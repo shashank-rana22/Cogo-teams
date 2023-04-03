@@ -11,6 +11,7 @@ const useFilterPopover = ({ setFilters }) => {
 		params : {
 			page_limit               : 100000,
 			pagination_data_required : false,
+			is_admin_view            : true,
 		},
 	}, { manual: false });
 
@@ -23,12 +24,22 @@ const useFilterPopover = ({ setFilters }) => {
 		},
 	}, { manual: false });
 
-	const { control, handleSubmit } = useForm();
+	const [{ data: audienceData }] = useRequest({
+		method : 'get',
+		url    : '/list_faq_audiences',
+		params : {
+			page_limit               : 100000,
+			pagination_data_required : false,
+		},
+	}, { manual: false });
+
+	const { control, handleSubmit, reset } = useForm();
 
 	const onSubmit = (values) => {
 		setFilters({
-			faq_tag_id   : values?.tag,
-			faq_topic_id : values?.topic,
+			faq_tag_id      : values?.tag,
+			faq_topic_id    : values?.topic,
+			faq_audience_id : values?.audience,
 		});
 
 		setShowFilter(false);
@@ -36,6 +47,7 @@ const useFilterPopover = ({ setFilters }) => {
 
 	const { list: topicList = [] } = topicsData || {};
 	const { list : tagList = [] } = tagsData || {};
+	const { list: audienceList = [] } = audienceData || {};
 
 	const topicOptions = (topicList || []).map((item) => ({
 		label : item?.display_name,
@@ -47,9 +59,15 @@ const useFilterPopover = ({ setFilters }) => {
 		value : item?.id,
 	}));
 
+	const audienceOptions = (audienceList || []).map((item) => ({
+		label : item?.name,
+		value : item?.id,
+	}));
+
 	const onClickReset = () => {
 		setFilters({});
 		setShowFilter(false);
+		reset();
 	};
 
 	return {
@@ -61,6 +79,8 @@ const useFilterPopover = ({ setFilters }) => {
 		handleSubmit,
 		onSubmit,
 		onClickReset,
+		audienceOptions,
+		reset,
 	};
 };
 

@@ -11,7 +11,7 @@ import DownloadModal from './DownloadModal';
 import styles from './styles.module.css';
 
 function ApprovalPending({
-	data, loading, page, setPage, setGenerate, setItem, setViewDoc, setEdit, listAPi,
+	data, loading, page, setPage, setGenerate, setItem, setViewDoc, edit, setEdit, listAPi,
 }) {
 	const { fields } = ApprovalPendingFields;
 	const [showApprove, setShowApprove] = useState(null);
@@ -34,6 +34,16 @@ function ApprovalPending({
 	const handleClickOnDownload = (documentUrl) => {
 		if (typeof window !== 'undefined') {
 			window.open(documentUrl, '_blank');
+		}
+	};
+
+	const handleOnEdit = (singleItem) => {
+		if (singleItem?.documentState === 'document_amendment_requested') {
+			handleEditMAWB(singleItem, '');
+		} else if (singleItem?.documentData?.status === 'uploaded') {
+			setShowUpload(singleItem); setEdit('edit');
+		} else if (singleItem?.documentData?.status === 'generated') {
+			handleEditMAWB(singleItem, 'edit');
 		}
 	};
 
@@ -74,9 +84,7 @@ function ApprovalPending({
 			<Button
 				themeType="linkUi"
 				style={{ fontSize: 12 }}
-				onClick={singleItem?.documentData?.status === 'uploaded'
-					? () => { setShowUpload(singleItem); }
-					: () => { handleEditMAWB(singleItem, 'edit'); }}
+				onClick={() => { handleOnEdit(singleItem); }}
 			>
 				<IcMEdit fill="#8B8B8B" />
 			</Button>
@@ -93,9 +101,14 @@ function ApprovalPending({
 						Amend
 					</Button>
 				) : (
-					<div>
-						Approval Pending
-					</div>
+					<Button
+						themeType="secondary"
+						style={{ border: '1px solid #333' }}
+						disabled={updateLoading}
+						onClick={() => { setShowApprove(singleItem); }}
+					>
+						Approve
+					</Button>
 				)
 		),
 	};
@@ -145,7 +158,13 @@ function ApprovalPending({
 					</Modal.Footer>
 				</Modal>
 			)}
-			<UploadModal showUpload={showUpload} setShowUpload={setShowUpload} listAPi={listAPi} />
+			<UploadModal
+				showUpload={showUpload}
+				setShowUpload={setShowUpload}
+				edit={edit}
+				setEdit={setEdit}
+				listAPi={listAPi}
+			/>
 		</>
 	);
 }

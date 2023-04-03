@@ -10,14 +10,12 @@ interface NestedObj {
 
 interface Props {
 	formData?: NestedObj;
-	taskItem?: NestedObj;
 	chargeableWeight?: number;
 	whiteout?:boolean;
 }
 
 function ContainerDetails({
 	formData = {},
-	taskItem = {},
 	chargeableWeight,
 	whiteout = false,
 }:Props) {
@@ -117,7 +115,7 @@ function ContainerDetails({
 								${styles.block_a_container_top_package}
 							`}
 							>
-								<p style={{ fontSize: 13 }}>{taskItem?.totalPackagesCount}</p>
+								<p style={{ fontSize: 13 }}>{formData?.totalPackagesCount}</p>
 							</div>
 							<div className={cl`
 								${styles.flex} 
@@ -130,17 +128,16 @@ function ContainerDetails({
 								`}
 								>
 									{' '}
-									<p className={styles.font_style} style={{ fontSize: 11 }}>
-										<div style={{ width: '84px' }}>Volume Weight:</div>
+									<p style={{ fontSize: 11 }}>
+										<div>Volume Weight:</div>
 									</p>
 									<div className={cl`
 										${styles.flex} 
 										${styles.vol_weight_box}
-										${styles.font_style}
 									`}
 									>
-										<p style={{ fontSize: 11, width: '120px' }} className="volume_box">
-											{`${chargeableWeight} Kgs(Cms)`}
+										<p style={{ fontSize: 11 }} className="volume_box">
+											{`${formData.volumetricWeight} Kgs(${dimension?.[0]?.unit || 'Cms'})`}
 										</p>
 									</div>
 								</div>
@@ -151,11 +148,10 @@ function ContainerDetails({
 									<div className={cl`
 										${styles.flex} 
 										${styles.vol_weight_box}
-										${styles.font_style}
 									`}
 									>
 										<p style={{ fontSize: 11 }} className="volume_box">
-											{dimension.map((item) => `${item.length}x${item.width}x${item.height}/${item.packages_count} 
+											{dimension.map((item) => item.length && `${item.length}x${item.width}x${item.height}/${item.packages_count} 
 											`)}
 										</p>
 									</div>
@@ -165,11 +161,10 @@ function ContainerDetails({
 									${styles.margin_remarks}
 								`}
 								>
-									<p className={styles.font_style} style={{ fontSize: 11, marginRight: 4 }}>Remarks:</p>
+									<p style={{ fontSize: 11, marginRight: 4 }}>Remarks:</p>
 									<div className={cl`
 										${styles.flex} 
 										${styles.vol_weight_box}
-										${styles.font_style}
 									`}
 									>
 										<p style={{ fontSize: 11 }} className="volume_box">
@@ -187,7 +182,7 @@ function ContainerDetails({
 							${styles.block_a_container_bottom_package}
 						`}
 						>
-							<p className={styles.font_style} style={{ fontSize: 13 }}>{taskItem?.totalPackagesCount}</p>
+							<p style={{ fontSize: 13 }}>{formData?.totalPackagesCount}</p>
 						</div>
 					</div>
 
@@ -231,7 +226,7 @@ function ContainerDetails({
 								${styles.block_a_container_bottom_package}
 							`}
 							>
-								<p className={styles.font_style} style={{ fontSize: 13 }}>{taskItem?.weight}</p>
+								<p style={{ fontSize: 13 }}>{formData?.weight}</p>
 							</div>
 						</div>
 						<div className={cl`
@@ -246,7 +241,7 @@ function ContainerDetails({
 								${styles.block_a_container_bottom_package}
 							`}
 							>
-								<p className={styles.font_style} style={{ fontSize: 13 }}>{taskItem?.weight}</p>
+								<p style={{ fontSize: 13 }}>{formData?.weight}</p>
 							</div>
 						</div>
 					</div>
@@ -359,7 +354,7 @@ function ContainerDetails({
 							`}
 								style={{ '--temp-color': tempColor } as React.CSSProperties}
 							>
-								<p style={{ fontSize: 13 }}>Q</p>
+								<p style={{ fontSize: 13, textTransform: 'uppercase' }}>{formData.class}</p>
 							</div>
 							<div className={cl`
 								${styles.flex} 
@@ -425,7 +420,6 @@ function ContainerDetails({
 							<div className={cl`
 								${styles.flex} 
 								${styles.block_a_container_bottom_package}
-								${styles.font_style}
 							`}
 							>
 								<p style={{ fontSize: 13 }}>{chargeableWeight}</p>
@@ -478,7 +472,6 @@ function ContainerDetails({
 							<div className={cl`
 								${styles.flex} 
 								${styles.block_a_container_bottom_package}
-								${styles.font_style}
 							`}
 							>
 								<p style={{ fontSize: 13 }}>{formData?.class === 'a' ? 'AS AGREED' : formData.ratePerKg}</p>
@@ -534,11 +527,10 @@ function ContainerDetails({
 							<div className={cl`
 								${styles.flex} 
 								${styles.block_a_container_bottom_package}
-								${styles.font_style}
 							`}
 							>
 								<p style={{ fontSize: 13 }}>
-									{formData?.class === 'a' ? 'AS AGREED' : ((chargeableWeight * formData.ratePerKg) || 0.0).toFixed(2)}
+									{formData?.class === 'a' ? 'AS AGREED' : formData.amount}
 								</p>
 							</div>
 						</div>
@@ -552,10 +544,9 @@ function ContainerDetails({
 							<div className={cl`
 								${styles.flex} 
 								${styles.block_a_container_bottom_package}
-								${styles.font_style}
 							`}
 							>
-								{formData?.class === 'a' ? 'AS AGREED' : ((chargeableWeight * formData.ratePerKg) || 0.0).toFixed(2)}
+								{formData?.class === 'a' ? 'AS AGREED' : formData.amount}
 							</div>
 						</div>
 					</div>
@@ -608,7 +599,7 @@ function ContainerDetails({
 								${styles.flex_in_flex_empty_bottom}
 							`}
 						>
-							<div className={styles.font_style} style={{ paddingLeft: '4px' }}>{formData.commodity}</div>
+							<div className={styles.font_style} style={{ paddingLeft: '4px', whiteSpace: 'pre-wrap' }}>{formData.commodity}</div>
 						</div>
 					</div>
 				</div>

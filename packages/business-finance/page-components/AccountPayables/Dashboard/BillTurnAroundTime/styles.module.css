@@ -1,0 +1,73 @@
+.container {
+	padding: 16px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 16px;
+}
+
+.heading_text {
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	font-weight: 500;
+	color: #333;
+}
+
+.info_icon {
+	margin-top: 4px;
+	margin-left: 8px;
+}
+
+.text {
+	display: flex;
+	flex-direction: column;
+}
+
+.hr {
+	width: 50%;
+	height: 2px;
+	margin-left: 2px;
+	background: #ed3726;
+	border-radius: 40px;
+}
+
+.filter {
+	display: flex;
+	justify-content: space-between;
+}
+
+.task_filter {
+	display: flex;
+	gap: 24px;
+	align-items: center;
+}
+
+.label {
+	display: flex;
+	align-items: center;
+	margin-right: 4px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #333;
+}
+
+.select_filter {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+}
+
+.reset_button {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.tooltip_text {
+	color: #ed3726;
+}

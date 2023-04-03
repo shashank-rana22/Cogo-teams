@@ -1,0 +1,47 @@
+.popover_content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	:global {
+		.ui_select_container {
+			width: 260px;
+		}
+	}
+}
+
+.styled_text {
+	margin-top: 16px;
+	margin-bottom: 8px;
+	font-weight: 600;
+}
+
+.button_container {
+	display: flex;
+}
+
+.search_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 12px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.styled_search_text {
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.reset_button {
+	margin-right: 4px;
+}
+
+.pop_over_style {
+	width: 320px;
+	max-height: fit-content;
+}
+
+.margin_span {
+	margin-top: 12px;
+}

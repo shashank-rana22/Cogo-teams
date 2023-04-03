@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { cl, Popover } from '@cogoport/components';
 import {
 	IcMHappy,
@@ -18,6 +17,18 @@ import EmojisBody from './EmojisBody';
 import ReceiveDiv from './ReceiveDiv';
 import SentDiv from './SentDiv';
 import styles from './styles.module.css';
+import TimeLine from './TimeLine';
+
+function MessageMapping({ conversation_type, ...restProps }) {
+	switch (conversation_type) {
+		case 'sent':
+			return <ReceiveDiv {...restProps} />;
+		case 'received':
+			return <SentDiv {...restProps} />;
+		default:
+			return <TimeLine {...restProps} />;
+	}
+}
 
 function MessageConversations({
 	messagesData = [],
@@ -39,10 +50,10 @@ function MessageConversations({
 	sendCommunicationTemplate = () => {},
 	communicationLoading = false,
 	lastPage = false,
-
+	messageLoading = false,
 }) {
 	const messageRef = useRef();
-	const { id = '', channel_type = '' } = activeMessageCard;
+	const { id = '', channel_type = '', new_user_message_count = 0 } = activeMessageCard;
 
 	const {
 		emojisList = {},
@@ -146,6 +157,9 @@ function MessageConversations({
 
 	);
 
+	const unreadIndex = new_user_message_count > messagesData.length
+		? 0 : messagesData.length - new_user_message_count;
+
 	const messageConversation = (
 		<>
 			{loadingPrevMessages
@@ -160,20 +174,14 @@ function MessageConversations({
 						)}
 					</div>
 				)}
-			{(messagesData || []).map((eachMessage) => (
-				eachMessage?.conversation_type !== 'received' ? (
-					<ReceiveDiv
-						key={eachMessage?.created_at}
-						eachMessage={eachMessage}
-						activeMessageCard={activeMessageCard}
-					/>
-				) : (
-					<SentDiv
-						key={eachMessage?.created_at}
-						eachMessage={eachMessage}
-						activeMessageCard={activeMessageCard}
-					/>
-				)
+			{(messagesData || []).map((eachMessage, index) => (
+				<MessageMapping
+					key={eachMessage?.created_at}
+					conversation_type={eachMessage?.conversation_type || 'unknown'}
+					eachMessage={eachMessage}
+					activeMessageCard={activeMessageCard}
+					messageStatus={channel_type === 'platform_chat' && !(index >= unreadIndex)}
+				/>
 			))}
 
 		</>
@@ -206,7 +214,6 @@ function MessageConversations({
 								role="presentation"
 								className={styles.file_name_container}
 								onClick={() => {
-									// eslint-disable-next-line no-undef
 									window.open(
 										finalUrl,
 										'_blank',
@@ -246,7 +253,7 @@ function MessageConversations({
 									className={styles.tag_div}
 									role="presentation"
 									onClick={() => {
-										if (hasPermissionToEdit) {
+										if (hasPermissionToEdit && !messageLoading) {
 											sentQuickSuggestions(
 												eachSuggestion,
 												scrollToBottom,
@@ -254,7 +261,7 @@ function MessageConversations({
 										}
 									}}
 									style={{
-										cursor: !hasPermissionToEdit ? 'not-allowed' : 'pointer',
+										cursor: (!hasPermissionToEdit || messageLoading) ? 'not-allowed' : 'pointer',
 									}}
 								>
 									{eachSuggestion}
@@ -367,12 +374,13 @@ function MessageConversations({
 						<IcMSend
 							fill="#EE3425"
 							onClick={() => {
-								if (hasPermissionToEdit) {
+								if (hasPermissionToEdit && !messageLoading) {
 									sendChatMessage(scrollToBottom);
 								}
 							}}
 							style={{
-								cursor: !hasPermissionToEdit || !(isEmpty(draftMessage?.trim()) || !finalUrl)
+								cursor: !hasPermissionToEdit || messageLoading
+								|| (isEmpty(draftMessage?.trim()) && !finalUrl)
 									? 'not-allowed'
 									: 'pointer',
 							}}

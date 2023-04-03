@@ -15,12 +15,13 @@ interface DataInterface {
 }
 interface HeaderInterface {
 	data?: DataInterface;
-	remarksVal: RemarksValInterface;
-	overAllRemark:string;
-	setOverAllRemark:Function;
+	remarksVal?: RemarksValInterface;
+	overAllRemark?:string;
+	setOverAllRemark?:Function;
 	lineItem?: boolean;
 	lineItemsRemarks: object;
 	status: string;
+	jobNumber?:string
 }
 
 function Header({
@@ -31,12 +32,12 @@ function Header({
 	lineItem,
 	lineItemsRemarks,
 	status,
+	jobNumber,
 }: HeaderInterface) {
 	const [approve, setApprove] = useState(false);
 	const [modalData, setModalData] = useState('');
 	const Router = useRouter();
 	const billId = Router?.query?.billId;
-
 	const { isShipment } = Router?.query || {};
 
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId || '';
@@ -68,12 +69,14 @@ function Header({
 	const getRoute = () => {
 		if (isShipment) {
 			return [
-				'/business-finance/coe-finance/[active_tab]/[view]',
-				'/business-finance/coe-finance/all_invoices/shipment-view',
+				`/business-finance/coe-finance/[active_tab]/[view]?jobNumber=${jobNumber}`,
+				`/business-finance/coe-finance/all_invoices/shipment-view?jobNumber=${jobNumber}`,
 			];
 		}
-		return ['/business-finance/coe-finance/[active_tab]/[view]',
-			'/business-finance/coe-finance/all_invoices/purchase-view'];
+		return [
+			`/business-finance/coe-finance/[active_tab]/[view]?jobNumber=${jobNumber}`,
+			`/business-finance/coe-finance/all_invoices/purchase-view?jobNumber=${jobNumber}`,
+		];
 	};
 
 	return (

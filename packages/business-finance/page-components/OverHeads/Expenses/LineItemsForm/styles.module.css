@@ -1,0 +1,111 @@
+.section {
+	border: 1px solid #000;
+	border-radius: 4px;
+}
+
+.container {
+	background-color: #fff;
+
+	:global {
+		.ui_table_container {
+			padding: 0;
+		}
+
+		.table_class {
+			padding: 0;
+		}
+
+		.ui_table_head_cell {
+			padding: 12px 0;
+			font-size: 10px;
+			color: white;
+			background-color: #000 !important;
+			border-right: none;
+		}
+
+		.ui_table_head_cell:first-child {
+			padding: 0;
+		}
+
+		.ui_table_head_row {
+			.ui_table_head_cell {
+				text-align: center;
+			}
+		}
+
+		.ui_table_body_cell {
+			width: 100px;
+		}
+
+		.ui_table_body_cell:first-child {
+			width: 100px;
+		}
+
+		.ui_table_body_cell:last-child {
+			width: 20px;
+		}
+
+		.ui_input_control {
+			font-size: 12px !important;
+		}
+	}
+}
+
+.flexend {
+	display: flex;
+	justify-content: flex-end;
+	margin: 5px 16px 10px;
+}
+
+.add {
+	color: #f68b21;
+	text-decoration-line: underline;
+	cursor: pointer;
+}
+
+.flex {
+	display: flex;
+	border: 1px solid #000;
+	border-right: none;
+	border-left: none;
+}
+
+.col {
+	display: flex;
+	flex-direction: column;
+	padding: 15px 10px;
+	border-left: 1px solid #000;
+}
+
+.total {
+	font-size: 16px;
+	font-weight: 600;
+	color: #333;
+	border-left: none;
+}
+
+.tat {
+	display: flex;
+	justify-content: flex-end;
+	padding: 25px 10px;
+	border-top: none;
+	border-radius: 0 0 6px 6px;
+}
+
+.label {
+	margin-right: 16px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #333;
+}
+
+.value {
+	font-size: 14px;
+	font-weight: 600;
+	color: #f68b21;
+}
+
+.table_container {
+	max-height: 315px;
+	overflow: scroll;
+}

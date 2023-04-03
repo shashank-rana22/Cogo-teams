@@ -79,6 +79,28 @@ const mawbControls = (disableClass) => ({
 			},
 		},
 		{
+			name        : 'originPortCode',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'Origin Port Code',
+			placeholder : 'Origin Port Code',
+			span        : 5,
+			rules       : {
+				required: 'Origin Port Code is Required',
+			},
+		},
+		{
+			name        : 'destinationPortCode',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'Destination Port Code',
+			placeholder : 'Destination Port Code',
+			span        : 5,
+			rules       : {
+				required: 'Destination Port Code is Required',
+			},
+		},
+		{
 			name        : 'airline',
 			type        : 'text',
 			className   : 'primary lg',
@@ -87,6 +109,17 @@ const mawbControls = (disableClass) => ({
 			span        : 5,
 			rules       : {
 				required: 'Carrier is Required',
+			},
+		},
+		{
+			name        : 'airlineIataCode',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'Airline IATA Code',
+			placeholder : 'Enter Airline IATA Code',
+			span        : 5,
+			rules       : {
+				required: 'Airline IATA Code is Required',
 			},
 		},
 		{
@@ -165,8 +198,7 @@ const mawbControls = (disableClass) => ({
 					className   : 'primary lg',
 					span        : 1.25,
 					rules       : {
-						required : 'Length is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+						validate: (value) => (value < 0 ? 'Cannot be Negative' : true),
 					},
 				},
 				{
@@ -177,8 +209,7 @@ const mawbControls = (disableClass) => ({
 					className   : 'primary lg',
 					span        : 1.25,
 					rules       : {
-						required : 'Width is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+						validate: (value) => (value < 0 ? 'Cannot be Negative' : true),
 					},
 				},
 				{
@@ -189,8 +220,7 @@ const mawbControls = (disableClass) => ({
 					className   : 'primary lg',
 					span        : 1.5,
 					rules       : {
-						required : 'Height is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+						validate: (value) => (value < 0 ? 'Cannot be Negative' : true),
 					},
 				},
 				{
@@ -201,8 +231,7 @@ const mawbControls = (disableClass) => ({
 					className   : 'primary lg',
 					span        : 2,
 					rules       : {
-						required : 'No of Packages is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+						validate: (value) => (value < 0 ? 'Cannot be Negative' : true),
 					},
 				}, {
 					name        : 'unit',
@@ -211,7 +240,7 @@ const mawbControls = (disableClass) => ({
 					placeholder : 'select',
 					span        : 1.25,
 					options     : [
-						{ label: 'Cm', value: 'cm' },
+						{ label: 'Cm', value: 'cms' },
 						{ label: 'Inch', value: 'inch' },
 					],
 				},
@@ -229,7 +258,13 @@ const mawbControls = (disableClass) => ({
 			},
 		},
 		{
+			name      : 'amountOfInsurance',
+			type      : 'text',
+			className : 'primary lg',
+			label     : 'Amount of Insurance',
+			span      : 5,
 		},
+		{},
 		{
 			name        : 'totalPackagesCount',
 			placeholder : 'Package Count',
@@ -281,7 +316,6 @@ const mawbControls = (disableClass) => ({
 				required : 'Chargable Weight is Required',
 				validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
 			},
-			disabled: true,
 		},
 		{
 			name         : 'ratePerKg',
@@ -291,10 +325,7 @@ const mawbControls = (disableClass) => ({
 			showOptional : false,
 			span         : 5,
 			placeholder  : 'Rate per Kg',
-			rules        : {
-				required: disableClass,
-			},
-			disabled: disableClass,
+			disabled     : disableClass,
 		},
 		{
 			name        : 'currency',
@@ -327,9 +358,6 @@ const mawbControls = (disableClass) => ({
 			maxLength   : 150,
 			placeholder : 'Remarks',
 			rows        : 3,
-			rules       : {
-				required: 'Remarks is Required',
-			},
 		},
 		{
 			name               : 'agentOtherCharges',
@@ -421,7 +449,7 @@ const mawbControls = (disableClass) => ({
 			type      : 'textarea',
 			className : 'textarea',
 			label     : 'Accounting Information:',
-			value     : 'Freight PrePaid',
+			value     : 'FREIGHT PREPAID',
 			span      : 7,
 			rules     : {
 				required: 'Accounting Information is Required',
@@ -433,9 +461,6 @@ const mawbControls = (disableClass) => ({
 			className : 'primary lg',
 			label     : 'Declared Value for Carriage:',
 			span      : 5,
-			rules     : {
-				required: 'Carriage Value is Required',
-			},
 		},
 		{
 			name        : 'city',
@@ -466,9 +491,6 @@ const mawbControls = (disableClass) => ({
 			span         : 5,
 			placeholder  : 'Handling Information...*',
 			maxLength    : 100,
-			rules        : {
-				required: 'Handling Information is Required',
-			},
 		},
 		{
 			name        : 'commodity',
@@ -495,6 +517,15 @@ const mawbControls = (disableClass) => ({
 			},
 		},
 		{
+			name        : 'shipperSignature',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'Signature of Shipper or his Agent',
+			span        : 5,
+			placeholder : 'Shipper Signature',
+			rules       : { required: 'Shipper Signature is Required' },
+		},
+		{
 			name        : 'place',
 			type        : 'text',
 			className   : 'primary lg',
@@ -505,6 +536,20 @@ const mawbControls = (disableClass) => ({
 				required: 'Place is Required',
 			},
 		},
+		{
+			name                  : 'executedDate',
+			type                  : 'date_picker',
+			className             : 'primary lg',
+			label                 : 'Executed Date',
+			span                  : 5,
+			placeholder           : 'Date',
+			value                 : new Date(),
+			isPreviousDaysAllowed : true,
+			rules                 : {
+				required: 'Date is Required',
+			},
+		},
+
 	],
 });
 

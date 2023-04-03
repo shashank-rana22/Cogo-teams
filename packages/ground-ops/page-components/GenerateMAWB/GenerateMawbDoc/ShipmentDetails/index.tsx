@@ -9,11 +9,10 @@ interface NestedObj {
 
 interface Props {
 	formData?: NestedObj;
-	taskItem?: NestedObj;
 	whiteout?:boolean;
 }
 
-function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Props) {
+function ShipmentDetails({ formData = {}, whiteout = false }:Props) {
 	let tempColor = '#333';
 	if (whiteout) {
 		tempColor = 'transparent';
@@ -113,7 +112,8 @@ function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Prop
 					>
 						<p style={{ fontSize: 10, color: tempColor }}>Accounting Information</p>
 					</div>
-					<div className={cl`
+					<div
+						className={cl`
 						${styles.flex} 
 						${styles.flex_padding_left}
 						${styles.flex_font_bold}
@@ -121,6 +121,11 @@ function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Prop
 						${styles.flex_in_flex}
 						${styles.font_style}
 					`}
+						style={{
+							fontSize      : 14.5,
+							textTransform : 'uppercase',
+							whiteSpace    : 'pre-wrap',
+						}}
 					>
 						{formData.accountingInformation}
 					</div>
@@ -155,7 +160,7 @@ function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Prop
 							>
 								<p
 									className={styles.font_style}
-									style={{ fontSize: 14 }}
+									style={{ fontSize: 14, textTransform: 'uppercase' }}
 								>
 									{formData?.origin}
 
@@ -301,7 +306,7 @@ function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Prop
 					`}
 									>
 										<p style={{ fontSize: 13 }}>
-											{taskItem?.destinationPortCode}
+											{formData?.destinationPortCode}
 										</p>
 									</div>
 								</p>
@@ -330,7 +335,7 @@ function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Prop
 												`}
 											>
 												<p style={{ fontSize: 12 }}>
-													{taskItem.airlineIataCode}
+													{formData.airlineIataCode}
 												</p>
 											</div>
 										</p>
@@ -570,7 +575,9 @@ function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Prop
 					${styles.flex_in_flex_b}
 				`}
 										>
-											<p style={{ fontSize: 12, color: tempColor }}>P</p>
+											<p style={{ fontSize: 12, color: tempColor }}>
+												{formData.paymentTerm === 'prepaid' && 'P'}
+											</p>
 										</div>
 									</div>
 									<div className={cl`
@@ -596,7 +603,9 @@ function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Prop
 					${styles.flex_in_flex_b}
 				`}
 										>
-											<p style={{ fontSize: 8 }} />
+											<p style={{ fontSize: 12, color: tempColor }}>
+												{formData.paymentTerm === 'collect' && 'C'}
+											</p>
 										</div>
 									</div>
 								</div>
@@ -650,7 +659,9 @@ function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Prop
 					${styles.flex_in_flex_b}
 				`}
 										>
-											<p style={{ fontSize: 12, color: tempColor }}>P</p>
+											<p style={{ fontSize: 12, color: tempColor }}>
+												{formData.paymentTerm === 'prepaid' && 'P'}
+											</p>
 										</div>
 									</div>
 									<div className={cl`
@@ -677,7 +688,9 @@ function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Prop
 					${styles.flex_in_flex_b}
 				`}
 										>
-											<p style={{ fontSize: 8 }} />
+											<p style={{ fontSize: 12, color: tempColor }}>
+												{formData.paymentTerm === 'collect' && 'C'}
+											</p>
 										</div>
 									</div>
 								</div>
@@ -742,7 +755,7 @@ function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Prop
 							>
 								<p
 									className={styles.font_style}
-									style={{ fontSize: 14 }}
+									style={{ fontSize: 14, textTransform: 'uppercase' }}
 								>
 									{formData?.destination}
 
@@ -848,7 +861,7 @@ function ShipmentDetails({ formData = {}, taskItem = {}, whiteout = false }:Prop
 					${styles.amount_of_insurance_bottom}
 				`}
 						>
-							<p style={{ fontSize: 15 }}>NIL</p>
+							<p style={{ fontSize: 15 }}>{formData.amountOfInsurance}</p>
 						</div>
 					</div>
 					<div
