@@ -1,15 +1,14 @@
 .input_component {
-	display: flex;
-	flex-direction: column;
-	align-items: left;
 	margin: 20px;
 }
 
 .input_heading {
-	margin-top: 12px;
+	margin-top: 20px;
 	margin-bottom: 8px;
 	font-size: 15x;
 	font-weight: 500;
+
+   
 }
 
 .button_row {
@@ -41,4 +40,8 @@
         background: #FFFFFF;
         }
     }
+}
+
+.span {
+    color: #ffb200;
 }

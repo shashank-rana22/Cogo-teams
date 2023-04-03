@@ -52,7 +52,6 @@ function RequestForm({
 					onChange={(val) => setAnswer(val)}
 					size="md"
 					placeholder="Enter Answer"
-					height={400}
 				/>
 
 			</div>

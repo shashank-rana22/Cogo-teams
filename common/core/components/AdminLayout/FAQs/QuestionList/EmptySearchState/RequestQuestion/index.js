@@ -29,18 +29,20 @@ function RelatedQuestions({
 					<div className={styles.input_heading}>Name of the Question</div>
 					<Input
 						value={searchQuestion}
-						size="lg"
+						size="md"
 						style={{ marginRight: '8px', width: '100%' }}
-						onChange={(e) => {
-							setSearchQuestion(e);
-						}}
+						onChange={(e) => setSearchQuestion(e)}
 					/>
 				</div>
 
 				<div>
 					<div className={styles.input_heading}>
 						If you have an answer suggestion,
-						enter below (Optional)
+						enter below
+						{' '}
+						<span className={styles.span}>
+							(Optional)
+						</span>
 					</div>
 
 					<div className={styles.answer_container}>
@@ -49,8 +51,6 @@ function RelatedQuestions({
 							onChange={(val) => setAnswer(val)}
 							size="md"
 							placeholder="Enter Answer"
-							width={400}
-							height={400}
 						/>
 					</div>
 
@@ -63,13 +63,15 @@ function RelatedQuestions({
 					size="md"
 					themeType="secondary"
 					onClick={() => setShow(false)}
+					disabled={createQuestionloading}
 				>
 					Cancel
 				</Button>
 
 				<Button
-					disabled={createQuestionloading}
+					loading={createQuestionloading}
 					size="md"
+					type="submit"
 					themeType="primary"
 					onClick={createFaqQuestion}
 					className={styles.submit_btn}
