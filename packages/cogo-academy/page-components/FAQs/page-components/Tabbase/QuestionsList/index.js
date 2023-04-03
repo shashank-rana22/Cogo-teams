@@ -46,6 +46,12 @@ function QuestionsList({ tabTitle = '', searchState = '', topicId = '', tagId = 
 						<Questions questions={question} topicId={topicId} topicName={tabTitle} />
 					</div>
 				))}
+				{searchState && (
+					<EmptyQuestionListState
+						searchState={searchState}
+						source="list"
+					/>
+				)}
 			</div>
 
 			<div className={styles.pagination}>

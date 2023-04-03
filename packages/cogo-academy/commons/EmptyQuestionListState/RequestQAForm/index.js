@@ -11,13 +11,17 @@ function RequestForm({
 	setAnswer,
 	setShow,
 	setQuestionCreated,
+	source,
 }) {
 	const { createQuestionSet, createQuestionLoading } = useCreateQuestionSet(
 		{ searchquestion, setShow, setQuestionCreated, answer },
 	);
 
 	return (
-		<div className={styles.container}>
+		<div
+			className={styles.container}
+			style={{ paddingLeft: source === 'list' ? '40px' : '0px' }}
+		>
 			<div className={styles.header}>
 				Request An Answer
 			</div>
@@ -31,6 +35,7 @@ function RequestForm({
 					value={searchquestion}
 					size="md"
 					onChange={(value) => setSearchquestion(value)}
+
 				/>
 			</div>
 
@@ -47,7 +52,6 @@ function RequestForm({
 					onChange={(val) => setAnswer(val)}
 					size="md"
 					placeholder="Enter Answer"
-					width={400}
 					height={400}
 				/>
 

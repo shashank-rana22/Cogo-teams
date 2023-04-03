@@ -34,8 +34,10 @@
 
     .ui_text_area_container {
         background: #FFFFFF;
+        width:70%;
         }
     }
+    
 }
 
 .button_container{
@@ -43,4 +45,13 @@
     justify-content: flex-start;
     padding-top: 20px;
 
+}
+
+.input_container{
+    :global{
+        .ui_input_container{
+            width:70%;
+        }
+    }
+    
 }

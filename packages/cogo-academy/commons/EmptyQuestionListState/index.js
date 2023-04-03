@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import RequestForm from './RequestQAForm';
 import styles from './styles.module.css';
 
-function EmptyQuestionListState({ searchState = '' }) {
+function EmptyQuestionListState({ searchState = '', source = 'empty_state' }) {
 	const [searchquestion, setSearchquestion] = useState(searchState);
 	const [questionCreated, setQuestionCreated] = useState(false);
 	const [answer, setAnswer] = useState('');
@@ -16,13 +16,19 @@ function EmptyQuestionListState({ searchState = '' }) {
 
 	const renderEmptyState = () => (
 		<div className={styles.nullstate_heading}>
-			<div className={styles.text_wrapper}>
-				Oops!
-			</div>
+			{source !== 'list'
+				&& (
+					<div>
+						<div className={styles.text_wrapper}>
+							Oops!
+						</div>
 
-			<div>
-				Sorry, we couldn’t find any question related to your query.
-			</div>
+						<div>
+							Sorry, we couldn’t find any question related to your query.
+						</div>
+					</div>
+				)}
+
 			<div className={styles.nullstate_btn}>
 				<div
 					className={styles.request_question}
@@ -41,6 +47,8 @@ function EmptyQuestionListState({ searchState = '' }) {
 							role="presentation"
 							onClick={() => setShow(true)}
 							className={styles.ask_question_text}
+							style={{ paddingLeft: source === 'list' ? '24px' : '0px' }}
+
 						>
 							Request or Submit an answer
 						</div>
@@ -63,6 +71,7 @@ function EmptyQuestionListState({ searchState = '' }) {
 						setAnswer={setAnswer}
 						setShow={setShow}
 						setQuestionCreated={setQuestionCreated}
+						source={source}
 
 					/>
 				)}
