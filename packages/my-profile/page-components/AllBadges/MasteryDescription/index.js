@@ -29,8 +29,8 @@ function MasteryDescription(props) {
 						</div>
 
 						{
-							[1, 2].map(() => (
-								<div className={styles.label_value}>
+							[1, 2].map((item) => (
+								<div className={styles.label_value} key={item}>
 									<Placeholder width="100%" height="32px" />
 									<Placeholder width="100%" height="32px" style={{ marginTop: '8px' }} />
 								</div>

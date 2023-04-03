@@ -40,9 +40,8 @@
 .account_attributes {
 	flex: 4;
 	padding: 16px;
-	background: rgb(226 226 226 / 20%);
+	background: rgb(226 226 226 0.8);
 	border-radius: 8px;
-	opacity: 0.8;
 }
 
 .add_rule_text {

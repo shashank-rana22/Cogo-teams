@@ -62,17 +62,17 @@ function useCreateBadgeConfiguration(props) {
 					badge_details                      : [
 						{
 							score     : Bronze_value,
-							image_url : Bronze_img_value?.finalUrl || bronze_details?.image_url?.finalUrl,
+							image_url : Bronze_img_value?.finalUrl || bronze_details?.image_url,
 							medal     : 'bronze',
 						},
 						{
 							score     : Silver_value,
-							image_url : Silver_img_value?.finalUrl || silver_details?.image_url?.finalUrl,
+							image_url : Silver_img_value?.finalUrl || silver_details?.image_url,
 							medal     : 'silver',
 						},
 						{
 							score     : Gold_value,
-							image_url : Gold_img_value?.finalUrl || gold_details?.image_url?.finalUrl,
+							image_url : Gold_img_value?.finalUrl || gold_details?.image_url,
 							medal     : 'gold',
 						},
 					],

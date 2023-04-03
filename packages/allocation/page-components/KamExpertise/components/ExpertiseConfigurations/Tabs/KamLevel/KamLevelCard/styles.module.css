@@ -37,17 +37,14 @@
 .label_text {
     width: 100%;
     margin: 0 0 4px;
-    font-size: 12px;
-    font-weight: 400;
-    color: #333;
-    opacity: 0.7;
+    font-size: 16px;
+    color: rgba(51, 51, 51, 0.7);
 }
 
 .title_show {
     font-size: 12px;
     font-weight: 400;
-    color: #221f20;
-    opacity: 0.6;
+    color: rgba(34, 31, 32, 0.6);
 }
 
 .card_container {

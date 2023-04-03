@@ -39,22 +39,28 @@ function useCreateMasterConfiguration(props) {
 		} = formValues || {};
 
 		try {
-			const payload = {
+			let payload = {
 				badge_name                         : mastery_name,
 				description                        : description_input,
 				expertise_configuration_detail_ids : badges,
 				expertise_configuration_type       : 'badge_configuration',
 				badge_details                      : [
 					{
-						image_url : image_input || masteryItemData?.mastery_details?.image_url,
+						image_url : image_input?.finalUrl || masteryItemData?.mastery_details?.image_url,
 						medal     : 'mastery',
 					},
 				],
 			};
 
 			if (!isEmpty(masteryItemData)) {
-				payload.id = masteryItemData.id;
-				payload.badge_details[0].badge_detail_id = masteryItemData?.mastery_details?.id;
+				payload = {
+					...payload,
+					id            : masteryItemData.id,
+					badge_details : [{
+						...payload.badge_details?.[0],
+						badge_detail_id: masteryItemData?.mastery_details?.id,
+					}],
+				};
 			}
 
 			await trigger({ data: payload });

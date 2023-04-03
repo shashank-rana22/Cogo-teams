@@ -2,8 +2,21 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+function ModalOptions({ onClick, lable }) {
+	return (
+		<div
+			role="presentation"
+			onClick={onClick}
+			className={styles.button}
+		>
+			{lable}
+		</div>
+	);
+}
+
 function CreateModal({ setMode, list }) {
 	const liveAndExpiredVersions = list.filter((item) => ['live', 'expired'].includes(item?.status));
+
 	const drafts = list.filter((item) => item.status === 'draft');
 
 	return (
@@ -13,34 +26,28 @@ function CreateModal({ setMode, list }) {
 			</div>
 
 			<div className={styles.button_container}>
-				<div
-					role="presentation"
+
+				<ModalOptions
 					onClick={() => setMode('new')}
-					className={styles.button}
-				>
-					a. Start from scratch (empty version)
-				</div>
+					lable="a. Start from scratch (empty version)"
+				/>
 
 				{!isEmpty(liveAndExpiredVersions) ? (
-					<div
-						role="presentation"
-						onClick={() => {
-							setMode('choose_published_version');
-						}}
-						className={styles.button}
-					>
-						b. Choose from published versions
-					</div>
+
+					<ModalOptions
+						onClick={() => setMode('choose_published_version')}
+						lable="b. Choose from published versions"
+					/>
+
 				) : null}
 
 				{!isEmpty(drafts) ? (
-					<div
-						role="presentation"
-						onClick={() => { setMode('saved-draft'); }}
-						className={styles.button}
-					>
-						c. Start where you left off (saved draft)
-					</div>
+
+					<ModalOptions
+						onClick={() => setMode('saved-draft')}
+						lable="c. Start where you left off (saved draft)"
+					/>
+
 				) : null}
 
 			</div>
