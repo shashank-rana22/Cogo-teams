@@ -7,7 +7,7 @@ function useCreateTest({ setActiveStepper }) {
 	const router = useRouter();
 
 	const [{ loading = false }, trigger] = useRequest({
-		url    : 'create_test',
+		url    : '/create_test',
 		method : 'POST',
 	}, { manual: true });
 

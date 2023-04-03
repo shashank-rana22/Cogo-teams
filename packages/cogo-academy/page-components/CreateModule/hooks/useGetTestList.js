@@ -6,16 +6,17 @@ import { useEffect, useState } from 'react';
 function useGetTestList({ filters:cogoEntityFilter, activeTab }) {
 	const { query, debounceQuery } = useDebounceQuery();
 
+	const [{ loading = false, data = {} }, trigger] = useRequest({
+		url    : '/list_tests',
+		method : 'GET',
+	}, { manual: true });
+
 	const [params, setParams] = useState({
 		page       : 1,
 		page_limit : 10,
 	});
-	const [input, setInput] = useState('');
 
-	const [{ loading = false, data = {} }, trigger] = useRequest({
-		url    : 'list_tests',
-		method : 'GET',
-	}, { manual: true });
+	const [input, setInput] = useState('');
 
 	const fetchList = () => {
 		try {
@@ -26,6 +27,7 @@ function useGetTestList({ filters:cogoEntityFilter, activeTab }) {
 			Toast.error(error?.message || 'Something went wrong');
 		}
 	};
+
 	useEffect(() => {
 		if (activeTab === 'tests') {
 			fetchList();
