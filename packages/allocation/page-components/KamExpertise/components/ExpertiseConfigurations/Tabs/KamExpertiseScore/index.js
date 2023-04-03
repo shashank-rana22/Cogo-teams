@@ -110,7 +110,7 @@ function KamExpertiseScoreConfig({
 				</div>
 			) : <LoadingState columnsToLoad={2} />}
 
-			{showModal ? (
+			{showModal && (
 				<Modal
 					size="md"
 					show={showModal}
@@ -196,8 +196,7 @@ function KamExpertiseScoreConfig({
 						</Modal.Footer>
 					</form>
 				</Modal>
-			) : null}
-
+			)}
 		</>
 	);
 }

@@ -1,15 +1,20 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Toast } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 
 import VERSION_KEYS from '../../../../constants/version-keys-mapping';
 import useGetKamExpertiseVersionDetials from '../../../../hooks/useGetKamExpertiseVersionDetials';
 
 import CreateModal from './CreateModal';
-import Draft from './CreateModal/Draft';
 import NewVersion from './CreateModal/NewVersion';
 import Published from './CreateModal/Published';
 import ModalFooter from './ModalFooter';
 import styles from './styles.module.css';
+
+function Draft({ setMode = () => {}, setShowModal = () => {} }) {
+	setShowModal(false);
+	setMode('initial-mode');
+	Toast.success('New Draft Loaded');
+}
 
 const { PUBLISHED_VERSION, SAVED_DRAFT, NEW_VERSION, INITIAL_MODE } = VERSION_KEYS;
 

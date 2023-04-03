@@ -18,35 +18,34 @@ function EventListItem({ data, index, setEventListData }) {
 		rules = [],
 	} = data || {};
 
-	const handleEdit = () => {
-		setEventListData({ data, toggleEvent: 'updateEvent' });
-	};
-
 	return (
 		<section className={styles.container}>
 			<div className={styles.top_div}>
 				#
 				{index + 1}
-				<IcMEdit style={{ cursor: 'pointer' }} onClick={handleEdit} />
+				<IcMEdit
+					style={{ cursor: 'pointer' }}
+					onClick={() => setEventListData({ data, toggleEvent: 'updateEvent' })}
+				/>
 			</div>
 
 			<div>
 				<p className={styles.info_tag}>
 					Expertise :
 					{' '}
-					<b style={{ marginLeft: 4 }}>{startCase(expertiseType || '')}</b>
+					<b className={styles.margin_left}>{startCase(expertiseType || '')}</b>
 				</p>
 
 				<p className={styles.info_tag}>
 					Event Name :
 					{' '}
-					<b style={{ marginLeft: 4 }}>{startCase(conditionName || '')}</b>
+					<b className={styles.margin_left}>{startCase(conditionName || '')}</b>
 				</p>
 
 				<p className={styles.info_tag}>
 					Description :
 					{' '}
-					<i style={{ marginLeft: 4 }}>{description}</i>
+					<i className={styles.margin_left}>{description || ''}</i>
 				</p>
 			</div>
 
@@ -57,11 +56,11 @@ function EventListItem({ data, index, setEventListData }) {
 
 				{rules.map((res, i) => (
 					<div className={styles.rule_body}>
-						<div style={{ marginRight: '4px' }}>
+						<div className={styles.margin_right}>
 							Rule #
 							{i + 1}
 						</div>
-						<span style={{ marginRight: '4px' }}>
+						<span className={styles.margin_right}>
 							<Pill
 								key="Reactivation"
 								size="lg"
@@ -71,11 +70,11 @@ function EventListItem({ data, index, setEventListData }) {
 							</Pill>
 						</span>
 
-						<div style={{ marginRight: '4px' }}>
+						<div className={styles.margin_right}>
 							is triggered on
 						</div>
 
-						<span style={{ marginRight: '4px' }}>
+						<span className={styles.margin_right}>
 							<Pill
 								key="Shipment_creation"
 								size="lg"
@@ -85,12 +84,12 @@ function EventListItem({ data, index, setEventListData }) {
 							</Pill>
 						</span>
 
-						<span style={{ marginRight: '4px' }}>
+						<span className={styles.margin_right}>
 							having parameter
 						</span>
 
 						{' '}
-						<span style={{ marginRight: '4px' }}>
+						<span className={styles.margin_right}>
 							<Pill
 								key="Account"
 								size="lg"

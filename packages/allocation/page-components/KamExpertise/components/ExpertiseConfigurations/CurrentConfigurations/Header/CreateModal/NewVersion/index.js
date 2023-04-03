@@ -31,9 +31,9 @@ function NewVersion(props) {
 					onClick={() => {
 						setMode('initial-mode');
 					}}
+					style={{ marginRight: '16px' }}
 				>
 					Back
-
 				</Button>
 
 				<Button

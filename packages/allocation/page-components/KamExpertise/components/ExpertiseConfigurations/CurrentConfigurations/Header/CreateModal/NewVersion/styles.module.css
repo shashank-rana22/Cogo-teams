@@ -20,9 +20,7 @@
 
 .button_container {
     display: flex;
-    gap: 15px;
     align-items: center;
     justify-content: center;
-    margin-top: 4px;
-    margin-bottom: 14px;
+    margin: 4px 0 12px 0;
 }
