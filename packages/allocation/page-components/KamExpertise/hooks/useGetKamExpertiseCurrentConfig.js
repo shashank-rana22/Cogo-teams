@@ -1,7 +1,7 @@
 import { useAllocationRequest } from '@cogoport/request';
 
 function useGetKamExpertiseCurrentConfig({ type = undefined }) {
-	const [{ data = {}, loading:configCardLoading }, refetch] = useAllocationRequest({
+	const [{ data = {}, loading }, refetch] = useAllocationRequest({
 		url     : 'kam_expertise_card_details',
 		method  : 'GET',
 		authkey : 'get_allocation_kam_expertise_card_details',
@@ -16,8 +16,8 @@ function useGetKamExpertiseCurrentConfig({ type = undefined }) {
 	const { list = [] } = data;
 	return {
 		list,
-		configCardLoading,
-		cardRefetch: refetch,
+		configCardLoading : loading,
+		cardRefetch       : refetch,
 	};
 }
 export default useGetKamExpertiseCurrentConfig;
