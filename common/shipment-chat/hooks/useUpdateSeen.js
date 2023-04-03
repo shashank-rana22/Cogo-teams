@@ -2,6 +2,8 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
+import getApiErrorString from '../utils/getApiErrorString';
+
 const useUpdateSeen = ({ payload }) => {
 	const { id = '', showUnreadChat = false } = payload;
 
@@ -18,7 +20,7 @@ const useUpdateSeen = ({ payload }) => {
 			try {
 				await trigger();
 			} catch (err) {
-				Toast.error(err?.data);
+				Toast.error(getApiErrorString(err));
 			}
 		})();
 	}, [trigger]);

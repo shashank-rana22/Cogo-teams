@@ -9,12 +9,12 @@ import styles from './styles.module.css';
 
 function MessageContainer({ msgContent, loadingChannel, showImpMsg }) {
 	const { user_id } = useSelector((state) => ({ user_id: state?.profile?.user.id }));
-	const { onCreate } = useUpdateMessage();
+	const { onUpdateMessage } = useUpdateMessage();
 	const containerRef = useRef(null);
 
 	const handleClick = (msg) => {
-		onCreate({
-			params: {
+		onUpdateMessage({
+			payload: {
 				id: msg?.mainKey, important: !msg?.important,
 			},
 		});
