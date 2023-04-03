@@ -8,7 +8,7 @@ import getLogStatsData from './getLogStatsData';
 import styles from './styles.module.css';
 import useGetLogStats from './useGetLogStats';
 
-function Statistics({ source = 'hr_pip_stats' }) {
+function Statistics() {
 	const { logStatsLoading = false, statsData = {}, statsParams, setStatsParams } = useGetLogStats();
 	const { pipStatsData, pipStatsKeys, probationStatsData, probationStatsKeys } = getLogStatsData(statsData);
 

@@ -1,9 +1,14 @@
 import { useIrisRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useGetLogStats = () => {
-	const [statsParams, setStatsParams] = useState({
+import getDefaultFeedbackMonth from '../../../../../../utils/getDefaultYearMonth';
 
+const useGetLogStats = () => {
+	const { feedbackMonth, feedbackYear } = getDefaultFeedbackMonth();
+
+	const [statsParams, setStatsParams] = useState({
+		Year  : feedbackYear,
+		Month : feedbackMonth,
 	});
 
 	const [{ loading = false, data = {} }] = useIrisRequest({
@@ -12,6 +17,6 @@ const useGetLogStats = () => {
 		params : statsParams,
 	}, { manual: false });
 
-	return { setStatsParams, logStatsLoading: loading, statsData: data };
+	return { setStatsParams, logStatsLoading: loading, statsData: data, statsParams };
 };
 export default useGetLogStats;

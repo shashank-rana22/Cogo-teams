@@ -15,8 +15,6 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 
 	const { left:leftFilters = [], right:rightFilters = [] } = filtersSourceMapping[source];
 
-	console.log('params::', params);
-
 	const filterControls = useGetControls(
 		{
 			leftFilters,
@@ -31,26 +29,26 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 		fields: [
 			...leftFilters,
 			...rightFilters,
-			...(source === 'hr_feedback' ? 'manager_id' : []),
 		],
+		defaultValues: params,
 	});
 
 	const managerName = watch('manager_name');
 
 	useEffect(() => {
-		const { department, designation, manager_id, year, month, date_range } = values;
+		const { Department, Designation, ManagerID, Year, Month, date_range } = values;
 
 		setParams((previousParams) => ({
 			...previousParams,
-			Q           : query || undefined,
-			Department  : department || undefined,
-			Designation : designation || undefined,
-			Page        : 1,
-			Year        : year || undefined,
-			Month       : month || undefined,
-			ManagerID   : manager_id || undefined,
-			StartDate   : date_range?.startDate || undefined,
-			EndDate     : date_range?.endDate || undefined,
+			Q         : query || undefined,
+			Department,
+			Designation,
+			Page      : 1,
+			Year,
+			Month,
+			ManagerID,
+			StartDate : date_range?.startDate || undefined,
+			EndDate   : date_range?.endDate || undefined,
 		}));
 	}, [query, setParams, values]);
 
@@ -78,7 +76,7 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 				})}
 			</div>
 			<div className={styles.right_container}>
-				{source !== 'hr_kpi_dashboard' && filterControls.right.map((cntrl) => {
+				{filterControls.right.map((cntrl) => {
 					if (isEmpty(cntrl)) { return null; }
 					const Element = getFieldController(cntrl?.type);
 					const value = startCase(cntrl?.name);

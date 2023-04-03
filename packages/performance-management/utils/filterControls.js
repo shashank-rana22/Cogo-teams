@@ -34,8 +34,8 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 			isClearable : true,
 		},
 		{
-			name        : 'rating',
-			label       : 'Rating',
+			name        : 'Rating',
+			label       : 'rating',
 			type        : 'select',
 			isClearable : true,
 			placeholder : 'Select...',
@@ -48,13 +48,13 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 			],
 		},
 		{
-			name       	: 'manager_id',
+			name       	: 'ManagerID',
 			placeholder	: 'Manager...',
 			type       	: 'select',
 			...asyncManagerOptions,
 		},
 		{
-			name        : 'year',
+			name        : 'Year',
 			label       : 'Select Year',
 			type        : 'select',
 			isClearable : !selectedMonth,
@@ -66,7 +66,7 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 			],
 		},
 		{
-			name        : 'month',
+			name        : 'Month',
 			label       : 'Select Month',
 			type        : 'select',
 			isClearable : true,
@@ -76,7 +76,7 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 				? monthOptions.filter((newMonth) => newMonth.index <= month) : monthOptions,
 		},
 		{
-			name        : 'status',
+			name        : 'Status',
 			lable       : 'Status',
 			placeholder : 'Type',
 			type        : 'select',
@@ -93,7 +93,7 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 			type                  : 'dateRangePicker',
 			isPreviousDaysAllowed : true,
 		}, {
-			name        : 'department',
+			name        : 'Department',
 			placeholder : 'Department...',
 			label       : 'Department',
 			type        : 'select',
@@ -112,7 +112,7 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 		},
 		{
 			...designationOptions,
-			name        : 'designation',
+			name        : 'Designation',
 			placeholder : 'Designation...',
 			label       : 'Designation',
 			type        : 'select',

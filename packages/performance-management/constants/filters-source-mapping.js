@@ -1,29 +1,29 @@
 const filtersSourceMapping = {
 	hr_pip_stats: {
-		right: [
-			{ name: 'manager_id' },
-			{ name: 'year', isClearable: false },
-			{ name: 'month' },
-			{ name: 'department' },
-			{ name: 'designation' },
+		left: [
+			{ name: 'ManagerID' },
+			{ name: 'Year', isClearable: false },
+			{ name: 'Month' },
+			{ name: 'Department' },
+			{ name: 'Designation' },
 		],
 	},
 	hr_kpi_dashboard: {
 		left: [
-			{ name: 'department' },
-			{ name: 'designation' },
+			{ name: 'Department' },
+			{ name: 'Designation' },
 			{ name: 'manager_name', placeholder: 'Search Manger' },
-			{ name: 'year' },
-			{ name: 'month' },
+			{ name: 'Year' },
+			{ name: 'Month' },
 		],
 	},
 	hr_feedback: {
 		left: [
-			{ name: 'department' },
-			{ name: 'designation' },
-			{ name: 'manager_id' },
-			{ name: 'year' },
-			{ name: 'month' },
+			{ name: 'Department' },
+			{ name: 'Designation' },
+			{ name: 'ManagerID' },
+			{ name: 'Year' },
+			{ name: 'Month' },
 		],
 		right: [
 			{ name: 'manager_name' },
@@ -31,9 +31,9 @@ const filtersSourceMapping = {
 	},
 	hr_pip_dashboard: {
 		left: [
-			{ name: 'department' },
-			{ name: 'designation' },
-			{ name: 'manager_id' },
+			{ name: 'Department' },
+			{ name: 'Designation' },
+			{ name: 'ManagerID' },
 		],
 		right: [
 			{ name: 'manager_name' },
@@ -46,9 +46,9 @@ const filtersSourceMapping = {
 	},
 	user_dashboard: {
 		left: [
-			{ name: 'year' },
-			{ name: 'month' },
-			{ name: 'rating' },
+			{ name: 'Year' },
+			{ name: 'Month' },
+			{ name: 'Rating' },
 		],
 	},
 };
