@@ -67,7 +67,7 @@ const completedColumn = (refetch: Function) => [
 			<div className={styles.fieldPair}>
 				<div
 					className={styles.link}
-					onClick={() => window.open(getDocumentUrl({ itemData: row }), '_blank')}
+					onClick={() => window.open(getDocumentUrl({ itemData: row }) as string, '_blank')}
 					role="presentation"
 				>
 					{getDocumentNumber({ itemData: row })}
