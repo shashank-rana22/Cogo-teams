@@ -43,7 +43,6 @@ const useGetUserGroups = () => {
 			platform = '',
 			work_scope = '',
 			country_id = '',
-			id = '',
 		} = item || {};
 
 		const workScopeLabel = (WORK_SCOPES_OPTIONS || []).find((workScope) => workScope.value === work_scope);
@@ -56,7 +55,6 @@ const useGetUserGroups = () => {
 			cogo_entity_name,
 			platform     : startCase(platform),
 			country      : selectedCountry?.name,
-			key          : id,
 		};
 
 		const pillsArray = Object.keys(pillsObject);
@@ -64,7 +62,13 @@ const useGetUserGroups = () => {
 		const label = (
 			<div>
 				<div
-					style={{ fontWeight: 600, paddingTop: '4px', paddingBottom: '6px' }}
+					style={{
+						display       : 'flex',
+						flexWrap      : 'wrap',
+						fontWeight    : 600,
+						paddingTop    : '4px',
+						paddingBottom : '6px',
+					}}
 					key={item.id}
 				>
 					{startCase(name)}
