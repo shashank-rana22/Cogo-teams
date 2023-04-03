@@ -22,7 +22,7 @@ function useGetEventList() {
 	const [params, setParams] = useState({
 		page    : 1,
 		filters : {
-			status         : 'draft',
+			status         : 'active',
 			condition_name : searchQuery || undefined,
 			expertise_type : expertise || undefined,
 		},

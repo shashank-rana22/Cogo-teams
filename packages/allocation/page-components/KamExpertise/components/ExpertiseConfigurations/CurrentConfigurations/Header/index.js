@@ -23,7 +23,7 @@ const CREATE_CONFIGURATION_MAPPING = {
 function Header(props) {
 	const {
 		audit_data = {},
-		LIVE_VERSION,
+		version_number,
 		data = [],
 		refetch,
 		expertiseRefetch,
@@ -71,7 +71,7 @@ function Header(props) {
 					:
 					{' '}
 					<strong>
-						{LIVE_VERSION ? `Version ${LIVE_VERSION}` : 'NA'}
+						{version_number ? `Version ${version_number}` : ' '}
 					</strong>
 				</div>
 

@@ -192,7 +192,7 @@ function MessageList(messageProps) {
 										<img
 											src={ECLAMATION_SVG}
 											alt="important"
-											width="12px"
+											width="10px"
 										/>
 									</div>
 								)}

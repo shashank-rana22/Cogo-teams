@@ -1,0 +1,18 @@
+.radio {
+	width: 250px;
+}
+
+.input_container {
+	margin-top: 16px;
+}
+
+.select_container {
+	margin-top: 16px;
+}
+
+.button_container {
+	display: flex;
+	gap: 6px;
+	justify-content: flex-end;
+	margin-top: 8px;
+}
