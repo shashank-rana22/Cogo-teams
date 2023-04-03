@@ -129,6 +129,7 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 
 						<Button
 							type="button"
+							style={{ marginLeft: '12px' }}
 							onClick={() => {
 								deleteFunctionMapping[activeTab]();
 								setShowModal(false);

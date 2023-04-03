@@ -153,7 +153,7 @@ function ReviewAndCriteria(props) {
 					size="md"
 					themeType="primary"
 					type="button"
-					onClick={() => handleSubmit(checkError)}
+					onClick={handleSubmit(checkError)}
 				>
 					Publish Test
 				</Button>
