@@ -6,7 +6,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function NewVersion(props) {
-	const { setMode, getVersion, createModalLoading, versionName, setVersionName } = props;
+	const { setMode, onCreate, createModalLoading, versionName, setVersionName } = props;
 
 	return (
 		<div className={styles.container}>
@@ -31,16 +31,16 @@ function NewVersion(props) {
 					onClick={() => {
 						setMode('initial-mode');
 					}}
+					style={{ marginRight: '16px' }}
 				>
 					Back
-
 				</Button>
 
 				<Button
 					disabled={isEmpty(versionName)}
 					loading={createModalLoading}
 					onClick={() => {
-						getVersion();
+						onCreate();
 					}}
 				>
 					Proceed

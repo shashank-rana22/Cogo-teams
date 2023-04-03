@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 
 function ModalFooter(props) {
 	const {
-		setMode, setSelectedVersion, selectedVersion, getVersion,
+		setMode, setSelectedVersion, selectedVersion, onCreate,
 		createModalLoading, versionName,
 	} = props;
 
@@ -36,7 +36,7 @@ function ModalFooter(props) {
 					className={styles.button}
 					disabled={isEmpty(selectedVersion) || isEmpty(versionName)}
 					onClick={() => {
-						getVersion();
+						onCreate();
 					}}
 					loading={createModalLoading}
 				>

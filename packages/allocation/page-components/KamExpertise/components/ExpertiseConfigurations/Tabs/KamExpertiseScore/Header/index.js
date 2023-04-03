@@ -1,6 +1,5 @@
 import { Placeholder } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
-import React from 'react';
 
 import styles from './styles.module.css';
 
@@ -16,12 +15,12 @@ function Header({ auditData, loading }) {
 							Currently Editing :
 							{' '}
 						</div>
-						<Placeholder height="20px" width="120px" />
 
+						<Placeholder height="20px" width="120px" />
 					</div>
+
 					<div className={styles.lower_details}>
 						<div className={styles.lower_info} style={{ marginRight: '8px' }}>
-
 							<div>
 								Last Modified
 								{' '}
@@ -44,7 +43,6 @@ function Header({ auditData, loading }) {
 							<Placeholder height="20px" width="120px" />
 						</div>
 					</div>
-
 				</div>
 			</div>
 		);
@@ -58,8 +56,10 @@ function Header({ auditData, loading }) {
 						Currently Editing :
 						{' '}
 					</div>
+
 					<b>Saved Draft</b>
 				</div>
+
 				<div className={styles.lower_details}>
 					<div className={styles.lower_info}>
 						<div>
@@ -67,11 +67,12 @@ function Header({ auditData, loading }) {
 							{' '}
 							:&nbsp;
 						</div>
+
 						<span>
 							{ updated_at ? (format(updated_at, 'dd-MM-YYYY') || '--') : ''}
 						</span>
-
 					</div>
+
 					<div className={styles.lower_info} style={{ marginLeft: '36px' }}>
 						<div>
 							Last Edit By

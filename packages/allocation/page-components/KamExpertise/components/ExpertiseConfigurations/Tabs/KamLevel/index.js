@@ -36,6 +36,7 @@ function KamLevel(props) {
 			/>,
 			children: <KamLevelDropDown
 				refetch={refetch}
+				cardRefetch={cardRefetch}
 				transition_level={data.transition_level}
 			/>,
 		}
@@ -66,6 +67,7 @@ function KamLevel(props) {
 					setCreateKam={setCreateKam}
 					dataLength={dataLength}
 					refetch={refetch}
+					cardRefetch={cardRefetch}
 				/>
 			</div>
 		</section>

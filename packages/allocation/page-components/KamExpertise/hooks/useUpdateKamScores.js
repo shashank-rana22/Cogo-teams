@@ -6,9 +6,8 @@ import { useAllocationRequest } from '@cogoport/request';
 function useUpdateKamScores(props) {
 	const {
 		transition_level,
-		listrefetch,
-		setEditMode,
 		refetch,
+		cardRefetch,
 	} = props;
 
 	const formProps = useForm();
@@ -40,11 +39,9 @@ function useUpdateKamScores(props) {
 				data: payload,
 			});
 
-			setEditMode(false);
-
-			listrefetch();
-
 			refetch();
+
+			cardRefetch();
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

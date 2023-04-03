@@ -1,5 +1,4 @@
 import { Button, Modal } from '@cogoport/components';
-import React from 'react';
 
 import styles from './styles.module.css';
 
@@ -23,7 +22,6 @@ function PublishVersionModal({
 			<Modal.Header title="Publish Draft" />
 
 			<Modal.Body>
-
 				<div className={styles.text}>
 					Are you sure you wish to publish
 					{' '}
@@ -31,9 +29,6 @@ function PublishVersionModal({
 					{' '}
 					?
 				</div>
-
-				<div className={styles.cards_container} />
-
 			</Modal.Body>
 
 			<Modal.Footer>

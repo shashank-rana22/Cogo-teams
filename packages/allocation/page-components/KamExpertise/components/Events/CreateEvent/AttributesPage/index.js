@@ -44,10 +44,6 @@ function AttributePage(props) {
 		return (
 			<div
 				className={styles.account_attributes}
-				style={{
-					background : '#fff',
-					padding    : '80px 16px 0 16px',
-				}}
 			>
 				<EmptyState
 					height="320px"

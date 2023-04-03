@@ -26,11 +26,11 @@ const OPTIONS = [
 function Header(props) {
 	const {
 		setEventListData = () => {},
-		loading,
+		loading = false,
 		debounceQuery,
 		setSearchValue = () => {},
-		searchValue,
-		expertise,
+		searchValue = '',
+		expertise = '',
 		setExpertise = () => {},
 	} = props;
 
