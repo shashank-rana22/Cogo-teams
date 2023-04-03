@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 import { useCallback } from 'react';
 
-import WORK_SCOPES_OPTIONS from '../../ControlCenter/ConfigurationEngine/CreateAudienceForm/utils/workScopeMappings';
+import WORK_SCOPES_OPTIONS from '../../CreateFAQ/ConfigurationEngine/CreateAudienceForm/utils/workScopeMappings';
 
 // eslint-disable-next-line import/no-unresolved
 import countries from '@/data-store/constants/countries.json';
