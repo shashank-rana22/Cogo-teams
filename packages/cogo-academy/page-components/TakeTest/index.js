@@ -1,8 +1,6 @@
-import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
-
+import Eligible from './Eligible';
 import NotEligible from './NotEligible';
-import TakeTest from './takeTest';
+import useCheckEligibility from './useCheckEligibility';
 
 const ELIGIBILITY_SCREEN_MAPPING = {
 	is_invalid_user: {
@@ -21,33 +19,17 @@ const ELIGIBILITY_SCREEN_MAPPING = {
 
 };
 
-function CheckEligibility() {
+function TakeTest() {
 	const {
-		query: { test_id },
-		user: { id: user_id },
-	} = useSelector(({ general, profile }) => ({
-		query : general.query,
-		user  : profile.user,
-	}));
-
-	const [{ data, loading }] = useRequest({
-		method : 'POST',
-		url    : '/check_test_user_eligibility',
-		params : {
-			user_id, test_id,
-		},
-	}, { manual: !test_id });
+		loading,
+		data,
+		currentQuestionId,
+	} = useCheckEligibility();
 
 	const { is_valid_user, is_active, attempts_left } = data || {};
 
-	const currentQuestion = localStorage.getItem(`current_question_${test_id}_${user_id}`);
-
 	if (loading) {
 		return 'loading ...';
-	}
-
-	if (currentQuestion) {
-		return <TakeTest />;
 	}
 
 	if (!is_valid_user) {
@@ -62,7 +44,7 @@ function CheckEligibility() {
 		return <NotEligible {...ELIGIBILITY_SCREEN_MAPPING.no_attempts_left} />;
 	}
 
-	return <TakeTest />;
+	return <Eligible currentQuestionId={currentQuestionId} />;
 }
 
-export default CheckEligibility;
+export default TakeTest;
