@@ -26,9 +26,9 @@
 	display: flex;
 }
 
-.text_wrapper{
-	font-size: 24px;
-	line-height: 10px;
+.text_wrapper {
 	padding-top: 20px;
 	padding-bottom: 20px;
+	font-size: 24px;
+	line-height: 10px;
 }
