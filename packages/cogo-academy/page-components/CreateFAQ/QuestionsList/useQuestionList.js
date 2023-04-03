@@ -19,6 +19,9 @@ const FILTER_MAPPING = {
 };
 
 const addedQuestionsColumns = ({
+	showPopOver,
+	setShowPopOver = () => {},
+	onClickNoButton = () => {},
 	activeList,
 	onClickEditButton,
 	deactivateQuestion,
@@ -111,15 +114,19 @@ const addedQuestionsColumns = ({
 						content={(
 							<PopOverContent
 								source="question"
-								onCLickYesButton={() => deactivateQuestion(deleteitem.id)}
+								onCLickYesButton={() => deactivateQuestion(items.id)}
+								onClickNoButton={() => onClickNoButton(items)}
 							/>
 						)}
+						visible={showPopOver === items?.id}
 					>
 						<IcMDelete
 							height={20}
 							width={20}
 							style={{ cursor: 'pointer' }}
-							onClick={() => { setDeleteitem(items); }}
+							onClick={
+								() => setShowPopOver(() => (showPopOver === items?.id ? null : items?.id))
+}
 						/>
 					</Popover>
 
@@ -131,7 +138,7 @@ const addedQuestionsColumns = ({
 ];
 
 const requestedQuestionsColumns = ({
-	deactivateQuestion, onClickEditButton,
+	deactivateQuestion, onClickEditButton, showPopOver, setShowPopOver = () => {}, onClickNoButton = () => {},
 }) => [
 	{
 		Header   : 'QUESTIONS',
@@ -178,13 +185,20 @@ const requestedQuestionsColumns = ({
 						<PopOverContent
 							source="question"
 							onCLickYesButton={() => deactivateQuestion(items.id)}
+							onClickNoButton={() => onClickNoButton(items)}
 						/>
+
 					)}
+					visible={showPopOver === items?.id}
+
 				>
 					<IcMDelete
 						height={20}
 						width={20}
 						style={{ cursor: 'pointer' }}
+						onClick={
+							() => setShowPopOver(() => (showPopOver === items?.id ? null : items?.id))
+}
 
 					/>
 				</Popover>
@@ -196,7 +210,7 @@ const requestedQuestionsColumns = ({
 
 const useQuestionList = () => {
 	const router = useRouter();
-
+	const [showPopOver, setShowPopOver] = useState(false);
 	const [sortType, setSortType] = useState(true);
 	const [searchInput, setSearchInput] = useState('');
 	const [activeList, setActiveList] = useState('published');
@@ -222,7 +236,9 @@ const useQuestionList = () => {
 	useEffect(() => {
 		debounceQuery(searchInput);
 	}, [debounceQuery, searchInput]);
-
+	const onClickNoButton = () => {
+		setShowPopOver(null);
+	};
 	const getQuestionsList = useCallback(async () => {
 		try {
 			await trigger({
@@ -288,6 +304,9 @@ const useQuestionList = () => {
 	};
 
 	const addedQuestionEnties = Object.entries(addedQuestionsColumns({
+		showPopOver,
+		setShowPopOver,
+		onClickNoButton,
 		activeList,
 		onClickEditButton,
 		deactivateQuestion,
@@ -307,10 +326,18 @@ const useQuestionList = () => {
 		return cols;
 	};
 	const columns = activeList !== 'requested'
-		? renderAddedQuestionColumns() : requestedQuestionsColumns({ deactivateQuestion, onClickEditButton });
+		? renderAddedQuestionColumns() : requestedQuestionsColumns({
+			deactivateQuestion,
+			onClickEditButton,
+			showPopOver,
+			setShowPopOver,
+			onClickNoButton,
+		});
 	const { list: data = [], requested_question_count = 0, ...paginationData } = questionList || {};
 
 	return {
+		showPopOver,
+		setShowPopOver,
 		page,
 		setPage,
 		paginationData,
