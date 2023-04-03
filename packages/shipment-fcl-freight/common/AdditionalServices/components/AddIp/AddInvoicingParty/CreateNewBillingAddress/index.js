@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useForm, useFieldArray } from '@cogoport/forms';
 import { useState } from 'react';
 
@@ -29,7 +30,11 @@ function CreateNewBillingAddress({
 		register,
 		setValue,
 		formState: { errors },
-	} = useForm();
+	} = useForm({
+		defaultValues: {
+			poc_details: [{ name: '', email: '', mobile_country_code: '', mobile_number: '' }],
+		},
+	});
 
 	const afterCreateBillingAddress = () => {
 		refetch();
@@ -42,6 +47,10 @@ function CreateNewBillingAddress({
 	});
 
 	const onSubmit = (values) => {
+		if (values?.poc_details?.length === 0) {
+			Toast.info('Please create at-least one POC before proceeding ');
+			return;
+		}
 		const payload = {
 			...values,
 			organization_id             : id,
@@ -59,6 +68,7 @@ function CreateNewBillingAddress({
 				useFieldArray={useFieldArray}
 				register={register}
 				handleSubmit={handleSubmit}
+				refetch={refetch}
 				errors={errors}
 				setValue={setValue}
 				onSubmit={onSubmit}

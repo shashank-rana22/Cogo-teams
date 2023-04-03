@@ -8,6 +8,7 @@ function CompanyDetails({
 	filledDetails = {},
 	setFilledDetails = () => {},
 	setCurrentStep = () => {},
+	setShowComponent = () => {},
 }) {
 	const {
 		formState: { errors },
@@ -36,6 +37,11 @@ function CompanyDetails({
 				filledDetails={filledDetails}
 			/>
 			<div className={styles.button_container}>
+				<Button
+					onClick={() => setShowComponent('view_billing_addresses')}
+				>
+					Cancel
+				</Button>
 				<Button
 					onClick={handleSubmit(onSubmitOfCompanyDetails)}
 				>

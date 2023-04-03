@@ -64,6 +64,7 @@ function CreateNewTradeParty({
 				filledDetails={filledDetails}
 				setFilledDetails={setFilledDetails}
 				setCurrentStep={setCurrentStep}
+				setShowComponent={setShowComponent}
 			/>
 		);
 	}

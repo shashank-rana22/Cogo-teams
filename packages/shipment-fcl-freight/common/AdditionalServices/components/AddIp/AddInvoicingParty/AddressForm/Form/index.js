@@ -10,123 +10,121 @@ import React from 'react';
 import mobileCountryCodeOptions from '../getCountryCode';
 import styles from '../styles.module.css';
 
+import controls from './controls';
+
 function Form({
 	control,
 	useFieldArray,
 	register = () => {},
 	errors,
 }) {
+	const formControls = controls();
+
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name: 'poc_details',
 	});
 
+	const renderForm = (field) => {
+		switch (field.type) {
+			case 'async-select':
+				return (
+					<div className={styles.input_container}>
+						<label>{field.label}</label>
+						<AsyncSelectController
+							name={field.name}
+							asyncKey={field.asyncKey}
+							valueKey={field.valueKey}
+							initialCall={false}
+							control={control}
+							placeholder={field.placeholder}
+							params={field.params}
+							rules={field.rules}
+						/>
+						{errors[field.name] && <span>{errors[field.name].message}</span>}
+					</div>
+				);
+			case 'input':
+				return (
+					<div className={styles.input_container}>
+						<label htmlFor={field.name}>{field.label}</label>
+						<InputController
+							name={field.name}
+							control={control}
+							size="sm"
+							placeholder={field.placeholder}
+							rules={field.rules}
+						/>
+						{errors[field.name] && <span>{errors[field.name].message}</span>}
+					</div>
+				);
+			case 'select':
+				return (
+					<div className={styles.input_container}>
+						<label>{field.label}</label>
+						<SelectController
+							name={field.name}
+							control={control}
+							size="sm"
+							options={field.options}
+							placeholder={field.placeholder}
+							rules={field.rules}
+						/>
+						{errors[field.name] && <span>{errors[field.name].message}</span>}
+					</div>
+				);
+			case 'file':
+				return (
+					<div className={styles.input_container}>
+						<label>{field.label}</label>
+						<UploadController
+							name={field.name}
+							control={control}
+							size="sm"
+							rules={field.rules}
+						/>
+						{errors[field.name] && <span>{errors[field.name].message}</span>}
+					</div>
+				);
+			case 'checkbox':
+				return (
+					<div className={styles.sez_container}>
+						<CheckboxController
+							name={field.name}
+							control={control}
+						/>
+						<label>{field.label}</label>
+					</div>
+				);
+			case 'text-area':
+				return (
+					<div className={styles.input_container}>
+						<label>{field.label}</label>
+						<TextAreaController
+							name={field.name}
+							control={control}
+							rules={{
+								required: {
+									value: true, message: 'Address is required',
+								},
+							}}
+							rows={4}
+						/>
+						{errors[field.name] && <span>{errors[field.name].message}</span>}
+					</div>
+				);
+			default:
+				return null;
+		}
+	};
+
 	return (
 		<form className={styles.form_container}>
-			<div className={styles.flex}>
-				<div className={styles.input_container}>
-					<label htmlFor="name">Billing Party Name</label>
-					<InputController
-						name="name"
-						control={control}
-						size="sm"
-						rules={{ required: { value: true, message: 'Name is required' } }}
-					/>
-					{errors.name && <span>This field is required</span>}
-				</div>
-				<div className={styles.input_container}>
-					<label htmlFor="address_type">Address Type</label>
-					<SelectController
-						name="address_type"
-						control={control}
-						size="sm"
-						options={[
-							{ label: 'Office', value: 'office' },
-							{ label: 'Factory', value: 'factory' },
-							{ label: 'Warehouse Address', value: 'warehouse_address' },
-						]}
-						rules={{ required: { value: true, message: 'Address Type is required' } }}
-					/>
-					{errors.address_type && <span>This field is required</span>}
-				</div>
-			</div>
-			<div className={styles.flex}>
-				<div className={styles.input_container}>
-					<label htmlFor="country_of_registration">Country of Registration</label>
-					<AsyncSelectController
-						name="country_id"
-						asyncKey="list_locations"
-						initialCall={false}
-						control={control}
-						placeholder="Select Country"
-						params={{
-							filters: { type: ['country'] },
-						}}
-						rules={{ required: { value: true, message: 'Country of Registration is required' } }}
-					/>
-					{errors.country_id && <span>This field is required</span>}
-				</div>
-				<div className={styles.input_container}>
-					<label htmlFor="pincode">Pincode</label>
-					<AsyncSelectController
-						name="pincode"
-						asyncKey="list_locations"
-						valueKey="postal_code"
-						initialCall={false}
-						control={control}
-						placeholder="Select Pincode"
-						params={{
-							filters: { type: ['pincode'] },
-						}}
-						rules={{ required: { value: true, message: 'Pincode is required' } }}
-					/>
-					{errors.pincode && <span>This field is required</span>}
-				</div>
-			</div>
-			<div className={styles.flex}>
-				<div className={styles.input_container}>
-					<label htmlFor="address">Address</label>
-					<TextAreaController
-						name="address"
-						control={control}
-						rules={{
-							required: {
-								value: true,
-							},
-						}}
-						rows={4}
-					/>
-					{errors.address && <span>This field is required</span>}
-				</div>
-				<div className={styles.input_container}>
-					<label htmlFor="tax_number_document_url">GST Proof</label>
-					<UploadController
-						name="tax_number_document_url"
-						control={control}
-						rules={{
-							required: {
-								value: true,
-							},
-						}}
-						rows={4}
-					/>
-					{errors.tax_number_document_url && <span>This field is required</span>}
-				</div>
-			</div>
-			<div className={styles.flex}>
-				<div className={styles.sez_container}>
-					<CheckboxController
-						name="is_sez"
-						control={control}
-					/>
-					<label htmlFor="is_sez">Is Sez</label>
-					<div />
-				</div>
-			</div>
+			{ formControls.map((field) => renderForm(field))}
 
 			<h3>POC Details</h3>
 			{fields.map((field, index) => (
-				<div key={field.id}>
+				<div key={field.id} style={{ flex: '0 0 100%' }}>
 					<div className={styles.field_array}>
 						<div className={styles.input_container}>
 							<label htmlFor="name">POC Name</label>
@@ -135,8 +133,13 @@ function Form({
 								control={control}
 								{...register(`poc_details.${index}.name`)}
 								size="sm"
-								rules={{ required: { value: true, message: 'POC Name is required' } }}
+								rules={{ required: { value: true, message: 'Name is required' } }}
 							/>
+							{errors.poc_details && (
+								<span>
+									{errors.poc_details[index]?.name?.message}
+								</span>
+							)}
 						</div>
 						<div className={styles.input_container}>
 							<label htmlFor="email">POC Email</label>
@@ -145,8 +148,13 @@ function Form({
 								control={control}
 								{...register(`poc_details.${index}.email`)}
 								size="sm"
-								rules={{ required: { value: true, message: 'POC Email is required' } }}
+								rules={{ required: { value: true, message: 'Email is required' } }}
 							/>
+							{errors.poc_details && (
+								<span>
+									{errors.poc_details[index]?.email?.message}
+								</span>
+							)}
 						</div>
 						<div className={styles.input_container}>
 							<label htmlFor="mobile_country_code">Country Code</label>
@@ -158,6 +166,11 @@ function Form({
 								options={mobileCountryCodeOptions}
 								rules={{ required: { value: true, message: 'Country Code is required' } }}
 							/>
+							{errors.poc_details && (
+								<span>
+									{errors.poc_details[index]?.mobile_country_code?.message}
+								</span>
+							)}
 						</div>
 						<div className={styles.input_container}>
 							<label htmlFor="mobile_number">Mobile Number</label>
@@ -168,6 +181,11 @@ function Form({
 								{...register(`poc_details.${index}.mobile_number`)}
 								rules={{ required: { value: true, message: 'Mobile Number is required' } }}
 							/>
+							{errors.poc_details && (
+								<span>
+									{errors.poc_details[index]?.mobile_number?.message}
+								</span>
+							)}
 						</div>
 						<IcMDelete onClick={() => remove(index)} />
 					</div>
@@ -178,10 +196,10 @@ function Form({
 			<Button type="button" onClick={() => append({ name: '' })}>
 				<IcMPlusInCircle />
 				&nbsp;
-				Add Item
+				Add POC
 			</Button>
-		</form>
 
+		</form>
 	);
 }
 

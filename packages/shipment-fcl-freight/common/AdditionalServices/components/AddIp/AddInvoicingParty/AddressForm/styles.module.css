@@ -1,11 +1,18 @@
 .form_container{
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+    flex-wrap: wrap;
+	
 	& > h3{
 		margin-top: 12px;
+		width: 100%;
 	}
 
-	& > button > svg{
-		width: 18px;
-		height: 18px;
+	& > div:not(:last-of-type){
+		flex: 0 0 45%;
+		margin: 4px 0px;
 	}
 }
 
@@ -30,17 +37,6 @@
 			margin-bottom: 0 !important;
     		min-height: fit-content !important;
 		}
-	}
-}
-
-.flex{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-top: 8px;
-
-	& > div{
-		flex: 0 0 45%;
 	}
 }
 

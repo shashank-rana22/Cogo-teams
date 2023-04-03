@@ -51,6 +51,7 @@ function AddInvoicingParty({
 				options={RADIO_GROUP_OPTIONS}
 				value={activeComponentKey}
 				onChange={setActiveComponentKey}
+				style={{ justifyContent: 'space-around' }}
 			/>
 
 			<ActiveComponent key={activeComponentKey} {...activeComponentProps} />

@@ -23,12 +23,14 @@ function AddressForm({
 	setShowComponent = () => {},
 	setIsAddressRegisteredUnderGst = () => {},
 	source = '',
+	refetch,
 }) {
 	useGetBusiness({ gstNumber, setValue });
 
 	const handleCancel = () => {
-		setCurrentStep('company_details');
-		setShowComponent(null);
+		if (source === 'create_trade_party') { setCurrentStep('company_details'); }
+		setShowComponent('view_billing_addresses');
+		refetch();
 	};
 
 	return (
