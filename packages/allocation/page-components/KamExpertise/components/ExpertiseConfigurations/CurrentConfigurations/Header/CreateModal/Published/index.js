@@ -25,7 +25,7 @@ const columns = [
 			const colors = value === 'live' ? 'green' : 'red';
 			return (
 				<span>
-					<Pill className={styles.pill} color={colors}>{value === 'active' ? 'live' : value}</Pill>
+					<Pill className={styles.pill} color={colors}>{value || ''}</Pill>
 				</span>
 			);
 		},
@@ -33,9 +33,9 @@ const columns = [
 	},
 	{
 		Header   : 'LAST UPDATED',
-		accessor : 'updated_at',
+		accessor : 'audit_data',
 		Cell     : ({ value }) => (
-			<section>{value ? format(value, 'dd-MM-YYYY') : ''}</section>
+			<section>{value?.updated_at ? format(value?.updated_at, 'dd-MM-YYYY') : ''}</section>
 		),
 	},
 
@@ -46,12 +46,7 @@ function Published({ setSelectedVersion = () => {}, list, versionName, setVersio
 
 	list.forEach((element) => {
 		if (element.status !== 'draft') {
-			table.push({
-				version_number : element?.version_number || '',
-				status         : element?.status || '',
-				updated_at     : element?.audit_data?.updated_at || '',
-
-			});
+			table.push(element);
 		}
 	});
 
@@ -78,7 +73,7 @@ function Published({ setSelectedVersion = () => {}, list, versionName, setVersio
 				columns={columns}
 				data={table}
 				selectType="single"
-				onRowClick={(row) => setSelectedVersion(row.version_number)}
+				onRowClick={(row) => setSelectedVersion(row)}
 			/>
 
 		</div>

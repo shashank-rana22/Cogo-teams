@@ -90,7 +90,7 @@ function useUpdateEvent(props) {
 	return {
 		onUpdate,
 		formProps,
-		getAddRuleControls: controls,
+		controls,
 		loading,
 	};
 }

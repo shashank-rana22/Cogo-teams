@@ -5,18 +5,17 @@ import styles from './styles.module.css';
 
 function ModalFooter(props) {
 	const {
-		setMode, setSelectedVersion, selectedVersion, getVersion,
+		setMode, setSelectedVersion, selectedVersion, onCreate,
 		createModalLoading, versionName,
 	} = props;
 
 	return (
 		<div className={styles.modal_footer}>
-			{selectedVersion ? (
+			{selectedVersion?.version_number ? (
 				<span className={styles.footer_text}>
 					Selected Version:
 					{' '}
-					{' '}
-					{selectedVersion}
+					{selectedVersion?.version_number}
 				</span>
 			) : (null)}
 
@@ -27,7 +26,7 @@ function ModalFooter(props) {
 					disabled={createModalLoading}
 					onClick={() => {
 						setMode('initial-mode');
-						setSelectedVersion('');
+						setSelectedVersion({});
 					}}
 				>
 					Back
@@ -35,9 +34,9 @@ function ModalFooter(props) {
 
 				<Button
 					className={styles.button}
-					disabled={!selectedVersion || isEmpty(versionName)}
+					disabled={isEmpty(selectedVersion) || isEmpty(versionName)}
 					onClick={() => {
-						getVersion();
+						onCreate();
 					}}
 					loading={createModalLoading}
 				>

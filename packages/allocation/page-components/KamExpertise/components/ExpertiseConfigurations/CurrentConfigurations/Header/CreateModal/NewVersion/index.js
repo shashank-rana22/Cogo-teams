@@ -6,7 +6,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function NewVersion(props) {
-	const { setMode, setSelectedVersion, getVersion, createModalLoading, versionName, setVersionName } = props;
+	const { setMode, onCreate, createModalLoading, versionName, setVersionName } = props;
 
 	return (
 		<div className={styles.container}>
@@ -40,8 +40,7 @@ function NewVersion(props) {
 					disabled={isEmpty(versionName)}
 					loading={createModalLoading}
 					onClick={() => {
-						setSelectedVersion('new');
-						getVersion();
+						onCreate();
 					}}
 				>
 					Proceed

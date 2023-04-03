@@ -19,7 +19,7 @@ const expertiseTypes = {
 };
 
 function useCreateKamLevel(props) {
-	const { dataLength = '', setCreateKam, refetch } = props;
+	const { dataLength = '', setCreateKam, refetch, cardRefetch } = props;
 
 	const formProps = useForm();
 
@@ -63,8 +63,12 @@ function useCreateKamLevel(props) {
 			});
 
 			setCreateKam(false);
-			reset({ configDetails: '' });
+
+			reset();
+
 			refetch();
+
+			cardRefetch();
 
 			Toast.success('Level Added!');
 		} catch (error) {

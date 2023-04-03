@@ -30,6 +30,11 @@
 
 .add_rule_container {
 	flex: 1;
+
+	:global(.ui_text_area_container){
+		height: 60px;
+		padding: 8px;
+	}
 }
 
 .account_attributes {

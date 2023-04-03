@@ -11,13 +11,14 @@ function Footer({
 	setCreateKam = () => { },
 	dataLength = '',
 	refetch,
+	cardRefetch,
 	createKam,
 }) {
 	const {
 		formProps,
 		onCreate,
 		createLoading,
-	} = useCreateKamLevel({ dataLength, setCreateKam, refetch });
+	} = useCreateKamLevel({ dataLength, setCreateKam, refetch, cardRefetch });
 
 	const {
 		control, formState: { errors }, handleSubmit,
