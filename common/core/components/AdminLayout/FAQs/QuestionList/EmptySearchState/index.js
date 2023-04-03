@@ -55,7 +55,7 @@ function EmptySearchState({ search = '', source = 'empty_state' }) {
 						role="presentation"
 						onClick={() => setShow(true)}
 					>
-						Send a question request for your query.
+						Send a question request for your query
 					</div>
 				</div>
 
