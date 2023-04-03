@@ -14,10 +14,9 @@ function PortDetails({ item }) {
 					{`(${port?.port_code})`}
 				</div>
 
-				<div>
+				<div className={styles.port_name_container}>
 					<Tooltip
-						content={<div>{port?.name}</div>}
-						theme="light"
+						content={port?.name}
 						interactive
 						placement="bottom"
 					>

@@ -24,6 +24,7 @@
     :global{
         .ui_input_container{
             padding-right: 6px;
+            min-width: 250px;
         }
     }
 }

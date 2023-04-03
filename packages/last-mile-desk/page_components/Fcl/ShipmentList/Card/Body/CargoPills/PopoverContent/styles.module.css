@@ -1,0 +1,5 @@
+.pills_container:not(:first-of-type){
+    border-top: 1px solid var(--color-secondary-greyscale-5);
+    margin-top: 4px;
+    padding-top: 2px;
+}

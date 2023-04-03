@@ -5,6 +5,21 @@
     :global{
         .ui_pill_container{
             margin-top: 0;
+            line-height: 1.8;
+        }
+
+        .ui_pill_text{
+            font-size: 10px;
+        }
+    }
+
+}
+
+.trade_type_container{
+    :global{
+        .ui_pill_container{
+            border-bottom-left-radius: 0;
+            border-top-right-radius:0 ;
         }
     }
 }
@@ -19,6 +34,15 @@
 
 .import {
     background-color: var(--color-tertiary-blue-4);
+}
+
+.source_container{
+    :global{
+        .ui_pill_container{
+            border-bottom-right-radius: 0;
+            border-top-left-radius:0 ;
+        }
+    }
 }
 
 .source{ 

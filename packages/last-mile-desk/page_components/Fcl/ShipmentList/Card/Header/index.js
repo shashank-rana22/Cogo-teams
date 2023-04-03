@@ -7,7 +7,7 @@ function Header({ item = {} }) {
 	const { trade_type = '', importer_exporter, source } = item || {};
 	return (
 		<div className={styles.container}>
-			<div>
+			<div className={styles.trade_type_container}>
 				{trade_type && (
 					<Pill className={cl`${trade_type === 'export' ? styles.export : styles.import}
                      ${styles.trade_type}`}
@@ -20,7 +20,7 @@ function Header({ item = {} }) {
 				&& <Pill color="orange">Channel Partner</Pill>}
 			</div>
 
-			<div>
+			<div className={styles.source_container}>
 				{source && (
 					<Pill className={styles.source}>
 						{source === 'direct' ? 'Sell Without Buy' : startCase(source) }

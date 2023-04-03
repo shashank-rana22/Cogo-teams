@@ -9,14 +9,22 @@ import PopoverContent from './PopoverContent';
 import styles from './styles.module.css';
 
 export default function ScopeSelect({
-	size = 'sm', themeType = 'secondary',
-	className = '', defaultValues, showChooseAgent = true,
+	size = 'sm',
+	themeType = 'secondary',
+	className = '',
+	defaultValues,
+	showChooseAgent = true,
+	popoverSize = 'sm',
+
 }) {
 	const [showPopover, setShowPopover] = useState(false);
 
 	const closePopover = () => setShowPopover(false);
 
-	const { handleApply, scopeData, scope, viewType, selectedAgentId } = useScope({ defaultValues, closePopover });
+	const { handleApply, scopeData, scope, viewType, selectedAgentId } = useScope({
+		defaultValues,
+		closePopover,
+	});
 
 	return (
 		<Popover
@@ -30,7 +38,7 @@ export default function ScopeSelect({
 					scope={scope}
 					viewType={viewType}
 					selectedAgentId={selectedAgentId}
-					size={size}
+					size={popoverSize}
 					showChooseAgent={showChooseAgent}
 					key={showPopover}
 				/>

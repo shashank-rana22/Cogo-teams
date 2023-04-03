@@ -6,7 +6,12 @@ import TRADE_TYPE from '../../../../configs/TRADE_TYPES';
 
 import styles from './styles.module.css';
 
-function FilterBy({ setPopoverFilter = () => {}, popoverFilter = {}, stateProps = {}, setShowPopover = () => {} }) {
+function FilterBy({
+	setPopoverFilter = () => {},
+	popoverFilter = {},
+	stateProps = {},
+	setShowPopover = () => {},
+}) {
 	const { filters, setFilters } = stateProps || {};
 	const { date_type, dateRange = '', trade_type } = popoverFilter;
 
@@ -43,7 +48,10 @@ function FilterBy({ setPopoverFilter = () => {}, popoverFilter = {}, stateProps 
 				</Button>
 
 				<Button
-					disabled={!(trade_type || date_type)}
+					disabled={!(trade_type || date_type)
+							|| (dateRange
+							&& 	(!popoverFilter?.startDate
+							|| !popoverFilter?.endDate))}
 					size="sm"
 					onClick={() => {
 						setFilters({ ...filters, ...popoverFilter });
@@ -78,7 +86,15 @@ function FilterBy({ setPopoverFilter = () => {}, popoverFilter = {}, stateProps 
 						<div className={cl`${date_type === type ? styles.active : styles.inactive} 
 							${styles.filter_by_buttons}`}
 						>
-							<Button onClick={() => setPopoverFilter({ ...popoverFilter, date_type: type })} size="xs">
+							<Button
+								onClick={() => setPopoverFilter({
+									...popoverFilter,
+									date_type : type,
+									dateRange : 'today',
+									...DATE_RANGE_MAPPING.today,
+								})}
+								size="xs"
+							>
 								{upperCase(type)}
 							</Button>
 						</div>

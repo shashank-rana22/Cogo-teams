@@ -20,8 +20,8 @@ function Body({ item = {}, stateProps = {} }) {
 				<div className={styles.divider} />
 
 				<div className={styles.fcl_icon}>
-					<div><IcMFfcl fill="#ee3425" height={28} width={28} /></div>
-					<div>FCL</div>
+					<div className={styles.icon_container}><IcMFfcl fill="#ee3425" height={28} width={28} /></div>
+					<div className={styles.icon_text}>FCL</div>
 				</div>
 
 				<div className={styles.port_detail}>

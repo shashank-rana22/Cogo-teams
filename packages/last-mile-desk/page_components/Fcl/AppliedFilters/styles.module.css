@@ -1,0 +1,39 @@
+.container{
+margin-bottom: 6px;
+    :global{
+        .ui_pill_container{
+            background-color: var(--color-tertiary-blue-5);
+            border-radius: 6px;
+            font-size: 12px;
+            padding: 0;
+        }
+    }
+    
+}
+
+.pill_content{
+    display: flex;
+}
+
+.pill_text{
+    padding: 6px 10px;
+}
+
+.pill_cross{
+    background-color: var(--color-tertiary-blue-4);
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    
+    :global{
+       .ui_button_container{
+        height: 100%;
+
+        &:hover{
+            background-color: var(--color-tertiary-blue-3);
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0;
+        }
+       }
+
+    }
+}

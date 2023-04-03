@@ -11,7 +11,7 @@ function Card({ item = {}, stateProps = { } }) {
 	const isShipmentCritical = getCriticalShipment({ tab: activeTab, shipment: item });
 
 	return (
-		<div className={cl`${styles.container} ${isShipmentCritical ? styles.critical_animation : ''}`}>
+		<div className={cl`${styles.container} ${isShipmentCritical ? styles.animate_card : ''}`}>
 			<Header item={item} />
 			<Body item={item} stateProps={stateProps} />
 		</div>

@@ -1,16 +1,14 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import getLastMileAddtionalMethods from '../helpers/getLastMileAddtionalMethods';
 import getLastMileFilters from '../helpers/getLastMileFilters';
 
 const useListLastMileDeskShipments = ({ stateProps = {} }) => {
-	const { filters, activeTab, setFilters } = stateProps || {};
+	const { filters, activeTab, setFilters, scopeFilters } = stateProps || {};
 
 	const [apiData, setApiData] = useState({});
-	const [loading, setLoading] = useState(false);
-
-	const [{ loading:apiLoading }, trigger] = useRequest('fcl_freight/list_lastmile_desk_shipments', { manual: true });
 
 	const { page = 1, ...restFilters } = filters || {};
 
@@ -18,37 +16,38 @@ const useListLastMileDeskShipments = ({ stateProps = {} }) => {
 
 	const additional_methods = getLastMileAddtionalMethods({ activeTab });
 
-	const apiTrigger = async () => {
-		setLoading(true);
+	const [{ loading }, trigger] = useRequest({
+		url    : 'fcl_freight/list_lastmile_desk_shipments',
+		params : {
+			filters    : { ...formattedFilters },
+			additional_methods,
+			page,
+			page_limit : 10,
+			sort_by    : 'serial_id',
+			sort_type  : 'desc',
+		},
+	}, { manual: true });
+
+	const apiTrigger = useCallback(async () => {
 		try {
-			const res = await trigger({
-				params: {
-					filters    : { ...formattedFilters },
-					additional_methods,
-					page,
-					page_limit : 10,
-					sort_by    : 'serial_id',
-					sort_type  : 'desc',
-				},
-			});
+			const res = await trigger();
 
 			if (res?.data?.list?.length === 0 && page > 1) setFilters({ ...filters, page: 1 });
 
-			setLoading(false);
 			setApiData(res?.data || {});
 		} catch (err) {
-			setLoading(false);
-			console.log(err);
+			setApiData({});
+			// Toast.error(getApiErrorString(err));
 		}
-	};
+	}, [trigger, setFilters, page, filters]);
 
 	useEffect(() => {
 		apiTrigger();
-		localStorage.setItem('last_mile_desk_values', JSON.stringify(stateProps));
-	}, [filters, activeTab]);
+		localStorage.setItem('last_mile_desk_values', JSON.stringify({ filters, activeTab, scopeFilters }));
+	}, [apiTrigger, filters, activeTab, scopeFilters]);
 
 	return {
-		loading: loading || apiLoading, apiTrigger, data: apiData,
+		loading, apiTrigger, data: apiData,
 	};
 };
 

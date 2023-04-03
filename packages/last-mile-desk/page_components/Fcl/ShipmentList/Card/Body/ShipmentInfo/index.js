@@ -1,3 +1,5 @@
+import { cl, Tooltip } from '@cogoport/components';
+
 import styles from './styles.module.css';
 
 function ShipmentInfo({ item = {} }) {
@@ -11,14 +13,22 @@ function ShipmentInfo({ item = {} }) {
 				{serial_id || ''}
 			</div>
 
-			<div className={styles.service_provider}>
-				{service_provider?.business_name}
+			<div className={styles.tooltip_container}>
+				<Tooltip content={service_provider?.business_name} placement="bottom" interactive>
+					<div className={cl`${styles.service_provider} ${styles.tooltip_text}`}>
+						{service_provider?.business_name}
+					</div>
+				</Tooltip>
 			</div>
 
-			<div className={styles.shipping_line}>
-				<span className={styles.line_heading}>Line:</span>
-				{' '}
-				{shipping_line?.business_name}
+			<div className={styles.tooltip_container}>
+				<Tooltip content={shipping_line?.business_name} placement="bottom" interactive>
+					<div className={cl`${styles.shipping_line} ${styles.tooltip_text}`}>
+						<span className={styles.line_heading}>Line:</span>
+						{' '}
+						{shipping_line?.business_name}
+					</div>
+				</Tooltip>
 			</div>
 
 			{lastmile_ops?.name && (
