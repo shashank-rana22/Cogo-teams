@@ -53,7 +53,9 @@ function ListView({ viewType = false }) {
 				</Button>
 			</div>
 
-			<Filters params={params} setParams={setParams} />
+			<div className={styles.filters}>
+				<Filters params={params} setParams={setParams} />
+			</div>
 
 			<UserTableData
 				columns={columns}

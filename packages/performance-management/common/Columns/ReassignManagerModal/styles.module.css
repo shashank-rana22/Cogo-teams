@@ -1,0 +1,15 @@
+.user {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.manager {
+    font-size: 12px;
+    margin-top: 4px;
+
+    .manager_name {
+        font-size: 14px;
+        font-weight: 600;
+    }
+}
+

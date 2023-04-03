@@ -27,7 +27,7 @@ function ReassignManager({ userId, setOpenReassign, refetchTreeParams = () => {}
 	useEffect(() => setManagerId(manager), [manager]);
 
 	return (
-		<div>
+		<div className={styles.reassign_modal}>
 			<div className={styles.name_input}>
 				<SelectController {...cogoUsersControl} control={control} />
 			</div>
