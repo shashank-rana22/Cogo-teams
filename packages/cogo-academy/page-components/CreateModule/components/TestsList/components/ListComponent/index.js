@@ -36,7 +36,7 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 		createQuestionSet,
 	} = useCreateQuestionSet({ questionSetId, getTestQuestionTest: fetchList });
 
-	const { loading:updateTestLoading, updateTest } = useUpdateTest();
+	const { loading: updateTestLoading, updateTest } = useUpdateTest();
 
 	const propsMapping = {
 		tests: {
