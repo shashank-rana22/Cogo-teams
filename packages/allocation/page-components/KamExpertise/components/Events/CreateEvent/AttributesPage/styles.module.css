@@ -34,10 +34,11 @@
 
 .account_attributes {
 	flex: 4;
-	height: 454px;
+	height: 572px;
 	padding: 16px;
 	overflow-y: scroll;
 	background: rgb(226 226 226 / 20%);
+	border: 1px solid rgb(44 62 80 / 20%);
 	border-radius: 8px;
 	opacity: 0.8;
 }
@@ -78,6 +79,7 @@
 	margin-bottom: 16px;
 	font-size: 18px;
 	font-weight: 600;
+	color: #221f20;
 
 	& svg {
 		margin-left: 4px;

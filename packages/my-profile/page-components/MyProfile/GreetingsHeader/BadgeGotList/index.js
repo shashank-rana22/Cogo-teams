@@ -33,7 +33,7 @@ function BadgeGotList(props) {
 					))}
 				</div>
 
-				<div className={styles.empty_text}>Sorry, you dont have any badges.</div>
+				<div className={styles.empty_text}>Sorry, you don&apos;t have any badges.</div>
 			</div>
 		);
 	}
