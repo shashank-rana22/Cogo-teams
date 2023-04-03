@@ -174,7 +174,6 @@ function Filters({
 					</div>
 					<div className={styles.flex_wrap}>
 						<Input
-							className="primary md"
 							placeholder={placeholder}
 							value={search}
 							onChange={(e) => handleChange(e)}
@@ -182,12 +181,13 @@ function Filters({
 								<IcMCross
 									onClick={handleInputReset}
 									cursor="pointer"
+									className={styles.icon_style}
 								/>
 							)}
 							prefix={(
 								<IcMSearchdark />
 							)}
-							style={{ width: 300 }}
+							className={styles.styled_input}
 						/>
 					</div>
 					<FilterpopOver
