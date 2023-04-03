@@ -3,7 +3,7 @@ import { IcMSearchlight, IcMUpload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import LoadingState from '../../../../commons/LoadingState';
+import LoadingState from '../../../../../../commons/LoadingState';
 import SavedQuestionDetails from '../../../../commons/SavedQuestionDetails';
 
 import BulkUpload from './BulkUpload';

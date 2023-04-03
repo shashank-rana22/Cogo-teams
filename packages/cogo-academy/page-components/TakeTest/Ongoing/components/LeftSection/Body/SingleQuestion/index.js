@@ -1,14 +1,33 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { CheckboxGroup, RadioGroup, Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
+
+import getAlphabets from '../../../../../../CreateModule/utils/getAlphabets';
 
 import styles from './styles.module.css';
 
-function SingleQuestion({ question = {}, currentQuestion, total_question, loading, answer = [], setAnswer }) {
-	const { question_text, options = [], question_type, test_question_answer_ids } = question;
+const alphabets = getAlphabets('A', 'Z');
 
-	const answerOptions = (options || [])?.map((answer_option) => ({
+function SingleQuestion({
+	question = {},
+	currentQuestion,
+	total_question,
+	loading,
+	answer = [],
+	setAnswer,
+	subQuestion,
+	from = 'stand_alone',
+}) {
+	const { question_text, test_question_answers = [], question_type } = question;
+
+	const correctAnswerIds = useMemo(() => (test_question_answers || []).reduce((acc, c) => {
+		if (c.selected_by_user) {
+			acc.push(c.id);
+		}
+		return acc;
+	}, []), [test_question_answers]);
+
+	const answerOptions = (test_question_answers || [])?.map((answer_option) => ({
 		label : answer_option?.answer_text,
 		value : answer_option?.id,
 	}));
@@ -17,22 +36,24 @@ function SingleQuestion({ question = {}, currentQuestion, total_question, loadin
 
 	useEffect(() => {
 		if (question_type !== 'multi_correct') {
-			setAnswer(test_question_answer_ids?.[0] || '');
+			setAnswer(correctAnswerIds?.[0] || '');
 		} else {
-			setAnswer(test_question_answer_ids || []);
+			setAnswer(correctAnswerIds || []);
 		}
-	}, [JSON.stringify(question)]);
+	}, [correctAnswerIds, question_type, setAnswer]);
 
 	if (loading || isEmpty(question)) {
 		<Placeholder height="40px" width="100%" />;
 	}
+
 	return (
-		<div className={styles.main_container}>
+		<div key={subQuestion} className={styles.main_container}>
 			<div className={styles.container}>
 				<div className={styles.question_count}>
 					Question
 					{' '}
-					{currentQuestion}
+					{from === 'case_study'
+						? `${currentQuestion}${alphabets[subQuestion - 1].toLowerCase()}` : currentQuestion}
 					{' '}
 					of
 					{' '}

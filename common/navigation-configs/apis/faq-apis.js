@@ -219,22 +219,22 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
-			api          : 'get_test_question',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'update_test_user_question_answer',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
 			api          : 'get_test',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
 		{
 			api          : 'create_test_user_mapping',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_user_test_question',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_test_user_question_response',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},

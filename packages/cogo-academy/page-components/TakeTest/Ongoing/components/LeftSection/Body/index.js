@@ -1,12 +1,22 @@
-// import { useState } from 'react';
 import CaseStudy from './CaseStudy';
-// import quizData from './dummydata';
 import SingleQuestion from './SingleQuestion';
 
-function Body({ data = [], currentQuestion, setCurrentQuestion, total_question, answer = '', setAnswer, loading }) {
+function Body({
+	data = {},
+	currentQuestion,
+	setCurrentQuestion,
+	total_question,
+	answer = '',
+	setAnswer,
+	loading,
+	subQuestion,
+	setSubQuestion,
+}) {
+	const { question_type } = data || {};
+
 	return (
-		<div>
-			{!data?.primary_question_type
+		<div key={`${loading}_${subQuestion}`}>
+			{question_type !== 'case_study'
 				? (
 					<SingleQuestion
 						question={data}
@@ -27,6 +37,8 @@ function Body({ data = [], currentQuestion, setCurrentQuestion, total_question, 
 						answer={answer}
 						setAnswer={setAnswer}
 						loading={loading}
+						subQuestion={subQuestion}
+						setSubQuestion={setSubQuestion}
 					/>
 				) }
 		</div>

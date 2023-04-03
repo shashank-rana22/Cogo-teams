@@ -4,8 +4,8 @@ import { IcMCrossInCircle, IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
+import LoadingState from '../../../../../../commons/LoadingState';
 import getElementController from '../../../../../../configs/getElementController';
-import LoadingState from '../../../../commons/LoadingState';
 import useCreateQuestionSet from '../../../../hooks/useCreateQuestionSet';
 
 import getControls from './controls';

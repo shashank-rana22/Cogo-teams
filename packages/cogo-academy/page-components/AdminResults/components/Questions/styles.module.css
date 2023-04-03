@@ -17,3 +17,9 @@
 .tabs_container {
 	margin-top: 12px;
 }
+
+.pagination_container {
+	display: flex;
+	justify-content: right;
+	padding-top: 12px;
+}

@@ -2,3 +2,14 @@
 	display: flex;
 	margin-top: 72px;
 }
+
+.pagination_container {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_paginnation_number_container {
+			margin-left: 12px;
+		}
+	}
+}

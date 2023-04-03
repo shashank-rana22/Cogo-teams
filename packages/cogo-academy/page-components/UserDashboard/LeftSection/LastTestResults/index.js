@@ -1,6 +1,8 @@
 import { isEmpty } from '@cogoport/utils';
 
+import LoadingState from '../../../../commons/LoadingState';
 import TestResultMessage from '../../../../commons/TestResultMessage';
+import EmptyState from '../../../CreateModule/commons/EmptyState';
 import QuestionWiseStats from '../../commons/QuestionWiseStats';
 
 import GoToDetails from './GoToDetails';
@@ -9,16 +11,18 @@ import styles from './styles.module.css';
 import TopicWisePercentile from './TopicWisePercentile';
 
 function LastTestResults(props) {
-	const { data = {}, loading } = props;
-
-	const stats_data = data;
+	const { data: stats_data = {}, loading } = props;
 
 	const { topic_wise_percentile, question_stats, status, test_id } = stats_data || {};
 
 	const hasPassed = status === 'passed';
 
-	if (loading || isEmpty(stats_data)) {
-		return null;
+	if (loading) {
+		return <LoadingState rowsCount={2} />;
+	}
+
+	if (isEmpty(stats_data)) {
+		return <EmptyState text="No Data Found" height={160} />;
 	}
 
 	return (

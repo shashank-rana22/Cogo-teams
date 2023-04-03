@@ -4,14 +4,25 @@ import QuestionsCount from './QuestionsCount';
 import QuestionStats from './QuestionStats';
 import styles from './styles.module.css';
 
-function Body({ data = [], loading, setCurrentQuestion, currentQuestion, fetchQuestions }) {
+function Body({
+	data = {},
+	loading,
+	setCurrentQuestion,
+	currentQuestion,
+	fetchQuestions,
+	total_question_count,
+	user_appearance,
+	setSubQuestion,
+}) {
 	if (loading || isEmpty(data)) {
 		return null;
 	}
+
 	return (
 		<div className={styles.container}>
 			<QuestionStats
-				data={data}
+				total_question_count={total_question_count}
+				user_appearance={user_appearance}
 			/>
 
 			<QuestionsCount
@@ -20,6 +31,9 @@ function Body({ data = [], loading, setCurrentQuestion, currentQuestion, fetchQu
 				loading={loading}
 				setCurrentQuestion={setCurrentQuestion}
 				currentQuestion={currentQuestion}
+				total_question_count={total_question_count}
+				user_appearance={user_appearance}
+				setSubQuestion={setSubQuestion}
 			/>
 		</div>
 	);

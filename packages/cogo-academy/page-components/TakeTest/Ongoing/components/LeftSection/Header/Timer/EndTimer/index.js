@@ -7,8 +7,8 @@ import StatsDisplay from '../../../../utils/StatsDisplay';
 
 import styles from './styles.module.css';
 
-function EndTimer({ data = {}, showTimeOverModal, setShowTimeOverModal, setActiveState }) {
-	const { endTest, endTestLoading } = useEndTest({ setShowTimeOverModal, setActiveState });
+function EndTimer({ data = {}, showTimeOverModal, setShowTimeOverModal, setActiveState, test_user_mapping_id }) {
+	const { endTest, endTestLoading } = useEndTest({ setShowTimeOverModal, setActiveState, test_user_mapping_id });
 
 	useEffect(() => {
 		setTimeout(() => {

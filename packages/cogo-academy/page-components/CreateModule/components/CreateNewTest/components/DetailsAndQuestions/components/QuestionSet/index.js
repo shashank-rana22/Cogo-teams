@@ -25,6 +25,17 @@ function QuestionSet({ setIdArray, setShowQuestionSet, idArray, watch }) {
 
 	const columns = getQuestionSetColumns({ idArray, setIdArray });
 
+	const handleSort = () => {
+		setSort((prev) => !prev);
+		setParams((prev) => ({
+			...prev,
+			sort_type : sort ? 'asc' : 'desc',
+			filters   : {
+				...prev.filters,
+			},
+		}));
+	};
+
 	return (
 		<div className={styles.container}>
 			<Breadcrumb className={styles.bcitems}>
@@ -55,40 +66,19 @@ function QuestionSet({ setIdArray, setShowQuestionSet, idArray, watch }) {
 
 				<div
 					role="presentation"
-					onClick={() => {
-						setSort((prev) => !prev);
-						setParams((prev) => ({
-							...prev,
-							sort_type : sort ? 'asc' : 'desc',
-							filters   : {
-								...prev.filters,
-							},
-						}));
-					}}
+					onClick={handleSort}
 					className={styles.filter}
 				>
-					{sort ? (
-						<IcMArrowRotateUp
-							width={16}
-							height={16}
-							fill="#393f70"
-							style={{
-								transition : 'transform 0.5s',
-								cursor     : 'pointer',
-								transform  : 'rotate(180deg)',
-							}}
-						/>
-					) : (
-						<IcMArrowRotateUp
-							width={16}
-							height={16}
-							fill="#393f70"
-							style={{
-								cursor     : 'pointer',
-								transition : 'transform 0.5s',
-							}}
-						/>
-					)}
+					<IcMArrowRotateUp
+						width={16}
+						height={16}
+						fill="#393f70"
+						style={{
+							transition : 'transform 0.5s',
+							cursor     : 'pointer',
+							transform  : sort ? 'rotate(180deg)' : '',
+						}}
+					/>
 
 					<span
 						className={styles.span_text}

@@ -6,8 +6,19 @@ import StatsDisplay from '../../../utils/StatsDisplay';
 
 import styles from './styles.module.css';
 
-function SubmitTest({ showSubmitTestModal, setShowSubmitTestModal, data = {}, setActiveState }) {
-	const { endTest, endTestLoading } = useEndTest({ setActiveState, setShowTimeOverModal: setShowSubmitTestModal });
+function SubmitTest({
+	showSubmitTestModal,
+	setShowSubmitTestModal,
+	setActiveState,
+	test_user_mapping_id,
+	user_appearance,
+	total_question_count,
+}) {
+	const { endTest, endTestLoading } = useEndTest({
+		setActiveState,
+		setShowTimeOverModal: setShowSubmitTestModal,
+		test_user_mapping_id,
+	});
 
 	const handleContinueTest = () => {
 		handleEnterFullScreen();
@@ -24,7 +35,7 @@ function SubmitTest({ showSubmitTestModal, setShowSubmitTestModal, data = {}, se
 					You cannot come back to the test once submitted.
 				</p>
 
-				<StatsDisplay data={data} />
+				<StatsDisplay data={user_appearance} total_question_count={total_question_count} />
 
 				<div className={styles.button_container}>
 					<Button

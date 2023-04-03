@@ -40,7 +40,7 @@ function Completion() {
 			title : 'Answered',
 			value : answered,
 		},
-		not_answered: {
+		viewed: {
 			title : 'Not Answered',
 			value : not_answered,
 		},
