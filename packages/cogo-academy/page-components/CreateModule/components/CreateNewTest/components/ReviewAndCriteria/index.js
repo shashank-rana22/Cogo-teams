@@ -15,6 +15,8 @@ import styles from './styles.module.css';
 function ReviewAndCriteria(props) {
 	const { loading, data, test_id } = props;
 
+	const router = useRouter();
+
 	const { control, formState: { errors }, handleSubmit, setValue, getValues, watch } = useForm();
 
 	const { fields, append, remove } = useFieldArray({
@@ -25,8 +27,6 @@ function ReviewAndCriteria(props) {
 	const { name = '', set_data = [], cogo_entity_object = {} } = data || {};
 
 	const { updateTest } = useUpdateTest();
-
-	const router = useRouter();
 
 	const [error, setError] = useState(false);
 
