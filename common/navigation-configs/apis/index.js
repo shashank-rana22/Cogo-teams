@@ -41,6 +41,7 @@ import sop from './sop-apis';
 import tech_ops from './tech-ops-apis';
 import techops_dashboard from './techops_dashboard';
 import tools from './tools';
+import vendor_rm_apis from './vendor_rm_apis';
 
 const apis = {
 	search: search.map((api) => ({
@@ -55,6 +56,10 @@ const apis = {
 	sop: sop.map((api) => ({
 		...api,
 		module: 'demand_crm',
+	})),
+	vendor_rm_apis: vendor_rm_apis.map((api) => ({
+		...api,
+		module: 'vendor_rm',
 	})),
 	revenue_desk: revenue_desk_apis.map((api) => ({
 		...api,

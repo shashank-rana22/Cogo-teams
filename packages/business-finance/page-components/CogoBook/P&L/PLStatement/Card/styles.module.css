@@ -1,0 +1,167 @@
+/* stylelint-disable selector-class-pattern */
+.container {
+	padding: 28px 32px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.period {
+	display: flex;
+	width: fit-content;
+	margin-right: 5px;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 20px;
+}
+
+.hr_period {
+	width: 5%;
+	border: 1px solid #ee3425;
+}
+
+.select_container {
+	display: flex;
+	gap: 16px;
+	width: fit-content;
+	margin-top: 16px;
+}
+
+.info_icon_container {
+	padding: 2px 0 0 4px;
+}
+
+.date_range {
+	width: fit-content;
+
+	:global {
+		.react-datepicker__input-container {
+			.react-datepicker__close-icon::after {
+				background: none !important;
+			}
+
+			.react-datepicker__close-icon {
+				right: -9px;
+				border: none;
+			}
+		}
+	}
+}
+
+.border {
+	margin: 4px 0;
+	border: 1px solid #f68b21;
+}
+
+.content_container {
+	width: 180px;
+}
+
+.chips {
+	:global {
+		.ui_chip_container {
+			min-width: 0 !important;
+		}
+	}
+
+	padding-bottom: 8px;
+	border-bottom: 1px solid #f8d468;
+}
+
+.radio {
+	:global {
+		.ui_radiogroup_container {
+			display: flex;
+			flex-direction: column;
+
+			.ui_radio_container {
+				border-bottom: 1px solid #f9f5ec;
+			}
+
+			.ui_radio_container:hover {
+				background-color: #f9f5ec;
+			}
+		}
+	}
+}
+
+.buttons {
+	display: flex;
+	gap: 8px;
+	justify-content: flex-end;
+	margin-top: 24px;
+}
+
+.toggle_data {
+	display: flex;
+	justify-content: space-between;
+	padding: 6px 16px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.button_flex_data {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}
+
+.flex_data {
+	display: flex;
+	gap: 20px;
+	justify-content: center;
+}
+
+.modal_data {
+	:global {
+		.ui_modal_body_container {
+			height: 100px;
+			overflow: visible !important;
+		}
+	}
+}
+
+.filters {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 22px;
+	margin-bottom: 12px;
+	font-size: 12px;
+	background: #fff;
+	border: 1px solid #88cad1;
+	border-radius: 8px;
+}
+
+.border_filter {
+	height: 36px;
+	border: 1px solid #88cad1;
+}
+
+.radio_filters {
+	display: flex;
+	align-items: center;
+}
+
+.bold_font {
+	font-weight: 600;
+}
+
+.delete_icon {
+	color: #ee3425;
+	cursor: pointer;
+}
+
+.label_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.bold_font_data {
+	margin-bottom: 8px;
+	font-size: 12px;
+	font-weight: 600;
+}
