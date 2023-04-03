@@ -101,18 +101,6 @@ function CogoOne() {
 		searchValue,
 	});
 
-	useEffect(() => {
-		if (!firstLoading) {
-			setActiveVoiceCard({});
-			setActiveCard({});
-			setActiveMail({});
-		}
-	}, [activeTab, firstLoading, setActiveCard, showBotMessages]);
-
-	useEffect(() => {
-		setToggleStatus(status === 'active');
-	}, [status]);
-
 	const renderComponent = () => {
 		if ((activeTab === 'message' && !isEmpty(activeMessageCard))
 			|| (activeTab === 'voice' && !isEmpty(activeVoiceCard))
@@ -148,6 +136,18 @@ function CogoOne() {
 			/>
 		);
 	};
+
+	useEffect(() => {
+		if (!firstLoading) {
+			setActiveVoiceCard({});
+			setActiveCard({});
+			setActiveMail({});
+		}
+	}, [activeTab, firstLoading, setActiveCard, showBotMessages]);
+
+	useEffect(() => {
+		setToggleStatus(status === 'active');
+	}, [status]);
 
 	return (
 		<div className={styles.layout_container}>
