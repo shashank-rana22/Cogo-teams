@@ -72,7 +72,6 @@ function QuestionsComponent({ test_id }) {
 
 			{!loading && (isEmpty(data?.list) ? <EmptyState /> : (
 				<div>
-
 					<RenderContent
 						questionsList={questionsList}
 						test_id={test_id}
