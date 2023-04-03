@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
+import { useCallback } from 'react';
 
 function useGetTest() {
 	const [{ loading, data = {} }, trigger] = useRequest({
@@ -7,7 +8,7 @@ function useGetTest() {
 		url    : '/get_test',
 	}, { manual: true });
 
-	const getTest = ({ test_id }) => {
+	const getTest = useCallback(({ test_id }) => {
 		try {
 			trigger({
 				params: {
@@ -17,7 +18,7 @@ function useGetTest() {
 		} catch (err) {
 			Toast.error(err?.message);
 		}
-	};
+	}, [trigger]);
 
 	return {
 		loading,

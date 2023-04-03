@@ -46,7 +46,7 @@ function useCreateQuestionSet({
 				data:
 				type === 'delete'
 					? { id: questionSetId, status: 'inactive' }
-					: { ...values, ...(type === 'edit' ? { id: questionSetId } : null) },
+					: { ...values, ...(type === 'edit' && { id: questionSetId }) },
 			});
 
 			Toast.success(`Question set ${actionNameMapping[type]} successfully`);
