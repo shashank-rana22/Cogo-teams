@@ -83,7 +83,7 @@ function Shipment() {
 							<div className={styles.to}>To</div>
 						</div>
 
-						<div style={{ margin: '0px' }}>
+						<div>
 							<DateRangepicker
 								isPreviousDaysAllowed
 								name="date"
