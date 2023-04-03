@@ -1,0 +1,34 @@
+.container{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	margin-left: 20px;
+	width: 12%;
+	@media (max-width: 768px) {
+		display: flex;
+		justify-content: flex-start;
+	}
+
+	@media (max-width: 576px) {
+		display: flex;
+		justify-content: center;
+	}
+};
+
+.upload_button{
+	border-radius: 4px;
+	color: #ffffff;
+	font-weight: 600;
+	font-size: 12px;
+	width: 120px;
+	padding: 6px 36px;
+	text-transform: capitalize;
+
+	@media (max-width: 768px) {
+		margin: 15px 20px 0px 0px;
+	}
+	@media (max-width: 768px) {
+		margin: 15px 20px 0 0;
+	}
+};

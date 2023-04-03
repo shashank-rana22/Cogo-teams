@@ -1,0 +1,62 @@
+.container{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 65%;
+
+	@media (max-width: 768px) {
+		display: flex;
+		flex-direction: column;
+	}
+};
+
+.task_details{
+  display:  flex;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.cargo_details{
+  display:  flex;
+  flex-direction: row;
+}
+
+.icon{
+  margin-right: 16px;
+  margin-top: 2px;
+}
+
+.task_and_icon{
+  display: flex;
+	align-items: center;
+	justify-content: center;
+
+	@media (max-width: 768px) {
+		margin-bottom: 20px;
+	}
+}
+
+.task_name{
+  font-weight: 600;
+	font-size: 16px;
+	color: red;
+	margin-right: 10px;
+}
+
+.deadline{
+	color: #393f70;
+	font-size: 14px;
+	font-weight: 500;
+	margin-right: 10px;
+};
+
+.completed{
+	color: #F68B21;
+	font-size: 14px;
+	margin-right: 10px;
+
+	/* &.after_due_date {
+		color: #cb6464;
+	} */
+};

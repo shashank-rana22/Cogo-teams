@@ -1,0 +1,34 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  padding-left: 12px;
+	margin-bottom: 32px;
+}
+
+.top_panel{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: red;
+  margin-bottom: 32px;
+	overflow-x: auto;
+}
+
+.bottom_panel{
+
+}
+
+.left_panel{
+  font-weight: 600;
+	font-size: 18px;
+	line-height: 21px;
+	@media (max-width: 768px) {
+		font-size: 12px;
+	}
+}
+
+.right_panel{
+  display: flex;
+	justify-content: space-between;
+}
+
