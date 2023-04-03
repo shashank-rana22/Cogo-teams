@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 import fields from './viewPriceFields';
 
 function ViewPrice({ showPrice, setShowPrice }) {
-	const { apiData, loading } = useGetSubsidiaryServiceRateCards({
+	const { apiData = [], loading } = useGetSubsidiaryServiceRateCards({
 		item: showPrice?.item,
 	});
 
@@ -17,7 +17,7 @@ function ViewPrice({ showPrice, setShowPrice }) {
 
 	useEffect(() => {
 		(async () => {
-			apiData?.list.forEach((items) => {
+			apiData?.list?.forEach((items) => {
 				items?.validities.forEach((validity) => {
 					line_items.push({
 						validity_start : validity?.validity_start,
@@ -28,9 +28,9 @@ function ViewPrice({ showPrice, setShowPrice }) {
 					});
 				});
 			});
-			setShowPrice({ ...showPrice, line_items });
+			setShowPrice((p) => ({ ...p, line_items }));
 		})();
-	}, [loading, setShowPrice, showPrice, JSON.stringify(line_items), apiData?.list]);
+	}, [loading, setShowPrice]);
 
 	const field = fields(showPrice?.item);
 	return (

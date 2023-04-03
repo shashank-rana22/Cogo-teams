@@ -33,8 +33,7 @@ const useGetSubsidiaryServiceRateCards = ({ item }) => {
 			addedService?.destination_port_id
 			|| addedService?.destination_port?.id
 			|| addedService?.destination_location?.id
-			|| addedService?.destination_airport?.id
-			|| undefined,
+			|| addedService?.destination_airport?.id,
 			container_type : addedService?.container_type,
 			container_size : addedService?.container_size,
 			commodity      : addedService?.commodity,
@@ -43,6 +42,7 @@ const useGetSubsidiaryServiceRateCards = ({ item }) => {
 			|| addedService?.service_provider?.id,
 			trade_type: addedService?.trade_type,
 		},
+
 	});
 
 	const getSubsidiaryServiceRateCards = useCallback(async () => {
@@ -53,11 +53,11 @@ const useGetSubsidiaryServiceRateCards = ({ item }) => {
 			setApiData({});
 			Toast.error(getApiErrorString(err));
 		}
-	}, [trigger]);
+	}, [JSON.stringify(trigger)]);
 
 	useEffect(() => {
 		getSubsidiaryServiceRateCards();
-	}, [getSubsidiaryServiceRateCards, item, serviceType]);
+	}, [getSubsidiaryServiceRateCards]);
 
 	return {
 		loading,
