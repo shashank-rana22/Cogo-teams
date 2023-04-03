@@ -261,6 +261,12 @@ const apis = [
 		feature      : 'tech_ops',
 		service_name : 'fcl_freight_rate',
 	},
+	{
+		api          : 'update_shipment_additional_service_quotation',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
