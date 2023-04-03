@@ -135,10 +135,11 @@ function CreateFAQ() {
 
 	const onClickYesButton = () => {
 		setShowModalOnCancel(false);
+		setQuestionPreview('preview');
 		router.back();
 	};
 
-	if (questionPreview === 'preview') {
+	if (questionPreview === 'preview' && editorValue.toString('html') !== '') {
 		return (
 			<PreviewQuestion
 				onClickPublish={onClickPublish}

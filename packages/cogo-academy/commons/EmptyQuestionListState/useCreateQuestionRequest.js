@@ -1,21 +1,22 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-const useCreateQuestionSet = () => {
+const useCreateQuestionSet = ({ searchquestion = '', setShow, setQuestionCreated, answer }) => {
 	const [{ loading: createQuestionLoading = false }, trigger] = useRequest({
 		url    : 'request_faq_question',
 		method : 'POST',
 	}, { manual: true });
 
-	const createQuestionSet = async ({ searchState = '', setShow, setQuestionCreated }) => {
-		if (!searchState) {
+	const createQuestionSet = async () => {
+		if (!searchquestion) {
 			Toast('Question cannot be empty');
 			return;
 		}
 
 		try {
 			const payload = {
-				question_abstract: searchState,
+				question_abstract: searchquestion,
+				answer,
 
 			};
 
@@ -24,7 +25,7 @@ const useCreateQuestionSet = () => {
 			setQuestionCreated(true);
 			setShow(false);
 		} catch (error) {
-			console.log('error :: ', error);
+			Toast.error(error?.message);
 		}
 	};
 

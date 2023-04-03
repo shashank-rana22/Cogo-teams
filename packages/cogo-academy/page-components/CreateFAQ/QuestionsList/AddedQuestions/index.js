@@ -7,7 +7,6 @@ import EmptyState from '../../../../commons/EmpyState';
 import StyledTable from '../../../../commons/StyledTable';
 
 import Header from './Header';
-import styles from './styles.module.css';
 
 function AddedQuestions(props) {
 	const {
@@ -71,11 +70,11 @@ function AddedQuestions(props) {
 
 		return (
 			<>
-				<div className={styles.table}>
+				<div>
 					<StyledTable columns={columns} data={data} loading={questionListLoading} />
 				</div>
 
-				<div className={styles.pagination}>
+				<div>
 					{paginationData?.total_count > 10
 						? (
 							<Pagination
@@ -92,7 +91,7 @@ function AddedQuestions(props) {
 	};
 
 	return (
-		<div className={styles.container}>
+		<div>
 			<Header
 				filters={filters}
 				setFilters={setFilters}
