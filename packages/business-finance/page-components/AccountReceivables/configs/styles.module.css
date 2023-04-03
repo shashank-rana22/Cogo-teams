@@ -1,0 +1,62 @@
+.name {
+	padding-left: 20px;
+	font-size: 12;
+	font-weight: 800;
+}
+
+.field_pair {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.link {
+	color: #f68b21;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.sid {
+	color: #f68b21;
+}
+
+.amount {
+	font-weight: 800;
+}
+
+.service {
+	font-weight: 800;
+}
+
+.center {
+	display: flex;
+	justify-content: center;
+}
+
+.width {
+	width: 14px;
+}
+
+.flex {
+	display: flex;
+}
+
+.icon_div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 15px;
+	margin-left: 8px;
+	cursor: pointer;
+}
+
+.wrapper {
+	font-size: 12px;
+	font-weight: 500;
+	cursor: pointer;
+}
+
+.styled_name {
+	font-size: 12px;
+	font-weight: 500;
+}

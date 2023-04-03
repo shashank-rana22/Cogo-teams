@@ -14,7 +14,7 @@
 
 .pagination {
 	display: flex;
-	justify-content: end;
+	justify-content: flex-end;
 	padding: 16px;
 }
 
@@ -44,6 +44,7 @@
 .col {
 	display: flex;
 	flex: var(--span);
+	justify-content: center;
 	padding: 4px;
 	font-size: 12px;
 	font-weight: 500;

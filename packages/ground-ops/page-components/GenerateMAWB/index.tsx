@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from '../Air/commons/Layout';
 
 import GenerateMawbDoc from './GenerateMawbDoc';
+import usePackingList from './Helpers/hooks/usePackingList';
 import mawbControls from './mawbControls';
 import styles from './styles.module.css';
 import UploadMAWB from './UploadMAWB';
@@ -21,8 +22,19 @@ const options = [
 	{ name: 'Upload Document', value: 'upload', label: 'Upload Document' },
 ];
 
+const iataCodeMapping = {
+	'7391cac2-e8db-467f-a59b-574d01dd7e7c' : '14-3-4526/0020',
+	'aa0e7e59-cbb9-43b2-98ce-1f992ae7ab19' : '14-3-4526/0005',
+	'bdef6da0-8353-4b9a-b422-550ebe9c2474' : '14-3-4526/0042',
+	'2f6f6dbc-c10b-4d1d-b9fd-e89298fb487c' : '14-3-4526/0053',
+};
+
+const agentOtherChargesCode = [{ code: 'AWB', price: '150' }, { code: 'PCA', price: '250' }];
+const carrierOtherChargesCode = [{ code: 'AMS', price: '' }, { code: 'AWC', price: '' },
+	{ code: 'XRAY', price: '' }, { code: 'CGC', price: '' }];
+
 interface NestedObj {
-	[key: string]: NestedObj;
+	[key: string]: NestedObj | React.FC ;
 }
 
 interface Props {
@@ -49,7 +61,11 @@ function GenerateMAWB({
 
 	const [value, onChange] = useState('manual');
 
-	const fields = mawbControls();
+	const [disableClass, setDisableClass] = useState(false);
+
+	const fields = mawbControls(disableClass);
+
+	const { packingData, packingList } = usePackingList();
 
 	const onSubmit = () => {
 		setBack(true);
@@ -70,49 +86,81 @@ function GenerateMAWB({
 		...fields.handling,
 	];
 
-	let chargeableWeight:number = Number((Math.max(
-		+formValues.weight * +taskItem.packagesCount,
+	const [chargeableWeight, setChargeableWeight] = useState(Number((Math.max(
+		+formValues.weight,
 		(+taskItem.volume * 166.67),
-	) || 0.0).toFixed(2));
+	) || 0.0).toFixed(2)));
+
+	const handleDocumentList = (type) => {
+		(packingData?.list || []).forEach((itm) => {
+			if (itm.documentType === type) {
+				window.open(itm.documentUrl, '_blank');
+			}
+		});
+	};
 
 	useEffect(() => {
-		chargeableWeight = Number((Math.max(
-			+formValues.weight * +formValues.packagesCount,
-			+formValues.volumetricWeight,
-		) || 0.0).toFixed(2));
-		setValue('chargeableWeight', (+chargeableWeight || 0.0).toFixed(2));
-	}, [formValues.volumetricWeight, formValues.weight, formValues.packagesCount]);
+		setChargeableWeight(formValues.chargeableWeight);
+	}, [formValues.chargeableWeight]);
 
 	useEffect(() => {
+		if (!viewDoc) {
+			setValue('amount', ((formValues.chargeableWeight * formValues.ratePerKg) || 0.0).toFixed(2));
+		}
+
+		if (formValues.class === 'a') {
+			setDisableClass(true);
+		} else {
+			setDisableClass(false);
+		}
+	}, [formValues.chargeableWeight, formValues.ratePerKg, formValues.class]);
+
+	useEffect(() => {
+		packingList({ item });
 		finalFields.forEach((c:any) => {
 			setValue(c.name, taskItem[c.name]);
 		});
-		setValue('iataCode', '14-3-4525/0005');
-		setValue('declaredValueForCarriage', 'NVD');
-		setValue('city', 'NEW DELHI');
-		setValue('place', 'NEW DELHI');
-		setValue('class', 'q');
-		setValue('commodity', `${'SAID TO CONTAIN\n'}${taskItem.commodity}`);
+		if (!viewDoc) {
+			setValue('executedDate', edit && taskItem.executedDate ? new Date(taskItem.executedDate) : new Date());
+			setValue('iataCode', edit ? taskItem.iataCode : iataCodeMapping[taskItem?.originAirportId] || '');
+			setValue('city', 'NEW DELHI');
+			setValue('place', 'NEW DELHI');
+			setValue('class', 'q');
+			setValue('currency', 'INR');
+			setValue('commodity', edit ? `${taskItem.commodity || ''}`
+				: `${'SAID TO CONTAIN\n'}${taskItem.commodity || ''}`);
+			setValue('agentOtherCharges', edit ? taskItem.agentOtherCharges
+				: agentOtherChargesCode);
+			setValue('carrierOtherCharges', edit ? taskItem.carrierOtherCharges
+				: carrierOtherChargesCode);
+			setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
+			setValue('shipperSignature', taskItem.customer_name);
+			setValue('amountOfInsurance', 'NIL');
+		}
 	}, []);
 
 	useEffect(() => {
 		let totalVolume:number = 0;
+		let totalPackage:number = 0;
 		(formValues.dimension || []).forEach((dimensionObj) => {
 			if (dimensionObj.unit === 'inch') {
 				totalVolume
 				+= Number(dimensionObj.length) * 2.54
 				* Number(dimensionObj.width) * 2.54
 				* Number(dimensionObj.height) * 2.54
-				* Number(dimensionObj.packages);
-			} else if (dimensionObj.unit === 'cm') {
+				* Number(dimensionObj.packages_count);
+			} else if (dimensionObj.unit === 'cms') {
 				totalVolume
 				+= Number(dimensionObj.length)
 				* Number(dimensionObj.width)
 				* Number(dimensionObj.height)
-				* Number(dimensionObj.packages);
+				* Number(dimensionObj.packages_count);
 			}
+			totalPackage += Number(dimensionObj.packages_count);
 		});
-		setValue('volumetricWeight', (((+totalVolume * 166.67) || 0.0) / 1000000).toFixed(2));
+		setValue('volumetricWeight', viewDoc ? taskItem.volumetricWeight
+			: Number(((+totalVolume * 166.67) || 0.0) / 1000000).toFixed(2));
+		setValue('totalPackagesCount', totalPackage || taskItem.totalPackagesCount);
 	}, [JSON.stringify(formValues.dimension), formValues.weight]);
 
 	return (
@@ -124,11 +172,11 @@ function GenerateMAWB({
 					<Breadcrumb>
 						<Breadcrumb.Item label={(
 							<div
-								onClick={() => setGenerate(false)}
+								onClick={() => { setGenerate(false); if (edit) { setEdit(false); } }}
 								role="link"
 								tabIndex={0}
 							>
-								Ground Ops Dashboard
+								SO2 - Docs Dashboard
 							</div>
 						)}
 						/>
@@ -158,7 +206,25 @@ function GenerateMAWB({
 							/>
 						)}
 					</div>
+					<div className={styles.flex}>
+						<Button
+							size="md"
+							themeType="primary"
+							onClick={() => handleDocumentList('packing_list')}
+							className={styles.packing_button}
+						>
+							Refer Packing List
+						</Button>
 
+						<Button
+							size="md"
+							themeType="primary"
+							onClick={() => handleDocumentList('shipping_instruction')}
+							className={styles.packing_button}
+						>
+							Refer Shipping Instruction
+						</Button>
+					</div>
 					{value === 'upload' ? <UploadMAWB item={item} setGenerate={setGenerate} />
 						: (
 							<>
@@ -171,7 +237,10 @@ function GenerateMAWB({
 											{!back ? (
 												<div className={styles.button_div}>
 													<Button
-														onClick={() => setGenerate(false)}
+														onClick={() => {
+															setGenerate(false);
+															if (edit) { setEdit(false); }
+														}}
 														themeType="secondary"
 														style={{ border: '1px solid #333' }}
 													>
@@ -252,9 +321,9 @@ function GenerateMAWB({
 						onClose={() => { setBack(false); setViewDoc(false); }}
 						size="lg"
 						className={styles.modal_container}
-						style={{ width: '900px' }}
+						style={{ width: '900px', height: '92vh' }}
 					>
-						<Modal.Body style={{ minHeight: '720px' }}>
+						<Modal.Body style={{ minHeight: '90vh' }}>
 							<GenerateMawbDoc
 								taskItem={taskItem}
 								formData={formData}

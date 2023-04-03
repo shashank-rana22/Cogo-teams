@@ -1,6 +1,6 @@
 import currencies from './Helpers/currencies';
 
-const mawbControls = () => ({
+const mawbControls = (disableClass) => ({
 	basic: [
 		{
 			name         : 'shipperName',
@@ -79,6 +79,28 @@ const mawbControls = () => ({
 			},
 		},
 		{
+			name        : 'originPortCode',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'Origin Port Code',
+			placeholder : 'Origin Port Code',
+			span        : 5,
+			rules       : {
+				required: 'Origin Port Code is Required',
+			},
+		},
+		{
+			name        : 'destinationPortCode',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'Destination Port Code',
+			placeholder : 'Destination Port Code',
+			span        : 5,
+			rules       : {
+				required: 'Destination Port Code is Required',
+			},
+		},
+		{
 			name        : 'airline',
 			type        : 'text',
 			className   : 'primary lg',
@@ -87,6 +109,17 @@ const mawbControls = () => ({
 			span        : 5,
 			rules       : {
 				required: 'Carrier is Required',
+			},
+		},
+		{
+			name        : 'airlineIataCode',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'Airline IATA Code',
+			placeholder : 'Enter Airline IATA Code',
+			span        : 5,
+			rules       : {
+				required: 'Airline IATA Code is Required',
 			},
 		},
 		{
@@ -165,8 +198,7 @@ const mawbControls = () => ({
 					className   : 'primary lg',
 					span        : 1.25,
 					rules       : {
-						required : 'Length is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+						validate: (value) => (value < 0 ? 'Cannot be Negative' : true),
 					},
 				},
 				{
@@ -177,8 +209,7 @@ const mawbControls = () => ({
 					className   : 'primary lg',
 					span        : 1.25,
 					rules       : {
-						required : 'Width is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+						validate: (value) => (value < 0 ? 'Cannot be Negative' : true),
 					},
 				},
 				{
@@ -189,20 +220,18 @@ const mawbControls = () => ({
 					className   : 'primary lg',
 					span        : 1.5,
 					rules       : {
-						required : 'Height is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+						validate: (value) => (value < 0 ? 'Cannot be Negative' : true),
 					},
 				},
 				{
-					name        : 'packages',
+					name        : 'packages_count',
 					placeholder : 'Packages count',
 					label       : 'Number of Packages',
 					type        : 'number',
 					className   : 'primary lg',
 					span        : 2,
 					rules       : {
-						required : 'No of Packages is Required',
-						validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+						validate: (value) => (value < 0 ? 'Cannot be Negative' : true),
 					},
 				}, {
 					name        : 'unit',
@@ -211,7 +240,7 @@ const mawbControls = () => ({
 					placeholder : 'select',
 					span        : 1.25,
 					options     : [
-						{ label: 'Cm', value: 'cm' },
+						{ label: 'Cm', value: 'cms' },
 						{ label: 'Inch', value: 'inch' },
 					],
 				},
@@ -229,9 +258,15 @@ const mawbControls = () => ({
 			},
 		},
 		{
+			name      : 'amountOfInsurance',
+			type      : 'text',
+			className : 'primary lg',
+			label     : 'Amount of Insurance',
+			span      : 5,
 		},
+		{},
 		{
-			name        : 'packagesCount',
+			name        : 'totalPackagesCount',
 			placeholder : 'Package Count',
 			label       : 'Package Count',
 			type        : 'number',
@@ -262,6 +297,7 @@ const mawbControls = () => ({
 			options     : [
 				{ value: 'q', label: 'Q' },
 				{ value: 'a', label: 'A' },
+				{ value: 'm', label: 'M' },
 			],
 			className : 'primary lg',
 			span      : 2,
@@ -280,7 +316,28 @@ const mawbControls = () => ({
 				required : 'Chargable Weight is Required',
 				validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
 			},
-			disabled: true,
+		},
+		{
+			name         : 'ratePerKg',
+			type         : 'number',
+			className    : 'primary lg',
+			label        : 'Rate per Kg',
+			showOptional : false,
+			span         : 5,
+			placeholder  : 'Rate per Kg',
+			disabled     : disableClass,
+		},
+		{
+			name        : 'currency',
+			placeholder : 'Select Currency',
+			type        : 'select',
+			span        : 5,
+			label       : 'Currency',
+			options     : currencies,
+			className   : 'primary lg',
+			rules       : {
+				required: 'Currency is Required',
+			},
 		},
 		{
 			name      : 'amount',
@@ -301,9 +358,6 @@ const mawbControls = () => ({
 			maxLength   : 150,
 			placeholder : 'Remarks',
 			rows        : 3,
-			rules       : {
-				required: 'Remarks is Required',
-			},
 		},
 		{
 			name               : 'agentOtherCharges',
@@ -395,7 +449,7 @@ const mawbControls = () => ({
 			type      : 'textarea',
 			className : 'textarea',
 			label     : 'Accounting Information:',
-			value     : 'Freight PrePaid',
+			value     : 'FREIGHT PREPAID',
 			span      : 7,
 			rules     : {
 				required: 'Accounting Information is Required',
@@ -407,9 +461,6 @@ const mawbControls = () => ({
 			className : 'primary lg',
 			label     : 'Declared Value for Carriage:',
 			span      : 5,
-			rules     : {
-				required: 'Carriage Value is Required',
-			},
 		},
 		{
 			name        : 'city',
@@ -440,35 +491,7 @@ const mawbControls = () => ({
 			span         : 5,
 			placeholder  : 'Handling Information...*',
 			maxLength    : 100,
-			rules        : {
-				required: 'Handling Information is Required',
-			},
 		},
-		{
-			name         : 'ratePerKg',
-			type         : 'number',
-			className    : 'primary lg',
-			label        : 'Rate per Kg',
-			showOptional : false,
-			span         : 5,
-			placeholder  : 'Rate per Kg',
-			rules        : {
-				required: 'Rate is Required',
-			},
-		},
-		{
-			name        : 'currency',
-			placeholder : 'Select Currency',
-			type        : 'select',
-			span        : 5,
-			label       : 'Currency',
-			options     : currencies,
-			className   : 'primary lg',
-			rules       : {
-				required: 'Currency is Required',
-			},
-		},
-
 		{
 			name        : 'commodity',
 			label       : 'Commodity Details:',
@@ -494,6 +517,15 @@ const mawbControls = () => ({
 			},
 		},
 		{
+			name        : 'shipperSignature',
+			type        : 'text',
+			className   : 'primary lg',
+			label       : 'Signature of Shipper or his Agent',
+			span        : 5,
+			placeholder : 'Shipper Signature',
+			rules       : { required: 'Shipper Signature is Required' },
+		},
+		{
 			name        : 'place',
 			type        : 'text',
 			className   : 'primary lg',
@@ -504,6 +536,20 @@ const mawbControls = () => ({
 				required: 'Place is Required',
 			},
 		},
+		{
+			name                  : 'executedDate',
+			type                  : 'date_picker',
+			className             : 'primary lg',
+			label                 : 'Executed Date',
+			span                  : 5,
+			placeholder           : 'Date',
+			value                 : new Date(),
+			isPreviousDaysAllowed : true,
+			rules                 : {
+				required: 'Date is Required',
+			},
+		},
+
 	],
 });
 

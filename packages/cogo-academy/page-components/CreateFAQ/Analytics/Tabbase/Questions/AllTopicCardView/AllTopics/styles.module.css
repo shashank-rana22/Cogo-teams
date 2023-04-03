@@ -1,0 +1,31 @@
+.container {
+	align-items: center;
+	justify-content: space-between;
+	padding: 1rem;
+	font-size: 20px;
+	font-weight: 500;
+	background-color: #fff;
+	border-radius: 8px;
+
+	&:hover {
+		box-shadow: 0 1px 1px rgb(0 0 0 / 20%);
+	}
+}
+
+.pill_container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.info_pills {
+	display: flex;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.dropdown {
+	transition: all 0.3s ease;
+}

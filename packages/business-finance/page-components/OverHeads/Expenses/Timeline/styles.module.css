@@ -1,0 +1,51 @@
+.container {
+	display: flex;
+	margin-left: 120px;
+}
+
+.faded_circle {
+	width: 24px;
+	height: 24px;
+	border: 2px solid #c6c6c6;
+	border-radius: 16px;
+}
+
+.bordered_circle {
+	width: 24px;
+	height: 24px;
+	border: 2px solid #ee3425;
+	border-radius: 16px;
+}
+
+.line {
+	width: 354px;
+	margin: 10px;
+	border-top: 2px solid #c6c6c6;
+}
+
+.colored_line {
+	width: 354px;
+	margin: 10px;
+	border-top: 2px solid #ed3726;
+}
+
+.timeline_item {
+	margin-left: -40px;
+	color: #ed3726;
+}
+
+.faded_text {
+	margin-left: -40px;
+	color: #828282;
+}
+
+.section {
+	display: flex;
+	flex-direction: column;
+	padding-left: 10px;
+}
+
+.inner_div {
+	display: flex;
+	width: 100%;
+}

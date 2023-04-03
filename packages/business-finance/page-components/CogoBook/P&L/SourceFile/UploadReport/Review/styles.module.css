@@ -1,0 +1,16 @@
+.button_flex {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.body_flex {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.bold_data {
+	font-size: 16px;
+	font-weight: 600;
+}

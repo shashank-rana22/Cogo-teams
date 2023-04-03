@@ -1,8 +1,6 @@
 .container {
 	width: 180px;
-	max-height: 550px;
 	padding: 0 0 15px;
-	overflow-y: scroll;
 }
 
 .container::-webkit-scrollbar {
@@ -53,8 +51,4 @@
 			margin: 0 5px 0 0 !important;
 		}
 	}
-}
-
-.disabled {
-	cursor: not-allowed !important;
 }

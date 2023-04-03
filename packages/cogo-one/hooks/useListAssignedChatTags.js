@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useListAssignedChatTags = () => {
 	const [{ data, loading }, trigger] = useRequest(
@@ -11,18 +11,17 @@ const useListAssignedChatTags = () => {
 		{ manual: true },
 	);
 
-	const fetchList = async () => {
+	const fetchList = useCallback(async () => {
 		try {
 			await trigger();
 		} catch (error) {
 			// console.log(error);
 		}
-	};
+	}, [trigger]);
 
 	useEffect(() => {
 		fetchList();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [fetchList]);
 
 	const { list = [] } = data || {};
 
@@ -30,6 +29,7 @@ const useListAssignedChatTags = () => {
 		label : startCase(item || ''),
 		value : item,
 	})) : [];
+
 	return {
 		tagOptions,
 	};
