@@ -28,7 +28,7 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 	const control = [
 		{
 			label       : 'Manager Name',
-			name        : 'manager_name',
+			name        : 'Q',
 			placeholder : 'Search User...',
 			type        : 'text',
 			isClearable : true,

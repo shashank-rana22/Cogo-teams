@@ -12,7 +12,7 @@ const filtersSourceMapping = {
 		left: [
 			{ name: 'Department' },
 			{ name: 'Designation' },
-			{ name: 'manager_name', placeholder: 'Search Manger' },
+			{ name: 'Q', placeholder: 'Search Manager' },
 			{ name: 'Year' },
 			{ name: 'Month' },
 		],
@@ -26,7 +26,7 @@ const filtersSourceMapping = {
 			{ name: 'Month' },
 		],
 		right: [
-			{ name: 'manager_name' },
+			{ name: 'Q' },
 		],
 	},
 	hr_pip_dashboard: {
@@ -36,7 +36,7 @@ const filtersSourceMapping = {
 			{ name: 'ManagerID' },
 		],
 		right: [
-			{ name: 'manager_name' },
+			{ name: 'Q' },
 		],
 	},
 	uploaded_files: {
@@ -57,7 +57,7 @@ const filtersSourceMapping = {
 			{ name: 'Designation' },
 			{ name: 'ManagerID' },
 		],
-		right: [{ name: 'manager_name' }],
+		right: [{ name: 'Q' }],
 	},
 };
 export default filtersSourceMapping;

@@ -28,9 +28,8 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 	const {
 		Department = '', Designation = '',
 		ManagerID = '', Year = '', Month = '', date_range = {},
+		Q = '',
 	} = watch();
-
-	const managerName = watch('manager_name');
 
 	useEffect(() => {
 		setParams((previousParams) => ({
@@ -47,8 +46,8 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 	}, [query, setParams, Month, Department, Designation, Year, ManagerID, date_range?.startDate, date_range?.endDate]);
 
 	useEffect(() => {
-		debounceQuery(managerName);
-	}, [debounceQuery, managerName]);
+		debounceQuery(Q);
+	}, [debounceQuery, Q]);
 
 	return (
 		<div className={styles.filters_container}>
