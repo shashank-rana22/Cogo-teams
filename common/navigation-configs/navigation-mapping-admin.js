@@ -2073,7 +2073,7 @@ const navigationMappingAdmin = {
 				title         : 'Employee Directory',
 				href          : '/v2/performance-management/employee-directory',
 				as            : '/v2/performance-management/employee-directory',
-				possible_apis : apis.performance_management,
+				possible_apis : apis.employee_directory,
 			},
 			{
 				key           : 'performance_management-user_dashboard',

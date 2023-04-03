@@ -1,15 +1,38 @@
-import Organization from './Organization';
-import styles from './styles.module.css';
+import { Toggle } from '@cogoport/components';
+import { useState } from 'react';
 
-function EmployeeDirectory() {
+import ListView from './ListView';
+import styles from './styles.module.css';
+import TreeView from './TreeView';
+
+function OrganizationTree() {
+	const [viewType, setViewType] = useState(false);
+
 	return (
-		<div className={styles.container}>
-			<div className={styles.header}>Employee Directory</div>
-			<div className={styles.organization_container}>
-				<Organization />
+		<div>
+			<div className={styles.header}>
+				<div className={styles.header_text}>
+					Organization
+				</div>
+			</div>
+
+			<div className={styles.view_type}>
+				<Toggle
+					name="viewType"
+					checked={viewType}
+					size="md"
+					onLabel="Tree View"
+					offLabel="List View"
+					onChange={(e) => setViewType(e.target.checked)}
+				/>
+
+				{viewType ? (
+					<TreeView viewType={viewType} />
+				) : <ListView viewType={viewType} />}
 			</div>
 		</div>
+
 	);
 }
 
-export default EmployeeDirectory;
+export default OrganizationTree;

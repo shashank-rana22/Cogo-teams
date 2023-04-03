@@ -1,18 +1,15 @@
-.container {
+.header {
 	display: flex;
-	flex-direction: column;
-	height: calc(100vh - 48px);
+	align-items: center;
+	justify-content: space-between;
 }
 
-.header {
+.header_text {
+	margin-left: 8px;
 	font-size: 28px;
 	font-weight: 600;
 }
 
-.organization_container {
-	flex: 1;
-	padding-right: 12px;
-	margin-top: 16px;
-	background-color: #fff;
-	border-radius: 8px;
+.view_type {
+    position: relative;
 }

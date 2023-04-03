@@ -7,7 +7,7 @@ import useListReassignControls from '../../../../../../utils/list-reassign-manag
 import styles from './styles.module.css';
 import useReassignManager from './useReassignManager';
 
-function ReassignManager({ userId, setOpenReassign, refetchTreeParams }) {
+function ReassignManager({ userId, setOpenReassign, refetchTreeParams = () => {} }) {
 	const [managerId, setManagerId] = useState('');
 
 	const { control, watch, reset } = useForm();

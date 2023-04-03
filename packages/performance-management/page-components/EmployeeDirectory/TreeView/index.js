@@ -1,10 +1,10 @@
 import { Button } from '@cogoport/components';
-import { IcMArrowBack } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
+
+import useGetOrganizationTree from '../useGetOrganizatioonTree';
 
 import styles from './styles.module.css';
-import useGetOrganizationTree from './useGetOrganizatioonTree';
 import UserCard from './UserCard';
 
 const scrollToSection = (elementRef) => {
@@ -15,8 +15,9 @@ const scrollToSection = (elementRef) => {
 	});
 };
 
-function OrganizationTree({ setOpenOrganizationTree }) {
+function TreeView({ viewType = false }) {
 	const [users, setUsers] = useState({});
+
 	const userLevelRef = useRef(null);
 	const reporteeLevelRef = useRef(null);
 
@@ -24,7 +25,7 @@ function OrganizationTree({ setOpenOrganizationTree }) {
 		treeData = {}, loading = false, refetchTreeParams = () => {},
 		params = {},
 		setParams = () => {},
-	} = useGetOrganizationTree();
+	} = useGetOrganizationTree({ viewType });
 
 	const resetTree = () => {
 		setParams({ UserID: undefined, ManagerIDs: undefined, Ceos: true });
@@ -52,24 +53,15 @@ function OrganizationTree({ setOpenOrganizationTree }) {
 
 	return (
 		<div>
-			<div className={styles.header}>
-				<div style={{ display: 'flex' }}>
-					<div
-						role="button"
-						tabIndex={0}
-						onClick={() => setOpenOrganizationTree(false)}
-						className={styles.redirect}
-					>
-						<IcMArrowBack width="20px" height="20px" />
-					</div>
-
-					<div className={styles.header_text}>
-						Organization Tree
-					</div>
-
-				</div>
-
-				<Button onClick={() => resetTree()}>Reset</Button>
+			<div className={styles.reset_tree}>
+				<Button
+					size="md"
+					onClick={() => resetTree()}
+					style={{ marginTop: '5px' }}
+					disabled={loading}
+				>
+					Reset Tree
+				</Button>
 			</div>
 
 			<div className={styles.organization_tree}>
@@ -92,28 +84,25 @@ function OrganizationTree({ setOpenOrganizationTree }) {
 							/>
 						))}
 					</div>
-				)
-					: 						(
-						<>
-							<div className={styles.manager_level}>
-								{(users.managerLevel || []).map((user) => (
-									<>
-										<UserCard
-											loading={loading}
-											user={user}
-											clickable
-											params={params}
-											setParams={setParams}
-											key={user.id}
+				) : (
+					<>
+						<div className={styles.manager_level}>
+							{(users.managerLevel || []).map((user) => (
+								<>
+									<UserCard
+										loading={loading}
+										user={user}
+										clickable
+										params={params}
+										setParams={setParams}
+										key={user.id}
+									/>
+									<div className={styles.line} />
+								</>
+							))}
+						</div>
 
-										/>
-										<div className={styles.line} />
-									</>
-								))}
-							</div>
-
-							{isEmpty(users.selectedReportee)
-						&& (
+						{isEmpty(users.selectedReportee) && (
 							<div className={styles.user_level} ref={userLevelRef}>
 								<UserCard
 									loading={loading}
@@ -124,43 +113,39 @@ function OrganizationTree({ setOpenOrganizationTree }) {
 							</div>
 						)}
 
-							<div className={styles.line} />
+						<div className={styles.line} />
 
-							<div className={styles.reportee_level}>
-								{!isEmpty(users.selectedReportee) && (
-									<div className={styles.user_level} ref={reporteeLevelRef}>
-										<UserCard
-											loading={loading}
-											user={users.selectedReportee}
-											enlarged
-											refetchTreeParams={refetchTreeParams}
-										/>
-									</div>
-								)}
-
-								<div className={styles.all_reportees}>
-									{(users.reporteeLevel || []).map((user) => (
-										<UserCard
-											loading={loading}
-											user={user}
-											clickable
-											params={params}
-											setParams={setParams}
-											key={user.id}
-											isLastLevel={user.is_last_level}
-										/>
-									))}
+						<div className={styles.reportee_level}>
+							{!isEmpty(users.selectedReportee) && (
+								<div className={styles.user_level} ref={reporteeLevelRef}>
+									<UserCard
+										loading={loading}
+										user={users.selectedReportee}
+										enlarged
+										refetchTreeParams={refetchTreeParams}
+									/>
 								</div>
+							)}
 
+							<div className={styles.all_reportees}>
+								{(users.reporteeLevel || []).map((user) => (
+									<UserCard
+										loading={loading}
+										user={user}
+										clickable
+										params={params}
+										setParams={setParams}
+										key={user.id}
+										isLastLevel={user.is_last_level}
+									/>
+								))}
 							</div>
-
-						</>
-					)}
+						</div>
+					</>
+				)}
 			</div>
-
 		</div>
-
 	);
 }
 
-export default OrganizationTree;
+export default TreeView;

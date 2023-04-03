@@ -1,0 +1,9 @@
+.download_csv {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+
+    svg {
+        margin-right: 8px;
+    }
+}

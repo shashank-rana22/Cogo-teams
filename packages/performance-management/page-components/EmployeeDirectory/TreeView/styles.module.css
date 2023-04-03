@@ -1,19 +1,7 @@
-.header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
-.redirect {
-	display: flex;
-	align-items: center;
-	cursor: pointer;
-}
-
-.header_text {
-	margin-left: 8px;
-	font-size: 28px;
-	font-weight: 600;
+.reset_tree {
+	position: absolute;
+	right: 0px;
+	top: 0px;
 }
 
 .base_level {

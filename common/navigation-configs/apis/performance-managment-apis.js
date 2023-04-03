@@ -112,11 +112,6 @@ const performance_management = {
 			service_name : 'iris',
 		},
 		{
-			api          : 'get_iris_get_employees',
-			access_type  : 'private',
-			service_name : 'iris',
-		},
-		{
 			api          : 'post_iris_update_partner_user_admin_mapping',
 			access_type  : 'private',
 			service_name : 'iris',
@@ -201,6 +196,28 @@ const performance_management = {
 		},
 		{
 			api          : 'get_iris_get_form',
+			access_type  : 'private',
+			service_name : 'iris',
+		},
+	],
+	employee_directory: [
+		{
+			api          : 'get_iris_get_employees',
+			access_type  : 'private',
+			service_name : 'iris',
+		},
+		{
+			api          : 'get_iris_list_reportees',
+			access_type  : 'private',
+			service_name : 'iris',
+		},
+		{
+			api          : 'get_iris_download_master_csv',
+			access_type  : 'private',
+			service_name : 'iris',
+		},
+		{
+			api          : 'post_iris_update_partner_user_admin_mapping',
 			access_type  : 'private',
 			service_name : 'iris',
 		},

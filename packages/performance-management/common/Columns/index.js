@@ -8,6 +8,7 @@ import redirectPathSourceMapping from '../../constants/redirect-source-mapping';
 
 import FeedbackFormModal from './FeedbackFormModal';
 import FeedbackModal from './FeedbackPopOver';
+import ReassignManagerModal from './ReassignManagerModal';
 import styles from './styles.module.css';
 
 // const statusColorMapping = {
@@ -18,6 +19,7 @@ import styles from './styles.module.css';
 
 const useGetColumns = ({
 	getTeamFeedbackList = () => {},
+	refetchList = () => {},
 	source = 'hr_dashboard',
 	columnsToShow = [],
 	setRefetchReportees = () => {},
@@ -249,16 +251,16 @@ const useGetColumns = ({
 		id  : 'progress',
 		key : 'progress',
 	},
-	// {
-	// 	Header   : <div className={styles.head}>Employee Status</div>,
-	// 	accessor : (item) => (
-	// 		<div className={styles.head_content}>
-	// 			<Pill color={statusColorMapping[item?.employee_status]}>{startCase(item?.employee_status)}</Pill>
-	// 		</div>
-	// 	),
-	// 	id  : 'employee_status',
-	// 	key : 'employee_status',
-	// },
+	{
+		Header   : <div className={styles.head} />,
+		accessor : (item) => (
+			<div className={styles.head_content}>
+				<ReassignManagerModal item={item} refetchList={refetchList} />
+			</div>
+		),
+		id  : 'reassign_manager',
+		key : 'reassign_manager',
+	},
 	{
 		Header   : <div className={styles.head}>PIP Status</div>,
 		accessor : (item) => (

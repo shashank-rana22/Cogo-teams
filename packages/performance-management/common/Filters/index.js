@@ -35,7 +35,7 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 		fields: [
 			...leftFilters,
 			...rightFilters,
-			...(source === 'hr_feedback' ? 'manger_id' : []),
+			...(source === 'hr_feedback' ? 'manager_id' : []),
 		],
 	});
 
