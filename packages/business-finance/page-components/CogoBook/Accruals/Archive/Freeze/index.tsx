@@ -43,7 +43,9 @@ function Freeze({ item, refetch }:FreezeInterface) {
 			setShowConfirmationModal(false);
 			refetch();
 		} catch (error) {
-			Toast.error(error?.response?.data?.message);
+			if (error?.response?.data?.message) {
+				Toast.error(error?.response?.data?.message);
+			}
 		}
 	};
 	const showModal = () => {

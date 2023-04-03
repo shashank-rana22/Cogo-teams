@@ -30,7 +30,7 @@ const removeConsole = {
 
 module.exports = withBundleAnalyzer({
 	env               : { ...loadEnvConfig.parsed },
-	reactStrictMode   : true,
+	reactStrictMode   : false,
 	swcMinify         : true,
 	basePath          : '/v2',
 	transpilePackages : modulesToTranspile,

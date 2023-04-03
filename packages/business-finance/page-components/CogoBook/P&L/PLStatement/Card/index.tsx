@@ -15,6 +15,7 @@ import useSaveCustomList from '../../../hooks/useSaveCustomList';
 import { OptionMonth } from '../../SourceFile/utils';
 import { entityMapping, optionsCheck, optionsPeriod, optionsPills, optionsRadio } from '../constant';
 
+import ModalMonth from './ModalMonth';
 import styles from './styles.module.css';
 
 function Card({
@@ -345,55 +346,7 @@ function Card({
 
 				{modal && (
 
-					<Modal
-						show={modal}
-						onClose={() => {
-							setModal(false);
-						}}
-					>
-						<Modal.Header title="Comparison Mode" />
-						<div className={styles.modal_data}>
-							<Modal.Body>
-								<div className={styles.flex_data}>
-									<div>
-										<Select
-											value={filters?.monthFrom}
-											onChange={(val:string) => {
-												setFilters((prev) => ({
-													...prev,
-													monthFrom: val,
-												}));
-											}}
-											placeholder="Month"
-											options={OptionMonth()}
-											isClearable
-											style={{ width: '200px' }}
-										/>
-									</div>
-									<div>
-										<Select
-											value={filters?.monthTo}
-											onChange={(val:string) => {
-												setFilters((prev) => ({ ...prev, monthTo: val }));
-											}}
-											placeholder="Month"
-											options={OptionMonth()}
-											isClearable
-											style={{ width: '200px' }}
-										/>
-									</div>
-								</div>
-
-							</Modal.Body>
-						</div>
-
-						<Modal.Footer>
-							<div className={styles.button_flex_data}>
-								<Button onClick={() => { setModal(false); }}>Confirm</Button>
-
-							</div>
-						</Modal.Footer>
-					</Modal>
+					<ModalMonth modal={modal} setModal={setModal} filters={filters} setFilters={setFilters} />
 
 				)}
 

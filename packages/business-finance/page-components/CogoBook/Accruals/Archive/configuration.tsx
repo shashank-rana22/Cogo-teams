@@ -226,7 +226,7 @@ export const ARCHIVE_DECLARED = (
 			};
 			return (
 				<div className={styles.button}>
-					<Button className="arrow" onClick={clickHandle} themeType="secondary"> View Button</Button>
+					<Button className="arrow" onClick={clickHandle} themeType="secondary"> View</Button>
 				</div>
 			);
 		},

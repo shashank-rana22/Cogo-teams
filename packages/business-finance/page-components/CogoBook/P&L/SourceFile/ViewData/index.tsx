@@ -37,9 +37,10 @@ function ViewData() {
 	});
 
 	const { entity, month, id, name, date } = query || {};
-	const formatMonth = format(month, 'MMM yyyy');
-	const monthPayload = format(month, 'yyyy-MM-01');
-	const formatDate = format(date, 'dd MMM yyyy');
+	// parseInt convert string to integer and pass as argument to Date constructor
+	const formatMonth = format(parseInt(month, month), 'MMM yyyy');
+	const monthPayload = format(parseInt(month, month), 'yyyy-MM-01');
+	const formatDate = format(parseInt(date, date), 'dd MMM yyyy');
 	const { fetchRatioApi, ratiosData } = useReport({ monthPayload });
 	const {
 		air = '', airCustoms = '',

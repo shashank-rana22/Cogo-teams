@@ -22,6 +22,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		user_id: profile?.user?.id,
 	}));
 	const [checkedRowsSerialId, setCheckedRowsSerialId] = useState([]);
+	const [viewSelected, setViewSelected] = useState(true);
 	const [tempCheckedData, setTempCheckedData] = useState([]);
 	const [payload, setPayload] = useState([]);
 	const [profitValue, setProfitValue] = useState(0);
@@ -133,11 +134,10 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 			didMountRef.current = true;
 			return;
 		}
-
-		if ((year && month)) {
+		if (year && month && viewSelected === false) {
 			refetch();
 		}
-	}, [refetch, query, year, month, page, sortType, sortBy]);
+	}, [refetch, query, page, sortType, sortBy, year, month, viewSelected]);
 
 	const {
 		pageNo: pageNos = 0,
@@ -412,6 +412,8 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		selectedDataLoading,
 		getTableHeaderCheckbox,
 		checkedData,
+		viewSelected,
+		setViewSelected,
 	};
 };
 export default useShipmentView;

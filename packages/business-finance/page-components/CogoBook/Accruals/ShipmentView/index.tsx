@@ -13,7 +13,6 @@ import styles from './styles.module.css';
 
 function ShipmentView() {
 	const [checkedRows, setCheckedRows] = useState({});
-	const [viewSelected, setViewSelected] = useState(true);
 	const [showBtn, setShowBtn] = useState(false);
 	const [bulkSection, setBulkSection] = useState({ value: false, bulkAction: '' });
 	const [filters, setFilters] = useState({
@@ -57,6 +56,8 @@ function ShipmentView() {
 		crossProfitHandler,
 		tickProfitHandler,
 		profit:profitData,
+		viewSelected,
+		setViewSelected,
 	} =	 useShipmentView({ filters, checkedRows, setBulkSection, bulkAction, setCheckedRows });
 
 	const {

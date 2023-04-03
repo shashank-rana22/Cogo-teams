@@ -10,6 +10,7 @@ interface DeleteInterface {
 	bulkData?:string
 	handleModal?:Function
 	setBulkModal?: React.Dispatch<React.SetStateAction<boolean>>
+	handleDelete?: Function
 }
 
 const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
@@ -132,7 +133,10 @@ const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 		{ manual: true },
 	);
 
-	const deleteSelected = async ({ id, bulkData, setBulkModal }:DeleteInterface) => {
+	const deleteSelected = async ({
+		id, bulkData, setBulkModal,
+		handleDelete,
+	}:DeleteInterface) => {
 		try {
 			await deleteSelectedInvoiceTrigger({
 				data: {
@@ -149,11 +153,17 @@ const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 					},
 				},
 			});
-			setBulkModal(false);
 			viewSelected();
+			if (setBulkModal) {
+				setBulkModal(false);
+			}
+			handleDelete(id);
+
 			Toast.success('Deleted successfully');
 		} catch (error) {
-			Toast.error(error?.response?.data?.message);
+			if (error?.response?.data?.message) {
+				Toast.error(error?.response?.data?.message);
+			}
 		}
 	};
 
