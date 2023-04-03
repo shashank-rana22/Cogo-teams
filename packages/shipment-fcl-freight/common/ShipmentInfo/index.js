@@ -8,36 +8,14 @@ import styles from './styles.module.css';
 function ShipmentInfo() {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const showFeature = shipment_data?.stakeholder_types?.some((e) => ['superadmin',
-		'booking_agent', 'sales_agent', 'user'].includes(e));
-
-	const text = showFeature
-		? `${shipment_data?.shipment_type} ID #${shipment_data?.serial_id}`
-		: `Shipment ID  #${shipment_data?.serial_id}`;
-
-	const sourceText =		shipment_data?.source === 'direct'
+	const sourceText =	shipment_data?.source === 'direct'
 		? 'Sell Without Buy'
 		: startCase(shipment_data?.source);
-
-	let isHoldApproved = false;
-	if (
-		['ftl_freight', 'ltl_freight'].includes(shipment_data?.shipment_type)
-			&& [
-				'hold',
-				'hold_by_so2',
-				'release_requested',
-				'release_rejected',
-				'release_rejected_by_so2',
-			].includes(shipment_data?.goods_control_status)
-	) {
-		isHoldApproved = true;
-	}
 
 	return (
 		<div className={styles.container}>
 			<Breadcrumb>
 				<Breadcrumb.Item label={<a href="page number">Shipments</a>} />
-				<Breadcrumb.Item label={text} />
 			</Breadcrumb>
 			{shipment_data?.source ? <Tags size="sm">{sourceText}</Tags> : null}
 			{shipment_data?.is_cogo_assured ? (
@@ -50,7 +28,6 @@ function ShipmentInfo() {
 				/>
 			) : null}
 
-			{isHoldApproved && <Tags className="sm warning">Shipment on hold</Tags>}
 		</div>
 	);
 }

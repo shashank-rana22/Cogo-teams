@@ -14,11 +14,6 @@ const editScheduleStates = [
 	'containers_gated_in',
 	'vessel_departed',
 	'vessel_arrived',
-	'cargo_carted_in',
-	'cargo_stuffed',
-	'cargo_handed_over_at_origin',
-	'flight_departed',
-	'flight_arrived',
 ];
 
 function Timeline() {

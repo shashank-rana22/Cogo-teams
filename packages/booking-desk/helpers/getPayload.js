@@ -28,10 +28,11 @@ export default function getPayload({ filters, activeTab, selected_agent_id }) {
 	const tabSpecificPayload = shipmentSpecificPayload[shipment_type];
 	const tabs = TABS_CONFIG[shipment_type];
 
-	const isCriticalVisible = tabs.find((tab) => tab.name === activeTab).criticalVisible ?? false;
+	const isCriticalVisible = tabs.find((tab) => tab.name === activeTab).isCriticalVisible ?? false;
 
 	const threeDaysLater = new Date();
 	threeDaysLater.setDate(threeDaysLater.getDate() + 3);
+	threeDaysLater.setTime(threeDaysLater.getTime() - timezoneOffset);
 
 	const payload = {
 		filters: {
@@ -39,7 +40,7 @@ export default function getPayload({ filters, activeTab, selected_agent_id }) {
 			...tabSpecificPayload[activeTab],
 			selected_agent_id,
 			...(isCriticalVisible && isCriticalOn
-				&& { schedule_departure_less_than: new Date(threeDaysLater.getTime() - timezoneOffset) }),
+				&& { schedule_departure_less_than: threeDaysLater }),
 			...(q && { q }),
 			...restFilters,
 		},

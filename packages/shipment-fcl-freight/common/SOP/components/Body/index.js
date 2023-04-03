@@ -9,10 +9,17 @@ import InvoicePref from '../InvoicePref';
 import styles from './styles.module.css';
 
 function Body({
-	data = {}, shipment_id = '', organization_id = '', getProcedureTrigger = () => {},
-	auditsTrigger = () => {}, services = [], loading = false,
+	data = {},
+	shipment_id = '',
+	organization_id = '',
+	getProcedureTrigger = () => {},
+	auditsTrigger = () => {},
+	services = [],
+	loading = false,
+	primary_service = {},
 }) {
 	const { operating_procedure:{ id:procedure_id = '' } = {} } = data;
+
 	const {
 		invoice_preference = [],
 		additional_preference = [],
@@ -21,12 +28,13 @@ function Body({
 
 	const shipment_ids = { shipment_id, organization_id, procedure_id };
 
-	return (
-		<>
-			{loading && <div className={styles.loader}><Loader /></div>}
-
-			{!loading
-		&& (
+	return loading
+		? (
+			<div className={styles.loader}>
+				<Loader />
+			</div>
+		)
+		: (
 			<>
 				<Card label="Document Handling" defaultOpen={document_handling_preference.length}>
 					<Document
@@ -34,6 +42,7 @@ function Body({
 						shipment_ids={shipment_ids}
 						getProcedureTrigger={getProcedureTrigger}
 						auditsTrigger={auditsTrigger}
+						primary_service={primary_service}
 					/>
 				</Card>
 
@@ -44,6 +53,7 @@ function Body({
 						getProcedureTrigger={getProcedureTrigger}
 						services={services}
 						auditsTrigger={auditsTrigger}
+						primary_service={primary_service}
 					/>
 				</Card>
 
@@ -55,8 +65,6 @@ function Body({
 					/>
 				</Card>
 			</>
-		)}
-		</>
-	);
+		);
 }
 export default Body;

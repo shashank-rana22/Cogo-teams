@@ -3,7 +3,8 @@ import { SelectController, useForm, useGetAsyncOptions, asyncFieldsPartnerUsers 
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import STAKEHOLDER_MAPPING from '../../../../../constants/STAKEHOLDER_MAPPING';
+import { STAKEHOLDER_CAN_BE_ADDED } from '../../../../../constants/STAKEHOLDER_MAPPING';
+import useUpdateShipmentStakeholders from '../../../../../hooks/useUpdateShipmentStakeholders';
 import { convertObjectMappingToArray } from '../../../../../utils/convertObjectMappingToArray';
 
 import styles from './styles.module.css';
@@ -14,8 +15,20 @@ const showServiceForStakeholder = (stakeholder_type) => !['booking_agent',
 	'portfolio_manager',
 	'lastmile_ops'].includes(stakeholder_type);
 
-function AddInternalPoc({ addPoc = {}, setAddPoc = () => {}, services = [] }) {
-	const { stakeholder_type = '' } = addPoc;
+function AddInternalPoc({
+	addPoc = {}, setAddPoc = () => {}, services = [], shipment_id,
+	stakeholdersTrigger = () => {},
+	servicesList = [],
+}) {
+	const refetch = () => {
+		setAddPoc(null);
+		stakeholdersTrigger();
+	};
+	const { apiTrigger, loading } = useUpdateShipmentStakeholders({
+		shipment_id,
+		refetch,
+		successMessage: 'Successfully Added',
+	});
 
 	const { control, watch, resetField, handleSubmit, formState:{ errors = {} } } = useForm();
 	const formValues = watch();
@@ -25,20 +38,38 @@ function AddInternalPoc({ addPoc = {}, setAddPoc = () => {}, services = [] }) {
 	};
 
 	const onSubmit = (value) => {
-		console.log({ value });
+		const { stakeholder_id, stakeholder_type:formStakeholderType, service_type } = value;
+
+		let service_id = '';
+
+		if (service_type) {
+			const service = servicesList.find((s) => s.service_type === service_type);
+			service_id = service.id;
+		}
+		const params = {
+			stakeholder_id,
+			stakeholder_type: formStakeholderType,
+			...(service_type && { service_type }),
+			...(service_id && { service_id }),
+
+		};
+
+		apiTrigger(params);
 	};
 
 	useEffect(() => {
 		resetField('service_id');
 		resetField('stakeholder_id');
-	}, [formValues?.stakeholder_type]);
+	}, [formValues?.stakeholder_type, resetField]);
 
-	console.log({ services });
-
-	const stakeholderTypeOptions = convertObjectMappingToArray(STAKEHOLDER_MAPPING);
+	const stakeholderTypeOptions = convertObjectMappingToArray(STAKEHOLDER_CAN_BE_ADDED);
 	const serviceOptions = (services || []).map((s) => ({ label: startCase(s), value: s }));
-	const stakeholderOptions = useGetAsyncOptions(asyncFieldsPartnerUsers());
-	// const stakeholderOptions = [];
+
+	const stakeholderOptions = useGetAsyncOptions({
+		...asyncFieldsPartnerUsers(),
+		valueKey    : 'user_id',
+		initialCall : false,
+	});
 
 	function Error(key) {
 		return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
@@ -51,7 +82,7 @@ function AddInternalPoc({ addPoc = {}, setAddPoc = () => {}, services = [] }) {
 				<div>
 					<div>
 						<span>Role - </span>
-						{startCase(stakeholder_type)}
+						{startCase(STAKEHOLDER_CAN_BE_ADDED[formValues?.stakeholder_type] || '')}
 					</div>
 				</div>
 
@@ -76,11 +107,11 @@ function AddInternalPoc({ addPoc = {}, setAddPoc = () => {}, services = [] }) {
 									<SelectController
 										size="sm"
 										control={control}
-										name="service_id"
+										name="service_type"
 										options={serviceOptions}
 										rules={{ required: { value: true, message: 'Service is required' } }}
 									/>
-									{Error('service_id')}
+									{Error('service_type')}
 								</div>
 							)
 							: null}
@@ -105,8 +136,26 @@ function AddInternalPoc({ addPoc = {}, setAddPoc = () => {}, services = [] }) {
 			</Modal.Body>
 			<Modal.Footer>
 				<div className={styles.actions}>
-					<div className={styles.cancel}><Button themeType="secondary" onClick={onClose}>Cancel</Button></div>
-					<div><Button themeType="accent" onClick={handleSubmit(onSubmit)}>Submit</Button></div>
+					<div className={styles.cancel}>
+						<Button
+							themeType="secondary"
+							onClick={onClose}
+							disabled={loading}
+						>
+							Cancel
+						</Button>
+
+					</div>
+					<div>
+						<Button
+							themeType="accent"
+							onClick={handleSubmit(onSubmit)}
+							disabled={loading}
+						>
+							Submit
+						</Button>
+
+					</div>
 				</div>
 			</Modal.Footer>
 		</Modal>
