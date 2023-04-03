@@ -84,11 +84,11 @@ function AddedQuestions(props) {
 
 		return (
 			<>
-				<div className={styles.table}>
+				<div>
 					<StyledTable columns={columns} data={data} loading={questionListLoading} />
 				</div>
 
-				<div className={styles.pagination}>
+				<div>
 					{paginationData?.total_count > 10
 						? (
 							<Pagination
@@ -105,7 +105,7 @@ function AddedQuestions(props) {
 	};
 
 	return (
-		<div className={styles.container}>
+		<div>
 			<Header
 				filters={filters}
 				setFilters={setFilters}

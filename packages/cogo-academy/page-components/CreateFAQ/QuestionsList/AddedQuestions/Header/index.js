@@ -1,5 +1,4 @@
-import { TabPanel, Tabs, Button } from '@cogoport/components';
-import { IcMArrowDoubleDown, IcMArrowDoubleUp } from '@cogoport/icons-react';
+import { TabPanel, Tabs } from '@cogoport/components';
 import React from 'react';
 
 import SearchInput from '../../../../../commons/SearchInput';
@@ -14,8 +13,6 @@ function Header({
 	setSearchInput,
 	activeList,
 	setActiveList,
-	sortType,
-	setSortType,
 	requestedQuestionCount,
 }) {
 	return (
@@ -34,20 +31,6 @@ function Header({
 					<FilterPopover filters={filters} setFilters={setFilters} />
 				</div>
 
-				<div>
-					<Button
-						type="button"
-						themeType="secondary"
-						style={{ marginLeft: 8, height: '40px' }}
-						size="md"
-						onClick={() => { setSortType((prev) => !prev); }}
-					>
-						{activeList === 'requested' ? 'Sort By Last Created' : 'Sort By Last Updated'}
-						{sortType ? <IcMArrowDoubleDown /> : <IcMArrowDoubleUp />}
-
-					</Button>
-
-				</div>
 			</div>
 
 			<div className={styles.tab_group}>

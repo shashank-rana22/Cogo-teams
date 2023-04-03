@@ -1,12 +1,3 @@
-.container {
-	margin-top: 20px;
-}
-
-.pagination {
-	display: flex;
-	justify-content: flex-end;
-}
-
 .button_container {
 	display: flex;
 	justify-content: flex-end;

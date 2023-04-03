@@ -158,13 +158,13 @@ function Answer({ topic = {}, question, setQuestion }) {
 							<div dangerouslySetInnerHTML={{ __html: answer }} />
 						</div>
 
-						<div className={styles.no_of_people_like_it} style={{ marginTop: 24 }}>
-							{answerData?.answers?.[0]?.upvote_count
-								? answerData?.answers?.[0]?.upvote_count
-								: '0'}
-							{' '}
-							people liked this answer
-						</div>
+						{answerData?.answers?.[0]?.upvote_count > 0 ? (
+							<div className={styles.no_of_people_like_it} style={{ marginTop: 24 }}>
+								{ answerData?.answers?.[0]?.upvote_count}
+								{' '}
+								people liked this answer
+							</div>
+						) : null}
 					</>
 				)}
 			</div>
