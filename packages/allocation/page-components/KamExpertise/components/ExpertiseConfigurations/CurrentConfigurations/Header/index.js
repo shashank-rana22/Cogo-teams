@@ -4,10 +4,10 @@ import { format } from '@cogoport/utils';
 import VERSION_KEYS from '../../../../constants/version-keys-mapping';
 import useSetVersionFilter from '../../../../hooks/useSetVersionFilter';
 
-import CreateModal from './CreateModal';
-import Draft from './CreateModal/Draft';
-import NewVersion from './CreateModal/NewVersion';
-import Published from './CreateModal/Published';
+import Draft from './ModalComponents/Draft';
+import InitialMode from './ModalComponents/InitialMode';
+import NewVersion from './ModalComponents/NewVersion';
+import Published from './ModalComponents/Published';
 import ModalFooter from './ModalFooter';
 import styles from './styles.module.css';
 
@@ -17,7 +17,7 @@ const CREATE_CONFIGURATION_MAPPING = {
 	[PUBLISHED_VERSION] : Published,
 	[SAVED_DRAFT]       : Draft,
 	[NEW_VERSION]       : NewVersion,
-	[INITIAL_MODE]      : CreateModal,
+	[INITIAL_MODE]      : InitialMode,
 };
 
 function Header(props) {
@@ -61,10 +61,18 @@ function Header(props) {
 			list,
 		},
 	};
+
 	const liveVersionList = list.filter((item) => item?.status === 'live')?.[0] || {};
 	const { version_number = '', audit_data = {} } = liveVersionList;
 
 	const Component = CREATE_CONFIGURATION_MAPPING[mode] || null;
+
+	const onClose = () => {
+		setShowModal(false);
+		setMode('initial-mode');
+		setSelectedVersion({});
+		setVersionName('');
+	};
 
 	return (
 		<div className={styles.container}>
@@ -110,12 +118,7 @@ function Header(props) {
 					<Modal
 						size="md"
 						show={showModal}
-						onClose={() => {
-							setShowModal(false);
-							setMode('initial-mode');
-							setSelectedVersion({});
-							setVersionName('');
-						}}
+						onClose={onClose}
 						placement="top"
 					>
 						<Modal.Header title="Create" />
