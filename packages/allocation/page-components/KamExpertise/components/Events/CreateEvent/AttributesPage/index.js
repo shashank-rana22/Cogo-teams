@@ -83,7 +83,7 @@ function AttributePage(props) {
 
 					return (
 
-						<div className={styles.attribute_form_group}>
+						<div key={controlItem.id} className={styles.attribute_form_group}>
 							<span className={styles.label}>
 								{el.label}
 								{' '}
