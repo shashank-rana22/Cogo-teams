@@ -3,7 +3,7 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-function useGetPaymentTable(organizationId: string) {
+function useGetPaymentTable(organizationId: string, entityCode?: number) {
 	const [paymentFilters, setPaymentFilters] = useState({
 		page       : 1,
 		pageLimit  : 10,
@@ -50,6 +50,7 @@ function useGetPaymentTable(organizationId: string) {
 							sortType   : orderBy.sortType,
 							sortBy     : orderBy.sortBy,
 							statusList : statusList || undefined,
+							entityCode : entityCode || undefined,
 						},
 					});
 				} catch (e) {
@@ -58,7 +59,7 @@ function useGetPaymentTable(organizationId: string) {
 			};
 			refetch();
 		},
-		[orderBy.sortBy, orderBy.sortType, orgId, page, pageLimit, paymentApi, query, statusList],
+		[orderBy.sortBy, orderBy.sortType, orgId, page, pageLimit, paymentApi, query, statusList, entityCode],
 	);
 
 	return {
