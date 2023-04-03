@@ -1,11 +1,9 @@
 import {
 	DateRangepicker,
 } from '@cogoport/components';
-
 import { dynamic } from '@cogoport/next';
-import { isEmpty, merge } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useRef, useEffect } from 'react';
-
 
 import GlobeStatsFooter from './GlobeStatsFooter';
 import styles from './styles.module.css';
@@ -16,18 +14,14 @@ function MapView(props = {}) {
 	const globeGL = useRef();
 
 	const {
-		stats={},
-		statsLoading = false,
-		setCountry = () => {},
+		stats = {},
 		country = {},
 		date = {},
 		setDate = {},
-		chatLoading = false,
 	} = props || {};
 	const [circleTab, setCircleTab] = useState('new_users');
-const globeData=stats?.list;
-	const { customer_locations = [], stats:globeStats = {} } = globeData || {};
-	console.log("customer_locations:", customer_locations);
+	const { customer_locations = [] } = stats?.list || {};
+
 	const CountryMobileCode = country?.mobile_country_code || '';
 
 	let markerData = {};
@@ -38,10 +32,6 @@ const globeData=stats?.list;
 		...markerData,
 	}));
 
-	const onSelectChange = (val) => {
-		setCountry(val);
-	};
-
 	useEffect(() => {
 		if (!isEmpty(globeGL?.current?.scene()?.children[2]?.visible
 			&& !isEmpty(globeGL?.current?.scene()?.children[1]?.intensity)
@@ -49,8 +39,7 @@ const globeData=stats?.list;
 			globeGL.current.scene().children[1].intensity = 1.25;
 			globeGL.current.scene().children[2].intensity = 0.25;
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [globeGL?.current, CountryMobileCode, date, circleTab]);
+	}, [globeGL, CountryMobileCode, date, circleTab]);
 
 	const resetGlobePosition = () => {
 		const defaultMapCenter = { lat: 0, lng: 78, altitude: 1.8 };
@@ -65,8 +54,7 @@ const globeData=stats?.list;
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.top_content}>
-				<div className={styles.select_container}>
-				</div>
+				<div className={styles.select_container} />
 				<div className={styles.date_range_container}>
 					<DateRangepicker
 						id="select_date_range"

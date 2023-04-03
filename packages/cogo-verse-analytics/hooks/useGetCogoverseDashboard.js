@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useGetCogoverseDashboard = ({ country = {}, date = {} }) => {
 	const CountryMobileCode = country?.mobile_country_code || '';
@@ -10,7 +10,7 @@ const useGetCogoverseDashboard = ({ country = {}, date = {} }) => {
 		method : 'GET',
 	}, { manual: true });
 
-	const getCogoverseDashboard = async () => {
+	const getCogoverseDashboard = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -22,17 +22,16 @@ const useGetCogoverseDashboard = ({ country = {}, date = {} }) => {
 		} catch (err) {
 			Toast.error(err?.message);
 		}
-	};
+	}, [date, trigger]);
 
 	useEffect(() => {
 		(async () => {
 			await getCogoverseDashboard();
 		})();
-		// eslint-disable-next-line
-	}, [date, CountryMobileCode]);
+	}, [CountryMobileCode, getCogoverseDashboard]);
 
 	return {
-		statsLoading : loading,
+		statsLoading : true,
 		stats        : data,
 	};
 };

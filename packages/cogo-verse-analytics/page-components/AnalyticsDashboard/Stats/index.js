@@ -15,17 +15,15 @@ function Stats(props = {}) {
 
 	useEffect(() => {
 		getUserSats();
-	}, []);
+	}, [getUserSats]);
 
 	const {
 		statsLoading,
 		stats = {},
-		chatLoading = false,
 	} = props || {};
 
-
 	const hideChart = isEmpty(stats);
-	const statsData=stats?.list || {};
+	const statsData = stats?.list || {};
 	const graph = statsData?.weekly_shipments || [];
 
 	return (
@@ -33,11 +31,21 @@ function Stats(props = {}) {
 
 			<div className={styles.cogoverse_header}>
 
-				<img src={imgURL.cogoverse_animated_icon} style={{ marginLeft: '10px' }} alt="Cogoverse Icon" width="18px" />
+				<img
+					src={imgURL.cogoverse_animated_icon}
+					style={{ marginLeft: '10px' }}
+					alt="Cogoverse Icon"
+					width="18px"
+				/>
 				<div className={cl`${styles.cogoverse}`}>ogoVerse Analytics</div>
 			</div>
 
-			<PrimaryStats userStats={userStats} stats={stats} firebaseLoading={firebaseLoading} />
+			<PrimaryStats
+				userStats={userStats}
+				stats={stats}
+				firebaseLoading={firebaseLoading}
+				statsLoading={statsLoading}
+			/>
 
 			<div className={styles.line_chart_container}>
 				<div className={styles.chart_heading}>
@@ -66,7 +74,7 @@ function Stats(props = {}) {
 				</div>
 				<div className={styles.the_chart}>
 					{
-						!chatLoading ? <Charts GraphData={graph} hideChart={hideChart} />
+						!statsLoading ? <Charts GraphData={graph} hideChart={hideChart} />
 							: (
 								<div className={styles.chart_empty}>
 									<Placeholder height="1px" margin="10px 0px" />
