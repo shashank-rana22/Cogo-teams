@@ -1,4 +1,4 @@
-import { useWatch, useDebounceQuery, useForm } from '@cogoport/forms';
+import { useDebounceQuery, useForm } from '@cogoport/forms';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -24,14 +24,8 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 	);
 
 	const { watch, control } = useForm();
-	const values = useWatch({
-		control,
-		fields: [
-			...leftFilters,
-			...rightFilters,
-		],
-		defaultValues: params,
-	});
+
+	const values = watch();
 
 	const managerName = watch('manager_name');
 
@@ -40,15 +34,14 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 
 		setParams((previousParams) => ({
 			...previousParams,
-			Q         : query || undefined,
-			Department,
-			Designation,
-			Page      : 1,
-			Year,
-			Month,
-			ManagerID,
-			StartDate : date_range?.startDate || undefined,
-			EndDate   : date_range?.endDate || undefined,
+			Q           : query || undefined,
+			Department  : Department || undefined,
+			Designation : Designation || undefined,
+			Year        : Year || undefined,
+			Month       : Month || undefined,
+			ManagerID   : ManagerID || undefined,
+			StartDate   : date_range?.startDate || undefined,
+			EndDate     : date_range?.endDate || undefined,
 		}));
 	}, [query, setParams, values]);
 
