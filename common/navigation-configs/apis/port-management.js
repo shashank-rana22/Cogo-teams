@@ -84,7 +84,7 @@ const pms = [
 		service_name : 'rate_sheet',
 	},
 	{
-		api          : 'update_fcl_rate_sheet',
+		api          : 'update_fcl_freight_rate_sheet',
 		access_type  : 'private',
 		service_name : 'fcl_freight_rate',
 	},
