@@ -16,7 +16,7 @@ import useSearch from '../hooks/useSearch';
 import styles from './styles.module.css';
 
 function Shipment() {
-	const [activeTab, setActiveTab] = useState('Shipments');
+	const [activeTab, setActiveTab] = useState('shipments');
 	const {
 		loading,
 		date,
@@ -124,7 +124,7 @@ function Shipment() {
 							themeType="secondary"
 							onChange={setActiveTab}
 						>
-							<TabPanel name="Shipments" title="Shipments" />
+							<TabPanel name="shipments" title="Shipments" />
 						</Tabs>
 					</div>
 
