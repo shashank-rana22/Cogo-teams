@@ -1,4 +1,4 @@
-const getControls = () => [
+const getControls = (userOptions, isDisabled = false) => [
 	{
 		name        : 'name',
 		label       : 'Name of Test',
@@ -27,11 +27,21 @@ const getControls = () => [
 		{
 			name        : 'select_user_group',
 			label       : 'Select Entity & User Groups',
-			type        : 'multiselect',
+			options     : userOptions,
+			type        : 'multi-select',
 			placeholder : 'User groups',
 		},
 		],
 		type: 'select-entity-usergroups',
+	},
+	{
+		name    : 'select_users',
+		label   : 'Select Users within Group',
+		type    : 'radioGroup',
+		options : [{ name: 'all', value: 'all', label: 'All', disabled: isDisabled },
+			{ name: 'excel', value: 'excel', label: 'Upload User list Excel', disabled: isDisabled }],
+		rules: { required: 'This is required' },
+
 	},
 ];
 
