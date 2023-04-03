@@ -54,7 +54,7 @@ function ListView({ viewType = false }) {
 			</div>
 
 			<div className={styles.filters}>
-				<Filters params={params} setParams={setParams} />
+				<Filters params={params} setParams={setParams} source="employee_directory_list" />
 			</div>
 
 			<UserTableData

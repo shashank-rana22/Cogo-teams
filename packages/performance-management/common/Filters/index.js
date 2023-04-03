@@ -1,6 +1,6 @@
 import { useDebounceQuery, useForm } from '@cogoport/forms';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import filtersSourceMapping from '../../constants/filters-source-mapping';
 import useGetControls from '../../utils/filterControls';

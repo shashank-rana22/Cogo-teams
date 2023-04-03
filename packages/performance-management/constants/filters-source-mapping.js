@@ -51,5 +51,13 @@ const filtersSourceMapping = {
 			{ name: 'Rating' },
 		],
 	},
+	employee_directory_list: {
+		left: [
+			{ name: 'Department' },
+			{ name: 'Designation' },
+			{ name: 'ManagerID' },
+		],
+		right: [{ name: 'manager_name' }],
+	},
 };
 export default filtersSourceMapping;
