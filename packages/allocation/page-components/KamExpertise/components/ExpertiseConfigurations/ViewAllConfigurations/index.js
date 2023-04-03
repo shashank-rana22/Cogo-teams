@@ -14,9 +14,8 @@ function ViewAllConfigurations() {
 
 	const {
 		configCardLoading,
-		ALL_VERSIONS,
-		DRAFTS,
-	} = useGetKamExpertiseCurrentConfig();
+		list = [],
+	} = useGetKamExpertiseCurrentConfig({ type: ['draft', 'live', 'expired'] });
 
 	const onClickBack = () => {
 		router.push('/allocation/kam-expertise/configurations');
@@ -36,7 +35,8 @@ function ViewAllConfigurations() {
 					Back to Configurations
 				</div>
 			</div>
-			{(isEmpty(ALL_VERSIONS) && isEmpty(DRAFTS))
+
+			{(isEmpty(list))
 				? (
 					<div className={styles.empty_state_container}>
 						<EmptyState
@@ -49,11 +49,7 @@ function ViewAllConfigurations() {
 					</div>
 				) : (
 					<>
-						{ DRAFTS.map((item) => (
-							<ConfigurationCard {...item} />
-						))}
-
-						{ ALL_VERSIONS.map((item) => (
+						{ list.map((item) => (
 							<ConfigurationCard {...item} />
 						))}
 					</>

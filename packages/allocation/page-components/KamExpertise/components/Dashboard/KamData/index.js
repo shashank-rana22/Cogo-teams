@@ -17,7 +17,7 @@ function KamData(props) {
 	const [kamLevel, setKamLevel] = useState(0);
 
 	const {
-		loading,
+		loading = false,
 		dashboardData,
 	} = useGetKamExpertiseDashboard(date_params);
 
@@ -32,9 +32,9 @@ function KamData(props) {
 		leaderboardLoading = false,
 		leaderboardList = [],
 		searchKAM = '',
-		setSearchKAM,
+		setSearchKAM = () => {},
 		badgeName = '',
-		setBadgeName,
+		setBadgeName = () => {},
 		debounceQuery,
 		paginationData,
 		getNextPage,

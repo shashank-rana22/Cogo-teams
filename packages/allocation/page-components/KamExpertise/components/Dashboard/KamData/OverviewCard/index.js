@@ -7,7 +7,7 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const Icon_Mapping = {
+const ICON_MAPPING = {
 	customer_expertise  : <IcMAgentManagement height={24} width={24} />,
 	trade_expertise     : <IcMTradeparties height={24} width={24} />,
 	commodity_expertise : <IcMBreakBulkCargoType height={24} width={24} />,
@@ -52,13 +52,13 @@ function OverviewCard(props) {
 		>
 			<Card.Title title={(
 				<div className={styles.title}>
-					<span>{Icon_Mapping[data.expertise_type]}</span>
+					<span>{ICON_MAPPING[data?.expertise_type]}</span>
 
-					<span className={styles.title_text}>{startCase(data.expertise_type)}</span>
+					<span className={styles.title_text}>{startCase(data?.expertise_type)}</span>
 
-					<span style={{ paddingTop: '4px', width: '40px', height: '40px' }}>
+					<span className={styles.tooltip}>
 						<Tooltip
-							content={startCase(data.expertise_type)}
+							content={data?.max_condition || 'NA'}
 							placement="top"
 						>
 							<IcMInfo
@@ -75,16 +75,18 @@ function OverviewCard(props) {
 				<div className={styles.display_flex}>
 					<span>Avg. Score</span>
 
-					<span style={{ display: 'flex', fontWeight: 'bold' }}>
-						{data.avg_score}
+					<span className={styles.values}>
+						{data?.avg_score || 0}
 					</span>
 				</div>
 
 				<div className={styles.display_flex}>
 					<span> Most Points in</span>
 
-					<span style={{ display: 'flex', fontWeight: 'bold' }}>
-						{data.max_condition || 'NA'}
+					<span className={styles.values}>
+						{data?.max_condition.length > 15
+							? `${data?.max_condition.substring(0, 15)}...`
+							: data?.max_condition || 'NA'}
 					</span>
 				</div>
 			</Card.Description>

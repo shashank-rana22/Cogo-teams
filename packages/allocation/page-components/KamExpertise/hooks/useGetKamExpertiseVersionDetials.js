@@ -10,7 +10,7 @@ const useGetKamExpertiseVersionDetials = (props) => {
 		cardRefetch,
 	} = props;
 
-	const [selectedVersion, setSelectedVersion] = useState('');
+	const [selectedVersion, setSelectedVersion] = useState({});
 	const [mode, setMode] = useState('initial-mode');
 	const [showModal, setShowModal] = useState(false);
 	const [versionName, setVersionName] = useState('');
@@ -24,9 +24,8 @@ const useGetKamExpertiseVersionDetials = (props) => {
 	const getVersion = async () => {
 		try {
 			const payload = {
-				// action_type    : mode,
-				// version_number : selectedVersion || undefined,
-				name: versionName,
+				version_id : selectedVersion?.version_id || undefined,
+				name       : versionName,
 			};
 			await trigger({ params: payload });
 
@@ -35,7 +34,7 @@ const useGetKamExpertiseVersionDetials = (props) => {
 			refetch();
 			expertiseRefetch();
 			cardRefetch();
-			setSelectedVersion('');
+			setSelectedVersion({});
 			Toast.success('Version selected successfully');
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));

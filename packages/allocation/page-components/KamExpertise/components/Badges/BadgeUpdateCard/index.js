@@ -61,10 +61,9 @@ function BadgeUpdateCard(props) {
 						disabled={loading}
 					/>
 
-					<div className={styles.error_message}>
+					<p className={styles.error_message}>
 						{errors?.[`${medalType}_value`]?.message}
-					</div>
-
+					</p>
 				</div>
 			</div>
 

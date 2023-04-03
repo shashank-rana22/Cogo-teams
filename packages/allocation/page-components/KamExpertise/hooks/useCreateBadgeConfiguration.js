@@ -7,7 +7,7 @@ import { getFieldController } from '../../../common/Form/getFieldController';
 import getAddBadgesControls from '../configurations/get-add-badges-control';
 
 function useCreateBadgeConfiguration(props) {
-	const { onClose, listRefetch, badgeItemData = {} } = props;
+	const { setToggleScreen, listRefetch, badgeItemData = {} } = props;
 
 	const {
 		badge_name,
@@ -87,7 +87,7 @@ function useCreateBadgeConfiguration(props) {
 
 				await trigger({ data: payload });
 
-				onClose();
+				setToggleScreen('badge_details');
 
 				Toast.success(isEmpty(badgeItemData) ? 'Event Created !' : 'Event Updated !');
 

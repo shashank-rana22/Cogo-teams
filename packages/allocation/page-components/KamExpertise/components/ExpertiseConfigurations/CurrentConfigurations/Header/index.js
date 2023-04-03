@@ -22,9 +22,7 @@ const CREATE_CONFIGURATION_MAPPING = {
 
 function Header(props) {
 	const {
-		audit_data = {},
-		version_number,
-		data = [],
+		list = [],
 		refetch,
 		expertiseRefetch,
 		cardRefetch,
@@ -42,7 +40,7 @@ function Header(props) {
 	const componentProps = {
 		[PUBLISHED_VERSION]: {
 			setSelectedVersion,
-			data,
+			list,
 			versionName,
 			setVersionName,
 		},
@@ -60,9 +58,11 @@ function Header(props) {
 		},
 		[INITIAL_MODE]: {
 			setMode,
-			data,
+			list,
 		},
 	};
+	const liveVersionList = list.filter((item) => item?.status === 'live')?.[0] || {};
+	const { version_number = '', audit_data = {} } = liveVersionList;
 
 	const Component = CREATE_CONFIGURATION_MAPPING[mode] || null;
 
@@ -113,7 +113,7 @@ function Header(props) {
 						onClose={() => {
 							setShowModal(false);
 							setMode('initial-mode');
-							setSelectedVersion('');
+							setSelectedVersion({});
 							setVersionName('');
 						}}
 						placement="top"
