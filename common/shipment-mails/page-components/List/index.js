@@ -1,7 +1,7 @@
 import { Input } from '@cogoport/components';
 import { IcMSearchlight, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { React } from 'react';
+import { React, useState } from 'react';
 
 import EmptyState from '../../common/EmptyState';
 import useGetMails from '../../hooks/useGetMails';
@@ -11,13 +11,20 @@ import Loader from './ListLoader';
 import styles from './styles.module.css';
 
 function Emails({ activeBox, RECIEVE_EMAIL, onMailClick, source, filters, activeMail }) {
-	const { mailApi, page, setPage, search, setSearch, getEmails } = useGetMails(
-		RECIEVE_EMAIL,
-		activeBox,
-		10,
+	const [page, setPage] = useState(1);
+	const [search, setSearch] = useState(undefined);
+
+	const payload = {
+		email_address : RECIEVE_EMAIL,
+		foldername    : activeBox,
+		page,
+		search,
+		page_limit    : 10,
 		source,
 		filters,
-	);
+	};
+
+	const { mailApi, getEmails } = useGetMails({ payload });
 
 	const handleRefresh = () => {
 		if (page === 1) {

@@ -1,7 +1,7 @@
 import { Input } from '@cogoport/components';
 import { IcMSearchlight, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { React } from 'react';
+import { React, useState } from 'react';
 
 import EmptyState from '../../common/EmptyState';
 import useGetRpaMails from '../../hooks/useGetRpaMails';
@@ -19,14 +19,43 @@ function EmailsRpa({
 	isClassified,
 	activeMail,
 }) {
+	const [page, setPage] = useState(1);
+	const [search, setSearch] = useState(undefined);
+
 	const all_filters = {
 		...(filters || {}),
 		foldername : activeBox,
 		source     : RECIEVE_EMAIL,
 	};
-	const {
-		mailApi, page, setPage, search, setSearch, getEmails,
-	} =	useGetRpaMails(RECIEVE_EMAIL, 10, source, all_filters, isClassified);
+
+	let q;
+	if (search && all_filters?.q) {
+		q = `${all_filters?.q} ${search}`;
+	} else if (search) {
+		q = search;
+	} else if (all_filters?.q) {
+		q = `${all_filters?.q}`;
+	}
+
+	const payload = {
+		includes: [
+			'id',
+			'subject',
+			'body_preview',
+			'sender',
+			'received_time',
+			'message_id',
+			'attachments_attachment_id',
+		],
+		email_address : RECIEVE_EMAIL,
+		page_no       : page,
+		page_limit    : 10,
+		source,
+		filters       : all_filters,
+		isClassified,
+		q,
+	};
+	const { mailApi, getEmails } =	useGetRpaMails({ payload });
 
 	const handleRefresh = () => {
 		if (page === 1) {

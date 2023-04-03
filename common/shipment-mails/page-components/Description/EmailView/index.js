@@ -14,7 +14,9 @@ function EmailView({
 	const email = RECIEVE_EMAIL;
 	const message_id = activeMail?.message_id || activeMail?.id;
 	const { emailData, loading } = useGetMail(email, message_id, activeMail?.id);
-	const { getAttachementsApi } = useGetAttachements(email, message_id);
+
+	const attachmentPaylaod = { email, message_id };
+	const { getAttachementsApi } = useGetAttachements({ attachmentPaylaod });
 	let content = emailData?.body?.content || '';
 
 	const allAttachements = getAttachementsApi?.data?.value || [];
