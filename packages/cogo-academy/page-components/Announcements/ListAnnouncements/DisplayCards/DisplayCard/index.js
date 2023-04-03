@@ -1,21 +1,15 @@
-import { Popover, Accordion, Button, Modal, Pill } from '@cogoport/components';
+import { Tooltip, Popover, Accordion, Button, Modal, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { IcMOverflowDot, IcMAnnouncement, IcMEyeopen, IcMEdit, IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { startCase, format } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import ANNOUNCEMENT_TYPE_MAPPING from '../../../constants/ANNOUNCEMENT_TYPE_MAPPING.json';
 import Preview from '../../../CreateAnnouncement/AnnouncementForm/Preview';
 
 import DisplayAttachments from './DisplayAttachments';
+import getSingleCardOptions from './getSingleCardOptions';
 import styles from './styles.module.css';
-
-const ANNOUNCEMENT_TYPE_MAPPING = {
-	general        : 'General',
-	product_update : 'Product Release / Update',
-	announcement   : 'Announcement',
-	tasks          : 'Tasks',
-};
 
 const STATUS_MAPPING = {
 	draft: {
@@ -55,16 +49,9 @@ function DisplayCard({
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [showGoLiveModal, setShowGoLiveModal] = useState(false);
 
-	const isCogoAcademyAdmin = (user_id === GLOBAL_CONSTANTS.uuid.cogoacademy_admin_id);
+	const options = getSingleCardOptions({ data });
 
-	const options = [
-		{ label: 'Title', value: startCase(data?.title) },
-		{ label: 'Validity Start', value: format(data?.validity_start, 'dd MMM yyyy hh:mm a') },
-		{ label: 'Validity End', value: format(data?.validity_end, 'dd MMM yyyy hh:mm a') },
-		{ label: 'Type', value: ANNOUNCEMENT_TYPE_MAPPING[data?.announcement_type] },
-		{ label: 'Status', value: data?.status },
-		{ label: 'Actions', value: 1 },
-	];
+	const isCogoAcademyAdmin = (user_id === GLOBAL_CONSTANTS.uuid.cogoacademy_admin_id);
 
 	const handleView = (i) => {
 		handleAnnouncementDetails(i);
@@ -176,7 +163,29 @@ function DisplayCard({
 			return <Pill color={STATUS_MAPPING[value].color}>{STATUS_MAPPING[value].label}</Pill>;
 		}
 
-		return <div className={styles.value}>{value}</div>;
+		return (
+			<div className={styles.tooltip}>
+				<Tooltip
+					content={label === 'Validity' ? (
+						<div className={styles.tooltip_hover_value}>
+							<span>
+								<strong>From - </strong>
+								{value.split('-')[0] || '-'}
+							</span>
+							<span>
+								<strong>To - </strong>
+								{value.split('-')[1] || '-'}
+							</span>
+						</div>
+					) : value}
+					style={{ width: 'fit-content' }}
+					placement="top"
+				>
+					<div className={styles.value}>{value}</div>
+				</Tooltip>
+			</div>
+
+		);
 	};
 
 	const getPreviewModalHeader = () => (
@@ -192,7 +201,10 @@ function DisplayCard({
 			<div className={styles.upperrow}>
 				<div className={styles.slabs} style={{ width: '100%' }}>
 					{options.map((i) => (
-						<div className={i.label !== 'Actions' ? styles.slab : styles.popover} key={i.label}>
+						<div
+							className={['Actions', 'Status'].includes(i.label) ? styles.popover : styles.slab}
+							key={i.label}
+						>
 							<div className={styles.label}>{i.label}</div>
 							{ i.label === 'Actions'
 								? (
@@ -217,11 +229,13 @@ function DisplayCard({
 			</div>
 			{activeTab === 'active' && (
 				<div
+					key={`announcement_accordian_${index}`}
 					role="button"
 					tabIndex={0}
 					onClick={() => handleAnnouncementDetails(index)}
 				>
 					<Accordion
+						key={`announcement_accordian_${index}`}
 						type="card"
 						title="Details"
 						className={styles.accordian}
