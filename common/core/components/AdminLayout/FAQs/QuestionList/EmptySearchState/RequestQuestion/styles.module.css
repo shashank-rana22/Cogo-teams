@@ -5,10 +5,8 @@
 .input_heading {
 	margin-top: 20px;
 	margin-bottom: 8px;
-	font-size: 15x;
+	font-size: 15px;
 	font-weight: 500;
-
-   
 }
 
 .button_row {
@@ -17,31 +15,30 @@
 	margin-top: 8px;
 }
 
-.header{
-    font-weight: 550;
-    font-size: 20px;
-    line-height: 36px;
+.header {
+	font-size: 20px;
+	font-weight: 550;
+	line-height: 36px;
 }
 
 .submit_btn {
 	margin-left: 8px;
-
 }
 
-.answer_container{
-    :global {
-    .ui_text_area_control {
-        height: 200px;  
-        font-size: 14px;
-        padding: 12px;
-        }
+.answer_container {
+	:global {
+		.ui_text_area_control {
+			height: 200px;
+			padding: 12px;
+			font-size: 14px;
+		}
 
-    .ui_text_area_container {
-        background: #FFFFFF;
-        }
-    }
+		.ui_text_area_container {
+			background: #fff;
+		}
+	}
 }
 
 .span {
-    color: #ffb200;
+	color: #ffb200;
 }
