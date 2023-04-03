@@ -1,41 +1,23 @@
 import { Input, ButtonIcon, Table, Breadcrumb, Pagination } from '@cogoport/components';
 import { IcMArrowRotateUp, IcMSearchlight } from '@cogoport/icons-react';
-import { useState, useEffect } from 'react';
 
-import useGetTestQuestionSets from '../../../../../../hooks/useGetTestQuestionSets';
-
-import getQuestionSetColumns from './getQuestionSetColumns';
 import styles from './styles.module.css';
+import useQuestionSet from './useQuestionSet';
 
 function QuestionSet({ setIdArray, setShowQuestionSet, idArray, watch }) {
-	const [filters, setFilters] = useState({});
-
-	const [sort, setSort] = useState(false);
-
 	const {
-		data, loading, setParams, debounceQuery,
-		input, setInput, cogo_entity_id,
-	} = useGetTestQuestionSets({ filters, watch });
-
-	useEffect(() => {
-		setFilters((prev) => ({ ...prev, cogo_entity_id }));
-	}, [cogo_entity_id]);
+		data,
+		debounceQuery,
+		input,
+		setInput,
+		loading,
+		columns,
+		handleSort,
+		setParams,
+		sort,
+	} = useQuestionSet({ idArray, watch, setIdArray });
 
 	const { page = 0, page_limit: pageLimit = 0, total_count = 0, list } = data || {};
-
-	const columns = getQuestionSetColumns({ idArray, setIdArray });
-
-	const handleSort = () => {
-		setSort((prev) => !prev);
-		setParams((prev) => ({
-			...prev,
-			sort_type : sort ? 'asc' : 'desc',
-			filters   : {
-				...prev.filters,
-			},
-		}));
-	};
-
 	return (
 		<div className={styles.container}>
 			<Breadcrumb className={styles.bcitems}>

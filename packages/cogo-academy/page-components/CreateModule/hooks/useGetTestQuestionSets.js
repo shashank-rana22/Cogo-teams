@@ -3,10 +3,8 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
-function useGetTestQuestionSets({ filters, activeTab = 'question_set', watch }) {
+function useGetTestQuestionSets({ filters, activeTab = 'question_set' }) {
 	const { query, debounceQuery } = useDebounceQuery();
-
-	const cogo_entity_id = watch('cogo_entity_id');
 
 	const [params, setParams] = useState({
 		page    : 1,
@@ -53,7 +51,6 @@ function useGetTestQuestionSets({ filters, activeTab = 'question_set', watch }) 
 		setInput,
 		params,
 		debounceQuery,
-		cogo_entity_id,
 	};
 }
 
