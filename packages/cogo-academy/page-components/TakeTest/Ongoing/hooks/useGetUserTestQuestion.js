@@ -19,7 +19,7 @@ function useGetUserTestQuestion({ currentQuestionId }) {
 			user_id,
 			question_id: currentQuestionId !== 'undefined' ? currentQuestionId : '',
 			...(currentQuestionId && currentQuestionId !== 'undefined'
-				? { question_id: currentQuestionId } : { new_question_required: false }),
+				? { question_id: currentQuestionId } : null),
 		},
 	}, { manual: false });
 
