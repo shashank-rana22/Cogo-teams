@@ -1,7 +1,7 @@
 import { Placeholder } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+
+import useGetTestPerformace from '../Questions/hooks/useGetTestPerformance';
 
 import BasicDetails from './BasicDetails';
 import DifficultyAndTopicDistribution from './DifficultyAndTopicDistribution';
@@ -10,45 +10,7 @@ import PercentagePassed from './PercentagePassed';
 import styles from './styles.module.css';
 
 function TestResults({ test_id = '' }) {
-	const [toggleState, setToggleState] = useState(false);
-
-	const [{ data, loading }] = useRequest({
-		method : 'GET',
-		url    : '/get_test_performance',
-		params : {
-			test_id,
-		},
-	}, { manual: false });
-
-	const stats_data = data?.data || {};
-
-	const {
-		test_name = '',
-		validity_start = '',
-		validity_end = '',
-		topics_covered = [],
-		time_taken = '',
-		required_pass_percent = '',
-		failed_and_passed = {},
-		total_students_appeared = '',
-		total_questions = '',
-	} = stats_data || {};
-
-	const header_data = {
-		test_name,
-		validity_start,
-		validity_end,
-		setToggleState,
-	};
-
-	const basic_info_data = {
-		topics_covered,
-		time_taken,
-		required_pass_percent,
-		failed_and_passed,
-		total_students_appeared,
-		total_questions,
-	};
+	const { loading, stats_data, basic_info_data, toggleState, header_data } = useGetTestPerformace({ test_id });
 
 	if (loading) {
 		return (
