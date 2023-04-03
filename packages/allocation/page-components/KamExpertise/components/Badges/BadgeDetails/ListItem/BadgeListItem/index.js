@@ -9,7 +9,7 @@ function BadgeListItem(props) {
 
 	const {
 		bronze_details = {}, silver_details = {},
-		gold_details = {}, badge_name = '_', description = '_', audits = [], created_by = {},
+		gold_details = {}, badge_name = '', description = '', audits = [], created_by = {},
 	} = data;
 
 	const handleEdit = () => {
@@ -44,7 +44,6 @@ function BadgeListItem(props) {
 			</div>
 
 			<div className={styles.main_card}>
-
 				<div className={styles.card_description}>
 					<div className={styles.details}>
 						<div className={styles.badge_name_tag}>

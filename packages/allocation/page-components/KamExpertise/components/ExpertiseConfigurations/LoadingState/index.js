@@ -5,8 +5,8 @@ import LoaderConfigurationCard from './LoaderConfigurationCard';
 function LoadingState() {
 	return (
 		<div>
-			{[1, 2].map(() => (
-				<LoaderConfigurationCard />
+			{[1, 2].map((item) => (
+				<LoaderConfigurationCard key={item} />
 			))}
 		</div>
 	);

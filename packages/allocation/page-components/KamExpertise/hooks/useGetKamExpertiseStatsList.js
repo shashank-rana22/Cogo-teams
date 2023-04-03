@@ -22,7 +22,8 @@ function useGetKamExpertiseStatsList() {
 			...pv,
 			filters: {
 				...pv.filters,
-				q: searchQuery || undefined,
+				q     : searchQuery || undefined,
+				badge : badgeName || undefined,
 			},
 		}));
 	}, [searchQuery, badgeName]);

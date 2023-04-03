@@ -21,19 +21,19 @@ const EVENTS_COMPONENTS_MAPPING = {
 function Events() {
 	const {
 		list = [],
-		loading,
-		paginationData,
-		getNextPage,
+		loading = false,
+		paginationData = {},
+		getNextPage = () => {},
 		debounceQuery,
-		setSearchValue,
-		searchValue,
-		expertise,
-		setExpertise,
-		listRefetch,
-		eventListData,
-		setEventListData,
-		locale,
-		partner_id,
+		setSearchValue = () => {},
+		searchValue = '',
+		expertise = '',
+		setExpertise = () => {},
+		listRefetch = () => {},
+		eventListData = {},
+		setEventListData = () => {},
+		locale = '',
+		partner_id = '',
 	} = useGetEventList();
 
 	const componentProps = {

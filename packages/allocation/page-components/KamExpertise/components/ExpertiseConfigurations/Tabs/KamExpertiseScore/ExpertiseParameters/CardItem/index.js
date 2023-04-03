@@ -17,13 +17,12 @@ function CardItem({ item, editMode, control }) {
 			<div className={styles.name_container}>
 				<div className={styles.parent_parameter_name}>
 					{startCase(data.length === 1 ? conditionName : group_name)}
-
 				</div>
+
 				<div className={styles.icon_container}>
 					<Tooltip content={description} placement="top">
-						<div><IcMInfo width={14} height={14} /></div>
+						<IcMInfo width={14} height={14} />
 					</Tooltip>
-
 				</div>
 			</div>
 
@@ -35,7 +34,7 @@ function CardItem({ item, editMode, control }) {
 					<>
 						{isDoubleLevel ? (
 							<div className={styles.child_name_container}>
-								<div className={styles.parameter_name}>{startCase(condition_name)}</div>
+								{startCase(condition_name)}
 							</div>
 						) : null}
 

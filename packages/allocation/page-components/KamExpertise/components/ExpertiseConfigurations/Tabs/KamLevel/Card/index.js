@@ -19,7 +19,6 @@ function Card({ list = [], editMode = false, control, errors = {} }) {
 						</div>
 
 						<div className={styles.controls_container}>
-
 							{value?.map((childItem) => {
 								const { threshold_score_type, threshold_score = '', id, rules = {} } = childItem;
 
@@ -35,7 +34,6 @@ function Card({ list = [], editMode = false, control, errors = {} }) {
 
 								return (
 									<div className={styles.field_container}>
-
 										{editMode ? (
 											<>
 												<div className={styles.label}>
