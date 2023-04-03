@@ -113,7 +113,7 @@ function Header(props) {
 						onClose={() => {
 							setShowModal(false);
 							setMode('initial-mode');
-							setSelectedVersion('');
+							setSelectedVersion({});
 							setVersionName('');
 						}}
 						placement="top"
