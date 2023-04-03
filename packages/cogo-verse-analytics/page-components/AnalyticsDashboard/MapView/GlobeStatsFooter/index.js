@@ -10,10 +10,10 @@ import styles from './styles.module.css';
 
 function GlobeStatsFooter(props = {}) {
 	const {
-		stats={},
+		stats = {},
 		statsLoading = false,
 	} = props || {};
-     const statsData=stats?.list || {};
+	const statsData = stats?.list || {};
 	return (
 		<div className={styles.footer_stats}>
 			<div className={styles.communication_stats}>

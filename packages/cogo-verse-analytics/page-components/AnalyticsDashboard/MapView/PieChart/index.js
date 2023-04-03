@@ -54,7 +54,6 @@ function CommunicationPieChart({ conversation_data = {} }) {
 								spacing    : 10,
 							},
 						]}
-
 						legends={[]}
 					/>
 				) : (
