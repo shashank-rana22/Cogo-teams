@@ -31,8 +31,8 @@ function Header(props) {
 	} = props;
 
 	const {
-		getVersion, createModalLoading, selectedVersion,
-		setSelectedVersion, mode, setMode, showModal, setShowModal,
+		getVersion, createModalLoading, selectedVersion, setSelectedVersion,
+		mode, setMode, showModal, setShowModal, versionName, setVersionName,
 	} = useGetKamExpertiseVersionDetials({
 		refetch,
 		expertiseRefetch,
@@ -43,6 +43,8 @@ function Header(props) {
 		[PUBLISHED_VERSION]: {
 			setSelectedVersion,
 			data,
+			versionName,
+			setVersionName,
 		},
 		[SAVED_DRAFT]: {
 			setMode,
@@ -53,6 +55,8 @@ function Header(props) {
 			setSelectedVersion,
 			getVersion,
 			createModalLoading,
+			versionName,
+			setVersionName,
 		},
 		[INITIAL_MODE]: {
 			setMode,
@@ -110,6 +114,7 @@ function Header(props) {
 							setShowModal(false);
 							setMode('initial-mode');
 							setSelectedVersion('');
+							setVersionName('');
 						}}
 						placement="top"
 					>
@@ -134,6 +139,7 @@ function Header(props) {
 									mode={mode}
 									getVersion={getVersion}
 									createModalLoading={createModalLoading}
+									versionName={versionName}
 								/>
 							</Modal.Footer>
 						) : null}

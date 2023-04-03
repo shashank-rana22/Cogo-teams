@@ -1,27 +1,28 @@
 .container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .alert_icon {
-	width: 100px;
-	height: 100px;
-	margin-bottom: 16px;
-	color: rgb(191 41 30 / 100%);
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+    color: rgb(191 41 30 / 100%);
 }
 
 .supporting_text {
-	margin-bottom: 24px;
-	color: #cd6464;
+    margin: 20px 0px 28px 0px;
+    color: #cd6464;
+    text-align: center;
 }
 
 .button_container {
-	display: flex;
-	gap: 15px;
-	align-items: center;
-	justify-content: center;
-	margin-top: 4px;
-	margin-bottom: 14px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4px;
+    margin-bottom: 14px;
 }

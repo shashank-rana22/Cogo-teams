@@ -57,6 +57,7 @@ function BadgeUpdateCard(props) {
 						rules={{
 							required: 'Score is required',
 						}}
+						type="number"
 						disabled={loading}
 					/>
 
