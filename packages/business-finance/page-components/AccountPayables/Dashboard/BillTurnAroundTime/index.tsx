@@ -70,10 +70,21 @@ function BillTurnAroundTime({ filtersData, activeEntity }:ItemProps) {
 					</div>
 					<Tooltip
 						placement="top"
-						content="Turnaround time for Bill to move from one status to
-						another that involves human intervention.
-
-						[Select TASKS and DATE to see TAT]"
+						content={(
+							<div>
+								Turnaround time for Bill to move from one status to
+								<br />
+								another that involves
+								<br />
+								human intervention.
+								<br />
+								<div className={styles.tooltip_text}>
+									[Select TASKS and DATE
+									<br />
+									to see TAT]
+								</div>
+							</div>
+						)}
 					>
 						<div className={styles.info_icon}>
 							<IcMInfo width="16px" height="16px" />

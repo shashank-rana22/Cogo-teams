@@ -18,8 +18,9 @@ const useGetBfList = () => {
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
-			url    : '/purchase/bills/list',
-			method : 'get',
+			url     : '/purchase/bills/list',
+			method  : 'get',
+			authKey : 'get_purchase_bills_list',
 		},
 		{ manual: false },
 	);
