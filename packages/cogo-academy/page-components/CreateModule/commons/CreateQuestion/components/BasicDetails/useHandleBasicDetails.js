@@ -15,13 +15,21 @@ const useHandleBasicDetails = ({
 	reset,
 	setValue,
 	setShowForm,
+	listSetQuestions,
 }) => {
 	const controls = useMemo(() => getControls({ mode }), [mode]);
 
 	const {
 		loading,
 		updateCaseStudy,
-	} = useUpdateCaseStudy({ setEditDetails, setAllKeysSaved, getTestQuestionTest, questionSetId, reset });
+	} = useUpdateCaseStudy({
+		setEditDetails,
+		setAllKeysSaved,
+		getTestQuestionTest,
+		questionSetId,
+		reset,
+		listSetQuestions,
+	});
 
 	const handleUpdateCaseStudy = () => {
 		const formValues = getValues();

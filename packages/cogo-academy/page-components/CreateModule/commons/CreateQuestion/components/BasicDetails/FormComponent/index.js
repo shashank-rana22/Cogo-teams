@@ -21,6 +21,7 @@ function FormComponent({
 	getTestQuestionTest,
 	setAllKeysSaved,
 	setShowForm,
+	listSetQuestions,
 }) {
 	const {
 		controls,
@@ -36,6 +37,7 @@ function FormComponent({
 		reset,
 		setValue,
 		setShowForm,
+		listSetQuestions,
 	});
 
 	return (

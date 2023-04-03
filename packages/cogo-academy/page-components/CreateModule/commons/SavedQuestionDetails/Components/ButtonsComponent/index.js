@@ -14,6 +14,7 @@ function ButtonsComponent({
 	setEditDetails,
 	allKeysSaved,
 	mode,
+	listSetQuestions,
 }) {
 	const {
 		handleEditQuestion,
@@ -25,6 +26,7 @@ function ButtonsComponent({
 	} = useSavedQuestionDetails({
 		setAllKeysSaved,
 		getTestQuestionTest,
+		listSetQuestions,
 		questionSetId,
 		setEditDetails,
 	});

@@ -1,13 +1,10 @@
 import { Button } from '@cogoport/components';
 import { TextAreaController, SelectController, InputController, ChipsController } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import { useMemo } from 'react';
 
-import useUpdateCaseStudyQuestion from '../../hooks/useUpdateCaseStudyQuestion';
-
-import getControls from './controls';
 import OptionsComponent from './OptionsComponent';
 import styles from './styles.module.css';
+import useHandleSingleQuestion from './useHandleSingleQuestion';
 
 function SingleQuestionComponent({
 	control,
@@ -16,60 +13,24 @@ function SingleQuestionComponent({
 	name = 'case_questions',
 	errors,
 	field,
-	remove,
 	isNewQuestion,
 	questionTypeWatch,
 	editDetails,
-	getValues,
-	questionSetId,
-	getTestQuestionTest,
-	reset,
-	setEditDetails,
-	setAllKeysSaved,
 	mode,
+	...restProps
 }) {
-	const NAME_CONTROL_MAPPING = useMemo(() => {
-		const hash = {};
-
-		const controls = getControls({ mode });
-
-		controls.forEach((item) => {
-			hash[item?.name] = item;
-		});
-
-		return hash;
-	}, [mode]);
-
-	const { updateCaseStudyQuestion, loading } = useUpdateCaseStudyQuestion({
-		questionSetId,
-		getTestQuestionTest,
-		setEditDetails,
-		setAllKeysSaved,
-		reset,
+	const {
+		handleUpdateCaseStudyQuestion,
+		handleDelete,
+		loading,
+		NAME_CONTROL_MAPPING,
+	} = useHandleSingleQuestion({
+		mode,
+		editDetails,
+		field,
+		index,
+		...restProps,
 	});
-
-	const handleDelete = () => {
-		if (field.isNew) {
-			remove(index, 1);
-		} else {
-			updateCaseStudyQuestion({
-				action              : 'delete',
-				caseStudyQuestionId : editDetails?.test_case_study_questions?.[index]?.id,
-				testQuestionId      : editDetails?.id,
-			});
-		}
-	};
-
-	const handleUpdateCaseStudyQuestion = () => {
-		const formValues = getValues();
-
-		updateCaseStudyQuestion({
-			values              : formValues?.case_questions?.[index],
-			action              : field.isNew ? 'create' : 'update',
-			caseStudyQuestionId : editDetails?.test_case_study_questions?.[index]?.id,
-			testQuestionId      : editDetails?.id,
-		});
-	};
 
 	return (
 		<div className={styles.container}>

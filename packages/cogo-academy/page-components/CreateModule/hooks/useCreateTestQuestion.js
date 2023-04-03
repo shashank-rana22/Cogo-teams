@@ -10,7 +10,7 @@ const actionNameMapping = {
 	case_study  : 'Case Study',
 };
 
-function useCreateTestQuestion({ reset }) {
+function useCreateTestQuestion({ reset, getTestQuestionTest, questionSetId, listSetQuestions }) {
 	const [{ loading: loadingCaseStudy }, triggerCaseStudy] = useRequest({
 		method : 'post',
 		url    : '/create_case_study_test_question',
@@ -26,7 +26,7 @@ function useCreateTestQuestion({ reset }) {
 		case_study  : triggerCaseStudy,
 	};
 
-	const createTestQuestion = async ({ values, questionSetId, getTestQuestionTest }) => {
+	const createTestQuestion = async ({ values }) => {
 		const { question_type = '' } = values || {};
 
 		const { hasError, ...payload } = getPayload({ values, questionSetId, type: question_type });
@@ -48,6 +48,7 @@ function useCreateTestQuestion({ reset }) {
 			Toast.success(`${actionNameMapping[question_type]} question created successfully`);
 
 			reset();
+			listSetQuestions({ questionSetId });
 			getTestQuestionTest({ questionSetId });
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data) || 'something went wrong');

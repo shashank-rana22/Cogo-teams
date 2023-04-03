@@ -15,6 +15,7 @@ const useCreateQuestion = ({
 	questionSetId,
 	getTestQuestionTest,
 	setAllKeysSaved,
+	listSetQuestions,
 }) => {
 	const [questionTypeWatch, setQuestionTypeWatch] = useState('stand_alone');
 
@@ -37,7 +38,12 @@ const useCreateQuestion = ({
 		...restFormProps
 	} = useForm();
 
-	const { createTestQuestion, loading } = useCreateTestQuestion({ reset });
+	const { createTestQuestion, loading } = useCreateTestQuestion({
+		reset,
+		getTestQuestionTest,
+		questionSetId,
+		listSetQuestions,
+	});
 
 	const { updateStandAloneTestQuestion } = useUpdateStandAloneTestQuestion({
 		questionSetId,
@@ -45,6 +51,7 @@ const useCreateQuestion = ({
 		setEditDetails,
 		setAllKeysSaved,
 		reset,
+		listSetQuestions,
 	});
 
 	const {
@@ -56,6 +63,7 @@ const useCreateQuestion = ({
 		getTestQuestionTest,
 		questionSetId,
 		reset,
+		listSetQuestions,
 	});
 
 	const onSubmit = (values) => {
@@ -66,7 +74,7 @@ const useCreateQuestion = ({
 				testQuestionId : editDetailsId,
 			});
 		} else {
-			createTestQuestion({ values, questionSetId, getTestQuestionTest });
+			createTestQuestion({ values });
 		}
 	};
 

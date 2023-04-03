@@ -20,6 +20,7 @@ function SavedQuestionDetails({
 	page,
 	mode,
 	page_limit,
+	listSetQuestions,
 }) {
 	const columns = useGetTableColumns({
 		setAllKeysSaved,
@@ -28,6 +29,7 @@ function SavedQuestionDetails({
 		setEditDetails,
 		allKeysSaved,
 		mode,
+		listSetQuestions,
 	});
 
 	if (isEmpty(test_questions)) {

@@ -13,7 +13,8 @@ function useUpdateCaseStudy({
 	getTestQuestionTest,
 	questionSetId,
 	reset = () => {},
-	setQuestionToDelete = () => [],
+	setQuestionToDelete = () => {},
+	listSetQuestions,
 }) {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
@@ -32,10 +33,12 @@ function useUpdateCaseStudy({
 
 			Toast.success(`Case study question ${actionNameMapping[action]} successfully`);
 
-			getTestQuestionTest({
+			listSetQuestions({
 				questionSetId,
 				...(action !== 'delete' ? { questionToShow: id } : { pageToShow: 1 }),
 			});
+
+			getTestQuestionTest({ questionSetId });
 
 			if (action === 'delete') {
 				setAllKeysSaved(true);
