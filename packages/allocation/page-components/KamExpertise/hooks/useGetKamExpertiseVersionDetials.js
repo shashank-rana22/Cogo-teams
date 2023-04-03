@@ -13,6 +13,7 @@ const useGetKamExpertiseVersionDetials = (props) => {
 	const [selectedVersion, setSelectedVersion] = useState('');
 	const [mode, setMode] = useState('initial-mode');
 	const [showModal, setShowModal] = useState(false);
+	const [versionName, setVersionName] = useState('');
 
 	const [{ loading = false }, trigger] = useAllocationRequest({
 		url     : '/kam_expertise_version_configurations',
@@ -25,7 +26,7 @@ const useGetKamExpertiseVersionDetials = (props) => {
 			const payload = {
 				// action_type    : mode,
 				// version_number : selectedVersion || undefined,
-				name: 'draft4', //! hardcoded needs to be changed
+				name: versionName,
 			};
 			await trigger({ params: payload });
 
@@ -50,6 +51,8 @@ const useGetKamExpertiseVersionDetials = (props) => {
 		setShowModal,
 		createModalLoading: loading,
 		getVersion,
+		versionName,
+		setVersionName,
 	};
 };
 

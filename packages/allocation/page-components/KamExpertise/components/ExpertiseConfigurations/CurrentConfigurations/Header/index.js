@@ -1,6 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 
+import VERSION_KEYS from '../../../../constants/version-keys-mapping';
 import useGetKamExpertiseVersionDetials from '../../../../hooks/useGetKamExpertiseVersionDetials';
 
 import CreateModal from './CreateModal';
@@ -10,14 +11,7 @@ import Published from './CreateModal/Published';
 import ModalFooter from './ModalFooter';
 import styles from './styles.module.css';
 
-const CONSTANT_KEYS = {
-	PUBLISHED_VERSION : 'choose_published_version',
-	SAVED_DRAFT       : 'saved-draft',
-	NEW_VERSION       : 'new',
-	INITIAL_MODE      : 'initial-mode',
-};
-
-const { PUBLISHED_VERSION, SAVED_DRAFT, NEW_VERSION, INITIAL_MODE } = CONSTANT_KEYS;
+const { PUBLISHED_VERSION, SAVED_DRAFT, NEW_VERSION, INITIAL_MODE } = VERSION_KEYS;
 
 const CREATE_CONFIGURATION_MAPPING = {
 	[PUBLISHED_VERSION] : Published,
@@ -28,17 +22,15 @@ const CREATE_CONFIGURATION_MAPPING = {
 
 function Header(props) {
 	const {
-		audit_data = {},
-		version_number,
-		data = [],
+		list = [],
 		refetch,
 		expertiseRefetch,
 		cardRefetch,
 	} = props;
 
 	const {
-		getVersion, createModalLoading, selectedVersion,
-		setSelectedVersion, mode, setMode, showModal, setShowModal,
+		getVersion, createModalLoading, selectedVersion, setSelectedVersion,
+		mode, setMode, showModal, setShowModal, versionName, setVersionName,
 	} = useGetKamExpertiseVersionDetials({
 		refetch,
 		expertiseRefetch,
@@ -47,28 +39,30 @@ function Header(props) {
 
 	const componentProps = {
 		[PUBLISHED_VERSION]: {
-			selectedVersion, // ! required ?
 			setSelectedVersion,
-			data,
+			list,
+			versionName,
+			setVersionName,
 		},
 		[SAVED_DRAFT]: {
 			setMode,
 			setShowModal,
-			setSelectedVersion, // ! required ?
 		},
 		[NEW_VERSION]: {
 			setMode,
-			setShowModal, // ! required ?
 			setSelectedVersion,
 			getVersion,
 			createModalLoading,
+			versionName,
+			setVersionName,
 		},
 		[INITIAL_MODE]: {
 			setMode,
-			setSelectedVersion, // ! required ?
-			data,
+			list,
 		},
 	};
+	const liveVersionList = list.filter((item) => item?.status === 'live')?.[0] || {};
+	const { version_number = '', audit_data = {} } = liveVersionList;
 
 	const Component = CREATE_CONFIGURATION_MAPPING[mode] || null;
 
@@ -120,6 +114,7 @@ function Header(props) {
 							setShowModal(false);
 							setMode('initial-mode');
 							setSelectedVersion('');
+							setVersionName('');
 						}}
 						placement="top"
 					>
@@ -144,6 +139,7 @@ function Header(props) {
 									mode={mode}
 									getVersion={getVersion}
 									createModalLoading={createModalLoading}
+									versionName={versionName}
 								/>
 							</Modal.Footer>
 						) : null}

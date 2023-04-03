@@ -2,8 +2,9 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function CreateModal({ setMode, data }) {
-	const drafts = data.filter((item) => item.status === 'draft');
+function CreateModal({ setMode, list }) {
+	const liveAndExpiredVersions = list.filter((item) => ['live', 'expired'].includes(item?.status));
+	const drafts = list.filter((item) => item.status === 'draft');
 
 	return (
 		<div className={styles.modal_container}>
@@ -20,7 +21,7 @@ function CreateModal({ setMode, data }) {
 					a. Start from scratch (empty version)
 				</div>
 
-				{!isEmpty(data) ? (
+				{!isEmpty(liveAndExpiredVersions) ? (
 					<div
 						role="presentation"
 						onClick={() => {
@@ -41,6 +42,7 @@ function CreateModal({ setMode, data }) {
 						c. Start where you left off (saved draft)
 					</div>
 				) : null}
+
 			</div>
 		</div>
 	);

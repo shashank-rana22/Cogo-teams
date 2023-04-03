@@ -45,7 +45,6 @@ function useCreateNewEvent(props) {
 					condition_name : snakeCase(condition_name || ''),
 					event_state_on,
 					attributes     : payloadAttribute,
-					status         : 'draft',
 					description,
 					attribute,
 

@@ -21,7 +21,6 @@
 
 .cancel_button {
 	display: flex;
-	gap: 12px;
 	float: right;
 	margin-right: 12px;
 }
