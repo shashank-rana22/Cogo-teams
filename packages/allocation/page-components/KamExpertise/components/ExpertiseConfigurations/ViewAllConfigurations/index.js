@@ -4,7 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../../common/EmptyState';
 import useGetKamExpertiseCurrentConfig from '../../../hooks/useGetKamExpertiseCurrentConfig';
-import ConfigurationCard from '../CurrentConfigurations/ConfigurationCard';
+import ConfigurationCard from '../ConfigurationCard';
 import LoadingState from '../LoadingState';
 
 import styles from './styles.module.css';
