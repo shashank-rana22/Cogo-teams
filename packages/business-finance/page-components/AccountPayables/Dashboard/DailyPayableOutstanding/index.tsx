@@ -68,13 +68,24 @@ function DailyPayableOutstanding({ filters, activeEntity }:ItemData) {
 			<div className={styles.header}>
 				<div className={styles.heading_text}>
 					<div className={styles.text}>
-						Daily Payable Outstanding
+						Days Payable Outstanding
 						<div className={styles.hr} />
 					</div>
 					<Tooltip
 						placement="top"
-						content="Days payable outstanding (DPO) is a financial ratio that indicates
-						the average time (in days) that a company takes to pay its bills and invoices"
+						content={(
+							<div className={styles.tooltip}>
+								Days payable outstanding (DPO) is a financial ratio
+								<br />
+								that indicates the average
+								<br />
+								time (in days) that a
+								<br />
+								company takes to pay
+								<br />
+								its bills and invoices
+							</div>
+						)}
 					>
 						<div className={styles.info_icon}>
 							<IcMInfo width="16px" height="16px" />
