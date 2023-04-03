@@ -43,6 +43,7 @@ function ViewPrice({ showPrice, setShowPrice }) {
 					apiData={showPrice?.line_items || []}
 					loading={loading}
 					showPagination={false}
+					numberOfLoader={3}
 				/>
 			)}
 

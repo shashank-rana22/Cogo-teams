@@ -16,10 +16,15 @@ function List({
 	sort = {},
 	setSort = () => {},
 	isLclManifest = false,
+	numberOfLoader = 10,
 }) {
 	const handleRender = () => {
 		if (loading) {
-			return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => <LoadingState fields={fields} isLast={item === 10} />);
+			const loadingStates = Array.from({ length: numberOfLoader }, (_, i) => (
+				<LoadingState fields={fields} isLast={i === numberOfLoader - 1} />
+			));
+
+			return loadingStates;
 		}
 
 		if (!data.length) {
