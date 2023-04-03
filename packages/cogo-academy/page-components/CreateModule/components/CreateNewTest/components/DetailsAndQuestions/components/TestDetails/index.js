@@ -36,14 +36,6 @@ function CreateNewTest({ control, errors, data, setValue, watch }) {
 
 	const radioGroupVal = watch('select_users') || '';
 
-	// if (listAudienceLoading) {
-	// 	return (
-	// 		<div className={styles.spinner}>
-	// 			<Spinner width="100px" height="100px" />
-	// 		</div>
-	// 	);
-	// }
-
 	return (
 		<div>
 			<div className={styles.header}>

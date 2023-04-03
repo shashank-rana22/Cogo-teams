@@ -30,6 +30,7 @@
 	}
 
 	.label{
+		flex-shrink: 0;
 		flex-basis: 25%;
 	}
 
