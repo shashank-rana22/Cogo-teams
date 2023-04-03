@@ -23,13 +23,6 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 	const { set_data = [] } = data || {};
 
 	const handleChange = ({ type }) => {
-		// handleSubmit((values) => {
-		// 	if (isEmpty(idArray)) {
-		// 		Toast.error('Atleast one of the Question Sets must be selected');
-		// 	} else {
-		// 		createTest({ idArray, next: type === 'save_as_draft' ? 'draft' : 'criteria', uploadDocument });
-		// 	}
-		// })();
 		createTest({ idArray, next: type === 'save_as_draft' ? 'draft' : 'criteria', uploadDocument });
 	};
 

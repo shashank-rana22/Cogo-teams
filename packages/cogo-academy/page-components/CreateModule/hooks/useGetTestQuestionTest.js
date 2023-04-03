@@ -1,8 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 function useGetTestQuestionTest({ setAllKeysSaved }) {
 	const { general: { query } } = useSelector((state) => state);
@@ -17,7 +16,7 @@ function useGetTestQuestionTest({ setAllKeysSaved }) {
 		url    : '/get_test_question_set',
 	}, { manual: true });
 
-	const getTestQuestionTest = async ({ questionSetId:setId }) => {
+	const getTestQuestionTest = useCallback(async ({ questionSetId:setId }) => {
 		try {
 			await trigger({
 				params: { id: setId, filters },
@@ -25,13 +24,13 @@ function useGetTestQuestionTest({ setAllKeysSaved }) {
 		} catch (err) {
 			setAllKeysSaved(true);
 		}
-	};
+	}, [filters, setAllKeysSaved, trigger]);
 
 	useEffect(() => {
 		if (!isEmpty(id)) {
 			getTestQuestionTest({ questionSetId: id });
 		}
-	}, []);
+	}, [getTestQuestionTest, id]);
 
 	return {
 		loading,

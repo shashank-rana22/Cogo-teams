@@ -1,53 +1,36 @@
-import { Pill, Button, Placeholder, Toast } from '@cogoport/components';
-import { useForm, InputController, useFieldArray } from '@cogoport/forms';
+import { Pill, Button, Placeholder } from '@cogoport/components';
+import { InputController } from '@cogoport/forms';
 import { IcMArrowBack, IcMDelete, IcMPlusInCircle } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
-
-import useUpdateTest from '../../../../hooks/useUpdateTest';
 
 import DurationAndValidity from './components/DurationAndValidity';
 import QuestionsAndDistribution from './components/QuestionsAndDistribution';
 import TestDetailsModal from './components/TestDetailsModal';
 import styles from './styles.module.css';
+import useHandleReviewAndCriteria from './useHandleReviewAndCriteria';
 
 function ReviewAndCriteria(props) {
 	const { loading, data, test_id } = props;
 
-	const { name = '', set_data = [], cogo_entity_object = {}, eligible_users = '' } = data || {};
+	const { name = '', set_data = [], cogo_entity_object = {}, eligible_users = '', guidelines = [] } = data || {};
 
-	const router = useRouter();
-
-	const [error, setError] = useState(false);
-
-	const [showModal, setShowModal] = useState(false);
-
-	const { control, formState: { errors }, handleSubmit, setValue, getValues, watch } = useForm();
-
-	const { fields, append, remove } = useFieldArray({
+	const {
+		checkError,
+		onNavigate,
+		updateTest,
+		errors,
+		handleSubmit,
+		getValues,
+		watch,
+		fields,
+		append,
+		remove,
+		setError,
+		showModal,
 		control,
-		name: 'guidelines',
-	});
-
-	const { updateTest } = useUpdateTest();
-
-	useEffect(() => {
-		setValue('guidelines', data?.guidelines?.map((guideline) => ({ instruction: guideline })));
-	}, [data, setValue]);
-
-	const onNavigate = () => {
-		const href = '/learning?activeTab=test_module';
-		router.push(href, href);
-	};
-
-	const newFunction = () => {
-		if (error) {
-			Toast.error('Total questions and cases cannot be 0');
-		} else {
-			setShowModal(true);
-		}
-	};
+		setShowModal,
+		setValue,
+	} = useHandleReviewAndCriteria({ guidelines });
 
 	return (
 		<div className={styles.container}>
@@ -170,9 +153,7 @@ function ReviewAndCriteria(props) {
 					size="md"
 					themeType="primary"
 					type="button"
-					onClick={
-						handleSubmit(newFunction)
-					}
+					onClick={() => handleSubmit(checkError)}
 				>
 					Publish Test
 				</Button>
