@@ -21,22 +21,16 @@ function Description({ question_text = '', id = '', test_id = '' }) {
 					role="presentation"
 					style={{ cursor: 'pointer' }}
 				>
-					{!viewQuestions ? (<IcMArrowRotateDown />
-					) : (<IcMArrowRotateUp />
-					)}
+					<div>
+						{!viewQuestions ? <IcMArrowRotateDown /> : <IcMArrowRotateUp />}
+					</div>
 
 					<div className={styles.view_question_text}>See Question Wise Analysis</div>
 				</div>
 			</div>
 
 			<div>
-				{
-				viewQuestions ? (
-					<ViewQuestions question_id={id} test_id={test_id} />
-				) : (
-					null
-				)
-			}
+				{viewQuestions ? <ViewQuestions question_id={id} test_id={test_id} /> : null}
 			</div>
 		</div>
 	);
