@@ -20,8 +20,18 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 
 	const { set_data = [] } = data || {};
 
+	const handleChange = ({ type }) => {
+		handleSubmit((values) => {
+			if (isEmpty(idArray)) {
+				Toast.error('Atleast one of the Question Sets must be selected');
+			} else {
+				createTest({ data: values, idArray, next: type === 'save_as_draft' ? 'draft' : 'criteria' });
+			}
+		})();
+	};
+
 	useEffect(() => {
-		if (!isEmpty(set_data || [])) {
+		if (!isEmpty(set_data)) {
 			setShowQuestionSet(true);
 			setIdArray((set_data || []).map((item) => item.id));
 		}
@@ -63,17 +73,9 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 						type="button"
 						loading={loading || getLoading}
 						size="md"
-						themeType="tertiary"
+						themeType="secondary"
 						style={{ marginRight: '10px' }}
-						onClick={
-							handleSubmit((values) => {
-								if (idArray.length === 0) {
-									Toast.error('Atleast one of the Question Sets must be selected');
-								} else {
-									createTest({ data: values, idArray, next: 'draft' });
-								}
-							})
-						}
+						onClick={() => handleChange({ type: 'save_as_draft' })}
 					>
 						Save As Draft
 					</Button>
@@ -83,15 +85,7 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 						loading={loading || getLoading}
 						size="md"
 						themeType="primary"
-						onClick={
-							handleSubmit((values) => {
-								if (idArray.length === 0) {
-									Toast.error('Atleast one of the Question Sets must be selected');
-								} else {
-									createTest({ data: values, idArray, next: 'criteria' });
-								}
-							})
-						}
+						onClick={() => handleChange({ type: 'review_and_set_validity' })}
 					>
 						Review And Set Validity
 					</Button>
