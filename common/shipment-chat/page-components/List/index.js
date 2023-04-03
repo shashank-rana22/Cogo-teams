@@ -26,8 +26,24 @@ function List({
 	const [id, setId] = useState();
 	const [showUnreadChat, setShowUnreadChat] = useState(false);
 	const [status, setStatus] = useState('active');
+	const [list, setList] = useState({
+		data       : [],
+		total      : 0,
+		total_page : 0,
+	});
+	const [filters, setFilters] = useState({ page: 1 });
+	const { page, q } = filters;
 
-	const { listData, page, total_page, filters, setFilters, loading } = useGetShipmentChatList({ status });
+	const getListPayload = {
+		page,
+		filters: {
+			subscribe_user_id: user_id,
+			status,
+			q,
+		},
+	};
+	const states = { list, setList };
+	const { listData, total_page, loading } = useGetShipmentChatList({ payload: getListPayload, states });
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const defaultChannel = listData?.find((obj) => obj?.source_id === shipment_data?.id);
