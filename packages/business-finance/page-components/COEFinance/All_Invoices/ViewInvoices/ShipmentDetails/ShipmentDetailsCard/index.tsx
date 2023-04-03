@@ -432,7 +432,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={status !== 'LOCKED'}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -442,7 +442,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={status !== 'LOCKED'}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}
@@ -538,7 +538,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={status !== 'LOCKED'}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -548,7 +548,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={status !== 'LOCKED'}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}
@@ -636,7 +636,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={status !== 'LOCKED'}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -646,7 +646,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={status !== 'LOCKED'}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}

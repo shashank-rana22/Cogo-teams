@@ -40,7 +40,7 @@ function ViewInvoices() {
 				jobNumber={jobNumber}
 				status={status}
 			/>
-			<Tagging billId={billId} setRemarksVal={setRemarksVal} />
+			<Tagging billId={billId} setRemarksVal={setRemarksVal} status={status} />
 			<SupplierDetails
 				data={fullResponse}
 				paymentsData={paymentsData}

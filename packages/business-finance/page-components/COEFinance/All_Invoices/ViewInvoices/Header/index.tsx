@@ -64,7 +64,8 @@ function Header({
 	const isApproveDisabled = Object.keys(lineItemsRemarks)?.length > 0
     || remarksVal?.billingPartyRemark?.length > 0
     || remarksVal?.collectionPartyRemark?.length > 0
-    || remarksVal?.invoiceDetailsRemark?.length > 0;
+	|| remarksVal?.invoiceDetailsRemark?.length > 0
+	|| remarksVal?.taggingRemark?.length > 0;
 
 	const getRoute = () => {
 		if (isShipment) {
@@ -114,7 +115,7 @@ function Header({
 					<Button
 						size="md"
 						style={{ marginRight: '8px' }}
-						disabled={!lineItem || !isApproveDisabled}
+						disabled={!isApproveDisabled}
 						onClick={(e: any) => handleModalData(e)}
 					>
 						Reject

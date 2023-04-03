@@ -9,8 +9,9 @@ import { TagCard } from './TagCard';
 
 function TagMap({
 	billId,
-	value, setValue, setRemarksVal,
-}: { billId: string, value?:{ approve?:string, reject?:string, undo?:string, remark:string },
+	value, setValue, setRemarksVal, status,
+}: {
+	billId: string, status?: string, value?: { approve?: string, reject?: string, undo?: string, remark: string, },
 	setValue: React.Dispatch<React.SetStateAction<{
 		approve: string;
 		reject: string;
@@ -72,7 +73,7 @@ function TagMap({
 				) : <Placeholder width="100%" height="200px" />}
 			</div>
 
-			{!isEmpty(mappingsData) && (
+			{!isEmpty(mappingsData) && status === 'LOCKED' && (
 				<div>
 					{value?.approve === 'approve' || value?.reject === 'reject' ? (
 						<div

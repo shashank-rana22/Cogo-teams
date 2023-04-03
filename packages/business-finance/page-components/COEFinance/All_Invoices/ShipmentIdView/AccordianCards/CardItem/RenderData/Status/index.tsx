@@ -19,6 +19,9 @@ function Status({ item }: PropsType) {
 	if (status === 'INITIATED') {
 		return <div className={styles.initiated}>Initiated</div>;
 	}
+	if (status === 'LOCKED') {
+		return <div className={styles.initiated}>LOCKED</div>;
+	}
 	if (status === 'ACCEPTED') {
 		return <div className={styles.accepted}>Accepted</div>;
 	}
