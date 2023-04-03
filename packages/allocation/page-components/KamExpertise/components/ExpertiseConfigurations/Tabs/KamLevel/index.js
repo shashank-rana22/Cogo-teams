@@ -20,23 +20,20 @@ function KamLevel(props) {
 	const [activeCard, setActiveCard] = useState('');
 	const [createKam, setCreateKam] = useState(false);
 
-	const { audit_data : auditData = {}, data : kamConfigLevelDetails = [] } = kamConfigDetails;
+	const { audit_data : auditData = {}, data : kamConfigLevelDetails } = kamConfigDetails || {};
 
-	// Todo : remove dataLength looks unrequired with transition level
-	const dataLength = kamConfigLevelDetails.length;
+	const dataLength = (kamConfigLevelDetails || []).length;
 
 	const options = kamConfigLevelDetails.map((data, index) => (
 		{
-			key: data.transition_level,
-
-			title: <KamLevelCard
+			key   : data.transition_level,
+			title : <KamLevelCard
 				data={data}
 				isActiveCard={activeCard === data?.transition_level}
 				refetch={refetch}
 				isLastCard={dataLength === index + 1}
 				cardRefetch={cardRefetch}
 			/>,
-
 			children: <KamLevelDropDown
 				refetch={refetch}
 				transition_level={data.transition_level}
@@ -46,13 +43,12 @@ function KamLevel(props) {
 
 	return (
 		<section>
-
 			<Header
 				auditData={auditData}
 				levelLoading={levelLoading}
 			/>
 
-			{ levelLoading
+			{levelLoading
 				? (<LoadingState columnsToLoad={4} />)
 				: (
 					<Collapse

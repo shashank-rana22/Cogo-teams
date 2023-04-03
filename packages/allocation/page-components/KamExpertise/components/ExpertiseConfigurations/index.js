@@ -75,6 +75,7 @@ function ViewAllConfigs() {
 				<div className={styles.icon_container}>
 					<IcMArrowBack width={16} height={16} />
 				</div>
+
 				<div className={styles.back_text}>
 					Back to Dashboard
 				</div>

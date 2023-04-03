@@ -89,7 +89,7 @@ function useCreateBadgeConfiguration(props) {
 
 				setToggleScreen('badge_details');
 
-				Toast.success(isEmpty(badgeItemData) ? 'Event Created !' : 'Event Updated !');
+				Toast.success(`Event ${isEmpty(badgeItemData) ? 'Created !' : 'Updated !'}`);
 
 				listRefetch();
 			} catch (error) {

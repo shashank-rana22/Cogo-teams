@@ -1,5 +1,4 @@
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
 import useGetKamExpertiseDashboard from '../../../hooks/useGetKamExpertiseDashboard';
@@ -14,11 +13,12 @@ import styles from './styles.module.css';
 
 function KamData(props) {
 	const { date_params = {} } = props;
-	const [kamLevel, setKamLevel] = useState(0);
 
 	const {
 		loading = false,
 		dashboardData,
+		kamLevel,
+		setKamLevel,
 	} = useGetKamExpertiseDashboard(date_params);
 
 	const {
@@ -39,10 +39,6 @@ function KamData(props) {
 		paginationData,
 		getNextPage,
 	} = useGetKamExpertiseStatsList();
-
-	useEffect(() => {
-		setKamLevel();
-	}, [date_params]);
 
 	const { list } = dashboardData || {};
 
