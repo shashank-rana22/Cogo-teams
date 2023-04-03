@@ -8,6 +8,11 @@
 	width: 100px;
 }
 
+.input_container {
+	margin-left: 4px;
+	margin-right: 4px;
+}
+
 .table_container {
 	padding: unset !important;
 	margin-top: 24px;
