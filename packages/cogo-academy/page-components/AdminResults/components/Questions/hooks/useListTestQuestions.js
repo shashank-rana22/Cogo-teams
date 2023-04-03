@@ -6,6 +6,7 @@ const useListQuestions = () => {
 	const [activeTab, setActiveTab] = useState('stand_alone_questions');
 
 	const [params, setParams] = useState({});
+
 	const [searchQuestion, setSearchQuestion] = useState('');
 
 	const { debounceQuery, query } = useDebounceQuery();
@@ -17,7 +18,6 @@ const useListQuestions = () => {
 				...params,
 			},
 			title: 'Stand Alone Questions',
-
 		},
 		case_study_based: {
 			payload: {
@@ -25,7 +25,6 @@ const useListQuestions = () => {
 				...params,
 			},
 			title: 'Case Study Based',
-
 		},
 	};
 

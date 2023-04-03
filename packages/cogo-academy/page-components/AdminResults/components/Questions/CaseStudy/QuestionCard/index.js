@@ -13,41 +13,44 @@ function QuestionCard({ question_id = '', test_id = '', index = 0 }) {
 	const { answers = [], question_data = {} } = data || {};
 	const { question = '' } = question_data || {};
 
+	if (loading) {
+		return (
+			<div className={styles.placeholder_container}>
+				{Array(3).fill('').map(() => (
+					<div
+						className={styles.placeholder_inner_container}
+					>
+						<Placeholder height="24px" />
+					</div>
+				))}
+			</div>
+		);
+	}
+
+	if (!isEmpty(answers)) {
+		return (<EmptyState />);
+	}
+
 	return (
-		<div>
-			{loading && (
-				<div className={styles.placeholder_container}>
-					{Array(3).fill('').map(() => (
-						<div
-							className={styles.placeholder_inner_container}
-						>
-							<Placeholder height="24px" />
-						</div>
-					))}
-				</div>
-			)}
-
-			{!loading && isEmpty(answers) ? <EmptyState /> : (
-				<div className={styles.container}>
-					<div className={styles.card_header}>
-						<div className={styles.question_heading}>
-							<div className={styles.question_number}>
-								Q
-								{index + 1}
-							</div>
-
-							<div className={styles.display_question}>
-								<div className={styles.question_text}>{question}</div>
-							</div>
-						</div>
+		<div className={styles.container}>
+			<div className={styles.card_header}>
+				<div className={styles.question_heading}>
+					<div className={styles.question_number}>
+						Q
+						{index + 1}
 					</div>
 
-					<div className={styles.answers_container}>
-						{answers.map((item) => (<GetAnswerItem answer={item} key={item.answer_id} />))}
+					<div className={styles.display_question}>
+						<div className={styles.question_text}>{question}</div>
 					</div>
 				</div>
-			)}
+			</div>
+
+			<div className={styles.answers_container}>
+				{answers.map((item) => (<GetAnswerItem answer={item} key={item.answer_id} />))}
+			</div>
 		</div>
+
 	);
 }
 

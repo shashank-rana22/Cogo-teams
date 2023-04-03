@@ -8,7 +8,7 @@ const usePublishNow = ({ test_id, refetchTest }) => {
 
 	const [{ loading }, trigger] = useRequest({
 		method : 'POST',
-		url    : 'end_test',
+		url    : '/end_test',
 	}, { manual: true });
 
 	const publishResults = async () => {
