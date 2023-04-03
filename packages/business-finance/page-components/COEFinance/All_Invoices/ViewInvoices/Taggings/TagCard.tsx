@@ -39,9 +39,10 @@ export function TagCard({
 				style={{
 					borderRight : childBill?.length > 1 ? '1px solid #88cad1' : '',
 					marginTop   : '16px',
+					position    : 'relative',
 				}}
 			>
-				<div style={{ display: 'flex', position: 'relative' }}>
+				<div style={{ display: 'flex' }}>
 					{childBill?.length > 1 && (
 						<div className={`${classname === 'merge' ? styles.merge : ''} ${styles.tag}`}>
 							{labelMap[classname || 'split']}
@@ -56,8 +57,10 @@ export function TagCard({
 						{isLastChild && (
 							<div
 								style={{
-									height: '40px',
+									height   : 'calc(100% - 40px)',
+									top      : '38px',
 									...commonStyles,
+									position : 'absolute',
 								}}
 							/>
 						)}

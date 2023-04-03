@@ -15,7 +15,7 @@
 .proforma_tagcards_container {
 	display: flex;
 	align-items: center;
-	min-width: 210px;
+	width: 260px;
 	padding: 10px;
 	border: 1px solid #88cad1;
 	border-radius: 8px;
@@ -90,7 +90,7 @@
 
 .tag {
 	position: absolute;
-	top: 100%;
+	top: 70px;
 	right: -26px;
 	z-index: 1;
 	padding: 4px 6px;
