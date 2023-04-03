@@ -1,0 +1,15 @@
+.top {
+	display: flex;
+	justify-content: space-between;
+	font-size: 16px;
+	font-weight: 600;
+	color: #333;
+}
+
+.kyc_button_container {
+	display: flex;
+}
+
+.kyc_btn {
+	margin-right: 16px;
+}
