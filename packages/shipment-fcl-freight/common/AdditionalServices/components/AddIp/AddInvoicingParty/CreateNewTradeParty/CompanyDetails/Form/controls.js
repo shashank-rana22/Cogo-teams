@@ -1,3 +1,8 @@
+import PATTERNS from '@cogoport/constants/patterns';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+
+const { IN: INDIA_COUNTRY_ID } = GLOBAL_CONSTANTS.country_ids;
+
 const countryOptions = [
 	{
 		label : 'Private Limited Company',
@@ -21,7 +26,10 @@ const countryOptions = [
 	},
 ];
 
-const controls = () => {
+const controls = ({ watch }) => {
+	const watchCountryId = watch('country_id');
+	const isCountryIndia = watchCountryId === INDIA_COUNTRY_ID;
+
 	const formControl = [
 		{
 			name     : 'country_id',
@@ -39,7 +47,13 @@ const controls = () => {
 			label       : 'PAN Number',
 			type        : 'input',
 			placeholder : 'Enter PAN Number',
-			rules       : { required: 'PAN Number is required' },
+			rules       : {
+				required : 'PAN Number is required',
+				pattern  : {
+					value   : isCountryIndia && PATTERNS.PAN_NUMBER,
+					message : 'PAN is invalid',
+				},
+			},
 		},
 		{
 			name        : 'business_name',
@@ -60,6 +74,7 @@ const controls = () => {
 			name  : 'verification_document',
 			label : 'Trade Party Verification document',
 			type  : 'file',
+			rules : { required: 'Trade Party Verification Document is required' },
 		},
 	];
 

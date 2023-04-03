@@ -1,6 +1,5 @@
 import { Button } from '@cogoport/components';
-
-import useCompanyDetails from '../hooks/useCompanyDetails';
+import { useForm } from '@cogoport/forms';
 
 import Form from './Form';
 import styles from './styles.module.css';
@@ -11,21 +10,23 @@ function CompanyDetails({
 	setCurrentStep = () => {},
 }) {
 	const {
-		errors = {},
-		control,
+		formState: { errors },
 		handleSubmit,
+		control,
 		register,
 		setValue,
-		onSubmitOfCompanyDetails,
-	} = useCompanyDetails({
-		filledDetails,
-		setFilledDetails,
-		setCurrentStep,
-	});
+		watch,
+	} = useForm();
+
+	const onSubmitOfCompanyDetails = (values = {}) => {
+		setFilledDetails({ ...values });
+		setCurrentStep('billing_address');
+	};
 
 	return (
 		<div className={styles.container}>
 			<Form
+				watch={watch}
 				control={control}
 				register={register}
 				handleSubmit={handleSubmit}

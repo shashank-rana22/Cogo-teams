@@ -4,7 +4,10 @@ import React, { useEffect } from 'react';
 import controls from './controls';
 import styles from './styles.module.css';
 
-function Form({ control, onSubmitOfCompanyDetails, handleSubmit, errors, setValue = () => {}, filledDetails = {} }) {
+function Form({
+	control, onSubmitOfCompanyDetails, handleSubmit, errors, setValue = () => {},
+	filledDetails = {}, watch,
+}) {
 	const { registration_number, business_name, company_type, country_id } = filledDetails;
 	useEffect(() => {
 		setValue('registration_number', registration_number);
@@ -13,7 +16,7 @@ function Form({ control, onSubmitOfCompanyDetails, handleSubmit, errors, setValu
 		setValue('country_id', country_id);
 	}, [registration_number, business_name, company_type, country_id, setValue]);
 
-	const { formControl } = controls();
+	const { formControl } = controls({ watch });
 
 	const renderForm = (field) => {
 		switch (field.type) {

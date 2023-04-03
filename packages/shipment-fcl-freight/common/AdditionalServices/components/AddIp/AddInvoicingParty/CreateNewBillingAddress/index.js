@@ -1,9 +1,9 @@
-import { useFieldArray } from '@cogoport/forms';
+import { useForm, useFieldArray } from '@cogoport/forms';
 import { useState } from 'react';
 
-import useCreateOrganizationBillingAddress from '../../../../../../hooks/useCreateOrganizationBillingAddress';
-
+import useCreateOrganizationAddress from '../../../../../../hooks/useCreateOrganizationAddress';
 import AddressForm from '../AddressForm';
+
 import styles from './styles.module.css';
 
 function CreateNewBillingAddress({
@@ -24,9 +24,33 @@ function CreateNewBillingAddress({
 	} = invoiceToTradePartyDetails;
 
 	const {
-		errors, handleSubmit, register,
-		control, setValue, onSubmit,
-	} = useCreateOrganizationBillingAddress({ id, tradePartyId, gstNumber, refetch, setShowComponent });
+		handleSubmit,
+		control,
+		register,
+		setValue,
+		formState: { errors },
+	} = useForm();
+
+	const afterCreateBillingAddress = () => {
+		refetch();
+		setShowComponent('view_billing_addresses');
+	};
+
+	const { apiTrigger } = useCreateOrganizationAddress({
+		refetch        : afterCreateBillingAddress,
+		successMessage : 'Billing address created successfully',
+	});
+
+	const onSubmit = (values) => {
+		const payload = {
+			...values,
+			organization_id             : id,
+			organization_trade_party_id : tradePartyId,
+			tax_number                  : gstNumber,
+		};
+
+		apiTrigger(payload);
+	};
 
 	return (
 		<div className={styles.container}>

@@ -1,7 +1,7 @@
 import { Button, Checkbox } from '@cogoport/components';
 
+import useGetBusiness from '../../../../../../hooks/useGetBusiness';
 import AsyncGstListController from '../CreateNewBillingAddress/AsyncGstListController';
-import useGetBusiness from '../hooks/useGetBusiness';
 
 import Form from './Form';
 import styles from './styles.module.css';

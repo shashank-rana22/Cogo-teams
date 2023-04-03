@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import getApiErrorString from '../../../../../../utils/getApiErrorString';
+import getApiErrorString from '../utils/getApiErrorString';
 
 const useGetBusiness = (props) => {
 	const {
