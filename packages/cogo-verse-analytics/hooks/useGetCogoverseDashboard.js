@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
 const useGetCogoverseDashboard = ({ country = {}, date = {} }) => {
-	const CountryMobileCode = country?.mobile_country_code || '';
+	const countryMobileCode = country?.mobile_country_code || '';
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_cogoverse_dashboard',
@@ -28,10 +28,10 @@ const useGetCogoverseDashboard = ({ country = {}, date = {} }) => {
 		(async () => {
 			await getCogoverseDashboard();
 		})();
-	}, [CountryMobileCode, getCogoverseDashboard]);
+	}, [countryMobileCode, getCogoverseDashboard]);
 
 	return {
-		statsLoading : true,
+		statsLoading : loading,
 		stats        : data,
 	};
 };
