@@ -1,6 +1,6 @@
 import { Card, Placeholder, Tooltip } from '@cogoport/components';
 import {
-	IcMInfo, IcMAgentManagement, IcMTradeparties,
+	IcMAgentManagement, IcMTradeparties,
 	IcMBreakBulkCargoType, IcMMiscellaneous,
 } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -55,18 +55,6 @@ function OverviewCard(props) {
 					<span>{ICON_MAPPING[data?.expertise_type]}</span>
 
 					<span className={styles.title_text}>{startCase(data?.expertise_type)}</span>
-
-					<span className={styles.tooltip}>
-						<Tooltip
-							content={data?.max_condition || 'NA'}
-							placement="top"
-						>
-							<IcMInfo
-								width={16}
-								height={16}
-							/>
-						</Tooltip>
-					</span>
 				</div>
 			)}
 			/>
@@ -80,15 +68,18 @@ function OverviewCard(props) {
 					</span>
 				</div>
 
-				<div className={styles.display_flex}>
-					<span> Most Points in</span>
+				<Tooltip
+					content={data?.max_condition || 'NA'}
+					placement="top"
+				>
+					<div className={styles.display_flex}>
+						<span> Most Points in</span>
 
-					<span className={styles.values}>
-						{data?.max_condition.length > 15
-							? `${data?.max_condition.substring(0, 15)}...`
-							: data?.max_condition || 'NA'}
-					</span>
-				</div>
+						<div className={styles.values}>
+							{data?.max_condition || 'NA'}
+						</div>
+					</div>
+				</Tooltip>
 			</Card.Description>
 		</Card>
 	);

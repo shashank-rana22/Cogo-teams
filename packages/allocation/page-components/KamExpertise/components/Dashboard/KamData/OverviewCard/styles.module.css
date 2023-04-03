@@ -51,6 +51,9 @@
 }
 
 .values {
-    display: flex;
+    white-space: nowrap;
+    width: 120px;
     font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

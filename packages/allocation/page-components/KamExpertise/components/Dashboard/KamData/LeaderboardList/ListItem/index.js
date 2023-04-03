@@ -97,10 +97,10 @@ function ListItem(props) {
 
 				<div className={styles.card_description_right}>
 					{expertise_score.map((expertise) => (
-						<div className={styles.exp} key={expertise.expertise_type}>
-							{startCase(expertise.expertise_type || '')}
+						<div className={styles.exp} key={expertise?.expertise_type}>
+							{startCase(expertise?.expertise_type || '')}
 
-							<b>{expertise.score}</b>
+							<b>{expertise?.score}</b>
 						</div>
 					))}
 				</div>
