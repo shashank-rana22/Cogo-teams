@@ -20,7 +20,8 @@ function TheGLobe(
 	const first_coordinate = markerData[0] || {};
 	const { latitude:country_lat = 0, longitude:country_lng = 0 } = country || {};
 
-	const countryLocation = useMemo(() => ({ lat: country_lat, lng: country_lng, altitude: 1.8 }), []);
+	const countryLocation = useMemo(() => (
+		{ lat: country_lat, lng: country_lng, altitude: 1.8 }), [country_lat, country_lng]);
 	const defaultMapCenter = useMemo(() => ({ lat: 0, lng: 78, altitude: 1.8 }), []);
 	const pointRotationSpeed = 100;
 	const countryMobileCode = country?.mobile_country_code || '';
