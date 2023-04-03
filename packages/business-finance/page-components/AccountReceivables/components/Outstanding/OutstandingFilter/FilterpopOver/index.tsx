@@ -56,13 +56,27 @@ function FilterpopOver({
 				</div>
 			</div>
 			<div className={styles.popover_content}>
-				<div style={{ marginTop: '12px' }} />
+				<div className={styles.margin_span} />
 
-				<div style={{
-					fontSize   : '14px',
-					fontWeight : 600,
-				}}
-				>
+				<div className={styles.styled_text}>
+					{' '}
+					Kam Owner
+
+				</div>
+				<AsyncSelect
+					name="user_id"
+					asyncKey="partner_users"
+					valueKey="user_id"
+					initialCall={false}
+					onChange={(userId:string) => onChange(userId, 'kamId')}
+					value={filters.kamId}
+					placeholder="Select Kam Owner"
+					size="sm"
+					isClearable
+				/>
+				<div className={styles.margin_span} />
+
+				<div className={styles.styled_text}>
 					{' '}
 					Sales Agent
 
@@ -76,13 +90,10 @@ function FilterpopOver({
 					value={filters.salesAgentId}
 					placeholder="Select Sales Agent User"
 					size="sm"
+					isClearable
 				/>
-				<div style={{ marginTop: '12px' }} />
-				<div style={{
-					fontSize   : '14px',
-					fontWeight : 600,
-				}}
-				>
+				<div className={styles.margin_span} />
+				<div className={styles.styled_text}>
 					{' '}
 					Credit Controller Agent
 
@@ -97,13 +108,10 @@ function FilterpopOver({
 					value={filters.creditControllerId}
 					placeholder="Select Credit Controller User"
 					size="sm"
+					isClearable
 				/>
-				<div style={{ marginTop: '12px' }} />
-				<div style={{
-					fontSize   : '14px',
-					fontWeight : 600,
-				}}
-				>
+				<div className={styles.margin_span} />
+				<div className={styles.styled_text}>
 					Company Type
 
 				</div>

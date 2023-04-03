@@ -23,7 +23,7 @@ function TestResult() {
 
 	const [{ data, loading }] = useRequest({
 		method : 'GET',
-		url    : 'get_user_performance',
+		url    : '/get_user_performance',
 		params : {
 			test_id,
 			user_id,
