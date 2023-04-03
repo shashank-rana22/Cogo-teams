@@ -40,11 +40,6 @@ function AnswerPage() {
 	const [isLiked, setIsLiked] = useState(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 
 	useEffect(() => {
-		setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive]);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [loading]);
-
-	useEffect(() => {
 		setAnswer(answerData?.answers?.[0]?.answer);
 	}, [answerData]);
 
@@ -69,6 +64,7 @@ function AnswerPage() {
 
 	const onClickLikeButton = async ({ _id }) => {
 		setload(false);
+		setIsLiked(isLiked === 'liked' ? '' : 'liked');
 
 		try {
 			let payload = {
@@ -93,15 +89,16 @@ function AnswerPage() {
 				data: payload,
 			});
 
-			setIsLiked(isLiked === 'liked' ? '' : 'liked');
 			refetchQuestions();
 		} catch (error) {
 			Toast.error(error?.message);
+			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
 	};
 
 	const onClickRemoveDisLike = async () => {
 		setload(false);
+		setIsLiked('');
 
 		try {
 			await trigger({
@@ -111,15 +108,17 @@ function AnswerPage() {
 				},
 			});
 
-			setIsLiked('');
 			refetchQuestions();
 		} catch (error) {
 			console.log('error :: ', error);
+			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
 	};
 
 	const onSubmit = async (values) => {
 		setload(false);
+		setIsLiked('disliked');
+
 		let remark = values?.remark;
 
 		if (values?.answer_checkbox) {
@@ -154,11 +153,11 @@ function AnswerPage() {
 				data: payload,
 			});
 
-			setIsLiked('disliked');
 			setShow(false);
 			refetchQuestions();
 		} catch (error) {
 			console.log('error :: ', error);
+			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
 	};
 
