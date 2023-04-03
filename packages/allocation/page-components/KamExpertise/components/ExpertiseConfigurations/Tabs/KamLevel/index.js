@@ -70,6 +70,7 @@ function KamLevel(props) {
 					setCreateKam={setCreateKam}
 					dataLength={dataLength}
 					refetch={refetch}
+					cardRefetch={cardRefetch}
 				/>
 			</div>
 		</section>

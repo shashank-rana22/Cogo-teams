@@ -6,8 +6,6 @@ import { useAllocationRequest } from '@cogoport/request';
 function useUpdateKamScores(props) {
 	const {
 		transition_level,
-		listrefetch,
-		setEditMode,
 		refetch,
 	} = props;
 
@@ -39,10 +37,6 @@ function useUpdateKamScores(props) {
 			await trigger({
 				data: payload,
 			});
-
-			setEditMode(false);
-
-			listrefetch();
 
 			refetch();
 		} catch (error) {

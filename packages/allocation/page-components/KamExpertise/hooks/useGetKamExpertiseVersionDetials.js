@@ -27,14 +27,21 @@ const useGetKamExpertiseVersionDetials = (props) => {
 				version_id : selectedVersion?.version_id || undefined,
 				name       : versionName,
 			};
+
 			await trigger({ params: payload });
 
 			setMode('initial-mode');
+
 			setShowModal(false);
+
 			refetch();
+
 			expertiseRefetch();
+
 			cardRefetch();
+
 			setSelectedVersion({});
+
 			Toast.success('Version selected successfully');
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
