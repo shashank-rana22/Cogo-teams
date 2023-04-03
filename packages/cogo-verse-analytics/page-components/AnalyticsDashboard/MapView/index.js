@@ -2,7 +2,7 @@ import {
 	DateRangepicker,
 } from '@cogoport/components';
 import { dynamic } from '@cogoport/next';
-import { isEmpty, merge } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useRef, useEffect } from 'react';
 
 import GlobeStatsFooter from './GlobeStatsFooter';
@@ -20,13 +20,11 @@ function MapView(props = {}) {
 		country = {},
 		date = {},
 		setDate = {},
-		chatLoading = false,
 	} = props || {};
 	const [circleTab, setCircleTab] = useState('new_users');
-	const globeData = stats?.list;
-	const { customer_locations = [], stats:globeStats = {} } = globeData || {};
-	console.log('customer_locations:', customer_locations);
-	const CountryMobileCode = country?.mobile_country_code || '';
+	const { customer_locations = [] } = stats?.list || {};
+
+	const countryMobileCode = country?.mobile_country_code || '';
 
 	let markerData = {};
 	markerData = customer_locations.map((item) => ({
@@ -36,10 +34,6 @@ function MapView(props = {}) {
 		...markerData,
 	}));
 
-	const onSelectChange = (val) => {
-		setCountry(val);
-	};
-
 	useEffect(() => {
 		if (!isEmpty(globeGL?.current?.scene()?.children[2]?.visible
 			&& !isEmpty(globeGL?.current?.scene()?.children[1]?.intensity)
@@ -47,8 +41,7 @@ function MapView(props = {}) {
 			globeGL.current.scene().children[1].intensity = 1.25;
 			globeGL.current.scene().children[2].intensity = 0.25;
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [globeGL?.current, CountryMobileCode, date, circleTab]);
+	}, [globeGL, countryMobileCode, date, circleTab]);
 
 	const resetGlobePosition = () => {
 		const defaultMapCenter = { lat: 0, lng: 78, altitude: 1.8 };

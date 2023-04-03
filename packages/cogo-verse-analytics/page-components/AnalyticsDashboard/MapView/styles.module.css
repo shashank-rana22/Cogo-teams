@@ -31,10 +31,12 @@
 			z-index: 1000;
 		}
 
+		/* stylelint-disable-next-line selector-class-pattern */
 		.react-datepicker-popper {
 			z-index: 1000;
 		}
 
+		/* stylelint-disable-next-line selector-class-pattern */
 		.react-datepicker__input-container {
 			input {
 				font-family: Poppins, sans-serif;
