@@ -35,10 +35,6 @@ function AllBadges() {
 		setBadgeParams = () => {},
 	} = useGetBadgeDescription();
 
-	const showAllBadges = () => {
-		setModalDetail('');
-	};
-
 	const showBadgeDetails = (badge) => {
 		setModalDetail(badge.id);
 
@@ -53,7 +49,7 @@ function AllBadges() {
 		<div className={styles.main_container_wrapper}>
 			<Header
 				modalDetail={modalDetail}
-				showAllBadges={showAllBadges}
+				setModalDetail={setModalDetail}
 				returnPath={returnPath}
 				goBack={goBack}
 			/>

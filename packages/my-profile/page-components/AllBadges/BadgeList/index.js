@@ -10,11 +10,11 @@ import styles from './styles.module.css';
 function StarCollection({ badgeClassName }) {
 	return (
 		<div className={styles.stars_container}>
-			{[1, 2, 3].map((itm) => (
-				<div key={itm}>
+			{[1, 2, 3].map((item) => (
+				<div key={item}>
 					<IcMStarfull
 						width={10}
-						fill={itm <= badgeClassName ? '#FFDF33' : '#BDBDBD'}
+						fill={item <= badgeClassName ? '#FFDF33' : '#BDBDBD'}
 					/>
 				</div>
 			))}
