@@ -12,7 +12,7 @@ const handleViewQuestionSet = ({ id, router }) => {
 };
 
 const handleEditTest = ({ id, router }) => {
-	router.push(`/learning/test-module/create-test?id=${id}`);
+	router.push(`/learning/test-module/create-test?mode=edit&id=${id}`);
 };
 
 export function QuestionSetButtons({ item, router, setQuestionSetId, setShowModal, loading }) {
