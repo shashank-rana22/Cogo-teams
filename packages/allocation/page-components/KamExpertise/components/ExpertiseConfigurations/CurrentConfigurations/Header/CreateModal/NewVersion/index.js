@@ -28,7 +28,9 @@ function NewVersion(props) {
 				<Button
 					themeType="tertiary"
 					disabled={createModalLoading}
-					onClick={() => { setMode('initial-mode'); }}
+					onClick={() => {
+						setMode('initial-mode');
+					}}
 				>
 					Back
 

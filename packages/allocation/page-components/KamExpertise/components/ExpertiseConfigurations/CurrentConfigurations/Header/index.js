@@ -1,6 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
 import { format } from '@cogoport/utils';
-import { useState } from 'react';
 
 import useGetKamExpertiseVersionDetials from '../../../../hooks/useGetKamExpertiseVersionDetials';
 
@@ -37,16 +36,13 @@ function Header(props) {
 		cardRefetch,
 	} = props;
 
-	const [versionName, setVersionName] = useState('');
-
 	const {
-		getVersion, createModalLoading, selectedVersion,
-		setSelectedVersion, mode, setMode, showModal, setShowModal,
+		getVersion, createModalLoading, selectedVersion, setSelectedVersion,
+		mode, setMode, showModal, setShowModal, versionName, setVersionName,
 	} = useGetKamExpertiseVersionDetials({
 		refetch,
 		expertiseRefetch,
 		cardRefetch,
-		versionName,
 	});
 
 	const componentProps = {
@@ -54,6 +50,8 @@ function Header(props) {
 			selectedVersion, // ! required ?
 			setSelectedVersion,
 			data,
+			versionName,
+			setVersionName,
 		},
 		[SAVED_DRAFT]: {
 			setMode,
@@ -126,6 +124,7 @@ function Header(props) {
 							setShowModal(false);
 							setMode('initial-mode');
 							setSelectedVersion('');
+							setVersionName('');
 						}}
 						placement="top"
 					>
@@ -150,6 +149,7 @@ function Header(props) {
 									mode={mode}
 									getVersion={getVersion}
 									createModalLoading={createModalLoading}
+									versionName={versionName}
 								/>
 							</Modal.Footer>
 						) : null}
