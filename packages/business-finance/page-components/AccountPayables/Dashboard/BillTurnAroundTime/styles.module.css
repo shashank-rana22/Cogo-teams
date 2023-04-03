@@ -67,3 +67,6 @@
 	display: flex;
 	justify-content: flex-end;
 }
+.tooltip_text{
+	color: #ed3726;
+}
