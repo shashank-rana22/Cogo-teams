@@ -91,7 +91,6 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 					</Button>
 				</div>
 			)}
-
 		</div>
 	);
 }

@@ -25,7 +25,6 @@ function QuestionsAndDistribution(props) {
 					: distribution_count || '0');
 			}
 		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data, setValue]);
 
 	const { set_data = '' } = data || {};
@@ -37,7 +36,7 @@ function QuestionsAndDistribution(props) {
 	const columns = [
 		{
 			Header   : 'QUESTION SET NAME',
-			id       : 'a',
+			id       : 'question_set_name',
 			accessor : ({ name = '' }) => (
 				<section>
 					{startCase(name) || '-'}
@@ -46,7 +45,7 @@ function QuestionsAndDistribution(props) {
 		},
 		{
 			Header   : 'TOPIC',
-			id       : 'b',
+			id       : 'topic',
 			accessor : ({ topic = '-' }) => (
 				<section>
 					<Pill
@@ -61,7 +60,7 @@ function QuestionsAndDistribution(props) {
 		},
 		{
 			Header   : 'USER GROUPS',
-			id       : 'c',
+			id       : 'user_groups',
 			accessor : ({ audience_ids = [] }) => (
 				<section>
 					{audience_ids.map((audience_id) => (
@@ -79,14 +78,14 @@ function QuestionsAndDistribution(props) {
 		},
 		{
 			Header   : 'AVAILABLE QUESTIONS',
-			id       : 'd',
+			id       : 'available_questions',
 			accessor : ({ non_case_study_question_count = 0 }) => (
 				<section>{non_case_study_question_count}</section>
 			),
 		},
 		{
 			Header   : 'AVAILABLE CASES',
-			id       : 'e',
+			id       : 'available_cases',
 			accessor : ({
 				case_study_question_count
 				= 0,
@@ -95,29 +94,30 @@ function QuestionsAndDistribution(props) {
 			),
 		},
 		{
-			Header:
-	<div className={styles.content}>
-		<div className={styles.subcontent}>
-			<span>DISTRIBUTION</span>
-			<span className={styles.matter}>
-				Questions and cases from each Set
-			</span>
-		</div>
-	</div>,
-			id       : 'f',
+			Header: (
+				<div className={styles.content}>
+					<div className={styles.subcontent}>
+						<span>DISTRIBUTION</span>
+
+						<span className={styles.matter}>
+							Questions and cases from each Set
+						</span>
+					</div>
+				</div>
+			),
+			id       : 'distribution',
 			accessor : ({ non_case_study_question_count = 0, case_study_question_count = 0, id = '' }) => {
 				const controlItem1 = getControls(id, non_case_study_question_count)[0];
 				const controlItem2 = getControls(id, case_study_question_count)[1];
 
 				return (
-
 					<section className={styles.distribution}>
-
 						<span className={(errors[`${id}q`] || errors[`${id}c`])
 							? null : styles.align_center}
 						>
 							No. of
 						</span>
+
 						<div className={styles.input_container}>
 							<InputController control={control} {...controlItem1} className={styles.input} />
 							{errors[`${id}q`] && <div className={styles.error_msg}>{errors[`${id}q`]?.message}</div>}
@@ -153,21 +153,24 @@ function QuestionsAndDistribution(props) {
 				loading={loading}
 				columns={columns}
 			/>
-			{(isEmpty(data) || loading) ? <Placeholder height="30px" width="100%" margin="0px 0px 20px 0px" /> : (
-				<div className={styles.total_questions}>
-					<h4 className={styles.total_heading}>
-						Total Questions:
-						{' '}
-						{questionsCount}
-					</h4>
-					<h4 className={styles.total_heading_two}>
-						Total Cases:
-						{' '}
-						{casesCount}
-					</h4>
-				</div>
-			)}
 
+			{(isEmpty(data) || loading)
+				? <Placeholder height="30px" width="100%" margin="0px 0px 20px 0px" />
+				: (
+					<div className={styles.total_questions}>
+						<h4 className={styles.total_heading}>
+							Total Questions:
+							{' '}
+							{questionsCount}
+						</h4>
+
+						<h4 className={styles.total_heading_two}>
+							Total Cases:
+							{' '}
+							{casesCount}
+						</h4>
+					</div>
+				)}
 		</>
 	);
 }
