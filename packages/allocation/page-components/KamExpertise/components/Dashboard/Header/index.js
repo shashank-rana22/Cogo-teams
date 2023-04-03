@@ -9,9 +9,11 @@ import styles from './styles.module.css';
 function Header() {
 	const router = useRouter();
 
-	const { LIVE_VERSION_DATA } = useGetKamExpertiseCurrentConfig();
+	const { list = [] } = useGetKamExpertiseCurrentConfig({ type: 'live' });
 
-	const { version_number = '', audit_data = {} } = LIVE_VERSION_DATA;
+	const liveVersionList = list?.[0] || {};
+
+	const { version_number = '', audit_data = {} } = liveVersionList;
 	const { updated_at = '', name = '' } = audit_data;
 
 	return (

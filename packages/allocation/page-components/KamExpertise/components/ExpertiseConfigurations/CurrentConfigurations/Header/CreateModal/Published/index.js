@@ -41,10 +41,10 @@ const columns = [
 
 ];
 
-function Published({ setSelectedVersion = () => {}, data }) {
+function Published({ setSelectedVersion = () => {}, list }) {
 	const table = [];
 
-	data.forEach((element) => {
+	list.forEach((element) => {
 		if (element.status !== 'draft') {
 			table.push({
 				version_number : element?.version_number || '',
