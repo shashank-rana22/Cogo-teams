@@ -13,9 +13,9 @@ function RequestForm({
 	setQuestionCreated,
 	source,
 }) {
-	const { createQuestionSet, createQuestionLoading } = useCreateQuestionSet(
-		{ searchquestion, setShow, setQuestionCreated, answer },
-	);
+	const { createQuestionSet, createQuestionLoading } = useCreateQuestionSet({
+		searchquestion, setShow, setQuestionCreated, answer,
+	});
 
 	return (
 		<div
