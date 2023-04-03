@@ -32,12 +32,9 @@ function BadgeUpdateCard(props) {
 
 	return (
 		<div className={`${styles.card_container} ${isLastItem ? styles.last_item : ''}`}>
-			<div
-				className={styles.display_flex}
-				style={{ justifyContent: isSingleBadgeEdit ? 'center' : 'flex-start' }}
-			>
+			<div className={styles.display_flex}>
 				<div>
-					<p style={{ color: '#4f4f4f', marginBottom: 16 }}>Medal</p>
+					<p className={styles.medal_text}>Medal</p>
 
 					<p>{medalType}</p>
 				</div>
@@ -49,7 +46,7 @@ function BadgeUpdateCard(props) {
 
 					<InputController
 						name={`${medalType}_value`}
-						value={MEDAL_IMAGE_MAPPING[medalType]?.score || undefined}
+						value={MEDAL_IMAGE_MAPPING[medalType]?.score || ''}
 						id={`${medalType}_value_input`}
 						control={control}
 						size="sm"

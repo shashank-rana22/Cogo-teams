@@ -14,8 +14,8 @@ const LoadingState = () => (
 
 			<div className={styles.lower_container}>
 
-				{[1, 2, 3, 4].map(() => (
-					<div className={styles.single_control}>
+				{[1, 2, 3, 4].map((item) => (
+					<div key={item} className={styles.single_control}>
 						<Placeholder width="240px" height="20px" style={{ marginBottom: '8px' }} />
 
 						<Placeholder width="80px" height="20px" />

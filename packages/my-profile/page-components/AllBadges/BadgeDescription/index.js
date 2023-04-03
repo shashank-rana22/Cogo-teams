@@ -1,5 +1,4 @@
 import { ProgressBar, Placeholder } from '@cogoport/components';
-import { IcCStar } from '@cogoport/icons-react';
 import { isEmpty, startCase, format } from '@cogoport/utils';
 
 import EmptyState from '../../../common/EmptyState';
@@ -15,11 +14,11 @@ function BadgeDescription(props) {
 		return (
 			<div className={styles.container}>
 				<p className={styles.heading}>
-					<Placeholder width="100%" height="24px" style={{ marginTop: '8px' }} />
+					<Placeholder width="100%" height="24px" margin="8px 0px 0px 0px" />
 				</p>
 
 				<div className={styles.display_flex}>
-					<Placeholder width="180px" height="180px" style={{ marginTop: '8px' }} />
+					<Placeholder width="180px" height="180px" margin="8px 0px 0px 0px" />
 
 					<div className={styles.details}>
 						<div className={styles.details_header}>
@@ -27,16 +26,16 @@ function BadgeDescription(props) {
 								<Placeholder width="160px" height="80px" />
 							</div>
 
-							<div className={styles.lable_value}>
+							<div className={styles.label_value}>
 								<Placeholder width="160px" height="80px" />
 							</div>
 						</div>
 
 						{
 							[1, 2].map((item) => (
-								<div key={item} className={styles.lable_value}>
+								<div key={item} className={styles.label_value}>
 									<Placeholder width="100%" height="32px" />
-									<Placeholder width="100%" height="32px" style={{ marginTop: '8px' }} />
+									<Placeholder width="100%" height="32px" margin="8px 0px 0px 0px" />
 								</div>
 							))
 						}
@@ -44,7 +43,7 @@ function BadgeDescription(props) {
 				</div>
 
 				<div>
-					<Placeholder width="100%" height="40px" style={{ margin: '16px 0' }} />
+					<Placeholder width="100%" height="40px" margin="16px" />
 				</div>
 			</div>
 		);
@@ -52,7 +51,7 @@ function BadgeDescription(props) {
 
 	if (isEmpty(badgeDetail)) {
 		return (
-			<div style={{ background: '#fff', padding: '20px 0', borderRadius: '8px' }}>
+			<div className={styles.empty_state_container}>
 				<EmptyState
 					height={220}
 					width={380}
@@ -79,20 +78,12 @@ function BadgeDescription(props) {
 							alt="Main Badge"
 						/>
 
-						{/* //Todo: stars arent available in the response */}
-						<div className={styles.stars}>
-							{[1, 2, 3].map((item) => (
-								<div key={item}>
-									<IcCStar width={10} stroke="#FFDF33" />
-								</div>
-							))}
-						</div>
 					</div>
 
 					<div className={styles.details}>
 						<div className={styles.details_header}>
-							<div className={styles.lable_value}>
-								<p className={styles.lable}>Achievement Date</p>
+							<div className={styles.label_value}>
+								<p className={styles.label}>Achievement Date</p>
 
 								<p className={styles.value}>
 									{badgeDetail.achievement_date
@@ -103,7 +94,7 @@ function BadgeDescription(props) {
 
 							{ !isEmpty(next_badge) && (
 								<div className={styles.next_unlock}>
-									<p className={styles.lable}>Next unlock</p>
+									<p className={styles.label}>Next unlock</p>
 
 									<div className={styles.next_badge}>
 										<img
@@ -120,14 +111,14 @@ function BadgeDescription(props) {
 							)}
 						</div>
 
-						<div className={styles.lable_value}>
-							<p className={styles.lable}>Number of KAMs with badge</p>
+						<div className={styles.label_value}>
+							<p className={styles.label}>Number of KAMs with badge</p>
 
 							<p className={styles.value}>{badgeDetail.kam_badge_count}</p>
 						</div>
 
-						<div className={styles.lable_value}>
-							<p className={styles.lable}>Rarity</p>
+						<div className={styles.label_value}>
+							<p className={styles.label}>Rarity</p>
 
 							<p className={styles.value}>
 								{badgeDetail.rarity}
@@ -136,7 +127,7 @@ function BadgeDescription(props) {
 						</div>
 
 						<div className={styles.description_container}>
-							<p className={styles.lable}>Description</p>
+							<p className={styles.label}>Description</p>
 
 							<p className={styles.value}>{badge_details?.[0]?.description}</p>
 						</div>
