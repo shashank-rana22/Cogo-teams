@@ -16,7 +16,6 @@ function MapView(props = {}) {
 	const {
 		stats = {},
 		statsLoading = false,
-		setCountry = () => {},
 		country = {},
 		date = {},
 		setDate = {},
