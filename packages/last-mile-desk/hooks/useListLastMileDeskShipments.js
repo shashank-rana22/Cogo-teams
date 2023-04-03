@@ -37,7 +37,7 @@ const useListLastMileDeskShipments = ({ stateProps = {} }) => {
 			setApiData(res?.data || {});
 		} catch (err) {
 			setApiData({});
-			// Toast.error(getApiErrorString(err));
+			Toast.error(err?.response?.data?.message || err?.message || 'Something went wrong !!');
 		}
 	}, [trigger, setFilters, page, filters]);
 

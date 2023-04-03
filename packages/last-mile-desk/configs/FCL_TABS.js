@@ -52,7 +52,6 @@ export const CRITICAL_TABS = {
 	container_gated_out       : { detention_days: 2 },
 	awaiting_container_return : { detention_days: 2 },
 	container_returned        : { detention_days: 0 },
-
 };
 
 export default FCL_TABS;

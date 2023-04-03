@@ -1,6 +1,6 @@
 import { cl } from '@cogoport/components';
 
-import getCriticalShipment from '../../../../helpers/getCritical';
+import getCriticalShipment from '../../../../helpers/getCriticalShipment';
 
 import Body from './Body';
 import Header from './Header';
