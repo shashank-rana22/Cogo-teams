@@ -1,7 +1,7 @@
 /* eslint-disable react/no-danger */
 import { Modal, Button, Badge, Pill, Toast } from '@cogoport/components';
 import { InputController, CheckboxController, useForm } from '@cogoport/forms';
-import { IcCLike, IcCDislike, IcMArrowBack } from '@cogoport/icons-react';
+import { IcMOverflowDot, IcMLiveChat, IcCLike, IcCDislike, IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -11,6 +11,8 @@ import React, { useState, useEffect } from 'react';
 import Spinner from '../../../../commons/Spinner';
 import useGetQuestions from '../../hooks/useGetQuestions';
 
+import FeedbackForm from './FeedbackForm';
+import useFeedback from './hooks/useFeedback';
 import RelatedQuestion from './RelatedQuestion';
 import styles from './styles.module.css';
 
@@ -32,6 +34,18 @@ function AnswerPage() {
 	const [show, setShow] = useState(false);
 	const [load, setload] = useState(true);
 	const { refetchQuestions, data: answerData, loading } = useGetQuestions({ id });
+
+	const {
+		// data = {},
+		isFeedbackAvailable = false,
+		setIsFeedbackAvailable = () => {},
+		handleSubmit: handleSubmitFeedback,
+		errors: feedbackFormErrors,
+		control: feebbackFormControl,
+		onSubmit: onSubmitFeedback,
+		answer,
+		setAnswer,
+	} = useFeedback({ answerData });
 
 	const is_positive = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive;
 
@@ -246,6 +260,26 @@ function AnswerPage() {
 					<IcCDislike fill={isLiked === 'disliked' ? 'black' : '#f8f5ec'} />
 				</div>
 
+				<div
+					role="presentation"
+					className={styles.feedback_button}
+					style={isFeedbackAvailable?.overall ? { background: '#FEDE00' } : {}}
+					onClick={() => setIsFeedbackAvailable((pv) => ({
+						overall: !(pv.overall),
+					}))}
+				>
+					{isFeedbackAvailable ? (
+						<IcMLiveChat />
+					) : (
+						<i className={styles.dot_icon}>
+							<IcMOverflowDot />
+						</i>
+					)}
+					<div className={styles.feedback_title}>
+						I have a feedback
+					</div>
+				</div>
+
 				<Modal
 					size="md"
 					show={show}
@@ -309,6 +343,24 @@ function AnswerPage() {
 					{format(answerData?.updated_at, 'dd MMM yyyy')}
 				</span>
 			</div>
+
+			<div className={styles.line} />
+
+			{
+				isFeedbackAvailable?.overall ? (
+					<FeedbackForm
+						answerData={answerData}
+						isFeedbackAvailable={isFeedbackAvailable}
+						setIsFeedbackAvailable={setIsFeedbackAvailable}
+						handleSubmit={handleSubmitFeedback}
+						errors={feedbackFormErrors}
+						control={feebbackFormControl}
+						onSubmit={onSubmitFeedback}
+						answer={answer}
+						setAnswer={setAnswer}
+					/>
+				) : null
+			}
 
 			<RelatedQuestion query_name={answerData?.query_name} question_abstract={answerData?.question_abstract} />
 		</div>

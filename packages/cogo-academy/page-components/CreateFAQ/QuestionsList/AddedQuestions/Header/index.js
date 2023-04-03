@@ -61,6 +61,7 @@ function Header({
 					<TabPanel name="draft" title="Draft" />
 					<TabPanel name="inactive" title="Inactive" />
 					<TabPanel name="requested" title="New Requests" badge={requestedQuestionCount || ''} />
+					<TabPanel name="feedbacks" title="Feedbacks" badge="5" />
 				</Tabs>
 			</div>
 		</div>

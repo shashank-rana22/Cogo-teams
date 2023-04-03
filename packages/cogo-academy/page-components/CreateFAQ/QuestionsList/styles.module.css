@@ -1,45 +1,78 @@
 .container {
-	width: 100%;
-	margin-top: 32px;
+    width: 100%;
+    margin-top: 32px;
 }
 
 .question {
-	white-space: initial;
+    white-space: initial;
 }
 
 .topics {
-	display: flex;
-	flex-wrap: wrap;
-	margin-right: 4;
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 4;
 }
 
 .tags {
-	display: flex;
-	flex-wrap: wrap;
-	margin-right: 4;
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 4;
 }
 
 .button_container {
-	display: flex;
-	margin: 8px 0;
+    display: flex;
+    margin: 8px 0;
 }
 
 .modal_container {
-	background-color: none;
+    background-color: none;
 
-	:global {
-		.ui_modal_backdrop {
-			background-color: rgb(251 251 252 / 0%);
-		}
-	}
+    :global {
+        .ui_modal_backdrop {
+            background-color: rgb(251 251 252 / 0%);
+        }
+    }
 
-	@media (max-width: 768px) {
-		width: 300px !important;
+    @media (max-width: 768px) {
+        width: 300px !important;
 
-		:global {
-			.ui_modal_backdrop {
-				background-color: rgb(241 241 244 / 0%);
-			}
-		}
-	}
+        :global {
+            .ui_modal_backdrop {
+                background-color: rgb(241 241 244 / 0%);
+            }
+        }
+    }
+}
+
+.tags_and_topics_value {
+    display: "flex";
+    flex-direction: row;
+}
+
+.chips_container {
+    margin-right: 8px;
+}
+
+.feedback_count_space {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 24px;
+}
+
+.feedback_count {
+    margin-left: 4px;
+}
+
+.pills {
+    :global {
+        .ui_pill_container.ui_ps_size_sm {
+            padding: 4px 8px;
+            font-size: 10px;
+            font-weight: 600;
+            background: white;
+            border: 1px solid #ffe4af;
+            border-radius: 16px;
+        }
+    }
 }

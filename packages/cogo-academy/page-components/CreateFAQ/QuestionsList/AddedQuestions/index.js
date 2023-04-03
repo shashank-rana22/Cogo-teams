@@ -61,6 +61,12 @@ function AddedQuestions(props) {
 						text="There are no inactive questions right now."
 					/>
 				);
+			} if (activeList === 'feedbacks') {
+				return (
+					<EmptyState
+						text="There are no feedbacks right now."
+					/>
+				);
 			}
 			return (
 				<EmptyState

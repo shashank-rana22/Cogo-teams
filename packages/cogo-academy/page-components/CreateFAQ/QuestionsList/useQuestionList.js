@@ -9,13 +9,14 @@ import { useState, useEffect, useCallback } from 'react';
 import PopOverContent from '../../../commons/PopoverContent';
 
 import styles from './styles.module.css';
+import feedbackTableColumns from './utils/getFeedbackTableColumns';
 
 const FILTER_MAPPING = {
-
 	published : { state: 'published', status: 'active' },
 	draft     : { state: 'draft', status: 'active' },
 	inactive  : { status: 'inactive' },
 	requested : { state: 'requested', status: 'active' },
+	feedbacks : { state: 'published', status: 'active' },
 };
 
 const addedQuestionsColumns = ({
@@ -23,100 +24,105 @@ const addedQuestionsColumns = ({
 	onClickEditButton,
 	deactivateQuestion,
 	onClickViewButton = () => {},
-
 	deleteitem,
 	setDeleteitem = () => {},
-}) => [
-	{
-		Header   : 'QUESTIONS',
-		accessor : (items) => (
-			<div className={styles.question}>
-				{items?.question_abstract}
-			</div>
-		),
-	},
-	{
-		Header   : 'TOPICS',
-		accessor : (items) => (items?.faq_topics?.length > 0 ? (
-			<div className={styles.topics}>
-				{items.faq_topics.map((topic) => {
-					const { display_name } = topic || {};
-					return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
-				})}
-			</div>
-		) : '-'),
-	},
-	{
-		Header   : 'TAGS',
-		accessor : (items) => (items?.faq_tags?.length > 0 ? (
-			<div className={styles.tags}>
-				{items.faq_tags.map((tag) => {
-					const { display_name } = tag || {};
-					return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
-				})}
-			</div>
-		) : '-'),
-	},
-	{
-		Header   : 'LAST UPDATED AT',
-		accessor : (items) => {
-			const formatDate = format(items?.updated_at || items?.created_at, 'dd MMM yyyy hh:mm a');
-			return (
-				<div>
-					{formatDate}
+}) => {
+	if (activeList === 'feedbacks') {
+		return feedbackTableColumns({ onClickEditButton, onClickViewButton });
+	}
+
+	return [
+		{
+			Header   : 'QUESTIONS',
+			accessor : (items) => (
+				<div className={styles.question}>
+					{items?.question_abstract}
 				</div>
-			);
+			),
 		},
-	},
-	{
-		Header   : 'ACTIONS',
-		accessor : (items) => (
-			<div className={styles.button_container}>
-				{!['inactive', 'draft'].includes(activeList)
-					? (
-						<Button
-							type="button"
-							themeType="primary"
-							size="sm"
-							style={{ marginRight: 8 }}
-							onClick={() => onClickViewButton(items?.id)}
-						>
-							VIEW
-						</Button>
-					)
-					: null}
-				<Button
-					type="button"
-					themeType="secondary"
-					size="sm"
-					style={{ marginRight: 8 }}
-					onClick={() => onClickEditButton(items?.id)}
-				>
-					EDIT
-				</Button>
-				{activeList !== 'inactive' ? (
-					<Popover
-						content={(
-							<PopOverContent
-								source="question"
-								onCLickYesButton={() => deactivateQuestion(deleteitem.id)}
-							/>
-						)}
+		{
+			Header   : 'TOPICS',
+			accessor : (items) => (items?.faq_topics?.length > 0 ? (
+				<div className={styles.topics}>
+					{items.faq_topics.map((topic) => {
+						const { display_name } = topic || {};
+						return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
+					})}
+				</div>
+			) : '-'),
+		},
+		{
+			Header   : 'TAGS',
+			accessor : (items) => (items?.faq_tags?.length > 0 ? (
+				<div className={styles.tags}>
+					{items.faq_tags.map((tag) => {
+						const { display_name } = tag || {};
+						return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
+					})}
+				</div>
+			) : '-'),
+		},
+		{
+			Header   : 'LAST UPDATED AT',
+			accessor : (items) => {
+				const formatDate = format(items?.updated_at || items?.created_at, 'dd MMM yyyy hh:mm a');
+				return (
+					<div>
+						{formatDate}
+					</div>
+				);
+			},
+		},
+		{
+			Header   : 'ACTIONS',
+			accessor : (items) => (
+				<div className={styles.button_container}>
+					{!['inactive', 'draft'].includes(activeList)
+						? (
+							<Button
+								type="button"
+								themeType="primary"
+								size="sm"
+								style={{ marginRight: 8 }}
+								onClick={() => onClickViewButton(items?.id)}
+							>
+								VIEW
+							</Button>
+						)
+						: null}
+					<Button
+						type="button"
+						themeType="secondary"
+						size="sm"
+						style={{ marginRight: 8 }}
+						onClick={() => onClickEditButton(items?.id)}
 					>
-						<IcMDelete
-							height={20}
-							width={20}
-							style={{ cursor: 'pointer' }}
-							onClick={() => { setDeleteitem(items); }}
-						/>
-					</Popover>
+						EDIT
+					</Button>
+					{activeList !== 'inactive' ? (
+						<Popover
+							content={(
+								<PopOverContent
+									source="question"
+									onCLickYesButton={() => deactivateQuestion(deleteitem.id)}
+								/>
+							)}
+						>
+							<IcMDelete
+								height={20}
+								width={20}
+								style={{ cursor: 'pointer' }}
+								onClick={() => { setDeleteitem(items); }}
+							/>
+						</Popover>
 
-				) : null}
+					) : null}
 
-			</div>
-		),
-	},
-];
+				</div>
+			),
+		},
+	];
+};
 
 const requestedQuestionsColumns = ({
 	deactivateQuestion, onClickEditButton,
