@@ -16,8 +16,9 @@ function ViewQuestions({ question_id = '', test_id = '' }) {
 	if (loading) {
 		return (
 			<div className={styles.placeholder_container}>
-				{Array(3).fill('').map(() => (
+				{[...Array(3).keys()].map((item) => (
 					<div
+						key={item}
 						className={styles.placeholder_inner_container}
 					>
 						<Placeholder height="24px" />

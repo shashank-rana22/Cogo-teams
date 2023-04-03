@@ -76,7 +76,6 @@ function TestDetailsModal(props) {
 			</Modal.Body>
 
 			<Modal.Footer align="right">
-
 				<Button
 					loading={loading}
 					size="md"
@@ -89,9 +88,7 @@ function TestDetailsModal(props) {
 				>
 					Publish Test
 				</Button>
-
 			</Modal.Footer>
-
 		</Modal>
 	);
 }
