@@ -1,5 +1,8 @@
+import Spinner from '../../commons/Spinner';
+
 import Eligible from './Eligible';
 import NotEligible from './NotEligible';
+import styles from './styles.module.css';
 import useCheckEligibility from './useCheckEligibility';
 
 const ELIGIBILITY_SCREEN_MAPPING = {
@@ -29,7 +32,17 @@ function TakeTest() {
 	const { is_valid_user, is_active, attempts_left } = data || {};
 
 	if (loading) {
-		return 'loading ...';
+		return (
+			<div className={styles.spinner}>
+				<Spinner
+					height={60}
+					width={60}
+					borderWidth="6px"
+					outerBorderColor="#FBD69F"
+					spinBorderColor="red"
+				/>
+			</div>
+		);
 	}
 
 	if (!is_valid_user) {

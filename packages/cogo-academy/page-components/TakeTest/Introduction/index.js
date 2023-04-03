@@ -48,8 +48,8 @@ function Introduction({ setActiveState, testData = {} }) {
 	const items = [
 		'Exam can be only taken in full screen',
 		'To Start test, please click on Begin Test',
-		// eslint-disable-next-line max-len
-		'Changing tabs is not allowed in between exam, If you switch tabs more than 2 times, your exam will be submitted automatically',
+		`Changing tabs is not allowed in between exam, If 
+		you switch tabs more than 2 times, your exam will be submitted automatically`,
 		'To submit the test, please click on submit test button',
 		'click on cancel if you dont want to start exam now',
 		'The timer will start once you start the exam',
