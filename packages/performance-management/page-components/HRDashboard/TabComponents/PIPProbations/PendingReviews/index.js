@@ -10,6 +10,7 @@ import styles from './styles.module.css';
 
 function PendingReviews({
 	activeTab,
+	logType,
 	setItem = () => {},
 	setModal = () => {},
 	refetchList = false,
@@ -23,7 +24,7 @@ function PendingReviews({
 		setParams,
 		setPage,
 		onSubmitModal,
-	} = useListLogs('hr_pip_pending_reviews');
+	} = useListLogs({ source: 'hr_pip_pending_reviews', logType });
 
 	const { list = [], pagination_data = {} } = employeeData;
 	const { page_limit, page, total_count } = pagination_data;

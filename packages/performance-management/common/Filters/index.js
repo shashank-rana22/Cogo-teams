@@ -44,14 +44,13 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 	const cogoUsersControl = useListReassignControls();
 
 	useEffect(() => {
-		const { department, designation, status: Status, manager_id, year, month, date_range } = values;
+		const { department, designation, manager_id, year, month, date_range } = values;
 
 		setParams((previousParams) => ({
 			...previousParams,
 			Q           : query || undefined,
 			Department  : department || undefined,
 			Designation : designation || undefined,
-			LogType     : Status || undefined,
 			Page        : 1,
 			Year        : year || undefined,
 			Month       : month || undefined,

@@ -35,6 +35,7 @@ function CreatePip({ item = {}, status = '', setItem = () => {}, setDisableNext 
 				<Datepicker
 					placeholder="Enter Date"
 					showTimeSelect
+					isPreviousDaysAllowed
 					dateFormat="dd/MMM/yyyy"
 					name="startDate"
 					onChange={(val) => clickedStartDate(val)}

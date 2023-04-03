@@ -43,8 +43,13 @@ function HRDashboard() {
 					<TabPanel name="feedbacks" title="KPI Feedbacks">
 						<KPIFeedbacks modal={modal} setModal={setModal} />
 					</TabPanel>
-					<TabPanel name="pip_probations" title="PIP / Probations">
-						<PIPProbations modal={modal} setModal={setModal} />
+
+					<TabPanel name="pip" title="PIP">
+						<PIPProbations key="pip" modal={modal} setModal={setModal} logType={activeTab} />
+					</TabPanel>
+
+					<TabPanel name="probation" title="Probation">
+						<PIPProbations key="probation" modal={modal} setModal={setModal} logType={activeTab} />
 					</TabPanel>
 				</Tabs>
 			</div>

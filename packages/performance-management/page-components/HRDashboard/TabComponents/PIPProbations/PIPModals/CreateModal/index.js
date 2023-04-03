@@ -6,18 +6,18 @@ import useCreateLog from '../../../../../../hooks/useCreateLog';
 import DecisionModal from '../UpdateModal/DecisionModal';
 
 import EmployeesTable from './EmloyeesTable';
-import styles from './styles.module.css';
 
 function CreateModal({
 	item = {},
 	source = 'log_modal',
+	logType,
 	modal,
 	setModal = () => {},
 	setItem = () => {},
 	setRefetchList = () => {},
 }) {
 	const { onSubmitCreate = () => {} } = useCreateLog();
-	const [status, setStatus] = useState('');
+	// const [status, setStatus] = useState('');
 	const [disableNext, setDisableNext] = useState('');
 
 	const onSubmitModalAction = () => {
@@ -27,11 +27,10 @@ function CreateModal({
 	};
 
 	const clickedBack = () => {
-		if (status === '') {
-			setModal('');
-		}
+		// if (status === '') {
+		// }
 		if (isEmpty(item)) {
-			setStatus('');
+			setModal('');
 		} else {
 			setItem({});
 		}
@@ -41,49 +40,48 @@ function CreateModal({
 		if (source === 'manual_feedback') {
 			return (<EmployeesTable source setItem={setItem} />);
 		}
-		if (status) {
-			if (isEmpty(item)) {
-				return (
-					<EmployeesTable source="log_modal" setItem={setItem} />
-				);
-			}
+		// if (logType) {
+		if (isEmpty(item)) {
 			return (
-				<DecisionModal
-					item={item}
-					setItem={setItem}
-					status={status}
-					type="create"
-					setDisableNext={setDisableNext}
-				/>
+				<EmployeesTable source="log_modal" setItem={setItem} />
 			);
 		}
-
 		return (
-			<div>
-				<p style={{ padding: '8px' }}>Do you wish to create new Probation or PIP</p>
-				<div className={styles.pip_select}>
-					<Button
-						size="xl"
-						className={styles.pip_select_btn}
-						themeType="secondary"
-						onClick={() => setStatus('probation')}
-						style={{ width: '120px' }}
-					>
-						Probations
-					</Button>
-
-					<Button
-						size="xl"
-						className={styles.pip_select_btn}
-						themeType="secondary"
-						onClick={() => setStatus('pip')}
-						style={{ width: '120px' }}
-					>
-						PIP
-					</Button>
-				</div>
-			</div>
+			<DecisionModal
+				item={item}
+				setItem={setItem}
+				status={logType}
+				type="create"
+				setDisableNext={setDisableNext}
+			/>
 		);
+
+		// return (
+		// 	<div>
+		// 		<p style={{ padding: '8px' }}>Do you wish to create new Probation or PIP</p>
+		// 		<div className={styles.pip_select}>
+		// 			<Button
+		// 				size="xl"
+		// 				className={styles.pip_select_btn}
+		// 				themeType="secondary"
+		// 				onClick={() => setStatus('probation')}
+		// 				style={{ width: '120px' }}
+		// 			>
+		// 				Probations
+		// 			</Button>
+
+		// 			<Button
+		// 				size="xl"
+		// 				className={styles.pip_select_btn}
+		// 				themeType="secondary"
+		// 				onClick={() => setStatus('pip')}
+		// 				style={{ width: '120px' }}
+		// 			>
+		// 				PIP
+		// 			</Button>
+		// 		</div>
+		// 	</div>
+		// );
 	};
 
 	return (
@@ -92,11 +90,11 @@ function CreateModal({
 			onClose={() => {
 				setModal('');
 				setItem({});
-				setStatus('');
+				// setStatus('');
 			}}
 			size="lg"
 		>
-			<Modal.Header title={`Create ${startCase(status)}`} />
+			<Modal.Header title={`Create ${startCase(logType)}`} />
 			<Modal.Body
 				style={{ maxHeight: '500px' }}
 			>
@@ -108,7 +106,7 @@ function CreateModal({
 					themeType="tertiary"
 					onClick={clickedBack}
 				>
-					{status ? 'Back' : 'Close'}
+					{isEmpty(item) ? 'Close' : 'Back'}
 
 				</Button>
 
@@ -117,7 +115,7 @@ function CreateModal({
 						size="md"
 						style={{ marginLeft: '8px' }}
 						onClick={() => {
-							onSubmitCreate(item, status, onSubmitModalAction);
+							onSubmitCreate(item, logType, onSubmitModalAction);
 						}}
 						disabled={disableNext}
 					>

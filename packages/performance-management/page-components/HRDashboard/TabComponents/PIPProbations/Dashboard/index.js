@@ -10,7 +10,9 @@ import Statistics from './Statistics';
 import styles from './styles.module.css';
 
 function Dashboard({
-	activeTab, setItem = () => {},
+	activeTab,
+	logType,
+	setItem = () => {},
 	setOpenLogModal = () => {},
 	setModal = () => {},
 	refetchList = false,
@@ -23,7 +25,7 @@ function Dashboard({
 		setParams,
 		setPage,
 		onSubmitModal,
-	} = useListLogs('hr_pip_dashboard');
+	} = useListLogs({ source: 'hr_pip_dashboard', logType });
 
 	const { list = [], pagination_data = {} } = employeeData;
 	const { page_limit, page, total_count } = pagination_data;

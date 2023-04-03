@@ -1,20 +1,24 @@
 import { Toast, Tabs, TabPanel, Button } from '@cogoport/components';
 import { IcMDownload, IcMEdit, IcMUpload } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import modalComponentsMapping from '../../../../constants/modal-components-mapping';
 import tabPanelComponentMapping from '../../../../constants/tab-pannel-component-mapping';
+import useDownloadLogCsv from '../../../../hooks/useDownloadLogCSV';
 import useUpdateLog from '../../../../hooks/useUpdateLog';
 
 import PendingReviews from './PendingReviews';
 import styles from './styles.module.css';
 
-function PIPProbations({ source = 'hr_dashboard', modal = '', setModal = () => {} }) {
+function PIPProbations({ source = 'hr_dashboard', modal = '', setModal = () => {}, logType = '' }) {
 	const [item, setItem] = useState({});
 	const [activeTab, setActiveTab] = useState('dashboard');
 	const [refetchList, setRefetchList] = useState(false);
 
 	const { onUpdateLog = () => {} } = useUpdateLog();
+
+	const { downloadLogCSV } = useDownloadLogCsv();
 
 	const onSubmitReset = () => {
 		setModal('');
@@ -67,6 +71,7 @@ function PIPProbations({ source = 'hr_dashboard', modal = '', setModal = () => {
 									>
 										<Component
 											activeTab={activeTab}
+											logType={logType}
 											item={item}
 											setItem={setItem}
 											setModal={setModal}
@@ -94,10 +99,12 @@ function PIPProbations({ source = 'hr_dashboard', modal = '', setModal = () => {
 							size="lg"
 							themeType="tertiary"
 							style={{ marginRight: '16px' }}
-							onClick={() => setModal('download')}
+							onClick={() => downloadLogCSV(logType)}
 						>
 							<IcMDownload style={{ marginRight: '4px' }} />
-							Probation CSV
+							{startCase(logType)}
+							{' '}
+							CSV
 						</Button>
 
 						<Button
@@ -136,6 +143,7 @@ function PIPProbations({ source = 'hr_dashboard', modal = '', setModal = () => {
 						onSubmit={onSubmit}
 						setRefetchList={setRefetchList}
 						source={source}
+						logType={logType}
 					/>
 				)}
 

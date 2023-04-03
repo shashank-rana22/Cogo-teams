@@ -58,7 +58,7 @@ function UpdatePip({
 			/>
 
 			<div className={styles.dates}>
-				{value === 'Extended' && (
+				{value === 'extended' && (
 					<div className={styles.extend_date}>
 						<div className={styles.lable}>
 							{` ( Will be Extended to : ${format(extended_date, 'dd-MMM-yyyy')} )`}

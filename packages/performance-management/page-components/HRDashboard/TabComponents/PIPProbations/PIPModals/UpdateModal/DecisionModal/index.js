@@ -116,7 +116,6 @@ function DecisionModal({
 					) : (
 						<Update
 							item={item}
-							status={status}
 							setItem={setItem}
 							setDisableNext={setDisableNext}
 						/>

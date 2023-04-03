@@ -10,20 +10,14 @@ import getMonthYearOptions from '../../../../../../utils/getMonthOptions';
 
 import styles from './styles.module.css';
 
-const sourceUploadTypeMapping = {
-	kpi_tab_upload : ['normalization'],
-	hr_dashboard   : ['probation', 'pip'],
-};
-
-function PipUploadModal({ modal, setModal = () => {}, source = 'pip_probation' }) {
+function PipUploadModal({ modal, setModal = () => {}, source = 'pip_probation', logType }) {
 	const [files, setFiles] = useState({});
-	const [type, setType] = useState('');
 	const [year, setYear] = useState('');
 	const [month, setMonth] = useState('');
 
-	const { monthOptions, yearOptions } = getMonthYearOptions(year);
+	const type = source === 'kpi_tab_upload' ? 'normalization' : logType;
 
-	const uploadTypes = sourceUploadTypeMapping[source];
+	const { monthOptions, yearOptions } = getMonthYearOptions(year);
 
 	const [{ loading : uploadLoading = false }, trigger] = useIrisRequest({
 		url    : 'post_iris_create_file',
@@ -72,121 +66,82 @@ function PipUploadModal({ modal, setModal = () => {}, source = 'pip_probation' }
 			show={modal === 'upload' || 'kpi_tab_upload'}
 			onClose={() => setModal('')}
 		>
-			<Modal.Header title="Upload CSV" />
+			<Modal.Header title={`Upload ${startCase(type)} CSV`} />
 			<div className={styles.upload_modal}>
 				<Modal.Body>
 					<div className={styles.upload_container}>
-						{type ? (
-							<>
-								<div
-									className={styles.upload_info}
-									style={{ background: files.normalizationCSV ? '#e0e0e0' : '' }}
-								>
-									<div>
-										<div className={styles.upload_header}>
-											<div className={styles.label}>
-												{`Upload ${startCase(type)} CSV`}
-											</div>
-											{type === 'normalization' && (
-												<div className={styles.filters}>
-													<Select
-														value={year}
-														onChange={setYear}
-														placeholder="Year..."
-														isClearable={!month}
-														style={{ marginRight: '8px' }}
-														options={yearOptions}
-													/>
-													<Select
-														value={month}
-														onChange={setMonth}
-														placeholder="Month..."
-														disabled={!year}
-														isClearable
-														options={monthOptions}
-													/>
-												</div>
-											) }
-
-											<Tooltip
-												theme="light"
-												placement="top-end"
-												animation="shift-away"
-												content={getToolTip('Get Sample PIP csv')}
-											>
-												<div
-													className={styles.info_tool}
-													role="button"
-													onClick={() => downloadOnboardingSample()}
-													tabIndex={0}
-												>
-													<IcMInfo width={20} height={20} />
-												</div>
-											</Tooltip>
+						<div
+							className={styles.upload_info}
+							style={{ background: files.normalizationCSV ? '#e0e0e0' : '' }}
+						>
+							<div>
+								<div className={styles.upload_header}>
+									<div className={styles.label}>
+										{`Upload ${startCase(type)} CSV`}
+									</div>
+									{type === 'normalization' && (
+										<div className={styles.filters}>
+											<Select
+												value={year}
+												onChange={setYear}
+												placeholder="Year..."
+												isClearable={!month}
+												style={{ marginRight: '8px' }}
+												options={yearOptions}
+											/>
+											<Select
+												value={month}
+												onChange={setMonth}
+												placeholder="Month..."
+												disabled={!year}
+												isClearable
+												options={monthOptions}
+											/>
 										</div>
-										<UploadController
-											control={control}
-											errors={errors}
-											name="uploaded_csv_file"
-											accept=".csv"
-										/>
-									</div>
+									) }
 
-								</div>
-								<div className={styles.submit}>
-									<Button
-										themeType="secondary"
-										onClick={() => setType('')}
-										style={{ marginRight: '8px' }}
+									<Tooltip
+										theme="light"
+										placement="top-end"
+										animation="shift-away"
+										content={getToolTip('Get Sample PIP csv')}
 									>
-										Back
-									</Button>
-									<Button
-										themeType="primary"
-										onClick={() => uploadCSVs()}
-										disabled={!isUploadPossible || isEmpty(files?.uploadedCSVFile)}
-										loading={uploadLoading}
-									>
-										Submit
-									</Button>
+										<div
+											className={styles.info_tool}
+											role="button"
+											onClick={() => downloadOnboardingSample()}
+											tabIndex={0}
+										>
+											<IcMInfo width={20} height={20} />
+										</div>
+									</Tooltip>
 								</div>
+								<UploadController
+									control={control}
+									errors={errors}
+									name="uploaded_csv_file"
+									accept=".csv"
+								/>
+							</div>
 
-							</>
-
-						) : (
-							<>
-								<div
-									className={styles.upload_info}
-									style={{ background: files.normalizationCSV ? '#e0e0e0' : '' }}
-								>
-									<p style={{ padding: '8px' }}>What do you wish to upload CSV for?</p>
-									<div className={styles.pip_select}>
-										{(uploadTypes || []).map((uploadType) => (
-											<Button
-												key={uploadType}
-												size="xl"
-												className={styles.pip_select_btn}
-												themeType="secondary"
-												onClick={() => setType(uploadType)}
-												style={{ width: '140px' }}
-											>
-												{startCase(uploadType)}
-											</Button>
-										))}
-									</div>
-								</div>
-
-								<div className={styles.submit}>
-									<Button
-										themeType="secondary"
-										onClick={() => setModal('')}
-										style={{ marginRight: '8px' }}
-									>
-										Close
-									</Button>
-								</div>
-							</>
-						)}
+						</div>
+						<div className={styles.submit}>
+							<Button
+								themeType="secondary"
+								onClick={() => setModal('')}
+								style={{ marginRight: '8px' }}
+							>
+								Close
+							</Button>
+							<Button
+								themeType="primary"
+								onClick={() => uploadCSVs()}
+								disabled={!isUploadPossible || isEmpty(files?.uploadedCSVFile)}
+								loading={uploadLoading}
+							>
+								Submit
+							</Button>
+						</div>
 					</div>
 				</Modal.Body>
 			</div>
