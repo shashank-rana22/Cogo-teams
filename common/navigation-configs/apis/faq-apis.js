@@ -346,6 +346,11 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
+			api          : 'get_test_sheet',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
 			api          : 'bulk_create_stand_alone_question',
 			access_type  : 'private',
 			service_name : 'cogo_academy',

@@ -3,20 +3,21 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 
-function useCreateTest({ setActiveStepper }) {
+function useCreateTest({ setActiveStepper = '' }) {
 	const router = useRouter();
+	const test_id = router.query?.id;
 
 	const [{ loading = false }, trigger] = useRequest({
-		url    : 'create_test',
+		url    : 'update_test',
 		method : 'POST',
 	}, { manual: true });
 
-	const createTest = async ({ data, idArray, next }) => {
+	const createTest = async ({ idArray = [], next, uploadDocument = '' }) => {
 		try {
 			const res = await trigger({
 				data: {
-					name                  : data?.name,
-					cogo_entity_id      		: data?.cogo_entity_id,
+					id                    : test_id,
+					file_url              : uploadDocument,
 					set_wise_distribution : [
 						...idArray.map((id) => ({ test_question_set_id: id, question_type: 'case_study' })),
 						...idArray.map((id) => ({ test_question_set_id: id, question_type: 'stand_alone' }))],

@@ -6,7 +6,7 @@ import { useRequest } from '@cogoport/request';
 function useUpdateTest() {
 	const router = useRouter();
 	const [{ loading = false }, trigger] = useRequest({
-		url    : 'update_test',
+		url    : '/update_test',
 		method : 'POST',
 	}, { manual: true });
 

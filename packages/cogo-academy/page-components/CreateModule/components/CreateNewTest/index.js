@@ -14,7 +14,7 @@ function CreateTest() {
 	const router = useRouter();
 	const test_id = router.query?.id;
 
-	const [activeStepper, setActiveStepper] = useState(test_id ? 'review_and_criteria' : 'details_and_questions');
+	const [activeStepper, setActiveStepper] = useState('details_and_questions');
 
 	const {
 		loading,
@@ -46,7 +46,7 @@ function CreateTest() {
 	useEffect(() => {
 		if (!isEmpty(test_id)) { getTest({ test_id }); }
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [test_id]);
+	}, [test_id, activeStepper]);
 
 	const { component: ActiveComponent, props: activeComponentProps } = COMPONENT_MAPPING[activeStepper];
 

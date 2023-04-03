@@ -1,17 +1,38 @@
+import { Button } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
-import { IcMArrowBack } from '@cogoport/icons-react';
+import { IcMArrowBack, IcMDownload } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import getElementController from '../../../../../../../../configs/getElementController';
+import useCreateNewTest from '../../../../../../hooks/useCreateNewTest';
+import useGetTestSheet from '../../../../../../hooks/useGetTestSheet';
 import useGetUserGroups from '../../../../../../hooks/useGetUserGroups';
 
 import getControls from './controls';
 import styles from './styles.module.css';
 
-function CreateNewTest({ control, errors, data, setValue, watch }) {
-	const [uploadDocument, setUploadDocument] = useState();
+function CreateNewTest({
+	control, errors, data, setValue, watch, handleSubmit, uploadDocument, setUploadDocument,
+}) {
 	const router = useRouter();
+
+	const test_sheet_id = router.query?.test_sheet_id;
+
+	const { loading, createNewTest } = useCreateNewTest();
+
+	const { loading:test_sheet_loading, data: test_sheet_data, getTestSheet } = useGetTestSheet();
+
+	const select_user_group = watch('select_user_group') || [];
+
+	const radioGroupVal = watch('select_users') || '';
+
+	const { audienceOptions = [] } = useGetUserGroups();
+
+	const controls = useMemo(
+		() => getControls([...audienceOptions] || [], (select_user_group.length === 0)),
+		[select_user_group.length, audienceOptions],
+	);
 
 	const onNavigate = () => {
 		const href = '/learning?activeTab=test_module';
@@ -26,16 +47,6 @@ function CreateNewTest({ control, errors, data, setValue, watch }) {
 		setValue('name', name);
 		setValue('cogo_entity_id', id);
 	}, [data, setValue]);
-
-	const select_user_group = watch('select_user_group') || [];
-
-	const { audienceOptions = [] } = useGetUserGroups();
-
-	const controls = useMemo(
-		() => getControls([...audienceOptions] || [], (select_user_group.length === 0)),
-		[select_user_group.length, audienceOptions],
-	);
-	const radioGroupVal = watch('select_users') || '';
 
 	return (
 		<div>
@@ -53,10 +64,12 @@ function CreateNewTest({ control, errors, data, setValue, watch }) {
 					if (name === 'select_entity_usergroups') {
 						return (
 							<div className={styles.control_container} key={name}>
+
 								<div className={`${styles.label}`}>
 									{label}
 									<sup className={styles.sup}>*</sup>
 								</div>
+
 								<div className={styles.control_type}>
 
 									{subControls.map((item) => {
@@ -95,18 +108,80 @@ function CreateNewTest({ control, errors, data, setValue, watch }) {
 						</div>
 					);
 				})}
+				{radioGroupVal === 'all' && (
+
+					<Button
+						size="sm"
+						themeType="primary"
+						className={styles.btn}
+						loading={loading}
+						onClick={
+							handleSubmit((values) => {
+								createNewTest({ data: values });
+							})
+						}
+					>
+						save
+					</Button>
+				)}
 			</div>
 
 			{radioGroupVal === 'excel' && (
-				<FileUploader
-					className={styles.file_select}
-					showProgress
-					draggable
-					value={uploadDocument}
-					onChange={setUploadDocument}
-					accept=".xlsx,.csv"
-				/>
+				<>
+					<div className={styles.btn_container}>
+
+						<Button
+							size="sm"
+							themeType="primary"
+							onClick={
+							handleSubmit((values) => {
+								createNewTest({ data: values });
+							})
+						}
+						>
+							Save and Generate
+						</Button>
+
+						<Button
+							size="sm"
+							themeType="secondary"
+							loading={test_sheet_loading}
+							onClick={() => {
+								getTestSheet(test_sheet_id);
+							}}
+						>
+							Refresh
+						</Button>
+
+						{test_sheet_data.test_sheet_data?.status === 'generated' && (
+							<div
+								className={styles.sample_div}
+								role="presentation"
+								onClick={() => window.open(
+									test_sheet_data.test_sheet_data?.file_url,
+									'_blank',
+								)}
+							>
+								<IcMDownload />
+								<div className={styles.sample_text}>Download Excel Format</div>
+							</div>
+						)}
+
+					</div>
+
+					{test_sheet_data.test_sheet_data?.status === 'generated' && (
+						<FileUploader
+							className={styles.file_select}
+							showProgress
+							draggable
+							value={uploadDocument}
+							onChange={setUploadDocument}
+							accept=".xlsx,.csv"
+						/>
+					)}
+				</>
 			)}
+
 		</div>
 	);
 }

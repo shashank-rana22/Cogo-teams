@@ -9,7 +9,7 @@ import QuestionSet from './components/QuestionSet';
 import TestDetails from './components/TestDetails';
 import styles from './styles.module.css';
 
-function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: getLoading }) {
+function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: getLoading, test_id }) {
 	const [showQuestionSet, setShowQuestionSet] = useState(false);
 
 	const [idArray, setIdArray] = useState([]);
@@ -18,16 +18,19 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 
 	const { loading, createTest } = useCreateTest({ setTestId, setActiveStepper });
 
+	const [uploadDocument, setUploadDocument] = useState();
+
 	const { set_data = [] } = data || {};
 
 	const handleChange = ({ type }) => {
-		handleSubmit((values) => {
-			if (isEmpty(idArray)) {
-				Toast.error('Atleast one of the Question Sets must be selected');
-			} else {
-				createTest({ data: values, idArray, next: type === 'save_as_draft' ? 'draft' : 'criteria' });
-			}
-		})();
+		// handleSubmit((values) => {
+		// 	if (isEmpty(idArray)) {
+		// 		Toast.error('Atleast one of the Question Sets must be selected');
+		// 	} else {
+		// 		createTest({ idArray, next: type === 'save_as_draft' ? 'draft' : 'criteria', uploadDocument });
+		// 	}
+		// })();
+		createTest({ idArray, next: type === 'save_as_draft' ? 'draft' : 'criteria', uploadDocument });
 	};
 
 	useEffect(() => {
@@ -39,10 +42,19 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 
 	return (
 		<div className={styles.container}>
-			<TestDetails control={control} errors={errors} data={data} setValue={setValue} watch={watch} />
+			<TestDetails
+				control={control}
+				errors={errors}
+				data={data}
+				setValue={setValue}
+				watch={watch}
+				handleSubmit={handleSubmit}
+				uploadDocument={uploadDocument}
+				setUploadDocument={setUploadDocument}
+			/>
 
 			<div className={styles.btn_container}>
-				{!showQuestionSet ? (
+				{(!showQuestionSet && test_id) ? (
 					<Button
 						type="button"
 						onClick={() => setShowQuestionSet(true)}

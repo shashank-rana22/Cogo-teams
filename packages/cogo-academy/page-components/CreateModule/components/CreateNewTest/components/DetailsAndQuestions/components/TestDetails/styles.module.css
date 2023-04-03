@@ -119,3 +119,26 @@
 .input_wrapper:nth-child(2) {
 	flex-grow: 1;
 }
+
+.sample_div {
+	display: flex;
+	align-items: center;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.sample_text {
+	margin-left: 4px;
+	font-size: 12px;
+	text-decoration: underline;
+}
+
+.btn_container{
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 10px;
+}
+
+.btn_container > *{
+	margin-left: 5px;
+}
