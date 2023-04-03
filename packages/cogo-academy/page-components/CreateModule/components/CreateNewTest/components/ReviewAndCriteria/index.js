@@ -76,14 +76,9 @@ function ReviewAndCriteria(props) {
 
 					<div className={styles.topic}>
 						<div className={styles.subtopic}> Users </div>
-						<div>
-							<Pill size="md" color="#FEF3E9" className={styles.names}>
-								<span className={styles.names}>KAM 1</span>
-							</Pill>
-							<Pill size="md" color="#FEF3E9">
-								<span className={styles.names}>KAM 2</span>
-							</Pill>
-						</div>
+						{/* <div>
+							<Pill size="md" color="#FEF3E9" className={styles.names} />
+						</div> */}
 					</div>
 				</div>
 			)}
