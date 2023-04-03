@@ -84,9 +84,6 @@ export const column = (
 		setFilters,
 	}:ColumnInterface,
 ) => {
-	const handleCloseModal = () => {
-		setOpenDeleteModal(false);
-	};
 	const handleDelete = (key = '') => {
 		setOpenDeleteModal((previousActions) => ({
 			...previousActions,
@@ -333,7 +330,7 @@ export const column = (
 						{openDeleteModal[id] && (
 							<DeleteModal
 								openDeleteModal={openDeleteModal}
-								handleCloseModal={handleCloseModal}
+								handleDelete={handleDelete}
 								setOpenDeleteModal={setOpenDeleteModal}
 								deleteSelected={deleteSelected}
 								id={id}
