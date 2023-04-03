@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import { IcMDownload, IcMUpload } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import useGetIngestionList from '../../../hooks/useGetIngestionList';
 import usePostIngestionData from '../../../hooks/usePostIngestionData';
 
 import ChooseModal from './Modals/ChooseModal/index';
@@ -30,7 +31,7 @@ const INGESTION_COMPONENTS_MAPPING = {
 	[UPLOAD]          : UploadModal,
 };
 
-function Header() {
+function Header({ refetch = () => {} }) {
 	const [showModal, setShowModal] = useState(false);
 
 	const {
@@ -42,8 +43,7 @@ function Header() {
 		setShow = () => {},
 		onSubmit = () => {},
 		loading,
-
-	} = usePostIngestionData();
+	} = usePostIngestionData({ refetch });
 	// console.log('formProps::::::::::', formProps);
 	// const componentProps = {
 	// 	[CHOOSE]: {

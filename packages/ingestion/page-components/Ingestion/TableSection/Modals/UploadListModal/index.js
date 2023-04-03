@@ -8,23 +8,26 @@ import useGetUploadList from '../../../../../hooks/useGetUploadList';
 import styles from './styles.module.css';
 
 function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
-	// console.log('row', row?.id);
 	const { columns, onPageChange, data, loading } = useGetUploadList(row?.id);
-	const { list = [], page = 0, page_limit, total_count } = data || {};
+	const { list, page = 0, page_limit, total_count } = data || {};
 	const onClose = () => {
 		setTableModal('');
+	};
+
+	const onSubmit = () => {
+		setTableModal('reUpload');
 	};
 
 	// Todo Test pagination here
 
 	if (isEmpty(list) && !loading) {
 		return (
-			<Modal size="l" show={tableModal} onClose={onClose} placement="center">
+			<Modal size="l" show={tableModal === 'uploadList'} onClose={onClose} placement="center">
 				<Modal.Header title={(
 					<div style={{ display: 'flex', alignItems: 'center' }}>
 						<IcMDownload style={{ margin: '0 4px 0 0' }} />
 						{' '}
-						Upload List
+						Upload Listrkjbvr
 					</div>
 				)}
 				/>
@@ -77,7 +80,16 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 				</div>
 			</Modal.Body>
 			<Modal.Footer>
-				<Button themeType="secondary" onClick={onClose}>Close</Button>
+				<Button
+					style={{ marginRight: '8px' }}
+					disabled={loading}
+					themeType="secondary"
+					onClick={onClose}
+				>
+					Close
+
+				</Button>
+				<Button disabled={loading} themeType="secondary" onClick={() => onSubmit()}>Re-Upload</Button>
 
 			</Modal.Footer>
 		</Modal>

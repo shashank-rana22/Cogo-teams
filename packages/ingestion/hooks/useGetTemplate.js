@@ -7,7 +7,7 @@ function useGetTemplate() {
 	}, { manual: true });
 
 	const getTemplateCsv = async (e) => {
-		console.log('params', { service_type: e });
+		// console.log('params', { service_type: e });
 		const response = await trigger({ service_type: e });
 
 		// eslint-disable-next-line no-undef

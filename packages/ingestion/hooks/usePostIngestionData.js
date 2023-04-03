@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 import controls from '../utils/controls';
 
-function usePostIngestionData() {
+function usePostIngestionData({ refetch = () => {} }) {
 	const [show, setShow] = useState('');
 	const profileData = useSelector(({ profile }) => profile);
 
@@ -41,6 +41,7 @@ function usePostIngestionData() {
 			setShow('');
 
 			Toast.success('Data Uploaded');
+			refetch();
 		} catch (error) {
 			console.log('error', error);
 		}

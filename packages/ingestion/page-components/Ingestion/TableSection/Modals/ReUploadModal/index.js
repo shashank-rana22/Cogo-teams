@@ -1,5 +1,6 @@
 import { Modal, Button } from '@cogoport/components';
 import { IcMUpload } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
 import usePostReUpload from '../../../../../hooks/usePostReUpload';
 import { getElementController } from '../../../../../utils/get-element-controls';
@@ -17,7 +18,7 @@ function ReUploadModal({ tableModal, setTableModal = () => {}, row = {} }) {
 	const { control, formState: { errors }, handleSubmit, reset } = formProps;
 
 	return (
-		<Modal size="md" show={tableModal} onClose={onClose} placement="center">
+		<Modal size="md" show={tableModal === 'reUpload'} onClose={onClose} placement="center">
 			<Modal.Header title={(
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<IcMUpload style={{ margin: '0 4px 0 0' }} />

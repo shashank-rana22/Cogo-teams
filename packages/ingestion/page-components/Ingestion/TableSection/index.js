@@ -7,20 +7,21 @@ import useGetIngestionList from '../../../hooks/useGetIngestionList';
 import Filters from './Filters';
 import styles from './styles.module.css';
 
-function TableSection() {
+function TableSection(props) {
 	const {
-		columns,
-		onPageChange,
-		loading,
+		columns = [],
+		onPageChange = () => {},
+		loading = false,
 		Component,
-		setTableModal,
-		tableModal,
+		setTableModal = () => {},
+		tableModal = '',
 		data,
-		row,
+		row = {},
 		formProps,
-		params,
-		setParams,
-	} = useGetIngestionList();
+		params = {},
+		setParams = () => {},
+		refetch,
+	} = props;
 
 	const { list, page = 0, page_limit = 0, total_count = 0 } = data || {};
 
@@ -55,7 +56,14 @@ function TableSection() {
 				</div>
 			)}
 
-			{Component && <Component setTableModal={setTableModal} tableModal={tableModal} row={row} />}
+			{Component && (
+				<Component
+					setTableModal={setTableModal}
+					tableModal={tableModal}
+					row={row}
+
+				/>
+			)}
 		</div>
 	);
 }

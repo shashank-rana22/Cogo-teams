@@ -31,7 +31,7 @@ function TemplateModal({ showModal, setShowModal = () => {} }) {
 						themeType="secondary"
 						onClick={() => getTemplateCsv('lead')}
 						style={{ height: '60px', width: '50%' }}
-						disabled={loading}
+						// disabled={loading}
 					>
 						Leads Template
 
@@ -40,7 +40,7 @@ function TemplateModal({ showModal, setShowModal = () => {} }) {
 						themeType="secondary"
 						onClick={() => setTemplate('partner')}
 						style={{ height: '60px', width: '50%' }}
-						disabled={loading}
+						// disabled={loading}
 
 					>
 						Channel Partner Template
@@ -50,7 +50,7 @@ function TemplateModal({ showModal, setShowModal = () => {} }) {
 						themeType="secondary"
 						onClick={() => setTemplate('organization')}
 						style={{ height: '60px', width: '50%' }}
-						disabled={loading}
+						// disabled={loading}
 
 					>
 						Importer Exporter Template

@@ -17,8 +17,6 @@ function UploadModal({
 
 	const { control, formState: { errors }, handleSubmit, reset } = formProps;
 
-	// console.log('form::::::', formProps.getValues());
-
 	const onChoose = (event) => {
 		onSubmit(event, uploadData);
 		// setShow('');

@@ -15,7 +15,7 @@ function useGetIngestionList() {
 	const [params, setParams] = useState({
 		page: 1,
 	});
-	const [{ data, loading = false }] = useRequest({
+	const [{ data, loading }, refetch] = useRequest({
 		method : 'get',
 		url    : 'list_ingestion_requests',
 		params,
@@ -278,6 +278,7 @@ function useGetIngestionList() {
 		formProps,
 		params,
 		setParams,
+		refetch,
 	};
 }
 
