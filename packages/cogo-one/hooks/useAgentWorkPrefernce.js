@@ -17,7 +17,7 @@ function useAgentWorkPrefernce() {
 
 	useEffect(() => {
 		fetchworkPrefernce();
-	}, [fetchworkPrefernce]);
+	}, []);
 
 	return {
 		loading,
