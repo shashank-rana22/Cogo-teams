@@ -121,7 +121,7 @@ function Report() {
 					<div className={styles.whole_container}>
 						{
 								(share || []).map((item) => (
-									<div className={styles.left_container}>
+									<div className={styles.left_container} key={item.country}>
 										{item.country}
 										<div>
 											Rs.
@@ -156,7 +156,7 @@ function Report() {
 								<div className={styles.whole_container}>
 									{
 									(marketshare || []).map((item) => (
-										<div className={styles.left_container}>
+										<div className={styles.left_container} key={item.country}>
 											{item.country}
 											<div>
 												(
