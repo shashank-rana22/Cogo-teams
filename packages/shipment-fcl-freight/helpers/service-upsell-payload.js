@@ -1,10 +1,80 @@
-const getServiceMappings = (service) => {
-	const trade_type = service.type === 'origin' ? 'export' : 'import';
-	const transportServices = ['trailer_freight', 'ftl_freight', 'ltl_freight'];
-	if (transportServices.includes(service.service)) {
-		return `${trade_type}_transportation`;
+const formatDataForSingleService = ({ rawParams }) => {
+	const { search_type, trade_type, formValues, primary_service } = rawParams;
+
+	if (search_type === 'fcl_cfs') {
+		if (trade_type === 'origin') {
+			return {
+				port_id             : primary_service?.origin_port?.id,
+				trade_type,
+				cargo_handling_type : formValues?.cargo_handling_type,
+			};
+		}
+		return {
+			port_id             : primary_service?.origin_port?.id,
+			trade_type,
+			cargo_handling_type : formValues?.cargo_handling_type,
+		};
 	}
-	return `${trade_type}_${service.service}`;
+
+	if (search_type === 'fcl_customs') {
+		if (trade_type === 'origin') {
+			return {
+				port_id             : primary_service?.origin_port?.id,
+				trade_type,
+				cargo_handling_type : formValues?.cargo_handling_type,
+			};
+		} return {
+			port_id             : primary_service?.origin_port?.id,
+			trade_type,
+			cargo_handling_type : formValues?.cargo_handling_type,
+		};
+	}
+
+	if (search_type === 'trailer_freight') {
+		if (trade_type === 'origin') {
+			return {
+				origin_location_id      : formValues?.location_id,
+				destination_location_id : primary_service?.origin_port?.id,
+				trade_type,
+			};
+		} return {
+			destination_location_id : formValues?.location_id,
+			origin_location_id      : primary_service?.origin_port?.id,
+			trade_type,
+		};
+	}
+
+	/*  need to change truck  type by formatting to type of keys , reminder  */
+
+	if (search_type === 'ftl_freight') {
+		if (trade_type === 'origin') {
+			return {
+				origin_location_id      : formValues?.location_id,
+				destination_location_id : primary_service?.origin_port?.id,
+				truck_type              : formValues?.truck_type,
+				trucks_count            : formValues?.trucks_count,
+				trade_type,
+			};
+		} return {
+			destination_location_id : formValues?.location_id,
+			origin_location_id      : primary_service?.origin_port?.id,
+			trade_type,
+		};
+	}
+
+	if (search_type === 'fcl_freight_local') {
+		if (trade_type === 'origin') {
+			return {
+				port_id: primary_service?.origin_port?.id,
+				trade_type,
+			};
+		} return {
+			port_id: primary_service?.destination_port?.id,
+			trade_type,
+		};
+	}
+
+	return null;
 };
 
 const formatPayload = ({
@@ -14,37 +84,7 @@ const formatPayload = ({
 	shipmentData = {},
 	primary_service,
 }) => {
-	const serviceToBeAdded = getServiceMappings(service);
-
-	const shipmentType = shipmentData?.shipment_type;
 	const search_type = service.service;
-
-	const { cargo_details } = primary_service;
-
-	const newServices = services.map((item) => ({
-		...item,
-		service_type: item?.service_type.split('_service')[0],
-	}));
-
-	const serviceValues = {};
-
-	Object.keys(formValues).forEach((key) => {
-		if (
-			key === 'cargo_handling_type'
-            && serviceToBeAdded === 'import_fcl_customs'
-		) {
-			serviceValues.import_transportation_cargo_handling_type = formValues[key];
-		}
-
-		if (
-			key === 'cargo_handling_type'
-            && serviceToBeAdded === 'export_fcl_customs'
-		) {
-			serviceValues.export_transportation_cargo_handling_type = formValues[key];
-		} else {
-			serviceValues[`${serviceToBeAdded}_${key}`] = formValues[key];
-		}
-	});
 
 	let trade_type;
 
@@ -58,12 +98,23 @@ const formatPayload = ({
 
 	const rawParams = {
 		trade_type,
-		source    : 'upsell',
-		source_id : shipmentData?.id,
+		search_type,
+		primary_service,
+		formValues,
+
 	};
 
-	return {
+	const newPayload = {
+		source_id: shipmentData?.id,
+		search_type,
+	};
+
+	newPayload[`${search_type}_services_attributes`] = formatDataForSingleService({
 		rawParams,
+	});
+
+	return {
+		payload: newPayload,
 	};
 };
 

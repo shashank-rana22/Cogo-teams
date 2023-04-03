@@ -23,8 +23,6 @@ function Services() {
 
 	const { serviceObj, upsellServices } =	helperFuncs(servicesList, possibleServices);
 
-	console.log(upsellServices, 'upsell services', serviceObj, servicesList);
-
 	// const { cancelUpsellDestinationFor, cancelUpsellOriginFor } = upsellTransportation(serviceObj, primary_service);
 
 	return (

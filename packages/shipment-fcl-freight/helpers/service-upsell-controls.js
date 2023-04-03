@@ -1,6 +1,6 @@
 import { useForm } from '@cogoport/forms';
 
-import serviceWiseControls from '../configurations/upsell/service-wise-controls';
+import Controls from '../configurations/upsell/service-wise-controls';
 
 import getServiceValues from './get-service-values';
 
@@ -23,6 +23,8 @@ function ServiceUpsellControls({ service, services = [] }) {
 		...item,
 		service_type: item?.service_type.split('_service')[0],
 	}));
+
+	const { serviceWiseControls } = Controls();
 
 	const rawControls = formatControls(
 		serviceWiseControls[search_type] || [],
@@ -48,7 +50,6 @@ function ServiceUpsellControls({ service, services = [] }) {
 		watch,
 		control,
 		errors,
-
 	};
 
 	return {
