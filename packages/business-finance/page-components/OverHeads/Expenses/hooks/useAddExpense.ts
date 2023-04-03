@@ -53,6 +53,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 		registration_number:registrationNumberTradeParty,
 		tds_deduction_rate:tdsTradeParty,
 		organization_trade_party_detail_id:tradePartyMappingIdFromTradeParty,
+		is_tax_applicable:isTaxApplicable,
 	} = tradeParty || {};
 
 	const {
@@ -193,7 +194,7 @@ const useAddExpense = ({ expenseData, setShowModal, getList, rowData }) => {
 					entityCodeId         : entityIdTradeParty,
 					organizationId       : orgIdTradeParty,
 					organizationSerialId : sidTradeParty,
-					isTaxApplicable      : true,
+					isTaxApplicable      : isTaxApplicable === null ? true : isTaxApplicable,
 					isSez                : false,
 					organizationName     : nameTradeParty,
 					pincode,

@@ -52,6 +52,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		registration_number:registrationNumberTradeParty,
 		tds_deduction_rate:tdsTradeParty,
 		organization_trade_party_detail_id:tradePartyMappingIdFromTradeParty,
+		is_tax_applicable:isTaxApplicable,
 	} = tradeParty || {};
 
 	const {
@@ -194,7 +195,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 					entityCodeId         : entityIdTradeParty,
 					organizationId       : orgIdTradeParty,
 					organizationSerialId : sidTradeParty,
-					isTaxApplicable      : true,
+					isTaxApplicable      : isTaxApplicable === null ? true : isTaxApplicable,
 					isSez                : false,
 					organizationName     : nameTradeParty,
 					pincode,
