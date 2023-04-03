@@ -1,18 +1,17 @@
 /* eslint-disable react/no-danger */
 import { Modal, Button, Badge, Pill, Toast } from '@cogoport/components';
-import { InputController, CheckboxController, useForm } from '@cogoport/forms';
-import { IcMOverflowDot, IcMLiveChat, IcCLike, IcCDislike, IcMArrowBack } from '@cogoport/icons-react';
+import { useForm } from '@cogoport/forms';
+import { IcCLike, IcCDislike, IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { startCase, format } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
+import FeedbackForm from '../../../../commons/FeedbackForm';
 import Spinner from '../../../../commons/Spinner';
 import useGetQuestions from '../../hooks/useGetQuestions';
 
-import FeedbackForm from './FeedbackForm';
-import useFeedback from './hooks/useFeedback';
 import RelatedQuestion from './RelatedQuestion';
 import styles from './styles.module.css';
 
@@ -34,18 +33,7 @@ function AnswerPage() {
 	const [show, setShow] = useState(false);
 	const [load, setload] = useState(true);
 	const { refetchQuestions, data: answerData, loading } = useGetQuestions({ id });
-
-	const {
-		// data = {},
-		isFeedbackAvailable = false,
-		setIsFeedbackAvailable = () => {},
-		handleSubmit: handleSubmitFeedback,
-		errors: feedbackFormErrors,
-		control: feebbackFormControl,
-		onSubmit: onSubmitFeedback,
-		answer,
-		setAnswer,
-	} = useFeedback({ answerData });
+	const [answer, setAnswer] = useState(answerData?.answers?.[0]?.answer);
 
 	const is_positive = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive;
 
@@ -56,7 +44,14 @@ function AnswerPage() {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [loading]);
 
-	const { handleSubmit, formState: { errors }, control } = useForm();
+	useEffect(() => {
+		setAnswer(answerData?.answers?.[0]?.answer);
+	}, [answerData]);
+
+	const { handleSubmit, control, watch } = useForm();
+
+	const watchQuestionCheckbox = watch('question_checkbox');
+	const watchAnswerCheckbox = watch('answer_checkbox');
 
 	const apiName = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id
 		? '/update_faq_feedback'
@@ -135,18 +130,22 @@ function AnswerPage() {
 		}
 
 		let payload = {
-			faq_answer_id : answerData?.answers[0]?.id,
-			is_positive   : false,
+			faq_answer_id               : answerData?.answers[0]?.id,
+			is_positive                 : false,
 			remark,
-			status        : 'active',
+			status                      : 'active',
+			suggested_question_abstract : watchQuestionCheckbox ? values?.question : undefined,
+			suggested_answer            : watchAnswerCheckbox ? answer?.toString('html') : undefined,
 		};
 		if (answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive) {
 			payload = {
-				id            : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-				faq_answer_id : answerData?.answers[0]?.id,
-				is_positive   : false,
+				id                          : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+				faq_answer_id               : answerData?.answers[0]?.id,
+				is_positive                 : false,
 				remark,
-				status        : 'active',
+				status                      : 'active',
+				suggested_question_abstract : watchQuestionCheckbox ? values?.question : undefined,
+				suggested_answer            : watchAnswerCheckbox ? answer?.toString('html') : undefined,
 			};
 		}
 
@@ -235,8 +234,7 @@ function AnswerPage() {
 							placement="left"
 							color="green"
 							size="md"
-							// eslint-disable-next-line no-unsafe-optional-chaining
-							text={answerData?.answers[0]?.upvote_count || 0}
+							text={answerData?.answers?.[0]?.upvote_count || 0}
 						>
 							<IcCLike fill={isLiked === 'liked' ? 'black' : '#f8f5ec'} />
 						</Badge>
@@ -260,71 +258,44 @@ function AnswerPage() {
 					<IcCDislike fill={isLiked === 'disliked' ? 'black' : '#f8f5ec'} />
 				</div>
 
-				<div
-					role="presentation"
-					className={styles.feedback_button}
-					style={isFeedbackAvailable?.overall ? { background: '#FEDE00' } : {}}
-					onClick={() => setIsFeedbackAvailable((pv) => ({
-						overall: !(pv.overall),
-					}))}
-				>
-					{isFeedbackAvailable ? (
-						<IcMLiveChat />
-					) : (
-						<i className={styles.dot_icon}>
-							<IcMOverflowDot />
-						</i>
-					)}
-					<div className={styles.feedback_title}>
-						I have a feedback
-					</div>
-				</div>
-
 				<Modal
-					size="md"
+					size="lg"
 					show={show}
 					onClose={onClose}
-					placement="right"
+					placement="center"
 				>
-					<Modal.Header title="Reason for dislike" />
+					<Modal.Header title="Give us your feedback" />
 					<Modal.Body>
-						<form
-							className={styles.form_container}
-							onSubmit={handleSubmit(onSubmit)}
-						>
-							<div>
-								<CheckboxController
-									control={control}
-									name="question_checkbox"
-									type="checkbox"
-									label="Question not satisfactory"
-								/>
-								<CheckboxController
-									control={control}
-									name="answer_checkbox"
-									type="checkbox"
-									label="Answer not satisfactory"
-								/>
-							</div>
-
-							<div className={styles.remark}>
-								<div className={styles.aftercheckbox}>Remarks</div>
-								<InputController
-									control={control}
-									name="remark"
-									type="text"
-									placeholder="Enter remark here"
-									rules={{ required: 'Remark is required' }}
-								/>
-								{errors.remark && (
-									<span className={styles.errors}>
-										{errors.remark.message}
-									</span>
-								)}
-							</div>
-							<Button type="submit" loading={feedbackLoading}>Submit</Button>
-						</form>
+						<FeedbackForm
+							answerData={answerData}
+							control={control}
+							answer={answer}
+							setAnswer={setAnswer}
+							watch={watch}
+						/>
 					</Modal.Body>
+					<Modal.Footer>
+						<Button
+							style={{ marginRight: '10px' }}
+							size="md"
+							themeType="secondary"
+							onClick={() => {
+								setShow(false);
+								setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
+							}}
+							disabled={feedbackLoading}
+						>
+							Cancel
+						</Button>
+						<Button
+							size="md"
+							themeType="primary"
+							onClick={handleSubmit(onSubmit)}
+							loading={feedbackLoading}
+						>
+							Submit
+						</Button>
+					</Modal.Footer>
 				</Modal>
 			</div>
 
@@ -345,22 +316,6 @@ function AnswerPage() {
 			</div>
 
 			<div className={styles.line} />
-
-			{
-				isFeedbackAvailable?.overall ? (
-					<FeedbackForm
-						answerData={answerData}
-						isFeedbackAvailable={isFeedbackAvailable}
-						setIsFeedbackAvailable={setIsFeedbackAvailable}
-						handleSubmit={handleSubmitFeedback}
-						errors={feedbackFormErrors}
-						control={feebbackFormControl}
-						onSubmit={onSubmitFeedback}
-						answer={answer}
-						setAnswer={setAnswer}
-					/>
-				) : null
-			}
 
 			<RelatedQuestion query_name={answerData?.query_name} question_abstract={answerData?.question_abstract} />
 		</div>
