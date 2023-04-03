@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Modal } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import useListServiceChargeCodes from '../../../../../hooks/useListServiceChargeCodes';
@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 import ViewPrice from './ViewPrice';
 
 function AddService({
-	shipment_id,
+	shipmentId,
 	services,
 	isSeller,
 	refetch = () => {},
@@ -22,7 +22,7 @@ function AddService({
 	const [showPrice, setShowPrice] = useState(null);
 
 	const { list, loading, setFilters, filters, serviceCountTotal } = useListServiceChargeCodes({
-		shipment_id,
+		shipmentId,
 		services,
 		show,
 		isSeller,
@@ -78,9 +78,6 @@ function AddService({
 					) : null}
 				</div>
 			</Modal.Body>
-			<Modal.Footer>
-				<Button onClick={() => setShowChargeCodes(false)}>OK</Button>
-			</Modal.Footer>
 		</Modal>
 	);
 }

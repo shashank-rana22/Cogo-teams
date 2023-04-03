@@ -32,6 +32,7 @@ function BillToCustomer({ updateResponse, onCancel, onBillToCustomer }) {
 							onBillToCustomer(true);
 						} else {
 							updateBillingInfo(modeOfReview);
+							onCancel();
 						}
 					}}
 				>

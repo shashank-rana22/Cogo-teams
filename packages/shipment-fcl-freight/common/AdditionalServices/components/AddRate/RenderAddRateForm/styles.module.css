@@ -1,3 +1,15 @@
+.form_container{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 8px;
+	flex-wrap: wrap;
+
+	& > div{
+		flex: 0 0 45%;
+		margin: 4px 0px;
+	}
+}
 .label{
 	font-weight: 900;
 	line-height: 14px;
@@ -5,16 +17,7 @@
 	margin: 8px 0px;
 }
 
-.flex{
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	margin-top: 8px;
 
-	& > div{
-		flex: 0 0 45%;
-	}
-}
 .button_wrapper{
 	display: flex;
 	align-items: center;
@@ -26,11 +29,6 @@
 	}
 }
 
-.form_container{
-	label{
-		font-size: 14px;
-	}
-}
 
 .input_container{
 	display: flex;

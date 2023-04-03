@@ -1,4 +1,3 @@
-// import { stakeholderCheck } from '@cogoport/bookings/commons/helpers/stakeholderCheck';
 import { cl, Popover } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMOverflowDot } from '@cogoport/icons-react';
@@ -15,8 +14,6 @@ const serviceCancelAllowedBy = [
 	'amendment_requested_by_importer_exporter',
 ];
 
-const roleForCancel = ['is_so1', 'is_so2'];
-
 function Item({
 	item = {},
 	actionButton,
@@ -28,18 +25,9 @@ function Item({
 	const [show, setShow] = useState(false);
 	const [showCancel, setShowCancel] = useState(false);
 	const [showEdit, setShowEdit] = useState(false);
-	// const stakeholder = stakeholderCheck();
-
-	// const role = Object.keys(stakeholder || {})?.find(
-	// 	(itm) => stakeholder[itm] === true,
-	// );
-
-	// TEMPORARY
-	const role = 'SUPERADMIN';
 
 	const showCancelInfo = serviceCancelAllowedBy.includes(item?.state)
-		|| (!roleForCancel.includes(role)
-			&& item?.state === 'quoted_by_service_provider');
+	|| (item?.state === 'quoted_by_service_provider');
 
 	const showEditBtn = status?.status === 'approved';
 
@@ -136,7 +124,7 @@ function Item({
 					id={item?.id}
 					showCancel={showCancel}
 					setShowCancel={setShowCancel}
-					setShow={setShow}
+					refetch={refetch}
 				/>
 			) : null}
 
