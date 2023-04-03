@@ -77,8 +77,7 @@ function Header({ auditData, loading }) {
 						<div>
 							Last Edit By
 							{' '}
-							:
-							{' '}
+							:&nbsp;
 						</div>
 
 						<b>{startCase(name || '')}</b>
