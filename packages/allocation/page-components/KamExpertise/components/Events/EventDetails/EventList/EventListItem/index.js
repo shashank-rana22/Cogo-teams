@@ -64,7 +64,7 @@ function EventListItem({ data, index, setEventListData }) {
 						<span style={{ marginRight: '4px' }}>
 							<Pill
 								key="Reactivation"
-								size="l"
+								size="lg"
 								color="blue"
 							>
 								{startCase(res.name || '')}
@@ -78,7 +78,7 @@ function EventListItem({ data, index, setEventListData }) {
 						<span style={{ marginRight: '4px' }}>
 							<Pill
 								key="Shipment_creation"
-								size="l"
+								size="lg"
 								color="#FEF3E9"
 							>
 								{COMPLETION_MAPPING[data.event_state_on || '']}
@@ -93,7 +93,7 @@ function EventListItem({ data, index, setEventListData }) {
 						<span style={{ marginRight: '4px' }}>
 							<Pill
 								key="Account"
-								size="l"
+								size="lg"
 								color="#FEF3E9"
 							>
 								{startCase(res.parameters || '')}

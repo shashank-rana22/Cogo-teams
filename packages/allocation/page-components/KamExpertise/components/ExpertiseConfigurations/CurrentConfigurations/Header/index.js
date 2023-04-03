@@ -1,6 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 
+import VERSION_KEYS from '../../../../constants/version-keys-mapping';
 import useGetKamExpertiseVersionDetials from '../../../../hooks/useGetKamExpertiseVersionDetials';
 
 import CreateModal from './CreateModal';
@@ -10,14 +11,7 @@ import Published from './CreateModal/Published';
 import ModalFooter from './ModalFooter';
 import styles from './styles.module.css';
 
-const CONSTANT_KEYS = {
-	PUBLISHED_VERSION : 'choose_published_version',
-	SAVED_DRAFT       : 'saved-draft',
-	NEW_VERSION       : 'new',
-	INITIAL_MODE      : 'initial-mode',
-};
-
-const { PUBLISHED_VERSION, SAVED_DRAFT, NEW_VERSION, INITIAL_MODE } = CONSTANT_KEYS;
+const { PUBLISHED_VERSION, SAVED_DRAFT, NEW_VERSION, INITIAL_MODE } = VERSION_KEYS;
 
 const CREATE_CONFIGURATION_MAPPING = {
 	[PUBLISHED_VERSION] : Published,
@@ -47,7 +41,6 @@ function Header(props) {
 
 	const componentProps = {
 		[PUBLISHED_VERSION]: {
-			selectedVersion, // ! required ?
 			setSelectedVersion,
 			data,
 			versionName,
@@ -56,11 +49,9 @@ function Header(props) {
 		[SAVED_DRAFT]: {
 			setMode,
 			setShowModal,
-			setSelectedVersion, // ! required ?
 		},
 		[NEW_VERSION]: {
 			setMode,
-			setShowModal, // ! required ?
 			setSelectedVersion,
 			getVersion,
 			createModalLoading,
@@ -69,7 +60,6 @@ function Header(props) {
 		},
 		[INITIAL_MODE]: {
 			setMode,
-			setSelectedVersion, // ! required ?
 			data,
 		},
 	};
