@@ -46,13 +46,12 @@ function PreviewVideos({ videos = [] }) {
 								>
 									<iframe
 										width="366"
-										height="200"
+										height="206"
 										src={video}
-										title="YouTube video player"
+										title="Video player"
 										frameBorder="0"
-										allow="accelerometer; clipboard-write;
-										encrypted-media; gyroscope; picture-in-picture; web-share"
-										allowfullscreen
+										allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share"
+										allowfullscreen="true"
 									/>
 
 								</div>

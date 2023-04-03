@@ -14,6 +14,7 @@ import performanceManagement from './config/performance-management';
 import rolesAndPermissions from './config/roles-n-permission';
 import supplyDashboard from './config/supply-dashboards';
 import unifiedDashboard from './config/unified-dashboard';
+import vendorRM from './config/vendor-rm';
 
 const routeConfig = {
 	...rolesAndPermissions,
@@ -23,6 +24,7 @@ const routeConfig = {
 	...contracts,
 	...businessFinance,
 	...unifiedDashboard,
+	...vendorRM,
 	...cogoAcademy,
 	...myIncident,
 	...myProfile,

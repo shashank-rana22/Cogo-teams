@@ -1,6 +1,6 @@
 import { MultiSelect, Toggle } from '@cogoport/components';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-import { asyncFieldsCogoEntities } from '@cogoport/forms/utils/getAsyncFields';
+import { asyncListCogoEntity } from '@cogoport/forms/utils/getAsyncFields';
 import { IcCCountryIndia, IcCCountryNetherland, IcCCountrySingapore } from '@cogoport/icons-react';
 import { merge } from '@cogoport/utils';
 import React from 'react';
@@ -16,7 +16,7 @@ const flagMapping = {
 };
 
 function Header({ headerFilters, setHeaderFilters }) {
-	const entityOptions = useGetAsyncOptions(merge(asyncFieldsCogoEntities()));
+	const entityOptions = useGetAsyncOptions(merge(asyncListCogoEntity()));
 
 	const { currency, entity_code = [] } = headerFilters;
 

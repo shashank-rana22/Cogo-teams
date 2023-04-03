@@ -51,7 +51,7 @@ function useGraphData() {
 			label : `Not Requested(${not_available_search_count - total_requested_questions})
 			 ${100 - total_requested_questions_percentage}%`,
 			value : 100 - total_requested_questions_percentage,
-			color : 'hsl(255, 100%, 100%)',
+			color : 'hsl(38, 100%, 91%)',
 		},
 	];
 
