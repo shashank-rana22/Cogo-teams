@@ -1,9 +1,9 @@
 .table_main_container {
-    padding: '0 40px 0 0';
+    padding: '0 20px 0 0';
 }
 
 .table {
-    margin: 20px 0;
+    margin: 8px 0;
 	background-color: #fff;
 	box-shadow: 0 0 16px rgb(44 62 80 / 10%);
 
@@ -19,7 +19,9 @@
 .pagination_container {
     width: 100%;
     display: flex;
-    /* justify-content: end; */
+    justify-content: flex-end;
+	/* align-items: center; */
+	
 }
 
 .empty {

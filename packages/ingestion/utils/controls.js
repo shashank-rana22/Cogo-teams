@@ -23,17 +23,12 @@ const PARTNER_OPTIONS = [
 	{ label: 'CogoPort Vietnam', value: PARTNER_IDS.VIETNAM_PARTNER_ID },
 ];
 
-// const IsCpOptions = [
-// 	{ label: 'Yes', value: true },
-// 	{ label: 'No', value: false },
-// ];
-
 const controls = [
 
 	{
 		name        : 'country_id',
 		label       : 'Country',
-		type        : 'select',
+		type        : 'countrySelect',
 		options     : countryOptions,
 		placeholder : 'Type Here...',
 		isClearable : true,
@@ -70,13 +65,6 @@ const controls = [
 
 		// rules       : { required: 'Agent is Required' },
 	},
-	// {
-	// 	name        : 'is_cp',
-	// 	label       : 'Is Channel Partner',
-	// 	type        : 'select',
-	// 	options     : IsCpOptions,
-	// 	placeholder : 'Type Here...',
-	// },
 
 ];
 

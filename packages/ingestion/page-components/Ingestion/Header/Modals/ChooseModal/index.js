@@ -8,18 +8,16 @@ function ChooseModal({ setShow = () => {}, show = '', setUploadData = () => {}, 
 		setShow('');
 	};
 
-	// const onIE = () => {
-
-	// 	setIngestionData({
-	// 		...ingestionData,
-	// 		finalModalHeading: 'Upload for Import Export',
-	// 	});
-	// };
-
 	const NEXT_PAGE_MAPPING = {
 		organization : 'orgDetails',
 		partner      : 'providerSelect',
 		lead         : 'providerSelect',
+	};
+
+	const IS_CP_MAPPING = {
+		organization : false,
+		partner      : true,
+		lead         : null,
 	};
 
 	const onChoose = (type) => {
@@ -27,7 +25,8 @@ function ChooseModal({ setShow = () => {}, show = '', setUploadData = () => {}, 
 
 		setUploadData({
 			...uploadData,
-			ingestion_type: type,
+			ingestion_type     : type,
+			is_channel_partner : IS_CP_MAPPING[type],
 		});
 	};
 

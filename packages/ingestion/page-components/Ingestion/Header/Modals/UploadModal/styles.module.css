@@ -8,15 +8,26 @@
     margin-bottom: '16px';
 } */
 
+
+
 .error_message {
 	font-size: 10px;
 	color: #cb6464;
+    padding: 0px;
 }
 
-.modal_container {
-    height: 200px;
+.modal_container 	{
+    display: flex;
+    flex-direction: column ;
 }
 
-/* .control_container {
-    height: 300px;
-} */
+.control_container {
+	display: flex;
+	flex-basis: 30%;
+	flex-direction: column;
+	margin: 0 20px 20px 0;
+}
+
+.control_label {
+	margin-bottom: 8px;
+}

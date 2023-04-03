@@ -1,6 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
 import { IcMUpload } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 
 import usePostReUpload from '../../../../../hooks/usePostReUpload';
 import { getElementController } from '../../../../../utils/get-element-controls';
@@ -9,13 +8,12 @@ import reUploadControls from '../../../../../utils/re-upload-controls';
 import styles from './styles.module.css';
 
 function ReUploadModal({ tableModal, setTableModal = () => {}, row = {} }) {
+	const { formProps, onSubmit = () => {} } = usePostReUpload(row);
+	const { control, formState: { errors }, handleSubmit, reset } = formProps;
 	const onClose = () => {
 		setTableModal('');
+		reset();
 	};
-
-	const { formProps, onSubmit = () => {} } = usePostReUpload(row);
-
-	const { control, formState: { errors }, handleSubmit, reset } = formProps;
 
 	return (
 		<Modal size="md" show={tableModal === 'reUpload'} onClose={onClose} placement="center">
@@ -57,7 +55,7 @@ function ReUploadModal({ tableModal, setTableModal = () => {}, row = {} }) {
 				</div>
 			</Modal.Body>
 			<Modal.Footer>
-				<Button themeType="secondary" onClick={onClose}>Close</Button>
+				<Button style={{ margin: '0 8px 0 0' }} themeType="secondary" onClick={onClose}>Close</Button>
 				<Button themeType="primary" onClick={handleSubmit(onSubmit)}>Submit</Button>
 
 			</Modal.Footer>

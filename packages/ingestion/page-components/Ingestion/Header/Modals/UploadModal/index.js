@@ -1,6 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
 import { IcMUpload } from '@cogoport/icons-react';
-import { useState } from 'react';
 
 import { getElementController } from '../../../../../utils/get-element-controls';
 import uploadControls from '../../../../../utils/upload-controls';
@@ -11,14 +10,10 @@ function UploadModal({
 	setShow = () => {}, show = '', uploadData, formProps,
 	onSubmit = () => {}, loading,
 }) {
-	// const [fileValue, setFileValue] = useState();
-	// const [multiFileValue, setMultiFileValue] = useState([]);
-	// const [loading, setLoading] = useState(false);
-
 	const { control, formState: { errors }, handleSubmit, reset } = formProps;
 
 	const onChoose = (event) => {
-		onSubmit(event, uploadData);
+		onSubmit(event);
 		// setShow('');
 	};
 
@@ -34,7 +29,7 @@ function UploadModal({
 	};
 
 	return (
-		<Modal size="md" show={show === 'uploadModal'} onClose={onClose} placement="center">
+		<Modal size="lg" show={show === 'uploadModal'} onClose={onClose} placement="center">
 			<Modal.Header title={(
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<IcMUpload style={{ margin: '0 4px 0 0' }} />
@@ -48,15 +43,6 @@ function UploadModal({
 					{FINAL_HEADING[uploadData?.ingestion_type]}
 				</div>
 
-				{/* <div style={{ display: 'block', alignItems: 'center', marginBottom: '16px' }}>
-					<FileSelect
-						multiple
-						value={multiFileValue}
-						loading={loading}
-						onChange={setMultiFileValue}
-						accept=".png,.svg,.jpg"
-					/>
-				</div> */}
 				<div className={styles.modal_container}>
 					{uploadControls.map((controlItem) => {
 						const el = { ...controlItem };
@@ -89,12 +75,9 @@ function UploadModal({
 					style={{ marginRight: '8px' }}
 					onClick={() => {
 						setShow('orgDetails');
-						// reset();
 					}}
-
 				>
 					Back
-
 				</Button>
 				<Button loading={loading} onClick={handleSubmit(onChoose)}>Submit</Button>
 			</Modal.Footer>

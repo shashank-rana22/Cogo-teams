@@ -3,13 +3,14 @@ import { IcMUpload } from '@cogoport/icons-react';
 
 import { getElementController } from '../../../../../utils/get-element-controls';
 
+import { CpDiv, IeDiv, LeadDiv } from './NextHeading';
 import styles from './styles.module.css';
 
 function OrgDetailsModal({
 	setShow = () => {}, show = '', uploadData, formProps, modalControls,
 
 }) {
-	const NEXT_PAGE_MAPPING = {
+	const BACK_PAGE_MAPPING = {
 		organization : 'chooseModal',
 		partner      : 'providerSelect',
 		lead         : 'providerSelect',
@@ -18,44 +19,15 @@ function OrgDetailsModal({
 	const { control, formState: { errors }, handleSubmit, reset } = formProps;
 	const onClose = () => {
 		setShow('');
-		// setUploadData({
-		// 	...uploadData,
-
-		// });
 		reset();
 	};
 
 	const onBack = () => {
-		setShow(NEXT_PAGE_MAPPING[uploadData?.ingestion_type]);
+		setShow(BACK_PAGE_MAPPING[uploadData?.ingestion_type]);
 		reset();
 	};
 
-	function LeadDiv() {
-		return (
-			<div>
-				Please provide more details about Leads
-			</div>
-		);
-	}
-
-	function CpDiv() {
-		return (
-			<div>
-				Please provide more details about Channel Partners
-			</div>
-		);
-	}
-
-	function IeDiv() {
-		return (
-			<div>
-				Please provide more details about Importer Exporter
-			</div>
-		);
-	}
-
 	const CONSTANT_KEYS = {
-		// LANDING     : '',
 		LEAD              : 'lead',
 		CHANNEL_PARTNER   : 'partner',
 		IMPORTER_EXPORTER : 'organization',
@@ -75,11 +47,6 @@ function OrgDetailsModal({
 
 	const onSubmit = () => {
 		setShow('uploadModal');
-		// setUploadData({
-		// 	...uploadData,
-		// 	// country_id : values?.country_id,
-		// 	// partner_id : values?.partner,
-		// });
 	};
 
 	return (
@@ -94,38 +61,10 @@ function OrgDetailsModal({
 			/>
 			<Modal.Body>
 				<div className={styles.modal_container}>
-					{/* {
-                    ingestionData?.option1 === 'org' ? (
-	<div>
-		Please provide more details about
-		Organizations
-	</div>
-                    )	: (
-	<div>
-		Please provide more details about the leads
-
-		<div className={styles.form_section}>
-			Is Channel Partner
-			<Select
-				value={ingestionData?.isCp}
-				onChange={(e) => setIngestionData({
-					...ingestionData,
-					isCp: e,
-				})}
-				placeholder="Is Channel Partner"
-				isClearable
-				options={IsCpOptions}
-			/>
-		</div>
-	</div>
-
-                    )
-                } */}
 
 					{
 						TopDiv && <TopDiv />
-
-				}
+					}
 
 					{
 
@@ -155,7 +94,7 @@ function OrgDetailsModal({
 							);
 						})
 
-                }
+            }
 
 				</div>
 

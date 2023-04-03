@@ -17,11 +17,11 @@
 	}
 }
 
-/* .pagination_container {
+.pagination_container {
     width: 100%;
     display: flex;
     justify-content: end;
-} */
+}
 
 .empty {
     height: '120px';

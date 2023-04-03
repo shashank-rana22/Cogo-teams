@@ -14,7 +14,7 @@ const uploadControls = [
 		type        : 'textArea',
 		// placeholder : 'Description',
 		isClearable : true,
-		// style       : { height: '180px', border: '1px solid #BDBDBD', borderRadius: 2, marginTop: '20px' },
+		style       : { height: '160px' },
 	},
 	{
 		name       : 'file_url',
@@ -25,6 +25,7 @@ const uploadControls = [
 		rules      : { required: 'File is Required' },
 		uploadType : 'aws',
 		accept     : '.csv',
+		// style      : { padding: '12px 0 0 0', margin: '0 0 20px 0' },
 
 	},
 

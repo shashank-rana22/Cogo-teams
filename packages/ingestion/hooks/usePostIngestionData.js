@@ -8,6 +8,7 @@ import { useState } from 'react';
 import controls from '../utils/controls';
 
 function usePostIngestionData({ refetch = () => {} }) {
+	const [showModal, setShowModal] = useState(false);
 	const [show, setShow] = useState('');
 	const profileData = useSelector(({ profile }) => profile);
 
@@ -28,8 +29,8 @@ function usePostIngestionData({ refetch = () => {} }) {
 
 	const { watch } = formProps;
 
-	const onSubmit = async (e, data) => {
-		const payload = Object.entries({ ...e, ...data })
+	const onSubmit = async (e) => {
+		const payload = Object.entries({ ...e, ...uploadData })
 			.filter(([key, value]) => key !== 'finalModalHeading')
 			.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 
@@ -81,6 +82,8 @@ function usePostIngestionData({ refetch = () => {} }) {
 		onSubmit,
 		show,
 		setShow,
+		showModal,
+		setShowModal,
 	};
 }
 

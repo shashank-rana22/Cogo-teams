@@ -6,44 +6,28 @@ import styles from './styles.module.css';
 function ProviderSelectModal({ setShow = () => {}, show = '', setUploadData = () => {}, uploadData, formProps }) {
 	const { reset } = formProps;
 
-	console.log('ingestion_type', uploadData.ingestion_type);
-	const FINAL_MODAL_MAPPING_CP = {
-		// IE           : 'a. Upload Importer/Exporter CSV',
-		CPBuy        : 'a. Upload Channel Partner (buy persona) CSV',
-		CPSell       : 'b. Upload Channel Partner (sell persona) CSV',
-		CPBuyAndSell : 'c. Channel Partner (buy and sell persona) CSV',
-	};
+	// console.log('ingestion_type', uploadData.ingestion_type);
+	// const FINAL_MODAL_MAPPING_CP = {
+	// 	CPBuy        : 'a. Upload Channel Partner (buy persona) CSV',
+	// 	CPSell       : 'b. Upload Channel Partner (sell persona) CSV',
+	// 	CPBuyAndSell : 'c. Channel Partner (buy and sell persona) CSV',
+	// };
 
 	const ProviderCpOptions = [
-		// { key: 'a. Importer/ Exporter', type: 'IE' },
 		{ key: 'a. Channel Partner (buy persona)', type: 'CPBuy' },
 		{ key: 'b. Channel Partner (sell persona)', type: 'CPSell' },
 		{ key: 'c. Channel Partner (buy and sell persona)', type: 'CPBuyAndSell' },
 	];
 
-	const FINAL_MODAL_MAPPING_LEADS = {
-		IE : 'a. Upload Importer/Exporter CSV',
-		SP : 'b. Upload Service Provider CSV',
-		// CPBuy  : 'c. Upload Channel Partner (buy persona) CSV',
-		// CPSell : 'd. Upload Channel Partner (sell persona) CSV',
-	};
+	// const FINAL_MODAL_MAPPING_LEADS = {
+	// 	IE : 'a. Upload Importer/Exporter CSV',
+	// 	SP : 'b. Upload Service Provider CSV',
+	// };
 
 	const ProviderLeadOptions = [
 		{ key: 'a. Importer/ Exporter', type: 'IE' },
 		{ key: 'b. Service Provider', type: 'SP' },
-		// { key: 'c. Channel Partner (buy persona)', type: 'CPBuy' },
-		// { key: 'd. Channel Partner (sell persona)', type: 'CPSell' },
 	];
-
-	// const FINAL_MODAL_MAPPING_IE = {
-	// 	IE: 'Upload Importer/Exporter CSV',
-
-	// };
-
-	// const ProviderIeOptions = [
-	// 	{ key: 'Importer/ Exporter', type: 'IE' },
-
-	// ];
 
 	const onClose = () => {
 		setShow('');
@@ -51,23 +35,32 @@ function ProviderSelectModal({ setShow = () => {}, show = '', setUploadData = ()
 	};
 
 	let ProviderButtonOptions = [];
-	let FINAL_MODAL_MAPPING = {};
+	// let FINAL_MODAL_MAPPING = {};
 
-	if (uploadData?.ingestion_type === 'lead') {
-		ProviderButtonOptions = ProviderLeadOptions;
-		FINAL_MODAL_MAPPING = FINAL_MODAL_MAPPING_LEADS;
-	} else if (uploadData?.ingestion_type === 'partner') {
-		ProviderButtonOptions = ProviderCpOptions;
-		FINAL_MODAL_MAPPING = FINAL_MODAL_MAPPING_CP;
-	}
+	const PROVIDER_BUTTON_MAPPING = {
+		lead    : ProviderLeadOptions,
+		partner : ProviderCpOptions,
+	};
+
+	ProviderButtonOptions = PROVIDER_BUTTON_MAPPING[uploadData?.ingestion_type];
+
+	// if (uploadData?.ingestion_type === 'lead') {
+	// 	ProviderButtonOptions = ProviderLeadOptions;
+	// 	// FINAL_MODAL_MAPPING = FINAL_MODAL_MAPPING_LEADS;
+	// } else if (uploadData?.ingestion_type === 'partner') {
+	// 	ProviderButtonOptions = ProviderCpOptions;
+	// 	// FINAL_MODAL_MAPPING = FINAL_MODAL_MAPPING_CP;
+	// }
 
 	const IS_CHANNEL_PARTNER_MAPPING = {
-		IE : false,
-		SP : true,
+		IE           : false,
+		SP           : true,
+		CPSell       : true,
+		CPBuy        : true,
+		CPBuyAndSell : true,
 	};
 
 	const onChoose = (input) => {
-		// console.log('input', input);
 		setUploadData({
 			...uploadData,
 			finalModalHeading  : input?.key,
@@ -76,7 +69,6 @@ function ProviderSelectModal({ setShow = () => {}, show = '', setUploadData = ()
 		reset();
 		setShow('orgDetails');
 	};
-	// console.log('ingestionData::', uploadData);
 
 	return (
 		<Modal size="md" show={show === 'providerSelect'} onClose={onClose} placement="center">
@@ -112,7 +104,6 @@ function ProviderSelectModal({ setShow = () => {}, show = '', setUploadData = ()
 			<Modal.Footer>
 
 				<Button themeType="secondary" onClick={() => setShow('chooseModal')}>Back</Button>
-				{/* <Button style={{ marginRight: '8px' }} onClick={() => setShow('uploadModal')}>Next</Button> */}
 
 			</Modal.Footer>
 		</Modal>

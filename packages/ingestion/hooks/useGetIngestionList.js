@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { IcMDownload } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import { startCase, format } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import ReUploadModal from '../page-components/Ingestion/TableSection/Modals/ReUploadModal';
 import UploadListModal from '../page-components/Ingestion/TableSection/Modals/UploadListModal';
@@ -24,15 +24,6 @@ function useGetIngestionList() {
 	const formProps = useForm();
 
 	const [tableModal, setTableModal] = useState();
-
-	// useEffect(() => {
-	// 	setParams({
-	// 		...params,
-	// 		q    : searchValue || undefined,
-	// 		page : 1,
-	// 	});
-	// // eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [searchValue]);
 
 	const tableListModal = (_id) => {
 		setRow(_id);
@@ -62,99 +53,99 @@ function useGetIngestionList() {
 
 	const Component = TABLE_MODAL_MAPPING[tableModal] || null;
 
-	const dummyData = {
-		page        : 1,
-		page_limit  : 8,
-		total       : 4,
-		total_count : 35,
-		list        : [{
-			name          : 'yash',
-			num_org       : 2,
-			uploaded_by   : 'Nilap',
-			uploaded_date : '2023-02-22T13:33:35.028Z',
-			status        : 'Uploading',
-			type          : 'CP',
-			error         : true,
-		},
-		{
-			name          : 'yash',
-			num_org       : 2,
-			uploaded_by   : 'Nilap',
-			uploaded_date : '2023-02-22T13:33:35.028Z',
-			status        : 'Uploaded',
-			type          : 'CP',
-			error         : true,
-		},
-		{
-			name          : 'yash',
-			num_org       : 2,
-			uploaded_by   : 'Nilap',
-			uploaded_date : '2023-02-22T13:33:35.028Z',
-			status        : 'Error',
-			type          : 'CP',
-			error         : true,
-		},
-		{
-			name          : 'yash',
-			num_org       : 2,
-			uploaded_by   : 'Nilap',
-			uploaded_date : '2023-02-22T13:33:35.028Z',
-			status        : 'Uploaded',
-			type          : 'CP',
-			error         : true,
-		},
-		{
-			name          : 'yash',
-			num_org       : 2,
-			uploaded_by   : 'Nilap',
-			uploaded_date : '2023-02-22T13:33:35.028Z',
-			status        : 'Uploaded',
-			type          : 'CP',
-			error         : true,
-		},
-		{
-			name          : 'yash',
-			num_org       : 2,
-			uploaded_by   : 'Nilap',
-			uploaded_date : '2023-02-22T13:33:35.028Z',
-			status        : 'Uploaded',
-			type          : 'CP',
-			error         : true,
-		},
-		{
-			name          : 'yash',
-			num_org       : 2,
-			uploaded_by   : 'Nilap',
-			uploaded_date : '2023-02-22T13:33:35.028Z',
-			status        : 'Uploaded',
-			type          : 'CP',
-			error         : false,
-		},
-		{
-			name          : 'yash',
-			num_org       : 2,
-			uploaded_by   : 'Nilap',
-			uploaded_date : '2023-02-22T13:33:35.028Z',
-			status        : 'Error',
-			type          : 'CP',
-			error         : true,
-		},
-		{
-			name          : 'yash',
-			num_org       : 2,
-			uploaded_by   : 'Nilap',
-			uploaded_date : '2023-02-22T13:33:35.028Z',
-			status        : 'Uploaded',
-			type          : 'SP',
-			error         : false,
-		}],
+	// const dummyData = {
+	// 	page        : 1,
+	// 	page_limit  : 8,
+	// 	total       : 4,
+	// 	total_count : 35,
+	// 	list        : [{
+	// 		name          : 'yash',
+	// 		num_org       : 2,
+	// 		uploaded_by   : 'Nilap',
+	// 		uploaded_date : '2023-02-22T13:33:35.028Z',
+	// 		status        : 'Uploading',
+	// 		type          : 'CP',
+	// 		error         : true,
+	// 	},
+	// 	{
+	// 		name          : 'yash',
+	// 		num_org       : 2,
+	// 		uploaded_by   : 'Nilap',
+	// 		uploaded_date : '2023-02-22T13:33:35.028Z',
+	// 		status        : 'Uploaded',
+	// 		type          : 'CP',
+	// 		error         : true,
+	// 	},
+	// 	{
+	// 		name          : 'yash',
+	// 		num_org       : 2,
+	// 		uploaded_by   : 'Nilap',
+	// 		uploaded_date : '2023-02-22T13:33:35.028Z',
+	// 		status        : 'Error',
+	// 		type          : 'CP',
+	// 		error         : true,
+	// 	},
+	// 	{
+	// 		name          : 'yash',
+	// 		num_org       : 2,
+	// 		uploaded_by   : 'Nilap',
+	// 		uploaded_date : '2023-02-22T13:33:35.028Z',
+	// 		status        : 'Uploaded',
+	// 		type          : 'CP',
+	// 		error         : true,
+	// 	},
+	// 	{
+	// 		name          : 'yash',
+	// 		num_org       : 2,
+	// 		uploaded_by   : 'Nilap',
+	// 		uploaded_date : '2023-02-22T13:33:35.028Z',
+	// 		status        : 'Uploaded',
+	// 		type          : 'CP',
+	// 		error         : true,
+	// 	},
+	// 	{
+	// 		name          : 'yash',
+	// 		num_org       : 2,
+	// 		uploaded_by   : 'Nilap',
+	// 		uploaded_date : '2023-02-22T13:33:35.028Z',
+	// 		status        : 'Uploaded',
+	// 		type          : 'CP',
+	// 		error         : true,
+	// 	},
+	// 	{
+	// 		name          : 'yash',
+	// 		num_org       : 2,
+	// 		uploaded_by   : 'Nilap',
+	// 		uploaded_date : '2023-02-22T13:33:35.028Z',
+	// 		status        : 'Uploaded',
+	// 		type          : 'CP',
+	// 		error         : false,
+	// 	},
+	// 	{
+	// 		name          : 'yash',
+	// 		num_org       : 2,
+	// 		uploaded_by   : 'Nilap',
+	// 		uploaded_date : '2023-02-22T13:33:35.028Z',
+	// 		status        : 'Error',
+	// 		type          : 'CP',
+	// 		error         : true,
+	// 	},
+	// 	{
+	// 		name          : 'yash',
+	// 		num_org       : 2,
+	// 		uploaded_by   : 'Nilap',
+	// 		uploaded_date : '2023-02-22T13:33:35.028Z',
+	// 		status        : 'Uploaded',
+	// 		type          : 'SP',
+	// 		error         : false,
+	// 	}],
 
-	};
+	// };
 	const columns = [
 		{
 			key      : 'name',
 			Header   : 'FILE NAME',
-			accessor : ({ name = '' }) => (
+			accessor : ({ name }) => (
 				<div className={styles.name}>{startCase(name || '___')}</div>
 			),
 		},
@@ -194,7 +185,7 @@ function useGetIngestionList() {
 		{
 			id       : 'status',
 			Header   : 'STATUS',
-			accessor : ({ status = '' }) => (
+			accessor : ({ status }) => (
 				<Pill size="sm" color={UPLOAD_STATUS_MAPPING[status]}>
 					{status ? startCase(status) : '___'}
 				</Pill>
@@ -203,7 +194,7 @@ function useGetIngestionList() {
 		{
 			key      : 'type',
 			Header   : 'TYPE',
-			accessor : ({ ingestion_type = '' }) => (
+			accessor : ({ ingestion_type }) => (
 				<div className={styles.type}>{startCase(ingestion_type || '___')}</div>
 			),
 		},
@@ -230,11 +221,9 @@ function useGetIngestionList() {
 			accessor : ({ error }) => (
 				<div className={styles.re_upload}>
 
-					{true ? (
+					{error ? (
 						<Button onClick={() => setTableModal('reUpload')} size="md" themeType="secondary">
 							{' '}
-							{/* <IcMDownload style={{ marginRight: '4px' }} />
-							Download */}
 							Re-Upload
 						</Button>
 					) : ''}
@@ -267,7 +256,6 @@ function useGetIngestionList() {
 
 	return {
 		columns,
-		// dummyData,
 		onPageChange,
 		loading,
 		Component,

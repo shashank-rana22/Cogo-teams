@@ -9,10 +9,12 @@ import styles from './styles.module.css';
 
 function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 	const { columns, onPageChange, data, loading } = useGetUploadList(row?.id);
-	const { list, page = 0, page_limit, total_count } = data || {};
+	const { list = [], page = 0, page_limit, total_count } = data || {};
 	const onClose = () => {
 		setTableModal('');
 	};
+
+	// console.log('dat', data);
 
 	const onSubmit = () => {
 		setTableModal('reUpload');
@@ -22,12 +24,12 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 
 	if (isEmpty(list) && !loading) {
 		return (
-			<Modal size="l" show={tableModal === 'uploadList'} onClose={onClose} placement="center">
+			<Modal size="lg" show={tableModal === 'uploadList'} onClose={onClose} placement="center">
 				<Modal.Header title={(
 					<div style={{ display: 'flex', alignItems: 'center' }}>
 						<IcMDownload style={{ margin: '0 4px 0 0' }} />
 						{' '}
-						Upload Listrkjbvr
+						Upload List
 					</div>
 				)}
 				/>
@@ -47,7 +49,7 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 	}
 
 	return (
-		<Modal size="l" show={tableModal} onClose={onClose} placement="center">
+		<Modal size="lg" show={tableModal} onClose={onClose} placement="center">
 			<Modal.Header title={(
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<IcMDownload style={{ margin: '0 4px 0 0' }} />
@@ -69,10 +71,10 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 					{total_count > page_limit && (
 						<div className={styles.pagination_container}>
 							<Pagination
-								type="number"
+								type="table"
 								currentPage={page}
 								totalItems={total_count || 0}
-								pageSize={page_limit || 8}
+								pageSize={page_limit || 5}
 								onPageChange={onPageChange}
 							/>
 						</div>

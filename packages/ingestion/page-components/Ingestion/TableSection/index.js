@@ -2,7 +2,6 @@ import { Table, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../common/EmptyState';
-import useGetIngestionList from '../../../hooks/useGetIngestionList';
 
 import Filters from './Filters';
 import styles from './styles.module.css';
@@ -20,16 +19,24 @@ function TableSection(props) {
 		formProps,
 		params = {},
 		setParams = () => {},
-		refetch,
 	} = props;
 
 	const { list, page = 0, page_limit = 0, total_count = 0 } = data || {};
 
 	if (isEmpty(list) && !loading) {
 		return (
-			<div className={styles.empty}>
-				<EmptyState height="300px" width="200px" />
-			</div>
+			<>
+				<Filters
+					disabled={isEmpty(list) && !loading}
+					setParams={setParams}
+					params={params}
+					formProps={formProps}
+				/>
+				<div className={styles.empty}>
+					<EmptyState height="300px" width="200px" />
+				</div>
+			</>
+
 		);
 	}
 	return (
@@ -47,7 +54,7 @@ function TableSection(props) {
 			{total_count > page_limit && (
 				<div className={styles.pagination_container}>
 					<Pagination
-						type="number"
+						type="table"
 						currentPage={page}
 						totalItems={total_count || 0}
 						pageSize={page_limit || 10}
