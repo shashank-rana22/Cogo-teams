@@ -56,10 +56,9 @@ function FilterpopOver({
 				</div>
 			</div>
 			<div className={styles.popover_content}>
-				<div className = {styles.margin_span} />
+				<div className={styles.margin_span} />
 
-				<div  className ={styles.styled_text}
-				>
+				<div className={styles.styled_text}>
 					{' '}
 					Kam Owner
 
@@ -75,10 +74,9 @@ function FilterpopOver({
 					size="sm"
 					isClearable
 				/>
-				<div className = {styles.margin_span} />
+				<div className={styles.margin_span} />
 
-				<div className ={styles.styled_text}
-				>
+				<div className={styles.styled_text}>
 					{' '}
 					Sales Agent
 
@@ -94,9 +92,8 @@ function FilterpopOver({
 					size="sm"
 					isClearable
 				/>
-				<div className = {styles.margin_span} />
-				<div className ={styles.styled_text}
-				>
+				<div className={styles.margin_span} />
+				<div className={styles.styled_text}>
 					{' '}
 					Credit Controller Agent
 
@@ -113,9 +110,8 @@ function FilterpopOver({
 					size="sm"
 					isClearable
 				/>
-				<div className = {styles.margin_span}  />
-				<div className ={styles.styled_text}
-				>
+				<div className={styles.margin_span} />
+				<div className={styles.styled_text}>
 					Company Type
 
 				</div>

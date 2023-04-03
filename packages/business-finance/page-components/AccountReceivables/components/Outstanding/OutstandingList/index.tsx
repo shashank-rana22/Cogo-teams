@@ -91,7 +91,7 @@ function OutstandingList({ item, outStandingFilters }: OutstandingListProps) {
 	};
 
 	const content = (types, head) => (
-		<div className = {styles.padding_container}>
+		<div className={styles.padding_container}>
 			<div className={styles.heading}>{head}</div>
 			<div className={styles.hr} />
 			<div className={styles.width_container}>

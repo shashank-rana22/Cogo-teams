@@ -181,13 +181,13 @@ function Filters({
 								<IcMCross
 									onClick={handleInputReset}
 									cursor="pointer"
-									className ={styles.icon_style}
+									className={styles.icon_style}
 								/>
 							)}
 							prefix={(
 								<IcMSearchdark />
 							)}
-							className ={styles.styled_input}
+							className={styles.styled_input}
 						/>
 					</div>
 					<FilterpopOver
