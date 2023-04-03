@@ -1,42 +1,25 @@
 import { Toast } from '@cogoport/components';
 import { useLensRequest } from '@cogoport/request';
 
-const useForwardEmail = () => {
+import getApiErrorString from '../utils/getApiErrorString';
+
+const useForwardEmail = ({ refetch = () => {} }) => {
 	const [forwardMailApi, triggerForwardMail] = useLensRequest({
 		url    : 'forward_mail',
 		method : 'POST',
 	}, { manual: true });
 
-	const forwardEmail = async ({
-		sender = '',
-		toUserEmail = [],
-		ccrecipients = [],
-		subject,
-		content,
-		attachments,
-		msgId,
-		userId,
-		onCreate,
-	}) => {
+	const forwardEmail = async ({ payload }) => {
 		try {
 			await triggerForwardMail({
 				data: {
-					sender,
-					toUserEmail,
-					ccrecipients,
-					subject,
-					content,
-					attachments,
-					msgId,
-					userId: userId || sender,
+					...payload,
 				},
 			});
 			Toast.success('Email Sent');
-			if (onCreate) {
-				onCreate();
-			}
+			refetch();
 		} catch (err) {
-			Toast.error(err?.data);
+			Toast.error(getApiErrorString(err));
 		}
 	};
 

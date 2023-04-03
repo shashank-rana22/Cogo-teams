@@ -1,45 +1,28 @@
 import { Toast } from '@cogoport/components';
 import { useLensRequest } from '@cogoport/request';
+
+import getApiErrorString from '../utils/getApiErrorString';
 /**
  * Single utility hook to Reply All mails from Cogo RPA
  */
 
-const useReplyAllEmail = () => {
+const useReplyAllEmail = ({ refetch = () => {} }) => {
 	const [replyAllMailApi, triggerReplyAllMail] = useLensRequest({
 		url    : 'reply_all',
 		method : 'POST',
 	}, { manual: true });
 
-	const replyAllEmail = async ({
-		sender = '',
-		toUserEmail = [],
-		ccrecipients = [],
-		subject,
-		content,
-		attachments,
-		msgId,
-		userId,
-		onCreate,
-	}) => {
+	const replyAllEmail = async ({ payload }) => {
 		try {
 			await triggerReplyAllMail({
 				data: {
-					sender,
-					toUserEmail,
-					ccrecipients,
-					subject,
-					content,
-					attachments,
-					msgId,
-					userId: userId || sender,
+					...payload,
 				},
 			});
 			Toast.success('Email Sent');
-			if (onCreate) {
-				onCreate();
-			}
+			refetch();
 		} catch (err) {
-			Toast.error(err?.data);
+			Toast.error(getApiErrorString(err));
 		}
 	};
 

@@ -17,17 +17,22 @@ function Footer({
 	handleSubmit,
 	onError,
 	action,
-	onCreate,
+	onCreate = () => {},
 	userEmailArray,
 	ccEmailArray,
 	bccEmailArray,
 }) {
-	const userId = useSelector(({ profile }) => profile?.id);
-	const { createEmail, mailApi } = useSendEmail();
-	const { forwardEmail, forwardMailApi } = useForwardEmail();
-	const { replyAllEmail, replyAllMailApi } = useReplyAllEmail();
-	const { replyEmail, replyMailApi } = useReplyEmail();
 	const [attachments, setAttachements] = useState([]);
+	const userId = useSelector(({ profile }) => profile?.id);
+
+	const refetch = () => {
+		onCreate();
+	};
+	const { createEmail, mailApi } = useSendEmail({ refetch });
+	const { forwardEmail, forwardMailApi } = useForwardEmail({ refetch });
+	const { replyAllEmail, replyAllMailApi } = useReplyAllEmail({ refetch });
+	const { replyEmail, replyMailApi } = useReplyEmail({ refetch });
+
 	let actionToPerform = createEmail;
 	let buttonText = 'Send Mail';
 	if (action === 'reply') {
@@ -45,18 +50,17 @@ function Footer({
 
 	const sendMail = async (data) => {
 		const payload = {
-			sender        : COMPOSE_EMAIL,
-			toUserEmail   : userEmailArray,
-			ccrecipients  : ccEmailArray,
-			bccrecipients : bccEmailArray,
+			sender        : COMPOSE_EMAIL || '',
+			toUserEmail   : userEmailArray || [],
+			ccrecipients  : ccEmailArray || [],
+			bccrecipients : bccEmailArray || [],
 			subject       : data?.subject,
 			content,
-			attachments   : attachments.map((item) => item),
+			attachments   : attachments?.map((item) => item),
 			msgId         : composingEmail?.id || undefined,
-			userId,
-			onCreate,
+			userId        : userId || COMPOSE_EMAIL,
 		};
-		await actionToPerform(payload);
+		await actionToPerform({ payload });
 	};
 	const loading =	replyAllMailApi.loading
 		|| mailApi.loading
