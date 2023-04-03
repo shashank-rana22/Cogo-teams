@@ -51,7 +51,7 @@ const useUpdateSingleBadge = (props) => {
 				status    : 'active',
 				id,
 				medal     : snakeCase(medal),
-				image_url : image_url || previous_image_url,
+				image_url : image_url?.finalUrl || previous_image_url,
 				score     : score || previous_score,
 			};
 
