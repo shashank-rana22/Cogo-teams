@@ -1,0 +1,63 @@
+.flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 16px;
+}
+
+.card_small {
+	padding: 8px 20px;
+	background-color: #fff;
+	border-radius: 8px;
+}
+
+.sub_flex {
+	display: flex;
+	gap: 16px;
+	align-items: center;
+}
+
+.input_container {
+	width: 400px;
+}
+
+.table_data {
+	margin-top: 16px;
+}
+
+.flex_sort {
+	display: flex;
+	align-items: center;
+}
+
+.status {
+	padding: 4px 8px;
+	background: #fef1df;
+	border-radius: 4px;
+}
+
+.status_fin {
+	padding: 4px 8px;
+	background: #ddebc0;
+	border-radius: 4px;
+}
+
+.status_op {
+	padding: 4px 8px;
+	background: #ddebc0;
+	border-radius: 4px;
+}
+
+.profit_data {
+	color: #67c676;
+}
+
+.profit_color {
+	color: #ee3425;
+}
+
+.wrapper {
+	width: 96px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
