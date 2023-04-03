@@ -40,12 +40,14 @@ function CreateNewTest({
 	};
 
 	useEffect(() => {
-		const { cogo_entity_object = {}, name = '' } = data;
+		const { cogo_entity_object = {}, name = '', audience_ids = [], eligible_users = '' } = data;
 
 		const { id } = cogo_entity_object || {};
 
 		setValue('name', name);
 		setValue('cogo_entity_id', id);
+		setValue('select_user_group', audience_ids);
+		setValue('select_users', eligible_users);
 	}, [data, setValue]);
 
 	return (
@@ -169,16 +171,15 @@ function CreateNewTest({
 
 					</div>
 
-					{test_sheet_data.test_sheet_data?.status === 'generated' && (
-						<FileUploader
-							className={styles.file_select}
-							showProgress
-							draggable
-							value={uploadDocument}
-							onChange={setUploadDocument}
-							accept=".xlsx,.csv"
-						/>
-					)}
+					<FileUploader
+						className={styles.file_select}
+						showProgress
+						draggable
+						value={uploadDocument}
+						onChange={setUploadDocument}
+						accept=".xlsx,.csv"
+						disabled={test_sheet_data.test_sheet_data?.status !== 'generated'}
+					/>
 				</>
 			)}
 
