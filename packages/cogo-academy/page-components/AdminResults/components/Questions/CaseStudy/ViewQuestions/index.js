@@ -13,36 +13,37 @@ function ViewQuestions({ question_id = '', test_id = '' }) {
 
 	const { list = [] } = data;
 
+	if (loading) {
+		return (
+			<div className={styles.placeholder_container}>
+				{[...Array(3).keys()].map((item) => (
+					<div
+						key={item}
+						className={styles.placeholder_inner_container}
+					>
+						<Placeholder height="24px" />
+					</div>
+				))}
+			</div>
+		);
+	}
+
+	if (isEmpty(list)) {
+		return <EmptyState />;
+	}
+
 	return (
 		<div>
-			{loading && (
-				<div className={styles.placeholder_container}>
-					{[...Array(3).keys()].map((item) => (
-						<div
-							key={item}
-							className={styles.placeholder_inner_container}
-						>
-							<Placeholder height="24px" />
-						</div>
-					))}
-				</div>
-			)}
+			<Header />
 
-			{!loading && isEmpty(list) ? <EmptyState /> : (
-				<div>
-					<Header />
-
-					{list.map((item) => (
-						<ViewQuestionItem
-							key={item.id}
-							question_item={item}
-							test_id={test_id}
-						/>
-					))}
-				</div>
-			)}
+			{list.map((item) => (
+				<ViewQuestionItem
+					key={item.id}
+					question_item={item}
+					test_id={test_id}
+				/>
+			))}
 		</div>
-
 	);
 }
 

@@ -27,8 +27,8 @@ function QuestionCard({ question_id = '', test_id = '', index = 0 }) {
 		);
 	}
 
-	if (!isEmpty(answers)) {
-		return (<EmptyState />);
+	if (isEmpty(answers)) {
+		return <EmptyState />;
 	}
 
 	return (

@@ -19,7 +19,6 @@ function Description({ question_text = '', id = '', test_id = '' }) {
 					className={styles.view_question}
 					onClick={() => setViewQuestions((prev) => !prev)}
 					role="presentation"
-					style={{ cursor: 'pointer' }}
 				>
 					<div>
 						{!viewQuestions ? <IcMArrowRotateDown /> : <IcMArrowRotateUp />}
