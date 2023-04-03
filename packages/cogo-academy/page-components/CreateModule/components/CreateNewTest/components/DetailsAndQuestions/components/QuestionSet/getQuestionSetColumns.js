@@ -109,6 +109,7 @@ const getQuestionSetColumns = ({ idArray, setIdArray }) => ([
 				<span className={styles.questionsettime}>
 					{format(updated_at, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}
 				</span>
+				{' '}
 				<span className={styles.questionsettime}>
 					{format(updated_at, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}
 				</span>

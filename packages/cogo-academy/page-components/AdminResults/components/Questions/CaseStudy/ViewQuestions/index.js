@@ -26,24 +26,20 @@ function ViewQuestions({ question_id = '', test_id = '' }) {
 					))}
 				</div>
 			)}
-			{
-				!loading && isEmpty(list) ? <EmptyState /> : (
 
-					<div>
-						<Header />
+			{!loading && isEmpty(list) ? <EmptyState /> : (
+				<div>
+					<Header />
 
-						{list.map((item) => (
-							<ViewQuestionItem
-								key={item.id}
-								question_item={item}
-								test_id={test_id}
-							/>
-						))}
-					</div>
-
-				)
-			}
-
+					{list.map((item) => (
+						<ViewQuestionItem
+							key={item.id}
+							question_item={item}
+							test_id={test_id}
+						/>
+					))}
+				</div>
+			)}
 		</div>
 
 	);

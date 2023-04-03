@@ -20,18 +20,14 @@ const getTopicWiseData = (topic_wise_percentile = {}) => (Object.keys(topic_wise
 function DifficultyAndTopicDistribution({ data = {}, toggleState = false }) {
 	const { difficulty_wise_stats, topic_wise_percent } = data || {};
 
+	const topic_wise_data = getTopicWiseData(topic_wise_percent);
+	const difficulty_wise_data = getDifficultyData(difficulty_wise_stats);
+
+	const chart_data = toggleState ? topic_wise_data : difficulty_wise_data;
+
 	return (
-		<div>
-			<div style={{ display: 'flex', marginRight: '12px' }}>
-				{toggleState ? (
-					<BarChart chart_data={getTopicWiseData(topic_wise_percent)} yAxis="Correct Answer %" />
-
-				) : (
-					<BarChart chart_data={getDifficultyData(difficulty_wise_stats)} yAxis="Correct Answer %" />
-
-				)}
-			</div>
-
+		<div style={{ display: 'flex', marginRight: '12px' }}>
+			<BarChart chart_data={chart_data} yAxis="Correct Answer %" />
 		</div>
 	);
 }

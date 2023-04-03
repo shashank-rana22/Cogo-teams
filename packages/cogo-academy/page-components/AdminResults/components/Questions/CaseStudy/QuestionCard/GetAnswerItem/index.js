@@ -9,10 +9,7 @@ function GetAnswerItem({ answer }) {
 	return (
 		<div className={styles.answer_item}>
 			<div className={styles.answer_header}>
-				{peers ? (
-					<div className={styles.percentage_bar} style={{ width: `${peers}%` }} />
-
-				) : null}
+				{peers ? <div className={styles.percentage_bar} style={{ width: `${peers}%` }} /> : null}
 
 				<div className={styles.peer_percentage}>
 					{toFixed(peers, 2)}
