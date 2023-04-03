@@ -74,9 +74,7 @@ function Shipment() {
 			<div className={styles.lower_half}>
 				<div className={styles.filter_tab}>
 					<div className={styles.left_padding}>
-						<div className={styles.date_range}>
-							DATE RANGE
-						</div>
+						DATE RANGE
 
 						<div className={styles.from_to}>
 							From
