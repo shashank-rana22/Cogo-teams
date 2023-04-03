@@ -2038,7 +2038,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/learning',
 				type          : 'link',
 				main_apis     : [],
-				possible_apis : apis.create_faq,
+				possible_apis : [...apis.create_faq, ...apis.create_test_set],
 			},
 			{
 				key           : 'cogo_academy-faq',
@@ -2048,15 +2048,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.faq,
-			},
-			{
-				key           : 'cogo_academy-create_test_set',
-				title         : 'Create Test',
-				href          : '/v2/learning/test-module',
-				as            : '/v2/learning/test-module',
-				type          : 'link',
-				main_apis     : [],
-				possible_apis : apis.create_test_set,
 			},
 			{
 				key           : 'cogo_academy-tests',
