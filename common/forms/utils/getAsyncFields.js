@@ -270,6 +270,21 @@ function listVendors() {
 	};
 }
 
+function asyncListCogoEntity() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'entity_code',
+		endpoint    : 'list_cogo_entities',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 100,
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -292,4 +307,5 @@ export {
 	asyncKamExpertiseRuleOptions,
 	asyncKamExpertiseGroupOptions,
 	listVendors,
+	asyncListCogoEntity,
 };

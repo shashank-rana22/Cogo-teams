@@ -11,8 +11,8 @@ import TotalColumn from './TotalColumn';
 
 function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
 	const { invoiceCurrency = '', lineItemsList:lineItemsListData = [] } = formData || {};
-	const { lineItemsList } = useGetListItemTaxes({ formData });
-
+	const { lineItemsList, loading } = useGetListItemTaxes({ formData });
+	const rest = { loading };
 	const { control, watch, setValue } = useForm(
 		{
 			defaultValues: {
@@ -115,6 +115,8 @@ function LineItemsForm({ formData, setFormData, taxOptions, setTaxOptions }) {
 					})}
 					data={controlledFields}
 					style={{ margin: '0px' }}
+					imageFind=""
+					{...rest}
 				/>
 
 				<TotalColumn

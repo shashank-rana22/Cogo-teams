@@ -17,8 +17,9 @@ function UploadController(props) {
 			render={({ field: { onChange, onBlur, value } }) => (
 				<FileUploader
 					{...rest}
-					key={name}
+					key={rest.id}
 					id={name}
+					defaultValues={value}
 					onChange={onChange}
 					value={value}
 					onBlur={onBlur}

@@ -19,6 +19,7 @@ import {
 	asyncKamExpertiseRuleOptions,
 	asyncKamExpertiseGroupOptions,
 	listVendors,
+	asyncListCogoEntity,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -52,6 +53,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_operators          : asyncFieldsListOperators,
 	list_rate_charge_codes  : asyncFieldListRateChargeCodes,
 	allot_bank              : asyncAllotBanks,
+	list_cogo_entity        : asyncListCogoEntity,
 	expertise_configuration : asyncFieldsExpertiseConfigurations,
 	badge_name              : asyncFieldsExpertiseBadgeName,
 	rule_options            : asyncKamExpertiseRuleOptions,

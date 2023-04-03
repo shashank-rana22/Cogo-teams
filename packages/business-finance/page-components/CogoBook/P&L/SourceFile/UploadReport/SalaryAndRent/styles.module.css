@@ -1,0 +1,108 @@
+.card {
+	margin: 16px 0;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 4px rgb(0 0 0 / 25%);
+}
+
+.flex_header {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.icon_info {
+	margin-top: 4px;
+}
+
+.card_data {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 32px;
+	font-weight: 600;
+}
+
+.card_data_enter {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 32px;
+	font-weight: 600;
+	border-bottom: 1px solid #f68b21;
+}
+
+.vertical_hr {
+	border: 1px solid #f68b21;
+}
+
+.flex_button {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}
+
+.icon {
+	margin-top: 6px;
+	cursor: pointer;
+}
+
+.shipment_container {
+	margin: 21px 32px;
+	background: #fff;
+	border: 1px solid #acdadf;
+	border-radius: 8px;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 36px;
+	border-bottom: 1px solid #acdadf;
+}
+
+.shipment_data {
+	padding: 16px 36px;
+}
+
+.ocean {
+	display: flex;
+	gap: 90px;
+	align-items: center;
+}
+
+.name {
+	font-size: 12px;
+	font-weight: 300;
+}
+
+.value {
+	font-weight: 600;
+
+	:global {
+		.ui_input_container {
+			height: 32px;
+
+			input {
+				font-size: 12px !important;
+			}
+		}
+	}
+}
+
+.data_value {
+	padding-bottom: 16px;
+}
+
+.icon_edit {
+	color: #f68b21;
+	cursor: pointer;
+}
+
+.icon_row {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	cursor: pointer;
+}
