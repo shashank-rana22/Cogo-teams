@@ -1,6 +1,6 @@
 import { Pill, Button, Popover } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
-import { IcMDelete } from '@cogoport/icons-react';
+import { IcMArrowNext, IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { startCase, format } from '@cogoport/utils';
@@ -19,13 +19,15 @@ const FILTER_MAPPING = {
 };
 
 const addedQuestionsColumns = ({
+	showPopOver,
+	setShowPopOver = () => {},
+	onClickNoButton = () => {},
 	activeList,
 	onClickEditButton,
 	deactivateQuestion,
 	onClickViewButton = () => {},
-
-	deleteitem,
-	setDeleteitem = () => {},
+	sortType,
+	setSortType = () => {},
 }) => [
 	{
 		Header   : 'QUESTIONS',
@@ -58,8 +60,19 @@ const addedQuestionsColumns = ({
 		) : '-'),
 	},
 	{
-		Header   : 'LAST UPDATED AT',
-		accessor : (items) => {
+		id     : 'LAST UPDATED AT',
+		Header : (
+			<div role="presentation" className={styles.sort_title} onClick={() => setSortType((prev) => !prev)}>
+				LAST UPDATED AT
+				<IcMArrowNext
+					height={14}
+					width={14}
+					className={styles.sort_arrow}
+					style={{ transform: sortType ? 'rotate(270deg)' : '' }}
+				/>
+			</div>
+		),
+		accessor: (items) => {
 			const formatDate = format(items?.updated_at || items?.created_at, 'dd MMM yyyy hh:mm a');
 			return (
 				<div>
@@ -99,15 +112,19 @@ const addedQuestionsColumns = ({
 						content={(
 							<PopOverContent
 								source="question"
-								onCLickYesButton={() => deactivateQuestion(deleteitem.id)}
+								onCLickYesButton={() => deactivateQuestion(items.id)}
+								onClickNoButton={() => onClickNoButton(items)}
 							/>
 						)}
+						visible={showPopOver === items?.id}
 					>
 						<IcMDelete
 							height={20}
 							width={20}
 							style={{ cursor: 'pointer' }}
-							onClick={() => { setDeleteitem(items); }}
+							onClick={
+								() => setShowPopOver(() => (showPopOver === items?.id ? null : items?.id))
+}
 						/>
 					</Popover>
 
@@ -119,7 +136,7 @@ const addedQuestionsColumns = ({
 ];
 
 const requestedQuestionsColumns = ({
-	deactivateQuestion, onClickEditButton,
+	deactivateQuestion, onClickEditButton, showPopOver, setShowPopOver = () => {}, onClickNoButton = () => {},
 }) => [
 	{
 		Header   : 'QUESTIONS',
@@ -166,13 +183,20 @@ const requestedQuestionsColumns = ({
 						<PopOverContent
 							source="question"
 							onCLickYesButton={() => deactivateQuestion(items.id)}
+							onClickNoButton={() => onClickNoButton(items)}
 						/>
+
 					)}
+					visible={showPopOver === items?.id}
+
 				>
 					<IcMDelete
 						height={20}
 						width={20}
 						style={{ cursor: 'pointer' }}
+						onClick={
+							() => setShowPopOver(() => (showPopOver === items?.id ? null : items?.id))
+}
 
 					/>
 				</Popover>
@@ -184,7 +208,7 @@ const requestedQuestionsColumns = ({
 
 const useQuestionList = () => {
 	const router = useRouter();
-
+	const [showPopOver, setShowPopOver] = useState(false);
 	const [sortType, setSortType] = useState(true);
 	const [searchInput, setSearchInput] = useState('');
 	const [activeList, setActiveList] = useState('published');
@@ -210,7 +234,9 @@ const useQuestionList = () => {
 	useEffect(() => {
 		debounceQuery(searchInput);
 	}, [debounceQuery, searchInput]);
-
+	const onClickNoButton = () => {
+		setShowPopOver(null);
+	};
 	const getQuestionsList = useCallback(async () => {
 		try {
 			await trigger({
@@ -275,20 +301,41 @@ const useQuestionList = () => {
 		);
 	};
 
-	const columns = activeList !== 'requested'
-		? addedQuestionsColumns({
-			activeList,
-			onClickEditButton,
-			deactivateQuestion,
-			onClickViewButton,
-			deleteitem,
-			setDeleteitem,
-		})
-		: requestedQuestionsColumns({ deactivateQuestion, onClickEditButton });
+	const addedQuestionEnties = Object.entries(addedQuestionsColumns({
+		showPopOver,
+		setShowPopOver,
+		onClickNoButton,
+		activeList,
+		onClickEditButton,
+		deactivateQuestion,
+		onClickViewButton,
+		deleteitem,
+		setDeleteitem,
+		sortType,
+		setSortType,
+	}));
 
+	const renderAddedQuestionColumns = () => {
+		const cols = addedQuestionEnties.map(([column, obj]) => ({
+			id       : column,
+			Header   : obj.Header,
+			accessor : obj.accessor,
+		}));
+		return cols;
+	};
+	const columns = activeList !== 'requested'
+		? renderAddedQuestionColumns() : requestedQuestionsColumns({
+			deactivateQuestion,
+			onClickEditButton,
+			showPopOver,
+			setShowPopOver,
+			onClickNoButton,
+		});
 	const { list: data = [], requested_question_count = 0, ...paginationData } = questionList || {};
 
 	return {
+		showPopOver,
+		setShowPopOver,
 		page,
 		setPage,
 		paginationData,
