@@ -17,6 +17,7 @@ function BasicDetails({
 	getTestQuestionTest,
 	questionSetId,
 	mode,
+	listSetQuestions,
 }) {
 	const [showForm, setShowForm] = useState(false);
 
@@ -45,6 +46,7 @@ function BasicDetails({
 						questionSetId={questionSetId}
 						setValue={setValue}
 						setShowForm={setShowForm}
+						listSetQuestions={listSetQuestions}
 					/>
 				)}
 		</div>

@@ -16,7 +16,7 @@
 
 .single_record {
 	display: flex;
-	flex-wrap: row wrap;
+	flex-wrap: wrap;
 }
 
 .fields_to_show {

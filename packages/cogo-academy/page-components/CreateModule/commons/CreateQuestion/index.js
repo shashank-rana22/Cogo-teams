@@ -17,6 +17,7 @@ function CreateQuestion({
 	setEditDetails,
 	topic,
 	mode,
+	listSetQuestions,
 }) {
 	const {
 		isNewQuestion,
@@ -42,6 +43,7 @@ function CreateQuestion({
 		questionSetId,
 		getTestQuestionTest,
 		setAllKeysSaved,
+		listSetQuestions,
 	});
 
 	return (
@@ -61,6 +63,7 @@ function CreateQuestion({
 					reset={reset}
 					setAllKeysSaved={setAllKeysSaved}
 					getTestQuestionTest={getTestQuestionTest}
+					listSetQuestions={listSetQuestions}
 					questionSetId={questionSetId}
 					mode={mode}
 				/>
@@ -80,6 +83,7 @@ function CreateQuestion({
 						setAllKeysSaved={setAllKeysSaved}
 						mode={mode}
 						questionTypeWatch={questionTypeWatch}
+						listSetQuestions={listSetQuestions}
 					/>
 				</div>
 

@@ -32,6 +32,7 @@ function AddQuestionsForm({
 	setPage,
 	mode,
 	page_limit,
+	getTestQuestionTest,
 }) {
 	const [showBulkUpload, setShowBulkUpload] = useState(false);
 
@@ -78,13 +79,14 @@ function AddQuestionsForm({
 						allKeysSaved={allKeysSaved}
 						setAllKeysSaved={setAllKeysSaved}
 						questionSetId={questionSetId}
-						getTestQuestionTest={listSetQuestions}
+						listSetQuestions={listSetQuestions}
 						loading={listLoading}
 						total_count={total_count}
 						page={page}
 						setPage={setPage}
 						mode={mode}
 						page_limit={page_limit}
+						getTestQuestionTest={getTestQuestionTest}
 					/>
 				)
 			)}
@@ -101,6 +103,7 @@ function AddQuestionsForm({
 					savedQuestionDetails={savedQuestionDetails}
 					listSetQuestions={listSetQuestions}
 					mode={mode}
+					getTestQuestionTest={getTestQuestionTest}
 				/>
 			) : null}
 
