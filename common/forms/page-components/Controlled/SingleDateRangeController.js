@@ -4,7 +4,7 @@ import { Controller } from 'react-hook-form';
 
 function SingleDateRangeController(props) {
 	const {
-		name, control, rules, ...rest
+		name, control, rules, disabled, ...rest
 	} = props;
 
 	return (
@@ -20,6 +20,7 @@ function SingleDateRangeController(props) {
 					id={name}
 					onChange={onChange}
 					value={value}
+					disable={disabled}
 				/>
 			)}
 		/>
