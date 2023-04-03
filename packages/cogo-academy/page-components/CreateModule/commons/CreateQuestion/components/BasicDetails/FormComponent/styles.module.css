@@ -13,7 +13,6 @@
 
 .control_container {
 	align-items: center;
-	margin: auto;
 
 	:global {
 		.ui_input_container,
@@ -53,7 +52,8 @@
 
 	@media (max-width: 768px) {
 		flex-direction: column;
-		align-items: center;
+		align-items: flex-start;
+		margin-top: 12px;
 	}
 }
 
@@ -65,7 +65,11 @@
 }
 
 .question_type {
-	margin: auto;
+	margin-left: 60px;
+	
+	@media (max-width: 768px) {
+		margin-top: 20px;
+	}
 
 	.control {
 		margin-top: 4px;

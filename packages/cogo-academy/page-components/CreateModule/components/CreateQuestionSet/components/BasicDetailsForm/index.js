@@ -56,7 +56,7 @@ function BasicDetailsForm({
 	};
 
 	const editForm = () => {
-		['name', 'topic', 'audience_ids'].forEach((item) => {
+		['name', 'topic'].forEach((item) => {
 			setValue(item, data?.[item]);
 		});
 

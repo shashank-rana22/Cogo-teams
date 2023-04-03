@@ -8,15 +8,6 @@ const getControls = ({ mode }) => [
 		rules       : { required: 'This is required' },
 	},
 	{
-		name        : 'audience_ids',
-		label       : 'User Groups',
-		type        : 'multi-select',
-		disabled    : mode === 'view',
-		placeholder : 'Select users',
-		options     : [{ label: 'KAM1', value: 'kam1' }, { label: 'KAM2', value: 'kam2' }],
-		rules       : { required: 'This is required' },
-	},
-	{
 		name    : 'question_type',
 		type    : 'chips',
 		label   : 'Pick Question Type',
