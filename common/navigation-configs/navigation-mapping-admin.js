@@ -1795,6 +1795,7 @@ const navigationMappingAdmin = {
 		key         : 'athena_dashboard',
 		title       : 'Athena Dashboard',
 		module_type : 'dashboards',
+		icon        : IcMDashboard,
 		href        : '/v2/athena-dashboard',
 		as          : '/v2/athena-dashboard',
 		main_apis   : [
