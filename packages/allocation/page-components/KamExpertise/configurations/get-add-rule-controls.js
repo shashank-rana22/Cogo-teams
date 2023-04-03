@@ -1,10 +1,11 @@
 import { asyncKamExpertiseGroupOptions } from '@cogoport/forms';
 import useGetAsyncOptionsMicroservice from '@cogoport/forms/hooks/useGetAsyncOptionsMicroservice';
 
-const GetControls = ({ expertiseTypeWatch }) => {
+const useGetControls = ({ expertiseTypeWatch }) => {
 	const asyncControlOptions = useGetAsyncOptionsMicroservice({
 		...asyncKamExpertiseGroupOptions(),
-		params: {
+		initialCall : false,
+		params      : {
 			status  : 'live',
 			filters : {
 				expertise_type: expertiseTypeWatch,
@@ -60,9 +61,9 @@ const GetControls = ({ expertiseTypeWatch }) => {
 		{
 			name  : 'description',
 			label : 'Description',
-			type  : 'text',
+			type  : 'textarea',
 		},
 	];
 };
 
-export default GetControls;
+export default useGetControls;
