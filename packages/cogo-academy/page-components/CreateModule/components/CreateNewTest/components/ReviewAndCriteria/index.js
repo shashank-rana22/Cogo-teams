@@ -14,6 +14,12 @@ import styles from './styles.module.css';
 
 function ReviewAndCriteria(props) {
 	const { loading, data, test_id } = props;
+	const { name = '', set_data = [], cogo_entity_object = {} } = data || {};
+
+	const router = useRouter();
+
+	const [error, setError] = useState(false);
+	const [showModal, setShowModal] = useState(false);
 
 	const { control, formState: { errors }, handleSubmit, setValue, getValues, watch } = useForm();
 
@@ -22,19 +28,11 @@ function ReviewAndCriteria(props) {
 		name: 'guidelines',
 	});
 
-	const { name = '', set_data = [], cogo_entity_object = {} } = data || {};
-
 	const { updateTest } = useUpdateTest();
-
-	const router = useRouter();
-
-	const [error, setError] = useState(false);
 
 	useEffect(() => {
 		setValue('guidelines', data?.guidelines?.map((guideline) => ({ instruction: guideline })));
 	}, [data, setValue]);
-
-	const [showModal, setShowModal] = useState(false);
 
 	const onNavigate = () => {
 		const href = '/learning?activeTab=test_module';
@@ -48,7 +46,7 @@ function ReviewAndCriteria(props) {
 				<div className={styles.title}>New Test</div>
 			</div>
 
-			{(isEmpty(data) || loading) ? (
+			{(loading || isEmpty(data)) ? (
 				<Placeholder
 					height="100px"
 					width="100%"
@@ -116,7 +114,7 @@ function ReviewAndCriteria(props) {
 
 			<div className={styles.instructions}>
 				<h3>Add Instructions</h3>
-				{ fields.map((field, index) => (
+				{fields.map((field, index) => (
 					<div key={field.id}>
 						<div className={styles.instruction}>
 							<InputController
@@ -126,14 +124,17 @@ function ReviewAndCriteria(props) {
 								name={`guidelines.${index}.instruction`}
 								rules={{ required: 'This is required' }}
 							/>
+
 							<div role="presentation" className={styles.add_icon} onClick={() => remove(index)}>
 								<IcMDelete height={20} width={20} />
 							</div>
 						</div>
+
 						{errors?.guidelines?.[index]?.instruction?.message
 						&& <p className={styles.err_msg}>{errors?.guidelines?.[index]?.instruction?.message}</p>}
 					</div>
 				))}
+
 				<div
 					role="presentation"
 					className={styles.add_icon}
@@ -147,6 +148,7 @@ function ReviewAndCriteria(props) {
 				<Button
 					loading={loading}
 					size="md"
+					type="button"
 					themeType="tertiary"
 					style={{ marginRight: '10px' }}
 					onClick={
@@ -157,6 +159,7 @@ function ReviewAndCriteria(props) {
 				>
 					Save As Draft
 				</Button>
+
 				<Button
 					loading={loading}
 					size="md"
@@ -175,7 +178,6 @@ function ReviewAndCriteria(props) {
 					Publish Test
 				</Button>
 			</div>
-
 		</div>
 	);
 }
