@@ -72,3 +72,8 @@
 	align-content: space-around;
 	margin-bottom: 16px;
 }
+
+.errors {
+	padding-top: 4px;
+	color: #ee3425;
+}

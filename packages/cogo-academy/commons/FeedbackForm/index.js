@@ -1,3 +1,4 @@
+// import { Badge } from '@cogoport/components';
 import { RTEditor } from '@cogoport/components';
 import { InputController, CheckboxController } from '@cogoport/forms';
 import React from 'react';
@@ -6,6 +7,7 @@ import styles from './styles.module.css';
 
 function FeedbackForm({
 	answerData = {},
+	errors = {},
 	control,
 	answer,
 	setAnswer,
@@ -69,7 +71,14 @@ function FeedbackForm({
 					name="remark"
 					type="text"
 					placeholder="Enter remark here"
+					rules={{ required: 'Remark is required' }}
 				/>
+
+				{errors.remark && (
+					<span className={styles.errors}>
+						{errors.remark.message}
+					</span>
+				)}
 			</div>
 		</div>
 	);
