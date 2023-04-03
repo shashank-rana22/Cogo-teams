@@ -30,7 +30,6 @@ function BadgeCard(props) {
 
 	return (
 		<>
-			{' '}
 			<div className={isLast ? styles.badge_card_right : styles.badge_card_left}>
 				<div className={styles.badge_header}>
 					<div className={styles.header_score}>

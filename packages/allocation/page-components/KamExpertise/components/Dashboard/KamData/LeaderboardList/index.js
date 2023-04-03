@@ -18,7 +18,7 @@ function LeaderboardList(props) {
 
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
 
-	if ((leaderboardLoading)) {
+	if (leaderboardLoading) {
 		return <LeaderboardLoading leaderboardList={leaderboardList} />;
 	}
 

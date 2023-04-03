@@ -19,7 +19,7 @@ function Header() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.left_container}>
-				<div style={{ fontSize: '18px', marginBottom: '4px' }}>
+				<div className={styles.config}>
 					Current Configuration :
 					{' '}
 					Version
