@@ -26,8 +26,6 @@ const addedQuestionsColumns = ({
 	onClickEditButton,
 	deactivateQuestion,
 	onClickViewButton = () => {},
-	deleteitem,
-	setDeleteitem = () => {},
 	sortType,
 	setSortType = () => {},
 }) => [

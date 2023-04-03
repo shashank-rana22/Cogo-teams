@@ -7,7 +7,6 @@ import useQuestionList from './useQuestionList';
 function QuestionsList() {
 	const [PopoverVisible, setPopoverVisible] = useState(true);
 	const props = useQuestionList({ PopoverVisible, setPopoverVisible });
-	
 
 	const { activeList = '', setPage = () => {} } = props;
 
