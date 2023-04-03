@@ -22,7 +22,7 @@ function MapView(props = {}) {
 	const [circleTab, setCircleTab] = useState('new_users');
 	const { customer_locations = [] } = stats?.list || {};
 
-	const CountryMobileCode = country?.mobile_country_code || '';
+	const countryMobileCode = country?.mobile_country_code || '';
 
 	let markerData = {};
 	markerData = customer_locations.map((item) => ({
@@ -39,7 +39,7 @@ function MapView(props = {}) {
 			globeGL.current.scene().children[1].intensity = 1.25;
 			globeGL.current.scene().children[2].intensity = 0.25;
 		}
-	}, [globeGL, CountryMobileCode, date, circleTab]);
+	}, [globeGL, countryMobileCode, date, circleTab]);
 
 	const resetGlobePosition = () => {
 		const defaultMapCenter = { lat: 0, lng: 78, altitude: 1.8 };
