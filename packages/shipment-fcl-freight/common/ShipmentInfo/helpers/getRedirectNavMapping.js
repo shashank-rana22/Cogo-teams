@@ -11,13 +11,11 @@ export const eventListener = () => {
 	window.sessionStorage.setItem('prev_nav', window.location.href);
 };
 
-export const backAllowed = (router) => {
-	const prev_nav_restricted = window.sessionStorage.getItem(
-		'prev_nav_restricted',
-	);
+export const backAllowed = (routerComponents) => {
+	const prev_nav_restricted = window.sessionStorage.getItem('prev_nav_restricted');
 	const prev_nav = window.sessionStorage.getItem('prev_nav');
 	const just_refreshed = prev_nav === window.location.href;
-	const isDirect = Object.keys(router.components || {}).length <= 2;
+	const isDirect = Object.keys(routerComponents || {}).length <= 2;
 
 	let isBackAllowed = !isDirect || just_refreshed;
 	if (typeof prev_nav_restricted === 'string') {

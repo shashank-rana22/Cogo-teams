@@ -1,5 +1,5 @@
 import getSideBarConfigs from '@cogoport/navigation-configs/side-bar';
-import { Router } from '@cogoport/next';
+import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect, useMemo } from 'react';
 
@@ -10,16 +10,19 @@ export default function useShipmentBack() {
 	const { permissions_navigations = {}, email = '' } = profileData;
 
 	const [isBackAllowed, setIsBackAllowed] = useState();
+	const router = useRouter();
 
 	const { redirectNav } = useMemo(() => {
-		const { nav_items: { partner: allSideBarNavs } } = getSideBarConfigs({ permissions_navigations, email });
+		const { nav_items: { partner: allSideBarNavs } } = getSideBarConfigs({
+			userData: { permissions_navigations, email },
+		});
 
 		return { redirectNav: getRedirectNavMapping(allSideBarNavs) };
 	}, [permissions_navigations, email]);
 
 	useEffect(() => {
 		setIsBackAllowed(() => {
-			if (backAllowed(Router)) {
+			if (backAllowed(router.components)) {
 				window.addEventListener('beforeunload', eventListener);
 				return true;
 			}
@@ -31,15 +34,15 @@ export default function useShipmentBack() {
 			window.sessionStorage.removeItem('prev_nav');
 			window.removeEventListener('beforeunload', eventListener);
 		};
-	}, []);
+	}, [router.components]);
 
 	const handleShipmentsClick = (e) => {
 		e.preventDefault();
 
 		if (isBackAllowed) {
-			Router.back();
+			router.back();
 		} else {
-			Router.push(redirectNav?.href, redirectNav?.as);
+			router.push(redirectNav?.href, redirectNav?.as);
 		}
 	};
 
