@@ -137,3 +137,11 @@
 .width_container {
 	width: 100px;
 }
+
+.style_margin_top {
+	margin-top: 4px;
+}
+
+.padding_container {
+	padding: 4px;
+}

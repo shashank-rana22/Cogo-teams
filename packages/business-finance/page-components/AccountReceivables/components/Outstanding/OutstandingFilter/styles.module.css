@@ -86,3 +86,12 @@
 	border: 1px solid #e0e0e0;
 	border-radius: 8px;
 }
+
+.styled_input {
+	width: 300px;
+	font-size: 14px; 
+}
+
+.icon_style {
+	margin-right: 4px;
+}

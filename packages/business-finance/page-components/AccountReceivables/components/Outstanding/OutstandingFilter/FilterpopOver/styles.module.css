@@ -41,3 +41,7 @@
 	width: 320px;
 	max-height: fit-content;
 }
+
+.margin_span {
+	margin-top: 12px;
+}

@@ -91,12 +91,12 @@ function OutstandingList({ item, outStandingFilters }: OutstandingListProps) {
 	};
 
 	const content = (types, head) => (
-		<div style={{ padding: '4px' }}>
+		<div className = {styles.padding_container}>
 			<div className={styles.heading}>{head}</div>
 			<div className={styles.hr} />
 			<div className={styles.width_container}>
 				{types?.map((party) => (
-					<div style={{ marginTop: '5px' }}>
+					<div className={styles.style_margin_top}>
 						<div className={styles.styled_tag}>{startCase(party)}</div>
 					</div>
 				))}
