@@ -52,7 +52,7 @@ function PendingReviews({
 				<Filters
 					params={params}
 					setParams={setParams}
-					source="hr_pip_pending"
+					source="hr_pip_dashboard"
 				/>
 
 			</div>

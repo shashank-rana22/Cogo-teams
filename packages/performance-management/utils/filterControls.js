@@ -10,19 +10,26 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 	const designationOptions = useGetCustomAsyncOptions({
 		endpoint    : 'get_iris_get_department_mappings',
 		initialCall : false,
-		params      : {
-			Department,
-		},
-		valueKey  : 'designation',
-		labelKey  : 'designation',
-		filterKey : 'Qdesignation',
+		params      : { Department },
+		valueKey    : 'designation',
+		labelKey    : 'designation',
+		filterKey   : 'Qdesignation',
+	});
+
+	const asyncManagerOptions = useGetCustomAsyncOptions({
+		endpoint    : 'get_iris_list_reportees',
+		initialCall : false,
+		params      : { IncludingCeos: true },
+		valueKey    : 'user_id',
+		labelKey    : 'name',
+		filterKey   : 'Q',
 	});
 
 	const control = [
 		{
 			label       : 'Manager Name',
 			name        : 'manager_name',
-			placeholder : 'Search Manager...',
+			placeholder : 'Search User...',
 			type        : 'text',
 			isClearable : true,
 		},
@@ -39,6 +46,12 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 				{ label: '4', value: 4 },
 				{ label: '5', value: 5 },
 			],
+		},
+		{
+			name       	: 'manager_id',
+			placeholder	: 'Manager...',
+			type       	: 'select',
+			...asyncManagerOptions,
 		},
 		{
 			name        : 'year',
@@ -116,16 +129,18 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 		right : [],
 	};
 
-	leftFilters.forEach((name) => {
-		const updatedControl = control.find((ctrl) => ctrl.name === name);
+	leftFilters.forEach(({ name, ...rest }) => {
+		let updatedControl = control.find((ctrl) => ctrl.name === name);
+		updatedControl = { ...updatedControl, ...rest };
 		if (control.name === 'month' && selectedYear === year) {
 			updatedControl.options = monthOptions.filter((newMonth) => newMonth.index <= month);
 		}
 		FilterControls.left.push(updatedControl);
 	});
 
-	rightFilters.forEach((name) => {
-		const updatedControl = control.find((ctrl) => ctrl.name === name);
+	rightFilters.forEach(({ name, ...rest }) => {
+		let updatedControl = control.find((ctrl) => ctrl.name === name);
+		updatedControl = { ...updatedControl, ...rest };
 		if (control.name === 'month' && selectedYear === year) {
 			updatedControl.options = monthOptions.filter((newMonth) => newMonth.index <= month);
 		}

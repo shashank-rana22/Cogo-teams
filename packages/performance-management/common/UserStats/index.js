@@ -8,6 +8,7 @@ import feedbackDataColumns from '../../constants/feedback-data-columns';
 import useListUserFeedbacks from '../../hooks/useListUserFeedbacks';
 import getMonthControls from '../../utils/monthControls';
 import useGetColumns from '../Columns';
+import Filters from '../Filters';
 import PerformanceChart from '../PerformanceChart';
 import UserTableData from '../UserTableData';
 
@@ -105,6 +106,8 @@ function UserStats({ source = '' }) {
 
 					</div>
 				</div>
+
+				<Filters source="user_dashboard" />
 
 				<div className={styles.performance_chart}>
 					<PerformanceChart userId={userId} params={params} />

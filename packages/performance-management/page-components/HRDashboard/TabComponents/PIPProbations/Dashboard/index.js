@@ -29,6 +29,7 @@ function Dashboard({
 
 	const { list = [], pagination_data = {} } = employeeData;
 	const { page_limit, page, total_count } = pagination_data;
+	console.log('dashboard params::', params);
 
 	useEffect(() => {
 		if (refetchList) {

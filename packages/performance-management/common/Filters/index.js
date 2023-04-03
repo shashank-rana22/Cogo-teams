@@ -1,9 +1,9 @@
-import { useWatch, useDebounceQuery, SelectController, useForm } from '@cogoport/forms';
+import { useWatch, useDebounceQuery, useForm } from '@cogoport/forms';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
+import filtersSourceMapping from '../../constants/filters-source-mapping';
 import useGetControls from '../../utils/filterControls';
-import useListReassignControls from '../../utils/list-reassign-manager-controls';
 import { getFieldController } from '../Form/getFieldController';
 
 import styles from './styles.module.css';
@@ -12,20 +12,16 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const filterProps = params;
-	const leftFilters = ['department', 'designation',
-		...(source === 'hr_kpi_dashboard' ? ['manager_name', 'year', 'month'] : []),
-		...(source === 'hr_feedback' ? ['year', 'month'] : []),
-		...(source === 'hr_pip_dashboard' ? ['status', 'date_range'] : []),
-		...(source === 'hr_pip_pending' ? ['status'] : []),
-	];
-	const rightFilters = ['manager_name'];
+
+	const { left:leftFilters = [], right:rightFilters = [] } = filtersSourceMapping[source];
+
+	console.log('params::', params);
 
 	const filterControls = useGetControls(
 		{
 			leftFilters,
 			rightFilters,
 			filterProps,
-			setParams,
 		},
 	);
 
@@ -40,8 +36,6 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 	});
 
 	const managerName = watch('manager_name');
-
-	const cogoUsersControl = useListReassignControls();
 
 	useEffect(() => {
 		const { department, designation, manager_id, year, month, date_range } = values;
@@ -82,15 +76,6 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 						/>
 					);
 				})}
-				{ source.includes('feedback') && (
-					<SelectController
-						{...cogoUsersControl}
-						style={{ marginRight: '8px' }}
-						control={control}
-						placeholder="Manager..."
-						isClearable
-					/>
-				)}
 			</div>
 			<div className={styles.right_container}>
 				{source !== 'hr_kpi_dashboard' && filterControls.right.map((cntrl) => {
@@ -105,7 +90,6 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 							id={`${cntrl}_id`}
 							value={params[value]}
 							style={{ marginRight: '8px' }}
-							placeholder="Search User.."
 						/>
 					);
 				})}
