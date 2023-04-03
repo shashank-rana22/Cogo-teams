@@ -2,10 +2,10 @@ import { Select, Input, Checkbox, Button } from '@cogoport/components';
 import { RadioGroupController } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 
+import controls from '../../../configurations/trend-controls';
 import countryname_value from '../../../constants/country-name-value';
 import useTrendSearch from '../hooks/useTrendSearch';
 
-import controls from './controls';
 import styles from './styles.module.css';
 
 function Trends() {
@@ -38,8 +38,8 @@ function Trends() {
 						className={styles.multiselect}
 					/>
 				</div>
-				{controls.map((Item) => {
-					const ele = { ...Item };
+				{controls.map((item) => {
+					const ele = { ...item };
 					return (
 						<div>
 							<div style={{ marginLeft: '10px' }}>
@@ -90,10 +90,10 @@ function Trends() {
 						</div>
 						<div className={styles.display_selected_code}>
 							{
-							((hscodeArr || []).map((Item) => (
+							((hscodeArr || []).map((item) => (
 								<div className={styles.individual}>
 									<div className={styles.individual_text}>
-										{Item}
+										{item}
 									</div>
 								</div>
 							)))
@@ -132,19 +132,18 @@ function Trends() {
 			}
 			</div>
 
-			<div>
-				<div className={styles.codes}>
-					{
-					((responsevalue || []).map((Item) => (
+			<div className={styles.codes}>
+				{
+					((responsevalue || []).map((item) => (
 						<div>
 							<div className={styles.set_css_output}>
 								<div className={styles.checkbox}>
 									<Checkbox
-										key={Item.hs_code}
-										id={Item.hs_code}
+										key={item.hs_code}
+										id={item.hs_code}
 										className="checkboxes"
-										label={Item.hs_code}
-										value={Item.hs_code}
+										label={item.hs_code}
+										value={item.hs_code}
 										onChange={(e) => {
 											let arr = [...hscodeArr];
 											if (e.target.checked) {
@@ -158,14 +157,13 @@ function Trends() {
 									/>
 								</div>
 								<div className={styles.description}>
-									{Item.category}
+									{item.category}
 								</div>
 							</div>
 							<hr />
 						</div>
 					)))
 				}
-				</div>
 			</div>
 		</div>
 	);

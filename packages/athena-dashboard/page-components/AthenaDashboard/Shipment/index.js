@@ -7,12 +7,12 @@ import { IcMDownload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import EmptyState from '../../../common/EmptyState';
+import controls from '../../../configurations/shipment-controls';
 import tableDataColumns from '../../../constants/table-data-columns';
 import useGetColumns from '../hooks/useGetColumns';
 import useSearch from '../hooks/useSearch';
 
-import controls from './controls';
-import EmptyState from './EmptyState';
 import styles from './styles.module.css';
 
 function Shipment() {
@@ -43,8 +43,8 @@ function Shipment() {
 					/>
 				</div>
 
-				{controls[1].map((Item) => {
-					const ele = { ...Item };
+				{controls[1].map((item) => {
+					const ele = { ...item };
 
 					return (
 						<MultiselectController
@@ -79,7 +79,7 @@ function Shipment() {
 						</div>
 
 						<div className={styles.from_to}>
-							<div>From</div>
+							From
 							<div className={styles.to}>To</div>
 						</div>
 
@@ -94,8 +94,8 @@ function Shipment() {
 					</div>
 
 					<div className={styles.left_padding}>
-						{controls[0].map((Item) => {
-							const el = { ...Item };
+						{controls[0].map((item) => {
+							const el = { ...item };
 							return (
 								<>
 									<div className={styles.microfilter_names}>
@@ -118,43 +118,40 @@ function Shipment() {
 				</div>
 
 				<div className={styles.table_and_tabs}>
-					<div>
-						<div className={styles.tab_lower}>
-							<Tabs
-								activeTab={activeTab}
-								themeType="secondary"
-								onChange={setActiveTab}
-							>
-								<TabPanel name="Shipments" title="Shipments" />
-							</Tabs>
+					<div className={styles.tab_lower}>
+						<Tabs
+							activeTab={activeTab}
+							themeType="secondary"
+							onChange={setActiveTab}
+						>
+							<TabPanel name="Shipments" title="Shipments" />
+						</Tabs>
+					</div>
+
+					<div className={styles.export_info}>
+						<div className={styles.shipment_report}>
+							Shipment Report
 						</div>
 
-						<div className={styles.export_info}>
-							<div className={styles.shipment_report}>
-								Shipment Report
-							</div>
-
-							<div className={styles.export_results}>
-								<IcMDownload style={{ 'padding-right': '3px' }} />
-								Export Results
-							</div>
+						<div className={styles.export_results}>
+							<IcMDownload style={{ 'padding-right': '3px' }} />
+							Export Results
 						</div>
+					</div>
 
-						<div className={styles.sort_by_box}>
-							<div className={styles.sort_by}>
-								Sort By
-							</div>
-							<div className={styles.select_box}>
-								<Select
-									value="Arrival date(newest first)"
-									options={[{
-										label : 'Shipment date (newest first)',
-										value : 'Arrival date(newest first)',
-									}]}
-									disabled
-								/>
-							</div>
-
+					<div className={styles.sort_by_box}>
+						<div className={styles.sort_by}>
+							Sort By
+						</div>
+						<div className={styles.select_box}>
+							<Select
+								value="Arrival date(newest first)"
+								options={[{
+									label : 'Shipment date (newest first)',
+									value : 'Arrival date(newest first)',
+								}]}
+								disabled
+							/>
 						</div>
 
 					</div>
@@ -183,9 +180,7 @@ function Shipment() {
 					)}
 
 					{loading && (
-						<div>
-							<Placeholder height="850px" width="868px" margin="50px 20px 20px 0px" />
-						</div>
+						<Placeholder height="850px" width="868px" margin="50px 20px 20px 0px" />
 					)}
 				</div>
 			</div>

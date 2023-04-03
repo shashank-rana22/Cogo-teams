@@ -1,7 +1,7 @@
 import { ResponsiveLine } from '@cogoport/charts/line/index';
 import { Table, Placeholder } from '@cogoport/components';
 
-import Map from '../../../constants/responsive-choropleth';
+import Map from '../../../common/responsive-choropleth';
 import tableDataColumns from '../../../constants/table-data-columns';
 import useGetColumns from '../hooks/useGetColumns';
 import useSetReport from '../hooks/useSetReport';
@@ -27,16 +27,14 @@ function Report() {
 	const TOP_GLOBAL_SUPPLIER_MAPPING = useGetColumns({ columnsToShow: globalSuppliersToShow });
 
 	return (
-		<div>
+		<>
 			<div className={styles.top_text}>
 				Trend Report
 			</div>
-			<div>
-				{!loading ? hsdesc
+			{!loading ? hsdesc
 				&& <Table className={styles.table} columns={COLUMNS_HSCODE_DESCRIPTION} data={hsdesc} />
-					: <Placeholder height="100px" width="100%" />}
-			</div>
-			<div>
+				: <Placeholder height="100px" width="100%" />}
+			<>
 				<div className={styles.trending_over_time}>
 					Trending Over Time:
 				</div>
@@ -109,12 +107,10 @@ function Report() {
 						/>
 					</div>
 				) : (
-					<div>
-						<Placeholder height="400px" width="100%" />
-					</div>
+					<Placeholder height="400px" width="100%" />
 				)}
 
-			</div>
+			</>
 			<div className={styles.value_of_goods}>
 				{shipment_type === 'import' ? 'Value of Goods (INR) entering India last year:'
 					: 'Value of Goods (INR) leaving India last year'}
@@ -124,16 +120,16 @@ function Report() {
 				<div className={styles.second_trend}>
 					<div className={styles.whole_container}>
 						{
-								(share || []).map((Item) => (
+								(share || []).map((item) => (
 									<div className={styles.left_container}>
-										<div>{Item.country}</div>
+										{item.country}
 										<div>
 											Rs.
 											{' '}
-											{Item.total.toLocaleString('en-IN')}
+											{item.total.toLocaleString('en-IN')}
 											{' '}
 											(
-											{Item.percent_share.toFixed(2)}
+											{item.percent_share.toFixed(2)}
 											%
 											)
 										</div>
@@ -148,9 +144,7 @@ function Report() {
 					</div>
 				</div>
 			) : (
-				<div>
-					<Placeholder height="400px" width="100%" />
-				</div>
+				<Placeholder height="400px" width="100%" />
 			)}
 
 			<div className={styles.value_of_goods} style={{ 'margin-top': '50px' }}>
@@ -161,14 +155,12 @@ function Report() {
 							<div className={styles.second_trend}>
 								<div className={styles.whole_container}>
 									{
-									(marketshare || []).map((Item) => (
+									(marketshare || []).map((item) => (
 										<div className={styles.left_container}>
-											<div>{Item.country}</div>
+											{item.country}
 											<div>
-												{Item.country}
-												{' '}
 												(
-												{Item.percent_share.toFixed(2)}
+												{item.percent_share.toFixed(2)}
 												%
 												)
 											</div>
@@ -206,7 +198,7 @@ function Report() {
 				<Placeholder height="600px" width="100%" />
 			)}
 
-		</div>
+		</>
 	);
 }
 

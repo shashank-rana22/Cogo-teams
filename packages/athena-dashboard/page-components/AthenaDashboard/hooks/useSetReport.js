@@ -43,20 +43,20 @@ const useSetReport = () => {
 		{
 			id    : 'India',
 			color : 'hsl(1, 100%, 50%)',
-			data  : (answer || []).map((Item) => ({
-				x : Item.month_name,
-				y : Item.total,
+			data  : (answer || []).map((item) => ({
+				x : item.month_name,
+				y : item.total,
 			})),
 		},
 	];
-	const shipmentValueMapData = (share || []).map((Item) => ({
-		id    : Item.country_code,
-		value : Item.total,
+	const shipmentValueMapData = (share || []).map((item) => ({
+		id    : item.country_code,
+		value : item.total,
 	}));
 
-	const marketShareChangeMapData = (marketshare || []).map((Item) => ({
-		id    : Item.country_code,
-		value : Item.percent_share.toFixed(2),
+	const marketShareChangeMapData = (marketshare || []).map((item) => ({
+		id    : item.country_code,
+		value : item.percent_share.toFixed(2),
 	}));
 	return {
 		hsdesc,
