@@ -47,7 +47,7 @@ function PopoverTags({
 		salesAgent = {},
 	} = item || {};
 
-	const { id ='', name ='', email = ''} = kam
+	const { id = '', name = '', email = '' } = kam;
 	const content = (
 		<PopoverContent data={data} loading={loading} />
 	);
