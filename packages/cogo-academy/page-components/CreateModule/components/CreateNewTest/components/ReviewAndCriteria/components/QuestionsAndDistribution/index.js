@@ -1,13 +1,14 @@
-import { Pill, Table, Placeholder } from '@cogoport/components';
-import { InputController } from '@cogoport/forms';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { Table, Placeholder } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import getControls from './controls';
+import getColumns from './columns';
 import styles from './styles.module.css';
 
 function QuestionsAndDistribution(props) {
-	const { data, control, errors, loading, setValue, watch, setError } = props;
+	const { data, loading, errors, control, setValue, watch, setError } = props;
+
+	const columns = getColumns({ errors, control });
 
 	useEffect(() => {
 		data?.test_set_distribution_data?.forEach(({
@@ -32,106 +33,6 @@ function QuestionsAndDistribution(props) {
 	const standAloneQuestions = watch((set_data || []).map(({ id }) => (`${id}q`)));
 
 	const caseStudyQuestions = watch((set_data || []).map(({ id }) => (`${id}c`)));
-
-	const columns = [
-		{
-			Header   : 'QUESTION SET NAME',
-			id       : 'question_set_name',
-			accessor : ({ name = '' }) => (
-				<section>
-					{startCase(name) || '-'}
-				</section>
-			),
-		},
-		{
-			Header   : 'TOPIC',
-			id       : 'topic',
-			accessor : ({ topic = '-' }) => (
-				<section>
-					<Pill
-						key={topic}
-						size="sm"
-						color="blue"
-					>
-						{startCase(topic)}
-					</Pill>
-				</section>
-			),
-		},
-		{
-			Header   : 'USER GROUPS',
-			id       : 'user_groups',
-			accessor : ({ audience_ids = [] }) => (
-				<section>
-					{audience_ids.map((audience_id) => (
-						<Pill
-							key={audience_id}
-							size="sm"
-							color="orange"
-						>
-							{startCase(audience_id)}
-						</Pill>
-					))}
-					{audience_ids.length === 0 && '-'}
-				</section>
-			),
-		},
-		{
-			Header   : 'AVAILABLE QUESTIONS',
-			id       : 'available_questions',
-			accessor : ({ non_case_study_question_count = 0 }) => (
-				<section>{non_case_study_question_count}</section>
-			),
-		},
-		{
-			Header   : 'AVAILABLE CASES',
-			id       : 'available_cases',
-			accessor : ({
-				case_study_question_count
-				= 0,
-			}) => (
-				<section>{case_study_question_count}</section>
-			),
-		},
-		{
-			Header: (
-				<div className={styles.content}>
-					<div className={styles.subcontent}>
-						<span>DISTRIBUTION</span>
-
-						<span className={styles.matter}>
-							Questions and cases from each Set
-						</span>
-					</div>
-				</div>
-			),
-			id       : 'distribution',
-			accessor : ({ non_case_study_question_count = 0, case_study_question_count = 0, id = '' }) => {
-				const controlItem1 = getControls(id, non_case_study_question_count)[0];
-				const controlItem2 = getControls(id, case_study_question_count)[1];
-
-				return (
-					<section className={styles.distribution}>
-						<span className={(errors[`${id}q`] || errors[`${id}c`])
-							? null : styles.align_center}
-						>
-							No. of
-						</span>
-
-						<div className={styles.input_container}>
-							<InputController control={control} {...controlItem1} className={styles.input} />
-							{errors[`${id}q`] && <div className={styles.error_msg}>{errors[`${id}q`]?.message}</div>}
-						</div>
-
-						<div className={styles.input_container}>
-							<InputController control={control} {...controlItem2} className={styles.input} />
-							{errors[`${id}c`] && <div className={styles.error_msg}>{errors[`${id}c`]?.message}</div>}
-						</div>
-					</section>
-				);
-			},
-		},
-	];
 
 	const questionsCount = (standAloneQuestions || []).reduce(
 		(total, currValue) => total + (Number(currValue) || 0),
