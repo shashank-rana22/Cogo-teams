@@ -62,7 +62,7 @@ const addedQuestionsColumns = ({
 	{
 		id     : 'LAST UPDATED AT',
 		Header : (
-			<div role="presentation" className={styles.sort_title} onClick={() => { setSortType((prev) => !prev); }}>
+			<div role="presentation" className={styles.sort_title} onClick={() => setSortType((prev) => !prev)}>
 				LAST UPDATED AT
 				<IcMArrowNext
 					height={14}
