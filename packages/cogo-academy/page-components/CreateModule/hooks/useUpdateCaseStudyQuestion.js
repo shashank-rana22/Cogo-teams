@@ -17,6 +17,7 @@ function useUpdateCaseStudyQuestion({
 	setEditDetails,
 	setAllKeysSaved,
 	reset = () => {},
+	listSetQuestions,
 }) {
 	const [{ loading:loadingUpdate }, triggerUpdate] = useRequest({
 		method : 'post',
@@ -69,7 +70,8 @@ function useUpdateCaseStudyQuestion({
 
 			Toast.success(`Case study question ${actionNameMapping[action]} successfully`);
 
-			getTestQuestionTest({ questionSetId, questionToShow: testQuestionId });
+			listSetQuestions({ questionSetId, questionToShow: testQuestionId });
+			getTestQuestionTest({ questionSetId });
 			setAllKeysSaved(true);
 			setEditDetails({});
 			reset();

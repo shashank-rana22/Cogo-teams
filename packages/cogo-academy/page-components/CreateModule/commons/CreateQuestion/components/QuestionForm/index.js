@@ -22,6 +22,7 @@ function QuestionForm({
 	setAllKeysSaved,
 	mode,
 	questionTypeWatch,
+	listSetQuestions,
 }) {
 	const NAME_CONTROL_MAPPING = useMemo(() => {
 		const hash = {};
@@ -69,6 +70,7 @@ function QuestionForm({
 							getValues={getValues}
 							questionSetId={questionSetId}
 							getTestQuestionTest={getTestQuestionTest}
+							listSetQuestions={listSetQuestions}
 							reset={reset}
 							setEditDetails={setEditDetails}
 							setAllKeysSaved={setAllKeysSaved}

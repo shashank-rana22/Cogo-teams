@@ -21,7 +21,7 @@ function VendorDetailsInfo({
 		{ label: 'Country of Registration', value: country?.name },
 		{ label: 'Registration No.', value: registration_number },
 		{ label: 'Organisation Name', value: business_name },
-		{ label: 'GST Certificate', value: registration_proof_url },
+		{ label: 'PAN Document', value: registration_proof_url },
 		{ label: 'Type of Company', value: startCase(company_type) },
 		{ label: 'Company Branch', value: name },
 	];
@@ -35,7 +35,7 @@ function VendorDetailsInfo({
 					</div>
 
 					<div className={styles.bottom}>
-						{item.label === 'GST Certificate'
+						{item.label === 'PAN Document'
 							? (
 								<div className={styles.download}>
 									<a

@@ -16,6 +16,7 @@ function ManualAddition({
 	test_questions,
 	listSetQuestions,
 	mode,
+	getTestQuestionTest,
 }) {
 	return (
 		<div>
@@ -36,13 +37,14 @@ function ManualAddition({
 							index={index}
 							item={item}
 							questionSetId={questionSetId}
-							getTestQuestionTest={listSetQuestions}
+							listSetQuestions={listSetQuestions}
 							setSavedQuestionDetails={setSavedQuestionDetails}
 							setAllKeysSaved={setAllKeysSaved}
 							editDetails={editDetails}
 							setEditDetails={setEditDetails}
 							topic={topic}
 							mode={mode}
+							getTestQuestionTest={getTestQuestionTest}
 						/>
 					);
 				}
@@ -58,12 +60,13 @@ function ManualAddition({
 					)}
 					type="edit"
 					questionSetId={questionSetId}
-					getTestQuestionTest={listSetQuestions}
+					listSetQuestions={listSetQuestions}
 					setSavedQuestionDetails={setSavedQuestionDetails}
 					setAllKeysSaved={setAllKeysSaved}
 					setEditDetails={setEditDetails}
 					topic={topic}
 					mode={mode}
+					getTestQuestionTest={getTestQuestionTest}
 				/>
 			) : null}
 		</div>

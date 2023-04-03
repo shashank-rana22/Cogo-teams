@@ -18,6 +18,7 @@ function useUpdateStandAloneTestQuestion({
 	setAllKeysSaved,
 	reset = () => {},
 	setQuestionToDelete = () => {},
+	listSetQuestions,
 }) {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
@@ -54,10 +55,12 @@ function useUpdateStandAloneTestQuestion({
 
 			Toast.success(`StandAlone Question has been ${MAPPING[action]} successfully`);
 
-			getTestQuestionTest({
+			listSetQuestions({
 				questionSetId,
 				...(action === 'delete' ? { pageToShow: 1 } : null),
 			});
+
+			getTestQuestionTest({ questionSetId });
 
 			setAllKeysSaved(true);
 			setEditDetails({});
