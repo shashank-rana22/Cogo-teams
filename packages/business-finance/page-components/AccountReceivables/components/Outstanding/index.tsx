@@ -11,6 +11,7 @@ import styles from './styles.module.css';
 
 function Outstanding() {
 	const [formFilters, setFormFilters] = useState({
+		kamId              : '',
 		salesAgentId       : '',
 		creditControllerId : '',
 		companyType        : '',
@@ -36,6 +37,7 @@ function Outstanding() {
 
 	const clearFilter = () => {
 		setFormFilters({
+			kamId              : '',
 			salesAgentId       : '',
 			creditControllerId : '',
 			companyType        : '',

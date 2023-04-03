@@ -78,9 +78,12 @@ function OutstandingList({ item, outStandingFilters }: OutstandingListProps) {
 		},
 		payments_list: {
 			organizationId,
+			outStandingFilters,
 		},
 		settlement_list: {
 			organizationId,
+			outStandingFilters,
+
 		},
 		organization_users: {
 			selfOrganizationId,
@@ -88,18 +91,18 @@ function OutstandingList({ item, outStandingFilters }: OutstandingListProps) {
 	};
 
 	const content = (types, head) => (
-		<div style={{ padding: '15px' }}>
+		<div style={{ padding: '4px' }}>
 			<div className={styles.heading}>{head}</div>
 			<div className={styles.hr} />
-			<div className={styles.flex_column}>
+			<div className={styles.width_container}>
 				{types?.map((party) => (
 					<div style={{ marginTop: '5px' }}>
 						<div className={styles.styled_tag}>{startCase(party)}</div>
 					</div>
 				))}
-
 			</div>
 		</div>
+
 	);
 
 	return (

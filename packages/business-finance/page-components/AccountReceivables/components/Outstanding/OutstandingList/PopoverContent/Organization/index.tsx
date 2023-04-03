@@ -41,10 +41,7 @@ function Organization({ data = {}, loading }:Props) {
 				<UserCard userData={user} type="active" />
 			</div>
 
-			<div className={styles.last_container}>
-
-				{(reportees || []).length > 0 && <Reportees reportees={reportees} />}
-			</div>
+			{(reportees || []).length > 0 && <Reportees reportees={reportees} />}
 		</div>
 
 	);

@@ -11,11 +11,13 @@ function Reporting({ reportingManagers = [] }: Props) {
 	return (
 		<div className={styles.container}>
 			{(reportingManagers || []).map((item) => (
-				<div className={styles.card_container}>
-					<UserCard userData={item} />
-				</div>
+				<>
+					<div className={styles.card_container}>
+						<UserCard userData={item} />
+					</div>
+					<div className={styles.connector} />
+				</>
 			))}
-			<div className={styles.connector} />
 
 		</div>
 	);

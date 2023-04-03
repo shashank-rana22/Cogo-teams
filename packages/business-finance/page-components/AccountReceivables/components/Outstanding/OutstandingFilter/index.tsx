@@ -187,7 +187,7 @@ function Filters({
 							prefix={(
 								<IcMSearchdark />
 							)}
-							style={{ width: 300 }}
+							style={{ width: 300, fontSize: '14px' }}
 						/>
 					</div>
 					<FilterpopOver

@@ -34,7 +34,7 @@ interface InvoiceFilterProps {
 	services?: string[],
 }
 
-const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
+const useGetOutstandingCard = (organizationId: string, entityCode: number) => {
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const [invoiceFilters, setinvoiceFilters] = useState<InvoiceFilterProps>({
