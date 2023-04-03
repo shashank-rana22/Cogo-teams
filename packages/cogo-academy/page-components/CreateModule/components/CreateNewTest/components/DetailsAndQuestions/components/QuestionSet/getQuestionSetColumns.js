@@ -23,7 +23,7 @@ const handleChange = ({ event, id, setIdArray }) => {
 const getQuestionSetColumns = ({ idArray, setIdArray }) => ([
 	{
 		Header   : '',
-		id       : 'check',
+		id       : 'select_question_set',
 		accessor : ({ id = '' }) => (
 			<Checkbox
 				key="question_set"
@@ -37,7 +37,7 @@ const getQuestionSetColumns = ({ idArray, setIdArray }) => ([
 	},
 	{
 		Header   : 'QUESTION SET NAME',
-		id       : 'a',
+		id       : 'name',
 		accessor : ({ name = '' }) => (
 			<section>
 				{startCase(name) || '-'}
@@ -46,7 +46,7 @@ const getQuestionSetColumns = ({ idArray, setIdArray }) => ([
 	},
 	{
 		Header   : 'TOPIC',
-		id       : 'b',
+		id       : 'topic',
 		accessor : ({ topic = '-' }) => (
 			<section>
 				<Pill
@@ -61,7 +61,7 @@ const getQuestionSetColumns = ({ idArray, setIdArray }) => ([
 	},
 	{
 		Header   : 'USER GROUPS',
-		id       : 'c',
+		id       : 'user_groups',
 		accessor : ({ audience_ids = [] }) => (
 			<section>
 				{audience_ids.map((audience_id) => (
@@ -79,14 +79,14 @@ const getQuestionSetColumns = ({ idArray, setIdArray }) => ([
 	},
 	{
 		Header   : 'NO. OF QUESTIONS',
-		id       : 'd',
+		id       : 'no_of_questions',
 		accessor : ({ non_case_study_question_count = 0 }) => (
 			<section>{non_case_study_question_count}</section>
 		),
 	},
 	{
 		Header   : 'NO. OF CASES',
-		id       : 'e',
+		id       : 'no_of_cases',
 		accessor : ({
 			case_study_question_count
 			= 0,
@@ -96,14 +96,14 @@ const getQuestionSetColumns = ({ idArray, setIdArray }) => ([
 	},
 	{
 		Header   : 'NO. OF TESTS USING THE SET',
-		id       : 'f',
+		id       : 'no_of_tests_using_the_set',
 		accessor : ({ set_count = 0 }) => (
 			<section>{set_count}</section>
 		),
 	},
 	{
 		Header   : 'LAST UPDATED',
-		id       : 'g',
+		id       : 'last_updated',
 		accessor : ({ updated_at = '' }) => (
 			<section>
 				<span className={styles.questionsettime}>
