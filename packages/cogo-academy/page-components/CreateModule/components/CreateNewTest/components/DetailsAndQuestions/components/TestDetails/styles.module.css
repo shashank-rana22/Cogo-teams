@@ -2,6 +2,7 @@
 	padding: 24px 0;
 	margin-top: 40px;
 	border-radius: 6px;
+
 	@media (max-width: 768px) {
 		padding: 24px;
 	}
@@ -23,57 +24,59 @@
 
 .control_container {
 	display: flex;
-	width: 85%;
+	gap: 20px;
 	align-items: center;
-	gap:20px;
+	width: 85%;
 	margin-bottom: 15px;
+
 	@media (max-width: 768px) {
 		flex-direction: column;
 		margin: auto;
 	}
 
-	.label{
-		flex-shrink: 0;
+	.label {
 		flex-basis: 25%;
+		flex-shrink: 0;
 	}
 
 	.control_type {
 		display: flex;
 		flex-basis: 55%;
-		gap:20px;
+		gap: 20px;
 	}
 }
 
-.input_wrapper:first-child{
+.input_wrapper:first-child {
 	flex-shrink: 0;
 }
 
-.input_wrapper:nth-child(2){
+.input_wrapper:nth-child(2) {
 	flex-grow: 1;
 }
 
-
 .control_container_two {
 	display: flex;
-	width: 85%;
+	gap: 20px;
 	align-items: center;
-	gap:20px;
+	width: 85%;
 	margin-bottom: 15px;
+
 	@media (max-width: 768px) {
 		flex-direction: column;
 		margin: auto;
 	}
 
-	:global{
-		.ui_radiogroup_container{
-			padding: 0px;
+	:global {
+		.ui_radiogroup_container {
+			padding: 0;
 		}
-		.ui_radio_container{
-			padding-left: 0px;
+
+		.ui_radio_container {
+			padding-left: 0;
 		}
 	}
 
-	.label{
+	.label {
 		flex-basis: 25%;
 	}
 
@@ -108,6 +111,6 @@
 	color: #cb6464;
 }
 
-.file_select{
+.file_select {
 	background-color: white;
 }
