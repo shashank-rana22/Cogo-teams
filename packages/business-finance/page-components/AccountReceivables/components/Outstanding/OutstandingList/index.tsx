@@ -2,6 +2,7 @@ import { TabPanel, Tabs, Tooltip } from '@cogoport/components';
 import { startCase, format } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import { GenericObject } from '../../../commons/Interfaces';
 import { CARD_DETAILS } from '../../../constants/index';
 import useGetPartnerRmMapping from '../../../hooks/useGetPartnerRmMapping';
 
@@ -35,10 +36,11 @@ interface ItemProps {
 	selfOrganizationId?: string
 }
 interface OutstandingListProps {
-	item?: ItemProps
+	item?: ItemProps,
+	outStandingFilters?: GenericObject,
 }
 
-function OutstandingList({ item }: OutstandingListProps) {
+function OutstandingList({ item, outStandingFilters }: OutstandingListProps) {
 	const [activeTab, setActiveTab] = useState('');
 
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
@@ -72,12 +74,16 @@ function OutstandingList({ item }: OutstandingListProps) {
 	const propsData = {
 		invoice_details: {
 			organizationId,
+			outStandingFilters,
 		},
 		payments_list: {
 			organizationId,
+			outStandingFilters,
 		},
 		settlement_list: {
 			organizationId,
+			outStandingFilters,
+
 		},
 		organization_users: {
 			selfOrganizationId,
@@ -85,18 +91,18 @@ function OutstandingList({ item }: OutstandingListProps) {
 	};
 
 	const content = (types, head) => (
-		<div style={{ padding: '15px' }}>
+		<div className={styles.padding_container}>
 			<div className={styles.heading}>{head}</div>
 			<div className={styles.hr} />
-			<div className={styles.flex_column}>
+			<div className={styles.width_container}>
 				{types?.map((party) => (
-					<div style={{ marginTop: '5px' }}>
+					<div className={styles.style_margin_top}>
 						<div className={styles.styled_tag}>{startCase(party)}</div>
 					</div>
 				))}
-
 			</div>
 		</div>
+
 	);
 
 	return (
