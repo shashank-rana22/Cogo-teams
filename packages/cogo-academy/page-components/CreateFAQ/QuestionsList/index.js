@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import AddedQuestions from './AddedQuestions';
 import styles from './styles.module.css';
 import useQuestionList from './useQuestionList';
 
 function QuestionsList() {
-	const [PopoverVisible, setPopoverVisible] = useState(true);
-	const props = useQuestionList({ PopoverVisible, setPopoverVisible });
+	const props = useQuestionList();
 
 	const { activeList = '', setPage = () => {} } = props;
 
