@@ -1,4 +1,4 @@
-import { Pill, Table } from '@cogoport/components';
+import { Input, Pill, Table } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 import React from 'react';
 
@@ -41,7 +41,7 @@ const columns = [
 
 ];
 
-function Published({ setSelectedVersion = () => {}, list }) {
+function Published({ setSelectedVersion = () => {}, list, versionName, setVersionName }) {
 	const table = [];
 
 	list.forEach((element) => {
@@ -58,12 +58,20 @@ function Published({ setSelectedVersion = () => {}, list }) {
 	return (
 		<div className={styles.modal_body}>
 			<div className={styles.head_text}>
-				b. Please select the version you prefer to use when creating a new draft:
+				Select the version to create a new draft:
 			</div>
 
 			<div className={styles.supporting_text}>
 				Creating a new draft will overwrite the existing saved draft.
 			</div>
+
+			<Input
+				size="sm"
+				placeholder="Enter Draft Name"
+				style={{ marginBottom: '16px' }}
+				value={versionName}
+				onChange={(value) => { setVersionName(value); }}
+			/>
 
 			<Table
 				className={styles.table}
