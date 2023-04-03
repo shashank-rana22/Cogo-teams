@@ -25,26 +25,23 @@ function useFaqAudiencesStats() {
 		url    : '/get_faq_audience_stats',
 	}, { manual: true });
 
-	const fetchFaqAudiencesStats = useCallback(async (StartDate, EndDate) => {
+	const fetchFaqAudiencesStats = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
-					// status        : 'active',
-					start_date : StartDate || undefined,
-					end_date   : EndDate || undefined,
-					// is_admin_view : true,
+					start_date : formatStartDate || undefined,
+					end_date   : formatEndDate || undefined,
 				},
 			});
 		} catch (error) {
 			console.log('error :: ', error);
 		}
-	}, [trigger]);
+	}, [formatEndDate, formatStartDate, trigger]);
 
 	useEffect(() => {
 		if (dataFetchedRef.current) return;
 		dataFetchedRef.current = true;
-		console.log(data, 'yes');
-		fetchFaqAudiencesStats(formatStartDate, formatEndDate);
+		fetchFaqAudiencesStats();
 	}, [page, date, fetchFaqAudiencesStats, formatStartDate, formatEndDate, data]);
 
 	const { page_limit = 0, total_count = 0 } = data || {};
