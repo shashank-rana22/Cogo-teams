@@ -20,7 +20,10 @@ export default function useShipmentBack() {
 		return { redirectNav: getRedirectNavMapping(allSideBarNavs) };
 	}, [permissions_navigations, email]);
 
+	console.log({ isBackAllowed });
+
 	useEffect(() => {
+		console.log('mounted');
 		setIsBackAllowed(() => {
 			if (backAllowed(router.components)) {
 				window.addEventListener('beforeunload', eventListener);
