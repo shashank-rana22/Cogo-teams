@@ -52,8 +52,10 @@ const useShipmentEmails = ({ payload = {} }) => {
 		});
 	}
 
+	useEffect(() => { entityType.current = entity_type; }, [entity_type]);
+
 	useEffect(() => {
-		if ((entityType).length) {
+		if (entityType?.current?.length) {
 			getShipmentEmails();
 		}
 	}, [entityType, getShipmentEmails]);

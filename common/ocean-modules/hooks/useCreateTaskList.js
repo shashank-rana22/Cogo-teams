@@ -83,15 +83,18 @@ const useCreateTaskList = ({ primary_service, shipment_data }) => {
 			setTaskList([...extraDocumentUploaded, ...uploadedList, ...pendingList, ...restList]);
 			setDocTypes([...pushInDocTypesArr]);
 		}
-	}, [listOfAllShipmentDocTypes,
-		listOfUploadedDocumentTypes,
-		listOfPendingTaskDocumentTypes,
-		pendingTasks,
+	}, [
+		JSON.stringify(listOfAllShipmentDocTypes),
+		// listOfUploadedDocumentTypes,
+		// listOfPendingTaskDocumentTypes,
+		JSON.stringify(pendingTasks),
 		primary_service?.trade_type,
-		taskConfigs,
-		taskConfigsForAllShipmentTasks,
-		uploadedShipmentDocuments?.list,
+		// taskConfigs,
+		// taskConfigsForAllShipmentTasks,
+		JSON.stringify(uploadedShipmentDocuments?.list),
 	]);
+
+	console.log({ taskList, docTypes });
 
 	return {
 		filters,
