@@ -14,7 +14,7 @@ import useEndTest from './hooks/useEndTest';
 import useGetUserTestQuestion from './hooks/useGetUserTestQuestion';
 import styles from './styles.module.css';
 
-function Ongoing({ testData, page, setActiveState }) {
+function Ongoing({ testData, page, setActiveState, currentQuestionId }) {
 	const { guidelines = [] } = testData || {};
 
 	const [currentQuestion, setCurrentQuestion] = useState(page || 1);
@@ -33,7 +33,7 @@ function Ongoing({ testData, page, setActiveState }) {
 		test_user_mapping_id,
 		total_question_count,
 		user_appearance,
-	} = useGetUserTestQuestion();
+	} = useGetUserTestQuestion({ currentQuestionId });
 
 	const { endTest, endTestLoading } = useEndTest({
 		setActiveState,

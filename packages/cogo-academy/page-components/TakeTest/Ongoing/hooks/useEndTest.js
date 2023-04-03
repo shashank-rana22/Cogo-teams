@@ -27,6 +27,7 @@ const useEndTest = ({ setActiveState = () => {}, setShowTimeOverModal, test_user
 
 			localStorage.removeItem(`current_question_${test_id}_${user_id}`);
 			localStorage.removeItem('visibilityChangeCount');
+			localStorage.removeItem(`current_question_id_${test_id}_${user_id}`);
 
 			setShowTimeOverModal(false);
 			setActiveState('completed');

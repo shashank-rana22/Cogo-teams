@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-function useGetUserTestQuestion() {
+function useGetUserTestQuestion({ currentQuestionId }) {
 	const {
 		query: { test_id },
 		user: { id: user_id },
@@ -16,6 +16,7 @@ function useGetUserTestQuestion() {
 		params : {
 			test_id,
 			user_id,
+			question_id: currentQuestionId,
 		},
 	}, { manual: false });
 
@@ -30,6 +31,10 @@ function useGetUserTestQuestion() {
 	};
 
 	const { start_time, question_data, test_user_mapping_id, total_question_count, user_appearance } = data || {};
+
+	const { id } = question_data || {};
+
+	localStorage.setItem(`current_question_id_${test_id}_${user_id}`, id);
 
 	return {
 		getUserTestQuestion,

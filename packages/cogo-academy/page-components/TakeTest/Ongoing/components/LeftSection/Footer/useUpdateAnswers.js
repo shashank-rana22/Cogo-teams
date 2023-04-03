@@ -1,8 +1,9 @@
+import { Toast } from '@cogoport/components';
+import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 import handleMinimizeTest from '../../../../utils/handleMinimizeTest';
-import useUpdateAnswerQuestion from '../../../hooks/useUpdateAnswerStatus';
 
 const getAnswerState = ({ type, answer }) => {
 	let answerState = 'answered';
@@ -37,9 +38,12 @@ function useUpdateAnswers({
 		user  : profile.user,
 	}));
 
-	const { question_type, sub_questions = [] } = data || {};
+	const [{ loading }, trigger] = useRequest({
+		method : 'post',
+		url    : '/update_test_user_question_response',
+	}, { manual: true });
 
-	const { loading, updateAnswerList } = useUpdateAnswerQuestion({ test_user_mapping_id });
+	const { id, question_type, sub_questions = [] } = data || {};
 
 	const handleUpdate = async ({ type }) => {
 		const answerState = getAnswerState({ type, answer });
@@ -50,14 +54,26 @@ function useUpdateAnswers({
 			answerArray = [answer];
 		}
 
-		await updateAnswerList(
-			{
-				data,
-				answerArray,
-				answerState,
-				subQuestion,
-			},
-		);
+		const payload = {
+			test_user_mapping_id,
+			test_question_id         : id,
+			test_question_answer_ids : answerArray,
+			answer_state             : answerState,
+			question_type,
+			...(question_type === 'case_study'
+				? { test_case_study_question_id: sub_questions?.[subQuestion - 1]?.id } : null),
+
+		};
+
+		const res = await trigger({
+			data: payload,
+		});
+
+		if (res?.status !== 200) {
+			handleMinimizeTest();
+			Toast.error('Something is wrong');
+			return;
+		}
 
 		if (total_question === currentQuestion) {
 			fetchQuestions({ question_id: data?.id });

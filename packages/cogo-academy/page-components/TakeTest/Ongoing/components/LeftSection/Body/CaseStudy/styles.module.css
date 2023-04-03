@@ -1,15 +1,23 @@
 .container {
 	display: flex;
-	margin-top: 72px;
 }
 
 .pagination_container {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+	border: 1px solid #000;
+	padding: 12px;
+	border-radius: 6px;
+	margin-bottom: 44px;
 
 	:global {
 		.ui_paginnation_number_container {
 			margin-left: 12px;
 		}
 	}
+}
+
+.main_container {
+	margin-top: 72px;
 }

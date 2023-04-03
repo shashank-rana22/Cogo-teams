@@ -22,7 +22,7 @@ function CaseStudy({
 	}
 
 	return (
-		<div>
+		<div className={styles.main_container}>
 			<div className={styles.pagination_container}>
 				<div>Navigate to a particular case question</div>
 

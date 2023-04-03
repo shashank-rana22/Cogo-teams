@@ -1,10 +1,11 @@
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
-import Completion from './Completion';
-import useGetTest from './hooks/useGetTest';
-import Introduction from './Introduction';
-import Ongoing from './Ongoing';
+import Completion from '../Completion';
+import useGetTest from '../hooks/useGetTest';
+import Introduction from '../Introduction';
+import Ongoing from '../Ongoing';
+
 import styles from './styles.module.css';
 
 const COMPONENT_MAPPING = {
@@ -22,7 +23,7 @@ const COMPONENT_MAPPING = {
 	},
 };
 
-function TakeTest() {
+function Eligible({ currentQuestionId }) {
 	const {
 		query: { test_id },
 		user: { id: user_id },
@@ -75,6 +76,7 @@ function TakeTest() {
 		<div id="maincontainer" className={styles.container}>
 			<Component
 				setActiveState={setActiveState}
+				currentQuestionId={currentQuestionId}
 				loading={loading}
 				testData={data}
 				page={page}
@@ -83,4 +85,4 @@ function TakeTest() {
 	);
 }
 
-export default TakeTest;
+export default Eligible;
