@@ -1,4 +1,5 @@
 import {
+	Select,
 	Placeholder, Tabs, TabPanel, Button, Table, DateRangepicker,
 } from '@cogoport/components';
 import { InputController, MultiselectController, AsyncSelectController } from '@cogoport/forms';
@@ -28,7 +29,7 @@ function Shipment() {
 
 	const columnsToShow = tableDataColumns.shipmentByHscode;
 
-	const columns = useGetColumns({ columnsToShow });
+	const COLUMNS = useGetColumns({ columnsToShow });
 
 	return (
 		<div className={styles.whole_page}>
@@ -71,7 +72,6 @@ function Shipment() {
 
 			</div>
 			<div className={styles.lower_half}>
-
 				<div className={styles.filter_tab}>
 					<div className={styles.left_padding}>
 						<div className={styles.date_range}>
@@ -94,14 +94,11 @@ function Shipment() {
 					</div>
 
 					<div className={styles.left_padding}>
-
 						{controls[0].map((Item) => {
 							const el = { ...Item };
-
 							return (
 								<>
 									<div className={styles.microfilter_names}>
-										{' '}
 										{el.label}
 									</div>
 
@@ -110,11 +107,11 @@ function Shipment() {
 										placeholder={el.placeholder}
 										key={el.name}
 										control={control}
+										isClearable
 										id={`${el.name}_input`}
 										className={styles.controller}
 									/>
 								</>
-
 							);
 						})}
 					</div>
@@ -122,7 +119,6 @@ function Shipment() {
 
 				<div className={styles.table_and_tabs}>
 					<div>
-
 						<div className={styles.tab_lower}>
 							<Tabs
 								activeTab={activeTab}
@@ -148,38 +144,42 @@ function Shipment() {
 							<div className={styles.sort_by}>
 								Sort By
 							</div>
+							<div className={styles.select_box}>
+								<Select
+									value="Arrival date(newest first)"
+									options={[{
+										label : 'Shipment date (newest first)',
+										value : 'Arrival date(newest first)',
+									}]}
+									disabled
+								/>
+							</div>
 
-							<select className={styles.select_box}>
-								<option value="Arrival date(newest first)">Shipment date(newest first)</option>
-							</select>
 						</div>
 
 					</div>
 
-					{!isEmpty(answer) && !loading && (
-						<div className={styles.table_div}>
-							<Table
-								id="hellotable"
-								className={styles.table}
-								columns={columns}
-								data={answer}
-							/>
-						</div>
-
-					) }
+					{!isEmpty(answer) && !loading
+						&& (
+							<div className={styles.table_div}>
+								<Table
+									id="hellotable"
+									className={styles.table}
+									columns={COLUMNS}
+									data={answer}
+								/>
+							</div>
+						)}
 
 					{ (isEmpty(answer) && !loading) && (
-						<div>
-							<EmptyState
-								height={500}
-								width={875}
-								emptyText="Search for records above"
-								textSize="24px"
-								flexDirection="column"
-								style={{ display: 'block' }}
-							/>
-
-						</div>
+						<EmptyState
+							height={350}
+							width={600}
+							emptyText="Search for records above"
+							textSize="24px"
+							flexDirection="column"
+							style={{ display: 'block' }}
+						/>
 					)}
 
 					{loading && (
@@ -187,9 +187,7 @@ function Shipment() {
 							<Placeholder height="850px" width="868px" margin="50px 20px 20px 0px" />
 						</div>
 					)}
-
 				</div>
-
 			</div>
 		</div>
 	);

@@ -1,9 +1,9 @@
 .whole_page {
-	margin-top: 18px;
+	margin-top: 16px;
 }
 
 .multiselect {
-	margin-top: 5px;
+	margin-top: 4px;
 }
 
 .header {
@@ -41,7 +41,7 @@
 	width: 150px;
 	height: 40px;
 	background-color: #e0e0e0;
-	border-radius: 6px;
+	border-radius: 10px;
 }
 
 .codes {
@@ -50,8 +50,8 @@
 }
 
 .description {
-	margin-top: 10px;
-	margin-left: 30px;
+	margin-top: 8px;
+	margin-left: 28px;
 }
 
 .set_css_output {
@@ -63,7 +63,7 @@
 }
 
 .clear_all {
-	margin-top: 25px;
+	margin-top: 24px;
 	cursor: pointer;
 	background-color: transparent;
 	border: none;
@@ -84,7 +84,7 @@
 .display_rect {
 	display: block;
 	margin-top: 20px;
-	margin-left: 50px;
+	margin-left: 48px;
 }
 
 .display_selected_code {
@@ -97,12 +97,12 @@
 	width: 100px;
 	height: 40px;
 	margin-top: 4px;
-	margin-right: 15px;
+	margin-right: 16px;
 	text-align: center;
 	background-color: #e0e0e0;
-	border-radius: 6px;
+	border-radius: 10px;
 }
 
 .individual_text {
-	margin-top: 10px;
+	margin-top: 8px;
 }

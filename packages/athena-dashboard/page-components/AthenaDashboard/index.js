@@ -22,7 +22,7 @@ function AthenaDashboard() {
 
 	return (
 		<div>
-			<div style={{ margin: 20 }}>
+			<div>
 				<Tabs
 					activeTab={activeTab}
 					fullWidth

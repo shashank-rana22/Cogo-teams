@@ -1,7 +1,14 @@
 import { ResponsiveLine } from '@cogoport/charts/line/index';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 const useGetColumns = ({ columnsToShow = [] }) => {
+	const {
+		general:{
+			locale,
+		},
+	} = useSelector((state) => state);
+
 	const columns = [
 		{
 			Header   : 'Shipment Record ID',
@@ -160,62 +167,62 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 		},
 		{
 			Header   : 'Jan',
-			accessor : (item) => ((!isEmpty(item.January)) ? item.January.toLocaleString('en-IN') : 0),
+			accessor : (item) => ((!isEmpty(item.January)) ? item.January.toLocaleString(locale) : 0),
 			key      : 'jan',
 		},
 		{
 			Header   : 'Feb',
-			accessor : (item) => ((!isEmpty(item.February)) ? item.February.toLocaleString('en-IN') : 0),
+			accessor : (item) => ((!isEmpty(item.February)) ? item.February.toLocaleString(locale) : 0),
 			key      : 'feb',
 		},
 		{
 			Header   : 'Mar',
-			accessor : (item) => ((!isEmpty(item.March)) ? item.March.toLocaleString('en-IN') : 0),
+			accessor : (item) => ((!isEmpty(item.March)) ? item.March.toLocaleString(locale) : 0),
 			key      : 'mar',
 		},
 		{
 			Header   : 'Apr',
-			accessor : (item) => ((!isEmpty(item.April)) ? item.April.toLocaleString('en-IN') : 0),
+			accessor : (item) => ((!isEmpty(item.April)) ? item.April.toLocaleString(locale) : 0),
 			key      : 'apr',
 		},
 		{
 			Header   : 'May',
-			accessor : (item) => ((!isEmpty(item.May)) ? item.May.toLocaleString('en-IN') : 0),
+			accessor : (item) => ((!isEmpty(item.May)) ? item.May.toLocaleString(locale) : 0),
 			key      : 'may',
 		},
 		{
 			Header   : 'Jun',
-			accessor : (item) => ((!isEmpty(item.June)) ? item.June.toLocaleString('en-IN') : 0),
+			accessor : (item) => ((!isEmpty(item.June)) ? item.June.toLocaleString(locale) : 0),
 			key      : 'jun',
 		},
 		{
 			Header   : 'July',
-			accessor : (item) => ((!isEmpty(item.July)) ? item.July.toLocaleString('en-IN') : 0),
+			accessor : (item) => ((!isEmpty(item.July)) ? item.July.toLocaleString(locale) : 0),
 			key      : 'july',
 		},
 		{
 			Header   : 'Aug',
-			accessor : (item) => ((!isEmpty(item.August)) ? item.August.toLocaleString('en-IN') : 0),
+			accessor : (item) => ((!isEmpty(item.August)) ? item.August.toLocaleString(locale) : 0),
 			key      : 'aug',
 		},
 		{
 			Header   : 'Sept',
-			accessor : (item) => ((!isEmpty(item.September)) ? item.September.toLocaleString('en-IN') : 0),
+			accessor : (item) => ((!isEmpty(item.September)) ? item.September.toLocaleString(locale) : 0),
 			key      : 'sept',
 		},
 		{
 			Header   : 'Oct',
-			accessor : (item) => ((!isEmpty(item.October)) ? item.October.toLocaleString('en-IN') : 0),
+			accessor : (item) => ((!isEmpty(item.October)) ? item.October.toLocaleString(locale) : 0),
 			key      : 'oct',
 		},
 		{
 			Header   : 'Nov',
-			accessor : (item) => ((!isEmpty(item.November)) ? item.November.toLocaleString('en-IN') : 0),
+			accessor : (item) => ((!isEmpty(item.November)) ? item.November.toLocaleString(locale) : 0),
 			key      : 'nov',
 		},
 		{
 			Header   : 'Dec',
-			accessor : (item) => ((!isEmpty(item.December)) ? item.December.toLocaleString('en-IN') : 0),
+			accessor : (item) => ((!isEmpty(item.December)) ? item.December.toLocaleString(locale) : 0),
 			key      : 'dec',
 		},
 	];
