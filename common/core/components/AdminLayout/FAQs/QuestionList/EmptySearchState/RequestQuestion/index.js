@@ -31,9 +31,7 @@ function RelatedQuestions({
 						value={searchQuestion}
 						size="lg"
 						style={{ marginRight: '8px', width: '100%' }}
-						onChange={(e) => {
-							setSearchQuestion(e);
-						}}
+						onChange={(e) => setSearchQuestion(e)}
 					/>
 				</div>
 
