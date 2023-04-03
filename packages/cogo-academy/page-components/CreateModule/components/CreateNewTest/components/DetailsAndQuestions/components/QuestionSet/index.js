@@ -8,18 +8,18 @@ import getQuestionSetColumns from './getQuestionSetColumns';
 import styles from './styles.module.css';
 
 function QuestionSet({ setIdArray, setShowQuestionSet, idArray, watch }) {
-	const cogo_entity_id = watch('cogo_entity_id');
 	const [filters, setFilters] = useState({});
+
 	const [sort, setSort] = useState(false);
+
+	const {
+		data, loading, setParams, debounceQuery,
+		input, setInput, cogo_entity_id,
+	} = useGetTestQuestionSets({ filters, watch });
 
 	useEffect(() => {
 		setFilters((prev) => ({ ...prev, cogo_entity_id }));
 	}, [cogo_entity_id]);
-
-	const {
-		data, loading, setParams, debounceQuery,
-		input, setInput,
-	} = useGetTestQuestionSets({ filters });
 
 	const { page = 0, page_limit: pageLimit = 0, total_count = 0, list } = data || {};
 
