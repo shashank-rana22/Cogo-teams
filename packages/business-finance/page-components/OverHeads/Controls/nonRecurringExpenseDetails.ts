@@ -63,9 +63,9 @@ export const nonRecurringExpenseDetails = ({
 					multiple       : false,
 					defaultOptions : false,
 					placeholder    : 'Vendor name',
-					span           : 2.5,
+					span           : 2,
 					initialCall    : false,
-					className      : styles.form_element,
+					className      : styles.input_width,
 				},
 				{
 					name                  : 'invoiceDate',
@@ -73,6 +73,7 @@ export const nonRecurringExpenseDetails = ({
 					type                  : 'datepicker',
 					isPreviousDaysAllowed : true,
 					span                  : 2,
+					className             : styles.input_width,
 				},
 				{
 					name                  : 'transactionDate',
@@ -80,6 +81,7 @@ export const nonRecurringExpenseDetails = ({
 					type                  : 'datepicker',
 					isPreviousDaysAllowed : false,
 					span                  : 2,
+					className             : styles.input_width,
 				},
 				{
 					name           : 'periodOfTransaction',
@@ -118,9 +120,9 @@ export const nonRecurringExpenseDetails = ({
 					label       : 'PAN',
 					type        : 'textarea',
 					value       : formData?.registrationNumber || null,
-					style       : { borderRadius: '4px', height: '40px', width: '180px', padding: '7px' },
+					style       : { borderRadius: '4px', height: '40px', width: '170px', padding: '7px' },
 					placeholder : 'Autofilled PAN',
-					span        : 2.4,
+					span        : 2,
 				},
 				{
 					name           : 'expenseCategory',
@@ -130,7 +132,7 @@ export const nonRecurringExpenseDetails = ({
 					defaultOptions : false,
 					placeholder    : 'Category',
 					span           : 2,
-					className      : styles.input_width,
+					className      : styles.select,
 					options        : categoryOptions,
 				},
 				{
@@ -141,7 +143,7 @@ export const nonRecurringExpenseDetails = ({
 					defaultOptions : false,
 					placeholder    : 'Sub-Category',
 					span           : 2,
-					className      : styles.input_width,
+					className      : styles.select,
 					options        : subCategoryOptions,
 				},
 				{
@@ -152,7 +154,7 @@ export const nonRecurringExpenseDetails = ({
 					multiple       : false,
 					defaultOptions : false,
 					span           : 2,
-					className      : styles.input_width,
+					className      : styles.select,
 					options        : branchOptions,
 				},
 				{
@@ -161,8 +163,8 @@ export const nonRecurringExpenseDetails = ({
 					type           : 'select',
 					clearable      : true,
 					multiple       : false,
+					className      : styles.select,
 					defaultOptions : false,
-					style          : { width: '140px' },
 					span           : 2,
 					options        : [
 						{ label: 'Pay Run', value: 'payrun' },
