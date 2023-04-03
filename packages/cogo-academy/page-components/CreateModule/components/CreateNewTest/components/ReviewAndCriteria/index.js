@@ -72,12 +72,12 @@ function ReviewAndCriteria(props) {
 						<div className={styles.entity_name}>{cogo_entity_object?.business_name}</div>
 					</div>
 
-					<div className={styles.topic}>
+					{/* <div className={styles.topic}>
 						<div className={styles.subtopic}> Users </div>
-						{/* <div>
+						<div>
 							<Pill size="md" color="#FEF3E9" className={styles.names} />
-						</div> */}
-					</div>
+						</div>
+					</div> */}
 				</div>
 			)}
 
