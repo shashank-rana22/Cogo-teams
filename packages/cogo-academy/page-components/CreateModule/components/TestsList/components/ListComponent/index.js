@@ -85,15 +85,8 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 				}}
 				className={styles.sort}
 			>
-				{sort ? (
-					<IcMArrowRotateUp
-						className={`${styles.styled_icon} ${styles.rotate}`}
-					/>
-				) : (
-					<IcMArrowRotateUp
-						className={styles.styled_icon}
-					/>
-				)}
+				<IcMArrowRotateUp className={`${styles.styled_icon} ${!sort ? styles.rotate : null}`} />
+
 				<span
 					className={styles.span_text}
 				>
@@ -141,7 +134,7 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 				</Modal.Body>
 			</Modal>
 
-			{total_count > 10 ? (
+			{total_count > pageLimit ? (
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="table"

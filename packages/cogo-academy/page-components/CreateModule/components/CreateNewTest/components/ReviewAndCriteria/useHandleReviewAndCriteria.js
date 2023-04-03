@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useFieldArray, useForm } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import useUpdateTest from '../../../../hooks/useUpdateTest';
 
@@ -25,13 +25,13 @@ function useHandleReviewAndCriteria({ guidelines = [] }) {
 		router.push(href, href);
 	};
 
-	const checkError = useMemo(() => {
+	const checkError = () => {
 		if (error) {
 			Toast.error('Total questions and cases cannot be 0');
 		} else {
 			setShowModal(true);
 		}
-	}, [error]);
+	};
 
 	useEffect(() => {
 		setValue('guidelines', guidelines?.map((guideline) => ({ instruction: guideline })));
