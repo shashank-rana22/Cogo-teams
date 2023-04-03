@@ -29,7 +29,7 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 
 	return (
 		<div className={styles.container}>
-			<TestDetails control={control} errors={errors} data={data} setValue={setValue} />
+			<TestDetails control={control} errors={errors} data={data} setValue={setValue} watch={watch} />
 
 			<div className={styles.btn_container}>
 				{!showQuestionSet ? (
