@@ -1,7 +1,7 @@
 .reset_tree {
 	position: absolute;
-	right: 0px;
-	top: 0px;
+	top: 0;
+	right: 0;
 }
 
 .base_level {
