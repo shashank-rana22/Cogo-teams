@@ -33,10 +33,10 @@ function List({
 	const defaultChannel = listData?.find((obj) => obj?.source_id === shipment_data?.id);
 	const channelId = defaultChannel ? defaultChannel?.id : listData[0]?.id;
 
-	const { loading: seenLoading } = useUpdateSeen({ channel_id: id, showUnreadChat });
+	const updateSeenPayload = { id, showUnreadChat };
+	const { loading: seenLoading } = useUpdateSeen({ payload: updateSeenPayload });
 
 	const getChannelPayload = { id };
-
 	const {
 		loadingChannel,
 		getChannel,
