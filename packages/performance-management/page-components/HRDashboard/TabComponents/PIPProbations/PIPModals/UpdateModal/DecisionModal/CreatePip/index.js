@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-function CreatePip({ item = {}, status = '', setItem = () => {}, setDisableNext = () => {} }) {
+function CreatePip({ status = '', setItem = () => {}, setDisableNext = () => {} }) {
 	const date = new Date();
 	const [startDate, setStartDate] = useState();
 	const [endDate, setEndDate] = useState();
@@ -65,6 +65,8 @@ function CreatePip({ item = {}, status = '', setItem = () => {}, setDisableNext 
 				<Datepicker
 					placeholder="Enter Date"
 					showTimeSelect
+					isPreviousDaysAllowed
+					minDate={startDate}
 					dateFormat="dd/MMM/yyyy"
 					name="endDate"
 					onChange={setEndDate}

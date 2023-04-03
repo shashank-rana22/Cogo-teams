@@ -1,4 +1,5 @@
-import { Button, Modal, Textarea } from '@cogoport/components';
+import { Textarea, Button, Modal } from '@cogoport/components';
+import { addDays, format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -9,6 +10,7 @@ function ReviewModal({
 	setItem = () => {},
 	onSubmit = () => {},
 }) {
+	const extended_date = addDays(new Date(item.end_date), 30);
 	return (
 
 		<Modal
@@ -23,36 +25,54 @@ function ReviewModal({
 			<div className={styles.upload_modal}>
 				<Modal.Body>
 					<div className={styles.modal_container}>
-						<div style={{ display: 'flex' }}>
-							<div className={styles.label}>
-								{item?.name}
-
+						<div className={styles.container}>
+							<div className={styles.update_dates}>
+								<div className={styles.sub_heading}>Name</div>
+								<div>{ item?.name }</div>
 							</div>
-							<div className={styles.label}>
-								{item?.designation}
+							<div style={{ display: 'flex' }}>
+								<div className={styles.update_dates}>
+									<div className={styles.sub_heading}>Start Date</div>
 
-							</div>
-							<div className={styles.label}>
-								{` - ${item?.cogo_id}`}
+									<div style={{ fontWeight: 'bold' }}>{format(item?.start_date, 'dd-MMM-yyyy')}</div>
+								</div>
+
+								<div className={styles.update_dates}>
+									<div className={styles.sub_heading}>End Date</div>
+
+									<div style={{ fontWeight: 'bold' }}>{format(item?.end_date, 'dd-MMM-yyyy')}</div>
+								</div>
+
 							</div>
 						</div>
-						<div style={{ display: 'flex' }}>
-							<div className={styles.sub_container}>
+						<div className={styles.container}>
+							<div className={styles.update_dates}>
 								<div className={styles.sub_heading}>Reports To</div>
 								<div>{item?.manager_name}</div>
 							</div>
-							<div className={styles.sub_container}>
-								<div className={styles.sub_heading}>Latest KPI</div>
-								<div>{item?.rating}</div>
-							</div>
-							<div className={styles.sub_container}>
+							<div className={styles.update_dates}>
 								<div className={styles.sub_heading}>Update</div>
-								<div>{item?.update}</div>
+								<div>{`${item?.log_type} ${item?.final_decision}`}</div>
 							</div>
+							{item?.final_decision === 'extended' && (
+								<div className={styles.update_dates}>
+									<div className={styles.sub_heading}>Extended Date</div>
+
+									<div style={{ fontWeight: 'bold' }}>{format(extended_date, 'dd-MMM-yyyy')}</div>
+								</div>
+							)}
 						</div>
 						<div className={styles.sub_container}>
 							<div className={styles.label}>Add Remarks</div>
-							<Textarea placeholder="Type here..." style={{ height: '100px' }} />
+							<Textarea
+								placeholder="Type here..."
+								style={{ height: '100px' }}
+								value={item?.comment}
+								onChange={(val) => setItem((prevItems) => ({
+									...prevItems,
+									comment: val,
+								}))}
+							/>
 						</div>
 					</div>
 				</Modal.Body>
