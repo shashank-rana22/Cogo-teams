@@ -1,9 +1,9 @@
 import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 
+import ConfigurationCard from '../ConfigurationCard';
 import LoadingState from '../LoadingState';
 
-import ConfigurationCard from './ConfigurationCard';
 import Header from './Header';
 
 function CurrentConfigurations(props) {
