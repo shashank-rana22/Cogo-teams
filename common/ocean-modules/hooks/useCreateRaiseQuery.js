@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback } from 'react';
@@ -7,8 +6,7 @@ import { useCallback } from 'react';
 import getApiErrorString from '../utils/getApiErrorString';
 
 function useCreateRaiseQuery({
-	setShowModal = () => {},
-	setIsOpen = () => {},
+	handleRaisedQuery = () => {},
 	shipmentId = '',
 	queryType = '',
 	remarks = '',
@@ -16,13 +14,6 @@ function useCreateRaiseQuery({
 	const { userId } = useSelector(({ profile }) => ({
 		userId: profile.id,
 	}));
-
-	const {
-		control,
-		reset,
-		formState: { errors },
-		handleSubmit,
-	} = useForm({});
 
 	const [{ loading }, trigger] = useRequest({
 		url    : 'raise_query',
@@ -44,23 +35,17 @@ function useCreateRaiseQuery({
 				});
 
 				if (!res.hasError) {
-					setShowModal(true);
-					setIsOpen(false);
-					reset();
+					handleRaisedQuery();
 				}
 			} catch (e) {
 				Toast.error(getApiErrorString(e));
 			}
 		})();
-	}, [queryType, remarks, userId, shipmentId, trigger, setShowModal, setIsOpen, reset]);
+	}, [queryType, remarks, userId, shipmentId, trigger, handleRaisedQuery]);
 
 	return {
 		loading,
 		handleFormSubmit,
-		handleSubmit,
-		reset,
-		errors,
-		control,
 	};
 }
 

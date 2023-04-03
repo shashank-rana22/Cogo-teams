@@ -2,7 +2,12 @@ import HistoryPagination from './HistoryPagination';
 import HistoryTable from './HistoryTable';
 import styles from './styles.module.css';
 
-function History({ data = {}, setFilters = () => {}, filters = {}, loading = false }) {
+function History({
+	data = {},
+	setFilters = () => {},
+	filters = {},
+	loading = false,
+}) {
 	return (
 		<>
 			<div className={styles.heading}>History (Booking Party)</div>

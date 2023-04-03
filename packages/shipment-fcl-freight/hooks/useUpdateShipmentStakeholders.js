@@ -3,20 +3,19 @@ import { useRequest } from '@cogoport/request';
 
 import getApiErrorString from '../utils/getApiErrorString';
 
-const useUpdateShipmentOperatingInstruction = ({
-	procedure_id = '',
-	instruction = '',
-	successMessage = 'Successfully Update',
+const useUpdateShipmentStakeholders = ({
+	shipment_id,
+	successMessage = 'Successfully Updated',
 	refetch = () => { },
 }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_shipment_operating_instruction',
+		url    : '/update_shipment_stakeholders',
 		method : 'POST',
 	}, { manual: true });
 
 	const apiTrigger = async (val) => {
 		try {
-			await trigger({ params: { instruction, procedure_id, ...val } });
+			await trigger({ params: { id: shipment_id, ...val } });
 
 			Toast.success(successMessage);
 			refetch();
@@ -31,4 +30,4 @@ const useUpdateShipmentOperatingInstruction = ({
 	};
 };
 
-export default useUpdateShipmentOperatingInstruction;
+export default useUpdateShipmentStakeholders;

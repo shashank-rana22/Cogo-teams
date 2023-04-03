@@ -4,33 +4,31 @@ import { useState, useEffect, useCallback } from 'react';
 
 import getApiErrorString from '../utils/getApiErrorString';
 
-const useListStakeholders = ({ defaultParams = {}, shipment_id = '' }) => {
+const useListStakeholders = ({ shipment_id = '' }) => {
 	const [apiData, setApiData] = useState({});
-	const [filters, setFilters] = useState({});
 
-	const [{ loading }, trigger] = useRequest('fcl_freight/list_stakeholders', { manual: true });
+	const [{ loading }, trigger] = useRequest({
+		url    : 'fcl_freight/list_stakeholders',
+		params : {
+			filters: {
+				shipment_id,
+			},
+			page_limit : 50,
+			sort_by    : 'created_at',
+			sort_type  : 'desc',
+		},
+	}, { manual: true });
 
-	const apiTrigger = useCallback(() => {
-		(
-			async () => {
-				try {
-					const res = await trigger({
-						params: {
-							filters: {
-								shipment_id,
-							},
-							...defaultParams,
-						},
-					});
+	const apiTrigger = useCallback(async () => {
+		try {
+			const res = await trigger();
 
-					setApiData(res.data || {});
-				} catch (err) {
-					setApiData({});
-					Toast.error(getApiErrorString(err));
-				}
-			}
-		)();
-	}, [shipment_id, JSON.stringify(defaultParams), trigger]);
+			setApiData(res.data || {});
+		} catch (err) {
+			setApiData({});
+			Toast.error(getApiErrorString(err));
+		}
+	}, [trigger]);
 
 	useEffect(() => {
 		apiTrigger();
@@ -39,11 +37,8 @@ const useListStakeholders = ({ defaultParams = {}, shipment_id = '' }) => {
 	return {
 		loading,
 		data: apiData,
-		filters,
 		apiTrigger,
-		setFilters,
 	};
 };
 
 export default useListStakeholders;
-// TODO
