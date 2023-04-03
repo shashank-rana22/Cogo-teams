@@ -1,6 +1,6 @@
 import { useDebounceQuery, useForm } from '@cogoport/forms';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import filtersSourceMapping from '../../constants/filters-source-mapping';
 import useGetControls from '../../utils/filterControls';
@@ -25,13 +25,14 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 
 	const { watch, control } = useForm();
 
-	const values = watch();
+	const {
+		Department = '', Designation = '',
+		ManagerID = '', Year = '', Month = '', date_range = {},
+	} = watch();
 
 	const managerName = watch('manager_name');
 
 	useEffect(() => {
-		const { Department, Designation, ManagerID, Year, Month, date_range } = values;
-
 		setParams((previousParams) => ({
 			...previousParams,
 			Q           : query || undefined,
@@ -43,7 +44,7 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 			StartDate   : date_range?.startDate || undefined,
 			EndDate     : date_range?.endDate || undefined,
 		}));
-	}, [query, setParams, values]);
+	}, [query, setParams, Month, Department, Designation, Year, ManagerID, date_range?.startDate, date_range?.endDate]);
 
 	useEffect(() => {
 		debounceQuery(managerName);
@@ -55,7 +56,9 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 				{filterControls.left.map((cntrl) => {
 					if (isEmpty(cntrl)) { return null; }
 					const Element = getFieldController(cntrl.type);
+
 					const value = startCase(cntrl.name);
+
 					return (
 						<Element
 							{...cntrl}
@@ -68,11 +71,14 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 					);
 				})}
 			</div>
+
 			<div className={styles.right_container}>
 				{filterControls.right.map((cntrl) => {
 					if (isEmpty(cntrl)) { return null; }
 					const Element = getFieldController(cntrl?.type);
+
 					const value = startCase(cntrl?.name);
+
 					return (
 						<Element
 							{...cntrl}
