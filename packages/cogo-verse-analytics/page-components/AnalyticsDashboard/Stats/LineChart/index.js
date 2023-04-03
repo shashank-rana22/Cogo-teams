@@ -52,10 +52,10 @@ function Charts({ GraphData = [], hideChart = false }) {
 					margin={{ top: 15, right: 35, bottom: 75, left: 75 }}
 					xScale={{ type: 'point' }}
 					yScale={{
-            	type    : 'linear',
-            	min     : 0,
-            	max     : 'auto',
-            	reverse : false,
+						type    : 'linear',
+						min     : 0,
+						max     : 'auto',
+						reverse : false,
 					}}
 					yFormat=" >-.2f"
 					curve="natural"
@@ -63,29 +63,29 @@ function Charts({ GraphData = [], hideChart = false }) {
 					axisRight={null}
 					colors={colors}
 					axisBottom={{
-            	orient         : 'bottom',
-            	tickSize       : 0,
-            	tickPadding    : 15,
-            	tickValues     : 8,
-            	tickRotation   : 0,
-			    legend         : 'Date',
-            	legendOffset   : 50,
-            	legendPosition : 'middle',
-            	// format         : (v) => formattedDate(v),
+						orient         : 'bottom',
+						tickSize       : 0,
+						tickPadding    : 15,
+						tickValues     : 8,
+						tickRotation   : 0,
+						legend         : 'Date',
+						legendOffset   : 50,
+						legendPosition : 'middle',
+					// format         : (v) => formattedDate(v),
 					}}
 					axisLeft={{
-            	orient         : 'left',
-            	tickSize       : 0,
-            	tickValues     : 5,
-            	tickPadding    : 12,
-            	tickRotation   : 0,
-			    legend         : 'Shipments',
-            	legendOffset   : -50,
-            	legendPosition : 'middle',
-            	// format         : (v) => formattedTime(v),
+						orient         : 'left',
+						tickSize       : 0,
+						tickValues     : 5,
+						tickPadding    : 12,
+						tickRotation   : 0,
+						legend         : 'Shipments',
+						legendOffset   : -50,
+						legendPosition : 'middle',
+						// format         : (v) => formattedTime(v),
 					}}
 					tooltip={({ point = {} }) => {
-            	const { borderColor, data } = point;
+						const { borderColor, data } = point;
 
             	return (
 	<div className={styles.tool_tip}>

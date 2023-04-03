@@ -7,7 +7,6 @@ const chartData = ({ platFormChatData = {} }) => {
 
 	const cogoverseCancelledShipments = botDataKeys.map((key) => ({ x: key, y: bot_data[key] }));
 	const platFormData = platformChatKeys.map((key) => ({ x: key, y: customer_support_data[key] }));
-
 	return [
 
 		{
