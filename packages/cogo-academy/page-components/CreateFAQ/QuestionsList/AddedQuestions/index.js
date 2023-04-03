@@ -7,7 +7,6 @@ import EmptyState from '../../../../commons/EmpyState';
 import StyledTable from '../../../../commons/StyledTable';
 
 import Header from './Header';
-import styles from './styles.module.css';
 
 function AddedQuestions(props) {
 	const {
