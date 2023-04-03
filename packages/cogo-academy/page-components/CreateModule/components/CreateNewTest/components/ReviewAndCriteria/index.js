@@ -41,6 +41,14 @@ function ReviewAndCriteria(props) {
 		router.push(href, href);
 	};
 
+	const newFunction = () => {
+		if (error) {
+			Toast.error('Total questions and cases cannot be 0');
+		} else {
+			setShowModal(true);
+		}
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -163,13 +171,7 @@ function ReviewAndCriteria(props) {
 					themeType="primary"
 					type="button"
 					onClick={
-						handleSubmit(() => {
-							if (error) {
-								Toast.error('Total questions and cases cannot be 0');
-							} else {
-								setShowModal(true);
-							}
-						})
+						handleSubmit(newFunction)
 					}
 				>
 					Publish Test
