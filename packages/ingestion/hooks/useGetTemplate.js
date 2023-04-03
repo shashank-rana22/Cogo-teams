@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 function useGetTemplate() {
@@ -7,11 +8,14 @@ function useGetTemplate() {
 	}, { manual: true });
 
 	const getTemplateCsv = async (e) => {
-		// console.log('params', { service_type: e });
-		const response = await trigger({ service_type: e });
+		try {
+			const response = await trigger({ params: { service_type: e } });
 
-		// eslint-disable-next-line no-undef
-		window.open(response?.data, '_blank');
+			// eslint-disable-next-line no-undef
+			window.open(response?.data?.template_file_url, '_blank');
+		} catch (error) {
+			Toast.error('error');
+		}
 	};
 
 	return {

@@ -1,4 +1,5 @@
 import useGetIngestionList from '../../hooks/useGetIngestionList';
+import usePostReUpload from '../../hooks/usePostReUpload';
 
 import Header from './Header';
 import TableSection from './TableSection';
@@ -18,6 +19,7 @@ function Ingestion() {
 		setParams,
 		refetch,
 	} = useGetIngestionList();
+
 	return (
 		<>
 			<Header refetch={refetch} />

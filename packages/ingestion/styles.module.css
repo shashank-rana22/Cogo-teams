@@ -8,6 +8,7 @@
 .created_date {
 	display: flex;
 	font-size: 12px;
+	justify-content: center;
 }
 
 .created_time {
@@ -32,4 +33,16 @@
 .uploaded {
 	max-width: 80px;
 	text-decoration-line: underline;
+}
+
+.total_count {
+    text-align: center;
+}
+
+.successfully_migrated_count {
+	text-align: center;
+}
+
+.error_type {
+	text-align: center;
 }

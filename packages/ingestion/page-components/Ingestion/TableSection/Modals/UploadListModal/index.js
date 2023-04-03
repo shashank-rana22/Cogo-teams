@@ -14,8 +14,6 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 		setTableModal('');
 	};
 
-	// console.log('dat', data);
-
 	const onSubmit = () => {
 		setTableModal('reUpload');
 	};
@@ -49,6 +47,7 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 	}
 
 	return (
+
 		<Modal size="lg" show={tableModal} onClose={onClose} placement="center">
 			<Modal.Header title={(
 				<div style={{ display: 'flex', alignItems: 'center' }}>

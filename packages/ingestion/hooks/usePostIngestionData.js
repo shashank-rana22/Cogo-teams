@@ -10,12 +10,16 @@ import controls from '../utils/controls';
 function usePostIngestionData({ refetch = () => {} }) {
 	const [showModal, setShowModal] = useState(false);
 	const [show, setShow] = useState('');
-	const profileData = useSelector(({ profile }) => profile);
+
+	const { profile: { partner = '' } } = useSelector((state) => state);
+	const { partner_user_id = '' } = partner || {};
+
+	// console.log('partner_user_id', partner_user_id);
 
 	const [uploadData, setUploadData] = useState({
 		performed_by_type  : 'agent',
 		finalModalHeading  : '',
-		user_id            : profileData?.user?.id,
+		partner_user_id,
 		ingestion_type     : '',
 		is_channel_partner : false,
 	});
@@ -44,7 +48,7 @@ function usePostIngestionData({ refetch = () => {} }) {
 			Toast.success('Data Uploaded');
 			refetch();
 		} catch (error) {
-			console.log('error', error);
+			Toast.error(error?.message);
 		}
 	};
 
@@ -58,7 +62,6 @@ function usePostIngestionData({ refetch = () => {} }) {
 			if (!isEmpty(watchCountry)) {
 				newControl = {
 					...newControl,
-					// disabled : false,
 					params: {
 						filters: {
 							...newControl?.params?.filters,

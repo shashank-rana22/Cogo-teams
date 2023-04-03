@@ -29,7 +29,15 @@ function UploadModal({
 	};
 
 	return (
-		<Modal size="lg" show={show === 'uploadModal'} onClose={onClose} placement="center">
+
+		<Modal
+			style={{ height: '630px' }}
+			scroll={false}
+			size="md"
+			show={show === 'uploadModal'}
+			onClose={onClose}
+			placement="center"
+		>
 			<Modal.Header title={(
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<IcMUpload style={{ margin: '0 4px 0 0' }} />

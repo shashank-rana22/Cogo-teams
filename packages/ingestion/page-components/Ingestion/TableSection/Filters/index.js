@@ -20,16 +20,19 @@ function Filters(props) {
 		control, watch,
 	} = formProps;
 
-	const uploadBy = watch('upload_by');
+	const uploadBy = watch('partner_user_id');
 	const uploadDate = watch('upload_date');
 
 	useEffect(() => {
 		setParams({
 			...params,
-			q           : query || undefined,
-			upload_by   : uploadBy || undefined,
-			upload_date : uploadDate || undefined,
-			page        : 1,
+			page    : 1,
+			filters : {
+				q               : query || undefined,
+				partner_user_id : uploadBy || undefined,
+				upload_date     : uploadDate || undefined,
+			},
+
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [query, uploadDate, uploadBy]);
@@ -56,7 +59,7 @@ function Filters(props) {
 										{...el}
 										key={el.name}
 										control={control}
-										disabled={disabled}
+										// disabled={disabled}
 									/>
 								</div>
 							</div>
@@ -67,11 +70,14 @@ function Filters(props) {
 			</div>
 			<div className={styles.search}>
 				<Input
-					onChange={setSearch}
+					onChange={(val) => {
+						setSearch(val);
+						console.log('val', val);
+					}}
 					prefix={<IcMSearchlight />}
 					placeholder="Search Filename"
 					width="100%"
-					disabled={disabled}
+					// disabled={disabled}
 				/>
 			</div>
 		</div>

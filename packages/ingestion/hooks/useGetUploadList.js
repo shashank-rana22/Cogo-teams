@@ -2,7 +2,7 @@ import { Button, Pill } from '@cogoport/components';
 import { IcMDownload } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import { startCase, format } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import styles from '../styles.module.css';
 
@@ -19,6 +19,10 @@ function useGetUploadList(id) {
 			ingestion_request_id: id,
 		},
 	});
+
+	const downloadErrorCsv = (e) => {
+		window.open(e, '_blank');
+	};
 
 	const [{ data, loading = false }] = useRequest({
 		method : 'get',
@@ -124,13 +128,13 @@ function useGetUploadList(id) {
 
 	const columns = [
 
-		{
-			key      : 'type',
-			Header   : 'ERROR TYPE',
-			accessor : ({ type }) => (
-				<div className={styles.type}>{startCase(type || '___')}</div>
-			),
-		},
+		// {
+		// 	key      : 'type',
+		// 	Header   : 'ERROR TYPE',
+		// 	accessor : ({ type }) => (
+		// 		<div className={styles.error_type}>{startCase(type || '___')}</div>
+		// 	),
+		// },
 		{
 			key      : 'uploaded_date',
 			Header   : 'UPLOAD DATE',
@@ -161,10 +165,10 @@ function useGetUploadList(id) {
 		{
 			key      : 'error',
 			Header   : 'ERROR REPORT',
-			accessor : ({ error }) => (
+			accessor : ({ errored_data_url }) => (
 				<div className={styles.name}>
-					{error ? (
-						<Button size="md" themeType="tertiary">
+					{errored_data_url ? (
+						<Button onClick={() => { downloadErrorCsv(errored_data_url); }} size="md" themeType="tertiary">
 							{' '}
 							<IcMDownload style={{ marginRight: '4px' }} />
 							Download
@@ -178,7 +182,7 @@ function useGetUploadList(id) {
 			key      : 'totals_count',
 			Header   : 'TOTAL COUNT',
 			accessor : ({ total_records_count }) => (
-				<div className={styles.number_of_org}>{total_records_count || '___'}</div>
+				<div className={styles.total_count}>{total_records_count || '___'}</div>
 
 			),
 		},
@@ -186,7 +190,7 @@ function useGetUploadList(id) {
 			key      : 'successfully_migratedd',
 			Header   : 'SUCCESSFULLY MIGRATED',
 			accessor : ({ successfully_migrated_count }) => (
-				<div className={styles.number_of_org}>{successfully_migrated_count || '___'}</div>
+				<div className={styles.successfully_migrated_count}>{successfully_migrated_count || '___'}</div>
 
 			),
 		},

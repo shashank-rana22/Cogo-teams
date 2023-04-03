@@ -2,7 +2,7 @@ import { Button, Pill } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMDownload } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
-import { startCase, format } from '@cogoport/utils';
+import { startCase, format, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import ReUploadModal from '../page-components/Ingestion/TableSection/Modals/ReUploadModal';
@@ -12,8 +12,11 @@ import styles from '../styles.module.css';
 function useGetIngestionList() {
 	const [row, setRow] = useState({});
 
+	const [tableModal, setTableModal] = useState();
+
 	const [params, setParams] = useState({
-		page: 1,
+		page                       : 1,
+		request_file_data_required : true,
 	});
 	const [{ data, loading }, refetch] = useRequest({
 		method : 'get',
@@ -21,9 +24,11 @@ function useGetIngestionList() {
 		params,
 	}, { manual: false });
 
-	const formProps = useForm();
+	const downloadErrorCsv = (link) => {
+		window.open(link, '_blank');
+	};
 
-	const [tableModal, setTableModal] = useState();
+	const formProps = useForm();
 
 	const tableListModal = (_id) => {
 		setRow(_id);
@@ -44,6 +49,7 @@ function useGetIngestionList() {
 		[UPLOAD_LIST] : UploadListModal,
 
 	};
+	const Component = TABLE_MODAL_MAPPING[tableModal] || null;
 
 	const UPLOAD_STATUS_MAPPING = {
 		Uploading : 'yellow',
@@ -51,8 +57,10 @@ function useGetIngestionList() {
 		inactive  : 'red',
 	};
 
-	const Component = TABLE_MODAL_MAPPING[tableModal] || null;
-
+	const reUploadFiles = (_row) => {
+		setRow(_row);
+		setTableModal('reUpload');
+	};
 	// const dummyData = {
 	// 	page        : 1,
 	// 	page_limit  : 8,
@@ -145,23 +153,23 @@ function useGetIngestionList() {
 		{
 			key      : 'name',
 			Header   : 'FILE NAME',
-			accessor : ({ name }) => (
-				<div className={styles.name}>{startCase(name || '___')}</div>
+			accessor : ({ request_files }) => (
+				<div className={styles.name}>{startCase(request_files[0]?.sheet_name || '___')}</div>
 			),
 		},
 		{
 			key      : 'num_org',
 			Header   : 'NUMBER OF ORGS',
-			accessor : ({ num_org }) => (
-				<div className={styles.number_of_org}>{num_org || '___'}</div>
+			accessor : ({ request_files }) => (
+				<div className={styles.number_of_org}>{request_files[0]?.total_records_count || '___'}</div>
 
 			),
 		},
 		{
 			key      : 'uploaded_by',
 			Header   : 'UPLOADED BY',
-			accessor : ({ name }) => (
-				<div className={styles.name}>{startCase(name || '___')}</div>
+			accessor : ({ user_detail }) => (
+				<div className={styles.name}>{startCase(user_detail?.name || '___')}</div>
 			),
 		},
 		{
@@ -201,10 +209,14 @@ function useGetIngestionList() {
 		{
 			key      : 'error',
 			Header   : 'ERROR REPORT',
-			accessor : ({ error }) => (
+			accessor : ({ request_files }) => (
 				<div className={styles.name}>
-					{error ? (
-						<Button size="md" themeType="tertiary">
+					{!isEmpty(request_files) ? (
+						<Button
+							onClick={() => { downloadErrorCsv(request_files[0]?.errored_data_url); }}
+							size="md"
+							themeType="tertiary"
+						>
 							{' '}
 							<IcMDownload style={{ marginRight: '4px' }} />
 							Download
@@ -217,12 +229,11 @@ function useGetIngestionList() {
 		{
 			key      : 're_upload',
 			Header   : 'RE-UPLOAD',
-			// Todo change this later true condition
-			accessor : ({ error }) => (
+			accessor : (item) => (
 				<div className={styles.re_upload}>
 
-					{error ? (
-						<Button onClick={() => setTableModal('reUpload')} size="md" themeType="secondary">
+					{!isEmpty(item?.request_files) ? (
+						<Button onClick={() => { reUploadFiles(item); }} size="md" themeType="secondary">
 							{' '}
 							Re-Upload
 						</Button>

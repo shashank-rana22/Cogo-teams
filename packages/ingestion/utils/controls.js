@@ -28,7 +28,7 @@ const controls = [
 	{
 		name        : 'country_id',
 		label       : 'Country',
-		type        : 'countrySelect',
+		type        : 'select',
 		options     : countryOptions,
 		placeholder : 'Type Here...',
 		isClearable : true,

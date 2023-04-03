@@ -1,10 +1,10 @@
 const reUploadControls = [
 
 	{
-		name        : 'reupload',
+		name        : 're_upload',
 		label       : 'ReUpload',
 		type        : 'file',
-		multiple    : 'multiple',
+		// multiple    : 'multiple',
 		placeholder : 'Upload Corrected CSV',
 		// isClearable : true,
 		rules       : { required: 'File is Required' },
