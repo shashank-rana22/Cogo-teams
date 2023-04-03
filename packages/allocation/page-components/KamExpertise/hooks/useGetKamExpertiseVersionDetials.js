@@ -8,6 +8,7 @@ const useGetKamExpertiseVersionDetials = (props) => {
 		refetch,
 		expertiseRefetch,
 		cardRefetch,
+		versionName,
 	} = props;
 
 	const [selectedVersion, setSelectedVersion] = useState('');
@@ -25,7 +26,7 @@ const useGetKamExpertiseVersionDetials = (props) => {
 			const payload = {
 				// action_type    : mode,
 				// version_number : selectedVersion || undefined,
-				name: 'draft4', //! hardcoded needs to be changed
+				name: versionName,
 			};
 			await trigger({ params: payload });
 

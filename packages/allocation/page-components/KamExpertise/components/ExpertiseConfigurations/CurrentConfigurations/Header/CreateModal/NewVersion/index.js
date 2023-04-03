@@ -1,23 +1,29 @@
-import { Button } from '@cogoport/components';
+import { Input, Button } from '@cogoport/components';
 import { IcMAlert } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function NewVersion(props) {
-	const { setMode, setSelectedVersion, getVersion, createModalLoading } = props;
+	const { setMode, setSelectedVersion, getVersion, createModalLoading, versionName, setVersionName } = props;
 
 	return (
 		<div className={styles.container}>
 			<IcMAlert className={styles.alert_icon} />
 
+			<Input
+				size="sm"
+				placeholder="Enter a Version Name"
+				style={{ width: '75%' }}
+				value={versionName}
+				onChange={(value) => { setVersionName(value); }}
+			/>
+
 			<div className={styles.supporting_text}>
 				Creating a new version will overwrite the existing saved draft.
 			</div>
 
-			<div className={styles.supporting_text}>
-				Do you wish to proceed?
-			</div>
 			<div className={styles.button_container}>
 				<Button
 					themeType="tertiary"
@@ -29,6 +35,7 @@ function NewVersion(props) {
 				</Button>
 
 				<Button
+					disabled={isEmpty(versionName)}
 					loading={createModalLoading}
 					onClick={() => {
 						setSelectedVersion('new');
