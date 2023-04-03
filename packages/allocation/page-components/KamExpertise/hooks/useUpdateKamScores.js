@@ -7,6 +7,7 @@ function useUpdateKamScores(props) {
 	const {
 		transition_level,
 		refetch,
+		cardRefetch,
 	} = props;
 
 	const formProps = useForm();
@@ -39,6 +40,8 @@ function useUpdateKamScores(props) {
 			});
 
 			refetch();
+
+			cardRefetch();
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

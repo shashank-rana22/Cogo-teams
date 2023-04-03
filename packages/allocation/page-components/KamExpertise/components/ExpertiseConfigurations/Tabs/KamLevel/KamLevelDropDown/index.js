@@ -7,7 +7,7 @@ import Card from '../Card';
 
 import styles from './styles.module.css';
 
-function KamLevelDropDown({ refetch, transition_level }) {
+function KamLevelDropDown({ refetch, cardRefetch, transition_level }) {
 	const [editMode, setEditMode] = useState(false);
 
 	const {
@@ -18,6 +18,7 @@ function KamLevelDropDown({ refetch, transition_level }) {
 	const { formProps, onSave, updateLoading } = useUpdateKamScores({
 		transition_level,
 		refetch,
+		cardRefetch,
 	});
 
 	const { control, handleSubmit } = formProps;

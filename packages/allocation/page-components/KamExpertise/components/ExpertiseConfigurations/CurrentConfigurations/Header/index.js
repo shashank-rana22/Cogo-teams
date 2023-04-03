@@ -2,7 +2,7 @@ import { Button, Modal } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 
 import VERSION_KEYS from '../../../../constants/version-keys-mapping';
-import useGetKamExpertiseVersionDetials from '../../../../hooks/useGetKamExpertiseVersionDetials';
+import useSetVersionFilter from '../../../../hooks/useSetVersionFilter';
 
 import CreateModal from './CreateModal';
 import Draft from './CreateModal/Draft';
@@ -29,9 +29,9 @@ function Header(props) {
 	} = props;
 
 	const {
-		getVersion, createModalLoading, selectedVersion, setSelectedVersion,
+		onCreate, createModalLoading, selectedVersion, setSelectedVersion,
 		mode, setMode, showModal, setShowModal, versionName, setVersionName,
-	} = useGetKamExpertiseVersionDetials({
+	} = useSetVersionFilter({
 		refetch,
 		expertiseRefetch,
 		cardRefetch,
@@ -51,7 +51,7 @@ function Header(props) {
 		[NEW_VERSION]: {
 			setMode,
 			setSelectedVersion,
-			getVersion,
+			onCreate,
 			createModalLoading,
 			versionName,
 			setVersionName,
@@ -137,7 +137,7 @@ function Header(props) {
 									setShowModal={setShowModal}
 									selectedVersion={selectedVersion}
 									mode={mode}
-									getVersion={getVersion}
+									onCreate={onCreate}
 									createModalLoading={createModalLoading}
 									versionName={versionName}
 								/>

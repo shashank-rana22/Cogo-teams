@@ -39,6 +39,7 @@ function KamLevel(props) {
 
 			children: <KamLevelDropDown
 				refetch={refetch}
+				cardRefetch={cardRefetch}
 				transition_level={data.transition_level}
 			/>,
 		}
