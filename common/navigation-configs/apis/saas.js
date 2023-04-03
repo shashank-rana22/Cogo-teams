@@ -2027,6 +2027,12 @@ const saas = {
 			module      : 'import-export-documents',
 			feature     : 'import-export-documents',
 		},
+		{
+			api         : 'get_saas_trade_engine_pdf',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
 	],
 
 };
