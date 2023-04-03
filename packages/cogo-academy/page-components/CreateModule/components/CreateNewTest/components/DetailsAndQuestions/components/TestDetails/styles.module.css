@@ -44,14 +44,6 @@
 	}
 }
 
-.input_wrapper:first-child {
-	flex-shrink: 0;
-}
-
-.input_wrapper:nth-child(2) {
-	flex-grow: 1;
-}
-
 .control_container_two {
 	display: flex;
 	align-items: center;
@@ -118,4 +110,12 @@
 			margin-right: 20px;
 		}
 	}
+}
+
+.input_wrapper:first-child {
+	flex-shrink: 0;
+}
+
+.input_wrapper:nth-child(2) {
+	flex-grow: 1;
 }
