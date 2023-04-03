@@ -20,9 +20,9 @@ function KamLevel(props) {
 	const [activeCard, setActiveCard] = useState('');
 	const [createKam, setCreateKam] = useState(false);
 
-	const { audit_data : auditData = {}, data : kamConfigLevelDetails } = kamConfigDetails || {};
+	const { audit_data : auditData = {}, data : kamConfigLevelDetails = [] } = kamConfigDetails || {};
 
-	const dataLength = (kamConfigLevelDetails || []).length;
+	const dataLength = kamConfigLevelDetails.length;
 
 	const options = kamConfigLevelDetails.map((data, index) => (
 		{
