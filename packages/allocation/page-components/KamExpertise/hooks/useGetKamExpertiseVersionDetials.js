@@ -8,12 +8,12 @@ const useGetKamExpertiseVersionDetials = (props) => {
 		refetch,
 		expertiseRefetch,
 		cardRefetch,
-		versionName,
 	} = props;
 
 	const [selectedVersion, setSelectedVersion] = useState('');
 	const [mode, setMode] = useState('initial-mode');
 	const [showModal, setShowModal] = useState(false);
+	const [versionName, setVersionName] = useState('');
 
 	const [{ loading = false }, trigger] = useAllocationRequest({
 		url     : '/kam_expertise_version_configurations',
@@ -51,6 +51,8 @@ const useGetKamExpertiseVersionDetials = (props) => {
 		setShowModal,
 		createModalLoading: loading,
 		getVersion,
+		versionName,
+		setVersionName,
 	};
 };
 
