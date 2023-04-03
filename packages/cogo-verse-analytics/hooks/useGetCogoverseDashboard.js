@@ -32,10 +32,8 @@ const useGetCogoverseDashboard = ({ country = {}, date = {} }) => {
 	}, [date, CountryMobileCode]);
 
 	return {
-		// statsLoading : loading,
-		statsLoading: true,
-
-		stats: data,
+		statsLoading : loading,
+		stats        : data,
 	};
 };
 
