@@ -44,8 +44,7 @@ function List({
 	};
 
 	const render = () => {
-		let showlist = Array(6).fill(1);
-		if (finalData.length) showlist = finalData;
+		const showlist = finalData.length ? finalData : Array(6).fill(1);
 
 		if (resourceLoading || finalData.length) {
 			return (showlist).map((singleitem) => (
