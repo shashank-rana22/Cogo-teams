@@ -5,11 +5,13 @@ import { format } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function Header({ header_data, loading = false }) {
-	const { setToggleState } = header_data;
+	const { setToggleState } = header_data || {};
+
 	return (
 		<div className={styles.header_row}>
 			<div>
 				<div className={styles.heading}>{header_data.test_name || ' '}</div>
+
 				<p className={styles.validity_label}>
 					Validity:
 					{' '}
