@@ -105,7 +105,6 @@
 
 .sort {
 	display: flex;
-	gap: 4px;
 	align-items: center;
 	float: right;
 	margin: 0 12px;
@@ -119,6 +118,5 @@
 
 .btn_container {
 	display: flex;
-	gap: 8px;
 	justify-content: flex-end;
 }
