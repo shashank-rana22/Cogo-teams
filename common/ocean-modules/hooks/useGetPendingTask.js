@@ -4,7 +4,7 @@ import { useEffect, useCallback } from 'react';
 
 import getApiErrorString from '../utils/getApiErrorString';
 
-function useGetPendingTasks({ shipment_data = {}, task_type = '' }) {
+function useGetPendingTasks({ shipment_data = {} }) {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'fcl_freight/list_tasks',
 		method : 'GET',
@@ -18,7 +18,7 @@ function useGetPendingTasks({ shipment_data = {}, task_type = '' }) {
 				await trigger({
 					params: {
 						filters: {
-							task_type,
+							task_type   : 'upload_document',
 							status      : 'pending',
 							shipment_id : id,
 						},
@@ -29,7 +29,7 @@ function useGetPendingTasks({ shipment_data = {}, task_type = '' }) {
 				Toast.error(getApiErrorString(err));
 			}
 		})();
-	}, [trigger, id, task_type]);
+	}, [trigger, id]);
 
 	useEffect(() => {
 		getTasks();

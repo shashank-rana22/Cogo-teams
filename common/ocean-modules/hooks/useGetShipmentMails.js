@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import useAxios from 'axios-hooks';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useRef } from 'react';
 
 import getApiErrorString from '../utils/getApiErrorString';
 
@@ -8,11 +8,22 @@ const keyMappings = {
 	shipping_instruction: 'si',
 };
 
-const useShipmentEmails = ({ cogo_shipment_id, document_type = [], page }) => {
+const useShipmentEmails = ({ payload = {} }) => {
+	const { page_no, entity_type, ...restPayload } = payload;
+
+	const entityType = useRef(entity_type);
+
 	const [recentClassifiedShipmentApi, triggerRecentClassifiedShipment] =	useAxios(
 		{
 			url    : `${process.env.COGO_LENS_URL}/list_rpa_mails`,
 			method : 'GET',
+			params : {
+				filters: {
+					entity_type,
+					...restPayload,
+				},
+				page_no,
+			},
 		},
 		{ manual: true },
 	);
@@ -20,21 +31,12 @@ const useShipmentEmails = ({ cogo_shipment_id, document_type = [], page }) => {
 	const getShipmentEmails = useCallback(() => {
 		(async () => {
 			try {
-				await triggerRecentClassifiedShipment({
-					params: {
-						filters: {
-							cogo_shipment_id,
-							entity_type: document_type.length ? document_type : undefined,
-						},
-						page_no    : page,
-						page_limit : 10,
-					},
-				});
+				await triggerRecentClassifiedShipment();
 			} catch (err) {
 				Toast.error(getApiErrorString(err));
 			}
 		})();
-	}, [cogo_shipment_id, document_type, page, triggerRecentClassifiedShipment]);
+	}, [triggerRecentClassifiedShipment]);
 
 	const newEmailData = [];
 	if ((recentClassifiedShipmentApi?.data?.body || []).length) {
@@ -51,18 +53,15 @@ const useShipmentEmails = ({ cogo_shipment_id, document_type = [], page }) => {
 	}
 
 	useEffect(() => {
-		if ((document_type || []).length || page) {
+		if ((entityType).length) {
 			getShipmentEmails();
 		}
-	}, [JSON.stringify(document_type), page, getShipmentEmails]);
+	}, [entityType, getShipmentEmails]);
 
 	return {
-		emailList : newEmailData,
-		loading   : recentClassifiedShipmentApi?.loading,
-		total_count:
-			recentClassifiedShipmentApi?.data?.pagination_data?.total_count,
+		emailList: newEmailData,
+
 	};
 };
 
 export default useShipmentEmails;
-// TODO
