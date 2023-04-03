@@ -24,7 +24,6 @@
 
 .control_container {
 	display: flex;
-	gap: 20px;
 	align-items: center;
 	width: 85%;
 	margin-bottom: 15px;
@@ -42,21 +41,11 @@
 	.control_type {
 		display: flex;
 		flex-basis: 55%;
-		gap: 20px;
 	}
-}
-
-.input_wrapper:first-child {
-	flex-shrink: 0;
-}
-
-.input_wrapper:nth-child(2) {
-	flex-grow: 1;
 }
 
 .control_container_two {
 	display: flex;
-	gap: 20px;
 	align-items: center;
 	width: 85%;
 	margin-bottom: 15px;
@@ -112,5 +101,21 @@
 }
 
 .file_select {
-	background-color: white;
+	background-color: #fff;
+}
+
+.input_wrapper {
+	:global {
+		.ui_select_container {
+			margin-right: 20px;
+		}
+	}
+}
+
+.input_wrapper:first-child {
+	flex-shrink: 0;
+}
+
+.input_wrapper:nth-child(2) {
+	flex-grow: 1;
 }

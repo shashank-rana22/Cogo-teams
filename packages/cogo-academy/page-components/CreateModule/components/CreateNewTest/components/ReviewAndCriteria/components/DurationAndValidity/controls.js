@@ -1,4 +1,4 @@
-const getControls = () => [
+const controls = [
 	{
 		name           : 'test_validity',
 		label          : 'Test Validity',
@@ -43,7 +43,6 @@ const getControls = () => [
 			},
 		},
 	},
-
 ];
 
-export default getControls;
+export default controls;

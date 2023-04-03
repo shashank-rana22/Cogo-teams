@@ -1,15 +1,13 @@
 import { Placeholder } from '@cogoport/components';
 import { isEmpty, format } from '@cogoport/utils';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 
 import getElementController from '../../../../../../../../configs/getElementController';
 
-import getControls from './controls';
+import controls from './controls';
 import styles from './styles.module.css';
 
 function DurationAndValidity({ setValue, data, control, errors, loading }) {
-	const controls = useMemo(() => getControls(), []);
-
 	useEffect(() => {
 		if (!isEmpty(data)) {
 			controls.forEach(({ name: controlName }) => {
@@ -25,8 +23,9 @@ function DurationAndValidity({ setValue, data, control, errors, loading }) {
 				}
 			});
 		}
+
 		setValue('maximum_attempts', '1');
-	}, [controls, data, setValue]);
+	}, [data, setValue]);
 
 	if (isEmpty(data) || loading) {
 		return <Placeholder height="130px" width="100%" margin="0px 0px 20px 0px" />;
@@ -36,18 +35,22 @@ function DurationAndValidity({ setValue, data, control, errors, loading }) {
 		<div className={styles.container}>
 			{controls?.map((controlItem) => {
 				const { type, label, name: controlName } = controlItem || {};
+
 				const Element = getElementController(type);
+
 				return (
-					<div className={styles.control_container_two}>
+					<div key={controlName} className={styles.control_container_two}>
 						<div className={styles.label}>
 							{label}
+
 							<sup className={styles.sup}>*</sup>
 						</div>
 
 						<div className={styles.control}>
 							<Element control={control} {...controlItem} className={styles[`element_${controlName}`]} />
-							{errors[controlName]
-							&& <div className={styles.error_msg}>{errors[controlName]?.message}</div>}
+
+							{errors[controlName]?.message
+								? <div className={styles.error_msg}>{errors[controlName]?.message}</div> : null}
 						</div>
 					</div>
 				);

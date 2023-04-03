@@ -45,11 +45,13 @@ function TestDetailsModal(props) {
 								mins
 							</p>
 						</div>
+
 						<div>
 							<h5>Attempts</h5>
 							<p>{maximum_attempts}</p>
 						</div>
 					</div>
+
 					<div>
 						<div>
 							<h5>Validity</h5>
@@ -62,6 +64,7 @@ function TestDetailsModal(props) {
 
 							</p>
 						</div>
+
 						<div>
 							<h5>Cutoff Pass %</h5>
 							<p>
