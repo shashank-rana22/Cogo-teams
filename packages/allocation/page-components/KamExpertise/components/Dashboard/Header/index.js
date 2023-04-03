@@ -9,14 +9,10 @@ import styles from './styles.module.css';
 function Header() {
 	const router = useRouter();
 
-	const { listKamExpertiseCurrentConfigs = {} } = useGetKamExpertiseCurrentConfig();
+	const { LIVE_VERSION_DATA } = useGetKamExpertiseCurrentConfig();
 
-	const {
-		list : data = [],
-		audit_data = {},
-	} = listKamExpertiseCurrentConfigs;
-
-	const liveVersion = data.filter((item) => item.status === 'live')?.[0]?.version_number || 'NA';
+	const { version_number = '', audit_data = {} } = LIVE_VERSION_DATA;
+	const { updated_at = '', name = '' } = audit_data;
 
 	return (
 		<div className={styles.container}>
@@ -26,7 +22,7 @@ function Header() {
 					{' '}
 					Version
 					{' '}
-					<b>{liveVersion}</b>
+					<b>{version_number}</b>
 				</div>
 
 				<div className={styles.audits_data}>
@@ -34,15 +30,14 @@ function Header() {
 						Published on :
 						{' '}
 						<b>
-							{ audit_data.updated_at
-								? format(audit_data?.updated_at, 'dd MMM yyyy') : ''}
+							{updated_at ? format(updated_at, 'dd MMM yyyy') : ''}
 						</b>
 					</div>
 
 					<div>
 						Published by :
 						{' '}
-						<b>{audit_data?.name || ''}</b>
+						<b>{name}</b>
 					</div>
 				</div>
 			</div>
