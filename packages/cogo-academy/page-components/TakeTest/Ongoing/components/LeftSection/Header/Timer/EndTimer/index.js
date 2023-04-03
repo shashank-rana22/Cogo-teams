@@ -14,8 +14,7 @@ function EndTimer({ data = {}, showTimeOverModal, setShowTimeOverModal, setActiv
 		setTimeout(() => {
 			endTest();
 		}, 5000);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [endTest]);
 
 	return (
 		<Modal size="md" show={showTimeOverModal}>

@@ -1,6 +1,7 @@
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
+import Spinner from '../../../commons/Spinner';
 import Completion from '../Completion';
 import useGetTest from '../hooks/useGetTest';
 import Introduction from '../Introduction';
@@ -63,13 +64,22 @@ function Eligible({ currentQuestionId }) {
 		}
 
 		localStorage.setItem('visibilityChangeCount', 1);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [test_id, user_id]);
 
-	const Component = COMPONENT_MAPPING[activeState]?.component;
+	const Component = COMPONENT_MAPPING?.[activeState]?.component || Introduction;
 
 	if (loading) {
-		return 'loading ...';
+		return (
+			<div className={styles.spinner}>
+				<Spinner
+					height={60}
+					width={60}
+					borderWidth="6px"
+					outerBorderColor="#FBD69F"
+					spinBorderColor="red"
+				/>
+			</div>
+		);
 	}
 
 	return (

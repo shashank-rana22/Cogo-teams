@@ -14,11 +14,13 @@ import styles from './styles.module.css';
 
 function ReviewAndCriteria(props) {
 	const { loading, data, test_id } = props;
-	const { name = '', set_data = [], cogo_entity_object = {} } = data || {};
+
+	const { name = '', set_data = [], cogo_entity_object = {}, eligible_users = '' } = data || {};
 
 	const router = useRouter();
 
 	const [error, setError] = useState(false);
+
 	const [showModal, setShowModal] = useState(false);
 
 	const { control, formState: { errors }, handleSubmit, setValue, getValues, watch } = useForm();
@@ -37,6 +39,14 @@ function ReviewAndCriteria(props) {
 	const onNavigate = () => {
 		const href = '/learning?activeTab=test_module';
 		router.push(href, href);
+	};
+
+	const newFunction = () => {
+		if (error) {
+			Toast.error('Total questions and cases cannot be 0');
+		} else {
+			setShowModal(true);
+		}
 	};
 
 	return (
@@ -72,12 +82,12 @@ function ReviewAndCriteria(props) {
 						<div className={styles.entity_name}>{cogo_entity_object?.business_name}</div>
 					</div>
 
-					{/* <div className={styles.topic}>
+					<div className={styles.topic}>
 						<div className={styles.subtopic}> Users </div>
 						<div>
-							<Pill size="md" color="#FEF3E9" className={styles.names} />
+							<Pill size="md" color="#FEF3E9" className={styles.names}>{ eligible_users || '-'}</Pill>
 						</div>
-					</div> */}
+					</div>
 				</div>
 			)}
 
@@ -161,13 +171,7 @@ function ReviewAndCriteria(props) {
 					themeType="primary"
 					type="button"
 					onClick={
-						handleSubmit(() => {
-							if (error) {
-								Toast.error('Total questions and cases cannot be 0');
-							} else {
-								setShowModal(true);
-							}
-						})
+						handleSubmit(newFunction)
 					}
 				>
 					Publish Test

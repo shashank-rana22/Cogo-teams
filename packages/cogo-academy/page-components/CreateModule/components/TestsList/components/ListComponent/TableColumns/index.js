@@ -12,14 +12,14 @@ import styles from './styles.module.css';
 export const questionSetColumns = ({ loading, router, setShowModal, setQuestionSetId }) => [
 	{
 		Header   : 'NAME',
-		id       : 'a',
+		id       : 'name',
 		accessor : ({ name = '' }) => (
 			<section>{name}</section>
 		),
 	},
 	{
 		Header   : 'TOPIC',
-		id       : 'c',
+		id       : 'topic',
 		accessor : ({ topic = [] }) => (
 			<section>
 				<Tooltip maxWidth={500} content={startCase(topic)} placement="top">
@@ -36,7 +36,7 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 	},
 	{
 		Header   : 'TOTAL QUESTIONS/CASES',
-		id       : 'd',
+		id       : 'total_questions',
 		accessor : ({
 			non_case_study_question_count
 			= 0, case_study_question_count
@@ -55,14 +55,14 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 	},
 	{
 		Header   : 'STATUS',
-		id       : 'tags',
+		id       : 'status',
 		accessor : ({ status = '' }) => (
 			<section>{status}</section>
 		),
 	},
 	{
 		Header   : 'NO. OF TESTS USING THE SET',
-		id       : 'e',
+		id       : 'number_of_tests',
 		accessor : ({ set_count = 0 }) => (
 			<section>
 				{set_count}
@@ -71,7 +71,7 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 	},
 	{
 		Header   : 'LAST UPDATED',
-		id       : 'updatedAt',
+		id       : 'updated_at',
 		accessor : ({ updated_at = '' }) => (
 			<section>
 				<span className={styles.time}>{format(updated_at, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}</span>
@@ -98,7 +98,7 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => ([
 	{
 		Header   : 'NAME',
-		id       : 'a',
+		id       : 'name',
 		accessor : ({ name = '', test_duration = '', current_status = '' }) => (
 			<div>
 				<section>
@@ -108,8 +108,8 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 							{startCase(name) || '-'}
 						</div>
 					</Tooltip>
-
 				</section>
+
 				{current_status === 'active' ? (
 					<section className={styles.duration}>
 						{test_duration}
@@ -122,7 +122,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 	},
 	{
 		Header   : 'TOPICS',
-		id       : 'c',
+		id       : 'topics',
 		accessor : ({ topics = [] }) => (
 			<section className={styles.topics}>
 				{topics.map((topic) => (
@@ -142,7 +142,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 	},
 	{
 		Header   : 'TOTAL QUESTIONS/CASES',
-		id       : 'd',
+		id       : 'total_questions',
 		accessor : ({ case_study_questions = 0, stand_alone_questions = 0 }) => (
 			<section>
 				{stand_alone_questions || 0}
@@ -157,14 +157,14 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 	},
 	{
 		Header   : 'ALLOWED ATTEMPTS',
-		id       : 'ss',
+		id       : 'allowed_attempts',
 		accessor : ({ maximum_attempts = 0 }) => (
 			<section>{maximum_attempts || '-'}</section>
 		),
 	},
 	{
 		Header   : 'CUTOFF PASS %',
-		id       : 'e',
+		id       : 'cutoff_pass',
 		accessor : ({ cut_off_percentage = '' }) => (
 			<section>
 				{cut_off_percentage || '-'}
@@ -173,7 +173,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 	},
 	{
 		Header   : 'ATTEMPTED BY',
-		id       : 'ik',
+		id       : 'attempted_by',
 		accessor : ({ attempted_by = 0 }) => (
 			<section>
 				{attempted_by}
@@ -182,12 +182,11 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 	},
 	{
 		Header   : 'STATUS',
-		id       : 'tags',
+		id       : 'status',
 		accessor : ({ current_status = '', id = '', validity_start = '', validity_end = '' }) => {
 			if (current_status === 'active') {
 				return (
 					<section className={styles.details}>
-
 						<section className={styles.status}>
 							<Pill size="md" color="green">{startCase(current_status)}</Pill>
 
@@ -202,14 +201,12 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 									Share Test Link
 								</Pill>
 							</div>
-
 						</section>
 
 						<section>
 							{format(validity_start, 'dd/MM/yyyy - ')}
 							{format(validity_end, 'dd/MM/yyyy')}
 						</section>
-
 					</section>
 				);
 			} if (current_status === 'published') {
@@ -227,6 +224,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 					</section>
 				);
 			}
+
 			if (current_status === 'upcoming') {
 				return (
 					<section>
@@ -239,6 +237,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 								{startCase(current_status)}
 							</Pill>
 						</section>
+
 						<section>
 							{format(validity_start, 'dd/MM/yyyy - ')}
 							{format(validity_end, 'dd/MM/yyyy')}
@@ -246,6 +245,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 					</section>
 				);
 			}
+
 			if (current_status === 'expired') {
 				return (
 					<section>
@@ -293,6 +293,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 		accessor : ({ updated_at = '' }) => (
 			<section className={styles.time}>
 				<span>{format(updated_at, 'dd MMM yy')}</span>
+
 				<span>{format(updated_at, 'h:mm a')}</span>
 			</section>
 		),

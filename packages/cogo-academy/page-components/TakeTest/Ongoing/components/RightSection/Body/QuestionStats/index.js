@@ -30,6 +30,7 @@ function QuestionStats({ total_question_count, user_appearance = [] }) {
 		<div className={styles.container}>
 			{Object.values(STATS_MAPPING).map((stats) => {
 				const { label, color, key } = stats;
+
 				const count = key === 'not_viewed'
 					? total_question_count - total_count
 					: user_appearance?.filter((item) => item.answer_state === key).length;
@@ -37,10 +38,11 @@ function QuestionStats({ total_question_count, user_appearance = [] }) {
 				total_count += Number(count);
 
 				return (
-					<div className={styles.stats_container}>
+					<div key={key} className={styles.stats_container}>
 						<div style={{ backgroundColor: color }} className={styles.stats_count}>
 							{count}
 						</div>
+
 						<p className={styles.label}>{label}</p>
 					</div>
 				);

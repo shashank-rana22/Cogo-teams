@@ -9,7 +9,7 @@ import WORK_SCOPES_OPTIONS from '../../ControlCenter/ConfigurationEngine/CreateA
 import countries from '@/data-store/constants/countries.json';
 
 const useGetUserGroups = () => {
-	const [{ data: audienceData, loading:listAudienceLoading }, triggerAudiences] = useRequest({
+	const [{ data: audienceData, loading: listAudienceLoading }, triggerAudiences] = useRequest({
 		method : 'get',
 		url    : '/list_faq_audiences',
 		params : {
@@ -72,8 +72,8 @@ const useGetUserGroups = () => {
 					key={item.id}
 				>
 					{startCase(name)}
-
 				</div>
+
 				{(pillsArray || []).map((ele) => (pillsObject[ele]
 					&& (
 						<Pill color="blue" key={ele}>
@@ -84,11 +84,13 @@ const useGetUserGroups = () => {
 					)))}
 			</div>
 		);
+
 		const q = `${item.name || ''}-${pillsArray.join('-')}`;
 		const value = item.id;
 
 		return { label, q, value };
 	};
+
 	(audienceList || []).forEach((item) => {
 		audienceOptions.push(getAudienceOption(item));
 	});

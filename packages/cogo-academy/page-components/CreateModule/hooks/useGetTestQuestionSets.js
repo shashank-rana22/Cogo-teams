@@ -6,18 +6,19 @@ import { useEffect, useState, useCallback } from 'react';
 function useGetTestQuestionSets({ filters, activeTab = 'question_set' }) {
 	const { query, debounceQuery } = useDebounceQuery();
 
+	const [{ data = {}, loading }, trigger] = useRequest({
+		url    : '/list_test_question_sets',
+		method : 'GET',
+	}, { manual: true });
+
 	const [params, setParams] = useState({
 		page    : 1,
 		filters : {
 			status: 'active',
 		},
 	});
-	const [input, setInput] = useState('');
 
-	const [{ data = {}, loading }, trigger] = useRequest({
-		url    : '/list_test_question_sets',
-		method : 'GET',
-	}, { manual: true });
+	const [input, setInput] = useState('');
 
 	const fetchList = useCallback(() => {
 		try {
@@ -45,7 +46,7 @@ function useGetTestQuestionSets({ filters, activeTab = 'question_set' }) {
 	return {
 		data,
 		loading,
-		fetchList: () => {},
+		fetchList,
 		setParams,
 		input,
 		setInput,

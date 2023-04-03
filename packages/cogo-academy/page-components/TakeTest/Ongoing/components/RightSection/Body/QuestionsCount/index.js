@@ -32,6 +32,7 @@ function QuestionsCount({
 		}
 
 		setSubQuestion(1);
+
 		fetchQuestions({ question_id: user_appearance?.[index]?.test_question_id });
 	};
 
@@ -40,10 +41,11 @@ function QuestionsCount({
 	return (
 		<div className={styles.container}>
 			{user_appearance?.map((question, index) => {
-				const { answer_state = '' } = question || {};
+				const { answer_state = '', test_question_id } = question || {};
 
 				return (
 					<div
+						key={test_question_id}
 						role="presentation"
 						onClick={() => handleChangeQuestion({ index })}
 						style={{
@@ -55,11 +57,10 @@ function QuestionsCount({
 					>
 						{index + 1}
 					</div>
-
 				);
 			})}
 
-			{ len ? [...Array(len)].map((item, index) => (
+			{len ? [...Array(len)].map((item, index) => (
 				<div
 					role="presentation"
 					style={{ backgroundColor: '#FDFBF6', cursor: 'not-allowed' }}
@@ -68,7 +69,6 @@ function QuestionsCount({
 					{user_appearance.length + index + 1}
 				</div>
 			)) : null}
-
 		</div>
 	);
 }

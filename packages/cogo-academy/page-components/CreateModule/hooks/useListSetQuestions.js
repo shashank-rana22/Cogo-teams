@@ -1,7 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 function useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKeysSaved, setEditDetails, query, mode }) {
 	const [page, setPage] = useState(1);
@@ -11,7 +10,7 @@ function useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKey
 		url    : '/list_set_questions',
 	}, { manual: true });
 
-	const listSetQuestions = async ({ questionToShow = '', pageToShow }) => {
+	const listSetQuestions = useCallback(async ({ questionToShow = '', pageToShow }) => {
 		try {
 			const res = await trigger({
 				params: {
@@ -40,13 +39,13 @@ function useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKey
 		} catch (err) {
 			setAllKeysSaved(true);
 		}
-	};
+	}, [mode, page, query, questionSetId, setAllKeysSaved, setEditDetails, setSavedQuestionDetails, trigger]);
 
 	useEffect(() => {
 		if (questionSetId) {
 			listSetQuestions({ questionToShow: '' });
 		}
-	}, [questionSetId, query, page]);
+	}, [questionSetId, query, page, listSetQuestions]);
 
 	return {
 		loading,

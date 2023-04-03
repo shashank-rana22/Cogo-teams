@@ -11,7 +11,7 @@ import ListComponent from './components/ListComponent';
 import styles from './styles.module.css';
 
 const BUTTON_TEXT_MAPPING = {
-	tests        : ' Test',
+	tests        : 'Test',
 	question_set : 'Question Set',
 
 };
@@ -32,7 +32,7 @@ function TestsList({ activeTab, setActiveTab }) {
 
 	const {
 		data: questionData,
-		loading:questionListLoading,
+		loading: questionListLoading,
 		fetchList: questionListRefetch,
 		setParams: setQuestionListParams,
 		params: questionListParams,

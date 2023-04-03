@@ -5,7 +5,7 @@ import { format, getByKey, startCase } from '@cogoport/utils';
 import InvoiceDetails from '../commons/invoiceDetails';
 import Remarks from '../commons/Remarks';
 import RenderIRNGenerated from '../commons/RenderIRNGenerated';
-import { getDocumentNumber } from '../Utils/getDocumentNumber';
+import { getDocumentNumber, getDocumentUrl } from '../Utils/getDocumentNumber';
 
 import styles from './styles.module.css';
 
@@ -67,7 +67,7 @@ const completedColumn = (refetch: Function) => [
 			<div className={styles.fieldPair}>
 				<div
 					className={styles.link}
-					onClick={() => window.open(getByKey(row, 'invoiceNumber') as string, '_blank')}
+					onClick={() => window.open(getDocumentUrl({ itemData: row }) as string, '_blank')}
 					role="presentation"
 				>
 					{getDocumentNumber({ itemData: row })}

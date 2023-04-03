@@ -34,6 +34,7 @@ function ManualAddition({
 				if (isNew) {
 					return (
 						<CreateQuestion
+							key={item.id}
 							index={index}
 							item={item}
 							questionSetId={questionSetId}

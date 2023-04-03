@@ -43,8 +43,8 @@ function BulkUpload({
 					className={styles.sample_div}
 					role="presentation"
 					onClick={() => window.open(
-						// eslint-disable-next-line max-len
-						'https://cogoport-testing.sgp1.digitaloceanspaces.com/8b3de8aeee4620f0f863c681d28e7767/test-module-sample-set.csv',
+						`https://cogoport-testing.sgp1.digitaloceanspaces.com/
+						8b3de8aeee4620f0f863c681d28e7767/test-module-sample-set.csv`,
 						'_blank',
 					)}
 				>

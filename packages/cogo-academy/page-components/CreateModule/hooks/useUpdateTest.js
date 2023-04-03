@@ -5,6 +5,7 @@ import { useRequest } from '@cogoport/request';
 
 function useUpdateTest() {
 	const router = useRouter();
+
 	const [{ loading = false }, trigger] = useRequest({
 		url    : '/update_test',
 		method : 'POST',
@@ -60,6 +61,7 @@ function useUpdateTest() {
 				});
 
 				router.push('/learning?activeTab=test_module');
+
 				Toast.success('Updated Successfully');
 			} else {
 				await trigger({
@@ -70,13 +72,16 @@ function useUpdateTest() {
 
 					},
 				});
+
 				fetchList();
+
 				Toast.success('Test Deleted Successfully');
 			}
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}
 	};
+
 	return {
 		loading,
 		updateTest,
