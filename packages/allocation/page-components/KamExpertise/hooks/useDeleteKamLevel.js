@@ -14,7 +14,7 @@ function useDeleteKamLevel(props) {
 		try {
 			const payload = {
 				transition_level,
-				level_to_be_deleted: true,
+				status: 'inactive',
 			};
 			await trigger({
 				data: payload,
