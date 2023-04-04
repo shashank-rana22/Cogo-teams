@@ -10,7 +10,7 @@ function useCreateFaqSet({
 	editorValue,
 	setEditorError,
 	RichTextEditor,
-	data,
+	data: apiData,
 }) {
 	const router = useRouter();
 	const {
@@ -38,7 +38,7 @@ function useCreateFaqSet({
 		}
 
 		// eslint-disable-next-line react-hooks/rules-of-hooks
-		const { payload } = useCreateFaqPayload({ values, editorValue, source: 'create', data });
+		const { payload } = useCreateFaqPayload({ values, editorValue, source: 'create', apiData });
 
 		try {
 			const res = await trigger({
@@ -60,9 +60,9 @@ function useCreateFaqSet({
 		}
 	};
 
-	const onClickPublish = async ({ data: publishData }) => {
+	const onClickPublish = async ({ data }) => {
 		const payload = {
-			id      : publishData?.id,
+			id      : data?.id,
 			state   : 'published',
 			status  : 'active',
 			answers : [{
