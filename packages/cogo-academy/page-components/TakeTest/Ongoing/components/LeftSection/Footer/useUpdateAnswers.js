@@ -57,7 +57,7 @@ function useUpdateAnswers({
 		const payload = {
 			test_user_mapping_id,
 			test_question_id         : id,
-			test_question_answer_ids : answerArray,
+			test_question_answer_ids : answerArray || [],
 			answer_state             : answerState,
 			question_type,
 			...(question_type === 'case_study'
