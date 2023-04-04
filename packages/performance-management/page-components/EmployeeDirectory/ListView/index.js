@@ -26,8 +26,11 @@ function ListView({ viewType = false }) {
 
 	const downloadCsv = async () => {
 		try {
-			await trigger();
+			const response = await trigger();
 			Toast.success('File Downloaded Successfully');
+
+			// eslint-disable-next-line no-undef
+			if (response.data?.url) { window.open(response.data.url, '_blank'); }
 		} catch (e) {
 			Toast.error(e.response?.data.error?.toString());
 		}
