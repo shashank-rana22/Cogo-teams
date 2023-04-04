@@ -123,7 +123,7 @@ function CreateNewTest({
 							})
 						}
 					>
-						save
+						Save
 					</Button>
 				)}
 			</div>
