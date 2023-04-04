@@ -26,7 +26,7 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 					<Pill
 						className={styles.topic_pill}
 						size="md"
-						color="#CFEAED"
+						color="#F3FAFA"
 					>
 						{startCase(topic)}
 					</Pill>
@@ -130,7 +130,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 						<Pill
 							className={styles.topic_pill}
 							size="sm"
-							color="#CFEAED"
+							color="#F3FAFA"
 						>
 							{startCase(topic)}
 						</Pill>

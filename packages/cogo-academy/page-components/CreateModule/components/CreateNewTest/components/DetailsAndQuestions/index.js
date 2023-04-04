@@ -26,13 +26,14 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 		if (idArray.length === 0) {
 			Toast.error('Atleast one of the question sets must be selected');
 		} else {
-			createTest({ idArray, next: type === 'save_as_draft' ? 'draft' : 'criteria', uploadDocument });
+			(handleSubmit((values) => {
+				createTest({ values, idArray, next: type === 'save_as_draft' ? 'draft' : 'criteria', uploadDocument });
+			}))();
 		}
 	};
 
 	useEffect(() => {
 		if (!isEmpty(data)) {
-			setShowQuestionSet(true);
 			setIdArray((set_data || []).map((item) => item.id));
 		}
 	}, [set_data, data]);
@@ -49,8 +50,24 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 				handleSubmit={handleSubmit}
 				uploadDocument={uploadDocument}
 				setUploadDocument={setUploadDocument}
-				setShowQuestionSet={setShowQuestionSet}
 			/>
+
+			<div className={styles.btn_container}>
+				{(!showQuestionSet) ? (
+					<Button
+						type="button"
+						onClick={() => setShowQuestionSet(true)}
+						size="md"
+						themeType="primary"
+						style={{ marginRight: '20px' }}
+						loading={getTestLoading || loading}
+						disabled={isEmpty(data)}
+					>
+						From Existing Question Set
+					</Button>
+				) : null}
+
+			</div>
 
 			{showQuestionSet ? (
 				<QuestionSet
@@ -65,7 +82,7 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 			{showQuestionSet && (
 				<div className={`${styles.btn_container} ${styles.btn_cont_float}`}>
 					<Button
-						type="button"
+						type="submit"
 						loading={loading || getTestLoading}
 						size="md"
 						themeType="secondary"
@@ -76,7 +93,7 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 					</Button>
 
 					<Button
-						type="button"
+						type="submit"
 						loading={loading || getTestLoading}
 						size="md"
 						themeType="primary"
