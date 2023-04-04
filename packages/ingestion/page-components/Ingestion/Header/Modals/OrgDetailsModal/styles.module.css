@@ -1,15 +1,15 @@
 .form_section {
-    margin-top: 16px;
-    height: 80px;
+	height: 80px;
+	margin-top: 16px;
 }
 
 .control_container {
-    height: 80px;
-    padding: 12px 16px;
+	height: 80px;
+	padding: 12px 16px;
 }
 
 .modal_container {
-    height: 300px;
+	height: 300px;
 }
 
 .error_message {
@@ -22,8 +22,7 @@
 }
 
 .close_button {
-   
-    display: flex;
-    justify-content: flex-end;
-    padding: 16px 16px;
+	display: flex;
+	justify-content: flex-end;
+	padding: 16px;
 }

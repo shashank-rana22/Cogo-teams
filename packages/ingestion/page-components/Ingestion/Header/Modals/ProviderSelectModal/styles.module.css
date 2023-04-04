@@ -1,23 +1,20 @@
 .provider_container {
-    min-height: 180px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 100%;
-    align-items: center;
-    padding: 0 0 20px 0;
-    overflow: hidden;
-    
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+	width: 100%;
+	min-height: 180px;
+	padding: 0 0 20px;
+	overflow: hidden;
 }
 
 .close_button {
-   
-    display: flex;
-    justify-content: flex-end;
-    padding: 16px 16px;
+	display: flex;
+	justify-content: flex-end;
+	padding: 16px;
 }
 
 .heading {
-    padding: 12px 16px;
-
+	padding: 12px 16px;
 }

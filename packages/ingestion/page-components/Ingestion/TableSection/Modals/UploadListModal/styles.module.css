@@ -1,10 +1,9 @@
 .table_main_container {
-    padding: '0 40px 0 0';
+	padding: "0 40px 0 0";
 }
 
 .table {
-
-    margin: 20px 0;
+	margin: 20px 0;
 	background-color: #fff;
 	box-shadow: 0 0 16px rgb(44 62 80 / 10%);
 
@@ -18,26 +17,24 @@
 }
 
 .pagination_container {
-    width: 100%;
-    display: flex;
-    justify-content: end;
+	display: flex;
+	justify-content: end;
+	width: 100%;
 }
 
 .empty {
-    height: '120px';
-    padding: 20px 0;
-	width: '600px';
+	width: "600px";
+	height: "120px";
+	padding: 20px 0;
 }
 
 .close_button {
-   
-    display: flex;
-    justify-content: flex-end;
-    padding: 16px 16px;
+	display: flex;
+	justify-content: flex-end;
+	padding: 16px;
 }
 
 .container {
 	display: flex;
 	padding: 8px 16px;
-
 }

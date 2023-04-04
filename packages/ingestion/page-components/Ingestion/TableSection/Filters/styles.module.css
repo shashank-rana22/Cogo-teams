@@ -1,17 +1,17 @@
 .filter_container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 12px;
-    align-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 12px;
 }
 
 .search {
-    width: 20%;
+	width: 20%;
 }
 
 .filter {
-    width: 80%; 
-    display: flex;   
+	display: flex;
+	width: 80%;
 }
 
 .form_group {
