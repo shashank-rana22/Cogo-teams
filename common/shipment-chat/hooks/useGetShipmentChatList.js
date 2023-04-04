@@ -1,39 +1,25 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 
-const useGetShipmentChatList = ({ status }) => {
-	const { user_id } = useSelector((state) => ({
-		user_id: state?.profile?.user.id,
-	}));
+import getApiErrorString from '../utils/getApiErrorString';
 
-	const [list, setList] = useState({
-		data       : [],
-		total      : 0,
-		total_page : 0,
-	});
-	const [filters, setFilters] = useState({ page: 1 });
-	const { page, q } = filters;
+const useGetShipmentChatList = ({ payload, states = {} }) => {
+	const { list = {}, setList = () => {} } = states;
 
-	const [{ loading: apiLoading }, trigger] = useRequest({
+	const [{ loading }, trigger] = useRequest({
 		url    : 'list_chat_channels',
 		method : 'GET',
+		params : {
+			...payload,
+		},
 	}, { manual: true });
 
 	const getShipmentChatList = useCallback(() => {
 		(async () => {
 			try {
-				const res = await trigger({
-					params: {
-						filters: {
-							subscribe_user_id: user_id,
-							status,
-							q,
-						},
-						page,
-					},
-				});
+				const res = await trigger();
+
 				setList((prevState) => ({
 					data:
 						res?.data?.page <= 1
@@ -43,23 +29,19 @@ const useGetShipmentChatList = ({ status }) => {
 					total_page : res?.data?.total,
 				}));
 			} catch (err) {
-				Toast.error(err);
+				Toast.error(getApiErrorString(err));
 			}
 		})();
-	}, [trigger, status, user_id, page, q]);
+	}, [trigger, setList]);
 
 	useEffect(() => {
 		getShipmentChatList();
 	}, [getShipmentChatList]);
 
 	return {
-		filters,
-		setFilters,
 		listData   : list?.data,
-		loading    : apiLoading,
-		page,
+		loading,
 		total_page : list?.total_page,
-		setList,
 	};
 };
 

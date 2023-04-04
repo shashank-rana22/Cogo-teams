@@ -1,4 +1,4 @@
-import { Textarea, Popover } from '@cogoport/components';
+import { Textarea, Popover, Toast } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcMSend, IcMAttach, IcMDocument } from '@cogoport/icons-react';
 import React, { useRef, useState } from 'react';
@@ -28,20 +28,21 @@ function Details({
 	subscribedUsers = [],
 	setShow = () => { },
 	get = {},
-	personal_data = {},
+	personalData = {},
 }) {
 	const sendToRef = useRef(null);
 	const [stakeHolderView, setStakeHolderView] = useState('');
 	const [textContent, setTextContent] = useState('');
 	const [showImpMsg, setShowImpMsg] = useState(false);
 	const [selectedFile, setSelectedFile] = useState([]);
+	const [rows, setRows] = useState(1);
 
-	const { data, isGettingShipment } = get;
-	const { shipment_data, primary_service } = data || {};
+	const { data, loadingChannel } = get;
+	const { channelData, primaryService } = data || {};
 	const { msgContent } = useFireBase({ id });
 
 	const isStakeholder = shipmentChatStakeholders.includes(
-		shipment_data?.stakeholder_types?.[0],
+		channelData?.stakeholder_types?.[0],
 	);
 
 	const formValues = {
@@ -53,34 +54,92 @@ function Details({
 		setTextContent('');
 	};
 
-	const { onCreate, loading } = useCreateMessage({
-		shipment_data,
-		formValues,
-		reset,
-		id,
-		stakeHolderView,
-		sourceId,
-		source,
-		sendToRef,
-		personal_data,
-		subscribedUsers,
-		isStakeholder,
-		shipmentChatStakeholders,
-		setSelectedFile,
+	// formatting Data for hooks
+	const stakeholder = stakeHolderView.split(' ');
+	const stakeholderArray = (stakeholder || []).map((item) => item.replace('@', ''));
+	const conditionArr = stakeholderArray.length && stakeholderArray[0] !== '' ? [...stakeholderArray] : [];
+	const filteredArr = (conditionArr || []).map((item) => {
+		if (item === '') {
+			return null;
+		}
+		if (item === 'Kam') {
+			return 'booking_agent';
+		}
+		return item?.toLowerCase();
 	});
+
+	const PersonalChannel = {
+		visible_to_user_ids: personalData?.subscribed_user_ids,
+	};
+
+	let visible_to_stakeholders = isStakeholder
+		? [...filteredArr, channelData?.stakeholder_types?.[0]]
+		: [...filteredArr];
+
+	visible_to_stakeholders = visible_to_stakeholders?.filter((item) => shipmentChatStakeholders.includes(item));
+
+	const GroupChannel = filteredArr.length
+		? {
+			created_by_stakeholder: channelData?.stakeholder_types?.[0], source_id: sourceId, visible_to_stakeholders,
+		}
+		: {
+			created_by_stakeholder : channelData?.stakeholder_types?.[0],
+			source_id              : sourceId,
+			visible_to_user_ids    : subscribedUsers,
+		};
+
+	const payloadData = source === 'shipment' ? GroupChannel : PersonalChannel;
+
+	const refetch = () => {
+		reset();
+		sendToRef?.current?.setText('');
+		setSelectedFile([]);
+	};
+
+	const createMsgPayload = {
+		content         : formValues?.message || '',
+		attachment_urls : formValues?.file || [],
+		channel_id      : id,
+		...payloadData,
+	};
+
+	const { loading, handleSendMsg } = useCreateMessage({ payload: createMsgPayload, refetch });
+
+	const onCreateMessage = () => {
+		if (payloadData?.visible_to_stakeholders?.length < 2) {
+			Toast.error('Please tag appropriate stakeholder');
+		} else {
+			handleSendMsg();
+		}
+	};
 
 	if (activeId !== id) {
 		return null;
 	}
 
+	const contentData = formValues?.message?.split('\n').length;
+	const handleClick = (e) => {
+		if (e.keyCode === 13 && e.shiftKey && rows < 5) {
+			setRows(contentData + 1);
+		}
+		if (e.keyCode === 13 && !e.shiftKey) {
+			onCreateMessage();
+			reset();
+			setRows(1);
+		}
+		if (contentData > 1 && (e.keyCode === 8 || e.keyCode === 46)) {
+			setRows(contentData - 1);
+		}
+	};
+
 	return (
 		<div className={styles.container}>
-			{isGettingShipment ? (
+			{loadingChannel ? (
 				<Loader />
 			) : (
 				<Header
-					shipment_data={shipment_data}
-					primary_service={primary_service}
+					channelData={channelData}
+					primaryService={primaryService}
 					setShow={setShow}
 					isStakeholder={isStakeholder}
 					showImpMsg={showImpMsg}
@@ -91,7 +150,7 @@ function Details({
 			<div className={styles.chat_sections}>
 				<MessageContainer
 					msgContent={msgContent}
-					isGettingShipment={isGettingShipment}
+					loadingChannel={loadingChannel}
 					showImpMsg={showImpMsg}
 				/>
 
@@ -141,6 +200,8 @@ function Details({
 							className={styles.text_area}
 							placeholder="Type your message here...."
 							value={textContent}
+							onKeyDown={(e) => handleClick(e)}
+							rows={rows}
 							onChange={(val) => {
 								setTextContent(val);
 							}}
@@ -150,7 +211,7 @@ function Details({
 							className={styles.send}
 							role="button"
 							tabIndex={0}
-							onClick={!loading ? onCreate : null}
+							onClick={!loading ? onCreateMessage : null}
 						>
 							<IcMSend style={{ width: '2em', height: '2em', fill: '#303b67' }} />
 						</div>

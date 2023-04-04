@@ -1,41 +1,40 @@
 .send_to_container {
-	width: 100%;
-	padding: 10px;
 	display: flex;
 	align-items: center;
+	width: 100%;
+	padding: 10px;
 	background: #f6f5fe;
 	border-bottom: 1px solid black;
 }
 
 .container {
-	cursor: pointer;
-	border-radius: 5px;
-	background: #F8F2E7;
-	box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.1);
-	width: 27%;
 	position: absolute;
-	left: 42%;
 	bottom: 19%;
+	left: 42%;
+	width: 27%;
+	cursor: pointer;
+	background: #f8f2e7;
+	border-radius: 5px;
+	box-shadow: 0 2px 20px rgb(0 0 0 / 10%);
 
 	& > div:hover {
-		box-shadow: 0px 0px 8px rgba(44, 62, 80, 0.2);
+		box-shadow: 0 0 8px rgb(44 62 80 / 20%);
 	}
 
 	& > :last-child {
 		border-bottom: none;
 	}
-
 }
 
 .options {
-	border-bottom: 0.5px solid #221F20;
-	padding: 4px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	padding: 4px;
 	font-size: 12px;
 	font-weight: 500;
-	color: #221F20;
+	color: #221f20;
+	border-bottom: 0.5px solid #221f20;
 }
 
 .send_input {
@@ -53,8 +52,8 @@
 }
 
 .send_text {
-	font-weight: 600;
-	font-size: 12px;
-	color: #000000;
 	margin-right: 4px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #000;
 }
