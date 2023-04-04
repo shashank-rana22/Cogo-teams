@@ -1,4 +1,5 @@
 import useListShipmentPendingTasks from '../../../../../hooks/useListShipmentPendingTasks';
+import TaskCard from '../TaskCard';
 
 import Card from './Card';
 import Header from './Header';
@@ -7,10 +8,12 @@ import styles from './styles.module.css';
 function List() {
 	const {
 		count, completedTaskCount, tasksList, loading,
-		shipmentData, setHideCompletedTasks,
+		setHideCompletedTasks, handleClick, selectedTaskId,
+		shipment_data,
 	} = useListShipmentPendingTasks();
 
-	console.log('task', loading, shipmentData);
+	console.log('task', loading);
+	console.log('task', tasksList.length);
 
 	if (loading) {
 		return (
@@ -32,9 +35,18 @@ function List() {
 				completedTaskCount={completedTaskCount}
 				setHideCompletedTasks={setHideCompletedTasks}
 			/>
-			{
-        (tasksList || []).map((task) => <Card task={task} />)
-      }
+			{!selectedTaskId ? (tasksList || []).map((task) => <Card task={task} handleClick={handleClick} />) : null}
+
+			{selectedTaskId ? (
+				<>
+					<Card task={tasksList.find((task) => task.id === selectedTaskId)} handleClick={handleClick} />
+
+					<TaskCard
+						task={tasksList.find((task) => task.id === selectedTaskId)}
+						shipment_data={shipment_data}
+					/>
+				</>
+			) : null }
 		</div>
 	);
 }

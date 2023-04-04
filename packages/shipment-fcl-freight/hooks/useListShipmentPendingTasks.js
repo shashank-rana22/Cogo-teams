@@ -6,6 +6,7 @@ import { useContext, useState, useEffect, useCallback } from 'react';
 import getApiErrorString from '../utils/getApiErrorString';
 
 function useListShipmentPendingTasks() {
+	const [selectedTaskId, setSelectedTaskId] = useState(null);
 	const [hideCompletedTasks, setHideCompletedTasks] = useState(false);
 	const [showMyTasks, setShowMyTasks] = useState(false);
 
@@ -51,14 +52,22 @@ function useListShipmentPendingTasks() {
 		? (data?.list || []).filter((task) => task.status === 'pending')
 		: (data?.list || []);
 
+	const handleClick = (task) => {
+		if (Object.keys(task).includes('id')) {
+			console.log('setting the task id', task);
+			setSelectedTaskId(task.id);
+		}
+	};
 	console.log('shipment data', data);
 	return {
-		loading      : loading || isGettingShipment,
-		count        : data?.total_count,
+		loading : loading || isGettingShipment,
+		count   : data?.total_count,
 		tasksList,
-		shipmentData : shipment_data,
 		completedTaskCount,
+		shipment_data,
 		setHideCompletedTasks,
+		handleClick,
+		selectedTaskId,
 		showMyTasks,
 		setShowMyTasks,
 	};

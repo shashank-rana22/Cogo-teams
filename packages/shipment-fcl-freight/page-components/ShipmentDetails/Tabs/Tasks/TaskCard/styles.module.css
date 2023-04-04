@@ -1,0 +1,28 @@
+.container{
+
+}
+
+.task_container{
+	margin-left: 8px;
+	.core-ui-select__menu {
+		min-width: 100% !important;
+		width: 100% !important;
+	}
+};
+
+.button_wrap{
+	margin: 20px 0px;
+	display: flex;
+	justify-content: flex-end;
+
+	.core-ui-button-root {
+		margin-left: 10px;
+		text-transform: capitalize;
+		width: 100px;
+	}
+};
+
+.form{
+	overflow-y: auto;
+	max-height: calc(100vh - 39.5vh);
+};

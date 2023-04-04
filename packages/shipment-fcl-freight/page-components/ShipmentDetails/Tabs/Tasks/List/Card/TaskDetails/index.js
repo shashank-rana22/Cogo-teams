@@ -7,8 +7,7 @@ import styles from './styles.module.css';
 
 function TaskDetails({
 	task = {},
-	 // shipment_data = {}, primary_service = {}, selectedTaskId = '',
-	  services = [],
+	services = [],
 }) {
 	const requiredServiceArr = [];
 	(task.task_field_ids || []).forEach((id) => {
