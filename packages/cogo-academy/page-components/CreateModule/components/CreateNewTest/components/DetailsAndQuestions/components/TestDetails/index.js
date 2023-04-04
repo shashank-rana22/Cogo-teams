@@ -28,6 +28,7 @@ function CreateNewTest({
 	const select_user_group = watch('select_user_group') || [];
 
 	const radioGroupVal = watch('select_users') || '';
+
 	const cogoEntityWatch = watch('cogo_entity_id') || '';
 
 	const { audienceOptions = [] } = useGetUserGroups();

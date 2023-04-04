@@ -13,10 +13,9 @@ import styles from './styles.module.css';
 function CreateTest() {
 	const { general: { query:urlQuery } } = useSelector((state) => state);
 
-	const { id:test_id, mode = '' } = urlQuery || {};
+	const { id:test_id } = urlQuery || {};
 
-	const [activeStepper, setActiveStepper] = useState(mode === 'edit'
-		? 'review_and_criteria' : 'details_and_questions');
+	const [activeStepper, setActiveStepper] = useState('details_and_questions');
 
 	const {
 		loading,
