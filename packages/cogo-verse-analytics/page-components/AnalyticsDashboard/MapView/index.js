@@ -25,12 +25,10 @@ function MapView(props = {}) {
 
 	const countryMobileCode = country?.mobile_country_code || '';
 
-	let markerData = {};
-	markerData = customer_locations.map((item) => ({
+	const markerData = customer_locations.map((item) => ({
 		lat : item?.latitude,
 		lng : item?.longitude,
 		pop : 500,
-		...markerData,
 	}));
 
 	useEffect(() => {
