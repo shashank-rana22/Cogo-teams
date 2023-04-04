@@ -129,7 +129,7 @@ function Trends() {
 			<div className={styles.codes}>
 				{
 					((responsevalue || []).map((item) => (
-						<div>
+						<div key={item.hs_code}>
 							<div className={styles.set_css_output}>
 								<div className={styles.checkbox}>
 									<Checkbox
