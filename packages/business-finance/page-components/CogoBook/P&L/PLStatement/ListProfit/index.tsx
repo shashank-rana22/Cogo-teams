@@ -199,7 +199,7 @@ function ListProfit({
 				<div className={styles.data_sub}>
 					{isRowVisible && <div className={styles.header_particular}>GROSS PROFIT</div>}
 					{getRelevantData()?.map((itemVal) => {
-						const ratio = ratioData?.turnoverRatioDetails?.[itemVal?.[key]] || 1;
+						const ratio = ratioData?.turnoverRatioDetails?.[itemVal?.key] || 1;
 						return (
 							<div className={styles.header_ocean} style={{ width: calculateWidth }}>
 								{isRowVisible
@@ -421,7 +421,7 @@ function ListProfit({
 					)}
 					{
 						getRelevantData()?.map((Val) => {
-							const ratio = ratioData?.[Val?.[key]] || 1;
+							const ratio = ratioData?.turnoverRatioDetails?.[Val?.key] || 1;
 							return (
 								<div className={styles.header_ocean} style={{ width: calculateWidth }}>
 									{isRowVisible
@@ -458,7 +458,7 @@ function ListProfit({
 
 					{
 						getRelevantData()?.map((itemValue) => {
-							const ratio = ratioData?.[itemValue[key]] || 1;
+							const ratio = ratioData?.turnoverRatioDetails?.[itemValue?.key] || 1;
 							return (
 								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
 									{isRowVisible && (
@@ -486,7 +486,7 @@ function ListProfit({
 					{isRowVisible && <div className={styles.header_particular}>PROFIT BEFORE TAX (C)</div>}
 					{
 						getRelevantData()?.map((value) => {
-							const ratio = ratioData?.[value[key]] || 1;
+							const ratio = ratioData?.turnoverRatioDetails?.[value?.key] || 1;
 							return (
 								<div
 									className={styles.header_ocean}
@@ -536,7 +536,7 @@ function ListProfit({
 					{isRowVisible && <div className={styles.header_particular}>PROFIT AFTER TAX (D)</div>}
 					{
 						getRelevantData()?.map((valData) => {
-							const ratio = ratioData?.[valData?.key] || 1;
+							const ratio = ratioData?.turnoverRatioDetails?.[valData?.key] || 1;
 							return (
 								<div className={styles.header_ocean} style={{ width: calculateWidth }}>
 									{isRowVisible ? ((revenueFromOps - operatingExpenses
