@@ -36,7 +36,7 @@ function WelcomeText() {
 
 				<div className={styles.text}>
 					Whether we &apos;ve met or not, I&apos; m positive that you all possess
-					what is takes to succeed at Cogoport and to help us achieve our goals and grow
+					what it takes to succeed at Cogoport and to help us achieve our goals and grow
 					as a company. I wish you all the best in your learning journey, and I look forward
 					to seeing you all on Day-1.
 				</div>
