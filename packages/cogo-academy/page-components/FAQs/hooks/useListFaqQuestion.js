@@ -18,14 +18,14 @@ function useListFaqQuestions({
 	const { general = {}, profile = {} } = useSelector((state) => state);
 
 	const { auth_role_data = [], partner = {} } = profile;
-	const { role_functions = [], role_sub_functions = [] } = auth_role_data?.[0] || {};
+	const { role_functions = {}, role_sub_functions = {} } = auth_role_data || {};
 
 	const { scope = '' } = general;
 	const { country_id = '', id = '' } = partner;
 
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : 'list_faq_questions',
+		url    : '/list_faq_questions',
 	}, { manual: true });
 
 	const { query, debounceQuery } = useDebounceQuery();
