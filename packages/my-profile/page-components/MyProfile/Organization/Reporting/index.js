@@ -1,3 +1,5 @@
+import React from 'react';
+
 import UserCard from '../UserCard';
 
 import styles from './styles.module.css';
