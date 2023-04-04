@@ -15,10 +15,8 @@
 	display: block;
 	margin: 48px 4px 4px 4px;
 	overflow-y: scroll;
-	white-space: wrap;
 	background-color: white;
 	box-shadow: 0 0 4px rgb(0 0 0 / 15%);
-	overflow-x: scroll;	
 }
 
 .export_info {
@@ -84,7 +82,7 @@
 
 .tab_lower {
 	margin: 20px;
-	margin-left: 0 !important;
+	margin-left: 0px;
 }
 
 .table_div {

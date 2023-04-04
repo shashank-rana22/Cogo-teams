@@ -24,8 +24,8 @@ const useTrendSearch = (item = {}) => {
 		method : 'post',
 	}, { manual: true });
 
-	const handleClick = async () => {
-		await trigger({
+	const handleClick = () => {
+		trigger({
 			data: {
 				filters: { commodity_name: searchValue },
 			},
