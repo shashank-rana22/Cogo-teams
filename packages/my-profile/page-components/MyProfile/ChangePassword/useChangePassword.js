@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
 const useChangePassword = ({
@@ -9,6 +10,14 @@ const useChangePassword = ({
 	refetch = () => {},
 	personDetails = {},
 }) => {
+	const {
+		user_data: { auth_role_data },
+	} = useSelector(({ profile }) => ({
+		user_data: profile || {},
+	}));
+
+	const { role_functions = [], role_sub_functions = [] } = auth_role_data || {};
+
 	const [error, setError] = useState({});
 
 	const [{ loading = false }, trigger] = useRequest({
@@ -55,6 +64,9 @@ const useChangePassword = ({
 		setError({ ...err });
 	};
 
+	const showOrganizationHierarchy = role_functions.includes('training')
+	&& role_sub_functions.includes('training_general');
+
 	return {
 		error,
 		onCreate,
@@ -62,6 +74,7 @@ const useChangePassword = ({
 		loading,
 		control,
 		handleSubmit,
+		showOrganizationHierarchy,
 		errors,
 		getValues,
 	};

@@ -36,6 +36,7 @@ function MyProfile() {
 		errors,
 		handleSubmit = () => {},
 		getValues,
+		showOrganizationHierarchy,
 	} = useChangePassword({
 		refetch,
 		personDetails : detailsData,
@@ -95,12 +96,17 @@ function MyProfile() {
 
 				</div>
 
-				<div>
-					<div className={styles.organization_container}>
-						<div className={styles.organization}>ORGANIZATION HIERARCHY</div>
-						<Organization personDetails={detailsData} detailsLoading={loading} />
-					</div>
-				</div>
+				{showOrganizationHierarchy
+					? (
+						<div>
+							<div className={styles.organization_container}>
+								<div className={styles.organization}>ORGANIZATION HIERARCHY</div>
+
+								<Organization personDetails={detailsData} detailsLoading={loading} />
+							</div>
+						</div>
+					)
+					: null}
 			</div>
 			<Modal
 				show={changePasswordModal}
