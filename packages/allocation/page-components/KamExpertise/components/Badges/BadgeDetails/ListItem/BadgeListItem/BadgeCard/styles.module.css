@@ -58,3 +58,13 @@
 .modal_body {
 	min-height: 500px;
 }
+
+.svg_container{
+	cursor: pointer;
+	margin-left: 4px;
+}
+
+.badge_update{
+	margin: 8px;
+	padding: 8px;
+}

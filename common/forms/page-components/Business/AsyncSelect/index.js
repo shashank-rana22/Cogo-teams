@@ -17,7 +17,6 @@ import {
 	asyncFieldsExpertiseConfigurations,
 	asyncFieldsExpertiseBadgeName,
 	asyncKamExpertiseRuleOptions,
-	asyncKamExpertiseGroupOptions,
 	listVendors,
 	asyncListCogoEntity,
 } from '../../../utils/getAsyncFields';
@@ -57,7 +56,6 @@ const keyAsyncFieldsParamsMapping = {
 	expertise_configuration : asyncFieldsExpertiseConfigurations,
 	badge_name              : asyncFieldsExpertiseBadgeName,
 	rule_options            : asyncKamExpertiseRuleOptions,
-	condition_group_options : asyncKamExpertiseGroupOptions,
 };
 
 function AsyncSelect(props) {
