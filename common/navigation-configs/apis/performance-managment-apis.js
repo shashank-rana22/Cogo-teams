@@ -222,7 +222,7 @@ const performance_management = {
 			service_name : 'iris',
 		},
 		{
-			api          : 'get_iris_download_master_csv',
+			api          : 'get_iris_download_employee_csv',
 			access_type  : 'private',
 			service_name : 'iris',
 		},

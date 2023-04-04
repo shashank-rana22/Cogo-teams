@@ -20,7 +20,7 @@ function ListView({ viewType = false }) {
 	} = useGetOrganizationTree({ viewType });
 
 	const [{ loading: downloadLoading = false }, trigger] = useIrisRequest({
-		url    : 'get_iris_download_master_csv',
+		url    : 'get_iris_download_employee_csv',
 		method : 'get',
 	}, { manual: true });
 
