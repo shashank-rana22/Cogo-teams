@@ -70,7 +70,7 @@
 }
 
 .bordernone {
-	border: none;
+	overflow-x: scroll;
 }
 
 .button_container {
@@ -138,5 +138,6 @@
 .border {
 	margin-top: 10px;
 	border: 1px solid #88cad1;
+	overflow-y: scroll;
 	border-radius: 8px;
 }
