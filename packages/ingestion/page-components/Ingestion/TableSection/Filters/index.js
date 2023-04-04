@@ -37,11 +37,9 @@ function Filters(props) {
 			},
 
 		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [query, uploadDate, uploadBy]);
+	}, [query, uploadDate, uploadBy, setParams, params]);
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => debounceQuery(search), [search]);
+	useEffect(() => debounceQuery(search), [debounceQuery, search]);
 
 	return (
 		<div className={styles.filter_container}>
