@@ -22,7 +22,7 @@
 	}
 }
 
-.card.animate_card {
+.card.critical_card {
 	background: linear-gradient(90deg, #fff, #fae7e7, #fff);
 	background-size: 400% 400%;
 	animation: move-bg 5s ease-in-out infinite alternate;
@@ -64,18 +64,11 @@
 .card_body {
 	display: flex;
 	justify-content: space-between;
+	padding-bottom: 10px;
 
 	.separator {
 		align-self: stretch;
 		width: 1px;
 		background: var(--color-secondary-greyscale-5);
 	}
-}
-
-.card_footer {
-	display: flex;
-	justify-content: flex-end;
-	padding: 0 2px 2px 0;
-	font-size: var(--font-size-sm);
-	font-weight: 600;
 }

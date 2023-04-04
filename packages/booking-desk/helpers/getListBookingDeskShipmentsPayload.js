@@ -38,7 +38,7 @@ export default function getListBookingDeskShipmentsPayload({ filters, activeTab,
 		filters: {
 			state: shipmentStates[activeTab] || shipmentStates.in_progress,
 			...tabSpecificPayload[activeTab],
-			selected_agent_id,
+			...(selected_agent_id && { selected_agent_id }),
 			...(isCriticalVisible && isCriticalOn
 				&& { schedule_departure_less_than: threeDaysLater }),
 			...(q && { q }),

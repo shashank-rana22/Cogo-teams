@@ -1,5 +1,6 @@
 /* stylelint-disable selector-class-pattern */
 .card {
+	position: relative;
 	cursor: pointer;
 	background: var(--color-secondary-5);
 	border-radius: 4px;
@@ -22,7 +23,7 @@
 	}
 }
 
-.card.animate_card {
+.card.critical_card {
 	background: linear-gradient(90deg, #fff, #fae7e7, #fff);
 	background-size: 400% 400%;
 	animation: move-bg 5s ease-in-out infinite alternate;
@@ -41,6 +42,7 @@
 .card_body {
 	display: flex;
 	justify-content: space-between;
+	padding-bottom: 10px;
 
 	.separator {
 		align-self: stretch;
@@ -50,6 +52,9 @@
 }
 
 .card_footer {
+	position: absolute;
+	right: 0;
+	bottom: 0;
 	display: flex;
 	justify-content: flex-end;
 	padding: 0 2px 2px 0;
