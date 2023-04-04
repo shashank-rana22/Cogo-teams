@@ -6,14 +6,14 @@
 }
 
 .title {
+	margin-left: 6px;
 	font-size: 20px;
 	font-weight: 600;
-    margin-left: 6px;
 }
 
 .back_icon {
+	color: #221f20;
 	cursor: pointer;
-	color: #221F20;
 }
 
 .container {
@@ -34,11 +34,11 @@
 
 .label {
 	width: 15%;
+	margin-top: 18px;
+	margin-bottom: 18px;
 	font-size: 16px;
 	font-weight: 600;
 	color: #221f20;
-	margin-top: 18px;
-	margin-bottom: 18px;
 }
 
 .topic {
@@ -49,36 +49,36 @@
 
 .subtopic {
 	margin-top: 18px;
-	color: #4f4f4f;
-	font-weight: 400;
 	font-size: 14px;
+	font-weight: 400;
+	color: #4f4f4f;
 }
 
 .names {
-	font-weight: 500;
-	color: #221F20;
 	font-size: 14px;
+	font-weight: 500;
+	color: #221f20;
 }
 
 .entity {
 	display: flex;
 	flex-direction: column;
-	text-align: center;
 	margin-top: 18px;
 	font-size: 14px;
+	text-align: center;
 }
 
 .label_entity {
-	font-size: 14px;
-	color: #4f4f4f;
-	font-weight: 400;
 	padding-top: 2px;
+	font-size: 14px;
+	font-weight: 400;
+	color: #4f4f4f;
 }
 
 .entity_name {
 	font-size: 14px;
 	font-weight: 500;
-	color: #221F20;
+	color: #221f20;
 }
 
 .topic_pill_container {
@@ -130,6 +130,6 @@
 }
 
 .eligible {
-	color : #4F4F4F;
 	font-size: 14px;
+	color: #4f4f4f;
 }
