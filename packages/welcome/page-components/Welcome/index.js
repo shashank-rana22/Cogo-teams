@@ -17,7 +17,7 @@ function ThingsToDo() {
 	return (
 		<div>
 			<Header name={name} />
-			<WelcomeText />
+			<WelcomeText name={name} />
 			<QuickStartCards />
 			<PlatformCards />
 			<FutureExpectationCards />

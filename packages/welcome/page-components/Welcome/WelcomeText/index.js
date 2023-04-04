@@ -1,23 +1,41 @@
 import React from 'react';
 
+// import MyResponsiveLine from './LineChart';
 import styles from './styles.module.css';
 
 function WelcomeText() {
 	return (
 		<div className={styles.container}>
-			<div className={styles.title}>Partners, Our Network is Yours!</div>
-			<div className={styles.description}>
-				By partnering with Cogoport, you have invested in your growth,
-				and we will do everything in our power to support you on this journey.
-				In return, we need your engagement and your judgement of the logistics industry to do better,
-				run faster and achieve big milestones. Let’s begin the journey towards improved efficiencies,
-				higher profitability and a better industry together!
+			<div className={styles.text_container}>
+				<div>
+					We are thrilled to have you on board, and we can &apos;t wait to see the amazing
+					impact you &apos;ll make with your unique skills and talent. We want to ensure that you have
+					the best possible start to your journey with us.
+
+				</div>
+				<div>
+					We believe in empowering our team members, and we want you to feel confident
+					and motivated as you start this new chapter in your career. In the lead-up to the 2-day
+					interactive program with us, you will find reading materials and FAQs to help you get a
+					head start on your onboarding journey. We want to ensure that you have all the
+					knowledge you need about the global trade to hit the ground running.
+				</div>
+				<div>
+					As you embark on this exciting new opportunity with Cogoport,
+					we encourage you to embrace every challenge, learn as much as possible,
+					and have fun along the way. We are excited to meet you all and welcome you to our family.
+				</div>
+				<div>Let &apos;s make great things happen together!</div>
 			</div>
-			<div className={styles.regards_section}>
-				<span>Amitabh Shankar</span>
-				<span>CEO - Logistics</span>
-				<span>Cogoport</span>
-			</div>
+
+			{/* <div className={styles.chart_container}>
+				<div className={styles.chart_heading}>
+					<strong>{name.split(' ')[0] }</strong>
+					, here’s how you engaged
+				</div>
+				<MyResponsiveLine />
+			</div> */}
+
 		</div>
 	);
 }

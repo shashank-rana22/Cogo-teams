@@ -2,8 +2,8 @@ import { IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
 import React, { useRef } from 'react';
 
 import CardItem from './CardItem';
+import data from './futureExpectationCardsData';
 import styles from './styles.module.css';
-import data from './tempData';
 
 function FutureExpectationCards() {
 	const scrollRef = useRef('');
@@ -21,23 +21,27 @@ function FutureExpectationCards() {
 
 			<div className={styles.cards_container}>
 
-				<div
-					role="presentation"
-					className={`${styles.arrow_container} ${styles.left}`}
-					onClick={() => slide(-scrollWidth)}
-				>
-					<div className={styles.arrow}><IcMArrowLeft /></div>
-				</div>
+				{data.length > 4 && (
+					<div
+						role="presentation"
+						className={`${styles.arrow_container} ${styles.left}`}
+						onClick={() => slide(-scrollWidth)}
+					>
+						<div className={styles.arrow}><IcMArrowLeft /></div>
+					</div>
+				)}
 
 				<div className={styles.cards} ref={scrollRef}>{data.map((item) => <CardItem data={item} />)}</div>
 
-				<div
-					role="presentation"
-					className={`${styles.arrow_container} ${styles.right}`}
-					onClick={() => slide(+scrollWidth)}
-				>
-					<div className={styles.arrow}><IcMArrowRight /></div>
-				</div>
+				{data.length > 4 && (
+					<div
+						role="presentation"
+						className={`${styles.arrow_container} ${styles.right}`}
+						onClick={() => slide(+scrollWidth)}
+					>
+						<div className={styles.arrow}><IcMArrowRight /></div>
+					</div>
+				)}
 			</div>
 		</div>
 	);

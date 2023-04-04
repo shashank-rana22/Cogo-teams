@@ -71,3 +71,8 @@
 	font-weight: 400;
 	color: #221f20;
 }
+
+.eye_button_text {
+	text-align: left;
+	word-break: keep-all;
+}

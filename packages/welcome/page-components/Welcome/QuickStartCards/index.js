@@ -1,8 +1,8 @@
 import React from 'react';
 
 import CardItem from './CardItem';
+import data from './quickStartData';
 import styles from './styles.module.css';
-import data from './tempData';
 
 function QuickStartCards() {
 	return (

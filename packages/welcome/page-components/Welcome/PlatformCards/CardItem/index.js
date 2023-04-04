@@ -7,12 +7,12 @@ import openDocument from '../../../../common/openDocument';
 import styles from './styles.module.css';
 
 function CardItem({ data = {} }) {
-	const { icon_url, heading, desc, login_id, password, href } = data;
+	const { icon_url, heading, desc, login_id, password, href, eye_button_text } = data;
 
 	const { label, url } = href;
 
 	const renderEyeButtonText = () => (
-		<div className={styles.eye_button_text}>More Details</div>
+		<div className={styles.eye_button_text}>{eye_button_text}</div>
 	);
 
 	return (

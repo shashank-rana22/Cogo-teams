@@ -22,7 +22,7 @@ function Header({ name = '' }) {
 						,
 						{' '}
 					</div>
-					<div className={styles.welcome_text}>Welcome to Cogoport. </div>
+					<div className={styles.welcome_text}>Welcome to Cogoport Family. </div>
 				</div>
 			</div>
 			<div className={styles.profile_container}>

@@ -9,6 +9,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
+	height: 40%;
 	padding: 20px;
 	background: #fede00;
 	border-top-left-radius: 16px;
@@ -33,7 +34,8 @@
 .lowerhalf {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+	justify-content: space-between;
+	height: 60%;
 	padding: 24px;
 }
 
@@ -62,19 +64,33 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
+
+	:global {
+		.ui_button_container {
+			padding: 0;
+		}
+	}
 }
 
 .tag_container {
 	display: flex;
 	gap: 4px;
 	align-items: center;
-	padding: 4px 12px;
+	width: 60%;
+	padding: 4px 8px;
 	border: 1px solid #c2c2c2;
 	border-radius: 18px;
 }
 
-.tag_count {
+.tag_count_container {
+	width: 90%;
+}
+
+.tag_count_text {
+	overflow: hidden;
 	font-size: 12px;
 	font-weight: 500;
 	color: #221f20;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
