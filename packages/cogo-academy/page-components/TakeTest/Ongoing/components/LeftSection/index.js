@@ -33,6 +33,7 @@ function LeftSection({
 				setShowTimeOverModal={setShowTimeOverModal}
 				showTimeOverModal={showTimeOverModal}
 				start_time={start_time}
+				user_appearance={user_appearance}
 			/>
 
 			<Body
