@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { IcMArrowDown } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -8,12 +7,9 @@ import styles from './styles.module.css';
 
 function ListProfit({
 	ratiosData,
-	// reportTriggerLoading,
-	// ratiosTriggerLoading,
 	reportData,
 	filters,
 }) {
-	// const [isRowVisible, setIsRowVisible] = useState(true);
 	const isNonZero = filters?.rowCheck?.includes('nonZero');
 
 	const [dropDown, setDropDown] = useState({
@@ -24,10 +20,6 @@ function ListProfit({
 		other     : true,
 		tax       : true,
 	});
-
-	// if (!reportTriggerLoading && !ratiosTriggerLoading) {
-	// 	return null;
-	// }
 
 	const getMapData = () => (reportData?.list || [{}]).map((item) => {
 		const {
@@ -45,11 +37,9 @@ function ListProfit({
 			totalOtherExpense = 0,
 			otherExpense,
 			totalOtherIncome = 0,
-			// otherIncome,
 			totalExceptionalItems = 0,
 			totalExtraordinaryItems = 0,
 			totalPriorPeriodItem = 0,
-			// priorPeriodItems,
 			totalTaxExpense = 0,
 		} = item;
 
@@ -80,8 +70,6 @@ function ListProfit({
 			marketingExpense = 0,
 			roundOff = 0,
 			salariesBonusIncentivesAndStaffWelfareExpenses:
-			// salariesBonusIncentivesAndStaffWelfareExpensesExpoense = 0,
-			// operating_expenses = 0,
 			repairsAndMaintenance = 0,
 			techAndProductCosts = 0,
 			anyOtherCosts = 0,
@@ -108,7 +96,7 @@ function ListProfit({
 		};
 
 		const ArrayLength = getRelevantData().length;
-		const calculateWidth = `${50 / ArrayLength}%`;
+		const calculateWidth = `${55 / ArrayLength}%`;
 
 		return (
 			<div>
@@ -128,7 +116,6 @@ function ListProfit({
 					}
 				</div>
 
-				{/* ==== */}
 				{true && (
 					<div className={styles.data_sub}>
 						<div className={styles.first_particular}>
@@ -147,7 +134,7 @@ function ListProfit({
 								</div>
 							)}
 							{dropDown?.revenue && (
-								<div>
+								<div className={styles.row_vis_data}>
 									{isRowVisible && <div>Booked Revenue</div>}
 									{isRowVisible && <div>Accrued Revenue</div>}
 								</div>
@@ -168,7 +155,7 @@ function ListProfit({
 								</div>
 							)}
 							{dropDown?.operating && (
-								<div>
+								<div className={styles.row_vis_data}>
 									{isRowVisible &&	<div>Booked Expenses</div>}
 									{isRowVisible &&	<div>Accrued Expenses</div>}
 								</div>
@@ -186,14 +173,14 @@ function ListProfit({
 									)}
 									{dropDown?.revenue && (
 										<>
-											{isRowVisible &&		<div>{(bookedRevenue * ratio).toFixed(2)}</div>}
-											{isRowVisible &&		<div>{(accruedRevenue * ratio).toFixed(2)}</div>}
+											{isRowVisible && <div>{(bookedRevenue * ratio).toFixed(2)}</div>}
+											{isRowVisible && <div>{(accruedRevenue * ratio).toFixed(2)}</div>}
 										</>
 									) }
 									{isRowVisible &&	(
-										<div className={styles.particular_data}>
+										<>
 											{(operatingExpenses * ratio).toFixed(2)}
-										</div>
+										</>
 									)}
 									{dropDown?.operating && (
 										<>
@@ -215,7 +202,8 @@ function ListProfit({
 						const ratio = ratioData?.turnoverRatioDetails?.[itemVal?.[key]] || 1;
 						return (
 							<div className={styles.header_ocean} style={{ width: calculateWidth }}>
-								{isRowVisible ? (<span>{((revenueFromOps - operatingExpenses) * ratio).toFixed(2)}</span>) : null}
+								{isRowVisible
+									? (<span>{((revenueFromOps - operatingExpenses) * ratio).toFixed(2)}</span>) : null}
 							</div>
 						);
 					})}
@@ -239,13 +227,13 @@ function ListProfit({
 							</div>
 						)}
 						{dropDown?.employee && (
-							<>
+							<div className={styles.row_vis_data}>
 								{isRowVisible && <div>ESOPs</div>}
 								{isRowVisible && <div>Gratuity & Leave Encashment</div>}
 								{isRowVisible && <div>Personnel Cost</div>}
 								{isRowVisible && <div>Housekeeping, Security, Subscriptions, Travel, Stay and CC</div>}
 								{isRowVisible && <div>Salaries, Bonus, Incentives and Staff Welfare Expenses</div>}
-							</>
+							</div>
 						) }
 
 						{isRowVisible &&	(
@@ -269,12 +257,12 @@ function ListProfit({
 							</div>
 						)}
 						{dropDown?.finance && (
-							<>
+							<div className={styles.row_vis_data}>
 								{isRowVisible && <div>Foreign Exchange Gain (Net)</div>}
 								{isRowVisible && <div>Interest on Loan, Discount on Bills and Bank Charges</div>}
 								{isRowVisible && <div>Miscellaneous Income</div>}
 								{isRowVisible && <div>Interest Income on FD</div>}
-							</>
+							</div>
 						) }
 
 						{isRowVisible &&	(
@@ -292,7 +280,7 @@ function ListProfit({
 							</div>
 						)}
 						{dropDown?.other && (
-							<>
+							<div className={styles.row_vis_data}>
 								{isRowVisible && <div>Interest on Loan, Discount on Bills and Bank Charges</div> }
 								{isRowVisible && <div>Legal, Compliance, Books and MIS</div> }
 								{isRowVisible && <div>Marketing Expense</div> }
@@ -307,7 +295,7 @@ function ListProfit({
 								{isRowVisible && <div>Currency Suspense Account</div>}
 								{isRowVisible && <div>Round off</div>}
 								{isRowVisible && <div>Any other costs</div> }
-							</>
+							</div>
 						)}
 
 						{isRowVisible && (
@@ -342,7 +330,8 @@ function ListProfit({
 												<div>{(personnelCost * ratio).toFixed(2)}</div>
 
 												<div>
-													{(salariesBonusIncentivesAndStaffWelfareExpenses * ratio).toFixed(2)}
+													{(salariesBonusIncentivesAndStaffWelfareExpenses
+														* ratio).toFixed(2)}
 												</div>
 											</>
 										)}
@@ -374,13 +363,19 @@ function ListProfit({
 										{isRowVisible && <div>{(interestIncomeOnFd * ratio).toFixed(2)}</div>}
 									</>
 								) }
-								{isRowVisible &&	<div className={styles.particular_data}>{(totalOtherExpense * ratio).toFixed(2)}</div>}
+								{isRowVisible
+								&& (
+									<div className={styles.particular_data}>
+										{(totalOtherExpense * ratio).toFixed(2)}
+									</div>
+								)}
 								{dropDown?.other
 								&& (
 									<>
 										{isRowVisible && (
 											<div>
-												{(interestOnLoanDiscountOnBillsAndBankChargesExpense * ratio).toFixed(2)}
+												{(interestOnLoanDiscountOnBillsAndBankChargesExpense
+													* ratio).toFixed(2)}
 											</div>
 										)}
 
@@ -390,7 +385,8 @@ function ListProfit({
 										{isRowVisible && <div>{(provisionsAndWriteOffs * ratio).toFixed(2)}</div>}
 										{isRowVisible && <div>{(ratesAndTaxes * ratio).toFixed(2)}</div>}
 										{isRowVisible && <div>{(rentAndTaxes * ratio).toFixed(2)}</div>}
-										{isRowVisible && <div>{(rentElectricityAndMaintenance * ratio).toFixed(2)}</div>}
+										{isRowVisible
+										&& <div>{(rentElectricityAndMaintenance * ratio).toFixed(2)}</div>}
 										{isRowVisible && <div>{(repairsAndMaintenance * ratio).toFixed(2)}</div>}
 
 										{isRowVisible && (
@@ -405,7 +401,12 @@ function ListProfit({
 										{isRowVisible && <div>{(anyOtherCosts * ratio).toFixed(2)}</div>}
 									</>
 								)}
-								{isRowVisible && <div className={styles.particular_data}>{(totalOtherIncome * ratio).toFixed(2)}</div>}
+								{isRowVisible
+								&& (
+									<div className={styles.particular_data}>
+										{(totalOtherIncome * ratio).toFixed(2)}
+									</div>
+								)}
 							</div>
 						);
 					})}
@@ -460,9 +461,21 @@ function ListProfit({
 							const ratio = ratioData?.[itemValue[key]] || 1;
 							return (
 								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
-									{isRowVisible && <div className={styles.particular_data}>{(totalExceptionalItems * ratio).toFixed(2)}</div>}
-									{isRowVisible && <div className={styles.particular_data}>{(totalExtraordinaryItems * ratio).toFixed(2)}</div>}
-									{isRowVisible && <div className={styles.particular_data}>{(totalPriorPeriodItem * ratio).toFixed(2)}</div>}
+									{isRowVisible && (
+										<div className={styles.particular_data}>
+											{(totalExceptionalItems * ratio).toFixed(2)}
+										</div>
+									)}
+									{isRowVisible && (
+										<div className={styles.particular_data}>
+											{(totalExtraordinaryItems * ratio).toFixed(2)}
+										</div>
+									)}
+									{isRowVisible && (
+										<div className={styles.particular_data}>
+											{(totalPriorPeriodItem * ratio).toFixed(2)}
+										</div>
+									)}
 
 								</div>
 							);
@@ -484,7 +497,8 @@ function ListProfit({
 								- totalDepreciationAndAmortization
 								- totalFinanceCost
 								- totalOtherExpense
-								- totalExceptionalItems - totalExtraordinaryItems - totalPriorPeriodItem) * ratio).toFixed(2) : null}
+								- totalExceptionalItems - totalExtraordinaryItems - totalPriorPeriodItem)
+								* ratio).toFixed(2) : null}
 								</div>
 							);
 						})
@@ -494,7 +508,7 @@ function ListProfit({
 				<div className={styles.data_sub}>
 					<div className={styles.first_particular}>
 						{isRowVisible && (
-							<div className={styles.particular_data_review}>
+							<div className={styles.depreciation}>
 								(-) Tax Expense
 							</div>
 						)}
@@ -507,7 +521,11 @@ function ListProfit({
 
 							return (
 								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
-									{isRowVisible && <div className={styles.particular_data}>{(totalTaxExpense * ratio).toFixed(2)}</div>}
+									{isRowVisible && (
+										<div className={styles.particular_data}>
+											{(totalTaxExpense * ratio).toFixed(2)}
+										</div>
+									)}
 								</div>
 							);
 						})

@@ -15,7 +15,7 @@
 }
 
 .header_particular {
-	width: 50%;
+	width: 45%;
 	padding: 18px 24px;
 	font-weight: 600;
 	color: #f68b21;
@@ -63,9 +63,14 @@
 }
 
 .first_particular {
-	width: 50%;
+	width: 45%;
 	padding: 18px 24px;
 	border-right: 1px solid #acdadf;
+}
+
+.row_vis_data {
+	margin-left: 8px;
+	color: #000000ad;
 }
 
 .first_ocean {
@@ -73,7 +78,7 @@
 	flex-direction: column;
 	align-items: flex-end;
 	width: 10%;
-	padding: 18px 36px;
+	padding: 18px;
 	border-right: 1px solid #acdadf;
 }
 

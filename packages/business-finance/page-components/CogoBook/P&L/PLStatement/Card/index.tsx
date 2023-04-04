@@ -101,7 +101,7 @@ function Card({
 					<div className={styles.period}>
 						Selection Criteria
 						<Tooltip
-							content="Please select the accounting month"
+							content={<div className={styles.tool}>Please select the accounting month</div>}
 							placement="top"
 						>
 							<div className={styles.info_icon_container}>
