@@ -1,0 +1,27 @@
+.tat {
+	display: flex;
+	justify-content: flex-end;
+	padding: 25px 10px;
+	border-top: none;
+	border-radius: 0 0 6px 6px;
+}
+
+.label {
+	margin-right: 16px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #333;
+}
+
+.value {
+	font-size: 14px;
+	font-weight: 600;
+	color: #f68b21;
+}
+
+.words {
+	display: flex;
+	flex-direction: row-reverse;
+	margin: -16px 12px 12px 0;
+	color: #f68b21;
+}

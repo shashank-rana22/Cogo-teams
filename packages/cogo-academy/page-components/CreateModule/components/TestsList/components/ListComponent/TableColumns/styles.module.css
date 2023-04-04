@@ -1,0 +1,43 @@
+.time {
+	display: flex;
+	flex-direction: column;
+	font-weight: 400;
+	color: #828282;
+}
+
+.question_set_time {
+	font-weight: 400;
+	color: #828282;
+}
+
+.name {
+	max-width: 100px;
+	overflow: hidden;
+	font-size: 14px;
+	color: #221f20;
+	text-overflow: ellipsis;
+}
+
+.duration {
+	color: #4f4f4f;
+}
+
+.status {
+	display: flex;
+}
+
+.topics {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.topic_pill {
+	max-width: 120px;
+}
+
+.topic_pill div {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

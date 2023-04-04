@@ -6,20 +6,15 @@ import PopoverContent from '../PopoverContent';
 
 import styles from './styles.module.css';
 
-interface CreditController {
+interface AgentProps {
 	id?: string,
 	name?: string,
 	email?: string
 }
 
-interface SalesAgent {
-	id?: string,
-	name?: string,
-	email?: string
-}
 interface ItemProps {
-	creditController?: CreditController,
-	salesAgent?: SalesAgent,
+	creditController?: AgentProps,
+	salesAgent?: AgentProps,
 	businessName?: string,
 	collectionPartyType?: string[],
 	serialId?: string,
@@ -29,6 +24,7 @@ interface ItemProps {
 	selfOrganizationName?: string,
 	organizationId?: string,
 	selfOrganizationId?: string
+	kam?: AgentProps,
 }
 
 interface PopoverProps {
@@ -46,9 +42,12 @@ function PopoverTags({
 
 }: PopoverProps) {
 	const {
-		creditController,
-		salesAgent,
+		kam = {},
+		creditController = {},
+		salesAgent = {},
 	} = item || {};
+
+	const { id = '', name = '', email = '' } = kam;
 	const content = (
 		<PopoverContent data={data} loading={loading} />
 	);
@@ -64,7 +63,7 @@ function PopoverTags({
 				>
 					<div className={styles.icon_wrapper}>
 						<IcMLcl
-							onClick={() => handleClick(salesAgent?.id)}
+							onClick={() => handleClick(id)}
 						/>
 					</div>
 				</Popover>
@@ -73,10 +72,10 @@ function PopoverTags({
 					<div className={styles.tag_texts}>
 						KAM Owner :
 						<div className={styles.tag_text}>
-							{salesAgent?.name || '-'}
+							{name || '-'}
 						</div>
 					</div>
-					<div className={styles.tag_text}>{salesAgent?.email || '-'}</div>
+					<div className={styles.tag_text}>{email || '-'}</div>
 				</div>
 			</div>
 
@@ -108,6 +107,7 @@ function PopoverTags({
 				<Popover
 					render={content}
 					placement="left"
+					className={styles.filters_popover}
 				>
 					<div className={styles.icon_wrapper}>
 						<IcMLcl

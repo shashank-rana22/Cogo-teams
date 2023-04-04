@@ -1,0 +1,27 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 90vh;
+}
+
+.heading {
+	margin-bottom: 4px;
+	font-size: 20px;
+	font-weight: 600;
+	color: #bf291e;
+	text-align: center;
+}
+
+.sub_heading {
+	margin-bottom: 24px;
+	font-size: 16px;
+	color: #221f20;
+	text-align: center;
+}
+
+.button_container {
+	width: fit-content;
+}
