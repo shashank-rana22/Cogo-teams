@@ -1,45 +1,46 @@
 .container {
-	display: flex;
-	width: 100%;
-	padding: 16px 40px 12px 0;
-	cursor: pointer;
-	background: #fff;
-	border-bottom: 1px solid #f8f2e7;
+  display: flex;
+  width: 100%;
+  padding: 16px 40px 12px 0;
+  cursor: pointer;
+  background: #fff;
+  border-bottom: 1px solid #f8f2e7;
+  height: 63px;
 
-	:global {
-		.ui_accordion_title {
-			width: 100% !important;
-		}
+  :global {
+    .ui_accordion_title {
+      width: 100% !important;
+    }
 
-		.ui_accordion_container {
-			border-radius: 0;
-			box-shadow: none;
-		}
+    .ui_accordion_container {
+      border-radius: 0;
+      box-shadow: none;
+    }
 
-		.ui_accordion_header {
-			border-radius: 0;
-		}
-	}
+    .ui_accordion_header {
+      border-radius: 0;
+    }
+  }
 }
 
 .container_item {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 10%;
-	margin-right: 16px;
-	font-size: 14px;
-	font-weight: 600;
-	text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10%;
+  margin-right: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
 }
 
 .section {
-	display: flex;
-	align-items: center;
-	justify-content: left;
-	width: 50%;
-	margin: auto;
-	font-size: 14px;
-	font-weight: 600;
-	text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  width: 50%;
+  margin: auto;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
 }

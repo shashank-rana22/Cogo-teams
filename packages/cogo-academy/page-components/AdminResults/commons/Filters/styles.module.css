@@ -1,11 +1,11 @@
 .container {
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
-	margin: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 32px 0 8px 0;
 }
 
 .icon_container {
-	display: flex;
-	margin: 0 8px;
+  display: flex;
+  margin: 0 8px;
 }

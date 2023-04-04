@@ -21,7 +21,7 @@ function Search({ searchQuestion = '', setSearchQuestion = () => {}, debounceQue
 						<IcMSearchlight />
 					</div>
 				)}
-				style={{ width: 300 }}
+				style={{ width: 300, height: '32px' }}
 			/>
 		</div>
 	);
