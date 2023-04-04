@@ -51,6 +51,10 @@
 	color: #221f20;
 }
 
+.description {
+	margin-bottom: 2px;
+}
+
 .more_details_eye_button {
 	position: absolute;
 	top: 12px;

@@ -1,11 +1,14 @@
 import { Button, ProgressBar } from '@cogoport/components';
 import { IcMUserAllocations } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function Header({ name = '' }) {
 	// const [progress, setProgress] = useState('60');
+
+	const { push } = useRouter();
 
 	return (
 		<div className={styles.container}>
@@ -27,7 +30,7 @@ function Header({ name = '' }) {
 					<span>Profile :</span>
 					<ProgressBar progress={60} />
 				</div>
-				<Button size="lg" themeType="accent">
+				<Button size="lg" themeType="accent" onClick={() => push('/my-profile', '/my-profile')}>
 					Complete Profile
 				</Button>
 			</div>
