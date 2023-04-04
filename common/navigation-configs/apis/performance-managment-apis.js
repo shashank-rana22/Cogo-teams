@@ -199,6 +199,16 @@ const performance_management = {
 			access_type  : 'private',
 			service_name : 'iris',
 		},
+		{
+			api          : 'get_iris_list_logs',
+			access_type  : 'private',
+			service_name : 'iris',
+		},
+		{
+			api          : 'post_iris_update_log',
+			access_type  : 'private',
+			service_name : 'iris',
+		},
 	],
 	employee_directory: [
 		{
