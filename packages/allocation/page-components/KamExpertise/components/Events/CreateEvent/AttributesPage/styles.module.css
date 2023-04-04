@@ -68,6 +68,7 @@
 
 .input_group {
     width: 250px;
+	margin: 0 16px 16px 0;
 }
 
 .rule_form_container {
@@ -96,10 +97,6 @@
     display: flex;
     flex-basis: 33.33%;
     flex-direction: column;
-}
-
-.margin_bottom {
-    margin: 0 16px 16px 0;
 }
 
 .rule_and_attribute {
