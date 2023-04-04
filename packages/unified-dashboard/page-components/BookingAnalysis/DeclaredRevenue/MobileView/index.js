@@ -1,7 +1,7 @@
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 import currencyCoversion from '../../../../utils/currencyCoversion';
-import getShortFormatNumber from '../../../../utils/getShortFormatNumber';
 import styles from '../styles.module.css';
 
 function MobileView({ master, keys, selectedFilterTab, currency }) {
@@ -15,14 +15,21 @@ function MobileView({ master, keys, selectedFilterTab, currency }) {
 	return (
 		<div className={styles.revenue_col}>
 			<div className={styles.text_currency}>
-				{getShortFormatNumber(
-					'en-US',
-					currencyCoversion(currency, etdMonth?.total_amount || 0),
+
+				{formatAmount({
+					amount: currencyCoversion(
+						currency,
+						etdMonth?.total_amount || 0,
+					),
 					currency,
-					{
-						currencyDisplay: 'symbol',
+					options: {
+						style                 : 'currency',
+						currencyDisplay       : 'symbol',
+						notation              : 'compact',
+						compactDisplay        : 'short',
+						minimumFractionDigits : 2,
 					},
-				)}
+				})}
 			</div>
 			<div className={styles.text_bookings}>
 				<div className={styles.revenue_span}>No. of Bookings</div>

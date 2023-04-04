@@ -98,6 +98,11 @@
 }
 
 @media (max-width: 767px) {
+	.flex_div {
+		display: block;
+		align-items: center;
+	}
+
 	.flex_col_1 {
 		position: relative;
 		right: auto;

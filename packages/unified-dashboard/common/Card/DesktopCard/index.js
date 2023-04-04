@@ -31,6 +31,7 @@ const DesktopCard = ({
 		}
 		return cardData;
 	});
+
 	return cardRevenueData.map((val) => (
 		<div className={styles.all_card}>
 			<div className={borderColor(val) ? `${styles.card_wrapper_border}` : `${styles.card_wrapper}`}>
@@ -39,12 +40,20 @@ const DesktopCard = ({
 						<div className={styles.text_tag}>
 							{val === undefined
 								? 0
-								: formatAmount(
-									'en-US',
-									currencyCoversion(currency, val?.total_amount || 0),
+								: formatAmount({
+									amount: currencyCoversion(
+										currency,
+										val?.total_amount || 0,
+									),
 									currency,
-									{ currencyDisplay: 'symbol' },
-								)}
+									options: {
+										style                 : 'currency',
+										currencyDisplay       : 'symbol',
+										notation              : 'compact',
+										compactDisplay        : 'short',
+										minimumFractionDigits : 2,
+									},
+								})}
 						</div>
 					</div>
 					<div className={styles.booking}>

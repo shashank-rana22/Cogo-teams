@@ -1,8 +1,8 @@
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 import currencyCoversion from '../../../../utils/currencyCoversion';
 import getMonthYear from '../../../../utils/getMonthYear';
-import getShortFormatNumber from '../../../../utils/getShortFormatNumber';
 import styles from '../styles.module.css';
 
 const DesktopView = ({ master, keys, selectedFilterTab, currency }) => {
@@ -20,14 +20,20 @@ const DesktopView = ({ master, keys, selectedFilterTab, currency }) => {
 	return declaredRevenueData.map((val) => (
 		<div className={backgroundColor(val) ? `${styles.revenue_col_color}` : `${styles.revenue_col}`}>
 			<div className={styles.text_currency}>
-				{getShortFormatNumber(
-					'en-US',
-					currencyCoversion(currency, val?.total_amount || 0),
+				{formatAmount({
+					amount: currencyCoversion(
+						currency,
+						val?.total_amount || 0,
+					),
 					currency,
-					{
-						currencyDisplay: 'symbol',
+					options: {
+						style                 : 'currency',
+						currencyDisplay       : 'symbol',
+						notation              : 'compact',
+						compactDisplay        : 'short',
+						minimumFractionDigits : 2,
 					},
-				)}
+				})}
 			</div>
 			<div className={styles.text_bookings}>
 				<div className={styles.revenue_span}>No. of Bookings</div>

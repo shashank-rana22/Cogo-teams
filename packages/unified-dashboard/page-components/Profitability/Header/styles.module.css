@@ -56,4 +56,17 @@
 	.job_status {
 		margin-top: 10px;
 	}
+
+	.search_container {
+		margin-top: 10px;
+		margin-right: auto;
+		margin-left: auto;
+
+		:global {
+			.ui_input_container {
+				width: 250px;
+				height: 40px;
+			}
+		}
+	}
 }

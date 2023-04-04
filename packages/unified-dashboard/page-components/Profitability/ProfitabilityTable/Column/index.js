@@ -1,7 +1,6 @@
 import { Tooltip, Tags } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { format } from '@cogoport/utils';
-
-import getShortFormatNumber from '../../../../utils/getShortFormatNumber';
 
 import styles from './styles.module.css';
 
@@ -20,8 +19,16 @@ const exportTag = {
 };
 
 function columns() {
-	const getAmount = (amt, currency) => getShortFormatNumber('en-US', amt, currency, {
-		currencyDisplay: 'symbol',
+	const getAmount = (amt, currency) => formatAmount({
+		amount  : amt,
+		currency,
+		options : {
+			style                 : 'currency',
+			currencyDisplay       : 'symbol',
+			notation              : 'compact',
+			compactDisplay        : 'short',
+			minimumFractionDigits : 2,
+		},
 	});
 
 	return [

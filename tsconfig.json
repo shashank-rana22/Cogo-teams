@@ -25,8 +25,7 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.js",
-    ".eslintrc.js"
-, "packages/unified-dashboard/common/FilterContentComponents"  ],
+    ".eslintrc.js", ],
   "exclude": [
     "node_modules"
   ],

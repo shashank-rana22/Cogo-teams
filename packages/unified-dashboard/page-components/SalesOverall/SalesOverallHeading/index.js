@@ -22,10 +22,8 @@ function SalesOverallHeading({
 						}
 						>
 							<IcMInfo
-								style={{
-									width  : '20px',
-									height : '14px',
-								}}
+								width={20}
+								height={14}
 							/>
 
 						</Tooltip>

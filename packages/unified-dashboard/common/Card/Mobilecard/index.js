@@ -37,15 +37,21 @@ function MobileCard({
 						<div className={styles.text_tag}>
 							{etdMonthData === undefined
 								? 0
-								: formatAmount(
-									'en-US',
-									currencyCoversion(
+								: formatAmount({
+									amount: currencyCoversion(
 										currency,
 										etdMonthData?.total_amount || 0,
 									),
 									currency,
-									{ currencyDisplay: 'symbol' },
-								)}
+									options: {
+										style                 : 'currency',
+										currencyDisplay       : 'symbol',
+										notation              : 'compact',
+										compactDisplay        : 'short',
+										minimumFractionDigits : 2,
+									},
+								})}
+
 						</div>
 					</div>
 					<div className={styles.booking_mobile}>

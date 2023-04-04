@@ -7,7 +7,6 @@ function NoDataFound() {
 				display        : 'flex',
 				justifyContent : 'center',
 				alignItems     : 'center',
-				height         : '0px',
 				marginTop      : '20px',
 			}}
 		>
