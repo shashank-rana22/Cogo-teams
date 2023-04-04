@@ -1,13 +1,12 @@
-// import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
+import getApiErrorString from '../utils/getApiErrorString';
+
 const useUpdateShipmentAdditionalService = ({
 	item = {},
-	setAddRate = () => {},
 	refetch = () => {},
-	onCancel = () => {},
 	showIp = false,
 	setShowIp = () => {},
 }) => {
@@ -29,19 +28,12 @@ const useUpdateShipmentAdditionalService = ({
 
 			if (res.status === 200) {
 				Toast.success('Service Updated successfully');
-
-				if (showIp) {
-					setShowIp(false);
-				}
+				setShowIp(false);
 				setRemarks(null);
-				setAddRate(null);
-
-				onCancel();
-
 				refetch();
 			}
 		} catch (err) {
-			Toast.error(err?.data);
+			Toast.error(getApiErrorString(err));
 		}
 	};
 
@@ -160,7 +152,15 @@ const useUpdateShipmentAdditionalService = ({
 				onComplete();
 			}
 		} catch (err) {
-			Toast.error(err?.data);
+			Toast.error(getApiErrorString(err));
+		}
+	};
+
+	const cancelAdditionalService = async (payload) => {
+		try {
+			await handleSubmit(payload);
+		} catch (err) {
+			Toast.error(getApiErrorString(err));
 		}
 	};
 
@@ -174,6 +174,7 @@ const useUpdateShipmentAdditionalService = ({
 		requestRateFromTechops,
 		handleInvoicingParty,
 		updateBillingInfo,
+		cancelAdditionalService,
 		remarks,
 		setRemarks,
 		loading,

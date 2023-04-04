@@ -1,10 +1,9 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable max-len */
 import { Modal, Button } from '@cogoport/components';
 import { InputController, MultiselectController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useEffect, useState } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useEffect, useState, useMemo } from 'react';
 
 import Spinner from '../../../commons/Spinner';
 import CreateUserForm from '../ConfigurationEngine/CreateAudienceForm';
@@ -35,7 +34,7 @@ function CreateFAQ() {
 	const router = useRouter();
 	const [editorError, setEditorError] = useState(false);
 
-	const { fetchQuestion, query, data, loading } = useGetQuestion();
+	const { fetchQuestion, query, data = {}, loading, mode } = useGetQuestion();
 
 	const {
 		editorValue,
@@ -83,33 +82,22 @@ function CreateFAQ() {
 
 	const {
 		question_abstract,
-		faq_tags = [],
-		faq_topics = [],
-		answers = [],
-		faq_audiences = [],
+		faq_tags,
+		faq_topics,
+		answers,
+		faq_audiences,
 	} = data || {};
 
 	useEffect(() => {
 		if (query?.id) {
 			fetchQuestion();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [query?.id]);
+	}, [fetchQuestion, query?.id, mode]);
 
-	const filterTags = [];
-	(faq_tags || []).forEach((item) => {
-		filterTags.push(item?.id);
-	});
-
-	const filterTopics = [];
-	(faq_topics || []).forEach((item) => {
-		filterTopics.push(item?.id);
-	});
-
-	const filterAudiences = [];
-	(faq_audiences || []).forEach((item) => {
-		filterAudiences.push(item?.id);
-	});
+	const filterTags = useMemo(() => (faq_tags || []).map((item) => item.id) || [], [faq_tags]);
+	const filterTopics = useMemo(() => (faq_topics || []).map((item) => item.id) || [], [faq_topics]);
+	const filterAudiences = useMemo(() => (faq_audiences || []).map((item) => item.id) || [], [faq_audiences]);
+	const answer = answers?.[0]?.answer;
 
 	useEffect(() => {
 		if (!loading) {
@@ -117,11 +105,29 @@ function CreateFAQ() {
 			setQuestionValue('tag_ids', filterTags);
 			setQuestionValue('topic_ids', filterTopics);
 			setQuestionValue('audience_ids', filterAudiences);
-			setEditorValue(RichTextEditor?.createValueFromString((answers?.[0]?.answer || ''), 'html'));
+			setEditorValue(RichTextEditor?.createValueFromString((answer || ''), 'html'));
 		}
+	}, [listTopicsLoading,
+		listTagsLoading,
+		listAudienceLoading,
+		loading,
+		setQuestionValue,
+		question_abstract,
+		filterTags,
+		filterTopics,
+		filterAudiences,
+		setEditorValue,
+		RichTextEditor,
+		answer,
+	]);
 
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [listTopicsLoading, listTagsLoading, listAudienceLoading, JSON.stringify(data)]);
+	useEffect(() => {
+		if (questionPreview !== 'preview') {
+			fetchTopics();
+			fetchTags();
+			fetchAudiences();
+		}
+	}, [fetchAudiences, fetchTags, fetchTopics, questionPreview]);
 
 	const onClickBackIcon = () => {
 		router.back();
@@ -147,7 +153,7 @@ function CreateFAQ() {
 				<Spinner
 					height={60}
 					width={60}
-					borderWidth="7px"
+					borderWidth="6px"
 					outerBorderColor="#FBD69F"
 					spinBorderColor="red"
 				/>
@@ -157,14 +163,13 @@ function CreateFAQ() {
 
 	return (
 		<div>
-
-			<div className={styles.back_div} onClick={onClickBackIcon}>
+			<div role="presentation" className={styles.back_div} onClick={onClickBackIcon}>
 				<IcMArrowBack width={20} height={20} />
 				<div className={styles.back}>Back to Dashboard</div>
 			</div>
 
 			<div className={styles.heading_text}>
-				{data ? 'Update' : 'Create'}
+				{!isEmpty(data) ? 'Update' : 'Create'}
 				{' '}
 				A Question
 			</div>
@@ -184,7 +189,7 @@ function CreateFAQ() {
 						rules={{ required: 'Question is required.' }}
 					/>
 
-					{errors.question_abstract && (
+					{errors?.question_abstract && (
 						<span className={styles.errors}>
 							{errors.question_abstract.message}
 						</span>
@@ -200,6 +205,7 @@ function CreateFAQ() {
 								Select Tags or
 							</div>
 							<div
+								role="presentation"
 								className={styles.create_tag_label}
 								onClick={handleCreateTag}
 							>
@@ -213,7 +219,7 @@ function CreateFAQ() {
 							options={tagOptions}
 							rules={{ required: 'Tags are required.' }}
 						/>
-						{errors.tag_ids && (
+						{errors?.tag_ids && (
 							<span className={styles.errors}>
 								{errors.tag_ids.message}
 							</span>
@@ -228,6 +234,7 @@ function CreateFAQ() {
 								Select Topics or
 							</div>
 							<div
+								role="presentation"
 								className={styles.create_tag_label}
 								onClick={handleCreateTopic}
 							>
@@ -241,7 +248,7 @@ function CreateFAQ() {
 							options={topicOptions}
 							rules={{ required: 'Topics are required.' }}
 						/>
-						{errors.topic_ids && (
+						{errors?.topic_ids && (
 							<span className={styles.errors}>
 								{errors.topic_ids.message}
 							</span>
@@ -258,6 +265,7 @@ function CreateFAQ() {
 							Select Audience or
 						</div>
 						<div
+							role="presentation"
 							className={styles.create_tag_label}
 							onClick={() => setShowCreateAudienceModal(true)}
 						>
@@ -270,7 +278,13 @@ function CreateFAQ() {
 						control={control}
 						onSearch={handleAudienceSearch}
 						options={audienceOptions}
+						rules={{ required: 'Audience is required.' }}
 					/>
+					{errors?.audience_ids && (
+						<span className={styles.errors}>
+							{errors.audience_ids.message}
+						</span>
+					)}
 				</div>
 
 				<div className={styles.faq_answer_container}>
@@ -342,6 +356,7 @@ function CreateFAQ() {
 
 				<Modal.Footer>
 					<Button
+						type="button"
 						themeType="secondary"
 						style={{ marginRight: 8 }}
 						onClick={onClickCancelButton}
@@ -349,7 +364,7 @@ function CreateFAQ() {
 						CANCEL
 					</Button>
 
-					<Button onClick={handleCreate(createFaqComponent)}>
+					<Button type="button" onClick={handleCreate(createFaqComponent)}>
 						SUBMIT
 					</Button>
 				</Modal.Footer>
@@ -372,6 +387,7 @@ function CreateFAQ() {
 
 				<Modal.Footer>
 					<Button
+						type="button"
 						themeType="tertiary"
 						style={{ marginRight: 8 }}
 						onClick={() => setShowModalOnCancel(false)}
@@ -380,6 +396,7 @@ function CreateFAQ() {
 					</Button>
 
 					<Button
+						type="button"
 						onClick={onClickYesButton}
 					>
 						Yes

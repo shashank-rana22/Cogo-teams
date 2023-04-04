@@ -1,52 +1,38 @@
-.container{
+.container {
 	&.ie {
 		.ie_booking_text {
 			color: #9ab7fe;
 		}
+
 		.core-ui-radio-radio-container.primary {
 			border: 1.5px solid black;
 		}
+
 		.core-ui-radio-radio-container.primary.checked {
 			border: 1.5px solid #034afd;
 		}
+
 		.core-ui-radio-icon.primary.checked {
 			background-color: #034afd;
 		}
 	}
 }
 
-.business_name{
-	font-size: 14px;
+.business_name {
 	margin: 0;
-	color: #333333;
+	font-size: 14px;
 	font-weight: 500;
+	color: #333333;
 }
 
-.radio_wrapper{
-	.core-ui-radio-root {
-		width: 100%;
-		border-bottom: 1px solid #eceff8;
-		padding: 12px 8px;
-
-		&:hover {
-			background: #f6f5fe;
-			border-radius: 4px;
-		}
-
-		@media (max-width: 768px) {
-			width: 100%;
-		}
-	}
-}
-
-.icon_wrapper{
+.icon_wrapper {
 	display: flex;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
 	margin-right: 8px;
 }
 
-.address_text{
+.address_text {
 	font-weight: 400;
 	font-size: 12px;
 	line-height: 16px;
@@ -54,7 +40,7 @@
 	margin: 0;
 }
 
-.gst_number{
+.gst_number {
 	font-weight: 400;
 	font-size: 10px;
 	line-height: 16px;
@@ -62,25 +48,25 @@
 	margin: 0;
 }
 
-.label_container{
+.label_container {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
 
-.address_align{
+.address_align {
 	display: flex;
 	flex-direction: row;
 }
 
-.add_address{
-	color: #034afd;
+.add_address {
 	font-size: 12px;
+	color: #034afd;
 	cursor: pointer;
 	text-decoration: underline;
 }
 
-.label{
+.label {
 	display: flex;
 	align-items: center;
 	margin: 0 8px 2px 8px;
@@ -88,31 +74,13 @@
 	padding: 4px;
 }
 
-.tag_container{
+.tag_container {
 	font-size: 8px;
 	display: flex;
 	align-items: center;
-
-	.core-ui-tag-root {
-		.core-ui-tag-text {
-			&.rejected {
-				color: white;
-			}
-		}
-
-		&.rejected {
-			background: #ed9d8e;
-		}
-		&.pending {
-			background: #f0dc29;
-		}
-		&.verified {
-			background: #a9e88b;
-		}
-	}
 }
 
 
-.radio_group{
+.radio_group {
 	display: block;
 }

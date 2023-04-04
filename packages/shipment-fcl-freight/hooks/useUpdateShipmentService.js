@@ -2,6 +2,8 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 
+import getApiErrorString from '../utils/getApiErrorString';
+
 const useUpdateShipmentService = ({
 	serviceData = [],
 	setShow = () => {},
@@ -34,7 +36,7 @@ const useUpdateShipmentService = ({
 				setShow(false);
 			}
 		} catch (err) {
-			Toast.error(err?.base);
+			Toast.error(getApiErrorString(err));
 		}
 	};
 

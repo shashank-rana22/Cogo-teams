@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 function CreateForm(props) {
 	const {
 		source = '',
-		viewType = 'topic',
+		queryValue = '',
 		setConfigurationPage,
 		handleSubmit,
 		control,
@@ -55,10 +55,9 @@ function CreateForm(props) {
 	}, [general.query?.id]);
 
 	useEffect(() => {
-		setValue('name', data?.name);
+		setValue('name', data?.display_name);
 		setValue('description', data?.description);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [loading]);
+	}, [data?.description, data?.display_name, loading, setValue]);
 
 	return (
 		<div className={styles.container} style={style}>
@@ -74,9 +73,9 @@ function CreateForm(props) {
 			{source !== 'create' ? (
 				<div>
 					<div className={styles.add_topic}>
-						Add
+						{id ? 'Update' : 'Add'}
 						{' '}
-						{startCase(viewType)}
+						{startCase(queryValue)}
 					</div>
 				</div>
 			) : null}
@@ -85,7 +84,7 @@ function CreateForm(props) {
 				className={styles.add_name}
 				style={{ marginTop: source === 'create' ? 0 : undefined }}
 			>
-				{startCase(viewType)}
+				{startCase(queryValue)}
 				{' '}
 				Name
 			</div>
@@ -110,7 +109,7 @@ function CreateForm(props) {
 			</div>
 
 			<div className={styles.user_tag}>
-				{startCase(viewType)}
+				{startCase(queryValue)}
 				{' '}
 				Description
 				{' '}

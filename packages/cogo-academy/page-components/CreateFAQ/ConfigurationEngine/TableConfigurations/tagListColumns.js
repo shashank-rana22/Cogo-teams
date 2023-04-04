@@ -37,11 +37,14 @@ function tagListColumns({
 		},
 		{
 			Header   : 'UPDATED BY',
-			accessor : (items) => (
-				<div className={styles.tags}>
-					{startCase(items.display_name) || '--'}
-				</div>
-			),
+			accessor : (items) => {
+				const { author = {} } = items || {};
+				return (
+					<div className={styles.tags}>
+						{startCase(author?.name) || '--'}
+					</div>
+				);
+			},
 		},
 		{
 			Header   : 'UPDATED AT',

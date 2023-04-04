@@ -1,27 +1,42 @@
-import Loader from '../../commons/Loader';
+import ScopeSelect from '@cogoport/scope-select';
 
-import List from './components/List';
-import ScopeAndFilters from './components/ScopeAndFilters';
-import TabsAndFilters from './components/TabsAndFilters';
-import useListBookingDeskShipments from './hooks/useListBookingDeskShipments';
+import Filters from '../../commons/Filters';
+import List from '../../commons/List';
+import Loader from '../../commons/Loader';
+import Tabs from '../../commons/Tabs';
+import { fcl_freight_local as tabs } from '../../config/TABS_CONFIG.json';
+import useListBookingDeskShipments from '../../hooks/useListBookingDeskShipments';
+
+import Card from './Card';
 import styles from './styles.module.css';
 
 export default function FCLLocalDesk({ stateProps = {} }) {
-	const { loading, data } = useListBookingDeskShipments({ stateProps });
+	const { loading, data } = useListBookingDeskShipments({ stateProps, prefix: 'fcl_local' });
+
+	const isCardAnimatable = !!tabs.find((tab) => tab.name === stateProps.activeTab).isCriticalVisible;
 
 	return (
-		<div>
+		<>
 			<div className={styles.header}>
 				<h1>Booking Desk</h1>
 
-				<ScopeAndFilters stateProps={stateProps} />
+				<ScopeSelect defaultValues={stateProps.scopeFilters} />
 			</div>
 
-			<TabsAndFilters stateProps={stateProps} />
+			<Filters stateProps={stateProps} tabs={tabs} />
+
+			<Tabs tabs={tabs} stateProps={stateProps} />
 
 			<div className={`${styles.list_container} ${loading ? styles.loading : ''}`}>
-				{loading ? <Loader /> : <List data={data} stateProps={stateProps} />}
+				{loading ? <Loader /> : (
+					<List
+						data={data}
+						stateProps={stateProps}
+						Card={Card}
+						isCardAnimatable={isCardAnimatable}
+					/>
+				)}
 			</div>
-		</div>
+		</>
 	);
 }

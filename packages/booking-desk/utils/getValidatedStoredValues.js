@@ -1,38 +1,48 @@
 import CONTROLS_CONFIG from '../config/CONTROLS_CONFIG.json';
 import TABS_CONFIG from '../config/TABS_CONFIG.json';
 
-export default function getValidatedStoredValues(storedValues, stringifiedScopeData) {
-	const scopeData = JSON.parse(stringifiedScopeData);
-	const filters = storedValues?.filters || {};
+export default function getValidatedStoredValues(scopeData) {
+	const storedValues = JSON.parse(localStorage.getItem('booking_desk_stored_values'));
+
+	let { shipment_type, trade_type, page } = storedValues?.filters || {};
+	const { isCriticalOn, q } = storedValues?.filters || {};
 	let activeTab = storedValues?.activeTab;
-	const scopeFilters = storedValues?.scopeFilters || {};
+	let { scope, view_type } = storedValues?.scopeFilters || {};
 
-	const { shipment_type, trade_type, page } = filters;
-	const { scope, view_type } = scopeFilters;
-
-	const { scopes = [], viewTypes = {} } = scopeData || {};
+	const { scopes = [], viewTypes = {}, defaultScope, defaultView } = scopeData || {};
 
 	if (!CONTROLS_CONFIG.shipment_types.some((shipment_type_obj) => shipment_type_obj.value === shipment_type)) {
-		filters.shipment_type = 'fcl_freight';
+		shipment_type = 'fcl_freight';
 	}
-	if (!CONTROLS_CONFIG.trade_types.some((trade_type_obj) => trade_type_obj.value === trade_type)) {
-		filters.trade_type = undefined;
+	if (trade_type && !CONTROLS_CONFIG.trade_types.some((trade_type_obj) => trade_type_obj.value === trade_type)) {
+		trade_type = undefined;
 	}
 	if (typeof page !== 'number') {
-		filters.page = 1;
+		page = 1;
 	}
 
-	const tabs = TABS_CONFIG[filters.shipment_type];
-	if (!tabs.some((tab) => tab.name === activeTab)) {
-		activeTab = 'place_booking';
+	const tabs = TABS_CONFIG[shipment_type];
+	const { name: defaultActiveTab, isCriticalVisible } = tabs.find((tab) => tab.name === activeTab) || tabs[0];
+	activeTab = defaultActiveTab;
+
+	if (!scopes.includes(scope)) {
+		scope = defaultScope;
+	}
+	if ((viewTypes[scope] || []).includes(view_type)) {
+		view_type = defaultView;
 	}
 
-	if (scopes.includes(scope)) {
-		scopeFilters.scope = scope;
-	}
-	if ((viewTypes[scopeFilters.scope] || []).includes(view_type)) {
-		scopeFilters.view_type = view_type;
-	}
-
-	return { filters, activeTab, scopeFilters };
+	return {
+		filters: {
+			shipment_type,
+			...(trade_type && { trade_type }),
+			...(isCriticalVisible && { isCriticalOn: !!isCriticalOn }),
+			...(q && { q }),
+			page,
+		},
+		activeTab,
+		scopeFilters: {
+			scope, view_type, selected_agent_id: storedValues?.scopeFilters?.selected_agent_id,
+		},
+	};
 }

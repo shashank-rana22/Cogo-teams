@@ -41,7 +41,7 @@ function useUpdateFaqSet({
 			});
 
 			if (res?.data) {
-				Toast.success('question updated sucessfully');
+				Toast.success('Question saved as draft sucessfully');
 
 				const href = `/learning/faq/create/question?mode=preview&id=${id}`;
 
@@ -50,7 +50,7 @@ function useUpdateFaqSet({
 				setQuestionPreview('preview');
 			}
 		} catch (err) {
-			console.log('err', err);
+			Toast.error(err?.message);
 		}
 	};
 

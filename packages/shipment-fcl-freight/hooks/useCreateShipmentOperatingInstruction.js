@@ -1,6 +1,8 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
+import getApiErrorString from '../utils/getApiErrorString';
+
 const useCreateShipmentOperatingInstruction = ({
 	procedure_id = '',
 	shipment_id = '',
@@ -21,7 +23,7 @@ const useCreateShipmentOperatingInstruction = ({
 				refetch();
 			}
 		} catch (err) {
-			Toast.error(err);
+			Toast.error(getApiErrorString(err));
 		}
 	};
 

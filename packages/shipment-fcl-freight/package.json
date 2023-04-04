@@ -12,6 +12,7 @@
     "@cogoport/icons-react": "^1.0.60",
     "@cogoport/maps": "^1.0.2",
     "@cogoport/next": "workspace:^0.1.0",
+    "@cogoport/ocean-modules": "workspace:^0.1.0",
     "@cogoport/request": "workspace:^0.1.0",
     "@cogoport/shipment-chat": "workspace:^0.1.0",
     "@cogoport/shipment-mails": "workspace:^1.0.0",

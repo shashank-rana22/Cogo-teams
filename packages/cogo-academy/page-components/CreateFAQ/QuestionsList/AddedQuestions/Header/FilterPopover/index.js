@@ -9,7 +9,7 @@ import useFilterPopover from './useFilterPopover';
 function FilterPopover({ filters, setFilters }) {
 	const {
 		showFilter, setShowFilter, topicOptions, tagOptions,
-		control, handleSubmit, onSubmit, onClickReset,
+		control, handleSubmit, onSubmit, onClickReset, audienceOptions,
 	} = useFilterPopover({ setFilters });
 
 	return (
@@ -27,6 +27,7 @@ function FilterPopover({ filters, setFilters }) {
 					control={control}
 					handleSubmit={handleSubmit}
 					onSubmit={onSubmit}
+					audienceOptions={audienceOptions}
 				/>
 			)}
 		>

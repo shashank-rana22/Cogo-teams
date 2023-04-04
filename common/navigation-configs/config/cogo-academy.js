@@ -21,6 +21,14 @@ const cogoAcademy = {
 	'/[partner_id]/learning/faq/answer': {
 		navigation: 'cogo_academy-faq',
 	},
+	'/[partner_id]/announcements': {
+		navigation : 'cogo_academy-announcements',
+		isMainNav  : false,
+	},
+	'/[partner_id]/announcements/create': {
+		navigation : 'cogo_academy-announcements',
+		isMainNav  : false,
+	},
 };
 
 module.exports = cogoAcademy;

@@ -1,4 +1,30 @@
 .container { 
+	width: 63%;
 	margin: 10px 24px;
 	flex: 1;
+
+	&.email_view {
+		margin: 30px 28px 10px;
+	}
+}
+
+.empty_state {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-left: 250px;
+	margin-top: -50px;
+}
+
+.heading {
+	font-size: 22px;
+	font-weight: 600;
+	color: #221F20;
+}
+
+.text {
+	margin-top: 4px;
+	font-size: 18px;
+	color: #828282;
 }

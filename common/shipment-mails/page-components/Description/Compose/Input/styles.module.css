@@ -23,11 +23,10 @@
 }
 
 .prefix{
-	font-weight: 700;
-	font-size: 14px;
-	line-height: 150%;
-
-	color: #333333;
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+	color: #828282;
 }
 
 .row {
@@ -40,4 +39,26 @@
 	align-items: center;
 	max-width: 300px;
 	/* overflow: auto; */
+}
+
+.value {
+	margin-left: 12px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #F8F2E7;
+	font-size: 10px;
+	font-weight: 500;
+	color: #221F20;
+	border-radius: 8px 0px 0px 8px;
+	padding: 2px 8px;
+}
+
+.cancel {
+	background: #f3c9a0;
+	border-radius: 0px 4px 4px 0px;
+	padding: 2px 8px;
+	cursor: pointer;
+	font-size: 10px;
+	font-weight: 600;
 }

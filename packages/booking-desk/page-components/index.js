@@ -1,21 +1,20 @@
 import { dynamic } from '@cogoport/next';
-import useGetScopeOptions from '@cogoport/scope-select/hooks/useGetScopeOptions';
+import { useGetScopeOptions } from '@cogoport/scope-select';
 import { useState, useEffect } from 'react';
 
 import getValidatedStoredValues from '../utils/getValidatedStoredValues';
+
+import styles from './styles.module.css';
 
 const FCLDesk = dynamic(() => import('./FCL'), { ssr: false });
 const FCLLocalDesk = dynamic(() => import('./FCL-Local'), { ssr: false });
 const LCLDesk = dynamic(() => import('./LCL'), { ssr: false });
 
-function ResolveBookingDesk({ stateProps }) {
-	switch (stateProps.filters.shipment_type) {
-		case 'fcl_freight': return <FCLDesk stateProps={stateProps} />;
-		case 'fcl_freight_local': return <FCLLocalDesk stateProps={stateProps} />;
-		case 'lcl_freight': return <LCLDesk stateProps={stateProps} />;
-		default: return <div>No Shipment Type was selected</div>;
-	}
-}
+const ResolveBookingDesk = {
+	fcl_freight       : FCLDesk,
+	fcl_freight_local : FCLLocalDesk,
+	lcl_freight       : LCLDesk,
+};
 
 export default function BookingDesk() {
 	const [filters, setFilters] = useState(null);
@@ -24,19 +23,27 @@ export default function BookingDesk() {
 
 	const { scopeData } = useGetScopeOptions();
 
-	const stringifiedScopeData = JSON.stringify(scopeData);
-
 	const stateProps = { activeTab, setActiveTab, filters, setFilters, scopeFilters };
 
 	useEffect(() => {
-		const localStoredValues = JSON.parse(localStorage.getItem('booking_desk_stored_values'));
-
-		const defaultValues = getValidatedStoredValues(localStoredValues, stringifiedScopeData);
+		const defaultValues = getValidatedStoredValues(scopeData);
 
 		setFilters(defaultValues.filters);
 		setActiveTab(defaultValues.activeTab);
 		setScopeFilters(defaultValues.scopeFilters);
-	}, [stringifiedScopeData]);
+	}, []);
 
-	return activeTab ? <ResolveBookingDesk stateProps={stateProps} /> : null;
+	const RenderDesk = filters?.shipment_type in ResolveBookingDesk ? ResolveBookingDesk[filters.shipment_type] : null;
+
+	if (RenderDesk) {
+		return (
+			<div
+				key={filters.shipment_type}
+				className={styles.component_enter_active}
+			>
+				<RenderDesk stateProps={stateProps} className={styles.component_exit_active} />
+			</div>
+		);
+	}
+	return null;
 }

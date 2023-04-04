@@ -28,6 +28,7 @@ import okam_task_apis from './okam-task-dashboard';
 import partner from './partner-apis';
 import payments from './payments-apis';
 import performance_management from './performance-managment-apis';
+import poc from './poc-apis';
 import pms from './port-management';
 import rms from './rate-management-apis';
 import revenue_desk_apis from './revenue-desk-apis';
@@ -40,6 +41,7 @@ import sop from './sop-apis';
 import tech_ops from './tech-ops-apis';
 import techops_dashboard from './techops_dashboard';
 import tools from './tools';
+import vendor_rm_apis from './vendor_rm_apis';
 
 const apis = {
 	search: search.map((api) => ({
@@ -54,6 +56,10 @@ const apis = {
 	sop: sop.map((api) => ({
 		...api,
 		module: 'demand_crm',
+	})),
+	vendor_rm_apis: vendor_rm_apis.map((api) => ({
+		...api,
+		module: 'vendor_rm',
 	})),
 	revenue_desk: revenue_desk_apis.map((api) => ({
 		...api,
@@ -122,6 +128,7 @@ const apis = {
 	...faq,
 	performance_management,
 	booking_desk,
+	poc,
 };
 
 export default apis;

@@ -38,16 +38,11 @@ function Field({
 
 	const sortingKey = field.sorting ? Object?.keys(field.sorting)?.[0] : null;
 
-	const showSortingType =		field.sorting
-		&& field.sorting[sortingKey]
-		&& field.sorting[sortingKey] === Object?.keys(sort)?.[0];
+	const showSortingType =	field.sorting && field.sorting[sortingKey]
+	&& field.sorting[sortingKey] === Object?.keys(sort)?.[0];
 
 	return (
 		<div
-			// xs={field.span}
-			// sm={field.span}
-			// md={field.span}
-			// lg={field.span}
 			style={field.hasStyle ? field.styles : stylesCol}
 			key={field?.key || field?.label}
 		>

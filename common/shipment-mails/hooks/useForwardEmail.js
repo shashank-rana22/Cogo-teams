@@ -13,10 +13,6 @@ const useForwardEmail = () => {
 		{ manual: true },
 	);
 
-	/**
-	 *
-	 * @param {Object} param0
-	 */
 	const forwardEmail = async ({
 		sender = '',
 		toUserEmail = [],

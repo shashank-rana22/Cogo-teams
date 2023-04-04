@@ -3,6 +3,8 @@ import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
+import getApiErrorString from '../utils/getApiErrorString';
+
 function useGetShipment() {
 	const router = useRouter();
 	const { shipment_id } = router.query;
@@ -18,11 +20,12 @@ function useGetShipment() {
 				await trigger({
 					params: {
 						id                 : shipment_id,
-						additional_methods : ['main_service', 'documents', 'bl_container_mappings'],
+						additional_methods : ['main_service',
+							'documents', 'bl_container_mappings'],
 					},
 				});
 			} catch (err) {
-				Toast.error(err);
+				Toast.error(getApiErrorString(err));
 			}
 		})();
 	}, [trigger, shipment_id]);
@@ -35,11 +38,10 @@ function useGetShipment() {
 
 		get: {
 			isGettingShipment,
-			refetch               : getShipment,
-			documents             : data?.documents,
-			primary_service       : data?.primary_service,
-			shipment_data         : data?.summary,
-			bl_container_mappings : data?.bl_container_mappings,
+			refetch         : getShipment,
+			documents       : data?.documents,
+			primary_service : data?.primary_service,
+			shipment_data   : data?.summary,
 		},
 	};
 }

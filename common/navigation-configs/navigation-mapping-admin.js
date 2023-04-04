@@ -784,8 +784,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'business_finance-account_payables',
 				title         : 'AP',
-				href          : '/business-finance/account-payables/[active_tab]',
-				as            : '/business-finance/account-payables/dashboard',
+				href          : '/v2/business-finance/account-payables/[active_tab]',
+				as            : '/v2/business-finance/account-payables/dashboard',
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.account_payables,
@@ -793,8 +793,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'business_finance-account_receivables',
 				title         : 'AR',
-				href          : '/business-finance/account-receivables',
-				as            : '/business-finance/account-receivables',
+				href          : '/v2/business-finance/account-receivables/[active_tab]',
+				as            : '/v2/business-finance/account-receivables/dashboard',
 				type          : 'link',
 				main_apis     : ['list_organizations'],
 				possible_apis : apis.account_receivables,
@@ -811,11 +811,20 @@ const navigationMappingAdmin = {
 			{
 				key           : 'business_finance-cogo_book',
 				title         : 'Cogo Books',
-				href          : '/business-finance/cogo-book/[active_tab]',
-				as            : '/business-finance/cogo-book/Accruals',
+				href          : '/business-finance/cogo-book/[active_tab]/[view]',
+				as            : '/business-finance/cogo-book/accruals/shipment_view',
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.cogo_book,
+			},
+			{
+				key           : 'business_finance-overheads',
+				title         : 'Overheads',
+				href          : '/v2/business-finance/overheads/[active_tab]',
+				as            : '/v2/business-finance/overheads/vendors',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.overheads,
 			},
 			{
 				key           : 'business_finance-incident_management',
@@ -825,6 +834,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.incident_controller,
+			},
+			{
+				key           : 'business_finance-cfo_dashboard',
+				title         : 'Finance Dashboard',
+				href          : '/v2/business-finance/cfo-dashboard/[activeTab]',
+				as            : '/v2/business-finance/cfo-dashboard/logistics',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.cfo_dashboard,
 			},
 			{
 				key           : 'business_finance-manual_invoice',
@@ -889,6 +907,7 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		module_type   : 'dashboards',
 	},
+
 	incentives: {
 		key       : 'incentives',
 		title     : 'Incentives/KPI',
@@ -1143,8 +1162,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-booking_desk',
 				title         : 'Booking Desk',
-				href          : '/booking-desk',
-				as            : '/booking-desk',
+				href          : '/v2/booking-desk',
+				as            : '/v2/booking-desk',
 				type          : 'link',
 				main_apis     : ['list_booking_desk_shipments'],
 				module_type   : 'link',
@@ -1265,7 +1284,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				module_type   : 'dashboards',
-				possible_apis : apis.bl_do,
+				possible_apis : [...apis.bl_do, ...apis.sop, ...apis.poc],
 
 			},
 			{
@@ -1763,6 +1782,13 @@ const navigationMappingAdmin = {
 				as            : '/v2/allocation/core-engine',
 				possible_apis : apis.allocation_engine,
 			},
+			{
+				key           : 'allocations-crm_feedback_dashboard',
+				title         : 'CRM Feedback Dashboard',
+				href          : '/v2/allocation/crm-feedback-dashboard',
+				as            : '/v2/allocation/crm-feedback-dashboard',
+				possible_apis : apis.crm_feedback_dashboard,
+			},
 		],
 	},
 	kam_monitoring: {
@@ -1881,6 +1907,17 @@ const navigationMappingAdmin = {
 		type          : 'link',
 		main_apis     : ['list_auth_roles'],
 		possible_apis : apis.roles_permissions,
+		module_type   : 'crm',
+	},
+	vendor_rm: {
+		key           : 'vendor_rm',
+		title         : 'VRM',
+		icon          : IcMCrm,
+		href          : '/v2/vendors',
+		as            : '/v2/vendors',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.vendor_rm_apis,
 		module_type   : 'crm',
 	},
 	ticket_management: {
@@ -2011,6 +2048,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.faq,
+			},
+			{
+				key           : 'cogo_academy-announcements',
+				title         : 'Announcements',
+				href          : '/v2/announcements',
+				as            : '/v2/announcements',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.announcements,
 			},
 		],
 		module_type: 'crm',

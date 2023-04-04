@@ -11,6 +11,7 @@
     "@cogoport/constants": "workspace:^0.1.0",
     "@cogoport/context": "workspace:^0.1.0",
     "@cogoport/forms": "workspace:^0.1.0",
+    "@cogoport/globalization": "workspace:^0.0.1",
     "@cogoport/icons-react": "^1.0.60",
     "@cogoport/next": "workspace:^0.1.0",
     "@cogoport/request": "workspace:^0.1.0",

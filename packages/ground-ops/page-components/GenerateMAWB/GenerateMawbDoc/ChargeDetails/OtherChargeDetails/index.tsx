@@ -152,7 +152,7 @@ function OtherChargeDetails({
 							${styles.place_container_text} 
 						`}
 						>
-							<p className={styles.font_style} style={{ fontSize: 14 }}>
+							<p style={{ fontSize: 14 }}>
 								{`${formatDate(formData.executedDate) || formatDate(new Date())}`}
 							</p>
 						</div>
@@ -244,7 +244,7 @@ function OtherChargeDetails({
 								${styles.end_final} 
 							`}
 					>
-						<p className={styles.font_style} style={{ fontSize: 18 }}>
+						<p style={{ fontSize: 18 }}>
 							{taskItem?.awbNumber}
 						</p>
 					</div>

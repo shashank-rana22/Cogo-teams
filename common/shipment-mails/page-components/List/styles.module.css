@@ -2,23 +2,14 @@
 	gap: 12px;
 	max-height: 75vh;
 	overflow: auto;
+	min-height: 50vh;
 }
 
 .main_container {
-	width: 320px;
+	width: 27%;
 	border-left: 1px solid #cbcfeb;
 	border-right: 1px solid #cbcfeb;
 	padding: 28px 0px 8px 0px;
-}
-
-.heading {
-	font-weight: 500;
-	font-size: 1rem;
-	line-height: 19px;
-	color: #393f70;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 }
 
 .search_container {

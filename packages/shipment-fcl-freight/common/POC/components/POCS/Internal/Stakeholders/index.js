@@ -1,5 +1,6 @@
 import { Button, Popover } from '@cogoport/components';
 import { IcMCall, IcMEdit, IcMEmail } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 import STAKEHOLDER_MAPPING from '../../../../../../constants/STAKEHOLDER_MAPPING';
 
@@ -14,6 +15,8 @@ function Stakeholders({ data = [], setAddPoc = () => {} }) {
 						name = '', email = '', mobile_country_code = '', mobile_number = '',
 					},
 					service_type,
+					service_id,
+					stakeholder_id,
 				} = item || {};
 
 				if (!STAKEHOLDER_MAPPING[stakeholder_type]) return null;
@@ -24,7 +27,7 @@ function Stakeholders({ data = [], setAddPoc = () => {} }) {
 					<div className={styles.stakeholder_container}>
 						<div className={styles.stakeholder}>
 							<span className={styles.stakeholder_type}>
-								{`${STAKEHOLDER_MAPPING[stakeholder_type]} : `}
+								{`${STAKEHOLDER_MAPPING[stakeholder_type] || startCase(stakeholder_type)} : `}
 							</span>
 							{name}
 						</div>
@@ -36,7 +39,8 @@ function Stakeholders({ data = [], setAddPoc = () => {} }) {
 									poc_type: 'editInternal',
 									stakeholder_type,
 									service_type,
-
+									service_id,
+									stakeholder_id,
 								})}
 								size="sm"
 							>

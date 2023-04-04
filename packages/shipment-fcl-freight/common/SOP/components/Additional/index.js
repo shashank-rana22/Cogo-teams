@@ -3,7 +3,11 @@ import { useState } from 'react';
 import AdditionalForm from './AdditionalForm';
 import Details from './Details';
 
-function Additional({ data = [], shipment_ids = {}, getProcedureTrigger = () => {} }) {
+function Additional({
+	data = [],
+	shipment_ids = {},
+	getProcedureTrigger = () => {},
+}) {
 	const [showForm, setShowForm] = useState(false);
 
 	return showForm ? (

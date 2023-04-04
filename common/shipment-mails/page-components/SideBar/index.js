@@ -12,6 +12,7 @@ function SideBar({
 	setActiveBox,
 }) {
 	const SIDE_BAR_ITEMS = sideBarConfigs;
+
 	return (
 		<div className={styles.container}>
 

@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 
 const useCreateQuestionSet = () => {
 	const [{ loading: createQuestionLoading = false }, trigger] = useRequest({
-		url    : 'create_question_answer_set',
+		url    : 'request_faq_question',
 		method : 'POST',
 	}, { manual: true });
 
@@ -15,9 +15,8 @@ const useCreateQuestionSet = () => {
 
 		try {
 			const payload = {
-				question_abstract : searchState,
-				state             : 'requested',
-				status            : 'active',
+				question_abstract: searchState,
+
 			};
 
 			await trigger({ data: payload });

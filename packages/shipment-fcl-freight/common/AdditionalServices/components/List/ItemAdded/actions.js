@@ -5,10 +5,7 @@ import IP_STATE_CONDITONS from '../../../constants/IP_STATE_CONDITIONS';
 
 const actions = ({
 	status,
-	activeTab,
-	setAddRate,
 	serviceListItem,
-	isShipper,
 	addRate,
 	setShowIp = () => {},
 	setItem = () => {},
@@ -30,7 +27,6 @@ const actions = ({
 				onClick={() => setAddSellPrice(true)}
 			>
 				{addRate && isSameItem ? 'CLOSE' : 'ADD SELL PRICE'}
-				- 3
 			</Button>
 		);
 	}
@@ -51,17 +47,20 @@ const actions = ({
 			</Button>
 		);
 	}
-	if (status.status === 'customer_confirmation_pending' && isShipper) {
-		return (
-			<Button
-				themeType="secondary"
-				style={{ marginLeft: 10, height: '24px' }}
-				onClick={onClick}
-			>
-				{addRate && isSameItem ? 'CLOSE' : 'REVIEW PRICE'}
-			</Button>
-		);
-	}
+	// FOR SHIPPER
+
+	// if (status.status === 'customer_confirmation_pending' && isShipper) {
+	// 	return (
+	// 		<Button
+	// 			themeType="secondary"
+	// 			style={{ marginLeft: 10, height: '24px' }}
+	// 			onClick={onClick}
+	// 		>
+	// 			{addRate && isSameItem ? 'CLOSE' : 'REVIEW PRICE'}
+	// 		</Button>
+	// 	);
+	// }
+
 	if (
 		status.status === 'cancelled_by_supplier'
 	) {
@@ -69,7 +68,7 @@ const actions = ({
 			<Button
 				themeType="secondary"
 				style={{ marginLeft: 10, height: '24px' }}
-				onClick={() => setAddRate({ serviceListItem, status, setAddRate })}
+				onClick={() => setItem({ serviceListItem, status })}
 			>
 				REALLOCATE
 			</Button>
@@ -83,7 +82,7 @@ const actions = ({
 			<Button
 				themeType="secondary"
 				style={{ marginLeft: 10, height: '24px' }}
-				onClick={() => setAddRate({ serviceListItem, status })}
+				onClick={() => setItem({ serviceListItem, status })}
 			>
 				REVIEW COMMENTS
 			</Button>
@@ -91,9 +90,8 @@ const actions = ({
 	}
 
 	if (
-		(!IP_STATE_CONDITONS.find((state) => state === serviceListItem.state)
+		(!IP_STATE_CONDITONS.includes(serviceListItem.state)
 			|| !serviceListItem.invoice_preference)
-		&& activeTab !== 'purchase_invoice'
 	) {
 		return (
 			<Button

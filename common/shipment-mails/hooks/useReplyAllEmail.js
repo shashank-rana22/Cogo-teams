@@ -13,10 +13,6 @@ const useReplyAllEmail = () => {
 		{ manual: true },
 	);
 
-	/**
-	 *
-	 * @param {Object} param0
-	 */
 	const replyAllEmail = async ({
 		sender = '',
 		toUserEmail = [],

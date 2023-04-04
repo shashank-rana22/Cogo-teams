@@ -3,17 +3,17 @@
         {
             "name": "place_booking",
             "title" : "Place Booking",
-            "criticalVisible": true
+            "isCriticalVisible": true
         },
         {
             "name": "upload_bn",
             "title" : "Upload BN",
-            "criticalVisible": true
+            "isCriticalVisible": true
         },
         {
             "name": "container_pick_up",
             "title" : "Container Pick Up",
-            "criticalVisible": true
+            "isCriticalVisible": true
         },
         {
             "name": "completed",
@@ -42,12 +42,7 @@
         {
             "name": "place_booking",
             "title" : "Place Booking",
-            "criticalVisible": true
-        },
-        {
-            "name": "upload_bn",
-            "title" : "Upload BN",
-            "criticalVisible": true
+            "isCriticalVisible": true
         },
         {
             "name": "completed",

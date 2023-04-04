@@ -1,9 +1,9 @@
-.price_div{
+.price_div {
 	display: flex;
 	justify-content: flex-end;
 }
 
-.loading_container{
+.loading_container {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;

@@ -4,14 +4,6 @@ import { useMemo } from 'react';
 
 import { getNavData } from '../utils/getNavData';
 
-/*
-	defaultVaules = {
-		scope: 'self',
-		view_type: 'service_ops1_view',
-		selected_agent_id: '213dfty42-234hsd3-32ui4g234',
-	}
-*/
-
 export default function useGetScopeOptions({ defaultValues = {} } = {}) {
 	const { profile, general } = useSelector((store) => store);
 	const { pathname } = general || {};

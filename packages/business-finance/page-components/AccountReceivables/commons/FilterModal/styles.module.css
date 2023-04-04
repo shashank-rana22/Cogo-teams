@@ -1,0 +1,49 @@
+.filter_button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 38px;
+	padding: 8px 20px;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 16px;
+	color: #333;
+	cursor: pointer;
+	background-color: #fff;
+	border: 1px solid #333;
+	border-radius: 4px;
+}
+
+.buttons {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 20px;
+}
+
+.clear {
+	margin-right: 10px;
+}
+
+.icon {
+	padding-top: 2px;
+	padding-left: 5px;
+	color: #ed3726;
+}
+
+.container_filter {
+	padding-left: 25px;
+	margin-top: -20px;
+}
+
+.currencys {
+	width: 100%;
+	padding-left: 5px;
+	margin: 8px 8px 8px 28px;
+	font-size: 16px;
+	font-weight: 800;
+	line-height: 22px;
+	text-decoration: underline;
+	text-decoration-thickness: 3px;
+	text-decoration-color: #ed3726;
+	text-underline-offset: 10px;
+}

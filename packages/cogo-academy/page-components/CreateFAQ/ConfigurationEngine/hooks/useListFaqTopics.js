@@ -21,9 +21,11 @@ function useListFaqTopics({ searchTopicsInput = '' }) {
 		try {
 			await trigger({
 				params: {
-					page       : topicCurrentPage,
-					page_limit : 5,
-					filters    : { q: query, status: activeTopic },
+					page                 : topicCurrentPage,
+					page_limit           : 5,
+					is_admin_view        : true,
+					author_data_required : true,
+					filters              : { q: query, status: activeTopic },
 				},
 			});
 		} catch (err) {

@@ -1,6 +1,8 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
+import getApiErrorString from '../utils/getApiErrorString';
+
 const useAddPoNumber = ({
 	shipment_data = {},
 	setShow = () => {},
@@ -24,7 +26,7 @@ const useAddPoNumber = ({
 			refetch();
 			Toast.success('Purchase Order Number Added!');
 		} catch (err) {
-			Toast.error(err);
+			Toast.error(getApiErrorString(err));
 		}
 	};
 

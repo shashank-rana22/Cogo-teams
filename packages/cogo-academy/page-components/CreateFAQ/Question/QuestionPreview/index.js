@@ -1,4 +1,4 @@
-/* eslint-disable react/no-danger */				// TODOs
+/* eslint-disable react/no-danger */
 import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -13,9 +13,9 @@ import styles from './styles.module.css';
 function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 	const router = useRouter();
 
-	const { fetchQuestion, query, data, loading } = useGetQuestion();
+	const { fetchQuestion, query = {}, data, loading } = useGetQuestion();
 
-	const { source = '' } = query;
+	const { source = '' } = query || {};
 
 	const {
 		question_abstract = '',
@@ -51,9 +51,10 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 	const { answer } = answers[0] || {};
 
 	useEffect(() => {
-		fetchQuestion();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [query?.id]);
+		if (query.id) {
+			fetchQuestion();
+		}
+	}, [fetchQuestion, query?.id]);
 
 	const onclickEdit = () => {
 		const href = `/learning/faq/create/question?mode=create&id=${id}`;
@@ -110,7 +111,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 
 				<div className={styles.tags_container}>
 					{tags.map((item) => (
-						<button className={styles.tags_button}>{item}</button>
+						<button type="button" className={styles.tags_button}>{item}</button>
 					))}
 				</div>
 			</div>
@@ -121,7 +122,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 
 				<div className={styles.tags_container}>
 					{topics.map((item) => (
-						<button className={styles.tags_button}>{item}</button>
+						<button type="button" className={styles.tags_button}>{item}</button>
 					))}
 				</div>
 			</div>
@@ -132,7 +133,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 
 				<div className={styles.tags_container}>
 					{audiences.map((item) => (
-						<button className={styles.tags_button}>{item}</button>
+						<button type="button" className={styles.tags_button}>{item}</button>
 					))}
 				</div>
 			</div>
@@ -140,6 +141,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 			<div className={styles.button_container}>
 
 				<Button
+					type="button"
 					themeType="secondary"
 					size="md"
 					className={styles.publish_button}
@@ -148,6 +150,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 					Back
 				</Button>
 				<Button
+					type="button"
 					themeType="primary"
 					size="md"
 					className={styles.publish_button}
@@ -158,6 +161,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 				{!(source === 'view')
 					&& (
 						<Button
+							type="button"
 							themeType="primary"
 							size="md"
 							className={styles.publish_button}
