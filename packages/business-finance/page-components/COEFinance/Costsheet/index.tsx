@@ -268,7 +268,7 @@ function CostSheet() {
 							<div className={styles.value_text}>
 								{sellData?.totalCreditNoteActual
 									? getFormattedPrice(sellData?.totalCreditNoteActual, 'INR')
-									: '  --' || '-'}
+									: '  --'}
 							</div>
 						</div>
 						<div className={styles.credit}>
@@ -276,7 +276,7 @@ function CostSheet() {
 							<div className={styles.value_text}>
 								{sellData?.totalQuotational
 									? getFormattedPrice(sellData?.totalQuotational, 'INR')
-									: '  --' || '-'}
+									: '  --'}
 							</div>
 						</div>
 					</div>
@@ -301,7 +301,7 @@ function CostSheet() {
 							<div className={styles.value_text}>
 								{buyData?.totalCreditNoteActual
 									? getFormattedPrice(buyData?.totalCreditNoteActual, 'INR')
-									: '  --' || '-'}
+									: '  --'}
 							</div>
 						</div>
 						<div className={styles.credit}>
@@ -309,7 +309,7 @@ function CostSheet() {
 							<div className={styles.value_text}>
 								{buyData?.totalQuotational
 									? getFormattedPrice(buyData?.totalQuotational, 'INR')
-									: '  --' || '-'}
+									: '  --'}
 							</div>
 						</div>
 					</div>
