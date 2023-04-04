@@ -59,12 +59,12 @@
 	min-height: 500px;
 }
 
-.svg_container{
-	cursor: pointer;
+.svg_container {
 	margin-left: 4px;
+	cursor: pointer;
 }
 
-.badge_update{
-	margin: 8px;
+.badge_update {
 	padding: 8px;
+	margin: 8px;
 }
