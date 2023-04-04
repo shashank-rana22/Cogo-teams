@@ -70,6 +70,9 @@ function Summary({ expenseData, setExpenseData, rowData }:Props) {
 	const { stakeholdersData, loading:stakeholdersLoading } = useGetStakeholders(category);
 	const { tradePartyData } = useGetTradePartyDetails(vendorID);
 
+	const splitArray = (String(uploadedInvoice) || '').split('/') || [];
+	const filename = splitArray[splitArray.length - 1];
+
 	useEffect(() => {
 		if (stakeholdersData) {
 			const { userEmail, userId, userName } = stakeholdersData || {};
@@ -180,7 +183,7 @@ function Summary({ expenseData, setExpenseData, rowData }:Props) {
 							target="_blank"
 							rel="noreferrer"
 						>
-							{showOverflowingNumber(uploadedInvoice, 20)}
+							{showOverflowingNumber(filename, 20)}
 						</a>
 					)
 					: '-'}
