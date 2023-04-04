@@ -12,11 +12,11 @@ function ThingsToDo() {
 		profile:{ user = {} },
 	} = useSelector((state) => state);
 
-	const { name = '' } = user;
+	const { name = '', picture = '' } = user;
 
 	return (
 		<div>
-			<Header name={name} />
+			<Header name={name} picture={picture} />
 			<WelcomeText name={name} />
 			<QuickStartCards />
 			<PlatformCards />

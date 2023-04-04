@@ -1,6 +1,7 @@
 .container {
 	width: 30%;
 	height: 300px;
+	cursor: pointer;
 	background: #fffdee;
 	border: 1px solid #fff6b8;
 	border-radius: 16px;
@@ -8,6 +9,12 @@
 	@media (max-width: 800px) {
 		width: 360px;
 		margin-bottom: 24px;
+	}
+
+	&:hover {
+		box-shadow: 0 4px 20px rgb(0 0 0 / 35%);
+		transition: 0.6s;
+		transform: scale(1.02);
 	}
 }
 

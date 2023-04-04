@@ -15,10 +15,15 @@
 	font-size: 40px;
 }
 
+.profile_picture {
+	width: 50px;
+	border-radius: 20%;
+}
+
 .name_details {
 	display: flex;
 	flex-direction: column;
-	padding: 8px;
+	padding: 0 8px 8px;
 	font-size: 24px;
 	font-weight: 500;
 	color: #221f20;

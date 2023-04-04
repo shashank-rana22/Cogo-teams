@@ -5,7 +5,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Header({ name = '' }) {
+function Header({ name = '', picture = '' }) {
 	// const [progress, setProgress] = useState('60');
 
 	// const { push } = useRouter();
@@ -14,7 +14,13 @@ function Header({ name = '' }) {
 		<div className={styles.container}>
 			<div className={styles.name_container}>
 
-				<div className={styles.avatar}><IcMUserAllocations /></div>
+				<div className={styles.avatar_container}>
+
+					{picture ? (
+						<img src={picture} alt="profile" className={styles.profile_picture} />
+					) : <IcMUserAllocations />}
+
+				</div>
 
 				<div className={styles.name_details}>
 

@@ -58,6 +58,17 @@ import apis from './apis';
 import business_finance from './apis/business-finance-apis';
 
 const navigationMappingAdmin = {
+	things_to_do: {
+		key           : 'things_to_do',
+		title         : 'Things To Do',
+		href          : '/things-to-do',
+		as            : '/things-to-do',
+		type          : 'link',
+		icon          : IcMDashboard,
+		main_apis     : [],
+		possible_apis : [],
+		module_type   : 'dashboards',
+	},
 	welcome: {
 		key           : 'welcome',
 		title         : 'Welcome',

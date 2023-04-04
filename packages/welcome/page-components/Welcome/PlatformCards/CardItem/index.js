@@ -1,8 +1,7 @@
 import { Button, Tooltip } from '@cogoport/components';
+import openDocument from '@cogoport/core/helpers/openDocument';
 import { IcMInformation } from '@cogoport/icons-react';
 import React from 'react';
-
-import openDocument from '../../../../common/openDocument';
 
 import styles from './styles.module.css';
 

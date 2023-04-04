@@ -8,6 +8,12 @@
 	border: 1px solid #fff6b8;
 	border-radius: 16px;
 
+	&:hover {
+		box-shadow: 0 2px 40px #fff6b8;
+		transition: 0.6s;
+		transform: scale(1.04);
+	}
+
 	@media (max-width: 1100px) {
 		width: 100%;
 		margin-bottom: 20px;

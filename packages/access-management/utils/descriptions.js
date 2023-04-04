@@ -1,5 +1,5 @@
 const descriptions = {
-	welcome: 'View Cogoport value propositions',
+	things_to_do: 'View Cogoport value propositions',
 	dashboards:
 		'View Stats and reports across multiple functions - Sales, Supply, Operation and Finance',
 	roles_permissions   : 'Create roles and configure its permissions',
