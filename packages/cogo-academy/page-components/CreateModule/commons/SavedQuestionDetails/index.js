@@ -1,8 +1,6 @@
 import { Pagination, Table } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import EmptyState from '../EmptyState';
-
 import useGetTableColumns from './Components/TableColumns/useGetTableColumns';
 import styles from './styles.module.css';
 
