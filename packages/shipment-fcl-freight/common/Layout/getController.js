@@ -1,9 +1,7 @@
 import {
-	InputController, PillsController, SelectController, DatepickerController, ChipsController,
+	InputController, PillsController, SelectController, DatepickerController,
+	ChipsController, ToggleController, UploadController,
 } from '@cogoport/forms';
-import UploadController from '@cogoport/forms/page-components/Controlled/UploadController';
-
-import ToggleController from './Item/ToggleController';
 
 const getElementController = (type = 'text') => {
 	switch (type) {

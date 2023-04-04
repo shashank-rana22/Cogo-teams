@@ -24,7 +24,6 @@ function useServiceUpsellControls({ service, services = [], truckTypeToggle, set
 		...item,
 		service_type: item?.service_type.split('_service')[0],
 	}));
-
 	const { serviceWiseControls } = useGetControls({ truckTypeToggle });
 
 	const rawControls = formatControls(
@@ -36,19 +35,18 @@ function useServiceUpsellControls({ service, services = [], truckTypeToggle, set
 		service_details: newServices,
 	});
 
-	const controls = rawControls.map((control) => ({
-		...control,
-		value:
-			service?.[control.name] || prefilledValues[control.name] || control.value,
-	}));
+	const defaultValues = {};
+	rawControls.forEach((control) => {
+		defaultValues[control.name] = service?.[control.name] || prefilledValues[control.name] || control.value;
+	});
 
-	const { handleSubmit, watch, control, formState : { errors } } = useForm(controls);
+	const { handleSubmit, watch, control, formState : { errors } } = useForm({ defaultValues });
 
 	const formValues = watch();
 	const { truck_body_type } = formValues;
 
 	useEffect(() => {
-		if (truck_body_type) { setTruckTypeToggle(truck_body_type); }
+		setTruckTypeToggle(truck_body_type);
 	}, [truck_body_type, setTruckTypeToggle]);
 
 	const formProps = {
@@ -61,7 +59,7 @@ function useServiceUpsellControls({ service, services = [], truckTypeToggle, set
 
 	return {
 		formProps,
-		controls,
+		controls: rawControls,
 	};
 }
 

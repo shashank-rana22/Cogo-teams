@@ -127,7 +127,7 @@ const useGetControls = ({ truckTypeToggle }) => {
 				offLabel : 'Closed Body',
 				onLabel  : 'Open Body',
 				type     : 'toggle',
-				value    : truckTypeToggle,
+				value    : false,
 			},
 			{
 				name      : 'truck_type',
