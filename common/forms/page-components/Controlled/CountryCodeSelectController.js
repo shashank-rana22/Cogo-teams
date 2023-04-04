@@ -1,8 +1,8 @@
 import { Controller } from 'react-hook-form';
 
-import SelectCountry from '../Business/SelectCountry';
+import SelectCountryCode from '../Business/SelectCountryCode';
 
-function CountrySelectController({
+function CountryCodeSelectController({
 	name,
 	value,
 	control,
@@ -16,7 +16,7 @@ function CountrySelectController({
 			rules={rest.rules}
 			shouldUnregister={rest.shouldUnregister}
 			render={({ field: { onChange, onBlur, value: newValue } }) => (
-				<SelectCountry
+				<SelectCountryCode
 					{...rest}
 					onChange={onChange}
 					value={newValue}
@@ -26,4 +26,4 @@ function CountrySelectController({
 		/>
 	);
 }
-export default CountrySelectController;
+export default CountryCodeSelectController;

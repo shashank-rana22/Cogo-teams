@@ -17,6 +17,8 @@ export { default as DayFrequencyController } from './page-components/Controlled/
 export { default as AsyncSelectController } from './page-components/Controlled/AsyncSelectController';
 export { default as TextAreaController } from './page-components/Controlled/TextAreaController';
 export { default as CheckboxController } from './page-components/Controlled/CheckboxController';
+export { default as CountryCodeSelectController } from './page-components/Controlled/CountryCodeSelectController';
+export { default as CreatableSelectController } from './page-components/Controlled/CreatableSelectController';
 export { default as CountrySelectController } from './page-components/Controlled/CountrySelectController';
 
 export { default as useInterval } from './hooks/useInterval';
