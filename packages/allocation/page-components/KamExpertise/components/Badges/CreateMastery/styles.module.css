@@ -16,14 +16,14 @@
 }
 
 .lower_background {
-    display: flex;
-    flex-basis: 55%;
-    justify-content: space-between;
-    width: 100%;
-    padding: 20px;
-    margin-top: -20px;
-    background: rgba(249, 249, 249, 0.9);
-    border-radius: 10px;
+	display: flex;
+	flex-basis: 55%;
+	justify-content: space-between;
+	width: 100%;
+	padding: 20px;
+	margin-top: -20px;
+	background: rgb(249 249 249 / 90%);
+	border-radius: 10px;
 
 	@media (max-width: 576px) {
 		flex-direction: column;
