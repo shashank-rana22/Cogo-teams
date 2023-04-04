@@ -4,7 +4,6 @@ import { useState } from 'react';
 
 import useCreateFaqSet from './hooks/useCreateFaqSets';
 import useGetTopicTagList from './hooks/useGetTopicTagList';
-import useUpdateFaqSet from './hooks/useUpdateFaqSets';
 
 let RichTextEditor;
 
@@ -15,7 +14,7 @@ if (typeof window !== 'undefined') {
 
 function useCreateQuestions({ data, setEditorError }) {
 	const { general } = useSelector((state) => state);
-	const { mode = '', id :questionId = '' } = general.query || {};
+	const { mode = '' } = general.query || {};
 
 	const [editorValue, setEditorValue] = useState(RichTextEditor.createEmptyValue());
 	const [showModalOnCancel, setShowModalOnCancel] = useState(false);
@@ -23,7 +22,7 @@ function useCreateQuestions({ data, setEditorError }) {
 	const [questionPreview, setQuestionPreview] = useState(mode || 'create');
 
 	const {
-		onSubmit:onSubmitCreateForm,
+		onSubmit,
 		onClickPublish,
 		loading,
 	} = useCreateFaqSet({
@@ -32,23 +31,10 @@ function useCreateQuestions({ data, setEditorError }) {
 		editorValue,
 		RichTextEditor,
 		setEditorError,
-	});
-
-	const { onSubmitUpdatedForm, loading: updateApiLoading } = useUpdateFaqSet({
-		setQuestionPreview,
-		editorValue,
 		data,
-		RichTextEditor,
-		setEditorError,
 	});
 
-	const onSubmit = (mode === 'create' && questionId)
-		? onSubmitUpdatedForm
-		: onSubmitCreateForm;
-
-	const apiLoading = (mode === 'create' && questionId)
-		? updateApiLoading
-		: loading;
+	const apiLoading = loading || false;
 
 	const {
 		topicOptions,
