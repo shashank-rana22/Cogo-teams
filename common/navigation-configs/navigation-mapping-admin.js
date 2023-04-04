@@ -2062,7 +2062,7 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'cogo_academy-tests',
-				title         : 'Assesment Module',
+				title         : 'Assessment Module',
 				href          : '/v2/learning/tests/dashboard',
 				as            : '/v2/learning/tests/dashboard',
 				type          : 'link',
