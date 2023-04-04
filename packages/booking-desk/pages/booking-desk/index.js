@@ -1,1 +1,1 @@
-export { default } from '@cogoport/booking-desk/page-components';
+export { default } from '../../page-components';

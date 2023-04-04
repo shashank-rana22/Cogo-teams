@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 export default function FCLDesk({ stateProps = {} }) {
 	const { loading, data } = useListBookingDeskShipments({ stateProps, prefix: 'lcl_freight' });
 
-	const isCardAnimatable = !!tabs.find((tab) => tab.name === stateProps.activeTab).isCriticalVisible;
+	const couldBeCardsCritical = !!tabs.find((tab) => tab.name === stateProps.activeTab).isCriticalVisible;
 
 	return (
 		<>
@@ -33,7 +33,7 @@ export default function FCLDesk({ stateProps = {} }) {
 						data={data}
 						stateProps={stateProps}
 						Card={Card}
-						isCardAnimatable={isCardAnimatable}
+						couldBeCardsCritical={couldBeCardsCritical}
 					/>
 				)}
 			</div>
