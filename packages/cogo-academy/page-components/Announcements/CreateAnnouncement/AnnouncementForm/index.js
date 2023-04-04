@@ -3,7 +3,7 @@ import { isEmpty, format } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import Spinner from '../../../../commons/Spinner';
-import BodyTextEditor from '../../../CreateFAQ/Question/BodyTextEditor';
+import BodyTextEditor from '../../../ControlCenter/Question/BodyTextEditor';
 import useCreateAnnouncements from '../useCreateAnnouncement';
 
 import CreateAudienceForm from './CreateAudienceForm';

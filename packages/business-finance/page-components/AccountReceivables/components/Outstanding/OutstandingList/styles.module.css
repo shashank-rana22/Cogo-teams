@@ -74,7 +74,7 @@
 
 .hr {
 	height: 1px;
-	margin-bottom: 6px;
+	margin-bottom: 8px;
 	background: #2c3e50;
 }
 
@@ -132,4 +132,16 @@
 
 .org_list {
 	margin-bottom: 16px;
+}
+
+.width_container {
+	width: 100px;
+}
+
+.style_margin_top {
+	margin-top: 4px;
+}
+
+.padding_container {
+	padding: 4px;
 }

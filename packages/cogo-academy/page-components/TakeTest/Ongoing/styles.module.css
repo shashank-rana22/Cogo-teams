@@ -1,0 +1,14 @@
+.main_container {
+	display: flex;
+}
+
+.left_container {
+	width: 70%;
+	padding: 32px;
+	background-color: #f9f5ec;
+}
+
+.right_container {
+	width: 30%;
+	background-color: #fff;
+}

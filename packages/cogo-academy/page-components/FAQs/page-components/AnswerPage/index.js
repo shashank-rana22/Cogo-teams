@@ -250,7 +250,7 @@ function AnswerPage() {
 					size="md"
 					show={show}
 					onClose={onClose}
-					placement="right"
+					placement="center"
 				>
 					<Modal.Header title="Reason for dislike" />
 					<Modal.Body>
@@ -288,13 +288,20 @@ function AnswerPage() {
 									</span>
 								)}
 							</div>
-							<Button type="submit" loading={feedbackLoading}>Submit</Button>
+							<div className={styles.submit_btn}>
+								<Button
+									type="submit"
+									loading={feedbackLoading}
+								>
+									Submit
+								</Button>
+							</div>
 						</form>
 					</Modal.Body>
 				</Modal>
 			</div>
 
-			<div>
+			<div className={styles.liked_wrapper}>
 				{answerData?.answers[0]?.upvote_count > 0 ? (
 					<span className={styles.sidetext}>
 						{answerData?.answers[0]?.upvote_count}
