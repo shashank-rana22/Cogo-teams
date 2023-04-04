@@ -19,10 +19,11 @@ function Header({
 }) {
 	const { push } = useRouter();
 
-	const { serial_id, id: shipment_id } = channelData || {};
+	const { serial_id, shipment_type, id: shipment_id } = channelData || {};
+	const shipmentType = shipment_type?.split('_')[0];
 
 	const handleClick = () => {
-		push('/booking/fcl/[shipment_id]', `/booking/fcl/${shipment_id}`);
+		push(`/booking/${shipmentType}/[shipment_id]`, `/booking/${shipmentType}/${shipment_id}`);
 		setShow(false);
 	};
 
