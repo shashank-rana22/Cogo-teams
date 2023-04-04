@@ -1,7 +1,7 @@
-import fclTabSpecificPayload from '../config/FCL/tabSpecificPayload.json';
-import fclLocalTabSpecificPayload from '../config/FCL-Local/tabSpecificPayload.json';
-import lclTabSpecificPayload from '../config/LCL/tabSpecificPayload.json';
 import TABS_CONFIG from '../config/TABS_CONFIG.json';
+import FCL from '../config/tabSpecificPayload/FCL.json';
+import FCL_Local from '../config/tabSpecificPayload/FCL_LOCAL.json';
+import LCL from '../config/tabSpecificPayload/LCL.json';
 
 const shipmentStates = {
 	in_progress: [
@@ -14,14 +14,14 @@ const shipmentStates = {
 shipmentStates.completed = [...shipmentStates.in_progress, 'completed'];
 
 const shipmentSpecificPayload = {
-	fcl_freight       : fclTabSpecificPayload,
-	fcl_freight_local : fclLocalTabSpecificPayload,
-	lcl_freight       : lclTabSpecificPayload,
+	fcl_freight       : FCL,
+	fcl_freight_local : FCL_Local,
+	lcl_freight       : LCL,
 };
 
 const timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
 
-export default function getPayload({ filters, activeTab, selected_agent_id }) {
+export default function getListBookingDeskShipmentsPayload({ filters, activeTab, selected_agent_id }) {
 	const { isCriticalOn, page, q, ...restFilters } = filters;
 	const { shipment_type } = filters;
 

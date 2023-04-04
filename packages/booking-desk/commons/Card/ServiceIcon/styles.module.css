@@ -1,0 +1,36 @@
+
+.icon_container {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+	width: 64px;
+
+	svg {
+		width: 28px;
+		height: 28px;
+	}
+}
+
+.icon_text {
+	font-size: 10px;
+	font-weight: 600;
+	letter-spacing: 0;
+	white-space: nowrap;
+}
+
+.fcl, .fcl_local {
+	svg path {
+		fill: var(--color-primary-error-red-2);
+	}
+	.icon_text {
+		color: var(--color-primary-error-red-2);
+	}
+}
+.lcl {
+	svg path {
+		fill: var(--color-primary-error-red-3);
+	}
+	.icon_text {
+		color: var(--color-primary-error-red-3);
+	}
+}
