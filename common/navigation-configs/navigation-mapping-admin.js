@@ -69,6 +69,17 @@ const navigationMappingAdmin = {
 		possible_apis : [],
 		module_type   : 'dashboards',
 	},
+	welcome: {
+		key           : 'welcome',
+		title         : 'Welcome',
+		href          : '/welcome',
+		as            : '/welcome',
+		type          : 'link',
+		icon          : IcMDashboard,
+		main_apis     : [],
+		possible_apis : [],
+		module_type   : 'dashboards',
+	},
 	channel_partner_dashboard: {
 		key           : 'channel_partner_dashboard',
 		title         : 'Dashboard',
