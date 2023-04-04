@@ -5,8 +5,8 @@ const keyMapping = {
 	etd : 'schedule_departure',
 };
 
-const getLastMileFilters = ({ filters = {}, stateProps }) => {
-	const { activeTab } = stateProps || {};
+const getLastMileFilters = ({ filters = {}, lastMileContextValues }) => {
+	const { activeTab } = lastMileContextValues || {};
 	const { criticalOn, endDate, startDate, dateRange, date_type, ...restFilters } = filters || {};
 
 	let finalFilters = { ...(TABWISE_FILTERS[activeTab] || {}), ...restFilters };

@@ -1,13 +1,16 @@
 import { Button, Pill } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
 import { format, startCase, upperCase } from '@cogoport/utils';
+import { useContext } from 'react';
 
 import DATE_RANGE_MAPPING from '../../../configs/DATE_RANGE_MAPPING';
+import LastMileDeskContext from '../../../context/LastMileDeskContext';
 
 import styles from './styles.module.css';
 
-function AppliedFilters({ stateProps }) {
-	const { filters = {}, setFilters } = stateProps || {};
+function AppliedFilters() {
+	const { filters = {}, setFilters } = useContext(LastMileDeskContext);
+
 	const { trade_type, date_type, dateRange, startDate, endDate } = filters || {};
 
 	const onCancel = (resetKeys = {}) => {

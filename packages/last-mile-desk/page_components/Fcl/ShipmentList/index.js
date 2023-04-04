@@ -6,7 +6,7 @@ import Card from './Card';
 import ListPagination from './ListPagination';
 import styles from './styles.module.css';
 
-function ShipmentList({ stateProps, loading, data }) {
+function ShipmentList({ loading, data }) {
 	const { list = [] } = data || {};
 	return (
 		<div>
@@ -15,13 +15,13 @@ function ShipmentList({ stateProps, loading, data }) {
 				: (
 					<div>
 						<div className={styles.pagination_container}>
-							<ListPagination data={data} stateProps={stateProps} />
+							<ListPagination data={data} />
 						</div>
 
-						{(list || []).map((item) => <Card item={item} stateProps={stateProps} />)}
+						{(list || []).map((item) => <Card item={item} />)}
 
 						<div className={styles.pagination_container}>
-							<ListPagination data={data} stateProps={stateProps} />
+							<ListPagination data={data} />
 						</div>
 					</div>
 				)}

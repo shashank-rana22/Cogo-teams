@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
+import LastMileDeskContext from '../context/LastMileDeskContext';
 import getLocalStorageVal from '../helpers/getLocalStorageVal';
 
 import Fcl from './Fcl';
@@ -10,9 +11,19 @@ function LastMileDesk() {
 	const [activeTab, setActiveTab] = useState(defaultValues?.activeTab);
 	const [scopeFilters] = useState(defaultValues?.scopeFilters);
 
-	const stateProps = { activeTab, setActiveTab, filters, setFilters, scopeFilters };
+	const contextValues = useMemo(() => ({
+		activeTab,
+		setActiveTab,
+		filters,
+		setFilters,
+		scopeFilters,
+	}), [activeTab, setActiveTab, filters, setFilters, scopeFilters]);
 
-	return activeTab ? <Fcl key={activeTab} stateProps={stateProps} /> : null;
+	return (
+		<LastMileDeskContext.Provider value={contextValues}>
+			{activeTab ? <Fcl /> : null}
+		</LastMileDeskContext.Provider>
+	);
 }
 
 export default LastMileDesk;

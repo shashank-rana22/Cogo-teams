@@ -1,18 +1,19 @@
 import { Button, cl, DateRangepicker } from '@cogoport/components';
 import { startCase, upperCase } from '@cogoport/utils';
+import { useContext } from 'react';
 
 import DATE_RANGE_MAPPING from '../../../../configs/DATE_RANGE_MAPPING';
 import TRADE_TYPE from '../../../../configs/TRADE_TYPES';
+import LastMileDeskContext from '../../../../context/LastMileDeskContext';
 
 import styles from './styles.module.css';
 
 function FilterBy({
 	setPopoverFilter = () => {},
 	popoverFilter = {},
-	stateProps = {},
 	setShowPopover = () => {},
 }) {
-	const { filters, setFilters } = stateProps || {};
+	const { filters = {}, setFilters } = useContext(LastMileDeskContext);
 	const { date_type, dateRange = '', trade_type } = popoverFilter;
 
 	const handleCustomDateChange = (val) => {

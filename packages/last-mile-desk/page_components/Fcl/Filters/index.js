@@ -1,15 +1,17 @@
 import { Toggle, Input, Popover, Button } from '@cogoport/components';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import ScopeSelect from '@cogoport/scope-select';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import { CRITICAL_TABS } from '../../../configs/FCL_TABS';
+import LastMileDeskContext from '../../../context/LastMileDeskContext';
 
 import FilterBy from './FilterBy';
 import styles from './styles.module.css';
 
-function Filters({ stateProps }) {
-	const { activeTab, filters = {}, setFilters, scopeFilters } = stateProps || {};
+function Filters() {
+	const { activeTab, filters = {}, setFilters, scopeFilters } = useContext(LastMileDeskContext);
+
 	const { criticalOn, q = '' } = filters || {};
 
 	const [popoverFilter, setPopoverFilter] = useState({ ...(filters || {}) });
@@ -46,7 +48,6 @@ function Filters({ stateProps }) {
 						<FilterBy
 							popoverFilter={popoverFilter}
 							setPopoverFilter={setPopoverFilter}
-							stateProps={stateProps}
 							setShowPopover={setShowPopover}
 						/>
 					)}

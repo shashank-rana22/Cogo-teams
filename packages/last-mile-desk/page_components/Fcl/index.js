@@ -7,8 +7,8 @@ import Filters from './Filters';
 import ShipmentList from './ShipmentList';
 import styles from './styles.module.css';
 
-function Fcl({ stateProps = {} }) {
-	const { data, loading } = useListLastMileDeskShipments({ stateProps });
+function Fcl() {
+	const { data, loading } = useListLastMileDeskShipments();
 
 	return (
 		<div>
@@ -16,19 +16,18 @@ function Fcl({ stateProps = {} }) {
 				<h1>Last Mile Desk</h1>
 
 				<div>
-					<Filters stateProps={stateProps} />
+					<Filters />
 				</div>
 			</div>
 
-			<AppliedFilters stateProps={stateProps} />
+			<AppliedFilters />
 
-			<DeskTabs stateProps={stateProps} />
+			<DeskTabs />
 
 			{loading
 				? <Loader />
 				: (
 					<ShipmentList
-						stateProps={stateProps}
 						loading={loading}
 						data={data}
 					/>

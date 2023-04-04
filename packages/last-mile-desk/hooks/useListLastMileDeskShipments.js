@@ -1,26 +1,29 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useContext } from 'react';
 
+import LastMileDeskContext from '../context/LastMileDeskContext';
 import getLastMileAddtionalMethods from '../helpers/getLastMileAddtionalMethods';
 import getLastMileFilters from '../helpers/getLastMileFilters';
 
-const useListLastMileDeskShipments = ({ stateProps = {} }) => {
-	const { filters, activeTab, setFilters } = stateProps || {};
+const useListLastMileDeskShipments = () => {
+	const lastMileContextValues = useContext(LastMileDeskContext);
+
+	const { filters, setFilters, activeTab } = lastMileContextValues || {};
 	const { page = 1, ...restFilters } = filters || {};
 
 	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
 
 	const [apiData, setApiData] = useState({});
 
-	const additional_methods = getLastMileAddtionalMethods({ activeTab });
+	const additional_methods = getLastMileAddtionalMethods({ lastMileContextValues });
 
 	const [{ loading }, trigger] = useRequest({
 		url    : 'fcl_freight/list_lastmile_desk_shipments',
 		params : {
 			filters: {
-				...getLastMileFilters({ filters: restFilters, stateProps }),
+				...getLastMileFilters({ filters: restFilters, lastMileContextValues }),
 				...(selected_agent_id ? { stakeholder_id: selected_agent_id } : {}),
 			},
 			additional_methods,

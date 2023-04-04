@@ -1,10 +1,12 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
+import { useContext } from 'react';
 
 import FCL_TABS from '../../../configs/FCL_TABS';
+import LastMileDeskContext from '../../../context/LastMileDeskContext';
 
-function DeskTabs({ stateProps = {} }) {
-	const { activeTab, setActiveTab, filters, setFilters } = stateProps || {};
+function DeskTabs() {
+	const { activeTab, setActiveTab, filters, setFilters } = useContext(LastMileDeskContext);
 
 	const tabs = FCL_TABS.map((k) => ({ title: startCase(k), name: k }));
 

@@ -1,7 +1,11 @@
 import { Pagination } from '@cogoport/components';
+import { useContext } from 'react';
 
-function ListPagination({ data, stateProps }) {
-	const { setFilters, filters = {} } = stateProps || {};
+import LastMileDeskContext from '../../../../context/LastMileDeskContext';
+
+function ListPagination({ data }) {
+	const { setFilters, filters = {} } = useContext(LastMileDeskContext);
+
 	const { page, total_count, page_limit } = data || {};
 
 	const onPageChange = (val) => {

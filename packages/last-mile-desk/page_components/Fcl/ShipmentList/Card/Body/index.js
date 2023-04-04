@@ -1,4 +1,7 @@
 import { IcMFfcl } from '@cogoport/icons-react';
+import { useContext } from 'react';
+
+import LastMileDeskContext from '../../../../../context/LastMileDeskContext';
 
 import CargoPills from './CargoPills';
 import PortDetails from './PortDetails';
@@ -8,8 +11,8 @@ import styles from './styles.module.css';
 
 const REQUIRED_DOC_TABS = ['vessel_arrived', 'container_gated_out'];
 
-function Body({ item = {}, stateProps = {} }) {
-	const { activeTab = '' } = stateProps || {};
+function Body({ item = {} }) {
+	const { activeTab } = useContext(LastMileDeskContext);
 	return (
 		<div className={styles.container}>
 			<div className={styles.sub_container}>
