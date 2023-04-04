@@ -14,13 +14,14 @@ function Header({ name = '', picture = '' }) {
 		<div className={styles.container}>
 			<div className={styles.name_container}>
 
-				<div className={styles.avatar_container}>
-
-					{picture ? (
-						<img src={picture} alt="profile" className={styles.profile_picture} />
-					) : <IcMUserAllocations />}
-
-				</div>
+				{picture ? (
+					<img src={picture} alt="profile" className={styles.profile_picture} />
+				) : (
+					<div className={styles.avatar}>
+						<IcMUserAllocations />
+						{' '}
+					</div>
+				)}
 
 				<div className={styles.name_details}>
 

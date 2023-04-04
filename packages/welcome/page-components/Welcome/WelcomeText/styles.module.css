@@ -10,12 +10,16 @@
 	align-items: flex-start;
 	font-size: 14px;
 	font-weight: 500;
-	color: #000;
-	opacity: 0.6;
+	color: #63615c;
 }
 
 .text {
 	margin-bottom: 32px;
+}
+
+.regards {
+	display: flex;
+	flex-direction: column;
 }
 
 .chart_container {
