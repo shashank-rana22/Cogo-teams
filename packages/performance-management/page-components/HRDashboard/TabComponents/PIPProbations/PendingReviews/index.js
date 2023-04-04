@@ -36,7 +36,7 @@ function PendingReviews({
 		}
 	}, [onSubmitModal, refetchList, setRefetchList]);
 
-	const columnsToShow = source === 'hr_dashboard' ? feedbackDataColumns.pendingReviewsList
+	const columnsToShow = source === 'hr_dashboard' ? feedbackDataColumns.pendingReviewsList[logType]
 		: feedbackDataColumns.managerProbationList;
 	const columns = useGetColumns({
 		columnsToShow,

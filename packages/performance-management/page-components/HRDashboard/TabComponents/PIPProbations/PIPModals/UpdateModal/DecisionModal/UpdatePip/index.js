@@ -33,7 +33,7 @@ function UpdatePip({
 		<div className={styles.update_container}>
 			<div className={styles.update_dates_container}>
 				<div className={styles.update_dates}>
-					<div className={styles.lable}>Start Date</div>
+					<div className={styles.lable}>{item?.log_type === 'pip' ? 'Start Date' : 'Joining Date'}</div>
 
 					<div style={{ fontWeight: 'bold' }}>{format(item?.start_date, 'dd-MMM-yyyy')}</div>
 				</div>
@@ -53,6 +53,7 @@ function UpdatePip({
 						...pv,
 						final_decision : val || undefined,
 						is_reviewed    : false,
+						extended_date  : val === 'extended' ? format(extended_date, 'yyyy-MM-dd') : undefined,
 					}));
 				}}
 			/>

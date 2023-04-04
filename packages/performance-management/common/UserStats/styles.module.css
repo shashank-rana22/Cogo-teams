@@ -59,6 +59,7 @@
 }
 
 .filter_container {
+	margin-top: 16px;
 	display: flex;
 	align-items: center;
 }

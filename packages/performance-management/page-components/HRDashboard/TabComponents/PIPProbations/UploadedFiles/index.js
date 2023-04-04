@@ -6,7 +6,7 @@ import feedbackDataColumns from '../../../../../constants/feedback-data-columns'
 import useListFiles from './useListFiles';
 
 function UploadedFiles({
-	activeTab,
+	activeTab, logType,
 	setItem = () => {},
 }) {
 	const {
@@ -15,7 +15,7 @@ function UploadedFiles({
 		params,
 		setParams,
 		setPage,
-	} = useListFiles(true);
+	} = useListFiles({ logType });
 
 	const { list = [], pagination_data = {} } = uploadedFilesData;
 	const { total_count } = pagination_data;
@@ -30,7 +30,13 @@ function UploadedFiles({
 
 	return (
 		<div>
-			<Filters source="uploaded_files" setParams={setParams} params={params} />
+			<div style={{ marginTop: '16px' }}>
+				<Filters
+					source="uploaded_files"
+					setParams={setParams}
+					params={params}
+				/>
+			</div>
 			<UserTableData
 				columns={columns}
 				loading={loading}

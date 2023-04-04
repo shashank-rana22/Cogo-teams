@@ -1,8 +1,8 @@
 import { useIrisRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useListFiles = () => {
-	const [params, setParams] = useState({ Page: 1, PageLimit: 10 });
+const useListFiles = ({ logType }) => {
+	const [params, setParams] = useState({ Page: 1, PageLimit: 10, CsvType: logType });
 
 	const [{ loading = false, data = {} }] = useIrisRequest({
 		url    : 'get_iris_list_files',

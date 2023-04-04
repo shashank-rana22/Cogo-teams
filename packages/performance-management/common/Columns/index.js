@@ -2,7 +2,6 @@ import { Tooltip, ButtonIcon, Pill, Button, cl } from '@cogoport/components';
 import { IcMArrowNext, IcMDownload, IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty, getYear, getMonth, format, startCase } from '@cogoport/utils';
-import { useMemo } from 'react';
 
 import redirectPathSourceMapping from '../../constants/redirect-source-mapping';
 
@@ -262,21 +261,6 @@ const useGetColumns = ({
 		key : 'reassign_manager',
 	},
 	{
-		Header   : <div className={styles.head}>PIP Status</div>,
-		accessor : (item) => (
-			<div className={styles.head_content}>
-				<Pill
-					color={item?.is_pip ? 'red' : 'green'}
-				>
-					{item.is_pip ? 'In PIP' : 'Out Of Pip'}
-
-				</Pill>
-			</div>
-		),
-		id  : 'is_pip',
-		key : 'is_pip',
-	},
-	{
 		Header   : <div className={styles.head} />,
 		accessor : (item) => (
 			<div className={styles.head_content}>
@@ -285,16 +269,6 @@ const useGetColumns = ({
 		),
 		id  : 'add_create_arrow',
 		key : 'add_create_arrow',
-	},
-	{
-		Header   : <div className={styles.head} />,
-		accessor : (item) => (
-			<div className={styles.head_content}>
-				<Button onClick={() => handleClick(item.user_id)} themeType="link">View Details</Button>
-			</div>
-		),
-		id  : 'user_details',
-		key : 'user_details',
 	},
 	{
 		Header   : <div className={styles.head}>ACTION</div>,
@@ -317,7 +291,7 @@ const useGetColumns = ({
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<Pill
-					color={item?.log_type === 'pip' ? 'yellow' : 'blue'}
+					color={item?.final_decision === 'confirmed' ? 'green' : 'yellow' || 'blue'}
 				>
 					{isEmpty(item?.final_decision)
 						? (`in ${item?.log_type}`) : (`${item?.log_type} ${item?.final_decision}`)}
@@ -421,8 +395,7 @@ const useGetColumns = ({
 		finalColumns.push(column);
 	});
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	return useMemo(() => finalColumns, []);
+	return finalColumns;
 };
 
 export default useGetColumns;

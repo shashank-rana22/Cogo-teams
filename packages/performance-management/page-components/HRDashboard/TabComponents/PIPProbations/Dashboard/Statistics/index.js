@@ -40,13 +40,13 @@ function Statistics({ logType }) {
 							keys={chartKeys}
 							indexBy="month"
 							margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
-							padding={0.5}
-							innerPadding={2}
-							groupMode="grouped"
+							padding={0.9}
+							innerPadding={0}
+							groupMode="stacked"
 							valueScale={{
 								type: 'linear',
 							}}
-							colors={['#CFEAED', '#C4DC91', '#F37166']}
+							colors={['#C4DC91', (logType === 'pip' ? '#F37166' : '#FBE39F')]}
 							axisTop={null}
 							axisRight={null}
 							axisBottom={{ tickSize: 0 }}
@@ -56,7 +56,6 @@ function Statistics({ logType }) {
 								tickRotation : 0,
 							}}
 							enableGridY={false}
-							borderRadius="6px"
 							legends={[
 								{
 									dataFrom      : 'keys',

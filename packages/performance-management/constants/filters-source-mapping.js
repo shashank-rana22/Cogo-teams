@@ -41,7 +41,7 @@ const filtersSourceMapping = {
 	},
 	uploaded_files: {
 		left: [
-			{ name: 'date_range' },
+			{ name: 'Q', placeholder: 'Search FileName...' },
 		],
 	},
 	user_dashboard: {

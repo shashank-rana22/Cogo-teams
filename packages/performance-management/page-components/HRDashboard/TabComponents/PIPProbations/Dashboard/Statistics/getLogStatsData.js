@@ -1,11 +1,9 @@
 const dataKeyMapping = {
-	month                  : 'month',
-	exited                 : 'Exited',
-	employees_in_pip       : 'In PIP',
-	extended               : 'Extended',
-	confirmed              : 'Confirmed',
-	employees_in_probation : 'In Probation',
-	active                 : 'Active',
+	month     : 'month',
+	exited    : 'Exited',
+	extended  : 'Extended',
+	confirmed : 'Confirmed',
+	active    : 'Confirmed',
 };
 
 const getLogStatsData = ({ statsData = [] }) => {
@@ -13,12 +11,13 @@ const getLogStatsData = ({ statsData = [] }) => {
 		const newObj = {};
 
 		Object.keys(obj).forEach((key) => {
-			newObj[dataKeyMapping[key]] = obj[key];
+			if (dataKeyMapping[key]) { newObj[dataKeyMapping[key]] = obj[key]; }
 		});
 		return newObj;
 	});
 
-	const chartKeys = Object.keys((statsData || [])[0] || {}).filter((key) => key !== 'month').map(
+	const chartKeys = Object.keys((statsData || [])[0] || {}).filter((key) => key !== 'month'
+	&& dataKeyMapping[key]).map(
 		(key) => dataKeyMapping[key],
 	);
 

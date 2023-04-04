@@ -32,7 +32,9 @@ function PIPProbations({ source = 'hr_dashboard', modal = '', setModal = () => {
 		} else if (item?.tags?.find((x) => x === 'Final discussion held') && modal === 'logs') {
 			setModal('update');
 		} else {
-			const { user_id, id, log_type, tags, final_decision, is_reviewed, comment } = item;
+			const {
+				user_id, id, log_type, tags, final_decision, is_reviewed, comment, extended_date,
+			} = item;
 			const payload = {
 				UserID        : user_id,
 				LogID         : id,
@@ -41,6 +43,7 @@ function PIPProbations({ source = 'hr_dashboard', modal = '', setModal = () => {
 				FinalDecision : final_decision || undefined,
 				IsReviewed    : is_reviewed || modal === 'review',
 				Comment       : comment || undefined,
+				ExtendedDate  : extended_date,
 			};
 			onUpdateLog(payload, onSubmitReset);
 		}
@@ -124,6 +127,7 @@ function PIPProbations({ source = 'hr_dashboard', modal = '', setModal = () => {
 			{source === 'manager_dashboard' && (
 				<PendingReviews
 					activeTab={activeTab}
+					logType={logType}
 					item={item}
 					setItem={setItem}
 					setModal={setModal}
