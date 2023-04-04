@@ -267,6 +267,7 @@ const useQuestionList = () => {
 					author_data_required              : FILTER_MAPPING[activeList].state === 'requested',
 					requested_question_count_required : true,
 					faq_feedback_count_required       : true,
+					answer_data_required              : activeList === 'feedbacks',
 
 				},
 			});
@@ -342,7 +343,10 @@ const useQuestionList = () => {
 		});
 
 	const {
-		list: data = [], requested_question_count = 0, downvote_feedback_count = 0, ...paginationData
+		list: data = [],
+		requested_question_count = 0,
+		downvote_feedback_count = 0,
+		...paginationData
 	} = questionList || {};
 
 	return {

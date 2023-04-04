@@ -37,6 +37,7 @@ const columns = ({
 			});
 			return (
 				<div className={styles.pills}>
+
 					{(finalTagsToDisplay(tags) || []).map((ele) => (
 						<Pill
 							className={styles.questions_tag}
@@ -53,10 +54,10 @@ const columns = ({
 	},
 	{
 		Header   : 'Feedbacks',
-		accessor : () => (
+		accessor : (item) => (
 			<div className={styles.feedback_count_space}>
 				<IcMLiveChat height={20} width={20} />
-				<b className={styles.feedback_count}>5</b>
+				<b className={styles.feedback_count}>{item?.total_downvote_count}</b>
 			</div>
 		),
 	},
@@ -73,8 +74,7 @@ const columns = ({
 				>
 					EDIT
 				</Button>
-				{/* {!['inactive', 'draft'].includes(activeList)
- ? ( */}
+
 				<Button
 					type="button"
 					themeType="primary"
@@ -84,8 +84,7 @@ const columns = ({
 				>
 					VIEW
 				</Button>
-				{/* )
- : null} */}
+
 			</div>
 		),
 	},

@@ -84,6 +84,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 
 	return (
 		<div className={styles.container}>
+
 			<div className={styles.header}>
 				<IcMArrowBack
 					width={20}
@@ -172,7 +173,8 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 						</Button>
 					)}
 			</div>
-			<QuestionFeedBack />
+			<QuestionFeedBack id={id} />
+
 		</div>
 	);
 }
