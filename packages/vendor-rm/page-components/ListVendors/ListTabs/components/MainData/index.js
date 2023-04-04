@@ -9,7 +9,7 @@ function MainData({
 	data = {},
 	refetchVendorInfo = () => {},
 }) {
-	const [activeTab, setActiveTab] = useState('services_and_users');
+	const [activeTab, setActiveTab] = useState('profile');
 	const options = Object.values(TAB_OPTION_MAPPING);
 
 	return (
