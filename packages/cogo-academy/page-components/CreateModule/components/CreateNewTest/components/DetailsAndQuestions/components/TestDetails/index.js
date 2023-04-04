@@ -28,6 +28,7 @@ function CreateNewTest({
 	const select_user_group = watch('select_user_group') || [];
 
 	const radioGroupVal = watch('select_users') || '';
+	const cogoEntityWatch = watch('cogo_entity_id') || '';
 
 	const { audienceOptions = [] } = useGetUserGroups();
 
@@ -47,10 +48,13 @@ function CreateNewTest({
 		const { id } = cogo_entity_object || {};
 
 		setValue('name', name);
-		setValue('cogo_entity_id', id);
+
+		if (isEmpty(cogoEntityWatch)) {
+			setValue('cogo_entity_id', id);
+		}
 		setValue('select_user_group', audience_ids);
 		setValue('select_users', eligible_users);
-	}, [data, setValue]);
+	}, [cogoEntityWatch, data, setValue]);
 
 	return (
 		<div>
