@@ -44,9 +44,8 @@ function TagMap({
 		setApprove(false);
 	};
 	const handleClickUndo = () => {
-		if (value?.undo === 'undo') {
-			setValue((prev) => ({ ...prev, reject: '', approve: '' }));
-		}
+		setValue((prev) => ({ ...prev, reject: '', approve: '' }));
+		setRemarksVal((prev) => ({ ...prev, taggingRemark: '' }));
 	};
 
 	return (

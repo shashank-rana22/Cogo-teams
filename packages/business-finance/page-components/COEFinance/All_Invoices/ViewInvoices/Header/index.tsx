@@ -115,7 +115,7 @@ function Header({
 					<Button
 						size="md"
 						style={{ marginRight: '8px' }}
-						disabled={!isApproveDisabled}
+						disabled={!lineItem || !isApproveDisabled}
 						onClick={(e: any) => handleModalData(e)}
 					>
 						Reject
