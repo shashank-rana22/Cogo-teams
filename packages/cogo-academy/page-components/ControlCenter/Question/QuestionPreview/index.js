@@ -5,6 +5,7 @@ import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
+import QuestionFeedBack from '../../../../commons/QuestionFeedBack';
 import Spinner from '../../../../commons/Spinner';
 import useGetQuestion from '../hooks/useGetQuestion';
 
@@ -171,6 +172,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 						</Button>
 					)}
 			</div>
+			<QuestionFeedBack />
 		</div>
 	);
 }
