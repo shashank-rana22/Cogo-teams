@@ -573,7 +573,7 @@ const navigationMappingSeller = {
 		as            : '/saas/cogopoint',
 		// type          : 'link',
 		line          : true,
-		showInNav     : true,
+		showInNav     : false,
 		icon          : 'nav-payments',
 		main_apis     : [],
 		possible_apis : app_apis.saas_cogopoint,
