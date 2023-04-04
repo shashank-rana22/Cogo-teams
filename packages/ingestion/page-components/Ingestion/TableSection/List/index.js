@@ -39,8 +39,8 @@ function List(props) {
 					<Pagination
 						type="table"
 						currentPage={page}
-						totalItems={total_count || 0}
-						pageSize={page_limit || 10}
+						totalItems={total_count}
+						pageSize={page_limit}
 						onPageChange={onPageChange}
 					/>
 				</div>
