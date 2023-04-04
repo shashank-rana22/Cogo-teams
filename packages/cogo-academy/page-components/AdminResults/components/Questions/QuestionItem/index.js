@@ -1,4 +1,4 @@
-import { Accordion, Pill } from '@cogoport/components';
+import { Popover, Accordion, Pill } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 import toFixed from '../../../../CreateModule/utils/toFixed';
@@ -15,10 +15,17 @@ function TitleComponent({
 	question,
 	question_type,
 }) {
+	const truncate = (str) => (str?.length > 10 ? `${startCase(str.substring(0, 10))}...` : startCase(str));
 	return (
 		<div role="presentation" className={styles.container}>
 			<div className={styles.small_section}>
-				<Pill size="md" color="#F3FAFA">{topic}</Pill>
+				<Popover render={topic} placement="bottom" trigger="mouseenter" caret={false}>
+					{' '}
+					<Pill size="md" color="#F3FAFA">
+						{truncate(topic)}
+					</Pill>
+				</Popover>
+
 			</div>
 
 			<div className={styles.section}>
