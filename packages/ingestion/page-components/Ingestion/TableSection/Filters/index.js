@@ -11,7 +11,6 @@ import styles from './styles.module.css';
 function Filters(props) {
 	const {
 		params = {}, setParams = () => {},
-	// disabled
 	} = props;
 	const [search, setSearch] = useState('');
 

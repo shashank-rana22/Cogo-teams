@@ -2,7 +2,7 @@ import { Button, Pill } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMDownload } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
-import { startCase, format, isEmpty } from '@cogoport/utils';
+import { startCase, format } from '@cogoport/utils';
 import { useState } from 'react';
 
 import ReUploadModal from '../page-components/Ingestion/TableSection/Modals/ReUploadModal';
@@ -61,93 +61,7 @@ function useGetIngestionList() {
 		setRow(_row);
 		setTableModal('reUpload');
 	};
-	// 	page        : 1,
-	// 	page_limit  : 8,
-	// 	total       : 4,
-	// 	total_count : 35,
-	// 	list        : [{
-	// 		name          : 'yash',
-	// 		num_org       : 2,
-	// 		uploaded_by   : 'Nilap',
-	// 		uploaded_date : '2023-02-22T13:33:35.028Z',
-	// 		status        : 'Uploading',
-	// 		type          : 'CP',
-	// 		error         : true,
-	// 	},
-	// 	{
-	// 		name          : 'yash',
-	// 		num_org       : 2,
-	// 		uploaded_by   : 'Nilap',
-	// 		uploaded_date : '2023-02-22T13:33:35.028Z',
-	// 		status        : 'Uploaded',
-	// 		type          : 'CP',
-	// 		error         : true,
-	// 	},
-	// 	{
-	// 		name          : 'yash',
-	// 		num_org       : 2,
-	// 		uploaded_by   : 'Nilap',
-	// 		uploaded_date : '2023-02-22T13:33:35.028Z',
-	// 		status        : 'Error',
-	// 		type          : 'CP',
-	// 		error         : true,
-	// 	},
-	// 	{
-	// 		name          : 'yash',
-	// 		num_org       : 2,
-	// 		uploaded_by   : 'Nilap',
-	// 		uploaded_date : '2023-02-22T13:33:35.028Z',
-	// 		status        : 'Uploaded',
-	// 		type          : 'CP',
-	// 		error         : true,
-	// 	},
-	// 	{
-	// 		name          : 'yash',
-	// 		num_org       : 2,
-	// 		uploaded_by   : 'Nilap',
-	// 		uploaded_date : '2023-02-22T13:33:35.028Z',
-	// 		status        : 'Uploaded',
-	// 		type          : 'CP',
-	// 		error         : true,
-	// 	},
-	// 	{
-	// 		name          : 'yash',
-	// 		num_org       : 2,
-	// 		uploaded_by   : 'Nilap',
-	// 		uploaded_date : '2023-02-22T13:33:35.028Z',
-	// 		status        : 'Uploaded',
-	// 		type          : 'CP',
-	// 		error         : true,
-	// 	},
-	// 	{
-	// 		name          : 'yash',
-	// 		num_org       : 2,
-	// 		uploaded_by   : 'Nilap',
-	// 		uploaded_date : '2023-02-22T13:33:35.028Z',
-	// 		status        : 'Uploaded',
-	// 		type          : 'CP',
-	// 		error         : false,
-	// 	},
-	// 	{
-	// 		name          : 'yash',
-	// 		num_org       : 2,
-	// 		uploaded_by   : 'Nilap',
-	// 		uploaded_date : '2023-02-22T13:33:35.028Z',
-	// 		status        : 'Error',
-	// 		type          : 'CP',
-	// 		error         : true,
-	// 	},
-	// 	{
-	// 		name          : 'yash',
-	// 		num_org       : 2,
-	// 		uploaded_by   : 'Nilap',
-	// 		uploaded_date : '2023-02-22T13:33:35.028Z',
-	// 		status        : 'Uploaded',
-	// 		type          : 'SP',
-	// 		error         : false,
-	// 	}],
 
-	// };
 	const columns = [
 		{
 			key      : 'name',

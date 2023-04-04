@@ -20,7 +20,7 @@ function TableSection(props) {
 	return (
 		<div className={styles.table_main_container}>
 
-			<Filters setParams={setParams} params={params} formProps={formProps} disabled={loading} />
+			<Filters setParams={setParams} params={params} formProps={formProps} />
 			<List
 				columns={columns}
 				onPageChange={onPageChange}
