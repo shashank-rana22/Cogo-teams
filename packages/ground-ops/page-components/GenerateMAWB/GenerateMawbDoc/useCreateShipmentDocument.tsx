@@ -2,6 +2,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import useGetHawb from '../Helpers/hooks/useGetHawb';
 
@@ -93,8 +94,8 @@ const useCreateShipmentDocument = ({
 				setGenerate(false);
 				setEdit(false);
 			} else {
-				if (!edit) { setHawbDetails([...hawbDetails, { id: new Date().getTime(), isNew: true }]); }
-				getHawb(res.data.ids[0]);
+				if (!edit) { setHawbDetails([...hawbDetails, { id: uuid(), isNew: true }]); }
+				getHawb(res?.data?.ids[0]);
 			}
 		} catch (error) {
 			Toast.error(error?.response?.data?.message || error?.message || 'Failed to save Document');

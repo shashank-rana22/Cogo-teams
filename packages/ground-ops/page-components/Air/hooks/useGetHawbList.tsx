@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequestAir } from '@cogoport/request';
 import { useCallback } from 'react';
 
@@ -27,7 +28,9 @@ const useGetHawbList = (shipmentId) => {
 					params:	payload,
 				});
 			} catch (err) {
-				console.log(err);
+				if (err?.message !== 'canceled') {
+					Toast.error(err?.message || 'Something went wrong');
+				}
 			}
 		})();
 	}, [shipmentId, trigger]);

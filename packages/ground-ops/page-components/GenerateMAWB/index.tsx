@@ -2,6 +2,7 @@
 import { Modal, Loader } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useState, useEffect } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import useGetHawbList from '../Air/hooks/useGetHawbList';
 
@@ -49,7 +50,7 @@ function GenerateMAWB({
 
 	const [disableClass, setDisableClass] = useState(false);
 	const [hawbDetails, setHawbDetails] = useState([
-		{ id: new Date().getTime(), documentNo: null, isNew: true },
+		{ id: uuid(), documentNo: null, isNew: true },
 	]);
 
 	const [activeHawb, setActiveHawb] = useState(hawbDetails[0]);
@@ -236,7 +237,6 @@ function GenerateMAWB({
 			{!viewDoc && (
 				<GenerateHeader
 					setGenerate={setGenerate}
-					edit={edit}
 					setEdit={setEdit}
 					category={category}
 					activeCategory={activeCategory}

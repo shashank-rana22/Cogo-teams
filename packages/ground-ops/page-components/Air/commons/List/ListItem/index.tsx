@@ -31,7 +31,12 @@ function CardItem({
 }:Props) {
 	return (
 		<div>
-			<section className={styles.list_container}>
+			<section
+				className={styles.list_container}
+				style={{
+					'--open-margin': isOpen ? 0 : '16px',
+				} as React.CSSProperties}
+			>
 				<div
 					className={`${styles.row} ${
 						isMobile ? styles.is_mobile : ''

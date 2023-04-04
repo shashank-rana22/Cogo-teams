@@ -13,14 +13,14 @@ const tabs = [
 	},
 ];
 
-function GenerateHeader({ setGenerate, edit, setEdit, category, activeCategory, setActiveCategory }) {
+function GenerateHeader({ setGenerate, setEdit, category, activeCategory, setActiveCategory }) {
 	return (
 		<div>
 			<div className={styles.heading}>Add Export Details</div>
 			<Breadcrumb>
 				<Breadcrumb.Item label={(
 					<div
-						onClick={() => { setGenerate(false); if (edit) { setEdit(false); } }}
+						onClick={() => { setGenerate(false); setEdit(false); }}
 						role="link"
 						tabIndex={0}
 					>
@@ -40,11 +40,10 @@ function GenerateHeader({ setGenerate, edit, setEdit, category, activeCategory, 
 							}}
 							role="presentation"
 						>
-							{' '}
 							<div
-								className={tab.key
-										=== activeCategory
-									? styles.category_container_click : styles.category_container}
+								className={`${styles.container_click} 
+								${tab.key
+									=== activeCategory ? styles.category_container_click : styles.category_container}`}
 							>
 								{tab.label}
 							</div>

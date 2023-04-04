@@ -35,11 +35,5 @@ export const HawbFields = {
 			span  : 0.5,
 			func  : 'handleDownload',
 		},
-		// {
-		// 	key   : 'edit',
-		// 	label : '',
-		// 	span  : 0.5,
-		// 	func  : 'handleEdit',
-		// },
 	],
 };

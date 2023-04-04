@@ -45,8 +45,7 @@ function HawbList({ data, setViewDoc, setItem }) {
 			pending_task_id     : values?.id,
 			state               : 'document_accepted',
 			file_name:
-			`Draft_Airway_Bill_For_Shipment_${serialId}_${new Date().getTime()}`
-			|| undefined,
+			`Draft_Airway_Bill_For_Shipment_${serialId}_${new Date().getTime()}`,
 		};
 		await updateDocument(payload, listAPi);
 		setShowApprove(null);

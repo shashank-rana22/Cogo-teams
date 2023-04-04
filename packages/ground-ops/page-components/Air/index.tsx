@@ -71,7 +71,8 @@ function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 						>
 							{' '}
 							<div
-								className={tab.key === activeTab ? styles.sub_container_click : styles.sub_container}
+								className={`${styles.container_click} 
+								${tab.key === activeTab ? styles.sub_container_click : styles.sub_container}`}
 							>
 								{tab.label}
 

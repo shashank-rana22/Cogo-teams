@@ -1,6 +1,7 @@
 import { Button, Stepper, RadioGroup } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import React, { useState } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import Layout from '../../Air/commons/Layout';
 import useCreateShipmentDocument from '../GenerateMawbDoc/useCreateShipmentDocument';
@@ -99,10 +100,9 @@ function FormContainer({
 						))}
 
 						<Button
-							onClick={() => setHawbDetails([
-								...hawbDetails,
-								{ id: new Date().getTime(), isNew: true },
-							])}
+							onClick={() => {
+								setHawbDetails((prev) => ([...prev, { id: uuid(), isNew: true }]));
+							}}
 							themeType="secondary"
 						>
 							<IcMPlus />
@@ -167,7 +167,7 @@ function FormContainer({
 											<Button
 												onClick={() => {
 													setGenerate(false);
-													if (edit) { setEdit(false); }
+													setEdit(false);
 												}}
 												themeType="secondary"
 												style={{ border: '1px solid #333' }}
