@@ -1,8 +1,8 @@
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../../../common/EmptyState';
-import OverviewCard from '../OverviewCard';
 
+import OverviewCard from './OverviewCard';
 import styles from './styles.module.css';
 
 function KamOverview(props) {

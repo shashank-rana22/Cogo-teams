@@ -2,10 +2,10 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
-import EmptyState from '../../../../../common/EmptyState';
-import useGetKamExpertiseCurrentConfig from '../../../hooks/useGetKamExpertiseCurrentConfig';
-import ConfigurationCard from '../ConfigurationCard';
-import LoadingState from '../LoadingState';
+import EmptyState from '../../../../common/EmptyState';
+import useGetKamExpertiseCurrentConfig from '../../hooks/useGetKamExpertiseCurrentConfig';
+import ConfigurationCard from '../ExpertiseConfigurations/ConfigurationCard';
+import LoadingState from '../ExpertiseConfigurations/LoadingState';
 
 import styles from './styles.module.css';
 
