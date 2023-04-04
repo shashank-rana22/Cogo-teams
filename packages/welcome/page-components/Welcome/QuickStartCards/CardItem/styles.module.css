@@ -1,8 +1,15 @@
 .container {
-	width: 30%;
+	min-width: 340px;
+	max-width: 30%;
+	height: 300px;
+	margin: 0 40px 20px 0;
 	background: #fffdee;
 	border: 1px solid #fff6b8;
 	border-radius: 16px;
+
+	@media (max-width: 800px) {
+		margin-right: 0;
+	}
 }
 
 .upperhalf {

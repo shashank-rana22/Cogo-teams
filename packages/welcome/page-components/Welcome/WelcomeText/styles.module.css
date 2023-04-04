@@ -1,8 +1,7 @@
 .container {
 	display: flex;
 	height: 100%;
-	margin-top: 12px;
-	margin-left: 56px;
+	margin: 12px 50px;
 }
 
 .text_container {
