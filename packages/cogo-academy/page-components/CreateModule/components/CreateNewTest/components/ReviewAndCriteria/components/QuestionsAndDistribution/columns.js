@@ -11,7 +11,7 @@ const getColumns = ({ errors, control }) => {
 			Header   : 'QUESTION SET NAME',
 			id       : 'question_set_name',
 			accessor : ({ name = '' }) => (
-				<section>
+				<section className={styles.question_set_name}>
 					{startCase(name) || '-'}
 				</section>
 			),
@@ -20,13 +20,15 @@ const getColumns = ({ errors, control }) => {
 			Header   : 'TOPIC',
 			id       : 'topic',
 			accessor : ({ topic = '-' }) => (
-				<section>
+				<section className={styles.topic}>
 					<Pill
 						key={topic}
 						size="sm"
-						color="blue"
+						color="#F3FAFA"
 					>
-						{startCase(topic)}
+						<div className={styles.topic_names}>
+							{startCase(topic)}
+						</div>
 					</Pill>
 				</section>
 			),
@@ -35,12 +37,12 @@ const getColumns = ({ errors, control }) => {
 			Header   : 'USER GROUPS',
 			id       : 'user_groups',
 			accessor : ({ audience_ids = [] }) => (
-				<section>
+				<section className={styles.usergroups}>
 					{audience_ids.map((audience_id) => (
 						<Pill
 							key={audience_id}
 							size="sm"
-							color="orange"
+							color="#FEF3E9"
 						>
 							{startCase(audience_id)}
 						</Pill>
@@ -53,7 +55,9 @@ const getColumns = ({ errors, control }) => {
 			Header   : 'AVAILABLE QUESTIONS',
 			id       : 'available_questions',
 			accessor : ({ non_case_study_question_count = 0 }) => (
-				<section>{non_case_study_question_count}</section>
+				<section className={styles.count}>
+					{non_case_study_question_count}
+				</section>
 			),
 		},
 		{
@@ -63,14 +67,17 @@ const getColumns = ({ errors, control }) => {
 				case_study_question_count
 				= 0,
 			}) => (
-				<section>{case_study_question_count}</section>
+				<section className={styles.case_study_question_count}>{case_study_question_count}</section>
 			),
 		},
 		{
 			Header: (
 				<div className={styles.content}>
 					<div className={styles.subcontent}>
-						<span>DISTRIBUTION</span>
+						<span className={styles.usable}>
+							DISTRIBUTION
+							<sup className={styles.sup}>*</sup>
+						</span>
 
 						<span className={styles.matter}>
 							Questions and cases from each Set
