@@ -1,7 +1,7 @@
-import { Button, Checkbox, cl } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import useGetControls from '../../../../configurations/filter-controls';
 
@@ -25,14 +25,12 @@ function FilterComponents({
 	setFilterVisible = () => {},
 	setAppliedFilters = () => {},
 	appliedFilters = {},
-	setActiveCardId = () => {},
 	setShowBotMessages = () => {},
-	showBotMessages = false,
 	isomniChannelAdmin = false,
+	tagOptions = [],
+	showBotMessages = false,
 }) {
-	const [botToggle, setBotToggle] = useState(false);
-
-	const filterControls = useGetControls(isomniChannelAdmin);
+	const filterControls = useGetControls({ isomniChannelAdmin, tagOptions, showBotMessages });
 
 	const defaultValues = getDefaultValues({ filters: appliedFilters, filterControls });
 
@@ -41,8 +39,13 @@ function FilterComponents({
 	} = useForm({ defaultValues });
 
 	const formValues = watch();
-	const { assigned_to = '' } = formValues || {};
-	const showElements = { assigned_agent: assigned_to === 'agent' };
+
+	const { assigned_to = '', observer = '' } = formValues || {};
+
+	const showElements = {
+		assigned_agent : assigned_to === 'agent',
+		chat_tags      : observer === 'chat_tags' || isomniChannelAdmin,
+	};
 
 	let filterValues = {};
 
@@ -53,20 +56,10 @@ function FilterComponents({
 	};
 
 	useEffect(() => {
-		if (botToggle) {
-			resetForm();
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [botToggle]);
-	useEffect(() => {
 		if (assigned_to === 'me') {
 			setValue('assigned_agent', '');
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [assigned_to]);
-	useEffect(() => {
-		setBotToggle(showBotMessages);
-	}, [showBotMessages]);
+	}, [assigned_to, setValue]);
 
 	Object.keys(formValues).forEach((item) => {
 		if (!isEmpty(formValues[item])) {
@@ -77,30 +70,14 @@ function FilterComponents({
 	const checkFiltersCount = Object.keys(filterValues).length;
 
 	const handleClick = () => {
-		setActiveCardId('');
 		setAppliedFilters(filterValues);
 		setFilterVisible(false);
-		setShowBotMessages(botToggle);
+		if (!isomniChannelAdmin) {
+			setShowBotMessages(filterValues?.observer === 'botSession');
+		}
 	};
 	const renderComp = (singleField) => {
 		const show = !(singleField?.name in showElements) || showElements[singleField?.name];
-		if (singleField?.onlyForAdmin) {
-			if (isomniChannelAdmin) {
-				return (
-					show && (
-						<Item
-							{...singleField}
-							control={control}
-							value={formValues[singleField.name]}
-							setValue={setValue}
-							error={errors[singleField.name]}
-							botToggle={botToggle}
-						/>
-					)
-				);
-			}
-			return null;
-		}
 		return (
 			show && (
 				<Item
@@ -109,7 +86,6 @@ function FilterComponents({
 					value={formValues[singleField.name]}
 					setValue={setValue}
 					error={errors[singleField.name]}
-					botToggle={botToggle}
 				/>
 			)
 		);
@@ -136,22 +112,8 @@ function FilterComponents({
 						) : null}
 				</div>
 			</div>
-			{!isomniChannelAdmin && (
-				<div className={styles.styled_flex}>
-					<Checkbox
-						name="closed"
-						size="sm"
-						onChange={() => setBotToggle((p) => !p)}
-						checked={botToggle}
-					/>
-					<div>
-						Closed
-					</div>
-				</div>
-			)}
-
 			{filterControls.map((field) => (
-				<div className={cl`${styles.filter_container} ${botToggle ? styles.disabled : ''}`} key={field.name}>
+				<div className={styles.filter_container} key={field.name}>
 					{renderComp(field)}
 				</div>
 			))}

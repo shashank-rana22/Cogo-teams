@@ -18,7 +18,13 @@ function GroundOps() {
 				<>
 					<Header />
 					<div style={{ marginTop: 20 }}>
-						<Air setGenerate={setGenerate} setItem={setItem} setViewDoc={setViewDoc} setEdit={setEdit} />
+						<Air
+							setGenerate={setGenerate}
+							setItem={setItem}
+							setViewDoc={setViewDoc}
+							edit={edit}
+							setEdit={setEdit}
+						/>
 					</div>
 				</>
 			)}

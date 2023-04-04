@@ -66,6 +66,7 @@
 
 .details {
 	display: flex;
+	gap: 4px;
 	align-items: center;
 	font-size: 14px;
 	font-weight: 500;
@@ -166,4 +167,15 @@
 .label {
 	font-size: 12;
 	font-weight: 500;
+}
+
+.sid {
+	display: flex;
+	gap: 4px;
+	font-size: 18px;
+}
+
+.job {
+	font-weight: 600;
+	color: #ed3726;
 }

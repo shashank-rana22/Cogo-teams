@@ -1,4 +1,5 @@
 import { Button, cl, Popover } from '@cogoport/components';
+import { IcMProfile, IcMRefresh } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -33,13 +34,20 @@ function Header({
 	isomniChannelAdmin = false,
 	setDisableButton = () => {},
 	disableButton = '',
+	updateRoomLoading = false,
+	updateUserRoom = () => {},
 }) {
 	const [isVisible, setIsVisible] = useState(false);
-	const {
-		chat_tags = [],
-	} = activeMessageCard || {};
+	const { chat_tags = [] } = activeMessageCard || {};
 
-	const { user_name = '', business_name = '', mobile_no = '', channel_type, user_type } = formattedData || {};
+	const {
+		user_name = '',
+		business_name = '',
+		mobile_no = '',
+		channel_type,
+		user_type,
+		search_user_name = '',
+	} = formattedData || {};
 
 	const getLowerLabel = () => {
 		if (user_name?.includes('anonymous')) {
@@ -77,25 +85,74 @@ function Header({
 			<Button
 				themeType="secondary"
 				size="md"
-				disabled={disableAssignButton || disableButton === 'auto_assign'}
+				disabled={
+                    disableAssignButton || disableButton === 'auto_assign'
+                }
 				className={styles.styled_buttons}
 				onClick={() => assignButtonAction('stop_and_assign')}
-				loading={showBotMessages && assignLoading && disableButton === 'stop_and_assign'}
+				loading={
+                    showBotMessages
+                    && assignLoading
+                    && disableButton === 'stop_and_assign'
+                }
 			>
 				Assign to me
 			</Button>
 			<Button
 				themeType="secondary"
 				size="md"
-				disabled={disableAssignButton || disableButton === 'stop_and_assign'}
+				disabled={
+                    disableAssignButton || disableButton === 'stop_and_assign'
+                }
 				className={styles.styled_buttons}
 				onClick={() => assignButtonAction('auto_assign')}
-				loading={showBotMessages && assignLoading && disableButton === 'auto_assign'}
+				loading={
+                    showBotMessages
+                    && assignLoading
+                    && disableButton === 'auto_assign'
+                }
 			>
 				Auto Assign
 			</Button>
 		</div>
 	);
+
+	const renderRightButton = () => (
+		<div>
+			{showBotMessages && isomniChannelAdmin ? (
+				<Popover
+					placement="bottom"
+					trigger="click"
+					render={renderButtonOption()}
+				>
+					<Button
+						themeType="secondary"
+						size="md"
+						className={styles.styled_button}
+					>
+						Assign To
+					</Button>
+				</Popover>
+			) : (
+				<Button
+					themeType="secondary"
+					size="md"
+					disabled={disableAssignButton}
+					className={styles.styled_button}
+					onClick={() => assignButtonAction('assign')}
+					loading={showBotMessages && assignLoading}
+				>
+					Assign
+				</Button>
+			)}
+		</div>
+	);
+
+	const handleUpdateUser = () => {
+		if (!updateRoomLoading) {
+			updateUserRoom(mobile_no);
+		}
+	};
 
 	return (
 		<div className={styles.container}>
@@ -118,8 +175,14 @@ function Header({
 						hasPermissionToEdit={hasPermissionToEdit}
 					/>
 				</div>
-				<div className={cl`${styles.flex} ${disableAssignButton ? styles.disabled_button : ''}`}>
-					{!isEmpty(filteredSpectators) && <Assignes filteredSpectators={filteredSpectators} />}
+				<div
+					className={cl`${styles.flex} ${
+						disableAssignButton ? styles.disabled_button : ''
+					}`}
+				>
+					{!isEmpty(filteredSpectators) && (
+						<Assignes filteredSpectators={filteredSpectators} />
+					)}
 					{activeAgentName && (
 						<div className={styles.active_agent}>
 							<AssigneeAvatar
@@ -129,31 +192,19 @@ function Header({
 							/>
 						</div>
 					)}
-					{showBotMessages && isomniChannelAdmin ? (
-						<Popover
-							placement="bottom"
-							trigger="click"
-							render={renderButtonOption()}
+					{renderRightButton()}
+					{isomniChannelAdmin && channel_type === 'whatsapp' && (
+						<div
+							role="button"
+							tabIndex="0"
+							className={cl`${styles.icon_div} ${updateRoomLoading ? styles.disable_icon : ''}`}
+							onClick={handleUpdateUser}
 						>
-							<Button
-								themeType="secondary"
-								size="md"
-								className={styles.styled_button}
-							>
-								Assign To
-							</Button>
-						</Popover>
-					) : (
-						<Button
-							themeType="secondary"
-							size="md"
-							disabled={disableAssignButton}
-							className={styles.styled_button}
-							onClick={() => assignButtonAction('assign')}
-							loading={showBotMessages && assignLoading}
-						>
-							Assign
-						</Button>
+							<IcMProfile width={15} height={15} fill="#221f20" />
+							<IcMRefresh className={cl`${styles.update_icon} 
+								${updateRoomLoading ? styles.disable_icon : ''}`}
+							/>
+						</div>
 					)}
 				</div>
 			</div>
@@ -161,7 +212,16 @@ function Header({
 				<div className={styles.flex}>
 					<UserAvatar type={channel_type} />
 					<div>
-						<div className={styles.name}>{startCase(user_name) || 'User'}</div>
+						<div className={styles.name}>
+							{startCase(user_name) || 'User'}
+							{channel_type === 'whatsapp' && (
+								<span className={styles.span_whatsapp_name}>
+									(
+									{startCase(search_user_name) || 'User'}
+									)
+								</span>
+							)}
+						</div>
 						<div className={styles.phone_number}>
 							{getLowerLabel()}
 						</div>

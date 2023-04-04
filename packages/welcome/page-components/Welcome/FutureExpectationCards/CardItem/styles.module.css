@@ -1,0 +1,48 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	min-width: 22%;
+	max-width: 22%;
+	padding: 32px 16px;
+	cursor: pointer;
+	background: #fffdee;
+	border: 1px solid #fff6b8;
+	border-radius: 16px;
+
+	@media (max-width: 800px) {
+		min-width: 100%;
+		max-width: 100%;
+	}
+}
+
+.upperpart {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 20px;
+}
+
+.icon {
+	&:hover {
+		transition: 0.5s;
+		transform: scale(1.2);
+	}
+}
+
+.lowerpart {
+	display: flex;
+	flex-direction: column;
+}
+
+.heading {
+	margin-bottom: 12px;
+	font-size: 18px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.description {
+	font-size: 12px;
+	font-weight: 400;
+	color: #221f20;
+}

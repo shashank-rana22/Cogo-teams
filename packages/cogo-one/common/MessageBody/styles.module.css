@@ -3,9 +3,19 @@
 	max-height: 250px;
 }
 
+.profanity_blur {
+	pointer-events: none;
+	filter: blur(20px);
+}
+
 .clickable_object {
 	display: block;
 	cursor: pointer;
+}
+
+.reduce_blur {
+	position: relative;
+	overflow: hidden;
 }
 
 .contact_card {
@@ -35,4 +45,19 @@
 
 .user_allocation {
 	margin-right: 10px;
+}
+
+.sensitive_content {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+
+.sensitive_text {
+	font-size: 10px;
+	color: #828282;
 }

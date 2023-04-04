@@ -264,7 +264,7 @@ const common_apis = {
 		{
 			api          : 'list_terms_and_conditions',
 			access_type  : 'private',
-			service_name : 'organization',
+			service_name : 'terms_and_condition',
 		},
 		{
 			api          : 'accept_credit_terms_and_condition',
@@ -401,6 +401,11 @@ const common_apis = {
 		},
 		{
 			api          : 'get_tax_numbers_data',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'update_organization_credit_request_status',
 			access_type  : 'private',
 			service_name : 'credit',
 		},
