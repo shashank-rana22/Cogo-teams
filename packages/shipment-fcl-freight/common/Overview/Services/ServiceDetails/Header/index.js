@@ -18,8 +18,6 @@ function Header({
 	refetchList = () => {},
 	shipmentData = {},
 }) {
-	console.log(heading, 'headingggg', state);
-
 	return (
 		<div className={cl`${state} ${styles.container}`}>
 			<div className={styles.heading_wrap}>

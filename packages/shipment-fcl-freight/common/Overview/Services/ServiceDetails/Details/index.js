@@ -7,9 +7,6 @@ import Item from './Item';
 import styles from './styles.module.css';
 
 function Details({ state = '', serviceItemsKey = [], serviceData = {} }) {
-	console.log(serviceData, 'serviceData');
-	console.log(serviceItemsKey, 'serviceItemsKey');
-
 	const [show, setShow] = useState(false);
 
 	const {

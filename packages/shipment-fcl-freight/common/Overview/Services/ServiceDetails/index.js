@@ -19,10 +19,6 @@ function ServiceDetails({
 	refetchServices = () => {},
 	primary_service = {},
 }) {
-	console.log(serviceName, 'serviceName');
-	console.log(servicesData, 'serviceData');
-	console.log(servicesList, 'servicesList');
-
 	const {
 		id = '',
 		service_type = '',
@@ -32,8 +28,6 @@ function ServiceDetails({
 		service_provider = '',
 		display_label = '',
 	} = servicesData?.[0];
-
-	console.log(id, service_type, state, 'extra Dataa');
 
 	const { source = '' } = shipmentData;
 	// const isHaulageAvailable = () => {
