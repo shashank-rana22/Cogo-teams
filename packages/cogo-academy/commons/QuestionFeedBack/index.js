@@ -9,12 +9,32 @@ function QuestionFeedBack() {
 			<h3>Feedbacks on this question</h3>
 			<div className={styles.pills_container}>
 				{[].map(() => (
-					<Pill className={styles.pill}>All 12</Pill>
+					<Pill className={styles.pill}>
+						All
+						{' '}
+						<span className={styles.pill_count}>12</span>
+					</Pill>
 				))}
-				<Pill className={styles.pill}>All 12</Pill>
-				<Pill className={styles.pill}>Questions 8</Pill>
-				<Pill className={styles.pill}>Answers 5</Pill>
-				<Pill className={styles.pill}>Both Questions & Answers 5</Pill>
+				<Pill className={styles.pill}>
+					All
+					{' '}
+					<span className={styles.pill_count}>12</span>
+				</Pill>
+				<Pill className={styles.pill}>
+					Questions
+					{' '}
+					<span className={styles.pill_count}>8</span>
+				</Pill>
+				<Pill className={styles.pill}>
+					Answers
+					{' '}
+					<span className={styles.pill_count}>5</span>
+				</Pill>
+				<Pill className={styles.pill}>
+					Both Questions & Answers
+					{' '}
+					<span className={styles.pill_count}>5</span>
+				</Pill>
 			</div>
 
 			<p className={styles.time_stamp}>27 MAR, 2023 08:00 PM</p>
