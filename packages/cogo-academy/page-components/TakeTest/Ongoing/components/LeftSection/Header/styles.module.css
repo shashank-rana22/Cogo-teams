@@ -1,6 +1,7 @@
 .main_container {
 	display: flex;
 	margin-bottom: 72px;
+	align-items: center;
 }
 
 .heading {
