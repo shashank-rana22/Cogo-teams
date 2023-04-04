@@ -45,7 +45,7 @@ function CreateExpenseForm({
 		<div>
 			{active === 'Expense Details'
 			&& (
-				<div style={{ marginTop: '60px' }}>
+				<div style={{ marginTop: '40px' }}>
 					<ExpenseDetailsForm
 						formData={formData}
 						setFormData={setFormData}
