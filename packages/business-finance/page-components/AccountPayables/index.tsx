@@ -3,14 +3,15 @@ import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import React, { useState, useEffect } from 'react';
 
+import AdvancePayment from './AdvancePayment';
 import Dashboard from './Dashboard';
 import useListCogoEntities from './Dashboard/hooks/useListCogoEntities';
 import styles from './styles.module.css';
 
 function AccountPayables() {
 	const { query, push } = useRouter();
-	const { activeTab } = query;
-	const [activePayables, setActivePayables] = useState(activeTab || 'dashboard');
+	// const { active_tab } = query;
+	const [activePayables, setActivePayables] = useState<string>(query.active_tab || 'dashboard');
 	const profile = useSelector((state) => state);
 	const { profile:{ partner } } = profile || {};
 	const { id: partnerId } = partner || {};
@@ -21,7 +22,7 @@ function AccountPayables() {
 		}
 		setActivePayables(v);
 		push(
-			'/business-finance/account-payables/[activeTab]',
+			'/business-finance/account-payables/[active_tab]',
 			`/business-finance/account-payables/${v}`,
 		);
 	};
@@ -71,6 +72,9 @@ function AccountPayables() {
 					</TabPanel>
 					<TabPanel name="invoices" title="INVOICES">
 						<h1>Invoices</h1>
+					</TabPanel>
+					<TabPanel name="advance-payment" title="Advance Payment">
+						<AdvancePayment />
 					</TabPanel>
 					<TabPanel name="payruns" title="PAYRUN">
 						<h1>Payruns</h1>
