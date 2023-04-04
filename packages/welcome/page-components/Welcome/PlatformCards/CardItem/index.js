@@ -1,11 +1,18 @@
-import { Button } from '@cogoport/components';
+import { Button, Popover } from '@cogoport/components';
 import { IcMInformation } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
 function CardItem({ data = {} }) {
+	const [visible, setVisible] = useState(false);
+
 	const { icon_url, heading, desc, login_id, password, href } = data;
+
+	const renderEyeButtonText = () => (
+		<div className={styles.eye_button_text}>More Details</div>
+	);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.leftpart}>
@@ -14,7 +21,11 @@ function CardItem({ data = {} }) {
 			<div className={styles.rightpart}>
 				<div className={styles.header_container}>
 					<div className={styles.heading}>{heading}</div>
-					<div className={styles.more_details_eye_button}><IcMInformation /></div>
+					<div className={styles.more_details_eye_button}>
+						<Popover placement="left" trigger="mouseenter" render={renderEyeButtonText()}>
+							<IcMInformation onClick={() => setVisible(!visible)} />
+						</Popover>
+					</div>
 				</div>
 				<div className={styles.details_container}>
 					<div className={styles.description}>{desc}</div>

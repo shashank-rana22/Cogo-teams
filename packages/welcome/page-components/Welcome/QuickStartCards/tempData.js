@@ -4,21 +4,30 @@ const data = [
 		heading  : 'Courses & Reading Material',
 		title    : 'CogoAcademy',
 		desc     : 'Here, we will be describing why one must use this link,and what they can expect here.',
-		href     : 'Visit CogoAcademy',
+		href     : {
+			label : 'Visit CogoAcademy',
+			link  : '/learning/faq',
+		},
 	},
 	{
 		icon_url : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/fe815422ac1e8452fb632963d08b89e4.png',
 		heading  : 'Frequently Answered Questions',
 		title    : 'CogoAssist',
 		desc     : 'Here, we will be describing why one must use this link,and what they can expect here.',
-		href     : 'Visit CogoAssist',
+		href     : {
+			label : 'Visit CogoAssist',
+			link  : '/learning/faq',
+		},
 	},
 	{
 		icon_url : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/fcdbcbfa0579ec5e2cab4fbdbcf3461b.png',
 		heading  : 'Self Assessment Module',
 		title    : 'Assessment Module',
 		desc     : 'Here, we will be describing why one must use this link,and what they can expect here.',
-		href     : 'Visit Module',
+		href     : {
+			label : 'Visit Module',
+			link  : '/learning/faq',
+		},
 	},
 ];
 

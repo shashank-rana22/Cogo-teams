@@ -1,11 +1,17 @@
 import { Button } from '@cogoport/components';
 import { IcMDocument } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function CardItem({ data = {} }) {
+	const { push } = useRouter();
+
 	const { icon_url, heading, title, desc, href } = data;
+
+	const { label, link } = href;
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.upperhalf}>
@@ -22,7 +28,7 @@ function CardItem({ data = {} }) {
 						<IcMDocument />
 						<span className={styles.tag_count}>1,301</span>
 					</div>
-					<Button size="md" themeType="linkUi">{href}</Button>
+					<Button size="md" themeType="linkUi" onClick={() => push(link, link)}>{label}</Button>
 				</div>
 			</div>
 		</div>
