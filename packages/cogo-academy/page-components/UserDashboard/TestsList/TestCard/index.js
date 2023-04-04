@@ -24,25 +24,8 @@ const CURRENT_STATUS_MAPPING = {
 	},
 };
 
-const handleRedirect = ({ test_id, redirect_to, push }) => {
-	const redirection_mapping = {
-		test: {
-			href : '/learning/tests/[test_id]',
-			as   : `/learning/tests/${test_id}`,
-		},
-		dashboard: {
-			href : '/learning/tests/dashboard/[test_id]',
-			as   : `/learning/tests/dashboard/${test_id}`,
-		},
-	};
-
-	const { href, as } = redirection_mapping[redirect_to];
-
-	push(href, as);
-};
-
 function TestCard({ test_card }) {
-	const { push } = useRouter();
+	const router = useRouter();
 
 	const {
 		name,
@@ -58,6 +41,22 @@ function TestCard({ test_card }) {
 
 	const { label = '', background = '' } = CURRENT_STATUS_MAPPING[current_status] || {};
 
+	const handleRedirect = ({ test_id, redirect_to }) => {
+		const redirection_mapping = {
+			test: {
+				href : '/learning/tests/[test_id]',
+				as   : `/learning/tests/${test_id}`,
+			},
+			dashboard: {
+				href : '/learning/tests/dashboard/[test_id]',
+				as   : `/learning/tests/dashboard/${test_id}`,
+			},
+		};
+
+		const { href, as } = redirection_mapping[redirect_to];
+		router.push(href, as);
+	};
+
 	return (
 		<div className={styles.main_container}>
 			<div>
@@ -72,10 +71,9 @@ function TestCard({ test_card }) {
 						<div key={topic_item} className={styles.topic_item}>{topic_item}</div>
 					))}
 				</div>
-
 				{status === 'published' ? (
 					<span
-						onClick={() => handleRedirect({ test_id: id, redirect_to: 'dashboard', push })}
+						onClick={() => handleRedirect({ test_id: id, redirect_to: 'dashboard' })}
 						role="presentation"
 						className={`${styles.check_results} ${styles.arrow}`}
 					>
@@ -96,7 +94,7 @@ function TestCard({ test_card }) {
 				)}
 			</div>
 
-			{current_status === 'active_test' || (current_status === 'completed' && attempts_count < maximum_attempts)
+			{current_status === 'active' || (current_status === 'completed' && attempts_count < maximum_attempts)
 				? (
 					<div
 						role="presentation"
