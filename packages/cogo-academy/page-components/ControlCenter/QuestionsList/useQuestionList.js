@@ -252,7 +252,8 @@ const useQuestionList = () => {
 					filters: {
 						...filters,
 						...FILTER_MAPPING[activeList],
-						q: query || undefined,
+						q                    : query || undefined,
+						is_feedback_positive : activeList === 'feedbacks' ? true : undefined,
 					},
 					page,
 					is_admin_view          : true,
@@ -261,7 +262,7 @@ const useQuestionList = () => {
 					faq_tags_data_required : ['published', 'draft']
 						.includes(FILTER_MAPPING[activeList].state),
 
-					faq_topics_data_required: ['published', 'draft']
+					faq_topics_data_required: ['published', 'draft', 'feedbacks']
 						.includes(FILTER_MAPPING[activeList].state),
 
 					author_data_required              : FILTER_MAPPING[activeList].state === 'requested',
