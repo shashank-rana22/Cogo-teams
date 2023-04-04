@@ -14,7 +14,7 @@ import useEndTest from './hooks/useEndTest';
 import useGetUserTestQuestion from './hooks/useGetUserTestQuestion';
 import styles from './styles.module.css';
 
-function Ongoing({ testData, page, setActiveState, currentQuestionId }) {
+function Ongoing({ testData, page, setActiveState, currentQuestionId, test_user_mapping_state }) {
 	const { guidelines = [] } = testData || {};
 
 	const [currentQuestion, setCurrentQuestion] = useState(page || 1);
@@ -33,7 +33,7 @@ function Ongoing({ testData, page, setActiveState, currentQuestionId }) {
 		test_user_mapping_id,
 		total_question_count,
 		user_appearance,
-	} = useGetUserTestQuestion({ currentQuestionId });
+	} = useGetUserTestQuestion({ currentQuestionId, test_user_mapping_state });
 
 	const { endTest, endTestLoading } = useEndTest({
 		setActiveState,
@@ -85,7 +85,6 @@ function Ongoing({ testData, page, setActiveState, currentQuestionId }) {
 				showLeaveTestModal={showLeaveTestModal}
 				setShowLeaveTestModal={setShowLeaveTestModal}
 				setActiveState={setActiveState}
-				data={question_data}
 				test_user_mapping_id={test_user_mapping_id}
 				user_appearance={user_appearance}
 				total_question_count={total_question_count}
@@ -98,9 +97,10 @@ function Ongoing({ testData, page, setActiveState, currentQuestionId }) {
 			<EndTimer
 				showTimeOverModal={showTimeOverModal}
 				setShowTimeOverModal={setShowTimeOverModal}
-				data={question_data}
 				test_user_mapping_id={test_user_mapping_id}
 				setActiveState={setActiveState}
+				user_appearance={user_appearance}
+				total_question_count={total_question_count}
 			/>
 		);
 	}
@@ -110,7 +110,6 @@ function Ongoing({ testData, page, setActiveState, currentQuestionId }) {
 			<SubmitTest
 				showSubmitTestModal={showSubmitTestModal}
 				setShowSubmitTestModal={setShowSubmitTestModal}
-				data={question_data}
 				setActiveState={setActiveState}
 				test_user_mapping_id={test_user_mapping_id}
 				user_appearance={user_appearance}
