@@ -1,88 +1,49 @@
-.title_black{
-	font-weight: normal;
-	font-size: 12px;
-	line-height: 20px;
-	text-align: center;
+.title_black {
 	display: inline-block;
 	max-width: 100%;
-	color: #000000;
+	font-size: 12px;
+	font-weight: normal;
+	line-height: 20px;
+	color: #000;
+	text-align: center;
+	text-align: left;
 	word-break: break-word;
 	word-wrap: break-word;
-	text-align: left;
 }
 
-.Row{
-	transition: 0.3s;
-	border-bottom: 1px solid #e0e0e0;
-	background: #ffffff;
-	padding: 16px 20px 8px 20px;
-	border-radius: 0px;
-	margin: 0;
-	display: flex !important;
-	justify-content: space-between !important;
-	cursor: pointer;
-
-	&:hover {
-		background: #f9f9f9;
-	}
-
-	outline: none;
-
-	&:focus-visible {
-		outline: auto blue;
-	}
-
-	@media (min-width: 768px) {
-		&.side {
-			background: #f9f9f9;
-			border: none;
-			padding: 8px 20px 0px 20px;
-
-			&:hover {
-				background: #ffffff;
-			}
-		}
-	}
-
-	&.expired {
-		background: #fbe6e6;
-	}
-
-	@media (max-width: 768px) {
-		border: 1px solid #e0e0e0;
-		padding: 8px 10px 4px 10px;
-	}
+.expired {
+	background: #fbe6e6;
 }
 
-.label{
+.label {
+	width: max-content;
 	font-size: 8px;
 	line-height: 12px;
-	text-transform: capitalize;
 	color: #4f4f4f;
-	width: max-content;
+	text-transform: capitalize;
+
 	@media (min-width: 768px) {
 		display: none;
 	}
 }
 
-
-.button_div{
+.button_div {
 	display: flex;
 	align-items: center;
 }
 
-.pill{
-	margin: 0px;
-	font-weight: normal;
+.pill {
+	padding: 2px 6px;
+	margin: 0;
+	overflow: hidden;
 	font-size: 12px;
+	font-weight: normal;
 	line-height: 16px;
-	color: #000000;
+	color: #000;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	overflow: hidden;
 	background: #fcedbf;
 	border-radius: 4px;
-	padding: 2px 6px;
 
 	&.expired {
 		background: #f7cdcd;
@@ -97,28 +58,29 @@
 	}
 
 	&.booking_placed {
-		background: rgb(230, 251, 233);
+		background: rgb(230 251 233);
 	}
 }
 
-.value{
-	margin: 0px;
-	font-weight: bold;
-	font-size: 12px;
-	line-height: 14px;
-	color: #000000;
+.value {
 	width: 100%;
+	margin: 0;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 14px;
+	color: #000;
 }
-.content{
+
+.content {
+	width: 300px;
 	padding: 12px 16px;
+	margin-bottom: 24px;
 	background: white;
 	border: 1px solid #e0e0e0;
 	border-radius: 10px;
-	margin-bottom: 24px;
-	width: 300px;
 }
 
-.total{
+.total {
 	font-weight: 500;
 	color: black;
 }

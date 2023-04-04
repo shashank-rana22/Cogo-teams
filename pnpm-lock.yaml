@@ -763,7 +763,7 @@ importers:
 
   packages/shipment-fcl-freight:
     specifiers:
-      '@cogoport/components': ^1.0.385
+      '@cogoport/components': ^1.0.395
       '@cogoport/constants': workspace:^0.1.0
       '@cogoport/context': workspace:^0.1.0
       '@cogoport/forms': workspace:^0.1.0
@@ -781,7 +781,7 @@ importers:
       prop-types: ^15.8.1
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.385_aydyy3gkshtlrnyh7fafj36que
+      '@cogoport/components': 1.0.395_aydyy3gkshtlrnyh7fafj36que
       '@cogoport/constants': link:../../common/constants
       '@cogoport/context': link:../../common/context
       '@cogoport/forms': link:../../common/forms

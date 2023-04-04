@@ -8,7 +8,6 @@ const useUpdateShipmentAdditionalService = ({
 	item = {},
 	refetch = () => {},
 	showIp = false,
-	setShowIp = () => {},
 }) => {
 	const [remarks, setRemarks] = useState(null);
 
@@ -28,7 +27,6 @@ const useUpdateShipmentAdditionalService = ({
 
 			if (res.status === 200) {
 				Toast.success('Service Updated successfully');
-				setShowIp(false);
 				setRemarks(null);
 				refetch();
 			}

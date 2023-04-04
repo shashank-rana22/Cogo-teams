@@ -39,10 +39,15 @@ function List({
 		refetch();
 	};
 
+	const refetchForUpdateSubService = () => {
+		setShowIp(false);
+		refetch();
+	};
+
 	const updateResponse = useUpdateShipmentAdditionalService({
 		item,
 		setShowIp,
-		refetch,
+		refetch: refetchForUpdateSubService,
 		showIp,
 	});
 
