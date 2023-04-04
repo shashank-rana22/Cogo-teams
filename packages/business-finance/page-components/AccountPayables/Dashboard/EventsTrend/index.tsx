@@ -43,8 +43,14 @@ function EventsTrend({ showData, setShowData, filtersData, activeEntity }:ItemPr
 					</div>
 					<Tooltip
 						placement="top"
-						content="Select an event to see the
-						occurrence of that event on Purchase Invoices in a given interval of time."
+						content={(
+							<div>
+								Select an event to see the
+								<br />
+								occurrence of that event on Purchase Invoices in a given
+								interval of time.
+							</div>
+						)}
 					>
 						<div className={styles.info_icon}>
 							<IcMInfo width="16px" height="16px" />
