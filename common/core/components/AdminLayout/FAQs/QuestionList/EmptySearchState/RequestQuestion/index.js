@@ -53,9 +53,7 @@ function RelatedQuestions({
 							placeholder="Enter Answer"
 						/>
 					</div>
-
 				</div>
-
 			</div>
 
 			<div className={styles.button_row}>
