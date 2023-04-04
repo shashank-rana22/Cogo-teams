@@ -1,8 +1,8 @@
-.container{
+.container {
 	margin-bottom: 24px;
 }
 
-.heading{
+.heading {
 	font-weight: 600;
 	font-size: 16px;
 	line-height: 19px;
@@ -11,7 +11,7 @@
 	margin-bottom: 16px;
 }
 
-.radio_wrapper{
+.radio_wrapper {
 	.core-ui-radio-root {
 		margin-bottom: 14px;
 		width: 100%;
@@ -36,7 +36,7 @@
 	}
 }
 
-.button_container{
+.button_container {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;

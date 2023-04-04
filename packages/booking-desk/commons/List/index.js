@@ -26,6 +26,7 @@ export default function List({ data, stateProps, Card, isCardAnimatable = false 
 				<div className={styles.list_container}>
 					{list.map((item) => (
 						<Card
+							key={item?.id}
 							item={item}
 							isCardAnimatable={isCardAnimatable}
 						/>

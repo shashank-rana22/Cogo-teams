@@ -16,13 +16,5 @@
 		.ui_carousel_container {
 			height: 100%;
 		}
-
-		.ui_carousel_arrow {
-			fill: #ee3425;
-		}
-
-		.ui_carousel_dots {
-			border: 1px solid #ee3425;
-		}
 	}
 }

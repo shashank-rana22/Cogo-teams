@@ -31,7 +31,7 @@ function Footer({
 		<div className={styles.buttons_container}>
 			<div className={styles.prev_and_next}>
 				<Button
-					type="previous"
+					type="button"
 					themeType="tertiary"
 					size="md"
 					disabled={announcementNumber === 0}
@@ -42,7 +42,7 @@ function Footer({
 					Previous
 				</Button>
 				<Button
-					type="next"
+					type="button"
 					button="type"
 					themeType="tertiary"
 					size="md"
@@ -65,7 +65,7 @@ function Footer({
 				</Button>
 				{redirection_url ? (
 					<Button
-						button="type"
+						type="button"
 						themeType="primary"
 						size="md"
 						onClick={handleTakeMeThere}
@@ -74,7 +74,7 @@ function Footer({
 					</Button>
 				) : (
 					<Button
-						button="type"
+						type="button"
 						themeType="primary"
 						size="md"
 						onClick={handleViewed}

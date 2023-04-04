@@ -57,10 +57,7 @@ function SupplierReallocation({
 				filters: {
 					account_type : 'service_provider',
 					kyc_status   : 'verified',
-					// service:
-					// 	serviceData?.[0]?.service_type === 'rail_domestic_freight_service'
-					// 		? serviceData?.[0]?.service_type?.split('_', 3)?.join('_')
-					// 		: serviceData?.[0]?.service_type?.split('_', 2)?.join('_'),
+					service      : serviceData?.[0]?.service_type?.split('_', 2)?.join('_'),
 				},
 			},
 		}),

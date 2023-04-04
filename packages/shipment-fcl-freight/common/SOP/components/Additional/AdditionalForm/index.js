@@ -13,7 +13,11 @@ const EMPTY_VALUES = {
 	remarks  : '',
 	document : '',
 };
-function AdditionalForm({ setShowForm = () => {}, shipment_ids = {}, getProcedureTrigger = () => {} }) {
+function AdditionalForm({
+	setShowForm = () => {},
+	shipment_ids = {},
+	getProcedureTrigger = () => {},
+}) {
 	const { shipment_id, organization_id, procedure_id } = shipment_ids;
 
 	const afterUpdateOrCreateRefetch = () => {

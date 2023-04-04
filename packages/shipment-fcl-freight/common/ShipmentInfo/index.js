@@ -16,6 +16,7 @@ function ShipmentInfo() {
 		<div className={styles.container}>
 			<Breadcrumb>
 				<Breadcrumb.Item label={<a href="page number">Shipments</a>} />
+				<Breadcrumb.Item label={`Shipment ID #${shipment_data?.serial_id}`} />
 			</Breadcrumb>
 			{shipment_data?.source ? <Tags size="sm">{sourceText}</Tags> : null}
 			{shipment_data?.is_cogo_assured ? (

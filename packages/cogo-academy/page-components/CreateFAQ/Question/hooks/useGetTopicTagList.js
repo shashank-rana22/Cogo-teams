@@ -12,28 +12,16 @@ const useGetTopicTagList = () => {
 	const [{ data: topicsData, loading:listTopicsLoading }, triggerTopics] = useRequest({
 		method : 'get',
 		url    : '/list_faq_topics',
-		params : {
-			page_limit               : 100000,
-			pagination_data_required : false,
-		},
 	}, { manual: true });
 
 	const [{ data: tagsData, loading:listTagsLoading }, triggerTags] = useRequest({
 		method : 'get',
 		url    : '/list_faq_tags',
-		params : {
-			page_limit               : 100000,
-			pagination_data_required : false,
-		},
 	}, { manual: true });
 
 	const [{ data: audienceData, loading:listAudienceLoading }, triggerAudiences] = useRequest({
 		method : 'get',
 		url    : '/list_faq_audiences',
-		params : {
-			page_limit               : 100000,
-			pagination_data_required : false,
-		},
 	}, { manual: true });
 
 	const fetchTopics = useCallback(async () => {
@@ -42,6 +30,7 @@ const useGetTopicTagList = () => {
 				params: {
 					page_limit               : 100000,
 					pagination_data_required : false,
+					is_admin_view            : true,
 				},
 			});
 		} catch (error) {

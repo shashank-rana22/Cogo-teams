@@ -124,6 +124,7 @@ function ShipmentDetails({ formData = {}, whiteout = false }:Props) {
 						style={{
 							fontSize      : 14.5,
 							textTransform : 'uppercase',
+							whiteSpace    : 'pre-wrap',
 						}}
 					>
 						{formData.accountingInformation}

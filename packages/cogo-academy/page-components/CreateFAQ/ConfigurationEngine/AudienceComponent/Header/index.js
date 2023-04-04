@@ -1,5 +1,6 @@
 import { TabPanel, Tabs, Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { startCase } from '@cogoport/utils';
 
 import SearchInput from '../../../../../commons/SearchInput';
 
@@ -12,7 +13,6 @@ function Header(
 		setSearchAudienceInput = () => {},
 		setConfigurationPage = () => {},
 		setActiveAudience = () => {},
-		// reset,
 	},
 ) {
 	const router = useRouter();
@@ -23,7 +23,6 @@ function Header(
 			'/learning/faq/create/configuration?create=audience',
 		);
 		setConfigurationPage('audience');
-		// reset();
 	};
 
 	return (
@@ -40,13 +39,13 @@ function Header(
 							themeType="tertiary"
 							onChange={setActiveAudience}
 						>
-							<TabPanel name="active" title="Active">
-								{/* <div>Active</div> */}
-							</TabPanel>
-
-							<TabPanel name="inactive" title="Inactive">
-								{/* <div>Inactive</div> */}
-							</TabPanel>
+							{['active', 'inactive'].map((tab) => (
+								<TabPanel
+									key={tab}
+									name={tab}
+									title={startCase(tab)}
+								/>
+							))}
 
 						</Tabs>
 					</div>

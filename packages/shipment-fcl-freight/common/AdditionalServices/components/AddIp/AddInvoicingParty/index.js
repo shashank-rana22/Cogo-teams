@@ -23,7 +23,6 @@ function AddInvoicingParty({
 	primary_service,
 	updateInvoicingParty = () => {},
 	isIE = false,
-	source,
 }) {
 	const [activeComponentKey, setActiveComponentKey] = useState(() => RADIO_GROUP_OPTIONS[0].value);
 
@@ -34,14 +33,12 @@ function AddInvoicingParty({
 			updateInvoicingParty,
 			bookingType  : 'self',
 			isIE,
-			source,
 		},
 		invoice_to_trade_partner: {
 			organization : organizationDetails,
 			primary_service,
 			updateInvoicingParty,
 			bookingType  : 'paying_party',
-			source,
 		},
 	};
 
@@ -54,6 +51,7 @@ function AddInvoicingParty({
 				options={RADIO_GROUP_OPTIONS}
 				value={activeComponentKey}
 				onChange={setActiveComponentKey}
+				style={{ justifyContent: 'space-around' }}
 			/>
 
 			<ActiveComponent key={activeComponentKey} {...activeComponentProps} />

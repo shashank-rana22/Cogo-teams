@@ -2,7 +2,12 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
-const useOceanRoute = ({ setMapPoints = () => {}, list = {} }) => {
+const useOceanRoute = ({
+	setMapPoints = () => {},
+	container_no = [],
+	saas_container_subscription_id = '',
+	type = '',
+}) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/get_container_sea_route',
 		method : 'POST',
@@ -11,13 +16,11 @@ const useOceanRoute = ({ setMapPoints = () => {}, list = {} }) => {
 	const getAllOceanRoutes = useCallback(() => {
 		(async () => {
 			try {
-				const container_no = list?.container_details?.map((c) => c?.container_no)
-					.flat();
 				const request_data = {
 					saas_container_subscriptions: [
 						{
-							saas_container_subscription_id : list?.id,
-							type                           : list?.type,
+							saas_container_subscription_id,
+							type,
 							container_no,
 						},
 					],
@@ -44,13 +47,13 @@ const useOceanRoute = ({ setMapPoints = () => {}, list = {} }) => {
 				return [];
 			}
 		})();
-	}, [list?.container_details, list?.id, list?.type, trigger, setMapPoints]);
+	}, [saas_container_subscription_id, type, trigger, setMapPoints]);
 
 	useEffect(() => {
-		if (!isEmpty(list)) {
+		if (!isEmpty(saas_container_subscription_id)) {
 			getAllOceanRoutes();
 		}
-	}, [getAllOceanRoutes, list]);
+	}, [getAllOceanRoutes, saas_container_subscription_id]);
 
 	return {
 		routesLoading: loading,

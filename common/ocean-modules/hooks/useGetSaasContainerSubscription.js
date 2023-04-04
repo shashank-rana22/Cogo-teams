@@ -11,7 +11,7 @@ const useGetSaasContainerSubscription = ({
 		method : 'GET',
 	}, { manual: true });
 
-	const listShipments = useCallback(() => {
+	const getSaasContainerSubscription = useCallback(() => {
 		(async () => {
 			try {
 				await trigger({
@@ -26,8 +26,8 @@ const useGetSaasContainerSubscription = ({
 	}, [shipmentId, trigger]);
 
 	useEffect(() => {
-		listShipments();
-	}, [listShipments]);
+		getSaasContainerSubscription();
+	}, [getSaasContainerSubscription]);
 
 	return {
 		loading,

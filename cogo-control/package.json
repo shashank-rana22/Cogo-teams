@@ -33,6 +33,7 @@
     "@cogoport/globalization" : "workspace:^0.0.1",
     "@cogoport/store": "workspace:0.1.0",
     "@cogoport/supply-dashboards": "workspace:0.1.0",
+    "@cogoport/vendor-rm": "workspace:0.1.0",
     "@cogoport/translate": "workspace:0.1.0",
     "@cogoport/shipment-fcl-freight": "workspace:0.1.0",
     "@cogoport/ocean-modules": "workspace:0.1.0",

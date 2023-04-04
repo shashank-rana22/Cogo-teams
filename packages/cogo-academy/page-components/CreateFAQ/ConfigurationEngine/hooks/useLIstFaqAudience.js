@@ -1,6 +1,7 @@
+import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 function useLIstFaqAudience({ searchAudienceInput = '' }) {
 	const [audienceCurrentPage, setAudienceCurrentPage] = useState(1);
@@ -10,11 +11,12 @@ function useLIstFaqAudience({ searchAudienceInput = '' }) {
 		method : 'get',
 		url    : '/list_faq_audiences',
 	}, { manual: true });
+
 	useEffect(() => {
 		debounceQuery(searchAudienceInput);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchAudienceInput]);
-	const fetchFaqAudience = async () => {
+	}, [debounceQuery, searchAudienceInput]);
+
+	const fetchFaqAudience = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -24,14 +26,13 @@ function useLIstFaqAudience({ searchAudienceInput = '' }) {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			Toast?.error(err?.message);
 		}
-	};
+	}, [activeAudience, audienceCurrentPage, query, trigger]);
 
 	useEffect(
 		() => { fetchFaqAudience(); },
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[activeAudience, setAudienceCurrentPage, query],
+		[activeAudience, audienceCurrentPage, fetchFaqAudience, query],
 	);
 
 	return {

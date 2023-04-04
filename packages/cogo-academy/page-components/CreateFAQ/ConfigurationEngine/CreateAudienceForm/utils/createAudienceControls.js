@@ -72,6 +72,9 @@ const createQuestionControls = ({ watchFunctions, entity_options, countryOptions
 			type        : 'select',
 			placeholder : 'Select Persona',
 			options     : PERSONA_OPTIONS,
+			rules       : {
+				required: 'Persona is required',
+			},
 		},
 
 		{

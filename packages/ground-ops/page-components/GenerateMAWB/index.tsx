@@ -149,7 +149,7 @@ function GenerateMAWB({
 				* Number(dimensionObj.width) * 2.54
 				* Number(dimensionObj.height) * 2.54
 				* Number(dimensionObj.packages_count);
-			} else if (dimensionObj.unit === 'cm') {
+			} else if (dimensionObj.unit === 'cms') {
 				totalVolume
 				+= Number(dimensionObj.length)
 				* Number(dimensionObj.width)

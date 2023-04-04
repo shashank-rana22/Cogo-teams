@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import getApiErrorString from '../utils/getApiErrorString';
 
-const useListServiceChargeCodes = ({ shipment_id, services, isSeller = false }) => {
+const useListServiceChargeCodes = ({ shipmentId, services, isSeller = false }) => {
 	const [filters, setFilters] = useState({
 		name         : undefined,
 		service_type : undefined,
@@ -19,20 +19,20 @@ const useListServiceChargeCodes = ({ shipment_id, services, isSeller = false }) 
 	useEffect(() => {
 		(async () => {
 			try {
-				if (shipment_id) {
+				if (shipmentId) {
 					await trigger({
-						params: { filters: { shipment_id } },
+						params: { filters: { shipment_id: shipmentId } },
 					});
 				}
 			} catch (err) {
 				Toast.error(getApiErrorString(err));
 			}
 		})();
-	}, [trigger, shipment_id]);
+	}, [trigger, shipmentId]);
 
 	let intialList = (data?.list || []).map((item) => ({
 		...item,
-		shipment_id,
+		shipmentId,
 		services,
 		isSeller,
 		name: `${item.code} ${startCase(item.name)}`,

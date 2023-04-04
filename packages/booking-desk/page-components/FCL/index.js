@@ -23,7 +23,7 @@ export default function FCLDesk({ stateProps = {} }) {
 				<ScopeSelect defaultValues={stateProps.scopeFilters} />
 			</div>
 
-			<Filters stateProps={stateProps} tabs={tabs} />
+			<Filters stateProps={stateProps} />
 
 			<Tabs tabs={tabs} stateProps={stateProps} />
 

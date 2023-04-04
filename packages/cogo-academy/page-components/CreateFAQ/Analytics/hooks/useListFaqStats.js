@@ -31,6 +31,8 @@ function useListFaqStats() {
 					filters: {
 						created_at_greater_than : formatStartDate || undefined,
 						created_at_less_than    : formatEndDate || undefined,
+						state                   : 'published',
+						status                  : 'active',
 
 					},
 					page_limit                          : 1000 || undefined,

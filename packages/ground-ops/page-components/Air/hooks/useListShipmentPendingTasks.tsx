@@ -46,6 +46,11 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {}, relev
 					documentState       : 'document_accepted',
 					isDocDataRequired   : true,
 				},
+				final_awb: {
+					assignedStakeholder : 'service_ops2_docs',
+					status              : 'pending',
+					task                : ['upload_airway_bill'],
+				},
 			};
 			if (searchValue) {
 				setPage(1);

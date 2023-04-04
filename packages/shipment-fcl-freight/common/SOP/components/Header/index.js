@@ -2,7 +2,11 @@ import { Button } from '@cogoport/components';
 
 import { header_container, label, value, last_update_details } from './styles.module.css';
 
-function Header({ setShowHistory = () => {}, showHistory = false, auditsData = {} }) {
+function Header({
+	setShowHistory = () => {},
+	showHistory = false,
+	auditsData = {},
+}) {
 	const formatDate = (val) => {
 		const findIndex = (val || '').indexOf('T');
 		return val.substring(0, findIndex);

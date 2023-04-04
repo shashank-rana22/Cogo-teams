@@ -1,5 +1,5 @@
 import { Popover, Button, Select, Modal } from '@cogoport/components';
-import { SelectController, TextAreaController } from '@cogoport/forms';
+import { SelectController, TextAreaController, useForm } from '@cogoport/forms';
 import { useState } from 'react';
 
 import useCreateRaiseQuery from '../../../hooks/useCreateRaiseQuery';
@@ -19,9 +19,21 @@ function Header({
 
 	const { query_type, remarks } = controls;
 
-	const { loading, handleFormSubmit, handleSubmit, reset, errors, control } = useCreateRaiseQuery({
-		setShowModal,
-		setIsOpen,
+	const {
+		control,
+		reset,
+		formState: { errors },
+		handleSubmit,
+	} = useForm({});
+
+	const handleRaisedQuery = () => {
+		setShowModal(true);
+		setIsOpen(false);
+		reset();
+	};
+
+	const { loading, handleFormSubmit } = useCreateRaiseQuery({
+		handleRaisedQuery,
 		shipmentId,
 	});
 

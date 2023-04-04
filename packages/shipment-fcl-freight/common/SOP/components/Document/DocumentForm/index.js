@@ -18,10 +18,16 @@ const DOCUMENT_FORM_FIELDS = ['bl_category', 'bl_preference', 'preferred_mode_of
 
 function DocumentForm({
 	sop_detail = {},
-	setShowForm = () => {}, shipment_ids = {}, showForm = '', instruction_id = '',
-	getProcedureTrigger = () => {}, auditsTrigger = () => {},
+	setShowForm = () => {},
+	shipment_ids = {},
+	showForm = '',
+	instruction_id = '',
+	getProcedureTrigger = () => {},
+	auditsTrigger = () => {},
+	primary_service = {},
 }) {
 	const { shipment_id, organization_id, procedure_id } = shipment_ids;
+	const { trade_type } = primary_service || {};
 
 	const afterUpdateOrCreateRefetch = () => {
 		setShowForm(false);
@@ -31,7 +37,7 @@ function DocumentForm({
 
 	const { data: orgData, loading } = useGetShipmentOperatingProcedure({
 		defaultParams  : { org_data_required: true },
-		defaultFilters : { service_type: 'fcl_freight' },
+		defaultFilters : { service_type: 'fcl_freight', trade_type },
 		shipment_id,
 		organization_id,
 	});
@@ -58,11 +64,10 @@ function DocumentForm({
 
 	const defaultValues = {};
 
-	DOCUMENT_FORM_FIELDS.forEach((k) => {
-		if (sop_detail[k]) defaultValues[k] = sop_detail[k];
-	});
+	DOCUMENT_FORM_FIELDS.forEach((k) => { if (sop_detail[k]) defaultValues[k] = sop_detail[k]; });
 
 	const { control, watch, handleSubmit, formState:{ errors = {} } } = useForm({ defaultValues });
+
 	const watchModeOfExecution = watch('preferred_mode_of_document_execution');
 
 	const onSubmit = (formValues) => {
@@ -71,6 +76,7 @@ function DocumentForm({
 			updateTrigger(params);
 			return;
 		}
+
 		const params = getCreateInstructionParams({ formValues });
 		createTrigger(params);
 	};

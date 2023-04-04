@@ -14,9 +14,14 @@ function Body({ list = [], loading = false }) {
 
 	const listToRender = list?.[0]?.data?.[0]?.tracking_data;
 
+	const container_no = list?.[0]?.container_details?.map((c) => c?.container_no)
+		.flat();
+
 	const { routesLoading } = useOceanRoute({
 		setMapPoints,
-		list: list?.[0],
+		container_no,
+		saas_container_subscription_id : list?.[0]?.id,
+		type                           : list?.[0]?.type,
 	});
 
 	useEffect(() => {

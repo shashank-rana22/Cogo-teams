@@ -1,21 +1,21 @@
-.container{
+.container {
     padding: 10px;
     
-    label{
-        font-weight: 700;
+    label {
         margin-bottom: 8px;
+        font-weight: 700;
     }
 
-    :global{
-        .ui_checkbox_container{
+    :global {
+        .ui_checkbox_container {
             padding: 0 !important;
         }
     }
 }
-.text{
+.text {
     color: rgb(203, 100, 100);
-    text-align: left;
     font-size: 12px;
-    line-height: 1.4;
+    text-align: left;
     margin-bottom: 12px;
+    line-height: 1.4;
 }

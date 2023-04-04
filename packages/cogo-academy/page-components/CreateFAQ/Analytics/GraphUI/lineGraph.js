@@ -60,7 +60,7 @@ function LineGraph({ graphData }) {
 					itemsSpacing      : 120,
 					itemDirection     : 'left-to-right',
 					itemWidth         : 90,
-					itemHeight        : 90,
+					itemHeight        : -40,
 					itemOpacity       : 0.75,
 					symbolSize        : 16,
 					symbolShape       : 'circle',

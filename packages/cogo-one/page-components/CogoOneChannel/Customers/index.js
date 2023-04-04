@@ -2,7 +2,11 @@ import { Tabs, TabPanel, Toggle } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import useReplyMail from '../../../hooks/useReplyMail';
+
 import InactiveModal from './InactiveModal';
+import MailList from './MailList';
+import MailModal from './MailList/MailModal';
 import MessageList from './MessageList';
 import NewWhatsappMessage from './NewWhatsappMessage';
 import styles from './styles.module.css';
@@ -35,11 +39,24 @@ function Customers({
 	showBotMessages = false,
 	setShowBotMessages,
 	setShowDialModal = () => {},
+	activeMail = {},
+	setActiveMail = () => {},
+	userId = '',
 	handleScroll = () => {},
 	setModalType = () => {},
 	modalType = {},
+	tagOptions = [],
+	mailProps = {},
 }) {
+	const { emailAddress, buttonType, setButtonType } = mailProps;
 	const [isChecked, setIsChecked] = useState(false);
+	const [attachments, setAttachments] = useState([]);
+
+	const {
+		replyMailApi = () => {},
+		replyLoading = false,
+	} = useReplyMail(mailProps);
+
 	const onChangeToggle = () => {
 		if (toggleStatus) {
 			setOpenModal(true);
@@ -52,6 +69,54 @@ function Customers({
 		setIsChecked(!isChecked);
 	};
 	const unReadChatsCountDisplay = Number(unReadChatsCount || 0) > 49 ? '49+' : unReadChatsCount;
+
+	const COMPONENT_MAPPING = {
+		message : MessageList,
+		voice   : VoiceList,
+		mail    : MailList,
+	};
+	const Component = COMPONENT_MAPPING[activeTab] || null;
+
+	const messageProps = {
+		isomniChannelAdmin,
+		messagesList,
+		setActiveMessage,
+		setSearchValue,
+		searchValue,
+		filterVisible,
+		setFilterVisible,
+		setAppliedFilters,
+		appliedFilters,
+		messagesLoading,
+		activeCardId,
+		setActiveCardId,
+		showBotMessages,
+		setShowBotMessages,
+		handleScroll,
+		setModalType,
+		modalType,
+		tagOptions,
+	};
+
+	const voiceProps = {
+		setActiveVoiceCard,
+		activeVoiceCard,
+		activeTab,
+		setShowDialModal,
+	};
+
+	const emailprops = {
+		activeMail,
+		setActiveMail,
+		emailAddress,
+	};
+
+	const componentProps = {
+		message : { ...messageProps },
+		voice   : { ...voiceProps },
+		mail    : { ...emailprops },
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.filters_container}>
@@ -94,38 +159,11 @@ function Customers({
 				>
 					<TabPanel name="message" title="Chats" badge={unReadChatsCount !== 0 && unReadChatsCountDisplay} />
 					<TabPanel name="voice" title="Voice" />
+					<TabPanel name="mail" title="Mail" />
 				</Tabs>
 			</div>
-
-			{activeTab === 'message' && (
-				<MessageList
-					isomniChannelAdmin={isomniChannelAdmin}
-					messagesList={messagesList}
-					setActiveMessage={setActiveMessage}
-					setSearchValue={setSearchValue}
-					searchValue={searchValue}
-					filterVisible={filterVisible}
-					setFilterVisible={setFilterVisible}
-					setAppliedFilters={setAppliedFilters}
-					appliedFilters={appliedFilters}
-					messagesLoading={messagesLoading}
-					activeCardId={activeCardId}
-					setActiveCardId={setActiveCardId}
-					showBotMessages={showBotMessages}
-					setShowBotMessages={setShowBotMessages}
-					handleScroll={handleScroll}
-					setModalType={setModalType}
-					modalType={modalType}
-				/>
-			)}
-
-			{activeTab === 'voice' && (
-				<VoiceList
-					setActiveVoiceCard={setActiveVoiceCard}
-					activeVoiceCard={activeVoiceCard}
-					activeTab={activeTab}
-					setShowDialModal={setShowDialModal}
-				/>
+			{Component && (
+				<Component key={activeTab} {...(componentProps[activeTab] || {})} />
 			)}
 
 			{openModal && (
@@ -138,7 +176,6 @@ function Customers({
 				/>
 			)}
 			<div className={styles.wrapper}>
-
 				<input
 					id="plus_checkbox"
 					type="checkbox"
@@ -166,6 +203,15 @@ function Customers({
 								/>
 
 							</div>
+
+							<div className={`${styles.action} ${styles.mail_icon}`}>
+								<img
+									onClick={() => setButtonType('send_mail')}
+									src="https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/email_icon_blue_2.svg"
+									alt="gmail icon"
+									role="presentation"
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -174,6 +220,18 @@ function Customers({
 				<NewWhatsappMessage
 					setModalType={setModalType}
 					modalType={modalType}
+				/>
+			)}
+
+			{buttonType && (
+				<MailModal
+					mailProps={mailProps}
+					userId={userId}
+					attachments={attachments}
+					setAttachments={setAttachments}
+					activeMail={activeMail}
+					replyMailApi={replyMailApi}
+					replyLoading={replyLoading}
 				/>
 			)}
 		</div>

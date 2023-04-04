@@ -11,10 +11,8 @@ function Internal({ data = [], setAddPoc = () => { }, loading = false }) {
 
 	return (
 		<div>
-
 			{loading ? <Loader /> : (
 				<>
-					{' '}
 					<div className={styles.header}>
 						<div className={styles.heading}>Internal : Cogoport</div>
 						<div>

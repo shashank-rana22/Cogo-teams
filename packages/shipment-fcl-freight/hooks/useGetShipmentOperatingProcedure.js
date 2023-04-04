@@ -1,5 +1,8 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
+
+import getApiErrorString from '../utils/getApiErrorString';
 
 const useGetShipmentOperatingProcedure = ({
 	shipment_id,
@@ -10,42 +13,37 @@ const useGetShipmentOperatingProcedure = ({
 	const [apiData, setApiData] = useState({});
 	const [filters, setFilters] = useState({});
 
-	const [{ loading }, trigger] = useRequest('get_shipment_operating_procedure', { manual: true });
+	const [{ loading }, trigger] = useRequest({
+		url    : 'get_shipment_operating_procedure',
+		params : {
+			filters: {
+				organization_id,
+				mode: 'ocean',
+				shipment_id,
+				...defaultFilters,
+				...filters,
+			},
+			org_data_required: false,
+			...defaultParams,
+		},
+	}, { manual: true });
 
-	const apiTrigger = useCallback(() => {
-		(
-			async () => {
-				try {
-					const res = await trigger({
-						params: {
-							filters: {
-								organization_id,
-								mode       : 'ocean',
-								shipment_id,
-								trade_type : 'import',
-								...defaultFilters,
-								...filters,
-							},
-							org_data_required: false,
-							...defaultParams,
-						},
-					});
+	const apiTrigger = useCallback(async () => {
+		try {
+			const res = await trigger();
 
-					setApiData(res.data || {});
-				} catch (err) {
-					setApiData({});
-					console.log({ err });
-				}
-			}
-		)();
-	}, [organization_id,
-		JSON.stringify(filters),
-		shipment_id,
-		 trigger]);
+			setApiData(res.data || {});
+		} catch (err) {
+			setApiData({});
 
-	useEffect(() => {
-		apiTrigger();
-	}, [apiTrigger]);
+			Toast.error(getApiErrorString(err));
+		}
+	}, [trigger]);
+
+	useEffect(
+		() => { apiTrigger(); },
+		[apiTrigger, filters],
+	);
 
 	return {
 		loading,
@@ -56,4 +54,3 @@ const useGetShipmentOperatingProcedure = ({
 	};
 };
 export default useGetShipmentOperatingProcedure;
-// TODO

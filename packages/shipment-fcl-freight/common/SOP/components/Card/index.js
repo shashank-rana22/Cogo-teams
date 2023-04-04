@@ -3,7 +3,11 @@ import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-function Card({ children = null, label = 'Card', defaultOpen = false }) {
+function Card({
+	children = null,
+	label = 'Card',
+	defaultOpen = false,
+}) {
 	const [open, setOpen] = useState(defaultOpen);
 
 	useEffect(() => {

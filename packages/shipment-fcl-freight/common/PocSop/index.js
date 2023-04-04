@@ -3,13 +3,13 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMArrowRotateLeft, IcMArrowRotateRight } from '@cogoport/icons-react';
 import { useState, useContext } from 'react';
 
-import POC from '../POC';
-import SOP from '../SOP';
+import Poc from '../POC';
+import Sop from '../SOP';
 
 import styles from './styles.module.css';
 
 function SopAndPoc() {
-	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
+	const { shipment_data, servicesList, primary_service } = useContext(ShipmentDetailContext);
 
 	const [activeTab, setActiveTab] = useState('poc');
 	const [show, setShow] = useState(false);
@@ -60,12 +60,12 @@ function SopAndPoc() {
 							>
 								<TabPanel name="poc" title="POC">
 									<div style={{ height: '80vh', overflow: 'scroll' }}>
-										<POC shipment_data={shipment_data} servicesList={servicesList} />
+										<Poc shipment_data={shipment_data} servicesList={servicesList} />
 									</div>
 								</TabPanel>
 								<TabPanel name="sop" title="SOP">
 									<div style={{ height: '80vh', overflow: 'scroll' }}>
-										<SOP shipment_data={shipment_data} />
+										<Sop shipment_data={shipment_data} primary_service={primary_service} />
 									</div>
 								</TabPanel>
 							</Tabs>

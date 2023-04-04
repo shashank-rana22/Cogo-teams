@@ -1,0 +1,25 @@
+.container {
+	display: flex;
+	justify-content: center;
+	margin-top: 80px;
+}
+
+.success {
+	width: 400px;
+	height: 200px;
+	margin: auto;
+}
+
+.reject {
+	width: 400px;
+	height: 200px;
+	margin: auto;
+}
+
+.failed {
+	color: #ee3425;
+}
+
+.approve_reject {
+	color: #f68b21;
+}

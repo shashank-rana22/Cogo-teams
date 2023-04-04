@@ -55,10 +55,9 @@ function CreateForm(props) {
 	}, [general.query?.id]);
 
 	useEffect(() => {
-		setValue('name', data?.name);
+		setValue('name', data?.display_name);
 		setValue('description', data?.description);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [loading]);
+	}, [data?.description, data?.display_name, loading, setValue]);
 
 	return (
 		<div className={styles.container} style={style}>
@@ -74,7 +73,7 @@ function CreateForm(props) {
 			{source !== 'create' ? (
 				<div>
 					<div className={styles.add_topic}>
-						Add
+						{id ? 'Update' : 'Add'}
 						{' '}
 						{startCase(queryValue)}
 					</div>

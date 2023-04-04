@@ -140,14 +140,17 @@ function TopicList({
 								))}
 							</div>
 
-							<div className={styles.pagination_container}>
-								<Pagination
-									totalItems={paginationData?.total_count || 0}
-									currentPage={page || 1}
-									pageSize={paginationData?.page_limit}
-									onPageChange={setPage}
-								/>
-							</div>
+							{paginationData?.total_count > 20
+							&& (
+								<div className={styles.pagination_container}>
+									<Pagination
+										totalItems={paginationData?.total_count || 0}
+										currentPage={page || 1}
+										pageSize={paginationData?.page_limit}
+										onPageChange={setPage}
+									/>
+								</div>
+							)}
 						</div>
 					)
 

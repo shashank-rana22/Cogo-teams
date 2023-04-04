@@ -45,7 +45,6 @@ function useCreateFaq() {
 	const createFaqComponent = async (values) => {
 		const { name, description } = values || {};
 		let payload = {
-			name,
 			display_name : startCase(name),
 			description,
 			status       : 'active',
@@ -61,12 +60,12 @@ function useCreateFaq() {
 			});
 
 			if (res?.data) {
-				Toast.success(`${queryValue} ${queryName}d sucessfully`);
+				Toast.success(`Faq ${startCase(queryValue)} ${queryName}d sucessfully`);
 				setConfigurationPage('dashboard');
 				router.back();
 			}
-		} catch (err) {
-			Toast.error('Something went wrong');
+		} catch (e) {
+			Toast.error(e?.response?.data?.base);
 		}
 	};
 	return {
