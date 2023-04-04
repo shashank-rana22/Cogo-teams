@@ -8,7 +8,7 @@ function Ingestion() {
 		columns,
 		onPageChange,
 		loading,
-		Component,
+		// Component,
 		setTableModal,
 		tableModal,
 		data,
@@ -26,7 +26,7 @@ function Ingestion() {
 				columns={columns}
 				onPageChange={onPageChange}
 				loading={loading}
-				Component={Component}
+				// Component={Component}
 				setTableModal={setTableModal}
 				tableModal={tableModal}
 				data={data}

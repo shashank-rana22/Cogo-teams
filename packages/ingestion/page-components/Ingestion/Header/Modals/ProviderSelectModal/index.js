@@ -6,23 +6,11 @@ import styles from './styles.module.css';
 function ProviderSelectModal({ setShow = () => {}, show = '', setUploadData = () => {}, uploadData, formProps }) {
 	const { reset } = formProps;
 
-	// console.log('ingestion_type', uploadData.ingestion_type);
-	// const FINAL_MODAL_MAPPING_CP = {
-	// 	CPBuy        : 'a. Upload Channel Partner (buy persona) CSV',
-	// 	CPSell       : 'b. Upload Channel Partner (sell persona) CSV',
-	// 	CPBuyAndSell : 'c. Channel Partner (buy and sell persona) CSV',
-	// };
-
 	const ProviderCpOptions = [
 		{ key: 'a. Channel Partner (buy persona)', type: 'CPBuy' },
 		{ key: 'b. Channel Partner (sell persona)', type: 'CPSell' },
 		{ key: 'c. Channel Partner (buy and sell persona)', type: 'CPBuyAndSell' },
 	];
-
-	// const FINAL_MODAL_MAPPING_LEADS = {
-	// 	IE : 'a. Upload Importer/Exporter CSV',
-	// 	SP : 'b. Upload Service Provider CSV',
-	// };
 
 	const ProviderLeadOptions = [
 		{ key: 'a. Importer/ Exporter', type: 'IE' },
@@ -35,7 +23,6 @@ function ProviderSelectModal({ setShow = () => {}, show = '', setUploadData = ()
 	};
 
 	let ProviderButtonOptions = [];
-	// let FINAL_MODAL_MAPPING = {};
 
 	const PROVIDER_BUTTON_MAPPING = {
 		lead    : ProviderLeadOptions,
@@ -43,14 +30,6 @@ function ProviderSelectModal({ setShow = () => {}, show = '', setUploadData = ()
 	};
 
 	ProviderButtonOptions = PROVIDER_BUTTON_MAPPING[uploadData?.ingestion_type];
-
-	// if (uploadData?.ingestion_type === 'lead') {
-	// 	ProviderButtonOptions = ProviderLeadOptions;
-	// 	// FINAL_MODAL_MAPPING = FINAL_MODAL_MAPPING_LEADS;
-	// } else if (uploadData?.ingestion_type === 'partner') {
-	// 	ProviderButtonOptions = ProviderCpOptions;
-	// 	// FINAL_MODAL_MAPPING = FINAL_MODAL_MAPPING_CP;
-	// }
 
 	const IS_CHANNEL_PARTNER_MAPPING = {
 		IE           : false,

@@ -36,9 +36,7 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 					<EmptyState height="200px" width="720px" />
 				</div>
 				<div className={styles.close_button}>
-					<Button disabled={loading} themeType="secondary" onClick={onClose}>Close</Button>
-					<Button disabled={loading} themeType="primary" onClick={onClose}>Re-Upload</Button>
-
+					<Button themeType="secondary" onClick={onClose}>Close</Button>
 				</div>
 			</Modal>
 
@@ -49,7 +47,7 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 
 		<Modal size="lg" show={tableModal} onClose={onClose} placement="center">
 			<Modal.Header title={(
-				<div style={{ display: 'flex', alignItems: 'center' }}>
+				<div className={styles.header}>
 					<IcMUpload style={{ margin: '0 4px 0 0' }} />
 					{' '}
 					Upload List

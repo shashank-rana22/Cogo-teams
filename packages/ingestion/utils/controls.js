@@ -3,6 +3,7 @@ import { PARTNER_IDS } from '@cogoport/constants/role_ids';
 // eslint-disable-next-line
 import countries from '../../../.data-store/constants/countries.json';
 
+const { INDIA_PARTNER_ID:indiaId, VIETNAM_PARTNER_ID:vietnamId } = PARTNER_IDS;
 const indiaOption = countries.find((country) => country.country_code === 'IN');
 
 const countryOptions = [{
@@ -19,8 +20,8 @@ countries.filter((country) => country.country_code !== 'IN').map((country) => {
 });
 
 const PARTNER_OPTIONS = [
-	{ label: 'CogoPort India', value: PARTNER_IDS.INDIA_PARTNER_ID },
-	{ label: 'CogoPort Vietnam', value: PARTNER_IDS.VIETNAM_PARTNER_ID },
+	{ label: 'CogoPort India', value: indiaId },
+	{ label: 'CogoPort Vietnam', value: vietnamId },
 ];
 
 const controls = [
@@ -30,7 +31,7 @@ const controls = [
 		label       : 'Country',
 		type        : 'select',
 		options     : countryOptions,
-		placeholder : 'Type Here...',
+		placeholder : 'Select Country',
 		isClearable : true,
 		rules       : { required: 'Country is Required' },
 	},
@@ -38,7 +39,7 @@ const controls = [
 		name        : 'partner_id',
 		label       : 'Partner',
 		type        : 'select',
-		placeholder : 'Type Here...',
+		placeholder : 'Partner ID',
 		options     : PARTNER_OPTIONS,
 		isClearable : true,
 		rules       : { required: 'Partner is Required' },
@@ -52,7 +53,7 @@ const controls = [
 		isClearable    : true,
 		defaultOptions : false,
 		initialCall    : false,
-		placeholder    : 'Type Here...',
+		placeholder    : 'Agent Name',
 		params         : {
 			filters: {
 				status               : 'active',
@@ -60,10 +61,6 @@ const controls = [
 			},
 			page_limit: 100,
 		},
-		// disabled: true,
-		// options     : countryOptions,
-
-		// rules       : { required: 'Agent is Required' },
 	},
 
 ];

@@ -5,8 +5,6 @@ import { useRequest } from '@cogoport/request';
 import { startCase, format } from '@cogoport/utils';
 import { useState } from 'react';
 
-import ReUploadModal from '../page-components/Ingestion/TableSection/Modals/ReUploadModal';
-import UploadListModal from '../page-components/Ingestion/TableSection/Modals/UploadListModal';
 import styles from '../styles.module.css';
 
 function useGetIngestionList() {
@@ -34,22 +32,6 @@ function useGetIngestionList() {
 		setRow(_id);
 		setTableModal('uploadList');
 	};
-
-	const CONSTANT_KEYS = {
-		REUPLOAD    : 'reUpload',
-		UPLOAD_LIST : 'uploadList',
-	};
-
-	const {
-		REUPLOAD, UPLOAD_LIST,
-	} = CONSTANT_KEYS;
-
-	const TABLE_MODAL_MAPPING = {
-		[REUPLOAD]    : ReUploadModal,
-		[UPLOAD_LIST] : UploadListModal,
-
-	};
-	const Component = TABLE_MODAL_MAPPING[tableModal] || null;
 
 	const UPLOAD_STATUS_MAPPING = {
 		Uploading : 'yellow',
@@ -182,7 +164,6 @@ function useGetIngestionList() {
 		columns,
 		onPageChange,
 		loading,
-		Component,
 		tableModal,
 		setTableModal,
 		data,

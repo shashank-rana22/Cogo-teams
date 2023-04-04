@@ -20,8 +20,6 @@
 	display: flex;
 	justify-content: flex-end;
 	width: 100%;
-
-	/* align-items: center; */
 }
 
 .empty {
