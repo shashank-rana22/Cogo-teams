@@ -7,14 +7,15 @@
 .text_container {
 	display: flex;
 	flex-direction: column;
-	gap: 36px;
 	align-items: flex-start;
-
-	/* width: 70%; */
 	font-size: 14px;
 	font-weight: 500;
 	color: #000;
 	opacity: 0.6;
+}
+
+.text {
+	margin-bottom: 32px;
 }
 
 .chart_container {

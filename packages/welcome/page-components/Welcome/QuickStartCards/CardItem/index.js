@@ -11,7 +11,7 @@ function CardItem({ data = {} }) {
 
 	const { label, url:redirection_url } = href;
 
-	const { icon:tag_icon, text:tag_text } = tag;
+	const { icon: tag_icon, text: tag_text } = tag;
 
 	const openLink = (url) => {
 		if (url?.includes('http://') || url?.includes('https://')) {

@@ -21,3 +21,12 @@
 		flex-direction: column;
 	}
 }
+
+.card_item {
+	width: 30%;
+
+	@media (max-width: 800px) {
+		width: 360px;
+		margin-bottom: 24px;
+	}
+}

@@ -10,10 +10,6 @@ function CardItem({ data = {} }) {
 
 	const { label, url } = href;
 
-	const renderEyeButtonText = () => (
-		<div className={styles.eye_button_text}>{eye_button_text}</div>
-	);
-
 	return (
 		<div className={styles.container}>
 
@@ -27,7 +23,10 @@ function CardItem({ data = {} }) {
 					<div className={styles.heading}>{heading}</div>
 
 					<div className={styles.more_details_eye_button}>
-						<Tooltip placement="left" content={renderEyeButtonText()}>
+						<Tooltip
+							placement="left"
+							content={(<div className={styles.eye_button_text}>{eye_button_text}</div>)}
+						>
 							<IcMInformation />
 						</Tooltip>
 					</div>

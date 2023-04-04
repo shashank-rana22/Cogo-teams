@@ -51,7 +51,6 @@
 
 .cards {
 	display: flex;
-	gap: 36px;
 	overflow-x: auto;
 	scroll-behavior: smooth;
 }

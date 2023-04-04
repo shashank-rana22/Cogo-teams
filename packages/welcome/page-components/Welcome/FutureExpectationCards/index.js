@@ -31,7 +31,12 @@ function FutureExpectationCards() {
 					</div>
 				)}
 
-				<div className={styles.cards} ref={scrollRef}>{data.map((item) => <CardItem data={item} />)}</div>
+				<div className={styles.cards} ref={scrollRef}>
+					{data.map((item, index) => (
+						<CardItem data={item} key={item.heading} index={index} />
+					))}
+
+				</div>
 
 				{data.length > 4 && (
 					<div

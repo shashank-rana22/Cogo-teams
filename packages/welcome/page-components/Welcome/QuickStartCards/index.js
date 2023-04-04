@@ -9,7 +9,11 @@ function QuickStartCards() {
 		<div className={styles.container}>
 			<div className={styles.heading}>We have curated these links to help you quick start -</div>
 			<div className={styles.cards_container}>
-				{data.map((item) => <CardItem data={item} />)}
+				{data.map((item) => (
+					<div key={item.title} className={styles.card_item}>
+						<CardItem data={item} />
+					</div>
+				))}
 			</div>
 		</div>
 	);

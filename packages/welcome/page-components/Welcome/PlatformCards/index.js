@@ -9,7 +9,11 @@ function PlatformCards() {
 		<div className={styles.container}>
 			<div className={styles.heading}>Cogoport Platforms -</div>
 			<div className={styles.cards_container}>
-				{data.map((item) => <CardItem data={item} />)}
+				{data.map((item) => (
+					<div key={item.heading} className={styles.card_item}>
+						<CardItem data={item} />
+					</div>
+				))}
 			</div>
 		</div>
 	);

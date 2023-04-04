@@ -2,11 +2,11 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function CardItem({ data = {} }) {
+function CardItem({ data = {}, index = 0 }) {
 	const { icon_url, heading, desc } = data;
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} style={{ marginLeft: index === 0 ? '' : '36px' }}>
 			<div className={styles.upperpart}>
 				<div className={styles.icon}><img src={icon_url} alt="icon" width={80} /></div>
 			</div>
