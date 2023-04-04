@@ -93,8 +93,8 @@ function useUpdateAnswers({
 			total_question > currentQuestion ? num + 1 : num,
 		);
 
-		if (['answered', 'marked_for_review'].includes((user_appearance?.[num - 1] || {}).answer_state)) {
-			await fetchQuestions({ question_id: user_appearance?.[num]?.test_question_id });
+		if (['answered', 'marked_for_review', 'viewed'].includes((user_appearance?.[num - 1] || {}).answer_state)) {
+			await fetchQuestions({ question_id: (user_appearance?.[num] || {})?.test_question_id || '' });
 		} else {
 			await fetchQuestions({});
 		}

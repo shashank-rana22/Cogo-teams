@@ -3,6 +3,7 @@ import { Button, Modal } from '@cogoport/components';
 import handleEnterFullScreen from '../../../../../utils/handleEnterFullScreen';
 import useEndTest from '../../../../hooks/useEndTest';
 import StatsDisplay from '../../../utils/StatsDisplay';
+import Timer from '../../Header/Timer';
 
 import styles from './styles.module.css';
 
@@ -13,7 +14,14 @@ function LeaveTest({
 	test_user_mapping_id,
 	user_appearance,
 	total_question_count,
+	start_time,
+	testData,
+	setShowTimeOverModal,
 }) {
+	const { test_duration } = testData || {};
+
+	const time = new Date(start_time).getTime();
+
 	const { endTest, endTestLoading } = useEndTest({
 		setActiveState,
 		setShowTimeOverModal: setShowLeaveTestModal,
@@ -28,9 +36,19 @@ function LeaveTest({
 	return (
 		<Modal size="md" show={showLeaveTestModal} onClose={setShowLeaveTestModal}>
 			<Modal.Body>
-				<b className={styles.heading}>Are you sure you want to leave the test?</b>
+				<div className={styles.flex_container}>
+					<div>
+						<b className={styles.heading}>Are you sure you want to leave the test?</b>
 
-				<p>Doing so will result in a waste attempt</p>
+						<p>Doing so will result in a waste attempt</p>
+					</div>
+
+					<Timer
+						test_start_time={time}
+						duration={test_duration}
+						setShowTimeOverModal={setShowTimeOverModal}
+					/>
+				</div>
 
 				<StatsDisplay data={user_appearance} total_question_count={total_question_count} />
 

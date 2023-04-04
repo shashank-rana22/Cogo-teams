@@ -1,6 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 
 import handleEnterFullScreen from '../../../../utils/handleEnterFullScreen';
+import Timer from '../../LeftSection/Header/Timer';
 
 import styles from './styles.module.css';
 
@@ -27,7 +28,18 @@ const items = [
 	category will be automatically submitted as a response.`,
 ];
 
-function InstructionsModal({ loading, guidelines, setShowInstructionsModal }) {
+function InstructionsModal({
+	loading,
+	guidelines,
+	setShowInstructionsModal,
+	start_time,
+	testData,
+	setShowTimeOverModal,
+}) {
+	const { test_duration } = testData || {};
+
+	const time = new Date(start_time).getTime();
+
 	const handleCloseInstruction = () => {
 		handleEnterFullScreen();
 		setShowInstructionsModal(false);
@@ -35,7 +47,17 @@ function InstructionsModal({ loading, guidelines, setShowInstructionsModal }) {
 
 	return (
 		<Modal showCloseIcon={false} size="md" show className={styles.modal_container}>
-			<Modal.Header title="Test Instructions" />
+			<Modal.Header title={(
+				<div className={styles.flex_container}>
+					<div>Test Instructions</div>
+					<Timer
+						test_start_time={time}
+						duration={test_duration}
+						setShowTimeOverModal={setShowTimeOverModal}
+					/>
+				</div>
+			)}
+			/>
 
 			<Modal.Body>
 				<div className={styles.modal_body}>
