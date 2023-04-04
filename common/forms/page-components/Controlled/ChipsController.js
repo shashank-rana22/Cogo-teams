@@ -4,7 +4,7 @@ import { Controller } from 'react-hook-form';
 
 function ChipsController(props) {
 	const {
-		name, control, options, rules, multiple, ...rest
+		name, control, options, rules, multiple, value, ...rest
 	} = props;
 
 	return (
@@ -12,8 +12,9 @@ function ChipsController(props) {
 			key={rest.id}
 			control={control}
 			name={name}
+			defaultValue={value}
 			rules={rules}
-			render={({ field: { onChange, value } }) => (
+			render={({ field: { onChange, value: newValue } }) => (
 				<Chips
 					{...rest}
 					key={rest.id}
@@ -24,7 +25,7 @@ function ChipsController(props) {
 						value    : undefined,
 						label    : undefined,
 					}))}
-					selectedItems={value}
+					selectedItems={newValue}
 					onItemChange={onChange}
 					enableMultiSelect={multiple}
 				/>

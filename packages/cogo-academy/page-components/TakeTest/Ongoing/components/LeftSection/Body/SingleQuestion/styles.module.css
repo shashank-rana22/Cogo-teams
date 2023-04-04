@@ -1,0 +1,55 @@
+.main_container {
+	:global {
+		.ui_radio_container {
+			display: block !important;
+			padding: 12px 0 0;
+		}
+
+		.ui_radio_theme {
+			flex-shrink: 0;
+		}
+
+		.ui_checkbox_style {
+			flex-shrink: 0;
+		}
+
+		.ui_radiogroup_container {
+			display: flex;
+			flex-direction: column;
+			padding: 0;
+		}
+
+		.ui_checkbox_container {
+			padding: 12px 0 0;
+		}
+
+		.ui_checkbox_group_container {
+			display: flex;
+			flex-direction: column;
+			padding: 0;
+		}
+	}
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 36px;
+}
+
+.question_count {
+	font-size: 12px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.question_type {
+	font-size: 12px;
+	color: #828282;
+}
+
+.question {
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+}

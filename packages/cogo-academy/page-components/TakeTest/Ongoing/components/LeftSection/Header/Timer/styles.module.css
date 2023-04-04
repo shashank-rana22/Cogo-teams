@@ -1,0 +1,11 @@
+.container {
+	display: flex;
+	align-items: center;
+}
+
+.timer {
+	margin-left: 12px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #bf291e;
+}
