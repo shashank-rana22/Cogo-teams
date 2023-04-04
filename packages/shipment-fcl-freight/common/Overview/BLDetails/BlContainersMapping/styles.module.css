@@ -1,4 +1,4 @@
-.content{
+.content {
     display: flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -6,12 +6,12 @@
 	padding: 10px;
 	margin: 0 10px;
 
-	& > div{
+	& > div {
 		width: 100%;
 	}
 }
 
-.button_div{
+.button_div {
     display: flex;
 	width: 100%;
 	align-items: center;
@@ -19,22 +19,22 @@
 	margin-top: 30px;
 }
 
-.input_container{
+.input_container {
 	display: flex;
 	flex-direction: column;
 
-	& > label{
+	& > label {
 		font-weight: 900;
 		margin-bottom: 4px;
 	}
 }
 
-.field_array{
+.field_array {
 	display: flex;
 	align-items: center;
 	margin: 12px auto;
 
-	& > div{
+	& > div {
 		flex: 1;
 		margin-right: 8px;
 	}

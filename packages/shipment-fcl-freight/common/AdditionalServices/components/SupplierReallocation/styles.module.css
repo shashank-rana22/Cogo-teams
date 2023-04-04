@@ -1,9 +1,9 @@
-.header{
+.header {
 	font-size: 18px;
 	font-weight: 600;
 }
 
-.button_container{
+.button_container {
 	margin: 22px auto auto auto;
 	display: flex;
 	justify-content: flex-end;
@@ -14,7 +14,7 @@
 	color: var(--color-primary-error-red-1);
 }
 
-.form_wrapper{
+.form_wrapper {
 	& > div:not(:last-of-type){
 		margin-bottom: 24px;
 	}
@@ -28,14 +28,14 @@
 			padding: 0px 0px 8px 0px !important;
 		}
 
-		.ui_modal_body_container{
+		.ui_modal_body_container {
 			max-height: 400px;
 			border: none;
 		}
 	}
 }
 
-.label{
+.label {
 	font-weight: 900;
 	line-height: 14px;
 	letter-spacing: 0.02em;

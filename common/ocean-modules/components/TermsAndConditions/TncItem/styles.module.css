@@ -1,4 +1,4 @@
-.container{
+.container {
 	padding: 22px 12px 22px 0px;
 
 	ul {
@@ -6,10 +6,10 @@
 	}
 }
 
-.condition{
-	font-weight: 400;
+.condition {
 	font-size: 12px;
-	line-height: 16px;
+	font-weight: 400;
 	margin-bottom: 6px;
+	line-height: 16px;
 	color: #828282;
 }
