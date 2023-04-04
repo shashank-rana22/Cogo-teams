@@ -2,7 +2,6 @@ import { isEmpty } from '@cogoport/utils';
 
 import LoadingState from '../../../../commons/LoadingState';
 import TestResultMessage from '../../../../commons/TestResultMessage';
-import EmptyState from '../../../CreateModule/commons/EmptyState';
 import QuestionWiseStats from '../../commons/QuestionWiseStats';
 
 import GoToDetails from './GoToDetails';
@@ -22,7 +21,7 @@ function LastTestResults(props) {
 	}
 
 	if (isEmpty(stats_data)) {
-		return <EmptyState text="No Data Found" height={160} />;
+		return null;
 	}
 
 	return (
