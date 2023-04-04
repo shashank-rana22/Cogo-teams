@@ -20,11 +20,12 @@ interface CardInterface {
 	setShowBtn: React.Dispatch<React.SetStateAction<boolean>>
 	setCheckedRows: React.Dispatch<React.SetStateAction<{}>>
 	setPayload: React.Dispatch<React.SetStateAction<any[]>>
+	isApplyEnable?:boolean
 }
 
 function Card({
 	refetch, filters, setFilters, shipmentLoading, setViewSelected,
-	setShowBtn, setCheckedRows, setPayload,
+	setShowBtn, setCheckedRows, setPayload, isApplyEnable,
 }:CardInterface) {
 	const [selectFilter, setSelectFilter] = useState(false);
 
@@ -228,7 +229,7 @@ function Card({
 				<Button
 					size="lg"
 					onClick={() => { onSubmit(); }}
-					disabled={!filters.year && !filters.month}
+					disabled={!isApplyEnable}
 					loading={shipmentLoading}
 				>
 					Apply

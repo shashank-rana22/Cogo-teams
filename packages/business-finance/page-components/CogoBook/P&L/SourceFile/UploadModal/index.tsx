@@ -19,6 +19,17 @@ function UploadModal({ uploadModal, setUploadModal }) {
 		sourceFileUploadLoading,
 	} =	 useSourceFile({ modalData, uploader, setUploadModal });
 
+	const SAMPLE_DOCUMENT_URL = 'https://cogoport-production.sgp1.digitaloceanspaces.com'
+	+ '/50767ab00d5073ed6d5be7ed6afebaa9/TB%20Sample.xlsx';
+
+	const onClickViewSampleFile = () => {
+		window.open(
+			SAMPLE_DOCUMENT_URL,
+			'_blank',
+			'noreferrer',
+		);
+	};
+
 	return (
 		<div>
 			<Modal show={uploadModal} onClose={() => { setUploadModal(false); }}>
@@ -62,6 +73,13 @@ function UploadModal({ uploadModal, setUploadModal }) {
 						draggable
 						accept=".xlsx"
 					/>
+					<div
+						className={styles.sample}
+						onClick={onClickViewSampleFile}
+						role="presentation"
+					>
+						Sample File
+					</div>
 
 				</Modal.Body>
 				<Modal.Footer>

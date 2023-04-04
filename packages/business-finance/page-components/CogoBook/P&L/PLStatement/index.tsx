@@ -53,10 +53,8 @@ function PLStatement() {
 	const {
 		ratiosData = {},
 		reportData = {},
-		// reportTriggerLoading,
 		fetchRatioApi,
 		fetchReportApi,
-		// ratiosTriggerLoading,
 	} = useReport({ filters });
 
 	return (
@@ -76,8 +74,6 @@ function PLStatement() {
 			{showReport && (
 				<ListProfit
 					ratiosData={ratiosData}
-					// reportTriggerLoading={reportTriggerLoading}
-					// ratiosTriggerLoading={ratiosTriggerLoading}
 					reportData={reportData}
 					filters={filters}
 				/>

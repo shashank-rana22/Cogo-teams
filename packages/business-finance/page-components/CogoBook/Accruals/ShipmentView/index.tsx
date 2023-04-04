@@ -13,7 +13,6 @@ import styles from './styles.module.css';
 
 function ShipmentView() {
 	const [checkedRows, setCheckedRows] = useState({});
-	const [viewSelected, setViewSelected] = useState(true);
 	const [showBtn, setShowBtn] = useState(false);
 	const [bulkSection, setBulkSection] = useState({ value: false, bulkAction: '' });
 	const [filters, setFilters] = useState({
@@ -57,6 +56,8 @@ function ShipmentView() {
 		crossProfitHandler,
 		tickProfitHandler,
 		profit:profitData,
+		viewSelected,
+		setViewSelected,
 	} =	 useShipmentView({ filters, checkedRows, setBulkSection, bulkAction, setCheckedRows });
 
 	const {
@@ -64,8 +65,9 @@ function ShipmentView() {
 		list = [],
 	} = apiData || {};
 
-	const { page } = filters || {};
+	const { page, year, month } = filters || {};
 
+	const isApplyEnable = year?.length > 0 && month?.length > 0;
 	return (
 		<div>
 			<Card
@@ -77,6 +79,7 @@ function ShipmentView() {
 				setViewSelected={setViewSelected}
 				setShowBtn={setShowBtn}
 				filters={filters}
+				isApplyEnable={isApplyEnable}
 			/>
 			<div className={styles.flex}>
 				<div className={styles.sub_flex}>
@@ -99,7 +102,7 @@ function ShipmentView() {
 						value={filters?.query}
 						onChange={(val) => { setFilters((prev) => ({ ...prev, query: val })); }}
 						placeholder="Search by SID"
-						disabled={!filters.year && !filters.month}
+						disabled={!isApplyEnable}
 						suffix={<IcMSearchlight height="20px" width="20px" style={{ marginRight: '8px' }} />}
 					/>
 				</div>

@@ -62,8 +62,8 @@ const useReport = ({
 			});
 
 			setShowReport(true);
-		} catch {
-			console.log('dfjnjn');
+		} catch (error) {
+			console.log(error);
 		}
 	}, [filters?.category, filters?.entity, filters?.month, reportTrigger]);
 
@@ -77,8 +77,8 @@ const useReport = ({
 			});
 
 			setShowReport(true);
-		} catch {
-			console.log('dfjn');
+		} catch (error) {
+			console.log(error);
 		}
 	}, [filters?.entity, filters?.month, monthPayload, ratioTrigger]);
 

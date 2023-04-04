@@ -115,7 +115,9 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 			});
 			setDrillData(res.data);
 		} catch (error) {
-			Toast.error(error?.response?.data?.message);
+			if (error?.response?.data?.message) {
+				Toast.error(error?.response?.data?.message);
+			}
 		}
 	}, [Amount, Percentage, Range, archivedStatus, date, drillDownArchiveTrigger, query, serviceType]);
 

@@ -8,7 +8,7 @@ const useSelectMonth = () => {
 		MonthTrigger,
 	] = useRequestBf(
 		{
-			url     : '/pnl/statement/locked-periods',
+			url     : 'pnl/statement/locked-periods',
 			method  : 'get',
 			authKey : 'get_pnl_statement_locked_periods',
 		},
@@ -19,7 +19,9 @@ const useSelectMonth = () => {
 		try {
 			await MonthTrigger({});
 		} catch (error) {
-			Toast.error(error?.response?.data?.message);
+			if (error?.response?.data?.message) {
+				Toast.error(error?.response?.data?.message);
+			}
 		}
 	}, [MonthTrigger]);
 	return {
