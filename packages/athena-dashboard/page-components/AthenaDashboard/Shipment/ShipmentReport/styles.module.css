@@ -1,0 +1,56 @@
+.main_container_right {
+	margin: 28px;
+	display: block;
+	overflow-x: scroll;
+}
+
+.category_division {
+	margin: 20px 20px 20px 0px;
+}
+
+.export_info {
+	display: flex;
+}
+
+.shipment_report {
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.export_results {
+	display: flex;
+	align-items: center;
+	padding-left: 12px;
+	font-size: 12px;
+	font-weight: 500;
+	text-align: center;
+	cursor: pointer;
+}
+
+.sort_by {
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.select_box {
+	box-sizing: border-box;
+	width: 250px;
+	border: 1px solid #e0e0e0;
+	border-radius: 10px;
+}
+
+.sort_by_box {
+	padding-top: 20px;
+}
+
+.table_container {
+	height: 850px;
+}
+
+.table {
+	display: block;
+	margin: 48px 4px 4px 4px;
+	overflow-y: scroll;
+	background-color: white;
+	box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+}

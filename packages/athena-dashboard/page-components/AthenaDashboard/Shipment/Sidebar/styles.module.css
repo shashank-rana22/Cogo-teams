@@ -1,0 +1,15 @@
+.advanced_filter_container {
+	margin: 4px;
+	background: #f9f9f9;
+	border-radius: 10px;
+	padding: 16px;
+}
+
+.microfilter_names {
+	margin-top: 20px;
+	margin-left: 4px;
+}
+
+.controller {
+	margin-top: 4px;
+}

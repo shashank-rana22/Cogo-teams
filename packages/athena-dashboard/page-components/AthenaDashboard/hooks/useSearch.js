@@ -1,11 +1,9 @@
 import { useForm } from '@cogoport/forms';
 import { useAthenaRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const useSearch = () => {
 	const [date, setDate] = useState('');
-	const [answer, setAnswer] = useState([]);
 
 	const formProps = useForm();
 
@@ -51,17 +49,11 @@ const useSearch = () => {
 		});
 	};
 
-	useEffect(() => {
-		if (!isEmpty(responseData)) {
-			setAnswer(responseData.list);
-		}
-	}, [responseData]);
-
 	return {
 		loading,
 		date,
 		setDate,
-		answer,
+		response: responseData.list,
 		control,
 		handleClick,
 		handleSubmit,

@@ -1,4 +1,5 @@
-.main_container {
+.search_container {
 	display: flex;
+	margin-top: 20px;
 	background-color: white;
 }
