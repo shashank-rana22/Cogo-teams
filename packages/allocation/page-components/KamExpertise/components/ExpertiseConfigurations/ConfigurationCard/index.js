@@ -35,7 +35,7 @@ const HEADING_MAPPING = {
 };
 
 function ConfigurationCard(props) {
-	const { version_number, status = '', expertise_details = [], audit_data = {}, total_levels } = props;
+	const { version_number = '', status = '', expertise_details = [], audit_data = {}, total_levels } = props;
 
 	return (
 		<div className={styles.card_container}>
