@@ -60,9 +60,9 @@ function useCreateFaqSet({
 		}
 	};
 
-	const onClickPublish = async ({ data }) => {
+	const onClickPublish = async ({ data: publishData }) => {
 		const payload = {
-			id      : data?.id,
+			id      : publishData?.id,
 			state   : 'published',
 			status  : 'active',
 			answers : [{
