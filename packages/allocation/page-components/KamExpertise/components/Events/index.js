@@ -65,9 +65,9 @@ function Events() {
 					label={<a href={`/v2/${locale}/${partner_id}/allocation/kam-expertise/`}>Dashboard</a>}
 				/>
 
-				{ (eventListData.toggleEvent === 'eventList') && <Breadcrumb.Item label={(<b>All Events</b>)} /> }
+				{ (eventListData.toggleEvent === EVENT_LIST) && <Breadcrumb.Item label={(<b>All Events</b>)} /> }
 
-				{ (eventListData.toggleEvent === 'updateEvent')
+				{ (eventListData.toggleEvent === POST_EVENT)
 					&& (
 						<Breadcrumb.Item
 							label={(
@@ -78,7 +78,7 @@ function Events() {
 						/>
 					)}
 
-				{ (eventListData.toggleEvent === 'updateEvent') && <Breadcrumb.Item label={(<b>Add Event</b>)} />}
+				{ (eventListData.toggleEvent === POST_EVENT) && <Breadcrumb.Item label={(<b>Add Event</b>)} />}
 			</Breadcrumb>
 
 			{Component && (
