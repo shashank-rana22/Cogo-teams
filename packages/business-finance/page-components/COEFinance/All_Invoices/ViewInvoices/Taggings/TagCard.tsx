@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 
 interface ChildBill {
 	id: string;
+	billId: string;
 }
 
 interface Props {
@@ -15,7 +16,7 @@ interface Props {
 	lineItemCount?: string;
 	createdAt?: Date;
 	childBill?: ChildBill[]
-	id: string;
+	billId: string;
 }
 
 export function TagCard({
@@ -41,12 +42,12 @@ export function TagCard({
 					position    : 'relative',
 				}}
 			>
-				{childBill?.length > 1 && (
-					<div className={`${classname === 'merge' ? styles.merge : ''} ${styles.tag}`}>
-						{labelMap[classname || 'split']}
-					</div>
-				)}
 				<div style={{ display: 'flex' }}>
+					{childBill?.length > 1 && (
+						<div className={`${classname === 'merge' ? styles.merge : ''} ${styles.tag}`}>
+							{labelMap[classname || 'split']}
+						</div>
+					)}
 					<div style={{ display: 'flex', flexDirection: 'column' }}>
 						{!isfirst && (
 							<div
@@ -56,8 +57,10 @@ export function TagCard({
 						{isLastChild && (
 							<div
 								style={{
-									height: '40px',
+									height   : 'calc(100% - 40px)',
+									top      : '38px',
 									...commonStyles,
+									position : 'absolute',
 								}}
 							/>
 						)}
@@ -79,7 +82,7 @@ export function TagCard({
 						<TagCard
 							item={child}
 							isfirst={false}
-							key={child.id}
+							key={child.billId}
 							classname={classname}
 							isLastChild={childBill.length - 1 === index}
 						/>

@@ -5,13 +5,15 @@ import React, { useState } from 'react';
 import styles from './styles.module.css';
 import TagMap from './TagMap';
 
-function Tagging({ billId, setRemarksVal }:
-{ billId: string, setRemarksVal: React.Dispatch<React.SetStateAction<{
-	collectionPartyRemark: string;
-	billingPartyRemark: string;
-	invoiceDetailsRemark: string;
-	taggingRemark:string
-}>> }) {
+function Tagging({ billId, setRemarksVal, status }:
+{
+	billId: string, status: string, setRemarksVal: React.Dispatch<React.SetStateAction<{
+		collectionPartyRemark: string;
+		billingPartyRemark: string;
+		invoiceDetailsRemark: string;
+		taggingRemark: string;
+
+	}>> }) {
 	const [value, setValue] = useState({ approve: '', reject: '', undo: '', remark: '' });
 	const showIcon = () => {
 		if (value?.approve === 'approve') {
@@ -46,6 +48,7 @@ function Tagging({ billId, setRemarksVal }:
 					value={value}
 					setValue={setValue}
 					setRemarksVal={setRemarksVal}
+					status={status}
 				/>
 			</Accordion>
 		</div>
