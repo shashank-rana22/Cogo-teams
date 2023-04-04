@@ -41,7 +41,7 @@ function Trends() {
 				{controls.map((item) => {
 					const ele = { ...item };
 					return (
-						<div>
+						<div key={ele.name}>
 							<div style={{ marginLeft: '10px' }}>
 								{ele.label}
 							</div>
@@ -69,15 +69,11 @@ function Trends() {
 				<Button
 					className={styles.button}
 					size="md"
-					themeType="secondary"
+					themeType="tertiary"
 					onClick={handleClick}
 					disabled={loading}
-					style={{ border: 'None' }}
 				>
-					{' '}
 					Search
-					{' '}
-
 				</Button>
 			</div>
 			<div className={styles.rect_div}>
@@ -91,7 +87,7 @@ function Trends() {
 						<div className={styles.display_selected_code}>
 							{
 							((hscodeArr || []).map((item) => (
-								<div className={styles.individual}>
+								<div key={item} className={styles.individual}>
 									<div className={styles.individual_text}>
 										{item}
 									</div>

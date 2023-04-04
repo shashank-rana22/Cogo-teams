@@ -21,32 +21,28 @@ function AthenaDashboard() {
 	const [activeTab, setActiveTab] = useState('shipments');
 
 	return (
-		<div>
-			<div>
-				<Tabs
-					activeTab={activeTab}
-					fullWidth
-					themeType="primary"
-					onChange={setActiveTab}
-				>
-					{Object.values(ATHENA_DASHBOARD_MAPPING).map((item) => {
-						const { name = '', title = '', Component } = item;
+		<Tabs
+			activeTab={activeTab}
+			fullWidth
+			themeType="primary"
+			onChange={setActiveTab}
+		>
+			{Object.values(ATHENA_DASHBOARD_MAPPING).map((item) => {
+				const { name = '', title = '', Component } = item;
 
-						if (!Component) return null;
+				if (!Component) return null;
 
-						return (
-							<TabPanel
-								key={name}
-								name={name}
-								title={title}
-							>
-								<Component />
-							</TabPanel>
-						);
-					})}
-				</Tabs>
-			</div>
-		</div>
+				return (
+					<TabPanel
+						key={name}
+						name={name}
+						title={title}
+					>
+						<Component />
+					</TabPanel>
+				);
+			})}
+		</Tabs>
 	);
 }
 export default AthenaDashboard;
