@@ -22,7 +22,7 @@ function Header({
 	const { serial_id, id: shipment_id } = channelData || {};
 
 	const handleClick = () => {
-		push('/shipments/[id]', `/shipments/${shipment_id}`);
+		push('/booking/fcl/[shipment_id]', `/booking/fcl/${shipment_id}`);
 		setShow(false);
 	};
 
