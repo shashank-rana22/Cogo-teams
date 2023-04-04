@@ -41,7 +41,7 @@ function useCreateFaqSet({
 
 		try {
 			const res = await trigger({
-				data: payload,
+				data: { ...payload, id: questionId },
 			});
 
 			if (res?.data) {
