@@ -2,7 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	margin: 16px;
+	margin: 10px;
 }
 
 .heading {
@@ -23,30 +23,11 @@
 
 .request_text {
 	width: fit-content;
+	margin: 10px;
 	font-size: 16px;
 	font-weight: 400;
 	text-decoration: underline;
 	cursor: pointer;
-}
-
-.input_component {
-	display: flex;
-	flex-direction: column;
-	align-items: left;
-	margin: 16px;
-}
-
-.button_row {
-	display: flex;
-	justify-content: right;
-	margin-top: 8px;
-}
-
-.input_heading {
-	margin-top: 52px;
-	margin-bottom: 8px;
-	font-size: 12px;
-	font-weight: 400;
 }
 
 .sub_heading {
@@ -54,11 +35,4 @@
 	font-size: 18px;
 	font-weight: 400;
 	opacity: 0.7;
-}
-
-.submit_btn {
-	margin-left: 8px;
-	color: #fff;
-	background: #ea3825;
-	border-color: #ea3825;
 }

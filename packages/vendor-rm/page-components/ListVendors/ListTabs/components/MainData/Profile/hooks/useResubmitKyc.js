@@ -68,7 +68,12 @@ const useResubmitKyc = ({
 	});
 
 	(rejected_documents || []).forEach((item) => {
-		newControls.push(DOCUMENT_TYPE_CONTROL_MAPPING[item?.document_type]?.control);
+		const documentControl = {
+			...DOCUMENT_TYPE_CONTROL_MAPPING[item?.document_type]?.control,
+			rules: { required: 'Required' },
+		};
+
+		newControls.push(documentControl);
 	});
 
 	const getDocuments = ({ rejected_documents: rejectedDocuments, values }) => {

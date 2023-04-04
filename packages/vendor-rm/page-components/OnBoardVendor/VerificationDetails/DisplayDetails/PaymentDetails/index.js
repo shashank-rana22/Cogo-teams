@@ -1,7 +1,7 @@
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import getShortFileName from '../utils/getShortFileName';
+import getShortFileName from '../../../../utils/getShortFileName';
 
 import styles from './styles.module.css';
 
@@ -14,9 +14,11 @@ const fieldsToShow = {
 	branch_name         : 'Branch Name',
 	bank_document_url   : 'Cancelled Cheque/Passbook',
 	address             : 'Billing Address',
+	tax_number          : 'GST Number',
+	tax_document_url    : 'GST Proof',
 };
 
-const DO_NOT_STARTCASE = ['bank_document_url', 'address'];
+const DO_NOT_STARTCASE = ['bank_document_url', 'tax_document_url', 'address'];
 
 function PaymentDetails({
 	detail,
@@ -24,8 +26,13 @@ function PaymentDetails({
 	const getDisplayValue = ({ fieldName }) => {
 		const val = detail?.[0]?.[fieldName] || '';
 
-		if (fieldName === 'bank_document_url') {
+		if (!val) {
+			return '-';
+		}
+
+		if (['bank_document_url', 'tax_document_url'].includes(fieldName)) {
 			const shortName = getShortFileName({ url: val });
+
 			return (
 				<a
 					className={styles.icon_container}
@@ -53,26 +60,26 @@ function PaymentDetails({
 			<div className={styles.title}>
 				Payment Details
 			</div>
+
 			<div className={styles.body}>
 				<div className={styles.single_record}>
-					{
-						Object.keys(fieldsToShow).map((fieldName) => (
-							<div
-								key={fieldName}
-								className={styles.fields_to_show}
-								style={{
-									flexBasis: `${fieldName === 'address' ? '50%' : '25%'}`,
-								}}
-							>
-								<div className={styles.label}>
-									{fieldsToShow[fieldName]}
-								</div>
-								<div className={styles.value}>
-									{getDisplayValue({ fieldName })}
-								</div>
+					{Object.keys(fieldsToShow).map((fieldName) => (
+						<div
+							key={fieldName}
+							className={styles.fields_to_show}
+							style={{
+								flexBasis: `${fieldName === 'address' ? '40%' : '20%'}`,
+							}}
+						>
+							<div className={styles.label}>
+								{fieldsToShow[fieldName]}
 							</div>
-						))
-					}
+
+							<div className={styles.value}>
+								{getDisplayValue({ fieldName })}
+							</div>
+						</div>
+					))}
 				</div>
 			</div>
 		</div>

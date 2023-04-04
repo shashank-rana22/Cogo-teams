@@ -41,7 +41,7 @@ function UploadModal({ showUpload, setShowUpload, listAPi, edit, setEdit }) {
 	const { loading, createDocument } = useCreateShipmentDocument();
 	const { loading:updateLoading, updateDocument } = useUpdateShipmentDocument();
 	const onSubmit = (formValues) => {
-		const fileArr = formValues.document.split('/');
+		const { fileName, finalUrl } = formValues?.document || {};
 		const payload = {
 			shipment_id         : showUpload?.shipmentId,
 			uploaded_by_org_id  : showUpload?.serviceProviderId,
@@ -52,14 +52,14 @@ function UploadModal({ showUpload, setShowUpload, listAPi, edit, setEdit }) {
 			service_type        : 'air_freight_service',
 			pending_task_id     : showUpload?.id,
 			state               : showUpload?.type === 'FinalAwb' ? undefined : 'document_accepted',
-			document_url        : formValues.document || undefined,
+			document_url        : finalUrl,
 			data                : {
 
 				status          : 'uploaded',
 				document_number : showUpload?.awbNumber,
 				service_id      : showUpload?.serviceId,
 				service_type    : 'air_freight_service',
-				document_url    : formValues.document || undefined,
+				document_url    : finalUrl,
 			},
 			documents: [
 				{
@@ -69,12 +69,12 @@ function UploadModal({ showUpload, setShowUpload, listAPi, edit, setEdit }) {
 						document_number : showUpload?.awbNumber,
 						service_id      : showUpload?.serviceId,
 						service_type    : 'air_freight_service',
-						document_url    : formValues.document || undefined,
+						document_url    : finalUrl,
 						bl_detail_id    : showUpload?.blDetailId,
 					},
 					document_type : showUpload?.documentType || 'draft_airway_bill',
-					document_url  : formValues.document || undefined,
-					file_name     : fileArr[fileArr.length - 1],
+					document_url  : finalUrl,
+					file_name     : fileName,
 				},
 			],
 		};

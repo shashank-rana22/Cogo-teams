@@ -1,3 +1,5 @@
+import { isEmpty } from '@cogoport/utils';
+
 import BackButton from './components/Backbutton';
 import Banner from './components/Banner';
 import MainData from './components/MainData';
@@ -10,7 +12,7 @@ function ListTabs() {
 		refetchVendorInfo,
 	} = useVendorInfo();
 
-	if (getVendorLoading) {
+	if (getVendorLoading || isEmpty(data)) {
 		return null;
 	}
 

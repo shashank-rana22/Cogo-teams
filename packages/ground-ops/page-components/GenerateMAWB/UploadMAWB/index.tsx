@@ -12,7 +12,7 @@ function UploadMAWB({ item, setGenerate }) {
 	const { control, handleSubmit, formState: { errors } } = useForm();
 	const { upload, loading } = useCreateShipmentDocument({ setGenerate });
 	const onSubmit = (formValues) => {
-		const fileArr = formValues.document.split('/');
+		const { fileName, finalUrl } = formValues?.document || {};
 		const payload = {
 			shipment_id         : item?.shipmentId,
 			uploaded_by_org_id  : item?.serviceProviderId,
@@ -23,14 +23,14 @@ function UploadMAWB({ item, setGenerate }) {
 			service_type        : 'air_freight_service',
 			pending_task_id     : item?.id,
 			state               : 'document_accepted',
-			document_url        : formValues.document || undefined,
+			document_url        : finalUrl,
 			data                : {
 
 				status          : 'uploaded',
 				document_number : item?.awbNumber,
 				service_id      : item?.serviceId,
 				service_type    : 'air_freight_service',
-				document_url    : formValues.document || undefined,
+				document_url    : finalUrl,
 			},
 			documents: [
 				{
@@ -40,11 +40,11 @@ function UploadMAWB({ item, setGenerate }) {
 						document_number : item?.awbNumber,
 						service_id      : item?.serviceId,
 						service_type    : 'air_freight_service',
-						document_url    : formValues.document || undefined,
+						document_url    : finalUrl,
 					},
 					document_type : 'draft_airway_bill',
-					document_url  : formValues.document || undefined,
-					file_name     : fileArr[fileArr.length - 1],
+					document_url  : finalUrl,
+					file_name     : fileName,
 				},
 			],
 		};

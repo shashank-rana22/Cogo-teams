@@ -1,0 +1,20 @@
+.main_container {
+	display: flex;
+	width: 20%;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-width: 80%;
+	padding: 12px;
+	border-radius: 6px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+}
+
+.percentile {
+	font-size: 32px;
+	font-weight: 600;
+}
