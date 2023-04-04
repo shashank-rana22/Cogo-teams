@@ -23,7 +23,7 @@ function useCreateQuestions({ data, setEditorError }) {
 	const [questionPreview, setQuestionPreview] = useState(mode || 'create');
 
 	const {
-		onSubmit:onSubmitCreateForm,
+		onSubmit: onSubmitCreateForm,
 		onClickPublish,
 		loading,
 	} = useCreateFaqSet({
@@ -32,6 +32,7 @@ function useCreateQuestions({ data, setEditorError }) {
 		editorValue,
 		RichTextEditor,
 		setEditorError,
+		data,
 	});
 
 	const { onSubmitUpdatedForm, loading: updateApiLoading } = useUpdateFaqSet({
