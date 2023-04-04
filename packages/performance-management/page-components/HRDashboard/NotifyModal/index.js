@@ -1,10 +1,10 @@
-import { Modal, Checkbox, Button } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 
 import styles from './styles.module.css';
 import useNotifyManagers from './useNotifyManagers';
 
 function NotifyModal({ modal = '', setModal = () => {} }) {
-	const { notify = () => {}, loading = false, setSendToAll, sendToAll } = useNotifyManagers({ setModal });
+	const { notify = () => {}, loading = false } = useNotifyManagers({ setModal });
 
 	return (
 		<Modal
