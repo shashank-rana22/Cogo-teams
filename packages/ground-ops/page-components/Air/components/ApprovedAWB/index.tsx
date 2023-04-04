@@ -8,7 +8,7 @@ import HAWBList from '../HawbList';
 import UploadModal from '../UploadModal';
 
 function ApprovedAWB({
-	data, loading, page, setPage, setGenerate, setItem, setViewDoc, edit, setEdit, listAPi, activeTab,
+	data, loading, page, setPage, setGenerate, setItem, setViewDoc, edit, setEdit, listAPI, activeTab,
 }) {
 	const [showUpload, setShowUpload] = useState(null);
 	const { fields } = ApprovedAWBFields;
@@ -74,7 +74,7 @@ function ApprovedAWB({
 			<UploadModal
 				showUpload={showUpload}
 				setShowUpload={setShowUpload}
-				listAPi={listAPi}
+				listAPI={listAPI}
 				edit={edit}
 				setEdit={setEdit}
 			/>

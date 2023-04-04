@@ -7,12 +7,12 @@ const useUpdateShipmentDocument = () => {
 		method : 'POST',
 	});
 
-	const updateDocument = async (payload, listAPi) => {
+	const updateDocument = async (payload, listAPI) => {
 		try {
 			await trigger({
 				data: payload,
 			});
-			listAPi({});
+			listAPI({});
 			Toast.success('Document Approved Successfully');
 		} catch (err) {
 			Toast.error(err?.response?.data?.base?.[0] || 'Something went wrong');

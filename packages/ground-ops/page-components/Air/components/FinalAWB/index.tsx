@@ -7,7 +7,7 @@ import { FinalAwbFields } from '../../configurations/final_awb';
 import UploadModal from '../UploadModal';
 
 function FinalAwb({
-	data, loading, page, setPage, edit, setEdit, listAPi,
+	data, loading, page, setPage, edit, setEdit, listAPI,
 }) {
 	const { fields } = FinalAwbFields;
 	const [showUpload, setShowUpload] = useState(null);
@@ -44,7 +44,7 @@ function FinalAwb({
 				setShowUpload={setShowUpload}
 				edit={edit}
 				setEdit={setEdit}
-				listAPi={listAPi}
+				listAPI={listAPI}
 			/>
 
 		</>

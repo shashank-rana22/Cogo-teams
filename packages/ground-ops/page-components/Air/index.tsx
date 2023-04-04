@@ -50,12 +50,12 @@ function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 
 	const {
 		data, loading, page,
-		setPage, listAPi, searchValue, setSearchValue,
+		setPage, listAPI, searchValue, setSearchValue,
 	} = useListShipmentPendingTasks({ activeTab, filter: filters, relevantToMe });
 
 	useEffect(() => {
-		listAPi();
-	}, [activeTab, listAPi]);
+		listAPI();
+	}, [activeTab, listAPI]);
 	return (
 		<div>
 			<div className={styles.container}>
@@ -118,7 +118,7 @@ function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 					setEdit={setEdit}
 					page={page}
 					setPage={setPage}
-					listAPi={listAPi}
+					listAPI={listAPI}
 					activeTab={activeTab}
 				/>
 			)}

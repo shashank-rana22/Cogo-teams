@@ -23,7 +23,7 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {}, relev
 		{ manual: true },
 	);
 
-	const listAPi = useCallback(() => {
+	const listAPI = useCallback(() => {
 		(async () => {
 			const payload = {
 				new_awb: {
@@ -84,13 +84,13 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {}, relev
 	}, [activeTab]);
 
 	useEffect(() => {
-		listAPi();
-	}, [listAPi, page, query]);
+		listAPI();
+	}, [listAPI, page, query]);
 
 	return {
 		data,
 		loading,
-		listAPi,
+		listAPI,
 		setPage,
 		page,
 		searchValue,

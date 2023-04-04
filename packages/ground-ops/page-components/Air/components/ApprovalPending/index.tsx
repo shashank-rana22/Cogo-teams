@@ -12,7 +12,7 @@ import DownloadModal from './DownloadModal';
 import styles from './styles.module.css';
 
 function ApprovalPending({
-	data, loading, page, setPage, setGenerate, setItem, setViewDoc, edit, setEdit, listAPi, activeTab,
+	data, loading, page, setPage, setGenerate, setItem, setViewDoc, edit, setEdit, listAPI, activeTab,
 }) {
 	const { fields } = ApprovalPendingFields;
 	const [showApprove, setShowApprove] = useState(null);
@@ -64,7 +64,7 @@ function ApprovalPending({
 			`Draft_Airway_Bill_For_Shipment_${serialId}_${new Date().getTime()}`
 			|| undefined,
 		};
-		await updateDocument(payload, listAPi);
+		await updateDocument(payload, listAPI);
 		setShowApprove(null);
 	};
 
@@ -168,7 +168,7 @@ function ApprovalPending({
 				setShowUpload={setShowUpload}
 				edit={edit}
 				setEdit={setEdit}
-				listAPi={listAPi}
+				listAPI={listAPI}
 			/>
 		</>
 	);

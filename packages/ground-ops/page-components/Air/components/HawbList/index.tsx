@@ -15,7 +15,7 @@ function HawbList({ data, setViewDoc, setItem }) {
 	const { loading:updateLoading, updateDocument } = useUpdateShipmentDocument();
 
 	const { fields } = HawbFields;
-	const { data:hawbData = {}, loading, getHawbList:listAPi } = useGetHawbList(data.shipmentId);
+	const { data:hawbData = {}, loading, getHawbList:listAPI } = useGetHawbList(data.shipmentId);
 
 	const handleClickOnDownload = (documentUrl) => {
 		if (typeof window !== 'undefined') {
@@ -29,8 +29,8 @@ function HawbList({ data, setViewDoc, setItem }) {
 	};
 
 	useEffect(() => {
-		listAPi();
-	}, [listAPi]);
+		listAPI();
+	}, [listAPI]);
 
 	const handleUpdate = async (values) => {
 		const serialId = values?.serialId || '';
@@ -47,7 +47,7 @@ function HawbList({ data, setViewDoc, setItem }) {
 			file_name:
 			`Draft_Airway_Bill_For_Shipment_${serialId}_${new Date().getTime()}`,
 		};
-		await updateDocument(payload, listAPi);
+		await updateDocument(payload, listAPI);
 		setShowApprove(null);
 	};
 
