@@ -13,7 +13,6 @@ import styles from './styles.module.css';
 import VoiceList from './VoiceList';
 
 function Customers({
-	setActiveCardId = () => {},
 	setActiveMessage = () => {},
 	setActiveVoiceCard = () => {},
 	activeVoiceCard,
@@ -24,8 +23,7 @@ function Customers({
 	activeTab,
 	setActiveTab = () => {},
 	toggleStatus,
-	messagesList = [],
-	unReadChatsCount = '',
+	chatsData = {},
 	setAppliedFilters = () => {},
 	appliedFilters = {},
 	fetchworkPrefernce = () => {},
@@ -47,10 +45,16 @@ function Customers({
 	modalType = {},
 	tagOptions = [],
 	mailProps = {},
+	firestore,
 }) {
 	const { emailAddress, buttonType, setButtonType } = mailProps;
 	const [isChecked, setIsChecked] = useState(false);
 	const [attachments, setAttachments] = useState([]);
+	const {
+		messagesList = [],
+		unReadChatsCount = 0,
+		sortedPinnedChatList = [],
+	} = chatsData || {};
 
 	const {
 		replyMailApi = () => {},
@@ -68,7 +72,6 @@ function Customers({
 	const handleOpenOptions = () => {
 		setIsChecked(!isChecked);
 	};
-	const unReadChatsCountDisplay = Number(unReadChatsCount || 0) > 49 ? '49+' : unReadChatsCount;
 
 	const COMPONENT_MAPPING = {
 		message : MessageList,
@@ -89,13 +92,15 @@ function Customers({
 		appliedFilters,
 		messagesLoading,
 		activeCardId,
-		setActiveCardId,
 		showBotMessages,
 		setShowBotMessages,
 		handleScroll,
 		setModalType,
 		modalType,
 		tagOptions,
+		userId,
+		sortedPinnedChatList,
+		firestore,
 	};
 
 	const voiceProps = {
@@ -157,7 +162,7 @@ function Customers({
 					themeType="secondary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="message" title="Chats" badge={unReadChatsCount !== 0 && unReadChatsCountDisplay} />
+					<TabPanel name="message" title="Chats" badge={unReadChatsCount !== 0 && unReadChatsCount} />
 					<TabPanel name="voice" title="Voice" />
 					<TabPanel name="mail" title="Mail" />
 				</Tabs>

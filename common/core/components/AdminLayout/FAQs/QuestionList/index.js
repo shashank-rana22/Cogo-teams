@@ -108,6 +108,7 @@ function QuestionList({
 								</div>
 							</div>
 						))}
+						{ search && <EmptySearchState search={search} source="list" />}
 					</div>
 
 					{(pageData?.total_count || 0) > 10 ? (

@@ -15,7 +15,7 @@ const getActiveCardDetails = (data = {}) => {
 		sender = null,
 		...rest
 	} = data || {};
-
+	const lowerCasedName = user_name?.toLowerCase();
 	if (channel_type === 'platform_chat') {
 		return {
 			...rest,
@@ -29,10 +29,11 @@ const getActiveCardDetails = (data = {}) => {
 			user_type,
 			sender,
 			email            : user_email,
-			search_user_name : user_name,
+			search_user_name : lowerCasedName,
 
 		};
 	}
+
 	if (isEmpty(Object.keys(user_details || {}))) {
 		return {
 			...rest,
@@ -42,7 +43,7 @@ const getActiveCardDetails = (data = {}) => {
 			user_id          : null,
 			channel_type,
 			user_type,
-			search_user_name : user_name,
+			search_user_name : lowerCasedName,
 		};
 	}
 
@@ -65,7 +66,7 @@ const getActiveCardDetails = (data = {}) => {
 		channel_type,
 		email,
 		user_type,
-		search_user_name  : user_name,
+		search_user_name  : lowerCasedName,
 	};
 };
 export default getActiveCardDetails;

@@ -1,0 +1,39 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	border-radius: 6px;
+}
+
+.heading {
+	padding: 14px 0;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 150%;
+	color: #4f4f4f;
+}
+
+.go_back {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	margin-bottom: 12px;
+	cursor: pointer;
+}
+
+.tabs_container {
+	width: 100%;
+}
+
+.go_back_text {
+	margin-bottom: 0;
+	margin-left: 8px;
+	font-size: 20px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+}
