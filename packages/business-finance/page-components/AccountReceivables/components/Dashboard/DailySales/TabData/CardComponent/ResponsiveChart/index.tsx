@@ -3,6 +3,7 @@ import { StreamDatum } from '@cogoport/charts/stream/index';
 import { Loader } from '@cogoport/components';
 
 import getAmountInLakhCrK from '../../../../../../../commons/getAmountInLakhCrK';
+import EmptyState from '../../../../../../commons/EmptyStateDocs';
 
 import styles from './styles.module.css';
 
@@ -37,6 +38,9 @@ function ResponsiveChart({ data, loadingData }: ResponsiveChartProps) {
 		},
 	];
 
+	if (data === undefined) {
+		return <EmptyState />;
+	}
 	return (
 		loadingData ? <div className={styles.loader}><Loader style={{ height: '100px', width: '50px' }} /></div>
 			: (
@@ -95,4 +99,5 @@ function ResponsiveChart({ data, loadingData }: ResponsiveChartProps) {
 			)
 	);
 }
+
 export default ResponsiveChart;

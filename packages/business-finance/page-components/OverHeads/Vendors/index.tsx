@@ -1,6 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { Select, Button, Input, Tooltip } from '@cogoport/components';
 import { IcMCrossInCircle, IcMSearchlight, IcMFtick, IcMInfo } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
@@ -27,6 +28,8 @@ interface ItemProps {
 }
 
 function VenderComponent() {
+	const router = useRouter();
+
 	const [filters, setFilters] = useState({
 		KYC_STATUS  : '',
 		CATEGORY    : '',
@@ -51,9 +54,11 @@ function VenderComponent() {
 		}));
 	};
 
-	// const handleClick = () => {
-	// 	router.push('/onboard-vendor');  // Will redirect to VRM when their VRM is live
-	// };
+	const handleClick = () => {
+		router.push(
+			'/onboard-vendor',
+		);
+	};
 
 	const renderHeaders = () => (
 		<div className={styles.header_container}>
@@ -87,8 +92,8 @@ function VenderComponent() {
 				<Button
 					size="lg"
 					themeType="secondary"
-					disabled
-					style={{ border: '1px solid black', fontSize: '14px' }}
+					onClick={handleClick}
+					className={styles.cta_button}
 				>
 					Create Vendor
 				</Button>
@@ -240,8 +245,6 @@ function VenderComponent() {
 		},
 	};
 
-	const isListEmpty = listData?.list?.length === 0;
-
 	return (
 		<div className={styles.vendor_container}>
 			{renderHeaders()}
@@ -259,18 +262,6 @@ function VenderComponent() {
 				showPagination
 				renderDropdown={(id) => renderDropdown(id)}
 			/>
-			<div>
-				{isListEmpty
-					&& (
-						<div className={styles.no_data}>
-							<img
-								style={{ width: '26%', margin: '10%' }}
-								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no result.svg"
-								alt="no data"
-							/>
-						</div>
-					)}
-			</div>
 
 			{
                 showModal && <CreateVendorModal showModal={showModal} setShowModal={setShowModal} />

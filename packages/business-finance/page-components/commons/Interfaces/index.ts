@@ -43,12 +43,14 @@ export interface TableProps {
 	className?: string;
 	style?: React.CSSProperties;
 	columns: object[];
+	loading: boolean;
 	data: object[];
 	layoutType?: 'table' | 'block' | 'flex' | 'absolute';
 	selectType?: 'single' | 'multiple';
 	onRowSelect?: (row: object) => void;
 	onRowClick?: (row: object) => void;
 	getRowId?: (row: object) => string;
+	imageFind:string;
 }
 
 export interface ListDataProps {

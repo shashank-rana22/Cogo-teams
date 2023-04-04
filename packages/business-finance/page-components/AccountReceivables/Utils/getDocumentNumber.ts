@@ -11,7 +11,7 @@ export const getDocumentNumber = ({ itemData }: Object) => {
 
 export const getDocumentUrl = ({ itemData }: Object) => {
 	if (!isEmpty(getByKey(itemData, 'invoiceNumber'))) {
-		return getByKey(itemData, 'invoicePdfUrl');
+		return getByKey(itemData, 'invoicePdf');
 	}
 	return getByKey(itemData, 'proformaPdfUrl');
 };

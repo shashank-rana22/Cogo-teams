@@ -1,4 +1,5 @@
 import { Select } from '@cogoport/components';
+import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 
 import SegmentedControl from '../../../commons/SegmentedControl';
 import { SERVICE_PROVIDER, SHIPMENT_TYPE_OPTIONS } from '../../constants';
@@ -7,7 +8,6 @@ import useReceivablesDashboard from '../../hooks/useReceivablesDashboard';
 import DailySales from './DailySales';
 import DailySalesOutstanding from './DailySalesOutstanding/index';
 import DateAndAccount from './DateAndAccount';
-import EntityTab from './EntityTab';
 import InvoiceJourney from './InvoiceJourney';
 import OutstandingAge from './OutstandingAge';
 import OutStandingKam from './OutstandingKam';
@@ -49,8 +49,21 @@ function Dashboard() {
 
 	return (
 		<div>
-			<div>
-				<EntityTab filterValue={filterValue} setFilterValue={setFilterValue} />
+			<div className={styles.entity_container}>
+
+				<div className={styles.styled_text}>Entity Code</div>
+				<div className={styles.input}>
+					<AsyncSelect
+						name="business_name"
+						asyncKey="list_cogo_entity"
+						valueKey="entity_code"
+						initialCall
+						onChange={(userId:string) => onChange(userId, 'entityCode')}
+						value={filterValue.entityCode}
+						placeholder="Select Entity Code"
+						size="sm"
+					/>
+				</div>
 			</div>
 			<DateAndAccount outstandingData={outstandingData} outstandingLoading={outstandingLoading} />
 			<ServiceCard outstandingData={outstandingData} outstandingLoading={outstandingLoading} />

@@ -37,7 +37,7 @@ const useGetInvoiceJourney = ({ filterValue }:ParamsInterface) => {
 		{
 			url     : '/payments/dashboard/invoice-tat-stats',
 			method  : 'get',
-			authKey : 'get_payments_dashboard_invoice_timeline',
+			authKey : 'get_payments_dashboard_invoice_tat_stats',
 		},
 		{ manual: true },
 	);

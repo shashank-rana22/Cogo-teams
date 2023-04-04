@@ -2339,6 +2339,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'user',
 		},
+		{
+			api          : 'update_user',
+			access_type  : 'private',
+			service_name : 'user',
+		},
 	],
 	support_crm: [
 		{
@@ -2694,6 +2699,26 @@ const partner = {
 			api          : 'verify_otp',
 			access_type  : 'private',
 			service_name : 'user',
+		},
+		{
+			api          : 'list_vendors',
+			access_type  : 'private',
+			service_name : 'vendor',
+		},
+		{
+			api          : 'get_vendor',
+			access_type  : 'private',
+			service_name : 'vendor',
+		},
+		{
+			api          : 'verify_vendor_kyc',
+			access_type  : 'private',
+			service_name : 'vendor',
+		},
+		{
+			api          : 'update_vendor_document',
+			access_type  : 'private',
+			service_name : 'vendor',
 		},
 	],
 	finance_crm: [
@@ -6716,17 +6741,21 @@ const partner = {
 	],
 	cogo_book: [
 		{
-			api         : 'get_incident_management_incident_list',
+			api         : 'get_pnl_accrual_archive_shipment_list',
 			access_type : 'private',
 		},
 		{
-			api         : 'patch_incident_management_incident_by_id',
+			api         : 'get_pnl_statement_salary',
 			access_type : 'private',
 		},
 		{
 			api          : 'list_cogo_entities',
 			access_type  : 'private',
 			service_name : 'partner',
+		},
+		{
+			api         : 'get_pnl_statement_list',
+			access_type : 'private',
 		},
 		{
 			api         : 'post_payments_journal_voucher_approve',
@@ -6824,6 +6853,46 @@ const partner = {
 			module      : 'accruals',
 			feature     : 'accruals',
 		},
+		{
+			api         : 'get_pnl_statement_report',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_pnl_statement_segments',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_pnl_statement_customizations',
+			access_type : 'private',
+		},
+		{
+			api         : 'delete_pnl_statement_customizations',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_pnl_statement_list_customizations',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_pnl_statement_turnover_ratios',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_pnl_statement_turnover_ratios',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_pnl_statement_locked_periods',
+			access_type : 'private',
+		},
+		{
+			api         : 'delete_pnl_statement_salary',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_pnl_statement_source_file',
+			access_type : 'private',
+		},
 	],
 	account_payables: [
 		{
@@ -6902,8 +6971,9 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'list_cogo_entities',
-			access_type : 'private',
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 		{
 			api         : 'list_organizations',
@@ -6982,6 +7052,66 @@ const partner = {
 		},
 		{
 			api         : 'get_purchase_payable_tolerance',
+			access_type : 'private',
+			module      : 'Dashboard',
+			feature     : 'Dashboard',
+		},
+		{
+			api         : 'get_purchase_payable_dashboard_paybles_by_service',
+			access_type : 'private',
+			module      : 'Dashboard',
+			feature     : 'Dashboard',
+		},
+		{
+			api         : 'get_purchase_payable_dashboard_daily_payable_outstanding',
+			access_type : 'private',
+			module      : 'Dashboard',
+			feature     : 'Dashboard',
+		},
+		{
+			api         : 'get_purchase_payable_dashboard_events_trend',
+			access_type : 'private',
+			module      : 'Dashboard',
+			feature     : 'Dashboard',
+		},
+		{
+			api         : 'get_purchase_payable_dashboard_total_paybles',
+			access_type : 'private',
+			module      : 'Dashboard',
+			feature     : 'Dashboard',
+		},
+		{
+			api         : 'get_purchase_payable_dashboard_bill_tat',
+			access_type : 'private',
+			module      : 'Dashboard',
+			feature     : 'Dashboard',
+		},
+		{
+			api         : 'get_payments_outstanding_paybles_info',
+			access_type : 'private',
+			module      : 'Dashboard',
+			feature     : 'Dashboard',
+		},
+		{
+			api         : 'get_payments_outstanding_top_ten_service_providers',
+			access_type : 'private',
+			module      : 'Dashboard',
+			feature     : 'Dashboard',
+		},
+		{
+			api         : 'get_purchase_payable_dashboard_age_payable',
+			access_type : 'private',
+			module      : 'Dashboard',
+			feature     : 'Dashboard',
+		},
+		{
+			api         : 'get_purchase_treasury_treasury_stats',
+			access_type : 'private',
+			module      : 'Dashboard',
+			feature     : 'Dashboard',
+		},
+		{
+			api         : 'get_payments_outstanding_by_supplier',
 			access_type : 'private',
 			module      : 'Dashboard',
 			feature     : 'Dashboard',
@@ -7490,13 +7620,19 @@ const partner = {
 			feature     : 'Dashboard',
 		},
 		{
-			api         : 'get_payments_dashboard_invoice_timeline',
+			api         : 'get_payments_dashboard_invoice_tat_stats',
 			access_type : 'private',
 			module      : 'Dashboard',
 			feature     : 'Dashboard',
 		},
 		{
 			api         : 'get_payments_dashboard_daily_sales_statistics',
+			access_type : 'private',
+			module      : 'Dashboard',
+			feature     : 'Dashboard',
+		},
+		{
+			api         : 'list_cogo_entities',
 			access_type : 'private',
 			module      : 'Dashboard',
 			feature     : 'Dashboard',
@@ -7702,6 +7838,40 @@ const partner = {
 		},
 		{
 			api         : 'post_sales_upload_translated_invoice',
+			access_type : 'private',
+		},
+	],
+	cfo_dashboard: [
+		{
+			api         : 'get_payments_dashboard_finance_profitability_shipment',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dashboard_finance_profitability_customer',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dashboard_finance_service_wise_rec_pay',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dashboard_finance_service_wise_overdue',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dashboard_finance_income_expense',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dashboard_finance_receivable_payable',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dashboard_finance_today_stats',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_purchase_treasury_treasury_stats',
 			access_type : 'private',
 		},
 	],
@@ -10967,6 +11137,16 @@ const partner = {
 			api          : 'update_user_room',
 			access_type  : 'private',
 			service_name : 'communication',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'convert_importer_exporter_to_channel_partner',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 	],
 	analytics_dashboard: [

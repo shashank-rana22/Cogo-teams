@@ -784,8 +784,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'business_finance-account_payables',
 				title         : 'AP',
-				href          : '/business-finance/account-payables/[active_tab]',
-				as            : '/business-finance/account-payables/dashboard',
+				href          : '/v2/business-finance/account-payables/[active_tab]',
+				as            : '/v2/business-finance/account-payables/dashboard',
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.account_payables,
@@ -811,8 +811,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'business_finance-cogo_book',
 				title         : 'Cogo Books',
-				href          : '/business-finance/cogo-book/[active_tab]',
-				as            : '/business-finance/cogo-book/Accruals',
+				href          : '/business-finance/cogo-book/[active_tab]/[view]',
+				as            : '/business-finance/cogo-book/accruals/shipment_view',
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.cogo_book,
@@ -834,6 +834,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.incident_controller,
+			},
+			{
+				key           : 'business_finance-cfo_dashboard',
+				title         : 'Finance Dashboard',
+				href          : '/v2/business-finance/cfo-dashboard/[activeTab]',
+				as            : '/v2/business-finance/cfo-dashboard/logistics',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.cfo_dashboard,
 			},
 			{
 				key           : 'business_finance-manual_invoice',
@@ -898,6 +907,7 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		module_type   : 'dashboards',
 	},
+
 	incentives: {
 		key       : 'incentives',
 		title     : 'Incentives/KPI',
@@ -1772,6 +1782,13 @@ const navigationMappingAdmin = {
 				as            : '/v2/allocation/core-engine',
 				possible_apis : apis.allocation_engine,
 			},
+			{
+				key           : 'allocations-crm_feedback_dashboard',
+				title         : 'CRM Feedback Dashboard',
+				href          : '/v2/allocation/crm-feedback-dashboard',
+				as            : '/v2/allocation/crm-feedback-dashboard',
+				possible_apis : apis.crm_feedback_dashboard,
+			},
 		],
 	},
 	kam_monitoring: {
@@ -1892,6 +1909,17 @@ const navigationMappingAdmin = {
 		possible_apis : apis.roles_permissions,
 		module_type   : 'crm',
 	},
+	vendor_rm: {
+		key           : 'vendor_rm',
+		title         : 'VRM',
+		icon          : IcMCrm,
+		href          : '/v2/vendors',
+		as            : '/v2/vendors',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.vendor_rm_apis,
+		module_type   : 'crm',
+	},
 	ticket_management: {
 		key       : 'ticket_management',
 		title     : 'Ticket Management',
@@ -2005,12 +2033,12 @@ const navigationMappingAdmin = {
 		options   : [
 			{
 				key           : 'cogo_academy-create_faq',
-				title         : 'Creator Management System',
-				href          : '/v2/learning/faq/create',
-				as            : '/v2/learning/faq/create',
+				title         : 'Control Center',
+				href          : '/v2/learning',
+				as            : '/v2/learning',
 				type          : 'link',
 				main_apis     : [],
-				possible_apis : apis.create_faq,
+				possible_apis : [...apis.create_faq, ...apis.create_test_set],
 			},
 			{
 				key           : 'cogo_academy-faq',
@@ -2020,6 +2048,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.faq,
+			},
+			{
+				key           : 'cogo_academy-tests',
+				title         : 'Test Module',
+				href          : '/v2/learning/tests/dashboard',
+				as            : '/v2/learning/tests/dashboard',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.tests,
 			},
 			{
 				key           : 'cogo_academy-announcements',

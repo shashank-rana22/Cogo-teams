@@ -27,8 +27,6 @@ function DailySalesOutstanding({
 	dailySalesOutstandingData,
 	dailySalesOutstandingApiLoading, quaterly, quaterlyLoading,
 }: DailySalesProps) {
-	console.log('dailySalesOutstandingData', dailySalesOutstandingData);
-
 	interface Props {
 		quarterView?: string;
 		graphView?: string;
@@ -98,7 +96,7 @@ function DailySalesOutstanding({
 							<div
 								className={styles.styled_daily_text}
 							>
-								Daily Sales Outstanding
+								Days Sales Outstanding
 							</div>
 
 							<Tooltip

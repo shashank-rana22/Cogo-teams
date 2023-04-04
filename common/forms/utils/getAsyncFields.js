@@ -53,6 +53,20 @@ function asyncFieldsOrganization() {
 	};
 }
 
+function asyncFieldsLeadOrganization() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'id',
+		endpoint    : 'list_lead_organizations',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
 function asyncFieldsOrganizationUsers() {
 	return {
 		labelKey    : 'name',
@@ -211,6 +225,21 @@ function listVendors() {
 	};
 }
 
+function asyncListCogoEntity() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'entity_code',
+		endpoint    : 'list_cogo_entities',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 100,
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -218,6 +247,7 @@ export {
 	asyncFieldsPartnerRoles,
 	asyncFieldsPartnerUsers,
 	asyncFieldsOrganizations,
+	asyncFieldsLeadOrganization,
 	asyncFieldsOrganizationUser,
 	asyncFieldsCampaignSegments,
 	asyncFieldsOrganization,
@@ -228,4 +258,5 @@ export {
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
 	listVendors,
+	asyncListCogoEntity,
 };
