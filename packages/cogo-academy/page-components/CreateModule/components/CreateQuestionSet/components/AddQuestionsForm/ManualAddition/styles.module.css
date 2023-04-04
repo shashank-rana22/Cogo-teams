@@ -1,9 +1,10 @@
 .breadcrumb_item {
-	font-size: 16px;
-	font-weight: 600;
-	color: #6fa5ab;
+  font-size: 16px;
+  font-weight: 600;
+  color: #6fa5ab;
 }
 
 .breadcrumb_container {
-	margin-top: 32px;
+  margin-top: 32px;
+  margin-bottom: 12px;
 }

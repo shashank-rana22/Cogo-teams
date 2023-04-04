@@ -1,6 +1,6 @@
-import { Button } from '@cogoport/components';
+import { Button, Tooltip } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
-import { IcMArrowBack, IcMDownload } from '@cogoport/icons-react';
+import { IcMArrowBack, IcMDownload, IcMRefresh } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useMemo } from 'react';
@@ -15,7 +15,7 @@ import styles from './styles.module.css';
 
 function CreateNewTest({
 	control, errors, data,
-	getTestLoading, setValue, watch, handleSubmit, uploadDocument, setUploadDocument, setShowQuestionSet,
+	getTestLoading, setValue, watch, handleSubmit, uploadDocument, setUploadDocument,
 }) {
 	const router = useRouter();
 
@@ -23,18 +23,14 @@ function CreateNewTest({
 
 	const { loading, createNewTest } = useCreateNewTest();
 
-	const { loading:test_sheet_loading, data: test_sheet_data, getTestSheet } = useGetTestSheet();
+	const { data: test_sheet_data, getTestSheet } = useGetTestSheet();
 
 	const select_user_group = watch('select_user_group') || [];
 
 	const radioGroupVal = watch('select_users') || '';
+	const cogoEntityWatch = watch('cogo_entity_id') || '';
 
 	const { audienceOptions = [] } = useGetUserGroups();
-
-	const controls = useMemo(
-		() => getControls([...audienceOptions] || [], (select_user_group.length === 0)),
-		[select_user_group.length, audienceOptions],
-	);
 
 	const onNavigate = () => {
 		const href = '/learning?activeTab=test_module';
@@ -42,15 +38,25 @@ function CreateNewTest({
 	};
 
 	useEffect(() => {
-		const { cogo_entity_object = {}, name = '', audience_ids = [], eligible_users = '' } = data;
+		if (!isEmpty(data)) {
+			const { cogo_entity_object = {}, name = '', audience_ids = [], eligible_users = '' } = data;
 
-		const { id } = cogo_entity_object || {};
+			const { id } = cogo_entity_object || {};
 
-		setValue('name', name);
-		setValue('cogo_entity_id', id);
-		setValue('select_user_group', audience_ids);
-		setValue('select_users', eligible_users);
-	}, [data, setValue]);
+			setValue('name', name);
+
+			if (isEmpty(cogoEntityWatch)) {
+				setValue('cogo_entity_id', id);
+			}
+			setValue('select_user_group', audience_ids);
+			setValue('select_users', eligible_users);
+		}
+	}, [cogoEntityWatch, data, setValue]);
+
+	const controls = useMemo(
+		() => getControls([...audienceOptions] || [], (select_user_group.length === 0), !isEmpty(data)),
+		[select_user_group.length, audienceOptions, data],
+	);
 
 	return (
 		<div>
@@ -121,7 +127,6 @@ function CreateNewTest({
 						onClick={
 							handleSubmit((values) => {
 								createNewTest({ data: values });
-								setShowQuestionSet(true);
 							})
 						}
 					>
@@ -132,33 +137,60 @@ function CreateNewTest({
 
 			{radioGroupVal === 'excel' && (
 				<>
-					<div className={styles.btn_container}>
 
-						{isEmpty(data) && (
-							<Button
-								size="sm"
-								themeType="primary"
-								loading={loading || getTestLoading}
-								onClick={
+					{isEmpty(data) ? (
+						<Button
+							size="sm"
+							themeType="primary"
+							className={styles.btn}
+							loading={loading || getTestLoading}
+							onClick={
 							handleSubmit((values) => {
 								createNewTest({ data: values });
 							})
 						}
-							>
-								Save and Generate
-							</Button>
-						)}
-
-						<Button
-							size="sm"
-							themeType="secondary"
-							loading={test_sheet_loading || loading}
-							onClick={() => {
-								getTestSheet(test_sheet_id);
-							}}
 						>
-							Refresh
+							Save and Generate
 						</Button>
+					) : (
+						<p className={styles.content}>
+							You may Upload your own Excel in required
+							format
+							{' '}
+							<b>OR</b>
+							{' '}
+							Download the list of Users, Edit and Upload that excel
+							{' '}
+							<sup className={styles.sup}>*</sup>
+						</p>
+					)}
+
+					<div className={styles.btn_container}>
+
+						{!(test_sheet_data.test_sheet_data?.status === 'generated') && !isEmpty(data) && (
+
+							<div className={styles.tooltip_container} style={{ width: 'fit-content' }}>
+
+								<Tooltip
+									maxWidth={400}
+									className={styles.refresh_tooltip}
+									content="Refresh to see if list has been Generated"
+									placement="top"
+									visible
+								>
+									<div
+										className={styles.sample_div}
+										role="presentation"
+										onClick={() => {
+											getTestSheet(test_sheet_id);
+										}}
+									>
+										<IcMRefresh />
+										<div className={styles.sample_text}>Refresh</div>
+									</div>
+								</Tooltip>
+							</div>
+						)}
 
 						{test_sheet_data.test_sheet_data?.status === 'generated' && (
 							<div
@@ -170,21 +202,24 @@ function CreateNewTest({
 								)}
 							>
 								<IcMDownload />
-								<div className={styles.sample_text}>Download Excel Format</div>
+								<div className={styles.sample_text}>Download User List</div>
 							</div>
 						)}
 
 					</div>
 
-					<FileUploader
-						className={styles.file_select}
-						showProgress
-						draggable
-						value={uploadDocument}
-						onChange={setUploadDocument}
-						accept=".xlsx,.csv"
-						disabled={test_sheet_data.test_sheet_data?.status !== 'generated'}
-					/>
+					{!isEmpty(data) && (
+						<FileUploader
+							className={styles.file_select}
+							showProgress
+							draggable
+							value={uploadDocument}
+							onChange={setUploadDocument}
+							accept=".xlsx,.csv"
+							disabled={!(test_sheet_data.test_sheet_data?.status === 'generated')}
+						/>
+					)}
+
 				</>
 			)}
 

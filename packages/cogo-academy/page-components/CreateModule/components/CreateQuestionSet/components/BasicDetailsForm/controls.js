@@ -1,7 +1,7 @@
 const getControls = ({ mode }) => [
 	{
 		name        : 'name',
-		label       : 'Name of Question Set:',
+		label       : 'Name of Question Set',
 		type        : 'input',
 		placeholder : 'Type name...',
 		disabled    : mode === 'view',
@@ -9,7 +9,7 @@ const getControls = ({ mode }) => [
 	},
 	{
 		name     : 'cogo_entity_id',
-		label    : 'Select Cogo Entity:',
+		label    : 'Select Cogo Entity',
 		type     : 'async-select',
 		asyncKey : 'partners',
 		disabled : mode === 'view',
@@ -25,7 +25,7 @@ const getControls = ({ mode }) => [
 	},
 	{
 		name        : 'topic',
-		label       : 'Select Set Topic:',
+		label       : 'Select Set Topic',
 		type        : 'input',
 		disabled    : mode === 'view',
 		placeholder : 'Select topic name',
