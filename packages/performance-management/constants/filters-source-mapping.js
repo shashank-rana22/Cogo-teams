@@ -59,5 +59,11 @@ const filtersSourceMapping = {
 		],
 		right: [{ name: 'Q' }],
 	},
+	past_stats: {
+		left: [
+			{ name: 'Year' },
+			{ name: 'Month' },
+		],
+	},
 };
 export default filtersSourceMapping;

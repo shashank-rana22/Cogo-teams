@@ -1,10 +1,9 @@
-import { Toast, Select } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { Toast } from '@cogoport/components';
 
 import EmptyState from '../../../../common/EmptyState';
+import Filters from '../../../../common/Filters';
 import PerformanceChart from '../../../../common/PerformanceChart';
 import useGetMonthStats from '../../../../hooks/useGetMonthStats';
-import getMonthControls from '../../../../utils/monthControls';
 import TeamMembersList from '../../TeamMembersList';
 
 import styles from './styles.module.css';
@@ -15,11 +14,6 @@ function PastStats() {
 	const { list = [], pagination_data = {}, is_manager = true } = data;
 
 	const { total_count = '' } = pagination_data;
-	const monthControls = getMonthControls(params?.Year, params?.Month);
-
-	const setFilter = (val, type) => {
-		setParams({ ...params, [type]: val || undefined, Page: 1 });
-	};
 
 	if (!is_manager) {
 		Toast.error('No Account Found In Your Team, Kindly Visit User Dashboard for Info Relevant to your accounts');
@@ -37,23 +31,7 @@ function PastStats() {
 	return (
 		<div>
 			<div className={styles.filters}>
-				{monthControls.map((cntrl) => {
-					const value = startCase(cntrl.name);
-					if (['year', 'month'].includes(cntrl.name)) {
-						return (
-							<Select
-								{...cntrl}
-								key={cntrl.name}
-								value={params[value]}
-								onChange={(val) => setFilter(val, value)}
-								placeholder={`Select ${value}`}
-								style={{ marginRight: '8px' }}
-								options={cntrl.options}
-							/>
-						);
-					}
-					return null;
-				})}
+				<Filters source="past_stats" params={params} setParams={setParams} />
 			</div>
 
 			<div className={styles.stats_section}>

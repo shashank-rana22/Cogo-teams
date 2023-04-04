@@ -28,7 +28,7 @@ function UserStats({ source = '' }) {
 	};
 
 	const {
-		feedbackData = {}, loading, params,
+		feedbackData = {}, loading, params, setParams,
 		setPage,
 	} = useListUserFeedbacks({
 		userId,
@@ -68,7 +68,7 @@ function UserStats({ source = '' }) {
 				<div className={styles.user_profile}><UserProfile userId={userId} /></div>
 
 				<div className={styles.filter_container}>
-					<Filters source="user_dashboard" params={params} />
+					<Filters source="user_dashboard" params={params} setParams={setParams} />
 
 				</div>
 

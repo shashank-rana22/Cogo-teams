@@ -5,7 +5,7 @@
 
 	:global {
 		.ui_select_display_container {
-			width: 160px;
+			max-width: 160px;
 		}
 
 		.ui_input_container {
@@ -16,19 +16,10 @@
 
 .left_container {
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .right_container {
 	display: flex;
 }
 
-.department_select {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-	width: 100%;
-}
-
-.sub_container {
-	display: flex;
-}

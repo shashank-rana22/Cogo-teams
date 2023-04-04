@@ -33,12 +33,13 @@
 	word-break: break-word;
 }
 
-.pip_select {
+.button_container {
 	display: flex;
+	width: 100%;
 	justify-content: center;
 }
 
-.pip_select_btn {
+.select_btn {
 	margin: 8px;
 	border: solid 1px #88cad1;
 }

@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 import filtersSourceMapping from '../../constants/filters-source-mapping';
 import useGetControls from '../../utils/filterControls';
-import { getFieldController } from '../Form/getFieldController';
+import { getElementController } from '../../utils/getElementController';
 
 import styles from './styles.module.css';
 
@@ -54,7 +54,7 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 			<div className={styles.left_container}>
 				{filterControls.left.map((cntrl) => {
 					if (isEmpty(cntrl)) { return null; }
-					const Element = getFieldController(cntrl.type);
+					const Element = getElementController(cntrl.type);
 
 					const value = startCase(cntrl.name);
 
@@ -65,7 +65,7 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 							key={cntrl.name}
 							id={`${cntrl}_id`}
 							value={params[value]}
-							style={{ marginRight: '8px' }}
+							style={{ margin: '8px 8px 0 0' }}
 						/>
 					);
 				})}
@@ -74,7 +74,7 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 			<div className={styles.right_container}>
 				{filterControls.right.map((cntrl) => {
 					if (isEmpty(cntrl)) { return null; }
-					const Element = getFieldController(cntrl?.type);
+					const Element = getElementController(cntrl?.type);
 
 					const value = startCase(cntrl?.name);
 
@@ -85,7 +85,7 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 							key={cntrl.name}
 							id={`${cntrl}_id`}
 							value={params[value]}
-							style={{ marginRight: '8px' }}
+							style={{ marginRight: '8px 8px 0 0' }}
 						/>
 					);
 				})}

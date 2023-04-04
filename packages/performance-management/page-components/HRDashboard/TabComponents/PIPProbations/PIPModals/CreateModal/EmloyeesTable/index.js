@@ -61,7 +61,7 @@ function EmployeesTable({ source = 'log_modal', setItem = () => {} }) {
 					<SelectController
 						{...cogoUsersControl}
 						control={control}
-						placeholder="Select Manger..."
+						placeholder="Select Manager..."
 						isClearable
 					/>
 				</div>
