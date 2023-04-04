@@ -88,6 +88,16 @@ const performance_management = {
 			service_name : 'iris',
 		},
 		{
+			api          : 'post_iris_create_form_responses',
+			access_type  : 'private',
+			service_name : 'iris',
+		},
+		{
+			api          : 'post_iris_update_form_responses',
+			access_type  : 'private',
+			service_name : 'iris',
+		},
+		{
 			api          : 'get_iris_get_department_mappings',
 			access_type  : 'private',
 			service_name : 'iris',
