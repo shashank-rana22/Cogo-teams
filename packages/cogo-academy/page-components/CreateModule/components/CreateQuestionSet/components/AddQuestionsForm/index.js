@@ -122,7 +122,7 @@ function AddQuestionsForm({
 					<div className={styles.button_container}>
 						<Button
 							type="button"
-							disabled={showBulkUpload}
+							disabled={showBulkUpload || !allKeysSaved}
 							loading={loading}
 							themeType="primary"
 							style={{ marginRight: '12px' }}
@@ -136,7 +136,7 @@ function AddQuestionsForm({
 
 						<Button
 							type="button"
-							disabled={!allKeysSaved}
+							disabled={!allKeysSaved || showBulkUpload}
 							loading={loading}
 							themeType="secondary"
 							onClick={() => {

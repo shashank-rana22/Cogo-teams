@@ -26,7 +26,7 @@ function ManualAddition({
 					className={styles.breadcrumb_item}
 				/>
 				<Breadcrumb.Item
-					style={{ color: '#ee3425' }}
+					style={{ color: '#221F20' }}
 					className={styles.breadcrumb_item}
 					label="Manual Addition"
 				/>

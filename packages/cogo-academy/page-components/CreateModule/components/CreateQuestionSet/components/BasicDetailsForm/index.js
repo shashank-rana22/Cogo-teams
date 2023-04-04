@@ -113,6 +113,7 @@ function BasicDetailsForm({
 						/>
 					</div>
 				</div>
+
 				<Modal
 					size="sm"
 					show={showModal}

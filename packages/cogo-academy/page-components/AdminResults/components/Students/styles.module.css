@@ -24,9 +24,7 @@
 				border-radius: 8px;
 
 				.ui_table_body_cell {
-					height: 43px !important;
-
-					/* padding-block: 20px; */
+					height: 42px !important;
 					font-size: 12px;
 					color: #221f20;
 				}
