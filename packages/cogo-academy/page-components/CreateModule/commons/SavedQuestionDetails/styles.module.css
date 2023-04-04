@@ -1,8 +1,8 @@
 .table_container {
 	max-width: 100%;
 	padding: unset !important;
-	overflow: scroll;
 	margin-top: 12px;
+	overflow: scroll;
 
 	:global {
 		.ui_table_head_row {

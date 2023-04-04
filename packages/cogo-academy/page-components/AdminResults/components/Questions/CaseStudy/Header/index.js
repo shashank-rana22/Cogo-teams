@@ -47,7 +47,7 @@ function Header({
 
 							<div className={styles.description_content_container}>
 								<Pill size="md" color="#F3FAFA">
-									<div className={styles.keys}>{key || '-'}</div>
+									{key || '-'}
 								</Pill>
 							</div>
 						</div>

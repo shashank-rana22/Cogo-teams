@@ -1,4 +1,4 @@
-import { Pill, Table, Placeholder } from '@cogoport/components';
+import { Table, Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
