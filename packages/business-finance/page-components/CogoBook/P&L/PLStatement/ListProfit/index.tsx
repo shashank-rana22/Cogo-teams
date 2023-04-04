@@ -178,9 +178,9 @@ function ListProfit({
 										</>
 									) }
 									{isRowVisible &&	(
-										<>
+										<div className={styles.particular_data}>
 											{(operatingExpenses * ratio).toFixed(2)}
-										</>
+										</div>
 									)}
 									{dropDown?.operating && (
 										<>
