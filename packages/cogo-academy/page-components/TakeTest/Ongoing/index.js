@@ -79,19 +79,6 @@ function Ongoing({ testData, page, setActiveState, currentQuestionId, test_user_
 		return () => document.removeEventListener('visibilitychange', onVisibilityChange);
 	}, [endTest]);
 
-	if (showLeaveTestModal) {
-		return (
-			<LeaveTest
-				showLeaveTestModal={showLeaveTestModal}
-				setShowLeaveTestModal={setShowLeaveTestModal}
-				setActiveState={setActiveState}
-				test_user_mapping_id={test_user_mapping_id}
-				user_appearance={user_appearance}
-				total_question_count={total_question_count}
-			/>
-		);
-	}
-
 	if (showTimeOverModal) {
 		return (
 			<EndTimer
@@ -105,6 +92,22 @@ function Ongoing({ testData, page, setActiveState, currentQuestionId, test_user_
 		);
 	}
 
+	if (showLeaveTestModal) {
+		return (
+			<LeaveTest
+				showLeaveTestModal={showLeaveTestModal}
+				setShowLeaveTestModal={setShowLeaveTestModal}
+				setActiveState={setActiveState}
+				test_user_mapping_id={test_user_mapping_id}
+				user_appearance={user_appearance}
+				total_question_count={total_question_count}
+				start_time={start_time}
+				testData={testData}
+				setShowTimeOverModal={setShowTimeOverModal}
+			/>
+		);
+	}
+
 	if (showSubmitTestModal) {
 		return (
 			<SubmitTest
@@ -114,6 +117,9 @@ function Ongoing({ testData, page, setActiveState, currentQuestionId, test_user_
 				test_user_mapping_id={test_user_mapping_id}
 				user_appearance={user_appearance}
 				total_question_count={total_question_count}
+				start_time={start_time}
+				testData={testData}
+				setShowTimeOverModal={setShowTimeOverModal}
 			/>
 		);
 	}
@@ -124,6 +130,9 @@ function Ongoing({ testData, page, setActiveState, currentQuestionId, test_user_
 				guidelines={guidelines}
 				loading={loading}
 				setShowInstructionsModal={setShowInstructionsModal}
+				start_time={start_time}
+				testData={testData}
+				setShowTimeOverModal={setShowTimeOverModal}
 			/>
 		);
 	}

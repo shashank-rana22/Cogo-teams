@@ -1,5 +1,6 @@
 .main_container {
 	display: flex;
+	align-items: center;
 	margin-bottom: 72px;
 }
 
