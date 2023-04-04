@@ -4,7 +4,7 @@ import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import TAB_PANEL_MAPPING from '../../constants/table-panel-mapping';
+import { TAB_PANEL_MAPPING, CONSTANT_KEYS } from '../../constants/table-panel-mapping';
 import useGetExpertiseParameters from '../../hooks/useGetExpertiseParameters';
 import useGetKamExpertiseConfig from '../../hooks/useGetKamExpertiseConfig';
 import useGetKamExpertiseCurrentConfig from '../../hooks/useGetKamExpertiseCurrentConfig';
@@ -13,6 +13,8 @@ import usePublishDraft from '../../hooks/usePublishDraft';
 import CurrentConfigurations from './CurrentConfigurations';
 import PublishVersionModal from './PublishVersionModal';
 import styles from './styles.module.css';
+
+const { KAM_EXPERTISE_SCORE_CONFIG, KAM_LEVEL_CONFIG } = CONSTANT_KEYS;
 
 function ViewAllConfigs() {
 	const router = useRouter();
@@ -37,16 +39,17 @@ function ViewAllConfigs() {
 		refetch,
 		cardRefetch,
 		expertiseRefetch,
+		list,
 	});
 
 	const componentProps = {
-		'kam-expertise-score-config': {
+		[KAM_EXPERTISE_SCORE_CONFIG]: {
 			listExpertiseParams,
 			expertiseLoading,
 			expertiseRefetch,
 			cardRefetch,
 		},
-		'kam-level-config': {
+		[KAM_LEVEL_CONFIG]: {
 			levelLoading,
 			kamConfigDetails,
 			refetch,
