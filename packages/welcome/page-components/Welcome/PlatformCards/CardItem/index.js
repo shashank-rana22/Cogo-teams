@@ -6,7 +6,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function CardItem({ data = {} }) {
-	const { icon_url, heading, desc, login_id, password, href, eye_button_text } = data;
+	const { icon_url, heading, desc, href, eye_button_text } = data;
 
 	const { label, url } = href;
 
@@ -36,7 +36,7 @@ function CardItem({ data = {} }) {
 
 					<div className={styles.description}>{desc}</div>
 
-					<div className={styles.login_details}>
+					{/* <div className={styles.login_details}>
 						<span>
 							<strong>Login id - </strong>
 							{' '}
@@ -47,7 +47,8 @@ function CardItem({ data = {} }) {
 							<strong>Password - </strong>
 							{password}
 						</span>
-					</div>
+					</div> */}
+					<div className={styles.description}>* Demo login details will be shared here soon</div>
 
 				</div>
 
