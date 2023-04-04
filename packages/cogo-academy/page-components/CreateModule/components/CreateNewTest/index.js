@@ -11,9 +11,9 @@ import TABS_MAPPING from './configs/TABS_MAPPING';
 import styles from './styles.module.css';
 
 function CreateTest() {
-	const { general: { query:urlQuery } } = useSelector((state) => state);
+	const { general: { query: urlQuery } } = useSelector((state) => state);
 
-	const { id:test_id } = urlQuery || {};
+	const { id: test_id } = urlQuery || {};
 
 	const [activeStepper, setActiveStepper] = useState('details_and_questions');
 
@@ -45,7 +45,9 @@ function CreateTest() {
 	};
 
 	useEffect(() => {
-		if (!isEmpty(test_id)) { getTest({ test_id }); }
+		if (!isEmpty(test_id)) {
+			getTest({ test_id });
+		}
 	}, [getTest, test_id, activeStepper]);
 
 	const { component: ActiveComponent, props: activeComponentProps } = COMPONENT_MAPPING[activeStepper];
