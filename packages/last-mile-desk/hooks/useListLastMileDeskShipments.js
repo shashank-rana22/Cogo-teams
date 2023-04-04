@@ -1,25 +1,28 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useState, useEffect, useCallback } from 'react';
 
 import getLastMileAddtionalMethods from '../helpers/getLastMileAddtionalMethods';
 import getLastMileFilters from '../helpers/getLastMileFilters';
 
 const useListLastMileDeskShipments = ({ stateProps = {} }) => {
-	const { filters, activeTab, setFilters, scopeFilters } = stateProps || {};
-
-	const [apiData, setApiData] = useState({});
-
+	const { filters, activeTab, setFilters } = stateProps || {};
 	const { page = 1, ...restFilters } = filters || {};
 
-	const formattedFilters = getLastMileFilters({ filters: restFilters, stateProps });
+	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
+
+	const [apiData, setApiData] = useState({});
 
 	const additional_methods = getLastMileAddtionalMethods({ activeTab });
 
 	const [{ loading }, trigger] = useRequest({
 		url    : 'fcl_freight/list_lastmile_desk_shipments',
 		params : {
-			filters    : { ...formattedFilters },
+			filters: {
+				...getLastMileFilters({ filters: restFilters, stateProps }),
+				...(selected_agent_id ? { stakeholder_id: selected_agent_id } : {}),
+			},
 			additional_methods,
 			page,
 			page_limit : 10,
@@ -42,12 +45,23 @@ const useListLastMileDeskShipments = ({ stateProps = {} }) => {
 	}, [trigger, setFilters, page, filters]);
 
 	useEffect(() => {
+		const [, scope, view_type] = (authParams || '').split(':');
+		if (!scope) { return; }
+
+		const newScopeFilters = { scope, view_type, selected_agent_id };
 		apiTrigger();
-		localStorage.setItem('last_mile_desk_values', JSON.stringify({ filters, activeTab, scopeFilters }));
-	}, [apiTrigger, filters, activeTab, scopeFilters]);
+
+		localStorage.setItem('last_mile_desk_values', JSON.stringify({
+			filters,
+			activeTab,
+			scopeFilters: newScopeFilters,
+		}));
+	}, [apiTrigger, filters, activeTab, authParams, selected_agent_id]);
 
 	return {
-		loading, apiTrigger, data: apiData,
+		loading,
+		apiTrigger,
+		data: apiData,
 	};
 };
 

@@ -1,24 +1,18 @@
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../commons/EmptyState';
-import Loader from '../../../commons/Loader';
-import useListLastMileDeskShipments from '../../../hooks/useListLastMileDeskShipments';
 
 import Card from './Card';
 import ListPagination from './ListPagination';
 import styles from './styles.module.css';
 
-function ShipmentList({ stateProps }) {
-	const { data, loading } = useListLastMileDeskShipments({ stateProps });
+function ShipmentList({ stateProps, loading, data }) {
 	const { list = [] } = data || {};
 	return (
 		<div>
-			{loading && <Loader />}
-
-			{!loading && isEmpty(list) && <EmptyState />}
-
-			{!loading && list?.length
-				&& (
+			{!loading
+			&& isEmpty(list) ? <EmptyState />
+				: (
 					<div>
 						<div className={styles.pagination_container}>
 							<ListPagination data={data} stateProps={stateProps} />

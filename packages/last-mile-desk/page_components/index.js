@@ -1,27 +1,18 @@
-import { useGetScopeOptions } from '@cogoport/scope-select';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import getLocalStorageVal from '../helpers/getLocalStorageVal';
 
 import Fcl from './Fcl';
 
 function LastMileDesk() {
-	const [filters, setFilters] = useState(null);
-	const [activeTab, setActiveTab] = useState(null);
-	const [scopeFilters, setScopeFilters] = useState(null);
-
-	const { scopeData } = useGetScopeOptions({});
+	const defaultValues = getLocalStorageVal();
+	const [filters, setFilters] = useState(defaultValues?.filters);
+	const [activeTab, setActiveTab] = useState(defaultValues?.activeTab);
+	const [scopeFilters] = useState(defaultValues?.scopeFilters);
 
 	const stateProps = { activeTab, setActiveTab, filters, setFilters, scopeFilters };
-	const defaultValues = getLocalStorageVal(scopeData);
 
-	useEffect(() => {
-		setFilters(defaultValues.filters);
-		setActiveTab(defaultValues.activeTab);
-		setScopeFilters(defaultValues.scopeFilters);
-	}, []);
-
-	return <Fcl stateProps={stateProps} />;
+	return activeTab ? <Fcl key={activeTab} stateProps={stateProps} /> : null;
 }
 
 export default LastMileDesk;

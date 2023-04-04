@@ -9,7 +9,7 @@ import FilterBy from './FilterBy';
 import styles from './styles.module.css';
 
 function Filters({ stateProps }) {
-	const { activeTab, filters = {}, setFilters } = stateProps || {};
+	const { activeTab, filters = {}, setFilters, scopeFilters } = stateProps || {};
 	const { criticalOn, q = '' } = filters || {};
 
 	const [popoverFilter, setPopoverFilter] = useState({ ...(filters || {}) });
@@ -69,7 +69,7 @@ function Filters({ stateProps }) {
 			</div>
 
 			<div>
-				<ScopeSelect size="md" />
+				<ScopeSelect size="md" defaultValues={scopeFilters} />
 			</div>
 		</div>
 	);
