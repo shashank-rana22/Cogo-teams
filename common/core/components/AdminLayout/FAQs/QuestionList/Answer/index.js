@@ -1,4 +1,5 @@
-import { Toast } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import {
 	IcMRedo,
 	IcMSad,
@@ -11,13 +12,13 @@ import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
-import DisLikeBox from './DisLikeBox';
+import FeedbackForm from './FeedbackForm';
 import Loader from './Loader';
 import RelatedQuestion from './RelatedQuestion';
 import styles from './styles.module.css';
 import useAnswer from './useAnswer';
 
-const FEEDBACK_MAPPING = {
+const FEEDBACK_MAPPING_ISLIKED = {
 	true  : 'liked',
 	false : 'disliked',
 };
@@ -37,66 +38,72 @@ function Answer({ topic = {}, question, setQuestion }) {
 		profile: { partner = '' },
 	} = useSelector((state) => state);
 
+	const { handleSubmit, control, watch } = useForm();
+
+	const watchQuestionCheckbox = watch('question_checkbox');
+	const watchAnswerCheckbox = watch('answer_checkbox');
+
 	const [show, setShow] = useState(false);
-	const [checkboxQ, setCheckboxQ] = useState(false);
-	const [checkboxA, setCheckboxA] = useState(false);
 	const [load, setload] = useState(true);
 
-	const { data: answerData, loading: getQuestionLoading, fetch } = useAnswer({ question });
+	const { data: answerData, loading, fetch } = useAnswer({ question });
 
-	const answer = answerData?.answers?.[0]?.answer;
-	const is_positive = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive;
-
-	const [isLiked, setIsLiked] = useState(FEEDBACK_MAPPING[is_positive] || '');
+	const [answer, setAnswer] = useState(answerData?.answers?.[0]?.answer);
 
 	useEffect(() => {
-		setIsLiked(FEEDBACK_MAPPING[is_positive] || '');
-	}, [getQuestionLoading, is_positive]);
+		setAnswer(answerData?.answers?.[0]?.answer);
+	}, [answerData]);
+
+	const is_positive = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive;
+
+	const [isLiked, setIsLiked] = useState(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 
 	const apiName = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id
 		? '/update_faq_feedback'
 		: '/create_faq_feedback';
 
-	const [{ loading = false }, trigger] = useRequest({
+	const [{ loading : feedbackLoading }, trigger] = useRequest({
 		url    : apiName,
-		method : 'post',
+		method : 'POST',
 	}, { manual: true });
 
-	const onClickLikeButton = async ({ id }) => {
+	const onClickLikeButton = async ({ _id }) => {
 		setload(false);
-
-		let payload = {
-			faq_answer_id : id,
-			is_positive   : true,
-			status        : 'active',
-		};
-		if (isLiked === 'liked') {
-			payload = {
-				id     : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-				status : 'inactive',
-			};
-		} else if (isLiked === 'disliked') {
-			payload = {
-				id          : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-				is_positive : true,
-				status      : 'active',
-			};
-		}
+		setIsLiked(isLiked === 'liked' ? '' : 'liked');
+		setShow(false);
 		try {
+			let payload = {
+				faq_answer_id : _id,
+				is_positive   : true,
+				status        : 'active',
+			};
+			if (isLiked === 'liked') {
+				payload = {
+					id     : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+					status : 'inactive',
+				};
+			} else if (isLiked === 'disliked') {
+				payload = {
+					id          : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+					is_positive : true,
+					status      : 'active',
+				};
+			}
+
 			await trigger({
 				data: payload,
 			});
 
-			setIsLiked(isLiked === 'liked' ? '' : 'liked');
-
 			fetch();
 		} catch (error) {
-			Toast.error(error);
+			Toast.error(error?.message);
+			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
 	};
 
 	const onClickRemoveDisLike = async () => {
 		setload(false);
+		setIsLiked('');
 
 		try {
 			await trigger({
@@ -106,10 +113,10 @@ function Answer({ topic = {}, question, setQuestion }) {
 				},
 			});
 
-			setIsLiked('');
 			fetch();
 		} catch (error) {
-			Toast.error(error);
+			Toast.error(error?.message);
+			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
 	};
 
@@ -128,6 +135,52 @@ function Answer({ topic = {}, question, setQuestion }) {
 		aElement.remove();
 	};
 
+	const onSubmit = async (values) => {
+		setload(false);
+		setIsLiked('disliked');
+
+		let remark = values?.remark;
+
+		if (values?.answer_checkbox) {
+			remark = `Answer not satisfactory. ${remark}`;
+		}
+		if (values?.question_checkbox) {
+			remark = `Question not satisfactory. ${remark}`;
+		}
+
+		let payload = {
+			faq_answer_id               : answerData?.answers[0]?.id,
+			is_positive                 : false,
+			remark,
+			status                      : 'active',
+			suggested_question_abstract : watchQuestionCheckbox ? values?.question : undefined,
+			suggested_answer            : watchAnswerCheckbox ? answer?.toString('html') : undefined,
+		};
+		if (answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive) {
+			payload = {
+				id                          : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+				faq_answer_id               : answerData?.answers[0]?.id,
+				is_positive                 : false,
+				remark,
+				status                      : 'active',
+				suggested_question_abstract : watchQuestionCheckbox ? values?.question : undefined,
+				suggested_answer            : watchAnswerCheckbox ? answer?.toString('html') : undefined,
+			};
+		}
+
+		try {
+			await trigger({
+				data: payload,
+			});
+
+			setShow(false);
+			fetch();
+		} catch (error) {
+			Toast.error(error?.message);
+			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
+		}
+	};
+
 	return (
 		<div className={styles.list}>
 			<div>
@@ -144,7 +197,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 					</div>
 				</div>
 
-				{getQuestionLoading && load ? (
+				{loading && load ? (
 					<Loader />
 				) : (
 					<>
@@ -186,7 +239,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 						className={styles.emoji_like}
 						role="presentation"
 						onClick={() => {
-							onClickLikeButton({ id: answerData?.answers?.[0]?.id });
+							onClickLikeButton({ _id: answerData?.answers?.[0]?.id });
 						}}
 						style={{ marginLeft: 8, cursor: 'pointer' }}
 					>
@@ -200,7 +253,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 							if (isLiked !== 'disliked') {
 								setShow(true);
 								setIsLiked('disliked');
-							} else {
+							} else if (!show) {
 								onClickRemoveDisLike();
 							}
 						}}
@@ -209,30 +262,46 @@ function Answer({ topic = {}, question, setQuestion }) {
 						{DISLIKE_MAPPING[isLiked] || <IcMSad />}
 					</div>
 				</div>
-
-				{show ? (
-					<DisLikeBox
-						setShow={setShow}
-						data={answerData}
-						loading={loading}
-						trigger={trigger}
-						setIsLiked={setIsLiked}
-						is_positive={is_positive}
-						setCheckboxA={setCheckboxA}
-						setCheckboxQ={setCheckboxQ}
-						checkboxA={checkboxA}
-						checkboxQ={checkboxQ}
-						setload={setload}
-						fetch={fetch}
-					/>
-				) : null}
-
-				<div role="presentation" className={styles.open_faq} onClick={goToFAQ}>
-					Open in Help Center
-					<IcMRedo style={{ marginLeft: 8 }} />
-				</div>
-
 			</div>
+			{show ? (
+				<div className={styles.dislike_box}>
+					<FeedbackForm
+						answerData={answerData}
+						control={control}
+						answer={answer}
+						setAnswer={setAnswer}
+						watch={watch}
+					/>
+					<div className={styles.footer_btns}>
+						<Button
+							style={{ marginRight: '10px' }}
+							size="md"
+							themeType="secondary"
+							onClick={() => {
+								setShow(false);
+								setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
+							}}
+							disabled={feedbackLoading}
+						>
+							Cancel
+						</Button>
+						<Button
+							size="md"
+							themeType="primary"
+							onClick={handleSubmit(onSubmit)}
+							loading={feedbackLoading}
+						>
+							Submit
+						</Button>
+					</div>
+				</div>
+			) : null}
+
+			<div role="presentation" className={styles.open_faq} onClick={goToFAQ}>
+				Open in Help Center
+				<IcMRedo style={{ marginLeft: 8 }} />
+			</div>
+
 		</div>
 	);
 }

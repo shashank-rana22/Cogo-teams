@@ -45,10 +45,6 @@
 	}
 }
 
-.dislikebox {
-	width: 100%;
-}
-
 .information_helpful {
 	display: flex;
 	flex-direction: column;
@@ -70,6 +66,7 @@
 .open_faq {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	margin-top: 20px;
 	margin-bottom: 20px;
 	font-size: 14px;
@@ -145,4 +142,17 @@
 .skeleton_container_mid {
 	display: flex;
 	margin: 10px 0 0;
+}
+
+.footer_btns {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 12px;
+}
+
+.dislike_box {
+	width: 100%;
+	padding: 20px;
+	border: 1px solid #e6e6e6;
+	border-radius: 6px;
 }
