@@ -5,29 +5,15 @@ import {
 } from '@cogoport/forms';
 
 export const getElementController = (type = 'text') => {
-	switch (type) {
-		case 'text':
-			return InputController;
+	const ELEMENT_MAPPING = {
+		text            : InputController,
+		select          : SelectController,
+		multiSelect     : MultiselectController,
+		file            : UploadController,
+		textArea        : TextAreaController,
+		asyncSelect     : AsyncSelectController,
+		singleDateRange : SingleDateRangeController,
+	};
 
-		case 'select':
-			return SelectController;
-
-		case 'multiSelect':
-			return MultiselectController;
-
-		case 'file':
-			return UploadController;
-
-		case 'textArea':
-			return TextAreaController;
-
-		case 'asyncSelect':
-			return AsyncSelectController;
-
-		case 'singleDateRange':
-			return SingleDateRangeController;
-
-		default:
-			return null;
-	}
+	return ELEMENT_MAPPING[type];
 };

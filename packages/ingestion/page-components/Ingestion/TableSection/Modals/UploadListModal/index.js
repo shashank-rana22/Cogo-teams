@@ -1,5 +1,5 @@
 import { Modal, Button, Table, Pagination } from '@cogoport/components';
-import { IcMDownload } from '@cogoport/icons-react';
+import { IcMUpload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../../common/EmptyState';
@@ -25,7 +25,7 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 			<Modal size="lg" show={tableModal === 'uploadList'} onClose={onClose} placement="center">
 				<Modal.Header title={(
 					<div style={{ display: 'flex', alignItems: 'center' }}>
-						<IcMDownload style={{ margin: '0 4px 0 0' }} />
+						<IcMUpload style={{ margin: '0 4px 0 0' }} />
 						{' '}
 						Upload List
 					</div>
@@ -50,7 +50,7 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 		<Modal size="lg" show={tableModal} onClose={onClose} placement="center">
 			<Modal.Header title={(
 				<div style={{ display: 'flex', alignItems: 'center' }}>
-					<IcMDownload style={{ margin: '0 4px 0 0' }} />
+					<IcMUpload style={{ margin: '0 4px 0 0' }} />
 					{' '}
 					Upload List
 				</div>
@@ -65,7 +65,7 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 					loading={loading}
 				/>
 
-				{total_count > page_limit && (
+				{true && (
 					<div className={styles.pagination_container}>
 						<Pagination
 							type="table"
