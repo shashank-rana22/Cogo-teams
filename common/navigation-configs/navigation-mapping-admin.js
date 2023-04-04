@@ -72,8 +72,8 @@ const navigationMappingAdmin = {
 	welcome: {
 		key           : 'welcome',
 		title         : 'Welcome',
-		href          : '/welcome',
-		as            : '/welcome',
+		href          : '/v2/welcome',
+		as            : '/v2/welcome',
 		type          : 'link',
 		icon          : IcMDashboard,
 		main_apis     : [],
@@ -2062,7 +2062,7 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'cogo_academy-tests',
-				title         : 'Test Module',
+				title         : 'Assessment Module',
 				href          : '/v2/learning/tests/dashboard',
 				as            : '/v2/learning/tests/dashboard',
 				type          : 'link',
