@@ -11,7 +11,7 @@ function Reporting({
 	return (
 		<div className={styles.container}>
 			{reporting_managers?.map((item) => (
-				<div key={item.id} className={styles.card_container}>
+				<div className={styles.card_container}>
 					<UserCard user_data={item} params={params} setParams={setParams} />
 				</div>
 			))}
