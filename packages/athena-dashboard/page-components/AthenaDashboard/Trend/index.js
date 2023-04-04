@@ -95,7 +95,6 @@ function Trends() {
 						}
 						</div>
 						<div className={styles.button_group}>
-
 							<Button
 								size="md"
 								themeType="primary"
