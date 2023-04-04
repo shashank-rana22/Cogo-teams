@@ -19,7 +19,6 @@ function usePostReUpload({ row = {}, setTableModal = () => {} }) {
 				partner_user_id      : row?.partner_user_id,
 				description          : row?.description,
 				agent_id             : row?.agent_id,
-				// is_channel_partner   : row?.is_channel_partner,
 				ingestion_request_id : row?.id,
 				file_name            : row?.request_files[0]?.sheet_name,
 

@@ -61,7 +61,6 @@ function useGetIngestionList() {
 		setRow(_row);
 		setTableModal('reUpload');
 	};
-	// const dummyData = {
 	// 	page        : 1,
 	// 	page_limit  : 8,
 	// 	total       : 4,
