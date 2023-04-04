@@ -26,15 +26,28 @@
 .profile_container {
 	display: flex;
 	align-items: flex-start;
+	justify-content: space-between;
+	width: 30%;
 }
 
 .progress_bar {
+	position: relative;
+	width: 50%;
 	margin-top: -8px;
-	margin-right: 24px;
 
 	:global {
 		.ui_progressbar_progress {
 			background-color: #81c0af;
 		}
+
+		.ui_progressbar_filename {
+			margin-left: 54px;
+		}
+	}
+
+	span {
+		position: absolute;
+		top: 4px;
+		left: 4px;
 	}
 }

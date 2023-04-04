@@ -24,6 +24,7 @@ function Header({ name = '' }) {
 			</div>
 			<div className={styles.profile_container}>
 				<div className={styles.progress_bar}>
+					<span>Profile :</span>
 					<ProgressBar progress={60} />
 				</div>
 				<Button size="lg" themeType="accent">
