@@ -1,0 +1,45 @@
+.modal_title {
+	font-size: 16px;
+	font-weight: 600;
+	color: #6fa5ab;
+}
+
+.test_name {
+	margin-bottom: 0;
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.modal_body span {
+	font-size: 14px;
+}
+
+.modal_body h5 {
+	margin-top: 15px;
+	margin-bottom: 5px;
+}
+
+.test_details {
+	display: flex;
+	justify-content: space-between;
+	padding: 0 20px;
+	margin-top: 20px;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+}
+
+.test_details h5 {
+	font-size: 14px;
+	color: #4f4f4f;
+}
+
+.test_details p {
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.test_details div {
+	margin: 20px 0;
+}

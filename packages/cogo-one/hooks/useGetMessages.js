@@ -20,7 +20,7 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 
 	const {
 		getCogooneTimeline,
-		loading, firstTimeLineLoading,
+		loading, firstTimeLineLoading, setFirstTimeLineLoading = () => {},
 	} = useListCogooneTimeline({ id, setMessagesState, type: 'messages' });
 
 	const snapshotCleaner = () => {
@@ -32,34 +32,36 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 
 	const mountSnapShot = () => {
 		setFirstLoadingMessages(true);
+		setFirstTimeLineLoading(true);
 		snapshotCleaner();
-		const chatCollectionQuery = query(
-			activeChatCollection,
-			orderBy('created_at', 'desc'),
-			limit(10),
-		);
+		if (activeChatCollection) {
+			const chatCollectionQuery = query(
+				activeChatCollection,
+				orderBy('created_at', 'desc'),
+				limit(10),
+			);
+			firstMessages.current = onSnapshot(
+				chatCollectionQuery,
+				(querySnapshot) => {
+					const lastDocumentTimeStamp = querySnapshot.docs[querySnapshot.docs.length - 1]?.data()?.created_at;
+					const islastPage = querySnapshot.docs.length < 10;
+					let prevMessageData = {};
+					querySnapshot.forEach((mes) => {
+						const timeStamp = mes.data()?.created_at;
+						prevMessageData = { ...prevMessageData, [timeStamp]: mes.data() };
+					});
 
-		firstMessages.current = onSnapshot(
-			chatCollectionQuery,
-			(querySnapshot) => {
-				const lastDocumentTimeStamp = querySnapshot.docs[querySnapshot.docs.length - 1]?.data()?.created_at;
-				const islastPage = querySnapshot.docs.length < 10;
-				let prevMessageData = {};
-				querySnapshot.forEach((mes) => {
-					const timeStamp = mes.data()?.created_at;
-					prevMessageData = { ...prevMessageData, [timeStamp]: mes.data() };
-				});
-
-				getCogooneTimeline({
-					startDate : lastDocumentTimeStamp,
-					endDate   : Date.now(),
-					prevMessageData,
-					lastDocumentTimeStamp,
-					islastPage,
-				});
-				setFirstLoadingMessages(false);
-			},
-		);
+					getCogooneTimeline({
+						startDate : lastDocumentTimeStamp,
+						endDate   : Date.now(),
+						prevMessageData,
+						lastDocumentTimeStamp,
+						islastPage,
+					});
+					setFirstLoadingMessages(false);
+				},
+			);
+		}
 	};
 
 	const getNextData = async () => {
