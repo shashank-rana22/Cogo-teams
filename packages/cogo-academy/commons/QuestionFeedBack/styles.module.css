@@ -10,71 +10,16 @@
     background-color: #fff9cf;
     margin-left: 0;
     margin-right: 8px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .pill_count {
     -webkit-text-stroke: 1px black;
+    padding-left:4px
 }
 
-.time_stamp {
-    font-size: 10px;
-    padding: 8px 0;
-}
-
-.card {
-    background-color: #fff;
-    padding: 20px;
-    width: 80%;
-    border-radius: 8px;
-    font-size: 14px;
-}
-
-.card_header {
-    display: flex;
-    align-items: center;
-}
-
-.card_header_name {
-    padding-top: 10px;
-    margin-left: 10px;
-}
-
-.question_container {
-    display: flex;
-    flex-direction: column;
-    padding: 20px 0;
-}
-
-.card_body {
-    padding-bottom: 20px;
-    width: 90%;
-}
-
-.body_heading {
+.header{
     font-weight: 600;
-    margin-bottom: 6px;
-}
-
-.question_abstract {
-    font-weight:600;
-    color: #717171;
-    margin-bottom: 6px;
-}
-
-.answer_content {
-    line-height: 28px;
-    margin-bottom: 6px;
-    font-weight:600;
-    color: #717171;
-}
-
-.answer_container {
-    display: flex;
-    flex-direction: column;
-}
-
-.anchor_text {
-    color: blue;
-    font-weight: 600;
+    font-size: 20px;
+    padding:16px 0px;
 }
