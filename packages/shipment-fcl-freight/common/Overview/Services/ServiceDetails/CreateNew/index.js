@@ -60,12 +60,6 @@ function CreateNew({
 				styles={{ dialog: { width: 700 } }}
 			>
 				<Form
-					extraParams={{
-						importer_exporter_id: user_id,
-						importer_exporter_branch_id:
-							shipmentData?.importer_exporter_branch_id,
-						user_id: shipmentData?.user_id,
-					}}
 					service={form.service}
 					onClose={handleClose}
 					shipmentData={shipmentData}

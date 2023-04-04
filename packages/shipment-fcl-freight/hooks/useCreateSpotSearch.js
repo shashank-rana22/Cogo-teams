@@ -28,6 +28,7 @@ const useCreateSpotSearch = ({ service = {}, primary_service = {}, shipmentData 
 		try {
 			const res = await trigger({ data: { ...payload } });
 			if (!res.hasError) {
+				// eslint-disable-next-line max-len
 				const newHref = `${window.location.origin}/${partner_id}/book/${res.data?.id}/${res.data?.importer_exporter_id}/${shipmentData?.id}`;
 
 				window.location.replace(newHref);
