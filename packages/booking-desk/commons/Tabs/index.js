@@ -18,7 +18,7 @@ export default function Tabs({ stateProps, tabs }) {
 			activeTab={activeTab}
 			onChange={handleActiveTabChange}
 		>
-			{tabs.map((tab) => <TabPanel {...tab} />)}
+			{tabs.map((tab) => <TabPanel key={tab.name} {...tab} />)}
 		</TabContainer>
 	);
 }

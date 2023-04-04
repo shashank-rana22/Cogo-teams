@@ -46,6 +46,7 @@ export default function PopoverContent({
 			<div className={styles.button_container}>
 				{actionButtons.map((button) => (
 					<Button
+						key={button.label}
 						size={size}
 						className={styles.action_buttons}
 						onClick={button.onClick}
@@ -63,6 +64,7 @@ export default function PopoverContent({
 					<div className={styles.pills_container}>
 						{scopes.map((val) => (
 							<Button
+								key={val}
 								className={`${styles.button_as_pill} ${selectedScope === val ? styles.active : ''}`}
 								size={size}
 								onClick={() => handleValChange('scope', val)}
@@ -81,6 +83,7 @@ export default function PopoverContent({
 					<div className={styles.pills_container}>
 						{viewTypes[selectedScope].map((val) => (
 							<Button
+								key={val}
 								className={`${styles.button_as_pill} ${selectedViewType === val ? styles.active : ''}`}
 								size={size}
 								onClick={() => handleValChange('viewType', val)}

@@ -1,4 +1,5 @@
 import { IcCFfcl } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 
 import CardHeader from '../../../commons/Card/CardHeader';
 import PortDetails from '../../../commons/Card/PortDetails/DualLocation';
@@ -9,8 +10,19 @@ import CargoDetails from './CargoDetails';
 import { card, card_body, card_footer, separator, animate_card } from './styles.module.css';
 
 export default function Card({ item = {}, isCardAnimatable = false }) {
+	const router = useRouter();
+
+	const handleCardClick = () => {
+		router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}`);
+	};
+
 	return (
-		<div className={`${card} ${isCardAnimatable && canCardAnimate({ item }) ? animate_card : ''}`}>
+		<div
+			role="button"
+			tabIndex={0}
+			onClick={handleCardClick}
+			className={`${card} ${isCardAnimatable && canCardAnimate({ item }) ? animate_card : ''}`}
+		>
 			<CardHeader item={item} />
 
 			<div className={card_body}>
