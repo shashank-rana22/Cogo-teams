@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@cogoport/access-management": "workspace:0.1.0",
+    "@cogoport/welcome": "workspace:0.1.0",
     "@cogoport/allocation": "workspace:0.1.0",
     "@cogoport/enrichment": "workspace:0.1.0",
     "@cogoport/authentication": "workspace:0.1.0",
