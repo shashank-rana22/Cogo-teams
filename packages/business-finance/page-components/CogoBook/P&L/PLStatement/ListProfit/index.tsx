@@ -98,6 +98,8 @@ function ListProfit({
 		const ArrayLength = getRelevantData().length;
 		const calculateWidth = `${55 / ArrayLength}%`;
 
+		const options = { style: 'decimal', maximumFractionDigits: 2 };
+
 		return (
 			<div>
 				<div className={styles.data_sub}>
@@ -168,24 +170,28 @@ function ListProfit({
 								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
 									{isRowVisible &&	(
 										<div className={styles.particular_data}>
-											{(revenueFromOps * ratio).toFixed(2)}
+											{(revenueFromOps * ratio).toLocaleString('en-IN', options)}
 										</div>
 									)}
 									{dropDown?.revenue && (
 										<>
-											{isRowVisible && <div>{(bookedRevenue * ratio).toFixed(2)}</div>}
-											{isRowVisible && <div>{(accruedRevenue * ratio).toFixed(2)}</div>}
+											{isRowVisible
+											&& <div>{(bookedRevenue * ratio).toLocaleString('en-IN', options)}</div>}
+											{isRowVisible
+											&& <div>{(accruedRevenue * ratio).toLocaleString('en-IN', options)}</div>}
 										</>
 									) }
 									{isRowVisible &&	(
 										<div className={styles.particular_data}>
-											{(operatingExpenses * ratio).toFixed(2)}
+											{(operatingExpenses * ratio).toLocaleString('en-IN', options)}
 										</div>
 									)}
 									{dropDown?.operating && (
 										<>
-											{isRowVisible &&	<div>{(bookedExpense * ratio).toFixed(2)}</div>}
-											{isRowVisible &&	<div>{(accruedExpense * ratio).toFixed(2)}</div>}
+											{isRowVisible
+											&& <div>{(bookedExpense * ratio).toLocaleString('en-IN', options)}</div>}
+											{isRowVisible
+											&& <div>{(accruedExpense * ratio).toLocaleString('en-IN', options)}</div>}
 										</>
 									)}
 								</div>
@@ -194,7 +200,6 @@ function ListProfit({
 
 					</div>
 				)}
-				{/* ===== */}
 
 				<div className={styles.data_sub}>
 					{isRowVisible && <div className={styles.header_particular}>GROSS PROFIT</div>}
@@ -203,7 +208,13 @@ function ListProfit({
 						return (
 							<div className={styles.header_ocean} style={{ width: calculateWidth }}>
 								{isRowVisible
-									? (<span>{((revenueFromOps - operatingExpenses) * ratio).toFixed(2)}</span>) : null}
+									? (
+										<span>
+											{((revenueFromOps - operatingExpenses)
+											* ratio).toLocaleString('en-IN', options)}
+
+										</span>
+									) : null}
 							</div>
 						);
 					})}
@@ -311,27 +322,31 @@ function ListProfit({
 							<div className={styles.first_ocean} style={{ width: calculateWidth }}>
 								{isRowVisible && (
 									<div className={styles.particular_data}>
-										{(totalEmployeeBenefitExpenses * ratio).toFixed(2)}
+										{(totalEmployeeBenefitExpenses * ratio).toLocaleString('en-IN', options)}
 									</div>
 								)}
 								{dropDown?.employee && (
 									<>
 										{' '}
-										{isRowVisible && <div>{(esops * ratio).toFixed(2)}</div>}
-										{isRowVisible && <div>{(gratuityLeaveEncashment * ratio).toFixed(2)}</div>}
+										{isRowVisible && <div>{(esops * ratio).toLocaleString('en-IN', options)}</div>}
+										{isRowVisible && (
+											<div>
+												{(gratuityLeaveEncashment * ratio).toLocaleString('en-IN', options)}
+											</div>
+										)}
 
 										{isRowVisible && (
 											<>
 												<div>
 													{(housekeepingSecuritySubscriptionsTravelStayAndCC
-												* ratio).toFixed(2)}
+												* ratio).toLocaleString('en-IN', options)}
 												</div>
 
-												<div>{(personnelCost * ratio).toFixed(2)}</div>
+												<div>{(personnelCost * ratio).toLocaleString('en-IN', options)}</div>
 
 												<div>
 													{(salariesBonusIncentivesAndStaffWelfareExpenses
-														* ratio).toFixed(2)}
+														* ratio).toLocaleString('en-IN', options)}
 												</div>
 											</>
 										)}
@@ -339,34 +354,51 @@ function ListProfit({
 								)}
 								{isRowVisible && (
 									<div className={styles.particular_data}>
-										{(totalDepreciationAndAmortization * ratio).toFixed(2)}
+										{(totalDepreciationAndAmortization * ratio).toLocaleString('en-IN', options)}
 									</div>
 								)}
 								{isRowVisible && (
 									<div className={styles.particular_data}>
 										{(totalFinanceCost
-										* ratio).toFixed(2)}
+										* ratio).toLocaleString('en-IN', options)}
 
 									</div>
 								)}
 								{dropDown?.finance && (
 									<>
-										{isRowVisible && <div>{(foreignExchangeGainNet * ratio).toFixed(2)}</div>}
-
-										{isRowVisible && (
+										{isRowVisible
+										&& (
 											<div>
-												{(interestOnLoanDiscountOnBillsAndBankCharges * ratio).toFixed(2)}
+												{(foreignExchangeGainNet
+										* ratio).toLocaleString('en-IN', options)}
 											</div>
 										)}
 
-										{isRowVisible && <div>{(miscelleneousIncome * ratio).toFixed(2)}</div>}
-										{isRowVisible && <div>{(interestIncomeOnFd * ratio).toFixed(2)}</div>}
+										{isRowVisible && (
+											<div>
+												{(interestOnLoanDiscountOnBillsAndBankCharges
+													* ratio).toLocaleString('en-IN', options)}
+											</div>
+										)}
+
+										{isRowVisible && (
+											<div>
+												{(miscelleneousIncome
+											* ratio).toLocaleString('en-IN', options)}
+											</div>
+										)}
+										{isRowVisible && (
+											<div>
+												{(interestIncomeOnFd
+											* ratio).toLocaleString('en-IN', options)}
+											</div>
+										)}
 									</>
 								) }
 								{isRowVisible
 								&& (
 									<div className={styles.particular_data}>
-										{(totalOtherExpense * ratio).toFixed(2)}
+										{(totalOtherExpense * ratio).toLocaleString('en-IN', options)}
 									</div>
 								)}
 								{dropDown?.other
@@ -375,36 +407,73 @@ function ListProfit({
 										{isRowVisible && (
 											<div>
 												{(interestOnLoanDiscountOnBillsAndBankChargesExpense
-													* ratio).toFixed(2)}
+													* ratio).toLocaleString('en-IN', options)}
 											</div>
 										)}
 
-										{isRowVisible && <div>{(legalComplianceBooksAndMis * ratio).toFixed(2)}</div>}
-										{isRowVisible && <div>{(marketingExpense * ratio).toFixed(2)}</div>}
-										{isRowVisible && <div>{(personnelExpenseCost * ratio).toFixed(2)}</div>}
-										{isRowVisible && <div>{(provisionsAndWriteOffs * ratio).toFixed(2)}</div>}
-										{isRowVisible && <div>{(ratesAndTaxes * ratio).toFixed(2)}</div>}
-										{isRowVisible && <div>{(rentAndTaxes * ratio).toFixed(2)}</div>}
 										{isRowVisible
-										&& <div>{(rentElectricityAndMaintenance * ratio).toFixed(2)}</div>}
-										{isRowVisible && <div>{(repairsAndMaintenance * ratio).toFixed(2)}</div>}
+										&& (
+											<div>
+												{(legalComplianceBooksAndMis
+										* ratio).toLocaleString('en-IN', options)}
+											</div>
+										)}
+										{isRowVisible
+										&& <div>{(marketingExpense * ratio).toLocaleString('en-IN', options)}</div>}
+										{isRowVisible
+										&& <div>{(personnelExpenseCost * ratio).toLocaleString('en-IN', options)}</div>}
+										{isRowVisible
+										&& (
+											<div>
+												{(provisionsAndWriteOffs
+										* ratio).toLocaleString('en-IN', options)}
+											</div>
+										)}
+										{isRowVisible
+										&& <div>{(ratesAndTaxes * ratio).toLocaleString('en-IN', options)}</div>}
+										{isRowVisible
+										&& <div>{(rentAndTaxes * ratio).toLocaleString('en-IN', options)}</div>}
+										{isRowVisible
+										&& (
+											<div>
+												{(rentElectricityAndMaintenance
+										* ratio).toLocaleString('en-IN', options)}
+											</div>
+										)}
+										{isRowVisible
+										&& (
+											<div>
+												{(repairsAndMaintenance
+										* ratio).toLocaleString('en-IN', options)}
+											</div>
+										)}
 
 										{isRowVisible && (
 											<div>
-												{(salariesBonusIncentivesAndStaffWelfareExpenses * ratio).toFixed(2)}
+												{(salariesBonusIncentivesAndStaffWelfareExpenses
+													* ratio).toLocaleString('en-IN', options)}
 											</div>
 										)}
 
-										{isRowVisible && <div>{(techAndProductCosts * ratio).toFixed(2)}</div>}
-										{isRowVisible && <div>{(currencySuspenseAccount * ratio).toFixed(2)}</div>}
-										{isRowVisible && <div>{(roundOff * ratio).toFixed(2)}</div>}
-										{isRowVisible && <div>{(anyOtherCosts * ratio).toFixed(2)}</div>}
+										{isRowVisible
+										&& <div>{(techAndProductCosts * ratio).toLocaleString('en-IN', options)}</div>}
+										{isRowVisible
+										&& (
+											<div>
+												{(currencySuspenseAccount
+										* ratio).toLocaleString('en-IN', options)}
+											</div>
+										)}
+										{isRowVisible
+										&& <div>{(roundOff * ratio).toLocaleString('en-IN', options)}</div>}
+										{isRowVisible
+										&& <div>{(anyOtherCosts * ratio).toLocaleString('en-IN', options)}</div>}
 									</>
 								)}
 								{isRowVisible
 								&& (
 									<div className={styles.particular_data}>
-										{(totalOtherIncome * ratio).toFixed(2)}
+										{(totalOtherIncome * ratio).toLocaleString('en-IN', options)}
 									</div>
 								)}
 							</div>
@@ -428,7 +497,7 @@ function ListProfit({
 										? ((revenueFromOps
 									- operatingExpenses
 									- totalDepreciationAndAmortization - totalFinanceCost - totalOtherExpense
-										) * ratio).toFixed(2) : null}
+										) * ratio).toLocaleString('en-IN', options) : null}
 								</div>
 							);
 						})
@@ -463,17 +532,17 @@ function ListProfit({
 								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
 									{isRowVisible && (
 										<div className={styles.particular_data}>
-											{(totalExceptionalItems * ratio).toFixed(2)}
+											{(totalExceptionalItems * ratio).toLocaleString('en-IN', options)}
 										</div>
 									)}
 									{isRowVisible && (
 										<div className={styles.particular_data}>
-											{(totalExtraordinaryItems * ratio).toFixed(2)}
+											{(totalExtraordinaryItems * ratio).toLocaleString('en-IN', options)}
 										</div>
 									)}
 									{isRowVisible && (
 										<div className={styles.particular_data}>
-											{(totalPriorPeriodItem * ratio).toFixed(2)}
+											{(totalPriorPeriodItem * ratio).toLocaleString('en-IN', options)}
 										</div>
 									)}
 
@@ -498,7 +567,7 @@ function ListProfit({
 								- totalFinanceCost
 								- totalOtherExpense
 								- totalExceptionalItems - totalExtraordinaryItems - totalPriorPeriodItem)
-								* ratio).toFixed(2) : null}
+								* ratio).toLocaleString('en-IN', options) : null}
 								</div>
 							);
 						})
@@ -523,7 +592,7 @@ function ListProfit({
 								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
 									{isRowVisible && (
 										<div className={styles.particular_data}>
-											{(totalTaxExpense * ratio).toFixed(2)}
+											{(totalTaxExpense * ratio).toLocaleString('en-IN', options)}
 										</div>
 									)}
 								</div>
@@ -543,7 +612,8 @@ function ListProfit({
 									- totalDepreciationAndAmortization
 									- totalFinanceCost - totalOtherExpense
 									- totalExceptionalItems - totalExtraordinaryItems
-									- totalPriorPeriodItem - totalTaxExpense) * ratio).toFixed(2) : null}
+									- totalPriorPeriodItem - totalTaxExpense)
+									* ratio).toLocaleString('en-IN', options) : null}
 
 								</div>
 							);
