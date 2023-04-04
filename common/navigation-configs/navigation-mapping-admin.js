@@ -60,7 +60,7 @@ import business_finance from './apis/business-finance-apis';
 const navigationMappingAdmin = {
 	welcome: {
 		key           : 'welcome',
-		title         : 'Welcome Page',
+		title         : 'Welcome',
 		href          : '/welcome',
 		as            : '/welcome',
 		type          : 'link',
