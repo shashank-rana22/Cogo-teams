@@ -14,6 +14,7 @@ const getControls = (userOptions, isDisabled = false, isempty = false) => [
 			label       : 'Select Cogo Entity:',
 			type        : 'async-select',
 			placeholder : 'Select Cogo Entity',
+			initialCall : true,
 			asyncKey    : 'partners',
 			params      : {
 				filters: {

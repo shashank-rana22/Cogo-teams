@@ -30,7 +30,7 @@ function WarningModal({ loading }) {
 					onClick={handleEnterFullScreen}
 					loading={loading}
 				>
-					continue
+					Continue
 				</Button>
 			</Modal.Footer>
 		</Modal>
