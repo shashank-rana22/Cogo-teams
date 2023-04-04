@@ -240,9 +240,11 @@ const useQuestionList = () => {
 	useEffect(() => {
 		debounceQuery(searchInput);
 	}, [debounceQuery, searchInput]);
+
 	const onClickNoButton = () => {
 		setShowPopOver(null);
 	};
+
 	const getQuestionsList = useCallback(async () => {
 		try {
 			await trigger({
@@ -337,6 +339,7 @@ const useQuestionList = () => {
 			setShowPopOver,
 			onClickNoButton,
 		});
+
 	const { list: data = [], requested_question_count = 0, ...paginationData } = questionList || {};
 
 	return {
