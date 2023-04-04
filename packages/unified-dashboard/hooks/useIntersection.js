@@ -2,6 +2,21 @@ import { useState, useEffect, useMemo } from 'react';
 
 function useIsInViewport(ref, rootMargin) {
 	const [isIntersecting, setIsIntersecting] = useState(false);
+	const [isMobile, setIsMobile] = useState(false);
+
+	const interSectionMargin = isMobile ? '-100px' : rootMargin;
+
+	const handleResize = () => {
+		if (window.innerWidth < 720) {
+			setIsMobile(true);
+		} else {
+			setIsMobile(false);
+		}
+	};
+
+	useEffect(() => {
+		window.addEventListener('resize', handleResize);
+	});
 
 	const observer = useMemo(() => {
 		let observerBool = null;
@@ -10,13 +25,13 @@ function useIsInViewport(ref, rootMargin) {
 				([entry]) => {
 					setIsIntersecting(entry.isIntersecting);
 				},
-				{ rootMargin },
+				{ interSectionMargin },
 			);
 
 			return observerBool;
 		}
 		return false;
-	}, [rootMargin]);
+	}, [interSectionMargin]);
 
 	useEffect(() => {
 		observer.observe(ref.current);
