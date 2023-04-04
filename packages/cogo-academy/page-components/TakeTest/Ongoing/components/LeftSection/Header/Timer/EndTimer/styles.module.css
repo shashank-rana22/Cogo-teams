@@ -1,0 +1,15 @@
+.heading {
+	margin-left: 10px;
+	font-size: 14px;
+	color: #221f20;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.submit_button {
+	float: right;
+}

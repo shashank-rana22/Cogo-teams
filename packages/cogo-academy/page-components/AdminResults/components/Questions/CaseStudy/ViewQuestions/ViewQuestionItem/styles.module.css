@@ -1,0 +1,42 @@
+.container {
+	display: flex;
+}
+
+.small_section {
+	width: 20%;
+	margin-right: 12px;
+	text-align: center;
+}
+
+.section {
+	width: 60%;
+	padding-left: 24px;
+}
+
+.icon {
+	width: 2%;
+}
+
+.outer_container {
+	display: flex;
+	width: 100%;
+	cursor: pointer;
+	background: #fff;
+	border-bottom: 1px solid #f8f2e7;
+
+	:global {
+		.ui_accordion_title {
+			width: 100%;
+		}
+
+		.ui_accordion_container {
+			border-radius: 0;
+			box-shadow: none;
+		}
+
+		.ui_accordion_header {
+			padding: 12px 24px 8px 0;
+			border-radius: 0;
+		}
+	}
+}

@@ -40,10 +40,16 @@ function AnswerPage() {
 	const [isLiked, setIsLiked] = useState(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 
 	useEffect(() => {
+		if (!loading) {
+			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive]);
+		}
+	}, [is_positive, loading]);
+
+	useEffect(() => {
 		setAnswer(answerData?.answers?.[0]?.answer);
 	}, [answerData]);
 
-	const { handleSubmit, control, watch } = useForm();
+	const { handleSubmit, formState: { errors }, control, watch } = useForm();
 
 	const watchQuestionCheckbox = watch('question_checkbox');
 	const watchAnswerCheckbox = watch('answer_checkbox');
@@ -271,6 +277,7 @@ function AnswerPage() {
 							answer={answer}
 							setAnswer={setAnswer}
 							watch={watch}
+							errors={errors}
 						/>
 					</Modal.Body>
 					<Modal.Footer>
@@ -298,7 +305,7 @@ function AnswerPage() {
 				</Modal>
 			</div>
 
-			<div>
+			<div className={styles.liked_wrapper}>
 				{answerData?.answers[0]?.upvote_count > 0 ? (
 					<span className={styles.sidetext}>
 						{answerData?.answers[0]?.upvote_count}

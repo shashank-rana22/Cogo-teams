@@ -34,7 +34,7 @@ function MostReadFaqResults({ searchState = '' }) {
 	}
 
 	if (isEmpty(data?.list)) {
-		return (<EmptyQuestionListState />);
+		return (<EmptyQuestionListState searchState={searchState} />);
 	}
 
 	return (
