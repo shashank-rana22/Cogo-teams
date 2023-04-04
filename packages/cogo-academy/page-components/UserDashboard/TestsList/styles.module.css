@@ -1,0 +1,12 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 30%;
+	padding: 24px;
+	background: #fff;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+}
