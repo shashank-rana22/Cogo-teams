@@ -20,10 +20,6 @@ function AllBadges() {
 
 	const { user_id = '', path: returnPath = '' } = query;
 
-	const goBack = () => {
-		router.back();
-	};
-
 	const {
 		listLoading,
 		userBadges,
@@ -51,7 +47,6 @@ function AllBadges() {
 				modalDetail={modalDetail}
 				setModalDetail={setModalDetail}
 				returnPath={returnPath}
-				goBack={goBack}
 			/>
 
 			{

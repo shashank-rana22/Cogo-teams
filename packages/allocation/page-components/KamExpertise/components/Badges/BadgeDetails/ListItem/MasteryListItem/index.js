@@ -70,7 +70,9 @@ function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData
 						<span>Mastery in</span>
 
 						{mastery_badges_detail?.map((item) => (
-							<Pill className={styles.pill}>{item?.badge_name}</Pill>
+							<div className={styles.pill}>
+								<Pill color="#edd7a9">{item?.badge_name}</Pill>
+							</div>
 						))}
 					</div>
 

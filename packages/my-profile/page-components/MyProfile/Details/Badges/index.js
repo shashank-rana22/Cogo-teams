@@ -63,7 +63,7 @@ function Badges(props) {
 					<Button
 						size="md"
 						themeType="secondary"
-						onClick={() => Toast.default('You dont have any mastery!')}
+						onClick={() => Toast.default("You don't have any mastery!")}
 					>
 						<b>Select Badges To Preview</b>
 					</Button>

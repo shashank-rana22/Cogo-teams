@@ -39,13 +39,15 @@ function BadgeCard(props) {
 							:
 							{' '}
 						</div>
+
 						<div className={styles.score}>
 							{score || '_'}
 							{' '}
 							Score
 						</div>
 					</div>
-					<span style={{ cursor: 'pointer', marginLeft: '4px' }}>
+
+					<span className={styles.svg_container}>
 						<IcMEdit onClick={onClose} />
 					</span>
 				</div>
@@ -54,7 +56,7 @@ function BadgeCard(props) {
 				</div>
 			</div>
 
-			{ openModal
+			{openModal
 			&& (
 				<Modal
 					size="sm"
@@ -65,7 +67,7 @@ function BadgeCard(props) {
 				>
 					<form onSubmit={handleSubmit(onSave)}>
 						<Modal.Body className={styles.modal_body}>
-							<div style={{ padding: '10px', margin: '10px' }}>
+							<div className={styles.badge_update}>
 								<BadgeUpdateCard
 									medalType={medal}
 									badgeItemData={badgeItemData}
@@ -76,7 +78,6 @@ function BadgeCard(props) {
 								/>
 							</div>
 						</Modal.Body>
-
 					</form>
 				</Modal>
 			)}

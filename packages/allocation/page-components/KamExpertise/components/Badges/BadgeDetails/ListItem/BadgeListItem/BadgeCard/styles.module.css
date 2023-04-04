@@ -6,7 +6,7 @@
 
 .badge_card_right {
 	width: 30%;
-	padding: 0 16px 0 0;
+	padding-right: 16px;
 }
 
 .badge_header {
@@ -56,4 +56,14 @@
 
 .modal_body {
 	min-height: 500px;
+}
+
+.svg_container{
+	cursor: pointer;
+	margin-left: 4px;
+}
+
+.badge_update{
+	margin: 8px;
+	padding: 8px;
 }

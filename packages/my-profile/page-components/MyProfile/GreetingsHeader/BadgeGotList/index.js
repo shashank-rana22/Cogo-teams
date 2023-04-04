@@ -12,13 +12,10 @@ function BadgeGotList(props) {
 	if (badgeListLoading) {
 		return (
 			<div className={styles.badge_list}>
-				{badgesGot.map((data, i) => ((i < 3) ? (
-					<Tooltip content={`${data.badge_name} ${startCase(data.medal || '')}`}>
-						<div key={data.id} className={styles.badge_container}>
-							<Placeholder height={60} width={60} style={{ borderRadius: '8px' }} />
-						</div>
-					</Tooltip>
-				) : null
+				{[1, 2, 3].map((item) => (
+					<div key={item} className={styles.badge_container}>
+						<Placeholder height={60} width={60} style={{ borderRadius: '8px' }} />
+					</div>
 				))}
 			</div>
 		);
@@ -40,31 +37,27 @@ function BadgeGotList(props) {
 
 	return (
 		<div className={styles.badge_list}>
-			{badgesGot.map((data, i) => (
-				(i < 3)
-					? (
-						<Tooltip content={`${data.badge_name} ${startCase(data.medal || '')}`}>
-							<div key={data.id} className={styles.badge_container}>
-								<div className={styles.badge}>
-									<img src={data.image_url} alt="badge" />
-								</div>
+			{badgesGot.slice(0, 3).map((data) => (
+				<Tooltip content={`${data.badge_name} ${startCase(data.medal || '')}`}>
+					<div key={data.id} className={styles.badge_container}>
+						<div className={styles.badge}>
+							<img src={data.image_url} alt="badge" />
+						</div>
 
-								<div className={styles.stars}>
-									{[1, 2, 3].map((item) => (
-										<div key={item}>
-											<IcMStarfull
-												width={10}
-												fill={item
+						<div className={styles.stars}>
+							{[1, 2, 3].map((item) => (
+								<div key={item}>
+									<IcMStarfull
+										width={10}
+										fill={item
 													<= BADGE_STARS_CLASSNAME_MAPPING[data?.medal]?.upper_limit
-													? '#FFDF33' : '#BDBDBD'}
-											/>
-										</div>
-									))}
+											? '#FFDF33' : '#BDBDBD'}
+									/>
 								</div>
-							</div>
-						</Tooltip>
-					)
-					: null
+							))}
+						</div>
+					</div>
+				</Tooltip>
 			))}
 		</div>
 	);
