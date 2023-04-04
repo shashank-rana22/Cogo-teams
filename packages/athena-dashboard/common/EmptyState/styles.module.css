@@ -1,6 +1,7 @@
 .empty_state{
-	width: 100%;
+	display: flex;
 	justify-content: center;
+	padding-left: 200px;
 }
 
 .column{

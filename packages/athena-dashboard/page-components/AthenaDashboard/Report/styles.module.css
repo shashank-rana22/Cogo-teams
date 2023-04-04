@@ -10,7 +10,6 @@
 }
 
 .left_container {
-	width: 180px;
 	text-align: center;
 
 	@media (max-width: 768px) {
@@ -19,9 +18,7 @@
 }
 
 .whole_container {
-	width: 200px;
 	height: 500px;
-	margin-top: 16px;
 	overflow-y: scroll;
 	background-color: white;
 

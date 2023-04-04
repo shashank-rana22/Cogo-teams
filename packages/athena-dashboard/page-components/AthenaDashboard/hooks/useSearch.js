@@ -44,8 +44,8 @@ const useSearch = () => {
 						country,
 					) => country.toString().toUpperCase()) || undefined,
 				},
-				start_date               : start_date || 'NaN-NaN-NaN',
-				end_date                 : end_date || 'NaN-NaN-NaN',
+				start_date               : start_date || '2022-01-01',
+				end_date                 : end_date || new Date().toJSON(),
 				pagination_data_required : false,
 			},
 		});

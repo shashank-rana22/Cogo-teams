@@ -88,7 +88,6 @@
 
 .individual {
 	width: 100px;
-	height: 40px;
 	margin-top: 4px;
 	margin-right: 16px;
 	text-align: center;
@@ -98,4 +97,5 @@
 
 .individual_text {
 	margin-top: 8px;
+	padding: 4px;
 }

@@ -141,7 +141,7 @@ function Report() {
 					</div>
 
 					<div className={styles.responsive_choropleth}>
-						<Map data={shipmentValueMapData} />
+						<Map data={shipmentValueMapData} style={{ marginLeft: '12px' }} />
 					</div>
 				</div>
 			) : (

@@ -32,7 +32,7 @@ function Shipment() {
 	const COLUMNS = useGetColumns({ columnsToShow });
 
 	return (
-		<div className={styles.whole_page}>
+		<>
 			<div className={styles.left_container}>
 
 				<div className={styles.search_container}>
@@ -177,7 +177,7 @@ function Shipment() {
 					)}
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 
