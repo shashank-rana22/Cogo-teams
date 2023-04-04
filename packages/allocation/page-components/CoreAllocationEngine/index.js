@@ -12,7 +12,6 @@ const TAB_PANEL_MAPPING = {
 		name      : 'configurations',
 		title     : 'Configurations',
 		Component : Configurations,
-
 	},
 	relations: {
 		name      : 'relations',

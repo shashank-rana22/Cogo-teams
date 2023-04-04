@@ -6,48 +6,6 @@ import styles from './styles.module.css';
 function Header({ auditData, loading }) {
 	const { name, updated_at } = auditData;
 
-	if (loading) {
-		return (
-			<div className={styles.main_container}>
-				<div className={styles.config_basic_detail}>
-					<div className={styles.draft_name}>
-						<div style={{ marginRight: '8px' }}>
-							Currently Editing :
-							{' '}
-						</div>
-
-						<Placeholder height="20px" width="120px" />
-					</div>
-
-					<div className={styles.lower_details}>
-						<div className={styles.lower_info} style={{ marginRight: '8px' }}>
-							<div>
-								Last Modified
-								{' '}
-								:
-							</div>
-
-							<span>
-								<Placeholder height="20px" width="120px" />
-							</span>
-						</div>
-
-						<div className={styles.lower_info} style={{ marginLeft: '36px' }}>
-							<div style={{ marginRight: '8px' }}>
-								Last Edit By
-								{' '}
-								:
-								{' '}
-							</div>
-
-							<Placeholder height="20px" width="120px" />
-						</div>
-					</div>
-				</div>
-			</div>
-		);
-	}
-
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.config_basic_detail}>
@@ -69,7 +27,8 @@ function Header({ auditData, loading }) {
 						</div>
 
 						<span>
-							{ updated_at ? (format(updated_at, 'dd-MM-YYYY') || '--') : ''}
+							{loading ? <Placeholder height="20px" width="120px" />
+								: ((updated_at && (format(updated_at, 'dd-MM-YYYY'))) || '--')}
 						</span>
 					</div>
 
@@ -80,7 +39,7 @@ function Header({ auditData, loading }) {
 							:&nbsp;
 						</div>
 
-						<b>{startCase(name || '')}</b>
+						{loading ? <Placeholder height="20px" width="120px" /> : <b>{startCase(name || '')}</b>}
 					</div>
 				</div>
 			</div>
