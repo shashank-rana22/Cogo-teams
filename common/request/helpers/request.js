@@ -7,6 +7,8 @@ import getAuthorizationParams from './get-final-authpipe';
 import getMicroServiceName from './get-microservice-name';
 import { getCookie } from './getCookieFromCtx';
 
+const PEEWEE_SERVICES = ['fcl_freight_rate'];
+
 const customSerializer = (params) => {
 	const paramsStringify = qs.stringify(params, {
 		arrayFormat: 'brackets', serializeDate: (date) => format(date, 'isoUtcDateTime'),
@@ -15,12 +17,15 @@ const customSerializer = (params) => {
 };
 
 const customPeeweeSerializer = (params) => {
+	const dataTypes = ['Object', 'Array'].map((d) => `[object ${d}]`);
 	const newParams = Object.keys(params).reduce((acc, key) => {
-		acc[key] = typeof params[key] === 'object'
+		acc[key] = dataTypes.includes(Object.prototype.toString.call(params[key]))
 			? JSON.stringify(params[key])
 			: params[key];
+
 		return acc;
 	}, {});
+
 	const paramsStringify = qs.stringify(newParams, {
 		arrayFormat: 'repeat', serializeDate: (date) => format(date),
 	});
@@ -51,8 +56,10 @@ request.interceptors.request.use((oldConfig) => {
 
 	if (serviceName) {
 		newConfig.url = `/${serviceName}/${originalApiPath}`;
-		if (serviceName === 'location'
-			&& process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('https://api.cogoport.com')) {
+		if (
+			PEEWEE_SERVICES.includes(serviceName)
+			|| (serviceName === 'location'
+			&& process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('https://api.cogoport.com'))) {
 			newConfig.paramsSerializer = { serialize: customPeeweeSerializer };
 		}
 	}
