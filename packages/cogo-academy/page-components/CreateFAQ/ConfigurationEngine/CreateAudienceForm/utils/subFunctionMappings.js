@@ -98,9 +98,9 @@ const SUB_FUNCTION_MAPPING = {
 		},
 	],
 	training: [
-		{ 
-			label: 'Training General', 
-			value: 'training_general' 
+		{
+			label : 'Training General',
+			value : 'training_general',
 		},
 		{
 			label : 'All',
@@ -108,24 +108,23 @@ const SUB_FUNCTION_MAPPING = {
 		},
 	],
 	hr: [
-		{ 
-			label: 'HR Admin',
-			 value: 'hr_admin' 
+		{
+			label : 'HR Admin',
+			value : 'hr_admin',
 		},
-		{ 
-			label: 'HRBP', 
-			value: 'hrbp' 
+		{
+			label : 'HRBP',
+			value : 'hrbp',
 		},
-		{ 
-			label: 'Talent Acquisition', 
-			value: 'talent_acquisition' 
+		{
+			label : 'Talent Acquisition',
+			value : 'talent_acquisition',
 		},
 		{
 			label : 'All',
 			value : 'all',
 		},
-	]
-
+	],
 };
 
 export default SUB_FUNCTION_MAPPING;
