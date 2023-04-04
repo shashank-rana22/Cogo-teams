@@ -53,7 +53,6 @@ function AccountPayables() {
 						placeholder="Select Entity"
 						options={options}
 						size="sm"
-						defaultOptions
 						style={{ width: '284px' }}
 					/>
 				</div>
