@@ -2,11 +2,11 @@ import { IcMFfcl } from '@cogoport/icons-react';
 
 import CargoPills from './CargoPills';
 import PortDetails from './PortDetails';
-import ReqDocs from './ReqDocs';
+import RequiredDocs from './RequiredDocs';
 import ShipmentInfo from './ShipmentInfo';
 import styles from './styles.module.css';
 
-const DOC_REQ_TABS = ['vessel_arrived', 'container_gated_out'];
+const REQUIRED_DOC_TABS = ['vessel_arrived', 'container_gated_out'];
 
 function Body({ item = {}, stateProps = {} }) {
 	const { activeTab = '' } = stateProps || {};
@@ -35,7 +35,7 @@ function Body({ item = {}, stateProps = {} }) {
 				</div>
 			</div>
 
-			{DOC_REQ_TABS.includes(activeTab) && <ReqDocs item={item} />}
+			{REQUIRED_DOC_TABS.includes(activeTab) && <RequiredDocs item={item} />}
 
 		</div>
 	);

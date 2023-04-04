@@ -2,7 +2,7 @@ import { IcCGreenCircle, IcCRedCircle } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function ReqDocs({ item }) {
+function RequiredDocs({ item }) {
 	const { documents = [] } = item || {};
 	return (
 		<div className={styles.container}>
@@ -21,4 +21,4 @@ function ReqDocs({ item }) {
 		</div>
 	);
 }
-export default ReqDocs;
+export default RequiredDocs;
