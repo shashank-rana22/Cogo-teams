@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 export const questionSetColumns = ({ loading, router, setShowModal, setQuestionSetId }) => [
 	{
-		Header   : 'NAME',
+		Header   : 'QUESTION SET NAME',
 		id       : 'name',
 		accessor : ({ name = '' }) => (
 			<section>{name}</section>
@@ -35,29 +35,28 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 		),
 	},
 	{
-		Header   : 'TOTAL QUESTIONS/CASES',
-		id       : 'total_questions',
-		accessor : ({
-			non_case_study_question_count
-			= 0, case_study_question_count
-			= 0,
-		}) => (
+		Header   : 'COGO ENTITY',
+		id       : 'cogo_entity_name',
+		accessor : ({ cogo_entity_name = '' }) => (
+			<section>{cogo_entity_name}</section>
+		),
+	},
+	{
+		Header   : 'NO. OF QUESTIONS',
+		id       : 'questions',
+		accessor : ({ non_case_study_question_count = 0 }) => (
 			<section>
 				{non_case_study_question_count || 0}
-				{' '}
-				Q +
-				{' '}
-				{case_study_question_count || 0}
-				{' '}
-				Cases
 			</section>
 		),
 	},
 	{
-		Header   : 'STATUS',
-		id       : 'status',
-		accessor : ({ status = '' }) => (
-			<section>{status}</section>
+		Header   : 'NO. OF CASES',
+		id       : 'case_study_questions',
+		accessor : ({ case_study_question_count = 0 }) => (
+			<section>
+				{case_study_question_count || 0}
+			</section>
 		),
 	},
 	{
@@ -73,10 +72,11 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 		Header   : 'LAST UPDATED',
 		id       : 'updated_at',
 		accessor : ({ updated_at = '' }) => (
-			<section>
-				<span className={styles.time}>{format(updated_at, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}</span>
-				<span className={styles.time}>{format(updated_at, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}</span>
-			</section>
+			<span className={styles.time}>
+				{`${format(updated_at, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}`}
+				{' '}
+				{format(updated_at, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}
+			</span>
 		),
 	},
 	{

@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Pill } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMCrossInCircle, IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -12,6 +12,18 @@ import getControls from './controls';
 import styles from './styles.module.css';
 
 const constants = ['name', 'topic', 'question_count', 'cogo_entity_id'];
+
+const getValue = ({ item, data }) => {
+	const { cogo_entity_object } = data || {};
+
+	if (item === 'cogo_entity_id') {
+		return cogo_entity_object?.business_name;
+	} if (item === 'topic') {
+		return <Pill size="lg" color="#F3FAFA">{data?.[item]}</Pill>;
+	}
+
+	return data?.[item] || 0;
+};
 
 function BasicDetailsForm({
 	setQuestionSetId,
@@ -80,10 +92,10 @@ function BasicDetailsForm({
 			<>
 				<div className={`${styles.container} ${styles.flex_row}`}>
 					{constants.map((item) => (
-						<div className={styles.flex_container}>
+						<div key={item} className={styles.flex_container}>
 							<div className={styles.label}>{startCase(item)}</div>
 							<div className={styles.value}>
-								{item === 'cogo_entity_id' ? cogo_entity_object?.business_name : data?.[item] || 0}
+								{getValue({ item, data })}
 							</div>
 						</div>
 					))}

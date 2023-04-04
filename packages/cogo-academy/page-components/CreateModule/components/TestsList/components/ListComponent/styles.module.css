@@ -27,6 +27,7 @@
 				color: #000;
 				text-align: center !important;
 				border-bottom: 1px solid #f8f2e7;
+				padding: 8px 20px;
 			}
 		}
 
@@ -37,10 +38,10 @@
 				border-radius: 8px;
 
 				.ui_table_body_cell {
-					padding-block: 20px;
-					font-size: 12px;
+					font-size: 14px;
 					color: #221f20;
 					text-align: center !important;
+					padding: 8px 20px;
 				}
 			}
 		}
