@@ -19,7 +19,7 @@ function useGetUserTestQuestion({ currentQuestionId }) {
 			user_id,
 			question_id: currentQuestionId !== 'undefined' ? currentQuestionId : '',
 			...(currentQuestionId && currentQuestionId !== 'undefined'
-				? { question_id: currentQuestionId } : null),
+				? { question_id: currentQuestionId } : {}),
 		},
 	}, { manual: false });
 
@@ -44,10 +44,6 @@ function useGetUserTestQuestion({ currentQuestionId }) {
 	};
 
 	const { start_time, question_data, test_user_mapping_id, total_question_count, user_appearance } = data || {};
-
-	const { id } = question_data || {};
-
-	localStorage.setItem(`current_question_id_${test_id}_${user_id}`, id);
 
 	return {
 		getUserTestQuestion,

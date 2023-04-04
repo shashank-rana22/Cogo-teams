@@ -2,10 +2,19 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	padding: 16px;
+	padding: 16px 100px;
 	margin-top: 40px;
 	background: rgb(255 255 255 / 70%);
 	border-radius: 12px;
+}
+
+.label {
+	font-weight: 400;
+	color: #221f20;
+}
+
+.sup {
+	color: #ee3425;
 }
 
 .flex_row {
@@ -41,7 +50,7 @@
 	flex-basis: 40%;
 	align-items: center;
 	justify-content: space-between;
-	margin: 16px;
+	margin-top: 16px;
 
 	@media (max-width: 768px) {
 		flex-direction: column;

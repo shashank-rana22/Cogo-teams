@@ -7,7 +7,7 @@ import QuestionCard from '../CaseStudy/QuestionCard';
 import styles from './styles.module.css';
 
 function TitleComponent({
-	appeared_percent,
+	user_appeared_percent,
 	correct_percentage,
 	difficulty,
 	students_appeared,
@@ -37,7 +37,7 @@ function TitleComponent({
 				{students_appeared}
 				{' '}
 				(
-				{toFixed(appeared_percent, 2)}
+				{toFixed(user_appeared_percent, 2)}
 				%
 				)
 			</div>
@@ -58,6 +58,7 @@ function QuestionItem({ question_item = {}, index = 0, test_id = '' }) {
 		question_text = '',
 		question_type = '',
 		user_appeared_count = '',
+		user_appeared_percent = '',
 		topic = '',
 	} = question_item || {};
 
@@ -71,6 +72,7 @@ function QuestionItem({ question_item = {}, index = 0, test_id = '' }) {
 						correct_percentage={correct_answer_percentage}
 						difficulty={difficulty_level}
 						students_appeared={user_appeared_count}
+						user_appeared_percent={user_appeared_percent}
 						topic={topic}
 						question={question_text}
 						question_type={question_type}

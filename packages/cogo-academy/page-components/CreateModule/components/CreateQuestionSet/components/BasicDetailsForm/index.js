@@ -149,6 +149,7 @@ function BasicDetailsForm({
 						<div key={name} className={styles.control_container}>
 							<div className={styles.label}>
 								{label}
+								<sup className={styles.sup}>*</sup>
 							</div>
 
 							<div className={styles.control}>
@@ -175,7 +176,7 @@ function BasicDetailsForm({
 					{!isEmpty(questionSetId) ? (
 						<Button
 							disabled={loading}
-							size="sm"
+							size="md"
 							type="button"
 							themeType="secondary"
 							onClick={() => setShowForm(false)}
@@ -187,7 +188,7 @@ function BasicDetailsForm({
 					<Button
 						style={{ marginLeft: '16px' }}
 						loading={loading}
-						size="sm"
+						size="md"
 						type="submit"
 					>
 						{!isEmpty(questionSetId) ? 'Save' : 'Create'}
@@ -195,6 +196,7 @@ function BasicDetailsForm({
 				</div>
 			) : null}
 		</form>
+
 	);
 }
 

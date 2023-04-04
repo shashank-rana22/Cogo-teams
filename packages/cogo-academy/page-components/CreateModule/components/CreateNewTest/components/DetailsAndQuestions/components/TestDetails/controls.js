@@ -1,4 +1,4 @@
-const getControls = (userOptions, isDisabled = false) => [
+const getControls = (userOptions, isDisabled = false, isempty = false) => [
 	{
 		name        : 'name',
 		label       : 'Name of Test',
@@ -14,6 +14,7 @@ const getControls = (userOptions, isDisabled = false) => [
 			label       : 'Select Cogo Entity:',
 			type        : 'async-select',
 			placeholder : 'Select Cogo Entity',
+			initialCall : true,
 			asyncKey    : 'partners',
 			params      : {
 				filters: {
@@ -31,6 +32,7 @@ const getControls = (userOptions, isDisabled = false) => [
 			options     : userOptions,
 			type        : 'multi-select',
 			placeholder : 'User groups',
+			disabled    : isempty,
 		},
 		],
 		type: 'select-entity-usergroups',
@@ -39,8 +41,8 @@ const getControls = (userOptions, isDisabled = false) => [
 		name    : 'select_users',
 		label   : 'Select Users within Group',
 		type    : 'radioGroup',
-		options : [{ name: 'all', value: 'all', label: 'All', disabled: isDisabled },
-			{ name: 'excel', value: 'excel', label: 'Upload User list Excel', disabled: isDisabled }],
+		options : [{ name: 'all', value: 'all', label: 'All', disabled: (isDisabled || isempty) },
+			{ name: 'excel', value: 'excel', label: 'Upload User list Excel', disabled: (isDisabled || isempty) }],
 		rules: { required: 'This is required' },
 
 	},

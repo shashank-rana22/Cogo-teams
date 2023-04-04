@@ -118,8 +118,10 @@ function TestsList({ activeTab, setActiveTab }) {
 					</div>
 
 					<Button
-						themeType="accent"
+						className={styles.btn}
+						themeType="primary"
 						type="button"
+						size="lg"
 						onClick={() => router.push(`/learning/test-module/${ROUTE_MAPPING[activeTab]}`)}
 					>
 						+ Create New
