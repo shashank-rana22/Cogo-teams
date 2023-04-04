@@ -3,7 +3,7 @@ import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { merge } from '@cogoport/utils';
 
-const Controls = ({ truckTypeToggle }) => {
+const useGetControls = ({ truckTypeToggle }) => {
 	const locationAsyncOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: ['pincode'] } },
 	}));
@@ -127,13 +127,12 @@ const Controls = ({ truckTypeToggle }) => {
 				offLabel : 'Closed Body',
 				onLabel  : 'Open Body',
 				type     : 'toggle',
-				value    : false,
+				value    : truckTypeToggle,
 			},
 			{
 				name      : 'truck_type',
-				label     : '',
 				type      : 'chips',
-				options   : truckTypeToggle ? geo.options.open_truck : geo.options.close_truck,
+				options   : truckTypeToggle ? geo.options.open_truck : geo.options.closed_truck,
 				className : 'primary sm',
 				span      : 12,
 				lg        : 12,
@@ -142,7 +141,7 @@ const Controls = ({ truckTypeToggle }) => {
 				name      : 'trucks_count',
 				label     : 'Number of Trucks',
 				type      : 'number',
-				prefix    : 'truck',
+				prefix    : 'Truck',
 				span      : 12,
 				className : 'primary sm',
 				min       : 1,
@@ -211,4 +210,4 @@ const Controls = ({ truckTypeToggle }) => {
 	};
 };
 
-export default Controls;
+export default useGetControls;

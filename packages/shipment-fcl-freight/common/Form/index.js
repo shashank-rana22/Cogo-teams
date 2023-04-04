@@ -1,14 +1,21 @@
 import { startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
-import ServiceUpsellControls from '../../helpers/service-upsell-controls';
+import useServiceUpsellControls from '../../hooks/useFormatServiceUpsellControls';
 import Footer from '../Footer';
 import Layout from '../Layout';
 
 import styles from './styles.module.css';
 
 function Form({ service, onClose, shipmentData, services, primary_service }) {
-	const { controls, formProps } = ServiceUpsellControls({ service, services });
+	const [truckTypeToggle, setTruckTypeToggle] = useState(false);
+
+	const { controls, formProps } = useServiceUpsellControls({
+		service,
+		services,
+		truckTypeToggle,
+		setTruckTypeToggle,
+	});
 
 	return (
 		<div className={styles.container}>

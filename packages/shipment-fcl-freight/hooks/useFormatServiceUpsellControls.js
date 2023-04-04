@@ -1,9 +1,9 @@
 import { useForm } from '@cogoport/forms';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
-import Controls from '../configurations/upsell/service-wise-controls';
+import getServiceValues from '../helpers/get-service-values';
 
-import getServiceValues from './get-service-values';
+import useGetControls from './useServiceUpsellControlsList';
 
 const formatControls = (controls, service) => controls.map((control) => {
 	if (control.options && control.name !== 'location_id') {
@@ -17,9 +17,7 @@ const formatControls = (controls, service) => controls.map((control) => {
 	return control;
 });
 
-function ServiceUpsellControls({ service, services = [] }) {
-	const [truckTypeToggle, setTruckTypeToggle] = useState(false);
-
+function useServiceUpsellControls({ service, services = [], truckTypeToggle, setTruckTypeToggle }) {
 	const search_type = service?.service;
 
 	const newServices = services.map((item) => ({
@@ -27,7 +25,7 @@ function ServiceUpsellControls({ service, services = [] }) {
 		service_type: item?.service_type.split('_service')[0],
 	}));
 
-	const { serviceWiseControls } = Controls({ truckTypeToggle });
+	const { serviceWiseControls } = useGetControls({ truckTypeToggle });
 
 	const rawControls = formatControls(
 		serviceWiseControls[search_type] || [],
@@ -47,11 +45,11 @@ function ServiceUpsellControls({ service, services = [] }) {
 	const { handleSubmit, watch, control, formState : { errors } } = useForm(controls);
 
 	const formValues = watch();
-	const truck_body_type = watch('truck_body_type');
+	const { truck_body_type } = formValues;
 
 	useEffect(() => {
-		setTruckTypeToggle(truck_body_type);
-	}, [truck_body_type]);
+		if (truck_body_type) { setTruckTypeToggle(truck_body_type); }
+	}, [truck_body_type, setTruckTypeToggle]);
 
 	const formProps = {
 		formValues,
@@ -67,4 +65,4 @@ function ServiceUpsellControls({ service, services = [] }) {
 	};
 }
 
-export default ServiceUpsellControls;
+export default useServiceUpsellControls;

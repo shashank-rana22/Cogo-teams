@@ -3,12 +3,10 @@ import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 
 import formatPayload from '../helpers/service-upsell-payload';
+import getApiErrorString from '../utils/getApiErrorString';
 
 const useCreateSpotSearch = ({ service = {}, primary_service = {}, shipmentData = {}, services = [] }) => {
-	// const [loading, setLoading] = useRequest(false);
 	const router = useRouter();
-
-	console.log(router, 'router');
 
 	const { query } = router;
 	const { partner_id } = query;
@@ -27,17 +25,15 @@ const useCreateSpotSearch = ({ service = {}, primary_service = {}, shipmentData 
 			formValues: values,
 		});
 
-		const res = await trigger({ data: { ...payload } });
+		try {
+			const res = await trigger({ data: { ...payload } });
+			if (!res.hasError) {
+				const newHref = `${window.location.origin}/${partner_id}/book/${res.data?.id}/${res.data?.importer_exporter_id}/${shipmentData?.id}`;
 
-		if (!res.hasError) {
-			const newHref = `${window.location.origin}/${partner_id}/book/${res.data?.id}/${res.data?.importer_exporter_id}/${shipmentData?.id}`;
-
-			window.location.replace(newHref);
-
-			// push(
-			// 	'/book/[checkout_id]/[importer_exporter_id]/[shipment_id]',
-			// 	`/book/${res.data?.id}/${res.data?.importer_exporter_id}/${shipmentData?.id}`,
-			// );
+				window.location.replace(newHref);
+			}
+		} catch (err) {
+			Toast.error(getApiErrorString(err));
 		}
 	};
 

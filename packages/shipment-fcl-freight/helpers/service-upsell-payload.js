@@ -2,7 +2,7 @@ const formatDataForSingleService = ({ rawParams }) => {
 	const { search_type, trade_type, formValues, primary_service } = rawParams;
 
 	if (search_type === 'fcl_cfs') {
-		if (trade_type === 'origin') {
+		if (trade_type === 'export') {
 			return {
 				port_id             : primary_service?.origin_port?.id,
 				trade_type,
@@ -17,7 +17,7 @@ const formatDataForSingleService = ({ rawParams }) => {
 	}
 
 	if (search_type === 'fcl_customs') {
-		if (trade_type === 'origin') {
+		if (trade_type === 'export') {
 			return {
 				port_id             : primary_service?.origin_port?.id,
 				trade_type,
@@ -31,7 +31,7 @@ const formatDataForSingleService = ({ rawParams }) => {
 	}
 
 	if (search_type === 'trailer_freight') {
-		if (trade_type === 'origin') {
+		if (trade_type === 'export') {
 			return {
 				origin_location_id      : formValues?.location_id,
 				destination_location_id : primary_service?.origin_port?.id,
@@ -44,10 +44,8 @@ const formatDataForSingleService = ({ rawParams }) => {
 		};
 	}
 
-	/*  need to change truck  type by formatting to type of keys , reminder  */
-
 	if (search_type === 'ftl_freight') {
-		if (trade_type === 'origin') {
+		if (trade_type === 'export') {
 			return {
 				origin_location_id      : formValues?.location_id,
 				destination_location_id : primary_service?.origin_port?.id,
@@ -57,7 +55,7 @@ const formatDataForSingleService = ({ rawParams }) => {
 			};
 		} return {
 			destination_location_id : formValues?.location_id,
-			origin_location_id      : primary_service?.origin_port?.id,
+			origin_location_id      : primary_service?.destination_port?.id,
 			truck_type              : formValues?.truck_type,
 			trucks_count            : formValues?.trucks_count,
 			trade_type,
@@ -65,7 +63,7 @@ const formatDataForSingleService = ({ rawParams }) => {
 	}
 
 	if (search_type === 'haulage_freight') {
-		if (trade_type === 'origin') {
+		if (trade_type === 'export') {
 			return {
 				origin_location_id      : primary_service?.origin_main_port?.id,
 				destination_location_id : primary_service?.origin_port?.id,
@@ -73,14 +71,14 @@ const formatDataForSingleService = ({ rawParams }) => {
 				transport_mode          : 'rail',
 			};
 		} return {
-			destination_location_id : formValues?.location_id,
-			origin_location_id      : primary_service?.origin_port?.id,
+			destination_location_id : primary_service?.destination_main_port?.id,
+			origin_location_id      : primary_service?.destination_port?.id,
 			trade_type,
 		};
 	}
 
 	if (search_type === 'fcl_freight_local') {
-		if (trade_type === 'origin') {
+		if (trade_type === 'export') {
 			return {
 				port_id: primary_service?.origin_port?.id,
 				trade_type,
@@ -97,10 +95,10 @@ const formatDataForSingleService = ({ rawParams }) => {
 const formatPayload = ({
 	formValues = {},
 	service = {},
-	services = [],
 	shipmentData = {},
 	primary_service,
 }) => {
+	console.log(formValues, 'formVAluesss');
 	const search_type = service.service;
 
 	let trade_type;

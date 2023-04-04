@@ -33,5 +33,9 @@
 
 .form{
 	overflow: auto;
-	height: calc(100vh - 33.5vh);
+	height: calc(100vh - 33.5vh); 
+
+	&.ui_chips_container{
+		flex-wrap: wrap;
+	}
 }

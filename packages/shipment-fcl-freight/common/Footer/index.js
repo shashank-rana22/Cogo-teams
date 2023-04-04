@@ -14,9 +14,7 @@ function Footer({
 	services = [],
 
 }) {
-	const { handleSubmit, watch } = formProps;
-
-	console.log(primary_service, 'primary_Servicce');
+	const { watch } = formProps;
 
 	const formValues = watch();
 
