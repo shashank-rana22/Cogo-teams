@@ -1,11 +1,14 @@
 import { useGetAsyncOptions } from '@cogoport/forms';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { merge } from '@cogoport/utils';
 
-const Controls = () => {
+const Controls = ({ truckTypeToggle }) => {
 	const locationAsyncOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: ['pincode'] } },
 	}));
+
+	const geo = getGeoConstants();
 
 	const serviceWiseControls = {
 		fcl_customs: [
@@ -94,49 +97,55 @@ const Controls = () => {
 		],
 		trailer_freight: [
 			{
-				...locationAsyncOptions,
 				label       : 'Pickup/Drop Pincode',
-				// name        : 'location_id',
+				name        : 'location_id',
 				placeholder : 'Search via pincode',
 				type        : 'select',
 				caret       : true,
 				className   : 'primary sm',
 				span        : 12,
 				rules       : { required: 'This is required' },
+				...locationAsyncOptions,
 			},
 		],
+
 		ftl_freight: [
 			{
+				label       : 'Pickup/Drop Pincode',
+				name        : 'location_id',
+				placeholder : 'Search via pincode',
+				type        : 'select',
+				caret       : true,
+				className   : 'primary sm',
+				span        : 12,
+				rules       : { required: 'This is required' },
 				...locationAsyncOptions,
-				label          : 'Pickup/Drop Pincode',
-				name           : 'location_id',
-				placeholder    : 'Search via pincode',
-				type           : 'location-select',
-				caret          : true,
-				className      : 'primary sm',
-				optionsListKey : 'locations',
-				span           : 12,
-				rules          : { required: 'This is required' },
-				params         : { filters: { type: ['pincode'] } },
+
 			},
 			{
-				name       : 'truck_type',
-				label      : '',
-				type       : 'select',
-				selectType : 'pills',
-				className  : 'primary sm',
-				span       : 12,
-				lg         : 12,
+				name     : 'truck_body_type',
+				offLabel : 'Closed Body',
+				onLabel  : 'Open Body',
+				type     : 'toggle',
+				value    : false,
 			},
 			{
-				name          : 'trucks_count',
-				label         : 'Number of Trucks',
-				type          : 'number',
-				prefix        : 'truck',
-				span          : 12,
-				className     : 'primary sm',
-				isShowStepper : false,
-				min           : 1,
+				name      : 'truck_type',
+				label     : '',
+				type      : 'chips',
+				options   : truckTypeToggle ? geo.options.open_truck : geo.options.close_truck,
+				className : 'primary sm',
+				span      : 12,
+				lg        : 12,
+			},
+			{
+				name      : 'trucks_count',
+				label     : 'Number of Trucks',
+				type      : 'number',
+				prefix    : 'truck',
+				span      : 12,
+				className : 'primary sm',
+				min       : 1,
 			},
 		],
 		haulage_freight : [],

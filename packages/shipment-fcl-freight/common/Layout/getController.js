@@ -1,7 +1,9 @@
 import {
-	InputController, PillsController, SelectController, DatepickerController,
+	InputController, PillsController, SelectController, DatepickerController, ChipsController,
 } from '@cogoport/forms';
 import UploadController from '@cogoport/forms/page-components/Controlled/UploadController';
+
+import ToggleController from './Item/ToggleController';
 
 const getElementController = (type = 'text') => {
 	switch (type) {
@@ -22,6 +24,10 @@ const getElementController = (type = 'text') => {
 
 		case 'date_picker':
 			return DatepickerController;
+		case 'chips':
+			return ChipsController;
+		case 'toggle':
+			return ToggleController;
 
 		default:
 			return null;

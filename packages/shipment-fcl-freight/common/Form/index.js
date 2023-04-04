@@ -7,22 +7,14 @@ import Layout from '../Layout';
 
 import styles from './styles.module.css';
 
-const serviceCustomNames = {
-	origin_haulage      : 'ICD to Port Haulage',
-	destination_haulage : 'Port to ICD Haulage',
-};
-
-function Form({ extraParams, service, onClose, shipmentData, services, primary_service }) {
+function Form({ service, onClose, shipmentData, services, primary_service }) {
 	const { controls, formProps } = ServiceUpsellControls({ service, services });
-
-	console.log(controls, 'controlsss');
 
 	return (
 		<div className={styles.container}>
-			{/* <form onSubmit={handleSubmit(addService, onError)}> */}
 			<div>
 				<div className={styles.form}>
-					FORM
+					{`${startCase(primary_service?.trade_type)} ${startCase(service?.service)}`}
 					<Layout controls={controls} formProps={formProps} />
 
 				</div>

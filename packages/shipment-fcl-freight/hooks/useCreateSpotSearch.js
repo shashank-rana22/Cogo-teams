@@ -6,16 +6,17 @@ import formatPayload from '../helpers/service-upsell-payload';
 
 const useCreateSpotSearch = ({ service = {}, primary_service = {}, shipmentData = {}, services = [] }) => {
 	// const [loading, setLoading] = useRequest(false);
-	const { push } = useRouter();
+	const router = useRouter();
+
+	console.log(router, 'router');
+
+	const { query } = router;
+	const { partner_id } = query;
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/create_upsell',
+		url    : 'fcl_freight/create_upsell',
 		method : 'POST',
 	}, { manual: true });
-
-	console.log('in Search');
-
-	const { shipment_type } = shipmentData;
 
 	const onAddService = async (values) => {
 		const { payload } = formatPayload({
@@ -26,13 +27,23 @@ const useCreateSpotSearch = ({ service = {}, primary_service = {}, shipmentData 
 			formValues: values,
 		});
 
-		const res = await trigger({ data: { payload } });
+		const res = await trigger({ data: { ...payload } });
 
-		console.log(res, 'ress');
+		if (!res.hasError) {
+			const newHref = `${window.location.origin}/${partner_id}/book/${res.data?.id}/${res.data?.importer_exporter_id}/${shipmentData?.id}`;
+
+			window.location.replace(newHref);
+
+			// push(
+			// 	'/book/[checkout_id]/[importer_exporter_id]/[shipment_id]',
+			// 	`/book/${res.data?.id}/${res.data?.importer_exporter_id}/${shipmentData?.id}`,
+			// );
+		}
 	};
 
 	return {
 		onAddService,
+		loading,
 	};
 };
 

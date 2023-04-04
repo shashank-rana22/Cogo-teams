@@ -58,6 +58,23 @@ const formatDataForSingleService = ({ rawParams }) => {
 		} return {
 			destination_location_id : formValues?.location_id,
 			origin_location_id      : primary_service?.origin_port?.id,
+			truck_type              : formValues?.truck_type,
+			trucks_count            : formValues?.trucks_count,
+			trade_type,
+		};
+	}
+
+	if (search_type === 'haulage_freight') {
+		if (trade_type === 'origin') {
+			return {
+				origin_location_id      : primary_service?.origin_main_port?.id,
+				destination_location_id : primary_service?.origin_port?.id,
+				trade_type,
+				transport_mode          : 'rail',
+			};
+		} return {
+			destination_location_id : formValues?.location_id,
+			origin_location_id      : primary_service?.origin_port?.id,
 			trade_type,
 		};
 	}
@@ -93,7 +110,7 @@ const formatPayload = ({
 	}
 
 	if (service.type === 'destination') {
-		trade_type = 'destination';
+		trade_type = 'import';
 	}
 
 	const rawParams = {

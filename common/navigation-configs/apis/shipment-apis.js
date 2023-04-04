@@ -1338,6 +1338,11 @@ const apis = [
 		service_name : 'business',
 	},
 	{
+		api          : 'create_upsell',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
 		api          : 'update_shipment_rail_domestic_freight_invoice_type',
 		access_type  : 'private',
 		service_name : 'shipment',

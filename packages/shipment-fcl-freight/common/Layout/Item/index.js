@@ -16,8 +16,6 @@ function Item(props) {
 		rules,
 	} = props || {};
 
-	console.log(props, 'propss');
-
 	const errorOriginal = handleError({
 		error,
 		rules,
