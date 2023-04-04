@@ -8,11 +8,14 @@ import { useState } from 'react';
 import controls from '../utils/controls';
 
 function usePostIngestionData({ refetch = () => {} }) {
-	// const [showModal, setShowModal] = useState(false);
 	const [show, setShow] = useState('');
 
 	const { profile: { partner = '' } } = useSelector((state) => state);
 	const { partner_user_id = '' } = partner || {};
+
+	const formProps = useForm();
+
+	const { watch } = formProps;
 
 	const [uploadData, setUploadData] = useState({
 		performed_by_type  : 'agent',
@@ -27,12 +30,8 @@ function usePostIngestionData({ refetch = () => {} }) {
 		method : 'POST',
 	}, { manual: true });
 
-	const formProps = useForm();
-
-	const { watch } = formProps;
-
 	const onSubmit = async (e) => {
-		const payload = Object.entries({ ...e, ...uploadData })
+		const payload = Object.entries({ ...e, ...uploadData, file_url: e?.file_url?.finalUrl })
 			.filter(([key, value]) => key !== 'finalModalHeading' && value !== null && value !== '')
 			.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 
@@ -57,7 +56,7 @@ function usePostIngestionData({ refetch = () => {} }) {
 		let newControl = { ...control };
 
 		if (newControl.name === 'agent') {
-			if (!isEmpty(watchCountry)) {
+			if (!isEmpty(watchCountry) && !isEmpty(watchPartner)) {
 				newControl = {
 					...newControl,
 					params: {
@@ -83,8 +82,6 @@ function usePostIngestionData({ refetch = () => {} }) {
 		onSubmit,
 		show,
 		setShow,
-		// showModal,
-		// setShowModal,
 	};
 }
 

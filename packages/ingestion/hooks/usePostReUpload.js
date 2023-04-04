@@ -21,10 +21,11 @@ function usePostReUpload({ row = {}, setTableModal = () => {} }) {
 				agent_id             : row?.agent_id,
 				ingestion_request_id : row?.id,
 				file_name            : row?.request_files[0]?.sheet_name,
-
 			};
 
-			const payload = Object.entries({ pay })
+			console.log('e', e);
+
+			const payload = Object.entries({ ...pay, file_url: e?.re_upload?.finalUrl })
 				.filter(([_, value]) => value !== null && value !== '')
 				.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 

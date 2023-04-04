@@ -31,9 +31,10 @@ function Filters(props) {
 			...params,
 			page    : 1,
 			filters : {
-				q               : query || undefined,
-				partner_user_id : uploadBy || undefined,
-				upload_date     : uploadDate || undefined,
+				q                       : query || undefined,
+				partner_user_id         : uploadBy || undefined,
+				created_at_greater_than : uploadDate?.startDate || undefined,
+				created_at_less_than    : uploadDate?.endDate || undefined,
 			},
 
 		});
