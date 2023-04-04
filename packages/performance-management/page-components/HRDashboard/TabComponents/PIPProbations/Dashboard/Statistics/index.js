@@ -9,8 +9,8 @@ import styles from './styles.module.css';
 import useGetLogStats from './useGetLogStats';
 
 function Statistics({ logType }) {
-	const { logStatsLoading = false, statsData = {}, statsParams, setStatsParams } = useGetLogStats();
-	const { pipStatsData, pipStatsKeys, probationStatsData, probationStatsKeys } = getLogStatsData(statsData);
+	const { logStatsLoading = false, statsData = [], statsParams, setStatsParams } = useGetLogStats(logType);
+	const { chartData = [], chartKeys } = getLogStatsData({ statsData });
 
 	return (
 		<div className={styles.container}>
@@ -36,8 +36,8 @@ function Statistics({ logType }) {
 						/>
 					) : (
 						<ResponsiveBar
-							data={logType === 'pip' ? pipStatsData : probationStatsData}
-							keys={logType === 'pip' ? pipStatsKeys : probationStatsKeys}
+							data={chartData}
+							keys={chartKeys}
 							indexBy="month"
 							margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
 							padding={0.5}

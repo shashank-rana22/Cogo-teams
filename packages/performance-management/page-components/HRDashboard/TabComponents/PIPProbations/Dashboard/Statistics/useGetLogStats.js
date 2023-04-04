@@ -3,15 +3,16 @@ import { useState } from 'react';
 
 import getDefaultFeedbackMonth from '../../../../../../utils/getDefaultYearMonth';
 
-const useGetLogStats = () => {
+const useGetLogStats = (logType) => {
 	const { feedbackMonth, feedbackYear } = getDefaultFeedbackMonth();
 
 	const [statsParams, setStatsParams] = useState({
-		Year  : feedbackYear,
-		Month : feedbackMonth,
+		Year    : feedbackYear,
+		Month   : feedbackMonth,
+		LogType : logType,
 	});
 
-	const [{ loading = false, data = {} }] = useIrisRequest({
+	const [{ loading = false, data = [] }] = useIrisRequest({
 		url    : 'get_iris_get_log_stats',
 		method : 'get',
 		params : statsParams,

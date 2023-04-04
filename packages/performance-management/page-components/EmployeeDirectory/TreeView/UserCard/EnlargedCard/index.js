@@ -70,6 +70,7 @@ function EnlargedCard({ user = {}, avatarProps = {}, refetchTreeParams, loading 
 					))}
 
 				</div>
+				<div className={styles.team_count}>{user?.team_count}</div>
 			</div>
 
 			<div className={`${styles.reassign_manager_container} ${openReassign ? styles.expand : ''}`}>

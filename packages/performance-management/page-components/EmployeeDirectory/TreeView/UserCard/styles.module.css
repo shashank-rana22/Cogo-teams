@@ -1,4 +1,5 @@
 .card_container {
+	position: relative;
 	margin: 8px;
 	overflow: hidden;
 	cursor: pointer;
@@ -41,7 +42,7 @@
 
 .designation {
 	width: fit-content;
-	max-width: 200px;
+	width: 200px;
 	padding-right: 8px;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -52,4 +53,19 @@
 .id {
 	margin-left: 8px;
 	font-weight: 600;
+}
+
+.team_count {
+	background: #6fa5ab;	
+	color: #ffffff;
+	width: 20px;
+	height: 20px;
+	font-size: 12px;
+
+	text-align: center;
+
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	border-top-left-radius: 8px;
 }

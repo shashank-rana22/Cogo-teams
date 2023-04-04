@@ -8,8 +8,8 @@ const dataKeyMapping = {
 	active                 : 'Active',
 };
 
-const getLogStatsData = (statsData) => {
-	const pipStatsData = (statsData.pip || []).map((obj) => {
+const getLogStatsData = ({ statsData = [] }) => {
+	const chartData = (statsData || []).map((obj) => {
 		const newObj = {};
 
 		Object.keys(obj).forEach((key) => {
@@ -18,20 +18,11 @@ const getLogStatsData = (statsData) => {
 		return newObj;
 	});
 
-	const pipStatsKeys = Object.keys((statsData.pip || [])[0] || {}).filter((key) => key !== 'month').map(
+	const chartKeys = Object.keys((statsData || [])[0] || {}).filter((key) => key !== 'month').map(
 		(key) => dataKeyMapping[key],
 	);
 
-	const probationStatsData = (statsData.probation || []).map((obj) => {
-		const newObj = {};
-		Object.keys(obj).forEach((key) => { newObj[dataKeyMapping[key]] = obj[key]; });
-		return newObj;
-	});
-	const probationStatsKeys = Object.keys((statsData.probation || [])[0] || {}).filter((key) => key !== 'month').map(
-		(key) => dataKeyMapping[key],
-	);
-
-	return { pipStatsData, pipStatsKeys, probationStatsData, probationStatsKeys };
+	return { chartData, chartKeys };
 };
 
 export default getLogStatsData;
