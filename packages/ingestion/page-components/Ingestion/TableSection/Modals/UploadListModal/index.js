@@ -20,7 +20,6 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 
 	// Todo Test pagination here
 
-	// Todo Reupload button condition on this modal
 	if (isEmpty(list) && !loading) {
 		return (
 			<Modal size="lg" show={tableModal === 'uploadList'} onClose={onClose} placement="center">
@@ -37,8 +36,8 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 					<EmptyState height="200px" width="720px" />
 				</div>
 				<div className={styles.close_button}>
-					<Button themeType="secondary" onClick={onClose}>Close</Button>
-					{/* <Button themeType="primary" onClick={onClose}>Re-Upload</Button> */}
+					<Button disabled={loading} themeType="secondary" onClick={onClose}>Close</Button>
+					<Button disabled={loading} themeType="primary" onClick={onClose}>Re-Upload</Button>
 
 				</div>
 			</Modal>
@@ -88,7 +87,10 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 					Close
 
 				</Button>
-				<Button disabled={loading} themeType="secondary" onClick={() => onSubmit()}>Re-Upload</Button>
+
+				{(row?.request_files[0]?.errored_data_url)
+					? (<Button disabled={loading} themeType="secondary" onClick={() => onSubmit()}>Re-Upload</Button>
+					) : ''}
 
 			</div>
 		</Modal>
