@@ -10,11 +10,12 @@ import FeedbackModal from './FeedbackPopOver';
 import ReassignManagerModal from './ReassignManagerModal';
 import styles from './styles.module.css';
 
-// const statusColorMapping = {
-// 	probation : 'red',
-// 	employed  : 'green',
-// 	young     : 'yellow',
-// };
+const statusColorMapping = {
+	pip       : 'red',
+	employed  : 'green',
+	probation : 'yellow',
+	exited    : 'red',
+};
 
 const useGetColumns = ({
 	getTeamFeedbackList = () => {},
@@ -27,6 +28,7 @@ const useGetColumns = ({
 	activeTab,
 }) => {
 	const router = useRouter();
+
 	const handleClick = (user_id) => {
 		const {
 			forwardPath,
@@ -285,6 +287,20 @@ const useGetColumns = ({
 		),
 		id  : 'action',
 		key : 'action',
+	},
+	{
+		Header   : <div className={styles.head}>STATUS</div>,
+		accessor : (item) => (
+			<div className={styles.head_content}>
+				<Pill
+					color={statusColorMapping[item.employment_status]}
+				>
+					{startCase(item.employment_status || 'Not Known')}
+				</Pill>
+			</div>
+		),
+		id  : 'employment_status',
+		key : 'employment_status',
 	},
 	{
 		Header   : <div className={styles.head}>STATUS</div>,
