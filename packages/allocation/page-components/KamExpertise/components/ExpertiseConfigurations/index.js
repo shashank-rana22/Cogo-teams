@@ -4,6 +4,7 @@ import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import TAB_PANEL_MAPPING from '../../constants/table-panel-mapping';
 import useGetExpertiseParameters from '../../hooks/useGetExpertiseParameters';
 import useGetKamExpertiseConfig from '../../hooks/useGetKamExpertiseConfig';
 import useGetKamExpertiseCurrentConfig from '../../hooks/useGetKamExpertiseCurrentConfig';
@@ -12,22 +13,6 @@ import usePublishDraft from '../../hooks/usePublishDraft';
 import CurrentConfigurations from './CurrentConfigurations';
 import PublishVersionModal from './PublishVersionModal';
 import styles from './styles.module.css';
-import KamExpertiseScoreConfig from './Tabs/KamExpertiseScore';
-import KamLevel from './Tabs/KamLevel';
-
-const TAB_PANEL_MAPPING = {
-	configurations: {
-		name      : 'kam-expertise-score-config',
-		title     : 'Kam Expertise Score Config',
-		Component : KamExpertiseScoreConfig,
-	},
-
-	relations: {
-		name      : 'kam-level-config',
-		title     : 'Kam Level Config',
-		Component : KamLevel,
-	},
-};
 
 function ViewAllConfigs() {
 	const router = useRouter();

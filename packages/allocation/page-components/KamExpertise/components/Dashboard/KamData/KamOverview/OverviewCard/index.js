@@ -69,14 +69,14 @@ function OverviewCard(props) {
 				</div>
 
 				<Tooltip
-					content={data?.max_condition || 'NA'}
+					content={startCase(data?.max_condition) || 'NA'}
 					placement="top"
 				>
 					<div className={styles.display_flex}>
 						<span> Most Points in</span>
 
 						<div className={styles.values}>
-							{data?.max_condition || 'NA'}
+							{startCase(data?.max_condition) || 'NA'}
 						</div>
 					</div>
 				</Tooltip>
