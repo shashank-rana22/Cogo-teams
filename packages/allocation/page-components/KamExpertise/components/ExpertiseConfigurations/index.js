@@ -37,6 +37,7 @@ function ViewAllConfigs() {
 		refetch,
 		cardRefetch,
 		expertiseRefetch,
+		list,
 	});
 
 	const componentProps = {

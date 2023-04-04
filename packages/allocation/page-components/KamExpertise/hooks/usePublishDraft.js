@@ -8,7 +8,12 @@ const usePublishDraft = (props) => {
 		refetch,
 		expertiseRefetch,
 		cardRefetch,
+		list,
 	} = props;
+
+	const draftData = list.filter((item) => item?.status === 'draft')?.[0] || {};
+
+	const { version_id = '' } = draftData;
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		method  : 'POST',
@@ -20,6 +25,7 @@ const usePublishDraft = (props) => {
 		try {
 			const payload = {
 				status: 'live',
+				version_id,
 			};
 
 			await trigger({
