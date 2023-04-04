@@ -40,7 +40,7 @@ function ChooseModal({ setShow = () => {}, show = '', setUploadData = () => {}, 
 				</div>
 			)}
 			/>
-			<Modal.Body>
+			<div>
 				<div className={styles.choose_heading}>What do you wish to upload CSV for?</div>
 				<div className={styles.choose_container}>
 					<Button
@@ -68,11 +68,12 @@ function ChooseModal({ setShow = () => {}, show = '', setUploadData = () => {}, 
 						Importer Exporter
 					</Button>
 				</div>
-			</Modal.Body>
-			<Modal.Footer>
-				<Button themeType="secondary" onClick={onClose}>Close</Button>
+				<div className={styles.close_button}>
+					<Button themeType="secondary" onClick={onClose}>Close</Button>
 
-			</Modal.Footer>
+				</div>
+			</div>
+
 		</Modal>
 	);
 }

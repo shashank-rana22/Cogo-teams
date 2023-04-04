@@ -10,11 +10,11 @@ function usePostReUpload({ row = {}, setTableModal = () => {} }) {
 
 	const onSubmit = async (e) => {
 		try {
-			const payload = {
+			const pay = {
 				partner_id           : row?.partner_id,
 				country_id           : row?.country_id,
 				performed_by_type    : 'agent',
-				file_url             : e?.re_upload[0],
+				file_url             : e?.re_upload,
 				ingestion_type       : row?.ingestion_type,
 				partner_user_id      : row?.partner_user_id,
 				description          : row?.description,
@@ -25,6 +25,10 @@ function usePostReUpload({ row = {}, setTableModal = () => {} }) {
 
 			};
 
+			const payload = Object.entries({ pay })
+				.filter(([_, value]) => value !== null && value !== '')
+				.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+
 			await trigger({
 				data: payload,
 			});
@@ -32,7 +36,7 @@ function usePostReUpload({ row = {}, setTableModal = () => {} }) {
 
 			setTableModal('');
 		} catch (error) {
-			Toast.error('Error');
+			Toast.error(error?.message);
 		}
 	};
 	const formProps = useForm();

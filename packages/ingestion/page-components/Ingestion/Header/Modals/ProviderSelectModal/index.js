@@ -80,8 +80,8 @@ function ProviderSelectModal({ setShow = () => {}, show = '', setUploadData = ()
 				</div>
 			)}
 			/>
-			<Modal.Body>
-				<div style={{ margin: '0 0 12px 0' }}>What do you wish to upload CSV for?</div>
+			<div>
+				<div className={styles.heading}>What do you wish to upload CSV for?</div>
 
 				<div className={styles.provider_container}>
 					{ProviderButtonOptions.map((response) => (
@@ -99,13 +99,14 @@ function ProviderSelectModal({ setShow = () => {}, show = '', setUploadData = ()
 					))}
 
 				</div>
+				<div className={styles.close_button}>
 
-			</Modal.Body>
-			<Modal.Footer>
+					<Button themeType="secondary" onClick={() => setShow('chooseModal')}>Back</Button>
 
-				<Button themeType="secondary" onClick={() => setShow('chooseModal')}>Back</Button>
+				</div>
 
-			</Modal.Footer>
+			</div>
+
 		</Modal>
 	);
 }

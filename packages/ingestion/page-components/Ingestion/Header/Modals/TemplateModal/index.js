@@ -5,15 +5,15 @@ import useGetTemplate from '../../../../../hooks/useGetTemplate';
 
 import styles from './styles.module.css';
 
-function TemplateModal({ showModal, setShowModal = () => {} }) {
+function TemplateModal({ show, setShow = () => {} }) {
 	const { getTemplateCsv = () => {} } = useGetTemplate();
 
 	const onClose = () => {
-		setShowModal(false);
+		setShow('');
 	};
 
 	return (
-		<Modal size="md" show={showModal} onClose={onClose} placement="center">
+		<Modal size="md" show={show === 'template'} onClose={onClose} placement="center">
 			<Modal.Header title={(
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<IcMDownload style={{ margin: '0 4px 0 0' }} />

@@ -187,7 +187,7 @@ function useGetUploadList(id) {
 			),
 		},
 		{
-			key      : 'successfully_migratedd',
+			key      : 'successfully_migrated',
 			Header   : 'SUCCESSFULLY MIGRATED',
 			accessor : ({ successfully_migrated_count }) => (
 				<div className={styles.successfully_migrated_count}>{successfully_migrated_count || '___'}</div>

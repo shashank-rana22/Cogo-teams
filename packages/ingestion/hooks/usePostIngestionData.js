@@ -8,13 +8,11 @@ import { useState } from 'react';
 import controls from '../utils/controls';
 
 function usePostIngestionData({ refetch = () => {} }) {
-	const [showModal, setShowModal] = useState(false);
+	// const [showModal, setShowModal] = useState(false);
 	const [show, setShow] = useState('');
 
 	const { profile: { partner = '' } } = useSelector((state) => state);
 	const { partner_user_id = '' } = partner || {};
-
-	// console.log('partner_user_id', partner_user_id);
 
 	const [uploadData, setUploadData] = useState({
 		performed_by_type  : 'agent',
@@ -35,7 +33,7 @@ function usePostIngestionData({ refetch = () => {} }) {
 
 	const onSubmit = async (e) => {
 		const payload = Object.entries({ ...e, ...uploadData })
-			.filter(([key, value]) => key !== 'finalModalHeading')
+			.filter(([key, value]) => key !== 'finalModalHeading' && value !== null && value !== '')
 			.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 
 		try {
@@ -85,8 +83,8 @@ function usePostIngestionData({ refetch = () => {} }) {
 		onSubmit,
 		show,
 		setShow,
-		showModal,
-		setShowModal,
+		// showModal,
+		// setShowModal,
 	};
 }
 

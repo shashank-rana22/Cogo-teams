@@ -59,7 +59,7 @@ function OrgDetailsModal({
 				</div>
 			)}
 			/>
-			<Modal.Body>
+			<div>
 				<div className={styles.modal_container}>
 
 					{
@@ -98,19 +98,20 @@ function OrgDetailsModal({
 
 				</div>
 
-			</Modal.Body>
-			<Modal.Footer>
+				<div className={styles.close_button}>
 
-				<Button
-					themeType="secondary"
-					style={{ marginRight: '8px' }}
-					onClick={onBack}
-				>
-					Back
+					<Button
+						themeType="secondary"
+						style={{ marginRight: '8px' }}
+						onClick={onBack}
+					>
+						Back
 
-				</Button>
-				<Button onClick={handleSubmit(onSubmit)}>Next</Button>
-			</Modal.Footer>
+					</Button>
+					<Button onClick={handleSubmit(onSubmit)}>Next</Button>
+				</div>
+			</div>
+
 		</Modal>
 	);
 }

@@ -9,7 +9,10 @@ import { getElementController } from '../../../../utils/get-element-controls';
 import styles from './styles.module.css';
 
 function Filters(props) {
-	const { params = {}, setParams = () => {}, disabled } = props;
+	const {
+		params = {}, setParams = () => {},
+	// disabled
+	} = props;
 	const [search, setSearch] = useState('');
 
 	const formProps = useForm();
@@ -59,7 +62,6 @@ function Filters(props) {
 										{...el}
 										key={el.name}
 										control={control}
-										// disabled={disabled}
 									/>
 								</div>
 							</div>
@@ -70,14 +72,10 @@ function Filters(props) {
 			</div>
 			<div className={styles.search}>
 				<Input
-					onChange={(val) => {
-						setSearch(val);
-						console.log('val', val);
-					}}
+					onChange={(val) => setSearch(val)}
 					prefix={<IcMSearchlight />}
 					placeholder="Search Filename"
 					width="100%"
-					// disabled={disabled}
 				/>
 			</div>
 		</div>

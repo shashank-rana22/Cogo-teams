@@ -12,9 +12,9 @@ const uploadControls = [
 		name        : 'description',
 		label       : 'Description',
 		type        : 'textArea',
-		// placeholder : 'Description',
+		placeholder : 'Description',
 		isClearable : true,
-		style       : { height: '60px' },
+		style       : { height: '80px' },
 	},
 	{
 		name       : 'file_url',

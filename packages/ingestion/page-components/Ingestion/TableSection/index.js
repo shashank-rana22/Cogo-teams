@@ -1,5 +1,3 @@
-// import { Table, Pagination } from '@cogoport/components';
-
 import Filters from './Filters';
 import List from './List';
 import styles from './styles.module.css';
@@ -9,33 +7,16 @@ function TableSection(props) {
 		columns = [],
 		onPageChange = () => {},
 		loading = false,
-		Component,
+		Component = () => {},
 		setTableModal = () => {},
 		tableModal = '',
 		data,
 		row = {},
-		formProps,
+		formProps = {},
 		params = {},
 		setParams = () => {},
 	} = props;
 
-	// const { list, page = 0, page_limit = 0, total_count = 0 } = data || {};
-
-	// if (isEmpty(list) && !loading) {
-	// 	return (
-	// 		<>
-	// 			<Filters
-	// 				setParams={setParams}
-	// 				params={params}
-	// 				formProps={formProps}
-	// 			/>
-	// 			<div className={styles.empty}>
-	// 				<EmptyState height="300px" width="200px" />
-	// 			</div>
-	// 		</>
-
-	// 	);
-	// }
 	return (
 		<div className={styles.table_main_container}>
 
@@ -49,31 +30,13 @@ function TableSection(props) {
 				params={params}
 				formProps={formProps}
 			/>
-			{/* <Table
-				className={styles.table}
-				columns={columns}
-				data={list || []}
-				loading={loading}
-			/>
-
-			{total_count > page_limit && (
-				<div className={styles.pagination_container}>
-					<Pagination
-						type="table"
-						currentPage={page}
-						totalItems={total_count || 0}
-						pageSize={page_limit || 10}
-						onPageChange={onPageChange}
-					/>
-				</div>
-			)} */}
 
 			{Component && (
 				<Component
 					setTableModal={setTableModal}
 					tableModal={tableModal}
 					row={row}
-
+					loading={loading}
 				/>
 			)}
 		</div>

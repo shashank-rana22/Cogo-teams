@@ -11,6 +11,7 @@ import UploadModal from './Modals/UploadModal';
 import styles from './styles.module.css';
 
 const CONSTANT_KEYS = {
+	TEMPLATE        : 'template',
 	CHOOSE          : 'chooseModal',
 	ORG_DETAILS     : 'orgDetails',
 	PROVIDER_SELECT : 'providerSelect',
@@ -18,10 +19,11 @@ const CONSTANT_KEYS = {
 };
 
 const {
-	CHOOSE, ORG_DETAILS, PROVIDER_SELECT, UPLOAD,
+	TEMPLATE, CHOOSE, ORG_DETAILS, PROVIDER_SELECT, UPLOAD,
 } = CONSTANT_KEYS;
 
 const INGESTION_COMPONENTS_MAPPING = {
+	[TEMPLATE]        : TemplateModal,
 	[CHOOSE]          : ChooseModal,
 	[ORG_DETAILS]     : OrgDetailsModal,
 	[PROVIDER_SELECT] : ProviderSelectModal,
@@ -38,8 +40,7 @@ function Header({ refetch = () => {} }) {
 		setShow = () => {},
 		onSubmit = () => {},
 		loading = false,
-		setShowModal = () => {},
-		showModal,
+
 	} = usePostIngestionData({ refetch });
 
 	const Component = INGESTION_COMPONENTS_MAPPING[show] || null;
@@ -55,7 +56,7 @@ function Header({ refetch = () => {} }) {
 					size="lg"
 					themeType="secondary"
 					style={{ marginRight: '16px' }}
-					onClick={() => setShowModal(true)}
+					onClick={() => setShow('template')}
 				>
 					<IcMDownload style={{ marginRight: '4px' }} />
 					Download Templates
@@ -89,7 +90,7 @@ function Header({ refetch = () => {} }) {
 				)
 			}
 
-			<TemplateModal setShowModal={setShowModal} showModal={showModal} />
+			<TemplateModal setShow={setShow} show={show} />
 		</div>
 
 	);

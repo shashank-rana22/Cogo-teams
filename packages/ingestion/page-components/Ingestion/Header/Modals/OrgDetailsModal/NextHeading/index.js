@@ -1,22 +1,24 @@
+import styles from './styles.module.css';
+
 function LeadDiv() {
 	return (
-		<div>
-			Please provide more details about Leads
+		<div className={styles.heading}>
+			Please provide more details about Lead
 		</div>
 	);
 }
 
 function CpDiv() {
 	return (
-		<div>
-			Please provide more details about Channel Partners
+		<div className={styles.heading}>
+			Please provide more details about Channel Partner
 		</div>
 	);
 }
 
 function IeDiv() {
 	return (
-		<div>
+		<div className={styles.heading}>
 			Please provide more details about Importer Exporter
 		</div>
 	);

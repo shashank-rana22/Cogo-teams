@@ -8,5 +8,14 @@
 }
 
 .choose_heading {
-    margin-bottom: 8px;
+    padding: 12px 16px;
+
+}
+
+.close_button {
+   
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px 16px;
+
 }

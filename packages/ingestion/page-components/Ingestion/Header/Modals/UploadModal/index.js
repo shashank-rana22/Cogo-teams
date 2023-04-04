@@ -31,8 +31,6 @@ function UploadModal({
 	return (
 
 		<Modal
-			style={{ height: '630px' }}
-			scroll={false}
 			size="md"
 			show={show === 'uploadModal'}
 			onClose={onClose}
@@ -46,8 +44,8 @@ function UploadModal({
 				</div>
 			)}
 			/>
-			<Modal.Body>
-				<div style={{ margin: '0 0 12px 0' }}>
+			<div>
+				<div style={{ margin: '0 0 12px 16px' }}>
 					{FINAL_HEADING[uploadData?.ingestion_type]}
 				</div>
 
@@ -75,20 +73,21 @@ function UploadModal({
 						);
 					})}
 				</div>
+				<div className={styles.close_button}>
+					<Button
+						themeType="secondary"
+						style={{ marginRight: '8px' }}
+						onClick={() => {
+							setShow('orgDetails');
+						}}
+					>
+						Back
+					</Button>
+					<Button loading={loading} onClick={handleSubmit(onChoose)}>Submit</Button>
+				</div>
 
-			</Modal.Body>
-			<Modal.Footer>
-				<Button
-					themeType="secondary"
-					style={{ marginRight: '8px' }}
-					onClick={() => {
-						setShow('orgDetails');
-					}}
-				>
-					Back
-				</Button>
-				<Button loading={loading} onClick={handleSubmit(onChoose)}>Submit</Button>
-			</Modal.Footer>
+			</div>
+
 		</Modal>
 	);
 }

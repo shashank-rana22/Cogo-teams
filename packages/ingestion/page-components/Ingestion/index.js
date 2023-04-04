@@ -1,5 +1,4 @@
 import useGetIngestionList from '../../hooks/useGetIngestionList';
-import usePostReUpload from '../../hooks/usePostReUpload';
 
 import Header from './Header';
 import TableSection from './TableSection';

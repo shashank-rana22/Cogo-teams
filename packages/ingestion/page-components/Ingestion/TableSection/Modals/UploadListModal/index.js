@@ -20,6 +20,7 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 
 	// Todo Test pagination here
 
+	// Todo Reupload button condition on this modal
 	if (isEmpty(list) && !loading) {
 		return (
 			<Modal size="lg" show={tableModal === 'uploadList'} onClose={onClose} placement="center">
@@ -31,16 +32,15 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 					</div>
 				)}
 				/>
-				<Modal.Body>
-					<div className={styles.empty}>
-						<EmptyState height="200px" width="720px" />
-					</div>
-				</Modal.Body>
-				<Modal.Footer>
+
+				<div className={styles.empty}>
+					<EmptyState height="200px" width="720px" />
+				</div>
+				<div className={styles.close_button}>
 					<Button themeType="secondary" onClick={onClose}>Close</Button>
 					{/* <Button themeType="primary" onClick={onClose}>Re-Upload</Button> */}
 
-				</Modal.Footer>
+				</div>
 			</Modal>
 
 		);
@@ -58,29 +58,27 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 			)}
 			/>
 
-			<Modal.Body>
-				<div>
-					<Table
-						className={styles.table}
-						columns={columns}
-						data={list || []}
-						loading={loading}
-					/>
+			<div className={styles.container}>
+				<Table
+					className={styles.table}
+					columns={columns}
+					data={list || []}
+					loading={loading}
+				/>
 
-					{total_count > page_limit && (
-						<div className={styles.pagination_container}>
-							<Pagination
-								type="table"
-								currentPage={page}
-								totalItems={total_count || 0}
-								pageSize={page_limit || 5}
-								onPageChange={onPageChange}
-							/>
-						</div>
-					)}
-				</div>
-			</Modal.Body>
-			<Modal.Footer>
+				{total_count > page_limit && (
+					<div className={styles.pagination_container}>
+						<Pagination
+							type="table"
+							currentPage={page}
+							totalItems={total_count || 0}
+							pageSize={page_limit || 5}
+							onPageChange={onPageChange}
+						/>
+					</div>
+				)}
+			</div>
+			<div className={styles.close_button}>
 				<Button
 					style={{ marginRight: '8px' }}
 					disabled={loading}
@@ -92,7 +90,7 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 				</Button>
 				<Button disabled={loading} themeType="secondary" onClick={() => onSubmit()}>Re-Upload</Button>
 
-			</Modal.Footer>
+			</div>
 		</Modal>
 	);
 }
