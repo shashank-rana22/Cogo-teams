@@ -22,6 +22,12 @@
 
 .pills_question_wrapper {
 	display: flex;
+
+	:global {
+		.ui_pill_container {
+			height: 20px;
+		}
+	}
 }
 
 .question_wrapper {

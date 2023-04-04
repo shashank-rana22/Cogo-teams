@@ -152,3 +152,8 @@
 	border-radius: 2px;
 	backdrop-filter: blur(3px);
 }
+
+.convert_to_cp {
+	display: flex;
+	justify-content: space-between;
+}

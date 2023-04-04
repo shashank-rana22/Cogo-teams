@@ -1,0 +1,67 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	height: 59px;
+	margin: 16px 0;
+}
+
+.flex {
+	display: flex;
+}
+
+.sub_container_click {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 89%;
+	height: 49px;
+	padding: 12px 23px;
+	margin-right: 28px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #ed3726;
+	cursor: pointer;
+	background: #fffaeb;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+	transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
+
+	&:hover {
+		width: 94%;
+		height: 50px;
+		box-shadow: 0 0 8px rgb(44 62 80 / 30%);
+	}
+}
+
+.sub_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 89%;
+	height: 49px;
+	padding: 12px 23px;
+	margin-right: 28px;
+	font-size: 12px;
+	font-weight: 600;
+	cursor: pointer;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+	transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
+
+	&:hover {
+		width: 94%;
+		height: 50px;
+		box-shadow: 0 0 8px rgb(44 62 80 / 30%);
+	}
+}
+
+.main_heading {
+	margin: 8px 0;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.coming_soon {
+	margin: 20px;
+}
