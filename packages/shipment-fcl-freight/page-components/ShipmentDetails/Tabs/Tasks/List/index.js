@@ -12,9 +12,6 @@ function List() {
 		shipment_data,
 	} = useListShipmentPendingTasks();
 
-	console.log('task', loading);
-	console.log('task', tasksList.length);
-
 	if (loading) {
 		return (
 			<div className={styles.container}>
@@ -39,7 +36,11 @@ function List() {
 
 			{selectedTaskId ? (
 				<>
-					<Card task={tasksList.find((task) => task.id === selectedTaskId)} handleClick={handleClick} />
+					<Card
+						task={tasksList.find((task) => task.id === selectedTaskId)}
+						handleClick={handleClick}
+						isTaskOpen
+					/>
 
 					<TaskCard
 						task={tasksList.find((task) => task.id === selectedTaskId)}

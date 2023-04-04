@@ -15,11 +15,6 @@
 	display: flex;
 	justify-content: flex-end;
 
-	.core-ui-button-root {
-		margin-left: 10px;
-		text-transform: capitalize;
-		width: 100px;
-	}
 };
 
 .form{

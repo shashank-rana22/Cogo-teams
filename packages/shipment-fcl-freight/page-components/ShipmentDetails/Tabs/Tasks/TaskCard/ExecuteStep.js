@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 
+import Layout from './helpers/Layout';
 import useStepExecution from './helpers/useStepExecution';
 import styles from './styles.module.css';
 
@@ -14,12 +15,9 @@ function ExecuteStep({
 	uiConfig = {},
 }) {
 	const {
-		finalConfig,
-		// controls,
-		// showElements,
+		formProps,
 		// error,
-		// fields,
-		// handleSubmit,
+		fields,
 		isLoading,
 		// setIsLoading,
 		// onError,
@@ -30,20 +28,19 @@ function ExecuteStep({
 		getApisData,
 		// selectedMail,
 	});
+	const { control, error } = formProps;
 
-	const handleClick = () => {
-		console.log('this is handle click', finalConfig, refetch, uiConfig);
-	};
+	console.log('fields', fields, uiConfig, refetch);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.form}>
-				{/* <FormLayout
-					controls={controls}
+				<Layout
 					fields={fields}
+					control={control}
 					errrors={error}
-					showElements={showElements}
-				/> */}
+					// showElements={showElements}
+				/>
 			</div>
 
 			<div className={styles.button_wrap}>
@@ -52,11 +49,11 @@ function ExecuteStep({
 					onClick={() => onCancel()}
 					disabled={isLoading}
 				>
-					cancel
+					CANCEL
 				</Button>
 
-				<Button disabled={isLoading} onClick={handleClick}>
-					{isLastStep ? 'Submit' : 'Next'}
+				<Button disabled={isLoading}>
+					{isLastStep ? 'SUBMIT' : 'NEXT'}
 				</Button>
 			</div>
 		</div>

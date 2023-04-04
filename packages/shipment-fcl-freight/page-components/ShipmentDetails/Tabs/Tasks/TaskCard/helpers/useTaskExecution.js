@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from 'react';
 import prepareSteps from '../utils/prepareSteps';
 
 function injectUiConfigs(rawTaskUiResponse, task, primaryService) {
-	const config = rawTaskUiResponse.task_confing || {};
+	const config = rawTaskUiResponse.task_config || {};
 
 	const modifiedConfig = {
 		label      : config.label,

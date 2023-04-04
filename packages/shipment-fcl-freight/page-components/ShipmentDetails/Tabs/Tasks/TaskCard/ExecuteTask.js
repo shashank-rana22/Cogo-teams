@@ -16,12 +16,10 @@ function ExecuteTask({ task = {}, onCancel = () => {} }) {
 	const stepConfigValue = steps.length
 		? steps[currentStep] || steps[steps.length - 1]
 		: {};
-	console.log('steps', loading);
-	console.log('current step', currentStep);
+	console.log('laoding', loading);
 
 	return (
 		<div>
-			This is task execution
 			<ExecuteStep
 				task={task}
 				stepConfig={stepConfigValue}

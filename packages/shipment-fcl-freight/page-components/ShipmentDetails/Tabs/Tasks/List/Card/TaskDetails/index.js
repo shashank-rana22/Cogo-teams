@@ -19,7 +19,6 @@ function TaskDetails({
 	});
 	const taskName = startCase(task.task || task.label);
 
-	console.log('task', task);
 	return (
 		<div className={styles.container}>
 			<div className={styles.task_details}>

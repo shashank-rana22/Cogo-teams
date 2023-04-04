@@ -7,7 +7,6 @@ function TaskCard({ task = {}, onCancel = () => {}, refetch = () => {} }) {
 	console.log('sfsdfs', refetch);
 	return (
 		<div>
-			This is task card.
 			<ExecuteTask task={task} onCancel={onCancel} />
 		</div>
 	);
