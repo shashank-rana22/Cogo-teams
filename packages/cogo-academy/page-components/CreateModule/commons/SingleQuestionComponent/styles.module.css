@@ -54,6 +54,13 @@
 .difficulty_level {
 	display: flex;
 	margin-top: 32px;
+	align-items: center;
+
+	:global {
+		.ui_chip_container {
+			height: 28px !important;
+		}
+	}
 
 	@media (max-width: 768px) {
 		flex-direction: column;

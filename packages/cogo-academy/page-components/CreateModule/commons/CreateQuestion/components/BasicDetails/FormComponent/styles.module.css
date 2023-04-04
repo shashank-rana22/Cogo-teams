@@ -33,6 +33,12 @@
 	display: flex;
 	margin-bottom: 32px;
 
+	:global {
+		.ui_chip_container {
+			height: 28px !important;
+		}
+	}
+
 	@media (max-width: 768px) {
 		flex-direction: column;
 

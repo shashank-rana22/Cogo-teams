@@ -22,11 +22,6 @@ const useGetTableColumns = ({
 
 	return [
 		{
-			Header   : 'Topic',
-			id       : 'topic',
-			accessor : ({ topic }) => <section>{topic}</section>,
-		},
-		{
 			Header   : 'Question Type',
 			id       : 'question_type',
 			accessor : ({ question_type }) => (
