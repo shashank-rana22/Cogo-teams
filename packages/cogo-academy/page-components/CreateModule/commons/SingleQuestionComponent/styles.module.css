@@ -53,8 +53,8 @@
 
 .difficulty_level {
 	display: flex;
-	margin-top: 32px;
 	align-items: center;
+	margin-top: 32px;
 
 	:global {
 		.ui_chip_container {
