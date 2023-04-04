@@ -59,10 +59,6 @@
 	cursor: pointer;
 }
 
-.eye_button_text {
-	min-width: max-content;
-}
-
 .details_container {
 	display: flex;
 	flex-direction: column;

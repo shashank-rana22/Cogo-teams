@@ -10,7 +10,7 @@ function CardItem({ data = {} }) {
 
 	const { icon_url, heading, title, desc, href } = data;
 
-	const { label, link } = href;
+	const { label, url } = href;
 
 	return (
 		<div className={styles.container}>
@@ -28,7 +28,7 @@ function CardItem({ data = {} }) {
 						<IcMDocument />
 						<span className={styles.tag_count}>1,301</span>
 					</div>
-					<Button size="md" themeType="linkUi" onClick={() => push(link, link)}>{label}</Button>
+					<Button size="md" themeType="linkUi" onClick={() => push(url, url)}>{label}</Button>
 				</div>
 			</div>
 		</div>

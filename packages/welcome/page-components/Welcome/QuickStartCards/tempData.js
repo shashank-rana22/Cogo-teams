@@ -6,7 +6,7 @@ const data = [
 		desc     : 'Here, we will be describing why one must use this link,and what they can expect here.',
 		href     : {
 			label : 'Visit CogoAcademy',
-			link  : '/learning/faq',
+			url   : '/learning/tests/dashboard',
 		},
 	},
 	{
@@ -16,7 +16,7 @@ const data = [
 		desc     : 'Here, we will be describing why one must use this link,and what they can expect here.',
 		href     : {
 			label : 'Visit CogoAssist',
-			link  : '/learning/faq',
+			url   : '/learning/faq',
 		},
 	},
 	{
@@ -26,7 +26,7 @@ const data = [
 		desc     : 'Here, we will be describing why one must use this link,and what they can expect here.',
 		href     : {
 			label : 'Visit Module',
-			link  : '/learning/faq',
+			url   : '/learning/tests/dashboard',
 		},
 	},
 ];

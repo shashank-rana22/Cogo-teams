@@ -5,7 +5,10 @@ const data = [
 		desc     : 'Use the following account details to login.',
 		login_id : 'ggg@cogoport.com',
 		password : 'CogoIntent',
-		href     : 'Visit Channel Partners Portal',
+		href     : {
+			label : 'Visit Channel Partners Portal',
+			url   : 'https://partners.cogoport.com',
+		},
 	},
 	{
 		icon_url : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/7d3e116621f46e0a8ab259f281c42650.png',
@@ -13,7 +16,10 @@ const data = [
 		desc     : 'Use the following account details to login.',
 		login_id : 'ggg@cogoport.com',
 		password : 'CogoIntent',
-		href     : 'Visit Customers Portal',
+		href     : {
+			label : 'Visit Customers Portal',
+			url   : 'https://app.cogoport.com',
+		},
 	},
 ];
 export default data;
