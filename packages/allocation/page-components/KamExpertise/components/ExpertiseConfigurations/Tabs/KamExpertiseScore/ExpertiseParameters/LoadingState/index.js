@@ -16,7 +16,7 @@ const LoadingState = () => (
 
 				{[1, 2, 3, 4].map((item) => (
 					<div key={item} className={styles.single_control}>
-						<Placeholder width="240px" height="20px" style={{ marginBottom: '8px' }} />
+						<Placeholder width="240px" height="20px" margin="0px 0px 8px 0px" />
 
 						<Placeholder width="80px" height="20px" />
 					</div>
