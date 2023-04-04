@@ -2,6 +2,7 @@ import { Select, Input, Pagination } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import { GenericObject } from '../../../../commons/Interfaces';
 import StyledTable from '../../../../commons/styledTable';
 import SettlementList from '../../../../configs/Settlement_table';
 import { ACCOUNT_TYPE } from '../../../../constants';
@@ -13,9 +14,13 @@ import styles from './styles.module.css';
 
 interface Props {
 	organizationId: string,
+	outStandingFilters?: GenericObject,
+
 }
 
-function SettlementTable({ organizationId }: Props) {
+function SettlementTable({ organizationId, outStandingFilters }: Props) {
+	const { entityCode = '' } = outStandingFilters || {};
+
 	const {
 		singleData,
 		getHistoryChild,
@@ -29,7 +34,7 @@ function SettlementTable({ organizationId }: Props) {
 		loading,
 		settlementFilters,
 		setSettlementFilters,
-	} = useGetSettlementTable(organizationId);
+	} = useGetSettlementTable(organizationId, entityCode);
 
 	const [active, setActive] = useState(false);
 
