@@ -36,7 +36,7 @@ function MyProfile() {
 		errors,
 		handleSubmit = () => {},
 		getValues,
-		showOrganizationHierarchy,
+		hideOrganizationHierarchy,
 	} = useChangePassword({
 		refetch,
 		personDetails : detailsData,
@@ -96,7 +96,7 @@ function MyProfile() {
 
 				</div>
 
-				{showOrganizationHierarchy
+				{!hideOrganizationHierarchy
 					? (
 						<div>
 							<div className={styles.organization_container}>

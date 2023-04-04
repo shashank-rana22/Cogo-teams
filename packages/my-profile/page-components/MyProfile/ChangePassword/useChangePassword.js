@@ -64,7 +64,7 @@ const useChangePassword = ({
 		setError({ ...err });
 	};
 
-	const showOrganizationHierarchy = role_functions.includes('training')
+	const hideOrganizationHierarchy = role_functions.includes('training')
 	&& role_sub_functions.includes('training_general');
 
 	return {
@@ -74,7 +74,7 @@ const useChangePassword = ({
 		loading,
 		control,
 		handleSubmit,
-		showOrganizationHierarchy,
+		hideOrganizationHierarchy,
 		errors,
 		getValues,
 	};
