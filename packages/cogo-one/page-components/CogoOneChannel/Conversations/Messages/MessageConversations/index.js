@@ -51,6 +51,8 @@ function MessageConversations({
 	communicationLoading = false,
 	lastPage = false,
 	messageLoading = false,
+	setOpenChannelType,
+	openChannelType,
 }) {
 	const messageRef = useRef();
 	const { id = '', channel_type = '', new_user_message_count = 0 } = activeMessageCard;
@@ -387,6 +389,9 @@ function MessageConversations({
 						/>
 					</div>
 				</div>
+			</div>
+			<div className={styles.other_channel_ids}>
+				jo
 			</div>
 		</div>
 	);
