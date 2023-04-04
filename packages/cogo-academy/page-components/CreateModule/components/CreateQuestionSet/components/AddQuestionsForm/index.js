@@ -46,7 +46,7 @@ function AddQuestionsForm({
 		<div className={styles.container}>
 			<div className={styles.label}>Questions</div>
 
-			{!isEmpty(questionSetId) ? (
+			{!isEmpty(questionSetId) && !isEmpty(listData) ? (
 				<div className={styles.input_container}>
 					<Input
 						size="md"
