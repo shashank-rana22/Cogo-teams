@@ -3,17 +3,16 @@ import { IcMLiveChat } from '@cogoport/icons-react';
 
 import styles from '../styles.module.css';
 
-const tags = ['one', 'two', 'three', 'four'];
-
-const tagsToDisplay = tags.map((tag) => ({
-	label : tag,
-	size  : 'md',
-}));
-
-const finalTagsToDisplay = tagsToDisplay.length > 3 ? [...tagsToDisplay.slice(0, 3), {
-	label : `+${tagsToDisplay.length - 3} more`,
-	size  : 'md',
-}] : tagsToDisplay;
+const finalTagsToDisplay = (tags) => {
+	const tagsToDisplay = tags.map((tag) => ({
+		label : tag,
+		size  : 'md',
+	}));
+	return tagsToDisplay.length > 3 ? [...tagsToDisplay.slice(0, 3), {
+		label : `+${tagsToDisplay.length - 3} more`,
+		size  : 'md',
+	}] : tagsToDisplay;
+};
 
 const columns = ({
 	onClickEditButton = () => {},
@@ -21,28 +20,36 @@ const columns = ({
 }) => [
 	{
 		Header   : 'QUESTIONS',
-		accessor : () => (
-			<h3>
-				Questions
-			</h3>
+		accessor : (item) => (
+			<div>
+				{item?.question_abstract}
+			</div>
 		),
 	},
 	{
 		Header   : 'TOPICS',
-		accessor : () => (
-			<div className={styles.pills}>
-				{(finalTagsToDisplay || []).map((item) => (
-					<Pill
-						className={styles.questions_tag}
-						key={item.label}
-						size="sm"
-						color="white"
-					>
-						{item.label}
-					</Pill>
-				))}
-			</div>
-		),
+		accessor : (item) => {
+			const tags = [];
+			(item.faq_tags || []).map((ele) => {
+				const { display_name } = ele || {};
+				tags.push(display_name);
+				return tags;
+			});
+			return (
+				<div className={styles.pills}>
+					{(finalTagsToDisplay(tags) || []).map((ele) => (
+						<Pill
+							className={styles.questions_tag}
+							key={ele.label}
+							size="sm"
+							color="white"
+						>
+							{ele.label}
+						</Pill>
+					))}
+				</div>
+			);
+		},
 	},
 	{
 		Header   : 'Feedbacks',

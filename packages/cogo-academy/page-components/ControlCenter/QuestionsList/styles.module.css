@@ -5,6 +5,7 @@
 
 .question {
 	white-space: initial;
+	width:300px
 }
 
 .topics {
@@ -69,7 +70,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: 24px;
+	width: 35px;
 }
 
 .feedback_count {
