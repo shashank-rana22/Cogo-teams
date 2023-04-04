@@ -7,10 +7,10 @@ const data = [
 		login_id : 'ggg@cogoport.com',
 		password : 'CogoIntent',
 		href     : {
-			label : 'Visit Channel Partners Portal',
-			url   : 'https://partners.cogoport.com',
+			label : "Visit Channel Partner's Demo Portal",
+			url   : 'https://partners.stage.cogoport.io',
 		},
-		eye_button_text: 'Our platform for channel partners and supply partners. Check out how Cogoport helps its partners and supplier leverage the power of technology. ',
+		eye_button_text: 'Our platform for channel partners and supply partners. Check out how Cogoport helps its partners and supplier leverage the power of technology.',
 	},
 	{
 		icon_url : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/7d3e116621f46e0a8ab259f281c42650.png',
@@ -19,8 +19,8 @@ const data = [
 		login_id : 'ggg@cogoport.com',
 		password : 'CogoIntent',
 		href     : {
-			label : 'Visit Customers Portal',
-			url   : 'https://app.cogoport.com',
+			label : "Visit Customer's Demo Portal",
+			url   : 'https://app.stage.cogoport.io',
 		},
 		eye_button_text: 'Our platform for customers (importers, exporters and domestics players). Check out how Cogoport simplifies all of their supply chain and logistics requirements.',
 	},

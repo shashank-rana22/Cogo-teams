@@ -1,15 +1,9 @@
 .container {
-	min-width: 340px;
-	max-width: 30%;
+	width: 30%;
 	height: 300px;
-	margin: 0 40px 20px 0;
 	background: #fffdee;
 	border: 1px solid #fff6b8;
 	border-radius: 16px;
-
-	@media (max-width: 800px) {
-		margin-right: 0;
-	}
 }
 
 .upperhalf {
@@ -25,6 +19,7 @@
 
 .card_heading {
 	width: 70%;
+	margin-right: 12px;
 	font-size: 18px;
 	font-weight: 600;
 	color: #221f20;
@@ -71,6 +66,10 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
+
+	@media (max-width: 800px) {
+		flex-direction: column;
+	}
 
 	:global {
 		.ui_button_container {

@@ -17,7 +17,7 @@ function FutureExpectationCards() {
 	return (
 		<div className={styles.container}>
 
-			<div className={styles.heading}>What’s expected of you over the next 15 days -</div>
+			<div className={styles.heading}>What’s expected of you over the next few days -</div>
 
 			<div className={styles.cards_container}>
 
