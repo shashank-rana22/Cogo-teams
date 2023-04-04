@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 function AccountPayables() {
 	const { query, push } = useRouter();
-	const [activePayables, setActivePayables] = useState<string>(query.active_tab || 'dashboard');
+	const [activePayables, setActivePayables] = useState<string>(query?.active_tab || 'dashboard');
 	const profile = useSelector((state) => state);
 	const { profile:{ partner } } = profile || {};
 	const { id: partnerId } = partner || {};
