@@ -66,7 +66,7 @@ function Ongoing({ testData, page, setActiveState, currentQuestionId, test_user_
 			}
 
 			if (visibilityChangeCount > 5) {
-				// endTest();
+				endTest();
 				localStorage.setItem('visibilityChangeCount', 1);
 				return;
 			}
