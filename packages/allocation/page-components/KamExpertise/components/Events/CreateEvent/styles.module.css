@@ -31,7 +31,7 @@
 .add_rule_container {
 	flex: 1;
 
-	:global(.ui_text_area_container){
+	:global(.ui_text_area_container) {
 		height: 60px;
 		padding: 8px;
 	}
@@ -40,7 +40,7 @@
 .account_attributes {
 	flex: 4;
 	padding: 16px;
-	background: rgb(226 226 226 0.8);
+	background: rgb(226 226 226 80%);
 	border-radius: 8px;
 }
 

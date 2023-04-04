@@ -1,59 +1,58 @@
 .container {
-    display: flex;
-    flex-basis: 24%;
-    height: 132px;
-    padding: 16px 24px 4px;
-    margin: 4px;
-    background: #fff;
-    border-radius: 8px;
-    border: 1px solid #c2c0c054;
-    cursor: default;
+	display: flex;
+	flex-basis: 24%;
+	height: 132px;
+	padding: 16px 24px 4px;
+	margin: 4px;
+	cursor: default;
+	background: #fff;
+	border: 1px solid #c2c0c054;
+	border-radius: 8px;
 
-    @media (max-width: 768px) {
-        flex-basis: 48%;
-    }
-
-    @media (max-width: 576px) {
-        flex-basis: 100%;
-    }
+	@media (max-width: 768px) {
+		flex-basis: 48%;
+	}
+	@media (max-width: 576px) {
+		flex-basis: 100%;
+	}
 }
 
 .title {
-    display: flex;
+	display: flex;
 }
 
 .title_text {
-    padding: 0 10px;
-    font-size: 16px;
-    font-weight: 600;
+	padding: 0 10px;
+	font-size: 16px;
+	font-weight: 600;
 }
 
 .content {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .display_flex {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .display_flex_loading {
-    display: flex;
-    flex-direction: column;
-    padding-top: 20px;
+	display: flex;
+	flex-direction: column;
+	padding-top: 20px;
 }
 
 .tooltip {
-    padding-top: 4px;
-    width: 40px;
-    height: 40px;
+	width: 40px;
+	height: 40px;
+	padding-top: 4px;
 }
 
 .values {
-    white-space: nowrap;
-    width: 120px;
-    font-weight: 600;
-    overflow: hidden;
-    text-overflow: ellipsis;
+	width: 120px;
+	overflow: hidden;
+	font-weight: 600;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }

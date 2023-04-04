@@ -1,22 +1,22 @@
 .head_text {
-    margin-bottom: 4px;
+	margin-bottom: 4px;
 }
 
 .supporting_text {
-    margin-bottom: 20px;
-    font-size: 12px;
-    font-style: italic;
-    color: #bf291e;
+	margin-bottom: 20px;
+	font-size: 12px;
+	font-style: italic;
+	color: #bf291e;
 }
 
 .table {
-    border: none;
-    padding: 0;
+	padding: 0;
+	border: none;
 }
 
 .pill {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: fit-content;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: fit-content;
 }

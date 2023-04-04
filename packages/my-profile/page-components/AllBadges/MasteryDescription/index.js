@@ -86,15 +86,13 @@ function MasteryDescription(props) {
 
 				<div className={styles.details}>
 					<div className={styles.details_header}>
-						<div className={styles.label_value}>
-							<p className={styles.label}>Achievement Date</p>
+						<p className={styles.label}>Achievement Date</p>
 
-							<p className={styles.value}>
-								{badgeDetail.achievement_date
-									? format(badgeDetail.achievement_date, 'dd MMM YYYY')
-									: 'Not achieved yet'}
-							</p>
-						</div>
+						<p className={styles.value}>
+							{badgeDetail.achievement_date
+								? format(badgeDetail.achievement_date, 'dd MMM YYYY')
+								: 'Not achieved yet'}
+						</p>
 					</div>
 
 					<div className={styles.label_value}>
