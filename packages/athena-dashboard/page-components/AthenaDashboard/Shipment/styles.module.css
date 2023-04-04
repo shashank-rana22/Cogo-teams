@@ -15,8 +15,7 @@
 .table {
 	display: block;
 	width: 100%;
-	height: 97%;
-	margin-top: 48px;
+	margin: 48px 4px 4px 4px;
 	overflow-y: scroll;
 	white-space: wrap;
 	background-color: white;
@@ -61,16 +60,6 @@
 	padding-top: 20px;
 }
 
-.from_to {
-	display: flex;
-	margin-top: 8px;
-	margin-left: 4px;
-}
-
-.to {
-	margin-left: 92px;
-}
-
 .microfilter_names {
 	margin-top: 20px;
 	margin-left: 4px;
@@ -85,8 +74,7 @@
 }
 
 .left_padding {
-	padding-top: 10px;
-	padding-left: 15px;
+	padding-left: 16px;
 }
 
 .lower_half {

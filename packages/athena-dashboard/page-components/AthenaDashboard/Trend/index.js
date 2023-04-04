@@ -45,15 +45,15 @@ function Trends() {
 							<div style={{ marginLeft: '10px' }}>
 								{ele.label}
 							</div>
-							<div>
-								<RadioGroupController
-									{...ele}
-									name={ele.name}
-									options={ele.options}
-									control={control}
-									style={{ padding: '0px' }}
-								/>
-							</div>
+
+							<RadioGroupController
+								{...ele}
+								name={ele.name}
+								options={ele.options}
+								control={control}
+								style={{ padding: '0px' }}
+							/>
+
 						</div>
 					);
 				})}
@@ -100,27 +100,25 @@ function Trends() {
 						}
 						</div>
 						<div className={styles.button_group}>
-							<div>
-								<Button
-									size="md"
-									themeType="primary"
-									className={styles.build_report_button}
-									onClick={handleSubmit(getReport)}
-								>
-									Build Report
-								</Button>
-							</div>
-							<div>
-								<Button
-									className={styles.clear_all}
-									themeType="secondary"
-									onClick={() => { setHscodeArr([]); setResponsevalue([]); }}
-									style={{ border: 'None', backgroundColor: 'transparent', paddingTop: '0px' }}
-								>
-									Clear all
 
-								</Button>
-							</div>
+							<Button
+								size="md"
+								themeType="primary"
+								className={styles.build_report_button}
+								onClick={handleSubmit(getReport)}
+							>
+								Build Report
+							</Button>
+
+							<Button
+								className={styles.clear_all}
+								themeType="tertiary"
+								onClick={() => { setHscodeArr([]); setResponsevalue([]); }}
+							>
+								Clear all
+
+							</Button>
+
 						</div>
 					</div>
 

@@ -1,5 +1,6 @@
 import { ResponsiveLine } from '@cogoport/charts/line/index';
 import { Table, Placeholder } from '@cogoport/components';
+import { getFormattedPrice } from '@cogoport/forms';
 
 import Map from '../../../common/responsive-choropleth';
 import tableDataColumns from '../../../constants/table-data-columns';
@@ -126,7 +127,7 @@ function Report() {
 										<div>
 											Rs.
 											{' '}
-											{item.total.toLocaleString('en-IN')}
+											{getFormattedPrice(item.total, 'INR')}
 											{' '}
 											(
 											{item.percent_share.toFixed(2)}

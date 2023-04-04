@@ -1,14 +1,8 @@
 import { ResponsiveLine } from '@cogoport/charts/line/index';
-import { useSelector } from '@cogoport/store';
+import { getFormattedPrice } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 
 const useGetColumns = ({ columnsToShow = [] }) => {
-	const {
-		general:{
-			locale,
-		},
-	} = useSelector((state) => state);
-
 	const columns = [
 		{
 			Header   : 'Shipment Record ID',
@@ -167,62 +161,62 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 		},
 		{
 			Header   : 'Jan',
-			accessor : (item) => ((!isEmpty(item.January)) ? item.January.toLocaleString(locale) : 0),
+			accessor : (item) => ((!isEmpty(item.January)) ? getFormattedPrice(item.January, 'INR') : 0),
 			key      : 'jan',
 		},
 		{
 			Header   : 'Feb',
-			accessor : (item) => ((!isEmpty(item.February)) ? item.February.toLocaleString(locale) : 0),
+			accessor : (item) => ((!isEmpty(item.February)) ? getFormattedPrice(item.February, 'INR') : 0),
 			key      : 'feb',
 		},
 		{
 			Header   : 'Mar',
-			accessor : (item) => ((!isEmpty(item.March)) ? item.March.toLocaleString(locale) : 0),
+			accessor : (item) => ((!isEmpty(item.March)) ? getFormattedPrice(item.March, 'INR') : 0),
 			key      : 'mar',
 		},
 		{
 			Header   : 'Apr',
-			accessor : (item) => ((!isEmpty(item.April)) ? item.April.toLocaleString(locale) : 0),
+			accessor : (item) => ((!isEmpty(item.April)) ? getFormattedPrice(item.April, 'INR') : 0),
 			key      : 'apr',
 		},
 		{
 			Header   : 'May',
-			accessor : (item) => ((!isEmpty(item.May)) ? item.May.toLocaleString(locale) : 0),
+			accessor : (item) => ((!isEmpty(item.May)) ? getFormattedPrice(item.May, 'INR') : 0),
 			key      : 'may',
 		},
 		{
 			Header   : 'Jun',
-			accessor : (item) => ((!isEmpty(item.June)) ? item.June.toLocaleString(locale) : 0),
+			accessor : (item) => ((!isEmpty(item.June)) ? getFormattedPrice(item.June, 'INR') : 0),
 			key      : 'jun',
 		},
 		{
 			Header   : 'July',
-			accessor : (item) => ((!isEmpty(item.July)) ? item.July.toLocaleString(locale) : 0),
+			accessor : (item) => ((!isEmpty(item.July)) ? getFormattedPrice(item.July, 'INR') : 0),
 			key      : 'july',
 		},
 		{
 			Header   : 'Aug',
-			accessor : (item) => ((!isEmpty(item.August)) ? item.August.toLocaleString(locale) : 0),
+			accessor : (item) => ((!isEmpty(item.August)) ? getFormattedPrice(item.August, 'INR') : 0),
 			key      : 'aug',
 		},
 		{
 			Header   : 'Sept',
-			accessor : (item) => ((!isEmpty(item.September)) ? item.September.toLocaleString(locale) : 0),
+			accessor : (item) => ((!isEmpty(item.September)) ? getFormattedPrice(item.September, 'INR') : 0),
 			key      : 'sept',
 		},
 		{
 			Header   : 'Oct',
-			accessor : (item) => ((!isEmpty(item.October)) ? item.October.toLocaleString(locale) : 0),
+			accessor : (item) => ((!isEmpty(item.October)) ? getFormattedPrice(item.October, 'INR') : 0),
 			key      : 'oct',
 		},
 		{
 			Header   : 'Nov',
-			accessor : (item) => ((!isEmpty(item.November)) ? item.November.toLocaleString(locale) : 0),
+			accessor : (item) => ((!isEmpty(item.November)) ? getFormattedPrice(item.November, 'INR') : 0),
 			key      : 'nov',
 		},
 		{
 			Header   : 'Dec',
-			accessor : (item) => ((!isEmpty(item.December)) ? item.December.toLocaleString(locale) : 0),
+			accessor : (item) => ((!isEmpty(item.December)) ? getFormattedPrice(item.December, 'INR') : 0),
 			key      : 'dec',
 		},
 	];

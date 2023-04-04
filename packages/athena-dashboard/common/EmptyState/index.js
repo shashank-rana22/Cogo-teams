@@ -9,7 +9,7 @@ function EmptyState({
 }) {
 	return (
 		<div className={`${styles.empty_state} ${styles[flexDirection]}`}>
-			<div>
+			<div style={{ justifyContent: 'center', display: 'flex' }}>
 				<img
 					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man"
 					width={width}
@@ -17,8 +17,8 @@ function EmptyState({
 					alt="Empty-state"
 					style={{ margin: '10px' }}
 				/>
-				<div style={{ fontSize: textSize, textAlign: 'center' }}>{emptyText}</div>
 			</div>
+			<div style={{ fontSize: textSize, textAlign: 'center' }}>{emptyText}</div>
 		</div>
 
 	);

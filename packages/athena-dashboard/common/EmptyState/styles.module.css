@@ -1,5 +1,8 @@
 .empty_state{
 	width: 100%;
-	display: inline-flex;
 	justify-content: center;
+}
+
+.column{
+	flex-direction: column;
 }

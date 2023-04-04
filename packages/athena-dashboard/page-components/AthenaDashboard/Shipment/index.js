@@ -54,6 +54,7 @@ function Shipment() {
 							isClearable
 							style={{ width: ele.width }}
 							control={control}
+							key={ele.name}
 						/>
 					);
 				})}
@@ -73,13 +74,8 @@ function Shipment() {
 			</div>
 			<div className={styles.lower_half}>
 				<div className={styles.filter_tab}>
-					<div className={styles.left_padding}>
-						DATE RANGE
-
-						<div className={styles.from_to}>
-							From
-							<div className={styles.to}>To</div>
-						</div>
+					<div className={styles.left_padding} style={{ paddingTop: '8px' }}>
+						Date Range
 
 						<div>
 							<DateRangepicker
@@ -95,7 +91,7 @@ function Shipment() {
 						{controls[0].map((item) => {
 							const el = { ...item };
 							return (
-								<>
+								<div key={el.name}>
 									<div className={styles.microfilter_names}>
 										{el.label}
 									</div>
@@ -109,7 +105,7 @@ function Shipment() {
 										id={`${el.name}_input`}
 										className={styles.controller}
 									/>
-								</>
+								</div>
 							);
 						})}
 					</div>
@@ -132,7 +128,7 @@ function Shipment() {
 						</div>
 
 						<div className={styles.export_results}>
-							<IcMDownload style={{ 'padding-right': '3px' }} />
+							<IcMDownload style={{ 'padding-right': '4px' }} />
 							Export Results
 						</div>
 					</div>
@@ -158,7 +154,6 @@ function Shipment() {
 						&& (
 							<div className={styles.table_div}>
 								<Table
-									id="hellotable"
 									className={styles.table}
 									columns={COLUMNS}
 									data={answer}
