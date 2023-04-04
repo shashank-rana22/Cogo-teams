@@ -64,6 +64,7 @@ function QuestionsAndDistribution(props) {
 				loading={loading}
 				columns={columns}
 			/>
+
 			{(isEmpty(data) || loading)
 				? <Placeholder height="30px" width="100%" margin="0px 0px 20px 0px" />
 				: (
