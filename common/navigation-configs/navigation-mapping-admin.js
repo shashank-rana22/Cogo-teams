@@ -72,8 +72,8 @@ const navigationMappingAdmin = {
 	welcome: {
 		key           : 'welcome',
 		title         : 'Welcome',
-		href          : '/welcome',
-		as            : '/welcome',
+		href          : '/v2/welcome',
+		as            : '/v2/welcome',
 		type          : 'link',
 		icon          : IcMDashboard,
 		main_apis     : [],
