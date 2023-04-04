@@ -10,7 +10,6 @@ import PocSop from '../../../common/PocSop';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Timeline from '../../../common/TimeLine';
-import Overview from '../Tabs/Overview';
 import Tasks from '../Tabs/Tasks/List';
 
 import styles from './styles.module.css';

@@ -1,3 +1,6 @@
+import { ShipmentDetailContext } from '@cogoport/context';
+import { useContext } from 'react';
+
 function useStepExecution({
 	task = {},
 	// stepConfig = {},
@@ -5,6 +8,8 @@ function useStepExecution({
 	// getApisData = {},
 	// // selectedMail,
 }) {
+	const { servicesList } = useContext(ShipmentDetailContext);
+	console.log('service get ', servicesList);
 	console.log('task', task);
 	// import service list from context
 	return {
