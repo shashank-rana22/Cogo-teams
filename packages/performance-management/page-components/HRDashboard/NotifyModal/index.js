@@ -18,20 +18,7 @@ function NotifyModal({ modal = '', setModal = () => {} }) {
 					<div className={styles.container}>
 						<div className={styles.notify_header}>
 							Are you sure you wish to send notifications to all
-							the managers?
-						</div>
-
-						<div className={styles.checkbox}>
-							<div className={styles.checkbox_label}>
-								Include CEOs
-								{' '}
-								<span>(Amitabh Shankar, Purnendu Shekhar)</span>
-							</div>
-							<Checkbox
-								checked={sendToAll}
-								onChange={(e) => setSendToAll(e.target.checked)}
-								style={{ paddingLeft: '0px' }}
-							/>
+							the managers who have not filled the feedbacks? (CEOs wont be notified)
 						</div>
 
 						<div className={styles.button_container}>
