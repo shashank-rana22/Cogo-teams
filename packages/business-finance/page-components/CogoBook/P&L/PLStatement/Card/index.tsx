@@ -29,6 +29,7 @@ function Card({
 	setSelect,
 	setShowReport,
 	setFiltersData,
+	reportTriggerLoading,
 }) {
 	const [modal, setModal] = useState(false);
 	const [customModal, setCustomModal] = useState(false);
@@ -320,6 +321,7 @@ function Card({
 						<Button
 							onClick={() => { handleClick(); }}
 							disabled={!filters?.entity && !filters?.month}
+							loading={reportTriggerLoading}
 						>
 							Run Report
 						</Button>

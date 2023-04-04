@@ -55,6 +55,7 @@ function PLStatement() {
 		reportData = {},
 		fetchRatioApi,
 		fetchReportApi,
+		reportTriggerLoading,
 	} = useReport({ filters });
 
 	return (
@@ -70,6 +71,7 @@ function PLStatement() {
 				setSelect={setSelect}
 				setShowReport={setShowReport}
 				setFiltersData={setFiltersData}
+				reportTriggerLoading={reportTriggerLoading}
 			/>
 			{showReport && (
 				<ListProfit

@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
@@ -63,7 +64,9 @@ const useReport = ({
 
 			setShowReport(true);
 		} catch (error) {
-			console.log(error);
+			if (error?.response?.data?.message) {
+				Toast.error(error?.response?.data?.message);
+			}
 		}
 	}, [filters?.category, filters?.entity, filters?.month, reportTrigger]);
 
@@ -78,7 +81,9 @@ const useReport = ({
 
 			setShowReport(true);
 		} catch (error) {
-			console.log(error);
+			if (error?.response?.data?.message) {
+				Toast.error(error?.response?.data?.message);
+			}
 		}
 	}, [filters?.entity, filters?.month, monthPayload, ratioTrigger]);
 
