@@ -3,6 +3,10 @@
 	flex-direction: column;
 	height: 100%;
 	margin: 40px 26px;
+
+	@media (max-width: 800px) {
+		margin: 40px 8px;
+	}
 }
 
 .heading {
