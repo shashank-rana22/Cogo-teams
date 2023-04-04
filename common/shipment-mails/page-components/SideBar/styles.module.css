@@ -1,4 +1,3 @@
-
 .container {
 	width: 12%;
 	padding-top: 28px;
@@ -6,14 +5,15 @@
 
 .item {
 	padding: 8px 16px;
-	border-bottom: 1px solid #E0E0E0;
+	border-bottom: 1px solid #e0e0e0;
 
 	&.active {
-		border-left: 3px solid #F9AE64; 
+		border-left: 3px solid #f9ae64;
 	}
+
 	&:hover {
-		background:#fbeee0;
 		cursor: pointer;
+		background: #fbeee0;
 	}
 }
 
@@ -22,10 +22,10 @@
 }
 
 .actions {
-	width: 100%;
 	display: flex;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
+	width: 100%;
 
 	:global {
 		.ui_button_container.ui_ps_size_md {
@@ -35,12 +35,12 @@
 }
 
 .item_name {
-	font-weight: normal;
 	font-size: 16px;
-	color: #221F20;
+	font-weight: normal;
+	color: #221f20;
 
 	&.active {
 		font-weight: 700;
-		color: #F9AE64;
+		color: #f9ae64;
 	}
 }
