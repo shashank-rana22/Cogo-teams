@@ -28,7 +28,7 @@ function BadgeUpdateCard(props) {
 		Gold   : gold_details,
 	};
 
-	const watch_image_value = watch(`${medalType}_img_value`);
+	const watch_image_value = watch(`${medalType}_img_value`)?.finalUrl;
 
 	return (
 		<div className={`${styles.card_container} ${isLastItem ? styles.last_item : ''}`}>
