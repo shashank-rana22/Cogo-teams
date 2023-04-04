@@ -39,12 +39,16 @@ function CardItem({ data = {} }) {
 					<div className={styles.description}>{desc}</div>
 
 					<div className={styles.login_details}>
-						<strong>Login id - </strong>
-						{' '}
-						{login_id}
-						{' , '}
-						<strong>Password - </strong>
-						{password}
+						<span>
+							<strong>Login id - </strong>
+							{' '}
+							{login_id}
+						</span>
+
+						<span>
+							<strong>Password - </strong>
+							{password}
+						</span>
 					</div>
 
 				</div>

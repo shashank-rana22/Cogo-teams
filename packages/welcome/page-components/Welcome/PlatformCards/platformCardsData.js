@@ -4,8 +4,8 @@ const data = [
 		icon_url : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/f74a76fc45de3258e88066a982649371.png',
 		heading  : 'For Channel Partners/Suppliers',
 		desc     : 'Use the following account details to login.',
-		login_id : 'ggg@cogoport.com',
-		password : 'CogoIntent',
+		login_id : 'testing@cogoport-partners.com',
+		password : 'CogoDemo@123',
 		href     : {
 			label : "Visit Channel Partner's Demo Portal",
 			url   : 'https://partners.stage.cogoport.io',
@@ -16,8 +16,8 @@ const data = [
 		icon_url : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/7d3e116621f46e0a8ab259f281c42650.png',
 		heading  : 'For Customers',
 		desc     : 'Use the following account details to login.',
-		login_id : 'ggg@cogoport.com',
-		password : 'CogoIntent',
+		login_id : 'testing@cogoport-customers.com',
+		password : 'CogoDemo@123',
 		href     : {
 			label : "Visit Customer's Demo Portal",
 			url   : 'https://app.stage.cogoport.io',

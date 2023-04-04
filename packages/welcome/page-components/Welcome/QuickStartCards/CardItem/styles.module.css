@@ -4,6 +4,11 @@
 	background: #fffdee;
 	border: 1px solid #fff6b8;
 	border-radius: 16px;
+
+	@media (max-width: 800px) {
+		width: 360px;
+		margin-bottom: 24px;
+	}
 }
 
 .upperhalf {
@@ -66,10 +71,6 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-
-	@media (max-width: 800px) {
-		flex-direction: column;
-	}
 
 	:global {
 		.ui_button_container {
