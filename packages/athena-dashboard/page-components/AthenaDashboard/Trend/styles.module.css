@@ -12,12 +12,6 @@
 	width: 70%;
 }
 
-.button {
-	cursor: pointer;
-	background-color: transparent;
-	border: 0;
-}
-
 .search_container {
 	display: flex;
 	margin-top: 20px;

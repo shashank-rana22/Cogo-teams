@@ -67,7 +67,6 @@ function Trends() {
 					value={searchValue}
 				/>
 				<Button
-					className={styles.button}
 					size="md"
 					themeType="tertiary"
 					onClick={handleClick}
