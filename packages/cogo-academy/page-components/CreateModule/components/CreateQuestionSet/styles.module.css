@@ -1,0 +1,35 @@
+.container {
+	display: flex;
+	flex-direction: column;
+
+	:global {
+		.ui_select_input_control {
+			font-size: 14px !important;
+			color: #221f20;
+		}
+
+		.ui_input_control {
+			font-size: 14px !important;
+			color: #221f20;
+		}
+	}
+
+	@media (max-width: 768px) {
+		margin-top: 48px;
+	}
+}
+
+.header {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.title {
+	font-size: 20px;
+	font-weight: 600;
+
+	@media (max-width: 768px) {
+		font-size: 18px;
+	}
+}
