@@ -1,4 +1,5 @@
 import { Input, Select, Button } from '@cogoport/components';
+import { IcMRefresh } from '@cogoport/icons-react';
 import React, { useEffect } from 'react';
 
 import Filter from '../../../../commons/Filters';
@@ -87,32 +88,52 @@ function UploadInvoiceForm({
 			<div className={styles.container}>
 				<div className={styles.upload_invoice}>
 					{!isUploadConfirm ? (
-						<>
-							<Filter
-								controls={uploadControls({ formData })}
-								filters={formData}
-								setFilters={setFormData}
-							/>
-							{uploadUrl &&	(
-								<div className={styles.confirm}>
-									<Button
-										onClick={() => setIsUploadConfirm(true)}
-									>
-										Confirm
-									</Button>
-									<div>&nbsp;(Please Confirm to view the uploaded invoice)</div>
-
+						<div>
+							{!uploadUrl ? (
+								<Filter
+									controls={recurringUploadInvoice()}
+									filters={formData}
+									setFilters={setFormData}
+								/>
+							) : (
+								<div style={{ margin: '8px' }}>
+									<object
+										data={uploadUrl}
+										type="application/pdf"
+										height="428px"
+										width="100%"
+										aria-label="Document"
+									/>
+									<div className={styles.confirm}>
+										<Button
+											onClick={() => {
+												setFormData((p) => ({ ...p, uploadedInvoice: null }));
+												setIsUploadConfirm(false);
+											}}
+											style={{ marginRight: '20px' }}
+											themeType="secondary"
+										>
+											Reset
+											&nbsp;
+											<IcMRefresh />
+										</Button>
+										<Button
+											onClick={() => setIsUploadConfirm(true)}
+										>
+											Confirm
+										</Button>
+									</div>
 								</div>
 							)}
-						</>
+						</div>
 					)
 						: (
 							<div>
-								<div style={{ margin: '4px 20px 0px 20px' }}>
+								<div style={{ margin: '8px' }}>
 									<object
-										data={formData?.uploadedInvoice}
+										data={uploadUrl}
 										type="application/pdf"
-										height="450px"
+										height="478px"
 										width="100%"
 										aria-label="Document"
 									/>

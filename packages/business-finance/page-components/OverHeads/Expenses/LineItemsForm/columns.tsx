@@ -55,7 +55,7 @@ const lineItemColumns = ({
 			Header   : 'Amount after tax',
 			id       : 'amount_after_tax',
 			accessor : (row:any, index:number) => (
-				<div style={{ width: '60px' }}>
+				<div style={{ width: '80px' }}>
 					<InputController
 						size="xs"
 						type="number"
@@ -71,7 +71,7 @@ const lineItemColumns = ({
 			Header   : 'TDS',
 			id       : 'tds',
 			accessor : (row:any, index:number) => (
-				<div style={{ width: '50px' }}>
+				<div style={{ width: '60px' }}>
 					<InputController
 						size="xs"
 						type="number"
