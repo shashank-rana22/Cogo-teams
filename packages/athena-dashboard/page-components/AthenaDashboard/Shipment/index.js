@@ -33,9 +33,9 @@ function Shipment() {
 
 	return (
 		<>
-			<div className={styles.left_container}>
+			<div className={styles.filter_container}>
 
-				<div className={styles.search_container}>
+				<div className={styles.search_bar}>
 					<InputController
 						placeholder="Enter a product name or a HS Code"
 						name="hs_code"
@@ -59,22 +59,20 @@ function Shipment() {
 					);
 				})}
 
-				<div className={styles.right_container}>
-					<Button
-						size="md"
-						themeType="primary"
-						onClick={handleSubmit(handleClick)}
-						disabled={loading}
-						style={{ height: '40px' }}
-					>
-						Search
-					</Button>
-				</div>
+				<Button
+					size="md"
+					themeType="primary"
+					onClick={handleSubmit(handleClick)}
+					disabled={loading}
+					style={{ height: '40px' }}
+				>
+					Search
+				</Button>
 
 			</div>
-			<div className={styles.lower_half}>
-				<div className={styles.filter_tab}>
-					<div className={styles.left_padding} style={{ paddingTop: '8px' }}>
+			<div className={styles.main_container}>
+				<div className={styles.advanced_filter_container}>
+					<div style={{ paddingTop: '8px' }}>
 						Date Range
 
 						<div>
@@ -87,32 +85,30 @@ function Shipment() {
 						</div>
 					</div>
 
-					<div className={styles.left_padding}>
-						{controls[0].map((item) => {
-							const el = { ...item };
-							return (
-								<div key={el.name}>
-									<div className={styles.microfilter_names}>
-										{el.label}
-									</div>
-
-									<AsyncSelectController
-										{...el}
-										placeholder={el.placeholder}
-										key={el.name}
-										control={control}
-										isClearable
-										id={`${el.name}_input`}
-										className={styles.controller}
-									/>
+					{controls[0].map((item) => {
+						const el = { ...item };
+						return (
+							<div key={el.name}>
+								<div className={styles.microfilter_names}>
+									{el.label}
 								</div>
-							);
-						})}
-					</div>
+
+								<AsyncSelectController
+									{...el}
+									placeholder={el.placeholder}
+									key={el.name}
+									control={control}
+									isClearable
+									id={`${el.name}_input`}
+									className={styles.controller}
+								/>
+							</div>
+						);
+					})}
 				</div>
 
-				<div className={styles.table_and_tabs}>
-					<div className={styles.tab_lower}>
+				<div className={styles.main_container_right}>
+					<div className={styles.category_division}>
 						<Tabs
 							activeTab={activeTab}
 							themeType="secondary"
@@ -152,7 +148,7 @@ function Shipment() {
 
 					{!isEmpty(answer) && !loading
 						&& (
-							<div className={styles.table_div}>
+							<div className={styles.table_container}>
 								<Table
 									className={styles.table}
 									columns={COLUMNS}

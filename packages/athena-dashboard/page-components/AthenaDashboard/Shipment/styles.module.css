@@ -1,11 +1,11 @@
-.search_container {
+.search_bar {
 	width: 420px;
 	overflow: hidden;
 	cursor: pointer;
 	border-radius: 10px;
 }
 
-.left_container {
+.filter_container {
 	display: flex;
 	justify-content: space-between;
 	margin: 16px 0px 16px 0px; 
@@ -59,33 +59,29 @@
 	margin-left: 4px;
 }
 
-.filter_tab {
+.advanced_filter_container {
 	margin: 4px;
 	background: #f9f9f9;
 	border-radius: 10px;
+	padding: 16px;
 }
 
-.left_padding {
-	margin: 16px;
-}
-
-.lower_half {
+.main_container {
 	display: flex;
 	background-color: white;
 }
 
-.table_and_tabs {
+.main_container_right {
 	margin: 28px;
 	display: block;
 	overflow-x: scroll;
 }
 
-.tab_lower {
-	margin: 20px;
-	margin-left: 0px;
+.category_division {
+	margin: 20px 20px 20px 0px;
 }
 
-.table_div {
+.table_container {
 	height: 850px;
 }
 

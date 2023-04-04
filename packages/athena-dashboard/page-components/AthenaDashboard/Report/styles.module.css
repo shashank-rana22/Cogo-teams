@@ -1,15 +1,15 @@
-.top_text {
+.report_heading {
 	font-size: 30px;
 }
 
-.table {
+.hscode_table {
 	margin-top: 48px;
 	background-color: white;
 	box-shadow: 0 0 4px rgb(0 0 0 / 15%);
 	overflow-x: scroll;	
 }
 
-.left_container {
+.individual_stats {
 	text-align: center;
 
 	@media (max-width: 768px) {
@@ -17,7 +17,7 @@
 	}
 }
 
-.whole_container {
+.stats_panel {
 	height: 500px;
 	overflow-y: scroll;
 	background-color: white;
@@ -27,7 +27,7 @@
 	}
 }
 
-.second_trend {
+.country_share {
 	display: flex;
 	margin-top: 24px;
 	background-color: white;
@@ -64,7 +64,7 @@
 	font-weight: bold;
 }
 
-.responsive_choropleth{
+.map_panel{
 	height: 500px; 
 	width: 80%;
 }

@@ -25,7 +25,7 @@ function Trends() {
 	} = useTrendSearch();
 
 	return (
-		<div className={styles.whole_page}>
+		<div className={styles.main_container}>
 			<div className={styles.header}>
 				<div>
 					Country/Region
@@ -76,19 +76,17 @@ function Trends() {
 					Search
 				</Button>
 			</div>
-			<div className={styles.rect_div}>
+			<div className={styles.selected_hscode_container}>
 				{
 				!isEmpty(hscodeArr) ? (
 
-					<div className={styles.display_rect}>
-						<div className={styles.selected_text}>
-							Selected HS Codes
-						</div>
+					<div className={styles.selected_hscodes}>
+						Selected HS Codes
 						<div className={styles.display_selected_code}>
 							{
 							((hscodeArr || []).map((item) => (
-								<div key={item} className={styles.individual}>
-									<div className={styles.individual_text}>
+								<div key={item} className={styles.hscode}>
+									<div className={styles.hscode_text}>
 										{item}
 									</div>
 								</div>
@@ -106,7 +104,7 @@ function Trends() {
 							</Button>
 
 							<Button
-								className={styles.clear_all}
+								style={{ marginTop: '24px' }}
 								themeType="tertiary"
 								onClick={() => { setHscodeArr([]); setResponsevalue([]); }}
 							>
@@ -118,7 +116,7 @@ function Trends() {
 					</div>
 
 				) : (
-					<div className={styles.text_rect}>
+					<div className={styles.selected_hscode_container_text}>
 						Select HS Codes for your report below. Your selected codes will show up here.
 					</div>
 				)
@@ -134,7 +132,6 @@ function Trends() {
 									<Checkbox
 										key={item.hs_code}
 										id={item.hs_code}
-										className="checkboxes"
 										label={item.hs_code}
 										value={item.hs_code}
 										onChange={(e) => addCheckedHSCodes(e)}

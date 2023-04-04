@@ -29,11 +29,11 @@ function Report() {
 
 	return (
 		<>
-			<div className={styles.top_text}>
+			<div className={styles.report_heading}>
 				Trend Report
 			</div>
 			{!loading ? hsdesc
-				&& <Table className={styles.table} columns={COLUMNS_HSCODE_DESCRIPTION} data={hsdesc} />
+				&& <Table className={styles.hscode_table} columns={COLUMNS_HSCODE_DESCRIPTION} data={hsdesc} />
 				: <Placeholder height="100px" width="100%" />}
 			<>
 				<div className={styles.trending_over_time}>
@@ -118,11 +118,11 @@ function Report() {
 			</div>
 
 			{!loading ? (
-				<div className={styles.second_trend}>
-					<div className={styles.whole_container}>
+				<div className={styles.country_share}>
+					<div className={styles.stats_panel}>
 						{
 								(share || []).map((item) => (
-									<div className={styles.left_container} key={item.country}>
+									<div className={styles.individual_stats} key={item.country}>
 										{item.country}
 										<div>
 											Rs.
@@ -140,7 +140,7 @@ function Report() {
 							}
 					</div>
 
-					<div className={styles.responsive_choropleth}>
+					<div className={styles.map_panel}>
 						<Map data={shipmentValueMapData} style={{ marginLeft: '12px' }} />
 					</div>
 				</div>
@@ -153,11 +153,11 @@ function Report() {
 			</div>
 			{
 						!loading ? (
-							<div className={styles.second_trend}>
-								<div className={styles.whole_container}>
+							<div className={styles.country_share}>
+								<div className={styles.stats_panel}>
 									{
 									(marketshare || []).map((item) => (
-										<div className={styles.left_container} key={item.country}>
+										<div className={styles.individual_stats} key={item.country}>
 											{item.country}
 											<div>
 												(
@@ -171,7 +171,7 @@ function Report() {
 									}
 								</div>
 
-								<div className={styles.responsive_choropleth}>
+								<div className={styles.map_panel}>
 									<Map
 										data={marketShareChangeMapData}
 										unknownColor="silver"

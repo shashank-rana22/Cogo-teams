@@ -1,4 +1,4 @@
-.whole_page {
+.main_container {
 	margin-top: 16px;
 }
 
@@ -18,13 +18,13 @@
 	background-color: white;
 }
 
-.rect_div {
+.selected_hscode_container {
 	display: flex;
 	min-height: 200px;
 	background-color: #f9f9f9;
 }
 
-.text_rect {
+.selected_hscode_container_text {
 	display: flex;
 	justify-content: center;
 	width: 100%;
@@ -55,17 +55,6 @@
 	margin-top: 20px;
 }
 
-.clear_all {
-	margin-top: 24px;
-	cursor: pointer;
-	background-color: transparent;
-	border: none;
-}
-
-.selected_text {
-	text-align: left;
-}
-
 .buttons {
 	display: flex;
 }
@@ -74,7 +63,7 @@
 	display: flex;
 }
 
-.display_rect {
+.selected_hscodes {
 	display: block;
 	margin-top: 20px;
 	margin-left: 48px;
@@ -86,16 +75,15 @@
 	margin-top: 20px;
 }
 
-.individual {
+.hscode {
 	width: 100px;
-	margin-top: 4px;
-	margin-right: 16px;
+	margin: 4px;
 	text-align: center;
 	background-color: #e0e0e0;
 	border-radius: 10px;
 }
 
-.individual_text {
+.hscode_text {
 	margin-top: 8px;
 	padding: 4px;
 }
