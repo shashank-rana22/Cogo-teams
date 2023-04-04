@@ -20,6 +20,10 @@
 	background: #fff296;
 	border-top-left-radius: 16px;
 	border-bottom-left-radius: 16px;
+
+	@media (max-width: 800px) {
+		padding: 40px 12px;
+	}
 }
 
 .rightpart {
@@ -50,6 +54,10 @@
 	font-size: 18px;
 	font-weight: 600;
 	color: #221f20;
+
+	@media (max-width: 800px) {
+		font-size: 14px;
+	}
 }
 
 .description {
@@ -62,6 +70,10 @@
 	right: 16px;
 	font-size: 16px;
 	cursor: pointer;
+
+	@media (max-width: 800px) {
+		font-size: 12px;
+	}
 }
 
 .details_container {
@@ -70,6 +82,10 @@
 	font-size: 12px;
 	font-weight: 400;
 	color: #221f20;
+
+	@media (max-width: 800px) {
+		font-size: 8px;
+	}
 }
 
 .eye_button_text {
@@ -80,4 +96,10 @@
 .login_details {
 	display: flex;
 	flex-direction: column;
+}
+
+.button_text {
+	@media (max-width: 800px) {
+		font-size: 10px;
+	}
 }

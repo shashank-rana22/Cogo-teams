@@ -51,7 +51,14 @@ function CardItem({ data = {} }) {
 
 				</div>
 
-				<Button size="md" themeType="linkUi" onClick={() => openDocument(url)}>{label}</Button>
+				<Button
+					type="button"
+					size="md"
+					themeType="linkUi"
+					onClick={() => openDocument(url)}
+				>
+					<span className={styles.button_text}>{label}</span>
+				</Button>
 			</div>
 		</div>
 	);

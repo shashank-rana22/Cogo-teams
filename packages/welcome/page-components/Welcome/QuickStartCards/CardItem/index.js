@@ -42,7 +42,15 @@ function CardItem({ data = {} }) {
 						</div>
 
 					</div>
-					<Button size="md" themeType="linkUi" onClick={() => openLink(redirection_url)}>{label}</Button>
+					<Button
+						type="button"
+						size="md"
+						themeType="linkUi"
+						onClick={() => openLink(redirection_url)}
+					>
+						{label}
+
+					</Button>
 				</div>
 			</div>
 		</div>

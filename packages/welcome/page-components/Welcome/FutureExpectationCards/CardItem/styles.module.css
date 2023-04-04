@@ -8,6 +8,11 @@
 	background: #fffdee;
 	border: 1px solid #fff6b8;
 	border-radius: 16px;
+
+	@media (max-width: 800px) {
+		min-width: 100%;
+		max-width: 100%;
+	}
 }
 
 .upperpart {
