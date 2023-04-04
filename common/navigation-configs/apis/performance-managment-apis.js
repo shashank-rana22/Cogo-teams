@@ -23,29 +23,40 @@ const performance_management = {
 	],
 	hr_dashboard: [
 		{
+			api          : 'get_iris_list_user_feedbacks',
+			access_type  : 'private',
+			service_name : 'iris',
+		},
+		{
+			api          : 'get_iris_get_user_info',
+			access_type  : 'private',
+			service_name : 'iris',
+		},
+		{
+			api          : 'get_iris_get_average_ratings',
+			access_type  : 'private',
+			service_name : 'iris',
+		},
+		{
 			api          : 'post_iris_create_question',
 			access_type  : 'private',
 			service_name : 'iris',
 		},
-
 		{
 			api          : 'get_iris_list_managers',
 			access_type  : 'private',
 			service_name : 'iris',
 		},
-
 		{
 			api          : 'get_iris_list_questions',
 			access_type  : 'private',
 			service_name : 'iris',
 		},
-
 		{
 			api          : 'get_iris_list_forms',
 			access_type  : 'private',
 			service_name : 'iris',
 		},
-
 		{
 			api          : 'get_iris_list_departments',
 			access_type  : 'private',
@@ -176,6 +187,11 @@ const performance_management = {
 		},
 		{
 			api          : 'get_iris_list_reportees',
+			access_type  : 'private',
+			service_name : 'iris',
+		},
+		{
+			api          : 'get_iris_get_average_ratings',
 			access_type  : 'private',
 			service_name : 'iris',
 		},
