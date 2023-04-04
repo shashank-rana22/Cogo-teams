@@ -21,6 +21,7 @@ function Trends() {
 		handleClick,
 		handleSubmit,
 		getReport,
+		addCheckedHSCodes,
 	} = useTrendSearch();
 
 	return (
@@ -136,16 +137,7 @@ function Trends() {
 										className="checkboxes"
 										label={item.hs_code}
 										value={item.hs_code}
-										onChange={(e) => {
-											let arr = [...hscodeArr];
-											if (e.target.checked) {
-												arr = [...hscodeArr, e.target.value];
-											} else if (arr.includes(e.target.value)) {
-												const index = arr.indexOf(e.target.value);
-												arr.splice(index, 1);
-											}
-											setHscodeArr(arr);
-										}}
+										onChange={(e) => addCheckedHSCodes(e)}
 									/>
 								</div>
 								<div className={styles.description}>
