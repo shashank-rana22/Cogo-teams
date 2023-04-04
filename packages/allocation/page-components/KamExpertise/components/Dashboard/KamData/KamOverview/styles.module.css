@@ -1,24 +1,24 @@
 .cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 12px 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 12px 0;
 
-    :global(.ui_card_container) {
-        box-shadow: none;
-    }
+	:global(.ui_card_container) {
+		box-shadow: none;
+	}
 
-    :global(.ui_card_container):hover {
-        box-shadow: none;
-    }
+	:global(.ui_card_container):hover {
+		box-shadow: none;
+	}
 }
 
 .empty_state {
-    display: flex;
-    flex-basis: 100%;
-    justify-content: center;
-    padding: 16px;
-    margin: 12px 0;
-    background: #fff;
-    border-radius: 8px;
+	display: flex;
+	flex-basis: 100%;
+	justify-content: center;
+	padding: 16px;
+	margin: 12px 0;
+	background: #fff;
+	border-radius: 8px;
 }
