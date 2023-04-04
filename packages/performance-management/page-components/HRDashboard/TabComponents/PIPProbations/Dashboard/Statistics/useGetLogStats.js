@@ -4,11 +4,10 @@ import { useState } from 'react';
 import getDefaultFeedbackMonth from '../../../../../../utils/getDefaultYearMonth';
 
 const useGetLogStats = (logType) => {
-	const { feedbackMonth, feedbackYear } = getDefaultFeedbackMonth();
+	const { feedbackYear } = getDefaultFeedbackMonth();
 
 	const [statsParams, setStatsParams] = useState({
 		Year    : feedbackYear,
-		Month   : feedbackMonth,
 		LogType : logType,
 	});
 

@@ -51,6 +51,7 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 			name       	: 'ManagerID',
 			placeholder	: 'Manager...',
 			type       	: 'select',
+			isClearable : true,
 			...asyncManagerOptions,
 		},
 		{
