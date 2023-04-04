@@ -31,14 +31,6 @@ const getControls = ({ mode }) => [
 		placeholder : 'Select topic name',
 		rules       : { required: 'This is required' },
 	},
-	{
-		name        : 'audience_ids',
-		label       : 'Select Set User Groups:',
-		type        : 'multi-select',
-		disabled    : mode === 'view',
-		options     : [],
-		placeholder : 'Select User Groups',
-	},
 ];
 
 export default getControls;

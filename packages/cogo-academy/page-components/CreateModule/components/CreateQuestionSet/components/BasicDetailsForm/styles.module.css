@@ -5,7 +5,7 @@
 	padding: 16px;
 	margin-top: 40px;
 	background: rgb(255 255 255 / 70%);
-	border-radius: 6px;
+	border-radius: 12px;
 }
 
 .flex_row {
@@ -34,7 +34,6 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	padding: 20px;
 }
 
 .control_container {
