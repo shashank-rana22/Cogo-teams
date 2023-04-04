@@ -14,7 +14,7 @@
 
 .style_table {
 	max-height: 300px;
-	overflow-x: scroll;
+	overflow-x: auto;
 	background: #fff;
 	border-radius: 5px;
 
@@ -55,5 +55,5 @@
 }
 
 .table_container {
-	overflow: scroll;
+	overflow: auto;
 }

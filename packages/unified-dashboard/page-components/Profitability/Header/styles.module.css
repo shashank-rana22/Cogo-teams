@@ -46,6 +46,7 @@
 @media screen and (max-width: 724px) {
 	.heading {
 		margin-right: 18px;
+		margin-bottom: 10px;
 		font-size: 16px;
 	}
 

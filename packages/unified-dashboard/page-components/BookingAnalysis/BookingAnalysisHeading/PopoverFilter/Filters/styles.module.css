@@ -76,3 +76,17 @@
 	display: flex;
 	flex-wrap: wrap;
 }
+
+@media (max-width: 767px) {
+	.shipment_checkbox {
+		display: flex;
+		flex-wrap: wrap;
+
+		:global {
+			.ui_checkbox_container {
+				min-width: 50%;
+				padding: 10px 0;
+			}
+		}
+	}
+}

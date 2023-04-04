@@ -34,3 +34,14 @@
 .tooltip {
 	margin: 0 5px;
 }
+
+@media (max-width: 767px) {
+	.heading_text {
+		display: flex;
+		margin-right: 0;
+		margin-bottom: 10px;
+		font-size: 20px;
+		font-weight: 600;
+		color: #333;
+	}
+}

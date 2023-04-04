@@ -93,3 +93,15 @@
 	display: flex;
 	align-items: center;
 }
+
+@media (max-width: 767px) {
+	.view_btn {
+		position: absolute;
+		bottom: 4px;
+		left: 100px;
+		font-size: 10px;
+		font-weight: 300;
+		color: #407fc3;
+		cursor: pointer;
+	}
+}

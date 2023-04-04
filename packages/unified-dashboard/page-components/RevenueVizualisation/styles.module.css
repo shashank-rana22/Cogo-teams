@@ -98,6 +98,20 @@
 }
 
 @media (max-width: 767px) {
+	.border_right:not(:last-child) {
+		padding: 10px 0;
+		border-right: none;
+		border-bottom: 1px solid #a59595;
+	}
+
+	.reset_btn {
+		margin-top: 10px;
+	}
+
+	.heading {
+		margin-bottom: 10px;
+	}
+
 	.flex_div {
 		display: block;
 		align-items: center;

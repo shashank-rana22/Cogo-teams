@@ -73,7 +73,7 @@ function RevenueVisualization({ headerFilters }) {
 				</div>
 
 				{selectedBarData && (
-					<Button className="primary md" onClick={handleResetCharts}>
+					<Button className={styles.reset_btn} onClick={handleResetCharts}>
 						Reset
 					</Button>
 				)}

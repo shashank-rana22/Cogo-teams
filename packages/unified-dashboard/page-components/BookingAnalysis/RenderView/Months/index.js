@@ -1,4 +1,5 @@
 import { IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
+import React, { useId } from 'react';
 
 import getMonthYear from '../../../../utils/getMonthYear';
 import getNextData from '../../../../utils/getNextData';
@@ -16,6 +17,8 @@ function Months({
 	selectedFilterTab,
 }) {
 	const isClickable = isNextArrowAllowed(selectedFilterTab, data, maxEtd);
+
+	const id = useId();
 
 	return (
 		<div className={styles.container}>
@@ -40,8 +43,10 @@ function Months({
 			</div>
 
 			<div className={styles.flex_months}>
-				{(data || []).map((months) => (
-					<div className={styles.month_container}>
+				{(data || []).map((months, index) => (
+					// using useId for unique key generation
+					// eslint-disable-next-line react/no-array-index-key
+					<div className={styles.month_container} key={`${id}${index}`}>
 						<ShowMonths selectedFilterTab={selectedFilterTab} value={months} />
 						<div className={styles.stepper_dots_top} />
 						{(selectedFilterTab === 'month'
