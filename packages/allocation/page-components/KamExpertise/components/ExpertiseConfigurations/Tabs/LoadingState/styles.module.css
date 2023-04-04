@@ -3,3 +3,8 @@
 		width: 100%;
 	}
 }
+
+.sub_container {
+	display: flex;
+	justify-content: space-between;
+}
