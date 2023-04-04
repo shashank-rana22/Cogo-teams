@@ -59,6 +59,19 @@ function CreateNewTest({
 		[select_user_group.length, audienceOptions, data],
 	);
 
+	const downloadFileAtUrl = (url) => {
+		fetch(url).then((response) => response.blob()).then((blob) => {
+			const blobURL = window.URL.createObjectURL(new Blob([blob]));
+			const fileName = url.split('/').pop();
+			const aTag = document.createElement('a');
+			aTag.href = blobURL;
+			aTag.setAttribute('download', fileName);
+			document.body.appendChild(aTag);
+			aTag.click();
+			aTag.remove();
+		});
+	};
+
 	return (
 		<div>
 			<div className={styles.header}>
@@ -177,7 +190,6 @@ function CreateNewTest({
 									className={styles.refresh_tooltip}
 									content="Refresh to see if list has been Generated"
 									placement="top"
-									visible
 								>
 									<div
 										className={styles.sample_div}
@@ -197,10 +209,7 @@ function CreateNewTest({
 							<div
 								className={styles.sample_div}
 								role="presentation"
-								onClick={() => window.open(
-									test_sheet_data.test_sheet_data?.file_url,
-									'_blank',
-								)}
+								onClick={() => downloadFileAtUrl(test_sheet_data.test_sheet_data?.file_url)}
 							>
 								<IcMDownload />
 								<div className={styles.sample_text}>Download User List</div>
