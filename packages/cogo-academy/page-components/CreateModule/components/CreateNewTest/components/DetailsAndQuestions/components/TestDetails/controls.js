@@ -22,6 +22,8 @@ const getControls = (userOptions, isDisabled = false, isempty = false) => [
 				},
 				page_limit: 10,
 			},
+			rules: { required: 'This is required' },
+
 		},
 		{
 			name        : 'select_user_group',
