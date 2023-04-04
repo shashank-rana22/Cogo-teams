@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { setCookie } from '@cogoport/utils';
 
-function useGetUserTestQuestion({ currentQuestionId, test_user_mapping_state }) {
+function useGetUserTestQuestion({ currentQuestionId }) {
 	const {
 		query: { test_id },
 		user: { id: user_id },
@@ -20,8 +20,6 @@ function useGetUserTestQuestion({ currentQuestionId, test_user_mapping_state }) 
 			question_id: currentQuestionId !== 'undefined' ? currentQuestionId : '',
 			...(currentQuestionId && currentQuestionId !== 'undefined'
 				? { question_id: currentQuestionId } : {}),
-			...(test_user_mapping_state === 'ongoing'
-			&& (!currentQuestionId || currentQuestionId === 'undefined') ? { first_question_required: true } : {}),
 		},
 	}, { manual: false });
 

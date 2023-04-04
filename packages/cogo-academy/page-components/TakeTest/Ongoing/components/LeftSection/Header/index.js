@@ -5,7 +5,7 @@ import toFixed from '../../../../../CreateModule/utils/toFixed';
 import styles from './styles.module.css';
 import Timer from './Timer';
 
-function Header({ total_question, testData,	setShowTimeOverModal, start_time, user_appearance }) {
+function Header({ total_question, testData,	setShowTimeOverModal, start_time, user_appearance = [] }) {
 	const time = new Date(start_time).getTime();
 
 	return (
