@@ -25,7 +25,7 @@ function useListFaqQuestions({
 
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
-		url    : 'list_faq_questions',
+		url    : '/list_faq_questions',
 	}, { manual: true });
 
 	const { query, debounceQuery } = useDebounceQuery();
