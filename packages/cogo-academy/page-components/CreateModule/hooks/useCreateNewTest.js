@@ -6,7 +6,7 @@ import { useRequest } from '@cogoport/request';
 function useCreateNewTest() {
 	const router = useRouter();
 
-	const [{ loading = false }, trigger] = useRequest({
+	const [{ loading }, trigger] = useRequest({
 		url    : 'create_test',
 		method : 'POST',
 	}, { manual: true });

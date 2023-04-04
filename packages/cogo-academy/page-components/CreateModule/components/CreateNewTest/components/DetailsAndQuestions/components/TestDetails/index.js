@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcMArrowBack, IcMDownload } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useMemo } from 'react';
 
 import getElementController from '../../../../../../../../configs/getElementController';
@@ -13,7 +14,8 @@ import getControls from './controls';
 import styles from './styles.module.css';
 
 function CreateNewTest({
-	control, errors, data, setValue, watch, handleSubmit, uploadDocument, setUploadDocument,
+	control, errors, data,
+	getTestLoading, setValue, watch, handleSubmit, uploadDocument, setUploadDocument, setShowQuestionSet,
 }) {
 	const router = useRouter();
 
@@ -110,16 +112,16 @@ function CreateNewTest({
 						</div>
 					);
 				})}
-				{radioGroupVal === 'all' && (
-
+				{radioGroupVal === 'all' && isEmpty(data) && (
 					<Button
 						size="sm"
 						themeType="primary"
 						className={styles.btn}
-						loading={loading}
+						loading={loading || getTestLoading}
 						onClick={
 							handleSubmit((values) => {
 								createNewTest({ data: values });
+								setShowQuestionSet(true);
 							})
 						}
 					>
@@ -132,22 +134,25 @@ function CreateNewTest({
 				<>
 					<div className={styles.btn_container}>
 
-						<Button
-							size="sm"
-							themeType="primary"
-							onClick={
+						{isEmpty(data) && (
+							<Button
+								size="sm"
+								themeType="primary"
+								loading={loading || getTestLoading}
+								onClick={
 							handleSubmit((values) => {
 								createNewTest({ data: values });
 							})
 						}
-						>
-							Save and Generate
-						</Button>
+							>
+								Save and Generate
+							</Button>
+						)}
 
 						<Button
 							size="sm"
 							themeType="secondary"
-							loading={test_sheet_loading}
+							loading={test_sheet_loading || loading}
 							onClick={() => {
 								getTestSheet(test_sheet_id);
 							}}
