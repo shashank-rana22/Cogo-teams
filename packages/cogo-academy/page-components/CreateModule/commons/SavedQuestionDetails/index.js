@@ -33,13 +33,7 @@ function SavedQuestionDetails({
 	});
 
 	if (isEmpty(test_questions)) {
-		return (
-			<EmptyState
-				emptyText="No questions found, please add questions below to reflect here"
-				height={180}
-				textSize="20px"
-			/>
-		);
+		return null;
 	}
 
 	return (
