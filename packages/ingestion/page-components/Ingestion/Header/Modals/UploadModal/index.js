@@ -15,7 +15,6 @@ function UploadModal({
 	const onChoose = (event) => {
 		onSubmit(event);
 		// setShow('');
-		console.log('event', event);
 	};
 
 	const onClose = () => {

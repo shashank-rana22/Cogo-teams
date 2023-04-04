@@ -210,7 +210,7 @@ function useGetIngestionList() {
 			Header   : 'ERROR REPORT',
 			accessor : ({ request_files }) => (
 				<div className={styles.name}>
-					{!isEmpty(request_files) ? (
+					{request_files[0]?.errored_data_url ? (
 						<Button
 							onClick={() => { downloadErrorCsv(request_files[0]?.errored_data_url); }}
 							size="md"
@@ -231,7 +231,7 @@ function useGetIngestionList() {
 			accessor : (item) => (
 				<div className={styles.re_upload}>
 
-					{!isEmpty(item?.request_files) ? (
+					{item?.request_files[0]?.errored_data_url ? (
 						<Button onClick={() => { reUploadFiles(item); }} size="md" themeType="secondary">
 							{' '}
 							Re-Upload

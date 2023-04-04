@@ -5,7 +5,6 @@ const uploadControls = [
 		label       : 'File Name',
 		type        : 'text',
 		placeholder : 'Name',
-		// isClearable : true,
 		rules       : { required: 'Name is Required' },
 	},
 	{
@@ -20,8 +19,6 @@ const uploadControls = [
 		name       : 'file_url',
 		label      : 'Upload',
 		type       : 'file',
-		// placeholder : 'Upload Here...',
-		// isClearable : true,
 		rules      : { required: 'File is Required' },
 		uploadType : 'aws',
 		accept     : '.csv',

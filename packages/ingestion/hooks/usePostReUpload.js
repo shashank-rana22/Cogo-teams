@@ -23,8 +23,6 @@ function usePostReUpload({ row = {}, setTableModal = () => {} }) {
 				file_name            : row?.request_files[0]?.sheet_name,
 			};
 
-			console.log('e', e);
-
 			const payload = Object.entries({ ...pay, file_url: e?.re_upload?.finalUrl })
 				.filter(([_, value]) => value !== null && value !== '')
 				.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});

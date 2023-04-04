@@ -2,7 +2,6 @@ import {
 	AsyncSelectController,
 	InputController, MultiselectController, SelectController,
 	UploadController, TextAreaController, SingleDateRangeController,
-	// CountrySelectController,
 } from '@cogoport/forms';
 
 export const getElementController = (type = 'text') => {
@@ -27,9 +26,6 @@ export const getElementController = (type = 'text') => {
 
 		case 'singleDateRange':
 			return SingleDateRangeController;
-
-			// case 'countrySelect':
-			// 	return CountrySelectController;
 
 		default:
 			return null;
