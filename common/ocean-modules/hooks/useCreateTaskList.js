@@ -12,10 +12,22 @@ const useCreateTaskList = ({ primary_service, shipment_data }) => {
 	const [taskList, setTaskList] = useState([]);
 	const [docTypes, setDocTypes] = useState([]);
 	const { data: taskConfigs } = useGetProcess();
+
 	const {
 		loading,
 		list : uploadedShipmentDocuments,
-	} = useGetListDocuments({ shipment_data, filters });
+	} = useGetListDocuments({
+		filters,
+		defaultFilters : { shipment_id: shipment_data?.id },
+		defaultParams  : {
+			additional_methods : ['pagination', 'organizations'],
+			page               : 1,
+			page_limit         : 1000,
+			sort_by            : 'created_at',
+			sort_type          : 'desc',
+		},
+		shipment_type: shipment_data?.shipment_type,
+	});
 
 	const { data : pendingTasks } = useGetPendingTasks({ shipment_data });
 
