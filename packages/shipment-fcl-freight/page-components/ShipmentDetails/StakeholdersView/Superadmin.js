@@ -5,6 +5,7 @@ import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import React, { useContext, useState } from 'react';
 
+import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';

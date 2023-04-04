@@ -1,25 +1,23 @@
-import { Button, Modal } from '@cogoport/components';
+import { Modal } from '@cogoport/components';
 import React from 'react';
 
 import AddInvoicingParty from './AddInvoicingParty';
 import styles from './styles.module.css';
 
 function AddIp({
-	shipment_data,
+	shipmentData,
 	showIp,
-	item,
 	setShowIp = () => {},
-	refetch,
 	updateInvoicingParty = () => {},
 }) {
 	const organizationDetails = {
-		id         : shipment_data?.importer_exporter?.id || undefined,
-		country_id : shipment_data?.importer_exporter?.country_id || undefined,
+		id         : shipmentData?.importer_exporter?.id || undefined,
+		country_id : shipmentData?.importer_exporter?.country_id || undefined,
 	};
-	if (shipment_data?.importer_exporter?.is_tax_applicable === null) {
+	if (shipmentData?.importer_exporter?.is_tax_applicable === null) {
 		organizationDetails.is_tax_applicable = true;
 	} else {
-		organizationDetails.is_tax_applicable =	shipment_data?.importer_exporter?.is_tax_applicable;
+		organizationDetails.is_tax_applicable =	shipmentData?.importer_exporter?.is_tax_applicable;
 	}
 
 	return (

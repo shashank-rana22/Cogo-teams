@@ -1,0 +1,19 @@
+.container {
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16px;
+	color: #393f70;
+	padding: 16px;
+}
+
+.anchor {
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16px;
+	color: #5936f0;
+	margin-left: 4px;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}

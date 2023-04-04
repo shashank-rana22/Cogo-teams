@@ -1,0 +1,165 @@
+.header {
+	font-size: 28px;
+	font-weight: 600;
+	line-height: 42px;
+}
+
+.center {
+	position: absolute;
+	top: 40%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.text {
+	margin: 0;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.pending_verification {
+	display: flex;
+	align-items: center;
+	color: #ed3726;
+
+	svg {
+		padding-right: 2px;
+	}
+}
+
+.pending_from_user {
+	display: flex;
+	align-items: center;
+	color: #ed3726;
+
+	svg {
+		padding-right: 2px;
+	}
+}
+
+.verified {
+	display: flex;
+	align-items: center;
+	color: #67c676;
+
+	svg {
+		padding-right: 2px;
+	}
+}
+
+.rejected {
+	display: flex;
+	align-items: center;
+	color: #ed3726;
+
+	svg {
+		padding-right: 2px;
+	}
+}
+
+.pagination_container {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+}
+
+.group {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin: 48px 0 36px;
+}
+
+.filter_container {
+	position: relative;
+	display: flex;
+	align-items: center;
+	padding: 7px 12px;
+	cursor: pointer;
+	background-color: #fff;
+	border: 1px solid #000;
+	border-radius: 4px;
+}
+
+.dot {
+	height: 3px;
+	margin-left: 4px;
+	background: #000;
+	border: 3px solid #000;
+	border-radius: 100%;
+}
+
+.title {
+	font-weight: 600;
+	color: #221f20;
+}
+
+.button_container {
+	display: flex;
+	width: fit-content;
+}
+
+.heading {
+	display: flex;
+	width: fit-content;
+}
+
+.actions_container {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+
+	:global {
+		.ui_popover_container {
+			min-width: 370px !important;
+		}
+	}
+}
+
+.input_wrapper {
+	:global {
+		.ui_input_container {
+			width: 366px;
+			margin: 0 12px;
+		}
+	}
+}
+
+.bold {
+	font-size: 12px;
+	font-weight: 600;
+	color: #333;
+}
+
+.underline {
+	margin-left: 8px;
+	text-decoration-line: underline;
+}
+
+.filter_in_use {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	width: 8px;
+	height: 8px;
+	background-color: #ed3726;
+	border-radius: 50%;
+}
+
+.created_at_header {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.filter_icon_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-left: 8px;
+	cursor: pointer;
+}

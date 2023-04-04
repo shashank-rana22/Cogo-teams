@@ -1,0 +1,15 @@
+.container {
+	padding: 22px 12px 22px 0px;
+
+	ul {
+		margin: 0;
+	}
+}
+
+.condition {
+	font-size: 12px;
+	font-weight: 400;
+	margin-bottom: 6px;
+	line-height: 16px;
+	color: #828282;
+}

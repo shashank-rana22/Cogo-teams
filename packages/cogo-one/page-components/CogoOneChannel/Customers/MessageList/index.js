@@ -3,7 +3,7 @@ import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import UserAvatar from '../../../../common/UserAvatar';
-import { PLATFORM_MAPPING } from '../../../../constants';
+import { PLATFORM_MAPPING, ECLAMATION_SVG } from '../../../../constants';
 import dateTimeConverter from '../../../../utils/dateTimeConverter';
 import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 import FilterComponents from '../FilterComponents';
@@ -12,25 +12,28 @@ import NewWhatsappMessage from '../NewWhatsappMessage';
 
 import styles from './styles.module.css';
 
-function MessageList({
-	messagesList,
-	setSearchValue = () => { },
-	filterVisible,
-	searchValue,
-	setFilterVisible = () => { },
-	setAppliedFilters = () => { },
-	appliedFilters,
-	messagesLoading = false,
-	activeCardId = '',
-	setActiveMessage,
-	setActiveCardId = () => {},
-	showBotMessages = false,
-	setShowBotMessages = () => {},
-	isomniChannelAdmin = false,
-	setModalType = () => {},
-	modalType = '',
-	handleScroll = () => {},
-}) {
+function MessageList(messageProps) {
+	const {
+		messagesList,
+		setSearchValue = () => { },
+		filterVisible,
+		searchValue,
+		setFilterVisible = () => { },
+		setAppliedFilters = () => { },
+		appliedFilters,
+		messagesLoading = false,
+		activeCardId = '',
+		setActiveMessage,
+		setActiveCardId = () => {},
+		showBotMessages = false,
+		setShowBotMessages = () => {},
+		isomniChannelAdmin = false,
+		setModalType = () => {},
+		modalType = '',
+		handleScroll = () => {},
+		tagOptions = [],
+	} = messageProps;
+
 	function lastMessagePreview(previewData = '') {
 		return (
 			<div
@@ -66,6 +69,7 @@ function MessageList({
 									setShowBotMessages={setShowBotMessages}
 									showBotMessages={showBotMessages}
 									isomniChannelAdmin={isomniChannelAdmin}
+									tagOptions={tagOptions}
 								/>
 							)
 						)}
@@ -99,8 +103,9 @@ function MessageList({
 							organization_name = '',
 							user_type = '',
 							search_user_name = '',
+							chat_tags = [],
 						} = userData || {};
-
+						const isImportant = chat_tags?.includes('important') || false;
 						const lastActive = new Date(item.new_message_sent_at);
 						const checkActiveCard = activeCardId === item?.id;
 						const searchName = search_user_name?.toLowerCase() || '';
@@ -117,8 +122,9 @@ function MessageList({
 								key={item?.id}
 								role="presentation"
 								className={cl`
-												${styles.card_container} 
-												${checkActiveCard ? styles.active_card : ''} 
+											${styles.card_container} 
+											${checkActiveCard ? styles.active_card : ''} 
+											${isImportant ? styles.important_styles : ''}
 												`}
 								onClick={() => setActiveMessage(item)}
 							>
@@ -180,6 +186,16 @@ function MessageList({
 										)}
 									</div>
 								</div>
+								{isImportant && (
+
+									<div className={styles.important_icon}>
+										<img
+											src={ECLAMATION_SVG}
+											alt="important"
+											width="10px"
+										/>
+									</div>
+								)}
 							</div>
 						);
 					})}

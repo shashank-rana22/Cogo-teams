@@ -13,7 +13,16 @@ function StatsOutstanding({ item }) {
 		creditNoteAgeingBucket = {},
 		onAccount = {},
 		onAccountAgeingBucket = {},
+		entityCode = '',
 	} = item || {};
+
+	const keyValue = {
+		101 : 'INR',
+		201 : 'EUR',
+		301 : 'INR',
+		401 : 'SGD',
+		501 : 'VND',
+	};
 
 	const invoiceContainer = [{
 		name         : 'OPEN INVOICES',
@@ -51,7 +60,7 @@ function StatsOutstanding({ item }) {
 							<div className={styles.amount} style={{ fontWeight: 500, fontSize: '12px' }}>
 								{getFormattedPrice(
 									invoiceObject.LedgerAmount?.ledgerAmount || 0,
-									invoiceObject.LedgerAmount?.ledgerCurrency,
+									invoiceObject.LedgerAmount?.ledgerCurrency || keyValue[entityCode],
 									{
 										style                 : 'currency',
 										currencyDisplay       : 'code',
@@ -86,7 +95,8 @@ function StatsOutstanding({ item }) {
 									>
 										{getFormattedPrice(
 											invoiceObject.ageingBucket[val.valueKey]?.ledgerAmount || 0,
-											invoiceObject.ageingBucket[val.valueKey]?.ledgerCurrency,
+											invoiceObject.ageingBucket[val.valueKey]?.ledgerCurrency
+											|| keyValue[entityCode],
 											{
 												style                 : 'currency',
 												currencyDisplay       : 'code',
@@ -114,7 +124,7 @@ function StatsOutstanding({ item }) {
 					>
 						{getFormattedPrice(
 							totalOutstanding.ledgerAmount || 0,
-							totalOutstanding.ledgerCurrency,
+							totalOutstanding.ledgerCurrency || keyValue[entityCode],
 							{
 								style                 : 'currency',
 								currencyDisplay       : 'code',

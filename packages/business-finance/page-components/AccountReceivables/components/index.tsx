@@ -3,20 +3,21 @@ import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
+import Dashboard from './Dashboard';
 import Outstanding from './Outstanding';
 import styles from './styles.module.css';
 
 function AccountReceivables() {
-	const { push } = useRouter();
-	const [receivables, setReceivables] = useState<string>('outstanding');
+	const { push, query } = useRouter();
+	const [receivables, setReceivables] = useState<string>(query.active_tab || 'dashboard');
 
 	const profile = useSelector((state) => state);
 	const { profile:{ partner } } = profile || {};
 	const { id: partnerId } = partner || {};
 
 	const handleChange = (val:string) => {
-		if (['dashboard', 'invoices', 'defaulters', 'manageBpr'].includes(val)) {
-			window.location.href = `/${partnerId}/business-finance/account-receivables`;
+		if (['invoices', 'defaulters', 'manageBpr'].includes(val)) {
+			window.location.href = `/${partnerId}/business-finance/account-receivables/${val}`;
 			return;
 		}
 		setReceivables(val);
@@ -43,12 +44,12 @@ function AccountReceivables() {
 					themeType="primary"
 				>
 					<TabPanel name="dashboard" title="Dashboard">
-						--
+						<Dashboard />
 					</TabPanel>
 					<TabPanel name="invoices" title="Invoices">
 						--
 					</TabPanel>
-					<TabPanel name="outstanding" title="OUTSTANDING">
+					<TabPanel name="outstanding" title="Outstanding">
 						<Outstanding />
 					</TabPanel>
 

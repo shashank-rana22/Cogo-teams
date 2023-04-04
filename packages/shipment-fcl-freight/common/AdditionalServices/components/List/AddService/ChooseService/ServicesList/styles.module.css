@@ -1,9 +1,9 @@
-.container{
+.container {
 	border: 1px solid #bdbdbd;
 	border-radius: 4px;
 }
 
-.card_list{
+.card_list {
 	height: 340px;
 	overflow: auto;
 }

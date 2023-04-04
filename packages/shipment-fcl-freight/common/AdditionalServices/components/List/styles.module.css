@@ -1,31 +1,32 @@
-
-.container{
+.container {
 	padding: 20px 14px;
 }
 
-.not_added{
+.not_added {
 	display: flex;
 	justify-content: flex-end;
+	margin-right: 8px;
+	margin-top: 12px;
 
 	@media (max-width: 768px) {
 		justify-content: center;
 	}
 }
 
-.add_icon{
+.add_icon {
 	margin-right: 6px;
 	font-size: 16px;
 	font-weight: 400;
 }
 
-.added_services{
+.added_services {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
 	margin-top: 12px;
 }
 
-.circle{
+.circle {
 	width: 12px;
 	height: 12px;
 	background-color: #f7cdcd;
@@ -37,7 +38,7 @@
 	background-color: #d9eafd;
 }
 
-.service_name{
+.service_name {
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 16px;
@@ -45,7 +46,7 @@
 	margin-right: 40px;
 }
 
-.info_container{
+.info_container {
 	display: flex;
     align-items: center;
 	margin-top: 8px;
@@ -62,26 +63,26 @@
 	}
 }
 
-.heading{
+.heading {
 	margin-bottom: 20px;
 	font-weight: 500;
 	font-size: 14px;
 	color: #363e6e;
 }
 
-.cogo_lens_div{
+.cogo_lens_div {
 	display: flex;
 	flex-direction: column;
 }
 
-.skeleton_wrapper{
+.skeleton_wrapper {
 	display: flex;
 	flex-direction: column;
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
-.incidental_charge_div{
+.incidental_charge_div {
 	display: flex;
 	width: 100%;
 }
@@ -100,4 +101,11 @@
 			max-height: 500px;
 		}
 	}
+}
+
+.show_more {
+	margin-top: -12px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
 }

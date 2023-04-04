@@ -1,0 +1,56 @@
+.serial_number {
+	font-weight: 700;
+	font-size: 12px;
+	line-height: 16px;
+	color: #000000;
+	margin-right: 8px;
+	flex: 0 0 5%;
+}
+
+.container_number {
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 14px;
+	color: #333333;
+	text-transform: uppercase;
+	margin-right: 8px;
+	flex: 0 0 38%;
+}
+
+.container {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+
+	& > div {
+		flex: 0 0 40%;
+	}
+}
+
+.container_description {
+	display: flex;
+	width: 60%;
+	align-items: center;
+}
+
+.container_item {
+	display: flex;
+	justify-content: space-between;
+	padding: 12px 12px 0px 12px;
+}
+
+.tag_wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	& > div {
+		background-color: #e7d8af;
+		margin-right: 8px;
+		padding: 0px 8px;
+    	border-radius: 4px;
+		width: max-content;
+		font-size: 10px;
+	}
+}

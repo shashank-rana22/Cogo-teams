@@ -10,15 +10,30 @@ import getTradePartiesDefaultParams from '../../../../helpers/getTradePartiesDef
 
 import styles from './styles.module.css';
 
-function DefaultForm({ companyType = '', tradePartyType = '', importer_exporter_id }, ref) {
-	const { data:{ list = [] } = {}, loading, filters, setFilters } = useListOrganizationTradeParties(
-		{
-			...getTradePartiesDefaultParams({ companyType, tradePartyType }),
-			organization_id: importer_exporter_id,
-		},
-	);
+function DefaultForm({
+	companyType = '',
+	tradePartyType = '',
+	importer_exporter_id,
+	organization_id,
+}, ref) {
+	const {
+		data:{ list = [] } = {},
+		loading,
+		filters,
+		setFilters,
+	} = useListOrganizationTradeParties({
+		...getTradePartiesDefaultParams({ companyType, tradePartyType }),
+		organization_id: organization_id || importer_exporter_id,
+	});
 
-	const { control, watch, reset, resetField, handleSubmit, formState:{ errors = {} }	} = useForm();
+	const {
+		control,
+		watch,
+		reset,
+		resetField,
+		handleSubmit,
+		formState:{ errors = {} },
+	} = useForm();
 
 	const formValues = watch();
 

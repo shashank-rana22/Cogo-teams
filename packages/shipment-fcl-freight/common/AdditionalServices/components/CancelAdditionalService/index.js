@@ -1,11 +1,11 @@
 import { Textarea, Button, Modal } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import useUpdateAdditionalService from '../../../../hooks/useUpdateAdditionalService';
+import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
 
 import styles from './styles.module.css';
 
-function CancelService({
+function CancelAdditionalService({
 	id = '',
 	showCancel = false,
 	setShowCancel = () => {},
@@ -16,12 +16,17 @@ function CancelService({
 	const onOuterClick = () => {
 		setShowCancel(false);
 	};
-	const { updateServiceList, loading } = useUpdateAdditionalService({
-		id,
-		remarkValues,
-		refetch,
-		setShowCancel,
-	});
+
+	const { cancelAdditionalService, loading } = useUpdateShipmentAdditionalService({ refetch });
+
+	const onSubmit = () => {
+		const payload = {
+			id,
+			remarks : [remarkValues],
+			state   : 'cancelled',
+		};
+		cancelAdditionalService(payload);
+	};
 
 	return showCancel ? (
 		<Modal
@@ -35,7 +40,7 @@ function CancelService({
 			<Modal.Header title="Cancel Service" />
 			<Modal.Body>
 				<div className={styles.container}>
-					<div style={{ height: '48vh' }}>
+					<div style={{ height: '40vh' }}>
 						<Textarea
 							value={remarkValues}
 							onChange={(e) => setRemarkValues(e)}
@@ -44,7 +49,7 @@ function CancelService({
 					</div>
 					<div className={styles.button_container}>
 						<Button
-							themeType="secondary"
+							themeType="primary"
 							style={{ marginRight: '6px' }}
 							onClick={() => {
 								setShowCancel(false);
@@ -52,7 +57,7 @@ function CancelService({
 						>
 							Cancel
 						</Button>
-						<Button onClick={updateServiceList} disabled={loading} themeType="secondary">
+						<Button onClick={onSubmit} disabled={loading} themeType="primary">
 							Submit
 						</Button>
 					</div>
@@ -62,4 +67,4 @@ function CancelService({
 	) : null;
 }
 
-export default CancelService;
+export default CancelAdditionalService;
