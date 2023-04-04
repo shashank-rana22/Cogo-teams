@@ -100,6 +100,7 @@ function Introduction({ setActiveState, testData = {} }) {
 								{case_study_questions}
 								{' '}
 								Case Study,
+								{' '}
 								{stand_alone_questions}
 								{' '}
 								Standalone Questions
