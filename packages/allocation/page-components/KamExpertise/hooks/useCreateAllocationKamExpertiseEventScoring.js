@@ -3,6 +3,8 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
+// Todo :  take just id and push with name : "event_configuration_detail_id"
+
 function useCreateAllocationKamExpertiseEventScoring(props) {
 	const { onClose, expertiseRefetch, cardRefetch } = props;
 
@@ -34,6 +36,7 @@ function useCreateAllocationKamExpertiseEventScoring(props) {
 
 		const {
 			event_configuration_rule_mapping_id,
+			event_configuration_detail_id,
 			impact,
 			scoring_type,
 			milestones,
@@ -54,6 +57,7 @@ function useCreateAllocationKamExpertiseEventScoring(props) {
 		try {
 			const payload = {
 				event_configuration_rule_mapping_id,
+				event_configuration_detail_id,
 				impact,
 				scoring_type,
 				scoring_criteria: SCORING_TYPE[scoring_type] || [],

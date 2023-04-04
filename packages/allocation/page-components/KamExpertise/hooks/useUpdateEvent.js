@@ -6,6 +6,8 @@ import { isEmpty } from '@cogoport/utils';
 
 import getAddRuleControls from '../configurations/get-add-rule-controls';
 
+// Todo: send event_detail_id (id) instead of rule_mapping_id
+
 function useUpdateEvent(props) {
 	const {
 		eventListData = {}, listRefetch = () => {}, attributeList = [],
@@ -25,7 +27,8 @@ function useUpdateEvent(props) {
 		condition_name : conditionName,
 		event_state_on : eventStateOn,
 		description : eventDescription,
-		rule_mapping_id : ruleMappingId,
+		// rule_mapping_id : ruleMappingId,
+		id : eventDetailId,
 	} = eventData;
 
 	const formProps = useForm({
@@ -64,7 +67,8 @@ function useUpdateEvent(props) {
 		} else {
 			try {
 				const payload = {
-					rule_mapping_id : ruleMappingId,
+					// rule_mapping_id : ruleMappingId,
+					event_detail_id : eventDetailId,
 					attributes      : payloadAttribute,
 				};
 
