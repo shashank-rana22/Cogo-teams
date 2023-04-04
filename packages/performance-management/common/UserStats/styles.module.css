@@ -59,9 +59,9 @@
 }
 
 .filter_container {
-	margin-top: 16px;
 	display: flex;
 	align-items: center;
+	margin-top: 16px;
 }
 
 .month_container {
