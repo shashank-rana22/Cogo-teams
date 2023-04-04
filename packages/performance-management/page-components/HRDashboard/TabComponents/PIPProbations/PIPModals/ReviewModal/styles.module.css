@@ -1,10 +1,14 @@
 .modal_container {
-	margin-left: 16px;
 	font-size: 16px;
 }
 
-.sub_container {
-	margin: 16px 24px 0 0;
+.container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.update_dates {
+	margin: 0px 16px 8px 0;
 }
 
 .sub_heading {

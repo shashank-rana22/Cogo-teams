@@ -17,7 +17,6 @@ function CreateModal({
 	setRefetchList = () => {},
 }) {
 	const { onSubmitCreate = () => {} } = useCreateLog();
-	// const [status, setStatus] = useState('');
 	const [disableNext, setDisableNext] = useState('');
 
 	const onSubmitModalAction = () => {
@@ -27,8 +26,6 @@ function CreateModal({
 	};
 
 	const clickedBack = () => {
-		// if (status === '') {
-		// }
 		if (isEmpty(item)) {
 			setModal('');
 		} else {
@@ -55,33 +52,6 @@ function CreateModal({
 				setDisableNext={setDisableNext}
 			/>
 		);
-
-		// return (
-		// 	<div>
-		// 		<p style={{ padding: '8px' }}>Do you wish to create new Probation or PIP</p>
-		// 		<div className={styles.pip_select}>
-		// 			<Button
-		// 				size="xl"
-		// 				className={styles.pip_select_btn}
-		// 				themeType="secondary"
-		// 				onClick={() => setStatus('probation')}
-		// 				style={{ width: '120px' }}
-		// 			>
-		// 				Probations
-		// 			</Button>
-
-		// 			<Button
-		// 				size="xl"
-		// 				className={styles.pip_select_btn}
-		// 				themeType="secondary"
-		// 				onClick={() => setStatus('pip')}
-		// 				style={{ width: '120px' }}
-		// 			>
-		// 				PIP
-		// 			</Button>
-		// 		</div>
-		// 	</div>
-		// );
 	};
 
 	return (
@@ -90,7 +60,6 @@ function CreateModal({
 			onClose={() => {
 				setModal('');
 				setItem({});
-				// setStatus('');
 			}}
 			size="lg"
 		>
