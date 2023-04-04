@@ -266,6 +266,8 @@ const useQuestionList = () => {
 
 					author_data_required              : FILTER_MAPPING[activeList].state === 'requested',
 					requested_question_count_required : true,
+					faq_feedback_count_required       : true,
+					answer_data_required              : activeList === 'feedbacks',
 
 				},
 			});
@@ -340,7 +342,12 @@ const useQuestionList = () => {
 			onClickNoButton,
 		});
 
-	const { list: data = [], requested_question_count = 0, ...paginationData } = questionList || {};
+	const {
+		list: data = [],
+		requested_question_count = 0,
+		downvote_feedback_count = 0,
+		...paginationData
+	} = questionList || {};
 
 	return {
 		showPopOver,
@@ -361,6 +368,7 @@ const useQuestionList = () => {
 		sortType,
 		setSortType,
 		requestedQuestionCount : requested_question_count,
+		downvoteFeedbackCount  : downvote_feedback_count,
 	};
 };
 

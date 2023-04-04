@@ -42,6 +42,7 @@ function AddedQuestions(props) {
 		sortType,
 		setSortType,
 		requestedQuestionCount,
+		downvoteFeedbackCount,
 	} = props;
 
 	const router = useRouter();
@@ -122,6 +123,7 @@ function AddedQuestions(props) {
 				sortType={sortType}
 				setSortType={setSortType}
 				requestedQuestionCount={requestedQuestionCount}
+				downvoteFeedbackCount={downvoteFeedbackCount}
 			/>
 
 			<div className={styles.button_container}>
