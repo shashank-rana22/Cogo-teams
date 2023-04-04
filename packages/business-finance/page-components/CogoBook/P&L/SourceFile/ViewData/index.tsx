@@ -43,7 +43,7 @@ function ViewData() {
 	const monthVal = today.getMonth() + 1;
 	const yearVal = today.getFullYear();
 
-	const monthPayload = `${yearVal} - ${monthVal} - 01`;
+	const monthPayload = `${yearVal}-0${monthVal}-01`;
 
 	const dateValue = new Date(Number(date));
 
