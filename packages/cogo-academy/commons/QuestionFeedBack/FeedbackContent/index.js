@@ -16,7 +16,7 @@ function FeedBackContent({ feedback }) {
 
 	const remarkContent = (remark || '').split('.');
 
-	const formatdated = format(updated_at, 'dd MMM, yyyy');
+	const formatdated = format(updated_at, 'dd MMM, yyyy hh:mm a');
 
 	return (
 		<div>

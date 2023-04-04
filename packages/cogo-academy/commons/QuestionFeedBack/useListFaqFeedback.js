@@ -1,5 +1,6 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useMemo } from 'react';
+import { useMemo, useCallback, useEffect } from 'react';
 
 const useListfaqFeedback = ({ id }) => {
 	const params = useMemo(() => ({
@@ -10,11 +11,24 @@ const useListfaqFeedback = ({ id }) => {
 		author_data_required: true,
 	}), [id]);
 
-	const [{ loading, data }] = useRequest({
+	const [{ loading, data }, trigger] = useRequest({
 		method : 'GET',
 		url    : '/list_faq_feedbacks',
-		params,
-	}, { manual: false });
+	}, { manual: true });
+
+	const fetchListFaqFeedback = useCallback(() => {
+		try {
+			trigger(params);
+		} catch (e) {
+			Toast.error(e?.message);
+		}
+	}, [params, trigger]);
+
+	useEffect(() => {
+		if (id) {
+			fetchListFaqFeedback();
+		}
+	}, [fetchListFaqFeedback, id]);
 
 	const { list } = data || {};
 

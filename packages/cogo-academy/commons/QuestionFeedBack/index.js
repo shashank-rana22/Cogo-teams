@@ -1,4 +1,5 @@
 import { Pill } from '@cogoport/components';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import FeedBackContent from './FeedbackContent';
@@ -12,8 +13,9 @@ function QuestionFeedBack({ id }) {
 	let feedbackOnAnswer = 0;
 	let feedbackonBoth = 0;
 
-	(list || []).map((ele) => {
+	(list || []).forEach((ele) => {
 		const { remark = '' } = ele || {};
+
 		if ((remark || '').includes('Question not satisfactory.')) {
 			feedbackOnquestion += 1;
 		}
@@ -24,23 +26,22 @@ function QuestionFeedBack({ id }) {
 		|| (remark || '').includes('Question not satisfactory')) {
 			feedbackonBoth += 1;
 		}
-		return { feedbackOnquestion, feedbackOnAnswer, feedbackonBoth };
 	});
 
 	const mapping = {
-		all                        : (list || []).length,
-		Questions                  : feedbackOnquestion,
-		Answer                     : feedbackOnAnswer,
-		'Both Question And Answer' : feedbackonBoth,
+		all                      : (list || []).length,
+		questions                : feedbackOnquestion,
+		answer                   : feedbackOnAnswer,
+		both_question_and_answer : feedbackonBoth,
 	};
 
-	return (
+	return (!isEmpty(list) && (
 		<div className={styles.container}>
 			<div className={styles.header}>Feedbacks on this question</div>
 			<div className={styles.pills_container}>
 				{Object.keys(mapping).map((ele) => (
 					<Pill className={styles.pill}>
-						{ele}
+						{startCase(ele)}
 						{' '}
 						<span className={styles.pill_count}>{mapping[ele]}</span>
 					</Pill>
@@ -54,6 +55,7 @@ function QuestionFeedBack({ id }) {
 			))}
 
 		</div>
+	)
 	);
 }
 
