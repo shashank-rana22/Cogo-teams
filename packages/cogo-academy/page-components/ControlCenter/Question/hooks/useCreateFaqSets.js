@@ -61,6 +61,10 @@ function useCreateFaqSet({
 	};
 
 	const onClickPublish = async ({ data }) => {
+		const audience_ids = (data?.answers?.[0]?.faq_audiences || []).map(
+			(audience) => audience?.id,
+		);
+
 		const payload = {
 			id      : data?.id,
 			state   : 'published',
@@ -68,7 +72,8 @@ function useCreateFaqSet({
 			answers : [{
 				state  : 'published',
 				status : 'active',
-
+				id     : data?.answers?.[0]?.id,
+				audience_ids,
 			}],
 		};
 
