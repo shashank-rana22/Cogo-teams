@@ -57,8 +57,7 @@ function AddTradePartyPoc({
 		<div>
 			<div>ADD POC</div>
 			<div>
-				Company Name :
-				{' '}
+				Company Name:&nbsp;
 				<span>{business_name}</span>
 			</div>
 		</div>

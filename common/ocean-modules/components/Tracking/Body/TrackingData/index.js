@@ -88,8 +88,9 @@ function TrackingData({ data = [], shippingLine = {} }) {
 									/>
 
 									{shippingLine?.business_name}
-									{' '}
+									&nbsp;
 									-
+									&nbsp;
 									{item?.vessel_name}
 								</div>
 							) : null}
