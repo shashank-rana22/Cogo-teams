@@ -43,8 +43,7 @@ function AddExternalPoc({
 			<div>{`ADD EXTERNAL ${upperCase(trade_type)} POC`}</div>
 
 			<div>
-				Company Name :
-				{' '}
+				Company Name:&nbsp;
 				<span>{organization_branch_name}</span>
 			</div>
 		</div>

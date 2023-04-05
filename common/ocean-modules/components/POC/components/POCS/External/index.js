@@ -24,8 +24,7 @@ function External({ tradePartnersData = {}, setAddPoc = () => {} }) {
 		<div>
 			<div className={styles.header}>
 				<div className={styles.heading}>
-					External:
-					{' '}
+					External:&nbsp;
 					{startCase(trade)}
 				</div>
 

@@ -10,16 +10,13 @@ function Item(props) {
 		type,
 		control,
 		span,
-		label,
 		error,
-		heading,
 		rules,
 	} = props || {};
 
 	const errorOriginal = handleError({
 		error,
 		rules,
-		label,
 	});
 	const Element = getElementController(type);
 
@@ -27,21 +24,10 @@ function Item(props) {
 
 	return (
 		<div className={styles.element} style={{ width: `${flex}%`, padding: '4px' }}>
-			<div style={{
-				height: '16px', marginBottom: '6px', fontWeight: '600', fontSize: '13px',
-			}}
-			>
-				{heading}
-			</div>
-			<h4 style={{
-				height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
-			}}
-			>
-				{label}
-			</h4>
 			<Element
 				{...props}
 				control={control}
+				size="sm"
 			/>
 			<p style={{
 				fontStyle     : 'normal',
