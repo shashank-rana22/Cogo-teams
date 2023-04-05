@@ -1,36 +1,33 @@
 import { Toast } from '@cogoport/components';
-import { ShipmentDetailContext } from '@cogoport/context';
 import { useRequest } from '@cogoport/request';
-import { useContext, useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
-const useListOrganizationDocuments = () => {
-	const { shipment_data } = useContext(ShipmentDetailContext);
+import getApiErrorString from '../utils/getApiErrorString';
 
-	const { importer_exporter_id = '', id = '' } = shipment_data;
-
+const useListOrganizationDocuments = ({ defaultFilters = {}, defaultParams = {} }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_organization_documents',
 		method : 'GET',
+		params : {
+			page    : 1000,
+			filters : {
+				...defaultFilters,
+			},
+			...defaultParams,
+		},
 	}, { manual: true });
 
-	const getList = useCallback(() => {
-		(async () => {
-			try {
-				await trigger({
-					params: {
-						page    : 1000,
-						filters : {
-							status          : ['accepted'],
-							organization_id : importer_exporter_id,
-							shipment_id     : id || undefined,
-						},
-					},
-				});
-			} catch (err) {
-				Toast.error(err);
-			}
-		})();
-	}, [trigger, importer_exporter_id, id]);
+	const getList = useCallback(async () => {
+		try {
+			await trigger();
+		} catch (err) {
+			Toast.error(getApiErrorString(err));
+		}
+	}, [trigger]);
+
+	useEffect(() => {
+		getList();
+	}, [getList]);
 
 	return {
 		data,

@@ -1,6 +1,8 @@
 import { Button, Popover } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMPdf, IcMImage, IcMOverflowDot } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
+import React, { useContext } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 import useListTradeDocuments from '../../../../hooks/useListTradeDocuments';
@@ -10,10 +12,22 @@ import Loader from '../Loader';
 import styles from './styles.module.css';
 
 function TradeDocuments({ forModal = false, handleSave = () => {}, handleView = () => {} }) {
-	const { data, getList, loading } = useListTradeDocuments();
+	const { shipment_data } = useContext(ShipmentDetailContext);
+
+	const { id = '', importer_exporter_id = '' } = shipment_data;
+	const { data, getList, loading } = useListTradeDocuments({
+		defaultFilters: {
+			status          : ['accepted'],
+			organization_id : importer_exporter_id,
+			shipment_id     : id || undefined,
+		},
+	});
 
 	const { deleteDocument } = useUpdateOrganizationDocument({
-		refetch: getList,
+		refetch       : getList,
+		defaultParams : {
+			status: 'inactive',
+		},
 	});
 
 	const content = (doc) => (

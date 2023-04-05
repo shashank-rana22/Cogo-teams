@@ -46,18 +46,18 @@ const useCreateTaskList = ({ primary_service, shipment_data }) => {
 		shipment_type,
 	});
 
-	const getDocType = (task) => task.split('upload_').slice(-1)[0];
+	const getDocType = useMemo(() => (task) => task.split('upload_').slice(-1)[0], []);
 
-	const taskConfigsForAllShipmentTasks = (taskConfigs || [])
+	const taskConfigsForAllShipmentTasks = useMemo(() => (taskConfigs || [])
 		.map(({ states }) => states.map(({ configs }) => configs.filter(
 			(task) => docTasks.includes(task?.task_type)
 				&& task?.trade_type === primary_service?.trade_type,
 		)))
-		.flat(2);
+		.flat(2), [taskConfigs, primary_service?.trade_type]);
 
 	const listOfAllShipmentDocTypes = useMemo(
 		() => taskConfigsForAllShipmentTasks.map((t) => getDocType(t?.task)),
-		[taskConfigsForAllShipmentTasks],
+		[taskConfigsForAllShipmentTasks, getDocType],
 	);
 
 	const listOfUploadedDocumentTypes = useMemo(() => (uploadedShipmentDocuments?.list || []).map(
@@ -115,6 +115,7 @@ const useCreateTaskList = ({ primary_service, shipment_data }) => {
 		listOfPendingTaskDocumentTypes,
 		listOfUploadedDocumentTypes,
 		pendingTasks,
+		getDocType,
 		primary_service?.trade_type,
 		uploadedShipmentDocuments?.list,
 		taskConfigs,
