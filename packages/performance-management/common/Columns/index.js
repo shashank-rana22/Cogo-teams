@@ -64,7 +64,12 @@ const useGetColumns = ({
 
 	const openCSV = (url) => {
 		// eslint-disable-next-line no-undef
-		if (url) { window.open(url); }
+		if (url) { window.open(url, '_blank'); }
+	};
+
+	const downloadError = (url) => {
+		// eslint-disable-next-line no-undef
+		if (url) { window.open(url, '_blank'); }
 	};
 
 	const currentDate = new Date();
@@ -394,6 +399,19 @@ const useGetColumns = ({
 		),
 		id  : 'uploaded_by',
 		key : 'uploaded_by',
+	},
+	{
+		Header   : <div className={styles.head}>Error Report</div>,
+		accessor : (item) => (
+			<div className={styles.head_content}>
+				<Button onClick={() => downloadError(item.error_url)} themeType="secondary" size="sm">
+					<IcMDownload style={{ marginRight: '4px' }} />
+					Error Report
+				</Button>
+			</div>
+		),
+		id  : 'error_report',
+		key : 'error_report',
 	},
 	{
 		Header   : <div className={styles.head} />,
