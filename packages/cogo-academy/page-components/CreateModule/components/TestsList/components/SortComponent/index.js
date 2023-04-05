@@ -11,7 +11,8 @@ function SortComponent({ value, sortFilter, setSortFilter }) {
 					width={14}
 					height={14}
 					onClick={() => {
-						setSortFilter({ sort_by: value, sort_type: 'desc' })}}
+						setSortFilter({ sort_by: value, sort_type: 'desc' });
+					}}
 				/>
 			) : (
 				<IcMArrowRotateDown
