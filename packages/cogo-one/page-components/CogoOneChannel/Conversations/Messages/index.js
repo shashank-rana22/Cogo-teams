@@ -23,21 +23,18 @@ function Messages({
 	suggestions = [],
 	userId = '',
 	isomniChannelAdmin = false,
-	setActiveMessage,
+	setActiveMessage = () => {},
 }) {
 	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 	const [uploading, setUploading] = useState({});
+	const [disableButton, setDisableButton] = useState('');
 	const { tagOptions = [] } = useListAssignedChatTags();
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
 	const closeModal = () => setOpenModal({ type: null, data: {} });
-
 	let activeChatCollection;
-
-	const [disableButton, setDisableButton] = useState('');
-
 	const {
 		id = '',
 		channel_type = '',

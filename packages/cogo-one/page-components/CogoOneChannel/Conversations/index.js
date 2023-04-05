@@ -15,7 +15,7 @@ function Conversations({
 	isomniChannelAdmin = false,
 	showBotMessages = false,
 	mailProps,
-	setActiveMessage,
+	setActiveMessage = () => {},
 }) {
 	return (
 		<div className={cl`${activeTab === 'mail' ? styles.mail_div : styles.container}`}>

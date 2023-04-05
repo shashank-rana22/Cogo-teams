@@ -395,6 +395,9 @@ function MessageConversations({
 					</div>
 				</div>
 			</div>
+			<div className={styles.other_channel_ids}>
+				jo
+			</div>
 		</div>
 	);
 }
