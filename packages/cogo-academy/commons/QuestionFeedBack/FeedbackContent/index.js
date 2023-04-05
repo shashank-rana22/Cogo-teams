@@ -49,7 +49,7 @@ function FeedBackContent({ feedback, onClickEdit = () => {}, id, source = '' }) 
 					<div className={styles.answer_container}>
 						<div className={styles.body_heading}>Answer</div>
 						<div className={styles.answer_content}>
-							{suggested_answer ? <div dangerouslySetInnerHTML={{ __html: suggested_answer }} /> : '-'}
+							{suggested_answer || '-'}
 
 						</div>
 						{suggested_answer
