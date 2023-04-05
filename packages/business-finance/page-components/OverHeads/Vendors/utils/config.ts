@@ -20,7 +20,7 @@ const bodyStyles = {
 	fontStyle  : 'normal',
 };
 
-const VENDOR_CONFIG = {
+export const VENDOR_CONFIG = {
 	showHeader   : true,
 	headerStyles : headerStyle,
 	bodyStyles,
@@ -79,4 +79,55 @@ const VENDOR_CONFIG = {
 	],
 };
 
-export default VENDOR_CONFIG;
+export const expenseConfig = () => ({
+	showHeader   : true,
+	headerStyles : headerStyle,
+	bodyStyles,
+	fields       : [
+		{
+			label : 'Name',
+			key   : 'sellerDetails.organizationName',
+			span  : 1.5,
+		},
+		{
+			label : 'Invoice Number',
+			func  : 'getInvoiceNumber',
+			span  : 1.5,
+		},
+		{
+			label : 'Category',
+			span  : 1.3,
+			func  : 'renderCategory',
+		},
+		{
+			label : 'Invoice Amount',
+			func  : 'renderInvoiceAmount',
+			span  : 1.5,
+		},
+		{
+			label : 'TDS',
+			func  : 'renderTds',
+			span  : 0.8,
+		},
+		{
+			label : 'Payable',
+			span  : 1.5,
+			func  : 'getPayable',
+		},
+		{
+			label : 'Paid',
+			func  : 'renderPaid',
+			span  : 1.2,
+		},
+		{
+			label : 'Invoice Dates',
+			func  : 'getInvoiceDates',
+			span  : 1.7,
+		},
+		{
+			label : 'Approved By',
+			func  : 'getApprovedByRecurring',
+			span  : 1.25,
+		},
+	],
+});

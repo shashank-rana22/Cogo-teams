@@ -91,8 +91,8 @@ function List({
 			) : (
 				<div className={styles.no_data}>
 					<img
-						style={{ width: '30%', margin: '8%' }}
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no result.svg"
+						style={{ width: '24%', margin: '8%' }}
+						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no ressult found.svg"
 						alt="no data"
 					/>
 				</div>

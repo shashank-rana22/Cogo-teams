@@ -10,8 +10,9 @@ import List from '../commons/List';
 
 import CreateVendorModal from './CreateVendorModal';
 import useListVendors from './hooks/useListVendors';
+import ShowMore from './ShowMore';
 import styles from './styles.module.css';
-import VENDOR_CONFIG from './utils/config';
+import { VENDOR_CONFIG } from './utils/config';
 import Controls from './utils/controls';
 
 interface ItemProps {
@@ -44,7 +45,6 @@ function VenderComponent() {
 		createdAtSortType   : null,
 	});
 	const [showModal, setShowModal] = useState(false);
-	const [dropdownId, setDropdownId] = useState(null);
 	const { listData, loading } = useListVendors({ filters, sort });
 
 	const handleChange = (e:any, value:string | number) => {
@@ -56,7 +56,7 @@ function VenderComponent() {
 
 	const handleClick = () => {
 		router.push(
-			'/onboard-vendor',
+			'/onboard-vendor', // redirecting to VRM(create vendor)
 		);
 	};
 
@@ -73,6 +73,7 @@ function VenderComponent() {
 		placeholder={placeholder}
 		options={options}
 		className={styles.select}
+		size="sm"
 		isClearable
 	/>
                 	);
@@ -82,7 +83,7 @@ function VenderComponent() {
 			</div>
 			<div className={styles.right_container}>
 				<Input
-					size="md"
+					size="sm"
 					placeholder="Search by Vendor Name/PAN/Organization ID/Sage ID"
 					suffix={<IcMSearchlight />}
 					value={filters.searchValue}
@@ -186,27 +187,11 @@ function VenderComponent() {
 		);
 	}
 
-	function RenderViewMoreButton({ item }) {
-		return (
-			<Button
-				themeType="secondary"
-				size="md"
-				onClick={() => {
-               	setDropdownId(item?.vendorSerialId);
-				}}
-				style={{ border: '1px solid' }}
-			>
-				View More
-			</Button>
-		);
-	}
-
-	const renderDropdown = (id:string | number = '') => {
-		if (id === dropdownId) {
-			return <h1>hey there</h1>;
-		}
-		return null;
-	};
+	const renderDropdown = (vendorId:number | string) => (
+		<ShowMore
+			vendorId={vendorId}
+		/>
+	);
 
 	const functions:any = {
 		renderKYCStatus: (itemData:ItemProps) => (
@@ -217,9 +202,6 @@ function VenderComponent() {
 		),
 		renderInvoice: (itemData:ItemProps) => (
 			<RenderInvoice item={itemData} />
-		),
-		renderViewMoreButton: (itemData:ItemProps) => (
-			<RenderViewMoreButton item={itemData} />
 		),
 		renderName: (itemData:ItemProps) => {
 			const { organizationName = '' } = itemData || {};
@@ -260,7 +242,7 @@ function VenderComponent() {
 					setFilters((p) => ({ ...p, page: pageValue }));
 				}}
 				showPagination
-				renderDropdown={(id) => renderDropdown(id)}
+				renderDropdown={({ vendorId }) => renderDropdown(vendorId)}
 			/>
 
 			{
