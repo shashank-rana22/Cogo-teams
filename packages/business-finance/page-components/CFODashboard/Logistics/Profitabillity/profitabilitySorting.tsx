@@ -2,7 +2,11 @@ import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function GetSortingData({ sort, setSort }) {
+interface Props {
+	sort?:string
+	setSort?: React.Dispatch<React.SetStateAction<string>>
+}
+function GetSortingData({ sort, setSort }:Props) {
 	return (
 		<div className={styles.sorting}>
 			<div style={{ marginRight: '8px' }}>Profitabillity</div>
