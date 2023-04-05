@@ -74,6 +74,7 @@ importers:
       '@cogoport/translate': workspace:0.1.0
       '@cogoport/utils': ^1.2.6
       '@cogoport/vendor-rm': workspace:0.1.0
+      '@cogoport/welcome': workspace:0.1.0
       '@next/bundle-analyzer': ^13.2.3
       '@types/node': ^18.14.5
       '@types/react': ^18.0.28
@@ -110,6 +111,7 @@ importers:
       '@cogoport/translate': link:../packages/Translation
       '@cogoport/utils': 1.2.6
       '@cogoport/vendor-rm': link:../packages/vendor-rm
+      '@cogoport/welcome': link:../packages/welcome
       '@next/bundle-analyzer': 13.2.4
       '@types/node': 18.15.0
       '@types/react': 18.0.28
@@ -671,6 +673,32 @@ importers:
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.6
+      react: 18.2.0
+
+  packages/welcome:
+    specifiers:
+      '@cogoport/charts': ^1.0.1
+      '@cogoport/components': ^1.0.359
+      '@cogoport/core': workspace:*
+      '@cogoport/icons-react': ^1.0.58
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.6
+      axios: ^1.3.4
+      axios-hooks: ^4.0.0
+      react: 18.2.0
+    dependencies:
+      '@cogoport/charts': 1.0.1_react@18.2.0
+      '@cogoport/components': 1.0.366_uffp5ldixb4cfaot3z7zbxlpbm
+      '@cogoport/core': link:../../common/core
+      '@cogoport/icons-react': 1.0.65_react@18.2.0
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.6
+      axios: 1.3.4
+      axios-hooks: 4.0.0_axios@1.3.4+react@18.2.0
       react: 18.2.0
 
 packages:
