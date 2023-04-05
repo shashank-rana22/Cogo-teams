@@ -1,4 +1,3 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const GetOrganization = ({ importerExporterIds }) => {
@@ -15,9 +14,7 @@ const GetOrganization = ({ importerExporterIds }) => {
 				},
 			});
 		} catch (err) {
-			if (err?.message !== 'canceled') {
-				Toast.error(err?.message || 'Something went wrong');
-			}
+			console.log(err);
 		}
 	};
 

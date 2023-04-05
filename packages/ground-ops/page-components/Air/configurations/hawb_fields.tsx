@@ -1,15 +1,10 @@
 export const HawbFields = {
 	fields: [
 		{
-			key    : 'serialId',
-			label  : 'SID',
-			span   : 0.8,
-			render : (item) => (
-				<div>
-					#
-					{item.serialId}
-				</div>
-			),
+			key   : 'serialId',
+			label : 'SID',
+			span  : 0.8,
+			func  : 'handleSerialId',
 		},
 		{
 			key   : 'documentNumber',

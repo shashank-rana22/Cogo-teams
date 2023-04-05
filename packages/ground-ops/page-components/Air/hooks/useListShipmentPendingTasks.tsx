@@ -1,4 +1,3 @@
-import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestAir } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -70,9 +69,7 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {}, relev
 					},
 				});
 			} catch (err) {
-				if (err?.message !== 'canceled') {
-					Toast.error(err?.message || 'Something went wrong');
-				}
+				console.log(err);
 			}
 		})();
 	}, [activeTab, filter, page, query, relevantToMe, searchValue, trigger, userData.user.id]);

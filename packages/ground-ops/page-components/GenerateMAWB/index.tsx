@@ -101,7 +101,7 @@ function GenerateMAWB({
 			const dataList = [];
 			(hawbDataList?.data?.shipmentPendingTasks || []).forEach((hawbItem) => {
 				const pushData = {
-					id         : hawbItem.documentId,
+					id         : hawbItem?.documentId,
 					documentNo : hawbItem?.documentData?.document_number,
 					isNew      : false,
 				};

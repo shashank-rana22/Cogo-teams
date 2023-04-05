@@ -28,10 +28,6 @@ function HawbList({ data, setViewDoc, setItem }) {
 		setItem(singleItem);
 	};
 
-	useEffect(() => {
-		listAPI();
-	}, [listAPI]);
-
 	const handleUpdate = async (values) => {
 		const serialId = values?.serialId || '';
 		const payload = {
@@ -87,6 +83,12 @@ function HawbList({ data, setViewDoc, setItem }) {
 	};
 
 	const functions = {
+		handleSerialId: (singleItem) => (
+			<div>
+				#
+				{singleItem.serialId || '-'}
+			</div>
+		),
 		handleDocumentNumber: (singleItem) => (
 			<p>{singleItem?.documentData?.document_number}</p>
 		),
@@ -106,6 +108,10 @@ function HawbList({ data, setViewDoc, setItem }) {
 			getControlButton(singleItem)
 		),
 	};
+
+	useEffect(() => {
+		listAPI();
+	}, [listAPI]);
 
 	return (
 		<>

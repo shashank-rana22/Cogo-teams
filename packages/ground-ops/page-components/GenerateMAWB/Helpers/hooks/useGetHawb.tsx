@@ -1,4 +1,3 @@
-import { Toast } from '@cogoport/components';
 import { useRequestAir } from '@cogoport/request';
 import { useState } from 'react';
 
@@ -23,9 +22,7 @@ const useGetHawb = () => {
 			});
 			setHawbSuccess(true);
 		} catch (err) {
-			if (err?.message !== 'canceled') {
-				Toast.error(err?.message || 'Something went wrong');
-			}
+			console.log(err);
 		}
 	};
 

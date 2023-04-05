@@ -84,7 +84,7 @@ function FormContainer({
 			<div className={styles.header_flex}>
 				{activeCategory === 'hawb' && (
 					<div className={styles.buttonwrap}>
-						{hawbDetails.map((hawbItem) => (
+						{(hawbDetails || []).map((hawbItem) => (
 							<div
 								key={hawbItem.id}
 								onClick={() => {
