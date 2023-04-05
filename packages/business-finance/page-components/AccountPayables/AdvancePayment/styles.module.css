@@ -1,3 +1,8 @@
 .container{
     padding-top: 16px;
 }
+.sub_container{
+    background: #FFFFFF;
+    border-radius: 8px; 
+    margin-top: 16px;
+}

@@ -1,6 +1,7 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { useState } from 'react';
 
+import SelectFilter from './SelectedFilter/index';
 import styles from './styles.module.css';
 
 function AdvancePayment() {
@@ -13,13 +14,16 @@ function AdvancePayment() {
 				onChange={setActiveTab}
 			>
 				<TabPanel name="pending" title="Pending" badge={3}>
-					<div>This is local search</div>
+					{/* <div>Pending</div> */}
 				</TabPanel>
 
 				<TabPanel name="history" title="History" badge={5}>
-					<div>This is suggested</div>
+					{/* <div>History</div> */}
 				</TabPanel>
 			</Tabs>
+			<div className={styles.sub_container}>
+				<SelectFilter />
+			</div>
 		</div>
 	);
 }
