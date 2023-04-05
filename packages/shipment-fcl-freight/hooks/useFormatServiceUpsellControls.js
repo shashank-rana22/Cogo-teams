@@ -18,8 +18,6 @@ const formatControls = (controls, service) => controls.map((control) => {
 });
 
 function useServiceUpsellControls({ service, services = [], truckTypeToggle, setTruckTypeToggle }) {
-	const search_type = service?.service;
-
 	const newServices = services.map((item) => ({
 		...item,
 		service_type: item?.service_type.split('_service')[0],
@@ -27,7 +25,7 @@ function useServiceUpsellControls({ service, services = [], truckTypeToggle, set
 	const { serviceWiseControls } = useGetControls({ truckTypeToggle });
 
 	const rawControls = formatControls(
-		serviceWiseControls[search_type] || [],
+		serviceWiseControls[service] || [],
 		service,
 	);
 

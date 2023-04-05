@@ -10,9 +10,6 @@ function Details({ state = '', serviceItemsKey = [], serviceData = {} }) {
 	const [show, setShow] = useState(false);
 
 	const {
-		id,
-		service_type,
-		// state,
 		container_size,
 		shipping_line,
 		commodity,
@@ -42,11 +39,9 @@ function Details({ state = '', serviceItemsKey = [], serviceData = {} }) {
 
 			{show ? (
 				<div className={styles.container}>
-					<div className={styles.container}>
-						{(serviceItemsKey || []).map((element) => (getByKey(serviceData, element.key) ? (
-							<Item state={state} label={element} detail={serviceData} />
-						) : null))}
-					</div>
+					{(serviceItemsKey || []).map((element) => (getByKey(serviceData, element.key) ? (
+						<Item state={state} label={element} detail={serviceData} />
+					) : null))}
 				</div>
 			) : null}
 		</>

@@ -3,12 +3,11 @@ import { useContext } from 'react';
 
 import { possibleServices } from '../../../configurations/possible-full-route';
 
+import CreateNew from './CreateNew';
 import helperFuncs from './helpers/getHelperFuncs';
-// import renderSubsidiaryServices from './helpers/renderSubsidiaryServices';
-// import upsellTransportation from './helpers/upsellTransportation';
+import upsellTransportation from './helpers/upsellTransportation';
 import Loader from './Loader';
 import ServiceDetails from './ServiceDetails';
-import CreateNew from './ServiceDetails/CreateNew';
 import styles from './styles.module.css';
 
 function Services() {
@@ -23,60 +22,50 @@ function Services() {
 
 	const { serviceObj, upsellServices } =	helperFuncs(servicesList, possibleServices);
 
-	// const { cancelUpsellDestinationFor, cancelUpsellOriginFor } = upsellTransportation(serviceObj, primary_service);
+	console.log({ upsellServices });
+
+	const { cancelUpsellDestinationFor, cancelUpsellOriginFor } = upsellTransportation(serviceObj);
 
 	return (
 		<div className={styles.container}>
 			{!servicesLoading && !isGettingShipment ? (
 
 				<div className={styles.service_container}>
-					<div className={styles.card_block}>
-						{(Object.keys(serviceObj.mainServices) || []).map((service) => (
-							<ServiceDetails
-								className={styles.service_details}
-								serviceName={service}
-								// cancelUpsellFor={cancelUpsellOriginFor}
-								servicesData={serviceObj?.mainServices[service]}
-								servicesList={servicesList}
-								shipmentData={shipment_data}
-								refetchServices={refetchServices}
-								primary_service={primary_service}
-							/>
+					{(Object.keys(serviceObj.originServices) || []).map((service) => (
+						<ServiceDetails
+							className={styles.service_details}
+							serviceName={service}
+							servicesData={serviceObj?.mainServices[service]}
+							servicesList={servicesList}
+							shipmentData={shipment_data}
+							refetchServices={refetchServices}
+						/>
 
-						))}
-					</div>
+					))}
 
-					<div className={styles.card_block}>
-						{(Object.keys(serviceObj?.mainServices) || []).map((service) => (
-							<ServiceDetails
-								className={styles.service_details}
-								serviceName={service}
-								// cancelUpsellFor={cancelUpsellOriginFor}
-								servicesData={serviceObj?.mainServices[service]}
-								servicesList={servicesList}
-								shipmentData={shipment_data}
-								refetchServices={refetchServices}
-								primary_service={primary_service}
-							/>
+					{(Object.keys(serviceObj?.mainServices) || []).map((service) => (
+						<ServiceDetails
+							className={styles.service_details}
+							serviceName={service}
+							servicesData={serviceObj?.mainServices[service]}
+							servicesList={servicesList}
+							shipmentData={shipment_data}
+							refetchServices={refetchServices}
+						/>
 
-						))}
-					</div>
+					))}
 
-					<div className={styles.card_block}>
-						{(Object.keys(serviceObj?.mainServices) || []).map((service) => (
-							<ServiceDetails
-								className={styles.service_details}
-								serviceName={service}
-								// cancelUpsellFor={cancelUpsellOriginFor}
-								servicesData={serviceObj?.mainServices[service]}
-								servicesList={servicesList}
-								shipmentData={shipment_data}
-								refetchServices={refetchServices}
-								primary_service={primary_service}
-							/>
+					{(Object.keys(serviceObj?.destinationServices) || []).map((service) => (
+						<ServiceDetails
+							className={styles.service_details}
+							serviceName={service}
+							servicesData={serviceObj?.mainServices[service]}
+							servicesList={servicesList}
+							shipmentData={shipment_data}
+							refetchServices={refetchServices}
+						/>
 
-						))}
-					</div>
+					))}
 				</div>
 			) : (
 				<Loader />
@@ -89,6 +78,8 @@ function Services() {
 						servicesList={servicesList}
 						shipmentData={shipment_data}
 						primary_service={primary_service}
+						cancelUpsellDestinationFor={cancelUpsellDestinationFor}
+						cancelUpsellOriginFor={cancelUpsellOriginFor}
 					/>
 
 				)))}

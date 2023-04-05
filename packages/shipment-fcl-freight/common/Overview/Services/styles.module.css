@@ -20,14 +20,7 @@
 	}
 
 }
-.card_block {
-	/* display: block;
-	width: 33%;
-	@media (max-width: 768px) {
-		width: 100%;
-		margin: 0px 10px 0px 0px;
-	} */
-}
+
 .title{
 	font-weight: 600;
 	font-size: 16px;
@@ -38,5 +31,6 @@
 .upselling {
 	display: flex; 
 	flex-direction: column; 
-	width: 30% ;
+	width: 30% ; 
+	gap: 12px;
 }

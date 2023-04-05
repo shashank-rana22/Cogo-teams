@@ -66,12 +66,13 @@ const helperFuncs = (servicesList, possibleServices) => {
 					const canPushService = 	checkIfServiceAlreadyPresent(serviceObj.destinationServices, service);
 
 					if (canPushService) {
-						if (Object.keys(serviceObj.mainServices).includes(service?.service_type)) {
+						if (Object.keys(serviceObj.mainServices).includes(service?.service_type)
+						&& serviceObj.mainServices?.[0]?.trade_type === serviceToIterate.trade_type) {
 							(serviceObj.mainServices[serviceToIterate.service_type]).push({
 								...service,
 								display_label: serviceToIterate.display_label,
 							});
-						} else {
+						} else if (!Object.keys(serviceObj.mainServices).includes(service?.service_type)) {
 							(serviceObj.mainServices)[service?.service_type] = [{
 								...service,
 								display_label: serviceToIterate.display_label,

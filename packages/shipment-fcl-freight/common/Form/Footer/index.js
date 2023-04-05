@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
 
-import useCreateSpotSearch from '../../hooks/useCreateSpotSearch';
+import useCreateSpotSearch from '../../../hooks/useCreateSpotSearch';
 
 import styles from './styles.module.css';
 

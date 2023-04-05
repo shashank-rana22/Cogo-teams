@@ -1,6 +1,8 @@
 .container{
-	height: fit-content;
-	border-radius: 4px;
+	min-height: fit-content; 
+	max-height: 250px; 
+	border-radius: 4px; 
+	overflow-y: auto;
 
 	&.cancelled {
 		border: 1px solid #333333;
