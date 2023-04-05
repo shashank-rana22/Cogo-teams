@@ -1,4 +1,3 @@
-/* stylelint-disable selector-class-pattern */
 .uploader {
 	:global {
 		.ui_upload_droparea_container {
