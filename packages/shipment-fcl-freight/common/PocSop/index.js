@@ -1,10 +1,8 @@
 import { Button, Modal, TabPanel, Tabs } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMArrowRotateLeft, IcMArrowRotateRight } from '@cogoport/icons-react';
+import { Poc, Sop } from '@cogoport/ocean-modules';
 import { useState, useContext } from 'react';
-
-import Poc from '../POC';
-import Sop from '../SOP';
 
 import styles from './styles.module.css';
 
