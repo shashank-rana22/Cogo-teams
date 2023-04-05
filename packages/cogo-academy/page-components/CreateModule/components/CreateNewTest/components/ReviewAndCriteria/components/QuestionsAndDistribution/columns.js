@@ -88,6 +88,7 @@ const getColumns = ({ errors, control }) => {
 			id       : 'distribution',
 			accessor : ({ non_case_study_question_count = 0, case_study_question_count = 0, id = '' }) => {
 				const controlItem1 = getControls(id, non_case_study_question_count)[0];
+
 				const controlItem2 = getControls(id, case_study_question_count)[1];
 
 				return (

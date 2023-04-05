@@ -1,4 +1,4 @@
-import { Table, Placeholder } from '@cogoport/components';
+import { Pill, Table, Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -9,6 +9,7 @@ function QuestionsAndDistribution(props) {
 	const { data, loading, errors, control, setValue, watch, setError } = props;
 
 	const columns = getColumns({ errors, control });
+
 	useEffect(() => {
 		data?.test_set_distribution_data?.forEach(({
 			question_type = '',
@@ -45,17 +46,25 @@ function QuestionsAndDistribution(props) {
 
 	setError(questionsCount + casesCount === 0);
 
+	let total = 0;
+
+	set_data.forEach((value) => {
+		total = total + value.case_study_question_count + value.non_case_study_question_count;
+	});
+
 	return (
 		<>
 			<span className={styles.heading_content}>
 				<span className={styles.text}>Questions and Distribution</span>
-				{/* <span className={styles.all}>
+				<span className={styles.all}>
 					<Pill color="#CFEAED" className={styles.question_pill}>
 						<div className={styles.question_info}>
 							Total Available Questions :
+							{' '}
+							{total}
 						</div>
 					</Pill>
-				</span> */}
+				</span>
 			</span>
 
 			<Table
