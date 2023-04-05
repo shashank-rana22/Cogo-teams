@@ -8,8 +8,9 @@ import { COGOVERSE_USER_ID } from '../constants/IDS_CONSTANTS';
 
 const useSendMessage = ({ channel_type = '', activeChatCollection }) => {
 	const API_MAPPING = {
-		whatsapp      : 'create_communication',
-		platform_chat : 'create_communication_platform_chat',
+		whatsapp      : '/create_communication',
+		platform_chat : '/create_communication_platform_chat',
+		telegram      : '/create_communication',
 	};
 	const {
 		user:{ id },
@@ -18,7 +19,7 @@ const useSendMessage = ({ channel_type = '', activeChatCollection }) => {
 
 	const [{ loading }, trigger] = useRequest(
 		{
-			url    : `/${API_MAPPING[channel_type]}`,
+			url    : API_MAPPING[channel_type],
 			method : 'post',
 		},
 		{ manual: true, autoCancel: false },
