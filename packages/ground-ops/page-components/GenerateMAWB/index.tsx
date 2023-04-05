@@ -73,6 +73,7 @@ function GenerateMAWB({
 
 	const category = item.blCategory;
 	const mawbId = item.documentId;
+	const pendingTaskId = item.id;
 
 	const [activeCategory, setActiveCategory] = useState(edit ? 'mawb' : taskItem.blCategory);
 
@@ -136,7 +137,7 @@ function GenerateMAWB({
 		finalFields.forEach((c) => {
 			if (activeCategory === 'hawb' && activeHawb.isNew && unsavedFields.includes(c.name)) {
 				setValue(c.name, '');
-			} else if (activeCategory === 'mawb' && unsavedFields.includes(c.name)) {
+			} else if (activeCategory === 'mawb' && unsavedFields.includes(c.name) && !edit) {
 				setValue(c.name, '');
 			} else {
 				setValue(c.name, taskItem[c.name] || '');
@@ -236,6 +237,7 @@ function GenerateMAWB({
 						category={category}
 						activeCategory={activeCategory}
 						setActiveCategory={setActiveCategory}
+						awbNumber={item.awbNumber}
 					/>
 
 					<FormContainer
@@ -288,6 +290,7 @@ function GenerateMAWB({
 								setActiveHawb={setActiveHawb}
 								setActiveKey={setActiveKey}
 								activeHawb={activeHawb}
+								pendingTaskId={pendingTaskId}
 							/>
 						</Modal.Body>
 

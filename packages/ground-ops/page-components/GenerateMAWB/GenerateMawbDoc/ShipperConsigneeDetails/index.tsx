@@ -10,7 +10,7 @@ interface Props {
 	formData?: NestedObj;
 	taskItem?: NestedObj;
 	whiteout?:boolean;
-	activeCategory?: String;
+	activeCategory?: string;
 	edit?: boolean | string;
 	viewDoc?: boolean;
 }

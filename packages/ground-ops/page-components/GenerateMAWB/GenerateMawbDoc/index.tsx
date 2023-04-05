@@ -37,6 +37,7 @@ interface Props {
 	setHawbDetails?:Function;
 	setActiveHawb?: Function;
 	setActiveKey?: Function;
+	pendingTaskId?: string;
 }
 
 const downloadButton = {
@@ -61,6 +62,7 @@ function GenerateMawb({
 	activeHawb = {},
 	setActiveHawb,
 	setActiveKey,
+	pendingTaskId = '',
 }:Props) {
 	const filteredData = { ...formData };
 
@@ -109,10 +111,10 @@ function GenerateMawb({
 			uploaded_by_org_id  : taskItem?.serviceProviderId,
 			performed_by_org_id : taskItem?.serviceProviderId,
 			document_type       : activeCategory === 'mawb' ? 'draft_airway_bill' : 'draft_house_airway_bill',
-			id                  : activeCategory === 'mawb' ? taskItem?.documentId : taskItem?.id,
+			id                  : activeCategory === 'mawb' ? taskItem?.documentId : pendingTaskId,
 			service_id          : taskItem?.serviceId,
 			service_type        : 'air_freight_service',
-			pending_task_id     : edit === 'edit' || activeHawb.isNew === false ? undefined : taskItem?.id,
+			pending_task_id     : edit === 'edit' || activeHawb.isNew === false ? undefined : pendingTaskId,
 			data                : {
 				...filteredData,
 				status          : 'generated',
@@ -268,6 +270,7 @@ function GenerateMawb({
 					<ShipmentDetails
 						formData={filteredData}
 						whiteout={whiteout}
+						activeCategory={activeCategory}
 					/>
 					<ContainerDetails
 						formData={filteredData}

@@ -60,7 +60,9 @@ function FormContainer({
 		return (
 			<Button
 				onClick={() => {
-					upload({ payload });
+					if (activeHawb.isNew === false) {
+						upload({ payload });
+					}
 					setHawbDetails((prev) => prev.filter((itm) => itm.id !== activeHawb.id));
 					setActiveHawb(hawbDetails.find((ele) => ele.id !== activeHawb.id));
 				}}

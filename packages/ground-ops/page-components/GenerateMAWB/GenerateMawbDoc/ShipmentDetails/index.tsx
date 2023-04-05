@@ -10,9 +10,10 @@ interface NestedObj {
 interface Props {
 	formData?: NestedObj;
 	whiteout?:boolean;
+	activeCategory?: string;
 }
 
-function ShipmentDetails({ formData = {}, whiteout = false }:Props) {
+function ShipmentDetails({ formData = {}, whiteout = false, activeCategory = '' }:Props) {
 	let tempColor = '#333';
 	if (whiteout) {
 		tempColor = 'transparent';
@@ -81,8 +82,7 @@ function ShipmentDetails({ formData = {}, whiteout = false }:Props) {
 								`}
 									style={{ fontSize: 14 }}
 								>
-									{formData.iataCode}
-
+									{activeCategory !== 'hawb' && formData.iataCode}
 								</div>
 							</p>
 						</div>

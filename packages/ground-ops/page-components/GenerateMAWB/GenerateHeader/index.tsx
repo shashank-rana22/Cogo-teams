@@ -13,23 +13,32 @@ const tabs = [
 	},
 ];
 
-function GenerateHeader({ setGenerate, setEdit, category, activeCategory, setActiveCategory }) {
+function GenerateHeader({ setGenerate, setEdit, category, activeCategory, setActiveCategory, awbNumber }) {
 	return (
 		<div>
-			<div className={styles.heading}>Add Export Details</div>
-			<Breadcrumb>
-				<Breadcrumb.Item label={(
-					<div
-						onClick={() => { setGenerate(false); setEdit(false); }}
-						role="link"
-						tabIndex={0}
-					>
-						SO2 - Docs Dashboard
-					</div>
-				)}
-				/>
-				<Breadcrumb.Item label="Add Export Details" />
-			</Breadcrumb>
+			<div className={styles.top_flex}>
+				<div>
+					<div className={styles.heading}>Add Export Details</div>
+					<Breadcrumb>
+						<Breadcrumb.Item label={(
+							<div
+								onClick={() => { setGenerate(false); setEdit(false); }}
+								role="link"
+								tabIndex={0}
+							>
+								SO2 - Docs Dashboard
+							</div>
+						)}
+						/>
+						<Breadcrumb.Item label="Add Export Details" />
+					</Breadcrumb>
+				</div>
+				<div>
+					<span className={styles.awb_style}>AWB Number :</span>
+					{awbNumber}
+				</div>
+
+			</div>
 			{category === 'hawb' && (
 				<div className={styles.flex}>
 					{tabs.map((tab) => (

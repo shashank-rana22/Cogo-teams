@@ -14,6 +14,11 @@
 	border-radius: 8px 8px 0 0;
 }
 
+.top_flex {
+	display: flex;
+	justify-content: space-between;
+}
+
 .container_click {
 	display: flex;
 	align-items: center;
@@ -31,4 +36,11 @@
 
 .category_container {
 	margin-bottom: 16px;
+}
+
+.awb_style {
+	color:#828282;
+	font-size: 14px;
+	line-height: 150%;
+	margin-right: 20px;
 }
