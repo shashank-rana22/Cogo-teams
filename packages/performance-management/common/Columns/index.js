@@ -1,5 +1,5 @@
 import { Tooltip, ButtonIcon, Pill, Button, cl } from '@cogoport/components';
-import { IcMArrowNext, IcMDownload, IcMArrowRight } from '@cogoport/icons-react';
+import { IcMExclamation, IcMArrowNext, IcMDownload, IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty, getYear, getMonth, format, startCase } from '@cogoport/utils';
 
@@ -404,10 +404,28 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>Error Report</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				<Button onClick={() => downloadError(item.error_url)} themeType="secondary" size="sm">
-					<IcMDownload style={{ marginRight: '4px' }} />
-					Error Report
-				</Button>
+				{item.error_url && (
+					<div className={styles.error_button}>
+						<Tooltip
+							content={(
+								<div
+									style={{ wordBreak: 'break-word' }}
+								>
+									Download Error Report
+								</div>
+							)}
+							placement="bottom"
+						>
+							<ButtonIcon
+								onClick={() => downloadError(item.error_url)}
+								themeType="secondary"
+								icon={<IcMExclamation height="20px" width="20px" />}
+								size="sm"
+							/>
+						</Tooltip>
+					</div>
+				)}
+
 			</div>
 		),
 		id  : 'error_report',

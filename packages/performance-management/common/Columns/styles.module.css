@@ -50,3 +50,11 @@
 	background-color: #67c676;
 	border-radius: 6px;
 }
+
+.error_button {
+	:global {
+		.ui_buttonicon_container {
+			background-color: #ee3425;
+		}
+	}
+}
