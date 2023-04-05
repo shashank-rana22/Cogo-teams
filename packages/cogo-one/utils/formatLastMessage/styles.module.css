@@ -1,0 +1,32 @@
+.content {
+	max-width: 80%;
+	height: 18px;
+	margin-left: 3px;
+	overflow: hidden;
+	font-size: 12px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	:global {
+		img {
+			display: none;
+		}
+
+		p {
+			width: 100%;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		div {
+			display: none;
+		}
+	}
+}
+
+.styled_flex {
+	display: flex;
+	align-items: center;
+	margin-top: 4px;
+}

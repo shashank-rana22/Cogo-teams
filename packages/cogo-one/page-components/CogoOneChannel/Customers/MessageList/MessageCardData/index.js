@@ -6,6 +6,7 @@ import UserAvatar from '../../../../../common/UserAvatar';
 import { PLATFORM_MAPPING, ECLAMATION_SVG } from '../../../../../constants';
 import updatePin from '../../../../../helpers/updatePin';
 import dateTimeConverter from '../../../../../utils/dateTimeConverter';
+import formatLastMessage from '../../../../../utils/formatLastMessage';
 import getActiveCardDetails from '../../../../../utils/getActiveCardDetails';
 
 import styles from './styles.module.css';
@@ -22,9 +23,11 @@ function MessageCardData({ item = {}, activeCardId = '', userId = '', setActiveM
 		new_message_sent_at = '',
 		pinnedTime = {},
 		last_message = '',
+		last_message_document = {},
 		new_message_count = 0,
 	} = getActiveCardDetails(item) || {};
 
+	const lastMessageVar = last_message || last_message_document;
 	const isImportant = chat_tags?.includes('important') || false;
 	const lastActive = new Date(new_message_sent_at);
 	const checkActiveCard = activeCardId === id;
@@ -101,10 +104,7 @@ function MessageCardData({ item = {}, activeCardId = '', userId = '', setActiveM
 				</div>
 
 				<div className={styles.content_div}>
-					<div
-						className={styles.content}
-						dangerouslySetInnerHTML={{ __html: last_message || '' }}
-					/>
+					{formatLastMessage(lastMessageVar)}
 					{new_message_count > 0 && (
 						<div className={styles.new_message_count}>
 							{new_message_count > 100 ? '99+' : (
