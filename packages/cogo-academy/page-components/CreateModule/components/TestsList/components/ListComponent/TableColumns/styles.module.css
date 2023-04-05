@@ -59,3 +59,11 @@
 .status_pill {
 	height: 25px;
 }
+
+
+.content {
+	max-width: 140px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

@@ -25,7 +25,7 @@ const getControls = ({ mode }) => [
 	},
 	{
 		name        : 'topic',
-		label       : 'Select Set Topic',
+		label       : 'Set Topic',
 		type        : 'input',
 		disabled    : mode === 'view',
 		placeholder : 'Select topic name',
