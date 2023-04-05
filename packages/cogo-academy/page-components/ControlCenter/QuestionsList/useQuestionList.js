@@ -253,7 +253,7 @@ const useQuestionList = () => {
 						...filters,
 						...FILTER_MAPPING[activeList],
 						q                    : query || undefined,
-						is_feedback_positive : activeList === 'feedbacks' ? true : undefined,
+						is_feedback_positive : activeList === 'feedbacks' ? false : undefined,
 					},
 					page,
 					is_admin_view          : true,
@@ -268,7 +268,8 @@ const useQuestionList = () => {
 					author_data_required              : FILTER_MAPPING[activeList].state === 'requested',
 					requested_question_count_required : true,
 					faq_feedback_count_required       : true,
-					answer_data_required              : activeList === 'feedbacks',
+					answers_data_required             : undefined,
+					last_updated_feedback_required    : activeList === 'feedbacks',
 
 				},
 			});

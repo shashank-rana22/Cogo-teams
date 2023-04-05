@@ -1,5 +1,5 @@
 import { useSelector } from '@cogoport/store';
-import React from 'react';
+import React from "react";
 
 import FutureExpectationCards from './FutureExpectationCards';
 import Header from './Header';
