@@ -31,6 +31,6 @@ export default function getValidatedStoredValues() {
 			page,
 		},
 		activeTab,
-		scopeFilters: storedValues.scopeFilters || {},
+		scopeFilters: storedValues?.scopeFilters || {},
 	};
 }

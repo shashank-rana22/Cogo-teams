@@ -15,7 +15,6 @@ function Footer({
 	composingEmail = {},
 	COMPOSE_EMAIL,
 	handleSubmit,
-	onError,
 	action,
 	onCreate = () => {},
 	userEmailArray,
@@ -78,7 +77,7 @@ function Footer({
 
 				<Button
 					className="primary lg"
-					onClick={handleSubmit(sendMail, onError)}
+					onClick={handleSubmit(sendMail)}
 					disabled={loading}
 				>
 					{!loading ? buttonText : `${buttonText}...`}

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import { useLensRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
