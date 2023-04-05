@@ -2,7 +2,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { React, useState, useContext } from 'react';
 
 import useCreateTaskList from '../../hooks/useCreateTaskList';
-import useGetShipmentMails from '../../hooks/useGetShipmentMails';
+import useGetShipmentMails from '../../hooks/useListRpaMails';
 
 import CheckList from './CheckList';
 import HeaderComponent from './Header';

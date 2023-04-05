@@ -1,4 +1,4 @@
-import { Toggle, Input, Select, Tabs, TabPanel } from '@cogoport/components';
+import { Toggle, Input, Select, Tabs, TabPanel, Tooltip } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -23,6 +23,7 @@ function Header({
 	return (
 		<div className={styles.heading}>
 			<div className={styles.sub_heading}>
+
 				{!activeToggle ? (
 					<div className={styles.sub_heading}>
 						<Input

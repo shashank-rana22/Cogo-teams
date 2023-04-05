@@ -36,7 +36,7 @@ function useListDocuments({
 
 	useEffect(() => {
 		listDocuments();
-	}, [listDocuments]);
+	}, [listDocuments, filters]);
 
 	return {
 		loading,

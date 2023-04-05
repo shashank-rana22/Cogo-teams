@@ -8,17 +8,25 @@ import useGetListDocuments from './useListDocuments';
 const docTasks = ['upload_document', 'approve_document', 'amend_document'];
 
 const useCreateTaskList = ({ primary_service, shipment_data }) => {
-	const [filters, setFilters] = useState({ q: '', uploaoded_by_org_id: '', service_type: '' });
+	const [filters, setFilters] = useState({ q: '', uploaded_by_org_id: '', service_type: '' });
 	const [taskList, setTaskList] = useState([]);
 	const [docTypes, setDocTypes] = useState([]);
-	const { data: taskConfigs } = useGetProcess();
+
+	const { id, shipment_type } = shipment_data;
+
+	const { data: taskConfigs } = useGetProcess({
+		defaultParams: {
+			status: 'active',
+		},
+		shipment_type,
+	});
 
 	const {
 		loading,
 		list : uploadedShipmentDocuments,
 	} = useGetListDocuments({
 		filters,
-		defaultFilters : { shipment_id: shipment_data?.id },
+		defaultFilters : { shipment_id: id },
 		defaultParams  : {
 			additional_methods : ['pagination', 'organizations'],
 			page               : 1,
@@ -26,10 +34,17 @@ const useCreateTaskList = ({ primary_service, shipment_data }) => {
 			sort_by            : 'created_at',
 			sort_type          : 'desc',
 		},
-		shipment_type: shipment_data?.shipment_type,
+		shipment_type,
 	});
 
-	const { data : pendingTasks } = useGetPendingTasks({ shipment_data });
+	const { data : pendingTasks } = useGetPendingTasks({
+		defaultFilters: {
+			task_type   : 'upload_document',
+			status      : 'pending',
+			shipment_id : id,
+		},
+		shipment_type,
+	});
 
 	const getDocType = (task) => task.split('upload_').slice(-1)[0];
 
@@ -96,23 +111,21 @@ const useCreateTaskList = ({ primary_service, shipment_data }) => {
 			setDocTypes([...pushInDocTypesArr]);
 		}
 	}, [
-		JSON.stringify(listOfAllShipmentDocTypes),
-		// listOfUploadedDocumentTypes,
-		// listOfPendingTaskDocumentTypes,
-		JSON.stringify(pendingTasks),
+		listOfAllShipmentDocTypes,
+		listOfPendingTaskDocumentTypes,
+		listOfUploadedDocumentTypes,
+		pendingTasks,
 		primary_service?.trade_type,
-		// taskConfigs,
-		// taskConfigsForAllShipmentTasks,
-		JSON.stringify(uploadedShipmentDocuments?.list),
+		uploadedShipmentDocuments?.list,
+		taskConfigs,
+		taskConfigsForAllShipmentTasks,
 	]);
-
-	console.log({ taskList, docTypes });
 
 	return {
 		filters,
 		setFilters,
 		taskList,
-		completedDocs: listOfUploadedDocumentTypes,
+		completedDocs: uploadedShipmentDocuments,
 		docTypes,
 		loading,
 	};
