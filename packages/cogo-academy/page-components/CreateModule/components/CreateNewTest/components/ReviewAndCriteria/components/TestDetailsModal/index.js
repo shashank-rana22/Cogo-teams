@@ -17,7 +17,7 @@ function TestDetailsModal(props) {
 		test_validity = {}, cut_off_percentage = '']	= getValues(['test_duration',
 		'maximum_attempts', 'test_validity', 'cut_off_percentage']);
 
-	const { updateTest } = useUpdateTest();
+	const { updateTest, loading: loading_modal_state } = useUpdateTest();
 
 	const standAloneQuestions = watch((set_data || []).map(({ id }) => (`${id}q`)));
 
@@ -45,7 +45,7 @@ function TestDetailsModal(props) {
 					<Pill
 						key={question_set.id}
 						size="sm"
-						color="blue"
+						color="#CFEAED"
 					>
 						<div className={styles.q_topic}>{startCase(question_set.topic)}</div>
 					</Pill>
@@ -119,7 +119,7 @@ function TestDetailsModal(props) {
 
 			<Modal.Footer align="right">
 				<Button
-					loading={loading}
+					loading={loading_modal_state || loading}
 					size="md"
 					themeType="primary"
 					onClick={
