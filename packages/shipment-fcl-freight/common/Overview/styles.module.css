@@ -1,11 +1,12 @@
-.container{
-    padding: 16px 12px 14px 12px;
-    & > div{
-        margin-bottom: 22px;
-    }
+.container {
+	padding: 16px 12px 14px;
+
+	& > div {
+		margin-bottom: 22px;
+	}
 }
 
-.extra_details{
-    display: flex;
+.extra_details {
+	display: flex;
 	width: 100%;
 }

@@ -1,4 +1,4 @@
-.container{
+.container {
 	position: relative;
 
 	.form-item-label {
@@ -6,26 +6,26 @@
 	}
 }
 
-.modal_container{
+.modal_container {
 	padding: 15px;
 }
 
-.title{
-	font-weight: 500;
-	font-size: 18px;
-	text-transform: uppercase;
-	color: #393f70;
+.title {
 	margin-bottom: 16px;
+	font-size: 18px;
+	font-weight: 500;
+	color: #393f70;
+	text-transform: uppercase;
 }
 
-.button{
+.button {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
 	margin-top: 100px;
 
 	.core-ui-button-root {
-		text-transform: capitalize;
 		width: 140px;
+		text-transform: capitalize;
 	}
 }
