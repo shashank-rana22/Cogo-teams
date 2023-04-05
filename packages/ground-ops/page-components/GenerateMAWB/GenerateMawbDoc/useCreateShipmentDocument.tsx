@@ -94,7 +94,7 @@ const useCreateShipmentDocument = ({
 				setGenerate(false);
 				setEdit(false);
 			} else {
-				if (!edit) { setHawbDetails([...hawbDetails, { id: uuid(), isNew: true }]); }
+				if (!edit) { setHawbDetails([...hawbDetails, { id: uuid(), documentNo: null, isNew: true }]); }
 				getHawb(res?.data?.ids[0]);
 			}
 		} catch (error) {

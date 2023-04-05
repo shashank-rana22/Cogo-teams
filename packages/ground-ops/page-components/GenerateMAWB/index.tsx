@@ -235,37 +235,37 @@ function GenerateMAWB({
 		<div className={styles.container}>
 			{loading && <Loader themeType="primary" className={styles.loader} />}
 			{!viewDoc && (
-				<GenerateHeader
-					setGenerate={setGenerate}
-					setEdit={setEdit}
-					category={category}
-					activeCategory={activeCategory}
-					setActiveCategory={setActiveCategory}
-				/>
-			)}
+				<>
+					<GenerateHeader
+						setGenerate={setGenerate}
+						setEdit={setEdit}
+						category={category}
+						activeCategory={activeCategory}
+						setActiveCategory={setActiveCategory}
+					/>
 
-			{!viewDoc && (
-				<FormContainer
-					back={back}
-					setBack={setBack}
-					edit={edit}
-					setEdit={setEdit}
-					packingData={packingData}
-					fields={fields}
-					control={control}
-					errors={errors}
-					item={item}
-					setGenerate={setGenerate}
-					handleSubmit={handleSubmit}
-					activeCategory={activeCategory}
-					hawbDetails={hawbDetails}
-					setHawbDetails={setHawbDetails}
-					activeHawb={activeHawb}
-					setActiveHawb={setActiveHawb}
-					activeKey={activeKey}
-					setActiveKey={setActiveKey}
-					taskItem={taskItem}
-				/>
+					<FormContainer
+						back={back}
+						setBack={setBack}
+						edit={edit}
+						setEdit={setEdit}
+						packingData={packingData}
+						fields={fields}
+						control={control}
+						errors={errors}
+						item={item}
+						setGenerate={setGenerate}
+						handleSubmit={handleSubmit}
+						activeCategory={activeCategory}
+						hawbDetails={hawbDetails}
+						setHawbDetails={setHawbDetails}
+						activeHawb={activeHawb}
+						setActiveHawb={setActiveHawb}
+						activeKey={activeKey}
+						setActiveKey={setActiveKey}
+						taskItem={taskItem}
+					/>
+				</>
 			)}
 
 			<div className={styles.file_container}>

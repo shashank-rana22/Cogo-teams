@@ -101,7 +101,7 @@ function FormContainer({
 
 						<Button
 							onClick={() => {
-								setHawbDetails((prev) => ([...prev, { id: uuid(), isNew: true }]));
+								setHawbDetails((prev) => ([...prev, { id: uuid(), documentNo: null, isNew: true }]));
 							}}
 							themeType="secondary"
 						>
