@@ -7,19 +7,21 @@ function TermsAndConditions() {
 	return (
 		<div className={styles.container}>
 
-			<div className={styles.heading}>Terms of Use and Privacy Policy - </div>
+			<div className={styles.heading}>Terms of Use and Privacy Policy </div>
 
 			<div className={styles.content_container}>
 
-				{data.map((item) => {
+				{data.map((item, index) => {
 					const { title = '', description = '' } = item;
 
 					return (
 						<div className={styles.text_item} key={item.title}>
 							<div className={styles.title}>
-								<u>{title}</u>
-								{' '}
-								:
+								<u>
+									{index + 1}
+									{' - '}
+									{title}
+								</u>
 							</div>
 							<div className={styles.description}>{description}</div>
 						</div>
