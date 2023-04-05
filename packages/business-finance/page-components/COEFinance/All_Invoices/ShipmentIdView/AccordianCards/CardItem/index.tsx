@@ -47,6 +47,8 @@ function CardItem({
 		loading,
 		list: { fullResponse },
 		config,
+		filters,
+		hookSetters,
 	} = useListBills({
 		jobNumber,
 		amountTab,
@@ -58,7 +60,7 @@ function CardItem({
 		setCurrentOpenSID('');
 	};
 
-	const { totalRecords, pageIndex, list }: FullResponseProps = fullResponse || {};
+	const { pageIndex, list }: FullResponseProps = fullResponse || {};
 
 	const functions = {
 		renderInvoiceNumber: (item: {}, field: {}) => (
@@ -99,8 +101,12 @@ function CardItem({
 						functions={functions}
 						loading={loading}
 						page={pageIndex}
-						pageSize={totalRecords}
-						showPagination={false}
+						pageSize={10}
+						showPagination
+						handlePageChange={(val: number) => hookSetters.setFilters({
+							...filters,
+							page: val,
+						})}
 					/>
 				)}
 			</div>

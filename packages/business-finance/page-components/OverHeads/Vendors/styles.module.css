@@ -68,3 +68,10 @@
 	display: flex;
 	justify-content: center;
 }
+
+.cta_button {
+	height: 35px !important;
+	font-size: 14px !important;
+	color: white !important;
+	background: #ed3726 !important;
+}

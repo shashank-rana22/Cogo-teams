@@ -1,0 +1,73 @@
+.container {
+	display: flex;
+	align-items: flex-start;
+	width: 100%;
+
+	@media (max-width: 800px) {
+		margin-top: 50px;
+	}
+}
+
+.name_container {
+	display: flex;
+	align-items: flex-start;
+	width: 60%;
+
+	@media (max-width: 800px) {
+		width: 100%;
+	}
+}
+
+.avatar {
+	margin-right: 4px;
+	font-size: 36px;
+}
+
+.profile_picture {
+	width: 36px;
+	margin-right: 4px;
+	border-radius: 20%;
+}
+
+.name_details {
+	display: flex;
+	flex-direction: column;
+	padding: 0 8px 8px;
+	font-size: 24px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.profile_container {
+	display: flex;
+	align-items: flex-end;
+	width: 40%;
+
+	@media (max-width: 800px) {
+		flex-direction: column;
+		align-items: flex-end;
+	}
+}
+
+.progress_bar {
+	position: relative;
+	width: 50%;
+	margin-top: -8px;
+	margin-right: 32px;
+
+	:global {
+		.ui_progressbar_progress {
+			background-color: #81c0af;
+		}
+
+		.ui_progressbar_filename {
+			margin-left: 54px;
+		}
+	}
+
+	span {
+		position: absolute;
+		top: 4px;
+		left: 4px;
+	}
+}

@@ -37,7 +37,7 @@ function Layout({ children, layout }) {
 			navbar={navigationMappingAdmin}
 		>
 			<div style={{ margin: 0, padding: '24px 20px' }}>
-				{role_functions.includes('sales') && (
+				{role_functions.some((r) => ['sales', 'training'].indexOf(r) >= 0) && (
 					<ChatFAQs
 						faqNotificationData={faqData}
 						faqNotificationApiLoading={faqNotificationApiLoading}

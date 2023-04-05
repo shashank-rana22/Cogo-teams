@@ -57,6 +57,8 @@ function List({
 		general: { isMobile = false },
 	}:any = useSelector((state: object) => state);
 
+	const isListEmpty = !itemData || list?.length === 0;
+
 	return (
 		<section>
 			{showHeader && !isMobile && (
@@ -69,22 +71,32 @@ function List({
 					renderHeaderCheckbox={renderHeaderCheckbox}
 				/>
 			)}
-			<div style={bodyStyles}>
-				{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
-					<div className={styles.card_container}>
-						<CardColumn
-							fields={fields}
-							itemStyles={itemStyles}
-							singleitem={singleitem}
-							config={config}
-							loading={loading}
-							functions={commonFunctions(functions)}
-							isMobile={isMobile}
-						/>
-						{renderDropdown(singleitem)}
-					</div>
-				))}
-			</div>
+			{!isListEmpty ? (
+				<div style={bodyStyles}>
+					{(list || []).map((singleitem) => (
+						<div className={styles.card_container}>
+							<CardColumn
+								fields={fields}
+								itemStyles={itemStyles}
+								singleitem={singleitem}
+								config={config}
+								loading={loading}
+								functions={commonFunctions(functions)}
+								isMobile={isMobile}
+							/>
+							{renderDropdown(singleitem)}
+						</div>
+					))}
+				</div>
+			) : (
+				<div className={styles.no_data}>
+					<img
+						style={{ width: '30%', margin: '8%' }}
+						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no result.svg"
+						alt="no data"
+					/>
+				</div>
+			)}
 			{showPagination && (
 				<div>
 					{totalRecords ? (

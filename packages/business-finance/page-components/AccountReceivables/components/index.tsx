@@ -8,8 +8,8 @@ import Outstanding from './Outstanding';
 import styles from './styles.module.css';
 
 function AccountReceivables() {
-	const { push } = useRouter();
-	const [receivables, setReceivables] = useState<string>('dashboard');
+	const { push, query } = useRouter();
+	const [receivables, setReceivables] = useState<string>(query.active_tab || 'dashboard');
 
 	const profile = useSelector((state) => state);
 	const { profile:{ partner } } = profile || {};
@@ -17,7 +17,7 @@ function AccountReceivables() {
 
 	const handleChange = (val:string) => {
 		if (['invoices', 'defaulters', 'manageBpr'].includes(val)) {
-			window.location.href = `/${partnerId}/business-finance/account-receivables`;
+			window.location.href = `/${partnerId}/business-finance/account-receivables/${val}`;
 			return;
 		}
 		setReceivables(val);
@@ -49,7 +49,7 @@ function AccountReceivables() {
 					<TabPanel name="invoices" title="Invoices">
 						--
 					</TabPanel>
-					<TabPanel name="outstanding" title="OUTSTANDING">
+					<TabPanel name="outstanding" title="Outstanding">
 						<Outstanding />
 					</TabPanel>
 

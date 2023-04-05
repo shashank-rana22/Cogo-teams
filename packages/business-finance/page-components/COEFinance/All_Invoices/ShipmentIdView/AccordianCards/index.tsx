@@ -166,7 +166,7 @@ function AccordianCards({
 									/>
 								</div>
 								<div className={styles.profitibility_value}>
-									{quotationProfitability?.toFixed(2)}
+									{(quotationProfitability || 0.0)?.toFixed(2)}
 									%
 								</div>
 							</div>
@@ -181,7 +181,7 @@ function AccordianCards({
 									/>
 								</div>
 								<div className={styles.profitibility_value}>
-									{tentativeProfitability?.toFixed(2)}
+									{(tentativeProfitability || 0.0)?.toFixed(2)}
 									{' '}
 									%
 								</div>

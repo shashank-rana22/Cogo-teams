@@ -1298,6 +1298,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'list_shipment_cancellation_reasons',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'send_liners_invoice_email',
 		access_type  : 'private',
 		service_name : 'shipment',

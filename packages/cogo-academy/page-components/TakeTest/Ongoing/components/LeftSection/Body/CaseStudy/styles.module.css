@@ -1,0 +1,23 @@
+.container {
+	display: flex;
+}
+
+.pagination_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px;
+	margin-bottom: 44px;
+	border: 1px solid #000;
+	border-radius: 6px;
+
+	:global {
+		.ui_paginnation_number_container {
+			margin-left: 12px;
+		}
+	}
+}
+
+.main_container {
+	margin-top: 72px;
+}
