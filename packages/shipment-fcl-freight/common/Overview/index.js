@@ -3,7 +3,6 @@ import TermsAndConditions from '@cogoport/ocean-modules/components/TermsAndCondi
 
 import BLDetails from './BLDetails';
 import OverviewManageServices from './OverviewManageServices';
-// import Services from './Services';
 import styles from './styles.module.css';
 
 function Overview({ shipmentData = {} }) {
@@ -11,7 +10,6 @@ function Overview({ shipmentData = {} }) {
 		<div className={styles.container}>
 			<OverviewManageServices />
 			<BLDetails />
-			{/* <Services /> */}
 			<div className={styles.extra_details}>
 				{shipmentData?.is_cogo_assured ? (
 					<Assured shipmentData={shipmentData} />
