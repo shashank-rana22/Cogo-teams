@@ -32,6 +32,7 @@ function Form({
 							placeholder={field.placeholder}
 							params={field.params}
 							rules={field.rules}
+							size="sm"
 						/>
 						{errors[field.name] && <span>{errors[field.name].message}</span>}
 					</div>

@@ -1,5 +1,6 @@
 import { Button, Modal, Accordion } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
 import EmptyState from '../../EmptyState';
@@ -16,7 +17,7 @@ function BLDetails() {
 	const [mappingModal, setMappingModal] = useState(false);
 	const [editContainerNum, setEditContainerNum] = useState(false);
 
-	const { shipment_data, documents, refetch } = useContext(
+	const { shipment_data, documents, refetch, primary_service } = useContext(
 		ShipmentDetailContext,
 	);
 
@@ -29,14 +30,17 @@ function BLDetails() {
 		if (containerDetailsItem) containerDetailsArray.push(...containerDetailsItem);
 	});
 
+	const intialContainersCount = primary_service?.cargo_details
+		.reduce((accumulator, currentValue) => accumulator + currentValue.containers_count, 0);
+
 	const renderBlCount = (
 		<div className={styles.bl_count_container}>
 			BL and Container Details
 			<div className="bl-count">
 				(
-				{documents?.length || 0}
+				{documents?.length || primary_service?.bls_count || 0}
 				&nbsp;BL & &nbsp;
-				{containersCount || 0}
+				{containersCount || intialContainersCount || 0}
 				&nbsp;
 				Containers
 				)
@@ -76,7 +80,8 @@ function BLDetails() {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.button_div}>{renderButtons()}</div>
+			{!isEmpty(documents) ? <div className={styles.button_div}>{renderButtons()}</div> : null }
+
 			<Accordion title={renderBlCount} style={{ width: '100%' }}>
 				{!documents?.length ? (
 					<EmptyState showContent={emptyStateContent} />) : (
@@ -85,17 +90,18 @@ function BLDetails() {
 								doc?.container_details?.length >= 1
 									? (
 										<div className={styles.service_card}>
-											<Accordion title={(
-												<TitleCard
-													item={doc}
-													setOpen={setOpen}
-													open={open}
-													setActiveId={setActiveId}
-													activeId={activeId}
-													shipmentData={shipment_data}
-													containerDetails={doc?.container_details}
-												/>
-											)}
+											<Accordion
+												title={(
+													<TitleCard
+														item={doc}
+														setOpen={setOpen}
+														open={open}
+														setActiveId={setActiveId}
+														activeId={activeId}
+														shipmentData={shipment_data}
+														containerDetails={doc?.container_details}
+													/>
+												)}
 											>
 												<ContainerDetails containerDetails={doc?.container_details} />
 											</Accordion>

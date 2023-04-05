@@ -37,6 +37,7 @@ function Form({
 							valueKey={field.valueKey}
 							initialCall={false}
 							control={control}
+							size="sm"
 							placeholder={field.placeholder}
 							params={field.params}
 							rules={field.rules}

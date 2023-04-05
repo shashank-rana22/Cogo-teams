@@ -1,24 +1,3 @@
-/* stylelint-disable selector-class-pattern */
-.container {
-	&.ie {
-		.ie_booking_text {
-			color: #9ab7fe;
-		}
-
-		.core-ui-radio-radio-container.primary {
-			border: 1.5px solid black;
-		}
-
-		.core-ui-radio-radio-container.primary.checked {
-			border: 1.5px solid #034afd;
-		}
-
-		.core-ui-radio-icon.primary.checked {
-			background-color: #034afd;
-		}
-	}
-}
-
 .business_name {
 	margin: 0;
 	font-size: 14px;

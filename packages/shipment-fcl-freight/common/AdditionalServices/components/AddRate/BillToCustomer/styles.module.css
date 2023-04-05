@@ -1,4 +1,3 @@
-/* stylelint-disable selector-class-pattern */
 .container {
 	margin-bottom: 24px;
 }
@@ -10,33 +9,6 @@
 	font-weight: 600;
 	line-height: 19px;
 	color: #393f70;
-}
-
-.radio_wrapper {
-	.core-ui-radio-root {
-		width: 100%;
-		margin-bottom: 14px;
-
-		@media (max-width: 768px) {
-			width: 100%;
-		}
-	}
-
-	.core-ui-radiogroup-container {
-		display: flex;
-		flex-direction: row;
-		justify-content: flex-start;
-		width: 100%;
-		margin-bottom: 16px;
-	}
-
-	.core-ui-radio-label {
-		margin-left: 10px;
-		font-size: 14px;
-		font-weight: 400;
-		color: #393f70;
-		opacity: 1;
-	}
 }
 
 .button_container {
