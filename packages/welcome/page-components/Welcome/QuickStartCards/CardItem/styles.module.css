@@ -7,7 +7,7 @@
 	border-radius: 16px;
 
 	&:hover {
-		box-shadow: 0 4px 20px rgb(0 0 0 / 35%);
+		box-shadow: 0 4px 16px rgb(0 0 0 / 35%);
 		transition: 0.6s;
 		transform: scale(1.02);
 	}
