@@ -99,8 +99,8 @@ function Header(props) {
 						:
 						{' '}
 						<strong>
-							{ audit_data.updated_at
-								? format(audit_data.updated_at, 'dd MMM yyyy') : ''}
+							{ audit_data?.updated_at
+								? format(audit_data?.updated_at, 'dd MMM yyyy') : ''}
 						</strong>
 					</div>
 

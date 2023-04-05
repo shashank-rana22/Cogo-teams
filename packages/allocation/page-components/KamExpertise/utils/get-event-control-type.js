@@ -1,3 +1,5 @@
+import styles from '../components/Events/CreateEvent/AttributesPage/styles.module.css';
+
 const getEventControlType = ({ name, options }) => {
 	const CONTROL_TYPE_MAPPING = {
 		string      : { type: 'text' },
@@ -22,6 +24,13 @@ const getEventControlType = ({ name, options }) => {
 			type        : 'asyncSelect',
 			asyncKey    : 'list_locations',
 			isClearable : true,
+			renderLabel : (optionss) => (
+				<div className={styles.modified_options}>
+					<div>{optionss.name}</div>
+
+					<div className={styles.location_options_type}>{optionss.type}</div>
+				</div>
+			),
 		},
 	};
 

@@ -22,7 +22,7 @@ function EventList(props) {
 					height="250px"
 					width="400px"
 					flexDirection="column"
-					emptyText="Badges not Found"
+					emptyText="Events not Found"
 					textSize="20px"
 				/>
 			</div>
