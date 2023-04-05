@@ -1,11 +1,11 @@
-.container{
+.container {
 	height: fit-content;
-	margin: 22px 22px 0px 0px;
+	margin: 22px 22px 0 0;
 	border: 1px solid #f9da7f;
 	border-radius: 4px;
 
 	&.cancelled {
-		border: 1px solid #333333;
+		border: 1px solid #333;
 	}
 
 	&.completed {
@@ -26,7 +26,7 @@
 }
 
 .last {
-	margin-bottom: 0px;
+	margin-bottom: 0;
 }
 
 .other {

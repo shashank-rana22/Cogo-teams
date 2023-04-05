@@ -1,8 +1,0 @@
-.styled_modal{
-    :global{
-        .ui_modal_body_container{
-            height: 150px !important;
-        }
-    }
-    
-}

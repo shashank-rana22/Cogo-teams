@@ -17,7 +17,6 @@
 .element {
 	padding: 4px;
 
-	/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 	:global {
 		.ui_select_input_placeholder {
 			font-size: 14px;

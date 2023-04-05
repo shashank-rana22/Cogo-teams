@@ -1,13 +1,13 @@
-.container{
+.container {
 	display: flex;
 }
 
-.flex_col{
+.flex_col {
 	width: 300px;
 	margin: 6px 12px;
 }
 
-.skeleton{
+.skeleton {
 	width: 300px;
-	margin: 20px; 
+	margin: 20px;
 }

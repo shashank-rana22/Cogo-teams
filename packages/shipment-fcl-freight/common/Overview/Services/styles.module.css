@@ -1,36 +1,35 @@
-.container{ 
+.container {
 	display: flex;
-    background-color: #fff; 
 	justify-content: space-between;
+	background-color: #fff;
 }
-.service_container{
+
+.service_container {
 	display: flex;
 	width: 100%;
-	padding: 0px 22px 29px 22px;
+	padding: 0 22px 29px;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
 		width: 100%;
-		margin: 0px 10px 0px 30%;
+		margin: 0 10px 0 30%;
 	}
-
 	@media (max-width: 768px) {
-		margin: 0px 0 0px 0;
 		width: 100%;
+		margin: 0;
 	}
-
 }
 
-.title{
-	font-weight: 600;
+.title {
 	font-size: 16px;
+	font-weight: 600;
 	line-height: 19px;
 	color: #393f70;
-} 
+}
 
 .upselling {
-	display: flex; 
-	flex-direction: column; 
-	width: 30% ; 
+	display: flex;
+	flex-direction: column;
 	gap: 12px;
+	width: 30%;
 }

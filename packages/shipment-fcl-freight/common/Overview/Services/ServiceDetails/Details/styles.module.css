@@ -1,11 +1,11 @@
-.container{
-	min-height: fit-content; 
-	max-height: 250px; 
-	border-radius: 4px; 
+.container {
+	min-height: fit-content;
+	max-height: 250px;
 	overflow-y: auto;
+	border-radius: 4px;
 
 	&.cancelled {
-		border: 1px solid #333333;
+		border: 1px solid #333;
 	}
 
 	&.completed {
@@ -25,9 +25,9 @@
 	}
 }
 
-.heading{
-	font-weight: 500;
+.heading {
 	font-size: 14px;
+	font-weight: 500;
 	line-height: 20px;
 	color: #363e6e;
 
@@ -36,10 +36,10 @@
 	}
 }
 
-.container_heading{
+.container_heading {
+	padding: 12px 16px 10px 20px;
 	background: #fef6df;
 	border-radius: 4px;
-	padding: 12px 16px 10px 20px;
 }
 
 .cancelled {
@@ -58,29 +58,29 @@
 	background: #f6f5fe;
 }
 
-.expander{
-	margin: 10px;
-	background: #fef6df;
-	color: #363e6e;
-	font-size: 14px;
-	font-weight: 500;
+.expander {
 	display: flex;
 	justify-content: space-between;
 	padding: 4px;
+	margin: 10px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #363e6e;
 	cursor: pointer;
+	background: #fef6df;
 	border-radius: 4px;
 }
 
-.card{
-	display: 'flex';
-	flex-direction: 'column';
+.card {
+	display: "flex";
+	flex-direction: "column";
 }
 
-.card_details{
+.card_details {
 	padding: 4px;
 }
 
-.card_sub_details{
+.card_sub_details {
 	padding: 4px;
 	font-size: 10px;
 }
