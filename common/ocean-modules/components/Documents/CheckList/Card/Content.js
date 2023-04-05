@@ -37,15 +37,13 @@ function Content({
 					{isChecked ? (
 						<div className={styles.gap}>
 							<div className={styles.upload_info}>
-								Uploaded By :
-								{' '}
+								Uploaded By:&nbsp;
 								{extraItem?.uploaded_by_user?.name
 									|| extraItem?.uploaded_by_org?.business_name}
 
 							</div>
 							<div className={styles.upload_info}>
-								Uploaded On :
-								{' '}
+								Uploaded On:&nbsp;
 								{format(extraItem?.created_at, 'dd MMM yyyy')}
 
 							</div>
@@ -60,8 +58,7 @@ function Content({
 						<div className={styles.gap}>
 							{item?.pendingItem ? (
 								<div className={styles.upload_info}>
-									Due On :
-									{' '}
+									Due On:&nbsp;
 									{format(item?.pendingItem?.deadline, 'dd MMM yyyy')}
 
 								</div>
