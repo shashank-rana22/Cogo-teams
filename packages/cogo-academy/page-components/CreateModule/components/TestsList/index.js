@@ -137,9 +137,15 @@ function TestsList({ activeTab, setActiveTab }) {
 											if (activeTab === 'tests') {
 												setInput(value);
 												debounceQuery(value);
+												if (params.page !== 1) {
+													setParams((prev) => ({ ...prev, page: 1 }));
+												}
 											} else {
 												setquestionListInput(value);
 												questionListDebounceQuery(value);
+												if (questionListParams.page !== 1) {
+													setQuestionListParams((prev) => ({ ...prev, page: 1 }));
+												}
 											}
 										}}
 										className={styles.input}
