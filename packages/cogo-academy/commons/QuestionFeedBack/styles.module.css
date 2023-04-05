@@ -1,5 +1,5 @@
 .container {
-   margin: 12px 0;
+   margin-bottom: 12px;
    padding-right: 20px;
 }
 
@@ -18,5 +18,23 @@
 .header{
     font-weight: 600;
     font-size: 20px;
-    padding-bottom:16px;
+    padding-bottom:12px;
+}
+
+.scrollable_container{
+    overflow-y: scroll;
+    height:81vh; 
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+    padding-right: 12px;
+	padding-top: 16px;
+	font-size: 13px;
+	cursor: pointer;
+}
+
+.pills_container{
+    padding-bottom: 8px;
 }

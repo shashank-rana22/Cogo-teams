@@ -20,7 +20,7 @@ function FeedBackContent({ feedback, onClickEdit = () => {}, id, source = '' }) 
 
 	return (
 		<div>
-			<p className={styles.time_stamp}>{formatdated}</p>
+			<div className={styles.time_stamp}>{formatdated}</div>
 
 			<div className={styles.card}>
 				<div className={styles.card_header}>
