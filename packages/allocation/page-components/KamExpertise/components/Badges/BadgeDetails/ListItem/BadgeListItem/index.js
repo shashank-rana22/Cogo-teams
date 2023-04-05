@@ -67,12 +67,12 @@ function BadgeListItem(props) {
 							</p>
 						</div>
 
-						<div className={styles.conditions}>
+						<div className={styles.events}>
 							Events :
 							{' '}
 							{
 								badge_condition_name.map((item) => (
-									<Pill color="#edd7a9" key={item?.id}>
+									<Pill color="#cfeaed" key={item?.id}>
 										{item?.condition_name || ''}
 									</Pill>
 								))
