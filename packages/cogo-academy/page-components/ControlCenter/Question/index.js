@@ -433,7 +433,7 @@ function CreateFAQ() {
 			</div>
 
 			<div className={styles.feedback_container}>
-				<QuestionFeedBack id={id} />
+				<QuestionFeedBack id={id} source="create" />
 			</div>
 
 		</div>

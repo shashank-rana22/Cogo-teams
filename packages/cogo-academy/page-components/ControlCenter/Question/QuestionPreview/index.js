@@ -173,7 +173,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 						</Button>
 					)}
 			</div>
-			<QuestionFeedBack id={id} />
+			<QuestionFeedBack id={id} onClickEdit={onclickEdit} />
 
 		</div>
 	);

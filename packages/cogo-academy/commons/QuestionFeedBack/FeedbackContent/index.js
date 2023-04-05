@@ -3,7 +3,7 @@ import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function FeedBackContent({ feedback }) {
+function FeedBackContent({ feedback, onClickEdit = () => {}, id, source = '' }) {
 	const {
 		suggested_answer = '',
 		suggested_question_abstract = '',
@@ -52,7 +52,15 @@ function FeedBackContent({ feedback }) {
 
 						</div>
 						{suggested_answer
-						&& <div className={styles.anchor_text}>Edit Answer</div>}
+						&& source !== 'create' && (
+							<div
+								className={styles.anchor_text}
+								role="presentation"
+								onClick={() => onClickEdit(id)}
+							>
+								Edit Answer
+							</div>
+						)}
 
 					</div>
 

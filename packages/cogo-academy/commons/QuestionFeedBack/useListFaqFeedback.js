@@ -18,7 +18,7 @@ const useListfaqFeedback = ({ id }) => {
 
 	const fetchListFaqFeedback = useCallback(() => {
 		try {
-			trigger(params);
+			trigger({ params });
 		} catch (e) {
 			Toast.error(e?.message);
 		}

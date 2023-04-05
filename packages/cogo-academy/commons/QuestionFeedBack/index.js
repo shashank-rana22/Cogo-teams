@@ -6,7 +6,7 @@ import FeedBackContent from './FeedbackContent';
 import styles from './styles.module.css';
 import useListfaqFeedback from './useListFaqFeedback';
 
-function QuestionFeedBack({ id }) {
+function QuestionFeedBack({ id, source = '', onClickEdit = () => {} }) {
 	const { list } = useListfaqFeedback({ id });
 
 	let feedbackOnquestion = 0;
@@ -36,7 +36,7 @@ function QuestionFeedBack({ id }) {
 	};
 
 	return (!isEmpty(list) && (
-		<div className={styles.container}>
+		<div className={styles.container} style={{ width: source === 'create' ? '100%' : '80%' }}>
 			<div className={styles.header}>Feedbacks on this question</div>
 			<div className={styles.pills_container}>
 				{Object.keys(mapping).map((ele) => (
@@ -50,7 +50,12 @@ function QuestionFeedBack({ id }) {
 
 			{(list || []).map((element) => (
 				<div>
-					<FeedBackContent feedback={element} />
+					<FeedBackContent
+						feedback={element}
+						onClickEdit={onClickEdit}
+						id={id}
+						source={source}
+					/>
 				</div>
 			))}
 
