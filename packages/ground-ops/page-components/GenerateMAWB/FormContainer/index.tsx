@@ -97,10 +97,10 @@ function FormContainer({
 									className={hawbItem.id
                                 === activeHawb.id ? styles.hawb_container_click : styles.hawb_container}
 								>
-									{!hawbItem.documentNo
+									{!hawbItem?.documentNo
 									&& `HAWB - ${hawbItem.id}`}
 									{' '}
-									{hawbItem.documentNo}
+									{hawbItem?.documentNo}
 								</div>
 							</div>
 						))}
