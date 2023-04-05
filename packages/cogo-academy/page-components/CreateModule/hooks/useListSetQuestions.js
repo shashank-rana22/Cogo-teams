@@ -2,7 +2,14 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState, useCallback } from 'react';
 
-function useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKeysSaved, setEditDetails, query, mode }) {
+function useListSetQuestions({
+	questionSetId,
+	setSavedQuestionDetails,
+	setAllKeysSaved,
+	setEditDetails,
+	query,
+	sortFilter,
+}) {
 	const [page, setPage] = useState(1);
 
 	const [{ loading, data }, trigger] = useRequest({
@@ -17,6 +24,7 @@ function useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKey
 					id         : questionSetId,
 					page_limit : 5,
 					page       : pageToShow || page,
+					...sortFilter,
 					filters    : {
 						q      : query,
 						status : 'active',
@@ -24,13 +32,8 @@ function useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKey
 				},
 			});
 
-			if (!res?.data?.total_count && isEmpty(query) && mode !== 'view') {
-				setSavedQuestionDetails([{ id: new Date().getTime(), isNew: true }]);
-				setAllKeysSaved(false);
-			} else {
-				setAllKeysSaved(true);
-				setSavedQuestionDetails(res?.data?.list || []);
-			}
+			setAllKeysSaved(true);
+			setSavedQuestionDetails(res?.data?.list || []);
 
 			if (!isEmpty(questionToShow)) {
 				setEditDetails((res?.data?.list || []).find((item) => item.id === questionToShow) || {});
@@ -39,7 +42,7 @@ function useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKey
 		} catch (err) {
 			setAllKeysSaved(true);
 		}
-	}, [mode, page, query, questionSetId, setAllKeysSaved, setEditDetails, setSavedQuestionDetails, trigger]);
+	}, [page, query, questionSetId, setAllKeysSaved, setEditDetails, setSavedQuestionDetails, trigger, sortFilter]);
 
 	useEffect(() => {
 		if (questionSetId) {
