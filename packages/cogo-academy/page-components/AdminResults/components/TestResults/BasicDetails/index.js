@@ -8,7 +8,7 @@ function BasicDetails({ basic_info_data }) {
 			label : 'Topics Covered',
 			icon  : <IcMActivePlans />,
 			renderData:
-	<div>
+	<div className={styles.topic}>
 		{basic_info_data.topics_covered.length > 0 ? (
 			<div>{basic_info_data.topics_covered.join(', ')}</div>
 		) : ('-')}

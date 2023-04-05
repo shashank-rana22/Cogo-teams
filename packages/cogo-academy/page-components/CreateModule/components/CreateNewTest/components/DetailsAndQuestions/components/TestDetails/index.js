@@ -72,6 +72,11 @@ function CreateNewTest({
 		});
 	};
 
+	const BUTTON_TEXT_MAPPING = {
+		excel : 'Save and Generate',
+		all   : 'Save',
+	};
+
 	return (
 		<div>
 			<div className={styles.header}>
@@ -106,6 +111,7 @@ function CreateNewTest({
 													control={control}
 													{...item}
 													className={styles[`element_${item.name}}`]}
+													style={{ width: '180px', height: '22px' }}
 												/>
 												{errors[item?.name]
 													? <div className={styles.error_msg}>This is required</div> : null}
@@ -120,53 +126,52 @@ function CreateNewTest({
 
 					return (
 						<div className={styles.control_container_two} key={name}>
-							<div className={styles.label}>
-								{label}
-								<sup className={styles.sup}>*</sup>
-							</div>
+							<div className={styles.row}>
+								<div className={styles.label}>
+									{label}
+									<sup className={styles.sup}>*</sup>
+								</div>
 
-							<div className={styles.control_type}>
-								<Element control={control} {...controlItem} className={styles[`element_${name}`]} />
-								{errors[name] && <div className={styles.error_msg}>This is required</div>}
+								<div className={styles.control_type}>
+									<Element
+										control={control}
+										{...controlItem}
+										className={styles[`element_${name}`]}
+									/>
+									{errors[name] && <div className={styles.error_msg}>This is required</div>}
+								</div>
 							</div>
+							{
+								name === 'select_users' && 	(
+									<div className={styles.save_btn}>
+										{isEmpty(data) && radioGroupVal && (
+											<Button
+												size="sm"
+												themeType="primary"
+												className={styles.btn}
+												loading={loading || getTestLoading}
+												onClick={
+										handleSubmit((values) => {
+											createNewTest({ data: values });
+										})
+									}
+											>
+												{BUTTON_TEXT_MAPPING[radioGroupVal]}
+											</Button>
+										)}
+									</div>
+								)
+							}
 						</div>
 					);
 				})}
-				{radioGroupVal === 'all' && isEmpty(data) && (
-					<Button
-						size="sm"
-						themeType="primary"
-						className={styles.btn}
-						loading={loading || getTestLoading}
-						onClick={
-							handleSubmit((values) => {
-								createNewTest({ data: values });
-							})
-						}
-					>
-						Save
-					</Button>
-				)}
+
 			</div>
 
 			{radioGroupVal === 'excel' && (
 				<>
 
-					{isEmpty(data) ? (
-						<Button
-							size="sm"
-							themeType="primary"
-							className={styles.btn}
-							loading={loading || getTestLoading}
-							onClick={
-							handleSubmit((values) => {
-								createNewTest({ data: values });
-							})
-						}
-						>
-							Save and Generate
-						</Button>
-					) : (
+					{!isEmpty(data) ? (
 						<p className={styles.content}>
 							You may Upload your own Excel in required
 							format
@@ -177,7 +182,7 @@ function CreateNewTest({
 							{' '}
 							<sup className={styles.sup}>*</sup>
 						</p>
-					)}
+					) : null}
 
 					<div className={styles.btn_container}>
 
