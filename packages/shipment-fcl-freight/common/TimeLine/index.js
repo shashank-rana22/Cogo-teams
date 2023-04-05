@@ -18,7 +18,7 @@ const editScheduleStates = [
 
 function Timeline() {
 	const {
-		shipment_data, primary_service, timelineLoading : loading,
+		shipment_data, primary_service, timelineLoading : loading, isGettingShipment,
 		timelineData, getShipmentTimeline,
 	} = useContext(ShipmentDetailContext);
 
@@ -39,7 +39,7 @@ function Timeline() {
 	const totalItems = (timelineData || []).length;
 	let consecutivelyCompleted = true;
 
-	if (loading) {
+	if (isGettingShipment || loading) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.list_container}>

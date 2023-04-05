@@ -1,14 +1,21 @@
 .container {
-	display: flex;
-	align-items: center;
-	padding-top: 12px;
-	font-size: 12px;
-	font-weight: 600;
-	color: #4f4f4f;
-	cursor: pointer;
-}
+    display: flex;
+    align-items: center;
+    color: #4F4F4F;
+    font-size: 12px;
+    font-weight: 600;
+    padding-top: 12px;
 
-.shipment_info {
-	width: 20%;
-	height: 10%;
+    .link {
+        cursor: pointer;
+
+        :hover {
+            text-decoration: underline;
+        }
+    }
+    .inactive {
+        > div {
+            cursor: initial;
+        }
+    }
 }
