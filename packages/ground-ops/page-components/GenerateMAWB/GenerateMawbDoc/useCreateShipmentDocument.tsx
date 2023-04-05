@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
@@ -73,6 +72,7 @@ const useCreateShipmentDocument = ({
 			setSuccess(true);
 			setHawbSuccess(false);
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [hawbSuccess]);
 
 	useEffect(() => {
@@ -82,6 +82,7 @@ const useCreateShipmentDocument = ({
 			setSuccess(false);
 			handleClick();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [success]);
 
 	const upload = async ({ payload }) => {
