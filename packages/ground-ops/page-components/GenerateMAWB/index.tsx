@@ -111,12 +111,6 @@ function GenerateMAWB({
 	}, [activeCategory, hawbListLoading]);
 
 	useEffect(() => {
-		if (hawbDetails.length > 0) {
-			setActiveHawb(hawbDetails[0]);
-		}
-	}, [hawbDetails.length]);
-
-	useEffect(() => {
 		setActiveKey('basic');
 		if (activeHawb && !activeHawb.isNew && activeCategory === 'hawb') {
 			getHawb(activeHawb.id);
