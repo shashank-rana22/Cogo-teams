@@ -20,7 +20,7 @@ function DifficultyAndTopicDistribution({ data = {}, toggleState = false }) {
 	const chart_data = toggleState ? topic_wise_data : difficulty_wise_data;
 
 	return (
-		<div style={{ display: 'flex', marginRight: '12px' }}>
+		<div style={{ display: 'flex', marginLeft: '24px', width: '20%' }}>
 			<BarChart chart_data={chart_data} yAxis="Correct Answer %" />
 		</div>
 	);

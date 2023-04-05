@@ -34,6 +34,7 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 
 	useEffect(() => {
 		if (!isEmpty(data)) {
+			setShowQuestionSet(true);
 			setIdArray((set_data || []).map((item) => item.id));
 		}
 	}, [set_data, data]);
