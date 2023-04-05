@@ -140,10 +140,11 @@
 }
 
 .sort_bottom_icon {
-	height: 4px;
+	height: 12px;
 }
 
 .sort_active {
+	margin-top: -10px;
 	color: #f68b21;
 	cursor: pointer;
 }
@@ -153,6 +154,7 @@
 }
 
 .sort_inactive {
+	margin-top: -10px;
 	color: #c0c0c0;
 	cursor: pointer;
 }

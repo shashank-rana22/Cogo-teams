@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
@@ -6,26 +5,26 @@ import styles from './styles.module.css';
 function GetSortingData({ sort, setSort }) {
 	return (
 		<div className={styles.sorting}>
-			<div style={{ marginRight: '4px' }}>Profitabillity</div>
-			<div>
-				<Button
-					themeType="tertiary"
+			<div style={{ marginRight: '8px' }}>Profitabillity</div>
+			<div style={{ marginTop: '6px' }}>
+				<div
 					onClick={() => {
 						setSort('Asc');
 					}}
+					role="presentation"
 					className={sort === 'Asc' ? styles.sort_active : styles.sort_inactive}
 				>
-					<IcMArrowRotateUp className={styles.sort_top_icon} />
-				</Button>
-				<Button
-					themeType="tertiary"
+					<IcMArrowRotateUp />
+				</div>
+				<div
 					onClick={() => {
 						setSort('Desc');
 					}}
+					role="presentation"
 					className={sort === 'Desc' ? styles.sort_active : styles.sort_inactive}
 				>
-					<IcMArrowRotateDown className={styles.sort_top_icon} />
-				</Button>
+					<IcMArrowRotateDown />
+				</div>
 
 			</div>
 		</div>
