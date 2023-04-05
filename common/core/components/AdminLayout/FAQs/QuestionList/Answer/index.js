@@ -193,7 +193,6 @@ function Answer({ topic = {}, question, setQuestion }) {
 				<div>
 					<div className={styles.question}>
 						{question?.question_abstract}
-						?
 					</div>
 				</div>
 
