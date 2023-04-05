@@ -777,11 +777,9 @@ importers:
       '@cogoport/ocean-modules': workspace:^0.1.0
       '@cogoport/request': workspace:^0.1.0
       '@cogoport/shipment-chat': workspace:^0.1.0
-      '@cogoport/shipment-fcl-freight': workspace:^0.1.0
       '@cogoport/shipment-mails': workspace:^1.0.0
       '@cogoport/store': workspace:^0.1.0
       '@cogoport/utils': ^1.2.6
-      data-store: link:@/data-store
       file-saver: ^2.0.5
       prop-types: ^15.8.1
       react: 18.2.0
@@ -798,11 +796,9 @@ importers:
       '@cogoport/ocean-modules': link:../../common/ocean-modules
       '@cogoport/request': link:../../common/request
       '@cogoport/shipment-chat': link:../../common/shipment-chat
-      '@cogoport/shipment-fcl-freight': 'link:'
       '@cogoport/shipment-mails': link:../../common/shipment-mails
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.6
-      data-store: link:@/data-store
       file-saver: 2.0.5
       prop-types: 15.8.1
       react: 18.2.0
@@ -6292,7 +6288,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -6303,7 +6299,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -6314,7 +6310,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
       synthetic-dom: 1.4.0
@@ -6326,7 +6322,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       draft-js-import-element: 1.4.0_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -6337,7 +6333,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       draft-js-import-element: 1.4.0_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
       synthetic-dom: 1.4.0
@@ -6349,7 +6345,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_react@18.2.0
+      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
       immutable: 3.8.2
     dev: false
 
