@@ -45,7 +45,7 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 
 	return (
 
-		<Modal size="lg" show={tableModal} onClose={onClose} placement="center">
+		<Modal key={tableModal} size="lg" show={tableModal} onClose={onClose} placement="center">
 			<Modal.Header title={(
 				<div className={styles.header}>
 					<IcMUpload style={{ margin: '0 4px 0 0' }} />

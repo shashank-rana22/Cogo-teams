@@ -52,14 +52,12 @@ function Filters(props) {
 						if (!Element) return null;
 
 						return (
-							<div style={{ width: `${Number(el.span) * 10}%` }} className={styles.form_group}>
-								<div className={styles.input_group}>
-									<Element
-										{...el}
-										key={el.name}
-										control={control}
-									/>
-								</div>
+							<div className={styles.form_group}>
+								<Element
+									{...el}
+									key={el.name}
+									control={control}
+								/>
 							</div>
 						);
 					})

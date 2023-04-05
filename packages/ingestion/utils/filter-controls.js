@@ -4,9 +4,8 @@ const filterControls = [
 		name                  : 'upload_date',
 		type                  : 'singleDateRange',
 		placeholder           : 'Upload Date',
-		span                  : 2.0,
+		span                  : 1.8,
 		isPreviousDaysAllowed : true,
-		style                 : { margin: '0 4px 0 0' },
 	},
 	{
 		name           : 'partner_user_id',

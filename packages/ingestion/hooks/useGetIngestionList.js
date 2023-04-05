@@ -154,12 +154,10 @@ function useGetIngestionList() {
 	];
 
 	const onPageChange = (pageNumber) => {
-		// console.log('page', pageNumber);
 		setParams((previousParams) => ({
 			...previousParams,
 			page: pageNumber,
 		}));
-		console.log('hhehehehe');
 	};
 
 	useEffect(() => { console.log('hahah', params?.page); }, [params?.page]);
