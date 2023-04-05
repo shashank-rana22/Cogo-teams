@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { IcMDownload } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import { startCase, format } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import styles from '../styles.module.css';
 
@@ -159,8 +159,6 @@ function useGetIngestionList() {
 			page: pageNumber,
 		}));
 	};
-
-	useEffect(() => { console.log('hahah', params?.page); }, [params?.page]);
 
 	return {
 		columns,

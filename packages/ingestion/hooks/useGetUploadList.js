@@ -20,8 +20,8 @@ function useGetUploadList(id) {
 		},
 	});
 
-	const downloadErrorCsv = (e) => {
-		window.open(e, '_blank');
+	const downloadErrorCsv = (_link) => {
+		window.open(_link, '_blank');
 	};
 
 	const [{ data, loading }] = useRequest({

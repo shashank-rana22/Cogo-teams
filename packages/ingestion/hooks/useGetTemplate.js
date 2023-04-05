@@ -11,7 +11,6 @@ function useGetTemplate() {
 		try {
 			const response = await trigger({ params: { service_type: e } });
 
-			// eslint-disable-next-line no-undef
 			window.open(response?.data?.template_file_url, '_blank');
 		} catch (error) {
 			Toast.error('error');
