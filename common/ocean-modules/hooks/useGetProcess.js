@@ -4,21 +4,20 @@ import { useEffect, useCallback } from 'react';
 
 import getApiErrorString from '../utils/getApiErrorString';
 
-function useGetShipmentProcess() {
+function useGetShipmentProcess({ defaultParams, shipment_type }) {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'fcl_freight/get_process',
+		url    : `${shipment_type}/get_process`,
 		method : 'GET',
+		params : {
+			...defaultParams,
+		},
 	}, { manual: true });
 
 	const getProcessConfigs = useCallback(() => {
 		(
 			async () => {
 				try {
-					await trigger({
-						params: {
-							status: 'active',
-						},
-					});
+					await trigger();
 				} catch (err) {
 					Toast.error(getApiErrorString(err));
 				}
