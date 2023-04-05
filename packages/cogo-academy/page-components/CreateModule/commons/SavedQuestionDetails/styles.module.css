@@ -7,9 +7,8 @@
 	:global {
 		.ui_table_head_row {
 			.ui_table_head_cell {
-				padding-top: 20px;
-				padding-bottom: 18px;
 				margin-bottom: 10px;
+				padding: 20px 20px 18px 40px;
 				font-size: 14px;
 				color: #000;
 				background-color: rgb(255 255 255 / 80%);
@@ -23,7 +22,7 @@
 				border-radius: 8px;
 
 				.ui_table_body_cell {
-					padding-block: 12px;
+					padding: 12px 20px 12px 40px;
 					font-size: 14px;
 					color: #221f20;
 				}
