@@ -66,7 +66,7 @@ const useSendMessage = ({ channel_type = '', activeChatCollection }) => {
 
 			await updateDoc(messageFireBaseDoc, {
 				new_message_count      : 0,
-				last_message           : { ...adminChat, communication_id: res.data.id } || {},
+				last_message_document  : { ...adminChat, communication_id: res.data.id } || {},
 				new_message_sent_at    : Date.now(),
 				new_user_message_count : old_count + 1,
 			});
