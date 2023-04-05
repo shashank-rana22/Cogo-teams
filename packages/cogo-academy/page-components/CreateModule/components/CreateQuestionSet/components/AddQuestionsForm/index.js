@@ -33,6 +33,8 @@ function AddQuestionsForm({
 	mode,
 	page_limit,
 	getTestQuestionTest,
+	setSortFilter,
+	sortFilter,
 }) {
 	const [showBulkUpload, setShowBulkUpload] = useState(false);
 
@@ -87,6 +89,8 @@ function AddQuestionsForm({
 						mode={mode}
 						page_limit={page_limit}
 						getTestQuestionTest={getTestQuestionTest}
+						setSortFilter={setSortFilter}
+						sortFilter={sortFilter}
 					/>
 				)
 			)}

@@ -2,7 +2,14 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState, useCallback } from 'react';
 
-function useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKeysSaved, setEditDetails, query }) {
+function useListSetQuestions({
+	questionSetId,
+	setSavedQuestionDetails,
+	setAllKeysSaved,
+	setEditDetails,
+	query,
+	sortFilter,
+}) {
 	const [page, setPage] = useState(1);
 
 	const [{ loading, data }, trigger] = useRequest({
@@ -17,6 +24,7 @@ function useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKey
 					id         : questionSetId,
 					page_limit : 5,
 					page       : pageToShow || page,
+					...sortFilter,
 					filters    : {
 						q      : query,
 						status : 'active',
@@ -34,7 +42,7 @@ function useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKey
 		} catch (err) {
 			setAllKeysSaved(true);
 		}
-	}, [page, query, questionSetId, setAllKeysSaved, setEditDetails, setSavedQuestionDetails, trigger]);
+	}, [page, query, questionSetId, setAllKeysSaved, setEditDetails, setSavedQuestionDetails, trigger, sortFilter]);
 
 	useEffect(() => {
 		if (questionSetId) {

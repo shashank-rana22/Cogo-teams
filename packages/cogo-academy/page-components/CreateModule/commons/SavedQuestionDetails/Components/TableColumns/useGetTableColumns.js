@@ -1,11 +1,13 @@
 import { Tooltip } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import { format, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import AnswerKey from '../AnswerKey';
 import ButtonsComponent from '../ButtonsComponent';
 import CaseAnswerType from '../CaseAnswerType';
 import CaseQuestion from '../CaseQuestion';
+import SortComponent from '../SortComponent';
 
 import styles from './styles.module.css';
 
@@ -17,6 +19,8 @@ const useGetTableColumns = ({
 	allKeysSaved,
 	mode,
 	listSetQuestions,
+	setSortFilter,
+	sortFilter,
 }) => {
 	const [caseToShow, setCaseToShow] = useState('');
 
@@ -77,6 +81,25 @@ const useGetTableColumns = ({
 				<section>
 					{startCase(difficulty_level)}
 				</section>
+			),
+		},
+		{
+			Header: (
+				<div className={styles.updated_at}>
+					<div className={styles.updated_at_text}>UPDATED AT</div>
+
+					<SortComponent
+						value="updated_at"
+						sortFilter={sortFilter}
+						setSortFilter={setSortFilter}
+					/>
+				</div>
+			),
+			id       : 'updated_at',
+			accessor : ({ updated_at }) => (
+				<div>
+					{format(updated_at, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}
+				</div>
 			),
 		},
 		{
