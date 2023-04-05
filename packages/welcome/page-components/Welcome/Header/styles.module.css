@@ -77,35 +77,3 @@
 		left: 4px;
 	}
 }
-
-.image_wrapper {
-	/* position: relative; */
-	margin-right: 6px;
-
-	/* adjust as needed */
-}
-
-.image {
-	/* position: absolute;
-	top: 60px;
-	right: 0;
-	left: 0; */
-
-	/* max-height: 100%; */
-	width: 100px;
-	height: 100px;
-	margin: auto;
-	border-radius: 30%;
-	transition: all 1s ease-out;
-	object-fit: cover;
-}
-
-.shrink {
-	opacity: 0;
-	transform: scale(0.5);
-}
-
-.expand {
-	opacity: 1;
-	transform: scale(1);
-}

@@ -20,6 +20,10 @@
 .text_item {
 	display: flex;
 	align-items: flex-start;
+
+	@media (max-width: 800px) {
+		flex-direction: column;
+	}
 }
 
 .title {
