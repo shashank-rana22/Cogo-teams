@@ -13,11 +13,23 @@ import useGetUserGroups from '../../../../../../hooks/useGetUserGroups';
 import getControls from './controls';
 import styles from './styles.module.css';
 
+const BUTTON_TEXT_MAPPING = {
+	excel : 'Save and Generate',
+	all   : 'Save',
+};
+
+const onNavigate = ({ push }) => {
+	const href = '/learning?activeTab=test_module';
+	push(href, href);
+};
+
 function CreateNewTest({
 	control, errors, data,
 	getTestLoading, setValue, watch, handleSubmit, uploadDocument, setUploadDocument,
 }) {
 	const router = useRouter();
+
+	const { push } = router;
 
 	const test_sheet_id = router.query?.test_sheet_id;
 
@@ -32,11 +44,6 @@ function CreateNewTest({
 	const cogoEntityWatch = watch('cogo_entity_id') || '';
 
 	const { audienceOptions = [] } = useGetUserGroups();
-
-	const onNavigate = () => {
-		const href = '/learning?activeTab=test_module';
-		router.push(href, href);
-	};
 
 	useEffect(() => {
 		if (!isEmpty(data)) {
@@ -72,57 +79,24 @@ function CreateNewTest({
 		});
 	};
 
-	const BUTTON_TEXT_MAPPING = {
-		excel : 'Save and Generate',
-		all   : 'Save',
-	};
-
 	return (
 		<div>
 			<div className={styles.header}>
-				<IcMArrowBack className={styles.back_icon} width={20} height={20} onClick={() => onNavigate()} />
+				<IcMArrowBack
+					className={styles.back_icon}
+					width={20}
+					height={20}
+					onClick={() => onNavigate({ push })}
+				/>
+
 				<div role="presentation" className={styles.title}>New Test</div>
 			</div>
 
 			<div className={styles.container}>
 				{controls.map((controlItem) => {
-					const { type, label, name, subControls = [] } = controlItem || {};
+					const { type, label, name } = controlItem || {};
 
 					const Element = getElementController(type);
-
-					if (name === 'select_entity_usergroups') {
-						return (
-							<div className={styles.control_container} key={name}>
-
-								<div className={`${styles.label}`}>
-									{label}
-									<sup className={styles.sup}>*</sup>
-								</div>
-
-								<div className={styles.control_type}>
-
-									{subControls.map((item) => {
-										const ElementToUse = getElementController(item.type);
-
-										return (
-											<div className={styles.input_wrapper} key={item.name}>
-												<ElementToUse
-													key={item.name}
-													control={control}
-													{...item}
-													className={styles[`element_${item.name}}`]}
-													style={{ width: '180px', height: '22px' }}
-												/>
-												{errors[item?.name]
-													? <div className={styles.error_msg}>This is required</div> : null}
-											</div>
-										);
-									})}
-								</div>
-
-							</div>
-						);
-					}
 
 					return (
 						<div className={styles.control_container_two} key={name}>

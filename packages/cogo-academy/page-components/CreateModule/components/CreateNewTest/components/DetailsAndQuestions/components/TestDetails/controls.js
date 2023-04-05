@@ -7,35 +7,31 @@ const getControls = (userOptions, isDisabled = false, isempty = false) => [
 		rules       : { required: 'This is required' },
 	},
 	{
-		name        : 'select_entity_usergroups',
-		label       : 'Select Entity & User Groups',
-		subControls : [
-			{
-				name        : 'cogo_entity_id',
-				label       : 'Select Cogo Entity:',
-				type        : 'async-select',
-				placeholder : 'Select Cogo Entity',
-				initialCall : true,
-				asyncKey    : 'partners',
-				params      : {
-					filters: {
-						entity_types : ['cogoport'],
-						status       : 'active',
-					},
-					page_limit: 10,
-				},
-				rules: { required: 'This is required' },
+		name        : 'cogo_entity_id',
+		label       : 'Select Cogo Entity',
+		type        : 'async-select',
+		placeholder : 'Select Cogo Entity',
+		initialCall : true,
+		asyncKey    : 'partners',
+		params      : {
+			filters: {
+				entity_types : ['cogoport'],
+				status       : 'active',
 			},
-			{
-				name        : 'select_user_group',
-				label       : 'Select Entity & User Groups',
-				options     : userOptions,
-				type        : 'multi-select',
-				placeholder : 'User groups',
-				disabled    : isempty,
-			},
-		],
-		type: 'select-entity-usergroups',
+			page_limit: 10,
+		},
+		rules: { required: 'This is required' },
+	},
+	{
+		name        : 'select_user_group',
+		label       : 'Select User Groups',
+		options     : userOptions,
+		type        : 'multi-select',
+		placeholder : 'User groups',
+		disabled    : isempty,
+		style       : {
+			width: '100%',
+		},
 	},
 	{
 		name    : 'select_users',
