@@ -26,6 +26,7 @@ function useVendorBankDetail({
 	} = formProps;
 
 	const ifscCode = watch('ifsc_code');
+	const tax_number = watch('tax_number');
 
 	const { payment_details, vendor_details = {} } = vendorInformation;
 
@@ -116,6 +117,11 @@ function useVendorBankDetail({
 		if (name === 'pincode_id') {
 			newControl = { ...newControl, ...pincodeOptions };
 		}
+
+		if (name === 'tax_document_url' && tax_number) {
+			newControl = { ...newControl, rules: { required: 'GST Proof is Required' } };
+		}
+
 		return { ...newControl };
 	});
 

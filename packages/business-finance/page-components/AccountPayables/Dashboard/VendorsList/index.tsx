@@ -27,7 +27,16 @@ function VendorsList({ activeEntity }:ItemProps) {
 						Top 10 Vendors
 						<div className={styles.hr} />
 					</div>
-					<Tooltip placement="top" content="Top 10 outstanding payments of vendors ">
+					<Tooltip
+						placement="top"
+						content={(
+							<div>
+								Top 10 outstanding
+								<br />
+								payments of vendors
+							</div>
+						)}
+					>
 						<div className={styles.info_icon}>
 							<IcMInfo width="16px" height="16px" />
 						</div>

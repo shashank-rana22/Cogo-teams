@@ -1,3 +1,4 @@
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import useQuestionList from '../../useQuestionList';
@@ -7,9 +8,10 @@ import styles from './styles.module.css';
 function RelatedQuestion({ query_name = '', question_abstract = '', setQuestion, question }) {
 	const { list } = useQuestionList({ query_name, question });
 
+	const uniqueQuestion = (list || []).find((ele) => (ele?.question_abstract !== question_abstract)) || {};
 	return (
 		<div style={{ paddingTop: '20px' }}>
-			{(list || []).length > 1 ? (
+			{(list || []).length > 1 && !isEmpty(uniqueQuestion) ? (
 				<span className={styles.related_question}>Related Questions</span>
 			) : null}
 

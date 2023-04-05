@@ -20,7 +20,7 @@ export const getControls = ({ countryOptions = {}, cityOptions = {} }) => [
 	{
 		name            : 'registration_proof_url',
 		showLabel       : false,
-		label           : 'Upload Tax Document Proof (Pan/GST Certificate)',
+		label           : 'Upload Tax Document Proof (PAN)',
 		style           : { flexBasis: '100%' },
 		type            : 'file',
 		themeType       : 'secondary',

@@ -37,7 +37,7 @@ const useGetOrgOutstanding = ({ formFilters }: GetOrgOutstanding) => {
 		search, entityCode, organizationSerialId, pageLimit, page, q, sageId, tradePartySerialId,
 	} = outStandingFilters || {};
 
-	const { salesAgentId, creditControllerId, companyType } = formFilters;
+	const { kamId, salesAgentId, creditControllerId, companyType } = formFilters;
 
 	const { order, key } = orderBy || {};
 
@@ -69,6 +69,7 @@ const useGetOrgOutstanding = ({ formFilters }: GetOrgOutstanding) => {
 						pageLimit,
 						salesAgentId         : salesAgentId || undefined,
 						creditControllerId   : creditControllerId || undefined,
+						kamId                : kamId || undefined,
 						companyType          : companyType || undefined,
 						entityCode           : entityCode || undefined,
 						organizationSerialId : organizationSerialId || undefined,
@@ -83,7 +84,7 @@ const useGetOrgOutstanding = ({ formFilters }: GetOrgOutstanding) => {
 		};
 		refetch();
 	}, [entityCode, companyType, creditControllerId, orderBy, salesAgentId, trigger,
-		organizationSerialId, page, pageLimit, sageId, tradePartySerialId, q, key, order]);
+		organizationSerialId, page, pageLimit, sageId, tradePartySerialId, q, key, order, kamId]);
 
 	useEffect(() => {
 		const resetQuery = {

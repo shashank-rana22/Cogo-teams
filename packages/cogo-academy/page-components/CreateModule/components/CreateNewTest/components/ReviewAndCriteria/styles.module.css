@@ -1,0 +1,122 @@
+.header {
+	display: flex;
+	align-items: center;
+	margin-top: 28px;
+	margin-bottom: 16px;
+}
+
+.title {
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.back_icon {
+	cursor: pointer;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.subcontainer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	width: 100%;
+	height: 100px;
+	background: rgb(255 255 255 / 40%);
+	border-radius: 6px;
+}
+
+.label {
+	width: 15%;
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.topic {
+	display: flex;
+	flex-direction: column;
+	font-size: 14px;
+	color: #4f4f4f;
+	text-align: center;
+}
+
+.subtopic {
+	padding-top: 20px;
+	color: #4f4f4f;
+}
+
+.names {
+	font-weight: 600;
+	color: #000;
+}
+
+.entity {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+
+.label_entity {
+	padding-top: 20px;
+	font-size: 14px;
+	color: #4f4f4f;
+}
+
+.entity_name {
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.topic_pill_container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.btn_container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-top: 40px;
+}
+
+.btn_cont_float {
+	justify-content: flex-end;
+}
+
+.btn {
+	width: fit-content;
+}
+
+.instruction {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+.add_icon {
+	width: fit-content;
+	cursor: pointer;
+}
+
+.instruction_input {
+	max-width: 90%;
+}
+
+.instructions {
+	margin-top: 50px;
+}
+
+.err_msg {
+	margin-bottom: 30px;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 0px;
+	color: #cb6464;
+}

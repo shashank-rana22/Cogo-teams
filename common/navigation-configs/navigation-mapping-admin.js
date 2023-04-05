@@ -69,6 +69,17 @@ const navigationMappingAdmin = {
 		possible_apis : [],
 		module_type   : 'dashboards',
 	},
+	welcome: {
+		key           : 'welcome',
+		title         : 'Welcome',
+		href          : '/v2/welcome',
+		as            : '/v2/welcome',
+		type          : 'link',
+		icon          : IcMDashboard,
+		main_apis     : [],
+		possible_apis : [],
+		module_type   : 'dashboards',
+	},
 	channel_partner_dashboard: {
 		key           : 'channel_partner_dashboard',
 		title         : 'Dashboard',
@@ -2033,12 +2044,12 @@ const navigationMappingAdmin = {
 		options   : [
 			{
 				key           : 'cogo_academy-create_faq',
-				title         : 'Creator Management System',
-				href          : '/v2/learning/faq/create',
-				as            : '/v2/learning/faq/create',
+				title         : 'Control Center',
+				href          : '/v2/learning',
+				as            : '/v2/learning',
 				type          : 'link',
 				main_apis     : [],
-				possible_apis : apis.create_faq,
+				possible_apis : [...apis.create_faq, ...apis.create_test_set],
 			},
 			{
 				key           : 'cogo_academy-faq',
@@ -2048,6 +2059,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.faq,
+			},
+			{
+				key           : 'cogo_academy-tests',
+				title         : 'Assessment Module',
+				href          : '/v2/learning/tests/dashboard',
+				as            : '/v2/learning/tests/dashboard',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.tests,
 			},
 			{
 				key           : 'cogo_academy-announcements',

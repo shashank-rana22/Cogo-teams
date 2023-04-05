@@ -36,7 +36,7 @@ export const getControls = ({ country_id = '' }) => [
 	{
 		name            : 'registration_proof_url',
 		showLabel       : false,
-		label           : 'Upload Tax Document Proof',
+		label           : 'Upload Tax Document Proof (PAN)',
 		style           : { flexBasis: '99%' },
 		type            : 'file',
 		themeType       : 'secondary',

@@ -31,6 +31,7 @@ function useVendorBankDetail({
 	} = formProps;
 
 	const ifscCode = watch('ifsc_code');
+	const tax_number = watch('tax_number');
 
 	const [{ loading: getBankDetailsLoading }, triggerGetBankDetails] = useRequest({
 		url    : '/get_bank_details',
@@ -112,6 +113,10 @@ function useVendorBankDetail({
 				flexBasis: '44%',
 			},
 		};
+
+		if (name === 'tax_document_url' && tax_number) {
+			newControl = { ...newControl, rules: { required: 'GST Proof is Required' } };
+		}
 
 		return {
 			...newControl,
