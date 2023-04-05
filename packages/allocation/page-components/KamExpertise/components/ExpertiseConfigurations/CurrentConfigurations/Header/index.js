@@ -10,9 +10,10 @@ import Published from './ModalComponents/Published';
 import ModalFooter from './ModalFooter';
 import styles from './styles.module.css';
 
-function Draft({ setMode = () => {}, setShowModal = () => {} }) {
+function Draft({ setMode = () => {}, setShowModal = () => {}, scrollDraftRef = () => {} }) {
 	setShowModal(false);
 	setMode('initial-mode');
+	scrollDraftRef();
 	Toast.success('New Draft Loaded');
 }
 
@@ -31,6 +32,7 @@ function Header(props) {
 		refetch,
 		expertiseRefetch,
 		cardRefetch,
+		scrollDraftRef,
 	} = props;
 
 	const {
@@ -52,6 +54,7 @@ function Header(props) {
 		[SAVED_DRAFT]: {
 			setMode,
 			setShowModal,
+			scrollDraftRef,
 		},
 		[NEW_VERSION]: {
 			setMode,

@@ -30,6 +30,8 @@ function ViewAllConfigs() {
 		list = [],
 		configCardLoading,
 		cardRefetch,
+		draftRef,
+		scrollDraftRef,
 	} = useGetKamExpertiseCurrentConfig({ type: ['draft', 'live', 'expired'] });
 
 	const { kamConfigDetails, levelLoading, refetch } = useGetKamExpertiseConfig();
@@ -80,9 +82,10 @@ function ViewAllConfigs() {
 					refetch={refetch}
 					expertiseRefetch={expertiseRefetch}
 					cardRefetch={cardRefetch}
+					scrollDraftRef={scrollDraftRef}
 				/>
 
-				<div className={styles.tab_list}>
+				<div className={styles.tab_list} ref={draftRef}>
 					<Tabs activeTab={activeConfigTab} themeType="secondary" onChange={setActiveConfigTab}>
 						{Object.values(TAB_PANEL_MAPPING).map((item) => {
 							const { name = '', title = '', Component } = item;
