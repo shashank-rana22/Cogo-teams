@@ -80,7 +80,7 @@ function EventListItem({ data, index, setEventListData }) {
 								size="lg"
 								color="#FEF3E9"
 							>
-								{COMPLETION_MAPPING[data.event_state_on || '']}
+								{COMPLETION_MAPPING[data.event_state_on] || 'Event'}
 							</Pill>
 						</span>
 

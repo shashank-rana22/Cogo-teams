@@ -1,5 +1,4 @@
 import { Input, Table } from '@cogoport/components';
-import React from 'react';
 
 import CONFIGURATION_FILTER_TABLE_COLUMNS from '../../../../../../constants/configuration-filter-table-columns';
 
@@ -29,7 +28,7 @@ function Published({ setSelectedVersion = () => {}, list, versionName, setVersio
 				placeholder="Enter Draft Name"
 				style={{ marginBottom: '16px' }}
 				value={versionName}
-				onChange={(value) => { setVersionName(value); }}
+				onChange={(value) => setVersionName(value)}
 			/>
 
 			<Table

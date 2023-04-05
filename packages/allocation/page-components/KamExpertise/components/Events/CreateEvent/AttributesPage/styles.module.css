@@ -113,6 +113,10 @@
 	justify-content: flex-end;
 }
 
+.tooltip_text {
+	word-break: break-word;
+}
+
 .location_options_type{
 	color: #4f4f4f;
 	font-size: 8px;

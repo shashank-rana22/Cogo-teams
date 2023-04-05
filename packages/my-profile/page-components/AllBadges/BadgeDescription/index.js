@@ -43,7 +43,7 @@ function BadgeDescription(props) {
 				</div>
 
 				<div>
-					<Placeholder width="100%" height="40px" margin="16px" />
+					<Placeholder width="100%" height="40px" margin="8px 0px 0px 0px" />
 				</div>
 			</div>
 		);
