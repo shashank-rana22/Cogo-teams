@@ -1,20 +1,22 @@
-.form_container{
-    display: flex;
-    flex-direction: column;
-  
-}
-.form_item_container{
-    width: 60%;
-    margin: 6px 0px;
-}
-.actions{
-    display: flex;
-}
-.cancel{
-    margin-right:8px
+.form_container {
+	display: flex;
+	flex-direction: column;
 }
 
-.errors{
-    color: red;
-    font-size: 12px;
+.form_item_container {
+	width: 60%;
+	margin: 6px 0;
+}
+
+.actions {
+	display: flex;
+}
+
+.cancel {
+	margin-right: 8px;
+}
+
+.errors {
+	font-size: 12px;
+	color: red;
 }

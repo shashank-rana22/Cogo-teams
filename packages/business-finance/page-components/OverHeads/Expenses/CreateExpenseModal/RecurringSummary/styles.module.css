@@ -1,0 +1,23 @@
+.header {
+	width: 8%;
+	margin-top: 4px;
+	border-bottom: 2px solid #ee3425;
+}
+
+.container {
+	margin: 20px;
+}
+
+.section {
+	min-width: 256px;
+	margin: 10px 20px 10px 0;
+}
+
+.value {
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.title {
+	font-size: 14px;
+}

@@ -1,4 +1,5 @@
-.cargo_details_container{
+/* stylelint-disable selector-class-pattern */
+.cargo_details_container {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
@@ -14,6 +15,6 @@
 }
 
 .more_details {
-	color: #F68B21;
 	font-size: var(--font-size-sm);
+	color: #f68b21;
 }

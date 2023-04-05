@@ -1,29 +1,27 @@
 .main {
 	display: flex;
-	color: #393f70;
 	gap: 12px;
 	font-weight: 500;
-	font-size: 14px;
+	color: #393f70;
 }
 
- .gap {
+.gap {
 	display: flex;
 	flex-direction: column;
 	gap: 2px;
 }
 
- .heading {
+.heading {
 	font-weight: 500;
-	font-size: 14px;
 	line-height: 18px;
 	color: #393f70;
 }
 
- .single_item {
+.single_item {
+	position: relative;
 	display: flex;
 	gap: 16px;
-	padding: 4x 16px 6px;
 	align-items: center;
-	position: relative;
+	padding: 4px 16px 6px;
 	margin-bottom: 8px;
 }

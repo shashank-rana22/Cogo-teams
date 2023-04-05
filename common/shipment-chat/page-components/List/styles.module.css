@@ -1,90 +1,96 @@
 .container {
-	width: 32%;
 	position: relative;
+	width: 32%;
 	overflow: hidden;
-	transition: all 0.3s;
 	border-right: 1px solid #e0e0e0;
+	transition: all 0.3s;
 }
 
-.list_container{
-	overflow: auto;
-	background: #ffffff;
+.list_container {
 	height: 367px;
+	overflow: auto;
+	background: #fff;
 
 	.colored {
-		background: #F8F2E7;
+		background: #f8f2e7;
 	}
 }
 
-.custom_loader{
+.custom_loader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	margin-top: 4px;
 	font-size: 16px;
 	font-weight: 500;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: #ff0000;
+	color: #f00;
 }
 
-.initial_state{
+.initial_state {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	width: 68%;
 }
 
 .card {
-	padding: 12px 24px;
-	border-bottom: 1px solid #e0e0e0;
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
+	padding: 12px 24px;
 	cursor: pointer;
+	border-bottom: 1px solid #e0e0e0;
 }
 
-.card_item{
+.card_item {
 	display: flex;
 	flex-direction: column;
 }
 
 .serial_id {
-	font-weight: 600;
-	font-size: 14px;
-	color: #403f3f;
 	display: flex;
 	align-items: center;
+	font-size: 14px;
+	font-weight: 600;
+	color: #403f3f;
 }
 
 .updated_at {
-	font-weight: 500;
 	font-size: 10px;
+	font-weight: 500;
 	line-height: 16px;
 	color: #918c8c;
 }
 
 .circle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	width: 20px;
 	height: 18px;
-	background: #EE3425;
-	border-radius: 5px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: #FEF3E9;
-	font-weight: 700;
-	font-size: 12px;
 	padding: 0 2px;
+	font-size: 12px;
+	font-weight: 700;
+	color: #fef3e9;
+	background: #ee3425;
+	border-radius: 5px;
 }
 
 .input_styles {
 	:global {
-		.ui_input_container.ui_ps_size_md{
+		.ui_input_container.ui_ps_size_md {
 			height: 28px !important;
 		}
 
 		.ui_input_control {
-			font-size: 14px;
 			height: 28px;
+			font-size: 14px;
 		}
 	}
+}
+
+.text {
+	font-size: 18px;
+	font-weight: 600;
 }

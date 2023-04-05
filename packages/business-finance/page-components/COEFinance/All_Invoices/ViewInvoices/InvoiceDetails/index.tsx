@@ -14,6 +14,7 @@ interface BillInterFace {
 	grandTotal: number;
 	billCurrency: string;
 	id?: string;
+	recurringState?:string,
 	billType: string;
 	isProforma: boolean;
 }

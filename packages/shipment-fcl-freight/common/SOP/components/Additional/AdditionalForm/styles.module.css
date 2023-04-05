@@ -1,60 +1,62 @@
-.form_container{
-    margin-bottom: 10px;
+.form_container {
+	margin-bottom: 10px;
 }
 
-.field_array_container{
-    margin: 4px 0px;
-    &:not(:first-child){
-        border-top:1px solid black;
-    }
-}
-.form_item_container{
-    margin: 6px 0px;
+.field_array_container {
+	margin: 4px 0;
+
+	&:not(:first-child) {
+		border-top: 1px solid black;
+	}
 }
 
-.row{
-    display: flex;
-    justify-content: space-between;
+.form_item_container {
+	margin: 6px 0;
 }
 
-.row>div{
-    width: 49%;
+.row {
+	display: flex;
+	justify-content: space-between;
 }
 
-.form_action{
-    display: flex;
-    justify-content: flex-end;
+.row > div {
+	width: 49%;
 }
 
-.cancel{
-    margin-right: 8px;
+.form_action {
+	display: flex;
+	justify-content: flex-end;
 }
 
-.delete_content{
-    color: red;
-    display: flex;
-    align-items: center;
-    font-weight: 600;
+.cancel {
+	margin-right: 8px;
 }
 
-.add_container{
-    display: flex;
-    justify-content: center;
+.delete_content {
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+	color: red;
 }
 
-.add_content{
-    color: black;
-    display: flex;
-    align-items: center;
-    font-size: 16px;    
+.add_container {
+	display: flex;
+	justify-content: center;
 }
 
-.errors{
-    color: red;
-    font-size: 12px;
+.add_content {
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	color: black;
 }
 
-.form_label{
-    font-weight: 600;
-    font-size: 12px;
+.errors {
+	font-size: 12px;
+	color: red;
+}
+
+.form_label {
+	font-size: 12px;
+	font-weight: 600;
 }

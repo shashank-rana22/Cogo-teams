@@ -1,22 +1,23 @@
 import { Button } from '@cogoport/components';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
+import useGetSubsidiaryServiceRateCards from '../../../../../../hooks/useGetSubsidiaryServiceRateCards';
 import CardList from '../../../../../CardList';
 import EmptyState from '../../../../../EmptyState';
 
 import styles from './styles.module.css';
-import useRequestRates from './useRequestRates';
 import fields from './viewPriceFields';
 
-function ViewPrice({ showPrice, setAddRate, setShowPrice }) {
-	const { data, loading } = useRequestRates({
+function ViewPrice({ showPrice, setShowPrice }) {
+	const { apiData = [], loading } = useGetSubsidiaryServiceRateCards({
 		item: showPrice?.item,
 	});
 
-	const line_items = [];
+	const line_items = useMemo(() => [], []);
+
 	useEffect(() => {
 		(async () => {
-			data?.list.forEach((items) => {
+			apiData?.list?.forEach((items) => {
 				items?.validities.forEach((validity) => {
 					line_items.push({
 						validity_start : validity?.validity_start,
@@ -27,11 +28,11 @@ function ViewPrice({ showPrice, setAddRate, setShowPrice }) {
 					});
 				});
 			});
-			setShowPrice({ ...showPrice, line_items });
+			setShowPrice((p) => ({ ...p, line_items }));
 		})();
-	}, [loading]);
+	}, [loading, setShowPrice, apiData?.list, line_items]);
 
-	const field = fields(showPrice?.item, setAddRate);
+	const field = fields(showPrice?.item);
 	return (
 		<div className={styles.container}>
 			{!(showPrice?.line_items || []).length && !loading ? (
@@ -39,15 +40,14 @@ function ViewPrice({ showPrice, setAddRate, setShowPrice }) {
 			) : (
 				<CardList
 					fields={field}
-					data={showPrice?.line_items || []}
+					apiData={showPrice?.line_items || []}
 					loading={loading}
 					showPagination={false}
+					numberOfLoader={3}
 				/>
 			)}
 
-			<Button>
-				<Button onClick={() => setShowPrice(null)}>Cancel</Button>
-			</Button>
+			<Button onClick={() => setShowPrice(false)}>Cancel</Button>
 		</div>
 	);
 }

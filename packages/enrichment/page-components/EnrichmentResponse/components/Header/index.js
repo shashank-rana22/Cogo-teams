@@ -1,6 +1,6 @@
 import { Breadcrumb, Placeholder } from '@cogoport/components';
 import { useRouter, Link } from '@cogoport/next';
-import { format } from '@cogoport/utils/';
+import { startCase, format, isEmpty } from '@cogoport/utils';
 
 import useHeaderStats from '../../hooks/useHeaderStats';
 
@@ -15,6 +15,8 @@ function Header() {
 	const { query = {} } = useRouter();
 
 	const { requestData = {}, loading } = useHeaderStats();
+
+	const { organization = {}, lead_organization = {}, created_at = '' } = requestData;
 
 	if (loading) {
 		return <Placeholder height="60px" width="100%" />;
@@ -43,7 +45,11 @@ function Header() {
 						</div>
 
 						<div className={styles.value}>
-							{requestData.organization?.[key] || '-'}
+							{isEmpty(lead_organization) ? (
+								startCase(organization?.[key] || '-')
+							) : (
+								startCase(lead_organization?.[key] || '-')
+							)}
 						</div>
 					</div>
 				))}
@@ -52,7 +58,7 @@ function Header() {
 					<div className={styles.info_label}>Enrichment Request Created At -</div>
 
 					<div className={styles.value}>
-						{requestData.created_at ? format(requestData.created_at, 'dd MMM yyyy') : '-'}
+						{created_at ? format(created_at, 'dd MMM yyyy') : '-'}
 					</div>
 				</div>
 			</div>

@@ -1,18 +1,21 @@
-.container{
-    background: #ffffff;
+.container {
+	background: #fff;
 }
-.header_container{
-    border-bottom: 1px solid #e0e0e0;
+
+.header_container {
 	padding-bottom: 6px;
+	border-bottom: 1px solid #e0e0e0;
 }
-.heading{
-    font-weight: 500;
-	font-size: 18px;
-	color: #2c3e50;
+
+.heading {
 	margin-bottom: 10px;
+	font-size: 18px;
+	font-weight: 500;
+	color: #2c3e50;
 }
-.sub_heading{
-    color: #828282;
+
+.sub_heading {
 	font-size: 12px;
 	line-height: 16px;
+	color: #828282;
 }

@@ -1,9 +1,9 @@
-.container{
-    overflow: 'scroll';
-    padding: 10px 0px;    
+.container {
+	padding: 10px 0;
+	overflow: "scroll";
 }
 
-.loader{
-    display: flex;
-    justify-content: center;
+.loader {
+	display: flex;
+	justify-content: center;
 }

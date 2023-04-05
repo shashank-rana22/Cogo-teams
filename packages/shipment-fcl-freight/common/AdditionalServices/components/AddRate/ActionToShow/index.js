@@ -78,7 +78,6 @@ function ActionsToShow({
 				<Button
 					onClick={() => {
 						onCancel();
-						setShowAddRate(false);
 					}}
 					disabled={loading}
 					themeType="primary"

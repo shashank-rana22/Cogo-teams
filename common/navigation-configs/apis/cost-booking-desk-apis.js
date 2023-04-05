@@ -256,6 +256,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'get_shipment_invoice_preference',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;

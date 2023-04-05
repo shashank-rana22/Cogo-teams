@@ -1,0 +1,134 @@
+.date_text {
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.date {
+	width: 200px;
+	margin-left: 8px;
+}
+
+.date_container {
+	display: flex;
+	align-items: center;
+	margin: 12px 0;
+	margin-top: 12px;
+}
+
+.over_all_data {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+
+.account_receivables {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 38%;
+	height: 70px;
+	background-color: white;
+	border-radius: 12px;
+}
+
+.account_receivables_amount {
+	display: flex;
+	align-items: center;
+	width: 36%;
+	height: 20px;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.dashboard_currency {
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.wrapper {
+	overflow: hidden;
+	font-size: 20px;
+	font-weight: 500;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.account_receivables_open_line {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	width: 34%;
+	height: 40px;
+}
+
+.account_receivables_line {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	width: 32%;
+	height: 40px;
+	padding-left: 24px;
+	border-right: 2px solid red;
+}
+
+.account_receivables_invoices {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	width: 70%;
+	padding-left: 16px;
+}
+
+.styled_text {
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.open_invoices {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30%;
+	height: 70px;
+	background-color: white;
+	border-radius: 12px;
+}
+
+.sub_invoices {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.on_account_payment {
+	display: flex;
+	align-items: center;
+	width: 30%;
+	height: 70px;
+	background-color: white;
+	border-radius: 12px;
+}
+
+.invoice_text {
+	font-size: 12px;
+	font-weight: 500;
+	color: #979797;
+}
+
+.amount {
+	width: 40%;
+	text-align: center;
+}
+
+.styled_text_week {
+	margin-left: 12px;
+	font-size: 12px;
+	font-weight: 400;
+}
+
+.placeholder_container {
+	width: 300px;
+	height: 40px;
+}

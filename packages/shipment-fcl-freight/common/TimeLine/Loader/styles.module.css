@@ -1,17 +1,18 @@
 .container {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    width: 100%;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 20px;
 
-    .small_circle {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-    }
-    .big_circle {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-    }
+	.small_circle {
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+	}
+
+	.big_circle {
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+	}
 }

@@ -1,38 +1,39 @@
 .label {
-    font-weight: 600;
-    position: relative;
-    width: max-content;
+	position: relative;
+	width: max-content;
+	font-weight: 600;
 }
+
 .label.required::after {
-    content: '*';
-    position: absolute;
-    top: 0;
-    right: -10px;
-    color: #ee3426;
+	position: absolute;
+	top: 0;
+	right: -10px;
+	color: #ee3426;
+	content: "*";
 }
 
 .lower_label {
-    font-weight: 600;
-    opacity: 0.8;
-    font-size: 10px;
+	font-size: 10px;
+	font-weight: 600;
+	opacity: 0.8;
 }
 
 .form_item {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 48%;
-    margin-bottom: 16px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 48%;
+	margin-bottom: 16px;
 }
 
 .form_container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 }
 
 .error_message {
-    color: #ee3426;
-    font-size: 10px;
-    margin-left: 6px;
+	margin-left: 6px;
+	font-size: 10px;
+	color: #ee3426;
 }

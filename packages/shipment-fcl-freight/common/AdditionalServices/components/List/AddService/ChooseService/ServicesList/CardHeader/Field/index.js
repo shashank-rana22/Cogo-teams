@@ -5,16 +5,10 @@ import React from 'react';
 import styles from '../styles.module.css';
 
 function Field({ field }) {
-	const stylesCol = {
-		display    : 'flex',
-		alignItems : 'center',
-		padding    : '0 4px',
-	};
-
 	return (
 		<div
-			style={field.hasStyle ? field.styles : stylesCol}
 			key={field?.key || field?.label}
+			className={styles.header_col}
 		>
 			<div className={styles.card_title}>
 				{field.tooltip ? (

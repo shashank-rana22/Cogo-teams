@@ -1,4 +1,5 @@
-import { Button, Modal } from '@cogoport/components';
+import { Modal } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useListServiceChargeCodes from '../../../../../hooks/useListServiceChargeCodes';
@@ -10,7 +11,7 @@ import styles from './styles.module.css';
 import ViewPrice from './ViewPrice';
 
 function AddService({
-	shipment_id,
+	shipmentId,
 	services,
 	isSeller,
 	refetch = () => {},
@@ -20,13 +21,36 @@ function AddService({
 }) {
 	const [showAddRate, setAddRate] = useState(null);
 	const [showPrice, setShowPrice] = useState(null);
-
-	const { list, loading, setFilters, filters, serviceCountTotal } = useListServiceChargeCodes({
-		shipment_id,
-		services,
-		show,
-		isSeller,
+	const [filters, setFilters] = useState({
+		name         : undefined,
+		service_type : undefined,
 	});
+
+	const { list, loading } = useListServiceChargeCodes({
+		shipmentId,
+		show,
+	});
+
+	let finalList = (list || []).map((item) => ({
+		...item,
+		shipmentId,
+		services,
+		isSeller,
+		name: `${item.code} ${startCase(item.name)}`,
+	}));
+
+	if (filters.name) {
+		finalList = finalList.filter((item) => item.name.toLowerCase().includes(filters.name.toLowerCase()));
+	}
+
+	if (filters.service_type) {
+		finalList = finalList.filter((item) => {
+			if (filters?.service_type?.includes('?')) {
+				return item.service_type === filters?.service_type?.split('?')?.[0];
+			}
+			return item.service_type === filters?.service_type;
+		});
+	}
 
 	if (!list?.length && !loading) {
 		<EmptyState />;
@@ -47,12 +71,12 @@ function AddService({
 						<ChooseService
 							setAddRate={setAddRate}
 							isSeller={isSeller}
-							list={list}
+							list={finalList}
 							loading={loading}
-							setFilters={setFilters}
+							setFilters={(values) => setFilters({ ...filters, ...values })}
 							filters={filters}
 							setShowPrice={setShowPrice}
-							serviceCountTotal={serviceCountTotal}
+							serviceCountTotal={finalList?.length}
 							services={services}
 							refetch={refetch}
 							setShowChargeCodes={setShowChargeCodes}
@@ -78,9 +102,6 @@ function AddService({
 					) : null}
 				</div>
 			</Modal.Body>
-			<Modal.Footer>
-				<Button onClick={() => setShowChargeCodes(false)}>OK</Button>
-			</Modal.Footer>
 		</Modal>
 	);
 }

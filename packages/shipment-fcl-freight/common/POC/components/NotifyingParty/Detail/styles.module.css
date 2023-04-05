@@ -1,8 +1,9 @@
-.trade_party{
-    display: flex;
-    align-items: center;
+.trade_party {
+	display: flex;
+	align-items: center;
 }
-.trade_party_display{
-    margin-left:4px;
-    font-weight: 600;
+
+.trade_party_display {
+	margin-left: 4px;
+	font-weight: 600;
 }

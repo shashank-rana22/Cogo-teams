@@ -6,20 +6,10 @@ import getValue from '../../../../../../../../utils/getValue';
 import styles from './styles.module.css';
 
 function Item({ item, fields, handleClick, loading = false }) {
-	const stylesCol = { padding: '0px 4px' };
-
-	const stylesRow = {
-		borderBottom   : '1px solid #e0e0e0',
-		borderRadius   : '0px',
-		margin         : 0,
-		display        : 'flex',
-		flexDirection  : 'row',
-		justifyContent : 'space-between',
-	};
+	const stylesCol = { padding: '0 4px' };
 
 	return (
 		<div
-			style={stylesRow}
 			onClick={handleClick}
 			tabIndex="0"
 			className={cl` ${item.expired ? styles.expired : ''} ${styles.row}`}

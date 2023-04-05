@@ -1,10 +1,11 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Tabs, TabPanel, Loader } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { Documents, Tracking } from '@cogoport/ocean-modules';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import React, { useContext, useState } from 'react';
 
+import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
@@ -13,8 +14,17 @@ import Timeline from '../../../common/TimeLine';
 import styles from './styles.module.css';
 
 function Superadmin() {
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data, isGettingShipment } = useContext(ShipmentDetailContext);
 	const [activeTab, setActiveTab] = useState('overview');
+
+	if (isGettingShipment) {
+		return (
+			<div className={styles.loader}>
+				Loading Shipment Data....
+				<Loader themeType="primary" className={styles.loader_icon} />
+			</div>
+		);
+	}
 
 	return (
 		<div>
@@ -38,7 +48,7 @@ function Superadmin() {
 					onChange={setActiveTab}
 				>
 					<TabPanel name="overview" title="Overview">
-						{/* <Overview shipmentData={shipment_data} /> */}
+						<Overview shipmentData={shipment_data} />
 					</TabPanel>
 					<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
 						{/* <TimelineAndTask /> */}

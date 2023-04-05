@@ -1,6 +1,5 @@
 import { Button, Modal, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
@@ -8,6 +7,7 @@ import useListAdditionalServices from '../../../../hooks/useListAdditionalServic
 import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
 import AddIp from '../AddIp';
 import AddRate from '../AddRate';
+import Loader from '../Loader';
 
 import AddService from './AddService';
 import Info from './Info';
@@ -19,23 +19,19 @@ import styles from './styles.module.css';
 function List({
 	services = [],
 	isSeller = false,
-	activeTab = '',
 	refetchServices = () => { },
 }) {
-	const { isShipper } = useSelector(({ general }) => ({
-		isShipper : general.query.account_type === 'importer_exporter',
-		isMobile  : general.isMobile,
-	}));
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const [addRate, setAddRate] = useState(false);
 	const [addSellPrice, setAddSellPrice] = useState(false);
 	const [showChargeCodes, setShowChargeCodes] = useState(false);
 	const [item, setItem] = useState({});
 	const [showIp, setShowIp] = useState(false);
+	const [pageLimit, setPageLimit] = useState(8);
 
-	const { list: additionalServiceList, refetch } = useListAdditionalServices({
+	const { list: additionalServiceList, refetch, loading, totalCount } = useListAdditionalServices({
 		shipment_data,
+		pageLimit,
 	});
 
 	const handleRefetch = () => {
@@ -43,16 +39,22 @@ function List({
 		refetch();
 	};
 
+	const refetchForUpdateSubService = () => {
+		setShowIp(false);
+		refetch();
+	};
+
 	const updateResponse = useUpdateShipmentAdditionalService({
 		item,
 		setShowIp,
-		refetch,
+		refetch: refetchForUpdateSubService,
 		showIp,
 	});
 
 	return (
 		<div className={styles.container}>
-			{!isEmpty(additionalServiceList) ? (
+			{loading && <Loader />}
+			{!isEmpty(additionalServiceList) && !loading ? (
 				<div className={styles.added_services}>
 					{additionalServiceList?.map((serviceListItem) => {
 						const status = getStaus({ serviceListItem });
@@ -63,13 +65,10 @@ function List({
 								status={status}
 								showIp={showIp}
 								actionButton={actions({
-									activeTab,
 									status,
 									serviceListItem,
 									setShowIp,
 									setAddSellPrice,
-									setAddRate,
-									isShipper,
 									setItem,
 									shipment_data,
 								})}
@@ -82,15 +81,30 @@ function List({
 				</div>
 			) : null}
 
-			<div className={styles.not_added}>
-				<Button
-					onClick={() => setShowChargeCodes(true)}
-					disabled={shipment_data?.is_job_closed}
-				>
-					<div className={styles.add_icon}>+</div>
-					Add Additional Charges
-				</Button>
-			</div>
+			{totalCount > 8
+				? (
+					<div className={styles.show_more}>
+						{pageLimit > 8
+							? 	(
+								<Button
+									size="md"
+									themeType="link"
+									onClick={() => setPageLimit(8)}
+								>
+									Show Less
+								</Button>
+							) : (
+								<Button
+									size="md"
+									themeType="link"
+									onClick={() => setPageLimit(16)}
+								>
+									Show More
+								</Button>
+							)}
+					</div>
+				)
+				: null}
 
 			{additionalServiceList?.length ? (
 				<div className={styles.info_container}>
@@ -101,6 +115,15 @@ function List({
 					<Info />
 				</div>
 			) : null}
+			<div className={styles.not_added}>
+				<Button
+					onClick={() => setShowChargeCodes(true)}
+					disabled={shipment_data?.is_job_closed}
+				>
+					<div className={styles.add_icon}>+</div>
+					Add Additional Services
+				</Button>
+			</div>
 
 			{addSellPrice ? (
 				<Modal
@@ -114,7 +137,6 @@ function List({
 					<Modal.Body>
 						<AddRate
 							item={item?.serviceListItem}
-							shipment_data={shipment_data}
 							status={item?.status}
 							setAddSellPrice={setAddSellPrice}
 							updateResponse={updateResponse}
@@ -125,10 +147,9 @@ function List({
 
 			{showIp ? (
 				<AddIp
-					shipment_data={shipment_data}
+					shipmentData={shipment_data}
 					setShowIp={setShowIp}
 					showIp={showIp}
-					item={item?.serviceListItem}
 					updateInvoicingParty={(ip) => updateResponse.handleInvoicingParty(ip)}
 				/>
 
@@ -136,7 +157,7 @@ function List({
 
 			{showChargeCodes ? (
 				<AddService
-					shipment_id={shipment_data?.id}
+					shipmentId={shipment_data?.id}
 					services={services}
 					isSeller={isSeller}
 					refetch={refetch}

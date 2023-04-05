@@ -3,16 +3,21 @@ import { useRequest } from '@cogoport/request';
 
 import getApiErrorString from '../utils/getApiErrorString';
 
-const useUpdateOrganizationDocument = ({ refetch }) => {
+const useUpdateOrganizationDocument = ({ refetch, defaultParams = {} }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : 'update_organization_document',
 		method : 'POST',
+
 	}, { manual: true });
 
 	const deleteDocument = async ({ id }) => {
 		try {
 			const res = await trigger({
-				data: { id, status: 'inactive' },
+				data:
+				{
+					id,
+					...defaultParams,
+				},
 			});
 			if (!res.hasError) {
 				Toast.success('Document Deleted Successfully');

@@ -15,17 +15,16 @@
 	display: flex;
 	flex-direction: column;
 	width: 45%;
-} 
+}
 
 .value {
+	width: 140px;
+	overflow: hidden;
 	font-size: 12px;
 	font-weight: 700;
-	font-size: 12px;
-	color: #333333;
+	color: #333;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	overflow: hidden;
-	width: 100%;
 	cursor: pointer;
 }
 
@@ -34,7 +33,7 @@
 	align-items: center;
 	justify-content: center;
 	width: 15%;
-	margin: 0px 28px 0px 12px;
+	margin: 0 28px 0 12px;
 }
 
 .port_code {
@@ -44,25 +43,25 @@
 }
 
 .code {
-	font-weight: 600;
-	font-size: 10px;
-	color: #828282;
 	margin-right: 4px;
-	color: #F68B21;
+	font-size: 10px;
+	font-weight: 600;
+	color: #828282;
+	color: #f68b21;
 }
 
-.country  {
+.country {
 	margin: 0;
-	font-weight: 400;
+	overflow: hidden;
 	font-size: 10px;
+	font-weight: 400;
 	color: #828282;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	overflow: hidden;
 }
 
 .icd {
+	margin: 4px 0;
 	font-size: 10px;
 	font-weight: 700;
-	margin: 4px 0;
 }

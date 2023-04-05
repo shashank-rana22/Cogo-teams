@@ -1,0 +1,58 @@
+.svg {
+	margin-right: 16px;
+	font-size: 24px;
+}
+
+.general {
+	display: flex;
+	margin-bottom: 38px;
+}
+
+.row {
+	display: flex;
+	justify-content: space-between;
+	width: 50%;
+	margin-top: 24px;
+}
+
+.vertical_line {
+	height: 120px;
+	border: 1px solid #e0e0e0;
+}
+
+.text_top {
+	padding: 4px 20px;
+	font-size: 14px;
+	font-weight: 400;
+	color: #828282;
+}
+
+.text_bottom {
+	display: flex;
+	justify-content: center;
+	font-size: 14px;
+	font-weight: 400;
+	color: #4f4f4f;
+}
+
+.text_bottom_left {
+	display: flex;
+	justify-content: center;
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.general_bottom {
+	display: flex;
+}
+
+.minutes {
+	margin-left: 4px;
+}
+
+.right_flex {
+	display: flex;
+	flex-wrap: wrap;
+	width: 30%;
+}

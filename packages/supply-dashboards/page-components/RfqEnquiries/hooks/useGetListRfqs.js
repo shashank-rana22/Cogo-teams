@@ -29,6 +29,7 @@ const useGetListRfqs = () => {
 				filters: {
 					...(filters || {}),
 					relevant_supply_agent_id : !isFullAccess ? user_profile?.user?.id : undefined,
+					supply_agent_preference  : true,
 					service_type             : filters.service_type,
 					origin_port_id           : filters.origin_port_id ? filters.origin_port_id : undefined,
 					destination_port_id      : filters.destination_port_id ? filters.destination_port_id : undefined,

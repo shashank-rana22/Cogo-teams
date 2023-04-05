@@ -4,7 +4,7 @@
   "description": "Package for Shipment Fcl Freight Service",
   "main": "index.js",
   "dependencies": {
-    "@cogoport/components": "^1.0.385",
+    "@cogoport/components": "^1.0.395",
     "@cogoport/constants": "workspace:^0.1.0",
     "@cogoport/context": "workspace:^0.1.0",
     "@cogoport/forms": "workspace:^0.1.0",

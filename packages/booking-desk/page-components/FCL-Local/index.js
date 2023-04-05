@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 export default function FCLLocalDesk({ stateProps = {} }) {
 	const { loading, data } = useListBookingDeskShipments({ stateProps, prefix: 'fcl_local' });
 
-	const isCardAnimatable = !!tabs.find((tab) => tab.name === stateProps.activeTab).isCriticalVisible;
+	const couldBeCardsCritical = !!tabs.find((tab) => tab.name === stateProps.activeTab).isCriticalVisible;
 
 	return (
 		<>
@@ -23,7 +23,7 @@ export default function FCLLocalDesk({ stateProps = {} }) {
 				<ScopeSelect defaultValues={stateProps.scopeFilters} />
 			</div>
 
-			<Filters stateProps={stateProps} tabs={tabs} />
+			<Filters stateProps={stateProps} />
 
 			<Tabs tabs={tabs} stateProps={stateProps} />
 
@@ -33,7 +33,7 @@ export default function FCLLocalDesk({ stateProps = {} }) {
 						data={data}
 						stateProps={stateProps}
 						Card={Card}
-						isCardAnimatable={isCardAnimatable}
+						couldBeCardsCritical={couldBeCardsCritical}
 					/>
 				)}
 			</div>

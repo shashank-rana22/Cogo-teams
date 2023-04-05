@@ -1,11 +1,14 @@
-.container{
-	.ui-textarea {
-		padding: 20px;
+.container {
+	:global {
+		.ui_text_area_container {
+			height: 100px !important;
+			border-radius: 4px !important;
+		}
 	}
 }
 
-.button_container{
-	margin: 12px 0px 0px 0px;
+.button_container {
 	display: flex;
 	justify-content: flex-end;
+	margin: 12px 0 0;
 }

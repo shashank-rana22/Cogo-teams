@@ -1,0 +1,35 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.circle {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 156px;
+	height: 156px;
+	background: #f7faef;
+	border: 5px solid  #ddebc0;
+	border-radius: 50%;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+}
+
+.label {
+	font-size: 14px;
+	color: #828282;
+}
+
+.value {
+	font-size: 20px;
+	font-weight: 600;
+	color: #849e4c;
+}
+
+.bold {
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+}

@@ -1,20 +1,20 @@
-.heading{
-    color: #5c6186;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 24px;
+.heading {
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 24px;
+	color: #5c6186;
 }
 
-.header{
-    display:  flex;
-    justify-content: space-between;
-    padding-bottom: 8px;
+.header {
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 8px;
 }
 
-.service_name{
-    text-align: center;
+.service_name {
 	margin: 12px 0;
 	font-size: 16px;
 	font-weight: 600;
+	text-align: center;
 	text-transform: capitalize;
 }

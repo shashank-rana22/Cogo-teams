@@ -4,46 +4,39 @@ import { useEffect, useCallback } from 'react';
 
 import getApiErrorString from '../utils/getApiErrorString';
 
-function useGetListDocuments({ shipment_data = {}, filters = {} }) {
+function useListDocuments({
+	filters = {},
+	defaultFilters = {},
+	defaultParams = {},
+	shipment_type = '',
+}) {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'fcl_freight/list_documents',
+		url    : `${shipment_type}/list_documents`,
 		method : 'GET',
+		params : {
+			filters: {
+				...filters,
+				...defaultFilters,
+			},
+			...defaultParams,
+
+		},
+
 	}, { manual: true });
-
-	const { id : shipment_id = '' } = shipment_data;
-
-	const { q, service_type, uploaded_by_org_id } = filters;
 
 	const listDocuments = useCallback(() => {
 		(async () => {
-			const filter = {
-				filters: {
-					q,
-					shipment_id,
-					service_type,
-					uploaded_by_org_id,
-				},
-			};
 			try {
-				await trigger({
-					params: {
-						...filter,
-						additional_methods : ['pagination', 'organizations'],
-						page               : 1,
-						page_limit         : 1000,
-						sort_by            : 'created_at',
-						sort_type          : 'desc',
-					},
-				});
+				await trigger();
 			} catch (err) {
 				Toast.error(getApiErrorString(err));
 			}
 		})();
-	}, [trigger, shipment_id, service_type, q, uploaded_by_org_id]);
+	}, [trigger]);
 
 	useEffect(() => {
 		listDocuments();
-	}, [listDocuments]);
+	}, [listDocuments, filters]);
 
 	return {
 		loading,
@@ -52,4 +45,4 @@ function useGetListDocuments({ shipment_data = {}, filters = {} }) {
 	};
 }
 
-export default useGetListDocuments;
+export default useListDocuments;
