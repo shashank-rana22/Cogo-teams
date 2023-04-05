@@ -1,17 +1,14 @@
-import React, { useId } from 'react';
+import React from 'react';
 
 import Loader from '../../utils/loader';
 
 import styles from './styles.module.css';
 
 export function CardLoader() {
-	const id = useId();
 	return (
 		<>
-			{[...Array(4)].map((_, index) => (
-				// using useId for unique key generation
-				// eslint-disable-next-line react/no-array-index-key
-				<div key={`${id}${index}`}>
+			{[...Array(4)].map(() => (
+				<div>
 					<div className={styles.card_wrapper}>
 						<Loader count={3} />
 					</div>
