@@ -20,6 +20,7 @@ const COMPONENT_PROPS_MAPPING = {
 			border        : '1px solid #ED3726',
 			flexDirection : 'column',
 			color         : '#ED3726',
+			padding       : 12,
 		},
 		color : '#ED3726',
 		icon  : <IcMCrossInCircle />,

@@ -3,6 +3,7 @@ import React from 'react';
 
 import Filters from '../../../../../commons/Filters';
 import FilterModal from '../../../../commons/FilterModal';
+import { GenericObject } from '../../../../commons/Interfaces';
 import SearchInput from '../../../../commons/searchInput';
 import StyledTable from '../../../../commons/styledTable';
 import completedColumn from '../../../../configs/Completed_table';
@@ -13,9 +14,11 @@ import styles from './styles.module.css';
 
 interface Props {
 	organizationId: string,
+	outStandingFilters?: GenericObject
 }
 
-function InvoiceTable({ organizationId }: Props) {
+function InvoiceTable({ organizationId, outStandingFilters }: Props) {
+	const { entityCode = '' } = outStandingFilters || {};
 	const {
 		listData,
 		clearInvoiceFilters,
@@ -24,7 +27,7 @@ function InvoiceTable({ organizationId }: Props) {
 		setinvoiceFilters,
 		getOrganizationInvoices,
 		sendReport,
-	} = useGetOutstandingCard(organizationId);
+	} = useGetOutstandingCard(organizationId, entityCode);
 
 	const { list : invoiceList = [], page: pageInvoiceList, totalRecords: recordInvoiceList } = listData || {};
 

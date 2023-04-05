@@ -96,7 +96,7 @@ function DailySalesOutstanding({
 							<div
 								className={styles.styled_daily_text}
 							>
-								Daily Sales Outstanding
+								Days Sales Outstanding
 							</div>
 
 							<Tooltip

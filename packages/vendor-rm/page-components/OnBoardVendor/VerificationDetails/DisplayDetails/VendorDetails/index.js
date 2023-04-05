@@ -1,15 +1,15 @@
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import getShortFileName from '../utils/getShortFileName';
+import getShortFileName from '../../../../utils/getShortFileName';
 
 import styles from './styles.module.css';
 
 const fieldsToShow = {
 	country_id             : 'Country of Registration',
-	registration_number    : 'Registration No.',
 	business_name          : 'Organisation Name',
-	registration_proof_url : 'GST Certificate',
+	registration_number    : 'PAN Number',
+	registration_proof_url : 'PAN Document',
 	company_type           : 'Type of Company',
 	city_id                : 'Company Branch',
 };
@@ -60,21 +60,17 @@ function VendorDetails({
 
 			<div className={styles.body}>
 				<div className={styles.single_record}>
-					{
-						Object.keys(fieldsToShow).map((fieldName) => (
-							<div key={fieldName} className={styles.fields_to_show}>
-
-								<div className={styles.label}>
-									{fieldsToShow[fieldName]}
-								</div>
-
-								<div className={styles.value}>
-									{getDisplayValue({ fieldName })}
-								</div>
-
+					{Object.keys(fieldsToShow).map((fieldName) => (
+						<div key={fieldName} className={styles.fields_to_show}>
+							<div className={styles.label}>
+								{fieldsToShow[fieldName]}
 							</div>
-						))
-					}
+
+							<div className={styles.value}>
+								{getDisplayValue({ fieldName })}
+							</div>
+						</div>
+					))}
 				</div>
 			</div>
 		</div>

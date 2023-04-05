@@ -1,0 +1,38 @@
+.table_container {
+	max-width: 100%;
+	padding: unset !important;
+	overflow: scroll;
+
+	:global {
+		.ui_table_head_row {
+			.ui_table_head_cell {
+				padding-top: 18px;
+				padding-bottom: 10px;
+				margin-bottom: 10px;
+				font-size: 14px;
+				color: #000;
+				border-bottom: 1px solid #f8f2e7;
+			}
+		}
+
+		.ui_table_body_container {
+			background-color: #fff;
+
+			.ui_table_body_row {
+				border-radius: 8px;
+
+				.ui_table_body_cell {
+					padding-block: 20px;
+					font-size: 12px;
+					color: #221f20;
+				}
+			}
+		}
+	}
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+	margin: 24px;
+}

@@ -1,0 +1,16 @@
+.list {
+	padding: 8px 12px;
+	margin: 8px 12px;
+
+	&.list_2 {
+		color: red !important;
+	}
+}
+
+.modal_container {
+	:global {
+		.ui_modal_body_container {
+			padding: unset !important;
+		}
+	}
+}
