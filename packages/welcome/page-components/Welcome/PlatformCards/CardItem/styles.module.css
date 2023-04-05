@@ -7,11 +7,10 @@
 	background: #fffefb;
 	border: 1px solid #fff6b8;
 	border-radius: 16px;
-	transition: all 0.3s ease-out;
+	transition: 0.6s;
 
 	&:hover {
 		box-shadow: 0 2px 24px #fff6b8;
-		transition: 0.6s;
 		transform: translateY(-6px);
 	}
 }
