@@ -1,7 +1,7 @@
 import { Pill, Button } from '@cogoport/components';
 import { IcMLiveChat } from '@cogoport/icons-react';
 
-import styles from '../styles.module.css';
+// import styles from '../styles.module.css';
 
 const tags = ['one', 'two', 'three', 'four'];
 

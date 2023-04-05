@@ -8,8 +8,6 @@ function FeedbackForm({
 	answerData = {},
 	errors = {},
 	control,
-	answer,
-	setAnswer,
 	watch,
 }) {
 	const watchQuestionCheckbox = watch('question_checkbox');
