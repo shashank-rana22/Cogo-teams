@@ -23,4 +23,14 @@
 	padding: 0 4px;
 	margin-right: 8px;
 	color: #828282;
+	font-size: 12px;
+}
+
+
+.custom_modal{
+	:global {
+		.ui_modal_body_container {
+			min-height: 200px;
+		}
+	}
 }

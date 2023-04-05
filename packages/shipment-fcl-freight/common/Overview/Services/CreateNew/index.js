@@ -58,7 +58,7 @@ function CreateNew({
 			<Modal
 				show={upsellModal}
 				onClose={() => setUpsellModal(false)}
-				styles={{ dialog: { width: 700 } }}
+				className={styles.custom_modal}
 			>
 				<Modal.Header title={`${startCase(primary_service?.trade_type)} ${startCase(service)}`} />
 				<Modal.Body>
