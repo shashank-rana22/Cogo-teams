@@ -40,11 +40,9 @@ function Layout({
 							error={{}}
 							{...controlField}
 						/>
-
 					)
 					: null;
 			})}
-
 		</div>
 	);
 }
