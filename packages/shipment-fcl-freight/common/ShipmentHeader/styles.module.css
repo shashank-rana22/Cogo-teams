@@ -1,68 +1,66 @@
 .container {
-  display: flex;
-  align-items: center;
-  width: 90%;
-  background: #ffffff;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-  padding: 10px 24px;
+	display: flex;
+	align-items: center;
+	width: 90%;
+	padding: 10px 24px;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(0 0 0 / 20%);
 }
 
 .po_number {
-  white-space: nowrap;
-  color: #979797;
-  font-weight: 400;
-  font-size: 12px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #979797;
+	white-space: nowrap;
 }
 
 .customer {
-  border-right: 1px solid #e0e0e0;
-  width: 18%;
-  padding-right: 20px 4px;
-
+	width: 18%;
+	padding-right: 20px 4px;
+	border-right: 1px solid #e0e0e0;
 }
 
 .port_details {
-  display: flex;
-  justify-content: center;
-  width: 55%;
-  border-right: 1px solid #e0e0e0;
-  margin-right: 30px;
+	display: flex;
+	justify-content: center;
+	width: 55%;
+	margin-right: 30px;
+	border-right: 1px solid #e0e0e0;
 }
 
-.business_name{
-    font-size: 12px;
-  width: fit-content;
-  max-width: 100px;
-  text-overflow: ellipsis;
-	white-space: nowrap;
+.business_name {
+	width: fit-content;
+	max-width: 100px;
 	overflow: hidden;
+	font-size: 12px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
-.dots{
-  margin-left: 5px;
+.dots {
+	margin-left: 5px;
 }
 
 .tooltip {
-  font-weight: 500;
-  max-width: 500px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  text-align: start;
-  font-size: 10px;
-  color: #828282;
-  width: fit-content;
+	width: fit-content;
+	max-width: 500px;
+	overflow: hidden;
+	font-size: 10px;
+	font-weight: 500;
+	color: #828282;
+	text-align: start;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .button {
-    font-size: 12px;
-    text-decoration: underline;
-    cursor: pointer;
-    color: red;
+	font-size: 12px;
+	color: red;
+	text-decoration: underline;
+	cursor: pointer;
 
-    :hover {
-        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
-    }
-} 
-
+	:hover {
+		box-shadow: 0 0 8px rgb(0 0 0 / 20%);
+	}
+}
