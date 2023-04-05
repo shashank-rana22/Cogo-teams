@@ -1,10 +1,11 @@
+/* stylelint-disable selector-class-pattern */
 .uploader {
 	:global {
 		.ui_upload_droparea_container {
 			flex-direction: row;
-			margin-bottom: 0;
 			min-height: 0;
 			padding: 0 12px;
+			margin-bottom: 0;
 
 			svg {
 				width: 30px;
@@ -12,14 +13,14 @@
 			}
 		}
 
-		.ui_upload_droparea_heading{
+		.ui_upload_droparea_heading {
 			font-size: 12px;
-            font-weight: 600;
+			font-weight: 600;
 		}
 
 		.ui_upload_droparea_subheading {
+			display: none;
 			font-size: 10px;
-            display: none;
 		}
 
 		.ui_upload_droparea_icon {

@@ -1,8 +1,6 @@
 import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
-import styles from './styles.module.css';
-
 function LoadingState({ fields = [], isLast = false }) {
 	const stylesCol = { padding: '0px 4px' };
 
@@ -12,13 +10,8 @@ function LoadingState({ fields = [], isLast = false }) {
 				if (singleItem?.show === false) {
 					return null;
 				}
-
 				return (
 					<div
-						// xs={6}
-						// sm={6}
-						// md={singleItem.span}
-						// lg={singleItem.span}
 						style={stylesCol}
 					>
 						<Placeholder width="100%" height="20px" />

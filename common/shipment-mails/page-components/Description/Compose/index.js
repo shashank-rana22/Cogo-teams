@@ -77,7 +77,14 @@ function Compose({
 	const [deleteEmail, setDeleteEmail] = useState(false);
 	const [editorState, setEditorState] = useState('');
 
-	const { options } = useGetEntityStakeholderMappings();
+	const { getEntityStakeholderApi } = useGetEntityStakeholderMappings();
+	const options = (getEntityStakeholderApi.data || []).map((item) => ({
+		label : item.description,
+		value : item.description,
+	}));
+
+	options.push({ label: 'Other', value: 'Other' });
+
 	const defaultValues = getFormattedValues(
 		composingEmail,
 		action,

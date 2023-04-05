@@ -26,15 +26,47 @@ function List({
 	const [id, setId] = useState();
 	const [showUnreadChat, setShowUnreadChat] = useState(false);
 	const [status, setStatus] = useState('active');
+	const [list, setList] = useState({
+		data       : [],
+		total      : 0,
+		total_page : 0,
+	});
+	const [filters, setFilters] = useState({ page: 1 });
+	const { page, q } = filters;
 
-	const { listData, page, total_page, filters, setFilters, loading } = useGetShipmentChatList({ status });
+	const getListPayload = {
+		page,
+		filters: {
+			subscribe_user_id: user_id,
+			status,
+			q,
+		},
+	};
+	const states = { list, setList };
+	const { listData, total_page, loading } = useGetShipmentChatList({ payload: getListPayload, states });
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const defaultChannel = listData?.find((obj) => obj?.source_id === shipment_data?.id);
 	const channelId = defaultChannel ? defaultChannel?.id : listData[0]?.id;
 
-	const { loading: seenLoading } = useUpdateSeen({ channel_id: id, showUnreadChat });
-	const { get, personal_data } = useGetChannel({ channel_id: id });
+	const updateSeenPayload = { id, showUnreadChat };
+	const { loading: seenLoading } = useUpdateSeen({ payload: updateSeenPayload });
+
+	const getChannelPayload = { id };
+	const {
+		loadingChannel,
+		getChannel,
+		channel,
+	} = useGetChannel({ payload: getChannelPayload });
+
+	const get = {
+		loadingChannel,
+		refetch : getChannel,
+		data    : {
+			channelData    : channel?.summary || {},
+			primaryService : channel?.primary_service_detail,
+		},
+	};
 
 	let unSeenMsg = [];
 	unSeenMsg = messageContentArr.filter((item) => item[user_id]);
@@ -143,12 +175,11 @@ function List({
 					<img
 						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg"
 						alt="empty"
-						style={{ width: '38em', height: '17em' }}
 					/>
 
-					<span style={{ fontSize: '18px', fontWeight: '600' }}>
+					<div className={styles.text}>
 						Welcome to Cogo Chat
-					</span>
+					</div>
 				</div>
 			) : (
 				channelList?.map((item) => (
@@ -160,7 +191,7 @@ function List({
 						sourceId={item?.source_id}
 						source={item?.source}
 						get={get}
-						personal_data={personal_data}
+						personalData={channel}
 					/>
 				))
 			)}

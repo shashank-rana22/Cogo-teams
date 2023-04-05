@@ -18,9 +18,7 @@ function useGetTimeLine({ shipment_data = {} }) {
 			const res = await trigger({
 				params: { shipment_id },
 			});
-			if (res.status === 200) {
-				setData(res.data);
-			}
+			setData(res.data);
 		} catch (e) {
 			setData([]);
 			Toast.error(getApiErrorString(e));

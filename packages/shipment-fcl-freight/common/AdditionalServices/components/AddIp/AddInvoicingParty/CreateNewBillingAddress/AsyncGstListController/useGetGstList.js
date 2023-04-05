@@ -1,5 +1,8 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
+
+import getApiErrorString from '../../../../../../../utils/getApiErrorString';
 
 function useGetGstList({ registrationNumber }) {
 	const [{ data }, trigger] = useRequest({
@@ -16,7 +19,7 @@ function useGetGstList({ registrationNumber }) {
 					},
 				});
 			} catch (err) {
-				console.log(err);
+				Toast.error(getApiErrorString(err));
 			}
 		})();
 	}, [trigger, registrationNumber]);

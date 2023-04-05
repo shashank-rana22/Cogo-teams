@@ -4,7 +4,7 @@ import EmptyState from '../EmptyState';
 
 import styles from './styles.module.css';
 
-export default function List({ data, stateProps, Card, isCardAnimatable = false }) {
+export default function List({ data, stateProps, Card, couldBeCardsCritical = false }) {
 	const { filters, setFilters } = stateProps;
 	const { list = [], total } = data;
 
@@ -26,8 +26,9 @@ export default function List({ data, stateProps, Card, isCardAnimatable = false 
 				<div className={styles.list_container}>
 					{list.map((item) => (
 						<Card
+							key={item?.id}
 							item={item}
-							isCardAnimatable={isCardAnimatable}
+							couldBeCardsCritical={couldBeCardsCritical}
 						/>
 					))}
 

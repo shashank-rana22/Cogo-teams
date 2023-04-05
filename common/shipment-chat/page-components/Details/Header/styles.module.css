@@ -1,47 +1,49 @@
 .container {
-	width: 100%;
-	min-height: 82px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 6px 20px 0px 20px;
+	width: 100%;
+	min-height: 82px;
+	padding: 6px 20px 0;
 	background-color: #eeeae2;
 }
 
 .sub_container {
-	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	width: 100%;
 }
 
 .serial_id {
-	font-weight: 700;
-	font-size: 12px;
-	color: #221F20;
 	width: 200px;
-	border-right: 1px solid #221F20;
-	cursor: pointer;
-	white-space: nowrap;
+	font-size: 12px;
+	font-weight: 700;
+	color: #221f20;
 	text-decoration-line: underline;
+	white-space: nowrap;
+	cursor: pointer;
+	border-right: 1px solid #221f20;
 }
 
 .name {
 	display: flex;
 	align-items: center;
-	color: #ffffff;
 	margin-left: 12px;
 	font-weight: 500;
+	color: #fff;
 }
 
-.user_name{
-	font-weight: 400;
-	font-size: 12px;
+.user_name {
 	padding: 2px;
+	font-size: 12px;
+	font-weight: 400;
 	color: #828282;
+
 	&.hide {
 		display: none;
 	}
+
 	&:hover {
 		color: #356efd;
 	}
@@ -67,19 +69,19 @@
 }
 
 .close_icon {
-	font-size: 18px;
-    margin-top: -10px;
-    margin-right: -12px;
-    border-radius: 50%;
-	padding: 4px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	cursor: pointer;
+	padding: 4px;
+	margin-top: -10px;
+	margin-right: -12px;
+	font-size: 18px;
 	font-weight: 600;
+	cursor: pointer;
+	border-radius: 50%;
 
 	&:hover {
 		background: white;
-		box-shadow: 0px 0px 8px rgba(44, 62, 80, 0.2);
+		box-shadow: 0 0 8px rgb(44 62 80 / 20%);
 	}
 }

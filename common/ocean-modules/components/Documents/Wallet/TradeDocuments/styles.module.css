@@ -1,0 +1,97 @@
+
+.wrapper {
+	display: flex;
+	gap: 16px;
+	padding: 16px;
+	width: 100%;
+	flex-wrap: wrap;
+}
+
+.single_doc {
+	flex: 1 1 0;
+	min-width: 40%;
+	max-width: 48.4%;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #cbd1f8;
+	padding: 16px;
+	border-radius: 8px;
+	gap: 8px;
+
+	:global(.tippy-content) {
+		padding: 0;
+	}
+	
+	& > svg {
+		color: #393f70;
+	}
+}
+
+.main {
+	display: flex;
+	flex-direction: column;
+	color: #393f70;
+	font-weight: 500;
+	font-size: 14px;
+	letter-spacing: 0.04em;
+}
+
+.upload_info {
+	font-weight: 400;
+	font-size: 10px;
+	letter-spacing: 0.02em;
+	color: #bdbdbd;
+	padding-top: 5px;
+} 
+
+.button_wrapper{ 
+	display: flex;  
+
+	.initial{
+		margin-right: 6px;
+	}
+}  
+
+.gap {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.heading{
+	font-weight: 500;
+	font-size: 14px;
+	color: #393f70;
+}
+
+.action {
+	font-weight: 400;
+	font-size: 10px;
+	color: #828282;
+	padding: 12px 24px;
+	&:hover {
+		cursor: pointer;
+		background: #f2f2f291;
+	}
+}
+.action_wrapper {
+	margin: -5px -9px;
+	padding: 4px;
+}
+
+.dots {
+	position: absolute;
+	top: 14px;
+	right: 12px;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+.header {
+	.segmented-control {
+		max-width: 282px;
+		margin: 6px;
+	}
+}

@@ -5,17 +5,30 @@ import { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-export default function PopoverContent({ scope, viewType, onClose, onApply, scopeData, size, showChooseAgent }) {
-	const { scopes, viewTypes, defaultScope, defaultView, selected_agent_id } = scopeData;
-
-	const defaultValues = { scope: scope || defaultScope, ...(showChooseAgent && { selected_agent_id }) };
-
-	const validViewTypes = viewTypes[defaultValues.scope] || [];
-	defaultValues.viewType = validViewTypes.includes(viewType) ? viewType : defaultView;
+export default function PopoverContent({
+	scope, viewType, selectedAgentId, scopeData, onClose, onApply, size, showChooseAgent,
+}) {
+	const { scopes, viewTypes } = scopeData;
+	const defaultValues = {
+		scope,
+		...(viewType && { viewType }),
+		...(showChooseAgent && { selected_agent_id: selectedAgentId }),
+	};
 
 	const { control, watch, setValue, handleSubmit } = useForm({ defaultValues });
 
 	const { scope: selectedScope, viewType: selectedViewType } = watch();
+
+	const actionButtons = [
+		{
+			label   : 'Cancel',
+			onClick : onClose,
+		},
+		{
+			label   : 'Apply',
+			onClick : handleSubmit(onApply),
+		},
+	];
 
 	const handleValChange = (key, val) => {
 		setValue(key, val);
@@ -23,7 +36,6 @@ export default function PopoverContent({ scope, viewType, onClose, onApply, scop
 
 	useEffect(() => {
 		setValue('viewType', (viewTypes[selectedScope] || [])[0]);
-		setValue('selected_agent_id', '');
 	}, [selectedScope, viewTypes, setValue]);
 
 	const isScopesPresent = scopes.length > 0;
@@ -32,22 +44,16 @@ export default function PopoverContent({ scope, viewType, onClose, onApply, scop
 	return (
 		<div className={styles.popover_content}>
 			<div className={styles.button_container}>
-				<Button
-					size={size}
-					className={styles.action_buttons}
-					onClick={onClose}
-				>
-					Cancel
-
-				</Button>
-				<Button
-					size={size}
-					className={styles.action_buttons}
-					onClick={handleSubmit(onApply)}
-				>
-					Apply
-
-				</Button>
+				{actionButtons.map((button) => (
+					<Button
+						key={button.label}
+						size={size}
+						className={styles.action_buttons}
+						onClick={button.onClick}
+					>
+						{button.label}
+					</Button>
+				))}
 			</div>
 
 			<hr />
@@ -58,6 +64,7 @@ export default function PopoverContent({ scope, viewType, onClose, onApply, scop
 					<div className={styles.pills_container}>
 						{scopes.map((val) => (
 							<Button
+								key={val}
 								className={`${styles.button_as_pill} ${selectedScope === val ? styles.active : ''}`}
 								size={size}
 								onClick={() => handleValChange('scope', val)}
@@ -76,6 +83,7 @@ export default function PopoverContent({ scope, viewType, onClose, onApply, scop
 					<div className={styles.pills_container}>
 						{viewTypes[selectedScope].map((val) => (
 							<Button
+								key={val}
 								className={`${styles.button_as_pill} ${selectedViewType === val ? styles.active : ''}`}
 								size={size}
 								onClick={() => handleValChange('viewType', val)}
@@ -96,7 +104,6 @@ export default function PopoverContent({ scope, viewType, onClose, onApply, scop
 						control={control}
 						size={size}
 						asyncKey="partner_users"
-						initialCall={false}
 						isClearable
 					/>
 				</>

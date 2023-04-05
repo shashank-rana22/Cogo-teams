@@ -21,11 +21,11 @@ export const useStakeholderCheck = () => {
 	const matchingStakeholders = stakeholderMap
 		.filter(({ role_ids: ids }) => (role_ids || []).some((item) => ids.includes(item)));
 
-	const ActiveStakeholder = matchingStakeholders.length > 0
+	const activeStakeholder = matchingStakeholders.length > 0
 		? matchingStakeholders[0].stakeholder
 		: 'Superadmin';
 
 	return {
-		ActiveStakeholder,
+		activeStakeholder,
 	};
 };

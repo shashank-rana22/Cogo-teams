@@ -3,25 +3,24 @@
 }
 
 .heading {
-	font-weight: 500;
-	color: #393f70;
+	margin: 8px 0 32px;
 	font-size: 18px;
+	font-weight: 500;
 	line-height: 15px;
-	margin: 8px 0px 32px 0px;
+	color: #393f70;
 }
 
 .render_container {
-	margin: 12px;
 	display: flex;
+	margin: 12px;
 }
 
 .button_container {
-	margin-top: 32px;
 	display: flex;
 	justify-content: flex-end;
-
-	
+	margin-top: 32px;
 }
+
 .button_container > button:first-child {
 	margin-right: 8px;
 }

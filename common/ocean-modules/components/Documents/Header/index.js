@@ -23,6 +23,7 @@ function Header({
 	return (
 		<div className={styles.heading}>
 			<div className={styles.sub_heading}>
+
 				{!activeToggle ? (
 					<div className={styles.sub_heading}>
 						<Input
