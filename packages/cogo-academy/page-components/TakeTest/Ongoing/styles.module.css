@@ -3,8 +3,9 @@
 }
 
 .left_container {
-	width: 70%;
-	padding: 32px;
+	width: 80%;
+
+	/* padding: 32px; */
 	background-color: #f9f5ec;
 }
 

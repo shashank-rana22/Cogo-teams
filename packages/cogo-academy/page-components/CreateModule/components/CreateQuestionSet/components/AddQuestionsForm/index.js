@@ -33,6 +33,8 @@ function AddQuestionsForm({
 	mode,
 	page_limit,
 	getTestQuestionTest,
+	setSortFilter,
+	sortFilter,
 }) {
 	const [showBulkUpload, setShowBulkUpload] = useState(false);
 
@@ -46,7 +48,7 @@ function AddQuestionsForm({
 		<div className={styles.container}>
 			<div className={styles.label}>Questions</div>
 
-			{!isEmpty(questionSetId) ? (
+			{!isEmpty(questionSetId) && !isEmpty(listData) ? (
 				<div className={styles.input_container}>
 					<Input
 						size="md"
@@ -87,6 +89,8 @@ function AddQuestionsForm({
 						mode={mode}
 						page_limit={page_limit}
 						getTestQuestionTest={getTestQuestionTest}
+						setSortFilter={setSortFilter}
+						sortFilter={sortFilter}
 					/>
 				)
 			)}
@@ -122,7 +126,7 @@ function AddQuestionsForm({
 					<div className={styles.button_container}>
 						<Button
 							type="button"
-							disabled={showBulkUpload}
+							disabled={showBulkUpload || !allKeysSaved}
 							loading={loading}
 							themeType="primary"
 							style={{ marginRight: '12px' }}
@@ -136,7 +140,7 @@ function AddQuestionsForm({
 
 						<Button
 							type="button"
-							disabled={!allKeysSaved}
+							disabled={!allKeysSaved || showBulkUpload}
 							loading={loading}
 							themeType="secondary"
 							onClick={() => {
