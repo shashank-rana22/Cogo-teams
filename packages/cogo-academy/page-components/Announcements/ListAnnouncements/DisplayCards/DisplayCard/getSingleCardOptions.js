@@ -12,7 +12,7 @@ const getSingleCardOptions = ({ data = {} }) => {
 		author_info = {},
 	} = data;
 
-	const { name:author_name = '' } = author_info;
+	const { name: author_name = '' } = author_info;
 
 	const options = [
 		{ label: 'Title', value: startCase(title) },
