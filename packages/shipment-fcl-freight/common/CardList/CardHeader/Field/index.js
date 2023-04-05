@@ -1,5 +1,5 @@
 import { Tooltip } from '@cogoport/components';
-import { IcMInfo } from '@cogoport/icons-react';
+import { IcMInfo, IcMArrowRotateDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -59,12 +59,9 @@ function Field({
 				)}
 
 				{field.sorting && (
-					<div
-						className={styles.caret}
-						sortType={showSortingType && show}
+					<IcMArrowRotateDown
+						className={(showSortingType && show) ? styles.caret_up : styles.caret_down}
 						onClick={() => handleOnchange(field)}
-						role="button"
-						tabIndex={0}
 					/>
 				)}
 			</div>

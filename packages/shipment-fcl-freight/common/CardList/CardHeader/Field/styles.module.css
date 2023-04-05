@@ -12,7 +12,14 @@
 	}
 }
 
-.caret {
+.caret_up {
+	width: 12px;
+	margin-left: 5px;
+	cursor: pointer;
+	transform: rotate(180deg);
+}
+
+.caret_down {
 	width: 12px;
 	margin-left: 5px;
 	cursor: pointer;
