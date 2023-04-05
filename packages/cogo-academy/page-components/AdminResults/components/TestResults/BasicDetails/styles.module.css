@@ -21,15 +21,29 @@
 }
 
 .text_top {
+	font-size: 14px;
+	font-weight: 400;
+	color: #828282;
+}
+
+.text_top_label {
 	padding: 4px 20px;
 	font-size: 14px;
 	font-weight: 400;
 	color: #828282;
 }
 
-.text_bottom {
+.text_bottom_left_data {
 	display: flex;
 	justify-content: center;
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.text_bottom {
+	display: flex;
+	justify-content: left;
 	font-size: 14px;
 	font-weight: 400;
 	color: #4f4f4f;

@@ -468,14 +468,29 @@ const rms = [
 		service_name : 'rate_sheet',
 	},
 	{
+		api          : 'create_fcl_freight_rate_sheet',
+		access_type  : 'private',
+		service_name : 'fcl_freight_rate',
+	},
+	{
 		api          : 'list_rate_sheets',
 		access_type  : 'private',
 		service_name : 'rate_sheet',
 	},
 	{
+		api          : 'list_fcl_freight_rate_sheets',
+		access_type  : 'private',
+		service_name : 'fcl_freight_rate',
+	},
+	{
 		api          : 'update_rate_sheet',
 		access_type  : 'private',
 		service_name : 'rate_sheet',
+	},
+	{
+		api          : 'update_fcl_freight_rate_sheet',
+		access_type  : 'private',
+		service_name : 'fcl_freight_rate',
 	},
 	{
 		api          : 'list_rate_charge_codes',

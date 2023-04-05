@@ -2,7 +2,6 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	padding: 16px 100px;
 	margin-top: 40px;
 	background: rgb(255 255 255 / 70%);
 	border-radius: 12px;
@@ -21,6 +20,7 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
+	padding: 16px 60px;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
@@ -43,6 +43,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
+	padding: 16px 60px;
 }
 
 .control_container {
@@ -88,6 +89,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+	margin-right: 20px;
+	margin-bottom: 12px;
 }
 
 .vertical_line {

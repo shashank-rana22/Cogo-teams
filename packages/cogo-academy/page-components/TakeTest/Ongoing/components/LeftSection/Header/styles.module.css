@@ -1,7 +1,7 @@
 .main_container {
 	display: flex;
-	margin-bottom: 72px;
 	align-items: center;
+	margin-bottom: 72px;
 }
 
 .heading {
