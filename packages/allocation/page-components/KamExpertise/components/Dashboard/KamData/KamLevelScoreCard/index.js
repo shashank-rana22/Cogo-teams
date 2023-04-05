@@ -68,11 +68,11 @@ function KamLevelScoreCard(props) {
 		>
 			<Card.Title title={(
 				<div className={styles.card_title}>
-					<h3>
+					<div className={styles.kam_level}>
 						KAM
 						{' '}
 						{index_lvl + 1}
-					</h3>
+					</div>
 
 					<IcMArrowNext width={28} height={28} style={{ color: 'red' }} />
 				</div>

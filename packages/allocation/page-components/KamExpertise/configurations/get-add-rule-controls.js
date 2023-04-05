@@ -59,9 +59,10 @@ const useGetControls = ({ expertiseTypeWatch }) => {
 			isClearable: true,
 		},
 		{
-			name  : 'description',
-			label : 'Description',
-			type  : 'textarea',
+			name        : 'description',
+			label       : 'Description',
+			type        : 'textarea',
+			placeholder : 'Type here...',
 		},
 	];
 };

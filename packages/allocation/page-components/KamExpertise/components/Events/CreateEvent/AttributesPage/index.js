@@ -78,7 +78,14 @@ function AttributePage(props) {
 							<span className={styles.label}>
 								{el.label}
 								{' '}
-								<Tooltip content={description} placement="top">
+								<Tooltip
+									content={(
+										<div className={styles.tooltip_text}>
+											{description}
+										</div>
+									)}
+									placement="top"
+								>
 									<IcMInfo
 										width={14}
 										height={14}
