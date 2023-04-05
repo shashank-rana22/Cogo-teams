@@ -16,6 +16,11 @@
 	}
 }
 
+.text {
+	font-size: 12px;
+	color: #cb6464;
+}
+
 .form_container {
 	display: flex;
 	flex-wrap: wrap;
@@ -54,6 +59,7 @@
 			min-height: fit-content !important;
 			padding: 0 !important;
 			margin-bottom: 0 !important;
+			border: 1px solid #dedede;
 		}
 	}
 }

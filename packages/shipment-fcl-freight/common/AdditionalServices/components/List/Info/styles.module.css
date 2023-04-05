@@ -67,3 +67,8 @@
 		border-bottom: 1px solid #f2f2f2;
 	}
 }
+
+.custom_tooltip {
+	width: fit-content;
+	max-width: 6100px !important;
+}

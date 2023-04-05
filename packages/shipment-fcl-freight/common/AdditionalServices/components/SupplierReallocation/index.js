@@ -165,7 +165,7 @@ function SupplierReallocation({
 				<div className={styles.button_container}>
 					<Button
 						className="reviewed"
-						onClick={handleSubmit(onUpdate, onError)}
+						onClick={handleSubmit(onUpdate)}
 						disabled={loading}
 					>
 						Update
