@@ -1,15 +1,15 @@
-.container{
-	padding: 22px 16px 0px 16px;
-	border-top: 1px solid #bdaff9;
-	margin: 0px -15px;
+/* stylelint-disable selector-class-pattern */
+.container {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+	padding: 22px 16px 0;
+	margin: 0 -15px;
 	margin-top: 16px;
+	border-top: 1px solid #bdaff9;
 
 	.core-ui-button-root {
-		text-transform: capitalize;
 		width: 120px;
+		text-transform: capitalize;
 	}
 }
-

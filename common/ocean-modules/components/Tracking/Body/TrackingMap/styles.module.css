@@ -1,11 +1,11 @@
-.map{
-	width: 650px;
+.map {
 	z-index: 90 !important;
+	width: 650px;
 }
 
-.loading{
-	color: #282b2e;
+.loading {
+	padding: 100px 0 0 200px;
 	font-size: 20px;
 	font-weight: 600;
-	padding: 100px 0 0 200px;
+	color: #282b2e;
 }

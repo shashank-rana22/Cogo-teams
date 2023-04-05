@@ -1,38 +1,39 @@
-.container{
+.container {
 	:global {
 		.ui_radiogroup_container {
-            flex-direction: column;
+			flex-direction: column;
 		}
 	}
 }
 
-.label_container{
-    display: flex;
+.label_container {
+	display: flex;
 }
 
-.label_name{
-    width: 175px;
+.label_name {
+	width: 175px;
 	max-width: 250px;
 	text-overflow: ellipsis;
 }
 
-.label_email{
-    width: 240px;
+.label_email {
+	width: 240px;
 	max-width: 300px;
 	text-overflow: ellipsis;
 }
 
-.label_contact{
-    width: 140px;
+.label_contact {
+	width: 140px;
 	text-overflow: ellipsis;
 }
-.errors{
-    color: red;
-    font-size: 14px;
+
+.errors {
 	padding-left: 20px;
+	font-size: 14px;
+	color: red;
 }
 
-.loader{
-    display: flex;
-    justify-content: center;
+.loader {
+	display: flex;
+	justify-content: center;
 }

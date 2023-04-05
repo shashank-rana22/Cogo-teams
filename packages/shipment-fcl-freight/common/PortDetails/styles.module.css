@@ -2,34 +2,33 @@
 	display: flex;
 	align-items: center;
 	width: 100%;
-	padding: 0px 20px;
+	padding: 0 20px;
 }
 
 .flex_row_origin {
 	display: flex;
 	flex-direction: column;
-	max-width: 40%;
 	width: fit-content;
+	max-width: 40%;
 	margin: 0 20px;
 }
 
 .flex_row_destination {
 	display: flex;
 	flex-direction: column;
-	max-width: 40%;
 	width: fit-content;
+	max-width: 40%;
 	margin: 0 20px;
-} 
+}
 
 .value {
+	width: 100%;
+	overflow: hidden;
 	font-size: 12px;
 	font-weight: 700;
-	font-size: 12px;
-	color: #333333;
+	color: #333;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	overflow: hidden;
-	width: 100%;
 	cursor: pointer;
 }
 
@@ -48,59 +47,59 @@
 }
 
 .code {
-	font-weight: 500;
+	margin: 0 0 4px;
 	font-size: 10px;
-	color: #F68B21;
-	margin: 0 0px 4px 0;
+	font-weight: 500;
+	color: #f68b21;
 }
 
-.country  {
+.country {
 	margin: 0;
-	font-weight: 400;
+	overflow: hidden;
 	font-size: 10px;
+	font-weight: 400;
 	color: #828282;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	overflow: hidden;
 }
 
 .service_name {
 	margin: 0;
-	font-weight: 400;
-	font-size: 12px;
-	color: #5936f0;
 	margin-top: 4px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #5936f0;
 }
 
 .icon_and_service {
 	display: flex;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
 	margin-right: 50px;
 }
 
 .icd {
+	margin: 4px 0;
 	font-size: 10px;
 	font-weight: 700;
-	margin: 4px 0;
 }
 
-.icons_and_service{
+.icons_and_service {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	font-size: 10px;
 	font-weight: 700;
+	color: #ee3426;
 	letter-spacing: 0;
 	white-space: nowrap;
-	color: #ee3426;
 
 	& > svg {
 		width: 24px;
 		height: 24px;
 
-		& > path{
+		& > path {
 			fill: #ee3426;
 		}
 	}

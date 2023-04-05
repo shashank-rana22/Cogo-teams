@@ -1,4 +1,3 @@
-import { cl } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -8,7 +7,7 @@ function TitleCard({
 	containerDetails = 0,
 }) {
 	return (
-		<div className={cl`${styles.container} title-card`}>
+		<div className={styles.container}>
 			<div className={styles.display_card}>
 				<div className={styles.details}>
 					<div className={styles.title_container}>

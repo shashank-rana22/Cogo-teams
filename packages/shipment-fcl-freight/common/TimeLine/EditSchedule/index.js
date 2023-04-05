@@ -33,7 +33,7 @@ export default function EditSchedule({ show = false, setShow = () => {}, timelin
 	} = useEditServiceSchedule({ setShow, timelineData });
 
 	return (
-		<Modal size="md" show={show} onClose={() => setShow(false)} placement="top" closeOnOuterClick={false} >
+		<Modal size="md" show={show} onClose={() => setShow(false)} placement="top" closeOnOuterClick={false}>
 			<Modal.Header title="Edit Timeline" />
 			<Modal.Body>
 				<form className={styles.form_container}>

@@ -1,4 +1,4 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Tabs, TabPanel, Loader } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { Documents, Tracking } from '@cogoport/ocean-modules';
 import { ShipmentChat } from '@cogoport/shipment-chat';
@@ -14,8 +14,17 @@ import Timeline from '../../../common/TimeLine';
 import styles from './styles.module.css';
 
 function Superadmin() {
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data, isGettingShipment } = useContext(ShipmentDetailContext);
 	const [activeTab, setActiveTab] = useState('overview');
+
+	if (isGettingShipment) {
+		return (
+			<div className={styles.loader}>
+				Loading Shipment Data....
+				<Loader themeType="primary" className={styles.loader_icon} />
+			</div>
+		);
+	}
 
 	return (
 		<div>
