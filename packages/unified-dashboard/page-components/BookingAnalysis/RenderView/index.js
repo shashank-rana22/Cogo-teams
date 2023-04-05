@@ -1,7 +1,7 @@
 import React from 'react';
 
+import Loader from '../../../common/Loader';
 import LoadingPage from '../../../common/LoadingPage';
-import Loader from '../../../utils/loader';
 
 import MobileBookingAnalysis from './MobileBookingAnalytics';
 import Months from './Months';
