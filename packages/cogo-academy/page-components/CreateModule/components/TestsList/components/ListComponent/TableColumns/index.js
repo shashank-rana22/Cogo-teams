@@ -15,14 +15,20 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 		Header   : 'QUESTION SET NAME',
 		id       : 'name',
 		accessor : ({ name = '' }) => (
-			<section>{name}</section>
+			<div>
+				<Tooltip maxWidth={500} content={startCase(name)} placement="top">
+					<div className={styles.content}>
+						{name}
+					</div>
+				</Tooltip>
+			</div>
 		),
 	},
 	{
 		Header   : 'TOPIC',
 		id       : 'topic',
 		accessor : ({ topic = [] }) => (
-			<section>
+			<section className={styles.content}>
 				<Tooltip maxWidth={500} content={startCase(topic)} placement="top">
 					<Pill
 						className={styles.topic_pill}

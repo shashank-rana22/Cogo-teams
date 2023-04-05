@@ -7,7 +7,7 @@ function useCreateNewTest() {
 	const router = useRouter();
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'create_test',
+		url    : '/create_test',
 		method : 'POST',
 	}, { manual: true });
 
@@ -23,9 +23,7 @@ function useCreateNewTest() {
 				},
 			});
 
-			const test_id = res?.data?.id;
-
-			const test_sheet_id = res?.data?.test_sheet_id;
+			const { id: test_id = '', test_sheet_id = '' } = res?.data || {};
 
 			let href = `/learning/test-module/create-test/?id=${test_id}`;
 			let as = `/learning/test-module/create-test/?id=${test_id}`;
@@ -36,6 +34,7 @@ function useCreateNewTest() {
 			}
 
 			router.push(href, as);
+
 			Toast.success('Created Successfully');
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');

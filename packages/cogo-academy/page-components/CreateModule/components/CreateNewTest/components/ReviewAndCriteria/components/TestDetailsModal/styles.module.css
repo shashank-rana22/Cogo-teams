@@ -70,14 +70,14 @@
 }
 
 .test_details > div {
-	margin: 20px 0;
 	display: flex;
 	justify-content: space-between;
+	margin: 20px 0;
 }
 
 .q_topic {
 	font-size: 12px;
-	color: #4F4F4F;
+	color: #4f4f4f;
 }
 
 .attempts_pass {

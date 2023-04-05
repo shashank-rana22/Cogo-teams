@@ -124,6 +124,7 @@ function IncomeExpense({ globalFilters, entityTabFilters }) {
 							Income & Expense
 							<div className={styles.border} />
 						</div>
+
 						<div className={styles.icon}>
 							<Tooltip
 								content={(

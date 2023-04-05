@@ -8,7 +8,14 @@ import styles from './styles.module.css';
 
 function TestDetailsModal(props) {
 	const {
-		getValues, handleSubmit, data, test_id, loading, showModal, setShowModal, watch,
+		getValues,
+		handleSubmit,
+		data = {},
+		test_id = '',
+		loading,
+		showModal,
+		setShowModal = () => {},
+		watch,
 	} = props;
 
 	const { name = '', set_data = [] } = data;
