@@ -26,9 +26,9 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 		if (idArray.length === 0) {
 			Toast.error('Atleast one of the question sets must be selected');
 		} else {
-			(handleSubmit((values) => {
+			handleSubmit((values) => {
 				createTest({ values, idArray, next: type === 'save_as_draft' ? 'draft' : 'criteria', uploadDocument });
-			}))();
+			})();
 		}
 	};
 

@@ -10,3 +10,23 @@
 	display: flex;
 	justify-content: flex-end;
 }
+
+.faq_link {
+	display: flex;
+	align-items: center;
+	margin-top: 4px;
+	font-size: 14px;
+	color: #221f20;
+	cursor: pointer;
+	text-decoration-line: underline;
+}
+
+.icon {
+	display: flex;
+	margin-left: 2px;
+}
+
+.arrow {
+	cursor: pointer;
+}
+

@@ -4,12 +4,13 @@ import { IcMShare } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
 
+import SortComponent from '../../SortComponent';
 import copyToClipboard from '../helpers/copyToClipboard';
 
 import { QuestionSetButtons, TestSetButtons } from './ButtonComponent';
 import styles from './styles.module.css';
 
-export const questionSetColumns = ({ loading, router, setShowModal, setQuestionSetId }) => [
+export const questionSetColumns = ({ loading, router, setShowModal, setQuestionSetId, sortFilter, setSortFilter }) => [
 	{
 		Header   : 'NAME',
 		id       : 'name',
@@ -70,7 +71,17 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 		),
 	},
 	{
-		Header   : 'LAST UPDATED',
+		Header: (
+			<div className={styles.container}>
+				<div className={styles.item}>LAST UPDATED</div>
+
+				<SortComponent
+					value="updated_at"
+					sortFilter={sortFilter}
+					setSortFilter={setSortFilter}
+				/>
+			</div>
+		),
 		id       : 'updated_at',
 		accessor : ({ updated_at = '' }) => (
 			<section>
@@ -95,7 +106,10 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 	},
 ];
 
-export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => ([
+export const testSetColumns = ({
+	loading, router, setShowModal, setTestId, sortFilter,
+	setSortFilter,
+}) => ([
 	{
 		Header   : 'NAME',
 		id       : 'name',
@@ -126,10 +140,10 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 		accessor : ({ topics = [] }) => (
 			<section className={styles.topics}>
 				{topics.map((topic) => (
-					<Tooltip maxWidth={500} content={startCase(topic)} placement="top" key={topic}>
+					<Tooltip maxWidth={400} content={startCase(topic)} placement="top" key={topic}>
 						<Pill
 							className={styles.topic_pill}
-							size="sm"
+							size="lg"
 							color="#F3FAFA"
 						>
 							{startCase(topic)}
@@ -188,7 +202,10 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 				return (
 					<section className={styles.details}>
 						<section className={styles.status}>
-							<Pill size="md" color="green">{startCase(current_status)}</Pill>
+							<Pill size="md" color="green" className={styles.status_pill}>
+								{startCase(current_status)}
+
+							</Pill>
 
 							<div role="presentation" onClick={() => copyToClipboard(id)}>
 								<Pill
@@ -196,6 +213,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 									size="md"
 									prefix={<IcMShare />}
 									color="#FEF3E9"
+									className={styles.status_pill}
 									style={{ cursor: 'pointer' }}
 								>
 									Share Test Link
@@ -216,6 +234,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 							key={current_status}
 							size="md"
 							color="orange"
+							className={styles.status_pill}
 						>
 							Results
 							{' '}
@@ -233,6 +252,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 								key={current_status}
 								size="md"
 								color="blue"
+								className={styles.status_pill}
 							>
 								{startCase(current_status)}
 							</Pill>
@@ -253,6 +273,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 							key={current_status}
 							size="md"
 							color="red"
+							className={styles.status_pill}
 						>
 							{startCase(current_status)}
 						</Pill>
@@ -266,6 +287,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 						key={current_status}
 						size="md"
 						color="yellow"
+						className={styles.status_pill}
 					>
 						{startCase(current_status)}
 					</Pill>
@@ -288,9 +310,21 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 		),
 	},
 	{
-		Header   : 'LAST UPDATED',
-		id       : 'updatedAt',
-		accessor : ({ updated_at = '' }) => (
+		Header: (
+			<div className={styles.container}>
+				<div className={styles.item}>LAST UPDATED</div>
+
+				<SortComponent
+					value="updated_at"
+					sortFilter={sortFilter}
+					setSortFilter={setSortFilter}
+				/>
+			</div>
+		),
+
+		id: 'updatedAt',
+
+		accessor: ({ updated_at = '' }) => (
 			<section className={styles.time}>
 				<span>{format(updated_at, 'dd MMM yy')}</span>
 

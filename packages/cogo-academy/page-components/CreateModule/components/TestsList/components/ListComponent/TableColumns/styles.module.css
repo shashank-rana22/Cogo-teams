@@ -3,6 +3,7 @@
 	flex-direction: column;
 	font-weight: 400;
 	color: #828282;
+	font-size: 12px;
 }
 
 .question_set_time {
@@ -34,10 +35,26 @@
 
 .topic_pill {
 	max-width: 120px;
+	height: 25px;
 }
 
 .topic_pill div {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+
+.container{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 6px;
+}
+.item{
+	flex-shrink: 0;
+	margin-right: 6px;
+}
+.status_pill{
+	height: 25px;
 }
