@@ -94,43 +94,9 @@ function CreateNewTest({
 
 			<div className={styles.container}>
 				{controls.map((controlItem) => {
-					const { type, label, name, subControls = [] } = controlItem || {};
+					const { type, label, name } = controlItem || {};
 
 					const Element = getElementController(type);
-
-					if (name === 'select_entity_usergroups') {
-						return (
-							<div className={styles.control_container} key={name}>
-
-								<div className={`${styles.label}`}>
-									{label}
-									<sup className={styles.sup}>*</sup>
-								</div>
-
-								<div className={styles.control_type}>
-
-									{subControls.map((item) => {
-										const ElementToUse = getElementController(item.type);
-
-										return (
-											<div className={styles.input_wrapper} key={item.name}>
-												<ElementToUse
-													key={item.name}
-													control={control}
-													{...item}
-													className={styles[`element_${item.name}}`]}
-													style={{ width: '180px', height: '22px' }}
-												/>
-												{errors[item?.name]
-													? <div className={styles.error_msg}>This is required</div> : null}
-											</div>
-										);
-									})}
-								</div>
-
-							</div>
-						);
-					}
 
 					return (
 						<div className={styles.control_container_two} key={name}>
