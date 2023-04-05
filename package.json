@@ -19,7 +19,7 @@
     "dev": "node scripts/build-pages && node scripts/pre-build && turbo run dev",
     "start": "turbo run start",
     "eslint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
-    "stylelint": "stylelint \"common/ocean-modules/components/Tracking**/*.css\"",
+    "stylelint": "stylelint \"**/*.css\"",
     "clean": "turbo run clean"
   },
   "dependencies": {
