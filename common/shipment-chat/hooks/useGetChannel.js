@@ -2,45 +2,39 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetChannel = ({ channel_id }) => {
+import getApiErrorString from '../utils/getApiErrorString';
+
+const useGetChannel = ({ payload }) => {
+	const { id } = payload;
+
 	const [{ loading: loadingChannel, data: channel }, trigger] = useRequest({
 		url    : 'get_chat_channel',
 		method : 'GET',
+		params : {
+			...payload,
+		},
 	}, { manual: true });
 
 	const getChannel = useCallback(() => {
 		(async () => {
 			try {
-				await trigger({
-					params: {
-						id: channel_id,
-					},
-				});
+				await trigger();
 			} catch (err) {
-				Toast.error(err);
+				Toast.error(getApiErrorString(err));
 			}
 		})();
-	}, [trigger, channel_id]);
-
-	const primaryService = channel?.primary_service_detail;
-	const channelData = channel?.summary || {};
+	}, [trigger]);
 
 	useEffect(() => {
-		if (channel_id) {
+		if (id) {
 			getChannel();
 		}
-	}, [channel_id, getChannel]);
+	}, [id, getChannel]);
 
 	return {
-		get: {
-			loadingChannel,
-			refetch : getChannel,
-			data    : {
-				channelData,
-				primaryService,
-			},
-		},
-		personal_data: channel,
+		loadingChannel,
+		getChannel,
+		channel,
 	};
 };
 

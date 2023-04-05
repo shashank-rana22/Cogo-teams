@@ -39,7 +39,7 @@ const formatPayload = ({
 
 	if (poc_details.length === 0) {
 		Toast.info('Please create at-least one POC before proceeding ');
-		return;
+		return null;
 	}
 
 	const orgTradePartyDocs = [

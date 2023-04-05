@@ -1,8 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import useAxios from 'axios-hooks';
-import { useEffect, useState, useCallback } from 'react';
+import { Toast } from '@cogoport/components';
+import { useLensRequest } from '@cogoport/request';
+import { useEffect, useCallback } from 'react';
 
 import APIS from '../constants/apis';
+import getApiErrorString from '../utils/getApiErrorString';
 
 /**
  * @param {String} email_address Mail address to  get mails from
@@ -11,58 +13,29 @@ import APIS from '../constants/apis';
  * Single utility hook to get mails from Cogo RPA using email address and folder
  */
 
-const useGetRpaMails = (
-	email_address,
-	page_limit,
-	source,
-	filters,
-	isClassified = false,
-) => {
-	const [page, setPage] = useState(1);
-	const [search, setSearch] = useState(undefined);
+const useGetRpaMails = ({ payload }) => {
+	const { isClassified = false, email_address, source, q, filters, ...restPayload } = payload;
 
 	const apis = APIS[source];
 
-	const [mailApi, triggerGetMail] = useAxios(
-		{
-			url    : `${process.env.COGO_LENS_URL}/${apis.list}`,
-			method : 'GET',
+	const [mailApi, triggerGetMail] = useLensRequest({
+		url    : `${apis.list}`,
+		method : 'GET',
+		params : {
+			...restPayload,
+			filters: JSON.stringify({ ...(filters || {}), q }),
 		},
-		{ manual: true },
-	);
+	}, { manual: true });
 
 	const getEmails = useCallback(() => {
 		(async () => {
 			try {
-				let q;
-				if (search && filters?.q) {
-					q = `${filters?.q} ${search}`;
-				} else if (search) {
-					q = search;
-				} else if (filters?.q) {
-					q = `${filters?.q}`;
-				}
-				await triggerGetMail({
-					params: {
-						includes: [
-							'id',
-							'subject',
-							'body_preview',
-							'sender',
-							'received_time',
-							'message_id',
-							'attachments_attachment_id',
-						],
-						page_no    : page,
-						page_limit : page_limit || 10,
-						filters    : JSON.stringify({ ...(filters || {}), q }),
-					},
-				});
+				await triggerGetMail();
 			} catch (err) {
-				console.log(err);
+				Toast.error(getApiErrorString(err));
 			}
 		})();
-	}, [JSON.stringify(filters), page, page_limit, search, triggerGetMail]);
+	}, [triggerGetMail]);
 
 	useEffect(() => {
 		getEmails();
@@ -70,11 +43,7 @@ const useGetRpaMails = (
 
 	return {
 		mailApi,
-		setPage,
-		page,
 		getEmails,
-		setSearch,
-		search,
 	};
 };
 

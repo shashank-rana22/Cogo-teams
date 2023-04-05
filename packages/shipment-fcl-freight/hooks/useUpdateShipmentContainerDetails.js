@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const useUpdateContainerDetails = ({
+const useUpdateShipmentContainerDetails = ({
 	refetch = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
@@ -35,4 +35,4 @@ const useUpdateContainerDetails = ({
 	};
 };
 
-export default useUpdateContainerDetails;
+export default useUpdateShipmentContainerDetails;

@@ -1,6 +1,6 @@
 const timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
 
-export default function getCardAnimateClass({ item = {} }) {
+export default function isCritical({ item = {} }) {
 	const departDate = item.schedule_departure || item.selected_schedule_departure;
 
 	const threeDaysLater = new Date();

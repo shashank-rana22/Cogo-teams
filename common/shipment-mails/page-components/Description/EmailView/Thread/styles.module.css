@@ -1,21 +1,21 @@
 .container {
-	padding: 16px;
-	background: #ffffff;
-	box-shadow: 0px 0px 4px #cbd1f8;
-	border-radius: 8px;
 	max-width: 740px;
+	padding: 16px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 4px #cbd1f8;
 }
 
 .email_container {
-	overflow: auto;
 	max-height: 60vh;
-	padding: 0px 12px;
+	padding: 0 12px;
+	overflow: auto;
 }
 
 .footer {
-	border-top: 1px solid #cbcfeb;
 	padding-top: 12px;
 	margin-top: 10px;
+	border-top: 1px solid #cbcfeb;
 }
 
 .button_div {

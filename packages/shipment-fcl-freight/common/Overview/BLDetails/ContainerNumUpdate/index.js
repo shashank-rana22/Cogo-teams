@@ -1,7 +1,7 @@
 import { Input, Button, Loader } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import useUpdateContainerDetails from '../../../../hooks/useUpdateContainerDetails';
+import useUpdateShipmentContainerDetails from '../../../../hooks/useUpdateShipmentContainerDetails';
 
 import styles from './styles.module.css';
 
@@ -20,7 +20,7 @@ function ContainerNmUpdate({
 		refetch();
 	};
 
-	const { loading, apiTrigger } = useUpdateContainerDetails({
+	const { loading, apiTrigger } = useUpdateShipmentContainerDetails({
 		refetch: afterContainerUpdate,
 	});
 

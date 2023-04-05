@@ -3,7 +3,7 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 50%;
-	padding: 0px 20px;
+	padding: 0 20px;
 }
 
 .single_location {
@@ -33,32 +33,32 @@
 .port_code {
 	display: flex;
 	align-items: center;
-	font-size: var(--font-size-md);
 	min-height: 16px;
+	font-size: var(--font-size-md);
 
 	.code {
-		color: var(--color-accent-orange-2);
 		margin-right: 2px;
+		color: var(--color-accent-orange-2);
 	}
-	
-	.country  {
+
+	.country {
 		color: #828282;
 	}
 }
 
 .ellipsis_text {
+	width: fit-content;
+	max-width: 100%;
+	overflow: hidden;
 	font-size: 12px;
 	font-weight: 600;
-	color: #333333;
-	max-width: 100%;
-	width: fit-content;
-	overflow: hidden;
-	white-space: nowrap;
+	color: #333;
 	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .icd {
+	margin: 4px 0;
 	font-size: 10px;
 	font-weight: 700;
-	margin: 4px 0;
 }

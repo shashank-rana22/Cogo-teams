@@ -1,42 +1,45 @@
-.container{
+/* stylelint-disable selector-class-pattern */
+.container {
 	margin-bottom: 24px;
 }
 
-.heading{
-	font-weight: 600;
-	font-size: 16px;
-	line-height: 19px;
-	color: #393f70;
+.heading {
 	margin: 0;
 	margin-bottom: 16px;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 19px;
+	color: #393f70;
 }
 
-.radio_wrapper{
+.radio_wrapper {
 	.core-ui-radio-root {
-		margin-bottom: 14px;
 		width: 100%;
+		margin-bottom: 14px;
 
 		@media (max-width: 768px) {
 			width: 100%;
 		}
 	}
+
 	.core-ui-radiogroup-container {
 		display: flex;
 		flex-direction: row;
+		justify-content: flex-start;
 		width: 100%;
 		margin-bottom: 16px;
-		justify-content: flex-start;
 	}
+
 	.core-ui-radio-label {
-		font-weight: 400;
+		margin-left: 10px;
 		font-size: 14px;
+		font-weight: 400;
 		color: #393f70;
 		opacity: 1;
-		margin-left: 10px;
 	}
 }
 
-.button_container{
+.button_container {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;

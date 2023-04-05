@@ -13,8 +13,33 @@ function EmailView({
 }) {
 	const email = RECIEVE_EMAIL;
 	const message_id = activeMail?.message_id || activeMail?.id;
-	const { emailData, loading } = useGetMail(email, message_id, activeMail?.id);
-	const { getAttachementsApi } = useGetAttachements(email, message_id);
+
+	const mailPayload = { email_address: email, message_id, mail_id: activeMail?.id };
+	const { getMailApi, getMailRpaApi } = useGetMail({ mailPayload });
+
+	const isFromRpa = getMailApi?.data?.error?.code === 'ErrorItemNotFound';
+	const rpaData = getMailRpaApi?.data;
+	const rpaMailData = {
+		...(rpaData || {}),
+		body: {
+			content: rpaData?.body,
+		},
+		ccRecipients: (rpaData?.cc_mails || []).map((item) => ({
+			emailAddress: { address: item },
+		})),
+		toRecipients: (rpaData?.to_mails || []).map((item) => ({
+			emailAddress: { address: item },
+		})),
+		from             : { emailAddress: { address: rpaData?.sender } },
+		receivedDateTime : rpaData?.received_time,
+		isFromRpa,
+	};
+
+	const emailData = isFromRpa ? rpaMailData : getMailApi?.data;
+	const loading = isFromRpa ? getMailRpaApi?.loading : getMailApi?.loading;
+
+	const attachmentPaylaod = { email, message_id };
+	const { getAttachementsApi } = useGetAttachements({ attachmentPaylaod });
 	let content = emailData?.body?.content || '';
 
 	const allAttachements = getAttachementsApi?.data?.value || [];

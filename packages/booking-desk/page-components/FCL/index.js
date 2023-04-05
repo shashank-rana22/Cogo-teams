@@ -13,17 +13,17 @@ import styles from './styles.module.css';
 export default function FCLDesk({ stateProps = {} }) {
 	const { loading, data } = useListBookingDeskShipments({ stateProps, prefix: 'fcl_freight' });
 
-	const isCardAnimatable = !!tabs.find((tab) => tab.name === stateProps.activeTab).isCriticalVisible;
+	const couldBeCardsCritical = !!tabs.find((tab) => tab.name === stateProps.activeTab).isCriticalVisible;
 
 	return (
 		<>
 			<div className={styles.header}>
 				<h1>Booking Desk</h1>
 
-				<ScopeSelect defaultValues={stateProps.scopeFilters} />
+				<ScopeSelect size="md" defaultValues={stateProps.scopeFilters} />
 			</div>
 
-			<Filters stateProps={stateProps} tabs={tabs} />
+			<Filters stateProps={stateProps} />
 
 			<Tabs tabs={tabs} stateProps={stateProps} />
 
@@ -33,7 +33,7 @@ export default function FCLDesk({ stateProps = {} }) {
 						data={data}
 						stateProps={stateProps}
 						Card={Card}
-						isCardAnimatable={isCardAnimatable}
+						couldBeCardsCritical={couldBeCardsCritical}
 					/>
 				)}
 			</div>

@@ -14,11 +14,9 @@ const useCreateOrganizationAddress = ({
 
 	const apiTrigger = async (payload) => {
 		try {
-			const res = await trigger({ data: payload });
-			if (!res.hasError) {
-				Toast.success(successMessage);
-				refetch();
-			}
+			await trigger({ data: payload });
+			Toast.success(successMessage);
+			refetch();
 		} catch (err) {
 			Toast.error(getApiErrorString(err));
 		}

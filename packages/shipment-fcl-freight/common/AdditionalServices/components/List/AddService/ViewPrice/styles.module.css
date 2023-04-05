@@ -1,9 +1,9 @@
-.container{
-	border-radius: 8px;
-	background: #ffffff;
+.container {
 	padding: 16px;
+	background-color: #fff;
+	border-radius: 8px;
 
-	& > button{
+	& > button {
 		margin-top: 8px;
 		margin-left: auto;
 	}

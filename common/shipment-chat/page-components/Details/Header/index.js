@@ -11,23 +11,24 @@ import styles from './styles.module.css';
 
 function Header({
 	isStakeholder,
-	shipment_data = {},
-	primary_service = {},
+	channelData = {},
+	primaryService = {},
 	setShow = () => {},
 	showImpMsg,
 	setShowImpMsg = () => {},
 }) {
 	const { push } = useRouter();
 
-	const { serial_id, id: shipment_id } = shipment_data || {};
+	const { serial_id, shipment_type, id: shipment_id } = channelData || {};
+	const shipmentType = shipment_type?.split('_')[0];
 
 	const handleClick = () => {
-		push('/shipments/[id]', `/shipments/${shipment_id}`);
+		push(`/booking/${shipmentType}/[shipment_id]`, `/booking/${shipmentType}/${shipment_id}`);
 		setShow(false);
 	};
 
 	const groupChatUsers = isStakeholder
-		? stakeholderMappings[shipment_data?.stakeholder_types?.[0] || 'default']
+		? stakeholderMappings[channelData?.stakeholder_types?.[0] || 'default']
 		|| []
 		: stakeholderMappings.default;
 
@@ -58,8 +59,8 @@ function Header({
 				) : null}
 
 				<PortDetails
-					data={shipment_data}
-					primary_service={primary_service}
+					data={channelData}
+					primary_service={primaryService}
 					isShow={false}
 				/>
 

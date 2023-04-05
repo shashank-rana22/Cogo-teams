@@ -1,45 +1,45 @@
-.form_container{
+.form_container {
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-top: 8px;
 	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 8px;
 
-	& > div{
+	& > div {
 		flex: 0 0 45%;
-		margin: 4px 0px;
+		margin: 4px 0;
 	}
 }
-.label{
+
+.label {
+	margin: 8px 0;
 	font-weight: 900;
 	line-height: 14px;
 	letter-spacing: 0.02em;
-	margin: 8px 0px;
 }
 
-
-.button_wrapper{
+.button_wrapper {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
 	margin-top: 16px;
 
-	& > button:first-child{
+	& > button:first-child {
 		margin-right: 8px;
 	}
 }
 
-
-.input_container{
+.input_container {
 	display: flex;
 	flex-direction: column;
 
-	& > label{
-		font-weight: 900;
+	& > label {
 		margin-bottom: 4px;
+		font-weight: 900;
 	}
 
-	& > select,input{
+	& > select,
+	input {
 		height: 38px;
 		font-size: 16px;
 	}

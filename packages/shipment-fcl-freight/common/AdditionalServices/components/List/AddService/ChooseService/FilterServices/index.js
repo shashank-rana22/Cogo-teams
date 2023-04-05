@@ -12,12 +12,12 @@ function FilterService({ setFilters, filters, uniqueServices }) {
 				onChange={(e) => setFilters({ service_type: e })}
 				placeholder="Choose service"
 				isClearable
-				size='sm'
+				size="sm"
 				options={uniqueServices || []}
 			/>
 
 			<Input
-				size='sm'
+				size="sm"
 				className={styles.search_input}
 				value={filters.name}
 				placeholder="Search service by name"

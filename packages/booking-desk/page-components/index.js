@@ -1,5 +1,4 @@
 import { dynamic } from '@cogoport/next';
-import { useGetScopeOptions } from '@cogoport/scope-select';
 import { useState, useEffect } from 'react';
 
 import getValidatedStoredValues from '../utils/getValidatedStoredValues';
@@ -21,12 +20,10 @@ export default function BookingDesk() {
 	const [activeTab, setActiveTab] = useState(null);
 	const [scopeFilters, setScopeFilters] = useState(null);
 
-	const { scopeData } = useGetScopeOptions();
-
 	const stateProps = { activeTab, setActiveTab, filters, setFilters, scopeFilters };
 
 	useEffect(() => {
-		const defaultValues = getValidatedStoredValues(scopeData);
+		const defaultValues = getValidatedStoredValues();
 
 		setFilters(defaultValues.filters);
 		setActiveTab(defaultValues.activeTab);

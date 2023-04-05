@@ -1,42 +1,41 @@
-.container{
+.container {
 	padding: 12px;
 }
 
-.heading{
-	font-weight: 500;
-	color: #393f70;
+.heading {
+	margin: 8px 0 32px;
 	font-size: 18px;
+	font-weight: 500;
 	line-height: 15px;
-	margin: 8px 0px 32px 0px;
+	color: #393f70;
 }
 
-.render_container{
-	margin: 12px;
+.render_container {
 	display: flex;
+	margin: 12px;
 }
 
-.button_container{
-	margin-top: 32px;
+.button_container {
 	display: flex;
 	justify-content: flex-end;
-
-	
+	margin-top: 32px;
 }
-.button_container > button:first-child{
+
+.button_container > button:first-child {
 	margin-right: 8px;
 }
 
-.container_num{
+.container_num {
 	display: flex;
 	align-items: center;
 	margin-right: 32px;
 }
 
-.icon_wrapper{
+.icon_wrapper {
 	cursor: pointer;
 }
 
-.loader{
+.loader {
 	display: flex;
 	justify-content: center;
 	padding-bottom: 20px;
