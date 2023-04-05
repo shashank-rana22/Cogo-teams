@@ -6,14 +6,13 @@ import styles from './styles.module.css';
 
 const items = ['Exam can be only taken in full screen',
 	'To continue test, please click on continue',
-	// eslint-disable-next-line max-len
-	'Changing tabs is not allowed in between exam, If you switch tabs more than 2 times, your exam will be submitted automatically',
-	'To submit the test, please click on submit test button'];
+	`Changing tabs is not allowed in between exam,
+	If you switch tabs more than 2 times, your exam will be submitted automatically`];
 
 function WarningModal({ loading }) {
 	return (
 		<Modal showCloseIcon={false} size="md" show className={styles.modal_container}>
-			<Modal.Header title="Are you sure?" />
+			<Modal.Header title="WARNING" />
 
 			<Modal.Body>
 				<ul className={styles.list}>
@@ -31,7 +30,7 @@ function WarningModal({ loading }) {
 					onClick={handleEnterFullScreen}
 					loading={loading}
 				>
-					continue
+					Continue
 				</Button>
 			</Modal.Footer>
 		</Modal>

@@ -25,7 +25,7 @@ function InfoBanner({ test_status = '', test_id, validity_end, refetchTest, load
 			</div>
 
 			<div>
-				{key !== 'published' && !isUnderValidity
+				{!['published', 'publishing'].includes(key) && !isUnderValidity
 					? <PublishNow test_id={test_id} refetchTest={refetchTest} /> : null}
 			</div>
 		</div>
