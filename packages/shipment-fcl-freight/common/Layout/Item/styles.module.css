@@ -67,5 +67,9 @@
 			font-weight: 400;
 			color: #bdbdbd;
 		}
+
+		.ui_chips_container {
+			flex-wrap: wrap;
+		}
 	}
 }
