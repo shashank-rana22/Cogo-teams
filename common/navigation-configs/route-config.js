@@ -15,6 +15,7 @@ import rolesAndPermissions from './config/roles-n-permission';
 import supplyDashboard from './config/supply-dashboards';
 import unifiedDashboard from './config/unified-dashboard';
 import vendorRM from './config/vendor-rm';
+import welcome from './config/welcome';
 
 const routeConfig = {
 	...rolesAndPermissions,
@@ -35,6 +36,7 @@ const routeConfig = {
 	...inventory_management,
 	...kamMonitoring,
 	...performanceManagement,
+	...welcome,
 };
 
 export default routeConfig;
