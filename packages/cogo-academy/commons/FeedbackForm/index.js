@@ -1,4 +1,3 @@
-// import { Badge } from '@cogoport/components';
 import { InputController, CheckboxController, TextAreaController } from '@cogoport/forms';
 import React from 'react';
 
