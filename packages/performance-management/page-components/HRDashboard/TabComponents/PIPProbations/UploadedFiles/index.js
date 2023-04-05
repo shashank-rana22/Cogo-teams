@@ -3,6 +3,7 @@ import Filters from '../../../../../common/Filters';
 import UserTableData from '../../../../../common/UserTableData';
 import feedbackDataColumns from '../../../../../constants/feedback-data-columns';
 
+import styles from './styles.module.css';
 import useListFiles from './useListFiles';
 
 function UploadedFiles({
@@ -29,7 +30,7 @@ function UploadedFiles({
 	});
 
 	return (
-		<div>
+		<div className={styles.container}>
 			<div style={{ marginTop: '16px' }}>
 				<Filters
 					source="uploaded_files"

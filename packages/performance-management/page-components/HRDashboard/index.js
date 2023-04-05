@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import styles from './styles.module.css';
 import KPIFeedbacks from './TabComponents/KPIFeedbacks';
 import PIPProbations from './TabComponents/PIPProbations';
+import UploadedFiles from './TabComponents/PIPProbations/UploadedFiles';
 
 function HRDashboard() {
 	const router = useRouter();
@@ -50,6 +51,10 @@ function HRDashboard() {
 
 					<TabPanel name="probation" title="Probation">
 						<PIPProbations key="probation" modal={modal} setModal={setModal} logType={activeTab} />
+					</TabPanel>
+
+					<TabPanel name="uploaded_files" title="Uploaded Files">
+						<UploadedFiles />
 					</TabPanel>
 				</Tabs>
 			</div>

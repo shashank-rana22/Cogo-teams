@@ -42,6 +42,7 @@ const filtersSourceMapping = {
 	uploaded_files: {
 		left: [
 			{ name: 'Q', placeholder: 'Search FileName...' },
+			{ name: 'CsvType' },
 		],
 	},
 	user_dashboard: {

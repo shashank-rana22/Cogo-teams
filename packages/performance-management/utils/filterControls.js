@@ -77,8 +77,8 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 				? monthOptions.filter((newMonth) => newMonth.index <= month) : monthOptions,
 		},
 		{
-			name        : 'Status',
-			lable       : 'Status',
+			name        : 'CsvType',
+			lable       : 'CSV Type',
 			placeholder : 'Type',
 			type        : 'select',
 			isClearable : true,
@@ -86,6 +86,8 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 			options     : [
 				{ label: 'PIP', value: 'pip' },
 				{ label: 'Probation', value: 'probation' },
+				{ label: 'Normalization', value: 'approve_ratings' },
+				{ label: 'Onboarding', value: 'onboarding' },
 			],
 		},
 		{

@@ -366,7 +366,10 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>CSV TYPE</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				<div>{`${startCase(item?.csv_type)}`}</div>
+				<div>
+					{`${item.csv_type === 'approve_ratings' ? 'Normalization'
+						: startCase(item.csv_type || '--')}`}
+				</div>
 			</div>
 		),
 		id  : 'upload_type',

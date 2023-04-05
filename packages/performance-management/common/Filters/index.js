@@ -28,7 +28,7 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 	const {
 		Department = '', Designation = '',
 		ManagerID = '', Year = '', Month = '', date_range = {},
-		Q = '',
+		Q = '', CsvType = '',
 	} = watch();
 
 	useEffect(() => {
@@ -42,8 +42,10 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 			ManagerID   : ManagerID || undefined,
 			StartDate   : date_range?.startDate || undefined,
 			EndDate     : date_range?.endDate || undefined,
+			CsvType     : CsvType || undefined,
 		}));
-	}, [query, setParams, Month, Department, Designation, Year, ManagerID, date_range?.startDate, date_range?.endDate]);
+	}, [query, setParams, Month, Department, Designation, Year, ManagerID, CsvType,
+		date_range?.startDate, date_range?.endDate]);
 
 	useEffect(() => {
 		debounceQuery(Q);
