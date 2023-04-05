@@ -13,11 +13,23 @@ import useGetUserGroups from '../../../../../../hooks/useGetUserGroups';
 import getControls from './controls';
 import styles from './styles.module.css';
 
+const BUTTON_TEXT_MAPPING = {
+	excel : 'Save and Generate',
+	all   : 'Save',
+};
+
+const onNavigate = ({ push }) => {
+	const href = '/learning?activeTab=test_module';
+	push(href, href);
+};
+
 function CreateNewTest({
 	control, errors, data,
 	getTestLoading, setValue, watch, handleSubmit, uploadDocument, setUploadDocument,
 }) {
 	const router = useRouter();
+
+	const { push } = router;
 
 	const test_sheet_id = router.query?.test_sheet_id;
 
@@ -32,11 +44,6 @@ function CreateNewTest({
 	const cogoEntityWatch = watch('cogo_entity_id') || '';
 
 	const { audienceOptions = [] } = useGetUserGroups();
-
-	const onNavigate = () => {
-		const href = '/learning?activeTab=test_module';
-		router.push(href, href);
-	};
 
 	useEffect(() => {
 		if (!isEmpty(data)) {
@@ -72,15 +79,16 @@ function CreateNewTest({
 		});
 	};
 
-	const BUTTON_TEXT_MAPPING = {
-		excel : 'Save and Generate',
-		all   : 'Save',
-	};
-
 	return (
 		<div>
 			<div className={styles.header}>
-				<IcMArrowBack className={styles.back_icon} width={20} height={20} onClick={() => onNavigate()} />
+				<IcMArrowBack
+					className={styles.back_icon}
+					width={20}
+					height={20}
+					onClick={() => onNavigate({ push })}
+				/>
+
 				<div role="presentation" className={styles.title}>New Test</div>
 			</div>
 

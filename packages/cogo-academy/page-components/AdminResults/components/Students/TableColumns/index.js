@@ -15,7 +15,7 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 			</div>
 		),
 		id       : 'user',
-		accessor : ({ user = {} }) => <section className={styles.section}>{user.name}</section>,
+		accessor : ({ user = {} }) => <section className={styles.section}>{user?.name}</section>,
 	},
 
 	{

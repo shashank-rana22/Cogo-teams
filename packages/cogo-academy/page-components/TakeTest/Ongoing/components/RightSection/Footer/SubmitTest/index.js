@@ -1,6 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 
-import handleEnterFullScreen from '../../../../../utils/handleEnterFullScreen';
+// import handleEnterFullScreen from '../../../../../utils/handleEnterFullScreen';
 import useEndTest from '../../../../hooks/useEndTest';
 import Timer from '../../../LeftSection/Header/Timer';
 import StatsDisplay from '../../../utils/StatsDisplay';
@@ -29,7 +29,7 @@ function SubmitTest({
 	});
 
 	const handleContinueTest = () => {
-		handleEnterFullScreen();
+		// handleEnterFullScreen();
 		setShowSubmitTestModal(false);
 	};
 

@@ -2,7 +2,6 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
-// eslint-disable-next-line import/no-unresolved
 import getAudienceOptions from '../utils/getAudienceOptions';
 
 const useGetUserGroups = () => {

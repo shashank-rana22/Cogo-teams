@@ -17,8 +17,8 @@
 	margin-top: 4px;
 	font-size: 14px;
 	color: #221f20;
-	cursor: pointer;
 	text-decoration-line: underline;
+	cursor: pointer;
 }
 
 .icon {
@@ -29,4 +29,3 @@
 .arrow {
 	cursor: pointer;
 }
-

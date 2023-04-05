@@ -1,14 +1,14 @@
 import { Button, Modal } from '@cogoport/components';
 
-import handleEnterFullScreen from '../../../../utils/handleEnterFullScreen';
+// import handleEnterFullScreen from '../../../../utils/handleEnterFullScreen';
 import Timer from '../../LeftSection/Header/Timer';
 
 import styles from './styles.module.css';
 
 const items = [
 	'Please read all questions carefully and attempt the questions.',
-	`Changing tabs is not allowed in between exam, If 
-	you switch tabs more than 2 times, your exam will be submitted automatically`,
+	// `Changing tabs is not allowed in between exam, If
+	// you switch tabs more than 2 times, your exam will be submitted automatically`,
 	`You may attempt a question and proceed to the next question via the ‘NEXT’ button. Your response,
 	if any will automatically save as you click the NEXT button. 
 	Alternatively, if you are unsure of the answer, 
@@ -41,7 +41,7 @@ function InstructionsModal({
 	const time = new Date(start_time).getTime();
 
 	const handleCloseInstruction = () => {
-		handleEnterFullScreen();
+		// handleEnterFullScreen();
 		setShowInstructionsModal(false);
 	};
 
