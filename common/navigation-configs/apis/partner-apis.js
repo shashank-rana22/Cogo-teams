@@ -2339,6 +2339,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'user',
 		},
+		{
+			api          : 'update_user',
+			access_type  : 'private',
+			service_name : 'user',
+		},
 	],
 	support_crm: [
 		{
@@ -3432,6 +3437,11 @@ const partner = {
 			service_name : 'rate_sheet',
 		},
 		{
+			api          : 'list_fcl_freight_rate_sheets',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -3445,6 +3455,11 @@ const partner = {
 			api          : 'update_rate_sheet',
 			access_type  : 'private',
 			service_name : 'rate_sheet',
+		},
+		{
+			api          : 'update_fcl_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
 		},
 		{
 			api          : 'list_organization_users',
@@ -3466,7 +3481,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'rate_sheet',
 		},
-
+		{
+			api          : 'create_fcl_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
 		{
 			api          : 'list_emails',
 			access_type  : 'private',
@@ -4392,6 +4411,11 @@ const partner = {
 			service_name : 'rate_sheet',
 		},
 		{
+			api          : 'list_fcl_freight_rate_sheets',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -4405,6 +4429,11 @@ const partner = {
 			api          : 'update_rate_sheet',
 			access_type  : 'private',
 			service_name : 'rate_sheet',
+		},
+		{
+			api          : 'update_fcl_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
 		},
 		{
 			api          : 'list_organization_users',
@@ -4425,6 +4454,11 @@ const partner = {
 			api          : 'create_rate_sheet',
 			access_type  : 'private',
 			service_name : 'rate_sheet',
+		},
+		{
+			api          : 'create_fcl_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
 		},
 		{
 			api          : 'list_cogo_entities',
@@ -9753,6 +9787,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'rate_sheet',
 		},
+		{
+			api          : 'create_fcl_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
 	],
 	trailer_freight: [
 		{
@@ -9805,6 +9844,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'rate_sheet',
 		},
+		{
+			api          : 'create_fcl_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
 	],
 	ltl_freight: [
 		{
@@ -9852,6 +9896,11 @@ const partner = {
 			api          : 'create_rate_sheet',
 			access_type  : 'private',
 			service_name : 'rate_sheet',
+		},
+		{
+			api          : 'create_fcl_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
 		},
 		{
 			api          : 'create_ltl_freight_rate_bulk_operation',
@@ -10108,6 +10157,11 @@ const partner = {
 			api          : 'create_rate_sheet',
 			access_type  : 'private',
 			service_name : 'rate_sheet',
+		},
+		{
+			api          : 'create_fcl_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
 		},
 		{
 			api          : 'update_air_freight_rate',

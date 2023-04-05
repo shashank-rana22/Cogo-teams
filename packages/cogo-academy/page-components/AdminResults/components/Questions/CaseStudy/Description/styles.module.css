@@ -1,0 +1,16 @@
+.content_container {
+	padding: 24px;
+}
+
+.view_question {
+	display: flex;
+	align-items: center;
+	justify-content: right;
+	padding-right: 24px;
+	margin-top: 24px;
+	cursor: pointer;
+}
+
+.view_question_text {
+	padding-left: 8px;
+}
