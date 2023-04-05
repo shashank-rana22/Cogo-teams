@@ -1,6 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { startCase, isNumber } from '@cogoport/utils';
 
 import { getFieldController } from '../../../../../../../../common/Form/getFieldController';
 
@@ -73,7 +73,9 @@ function CardItem({ item, editMode, control }) {
 												<div className={styles.lower_current_value}>
 													Current value:
 													{' '}
-													{startCase(score)}
+													{isNumber(score)
+														? score
+														: startCase(score)}
 												</div>
 											</>
 										) : (
@@ -83,7 +85,9 @@ function CardItem({ item, editMode, control }) {
 												</div>
 
 												<div className={styles.current_value}>
-													{startCase(score) || '___'}
+													{isNumber(score)
+														? score || 0
+														: startCase(score) || 0}
 												</div>
 											</>
 										)}
