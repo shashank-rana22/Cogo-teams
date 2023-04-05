@@ -1,4 +1,4 @@
-import { Pill } from '@cogoport/components';
+import { Pill, Tooltip } from '@cogoport/components';
 import { InputController } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
 
@@ -11,26 +11,30 @@ const getColumns = ({ errors, control }) => {
 			Header   : 'QUESTION SET NAME',
 			id       : 'question_set_name',
 			accessor : ({ name = '' }) => (
-				<section className={styles.question_set_name}>
-					{startCase(name) || '-'}
-				</section>
+				<Tooltip content={name} placement="top">
+					<div className={styles.question_set_name}>
+						{startCase(name) || '-'}
+					</div>
+				</Tooltip>
 			),
 		},
 		{
 			Header   : 'TOPIC',
 			id       : 'topic',
 			accessor : ({ topic = '-' }) => (
-				<section className={styles.topic}>
+				<Tooltip content={topic} placement="top">
 					<Pill
 						key={topic}
 						size="sm"
 						color="#F3FAFA"
+						className={styles.topic}
 					>
 						<div className={styles.topic_names}>
 							{startCase(topic)}
 						</div>
 					</Pill>
-				</section>
+				</Tooltip>
+
 			),
 		},
 		{

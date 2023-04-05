@@ -56,9 +56,9 @@
 			margin-bottom: 10px;
 			font-size: 14px;
 			color: #000;
-			text-align: left;
 			background: rgb(255 255 255 / 40%);
 			border-bottom: 1px solid #f8f2e7;
+			text-align: center;
 		}
 
 		.ui_table_body_container {
@@ -141,6 +141,10 @@
 
 .topic_names {
 	font-size: 14px;
+	max-width: 160px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 .total_value {
@@ -150,7 +154,10 @@
 .question_set_name {
 	padding-left: 34px;
 	font-size: 14px;
-	text-align: left;
+	max-width: 160px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 .usergroups {
