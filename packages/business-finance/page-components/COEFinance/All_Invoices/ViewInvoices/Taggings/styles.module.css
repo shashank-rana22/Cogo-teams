@@ -137,7 +137,7 @@
 
 .border {
 	margin-top: 10px;
-	border: 1px solid #88cad1;
 	overflow-y: scroll;
+	border: 1px solid #88cad1;
 	border-radius: 8px;
 }
