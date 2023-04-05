@@ -60,6 +60,7 @@ function LeftSection({
 				subQuestion={subQuestion}
 				test_user_mapping_id={test_user_mapping_id}
 				user_appearance={user_appearance}
+				loading={loading}
 			/>
 		</div>
 	);

@@ -43,7 +43,13 @@ function useGetUserTestQuestion({ currentQuestionId }) {
 		}
 	};
 
-	const { start_time, question_data, test_user_mapping_id, total_question_count, user_appearance } = data || {};
+	const {
+		start_time,
+		question_data,
+		test_user_mapping_id,
+		total_question_count,
+		user_appearance,
+	} = data || {};
 
 	return {
 		getUserTestQuestion,
