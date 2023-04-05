@@ -153,6 +153,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 					>
 						<TabPanel name="channels" title="Channels" />
 						<TabPanel name="agent" title="Agents" />
+						<TabPanel name="summary" title="Summary" />
 					</Tabs>
 				</div>
 			)}
@@ -160,7 +161,9 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 			{activeSubTab !== 'agent' && (
 				<div className={styles.filters_container}>
 					<div className={styles.title}>
-						{USER_ACTIVITY_MAPPING[activityTab]}
+						{activeSubTab === 'summary'
+							? USER_ACTIVITY_MAPPING[activeSubTab]
+							: USER_ACTIVITY_MAPPING[activityTab]}
 					</div>
 
 					{activityTab !== 'platform' && (
@@ -176,6 +179,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 										handleFilters={handleFilters}
 										handleReset={handleReset}
 										loading={loading}
+										activeSubTab={activeSubTab}
 									/>
 								)}
 								visible={filterVisible}
@@ -205,7 +209,9 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 					<Pagination
 						type="page"
 						currentPage={pagination}
-						totalItems={activeSubTab === 'agent' ? agent_total_count : channel_total_count}
+						totalItems={activeSubTab === 'agent' || activeSubTab === 'summary'
+							? agent_total_count : channel_total_count}
+						// totalItems={totalItems}
 						pageSize={10}
 						onPageChange={(val) => setPagination(val)}
 					/>

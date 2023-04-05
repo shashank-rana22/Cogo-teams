@@ -1,4 +1,4 @@
-import { Button, CheckboxGroup, Input } from '@cogoport/components';
+import { Button, CheckboxGroup, Input, DateRangepicker } from '@cogoport/components';
 import { IcMCross, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
@@ -14,6 +14,7 @@ function Filters({
 	handleFilters = () => {},
 	handleReset = () => {},
 	loading = false,
+	activeSubTab = '',
 }) {
 	const { FILTERS_MAPPING } = filterOptions();
 	const [values, setValues] = useState(null);
@@ -24,6 +25,35 @@ function Filters({
 		setValues(appliedFilters);
 	}, [appliedFilters]);
 
+	const checkFilter = () => {
+		if (activityTab === 'transactional') {
+			return (
+				<>
+					<div className={styles.label}>Enter Serial ID</div>
+					<Input
+						size="sm"
+						placeholder="Enter serial id"
+						options={FILTERS_MAPPING[activityTab]}
+						onChange={setValues}
+						value={values || ''}
+					/>
+				</>
+			);
+		}
+		if (activityTab === 'communication' && activeSubTab === 'summary') {
+			return (
+				<DateRangepicker name="fromToDate" onChange={setValues} value={values} isPreviousDaysAllowed />
+			);
+		}
+		return (
+			<CheckboxGroup
+				options={FILTERS_MAPPING[activityTab]}
+				onChange={setValues}
+				value={values || []}
+				className={styles.filters}
+			/>
+		);
+	};
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -36,7 +66,8 @@ function Filters({
 				</div>
 			</div>
 
-			{activityTab === 'transactional' ? (
+			{checkFilter()}
+			{/* {activityTab === 'transactional' ? (
 				<>
 					<div className={styles.label}>Enter Serial ID</div>
 					<Input
@@ -54,7 +85,7 @@ function Filters({
 					value={values || []}
 					className={styles.filters}
 				/>
-			)}
+			)} */}
 
 			<div className={styles.actions}>
 				<Button size="sm" themeType="tertiary" onClick={handleReset}>
