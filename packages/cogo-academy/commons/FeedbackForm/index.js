@@ -1,11 +1,9 @@
-// import { Badge } from '@cogoport/components';
 import { InputController, CheckboxController, TextAreaController } from '@cogoport/forms';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function FeedbackForm({
-	answerData = {},
 	errors = {},
 	control,
 	watch,
@@ -33,7 +31,7 @@ function FeedbackForm({
 							name="question"
 							type="text"
 							placeholder="Enter text here"
-							value={answerData?.question_abstract}
+							value=""
 						/>
 					</section>
 				) : null}
@@ -64,7 +62,7 @@ function FeedbackForm({
 			</section>
 
 			<div className={styles.remark}>
-				<div className={styles.aftercheckbox}>Remarks (optional)</div>
+				<div className={styles.aftercheckbox}>Remarks</div>
 
 				<InputController
 					control={control}
