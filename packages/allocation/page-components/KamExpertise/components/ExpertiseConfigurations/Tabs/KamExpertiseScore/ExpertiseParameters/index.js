@@ -24,7 +24,7 @@ function ExpertiseParameters(props) {
 		loading: editLoading,
 	} = useEditExpertiseParameters({ list, expertiseRefetch, setEditMode, cardRefetch });
 
-	if (isEmpty(list)) {
+	if (isEmpty(list) && !expertiseLoading) {
 		return (
 			<div className={styles.empty_card}>
 				There are no conditions currently active,
