@@ -1,7 +1,8 @@
 import { useAllocationRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useRef } from 'react';
 
-function useGetKamExpertiseCurrentConfig({ type = [] }) {
+function useGetKamExpertiseCurrentConfig({ type }) {
 	const draftRef = useRef({});
 
 	const scrollDraftRef = () => {
@@ -13,10 +14,7 @@ function useGetKamExpertiseCurrentConfig({ type = [] }) {
 		method  : 'GET',
 		authkey : 'get_allocation_kam_expertise_card_details',
 		params  : {
-			...type
-				? {
-					filters: { status: type },
-				} : null,
+			filters: { status: !isEmpty(type) ? type : undefined },
 		},
 	}, { manual: false });
 
