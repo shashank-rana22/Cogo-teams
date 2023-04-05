@@ -1,0 +1,21 @@
+.validity_label {
+	font-size: 14px;
+	color: #828282;
+}
+
+.validity {
+	margin-top: 4px;
+	font-size: 14px;
+	color: #221f20;
+}
+
+.header_row {
+	display: flex;
+	justify-content: space-between;
+}
+
+.heading {
+	font-size: 18px;
+	font-weight: 600;
+	color: #221f20;
+}
