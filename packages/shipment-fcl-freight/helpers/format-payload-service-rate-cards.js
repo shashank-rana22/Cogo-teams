@@ -25,7 +25,6 @@ export const formatPayloadForSubsidiaryServiceRateCards = (item) => {
 		commodity           : addedService?.commodity,
 		service_provider_id : addedService?.service_provider_id || addedService?.service_provider?.id,
 		trade_type          : addedService?.trade_type,
-
 	};
 
 	return {

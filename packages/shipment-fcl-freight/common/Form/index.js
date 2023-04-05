@@ -21,7 +21,7 @@ function Form({ service, onClose, shipmentData, services, primary_service }) {
 		<div className={styles.container}>
 			<div>
 				<div className={styles.form}>
-					{`${startCase(primary_service?.trade_type)} ${startCase(service?.service)}`}
+					{`${startCase(primary_service?.trade_type)} ${startCase(service)}`}
 					<Layout controls={controls} formProps={formProps} />
 
 				</div>
