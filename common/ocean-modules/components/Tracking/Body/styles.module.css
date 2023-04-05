@@ -1,12 +1,12 @@
-.tracking_info{
-    display: flex;
+.tracking_info {
+	display: flex;
 }
 
-.container{
-    display: flex;
+.container {
+	display: flex;
 	flex-direction: column;
 	width: 50%;
-	border-radius: 6px;
-	padding: 25px 15px 35px 15px;
+	padding: 25px 15px 35px;
 	background-color: #fafcff;
+	border-radius: 6px;
 }
