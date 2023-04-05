@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequestAir } from '@cogoport/request';
 
 const usePackingList = () => {
@@ -19,7 +20,9 @@ const usePackingList = () => {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			if (err?.message !== 'canceled') {
+				Toast.error(err?.message || 'Something went wrong');
+			}
 		}
 	};
 

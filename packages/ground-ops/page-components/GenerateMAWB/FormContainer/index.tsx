@@ -1,4 +1,4 @@
-import { Button, Stepper, RadioGroup } from '@cogoport/components';
+import { Button, Stepper, RadioGroup, Toast } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 import { v4 as uuid } from 'uuid';
@@ -60,11 +60,15 @@ function FormContainer({
 		return (
 			<Button
 				onClick={() => {
-					if (activeHawb.isNew === false) {
-						upload({ payload });
+					if (edit) {
+						if (activeHawb.isNew === false) {
+							upload({ payload });
+						}
+						setHawbDetails((prev) => prev.filter((itm) => itm.id !== activeHawb.id));
+						setActiveHawb(hawbDetails.find((ele) => ele.id !== activeHawb.id));
+					} else {
+						Toast.error('Cannot be deleted in create mode');
 					}
-					setHawbDetails((prev) => prev.filter((itm) => itm.id !== activeHawb.id));
-					setActiveHawb(hawbDetails.find((ele) => ele.id !== activeHawb.id));
 				}}
 				themeType="secondary"
 				style={{ border: '1px solid #333', marginLeft: '8%' }}

@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const GetOperator = ({ airlineIds }) => {
@@ -14,7 +15,9 @@ const GetOperator = ({ airlineIds }) => {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			if (err?.message !== 'canceled') {
+				Toast.error(err?.message || 'Something went wrong');
+			}
 		}
 	};
 
