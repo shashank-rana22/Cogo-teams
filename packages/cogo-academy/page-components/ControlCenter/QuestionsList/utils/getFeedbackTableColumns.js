@@ -1,6 +1,7 @@
-import { Pill, Button } from '@cogoport/components';
+import { Pill, Button, Tooltip } from '@cogoport/components';
 import { IcMLiveChat, IcMArrowNext } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
+import startCase from '@cogoport/utils/src/utilities/startCase';
 
 import styles from '../styles.module.css';
 
@@ -14,6 +15,7 @@ const finalTagsToDisplay = (tags) => {
 		size  : 'md',
 	}] : tagsToDisplay;
 };
+const truncate = (str) => (str?.length > 38 ? `${startCase(str.substring(0, 36))}...` : startCase(str));
 
 const columns = ({
 	onClickEditButton = () => {},
@@ -22,9 +24,10 @@ const columns = ({
 	{
 		Header   : 'QUESTIONS',
 		accessor : (item) => (
-			<div>
-				{item?.question_abstract}
-			</div>
+			<Tooltip content={item?.question_abstract} placement="right">
+				<div>{truncate(item?.question_abstract)}</div>
+			</Tooltip>
+
 		),
 	},
 	{
