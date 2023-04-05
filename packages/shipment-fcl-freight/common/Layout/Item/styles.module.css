@@ -10,7 +10,6 @@
 .element {
 	/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 	:global {
-		/* stylelint-disable-next-line selector-class-pattern */
 		.react-datepicker__input-container {
 			width: 100%;
 
