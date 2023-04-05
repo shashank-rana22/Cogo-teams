@@ -179,11 +179,9 @@ function KamExpertiseScoreConfig({
 									})}
 								</section>
 							</div>
-
 						</Modal.Body>
 
 						<Modal.Footer>
-
 							<Button
 								size="md"
 								type="submit"
