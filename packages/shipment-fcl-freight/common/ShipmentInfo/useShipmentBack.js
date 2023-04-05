@@ -12,18 +12,15 @@ export default function useShipmentBack() {
 	const [isBackAllowed, setIsBackAllowed] = useState();
 	const router = useRouter();
 
-	const { redirectNav } = useMemo(() => {
+	const { navToRedirect, version } = useMemo(() => {
 		const { nav_items: { partner: allSideBarNavs } } = getSideBarConfigs({
 			userData: { permissions_navigations, email },
 		});
 
-		return { redirectNav: getRedirectNavMapping(allSideBarNavs) };
+		return getRedirectNavMapping(allSideBarNavs);
 	}, [permissions_navigations, email]);
 
-	console.log({ isBackAllowed });
-
 	useEffect(() => {
-		console.log('mounted');
 		setIsBackAllowed(() => {
 			if (backAllowed(router.components)) {
 				window.addEventListener('beforeunload', eventListener);
@@ -44,8 +41,14 @@ export default function useShipmentBack() {
 
 		if (isBackAllowed) {
 			router.back();
+		} else if (version === 'v2') {
+			router.push(navToRedirect?.href, navToRedirect?.as);
 		} else {
-			router.push(redirectNav?.href, redirectNav?.as);
+			let newUrl = window.location.href.split('/booking')[0];
+			newUrl = newUrl.replace('v2/en-IN/', '');
+			newUrl += navToRedirect.href;
+
+			window.location.href = newUrl;
 		}
 	};
 

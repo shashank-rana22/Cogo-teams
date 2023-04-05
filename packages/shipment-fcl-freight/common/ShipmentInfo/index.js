@@ -18,10 +18,12 @@ function ShipmentInfo() {
 	return (
 		<div className={styles.container}>
 			<Breadcrumb>
-				<Breadcrumb.Item label={<a href="/shipment-management">Shipments</a>} onClick={handleShipmentsClick} />
-				<Breadcrumb.Item label={isGettingShipment
-					? <Placeholder width={100} />
-					: `Shipment ID  #${shipment_data?.serial_id}`}
+				<Breadcrumb.Item label="Shipments" className={styles.link} onClick={handleShipmentsClick} />
+				<Breadcrumb.Item
+					className={styles.inactive}
+					label={isGettingShipment
+						? <Placeholder width={100} />
+						: `Shipment ID  #${shipment_data?.serial_id}`}
 				/>
 			</Breadcrumb>
 

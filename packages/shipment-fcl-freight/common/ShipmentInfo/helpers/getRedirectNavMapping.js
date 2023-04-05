@@ -1,10 +1,10 @@
 const booking_list_priority_array = [
-	'coe-shipments',
-	'coe-booking_desk',
-	'coe-bl_do_collection_release',
-	'coe-kam_desk',
-	'coe-document_desk',
-	'coe-last_mile',
+	{ name: 'coe-shipments', version: 'v1' },
+	{ name: 'coe-booking_desk', version: 'v2' },
+	{ name: 'coe-bl_do_collection_release', version: 'v1' },
+	{ name: 'coe-kam_desk', version: 'v1' },
+	{ name: 'coe-document_desk', version: 'v1' },
+	{ name: 'coe-last_mile', version: 'v1' },
 ];
 
 export const eventListener = () => {
@@ -27,11 +27,19 @@ export const backAllowed = (routerComponents) => {
 export const getRedirectNavMapping = (allNavs) => {
 	const coe_navs = (allNavs || []).find((nav) => nav.key === 'coe')?.options || [];
 
-	let nav_to_redirect = false;
+	let navToRedirect = false;
+	let version = 'v1';
+
 	booking_list_priority_array.some((prNav) => {
-		nav_to_redirect = coe_navs.find((nav) => nav.key === prNav) ?? false;
-		return nav_to_redirect !== false;
+		navToRedirect = coe_navs.find((nav) => nav.key === prNav.name) ?? false;
+		version = prNav.version;
+
+		return navToRedirect !== false;
 	});
 
-	return nav_to_redirect || { href: '/', as: '/' };
+	if (navToRedirect === false) {
+		navToRedirect = { href: '/', as: '/' };
+	}
+
+	return { navToRedirect, version };
 };

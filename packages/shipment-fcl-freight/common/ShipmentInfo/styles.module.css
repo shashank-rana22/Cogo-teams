@@ -6,7 +6,16 @@
     font-weight: 600;
     padding-top: 12px;
 
-    :global {
-        .ui_breadcrumb_container > div {
+    .link {
+        cursor: pointer;
+
+        :hover {
+            text-decoration: underline;
+        }
+    }
+    .inactive {
+        > div {
             cursor: initial;
+        }
+    }
 }
