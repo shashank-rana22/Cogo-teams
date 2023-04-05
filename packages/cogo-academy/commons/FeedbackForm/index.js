@@ -1,6 +1,5 @@
 // import { Badge } from '@cogoport/components';
-import { RTEditor } from '@cogoport/components';
-import { InputController, CheckboxController } from '@cogoport/forms';
+import { InputController, CheckboxController, TextAreaController } from '@cogoport/forms';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -55,9 +54,12 @@ function FeedbackForm({
 					<section>
 						<h4>Rephrase the answer (optional)</h4>
 
-						<RTEditor
-							value={answer}
-							onChange={setAnswer}
+						<TextAreaController
+							control={control}
+							name="answer"
+							type="text"
+							placeholder="Enter text here"
+							value=""
 						/>
 					</section>
 				) : null}
