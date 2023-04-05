@@ -22,7 +22,7 @@ const useGetTableColumns = ({
 
 	return [
 		{
-			Header   : 'Question Type',
+			Header   : 'QUESTION TYPE',
 			id       : 'question_type',
 			accessor : ({ question_type }) => (
 				<section>
@@ -31,7 +31,7 @@ const useGetTableColumns = ({
 			),
 		},
 		{
-			Header   : 'Question/Case',
+			Header   : 'QUESTION/CASE',
 			id       : 'question_text',
 			accessor : (item) => (
 				<Tooltip
@@ -53,7 +53,7 @@ const useGetTableColumns = ({
 			),
 		},
 		{
-			Header   : 'Answer Type',
+			Header   : 'ANSWER TYPE',
 			id       : 'answer_type',
 			accessor : (item) => (
 				<section>
@@ -64,14 +64,14 @@ const useGetTableColumns = ({
 			),
 		},
 		{
-			Header   : 'Answer Key',
+			Header   : 'ANSWER KEY',
 			id       : 'answer_key',
 			accessor : (item) => (
 				<AnswerKey item={item} caseToShow={caseToShow} />
 			),
 		},
 		{
-			Header   : 'Difficulty Level',
+			Header   : 'DIFFICULTY LEVEL',
 			id       : 'difficulty_level',
 			accessor : ({ difficulty_level }) => (
 				<section>

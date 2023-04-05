@@ -43,7 +43,7 @@ function CreateQuestionSet() {
 		page,
 		setPage,
 		page_limit,
-	} = useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKeysSaved, setEditDetails, query, mode });
+	} = useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKeysSaved, setEditDetails, query });
 
 	if (['edit', 'view'].includes(mode) && isEmpty(id) && !activeTab) {
 		router.push('/learning/test-module/question?mode=new');

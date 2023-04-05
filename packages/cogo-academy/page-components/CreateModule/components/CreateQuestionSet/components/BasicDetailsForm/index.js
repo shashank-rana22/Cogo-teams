@@ -1,6 +1,6 @@
 import { Button, Modal, Pill } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { IcMCrossInCircle, IcMDelete, IcMEdit } from '@cogoport/icons-react';
+import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -11,12 +11,12 @@ import useCreateQuestionSet from '../../../../hooks/useCreateQuestionSet';
 import getControls from './controls';
 import styles from './styles.module.css';
 
-const constants = ['name', 'topic', 'question_count', 'cogo_entity_id'];
+const constants = ['name', 'topic', 'question_count', 'cogo_entity'];
 
 const getValue = ({ item, data }) => {
 	const { cogo_entity_object } = data || {};
 
-	if (item === 'cogo_entity_id') {
+	if (item === 'cogo_entity') {
 		return cogo_entity_object?.business_name;
 	} if (item === 'topic') {
 		return <Pill size="lg" color="#F3FAFA">{data?.[item]}</Pill>;
@@ -173,16 +173,6 @@ function BasicDetailsForm({
 					);
 				})}
 			</div>
-
-			{!isEmpty(questionSetId) ? (
-				<div
-					role="presentation"
-					onClick={() => setShowForm(false)}
-					className={styles.cancel_button}
-				>
-					<IcMCrossInCircle width={16} height={16} />
-				</div>
-			) : null}
 
 			{mode !== 'view' ? (
 				<div className={styles.button_container}>
