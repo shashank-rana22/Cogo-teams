@@ -1,5 +1,8 @@
 .question_div {
-	max-width: 400px;
+	max-width: 360px;
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .updated_at {
