@@ -114,12 +114,21 @@ const useListChats = ({
 
 	), [searchQuery]);
 
-	const queryForSeenByUsers = useMemo(() => (
-		status === 'seen_by_users'
-			? [where('conversation_type', '==', 'received'),
-				where('last_message_document.created_at', '==', 'received')] : []
+	const queryForSeenByUsers = useMemo(() => {
+		if (status === 'seen_by_user') {
+			const now = new Date();
+			now.setMinutes(now.getMinutes() - 15);
+			const epochTimestamp = now.getTime();
 
-	), [status]);
+			return [
+				where('last_message_document.conversation_type', '==', 'received'),
+				where('last_message_document.created_at', '<=', epochTimestamp),
+				orderBy('last_message_document.created_at', 'desc'),
+			];
+		}
+		return [];
+	}, [status]);
+
 	const mountPinnedSnapShot = useCallback(() => {
 		setLoading(true);
 		snapshotCleaner({ ref: pinSnapshotListener });
@@ -129,6 +138,7 @@ const useListChats = ({
 			const newChatsQuery = query(
 				omniChannelCollection,
 				queryForPinnedChat,
+				...queryForSeenByUsers,
 				...queryForSearch,
 				...omniChannelQuery,
 			);
@@ -144,7 +154,7 @@ const useListChats = ({
 		return () => {
 			snapshotCleaner({ ref: pinSnapshotListener });
 		};
-	}, [omniChannelCollection, omniChannelQuery, userId, queryForSearch, canShowPinnedChats]);
+	}, [omniChannelCollection, omniChannelQuery, userId, queryForSearch, canShowPinnedChats, queryForSeenByUsers]);
 
 	const mountUnreadCountSnapShot = useCallback(() => {
 		const queryForUnreadChats = status !== 'unread'
@@ -179,6 +189,7 @@ const useListChats = ({
 		snapshotCleaner({ ref: snapshotListener });
 		const newChatsQuery = query(
 			omniChannelCollection,
+			...queryForSeenByUsers,
 			...queryForSearch,
 			...omniChannelQuery,
 			limit(PAGE_LIMIT),
@@ -203,11 +214,12 @@ const useListChats = ({
 		return () => {
 			snapshotCleaner({ ref: snapshotListener });
 		};
-	}, [omniChannelCollection, omniChannelQuery, queryForSearch]);
+	}, [omniChannelCollection, omniChannelQuery, queryForSearch, queryForSeenByUsers]);
 
 	const getPrevChats = useCallback(async () => {
 		const prevChatsQuery = query(
 			omniChannelCollection,
+			...queryForSeenByUsers,
 			...omniChannelQuery,
 			where(
 				'new_message_sent_at',
@@ -233,7 +245,7 @@ const useListChats = ({
 			lastMessageTimeStamp,
 		}));
 		setLoading(false);
-	}, [listData?.lastMessageTimeStamp, omniChannelCollection, omniChannelQuery]);
+	}, [listData?.lastMessageTimeStamp, omniChannelCollection, omniChannelQuery, queryForSeenByUsers]);
 
 	const { activeCardId = '', activeCardData } = activeCard || {};
 	const { channel_type:activeChannelType = '' } = activeCardData || {};
