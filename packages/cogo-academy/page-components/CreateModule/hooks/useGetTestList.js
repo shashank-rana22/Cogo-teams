@@ -21,7 +21,15 @@ function useGetTestList({ filters:cogoEntityFilter, activeTab }) {
 	const fetchList = useCallback(() => {
 		try {
 			trigger({
-				params: { ...params, filters: { ...params.filters, q: query, ...cogoEntityFilter } },
+				params: {
+					...params,
+					filters: {
+						...params.filters,
+						q      : query,
+						...cogoEntityFilter,
+						status : ['active', 'draft', 'published'],
+					},
+				},
 			});
 		} catch (error) {
 			Toast.error(error?.message || 'Something went wrong');
