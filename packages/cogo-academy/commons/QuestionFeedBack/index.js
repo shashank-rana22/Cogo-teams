@@ -29,7 +29,7 @@ function QuestionFeedBack({ id, source = '', onClickEdit = () => {} }) {
 			feedbackOnAnswer += 1;
 		}
 		if ((remark || '').includes('Answer not satisfactory')
-		|| (remark || '').includes('Question not satisfactory')) {
+		&& (remark || '').includes('Question not satisfactory')) {
 			feedbackonBoth += 1;
 		}
 	});
