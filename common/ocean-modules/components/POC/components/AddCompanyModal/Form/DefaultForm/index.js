@@ -38,9 +38,9 @@ function DefaultForm({
 	const formValues = watch();
 
 	useEffect(() => {
-		setFilters({ ...filters });
+		setFilters((p) => ({ ...p }));
 		reset();
-	}, [companyType, tradePartyType]);
+	}, [companyType, tradePartyType, setFilters, reset]);
 
 	useEffect(() => {
 		resetField('address');

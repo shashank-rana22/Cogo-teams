@@ -42,25 +42,27 @@ function SelfAndTradePartyForm({
 		setValue,
 	} = useForm();
 
-	const formValues = watch();
+	const { trade_party_id, address } = watch() || {};
+
+	const firstTradeParty = list?.[0]?.id;
 
 	useEffect(() => {
 		if (companyType === 'self') {
-			setValue('trade_party_id', list?.[0]?.id);
+			setValue('trade_party_id', firstTradeParty);
 		}
-	}, [list, companyType, setValue]);
+	}, [firstTradeParty, companyType, setValue]);
 
 	useEffect(() => {
-		const selectedTradeParty = list?.find((t) => t.id === formValues?.trade_party_id);
+		const selectedTradeParty = list?.find((t) => t.id === trade_party_id);
 		setValue('registration_number', selectedTradeParty?.registration_number || '');
 
 		resetField('address');
 		resetField('pincode');
-	}, [formValues?.trade_party_id, list, setValue, resetField]);
+	}, [trade_party_id, list, setValue, resetField]);
 
 	useEffect(() => {
-		setValue('pincode', formValues.address?.split('::')?.[1]);
-	}, [formValues?.address, setValue]);
+		setValue('pincode', address?.split('::')?.[1]);
+	}, [address, setValue]);
 
 	const company_options = getCompanyNameOptions(list);
 	const address_options = getCompanyAddressOptions(list);
@@ -116,7 +118,7 @@ function SelfAndTradePartyForm({
 										name="address"
 										placeholder="Select Address"
 										control={control}
-										options={address_options[formValues.trade_party_id]}
+										options={address_options[trade_party_id]}
 										rules={{ required: { value: true, message: 'Address is required' } }}
 									/>
 									{Error('address')}
