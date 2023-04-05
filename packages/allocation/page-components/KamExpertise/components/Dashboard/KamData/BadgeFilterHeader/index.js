@@ -25,6 +25,7 @@ function BadgeFilterHeader(props) {
 						multiple
 						isClearable
 						disabled={leaderboardLoading}
+						initialCall
 						params={{
 							filters: {
 								status                       : 'active',

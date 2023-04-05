@@ -98,7 +98,7 @@ function CreateMastery(props) {
 					})}
 
 					<div className={styles.lower_background}>
-						<div style={{ flexBasis: '29%' }}>
+						<div style={{ width: '29%' }}>
 							<p style={{ color: '#4f4f4f' }}>Badge PNG</p>
 
 							<div className={styles.uploader}>

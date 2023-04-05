@@ -1,18 +1,9 @@
 import { Card, Placeholder, Tooltip } from '@cogoport/components';
-import {
-	IcMAgentManagement, IcMTradeparties,
-	IcMBreakBulkCargoType, IcMMiscellaneous,
-} from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import styles from './styles.module.css';
+import ICON_MAPPING from '../../../../../constants/icon-mapping';
 
-const ICON_MAPPING = {
-	customer_expertise  : <IcMAgentManagement height={24} width={24} />,
-	trade_expertise     : <IcMTradeparties height={24} width={24} />,
-	commodity_expertise : <IcMBreakBulkCargoType height={24} width={24} />,
-	miscellaneous       : <IcMMiscellaneous height={24} width={24} />,
-};
+import styles from './styles.module.css';
 
 function OverviewCard(props) {
 	const { data = {}, overviewLoading = false } = props;
@@ -52,7 +43,7 @@ function OverviewCard(props) {
 		>
 			<Card.Title title={(
 				<div className={styles.title}>
-					<span>{ICON_MAPPING[data?.expertise_type]}</span>
+					<div style={{ fontSize: '24px' }}>{ICON_MAPPING[data?.expertise_type]}</div>
 
 					<span className={styles.title_text}>{startCase(data?.expertise_type)}</span>
 				</div>

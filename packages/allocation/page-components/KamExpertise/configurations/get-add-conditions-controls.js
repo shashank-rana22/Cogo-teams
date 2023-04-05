@@ -3,7 +3,7 @@ import useGetAsyncOptionsMicroservice from '@cogoport/forms/hooks/useGetAsyncOpt
 const useGetControls = ({ modifiedControls = [], typeFilter, showModal = false }) => {
 	const asyncControl = useGetAsyncOptionsMicroservice({
 		labelKey : 'condition_name',
-		valueKey : 'rule_mapping_id',
+		valueKey : 'id',
 		endpoint : '/kam_expertise_event_configuration_name',
 		authkey  : 'get_allocation_kam_expertise_event_configuration_name',
 		params   : {
@@ -15,7 +15,7 @@ const useGetControls = ({ modifiedControls = [], typeFilter, showModal = false }
 
 	return [
 		{
-			name        : 'event_configuration_rule_mapping_id',
+			name        : 'event_configuration_detail_id',
 			label       : 'Condition Name',
 			placeholder : '',
 			...asyncControl,
