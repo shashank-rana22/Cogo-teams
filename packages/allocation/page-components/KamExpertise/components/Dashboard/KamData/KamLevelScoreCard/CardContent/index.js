@@ -22,7 +22,7 @@ function CardContent({ listData, value }) {
 					{listData?.[value] || ''}
 				</span>
 
-				<span style={{ display: 'flex' }}>
+				<div style={{ display: 'flex' }}>
 					{ percentage_change !== 0 ? (
 						<IcMArrowBack
 							width={20}
@@ -36,12 +36,11 @@ function CardContent({ listData, value }) {
 						/>
 					) : null}
 
-					<span style={{ marginLeft: '4px' }}>
+					<div style={{ marginLeft: '4px' }}>
 						{Math.abs(percentage_change)}
-						{' '}
 						%
-					</span>
-				</span>
+					</div>
+				</div>
 
 			</div>
 		</div>

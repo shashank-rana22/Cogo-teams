@@ -62,6 +62,7 @@ function Header(props) {
 					themeType="primary"
 					size="md"
 					className={styles.button_badge}
+					disabled={loading}
 					onClick={() => {
 						setBadgeItemData({});
 						setToggleScreen('create_badge');
