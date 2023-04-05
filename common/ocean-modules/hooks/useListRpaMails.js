@@ -1,5 +1,5 @@
 import { Toast } from '@cogoport/components';
-import useAxios from 'axios-hooks';
+import { useLensRequest } from '@cogoport/request';
 import { useEffect, useCallback, useRef } from 'react';
 
 import getApiErrorString from '../utils/getApiErrorString';
@@ -13,20 +13,17 @@ const useShipmentEmails = ({ payload = {} }) => {
 
 	const entityType = useRef(entity_type);
 
-	const [recentClassifiedShipmentApi, triggerRecentClassifiedShipment] =	useAxios(
-		{
-			url    : `${process.env.COGO_LENS_URL}/list_rpa_mails`,
-			method : 'GET',
-			params : {
-				filters: {
-					entity_type,
-					...restPayload,
-				},
-				page_no,
+	const [recentClassifiedShipmentApi, triggerRecentClassifiedShipment] = useLensRequest({
+		url    : 'list_rpa_mails',
+		method : 'GET',
+		params : {
+			filters: {
+				entity_type,
+				...restPayload,
 			},
+			page_no,
 		},
-		{ manual: true },
-	);
+	}, { manual: true });
 
 	const getShipmentEmails = useCallback(() => {
 		(async () => {
