@@ -28,9 +28,7 @@ const SUB_FUNCTION_MAPPING = {
 			label : 'All',
 			value : 'all',
 		},
-
 	],
-
 	supply: [
 		{
 			label : 'Shipping Line',
@@ -68,9 +66,7 @@ const SUB_FUNCTION_MAPPING = {
 			label : 'All',
 			value : 'all',
 		},
-
 	],
-
 	operations: [
 		{
 			label : 'Booking Desk',
@@ -88,23 +84,47 @@ const SUB_FUNCTION_MAPPING = {
 			label : 'All',
 			value : 'all',
 		},
-
 	],
 	all: [
 		{
 			label : 'All',
 			value : 'all',
 		},
-
 	],
-
 	finance: [
 		{
 			label : 'All',
 			value : 'all',
 		},
 	],
-
+	training: [
+		{
+			label : 'Training General',
+			value : 'training_general',
+		},
+		{
+			label : 'All',
+			value : 'all',
+		},
+	],
+	hr: [
+		{
+			label : 'HR Admin',
+			value : 'hr_admin',
+		},
+		{
+			label : 'HRBP',
+			value : 'hrbp',
+		},
+		{
+			label : 'Talent Acquisition',
+			value : 'talent_acquisition',
+		},
+		{
+			label : 'All',
+			value : 'all',
+		},
+	],
 };
 
 export default SUB_FUNCTION_MAPPING;

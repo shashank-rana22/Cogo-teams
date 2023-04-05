@@ -10,8 +10,7 @@ import styles from './styles.module.css';
 
 function AccountPayables() {
 	const { query, push } = useRouter();
-	// const { active_tab } = query;
-	const [activePayables, setActivePayables] = useState<string>(query.active_tab || 'dashboard');
+	const [activePayables, setActivePayables] = useState<string>(query?.active_tab || 'dashboard');
 	const profile = useSelector((state) => state);
 	const { profile:{ partner } } = profile || {};
 	const { id: partnerId } = partner || {};
@@ -33,11 +32,11 @@ function AccountPayables() {
 
 	const [activeEntity, setActiveEntity] = useState(list?.[2]?.entity_code || '301');
 	const options = [
-		{ label: 'Cogoport Vietnam', value: list?.[0]?.entity_code },
-		{ label: 'Cogo Universe Pte. Ltd', value: list?.[1]?.entity_code },
-		{ label: 'COGOPORT PRIVATE LIMITED', value: list?.[2]?.entity_code },
-		{ label: 'Cogoport Netherlands', value: list?.[3]?.entity_code },
-		{ label: 'COGO FREIGHT PVT LTD', value: list?.[4]?.entity_code },
+		{ label: 'Cogoport Vietnam (501)', value: list?.[0]?.entity_code || '501' },
+		{ label: 'Cogo Universe Pte. Ltd (401)', value: list?.[1]?.entity_code || '401' },
+		{ label: 'COGOPORT PRIVATE LIMITED (301)', value: list?.[2]?.entity_code || '301' },
+		{ label: 'Cogoport Netherlands (201)', value: list?.[3]?.entity_code || '201' },
+		{ label: 'COGO FREIGHT PVT LTD (101)', value: list?.[4]?.entity_code || '101' },
 	];
 
 	return (
@@ -54,9 +53,8 @@ function AccountPayables() {
 						onChange={setActiveEntity}
 						placeholder="Select Entity"
 						options={options}
-						size="md"
-						isClearable
-						style={{ width: '200px' }}
+						size="sm"
+						style={{ width: '284px' }}
 					/>
 				</div>
 			</div>
