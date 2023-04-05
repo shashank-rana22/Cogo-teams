@@ -25,8 +25,10 @@
 
 .profile_picture {
 	width: 36px;
+	height: 36px;
 	margin-right: 4px;
 	border-radius: 20%;
+	object-fit: cover;
 }
 
 .name_details {
@@ -36,6 +38,10 @@
 	font-size: 24px;
 	font-weight: 500;
 	color: #221f20;
+
+	@media (max-width: 800px) {
+		font-size: 20px;
+	}
 }
 
 .profile_container {
@@ -70,4 +76,36 @@
 		top: 4px;
 		left: 4px;
 	}
+}
+
+.image_wrapper {
+	/* position: relative; */
+	margin-right: 6px;
+
+	/* adjust as needed */
+}
+
+.image {
+	/* position: absolute;
+	top: 60px;
+	right: 0;
+	left: 0; */
+
+	/* max-height: 100%; */
+	width: 100px;
+	height: 100px;
+	margin: auto;
+	border-radius: 30%;
+	transition: all 1s ease-out;
+	object-fit: cover;
+}
+
+.shrink {
+	opacity: 0;
+	transform: scale(0.5);
+}
+
+.expand {
+	opacity: 1;
+	transform: scale(1);
 }

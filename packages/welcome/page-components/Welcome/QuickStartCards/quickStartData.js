@@ -24,7 +24,7 @@ const data = [
 		},
 		tag: {
 			icon : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/f1923cd08f77d9e73b474ca5ea7a8d06.png',
-			text : '200+ FAQs',
+			text : '500+ FAQs',
 		},
 	},
 	{
