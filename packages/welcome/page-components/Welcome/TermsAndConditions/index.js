@@ -15,7 +15,7 @@ function TermsAndConditions() {
 					const { title = '', description = '' } = item;
 
 					return (
-						<div className={styles.text_item}>
+						<div className={styles.text_item} key={item.title}>
 							<div className={styles.title}>
 								<u>{title}</u>
 								{' '}
