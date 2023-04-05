@@ -41,7 +41,7 @@ const useGetBusiness = (props) => {
 				Toast.error(getApiErrorString(err));
 			}
 		})();
-	}, [trigger, gstNumber]);
+	}, [trigger, gstNumber, setValue]);
 
 	return {
 		data,
