@@ -29,11 +29,13 @@ const controls = [
 	{
 		name        : 'country_id',
 		label       : 'Country',
-		type        : 'select',
-		options     : countryOptions,
+		type        : 'asyncSelect',
+		params      : { filters: { type: ['country'] } },
+		asyncKey    : 'list_locations',
 		placeholder : 'Select Country',
 		isClearable : true,
 		rules       : { required: 'Country is Required' },
+
 	},
 	{
 		name        : 'partner_id',
