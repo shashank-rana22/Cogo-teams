@@ -10,7 +10,7 @@ function GetSortingData({ sort, setSort }:Props) {
 	return (
 		<div className={styles.sorting}>
 			<div style={{ marginRight: '8px' }}>Profitabillity</div>
-			<div style={{ marginTop: '6px' }}>
+			<div style={{ marginBottom: '2px' }}>
 				<div
 					onClick={() => {
 						setSort('Asc');

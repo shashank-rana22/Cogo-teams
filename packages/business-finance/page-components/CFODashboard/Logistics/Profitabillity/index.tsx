@@ -39,15 +39,13 @@ function Profitabillity({ globalFilters, entityTabFilters }) {
 		sort,
 	});
 
+	const { pageIndex = 0, pageSize = 0, totalRecord, shipmentList = [], customerList = [] } = profitabillityData || {};
+	const rest = { loading: profitabillityLoading };
+	const columns = getProfitabillityColumn(tabs, sort, setSort);
+
 	useEffect(() => {
 		setSort('');
 	}, [tabs]);
-
-	const { pageIndex = 0, pageSize = 0, totalRecord, shipmentList = [], customerList = [] } = profitabillityData || {};
-
-	const rest = { loading: profitabillityLoading };
-
-	const columns = getProfitabillityColumn(tabs, sort, setSort);
 
 	return (
 
