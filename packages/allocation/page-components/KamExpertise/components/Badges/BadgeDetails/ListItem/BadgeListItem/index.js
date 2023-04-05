@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Pill } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
 
 import BadgeCard from './BadgeCard';
@@ -10,6 +10,7 @@ function BadgeListItem(props) {
 	const {
 		bronze_details = {}, silver_details = {},
 		gold_details = {}, badge_name = '', description = '', audits = [], created_by = {},
+		badge_condition_name = [],
 	} = data;
 
 	const handleEdit = () => {
@@ -64,6 +65,18 @@ function BadgeListItem(props) {
 								{' '}
 								{description}
 							</p>
+						</div>
+
+						<div className={styles.events}>
+							Events :
+							{' '}
+							{
+								badge_condition_name.map((item) => (
+									<Pill color="#cfeaed" key={item?.id}>
+										{item?.condition_name || ''}
+									</Pill>
+								))
+							}
 						</div>
 					</div>
 
