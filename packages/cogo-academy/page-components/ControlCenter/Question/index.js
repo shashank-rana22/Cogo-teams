@@ -331,104 +331,114 @@ function CreateFAQ() {
 
 				</form>
 
-				<Modal
-					size="md"
-					show={show}
-					onClose={() => setShow(false)}
-					closeOnOuterClick={false}
-					showCloseIcon={false}
-				>
-					<Modal.Header title={`Add new ${queryValue} here`} />
+				{show
+				&& (
+					<Modal
+						size="md"
+						show={show}
+						onClose={() => setShow(false)}
+						closeOnOuterClick={false}
+						showCloseIcon={false}
+					>
+						<Modal.Header title={`Add new ${queryValue} here`} />
 
-					<Modal.Body>
-						<div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-							<CreateForm
+						<Modal.Body>
+							<div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+								<CreateForm
+									source="create"
+									viewType={queryValue}
+									setConfigurationPage={setConfigurationPage}
+									handleSubmit={handleCreate}
+									control={createFormControl}
+									createFaqComponent={createFaqComponent}
+									setValue={setValue}
+									style={style}
+									setShow={setShow}
+									displayBackButton="No"
+									errors={formErrors}
+								/>
+							</div>
+						</Modal.Body>
+
+						<Modal.Footer>
+							<Button
+								type="button"
+								themeType="secondary"
+								style={{ marginRight: 8 }}
+								onClick={onClickCancelButton}
+							>
+								CANCEL
+							</Button>
+
+							<Button type="button" onClick={handleCreate(createFaqComponent)}>
+								SUBMIT
+							</Button>
+						</Modal.Footer>
+					</Modal>
+				)}
+
+				{showModalOnCancel
+				&& (
+					<Modal
+						size="md"
+						show={showModalOnCancel}
+						onClose={() => setShowModalOnCancel(false)}
+						closeOnOuterClick={false}
+						showCloseIcon
+					>
+						<Modal.Header title="Confirm your action" />
+
+						<Modal.Body>
+							<div className={styles.text_wrapper}>
+								Your current changes will not be saved, Are you sure want to cancel ?
+							</div>
+						</Modal.Body>
+
+						<Modal.Footer>
+							<Button
+								type="button"
+								themeType="tertiary"
+								style={{ marginRight: 8 }}
+								onClick={() => setShowModalOnCancel(false)}
+							>
+								No
+							</Button>
+
+							<Button
+								type="button"
+								onClick={onClickYesButton}
+							>
+								Yes
+							</Button>
+
+						</Modal.Footer>
+					</Modal>
+				)}
+
+				{showCreateAudienceModal
+
+				&& (
+					<Modal
+						size="md"
+						show={showCreateAudienceModal}
+						onClose={() => setShowCreateAudienceModal(false)}
+						closeOnOuterClick={false}
+						showCloseIcon
+					>
+						<Modal.Header title="Create audience" />
+
+						<Modal.Body>
+							<CreateUserForm
 								source="create"
-								viewType={queryValue}
+								setShowCreateAudienceModal={setShowCreateAudienceModal}
 								setConfigurationPage={setConfigurationPage}
-								handleSubmit={handleCreate}
-								control={createFormControl}
-								createFaqComponent={createFaqComponent}
-								setValue={setValue}
-								style={style}
-								setShow={setShow}
 								displayBackButton="No"
-								errors={formErrors}
+								customStyle={userFormStyle}
+								fetchAudiences={fetchAudiences}
 							/>
-						</div>
-					</Modal.Body>
-
-					<Modal.Footer>
-						<Button
-							type="button"
-							themeType="secondary"
-							style={{ marginRight: 8 }}
-							onClick={onClickCancelButton}
-						>
-							CANCEL
-						</Button>
-
-						<Button type="button" onClick={handleCreate(createFaqComponent)}>
-							SUBMIT
-						</Button>
-					</Modal.Footer>
-				</Modal>
-
-				<Modal
-					size="md"
-					show={showModalOnCancel}
-					onClose={() => setShowModalOnCancel(false)}
-					closeOnOuterClick={false}
-					showCloseIcon
-				>
-					<Modal.Header title="Confirm your action" />
-
-					<Modal.Body>
-						<div className={styles.text_wrapper}>
-							Your current changes will not be saved, Are you sure want to cancel ?
-						</div>
-					</Modal.Body>
-
-					<Modal.Footer>
-						<Button
-							type="button"
-							themeType="tertiary"
-							style={{ marginRight: 8 }}
-							onClick={() => setShowModalOnCancel(false)}
-						>
-							No
-						</Button>
-
-						<Button
-							type="button"
-							onClick={onClickYesButton}
-						>
-							Yes
-						</Button>
-
-					</Modal.Footer>
-				</Modal>
-
-				<Modal
-					size="md"
-					show={showCreateAudienceModal}
-					onClose={() => setShowCreateAudienceModal(false)}
-					closeOnOuterClick={false}
-					showCloseIcon
-				>
-					<Modal.Header title="Create audience" />
-
-					<Modal.Body>
-						<CreateUserForm
-							source="create"
-							setShowCreateAudienceModal={setShowCreateAudienceModal}
-							setConfigurationPage={setConfigurationPage}
-							displayBackButton="No"
-							customStyle={userFormStyle}
-							fetchAudiences={fetchAudiences}
-						/>
-					</Modal.Body>
-				</Modal>
+						</Modal.Body>
+					</Modal>
+				)}
 
 			</div>
 

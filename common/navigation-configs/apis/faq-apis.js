@@ -81,11 +81,6 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
-			api          : 'get_faq_audience',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
 			api          : 'update_faq_audience',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
@@ -153,11 +148,6 @@ const faq = {
 			api          : 'list_cogo_entities',
 			access_type  : 'private',
 			service_name : 'partner',
-		},
-		{
-			api          : 'get_faq_audience',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
 		},
 		{
 			api          : 'create_faq_audience',

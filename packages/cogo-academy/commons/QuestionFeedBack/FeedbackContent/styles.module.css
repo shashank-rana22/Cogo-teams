@@ -1,6 +1,7 @@
 .time_stamp {
     font-size: 10px;
-    padding: 12px 0;
+    font-weight: 600;
+    padding: 12px 6px;
 }
 
 .card {
@@ -8,6 +9,7 @@
     padding: 20px;
     border-radius: 8px;
     font-size: 14px;
+    border: 1px solid #ddd;
 }
 
 .card_header {

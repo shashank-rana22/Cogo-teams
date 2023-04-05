@@ -23,7 +23,7 @@
 
 .scrollable_container{
     overflow-y: scroll;
-    height:81vh; 
+    height:80vh; 
 }
 
 .pagination_container {
@@ -36,5 +36,5 @@
 }
 
 .pills_container{
-    padding-bottom: 8px;
+    padding-bottom: 14px;
 }

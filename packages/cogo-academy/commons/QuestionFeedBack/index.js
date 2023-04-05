@@ -45,7 +45,7 @@ function QuestionFeedBack({ id, source = '', onClickEdit = () => {} }) {
 		<div className={styles.container} style={{ width: source === 'create' ? '100%' : '80%' }}>
 			<div
 				className={styles.header}
-				style={{ marginTop: source === 'create' ? '0px' : '20px' }}
+				style={{ marginTop: source === 'create' ? '0px' : '30px' }}
 			>
 				Feedbacks on this question
 
