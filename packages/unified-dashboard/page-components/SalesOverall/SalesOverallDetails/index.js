@@ -1,5 +1,6 @@
+import NoDataFound from '../../../common/NoDataFound';
+
 import FieldSales from './FieldSales';
-import NoDataFound from './NoDataFound';
 import styles from './styles.module.css';
 
 function SalesOverallDetails({ currency, salesFunnel = {}, filters }) {

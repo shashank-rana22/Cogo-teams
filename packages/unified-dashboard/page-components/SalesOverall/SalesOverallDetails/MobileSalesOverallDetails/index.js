@@ -1,4 +1,4 @@
-import NoDataFound from '../NoDataFound';
+import NoDataFound from '../../../../common/NoDataFound';
 
 import FieldSales from './FieldSales';
 import styles from './styles.module.css';

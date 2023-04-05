@@ -1,14 +1,11 @@
 import React from 'react';
 
+import styles from './styles.module.css';
+
 function NoDataFound() {
 	return (
 		<div
-			style={{
-				display        : 'flex',
-				justifyContent : 'center',
-				alignItems     : 'center',
-				marginTop      : '20px',
-			}}
+			className={styles.no_data}
 		>
 			<h2>No Data Found</h2>
 		</div>
