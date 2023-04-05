@@ -1,13 +1,12 @@
-.container{
+.container {
 	display: flex;
-	width:100%;
-	
+	width: 100%;
 }
 
-.question_container{
-	flex:1.75;
-	padding-right:50px;
-	width:66%
+.question_container {
+	flex: 1.75;
+	width: 66%;
+	padding-right: 50px;
 }
 
 .back_div {
@@ -88,11 +87,11 @@
 	padding: 8px 0;
 }
 
-.feedback_container{
-	flex:1;
+.feedback_container {
+	flex: 1;
 }
 
-/* 
+/*
 .faq_answer_container{
 	.img{
 		width:100px;

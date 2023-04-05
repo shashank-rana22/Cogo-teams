@@ -21,10 +21,10 @@
 .tab_group {
 	width: fit-content;
 	margin-top: 12px;
+
 	:global {
 		.ui_tab_list_container {
 			align-items: inherit;
 		}
 	}
-
 }

@@ -4,8 +4,8 @@
 }
 
 .question {
+	width: 300px;
 	white-space: initial;
-	width:300px
 }
 
 .topics {
