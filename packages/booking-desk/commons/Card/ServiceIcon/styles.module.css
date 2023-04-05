@@ -1,4 +1,3 @@
-
 .icon_container {
 	display: inline-flex;
 	flex-direction: column;
@@ -18,18 +17,22 @@
 	white-space: nowrap;
 }
 
-.fcl, .fcl_local {
+.fcl,
+.fcl_local {
 	svg path {
 		fill: var(--color-primary-error-red-2);
 	}
+
 	.icon_text {
 		color: var(--color-primary-error-red-2);
 	}
 }
+
 .lcl {
 	svg path {
 		fill: var(--color-primary-error-red-3);
 	}
+
 	.icon_text {
 		color: var(--color-primary-error-red-3);
 	}

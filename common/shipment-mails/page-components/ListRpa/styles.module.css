@@ -7,16 +7,16 @@
 
 .main_container {
 	width: 27%;
-	border-left: 1px solid #E0E0E0;
-	border-right: 1px solid #E0E0E0;
-	padding: 28px 0px 0px 0px;
+	padding: 28px 0 0;
+	border-right: 1px solid #e0e0e0;
+	border-left: 1px solid #e0e0e0;
 }
 
 .search_container {
 	display: flex;
 	justify-content: center;
-	padding: 0px 12px;
-	
+	padding: 0 12px;
+
 	:global {
 		.ui_input_container.ui_ps_size_md {
 			height: 32px;
@@ -34,8 +34,8 @@
 }
 
 .line {
-	border: 1px solid #E0E0E0;
 	margin-top: 10px;
+	border: 1px solid #e0e0e0;
 }
 
 .header {
@@ -45,9 +45,9 @@
 }
 
 .pagination_container {
-	justify-content: flex-end;
 	display: flex;
 	align-items: center;
+	justify-content: flex-end;
 	margin: 10px 24px;
 	font-size: 12px;
 	font-weight: 600;

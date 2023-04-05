@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { MultiselectController, InputController } from '@cogoport/forms';
 
-import useUpdateContainerDetails from '../../../../hooks/useUpdateContainerDetails';
+import useUpdateShipmentContainerDetails from '../../../../hooks/useUpdateShipmentContainerDetails';
 
 import styles from './styles.module.css';
 import formatPayload from './utils/formatPayload';
@@ -26,7 +26,7 @@ function BlContainersMapping({
 	const {
 		loading,
 		apiTrigger,
-	} = useUpdateContainerDetails({
+	} = useUpdateShipmentContainerDetails({
 		refetch: afterContainerUpdate,
 	});
 

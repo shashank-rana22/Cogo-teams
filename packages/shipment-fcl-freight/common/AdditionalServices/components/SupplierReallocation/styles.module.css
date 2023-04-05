@@ -4,9 +4,9 @@
 }
 
 .button_container {
-	margin: 22px auto auto auto;
 	display: flex;
 	justify-content: flex-end;
+	margin: 22px auto auto;
 }
 
 .errors {
@@ -15,7 +15,7 @@
 }
 
 .form_wrapper {
-	& > div:not(:last-of-type){
+	& > div:not(:last-of-type) {
 		margin-bottom: 24px;
 	}
 }
@@ -25,7 +25,7 @@
 
 	:global {
 		.ui_modal_header_container {
-			padding: 0px 0px 8px 0px !important;
+			padding: 0 0 8px !important;
 		}
 
 		.ui_modal_body_container {
@@ -36,8 +36,8 @@
 }
 
 .label {
+	margin: 8px 0;
 	font-weight: 900;
 	line-height: 14px;
 	letter-spacing: 0.02em;
-	margin: 8px 0px;
 }

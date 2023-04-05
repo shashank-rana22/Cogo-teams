@@ -1,68 +1,68 @@
-
 .container {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 6px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 6px;
 
-    * {
-        font-size: var(--font-size-md);
-    }
+	* {
+		font-size: var(--font-size-md);
+	}
 
-    :global {
-        .ui_input_container {
-            height: initial !important;
-            width: 140px;
+	:global {
+		.ui_input_container {
+			width: 140px;
+			height: initial !important;
 
-            .ui_input_control {
-                font-size: var(--font-size-md)
-            }
-        }
-    }
+			.ui_input_control {
+				font-size: var(--font-size-md);
+			}
+		}
+	}
 }
 
 .applied_filters {
-    display: flex;
+	display: flex;
 
-    .applied_filter {
-        background-color: #F3FAFA;
-        padding: 4px 6px;
-        border-radius: 4px;
+	.applied_filter {
+		padding: 4px 6px;
+		background-color: #f3fafa;
+		border-radius: 4px;
 
-        &.clearable {
-            border-radius: 4px 0 0 4px;
-        }
+		&.clearable {
+			border-radius: 4px 0 0 4px;
+		}
 
-        &:not(:first-of-type){
-            margin-left: 10px;
-        }
-    }
-    .clear_filter_icon {
-        display: flex;
-        align-items: center;
-        background-color: #CFEAED;
-        padding: 0 6px;
-        border-radius: 0 4px 4px 0;
-        border: none;
-        cursor: pointer;
-        
-        svg {
-            vertical-align: middle;
-            fill: #6FA5AB;
-            width: 16px;
-            height: 16px;
-        }
-    }
+		&:not(:first-of-type) {
+			margin-left: 10px;
+		}
+	}
+
+	.clear_filter_icon {
+		display: flex;
+		align-items: center;
+		padding: 0 6px;
+		cursor: pointer;
+		background-color: #cfeaed;
+		border: none;
+		border-radius: 0 4px 4px 0;
+
+		svg {
+			width: 16px;
+			height: 16px;
+			vertical-align: middle;
+			fill: #6fa5ab;
+		}
+	}
 }
 
 .open_filters {
-    display: flex;
-    gap: 10px;
-    align-items: stretch;
-    max-height: 28px;
+	display: flex;
+	gap: 10px;
+	align-items: stretch;
+	max-height: 28px;
 
-    :global {
-        .ui_button_container {
-            height: 100%;
-        }
-    }
+	:global {
+		.ui_button_container {
+			height: 100%;
+		}
+	}
 }

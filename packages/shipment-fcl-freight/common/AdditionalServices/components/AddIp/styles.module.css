@@ -8,7 +8,7 @@
 	:global {
 		.ui_modal_body_container {
 			height: 400px;
-			max-height: 400px ;
+			max-height: 400px;
 		}
 	}
 }

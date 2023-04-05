@@ -1,11 +1,11 @@
 .button_container {
 	display: flex;
 	justify-content: flex-end;
-	background: #ffffff;
 	padding: 8px;
+	background-color: #fff;
 	border-top: 1px solid #cbcff5;
 
-	& > button:first-of-type{
+	& > button:first-of-type {
 		margin-right: 8px;
 	}
 }
@@ -15,10 +15,10 @@
 	flex-direction: column;
 }
 
-.title{
-	color: #393f70;
+.title {
+	margin: 16px 0 0;
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 16px;
-	margin: 16px 0px 0px;
+	color: #393f70;
 }

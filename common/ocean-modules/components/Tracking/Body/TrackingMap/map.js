@@ -7,7 +7,6 @@ import Route from './Route';
 const LAYER = [
 	{
 		name        : 'Cogo Maps',
-		// eslint-disable-next-line max-len
 		url         : 'https://api.cogoport.com/cogo-tiles/{z}/{x}/{y}.png',
 		attribution : '',
 	},

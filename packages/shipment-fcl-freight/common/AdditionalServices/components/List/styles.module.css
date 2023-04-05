@@ -1,3 +1,4 @@
+/* stylelint-disable selector-class-pattern */
 .container {
 	padding: 20px 14px;
 }
@@ -5,8 +6,8 @@
 .not_added {
 	display: flex;
 	justify-content: flex-end;
-	margin-right: 8px;
 	margin-top: 12px;
+	margin-right: 8px;
 
 	@media (max-width: 768px) {
 		justify-content: center;
@@ -21,16 +22,16 @@
 
 .added_services {
 	display: flex;
-	align-items: center;
 	flex-wrap: wrap;
+	align-items: center;
 	margin-top: 12px;
 }
 
 .circle {
 	width: 12px;
 	height: 12px;
-	background-color: #f7cdcd;
 	margin-right: 8px;
+	background-color: #f7cdcd;
 	border-radius: 50%;
 }
 
@@ -39,22 +40,22 @@
 }
 
 .service_name {
-	font-weight: 500;
-	font-size: 14px;
-	line-height: 16px;
-	color: #333333;
 	margin-right: 40px;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 16px;
+	color: #333;
 }
 
 .info_container {
 	display: flex;
-    align-items: center;
+	align-items: center;
 	margin-top: 8px;
 
 	:global {
 		.tippy-box {
-			max-width: 6100px !important;
 			width: fit-content;
+			max-width: 6100px !important;
 
 			.tippy-content {
 				width: 100%;
@@ -65,8 +66,8 @@
 
 .heading {
 	margin-bottom: 20px;
-	font-weight: 500;
 	font-size: 14px;
+	font-weight: 500;
 	color: #363e6e;
 }
 
@@ -91,7 +92,7 @@
 	:global {
 		.ui_modal_body_container {
 			max-height: 400px;
-	}
+		}
 	}
 }
 
@@ -104,8 +105,8 @@
 }
 
 .show_more {
-	margin-top: -12px;
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+	margin-top: -12px;
 }

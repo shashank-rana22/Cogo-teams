@@ -29,7 +29,7 @@ export default function useGetScopeOptions({ defaultValues = {} } = {}) {
 					scopes.push(type);
 					viewTypes[type] = through_criteria || [];
 
-					if (is_default || defaultValues.scope === type) {
+					if ((!defaultScope && is_default) || defaultValues.scope === type) {
 						defaultScope = type;
 
 						defaultView = viewTypes[type].includes(defaultValues.view_type)

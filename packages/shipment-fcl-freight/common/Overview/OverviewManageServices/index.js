@@ -16,7 +16,7 @@ function OverviewManageServices() {
 	);
 
 	return (
-		<Accordion title={getTitle}>
+		<Accordion title={getTitle} isOpen>
 			<AdditionalServiceList
 				services={servicesList}
 				refetchServices={refetchServices}

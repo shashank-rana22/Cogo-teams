@@ -14,21 +14,22 @@
 }
 
 .attachement_item {
-	margin-right: 10px;
 	display: flex;
 	align-items: center;
 	padding: 4px;
+	margin-right: 10px;
 	border-radius: 4px;
+
 	&:hover {
-		background: #e0e0e0;
 		cursor: pointer;
+		background: #e0e0e0;
 	}
 }
 
-.name{
-	max-width: 100px;
+.name {
 	display: inline-block;
+	max-width: 100px;
+	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	overflow: hidden;
 }

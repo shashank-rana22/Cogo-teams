@@ -7,17 +7,17 @@ import { FirebaseConfig } from '../FirebaseConfig';
 const useSeen = () => {
 	const [msgSeen, setMsgSeen] = useState({});
 
-	useEffect(() => {
-		const app = getApps().length === 0 ? initializeApp(FirebaseConfig) : getApp();
-		const db = getDatabase(app);
+	const app = getApps().length === 0 ? initializeApp(FirebaseConfig) : getApp();
+	const db = getDatabase(app);
 
+	useEffect(() => {
 		const hit = ref(db, 'listchannels');
 
 		onValue(hit, (snapshot) => {
 			const data = snapshot.val();
 			setMsgSeen(data);
 		});
-	}, []);
+	}, [db]);
 
 	return {
 		msgSeen,

@@ -1,7 +1,9 @@
-import useAxios from 'axios-hooks';
-import { useEffect, useState, useCallback } from 'react';
+import { Toast } from '@cogoport/components';
+import { useLensRequest } from '@cogoport/request';
+import { useEffect, useCallback } from 'react';
 
 import APIS from '../constants/apis';
+import getApiErrorString from '../utils/getApiErrorString';
 
 /**
  * @param {String} email_address Mail address to  get mails from
@@ -11,56 +13,37 @@ import APIS from '../constants/apis';
  * Single utility hook to get mails from Cogo RPA using email address and folder
  */
 
-const useGetMails = (
-	email_address,
-	foldername,
-	page_limit,
-	source,
-	filters,
-) => {
-	const [page, setPage] = useState(1);
-	const [search, setSearch] = useState(undefined);
+const useGetMails = ({ payload }) => {
+	const { source, filters, ...restPayload } = payload;
 
 	const apis = APIS[source];
 
-	const [mailApi, triggerGetMail] = useAxios(
-		{
-			url    : `${process.env.COGO_LENS_URL}/${apis.list}`,
-			method : 'GET',
+	const [mailApi, triggerGetMail] = useLensRequest({
+		url    : `${apis.list}`,
+		method : 'GET',
+		params : {
+			...restPayload,
+			filters: JSON.stringify(filters),
 		},
-		{ manual: true },
-	);
+	}, { manual: true });
 
 	const getEmails = useCallback(() => {
 		(async () => {
 			try {
-				await triggerGetMail({
-					params: {
-						email_address,
-						foldername,
-						page,
-						page_limit : page_limit || 10,
-						search,
-						filters    : JSON.stringify(filters),
-					},
-				});
+				await triggerGetMail();
 			} catch (err) {
-				console.log(err);
+				Toast.error(getApiErrorString(err));
 			}
 		})();
-	}, [email_address, foldername, page, page_limit, search, filters, triggerGetMail]);
+	}, [triggerGetMail]);
 
 	useEffect(() => {
 		getEmails();
-	}, [email_address, foldername, page, search, getEmails]);
+	}, [restPayload, getEmails]);
 
 	return {
 		mailApi,
-		setPage,
-		page,
 		getEmails,
-		setSearch,
-		search,
 	};
 };
 
