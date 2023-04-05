@@ -2,10 +2,10 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { dynamic } from '@cogoport/next';
 import React, { useMemo } from 'react';
 
-import { useStakeholderCheck } from '../../helpers/useStakeholderCheck';
 import useGetServices from '../../hooks/useGetServices';
 import useGetShipment from '../../hooks/useGetShipment';
 import useGetTimeLine from '../../hooks/useGetTimeline';
+import { useStakeholderCheck } from '../../hooks/useStakeholderCheck';
 
 const Kam = dynamic(() => import('./StakeholdersView/Kam'), { ssr: false });
 const Superadmin = dynamic(() => import('./StakeholdersView/Superadmin'), { ssr: false });
