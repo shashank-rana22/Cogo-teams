@@ -53,6 +53,8 @@ function DisplayCard({
 
 	const isCogoAcademyAdmin = (user_id === GLOBAL_CONSTANTS.uuid.cogoacademy_admin_id);
 
+	const isAllowedToEdit = isCogoAcademyAdmin || data.status === 'draft';
+
 	const handleView = (i) => {
 		handleAnnouncementDetails(i);
 		setShowModal(true);
@@ -91,7 +93,7 @@ function DisplayCard({
 				View
 			</Button>
 
-			{activeTab === 'active' && data?.status === 'draft' && (
+			{activeTab === 'active' && isAllowedToEdit && (
 				<Button
 					type="button"
 					themeType="secondary"
@@ -104,7 +106,7 @@ function DisplayCard({
 				</Button>
 			)}
 
-			{activeTab === 'active' && data?.status === 'draft' && (
+			{activeTab === 'active' && isAllowedToEdit && (
 				<Button
 					type="button"
 					themeType="secondary"
@@ -243,6 +245,7 @@ function DisplayCard({
 						<div className={styles.titles}>Embedded Media :</div>
 						<div className={styles.document_container}>
 							<DisplayAttachments
+								isAllowedToEdit={isAllowedToEdit}
 								data={accordianData}
 								index={index}
 								refetch={refetch}
