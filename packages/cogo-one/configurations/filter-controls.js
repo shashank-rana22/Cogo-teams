@@ -9,7 +9,10 @@ const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMe
 		ADMIN : showBotMessages ? ['observer', 'chat_tags'] : ['observer'],
 		KAM   : ['assigned_to', 'assigned_agent'],
 	};
-
+	const extraStatusOptions = (showBotMessages && isomniChannelAdmin) ? 	[{
+		label : 'seen By User',
+		value : 'seen_by_user',
+	}] : [];
 	const controls = [
 		{
 			label     : '',
@@ -26,6 +29,7 @@ const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMe
 					label : 'All',
 					value : 'all',
 				},
+				...extraStatusOptions,
 			],
 		},
 		{

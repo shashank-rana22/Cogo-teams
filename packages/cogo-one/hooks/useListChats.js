@@ -114,6 +114,12 @@ const useListChats = ({
 
 	), [searchQuery]);
 
+	const queryForSeenByUsers = useMemo(() => (
+		status === 'seen_by_users'
+			? [where('conversation_type', '==', 'received'),
+				where('last_message_document.created_at', '==', 'received')] : []
+
+	), [status]);
 	const mountPinnedSnapShot = useCallback(() => {
 		setLoading(true);
 		snapshotCleaner({ ref: pinSnapshotListener });
