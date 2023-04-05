@@ -19,7 +19,6 @@ function DefaultForm({
 	const {
 		data:{ list = [] } = {},
 		loading,
-		filters,
 		setFilters,
 	} = useListOrganizationTradeParties({
 		...getTradePartiesDefaultParams({ companyType, tradePartyType }),
@@ -38,9 +37,9 @@ function DefaultForm({
 	const formValues = watch();
 
 	useEffect(() => {
-		setFilters({ ...filters });
+		setFilters((p) => ({ ...p }));
 		reset();
-	}, [companyType, tradePartyType]);
+	}, [companyType, tradePartyType, setFilters, reset]);
 
 	useEffect(() => {
 		resetField('address');

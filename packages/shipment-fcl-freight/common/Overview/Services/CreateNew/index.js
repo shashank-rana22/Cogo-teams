@@ -1,8 +1,11 @@
 import { Modal, cl } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import Form from '../../../Form';
+import useServiceUpsellControls from '../../../../hooks/useFormatServiceUpsellControls';
+import Footer from '../../../Footer';
+import Layout from '../../../Layout';
 
 import styles from './styles.module.css';
 
@@ -15,6 +18,7 @@ function CreateNew({
 	cancelUpsellDestinationFor = '',
 }) {
 	const [upsellModal, setUpsellModal] = useState(false);
+	const [truckTypeToggle, setTruckTypeToggle] = useState(false);
 
 	const service = upsellableService.service_type.replace('_service', '');
 
@@ -28,6 +32,13 @@ function CreateNew({
 		isUpsellable = (primary_service?.origin_port?.is_icd
 			|| primary_service?.destination_port?.is_icd);
 	}
+
+	const { controls, formProps } = useServiceUpsellControls({
+		service,
+		services: servicesList,
+		truckTypeToggle,
+		setTruckTypeToggle,
+	});
 
 	return (
 		<>
@@ -47,16 +58,22 @@ function CreateNew({
 			<Modal
 				show={upsellModal}
 				onClose={() => setUpsellModal(false)}
-				className="primary lg"
-				styles={{ dialog: { width: 700 } }}
+				className={styles.custom_modal}
 			>
-				<Form
-					service={service}
-					onClose={() => setUpsellModal(false)}
-					shipmentData={shipmentData}
-					primary_service={primary_service}
-					services={servicesList}
-				/>
+				<Modal.Header title={`${startCase(primary_service?.trade_type)} ${startCase(service)}`} />
+				<Modal.Body>
+					<Layout controls={controls} formProps={formProps} />
+				</Modal.Body>
+				<Modal.Footer>
+					<Footer
+						onClose={() => setUpsellModal(false)}
+						formProps={formProps}
+						service={service}
+						shipmentData={shipmentData}
+						services={servicesList}
+						primary_service={primary_service}
+					/>
+				</Modal.Footer>
 			</Modal>
 		</>
 	);

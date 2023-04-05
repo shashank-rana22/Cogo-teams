@@ -13,7 +13,7 @@ import { card, card_body, card_footer, separator, critical_card } from './styles
 export default function Card({ item = {}, couldBeCardsCritical = false }) {
 	const router = useRouter();
 
-	const handleCardClick = () => {
+	const clickCard = () => {
 		router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}`);
 	};
 
@@ -21,7 +21,7 @@ export default function Card({ item = {}, couldBeCardsCritical = false }) {
 		<div
 			role="button"
 			tabIndex={0}
-			onClick={handleCardClick}
+			onClick={clickCard}
 			className={`${card} ${couldBeCardsCritical && isCardCritical({ item }) ? critical_card : ''}`}
 		>
 			<CardHeader item={item} />

@@ -772,6 +772,7 @@ importers:
       '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/icons-react': ^1.0.60
       '@cogoport/maps': ^1.0.2
+      '@cogoport/navigation-configs': workspace:^0.1.0
       '@cogoport/next': workspace:^0.1.0
       '@cogoport/ocean-modules': workspace:^0.1.0
       '@cogoport/request': workspace:^0.1.0
@@ -790,6 +791,7 @@ importers:
       '@cogoport/globalization': link:../../common/globalization
       '@cogoport/icons-react': 1.0.60_react@18.2.0
       '@cogoport/maps': 1.0.3_aydyy3gkshtlrnyh7fafj36que
+      '@cogoport/navigation-configs': link:../../common/navigation-configs
       '@cogoport/next': link:../../common/next
       '@cogoport/ocean-modules': link:../../common/ocean-modules
       '@cogoport/request': link:../../common/request

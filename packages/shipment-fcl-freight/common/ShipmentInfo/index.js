@@ -1,23 +1,32 @@
-import { Breadcrumb, Tags, Placeholder } from '@cogoport/components';
+import { Placeholder, Breadcrumb, Tags } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
 import styles from './styles.module.css';
+import useShipmentBack from './useShipmentBack';
 
 function ShipmentInfo() {
 	const { shipment_data, isGettingShipment } = useContext(ShipmentDetailContext);
 
-	const sourceText =	shipment_data?.source === 'direct'
+	const { handleShipmentsClick } = useShipmentBack();
+
+	const sourceText = shipment_data?.source === 'direct'
 		? 'Sell Without Buy'
 		: startCase(shipment_data?.source);
 
-	return !isGettingShipment ? (
+	return (
 		<div className={styles.container}>
 			<Breadcrumb>
-				<Breadcrumb.Item label={<a href="page number">Shipments</a>} />
-				<Breadcrumb.Item label={`${shipment_data?.serial_id}`} />
+				<Breadcrumb.Item label="Shipments" className={styles.link} onClick={handleShipmentsClick} />
+				<Breadcrumb.Item
+					className={styles.inactive}
+					label={isGettingShipment
+						? <Placeholder width={100} />
+						: `Shipment ID  #${shipment_data?.serial_id}`}
+				/>
 			</Breadcrumb>
+
 			{shipment_data?.source ? <Tags size="sm">{sourceText}</Tags> : null}
 			{shipment_data?.is_cogo_assured ? (
 				<img
@@ -27,10 +36,10 @@ function ShipmentInfo() {
 					height="2em"
 					style={{ marginLeft: '20px' }}
 				/>
-			) : <Placeholder className={styles.shipment_info} />}
+			) : null}
 
 		</div>
-	) : null;
+	);
 }
 
 export default ShipmentInfo;

@@ -1,14 +1,14 @@
-export const formatPayloadForSubsidiaryServiceRateCards = (item) => {
-	const serviceType = item?.service_type.replace('_service', '');
+export const formatPayloadForSubsidiaryServiceRateCards = ({ code, service_type, services }) => {
+	const serviceType = (service_type || '').replace('_service', '');
 
-	const addedService = (item?.services || []).find(
-		(service) => service.service_type === item.service_type,
+	const addedService = (services || []).find(
+		(service) => service.service_type === service_type,
 	);
 
 	const date = new Date();
 
 	const payload = {
-		code                 : item.code,
+		code,
 		service_type         : serviceType,
 		validity_end         : addedService?.schedule_arrival,
 		validity_start       : date,
@@ -25,10 +25,7 @@ export const formatPayloadForSubsidiaryServiceRateCards = (item) => {
 		commodity           : addedService?.commodity,
 		service_provider_id : addedService?.service_provider_id || addedService?.service_provider?.id,
 		trade_type          : addedService?.trade_type,
-
 	};
 
-	return {
-		payload,
-	};
+	return payload;
 };

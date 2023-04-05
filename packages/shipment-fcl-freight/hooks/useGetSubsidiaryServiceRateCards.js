@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 
 import { formatPayloadForSubsidiaryServiceRateCards } from '../helpers/format-payload-service-rate-cards';
 import getApiErrorString from '../utils/getApiErrorString';
@@ -8,26 +8,28 @@ import getApiErrorString from '../utils/getApiErrorString';
 const useGetSubsidiaryServiceRateCards = ({ item }) => {
 	const [apiData, setApiData] = useState({});
 
+	const { code, services, service_type } = item || {};
+
+	const payload = useMemo(
+		() => formatPayloadForSubsidiaryServiceRateCards({ code, services, service_type }),
+		[code, services, service_type],
+	);
+
 	const [{ loading }, trigger] = useRequest({
 		url    : '/get_subsidiary_service_rate_cards',
 		method : 'GET',
+		params : payload,
 	});
-
-	const { payload } = formatPayloadForSubsidiaryServiceRateCards(item);
 
 	const getSubsidiaryServiceRateCards = useCallback(async () => {
 		try {
-			const res = await trigger({
-				params: {
-					...payload,
-				},
-			});
+			const res = await trigger();
 			setApiData(res.data || {});
 		} catch (err) {
 			setApiData({});
 			Toast.error(getApiErrorString(err));
 		}
-	}, [trigger, payload]);
+	}, [trigger]);
 
 	useEffect(() => {
 		getSubsidiaryServiceRateCards();
