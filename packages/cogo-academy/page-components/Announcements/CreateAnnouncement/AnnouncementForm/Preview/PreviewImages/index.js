@@ -1,6 +1,7 @@
 import { IcMArrowRight, IcMArrowLeft } from '@cogoport/icons-react';
 import React, { useRef } from 'react';
 
+import openDocument from '../../../../../../commons/OpenDocument';
 import styles from '../PreviewVideos/styles.module.css';
 
 const scrollAmount = 766;
@@ -32,15 +33,21 @@ function PreviewImages({ images = [] }) {
 					<div className={styles.content_inner_container} ref={scrollRefImages}>
 
 						<div className={styles.contents}>
-							{images.map((i, index) => (
-								<div
-									key={i}
-									className={styles.content_item}
-									style={{ marginLeft: `${index === 0 ? '' : '20px'}` }}
-								>
-									<img src={i} alt="img" width={366} />
-								</div>
-							))}
+							{images.map((i, index) => {
+								const image_url = (i.finalUrl ? i.finalUrl : i);
+
+								return (
+									<div
+										key={image_url}
+										role="presentation"
+										className={styles.content_item}
+										style={{ marginLeft: `${index === 0 ? '' : '20px'}` }}
+										onClick={() => openDocument(image_url)}
+									>
+										<img src={image_url} alt="img" width={366} />
+									</div>
+								);
+							})}
 						</div>
 
 					</div>

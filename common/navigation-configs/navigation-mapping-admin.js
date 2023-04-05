@@ -1,4 +1,5 @@
 import {
+	IcMAnnouncement,
 	IcMSettings,
 	IcMAccountSettings,
 	IcMLocation,
@@ -2054,6 +2055,7 @@ const navigationMappingAdmin = {
 				title         : 'Announcements',
 				href          : '/v2/announcements',
 				as            : '/v2/announcements',
+				icon          : IcMAnnouncement,
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.announcements,
