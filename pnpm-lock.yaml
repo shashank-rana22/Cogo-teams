@@ -867,14 +867,14 @@ importers:
       axios-hooks: ^4.0.0
       react: 18.2.0
     dependencies:
-      '@cogoport/charts': 1.0.1_react@18.2.0
-      '@cogoport/components': 1.0.366_uffp5ldixb4cfaot3z7zbxlpbm
+      '@cogoport/charts': 1.0.2_react@18.2.0
+      '@cogoport/components': 1.0.395_uffp5ldixb4cfaot3z7zbxlpbm
       '@cogoport/core': link:../../common/core
       '@cogoport/icons-react': 1.0.65_react@18.2.0
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
-      '@cogoport/utils': 1.2.6
+      '@cogoport/utils': 1.2.7
       axios: 1.3.4
       axios-hooks: 4.0.0_axios@1.3.4+react@18.2.0
       react: 18.2.0
@@ -2209,34 +2209,8 @@ packages:
       - react-dom
     dev: false
 
-  /@cogoport/charts/1.0.2_react@18.2.0:
-    resolution: {integrity: sha512-drFmQZ3GW5upV9rkKG8xZXm3rIXS4jsk8S6CiWyXPjb26LweKkF/97LXMP4YL4L7t9zzh7FtXInIKOyawuOHOg==}
-    peerDependencies:
-      react: ^18.2.0
-    dependencies:
-      '@nivo/bar': 0.80.0_vpsqasc34janocxdlqh4y4bymy
-      '@nivo/bullet': 0.80.0_vpsqasc34janocxdlqh4y4bymy
-      '@nivo/bump': 0.80.0_vpsqasc34janocxdlqh4y4bymy
-      '@nivo/calendar': 0.80.0_vpsqasc34janocxdlqh4y4bymy
-      '@nivo/core': 0.80.0_owushstsnvapaxzneadhkyoeea
-      '@nivo/funnel': 0.80.0_vpsqasc34janocxdlqh4y4bymy
-      '@nivo/geo': 0.80.0_vpsqasc34janocxdlqh4y4bymy
-      '@nivo/line': 0.80.0_vpsqasc34janocxdlqh4y4bymy
-      '@nivo/marimekko': 0.80.0_vpsqasc34janocxdlqh4y4bymy
-      '@nivo/pie': 0.80.0_vpsqasc34janocxdlqh4y4bymy
-      '@nivo/radial-bar': 0.80.0_vpsqasc34janocxdlqh4y4bymy
-      '@nivo/scatterplot': 0.80.0_vpsqasc34janocxdlqh4y4bymy
-      '@nivo/stream': 0.80.0_vpsqasc34janocxdlqh4y4bymy
-      '@nivo/sunburst': 0.80.0_vpsqasc34janocxdlqh4y4bymy
-      '@nivo/tooltip': 0.80.0_vpsqasc34janocxdlqh4y4bymy
-      react: 18.2.0
-    transitivePeerDependencies:
-      - prop-types
-      - react-dom
-    dev: false
-
-  /@cogoport/components/1.0.366_4o7yor53awafeuvdjrs2cbhz3i:
-    resolution: {integrity: sha512-7x0BpOXdhTeb6P6por00NyQ+nmosa4xZRffa0ljRU8fzZ7nqdJaofiXFOoI9VjCrvsEJ+sivFCi7OWct/qo6bw==}
+  /@cogoport/components/1.0.385_aydyy3gkshtlrnyh7fafj36que:
+    resolution: {integrity: sha512-K1D0vSZuC5D8yIdSK11AL2+2+2RDWykl/nF52kDRhNBr6S/TD8vPdtoP8d5RCTT8DTXYbDPioY1U6gOVUytzfQ==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
@@ -4279,6 +4253,22 @@ packages:
       - react-dom
     dev: false
 
+  /@nivo/polar-axes/0.80.0_6zomopewppbkd5eeu2nbbcio3i:
+    resolution: {integrity: sha512-lhk8ZtpEg7qT6/UFnrXOd0Tg5M6ZipTxjT2JmC6gxAADDiha5BzlAuBZaSudgbwhWbnzTdNGqHBkR5Dp/yqUcA==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/arcs': 0.80.0_6zomopewppbkd5eeu2nbbcio3i
+      '@nivo/core': 0.80.0_g5kln477lwx3caqucf3exzf3du
+      '@nivo/scales': 0.80.0
+      '@react-spring/web': 9.4.5_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
   /@nivo/polar-axes/0.80.0_vpsqasc34janocxdlqh4y4bymy:
     resolution: {integrity: sha512-lhk8ZtpEg7qT6/UFnrXOd0Tg5M6ZipTxjT2JmC6gxAADDiha5BzlAuBZaSudgbwhWbnzTdNGqHBkR5Dp/yqUcA==}
     peerDependencies:
@@ -4289,6 +4279,28 @@ packages:
       '@nivo/core': 0.80.0_owushstsnvapaxzneadhkyoeea
       '@nivo/scales': 0.80.0
       '@react-spring/web': 9.4.5_react@18.2.0
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
+  /@nivo/radial-bar/0.80.0_6zomopewppbkd5eeu2nbbcio3i:
+    resolution: {integrity: sha512-IJ+IvGCXcy3y0uwcAsMyjyV5WTPe3vP5aUuV+bglTOUd1PmyD+6XY5FIAX0x3049t8mpHZnVRTewPpfaAZYLPw==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/arcs': 0.80.0_6zomopewppbkd5eeu2nbbcio3i
+      '@nivo/colors': 0.80.0_lqef3llyjlhcb4sprl3jwpzupa
+      '@nivo/core': 0.80.0_g5kln477lwx3caqucf3exzf3du
+      '@nivo/legends': 0.80.0_lqef3llyjlhcb4sprl3jwpzupa
+      '@nivo/polar-axes': 0.80.0_6zomopewppbkd5eeu2nbbcio3i
+      '@nivo/scales': 0.80.0
+      '@nivo/tooltip': 0.80.0_wyuiu3ihipn7hpncy62nqhyrji
+      '@react-spring/web': 9.4.5_biqbaboplfbrettd7655fr4n2y
+      d3-scale: 3.3.0
+      d3-shape: 1.3.7
       react: 18.2.0
     transitivePeerDependencies:
       - prop-types
