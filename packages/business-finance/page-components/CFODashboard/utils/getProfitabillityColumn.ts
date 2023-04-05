@@ -1,11 +1,11 @@
 import customerProfitabillityColumn from '../configuration/customer-profitabillity-table';
 import profitabillityColumn from '../configuration/profitabillity-table';
 
-const getProfitabillityColumn = (tabs) => {
+const getProfitabillityColumn = (tabs, sort, setSort) => {
 	if (tabs === 'shipment') {
-		return profitabillityColumn;
+		return profitabillityColumn(sort, setSort);
 	}
-	return customerProfitabillityColumn;
+	return customerProfitabillityColumn(sort, setSort);
 };
 
 export default getProfitabillityColumn;
