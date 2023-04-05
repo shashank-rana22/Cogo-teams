@@ -1,3 +1,5 @@
+import { startCase } from '@cogoport/utils';
+
 import styles from '../components/Events/CreateEvent/AttributesPage/styles.module.css';
 
 const getEventControlType = ({ name, options }) => {
@@ -11,6 +13,11 @@ const getEventControlType = ({ name, options }) => {
 			isClearable : true,
 			asyncKey    : 'rule_options',
 			params      : { rule_name: name },
+			renderLabel : (item) => (
+				<div>
+					{startCase(item.option)}
+				</div>
+			),
 		},
 		asyncMultiSelect: {
 			type        : 'asyncSelect',
@@ -24,11 +31,11 @@ const getEventControlType = ({ name, options }) => {
 			type        : 'asyncSelect',
 			asyncKey    : 'list_locations',
 			isClearable : true,
-			renderLabel : (optionss) => (
+			renderLabel : (item) => (
 				<div className={styles.modified_options}>
-					<div>{optionss.name}</div>
+					<div>{item.name}</div>
 
-					<div className={styles.location_options_type}>{optionss.type}</div>
+					<div className={styles.location_options_type}>{item.type}</div>
 				</div>
 			),
 		},
