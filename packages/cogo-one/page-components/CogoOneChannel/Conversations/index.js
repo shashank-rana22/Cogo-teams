@@ -13,7 +13,6 @@ function Conversations({
 	suggestions = [],
 	userId,
 	isomniChannelAdmin = false,
-	showBotMessages = false,
 	mailProps,
 }) {
 	return (
@@ -25,7 +24,6 @@ function Conversations({
 					suggestions={suggestions}
 					userId={userId}
 					isomniChannelAdmin={isomniChannelAdmin}
-					showBotMessages={showBotMessages}
 				/>
 			)}
 			{activeTab === 'voice' && (<VoiceCall activeVoiceCard={activeVoiceCard} />)}

@@ -115,7 +115,6 @@ function CogoOne() {
 						suggestions={suggestions}
 						userId={userId}
 						isomniChannelAdmin={isomniChannelAdmin}
-						showBotMessages={showBotMessages}
 						mailProps={mailProps}
 					/>
 					{activeTab !== 'mail' && (
