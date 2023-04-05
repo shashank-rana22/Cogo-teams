@@ -31,8 +31,8 @@ const useGetProfitability = (isInViewport) => {
 							...rest,
 						},
 					});
-				} catch (e) {
-					console.log(e, 'err');
+				} catch (err) {
+					console.log(err, 'err');
 				}
 			}
 		},

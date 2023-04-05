@@ -63,7 +63,7 @@ function CommonData({
 					param={param}
 					setParam={setParam}
 					revenue_analysis={revenue_analysis}
-					etd={etd}
+					maxEtd={etd}
 				/>
 
 				{Object.keys(rev).length > 0

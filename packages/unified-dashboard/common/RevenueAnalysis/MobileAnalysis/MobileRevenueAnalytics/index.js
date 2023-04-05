@@ -2,7 +2,7 @@ import { IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
 
 import mobileGetNextData from '../../../../utils/mobileGetNextData';
 import mobileGetPreviousData from '../../../../utils/mobileGetPreviousData';
-import mobileNextArrowAllowed from '../../../../utils/mobileNextArrowAllowed';
+import mobileNextRevenueAllowed from '../../../../utils/mobileNextRevenueAllowed';
 
 import styles from './styles.module.css';
 
@@ -11,12 +11,12 @@ function MobileBookingAnalysis({
 	param,
 	setParam,
 	revenue_analysis,
-	etd,
+	maxEtd,
 }) {
-	const isClickable = mobileNextArrowAllowed(
+	const isClickable = mobileNextRevenueAllowed(
 		selectedFilterTab,
-		revenue_analysis,
-		etd,
+		revenue_analysis[0],
+		maxEtd,
 	);
 
 	const handleMonth = () => {
