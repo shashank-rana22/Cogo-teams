@@ -50,8 +50,7 @@ function ShipperConsigneeDetails({
 						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
 						<p style={{ fontSize: 18 }}>
-							{awbType === 'mawb' ? awbNumber.substring(0, 3)
-								: documentNo.substring(0, 4)}
+							{awbNumber.substring(0, 3)}
 						</p>
 					</div>
 					<div
@@ -71,7 +70,7 @@ function ShipperConsigneeDetails({
 					`}
 					>
 						<p style={{ fontSize: 18 }}>
-							{awbType === 'mawb' ? awbNumber.substring(4, 13) : documentNo.substring(5, 13)}
+							{awbNumber.substring(4, 13)}
 						</p>
 					</div>
 				</div>
