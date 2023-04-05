@@ -1,5 +1,6 @@
 import { Pill, Button } from '@cogoport/components';
-import { IcMLiveChat } from '@cogoport/icons-react';
+import { IcMLiveChat, IcMArrowNext } from '@cogoport/icons-react';
+import { format } from '@cogoport/utils';
 
 import styles from '../styles.module.css';
 
@@ -30,7 +31,8 @@ const columns = ({
 		Header   : 'TOPICS',
 		accessor : (item) => {
 			const tags = [];
-			(item.faq_tags || []).map((ele) => {
+			(item.faq_topics
+				|| []).map((ele) => {
 				const { display_name } = ele || {};
 				tags.push(display_name);
 				return tags;
@@ -60,6 +62,28 @@ const columns = ({
 				<b className={styles.feedback_count}>{item?.total_downvote_count}</b>
 			</div>
 		),
+	},
+	{
+		id     : 'LAST UPDATED AT',
+		Header : (
+			<div role="presentation" className={styles.sort_title} onClick={() => setSortType((prev) => !prev)}>
+				LAST UPDATED AT
+				<IcMArrowNext
+					height={14}
+					width={14}
+					className={styles.sort_arrow}
+					style={{ transform: true ? 'rotate(270deg)' : '' }}
+				/>
+			</div>
+		),
+		accessor: (items) => {
+			const formatDate = format(items?.updated_at || items?.created_at, 'dd MMM yyyy hh:mm a');
+			return (
+				<div>
+					{formatDate}
+				</div>
+			);
+		},
 	},
 	{
 		Header   : 'ACTIONS',
