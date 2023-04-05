@@ -19,7 +19,6 @@ function DefaultForm({
 	const {
 		data:{ list = [] } = {},
 		loading,
-		filters,
 		setFilters,
 	} = useListOrganizationTradeParties({
 		...getTradePartiesDefaultParams({ companyType, tradePartyType }),
