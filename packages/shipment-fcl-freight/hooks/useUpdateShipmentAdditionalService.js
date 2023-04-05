@@ -1,8 +1,11 @@
 import { Toast } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 import getApiErrorString from '../utils/getApiErrorString';
+
+const geo = getGeoConstants();
 
 const useUpdateShipmentAdditionalService = ({
 	item = {},
@@ -105,32 +108,35 @@ const useUpdateShipmentAdditionalService = ({
 		handleSubmit(payload);
 	};
 
-	const handleInvoicingParty = (ba) => {
-		if (!ba) {
+	const handleInvoicingParty = (billing_address) => {
+		if (!billing_address) {
 			Toast.error('Please select invoicing party');
 			return;
 		}
+
+		const {
+			tax_number, poc, pincode, organization_country_id, organization_id, is_sez, address,
+			organization_trade_party_id, business_name, name, invoice_currency, registration_number,
+		} = billing_address;
 
 		const payload = {
 			id                 : item.serviceListItem.id,
 			invoice_preference : {
 				billing_address: {
-					tax_number                  : ba.tax_number,
-					poc                         : ba.poc,
-					pincode                     : ba.pincode,
-					organization_id             : ba.organization_id,
-					organization_country_id     : ba.organization_country_id,
-					name                        : ba.name,
-					is_sez                      : ba.is_sez,
-					business_name               : ba.business_name,
-					address                     : ba.address,
-					invoice_currency            : ba.invoice_currency || 'INR',
-					// invoice_currency            : ba.invoice_currency || geo.country.currency.code,
-					organization_trade_party_id : ba.organization_trade_party_id,
-					registration_number         : ba.registration_number,
+					tax_number,
+					poc,
+					pincode,
+					organization_id,
+					organization_country_id,
+					name,
+					is_sez,
+					business_name,
+					address,
+					invoice_currency: invoice_currency || geo.country.currency.code,
+					organization_trade_party_id,
+					registration_number,
 				},
-				// invoice_currency: ba.invoice_currency || geo.country.currency.code,
-				invoice_currency: ba.invoice_currency || 'INR',
+				invoice_currency: invoice_currency || geo.country.currency.code,
 			},
 		};
 
@@ -180,4 +186,3 @@ const useUpdateShipmentAdditionalService = ({
 };
 
 export default useUpdateShipmentAdditionalService;
-// TODO
