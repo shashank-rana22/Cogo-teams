@@ -1,19 +1,18 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useMemo, useCallback, useEffect, useState } from 'react';
+import { useMemo, useCallback, useEffect } from 'react';
 
 const useListfaqFeedback = ({ id }) => {
-	const [page, setPage] = useState(1);
+	// const [page, setPage] = useState(1);
 
 	const params = useMemo(() => ({
 		filters: {
 			faq_question_id : id,
 			status          : 'active',
 		},
-		page,
-		page_limit           : 5,
+		// page,
+		page_limit           : 100000,
 		author_data_required : true,
-	}), [id, page]);
+	}), [id]);
 
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'GET',
@@ -24,7 +23,7 @@ const useListfaqFeedback = ({ id }) => {
 		try {
 			trigger({ params });
 		} catch (e) {
-			Toast.error(e?.message);
+			console.log(e);
 		}
 	}, [params, trigger]);
 
@@ -39,8 +38,8 @@ const useListfaqFeedback = ({ id }) => {
 	return {
 		list,
 		loading,
-		page,
-		setPage,
+		// page,
+		// setPage,
 		total_count,
 		page_limit,
 	};

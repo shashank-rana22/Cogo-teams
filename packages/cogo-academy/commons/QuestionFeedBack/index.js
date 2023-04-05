@@ -1,4 +1,4 @@
-import { Pagination, Pill } from '@cogoport/components';
+import { Pill } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -9,10 +9,10 @@ import useListfaqFeedback from './useListFaqFeedback';
 function QuestionFeedBack({ id, source = '', onClickEdit = () => {} }) {
 	const {
 		list,
-		page,
-		setPage,
-		total_count,
-		page_limit,
+		// page,
+		// setPage,
+		// total_count,
+		// page_limit,
 	} = useListfaqFeedback({ id });
 
 	let feedbackOnquestion = 0;
@@ -35,7 +35,7 @@ function QuestionFeedBack({ id, source = '', onClickEdit = () => {} }) {
 	});
 
 	const mapping = {
-		all                      : total_count,
+		all                      : (list || []).length,
 		questions                : feedbackOnquestion,
 		answer                   : feedbackOnAnswer,
 		both_question_and_answer : feedbackonBoth,
@@ -72,7 +72,7 @@ function QuestionFeedBack({ id, source = '', onClickEdit = () => {} }) {
 					</div>
 				))}
 
-				{total_count > 5
+				{/* {total_count > 5
 
 				&& (
 					<div className={styles.pagination_container}>
@@ -85,7 +85,7 @@ function QuestionFeedBack({ id, source = '', onClickEdit = () => {} }) {
 							onPageChange={setPage}
 						/>
 					</div>
-				)}
+				)} */}
 			</div>
 
 		</div>
