@@ -58,7 +58,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 	}, [fetchQuestion, query?.id]);
 
 	const onclickEdit = () => {
-		const href = `/learning/faq/create/question?mode=new&id=${id}`;
+		const href = `/learning/faq/create/question?mode=create&id=${id}`;
 		router.push(href, href);
 		setQuestionPreview('create');
 	};

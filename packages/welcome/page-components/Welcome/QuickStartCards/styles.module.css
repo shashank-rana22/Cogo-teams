@@ -1,0 +1,36 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	margin: 40px 26px;
+
+	@media (max-width: 800px) {
+		margin: 40px 8px;
+	}
+}
+
+.heading {
+	margin-bottom: 24px;
+	font-size: 18px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.cards_container {
+	display: flex;
+	justify-content: space-between;
+	height: 100%;
+
+	@media (max-width: 800px) {
+		flex-direction: column;
+	}
+}
+
+.card_item {
+	width: 30%;
+
+	@media (max-width: 800px) {
+		width: 100%;
+		margin-bottom: 24px;
+	}
+}

@@ -300,8 +300,8 @@ const useQuestionList = () => {
 
 	const onClickEditButton = (id) => {
 		router.push(
-			`/learning/faq/create/question?mode=new&id=${id}`,
-			`/learning/faq/create/question?mode=new&id=${id}`,
+			`/learning/faq/create/question?mode=create&id=${id}`,
+			`/learning/faq/create/question?mode=create&id=${id}`,
 		);
 	};
 
