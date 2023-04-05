@@ -99,6 +99,7 @@
 		}
 
 		.ui_progressbar_bar {
+			width: 80%;
 			margin: 20px 0 4px 34px;
 			background: #88cad1;
 		}

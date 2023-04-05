@@ -1,9 +1,10 @@
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
 import getFormattedPrice from '../../commons/utils/getFormattedPrice';
+import GetSortingData from '../Logistics/Profitabillity/profitabilitySorting';
 
 import styles from './styles.module.css';
 
-const customerProfitabillityColumn = [
+const customerProfitabillityColumn = (sort, setSort) => [
 
 	{
 		Header   : 'Name',
@@ -33,7 +34,7 @@ const customerProfitabillityColumn = [
 		Header   : 'SID Count',
 		id       : 'shipmentCount',
 		accessor : (row) => (
-			<div style={{ color: '#F68B21', textDecorationLine: 'underline' }}>
+			<div>
 				{row?.shipmentCount}
 			</div>
 		),
@@ -65,7 +66,7 @@ const customerProfitabillityColumn = [
 
 	},
 	{
-		Header   : 'Profitability',
+		Header   : <GetSortingData sort={sort} setSort={setSort} />,
 		id       : 'profitability',
 		accessor : (row) => (
 			<div>

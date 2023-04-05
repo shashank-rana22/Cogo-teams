@@ -120,3 +120,43 @@
 	font-weight: 500;
 	line-height: 150%;
 }
+
+.sort_top_icon {
+	height: 12px;
+}
+
+.sorting {
+	display: flex;
+
+	:global {
+		.ui_button_container {
+			min-width: 0;
+			height: 8px;
+			padding: 0;
+			margin-top: 4px;
+			font-size: 12px;
+		}
+	}
+}
+
+.sort_bottom_icon {
+	height: 4px;
+}
+
+.sort_active {
+	color: #f68b21;
+	cursor: pointer;
+}
+
+.sort_active:hover {
+	color: #f68b21;
+}
+
+.sort_inactive {
+	color: #c0c0c0;
+	cursor: pointer;
+}
+
+.sort_inactive:hover {
+	color: #c0c0c0;
+}

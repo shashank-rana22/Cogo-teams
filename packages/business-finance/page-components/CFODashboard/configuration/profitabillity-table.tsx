@@ -3,10 +3,11 @@ import { startCase } from '@cogoport/utils';
 
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
 import getFormattedPrice from '../../commons/utils/getFormattedPrice';
+import GetSortingData from '../Logistics/Profitabillity/profitabilitySorting';
 
 import styles from './styles.module.css';
 
-const profitabillityColumn = [
+const profitabillityColumn = (sort, setSort) => [
 	{
 		Header   : 'SID',
 		id       : 'jobNumber',
@@ -89,7 +90,7 @@ const profitabillityColumn = [
 
 	},
 	{
-		Header   : 'Profitability',
+		Header   : <GetSortingData sort={sort} setSort={setSort} />,
 		id       : 'profitability',
 		accessor : (row) => (
 			<div>
