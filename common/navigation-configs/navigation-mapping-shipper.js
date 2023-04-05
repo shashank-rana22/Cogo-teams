@@ -486,6 +486,8 @@ const navigationMappingShipper = {
 		main_apis     : [],
 		possible_apis : app_apis.saas_cogopoint,
 		module_type   : 'dashboards',
+		showInNav     : false,
+
 	},
 
 };
