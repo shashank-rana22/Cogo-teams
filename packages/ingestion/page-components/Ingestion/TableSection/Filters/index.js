@@ -28,8 +28,7 @@ function Filters(props) {
 	useEffect(() => {
 		setParams({
 			...params,
-			page    : 1,
-			filters : {
+			filters: {
 				q                       : query || undefined,
 				partner_user_id         : uploadBy || undefined,
 				created_at_greater_than : uploadDate?.startDate || undefined,
@@ -43,7 +42,6 @@ function Filters(props) {
 
 	return (
 		<div className={styles.filter_container}>
-
 			<div className={styles.filter}>
 				{
 					filterControls.map((controlItem) => {
@@ -55,7 +53,7 @@ function Filters(props) {
 
 						return (
 							<div style={{ width: `${Number(el.span) * 10}%` }} className={styles.form_group}>
-								<div style={{ width: '100%' }} className={styles.input_group}>
+								<div className={styles.input_group}>
 									<Element
 										{...el}
 										key={el.name}

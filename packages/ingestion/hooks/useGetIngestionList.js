@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { IcMDownload } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import { startCase, format } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import styles from '../styles.module.css';
 
@@ -104,7 +104,7 @@ function useGetIngestionList() {
 		{
 			key      : 'error',
 			Header   : 'ERROR REPORT',
-			accessor : ({ request_files }) => (
+			accessor : ({ request_files = [] }) => (
 				<div className={styles.name}>
 					{request_files[0]?.errored_data_url ? (
 						<Button
@@ -154,11 +154,15 @@ function useGetIngestionList() {
 	];
 
 	const onPageChange = (pageNumber) => {
+		// console.log('page', pageNumber);
 		setParams((previousParams) => ({
 			...previousParams,
 			page: pageNumber,
 		}));
+		console.log('hhehehehe');
 	};
+
+	useEffect(() => { console.log('hahah', params?.page); }, [params?.page]);
 
 	return {
 		columns,

@@ -7,11 +7,15 @@
 
 .search {
 	width: 20%;
+
+	@media (max-width: 768px) {
+		width: 40%;
+	}
 }
 
 .filter {
 	display: flex;
-	width: 80%;
+	width: 100%;
 }
 
 .form_group {
@@ -20,12 +24,14 @@
 	gap: 1rem;
 	align-items: center;
 	justify-content: space-between;
+	
 }
 
 .form_group:not(:first-child) { margin: 10px 0; }
 
 .input_group {
 	display: flex;
-	flex-direction: column;
-	width: 50%;
+	
+	width: 100%;
+
 }

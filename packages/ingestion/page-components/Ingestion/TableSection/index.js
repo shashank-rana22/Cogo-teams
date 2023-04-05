@@ -43,8 +43,6 @@ function TableSection(props) {
 				onPageChange={onPageChange}
 				data={data}
 				loading={loading}
-				setParams={setParams}
-				params={params}
 				formProps={formProps}
 			/>
 

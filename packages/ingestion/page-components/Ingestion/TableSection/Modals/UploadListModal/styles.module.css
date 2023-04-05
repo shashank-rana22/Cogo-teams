@@ -13,13 +13,14 @@
 
 	:global(.ui_table_head_cell) {
 		font-size: 14px;
-	}
+	}	
 }
 
 .pagination_container {
 	display: flex;
-	justify-content: end;
+	justify-content: flex-end;
 	width: 100%;
+	padding: 0px 16px;
 }
 
 .empty {
@@ -36,8 +37,13 @@
 
 .container {
 	display: flex;
-	flex-direction: column;
 	padding: 8px 16px;
+	width: 100%;
+
+	@media (max-width: 768px) {
+		overflow-x: scroll;
+	}
+
 }
 
 

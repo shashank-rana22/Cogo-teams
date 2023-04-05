@@ -55,26 +55,29 @@ function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
 			)}
 			/>
 
-			<div className={styles.container}>
-				<Table
-					className={styles.table}
-					columns={columns}
-					data={list || []}
-					loading={loading}
-				/>
+			<div>
+				<div className={styles.container}>
+					<Table
+						className={styles.table}
+						columns={columns}
+						data={list || []}
+						loading={loading}
+					/>
 
-				{true && (
+				</div>
+				{total_count > page_limit && (
 					<div className={styles.pagination_container}>
 						<Pagination
 							type="table"
 							currentPage={page}
-							totalItems={total_count || 0}
+							totalItems={total_count || 10}
 							pageSize={page_limit || 5}
 							onPageChange={onPageChange}
 						/>
 					</div>
 				)}
 			</div>
+
 			<div className={styles.close_button}>
 				<Button
 					style={{ marginRight: '8px' }}

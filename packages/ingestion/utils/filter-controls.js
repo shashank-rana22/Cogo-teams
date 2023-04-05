@@ -6,7 +6,7 @@ const filterControls = [
 		placeholder           : 'Upload Date',
 		span                  : 2.0,
 		isPreviousDaysAllowed : true,
-		style                 : { margin: '0 8px 0 0' },
+		style                 : { margin: '0 4px 0 0' },
 	},
 	{
 		name           : 'partner_user_id',

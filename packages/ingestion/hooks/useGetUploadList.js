@@ -24,7 +24,7 @@ function useGetUploadList(id) {
 		window.open(e, '_blank');
 	};
 
-	const [{ data, loading = false }] = useRequest({
+	const [{ data, loading }] = useRequest({
 		method : 'get',
 		url    : 'list_ingestion_error_request_files',
 		params,

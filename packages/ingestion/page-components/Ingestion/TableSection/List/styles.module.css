@@ -22,3 +22,11 @@
 	height: "520px";
 	padding: 120px 0;
 }
+
+.table_container {
+	width: 100%;
+
+	@media (max-width: 1115px) {
+		overflow-x: scroll;
+	}
+}
