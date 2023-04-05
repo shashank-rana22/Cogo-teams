@@ -60,7 +60,11 @@ function OverviewCard(props) {
 				</div>
 
 				<Tooltip
-					content={startCase(data?.max_condition) || 'NA'}
+					content={(
+						<div className={styles.tooltip_text}>
+							{startCase(data?.max_condition) || 'NA'}
+						</div>
+					)}
 					placement="top"
 				>
 					<div className={styles.display_flex}>
