@@ -12,7 +12,7 @@ function FeedBackContent({ feedback, onClickEdit = () => {}, id, source = '' }) 
 		remark = '',
 	} = feedback || {};
 
-	const { name = '' } = author?.[0] || {};
+	const { name = '', picture = '' } = author?.[0] || {};
 
 	const remarkContent = (remark || '').split('.');
 
@@ -25,10 +25,11 @@ function FeedBackContent({ feedback, onClickEdit = () => {}, id, source = '' }) 
 			<div className={styles.card}>
 				<div className={styles.card_header}>
 					<Avatar
-						src="https://www.w3schools.com/howto/img_avatar.png"
+						src={picture || 'https://www.w3schools.com/howto/img_avatar.png'}
 						alt="img"
 						size="40px"
 					/>
+
 					<h3 className={styles.card_header_name}>
 						{name}
 						{' '}
