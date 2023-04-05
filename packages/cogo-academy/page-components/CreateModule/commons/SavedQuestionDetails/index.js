@@ -19,6 +19,8 @@ function SavedQuestionDetails({
 	mode,
 	page_limit,
 	listSetQuestions,
+	setSortFilter,
+	sortFilter,
 }) {
 	const columns = useGetTableColumns({
 		setAllKeysSaved,
@@ -28,6 +30,8 @@ function SavedQuestionDetails({
 		allKeysSaved,
 		mode,
 		listSetQuestions,
+		setSortFilter,
+		sortFilter,
 	});
 
 	if (isEmpty(test_questions)) {
