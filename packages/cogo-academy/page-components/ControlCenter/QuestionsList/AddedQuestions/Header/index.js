@@ -14,7 +14,7 @@ function Header({
 	activeList,
 	setActiveList,
 	requestedQuestionCount,
-	downvoteFeedbackCount,
+	// downvoteFeedbackCount,
 }) {
 	return (
 		<div>
@@ -46,7 +46,6 @@ function Header({
 					<TabPanel name="inactive" title="Inactive" />
 					<TabPanel name="requested" title="New Requests" badge={requestedQuestionCount || ''} />
 					{/* <TabPanel name="feedbacks" title="Feedbacks" badge={downvoteFeedbackCount || ''} /> */}
-
 				</Tabs>
 			</div>
 		</div>

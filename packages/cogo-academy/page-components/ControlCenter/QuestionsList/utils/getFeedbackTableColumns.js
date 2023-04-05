@@ -1,7 +1,7 @@
 import { Pill, Button, Tooltip } from '@cogoport/components';
 import { IcMLiveChat } from '@cogoport/icons-react';
 // import { format } from '@cogoport/utils';
-import startCase from '@cogoport/utils/src/utilities/startCase';
+import { startCase } from '@cogoport/utils';
 
 import styles from '../styles.module.css';
 
