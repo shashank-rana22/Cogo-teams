@@ -1,34 +1,35 @@
-.container{
-	padding: 8px ;
+/* stylelint-disable selector-class-pattern */
+.container {
+	padding: 8px;
+	margin-bottom: 10px;
+	color: #bdbdbd;
 	border: 1px dashed #bdbdbd;
 	border-radius: 4px;
-	color: #bdbdbd;
-	margin-bottom: 10px;
 }
 
-.add_button{
-    background: none;
-    border:none;
-    font-size: 16px;
-    display:  flex ;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+.add_button {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	font-size: 16px;
+	background: none;
+	border: none;
 }
 
-.add_button:hover{  
-    border-color: #393f70;
-    color: #7e86c2;
-    cursor: pointer;
+.add_button:hover {
+	color: #7e86c2;
+	cursor: pointer;
+	border-color: #393f70;
 }
 
-.displayText{
-    text-align: left;
-    font-size: 14px;
-    font-weight: 500;
+.displayText {
+	font-size: 14px;
+	font-weight: 500;
+	text-align: left;
 }
 
-.add{
-    font-size: 28px;
-    font-weight: 600;
+.add {
+	font-size: 28px;
+	font-weight: 600;
 }

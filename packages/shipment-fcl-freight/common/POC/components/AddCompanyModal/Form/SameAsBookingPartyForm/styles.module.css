@@ -1,19 +1,20 @@
-.checkbox{
-    display: flex;
-    align-items: center;
+.checkbox {
+	display: flex;
+	align-items: center;
 
-    :global{
-        .ui_checkbox_container{
-            padding-left: 0;
-        }
-    }
-}
-.errors{
-    color: red;
-    font-size: 12px;
+	:global {
+		.ui_checkbox_container {
+			padding-left: 0;
+		}
+	}
 }
 
-.form_label{
-    font-weight: 600;
-    font-size: 12px;
+.errors {
+	font-size: 12px;
+	color: red;
+}
+
+.form_label {
+	font-size: 12px;
+	font-weight: 600;
 }

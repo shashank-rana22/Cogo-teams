@@ -1,37 +1,38 @@
-.header{
-    display: flex;
-    justify-content: space-between;
-}
-
-.business_name{
-    color: #5c6186;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 24px;
-}
-
-.address{
-	font-weight: 600;
-	margin-bottom: 8px;
-}
-
-.detail_card{
-    display: flex;
-    flex-direction: column;
-	padding: 10px 18px;
+.header {
+	display: flex;
 	justify-content: space-between;
-	border: 1px solid #F6F5FE;
-	border-radius: 4px;
+}
+
+.business_name {
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 24px;
+	color: #5c6186;
+}
+
+.address {
 	margin-bottom: 8px;
+	font-weight: 600;
 }
 
-.label_value_container{
-    display:  flex;
+.detail_card {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 10px 18px;
+	margin-bottom: 8px;
+	border: 1px solid #f6f5fe;
+	border-radius: 4px;
 }
 
-.label{
-    color: #828282;
+.label_value_container {
+	display: flex;
 }
-.value{
-    margin-left: 4px;
+
+.label {
+	color: #828282;
+}
+
+.value {
+	margin-left: 4px;
 }
