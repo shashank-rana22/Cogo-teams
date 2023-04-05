@@ -61,7 +61,7 @@ function QuestionsAndDistribution(props) {
 						<div className={styles.question_info}>
 							Total Available Questions :
 							{' '}
-							{total}
+							<span className={styles.total_value}>{total}</span>
 						</div>
 					</Pill>
 				</span>
