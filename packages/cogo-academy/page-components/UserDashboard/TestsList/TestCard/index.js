@@ -100,7 +100,7 @@ function TestCard({ test_card }) {
 				? (
 					<div
 						role="presentation"
-						onClick={() => handleRedirect({ test_id: id, redirect_to: 'test' })}
+						onClick={() => handleRedirect({ test_id: id, redirect_to: 'test', push })}
 						className={styles.arrow}
 					>
 						<IcMArrowRight

@@ -1,7 +1,7 @@
 import { Button, Tabs, TabPanel, Input, ButtonIcon } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 import useGetTestList from '../../hooks/useGetTestList';
 import useGetTestQuestionSets from '../../hooks/useGetTestQuestionSets';
@@ -25,6 +25,8 @@ function TestsList({ activeTab, setActiveTab }) {
 	const router = useRouter();
 
 	const [filters, setFilters] = useState({});
+
+	const [sortFilter, setSortFilter] = useState({});
 
 	const {
 		data, loading, fetchList, setParams, params, debounceQuery, input, setInput,
@@ -53,6 +55,8 @@ function TestsList({ activeTab, setActiveTab }) {
 				setParams,
 				activeTab,
 				params,
+				sortFilter,
+				setSortFilter,
 			},
 		},
 		question_set: {
@@ -66,6 +70,8 @@ function TestsList({ activeTab, setActiveTab }) {
 				setParams : setQuestionListParams,
 				activeTab,
 				params    : questionListParams,
+				sortFilter,
+				setSortFilter,
 			},
 		},
 	};
@@ -77,58 +83,21 @@ function TestsList({ activeTab, setActiveTab }) {
 		setActiveTab(val);
 	};
 
+	const SET_PARAMS_MAPPING = useMemo(() => ({
+		tests        : setParams,
+		question_set : setQuestionListParams,
+	}), [setParams, setQuestionListParams]);
+
+	useEffect(() => {
+		SET_PARAMS_MAPPING[activeTab]((prev) => ({
+			...prev,
+			...sortFilter,
+		}));
+	}, [sortFilter, activeTab, SET_PARAMS_MAPPING]);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.tabs_container}>
-				<div className={styles.filter}>
-					<Input
-						size="md"
-						suffix={(
-							<ButtonIcon
-								size="md"
-								icon={<IcMSearchlight />}
-								disabled={false}
-								themeType="primary"
-							/>
-						)}
-						value={activeTab === 'tests' ? input : questionListInput}
-						placeholder={
-								activeTab === 'tests'
-									? 'Search for Test/Topic'
-									: 'Search for Question set name'
-											}
-						onChange={(value) => {
-							if (activeTab === 'tests') {
-								setInput(value);
-								debounceQuery(value);
-							} else {
-								setquestionListInput(value);
-								questionListDebounceQuery(value);
-							}
-						}}
-						className={styles.input}
-					/>
-
-					<div className={styles.filter_popover}>
-						<FilterPopover
-							filters={filters}
-							setFilters={setFilters}
-							activeTab={activeTab}
-						/>
-					</div>
-
-					<Button
-						className={styles.btn}
-						themeType="primary"
-						type="button"
-						size="lg"
-						onClick={() => router.push(`/learning/test-module/${ROUTE_MAPPING[activeTab]}`)}
-					>
-						+ Create New
-						{' '}
-						{BUTTON_TEXT_MAPPING[activeTab]}
-					</Button>
-				</div>
 
 				<Tabs
 					activeTab={activeTab}
@@ -146,6 +115,57 @@ function TestsList({ activeTab, setActiveTab }) {
 								title={title}
 								className={styles.tabItem}
 							>
+
+								<div className={styles.filter}>
+									<Input
+										size="md"
+										suffix={(
+											<ButtonIcon
+												size="md"
+												icon={<IcMSearchlight />}
+												disabled={false}
+												themeType="primary"
+											/>
+										)}
+										value={activeTab === 'tests' ? input : questionListInput}
+										placeholder={
+								activeTab === 'tests'
+									? 'Search for Test/Topic'
+									: 'Search for Question set name'
+											}
+										onChange={(value) => {
+											if (activeTab === 'tests') {
+												setInput(value);
+												debounceQuery(value);
+											} else {
+												setquestionListInput(value);
+												questionListDebounceQuery(value);
+											}
+										}}
+										className={styles.input}
+									/>
+
+									<div className={styles.filter_popover}>
+										<FilterPopover
+											filters={filters}
+											setFilters={setFilters}
+											activeTab={activeTab}
+										/>
+									</div>
+
+									<Button
+										size="md"
+										className={styles.btn}
+										themeType="primary"
+										type="button"
+										onClick={() => router.push(`/learning/test-module/${ROUTE_MAPPING[activeTab]}`)}
+									>
+										+ Create New
+										{' '}
+										{BUTTON_TEXT_MAPPING[activeTab]}
+									</Button>
+								</div>
+
 								<div>
 									<ContainerComponent {...componentProps} />
 								</div>
@@ -153,6 +173,7 @@ function TestsList({ activeTab, setActiveTab }) {
 						);
 					})}
 				</Tabs>
+
 			</div>
 
 		</div>

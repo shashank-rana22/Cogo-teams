@@ -143,6 +143,10 @@
 	font-size: 14px;
 }
 
+.total_value {
+	font-weight: 600;
+}
+
 .question_set_name {
 	padding-left: 34px;
 	font-size: 14px;

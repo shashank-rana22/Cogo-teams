@@ -102,6 +102,7 @@ function ReviewAndCriteria(props) {
 				{...props}
 				showModal={showModal}
 				setShowModal={setShowModal}
+				watch={watch}
 			/>
 
 			<div className={styles.instructions}>

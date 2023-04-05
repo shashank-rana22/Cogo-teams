@@ -230,7 +230,7 @@ function CreateNewTest({
 							draggable
 							value={uploadDocument}
 							onChange={setUploadDocument}
-							accept=".xlsx,.csv"
+							accept=".csv"
 							disabled={!(test_sheet_data.test_sheet_data?.status === 'generated')}
 						/>
 					)}

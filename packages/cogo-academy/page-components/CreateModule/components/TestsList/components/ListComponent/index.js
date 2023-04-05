@@ -1,5 +1,4 @@
 import { Pagination, Table, Modal, Button } from '@cogoport/components';
-import { IcMArrowRotateUp } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -16,10 +15,11 @@ const MODAL_TEXT_MAPPING = {
 	question_set : 'Question Set',
 };
 
-function ListComponent({ data, loading, setParams, activeTab, params, fetchList }) {
+function ListComponent({
+	data, loading, setParams, activeTab, params, fetchList, sortFilter, setSortFilter,
+}) {
 	const router = useRouter();
 
-	const [sort, setSort] = useState(false);
 	const [testId, setTestId] = useState('');
 	const [questionSetId, setQuestionSetId] = useState('');
 	const [showModal, setShowModal] = useState(false);
@@ -44,8 +44,10 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 			router,
 			setShowModal,
 			setTestId,
+			sortFilter,
+			setSortFilter,
 		},
-		question_set: { loading: updateLoading, router, setShowModal, setQuestionSetId },
+		question_set: { loading: updateLoading, router, setShowModal, setQuestionSetId, sortFilter, setSortFilter },
 	};
 
 	const columns = columnsMapping[activeTab]({ ...propsMapping[activeTab] });
@@ -69,30 +71,6 @@ function ListComponent({ data, loading, setParams, activeTab, params, fetchList 
 
 	return (
 		<div className={styles.table_container}>
-			<div
-				role="presentation"
-				onClick={() => {
-					setSort((prev) => !prev);
-
-					setParams((prev) => ({
-						...prev,
-						sort_type : sort ? 'asc' : 'desc',
-						filters   : {
-							...prev.filters,
-
-						},
-					}));
-				}}
-				className={styles.sort}
-			>
-				<IcMArrowRotateUp className={`${styles.styled_icon} ${!sort ? styles.rotate : null}`} />
-
-				<span
-					className={styles.span_text}
-				>
-					Sort By
-				</span>
-			</div>
 
 			<Table
 				className={styles.table_container}
