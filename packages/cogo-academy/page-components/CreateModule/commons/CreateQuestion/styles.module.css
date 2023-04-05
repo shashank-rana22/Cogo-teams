@@ -12,6 +12,9 @@
 
 .question_label {
 	width: 200px;
+	font-size: 16px;
+	font-weight: 500;
+	color: #221f20;
 }
 
 .question_form {

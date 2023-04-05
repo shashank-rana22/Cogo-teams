@@ -38,7 +38,6 @@ const getCaseStudyPayload = ({ editType, values, action, caseStudyQuestionId, te
 		};
 	}
 	const {
-		audience_ids,
 		question_text,
 		case_questions = [],
 		topic,
@@ -90,7 +89,6 @@ const getCaseStudyPayload = ({ editType, values, action, caseStudyQuestionId, te
 
 	return {
 		test_question_set_id: questionSetId,
-		audience_ids,
 		question_text,
 		topic,
 		question_type,

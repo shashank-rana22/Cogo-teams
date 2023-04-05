@@ -1,5 +1,5 @@
 import { Stepper } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -11,8 +11,9 @@ import TABS_MAPPING from './configs/TABS_MAPPING';
 import styles from './styles.module.css';
 
 function CreateTest() {
-	const router = useRouter();
-	const test_id = router.query?.id;
+	const { general: { query: urlQuery } } = useSelector((state) => state);
+
+	const { id: test_id } = urlQuery || {};
 
 	const [activeStepper, setActiveStepper] = useState('details_and_questions');
 
@@ -44,7 +45,9 @@ function CreateTest() {
 	};
 
 	useEffect(() => {
-		if (!isEmpty(test_id)) { getTest({ test_id }); }
+		if (!isEmpty(test_id)) {
+			getTest({ test_id });
+		}
 	}, [getTest, test_id, activeStepper]);
 
 	const { component: ActiveComponent, props: activeComponentProps } = COMPONENT_MAPPING[activeStepper];
