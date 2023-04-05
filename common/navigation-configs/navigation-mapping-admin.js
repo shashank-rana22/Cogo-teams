@@ -2001,6 +2001,16 @@ const navigationMappingAdmin = {
 		possible_apis : apis.manage_rfq,
 		module_type   : 'dashboards',
 	},
+	rfq_dashboard: {
+		key           : 'rfq_dashboard',
+		title         : 'RFQ Dashboard',
+		href          : '/rfq-dashboard',
+		as            : '/rfq-dashboard',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.rfq_dashboard,
+		module_type   : 'dashboards',
+	},
 	contract_rates: {
 		key       : 'contract_rates',
 		title     : 'Contract Rates',

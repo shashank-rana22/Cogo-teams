@@ -11,6 +11,7 @@ import kamMonitoring from './config/kam-monitoring';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import performanceManagement from './config/performance-management';
+import rfqDashboard from './config/rfq-dashboard';
 import rolesAndPermissions from './config/roles-n-permission';
 import supplyDashboard from './config/supply-dashboards';
 import vendorRM from './config/vendor-rm';
@@ -29,6 +30,7 @@ const routeConfig = {
 	...myProfile,
 	...enrichment,
 	...cogoVerseAnalytics,
+	...rfqDashboard,
 	...cogoOne,
 	...myProfile,
 	...inventory_management,

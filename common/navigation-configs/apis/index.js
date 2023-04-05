@@ -32,6 +32,7 @@ import pms from './port-management';
 import rms from './rate-management-apis';
 import revenue_desk_apis from './revenue-desk-apis';
 import rfq from './rfq-apis';
+import rfq_dashboard from './rfq-dashboard-apis';
 import saas from './saas';
 import search from './search-apis';
 import shipment from './shipment-apis';
@@ -112,6 +113,7 @@ const apis = {
 	...allocation,
 	manage_rfq,
 	app_manage_rfq,
+	rfq_dashboard,
 	bl_do_collection_release,
 	kam_desk,
 	document_desk,
