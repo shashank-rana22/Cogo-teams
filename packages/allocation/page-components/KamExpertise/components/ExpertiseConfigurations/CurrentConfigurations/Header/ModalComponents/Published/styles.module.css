@@ -12,6 +12,7 @@
 .table {
 	padding: 0;
 	border: none;
+	cursor: pointer;
 }
 
 .pill {
