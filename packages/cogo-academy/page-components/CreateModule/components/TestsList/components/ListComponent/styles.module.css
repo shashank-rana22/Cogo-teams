@@ -13,8 +13,8 @@
 }
 
 .table_container {
-	margin-top: 16px;
 	padding: unset !important;
+	margin-top: 16px;
 
 	:global {
 		.ui_table_head_row {

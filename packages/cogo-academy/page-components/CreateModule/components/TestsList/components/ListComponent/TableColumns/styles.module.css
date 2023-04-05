@@ -4,7 +4,6 @@
 	font-size: 12px;
 	font-weight: 400;
 	color: #828282;
-	font-size: 12px;
 }
 
 .question_set_time {
@@ -45,17 +44,18 @@
 	white-space: nowrap;
 }
 
-
-.container{
+.container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	margin-right: 6px;
 }
-.item{
+
+.item {
 	flex-shrink: 0;
 	margin-right: 6px;
 }
-.status_pill{
+
+.status_pill {
 	height: 25px;
 }
