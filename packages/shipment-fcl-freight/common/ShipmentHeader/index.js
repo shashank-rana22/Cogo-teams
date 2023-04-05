@@ -55,6 +55,7 @@ function ShipmentHeader() {
 					theme="light"
 					placement="bottom"
 					maxWidth="none"
+					interactive
 					content={(
 						<div className={styles.tooltip}>
 							{importer_exporter?.business_name}

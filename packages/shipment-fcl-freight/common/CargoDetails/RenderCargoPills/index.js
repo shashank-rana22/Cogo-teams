@@ -12,14 +12,11 @@ const labels = [
 	'trade_type',
 	'packages',
 	'volume',
-	'weight',
 	'haulage_type',
 	'transport_mode',
 	'cargo_weight_per_container',
 	'destination_cargo_handling_type',
 	'payment_term',
-	'container_load_type',
-	'contract_reference_id',
 ];
 
 function RenderCargoPills({ detail }) {

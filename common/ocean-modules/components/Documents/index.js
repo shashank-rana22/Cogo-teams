@@ -2,7 +2,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { React, useState, useContext } from 'react';
 
 import useCreateTaskList from '../../hooks/useCreateTaskList';
-import useGetShipmentMails from '../../hooks/useGetShipmentMails';
+import useGetShipmentMails from '../../hooks/useListRpaMails';
 
 import CheckList from './CheckList';
 import HeaderComponent from './Header';
@@ -23,10 +23,13 @@ function Documents() {
 		setFilters,
 	} = useCreateTaskList({ shipment_data, primary_service });
 
-	const { emailList } = useGetShipmentMails({
+	const emailPayload = {
 		cogo_shipment_id : shipment_data?.id,
-		cogo_serial_id   : shipment_data?.serial_id,
-		document_type    : docTypes,
+		entity_type      : docTypes,
+	};
+
+	const { emailList } = useGetShipmentMails({
+		payload: emailPayload,
 	});
 
 	return (
@@ -41,6 +44,7 @@ function Documents() {
 				activeWallet={activeWallet}
 				setActiveWallet={setActiveWallet}
 			/>
+
 			{!activeToggle ? (
 				<CheckList
 					data={taskList}

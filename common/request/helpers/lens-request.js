@@ -17,7 +17,7 @@ const customSerializer = (params) => {
 
 const microServices = getMicroServiceName();
 
-export const lensRequest = Axios.create({ baseURL: process.env.NEXT_PUBLIC_LENS_BASE_URL });
+export const lensRequest = Axios.create({ baseURL: process.env.NEXT_PUBLIC_COGO_LENS_URL });
 
 lensRequest.interceptors.request.use((oldConfig) => {
 	const newConfig = { ...oldConfig };

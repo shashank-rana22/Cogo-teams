@@ -1,9 +1,14 @@
 .container {
-    display: flex;
-    align-items: center;
-    color: #4F4F4F;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    padding-top: 12px;
+	display: flex;
+	align-items: center;
+	padding-top: 12px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #4f4f4f;
+	cursor: pointer;
+} 
+
+.shipment_info {
+	width : 20%; 
+	height: 10%;
 }

@@ -21,23 +21,30 @@ function ShipmentDetails() {
 
 	const { servicesGet } = useGetServices({ shipment_data, additional_methods });
 	const { getTimeline } = useGetTimeLine({ shipment_data });
-	const { ActiveStakeholder } = useStakeholderCheck();
+	const { activeStakeholder } = useStakeholderCheck();
 
 	const contextValues = useMemo(() => ({
 		...get,
 		...servicesGet,
 		...getTimeline,
-		ActiveStakeholder,
-	}), [get, servicesGet, getTimeline, ActiveStakeholder]);
+		activeStakeholder,
+	}), [get, servicesGet, getTimeline, activeStakeholder]);
+
+	const importStakeholderView = () => {
+		switch (activeStakeholder) {
+			case 'KAM':
+				return <Kam />;
+
+			case 'Superadmin':
+				return <Superadmin />;
+			default:
+				return null;
+		}
+	};
 
 	return (
 		<ShipmentDetailContext.Provider value={contextValues}>
-
-			{(ActiveStakeholder === 'KAM')
-				? <Kam /> : (
-					<Superadmin />
-				)}
-
+			{importStakeholderView()}
 		</ShipmentDetailContext.Provider>
 	);
 }
