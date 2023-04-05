@@ -9,7 +9,7 @@
 	.card_wrapper {
 		width: max-content;
 		padding: 0;
-		overflow: scroll;
+		overflow: auto;
 		background: #fff;
 		border: 1px solid #efefef;
 		box-shadow: none;
