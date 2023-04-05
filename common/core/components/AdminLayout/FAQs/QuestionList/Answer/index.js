@@ -10,7 +10,7 @@ import {
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import FeedbackForm from './FeedbackForm';
 import Loader from './Loader';
@@ -47,12 +47,6 @@ function Answer({ topic = {}, question, setQuestion }) {
 	const [load, setload] = useState(true);
 
 	const { data: answerData, loading, fetch } = useAnswer({ question });
-
-	const [answer, setAnswer] = useState(answerData?.answers?.[0]?.answer);
-
-	useEffect(() => {
-		setAnswer(answerData?.answers?.[0]?.answer);
-	}, [answerData]);
 
 	const is_positive = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive;
 
@@ -207,7 +201,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 						</div>
 
 						<div className={styles.ansofques}>
-							<div dangerouslySetInnerHTML={{ __html: answer }} />
+							<div dangerouslySetInnerHTML={{ __html: answerData?.answers?.[0]?.answer }} />
 						</div>
 
 						{answerData?.answers?.[0]?.upvote_count > 0 ? (
@@ -267,9 +261,8 @@ function Answer({ topic = {}, question, setQuestion }) {
 					<FeedbackForm
 						answerData={answerData}
 						control={control}
-						answer={answer}
-						setAnswer={setAnswer}
-						watch={watch}
+						watchAnswerCheckbox={watchAnswerCheckbox}
+						watchQuestionCheckbox={watchQuestionCheckbox}
 					/>
 					<div className={styles.footer_btns}>
 						<Button
