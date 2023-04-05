@@ -117,6 +117,7 @@ function CogoOne() {
 						isomniChannelAdmin={isomniChannelAdmin}
 						showBotMessages={showBotMessages}
 						mailProps={mailProps}
+						setActiveMessage={setActiveMessage}
 					/>
 					{activeTab !== 'mail' && (
 						<ProfileDetails

@@ -119,6 +119,7 @@
 }
 
 .styled_div {
+	position: relative;
 	height: 100%;
 }
 

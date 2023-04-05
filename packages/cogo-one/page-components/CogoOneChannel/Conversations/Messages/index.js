@@ -23,6 +23,7 @@ function Messages({
 	suggestions = [],
 	userId = '',
 	isomniChannelAdmin = false,
+	setActiveMessage,
 }) {
 	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
@@ -164,6 +165,7 @@ function Messages({
 						communicationLoading={communicationLoading}
 						closeModal={closeModal}
 						messageLoading={messageLoading}
+						setActiveMessage={setActiveMessage}
 					/>
 				</div>
 			</div>
