@@ -98,7 +98,6 @@ const formatPayload = ({
 	shipmentData = {},
 	primary_service,
 }) => {
-	console.log(formValues, 'formVAluesss');
 	const search_type = service.service;
 
 	let trade_type;

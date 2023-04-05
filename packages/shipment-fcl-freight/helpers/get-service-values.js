@@ -1,9 +1,7 @@
-/* eslint-disable no-plusplus */
-
 const findValue = (name, trade_type, detail) => {
 	let value = null;
 	const services = Object.values(detail?.service_details || {});
-	for (let i = 0; i < services.length; i++) {
+	for (let i = 0; i < services.length; i += 1) {
 		const item = services[i];
 		if (value) {
 			return value;
