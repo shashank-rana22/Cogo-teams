@@ -140,7 +140,7 @@ function AnswerPage() {
 			remark,
 			status                      : 'active',
 			suggested_question_abstract : watchQuestionCheckbox ? values?.question : undefined,
-			suggested_answer            : watchAnswerCheckbox ? answer?.toString('html') : undefined,
+			suggested_answer            : watchAnswerCheckbox ? values?.answer : undefined,
 		};
 		if (answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive) {
 			payload = {
@@ -150,7 +150,7 @@ function AnswerPage() {
 				remark,
 				status                      : 'active',
 				suggested_question_abstract : watchQuestionCheckbox ? values?.question : undefined,
-				suggested_answer            : watchAnswerCheckbox ? answer?.toString('html') : undefined,
+				suggested_answer            : watchAnswerCheckbox ? values?.answer : undefined,
 			};
 		}
 
