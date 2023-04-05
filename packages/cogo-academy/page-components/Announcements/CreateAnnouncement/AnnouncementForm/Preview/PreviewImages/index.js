@@ -34,7 +34,7 @@ function PreviewImages({ images = [] }) {
 
 						<div className={styles.contents}>
 							{images.map((i, index) => {
-								const image_url = (i.finalUrl ? i.finalUrl : i);
+								const image_url = (i?.finalUrl ? i?.finalUrl : i);
 
 								return (
 									<div

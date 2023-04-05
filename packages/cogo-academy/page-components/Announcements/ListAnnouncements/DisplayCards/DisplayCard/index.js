@@ -74,7 +74,7 @@ function DisplayCard({
 					type="button"
 					themeType="primary"
 					size="md"
-					style={{ width: '100%' }}
+					style={{ width: '100%', marginBottom: '8px' }}
 					onClick={() => setShowGoLiveModal(true)}
 				>
 					<IcMAnnouncement height={20} width={20} className={styles.button_icon} />
@@ -86,7 +86,7 @@ function DisplayCard({
 				type="button"
 				themeType="secondary"
 				size="md"
-				style={{ width: '100%' }}
+				style={{ width: '100%', marginBottom: '8px' }}
 				onClick={() => handleView(index)}
 			>
 				<IcMEyeopen className={styles.button_icon} />
@@ -98,7 +98,7 @@ function DisplayCard({
 					type="button"
 					themeType="secondary"
 					size="md"
-					style={{ width: '100%' }}
+					style={{ width: '100%', marginBottom: '8px' }}
 					onClick={() => editDetails()}
 				>
 					<IcMEdit className={styles.button_icon} />
@@ -137,6 +137,7 @@ function DisplayCard({
 								size="md"
 								disabled={loadingEditAndGoLive}
 								onClick={() => setShowGoLiveModal(false)}
+								style={{ marginRight: '20px' }}
 							>
 								Cancel
 							</Button>
@@ -170,7 +171,7 @@ function DisplayCard({
 				<Tooltip
 					content={label === 'Validity' ? (
 						<div className={styles.tooltip_hover_value}>
-							<span>
+							<span style={{ marginBottom: '4px' }}>
 								<strong>From - </strong>
 								{value.split('-')[0] || '-'}
 							</span>
@@ -292,6 +293,7 @@ function DisplayCard({
 								size="md"
 								disabled={loadingUpdate}
 								onClick={() => setShowDeleteModal(false)}
+								style={{ marginRight: '20px' }}
 							>
 								Cancel
 							</Button>

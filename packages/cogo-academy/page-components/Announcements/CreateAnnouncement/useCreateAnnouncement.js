@@ -140,13 +140,13 @@ const useCreateAnnouncements = ({
 			{
 				document_type : 'image',
 				document_name : 'image',
-				document_url  : (image.finalUrl ? image.finalUrl : image),
+				document_url  : (image?.finalUrl ? image?.finalUrl : image),
 			}
 		)), ...files.map((file) => (
 			{
 				document_type : 'pdf',
 				document_name : 'files',
-				document_url  : (file.finalUrl ? file.finalUrl : file),
+				document_url  : (file?.finalUrl ? file?.finalUrl : file),
 			}
 		))];
 		const hot_duration = addDays(validity_start, values?.hot_duration);
