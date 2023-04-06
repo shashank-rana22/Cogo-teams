@@ -47,6 +47,10 @@
 		.ui_collapse_icon {
 			margin-top: 38px;
 		}
+
+		.ui_collapse_main > div {
+			margin-bottom: 10px;
+		}
 	}
 }
 

@@ -117,12 +117,12 @@
 	word-break: break-word;
 }
 
-.location_options_type{
-	color: #4f4f4f;
+.location_options_type {
 	font-size: 8px;
+	color: #4f4f4f;
 }
 
-.modified_options{
+.modified_options {
 	display: flex;
 	flex-direction: column;
 }

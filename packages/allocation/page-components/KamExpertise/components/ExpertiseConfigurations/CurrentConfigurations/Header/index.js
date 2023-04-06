@@ -1,20 +1,15 @@
-import { Button, Modal, Toast } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 
 import VERSION_KEYS from '../../../../constants/version-keys-mapping';
 import useSetVersionFilter from '../../../../hooks/useSetVersionFilter';
 
+import Draft from './ModalComponents/Draft';
 import InitialMode from './ModalComponents/InitialMode';
 import NewVersion from './ModalComponents/NewVersion';
 import Published from './ModalComponents/Published';
 import ModalFooter from './ModalFooter';
 import styles from './styles.module.css';
-
-function Draft({ setMode = () => {}, setShowModal = () => {} }) {
-	setShowModal(false);
-	setMode('initial-mode');
-	Toast.success('New Draft Loaded');
-}
 
 const { PUBLISHED_VERSION, SAVED_DRAFT, NEW_VERSION, INITIAL_MODE } = VERSION_KEYS;
 
@@ -32,6 +27,7 @@ function Header(props) {
 		expertiseRefetch,
 		cardRefetch,
 		onClickViewAllConfig,
+		scrollDraftRef,
 	} = props;
 
 	const {
@@ -53,6 +49,7 @@ function Header(props) {
 		[SAVED_DRAFT]: {
 			setMode,
 			setShowModal,
+			scrollDraftRef,
 		},
 		[NEW_VERSION]: {
 			setMode,
