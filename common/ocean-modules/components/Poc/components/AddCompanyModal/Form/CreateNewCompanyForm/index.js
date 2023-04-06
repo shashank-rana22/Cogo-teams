@@ -105,6 +105,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							control={control}
 							size="sm"
 							placeholder="Enter or Select Country"
+							mobile_country_code={false}
 							rules={{ required: { value: true, message: 'Country of Registration is required' } }}
 						/>
 						{Error('country')}
