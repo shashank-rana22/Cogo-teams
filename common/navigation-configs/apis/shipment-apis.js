@@ -1322,6 +1322,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'list_organization_assets',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
 ];
 
 export default apis;
