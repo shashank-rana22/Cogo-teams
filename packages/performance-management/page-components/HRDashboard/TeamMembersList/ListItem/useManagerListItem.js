@@ -16,10 +16,13 @@ const useManagerListItem = ({ item, searchValue = '', pageParams = {} }) => {
 		Year                 : Year || d.getFullYear(),
 	});
 
+	const validParams = {};
+	Object.keys(params).forEach((key) => { if (params[key]) { validParams[key] = params[key]; } });
+
 	const [{ data = {}, loading = false }] = useIrisRequest({
 		method : 'get',
 		url    : 'get_iris_list_reportees',
-		params,
+		params : { ...validParams },
 	}, { manual: false });
 
 	const setPage = (p) => { setParams({ ...params, Page: p }); };

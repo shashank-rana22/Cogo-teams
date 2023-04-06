@@ -11,10 +11,13 @@ const useGetLogStats = (logType) => {
 		LogType : logType,
 	});
 
+	const validParams = {};
+	Object.keys(statsParams).forEach((key) => { if (statsParams[key]) { validParams[key] = statsParams[key]; } });
+
 	const [{ loading = false, data = [] }] = useIrisRequest({
 		url    : 'get_iris_get_log_stats',
 		method : 'get',
-		params : statsParams,
+		params : { ...validParams },
 	}, { manual: false });
 
 	return { setStatsParams, logStatsLoading: loading, statsData: data, statsParams };

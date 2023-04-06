@@ -10,10 +10,13 @@ const useListLogs = ({ source = '', logType }) => {
 		IsReviewed : source === 'hr_pip_dashboard',
 	});
 
+	const validParams = {};
+	Object.keys(params).forEach((key) => { if (params[key]) { validParams[key] = params[key]; } });
+
 	const [{ data: employeeData = {}, loading = false }, trigger] = useIrisRequest({
 		url    : 'get_iris_list_logs',
 		method : 'get',
-		params,
+		params : { ...validParams },
 	}, { manual: false });
 
 	const onSubmitModal = () => {

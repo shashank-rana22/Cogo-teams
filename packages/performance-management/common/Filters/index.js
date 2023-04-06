@@ -23,7 +23,12 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 		},
 	);
 
-	const { watch, control } = useForm();
+	const { watch, control } = useForm({
+		defaultValues: {
+			Year  : params.Year,
+			Month : params.Month,
+		},
+	});
 
 	const {
 		Department = '', Designation = '',

@@ -16,10 +16,13 @@ const useListReportees = ({
 		Month                : feedbackMonth,
 	});
 
+	const validParams = {};
+	Object.keys(params).forEach((key) => { if (params[key]) { validParams[key] = params[key]; } });
+
 	const [{ data: feedbackData = {}, loading = false }, trigger] = useIrisRequest({
 		method : 'get',
 		url    : 'get_iris_list_reportees',
-		params,
+		params : { ...validParams },
 	}, { manual: false });
 
 	const fetchReportees = async () => {
