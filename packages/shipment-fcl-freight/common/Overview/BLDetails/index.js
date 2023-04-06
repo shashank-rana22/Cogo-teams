@@ -98,37 +98,40 @@ function BLDetails() {
 					/>
 				) : (
 					<div className={styles.manage_services_div}>
-						{(list || []).map((doc) => (
-							doc?.containers?.length >= 1
+						{(list || []).map((item) => (
+							item?.containers?.length >= 1
 								? (
 									<div className={styles.service_card}>
 										<Accordion
 											title={(
 												<TitleCard
-													item={doc}
+													item={item}
 													setOpen={setOpen}
 													open={open}
 													setActiveId={setActiveId}
 													activeId={activeId}
 													shipmentData={shipment_data}
-													containerDetails={doc?.containers}
+													containerDetails={item?.containers}
 												/>
 											)}
 										>
-											<ContainerDetails containerDetails={doc?.containers} />
+											<ContainerDetails
+												containerDetails={item?.containers}
+												cargoDetails={item?.cargo_details}
+											/>
 										</Accordion>
 									</div>
 								)
 								: (
 									<div className={styles.service_card}>
 										<TitleCard
-											item={doc}
+											item={item}
 											setOpen={setOpen}
 											open={open}
 											setActiveId={setActiveId}
 											activeId={activeId}
 											shipmentData={shipment_data}
-											containerDetails={doc?.containers}
+											containerDetails={item?.containers}
 										/>
 									</div>
 								)

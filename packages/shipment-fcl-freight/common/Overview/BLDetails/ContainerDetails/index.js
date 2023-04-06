@@ -5,7 +5,7 @@ import { renderValue } from '../../../CargoDetails/RenderCargoPills/renderValue'
 
 import styles from './styles.module.css';
 
-function ConatinerDetails({ containerDetails = [] }) {
+function ConatinerDetails({ containerDetails = [], cargoDetails = {} }) {
 	return (
 		<div className={styles.container}>
 			{(containerDetails || [])?.map((item, index) => (
@@ -18,8 +18,8 @@ function ConatinerDetails({ containerDetails = [] }) {
 							</div>
 							<div className={styles.container_number}>{item?.container_number}</div>
 							<div className={styles.tag_wrapper}>
-								<div>{startCase(item?.container_type)}</div>
-								<div>{renderValue('container_size', item)}</div>
+								<div>{startCase(cargoDetails?.container_type)}</div>
+								<div>{renderValue('container_size', cargoDetails)}</div>
 							</div>
 						</div>
 					</div>

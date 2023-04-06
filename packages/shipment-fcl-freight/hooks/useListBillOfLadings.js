@@ -15,6 +15,7 @@ const useListBillOfLadings = ({ shipment_data = {} }) => {
 			filters: {
 				shipment_id: sid,
 			},
+			additional_methods: ['cargo_details'],
 		},
 	}, { manual: true });
 
