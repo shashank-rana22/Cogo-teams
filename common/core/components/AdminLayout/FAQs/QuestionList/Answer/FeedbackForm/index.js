@@ -62,13 +62,14 @@ function FeedbackForm({
 			</section>
 
 			<div className={styles.remark}>
-				<div className={styles.aftercheckbox}>Remarks (optional)</div>
+				<div className={styles.aftercheckbox}>Remarks</div>
 
 				<InputController
 					control={control}
 					name="remark"
 					type="text"
 					placeholder="Enter remark here"
+					rules={{ required: 'Remark is required.' }}
 				/>
 			</div>
 		</div>
