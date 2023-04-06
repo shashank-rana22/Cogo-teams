@@ -12,8 +12,7 @@ function Trends() {
 	const {
 		searchValue,
 		setSearchValue,
-		responsevalue,
-		setResponsevalue,
+		responseData,
 		hscodeArr,
 		setHscodeArr,
 		control,
@@ -43,11 +42,11 @@ function Trends() {
 				handleSubmit={handleSubmit}
 				getReport={getReport}
 				setHscodeArr={setHscodeArr}
-				setResponsevalue={setResponsevalue}
 			/>
 
 			<HsCodeList
-				responsevalue={responsevalue}
+				hscodeArr={hscodeArr}
+				responseData={responseData}
 				addCheckedHSCodes={addCheckedHSCodes}
 			/>
 		</div>

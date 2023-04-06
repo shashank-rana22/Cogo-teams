@@ -1,10 +1,10 @@
 import { ResponsiveLine } from '@cogoport/charts/line/index';
-import country from '@cogoport/globalization/constants/geo/IN';
+import globals from '@cogoport/globalization/constants/globals.json';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
 
 const useGetColumns = ({ columnsToShow = [] }) => {
-	const { currency:{ code } } = country.country;
+	const { currency_code:{ INR } } = globals;
 	const columns = [
 		{
 			Header   : 'Shipment Record ID',
@@ -165,7 +165,7 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 			Header   : 'Jan',
 			accessor : (item) => ((!isEmpty(item.January)) ? formatAmount({
 				amount   : item.January,
-				currency : code,
+				currency : INR,
 			}) : 0),
 			key: 'jan',
 		},
@@ -173,7 +173,7 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 			Header   : 'Feb',
 			accessor : (item) => ((!isEmpty(item.February)) ? formatAmount({
 				amount   : item.February,
-				currency : code,
+				currency : INR,
 			}) : 0),
 			key: 'feb',
 		},
@@ -181,7 +181,7 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 			Header   : 'Mar',
 			accessor : (item) => ((!isEmpty(item.March)) ? formatAmount({
 				amount   : item.March,
-				currency : code,
+				currency : INR,
 			}) : 0),
 			key: 'mar',
 		},
@@ -189,7 +189,7 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 			Header   : 'Apr',
 			accessor : (item) => ((!isEmpty(item.April)) ? formatAmount({
 				amount   : item.April,
-				currency : code,
+				currency : INR,
 			}) : 0),
 			key: 'apr',
 		},
@@ -197,7 +197,7 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 			Header   : 'May',
 			accessor : (item) => ((!isEmpty(item.May)) ? formatAmount({
 				amount   : item.May,
-				currency : code,
+				currency : INR,
 			}) : 0),
 			key: 'may',
 		},
@@ -205,7 +205,7 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 			Header   : 'Jun',
 			accessor : (item) => ((!isEmpty(item.June)) ? formatAmount({
 				amount   : item.June,
-				currency : code,
+				currency : INR,
 			}) : 0),
 			key: 'jun',
 		},
@@ -213,7 +213,7 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 			Header   : 'July',
 			accessor : (item) => ((!isEmpty(item.July)) ? formatAmount({
 				amount   : item.July,
-				currency : code,
+				currency : INR,
 			}) : 0),
 			key: 'july',
 		},
@@ -221,7 +221,7 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 			Header   : 'Aug',
 			accessor : (item) => ((!isEmpty(item.August)) ? formatAmount({
 				amount   : item.August,
-				currency : code,
+				currency : INR,
 			}) : 0),
 			key: 'aug',
 		},
@@ -229,7 +229,7 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 			Header   : 'Sept',
 			accessor : (item) => ((!isEmpty(item.September)) ? formatAmount({
 				amount   : item.September,
-				currency : code,
+				currency : INR,
 			}) : 0),
 			key: 'sept',
 		},
@@ -237,7 +237,7 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 			Header   : 'Oct',
 			accessor : (item) => ((!isEmpty(item.October)) ? formatAmount({
 				amount   : item.October,
-				currency : code,
+				currency : INR,
 			}) : 0),
 			key: 'oct',
 		},
@@ -245,7 +245,7 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 			Header   : 'Nov',
 			accessor : (item) => ((!isEmpty(item.November)) ? formatAmount({
 				amount   : item.November,
-				currency : code,
+				currency : INR,
 			}) : 0),
 			key: 'nov',
 		},
@@ -253,7 +253,7 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 			Header   : 'Dec',
 			accessor : (item) => ((!isEmpty(item.December)) ? formatAmount({
 				amount   : item.December,
-				currency : code,
+				currency : INR,
 			}) : 0),
 			key: 'dec',
 		},

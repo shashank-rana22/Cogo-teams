@@ -1,13 +1,11 @@
 import { useForm } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import { useAthenaRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const useTrendSearch = (item = {}) => {
 	const router = useRouter();
 	const [searchValue, setSearchValue] = useState('');
-	const [responsevalue, setResponsevalue] = useState([]);
 	const [hscodeArr, setHscodeArr] = useState([]);
 
 	const formProps = useForm({
@@ -19,7 +17,7 @@ const useTrendSearch = (item = {}) => {
 
 	const { control, handleSubmit } = formProps;
 
-	const [{ loading = false, data: responseData = {} }, trigger] = useAthenaRequest({
+	const [{ loading = false, data: responseData = [] }, trigger] = useAthenaRequest({
 		url    : 'hscodes_by_commodity_name',
 		method : 'post',
 	}, { manual: true });
@@ -32,12 +30,6 @@ const useTrendSearch = (item = {}) => {
 		});
 	};
 
-	useEffect(() => {
-		if (!isEmpty(responseData)) {
-			setResponsevalue(responseData.list);
-		}
-	}, [responseData]);
-
 	const getReport = (formValues) => {
 		if (formValues.trade_direction && hscodeArr) {
 			router.push(
@@ -47,13 +39,13 @@ const useTrendSearch = (item = {}) => {
 		}
 	};
 
-	const addCheckedHSCodes = (e) => {
+	const addCheckedHSCodes = (e, newItem) => {
 		let arr = [...hscodeArr];
 
 		if (e.target.checked) {
-			arr = [...hscodeArr, e.target.value];
+			arr = [...hscodeArr, newItem.hs_code];
 		} else if (arr.includes(e.target.value)) {
-			const index = arr.indexOf(e.target.value);
+			const index = arr.indexOf(newItem.hs_code);
 
 			arr.splice(index, 1);
 		}
@@ -64,8 +56,7 @@ const useTrendSearch = (item = {}) => {
 	return {
 		searchValue,
 		setSearchValue,
-		responsevalue,
-		setResponsevalue,
+		responseData,
 		hscodeArr,
 		setHscodeArr,
 		loading,

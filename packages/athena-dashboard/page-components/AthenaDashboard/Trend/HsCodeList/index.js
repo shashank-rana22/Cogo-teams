@@ -2,11 +2,11 @@ import { Checkbox } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function HsCodeList({ responsevalue, addCheckedHSCodes }) {
+function HsCodeList({ hscodeArr = [], responseData, addCheckedHSCodes }) {
 	return (
 		<div className={styles.codes}>
 			{
-					((responsevalue || []).map((item) => (
+					((responseData.list || []).map((item) => (
 						<div key={item.hs_code}>
 							<div className={styles.result_container}>
 								<div className={styles.checkbox}>
@@ -14,8 +14,8 @@ function HsCodeList({ responsevalue, addCheckedHSCodes }) {
 										key={item.hs_code}
 										id={item.hs_code}
 										label={item.hs_code}
-										value={item.hs_code}
-										onChange={(e) => addCheckedHSCodes(e)}
+										checked={hscodeArr.includes(item.hs_code)}
+										onChange={(e) => addCheckedHSCodes(e, item)}
 									/>
 								</div>
 								<div className={styles.description}>

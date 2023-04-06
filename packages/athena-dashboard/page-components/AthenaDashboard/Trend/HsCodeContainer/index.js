@@ -3,7 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function HsCodeContainer({ hscodeArr, handleSubmit, getReport, setHscodeArr, setResponsevalue }) {
+function HsCodeContainer({ hscodeArr, handleSubmit, getReport, setHscodeArr }) {
 	return (
 		<div className={styles.selected_hscode_container}>
 			{
@@ -35,10 +35,9 @@ function HsCodeContainer({ hscodeArr, handleSubmit, getReport, setHscodeArr, set
 							<Button
 								style={{ marginTop: '24px' }}
 								themeType="tertiary"
-								onClick={() => { setHscodeArr([]); setResponsevalue([]); }}
+								onClick={() => { setHscodeArr([]); }}
 							>
 								Clear all
-
 							</Button>
 
 						</div>
