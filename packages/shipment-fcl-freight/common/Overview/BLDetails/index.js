@@ -84,44 +84,50 @@ function BLDetails() {
 
 			<Accordion title={renderBlCount} style={{ width: '100%' }}>
 				{!documents?.length ? (
-					<EmptyState showContent={emptyStateContent} />) : (
-						<div className={styles.manage_services_div}>
-							{(documents || []).map((doc) => (
-								doc?.container_details?.length >= 1
-									? (
-										<div className={styles.service_card}>
-											<Accordion
-												title={(
-													<TitleCard
-														item={doc}
-														setOpen={setOpen}
-														open={open}
-														setActiveId={setActiveId}
-														activeId={activeId}
-														shipmentData={shipment_data}
-														containerDetails={doc?.container_details}
-													/>
-												)}
-											>
-												<ContainerDetails containerDetails={doc?.container_details} />
-											</Accordion>
-										</div>
-									)
-									: (
-										<div className={styles.service_card}>
-											<TitleCard
-												item={doc}
-												setOpen={setOpen}
-												open={open}
-												setActiveId={setActiveId}
-												activeId={activeId}
-												shipmentData={shipment_data}
-												containerDetails={doc?.container_details}
-											/>
-										</div>
-									)
-							))}
-						</div>
+					<EmptyState
+						showContent={emptyStateContent}
+						textSize="20px"
+						emptyText="No BL Details Found!"
+						subEmptyText="Currently BL is not uploaded from the respective stakeholder."
+					/>
+				) : (
+					<div className={styles.manage_services_div}>
+						{(documents || []).map((doc) => (
+							doc?.container_details?.length >= 1
+								? (
+									<div className={styles.service_card}>
+										<Accordion
+											title={(
+												<TitleCard
+													item={doc}
+													setOpen={setOpen}
+													open={open}
+													setActiveId={setActiveId}
+													activeId={activeId}
+													shipmentData={shipment_data}
+													containerDetails={doc?.container_details}
+												/>
+											)}
+										>
+											<ContainerDetails containerDetails={doc?.container_details} />
+										</Accordion>
+									</div>
+								)
+								: (
+									<div className={styles.service_card}>
+										<TitleCard
+											item={doc}
+											setOpen={setOpen}
+											open={open}
+											setActiveId={setActiveId}
+											activeId={activeId}
+											shipmentData={shipment_data}
+											containerDetails={doc?.container_details}
+										/>
+									</div>
+								)
+						))}
+					</div>
 				)}
 			</Accordion>
 

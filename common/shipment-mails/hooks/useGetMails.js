@@ -15,6 +15,7 @@ import getApiErrorString from '../utils/getApiErrorString';
 
 const useGetMails = ({ payload }) => {
 	const { source, filters, ...restPayload } = payload;
+	const { email_address, foldername, page, search } = restPayload;
 
 	const apis = APIS[source];
 
@@ -39,7 +40,7 @@ const useGetMails = ({ payload }) => {
 
 	useEffect(() => {
 		getEmails();
-	}, [restPayload, getEmails]);
+	}, [email_address, foldername, page, search, getEmails]);
 
 	return {
 		mailApi,
