@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useRequestBf } from '@cogoport/request';
 
 const useGetTaggingBills = ({ billId }: { billId:string }) => {
