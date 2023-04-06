@@ -15,7 +15,7 @@ export default function useGetScopeOptions({ defaultValues = {} } = {}) {
 		const { main_apis } = navData;
 		const allNavApis = (permissions_navigations || {})[navigation] || {};
 
-		const scopes = [];
+		let scopes = [];
 		const viewTypes = {};
 		let defaultScope = null;
 		let defaultView = null;
@@ -27,7 +27,7 @@ export default function useGetScopeOptions({ defaultValues = {} } = {}) {
 
 				if (type !== 'none') {
 					scopes.push(type);
-					viewTypes[type] = through_criteria || [];
+					viewTypes[type] = Array.from(new Set(through_criteria)) || [];
 
 					if ((!defaultScope && is_default) || defaultValues.scope === type) {
 						defaultScope = type;
@@ -39,6 +39,7 @@ export default function useGetScopeOptions({ defaultValues = {} } = {}) {
 				}
 			});
 		});
+		scopes = Array.from(new Set(scopes));
 
 		return { scopes, viewTypes, defaultScope, defaultView, defaultAgentId };
 	}, [navigation, permissions_navigations, defaultValues]);

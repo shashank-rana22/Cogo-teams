@@ -4,11 +4,13 @@ import Filters from '../../commons/Filters';
 import List from '../../commons/List';
 import Loader from '../../commons/Loader';
 import Tabs from '../../commons/Tabs';
-import { fcl_freight_local as tabs } from '../../config/TABS_CONFIG.json';
+import allTabs from '../../config/TABS_CONFIG.json';
 import useListBookingDeskShipments from '../../hooks/useListBookingDeskShipments';
 
 import Card from './Card';
 import styles from './styles.module.css';
+
+const { fcl_freight_local: tabs } = allTabs;
 
 export default function FCLLocalDesk({ stateProps = {} }) {
 	const { loading, data } = useListBookingDeskShipments({ stateProps, prefix: 'fcl_local' });
