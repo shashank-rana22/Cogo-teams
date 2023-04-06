@@ -15,8 +15,8 @@ interface ParamsInterface {
 const useGetInvoiceJourney = ({ filterValue, entityCode }:ParamsInterface) => {
 	const { serviceType = '', companyType = '' } = filterValue || {};
 
-	const d = new Date();
-	const currentMonth = months[d.getMonth()];
+	const CurrentDate = new Date();
+	const currentMonth = months[CurrentDate.getMonth()];
 
 	const currentYearsState = new Date().getFullYear();
 

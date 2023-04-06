@@ -71,3 +71,9 @@
 	align-items: center;
 	justify-content: space-between;
 }
+
+.table_style {
+	width: 1200px;
+	height: 200px;
+	margin-top: 20px;
+}

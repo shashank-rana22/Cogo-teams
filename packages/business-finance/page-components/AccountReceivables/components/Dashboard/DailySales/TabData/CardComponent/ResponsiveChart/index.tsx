@@ -14,16 +14,15 @@ interface ResponsiveChartProps {
 	entityCode?: string,
 	showCount?: boolean,
 }
+const keyValue = {
+	101 : 'INR',
+	201 : 'EUR',
+	301 : 'INR',
+	401 : 'SGD',
+	501 : 'VND',
+};
 
-function ResponsiveChart({ data, loadingData, entityCode, showCount = true }: ResponsiveChartProps) {
-	const keyValue = {
-		101 : 'INR',
-		201 : 'EUR',
-		301 : 'INR',
-		401 : 'SGD',
-		501 : 'VND',
-	};
-
+function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true }: ResponsiveChartProps) {
 	data?.sort((a, b) => {
 		const dateA = new Date(`${a.year}-${a.date} 00:00:00`);
 		const dateB = new Date(`${b.year}-${b.date} 00:00:00`);

@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 function AccountReceivables() {
 	const { push, query } = useRouter();
 	const [receivables, setReceivables] = useState<string>(query.active_tab || 'dashboard');
-	const { loading, EntityData } = useListCogoEntity();
+	const { loading, EntityData = [] } = useListCogoEntity();
 
 	const [entityCode, setEntityCode] = useState('301');
 

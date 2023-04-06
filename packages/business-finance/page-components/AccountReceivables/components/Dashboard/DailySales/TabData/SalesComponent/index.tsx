@@ -45,7 +45,7 @@ function SalesComponent({
 
 	const revenueDetails = data?.SALES_INVOICE?.filter((element) => (element.invoiceType === 'REVENUE'));
 
-	const formatData = (revenueDetails)?.map((item) => (
+	const formatData = (revenueDetails || [])?.map((item) => (
 		{
 			date: format(
 				item?.duration,
@@ -79,37 +79,22 @@ function SalesComponent({
 	const getData = () => (
 		<div className={styles.container}>
 
-			<table style={{ width: '1200px', height: '200px', marginTop: '20px' }}>
+			<table className={styles.table_style}>
 				<tr>
 					<td>{' '}</td>
-					<td className={styles.styled_date}>
-						{
+					{[1, 2, 3].map((index) => (
+						<td className={styles.styled_date} key={index}>
+							{
 										format(
-											durations[0],
+											durations[index - 1],
 											yearFormat(),
 											{},
 											false,
 										)
                     }
-					</td>
-					<td className={styles.styled_date}>
-						{format(
-							durations[1],
-							yearFormat(),
-							{},
-							false,
-						)}
+						</td>
+					))}
 
-					</td>
-					<td className={styles.styled_date}>
-						{	format(
-							durations[2],
-							yearFormat(),
-							{},
-							false,
-						)}
-
-					</td>
 					<td className={styles.styled_date_last}>
 						{	format(
 							durations[3],
@@ -130,195 +115,72 @@ function SalesComponent({
 							Credit Notes (-)
 						</div>
 					</td>
-					<td>
-						{' '}
-						<div className={styles.styled_credit}>
-							{getFormattedPrice(
-								getDataFromDuration(invoiceArray, durations[0])?.[0]?.amount,
-								getDataFromDuration(invoiceArray, durations[0])?.[0]?.dashboardCurrency,
-								{
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 0,
-								},
-							)}
-						</div>
-						<div className={styles.styled_credit}>
+					{[1, 2, 3, 4].map((index) => (
 
+						<td key={index}>
 							{' '}
+							<div className={styles.styled_credit}>
+								{getFormattedPrice(
+									getDataFromDuration(invoiceArray, durations[index - 1])?.[0]?.amount,
+									getDataFromDuration(
+										invoiceArray,
+										durations[index - 1],
+									)?.[0]?.dashboardCurrency,
+									{
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 0,
+									},
+								)}
+							</div>
+							<div className={styles.styled_credit}>
 
-							{getFormattedPrice(
-								getDataFromDuration(creditNoteArray, durations[0])?.[0]?.amount,
-								getDataFromDuration(creditNoteArray, durations[0])?.[0]?.dashboardCurrency,
-								{
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 0,
-								},
-							)}
-							{' '}
-							<span className={styles.credit_note_text}>(-)</span>
-						</div>
+								{' '}
 
-					</td>
-					<td>
-						{' '}
-						<div className={styles.styled_credit}>
+								{getFormattedPrice(
+									getDataFromDuration(creditNoteArray, durations[index - 1])?.[0]?.amount,
+									getDataFromDuration(
+										creditNoteArray,
+										durations[index - 1],
+									)?.[0]?.dashboardCurrency,
+									{
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 0,
+									},
+								)}
+								{' '}
+								<span className={styles.credit_note_text}>(-)</span>
+							</div>
 
-							{getFormattedPrice(
-								getDataFromDuration(invoiceArray, durations[1])?.[0]?.amount,
-								getDataFromDuration(invoiceArray, durations[1])?.[0]?.dashboardCurrency,
-								{
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 0,
-								},
-							)}
-						</div>
-						<div className={styles.styled_credit}>
+						</td>
 
-							{' '}
-							{getFormattedPrice(
-								getDataFromDuration(creditNoteArray, durations[1])?.[0]?.amount,
-								getDataFromDuration(creditNoteArray, durations[1])?.[0]?.dashboardCurrency,
-								{
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 0,
-								},
-							)}
-							{' '}
-							<span className={styles.credit_note_text}>(-)</span>
-						</div>
-
-					</td>
-					<td>
-						{' '}
-						<div className={styles.styled_credit}>
-							{getFormattedPrice(
-								getDataFromDuration(invoiceArray, durations[2])?.[0]?.amount,
-								getDataFromDuration(invoiceArray, durations[2])?.[0]?.dashboardCurrency,
-								{
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 0,
-								},
-							)}
-						</div>
-						<div className={styles.styled_credit}>
-
-							{' '}
-							{getFormattedPrice(
-								getDataFromDuration(creditNoteArray, durations[2])?.[0]?.amount,
-								getDataFromDuration(creditNoteArray, durations[2])?.[0]?.dashboardCurrency,
-								{
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 0,
-								},
-							)}
-							{' '}
-							<span className={styles.credit_note_text}>(-)</span>
-						</div>
-
-					</td>
-					<td>
-						{' '}
-						<div className={styles.styled_credit}>
-							{getFormattedPrice(
-								getDataFromDuration(invoiceArray, durations[3])?.[0]?.amount,
-								getDataFromDuration(invoiceArray, durations[3])?.[0]?.dashboardCurrency,
-								{
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 0,
-								},
-							)}
-						</div>
-						<div className={styles.styled_credit}>
-
-							{' '}
-							{getFormattedPrice(
-								getDataFromDuration(creditNoteArray, durations[3])?.[0]?.amount,
-								getDataFromDuration(creditNoteArray, durations[3])?.[0]?.dashboardCurrency,
-								{
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 0,
-								},
-							)}
-							{' '}
-							<span className={styles.credit_note_text}>(-)</span>
-						</div>
-
-					</td>
+					))}
 				</tr>
 				<tr>
 					<td>
 						Revenue
 					</td>
-					<td>
 
-						<span className={styles.styled_amount}>
+					{[1, 2, 3, 4].map((index) => (
 
-							{getFormattedPrice(
-								getDataFromDuration(revenueArray, durations[0])?.[0]?.amount,
-								getDataFromDuration(revenueArray, durations[0])?.[0]?.dashboardCurrency,
-								{
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 0,
-								},
-							)}
-						</span>
+						<td key={index}>
 
-					</td>
-					<td>
+							<span className={styles.styled_amount}>
 
-						<span className={styles.styled_amount}>
-							{getFormattedPrice(
-								getDataFromDuration(revenueArray, durations[1])?.[0]?.amount,
-								getDataFromDuration(revenueArray, durations[1])?.[0]?.dashboardCurrency,
-								{
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 0,
-								},
-							)}
-						</span>
+								{getFormattedPrice(
+									getDataFromDuration(revenueArray, durations[index - 1])?.[0]?.amount,
+									getDataFromDuration(revenueArray, durations[index - 1])?.[0]?.dashboardCurrency,
+									{
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 0,
+									},
+								)}
+							</span>
 
-					</td>
-					<td>
-
-						<span className={styles.styled_amount}>
-							{getFormattedPrice(
-								getDataFromDuration(revenueArray, durations[2])?.[0]?.amount,
-								getDataFromDuration(revenueArray, durations[2])?.[0]?.dashboardCurrency,
-								{
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 0,
-								},
-							)}
-
-						</span>
-
-					</td>
-					<td>
-
-						<span className={styles.styled_amount}>
-							{getFormattedPrice(
-								getDataFromDuration(revenueArray, durations[3])?.[0]?.amount,
-								getDataFromDuration(revenueArray, durations[3])?.[0]?.dashboardCurrency,
-								{
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 0,
-								},
-							)}
-						</span>
-
-					</td>
+						</td>
+					))}
 
 				</tr>
 			</table>
