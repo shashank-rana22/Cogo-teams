@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import controls from '../../../configurations/shipment-controls';
 import tableDataColumns from '../../../constants/table-data-columns';
 import useGetColumns from '../hooks/useGetColumns';
 import useSearch from '../hooks/useSearch';
@@ -28,10 +27,8 @@ function Shipment() {
 
 	return (
 		<>
-
 			<Filter
 				control={control}
-				controls={controls}
 				handleSubmit={handleSubmit}
 				handleClick={handleClick}
 				loading={loading}
@@ -42,7 +39,6 @@ function Shipment() {
 					date={date}
 					setDate={setDate}
 					control={control}
-					controls={controls}
 				/>
 				<ShipmentReport
 					activeTab={activeTab}

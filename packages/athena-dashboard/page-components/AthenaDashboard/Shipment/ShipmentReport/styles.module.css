@@ -33,7 +33,6 @@
 }
 
 .select_box {
-	box-sizing: border-box;
 	width: 250px;
 	border: 1px solid #e0e0e0;
 	border-radius: 10px;

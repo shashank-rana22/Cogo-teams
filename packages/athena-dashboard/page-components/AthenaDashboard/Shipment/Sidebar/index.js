@@ -1,9 +1,11 @@
 import { DateRangepicker } from '@cogoport/components';
 import { AsyncSelectController } from '@cogoport/forms';
 
+import controls from '../../../../configurations/Shipment/sidebar-controls';
+
 import styles from './styles.module.css';
 
-function Sidebar({ date, setDate, control, controls }) {
+function Sidebar({ date, setDate, control }) {
 	return (
 		<div className={styles.advanced_filter_container}>
 			<div className={styles.date_range_container}>
@@ -19,7 +21,7 @@ function Sidebar({ date, setDate, control, controls }) {
 				</div>
 			</div>
 
-			{controls[0].map((item) => {
+			{controls.map((item) => {
 				const el = { ...item };
 				return (
 					<div key={el.name}>

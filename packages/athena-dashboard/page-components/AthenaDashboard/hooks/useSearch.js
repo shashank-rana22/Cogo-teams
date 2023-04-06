@@ -28,6 +28,7 @@ const useSearch = () => {
 			origin_port,
 			destination_port,
 		} = formValues;
+
 		await trigger({
 			data: {
 				page       : 1,
@@ -41,16 +42,16 @@ const useSearch = () => {
 					incoterm       : incoterm_values || undefined,
 					origin_country : origin_country.map((
 						country,
-					) => country.toString().toUpperCase()) || undefined,
+					) => country.toUpperCase()) || undefined,
 					destination_country: destination_country.map((
 						country,
-					) => country.toString().toUpperCase()) || undefined,
+					) => country.toUpperCase()) || undefined,
 					origin_port: origin_port.map((
 						country,
-					) => country.toString().toUpperCase()) || undefined,
+					) => country.toUpperCase()) || undefined,
 					destination_port: destination_port.map((
 						country,
-					) => country.toString().toUpperCase()) || undefined,
+					) => country.toUpperCase()) || undefined,
 				},
 				start_date               : start_date || undefined,
 				end_date                 : end_date || undefined,
@@ -63,7 +64,7 @@ const useSearch = () => {
 		loading,
 		date,
 		setDate,
-		response: responseData.list,
+		response: (responseData || []).list,
 		control,
 		handleClick,
 		handleSubmit,

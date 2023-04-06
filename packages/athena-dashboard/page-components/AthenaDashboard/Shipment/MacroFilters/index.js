@@ -1,9 +1,11 @@
 import { Button } from '@cogoport/components';
 import { InputController, MultiselectController } from '@cogoport/forms';
 
+import controls from '../../../../configurations/Shipment/filter-controls';
+
 import styles from './styles.module.css';
 
-function Filter({ control, controls, handleSubmit, handleClick, loading }) {
+function Filter({ control, handleSubmit, handleClick, loading }) {
 	return (
 		<div className={styles.filter_container}>
 			<div className={styles.search_bar}>
@@ -14,7 +16,7 @@ function Filter({ control, controls, handleSubmit, handleClick, loading }) {
 				/>
 			</div>
 
-			{controls[1].map((item) => {
+			{controls.map((item) => {
 				const ele = { ...item };
 
 				return (

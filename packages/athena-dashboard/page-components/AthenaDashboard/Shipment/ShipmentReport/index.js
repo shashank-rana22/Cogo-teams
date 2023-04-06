@@ -25,7 +25,7 @@ function ShipmentReport({ activeTab, setActiveTab, response, COLUMNS, loading })
 				</div>
 
 				<div className={styles.export_results}>
-					<IcMDownload style={{ 'padding-right': '4px' }} />
+					<IcMDownload height={12} width={12} style={{ marginRight: '4px' }} />
 					Export Results
 				</div>
 			</div>
@@ -66,7 +66,6 @@ function ShipmentReport({ activeTab, setActiveTab, response, COLUMNS, loading })
 					emptyText="Search for records above"
 					textSize="24px"
 					flexDirection="column"
-					style={{ display: 'block' }}
 				/>
 			)}
 			{loading && (

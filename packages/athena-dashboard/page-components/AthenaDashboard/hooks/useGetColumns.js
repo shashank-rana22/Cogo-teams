@@ -8,67 +8,67 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 	const columns = [
 		{
 			Header   : 'Shipment Record ID',
-			accessor : (item) => item.shipment_record_id,
+			accessor : (item) => item?.shipment_record_id || '--',
 			key      : 'shipment_record_id',
 		},
 		{
 			Header   : 'Importer Lead ID',
-			accessor : (item) => item.importer_lead_id,
+			accessor : (item) => item?.importer_lead_id || '--',
 			key      : 'importer_lead_id',
 		},
 		{
 			Header   : 'Exporter Lead ID',
-			accessor : (item) => item.exporter_lead_id,
+			accessor : (item) => item?.exporter_lead_id || '--',
 			key      : 'exporter_lead_id',
 		},
 		{
 			Header   : 'Shipment Mode',
-			accessor : (item) => item.shipment_mode,
+			accessor : (item) => item?.shipment_mode || '--',
 			key      : 'shipment_mode',
 		},
 		{
 			Header   : 'Incoterm',
-			accessor : (item) => item.incoterm,
+			accessor : (item) => item?.incoterm || '--',
 			key      : 'incoterm',
 		},
 		{
 			Header   : 'Origin Port',
-			accessor : (item) => item.origin_port,
+			accessor : (item) => item?.origin_port || '--',
 			key      : 'origin_port',
 		},
 		{
 			Header   : 'Origin Country',
-			accessor : (item) => item.origin_country,
+			accessor : (item) => item?.origin_country || '--',
 			key      : 'origin_country',
 		},
 		{
 			Header   : 'Destination Port',
-			accessor : (item) => item.destination_port,
+			accessor : (item) => item?.destination_port || '--',
 			key      : 'destination_port',
 		},
 		{
 			Header   : 'Destination Country',
-			accessor : (item) => item.destination_country,
+			accessor : (item) => item?.destination_country || '--',
 			key      : 'destination_country',
 		},
 		{
 			Header   : 'Shipment Date',
-			accessor : (item) => item.shipment_date,
+			accessor : (item) => item?.shipment_date || '--',
 			key      : 'shipment_date',
 		},
 		{
 			Header   : 'Shipment Value',
-			accessor : (item) => item.shipment_value,
+			accessor : (item) => item?.shipment_value || '--',
 			key      : 'shipment_value',
 		},
 		{
 			Header   : 'Importer Lead Segment',
-			accessor : (item) => item.importer_lead_segment,
+			accessor : (item) => item?.importer_lead_segment || '--',
 			key      : 'importer_lead_segment',
 		},
 		{
 			Header   : 'Exporter Lead Segment',
-			accessor : (item) => item.exporter_lead_segment,
+			accessor : (item) => item?.exporter_lead_segment || '--',
 			key      : 'exporter_lead_segment',
 		},
 		{
@@ -78,17 +78,17 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 		},
 		{
 			Header   : 'HS CODE',
-			accessor : (item) => item.hs_code,
+			accessor : (item) => item?.hs_code || '--',
 			key      : 'hs_code',
 		},
 		{
 			Header   : 'Description',
-			accessor : (item) => item.category,
+			accessor : (item) => item?.category || '--',
 			key      : 'description',
 		},
 		{
 			Header   : 'Country',
-			accessor : (item) => item.country,
+			accessor : (item) => item?.country || '--',
 			key      : 'country',
 		},
 		{
@@ -102,7 +102,7 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 				<div style={{ height: '50px', width: '70px' }}>
 					<ResponsiveLine data={[
 						{
-							id   : item.country,
+							id   : item?.country || '--',
 							data : [
 								{
 									x : 'January',
