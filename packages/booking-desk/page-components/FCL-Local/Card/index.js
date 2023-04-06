@@ -14,6 +14,7 @@ export default function Card({ item = {}, couldBeCardsCritical = false }) {
 		currUrl = currUrl.replace('/v2/en-IN', '');
 		const newUrl = currUrl.replace('booking-desk', `shipments/${item.id}`);
 
+		window.sessionStorage.setItem('prev_nav', newUrl);
 		window.location.href = newUrl;
 	};
 
