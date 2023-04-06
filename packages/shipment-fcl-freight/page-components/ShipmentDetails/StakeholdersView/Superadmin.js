@@ -1,7 +1,7 @@
 import { Tabs, TabPanel, Loader } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { Documents, Tracking } from '@cogoport/ocean-modules';
-import { ShipmentChat } from '@cogoport/shipment-chat';
+// import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import React, { useContext, useState } from 'react';
 
@@ -30,7 +30,7 @@ function Superadmin() {
 		<div>
 			<div className={styles.top_header}>
 				<ShipmentInfo />
-				<ShipmentChat />
+				{/* <ShipmentChat /> */}
 			</div>
 
 			<div className={styles.header}>
