@@ -67,7 +67,7 @@ function RecurringSummary({ recurringData, setRecurringData }:Props) {
 	const { stakeholdersData, loading:stakeholderLoading } = useGetStakeholders(expenseCategory);
 	const { tradePartyData } = useGetTradePartyDetails(vendorID);
 
-	const splitArray = (String(uploadedInvoice) || '').split('/') || [];
+	const splitArray = (uploadedInvoice || '').toString().split('/') || [];
 	const filename = splitArray[splitArray.length - 1];
 
 	useEffect(() => {
