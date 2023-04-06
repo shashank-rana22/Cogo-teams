@@ -15,6 +15,7 @@ function ButtonsComponent({
 	allKeysSaved,
 	mode,
 	listSetQuestions,
+	editDetails,
 }) {
 	const {
 		handleEditQuestion,
@@ -29,6 +30,7 @@ function ButtonsComponent({
 		listSetQuestions,
 		questionSetId,
 		setEditDetails,
+		editDetails,
 	});
 
 	return (
@@ -48,9 +50,9 @@ function ButtonsComponent({
 							<div
 								style={{ marginLeft: '8px' }}
 							>
-								{mode !== 'view' && item.question_type === 'case_study'
-									? 'Edit' : 'View'}
-
+								Edit
+								{/* {mode !== 'view' && item.question_type === 'case_study'
+									? 'Edit' : 'View'} */}
 							</div>
 						</Button>
 
