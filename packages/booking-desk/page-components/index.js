@@ -5,14 +5,10 @@ import getValidatedStoredValues from '../utils/getValidatedStoredValues';
 
 import styles from './styles.module.css';
 
-const FCLDesk = dynamic(() => import('./FCL'), { ssr: false });
-const FCLLocalDesk = dynamic(() => import('./FCL-Local'), { ssr: false });
-const LCLDesk = dynamic(() => import('./LCL'), { ssr: false });
-
 const ResolveBookingDesk = {
-	fcl_freight       : FCLDesk,
-	fcl_freight_local : FCLLocalDesk,
-	lcl_freight       : LCLDesk,
+	fcl_freight       : dynamic(() => import('./FCL'), { ssr: false }),
+	fcl_freight_local : dynamic(() => import('./FCL-Local'), { ssr: false }),
+	lcl_freight       : dynamic(() => import('./LCL'), { ssr: false }),
 };
 
 export default function BookingDesk() {
