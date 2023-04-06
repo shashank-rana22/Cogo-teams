@@ -1,49 +1,53 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
-import { useState } from 'react';
-
-import useAnswer from './useAnswer';
+import { useState, useEffect } from 'react';
 
 const FEEDBACK_MAPPING_ISLIKED = {
 	true  : 'liked',
 	false : 'disliked',
 };
 
-const useCreateFeedback = ({ question }) => {
-	const {
-		profile: { partner = '' },
-	} = useSelector((state) => state);
+const useCreateFeedback = ({ refetchQuestions, answerData, loading }) => {
+	const [show, setShow] = useState(false);
+	const [load, setload] = useState(true);
 
-	const { handleSubmit, control, watch } = useForm();
+	const { is_positive, id } = answerData?.answers?.[0]?.faq_feedbacks?.[0] || {};
+
+	const [isLiked, setIsLiked] = useState(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
+
+	useEffect(() => {
+		if (!loading) {
+			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive]);
+		}
+	}, [is_positive, loading]);
+
+	const { handleSubmit, formState: { errors }, control, watch } = useForm();
 
 	const watchQuestionCheckbox = watch('question_checkbox');
 	const watchAnswerCheckbox = watch('answer_checkbox');
 
-	const [show, setShow] = useState(false);
-	const [load, setload] = useState(true);
+	const apiName = id
+		? '/update_faq_feedback'
+		: '/create_faq_feedback';
 
-	const { data: answerData, loading, fetch } = useAnswer({ question });
-
-	const { id, is_positive } = answerData?.answers?.[0]?.faq_feedbacks?.[0] || {};
-
-	const [isLiked, setIsLiked] = useState(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
-
-	const apiName = id ? '/update_faq_feedback' : '/create_faq_feedback';
-
-	const [{ loading : feedbackLoading }, trigger] = useRequest({
+	const [{ loading: feedbackLoading = false }, trigger] = useRequest({
 		url    : apiName,
 		method : 'POST',
-	}, { manual: true });
+	});
 
-	const onClickLikeButton = async ({ answerId }) => {
+	const onClose = () => {
+		setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
+		setShow(false);
+	};
+
+	const onClickLikeButton = async ({ _id }) => {
 		setload(false);
 		setIsLiked(isLiked === 'liked' ? '' : 'liked');
-		setShow(false);
+
 		try {
 			let payload = {
-				faq_answer_id : answerId,
+				faq_answer_id : _id,
 				is_positive   : true,
 				status        : 'active',
 			};
@@ -64,7 +68,7 @@ const useCreateFeedback = ({ question }) => {
 				data: payload,
 			});
 
-			fetch();
+			refetchQuestions();
 		} catch (error) {
 			Toast.error(error?.message);
 			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
@@ -83,26 +87,10 @@ const useCreateFeedback = ({ question }) => {
 				},
 			});
 
-			fetch();
+			refetchQuestions();
 		} catch (error) {
-			Toast.error(error?.message);
 			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
-	};
-
-	const goToFAQ = () => {
-		const { id: partnerId = '' } = partner || {};
-
-		const aElement = document.createElement('a');
-		aElement.setAttribute('href', `/v2/${partnerId}/learning/faq`);
-		aElement.setAttribute('target', '_blank');
-
-		const bodyElement = document.querySelector('body');
-		bodyElement.appendChild(aElement);
-
-		aElement.click();
-
-		aElement.remove();
 	};
 
 	const onSubmit = async (values) => {
@@ -126,7 +114,7 @@ const useCreateFeedback = ({ question }) => {
 			suggested_question_abstract : watchQuestionCheckbox ? values?.question : undefined,
 			suggested_answer            : watchAnswerCheckbox ? values?.answer : undefined,
 		};
-		if (is_positive) {
+		if (answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive) {
 			payload = {
 				id,
 				faq_answer_id               : answerData?.answers[0]?.id,
@@ -144,30 +132,29 @@ const useCreateFeedback = ({ question }) => {
 			});
 
 			setShow(false);
-			fetch();
+			refetchQuestions();
 		} catch (error) {
-			Toast.error(error?.message);
 			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
 	};
 
 	return {
-		handleSubmit,
-		control,
 		show,
+		setShow,
 		load,
-		loading,
+		setload,
+		handleSubmit,
+		errors,
+		control,
 		feedbackLoading,
+		onClose,
 		onClickLikeButton,
 		onClickRemoveDisLike,
 		onSubmit,
-		goToFAQ,
-		answerData,
 		isLiked,
-		setShow,
 		setIsLiked,
-		watchAnswerCheckbox,
 		watchQuestionCheckbox,
+		watchAnswerCheckbox,
 		is_positive,
 		FEEDBACK_MAPPING_ISLIKED,
 

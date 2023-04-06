@@ -10,8 +10,9 @@ const useListfaqFeedback = ({ id }) => {
 			status          : 'active',
 		},
 		// page,
-		page_limit           : 100000,
-		author_data_required : true,
+		feedback_remark_stats_required : true,
+		page_limit                     : 100000,
+		author_data_required           : true,
 	}), [id]);
 
 	const [{ loading, data }, trigger] = useRequest({
