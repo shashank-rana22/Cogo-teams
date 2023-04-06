@@ -32,13 +32,12 @@ const columns = ({
 	{
 		Header   : 'TOPICS',
 		accessor : (item) => {
-			const tags = [];
-			(item.faq_topics
+			const tags = (item.faq_topics
 				|| []).map((ele) => {
 				const { display_name } = ele || {};
-				tags.push(display_name);
-				return tags;
+				return display_name;
 			});
+
 			return (
 				<div className={styles.pills}>
 

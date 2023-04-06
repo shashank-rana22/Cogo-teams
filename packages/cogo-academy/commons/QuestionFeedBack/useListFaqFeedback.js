@@ -13,7 +13,7 @@ const useListfaqFeedback = ({ id }) => {
 		},
 		page,
 		feedback_remark_stats_required : true,
-		page_limit                     : 100000,
+		page_limit                     : 5,
 		author_data_required           : true,
 	}), [id, page]);
 
