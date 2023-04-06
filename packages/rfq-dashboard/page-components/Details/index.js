@@ -1,17 +1,15 @@
-import CustomerPastMonthDataCard from "./CustomerPastDataCard";
-import Header from "./Header";
-import PastMonthsDataCard from "./PastMonthsDataGraphCard";
-import GraphDataCard from "./PastMonthsDataGraphCard";
+import CustomerPastMonthDataCard from './CustomerPastDataCard';
+import Header from './Header';
+import GraphDataCard from './PastMonthsDataGraphCard';
 import styles from './styles.module.css';
-
 
 function Details() {
 	return (
 		<div className={styles.details_prime_container}>
-			<Header/>
+			<Header />
 			<div className={styles.customer_cards_past_month}>
-				<CustomerPastMonthDataCard/>
-				<GraphDataCard/>
+				<CustomerPastMonthDataCard />
+				<GraphDataCard />
 			</div>
 		</div>
 	);
