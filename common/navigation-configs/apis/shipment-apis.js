@@ -1298,6 +1298,11 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
+		api          : 'list_bill_of_ladings',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
 		api          : 'get_process',
 		access_type  : 'private',
 		service_name : 'bookings',
