@@ -16,7 +16,6 @@ function QuestionsList({ tabTitle = '', searchState = '', topicId = '', tagId = 
 		data,
 		loading = false,
 		paginationData,
-	// eslint-disable-next-line react-hooks/rules-of-hooks
 	} = useListFaqQuestions({ topicId, tagId, searchState });
 
 	if (loading) {
@@ -39,13 +38,19 @@ function QuestionsList({ tabTitle = '', searchState = '', topicId = '', tagId = 
 
 	return (
 		<div>
-			<div style={{ margin: '5px 0', width: '100%', height: '487px' }} className={styles.scrollable}>
+			<div style={{ margin: '6px 0', width: '100%', height: '488px' }} className={styles.scrollable}>
 
 				{(data?.list || []).map((question) => (
 					<div className={styles.border}>
 						<Questions questions={question} topicId={topicId} topicName={tabTitle} />
 					</div>
 				))}
+				{searchState && (
+					<EmptyQuestionListState
+						searchState={searchState}
+						source="list"
+					/>
+				)}
 			</div>
 
 			<div className={styles.pagination}>

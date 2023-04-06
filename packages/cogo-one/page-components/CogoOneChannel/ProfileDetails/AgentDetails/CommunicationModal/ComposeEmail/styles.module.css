@@ -10,7 +10,7 @@
 .styled_editor {
 	:global {
 		.notranslate {
-			min-height: 300px;
+			min-height: 250px;
 		}
 	}
 }
@@ -25,8 +25,7 @@
 
 .rte_container {
 	position: relative;
-	height: 460px;
-	padding-bottom: 80px;
+	height: 380px;
 	overflow-y: auto;
 }
 
@@ -34,11 +33,10 @@
 	position: absolute;
 	top: 12px;
 	right: 0;
-	left: 467px;
 	z-index: 10000;
 	width: 29px;
 	height: 29px;
-	margin-right: 77px;
+	margin-right: 70px;
 	border: 1px solid #999;
 	border-radius: 2px;
 
@@ -105,7 +103,7 @@
 }
 
 .attachments_scroll {
-	height: 80px;
+	padding-bottom: 10px;
 	margin-top: 10px;
 }
 

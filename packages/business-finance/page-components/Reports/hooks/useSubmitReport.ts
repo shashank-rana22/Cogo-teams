@@ -2,6 +2,8 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 
+import { DATE_OPTIONAL_APIS } from '../constants';
+
 interface DateInterface {
 	startDate?:Date,
 	endDate?:Date
@@ -16,6 +18,7 @@ interface Props {
 const useSubmitReport = (value:Props) => {
 	const { dateRange, reportType, accountType } = value || {};
 	const apiKey = reportType?.replaceAll('-', '_');
+	const dateOptionnal = DATE_OPTIONAL_APIS.includes(reportType);
 
 	const [{ loading }, trigger] = useRequestBf({
 		url     : `/muneem/reports/${reportType}`,
@@ -30,8 +33,8 @@ const useSubmitReport = (value:Props) => {
 		try {
 			const response = await trigger({
 				params: {
-					start_date   : format(startDate, 'yyyy-MM-dd', {}, false) || undefined,
-					end_date     : format(endDate, 'yyyy-MM-dd', {}, false) || undefined,
+					start_date   : !dateOptionnal ? format(startDate, 'yyyy-MM-dd', {}, false) : undefined,
+					end_date     : !dateOptionnal ? format(endDate, 'yyyy-MM-dd', {}, false) : undefined,
 					account_type : accountType || undefined,
 				},
 			});

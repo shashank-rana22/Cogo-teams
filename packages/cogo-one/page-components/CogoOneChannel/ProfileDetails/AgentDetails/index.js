@@ -20,6 +20,7 @@ function AgentDetails({
 	formattedMessageData = {},
 	customerId = '',
 	updateLeaduser = () => {},
+	setModalType = () => {},
 }) {
 	const { user_details = null, user_type, id = '' } = activeMessageCard || {};
 	const {
@@ -212,6 +213,7 @@ function AgentDetails({
 					userName={name}
 					emptyState={emptyState}
 					activeTab={activeTab}
+					setModalType={setModalType}
 				/>
 			)}
 			{(mobile_no || user_number) && (

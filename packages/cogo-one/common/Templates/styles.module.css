@@ -3,9 +3,13 @@
 }
 
 .message_container {
-	height: 400px;
+	height: 300px;
 	padding-top: 20px;
 	overflow-y: scroll;
+}
+
+.message_container::-webkit-scrollbar {
+	display: none;
 }
 
 .each_message {
@@ -20,9 +24,11 @@
 }
 
 .title {
+	max-width: 70%;
 	font-size: 14px;
 	font-weight: 500;
 	color: #221f20;
+	word-break: break-word;
 }
 
 .message {
@@ -77,16 +83,6 @@
 
 .text_area_container {
 	margin-top: 50px;
-
-	:global {
-		.ui_input_container {
-			min-height: 230px;
-		}
-
-		.ui_input_control {
-			font-family: Poppins, sans-serif !important;
-		}
-	}
 }
 
 .loader_div {
@@ -116,19 +112,21 @@
 }
 
 .preview {
-	position: relative;
 	display: flex;
 	flex-direction: column;
 	flex-grow: 2;
 	align-items: flex-start;
+	justify-content: center;
 	width: max-content;
 	padding: 12px;
 }
 
 .whatsapp {
-	width: 241px;
-	height: 498px;
-	background-image: url("https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/mobile.svg");
+	position: relative;
+	width: 220px;
+	height: 380px;
+	background-image: url("https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/mobile_sm.svg");
+	background-repeat: no-repeat;
 }
 
 .back_icon {
@@ -139,9 +137,9 @@
 
 .overflow_div {
 	position: absolute;
-	top: 85px;
-	left: 28px;
-	max-height: 380px;
+	top: 68px;
+	left: 16px;
+	max-height: 250px;
 	overflow-y: scroll;
 	font-size: 12px;
 	background: #fff;
@@ -150,8 +148,7 @@
 }
 
 .preview_div {
-	min-width: 190px;
-	max-width: 200px;
+	max-width: 182px;
 	padding: 5px;
 	background: #fff;
 	border-radius: 4px;
@@ -168,4 +165,57 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+}
+
+.template_heading {
+	display: flex;
+	align-items: center;
+	max-width: 361px;
+	padding: 6px 10px;
+	font-size: 16px;
+}
+
+.wrap_mobile_number {
+	display: flex;
+	align-items: center;
+	max-width: 361px;
+	padding: 6px 10px;
+	border-right: 1px solid #e0e0e0;
+
+	:global {
+		.ui_select_display_container {
+			margin-right: 5px !important;
+		}
+	}
+}
+
+.wrap_mobile_number h3 {
+	margin-bottom: 0;
+}
+
+.wrap_heading {
+	display: flex;
+	align-items: center;
+	max-width: 361px;
+	padding: 6px 10px;
+	font-size: 16px;
+	border-right: 1px solid #e0e0e0;
+}
+
+.flex_div {
+	display: flex;
+	align-items: center;
+	margin: 0 0 10px 10px;
+}
+
+.mobile_number {
+	margin-left: 5px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.whatsapp_icon {
+	width: 22px;
+	height: 22px;
+	margin-left: 15px;
 }

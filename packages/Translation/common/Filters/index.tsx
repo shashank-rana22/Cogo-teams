@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
+import BulkUploadTranslation from '../../page-components/BulkUpload';
 import CreateRoleModal from '../../page-components/CreateForm';
 import { getElements } from '../../utils/getElements';
 import { FilterProps } from '../interfaces';
@@ -22,6 +23,7 @@ function Filters({
 	refetch,
 }: Props) {
 	const { search } = filters || {};
+	const [show, setShow] = useState(false);
 
 	return (
 		<section className={styles.container} id="filters">
@@ -53,6 +55,7 @@ function Filters({
 					size="md"
 					placeholder="Search by Original Text "
 				/>
+				<BulkUploadTranslation show={show} setShow={setShow} refetch={refetch} />
 				<CreateRoleModal status={status} refetch={refetch} />
 			</div>
 		</section>

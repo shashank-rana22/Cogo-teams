@@ -13,8 +13,9 @@ const useUpdateContract = () => {
 			const res = await trigger({
 
 				data: {
-					id     : payload?.id,
-					status : payload?.status,
+					id          : payload?.id,
+					status      : payload?.status,
+					is_approved : true,
 				},
 			});
 			if (res?.data) {

@@ -1,0 +1,25 @@
+.header_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-left: 6px;
+	margin: 12px;
+}
+
+.popular_topics {
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 21px;
+	color: #221f20;
+}
+
+.history_text_container {
+	display: flex;
+}
+
+.text_wrapper {
+	padding-right: 22px;
+	font-weight: 600;
+	text-decoration: underline;
+	cursor: pointer;
+}

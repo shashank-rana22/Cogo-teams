@@ -1,0 +1,22 @@
+.form_container {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 25px 25px 0;
+}
+
+.form_group {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 40px;
+	margin-right: 40px;
+}
+
+.form_label {
+	margin-bottom: 6px;
+	text-align: start;
+}
+
+.error_message {
+	font-size: 12px;
+	color: #cb6464;
+}
