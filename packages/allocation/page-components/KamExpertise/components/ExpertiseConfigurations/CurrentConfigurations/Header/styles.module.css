@@ -38,3 +38,12 @@
 	display: flex;
 	margin-left: auto;
 }
+
+.button_container{
+	display: flex;
+
+}
+
+.configButton{
+	margin-right: 20px;
+}
