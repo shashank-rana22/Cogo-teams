@@ -1,0 +1,67 @@
+.form_item_container {
+	margin: 6px 0;
+}
+
+.row {
+	display: flex;
+	justify-content: space-between;
+}
+
+.row > div {
+	width: 49%;
+}
+
+.checkbox {
+	display: flex;
+	align-items: center;
+	margin: 6px 0;
+
+	:global {
+		.ui_checkbox_container {
+			padding-left: 0;
+		}
+	}
+}
+
+.errors {
+	font-size: 12px;
+	color: red;
+}
+
+.form_label {
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.upload_container {
+	:global {
+		.ui_upload_filesuccess_container {
+			margin-top: 4px;
+			font-size: 12px;
+		}
+
+		.ui_upload_droparea_heading {
+			font-size: 12px;
+		}
+
+		.ui_upload_droparea_subheading {
+			font-size: 10px;
+		}
+
+		.ui_upload_droparea_icon {
+			margin-right: 12px;
+		}
+
+		.ui_upload_droparea_container {
+			flex-direction: row;
+			min-height: 0;
+			padding: 0 12px;
+			margin-bottom: 0;
+
+			svg {
+				width: 30px;
+				height: 30px;
+			}
+		}
+	}
+}

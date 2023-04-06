@@ -52,6 +52,7 @@ const useCreateQuestion = ({
 		setAllKeysSaved,
 		reset,
 		listSetQuestions,
+		editDetails,
 	});
 
 	const {
@@ -74,7 +75,7 @@ const useCreateQuestion = ({
 				testQuestionId : editDetailsId,
 			});
 		} else {
-			createTestQuestion({ values });
+			createTestQuestion({ values, editDetails });
 		}
 	};
 
