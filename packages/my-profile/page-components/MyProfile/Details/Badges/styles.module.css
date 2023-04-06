@@ -1,5 +1,5 @@
 .container {
-	height: 122px;
+	height: 120px;
 	padding: 12px;
 }
 
@@ -62,4 +62,23 @@
 
 .modal_body {
 	height: 240px;
+}
+
+.empty {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	margin-top: 16px;
+}
+
+.empty_boxes {
+	width: 48px;
+	height: 48px;
+	background-color: rgb(224 224 224 / 30%);
+	border: 1px dashed #e0e0e0;
+	border-radius: 8px;
+}
+
+.tooltip {
+	word-break: break-word;
 }

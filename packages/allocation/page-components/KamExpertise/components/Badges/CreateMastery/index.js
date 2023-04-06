@@ -121,7 +121,7 @@ function CreateMastery(props) {
 							<div>
 								{watch_image_input ? (
 									<div className={styles.preview}>
-										<img src={watch_image_input} alt="preview_image" />
+										<img src={watch_image_input.finalUrl} alt="preview_image" />
 									</div>
 								) : null}
 

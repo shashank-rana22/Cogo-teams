@@ -25,6 +25,11 @@
 	font-weight: 500;
 }
 
+.events {
+	display: flex;
+	align-items: center;
+}
+
 .modified {
 	display: flex;
 	justify-content: space-between;

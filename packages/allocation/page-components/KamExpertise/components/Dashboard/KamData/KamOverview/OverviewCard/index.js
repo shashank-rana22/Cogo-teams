@@ -65,6 +65,7 @@ function OverviewCard(props) {
 							{startCase(data?.max_condition) || 'NA'}
 						</div>
 					)}
+					disabled={!(data?.max_condition)}
 					placement="top"
 				>
 					<div className={styles.display_flex}>

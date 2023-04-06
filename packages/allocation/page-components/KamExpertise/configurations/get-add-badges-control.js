@@ -11,7 +11,7 @@ const controls = [
 	},
 	{
 		name        : 'condition',
-		label       : 'Condition',
+		label       : 'Event',
 		placeholder : 'Select Events',
 		type        : 'asyncSelect',
 		asyncKey    : 'expertise_configuration',

@@ -13,6 +13,7 @@ function CurrentConfigurations(props) {
 		refetch,
 		expertiseRefetch,
 		cardRefetch,
+		scrollDraftRef,
 	} = props;
 
 	const router = useRouter();
@@ -34,6 +35,7 @@ function CurrentConfigurations(props) {
 				refetch={refetch}
 				expertiseRefetch={expertiseRefetch}
 				cardRefetch={cardRefetch}
+				scrollDraftRef={scrollDraftRef}
 			/>
 
 			{liveAndDraftVersions?.map((item) => (
