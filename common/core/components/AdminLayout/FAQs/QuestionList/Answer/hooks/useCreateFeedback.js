@@ -26,39 +26,37 @@ const useCreateFeedback = ({ question }) => {
 
 	const { data: answerData, loading, fetch } = useAnswer({ question });
 
-	const is_positive = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive;
+	const { id, is_positive } = answerData?.answers?.[0]?.faq_feedbacks?.[0] || {};
 
 	const isFeedbackLiked = FEEDBACK_MAPPING_ISLIKED[is_positive] || '';
 
 	const [isLiked, setIsLiked] = useState(isFeedbackLiked);
 
-	const apiName = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id
-		? '/update_faq_feedback'
-		: '/create_faq_feedback';
+	const apiName = id ? '/update_faq_feedback' : '/create_faq_feedback';
 
 	const [{ loading : feedbackLoading }, trigger] = useRequest({
 		url    : apiName,
 		method : 'POST',
 	}, { manual: true });
 
-	const onClickLikeButton = async ({ _id }) => {
+	const onClickLikeButton = async ({ answerId }) => {
 		setload(false);
-		setIsLiked(isLiked === 'liked' ? '' : 'liked');
+		setIsLiked(isFeedbackLiked === 'liked' ? '' : 'liked');
 		setShow(false);
 		try {
 			let payload = {
-				faq_answer_id : _id,
+				faq_answer_id : answerId,
 				is_positive   : true,
 				status        : 'active',
 			};
-			if (isLiked === 'liked') {
+			if (isFeedbackLiked === 'liked') {
 				payload = {
-					id     : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-					status : 'inactive',
+					id,
+					status: 'inactive',
 				};
-			} else if (isLiked === 'disliked') {
+			} else if (isFeedbackLiked === 'disliked') {
 				payload = {
-					id          : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+					id,
 					is_positive : true,
 					status      : 'active',
 				};
@@ -82,8 +80,8 @@ const useCreateFeedback = ({ question }) => {
 		try {
 			await trigger({
 				data: {
-					id     : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-					status : 'inactive',
+					id,
+					status: 'inactive',
 				},
 			});
 
@@ -130,9 +128,9 @@ const useCreateFeedback = ({ question }) => {
 			suggested_question_abstract : watchQuestionCheckbox ? values?.question : undefined,
 			suggested_answer            : watchAnswerCheckbox ? values?.answer : undefined,
 		};
-		if (answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive) {
+		if (is_positive) {
 			payload = {
-				id                          : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
+				id,
 				faq_answer_id               : answerData?.answers[0]?.id,
 				is_positive                 : false,
 				remark,
@@ -174,6 +172,7 @@ const useCreateFeedback = ({ question }) => {
 		watchQuestionCheckbox,
 		is_positive,
 		FEEDBACK_MAPPING_ISLIKED,
+
 	};
 };
 

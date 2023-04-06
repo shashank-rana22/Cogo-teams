@@ -47,6 +47,8 @@ function Answer({ topic = {}, question, setQuestion }) {
 		FEEDBACK_MAPPING_ISLIKED,
 	} = useCreateFeedback({ question });
 
+	const { id:answerId, answer, upvote_count } = answerData?.answers?.[0] || {};
+
 	return (
 		<div className={styles.list}>
 			<div>
@@ -73,12 +75,12 @@ function Answer({ topic = {}, question, setQuestion }) {
 						</div>
 
 						<div className={styles.ansofques}>
-							<div dangerouslySetInnerHTML={{ __html: answerData?.answers?.[0]?.answer }} />
+							<div dangerouslySetInnerHTML={{ __html: answer }} />
 						</div>
 
-						{answerData?.answers?.[0]?.upvote_count > 0 ? (
+						{upvote_count > 0 ? (
 							<div className={styles.no_of_people_like_it} style={{ marginTop: 24 }}>
-								{ answerData?.answers?.[0]?.upvote_count}
+								{ upvote_count}
 								{' '}
 								people liked this answer
 							</div>
@@ -104,7 +106,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 						className={styles.emoji_like}
 						role="presentation"
 						onClick={() => {
-							onClickLikeButton({ _id: answerData?.answers?.[0]?.id });
+							onClickLikeButton({ answerId });
 						}}
 						style={{ marginLeft: 8, cursor: 'pointer' }}
 					>
