@@ -5,6 +5,7 @@ import FutureExpectationCards from './FutureExpectationCards';
 import Header from './Header';
 import PlatformCards from './PlatformCards';
 import QuickStartCards from './QuickStartCards';
+import TermsAndConditions from './TermsAndConditions';
 import WelcomeText from './WelcomeText';
 
 function ThingsToDo() {
@@ -21,6 +22,7 @@ function ThingsToDo() {
 			<QuickStartCards />
 			<PlatformCards />
 			<FutureExpectationCards />
+			<TermsAndConditions />
 		</div>
 	);
 }
