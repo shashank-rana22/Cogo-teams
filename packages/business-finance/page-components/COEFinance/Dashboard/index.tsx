@@ -78,6 +78,8 @@ function Dashboard({ statsData }) {
 						<StyledTable
 							data={So2statsData}
 							columns={columns}
+							loading={false}
+							imageFind=""
 						/>
 					</div>
 

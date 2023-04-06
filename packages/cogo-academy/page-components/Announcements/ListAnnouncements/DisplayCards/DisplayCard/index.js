@@ -1,4 +1,5 @@
 import { Popover, Accordion, Button, Modal, Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { IcMOverflowDot, IcMAnnouncement, IcMEyeopen, IcMEdit, IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
@@ -8,8 +9,6 @@ import Preview from '../../../CreateAnnouncement/AnnouncementForm/Preview';
 
 import DisplayAttachments from './DisplayAttachments';
 import styles from './styles.module.css';
-
-const ADMIN_IDS = ['7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44'];
 
 const ANNOUNCEMENT_TYPE_MAPPING = {
 	general        : 'General',
@@ -26,6 +25,10 @@ const STATUS_MAPPING = {
 	active: {
 		label : 'Live',
 		color : 'green',
+	},
+	inactive: {
+		label : 'Inactive',
+		color : 'red',
 	},
 };
 
@@ -52,6 +55,8 @@ function DisplayCard({
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [showGoLiveModal, setShowGoLiveModal] = useState(false);
 
+	const isCogoAcademyAdmin = (user_id === GLOBAL_CONSTANTS.uuid.cogoacademy_admin_id);
+
 	const options = [
 		{ label: 'Title', value: startCase(data?.title) },
 		{ label: 'Validity Start', value: format(data?.validity_start, 'dd MMM yyyy hh:mm a') },
@@ -75,43 +80,49 @@ function DisplayCard({
 
 	const renderPopover = () => (
 		<div className={styles.buttons_container}>
-			{data.status === 'draft' && ADMIN_IDS.includes(user_id) ? (
+			{data.status === 'draft' && isCogoAcademyAdmin ? (
 				<Button
-					type="view"
+					type="button"
 					themeType="primary"
 					size="md"
+					style={{ width: '100%' }}
 					onClick={() => setShowGoLiveModal(true)}
 				>
 					<IcMAnnouncement height={20} width={20} className={styles.button_icon} />
-					Go Live
+					Publish
 				</Button>
 			) : null}
+
 			<Button
-				type="view"
+				type="button"
 				themeType="secondary"
 				size="md"
+				style={{ width: '100%' }}
 				onClick={() => handleView(index)}
 			>
 				<IcMEyeopen className={styles.button_icon} />
 				View
 			</Button>
+
 			{activeTab === 'active' && data?.status === 'draft' && (
 				<Button
-					type="edit"
+					type="button"
 					themeType="secondary"
 					size="md"
+					style={{ width: '100%' }}
 					onClick={() => editDetails()}
 				>
 					<IcMEdit className={styles.button_icon} />
 					Edit
 				</Button>
 			)}
-			{activeTab === 'active' && data?.status === 'draft' && (
 
+			{activeTab === 'active' && data?.status === 'draft' && (
 				<Button
-					type="edit"
+					type="button"
 					themeType="secondary"
 					size="md"
+					style={{ width: '100%' }}
 					onClick={() => setShowDeleteModal(true)}
 				>
 					<IcMDelete className={styles.button_icon} />
@@ -259,7 +270,7 @@ function DisplayCard({
 					<Modal.Footer>
 						<div className={styles.delete_buttons}>
 							<Button
-								type="cancel"
+								type="button"
 								themeType="secondary"
 								size="md"
 								disabled={loadingUpdate}
@@ -268,7 +279,7 @@ function DisplayCard({
 								Cancel
 							</Button>
 							<Button
-								type="delete"
+								type="button"
 								themeType="primary"
 								size="md"
 								loading={loadingUpdate}

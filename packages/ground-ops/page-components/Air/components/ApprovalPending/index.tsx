@@ -1,17 +1,18 @@
 import { Button, Modal } from '@cogoport/components';
-import { IcMDownload, IcMEdit } from '@cogoport/icons-react';
+import { IcMEyeopen, IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import List from '../../commons/List';
 import { ApprovalPendingFields } from '../../configurations/approval_pending_fields';
 import useUpdateShipmentDocument from '../../hooks/useUpdateShipmentDocument';
+import HAWBList from '../HawbList';
 import UploadModal from '../UploadModal';
 
 import DownloadModal from './DownloadModal';
 import styles from './styles.module.css';
 
 function ApprovalPending({
-	data, loading, page, setPage, setGenerate, setItem, setViewDoc, edit, setEdit, listAPi,
+	data, loading, page, setPage, setGenerate, setItem, setViewDoc, edit, setEdit, listAPI, activeTab,
 }) {
 	const { fields } = ApprovalPendingFields;
 	const [showApprove, setShowApprove] = useState(null);
@@ -37,6 +38,16 @@ function ApprovalPending({
 		}
 	};
 
+	const handleOnEdit = (singleItem) => {
+		if (singleItem?.documentState === 'document_amendment_requested') {
+			handleEditMAWB(singleItem, '');
+		} else if (singleItem?.documentData?.status === 'uploaded') {
+			setShowUpload(singleItem); setEdit('edit');
+		} else if (singleItem?.documentData?.status === 'generated') {
+			handleEditMAWB(singleItem, 'edit');
+		}
+	};
+
 	const handleUpdate = async (values) => {
 		const serialId = values?.serialId || '';
 		const payload = {
@@ -53,7 +64,7 @@ function ApprovalPending({
 			`Draft_Airway_Bill_For_Shipment_${serialId}_${new Date().getTime()}`
 			|| undefined,
 		};
-		await updateDocument(payload, listAPi);
+		await updateDocument(payload, listAPI);
 		setShowApprove(null);
 	};
 
@@ -66,7 +77,7 @@ function ApprovalPending({
 					? () => { handleClickOnDownload(singleItem.documentUrl); }
 					: () => { handleDownloadMAWB(singleItem); }}
 			>
-				<IcMDownload fill="#8B8B8B" />
+				<IcMEyeopen fill="#8B8B8B" />
 
 			</Button>
 		),
@@ -74,9 +85,7 @@ function ApprovalPending({
 			<Button
 				themeType="linkUi"
 				style={{ fontSize: 12 }}
-				onClick={singleItem?.documentData?.status === 'uploaded'
-					? () => { setShowUpload(singleItem); setEdit('edit'); }
-					: () => { handleEditMAWB(singleItem, 'edit'); }}
+				onClick={() => { handleOnEdit(singleItem); }}
 			>
 				<IcMEdit fill="#8B8B8B" />
 			</Button>
@@ -113,6 +122,10 @@ function ApprovalPending({
 				page={page}
 				setPage={setPage}
 				functions={functions}
+				activeTab={activeTab}
+				Child={HAWBList}
+				setViewDoc={setViewDoc}
+				setItem={setItem}
 			/>
 			{show && <DownloadModal show={show} setShow={setShow} />}
 			{showApprove && (
@@ -155,7 +168,7 @@ function ApprovalPending({
 				setShowUpload={setShowUpload}
 				edit={edit}
 				setEdit={setEdit}
-				listAPi={listAPi}
+				listAPI={listAPI}
 			/>
 		</>
 	);

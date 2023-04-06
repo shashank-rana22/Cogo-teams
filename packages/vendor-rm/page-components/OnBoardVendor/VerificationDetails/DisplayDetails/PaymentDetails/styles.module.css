@@ -1,0 +1,46 @@
+.container {
+	padding: 24px 0;
+	border-top: 1px solid rgb(0 0 0 / 7%);
+}
+
+.title {
+	margin-bottom: 16px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.body {
+	display: flex;
+	flex-direction: column;
+}
+
+.single_record {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.fields_to_show {
+	display: flex;
+	flex-direction: column;
+}
+
+.label {
+	margin-top: 16px;
+	font-size: 14px;
+	font-weight: 300;
+	color: #333;
+	opacity: 0.7;
+}
+
+.value {
+	padding: 8px 0;
+	font-size: 14px;
+	font-weight: 600;
+	color: #333;
+}
+
+.icon_container {
+	display: flex;
+	align-items: center;
+	color: #f68b21 !important;
+}
