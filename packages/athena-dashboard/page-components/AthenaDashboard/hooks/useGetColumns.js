@@ -1,8 +1,10 @@
 import { ResponsiveLine } from '@cogoport/charts/line/index';
-import { getFormattedPrice } from '@cogoport/forms';
+import country from '@cogoport/globalization/constants/geo/IN';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
 
 const useGetColumns = ({ columnsToShow = [] }) => {
+	const { currency:{ code } } = country.country;
 	const columns = [
 		{
 			Header   : 'Shipment Record ID',
@@ -161,63 +163,99 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 		},
 		{
 			Header   : 'Jan',
-			accessor : (item) => ((!isEmpty(item.January)) ? getFormattedPrice(item.January, 'INR') : 0),
-			key      : 'jan',
+			accessor : (item) => ((!isEmpty(item.January)) ? formatAmount({
+				amount   : item.January,
+				currency : code,
+			}) : 0),
+			key: 'jan',
 		},
 		{
 			Header   : 'Feb',
-			accessor : (item) => ((!isEmpty(item.February)) ? getFormattedPrice(item.February, 'INR') : 0),
-			key      : 'feb',
+			accessor : (item) => ((!isEmpty(item.February)) ? formatAmount({
+				amount   : item.February,
+				currency : code,
+			}) : 0),
+			key: 'feb',
 		},
 		{
 			Header   : 'Mar',
-			accessor : (item) => ((!isEmpty(item.March)) ? getFormattedPrice(item.March, 'INR') : 0),
-			key      : 'mar',
+			accessor : (item) => ((!isEmpty(item.March)) ? formatAmount({
+				amount   : item.March,
+				currency : code,
+			}) : 0),
+			key: 'mar',
 		},
 		{
 			Header   : 'Apr',
-			accessor : (item) => ((!isEmpty(item.April)) ? getFormattedPrice(item.April, 'INR') : 0),
-			key      : 'apr',
+			accessor : (item) => ((!isEmpty(item.April)) ? formatAmount({
+				amount   : item.April,
+				currency : code,
+			}) : 0),
+			key: 'apr',
 		},
 		{
 			Header   : 'May',
-			accessor : (item) => ((!isEmpty(item.May)) ? getFormattedPrice(item.May, 'INR') : 0),
-			key      : 'may',
+			accessor : (item) => ((!isEmpty(item.May)) ? formatAmount({
+				amount   : item.May,
+				currency : code,
+			}) : 0),
+			key: 'may',
 		},
 		{
 			Header   : 'Jun',
-			accessor : (item) => ((!isEmpty(item.June)) ? getFormattedPrice(item.June, 'INR') : 0),
-			key      : 'jun',
+			accessor : (item) => ((!isEmpty(item.June)) ? formatAmount({
+				amount   : item.June,
+				currency : code,
+			}) : 0),
+			key: 'jun',
 		},
 		{
 			Header   : 'July',
-			accessor : (item) => ((!isEmpty(item.July)) ? getFormattedPrice(item.July, 'INR') : 0),
-			key      : 'july',
+			accessor : (item) => ((!isEmpty(item.July)) ? formatAmount({
+				amount   : item.July,
+				currency : code,
+			}) : 0),
+			key: 'july',
 		},
 		{
 			Header   : 'Aug',
-			accessor : (item) => ((!isEmpty(item.August)) ? getFormattedPrice(item.August, 'INR') : 0),
-			key      : 'aug',
+			accessor : (item) => ((!isEmpty(item.August)) ? formatAmount({
+				amount   : item.August,
+				currency : code,
+			}) : 0),
+			key: 'aug',
 		},
 		{
 			Header   : 'Sept',
-			accessor : (item) => ((!isEmpty(item.September)) ? getFormattedPrice(item.September, 'INR') : 0),
-			key      : 'sept',
+			accessor : (item) => ((!isEmpty(item.September)) ? formatAmount({
+				amount   : item.September,
+				currency : code,
+			}) : 0),
+			key: 'sept',
 		},
 		{
 			Header   : 'Oct',
-			accessor : (item) => ((!isEmpty(item.October)) ? getFormattedPrice(item.October, 'INR') : 0),
-			key      : 'oct',
+			accessor : (item) => ((!isEmpty(item.October)) ? formatAmount({
+				amount   : item.October,
+				currency : code,
+			}) : 0),
+			key: 'oct',
 		},
 		{
 			Header   : 'Nov',
-			accessor : (item) => ((!isEmpty(item.November)) ? getFormattedPrice(item.November, 'INR') : 0),
-			key      : 'nov',
+			accessor : (item) => ((!isEmpty(item.November)) ? formatAmount({
+				amount   : item.November,
+				currency : code,
+			}) : 0),
+			key: 'nov',
 		},
 		{
 			Header   : 'Dec',
-			accessor : (item) => ((!isEmpty(item.December)) ? getFormattedPrice(item.December, 'INR') : 0),
-			key      : 'dec',
+			accessor : (item) => ((!isEmpty(item.December)) ? formatAmount({
+				amount   : item.December,
+				currency : code,
+			}) : 0),
+			key: 'dec',
 		},
 	];
 

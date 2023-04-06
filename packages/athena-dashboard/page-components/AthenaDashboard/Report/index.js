@@ -1,6 +1,7 @@
 import { ResponsiveLine } from '@cogoport/charts/line/index';
 import { Table, Placeholder } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import country from '@cogoport/globalization/constants/geo/IN';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import Map from '../../../common/responsive-choropleth';
 import tableDataColumns from '../../../constants/table-data-columns';
@@ -10,6 +11,8 @@ import useSetReport from '../hooks/useSetReport';
 import styles from './styles.module.css';
 
 function Report() {
+	const { currency:{ code } } = country.country;
+
 	const {
 		hsdesc,
 		share,
@@ -127,7 +130,7 @@ function Report() {
 								<div>
 									Rs.
 									{' '}
-									{getFormattedPrice(item.total, 'INR')}
+									{formatAmount({ amount: item.total, currency: code })}
 									{' '}
 									(
 									{item.percent_share.toFixed(2)}
