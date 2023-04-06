@@ -116,6 +116,7 @@ function CogoOne() {
 						userId={userId}
 						isomniChannelAdmin={isomniChannelAdmin}
 						mailProps={mailProps}
+						setActiveMessage={setActiveMessage}
 					/>
 					{activeTab !== 'mail' && (
 						<ProfileDetails
@@ -124,6 +125,7 @@ function CogoOne() {
 							activeVoiceCard={activeVoiceCard}
 							updateLeaduser={updateLeaduser}
 							activeCardId={activeCardId}
+							setActiveMessage={setActiveMessage}
 						/>
 					)}
 				</>

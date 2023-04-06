@@ -21,6 +21,7 @@ function AgentDetails({
 	customerId = '',
 	updateLeaduser = () => {},
 	setModalType = () => {},
+	setActiveMessage = () => {},
 }) {
 	const { user_details = null, user_type, id = '' } = activeMessageCard || {};
 	const {
@@ -224,6 +225,8 @@ function AgentDetails({
 						noData={!leadUserId && !userId}
 						loading={loading}
 						activeCardData={DATA_MAPPING[activeTab] || {}}
+						activeMessageCard={activeMessageCard}
+						setActiveMessage={setActiveMessage}
 					/>
 				</>
 			)}

@@ -1,0 +1,64 @@
+.left_arrow {
+	position: absolute;
+	top: 35%;
+	right: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 0 10px 4px;
+	cursor: pointer;
+	background: white;
+	border-radius: 4px 0 0 4px;
+	box-shadow: -1px 1.5px 4px rgb(0 0 0 / 5%), -1px -1.5px 4px rgb(0 0 0 / 5%);
+	transition: all 0.3s ease-in-out;
+}
+
+.other_channel_icons {
+	position: absolute;
+	top: 23%;
+	right: 0%;
+	display: flex;
+	flex-direction: column;
+	width: 55px;
+	height: 177px;
+	background: #fff;
+	border-radius: 4px 0 0 4px;
+	box-shadow: -1px 1.5px 4px rgb(0 0 0 / 5%), -1px -1.5px 4px rgb(0 0 0 / 5%);
+	transition: all 0.3s ease-in-out;
+}
+
+.show_other_channel_icons {
+	width: 0;
+}
+
+.other_channel_icon_div {
+	height: 35px;
+	padding: 7px;
+	margin: 12px 10px;
+	background: #fdfbf6;
+	border: 0.5px solid #f2e3c3;
+	border-radius: 100%;
+}
+
+.other_channel_icon {
+	cursor: pointer;
+}
+
+.right_arrow {
+	right: 55px;
+	transition: all 0.3s ease-in-out;
+}
+
+.blur_bg {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, rgb(70 58 32 / 35%) 0%, rgb(114 120 173 / 35%) 100%);
+	backdrop-filter: blur(3px);
+	transition: all 0.3s ease-in-out;
+}
+
+.active_channel {
+	background-color: #f2e3c3;
+}
