@@ -46,6 +46,7 @@ function Header({
 							isClearable
 						/>
 						<Select
+							className={styles.select}
 							size="sm"
 							placeholder="Select Service"
 							style={{ padding: '6px', marginRight: '6px', width: '200px' }}

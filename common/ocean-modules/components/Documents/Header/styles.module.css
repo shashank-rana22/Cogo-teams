@@ -39,3 +39,7 @@
 		background-color: var(--color-accent-orange-2) !important;
 	}
 }
+
+.select {
+	font-size: 12px;
+}
