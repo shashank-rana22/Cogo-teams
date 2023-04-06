@@ -106,51 +106,51 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 							data : [
 								{
 									x : 'January',
-									y : item.January || 0,
+									y : item?.January || 0,
 								},
 								{
 									x : 'February',
-									y : item.February || 0,
+									y : item?.February || 0,
 								},
 								{
 									x : 'March',
-									y : item.March || 0,
+									y : item?.March || 0,
 								},
 								{
 									x : 'April',
-									y : item.April || 0,
+									y : item?.April || 0,
 								},
 								{
 									x : 'May',
-									y : item.May || 0,
+									y : item?.May || 0,
 								},
 								{
 									x : 'June',
-									y : item.June || 0,
+									y : item?.June || 0,
 								},
 								{
 									x : 'July',
-									y : item.July || 0,
+									y : item?.July || 0,
 								},
 								{
 									x : 'August',
-									y : item.August || 0,
+									y : item?.August || 0,
 								},
 								{
 									x : 'September',
-									y : item.September || 0,
+									y : item?.September || 0,
 								},
 								{
 									x : 'October',
-									y : item.October || 0,
+									y : item?.October || 0,
 								},
 								{
 									x : 'November',
-									y : item.November || 0,
+									y : item?.November || 0,
 								},
 								{
 									x : 'December',
-									y : item.December || 0,
+									y : item?.December || 0,
 								},
 
 							],
