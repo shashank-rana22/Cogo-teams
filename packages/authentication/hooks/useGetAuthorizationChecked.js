@@ -38,7 +38,7 @@ const useGetAuthorizationChecked = () => {
 			if (!_initialized) {
 				try {
 					const res = await request.get('get_user_session');
-					setCookie('parent_entity_id', res.partner?.id);
+					setCookie('parent_entity_id', res.data?.partner?.id);
 					dispatch(setProfileState({ _initialized: true, ...res.data }));
 				} catch (err) {
 					console.log(err);
