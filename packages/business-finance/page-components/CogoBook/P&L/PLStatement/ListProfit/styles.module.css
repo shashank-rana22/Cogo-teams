@@ -24,8 +24,9 @@
 
 .header_ocean {
 	display: flex;
-	justify-content: center;
-	padding: 18px 24px;
+	flex-direction: column;
+	align-items: flex-end;
+	padding: 18px;
 	font-weight: 600;
 	color: #f68b21;
 	border-right: 1px solid #acdadf;
