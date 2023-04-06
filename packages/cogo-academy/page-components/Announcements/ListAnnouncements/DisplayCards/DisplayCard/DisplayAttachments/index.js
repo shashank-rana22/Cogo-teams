@@ -24,12 +24,16 @@ const displayPlaceHolders = () => (
 		/>
 	</div>
 );
-function DisplayAttachments({ data = {}, index, refetch = () => {}, announcement_id = '' }) {
+function DisplayAttachments({
+	data = {},
+	index,
+	refetch = () => {},
+	announcement_id = '',
+	isAllowedToEdit = false,
+}) {
 	const image = data?.announcement_attachments?.image || '';
 	const pdf = data?.announcement_attachments?.pdf || '';
 	const video = data?.announcement_attachments?.video || '';
-
-	const { status = '' } = data;
 
 	const {
 		deleteAttachment,
@@ -50,7 +54,7 @@ function DisplayAttachments({ data = {}, index, refetch = () => {}, announcement
 					data={image}
 					announcement_id={data?.id}
 					index={index}
-					status={status}
+					isAllowedToEdit={isAllowedToEdit}
 					loadingUpdateAttachment={loadingUpdateAttachment}
 					loadingAddAttachment={loadingAddAttachment}
 					deleteAttachment={deleteAttachment}
@@ -62,7 +66,7 @@ function DisplayAttachments({ data = {}, index, refetch = () => {}, announcement
 					data={pdf}
 					announcement_id={data?.id}
 					index={index}
-					status={status}
+					isAllowedToEdit={isAllowedToEdit}
 					loadingUpdateAttachment={loadingUpdateAttachment}
 					loadingAddAttachment={loadingAddAttachment}
 					deleteAttachment={deleteAttachment}
@@ -74,7 +78,7 @@ function DisplayAttachments({ data = {}, index, refetch = () => {}, announcement
 					data={video}
 					announcement_id={data?.id}
 					index={index}
-					status={status}
+					isAllowedToEdit={isAllowedToEdit}
 					loadingUpdateAttachment={loadingUpdateAttachment}
 					loadingAddAttachment={loadingAddAttachment}
 					deleteAttachment={deleteAttachment}
