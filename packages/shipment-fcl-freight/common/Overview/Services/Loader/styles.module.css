@@ -1,12 +1,12 @@
 .container {
-	display: flex; 
+	display: flex;
 	width: 100%;
 }
 
-.flex_col {  
-	display: flex; 
+.flex_col {
+	display: flex;
 	flex-direction: column;
-	width: 300px; 
-	margin: 6px;  
 	gap: 6px;
+	width: 300px;
+	margin: 6px;
 }
