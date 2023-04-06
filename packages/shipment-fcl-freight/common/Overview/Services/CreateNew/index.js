@@ -1,12 +1,7 @@
-import { Modal, cl } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import useServiceUpsellControls from '../../../../hooks/useFormatServiceUpsellControls';
-import Footer from '../../../Footer';
-import Layout from '../../../Layout';
-
+import Form from './Form';
 import styles from './styles.module.css';
 
 function CreateNew({
@@ -18,9 +13,6 @@ function CreateNew({
 	cancelUpsellDestinationFor = '',
 }) {
 	const [upsellModal, setUpsellModal] = useState(false);
-	const [truckTypeToggle, setTruckTypeToggle] = useState(false);
-
-	const service = upsellableService.service_type.replace('_service', '');
 
 	const cancelUpsell = !upsellableService?.service_type
 	|| upsellableService?.service_type === cancelUpsellDestinationFor
@@ -32,13 +24,6 @@ function CreateNew({
 		isUpsellable = (primary_service?.origin_port?.is_icd
 			|| primary_service?.destination_port?.is_icd);
 	}
-
-	const { controls, formProps } = useServiceUpsellControls({
-		service,
-		services: servicesList,
-		truckTypeToggle,
-		setTruckTypeToggle,
-	});
 
 	return (
 		<>
@@ -55,26 +40,17 @@ function CreateNew({
 					</div>
 				) : null}
 
-			<Modal
-				show={upsellModal}
-				onClose={() => setUpsellModal(false)}
-				className={styles.custom_modal}
-			>
-				<Modal.Header title={`${startCase(primary_service?.trade_type)} ${startCase(service)}`} />
-				<Modal.Body>
-					<Layout controls={controls} formProps={formProps} />
-				</Modal.Body>
-				<Modal.Footer>
-					<Footer
-						onClose={() => setUpsellModal(false)}
-						formProps={formProps}
-						service={upsellableService}
-						shipmentData={shipmentData}
-						services={servicesList}
-						primary_service={primary_service}
-					/>
-				</Modal.Footer>
-			</Modal>
+			{	upsellModal ? (
+				<Form
+					upsellModal={upsellModal}
+					setUpsellModal={setUpsellModal}
+					servicesList={servicesList}
+					shipmentData={shipmentData}
+					upsellableService={upsellableService}
+					primary_service={primary_service}
+				/>
+			) : null}
+
 		</>
 	);
 }

@@ -5,7 +5,8 @@ import { merge } from '@cogoport/utils';
 
 const useGetControls = ({ truckTypeToggle }) => {
 	const locationAsyncOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params: { filters: { type: ['pincode'] } },
+		initialCall : false,
+		params      : { filters: { type: ['pincode'] } },
 	}));
 
 	const geo = getGeoConstants();
