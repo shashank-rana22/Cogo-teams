@@ -1,10 +1,10 @@
 .service {
 	display: flex;
+	gap: 8px;
 	align-items: center;
 	font-size: 13px;
 	font-weight: 500;
 	text-transform: uppercase;
-	gap:8px;
 }
 
 .heading {
@@ -14,7 +14,7 @@
 	padding: 8px;
 }
 
-.service_name{
+.service_name {
 	display: flex;
 	align-items: center;
 }
