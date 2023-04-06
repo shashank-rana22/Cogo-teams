@@ -41,7 +41,7 @@ function AddNewService({
 					</div>
 				) : null}
 
-			{	upsellModal ? (
+			{upsellModal ? (
 				<Form
 					upsellModal={upsellModal}
 					setUpsellModal={setUpsellModal}
