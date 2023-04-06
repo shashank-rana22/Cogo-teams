@@ -7,7 +7,7 @@ import Item from './Item';
 import styles from './styles.module.css';
 
 function Details({ state = '', serviceItemsKey = [], serviceData = {} }) {
-	const [show, setShow] = useState(false);
+	const [show, setShow] = useState(true);
 
 	const {
 		container_size,
