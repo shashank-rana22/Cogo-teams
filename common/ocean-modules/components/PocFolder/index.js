@@ -10,7 +10,7 @@ import AddedTradeParty from './components/AddedTradeParty';
 import AddPocModal from './components/AddPocModal';
 import InvoicingParty from './components/InvoicingParty';
 import NotifyingParty from './components/NotifyingParty';
-import Pocs from './components/Pocs';
+import Pocs from './components/PocFile';
 import ServiceProvider from './components/ServiceProvider';
 import TradeParties from './components/TradeParties';
 import getServiceProviderData from './helpers/getServiceProviderData';
