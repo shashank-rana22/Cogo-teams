@@ -50,9 +50,9 @@ function ButtonsComponent({
 							<div
 								style={{ marginLeft: '8px' }}
 							>
-								{mode !== 'view' && item.question_type === 'case_study'
-									? 'Edit' : 'View'}
-
+								Edit
+								{/* {mode !== 'view' && item.question_type === 'case_study'
+									? 'Edit' : 'View'} */}
 							</div>
 						</Button>
 
