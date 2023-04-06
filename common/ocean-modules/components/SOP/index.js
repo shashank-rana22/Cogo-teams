@@ -11,6 +11,7 @@ function Sop({
 	shipment_data = {},
 	primary_service = {},
 }) {
+	console.log('aaaa');
 	const { id:shipment_id, importer_exporter_id:organization_id, services = [] } = shipment_data || {};
 	const { trade_type } = primary_service || {};
 

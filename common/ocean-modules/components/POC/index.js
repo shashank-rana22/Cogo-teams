@@ -10,13 +10,14 @@ import AddedTradeParty from './components/AddedTradeParty';
 import AddPocModal from './components/AddPocModal';
 import InvoicingParty from './components/InvoicingParty';
 import NotifyingParty from './components/NotifyingParty';
-import POCS from './components/POCS';
+import Pocs from './components/Pocs';
 import ServiceProvider from './components/ServiceProvider';
 import TradeParties from './components/TradeParties';
 import getServiceProviderData from './helpers/getServiceProviderData';
 import styles from './styles.module.css';
 
 function Poc({ shipment_data = {}, servicesList = [] }) {
+	console.log('aaaa');
 	const { id:shipment_id, importer_exporter_id, services } = shipment_data || {};
 
 	const [addCompany, setAddCompany] = useState(null);
@@ -54,7 +55,7 @@ function Poc({ shipment_data = {}, servicesList = [] }) {
 							serviceProviders={serviceProviders}
 						/>
 
-						<POCS
+						<Pocs
 							tradePartnersData={data}
 							setAddPoc={setAddPoc}
 							shipmentStakeholderData={shipmentStakeholderData}
