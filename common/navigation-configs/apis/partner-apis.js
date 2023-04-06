@@ -23,7 +23,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'get_swift_details',
+			api          : 'get_organization_swift_code_details',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -921,7 +921,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'get_swift_details',
+			api          : 'get_organization_swift_code_details',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -1740,7 +1740,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'get_swift_details',
+			api          : 'get_organization_swift_code_details',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -2414,7 +2414,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'get_swift_details',
+			api          : 'get_organization_swift_code_details',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
