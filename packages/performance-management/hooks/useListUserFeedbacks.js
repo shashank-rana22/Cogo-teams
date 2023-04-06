@@ -21,10 +21,13 @@ const useListUserFeedbacks = ({
 		PageLimit    : 10,
 	});
 
+	const validParams = {};
+	Object.keys(params).forEach((key) => { if (params[key]) { validParams[key] = params[key]; } });
+
 	const [{ data: feedbackData = {}, loading = false }] = useIrisRequest({
 		method : 'get',
 		url    : 'get_iris_list_user_feedbacks',
-		params,
+		params : { ...validParams },
 	}, { manual: false });
 
 	const setPage = (p) => { setParams({ ...params, Page: p }); };
