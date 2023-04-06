@@ -18,8 +18,6 @@ function UploadListModal({ tableModal = '', setTableModal = () => {}, row = {} }
 		setTableModal('reUpload');
 	};
 
-	// Todo Test pagination here
-
 	if (isEmpty(list) && !loading) {
 		return (
 			<Modal size="lg" show={tableModal === 'uploadList'} onClose={onClose} placement="center">
