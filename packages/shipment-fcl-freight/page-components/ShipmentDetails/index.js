@@ -43,6 +43,8 @@ function ShipmentDetails() {
 				return <Kam />;
 
 			case 'Superadmin':
+			case 'Admin':
+			case 'TechSuperadmin':
 				return <Superadmin />;
 			default:
 				return null;
