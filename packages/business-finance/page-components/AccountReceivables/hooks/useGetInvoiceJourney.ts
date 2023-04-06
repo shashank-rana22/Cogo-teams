@@ -1,4 +1,3 @@
-import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
@@ -43,20 +42,16 @@ const useGetInvoiceJourney = ({ filterValue, entityCode }:ParamsInterface) => {
 	);
 	useEffect(() => {
 		const getJourneyData = async () => {
-			try {
-				await journeyTrigger({
-					params: {
-						entityCode  : entityCode || undefined,
-						serviceType : serviceType || undefined,
-						companyType : companyType !== 'All' ? companyType : undefined,
-						month       : dateFilter.month || undefined,
-						year        : dateFilter.year || undefined,
+			await journeyTrigger({
+				params: {
+					entityCode  : entityCode || undefined,
+					serviceType : serviceType || undefined,
+					companyType : companyType !== 'All' ? companyType : undefined,
+					month       : dateFilter.month || undefined,
+					year        : dateFilter.year || undefined,
 
-					},
-				});
-			} catch (e) {
-				Toast.error(e?.error?.message || 'Something went wrong');
-			}
+				},
+			});
 		};
 		getJourneyData();
 	}, [journeyTrigger, entityCode, serviceType,

@@ -6,8 +6,8 @@
 .filter_container {
 	display: flex;
 	justify-content: space-between;
-	margin-bottom: 16px;
 	margin-top: 16px;
+	margin-bottom: 16px;
 }
 
 .entity_code {

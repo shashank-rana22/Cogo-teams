@@ -6,9 +6,9 @@
 
 	:global {
 		.ui_input_container {
-		height: 36px;
+			height: 36px;
+		}
 	}
-}
 }
 
 .pagination_container {
@@ -19,4 +19,3 @@
 		position: absolute;
 	}
 }
-

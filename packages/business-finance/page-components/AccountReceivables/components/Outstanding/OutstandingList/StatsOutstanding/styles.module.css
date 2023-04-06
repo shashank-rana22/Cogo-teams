@@ -74,18 +74,18 @@
 .amount_open {
 	display: flex;
 	margin-top: 2px;
-	word-break: break-all;
+	font-size: 12px;
 	font-weight: 600;
-	font-size: 12px; 
+	word-break: break-all;
 }
 
 .amount {
 	display: flex;
 	margin-top: 2px;
-	word-break: break-all;
+	font-size: 12px;
 	font-weight: 600;
-	font-size: 12px; 
-	color: #cb6464
+	color: #cb6464;
+	word-break: break-all;
 }
 
 .container {

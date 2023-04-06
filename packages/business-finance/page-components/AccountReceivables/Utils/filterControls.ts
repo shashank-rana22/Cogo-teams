@@ -28,8 +28,8 @@ export const filterControls = (toggleData: boolean, disabledConfig: DisabledConf
 			type                  : 'datepicker',
 			isPreviousDaysAllowed : true,
 			maxDate               : today,
-			span                  : 3.3,
-			disable               : disabledConfig.date,
+			span                  : toggleData ? 12 : 3.3,
+			disable               : toggleData ? false : disabledConfig.date,
 			value                 : filters.date,
 		},
 		{
@@ -52,7 +52,8 @@ export const filterControls = (toggleData: boolean, disabledConfig: DisabledConf
 				{ value: 'NOV', label: 'November' },
 				{ value: 'DEC', label: 'December' },
 			],
-			disabled: disabledConfig.month || toggleData,
+			disabled : disabledConfig.month || toggleData,
+			show     : !toggleData,
 		},
 		{
 			name        : 'year',
@@ -62,7 +63,7 @@ export const filterControls = (toggleData: boolean, disabledConfig: DisabledConf
 			isClearable : true,
 			options     : optionsVal(),
 			disabled    : disabledConfig.year || toggleData,
-
+			show        : !toggleData,
 		},
 	];
 };

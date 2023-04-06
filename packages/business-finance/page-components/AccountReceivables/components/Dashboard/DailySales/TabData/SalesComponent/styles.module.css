@@ -1,56 +1,73 @@
 .container {
-    :global {
-        table {
-            border: 1px solid #E0E0E0;
-            border-collapse: collapse;
-            border-radius: 4px !important;
-        }
+	:global {
+		table {
+			border-collapse: collapse;
+			border: 1px solid #e0e0e0;
+			border-radius: 4px !important;
+		}
 
-        td {
-            border: 1px solid #E0E0E0;
-            border-collapse: collapse;
-            text-align: center;
-        }
-    }
+		td {
+			padding-left: 16px;
+			border-collapse: collapse;
+			border: 1px solid #e0e0e0;
+		}
+	}
 }
 
 .styled_amount {
-    font-size: 18px;
-    font-weight: 600;
-    color: #F68B21;
+	font-size: 18px;
+	font-weight: 600;
+	color: #f68b21;
 }
 
 .styled_count {
-    font-size: 18px;
-    font-weight: 600;
-    color: black;
+	font-size: 18px;
+	font-weight: 600;
+	color: black;
 }
 
 .flex {
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 .styled_credit {
-    font-size: 14px;
-    font-weight: 500;
+	font-size: 14px;
+	font-weight: 500;
 }
 
 .styled_date {
-    font-size: 14px;
-    font-weight: 500;
+	font-size: 14px;
+	font-weight: 500;
 }
 
 .credit_note {
-    height: 60px;
+	height: 60px;
 }
 
 .credit_note_text {
-    color: #EE3425
+	color: #ee3425;
 }
 
 .styled_date_last {
-    font-size: 14px;
-    font-weight: 500;
-    color: #F68B21;
+	font-size: 14px;
+	font-weight: 600;
+	color: #f68b21;
+}
+
+.chart {
+	width: 1200px;
+	height: 300px;
+}
+
+.placeholder_container {
+	width: 250px;
+	height: 80px;
+	margin-right: 16px;
+}
+
+.place {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }

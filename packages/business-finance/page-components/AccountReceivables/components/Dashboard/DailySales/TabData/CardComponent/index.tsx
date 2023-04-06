@@ -29,7 +29,7 @@ function CardComponent({
 	subActiveTab, dailyStatsData, toggleData, loading,
 	filters, filterValue, entityCode,
 }: CardComponentProps) {
-	const { data, loading:loadingData } = useGetGraph({ filters, filterValue, subActiveTab, entityCode });
+	const { data, loading: loadingData } = useGetGraph({ filters, filterValue, subActiveTab, entityCode, toggleData });
 	const getData = () => {
 		const getFormat = (duration) => {
 			if (filters.month) 			{
@@ -54,6 +54,7 @@ function CardComponent({
 				</div>
 			);
 		}
+
 		if (dailyStatsData) {
 			return (dailyStatsData[subActiveTab] || [{}]).map((item) => {
 				const { count, amount, duration, dashboardCurrency } = item || {};

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Tooltip, Toggle } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
@@ -28,7 +29,7 @@ function DailySales({ filterValue, entityCode }: DailySalesProps) {
 		month : false,
 		year  : false,
 	});
-	const { dailyStatsData, loading } = useInvoiceStatistics({ filters, subActiveTab, entityCode });
+	const { dailyStatsData, loading } = useInvoiceStatistics({ filters, subActiveTab, entityCode, toggleData });
 
 	useEffect(() => {
 		if (filters.date) {
@@ -41,7 +42,7 @@ function DailySales({ filterValue, entityCode }: DailySalesProps) {
 			setDisabledConfig({
 				date  : true,
 				month : false,
-				year  : true,
+				year  : false,
 			});
 		} else if (filters.year) {
 			setDisabledConfig({
@@ -58,12 +59,21 @@ function DailySales({ filterValue, entityCode }: DailySalesProps) {
 		}
 	}, [filters.date, filters.month, filters.year]);
 
+	useEffect(() => {
+		if ((filters.month || filters.year)) {
+			setFilters((p) => ({ ...p, date: undefined }));
+		}
+		if ((!filters.date && toggleData)) {
+			setFilters((p) => ({ ...p, date: new Date() }));
+		}
+	}, [toggleData]);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex}>
 				<div>
 					<div className={styles.journey}>
-						Daily Sales Statistics
+						Sales Statistics
 						<Tooltip content="Daily Sales Statistics." placement="top">
 							<div className={styles.icon}><IcMInfo height="18px" width="18px" /></div>
 						</Tooltip>

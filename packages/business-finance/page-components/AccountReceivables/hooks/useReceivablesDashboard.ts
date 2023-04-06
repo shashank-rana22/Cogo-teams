@@ -1,4 +1,3 @@
-import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -29,8 +28,8 @@ const useReceivablesDashboard = (entityCode: string) => {
 		{ manual: true },
 	);
 
-	const ageingBucketData = useCallback(async () => {
-		try {
+	const ageingBucketData = useCallback(() => {
+		(async () => {
 			listApiTrigger({
 				params: {
 					entityCode  : entityCode || undefined,
@@ -38,9 +37,7 @@ const useReceivablesDashboard = (entityCode: string) => {
 					companyType : companyType !== 'All' ? companyType : undefined,
 				},
 			});
-		} catch (e) {
-			Toast.error(e?.error?.message || 'Something went wrong');
-		}
+		})();
 	}, [companyType, entityCode, serviceType, listApiTrigger]);
 
 	const [
@@ -55,8 +52,8 @@ const useReceivablesDashboard = (entityCode: string) => {
 		{ manual: true },
 	);
 
-	const quaterlyDataApi = useCallback(async () => {
-		try {
+	const quaterlyDataApi = useCallback(() => {
+		(async () => {
 			quaterlyDataTrigger({
 				params: {
 					entityCode  : entityCode || undefined,
@@ -64,9 +61,7 @@ const useReceivablesDashboard = (entityCode: string) => {
 					companyType : companyType !== 'All' ? companyType : undefined,
 				},
 			});
-		} catch (e) {
-			Toast.error(e?.error?.message || 'Something went wrong');
-		}
+		})();
 	}, [companyType, entityCode, serviceType, quaterlyDataTrigger]);
 
 	const [
@@ -93,8 +88,8 @@ const useReceivablesDashboard = (entityCode: string) => {
 		{ manual: true },
 	);
 
-	const dailySalesOutstandingApi = useCallback(async () => {
-		try {
+	const dailySalesOutstandingApi = useCallback(() => {
+		(async () => {
 			await dailySalesOutstandingTrigger({
 				params: {
 					entityCode  : entityCode || undefined,
@@ -102,9 +97,7 @@ const useReceivablesDashboard = (entityCode: string) => {
 					companyType : companyType !== 'All' ? companyType : undefined,
 				},
 			});
-		} catch (e) {
-			Toast.error(e?.error?.message || 'Something went wrong');
-		}
+		})();
 	}, [dailySalesOutstandingTrigger, companyType, entityCode, serviceType]);
 
 	const [
@@ -120,18 +113,14 @@ const useReceivablesDashboard = (entityCode: string) => {
 	);
 
 	const salesFunnelApi = useCallback(async () => {
-		try {
-			await salesFunnelTrigger({
-				params: {
-					month       : salesFunnelMonth || undefined,
-					entityCode  : entityCode || undefined,
-					serviceType : serviceType || undefined,
-					companyType : companyType !== 'All' ? companyType : undefined,
-				},
-			});
-		} catch (e) {
-			Toast.error(e?.error?.message || 'Something went wrong');
-		}
+		await salesFunnelTrigger({
+			params: {
+				month       : salesFunnelMonth || undefined,
+				entityCode  : entityCode || undefined,
+				serviceType : serviceType || undefined,
+				companyType : companyType !== 'All' ? companyType : undefined,
+			},
+		});
 	}, [companyType,
 		entityCode, serviceType, salesFunnelMonth, salesFunnelTrigger]);
 
@@ -148,15 +137,11 @@ const useReceivablesDashboard = (entityCode: string) => {
 	);
 
 	const outstandingApi = useCallback(async () => {
-		try {
-			await outstandingTrigger({
-				params: {
-					entityCode: entityCode || undefined,
-				},
-			});
-		} catch (e) {
-			Toast.error(e?.error?.message || 'Something went wrong');
-		}
+		await outstandingTrigger({
+			params: {
+				entityCode: entityCode || undefined,
+			},
+		});
 	}, [entityCode, outstandingTrigger]);
 
 	useEffect(() => {

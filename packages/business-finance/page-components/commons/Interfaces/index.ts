@@ -72,7 +72,8 @@ export interface ControlProps {
 	type?: string;
 	options?: Options[];
 	groupBy?:ControlProps[];
-	style?:React.CSSProperties;
+	style?: React.CSSProperties;
+	show?: boolean;
 	[key:string]: string | number | undefined | boolean | Options[] | object[] | React.CSSProperties | Date;
 }
 

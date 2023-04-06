@@ -11,19 +11,26 @@ import styles from './styles.module.css';
 interface ResponsiveChartProps {
 	data?: StreamDatum[],
 	loadingData?: boolean,
-	entityCode?: string
+	entityCode?: string,
+	showCount?: boolean,
 }
 
-function ResponsiveChart({ data, loadingData, entityCode }: ResponsiveChartProps) {
-	console.log('data', data);
-
+function ResponsiveChart({ data, loadingData, entityCode, showCount = true }: ResponsiveChartProps) {
 	const keyValue = {
 		101 : 'INR',
 		201 : 'EUR',
 		301 : 'INR',
 		401 : 'SGD',
 		501 : 'VND',
-	};	const AmountData = [];
+	};
+
+	data?.sort((a, b) => {
+		const dateA = new Date(`${a.year}-${a.date} 00:00:00`);
+		const dateB = new Date(`${b.year}-${b.date} 00:00:00`);
+		return dateA.getTime() - dateB.getTime();
+	});
+
+	const AmountData = [];
 	const CountData = [];
 
 	(data || []).forEach((item) => {
@@ -48,14 +55,21 @@ function ResponsiveChart({ data, loadingData, entityCode }: ResponsiveChartProps
 		},
 	];
 
-	if (data === undefined) {
+	const formatdata = showCount ? finalData : [
+		{
+			id   : 'Amount',
+			data : AmountData,
+		},
+	];
+
+	if (!data) {
 		return <EmptyState />;
 	}
 	return (
 		loadingData ? <div className={styles.loader}><Loader style={{ height: '100px', width: '50px' }} /></div>
 			: (
 				<ResponsiveLine
-					data={finalData}
+					data={formatdata}
 					margin={{ top: 10, right: 120, bottom: 100, left: 90 }}
 					xScale={{ type: 'point' }}
 					enableGridX={false}

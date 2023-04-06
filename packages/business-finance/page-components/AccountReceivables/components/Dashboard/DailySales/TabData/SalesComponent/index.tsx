@@ -1,10 +1,10 @@
+import { Placeholder } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
-import { format } from '@cogoport/utils';
-import React, { useEffect, useState } from 'react';
+import { isEmpty, format } from '@cogoport/utils';
+import React from 'react';
 
 import useGetGraph from '../../../../../hooks/useGetGraph';
 import ResponsiveChart from '../CardComponent/ResponsiveChart';
-import BarData from '../CardComponent/ResponsiveChart/data';
 
 import styles from './styles.module.css';
 
@@ -17,10 +17,9 @@ function SalesComponent({
 	filterValue,
 	entityCode,
 }) {
-	const { data, loading:loadingData } = useGetGraph({ filters, filterValue, subActiveTab, entityCode });
+	const { data, loading: loadingData } = useGetGraph({ filters, filterValue, subActiveTab, entityCode, toggleData });
 
 	const { SALES_INVOICE = [] } = dailyStatsData || {};
-	console.log('dailyStatsData', dailyStatsData);
 
 	const invoiceArray = [];
 	const creditNoteArray = [];
@@ -36,6 +35,47 @@ function SalesComponent({
 		}
 	});
 
+	const durations = [];
+	invoiceArray.forEach((item) => (
+		durations.push(item.duration)
+	));
+	durations.sort();
+
+	const getDataFromDuration = (type, date) => type.filter((item) => item?.duration === date);
+
+	const revenueDetails = data?.SALES_INVOICE?.filter((element) => (element.invoiceType === 'REVENUE'));
+
+	const formatData = (revenueDetails)?.map((item) => (
+		{
+			date: format(
+				item?.duration,
+				'dd MMM ',
+				{},
+				false,
+			),
+			Amount : item?.amount,
+			Count  : item?.count,
+			year   : format(
+				item?.duration,
+				'YYYY',
+				{},
+				false,
+			),
+		}));
+
+	const yearFormat = () => {
+		if (!isEmpty(filters.year) && !isEmpty(filters.month)) {
+			return 'MMM YYYY';
+		}
+		if (!isEmpty(filters.year)) {
+			return 'YYYY';
+		}
+		if (!isEmpty(filters.month)) {
+			return 'MMM';
+		}
+		return 'dd MMM YYYY';
+	};
+
 	const getData = () => (
 		<div className={styles.container}>
 
@@ -45,8 +85,8 @@ function SalesComponent({
 					<td className={styles.styled_date}>
 						{
 										format(
-											invoiceArray[0]?.duration,
-											'dd MMM YYYY',
+											durations[0],
+											yearFormat(),
 											{},
 											false,
 										)
@@ -54,8 +94,8 @@ function SalesComponent({
 					</td>
 					<td className={styles.styled_date}>
 						{format(
-							invoiceArray[1]?.duration,
-							'dd MMM YYYY',
+							durations[1],
+							yearFormat(),
 							{},
 							false,
 						)}
@@ -63,8 +103,8 @@ function SalesComponent({
 					</td>
 					<td className={styles.styled_date}>
 						{	format(
-							invoiceArray[2]?.duration,
-							'dd MMM YYYY',
+							durations[2],
+							yearFormat(),
 							{},
 							false,
 						)}
@@ -72,8 +112,8 @@ function SalesComponent({
 					</td>
 					<td className={styles.styled_date_last}>
 						{	format(
-							invoiceArray[3]?.duration,
-							'dd MMM YYYY',
+							durations[3],
+							yearFormat(),
 							{},
 							false,
 						)}
@@ -87,15 +127,15 @@ function SalesComponent({
 							Sales
 						</div>
 						<div className={styles.credit_note_text}>
-							(Credit Notes)
+							Credit Notes (-)
 						</div>
 					</td>
 					<td>
 						{' '}
 						<div className={styles.styled_credit}>
 							{getFormattedPrice(
-								invoiceArray[0]?.amount,
-								invoiceArray[0]?.dashboardCurrency,
+								getDataFromDuration(invoiceArray, durations[0])?.[0]?.amount,
+								getDataFromDuration(invoiceArray, durations[0])?.[0]?.dashboardCurrency,
 								{
 									style                 : 'currency',
 									currencyDisplay       : 'code',
@@ -107,17 +147,17 @@ function SalesComponent({
 
 							{' '}
 
-							(
 							{getFormattedPrice(
-								creditNoteArray[0]?.amount,
-								creditNoteArray[0]?.dashboardCurrency,
+								getDataFromDuration(creditNoteArray, durations[0])?.[0]?.amount,
+								getDataFromDuration(creditNoteArray, durations[0])?.[0]?.dashboardCurrency,
 								{
 									style                 : 'currency',
 									currencyDisplay       : 'code',
 									maximumFractionDigits : 0,
 								},
 							)}
-							)
+							{' '}
+							<span className={styles.credit_note_text}>(-)</span>
 						</div>
 
 					</td>
@@ -126,8 +166,8 @@ function SalesComponent({
 						<div className={styles.styled_credit}>
 
 							{getFormattedPrice(
-								invoiceArray[1]?.amount,
-								invoiceArray[1]?.dashboardCurrency,
+								getDataFromDuration(invoiceArray, durations[1])?.[0]?.amount,
+								getDataFromDuration(invoiceArray, durations[1])?.[0]?.dashboardCurrency,
 								{
 									style                 : 'currency',
 									currencyDisplay       : 'code',
@@ -138,17 +178,17 @@ function SalesComponent({
 						<div className={styles.styled_credit}>
 
 							{' '}
-							(
 							{getFormattedPrice(
-								creditNoteArray[1]?.amount,
-								creditNoteArray[1]?.dashboardCurrency,
+								getDataFromDuration(creditNoteArray, durations[1])?.[0]?.amount,
+								getDataFromDuration(creditNoteArray, durations[1])?.[0]?.dashboardCurrency,
 								{
 									style                 : 'currency',
 									currencyDisplay       : 'code',
 									maximumFractionDigits : 0,
 								},
 							)}
-							)
+							{' '}
+							<span className={styles.credit_note_text}>(-)</span>
 						</div>
 
 					</td>
@@ -156,8 +196,8 @@ function SalesComponent({
 						{' '}
 						<div className={styles.styled_credit}>
 							{getFormattedPrice(
-								invoiceArray[2]?.amount,
-								invoiceArray[2]?.dashboardCurrency,
+								getDataFromDuration(invoiceArray, durations[2])?.[0]?.amount,
+								getDataFromDuration(invoiceArray, durations[2])?.[0]?.dashboardCurrency,
 								{
 									style                 : 'currency',
 									currencyDisplay       : 'code',
@@ -168,18 +208,17 @@ function SalesComponent({
 						<div className={styles.styled_credit}>
 
 							{' '}
-							(
 							{getFormattedPrice(
-								creditNoteArray[2]?.amount,
-								creditNoteArray[2]?.dashboardCurrency,
+								getDataFromDuration(creditNoteArray, durations[2])?.[0]?.amount,
+								getDataFromDuration(creditNoteArray, durations[2])?.[0]?.dashboardCurrency,
 								{
 									style                 : 'currency',
 									currencyDisplay       : 'code',
 									maximumFractionDigits : 0,
 								},
 							)}
-							)
-
+							{' '}
+							<span className={styles.credit_note_text}>(-)</span>
 						</div>
 
 					</td>
@@ -187,8 +226,8 @@ function SalesComponent({
 						{' '}
 						<div className={styles.styled_credit}>
 							{getFormattedPrice(
-								invoiceArray[3]?.amount,
-								invoiceArray[3]?.dashboardCurrency,
+								getDataFromDuration(invoiceArray, durations[3])?.[0]?.amount,
+								getDataFromDuration(invoiceArray, durations[3])?.[0]?.dashboardCurrency,
 								{
 									style                 : 'currency',
 									currencyDisplay       : 'code',
@@ -199,17 +238,17 @@ function SalesComponent({
 						<div className={styles.styled_credit}>
 
 							{' '}
-							(
 							{getFormattedPrice(
-								creditNoteArray[3]?.amount,
-								creditNoteArray[3]?.dashboardCurrency,
+								getDataFromDuration(creditNoteArray, durations[3])?.[0]?.amount,
+								getDataFromDuration(creditNoteArray, durations[3])?.[0]?.dashboardCurrency,
 								{
 									style                 : 'currency',
 									currencyDisplay       : 'code',
 									maximumFractionDigits : 0,
 								},
 							)}
-							)
+							{' '}
+							<span className={styles.credit_note_text}>(-)</span>
 						</div>
 
 					</td>
@@ -223,8 +262,8 @@ function SalesComponent({
 						<span className={styles.styled_amount}>
 
 							{getFormattedPrice(
-								revenueArray[0]?.amount,
-								revenueArray[0]?.dashboardCurrency,
+								getDataFromDuration(revenueArray, durations[0])?.[0]?.amount,
+								getDataFromDuration(revenueArray, durations[0])?.[0]?.dashboardCurrency,
 								{
 									style                 : 'currency',
 									currencyDisplay       : 'code',
@@ -238,8 +277,8 @@ function SalesComponent({
 
 						<span className={styles.styled_amount}>
 							{getFormattedPrice(
-								revenueArray[1]?.amount,
-								revenueArray[1]?.dashboardCurrency,
+								getDataFromDuration(revenueArray, durations[1])?.[0]?.amount,
+								getDataFromDuration(revenueArray, durations[1])?.[0]?.dashboardCurrency,
 								{
 									style                 : 'currency',
 									currencyDisplay       : 'code',
@@ -253,8 +292,8 @@ function SalesComponent({
 
 						<span className={styles.styled_amount}>
 							{getFormattedPrice(
-								revenueArray[2]?.amount,
-								revenueArray[2]?.dashboardCurrency,
+								getDataFromDuration(revenueArray, durations[2])?.[0]?.amount,
+								getDataFromDuration(revenueArray, durations[2])?.[0]?.dashboardCurrency,
 								{
 									style                 : 'currency',
 									currencyDisplay       : 'code',
@@ -269,8 +308,8 @@ function SalesComponent({
 
 						<span className={styles.styled_amount}>
 							{getFormattedPrice(
-								revenueArray[3]?.amount,
-								revenueArray[3]?.dashboardCurrency,
+								getDataFromDuration(revenueArray, durations[3])?.[0]?.amount,
+								getDataFromDuration(revenueArray, durations[3])?.[0]?.dashboardCurrency,
 								{
 									style                 : 'currency',
 									currencyDisplay       : 'code',
@@ -285,17 +324,27 @@ function SalesComponent({
 			</table>
 		</div>
 	);
-
-	console.log('subActiveTab', subActiveTab);
+	if (loading || loadingData) {
+		return (
+			<div className={styles.place}>
+				{
+					[1, 2, 3, 4].map(() => (
+						<Placeholder className={styles.placeholder_container} />
+					))
+				}
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.flex}>
 			{toggleData ? (
 				<div className={styles.chart}>
 					<ResponsiveChart
-						data={BarData(subActiveTab, data)}
+						data={formatData}
 						loadingData={loadingData}
 						entityCode={entityCode}
+						showCount={false}
 					/>
 				</div>
 			) : getData()}
