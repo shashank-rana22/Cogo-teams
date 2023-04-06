@@ -16,6 +16,10 @@
 	margin: 4px;
 }
 
+.card_with_checkbox {
+	width: 90%;
+}
+
 .card_container:hover {
 	background: #fdfbf6;
 }

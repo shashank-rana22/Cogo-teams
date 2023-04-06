@@ -74,6 +74,7 @@ function MessageCardData({
 				tabIndex={0}
 				className={cl`
 						${styles.card_container} 
+						${!autoAssignChats ? styles.card_with_checkbox : ''}
 						${checkActiveCard ? styles.active_card : ''} 
 							`}
 				onClick={() => setActiveMessage(item)}

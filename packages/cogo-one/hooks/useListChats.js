@@ -42,6 +42,7 @@ const useListChats = ({
 	});
 
 	const [loading, setLoading] = useState(false);
+	const [activeRoomLoading, setActiveRoomLoading] = useState(false);
 	const [appliedFilters, setAppliedFilters] = useState({});
 
 	const [listData, setListData] = useState({
@@ -252,6 +253,7 @@ const useListChats = ({
 	const { channel_type:activeChannelType = '' } = activeCardData || {};
 
 	const mountActiveRoomSnapShot = useCallback(() => {
+		setActiveRoomLoading(true);
 		snapshotCleaner({ ref: activeRoomSnapshotListner });
 		if (activeCardId) {
 			const activeMessageDoc = doc(
@@ -266,6 +268,7 @@ const useListChats = ({
 					{ id: activeMessageDoc?.id, ...(activeMessageData.data() || {}) },
 				}));
 			});
+			setActiveRoomLoading(false);
 		}
 	}, [firestore, activeCardId, activeChannelType]);
 
@@ -343,6 +346,7 @@ const useListChats = ({
 		updateLeaduser,
 		firstLoading,
 		handleScroll,
+		activeRoomLoading,
 	};
 };
 

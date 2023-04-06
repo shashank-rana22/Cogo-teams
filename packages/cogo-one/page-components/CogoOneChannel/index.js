@@ -93,6 +93,7 @@ function CogoOne() {
 		firstLoading,
 		updateLeaduser,
 		handleScroll,
+		activeRoomLoading,
 	} = useListChats({
 		firestore,
 		userId,
@@ -127,6 +128,7 @@ function CogoOne() {
 							activeCardId={activeCardId}
 							setActiveMessage={setActiveMessage}
 							setModalType={setModalType}
+							activeRoomLoading={activeRoomLoading}
 						/>
 					)}
 				</>

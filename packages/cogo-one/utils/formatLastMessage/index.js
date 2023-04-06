@@ -19,7 +19,7 @@ const formatLastMessage = (lastMessage) => {
 			{message_type !== 'text' && ActiveIcon && <ActiveIcon height="15px" width="15px" />}
 			<div
 				className={styles.content}
-				dangerouslySetInnerHTML={{ __html: message || 'attachment' }}
+				dangerouslySetInnerHTML={{ __html: message || message_type }}
 			/>
 		</div>
 	);

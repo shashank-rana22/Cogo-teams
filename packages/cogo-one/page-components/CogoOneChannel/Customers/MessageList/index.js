@@ -184,7 +184,11 @@ function MessageList(messageProps) {
 						</div>
 					)}
 
-					<div className={styles.list_container} onScroll={handleScroll}>
+					<div
+						className={cl`${styles.list_container} ${showBotMessages
+							? styles.bot_list_container : ''}`}
+						onScroll={handleScroll}
+					>
 						{!isPinnedChatEmpty && (
 							<>
 								<div
@@ -207,6 +211,7 @@ function MessageList(messageProps) {
 												firestore={firestore}
 												autoAssignChats={autoAssignChats}
 												handleCheckedChats={handleCheckedChats}
+												showBotMessages={showBotMessages}
 											/>
 										))}
 									</div>

@@ -173,6 +173,10 @@
 	overflow-y: auto;
 }
 
+.bot_list_container {
+	height: calc(100% - 200px);
+}
+
 .list_container::-webkit-scrollbar {
 	display: none;
 }

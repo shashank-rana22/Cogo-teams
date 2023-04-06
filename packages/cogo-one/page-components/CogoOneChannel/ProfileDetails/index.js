@@ -16,6 +16,7 @@ function ProfileDetails({
 	activeCardId,
 	setModalType = () => {},
 	setActiveMessage = () => {},
+	activeRoomLoading,
 }) {
 	const customerId = activeTab === 'message' ? activeMessageCard?.id : activeVoiceCard?.id;
 
@@ -66,6 +67,7 @@ function ProfileDetails({
 						hideCpButton={hideCpButton}
 						getOrgDetails={getOrgDetails}
 						setActiveMessage={setActiveMessage}
+						activeRoomLoading={activeRoomLoading}
 					/>
 				)}
 			</div>

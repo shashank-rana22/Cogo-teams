@@ -15,6 +15,7 @@ function ConversationContainer({
 	activeCardData = {},
 	activeMessageCard = {},
 	setActiveMessage,
+	activeRoomLoading,
 }) {
 	const { user_channel_ids = {}, channel_type = '', user_details = {} } = activeMessageCard || {};
 	const { business_name = '' } = user_details || {};
@@ -24,7 +25,7 @@ function ConversationContainer({
 	}
 	return (
 		<>
-			{loading ? ([...Array(2)].map(() => (
+			{loading || activeRoomLoading ? ([...Array(2)].map(() => (
 				<div className={styles.container}>
 					<div className={styles.icon_type}>
 						<Placeholder type="circle" radius="30px" />
@@ -33,7 +34,7 @@ function ConversationContainer({
 						<div className={styles.header}>
 							<div className={styles.name}>
 								<Placeholder
-									height="10px"
+									height="16px"
 									width="160px"
 									margin="0px 0px 0px 0px"
 								/>
