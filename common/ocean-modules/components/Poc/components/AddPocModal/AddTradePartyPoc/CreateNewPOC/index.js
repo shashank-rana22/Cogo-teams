@@ -7,7 +7,7 @@ import validateMobileNumber from '../../../../../../utils/validateMobileNumber';
 
 import styles from './styles.module.css';
 
-function CreateNewPOC(props, ref) {
+function CreateNewPOC(ref) {
 	const { control, formState:{ errors = {} }, handleSubmit } = useForm();
 	const workscopeOptions = convertObjectMappingToArray(POC_WORKSCOPE_MAPPING);
 

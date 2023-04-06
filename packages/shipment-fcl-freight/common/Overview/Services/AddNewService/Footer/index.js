@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
 
-import useCreateUpsell from '../../hooks/useCreateUpsell';
+import useCreateUpsell from '../../../../../hooks/useCreateUpsell';
 
 import styles from './styles.module.css';
 

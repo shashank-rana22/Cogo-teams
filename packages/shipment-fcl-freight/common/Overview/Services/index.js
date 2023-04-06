@@ -3,7 +3,7 @@ import { useContext } from 'react';
 
 import { possibleServices } from '../../../configurations/possible-full-route';
 
-import CreateNew from './CreateNew';
+import AddNewService from './AddNewService';
 import helperFuncs from './helpers/getHelperFuncs';
 import upsellTransportation from './helpers/upsellTransportation';
 import Loader from './Loader';
@@ -71,7 +71,7 @@ function Services() {
 
 			<div className={styles.upselling}>
 				{Object.keys(upsellServices).map((tradeType) => (upsellServices[tradeType] || []).map((service) => (
-					<CreateNew
+					<AddNewService
 						upsellableService={service}
 						servicesList={servicesList}
 						shipmentData={shipment_data}

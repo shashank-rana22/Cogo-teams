@@ -27,10 +27,10 @@ const useCreateUpsell = ({ service = {}, primary_service = {}, shipmentData = {}
 		try {
 			const res = await trigger({ data: { ...payload } });
 			if (!res.hasError) {
-				const newHref = `${window.location.origin}/${partner_id}/book/${res.data?.id}/
-				${res.data?.importer_exporter_id}/${shipmentData?.id}`;
+				let newHref = `${window.location.origin}/${partner_id}/book/`;
+				newHref += `${res.data?.id}/${res.data?.importer_exporter_id}/${shipmentData?.id}`;
 
-				window.location.replace(newHref);
+				window.location.href = newHref;
 			}
 		} catch (err) {
 			Toast.error(getApiErrorString(err));
