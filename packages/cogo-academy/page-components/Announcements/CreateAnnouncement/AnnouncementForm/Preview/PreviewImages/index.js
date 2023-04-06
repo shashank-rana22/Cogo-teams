@@ -22,7 +22,7 @@ function PreviewImages({ images = [] }) {
 				<div className={styles.content_container}>
 					<div className={styles.content_header_container}>
 						<div className={styles.heading}>IMAGES</div>
-						{images.length > 2 && (
+						{(images || []).length > 2 && (
 							<div className={styles.icn_container}>
 								<IcMArrowLeft width={25} height={25} onClick={scrollHandlerLeftImages} />
 								<IcMArrowRight width={25} height={25} onClick={scrollHandlerRightImages} />
@@ -33,8 +33,8 @@ function PreviewImages({ images = [] }) {
 					<div className={styles.content_inner_container} ref={scrollRefImages}>
 
 						<div className={styles.contents}>
-							{images.map((i, index) => {
-								const image_url = (i?.finalUrl ? i?.finalUrl : i);
+							{(images || []).map((img_item, index) => {
+								const image_url = (img_item?.finalUrl ? img_item?.finalUrl : img_item);
 
 								return (
 									<div

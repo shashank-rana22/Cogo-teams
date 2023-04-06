@@ -12,7 +12,7 @@ function PreviewFiles({ files = [] }) {
 					<div className={styles.heading}>RELATED ATTACHMENTS</div>
 
 					<div className={styles.files}>
-						{files.map((file) => {
+						{(files || []).map((file) => {
 							const file_url = (file?.finalUrl ? file?.finalUrl : file);
 
 							return (
