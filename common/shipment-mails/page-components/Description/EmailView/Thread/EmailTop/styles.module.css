@@ -1,0 +1,48 @@
+.container {
+	display: flex;
+	padding-bottom: 22px;
+	margin: 0 7px;
+	cursor: pointer;
+}
+
+.circle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 18px;
+	height: 18px;
+	border: 1px solid #393f70;
+	border-radius: 50%;
+}
+
+.sender {
+	margin-bottom: 2px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.content {
+	flex: 1;
+	margin-left: 8px;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 4px;
+}
+
+.date {
+	margin-bottom: 8px;
+	font-size: 12px;
+	color: #2f2f32;
+}
+
+.initial_body {
+	margin-bottom: 2px;
+	font-size: 10px;
+	color: #2f2f32;
+	opacity: 0.6;
+}

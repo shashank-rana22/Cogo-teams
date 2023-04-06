@@ -1,0 +1,41 @@
+.heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.sub_heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.line {
+	width: 50%;
+	border: 1px solid #cbcff5;
+	border-radius: 10px;
+}
+
+.custom_toggle {
+	:global {
+		.ui_toggle_onlabel {
+			font-weight: 700;
+		}
+
+		.ui_toggle_offlabel {
+			font-weight: 700;
+		}
+	}
+
+	& > div:nth-child(2) > label > span::after {
+		content: "";
+		background-color: var(--color-accent-orange-2) !important;
+	}
+
+	& > div:nth-child(2) > label > span::before {
+		content: "";
+		background-color: var(--color-accent-orange-2) !important;
+	}
+}

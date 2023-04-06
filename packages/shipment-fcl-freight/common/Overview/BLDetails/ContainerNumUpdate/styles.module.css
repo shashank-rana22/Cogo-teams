@@ -1,0 +1,42 @@
+.container {
+	padding: 12px;
+}
+
+.heading {
+	margin: 8px 0 32px;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 15px;
+	color: #393f70;
+}
+
+.render_container {
+	display: flex;
+	margin: 12px;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 32px;
+}
+
+.button_container > button:first-child {
+	margin-right: 8px;
+}
+
+.container_num {
+	display: flex;
+	align-items: center;
+	margin-right: 32px;
+}
+
+.icon_wrapper {
+	cursor: pointer;
+}
+
+.loader {
+	display: flex;
+	justify-content: center;
+	padding-bottom: 20px;
+}
