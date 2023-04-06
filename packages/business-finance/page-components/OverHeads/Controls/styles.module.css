@@ -9,28 +9,32 @@
 .select {
 	width: 170px;
 }
-.pan{
-	border-radius: 4px;
-	height: 40px;
+
+.pan {
 	width: 170px;
+	height: 40px;
 	padding: 7px;
-}
-.agreement{
 	border-radius: 4px;
-	width: 164px;
-	height: 40px; 
-	padding: 7px;
 }
-.description{
-	border-radius: 4px; 
+
+.agreement {
+	width: 164px;
+	height: 40px;
+	padding: 7px;
+	border-radius: 4px;
+}
+
+.description {
 	width: 1020px;
-	height: 72px; 
-	margin-top: 8px;
-	padding: 7px; 
-}
-.pan_area{
-	border-radius: 4px; 
-	width: 164px;
-	height: 40px; 
+	height: 72px;
 	padding: 7px;
+	margin-top: 8px;
+	border-radius: 4px;
+}
+
+.pan_area {
+	width: 164px;
+	height: 40px;
+	padding: 7px;
+	border-radius: 4px;
 }
