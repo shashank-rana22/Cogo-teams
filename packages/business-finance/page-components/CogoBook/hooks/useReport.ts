@@ -6,7 +6,7 @@ import { entityMappingData } from '../P&L/PLStatement/constant';
 
 interface FilterInterface {
 	filters?:{
-		month?:string
+		date?:string
 		category?:string
 		entity?:string
 	}
@@ -57,7 +57,7 @@ const useReport = ({
 		try {
 			await reportTrigger({
 				params: {
-					periods      : [filters?.month] || [getLastMonthData()] || undefined,
+					periods      : [filters?.date] || [getLastMonthData()] || undefined,
 					cogoEntityId : entityMappingData[filters?.entity] || undefined,
 				},
 			});
@@ -68,13 +68,13 @@ const useReport = ({
 				Toast.error(error?.response?.data?.message);
 			}
 		}
-	}, [filters?.category, filters?.entity, filters?.month, reportTrigger]);
+	}, [filters?.category, filters?.entity, filters?.date, reportTrigger]);
 
 	const fetchRatioApi = useCallback(async (setShowReport?:any) => {
 		try {
 			await ratioTrigger({
 				params: {
-					periods      : monthPayload || filters?.month || undefined,
+					periods      : monthPayload || filters?.date || undefined,
 					cogoEntityId : entityMappingData[filters?.entity] || undefined,
 				},
 			});
@@ -85,7 +85,7 @@ const useReport = ({
 				Toast.error(error?.response?.data?.message);
 			}
 		}
-	}, [filters?.entity, filters?.month, monthPayload, ratioTrigger]);
+	}, [filters?.entity, filters?.date, monthPayload, ratioTrigger]);
 
 	return {
 		ratiosData,

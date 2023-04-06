@@ -134,8 +134,8 @@ function Card({
 						<div>
 							<div className={styles.bold_font_data}>Month*</div>
 							<Select
-								value={filters?.month}
-								onChange={(val:string) => { setFilters((prev) => ({ ...prev, month: val })); }}
+								value={filters?.date}
+								onChange={(val:string) => { setFilters((prev) => ({ ...prev, date: val })); }}
 								placeholder="Month"
 								options={OptionMonth()}
 								disabled={filters?.category}
@@ -231,6 +231,8 @@ function Card({
 											radio = '', chip = '',
 										} = JSON.parse(filtersItem) || {};
 
+										console.log(month, 'month');
+
 										return (
 											<div className={styles.filters}>
 												<div className={styles.radio_filters}>
@@ -320,7 +322,7 @@ function Card({
 						</Button>
 						<Button
 							onClick={() => { handleClick(); }}
-							disabled={!filters?.entity && !filters?.month}
+							disabled={!(filters?.entity && filters?.date)}
 							loading={reportTriggerLoading}
 						>
 							Run Report

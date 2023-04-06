@@ -38,11 +38,6 @@ function ListProfit({
 			totalPriorPeriodItem = 0,
 		} = item;
 
-		let isRowVisible = true;
-		if (isNonZero && revenueFromOps === 0) {
-			isRowVisible = false;
-		}
-
 		const ratioData = (ratiosData?.list || [{}])?.find((itemRatio) => itemRatio.ratioBasis === filters?.ratio);
 
 		const {
@@ -78,6 +73,11 @@ function ListProfit({
 			interestOnLoanDiscountOnBillsAndBankChargesExpense = 0,
 		} = otherExpense || {};
 
+		let isRowVisible = true;
+		if (isNonZero && revenueFromOps === 0) {
+			isRowVisible = false;
+		}
+
 		const key = filters?.radio ? filters?.radio : 'nothing';
 		const mode = filters?.mode ? 'ON' : 'OFF';
 
@@ -91,7 +91,7 @@ function ListProfit({
 		};
 
 		const ArrayLength = getRelevantData().length;
-		const calculateWidth = `${55 / ArrayLength}%`;
+		const calculateWidth = `${59 / ArrayLength}%`;
 
 		const options = { style: 'decimal', maximumFractionDigits: 2 };
 		return (

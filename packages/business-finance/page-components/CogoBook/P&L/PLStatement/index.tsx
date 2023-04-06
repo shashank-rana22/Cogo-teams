@@ -11,7 +11,7 @@ function PLStatement() {
 	const [filtersData, setFiltersData] = useState({
 		cogoEntityId : '',
 		category     : '',
-		date         : '',
+		month        : '',
 		rowCheck     : '',
 		colCheck     : '',
 		chip         : '',
@@ -36,9 +36,9 @@ function PLStatement() {
 	useEffect(() => {
 		setFilters((prev) => ({
 			...prev,
-			entity   : entityMapping[filtersData?.cogoEntityId] || '',
+			entity   : `${entityMapping[filtersData?.cogoEntityId]}` || '',
 			category : filtersData?.category || '',
-			date     : filtersData?.date || '',
+			date     : filtersData?.month || '',
 			rowCheck : filtersData?.rowCheck || '',
 			colCheck : filtersData?.colCheck || '',
 			chip     : filtersData?.chip || 'Segment',

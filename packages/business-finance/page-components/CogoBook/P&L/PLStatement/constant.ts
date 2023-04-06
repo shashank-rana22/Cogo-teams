@@ -210,11 +210,10 @@ export const mappingData = (filters) => {
 					key  : 'ocean',
 					name : 'Ocean',
 					keys : {
-						bookedRevenue  : 'fclImportBookedRevenue',
-						bookedExpense  : 'fclImportBookedExpense',
-						accruedRevenue : 'fclImportAccruedRevenue',
-						accruedExpense : 'fclImportAccruedExpense',
-
+						bookedRevenue  : 'totalBookedRevenue',
+						accruedRevenue : 'totalAccruedRevenue',
+						bookedExpense  : 'totalBookedExpense',
+						accruedExpense : 'totalAccruedExpense',
 					},
 					type: 'ocean',
 				},
@@ -222,11 +221,10 @@ export const mappingData = (filters) => {
 					key  : 'air',
 					name : 'Air',
 					keys : {
-						bookedRevenue  : 'fclImportBookedRevenue',
-						bookedExpense  : 'fclImportBookedExpense',
-						accruedRevenue : 'fclImportAccruedRevenue',
-						accruedExpense : 'fclImportAccruedExpense',
-
+						bookedRevenue  : 'totalBookedRevenue',
+						accruedRevenue : 'totalAccruedRevenue',
+						bookedExpense  : 'totalBookedExpense',
+						accruedExpense : 'totalAccruedExpense',
 					},
 					type: 'air',
 				},
@@ -234,11 +232,10 @@ export const mappingData = (filters) => {
 					key  : 'surface',
 					name : 'Surface',
 					keys : {
-						bookedRevenue  : 'fclImportBookedRevenue',
-						bookedExpense  : 'fclImportBookedExpense',
-						accruedRevenue : 'fclImportAccruedRevenue',
-						accruedExpense : 'fclImportAccruedExpense',
-
+						bookedRevenue  : 'totalBookedRevenue',
+						accruedRevenue : 'totalAccruedRevenue',
+						bookedExpense  : 'totalBookedExpense',
+						accruedExpense : 'totalAccruedExpense',
 					},
 					type: 'surface',
 				},
@@ -246,11 +243,10 @@ export const mappingData = (filters) => {
 					key  : 'rail',
 					name : 'Rail',
 					keys : {
-						bookedRevenue  : 'fclImportBookedRevenue',
-						bookedExpense  : 'fclImportBookedExpense',
-						accruedRevenue : 'fclImportAccruedRevenue',
-						accruedExpense : 'fclImportAccruedExpense',
-
+						bookedRevenue  : 'totalBookedRevenue',
+						accruedRevenue : 'totalAccruedRevenue',
+						bookedExpense  : 'totalBookedExpense',
+						accruedExpense : 'totalAccruedExpense',
 					},
 					type: 'rail',
 				},
