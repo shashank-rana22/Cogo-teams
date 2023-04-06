@@ -180,6 +180,20 @@ function Card({
 				</div>
 				<div className={styles.hr_filter} />
 				<div className={styles.select_container}>
+					<Select
+						value={filters?.entity}
+						onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
+						placeholder="Entity"
+						options={[
+							{ label: '201', value: '201' },
+							{ label: '301', value: '301' },
+							{ label: '401', value: '401' },
+							{ label: '501', value: '501' },
+						]}
+						isClearable
+						style={{ width: '100px' }}
+					/>
+
 					<Popover
 						placement="bottom"
 						caret={false}
@@ -202,26 +216,12 @@ function Card({
 					</Popover>
 
 					<Select
-						value={filters?.entity}
-						onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
-						placeholder="Entity"
-						options={[
-							{ label: '201', value: '201' },
-							{ label: '301', value: '301' },
-							{ label: '401', value: '401' },
-							{ label: '501', value: '501' },
-						]}
-						isClearable
-						style={{ width: '100px' }}
-					/>
-
-					<Select
 						value={filters?.shipmentType}
 						onChange={(val:string) => { setFilters((prev) => ({ ...prev, shipmentType: val })); }}
 						placeholder="Shipment Type"
 						options={optionsShipment}
 						isClearable
-						style={{ width: '200px' }}
+						style={{ width: '150px' }}
 					/>
 
 				</div>
