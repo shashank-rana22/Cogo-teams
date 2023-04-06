@@ -33,10 +33,15 @@ function useGetIngestionList() {
 		setTableModal('uploadList');
 	};
 
+	// const UPLOAD_STATUS_MAPPING = {
+	// 	Uploading : 'yellow',
+	// 	active    : 'green',
+	// 	inactive  : 'red',
+	// };
 	const UPLOAD_STATUS_MAPPING = {
-		Uploading : 'yellow',
-		active    : 'green',
-		inactive  : 'red',
+		init       : 'yellow',
+		completed  : 'green',
+		processing : 'red',
 	};
 
 	const reUploadFiles = (_row) => {
@@ -88,10 +93,13 @@ function useGetIngestionList() {
 		{
 			id       : 'status',
 			Header   : 'STATUS',
-			accessor : ({ status }) => (
-				<Pill size="sm" color={UPLOAD_STATUS_MAPPING[status]}>
-					{status ? startCase(status) : '___'}
-				</Pill>
+			accessor : ({ request_files = [] }) => (
+				<div className={styles.status}>
+					<Pill size="sm" color={UPLOAD_STATUS_MAPPING[request_files[0]?.stage]}>
+						{request_files[0]?.stage ? startCase(request_files[0]?.stage) : '___'}
+					</Pill>
+				</div>
+
 			),
 		},
 		{
@@ -142,10 +150,13 @@ function useGetIngestionList() {
 			Header   : 'UPLOADED',
 			accessor : (item) => (
 				<div className={styles.uploaded}>
-					<Button onClick={() => { tableListModal(item); }} size="md" themeType="tertiary">
-						{' '}
-						View All
-					</Button>
+
+					{item?.request_files[0]?.errored_data_url ? (
+						<Button onClick={() => { tableListModal(item); }} size="md" themeType="tertiary">
+							{' '}
+							View All
+						</Button>
+					) : ''}
 
 				</div>
 			),
