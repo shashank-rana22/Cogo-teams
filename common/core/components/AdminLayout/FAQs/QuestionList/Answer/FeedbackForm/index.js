@@ -74,7 +74,7 @@ function FeedbackForm({
 				/>
 
 				{errors.remark && (
-					<span className={styles.errors}>
+					<span className={styles.errortext}>
 						{errors.remark.message}
 					</span>
 				)}
