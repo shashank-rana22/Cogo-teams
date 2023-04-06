@@ -4,9 +4,9 @@
 
 .hscode_table {
 	margin-top: 48px;
+	overflow-x: scroll;
 	background-color: white;
 	box-shadow: 0 0 4px rgb(0 0 0 / 15%);
-	overflow-x: scroll;	
 }
 
 .individual_stats {
@@ -64,11 +64,12 @@
 	font-weight: bold;
 }
 
-.map_panel{
-	height: 500px; 
+.map_panel {
 	width: 80%;
+	height: 500px;
 }
-.responsive_line{
+
+.responsive_line {
 	height: 400px;
-	box-shadow: 10px 5px 5px rgb(239, 233, 233);
+	box-shadow: 10px 5px 5px rgb(239 233 233);
 }

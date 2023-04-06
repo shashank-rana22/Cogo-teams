@@ -1,10 +1,10 @@
-.empty_state{
+.empty_state {
 	display: flex;
 	justify-content: center;
 	padding-left: 200px;
 }
 
-.column{
+.column {
 	flex-direction: column;
 }
 

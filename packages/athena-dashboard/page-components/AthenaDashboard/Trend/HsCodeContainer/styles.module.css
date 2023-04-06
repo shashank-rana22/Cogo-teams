@@ -25,10 +25,9 @@
 }
 
 .hscode_text {
-	margin-top: 8px;
 	padding: 4px;
+	margin-top: 8px;
 }
-
 
 .button_group {
 	display: flex;
