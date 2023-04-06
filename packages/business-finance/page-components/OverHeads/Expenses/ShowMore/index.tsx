@@ -3,6 +3,7 @@ import { Button, Placeholder, Pagination } from '@cogoport/components';
 import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
+import showOverflowingNumber from '../../../commons/showOverflowingNumber';
 import { formatDate } from '../../../commons/utils/formatDate';
 import useListExpense from '../hooks/useListExpense';
 import useSendEmail from '../hooks/useSendEmail';
@@ -16,6 +17,7 @@ interface BillInterface {
 	paidAmount?:number | string,
 	dueDate?:Date,
 	billDate?:Date,
+	subCategory?:string,
 	createdDate?:Date,
 	status?:string,
 	updatedAt?:any,
@@ -103,8 +105,8 @@ function ShowMore({ id, recurringState, showExpenseModal }:Props) {
 											billNumber, grandTotal, paidAmount = 0, payableTds = 0,
 											dueDate, billDate, createdDate, status, approvedByName, updatedAt,
 											billDocumentUrl = '',
+											subCategory = '',
 										} = bill || {};
-										// const { name = '' } = approvedByName || {};
 
 										return (
 											<div className={styles.data_div}>
@@ -123,12 +125,16 @@ function ShowMore({ id, recurringState, showExpenseModal }:Props) {
 													</div>
 												</div>
 												<div className={styles.section}>
-													<div>TDS</div>
-													<div className={styles.element}>{payableTds}</div>
+													<div>Sub category</div>
+													<div className={styles.element}>{showOverflowingNumber(subCategory, 12)}</div>
 												</div>
 												<div className={styles.section}>
 													<div>Payable</div>
 													<div className={styles.element}>{grandTotal - payableTds}</div>
+												</div>
+												<div className={styles.section}>
+													<div>TDS</div>
+													<div className={styles.element}>{payableTds}</div>
 												</div>
 												<div className={styles.section}>
 													<div>Paid</div>
