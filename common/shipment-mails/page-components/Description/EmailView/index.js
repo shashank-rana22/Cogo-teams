@@ -15,7 +15,7 @@ function EmailView({
 	const message_id = activeMail?.message_id || activeMail?.id;
 
 	const mailPayload = { email_address: email, message_id, mail_id: activeMail?.id };
-	const { getMailApi, getMailRpaApi } = useGetMail({ mailPayload });
+	const { getMailApi, getMailRpaApi } = useGetMail({ payload: mailPayload });
 
 	const isFromRpa = getMailApi?.data?.error?.code === 'ErrorItemNotFound';
 	const rpaData = getMailRpaApi?.data;
@@ -39,7 +39,7 @@ function EmailView({
 	const loading = isFromRpa ? getMailRpaApi?.loading : getMailApi?.loading;
 
 	const attachmentPaylaod = { email, message_id };
-	const { getAttachementsApi } = useGetAttachements({ attachmentPaylaod });
+	const { getAttachementsApi } = useGetAttachements({ payload: attachmentPaylaod });
 	let content = emailData?.body?.content || '';
 
 	const allAttachements = getAttachementsApi?.data?.value || [];
