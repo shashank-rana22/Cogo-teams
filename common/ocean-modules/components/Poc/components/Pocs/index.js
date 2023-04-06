@@ -7,7 +7,7 @@ import External from './External';
 import Internal from './Internal';
 import styles from './styles.module.css';
 
-function PocFile({
+function Pocs({
 	tradePartnersData = {},
 	setAddPoc = () => {},
 	shipmentStakeholderData = [],
@@ -43,4 +43,4 @@ function PocFile({
 		</Card>
 	);
 }
-export default PocFile;
+export default Pocs;
