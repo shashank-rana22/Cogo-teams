@@ -176,7 +176,7 @@ function ShowMore({ vendorId }:Props) {
 
 	return (
 		<div className={styles.container}>
-			{!moreData ? (
+			{!moreData && (
 				<div className={styles.button_container}>
 					<button
 						className={styles.button_style}
@@ -187,10 +187,11 @@ function ShowMore({ vendorId }:Props) {
 						<div style={{ marginBottom: '-4px' }}><IcMArrowDown /></div>
 					</button>
 				</div>
-			) : (
-				<div className={moreData
-					? styles.more_data_container : `${styles.more_data_container} ${styles.more_data_container_close}`}
-				>
+			) }
+			<div className={moreData
+				? styles.more_data_container : `${styles.more_data_container} ${styles.more_data_container_close}`}
+			>
+				<div className={styles.list_container}>
 					{listLoading ? (
 						<div>
 							<div style={{ display: 'flex' }}>
@@ -242,25 +243,24 @@ function ShowMore({ vendorId }:Props) {
 							)}
 						</div>
 					)}
-
-					{moreData && (
-						<div className={styles.button_container}>
-							<button
-								className={styles.button_style}
-								onClick={() => {
-									setMoreData(false);
-									setExpenseType('RECURRING');
-								}}
-							>
-								<div>Show less</div>
-								{' '}
-								<div style={{ marginBottom: '-4px' }}><IcMArrowUp /></div>
-							</button>
-						</div>
-					)}
 				</div>
-			)}
 
+				{moreData && (
+					<div className={styles.button_container}>
+						<button
+							className={styles.button_style}
+							onClick={() => {
+								setMoreData(false);
+								setExpenseType('RECURRING');
+							}}
+						>
+							<div>Show less</div>
+							{' '}
+							<div style={{ marginBottom: '-4px' }}><IcMArrowUp /></div>
+						</button>
+					</div>
+				)}
+			</div>
 		</div>
 	);
 }

@@ -40,19 +40,22 @@
 
 .more_data_container {
 	width: 100%;
-	max-height: 624px;
+	max-height: 614px;
 	background: white;
 	border-top: 1px solid #edd7a9;
-	transition: max-height 0.3s ease;
+	transition: max-height 0.6s ease-in-out;
+	overflow: hidden;
 }
 
 .more_data_container_close {
 	width: 0;
 	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.1s ease-in-out;
 }
 
 .list_container {
-	max-height: 442px;
+	max-height: 600px;
 	overflow: scroll;
 }
 
