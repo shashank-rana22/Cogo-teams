@@ -5,6 +5,7 @@ import { format, isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { FilterInterface } from '../Accruals/interface';
+import { entityMappingData } from '../P&L/PLStatement/constant';
 
 import calculateAccrue from './calculateAccrue';
 
@@ -33,7 +34,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		year = '', month = '', shipmentType = '',
 		profitAmount = '', profitType = '', tradeType = '', service = '', range,
 		jobState = '', query = '', page, date, profitPercent = '', profitPercentUpper = '', profitAmountUpper = '',
-		sortType = '', sortBy = '',
+		sortType = '', sortBy = '', entity = '',
 	} = filters || {};
 	const { calAccruePurchase, calAccrueSale } = calculateAccrue();
 
@@ -79,6 +80,8 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 					serviceType          : service || undefined,
 					tradeType            : tradeType || undefined,
 					jobType              : shipmentType || undefined,
+					entityCode           : entity || undefined,
+					entityId             : entityMappingData[entity] || undefined,
 					profitComparisonType : rangeMapping[range] || undefined,
 					jobState             : jobState || undefined,
 					lowerProfitMargin    : profitAmount || profitPercent || undefined,
@@ -127,6 +130,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		sortType,
 		tradeType,
 		year,
+		entity,
 	]);
 
 	useEffect(() => {

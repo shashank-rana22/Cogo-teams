@@ -4,6 +4,8 @@ import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
+import { entityMappingData } from '../P&L/PLStatement/constant';
+
 interface GlobalInterface {
 	page?:number
 	pageLimit?:number
@@ -14,6 +16,7 @@ interface GlobalInterface {
 	search?:string
 	Range?:string
 	date?:any
+	entity?:string
 
 }
 const useArchive = ({ toggleValue = '', setShowTab }) => {
@@ -31,6 +34,7 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 		archivedStatus : '',
 		search         : '',
 		Range          : '',
+		entity         : '',
 	});
 
 	const {
@@ -41,6 +45,7 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 		serviceType,
 		search,
 		Range,
+		entity,
 	} = globalFilters || {};
 
 	useEffect(() => {
@@ -77,14 +82,16 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 		try {
 			const res = await api({
 				params: {
-					serviceType: serviceType || undefined,
+					serviceType : serviceType || undefined,
+					entityCode  : entity || undefined,
+					entityId    : entityMappingData[entity] || undefined,
 				},
 			});
 			setApiData(res.data);
 		} catch {
 			setApiData({ list: [], totalRecords: 0 });
 		}
-	}, [api, serviceType]);
+	}, [api, entity, serviceType]);
 
 	const [
 		{ loading:drillDownArchiveLoading },
@@ -111,6 +118,8 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 					Amount         : Amount === '' ? undefined : Amount,
 					Percentage     : Percentage === '' ? undefined : Percentage,
 					Range          : Range || undefined,
+					entityCode     : entity || undefined,
+					entityId       : entityMappingData[entity] || undefined,
 				},
 			});
 			setDrillData(res.data);
@@ -119,7 +128,7 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 				Toast.error(error?.response?.data?.message);
 			}
 		}
-	}, [Amount, Percentage, Range, archivedStatus, date, drillDownArchiveTrigger, query, serviceType]);
+	}, [Amount, Percentage, Range, archivedStatus, date, drillDownArchiveTrigger, query, serviceType, entity]);
 
 	useEffect(() => {
 		if (!particularMonth) {

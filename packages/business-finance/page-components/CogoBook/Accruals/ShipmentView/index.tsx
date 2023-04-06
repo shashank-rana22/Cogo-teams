@@ -23,6 +23,7 @@ function ShipmentView() {
 		shipmentType       : '',
 		tradeType          : '',
 		range              : '',
+		entity             : '',
 		profitAmount       : '',
 		jobState           : '',
 		profitPercent      : '',

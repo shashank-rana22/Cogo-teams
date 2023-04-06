@@ -129,6 +129,23 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 								/>
 							</div>
 						)}
+						<div className={styles.div_select}>
+							<Select
+								value={globalFilters?.entity}
+								onChange={(val:string) => {
+									setGlobalFilters((prev) => ({ ...prev, entity: val }));
+								}}
+								placeholder="Entity"
+								options={[
+									{ label: '201', value: '201' },
+									{ label: '301', value: '301' },
+									{ label: '401', value: '401' },
+									{ label: '501', value: '501' },
+								]}
+								isClearable
+								style={{ width: '150px' }}
+							/>
+						</div>
 					</div>
 					{particularMonth ? (
 						<div className={styles.search_container}>

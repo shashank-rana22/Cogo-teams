@@ -202,6 +202,20 @@ function Card({
 					</Popover>
 
 					<Select
+						value={filters?.entity}
+						onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
+						placeholder="Entity"
+						options={[
+							{ label: '201', value: '201' },
+							{ label: '301', value: '301' },
+							{ label: '401', value: '401' },
+							{ label: '501', value: '501' },
+						]}
+						isClearable
+						style={{ width: '100px' }}
+					/>
+
+					<Select
 						value={filters?.shipmentType}
 						onChange={(val:string) => { setFilters((prev) => ({ ...prev, shipmentType: val })); }}
 						placeholder="Shipment Type"
@@ -209,6 +223,7 @@ function Card({
 						isClearable
 						style={{ width: '200px' }}
 					/>
+
 				</div>
 			</div>
 			<div className={styles.more_filter}>
