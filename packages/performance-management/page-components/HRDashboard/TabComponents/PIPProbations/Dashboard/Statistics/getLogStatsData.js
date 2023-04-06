@@ -11,7 +11,7 @@ const getLogStatsData = ({ statsData = [] }) => {
 		const newObj = {};
 
 		Object.keys(obj).forEach((key) => {
-			if (dataKeyMapping[key]) { newObj[dataKeyMapping[key]] = obj[key]; }
+			if (dataKeyMapping[key] && obj[key] !== '0') { newObj[dataKeyMapping[key]] = obj[key]; }
 		});
 		return newObj;
 	});
