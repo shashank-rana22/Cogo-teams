@@ -1,4 +1,4 @@
-import { Select, Placeholder, Tabs, TabPanel, Table } from '@cogoport/components';
+import { Placeholder, Tabs, TabPanel, Table } from '@cogoport/components';
 import { IcMDownload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
@@ -28,23 +28,6 @@ function ShipmentReport({ activeTab, setActiveTab, response, COLUMNS, loading })
 					<IcMDownload height={12} width={12} style={{ marginRight: '4px' }} />
 					Export Results
 				</div>
-			</div>
-
-			<div className={styles.sort_by_box}>
-				<div className={styles.sort_by}>
-					Sort By
-				</div>
-				<div className={styles.select_box}>
-					<Select
-						value="Arrival date(newest first)"
-						options={[{
-							label : 'Shipment date (newest first)',
-							value : 'Arrival date(newest first)',
-						}]}
-						disabled
-					/>
-				</div>
-
 			</div>
 
 			{!isEmpty(response) && !loading
