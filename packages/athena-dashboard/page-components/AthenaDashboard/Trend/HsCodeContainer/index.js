@@ -3,7 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function HsCodeContainer({ hscodeArr, handleSubmit, getReport, setHscodeArr }) {
+function HsCodeContainer({ hscodeArr = [], handleSubmit, getReport, setHscodeArr }) {
 	return (
 		<div className={styles.selected_hscode_container}>
 			{
