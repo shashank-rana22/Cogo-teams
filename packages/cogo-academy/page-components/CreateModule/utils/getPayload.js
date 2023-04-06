@@ -6,13 +6,23 @@ const payloadMapping = {
 	case_study  : getCaseStudyPayload,
 };
 
-function getPayload({ values, type, questionSetId, action, testQuestionId, editType, caseStudyQuestionId }) {
+function getPayload({
+	values,
+	type,
+	questionSetId,
+	action,
+	testQuestionId,
+	editType,
+	caseStudyQuestionId,
+	editDetails,
+	index,
+}) {
 	const payloadPropsMapping = {
 		stand_alone: {
-			values, action, testQuestionId, questionSetId,
+			values, action, testQuestionId, questionSetId, editDetails,
 		},
 		case_study: {
-			editType, values, action, caseStudyQuestionId, testQuestionId, questionSetId,
+			editType, values, action, caseStudyQuestionId, testQuestionId, questionSetId, editDetails, index,
 		},
 	};
 

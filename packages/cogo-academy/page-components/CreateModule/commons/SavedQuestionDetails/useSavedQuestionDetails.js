@@ -9,6 +9,7 @@ const useSavedQuestionDetails = ({
 	questionSetId,
 	setEditDetails,
 	listSetQuestions,
+	editDetails,
 }) => {
 	const [questionToDelete, setQuestionToDelete] = useState({});
 
@@ -19,6 +20,7 @@ const useSavedQuestionDetails = ({
 		setAllKeysSaved,
 		setQuestionToDelete,
 		listSetQuestions,
+		editDetails,
 	});
 
 	const {
