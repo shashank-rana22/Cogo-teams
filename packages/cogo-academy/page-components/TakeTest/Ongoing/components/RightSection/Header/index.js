@@ -1,7 +1,7 @@
-import { IcMExpand } from '@cogoport/icons-react';
+// import { IcMExpand } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 
-import handleMinimizeTest from '../../../../utils/handleMinimizeTest';
+// import handleMinimizeTest from '../../../../utils/handleMinimizeTest';
 
 import styles from './styles.module.css';
 
@@ -11,7 +11,7 @@ function Header({ setShowInstructionsModal }) {
 	}));
 
 	const handleShowInstruction = () => {
-		handleMinimizeTest();
+		// handleMinimizeTest();
 		setShowInstructionsModal(true);
 	};
 
@@ -32,9 +32,9 @@ function Header({ setShowInstructionsModal }) {
 				<b>{name}</b>
 			</div>
 
-			<div className={styles.expand_icon}>
+			{/* <div className={styles.expand_icon}>
 				<IcMExpand onClick={handleMinimizeTest} width={20} height={20} />
-			</div>
+			</div> */}
 		</div>
 	);
 }
