@@ -33,12 +33,11 @@ const useListUserFeedbacks = ({
 	const setPage = (p) => { setParams({ ...params, Page: p }); };
 
 	useEffect(() => {
-		setParams({
-			...params,
+		setParams((pv) => ({
+			...pv,
 			Page : 1,
 			Q    : searchValue || undefined,
-		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		}));
 	}, [searchValue]);
 
 	return {

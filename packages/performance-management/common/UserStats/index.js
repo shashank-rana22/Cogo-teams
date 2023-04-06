@@ -15,13 +15,14 @@ import UserProfile from './UserProfile';
 
 function UserStats({ source = '' }) {
 	const router = useRouter();
-	const [userId, setUserId] = useState('');
 
 	const {
 		general: {
 			query: { user_id = '', path = '' },
 		},
 	} = useSelector((state) => state);
+
+	const [userId, setUserId] = useState(user_id);
 
 	const handleClick = () => {
 		router.push(`${path}`);
