@@ -12,6 +12,8 @@ import styles from './styles.module.css';
 
 function EmployeesTable({ source = 'log_modal', setItem = () => {} }) {
 	const [searchValue, setSearchValue] = useState('');
+	const [refetchReportees, setRefetchReportees] = useState(false);
+
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const {
@@ -20,6 +22,7 @@ function EmployeesTable({ source = 'log_modal', setItem = () => {} }) {
 		setPage,
 		setParams,
 		params,
+		fetchReportees,
 	} = useListReportees({
 		searchValue: query,
 	});
@@ -44,7 +47,17 @@ function EmployeesTable({ source = 'log_modal', setItem = () => {} }) {
 
 	const columnsToShow = [
 		...(source === 'log_modal' ? feedbackDataColumns.logModal : feedbackDataColumns.manualFeedbacks)];
-	const columns = useGetColumns({ columnsToShow, source, setItem });
+
+	const columns = useGetColumns({ setRefetchReportees, columnsToShow, source, setItem });
+
+	useEffect(() => {
+		if (refetchReportees) {
+			fetchReportees();
+		}
+		setRefetchReportees(false);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [refetchReportees]);
+
 	return (
 		<>
 			<div className={styles.name_input}>
