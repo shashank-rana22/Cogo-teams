@@ -38,7 +38,7 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 			label       : 'rating',
 			type        : 'select',
 			isClearable : true,
-			placeholder : 'Select...',
+			placeholder : 'Rating...',
 			options     : [
 				{ label: '1', value: 1 },
 				{ label: '2', value: 2 },
