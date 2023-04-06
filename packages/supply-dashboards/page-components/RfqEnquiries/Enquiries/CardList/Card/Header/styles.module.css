@@ -4,6 +4,7 @@
 	font-size: 13px;
 	font-weight: 500;
 	text-transform: uppercase;
+	gap:8px;
 }
 
 .heading {
@@ -11,4 +12,9 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 8px;
+}
+
+.service_name{
+	display: flex;
+	align-items: center;
 }
