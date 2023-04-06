@@ -73,7 +73,7 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 		},
 		{
 			Header   : 'HS Code',
-			accessor : (item) => (item.hscodes || []).map((i) => `[${i.toString()}]`).join(', '),
+			accessor : (item) => (item.hscodes || []).map((i) => `[${i.toString()}]`).join(', ') || '--',
 			key      : 'hscodes',
 		},
 		{
@@ -93,7 +93,7 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 		},
 		{
 			Header   : 'Share',
-			accessor : (item) => `${item.percent_share.toFixed(2)}%`,
+			accessor : (item) => `${item.percent_share.toFixed(2)}%` || '--',
 			key      : 'share',
 		},
 		{
