@@ -57,6 +57,7 @@ function Filters(props) {
 									{...el}
 									key={el.name}
 									control={control}
+									className={styles.field_controller}
 								/>
 							</div>
 						);

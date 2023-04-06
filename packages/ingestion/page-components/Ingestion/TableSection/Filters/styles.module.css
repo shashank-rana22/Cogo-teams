@@ -28,8 +28,20 @@
 		width: 32%;
 	}
 
+	:global {
+		.ui_select_display_container {
+
+			.ui_select_input_placeholder {
+				color: #CACACA;
+			}
+
+		}
+	}
+
 }
 
 .form_group:not(:first-child) { margin: 10px 0; }
 
-
+.field_controller {
+	width: 200px;
+}

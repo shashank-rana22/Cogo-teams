@@ -4,7 +4,7 @@ const filterControls = [
 		name                  : 'upload_date',
 		type                  : 'singleDateRange',
 		placeholder           : 'Upload Date',
-		span                  : 1.8,
+		// span                  : 1.8,
 		isPreviousDaysAllowed : true,
 	},
 	{
@@ -16,7 +16,7 @@ const filterControls = [
 		defaultOptions : false,
 		initialCall    : false,
 		placeholder    : 'Upload By',
-		span           : 2.4,
+		// span           : 2.4,
 		params         : {
 			filters: {
 				status               : 'active',
