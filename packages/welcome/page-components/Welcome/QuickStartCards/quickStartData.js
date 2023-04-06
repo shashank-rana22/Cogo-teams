@@ -23,8 +23,8 @@ const data = [
 			url   : '/learning/faq',
 		},
 		tag: {
-			icon : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/f1923cd08f77d9e73b474ca5ea7a8d06.png',
-			text : '200+ FAQs',
+			icon : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ecaf5d5b92d1df3a2fdc8640c75c1b3f.png',
+			text : '500+ FAQs',
 		},
 	},
 	{

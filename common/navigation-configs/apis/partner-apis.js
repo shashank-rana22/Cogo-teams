@@ -3229,6 +3229,12 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'spot_search',
 		},
+		{
+			api          : 'list_cogo_assured_rate_feedbacks',
+			access_type  : 'private',
+			service_name : 'cogo_assured_rate',
+			feature      : 'rate_feedbacks',
+		},
 	],
 	okam_dashboard: [
 		{
@@ -10876,6 +10882,10 @@ const partner = {
 		},
 		{
 			api         : 'get_air_coe_documents_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_documents',
 			access_type : 'private',
 		},
 		{

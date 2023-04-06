@@ -57,7 +57,7 @@ function Completion() {
 	const handleGoToDashboard = () => {
 		push('/learning/tests/dashboard', '/learning/tests/dashboard', '_blank');
 
-		document.getElementById('maincontainer').innerHTML = 'redirecting ...';
+		// document.getElementById('container').innerHTML = 'redirecting ...'; TODO
 	};
 
 	return (

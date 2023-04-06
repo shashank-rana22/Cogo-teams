@@ -1,11 +1,13 @@
 import { Tooltip } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import { format, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import AnswerKey from '../AnswerKey';
 import ButtonsComponent from '../ButtonsComponent';
 import CaseAnswerType from '../CaseAnswerType';
 import CaseQuestion from '../CaseQuestion';
+import SortComponent from '../SortComponent';
 
 import styles from './styles.module.css';
 
@@ -17,17 +19,14 @@ const useGetTableColumns = ({
 	allKeysSaved,
 	mode,
 	listSetQuestions,
+	setSortFilter,
+	sortFilter,
 }) => {
 	const [caseToShow, setCaseToShow] = useState('');
 
 	return [
 		{
-			Header   : 'Topic',
-			id       : 'topic',
-			accessor : ({ topic }) => <section>{topic}</section>,
-		},
-		{
-			Header   : 'Question Type',
+			Header   : 'QUESTION TYPE',
 			id       : 'question_type',
 			accessor : ({ question_type }) => (
 				<section>
@@ -36,7 +35,7 @@ const useGetTableColumns = ({
 			),
 		},
 		{
-			Header   : 'Question/Case',
+			Header   : 'QUESTION/CASE',
 			id       : 'question_text',
 			accessor : (item) => (
 				<Tooltip
@@ -58,7 +57,7 @@ const useGetTableColumns = ({
 			),
 		},
 		{
-			Header   : 'Answer Type',
+			Header   : 'ANSWER TYPE',
 			id       : 'answer_type',
 			accessor : (item) => (
 				<section>
@@ -69,19 +68,38 @@ const useGetTableColumns = ({
 			),
 		},
 		{
-			Header   : 'Answer Key',
+			Header   : 'ANSWER KEY',
 			id       : 'answer_key',
 			accessor : (item) => (
 				<AnswerKey item={item} caseToShow={caseToShow} />
 			),
 		},
 		{
-			Header   : 'Difficulty Level',
+			Header   : 'DIFFICULTY LEVEL',
 			id       : 'difficulty_level',
 			accessor : ({ difficulty_level }) => (
 				<section>
 					{startCase(difficulty_level)}
 				</section>
+			),
+		},
+		{
+			Header: (
+				<div className={styles.updated_at}>
+					<div className={styles.updated_at_text}>UPDATED AT</div>
+
+					<SortComponent
+						value="updated_at"
+						sortFilter={sortFilter}
+						setSortFilter={setSortFilter}
+					/>
+				</div>
+			),
+			id       : 'updated_at',
+			accessor : ({ updated_at }) => (
+				<div>
+					{format(updated_at, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}
+				</div>
 			),
 		},
 		{

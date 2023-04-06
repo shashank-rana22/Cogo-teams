@@ -1,9 +1,11 @@
-import showOverflowingNumber from '../../commons/showOverflowingNumber';
+import { Tooltip, cl } from '@cogoport/components';
+
 import getFormattedPrice from '../../commons/utils/getFormattedPrice';
+import GetSortingData from '../Logistics/Profitabillity/profitabilitySorting';
 
 import styles from './styles.module.css';
 
-const customerProfitabillityColumn = [
+const customerProfitabillityColumn = (sort, setSort) => [
 
 	{
 		Header   : 'Name',
@@ -11,14 +13,21 @@ const customerProfitabillityColumn = [
 		accessor : (row) => (
 
 			<div
-				style={{
-					fontWeight : '400',
-					fontSize   : '12px',
-					marginLeft : '10px',
-				}}
-				className={styles.sentence_case}
+				className={cl`${styles.sentence_case} ${styles.name_text_style}`}
 			>
-				{showOverflowingNumber(row?.businessName, 12)}
+				<Tooltip
+					content={(
+						<div className={styles.tooltip_text}>
+							{row?.businessName}
+						</div>
+					)}
+					interactive
+				>
+					<div>
+						{(row?.businessName as string).substring(0, 12)}
+						...
+					</div>
+				</Tooltip>
 			</div>
 
 		),
@@ -26,14 +35,18 @@ const customerProfitabillityColumn = [
 	{
 		Header   : 'Entity',
 		id       : 'entity',
-		accessor : 'entity',
+		accessor : (row) => (
+			<div className={styles.text_weight}>
+				{row?.entity}
+			</div>
+		),
 
 	},
 	{
 		Header   : 'SID Count',
 		id       : 'shipmentCount',
 		accessor : (row) => (
-			<div style={{ color: '#F68B21', textDecorationLine: 'underline' }}>
+			<div className={styles.text_weight}>
 				{row?.shipmentCount}
 			</div>
 		),
@@ -42,7 +55,7 @@ const customerProfitabillityColumn = [
 		Header   : 'Booked Income',
 		id       : 'income',
 		accessor : (row) => (
-			<div>
+			<div className={styles.text_weight}>
 				{getFormattedPrice(
 					row?.bookedIncome,
 					'INR',
@@ -55,7 +68,7 @@ const customerProfitabillityColumn = [
 		Header   : 'Booked Expense',
 		id       : 'expense',
 		accessor : (row) => (
-			<div>
+			<div className={styles.text_weight}>
 				{getFormattedPrice(
 					row?.bookedExpense,
 					'INR',
@@ -65,10 +78,10 @@ const customerProfitabillityColumn = [
 
 	},
 	{
-		Header   : 'Profitability',
+		Header   : <GetSortingData sort={sort} setSort={setSort} />,
 		id       : 'profitability',
 		accessor : (row) => (
-			<div>
+			<div className={styles.text_weight}>
 				{ row?.profitability.toFixed(2) }
 				<text>%</text>
 			</div>

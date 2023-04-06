@@ -8,7 +8,7 @@ function BasicDetails({ basic_info_data }) {
 			label : 'Topics Covered',
 			icon  : <IcMActivePlans />,
 			renderData:
-	<div>
+	<div className={styles.topic}>
 		{basic_info_data.topics_covered.length > 0 ? (
 			<div>{basic_info_data.topics_covered.join(', ')}</div>
 		) : ('-')}
@@ -108,10 +108,10 @@ function BasicDetails({ basic_info_data }) {
 						return (
 							<div className={styles.general} key={itemKey}>
 								<div className={styles.text}>
-									<div className={styles.text_top}>
+									<div className={styles.text_top_label}>
 										{label}
 									</div>
-									<div className={styles.text_bottom_left}>
+									<div className={styles.text_bottom_left_data}>
 										{renderData}
 									</div>
 								</div>
