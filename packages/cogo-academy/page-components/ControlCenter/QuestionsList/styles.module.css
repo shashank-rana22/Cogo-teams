@@ -57,11 +57,6 @@
 	}
 }
 
-.tags_and_topics_value {
-	display: "flex";
-	flex-direction: row;
-}
-
 .chips_container {
 	margin-right: 8px;
 }
@@ -70,7 +65,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: 35px;
+	width: 34px;
 }
 
 .feedback_count {
@@ -83,7 +78,7 @@
 			padding: 4px 8px;
 			font-size: 10px;
 			font-weight: 600;
-			background: white;
+			background: #ffffff;
 			border: 1px solid #ffe4af;
 			border-radius: 16px;
 		}

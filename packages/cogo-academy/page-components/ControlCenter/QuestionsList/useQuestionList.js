@@ -1,9 +1,11 @@
 import { Pill, Button, Popover } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowNext, IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
-import { startCase, format } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect, useCallback } from 'react';
 
 import PopOverContent from '../../../commons/PopoverContent';
@@ -33,6 +35,7 @@ const addedQuestionsColumns = ({
 	if (activeList === 'feedbacks') {
 		return feedbackTableColumns({ onClickEditButton, onClickViewButton });
 	}
+
 	return [
 		{
 			Header   : 'QUESTIONS',
@@ -44,22 +47,22 @@ const addedQuestionsColumns = ({
 		},
 		{
 			Header   : 'TOPICS',
-			accessor : (items) => (items?.faq_topics?.length > 0 ? (
+			accessor : (items) => (!isEmpty(items?.faq_topics || []) ? (
 				<div className={styles.topics}>
-					{items.faq_topics.map((topic) => {
-						const { display_name } = topic || {};
-						return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
+					{(items.faq_topics || []).map((topic) => {
+						const { display_name, id } = topic || {};
+						return <Pill size="sm" color="green" key={id}>{startCase(display_name)}</Pill>;
 					})}
 				</div>
 			) : '-'),
 		},
 		{
 			Header   : 'TAGS',
-			accessor : (items) => (items?.faq_tags?.length > 0 ? (
+			accessor : (items) => (!isEmpty(items?.faq_tags || []) ? (
 				<div className={styles.tags}>
 					{items.faq_tags.map((tag) => {
-						const { display_name } = tag || {};
-						return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
+						const { display_name, id } = tag || {};
+						return <Pill size="sm" color="green" key={id}>{startCase(display_name)}</Pill>;
 					})}
 				</div>
 			) : '-'),
@@ -78,10 +81,23 @@ const addedQuestionsColumns = ({
 				</div>
 			),
 			accessor: (items) => {
-				const formatDate = format(items?.updated_at || items?.created_at, 'dd MMM yyyy hh:mm a');
+				const date = items?.updated_at || items?.created_at;
 				return (
 					<div>
-						{formatDate}
+						{formatDate({
+							date,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							formatType : 'date',
+						})}
+						,
+						{' '}
+
+						{formatDate({
+							date,
+							timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+							formatType : 'time',
+
+						})}
 					</div>
 				);
 			},
@@ -162,14 +178,16 @@ const requestedQuestionsColumns = ({
 	},
 	{
 		Header   : 'CREATED AT',
-		accessor : (items) => {
-			const formatDate = format(items?.created_at, 'dd MMM yyyy');
-			return (
-				<div>
-					{formatDate}
-				</div>
-			);
-		},
+		accessor : (items) => (
+			<div>
+				{formatDate({
+					date       : items?.created_at,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					formatType : 'date',
+				})}
+			</div>
+		)
+		,
 	},
 	{
 		Header   : 'ACTIONS',

@@ -6,13 +6,13 @@
 .pill {
 	margin-right: 8px;
 	margin-left: 0;
-	font-weight: 500;
+	font-weight: 800;
 	background-color: #fff9cf;
 }
 
 .pill_count {
-	-webkit-text-stroke: 1px black;
 	padding-left: 4px;
+
 }
 
 .header {

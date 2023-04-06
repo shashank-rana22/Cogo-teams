@@ -1,4 +1,4 @@
-import { Pill } from '@cogoport/components';
+import { Pill, Pagination } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -9,39 +9,27 @@ import useListfaqFeedback from './useListFaqFeedback';
 function QuestionFeedBack({ id, source = '', onClickEdit = () => {} }) {
 	const {
 		list,
-		// page,
-		// setPage,
-		// total_count,
-		// page_limit,
+		page,
+		setPage,
+		total_count,
+		page_limit,
+		answer_remark,
+		question_answer_remark,
+		question_remark,
 	} = useListfaqFeedback({ id });
 
-	let feedbackOnquestion = 0;
-	let feedbackOnAnswer = 0;
-	let feedbackonBoth = 0;
-
-	(list || []).forEach((ele) => {
-		const { remark = '' } = ele || {};
-
-		if ((remark || '').includes('Question not satisfactory.')) {
-			feedbackOnquestion += 1;
-		}
-		if ((remark || '').includes('Answer not satisfactory')) {
-			feedbackOnAnswer += 1;
-		}
-		if ((remark || '').includes('Answer not satisfactory')
-		&& (remark || '').includes('Question not satisfactory')) {
-			feedbackonBoth += 1;
-		}
-	});
-
-	const mapping = {
-		all                      : (list || []).length,
-		questions                : feedbackOnquestion,
-		answer                   : feedbackOnAnswer,
-		both_question_and_answer : feedbackonBoth,
+	const FEEDBACK_COUNT_MAPPING = {
+		all                      : total_count,
+		questions                : question_remark,
+		answer                   : answer_remark,
+		both_question_and_answer : question_answer_remark,
 	};
 
-	return (!isEmpty(list) && (
+	if (isEmpty(list)) {
+		return null;
+	}
+
+	return (
 		<div className={styles.container} style={{ width: source === 'create' ? '100%' : '80%' }}>
 			<div
 				className={styles.header}
@@ -51,28 +39,28 @@ function QuestionFeedBack({ id, source = '', onClickEdit = () => {} }) {
 
 			</div>
 			<div className={styles.pills_container}>
-				{Object.keys(mapping).map((ele) => (
-					<Pill className={styles.pill}>
-						{startCase(ele)}
+				{Object.keys(FEEDBACK_COUNT_MAPPING).map((feedbacks) => (
+					<Pill className={styles.pill} key={feedbacks}>
+						{startCase(feedbacks || '')}
 						{' '}
-						<span className={styles.pill_count}>{mapping[ele]}</span>
+						<span className={styles.pill_count}>{FEEDBACK_COUNT_MAPPING[feedbacks]}</span>
 					</Pill>
 				))}
 			</div>
 
 			<div className={styles.scrollable_container}>
 				{(list || []).map((element) => (
-					<div>
-						<FeedBackContent
-							feedback={element}
-							onClickEdit={onClickEdit}
-							id={id}
-							source={source}
-						/>
-					</div>
+					<FeedBackContent
+						feedback={element}
+						onClickEdit={onClickEdit}
+						id={id}
+						source={source}
+						key={id}
+
+					/>
 				))}
 
-				{/* {total_count > 5
+				{total_count > 5
 
 				&& (
 					<div className={styles.pagination_container}>
@@ -85,11 +73,10 @@ function QuestionFeedBack({ id, source = '', onClickEdit = () => {} }) {
 							onPageChange={setPage}
 						/>
 					</div>
-				)} */}
+				)}
 			</div>
 
 		</div>
-	)
 	);
 }
 

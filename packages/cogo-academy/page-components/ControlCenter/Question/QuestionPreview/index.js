@@ -112,8 +112,15 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 					&& <h5 className={styles.tags_title}>Tags</h5>}
 
 					<div className={styles.tags_container}>
-						{tags.map((item) => (
-							<button type="button" className={styles.tags_button}>{item}</button>
+						{tags.map((item, index) => (
+							<button
+								key={`${item}_${index + 1}`}
+								type="button"
+								className={styles.tags_button}
+							>
+								{item}
+
+							</button>
 						))}
 					</div>
 				</div>
@@ -123,8 +130,15 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 				&& <h5 className={styles.tags_title}>Topics</h5>}
 
 					<div className={styles.tags_container}>
-						{topics.map((item) => (
-							<button type="button" className={styles.tags_button}>{item}</button>
+						{topics.map((item, index) => (
+							<button
+								key={`${item}_${index + 1}`}
+								type="button"
+								className={styles.tags_button}
+							>
+								{item}
+
+							</button>
 						))}
 					</div>
 				</div>
@@ -134,8 +148,15 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 				&& <h5 className={styles.tags_title}>Audiences</h5>}
 
 					<div className={styles.tags_container}>
-						{audiences.map((item) => (
-							<button type="button" className={styles.tags_button}>{item}</button>
+						{audiences.map((item, index) => (
+							<button
+								key={`${item}_${index + 1}`}
+								type="button"
+								className={styles.tags_button}
+							>
+								{item}
+
+							</button>
 						))}
 					</div>
 				</div>

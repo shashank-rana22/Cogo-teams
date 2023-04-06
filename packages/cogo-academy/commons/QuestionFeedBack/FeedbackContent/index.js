@@ -1,5 +1,6 @@
 import { Avatar } from '@cogoport/components';
-import { format } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import styles from './styles.module.css';
 
@@ -16,16 +17,30 @@ function FeedBackContent({ feedback, onClickEdit = () => {}, id, source = '' }) 
 
 	const remarkContent = (remark || '').split('.');
 
-	const formatdated = format(updated_at, 'dd MMM, yyyy hh:mm a');
-
 	return (
 		<div>
-			<div className={styles.time_stamp}>{formatdated}</div>
+			<div className={styles.time_stamp}>
+				{formatDate({
+					date       : updated_at,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					formatType : 'date',
+				})}
+				{' '}
+				,
+
+				{formatDate({
+					date       : updated_at,
+					timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+					formatType : 'time',
+
+				})}
+
+			</div>
 
 			<div className={styles.card}>
 				<div className={styles.card_header}>
 					<Avatar
-						src={picture || 'https://www.w3schools.com/howto/img_avatar.png'}
+						src={picture || 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/img_avatar.png'}
 						alt="img"
 						size="40px"
 					/>
