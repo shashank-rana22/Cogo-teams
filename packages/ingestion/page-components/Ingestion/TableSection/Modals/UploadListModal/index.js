@@ -7,7 +7,7 @@ import useGetUploadList from '../../../../../hooks/useGetUploadList';
 
 import styles from './styles.module.css';
 
-function UploadListModal({ tableModal, setTableModal = () => {}, row = {} }) {
+function UploadListModal({ tableModal = '', setTableModal = () => {}, row = {} }) {
 	const { columns, onPageChange, data, loading } = useGetUploadList(row?.id);
 	const { list = [], page = 0, page_limit, total_count } = data || {};
 	const onClose = () => {

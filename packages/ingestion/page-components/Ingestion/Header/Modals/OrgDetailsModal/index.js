@@ -7,7 +7,7 @@ import { CpDiv, IeDiv, LeadDiv } from './NextHeading';
 import styles from './styles.module.css';
 
 function OrgDetailsModal({
-	setShow = () => {}, show = '', uploadData, formProps, modalControls,
+	setShow = () => {}, show = '', uploadData, formProps = {}, modalControls = [],
 
 }) {
 	const BACK_PAGE_MAPPING = {

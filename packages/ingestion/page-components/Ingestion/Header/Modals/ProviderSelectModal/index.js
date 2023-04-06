@@ -3,7 +3,7 @@ import { IcMUpload } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function ProviderSelectModal({ setShow = () => {}, show = '', setUploadData = () => {}, uploadData, formProps }) {
+function ProviderSelectModal({ setShow = () => {}, show = '', setUploadData = () => {}, uploadData, formProps = {} }) {
 	const { reset } = formProps;
 
 	const ProviderCpOptions = [

@@ -27,13 +27,12 @@ function Header({ refetch = () => {} }) {
 	const {
 		setUploadData = () => {},
 		uploadData = {},
-		formProps,
+		formProps = {},
 		modalControls = [],
 		show = '',
 		setShow = () => {},
 		onSubmit = () => {},
 		loading = false,
-
 	} = usePostIngestionData({ refetch });
 
 	const Component = INGESTION_COMPONENTS_MAPPING[show] || null;

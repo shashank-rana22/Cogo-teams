@@ -5,7 +5,7 @@ import useGetTemplate from '../../../../../hooks/useGetTemplate';
 
 import styles from './styles.module.css';
 
-function TemplateModal({ show, setShow = () => {} }) {
+function TemplateModal({ show = '', setShow = () => {} }) {
 	const { getTemplateCsv = () => {} } = useGetTemplate();
 
 	const onClose = () => {

@@ -48,14 +48,14 @@ function useGetIngestionList() {
 		{
 			key      : 'name',
 			Header   : 'FILE NAME',
-			accessor : ({ request_files }) => (
+			accessor : ({ request_files = [] }) => (
 				<div className={styles.name}>{startCase(request_files[0]?.sheet_name || '___')}</div>
 			),
 		},
 		{
 			key      : 'num_org',
 			Header   : 'NUMBER OF ORGS',
-			accessor : ({ request_files }) => (
+			accessor : ({ request_files = [] }) => (
 				<div className={styles.number_of_org}>{request_files[0]?.total_records_count || '___'}</div>
 
 			),

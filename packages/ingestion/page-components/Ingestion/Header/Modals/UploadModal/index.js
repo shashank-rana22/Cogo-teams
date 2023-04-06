@@ -7,7 +7,7 @@ import uploadControls from '../../../../../utils/upload-controls';
 import styles from './styles.module.css';
 
 function UploadModal({
-	setShow = () => {}, show = '', uploadData, formProps,
+	setShow = () => {}, show = '', uploadData, formProps = {},
 	onSubmit = () => {}, loading,
 }) {
 	const { control, formState: { errors }, handleSubmit, reset } = formProps;

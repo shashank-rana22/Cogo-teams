@@ -13,7 +13,7 @@ function TableSection(props) {
 		loading = false,
 		setTableModal = () => {},
 		tableModal = '',
-		data,
+		data = {},
 		row = {},
 		formProps = {},
 		params = {},
