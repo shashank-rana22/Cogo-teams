@@ -38,14 +38,6 @@ function ShowMore({ vendorId }:Props) {
 		},
 	];
 
-	useEffect(() => {
-		if (moreData) getList({ vendorId, expenseType, pageIndex, pageSize: 5 });
-	}, [expenseType, getList, moreData, pageIndex, vendorId]);
-
-	useEffect(() => {
-		setPageIndex(1);
-	}, [expenseType]);
-
 	const functions = {
 		renderCategory: (itemData:any) => {
 			const { category = '' } = itemData || {};
@@ -104,23 +96,7 @@ function ShowMore({ vendorId }:Props) {
 							<div>{formatDate(updatedAt, 'dd MMM yyyy', {}, false) || '-' }</div>
 						</div>
 					) : (
-						<>
-							<div className={styles.pending_approval}>Pending Approval</div>
-							{/* <div className={styles.link}>
-								<Button
-									style={{
-										background : 'none',
-										color      : mailLoading ? '#b0b0b0' : '#F68B21',
-										fontSize   : '11px',
-										padding    : '0px 4px',
-									}}
-									disabled={mailLoading}
-									onClick={() => { sendMail({ rowData: itemData, recurringState }); }}
-								>
-									Re-send Email
-								</Button>
-							</div> */}
-						</>
+						<div className={styles.pending_approval}>Pending Approval</div>
 					)}
 				</div>
 			);
@@ -173,6 +149,14 @@ function ShowMore({ vendorId }:Props) {
 			);
 		},
 	};
+
+	useEffect(() => {
+		if (moreData) getList({ vendorId, expenseType, pageIndex, pageSize: 5 });
+	}, [expenseType, getList, moreData, pageIndex, vendorId]);
+
+	useEffect(() => {
+		setPageIndex(1);
+	}, [expenseType]);
 
 	return (
 		<div className={styles.container}>

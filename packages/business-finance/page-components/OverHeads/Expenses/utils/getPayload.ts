@@ -54,7 +54,7 @@ const getPayload = ({
 	expenseType,
 	expenseConfigurationId,
 }) => {
-	const lineItemsData = lineItemsList?.map((lineItem:any) => {
+	const lineItemsData = (lineItemsList || []).map((lineItem:any) => {
 		if (lineItem?.tax) {
 			const { code, serviceName, productCode } = JSON.parse(lineItem?.tax) || {};
 

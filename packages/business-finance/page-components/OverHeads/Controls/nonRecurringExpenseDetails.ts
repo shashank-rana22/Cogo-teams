@@ -120,7 +120,7 @@ export const nonRecurringExpenseDetails = ({
 					label       : 'PAN',
 					type        : 'textarea',
 					value       : formData?.registrationNumber || null,
-					style       : { borderRadius: '4px', height: '40px', width: '170px', padding: '7px' },
+					className   : styles.pan,
 					placeholder : 'Autofilled PAN',
 					span        : 2.2,
 				},

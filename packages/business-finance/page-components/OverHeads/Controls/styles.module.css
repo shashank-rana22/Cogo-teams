@@ -9,3 +9,28 @@
 .select {
 	width: 170px;
 }
+.pan{
+	border-radius: 4px;
+	height: 40px;
+	width: 170px;
+	padding: 7px;
+}
+.agreement{
+	border-radius: 4px;
+	width: 164px;
+	height: 40px; 
+	padding: 7px;
+}
+.description{
+	border-radius: 4px; 
+	width: 1020px;
+	height: 72px; 
+	margin-top: 8px;
+	padding: 7px; 
+}
+.pan_area{
+	border-radius: 4px; 
+	width: 164px;
+	height: 40px; 
+	padding: 7px;
+}

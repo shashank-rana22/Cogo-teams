@@ -33,7 +33,7 @@ function UploadInvoice({
 }:Props) {
 	const {
 		uploadedInvoice:uploadUrl, invoiceCurrency,
-		invoiceNumber, invoiceDate, lineItemsList,
+		invoiceNumber, invoiceDate, lineItemsList = [],
 	} = formData || {};
 
 	const isLineItemPresent = lineItemsList?.[0]?.payable_amount;

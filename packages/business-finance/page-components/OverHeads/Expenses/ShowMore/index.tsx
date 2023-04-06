@@ -107,6 +107,7 @@ function ShowMore({ id, recurringState, showExpenseModal }:Props) {
 											billDocumentUrl = '',
 											subCategory = '',
 										} = bill || {};
+										const subCategoryFormatted = (subCategory || '').replaceAll('_', ' ');
 
 										return (
 											<div className={styles.data_div}>
@@ -126,7 +127,7 @@ function ShowMore({ id, recurringState, showExpenseModal }:Props) {
 												</div>
 												<div className={styles.section}>
 													<div>Sub category</div>
-													<div className={styles.element}>{showOverflowingNumber(subCategory, 12)}</div>
+													<div className={styles.element}>{showOverflowingNumber(subCategoryFormatted, 12)}</div>
 												</div>
 												<div className={styles.section}>
 													<div>Payable</div>
