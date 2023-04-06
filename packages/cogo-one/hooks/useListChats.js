@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import {
@@ -286,13 +287,17 @@ const useListChats = ({
 
 	const setActiveMessage = async (val) => {
 		const { channel_type, id } = val || {};
-		setActiveCard({ activeCardId: id, activeCardData: val });
 		if (channel_type && id) {
-			const messageDoc = doc(
-				firestore,
-				`${FIRESTORE_PATH[channel_type]}/${id}`,
-			);
-			await updateDoc(messageDoc, { new_message_count: 0 });
+			try {
+				const messageDoc = doc(
+					firestore,
+					`${FIRESTORE_PATH[channel_type]}/${id}`,
+				);
+				await updateDoc(messageDoc, { new_message_count: 0, has_admin_unread_message: false });
+				setActiveCard({ activeCardId: id, activeCardData: val });
+			} catch (e) {
+				Toast.error('Chat Not Found');
+			}
 		}
 	};
 
