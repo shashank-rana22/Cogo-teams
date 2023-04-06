@@ -93,7 +93,7 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 		},
 		{
 			Header   : 'Share',
-			accessor : (item) => `${item.percent_share.toFixed(2)}%` || '--',
+			accessor : (item) => `${item?.percent_share.toFixed(2)}%` || '--',
 			key      : 'share',
 		},
 		{
