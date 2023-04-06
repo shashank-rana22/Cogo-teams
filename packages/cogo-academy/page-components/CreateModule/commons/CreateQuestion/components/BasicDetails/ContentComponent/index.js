@@ -3,7 +3,7 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const constants = ['topic', 'audience_ids', 'question_type', 'difficulty_level', 'questions'];
+const constants = ['topic', 'question_type', 'difficulty_level', 'questions'];
 
 const getQuestionType = (question_type) => (question_type === 'case_study' ? 'Case Study' : 'Stand Alone');
 
@@ -12,7 +12,6 @@ const getValue = ({ item, editDetails }) => {
 
 	const MAPPING = {
 		question_type    : getQuestionType(question_type),
-		audience_ids     : '--',
 		difficulty_level : startCase(editDetails?.[item] || '--'),
 		topic            : editDetails?.[item] || '--',
 		questions        : test_case_study_questions.length,
