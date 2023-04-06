@@ -116,7 +116,7 @@ function Header(props) {
 				<Button
 					onClick={onClickViewAllConfig}
 					themeType="secondary"
-					className={styles.configButton}
+					className={styles.config_button}
 				>
 					View All Configurations
 				</Button>
