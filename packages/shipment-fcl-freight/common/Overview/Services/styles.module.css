@@ -1,0 +1,35 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	background-color: #fff;
+}
+
+.services_container {
+	display: flex;
+	width: 80%;
+	padding: 0 22px 29px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		width: 100%;
+		margin: 0 10px 0 30%;
+	}
+	@media (max-width: 768px) {
+		width: 100%;
+		margin: 0;
+	}
+}
+
+.title {
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 19px;
+	color: #393f70;
+}
+
+.upselling {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	width: 30%;
+}

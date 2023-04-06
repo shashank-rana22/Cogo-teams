@@ -22,7 +22,7 @@ const apis = [
 	{
 		api          : 'get_shipment',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'bookings',
 	},
 	{
 		api          : 'get_shipment_timeline',
@@ -114,13 +114,13 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'partner',
 	},
-	{ api: 'create_chat_message', access_type: 'private' },
-	{ api: 'list_chat_channels', access_type: 'private' },
+	{ api: 'create_chat_message', access_type: 'private', service_name: 'chat' },
+	{ api: 'list_chat_channels', access_type: 'private', service_name: 'chat' },
 	{ api: 'delete_chat_message', access_type: 'private' },
-	{ api: 'update_chat_message', access_type: 'private' },
+	{ api: 'update_chat_message', access_type: 'private', service_name: 'chat' },
 	{ api: 'get_chat_channel', access_type: 'private' },
 	{ api: 'create_chat_channel', access_type: 'private' },
-	{ api: 'update_chat_channel_seen', access_type: 'private' },
+	{ api: 'update_chat_channel_seen', access_type: 'private', 	service_name: 'chat'	},
 	{
 		api          : 'bulk_update_shipment_services',
 		access_type  : 'private',

@@ -1,0 +1,29 @@
+.top_header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+
+.header {
+	display: flex;
+}
+
+.container {
+	padding-top: 10px;
+	margin-top: 20px;
+	background-color: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(0 0 0 / 20%);
+}
+
+.loader {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+.loader_icon {
+	width: 50px;
+}
