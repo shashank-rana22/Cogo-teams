@@ -1,6 +1,7 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
+import { useState, useEffect } from 'react';
 
 import feedbackDataColumns from '../../constants/feedback-data-columns';
 import useListUserFeedbacks from '../../hooks/useListUserFeedbacks';
@@ -14,14 +15,13 @@ import UserProfile from './UserProfile';
 
 function UserStats({ source = '' }) {
 	const router = useRouter();
+	const [userId, setUserId] = useState('');
 
 	const {
 		general: {
 			query: { user_id = '', path = '' },
 		},
 	} = useSelector((state) => state);
-
-	const userId = user_id;
 
 	const handleClick = () => {
 		router.push(`${path}`);
@@ -42,6 +42,8 @@ function UserStats({ source = '' }) {
 	const columnsToShow = feedbackDataColumns.userStats;
 
 	const columns = useGetColumns({ columnsToShow });
+
+	useEffect(() => { if (user_id) { setUserId(user_id); } }, [user_id]);
 
 	return (
 		<div className={styles.container}>
