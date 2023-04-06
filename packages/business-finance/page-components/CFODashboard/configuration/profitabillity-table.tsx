@@ -1,24 +1,18 @@
-import { Pill } from '@cogoport/components';
+import { Pill, Tooltip, cl } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
-import showOverflowingNumber from '../../commons/showOverflowingNumber';
 import getFormattedPrice from '../../commons/utils/getFormattedPrice';
+import GetSortingData from '../Logistics/Profitabillity/profitabilitySorting';
 
 import styles from './styles.module.css';
 
-const profitabillityColumn = [
+const profitabillityColumn = (sort, setSort) => [
 	{
 		Header   : 'SID',
 		id       : 'jobNumber',
 		accessor : (row) => (
-			<div style={{
-				display       : 'flex',
-				flexDirection : 'column',
-				marginLeft    : '16px',
-				fontWeight    : '500',
-			}}
-			>
-				<span style={{ color: '#F68B21', textDecorationLine: 'underline' }}>{row?.jobNumber}</span>
+			<div className={styles.jobnumber_text_style}>
+				<span className={styles.jobnumber_text}>{row?.jobNumber}</span>
 				<span>
 					{startCase(row?.shipmentType)}
 				</span>
@@ -29,16 +23,22 @@ const profitabillityColumn = [
 		Header   : 'Name',
 		id       : 'businessName',
 		accessor : (row) => (
-
 			<div
-				style={{
-					fontWeight : '500',
-					fontSize   : '12px',
-					marginLeft : '-10px',
-				}}
-				className={styles.sentence_case}
+				className={cl`${styles.sentence_case} ${styles.business_text_style}`}
 			>
-				{showOverflowingNumber(row?.businessName, 12)}
+				<Tooltip
+					content={(
+						<div className={styles.tooltip_text}>
+							{row?.businessName}
+						</div>
+					)}
+					interactive
+				>
+					<div>
+						{(row?.businessName as string).substring(0, 12)}
+						...
+					</div>
+				</Tooltip>
 			</div>
 
 		),
@@ -47,14 +47,8 @@ const profitabillityColumn = [
 		Header   : 'Entity',
 		id       : 'entity',
 		accessor : (row) => (
-
 			<div
-				style={{
-					fontWeight  : '500',
-					fontSize    : '12px',
-					marginRight : '20px',
-				}}
-				className={styles.sentence_case}
+				className={cl`${styles.sentence_case} ${styles.entity_text_style}`}
 			>
 				{row?.entity}
 			</div>
@@ -66,7 +60,7 @@ const profitabillityColumn = [
 		Header   : 'Booked Income',
 		id       : 'income',
 		accessor : (row) => (
-			<div style={{ marginLeft: '-6px', fontWeight: '500' }}>
+			<div className={styles.expense_text_style}>
 				{getFormattedPrice(
 					Math.abs(row?.income),
 					'INR',
@@ -79,7 +73,7 @@ const profitabillityColumn = [
 		Header   : 'Booked Expense',
 		id       : 'expense',
 		accessor : (row) => (
-			<div style={{ marginLeft: '-6px', fontWeight: '500' }}>
+			<div className={styles.expense_text_style}>
 				{getFormattedPrice(
 					row?.expense,
 					'INR',
@@ -89,10 +83,10 @@ const profitabillityColumn = [
 
 	},
 	{
-		Header   : 'Profitability',
+		Header   : <GetSortingData sort={sort} setSort={setSort} />,
 		id       : 'profitability',
 		accessor : (row) => (
-			<div>
+			<div className={styles.text_weight}>
 				{ row?.profitability.toFixed(2) }
 				<text>%</text>
 			</div>
