@@ -5,7 +5,7 @@ import { useRequest } from '@cogoport/request';
 import formatPayload from '../helpers/service-upsell-payload';
 import getApiErrorString from '../utils/getApiErrorString';
 
-const useCreateSpotSearch = ({ service = {}, primary_service = {}, shipmentData = {}, services = [] }) => {
+const useCreateUpsell = ({ service = {}, primary_service = {}, shipmentData = {} }) => {
 	const router = useRouter();
 
 	const { query } = router;
@@ -19,7 +19,6 @@ const useCreateSpotSearch = ({ service = {}, primary_service = {}, shipmentData 
 	const onAddService = async (values) => {
 		const { payload } = formatPayload({
 			service,
-			services,
 			primary_service,
 			shipmentData,
 			formValues: values,
@@ -44,4 +43,4 @@ const useCreateSpotSearch = ({ service = {}, primary_service = {}, shipmentData 
 	};
 };
 
-export default useCreateSpotSearch;
+export default useCreateUpsell;

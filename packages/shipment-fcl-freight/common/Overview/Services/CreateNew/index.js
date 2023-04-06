@@ -68,7 +68,7 @@ function CreateNew({
 					<Footer
 						onClose={() => setUpsellModal(false)}
 						formProps={formProps}
-						service={service}
+						service={upsellableService}
 						shipmentData={shipmentData}
 						services={servicesList}
 						primary_service={primary_service}

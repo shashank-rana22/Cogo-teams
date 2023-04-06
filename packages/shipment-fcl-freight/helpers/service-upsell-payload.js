@@ -1,5 +1,5 @@
 const formatDataForSingleService = ({ rawParams }) => {
-	const { search_type, trade_type, formValues, primary_service } = rawParams;
+	const { trade_type, search_type, primary_service, formValues } = rawParams;
 
 	if (search_type === 'fcl_cfs') {
 		if (trade_type === 'export') {
@@ -98,17 +98,9 @@ const formatPayload = ({
 	shipmentData = {},
 	primary_service,
 }) => {
-	const search_type = service.service;
+	const search_type = service?.service_type.replace('_service', '');
 
-	let trade_type;
-
-	if (service?.type === 'origin') {
-		trade_type = 'export';
-	}
-
-	if (service.type === 'destination') {
-		trade_type = 'import';
-	}
+	const { trade_type } = service;
 
 	const rawParams = {
 		trade_type,

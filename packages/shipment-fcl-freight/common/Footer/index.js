@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
 
-import useCreateSpotSearch from '../../hooks/useCreateSpotSearch';
+import useCreateUpsell from '../../hooks/useCreateUpsell';
 
 import styles from './styles.module.css';
 
@@ -11,18 +11,16 @@ function Footer({
 	service = {},
 	shipmentData = {},
 	formProps = {},
-	services = [],
 
 }) {
 	const { watch } = formProps;
 
 	const formValues = watch();
 
-	const { onAddService, isLoading = false } = useCreateSpotSearch({
+	const { onAddService, isLoading = false } = useCreateUpsell({
 		primary_service,
 		service,
 		shipmentData,
-		services,
 	});
 
 	return (
