@@ -8,7 +8,7 @@ function CardItem({ data = {}, index = 0 }) {
 	return (
 		<div className={styles.container} style={{ marginLeft: index === 0 ? '' : '36px' }}>
 			<div className={styles.upperpart}>
-				<div className={styles.icon}><img src={icon_url} alt="icon" width={80} /></div>
+				<div className={styles.icon}><img src={icon_url} alt="icon" width={70} /></div>
 			</div>
 			<div className={styles.lowerpart}>
 				<div className={styles.heading}>{heading}</div>
