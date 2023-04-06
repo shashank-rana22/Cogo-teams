@@ -60,15 +60,17 @@ const useSendMessage = ({ channel_type = '', activeChatCollection }) => {
 					sender_user_id : id,
 				},
 			});
-			await addDoc(activeChatCollection, { ...adminChat, communication_id: res.data.id });
+			await addDoc(activeChatCollection, { ...adminChat, communication_id: res?.data?.id });
 			scrollToBottom();
 			const old_count = document.data().new_user_message_count;
 
 			await updateDoc(messageFireBaseDoc, {
-				new_message_count      : 0,
-				last_message_document  : { ...adminChat, communication_id: res.data.id } || {},
-				new_message_sent_at    : Date.now(),
-				new_user_message_count : old_count + 1,
+				new_message_count         : 0,
+				has_admin_unread_messages : false,
+				last_message              : adminChat.response.message || '',
+				last_message_document     : { ...adminChat, communication_id: res.data.id } || {},
+				new_message_sent_at       : Date.now(),
+				new_user_message_count    : old_count + 1,
 			});
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
