@@ -34,7 +34,8 @@ const useGetControls = ({ expertiseTypeWatch }) => {
 			label : 'Condition Name',
 			type  : 'text',
 			rules : {
-				required: 'Specify Condition',
+				required : 'Specify Condition',
+				validate : (value) => (value.includes("'") ? 'Apostrophe is not allowed' : undefined),
 			},
 		},
 		{
