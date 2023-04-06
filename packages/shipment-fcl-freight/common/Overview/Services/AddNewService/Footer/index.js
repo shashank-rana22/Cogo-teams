@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
 
-import useCreateUpsell from '../../hooks/useCreateUpsell';
+import useCreateUpsell from '../../../../../hooks/useCreateUpsell';
 
 import styles from './styles.module.css';
 
@@ -17,7 +17,7 @@ function Footer({
 
 	const formValues = watch();
 
-	const { onAddService, isLoading = false } = useCreateUpsell({
+	const { onAddService, loading } = useCreateUpsell({
 		primary_service,
 		service,
 		shipmentData,
@@ -28,7 +28,7 @@ function Footer({
 			<Button
 				className="secondary md"
 				onClick={onClose}
-				disabled={isLoading}
+				disabled={loading}
 				id="shipment_form_header_cancel"
 			>
 				Cancel
@@ -37,12 +37,12 @@ function Footer({
 			<Button
 				type="submit"
 				className="primary md"
-				disabled={isLoading}
+				disabled={loading}
 				onClick={() => (onAddService(formValues))}
 				style={{ marginLeft: 16 }}
 				id="shipment_form_header_submit"
 			>
-				{isLoading ? 'Adding Service...' : 'Submit'}
+				{loading ? 'Adding Service...' : 'Submit'}
 			</Button>
 		</div>
 	);
