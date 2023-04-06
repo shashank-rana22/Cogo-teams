@@ -1,0 +1,10 @@
+.details_prime_container {
+	display: flex;
+	flex-direction: column;
+}
+
+.customer_cards_past_month {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+}

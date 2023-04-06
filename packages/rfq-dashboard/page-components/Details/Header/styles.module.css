@@ -1,0 +1,26 @@
+.header_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.back_path_section {
+	display: flex;
+	align-items: center;
+}
+
+.back_icon {
+	cursor: pointer;
+}
+
+.heading {
+	padding-left: 5px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.requested_date_section {
+	font-size: 12px;
+	color: #4f4f4f;
+}
