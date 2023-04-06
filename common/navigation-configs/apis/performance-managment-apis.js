@@ -148,6 +148,11 @@ const performance_management = {
 			service_name : 'iris',
 		},
 		{
+			api          : 'post_iris_update_file',
+			access_type  : 'private',
+			service_name : 'iris',
+		},
+		{
 			api          : 'get_iris_list_logs',
 			access_type  : 'private',
 			service_name : 'iris',

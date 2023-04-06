@@ -4,7 +4,7 @@ import UploadController from '@cogoport/forms/page-components/Controlled/UploadC
 import { IcMInfo } from '@cogoport/icons-react';
 import { useIrisRequest } from '@cogoport/request';
 import { startCase, isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import Filters from '../../../../../../common/Filters';
 import sampleTypeCsv from '../../../../../../constants/sample-type-csv';
@@ -12,8 +12,7 @@ import getDefaultFeedbackMonth from '../../../../../../utils/getDefaultYearMonth
 
 import styles from './styles.module.css';
 
-function PipUploadModal({ modal, setModal = () => {}, logType = '' }) {
-	const [files, setFiles] = useState({});
+function PipUploadModal({ item = {}, modal, setModal = () => {}, logType = '', setRefetchList = () => {} }) {
 	const [type, setType] = useState(logType);
 	const { feedbackMonth, feedbackYear } = getDefaultFeedbackMonth();
 
@@ -23,7 +22,7 @@ function PipUploadModal({ modal, setModal = () => {}, logType = '' }) {
 	});
 
 	const [{ loading : uploadLoading = false }, trigger] = useIrisRequest({
-		url    : 'post_iris_create_file',
+		url    : logType === 'correction' ? 'update_file' : 'post_iris_create_file',
 		method : 'post',
 	}, { manual: true });
 
@@ -31,26 +30,27 @@ function PipUploadModal({ modal, setModal = () => {}, logType = '' }) {
 
 	const uploadedCSVFile = watch('uploaded_csv_file');
 
-	useEffect(() => setFiles({
-		uploadedCSVFile: uploadedCSVFile || undefined,
-	}), [uploadedCSVFile]);
-
 	const isUploadPossible = type === 'normalization' ? !!params.Month : true;
 
 	const uploadCSVs = async () => {
 		try {
 			await trigger({
 				data: {
-					CsvUrl   : files.uploadedCSVFile,
-					...(type === 'normalization' && params),
-					CsvType  : type === 'normalization' ? 'approve_ratings' : type,
-					FileName : uploadedCSVFile.split('/').slice(-1).join('').replaceAll('%', ' '),
+					...(type === 'correction' ? { Url: uploadedCSVFile?.finalUrl, FileID: item.id } : {
+						CsvUrl: uploadedCSVFile?.finalUrl,
+						...(type === 'normalization' && {
+							Year  : params.Year?.toString(),
+							Month : params.Month?.toString(),
+						}),
+						CsvType  : type === 'normalization' ? 'approve_ratings' : type,
+						FileName : uploadedCSVFile?.fileName,
+					}),
 				},
 			});
 
 			Toast.success('File sent for processing. Please check after some time...');
-			setFiles({});
 			setModal('');
+			setRefetchList(true);
 		} catch (e) {
 			Toast.error(e.response?.data.error?.toString());
 		}
@@ -99,7 +99,6 @@ function PipUploadModal({ modal, setModal = () => {}, logType = '' }) {
 						{type && (
 							<div
 								className={styles.upload_info}
-								style={{ background: files.normalizationCSV ? '#e0e0e0' : '' }}
 							>
 								<div>
 									<div className={styles.upload_header}>
@@ -150,7 +149,7 @@ function PipUploadModal({ modal, setModal = () => {}, logType = '' }) {
 								<Button
 									themeType="primary"
 									onClick={() => uploadCSVs()}
-									disabled={!isUploadPossible || isEmpty(files?.uploadedCSVFile)}
+									disabled={!isUploadPossible || isEmpty(uploadedCSVFile)}
 									loading={uploadLoading}
 								>
 									Submit

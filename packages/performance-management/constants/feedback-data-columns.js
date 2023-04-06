@@ -14,7 +14,7 @@ const feedbackDataColumns = {
 	},
 	managerProbationList : ['name', 'designation', 'start_date', 'end_date', 'status', 'action'],
 	uploadedFiles        : ['name', 'number_of_employees', 'start_date', 'upload_type',
-		'uploaded_by', 'error_report', 'download_csv'],
+		'uploaded_by', 'error_report', 'reupload', 'download_csv'],
 	pipProbationList : ['name', 'designation', 'manager', 'status', 'start_date', 'end_date'],
 	reAssignModal    : ['name', 'designation', 'manager'],
 	employeeList     : ['name', 'cogo_id', 'department', 'designation', 'employment_status',

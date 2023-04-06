@@ -1,21 +1,29 @@
+import { useState, useEffect } from 'react';
+
 import useGetColumns from '../../../../../common/Columns';
 import Filters from '../../../../../common/Filters';
 import UserTableData from '../../../../../common/UserTableData';
 import feedbackDataColumns from '../../../../../constants/feedback-data-columns';
+import modalComoponentsMapping from '../../../../../constants/modal-components-mapping';
 
 import styles from './styles.module.css';
 import useListFiles from './useListFiles';
 
 function UploadedFiles({
 	activeTab, logType,
-	setItem = () => {},
+	modal = '',
+	setModal = () => {},
 }) {
+	const [item, setItem] = useState({});
+	const [refetchList, setRefetchList] = useState(false);
+
 	const {
 		data:uploadedFilesData = {},
 		loading,
 		params,
 		setParams,
 		setPage,
+		refetchFiles,
 	} = useListFiles({ logType });
 
 	const { list = [], pagination_data = {} } = uploadedFilesData;
@@ -26,8 +34,17 @@ function UploadedFiles({
 		columnsToShow,
 		activeTab,
 		setItem,
+		setModal,
 		source: 'uploaded_files',
 	});
+
+	const ModalComponent = modalComoponentsMapping[modal]?.Component;
+
+	useEffect(() => {
+		if (refetchList) {
+			refetchFiles();
+		}setRefetchList(false);
+	}, [refetchFiles, refetchList]);
 
 	return (
 		<div className={styles.container}>
@@ -47,6 +64,19 @@ function UploadedFiles({
 				setPagination={setPage}
 				total_count={total_count}
 			/>
+
+			{modal
+				&& (
+					<ModalComponent
+						item={item}
+						setItem={setItem}
+						modal={modal}
+						setModal={setModal}
+						refetchList={refetchList}
+						setRefetchList={setRefetchList}
+						logType="correction"
+					/>
+				)}
 		</div>
 	);
 }

@@ -54,7 +54,7 @@ function HRDashboard() {
 					</TabPanel>
 
 					<TabPanel name="uploaded_files" title="Uploaded Files">
-						<UploadedFiles />
+						<UploadedFiles modal={modal} setModal={setModal} />
 					</TabPanel>
 				</Tabs>
 			</div>

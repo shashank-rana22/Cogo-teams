@@ -1,5 +1,5 @@
 import { Tooltip, ButtonIcon, Pill, Button, cl } from '@cogoport/components';
-import { IcMExclamation, IcMArrowNext, IcMDownload, IcMArrowRight } from '@cogoport/icons-react';
+import { IcMUpload, IcMExclamation, IcMArrowNext, IcMDownload, IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty, getYear, getMonth, format, startCase } from '@cogoport/utils';
 
@@ -430,6 +430,29 @@ const useGetColumns = ({
 		),
 		id  : 'error_report',
 		key : 'error_report',
+	},
+	{
+		Header   : <div className={styles.head} />,
+		accessor : (item) => (
+			<div className={styles.head_content}>
+				{item.error_url && (
+					<Button
+						themeType="secondary"
+						size="sm"
+						onClick={() => {
+							setItem(item);
+							setModal('upload');
+						}}
+					>
+						<IcMUpload style={{ marginRight: '4px' }} />
+						Reupload
+					</Button>
+				)}
+
+			</div>
+		),
+		id  : 'reupload',
+		key : 'reupload',
 	},
 	{
 		Header   : <div className={styles.head} />,
