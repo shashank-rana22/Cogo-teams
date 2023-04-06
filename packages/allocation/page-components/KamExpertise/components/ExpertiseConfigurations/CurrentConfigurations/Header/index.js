@@ -31,6 +31,7 @@ function Header(props) {
 		refetch,
 		expertiseRefetch,
 		cardRefetch,
+		onClickViewAllConfig,
 	} = props;
 
 	const {
@@ -114,46 +115,53 @@ function Header(props) {
 				</div>
 			</div>
 
-			<div>
+			<div className={styles.button_container}>
+				<Button
+					onClick={onClickViewAllConfig}
+					themeType="secondary"
+					className={styles.configButton}
+				>
+					View All Configurations
+				</Button>
+
 				<Button onClick={() => setShowModal(true)}>
 					Create
 				</Button>
-
-				{showModal && (
-					<Modal
-						size="md"
-						show={showModal}
-						onClose={onClose}
-						placement="top"
-					>
-						<Modal.Header title="Create" />
-
-						<Modal.Body>
-							{Component && (
-								<Component
-									key={mode}
-									{...(componentProps[mode] || {})}
-								/>
-							)}
-						</Modal.Body>
-
-						{mode === PUBLISHED_VERSION ? (
-							<Modal.Footer className={styles.test}>
-								<ModalFooter
-									setMode={setMode}
-									setSelectedVersion={setSelectedVersion}
-									setShowModal={setShowModal}
-									selectedVersion={selectedVersion}
-									mode={mode}
-									onCreate={onCreate}
-									createModalLoading={createModalLoading}
-									versionName={versionName}
-								/>
-							</Modal.Footer>
-						) : null}
-					</Modal>
-				)}
 			</div>
+			{showModal && (
+				<Modal
+					size="md"
+					show={showModal}
+					onClose={onClose}
+					placement="top"
+				>
+					<Modal.Header title="Create" />
+
+					<Modal.Body>
+						{Component && (
+							<Component
+								key={mode}
+								{...(componentProps[mode] || {})}
+							/>
+						)}
+					</Modal.Body>
+
+					{mode === PUBLISHED_VERSION ? (
+						<Modal.Footer className={styles.test}>
+							<ModalFooter
+								setMode={setMode}
+								setSelectedVersion={setSelectedVersion}
+								setShowModal={setShowModal}
+								selectedVersion={selectedVersion}
+								mode={mode}
+								onCreate={onCreate}
+								createModalLoading={createModalLoading}
+								versionName={versionName}
+							/>
+						</Modal.Footer>
+					) : null}
+				</Modal>
+			)}
 		</div>
 	);
 }
