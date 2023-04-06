@@ -25,7 +25,6 @@ function FilterComponents({
 	setFilterVisible = () => {},
 	setAppliedFilters = () => {},
 	appliedFilters = {},
-	setActiveCardId = () => {},
 	setShowBotMessages = () => {},
 	isomniChannelAdmin = false,
 	tagOptions = [],
@@ -71,7 +70,6 @@ function FilterComponents({
 	const checkFiltersCount = Object.keys(filterValues).length;
 
 	const handleClick = () => {
-		setActiveCardId('');
 		setAppliedFilters(filterValues);
 		setFilterVisible(false);
 		if (!isomniChannelAdmin) {

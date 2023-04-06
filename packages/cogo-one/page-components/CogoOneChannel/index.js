@@ -82,13 +82,13 @@ function CogoOne() {
 	};
 
 	const {
-		listData = {},
+		chatsData = {},
 		setActiveMessage = () => {},
 		activeMessageCard = {},
 		setAppliedFilters = () => {},
 		appliedFilters,
 		loading,
-		setActiveCardId,
+		setActiveCard,
 		activeCardId,
 		firstLoading,
 		updateLeaduser,
@@ -100,21 +100,6 @@ function CogoOne() {
 		showBotMessages,
 		searchValue,
 	});
-	const { messagesList = [], unReadChatsCount } = listData;
-
-	useEffect(() => {
-		if (!firstLoading) {
-			setActiveVoiceCard({});
-			setActiveCardId('');
-			setActiveMail({});
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeTab, showBotMessages]);
-
-	useEffect(() => {
-		setToggleStatus(status === 'active');
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(agentStatus)]);
 
 	const renderComponent = () => {
 		if ((activeTab === 'message' && !isEmpty(activeMessageCard))
@@ -138,7 +123,6 @@ function CogoOne() {
 							activeMessageCard={activeMessageCard}
 							activeTab={activeTab}
 							activeVoiceCard={activeVoiceCard}
-							firestore={firestore}
 							updateLeaduser={updateLeaduser}
 							activeCardId={activeCardId}
 						/>
@@ -153,10 +137,21 @@ function CogoOne() {
 		);
 	};
 
+	useEffect(() => {
+		if (!firstLoading) {
+			setActiveVoiceCard({});
+			setActiveCard({});
+			setActiveMail({});
+		}
+	}, [activeTab, firstLoading, setActiveCard, showBotMessages]);
+
+	useEffect(() => {
+		setToggleStatus(status === 'active');
+	}, [status]);
+
 	return (
 		<div className={styles.layout_container}>
 			<Customers
-				setActiveCardId={setActiveCardId}
 				isomniChannelAdmin={isomniChannelAdmin}
 				setActiveMessage={setActiveMessage}
 				activeMessageCard={activeMessageCard}
@@ -170,8 +165,7 @@ function CogoOne() {
 				setActiveTab={setActiveTab}
 				setToggleStatus={setToggleStatus}
 				toggleStatus={toggleStatus}
-				messagesList={messagesList}
-				unReadChatsCount={unReadChatsCount}
+				chatsData={chatsData}
 				appliedFilters={appliedFilters}
 				setAppliedFilters={setAppliedFilters}
 				fetchworkPrefernce={fetchworkPrefernce}
@@ -192,6 +186,7 @@ function CogoOne() {
 				modalType={modalType}
 				tagOptions={tagOptions}
 				mailProps={mailProps}
+				firestore={firestore}
 			/>
 
 			<div className={styles.chat_details_continer}>

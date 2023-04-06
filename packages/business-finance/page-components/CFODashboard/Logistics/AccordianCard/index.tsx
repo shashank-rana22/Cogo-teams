@@ -221,7 +221,7 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 																	<Placeholder
 																		height="20px"
 																		width="100px"
-																		margin="	10px 40px 20px 0px"
+																		margin="10px 40px 20px 0px"
 																	/>
 																)
 																: (
@@ -291,7 +291,7 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 													/>
 												) : (
 													<>
-														<div>
+														<div style={{ fontWeight: '600' }}>
 															{showInTooltop(
 																getFormattedPrice(accordianStatsData
 																	?.arData?.overdueAmount, 'INR'),
@@ -338,7 +338,7 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 													/>
 												) : (
 													<>
-														<div>
+														<div style={{ fontWeight: '600' }}>
 															{showInTooltop(
 																getFormattedPrice(Math.abs(accordianStatsData
 																	?.apData?.overdueAmount), 'INR'),
