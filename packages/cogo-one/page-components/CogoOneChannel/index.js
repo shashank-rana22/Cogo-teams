@@ -126,6 +126,7 @@ function CogoOne() {
 							updateLeaduser={updateLeaduser}
 							activeCardId={activeCardId}
 							setActiveMessage={setActiveMessage}
+							setModalType={setModalType}
 						/>
 					)}
 				</>
