@@ -188,7 +188,7 @@ const useVendorList = () => {
 			),
 		},
 		{
-			Header   : 'PAN/GST',
+			Header   : 'PAN',
 			id       : 'registration_number',
 			accessor : ({ registration_number = '' }) => (
 				<section className={styles.bold}>

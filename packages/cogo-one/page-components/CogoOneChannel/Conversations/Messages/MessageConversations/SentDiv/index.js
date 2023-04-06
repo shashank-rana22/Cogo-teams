@@ -21,7 +21,7 @@ function SentDiv({
 		message_status = '',
 	} = eachMessage;
 
-	const { btns = [], list = [] } = response;
+	const { btns = [], list = [] } = response || {};
 	const [showList, setShowList] = useState(false);
 
 	const date = format(new Date(created_at), 'dd MMM YYYY, HH:mm');

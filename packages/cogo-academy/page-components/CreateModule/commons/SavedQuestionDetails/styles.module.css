@@ -1,0 +1,38 @@
+.table_container {
+	max-width: 100%;
+	padding: unset !important;
+	margin-top: 12px;
+	overflow: auto;
+
+	:global {
+		.ui_table_head_row {
+			.ui_table_head_cell {
+				padding: 20px;
+				margin-bottom: 10px;
+				font-size: 14px;
+				color: #000;
+				background-color: rgb(255 255 255 / 80%);
+			}
+		}
+
+		.ui_table_body_container {
+			background-color: #fff;
+
+			.ui_table_body_row {
+				border-radius: 8px;
+
+				.ui_table_body_cell {
+					padding: 12px;
+					font-size: 14px;
+					color: #221f20;
+				}
+			}
+		}
+	}
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+	margin: 24px;
+}

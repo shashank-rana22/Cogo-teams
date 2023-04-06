@@ -74,6 +74,7 @@ importers:
       '@cogoport/translate': workspace:0.1.0
       '@cogoport/utils': ^1.2.6
       '@cogoport/vendor-rm': workspace:0.1.0
+      '@cogoport/welcome': workspace:0.1.0
       '@next/bundle-analyzer': ^13.2.3
       '@types/node': ^18.14.5
       '@types/react': ^18.0.28
@@ -110,6 +111,7 @@ importers:
       '@cogoport/translate': link:../packages/Translation
       '@cogoport/utils': 1.2.6
       '@cogoport/vendor-rm': link:../packages/vendor-rm
+      '@cogoport/welcome': link:../packages/welcome
       '@next/bundle-analyzer': 13.2.4
       '@types/node': 18.15.0
       '@types/react': 18.0.28
@@ -370,7 +372,7 @@ importers:
 
   packages/cogo-academy:
     specifiers:
-      '@cogoport/charts': ^1.0.1
+      '@cogoport/charts': ^1.0.2
       '@cogoport/components': ^1.0.359
       '@cogoport/forms': workspace:*
       '@cogoport/globalization': workspace:*
@@ -384,7 +386,7 @@ importers:
       react: 18.2.0
       react-rte: ^0.16.5
     dependencies:
-      '@cogoport/charts': 1.0.1_react@18.2.0
+      '@cogoport/charts': 1.0.2_react@18.2.0
       '@cogoport/components': 1.0.366_4o7yor53awafeuvdjrs2cbhz3i
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
@@ -525,6 +527,7 @@ importers:
       html2canvas: ^1.4.1
       jspdf: ^2.5.1
       react: 18.2.0
+      uuid: ^9.0.0
     dependencies:
       '@cogoport/components': 1.0.366_4o7yor53awafeuvdjrs2cbhz3i
       '@cogoport/forms': link:../../common/forms
@@ -537,6 +540,7 @@ importers:
       html2canvas: 1.4.1
       jspdf: 2.5.1
       react: 18.2.0
+      uuid: 9.0.0
 
   packages/locations:
     specifiers:
@@ -669,6 +673,32 @@ importers:
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.6
+      react: 18.2.0
+
+  packages/welcome:
+    specifiers:
+      '@cogoport/charts': ^1.0.1
+      '@cogoport/components': ^1.0.359
+      '@cogoport/core': workspace:*
+      '@cogoport/icons-react': ^1.0.58
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.6
+      axios: ^1.3.4
+      axios-hooks: ^4.0.0
+      react: 18.2.0
+    dependencies:
+      '@cogoport/charts': 1.0.1_react@18.2.0
+      '@cogoport/components': 1.0.366_uffp5ldixb4cfaot3z7zbxlpbm
+      '@cogoport/core': link:../../common/core
+      '@cogoport/icons-react': 1.0.65_react@18.2.0
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.6
+      axios: 1.3.4
+      axios-hooks: 4.0.0_axios@1.3.4+react@18.2.0
       react: 18.2.0
 
 packages:
@@ -1999,6 +2029,32 @@ packages:
       '@nivo/stream': 0.80.0_6zomopewppbkd5eeu2nbbcio3i
       '@nivo/sunburst': 0.80.0_6zomopewppbkd5eeu2nbbcio3i
       '@nivo/tooltip': 0.80.0_wyuiu3ihipn7hpncy62nqhyrji
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
+  /@cogoport/charts/1.0.2_react@18.2.0:
+    resolution: {integrity: sha512-drFmQZ3GW5upV9rkKG8xZXm3rIXS4jsk8S6CiWyXPjb26LweKkF/97LXMP4YL4L7t9zzh7FtXInIKOyawuOHOg==}
+    peerDependencies:
+      react: ^18.2.0
+    dependencies:
+      '@nivo/bar': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/bullet': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/bump': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/calendar': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/core': 0.80.0_owushstsnvapaxzneadhkyoeea
+      '@nivo/funnel': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/geo': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/line': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/marimekko': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/pie': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/radial-bar': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/scatterplot': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/stream': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/sunburst': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/tooltip': 0.80.0_vpsqasc34janocxdlqh4y4bymy
       react: 18.2.0
     transitivePeerDependencies:
       - prop-types
@@ -3817,6 +3873,44 @@ packages:
       '@nivo/core': 0.80.0_owushstsnvapaxzneadhkyoeea
       '@nivo/legends': 0.80.0_vpsqasc34janocxdlqh4y4bymy
       '@nivo/tooltip': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      d3-shape: 1.3.7
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
+  /@nivo/polar-axes/0.80.0_vpsqasc34janocxdlqh4y4bymy:
+    resolution: {integrity: sha512-lhk8ZtpEg7qT6/UFnrXOd0Tg5M6ZipTxjT2JmC6gxAADDiha5BzlAuBZaSudgbwhWbnzTdNGqHBkR5Dp/yqUcA==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/arcs': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/core': 0.80.0_owushstsnvapaxzneadhkyoeea
+      '@nivo/scales': 0.80.0
+      '@react-spring/web': 9.4.5_react@18.2.0
+      react: 18.2.0
+    transitivePeerDependencies:
+      - prop-types
+      - react-dom
+    dev: false
+
+  /@nivo/radial-bar/0.80.0_vpsqasc34janocxdlqh4y4bymy:
+    resolution: {integrity: sha512-IJ+IvGCXcy3y0uwcAsMyjyV5WTPe3vP5aUuV+bglTOUd1PmyD+6XY5FIAX0x3049t8mpHZnVRTewPpfaAZYLPw==}
+    peerDependencies:
+      '@nivo/core': 0.80.0
+      react: '>= 16.14.0 < 19.0.0'
+    dependencies:
+      '@nivo/arcs': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/colors': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/core': 0.80.0_owushstsnvapaxzneadhkyoeea
+      '@nivo/legends': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/polar-axes': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@nivo/scales': 0.80.0
+      '@nivo/tooltip': 0.80.0_vpsqasc34janocxdlqh4y4bymy
+      '@react-spring/web': 9.4.5_react@18.2.0
+      d3-scale: 3.3.0
       d3-shape: 1.3.7
       react: 18.2.0
     transitivePeerDependencies:
