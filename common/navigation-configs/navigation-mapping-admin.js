@@ -1171,14 +1171,14 @@ const navigationMappingAdmin = {
 
 			},
 			{
-				key           : 'coe-booking_desk',
+				key           : 'coe-booking_note_desk',
 				title         : 'Booking Desk',
 				href          : '/booking-desk',
 				as            : '/booking-desk',
 				type          : 'link',
-				main_apis     : ['list_booking_desk_shipments'],
-				module_type   : 'link',
-				possible_apis : apis.booking_desk,
+				main_apis     : ['list_shipments'],
+				module_type   : 'crm',
+				possible_apis : apis.shipment,
 			},
 			{
 				key           : 'coe-fcl_revenue_desk',
