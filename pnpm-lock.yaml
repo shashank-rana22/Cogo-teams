@@ -669,6 +669,7 @@ importers:
       html2canvas: ^1.4.1
       jspdf: ^2.5.1
       react: 18.2.0
+      uuid: ^9.0.0
     dependencies:
       '@cogoport/components': 1.0.385_aydyy3gkshtlrnyh7fafj36que
       '@cogoport/forms': link:../../common/forms
@@ -681,6 +682,7 @@ importers:
       html2canvas: 1.4.1
       jspdf: 2.5.1
       react: 18.2.0
+      uuid: 9.0.0
 
   packages/locations:
     specifiers:
