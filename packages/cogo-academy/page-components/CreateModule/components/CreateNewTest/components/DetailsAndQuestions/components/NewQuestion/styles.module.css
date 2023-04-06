@@ -1,0 +1,71 @@
+.btn_container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.input {
+	width: 30%;
+}
+
+.filter {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 15px 0;
+}
+
+.span_text {
+	margin-left: 2px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.btn_cont_float {
+	float: right;
+}
+
+.table_container {
+	padding: unset !important;
+
+	:global {
+		.ui_table_head_row {
+			.ui_table_head_cell {
+				padding-top: 18px;
+				padding-bottom: 10px;
+				margin-bottom: 10px;
+				font-size: 14px;
+				color: #000;
+				background-color: #fff;
+				border-bottom: 1px solid #f8f2e7;
+			}
+		}
+
+		.ui_table_body_container {
+			background-color: #fff;
+
+			.ui_table_body_row {
+				border-radius: 8px;
+
+				.ui_table_body_cell {
+					padding-block: 10px;
+					font-size: 12px;
+					color: #221f20;
+				}
+			}
+		}
+	}
+}
+
+.checkbox {
+	padding: 0;
+	margin-right: -15px;
+	margin-left: 12px;
+}
+
+.breadcrumb_item {
+	font-size: 16px;
+	font-weight: 600;
+	color: #6fa5ab;
+}

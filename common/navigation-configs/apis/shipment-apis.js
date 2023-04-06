@@ -1298,7 +1298,17 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'list_shipment_cancellation_reasons',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'get_shipment_ftl_freight_service_tracker',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'send_liners_invoice_email',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
@@ -1309,6 +1319,21 @@ const apis = [
 	},
 	{
 		api          : 'get_shipment_ftl_freight_service_tracking_consent',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_checkout_applicable_promocodes',
+		access_type  : 'private',
+		service_name : 'checkout',
+	},
+	{
+		api          : 'bulk_create_shipment_ftl_freight_additional_services',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_ftl_freight_additional_service',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},

@@ -1,0 +1,19 @@
+.content {
+	display: flex;
+}
+
+.box_info {
+	margin-bottom: 14px;
+}
+
+.top {
+	font-size: 14px;
+	color: #707070;
+}
+
+.bottom {
+	width: 250px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #333;
+}

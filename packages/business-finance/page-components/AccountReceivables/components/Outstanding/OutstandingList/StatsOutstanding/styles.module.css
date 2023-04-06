@@ -1,0 +1,98 @@
+.invoices_wrapper {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	box-shadow: rgb(0 0 0 / 10%) 0.1px 0.1px 0.1px 0.1px;
+}
+
+.invoices_card {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 12px 10px 10px;
+	margin-top: 8px;
+	background-color: #f9fbfe;
+	border-radius: 8px;
+	box-shadow: rgb(0 0 0 / 10%) 0.1px 0.1px 0.1px 0.1px;
+}
+
+.left_container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-width: 20%;
+	padding: 0 8px 10px 12px;
+}
+
+.styled_heading {
+	display: flex;
+	align-items: center;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.info_content {
+	padding: 15px;
+}
+
+.heading {
+	font-size: 14px;
+	font-weight: 600;
+	color: #2c3e50;
+}
+
+.count {
+	margin-left: 5px;
+	color: #356efd;
+}
+
+.icon {
+	padding: 4px 0 0 4px;
+	color: red;
+}
+
+.cn {
+	margin-top: 5px;
+}
+
+.right_container {
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+}
+
+.flex {
+	display: flex;
+}
+
+.label {
+	display: flex;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.amount {
+	display: flex;
+	margin-top: 2px;
+	word-break: break-all;
+}
+
+.container {
+	display: flex;
+	width: 100%;
+}
+
+.flex_column {
+	display: flex;
+	flex-direction: column;
+}
+
+.outstanding_card {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 14%;
+	margin: 8px 4px 2px 12px;
+	border-radius: 8px;
+	box-shadow: rgb(0 0 0 / 10%) 0.1px 0.1px 0.1px 0.1px;
+}

@@ -37,7 +37,7 @@ function DisplayAttachment(
 				</div>
 
 				{status === 'draft' && (
-					<Button type="add" size="sm" themeType="secondary" onClick={() => setShowAddModal(name)}>
+					<Button type="button" size="sm" themeType="secondary" onClick={() => setShowAddModal(name)}>
 						Add
 						{' '}
 						{name}
@@ -57,7 +57,7 @@ function DisplayAttachment(
 
 							<div className={styles.buttoncontainer}>
 								<Button
-									type="view"
+									type="button"
 									themeType="primary"
 									size="sm"
 									style={{ marginRight: 8 }}
@@ -68,7 +68,7 @@ function DisplayAttachment(
 								{status === 'draft' && (
 									<>
 										<Button
-											type="edit"
+											type="button"
 											themeType="secondary"
 											size="sm"
 											style={{ marginRight: 8 }}
