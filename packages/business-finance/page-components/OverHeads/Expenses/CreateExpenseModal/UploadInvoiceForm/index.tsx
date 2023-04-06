@@ -4,7 +4,6 @@ import React, { useEffect } from 'react';
 
 import Filter from '../../../../commons/Filters';
 import { CURRENCY_OPTIONS } from '../../../constants/CURRENCY_OPTIONS';
-import { nonRecurringUploadInvoice } from '../../../Controls/nonRecurringUploadInvoice';
 import { recurringUploadInvoice } from '../../../Controls/recurringUploadInvoice';
 import LineItemsForm from '../../LineItemsForm';
 
@@ -20,7 +19,6 @@ interface FilterInterface {
 interface Props {
 	formData:FilterInterface,
 	setFormData:(p:object) => void,
-	createExpenseType:string,
 	isUploadConfirm?:boolean,
 	setIsUploadConfirm?:(p:any)=>void,
 	taxOptions?:object[],
@@ -31,7 +29,6 @@ interface Props {
 function UploadInvoiceForm({
 	formData,
 	setFormData,
-	createExpenseType,
 	isUploadConfirm,
 	setIsUploadConfirm,
 	taxOptions,
@@ -39,13 +36,6 @@ function UploadInvoiceForm({
 	setIsFormValidated,
 }:Props) {
 	const { invoiceCurrency, invoiceNumber, uploadedInvoice:uploadUrl, lineItemsList } = formData || {};
-
-	let uploadControls:any;
-	if (createExpenseType === 'recurring') {
-		uploadControls = recurringUploadInvoice;
-	} else if (createExpenseType === 'nonRecurring') {
-		uploadControls = nonRecurringUploadInvoice;
-	}
 
 	const isLineItemPresent = lineItemsList?.[0]?.payable_amount;
 

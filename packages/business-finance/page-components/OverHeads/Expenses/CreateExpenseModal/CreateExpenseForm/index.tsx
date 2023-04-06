@@ -66,7 +66,6 @@ function CreateExpenseForm({
 				<UploadInvoiceForm
 					formData={formData}
 					setFormData={setFormData}
-					createExpenseType={createExpenseType}
 					isUploadConfirm={isUploadConfirm}
 					setIsUploadConfirm={setIsUploadConfirm}
 					taxOptions={taxOptions}
