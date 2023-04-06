@@ -1,46 +1,53 @@
 .ribbon {
-  position: absolute;
-  left: -6px; 
-  top: -6px;
-  z-index: 1;
-  overflow: hidden;
-  width: 75px; 
-  height: 75px;
-  text-align: right;
+	position: absolute;
+	top: -6px;
+	left: -6px;
+	z-index: 1;
+	width: 75px;
+	height: 75px;
+	overflow: hidden;
+	text-align: right;
 }
+
 .ribbon span {
-  font-size: 10px;
-  font-weight: bold;
-  color: #FFF;
-  text-transform: uppercase;
-  text-align: center;
-  line-height: 20px;
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  width: 78px;
-  display: block;
-  background: #CC2D20;
-  background: linear-gradient(#EE3425 0%, #CC2D20 100%);
-  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
-  position: absolute;
-  top: 12px; 
-  left:-17px;
+	position: absolute;
+	top: 12px;
+	left: -17px;
+	display: block;
+	width: 78px;
+	font-size: 10px;
+	font-weight: bold;
+	line-height: 20px;
+	color: #fff;
+	text-align: center;
+	text-transform: uppercase;
+	background: #cc2d20;
+	background: linear-gradient(#ee3425 0%, #cc2d20 100%);
+	box-shadow: 0 3px 10px -5px rgb(0 0 0 / 100%);
+	transform: rotate(-45deg);
+	transform: rotate(-45deg);
 }
+
 .ribbon span::before {
-  content: "";
-  position: absolute; left: 0px; top: 100%;
-  z-index: -1;
-  border-left: 3px solid #CC2D20;
-  border-right: 3px solid transparent;
-  border-bottom: 3px solid transparent;
-  border-top: 3px solid #CC2D20;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: -1;
+	content: "";
+	border-top: 3px solid #cc2d20;
+	border-right: 3px solid transparent;
+	border-bottom: 3px solid transparent;
+	border-left: 3px solid #cc2d20;
 }
+
 .ribbon span::after {
-  content: "";
-  position: absolute; right: 0px; top: 100%;
-  z-index: -1;
-  border-left: 3px solid transparent;
-  border-right: 3px solid #CC2D20;
-  border-bottom: 3px solid transparent;
-  border-top: 3px solid #CC2D20;
+	position: absolute;
+	top: 100%;
+	right: 0;
+	z-index: -1;
+	content: "";
+	border-top: 3px solid #cc2d20;
+	border-right: 3px solid #cc2d20;
+	border-bottom: 3px solid transparent;
+	border-left: 3px solid transparent;
 }
