@@ -50,6 +50,9 @@ const FUNCTION_SUB_FUNCTION_MAPPING = {
 		{ label: 'HRBP', value: 'hrbp' },
 		{ label: 'Talent Acquisition', value: 'talent_acquisition' },
 	],
+	external: [
+		{ label: 'Enrichment', value: 'enrichment' },
+	],
 };
 
 const get_all_sub_functions = (role_functions) => {
@@ -113,6 +116,10 @@ export const controls = (role_functions, partnerOptions) => [
 			{
 				label : 'Finance',
 				value : 'finance',
+			},
+			{
+				label : 'External',
+				value : 'external',
 			},
 		],
 		params: { filters: { status: 'active' } },
