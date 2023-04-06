@@ -33,7 +33,6 @@ function AnswerPage() {
 	const [show, setShow] = useState(false);
 	const [load, setload] = useState(true);
 	const { refetchQuestions, data: answerData, loading } = useGetQuestions({ id });
-	const [answer, setAnswer] = useState(answerData?.answers?.[0]?.answer);
 
 	const is_positive = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive;
 
@@ -44,10 +43,6 @@ function AnswerPage() {
 			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive]);
 		}
 	}, [is_positive, loading]);
-
-	useEffect(() => {
-		setAnswer(answerData?.answers?.[0]?.answer);
-	}, [answerData]);
 
 	const { handleSubmit, formState: { errors }, control, watch } = useForm();
 
@@ -274,10 +269,9 @@ function AnswerPage() {
 						<FeedbackForm
 							answerData={answerData}
 							control={control}
-							answer={answer}
-							setAnswer={setAnswer}
-							watch={watch}
 							errors={errors}
+							watchQuestionCheckbox={watchQuestionCheckbox}
+							watchAnswerCheckbox={watchAnswerCheckbox}
 						/>
 					</Modal.Body>
 					<Modal.Footer>

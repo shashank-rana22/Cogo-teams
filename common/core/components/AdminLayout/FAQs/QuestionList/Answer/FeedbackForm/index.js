@@ -5,11 +5,10 @@ import styles from './styles.module.css';
 
 function FeedbackForm({
 	control,
-	watch = () => {},
+	watchQuestionCheckbox,
+	watchAnswerCheckbox,
+	answerData,
 }) {
-	const watchQuestionCheckbox = watch('question_checkbox');
-	const watchAnswerCheckbox = watch('answer_checkbox');
-
 	return (
 		<div className={styles.container}>
 			<section className={styles.section_container}>
@@ -31,7 +30,7 @@ function FeedbackForm({
 							name="question"
 							type="text"
 							placeholder="Enter text here"
-							value=""
+							value={answerData?.question_abstract}
 						/>
 					</section>
 				) : null}

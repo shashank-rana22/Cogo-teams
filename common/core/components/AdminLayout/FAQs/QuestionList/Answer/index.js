@@ -1,5 +1,4 @@
-import { Button, Toast } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+import { Button } from '@cogoport/components';
 import {
 	IcMRedo,
 	IcMSad,
@@ -7,21 +6,14 @@ import {
 	IcCHappy,
 	IcCSad,
 } from '@cogoport/icons-react';
-import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import FeedbackForm from './FeedbackForm';
+import useCreateFeedback from './hooks/useCreateFeedback';
 import Loader from './Loader';
 import RelatedQuestion from './RelatedQuestion';
 import styles from './styles.module.css';
-import useAnswer from './useAnswer';
-
-const FEEDBACK_MAPPING_ISLIKED = {
-	true  : 'liked',
-	false : 'disliked',
-};
 
 const LIKE_MAPPING = {
 	liked    : <IcCHappy />,
@@ -35,151 +27,25 @@ const DISLIKE_MAPPING = {
 
 function Answer({ topic = {}, question, setQuestion }) {
 	const {
-		profile: { partner = '' },
-	} = useSelector((state) => state);
-
-	const { handleSubmit, control, watch } = useForm();
-
-	const watchQuestionCheckbox = watch('question_checkbox');
-	const watchAnswerCheckbox = watch('answer_checkbox');
-
-	const [show, setShow] = useState(false);
-	const [load, setload] = useState(true);
-
-	const { data: answerData, loading, fetch } = useAnswer({ question });
-
-	const [answer, setAnswer] = useState(answerData?.answers?.[0]?.answer);
-
-	useEffect(() => {
-		setAnswer(answerData?.answers?.[0]?.answer);
-	}, [answerData]);
-
-	const is_positive = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive;
-
-	const [isLiked, setIsLiked] = useState(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
-
-	const apiName = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id
-		? '/update_faq_feedback'
-		: '/create_faq_feedback';
-
-	const [{ loading : feedbackLoading }, trigger] = useRequest({
-		url    : apiName,
-		method : 'POST',
-	}, { manual: true });
-
-	const onClickLikeButton = async ({ _id }) => {
-		setload(false);
-		setIsLiked(isLiked === 'liked' ? '' : 'liked');
-		setShow(false);
-		try {
-			let payload = {
-				faq_answer_id : _id,
-				is_positive   : true,
-				status        : 'active',
-			};
-			if (isLiked === 'liked') {
-				payload = {
-					id     : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-					status : 'inactive',
-				};
-			} else if (isLiked === 'disliked') {
-				payload = {
-					id          : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-					is_positive : true,
-					status      : 'active',
-				};
-			}
-
-			await trigger({
-				data: payload,
-			});
-
-			fetch();
-		} catch (error) {
-			Toast.error(error?.message);
-			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
-		}
-	};
-
-	const onClickRemoveDisLike = async () => {
-		setload(false);
-		setIsLiked('');
-
-		try {
-			await trigger({
-				data: {
-					id     : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-					status : 'inactive',
-				},
-			});
-
-			fetch();
-		} catch (error) {
-			Toast.error(error?.message);
-			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
-		}
-	};
-
-	const goToFAQ = () => {
-		const { id: partnerId = '' } = partner || {};
-
-		const aElement = document.createElement('a');
-		aElement.setAttribute('href', `/v2/${partnerId}/learning/faq`);
-		aElement.setAttribute('target', '_blank');
-
-		const bodyElement = document.querySelector('body');
-		bodyElement.appendChild(aElement);
-
-		aElement.click();
-
-		aElement.remove();
-	};
-
-	const onSubmit = async (values) => {
-		setload(false);
-		setIsLiked('disliked');
-
-		let remark = values?.remark;
-
-		if (values?.answer_checkbox) {
-			remark = `Answer not satisfactory. ${remark}`;
-		}
-		if (values?.question_checkbox) {
-			remark = `Question not satisfactory. ${remark}`;
-		}
-
-		let payload = {
-			faq_answer_id               : answerData?.answers[0]?.id,
-			is_positive                 : false,
-			remark,
-			status                      : 'active',
-			suggested_question_abstract : watchQuestionCheckbox ? values?.question : undefined,
-			suggested_answer            : watchAnswerCheckbox ? values?.answer : undefined,
-		};
-		if (answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive) {
-			payload = {
-				id                          : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-				faq_answer_id               : answerData?.answers[0]?.id,
-				is_positive                 : false,
-				remark,
-				status                      : 'active',
-				suggested_question_abstract : watchQuestionCheckbox ? values?.question : undefined,
-				suggested_answer            : watchAnswerCheckbox ? values?.answer : undefined,
-			};
-		}
-
-		try {
-			await trigger({
-				data: payload,
-			});
-
-			setShow(false);
-			fetch();
-		} catch (error) {
-			Toast.error(error?.message);
-			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
-		}
-	};
+		handleSubmit = () => {},
+		control,
+		show,
+		load,
+		loading,
+		feedbackLoading,
+		onClickLikeButton = () => {},
+		onClickRemoveDisLike = () => {},
+		onSubmit = () => {},
+		goToFAQ = () => {},
+		answerData,
+		isLiked,
+		setShow = () => {},
+		setIsLiked = () => {},
+		watchAnswerCheckbox,
+		watchQuestionCheckbox,
+		is_positive,
+		FEEDBACK_MAPPING_ISLIKED,
+	} = useCreateFeedback({ question });
 
 	return (
 		<div className={styles.list}>
@@ -207,7 +73,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 						</div>
 
 						<div className={styles.ansofques}>
-							<div dangerouslySetInnerHTML={{ __html: answer }} />
+							<div dangerouslySetInnerHTML={{ __html: answerData?.answers?.[0]?.answer }} />
 						</div>
 
 						{answerData?.answers?.[0]?.upvote_count > 0 ? (
@@ -267,9 +133,8 @@ function Answer({ topic = {}, question, setQuestion }) {
 					<FeedbackForm
 						answerData={answerData}
 						control={control}
-						answer={answer}
-						setAnswer={setAnswer}
-						watch={watch}
+						watchAnswerCheckbox={watchAnswerCheckbox}
+						watchQuestionCheckbox={watchQuestionCheckbox}
 					/>
 					<div className={styles.footer_btns}>
 						<Button
