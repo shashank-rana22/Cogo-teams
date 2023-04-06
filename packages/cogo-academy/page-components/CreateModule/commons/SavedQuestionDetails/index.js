@@ -32,6 +32,7 @@ function SavedQuestionDetails({
 		listSetQuestions,
 		setSortFilter,
 		sortFilter,
+		editDetails,
 	});
 
 	if (isEmpty(test_questions)) {
