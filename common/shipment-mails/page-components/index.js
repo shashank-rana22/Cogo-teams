@@ -50,17 +50,17 @@ function ShipmentMails({
 	const COMPOSE_EMAIL = RPA.BOOKINGS_DEFAULT_COMPOSE_EMAIL;
 	const RECIEVE_EMAIL = RPA.BOOKINGS_DEFAULT_RECIEVE_EMAIL;
 
-	// if (
-	// 	process.env.REST_BASE_API_URL !== 'https://api.cogoport.com'
-	// 	|| process.env.NODE_ENV !== 'production'
-	// ) {
-	// 	return (
-	// 		<div>
-	// 			Thank you for visiting but this feature is enabled only for production
-	// 			usage.
-	// 		</div>
-	// 	);
-	// }
+	if (
+		process.env.REST_BASE_API_URL !== 'https://api.cogoport.com'
+		|| process.env.NODE_ENV !== 'production'
+	) {
+		return (
+			<div>
+				Thank you for visiting but this feature is enabled only for production
+				usage.
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>

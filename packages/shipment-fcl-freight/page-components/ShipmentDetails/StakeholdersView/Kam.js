@@ -13,7 +13,7 @@ import Timeline from '../../../common/TimeLine';
 
 import styles from './styles.module.css';
 
-function Superadmin() {
+function Kam() {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const [activeTab, setActiveTab] = useState('overview');
 
@@ -66,4 +66,4 @@ function Superadmin() {
 	);
 }
 
-export default Superadmin;
+export default Kam;
