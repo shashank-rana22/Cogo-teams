@@ -18,7 +18,6 @@ import ReceiveDiv from './ReceiveDiv';
 import SentDiv from './SentDiv';
 import styles from './styles.module.css';
 import TimeLine from './TimeLine';
-import UserChannel from './UserChannels';
 
 function MessageMapping({ conversation_type, ...restProps }) {
 	switch (conversation_type) {
@@ -52,10 +51,9 @@ function MessageConversations({
 	communicationLoading = false,
 	lastPage = false,
 	messageLoading = false,
-	setActiveMessage,
 }) {
 	const messageRef = useRef();
-	const { id = '', channel_type = '', new_user_message_count = 0, user_channel_ids = {} } = activeMessageCard;
+	const { id = '', channel_type = '', new_user_message_count = 0 } = activeMessageCard;
 
 	const {
 		emojisList = {},
@@ -198,11 +196,6 @@ function MessageConversations({
 			>
 				{firstLoadingMessages ? firstLoadingDiv : messageConversation }
 			</div>
-			<UserChannel
-				setActiveMessage={setActiveMessage}
-				userChannelIds={user_channel_ids}
-				activeChannelId={channel_type}
-			/>
 
 			<div
 				className={cl`${styles.nofile_container} 
@@ -394,9 +387,6 @@ function MessageConversations({
 						/>
 					</div>
 				</div>
-			</div>
-			<div className={styles.other_channel_ids}>
-				jo
 			</div>
 		</div>
 	);

@@ -126,6 +126,7 @@ function CogoOne() {
 							activeVoiceCard={activeVoiceCard}
 							updateLeaduser={updateLeaduser}
 							activeCardId={activeCardId}
+							setActiveMessage={setActiveMessage}
 						/>
 					)}
 				</>
