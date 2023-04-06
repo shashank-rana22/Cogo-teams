@@ -17,7 +17,6 @@ import getServiceProviderData from './helpers/getServiceProviderData';
 import styles from './styles.module.css';
 
 function Poc({ shipment_data = {}, servicesList = [] }) {
-	console.log('aaaa');
 	const { id:shipment_id, importer_exporter_id, services } = shipment_data || {};
 
 	const [addCompany, setAddCompany] = useState(null);
