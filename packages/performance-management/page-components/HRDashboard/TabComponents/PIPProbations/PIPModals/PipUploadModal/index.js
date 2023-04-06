@@ -22,7 +22,7 @@ function PipUploadModal({ item = {}, modal, setModal = () => {}, logType = '', s
 	});
 
 	const [{ loading : uploadLoading = false }, trigger] = useIrisRequest({
-		url    : logType === 'correction' ? 'update_file' : 'post_iris_create_file',
+		url    : logType === 'correction' ? 'post_iris_update_file' : 'post_iris_create_file',
 		method : 'post',
 	}, { manual: true });
 
