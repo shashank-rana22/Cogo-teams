@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import EmptyState from '../../../../common/EmptyState';
 import { USER_ACTIVITY_MAPPING } from '../../../../constants';
 import useGetOmnichannelActivityLogs from '../../../../hooks/useGetOmnichannelActivityLogs';
+import useGetUserChatSummary from '../../../../hooks/useGetUserChatSummary';
 import useListCogooneTimeline from '../../../../hooks/useListCogooneTimeline';
 import getUserActivityComponent from '../../../../utils/getUserActivityComponent';
 
@@ -15,12 +16,13 @@ import styles from './styles.module.css';
 
 const EmptyFunction = () => {};
 
-function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessageData }) {
+function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessageData, activeMessageCard }) {
 	const [activityTab, setActivityTab] = useState('transactional');
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [pagination, setPagination] = useState(1);
 	const [activeSubTab, setActiveSubTab] = useState('channels');
 
+	const { mobile_no } = activeMessageCard;
 	const { user_id:messageUserId, lead_user_id:messageLeadUserId = null, id = '' } = formattedMessageData || {};
 
 	const { user_id:voiceCallUserId = '' } = activeVoiceCard || {};
@@ -61,6 +63,13 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 		setPagination,
 
 	});
+
+	const { chatData = {} } = useGetUserChatSummary({
+		mobile_no,
+		activeSubTab,
+
+	});
+	console.log('chatData:', chatData);
 
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
 
