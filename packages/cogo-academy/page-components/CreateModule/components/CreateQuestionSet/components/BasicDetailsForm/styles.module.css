@@ -2,16 +2,25 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	padding: 16px;
 	margin-top: 40px;
 	background: rgb(255 255 255 / 70%);
-	border-radius: 6px;
+	border-radius: 12px;
+}
+
+.label {
+	font-weight: 400;
+	color: #221f20;
+}
+
+.sup {
+	color: #ee3425;
 }
 
 .flex_row {
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
+	padding: 16px 60px;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
@@ -34,7 +43,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	padding: 20px;
+	padding: 16px 60px;
 }
 
 .control_container {
@@ -42,7 +51,7 @@
 	flex-basis: 40%;
 	align-items: center;
 	justify-content: space-between;
-	margin: 16px;
+	margin-top: 16px;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
@@ -79,8 +88,9 @@
 .button_container {
 	display: flex;
 	align-items: center;
-	justify-content: end;
+	justify-content: flex-end;
 	margin-right: 20px;
+	margin-bottom: 12px;
 }
 
 .vertical_line {

@@ -1,4 +1,4 @@
-import { IcMCrossInCircle, IcMFtick } from '@cogoport/icons-react';
+import { IcMCrossInCircle, IcMFtick, IcMInfo } from '@cogoport/icons-react';
 
 const TEXT_MAPPING = {
 	active: {
@@ -18,6 +18,15 @@ const TEXT_MAPPING = {
 		iconColor       : '#849E4C',
 		backgroundColor : '#F7FAEF',
 		borderColor     : '#849E4C',
+	},
+	publishing: {
+		key             : 'publishing',
+		text            : 'Test Results are being Published.',
+		Icon            : IcMInfo,
+		subText         : 'Your students can now see their scores in a while.',
+		iconColor       : '#D6B300',
+		backgroundColor : '#FDFBF6',
+		borderColor     : '#D6B300',
 	},
 };
 
