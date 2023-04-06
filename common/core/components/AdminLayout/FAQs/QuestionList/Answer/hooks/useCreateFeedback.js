@@ -16,7 +16,7 @@ const useCreateFeedback = ({ question }) => {
 		profile: { partner = '' },
 	} = useSelector((state) => state);
 
-	const { handleSubmit, control, watch } = useForm();
+	const { handleSubmit, control, watch, formState: { errors } } = useForm();
 
 	const watchQuestionCheckbox = watch('question_checkbox');
 	const watchAnswerCheckbox = watch('answer_checkbox');
@@ -157,6 +157,7 @@ const useCreateFeedback = ({ question }) => {
 		show,
 		load,
 		loading,
+		errors,
 		feedbackLoading,
 		onClickLikeButton,
 		onClickRemoveDisLike,

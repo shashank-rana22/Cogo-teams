@@ -4,6 +4,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function FeedbackForm({
+	errors = {},
 	control,
 	watchQuestionCheckbox,
 	watchAnswerCheckbox,
@@ -62,14 +63,21 @@ function FeedbackForm({
 			</section>
 
 			<div className={styles.remark}>
-				<div className={styles.aftercheckbox}>Remarks (optional)</div>
+				<div className={styles.aftercheckbox}>Remarks</div>
 
 				<InputController
 					control={control}
 					name="remark"
 					type="text"
 					placeholder="Enter remark here"
+					rules={{ required: 'Remark is required' }}
 				/>
+
+				{errors.remark && (
+					<span className={styles.errortext}>
+						{errors.remark.message}
+					</span>
+				)}
 			</div>
 		</div>
 	);
