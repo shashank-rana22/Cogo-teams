@@ -1,10 +1,11 @@
-import { Input, Popover, Button } from '@cogoport/components';
+import { Input, Popover, Button, cl } from '@cogoport/components';
 import {
 	IcMFilter,
 	IcMSearchlight,
 	IcMArrowRotateRight,
 	IcMArrowRotateDown,
 	IcMArrowBack,
+	// IcMCross,
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
@@ -43,7 +44,6 @@ function MessageList(messageProps) {
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
 	const [autoAssignChats, setAutoAssignChats] = useState(true);
 	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
-	const [selectedAutoAssignCount, setSelectedAutoAssignCount] = useState(0);
 
 	const handleCheckedChats = (item, id) => {
 		const chatIDs = Object.keys(selectedAutoAssign);
@@ -55,10 +55,9 @@ function MessageList(messageProps) {
 			setSelectedAutoAssign((p) => {
 				const temp = p;
 				delete (temp[id]);
-				return p;
+				return { ...p };
 			});
 		}
-		setSelectedAutoAssignCount(Object.keys(selectedAutoAssign)?.length);
 	};
 
 	const {
@@ -66,9 +65,14 @@ function MessageList(messageProps) {
 		bulkAssignLoading = false,
 	} = useBulkAssignChat({ setSelectedAutoAssign, setAutoAssignChats });
 
+	const handleAutoAssignBack = () => {
+		setAutoAssignChats(true);
+		setSelectedAutoAssign({});
+	};
+
 	useEffect(() => {
-		setSelectedAutoAssignCount(Object.keys(selectedAutoAssign)?.length);
-	}, [selectedAutoAssign]);
+		handleAutoAssignBack();
+	}, [showBotMessages]);
 
 	const ActiveIcon = openPinnedChats ? IcMArrowRotateDown : IcMArrowRotateRight;
 	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;
@@ -124,8 +128,11 @@ function MessageList(messageProps) {
 			) : (
 				<>
 					{showBotMessages && (
-						<div className={styles.auto_assign_container}>
-							{ autoAssignChats && (
+						<div className={cl`${styles.auto_assign_container}
+						${!autoAssignChats && styles.auto_assign_background}
+						`}
+						>
+							{ autoAssignChats ? (
 								<Button
 									id="auto-assign-chats"
 									className="auto-assign-chats"
@@ -135,37 +142,44 @@ function MessageList(messageProps) {
 								>
 									Auto Assign Chats
 								</Button>
-							)}
+							) : (
+								<div className={styles.show_auto_assign}>
+									<div className={styles.icon_container}>
+										<IcMArrowBack
+											onClick={handleAutoAssignBack}
+										/>
+									</div>
+									{
+								isEmpty(selectedAutoAssign)
+									? (<div className={styles.select_chats}>Select the Chats to be Auto Assigned.</div>)
+									: (
+										<>
+											<div className={styles.selected_count}>
+												<span>
+													{ Object.keys(selectedAutoAssign || {}).length || 0}
+												</span>
 
-							{!autoAssignChats && isEmpty(selectedAutoAssign)
-						&& <div className={styles.select_chats}>Select the Chats to be Auto Assigned.</div>}
+												Selected
 
-							{!autoAssignChats && !isEmpty(selectedAutoAssign)
-						&& (
-							<div className={styles.auto_assign_button}>
-								<IcMArrowBack />
-								<div className={styles.selected_count}>
-									<span>
-										{selectedAutoAssignCount }
-									</span>
+											</div>
 
-									Selected
+											<Button
+												id="auto-assign"
+												size="sm"
+												themeType="accent"
+												loading={bulkAssignLoading}
+												onClick={() => {
+													bulkAssignChat({ selectedAutoAssign });
+												}}
+											>
+												Auto Assign
+											</Button>
+
+										</>
+									)
+							}
 								</div>
-								<Button
-									id="auto-assign"
-									size="sm"
-									themeType="accent"
-									loading={bulkAssignLoading}
-									onClick={() => {
-										bulkAssignChat({ selectedAutoAssign });
-									}}
-								>
-									Auto Assign
-								</Button>
-
-							</div>
-
-						)}
+							)}
 
 						</div>
 					)}
