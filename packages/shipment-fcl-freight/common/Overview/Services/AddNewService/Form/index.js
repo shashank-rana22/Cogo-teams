@@ -3,8 +3,8 @@ import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useServiceUpsellControls from '../../../../../hooks/useFormatServiceUpsellControls';
-import Footer from '../../../../Footer';
 import Layout from '../../../../Layout';
+import Footer from '../Footer';
 
 import styles from './styles.module.css';
 

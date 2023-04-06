@@ -21,18 +21,16 @@ const useUpdateShipmentAdditionalService = ({
 
 	const handleSubmit = async (data) => {
 		try {
-			const res = await trigger({
+			await trigger({
 				data: {
 					...data,
 					pending_task_id: showIp ? undefined : item?.pending_task_id,
 				},
 			});
 
-			if (res.status === 200) {
-				Toast.success('Service Updated successfully');
-				setRemarks(null);
-				refetch();
-			}
+			Toast.success('Service Updated successfully');
+			setRemarks(null);
+			refetch();
 		} catch (err) {
 			Toast.error(getApiErrorString(err));
 		}
