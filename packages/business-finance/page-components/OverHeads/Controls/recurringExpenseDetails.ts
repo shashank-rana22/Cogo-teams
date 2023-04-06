@@ -134,7 +134,7 @@ export const recurringExpenseDetails = ({
 					options : [
 						{ label: 'INR', value: 'INR' },
 						{ label: 'USD', value: 'USD' },
-						{ label: 'VN', value: 'VN' },
+						{ label: 'VND', value: 'VND' },
 						{ label: 'GBP', value: 'GBP' }],
 				},
 				{
