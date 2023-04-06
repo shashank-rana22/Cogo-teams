@@ -1,5 +1,6 @@
 import { Pagination } from '@cogoport/components';
-import React from 'react';
+import { IcMArrowDown } from '@cogoport/icons-react';
+import React, { useState, ReactFragment } from 'react';
 
 import EmptyState from './EmptyState';
 import GetFinalList from './GetFinalList';
@@ -15,6 +16,10 @@ interface Props {
 	page?: number;
 	setPage?: Function;
 	functions?: FunctionObjects;
+	activeTab?: string;
+	Child?: ReactFragment;
+	setViewDoc?: Function;
+	setItem?: Function;
 }
 
 function List({
@@ -24,13 +29,22 @@ function List({
 	page,
 	setPage,
 	functions,
+	activeTab = '',
+	Child = () => {},
+	setViewDoc = () => {},
+	setItem = () => {},
 } :Props) {
 	const { data = {} } = listData;
 	const { finalData = [], resourceLoading } = GetFinalList({ data, listData, loading });
+	const [isOpen, setIsOpen] = useState(null);
+
+	const handleProgramDetail = (itm) => {
+		setIsOpen(isOpen === null ? itm.id : null);
+		setIsOpen(itm.id);
+	};
 
 	const render = () => {
-		let showlist = Array(6).fill(1);
-		if (finalData.length) showlist = finalData;
+		const showlist = finalData.length ? finalData : Array(6).fill(1);
 
 		if (resourceLoading || finalData.length) {
 			return (showlist).map((singleitem) => (
@@ -40,7 +54,33 @@ function List({
 						fields={fields}
 						functions={functions}
 						loading={resourceLoading}
+						isOpen={isOpen}
+						Child={Child}
+						setViewDoc={setViewDoc}
+						setItem={setItem}
 					/>
+					{singleitem.blCategory === 'hawb' && ['approval_pending', 'approved_awb'].includes(activeTab) && (
+						<div
+							style={{ '--length': isOpen === singleitem.id ? 0 : '-16px' } as React.CSSProperties}
+							className={styles.accordian_style}
+						>
+							{isOpen === singleitem.id ? (
+								<IcMArrowDown
+									style={{ transform: 'rotate(180deg)', cursor: 'pointer', width: '100%' }}
+									onClick={() => {
+										setIsOpen(null);
+									}}
+								/>
+							) : (
+								<IcMArrowDown
+									style={{ cursor: 'pointer', width: '100%' }}
+									onClick={() => {
+										handleProgramDetail(singleitem);
+									}}
+								/>
+							)}
+						</div>
+					)}
 				</div>
 			));
 		}

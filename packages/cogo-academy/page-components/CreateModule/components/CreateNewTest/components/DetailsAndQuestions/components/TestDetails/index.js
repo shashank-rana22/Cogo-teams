@@ -1,7 +1,8 @@
-import { Button } from '@cogoport/components';
+import { Button, Tooltip } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
-import { IcMArrowBack, IcMDownload } from '@cogoport/icons-react';
+import { IcMArrowBack, IcMDownload, IcMRefresh } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useMemo } from 'react';
 
 import getElementController from '../../../../../../../../configs/getElementController';
@@ -12,174 +13,202 @@ import useGetUserGroups from '../../../../../../hooks/useGetUserGroups';
 import getControls from './controls';
 import styles from './styles.module.css';
 
+const BUTTON_TEXT_MAPPING = {
+	excel : 'Save and Generate',
+	all   : 'Save',
+};
+
+const onNavigate = ({ push }) => {
+	const href = '/learning?activeTab=test_module';
+	push(href, href);
+};
+
 function CreateNewTest({
-	control, errors, data, setValue, watch, handleSubmit, uploadDocument, setUploadDocument,
+	control, errors, data,
+	getTestLoading, setValue, watch, handleSubmit, uploadDocument, setUploadDocument,
 }) {
 	const router = useRouter();
+
+	const { push } = router;
 
 	const test_sheet_id = router.query?.test_sheet_id;
 
 	const { loading, createNewTest } = useCreateNewTest();
 
-	const { loading:test_sheet_loading, data: test_sheet_data, getTestSheet } = useGetTestSheet();
+	const { data: test_sheet_data, getTestSheet } = useGetTestSheet();
 
 	const select_user_group = watch('select_user_group') || [];
 
 	const radioGroupVal = watch('select_users') || '';
 
+	const cogoEntityWatch = watch('cogo_entity_id') || '';
+
 	const { audienceOptions = [] } = useGetUserGroups();
 
+	useEffect(() => {
+		if (!isEmpty(data)) {
+			const { cogo_entity_object = {}, name = '', audience_ids = [], eligible_users = '' } = data;
+
+			const { id } = cogo_entity_object || {};
+
+			setValue('name', name);
+
+			if (isEmpty(cogoEntityWatch)) {
+				setValue('cogo_entity_id', id);
+			}
+			setValue('select_user_group', audience_ids);
+			setValue('select_users', eligible_users);
+		}
+	}, [cogoEntityWatch, data, setValue]);
+
 	const controls = useMemo(
-		() => getControls([...audienceOptions] || [], (select_user_group.length === 0)),
-		[select_user_group.length, audienceOptions],
+		() => getControls([...audienceOptions] || [], (select_user_group.length === 0), !isEmpty(data)),
+		[select_user_group.length, audienceOptions, data],
 	);
 
-	const onNavigate = () => {
-		const href = '/learning?activeTab=test_module';
-		router.push(href, href);
+	const downloadFileAtUrl = (url) => {
+		fetch(url).then((response) => response.blob()).then((blob) => {
+			const blobURL = URL.createObjectURL(new Blob([blob]));
+			const fileName = url.split('/').pop();
+			const aTag = document.createElement('a');
+			aTag.href = blobURL;
+			aTag.setAttribute('download', fileName);
+			document.body.appendChild(aTag);
+			aTag.click();
+			aTag.remove();
+		});
 	};
-
-	useEffect(() => {
-		const { cogo_entity_object = {}, name = '', audience_ids = [], eligible_users = '' } = data;
-
-		const { id } = cogo_entity_object || {};
-
-		setValue('name', name);
-		setValue('cogo_entity_id', id);
-		setValue('select_user_group', audience_ids);
-		setValue('select_users', eligible_users);
-	}, [data, setValue]);
 
 	return (
 		<div>
 			<div className={styles.header}>
-				<IcMArrowBack className={styles.back_icon} width={20} height={20} onClick={() => onNavigate()} />
+				<IcMArrowBack
+					className={styles.back_icon}
+					width={20}
+					height={20}
+					onClick={() => onNavigate({ push })}
+				/>
+
 				<div role="presentation" className={styles.title}>New Test</div>
 			</div>
 
 			<div className={styles.container}>
 				{controls.map((controlItem) => {
-					const { type, label, name, subControls = [] } = controlItem || {};
+					const { type, label, name } = controlItem || {};
 
 					const Element = getElementController(type);
 
-					if (name === 'select_entity_usergroups') {
-						return (
-							<div className={styles.control_container} key={name}>
-
-								<div className={`${styles.label}`}>
+					return (
+						<div className={styles.control_container_two} key={name}>
+							<div className={styles.row}>
+								<div className={styles.label}>
 									{label}
 									<sup className={styles.sup}>*</sup>
 								</div>
 
 								<div className={styles.control_type}>
-
-									{subControls.map((item) => {
-										const ElementToUse = getElementController(item.type);
-
-										return (
-											<div className={styles.input_wrapper} key={item.name}>
-												<ElementToUse
-													key={item.name}
-													control={control}
-													{...item}
-													className={styles[`element_${item.name}}`]}
-												/>
-												{errors[item?.name]
-													? <div className={styles.error_msg}>This is required</div> : null}
-											</div>
-										);
-									})}
+									<Element
+										control={control}
+										{...controlItem}
+										className={styles[`element_${name}`]}
+									/>
+									{errors[name] && <div className={styles.error_msg}>This is required</div>}
 								</div>
-
 							</div>
-						);
-					}
-
-					return (
-						<div className={styles.control_container_two} key={name}>
-							<div className={styles.label}>
-								{label}
-								<sup className={styles.sup}>*</sup>
-							</div>
-
-							<div className={styles.control_type}>
-								<Element control={control} {...controlItem} className={styles[`element_${name}`]} />
-								{errors[name] && <div className={styles.error_msg}>This is required</div>}
-							</div>
+							{
+								name === 'select_users' && 	(
+									<div className={styles.save_btn}>
+										{isEmpty(data) && radioGroupVal && (
+											<Button
+												size="sm"
+												themeType="primary"
+												className={styles.btn}
+												loading={loading || getTestLoading}
+												onClick={
+										handleSubmit((values) => {
+											createNewTest({ data: values });
+										})
+									}
+											>
+												{BUTTON_TEXT_MAPPING[radioGroupVal]}
+											</Button>
+										)}
+									</div>
+								)
+							}
 						</div>
 					);
 				})}
-				{radioGroupVal === 'all' && (
 
-					<Button
-						size="sm"
-						themeType="primary"
-						className={styles.btn}
-						loading={loading}
-						onClick={
-							handleSubmit((values) => {
-								createNewTest({ data: values });
-							})
-						}
-					>
-						save
-					</Button>
-				)}
 			</div>
 
 			{radioGroupVal === 'excel' && (
 				<>
+
+					{!isEmpty(data) ? (
+						<p className={styles.content}>
+							You may Upload your own Excel in required
+							format
+							{' '}
+							<b>OR</b>
+							{' '}
+							Download the list of Users, Edit and Upload that excel
+							{' '}
+							<sup className={styles.sup}>*</sup>
+						</p>
+					) : null}
+
 					<div className={styles.btn_container}>
 
-						<Button
-							size="sm"
-							themeType="primary"
-							onClick={
-							handleSubmit((values) => {
-								createNewTest({ data: values });
-							})
-						}
-						>
-							Save and Generate
-						</Button>
+						{!(test_sheet_data.test_sheet_data?.status === 'generated') && !isEmpty(data) && (
 
-						<Button
-							size="sm"
-							themeType="secondary"
-							loading={test_sheet_loading}
-							onClick={() => {
-								getTestSheet(test_sheet_id);
-							}}
-						>
-							Refresh
-						</Button>
+							<div className={styles.tooltip_container} style={{ width: 'fit-content' }}>
+
+								<Tooltip
+									maxWidth={400}
+									className={styles.refresh_tooltip}
+									content="Refresh to see if list has been Generated"
+									placement="top"
+								>
+									<div
+										className={styles.sample_div}
+										role="presentation"
+										onClick={() => {
+											getTestSheet(test_sheet_id);
+										}}
+									>
+										<IcMRefresh />
+										<div className={styles.sample_text}>Refresh</div>
+									</div>
+								</Tooltip>
+							</div>
+						)}
 
 						{test_sheet_data.test_sheet_data?.status === 'generated' && (
 							<div
 								className={styles.sample_div}
 								role="presentation"
-								onClick={() => window.open(
-									test_sheet_data.test_sheet_data?.file_url,
-									'_blank',
-								)}
+								onClick={() => downloadFileAtUrl(test_sheet_data.test_sheet_data?.file_url)}
 							>
 								<IcMDownload />
-								<div className={styles.sample_text}>Download Excel Format</div>
+								<div className={styles.sample_text}>Download User List</div>
 							</div>
 						)}
 
 					</div>
 
-					<FileUploader
-						className={styles.file_select}
-						showProgress
-						draggable
-						value={uploadDocument}
-						onChange={setUploadDocument}
-						accept=".xlsx,.csv"
-						disabled={test_sheet_data.test_sheet_data?.status !== 'generated'}
-					/>
+					{!isEmpty(data) && (
+						<FileUploader
+							className={styles.file_select}
+							showProgress
+							draggable
+							value={uploadDocument}
+							onChange={setUploadDocument}
+							accept=".csv"
+							disabled={!(test_sheet_data.test_sheet_data?.status === 'generated')}
+						/>
+					)}
+
 				</>
 			)}
 

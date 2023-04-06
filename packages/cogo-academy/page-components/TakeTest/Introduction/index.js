@@ -34,25 +34,40 @@ function Introduction({ setActiveState, testData = {} }) {
 		setActiveState('ongoing');
 		localStorage.setItem('visibilityChangeCount', 1);
 
-		const elem = document.getElementById('maincontainer');
+		// const elem = document.getElementById('maincontainer');
 
-		if (elem?.requestFullscreen) {
-			elem?.requestFullscreen();
-		} else if (elem?.webkitRequestFullscreen) { /* Safari */
-			elem?.webkitRequestFullscreen();
-		} else if (elem?.msRequestFullscreen) { /* IE11 */
-			elem?.msRequestFullscreen();
-		}
+		// if (elem?.requestFullscreen) {
+		// 	elem?.requestFullscreen();
+		// } else if (elem?.webkitRequestFullscreen) { /* Safari */
+		// 	elem?.webkitRequestFullscreen();
+		// } else if (elem?.msRequestFullscreen) { /* IE11 */
+		// 	elem?.msRequestFullscreen();
+		// }
 	};
 
 	const items = [
-		'Exam can be only taken in full screen',
-		'To Start test, please click on Begin Test',
-		`Changing tabs is not allowed in between exam, If 
-		you switch tabs more than 2 times, your exam will be submitted automatically`,
-		'To submit the test, please click on submit test button',
-		'click on cancel if you dont want to start exam now',
-		'The timer will start once you start the exam',
+		`Opening test instructions during the test will lead to wastage of test time, 
+		make sure you read instructions well before beginning the test.`,
+		'Please read all questions carefully and attempt the questions.',
+		// `Changing tabs is not allowed in between exam, If
+		// you switch tabs more than 2 times, your exam will be submitted automatically`,
+		`You may attempt a question and proceed to the next question via the ‘NEXT’ button. Your response,
+		if any will automatically save as you click the NEXT button. 
+		Alternatively, if you are unsure of the answer, 
+		you may ‘MARK FOR REVIEW’ and try reviewing the question later.`,
+		`If you do not wish to answer a question you may directly proceed with ‘NEXT’.
+		You can also ‘MARK FOR REVIEW’ in a case you think you want to attempt that question later.`,
+		'You may come back to any question at a later time from the side panel (with question numbers) and view them.',
+		`If a question has not been attempted, if will show under the ‘Not answered’ tag. 
+		Answered question will take the ‘Answered tag’ while questions 
+		that you have not seen even once will take the ‘Not Visited’ tag. 
+		Marked for Review question will take the ‘Marked for Review’ tag.`,
+		'You may come back and edit your response to a question at any given point.',
+		`At the last question of the test, please click on ‘SAVE’ to save your response, 
+		post which you may proceed to ‘FINISH TEST’ or go back to any of the questions you missed or want to review. 
+		Please select ‘FINSIH TEST’ whenever you want to submit the test.`,
+		`If you run out of time, all questions that have been answered (even if they fall in the ‘Marked for review’
+		category will be automatically submitted as a response.`,
 	];
 
 	return (
@@ -84,7 +99,8 @@ function Introduction({ setActiveState, testData = {} }) {
 							<div className={styles.value}>
 								{case_study_questions}
 								{' '}
-								Case Study Questions,
+								Case Study,
+								{' '}
 								{stand_alone_questions}
 								{' '}
 								Standalone Questions
