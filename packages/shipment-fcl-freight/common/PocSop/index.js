@@ -15,13 +15,17 @@ function SopAndPoc() {
 	const onClose = () => setShow(false);
 	return (
 		<div>
-			<div className={styles.poc_sop_container}>
+			<div
+				className={styles.poc_sop_container}
+				onClick={() => setShow(true)}
+				tabIndex={0}
+				role="button"
+			>
 				<div className={styles.poc_sop_icon}>
-					<Button onClick={() => setShow(true)} themeType="tertiary">
+					<Button themeType="tertiary">
 						<IcMArrowRotateLeft
 							fill="white"
 						/>
-
 					</Button>
 				</div>
 				<div className={styles.poc_sop_text}>POC and SOP</div>
@@ -35,7 +39,6 @@ function SopAndPoc() {
 						size="md"
 						scroll={false}
 						onClose={() => setShow(false)}
-						closeOnOuterClick={false}
 					>
 						<Modal.Body>
 							<div className={styles.close}>
@@ -55,6 +58,7 @@ function SopAndPoc() {
 								fullWidth
 								activeTab={activeTab}
 								onChange={setActiveTab}
+								className={styles.custom_tabs}
 							>
 								<TabPanel name="poc" title="POC">
 									<div style={{ height: '80vh', overflow: 'scroll' }}>
