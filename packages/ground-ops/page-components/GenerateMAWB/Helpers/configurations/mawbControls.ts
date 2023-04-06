@@ -63,9 +63,6 @@ const mawbControls = (disableClass) => ({
 			label       : 'Origin',
 			placeholder : 'Enter Origin Airport',
 			span        : 5,
-			rules       : {
-				required: 'Origin Airport is Required',
-			},
 		},
 		{
 			name        : 'destination',
@@ -74,9 +71,6 @@ const mawbControls = (disableClass) => ({
 			label       : 'Destination',
 			placeholder : 'Enter Destination Airport',
 			span        : 5,
-			rules       : {
-				required: 'Destination Airport is Required',
-			},
 		},
 		{
 			name        : 'originPortCode',

@@ -1,31 +1,46 @@
-.ribbon{
-background-color: #a00;
-  overflow: hidden;
-  white-space: nowrap;
-  /* top left corner */
+.ribbon {
   position: absolute;
-  left: -50px;
-  top: 40px;
-  /* for 45 deg rotation */
-  -webkit-transform: rotate(-45deg);
-     -moz-transform: rotate(-45deg);
-      -ms-transform: rotate(-45deg);
-       -o-transform: rotate(-45deg);
-          transform: rotate(-45deg);
-  /* for creating shadow */
-  -webkit-box-shadow: 0 0 10px #888;
-     -moz-box-shadow: 0 0 10px #888;
-          box-shadow: 0 0 10px #888;
+  left: -6px; 
+  top: -6px;
+  z-index: 1;
+  overflow: hidden;
+  width: 75px; 
+  height: 75px;
+  text-align: right;
 }
 .ribbon span {
-  border: 1px solid #faa;
-  color: #fff;
-  display: block;
-  font: bold 100% 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  margin: 1px 0;
-  padding: 10px 50px;
+  font-size: 10px;
+  font-weight: bold;
+  color: #FFF;
+  text-transform: uppercase;
   text-align: center;
-  text-decoration: none;
-  /* for creating shadow */
-  text-shadow: 0 0 5px #444;
+  line-height: 20px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  width: 78px;
+  display: block;
+  background: #CC2D20;
+  background: linear-gradient(#EE3425 0%, #CC2D20 100%);
+  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+  position: absolute;
+  top: 12px; 
+  left:-17px;
+}
+.ribbon span::before {
+  content: "";
+  position: absolute; left: 0px; top: 100%;
+  z-index: -1;
+  border-left: 3px solid #CC2D20;
+  border-right: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-top: 3px solid #CC2D20;
+}
+.ribbon span::after {
+  content: "";
+  position: absolute; right: 0px; top: 100%;
+  z-index: -1;
+  border-left: 3px solid transparent;
+  border-right: 3px solid #CC2D20;
+  border-bottom: 3px solid transparent;
+  border-top: 3px solid #CC2D20;
 }

@@ -2,7 +2,6 @@ import { Placeholder } from '@cogoport/components';
 import React, { ReactNode, ReactFragment } from 'react';
 
 import { FieldType, FunctionObjects, NestedObj } from '../Interfaces/index';
-import RenderRibbon from '../RenderRibbon';
 import styles from '../styles.module.css';
 
 import getValue from './getValue';
@@ -76,7 +75,6 @@ function CardItem({
 					})}
 
 				</div>
-				<RenderRibbon item={singleitem} />
 			</section>
 			{isOpen === singleitem.id && (
 				<Child
