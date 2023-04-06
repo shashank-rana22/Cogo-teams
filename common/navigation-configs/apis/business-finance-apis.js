@@ -209,6 +209,11 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
+			api         : 'get_purchase_bills_tagging_map',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
 			api          : 'update_shipment',
 			access_type  : 'private',
 			feature      : 'coeFinance',
