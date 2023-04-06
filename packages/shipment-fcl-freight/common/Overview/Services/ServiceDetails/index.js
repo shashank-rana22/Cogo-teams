@@ -9,7 +9,7 @@ import Status from './Status';
 import styles from './styles.module.css';
 
 function ServiceDetails({
-	servicesData = {},
+	servicesData = [],
 	servicesList = [],
 	shipmentData = {},
 	refetchServices = () => {},
@@ -22,7 +22,7 @@ function ServiceDetails({
 		payment_term = '',
 		service_provider = {},
 		display_label = '',
-	} = servicesData[0];
+	} = servicesData?.[0] || {};
 
 	const service_items_key = getConfigs(service_type).details || {};
 
