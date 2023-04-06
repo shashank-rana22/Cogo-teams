@@ -32,6 +32,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 		show,
 		load,
 		loading,
+		errors,
 		feedbackLoading,
 		onClickLikeButton = () => {},
 		onClickRemoveDisLike = () => {},
@@ -133,6 +134,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 			{show ? (
 				<div className={styles.dislike_box}>
 					<FeedbackForm
+						errors={errors}
 						answerData={answerData}
 						control={control}
 						watchAnswerCheckbox={watchAnswerCheckbox}
