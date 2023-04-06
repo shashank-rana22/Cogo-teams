@@ -85,7 +85,6 @@
 	height: 36px;
 	padding: 5px;
 	margin: 14px 0;
-	background: #acdadf;
 	border-radius: 6px;
 
 	:global {
@@ -96,11 +95,47 @@
 	}
 }
 
-.auto_assign_button {
+.auto_assign_background {
+	background: #fdebe9;
+}
+
+.show_auto_assign {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
+
+	:global {
+		.ui_button_container {
+			width: 100px;
+		}
+	}
+}
+
+.icon_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	:hover {
+		background-color: #f8aea8;
+		border-radius: 6px;
+	}
+
+	svg {
+		width: 24px;
+		height: 24px;
+		padding: 3px;
+		cursor: pointer;
+	}
+}
+
+.auto_assign_button {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	/* width: 100%; */
 	font-size: 12px;
 
 	svg {
@@ -116,6 +151,9 @@
 }
 
 .selected_count {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	margin: 0 10px;
 
 	span {
@@ -125,7 +163,8 @@
 }
 
 .select_chats {
-	font-size: 11px;
+	padding-right: 10px;
+	font-size: 12px;
 }
 
 .list_container {
