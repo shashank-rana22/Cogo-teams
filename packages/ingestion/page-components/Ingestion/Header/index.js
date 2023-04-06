@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 import { IcMDownload, IcMUpload } from '@cogoport/icons-react';
 
+import { CONSTANT_KEYS } from '../../../constants/header-mapping';
 import usePostIngestionData from '../../../hooks/usePostIngestionData';
 
 import ChooseModal from './Modals/ChooseModal/index';
@@ -9,14 +10,6 @@ import ProviderSelectModal from './Modals/ProviderSelectModal';
 import TemplateModal from './Modals/TemplateModal';
 import UploadModal from './Modals/UploadModal';
 import styles from './styles.module.css';
-
-const CONSTANT_KEYS = {
-	TEMPLATE        : 'template',
-	CHOOSE          : 'chooseModal',
-	ORG_DETAILS     : 'orgDetails',
-	PROVIDER_SELECT : 'providerSelect',
-	UPLOAD          : 'uploadModal',
-};
 
 const {
 	TEMPLATE, CHOOSE, ORG_DETAILS, PROVIDER_SELECT, UPLOAD,

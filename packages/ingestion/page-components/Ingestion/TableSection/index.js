@@ -1,3 +1,5 @@
+import { CONSTANT_KEYS } from '../../../constants/table-modal-mapping';
+
 import Filters from './Filters';
 import List from './List';
 import ReUploadModal from './Modals/ReUploadModal';
@@ -17,11 +19,6 @@ function TableSection(props) {
 		params = {},
 		setParams = () => {},
 	} = props;
-
-	const CONSTANT_KEYS = {
-		REUPLOAD    : 'reUpload',
-		UPLOAD_LIST : 'uploadList',
-	};
 
 	const {
 		REUPLOAD, UPLOAD_LIST,
