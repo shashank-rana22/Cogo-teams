@@ -4,9 +4,9 @@
 	background-color: #fff;
 }
 
-.service_container {
+.services_container {
 	display: flex;
-	width: 100%;
+	width: 80%;
 	padding: 0 22px 29px;
 
 	@media (max-width: 768px) {

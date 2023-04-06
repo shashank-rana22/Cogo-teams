@@ -27,42 +27,49 @@ function Services() {
 	return !servicesLoading && !isGettingShipment
 		? (
 			<div className={styles.container}>
-				<div className={styles.service_container}>
-					{(Object.keys(serviceObj.originServices) || []).map((service) => (
-						<ServiceDetails
-							className={styles.service_details}
-							serviceName={service}
-							servicesData={serviceObj?.mainServices[service]}
-							servicesList={servicesList}
-							shipmentData={shipment_data}
-							refetchServices={refetchServices}
-						/>
+				<div className={styles.services_container}>
+					<div className={styles.trade_services}>
+						{(Object.keys(serviceObj.originServices) || []).map((service) => (
+							<ServiceDetails
+								className={styles.service_details}
+								serviceName={service}
+								servicesData={serviceObj?.originServices[service]}
+								servicesList={servicesList}
+								shipmentData={shipment_data}
+								refetchServices={refetchServices}
+							/>
 
-					))}
+						))}
+					</div>
 
-					{(Object.keys(serviceObj?.mainServices) || []).map((service) => (
-						<ServiceDetails
-							className={styles.service_details}
-							serviceName={service}
-							servicesData={serviceObj?.mainServices[service]}
-							servicesList={servicesList}
-							shipmentData={shipment_data}
-							refetchServices={refetchServices}
-						/>
+					<div className={styles.trade_services}>
+						{(Object.keys(serviceObj?.mainServices) || []).map((service) => (
+							<ServiceDetails
+								className={styles.service_details}
+								serviceName={service}
+								servicesData={serviceObj?.mainServices[service]}
+								servicesList={servicesList}
+								shipmentData={shipment_data}
+								refetchServices={refetchServices}
+							/>
 
-					))}
+						))}
+					</div>
 
-					{(Object.keys(serviceObj?.destinationServices) || []).map((service) => (
-						<ServiceDetails
-							className={styles.service_details}
-							serviceName={service}
-							servicesData={serviceObj?.mainServices[service]}
-							servicesList={servicesList}
-							shipmentData={shipment_data}
-							refetchServices={refetchServices}
-						/>
+					<div className={styles.trade_services}>
+						{(Object.keys(serviceObj?.destinationServices) || []).map((service) => (
+							<ServiceDetails
+								className={styles.service_details}
+								serviceName={service}
+								servicesData={serviceObj?.destinationServices[service]}
+								servicesList={servicesList}
+								shipmentData={shipment_data}
+								refetchServices={refetchServices}
+							/>
 
-					))}
+						))}
+
+					</div>
 				</div>
 
 				<div className={styles.upselling}>

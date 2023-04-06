@@ -1,12 +1,11 @@
-import { cl } from '@cogoport/components';
 import { IcCFtick } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
 function Assured({ shipmentData = {} }) {
 	return (
-		<div className={cl`${styles.container} cogo-assured`}>
-			<div className={styles.text}>
+		<div className={styles.container}>
+			<div className={styles.header}>
 				<img
 					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-verifiedmark.svg"
 					alt="verifiedmark"
