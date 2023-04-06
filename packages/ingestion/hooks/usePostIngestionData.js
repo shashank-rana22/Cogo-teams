@@ -43,6 +43,7 @@ function usePostIngestionData({ refetch = () => {} }) {
 			setShow('');
 
 			Toast.success('Data Uploaded');
+
 			refetch();
 		} catch (error) {
 			Toast.error(error?.message);

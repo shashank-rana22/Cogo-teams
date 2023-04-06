@@ -12,11 +12,6 @@ function UploadModal({
 }) {
 	const { control, formState: { errors }, handleSubmit, reset } = formProps;
 
-	const onChoose = (event) => {
-		onSubmit(event);
-		// setShow('');
-	};
-
 	const onClose = () => {
 		setShow('');
 		reset();
@@ -83,7 +78,7 @@ function UploadModal({
 					>
 						Back
 					</Button>
-					<Button loading={loading} onClick={handleSubmit(onChoose)}>Submit</Button>
+					<Button loading={loading} onClick={handleSubmit(onSubmit)}>Submit</Button>
 				</div>
 
 			</div>
