@@ -19,7 +19,7 @@ const useGetUserRequestedFaqs = () => {
 		method : 'GET',
 		url    : '/get_user_requested_faqs',
 		params,
-	}, { manual: false });
+	}, { manual: true });
 
 	const getUserFaqs = useCallback(async () => {
 		try {

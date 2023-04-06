@@ -33,6 +33,7 @@ function LeftSection({
 				setShowTimeOverModal={setShowTimeOverModal}
 				showTimeOverModal={showTimeOverModal}
 				start_time={start_time}
+				user_appearance={user_appearance}
 			/>
 
 			<Body
@@ -59,6 +60,7 @@ function LeftSection({
 				subQuestion={subQuestion}
 				test_user_mapping_id={test_user_mapping_id}
 				user_appearance={user_appearance}
+				loading={loading}
 			/>
 		</div>
 	);

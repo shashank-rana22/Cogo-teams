@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
@@ -9,7 +9,7 @@ import QuestionSet from './components/QuestionSet';
 import TestDetails from './components/TestDetails';
 import styles from './styles.module.css';
 
-function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: getLoading, test_id }) {
+function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: getTestLoading }) {
 	const [showQuestionSet, setShowQuestionSet] = useState(false);
 
 	const [idArray, setIdArray] = useState([]);
@@ -23,15 +23,21 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 	const { set_data = [] } = data || {};
 
 	const handleChange = ({ type }) => {
-		createTest({ idArray, next: type === 'save_as_draft' ? 'draft' : 'criteria', uploadDocument });
+		if (idArray.length === 0) {
+			Toast.error('Atleast one of the question sets must be selected');
+		} else {
+			handleSubmit((values) => {
+				createTest({ values, idArray, next: type === 'save_as_draft' ? 'draft' : 'criteria', uploadDocument });
+			})();
+		}
 	};
 
 	useEffect(() => {
-		if (!isEmpty(set_data)) {
+		if (!isEmpty(data)) {
 			setShowQuestionSet(true);
 			setIdArray((set_data || []).map((item) => item.id));
 		}
-	}, [set_data]);
+	}, [set_data, data]);
 
 	return (
 		<div className={styles.container}>
@@ -39,6 +45,7 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 				control={control}
 				errors={errors}
 				data={data}
+				getTestLoading={getTestLoading}
 				setValue={setValue}
 				watch={watch}
 				handleSubmit={handleSubmit}
@@ -47,14 +54,15 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 			/>
 
 			<div className={styles.btn_container}>
-				{(!showQuestionSet && test_id) ? (
+				{(!showQuestionSet) ? (
 					<Button
 						type="button"
 						onClick={() => setShowQuestionSet(true)}
 						size="md"
 						themeType="primary"
 						style={{ marginRight: '20px' }}
-						loading={getLoading || loading}
+						loading={getTestLoading || loading}
+						disabled={isEmpty(data)}
 					>
 						From Existing Question Set
 					</Button>
@@ -75,8 +83,8 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 			{showQuestionSet && (
 				<div className={`${styles.btn_container} ${styles.btn_cont_float}`}>
 					<Button
-						type="button"
-						loading={loading || getLoading}
+						type="submit"
+						loading={loading || getTestLoading}
 						size="md"
 						themeType="secondary"
 						style={{ marginRight: '10px' }}
@@ -86,8 +94,8 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 					</Button>
 
 					<Button
-						type="button"
-						loading={loading || getLoading}
+						type="submit"
+						loading={loading || getTestLoading}
 						size="md"
 						themeType="primary"
 						onClick={() => handleChange({ type: 'review_and_set_validity' })}

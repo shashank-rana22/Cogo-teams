@@ -3,7 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import checkErrors from './checkErrors';
 
 const getStandAlonePayload = ({ values, action, testQuestionId, questionSetId }) => {
-	const { audience_ids, question = [], topic } = values || {};
+	const { question = [], topic } = values || {};
 
 	const {
 		question_type,
@@ -38,7 +38,6 @@ const getStandAlonePayload = ({ values, action, testQuestionId, questionSetId })
 
 	return {
 		...(action === 'update' ? { id: testQuestionId } : { test_question_set_id: questionSetId }),
-		audience_ids,
 		question_type,
 		topic,
 		difficulty_level,

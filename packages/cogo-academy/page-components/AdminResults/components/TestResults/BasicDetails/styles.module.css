@@ -11,7 +11,7 @@
 .row {
 	display: flex;
 	justify-content: space-between;
-	width: 50%;
+	width: 60%;
 	margin-top: 24px;
 }
 
@@ -21,15 +21,33 @@
 }
 
 .text_top {
+	font-size: 14px;
+	font-weight: 400;
+	color: #828282;
+}
+
+.topic {
+	width: 80%;
+}
+
+.text_top_label {
 	padding: 4px 20px;
 	font-size: 14px;
 	font-weight: 400;
 	color: #828282;
 }
 
-.text_bottom {
+.text_bottom_left_data {
 	display: flex;
 	justify-content: center;
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.text_bottom {
+	display: flex;
+	justify-content: left;
 	font-size: 14px;
 	font-weight: 400;
 	color: #4f4f4f;
@@ -55,4 +73,12 @@
 	display: flex;
 	flex-wrap: wrap;
 	width: 30%;
+}
+
+.left_flex {
+	width: 50%;
+}
+
+.middle_flex {
+	width: 20%;
 }

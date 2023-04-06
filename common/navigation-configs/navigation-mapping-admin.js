@@ -69,6 +69,17 @@ const navigationMappingAdmin = {
 		possible_apis : [],
 		module_type   : 'dashboards',
 	},
+	welcome: {
+		key           : 'welcome',
+		title         : 'Welcome',
+		href          : '/v2/welcome',
+		as            : '/v2/welcome',
+		type          : 'link',
+		icon          : IcMDashboard,
+		main_apis     : [],
+		possible_apis : [],
+		module_type   : 'dashboards',
+	},
 	channel_partner_dashboard: {
 		key           : 'channel_partner_dashboard',
 		title         : 'Dashboard',
@@ -2058,7 +2069,7 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'cogo_academy-tests',
-				title         : 'Test Module',
+				title         : 'Assessment Module',
 				href          : '/v2/learning/tests/dashboard',
 				as            : '/v2/learning/tests/dashboard',
 				type          : 'link',

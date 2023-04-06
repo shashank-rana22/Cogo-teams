@@ -14,6 +14,7 @@
 
 .table_container {
 	padding: unset !important;
+	margin-top: 16px;
 
 	:global {
 		.ui_table_head_row {
@@ -22,6 +23,7 @@
 			.ui_table_head_cell {
 				padding-top: 18px;
 				padding-bottom: 10px;
+				padding-left: 25px;
 				margin-bottom: 10px;
 				font-size: 14px;
 				color: #000;
@@ -38,7 +40,8 @@
 
 				.ui_table_body_cell {
 					padding-block: 20px;
-					font-size: 12px;
+					padding-left: 25px;
+					font-size: 14px;
 					color: #221f20;
 					text-align: center !important;
 				}
@@ -119,4 +122,8 @@
 .btn_container {
 	display: flex;
 	justify-content: flex-end;
+}
+
+.span_text {
+	margin-left: 6px;
 }

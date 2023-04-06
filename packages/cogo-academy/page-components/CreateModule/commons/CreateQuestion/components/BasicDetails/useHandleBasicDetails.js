@@ -33,11 +33,10 @@ const useHandleBasicDetails = ({
 
 	const handleUpdateCaseStudy = () => {
 		const formValues = getValues();
-		const { audience_ids, topic, question_text, question_type, difficulty_level } = formValues || {};
+		const { topic, question_text, question_type, difficulty_level } = formValues || {};
 
 		updateCaseStudy({
 			values: {
-				audience_ids,
 				topic,
 				question_text,
 				question_type,
@@ -53,7 +52,6 @@ const useHandleBasicDetails = ({
 
 		setValue('topic', topic);
 		setValue('difficulty_level', difficulty_level);
-		setValue('audience_ids', []);
 		setValue('question_text', question_text);
 
 		setValue(
