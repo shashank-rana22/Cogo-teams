@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 function Sidebar({ date, setDate, control, controls }) {
 	return (
 		<div className={styles.advanced_filter_container}>
-			<div style={{ paddingTop: '8px' }}>
+			<div className={styles.date_range_container}>
 				Date Range
 
 				<div>

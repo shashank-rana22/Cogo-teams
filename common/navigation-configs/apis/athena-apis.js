@@ -18,6 +18,12 @@ const athena_dashboard = {
 			feature      : 'athena_dashboard',
 			service_name : 'athena',
 		},
+		{
+			api          : 'world_countries',
+			access_type  : 'private',
+			feature      : 'athena_dashboard',
+			service_name : 'athena',
+		},
 	],
 };
 

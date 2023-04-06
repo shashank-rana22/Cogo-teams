@@ -1,11 +1,27 @@
 import { ResponsiveChoropleth } from '@cogoport/charts/geo';
 
-import countries from '../page-components/AthenaDashboard/Report/world_countries.json';
+import useGetCoordinates from '../hooks/useGetCoordinates';
 
 function Map({ data = {}, unknownColor = 'white', lowerlimit = 0, upperlimit = 100000000 }) {
+	const { responseData = {} } = useGetCoordinates();
+
+	const newData = [];
+	(responseData.list || []).forEach((obj) => {
+		const { id = '', type = '', name = '', coordinates = [], geometry_type = '' } = obj;
+		const parsed_coordinates = JSON.parse(coordinates) || {};
+		newData.push({
+			type,
+			properties : { name },
+			geometry   : {
+				type        : geometry_type,
+				coordinates : parsed_coordinates,
+			},
+			id,
+		});
+	});
 	return (
 		<ResponsiveChoropleth
-			features={countries.features}
+			features={newData}
 			data={data}
 			margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
 			colors="nivo"

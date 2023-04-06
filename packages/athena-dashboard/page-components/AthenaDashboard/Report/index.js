@@ -21,6 +21,7 @@ function Report() {
 		shipment_type,
 		loading,
 	} = useSetReport();
+
 	const hscodesToShow = tableDataColumns.hsCodesDescription;
 	const globalSuppliersToShow = tableDataColumns.topGlobalSuppliers;
 
@@ -120,24 +121,22 @@ function Report() {
 			{!loading ? (
 				<div className={styles.country_share}>
 					<div className={styles.stats_panel}>
-						{
-								(share || []).map((item) => (
-									<div className={styles.individual_stats} key={item.country}>
-										{item.country}
-										<div>
-											Rs.
-											{' '}
-											{getFormattedPrice(item.total, 'INR')}
-											{' '}
-											(
-											{item.percent_share.toFixed(2)}
-											%
-											)
-										</div>
-										<hr />
-									</div>
-								))
-							}
+						{(share || []).map((item) => (
+							<div className={styles.individual_stats} key={item.country}>
+								{item.country}
+								<div>
+									Rs.
+									{' '}
+									{getFormattedPrice(item.total, 'INR')}
+									{' '}
+									(
+									{item.percent_share.toFixed(2)}
+									%
+									)
+								</div>
+								<hr />
+							</div>
+						))}
 					</div>
 
 					<div className={styles.map_panel}>

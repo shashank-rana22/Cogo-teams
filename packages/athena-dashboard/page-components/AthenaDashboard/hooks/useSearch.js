@@ -18,6 +18,16 @@ const useSearch = () => {
 	}, { manual: true });
 
 	const handleClick = async (formValues) => {
+		const {
+			hs_code,
+			shipment_type_values,
+			shipment_mode_values,
+			incoterm_values,
+			origin_country,
+			destination_country,
+			origin_port,
+			destination_port,
+		} = formValues;
 		await trigger({
 			data: {
 				page       : 1,
@@ -25,20 +35,20 @@ const useSearch = () => {
 				sort_type  : 'desc',
 				sort_by    : 'shipment_date',
 				filters    : {
-					hs_code        : formValues.hs_code || undefined,
-					shipment_type  : formValues.shipment_type_values || undefined,
-					shipment_mode  : formValues.shipment_mode_values || undefined,
-					incoterm       : formValues.incoterm_values || undefined,
-					origin_country : formValues.origin_country.map((
+					hs_code        : hs_code || undefined,
+					shipment_type  : shipment_type_values || undefined,
+					shipment_mode  : shipment_mode_values || undefined,
+					incoterm       : incoterm_values || undefined,
+					origin_country : origin_country.map((
 						country,
 					) => country.toString().toUpperCase()) || undefined,
-					destination_country: formValues.destination_country.map((
+					destination_country: destination_country.map((
 						country,
 					) => country.toString().toUpperCase()) || undefined,
-					origin_port: formValues.origin_port.map((
+					origin_port: origin_port.map((
 						country,
 					) => country.toString().toUpperCase()) || undefined,
-					destination_port: formValues.destination_port.map((
+					destination_port: destination_port.map((
 						country,
 					) => country.toString().toUpperCase()) || undefined,
 				},
