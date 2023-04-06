@@ -1,8 +1,15 @@
-import { Input, Popover } from '@cogoport/components';
-import { IcMFilter, IcMSearchlight, IcMArrowRotateRight, IcMArrowRotateDown } from '@cogoport/icons-react';
+import { Input, Popover, Button } from '@cogoport/components';
+import {
+	IcMFilter,
+	IcMSearchlight,
+	IcMArrowRotateRight,
+	IcMArrowRotateDown,
+	IcMArrowBack,
+} from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
+import useBulkAssignChat from '../../../../hooks/useBulkAssignChat';
 import FilterComponents from '../FilterComponents';
 import LoadingState from '../LoadingState';
 import NewWhatsappMessage from '../NewWhatsappMessage';
@@ -34,6 +41,34 @@ function MessageList(messageProps) {
 		firestore,
 	} = messageProps;
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
+	const [autoAssignChats, setAutoAssignChats] = useState(true);
+	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
+	const [selectedAutoAssignCount, setSelectedAutoAssignCount] = useState(0);
+
+	const handleCheckedChats = (item, id) => {
+		const chatIDs = Object.keys(selectedAutoAssign);
+
+		if (!chatIDs.includes(id)) {
+			setSelectedAutoAssign({ ...selectedAutoAssign, [id]: item });
+		} else if (chatIDs.includes(id)) {
+			delete (selectedAutoAssign[id]);
+			setSelectedAutoAssign((p) => {
+				const temp = p;
+				delete (temp[id]);
+				return p;
+			});
+		}
+		setSelectedAutoAssignCount(Object.keys(selectedAutoAssign)?.length);
+	};
+
+	const {
+		bulkAssignChat = () => {},
+		bulkAssignLoading = false,
+	} = useBulkAssignChat({ setSelectedAutoAssign, setAutoAssignChats });
+
+	useEffect(() => {
+		setSelectedAutoAssignCount(Object.keys(selectedAutoAssign)?.length);
+	}, [selectedAutoAssign]);
 
 	const ActiveIcon = openPinnedChats ? IcMArrowRotateDown : IcMArrowRotateRight;
 	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;
@@ -79,6 +114,7 @@ function MessageList(messageProps) {
 					&& <div className={styles.filters_applied} />}
 				</div>
 			</div>
+
 			{ isEmpty(messagesList) && isPinnedChatEmpty && !messagesLoading ? (
 				<div className={styles.list_container}>
 					<div className={styles.empty_state}>
@@ -86,45 +122,99 @@ function MessageList(messageProps) {
 					</div>
 				</div>
 			) : (
-				<div className={styles.list_container} onScroll={handleScroll}>
-					{!isPinnedChatEmpty && (
-						<>
-							<div
-								role="button"
-								tabIndex={0}
-								className={styles.pinned_chat_flex}
-								onClick={() => setOpenPinnedChats((p) => !p)}
-							>
-								<ActiveIcon className={styles.icon} />
-								<div className={styles.pin_text}>pinned chats</div>
-							</div>
-							{openPinnedChats && (
-								<div className={styles.pinned_chats_div}>
-									{(sortedPinnedChatList || []).map((item) => (
-										<MessageCardData
-											item={item}
-											activeCardId={activeCardId}
-											userId={userId}
-											setActiveMessage={setActiveMessage}
-											firestore={firestore}
-										/>
-									))}
-								</div>
+				<>
+					{showBotMessages && (
+						<div className={styles.auto_assign_container}>
+							{ autoAssignChats && (
+								<Button
+									id="auto-assign-chats"
+									className="auto-assign-chats"
+									size="sm"
+									themeType="secondary"
+									onClick={() => { setAutoAssignChats(false); }}
+								>
+									Auto Assign Chats
+								</Button>
 							)}
-						</>
+
+							{!autoAssignChats && isEmpty(selectedAutoAssign)
+						&& <div className={styles.select_chats}>Select the Chats to be Auto Assigned.</div>}
+
+							{!autoAssignChats && !isEmpty(selectedAutoAssign)
+						&& (
+							<div className={styles.auto_assign_button}>
+								<IcMArrowBack />
+								<div className={styles.selected_count}>
+									<span>
+										{selectedAutoAssignCount }
+									</span>
+
+									Selected
+								</div>
+								<Button
+									id="auto-assign"
+									size="sm"
+									themeType="accent"
+									loading={bulkAssignLoading}
+									onClick={() => {
+										bulkAssignChat({ selectedAutoAssign });
+									}}
+								>
+									Auto Assign
+								</Button>
+
+							</div>
+
+						)}
+
+						</div>
 					)}
-					<div className={styles.recent_text}>Recent</div>
-					{(messagesList || []).map((item) => (
-						<MessageCardData
-							item={item}
-							activeCardId={activeCardId}
-							userId={userId}
-							setActiveMessage={setActiveMessage}
-							firestore={firestore}
-						/>
-					))}
-					{messagesLoading && <LoadingState />}
-				</div>
+
+					<div className={styles.list_container} onScroll={handleScroll}>
+						{!isPinnedChatEmpty && (
+							<>
+								<div
+									role="button"
+									tabIndex={0}
+									className={styles.pinned_chat_flex}
+									onClick={() => setOpenPinnedChats((p) => !p)}
+								>
+									<ActiveIcon className={styles.icon} />
+									<div className={styles.pin_text}>pinned chats</div>
+								</div>
+								{openPinnedChats && (
+									<div className={styles.pinned_chats_div}>
+										{(sortedPinnedChatList || []).map((item) => (
+											<MessageCardData
+												item={item}
+												activeCardId={activeCardId}
+												userId={userId}
+												setActiveMessage={setActiveMessage}
+												firestore={firestore}
+												autoAssignChats={autoAssignChats}
+												handleCheckedChats={handleCheckedChats}
+											/>
+										))}
+									</div>
+								)}
+							</>
+						)}
+						<div className={styles.recent_text}>Recent</div>
+						{(messagesList || []).map((item) => (
+							<MessageCardData
+								item={item}
+								activeCardId={activeCardId}
+								userId={userId}
+								setActiveMessage={setActiveMessage}
+								firestore={firestore}
+								autoAssignChats={autoAssignChats}
+								handleCheckedChats={handleCheckedChats}
+
+							/>
+						))}
+						{messagesLoading && <LoadingState />}
+					</div>
+				</>
 			)}
 
 			{modalType?.type && (

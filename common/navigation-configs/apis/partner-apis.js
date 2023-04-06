@@ -10568,6 +10568,7 @@ const partner = {
 
 	],
 	omni_channel: [
+
 		{
 			api          : 'list_organizations',
 			access_type  : 'private',
@@ -11077,6 +11078,11 @@ const partner = {
 		},
 		{
 			api          : 'create_suggestion',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'bulk_assign_chat',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

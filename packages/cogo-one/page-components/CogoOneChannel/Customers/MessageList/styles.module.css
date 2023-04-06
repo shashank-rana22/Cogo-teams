@@ -77,6 +77,57 @@
 	color: #828282;
 }
 
+.auto_assign_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 36px;
+	padding: 5px;
+	margin: 14px 0;
+	background: #acdadf;
+	border-radius: 6px;
+
+	:global {
+		.ui_button_container {
+			width: 100%;
+			font-weight: 500;
+		}
+	}
+}
+
+.auto_assign_button {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	font-size: 12px;
+
+	svg {
+		width: 20px;
+		margin-right: 6px;
+	}
+
+	:global {
+		.ui_button_container {
+			width: 110px;
+		}
+	}
+}
+
+.selected_count {
+	margin: 0 10px;
+
+	span {
+		margin-right: 5px;
+		font-weight: 600;
+	}
+}
+
+.select_chats {
+	font-size: 11px;
+}
+
 .list_container {
 	height: 80%;
 	overflow-y: auto;
