@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Placeholder } from '@cogoport/components';
 import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
@@ -175,7 +176,7 @@ function ShowMore({ vendorId }:Props) {
 
 	return (
 		<div className={styles.container}>
-			{!moreData && (
+			{!moreData ? (
 				<div className={styles.button_container}>
 					<button
 						className={styles.button_style}
@@ -186,79 +187,80 @@ function ShowMore({ vendorId }:Props) {
 						<div style={{ marginBottom: '-4px' }}><IcMArrowDown /></div>
 					</button>
 				</div>
-			)}
-
-			<div className={moreData
-				? styles.more_data_container : `${styles.more_data_container} ${styles.more_data_container_close}`}
-			>
-				{listLoading ? (
-					<div>
-						<div style={{ display: 'flex' }}>
-							{[1, 2, 3].map(() => (
-								<Placeholder height="50px" width="32%" margin="8px" />
-							))}
+			) : (
+				<div className={moreData
+					? styles.more_data_container : `${styles.more_data_container} ${styles.more_data_container_close}`}
+				>
+					{listLoading ? (
+						<div>
+							<div style={{ display: 'flex' }}>
+								{[1, 2, 3].map(() => (
+									<Placeholder height="50px" width="32%" margin="8px" />
+								))}
+							</div>
+							<div style={{ display: 'flex' }}>
+								{[1, 2, 3].map(() => (
+									<Placeholder height="50px" width="32%" margin="8px" />
+								))}
+							</div>
+							<div style={{ display: 'flex' }}>
+								{[1, 2, 3].map(() => (
+									<Placeholder height="50px" width="32%" margin="8px" />
+								))}
+							</div>
 						</div>
-						<div style={{ display: 'flex' }}>
-							{[1, 2, 3].map(() => (
-								<Placeholder height="50px" width="32%" margin="8px" />
-							))}
-						</div>
-						<div style={{ display: 'flex' }}>
-							{[1, 2, 3].map(() => (
-								<Placeholder height="50px" width="32%" margin="8px" />
-							))}
-						</div>
-					</div>
-				) : (
-					<div style={{ padding: '20px' }}>
-						<div className={styles.segmented_control}>
-							<SegmentedControl
-								options={OPTIONS}
-								activeTab={expenseType}
-								setActiveTab={setExpenseType}
-								color="#ED3726"
-								background="#FFFAEB"
-							/>
-						</div>
-						{(listData && listData?.list?.length > 0) ? (
-							<List
-								config={expenseConfig()}
-								itemData={listData}
-								loading={listLoading}
-								functions={functions}
-								page={pageIndex}
-								pageSize={5}
-								handlePageChange={handlePageChange}
-								showPagination
-							/>
-						) : (
-							<div className={styles.no_data}>
-								<div>No data found</div>
-								<img
-									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty_no_data.svg"
-									alt="no data"
+					) : (
+						<div style={{ padding: '20px' }}>
+							<div className={styles.segmented_control}>
+								<SegmentedControl
+									options={OPTIONS}
+									activeTab={expenseType}
+									setActiveTab={setExpenseType}
+									color="#ED3726"
+									background="#FFFAEB"
 								/>
 							</div>
-						)}
-					</div>
-				)}
+							{(listData && listData?.list?.length > 0) ? (
+								<List
+									config={expenseConfig()}
+									itemData={listData}
+									loading={listLoading}
+									functions={functions}
+									page={pageIndex}
+									pageSize={5}
+									handlePageChange={handlePageChange}
+									showPagination
+								/>
+							) : (
+								<div className={styles.no_data}>
+									<div>No data found</div>
+									<img
+										src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty_no_data.svg"
+										alt="no data"
+									/>
+								</div>
+							)}
+						</div>
+					)}
 
-				{moreData && (
-					<div className={styles.button_container}>
-						<button
-							className={styles.button_style}
-							onClick={() => {
-								setMoreData(false);
-								setExpenseType('RECURRING');
-							}}
-						>
-							<div>Show less</div>
-							{' '}
-							<div style={{ marginBottom: '-4px' }}><IcMArrowUp /></div>
-						</button>
-					</div>
-				)}
-			</div>
+					{moreData && (
+						<div className={styles.button_container}>
+							<button
+								className={styles.button_style}
+								onClick={() => {
+									setMoreData(false);
+									setExpenseType('RECURRING');
+								}}
+							>
+								<div>Show less</div>
+								{' '}
+								<div style={{ marginBottom: '-4px' }}><IcMArrowUp /></div>
+							</button>
+						</div>
+					)}
+				</div>
+			)}
+
 		</div>
 	);
 }

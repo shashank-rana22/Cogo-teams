@@ -40,7 +40,7 @@
 
 .more_data_container {
 	width: 100%;
-	max-height: 472px;
+	max-height: 624px;
 	background: white;
 	border-top: 1px solid #edd7a9;
 	transition: max-height 0.3s ease;

@@ -71,9 +71,9 @@ function List({
 					renderHeaderCheckbox={renderHeaderCheckbox}
 				/>
 			)}
-			{!isListEmpty ? (
+			{!isListEmpty || loading ? (
 				<div style={bodyStyles}>
-					{(list || []).map((singleitem) => (
+					{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
 						<div className={styles.card_container}>
 							<CardColumn
 								fields={fields}
