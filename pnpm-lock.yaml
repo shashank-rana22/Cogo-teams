@@ -76,7 +76,9 @@ importers:
       '@cogoport/performance-management': workspace:1.0.0
       '@cogoport/request': workspace:0.1.0
       '@cogoport/scope-select': workspace:0.1.0
+      '@cogoport/shipment-chat': workspace:0.1.0
       '@cogoport/shipment-fcl-freight': workspace:0.1.0
+      '@cogoport/shipment-mails': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
       '@cogoport/supply-dashboards': workspace:0.1.0
       '@cogoport/translate': workspace:0.1.0
@@ -117,7 +119,9 @@ importers:
       '@cogoport/performance-management': link:../packages/performance-management
       '@cogoport/request': link:../common/request
       '@cogoport/scope-select': link:../common/scope-select
+      '@cogoport/shipment-chat': link:../common/shipment-chat
       '@cogoport/shipment-fcl-freight': link:../packages/shipment-fcl-freight
+      '@cogoport/shipment-mails': link:../common/shipment-mails
       '@cogoport/store': link:../common/store
       '@cogoport/supply-dashboards': link:../packages/supply-dashboards
       '@cogoport/translate': link:../packages/Translation
@@ -779,7 +783,7 @@ importers:
       '@cogoport/ocean-modules': workspace:^0.1.0
       '@cogoport/request': workspace:^0.1.0
       '@cogoport/shipment-chat': workspace:^0.1.0
-      '@cogoport/shipment-mails': workspace:^1.0.0
+      '@cogoport/shipment-mails': workspace:^0.1.0
       '@cogoport/store': workspace:^0.1.0
       '@cogoport/utils': ^1.2.6
       file-saver: ^2.0.5

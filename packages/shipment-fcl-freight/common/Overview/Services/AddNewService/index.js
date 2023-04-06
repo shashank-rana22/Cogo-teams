@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import Form from './Form';
 import styles from './styles.module.css';
 
-function CreateNew({
+function AddNewService({
 	upsellableService = {},
 	servicesList = [],
 	shipmentData = {},
@@ -41,7 +41,7 @@ function CreateNew({
 					</div>
 				) : null}
 
-			{	upsellModal ? (
+			{upsellModal ? (
 				<Form
 					upsellModal={upsellModal}
 					setUpsellModal={setUpsellModal}
@@ -56,4 +56,4 @@ function CreateNew({
 	);
 }
 
-export default CreateNew;
+export default AddNewService;

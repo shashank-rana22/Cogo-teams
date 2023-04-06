@@ -3,7 +3,7 @@ import { useContext } from 'react';
 
 import { possibleServices } from '../../../configurations/possible-full-route';
 
-import CreateNew from './CreateNew';
+import AddNewService from './AddNewService';
 import helperFuncs from './helpers/getHelperFuncs';
 import upsellTransportation from './helpers/upsellTransportation';
 import Loader from './Loader';
@@ -24,10 +24,9 @@ function Services() {
 
 	const { cancelUpsellDestinationFor, cancelUpsellOriginFor } = upsellTransportation(serviceObj);
 
-	return (
-		<div className={styles.container}>
-			{!servicesLoading && !isGettingShipment ? (
-
+	return !servicesLoading && !isGettingShipment
+		? (
+			<div className={styles.container}>
 				<div className={styles.service_container}>
 					{(Object.keys(serviceObj.originServices) || []).map((service) => (
 						<ServiceDetails
@@ -65,25 +64,24 @@ function Services() {
 
 					))}
 				</div>
-			) : (
-				<Loader />
-			)}
 
-			<div className={styles.upselling}>
-				{Object.keys(upsellServices).map((tradeType) => (upsellServices[tradeType] || []).map((service) => (
-					<CreateNew
-						upsellableService={service}
-						servicesList={servicesList}
-						shipmentData={shipment_data}
-						primary_service={primary_service}
-						cancelUpsellDestinationFor={cancelUpsellDestinationFor}
-						cancelUpsellOriginFor={cancelUpsellOriginFor}
-					/>
+				<div className={styles.upselling}>
+					{Object.keys(upsellServices).map((tradeType) => (upsellServices[tradeType] || []).map((service) => (
+						<AddNewService
+							upsellableService={service}
+							servicesList={servicesList}
+							shipmentData={shipment_data}
+							primary_service={primary_service}
+							cancelUpsellDestinationFor={cancelUpsellDestinationFor}
+							cancelUpsellOriginFor={cancelUpsellOriginFor}
+						/>
 
-				)))}
+					)))}
+				</div>
+
 			</div>
-
-		</div>
-	);
+		)
+		: <Loader />;
 }
+
 export default Services;

@@ -12,7 +12,7 @@ const Superadmin = dynamic(() => import('./StakeholdersView/Superadmin'), { ssr:
 
 function ShipmentDetails() {
 	const shipment_additional_methods = useMemo(() => ['main_service',
-		'documents', 'bl_container_mappings', 'containers'], []);
+		'documents', 'bl_container_mappings'], []);
 
 	const { get } = useGetShipment({ additional_methods: shipment_additional_methods });
 	const { shipment_data } = get;

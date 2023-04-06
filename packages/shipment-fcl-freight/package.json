@@ -16,7 +16,7 @@
     "@cogoport/ocean-modules": "workspace:^0.1.0",
     "@cogoport/request": "workspace:^0.1.0",
     "@cogoport/shipment-chat": "workspace:^0.1.0",
-    "@cogoport/shipment-mails": "workspace:^1.0.0",
+    "@cogoport/shipment-mails": "workspace:^0.1.0",
     "@cogoport/store": "workspace:^0.1.0",
     "@cogoport/utils": "^1.2.6",
     "file-saver": "^2.0.5",
