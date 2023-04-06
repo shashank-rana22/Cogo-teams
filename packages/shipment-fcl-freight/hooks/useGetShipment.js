@@ -5,7 +5,7 @@ import { useEffect, useCallback } from 'react';
 
 import getApiErrorString from '../utils/getApiErrorString';
 
-function useGetShipment() {
+function useGetShipment({ additional_methods }) {
 	const router = useRouter();
 	const { shipment_id } = router.query;
 
@@ -19,16 +19,15 @@ function useGetShipment() {
 			try {
 				await trigger({
 					params: {
-						id                 : shipment_id,
-						additional_methods : ['main_service',
-							'documents', 'bl_container_mappings'],
+						id: shipment_id,
+						additional_methods,
 					},
 				});
 			} catch (err) {
 				Toast.error(getApiErrorString(err));
 			}
 		})();
-	}, [trigger, shipment_id]);
+	}, [trigger, shipment_id, additional_methods]);
 
 	useEffect(() => {
 		getShipment();

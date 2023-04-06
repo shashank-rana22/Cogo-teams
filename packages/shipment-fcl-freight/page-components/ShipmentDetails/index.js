@@ -11,15 +11,22 @@ const Kam = dynamic(() => import('./StakeholdersView/Kam'), { ssr: false });
 const Superadmin = dynamic(() => import('./StakeholdersView/Superadmin'), { ssr: false });
 
 function ShipmentDetails() {
-	const { get } = useGetShipment();
+	const shipment_additional_methods = useMemo(() => ['main_service',
+		'documents', 'bl_container_mappings', 'containers'], []);
+
+	const { get } = useGetShipment({ additional_methods: shipment_additional_methods });
 	const { shipment_data } = get;
 
-	const additional_methods = useMemo(() => [
+	const services_additional_methods = useMemo(() => [
 		'booking_requirement',
 		'stakeholder',
 		'service_objects'], []);
 
-	const { servicesGet } = useGetServices({ shipment_data, additional_methods });
+	const { servicesGet } = useGetServices({
+		shipment_id        : shipment_data?.id,
+		additional_methods : services_additional_methods,
+	});
+
 	const { getTimeline } = useGetTimeLine({ shipment_data });
 	const { activeStakeholder } = useStakeholderCheck();
 
