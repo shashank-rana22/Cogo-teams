@@ -32,11 +32,11 @@ function MessageCardData({
 		new_message_sent_at = '',
 		pinnedTime = {},
 		last_message = '',
-		last_message_document = {},
+		last_message_document = null,
 		new_message_count = 0,
 	} = getActiveCardDetails(item) || {};
 
-	const lastMessageVar = last_message || last_message_document;
+	const lastMessageVar = last_message_document || last_message;
 	const isImportant = chat_tags?.includes('important') || false;
 	const lastActive = new Date(new_message_sent_at);
 	const checkActiveCard = activeCardId === id;

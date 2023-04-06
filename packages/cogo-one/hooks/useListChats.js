@@ -293,7 +293,7 @@ const useListChats = ({
 					firestore,
 					`${FIRESTORE_PATH[channel_type]}/${id}`,
 				);
-				await updateDoc(messageDoc, { new_message_count: 0, has_admin_unread_message: false });
+				await updateDoc(messageDoc, { new_message_count: 0, has_admin_unread_messages: false });
 				setActiveCard({ activeCardId: id, activeCardData: val });
 			} catch (e) {
 				Toast.error('Chat Not Found');
