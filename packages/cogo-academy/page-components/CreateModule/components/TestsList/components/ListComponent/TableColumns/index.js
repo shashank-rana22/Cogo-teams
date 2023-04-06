@@ -204,13 +204,16 @@ export const testSetColumns = ({
 		Header   : 'STATUS',
 		id       : 'status',
 		accessor : ({ current_status = '', id = '', validity_start = '', validity_end = '' }) => {
-			if (current_status === 'active') {
+			if (['active', 'upcoming'].includes(current_status)) {
 				return (
 					<section className={styles.details}>
 						<section className={styles.status}>
-							<Pill size="md" color="green" className={styles.status_pill}>
+							<Pill
+								size="md"
+								color={current_status === 'upcoming' ? '#00c8ff' : '#C4DC91'}
+								className={styles.status_pill}
+							>
 								{startCase(current_status)}
-
 							</Pill>
 
 							<div role="presentation" onClick={() => copyToClipboard(id)}>
@@ -246,28 +249,6 @@ export const testSetColumns = ({
 							{' '}
 							{startCase(current_status)}
 						</Pill>
-					</section>
-				);
-			}
-
-			if (current_status === 'upcoming') {
-				return (
-					<section>
-						<section>
-							<Pill
-								key={current_status}
-								size="md"
-								color="blue"
-								className={styles.status_pill}
-							>
-								{startCase(current_status)}
-							</Pill>
-						</section>
-
-						<section>
-							{format(validity_start, 'dd/MM/yyyy - ')}
-							{format(validity_end, 'dd/MM/yyyy')}
-						</section>
 					</section>
 				);
 			}
