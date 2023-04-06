@@ -1,0 +1,56 @@
+.container {
+    :global {
+        table {
+            border: 1px solid #E0E0E0;
+            border-collapse: collapse;
+            border-radius: 4px !important;
+        }
+
+        td {
+            border: 1px solid #E0E0E0;
+            border-collapse: collapse;
+            text-align: center;
+        }
+    }
+}
+
+.styled_amount {
+    font-size: 18px;
+    font-weight: 600;
+    color: #F68B21;
+}
+
+.styled_count {
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+}
+
+.styled_credit {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.styled_date {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.credit_note {
+    height: 60px;
+}
+
+.credit_note_text {
+    color: #EE3425
+}
+
+.styled_date_last {
+    font-size: 14px;
+    font-weight: 500;
+    color: #F68B21;
+}

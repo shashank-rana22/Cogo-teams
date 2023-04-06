@@ -3,24 +3,17 @@ import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-interface FilterInterface {
-	entityCode?:string
-	serviceType?:string
-	companyType?: string
-}
 interface ParamsInterface {
-	filterValue?:FilterInterface
 	filters?:SubFilterInterface
 	subActiveTab?:string
+	entityCode?: string
 }
 interface SubFilterInterface {
 	month?:string
 	year?:string
 	date?:Date
 }
-const useInvoiceStatistics = ({ filters, filterValue, subActiveTab }:ParamsInterface) => {
-	const { entityCode = '', serviceType = '', companyType = '' } = filterValue || {};
-
+const useInvoiceStatistics = ({ filters, subActiveTab, entityCode }:ParamsInterface) => {
 	const [{ data:dailyStatsData, loading }, journeyTrigger] = useRequestBf(
 		{
 			url     : '/payments/dashboard/daily-sales-statistics',
@@ -34,12 +27,10 @@ const useInvoiceStatistics = ({ filters, filterValue, subActiveTab }:ParamsInter
 			try {
 				await journeyTrigger({
 					params: {
-						entityCode  : entityCode || undefined,
-						month       : filters?.month || undefined,
-						year        : filters?.year || undefined,
-						serviceType : serviceType || undefined,
-						companyType : companyType !== 'All' ? companyType : undefined,
-						asOnDate    : filters?.date ? format(
+						entityCode : entityCode || undefined,
+						month      : filters?.month || undefined,
+						year       : filters?.year || undefined,
+						asOnDate   : filters?.date ? format(
 							filters?.date,
 							'yyyy-MM-dd 00:00:00',
 							{},
@@ -53,7 +44,7 @@ const useInvoiceStatistics = ({ filters, filterValue, subActiveTab }:ParamsInter
 			}
 		};
 		getJourneyData();
-	}, [journeyTrigger, filters, subActiveTab, entityCode, serviceType, companyType]);
+	}, [journeyTrigger, filters, subActiveTab, entityCode]);
 	return {
 		dailyStatsData,
 		loading,

@@ -12,14 +12,15 @@ interface ParamsInterface {
 	filterValue?:FilterInterface
 	filters?:SubFilterInterface
 	subActiveTab?:string
+	entityCode?: string
 }
 interface SubFilterInterface {
 	month?:string
 	year?:string
 	date?:Date
 }
-const useGetGraph = ({ filters, filterValue, subActiveTab }:ParamsInterface) => {
-	const { entityCode = '', serviceType = '', companyType = '' } = filterValue || {};
+const useGetGraph = ({ filters, filterValue, subActiveTab, entityCode }:ParamsInterface) => {
+	const { serviceType = '', companyType = '' } = filterValue || {};
 
 	const [{ data, loading }, Trigger] = useRequestBf(
 		{

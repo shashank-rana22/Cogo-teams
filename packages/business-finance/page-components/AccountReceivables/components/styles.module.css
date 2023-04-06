@@ -6,6 +6,9 @@
 }
 
 .header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	padding-bottom: 16px;
 }
 
@@ -20,4 +23,8 @@
 	height: 4px;
 	background: #ed3726;
 	border-radius: 4px;
+}
+
+.input {
+	width: 260px;
 }

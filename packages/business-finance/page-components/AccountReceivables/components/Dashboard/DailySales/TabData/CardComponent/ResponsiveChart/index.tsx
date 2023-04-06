@@ -1,6 +1,7 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { StreamDatum } from '@cogoport/charts/stream/index';
 import { Loader } from '@cogoport/components';
+import { getFormattedPrice } from '@cogoport/forms';
 
 import getAmountInLakhCrK from '../../../../../../../commons/getAmountInLakhCrK';
 import EmptyState from '../../../../../../commons/EmptyStateDocs';
@@ -9,11 +10,20 @@ import styles from './styles.module.css';
 
 interface ResponsiveChartProps {
 	data?: StreamDatum[],
-	loadingData?: boolean
+	loadingData?: boolean,
+	entityCode?: string
 }
 
-function ResponsiveChart({ data, loadingData }: ResponsiveChartProps) {
-	const AmountData = [];
+function ResponsiveChart({ data, loadingData, entityCode }: ResponsiveChartProps) {
+	console.log('data', data);
+
+	const keyValue = {
+		101 : 'INR',
+		201 : 'EUR',
+		301 : 'INR',
+		401 : 'SGD',
+		501 : 'VND',
+	};	const AmountData = [];
 	const CountData = [];
 
 	(data || []).forEach((item) => {
@@ -52,6 +62,7 @@ function ResponsiveChart({ data, loadingData }: ResponsiveChartProps) {
 					colors={['#88CAD1', '#F68B21']}
 					enableSlices="x"
 					yScale={{ type: 'linear', min: 0, max: 'auto' }}
+					yFormat={(value) => getFormattedPrice(value, keyValue[entityCode])}
 					axisTop={null}
 					axisRight={null}
 					axisBottom={{

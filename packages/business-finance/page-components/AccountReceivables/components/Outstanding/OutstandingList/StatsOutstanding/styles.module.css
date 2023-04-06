@@ -71,10 +71,21 @@
 	font-weight: 600;
 }
 
+.amount_open {
+	display: flex;
+	margin-top: 2px;
+	word-break: break-all;
+	font-weight: 600;
+	font-size: 12px; 
+}
+
 .amount {
 	display: flex;
 	margin-top: 2px;
 	word-break: break-all;
+	font-weight: 600;
+	font-size: 12px; 
+	color: #cb6464
 }
 
 .container {

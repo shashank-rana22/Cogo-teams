@@ -4,14 +4,13 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { months } from '../constants';
 
-const useReceivablesDashboard = () => {
+const useReceivablesDashboard = (entityCode: string) => {
 	const [filterValue, setFilterValue] = useState({
-		entityCode  : '301',
 		serviceType : '',
 		companyType : 'All',
 	});
 
-	const { entityCode = '', serviceType = '', companyType = '' } = filterValue || {};
+	const { serviceType = '', companyType = '' } = filterValue || {};
 
 	const d = new Date();
 	const currentMonth = months[d.getMonth()];
@@ -60,15 +59,15 @@ const useReceivablesDashboard = () => {
 		try {
 			quaterlyDataTrigger({
 				params: {
-					entityCode  : filterValue?.entityCode || undefined,
-					serviceType : filterValue?.serviceType || undefined,
-					companyType : filterValue.companyType !== 'All' ? filterValue.companyType : undefined,
+					entityCode  : entityCode || undefined,
+					serviceType : serviceType || undefined,
+					companyType : companyType !== 'All' ? companyType : undefined,
 				},
 			});
 		} catch (e) {
 			Toast.error(e?.error?.message || 'Something went wrong');
 		}
-	}, [filterValue.companyType, filterValue?.entityCode, filterValue?.serviceType, quaterlyDataTrigger]);
+	}, [companyType, entityCode, serviceType, quaterlyDataTrigger]);
 
 	const [
 		{ data: kamOutstandingData, loading: kamOutstandingLoading },

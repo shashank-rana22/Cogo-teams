@@ -5,16 +5,16 @@ import { useEffect, useState } from 'react';
 import { months } from '../constants';
 
 interface FilterInterface {
-	entityCode?:string
 	serviceType?:string
 	companyType?:string
 }
 interface ParamsInterface {
 	filterValue?:FilterInterface
+	entityCode?: string
 }
 
-const useGetInvoiceJourney = ({ filterValue }:ParamsInterface) => {
-	const { entityCode = '', serviceType = '', companyType = '' } = filterValue || {};
+const useGetInvoiceJourney = ({ filterValue, entityCode }:ParamsInterface) => {
+	const { serviceType = '', companyType = '' } = filterValue || {};
 
 	const d = new Date();
 	const currentMonth = months[d.getMonth()];

@@ -21,7 +21,7 @@ const useGetPartnerRmMapping = () => {
 				},
 			});
 		} catch (err) {
-			Toast.error(err?.error?.message);
+			console.log(err?.message);
 		}
 	};
 
