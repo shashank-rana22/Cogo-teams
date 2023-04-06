@@ -1,4 +1,4 @@
-import { Checkbox, Pill } from '@cogoport/components';
+import { Checkbox, Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { startCase, format } from '@cogoport/utils';
 
@@ -39,24 +39,27 @@ const getQuestionSetColumns = ({ idArray, setIdArray }) => ([
 		Header   : 'QUESTION SET NAME',
 		id       : 'name',
 		accessor : ({ name = '' }) => (
-			<section>
-				{startCase(name) || '-'}
-			</section>
+			<Tooltip content={name} placement="top">
+				<div className={styles.content}>
+					{startCase(name) || '-'}
+				</div>
+			</Tooltip>
 		),
 	},
 	{
 		Header   : 'TOPIC',
 		id       : 'topic',
 		accessor : ({ topic = '-' }) => (
-			<section>
+			<Tooltip content={topic} placement="top">
 				<Pill
 					key={topic}
 					size="sm"
 					color="blue"
+					className={styles.content}
 				>
 					{startCase(topic)}
 				</Pill>
-			</section>
+			</Tooltip>
 		),
 	},
 	{
