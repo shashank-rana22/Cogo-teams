@@ -7,6 +7,10 @@ const checkErrors = ({ options, question_type }) => {
 
 	const correctOptionsLength = correctOptions.length;
 
+	if (allOptions.length < 2) {
+		return 'Atleast two option should be present';
+	}
+
 	if (!correctOptionsLength) {
 		return 'Atleast one option should be true';
 	}

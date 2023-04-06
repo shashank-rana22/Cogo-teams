@@ -1,6 +1,6 @@
 import { Input, Pagination, Select, Tooltip } from '@cogoport/components';
 import { IcMInfo, IcMSearchlight } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import StyledTable from '../../../commons/StyledTable';
 import useGetProfitabillityShipmentList from '../../hooks/getProfitabillityShipmentList';
@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 function Profitabillity({ globalFilters, entityTabFilters }) {
 	const [filters, setFilters] = useState({});
 	const [jobsFilters, setJobsFilters] = useState('');
-
+	const [sort, setSort] = useState('');
 	const tab = [
 		{
 			key   : 'shipment',
@@ -29,13 +29,23 @@ function Profitabillity({ globalFilters, entityTabFilters }) {
 		profitabillityLoading,
 		searchValue,
 		setSearchValue,
-	} = useGetProfitabillityShipmentList({ tabs, filters, setFilters, jobsFilters, globalFilters, entityTabFilters });
+	} = useGetProfitabillityShipmentList({
+		tabs,
+		filters,
+		setFilters,
+		jobsFilters,
+		globalFilters,
+		entityTabFilters,
+		sort,
+	});
 
 	const { pageIndex = 0, pageSize = 0, totalRecord, shipmentList = [], customerList = [] } = profitabillityData || {};
-
 	const rest = { loading: profitabillityLoading };
+	const columns = getProfitabillityColumn(tabs, sort, setSort);
 
-	const columns = getProfitabillityColumn(tabs);
+	useEffect(() => {
+		setSort('');
+	}, [tabs]);
 
 	return (
 

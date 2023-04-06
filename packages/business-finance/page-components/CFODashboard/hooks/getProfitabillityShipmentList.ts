@@ -14,10 +14,11 @@ interface Props {
 	setFilters: (p: object) => void;
 	globalFilters:GenericObject
 	entityTabFilters?:string
+	sort?:string
 }
 
 const useGetProfitabillityShipmentList = (
-	{ tabs, filters, setFilters, jobsFilters, globalFilters, entityTabFilters }:Props,
+	{ tabs, filters, setFilters, jobsFilters, globalFilters, entityTabFilters, sort }:Props,
 ) => {
 	const [searchValue, setSearchValue] = useState<string>('');
 
@@ -43,7 +44,7 @@ const useGetProfitabillityShipmentList = (
 
 	const startDateFilter = startDate ? format(startDate as Date, 'yyyy-MM-dd', {}, false) : undefined;
 	const endDateFilters = endDate ? format(endDate as Date, 'yyyy-MM-dd', {}, false) : undefined;
-
+	const sortingHandle = sort === 'Asc' || sort === 'Desc';
 	useEffect(() => {
 		const refetch = () => {
 			try {
@@ -54,8 +55,8 @@ const useGetProfitabillityShipmentList = (
 						startDate    : tabs === 'shipment' ? startDateFilter : undefined,
 						endDate      : tabs === 'shipment' ? endDateFilters : undefined,
 						jobStatus    : jobsFilters || undefined,
-						// sortType    : 'Desc',
-						// sortBy      : 'profit',
+						sortType     : sortingHandle ? sort : undefined,
+						sortBy       : sortingHandle ? 'profit' : undefined,
 						pageSize     : 5,
 						q            : filters?.q || undefined,
 						pageIndex    : filters?.pageIndex,
@@ -66,7 +67,8 @@ const useGetProfitabillityShipmentList = (
 			}
 		};
 		refetch();
-	}, [tabs, filters, jobsFilters, globalFilters, endDateFilters, startDateFilter, trigger, entityTabFilters]);
+	}, [tabs, filters, jobsFilters, globalFilters,
+		endDateFilters, startDateFilter, trigger, sortingHandle, entityTabFilters, sort]);
 
 	useEffect(() => {
 		debounceQuery(searchValue);
