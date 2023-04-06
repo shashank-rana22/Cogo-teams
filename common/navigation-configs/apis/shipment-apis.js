@@ -1297,6 +1297,21 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'get_shipment_ftl_freight_service_tracker',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'start_shipment_ftl_freight_service_tracking',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_ftl_freight_service_tracking_consent',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
