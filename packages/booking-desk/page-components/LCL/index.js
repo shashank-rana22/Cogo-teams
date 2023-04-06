@@ -4,11 +4,13 @@ import Filters from '../../commons/Filters';
 import List from '../../commons/List';
 import Loader from '../../commons/Loader';
 import Tabs from '../../commons/Tabs';
-import { lcl_freight as tabs } from '../../config/TABS_CONFIG.json';
+import allTabs from '../../config/TABS_CONFIG.json';
 import useListBookingDeskShipments from '../../hooks/useListBookingDeskShipments';
 
 import Card from './Card';
 import styles from './styles.module.css';
+
+const { lcl_freight: tabs } = allTabs;
 
 export default function FCLDesk({ stateProps = {} }) {
 	const { loading, data } = useListBookingDeskShipments({ stateProps, prefix: 'lcl_freight' });

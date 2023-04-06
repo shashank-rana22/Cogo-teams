@@ -1,6 +1,6 @@
 const bookingDesk = {
 	'/[partner_id]/booking-desk': {
-		navigation: 'coe-booking_desk',
+		navigation: 'coe-booking_note_desk',
 	},
 };
 
