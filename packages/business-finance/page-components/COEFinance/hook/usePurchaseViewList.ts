@@ -24,7 +24,7 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject,
 		if (subActiveTabReject === 'coe_rejected') {
 			return 'COE_REJECTED';
 		}
-		return 'INITIATED';
+		return 'LOCKED';
 	};
 
 	const [currentTab, setCurrentTab] = useState(getStatus());
