@@ -18,6 +18,7 @@ function Services() {
 		servicesList,
 		refetchServices,
 		servicesLoading,
+		activeStakeholder,
 	} = useContext(ShipmentDetailContext);
 
 	const { serviceObj, upsellServices } =	helperFuncs(servicesList, possibleServices);
@@ -72,19 +73,23 @@ function Services() {
 					</div>
 				</div>
 
-				<div className={styles.upselling}>
-					{Object.keys(upsellServices).map((tradeType) => (upsellServices[tradeType] || []).map((service) => (
-						<AddNewService
-							upsellableService={service}
-							servicesList={servicesList}
-							shipmentData={shipment_data}
-							primary_service={primary_service}
-							cancelUpsellDestinationFor={cancelUpsellDestinationFor}
-							cancelUpsellOriginFor={cancelUpsellOriginFor}
-						/>
+				{
+				activeStakeholder === 'kam' ? (
+					<div className={styles.upselling}>
+						{Object.keys(upsellServices).map((tradeType) => (upsellServices[tradeType]).map((service) => (
+							<AddNewService
+								upsellableService={service}
+								servicesList={servicesList}
+								shipmentData={shipment_data}
+								primary_service={primary_service}
+								cancelUpsellDestinationFor={cancelUpsellDestinationFor}
+								cancelUpsellOriginFor={cancelUpsellOriginFor}
+							/>
 
-					)))}
-				</div>
+						)))}
+					</div>
+				) : null
+}
 
 			</div>
 		)
