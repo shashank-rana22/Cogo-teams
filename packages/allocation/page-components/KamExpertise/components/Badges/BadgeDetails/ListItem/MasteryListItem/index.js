@@ -3,7 +3,7 @@ import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData }) {
+function MasteryListItem({ data = {}, index, setToggleScreen = () => {}, setMasteryItemData = () => {} }) {
 	const {
 		badge_name = '_', description = '_',
 		audits = [], created_by = {},
@@ -69,8 +69,8 @@ function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData
 
 						<span>Mastery in</span>
 
-						{mastery_badges_detail?.map((item) => (
-							<div className={styles.pill}>
+						{(mastery_badges_detail || []).map((item) => (
+							<div key={item?.id} className={styles.pill}>
 								<Pill color="#ced1ed">{item?.badge_name}</Pill>
 							</div>
 						))}
