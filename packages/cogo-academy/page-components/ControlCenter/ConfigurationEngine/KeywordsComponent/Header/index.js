@@ -82,6 +82,7 @@ function Header({
 							<SelectController
 								control={control}
 								name="keyword_type"
+								placeholder="Select keyword type"
 								options={[
 									{ label: 'Custom Vocabulary', value: 'custom_vocab' },
 									{ label: 'Standard Terms', value: 'standard_terms' }]}
