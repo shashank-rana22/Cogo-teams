@@ -57,6 +57,7 @@ function ShipmentDetailsCard({
 		accountNumber = '',
 		ifscCode = '',
 	} = sellerBankDetail || {};
+	console.log({ registrationNumber, sellerDetail }, 'refgknik');
 	const {
 		billNumber = '',
 		billDate,
@@ -488,7 +489,7 @@ function ShipmentDetailsCard({
 											<div className={styles.margin_bottom}>
 												PAN Number -
 												{' '}
-												<span>{(taxNumber || '').slice(2, 12)}</span>
+												<span>{(registrationNumber || '')}</span>
 											</div>
 											<div className={styles.margin_bottom}>
 												GST Number -
