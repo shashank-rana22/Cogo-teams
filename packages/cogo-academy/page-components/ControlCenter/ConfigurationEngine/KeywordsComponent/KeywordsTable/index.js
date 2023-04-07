@@ -8,7 +8,7 @@ import LoadingState from '../../commons/LoadingState';
 
 import styles from './styles.module.css';
 
-function TagTable({
+function KeywordsTable({
 	activeTag = '',
 	columns = [],
 	data = [],
@@ -18,7 +18,7 @@ function TagTable({
 	setConfigurationPage = () => {},
 	reset,
 }) {
-	const { list:listTagsData = [], total_count } = data || {};
+	const { list:listKeywordsData = [], total_count } = data || {};
 	const router = useRouter();
 
 	if (tagsLoading) {
@@ -40,12 +40,12 @@ function TagTable({
 				activeTag === 'active'
 					? (
 						<EmptyState
-							text="There are no tags right now. Start by adding a tag."
+							text="There are no keywords right now. Start by adding a keyword."
 							btn_text="Add tag"
 							onClick={onClick}
 						/>
 					) : (
-						<EmptyState text="There are no inactive tags right now." />
+						<EmptyState text="There are no inactive keywords right now." />
 					)
 			);
 		}
@@ -54,7 +54,7 @@ function TagTable({
 			<div>
 				<div>
 					<div className={styles.table}>
-						<StyledTable columns={columns} data={listTagsData} />
+						<StyledTable columns={columns} data={listKeywordsData} />
 					</div>
 
 				</div>
@@ -78,4 +78,4 @@ function TagTable({
 	);
 }
 
-export default TagTable;
+export default KeywordsTable;

@@ -1,15 +1,15 @@
-import { useRouter } from '@cogoport/next';
 import { useState, useEffect } from 'react';
 
 import useListFaqTags from '../hooks/useListFaqTags';
-import tagListColumns from '../TableConfigurations/tagListColumns';
+import keyWordListColumns from '../TableConfigurations/keyWordListColumns';
 
 import Header from './Header';
-import TagsTable from './TagsTable';
+import KeywordsTable from './KeywordsTable';
 import useDeleteTag from './useDeleteTag';
 
-function TagComponent({ configurationPage, setConfigurationPage, reset }) {
+function KeywordsComponent({ setConfigurationPage, reset }) {
 	const [searchTagsInput, setSearchTagsInput] = useState('');
+	const [sortType, setSortType] = useState(true);
 
 	const {
 		data,
@@ -19,7 +19,7 @@ function TagComponent({ configurationPage, setConfigurationPage, reset }) {
 		tagCurrentPage,
 		setTagCurrentPage,
 		fetchFaqTag,
-	} = useListFaqTags({ searchTagsInput });
+	} = useListFaqTags({ searchTagsInput, sortType });
 
 	const {
 		onClickDeleteIcon = () => {},
@@ -28,23 +28,14 @@ function TagComponent({ configurationPage, setConfigurationPage, reset }) {
 		loading:updateApiLoading,
 	} = useDeleteTag({ fetchFaqTag });
 
-	const router = useRouter();
-
-	const onClickEdit = (item) => {
-		setConfigurationPage('tag');
-		router.push(
-			`/learning/faq/create/configuration?update=tag&id=${item.id}`,
-			`/learning/faq/create/configuration?update=tag&id=${item.id}`,
-		);
-	};
-
-	const { listColumns = [] } = tagListColumns({
-		onClickEdit,
+	const { listColumns = [] } = keyWordListColumns({
+		setSortType,
 		onClickDeleteIcon,
 		showPopOver,
 		setShowPopOver,
 		updateApiLoading,
 		activeTag,
+		sortType,
 	});
 
 	useEffect(() => {
@@ -54,8 +45,6 @@ function TagComponent({ configurationPage, setConfigurationPage, reset }) {
 	return (
 		<div>
 			<Header
-				configurationPage={configurationPage}
-				setConfigurationPage={setConfigurationPage}
 				activeTag={activeTag}
 				setActiveTag={setActiveTag}
 				searchTagsInput={searchTagsInput}
@@ -63,7 +52,7 @@ function TagComponent({ configurationPage, setConfigurationPage, reset }) {
 				reset={reset}
 			/>
 
-			<TagsTable
+			<KeywordsTable
 				activeTag={activeTag}
 				columns={listColumns}
 				data={data}
@@ -77,4 +66,4 @@ function TagComponent({ configurationPage, setConfigurationPage, reset }) {
 	);
 }
 
-export default TagComponent;
+export default KeywordsComponent;
