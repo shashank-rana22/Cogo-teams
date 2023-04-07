@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { IcMPreview } from '@cogoport/icons-react';
+import { IcMEyeOpen } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -19,7 +19,7 @@ function FullView({ url }) {
 			<Button type="button" onClick={() => openDocument(url)} size="md" themeType="secondary">
 				Preview
 				<div className={styles.icon}>
-					<IcMPreview height={16} width={16} />
+					<IcMEyeOpen height={16} width={16} />
 				</div>
 			</Button>
 		</div>
