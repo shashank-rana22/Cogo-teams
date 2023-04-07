@@ -1,10 +1,10 @@
-.level_card_collapse{
-
+.level_card_collapse {
 	:global {
-		.ui_collapse_title{
+		.ui_collapse_title {
 			width: 100%;
 		}
-		.ui_collapse_header{
+
+		.ui_collapse_header {
 			align-items: baseline;
 			padding: 12px 16px;
 		}
@@ -12,10 +12,7 @@
 		.ui_collapse_main > div {
 			margin-bottom: 10px;
 		}
-		
 	}
-	
-
 }
 
 .create_button {

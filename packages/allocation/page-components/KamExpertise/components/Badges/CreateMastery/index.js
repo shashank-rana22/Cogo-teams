@@ -1,5 +1,7 @@
 import { Button } from '@cogoport/components';
-import { isEmpty, format } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { isEmpty } from '@cogoport/utils';
 
 import { getFieldController } from '../../../../../common/Form/getFieldController';
 import useCreateMasterConfiguration from '../../../hooks/useCreateMasterConfiguration';
@@ -48,7 +50,11 @@ function CreateMastery(props) {
 							>
 								Last Modified :
 								{' '}
-								{updated_at ? format(updated_at, 'dd MMMM yyyy') : '_'}
+								{updated_at ? formatDate({
+									date       : updated_at,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+									formatType : 'date',
+								}) : '_'}
 							</p>
 
 							<p className={styles.text_styles}>

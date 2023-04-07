@@ -1,5 +1,7 @@
 import { Placeholder } from '@cogoport/components';
-import { format, startCase } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -28,7 +30,11 @@ function Header({ auditData, loading }) {
 
 						<span>
 							{loading ? <Placeholder height="20px" width="120px" />
-								: ((updated_at && (format(updated_at, 'dd-MM-YYYY'))) || '')}
+								: ((updated_at && (formatDate({
+									date       : updated_at,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MM-yyyy'],
+									formatType : 'date',
+								}))) || '')}
 						</span>
 					</div>
 
