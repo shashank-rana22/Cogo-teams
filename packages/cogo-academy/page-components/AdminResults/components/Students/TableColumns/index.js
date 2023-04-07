@@ -15,14 +15,14 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 			</div>
 		),
 		id       : 'user',
-		accessor : ({ user = {} }) => <section>{user.name}</section>,
+		accessor : ({ user = {} }) => <section className={styles.section}>{user?.name}</section>,
 	},
 
 	{
-		Header   : <div>PASSED/FAILED</div>,
+		Header   : <div className={styles.container}>PASSED/FAILED</div>,
 		id       : 'passed_failed',
 		accessor : ({ result_status = '' }) => (
-			<section>{startCase(result_status) || '-'}</section>
+			<section className={styles.section}>{startCase(result_status) || '-'}</section>
 		),
 	},
 	{
@@ -39,7 +39,7 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 		),
 		id       : 'score_achieved',
 		accessor : ({ final_score = '', test = {} }) => (
-			<section>
+			<section className={styles.section}>
 				{toFixed(final_score, 2)}
 				/
 				{toFixed(test.total_marks, 2)}
@@ -61,7 +61,7 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 		),
 		id       : 'percentile',
 		accessor : ({ percentile = '' }) => (
-			<div>{percentile !== null ? toFixed(percentile, 2) : '-'}</div>
+			<div className={styles.section}>{percentile !== null ? toFixed(percentile, 2) : '-'}</div>
 		),
 	},
 	{
@@ -81,7 +81,7 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 			const timeTaken = Math.ceil(time_taken);
 			return (
 				(time_taken > 0) ? (
-					<div>
+					<div className={styles.section}>
 						{timeTaken}
 						{' '}
 						{timeTaken > 1 ? 'mins' : 'min'}
@@ -105,7 +105,7 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 		),
 		id       : 'attempted_on',
 		accessor : ({ created_at = '' }) => (
-			<section>
+			<section className={styles.section}>
 				{format(
 					created_at,
 					`${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']} ${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`,

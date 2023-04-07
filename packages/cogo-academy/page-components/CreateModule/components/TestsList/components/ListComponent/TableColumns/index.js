@@ -4,29 +4,36 @@ import { IcMShare } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
 
+import SortComponent from '../../SortComponent';
 import copyToClipboard from '../helpers/copyToClipboard';
 
 import { QuestionSetButtons, TestSetButtons } from './ButtonComponent';
 import styles from './styles.module.css';
 
-export const questionSetColumns = ({ loading, router, setShowModal, setQuestionSetId }) => [
+export const questionSetColumns = ({ loading, router, setShowModal, setQuestionSetId, sortFilter, setSortFilter }) => [
 	{
-		Header   : 'NAME',
+		Header   : 'QUESTION SET NAME',
 		id       : 'name',
 		accessor : ({ name = '' }) => (
-			<section>{name}</section>
+			<div>
+				<Tooltip maxWidth={500} content={startCase(name)} placement="top">
+					<div className={styles.content}>
+						{name}
+					</div>
+				</Tooltip>
+			</div>
 		),
 	},
 	{
 		Header   : 'TOPIC',
 		id       : 'topic',
 		accessor : ({ topic = [] }) => (
-			<section>
+			<section className={styles.content}>
 				<Tooltip maxWidth={500} content={startCase(topic)} placement="top">
 					<Pill
 						className={styles.topic_pill}
 						size="md"
-						color="#CFEAED"
+						color="#F3FAFA"
 					>
 						{startCase(topic)}
 					</Pill>
@@ -35,29 +42,28 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 		),
 	},
 	{
-		Header   : 'TOTAL QUESTIONS/CASES',
-		id       : 'total_questions',
-		accessor : ({
-			non_case_study_question_count
-			= 0, case_study_question_count
-			= 0,
-		}) => (
+		Header   : 'COGO ENTITY',
+		id       : 'cogo_entity_name',
+		accessor : ({ cogo_entity_name = '' }) => (
+			<section>{cogo_entity_name}</section>
+		),
+	},
+	{
+		Header   : 'NO. OF QUESTIONS',
+		id       : 'questions',
+		accessor : ({ non_case_study_question_count = 0 }) => (
 			<section>
 				{non_case_study_question_count || 0}
-				{' '}
-				Q +
-				{' '}
-				{case_study_question_count || 0}
-				{' '}
-				Cases
 			</section>
 		),
 	},
 	{
-		Header   : 'STATUS',
-		id       : 'status',
-		accessor : ({ status = '' }) => (
-			<section>{status}</section>
+		Header   : 'NO. OF CASES',
+		id       : 'case_study_questions',
+		accessor : ({ case_study_question_count = 0 }) => (
+			<section>
+				{case_study_question_count || 0}
+			</section>
 		),
 	},
 	{
@@ -70,13 +76,24 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 		),
 	},
 	{
-		Header   : 'LAST UPDATED',
+		Header: (
+			<div className={styles.container}>
+				<div className={styles.item}>LAST UPDATED</div>
+
+				<SortComponent
+					value="updated_at"
+					sortFilter={sortFilter}
+					setSortFilter={setSortFilter}
+				/>
+			</div>
+		),
 		id       : 'updated_at',
 		accessor : ({ updated_at = '' }) => (
-			<section>
-				<span className={styles.time}>{format(updated_at, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}</span>
-				<span className={styles.time}>{format(updated_at, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}</span>
-			</section>
+			<span className={styles.time}>
+				{`${format(updated_at, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}`}
+				{' '}
+				{format(updated_at, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}
+			</span>
 		),
 	},
 	{
@@ -95,7 +112,10 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 	},
 ];
 
-export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => ([
+export const testSetColumns = ({
+	loading, router, setShowModal, setTestId, sortFilter,
+	setSortFilter,
+}) => ([
 	{
 		Header   : 'NAME',
 		id       : 'name',
@@ -126,11 +146,11 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 		accessor : ({ topics = [] }) => (
 			<section className={styles.topics}>
 				{topics.map((topic) => (
-					<Tooltip maxWidth={500} content={startCase(topic)} placement="top" key={topic}>
+					<Tooltip maxWidth={400} content={startCase(topic)} placement="top" key={topic}>
 						<Pill
 							className={styles.topic_pill}
-							size="sm"
-							color="#CFEAED"
+							size="lg"
+							color="#F3FAFA"
 						>
 							{startCase(topic)}
 						</Pill>
@@ -188,7 +208,10 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 				return (
 					<section className={styles.details}>
 						<section className={styles.status}>
-							<Pill size="md" color="green">{startCase(current_status)}</Pill>
+							<Pill size="md" color="green" className={styles.status_pill}>
+								{startCase(current_status)}
+
+							</Pill>
 
 							<div role="presentation" onClick={() => copyToClipboard(id)}>
 								<Pill
@@ -196,6 +219,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 									size="md"
 									prefix={<IcMShare />}
 									color="#FEF3E9"
+									className={styles.status_pill}
 									style={{ cursor: 'pointer' }}
 								>
 									Share Test Link
@@ -216,6 +240,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 							key={current_status}
 							size="md"
 							color="orange"
+							className={styles.status_pill}
 						>
 							Results
 							{' '}
@@ -233,6 +258,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 								key={current_status}
 								size="md"
 								color="blue"
+								className={styles.status_pill}
 							>
 								{startCase(current_status)}
 							</Pill>
@@ -253,6 +279,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 							key={current_status}
 							size="md"
 							color="red"
+							className={styles.status_pill}
 						>
 							{startCase(current_status)}
 						</Pill>
@@ -266,6 +293,7 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 						key={current_status}
 						size="md"
 						color="yellow"
+						className={styles.status_pill}
 					>
 						{startCase(current_status)}
 					</Pill>
@@ -288,9 +316,21 @@ export const testSetColumns = ({ loading, router, setShowModal, setTestId }) => 
 		),
 	},
 	{
-		Header   : 'LAST UPDATED',
-		id       : 'updatedAt',
-		accessor : ({ updated_at = '' }) => (
+		Header: (
+			<div className={styles.container}>
+				<div className={styles.item}>LAST UPDATED</div>
+
+				<SortComponent
+					value="updated_at"
+					sortFilter={sortFilter}
+					setSortFilter={setSortFilter}
+				/>
+			</div>
+		),
+
+		id: 'updatedAt',
+
+		accessor: ({ updated_at = '' }) => (
 			<section className={styles.time}>
 				<span>{format(updated_at, 'dd MMM yy')}</span>
 

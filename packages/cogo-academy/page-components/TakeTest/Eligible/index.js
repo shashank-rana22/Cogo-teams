@@ -52,15 +52,15 @@ function Eligible({ currentQuestionId }) {
 		if (localStorage.getItem(`current_question_${test_id}_${user_id}`)) {
 			setActiveState('ongoing');
 
-			const elem = document.getElementById('maincontainer');
+			// const elem = document.getElementById('maincontainer');
 
-			if (elem?.requestFullscreen) {
-				elem?.requestFullscreen();
-			} else if (elem?.webkitRequestFullscreen) { /* Safari */
-				elem?.webkitRequestFullscreen();
-			} else if (elem?.msRequestFullscreen) { /* IE11 */
-				elem?.msRequestFullscreen();
-			}
+			// if (elem?.requestFullscreen) {
+			// 	elem?.requestFullscreen();
+			// } else if (elem?.webkitRequestFullscreen) { /* Safari */
+			// 	elem?.webkitRequestFullscreen();
+			// } else if (elem?.msRequestFullscreen) { /* IE11 */
+			// 	elem?.msRequestFullscreen();
+			// }
 		}
 
 		localStorage.setItem('visibilityChangeCount', 1);
@@ -90,6 +90,7 @@ function Eligible({ currentQuestionId }) {
 				loading={loading}
 				testData={data}
 				page={page}
+				test_user_mapping_state={test_user_mapping_state}
 			/>
 		</div>
 	);

@@ -25,6 +25,16 @@ const useStudentWiseTestResult = ({ test_id = '' }) => {
 			},
 			title: 'Appeared',
 		},
+		ongoing: {
+			index   : 2,
+			payload : {
+				sort_by   : sortBy,
+				sort_type : sortType,
+				filters   : { test_id, q: query, result_status: filter, state: 'ongoing' },
+				...params,
+			},
+			title: 'Ongoing',
+		},
 		not_appeared: {
 			index   : 1,
 			payload : {

@@ -7,7 +7,14 @@ import StatsDisplay from '../../../../utils/StatsDisplay';
 
 import styles from './styles.module.css';
 
-function EndTimer({ data = {}, showTimeOverModal, setShowTimeOverModal, setActiveState, test_user_mapping_id }) {
+function EndTimer({
+	showTimeOverModal,
+	setShowTimeOverModal,
+	setActiveState,
+	test_user_mapping_id,
+	user_appearance,
+	total_question_count,
+}) {
 	const { endTest, endTestLoading } = useEndTest({ setShowTimeOverModal, setActiveState, test_user_mapping_id });
 
 	useEffect(() => {
@@ -34,7 +41,10 @@ function EndTimer({ data = {}, showTimeOverModal, setShowTimeOverModal, setActiv
 					The test time has ended.
 					Your responses will be now be submitted.Thank You for attempting the test.
 				</p>
-				<StatsDisplay data={data} />
+				<StatsDisplay
+					data={user_appearance}
+					total_question_count={total_question_count}
+				/>
 
 				<Button
 					onClick={endTest}

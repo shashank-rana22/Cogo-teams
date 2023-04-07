@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-const useCreateRfqSupplyAgentPreference = ({ item, reason, setShow, refetch }) => {
+const useCreateRfqSupplyAgentPreference = ({ item, reason, setShow, refetch, othertext }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_rfq_supply_agent_preference',
 		method : 'POST',
@@ -13,7 +13,7 @@ const useCreateRfqSupplyAgentPreference = ({ item, reason, setShow, refetch }) =
 				data: {
 					rfq_id          : item?.id,
 					preference_type : 'close',
-					remarks         : [reason],
+					remarks         : othertext !== null ? [reason, othertext] : [reason],
 				},
 			});
 			setShow(false);

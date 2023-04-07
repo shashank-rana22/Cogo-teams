@@ -1,0 +1,59 @@
+.send_to_container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 10px;
+	background: #f6f5fe;
+	border-bottom: 1px solid black;
+}
+
+.container {
+	position: absolute;
+	bottom: 19%;
+	left: 42%;
+	width: 27%;
+	cursor: pointer;
+	background: #f8f2e7;
+	border-radius: 5px;
+	box-shadow: 0 2px 20px rgb(0 0 0 / 10%);
+
+	& > div:hover {
+		box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+	}
+
+	& > :last-child {
+		border-bottom: none;
+	}
+}
+
+.options {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 4px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #221f20;
+	border-bottom: 0.5px solid #221f20;
+}
+
+.send_input {
+	width: 250px;
+
+	:global {
+		.ui_input_container.ui_ps_size_md {
+			height: 20px;
+		}
+
+		.ui_input_container.ui_ps_size_md .ui_input_control {
+			font-size: 12px;
+		}
+	}
+}
+
+.send_text {
+	margin-right: 4px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #000;
+}

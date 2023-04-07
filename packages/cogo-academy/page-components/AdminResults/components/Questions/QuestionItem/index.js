@@ -1,4 +1,4 @@
-import { Accordion, Pill } from '@cogoport/components';
+import { Popover, Accordion, Pill } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 import toFixed from '../../../../CreateModule/utils/toFixed';
@@ -7,7 +7,7 @@ import QuestionCard from '../CaseStudy/QuestionCard';
 import styles from './styles.module.css';
 
 function TitleComponent({
-	appeared_percent,
+	user_appeared_percent,
 	correct_percentage,
 	difficulty,
 	students_appeared,
@@ -15,10 +15,17 @@ function TitleComponent({
 	question,
 	question_type,
 }) {
+	const truncate = (str) => (str?.length > 10 ? `${startCase(str.substring(0, 10))}...` : startCase(str));
 	return (
 		<div role="presentation" className={styles.container}>
 			<div className={styles.small_section}>
-				<Pill size="md" color="#F3FAFA">{topic}</Pill>
+				<Popover render={topic} placement="bottom" trigger="mouseenter" caret={false}>
+					{' '}
+					<Pill size="md" color="#F3FAFA">
+						{truncate(topic)}
+					</Pill>
+				</Popover>
+
 			</div>
 
 			<div className={styles.section}>
@@ -37,7 +44,7 @@ function TitleComponent({
 				{students_appeared}
 				{' '}
 				(
-				{toFixed(appeared_percent, 2)}
+				{toFixed(user_appeared_percent, 2)}
 				%
 				)
 			</div>
@@ -58,6 +65,7 @@ function QuestionItem({ question_item = {}, index = 0, test_id = '' }) {
 		question_text = '',
 		question_type = '',
 		user_appeared_count = '',
+		user_appeared_percent = '',
 		topic = '',
 	} = question_item || {};
 
@@ -71,6 +79,7 @@ function QuestionItem({ question_item = {}, index = 0, test_id = '' }) {
 						correct_percentage={correct_answer_percentage}
 						difficulty={difficulty_level}
 						students_appeared={user_appeared_count}
+						user_appeared_percent={user_appeared_percent}
 						topic={topic}
 						question={question_text}
 						question_type={question_type}

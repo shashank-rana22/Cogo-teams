@@ -36,7 +36,11 @@ function BulkUpload({
 						label="Add Questions"
 						className={styles.breadcrumb_item}
 					/>
-					<Breadcrumb.Item style={{ color: '#ee3425' }} label="Bulk Upload" />
+
+					<Breadcrumb.Item
+						style={{ color: '#221F20', fontSize: '16px' }}
+						label="Bulk Upload"
+					/>
 				</Breadcrumb>
 
 				<div

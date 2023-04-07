@@ -22,6 +22,7 @@ function CreateQuestionSet() {
 
 	const [savedQuestionDetails, setSavedQuestionDetails] = useState([]);
 	const [editDetails, setEditDetails] = useState({});
+	const [sortFilter, setSortFilter] = useState({ sort_type: 'desc', sort_by: 'updated_at' });
 
 	const [allKeysSaved, setAllKeysSaved] = useState(true);
 
@@ -43,7 +44,14 @@ function CreateQuestionSet() {
 		page,
 		setPage,
 		page_limit,
-	} = useListSetQuestions({ questionSetId, setSavedQuestionDetails, setAllKeysSaved, setEditDetails, query, mode });
+	} = useListSetQuestions({
+		questionSetId,
+		setSavedQuestionDetails,
+		setAllKeysSaved,
+		setEditDetails,
+		query,
+		sortFilter,
+	});
 
 	if (['edit', 'view'].includes(mode) && isEmpty(id) && !activeTab) {
 		router.push('/learning/test-module/question?mode=new');
@@ -95,6 +103,8 @@ function CreateQuestionSet() {
 				setPage={setPage}
 				mode={mode}
 				page_limit={page_limit}
+				sortFilter={sortFilter}
+				setSortFilter={setSortFilter}
 			/>
 		</div>
 	);
