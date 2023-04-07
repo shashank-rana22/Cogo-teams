@@ -49,18 +49,20 @@ const useReport = ({
 			const lastMonth = `${yearData}-${monthValue}-01`;
 			return [lastMonth];
 		}
-
-		const now = new Date();
-		// eslint-disable-next-line no-mixed-operators
-		const prevQuarterLastMonth = new Date(now.getFullYear(), now.getMonth() - (now.getMonth() + 3) % 3, 0);
-		const lastThreeMonths = Array.from({ length: 3 }, (_, i) => new Date(
-			prevQuarterLastMonth.getFullYear(),
-			prevQuarterLastMonth.getMonth() - i,
-			1,
-		));
-		const lastThreeMonthsFormatted = lastThreeMonths.map((date) => `${date.getFullYear()}
-		-0${date.getMonth() + 1}-01`);
-		return lastThreeMonthsFormatted;
+		if (filters?.category === 'lastQuarter') {
+			const now = new Date();
+			// eslint-disable-next-line no-mixed-operators
+			const prevQuarterLastMonth = new Date(now.getFullYear(), now.getMonth() - (now.getMonth() + 3) % 3, 0);
+			const lastThreeMonths = Array.from({ length: 3 }, (_, i) => new Date(
+				prevQuarterLastMonth.getFullYear(),
+				prevQuarterLastMonth.getMonth() - i,
+				1,
+			));
+			const lastThreeMonthsFormatted = lastThreeMonths.map((date) => `${date.getFullYear()}
+			-0${date.getMonth() + 1}-01`);
+			return lastThreeMonthsFormatted;
+		}
+		return null;
 	}, [filters?.category]);
 
 	const fetchReportApi = useCallback(async (setShowReport) => {
