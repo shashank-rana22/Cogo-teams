@@ -177,6 +177,22 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api         : 'get_purchase_bills_exchange_rate_deviation_by_id',
+		access_type : 'private',
+	},
+	{
+		api         : 'post_purchase_bills',
+		access_type : 'private',
+	},
+	{
+		api         : 'put_purchase_bills',
+		access_type : 'private',
+	},
+	{
+		api         : 'get_purchase_bills_tagging_map',
+		access_type : 'private',
+	},
+	{
 		api          : 'update_shipment_collection_party',
 		access_type  : 'private',
 		service_name : 'shipment',
