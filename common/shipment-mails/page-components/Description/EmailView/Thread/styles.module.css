@@ -1,0 +1,24 @@
+.container {
+	max-width: 740px;
+	padding: 16px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 4px #cbd1f8;
+}
+
+.email_container {
+	max-height: 60vh;
+	padding: 0 12px;
+	overflow: auto;
+}
+
+.footer {
+	padding-top: 12px;
+	margin-top: 10px;
+	border-top: 1px solid #cbcfeb;
+}
+
+.button_div {
+	display: flex;
+	align-items: center;
+}

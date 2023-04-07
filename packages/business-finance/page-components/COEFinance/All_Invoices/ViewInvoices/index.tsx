@@ -7,6 +7,7 @@ import Header from './Header/index';
 import InvoiceDetails from './InvoiceDetails/index';
 import ShipmentDetails from './ShipmentDetails/index';
 import SupplierDetails from './SupplierDetails/index';
+import Tagging from './Taggings';
 
 function ViewInvoices() {
 	const { query } = useRouter();
@@ -15,6 +16,7 @@ function ViewInvoices() {
 		collectionPartyRemark : '',
 		billingPartyRemark    : '',
 		invoiceDetailsRemark  : '',
+		taggingRemark         : '',
 	});
 	const [overAllRemark, setOverAllRemark] = useState('');
 	const [lineItemsRemarks, setLineItemsRemarks] = useState({});
@@ -38,15 +40,13 @@ function ViewInvoices() {
 				jobNumber={jobNumber}
 				status={status}
 			/>
-
+			<Tagging billId={billId} setRemarksVal={setRemarksVal} status={status} />
 			<SupplierDetails
 				data={fullResponse}
 				paymentsData={paymentsData}
 				accPaymentLoading={accPaymentLoading}
 			/>
-
 			<InvoiceDetails data={fullResponse} getBillRefetch={getBillRefetch} />
-
 			<ShipmentDetails
 				data={fullResponse}
 				orgId={query?.orgId || ''}

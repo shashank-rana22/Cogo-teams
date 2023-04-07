@@ -55,9 +55,16 @@
 
 .text_editor_container {
 	display: flex;
-	flex-basis: 48%;
 	flex-direction: column;
+	width: 48%;
 	margin-bottom: 20px;
+
+	:global {
+		.notranslate {
+			max-height: 500px;
+			overflow: auto;
+		}
+	}
 
 	@media (max-width: 768px) {
 		flex-basis: 100%;

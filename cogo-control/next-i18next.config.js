@@ -6,7 +6,7 @@ module.exports = {
 		locales       : ['default', 'en-IN', 'vi-VN'],
 	},
 	// eslint-disable-next-line valid-typeof
-	...(typeof window === 'undefined'
+	...(typeof window === undefined
 		? { localePath: path.resolve('./public/locales') }
 		: {}),
 };
