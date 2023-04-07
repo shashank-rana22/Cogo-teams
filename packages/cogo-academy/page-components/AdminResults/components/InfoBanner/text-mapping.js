@@ -4,7 +4,7 @@ const TEXT_MAPPING = {
 	active: {
 		key             : 'active',
 		text            : 'Test Results have not been published yet.',
-		subText         : 'They will be auto-published when the validity ends',
+		subText         : 'Please click on publish results button when the test is completed',
 		Icon            : IcMCrossInCircle,
 		iconColor       : '#D6B300',
 		backgroundColor : '#FDFBF6',

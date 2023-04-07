@@ -1,4 +1,4 @@
-import { Toast } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import {
 	IcMRedo,
 	IcMSad,
@@ -6,21 +6,14 @@ import {
 	IcCHappy,
 	IcCSad,
 } from '@cogoport/icons-react';
-import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-import DisLikeBox from './DisLikeBox';
+import FeedbackForm from './FeedbackForm';
+import useCreateFeedback from './hooks/useCreateFeedback';
 import Loader from './Loader';
 import RelatedQuestion from './RelatedQuestion';
 import styles from './styles.module.css';
-import useAnswer from './useAnswer';
-
-const FEEDBACK_MAPPING = {
-	true  : 'liked',
-	false : 'disliked',
-};
 
 const LIKE_MAPPING = {
 	liked    : <IcCHappy />,
@@ -34,99 +27,28 @@ const DISLIKE_MAPPING = {
 
 function Answer({ topic = {}, question, setQuestion }) {
 	const {
-		profile: { partner = '' },
-	} = useSelector((state) => state);
+		handleSubmit = () => {},
+		control,
+		show,
+		load,
+		loading,
+		errors,
+		feedbackLoading,
+		onClickLikeButton = () => {},
+		onClickRemoveDisLike = () => {},
+		onSubmit = () => {},
+		goToFAQ = () => {},
+		answerData,
+		isLiked,
+		setShow = () => {},
+		setIsLiked = () => {},
+		watchAnswerCheckbox,
+		watchQuestionCheckbox,
+		is_positive,
+		FEEDBACK_MAPPING_ISLIKED,
+	} = useCreateFeedback({ question });
 
-	const [show, setShow] = useState(false);
-	const [checkboxQ, setCheckboxQ] = useState(false);
-	const [checkboxA, setCheckboxA] = useState(false);
-	const [load, setload] = useState(true);
-
-	const { data: answerData, loading: getQuestionLoading, fetch } = useAnswer({ question });
-
-	const answer = answerData?.answers?.[0]?.answer;
-	const is_positive = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.is_positive;
-
-	const [isLiked, setIsLiked] = useState(FEEDBACK_MAPPING[is_positive] || '');
-
-	useEffect(() => {
-		setIsLiked(FEEDBACK_MAPPING[is_positive] || '');
-	}, [getQuestionLoading, is_positive]);
-
-	const apiName = answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id
-		? '/update_faq_feedback'
-		: '/create_faq_feedback';
-
-	const [{ loading = false }, trigger] = useRequest({
-		url    : apiName,
-		method : 'post',
-	}, { manual: true });
-
-	const onClickLikeButton = async ({ id }) => {
-		setload(false);
-
-		let payload = {
-			faq_answer_id : id,
-			is_positive   : true,
-			status        : 'active',
-		};
-		if (isLiked === 'liked') {
-			payload = {
-				id     : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-				status : 'inactive',
-			};
-		} else if (isLiked === 'disliked') {
-			payload = {
-				id          : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-				is_positive : true,
-				status      : 'active',
-			};
-		}
-		try {
-			await trigger({
-				data: payload,
-			});
-
-			setIsLiked(isLiked === 'liked' ? '' : 'liked');
-
-			fetch();
-		} catch (error) {
-			Toast.error(error);
-		}
-	};
-
-	const onClickRemoveDisLike = async () => {
-		setload(false);
-
-		try {
-			await trigger({
-				data: {
-					id     : answerData?.answers?.[0]?.faq_feedbacks?.[0]?.id,
-					status : 'inactive',
-				},
-			});
-
-			setIsLiked('');
-			fetch();
-		} catch (error) {
-			Toast.error(error);
-		}
-	};
-
-	const goToFAQ = () => {
-		const { id: partnerId = '' } = partner || {};
-
-		const aElement = document.createElement('a');
-		aElement.setAttribute('href', `/v2/${partnerId}/learning/faq`);
-		aElement.setAttribute('target', '_blank');
-
-		const bodyElement = document.querySelector('body');
-		bodyElement.appendChild(aElement);
-
-		aElement.click();
-
-		aElement.remove();
-	};
+	const { id:answerId, answer, upvote_count } = answerData?.answers?.[0] || {};
 
 	return (
 		<div className={styles.list}>
@@ -140,11 +62,10 @@ function Answer({ topic = {}, question, setQuestion }) {
 				<div>
 					<div className={styles.question}>
 						{question?.question_abstract}
-						?
 					</div>
 				</div>
 
-				{getQuestionLoading && load ? (
+				{loading && load ? (
 					<Loader />
 				) : (
 					<>
@@ -158,9 +79,9 @@ function Answer({ topic = {}, question, setQuestion }) {
 							<div dangerouslySetInnerHTML={{ __html: answer }} />
 						</div>
 
-						{answerData?.answers?.[0]?.upvote_count > 0 ? (
+						{upvote_count > 0 ? (
 							<div className={styles.no_of_people_like_it} style={{ marginTop: 24 }}>
-								{ answerData?.answers?.[0]?.upvote_count}
+								{ upvote_count}
 								{' '}
 								people liked this answer
 							</div>
@@ -186,7 +107,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 						className={styles.emoji_like}
 						role="presentation"
 						onClick={() => {
-							onClickLikeButton({ id: answerData?.answers?.[0]?.id });
+							onClickLikeButton({ answerId });
 						}}
 						style={{ marginLeft: 8, cursor: 'pointer' }}
 					>
@@ -200,7 +121,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 							if (isLiked !== 'disliked') {
 								setShow(true);
 								setIsLiked('disliked');
-							} else {
+							} else if (!show) {
 								onClickRemoveDisLike();
 							}
 						}}
@@ -209,30 +130,46 @@ function Answer({ topic = {}, question, setQuestion }) {
 						{DISLIKE_MAPPING[isLiked] || <IcMSad />}
 					</div>
 				</div>
-
-				{show ? (
-					<DisLikeBox
-						setShow={setShow}
-						data={answerData}
-						loading={loading}
-						trigger={trigger}
-						setIsLiked={setIsLiked}
-						is_positive={is_positive}
-						setCheckboxA={setCheckboxA}
-						setCheckboxQ={setCheckboxQ}
-						checkboxA={checkboxA}
-						checkboxQ={checkboxQ}
-						setload={setload}
-						fetch={fetch}
-					/>
-				) : null}
-
-				<div role="presentation" className={styles.open_faq} onClick={goToFAQ}>
-					Open in Help Center
-					<IcMRedo style={{ marginLeft: 8 }} />
-				</div>
-
 			</div>
+			{show ? (
+				<div className={styles.dislike_box}>
+					<FeedbackForm
+						errors={errors}
+						answerData={answerData}
+						control={control}
+						watchAnswerCheckbox={watchAnswerCheckbox}
+						watchQuestionCheckbox={watchQuestionCheckbox}
+					/>
+					<div className={styles.footer_btns}>
+						<Button
+							style={{ marginRight: '10px' }}
+							size="md"
+							themeType="secondary"
+							onClick={() => {
+								setShow(false);
+								setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
+							}}
+							disabled={feedbackLoading}
+						>
+							Cancel
+						</Button>
+						<Button
+							size="md"
+							themeType="primary"
+							onClick={handleSubmit(onSubmit)}
+							loading={feedbackLoading}
+						>
+							Submit
+						</Button>
+					</div>
+				</div>
+			) : null}
+
+			<div role="presentation" className={styles.open_faq} onClick={goToFAQ}>
+				Open in Help Center
+				<IcMRedo style={{ marginLeft: 8 }} />
+			</div>
+
 		</div>
 	);
 }
