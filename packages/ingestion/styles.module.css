@@ -46,3 +46,7 @@
 .error_type {
 	text-align: center;
 }
+
+.updated_at {
+	display: flex;
+}

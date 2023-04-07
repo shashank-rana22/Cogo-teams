@@ -1,10 +1,11 @@
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { IcMDownload, IcMUpload } from '@cogoport/icons-react';
 
 import { CONSTANT_KEYS } from '../../../constants/header-mapping';
 import usePostIngestionData from '../../../hooks/usePostIngestionData';
 
 import ChooseModal from './Modals/ChooseModal/index';
+import { ChooseFooter, OrgDetailsFooter, ProviderSelectFooter, UploadModalFooter } from './Modals/Footers';
 import OrgDetailsModal from './Modals/OrgDetailsModal/index';
 import ProviderSelectModal from './Modals/ProviderSelectModal';
 import TemplateModal from './Modals/TemplateModal';
@@ -29,13 +30,28 @@ function Header({ refetch = () => {} }) {
 		uploadData = {},
 		formProps = {},
 		modalControls = [],
-		show = '',
+		show = {},
 		setShow = () => {},
 		onSubmit = () => {},
 		loading = false,
 	} = usePostIngestionData({ refetch });
 
-	const Component = INGESTION_COMPONENTS_MAPPING[show] || null;
+	const onClose = () => {
+		setShow((pv) => ({
+			...pv,
+			open: false,
+		}));
+	};
+
+	const INGESTION_FOOTERS_MAPPING = {
+		[CHOOSE]          : ChooseFooter,
+		[ORG_DETAILS]     : OrgDetailsFooter,
+		[PROVIDER_SELECT] : ProviderSelectFooter,
+		[UPLOAD]          : UploadModalFooter,
+	};
+
+	const Footer = INGESTION_FOOTERS_MAPPING[show?.screen] || null;
+	const Component = INGESTION_COMPONENTS_MAPPING[show?.screen] || null;
 
 	return (
 		<div>
@@ -58,7 +74,10 @@ function Header({ refetch = () => {} }) {
 					size="lg"
 					themeType="primary"
 					onClick={() => {
-						setShow('chooseModal');
+						setShow({
+							open   : true,
+							screen : 'chooseModal',
+						});
 					}}
 				>
 					<IcMUpload style={{ marginRight: '4px' }} />
@@ -66,8 +85,18 @@ function Header({ refetch = () => {} }) {
 
 				</Button>
 			</div>
-
-			{
+			{show?.open && (
+				<Modal size="md" show={show?.open} onClose={() => onClose()}>
+					<Modal.Header title={(
+						<div style={{ display: 'flex', alignItems: 'center' }}>
+							<IcMUpload style={{ margin: '0 4px 0 0' }} />
+							{' '}
+							Upload CSV
+						</div>
+					)}
+					/>
+					<Modal.Body>
+						{
 				Component && (
 					<Component
 						show={show}
@@ -80,7 +109,24 @@ function Header({ refetch = () => {} }) {
 						loading={loading}
 					/>
 				)
-			}
+}
+					</Modal.Body>
+
+					<Modal.Footer>
+						<Footer
+							show={show}
+							setShow={setShow}
+							setUploadData={setUploadData}
+							uploadData={uploadData}
+							formProps={formProps}
+							modalControls={modalControls}
+							onSubmit={onSubmit}
+							loading={loading}
+						/>
+					</Modal.Footer>
+
+				</Modal>
+			)}
 
 			<TemplateModal setShow={setShow} show={show} />
 		</div>

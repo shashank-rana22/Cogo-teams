@@ -2152,7 +2152,7 @@ const navigationMappingAdmin = {
 		title         : 'Ingestion',
 		isSubNavs     : false,
 		module_type   : 'dashboards',
-		main_apis     : [],
+		main_apis     : ['list_ingestion_requests'],
 		href          : '/v2/ingestion',
 		as            : '/v2/ingestion',
 		possible_apis : apis.ingestion,

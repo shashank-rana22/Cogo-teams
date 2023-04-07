@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 function Filters(props) {
 	const {
-		params = {}, setParams = () => {},
+		setParams = () => {},
 	} = props;
 	const [search, setSearch] = useState('');
 
@@ -26,8 +26,8 @@ function Filters(props) {
 	const uploadDate = watch('upload_date');
 
 	useEffect(() => {
-		setParams({
-			...params,
+		setParams((pv) => ({
+			...pv,
 			filters: {
 				q                       : query || undefined,
 				partner_user_id         : uploadBy || undefined,
@@ -35,8 +35,8 @@ function Filters(props) {
 				created_at_less_than    : uploadDate?.endDate || undefined,
 			},
 
-		});
-	}, [query, uploadDate, uploadBy, setParams, params]);
+		}));
+	}, [query, uploadDate, uploadBy, setParams]);
 
 	useEffect(() => debounceQuery(search), [debounceQuery, search]);
 

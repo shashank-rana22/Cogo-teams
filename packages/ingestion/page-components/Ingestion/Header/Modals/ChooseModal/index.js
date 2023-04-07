@@ -1,13 +1,8 @@
-import { Modal, Button } from '@cogoport/components';
-import { IcMUpload } from '@cogoport/icons-react';
+import { Button } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function ChooseModal({ setShow = () => {}, show = '', setUploadData = () => {}, uploadData = {} }) {
-	const onClose = () => {
-		setShow('');
-	};
-
+function ChooseModal({ setShow = () => {}, setUploadData = () => {}, uploadData = {} }) {
 	const NEXT_PAGE_MAPPING = {
 		organization : 'orgDetails',
 		partner      : 'providerSelect',
@@ -21,7 +16,10 @@ function ChooseModal({ setShow = () => {}, show = '', setUploadData = () => {}, 
 	};
 
 	const onChoose = (type) => {
-		setShow(NEXT_PAGE_MAPPING[type]);
+		setShow((pv) => ({
+			...pv,
+			screen: NEXT_PAGE_MAPPING[type],
+		}));
 
 		setUploadData({
 			...uploadData,
@@ -31,50 +29,38 @@ function ChooseModal({ setShow = () => {}, show = '', setUploadData = () => {}, 
 	};
 
 	return (
-		<Modal size="md" show={show === 'chooseModal'} onClose={onClose} placement="center">
-			<Modal.Header title={(
-				<div style={{ display: 'flex', alignItems: 'center' }}>
-					<IcMUpload style={{ margin: '0 4px 0 0' }} />
-					{' '}
-					Upload CSV
-				</div>
-			)}
-			/>
-			<div>
-				<div className={styles.choose_heading}>What do you wish to upload CSV for?</div>
-				<div className={styles.choose_container}>
-					<Button
-						themeType="secondary"
-						onClick={() => onChoose('lead')}
-						style={{ height: '60px', width: '50%' }}
-					>
-						Lead
 
-					</Button>
-					<Button
-						themeType="secondary"
-						onClick={() => onChoose('partner')}
-						style={{ height: '60px', width: '50%' }}
-					>
-						Channel Partner
+		<div>
+			<div className={styles.choose_heading}>What do you wish to upload CSV for?</div>
+			<div className={styles.choose_container}>
+				<Button
+					themeType="secondary"
+					onClick={() => onChoose('lead')}
+					style={{ height: '60px', width: '50%' }}
+				>
+					Lead
 
-					</Button>
-					<Button
-						themeType="secondary"
-						onClick={() => onChoose('organization')}
-						style={{ height: '60px', width: '50%' }}
+				</Button>
+				<Button
+					themeType="secondary"
+					onClick={() => onChoose('partner')}
+					style={{ height: '60px', width: '50%' }}
+				>
+					Channel Partner
 
-					>
-						Importer Exporter
-					</Button>
-				</div>
-				<div className={styles.close_button}>
-					<Button themeType="secondary" onClick={onClose}>Close</Button>
-
-				</div>
+				</Button>
+				<Button
+					themeType="secondary"
+					onClick={() => onChoose('organization')}
+					style={{ height: '60px', width: '50%' }}
+				>
+					Importer Exporter
+				</Button>
 			</div>
 
-		</Modal>
+		</div>
+
+	// </Modal>
 	);
 }
 

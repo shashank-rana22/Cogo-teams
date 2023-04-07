@@ -1,9 +1,8 @@
-import { Modal, Button } from '@cogoport/components';
-import { IcMUpload } from '@cogoport/icons-react';
+import { Button } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function ProviderSelectModal({ setShow = () => {}, show = '', setUploadData = () => {}, uploadData, formProps = {} }) {
+function ProviderSelectModal({ setShow = () => {}, setUploadData = () => {}, uploadData, formProps = {} }) {
 	const { reset } = formProps;
 
 	const ProviderCpOptions = [
@@ -16,11 +15,6 @@ function ProviderSelectModal({ setShow = () => {}, show = '', setUploadData = ()
 		{ key: 'a. Importer/ Exporter', type: 'IE' },
 		{ key: 'b. Service Provider', type: 'SP' },
 	];
-
-	const onClose = () => {
-		setShow('');
-		reset();
-	};
 
 	let ProviderButtonOptions = [];
 
@@ -46,47 +40,36 @@ function ProviderSelectModal({ setShow = () => {}, show = '', setUploadData = ()
 			is_channel_partner : IS_CHANNEL_PARTNER_MAPPING[input?.type],
 		});
 		reset();
-		setShow('orgDetails');
+		setShow((pv) => ({
+			...pv,
+			screen: 'orgDetails',
+		}));
 	};
 
 	return (
-		<Modal size="md" show={show === 'providerSelect'} onClose={onClose} placement="center">
-			<Modal.Header title={(
-				<div style={{ display: 'flex', alignItems: 'center' }}>
-					<IcMUpload style={{ margin: '0 4px 0 0' }} />
-					{' '}
-					Upload CSV
-				</div>
-			)}
-			/>
-			<div>
-				<div className={styles.heading}>What do you wish to upload CSV for?</div>
 
-				<div className={styles.provider_container}>
-					{ProviderButtonOptions.map((response) => (
-						<Button
-							themeType="secondary"
-							onClick={() => {
-								onChoose(response);
-							}}
-							key={response?.key}
-							style={{ width: '80%', height: '44px' }}
-						>
-							{response?.key}
+		<div>
+			<div className={styles.heading}>What do you wish to upload CSV for?</div>
 
-						</Button>
-					))}
+			<div className={styles.provider_container}>
+				{ProviderButtonOptions.map((response) => (
+					<Button
+						themeType="secondary"
+						onClick={() => {
+							onChoose(response);
+						}}
+						key={response?.key}
+						style={{ width: '80%', height: '44px' }}
+					>
+						{response?.key}
 
-				</div>
-				<div className={styles.close_button}>
-
-					<Button themeType="secondary" onClick={() => setShow('chooseModal')}>Back</Button>
-
-				</div>
+					</Button>
+				))}
 
 			</div>
 
-		</Modal>
+		</div>
+
 	);
 }
 

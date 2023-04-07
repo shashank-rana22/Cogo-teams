@@ -16,10 +16,26 @@ function useGetIngestionList() {
 		page                       : 1,
 		request_file_data_required : true,
 	});
+
+	const validParams = {};
+	Object.entries(params.filters || {}).forEach(([filterKey, value]) => {
+		if (value) {
+			validParams.filters = {};
+			validParams.filters[filterKey] = params.filters[filterKey];
+		}
+	});
+
+	Object.keys(params)
+		.forEach((key) => {
+			if (params[key] && key !== 'filters') {
+				validParams[key] = params[key];
+			}
+		});
+
 	const [{ data, loading }, refetch] = useRequest({
 		method : 'get',
 		url    : 'list_ingestion_requests',
-		params,
+		params : { ...validParams },
 	}, { manual: false });
 
 	const downloadErrorCsv = (link) => {
@@ -33,11 +49,6 @@ function useGetIngestionList() {
 		setTableModal('uploadList');
 	};
 
-	// const UPLOAD_STATUS_MAPPING = {
-	// 	Uploading : 'yellow',
-	// 	active    : 'green',
-	// 	inactive  : 'red',
-	// };
 	const UPLOAD_STATUS_MAPPING = {
 		init       : 'yellow',
 		completed  : 'green',
@@ -76,7 +87,7 @@ function useGetIngestionList() {
 			key      : 'uploaded_date',
 			Header   : 'UPLOAD DATE',
 			accessor : ({ updated_at }) => (
-				<div>
+				<div className={styles.updated_at}>
 					{updated_at	 ? (
 						<div className={styles.created_date}>
 							{format(updated_at, 'dd MMM yyyy') || '___'}
@@ -135,7 +146,7 @@ function useGetIngestionList() {
 			accessor : (item) => (
 				<div className={styles.re_upload}>
 
-					{item?.request_files[0]?.errored_data_url ? (
+					{item.request_files?.[0].errored_data_url ? (
 						<Button onClick={() => { reUploadFiles(item); }} size="md" themeType="secondary">
 							{' '}
 							Re-Upload
@@ -151,7 +162,7 @@ function useGetIngestionList() {
 			accessor : (item) => (
 				<div className={styles.uploaded}>
 
-					{item?.request_files[0]?.errored_data_url ? (
+					{item.request_files?.[0].errored_data_url ? (
 						<Button onClick={() => { tableListModal(item); }} size="md" themeType="tertiary">
 							{' '}
 							View All
