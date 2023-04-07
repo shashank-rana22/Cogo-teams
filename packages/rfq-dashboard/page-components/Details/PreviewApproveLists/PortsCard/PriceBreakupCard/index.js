@@ -14,7 +14,7 @@ function PriceBreakupCard() {
 	];
 	return (
 		<div className={styles.container}>
-			<div className={styles.card_title}>
+			<div className={`${styles.card_title} ${styles.border_bottom}`}>
 				{
 					cardTitles.map((itm) => (
 						<div className={`${styles.column_labels} ${styles[`${itm.name}_card_title`]}`}>{itm.label}</div>
@@ -23,12 +23,10 @@ function PriceBreakupCard() {
 			</div>
 			{
 				priceBreakupChildData.map((dataItem) => (
-					// <div className={styles.price_breakup_child_container}>
-					<>
+					<div className={styles.border_bottom}>
 						<Title cardTitles={cardTitles} titleData={dataItem.title} />
 						<PriceBreakupData cardTitles={cardTitles} data={dataItem.data} />
-					</>
-					// </div>
+					</div>
 				))
 			}
 

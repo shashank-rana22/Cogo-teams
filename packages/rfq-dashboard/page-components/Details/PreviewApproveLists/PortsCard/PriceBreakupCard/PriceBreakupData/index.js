@@ -10,7 +10,7 @@ function PriceBreakupData({ cardTitles = [], data = [] }) {
 					<div className={styles.card_title}>
 						{cardTitles.map((item) => (
 							<div className={`${styles.column_labels} ${styles[`${item.name}_card_title`]}`}>
-								{dataItem[item.name]}
+								<p className={styles.data_labels}>{dataItem[item.name]}</p>
 							</div>
 						))}
 					</div>

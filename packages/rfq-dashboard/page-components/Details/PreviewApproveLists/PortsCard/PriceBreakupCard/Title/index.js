@@ -8,8 +8,19 @@ function Title({ cardTitles = [], titleData = [] }) {
 			<div className={styles.card_title}>
 				{cardTitles.map((itm) => (
 					<div className={`${styles.column_labels} ${styles[`${itm.name}_card_title`]}`}>
-						{itm.name === 'sell_price' && 'Total: '}
-						{titleData?.[`${itm.name}`]}
+						{itm.name === 'sell_price' ? (
+							<span className={styles.green_text}>
+								Total:
+								{' '}
+								{titleData?.[`${itm.name}`]}
+								{' '}
+							</span>
+						) : (
+							<span>
+								{titleData?.[`${itm.name}`]}
+							</span>
+						) }
+
 						{itm.name === 'service'
 							&& (
 								<>

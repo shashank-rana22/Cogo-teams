@@ -17,9 +17,11 @@
 }
 
 .container {
+	z-index: 1;
 	display: flex;
 	align-items: center;
 	padding: 10px;
+	margin-bottom: -4px;
 	background: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
