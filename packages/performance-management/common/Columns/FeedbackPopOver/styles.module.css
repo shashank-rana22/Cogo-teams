@@ -17,19 +17,3 @@
 	text-align: justify;
 	word-wrap: break-word;
 }
-
-.feedback_button {
-	cursor: pointer;
-
-	.styled_text {
-		padding: 2px 8px;
-		color: #5936f0;
-		background: #ded7fc;
-		border: 1px solid #ded7fc;
-		border-radius: 4px;
-
-		&.styled_text {
-			width: fit-content;
-		}
-	}
-}
