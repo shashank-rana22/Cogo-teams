@@ -14,7 +14,7 @@ const ANNOUNCEMENT_TYPE_MAPPING = {
 	tasks          : 'Tasks',
 };
 
-function AnnouncementOnRefresh({ data = [] }) {
+function AnnouncementModal({ data = [] }) {
 	const [singleModaldata, setSingleModaldata] = useState({});
 	const [announcementNumber, setAnnouncementNumber] = useState(0);
 	const [showModal, setShowModal] = useState(true);
@@ -75,4 +75,4 @@ function AnnouncementOnRefresh({ data = [] }) {
 	);
 }
 
-export default AnnouncementOnRefresh;
+export default AnnouncementModal;
