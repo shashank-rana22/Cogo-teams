@@ -21,6 +21,8 @@ function Services() {
 		activeStakeholder,
 	} = useContext(ShipmentDetailContext);
 
+	console.log(activeStakeholder, 'activee');
+
 	const { serviceObj, upsellServices } =	helperFuncs(servicesList, possibleServices);
 
 	const { cancelUpsellDestinationFor, cancelUpsellOriginFor } = upsellTransportation(serviceObj);
@@ -74,7 +76,7 @@ function Services() {
 				</div>
 
 				{
-				activeStakeholder === 'kam' ? (
+				activeStakeholder === 'Kam' ? (
 					<div className={styles.upselling}>
 						{Object.keys(upsellServices).map((tradeType) => (upsellServices[tradeType]).map((service) => (
 							<AddNewService
