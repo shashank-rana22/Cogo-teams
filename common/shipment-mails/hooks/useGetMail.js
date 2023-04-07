@@ -1,8 +1,7 @@
-import { Toast } from '@cogoport/components';
 import { useLensRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 /**
  * Single utility hook to get mail from Cogo RPA using id of email
@@ -33,7 +32,7 @@ const useGetMail = ({ payload }) => {
 			try {
 				await triggerGetRpaMail();
 			} catch (err) {
-				Toast.error(getApiErrorString(err));
+				toastApiError(err);
 			}
 		}
 		)();
@@ -47,7 +46,7 @@ const useGetMail = ({ payload }) => {
 					getRpaMail();
 				}
 			} catch (err) {
-				Toast.error(getApiErrorString(err));
+				toastApiError(err);
 			}
 		})();
 	}, [triggerGetMail, getRpaMail]);

@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+
+import toastApiError from '../utils/toastApiError';
 
 const useUpdateShipmentContainerDetails = ({
 	refetch = () => {},
@@ -13,16 +14,13 @@ const useUpdateShipmentContainerDetails = ({
 	const apiTrigger = async (update_data) => {
 		if (update_data?.length !== 0) {
 			try {
-				const res = await trigger({ data: { update_data } });
+				await trigger({ data: { update_data } });
 
-				if (res.status === 200) {
-					Toast.success('Container Details Updated Successfully!');
-					refetch();
-				} else {
-					Toast.error('Please check the details filled or try again!');
-				}
+				Toast.success('Container Details Updated Successfully!');
+				refetch();
 			} catch (err) {
-				Toast.error(getApiErrorString(err));
+				Toast.error('Please check the details filled or try again!');
+				toastApiError(err);
 			}
 		} else {
 			Toast.error('Update Data cannot be blank');

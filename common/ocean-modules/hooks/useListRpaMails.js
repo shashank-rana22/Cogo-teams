@@ -1,8 +1,7 @@
-import { Toast } from '@cogoport/components';
 import { useLensRequest } from '@cogoport/request';
 import { useEffect, useCallback, useRef } from 'react';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 const keyMappings = {
 	shipping_instruction: 'si',
@@ -30,7 +29,7 @@ const useShipmentEmails = ({ payload = {} }) => {
 			try {
 				await triggerRecentClassifiedShipment();
 			} catch (err) {
-				Toast.error(getApiErrorString(err));
+				toastApiError(err);
 			}
 		})();
 	}, [triggerRecentClassifiedShipment]);

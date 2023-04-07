@@ -1,9 +1,8 @@
-import { Toast } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 
 import formatPayload from '../helpers/service-upsell-payload';
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 const useCreateUpsell = ({ service = {}, primary_service = {}, shipmentData = {} }) => {
 	const router = useRouter();
@@ -33,7 +32,7 @@ const useCreateUpsell = ({ service = {}, primary_service = {}, shipmentData = {}
 				window.location.href = newHref;
 			}
 		} catch (err) {
-			Toast.error(getApiErrorString(err));
+			toastApiError(err);
 		}
 	};
 
