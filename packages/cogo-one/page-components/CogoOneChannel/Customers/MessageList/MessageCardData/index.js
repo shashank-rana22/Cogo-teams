@@ -68,6 +68,7 @@ function MessageCardData({
 			) }
 
 			<div
+				key={id}
 				role="button"
 				tabIndex={0}
 				className={cl`
