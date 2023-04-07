@@ -22,7 +22,7 @@ function Header({
 
 	const suffix = search ? (
 		<IcMCross
-			onClick={() => { setSearch(''); setQuestion(null); }}
+			onClick={() => { setInput(''); setSearch(''); setQuestion(null); }}
 			style={{ cursor: 'pointer', color: '#000000' }}
 		/>
 	) : null;
