@@ -894,6 +894,7 @@ function ListProfit({
 
 					{
 						getRelevantData()?.map((itemDataValue) => {
+							const ratio = ratioData?.turnoverRatioDetails?.[itemDataValue?.key];
 							const segmentType = item[itemDataValue?.type.toLowerCase()];
 							const bookedRevenue = segmentType?.[itemDataValue?.keys?.bookedRevenue] || 0;
 							const accruedRevenue = segmentType?.[itemDataValue?.keys?.accruedRevenue] || 0;
@@ -905,11 +906,11 @@ function ListProfit({
 										{isRowVisible
 											? (
 												<div className={styles.particular_data}>
-													{(((bookedRevenue + accruedRevenue)
+													{((((bookedRevenue + accruedRevenue)
 													- (bookedExpense + accruedExpense)
 													- totalDepreciationAndAmortization - totalFinanceCost
 													- totalOtherExpense - totalExceptionalItems
-													- totalExtraordinaryItems - totalPriorPeriodItem) * 0.2517)
+													- totalExtraordinaryItems - totalPriorPeriodItem) * ratio) * 0.2517)
 														.toLocaleString('en-IN', options)}
 												</div>
 											) : null}
@@ -921,14 +922,13 @@ function ListProfit({
 								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
 									{isRowVisible && (
 										<div className={styles.particular_data}>
-											{((revenueFromOps
+											{isRowVisible ? ((revenueFromOps
 								- operatingExpenses
 								- totalDepreciationAndAmortization
 								- totalFinanceCost
 								- totalOtherExpense
-								- totalExceptionalItems
-								- totalExtraordinaryItems
-								- totalPriorPeriodItem) * 0.2517).toLocaleString('en-IN', options)}
+								- totalExceptionalItems - totalExtraordinaryItems - totalPriorPeriodItem) * 0.2517
+											).toLocaleString('en-IN', options) : null}
 										</div>
 									)}
 								</div>
@@ -942,6 +942,7 @@ function ListProfit({
 					{
 						getRelevantData()?.map((valData) => {
 							const segmentType = item[valData?.type.toLowerCase()];
+							const ratio = ratioData?.turnoverRatioDetails?.[valData?.key];
 							const bookedRevenue = segmentType?.[valData?.keys?.bookedRevenue] || 0;
 							const accruedRevenue = segmentType?.[valData?.keys?.accruedRevenue] || 0;
 							const bookedExpense = segmentType?.[valData?.keys?.bookedExpense] || 0;
@@ -952,19 +953,18 @@ function ListProfit({
 										{isRowVisible
 											? (
 												<span>
-													{(((bookedRevenue + accruedRevenue)
+													{(((((bookedRevenue + accruedRevenue)
 													- (bookedExpense + accruedExpense)
-													- totalDepreciationAndAmortization
-													- totalFinanceCost - totalOtherExpense
-													- totalExceptionalItems - totalExtraordinaryItems
-													- totalPriorPeriodItem - (((bookedRevenue + accruedRevenue)
+													- totalDepreciationAndAmortization - totalFinanceCost
+													- totalOtherExpense - totalExceptionalItems
+													- totalExtraordinaryItems
+													- totalPriorPeriodItem) * ratio)
+													- ((((bookedRevenue + accruedRevenue)
 													- (bookedExpense + accruedExpense)
-														- totalDepreciationAndAmortization
-														- totalFinanceCost
-														- totalOtherExpense
-														- totalExceptionalItems
-														- totalExtraordinaryItems
-														- totalPriorPeriodItem) * 0.2517)))
+													- totalDepreciationAndAmortization - totalFinanceCost
+													- totalOtherExpense - totalExceptionalItems
+													- totalExtraordinaryItems
+													- totalPriorPeriodItem) * ratio) * 0.2517)))
 														.toLocaleString('en-IN', options)}
 												</span>
 											) : null}
@@ -982,9 +982,9 @@ function ListProfit({
 										- totalDepreciationAndAmortization
 										- totalFinanceCost
 										- totalOtherExpense
-										- totalExceptionalItems
-										- totalExtraordinaryItems
-										- totalPriorPeriodItem) * 0.2517))).toLocaleString('en-IN', options) : null}
+										- totalExceptionalItems - totalExtraordinaryItems
+										- totalPriorPeriodItem) * 0.2517
+									))).toLocaleString('en-IN', options) : null}
 
 								</div>
 							);
