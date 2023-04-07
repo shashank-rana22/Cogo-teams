@@ -37,7 +37,7 @@ function usePostReUpload({ row = {}, setTableModal = () => {} }) {
 			};
 
 			const payload = Object.entries({ ...pay, file_url: e?.re_upload?.finalUrl })
-				.filter(([_, value]) => value !== null && value !== '')
+				.filter(([, value]) => value !== null && value !== '')
 				.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 
 			await trigger({
@@ -56,7 +56,6 @@ function usePostReUpload({ row = {}, setTableModal = () => {} }) {
 		onSubmit,
 		loading,
 		onClose,
-
 	};
 }
 
