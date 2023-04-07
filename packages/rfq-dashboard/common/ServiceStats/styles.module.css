@@ -5,6 +5,7 @@
 }
 
 .service_stats_ports_section {
+	justify-content: space-evenly;
 	padding-top: 0;
 }
 
