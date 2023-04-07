@@ -1,21 +1,24 @@
 import { Pill, Button, Popover } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowNext, IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
-import { startCase, format } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect, useCallback } from 'react';
 
 import PopOverContent from '../../../commons/PopoverContent';
 
 import styles from './styles.module.css';
+import feedbackTableColumns from './utils/getFeedbackTableColumns';
 
 const FILTER_MAPPING = {
-
 	published : { state: 'published', status: 'active' },
 	draft     : { state: 'draft', status: 'active' },
 	inactive  : { status: 'inactive' },
 	requested : { state: 'requested', status: 'active' },
+	feedbacks : { state: 'published', status: 'active' },
 };
 
 const addedQuestionsColumns = ({
@@ -28,112 +31,131 @@ const addedQuestionsColumns = ({
 	onClickViewButton = () => {},
 	sortType,
 	setSortType = () => {},
-}) => [
-	{
-		Header   : 'QUESTIONS',
-		accessor : (items) => (
-			<div className={styles.question}>
-				{items?.question_abstract}
-			</div>
-		),
-	},
-	{
-		Header   : 'TOPICS',
-		accessor : (items) => (items?.faq_topics?.length > 0 ? (
-			<div className={styles.topics}>
-				{items.faq_topics.map((topic) => {
-					const { display_name } = topic || {};
-					return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
-				})}
-			</div>
-		) : '-'),
-	},
-	{
-		Header   : 'TAGS',
-		accessor : (items) => (items?.faq_tags?.length > 0 ? (
-			<div className={styles.tags}>
-				{items.faq_tags.map((tag) => {
-					const { display_name } = tag || {};
-					return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
-				})}
-			</div>
-		) : '-'),
-	},
-	{
-		id     : 'LAST UPDATED AT',
-		Header : (
-			<div role="presentation" className={styles.sort_title} onClick={() => setSortType((prev) => !prev)}>
-				LAST UPDATED AT
-				<IcMArrowNext
-					height={14}
-					width={14}
-					className={styles.sort_arrow}
-					style={{ transform: sortType ? 'rotate(270deg)' : '' }}
-				/>
-			</div>
-		),
-		accessor: (items) => {
-			const formatDate = format(items?.updated_at || items?.created_at, 'dd MMM yyyy hh:mm a');
-			return (
-				<div>
-					{formatDate}
+}) => {
+	if (activeList === 'feedbacks') {
+		return feedbackTableColumns({ onClickEditButton, onClickViewButton });
+	}
+
+	return [
+		{
+			Header   : 'QUESTIONS',
+			accessor : (items) => (
+				<div className={styles.question}>
+					{items?.question_abstract}
 				</div>
-			);
+			),
 		},
-	},
-	{
-		Header   : 'ACTIONS',
-		accessor : (items) => (
-			<div className={styles.button_container}>
-				{!['inactive', 'draft'].includes(activeList)
-					? (
-						<Button
-							type="button"
-							themeType="primary"
-							size="sm"
-							style={{ marginRight: 8 }}
-							onClick={() => onClickViewButton(items?.id)}
-						>
-							VIEW
-						</Button>
-					)
-					: null}
-				<Button
-					type="button"
-					themeType="secondary"
-					size="sm"
-					style={{ marginRight: 8 }}
-					onClick={() => onClickEditButton(items?.id)}
-				>
-					EDIT
-				</Button>
-				{activeList !== 'inactive' ? (
-					<Popover
-						content={(
-							<PopOverContent
-								source="question"
-								onCLickYesButton={() => deactivateQuestion(items.id)}
-								onClickNoButton={() => onClickNoButton(items)}
-							/>
-						)}
-						visible={showPopOver === items?.id}
+		{
+			Header   : 'TOPICS',
+			accessor : (items) => (!isEmpty(items?.faq_topics || []) ? (
+				<div className={styles.topics}>
+					{(items.faq_topics || []).map((topic) => {
+						const { display_name, id } = topic || {};
+						return <Pill size="sm" color="green" key={id}>{startCase(display_name)}</Pill>;
+					})}
+				</div>
+			) : '-'),
+		},
+		{
+			Header   : 'TAGS',
+			accessor : (items) => (!isEmpty(items?.faq_tags || []) ? (
+				<div className={styles.tags}>
+					{items.faq_tags.map((tag) => {
+						const { display_name, id } = tag || {};
+						return <Pill size="sm" color="green" key={id}>{startCase(display_name)}</Pill>;
+					})}
+				</div>
+			) : '-'),
+		},
+		{
+			id     : 'LAST UPDATED AT',
+			Header : (
+				<div role="presentation" className={styles.sort_title} onClick={() => setSortType((prev) => !prev)}>
+					LAST UPDATED AT
+					<IcMArrowNext
+						height={14}
+						width={14}
+						className={styles.sort_arrow}
+						style={{ transform: sortType ? 'rotate(270deg)' : '' }}
+					/>
+				</div>
+			),
+			accessor: (items) => {
+				const date = items?.updated_at || items?.created_at;
+				return (
+					<div>
+						{formatDate({
+							date,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							formatType : 'date',
+						})}
+						,
+						{' '}
+
+						{formatDate({
+							date,
+							timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+							formatType : 'time',
+
+						})}
+					</div>
+				);
+			},
+		},
+		{
+			Header   : 'ACTIONS',
+			accessor : (items) => (
+				<div className={styles.button_container}>
+					{!['inactive', 'draft'].includes(activeList)
+						? (
+							<Button
+								type="button"
+								themeType="primary"
+								size="sm"
+								style={{ marginRight: 8 }}
+								onClick={() => onClickViewButton(items?.id)}
+							>
+								VIEW
+							</Button>
+						)
+						: null}
+					<Button
+						type="button"
+						themeType="secondary"
+						size="sm"
+						style={{ marginRight: 8 }}
+						onClick={() => onClickEditButton(items?.id)}
 					>
-						<IcMDelete
-							height={20}
-							width={20}
-							style={{ cursor: 'pointer' }}
-							onClick={
+						EDIT
+					</Button>
+					{activeList !== 'inactive' ? (
+						<Popover
+							content={(
+								<PopOverContent
+									source="question"
+									onCLickYesButton={() => deactivateQuestion(items.id)}
+									onClickNoButton={() => onClickNoButton(items)}
+								/>
+							)}
+							visible={showPopOver === items?.id}
+						>
+							<IcMDelete
+								height={20}
+								width={20}
+								style={{ cursor: 'pointer' }}
+								onClick={
 								() => setShowPopOver(() => (showPopOver === items?.id ? null : items?.id))
 }
-						/>
-					</Popover>
+							/>
+						</Popover>
 
-				) : null}
+					) : null}
 
-			</div>
-		),
-	},
-];
+				</div>
+			),
+		},
+	];
+};
 
 const requestedQuestionsColumns = ({
 	deactivateQuestion, onClickEditButton, showPopOver, setShowPopOver = () => {}, onClickNoButton = () => {},
@@ -156,14 +178,16 @@ const requestedQuestionsColumns = ({
 	},
 	{
 		Header   : 'CREATED AT',
-		accessor : (items) => {
-			const formatDate = format(items?.created_at, 'dd MMM yyyy');
-			return (
-				<div>
-					{formatDate}
-				</div>
-			);
-		},
+		accessor : (items) => (
+			<div>
+				{formatDate({
+					date       : items?.created_at,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					formatType : 'date',
+				})}
+			</div>
+		)
+		,
 	},
 	{
 		Header   : 'ACTIONS',
@@ -234,9 +258,11 @@ const useQuestionList = () => {
 	useEffect(() => {
 		debounceQuery(searchInput);
 	}, [debounceQuery, searchInput]);
+
 	const onClickNoButton = () => {
 		setShowPopOver(null);
 	};
+
 	const getQuestionsList = useCallback(async () => {
 		try {
 			await trigger({
@@ -244,7 +270,8 @@ const useQuestionList = () => {
 					filters: {
 						...filters,
 						...FILTER_MAPPING[activeList],
-						q: query || undefined,
+						q                    : query || undefined,
+						is_feedback_positive : activeList === 'feedbacks' ? false : undefined,
 					},
 					page,
 					is_admin_view          : true,
@@ -253,11 +280,14 @@ const useQuestionList = () => {
 					faq_tags_data_required : ['published', 'draft']
 						.includes(FILTER_MAPPING[activeList].state),
 
-					faq_topics_data_required: ['published', 'draft']
+					faq_topics_data_required: ['published', 'draft', 'feedbacks']
 						.includes(FILTER_MAPPING[activeList].state),
 
 					author_data_required              : FILTER_MAPPING[activeList].state === 'requested',
 					requested_question_count_required : true,
+					faq_feedback_count_required       : true,
+					answers_data_required             : undefined,
+					last_updated_feedback_required    : activeList === 'feedbacks',
 
 				},
 			});
@@ -331,7 +361,13 @@ const useQuestionList = () => {
 			setShowPopOver,
 			onClickNoButton,
 		});
-	const { list: data = [], requested_question_count = 0, ...paginationData } = questionList || {};
+
+	const {
+		list: data = [],
+		requested_question_count = 0,
+		downvote_feedback_count = 0,
+		...paginationData
+	} = questionList || {};
 
 	return {
 		showPopOver,
@@ -352,6 +388,7 @@ const useQuestionList = () => {
 		sortType,
 		setSortType,
 		requestedQuestionCount : requested_question_count,
+		downvoteFeedbackCount  : downvote_feedback_count,
 	};
 };
 

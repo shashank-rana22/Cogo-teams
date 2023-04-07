@@ -21,6 +21,7 @@ const useGetTableColumns = ({
 	listSetQuestions,
 	setSortFilter,
 	sortFilter,
+	editDetails,
 }) => {
 	const [caseToShow, setCaseToShow] = useState('');
 
@@ -115,6 +116,7 @@ const useGetTableColumns = ({
 					setEditDetails={setEditDetails}
 					allKeysSaved={allKeysSaved}
 					mode={mode}
+					editDetails={editDetails}
 				/>
 			),
 		},

@@ -19,6 +19,7 @@ function useUpdateStandAloneTestQuestion({
 	reset = () => {},
 	setQuestionToDelete = () => {},
 	listSetQuestions,
+	editDetails,
 }) {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
@@ -37,6 +38,7 @@ function useUpdateStandAloneTestQuestion({
 				questionSetId,
 				action,
 				testQuestionId,
+				editDetails,
 			});
 
 			if (!isEmpty(hasError)) {
