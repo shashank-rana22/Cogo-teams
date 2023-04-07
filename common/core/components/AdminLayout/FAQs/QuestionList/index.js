@@ -85,7 +85,6 @@ function QuestionList({
 									<div className={styles.question_container}>
 										<div style={{ marginRight: 4 }}>
 											{item?.question_abstract}
-											?
 										</div>
 										<div>
 											<IcMArrowRight

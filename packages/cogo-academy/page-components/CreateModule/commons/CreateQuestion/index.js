@@ -100,7 +100,7 @@ function CreateQuestion({
 							</Button>
 						) : null}
 
-						{!(editDetails?.question_type === 'case_study') && isNewQuestion ? (
+						{!(editDetails?.question_type === 'case_study') ? (
 							<Button
 								loading={loading || updateCaseStudyLoading}
 								type="submit"

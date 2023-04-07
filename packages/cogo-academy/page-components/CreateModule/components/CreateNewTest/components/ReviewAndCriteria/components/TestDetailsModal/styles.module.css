@@ -20,9 +20,38 @@
 	margin-bottom: 5px;
 }
 
+.duration {
+	font-weight: 500;
+}
+
+.attempts {
+	font-weight: 500;
+}
+
+.validity {
+	font-weight: 500;
+}
+
+.cutoff {
+	font-weight: 500;
+}
+
+.names {
+	font-size: 14px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.entity {
+	margin-right: 20px;
+	font-weight: 400;
+}
+
+.questions_cases {
+	font-weight: 500;
+}
+
 .test_details {
-	display: flex;
-	justify-content: space-between;
 	padding: 0 20px;
 	margin-top: 20px;
 	border: 1px solid #e0e0e0;
@@ -40,6 +69,21 @@
 	color: #4f4f4f;
 }
 
-.test_details div {
+.test_details > div {
+	display: flex;
+	justify-content: space-between;
 	margin: 20px 0;
+}
+
+.q_topic {
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.attempts_pass {
+	display: flex;
+}
+
+.attempt_details {
+	margin-right: 16px;
 }
