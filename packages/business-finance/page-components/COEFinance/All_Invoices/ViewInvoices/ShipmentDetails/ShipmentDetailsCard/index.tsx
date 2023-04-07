@@ -51,7 +51,7 @@ function ShipmentDetailsCard({
 		registrationNumber: registrationNumberBuyer = '',
 		taxNumber: taxNumberBuyer = '',
 	} = buyerDetail || {};
-	const { organizationName = '', taxNumber = '' } = sellerDetail || {};
+	const { organizationName = '', taxNumber = '', registrationNumber = '' } = sellerDetail || {};
 	const {
 		bankName = '',
 		accountNumber = '',
@@ -247,7 +247,7 @@ function ShipmentDetailsCard({
 														<div className={styles.margin_bottom}>
 															PAN Number -
 															{' '}
-															<span>{(taxNumber || '').slice(2, 12)}</span>
+															<span>{(registrationNumber || '')}</span>
 														</div>
 													</div>
 
