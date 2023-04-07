@@ -1,6 +1,7 @@
-import { Toast, Input } from '@cogoport/components';
+import { Toast, Input, Button } from '@cogoport/components';
 import { IcMSearchlight, IcMCross, IcMArrowLeft } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -17,14 +18,14 @@ function Header({
 	showNotificationContent,
 	refetch,
 }) {
-	const suffix = !search ? (
-		<IcMSearchlight />
-	) : (
+	const [input, setInput] = useState('');
+
+	const suffix = search ? (
 		<IcMCross
 			onClick={() => { setSearch(''); setQuestion(null); }}
 			style={{ cursor: 'pointer', color: '#000000' }}
 		/>
-	);
+	) : null;
 
 	const onClickBackButton = async () => {
 		if (question && topic) {
@@ -65,16 +66,29 @@ function Header({
 					<div className={styles.title}>Cogo Assist</div>
 				</div>
 
-				<div className={styles.input_container}>
+				<form
+					onSubmit={(e) => { e.preventDefault(); setSearch(input); setQuestion(null); }}
+					className={styles.input_container}
+				>
 					<Input
 						className="primary lg"
 						placeholder="Search for a question or a topic"
-						value={search}
-						onChange={(e) => { setSearch(e); setQuestion(null); }}
+						value={input}
+						onChange={(e) => {
+							setInput(e);
+							if (!e) setSearch('');
+						}}
 						suffix={suffix}
-						style={{ padding: '0 10px' }}
+						style={{ padding: '0 10px', marginRight: 8 }}
 					/>
-				</div>
+					<Button
+						type="submit"
+						size="md"
+						themeType="primary"
+					>
+						<IcMSearchlight />
+					</Button>
+				</form>
 			</div>
 		</div>
 	);
