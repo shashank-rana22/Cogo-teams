@@ -510,12 +510,12 @@ export const getOceanRatio = (
 	lclImports,
 	lclExports,
 ) => [
-	{ name: 'Total', value: `${ocean * 100} %` || '---' },
-	{ name: 'FCL Exports', value: `${fclExports * 100}%` || '---' },
-	{ name: 'FCL Imports', value: `${fclImports * 100}%` || '---' },
-	{ name: 'LCL Exports', value: `${lclExports * 100}%` || '---' },
-	{ name: 'LCL Imports', value: `${lclImports * 100}%` || '---' },
-	{ name: 'Customs', value: `${oceanCustoms * 100}%` || '---' },
+	{ name: 'Total', value: `${(ocean * 100).toFixed(2)} %` || '---' },
+	{ name: 'FCL Exports', value: `${(fclExports * 100).toFixed(2)}%` || '---' },
+	{ name: 'FCL Imports', value: `${(fclImports * 100).toFixed(2)}%` || '---' },
+	{ name: 'LCL Exports', value: `${(lclExports * 100).toFixed(2)}%` || '---' },
+	{ name: 'LCL Imports', value: `${(lclImports * 100).toFixed(2)}%` || '---' },
+	{ name: 'Customs', value: `${(oceanCustoms * 100).toFixed(2)}%` || '---' },
 ];
 
 export const getAirRatio = (
@@ -524,18 +524,18 @@ export const getAirRatio = (
 	airExports,
 	airImports,
 ) => [
-	{ name: 'Total', value: `${air * 100} %` || '---' },
+	{ name: 'Total', value: `${(air * 100).toFixed(2)} %` || '---' },
 	{
 		name  : 'Air Exports',
-		value : `${airExports * 100} %` || '---',
+		value : `${(airExports * 100).toFixed(2)} %` || '---',
 	},
 	{
 		name  : 'Air Imports',
-		value : `${airImports * 100} %` || '---',
+		value : `${(airImports * 100).toFixed(2)} %` || '---',
 	},
 	{
 		name  : 'Air Customs',
-		value : `${airCustoms * 100} %` || '---',
+		value : `${(airCustoms * 100).toFixed(2)} %` || '---',
 	},
 ];
 export const getSurfaceRatio = (
@@ -545,15 +545,15 @@ export const getSurfaceRatio = (
 ) => [
 	{
 		name  : 'Total',
-		value : `${surface * 100} %` || '---',
+		value : `${(surface * 100).toFixed(2)} %` || '---',
 	},
 	{
 		name  : 'FTL',
-		value : `${ftl * 100} %` || '---',
+		value : `${(ftl * 100).toFixed(2)} %` || '---',
 	},
 	{
 		name  : 'LTL',
-		value : `${ltl * 100} %` || '---',
+		value : `${(ltl * 100).toFixed(2)} %` || '---',
 	},
 ];
 
@@ -563,7 +563,7 @@ export const getRailRatio = (
 ) => [
 	{
 		name  : 'Total',
-		value : `${rail * 100} %` || '---',
+		value : `${(rail * 100).toFixed(2)} %` || '---',
 	},
-	{ name: 'Domestic', value: `${railDomestic * 100} %` || '---' },
+	{ name: 'Domestic', value: `${(railDomestic * 100).toFixed(2)} %` || '---' },
 ];
