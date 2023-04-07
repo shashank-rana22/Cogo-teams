@@ -17,9 +17,9 @@ function ConversationContainer({
 	setActiveMessage,
 	activeRoomLoading = false,
 }) {
+	const [modalType, setModalType] = useState(null);
 	const { user_channel_ids = {}, channel_type = '', user_details = {} } = activeMessageCard || {};
 	const { business_name = '' } = user_details || {};
-	const [modalType, setModalType] = useState(null);
 	const showLoader = loading || activeRoomLoading;
 	if (showLoader) {
 		return ([...Array(2)].map(() => (
@@ -52,53 +52,44 @@ function ConversationContainer({
 	if ((isEmpty(userData) || noData)) {
 		return <div className={styles.empty}>No data Found...</div>;
 	}
+	const modifiedOtherChannelsConfig = OtherChannelsConfig.map((eachRoomConfig) => {
+		const { id_name = '' } = eachRoomConfig || {};
+		return {
+			...eachRoomConfig, has_existing_room: id_name && (id_name in user_channel_ids),
+		};
+	});
+
+	const onCardClick = ({ other_channel_type, has_existing_room = false, id_name }) => {
+		if (has_existing_room) {
+			setActiveMessage({
+				channel_type: other_channel_type, id: user_channel_ids?.[id_name],
+			});
+		} else {
+			setModalType(other_channel_type);
+		}
+	};
 	return (
 		<>
 			<div className={styles.wrapper}>
-				{OtherChannelsConfig
-					.map(({ name, icon, value_type, other_channel_type }) => !isEmpty(userData?.[name])
-						&& other_channel_type === 'email' && (
-							<div
-								role="presentation"
-								className={styles.contacts_container}
-								onClick={() => setModalType(other_channel_type)}
-							>
-								<div className={styles.container}>
-									<div className={styles.icon_type}>
-										{icon}
-									</div>
-									<div className={styles.details}>
-										<div className={styles.header}>
-											<div className={styles.name}>
-												{userData?.name || ''}
-											</div>
-										</div>
-										<div
-											className={styles.organization}
-										>
-											{hideDetails({
-												data : userData?.[name],
-												type : value_type,
-											})}
-										</div>
-									</div>
-								</div>
-							</div>
-					))}
-				{OtherChannelsConfig
-					.map(({ name, icon, value_type, other_channel_type, id_name = '' }) => !isEmpty(
-						user_channel_ids?.[id_name],
-					)
-						&& other_channel_type !== channel_type
-							&& (
+				{modifiedOtherChannelsConfig
+					.map(({
+						name,
+						icon,
+						value_type,
+						other_channel_type,
+						id_name = '',
+						has_existing_room = false,
+					}) => {
+						const show = (!has_existing_room ? userData?.[name] : true)
+						&& other_channel_type !== channel_type;
+						return (
+							show && (
 								<div
-									role="presentation"
+									key={name}
+									tabIndex={0}
+									role="button"
 									className={styles.contacts_container}
-									onClick={() => {
-										setActiveMessage({
-											channel_type: other_channel_type, id: user_channel_ids?.[id_name],
-										});
-									}}
+									onClick={() => onCardClick({ other_channel_type, id_name, has_existing_room })}
 								>
 									<div className={styles.container}>
 										<div className={styles.icon_type}>
@@ -114,16 +105,16 @@ function ConversationContainer({
 												className={styles.organization}
 											>
 												{hideDetails({
-													data: userData?.[name]
-														? userData?.[name]
-														: business_name,
-													type: value_type,
+													data : userData?.[name] || business_name,
+													type : value_type,
 												})}
 											</div>
 										</div>
 									</div>
 								</div>
-							))}
+							)
+						);
+					})}
 			</div>
 
 			{modalType && (
