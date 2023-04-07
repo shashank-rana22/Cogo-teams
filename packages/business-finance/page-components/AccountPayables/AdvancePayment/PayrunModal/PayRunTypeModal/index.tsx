@@ -1,15 +1,14 @@
 import { Modal, Button } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
-
-import CreateNewPayRun from '../../CreateNewPayRun';
 
 import ExitingPayRun from './ExistingPayRun';
 import styles from './styles.module.css';
 
 function PayRunTypeModal({ payRunType, setPayRunType }) {
-	const [newPayRun, setNewPayRun] = useState(false);
+	const { push } = useRouter();
 	const handleClick = () => (
-		setNewPayRun(true)
+		push('/business-finance/account-payables/advance-payment/create-new-payrun')
 	);
 	const [exitPayRun, setExitPayRun] = useState(false);
 	return (
@@ -32,7 +31,6 @@ function PayRunTypeModal({ payRunType, setPayRunType }) {
 				</Modal.Footer>
 			</Modal>
 			{exitPayRun && <ExitingPayRun exitPayRun={exitPayRun} setExitPayRun={setExitPayRun} />}
-			{newPayRun && <CreateNewPayRun newPayRun={newPayRun} setNewPayRun={setNewPayRun} />}
 		</div>
 	);
 }

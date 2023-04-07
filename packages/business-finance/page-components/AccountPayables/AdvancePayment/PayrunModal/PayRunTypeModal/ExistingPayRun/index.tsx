@@ -60,7 +60,7 @@ function ExitingPayRun({ exitPayRun, setExitPayRun }) {
 					<div className={styles.header}>
 						Select a pay run you want to add to.
 					</div>
-					<List config={PaymentReadyConfig} itemData={list} functions={functions} />
+					<List config={PaymentReadyConfig} itemData={list} functions={functions} rowStyle="border" />
 				</Modal.Body>
 				<Modal.Footer>
 					<Button themeType="secondary" onClick={() => { setExitPayRun(false); }}>Cancel</Button>

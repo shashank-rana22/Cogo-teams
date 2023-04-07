@@ -17,6 +17,7 @@ export interface Props {
 	loading?: boolean;
 	subActiveTab?: string;
 	width?: string;
+	rowStyle?:string;
 }
 
 function CardColumn({
@@ -29,13 +30,15 @@ function CardColumn({
 	loading,
 	subActiveTab,
 	width,
+	rowStyle,
 }: Props) {
 	const { clickable } = config;
 	const tableWidth = { minWidth: width } || {};
 	return (
 		<section style={{ ...itemStyles, position: 'relative', ...tableWidth }}>
 			<div
-				className={`${styles.row} ${clickable ? styles.clickable : ''} ${
+				className={`${rowStyle === 'border' ? styles.row_style : styles.row} 
+				${clickable ? styles.clickable : ''} ${
 					isMobile ? styles.is_mobile : ''
 				}`}
 			>
