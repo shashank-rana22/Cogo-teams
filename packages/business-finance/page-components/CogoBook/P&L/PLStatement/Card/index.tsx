@@ -322,7 +322,7 @@ function Card({
 						</Button>
 						<Button
 							onClick={() => { handleClick(); }}
-							disabled={!(filters?.entity && filters?.date)}
+							disabled={!(filters?.entity && (filters?.date || filters?.category))}
 							loading={reportTriggerLoading}
 						>
 							Run Report

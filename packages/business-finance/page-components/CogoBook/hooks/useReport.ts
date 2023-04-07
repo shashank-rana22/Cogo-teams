@@ -39,25 +39,35 @@ const useReport = ({
 		},
 		{ manual: true },
 	);
+	const getLastMonthData = useCallback(() => {
+		if (filters?.category === 'lastMonth') {
+			const currentDate = new Date();
+			currentDate.setMonth(currentDate.getMonth() - 1);
+			const yearData = currentDate.getFullYear();
+			const month = currentDate.getMonth() + 1;
+			const monthValue = month.toString().padStart(2, '0');
+			const lastMonth = `${yearData}-${monthValue}-01`;
+			return [lastMonth];
+		}
+
+		const now = new Date();
+		// eslint-disable-next-line no-mixed-operators
+		const prevQuarterLastMonth = new Date(now.getFullYear(), now.getMonth() - (now.getMonth() + 3) % 3, 0);
+		const lastThreeMonths = Array.from({ length: 3 }, (_, i) => new Date(
+			prevQuarterLastMonth.getFullYear(),
+			prevQuarterLastMonth.getMonth() - i,
+			1,
+		));
+		const lastThreeMonthsFormatted = lastThreeMonths.map((date) => `${date.getFullYear()}
+		-0${date.getMonth() + 1}-01`);
+		return lastThreeMonthsFormatted;
+	}, [filters?.category]);
 
 	const fetchReportApi = useCallback(async (setShowReport) => {
-		const getLastMonthData = () => {
-			if (filters?.category === 'lastMonth ') {
-				const currentDate = new Date();
-				currentDate.setMonth(currentDate.getMonth() - 1);
-				const yearData = currentDate.getFullYear();
-				const month = currentDate.getMonth() + 1;
-				const monthValue = month.toString().padStart(2, '0');
-				const lastMonth = `${yearData}-${monthValue}-01`;
-				return lastMonth;
-			}
-			return null;
-		};
-
 		try {
 			await reportTrigger({
 				params: {
-					periods      : [filters?.date] || [getLastMonthData()] || undefined,
+					periods      : getLastMonthData() || [filters?.date] || undefined,
 					cogoEntityId : entityMappingData[filters?.entity] || undefined,
 				},
 			});
@@ -68,13 +78,13 @@ const useReport = ({
 				Toast.error(error?.response?.data?.message);
 			}
 		}
-	}, [filters?.category, filters?.entity, filters?.date, reportTrigger]);
+	}, [getLastMonthData, reportTrigger, filters?.date, filters?.entity]);
 
 	const fetchRatioApi = useCallback(async (setShowReport?:any) => {
 		try {
 			await ratioTrigger({
 				params: {
-					periods      : monthPayload || filters?.date || undefined,
+					periods      : getLastMonthData() || monthPayload || filters?.date || undefined,
 					cogoEntityId : entityMappingData[filters?.entity] || undefined,
 				},
 			});
@@ -85,7 +95,7 @@ const useReport = ({
 				Toast.error(error?.response?.data?.message);
 			}
 		}
-	}, [filters?.entity, filters?.date, monthPayload, ratioTrigger]);
+	}, [ratioTrigger, getLastMonthData, monthPayload, filters?.date, filters?.entity]);
 
 	return {
 		ratiosData,

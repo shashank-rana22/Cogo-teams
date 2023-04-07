@@ -44,7 +44,7 @@ function ListProfit({
 			esops = 0,
 			gratuityLeaveEncashment = 0,
 			personnelCost = 0,
-			housekeepingSecuritySubscriptionsTravelStayAndCC = 0,
+			housekeepingSecuritySubscriptionsTravelStayAndCc = 0,
 			salariesBonusIncentivesAndStaffWelfareExpenses = 0,
 		} = employeeBenefitExpenses || {};
 
@@ -52,7 +52,7 @@ function ListProfit({
 			foreignExchangeGainNet = 0,
 			interestIncomeOnFd = 0,
 			interestOnLoanDiscountOnBillsAndBankCharges = 0,
-			miscelleneousIncome = 0,
+			miscellaneousIncome = 0,
 		} = financeCost || {};
 
 		const {
@@ -408,11 +408,14 @@ function ListProfit({
 										{isRowVisible && (
 											<>
 												<div>
-													{(housekeepingSecuritySubscriptionsTravelStayAndCC
-												* ratio).toLocaleString('en-IN', options)}
+													{(personnelCost * ratio).toLocaleString('en-IN', options)}
 												</div>
 
-												<div>{(personnelCost * ratio).toLocaleString('en-IN', options)}</div>
+												<div>
+													{(housekeepingSecuritySubscriptionsTravelStayAndCc
+													* ratio).toLocaleString('en-IN', options)}
+
+												</div>
 
 												<div>
 													{(salariesBonusIncentivesAndStaffWelfareExpenses
@@ -453,7 +456,7 @@ function ListProfit({
 
 										{isRowVisible && (
 											<div>
-												{(miscelleneousIncome
+												{(miscellaneousIncome
 											* ratio).toLocaleString('en-IN', options)}
 											</div>
 										)}
