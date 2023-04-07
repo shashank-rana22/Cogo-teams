@@ -11,6 +11,8 @@ import styles from './styles.module.css';
 import getTableColumns from './TableColumns';
 
 function StudentsComponent({ test_id }) {
+	const [showModal, setShowModal] = useState(false);
+
 	const {
 		data = {},
 		loading,
@@ -30,8 +32,6 @@ function StudentsComponent({ test_id }) {
 	} = useStudentWiseTestResult({ test_id });
 
 	const { userSessionMapping, setUserId } = useUpdateTestUserMapping({ refetch });
-
-	const [showModal, setShowModal] = useState(false);
 
 	const { stats = [], page_limit = 0, total_count = 0, list } = data || {};
 
