@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { TabPanel, Tabs } from '@cogoport/components';
 import { useState } from 'react';
 
@@ -5,7 +6,7 @@ import Basic from './Basic';
 import styles from './styles.module.css';
 
 function Content(props) {
-	const { components, setComponents } = props;
+	const { components, setComponents, addNewItem, onNewItemAdding, selectedItem } = props;
 	const [secondaryTab, setSecondaryTab] = useState('basic');
 
 	return (
@@ -19,7 +20,7 @@ function Content(props) {
 			>
 
 				<TabPanel name="basic" title="Basic">
-					<Basic components={components} setComponents={setComponents} />
+					<Basic components={components} setComponents={setComponents} addNewItem={addNewItem} onNewItemAdding={onNewItemAdding} selectedItem={selectedItem} />
 				</TabPanel>
 
 				<TabPanel name="premade" title="Premade">

@@ -3,7 +3,7 @@ import { TabPanel, Tabs } from '@cogoport/components';
 import Content from './Content';
 
 function LeftPanel(props) {
-	const { activeTab, setActiveTab, components, setComponents } = props;
+	const { activeTab, setActiveTab, components, setComponents, selectedItem, onNewItemAdding, addNewItem } = props;
 
 	return (
 		<Tabs
@@ -17,6 +17,10 @@ function LeftPanel(props) {
 				<Content
 					components={components}
 					setComponents={setComponents}
+					addNewItem={addNewItem}
+					onNewItemAdding={onNewItemAdding}
+					selectedItem={selectedItem}
+
 				/>
 			</TabPanel>
 

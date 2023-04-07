@@ -1,5 +1,6 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { Button } from '@cogoport/components';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import DropBox from '../DropBox';
 import LeftPanel from '../LeftPanel';
@@ -9,6 +10,46 @@ import styles from './styles.module.css';
 function DNDComponent() {
 	const [activeTab, setActiveTab] = useState('content');
 	const [components, setComponents] = useState([]);
+
+	const [isNewItemAdding, setNewItemAdding] = useState(false);
+
+	const [selectedItem, setSelectedItem] = useState({});
+
+	const handleAddNewItem = useCallback(
+		(type, hoveredIndex = components.length, shouldAddBelow = true) => {
+		  const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
+
+		  setComponents([
+				...components.slice(0, startIndex),
+				{ id: components.length + 1, type },
+				...components.slice(startIndex),
+		  ]);
+
+		  //! !!!!!!!!!!! ATTENTION
+		  //! Portal :: We might change the last Added item logic like this, my recommendation is changing portal logic as well
+		  setSelectedItem({
+				id    : components.length + 1,
+				index : startIndex,
+		  });
+		},
+		[components],
+	  );
+
+	  const MemoLeftPanel = useCallback(
+		() => (
+			<LeftPanel
+				activeTab={activeTab}
+				setActiveTab={setActiveTab}
+				components={components}
+				setComponents={setComponents}
+				addNewItem={handleAddNewItem}
+				onNewItemAdding={setNewItemAdding}
+				selectedItem={selectedItem}
+			/>
+		),
+		[handleAddNewItem, selectedItem],
+
+	  );
 
 	// const [layouts, setLayouts] = useState(null);
 
@@ -55,12 +96,7 @@ function DNDComponent() {
 
 			<section className={styles.body}>
 				<div className={styles.left_panel}>
-					<LeftPanel
-						activeTab={activeTab}
-						setActiveTab={setActiveTab}
-						components={components}
-						setComponents={setComponents}
-					/>
+					<MemoLeftPanel />
 				</div>
 
 				<div className={styles.right_panel}>
@@ -88,6 +124,11 @@ function DNDComponent() {
 						<DropBox
 							components={components}
 							setComponents={setComponents}
+							addNewItem={handleAddNewItem}
+							onNewItemAdding={setNewItemAdding}
+							selectedItem={selectedItem}
+							setSelectedItem={setSelectedItem}
+							isNewItemAdding={isNewItemAdding}
 						/>
 
 					</div>

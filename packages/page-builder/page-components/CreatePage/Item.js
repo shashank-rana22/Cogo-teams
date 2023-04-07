@@ -1,33 +1,31 @@
 import React, { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
-import ButtonComponent from '../../../commons/widgets/ButtonComponent';
-import ImageComponent from '../../../commons/widgets/ImageComponent';
-import TextComponent from '../../../commons/widgets/TextComponent';
-
-const ItemTypes = {
-	CARD: 'card',
-};
-
-function Item(props) {
-	const {
-		widget, components, setComponents, index, id,
-		moveItem,
-		isNewItemAdding,
-		onNewAddingItemProps,
-		onClick,
-		isSelected,
-
-	 } = props;
-
-	const { type, id: elementId } = widget;
-
+function Item({
+	type,
+	id,
+	index,
+	moveItem,
+	isNewItemAdding,
+	onNewAddingItemProps,
+	onClick,
+	isSelected,
+}) {
 	const itemRef = useRef(null);
+
+	const ITEM_TYPES = {
+		FORM      : 'FORM',
+		HEADING   : 'HEADING',
+		PARAGRAPH : 'PARAGRAPH',
+		LINK      : 'LINK',
+		DOCUMENT  : 'DOCUMENT',
+		IMAGE     : 'IMAGE',
+	};
 
 	//! Portal :: useDrop hook for builderItem
 	// TODO :: refactor and split here while adding portal
 	const [{ handlerId }, drop] = useDrop({
-		accept: ItemTypes.CARD,
+		accept: Object.keys(ITEM_TYPES),
 		collect(monitor) {
 			return {
 				handlerId: monitor.getHandlerId(),
@@ -76,7 +74,6 @@ function Item(props) {
 
 	//! Portal :: isDragging prop. might be use for styling changes in dnd process or something like that purposes
 	const [{ isDragging }, drag] = useDrag({
-		type    : ItemTypes.CARD,
 		item    : { type, id, index },
 		collect : (monitor) => ({
 			isDragging: monitor.isDragging(),
@@ -84,56 +81,23 @@ function Item(props) {
 	});
 
 	//! Portal :: trigger the item as dnd object
-	const ref = drag(drop(itemRef));
+	drag(drop(itemRef));
 
 	const opacity = isNewItemAdding && !id ? '0.3' : '1';
-
 	const border = isSelected ? '3px dashed blue' : '1px solid silver';
-
 	return (
 		<div
-			ref={ref}
 			data-handler-id={handlerId}
-			onClick={onClick}
+			ref={itemRef}
 			style={{
-				opacity,
-				border,
-				padding : '10px',
-				margin  : '10px',
+      	padding : '10px',
+      	margin  : '10px',
+      	opacity,
+      	border,
 			}}
+			onClick={onClick}
 		>
-			{type === 'text' && (
-				<TextComponent
-					key={elementId}
-					text={widget.content}
-					components={components}
-					setComponents={setComponents}
-					elementId={elementId}
-				/>
-			)}
-
-			{type === 'image' && (
-				<ImageComponent
-					key={elementId}
-					src={widget.content}
-					alt={widget.alt}
-					components={components}
-					setComponents={setComponents}
-					elementId={elementId}
-				/>
-			)}
-			{type === 'button' && (
-				<ButtonComponent
-					key={elementId}
-					label={widget.content}
-					themeType={widget.themeType}
-					size={widget.size}
-					type={widget.type}
-					components={components}
-					setComponents={setComponents}
-					elementId={elementId}
-				/>
-			)}
+			{type}
 		</div>
 	);
 }
