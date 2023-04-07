@@ -302,6 +302,7 @@ function GenerateMAWB({
 						activeCategory={activeCategory}
 						setActiveCategory={setActiveCategory}
 						awbNumber={item.awbNumber}
+						serialId={item.serialId}
 					/>
 
 					<FormContainer
