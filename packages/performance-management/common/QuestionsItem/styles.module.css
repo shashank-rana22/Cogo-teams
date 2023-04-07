@@ -1,0 +1,31 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+	padding: 0 8px;
+	margin: 8px 0;
+	border-radius: 8px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+}
+
+.order_container {
+	transform: rotate(90deg) scale(70%);
+}
+
+.question_container {
+	height: 80px;
+}
+
+.weightage {
+	padding: 8px;
+	margin: 4px;
+}
+
+.icon_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 8px;
+	margin: 4px;
+}

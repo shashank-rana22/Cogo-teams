@@ -1,7 +1,7 @@
 import { Button, CheckboxGroup, Input } from '@cogoport/components';
 import { IcMCross, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import filterOptions from '../../../../../configurations/user-activity-filter-options';
 
@@ -10,14 +10,19 @@ import styles from './styles.module.css';
 function Filters({
 	setFilterVisible = () => {},
 	activityTab,
-	filters,
-	setFilters,
+	filters: appliedFilters = null,
 	handleFilters = () => {},
 	handleReset = () => {},
+	loading = false,
 }) {
 	const { FILTERS_MAPPING } = filterOptions();
+	const [values, setValues] = useState(null);
 
-	const emptyCheck = isEmpty(filters);
+	const emptyCheck = isEmpty(values);
+
+	useEffect(() => {
+		setValues(appliedFilters);
+	}, [appliedFilters]);
 
 	return (
 		<div className={styles.container}>
@@ -38,15 +43,15 @@ function Filters({
 						size="sm"
 						placeholder="Enter serial id"
 						options={FILTERS_MAPPING[activityTab]}
-						onChange={setFilters}
-						value={filters}
+						onChange={setValues}
+						value={values || ''}
 					/>
 				</>
 			) : (
 				<CheckboxGroup
 					options={FILTERS_MAPPING[activityTab]}
-					onChange={setFilters}
-					value={filters}
+					onChange={setValues}
+					value={values || []}
 					className={styles.filters}
 				/>
 			)}
@@ -57,9 +62,16 @@ function Filters({
 						<IcMRefresh width={10} height={10} />
 					</div>
 					Reset Status
-
 				</Button>
-				<Button size="sm" themeType="accent" onClick={handleFilters} disabled={emptyCheck}>Apply</Button>
+				<Button
+					size="sm"
+					themeType="accent"
+					onClick={() => handleFilters(values)}
+					disabled={emptyCheck}
+					loading={loading}
+				>
+					Apply
+				</Button>
 			</div>
 		</div>
 	);

@@ -10,3 +10,13 @@
 		}
 	}
 }
+
+.loader {
+	height: 100px;
+}
+
+.loader_main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

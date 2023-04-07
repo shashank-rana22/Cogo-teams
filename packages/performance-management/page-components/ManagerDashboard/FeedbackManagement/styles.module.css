@@ -1,0 +1,38 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.empty_container {
+	height: calc(100vh - 48px);
+}
+
+.redirect_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	font-size: 28px;
+	font-weight: 600;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	margin-top: 16px;
+}
+
+.header_filters {
+	display: flex;
+	align-items: center;
+
+	:global(.ui_select_display_container) {
+		width: 160px;
+		height: 38px;
+	}
+}
+
+.filter_container {
+	display: flex;
+	align-items: center;
+}

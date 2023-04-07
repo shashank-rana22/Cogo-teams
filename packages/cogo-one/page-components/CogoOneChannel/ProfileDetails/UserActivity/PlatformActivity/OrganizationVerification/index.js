@@ -1,4 +1,3 @@
-import { Pill } from '@cogoport/components';
 import { format, isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -22,7 +21,6 @@ function OrganizationVerification({ organization }) {
 			</div>
 			<div className={styles.main_card}>
 				<div className={styles.card}>
-					<Pill size="md" color="#f8aea8">Platform</Pill>
 					<div className={styles.title}>{short_name}</div>
 					<div className={styles.description}>
 						Kyc is verified on

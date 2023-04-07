@@ -7,7 +7,7 @@ function asyncFieldsLocations2() {
 		params      : {
 			filters    : { status: 'active' },
 			page_limit : 20,
-			includes   : { country: null, main_ports: null },
+			includes   : { country: null, default_params_required: true },
 		},
 	};
 }
@@ -23,7 +23,7 @@ function asyncFieldsLocations() {
 			page_limit : 10,
 			sort_by    : 'name',
 			sort_type  : 'asc',
-			includes   : { country: null, main_ports: null },
+			includes   : { country: null, default_params_required: true },
 		},
 	};
 }
@@ -49,6 +49,20 @@ function asyncFieldsOrganization() {
 		initialCall : true,
 		params      : {
 			filters: { status: 'active' },
+		},
+	};
+}
+
+function asyncFieldsLeadOrganization() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'id',
+		endpoint    : 'list_lead_organizations',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
 		},
 	};
 }
@@ -144,11 +158,39 @@ function asyncFieldsCampaignSegments() {
 		},
 	};
 }
+function asyncFieldsListOperators() {
+	return {
+		labelKey    : 'short_name',
+		valueKey    : 'id',
+		endpoint    : 'list_operators',
+		initialCall : true,
+		params      : {
+			filters    : { operator_type: 'airline', status: 'active' },
+			page_limit : 100,
+			sort_by    : 'short_name',
+			sort_type  : 'asc',
+		},
+	};
+}
+
 function asyncFieldsListAgents() {
 	return {
 		labelKey    : 'name',
 		valueKey    : 'agent_id',
 		endpoint    : 'list_chat_agents',
+		initialCall : true,
+		params      : {
+			page_limit : 20,
+			sort_by    : 'active_assigned_chats',
+			sort_type  : 'asc',
+		},
+	};
+}
+function asyncFieldListRateChargeCodes() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'code',
+		endpoint    : 'list_rate_charge_codes',
 		initialCall : true,
 		params      : {
 			filters    : { status: 'active' },
@@ -166,10 +208,34 @@ function asyncAllotBanks() {
 		endpoint     : '/purchase/treasury/live-status',
 		authkey      : 'get_purchase_treasury_live_status',
 		initialCall  : false,
-		microservice : true,
+		microService : 'business_finance',
 		params       : {
 			entityCode : 301,
 			currency   : 'INR',
+		},
+	};
+}
+
+function listVendors() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'q',
+		endpoint    : 'list_vendors',
+		initialCall : false,
+	};
+}
+
+function asyncListCogoEntity() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'entity_code',
+		endpoint    : 'list_cogo_entities',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 100,
 		},
 	};
 }
@@ -181,11 +247,16 @@ export {
 	asyncFieldsPartnerRoles,
 	asyncFieldsPartnerUsers,
 	asyncFieldsOrganizations,
+	asyncFieldsLeadOrganization,
 	asyncFieldsOrganizationUser,
 	asyncFieldsCampaignSegments,
 	asyncFieldsOrganization,
 	asyncFieldsOrganizationUsers,
 	asyncFieldsOperators,
+	asyncFieldsListOperators,
 	asyncFieldsListAgents,
+	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
+	listVendors,
+	asyncListCogoEntity,
 };

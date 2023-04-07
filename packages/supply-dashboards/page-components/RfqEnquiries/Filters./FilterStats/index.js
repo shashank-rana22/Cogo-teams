@@ -37,7 +37,17 @@ function FilterStats({ filters, hookSetters }) {
 		}
 	};
 	const handleOnClick = (value) => {
-		hookSetters.setFilters((prev) => ({ ...prev, service_type: value, page: 1 }));
+		hookSetters.setFilters((prev) => ({
+			...prev,
+			service_type            : value,
+			page                    : 1,
+			origin_port_id          : undefined,
+			destinaton_port_id      : undefined,
+			origin_airport_id       : undefined,
+			destination_airport_id  : undefined,
+			origin_location_id      : undefined,
+			destination_location_id : undefined,
+		}));
 	};
 
 	const handleOnChangeCheckbox = (value, checkbox) => {

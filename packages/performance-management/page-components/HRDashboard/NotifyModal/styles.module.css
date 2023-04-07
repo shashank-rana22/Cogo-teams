@@ -1,0 +1,25 @@
+.notify_card {
+	display: flex;
+	padding: 8px;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	margin-top: 8px;
+}
+
+.checkbox {
+	display: flex;
+	align-items: center;
+	margin-top: 8px;
+}
+
+.checkbox_label {
+	font-size: 14px;
+
+	span {
+		font-weight: 700;
+	}
+}

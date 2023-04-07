@@ -1,0 +1,46 @@
+.feedback_button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.feedback_button_text {
+	margin: 0;
+}
+
+.modal_header {
+	font-size: 16px;
+	font-weight: 600;
+
+	span {
+		font-size: 18px;
+		font-weight: 700;
+		color: #7278ad;
+	}
+}
+
+.add_button {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.feedback_form_button {
+	display: flex;
+	padding: 4px 12px;
+	color: #034afd;
+	background: #cddbff;
+	border-radius: 4px;
+}
+
+.popover {
+	:global {
+		.ui_popover_container {
+			padding: 0;
+		}
+	}
+}
+
+.popover_item:hover {
+	background: #f8f2e7;
+}

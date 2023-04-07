@@ -111,7 +111,7 @@ const navigationMappingSeller = {
 	},
 	saas_cogo_insurance: {
 		key           : 'saas_cogo_insurance',
-		title         : 'Insurance',
+		title         : 'Cargo Insurance',
 		href          : '/saas/insurance/list',
 		as            : '/saas/insurance/list',
 		type          : 'link',

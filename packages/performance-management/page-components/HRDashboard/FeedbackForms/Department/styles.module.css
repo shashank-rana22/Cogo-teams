@@ -1,0 +1,56 @@
+.accordion {
+	padding: 8px;
+	margin: 8px 8px 0;
+	background-color: #fff;
+	border-radius: 8px;
+}
+
+.department {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	.department_label {
+		margin: 0;
+		font-size: 14px;
+		font-weight: 700;
+	}
+}
+
+.roles {
+	margin: 0 4px;
+}
+
+.role {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	height: 50px;
+	padding: 0 8px;
+	cursor: pointer;
+
+	.role_label {
+		flex: 1;
+		margin: 0;
+	}
+
+	:global {
+		.ui_pill_container {
+			cursor: pointer;
+		}
+	}
+}
+
+.role:not(:last-child) {
+	border-bottom: 1px solid #efefef;
+}
+
+.role:hover {
+	background-color: #f8f2e7;
+	border-bottom: 1px solid #edd7a9;
+}
+
+.selected_designation {
+	background-color: #f8f2e7;
+}

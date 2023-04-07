@@ -75,3 +75,59 @@
 	width: 30px;
 	height: 30px;
 }
+
+.list_container {
+	margin-top: 6px;
+	color: #615f5f;
+	background-color: #cfeaed41;
+	border: 1px solid #cfeaed;
+	border-radius: 4px;
+	box-shadow: 0 0 5px 0 #627fac33;
+}
+
+.list_item {
+	padding: 10px 12px;
+	border-bottom: 1px solid #cfeaed;
+
+	&:last-child {
+		border: none;
+	}
+}
+
+.list_item_title {
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.list_item_description {
+	font-size: 11px;
+}
+
+.list_button {
+	width: 100%;
+	padding: 6px;
+	margin-top: -3px;
+	cursor: pointer;
+	background-color: #cfeaed;
+	border: none;
+	border-top: 1px solid lightgray;
+	border-radius: 0 0 4px 4px;
+	outline: none;
+	box-shadow: 0 2px 3px 0 #627fac33;
+}
+
+.btn_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.btn_icon {
+	margin-right: 3px;
+}
+
+.message_tick_container {
+	display: flex;
+	justify-content: flex-end;
+}

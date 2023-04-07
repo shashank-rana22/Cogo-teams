@@ -10,7 +10,12 @@ import {
 	asyncFieldsPartner,
 	asyncFieldsPartnerRoles,
 	asyncFieldsPartnerUsers,
+	asyncFieldsLocations,
+	asyncFieldsListOperators,
+	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
+	listVendors,
+	asyncListCogoEntity,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -31,14 +36,20 @@ import {
  * @returns {Array} Modified Async Options
  * getModifiedOptions
  */
+
 const keyAsyncFieldsParamsMapping = {
-	organizations      : asyncFieldsOrganizations,
-	organization_users : asyncFieldsOrganizationUser,
-	partners           : asyncFieldsPartner,
-	partner_users      : asyncFieldsPartnerUsers,
-	partner_roles      : asyncFieldsPartnerRoles,
-	segments           : asyncFieldsCampaignSegments,
-	allot_bank         : asyncAllotBanks,
+	list_vendors           : listVendors,
+	organizations          : asyncFieldsOrganizations,
+	organization_users     : asyncFieldsOrganizationUser,
+	partners               : asyncFieldsPartner,
+	partner_users          : asyncFieldsPartnerUsers,
+	partner_roles          : asyncFieldsPartnerRoles,
+	segments               : asyncFieldsCampaignSegments,
+	list_locations         : asyncFieldsLocations,
+	list_operators         : asyncFieldsListOperators,
+	list_rate_charge_codes : asyncFieldListRateChargeCodes,
+	allot_bank             : asyncAllotBanks,
+	list_cogo_entity       : asyncListCogoEntity,
 };
 
 function AsyncSelect(props) {
@@ -49,20 +60,23 @@ function AsyncSelect(props) {
 		initialCall,
 		getModifiedOptions,
 		getSelectedOption,
-		microService = false,
+		microService = '',
 		...rest
 	} = props;
 
 	const defaultParams = keyAsyncFieldsParamsMapping[asyncKey]?.() || {};
 
-	const asyncOptionsHook = microService ? useGetAsyncOptionsMicroservice : useGetAsyncOptions;
+	const asyncOptionsHook = (microService || defaultParams.microService)
+		? useGetAsyncOptionsMicroservice
+		: useGetAsyncOptions;
 
 	const getAsyncOptionsProps = asyncOptionsHook({
 		...defaultParams,
 		initialCall,
-		params   : params || defaultParams.params,
-		labelKey : rest.labelKey || defaultParams.labelKey,
-		valueKey : rest.valueKey || defaultParams.valueKey,
+		params       : params || defaultParams.params,
+		labelKey     : rest.labelKey || defaultParams.labelKey,
+		valueKey     : rest.valueKey || defaultParams.valueKey,
+		microService : microService || defaultParams.microService,
 	});
 
 	if (typeof getModifiedOptions === 'function' && !isEmpty(getAsyncOptionsProps.options)) {

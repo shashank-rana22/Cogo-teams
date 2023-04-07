@@ -2,9 +2,7 @@ export const filterControls = [
 	{
 		name        : 'shipmentType',
 		placeholder : 'Select Service',
-		size        : 'lg',
 		type        : 'select',
-		caret       : true,
 		isClearable : true,
 		options     : [
 			{ value: 'fcl_freight', label: 'FCL' },

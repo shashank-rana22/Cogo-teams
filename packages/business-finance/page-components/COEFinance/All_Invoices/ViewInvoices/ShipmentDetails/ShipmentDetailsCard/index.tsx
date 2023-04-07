@@ -8,7 +8,6 @@ import {
 	Checkbox,
 } from '@cogoport/components';
 import { IcCFtick, IcMCrossInCircle, IcMInfo } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import { format, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -63,11 +62,9 @@ function ShipmentDetailsCard({
 		billDate,
 		status = '',
 		placeOfSupply = '',
+		billType = '',
+		isProforma,
 	} = bill || {};
-
-	const { query } = useRouter();
-	const { billType, isProforma } = query;
-
 	const [DetailsCard, setDetailsCard] = useState([
 		{
 			id    : 1,
@@ -435,7 +432,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={status !== 'LOCKED'}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -445,7 +442,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={status !== 'LOCKED'}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}
@@ -541,7 +538,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={status !== 'LOCKED'}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -551,7 +548,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={status !== 'LOCKED'}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}
@@ -639,7 +636,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={status !== 'LOCKED'}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -649,7 +646,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={status !== 'LOCKED'}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}

@@ -1,4 +1,4 @@
-import { Button, Pill, Accordion, Placeholder } from '@cogoport/components';
+import { Loader, Button, Pill, Accordion, Placeholder } from '@cogoport/components';
 import { IcADocumentTemplates, IcMArrowNext } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
@@ -23,7 +23,7 @@ import styles from './styles.module.css';
 function CostSheet() {
 	const Router = useRouter();
 	const { query } = Router || {};
-	const { shipmentId: shipmentid, jobNumber, orgId, IsJobClose } = query || {};
+	const { shipmentId, jobNumber, orgId, IsJobClose } = query || {};
 	const getStatus = () => {
 		if (IsJobClose === 'OPEN') {
 			return false;
@@ -41,18 +41,14 @@ function CostSheet() {
 		buydata,
 		apiloading,
 		preTaxData,
-		postTaxData,
 		preTaxLoading,
-		postTaxLoading,
 		sellData,
 		buyData,
 	} = useGetShipmentCostSheet({ query });
 	const { tentativeProfit: preTaxActual, quotationalProfit: preTaxExpected } = preTaxData || {};
-	const { tentativeProfit: postTaxActual, quotationalProfit: postTaxExpected } = postTaxData || {};
-	const { data: shipmentData } = useListShipment(jobNumber);
+	const { data: shipmentData, loading:loadingShipment } = useListShipment(jobNumber);
 	const dataList = shipmentData?.list[0] || {};
 	const { source, tradeType } = dataList;
-	const shipmentId = dataList?.id || '';
 	const sourceText = source === 'direct' ? 'Sell Without Buy' : startCase(source);
 	const { data: dataWallet } = useGetWallet(shipmentId);
 	const {
@@ -73,16 +69,30 @@ function CostSheet() {
 		getData(data);
 	};
 
+	const getPills = () => {
+		if (loadingShipment) {
+			return <Placeholder height="20px" width="80px" />;
+		}
+		if (sourceText) {
+			return <Pill color="blue">{sourceText}</Pill>;
+		}
+		if (tradeType) {
+			return <Pill color="yellow">{startCase(tradeType)}</Pill>;
+		}
+		return <div>No Data Found</div>;
+	};
 	return (
 		<div>
 			<div className={styles.flex}>
 				<Button
 					size="md"
 					themeType="secondary"
-					onClick={() => Router.push(
-						'/business-finance/coe-finance/[active_tab]/[view]',
-						'/business-finance/coe-finance/all_invoices/shipment-view' as never as null,
-					)}
+					onClick={() => {
+						Router.push(
+							`/business-finance/coe-finance/[active_tab]/[view]?jobNumber=${jobNumber}`,
+							`/business-finance/coe-finance/all_invoices/shipment-view?jobNumber=${jobNumber}`,
+						);
+					}}
 				>
 					Go Back
 				</Button>
@@ -132,12 +142,6 @@ function CostSheet() {
 					actual={preTaxActual}
 					loading={preTaxLoading}
 				/>
-				<StatRect
-					heading="Profit on Shipment - Post Tax"
-					expected={postTaxExpected}
-					actual={postTaxActual}
-					loading={postTaxLoading}
-				/>
 			</div>
 			<DiscountRect
 				heading="Discount Applied"
@@ -168,10 +172,11 @@ function CostSheet() {
 				title={
         (
 	<span className={styles.label}>
-		Documents
+		Shipment Documents
 		<span className={styles.icon}>
 			<IcADocumentTemplates />
 		</span>
+		{loadingShipment && <Loader />}
 	</span>
         ) as unknown as string
         }
@@ -181,7 +186,7 @@ function CostSheet() {
 					margin          : '25px 0px',
 				}}
 			>
-				<Documents shipmentId={shipmentid} />
+				<Documents shipmentId={shipmentId} />
 			</Accordion>
 			<Accordion
 				type="text"
@@ -190,9 +195,20 @@ function CostSheet() {
 	<span className={styles.details}>
 		Shipment Details
 		<div className={styles.tags_container}>
-			{sourceText && <Pill color="blue">{sourceText}</Pill>}
-			{tradeType && <Pill color="yellow">{startCase(tradeType)}</Pill>}
+			{getPills()}
 		</div>
+
+		<div className={styles.sid}>
+			{' '}
+			SID
+			{' '}
+			<div className={styles.job}>
+				#
+				{jobNumber}
+			</div>
+
+		</div>
+
 	</span>
         ) as unknown as string
         }
@@ -205,8 +221,9 @@ function CostSheet() {
 				<Details
 					orgId={orgId}
 					dataList={shipmentData?.list?.[0]}
-					shipmentId={shipmentid}
+					shipmentId={shipmentId}
 				/>
+
 			</Accordion>
 			<div className={styles.heading}>Cost Sheet</div>
 			<Line width="60px" color="#F68B21" margin="5px 0px 0px 0px" />
@@ -246,11 +263,21 @@ function CostSheet() {
 						loading={apiloading}
 					/>
 					<div className={styles.quotation_amount}>
-						Quotation Total :
-						<div className={styles.value_text}>
-							{sellData?.totalQuotational
-								? getFormattedPrice(sellData?.totalQuotational, 'INR')
-								: '  --' || '-'}
+						<div className={styles.credit}>
+							Credit Note :
+							<div className={styles.value_text}>
+								{sellData?.totalCreditNoteActual
+									? getFormattedPrice(sellData?.totalCreditNoteActual, 'INR')
+									: '  --'}
+							</div>
+						</div>
+						<div className={styles.credit}>
+							Quotation Total :
+							<div className={styles.value_text}>
+								{sellData?.totalQuotational
+									? getFormattedPrice(sellData?.totalQuotational, 'INR')
+									: '  --'}
+							</div>
 						</div>
 					</div>
 					{apiloading
@@ -269,11 +296,21 @@ function CostSheet() {
 						loading={apiloading}
 					/>
 					<div className={styles.quotation_amount}>
-						Quotation Total :
-						<div className={styles.value_text}>
-							{buyData?.totalQuotational
-								? getFormattedPrice(buyData?.totalQuotational, 'INR')
-								: '  --' || '-'}
+						<div className={styles.credit}>
+							Credit Note :
+							<div className={styles.value_text}>
+								{buyData?.totalCreditNoteActual
+									? getFormattedPrice(buyData?.totalCreditNoteActual, 'INR')
+									: '  --'}
+							</div>
+						</div>
+						<div className={styles.credit}>
+							Quotation Total :
+							<div className={styles.value_text}>
+								{buyData?.totalQuotational
+									? getFormattedPrice(buyData?.totalQuotational, 'INR')
+									: '  --'}
+							</div>
 						</div>
 					</div>
 					{apiloading

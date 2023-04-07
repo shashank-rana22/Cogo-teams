@@ -2,10 +2,10 @@ import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
 const useGetUser = ({ lead_user_id = null, userId = null, customerId }) => {
-	const apiName =	 !userId ? 'get_lead_user' : 'get_user';
+	const apiName =	 !userId ? '/get_lead_user' : '/get_user';
 	const payload = !userId ? lead_user_id : userId;
 	const [{ loading, data }, trigger] = useRequest({
-		url    : `${apiName}`,
+		url    : apiName,
 		method : 'get',
 	}, { manual: true });
 

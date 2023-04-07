@@ -1,11 +1,14 @@
-import { Pill, Placeholder, Loader } from '@cogoport/components';
+import { Button, Pill, Placeholder, Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
+import { ACCOUNT_TYPE } from '../../../../constants';
 import useGetListPromotions from '../../../../hooks/useGetListPromocode';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
 import useGetOrganizationCogopoints from '../../../../hooks/useGetOrganizationCogopoints';
 
+import ConvertToCpModal from './ConvertToCpModal';
 import OrgAgentDetails from './OrgAgentDetails';
 import PromocodeThumbnail from './PromocodeThumbnail';
 import styles from './styles.module.css';
@@ -15,13 +18,17 @@ function OrganizationDetails({
 	activeVoiceCard = {},
 	formattedMessageData = {},
 	openNewTab = () => {},
+	hideCpButton = false,
+	getOrgDetails = () => {},
 }) {
 	const { organization_id:messageOrgId = '' } = formattedMessageData || {};
 	const { organization_id:voiceOrgId = '' } = activeVoiceCard || {};
 
 	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
 
-	const { organizationData = {}, orgLoading } = useGetOrganization({ organizationId });
+	const { organizationData = {}, orgLoading, fetchOrganization = () => {} } = useGetOrganization({ organizationId });
+
+	const [showConvertModal, setShowConvertModal] = useState(false);
 
 	const {
 		pointData = {},
@@ -30,7 +37,7 @@ function OrganizationDetails({
 
 	const { promoData = {}, promoLoading } = useGetListPromotions({ organizationId });
 	const { list = [] } = promoData || {};
-	const { agent = {}, account_type, kyc_status, serial_id, short_name, city } = organizationData || {};
+	const { agent = {}, account_type, kyc_status, serial_id, short_name, city, tags = [] } = organizationData || {};
 	const { display_name } = city || {};
 
 	const { total_redeemable } = pointData || {};
@@ -44,6 +51,10 @@ function OrganizationDetails({
 		);
 	}
 
+	const refetchOrgDetails = () => {
+		fetchOrganization();
+		getOrgDetails();
+	};
 	function ListPromos() {
 		return isEmpty(list) ? (
 			<div className={styles.promotion_cards_empty_state}>
@@ -56,6 +67,11 @@ function OrganizationDetails({
 			</div>
 		) : (
 			<div className={styles.promotion_cards}>
+				<div className={styles.wrapper}>
+					<h3>
+						Coming Soon...
+					</h3>
+				</div>
 				<PromocodeThumbnail list={list} />
 			</div>
 		);
@@ -115,17 +131,39 @@ function OrganizationDetails({
 						{' '}
 						{serial_id}
 					</div>
-					<div>
+					<div className={styles.convert_to_cp}>
 						<Pill
 							key="Importer/Exporter"
 							size="sm"
 							color="#FFF7BF"
 						>
-							{account_type === 'importer_exporter' ? 'Importer/Exporter' : 'Service Provider'}
+							{tags.includes('partner') ? 'Channel Partner' : (
+								<div>
+									{ACCOUNT_TYPE[account_type]}
+								</div>
+							)}
+
 						</Pill>
+						{ !hideCpButton && !orgLoading && (
+							<Button
+								size="sm"
+								themeType="primary"
+								onClick={() => setShowConvertModal(true)}
+							>
+								Convert Account to CP
+							</Button>
+						)}
 					</div>
 				</>
 			)}
+			{showConvertModal && (
+				<ConvertToCpModal
+					showConvertModal={showConvertModal}
+					setShowConvertModal={setShowConvertModal}
+					organizationId={organizationId}
+					refetchOrgDetails={refetchOrgDetails}
+				/>
+			) }
 
 			{!isEmpty(agent) && (
 				<>

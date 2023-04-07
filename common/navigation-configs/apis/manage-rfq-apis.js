@@ -10,6 +10,11 @@ const apis = [
 		service_name : 'organization',
 	},
 	{
+		api          : 'list_partner_users',
+		access_type  : 'private',
+		service_name : 'partner',
+	},
+	{
 		api          : 'update_rfq',
 		access_type  : 'private',
 		feature      : 'rfq',
@@ -121,6 +126,12 @@ const apis = [
 		feature      : 'rfq',
 		service_name : 'spot_search',
 
+	},
+	{
+		api          : 'download_rfq_excel',
+		access_type  : 'private',
+		feature      : 'rfq',
+		service_name : 'rfq',
 	},
 ];
 

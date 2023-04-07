@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 interface Props {
-	options:{ label:string, value:string, icon?: JSX.Element, badge?:number }[];
+	options:{ label:string, value:string, icon?: JSX.Element, badge?:number | string }[];
 	activeTab:string;
 	setActiveTab:Function;
 	color?: string;

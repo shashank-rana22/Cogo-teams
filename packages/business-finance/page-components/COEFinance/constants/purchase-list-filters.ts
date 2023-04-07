@@ -1,11 +1,17 @@
-function filtersData(statsData) {
-	const { INITIATED = '', FINANCE_ACCEPTED = '', ON_HOLD = '' } = statsData || {};
+interface StatsDataInterface {
+	INITIATED?:string
+	FINANCE_ACCEPTED?:string
+	ON_HOLD?: string
+	LOCKED?: string
+}
+function filtersData(statsData:StatsDataInterface) {
+	const { LOCKED = '', FINANCE_ACCEPTED = '', ON_HOLD = '' } = statsData || {};
 
 	return [
 		{
-			label : 'Initiated',
-			value : 'INITIATED',
-			badge : INITIATED,
+			label : 'Locked',
+			value : 'LOCKED',
+			badge : LOCKED || '0',
 		},
 		{
 			label : 'On Hold',
@@ -15,7 +21,7 @@ function filtersData(statsData) {
 		{
 			label : 'Approved',
 			value : 'FINANCE_ACCEPTED',
-			badge : FINANCE_ACCEPTED,
+			badge : FINANCE_ACCEPTED || '0',
 		},
 
 	];

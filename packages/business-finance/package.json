@@ -8,16 +8,18 @@
   "types": "dist/types/index.d.ts",
   "dependencies": {
     "@cogoport/charts": "^1.0.1",
-    "@cogoport/components": "^1.0.330",
+    "@cogoport/components": "^1.0.359",
     "@cogoport/forms": "workspace:0.1.0",
-    "@cogoport/icons-react": "^1.0.58",
+    "@cogoport/globalization": "workspace:^0.0.1",
+    "@cogoport/icons-react": "^1.0.65",
     "@cogoport/next": "workspace:0.1.0",
     "@cogoport/request": "workspace:0.1.0",
     "@cogoport/store": "workspace:0.1.0",
-    "@cogoport/utils": "^1.2.2",
+    "@cogoport/utils": "^1.2.6",
     "file-saver": "^2.0.5",
     "number-to-words": "^1.2.4",
-    "react": "18.2.0"
+    "react": "18.2.0",
+    "react-grid-layout": "^1.3.4"
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.5",

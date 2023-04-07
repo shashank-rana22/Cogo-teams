@@ -41,7 +41,18 @@ const FUNCTION_SUB_FUNCTION_MAPPING = {
 		{ label: 'Post Shipment', value: 'post_shipment' },
 		{ label: 'FINOPS', value: 'finops' },
 	],
-	finance: [{ label: 'Credit Controller', value: 'credit_controller' }],
+	finance  : [{ label: 'Credit Controller', value: 'credit_controller' }],
+	training : [
+		{ label: 'Training General', value: 'training_general' },
+	],
+	hr: [
+		{ label: 'HR Admin', value: 'hr_admin' },
+		{ label: 'HRBP', value: 'hrbp' },
+		{ label: 'Talent Acquisition', value: 'talent_acquisition' },
+	],
+	external: [
+		{ label: 'Enrichment', value: 'enrichment' },
+	],
 };
 
 const get_all_sub_functions = (role_functions) => {
@@ -67,7 +78,6 @@ export const controls = (role_functions, partnerOptions) => [
 		...partnerOptions,
 		name        : 'stakeholder_id',
 		placeholder : 'Select partner',
-		size        : 'lg',
 		type        : 'select',
 		isClearable : true,
 		params      : { filters: { status: 'active' } },
@@ -75,7 +85,6 @@ export const controls = (role_functions, partnerOptions) => [
 	{
 		name           : 'navigation',
 		placeholder    : 'Select module',
-		size           : 'lg',
 		scope          : 'partner',
 		type           : 'select',
 		defaultOptions : true,
@@ -86,7 +95,6 @@ export const controls = (role_functions, partnerOptions) => [
 	{
 		name           : 'role_functions',
 		placeholder    : 'Select Function',
-		size           : 'lg',
 		scope          : 'partner',
 		type           : 'multiSelect',
 		defaultOptions : true,
@@ -109,13 +117,16 @@ export const controls = (role_functions, partnerOptions) => [
 				label : 'Finance',
 				value : 'finance',
 			},
+			{
+				label : 'External',
+				value : 'external',
+			},
 		],
 		params: { filters: { status: 'active' } },
 	},
 	{
 		name           : 'role_sub_functions',
 		placeholder    : 'Select Sub-function',
-		size           : 'lg',
 		scope          : 'partner',
 		type           : 'multiSelect',
 		defaultOptions : true,
@@ -127,7 +138,6 @@ export const controls = (role_functions, partnerOptions) => [
 	{
 		name           : 'hierarchy_level',
 		placeholder    : 'Select Level',
-		size           : 'lg',
 		scope          : 'partner',
 		type           : 'select',
 		defaultOptions : true,

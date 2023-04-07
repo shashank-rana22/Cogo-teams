@@ -15,7 +15,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 
 	:global {
 		.ui_toggle_container.ui_ps_size_md .ui_switch {
@@ -65,105 +65,7 @@
 .source_types {
 	display: flex;
 	align-items: center;
-	width: calc(100% - 40px);
-}
-
-.card_container {
-	padding: 10px 12px;
-	border-radius: 4px;
-}
-
-.card_container:hover {
-	background: #fdfbf6;
-}
-
-.active_card {
-	background: #fbf7ec;
-}
-
-.active_card:hover {
-	background: #fbf7ec;
-}
-
-.card {
-	padding: 8px;
-	cursor: pointer;
-}
-
-.user_information {
-	display: flex;
-	justify-content: space-between;
-}
-
-.activity_duration {
-	margin-top: 2px;
-	font-size: 10px;
-	font-weight: 500;
-	color: #4f4f4f;
-}
-
-.user_details {
-	display: flex;
-	flex-direction: column;
-	margin-left: 5px;
-}
-
-.user_name {
-	max-width: 130px;
-	overflow: hidden;
-	font-size: 14px;
-	font-weight: 600;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-
-	@media (max-width: 1280px) {
-		max-width: 100px;
-	}
-}
-
-.organisation {
-	max-width: 140px;
-	margin-top: 2px;
-	overflow: hidden;
-	font-size: 10px;
-	color: #828282;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-
-	@media (max-width: 1280px) {
-		max-width: 100px;
-	}
-}
-
-.avatar_container {
-	display: flex;
-}
-
-.content_div {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
-.new_message_count {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 20px;
-	height: 20px;
-	font-size: 9px;
-	color: #fff;
-	background: #ee3425;
-	border-radius: 50%;
-}
-
-.content {
-	max-width: 90%;
-	margin-top: 3px;
-	overflow: hidden;
-	font-size: 12px;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+	width: calc(100% - 44px);
 }
 
 .empty_state {
@@ -176,12 +78,8 @@
 }
 
 .list_container {
-	height: calc(100% - 155px);
+	height: 80%;
 	overflow-y: auto;
-
-	@media (max-width: 1280px) {
-		height: calc(100% - 130px);
-	}
 }
 
 .list_container::-webkit-scrollbar {
@@ -237,4 +135,58 @@
 
 .warning {
 	background: #fef199;
+}
+
+.important_styles {
+	position: relative;
+}
+
+.important_icon {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 22px;
+	background: #ee3425;
+	border-radius: 0 4px;
+}
+
+.name_container {
+	display: flex;
+	align-items: center;
+}
+
+.pinned_chats_div {
+	margin-bottom: 10px;
+	border-bottom: 0.5px solid #b0b0b0;
+}
+
+.icon {
+	width: 10px;
+	height: 10px;
+	fill: #828282;
+}
+
+.pinned_chat_flex {
+	display: flex;
+	align-items: center;
+	padding: 0 3px 10px 0;
+	cursor: pointer;
+	user-select: none;
+}
+
+.pin_text {
+	margin-left: 5px;
+	font-size: 10px;
+	font-weight: 600;
+	color: #828282;
+}
+
+.recent_text {
+	font-size: 10px;
+	font-weight: 600;
+	color: #828282;
+	user-select: none;
 }

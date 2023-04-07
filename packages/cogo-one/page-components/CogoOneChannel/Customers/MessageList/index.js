@@ -1,44 +1,42 @@
-import { cl, Input, Popover, Tooltip } from '@cogoport/components';
-import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
-import React from 'react';
+import { Input, Popover } from '@cogoport/components';
+import { IcMFilter, IcMSearchlight, IcMArrowRotateRight, IcMArrowRotateDown } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
-import UserAvatar from '../../../../common/UserAvatar';
-import { PLATFORM_MAPPING } from '../../../../constants';
-import dateTimeConverter from '../../../../utils/dateTimeConverter';
-import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 import FilterComponents from '../FilterComponents';
 import LoadingState from '../LoadingState';
+import NewWhatsappMessage from '../NewWhatsappMessage';
 
+import MessageCardData from './MessageCardData';
 import styles from './styles.module.css';
 
-function MessageList({
-	messagesList,
-	setSearchValue = () => { },
-	filterVisible,
-	searchValue,
-	setFilterVisible = () => { },
-	setAppliedFilters = () => { },
-	appliedFilters,
-	messagesLoading = false,
-	activeCardId = '',
-	setActiveMessage,
-	setActiveCardId = () => {},
-	showBotMessages = false,
-}) {
-	function getShowChat({ user_name }) {
-		if (searchValue) {
-			const searchName = user_name?.toLowerCase();
-			return searchName?.includes(searchValue?.toLowerCase());
-		}
+function MessageList(messageProps) {
+	const {
+		messagesList,
+		setSearchValue = () => { },
+		filterVisible,
+		searchValue,
+		setFilterVisible = () => { },
+		setAppliedFilters = () => { },
+		appliedFilters,
+		messagesLoading = false,
+		activeCardId = '',
+		setActiveMessage,
+		showBotMessages = false,
+		setShowBotMessages = () => {},
+		isomniChannelAdmin = false,
+		setModalType = () => {},
+		modalType = '',
+		handleScroll = () => {},
+		tagOptions = [],
+		userId,
+		sortedPinnedChatList = [],
+		firestore,
+	} = messageProps;
+	const [openPinnedChats, setOpenPinnedChats] = useState(true);
 
-		return true;
-	}
-
-	if (messagesLoading) {
-		return <LoadingState />;
-	}
-
+	const ActiveIcon = openPinnedChats ? IcMArrowRotateDown : IcMArrowRotateRight;
+	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;
 	return (
 		<>
 			<div className={styles.filters_container}>
@@ -51,137 +49,89 @@ function MessageList({
 						onChange={(val) => setSearchValue(val)}
 					/>
 				</div>
-				{!showBotMessages && (
-					<div className={styles.filter_icon}>
-						<Popover
-							placement="right"
-							render={(
+				<div className={styles.filter_icon}>
+					<Popover
+						placement="right"
+						render={(
 							filterVisible && (
 								<FilterComponents
 									setFilterVisible={setFilterVisible}
 									filterVisible={filterVisible}
 									appliedFilters={appliedFilters}
 									setAppliedFilters={setAppliedFilters}
-									setActiveCardId={setActiveCardId}
+									setShowBotMessages={setShowBotMessages}
+									showBotMessages={showBotMessages}
+									isomniChannelAdmin={isomniChannelAdmin}
+									tagOptions={tagOptions}
 								/>
 							)
-							)}
-							visible={filterVisible}
-							onClickOutside={() => setFilterVisible(false)}
-						>
-							<IcMFilter
-								onClick={() => setFilterVisible((prev) => !prev)}
-								className={styles.filter_icon}
-							/>
-						</Popover>
-						{!isEmpty(appliedFilters) && <div className={styles.filters_applied} />}
-					</div>
-				)}
+						)}
+						visible={filterVisible}
+						onClickOutside={() => setFilterVisible(false)}
+					>
+						<IcMFilter
+							onClick={() => setFilterVisible((prev) => !prev)}
+							className={styles.filter_icon}
+						/>
+					</Popover>
+					{(!isEmpty(appliedFilters)
+					|| (showBotMessages && !isomniChannelAdmin))
+					&& <div className={styles.filters_applied} />}
+				</div>
 			</div>
-
-			{ isEmpty(messagesList) ? (
+			{ isEmpty(messagesList) && isPinnedChatEmpty && !messagesLoading ? (
 				<div className={styles.list_container}>
 					<div className={styles.empty_state}>
 						No Messages Yet..
 					</div>
 				</div>
 			) : (
-				<div className={styles.list_container}>
-					{(messagesList || []).map((item) => {
-						const { chat_status = '' } = item || {};
-						const userData = getActiveCardDetails(item);
-						const {
-							user_name = '',
-							organization_name = '',
-							user_type = '',
-						} = userData || {};
-
-						const lastActive = new Date(item.new_message_sent_at);
-						const checkActiveCard = activeCardId === item?.id;
-
-						const showOrganization = () => {
-							if (['public_website', 'public_cp', 'public_app'].includes(user_type)) {
-								return startCase(PLATFORM_MAPPING[user_type] || '');
-							}
-							return startCase(organization_name);
-						};
-
-						const show = getShowChat({ user_name, item, appliedFilters, searchValue });
-
-						return (
-							show && (
-								<div
-									key={item?.id}
-									role="presentation"
-									className={cl`
-												${styles.card_container} 
-												${checkActiveCard ? styles.active_card : ''} 
-												`}
-									onClick={() => setActiveMessage(item)}
-								>
-									<div className={styles.card}>
-										<div className={styles.user_information}>
-											<div className={styles.avatar_container}>
-												<UserAvatar
-													type={item.channel_type}
-													imageSource={item.image}
-												/>
-												<div className={styles.user_details}>
-													<Tooltip content={startCase(user_name)} placement="top">
-														<div className={styles.user_name}>
-															{startCase(user_name)}
-														</div>
-													</Tooltip>
-
-													<div className={styles.organisation}>
-														{showOrganization()}
-													</div>
-												</div>
-											</div>
-
-											<div className={styles.user_activity}>
-												<div className={styles.tags_conatiner}>
-													{!isEmpty(chat_status) && (
-														<div
-															className={cl`
-																${styles.tags}
-																${chat_status === 'warning' ? styles.warning : ''}
-																${chat_status === 'escalated' ? styles.escalated : ''}
-															`}
-														>
-															{startCase(chat_status)}
-														</div>
-													)}
-												</div>
-
-												<div className={styles.activity_duration}>
-													{dateTimeConverter(
-														Date.now() - Number(lastActive),
-														Number(lastActive),
-													)?.renderTime}
-												</div>
-											</div>
-										</div>
-
-										<div className={styles.content_div}>
-											<div className={styles.content}>
-												{item.last_message}
-											</div>
-
-											{item.new_message_count > 0 && (
-												<div className={styles.new_message_count}>
-													{item.new_message_count > 100 ? '99+' : (
-														item.new_message_count
-													)}
-												</div>
-											)}
-										</div>
-									</div>
+				<div className={styles.list_container} onScroll={handleScroll}>
+					{!isPinnedChatEmpty && (
+						<>
+							<div
+								role="button"
+								tabIndex={0}
+								className={styles.pinned_chat_flex}
+								onClick={() => setOpenPinnedChats((p) => !p)}
+							>
+								<ActiveIcon className={styles.icon} />
+								<div className={styles.pin_text}>pinned chats</div>
+							</div>
+							{openPinnedChats && (
+								<div className={styles.pinned_chats_div}>
+									{(sortedPinnedChatList || []).map((item) => (
+										<MessageCardData
+											item={item}
+											activeCardId={activeCardId}
+											userId={userId}
+											setActiveMessage={setActiveMessage}
+											firestore={firestore}
+										/>
+									))}
 								</div>
-							)
-						);
-					})}
+							)}
+						</>
+					)}
+					<div className={styles.recent_text}>Recent</div>
+					{(messagesList || []).map((item) => (
+						<MessageCardData
+							item={item}
+							activeCardId={activeCardId}
+							userId={userId}
+							setActiveMessage={setActiveMessage}
+							firestore={firestore}
+						/>
+					))}
+					{messagesLoading && <LoadingState />}
 				</div>
+			)}
+
+			{modalType?.type && (
+				<NewWhatsappMessage
+					setModalType={setModalType}
+					modalType={modalType}
+				/>
 			)}
 		</>
 	);

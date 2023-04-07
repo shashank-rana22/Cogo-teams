@@ -8,7 +8,7 @@
 
 .list_container {
 	height: 75vh;
-	padding-bottom: 14px;
+	padding-bottom: 28px;
 	margin-top: 10px;
 	overflow-y: auto;
 
@@ -59,7 +59,6 @@
 
 .filter_icon {
 	margin-top: 10px;
-	cursor: pointer;
 }
 
 .filter_dot {
@@ -88,7 +87,7 @@
 	bottom: 0;
 	z-index: 1;
 	display: flex;
-	justify-content: flex-end;
+	justify-content: flex-start;
 	width: 100%;
 	padding-top: 8px;
 	background: #f9f9f9;
@@ -99,4 +98,8 @@
 	flex-direction: column;
 	justify-content: center;
 	width: 100%;
+}
+
+.communication_options {
+	margin-top: 10px;
 }

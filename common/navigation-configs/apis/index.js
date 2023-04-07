@@ -3,8 +3,9 @@ import app_contract_management from './app-manage-contract-apis';
 import app_manage_rfq from './app-manage-rfq-apis';
 import app_settings from './app-settings';
 import bl_do from './bl-do-apis';
-import bl_do_collection_release from './bl_do_collection_release';
+import bl_do_collection_release from './bl-do-collection-release-apis';
 import bn_salvage from './bn-salvage-apis';
+import booking_desk from './booking-desk-apis';
 import coe_finance from './coe-finance-apis';
 import cogoLens from './cogo-lens';
 import common_apis from './common-apis';
@@ -14,7 +15,8 @@ import cost_booking_desk from './cost-booking-desk-apis';
 import document_walet from './doc-walet';
 import document_desk from './document-desk-apis';
 import enquiry_supply from './enquiry-supply-apis';
-import enrichment from './enrichment';
+import enrichment from './enrichment-apis';
+import faq from './faq-apis';
 import feedback from './feedback-apis';
 import kam_desk from './kam-desk-apis';
 import kam_payments_dashboard from './kam-payments-dashboard-apis';
@@ -25,6 +27,8 @@ import manage_rfq from './manage-rfq-apis';
 import okam_task_apis from './okam-task-dashboard';
 import partner from './partner-apis';
 import payments from './payments-apis';
+import performance_management from './performance-managment-apis';
+import poc from './poc-apis';
 import pms from './port-management';
 import rms from './rate-management-apis';
 import revenue_desk_apis from './revenue-desk-apis';
@@ -37,6 +41,7 @@ import sop from './sop-apis';
 import tech_ops from './tech-ops-apis';
 import techops_dashboard from './techops_dashboard';
 import tools from './tools';
+import vendor_rm_apis from './vendor_rm_apis';
 
 const apis = {
 	search: search.map((api) => ({
@@ -51,6 +56,10 @@ const apis = {
 	sop: sop.map((api) => ({
 		...api,
 		module: 'demand_crm',
+	})),
+	vendor_rm_apis: vendor_rm_apis.map((api) => ({
+		...api,
+		module: 'vendor_rm',
 	})),
 	revenue_desk: revenue_desk_apis.map((api) => ({
 		...api,
@@ -116,6 +125,10 @@ const apis = {
 	...consolidated_invoices,
 	login_apis,
 	enrichment,
+	...faq,
+	performance_management,
+	booking_desk,
+	poc,
 };
 
 export default apis;

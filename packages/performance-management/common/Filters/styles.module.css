@@ -1,0 +1,14 @@
+.department_select {
+	display: flex;
+	justify-content: flex-start;
+
+	:global {
+		.ui_select_display_container {
+			width: 160px;
+		}
+
+		.ui_input_container {
+			width: 180px;
+		}
+	}
+}

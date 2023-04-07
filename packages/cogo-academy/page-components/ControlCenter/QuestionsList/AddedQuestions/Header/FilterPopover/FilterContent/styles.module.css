@@ -1,0 +1,17 @@
+.filter_container {
+	:global {
+		.ui_multiselect_display_container {
+			width: 220px;
+		}
+	}
+}
+
+.title {
+	margin: 8px 0;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 16px;
+}

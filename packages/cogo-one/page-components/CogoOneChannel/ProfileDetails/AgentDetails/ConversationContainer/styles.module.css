@@ -18,6 +18,7 @@
 
 .contacts_container {
 	overflow-y: scroll;
+	cursor: pointer;
 }
 
 .contacts_container::-webkit-scrollbar {
@@ -52,24 +53,10 @@
 	color: #4f4f4f;
 }
 
-.duration {
-	font-size: 10px;
-	font-weight: 500;
-	color: #4f4f4f;
-}
-
 .organization {
 	width: 100%;
 	font-size: 10px;
 	color: #828282;
-}
-
-.message {
-	padding-left: 30px;
-	font-size: 10px;
-	color: #221f20;
-	text-overflow: ellipsis;
-	white-space: break-spaces;
 }
 
 .empty {

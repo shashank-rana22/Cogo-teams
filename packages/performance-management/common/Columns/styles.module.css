@@ -1,0 +1,27 @@
+.head {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+	font-size: 14px;
+	font-weight: 700;
+	color: #221f20;
+}
+
+.head_content {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.improvement_needed {
+	color: #f00;
+}
+
+.average {
+	color: #f3aa18;
+}
+
+.good_performance {
+	color: #67c676;
+}

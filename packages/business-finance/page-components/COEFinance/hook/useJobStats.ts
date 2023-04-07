@@ -45,7 +45,7 @@ const useJobStats = (filters :FilterInterface) => {
 					},
 				});
 			} catch (err) {
-				Toast.error(err);
+				Toast.error(err?.response?.data?.message);
 			}
 		};
 		getData();

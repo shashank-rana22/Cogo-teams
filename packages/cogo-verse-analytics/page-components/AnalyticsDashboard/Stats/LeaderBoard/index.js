@@ -31,7 +31,7 @@ function LeaderBoard(props = {}) {
 				<div
 					className={INTENT_LEADERBOARD.length > 3
 						? cl`${styles.leaderboard_content} 
-                ${styles.inner_shadow}`
+                			${styles.inner_shadow}`
 						: styles.leaderboard_content}
 				>
 					{' '}

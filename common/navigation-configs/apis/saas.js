@@ -997,17 +997,17 @@ const saas = {
 		{
 			api          : 'get_exchange_rate',
 			access_type  : 'private',
-			service_name : 'organization',
+			service_name : 'exchange_rate',
 		},
 		{
 			api          : 'create_spot_search',
 			access_type  : 'private',
-			service_name : 'organization',
+			service_name : 'spot_search',
 		},
 		{
 			api          : 'get_spot_search',
 			access_type  : 'public',
-			service_name : 'organization',
+			service_name : 'spot_search',
 		},
 		{
 			api          : 'get_sailing_schedules',
@@ -1418,6 +1418,11 @@ const saas = {
 			service_name : 'saas_subscriptions_v2',
 		},
 		{
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'list_coupons',
 			access_type  : 'private',
 			service_name : 'saas_subscriptions_v2',
@@ -1437,7 +1442,7 @@ const saas = {
 		{
 			api          : 'get_exchange_rate',
 			access_type  : 'private',
-			service_name : 'organization',
+			service_name : 'exchange_rate',
 		},
 		{
 			api          : 'list_organization_billing_addresses',
@@ -1543,6 +1548,22 @@ const saas = {
 			api          : 'create_organization_billing_address',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api         : 'get_saas_faq',
+			access_type : 'private',
+			module      : 'insurance',
+			feature     : 'insurance',
 		},
 	],
 	app_saas_trade_partner: [
@@ -1737,10 +1758,11 @@ const saas = {
 			feature     : 'dutiesTaxes',
 		},
 		{
-			api         : 'get_exchange_rate',
-			access_type : 'private',
-			module      : 'dutiesTaxes',
-			feature     : 'dutiesTaxes',
+			api          : 'get_exchange_rate',
+			access_type  : 'private',
+			module       : 'dutiesTaxes',
+			feature      : 'dutiesTaxes',
+			service_name : 'exchange_rate',
 		},
 		{
 			api         : 'saas_get_user_quota_usage',
@@ -1755,10 +1777,11 @@ const saas = {
 			feature     : 'dutiesTaxes',
 		},
 		{
-			api         : 'get_exchange_rate',
-			access_type : 'private',
-			module      : 'dutiesTaxes',
-			feature     : 'dutiesTaxes',
+			api          : 'get_exchange_rate',
+			access_type  : 'private',
+			module       : 'dutiesTaxes',
+			feature      : 'dutiesTaxes',
+			service_name : 'exchange_rate',
 		},
 		{
 			api         : 'post_saas_trade_engine_duties_draft',
@@ -1839,16 +1862,18 @@ const saas = {
 			feature     : 'dutiesTaxes',
 		},
 		{
-			api         : 'get_spot_search',
-			access_type : 'private',
-			module      : 'dutiesTaxes',
-			feature     : 'dutiesTaxes',
+			api          : 'get_spot_search',
+			access_type  : 'private',
+			module       : 'dutiesTaxes',
+			feature      : 'dutiesTaxes',
+			service_name : 'spot_search',
 		},
 		{
-			api         : 'create_spot_search',
-			access_type : 'private',
-			module      : 'dutiesTaxes',
-			feature     : 'dutiesTaxes',
+			api          : 'create_spot_search',
+			access_type  : 'private',
+			module       : 'dutiesTaxes',
+			feature      : 'dutiesTaxes',
+			service_name : 'spot_search',
 		},
 		{
 			api         : 'get_saas_trade_engine_service_rates',

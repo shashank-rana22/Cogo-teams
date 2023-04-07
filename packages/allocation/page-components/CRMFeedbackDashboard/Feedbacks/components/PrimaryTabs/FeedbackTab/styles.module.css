@@ -1,0 +1,33 @@
+.container {
+	margin-top: 20px;
+}
+
+.table {
+	:global(.ui_table_container) {
+		padding: 0 12px;
+	}
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 12px;
+}
+
+.table_cell {
+	min-width: 120px;
+}
+
+.feedback {
+	display: flex;
+	align-items: center;
+	min-width: 156px;
+}
+
+.tooltip_text {
+	display: block;
+	max-width: 300px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

@@ -1,0 +1,8 @@
+.loading_container {
+	display: flex;
+	justify-content: space-between;
+	padding: 16px 24px;
+	background: #fff;
+	border-bottom: 1px solid #f2f2f2;
+	border-radius: 10px;
+}

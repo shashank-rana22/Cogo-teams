@@ -1,4 +1,4 @@
-import { Pill } from '@cogoport/components';
+import { Loader, Placeholder, Pill } from '@cogoport/components';
 import {
 	IcMArrowRotateDown,
 	IcMArrowRotateUp,
@@ -55,7 +55,11 @@ interface BillInterface {
 	billCurrency: string;
 	grandTotal: any;
 	subTotal: string | number;
+	recurringState?:string,
+	billType: string;
+	isProforma: boolean,
 }
+
 interface JobInterface {
 	jobNumber: string;
 }
@@ -76,8 +80,7 @@ export interface DataInterface {
 interface ShipmentDetailsInterface {
 	data: DataInterface;
 	orgId: string;
-	jobNumber?: string;
-	remarksVal: RemarksValInterface;
+	remarksVal?: RemarksValInterface;
 	setRemarksVal: any;
 	lineItemsRemarks: object;
 	setLineItemsRemarks: React.Dispatch<React.SetStateAction<{}>>;
@@ -88,7 +91,6 @@ interface ShipmentDetailsInterface {
 function ShipmentDetails({
 	data,
 	orgId,
-	jobNumber,
 	remarksVal,
 	setRemarksVal,
 	lineItemsRemarks,
@@ -102,8 +104,10 @@ function ShipmentDetails({
 	const [showVariance, setShowVariance] = useState(false);
 	const [itemCheck, setItemCheck] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
+	const { job } = data || {};
+	const { jobNumber } = job || {};
 	const { varianceFullData, loading } = useGetVariance({ collectionPartyId });
-	const { data: shipmentData } = useListShipment(jobNumber);
+	const { data: shipmentData, loading:loadingShipment } = useListShipment(jobNumber);
 	const dataList = shipmentData?.list[0] || {};
 	const { source, trade_type: tradeType } = dataList;
 	const shipmentId = dataList?.id || '';
@@ -115,6 +119,19 @@ function ShipmentDetails({
 		amount,
 		amount_currency: amountCurrency,
 	} = dataWallet?.list?.[0] || {};
+
+	const getPills = () => {
+		if (loadingShipment) {
+			return <Placeholder height="20px" width="80px" />;
+		}
+		if (sourceText) {
+			return <Pill color="blue">{sourceText}</Pill>;
+		}
+		if (tradeType) {
+			return <Pill color="yellow">{startCase(tradeType)}</Pill>;
+		}
+		return <div>NO DATA FOUND</div>;
+	};
 
 	return (
 		<div className={styles.container}>
@@ -146,8 +163,7 @@ function ShipmentDetails({
 					<div className={styles.sub_container}>
 						Details
 						<div className={styles.tags_container}>
-							{sourceText && <Pill color="blue">{sourceText}</Pill>}
-							{tradeType && <Pill color="yellow">{startCase(tradeType)}</Pill>}
+							{getPills()}
 						</div>
 						{dataWallet?.list?.[0] && (
 							<div className={styles.data}>
@@ -203,8 +219,11 @@ function ShipmentDetails({
 			>
 				<div className={styles.card_upper}>
 					<div className={styles.sub_container}>
-						Documents
+						Shipment Documents
 						<IcADocumentTemplates height="17px" width="17px" />
+						{loadingShipment && (
+							<Loader />
+						)}
 					</div>
 
 					<div

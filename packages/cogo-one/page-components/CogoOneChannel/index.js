@@ -1,3 +1,4 @@
+import { IcMDownload } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
@@ -5,9 +6,11 @@ import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
+import { ANDRIOD_APK } from '../../constants';
 import { hasPermission } from '../../constants/IDS_CONSTANTS';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus';
+import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChats from '../../hooks/useListChats';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 
@@ -36,13 +39,24 @@ function CogoOne() {
 	const { suggestions = [] } = useListChatSuggestions();
 	const [showDialModal, setShowDialModal] = useState(false);
 
+	const [activeMail, setActiveMail] = useState({});
+	const [recipientArray, setRecipientArray] = useState([]);
+	const [bccArray, setBccArray] = useState([]);
+	const [buttonType, setButtonType] = useState('');
+	const [emailState, setEmailState] = useState({
+		subject : '',
+		body    : '',
+	});
+
+	const [modalType, setModalType] = useState({ type: null, data: {} });
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
 	const firestore = getFirestore(app);
 
-	const { userRoleIds, userId } = useSelector(({ profile }) => ({
-		userRoleIds : profile.partner?.user_role_ids || [],
-		userId      : profile?.user?.id,
+	const { userRoleIds, userId, emailAddress } = useSelector(({ profile }) => ({
+		userRoleIds  : profile.partner?.user_role_ids || [],
+		userId       : profile?.user?.id,
+		emailAddress : profile?.user?.email,
 	}));
 
 	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
@@ -52,41 +66,45 @@ function CogoOne() {
 		updateUserStatus = () => {},
 	} = useCreateUserInactiveStatus({ fetchworkPrefernce, setOpenModal });
 
+	const { tagOptions = [] } = useListAssignedChatTags();
+	const mailProps = {
+		activeMail,
+		setActiveMail,
+		recipientArray,
+		setRecipientArray,
+		bccArray,
+		setBccArray,
+		buttonType,
+		setButtonType,
+		emailState,
+		setEmailState,
+		emailAddress,
+	};
+
 	const {
-		listData = {},
+		chatsData = {},
 		setActiveMessage = () => {},
 		activeMessageCard = {},
 		setAppliedFilters = () => {},
 		appliedFilters,
 		loading,
-		setActiveCardId,
+		setActiveCard,
 		activeCardId,
 		firstLoading,
 		updateLeaduser,
+		handleScroll,
 	} = useListChats({
 		firestore,
 		userId,
 		isomniChannelAdmin,
 		showBotMessages,
+		searchValue,
 	});
-	const { messagesList = [], unReadChatsCount } = listData;
-
-	useEffect(() => {
-		if (!firstLoading) {
-			setActiveVoiceCard({});
-			setActiveCardId('');
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeTab, showBotMessages]);
-
-	useEffect(() => {
-		setToggleStatus(status === 'active');
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(agentStatus)]);
 
 	const renderComponent = () => {
 		if ((activeTab === 'message' && !isEmpty(activeMessageCard))
-			|| (activeTab === 'voice' && !isEmpty(activeVoiceCard))) {
+			|| (activeTab === 'voice' && !isEmpty(activeVoiceCard))
+			|| (activeTab === 'mail' && !isEmpty(activeMail))) {
 			return (
 				<>
 					<Conversations
@@ -98,16 +116,17 @@ function CogoOne() {
 						userId={userId}
 						isomniChannelAdmin={isomniChannelAdmin}
 						showBotMessages={showBotMessages}
+						mailProps={mailProps}
 					/>
-					<ProfileDetails
-						activeMessageCard={activeMessageCard}
-						activeTab={activeTab}
-						activeVoiceCard={activeVoiceCard}
-						firestore={firestore}
-						updateLeaduser={updateLeaduser}
-						activeCardId={activeCardId}
-
-					/>
+					{activeTab !== 'mail' && (
+						<ProfileDetails
+							activeMessageCard={activeMessageCard}
+							activeTab={activeTab}
+							activeVoiceCard={activeVoiceCard}
+							updateLeaduser={updateLeaduser}
+							activeCardId={activeCardId}
+						/>
+					)}
 				</>
 			);
 		}
@@ -118,10 +137,21 @@ function CogoOne() {
 		);
 	};
 
+	useEffect(() => {
+		if (!firstLoading) {
+			setActiveVoiceCard({});
+			setActiveCard({});
+			setActiveMail({});
+		}
+	}, [activeTab, firstLoading, setActiveCard, showBotMessages]);
+
+	useEffect(() => {
+		setToggleStatus(status === 'active');
+	}, [status]);
+
 	return (
 		<div className={styles.layout_container}>
 			<Customers
-				setActiveCardId={setActiveCardId}
 				isomniChannelAdmin={isomniChannelAdmin}
 				setActiveMessage={setActiveMessage}
 				activeMessageCard={activeMessageCard}
@@ -135,8 +165,7 @@ function CogoOne() {
 				setActiveTab={setActiveTab}
 				setToggleStatus={setToggleStatus}
 				toggleStatus={toggleStatus}
-				messagesList={messagesList}
-				unReadChatsCount={unReadChatsCount}
+				chatsData={chatsData}
 				appliedFilters={appliedFilters}
 				setAppliedFilters={setAppliedFilters}
 				fetchworkPrefernce={fetchworkPrefernce}
@@ -149,10 +178,44 @@ function CogoOne() {
 				setShowBotMessages={setShowBotMessages}
 				showBotMessages={showBotMessages}
 				setShowDialModal={setShowDialModal}
+				activeMail={activeMail}
+				setActiveMail={setActiveMail}
+				userId={userId}
+				handleScroll={handleScroll}
+				setModalType={setModalType}
+				modalType={modalType}
+				tagOptions={tagOptions}
+				mailProps={mailProps}
+				firestore={firestore}
 			/>
 
 			<div className={styles.chat_details_continer}>
 				{renderComponent()}
+			</div>
+			<div
+				className={styles.download_apk}
+			>
+				<div
+					role="presentation"
+					className={styles.download_div}
+					onClick={() => window.open(ANDRIOD_APK, '_blank')}
+				>
+					<img
+						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-logo-without-bg"
+						alt="bot"
+						className={styles.bot_icon_styles}
+					/>
+					<div className={styles.text_styles}>
+						<div className={styles.flex}>
+							<IcMDownload
+								fill="#EE3425"
+								className={styles.download_icon}
+							/>
+							<div>Get the</div>
+						</div>
+						app now
+					</div>
+				</div>
 			</div>
 			{showDialModal && (
 				<DialCallModal

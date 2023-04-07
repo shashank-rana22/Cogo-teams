@@ -8,7 +8,6 @@ import MyResponsivePie from '../Components/PieChart';
 import { PieChartData } from '../Components/PieChart/PieChartData';
 import MyResponsiveBar from '../Components/ResponsiveBar';
 import BarData from '../Components/ResponsiveBar/BarData';
-import usePurchaseViewStats from '../hook/getPurchaseViewStats';
 import useJobStats from '../hook/useJobStats';
 import useServiceOpsStats from '../hook/useServiceOpsStats';
 
@@ -17,10 +16,9 @@ import { filterControls, reportControls } from './controls';
 import JobStats from './JobStats';
 import styles from './styles.module.css';
 
-function Dashboard() {
+function Dashboard({ statsData }) {
 	const [filters, setFilters] = useState({ zone: '', serviceType: '', days: '' });
 	const [reportModal, setReportModal] = useState(false);
-	const { statsData } = usePurchaseViewStats();
 	const { So2statsData } = useServiceOpsStats(filters);
 	const { jobStatsData } = useJobStats(filters);
 	const { INITIATED = '', FINANCE_ACCEPTED = '', COE_REJECTED = '', FINANCE_REJECTED = '' } = statsData || {};
@@ -80,6 +78,8 @@ function Dashboard() {
 						<StyledTable
 							data={So2statsData}
 							columns={columns}
+							loading={false}
+							imageFind=""
 						/>
 					</div>
 

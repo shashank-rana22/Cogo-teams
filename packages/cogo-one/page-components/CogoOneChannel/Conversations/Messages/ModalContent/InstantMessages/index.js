@@ -1,9 +1,10 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { useState } from 'react';
 
+import Templates from '../../../../../../common/Templates';
+
 import InstantReplies from './InstantReplies';
 import styles from './styles.module.css';
-import Templates from './Templates';
 
 function InstantRepliesModal({ data = {} }) {
 	const [activeTab, setActiveTab] = useState('quick_reply');
@@ -52,7 +53,6 @@ function InstantRepliesModal({ data = {} }) {
 						activeTab={activeTab}
 						openCreateReply={openCreateReply}
 						setOpenCreateReply={setOpenCreateReply}
-						setActiveTab={setActiveTab}
 					/>
 				</TabPanel>
 

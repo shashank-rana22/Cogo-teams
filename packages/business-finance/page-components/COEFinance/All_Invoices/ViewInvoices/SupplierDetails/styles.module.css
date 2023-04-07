@@ -68,6 +68,15 @@
 	width: 29%;
 }
 
+.details {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 8px 0;
+	font-size: 18px;
+	font-weight: 600;
+}
+
 .text_decoration {
 	width: 100px;
 	overflow: hidden;
@@ -120,4 +129,21 @@
 
 .download {
 	cursor: pointer;
+}
+
+.loader {
+	height: 100px;
+}
+
+.loader_main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.sid_details {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
 }

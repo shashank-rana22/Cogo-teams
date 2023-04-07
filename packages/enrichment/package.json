@@ -1,0 +1,20 @@
+{
+    "name": "@cogoport/enrichment",
+    "version": "0.1.0",
+    "description": "Enrichment for Third Parties",
+    "private": true,
+    "main": "./index.js",
+    "types": "./index.js",
+    "dependencies": {
+      "@cogoport/components": "^1.0.319",
+      "@cogoport/forms": "workspace:0.1.0",
+      "@cogoport/charts": "^1.0.1",
+      "@cogoport/icons-react": "^1.0.51",
+      "@cogoport/navigation-configs": "workspace:0.1.0",
+      "@cogoport/next": "workspace:0.1.0",
+      "@cogoport/request": "workspace:0.1.0",
+      "@cogoport/store": "workspace:0.1.0",
+      "@cogoport/utils": "^1.2.2",
+      "react": "18.2.0"
+    }
+  }

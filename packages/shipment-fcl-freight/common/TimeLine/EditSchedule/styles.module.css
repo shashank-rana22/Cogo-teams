@@ -1,0 +1,39 @@
+.label {
+	position: relative;
+	width: max-content;
+	font-weight: 600;
+}
+
+.label.required::after {
+	position: absolute;
+	top: 0;
+	right: -10px;
+	color: #ee3426;
+	content: "*";
+}
+
+.lower_label {
+	font-size: 10px;
+	font-weight: 600;
+	opacity: 0.8;
+}
+
+.form_item {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 48%;
+	margin-bottom: 16px;
+}
+
+.form_container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.error_message {
+	margin-left: 6px;
+	font-size: 10px;
+	color: #ee3426;
+}

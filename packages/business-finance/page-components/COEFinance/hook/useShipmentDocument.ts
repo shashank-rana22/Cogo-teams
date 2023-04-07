@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 const useShipmentDocument = (shipmentId) => {
 	const [{ data, loading }, trigger] = useRequest(
 		{
-			url    : '/shipment/list_shipment_documents',
+			url    : '/list_shipment_documents',
 			method : 'get',
 		},
 		{ autoCancel: false },
@@ -17,6 +17,8 @@ const useShipmentDocument = (shipmentId) => {
 				filters                          : {
 					shipment_id: shipmentId,
 				},
+				page       : 1,
+				page_limit : 50,
 			},
 		});
 	}, [shipmentId, trigger]);

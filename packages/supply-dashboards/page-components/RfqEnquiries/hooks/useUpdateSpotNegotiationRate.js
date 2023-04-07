@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Toast } from '@cogoport/components';
 import { useForm, getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
@@ -47,7 +48,7 @@ const useUpdateSpotNegotiationRate = ({
 		service  : service.service,
 	});
 
-	const { data :rateSelected } = useGetRates({ service, selectedRate });
+	const { data :rateSelected, loading: loadingRateSelected } = useGetRates({ service, selectedRate });
 
 	const prefillData = useRef();
 
@@ -63,29 +64,61 @@ const useUpdateSpotNegotiationRate = ({
 				setValue('airline_id', rateSelected?.data?.airline_id);
 			} else {
 				setValue('service_provider_id', selectedRate?.service_provider_id);
-				setValue('shipping_line_id', selectedRate?.data?.shipping_line_id);
-				setValue('airline_id', selectedRate?.data?.airline_id);
+				setValue('shipping_line_id', selectedRate?.shipping_line_id);
+				setValue('airline_id', selectedRate?.airline_id);
 			}
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(rateSelected)]);
 
 	useEffect(() => {
-		let mandatoryFreightCodes = [];
-		let mandatoryOriginChargeCodes = [];
-		let mandatoryDestinationChargeCodes = [];
-		let mandatorySurchargeCodes = [];
+		let prefillFreightCodes = [];
+		let prefillOriginChargeCodes = [];
+		let prefillDestinationChargeCodes = [];
+		let prefillSurchargeCodes = [];
 		if (data) {
 			if (prefillData.current || !rateSelected) {
 				prefillData.current = data;
 			} else if (!prefillData.current) {
 				prefillData.current = rateSelected;
 			}
-			(Object.keys(prefillData.current?.data || {})).forEach((item) => {
-				const val = prefillData.current?.data[item];
+			(Object.keys(prefillData.current?.data || prefillData.current?.freight
+				|| prefillData.current?.ftl_freight || prefillData.current?.ltl_freight
+				|| prefillData.current?.fcl_customs || prefillData.current?.lcl_customs
+				|| prefillData.current?.air_customs || prefillData.current.fcl_cfs
+				|| prefillData.current.haulage_freight
+				|| {})).forEach((item) => {
+				let val;
+				if (prefillData.current?.data) {
+					val = prefillData?.current?.data[item];
+				}
+				if (prefillData.current?.freight) {
+					val = prefillData?.current?.freight[item];
+				}
+				if (prefillData?.current?.ftl_freight) {
+					val = prefillData?.current?.ftl_freight[item];
+				}
+				if (prefillData?.current?.ltl_freight) {
+					val = prefillData?.current?.ltl_freight[item];
+				}
+				if (prefillData.current?.fcl_customs) {
+					val = prefillData?.current?.fcl_customs[item];
+				}
+				if (prefillData.current?.lcl_customs) {
+					val = prefillData?.current?.lcl_customs[item];
+				}
+				if (prefillData.current?.air_customs) {
+					val = prefillData?.current?.air_customs[item];
+				}
+				if (prefillData.current?.fcl_cfs) {
+					val = prefillData?.current?.fcl_cfs[item];
+				}
+				if (prefillData.current?.haulage_freight) {
+					val = prefillData?.current?.haulage_freight[item];
+				}
 				if (val) {
-					if (item === 'line_items') {
-						mandatoryFreightCodes = val;
+					if (item === 'line_items' || item === 'customs_line_items') {
+						prefillFreightCodes = val;
 					} else if (item === 'origin_storage') {
 						setValue('origin_free_limit', val?.free_limit);
 						setValue('origin_slabs', val?.slabs);
@@ -93,9 +126,9 @@ const useUpdateSpotNegotiationRate = ({
 						setValue('destination_free_limit', val?.free_limit);
 						setValue('destination_slabs', val?.slabs);
 					} else if (Array.isArray(val)) {
-						(Object.keys(val[0])).forEach((prefill) => {
+						(Object.keys(val[0] || {})).forEach((prefill) => {
 							if (prefill === 'line_items') {
-								mandatoryFreightCodes = val[0]?.[prefill];
+								prefillFreightCodes = val[0]?.[prefill];
 							} else if (prefill === 'validity_start' || prefill === 'validity_end') {
 								setValue(prefill, new Date(val[0]?.[prefill]));
 							} else if (prefill === 'departure_dates') {
@@ -103,16 +136,23 @@ const useUpdateSpotNegotiationRate = ({
 							} else {
 								setValue(prefill, val[0]?.[prefill]);
 							}
+							if (service?.service === 'air_freight') {
+								prefillFreightCodes = [{
+									code      : 'BAS',
+									min_price : Number(val[0]?.min_price).toString(),
+									price     : Number(val[0]?.min_price).toString(),
+								}];
+							}
 						});
 					} else if (typeof (val) === 'object') {
 						(Object.keys(val)).forEach((prefill) => {
 							if (prefill === 'line_items') {
 								if (item === 'origin_local') {
-									mandatoryOriginChargeCodes = val?.[prefill];
+									prefillOriginChargeCodes = val?.[prefill];
 								} else if (item === 'destination_local') {
-									mandatoryDestinationChargeCodes = val?.[prefill];
+									prefillDestinationChargeCodes = val?.[prefill];
 								} else if (item === 'surcharge') {
-									mandatorySurchargeCodes = val?.[prefill];
+									prefillSurchargeCodes = val?.[prefill];
 								}
 							} else {
 								setValue(prefill, val?.[prefill]);
@@ -121,19 +161,27 @@ const useUpdateSpotNegotiationRate = ({
 					}
 				}
 			});
+			let mandatoryFreightCodes = [];
+			let mandatoryOriginChargeCodes = [];
+			let mandatoryDestinationChargeCodes = [];
+			let mandatorySurchargeCodes = [];
 			Object.keys(data?.freights_charge_codes || data?.customs_charge_codes
 				|| data?.cfs_charge_codes || data?.haulage_charge_codes || {}).forEach((code) => {
 				if (data?.freights_charge_codes?.[code].tags?.includes('mandatory')
 				|| data?.customs_charge_codes?.[code].tags?.includes('mandatory')
 				|| data?.cfs_charge_codes?.[code].tags?.includes('mandatory')
 				|| data?.haulage_charge_codes?.[code].tags?.includes('mandatory')) {
-					let flag = 0;
-					mandatoryFreightCodes.forEach((charge) => {
+					let flag = {};
+					prefillFreightCodes.forEach((charge) => {
 						if (charge.code === code) {
-							flag = 1;
+							flag = charge;
 						}
 					});
-					if (!flag) {
+					if (Object.keys(flag).length) {
+						prefillFreightCodes = prefillFreightCodes.filter((item) => item.code !== flag.code);
+						mandatoryFreightCodes = [...mandatoryFreightCodes,
+							{ code, price: flag?.price, unit: flag?.unit, currency: flag?.currency }];
+					} else {
 						mandatoryFreightCodes = [...mandatoryFreightCodes,
 							{ code, price: '', unit: '', currency: '' }];
 					}
@@ -141,13 +189,17 @@ const useUpdateSpotNegotiationRate = ({
 			});
 			Object.keys(data?.origin_local_charge_codes || {}).forEach((code) => {
 				if (data?.origin_local_charge_codes?.[code].tags?.includes('mandatory')) {
-					let flag = 0;
-					mandatoryOriginChargeCodes.forEach((charge) => {
+					let flag = {};
+					prefillOriginChargeCodes.forEach((charge) => {
 						if (charge.code === code) {
-							flag = 1;
+							flag = charge;
 						}
 					});
-					if (!flag) {
+					if (Object.keys(flag).length) {
+						prefillOriginChargeCodes = prefillOriginChargeCodes.filter((item) => item.code !== flag.code);
+						mandatoryOriginChargeCodes = [...mandatoryOriginChargeCodes,
+							{ code, price: flag?.price, unit: flag?.unit, currency: flag?.currency }];
+					} else {
 						mandatoryOriginChargeCodes = [...mandatoryOriginChargeCodes,
 							{ code, price: '', unit: '', currency: '' }];
 					}
@@ -155,45 +207,57 @@ const useUpdateSpotNegotiationRate = ({
 			});
 			Object.keys(data?.destination_local_charge_codes || {}).forEach((code) => {
 				if (data?.destination_local_charge_codes?.[code].tags?.includes('mandatory')) {
-					let flag = 0;
-					mandatoryDestinationChargeCodes.forEach((charge) => {
+					let flag = {};
+					prefillDestinationChargeCodes.forEach((charge) => {
 						if (charge.code === code) {
-							flag = 1;
+							flag = charge;
 						}
 					});
-					if (!flag) {
+					if (Object.keys(flag).length) {
+						prefillDestinationChargeCodes = prefillDestinationChargeCodes.filter((item) => item.code !== flag.code);
 						mandatoryDestinationChargeCodes = [...mandatoryDestinationChargeCodes,
-							{ code, price: '', unit: '', currency: '' }];
+							{ code, price: flag?.price, unit: flag?.unit, currency: flag?.currency }];
+					} else {
+						mandatoryDestinationChargeCodes = [...mandatoryDestinationChargeCodes, { code, price: '', unit: '', currency: '' }];
 					}
 				}
 			});
 			Object.keys(data?.surcharge_charge_codes || {}).forEach((code) => {
 				if (data?.surcharge_charge_codes?.[code].tags?.includes('mandatory')) {
-					let flag = 0;
-					mandatorySurchargeCodes.forEach((charge) => {
+					let flag = {};
+					prefillSurchargeCodes.forEach((charge) => {
 						if (charge.code === code) {
-							flag = 1;
+							flag = charge;
 						}
 					});
-					if (!flag) {
+					if (Object.keys(flag).length) {
+						prefillSurchargeCodes = prefillSurchargeCodes.filter((item) => item.code !== flag.code);
 						mandatorySurchargeCodes = [...mandatorySurchargeCodes,
-							{ code, price: '', unit: '', currency: '' }];
+							{ code, price: flag?.price, unit: flag?.unit, currency: flag?.currency }];
+					} else {
+						mandatorySurchargeCodes = [...mandatorySurchargeCodes, { code, price: '', unit: '', currency: '' }];
 					}
 				}
 			});
 
-			if (mandatoryFreightCodes.length) {
-				setValue('freights', mandatoryFreightCodes);
+			if (mandatoryFreightCodes.length || prefillFreightCodes.length) {
+				setValue('freights', [...mandatoryFreightCodes, ...prefillFreightCodes]);
 			}
-			if (mandatoryOriginChargeCodes.length) {
-				setValue('origin_local', mandatoryOriginChargeCodes);
+			if (mandatoryOriginChargeCodes.length || prefillOriginChargeCodes.length) {
+				setValue('origin_local', [...mandatoryOriginChargeCodes, ...prefillOriginChargeCodes]);
 			}
-			if (mandatoryDestinationChargeCodes.length) {
-				setValue('destination_local', mandatoryDestinationChargeCodes);
+			if (mandatoryDestinationChargeCodes.length || prefillDestinationChargeCodes.length) {
+				setValue('destination_local', [...mandatoryDestinationChargeCodes, ...prefillDestinationChargeCodes]);
 			}
-			if (mandatorySurchargeCodes.length) {
-				setValue('surcharge', mandatorySurchargeCodes);
+			if (mandatorySurchargeCodes.length || prefillSurchargeCodes.length) {
+				setValue('surcharge', [...mandatorySurchargeCodes, ...prefillSurchargeCodes]);
 			}
+			prefillData.current = {
+				mandatoryFreightCodes,
+				mandatoryDestinationChargeCodes,
+				mandatoryOriginChargeCodes,
+				mandatorySurchargeCodes,
+			};
 		}
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -349,6 +413,9 @@ const useUpdateSpotNegotiationRate = ({
 		requiredValues : values,
 		setValue,
 		data,
+		prefillData,
+		rateSelected,
+		loadingRateSelected,
 	};
 };
 export default useUpdateSpotNegotiationRate;

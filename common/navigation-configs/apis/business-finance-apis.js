@@ -11,6 +11,16 @@ const business_finance = {
 			service_name : 'shipment',
 		},
 		{
+			api         : 'get_purchase_bills_supplier_history',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
+			api         : 'get_common_job_shipment_id_view',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
 			api          : 'list_shipment_documents',
 			access_type  : 'private',
 			service_name : 'shipment',
@@ -123,7 +133,7 @@ const business_finance = {
 			service_name : 'shipment',
 		},
 		{
-			api         : 'get_payments_accounts_org_stats',
+			api         : 'get_payments_accounts_org_stats_for_coe_finance',
 			access_type : 'private',
 			feature     : 'coeFinance',
 		},
@@ -153,14 +163,16 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
-			api         : 'create_chat_message',
-			access_type : 'private',
-			feature     : 'coeFinance',
+			api          : 'create_chat_message',
+			access_type  : 'private',
+			feature      : 'coeFinance',
+			service_name : 'chat',
 		},
 		{
-			api         : 'list_chat_channels',
-			access_type : 'private',
-			feature     : 'coeFinance',
+			api          : 'list_chat_channels',
+			access_type  : 'private',
+			feature      : 'coeFinance',
+			service_name : 'chat',
 		},
 		{
 			api         : 'delete_chat_message',
@@ -168,9 +180,10 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
-			api         : 'update_chat_message',
-			access_type : 'private',
-			feature     : 'coeFinance',
+			api          : 'update_chat_message',
+			access_type  : 'private',
+			feature      : 'coeFinance',
+			service_name : 'chat',
 		},
 		{
 			api         : 'get_chat_channel',
@@ -183,9 +196,10 @@ const business_finance = {
 			feature     : 'coeFinance',
 		},
 		{
-			api         : 'update_chat_channel_seen',
-			access_type : 'private',
-			feature     : 'coeFinance',
+			api          : 'update_chat_channel_seen',
+			access_type  : 'private',
+			feature      : 'coeFinance',
+			service_name : 'chat',
 		},
 		{
 			api          : 'update_shipment_manifest',
@@ -195,6 +209,11 @@ const business_finance = {
 		},
 		{
 			api         : 'get_sales_invoice_shipment_list',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
+			api         : 'get_purchase_bills_tagging_map',
 			access_type : 'private',
 			feature     : 'coeFinance',
 		},

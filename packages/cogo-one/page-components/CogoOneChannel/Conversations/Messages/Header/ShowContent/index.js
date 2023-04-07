@@ -4,7 +4,7 @@ import { isEmpty, snakeCase, startCase } from '@cogoport/utils';
 import { TAGS_COLORS } from '../../../../../../constants';
 import styles from '../HeaderFuncs/styles.module.css';
 
-function ShowContent({ list = [], showMorePlacement = 'right' }) {
+function ShowContent({ list = [], showMorePlacement = 'right', hasPermissionToEdit = false }) {
 	const MAX_SHOW_LENGTH = 2;
 	const showMoreList = (list || []).length > MAX_SHOW_LENGTH;
 	const lessList = (list || []).slice(0, MAX_SHOW_LENGTH);
@@ -34,7 +34,7 @@ function ShowContent({ list = [], showMorePlacement = 'right' }) {
 	if (isEmpty(list)) {
 		return (
 			<div className={styles.tags_text}>
-				Add tags to categorise chats
+				{hasPermissionToEdit &&	'Add tags to categorise chats'}
 			</div>
 		);
 	}

@@ -3,6 +3,7 @@ import { request } from '@cogoport/request';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setGeneralState } from '@cogoport/store/reducers/general';
 import { setProfileState } from '@cogoport/store/reducers/profile';
+import { setCookie } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import redirections from '../utils/redirections';
@@ -37,6 +38,9 @@ const useGetAuthorizationChecked = () => {
 			if (!_initialized) {
 				try {
 					const res = await request.get('get_user_session');
+
+					const { partner = {} } = res.data || {};
+					setCookie('parent_entity_id', partner.id);
 					dispatch(setProfileState({ _initialized: true, ...res.data }));
 				} catch (err) {
 					console.log(err);
@@ -54,9 +58,8 @@ const useGetAuthorizationChecked = () => {
 						if (configs?.href?.includes('/v2')) {
 							const replaceHref = configs?.href?.replace('/v2', '');
 							const replaceAs = configs?.as?.replace('/v2', '');
-							await push(replaceHref?.href, replaceAs?.as);
-						}
-						if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
+							await push(replaceHref, replaceAs);
+						} else if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
 							// eslint-disable-next-line no-undef
 							window.location.href = `/${profile?.partner?.id}${configs.as || configs.href}`;
 						} else {

@@ -9,7 +9,7 @@ import useGetSuggestedLocals from '../../../../../hooks/useGetSuggestedLocals';
 
 import styles from './styles.module.css';
 
-function LocalLabel({ label, field, setValue, values, service }) {
+function LocalLabel({ label, field, setValue, values, service, prefillData, rateSelected }) {
 	const [selected, setSelected] = useState(null);
 	const { list } = useGetSuggestedLocals({
 		section    : { name: field.name },
@@ -19,8 +19,11 @@ function LocalLabel({ label, field, setValue, values, service }) {
 
 	const allIds = (list || []).map((item) => item.id);
 
+	let mandatoryLineItems = field.name === 'origin_local'
+		? prefillData.current?.mandatoryOriginChargeCodes : prefillData.current?.mandatoryDestinationChargeCodes;
+
 	const content = (
-		<div>
+		<div className={styles.locals}>
 			{(list || []).map((item) => (
 				<div
 					className={styles.charge_item}
@@ -47,18 +50,42 @@ function LocalLabel({ label, field, setValue, values, service }) {
 		</div>
 	);
 	useEffect(() => {
-		const rate_data = selected || list?.[0] || {};
+		const rate_data = selected || list[0] || {};
 		const line_items = rate_data?.data?.line_items || [];
-		const actualLineItems = line_items.map((line_item) => ({
-			price    : line_item.price,
-			code     : line_item.code,
-			unit     : line_item.unit,
-			currency : line_item.currency,
-		}));
-		if (actualLineItems.length) {
-			setValue(field.name, actualLineItems);
+
+		let actualLineItems = [];
+		line_items.forEach((line_item) => {
+			let isPresent = {};
+			mandatoryLineItems.forEach((mandatory_line_item) => {
+				if (mandatory_line_item.code === line_item.code) {
+					isPresent = mandatory_line_item;
+				}
+			});
+			if (Object.keys(isPresent).length) {
+				mandatoryLineItems = mandatoryLineItems.filter((item) => item.code !== isPresent.code);
+				actualLineItems = [...actualLineItems,
+					{
+						price    : line_item.price,
+						code     : line_item.code,
+						unit     : line_item.unit,
+						currency : line_item.currency,
+					}];
+			} else {
+				actualLineItems = [...actualLineItems,
+					{
+						price    : line_item.price,
+						code     : line_item.code,
+						unit     : line_item.unit,
+						currency : line_item.currency,
+					}];
+			}
+		});
+
+		if (line_items.length && (selected || !rateSelected?.spot_negotiation_id)) {
+			setValue(field.name, [...mandatoryLineItems, ...actualLineItems]);
 		}
 	}, [selected?.id, JSON.stringify(allIds)]);
+
 	return (
 		<div className={styles.container}>
 			<span>{label}</span>

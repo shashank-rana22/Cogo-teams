@@ -1,8 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useRouter } from '@cogoport/next';
 import React, { useState, useEffect } from 'react';
-
-import usePurchaseViewStats from '../hook/getPurchaseViewStats';
 
 import CommonListData from './CommonListData';
 import styles from './styles.module.css';
@@ -23,35 +20,38 @@ const tabsKeyComponentMapping = {
 	coe_rejected     : CommonListData,
 };
 
-function Rejected() {
+function Rejected({ statsData }) {
 	const { push } = useRouter();
 	const [filters, setFilters] = useState({});
-	const [subActiveTab, setSubActiveTab] = useState<string>('finance_rejected');
+	const { FINANCE_REJECTED = '', COE_REJECTED = '' } = statsData || {};
+	const [subActiveTabReject, setSubActiveTabReject] = useState<string>('finance_rejected');
+
 	const tabComponentProps = {
 		finance_rejected: {
 			filters,
 			setFilters,
-			subActiveTab,
+			subActiveTabReject,
 		},
 		coe_rejected: {
 			filters,
 			setFilters,
-			subActiveTab,
+			subActiveTabReject,
 		},
 	};
 
-	const ActiveTabComponent = tabsKeyComponentMapping[subActiveTab] || null;
+	const ActiveTabComponent = tabsKeyComponentMapping[subActiveTabReject] || null;
+
+	const handleTabChange = (tab) => {
+		setSubActiveTabReject(tab.key);
+	};
 
 	useEffect(() => {
 		push(
 			'/business-finance/coe-finance/[active_tab]/[view]',
-			`/business-finance/coe-finance/rejected/${subActiveTab}`,
+			`/business-finance/coe-finance/rejected/${subActiveTabReject}`,
 		);
-	}, [subActiveTab]);
-
-	const { statsData }: any = usePurchaseViewStats();
-
-	const { FINANCE_REJECTED = '', COE_REJECTED = '' } = statsData || {};
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [subActiveTabReject]);
 
 	return (
 		<div>
@@ -64,11 +64,11 @@ function Rejected() {
 						<div
 							key={tab.key}
 							onClick={() => {
-								setSubActiveTab(tab.key);
+								handleTabChange(tab);
 							}}
 							role="presentation"
 						>
-							<div className={tab.key === subActiveTab
+							<div className={tab.key === subActiveTabReject
 								? styles.sub_container_click : styles.sub_container}
 							>
 								{tab.label}
@@ -83,7 +83,12 @@ function Rejected() {
 				</div>
 
 			</div>
-			{ActiveTabComponent && <ActiveTabComponent key={subActiveTab} {...tabComponentProps[subActiveTab]} />}
+			{ActiveTabComponent && (
+				<ActiveTabComponent
+					key={subActiveTabReject}
+					{...tabComponentProps[subActiveTabReject]}
+				/>
+			)}
 		</div>
 	);
 }

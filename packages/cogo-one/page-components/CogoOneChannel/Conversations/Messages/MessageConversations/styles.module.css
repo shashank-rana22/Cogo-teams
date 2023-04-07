@@ -243,3 +243,12 @@
 	width: 100%;
 	height: 100%;
 }
+
+.load_prev_messages {
+	display: flex;
+	justify-content: center;
+}
+
+.refresh_icon {
+	cursor: pointer;
+}

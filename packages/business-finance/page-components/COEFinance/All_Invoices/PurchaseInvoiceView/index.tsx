@@ -1,3 +1,4 @@
+import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import { GenericObject } from '../../../commons/Interfaces/index';
@@ -41,9 +42,13 @@ interface Props {
 	filters: GenericObject;
 	setFilters: (p: object) => void;
 	subActiveTab: string;
+	statsData?:object
 }
 
-function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
+function PurchaseInvoice({ filters, setFilters, subActiveTab, statsData }: Props) {
+	const { query } = useRouter();
+	const { jobNumber } = query || {};
+
 	const [sort, setSort] = useState({});
 
 	const {
@@ -55,7 +60,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 		tab,
 		setTab,
 		setCurrentTab,
-	} = useGetPurchaseViewList({ filters, setFilters, sort });
+	} = useGetPurchaseViewList({ filters, setFilters, sort, jobNumber });
 
 	const functions = {
 		renderStatus    : (itemData: ItemProps) => <RenderStatus item={itemData} />,
@@ -81,6 +86,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 		<div>
 			<SegmentedFilters
 				filters={filters}
+				statsData={statsData}
 				setFilters={setFilters}
 				setSearchValue={setSearchValue}
 				searchValue={searchValue}
@@ -101,9 +107,7 @@ function PurchaseInvoice({ filters, setFilters, subActiveTab }: Props) {
 					setFilters((p: GenericObject) => ({ ...p, pageIndex: pageValue }));
 				}}
 				subActiveTab={subActiveTab}
-				showPagination={false}
-				width="1800px"
-				scrollable
+				showPagination
 			/>
 		</div>
 	);

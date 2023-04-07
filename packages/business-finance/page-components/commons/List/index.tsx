@@ -27,7 +27,6 @@ export interface Props {
 	pageSize?: number;
 	showPagination?: boolean;
 	subActiveTab?: string;
-	scrollable?: boolean;
 	width?: string;
 }
 
@@ -44,7 +43,6 @@ function List({
 	pageSize = 10,
 	showPagination = true,
 	subActiveTab,
-	scrollable = false,
 	width,
 }: Props) {
 	const {
@@ -62,50 +60,33 @@ function List({
 	}: any = useSelector((state: object) => state);
 
 	return (
-		<>
-			<section style={{ overflow: 'scroll' }}>
-				{showHeader && !isMobile && (
-					<Header
+		<section>
+			{showHeader && !isMobile && (
+				<Header
+					fields={fields}
+					sort={sort}
+					setSort={setSort}
+					headerStyles={headerStyles}
+					showHeaderCheckbox={showHeaderCheckbox}
+					renderHeaderCheckbox={renderHeaderCheckbox}
+				/>
+			)}
+			<div style={bodyStyles}>
+				{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
+					<CardColumn
 						fields={fields}
-						sort={sort}
-						setSort={setSort}
-						headerStyles={headerStyles}
-						showHeaderCheckbox={showHeaderCheckbox}
-						renderHeaderCheckbox={renderHeaderCheckbox}
+						itemStyles={itemStyles}
+						singleitem={singleitem}
+						config={config}
+						loading={loading}
+						functions={commonFunctions(functions)}
+						isMobile={isMobile}
+						subActiveTab={subActiveTab}
+						width={width}
 					/>
-				)}
-				<div style={bodyStyles}>
-					{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
-						<CardColumn
-							fields={fields}
-							itemStyles={itemStyles}
-							singleitem={singleitem}
-							config={config}
-							loading={loading}
-							functions={commonFunctions(functions)}
-							isMobile={isMobile}
-							subActiveTab={subActiveTab}
-							width={width}
-						/>
-					))}
-				</div>
-				{showPagination && (
-					<div>
-						{itemData?.totalRecords && (
-							<div className={styles.pagination_container}>
-								<Pagination
-									type="table"
-									currentPage={page}
-									totalItems={itemData?.totalRecords}
-									pageSize={pageSize}
-									onPageChange={handlePageChange}
-								/>
-							</div>
-						)}
-					</div>
-				)}
-			</section>
-			{scrollable && (
+				))}
+			</div>
+			{showPagination && (
 				<div>
 					{itemData?.totalRecords && (
 						<div className={styles.pagination_container}>
@@ -120,7 +101,7 @@ function List({
 					)}
 				</div>
 			)}
-		</>
+		</section>
 	);
 }
 
