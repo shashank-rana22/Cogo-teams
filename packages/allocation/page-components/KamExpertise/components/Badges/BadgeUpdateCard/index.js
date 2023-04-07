@@ -100,7 +100,7 @@ function BadgeUpdateCard(props) {
 						? (
 							<div className={styles.preview}>
 								<img
-									src={MEDAL_IMAGE_MAPPING[medal Type]?.image_url}
+									src={MEDAL_IMAGE_MAPPING[medalType]?.image_url}
 									alt="badge-img-preview"
 								/>
 							</div>
@@ -110,7 +110,7 @@ function BadgeUpdateCard(props) {
 				</div>
 			</div>
 
-			{isSingleBadgeEdit && (
+			{ isSingleBadgeEdit && (
 				<div className={styles.save_update}>
 					<Button
 						size="sm"
