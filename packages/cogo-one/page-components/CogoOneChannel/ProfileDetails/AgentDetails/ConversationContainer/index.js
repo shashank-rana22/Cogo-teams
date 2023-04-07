@@ -33,7 +33,6 @@ function ConversationContainer({
 							<Placeholder
 								height="16px"
 								width="160px"
-								margin="0px 0px 0px 0px"
 							/>
 						</div>
 					</div>

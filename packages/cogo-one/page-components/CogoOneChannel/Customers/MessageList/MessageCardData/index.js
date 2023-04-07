@@ -60,15 +60,16 @@ function MessageCardData({
 	};
 
 	return (
-		<div className={styles.chat_card_main_container}>
+		<div
+			key={id}
+			className={styles.chat_card_main_container}
+		>
 			{!autoAssignChats && (
 				<Checkbox
 					onChange={() => handleCheckedChats(item, id)}
 				/>
 			) }
-
 			<div
-				key={id}
 				role="button"
 				tabIndex={0}
 				className={cl`
