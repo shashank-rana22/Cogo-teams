@@ -1,6 +1,6 @@
 import { navigationMappingsAdmin } from '@cogoport/navigation-configs';
 
-export const getNavData = (navigation) => {
+export default function getNavData(navigation) {
 	const [mainNav, subNav] = navigation.split('-');
 	const mainNavData = navigationMappingsAdmin[mainNav];
 
@@ -8,4 +8,4 @@ export const getNavData = (navigation) => {
 		(mainNavData || {}).options || [])
 		.find((optObj) => optObj.key === navigation)
 		: mainNavData;
-};
+}
