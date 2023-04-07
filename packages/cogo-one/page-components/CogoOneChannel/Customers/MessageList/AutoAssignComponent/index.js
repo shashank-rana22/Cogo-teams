@@ -7,7 +7,7 @@ import { isEmpty } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function AutoAssignComponent({
-	autoAssignChats = false,
+	autoAssignChats = true,
 	setAutoAssignChats = () => {},
 	handleAutoAssignBack,
 	selectedAutoAssign,
@@ -16,7 +16,7 @@ function AutoAssignComponent({
 }) {
 	const count = Object.keys(selectedAutoAssign || {}).length || 0;
 	return (
-		<div className={cl`${styles.auto_assign_container}${!autoAssignChats ? styles.auto_assign_background : ''}`}>
+		<div className={cl`${styles.auto_assign_container} ${!autoAssignChats ? styles.auto_assign_background : ''}`}>
 			{ autoAssignChats ? (
 				<Button
 					size="sm"
@@ -35,7 +35,7 @@ function AutoAssignComponent({
 						/>
 					</div>
 					{isEmpty(selectedAutoAssign)
-						? <div className={styles.select_chats}>Select the Chats to be Auto Assigned.</div>
+						? <div className={styles.select_chats}>Select the Chats to be Auto Assigned</div>
 						: (
 							<>
 								<div className={styles.selected_count}>

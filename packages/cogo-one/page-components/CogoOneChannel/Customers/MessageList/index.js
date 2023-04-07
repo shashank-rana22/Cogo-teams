@@ -134,8 +134,8 @@ function MessageList(messageProps) {
 						/>
 					)}
 					<div
-						className={cl`${styles.list_container} ${showBotMessages
-							? styles.bot_list_container : ''}`}
+						className={cl`${styles.list_container} 
+						${(showBotMessages && isomniChannelAdmin) ? styles.bot_list_container : ''}`}
 						onScroll={handleScroll}
 					>
 						{!isPinnedChatEmpty && (

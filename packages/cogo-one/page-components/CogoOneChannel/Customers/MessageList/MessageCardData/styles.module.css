@@ -6,6 +6,10 @@
 		.ui_checkbox_container {
 			padding: 1px;
 		}
+
+		.ui_checkbox_normal {
+			margin: 0 !important;
+		}
 	}
 }
 
@@ -17,7 +21,7 @@
 }
 
 .card_with_checkbox {
-	width: 90%;
+	width: 95%;
 }
 
 .card_container:hover {

@@ -28,7 +28,7 @@ function getFireStoreQuery({
 				...queryFilters,
 				where('channel_type', 'in', appliedFilters[item]),
 			];
-		} else if (item === 'status' && appliedFilters[item] === 'unread') {
+		} else if (item === 'status') {
 			if (appliedFilters[item] === 'unread') {
 				queryFilters = [
 					...queryFilters,
@@ -38,6 +38,7 @@ function getFireStoreQuery({
 				const now = new Date();
 				now.setMinutes(now.getMinutes() - 15);
 				const epochTimestamp = now.getTime();
+
 				queryFilters = [
 					...queryFilters,
 					where('last_message_document.conversation_type', '==', 'received'),
