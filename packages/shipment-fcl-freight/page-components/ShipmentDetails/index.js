@@ -10,7 +10,7 @@ function ShipmentDetails() {
 	const { activeStakeholder } = useStakeholderCheck();
 
 	switch (activeStakeholder) {
-		case 'KAM':
+		case 'Kam':
 			return <Kam />;
 		case 'Superadmin':
 		case 'Admin':
