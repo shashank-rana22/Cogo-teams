@@ -14,7 +14,7 @@ const customSerializer = (params) => {
 
 const microServices = getMicroServiceName();
 
-const athenaRequest = Axios.create({ baseURL: process.env.NEXT_PUBLIC_LOCAL_TESTING });
+const athenaRequest = Axios.create({ baseURL: process.env.NEXT_PUBLIC_REST_BASE_API_URL });
 
 athenaRequest.interceptors.request.use((oldConfig) => {
 	const { ...newConfig } = oldConfig;

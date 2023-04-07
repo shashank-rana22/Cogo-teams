@@ -77,7 +77,11 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 			accessor : (item) => (
 				<div style={{ width: '200px' }}>
 					<Tooltip
-						content={(item.hscodes || []).map((hsCode) => `${hsCode}, `) || '--'}
+						content={(
+							<div style={{ wordBreak: 'break-word' }}>
+								{(item.hscodes || []).map((hsCode) => `${hsCode}, `) || '--'}
+							</div>
+						)}
 						placement="top"
 					>
 						{(item.hscodes || []).map((hsCode) => `[${hsCode}], `)}
