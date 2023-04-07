@@ -9312,7 +9312,7 @@ const partner = {
 			service_name : 'shipment',
 		},
 		{
-			api :          'get_shipment_ftl_freight_service_tracker',
+			api          : 'get_shipment_ftl_freight_service_tracker',
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
