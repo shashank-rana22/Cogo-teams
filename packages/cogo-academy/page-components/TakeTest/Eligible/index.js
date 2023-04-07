@@ -89,7 +89,7 @@ function Eligible({ currentQuestionId }) {
 				currentQuestionId={currentQuestionId}
 				loading={loading}
 				testData={data}
-				page={page}
+				page={Number(page)}
 				test_user_mapping_state={test_user_mapping_state}
 			/>
 		</div>

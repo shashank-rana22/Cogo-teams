@@ -84,7 +84,7 @@ function Ongoing({ testData, setActiveState, currentQuestionId, test_user_mappin
 		|| (!(currentQuestionId && currentQuestionId !== 'undefined') && page && page !== 'undefined' && page > 1))) {
 			setCurrentQuestion(1);
 		} else {
-			setCurrentQuestion(page);
+			setCurrentQuestion(Number(page));
 		}
 	}, [currentQuestionId, page]);
 
