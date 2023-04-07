@@ -42,6 +42,7 @@ function AddedQuestions(props) {
 		sortType,
 		setSortType,
 		requestedQuestionCount,
+		downvoteFeedbackCount,
 	} = props;
 
 	const router = useRouter();
@@ -72,6 +73,12 @@ function AddedQuestions(props) {
 				return (
 					<EmptyState
 						text="There are no inactive questions right now."
+					/>
+				);
+			} if (activeList === 'feedbacks') {
+				return (
+					<EmptyState
+						text="There are no feedbacks right now."
 					/>
 				);
 			}
@@ -116,6 +123,7 @@ function AddedQuestions(props) {
 				sortType={sortType}
 				setSortType={setSortType}
 				requestedQuestionCount={requestedQuestionCount}
+				downvoteFeedbackCount={downvoteFeedbackCount}
 			/>
 
 			<div className={styles.button_container}>

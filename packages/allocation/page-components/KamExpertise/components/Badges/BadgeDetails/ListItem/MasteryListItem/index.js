@@ -1,5 +1,6 @@
 import { Pill, Button } from '@cogoport/components';
-import { format } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import styles from './styles.module.css';
 
@@ -52,7 +53,11 @@ function MasteryListItem({ data = {}, index, setToggleScreen = () => {}, setMast
 						<div>
 							Last Modified :
 							{' '}
-							{updated_at ? format(updated_at, 'dd MMMM yy') : '_'}
+							{updated_at ? formatDate({
+								date       : updated_at,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+								formatType : 'date',
+							}) : '_'}
 						</div>
 
 						<div>

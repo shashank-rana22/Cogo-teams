@@ -52,13 +52,16 @@ function KamLevel(props) {
 			{levelLoading
 				? (<LoadingState columnsToLoad={4} />)
 				: (
-					<Collapse
-						panels={options}
-						activeKey={activeCard}
-						setActive={setActiveCard}
-						type="text"
-						className={styles.collapse}
-					/>
+					<div className={styles.level_card_collapse}>
+						<Collapse
+							panels={options}
+							activeKey={activeCard}
+							setActive={setActiveCard}
+							type="text"
+							className={styles.collapse}
+						/>
+					</div>
+
 				)}
 
 			<div className={styles.response_card}>

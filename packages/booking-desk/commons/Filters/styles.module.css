@@ -1,0 +1,68 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 6px;
+
+	* {
+		font-size: var(--font-size-md);
+	}
+
+	:global {
+		.ui_input_container {
+			width: 140px;
+			height: initial !important;
+
+			.ui_input_control {
+				font-size: var(--font-size-md);
+			}
+		}
+	}
+}
+
+.applied_filters {
+	display: flex;
+
+	.applied_filter {
+		padding: 4px 6px;
+		background-color: #f3fafa;
+		border-radius: 4px;
+
+		&.clearable {
+			border-radius: 4px 0 0 4px;
+		}
+
+		&:not(:first-of-type) {
+			margin-left: 10px;
+		}
+	}
+
+	.clear_filter_icon {
+		display: flex;
+		align-items: center;
+		padding: 0 6px;
+		cursor: pointer;
+		background-color: #cfeaed;
+		border: none;
+		border-radius: 0 4px 4px 0;
+
+		svg {
+			width: 16px;
+			height: 16px;
+			vertical-align: middle;
+			fill: #6fa5ab;
+		}
+	}
+}
+
+.open_filters {
+	display: flex;
+	gap: 10px;
+	align-items: stretch;
+	max-height: 28px;
+
+	:global {
+		.ui_button_container {
+			height: 100%;
+		}
+	}
+}

@@ -14,7 +14,7 @@ function DisplayAttachment(
 	{
 		data = {},
 		name,
-		status = '',
+		isAllowedToEdit = false,
 		index,
 		deleteAttachment = () => {},
 		loadingUpdateAttachment = false,
@@ -36,7 +36,7 @@ function DisplayAttachment(
 					{name}
 				</div>
 
-				{status === 'draft' && (
+				{isAllowedToEdit && (
 					<Button type="button" size="sm" themeType="secondary" onClick={() => setShowAddModal(name)}>
 						Add
 						{' '}
@@ -49,7 +49,7 @@ function DisplayAttachment(
 					? data.map((item) => (
 						<div key={item.id} className={styles.data_container}>
 							<div
-								style={{ width: `${status === 'draft' ? '50%' : '80%'}` }}
+								style={{ width: `${isAllowedToEdit ? '50%' : '80%'}` }}
 								className={styles.data_display}
 							>
 								<span className={styles.name_data}>{item?.document_url}</span>
@@ -65,7 +65,7 @@ function DisplayAttachment(
 								>
 									View
 								</Button>
-								{status === 'draft' && (
+								{isAllowedToEdit && (
 									<>
 										<Button
 											type="button"
