@@ -29,8 +29,6 @@ function Header(
 	return (
 		<div className={styles.container}>
 
-			<div className={styles.tag}>Tags</div>
-
 			<div className={styles.header_container}>
 
 				<div className={styles.flex_items}>

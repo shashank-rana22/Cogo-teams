@@ -61,7 +61,7 @@ function TagTable({
 						type="table"
 						currentPage={audienceCurrentPage}
 						totalItems={total_count}
-						pageSize={5}
+						pageSize={10}
 						onPageChange={setAudienceCurrentPage}
 					/>
 				</div>

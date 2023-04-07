@@ -1,3 +1,6 @@
+import { Tabs, TabPanel } from '@cogoport/components';
+import React, { useState } from 'react';
+
 import AudienceComponent from './AudienceComponent';
 import CreateAudienceForm from './CreateAudienceForm';
 import CreateForm from './CreateComponent';
@@ -14,6 +17,8 @@ const CONFIGURATION_MAPPING = {
 };
 
 function ConfigurationEngine() {
+	const [activeTab, setActiveTab] = useState('audience_groups');
+
 	const props = useCreateFaq();
 
 	const {
@@ -34,24 +39,47 @@ function ConfigurationEngine() {
 	return (
 
 		<div className={styles.container}>
+
 			<Header />
 
-			<AudienceComponent
-				configurationPage={configurationPage}
-				setConfigurationPage={setConfigurationPage}
-			/>
+			<Tabs
+				themeType="primary"
+				fullWidth
+				activeTab={activeTab}
+				onChange={setActiveTab}
+			>
+				<TabPanel name="audience_groups" title="Audience Groups">
+					<AudienceComponent
+						configurationPage={configurationPage}
+						setConfigurationPage={setConfigurationPage}
+					/>
+				</TabPanel>
 
-			<TagComponent
-				configurationPage={configurationPage}
-				setConfigurationPage={setConfigurationPage}
-				reset={reset}
-			/>
+				<TabPanel name="tags" title="Tags">
+					<TagComponent
+						configurationPage={configurationPage}
+						setConfigurationPage={setConfigurationPage}
+						reset={reset}
+					/>
+				</TabPanel>
 
-			<TopicComponent
-				configurationPage={configurationPage}
-				setConfigurationPage={setConfigurationPage}
-				reset={reset}
-			/>
+				<TabPanel name="topics" title="Topics">
+					<TopicComponent
+						configurationPage={configurationPage}
+						setConfigurationPage={setConfigurationPage}
+						reset={reset}
+					/>
+				</TabPanel>
+
+				<TabPanel name="key_words" title="Key Words">
+					<TopicComponent
+						configurationPage={configurationPage}
+						setConfigurationPage={setConfigurationPage}
+						reset={reset}
+					/>
+				</TabPanel>
+			</Tabs>
+
 		</div>
 	);
 }
