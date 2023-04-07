@@ -1,4 +1,3 @@
-import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -28,15 +27,8 @@ function useListFaqQuestions({
 		url    : '/list_faq_questions',
 	}, { manual: true });
 
-	const { query, debounceQuery } = useDebounceQuery();
-
 	const roleFunction = !isEmpty(role_functions) ? role_functions : undefined;
 	const roleSubFunction = !isEmpty(role_sub_functions) ? role_sub_functions : undefined;
-
-	useEffect(() => {
-		debounceQuery(searchState);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchState]);
 
 	const fetchFaqQuestions = async () => {
 		try {
@@ -45,7 +37,7 @@ function useListFaqQuestions({
 					filters: {
 						state             : 'published',
 						status            : 'active',
-						q                 : query || query_name || undefined,
+						q                 : searchState || query_name || undefined,
 						faq_topic_id      : topicId || undefined,
 						faq_tag_id        : tagId || undefined,
 						auth_function     : scope === 'partner' ? roleFunction : undefined,
@@ -70,9 +62,9 @@ function useListFaqQuestions({
 	useEffect(() => {
 		fetchFaqQuestions();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, query, topicId, JSON.stringify(tagId)]);
+	}, [page, searchState, topicId, JSON.stringify(tagId)]);
 
-	const { page_limit, total_count } = data || {};
+	const { page_limit, response_type, gpt_answer = '', show_more = '', total_count } = data || {};
 
 	const paginationData = { page_limit, total_count };
 
@@ -86,6 +78,9 @@ function useListFaqQuestions({
 		activeTab,
 		setActiveTab,
 		topicId,
+		response_type,
+		gpt_answer,
+		show_more,
 	};
 }
 

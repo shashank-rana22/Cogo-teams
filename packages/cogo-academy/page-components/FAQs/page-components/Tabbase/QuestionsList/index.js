@@ -5,6 +5,7 @@ import React from 'react';
 import EmptyQuestionListState from '../../../../../commons/EmptyQuestionListState';
 import Spinner from '../../../../../commons/Spinner';
 import useListFaqQuestions from '../../../hooks/useListFaqQuestion';
+import GPTAnswers from '../../GPTAnswers';
 
 import Questions from './Questions';
 import styles from './styles.module.css';
@@ -16,6 +17,9 @@ function QuestionsList({ tabTitle = '', searchState = '', topicId = '', tagId = 
 		data,
 		loading = false,
 		paginationData,
+		response_type,
+		gpt_answer,
+		show_more,
 	} = useListFaqQuestions({ topicId, tagId, searchState });
 
 	if (loading) {
@@ -35,7 +39,9 @@ function QuestionsList({ tabTitle = '', searchState = '', topicId = '', tagId = 
 	if (isEmpty(data?.list)) {
 		return <EmptyQuestionListState searchState={searchState} />;
 	}
-
+	if (response_type === 'GPT') {
+		return <GPTAnswers answer={gpt_answer} showMore={show_more} search={searchState} />;
+	}
 	return (
 		<div>
 			<div style={{ margin: '6px 0', width: '100%', height: '488px' }} className={styles.scrollable}>
