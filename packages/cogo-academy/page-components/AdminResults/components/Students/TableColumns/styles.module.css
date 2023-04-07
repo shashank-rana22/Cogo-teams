@@ -1,17 +1,17 @@
 .container {
-  display: flex;
-  align-items: center;
-  padding-left: 24px;
+	display: flex;
+	align-items: center;
+	padding-left: 24px;
 }
 
 .item {
-  margin-right: 8px;
+	margin-right: 8px;
 }
 
 .section {
-  padding-left: 24px;
+	padding-left: 24px;
 }
 
 .delete {
-  cursor: pointer;
+	cursor: pointer;
 }
