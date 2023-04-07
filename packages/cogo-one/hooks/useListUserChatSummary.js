@@ -7,9 +7,9 @@ const useListUserChatSummary = ({
 	activeSubTab = '',
 	user_id = '',
 	lead_user_id = '',
-	mobile_no,
-	sender,
-	pagination,
+	mobile_no = '',
+	sender = '',
+	pagination = 0,
 	channel_type = '',
 }) => {
 	const [dateFilters, setDateFilters] = useState(null);
@@ -49,7 +49,7 @@ const useListUserChatSummary = ({
 		dateFilters?.endDate, pagination, trigger]);
 
 	useEffect(() => {
-		if (activeSubTab === 'summary' && (user_id || lead_user_id || id)) {
+		if (activeSubTab === 'summary') {
 			getUserChatSummary();
 		}
 	}, [activeSubTab, getUserChatSummary, lead_user_id, user_id, id]);

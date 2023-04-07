@@ -59,6 +59,7 @@
 
 .filter_icon {
 	margin-top: 10px;
+	cursor: pointer;
 }
 
 .filter_dot {

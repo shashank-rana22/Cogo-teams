@@ -1,4 +1,4 @@
-import { Button, CheckboxGroup, Input, DateRangepicker } from '@cogoport/components';
+import { Button, CheckboxGroup, Input, DateRangepicker, cl } from '@cogoport/components';
 import { IcMCross, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
@@ -24,7 +24,7 @@ function Filters({
 	const emptyCheck = isEmpty(values) && isEmpty(dateValues);
 
 	useEffect(() => {
-		if (activeSubTab === 'summary') { setDateValues(dateFilters); } else setValues(appliedFilters || []);
+		if (activeSubTab === 'summary') { setDateValues(dateFilters); } else { setValues(appliedFilters || []); }
 	}, [activeSubTab, appliedFilters, dateFilters]);
 
 	const checkFilter = () => {
@@ -44,7 +44,13 @@ function Filters({
 		}
 		if (activityTab === 'communication' && activeSubTab === 'summary') {
 			return (
-				<DateRangepicker name="fromToDate" onChange={setDateValues} value={dateValues} isPreviousDaysAllowed />
+				<DateRangepicker
+					className={styles.date_picker}
+					name="fromToDate"
+					onChange={setDateValues}
+					value={dateValues}
+					isPreviousDaysAllowed
+				/>
 			);
 		}
 		return (
@@ -57,7 +63,7 @@ function Filters({
 		);
 	};
 	return (
-		<div className={styles.container}>
+		<div className={cl`${styles.container} ${activeSubTab === 'summary' ? styles.summary_container : ''}`}>
 			<div className={styles.header}>
 				<div className={styles.title}>
 					Filters

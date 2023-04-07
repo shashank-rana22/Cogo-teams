@@ -31,23 +31,10 @@ function filterOptions() {
 			value : 'voice_call',
 		},
 	];
-	const summaryFilters = [
-		{
-			label : 'from',
-			value : 'date',
-			type  : 'date',
-		},
-		{
-			label : 'to',
-			value : 'date',
-			type  : 'date',
-		},
-	];
 
 	const FILTERS_MAPPING = {
 		communication : communicationFilters,
 		transactional : transactionalFilters,
-		summary       : summaryFilters,
 	};
 
 	return { FILTERS_MAPPING };
