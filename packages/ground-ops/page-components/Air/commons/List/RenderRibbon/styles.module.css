@@ -25,7 +25,6 @@
 	background: linear-gradient(#ee3425 0%, #cc2d20 100%);
 	box-shadow: 0 3px 10px -5px rgb(0 0 0 / 100%);
 	transform: rotate(-45deg);
-	transform: rotate(-45deg);
 }
 
 .ribbon span::before {
