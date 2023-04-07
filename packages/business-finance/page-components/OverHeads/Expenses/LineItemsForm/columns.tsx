@@ -40,7 +40,7 @@ const lineItemColumns = ({
 			Header   : 'Tax',
 			id       : 'tax',
 			accessor : (row:any, index:number) => (
-				<div style={{ width: '110px' }}>
+				<div style={{ width: '90px' }}>
 					<SelectController
 						control={control}
 						options={taxOptions}
@@ -71,7 +71,7 @@ const lineItemColumns = ({
 			Header   : 'TDS',
 			id       : 'tds',
 			accessor : (row:any, index:number) => (
-				<div style={{ width: '60px' }}>
+				<div style={{ width: '50px' }}>
 					<InputController
 						size="xs"
 						type="number"
@@ -106,7 +106,7 @@ const lineItemColumns = ({
 						<IcMDelete
 							color="#ED3726"
 							onClick={() => {
-								remove(index, 1);
+								remove(index);
 							}}
 							style={{ cursor: 'pointer' }}
 							height={15}
