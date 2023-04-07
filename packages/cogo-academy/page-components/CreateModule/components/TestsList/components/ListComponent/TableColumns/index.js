@@ -1,6 +1,6 @@
 import { Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
-import { IcMShare } from '@cogoport/icons-react';
+import { IcMArrowNext, IcMShare } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
 
@@ -119,7 +119,7 @@ export const testSetColumns = ({
 	{
 		Header   : 'NAME',
 		id       : 'name',
-		accessor : ({ name = '', test_duration = '', current_status = '' }) => (
+		accessor : ({ name = '', test_duration = '' }) => (
 			<div>
 				<section>
 					{' '}
@@ -130,7 +130,7 @@ export const testSetColumns = ({
 					</Tooltip>
 				</section>
 
-				{current_status === 'active' ? (
+				{test_duration ? (
 					<section className={styles.duration}>
 						{test_duration}
 						{' '}
@@ -204,13 +204,16 @@ export const testSetColumns = ({
 		Header   : 'STATUS',
 		id       : 'status',
 		accessor : ({ current_status = '', id = '', validity_start = '', validity_end = '' }) => {
-			if (current_status === 'active') {
+			if (['active', 'upcoming'].includes(current_status)) {
 				return (
 					<section className={styles.details}>
 						<section className={styles.status}>
-							<Pill size="md" color="green" className={styles.status_pill}>
+							<Pill
+								size="md"
+								color={current_status === 'upcoming' ? '#00c8ff' : '#C4DC91'}
+								className={styles.status_pill}
+							>
 								{startCase(current_status)}
-
 							</Pill>
 
 							<div role="presentation" onClick={() => copyToClipboard(id)}>
@@ -227,10 +230,21 @@ export const testSetColumns = ({
 							</div>
 						</section>
 
-						<section>
-							{format(validity_start, 'dd/MM/yyyy - ')}
-							{format(validity_end, 'dd/MM/yyyy')}
-						</section>
+						<div className={styles.status_time}>
+							<section className={styles.time}>
+								<div>{format(validity_start, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}</div>
+
+								<div>{format(validity_start, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}</div>
+							</section>
+
+							<div className={styles.middle_div}><IcMArrowNext height={16} width={16} /></div>
+
+							<section className={styles.time}>
+								<div>{format(validity_end, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}</div>
+
+								<div>{format(validity_end, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}</div>
+							</section>
+						</div>
 					</section>
 				);
 			} if (current_status === 'published') {
@@ -246,28 +260,6 @@ export const testSetColumns = ({
 							{' '}
 							{startCase(current_status)}
 						</Pill>
-					</section>
-				);
-			}
-
-			if (current_status === 'upcoming') {
-				return (
-					<section>
-						<section>
-							<Pill
-								key={current_status}
-								size="md"
-								color="blue"
-								className={styles.status_pill}
-							>
-								{startCase(current_status)}
-							</Pill>
-						</section>
-
-						<section>
-							{format(validity_start, 'dd/MM/yyyy - ')}
-							{format(validity_end, 'dd/MM/yyyy')}
-						</section>
 					</section>
 				);
 			}
@@ -341,7 +333,7 @@ export const testSetColumns = ({
 	{
 		Header   : '',
 		id       : 'options',
-		accessor : ({ id = '', validity_start = '', current_status = '' }) => (
+		accessor : ({ id = '', validity_start = '', current_status = '', validity_end = '' }) => (
 			<TestSetButtons
 				id={id}
 				validity_start={validity_start}
@@ -350,6 +342,7 @@ export const testSetColumns = ({
 				setShowModal={setShowModal}
 				setTestId={setTestId}
 				router={router}
+				validity_end={validity_end}
 			/>
 		),
 	},

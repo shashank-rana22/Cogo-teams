@@ -2,7 +2,6 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { deleteCookie } from '@cogoport/utils';
 import { useCallback } from 'react';
 
 const useEndTest = ({ setActiveState = () => {}, setShowTimeOverModal, test_user_mapping_id }) => {
@@ -29,7 +28,7 @@ const useEndTest = ({ setActiveState = () => {}, setShowTimeOverModal, test_user
 
 			localStorage.removeItem(`current_question_${test_id}_${user_id}`);
 			localStorage.removeItem('visibilityChangeCount');
-			deleteCookie(`current_question_id_${test_id}_${user_id}`);
+			localStorage.removeItem(`current_question_id_${test_id}_${user_id}`);
 
 			setShowTimeOverModal(false);
 			setActiveState('completed');
