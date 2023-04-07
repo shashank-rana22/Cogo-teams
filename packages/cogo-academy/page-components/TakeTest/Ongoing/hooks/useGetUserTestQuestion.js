@@ -1,6 +1,5 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { setCookie } from '@cogoport/utils';
 
 function useGetUserTestQuestion({ currentQuestionId, page }) {
 	const {
@@ -39,7 +38,7 @@ function useGetUserTestQuestion({ currentQuestionId, page }) {
 
 			const { id } = question_data || {};
 
-			setCookie(`current_question_id_${test_id}_${user_id}`, id);
+			localStorage.setItem(`current_question_id_${test_id}_${user_id}`, id);
 		} catch (err) {
 			console.log('err', err);
 		}

@@ -49,8 +49,7 @@ function Eligible({ currentQuestionId }) {
 	}, [setActiveState, test_user_mapping_state]);
 
 	useEffect(() => {
-		if (localStorage.getItem(`current_question_${test_id}_${user_id}`)
-		|| (currentQuestionId && currentQuestionId !== 'undefined')) {
+		if (page || (currentQuestionId && currentQuestionId !== 'undefined')) {
 			setActiveState('ongoing');
 
 			// const elem = document.getElementById('maincontainer');
@@ -65,7 +64,7 @@ function Eligible({ currentQuestionId }) {
 		}
 
 		localStorage.setItem('visibilityChangeCount', 1);
-	}, [currentQuestionId, test_id, user_id]);
+	}, [currentQuestionId, page, test_id, user_id]);
 
 	const Component = COMPONENT_MAPPING?.[activeState]?.component || Introduction;
 
