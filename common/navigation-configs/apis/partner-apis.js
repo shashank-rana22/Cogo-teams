@@ -11149,7 +11149,7 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'get_user_chat_summary',
+			api          : 'list_user_chat_summary',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

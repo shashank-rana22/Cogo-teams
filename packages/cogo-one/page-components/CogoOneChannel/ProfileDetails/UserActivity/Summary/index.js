@@ -2,24 +2,17 @@ import { Avatar } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 import React from 'react';
 
-import timeLineFunctions from '../../../../../utils/timeLineFunctions';
-
 import styles from './styles.module.css';
 
-function Summary({ timeLineList = [] }) {
+function Summary({ chatDataList = [] }) {
 	return (
 		<div className={styles.container}>
-			{(timeLineList || []).map((item) => {
+			{(chatDataList || []).map((item) => {
 				const {
-					conversation_type = '',
-					agent_data = {},
-					performed_by_data = {},
 					created_at,
-					conversation_started_at,
+					summary,
+					summary_date,
 				} = item || {};
-				const { name : presentAgent } = agent_data || {};
-				const { name : previousAgent } = performed_by_data || {};
-				const { renderStatement } = timeLineFunctions();
 
 				return (
 					<>
@@ -29,18 +22,13 @@ function Summary({ timeLineList = [] }) {
 						>
 							<div className={styles.dot} />
 							<div className={styles.durations}>
-								{format(created_at, 'HH:mm a dd MMM')}
+								{format(summary_date, 'HH:mm a dd MMM')}
 							</div>
 						</div>
 						<div className={styles.main_card}>
 							<div className={styles.card}>
 								<div className={styles.title}>
-									{renderStatement({
-										type     : conversation_type,
-										present  : presentAgent,
-										previous : previousAgent,
-										startAt  : conversation_started_at,
-									})}
+									{summary}
 								</div>
 								<div className={styles.user_avatar}>
 									<Avatar

@@ -6,8 +6,8 @@ import { useState, useEffect } from 'react';
 import EmptyState from '../../../../common/EmptyState';
 import { USER_ACTIVITY_MAPPING } from '../../../../constants';
 import useGetOmnichannelActivityLogs from '../../../../hooks/useGetOmnichannelActivityLogs';
-import useGetUserChatSummary from '../../../../hooks/useGetUserChatSummary';
 import useListCogooneTimeline from '../../../../hooks/useListCogooneTimeline';
+import useListUserChatSummary from '../../../../hooks/useListUserChatSummary';
 import getUserActivityComponent from '../../../../utils/getUserActivityComponent';
 
 import Filters from './Filters';
@@ -23,7 +23,10 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 	const [activeSubTab, setActiveSubTab] = useState('channels');
 
 	const { mobile_no } = activeMessageCard;
-	const { user_id:messageUserId, lead_user_id:messageLeadUserId = null, id = '' } = formattedMessageData || {};
+	const {
+		user_id:messageUserId,
+		lead_user_id:messageLeadUserId = null, id = '', sender = '',
+	} = formattedMessageData || {};
 
 	const { user_id:voiceCallUserId = '' } = activeVoiceCard || {};
 
@@ -64,19 +67,26 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 
 	});
 
-	const { chatData = {} } = useGetUserChatSummary({
+	const { chatData = {} } = useListUserChatSummary({
 		mobile_no,
 		activeSubTab,
-
+		sender,
+		user_id,
+		lead_user_id,
 	});
-	console.log('chatData:', chatData);
 
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
 
 	const { list: timeLineList = [], total_count: agent_total_count } = timeLineData || {};
+	const { list: chatDataList = [], total_count: summary_total_count } = chatData || {};
+
+	let subtab_count;
+	if (activeSubTab === 'agent') { subtab_count = agent_total_count; }
+	if (activeSubTab === 'summary') { subtab_count = summary_total_count; }
 
 	let list = [];
 	let channel_total_count;
+
 	if (activityTab === 'communication' || activityTab === 'transactional') {
 		list = data?.[activityTab]?.list || [];
 		channel_total_count = data?.[activityTab]?.total_count || '0';
@@ -111,7 +121,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 	}, [activeSubTab, setFilters]);
 
 	const emptyCheck = activeSubTab !== 'channels'
-		? isEmpty(timeLineList) : (!user_id && !lead_user_id) || isEmpty(list);
+		? isEmpty(timeLineList) : (!user_id && !lead_user_id) || isEmpty(list) || isEmpty(chatDataList);
 
 	function ShowData() {
 		return emptyCheck ? (
@@ -128,6 +138,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 						platform={platform}
 						transactional={transactional}
 						timeLineList={timeLineList}
+						chatDataList={chatDataList}
 					/>
 				)}
 			</div>
@@ -219,7 +230,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 						type="page"
 						currentPage={pagination}
 						totalItems={activeSubTab === 'agent' || activeSubTab === 'summary'
-							? agent_total_count : channel_total_count}
+							? subtab_count : channel_total_count}
 						// totalItems={totalItems}
 						pageSize={10}
 						onPageChange={(val) => setPagination(val)}
