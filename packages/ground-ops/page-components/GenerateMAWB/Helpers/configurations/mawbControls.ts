@@ -11,7 +11,6 @@ const mawbControls = (disableClass) => ({
 			placeholder  : "Enter Shipper's name",
 			span         : 5,
 			value        : '',
-			maxLength    : 50,
 			rules        : {
 				required: 'Shippers Name is Required',
 			},
@@ -38,7 +37,6 @@ const mawbControls = (disableClass) => ({
 			value        : '',
 			span         : 5,
 			placeholder  : "Enter Consignee's name",
-			maxLength    : 50,
 			rules        : {
 				required: 'Consignees Name is Required',
 			},
@@ -489,7 +487,7 @@ const mawbControls = (disableClass) => ({
 			showOptional : false,
 			span         : 5,
 			placeholder  : 'Handling Information...*',
-			maxLength    : 100,
+			maxLength    : 300,
 		},
 		{
 			name        : 'commodity',
