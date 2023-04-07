@@ -116,6 +116,24 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 	},
 ];
 
+const getOngoingColumns = () => [
+
+	{
+		Header   : 'NAME',
+		id       : 'name',
+		accessor : ({ user = {} }) => (
+			<section>{startCase(user.name)}</section>
+		),
+	},
+	{
+		Header   : 'EMAIL',
+		id       : 'email',
+		accessor : ({ user = {} }) => (
+			<section>{user.email}</section>
+		),
+	},
+];
+
 const getNotAppeardColumns = ({ setShowModal, setUserId = () => {} }) => [
 
 	{
@@ -146,20 +164,29 @@ const getNotAppeardColumns = ({ setShowModal, setUserId = () => {} }) => [
 			>
 				Delete
 			</IcMDelete>
-
 		),
 	},
 ];
+
+const TABLE_MAPPING = {
+	appeared     : getAppearedColumns,
+	not_appeared : getNotAppeardColumns,
+	ongoing      : getOngoingColumns,
+};
 
 const getTableColumns = ({
 	sortFilter, setSortFilter,
 	activeTab, setShowModal, setUserId = () => {},
 }) => {
-	if (activeTab === 'appeared') {
-		return getAppearedColumns({ sortFilter, setSortFilter });
-	}
+	const getcolumnsFun = TABLE_MAPPING?.[activeTab] || getAppearedColumns;
 
-	return getNotAppeardColumns({ setShowModal, setUserId });
+	const getcolumnsArg = {
+		appeared     : { sortFilter, setSortFilter },
+		not_appeared : { setShowModal, setUserId },
+		ongoing      : { },
+	};
+
+	return getcolumnsFun(getcolumnsArg[activeTab] || {});
 };
 
 export default getTableColumns;
