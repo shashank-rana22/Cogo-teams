@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import StyledTable from '../../common/StyledTable';
 import useArchive from '../../hooks/useArchive';
-import { serviceTypeOptions } from '../constant';
+import { optionsEntity, serviceTypeOptions } from '../constant';
 
 import { ARCHIVE_DECLARED, ARCHIVE_MONTH_ACCRUED, ARCHIVE_MONTH_BOOKED } from './configuration';
 import Freeze from './Freeze';
@@ -136,12 +136,7 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 									setGlobalFilters((prev) => ({ ...prev, entity: val }));
 								}}
 								placeholder="Entity"
-								options={[
-									{ label: '201', value: '201' },
-									{ label: '301', value: '301' },
-									{ label: '401', value: '401' },
-									{ label: '501', value: '501' },
-								]}
+								options={optionsEntity}
 								isClearable
 								style={{ width: '150px' }}
 							/>

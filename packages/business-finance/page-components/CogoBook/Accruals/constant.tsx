@@ -24,6 +24,13 @@ export const monthData = {
 	12 : 'December',
 };
 
+export const optionsEntity = [
+	{ label: '201', value: '201' },
+	{ label: '301', value: '301' },
+	{ label: '401', value: '401' },
+	{ label: '501', value: '501' },
+];
+
 const content = (purchaseInvoicesCount, salesInvoicesCount) => {
 	const { creditNoteCount = '', invoiceCount = '', proformaCount = ''	} = purchaseInvoicesCount || {};
 	const {

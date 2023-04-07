@@ -10,6 +10,7 @@ import { format, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import SelectAccrual from '../../../../commons/SelectAccrual';
+import { optionsEntity } from '../../../Accruals/constant';
 import useSaveCustom from '../../../hooks/useSaveCustom';
 import useSaveCustomList from '../../../hooks/useSaveCustomList';
 import { OptionMonth } from '../../SourceFile/utils';
@@ -118,12 +119,7 @@ function Card({
 								value={filters?.entity}
 								onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
 								placeholder="Entity"
-								options={[
-									{ label: 'Entity 201', value: '201' },
-									{ label: 'Entity 301', value: '301' },
-									{ label: 'Entity 401', value: '401' },
-									{ label: 'Entity 501', value: '501' },
-								]}
+								options={optionsEntity}
 								isClearable
 								style={{ width: '150px' }}
 							/>
