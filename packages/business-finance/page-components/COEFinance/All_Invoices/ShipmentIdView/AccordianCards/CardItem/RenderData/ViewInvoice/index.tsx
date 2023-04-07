@@ -8,7 +8,8 @@ interface ItemTypes {
 	billId?:string;
 	billNumber?:string;
 	organizationId?:string;
-	jobNumber?:string;
+	jobNumber?: string;
+	status?: string;
 
 }
 
@@ -20,11 +21,11 @@ interface PropsType {
 function ViewInvoice({ item }: PropsType) {
 	const router = useRouter();
 	const handleChange = (itemData:ItemTypes) => {
-		const { billId, billNumber, organizationId, jobNumber } = itemData || {};
+		const { billId, billNumber, organizationId, jobNumber, status } = itemData || {};
 		router.push(
 			`/business-finance/coe-finance/${router.query.active_tab}
 			/view-invoices?billId=${billId}&billNumber=${billNumber}
-			&orgId=${organizationId}&jobNumber=${jobNumber}&isShipment=${true}`,
+			&orgId=${organizationId}&jobNumber=${jobNumber}&isShipment=${true}&status=${status}`,
 		);
 	};
 	return (

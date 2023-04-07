@@ -1,4 +1,5 @@
 import {
+	IcMAnnouncement,
 	IcMSettings,
 	IcMAccountSettings,
 	IcMLocation,
@@ -1176,9 +1177,9 @@ const navigationMappingAdmin = {
 				href          : '/booking-desk',
 				as            : '/booking-desk',
 				type          : 'link',
-				main_apis     : ['list_shipments'],
+				main_apis     : ['list_shipments', 'list_booking_desk_shipments'],
 				module_type   : 'crm',
-				possible_apis : apis.shipment,
+				possible_apis : [...apis.shipment, ...apis.booking_desk],
 			},
 			{
 				key           : 'coe-fcl_revenue_desk',
@@ -2083,6 +2084,7 @@ const navigationMappingAdmin = {
 				title         : 'Announcements',
 				href          : '/v2/announcements',
 				as            : '/v2/announcements',
+				icon          : IcMAnnouncement,
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.announcements,

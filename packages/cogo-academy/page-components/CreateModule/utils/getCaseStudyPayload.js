@@ -2,7 +2,16 @@ import { isEmpty } from '@cogoport/utils';
 
 import checkErrors from './checkErrors';
 
-const getCaseStudyPayload = ({ editType, values, action, caseStudyQuestionId, testQuestionId, questionSetId }) => {
+const getCaseStudyPayload = ({
+	editType,
+	values,
+	action,
+	caseStudyQuestionId,
+	testQuestionId,
+	questionSetId,
+	editDetails = {},
+	index: questionIndex = '',
+}) => {
 	if (editType === 'case_question') {
 		const { question_text, options = [], question_type, explanation } = values || {};
 
@@ -18,6 +27,10 @@ const getCaseStudyPayload = ({ editType, values, action, caseStudyQuestionId, te
 			return { hasError };
 		}
 
+		const { test_case_study_questions = {} } = editDetails || {};
+
+		const { test_question_answers = [] } = test_case_study_questions?.[questionIndex] || {};
+
 		const answers = options.map((option, index) => {
 			const { is_correct, answer_text } = option || {};
 
@@ -26,6 +39,7 @@ const getCaseStudyPayload = ({ editType, values, action, caseStudyQuestionId, te
 				is_correct      : is_correct === 'true',
 				status          : 'active',
 				sequence_number : index,
+				...(action === 'update' ? { test_question_answer_id: test_question_answers?.[index]?.id } : {}),
 			};
 		});
 

@@ -1,0 +1,136 @@
+.container {
+	flex: 1;
+}
+
+.heading {
+	display: flex;
+	align-items: center;
+	margin: 16px 0 8px;
+	font-style: normal;
+	font-weight: 600;
+	color: #000;
+}
+
+.compose_container {
+	padding: 4px 16px 16px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 4px #cbd1f8;
+
+	:global {
+		.ui_input_container {
+			width: 300px;
+			height: none;
+			border: none;
+
+			.ui_input_control {
+				font-size: 12px;
+			}
+		}
+	}
+
+	.core-ui-rte-wrapper {
+		width: 100%;
+		border: none;
+	}
+}
+
+.text {
+	margin-right: 8px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	padding: 4px 8px;
+
+	/* background-color: antiquewhite; */
+	border-radius: 8px;
+}
+
+.suffix_button {
+	padding: 4px;
+	font-weight: 600;
+	color: red;
+	cursor: pointer;
+	border: none;
+	border-radius: 4px;
+	outline: none;
+
+	&:hover {
+		background: #fdebe9;
+	}
+}
+
+.error {
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 16px;
+	color: #cb6464;
+}
+
+.subject_preview {
+	display: flex;
+	align-items: center;
+	padding: 4px 0 12px;
+	margin: 8px 0;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.subject_label {
+	font-weight: 600;
+	color: #828282;
+}
+
+.preview {
+	margin-left: 4px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #000;
+}
+
+.mail_type {
+	padding: 8px 0;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.styled_editor {
+	:global {
+		.notranslate {
+			min-height: 270px;
+			font-size: 14px;
+		}
+
+		.DraftEditor-editorContainer {
+			/* border: 1px solid black; */
+		}
+
+		.public-DraftEditorPlaceholder-root {
+			font-size: 14px;
+		}
+	}
+}
+
+.value {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 2px 8px;
+	margin-left: 12px;
+	font-size: 10px;
+	font-weight: 500;
+	color: #221f20;
+	background: #fffce6;
+	border-radius: 8px 0 0 8px;
+}
+
+.cancel {
+	padding: 2px 8px;
+	font-size: 10px;
+	font-weight: 600;
+	cursor: pointer;
+	background: #fef199;
+	border-radius: 0 4px 4px 0;
+}

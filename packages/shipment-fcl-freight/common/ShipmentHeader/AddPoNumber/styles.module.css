@@ -1,0 +1,31 @@
+.container {
+	position: relative;
+
+	.form-item-label {
+		margin-bottom: 8px;
+	}
+}
+
+.modal_container {
+	padding: 15px;
+}
+
+.title {
+	margin-bottom: 16px;
+	font-size: 18px;
+	font-weight: 500;
+	color: #393f70;
+	text-transform: uppercase;
+}
+
+.button {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-top: 100px;
+
+	.core-ui-button-root {
+		width: 140px;
+		text-transform: capitalize;
+	}
+}
