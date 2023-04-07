@@ -1582,6 +1582,16 @@ const navigationMappingAdmin = {
 
 				main_apis: [],
 			},
+			{
+				key           : 'cogo_assured-feedbacks',
+				title         : 'Feedbacks',
+				href          : '/cogo-assured/feedbacks',
+				as            : '/cogo-assured/feedbacks',
+				type          : 'link',
+				possible_apis : apis.cogo_assured,
+
+				main_apis: [],
+			},
 		],
 	},
 	tracking_job: {
