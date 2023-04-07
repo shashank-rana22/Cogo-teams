@@ -1,26 +1,25 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable react-hooks/exhaustive-deps */
+import update from 'immutability-helper';
 import isEqual from 'lodash.isequal';
 import React, {
 	useCallback,
 	useEffect,
 	useMemo,
+	useRef,
 	useState,
 } from 'react';
 import { useDrop } from 'react-dnd';
-
-// import { ITEM_TYPES } from './constants';
 
 import RightPanel from '../RightPanel';
 
 import styles from './styles.module.css';
 
-const ItemTypes = {
-	BOX: 'box',
+const ITEM_TYPES = {
+	text   : 'text',
+	button : 'button',
+	image  : 'image',
 };
 
-function DropBox({
+function Stage({
 	components,
 	setComponents,
 	addNewItem,
@@ -28,7 +27,7 @@ function DropBox({
 	setSelectedItem,
 	selectedItem,
 }) {
-	// const [components, setComponents] = useState(components);
+	const [stageItems, setStageItems] = useState(components);
 
 	const [newAddingItemProps, setNewAddingItemProps] = useState({
 	  hoveredIndex   : 0,
@@ -51,28 +50,28 @@ function DropBox({
 
 	//! Portal :: mimic behavior of portal stage
 	useEffect(() => {
-	  if (!isEqual(components, components)) {
-			setComponents(components);
+	  if (!isEqual(stageItems, components)) {
+			setStageItems(components);
 	  }
 	}, [components]);
 
 	//! Portal :: "update" method mutate the array, we might use alternative to this Eg. arrayMove
 	const moveItem = useCallback(
-		(dragIndex, hoverIndex) => {
-			const dragItem = components[dragIndex];
-			const hoverItem = components[hoverIndex];
+	  (dragIndex, hoverIndex) => {
+			const dragItem = stageItems[dragIndex];
+			const hoverItem = stageItems[hoverIndex];
 			// Swap places of dragItem and hoverItem in the pets array
-			setComponents((pets) => {
+			setStageItems((pets) => {
 				const updatedPets = [...pets];
 				updatedPets[dragIndex] = hoverItem;
 				updatedPets[hoverIndex] = dragItem;
 				return updatedPets;
 			});
-		},
-		[components],
+	  },
+	  [stageItems, setStageItems],
 	);
 
-	const memoItems = useMemo(() => components?.map((item, index) => {
+	const memoItems = useMemo(() => stageItems?.map((item, index) => {
 		const { id, type } = item;
 		return (
 			<div
@@ -80,8 +79,8 @@ function DropBox({
 			>
 				<RightPanel
 					widget={item}
-					components={components}
-					setComponents={setComponents}
+					components={stageItems}
+					setComponents={setStageItems}
 					index={index}
 					id={id}
 					key={`id_${index}`}
@@ -95,7 +94,7 @@ function DropBox({
 			</div>
 		);
 	  }), [
-	  components,
+	  stageItems,
 	  moveItem,
 	  selectedItem,
 	  isNewItemAdding,
@@ -104,7 +103,7 @@ function DropBox({
 
 	//! Portal :: useDrop for stage process
 	const [{ canDrop, isOver, draggingItemType }, dropRef] = useDrop({
-	  accept : ItemTypes.BOX,
+	  accept : Object.keys(ITEM_TYPES),
 	  drop   : (droppedItem) => {
 			const { type, id } = droppedItem;
 			if (!id) {
@@ -112,8 +111,15 @@ function DropBox({
 		  addNewItem(type, hoveredIndex, shouldAddBelow);
 			} else {
 		  // the result of sorting is applying the mock data
-		  setComponents(components);
+		  setComponents(stageItems);
 			}
+			console.log(
+		  'droppedItem: ',
+		  type,
+		  'order: ',
+		  hoveredIndex,
+		  isNewItemAdding ? 'new item added!' : '',
+			);
 	  },
 	  collect: (monitor) => ({
 			isOver           : monitor.isOver(),
@@ -122,35 +128,24 @@ function DropBox({
 	  }),
 	});
 
-	// const [{ canDrop, isOver }, drop] = useDrop(() => ({
-	// 	accept  : ItemTypes.BOX,
-	// 	drop    : () => ({ name: 'Dustbin' }),
-	// 	collect : (monitor) => ({
-	// 		isOver  : monitor.isOver(),
-	// 		canDrop : monitor.canDrop(),
-	// 	}),
-
-	// }));
 	//! Portal :: placeholder item while new item adding
 	useEffect(() => {
 	  if (isNewItemAdding) {
-			const _stageItems = components.filter(({ id }) => !!id);
+			const _stageItems = stageItems.filter(({ id }) => !!id);
 			if (isOver && isNewItemAdding) {
-		  const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
-
-		  setComponents([
+				const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
+				setStageItems([
 					..._stageItems.slice(0, startIndex),
 					{
-			  type: draggingItemType,
+						type: draggingItemType,
 					},
 					..._stageItems.slice(startIndex),
 		  ]);
 			} else {
-		  setComponents(_stageItems);
+				//   setStageItems(_stageItems);
 			}
 	  }
 	}, [isOver, draggingItemType, isNewItemAdding, shouldAddBelow, hoveredIndex]);
-
 	const isActive = canDrop && isOver;
 
 	let backgroundColor = '#fff';
@@ -174,4 +169,4 @@ function DropBox({
 	);
 }
 
-export default DropBox;
+export default Stage;

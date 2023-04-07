@@ -5,8 +5,10 @@ import ButtonComponent from '../../../commons/widgets/ButtonComponent';
 import ImageComponent from '../../../commons/widgets/ImageComponent';
 import TextComponent from '../../../commons/widgets/TextComponent';
 
-const ItemTypes = {
-	CARD: 'card',
+const ITEM_TYPES = {
+	text   : 'text',
+	button : 'button',
+	image  : 'image',
 };
 
 function Item(props) {
@@ -27,7 +29,7 @@ function Item(props) {
 	//! Portal :: useDrop hook for builderItem
 	// TODO :: refactor and split here while adding portal
 	const [{ handlerId }, drop] = useDrop({
-		accept: ItemTypes.CARD,
+		accept: Object.keys(ITEM_TYPES),
 		collect(monitor) {
 			return {
 				handlerId: monitor.getHandlerId(),
@@ -76,7 +78,7 @@ function Item(props) {
 
 	//! Portal :: isDragging prop. might be use for styling changes in dnd process or something like that purposes
 	const [{ isDragging }, drag] = useDrag({
-		type    : ItemTypes.CARD,
+		type,
 		item    : { type, id, index },
 		collect : (monitor) => ({
 			isDragging: monitor.isDragging(),

@@ -5,13 +5,9 @@ import { useDrag } from 'react-dnd';
 
 import styles from './styles.module.css';
 
-const ItemTypes = {
-	BOX: 'box',
-};
-
 function Item({ itemType, onClick, onNewItemAdding, content }) {
 	const [{ isDragging }, dragRef] = useDrag({
-		type    : ItemTypes.BOX,
+		type    : itemType,
 		item    : content,
 		collect : (monitor) => ({
 			isDragging: monitor.isDragging(),
