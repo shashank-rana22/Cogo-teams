@@ -147,7 +147,7 @@ function CogoOne() {
 			setActiveCard({});
 			setActiveMail({});
 		}
-	}, [activeTab, firstLoading, setActiveCard, showBotMessages, isomniChannelAdmin]);
+	}, [activeTab, firstLoading, setActiveCard, showBotMessages]);
 
 	useEffect(() => {
 		if (isomniChannelAdmin) {
