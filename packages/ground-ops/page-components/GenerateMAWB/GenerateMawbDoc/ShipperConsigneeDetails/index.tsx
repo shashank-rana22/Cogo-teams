@@ -117,10 +117,12 @@ function ShipperConsigneeDetails({
 							${styles.flex_font_bold} 
 						`}
 						>
-							<div className={cl`
+							<div
+								className={cl`
 							${styles.styled_text_area} 
 							${styles.font_style} 
 						`}
+								style={{ whiteSpace: 'pre-wrap' }}
 							>
 
 								{formData.shipperName}
@@ -229,10 +231,12 @@ function ShipperConsigneeDetails({
 							${styles.flex_font_bold} 
 						`}
 						>
-							<div className={cl`
+							<div
+								className={cl`
 							${styles.styled_text_area} 
 							${styles.font_style} 
 						`}
+								style={{ whiteSpace: 'pre-wrap' }}
 							>
 								{formData.consigneeName}
 								<br />
