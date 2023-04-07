@@ -25,7 +25,7 @@ function PreviewVideos({ videos = [] }) {
 
 						<div className={styles.heading}>VIDEOS</div>
 
-						{videos.length > 2 && (
+						{(videos || []).length > 2 && (
 							<div className={styles.icn_container}>
 								<IcMArrowLeft width={25} height={25} onClick={scrollHandlerLeftVideos} />
 								<IcMArrowRight width={25} height={25} onClick={scrollHandlerRightVideos} />
@@ -38,7 +38,7 @@ function PreviewVideos({ videos = [] }) {
 
 						<div className={styles.contents}>
 
-							{videos.map((video, index) => (
+							{(videos || []).map((video, index) => (
 								<div
 									key={video}
 									className={styles.content_item}
