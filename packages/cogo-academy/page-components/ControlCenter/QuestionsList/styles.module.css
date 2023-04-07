@@ -84,12 +84,13 @@
 		}
 	}
 }
-.inner_pills{
+
+.inner_pills {
+	display: "flex";
+	flex-direction: "column";
 	font-weight: 600;
-	display: 'flex';
-	flex-direction: 'column';
-	border: '1px';
 	background: #fff;
+	border: "1px";
 	border: 1px solid #ffe4af;
 	border-radius: 16px;
 }
