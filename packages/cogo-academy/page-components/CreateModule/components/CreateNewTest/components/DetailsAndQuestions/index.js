@@ -11,14 +11,12 @@ import styles from './styles.module.css';
 
 function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: getTestLoading }) {
 	const [showQuestionSet, setShowQuestionSet] = useState(false);
-
 	const [idArray, setIdArray] = useState([]);
+	const [uploadDocument, setUploadDocument] = useState('');
 
 	const { control, formState:{ errors }, handleSubmit, setValue, watch } = useForm();
 
 	const { loading, createTest } = useCreateTest({ setTestId, setActiveStepper });
-
-	const [uploadDocument, setUploadDocument] = useState('');
 
 	const radioGroupVal = watch('select_users') || '';
 
