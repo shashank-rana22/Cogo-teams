@@ -1,5 +1,5 @@
 .name {
-	max-width: 80px;
+	min-width: 80px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;

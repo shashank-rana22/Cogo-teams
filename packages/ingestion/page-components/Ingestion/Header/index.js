@@ -1,8 +1,8 @@
 import { Button, Modal } from '@cogoport/components';
 import { IcMDownload, IcMUpload } from '@cogoport/icons-react';
-import { useState } from 'react';
 
 import { CONSTANT_KEYS } from '../../../constants/header-mapping';
+import useGetTemplate from '../../../hooks/useGetTemplate';
 import usePostIngestionData from '../../../hooks/usePostIngestionData';
 
 import ChooseModal from './Modals/ChooseModal/index';
@@ -25,7 +25,6 @@ const INGESTION_COMPONENTS_MAPPING = {
 };
 
 function Header({ refetch = () => {} }) {
-	const [template, setTemplate] = useState('');
 	const {
 		setUploadData = () => {},
 		uploadData = {},
@@ -36,6 +35,8 @@ function Header({ refetch = () => {} }) {
 		onSubmit = () => {},
 		loading = false,
 	} = usePostIngestionData({ refetch });
+
+	const { getTemplateCsv = () => {}, template = '', setTemplate = () => {} } = useGetTemplate();
 
 	const onClose = () => {
 		setShow((pv) => ({
@@ -87,7 +88,7 @@ function Header({ refetch = () => {} }) {
 				</Button>
 			</div>
 			{show?.open && (
-				<Modal size="md" show={show?.open} onClose={() => onClose()}>
+				<Modal size="md" show={show?.open} onClose={() => onClose()} closeOnOuterClick={false}>
 					<Modal.Header title={(
 						<div style={{ display: 'flex', alignItems: 'center' }}>
 							<IcMUpload style={{ margin: '0 4px 0 0' }} />
@@ -128,7 +129,7 @@ function Header({ refetch = () => {} }) {
 				</Modal>
 			)}
 
-			<TemplateModal setTemplate={setTemplate} template={template} />
+			<TemplateModal getTemplateCsv={getTemplateCsv} template={template} setTemplate={setTemplate} />
 		</>
 
 	);

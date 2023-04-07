@@ -2,13 +2,10 @@ import { Modal, Button } from '@cogoport/components';
 import { IcMDownload } from '@cogoport/icons-react';
 
 import { BUTTON_MAPPING } from '../../../../../constants/template-mapping';
-import useGetTemplate from '../../../../../hooks/useGetTemplate';
 
 import styles from './styles.module.css';
 
-function TemplateModal({ template = '', setTemplate = () => {} }) {
-	const { getTemplateCsv = () => {} } = useGetTemplate();
-
+function TemplateModal({ getTemplateCsv = () => {}, template = '', setTemplate = () => {} }) {
 	const onClose = () => {
 		setTemplate('');
 	};
@@ -43,7 +40,6 @@ function TemplateModal({ template = '', setTemplate = () => {} }) {
 			</Modal.Body>
 			<Modal.Footer>
 				<Button themeType="secondary" onClick={onClose}>Close</Button>
-
 			</Modal.Footer>
 		</Modal>
 	);
