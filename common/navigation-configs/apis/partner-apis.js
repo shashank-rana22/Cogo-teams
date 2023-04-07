@@ -10574,7 +10574,6 @@ const partner = {
 
 	],
 	omni_channel: [
-
 		{
 			api          : 'list_organizations',
 			access_type  : 'private',

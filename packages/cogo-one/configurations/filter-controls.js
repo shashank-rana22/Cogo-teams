@@ -10,7 +10,7 @@ const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMe
 		KAM   : ['assigned_to', 'assigned_agent'],
 	};
 	const extraStatusOptions = (showBotMessages && isomniChannelAdmin) ? 	[{
-		label : 'seen By User',
+		label : 'Seen By User',
 		value : 'seen_by_user',
 	}] : [];
 	const controls = [

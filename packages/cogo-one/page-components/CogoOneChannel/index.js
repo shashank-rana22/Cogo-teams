@@ -146,8 +146,9 @@ function CogoOne() {
 			setActiveVoiceCard({});
 			setActiveCard({});
 			setActiveMail({});
+			setAppliedFilters({});
 		}
-	}, [activeTab, firstLoading, setActiveCard, showBotMessages]);
+	}, [activeTab, firstLoading, setActiveCard, showBotMessages, setAppliedFilters]);
 
 	useEffect(() => {
 		setToggleStatus(status === 'active');

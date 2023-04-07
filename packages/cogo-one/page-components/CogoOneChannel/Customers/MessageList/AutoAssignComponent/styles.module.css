@@ -17,7 +17,7 @@
 }
 
 .auto_assign_background {
-	background: #fdebe9;
+	background: #fdfbf6;
 }
 
 .show_auto_assign {
@@ -39,7 +39,7 @@
 	justify-content: center;
 
 	:hover {
-		background-color: #f8aea8;
+		background-color: #f2e3c3;
 		border-radius: 6px;
 	}
 

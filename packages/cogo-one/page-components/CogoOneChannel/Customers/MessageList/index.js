@@ -153,6 +153,7 @@ function MessageList(messageProps) {
 									<div className={styles.pinned_chats_div}>
 										{(sortedPinnedChatList || []).map((item) => (
 											<MessageCardData
+												key={item?.id}
 												item={item}
 												activeCardId={activeCardId}
 												userId={userId}
@@ -170,6 +171,7 @@ function MessageList(messageProps) {
 						<div className={styles.recent_text}>Recent</div>
 						{(messagesList || []).map((item) => (
 							<MessageCardData
+								key={item?.id}
 								item={item}
 								activeCardId={activeCardId}
 								userId={userId}

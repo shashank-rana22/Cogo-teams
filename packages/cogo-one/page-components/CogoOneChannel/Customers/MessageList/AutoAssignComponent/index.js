@@ -46,7 +46,7 @@ function AutoAssignComponent({
 								</div>
 								<Button
 									size="sm"
-									themeType="accent"
+									themeType="primary"
 									loading={bulkAssignLoading}
 									onClick={() => {
 										bulkAssignChat({ selectedAutoAssign });

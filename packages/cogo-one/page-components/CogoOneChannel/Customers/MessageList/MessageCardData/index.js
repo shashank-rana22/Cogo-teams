@@ -19,7 +19,6 @@ function MessageCardData({
 	firestore,
 	autoAssignChats = true,
 	handleCheckedChats = () => {},
-
 }) {
 	const {
 		user_name = '',
@@ -69,7 +68,6 @@ function MessageCardData({
 			) }
 
 			<div
-				key={id}
 				role="button"
 				tabIndex={0}
 				className={cl`

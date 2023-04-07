@@ -15,8 +15,8 @@ const formatLastMessage = (lastMessage) => {
 	const ActiveIcon = message_type === 'image' ? IcMImage : IcMDocument;
 	return (
 		<div className={styles.styled_flex}>
-			{conversation_type === 'received' && <IcMTick height="15px" width="15px" />}
-			{message_type !== 'text' && ActiveIcon && <ActiveIcon height="15px" width="15px" />}
+			{conversation_type === 'received' && <IcMTick height="20px" width="20px" />}
+			{message_type !== 'text' && ActiveIcon && <ActiveIcon height="20px" width="20px" />}
 			<div
 				className={styles.content}
 				dangerouslySetInnerHTML={{ __html: message || message_type }}

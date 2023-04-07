@@ -35,9 +35,9 @@ function getFireStoreQuery({
 					where('has_admin_unread_messages', '==', true),
 				];
 			} else if (appliedFilters[item] === 'seen_by_user') {
-				const now = new Date();
-				now.setMinutes(now.getMinutes() - 15);
-				const epochTimestamp = now.getTime();
+				const currentTime = new Date();
+				currentTime.setMinutes(currentTime.getMinutes() - 15);
+				const epochTimestamp = currentTime.getTime();
 
 				queryFilters = [
 					...queryFilters,
