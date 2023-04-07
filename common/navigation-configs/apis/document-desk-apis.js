@@ -213,7 +213,7 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api         : 'get_exchange_rate_deviation_by_id',
+		api         : 'get_purchase_bills_exchange_rate_deviation_by_id',
 		access_type : 'private',
 	},
 	{
