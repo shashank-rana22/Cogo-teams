@@ -34,6 +34,7 @@ const userFormStyle = {
 function CreateFAQ() {
 	const router = useRouter();
 	const [editorError, setEditorError] = useState(false);
+	// const [showAlias, setShowAlias] = useState(false);
 
 	const { fetchQuestion, query, data = {}, loading, mode } = useGetQuestion();
 
@@ -179,25 +180,34 @@ function CreateFAQ() {
 				</div>
 
 				<form className={styles.form_container} onSubmit={handleSubmit(onSubmit)}>
+
 					<div className={styles.input_container}>
 						<div className={styles.input_label}>
 							Question
 						</div>
 
-						<InputController
-							control={control}
-							name="question_abstract"
-							type="input"
-							placeholder="Create a question."
-							key={question_abstract}
-							rules={{ required: 'Question is required.' }}
-						/>
+						<div className={styles.question_alias}>
 
-						{errors?.question_abstract && (
-							<span className={styles.errors}>
-								{errors.question_abstract.message}
-							</span>
-						)}
+							<InputController
+								control={control}
+								name="question_abstract"
+								type="input"
+								placeholder="Create a question."
+								key={question_abstract}
+								rules={{ required: 'Question is required.' }}
+							/>
+
+							{errors?.question_abstract && (
+								<span className={styles.errors}>
+									{errors.question_abstract.message}
+								</span>
+							)}
+
+							<div className={styles.alias}>
+								Add Alias
+							</div>
+
+						</div>
 
 					</div>
 

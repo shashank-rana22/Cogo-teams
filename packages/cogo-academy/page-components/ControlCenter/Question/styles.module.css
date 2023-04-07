@@ -49,7 +49,19 @@
 .input_container {
 	display: flex;
 	flex-direction: column;
+/* :global{
+	.ui_input_container{
+		width:85%;
+		
+	}
+} */
+:global(.ui_input_container){
+	width:85%;
 }
+	
+}	
+	
+
 
 .button_container {
 	display: flex;
@@ -89,4 +101,20 @@
 
 .feedback_container {
 	flex: 1;
+}
+
+.question_alias{
+	display: flex;
+}
+
+.alias{
+	padding-left: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: 600;
+	color:#034AFD;
+	cursor:pointer;
+	text-decoration: underline;
+	font-size: 15px;
 }
