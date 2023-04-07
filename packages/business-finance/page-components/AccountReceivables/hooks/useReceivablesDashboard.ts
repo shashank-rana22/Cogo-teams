@@ -1,17 +1,15 @@
-import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
 import { months } from '../constants';
 
-const useReceivablesDashboard = () => {
+const useReceivablesDashboard = (entityCode: string) => {
 	const [filterValue, setFilterValue] = useState({
-		entityCode  : '301',
 		serviceType : '',
 		companyType : 'All',
 	});
 
-	const { entityCode = '', serviceType = '', companyType = '' } = filterValue || {};
+	const { serviceType = '', companyType = '' } = filterValue || {};
 
 	const d = new Date();
 	const currentMonth = months[d.getMonth()];
@@ -30,8 +28,8 @@ const useReceivablesDashboard = () => {
 		{ manual: true },
 	);
 
-	const ageingBucketData = useCallback(async () => {
-		try {
+	const ageingBucketData = useCallback(() => {
+		(async () => {
 			listApiTrigger({
 				params: {
 					entityCode  : entityCode || undefined,
@@ -39,9 +37,7 @@ const useReceivablesDashboard = () => {
 					companyType : companyType !== 'All' ? companyType : undefined,
 				},
 			});
-		} catch (e) {
-			Toast.error(e?.error?.message || 'Something went wrong');
-		}
+		})();
 	}, [companyType, entityCode, serviceType, listApiTrigger]);
 
 	const [
@@ -56,19 +52,17 @@ const useReceivablesDashboard = () => {
 		{ manual: true },
 	);
 
-	const quaterlyDataApi = useCallback(async () => {
-		try {
+	const quaterlyDataApi = useCallback(() => {
+		(async () => {
 			quaterlyDataTrigger({
 				params: {
-					entityCode  : filterValue?.entityCode || undefined,
-					serviceType : filterValue?.serviceType || undefined,
-					companyType : filterValue.companyType !== 'All' ? filterValue.companyType : undefined,
+					entityCode  : entityCode || undefined,
+					serviceType : serviceType || undefined,
+					companyType : companyType !== 'All' ? companyType : undefined,
 				},
 			});
-		} catch (e) {
-			Toast.error(e?.error?.message || 'Something went wrong');
-		}
-	}, [filterValue.companyType, filterValue?.entityCode, filterValue?.serviceType, quaterlyDataTrigger]);
+		})();
+	}, [companyType, entityCode, serviceType, quaterlyDataTrigger]);
 
 	const [
 		{ data: kamOutstandingData, loading: kamOutstandingLoading },
@@ -94,8 +88,8 @@ const useReceivablesDashboard = () => {
 		{ manual: true },
 	);
 
-	const dailySalesOutstandingApi = useCallback(async () => {
-		try {
+	const dailySalesOutstandingApi = useCallback(() => {
+		(async () => {
 			await dailySalesOutstandingTrigger({
 				params: {
 					entityCode  : entityCode || undefined,
@@ -103,9 +97,7 @@ const useReceivablesDashboard = () => {
 					companyType : companyType !== 'All' ? companyType : undefined,
 				},
 			});
-		} catch (e) {
-			Toast.error(e?.error?.message || 'Something went wrong');
-		}
+		})();
 	}, [dailySalesOutstandingTrigger, companyType, entityCode, serviceType]);
 
 	const [
@@ -121,18 +113,14 @@ const useReceivablesDashboard = () => {
 	);
 
 	const salesFunnelApi = useCallback(async () => {
-		try {
-			await salesFunnelTrigger({
-				params: {
-					month       : salesFunnelMonth || undefined,
-					entityCode  : entityCode || undefined,
-					serviceType : serviceType || undefined,
-					companyType : companyType !== 'All' ? companyType : undefined,
-				},
-			});
-		} catch (e) {
-			Toast.error(e?.error?.message || 'Something went wrong');
-		}
+		await salesFunnelTrigger({
+			params: {
+				month       : salesFunnelMonth || undefined,
+				entityCode  : entityCode || undefined,
+				serviceType : serviceType || undefined,
+				companyType : companyType !== 'All' ? companyType : undefined,
+			},
+		});
 	}, [companyType,
 		entityCode, serviceType, salesFunnelMonth, salesFunnelTrigger]);
 
@@ -149,15 +137,11 @@ const useReceivablesDashboard = () => {
 	);
 
 	const outstandingApi = useCallback(async () => {
-		try {
-			await outstandingTrigger({
-				params: {
-					entityCode: entityCode || undefined,
-				},
-			});
-		} catch (e) {
-			Toast.error(e?.error?.message || 'Something went wrong');
-		}
+		await outstandingTrigger({
+			params: {
+				entityCode: entityCode || undefined,
+			},
+		});
 	}, [entityCode, outstandingTrigger]);
 
 	useEffect(() => {
