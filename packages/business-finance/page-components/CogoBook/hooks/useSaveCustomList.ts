@@ -48,7 +48,7 @@ const useSaveCustomList = ({ setCustomModal }) => {
 	const refetchDelete = useCallback(async (item) => {
 		try {
 			const res = await deleteTrigger({
-				params: {
+				data: {
 					id: item?.id,
 				},
 			});
