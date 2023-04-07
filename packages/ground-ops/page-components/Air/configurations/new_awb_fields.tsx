@@ -52,6 +52,11 @@ export const NewAWBFields = {
 			),
 		},
 		{
+			key   : 'scheduleDeparture',
+			label : 'Schedule Departure',
+			span  : 1.5,
+		},
+		{
 			key   : 'generateDoc',
 			label : 'Document',
 			span  : 1.5,

@@ -52,6 +52,16 @@ export const ApprovalPendingFields = {
 			),
 		},
 		{
+			key    : 'scheduleDeparture',
+			label  : 'Schedule Departure',
+			span   : 1.5,
+			render : (item) => (
+				<div style={{ textTransform: 'uppercase' }}>
+					{formatDate(item.scheduleDeparture)}
+				</div>
+			),
+		},
+		{
 			key   : 'status',
 			label : 'Status',
 			span  : 1,
