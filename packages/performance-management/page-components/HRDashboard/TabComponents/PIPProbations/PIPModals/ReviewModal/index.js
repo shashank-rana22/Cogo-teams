@@ -1,5 +1,5 @@
 import { Textarea, Button, Modal } from '@cogoport/components';
-import { addDays, format } from '@cogoport/utils';
+import { startCase, addDays, format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -28,19 +28,26 @@ function ReviewModal({
 						<div className={styles.container}>
 							<div className={styles.update_dates}>
 								<div className={styles.sub_heading}>Name</div>
-								<div>{ item?.name }</div>
+								<div>{ startCase(item?.name || '---') }</div>
 							</div>
 							<div style={{ display: 'flex' }}>
 								<div className={styles.update_dates}>
 									<div className={styles.sub_heading}>Start Date</div>
 
-									<div style={{ fontWeight: 'bold' }}>{format(item?.start_date, 'dd-MMM-yyyy')}</div>
+									<div style={{ fontWeight: 'bold' }}>
+										{item.start_date
+											? format(item.start_date, 'dd-MMM-yyyy') : '---'}
+									</div>
 								</div>
 
 								<div className={styles.update_dates}>
 									<div className={styles.sub_heading}>End Date</div>
 
-									<div style={{ fontWeight: 'bold' }}>{format(item?.end_date, 'dd-MMM-yyyy')}</div>
+									<div style={{ fontWeight: 'bold' }}>
+										{item.end_date
+											? format(item.end_date, 'dd-MMM-yyyy') : '---'}
+
+									</div>
 								</div>
 
 							</div>
@@ -48,17 +55,21 @@ function ReviewModal({
 						<div className={styles.container}>
 							<div className={styles.update_dates}>
 								<div className={styles.sub_heading}>Reports To</div>
-								<div>{item?.manager_name}</div>
+								<div>{startCase(item.manager_name || '---')}</div>
 							</div>
 							<div className={styles.update_dates}>
 								<div className={styles.sub_heading}>Update</div>
-								<div>{`${item?.log_type} ${item?.final_decision}`}</div>
+								<div>{`${item.log_type || '---'} ${item.final_decision || '---'}`}</div>
 							</div>
-							{item?.final_decision === 'extended' && (
+							{item.final_decision === 'extended' && (
 								<div className={styles.update_dates}>
 									<div className={styles.sub_heading}>Extended Date</div>
 
-									<div style={{ fontWeight: 'bold' }}>{format(extended_date, 'dd-MMM-yyyy')}</div>
+									<div style={{ fontWeight: 'bold' }}>
+										{extended_date
+											? format(extended_date, 'dd-MMM-yyyy') : '---'}
+
+									</div>
 								</div>
 							)}
 						</div>

@@ -55,7 +55,7 @@ const useGetColumns = ({
 			tags         : item?.tags || [],
 			disabledTags : item?.tags || [],
 		});
-		if (item?.log_type === 'probation' && !item?.final_decision) {
+		if (item.log_type === 'probation' && !item.final_decision) {
 			setModal('update');
 		} else {
 			setModal('logs');
@@ -63,12 +63,10 @@ const useGetColumns = ({
 	};
 
 	const openCSV = (url) => {
-		// eslint-disable-next-line no-undef
 		if (url) { window.open(url, '_blank'); }
 	};
 
 	const downloadError = (url) => {
-		// eslint-disable-next-line no-undef
 		if (url) { window.open(url, '_blank'); }
 	};
 
@@ -86,7 +84,7 @@ const useGetColumns = ({
 				<div
 					className={styles.container}
 				>
-					{source === 'uploaded_files' ? item?.file_name : startCase(item?.name)}
+					{source === 'uploaded_files' ? item.file_name : startCase(item.name || '---')}
 				</div>
 			</div>
 		),
@@ -97,7 +95,7 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>ID</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				<div>{startCase(item?.cogo_id) || '-'}</div>
+				{startCase(item.cogo_id || '-')}
 			</div>
 		),
 		id  : 'cogo_id',
@@ -108,7 +106,7 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>DEPARTMENT</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				<div>{startCase(item?.department) || '-'}</div>
+				{startCase(item.department || '-')}
 			</div>
 		),
 		id  : 'department',
@@ -119,7 +117,7 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>DESIGNATION</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				<div>{startCase(item?.designation) || '-'}</div>
+				{startCase(item.designation || '-')}
 			</div>
 		),
 		id  : 'designation',
@@ -133,7 +131,6 @@ const useGetColumns = ({
 				<div className={cl`styles.${ratingClass(item?.rating)}`}>
 					{item?.rating || '-'}
 				</div>
-				{' '}
 			</div>
 		),
 		id  : 'rating',
@@ -145,7 +142,7 @@ const useGetColumns = ({
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<div className={cl`styles.${ratingClass(item?.score)}`}>
-					{item?.score || '-'}
+					{item.score || '-'}
 				</div>
 				{' '}
 			</div>
@@ -156,7 +153,7 @@ const useGetColumns = ({
 	{
 		Header   : <div className={styles.head} />,
 		accessor : (item) => (
-			<FeedbackModal feedback={item?.feedback} />
+			<FeedbackModal feedback={item.feedback} />
 		),
 		id  : 'feedback',
 		key : 'feedback',
@@ -165,7 +162,7 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>MONTH</div>,
 		accessor : () => (
 			<div className={styles.head_content}>
-				<div>{format(new Date(feedbackYear, feedbackMonth, 1), 'MMM yyyy')}</div>
+				{format(new Date(feedbackYear, feedbackMonth, 1), 'MMM yyyy')}
 			</div>
 		),
 		id  : 'month',
@@ -207,7 +204,7 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>{activeTab === 'uploaded_files' ? ('Uploaded By') : ('MANAGER')}</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				<div>{item?.manager_name ? (item?.manager_name) : (item?.hr_manager_name)}</div>
+				<div>{item.manager_name ? item.manager_name : item.hr_manager_name}</div>
 			</div>
 		),
 		id  : 'manager',
@@ -236,9 +233,9 @@ const useGetColumns = ({
 			const incompleteTags = Array(len).fill('').map((_, index) => index);
 
 			return (
-				(item?.log_type === 'pip' && (
+				(item.log_type === 'pip' && (
 					<div className={styles.head_content}>
-						{tags?.map((val) => (
+						{(tags || []).map((val) => (
 							<Tooltip
 								content={<div style={{ wordBreak: 'break-word' }}>{val}</div>}
 								placement="bottom"
@@ -282,11 +279,10 @@ const useGetColumns = ({
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<Button
-					themeType={item?.log_type === 'probation' && !item?.final_decision ? 'primary' : 'secondary'}
+					themeType={item.log_type === 'probation' && !item.final_decision ? 'primary' : 'secondary'}
 					onClick={() => addLog(item)}
-					// disabled={item?.final_decision && item?.log_type === 'probation'}
 				>
-					{item?.log_type === 'probation' && !item?.final_decision ? 'Update' : 'Log'}
+					{item.log_type === 'probation' && !item.final_decision ? 'Update' : 'Log'}
 				</Button>
 			</div>
 		),
@@ -312,10 +308,10 @@ const useGetColumns = ({
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<Pill
-					color={item?.final_decision === 'confirmed' ? 'green' : 'yellow' || 'blue'}
+					color={item.final_decision === 'confirmed' ? 'green' : 'yellow'}
 				>
-					{isEmpty(item?.final_decision)
-						? (`in ${item?.log_type}`) : (`${item?.log_type} ${item?.final_decision}`)}
+					{isEmpty(item.final_decision)
+						? (`in ${item.log_type}`) : (`${item.log_type} ${item.final_decision}`)}
 
 				</Pill>
 			</div>
@@ -333,7 +329,7 @@ const useGetColumns = ({
 						setItem(item);
 						setModal('review');
 					}}
-					disabled={!item?.final_decision}
+					disabled={!item.final_decision}
 				>
 					Review
 				</Button>
@@ -346,12 +342,13 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>{source === 'uploaded_files' ? 'UPLOAD DATE' : 'START DATE'}</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				<div>
-					{source === 'uploaded_files'
-						? format(item?.created_at, 'dd-MMM-yyyy')
-						: format(item?.start_date, 'dd-MMM-yyyy')}
-
-				</div>
+				{item.created_at || item.start_date ? (
+					<div>
+						{source === 'uploaded_files'
+							? format(item.created_at, 'dd-MMM-yyyy')
+							: format(item.start_date, 'dd-MMM-yyyy')}
+					</div>
+				) : '---'}
 			</div>
 		),
 		id  : 'start_date',
@@ -361,7 +358,7 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>END DATE</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				<div>{format(item?.end_date, 'dd-MMM-yyyy')}</div>
+				{item.end_date ? format(item.end_date, 'dd-MMM-yyyy') : '---'}
 			</div>
 		),
 		id  : 'end_date',
@@ -384,7 +381,7 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>EMPLOYEES AFFECTED</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				{item?.employee_count || '-'}
+				{item.employee_count || '-'}
 			</div>
 		),
 		id  : 'number_of_employees',
@@ -394,7 +391,7 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>UPLOADED BY</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				{startCase(item?.uploaded_by)}
+				{startCase(item.uploaded_by || '---')}
 			</div>
 		),
 		id  : 'uploaded_by',

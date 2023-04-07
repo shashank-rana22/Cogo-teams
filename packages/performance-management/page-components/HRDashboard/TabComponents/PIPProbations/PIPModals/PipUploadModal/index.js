@@ -57,7 +57,6 @@ function PipUploadModal({ item = {}, modal, setModal = () => {}, logType = '', s
 	};
 
 	const downloadSampleCsv = () => {
-		// eslint-disable-next-line max-len, no-undef
 		window.open(sampleTypeCsv[type], '_blank');
 	};
 
@@ -100,41 +99,39 @@ function PipUploadModal({ item = {}, modal, setModal = () => {}, logType = '', s
 							<div
 								className={styles.upload_info}
 							>
-								<div>
-									<div className={styles.upload_header}>
-										<div className={styles.label}>
-											{`Upload ${startCase(type)} CSV`}
-										</div>
-										{type === 'normalization' && (
-											<div className={styles.filters}>
-												<Filters source="past_stats" params={params} setParams={setParams} />
-											</div>
-										) }
-
-										<Tooltip
-											theme="light"
-											placement="top-end"
-											animation="shift-away"
-											content={getToolTip('Get Sample PIP csv')}
-										>
-											<div
-												className={styles.info_tool}
-												role="button"
-												onClick={() => downloadSampleCsv()}
-												tabIndex={0}
-											>
-												<IcMInfo width={20} height={20} />
-											</div>
-										</Tooltip>
+								<div className={styles.upload_header}>
+									<div className={styles.label}>
+										{`Upload ${startCase(type)} CSV`}
 									</div>
-									<UploadController
-										control={control}
-										errors={errors}
-										name="uploaded_csv_file"
-										accept=".csv"
-									/>
+									{type === 'normalization' && (
+										<div className={styles.filters}>
+											<Filters source="past_stats" params={params} setParams={setParams} />
+										</div>
+									) }
+
+									<Tooltip
+										theme="light"
+										placement="top-end"
+										animation="shift-away"
+										content={getToolTip('Get Sample PIP csv')}
+									>
+										<div
+											className={styles.info_tool}
+											role="button"
+											onClick={() => downloadSampleCsv()}
+											tabIndex={0}
+										>
+											<IcMInfo width={20} height={20} />
+										</div>
+									</Tooltip>
 								</div>
 
+								<UploadController
+									control={control}
+									errors={errors}
+									name="uploaded_csv_file"
+									accept=".csv"
+								/>
 							</div>
 						)}
 						<div className={styles.submit}>

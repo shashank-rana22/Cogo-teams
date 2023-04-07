@@ -1,5 +1,5 @@
 import { Placeholder } from '@cogoport/components';
-import { isEmpty, format } from '@cogoport/utils';
+import { startCase, isEmpty, format } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import EmptyState from '../../../../../../../common/EmptyState';
@@ -12,12 +12,12 @@ function AllLogs({ item = {} }) {
 	const { list = [] } = LogData;
 
 	useEffect(() => {
-		setParams({ LogID: item?.id });
+		setParams({ LogID: item.id });
 	}, [item, setParams]);
 
-	return (
-		<div className={styles.main_container}>
-			{loading && (
+	if (loading) {
+		return (
+			<div className={styles.main_container}>
 				<div className={styles.sub_container}>
 					<div className={styles.flex_container}>
 						<div className={styles.circle} />
@@ -31,8 +31,13 @@ function AllLogs({ item = {} }) {
 						<Placeholder width="120px" />
 					</div>
 				</div>
-			)}
-			{!loading && isEmpty(list) && (
+			</div>
+		);
+	}
+
+	if (isEmpty(list)) {
+		return (
+			<div className={styles.main_container}>
 				<div className={styles.empty}>
 					<EmptyState
 						flexDirection="column"
@@ -40,10 +45,13 @@ function AllLogs({ item = {} }) {
 						textSize="16px"
 					/>
 				</div>
+			</div>
+		);
+	}
 
-			)}
-
-			{!loading && (list || []).map((object) => (
+	return (
+		<div className={styles.main_container}>
+			{(list || []).map((object) => (
 				<div className={styles.sub_container} key={object.created_at}>
 					<div className={styles.flex_container}>
 						<div className={styles.circle} />
@@ -55,10 +63,10 @@ function AllLogs({ item = {} }) {
 							{' '}
 							By
 							{' '}
-							<b>{object?.name?.name}</b>
+							<b>{startCase(object.name?.name || '---')}</b>
 						</div>
-						<div className={styles.lable}>Comments:</div>
-						<div>{object?.comment}</div>
+						<div className={styles.label}>Comments:</div>
+						<div>{object.comment || '---'}</div>
 					</div>
 				</div>
 			))}

@@ -26,7 +26,7 @@ function KPIFeedbacks({ modal = '', setModal = () => {} }) {
 	const ModalComponent = modalComoponentsMapping[modal]?.Component;
 
 	return (
-		<div>
+		<>
 			<div className={styles.top_container}>
 				<div className={styles.filters}>
 					<Filters
@@ -65,48 +65,46 @@ function KPIFeedbacks({ modal = '', setModal = () => {} }) {
 				</div>
 			</div>
 
-			<div>
-				<div className={styles.stats_container}>
-					<PerformanceChart params={params} />
-				</div>
-
-				<div className={styles.list_header}>
-					<p className={styles.list_title}>
-						All Managers List
-					</p>
-
-					<div className={styles.list_actions}>
-						<Button
-							size="md"
-							themeType="tertiary"
-							onClick={() => {
-								redirectToFeedbackManagement();
-							}}
-						>
-							View and Download all Feedbacks
-						</Button>
-					</div>
-				</div>
-
-				<div className={styles.table_section}>
-					<TeamMembersList
-						list={list}
-						loading={loading}
-						params={params}
-						total_count={total_count}
-						setPagination={setPage}
-					/>
-				</div>
-
-				{modal && (
-					<ModalComponent
-						modal={modal}
-						setModal={setModal}
-						source={modal}
-					/>
-				)}
+			<div className={styles.stats_container}>
+				<PerformanceChart params={params} />
 			</div>
-		</div>
+
+			<div className={styles.list_header}>
+				<p className={styles.list_title}>
+					All Managers List
+				</p>
+
+				<div className={styles.list_actions}>
+					<Button
+						size="md"
+						themeType="tertiary"
+						onClick={() => {
+							redirectToFeedbackManagement();
+						}}
+					>
+						View and Download all Feedbacks
+					</Button>
+				</div>
+			</div>
+
+			<div className={styles.table_section}>
+				<TeamMembersList
+					list={list}
+					loading={loading}
+					params={params}
+					total_count={total_count}
+					setPagination={setPage}
+				/>
+			</div>
+
+			{modal && (
+				<ModalComponent
+					modal={modal}
+					setModal={setModal}
+					source={modal}
+				/>
+			)}
+		</>
 	);
 }
 

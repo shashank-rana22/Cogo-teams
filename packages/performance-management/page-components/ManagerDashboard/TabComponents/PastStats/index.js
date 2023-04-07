@@ -29,7 +29,7 @@ function PastStats() {
 	}
 
 	return (
-		<div>
+		<>
 			<div className={styles.filters}>
 				<Filters source="past_stats" params={params} setParams={setParams} />
 			</div>
@@ -40,9 +40,9 @@ function PastStats() {
 
 			<div className={styles.list_section}>
 				<div className={styles.list_header}>
-					<p className={styles.list_title}>
+					<div className={styles.list_title}>
 						Team Members Feedback List
-					</p>
+					</div>
 				</div>
 
 				<div className={styles.table_section}>
@@ -56,7 +56,7 @@ function PastStats() {
 					/>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 

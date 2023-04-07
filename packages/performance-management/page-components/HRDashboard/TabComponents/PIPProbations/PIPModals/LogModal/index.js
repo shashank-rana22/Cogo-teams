@@ -14,80 +14,76 @@ function LogModal({
 	source = '',
 }) {
 	const [activeLogTab, setActiveLogTab] = useState(
-		(item?.final_decision || source === 'manager_dashboard') ? 'all' : 'new',
+		(item.final_decision || source === 'manager_dashboard') ? 'all' : 'new',
 	);
 
 	const isDisabled = item.tags.length === item.disabledTags.length && !item.comment;
 
 	return (
-		<div>
-			<Modal
-				show={modal === 'logs'}
-				onClose={() => {
-					setModal('');
-					setItem({});
-				}}
-				size="lg"
-			>
-				<Modal.Header title="Logs" />
-				<div className={styles.upload_modal}>
-					<Modal.Body
-						style={{ maxHeight: '500px' }}
+		<Modal
+			show={modal === 'logs'}
+			onClose={() => {
+				setModal('');
+				setItem({});
+			}}
+			size="lg"
+		>
+			<Modal.Header title="Logs" />
+			<div className={styles.upload_modal}>
+				<Modal.Body
+					style={{ maxHeight: '500px' }}
+				>
+					<Tabs
+						activeTab={activeLogTab}
+						themeType="primary"
+						onChange={setActiveLogTab}
 					>
-						<Tabs
-							activeTab={activeLogTab}
-							themeType="primary"
-							onChange={setActiveLogTab}
-						>
-							{!item?.final_decision && (
-								<TabPanel
-									name="new"
-									title="New Log"
-								>
-									<NewLog
-										item={item}
-										setItem={setItem}
-										// setDisableNext={setDisableNext}
-									/>
-								</TabPanel>
-							)}
-							<TabPanel name="all" title="All Logs">
-								<AllLogs
+						{!item?.final_decision && (
+							<TabPanel
+								name="new"
+								title="New Log"
+							>
+								<NewLog
 									item={item}
+									setItem={setItem}
 								/>
 							</TabPanel>
-						</Tabs>
+						)}
+						<TabPanel name="all" title="All Logs">
+							<AllLogs
+								item={item}
+							/>
+						</TabPanel>
+					</Tabs>
 
-					</Modal.Body>
-				</div>
-				<Modal.Footer>
+				</Modal.Body>
+			</div>
+			<Modal.Footer>
+				<Button
+					size="md"
+					themeType="tertiary"
+					type="button"
+					onClick={() => {
+						setModal('');
+						setItem({});
+					}}
+				>
+					Close
+				</Button>
+
+				{activeLogTab === 'new' && (
 					<Button
 						size="md"
-						themeType="tertiary"
-						type="button"
-						onClick={() => {
-							setModal('');
-							setItem({});
-						}}
+						themeType="primary"
+						type="submit"
+						disabled={isDisabled}
+						onClick={onSubmit}
 					>
-						Close
+						Submit
 					</Button>
-
-					{activeLogTab === 'new' && (
-						<Button
-							size="md"
-							themeType="primary"
-							type="submit"
-							disabled={isDisabled}
-							onClick={onSubmit}
-						>
-							Submit
-						</Button>
-					)}
-				</Modal.Footer>
-			</Modal>
-
-		</div>
+				)}
+			</Modal.Footer>
+		</Modal>
 	);
 }
 

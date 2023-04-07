@@ -14,7 +14,7 @@ function DeadlineModal({
 	const { loading, onUpdateFormDeadline } = useFormDeadline({ setOpenActivateModal, refetchFormDeadline });
 
 	return (
-		<div>
+		<>
 			Please select the deadline for the forms. Forms will be accessible
 			for the edits to the managers till the specified deadline.
 
@@ -63,7 +63,7 @@ function DeadlineModal({
 					</Button>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 export default DeadlineModal;

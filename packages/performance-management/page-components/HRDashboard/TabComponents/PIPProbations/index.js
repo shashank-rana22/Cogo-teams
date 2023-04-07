@@ -27,9 +27,9 @@ function PIPProbations({ source = 'hr_dashboard', modal = '', setModal = () => {
 	};
 
 	const onSubmit = () => {
-		if (item?.tags?.find((x) => x === 'Final discussion held') && item.tags?.length !== 3) {
+		if (item.tags?.find((x) => x === 'Final discussion held') && item.tags?.length !== 3) {
 			Toast.error('All three boxes have to be ticked');
-		} else if (item?.tags?.find((x) => x === 'Final discussion held') && modal === 'logs') {
+		} else if (item.tags?.find((x) => x === 'Final discussion held') && modal === 'logs') {
 			setModal('update');
 		} else {
 			const {
@@ -55,37 +55,35 @@ function PIPProbations({ source = 'hr_dashboard', modal = '', setModal = () => {
 		<div className={styles.container}>
 			{source === 'hr_dashboard' && (
 				<>
-					<div>
-						<Tabs
-							activeTab={activeTab}
-							themeType="secondary"
-							onChange={setActiveTab}
-						>
-							{Object.values(tabPanelComponentMapping).map((tabPanelItem) => {
-								const { name = '', title = '', Component } = tabPanelItem;
+					<Tabs
+						activeTab={activeTab}
+						themeType="secondary"
+						onChange={setActiveTab}
+					>
+						{Object.values(tabPanelComponentMapping).map((tabPanelItem) => {
+							const { name = '', title = '', Component } = tabPanelItem;
 
-								if (!Component) return null;
+							if (!Component) return null;
 
-								return (
-									<TabPanel
-										key={name}
-										name={name}
-										title={title}
-									>
-										<Component
-											activeTab={activeTab}
-											logType={logType}
-											item={item}
-											setItem={setItem}
-											setModal={setModal}
-											refetchList={refetchList}
-											setRefetchList={setRefetchList}
-										/>
-									</TabPanel>
-								);
-							})}
-						</Tabs>
-					</div>
+							return (
+								<TabPanel
+									key={name}
+									name={name}
+									title={title}
+								>
+									<Component
+										activeTab={activeTab}
+										logType={logType}
+										item={item}
+										setItem={setItem}
+										setModal={setModal}
+										refetchList={refetchList}
+										setRefetchList={setRefetchList}
+									/>
+								</TabPanel>
+							);
+						})}
+					</Tabs>
 
 					<div className={styles.button_container}>
 						<Button

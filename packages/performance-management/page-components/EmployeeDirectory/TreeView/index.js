@@ -8,7 +8,6 @@ import styles from './styles.module.css';
 import UserCard from './UserCard';
 
 const scrollToSection = (elementRef) => {
-	// eslint-disable-next-line no-undef
 	window.scrollTo({
 		top      : elementRef.current.offsetTop,
 		behavior : 'smooth',
@@ -52,7 +51,7 @@ function TreeView({ viewType = false }) {
 	}, [loading, users]);
 
 	return (
-		<div>
+		<>
 			<div className={styles.reset_tree}>
 				<Button
 					size="md"
@@ -109,6 +108,7 @@ function TreeView({ viewType = false }) {
 									user={users.userLevel}
 									enlarged
 									refetchTreeParams={refetchTreeParams}
+									key={users.userLevel?.id}
 								/>
 							</div>
 						)}
@@ -123,6 +123,7 @@ function TreeView({ viewType = false }) {
 										user={users.selectedReportee}
 										enlarged
 										refetchTreeParams={refetchTreeParams}
+										key={users.selectedReportee?.id}
 									/>
 								</div>
 							)}
@@ -144,7 +145,7 @@ function TreeView({ viewType = false }) {
 					</>
 				)}
 			</div>
-		</div>
+		</>
 	);
 }
 

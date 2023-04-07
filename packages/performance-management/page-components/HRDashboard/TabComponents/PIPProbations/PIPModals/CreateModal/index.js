@@ -37,7 +37,7 @@ function CreateModal({
 		if (source === 'manual_feedback') {
 			return (<EmployeesTable source setItem={setItem} />);
 		}
-		// if (logType) {
+
 		if (isEmpty(item)) {
 			return (
 				<EmployeesTable source="log_modal" setItem={setItem} />

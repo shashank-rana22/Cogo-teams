@@ -18,7 +18,7 @@ function ManagerDashboard() {
 	};
 
 	return (
-		<div>
+		<>
 			<div className={styles.header}>
 				<div className={styles.header_text}>
 					Manager Dashboard
@@ -68,7 +68,7 @@ function ManagerDashboard() {
 					</TabPanel>
 				</Tabs>
 			</div>
-		</div>
+		</>
 	);
 }
 

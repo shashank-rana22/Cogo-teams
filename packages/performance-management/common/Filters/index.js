@@ -81,9 +81,9 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 			<div className={styles.right_container}>
 				{filterControls.right.map((cntrl) => {
 					if (isEmpty(cntrl)) { return null; }
-					const Element = getElementController(cntrl?.type);
+					const Element = getElementController(cntrl.type);
 
-					const value = startCase(cntrl?.name);
+					const value = startCase(cntrl.name);
 
 					return (
 						<Element

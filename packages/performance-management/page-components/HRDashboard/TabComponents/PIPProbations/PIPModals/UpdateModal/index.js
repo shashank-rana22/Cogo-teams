@@ -23,9 +23,7 @@ function UpdateModal({
 			size="lg"
 		>
 			<Modal.Header title={`update ${item?.log_type}`} />
-			<Modal.Body
-				style={{ maxHeight: '500px' }}
-			>
+			<Modal.Body style={{ maxHeight: '500px' }}>
 				<DecisionModal
 					item={item}
 					setItem={setItem}

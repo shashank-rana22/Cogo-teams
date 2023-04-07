@@ -84,7 +84,7 @@ function UserCard({
 					<Avatar {...getAvatarProps(user)} size="80px" />
 
 					<div className={styles.user_info}>
-						<strong>{startCase(user?.name)}</strong>
+						<strong>{startCase(user?.name || '---')}</strong>
 
 						<div className={styles.id_designation}>
 							<Tooltip
@@ -98,11 +98,11 @@ function UserCard({
 								<div className={styles.designation}>{startCase(user.designation || '')}</div>
 							</Tooltip>
 
-							<div className={styles.id}>{user?.cogo_id}</div>
+							<div className={styles.id}>{user.cogo_id || '---'}</div>
 						</div>
 					</div>
 				</div>
-				<div className={styles.team_count}>{user?.team_count}</div>
+				<div className={styles.team_count}>{user.team_count || '0'}</div>
 			</div>
 		);
 	}

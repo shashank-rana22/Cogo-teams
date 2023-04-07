@@ -55,8 +55,7 @@ function EmployeesTable({ source = 'log_modal', setItem = () => {} }) {
 			fetchReportees();
 		}
 		setRefetchReportees(false);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [refetchReportees]);
+	}, [fetchReportees, refetchReportees]);
 
 	return (
 		<>

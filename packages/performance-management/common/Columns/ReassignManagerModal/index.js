@@ -9,7 +9,7 @@ function ReassignManagerModal({ item, refetchList = () => {} }) {
 	const [openReassign, setOpenReassign] = useState(false);
 
 	const getTitleDiv = () => (
-		<div>
+		<>
 			<div className={styles.user}>
 				{item.name}
 			</div>
@@ -18,11 +18,11 @@ function ReassignManagerModal({ item, refetchList = () => {} }) {
 				{' '}
 				<span className={styles.manager_name}>{item.manager_name}</span>
 			</div>
-		</div>
+		</>
 	);
 
 	return (
-		<div>
+		<>
 			<Button size="sm" onClick={() => setOpenReassign(true)} themeType="secondary">Reassign</Button>
 
 			{openReassign && (
@@ -37,7 +37,7 @@ function ReassignManagerModal({ item, refetchList = () => {} }) {
 					</Modal.Body>
 				</Modal>
 			)}
-		</div>
+		</>
 	);
 }
 

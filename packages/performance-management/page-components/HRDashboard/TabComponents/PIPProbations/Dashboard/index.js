@@ -1,3 +1,4 @@
+import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import useGetColumns from '../../../../../common/Columns';
@@ -55,25 +56,25 @@ function Dashboard({
 				/>
 			</div>
 
-			<div>
-				<div className={styles.heading}>Past PIP &amp; Probation List</div>
-				<div className={styles.filters}>
-					<Filters
-						params={params}
-						setParams={setParams}
-						source="hr_pip_dashboard"
-					/>
-				</div>
-				<UserTableData
-					columns={columns}
-					list={list}
-					loading={loading}
-					pagination={page}
-					page_limit={page_limit}
-					setPagination={setPage}
-					total_count={total_count}
+			<div className={styles.heading}>{`Past ${startCase(logType)} List`}</div>
+
+			<div className={styles.filters}>
+				<Filters
+					params={params}
+					setParams={setParams}
+					source="hr_pip_dashboard"
 				/>
 			</div>
+
+			<UserTableData
+				columns={columns}
+				list={list}
+				loading={loading}
+				pagination={page}
+				page_limit={page_limit}
+				setPagination={setPage}
+				total_count={total_count}
+			/>
 		</div>
 	);
 }

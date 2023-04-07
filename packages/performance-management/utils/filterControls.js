@@ -78,7 +78,7 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 		},
 		{
 			name        : 'CsvType',
-			lable       : 'CSV Type',
+			label       : 'CSV Type',
 			placeholder : 'Type',
 			type        : 'select',
 			isClearable : true,

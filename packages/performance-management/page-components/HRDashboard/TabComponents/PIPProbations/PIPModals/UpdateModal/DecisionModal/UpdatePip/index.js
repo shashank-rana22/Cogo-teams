@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import styles from './styles.module.css';
 
 function UpdatePip({
-	item,
+	item = {},
 	setDisableNext = () => {},
 	setItem = () => {},
 }) {
@@ -16,8 +16,8 @@ function UpdatePip({
 		{ name: 'R2', value: 'confirmed', label: 'Confirm' },
 		{
 			name  : 'R1',
-			value : item?.log_type === 'pip' ? 'exited' : 'extended',
-			label : item?.log_type === 'pip' ? 'Exit' : 'Extend',
+			value : item.log_type === 'pip' ? 'exited' : 'extended',
+			label : item.log_type === 'pip' ? 'Exit' : 'Extend',
 		},
 	];
 
@@ -33,15 +33,23 @@ function UpdatePip({
 		<div className={styles.update_container}>
 			<div className={styles.update_dates_container}>
 				<div className={styles.update_dates}>
-					<div className={styles.lable}>{item?.log_type === 'pip' ? 'Start Date' : 'Joining Date'}</div>
+					<div className={styles.label}>{item.log_type === 'pip' ? 'Start Date' : 'Joining Date'}</div>
 
-					<div style={{ fontWeight: 'bold' }}>{format(item?.start_date, 'dd-MMM-yyyy')}</div>
+					<div style={{ fontWeight: 'bold' }}>
+						{item.start_date ? format(item.start_date, 'dd-MMM-yyyy')
+							: '---'}
+
+					</div>
 				</div>
 
 				<div className={styles.update_dates}>
-					<div className={styles.lable}>End Date</div>
+					<div className={styles.label}>End Date</div>
 
-					<div style={{ fontWeight: 'bold' }}>{format(item?.end_date, 'dd-MMM-yyyy')}</div>
+					<div style={{ fontWeight: 'bold' }}>
+						{item.end_date
+							? format(item.end_date, 'dd-MMM-yyyy') : '---'}
+
+					</div>
 				</div>
 			</div>
 			<RadioGroup
@@ -61,12 +69,12 @@ function UpdatePip({
 			<div className={styles.dates}>
 				{value === 'extended' && (
 					<div className={styles.extend_date}>
-						<div className={styles.lable}>
+						<div className={styles.label}>
 							{` ( Will be Extended to : ${format(extended_date, 'dd-MMM-yyyy')} )`}
 						</div>
 					</div>
 				)}
-				<div className={styles.lable}>
+				<div className={styles.label}>
 					Reason
 				</div>
 				<Textarea

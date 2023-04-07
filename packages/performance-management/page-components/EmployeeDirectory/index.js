@@ -9,7 +9,7 @@ function OrganizationTree() {
 	const [viewType, setViewType] = useState(false);
 
 	return (
-		<div>
+		<>
 			<div className={styles.header}>
 				<div className={styles.header_text}>
 					Organization
@@ -30,7 +30,7 @@ function OrganizationTree() {
 					<TreeView viewType={viewType} />
 				) : <ListView viewType={viewType} />}
 			</div>
-		</div>
+		</>
 
 	);
 }

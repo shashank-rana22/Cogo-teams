@@ -35,8 +35,8 @@ function NewLog({ item = {}, setItem = () => {} }) {
 	};
 
 	return (
-		<div>
-			<div className={styles.lable}>
+		<>
+			<div className={styles.label}>
 				Add Comment
 			</div>
 
@@ -47,17 +47,15 @@ function NewLog({ item = {}, setItem = () => {} }) {
 				placeholder="Text Area"
 				value={comment}
 				onChange={(val) => onChange('comment', val)}
-				// onChange={setComment}
 			/>
 
 			<CheckboxGroup
 				className={styles.checkbox}
 				options={newOptions}
 				value={tags || []}
-				// onChange={onChange}
 				onChange={(val) => onChange('tags', val)}
 			/>
-		</div>
+		</>
 	);
 }
 export default NewLog;

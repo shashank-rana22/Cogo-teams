@@ -29,7 +29,6 @@ function ListView({ viewType = false }) {
 			const response = await trigger();
 			Toast.success('File Downloaded Successfully');
 
-			// eslint-disable-next-line no-undef
 			if (response.data?.url) { window.open(response.data.url, '_blank'); }
 		} catch (e) {
 			Toast.error(e.response?.data.error?.toString());
@@ -43,7 +42,7 @@ function ListView({ viewType = false }) {
 	const columns = useGetColumns({ columnsToShow, refetchList });
 
 	return (
-		<div>
+		<>
 			<div className={styles.download_csv}>
 				<Button
 					size="md"
@@ -69,7 +68,7 @@ function ListView({ viewType = false }) {
 				total_count={total_count}
 				loading={loading}
 			/>
-		</div>
+		</>
 	);
 }
 
