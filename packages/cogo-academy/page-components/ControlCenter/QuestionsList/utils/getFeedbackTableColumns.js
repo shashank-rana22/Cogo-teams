@@ -5,7 +5,7 @@ import { format, startCase } from '@cogoport/utils';
 import styles from '../styles.module.css';
 
 const finalTagsToDisplay = (tags) => {
-	const tagsToDisplay = tags.map((tag) => ({
+	const tagsToDisplay = (tags || []).map((tag) => ({
 		label : tag,
 		size  : 'md',
 	}));
@@ -15,7 +15,7 @@ const finalTagsToDisplay = (tags) => {
 	}] : tagsToDisplay;
 };
 const hiddenTagsToDisplay = (tags) => {
-	const tagsToDisplay = tags.map((tag) => ({
+	const tagsToDisplay = (tags || []).map((tag) => ({
 		label : tag,
 		size  : 'md',
 	}));

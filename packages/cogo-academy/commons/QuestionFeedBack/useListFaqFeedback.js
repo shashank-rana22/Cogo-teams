@@ -11,7 +11,7 @@ const useListfaqFeedback = ({ id, feedbackId }) => {
 			faq_question_id      : id,
 			status               : 'active',
 			is_feedback_positive : false,
-			other_than_id        : feedbackId || undefined,
+			exclude_feedback_id  : feedbackId || undefined,
 		},
 		page,
 		feedback_remark_stats_required : true,
