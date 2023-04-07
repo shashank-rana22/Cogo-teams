@@ -6,7 +6,7 @@ const controls = [
 		type        : 'asyncSelect',
 		asyncKey    : 'list_locations',
 		valueKey    : 'name',
-		initialCall : true,
+		initialCall : false,
 		multiple    : true,
 		params      : {
 			filters: {
@@ -22,7 +22,7 @@ const controls = [
 		type        : 'asyncSelect',
 		asyncKey    : 'list_locations',
 		valueKey    : 'name',
-		initialCall : true,
+		initialCall : false,
 		multiple    : true,
 		params      : {
 			filters: {
@@ -38,7 +38,7 @@ const controls = [
 		type        : 'asyncSelect',
 		asyncKey    : 'list_locations',
 		valueKey    : 'name',
-		initialCall : true,
+		initialCall : false,
 		multiple    : true,
 		params      : {
 			filters: {
@@ -54,7 +54,7 @@ const controls = [
 		type        : 'asyncSelect',
 		asyncKey    : 'list_locations',
 		valueKey    : 'name',
-		initialCall : true,
+		initialCall : false,
 		multiple    : true,
 		params      : {
 			filters: {

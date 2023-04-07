@@ -19,15 +19,8 @@ function ShipmentReport({ activeTab, setActiveTab, response, COLUMNS, loading })
 				</Tabs>
 			</div>
 
-			<div className={styles.export_info}>
-				<div className={styles.shipment_report}>
-					Shipment Report
-				</div>
-
-				<div className={styles.export_results}>
-					<IcMDownload height={12} width={12} style={{ marginRight: '4px' }} />
-					Export Results
-				</div>
+			<div className={styles.shipment_report}>
+				Shipment Report
 			</div>
 
 			{!isEmpty(response) && !loading
@@ -44,15 +37,15 @@ function ShipmentReport({ activeTab, setActiveTab, response, COLUMNS, loading })
 
 			{ (isEmpty(response) && !loading) && (
 				<EmptyState
-					height={350}
-					width={600}
+					height={200}
+					width={300}
 					emptyText="Search for records above"
-					textSize="24px"
+					textSize="16px"
 					flexDirection="column"
 				/>
 			)}
 			{loading && (
-				<Placeholder height="850px" width="868px" margin="50px 20px 20px 0px" />
+				<Placeholder height="850px" width="968px" margin="50px 20px 20px 0px" />
 			)}
 		</div>
 	);

@@ -13,7 +13,7 @@ function SearchContainer({ searchValue, setSearchValue, handleClick, loading }) 
 			/>
 			<Button
 				size="md"
-				themeType="tertiary"
+				themeType="primary"
 				onClick={handleClick}
 				disabled={loading}
 			>

@@ -24,6 +24,12 @@ const athena_dashboard = {
 			feature      : 'athena_dashboard',
 			service_name : 'athena',
 		},
+		{
+			api          : 'list_locations',
+			access_type  : 'private',
+			feature      : 'athena_dashboard',
+			service_name : 'location',
+		},
 	],
 };
 

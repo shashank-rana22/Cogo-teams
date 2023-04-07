@@ -2,7 +2,7 @@ const controls = [
 	{
 		name        : 'country_values',
 		placeholder : 'Countries',
-		width       : '150px',
+		width       : '180px',
 		options     : [
 			{ label: 'INDIA', value: 'INDIA' },
 		],
@@ -19,7 +19,7 @@ const controls = [
 	{
 		name        : 'shipment_mode_values',
 		placeholder : 'Shipment Mode',
-		width       : '200px',
+		width       : '220px',
 		options     : [
 			{ label: 'SEA', value: 'SEA' },
 			{ label: 'AIR', value: 'AIR' },
@@ -28,7 +28,7 @@ const controls = [
 	{
 		name        : 'incoterm_values',
 		placeholder : 'Incoterm',
-		width       : '150px',
+		width       : '160px',
 		options     : [
 			{ label: 'CIF', value: 'CIF' },
 			{ label: 'CF', value: 'CF' },

@@ -1803,16 +1803,13 @@ const navigationMappingAdmin = {
 		],
 	},
 	athena_dashboard: {
-		key         : 'athena_dashboard',
-		title       : 'Athena Dashboard',
-		module_type : 'dashboards',
-		icon        : IcMDashboard,
-		href        : '/v2/athena-dashboard',
-		as          : '/v2/athena-dashboard',
-		main_apis   : [
-			'list_locations',
-		],
-		possible_apis: apis.athena,
+		key           : 'athena_dashboard',
+		title         : 'Athena Dashboard',
+		module_type   : 'dashboards',
+		icon          : IcMDashboard,
+		href          : '/v2/athena-dashboard',
+		as            : '/v2/athena-dashboard',
+		possible_apis : apis.athena,
 	},
 	kam_monitoring: {
 		key         : 'kam_monitoring',
