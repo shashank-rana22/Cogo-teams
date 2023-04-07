@@ -11,29 +11,25 @@ function useBulkAssignChat({ setSelectedAutoAssign = () => {}, setAutoAssignChat
 	}, { manual: true, autoCancel: false });
 
 	const bulkAssignChat = async ({ selectedAutoAssign = {} }) => {
-		const filteredChatsPayload = Object.keys(selectedAutoAssign || {})
-			.filter((key) => selectedAutoAssign[key]).map((key) => {
-				const eachChat = selectedAutoAssign[key] || {};
-				const {
-					channel_type = '',
-					id = '',
-					user_id = '',
-					mobile_no = '',
-					sender = '',
-					lead_user_id = '',
-					organization_id = '',
-				} = getActiveCardDetails(eachChat) || {};
-				return {
-					channel                 : channel_type,
-					channel_chat_id         : id,
-					user_id,
-					whatsapp_number_eformat : channel_type === 'whatsapp' ? mobile_no : undefined,
-					lead_user_id            : (!(user_id) && lead_user_id) ? lead_user_id : undefined,
-					organization_id,
-					sender,
+		const filteredChatsPayload = Object.values(selectedAutoAssign || {}).map((eachChat) => {
+			const {
+				channel_type = '',
+				id = '',
+				user_id = '',
+				mobile_no = '',
+				sender = '',
+				lead_user_id = '',
+			} = getActiveCardDetails(eachChat) || {};
+			return {
+				channel                 : channel_type,
+				channel_chat_id         : id,
+				user_id,
+				whatsapp_number_eformat : channel_type === 'whatsapp' ? mobile_no : undefined,
+				lead_user_id            : (!(user_id) && lead_user_id) ? lead_user_id : undefined,
+				sender                  : channel_type === 'platform_chat' ? sender : undefined,
 
-				};
-			});
+			};
+		});
 
 		try {
 			await trigger({

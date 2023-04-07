@@ -46,7 +46,11 @@ function MessageList(messageProps) {
 
 	const handleCheckedChats = (item, id) => {
 		if (id in selectedAutoAssign) {
-			setSelectedAutoAssign((p) => ({ ...p, [id]: null }));
+			setSelectedAutoAssign((p) => {
+				const arg = p;
+				delete (arg[id]);
+				return { ...p };
+			});
 		} else {
 			setSelectedAutoAssign((p) => ({ ...p, [id]: item }));
 		}
