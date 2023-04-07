@@ -100,6 +100,12 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
+			api          : 'list_faq_keywords',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+
 	],
 	faq: [
 		{

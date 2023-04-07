@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import useListFaqTags from '../hooks/useListFaqTags';
+import useListKeywords from '../hooks/useListKeywords';
 import keyWordListColumns from '../TableConfigurations/keyWordListColumns';
 
 import Header from './Header';
@@ -8,25 +8,25 @@ import KeywordsTable from './KeywordsTable';
 import useDeleteTag from './useDeleteTag';
 
 function KeywordsComponent({ setConfigurationPage, reset }) {
-	const [searchTagsInput, setSearchTagsInput] = useState('');
+	const [searchKeyWord, setSearchKeyWord] = useState('');
 	const [sortType, setSortType] = useState(true);
 
 	const {
 		data,
 		loading = false,
-		activeTag,
-		setActiveTag,
-		tagCurrentPage,
-		setTagCurrentPage,
-		fetchFaqTag,
-	} = useListFaqTags({ searchTagsInput, sortType });
+		activeKeyword,
+		setActiveKeyword,
+		keywordCurrentPage,
+		setKeywordCurrentPage,
+		fetchFaqKeyword,
+	} = useListKeywords({ searchKeyWord, sortType });
 
 	const {
 		onClickDeleteIcon = () => {},
 		showPopOver,
 		setShowPopOver = () => {},
 		loading:updateApiLoading,
-	} = useDeleteTag({ fetchFaqTag });
+	} = useDeleteTag({ fetchFaqKeyword });
 
 	const { listColumns = [] } = keyWordListColumns({
 		setSortType,
@@ -34,31 +34,30 @@ function KeywordsComponent({ setConfigurationPage, reset }) {
 		showPopOver,
 		setShowPopOver,
 		updateApiLoading,
-		activeTag,
+		activeKeyword,
 		sortType,
 	});
 
 	useEffect(() => {
-		setTagCurrentPage(1);
-	}, [activeTag, setTagCurrentPage]);
+		setKeywordCurrentPage(1);
+	}, [activeKeyword, setKeywordCurrentPage]);
 
 	return (
 		<div>
 			<Header
-				activeTag={activeTag}
-				setActiveTag={setActiveTag}
-				searchTagsInput={searchTagsInput}
-				setSearchTagsInput={setSearchTagsInput}
-				reset={reset}
+				activeKeyword={activeKeyword}
+				setActiveKeyword={setActiveKeyword}
+				searchKeyWord={searchKeyWord}
+				setSearchKeyWord={setSearchKeyWord}
 			/>
 
 			<KeywordsTable
-				activeTag={activeTag}
+				activeKeyword={activeKeyword}
 				columns={listColumns}
 				data={data}
 				tagsLoading={loading}
-				tagCurrentPage={tagCurrentPage}
-				setTagCurrentPage={setTagCurrentPage}
+				keywordCurrentPage={keywordCurrentPage}
+				setKeywordCurrentPage={setKeywordCurrentPage}
 				setConfigurationPage={setConfigurationPage}
 				reset={reset}
 			/>
