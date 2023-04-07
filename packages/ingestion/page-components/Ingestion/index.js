@@ -5,17 +5,17 @@ import TableSection from './TableSection';
 
 function Ingestion() {
 	const {
-		columns,
-		onPageChange,
-		loading,
-		setTableModal,
-		tableModal,
-		data,
-		row,
-		formProps,
-		params,
-		setParams,
-		refetch,
+		columns = [],
+		onPageChange = () => {},
+		loading = false,
+		setTableModal = () => {},
+		tableModal = '',
+		data = {},
+		row = {},
+		formProps = {},
+		params = {},
+		setParams = () => {},
+		refetch = () => {},
 	} = useGetIngestionList();
 
 	return (

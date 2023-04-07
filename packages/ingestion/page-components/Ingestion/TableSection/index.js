@@ -4,7 +4,6 @@ import Filters from './Filters';
 import List from './List';
 import ReUploadModal from './Modals/ReUploadModal';
 import UploadListModal from './Modals/UploadListModal';
-import styles from './styles.module.css';
 
 function TableSection(props) {
 	const {
@@ -32,7 +31,7 @@ function TableSection(props) {
 	const Component = TABLE_MODAL_MAPPING[tableModal] || null;
 
 	return (
-		<div className={styles.table_main_container}>
+		<>
 
 			<Filters setParams={setParams} params={params} formProps={formProps} />
 			<List
@@ -51,7 +50,7 @@ function TableSection(props) {
 					loading={loading}
 				/>
 			)}
-		</div>
+		</>
 	);
 }
 

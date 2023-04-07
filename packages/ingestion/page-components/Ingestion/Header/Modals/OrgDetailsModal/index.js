@@ -1,3 +1,4 @@
+import { CONSTANT_KEYS } from '../../../../../constants/org-details-mapping';
 import { getElementController } from '../../../../../utils/get-element-controls';
 
 import { CpDiv, IeDiv, LeadDiv } from './NextHeading';
@@ -5,15 +6,8 @@ import styles from './styles.module.css';
 
 function OrgDetailsModal({
 	uploadData, formProps = {}, modalControls = [],
-
 }) {
 	const { control, formState: { errors } } = formProps;
-
-	const CONSTANT_KEYS = {
-		LEAD              : 'lead',
-		CHANNEL_PARTNER   : 'partner',
-		IMPORTER_EXPORTER : 'organization',
-	};
 
 	const {
 		LEAD, CHANNEL_PARTNER, IMPORTER_EXPORTER,

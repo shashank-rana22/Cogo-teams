@@ -1,27 +1,10 @@
 import { PARTNER_IDS } from '@cogoport/constants/role_ids';
 
-// eslint-disable-next-line
-import countries from '../../../.data-store/constants/countries.json';
-
 const { INDIA_PARTNER_ID:indiaId, VIETNAM_PARTNER_ID:vietnamId } = PARTNER_IDS;
-const indiaOption = countries.find((country) => country.country_code === 'IN');
-
-const countryOptions = [{
-	label : indiaOption?.name,
-	value : indiaOption?.id,
-}];
-
-countries.filter((country) => country.country_code !== 'IN').map((country) => {
-	const option = { label: country.name, value: country.id };
-
-	countryOptions.push(option);
-
-	return countryOptions;
-});
 
 const PARTNER_OPTIONS = [
-	{ label: 'CogoPort India', value: indiaId },
-	{ label: 'CogoPort Vietnam', value: vietnamId },
+	{ label: 'Cogoport India', value: indiaId },
+	{ label: 'Cogoport Vietnam', value: vietnamId },
 ];
 
 const controls = [
@@ -31,6 +14,7 @@ const controls = [
 		label       : 'Country',
 		type        : 'asyncSelect',
 		params      : { filters: { type: ['country'] } },
+		initialCall : false,
 		asyncKey    : 'list_locations',
 		placeholder : 'Select Country',
 		isClearable : true,

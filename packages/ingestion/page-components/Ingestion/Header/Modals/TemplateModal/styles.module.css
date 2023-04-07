@@ -10,3 +10,13 @@
 .heading {
 	margin-bottom: 8px;
 }
+
+.header {
+	display: flex;
+	align-items: center;
+}
+
+.template_button {
+	width: 50%;
+	height: 60px;
+}

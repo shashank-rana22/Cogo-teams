@@ -10,7 +10,7 @@ import styles from '../styles.module.css';
 function useGetIngestionList() {
 	const [row, setRow] = useState({});
 
-	const [tableModal, setTableModal] = useState();
+	const [tableModal, setTableModal] = useState('');
 
 	const [params, setParams] = useState({
 		page                       : 1,
@@ -64,15 +64,15 @@ function useGetIngestionList() {
 		{
 			key      : 'name',
 			Header   : 'FILE NAME',
-			accessor : ({ request_files = [] }) => (
-				<div className={styles.name}>{startCase(request_files[0]?.sheet_name || '___')}</div>
+			accessor : ({ request_files = {} }) => (
+				<div className={styles.name}>{startCase(request_files?.sheet_name || '___')}</div>
 			),
 		},
 		{
 			key      : 'num_org',
 			Header   : 'NUMBER OF ORGS',
-			accessor : ({ request_files = [] }) => (
-				<div className={styles.number_of_org}>{request_files[0]?.total_records_count || '___'}</div>
+			accessor : ({ request_files = {} }) => (
+				<div className={styles.number_of_org}>{request_files?.total_records_count || '___'}</div>
 
 			),
 		},
@@ -104,10 +104,10 @@ function useGetIngestionList() {
 		{
 			id       : 'status',
 			Header   : 'STATUS',
-			accessor : ({ request_files = [] }) => (
+			accessor : ({ request_files = {} }) => (
 				<div className={styles.status}>
-					<Pill size="sm" color={UPLOAD_STATUS_MAPPING[request_files[0]?.stage]}>
-						{request_files[0]?.stage ? startCase(request_files[0]?.stage) : '___'}
+					<Pill size="sm" color={UPLOAD_STATUS_MAPPING[request_files?.stage]}>
+						{request_files?.stage ? startCase(request_files?.stage) : '___'}
 					</Pill>
 				</div>
 
@@ -123,19 +123,18 @@ function useGetIngestionList() {
 		{
 			key      : 'error',
 			Header   : 'ERROR REPORT',
-			accessor : ({ request_files = [] }) => (
+			accessor : ({ request_files = {} }) => (
 				<div className={styles.name}>
-					{request_files[0]?.errored_data_url ? (
+					{request_files?.errored_data_url ? (
 						<Button
-							onClick={() => { downloadErrorCsv(request_files[0]?.errored_data_url); }}
+							onClick={() => { downloadErrorCsv(request_files?.errored_data_url); }}
 							size="md"
 							themeType="tertiary"
 						>
-							{' '}
 							<IcMDownload style={{ marginRight: '4px' }} />
 							Download
 						</Button>
-					) : ''}
+					) : null}
 
 				</div>
 			),
@@ -146,12 +145,11 @@ function useGetIngestionList() {
 			accessor : (item) => (
 				<div className={styles.re_upload}>
 
-					{item.request_files?.[0].errored_data_url ? (
+					{item?.request_files?.errored_data_url ? (
 						<Button onClick={() => { reUploadFiles(item); }} size="md" themeType="secondary">
-							{' '}
 							Re-Upload
 						</Button>
-					) : ''}
+					) : null}
 
 				</div>
 			),
@@ -162,12 +160,11 @@ function useGetIngestionList() {
 			accessor : (item) => (
 				<div className={styles.uploaded}>
 
-					{item.request_files?.[0].errored_data_url ? (
+					{item.request_files?.errored_data_url ? (
 						<Button onClick={() => { tableListModal(item); }} size="md" themeType="tertiary">
-							{' '}
 							View All
 						</Button>
-					) : ''}
+					) : null}
 
 				</div>
 			),

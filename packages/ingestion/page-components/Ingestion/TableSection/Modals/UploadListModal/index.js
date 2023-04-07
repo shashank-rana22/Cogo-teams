@@ -24,7 +24,6 @@ function UploadListModal({ tableModal = '', setTableModal = () => {}, row = {} }
 				<Modal.Header title={(
 					<div style={{ display: 'flex', alignItems: 'center' }}>
 						<IcMUpload style={{ margin: '0 4px 0 0' }} />
-						{' '}
 						Upload List
 					</div>
 				)}
@@ -47,7 +46,6 @@ function UploadListModal({ tableModal = '', setTableModal = () => {}, row = {} }
 			<Modal.Header title={(
 				<div className={styles.header}>
 					<IcMUpload style={{ margin: '0 4px 0 0' }} />
-					{' '}
 					Upload List
 				</div>
 			)}

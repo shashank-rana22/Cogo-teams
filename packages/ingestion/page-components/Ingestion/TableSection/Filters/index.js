@@ -8,10 +8,7 @@ import { getElementController } from '../../../../utils/get-element-controls';
 
 import styles from './styles.module.css';
 
-function Filters(props) {
-	const {
-		setParams = () => {},
-	} = props;
+function Filters({ setParams = () => {} }) {
 	const [search, setSearch] = useState('');
 
 	const formProps = useForm();

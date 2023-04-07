@@ -5,14 +5,12 @@ import EmptyState from '../../../../common/EmptyState';
 
 import styles from './styles.module.css';
 
-function List(props) {
-	const {
-		columns = [],
-		onPageChange = () => {},
-		data,
-		loading = false,
-	} = props;
-
+function List({
+	columns = [],
+	onPageChange = () => {},
+	data,
+	loading = false,
+}) {
 	const { list, page, page_limit, total_count } = data || {};
 
 	if (isEmpty(list) && !loading) {

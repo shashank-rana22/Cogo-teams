@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { IcMDownload, IcMUpload } from '@cogoport/icons-react';
+import { useState } from 'react';
 
 import { CONSTANT_KEYS } from '../../../constants/header-mapping';
 import usePostIngestionData from '../../../hooks/usePostIngestionData';
@@ -13,11 +14,11 @@ import UploadModal from './Modals/UploadModal';
 import styles from './styles.module.css';
 
 const {
-	TEMPLATE, CHOOSE, ORG_DETAILS, PROVIDER_SELECT, UPLOAD,
+	CHOOSE, ORG_DETAILS, PROVIDER_SELECT, UPLOAD,
 } = CONSTANT_KEYS;
 
 const INGESTION_COMPONENTS_MAPPING = {
-	[TEMPLATE]        : TemplateModal,
+	// [TEMPLATE]        : TemplateModal,
 	[CHOOSE]          : ChooseModal,
 	[ORG_DETAILS]     : OrgDetailsModal,
 	[PROVIDER_SELECT] : ProviderSelectModal,
@@ -25,6 +26,7 @@ const INGESTION_COMPONENTS_MAPPING = {
 };
 
 function Header({ refetch = () => {} }) {
+	const [template, setTemplate] = useState('');
 	const {
 		setUploadData = () => {},
 		uploadData = {},
@@ -54,7 +56,7 @@ function Header({ refetch = () => {} }) {
 	const Component = INGESTION_COMPONENTS_MAPPING[show?.screen] || null;
 
 	return (
-		<div>
+		<>
 			<h1 style={{ margin: 0 }}>
 				Ingestion
 			</h1>
@@ -64,7 +66,10 @@ function Header({ refetch = () => {} }) {
 					size="lg"
 					themeType="secondary"
 					style={{ marginRight: '16px' }}
-					onClick={() => setShow('template')}
+					onClick={() => setShow({
+						open   : true,
+						screen : 'template',
+					})}
 				>
 					<IcMDownload style={{ marginRight: '4px' }} />
 					Download Templates
@@ -90,7 +95,6 @@ function Header({ refetch = () => {} }) {
 					<Modal.Header title={(
 						<div style={{ display: 'flex', alignItems: 'center' }}>
 							<IcMUpload style={{ margin: '0 4px 0 0' }} />
-							{' '}
 							Upload CSV
 						</div>
 					)}
@@ -128,8 +132,8 @@ function Header({ refetch = () => {} }) {
 				</Modal>
 			)}
 
-			<TemplateModal setShow={setShow} show={show} />
-		</div>
+			<TemplateModal setTemplate={setTemplate} template={template} />
+		</>
 
 	);
 }

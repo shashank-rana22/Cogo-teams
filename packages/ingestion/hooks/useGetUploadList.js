@@ -74,11 +74,10 @@ function useGetUploadList(id) {
 				<div className={styles.name}>
 					{errored_data_url ? (
 						<Button onClick={() => { downloadErrorCsv(errored_data_url); }} size="md" themeType="tertiary">
-							{' '}
 							<IcMDownload style={{ marginRight: '4px' }} />
 							Download
 						</Button>
-					) : ''}
+					) : null}
 
 				</div>
 			),

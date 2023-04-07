@@ -12,7 +12,7 @@ function usePostIngestionData({ refetch = () => {} }) {
 		screen : '',
 	});
 
-	const { profile: { partner = '' } } = useSelector((state) => state);
+	const { profile: { partner } } = useSelector((state) => state);
 	const { partner_user_id = '' } = partner || {};
 
 	const formProps = useForm();

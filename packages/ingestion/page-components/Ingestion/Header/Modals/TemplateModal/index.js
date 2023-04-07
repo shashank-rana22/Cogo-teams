@@ -5,19 +5,18 @@ import useGetTemplate from '../../../../../hooks/useGetTemplate';
 
 import styles from './styles.module.css';
 
-function TemplateModal({ show = '', setShow = () => {} }) {
+function TemplateModal({ template = '', setTemplate = () => {} }) {
 	const { getTemplateCsv = () => {} } = useGetTemplate();
 
 	const onClose = () => {
-		setShow('');
+		setTemplate('');
 	};
 
 	return (
-		<Modal size="md" show={show === 'template'} onClose={onClose} placement="center">
+		<Modal size="md" show={template === 'template'} onClose={onClose} placement="center">
 			<Modal.Header title={(
-				<div style={{ display: 'flex', alignItems: 'center' }}>
+				<div className={styles.header}>
 					<IcMDownload style={{ margin: '0 4px 0 0' }} />
-					{' '}
 					Download Templates
 				</div>
 			)}
@@ -28,7 +27,7 @@ function TemplateModal({ show = '', setShow = () => {} }) {
 					<Button
 						themeType="secondary"
 						onClick={() => getTemplateCsv('lead')}
-						style={{ height: '60px', width: '50%' }}
+						className={styles.template_button}
 					>
 						Leads Template
 
@@ -36,7 +35,7 @@ function TemplateModal({ show = '', setShow = () => {} }) {
 					<Button
 						themeType="secondary"
 						onClick={() => getTemplateCsv('partner')}
-						style={{ height: '60px', width: '50%' }}
+						className={styles.template_button}
 
 					>
 						Channel Partner Template
@@ -45,7 +44,7 @@ function TemplateModal({ show = '', setShow = () => {} }) {
 					<Button
 						themeType="secondary"
 						onClick={() => getTemplateCsv('organization')}
-						style={{ height: '60px', width: '50%' }}
+						className={styles.template_button}
 
 					>
 						Importer Exporter Template

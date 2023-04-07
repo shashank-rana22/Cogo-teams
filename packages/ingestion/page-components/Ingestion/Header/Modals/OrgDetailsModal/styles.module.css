@@ -29,10 +29,8 @@
 
 .field_controller {
 	:global {
-		.ui_select_display_container {
 			.ui_select_input_placeholder {
-				color: #cacaca;
-			}
+			color: #cacaca;
 		}
 	}
 }

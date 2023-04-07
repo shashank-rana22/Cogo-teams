@@ -20,7 +20,6 @@ function ReUploadModal({ tableModal = '', setTableModal = () => {}, row = {} }) 
 			<Modal.Header title={(
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<IcMUpload style={{ margin: '0 4px 0 0' }} />
-					{' '}
 					Re - Upload CSV
 				</div>
 			)}

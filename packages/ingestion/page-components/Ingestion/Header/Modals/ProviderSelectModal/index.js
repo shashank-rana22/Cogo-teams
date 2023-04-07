@@ -48,7 +48,7 @@ function ProviderSelectModal({ setShow = () => {}, setUploadData = () => {}, upl
 
 	return (
 
-		<div>
+		<>
 			<div className={styles.heading}>What do you wish to upload CSV for?</div>
 
 			<div className={styles.provider_container}>
@@ -59,7 +59,8 @@ function ProviderSelectModal({ setShow = () => {}, setUploadData = () => {}, upl
 							onChoose(response);
 						}}
 						key={response?.key}
-						style={{ width: '80%', height: '44px' }}
+						// style={{ width: '80%', height: '44px' }}
+						className={styles.provider_button}
 					>
 						{response?.key}
 
@@ -68,7 +69,7 @@ function ProviderSelectModal({ setShow = () => {}, setUploadData = () => {}, upl
 
 			</div>
 
-		</div>
+		</>
 
 	);
 }

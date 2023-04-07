@@ -13,7 +13,7 @@ function useGetTemplate() {
 
 			window.open(response?.data?.template_file_url, '_blank');
 		} catch (error) {
-			Toast.error('error');
+			Toast.error(error?.message);
 		}
 	};
 
