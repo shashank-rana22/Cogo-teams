@@ -1,0 +1,49 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: max-content;
+	margin: 8px;
+}
+
+.div_container {
+	display: flex;
+}
+
+.styled_button {
+	margin-bottom: 8px;
+}
+
+.cancel_modal {
+	display: flex;
+	flex-direction: column;
+	padding: 10px 5px;
+}
+
+.sub_cancel_modal {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 12px;
+}
+
+.cancel_invoice {
+	margin-bottom: 12px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.styled_reason {
+	margin-top: 12px;
+	margin-bottom: 6px;
+	font-size: 16px;
+}
+
+.styled_remarks {
+	margin-top: 12px;
+	margin-bottom: 6px;
+	font-size: 16px;
+}
+
+.confirm_button {
+	display: flex;
+	margin-top: 12px;
+}

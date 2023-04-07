@@ -1,0 +1,32 @@
+.date_container {
+	display: flex;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.date_text {
+	margin-right: 12px;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.input {
+	width: 200px;
+	margin-right: 12px;
+}
+
+.filter_container {
+	margin-top: 20px;
+}
+
+.entity_container {
+	display: flex;
+	align-items: center;
+	margin-top: 12px;
+}
+
+.styled_text {
+	margin-right: 8px;
+	font-size: 14px;
+	font-weight: 500;
+}

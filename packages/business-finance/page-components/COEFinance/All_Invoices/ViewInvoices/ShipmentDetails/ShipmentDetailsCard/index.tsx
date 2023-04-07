@@ -8,7 +8,6 @@ import {
 	Checkbox,
 } from '@cogoport/components';
 import { IcCFtick, IcMCrossInCircle, IcMInfo } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import { format, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -63,11 +62,9 @@ function ShipmentDetailsCard({
 		billDate,
 		status = '',
 		placeOfSupply = '',
+		billType = '',
+		isProforma,
 	} = bill || {};
-
-	const { query } = useRouter();
-	const { billType, isProforma } = query;
-
 	const [DetailsCard, setDetailsCard] = useState([
 		{
 			id    : 1,

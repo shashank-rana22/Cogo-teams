@@ -32,7 +32,7 @@ function ServiceDetail({ item, service, formattedData }) {
 			{
 				item.source && (
 					<div className={styles.quantity}>
-						{item.source}
+						{item.source === 'spot_search' ? 'Spot search - lock freight' : startCase(item.source)}
 					</div>
 				)
 			}

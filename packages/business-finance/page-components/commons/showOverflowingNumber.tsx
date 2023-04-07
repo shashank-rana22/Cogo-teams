@@ -5,7 +5,7 @@ const showOverflowingNumber = (value: number | string, maxLength:number) => {
 
 	if (String(newValue).length > maxLength) {
 		return (
-			<Tooltip content={newValue}>
+			<Tooltip content={newValue} interactive>
 				<div>
 					{(newValue as string).substring(0, maxLength)}
 					...

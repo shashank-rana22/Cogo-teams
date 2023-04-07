@@ -1,0 +1,44 @@
+.form_container {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 25px 25px 0;
+
+	:global {
+		.ui_upload_droparea_container {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+		}
+
+		.ui_upload_droparea_icon {
+			margin-right: 5%;
+		}
+	}
+
+	@media (max-width: 786px) {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+.form_group {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 40px;
+	margin-right: 3%;
+}
+
+.form_label {
+	margin-bottom: 6px;
+	text-align: start;
+}
+
+.error_message {
+	font-size: 12px;
+	font-weight: 400;
+	color: #cb6464;
+}
+
+.optional_tag {
+	font-size: 12px;
+}
