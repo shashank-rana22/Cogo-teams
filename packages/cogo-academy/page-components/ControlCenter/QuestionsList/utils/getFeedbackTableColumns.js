@@ -14,6 +14,13 @@ const finalTagsToDisplay = (tags) => {
 		size  : 'md',
 	}] : tagsToDisplay;
 };
+const hiddenTagsToDisplay = (tags) => {
+	const tagsToDisplay = tags.map((tag) => ({
+		label : tag,
+		size  : 'md',
+	}));
+	return tagsToDisplay.length > 3 ? [...tagsToDisplay.slice(3, tagsToDisplay.length)] : '';
+};
 const truncate = (str) => (str?.length > 38 ? `${startCase(str.substring(0, 36))}...` : startCase(str));
 
 const columns = ({
@@ -40,17 +47,55 @@ const columns = ({
 
 			return (
 				<div className={styles.pills}>
+					{hiddenTagsToDisplay(tags) ? (
+						<Tooltip
+							content={(
+								<div>
+									{(hiddenTagsToDisplay(tags) || []).map((ele) => (
+										<Pill
+											className={styles.inner_pills}
+											key={ele.label}
+											size="sm"
+											color="white"
+										>
+											{ele.label}
+										</Pill>
+									))}
 
-					{(finalTagsToDisplay(tags) || []).map((ele) => (
-						<Pill
-							className={styles.questions_tag}
-							key={ele.label}
-							size="sm"
-							color="white"
+								</div>
+							)}
+							placement="right"
 						>
-							{ele.label}
-						</Pill>
-					))}
+							<div>
+								{(finalTagsToDisplay(tags) || []).map((ele) => (
+									<Pill
+										className={styles.questions_tag}
+										key={ele.label}
+										size="sm"
+										color="white"
+									>
+										{ele.label}
+									</Pill>
+								))}
+
+							</div>
+						</Tooltip>
+					) :	(
+						<div>
+							{(finalTagsToDisplay(tags) || []).map((ele) => (
+								<Pill
+									className={styles.questions_tag}
+									key={ele.label}
+									size="sm"
+									color="white"
+								>
+									{ele.label}
+								</Pill>
+							))}
+
+						</div>
+					)}
+
 				</div>
 			);
 		},
