@@ -1,5 +1,5 @@
 // import { Toast } from '@cogoport/components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // import handleMinimizeTest from '../utils/handleMinimizeTest';
 
@@ -14,10 +14,10 @@ import InstructionsModal from './components/RightSection/InstructionsModal';
 import useGetUserTestQuestion from './hooks/useGetUserTestQuestion';
 import styles from './styles.module.css';
 
-function Ongoing({ testData, page, setActiveState, currentQuestionId, test_user_mapping_state }) {
+function Ongoing({ testData, setActiveState, currentQuestionId, test_user_mapping_state, page }) {
 	const { guidelines = [] } = testData || {};
 
-	const [currentQuestion, setCurrentQuestion] = useState(page || 1);
+	const [currentQuestion, setCurrentQuestion] = useState(1);
 	const [subQuestion, setSubQuestion] = useState(1);
 	// const [isFullscreen, setIsFullscreen] = useState(false);
 	const [showLeaveTestModal, setShowLeaveTestModal] = useState(false);
@@ -32,8 +32,8 @@ function Ongoing({ testData, page, setActiveState, currentQuestionId, test_user_
 		question_data,
 		test_user_mapping_id,
 		total_question_count,
-		user_appearance,
-	} = useGetUserTestQuestion({ currentQuestionId, test_user_mapping_state });
+		user_appearance = [],
+	} = useGetUserTestQuestion({ currentQuestionId, test_user_mapping_state, page });
 
 	// const { endTest, endTestLoading } = useEndTest({
 	// 	setActiveState,
@@ -78,6 +78,15 @@ function Ongoing({ testData, page, setActiveState, currentQuestionId, test_user_
 
 	// 	return () => document.removeEventListener('visibilitychange', onVisibilityChange);
 	// }, [endTest]);
+
+	useEffect(() => {
+		if ((!(page && page !== 'undefined')
+		|| (!(currentQuestionId && currentQuestionId !== 'undefined') && page && page !== 'undefined' && page > 1))) {
+			setCurrentQuestion(1);
+		} else {
+			setCurrentQuestion(Number(page));
+		}
+	}, [currentQuestionId, page]);
 
 	if (showTimeOverModal) {
 		return (
