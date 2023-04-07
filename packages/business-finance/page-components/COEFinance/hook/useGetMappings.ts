@@ -5,7 +5,7 @@ const useGetTaggingBills = ({ billId }: { billId:string }) => {
 		{
 			url     : '/purchase/bills/tagging-map',
 			method  : 'get',
-			authKey : 'get_purchase_bills_daily_tagging_map',
+			authKey : 'get_purchase_bills_tagging_map',
 			params  : { billId },
 		},
 		{ manual: false },
