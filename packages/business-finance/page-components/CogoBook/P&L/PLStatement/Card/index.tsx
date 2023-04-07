@@ -33,12 +33,11 @@ function Card({
 }) {
 	const [modal, setModal] = useState(false);
 	const [customModal, setCustomModal] = useState(false);
-	const [deleteData, setDeleteData] = useState([]);
 	const { refetch, saveLoading } = useSaveCustom({ filters });
 	const {
 		refetch:refetchSave, saveData, loading, LoadingDelete,
 		refetchDelete,
-	} = useSaveCustomList({ deleteData, setCustomModal });
+	} = useSaveCustomList({ setCustomModal });
 
 	const content = () => (
 		<div className={styles.content_container}>
@@ -91,8 +90,7 @@ function Card({
 	};
 
 	const handleDelete = (item) => {
-		setDeleteData(item);
-		refetchDelete();
+		refetchDelete(item);
 	};
 
 	return (
@@ -230,8 +228,6 @@ function Card({
 											cogoEntityId = '', month = '', rowCheck,
 											radio = '', chip = '',
 										} = JSON.parse(filtersItem) || {};
-
-										console.log(month, 'month');
 
 										return (
 											<div className={styles.filters}>
