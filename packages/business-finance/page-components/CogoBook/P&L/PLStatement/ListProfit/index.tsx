@@ -387,7 +387,177 @@ function ListProfit({
 					</div>
 
 					{getRelevantData()?.map((itemValue) => {
-						const ratio = ratioData?.turnoverRatioDetails?.[itemValue?.key] || 1;
+						const ratio = ratioData?.turnoverRatioDetails?.[itemValue?.key];
+						if (itemValue?.type === 'total') {
+							return (
+								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
+									{isRowVisible && (
+										<div className={styles.particular_data}>
+											{(totalEmployeeBenefitExpenses).toLocaleString('en-IN', options)}
+										</div>
+									)}
+									{dropDown?.employee && (
+										<>
+											{' '}
+											{isRowVisible && <div>{(esops).toLocaleString('en-IN', options)}</div>}
+											{isRowVisible && (
+												<div>
+													{(gratuityLeaveEncashment).toLocaleString('en-IN', options)}
+												</div>
+											)}
+
+											{isRowVisible && (
+												<>
+													<div>
+														{(personnelCost).toLocaleString('en-IN', options)}
+													</div>
+
+													<div>
+														{(housekeepingSecuritySubscriptionsTravelStayAndCc
+														).toLocaleString('en-IN', options)}
+
+													</div>
+
+													<div>
+														{(salariesBonusIncentivesAndStaffWelfareExpenses
+														).toLocaleString('en-IN', options)}
+													</div>
+												</>
+											)}
+										</>
+									)}
+									{isRowVisible && (
+										<div className={styles.particular_data}>
+											{(totalDepreciationAndAmortization).toLocaleString('en-IN', options)}
+										</div>
+									)}
+									{isRowVisible && (
+										<div className={styles.particular_data}>
+											{(totalFinanceCost
+											).toLocaleString('en-IN', options)}
+
+										</div>
+									)}
+									{dropDown?.finance && (
+										<>
+											{isRowVisible
+											&& (
+												<div>
+													{(foreignExchangeGainNet
+													).toLocaleString('en-IN', options)}
+												</div>
+											)}
+
+											{isRowVisible && (
+												<div>
+													{(interestOnLoanDiscountOnBillsAndBankCharges
+													).toLocaleString('en-IN', options)}
+												</div>
+											)}
+
+											{isRowVisible && (
+												<div>
+													{(miscellaneousIncome
+													).toLocaleString('en-IN', options)}
+												</div>
+											)}
+											{isRowVisible && (
+												<div>
+													{(interestIncomeOnFd
+													).toLocaleString('en-IN', options)}
+												</div>
+											)}
+										</>
+									) }
+									{isRowVisible
+									&& (
+										<div className={styles.particular_data}>
+											{(totalOtherExpense).toLocaleString('en-IN', options)}
+										</div>
+									)}
+									{dropDown?.other
+									&& (
+										<>
+											{isRowVisible && (
+												<div>
+													{(interestOnLoanDiscountOnBillsAndBankChargesExpense
+													).toLocaleString('en-IN', options)}
+												</div>
+											)}
+
+											{isRowVisible
+											&& (
+												<div>
+													{(legalComplianceBooksAndMis
+													).toLocaleString('en-IN', options)}
+												</div>
+											)}
+											{isRowVisible
+											&& <div>{(marketingExpense).toLocaleString('en-IN', options)}</div>}
+											{isRowVisible
+											&& <div>{(personnelExpenseCost).toLocaleString('en-IN', options)}</div>}
+											{isRowVisible
+											&& (
+												<div>
+													{(provisionsAndWriteOffs
+													).toLocaleString('en-IN', options)}
+												</div>
+											)}
+											{isRowVisible
+											&& <div>{(ratesAndTaxes).toLocaleString('en-IN', options)}</div>}
+											{isRowVisible
+											&& <div>{(rentAndTaxes).toLocaleString('en-IN', options)}</div>}
+											{isRowVisible
+											&& (
+												<div>
+													{(rentElectricityAndMaintenance
+													).toLocaleString('en-IN', options)}
+												</div>
+											)}
+											{isRowVisible
+											&& (
+												<div>
+													{(repairsAndMaintenance
+													).toLocaleString('en-IN', options)}
+												</div>
+											)}
+
+											{isRowVisible && (
+												<div>
+													{(salariesBonusIncentivesAndStaffWelfareExpenses
+													).toLocaleString('en-IN', options)}
+												</div>
+											)}
+
+											{isRowVisible
+											&& (
+												<div>
+													{(techAndProductCosts)
+														.toLocaleString('en-IN', options)}
+												</div>
+											)}
+											{isRowVisible
+											&& (
+												<div>
+													{(currencySuspenseAccount
+													).toLocaleString('en-IN', options)}
+												</div>
+											)}
+											{isRowVisible
+											&& <div>{(roundOff).toLocaleString('en-IN', options)}</div>}
+											{isRowVisible
+											&& <div>{(anyOtherCosts).toLocaleString('en-IN', options)}</div>}
+										</>
+									)}
+									{isRowVisible
+									&& (
+										<div className={styles.particular_data}>
+											{(totalOtherIncome).toLocaleString('en-IN', options)}
+										</div>
+									)}
+								</div>
+							);
+						}
 						return (
 							<div className={styles.first_ocean} style={{ width: calculateWidth }}>
 								{isRowVisible && (
@@ -568,7 +738,7 @@ function ListProfit({
 							const accruedRevenue = segmentType?.[itemData?.keys?.accruedRevenue] || 0;
 							const bookedExpense = segmentType?.[itemData?.keys?.bookedExpense] || 0;
 							const accruedExpense = segmentType?.[itemData?.keys?.accruedExpense] || 0;
-							const ratio = ratioData?.turnoverRatioDetails?.[itemData?.key] || 1;
+							const ratio = ratioData?.turnoverRatioDetails?.[itemData?.key];
 							if (itemData?.type !== 'total') {
 								return (
 									<div className={styles.header_ocean} style={{ width: calculateWidth }}>
@@ -578,7 +748,7 @@ function ListProfit({
 													{(((bookedRevenue + accruedRevenue)
 													- (bookedExpense + accruedExpense)
 													- totalDepreciationAndAmortization
-													- totalFinanceCost - totalOtherExpense))
+													- totalFinanceCost - totalOtherExpense) * ratio)
 														.toLocaleString('en-IN', options)}
 												</span>
 											) : null}
@@ -591,7 +761,7 @@ function ListProfit({
 										? ((revenueFromOps
 									- operatingExpenses
 									- totalDepreciationAndAmortization - totalFinanceCost - totalOtherExpense
-										) * ratio).toLocaleString('en-IN', options) : null}
+										)).toLocaleString('en-IN', options) : null}
 								</div>
 							);
 						})
@@ -621,7 +791,29 @@ function ListProfit({
 
 					{
 						getRelevantData()?.map((itemValue) => {
-							const ratio = ratioData?.turnoverRatioDetails?.[itemValue?.key] || 1;
+							const ratio = ratioData?.turnoverRatioDetails?.[itemValue?.key];
+							if (itemValue?.type === 'total') {
+								return (
+									<div className={styles.first_ocean} style={{ width: calculateWidth }}>
+										{isRowVisible && (
+											<div className={styles.particular_data}>
+												{(totalExceptionalItems).toLocaleString('en-IN', options)}
+											</div>
+										)}
+										{isRowVisible && (
+											<div className={styles.particular_data}>
+												{(totalExtraordinaryItems).toLocaleString('en-IN', options)}
+											</div>
+										)}
+										{isRowVisible && (
+											<div className={styles.particular_data}>
+												{(totalPriorPeriodItem).toLocaleString('en-IN', options)}
+											</div>
+										)}
+
+									</div>
+								);
+							}
 							return (
 								<div className={styles.first_ocean} style={{ width: calculateWidth }}>
 									{isRowVisible && (
@@ -649,7 +841,7 @@ function ListProfit({
 					{isRowVisible && <div className={styles.header_particular}>PROFIT BEFORE TAX (C)</div>}
 					{
 						getRelevantData()?.map((value) => {
-							const ratio = ratioData?.turnoverRatioDetails?.[value?.key] || 1;
+							const ratio = ratioData?.turnoverRatioDetails?.[value?.key];
 							const segmentType = item[value?.type.toLowerCase()];
 							const bookedRevenue = segmentType?.[value?.keys?.bookedRevenue] || 0;
 							const accruedRevenue = segmentType?.[value?.keys?.accruedRevenue] || 0;
@@ -665,7 +857,7 @@ function ListProfit({
 													- (bookedExpense + accruedExpense)
 													- totalDepreciationAndAmortization - totalFinanceCost
 													- totalOtherExpense - totalExceptionalItems
-													- totalExtraordinaryItems - totalPriorPeriodItem))
+													- totalExtraordinaryItems - totalPriorPeriodItem) * ratio)
 														.toLocaleString('en-IN', options)}
 												</span>
 											) : null}
@@ -683,7 +875,7 @@ function ListProfit({
 								- totalFinanceCost
 								- totalOtherExpense
 								- totalExceptionalItems - totalExtraordinaryItems - totalPriorPeriodItem)
-								* ratio).toLocaleString('en-IN', options) : null}
+									).toLocaleString('en-IN', options) : null}
 								</div>
 							);
 						})
