@@ -7,7 +7,7 @@ import Header from './Header';
 import KeywordsTable from './KeywordsTable';
 import useDeleteTag from './useDeleteTag';
 
-function KeywordsComponent({ setConfigurationPage, reset }) {
+function KeywordsComponent() {
 	const [searchKeyWord, setSearchKeyWord] = useState('');
 	const [sortType, setSortType] = useState(true);
 
@@ -45,6 +45,7 @@ function KeywordsComponent({ setConfigurationPage, reset }) {
 	return (
 		<div>
 			<Header
+				fetchFaqKeyword={fetchFaqKeyword}
 				activeKeyword={activeKeyword}
 				setActiveKeyword={setActiveKeyword}
 				searchKeyWord={searchKeyWord}
@@ -55,11 +56,9 @@ function KeywordsComponent({ setConfigurationPage, reset }) {
 				activeKeyword={activeKeyword}
 				columns={listColumns}
 				data={data}
-				tagsLoading={loading}
+				keywordsLoading={loading}
 				keywordCurrentPage={keywordCurrentPage}
 				setKeywordCurrentPage={setKeywordCurrentPage}
-				setConfigurationPage={setConfigurationPage}
-				reset={reset}
 			/>
 		</div>
 	);

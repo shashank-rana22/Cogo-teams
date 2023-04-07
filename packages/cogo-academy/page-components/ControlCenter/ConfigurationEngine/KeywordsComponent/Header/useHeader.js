@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useHeader = () => {
+const useHeader = ({ fetchFaqKeyword = () => {} }) => {
 	const [show, setShow] = useState(false);
 
 	const [{ loading = false }, trigger] = useRequest({
@@ -21,6 +21,7 @@ const useHeader = () => {
 
 			setShow(false);
 			Toast.success('Keyword created successfully!');
+			fetchFaqKeyword();
 		} catch (error) {
 			Toast.error(error?.message);
 		}

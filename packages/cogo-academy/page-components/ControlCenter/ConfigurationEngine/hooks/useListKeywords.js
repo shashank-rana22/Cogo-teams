@@ -2,7 +2,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-function useListKeywords({ searchKeyWord = '' }) {
+function useListKeywords({ searchKeyWord = '', sortType }) {
 	const [keywordCurrentPage, setKeywordCurrentPage] = useState(1);
 	const [activeKeyword, setActiveKeyword] = useState('active');
 	const { query, debounceQuery } = useDebounceQuery();
@@ -16,8 +16,6 @@ function useListKeywords({ searchKeyWord = '' }) {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchKeyWord]);
 
-	// sort: sortType ? 'asc' : 'desc'
-
 	const fetchFaqKeyword = async () => {
 		try {
 			await trigger({
@@ -26,6 +24,7 @@ function useListKeywords({ searchKeyWord = '' }) {
 					page_limit           : 10,
 					author_data_required : true,
 					filters              : { q: query, status: activeKeyword },
+					sort_type            : sortType ? 'asc' : 'desc',
 				},
 			});
 		} catch (err) {
@@ -34,7 +33,7 @@ function useListKeywords({ searchKeyWord = '' }) {
 	};
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => { fetchFaqKeyword(); }, [activeKeyword, keywordCurrentPage, query]);
+	useEffect(() => { fetchFaqKeyword(); }, [activeKeyword, keywordCurrentPage, query, sortType]);
 
 	return {
 		fetchFaqKeyword,

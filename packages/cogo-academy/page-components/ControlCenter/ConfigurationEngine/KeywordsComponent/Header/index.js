@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 import useHeader from './useHeader';
 
 function Header({
+	fetchFaqKeyword = () => {},
 	activeKeyword,
 	setActiveKeyword,
 	searchKeyWord,
@@ -14,7 +15,7 @@ function Header({
 }) {
 	const {
 		show, setShow, control, errors, handleSubmit, onSubmit, loading,
-	} = useHeader();
+	} = useHeader({ fetchFaqKeyword });
 
 	return (
 		<div className={styles.header_container}>
