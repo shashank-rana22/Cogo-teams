@@ -2,8 +2,8 @@ import { isEmpty } from '@cogoport/utils';
 
 import checkErrors from './checkErrors';
 
-const getStandAlonePayload = ({ values, action, testQuestionId, questionSetId }) => {
-	const { audience_ids, question = [], topic } = values || {};
+const getStandAlonePayload = ({ values, action, testQuestionId, questionSetId, editDetails = {} }) => {
+	const { question = [], topic } = values || {};
 
 	const {
 		question_type,
@@ -25,11 +25,14 @@ const getStandAlonePayload = ({ values, action, testQuestionId, questionSetId })
 		return { hasError };
 	}
 
+	const { test_question_answers = [] } = editDetails || {};
+
 	const answers = options.map((item, index) => {
 		const { is_correct } = item || {};
 
 		return {
 			...item,
+			...(action === 'update' ? { test_question_answer_id: test_question_answers?.[index]?.id } : {}),
 			is_correct      : is_correct === 'true',
 			status          : 'active',
 			sequence_number : index,
@@ -38,7 +41,6 @@ const getStandAlonePayload = ({ values, action, testQuestionId, questionSetId })
 
 	return {
 		...(action === 'update' ? { id: testQuestionId } : { test_question_set_id: questionSetId }),
-		audience_ids,
 		question_type,
 		topic,
 		difficulty_level,

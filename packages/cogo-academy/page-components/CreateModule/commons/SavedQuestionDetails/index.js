@@ -1,8 +1,6 @@
 import { Pagination, Table } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import EmptyState from '../EmptyState';
-
 import useGetTableColumns from './Components/TableColumns/useGetTableColumns';
 import styles from './styles.module.css';
 
@@ -21,6 +19,8 @@ function SavedQuestionDetails({
 	mode,
 	page_limit,
 	listSetQuestions,
+	setSortFilter,
+	sortFilter,
 }) {
 	const columns = useGetTableColumns({
 		setAllKeysSaved,
@@ -30,16 +30,13 @@ function SavedQuestionDetails({
 		allKeysSaved,
 		mode,
 		listSetQuestions,
+		setSortFilter,
+		sortFilter,
+		editDetails,
 	});
 
 	if (isEmpty(test_questions)) {
-		return (
-			<EmptyState
-				emptyText="No questions found, please add questions below to reflect here"
-				height={180}
-				textSize="20px"
-			/>
-		);
+		return null;
 	}
 
 	return (

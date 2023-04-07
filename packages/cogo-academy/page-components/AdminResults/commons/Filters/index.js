@@ -33,7 +33,7 @@ function Filters({
 						<IcMSearchlight />
 					</div>
 				)}
-				style={{ width: 300 }}
+				style={{ width: '300px', height: '32px' }}
 			/>
 
 			{activeTab === 'appeared' ? (

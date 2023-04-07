@@ -1,6 +1,6 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Pill } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { IcMCrossInCircle, IcMDelete, IcMEdit } from '@cogoport/icons-react';
+import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -11,7 +11,19 @@ import useCreateQuestionSet from '../../../../hooks/useCreateQuestionSet';
 import getControls from './controls';
 import styles from './styles.module.css';
 
-const constants = ['name', 'topic', 'question_count', 'cogo_entity_id'];
+const constants = ['name', 'topic', 'question_count', 'cogo_entity'];
+
+const getValue = ({ item, data }) => {
+	const { cogo_entity_object } = data || {};
+
+	if (item === 'cogo_entity') {
+		return cogo_entity_object?.business_name;
+	} if (item === 'topic') {
+		return <Pill size="lg" color="#F3FAFA">{data?.[item]}</Pill>;
+	}
+
+	return data?.[item] || 0;
+};
 
 function BasicDetailsForm({
 	setQuestionSetId,
@@ -56,7 +68,7 @@ function BasicDetailsForm({
 	};
 
 	const editForm = () => {
-		['name', 'topic', 'audience_ids'].forEach((item) => {
+		['name', 'topic'].forEach((item) => {
 			setValue(item, data?.[item]);
 		});
 
@@ -80,10 +92,10 @@ function BasicDetailsForm({
 			<>
 				<div className={`${styles.container} ${styles.flex_row}`}>
 					{constants.map((item) => (
-						<div className={styles.flex_container}>
+						<div key={item} className={styles.flex_container}>
 							<div className={styles.label}>{startCase(item)}</div>
 							<div className={styles.value}>
-								{item === 'cogo_entity_id' ? cogo_entity_object?.business_name : data?.[item] || 0}
+								{getValue({ item, data })}
 							</div>
 						</div>
 					))}
@@ -101,6 +113,7 @@ function BasicDetailsForm({
 						/>
 					</div>
 				</div>
+
 				<Modal
 					size="sm"
 					show={showModal}
@@ -149,6 +162,7 @@ function BasicDetailsForm({
 						<div key={name} className={styles.control_container}>
 							<div className={styles.label}>
 								{label}
+								<sup className={styles.sup}>*</sup>
 							</div>
 
 							<div className={styles.control}>
@@ -160,22 +174,12 @@ function BasicDetailsForm({
 				})}
 			</div>
 
-			{!isEmpty(questionSetId) ? (
-				<div
-					role="presentation"
-					onClick={() => setShowForm(false)}
-					className={styles.cancel_button}
-				>
-					<IcMCrossInCircle width={16} height={16} />
-				</div>
-			) : null}
-
 			{mode !== 'view' ? (
 				<div className={styles.button_container}>
 					{!isEmpty(questionSetId) ? (
 						<Button
 							disabled={loading}
-							size="sm"
+							size="md"
 							type="button"
 							themeType="secondary"
 							onClick={() => setShowForm(false)}
@@ -187,7 +191,7 @@ function BasicDetailsForm({
 					<Button
 						style={{ marginLeft: '16px' }}
 						loading={loading}
-						size="sm"
+						size="md"
 						type="submit"
 					>
 						{!isEmpty(questionSetId) ? 'Save' : 'Create'}
@@ -195,6 +199,7 @@ function BasicDetailsForm({
 				</div>
 			) : null}
 		</form>
+
 	);
 }
 

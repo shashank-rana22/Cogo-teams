@@ -1,0 +1,27 @@
+.main {
+	display: flex;
+	gap: 12px;
+	font-weight: 500;
+	color: #393f70;
+}
+
+.gap {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.heading {
+	font-weight: 500;
+	line-height: 18px;
+	color: #393f70;
+}
+
+.single_item {
+	position: relative;
+	display: flex;
+	gap: 16px;
+	align-items: center;
+	padding: 4px 16px 6px;
+	margin-bottom: 8px;
+}

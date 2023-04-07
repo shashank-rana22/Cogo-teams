@@ -18,6 +18,8 @@ function useUpdateCaseStudyQuestion({
 	setAllKeysSaved,
 	reset = () => {},
 	listSetQuestions,
+	editDetails,
+	index,
 }) {
 	const [{ loading:loadingUpdate }, triggerUpdate] = useRequest({
 		method : 'post',
@@ -49,6 +51,8 @@ function useUpdateCaseStudyQuestion({
 			action,
 			caseStudyQuestionId,
 			testQuestionId,
+			editDetails,
+			index,
 		});
 
 		if (!isEmpty(hasError)) {

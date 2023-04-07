@@ -1,14 +1,11 @@
-/* eslint-disable import/no-relative-packages */
 import { Button } from '@cogoport/components';
 import { SelectController, InputController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
 import { useEffect, useMemo } from 'react';
 
 /* eslint-disable */
 import countries from '../../../../../../.data-store/constants/countries.json';
-import useGetAudience from '../hooks/useGetFaqAudience';
 import useListCogoEntity from '../hooks/useListCogoEntities';
 
 import styles from './styles.module.css';
@@ -26,8 +23,6 @@ function CreateAudienceForm(props) {
 	} = props;
 
 	const router = useRouter();
-	const { general } = useSelector((state) => state);
-	const { id:audienceId, update } = general.query || {};
 
 	const {
 		createAudience,
@@ -45,24 +40,9 @@ function CreateAudienceForm(props) {
 		setShowCreateAudienceModal,
 	});
 
-	const { fetchAudience = () => {}, data, loading } = useGetAudience();
-
 	const {
-		listCogoEntities,
 		entity_data,
 	} = useListCogoEntity();
-
-	useEffect(() => {
-		listCogoEntities();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
-	useEffect(() => {
-		if (update && audienceId) {
-			fetchAudience();
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [audienceId]);
 
 	const entity_options = [];
 
@@ -97,14 +77,6 @@ function CreateAudienceForm(props) {
 
 	const { controls } = createAudienceControls({ entity_options, watchFunctions, countryOptions });
 
-	useEffect(() => {
-		(Object.keys(controls) || []).forEach((controll) => {
-			const { name:controlName } = controls[controll] || {};
-			setValue(controlName, data?.[controlName]);
-		});
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [loading]);
 
 	useEffect(() => {
 		setValue('auth_sub_function', null);
@@ -154,9 +126,7 @@ function CreateAudienceForm(props) {
 
 			{source !== 'create' ? (
 				<div className={styles.header}>
-					{audienceId ? 'Update' : 'Add'}
-					{' '}
-					Audience
+				 Add Audience
 				</div>
 			) : null}
 
