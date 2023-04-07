@@ -1,5 +1,4 @@
 import { Placeholder, Tabs, TabPanel, Table } from '@cogoport/components';
-import { IcMDownload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
