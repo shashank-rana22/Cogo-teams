@@ -1,5 +1,6 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequest } from '@cogoport/request';
-import { format } from '@cogoport/utils';
 import { useEffect, useCallback, useState } from 'react';
 
 const useListUserChatSummary = ({
@@ -27,9 +28,19 @@ const useListUserChatSummary = ({
 					lead_user_id              : lead_user_id || undefined,
 					user_token                : sender || undefined,
 					summary_date_greater_than : dateFilters?.startDate
-						? format(dateFilters?.startDate, 'dd MMM yyyy') : undefined,
+						? formatDate({
+							date       : dateFilters?.startDate,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							formatType : 'dateTime',
+							separator  : ' | ',
+						}) : undefined,
 					summary_date_less_than: dateFilters?.endDate
-						? format(dateFilters?.endDate, 'dd MMM yyyy') : undefined,
+						? formatDate({
+							date       : dateFilters?.endDate,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							formatType : 'dateTime',
+							separator  : ' | ',
+						}) : undefined,
 				},
 				page       : pagination,
 				page_limit : 10,
