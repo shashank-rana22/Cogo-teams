@@ -30,11 +30,11 @@ function PreviewAndApproveLists() {
 						<PortsCard />
 					</div>
 				</div>
-				<div className={styles.shipment_lists_section}>
+				{/* <div className={styles.shipment_lists_section}>
 					<div className={styles.lists_heading_section}>
 						<span className={styles.lists_heading_part}>Remaining</span>
 						<div className={`
-						${styles.lists_heading_section} 
+						${styles.lists_heading_section}
 						${styles.port_pairs_nos}`}
 						>
 							(4 Port Pairs)
@@ -43,7 +43,7 @@ function PreviewAndApproveLists() {
 					<div className={styles.ports_section}>
 						<PortsCard />
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

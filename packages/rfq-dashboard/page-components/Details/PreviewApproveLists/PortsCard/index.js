@@ -7,7 +7,7 @@ import { PromisedConAndContract } from '../../../../configurations/service-stats
 
 import CommodityMapping from './CommodityMapping';
 import LocationDetails from './LocationDetails';
-import PriceBreakup from './PriceBreakup';
+import PriceBreakupCard from './PriceBreakupCard';
 import PriceFreightCtr from './PriceFrieghtCtr';
 import styles from './styles.module.css';
 
@@ -53,7 +53,7 @@ function PortsCard() {
 						<IcMArrowRotateDown />
 					</button>
 				</div>
-				{showPrice && <PriceBreakup />}
+				{showPrice && <PriceBreakupCard />}
 			</div>
 		</div>
 	);
