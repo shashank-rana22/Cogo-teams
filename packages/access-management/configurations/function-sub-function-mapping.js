@@ -31,6 +31,9 @@ const functionSubFunctionMapping = {
 		{ label: 'HRBP', value: 'hrbp' },
 		{ label: 'Talent Acquisition', value: 'talent_acquisition' },
 	],
+	external: [
+		{ label: 'Enrichment', value: 'enrichment' },
+	],
 };
 
 export default functionSubFunctionMapping;

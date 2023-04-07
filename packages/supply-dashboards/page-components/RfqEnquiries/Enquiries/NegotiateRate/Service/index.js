@@ -92,13 +92,13 @@ function Service({
 						: `${tradetype} ${startCase(service?.service)}`}
 				</div>
 				<div className={styles.location}>
-					<Tooltip content={originAddress}>
+					<Tooltip interactive content={originAddress}>
 						<div className={styles.port}>{origin}</div>
 					</Tooltip>
 					{destination ? (
 						<>
 							<IcMPortArrow style={{ paddingTop: '2px', margin: '4px' }} />
-							<Tooltip content={destinationAddress}>
+							<Tooltip interactive content={destinationAddress}>
 								<div className={styles.port}>{destination}</div>
 							</Tooltip>
 						</>

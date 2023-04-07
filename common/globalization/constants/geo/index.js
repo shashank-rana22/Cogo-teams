@@ -1,4 +1,3 @@
-/* eslint-disable valid-typeof */
 import { getCookie } from '@cogoport/utils';
 
 import GLOBAL_CONSTANTS from '../globals.json';
@@ -14,7 +13,7 @@ const MAPPING = {
 };
 
 const getGeoConstants = () => {
-	if (typeof window === undefined) {
+	if (typeof window === 'undefined') {
 		return null;
 	}
 
