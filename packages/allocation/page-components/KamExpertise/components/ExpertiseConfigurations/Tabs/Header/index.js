@@ -28,7 +28,7 @@ function Header({ auditData, loading }) {
 
 						<span>
 							{loading ? <Placeholder height="20px" width="120px" />
-								: ((updated_at && (format(updated_at, 'dd-MM-YYYY'))) || '--')}
+								: ((updated_at && (format(updated_at, 'dd-MM-YYYY'))) || '')}
 						</span>
 					</div>
 

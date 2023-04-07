@@ -1,10 +1,10 @@
 import { Collapse } from '@cogoport/components';
 import { useState } from 'react';
 
+import Header from '../Header';
 import LoadingState from '../LoadingState';
 
 import Footer from './Footer';
-import Header from './Header';
 import KamLevelCard from './KamLevelCard';
 import KamLevelDropDown from './KamLevelDropDown';
 import styles from './styles.module.css';
