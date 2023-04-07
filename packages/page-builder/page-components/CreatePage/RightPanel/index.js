@@ -13,21 +13,22 @@ const ITEM_TYPES = {
 
 function Item(props) {
 	const {
-		widget, components, setComponents, index, id,
+		widget,
+		components,
+		setComponents,
+		index,
+		id,
 		moveItem,
 		isNewItemAdding,
 		onNewAddingItemProps,
 		onClick,
 		isSelected,
-
-	 } = props;
+	} = props;
 
 	const { type, id: elementId } = widget;
 
 	const itemRef = useRef(null);
 
-	//! Portal :: useDrop hook for builderItem
-	// TODO :: refactor and split here while adding portal
 	const [{ handlerId }, drop] = useDrop({
 		accept: Object.keys(ITEM_TYPES),
 		collect(monitor) {
@@ -40,7 +41,6 @@ function Item(props) {
 				return;
 			}
 
-			//! Position arrangement for item sorting and adding
 			const { top, bottom, height } = itemRef.current.getBoundingClientRect();
 			const { y } = monitor.getClientOffset();
 			const hoverIndex = index;
@@ -49,12 +49,10 @@ function Item(props) {
 			const hoverMiddleY = (bottom - top) / 2;
 			const hoverClientY = y - top;
 
-			//! Portal :: compare id and tempID in here
 			if (!id || dragIndex === hoverIndex) {
 				return;
 			}
 
-			//! Portal :: reorder items
 			if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
 				return;
 			}
@@ -64,7 +62,9 @@ function Item(props) {
 			if (!isNewItemAdding) {
 				onNewAddingItemProps({ hoveredIndex: hoverIndex });
 				moveItem(dragIndex, hoverIndex);
-				item.index = hoverIndex;
+
+				const data = item;
+				data.index = hoverIndex;
 			} else {
 				const belowThreshold = top + height / 2;
 				const newShould = y >= belowThreshold;
@@ -76,8 +76,7 @@ function Item(props) {
 		},
 	});
 
-	//! Portal :: isDragging prop. might be use for styling changes in dnd process or something like that purposes
-	const [{ isDragging }, drag] = useDrag({
+	const [, drag] = useDrag({
 		type,
 		item    : { type, id, index },
 		collect : (monitor) => ({
@@ -85,7 +84,6 @@ function Item(props) {
 		}),
 	});
 
-	//! Portal :: trigger the item as dnd object
 	const ref = drag(drop(itemRef));
 
 	const opacity = isNewItemAdding && !id ? '0.3' : '1';
@@ -94,6 +92,7 @@ function Item(props) {
 
 	return (
 		<div
+			role="presentation"
 			ref={ref}
 			data-handler-id={handlerId}
 			onClick={onClick}
@@ -104,6 +103,7 @@ function Item(props) {
 				margin  : '10px',
 			}}
 		>
+
 			{type === 'text' && (
 				<TextComponent
 					key={elementId}
@@ -124,6 +124,7 @@ function Item(props) {
 					elementId={elementId}
 				/>
 			)}
+
 			{type === 'button' && (
 				<ButtonComponent
 					key={elementId}

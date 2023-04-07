@@ -1,10 +1,8 @@
-import update from 'immutability-helper';
 import isEqual from 'lodash.isequal';
 import React, {
 	useCallback,
 	useEffect,
 	useMemo,
-	useRef,
 	useState,
 } from 'react';
 import { useDrop } from 'react-dnd';
@@ -83,7 +81,7 @@ function Stage({
 					setComponents={setStageItems}
 					index={index}
 					id={id}
-					key={`id_${index}`}
+					key={id}
 					type={type}
 					moveItem={moveItem}
 					isNewItemAdding={isNewItemAdding}

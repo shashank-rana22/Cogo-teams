@@ -25,8 +25,6 @@ function DNDComponent() {
 				...components.slice(startIndex),
 		  ]);
 
-		  //! !!!!!!!!!!! ATTENTION
-		  //! Portal :: We might change the last Added item logic like this, my recommendation is changing portal logic as well
 		  setSelectedItem({
 				id    : components.length + 1,
 				index : startIndex,
@@ -47,46 +45,10 @@ function DNDComponent() {
 				selectedItem={selectedItem}
 			/>
 		),
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[handleAddNewItem, selectedItem],
 
 	  );
-
-	// const [layouts, setLayouts] = useState(null);
-
-	// const handleModify = (layout) => {
-	// 	const tempArray = components;
-
-	// 	const newLayout = layout?.map((position) => {
-	// 		const { i, x, y, w, h } = position;
-
-	// 		const index = Number(i);
-
-	// 		tempArray[index].x = x;
-	// 		tempArray[index].y = y;
-	// 		tempArray[index].width = w;
-	// 		tempArray[index].height = h;
-	// 		return tempArray[index];
-	// 	});
-
-	// 	setLayouts(newLayout);
-
-	// 	setComponents(tempArray);
-	// };
-
-	// const handleDelete = (key) => {
-	// 	const tempArray = components.slice();
-
-	// 	const widgetIndex = tempArray.indexOf(tempArray.find((data) => data.i === key));
-	// 	tempArray.splice(widgetIndex, 1);
-
-	// 	const modifiedArray = tempArray.map((temp, index) => ({
-	// 		...temp,
-	// 		i: index,
-
-	// 	}));
-
-	// 	setComponents(modifiedArray);
-	// };
 
 	return (
 		<div>
