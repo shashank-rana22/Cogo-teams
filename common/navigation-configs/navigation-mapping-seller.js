@@ -196,6 +196,16 @@ const navigationMappingSeller = {
 				],
 				possible_apis: app_apis.saas_freight_rate_trend,
 			},
+			{
+				key           : 'saas_tools-vessel_tracking',
+				title         : 'Live Vessel Tracking',
+				href          : '/saas/live-vessel-tracking',
+				as            : '/saas/live-vessel-tracking',
+				type          : 'link',
+				icon          : 'nav-trade-partner',
+				main_apis     : [],
+				possible_apis : app_apis.saas_live_vessel_tracking,
+			},
 		],
 	},
 	saas_finance: {

@@ -1968,6 +1968,7 @@ const saas = {
 			feature     : 'order-history',
 		},
 	],
+	app_saas_live_vessel_tracking: [],
 
 };
 export default saas;
