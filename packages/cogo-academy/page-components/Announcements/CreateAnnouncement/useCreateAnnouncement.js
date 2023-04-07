@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
-import { format, addDays } from '@cogoport/utils';
+import { differenceInDays, format, addDays } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import getFormControls from './controls/get-form-controls';
@@ -37,7 +37,6 @@ const useCreateAnnouncements = ({
 	}, { manual: true });
 
 	const controls = getFormControls();
-	const getDateValue = (date) => format(date, 'dd MMM yyyy hh:mm a').split(' ')[0];
 
 	useEffect(() => {
 		if (actionType !== 'edit') return;
@@ -61,7 +60,7 @@ const useCreateAnnouncements = ({
 		setValue('redirection_url', defaultValues?.redirection_url);
 		setValue('is_important', is_important);
 		setValue('audience_ids', audience_ids);
-		setValue('hot_duration', getDateValue(hot_duration) - getDateValue(validity_start));
+		setValue('hot_duration', differenceInDays(new Date(hot_duration), new Date(validity_start)));
 		setValue('validity', validity);
 	}, [defaultValues, listAudienceLoading, actionType, setValue]);
 
@@ -125,9 +124,12 @@ const useCreateAnnouncements = ({
 			redirection_url,
 			is_important,
 			audience_ids,
+			images,
+			files,
 		} = values;
+
 		const { startDate:validity_start, endDate:validity_end } = validity;
-		const { images, files } = values;
+
 		const attachments = [...videos.map((video) => (
 			{
 				document_type : 'video',
@@ -138,13 +140,13 @@ const useCreateAnnouncements = ({
 			{
 				document_type : 'image',
 				document_name : 'image',
-				document_url  : image,
+				document_url  : (image?.finalUrl ? image?.finalUrl : image),
 			}
 		)), ...files.map((file) => (
 			{
 				document_type : 'pdf',
 				document_name : 'files',
-				document_url  : file,
+				document_url  : (file?.finalUrl ? file?.finalUrl : file),
 			}
 		))];
 		const hot_duration = addDays(validity_start, values?.hot_duration);

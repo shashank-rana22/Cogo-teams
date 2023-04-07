@@ -68,7 +68,6 @@ function useCreateFaqSet({
 			answers : [{
 				state  : 'published',
 				status : 'active',
-
 			}],
 		};
 

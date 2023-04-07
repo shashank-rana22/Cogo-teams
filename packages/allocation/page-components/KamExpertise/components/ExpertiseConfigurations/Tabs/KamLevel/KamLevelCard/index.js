@@ -66,7 +66,7 @@ function KamLevelCard(props) {
 						{' '}
 						{transition_level}
 						, A KAM needs to fulfill all of the following criteria
-						as defined -
+						as defined :
 					</div>
 				)
 				: (
