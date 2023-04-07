@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import { optionsEntity } from '../../../Accruals/constant';
 import useSourceFile from '../../../hooks/useSourceFile';
+import { SAMPLE_DOCUMENT_URL } from '../../constant';
 import { OptionMonth } from '../utils';
 
 import styles from './styles.module.css';
@@ -19,9 +20,6 @@ function UploadModal({ uploadModal, setUploadModal }) {
 		uploadApi,
 		sourceFileUploadLoading,
 	} =	 useSourceFile({ modalData, uploader, setUploadModal });
-
-	const SAMPLE_DOCUMENT_URL = 'https://cogoport-production.sgp1.digitaloceanspaces.com'
-	+ '/50767ab00d5073ed6d5be7ed6afebaa9/TB%20Sample.xlsx';
 
 	const onClickViewSampleFile = () => {
 		window.open(
