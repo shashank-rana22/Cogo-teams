@@ -1,0 +1,115 @@
+.single_item {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.message_text {
+	font-size: 10px;
+	font-weight: 400;
+	line-height: 16px;
+	color: #cb6464;
+}
+
+.main {
+	display: flex;
+	align-items: center;
+	width: 80%;
+	font-size: 14px;
+	font-weight: 500;
+
+	& > div {
+		margin: 0 8px 0 12px;
+	}
+}
+
+.upload_info {
+	height: fit-content;
+	padding: 4px 12px;
+	margin-right: 10px;
+	font-size: 10px;
+	white-space: nowrap;
+	background: #f2f4f7;
+	border-radius: 12px;
+}
+
+.document_status {
+	height: fit-content;
+	padding: 4px 12px;
+	margin-right: 10px;
+	font-size: 10px;
+	background: #f2f4f7;
+	border-radius: 12px;
+
+	&.accepted {
+		color: #027a48;
+		background: #ecfdf3;
+	}
+
+	&.pending {
+		color: #c4320a;
+		background: #fff6ed;
+	}
+}
+
+.gap {
+	display: flex;
+
+	.ui_pill_container {
+		background: #f2f4f7;
+		background-color: #f2f4f7;
+		border-radius: 16px;
+	}
+}
+
+.heading {
+	width: 20%;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.dots {
+	top: 14px;
+	right: 12px;
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	width: 10px;
+}
+
+.action_container {
+	display: flex;
+	gap: 6px;
+	align-items: center;
+}
+
+.hold_document {
+	width: 140px;
+	color: #cb6464;
+}
+
+.single_item_child {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 10px 16px;
+	margin-bottom: 16px;
+	border: 1px solid #ececec;
+	border-radius: 4px;
+}
+
+.upload_item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 10px 16px;
+	margin-bottom: 16px;
+	border: 1px solid #ececec;
+	border-radius: 4px;
+}
