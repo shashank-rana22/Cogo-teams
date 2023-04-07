@@ -89,8 +89,11 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 	const { list: chatDataList = [], total_count: summary_total_count } = chatData || {};
 
 	let subtab_count;
-	if (activeSubTab === 'agent') { subtab_count = agent_total_count; }
-	if (activeSubTab === 'summary') { subtab_count = summary_total_count; }
+	if (activeSubTab === 'agent') {
+		subtab_count = agent_total_count;
+	} else if (activeSubTab === 'summary') {
+		subtab_count = summary_total_count;
+	}
 
 	let list = [];
 	let channel_total_count;
@@ -110,18 +113,18 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 	useEffect(() => {
 		setFilters(null);
 		setDateFilters(null);
-		setActiveSubTab('channels');
 		setPagination(1);
-	}, [activityTab, setFilters, setDateFilters]);
-
-	useEffect(() => {
-		setFilters(null);
-		setDateFilters(null);
-		setPagination(1);
-	}, [activeSubTab, setFilters, setDateFilters]);
+		if (activityTab !== 'communication') {
+			setActiveSubTab('channels');
+		}
+	}, [activityTab, activeSubTab, setFilters, setDateFilters]);
 
 	const handleFilters = (val) => {
-		if (activeSubTab === 'summary') { setDateFilters(val); } else { setFilters(val); }
+		if (activeSubTab === 'summary') {
+			setDateFilters(val);
+		} else {
+			setFilters(val);
+		}
 		setPagination(1);
 		setFilterVisible(false);
 	};
@@ -129,7 +132,11 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 	const handleReset = () => {
 		setFilters(null);
 		setDateFilters(null);
-		if (activeSubTab === 'summary') { getUserChatSummary(); } else { fetchActivityLogs(); }
+		if (activeSubTab === 'summary') {
+			getUserChatSummary();
+		} else {
+			fetchActivityLogs();
+		}
 		setFilterVisible(false);
 	};
 
@@ -177,8 +184,14 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 						name="transactional"
 						title={<IcMFdollar width={20} height={20} />}
 					/>
-					<TabPanel name="platform" title={<IcMPlatformDemo width={20} height={20} />} />
-					<TabPanel name="communication" title={<IcMCampaignTool width={20} height={20} />} />
+					<TabPanel
+						name="platform"
+						title={<IcMPlatformDemo width={20} height={20} />}
+					/>
+					<TabPanel
+						name="communication"
+						title={<IcMCampaignTool width={20} height={20} />}
+					/>
 				</Tabs>
 			</div>
 
@@ -200,9 +213,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 			{activeSubTab !== 'agent' && (
 				<div className={styles.filters_container}>
 					<div className={styles.title}>
-						{activeSubTab === 'summary'
-							? USER_ACTIVITY_MAPPING[activeSubTab]
-							: USER_ACTIVITY_MAPPING[activityTab]}
+						{USER_ACTIVITY_MAPPING[activeSubTab === 'summary' ? activeSubTab : activityTab]}
 					</div>
 
 					{activityTab !== 'platform' && (

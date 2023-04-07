@@ -23,8 +23,20 @@ function Filters({
 
 	const emptyCheck = isEmpty(values) && isEmpty(dateValues);
 
+	const handleClick = () => {
+		if (activeSubTab === 'summary') {
+			handleFilters(dateValues);
+		} else {
+			handleFilters(values);
+		}
+	};
+
 	useEffect(() => {
-		if (activeSubTab === 'summary') { setDateValues(dateFilters); } else { setValues(appliedFilters || []); }
+		if (activeSubTab === 'summary') {
+			setDateValues(dateFilters);
+		} else {
+			setValues(appliedFilters || []);
+		}
 	}, [activeSubTab, appliedFilters, dateFilters]);
 
 	const checkFilter = () => {
@@ -62,8 +74,11 @@ function Filters({
 			/>
 		);
 	};
+
 	return (
-		<div className={cl`${styles.container} ${activeSubTab === 'summary' ? styles.summary_container : ''}`}>
+		<div className={cl`${styles.container} 
+					${activeSubTab === 'summary' ? styles.summary_container : ''}`}
+		>
 			<div className={styles.header}>
 				<div className={styles.title}>
 					Filters
@@ -86,7 +101,7 @@ function Filters({
 				<Button
 					size="sm"
 					themeType="accent"
-					onClick={activeSubTab === 'summary' ? () => handleFilters(dateValues) : () => handleFilters(values)}
+					onClick={handleClick}
 					disabled={emptyCheck}
 					loading={loading}
 				>

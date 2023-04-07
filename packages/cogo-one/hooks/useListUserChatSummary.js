@@ -3,13 +3,12 @@ import { format } from '@cogoport/utils';
 import { useEffect, useCallback, useState } from 'react';
 
 const useListUserChatSummary = ({
-	id = '',
 	activeSubTab = '',
 	user_id = '',
 	lead_user_id = '',
 	mobile_no = '',
 	sender = '',
-	pagination = 0,
+	pagination = 1,
 	channel_type = '',
 }) => {
 	const [dateFilters, setDateFilters] = useState(null);
@@ -42,17 +41,20 @@ const useListUserChatSummary = ({
 			// console.log(error);
 		}
 	}, [channel_type,
-		mobile_no, user_id,
+		mobile_no,
+		user_id,
 		lead_user_id,
 		sender,
-		dateFilters?.startDate,
-		dateFilters?.endDate, pagination, trigger]);
+		dateFilters,
+		pagination,
+		trigger,
+	]);
 
 	useEffect(() => {
 		if (activeSubTab === 'summary') {
 			getUserChatSummary();
 		}
-	}, [activeSubTab, getUserChatSummary, lead_user_id, user_id, id]);
+	}, [activeSubTab, getUserChatSummary]);
 
 	return {
 		chatData           : data || {},

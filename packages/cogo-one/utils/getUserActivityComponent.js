@@ -5,18 +5,19 @@ import Summary from '../page-components/CogoOneChannel/ProfileDetails/UserActivi
 import TransactionalActivity from '../page-components/CogoOneChannel/ProfileDetails/UserActivity/TransactionalActivity';
 
 function getUserActivityComponent(activityTab, activeSubTab) {
-	switch (activityTab) {
-		case 'platform':
-			return PlatformActivity;
-		case 'transactional':
-			return TransactionalActivity;
-		case 'communication':
-			if (activeSubTab === 'channels') return CommunicationActivity;
-			if (activeSubTab === 'agent') return AgentTimeLine;
-			return Summary;
-		default:
-			return null;
+	if (activityTab === 'platform') {
+		return PlatformActivity;
 	}
+	if (activityTab === 'transactional') {
+		return TransactionalActivity;
+	}
+	if (activeSubTab === 'channels') {
+		return CommunicationActivity;
+	}
+	if (activeSubTab === 'agent') {
+		return AgentTimeLine;
+	}
+	return Summary;
 }
 
 export default getUserActivityComponent;
