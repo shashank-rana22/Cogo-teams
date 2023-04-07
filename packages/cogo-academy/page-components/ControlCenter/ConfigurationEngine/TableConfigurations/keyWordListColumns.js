@@ -20,15 +20,15 @@ function keyWordListColumns({
 
 	const listColumns = [
 		{
-			Header   : 'KEY WORD NAME',
+			Header   : 'KEYWORD',
 			accessor : (items) => (
 				<div className={styles.question}>
-					{startCase(items?.name) || '--'}
+					{startCase(items?.display_name) || '--'}
 				</div>
 			),
 		},
 		{
-			Header   : 'KEY WORD DESCRIPTION',
+			Header   : 'KEYWORD DESCRIPTION',
 			accessor : (items) => (
 				<div className={styles.topics}>
 					{startCase(items?.description) || '--'}
@@ -63,8 +63,6 @@ function keyWordListColumns({
 			accessor: (items) => (
 				<div
 					className={styles.tags}
-					role="presentation"
-					onClick={() => setSortType((prev) => !prev)}
 				>
 					{format(items.created_at, 'dd MMM yy') || '--'}
 				</div>
@@ -81,7 +79,7 @@ function keyWordListColumns({
 						styles={{ marginRight: '20px' }}
 						render={(
 							<PopOverContent
-								source="tag"
+								source="keyword"
 								onCLickYesButton={() => onClickDeleteIcon(item)}
 								onClickNoButton={() => onClickNoButton(item)}
 								loading={updateApiLoading}

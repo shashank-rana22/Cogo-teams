@@ -2,11 +2,11 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-function useDeleteTag({ fetchFaqTag }) {
+function useDeleteKeyword({ fetchFaqKeyword }) {
 	const [showPopOver, setShowPopOver] = useState(null);
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_faq_tag',
+		url    : '/update_faq_keyword',
 		method : 'POST',
 	}, { manual: true });
 
@@ -20,9 +20,9 @@ function useDeleteTag({ fetchFaqTag }) {
 			});
 
 			if (res?.data) {
-				Toast.success('Tag deleted sucessfully');
+				Toast.success('Keyword deleted sucessfully');
 				setShowPopOver(null);
-				fetchFaqTag();
+				fetchFaqKeyword();
 			}
 		} catch (err) {
 			console.log('err', err);
@@ -36,4 +36,4 @@ function useDeleteTag({ fetchFaqTag }) {
 		setShowPopOver,
 	};
 }
-export default useDeleteTag;
+export default useDeleteKeyword;

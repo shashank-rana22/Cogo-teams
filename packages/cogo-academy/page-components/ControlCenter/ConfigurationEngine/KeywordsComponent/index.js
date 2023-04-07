@@ -5,7 +5,7 @@ import keyWordListColumns from '../TableConfigurations/keyWordListColumns';
 
 import Header from './Header';
 import KeywordsTable from './KeywordsTable';
-import useDeleteTag from './useDeleteTag';
+import useDeleteKeyword from './useDeleteKeyword';
 
 function KeywordsComponent() {
 	const [searchKeyWord, setSearchKeyWord] = useState('');
@@ -26,7 +26,7 @@ function KeywordsComponent() {
 		showPopOver,
 		setShowPopOver = () => {},
 		loading:updateApiLoading,
-	} = useDeleteTag({ fetchFaqKeyword });
+	} = useDeleteKeyword({ fetchFaqKeyword });
 
 	const { listColumns = [] } = keyWordListColumns({
 		setSortType,
