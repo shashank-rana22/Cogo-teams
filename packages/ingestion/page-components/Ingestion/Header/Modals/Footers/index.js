@@ -74,7 +74,7 @@ export function ProviderSelectFooter(props) {
 
 export function UploadModalFooter(props) {
 	const { loading = false, formProps = {}, setShow = () => {}, onSubmit = () => {} } = props;
-	const { handleSubmit, reset } = formProps;
+	const { handleSubmit } = formProps;
 
 	return (
 		<>
@@ -86,7 +86,6 @@ export function UploadModalFooter(props) {
 						...pv,
 						screen: 'orgDetails',
 					}));
-					reset();
 				}}
 			>
 				Back

@@ -60,7 +60,6 @@ function ChooseModal({ setShow = () => {}, setUploadData = () => {}, uploadData 
 
 		</div>
 
-	// </Modal>
 	);
 }
 

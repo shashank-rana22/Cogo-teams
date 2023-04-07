@@ -22,19 +22,21 @@ function UploadListModal({ tableModal = '', setTableModal = () => {}, row = {} }
 		return (
 			<Modal size="lg" show={tableModal === 'uploadList'} onClose={onClose} placement="center">
 				<Modal.Header title={(
-					<div style={{ display: 'flex', alignItems: 'center' }}>
+					<div className={styles.header}>
 						<IcMUpload style={{ margin: '0 4px 0 0' }} />
 						Upload List
 					</div>
 				)}
 				/>
 
-				<div className={styles.empty}>
-					<EmptyState height="200px" width="720px" />
-				</div>
-				<div className={styles.close_button}>
-					<Button themeType="secondary" onClick={onClose}>Close</Button>
-				</div>
+				<Modal.Footer>
+					<div className={styles.empty}>
+						<EmptyState height="200px" width="720px" />
+					</div>
+					<div className={styles.close_button}>
+						<Button themeType="secondary" onClick={onClose}>Close</Button>
+					</div>
+				</Modal.Footer>
 			</Modal>
 
 		);
@@ -74,22 +76,32 @@ function UploadListModal({ tableModal = '', setTableModal = () => {}, row = {} }
 				)}
 			</div>
 
-			<div className={styles.close_button}>
-				<Button
-					style={{ marginRight: '8px' }}
-					disabled={loading}
-					themeType="secondary"
-					onClick={onClose}
-				>
-					Close
+			<Modal.Footer>
+				<div className={styles.close_button}>
+					<Button
+						style={{ marginRight: '8px' }}
+						disabled={loading}
+						themeType="secondary"
+						onClick={onClose}
+					>
+						Close
 
-				</Button>
+					</Button>
 
-				{(row?.request_files[0]?.errored_data_url)
-					? (<Button disabled={loading} themeType="secondary" onClick={() => onSubmit()}>Re-Upload</Button>
-					) : ''}
+					{(row?.request_files?.errored_data_url)
+						? (
+							<Button
+								disabled={loading}
+								themeType="secondary"
+								onClick={() => onSubmit()}
+							>
+								Re-Upload
+							</Button>
+						) : ''}
 
-			</div>
+				</div>
+
+			</Modal.Footer>
 		</Modal>
 	);
 }

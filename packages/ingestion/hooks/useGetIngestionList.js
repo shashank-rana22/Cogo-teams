@@ -5,6 +5,7 @@ import { useRequest } from '@cogoport/request';
 import { startCase, format } from '@cogoport/utils';
 import { useState } from 'react';
 
+import { UPLOAD_STATUS_MAPPING } from '../constants/table-modal-mapping';
 import styles from '../styles.module.css';
 
 function useGetIngestionList() {
@@ -47,12 +48,6 @@ function useGetIngestionList() {
 	const tableListModal = (_id) => {
 		setRow(_id);
 		setTableModal('uploadList');
-	};
-
-	const UPLOAD_STATUS_MAPPING = {
-		init       : 'yellow',
-		completed  : 'green',
-		processing : 'red',
 	};
 
 	const reUploadFiles = (_row) => {
@@ -102,8 +97,8 @@ function useGetIngestionList() {
 			),
 		},
 		{
-			id       : 'status',
-			Header   : 'STATUS',
+			id       : 'stage',
+			Header   : 'STAGE',
 			accessor : ({ request_files = {} }) => (
 				<div className={styles.status}>
 					<Pill size="sm" color={UPLOAD_STATUS_MAPPING[request_files?.stage]}>

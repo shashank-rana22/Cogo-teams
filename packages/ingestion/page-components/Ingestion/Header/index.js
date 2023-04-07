@@ -34,16 +34,10 @@ function Header({ refetch = () => {} }) {
 		setShow = () => {},
 		onSubmit = () => {},
 		loading = false,
+		onClose = () => {},
 	} = usePostIngestionData({ refetch });
 
 	const { getTemplateCsv = () => {}, template = '', setTemplate = () => {} } = useGetTemplate();
-
-	const onClose = () => {
-		setShow((pv) => ({
-			...pv,
-			open: false,
-		}));
-	};
 
 	const INGESTION_FOOTERS_MAPPING = {
 		[CHOOSE]          : ChooseFooter,

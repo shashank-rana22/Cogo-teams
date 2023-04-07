@@ -54,3 +54,9 @@
 .error {
 	min-width: 80px;
 }
+
+.stage {
+	display: flex;
+	justify-content: start;
+	min-width: 60px;
+}

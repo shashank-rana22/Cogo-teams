@@ -8,12 +8,14 @@ import reUploadControls from '../../../../../utils/re-upload-controls';
 import styles from './styles.module.css';
 
 function ReUploadModal({ tableModal = '', setTableModal = () => {}, row = {} }) {
-	const { formProps, onSubmit = () => {}, loading } = usePostReUpload({ row, setTableModal });
-	const { control, formState: { errors }, handleSubmit, reset } = formProps;
-	const onClose = () => {
-		setTableModal('');
-		reset();
-	};
+	const {
+		formProps = {},
+		onSubmit = () => {},
+		loading = false,
+		onClose = () => {},
+	} =	 usePostReUpload({ row, setTableModal });
+
+	const { control, formState: { errors }, handleSubmit } = formProps;
 
 	return (
 		<Modal key={tableModal} size="md" show={tableModal === 'reUpload'} onClose={onClose} placement="center">

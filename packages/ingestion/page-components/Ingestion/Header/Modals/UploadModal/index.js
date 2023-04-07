@@ -19,7 +19,7 @@ function UploadModal({
 
 		<div>
 			<div style={{ margin: '0 0 4px 16px' }}>
-				{FINAL_HEADING[uploadData?.ingestion_type]}
+				{FINAL_HEADING[uploadData?.ingestion_type] || '___'}
 			</div>
 
 			<div className={styles.modal_container}>
@@ -36,7 +36,6 @@ function UploadModal({
 								size="md"
 								key={el.name}
 								control={control}
-								id={`${el.name}_input`}
 							/>
 
 							<div className={styles.error_message}>

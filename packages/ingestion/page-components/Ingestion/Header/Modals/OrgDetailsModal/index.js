@@ -25,13 +25,10 @@ function OrgDetailsModal({
 
 		<div>
 			<div className={styles.modal_container}>
-
 				{
 						TopDiv && <TopDiv />
 					}
-
 				{
-
 						modalControls.map((controlItem) => {
 							const el = { ...controlItem };
 

@@ -12,6 +12,13 @@ function usePostIngestionData({ refetch = () => {} }) {
 		screen : '',
 	});
 
+	const onClose = () => {
+		setShow((pv) => ({
+			...pv,
+			open: false,
+		}));
+	};
+
 	const { profile: { partner } } = useSelector((state) => state);
 	const { partner_user_id = '' } = partner || {};
 
@@ -83,6 +90,7 @@ function usePostIngestionData({ refetch = () => {} }) {
 		onSubmit,
 		show,
 		setShow,
+		onClose,
 	};
 }
 

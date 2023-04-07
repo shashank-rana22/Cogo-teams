@@ -1,20 +1,15 @@
 import { Button } from '@cogoport/components';
 
+import {
+	ProviderCpOptions,
+	ProviderLeadOptions,
+	IS_CHANNEL_PARTNER_MAPPING,
+} from '../../../../../constants/org-details-mapping';
+
 import styles from './styles.module.css';
 
 function ProviderSelectModal({ setShow = () => {}, setUploadData = () => {}, uploadData, formProps = {} }) {
 	const { reset } = formProps;
-
-	const ProviderCpOptions = [
-		{ key: 'a. Channel Partner (buy persona)', type: 'CPBuy' },
-		{ key: 'b. Channel Partner (sell persona)', type: 'CPSell' },
-		{ key: 'c. Channel Partner (buy and sell persona)', type: 'CPBuyAndSell' },
-	];
-
-	const ProviderLeadOptions = [
-		{ key: 'a. Importer/ Exporter', type: 'IE' },
-		{ key: 'b. Service Provider', type: 'SP' },
-	];
 
 	let ProviderButtonOptions = [];
 
@@ -23,15 +18,7 @@ function ProviderSelectModal({ setShow = () => {}, setUploadData = () => {}, upl
 		partner : ProviderCpOptions,
 	};
 
-	ProviderButtonOptions = PROVIDER_BUTTON_MAPPING[uploadData?.ingestion_type];
-
-	const IS_CHANNEL_PARTNER_MAPPING = {
-		IE           : false,
-		SP           : true,
-		CPSell       : true,
-		CPBuy        : true,
-		CPBuyAndSell : true,
-	};
+	ProviderButtonOptions = PROVIDER_BUTTON_MAPPING[uploadData?.ingestion_type] || '';
 
 	const onChoose = (input) => {
 		setUploadData({

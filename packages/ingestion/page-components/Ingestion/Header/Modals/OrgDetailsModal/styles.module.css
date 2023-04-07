@@ -5,11 +5,12 @@
 
 .control_container {
 	height: 80px;
-	padding: 12px 16px;
+	padding: 4px 16px;
 }
 
 .modal_container {
 	height: 300px;
+	margin-top: 0;
 }
 
 .error_message {
@@ -29,7 +30,7 @@
 
 .field_controller {
 	:global {
-			.ui_select_input_placeholder {
+		.ui_select_input_placeholder {
 			color: #cacaca;
 		}
 	}

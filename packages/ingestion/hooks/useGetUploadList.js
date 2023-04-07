@@ -4,15 +4,10 @@ import { useRequest } from '@cogoport/request';
 import { startCase, format } from '@cogoport/utils';
 import { useState } from 'react';
 
+import { UPLOAD_STATUS_MAPPING } from '../constants/table-modal-mapping';
 import styles from '../styles.module.css';
 
 function useGetUploadList(id) {
-	const UPLOAD_STATUS_MAPPING = {
-		init       : 'yellow',
-		completed  : 'green',
-		processing : 'red',
-	};
-
 	const [params, setParams] = useState({
 		page    : 1,
 		filters : {
@@ -59,12 +54,15 @@ function useGetUploadList(id) {
 			),
 		},
 		{
-			id       : 'status',
-			Header   : 'STATUS',
+			id       : 'stage',
+			Header   : 'STAGE',
 			accessor : ({ stage }) => (
-				<Pill size="sm" color={UPLOAD_STATUS_MAPPING[stage]}>
-					{ startCase(stage || '___') }
-				</Pill>
+				<div className={styles.stage}>
+					<Pill size="sm" color={UPLOAD_STATUS_MAPPING[stage]}>
+						{ startCase(stage || '___') }
+					</Pill>
+				</div>
+
 			),
 		},
 		{

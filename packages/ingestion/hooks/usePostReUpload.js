@@ -8,19 +8,32 @@ function usePostReUpload({ row = {}, setTableModal = () => {} }) {
 		method : 'POST',
 	}, { manual: true });
 
+	const formProps = useForm();
+
+	const { reset } = formProps;
+
+	const onClose = () => {
+		setTableModal('');
+		reset();
+	};
+
 	const onSubmit = async (e) => {
+		const {
+			partner_id = '', country_id = '', ingestion_type = '',
+			partner_user_id = '', description = '', agent_id = '', id = '', request_files = {},
+		} = row;
+
 		try {
 			const pay = {
-				partner_id           : row?.partner_id,
-				country_id           : row?.country_id,
+				partner_id,
+				country_id,
 				performed_by_type    : 'agent',
-				file_url             : e?.re_upload,
-				ingestion_type       : row?.ingestion_type,
-				partner_user_id      : row?.partner_user_id,
-				description          : row?.description,
-				agent_id             : row?.agent_id,
-				ingestion_request_id : row?.id,
-				file_name            : row?.request_files[0]?.sheet_name,
+				ingestion_type,
+				partner_user_id,
+				description,
+				agent_id,
+				ingestion_request_id : id,
+				file_name            : request_files?.sheet_name,
 			};
 
 			const payload = Object.entries({ ...pay, file_url: e?.re_upload?.finalUrl })
@@ -37,12 +50,12 @@ function usePostReUpload({ row = {}, setTableModal = () => {} }) {
 			Toast.error(error?.message);
 		}
 	};
-	const formProps = useForm();
 
 	return {
 		formProps,
 		onSubmit,
 		loading,
+		onClose,
 
 	};
 }
