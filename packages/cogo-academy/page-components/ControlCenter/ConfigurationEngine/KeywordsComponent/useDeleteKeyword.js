@@ -29,11 +29,30 @@ function useDeleteKeyword({ fetchFaqKeyword }) {
 		}
 	};
 
+	const onClickRestore = async ({ id }) => {
+		try {
+			const payload = {
+				id,
+				status: 'active',
+			};
+
+			await trigger({
+				data: payload,
+			});
+
+			fetchFaqKeyword();
+			Toast.success('Keyword restored sucessfully!');
+		} catch (error) {
+			Toast.error(error?.message);
+		}
+	};
+
 	return {
 		onClickDeleteIcon,
 		loading,
 		showPopOver,
 		setShowPopOver,
+		onClickRestore,
 	};
 }
 export default useDeleteKeyword;

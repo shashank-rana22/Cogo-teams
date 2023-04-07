@@ -26,6 +26,7 @@ function KeywordsComponent() {
 		showPopOver,
 		setShowPopOver = () => {},
 		loading:updateApiLoading,
+		onClickRestore,
 	} = useDeleteKeyword({ fetchFaqKeyword });
 
 	const { listColumns = [] } = keyWordListColumns({
@@ -36,6 +37,7 @@ function KeywordsComponent() {
 		updateApiLoading,
 		activeKeyword,
 		sortType,
+		onClickRestore,
 	});
 
 	useEffect(() => {
