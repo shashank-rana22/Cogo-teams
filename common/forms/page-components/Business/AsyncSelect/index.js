@@ -16,6 +16,7 @@ import {
 	asyncAllotBanks,
 	listVendors,
 	asyncListCogoEntity,
+	asyncListHsCodes,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -50,6 +51,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_rate_charge_codes : asyncFieldListRateChargeCodes,
 	allot_bank             : asyncAllotBanks,
 	list_cogo_entity       : asyncListCogoEntity,
+	list_hs_codes        	 : asyncListHsCodes,
 };
 
 function AsyncSelect(props) {

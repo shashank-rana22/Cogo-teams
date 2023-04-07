@@ -1,3 +1,5 @@
+// We can use this old form format or react's default form
+
 const reactHookForm = require('react-hook-form');
 
 const getDefaultValues = (controls) => {

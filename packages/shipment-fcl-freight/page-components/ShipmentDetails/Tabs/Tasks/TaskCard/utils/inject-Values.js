@@ -8,7 +8,7 @@ const injectValues = (
 	shipment_data,
 	stepConfig,
 ) => {
-	const controls = populatedControls;
+	const controls = populatedControls || [];
 	if (task.task === 'upload_si') {
 		controls[0].value = [
 			{

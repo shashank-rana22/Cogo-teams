@@ -240,6 +240,18 @@ function asyncListCogoEntity() {
 	};
 }
 
+function asyncListHsCodes() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_hs_codes',
+		initialCall : false,
+		params      : {
+			page_limit: 20,
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -259,4 +271,5 @@ export {
 	asyncAllotBanks,
 	listVendors,
 	asyncListCogoEntity,
+	asyncListHsCodes,
 };

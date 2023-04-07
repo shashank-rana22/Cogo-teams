@@ -4,3 +4,17 @@
       margin-bottom: 22px;
   }
 }
+
+.see_all_tasks{
+  display: flex;
+	align-items: center;
+	height: 50px;
+	cursor: pointer;
+	justify-content: space-between;
+	width: 130px;
+	text-decoration: underline;
+	color: red;
+	font-size: 16px;
+	font-weight: 400;
+	margin-top: -10px;
+}

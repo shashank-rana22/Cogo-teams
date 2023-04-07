@@ -3,6 +3,7 @@ import React from 'react';
 import getElementController from '../getController';
 import getErrorMessage from '../getErrorMessage';
 
+import getAsyncFields from './getAsyncKeys';
 import styles from './styles.module.css';
 
 function Item(props) {
@@ -21,7 +22,26 @@ function Item(props) {
 		rules,
 		label,
 	});
-	const Element = getElementController(type);
+
+	let newProps = { ...props };
+
+	const isAsyncSelect = ['select', 'creatable-select'].includes(type)
+												&& Object.keys(props).includes('optionsListKey');
+
+	if (isAsyncSelect) {
+		const asyncKey = props?.optionsListKey;
+		const { defaultParams, ...asyncFields } = getAsyncFields(asyncKey);
+		const finalParams = props?.params || defaultParams;
+
+		newProps = {
+			...newProps,
+			...asyncFields,
+			params : finalParams,
+			type   : 'async-select',
+		};
+	}
+
+	const Element = getElementController(newProps.type);
 
 	const flex = ((span || 12) / 12) * 100 - 1;
 
@@ -40,7 +60,7 @@ function Item(props) {
 				{label}
 			</h4>
 			<Element
-				{...props}
+				{...newProps}
 				control={control}
 			/>
 			<p style={{

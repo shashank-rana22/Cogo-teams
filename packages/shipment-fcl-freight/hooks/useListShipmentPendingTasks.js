@@ -54,11 +54,10 @@ function useListShipmentPendingTasks() {
 
 	const handleClick = (task) => {
 		if (Object.keys(task).includes('id')) {
-			console.log('setting the task id', task);
 			setSelectedTaskId(task.id);
 		}
 	};
-	console.log('shipment data', data);
+
 	return {
 		loading : loading || isGettingShipment,
 		count   : data?.total_count,
@@ -67,6 +66,7 @@ function useListShipmentPendingTasks() {
 		shipment_data,
 		setHideCompletedTasks,
 		handleClick,
+		setSelectedTaskId,
 		selectedTaskId,
 		showMyTasks,
 		setShowMyTasks,

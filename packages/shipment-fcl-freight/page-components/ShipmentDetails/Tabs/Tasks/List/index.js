@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 function List() {
 	const {
 		count, completedTaskCount, tasksList, loading,
-		setHideCompletedTasks, handleClick, selectedTaskId,
+		setHideCompletedTasks, handleClick, selectedTaskId, setSelectedTaskId,
 		shipment_data,
 	} = useListShipmentPendingTasks();
 
@@ -32,6 +32,19 @@ function List() {
 				completedTaskCount={completedTaskCount}
 				setHideCompletedTasks={setHideCompletedTasks}
 			/>
+
+			{
+				selectedTaskId ? (
+					<div className={styles.see_all_tasks} onClick={() => setSelectedTaskId(null)}>
+						<img
+							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/arrow.svg"
+							alt="arrow"
+						/>
+						<div>See All Tasks</div>
+					</div>
+				) : null
+			}
+
 			{!selectedTaskId ? (tasksList || []).map((task) => <Card task={task} handleClick={handleClick} />) : null}
 
 			{selectedTaskId ? (

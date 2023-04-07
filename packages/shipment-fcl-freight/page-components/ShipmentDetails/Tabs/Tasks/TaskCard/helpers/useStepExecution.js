@@ -4,7 +4,6 @@ import { useContext, useState } from 'react';
 
 import getShowTaskFields from '../utils/get-show-task-fields';
 import injectValues from '../utils/inject-Values';
-
 // import useForm from './useForm';
 
 const getDefaultValues = (oldfields) => {
@@ -24,10 +23,6 @@ const getDefaultValues = (oldfields) => {
 // here controls manipulation can take place people had done prefilling here but it is not recommended
 const populateControls = (
 	controls,
-	// getApisData,
-	// task,
-	// shipment_data,
-	// stepConfig,
 ) => controls;
 
 const mutateFields = (fields, primaryService, formValues) => {
@@ -67,6 +62,7 @@ const mutateFields = (fields, primaryService, formValues) => {
 	return newFields;
 };
 
+// This was used in older code for injection form and form mutating
 const injectForm = (config, formProps, task, primaryService, formValues) => {
 	const showElements = getShowTaskFields(formValues, config.controls);
 
@@ -95,13 +91,7 @@ function useStepExecution({
 }) {
 	const { servicesList } = useContext(ShipmentDetailContext);
 
-	const populatedControls = populateControls(
-		stepConfig.controls,
-		getApisData,
-		task,
-		primaryService,
-		stepConfig,
-	);
+	const populatedControls = populateControls(stepConfig.controls);
 
 	const valueInjectedControls = injectValues(
 		selectedMail,
@@ -116,53 +106,15 @@ function useStepExecution({
 
 	const formProps = useForm({ defaultValues });
 
-	// const formProps = useForm(valueInjectedControls || []);
-
-	// const formValues = formProps.watch();
-
-	// const { finalConfig, controls, showElements } = injectForm(
-	// 	stepConfig,
-	// 	formProps,
-	// 	task,
-	// 	primaryService,
-	// 	formValues,
-	// );
-
-	// const groupSubHeadings = {};
-	// if (task.task === 'mark_confirmed') {
-	// 	(controls || []).forEach((obj) => {
-	// 		if (!Array.isArray(groupSubHeadings[obj.subHeading])) {
-	// 			groupSubHeadings[obj.subHeading] = [];
-	// 			groupSubHeadings[obj.subHeading].push(obj);
-	// 		} else {
-	// 			groupSubHeadings[obj.subHeading].push(obj);
-	// 		}
-	// 	});
-	// }
+	// Here some more manipulation is done
 
 	const [error, setError] = useState({});
 
-	// const { fields = {}, handleSubmit } = finalConfig.formProps;
 	const [isLoading, setIsLoading] = useState(false);
 
 	const onError = (err) => {
 		setError(err);
 	};
-
-	// return {
-	// 	finalConfig,
-	// 	controls,
-	// 	showElements,
-	// 	error,
-	// 	setError,
-	// 	fields,
-	// 	handleSubmit,
-	// 	isLoading,
-	// 	setIsLoading,
-	// 	onError,
-	// 	groupSubHeadings,
-	// 	servicesList,
-	// };
 
 	return {
 		fields,
