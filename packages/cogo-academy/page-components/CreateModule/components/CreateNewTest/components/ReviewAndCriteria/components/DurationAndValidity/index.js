@@ -16,15 +16,14 @@ function DurationAndValidity({ setValue, data, control, errors, loading }) {
 				if (controlName === 'test_validity') {
 					setValue(controlName, {
 						startDate : new Date(format(validity_start)),
-						endDate   : new Date(format(validity_end)),
+						endDate   : (validity_end) ? new Date(format(validity_end))
+							: new Date(Date.now() + (3600 * 1000 * 24)),
 					});
-				} else {
+				} else if (data[controlName]) {
 					setValue(controlName, data[controlName]);
 				}
 			});
 		}
-
-		setValue('maximum_attempts', '1');
 	}, [data, setValue]);
 
 	if (isEmpty(data) || loading) {
@@ -35,7 +34,6 @@ function DurationAndValidity({ setValue, data, control, errors, loading }) {
 		<div className={styles.container}>
 			{controls?.map((controlItem) => {
 				const { type, label, name: controlName } = controlItem || {};
-
 				const Element = getElementController(type);
 
 				return (
