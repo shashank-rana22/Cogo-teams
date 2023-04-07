@@ -38,7 +38,6 @@ function ConfigurationEngine() {
 	}
 
 	return (
-
 		<div className={styles.container}>
 
 			<Header />
@@ -72,7 +71,7 @@ function ConfigurationEngine() {
 					/>
 				</TabPanel>
 
-				<TabPanel name="key_words" title="Key Words">
+				<TabPanel name="keywords" title="Keywords">
 					<KeywordsComponent
 						configurationPage={configurationPage}
 						setConfigurationPage={setConfigurationPage}
@@ -80,7 +79,6 @@ function ConfigurationEngine() {
 					/>
 				</TabPanel>
 			</Tabs>
-
 		</div>
 	);
 }

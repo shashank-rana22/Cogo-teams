@@ -1,47 +1,47 @@
 .container {
-  width: 100%;
-  margin-top: 32px;
+	width: 100%;
+	margin-top: 32px;
 }
 
 .name {
-  white-space: initial;
+	white-space: initial;
 }
 
 .description {
-  display: flex;
-  flex-wrap: wrap;
-  margin-right: 4;
+	display: flex;
+	flex-wrap: wrap;
+	margin-right: 4;
 }
 
 .tags {
-  display: flex;
-  flex-wrap: wrap;
-  margin-right: 4;
+	display: flex;
+	flex-wrap: wrap;
+	margin-right: 4;
 }
 
 .button_container {
-  display: flex;
-  margin: 8px 0;
+	display: flex;
+	margin: 8px 0;
 }
 
 .pagination_container {
-  display: flex;
-  justify-content: flex-end;
+	display: flex;
+	justify-content: flex-end;
 }
 
 .delete_button {
-  margin-right: 8px;
-  cursor: pointer;
+	margin-right: 8px;
+	cursor: pointer;
 }
 
 .sort_arrow {
-  margin-left: 4px;
-  transition: 0.3s;
-  transform: rotate(90deg);
+	margin-left: 4px;
+	transition: 0.3s;
+	transform: rotate(90deg);
 }
 
 .sort_title {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
 }

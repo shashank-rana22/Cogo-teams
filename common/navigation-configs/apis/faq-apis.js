@@ -96,6 +96,11 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
+			api          : 'create_faq_keyword',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
 			api          : 'list_faq_feedbacks',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
