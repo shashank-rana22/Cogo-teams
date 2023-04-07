@@ -82,11 +82,11 @@ function SalesComponent({
 			<table className={styles.table_style}>
 				<tr>
 					<td>{' '}</td>
-					{[1, 2, 3].map((index) => (
-						<td className={styles.styled_date} key={index}>
+					{[1, 2, 3].map((val) => (
+						<td className={styles.styled_date} key={val}>
 							{
 										format(
-											durations[index - 1],
+											durations[val - 1],
 											yearFormat(),
 											{},
 											false,
@@ -115,16 +115,16 @@ function SalesComponent({
 							Credit Notes (-)
 						</div>
 					</td>
-					{[1, 2, 3, 4].map((index) => (
+					{[1, 2, 3, 4].map((val) => (
 
-						<td key={index}>
+						<td key={val}>
 							{' '}
 							<div className={styles.styled_credit}>
 								{getFormattedPrice(
-									getDataFromDuration(invoiceArray, durations[index - 1])?.[0]?.amount,
+									getDataFromDuration(invoiceArray, durations[val - 1])?.[0]?.amount,
 									getDataFromDuration(
 										invoiceArray,
-										durations[index - 1],
+										durations[val - 1],
 									)?.[0]?.dashboardCurrency,
 									{
 										style                 : 'currency',
@@ -138,10 +138,10 @@ function SalesComponent({
 								{' '}
 
 								{getFormattedPrice(
-									getDataFromDuration(creditNoteArray, durations[index - 1])?.[0]?.amount,
+									getDataFromDuration(creditNoteArray, durations[val - 1])?.[0]?.amount,
 									getDataFromDuration(
 										creditNoteArray,
-										durations[index - 1],
+										durations[val - 1],
 									)?.[0]?.dashboardCurrency,
 									{
 										style                 : 'currency',
@@ -162,15 +162,15 @@ function SalesComponent({
 						Revenue
 					</td>
 
-					{[1, 2, 3, 4].map((index) => (
+					{[1, 2, 3, 4].map((val) => (
 
-						<td key={index}>
+						<td key={val}>
 
 							<span className={styles.styled_amount}>
 
 								{getFormattedPrice(
-									getDataFromDuration(revenueArray, durations[index - 1])?.[0]?.amount,
-									getDataFromDuration(revenueArray, durations[index - 1])?.[0]?.dashboardCurrency,
+									getDataFromDuration(revenueArray, durations[val - 1])?.[0]?.amount,
+									getDataFromDuration(revenueArray, durations[val - 1])?.[0]?.dashboardCurrency,
 									{
 										style                 : 'currency',
 										currencyDisplay       : 'code',

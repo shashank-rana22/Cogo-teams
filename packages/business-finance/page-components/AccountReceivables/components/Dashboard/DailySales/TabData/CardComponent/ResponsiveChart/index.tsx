@@ -5,6 +5,7 @@ import { getFormattedPrice } from '@cogoport/forms';
 
 import getAmountInLakhCrK from '../../../../../../../commons/getAmountInLakhCrK';
 import EmptyState from '../../../../../../commons/EmptyStateDocs';
+import { keyValue } from '../../../../../../constants';
 
 import styles from './styles.module.css';
 
@@ -14,13 +15,6 @@ interface ResponsiveChartProps {
 	entityCode?: string,
 	showCount?: boolean,
 }
-const keyValue = {
-	101 : 'INR',
-	201 : 'EUR',
-	301 : 'INR',
-	401 : 'SGD',
-	501 : 'VND',
-};
 
 function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true }: ResponsiveChartProps) {
 	data?.sort((a, b) => {
