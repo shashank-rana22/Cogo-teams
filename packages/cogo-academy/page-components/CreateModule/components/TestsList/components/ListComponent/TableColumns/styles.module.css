@@ -66,3 +66,17 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
+.status_time {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+}
+
+.middle_div {
+	margin: auto 12px;
+}
+
+.details {
+	margin: auto;
+}
