@@ -18,7 +18,6 @@ const {
 } = CONSTANT_KEYS;
 
 const INGESTION_COMPONENTS_MAPPING = {
-	// [TEMPLATE]        : TemplateModal,
 	[CHOOSE]          : ChooseModal,
 	[ORG_DETAILS]     : OrgDetailsModal,
 	[PROVIDER_SELECT] : ProviderSelectModal,
@@ -66,10 +65,7 @@ function Header({ refetch = () => {} }) {
 					size="lg"
 					themeType="secondary"
 					style={{ marginRight: '16px' }}
-					onClick={() => setShow({
-						open   : true,
-						screen : 'template',
-					})}
+					onClick={() => setTemplate('template')}
 				>
 					<IcMDownload style={{ marginRight: '4px' }} />
 					Download Templates

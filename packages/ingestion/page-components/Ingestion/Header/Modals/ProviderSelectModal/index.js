@@ -59,8 +59,7 @@ function ProviderSelectModal({ setShow = () => {}, setUploadData = () => {}, upl
 							onChoose(response);
 						}}
 						key={response?.key}
-						// style={{ width: '80%', height: '44px' }}
-						className={styles.provider_button}
+						style={{ width: '80%', height: '44px' }}
 					>
 						{response?.key}
 

@@ -124,7 +124,7 @@ function useGetIngestionList() {
 			key      : 'error',
 			Header   : 'ERROR REPORT',
 			accessor : ({ request_files = {} }) => (
-				<div className={styles.name}>
+				<div className={styles.error}>
 					{request_files?.errored_data_url ? (
 						<Button
 							onClick={() => { downloadErrorCsv(request_files?.errored_data_url); }}

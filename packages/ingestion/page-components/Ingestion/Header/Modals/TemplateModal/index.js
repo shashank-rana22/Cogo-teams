@@ -1,6 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 import { IcMDownload } from '@cogoport/icons-react';
 
+import { BUTTON_MAPPING } from '../../../../../constants/template-mapping';
 import useGetTemplate from '../../../../../hooks/useGetTemplate';
 
 import styles from './styles.module.css';
@@ -24,31 +25,20 @@ function TemplateModal({ template = '', setTemplate = () => {} }) {
 			<Modal.Body>
 				<div className={styles.heading}>Download Templates among the following</div>
 				<div className={styles.container}>
-					<Button
-						themeType="secondary"
-						onClick={() => getTemplateCsv('lead')}
-						className={styles.template_button}
-					>
-						Leads Template
 
-					</Button>
-					<Button
-						themeType="secondary"
-						onClick={() => getTemplateCsv('partner')}
-						className={styles.template_button}
+					{
+						BUTTON_MAPPING.map((item) => (
+							<Button
+								themeType="secondary"
+								onClick={() => getTemplateCsv(item?.name)}
+								style={{ width: '50%', height: '60px' }}
+							>
+								{item?.name}
 
-					>
-						Channel Partner Template
+							</Button>
+						))
+					}
 
-					</Button>
-					<Button
-						themeType="secondary"
-						onClick={() => getTemplateCsv('organization')}
-						className={styles.template_button}
-
-					>
-						Importer Exporter Template
-					</Button>
 				</div>
 			</Modal.Body>
 			<Modal.Footer>

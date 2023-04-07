@@ -63,7 +63,7 @@ function useGetUploadList(id) {
 			Header   : 'STATUS',
 			accessor : ({ stage }) => (
 				<Pill size="sm" color={UPLOAD_STATUS_MAPPING[stage]}>
-					{stage ? startCase(stage) : '___'}
+					{ startCase(stage || '___') }
 				</Pill>
 			),
 		},
