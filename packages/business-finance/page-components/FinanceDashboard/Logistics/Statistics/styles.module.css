@@ -105,3 +105,11 @@
 	font-weight: 500;
 	color: #ee3425;
 }
+
+.tooltip_text {
+	font-size: 12px;
+	font-weight: 600;
+	word-break: break-word;
+	word-wrap: break-word;
+	white-space: pre-wrap;
+}
