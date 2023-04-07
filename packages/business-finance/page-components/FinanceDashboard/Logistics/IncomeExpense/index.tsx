@@ -151,7 +151,7 @@ function IncomeExpense({ globalFilters, entityTabFilters }) {
 									<Input
 										placeholder="Select Year Mode"
 										size="sm"
-										value={inputValue}
+										value={inputValue || `CY - ${currentYear}`}
 									/>
 								</div>
 							</Popover>
