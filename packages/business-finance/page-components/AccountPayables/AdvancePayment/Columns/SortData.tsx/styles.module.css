@@ -1,0 +1,9 @@
+.container {
+	display: flex;
+}
+
+.icon_style {
+	display: inline-flex;
+	flex-direction: column;
+	margin-left: 4px;
+}

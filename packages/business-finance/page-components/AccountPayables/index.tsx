@@ -72,7 +72,7 @@ function AccountPayables() {
 						<h1>Invoices</h1>
 					</TabPanel>
 					<TabPanel name="advance-payment" title="Advance Payment">
-						<AdvancePayment />
+						<AdvancePayment activeEntity={activeEntity} />
 					</TabPanel>
 					<TabPanel name="payruns" title="PAYRUN">
 						<h1>Payruns</h1>
