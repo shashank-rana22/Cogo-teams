@@ -146,9 +146,14 @@ function CogoOne() {
 			setActiveVoiceCard({});
 			setActiveCard({});
 			setActiveMail({});
+		}
+	}, [activeTab, firstLoading, setActiveCard, showBotMessages, isomniChannelAdmin]);
+
+	useEffect(() => {
+		if (isomniChannelAdmin) {
 			setAppliedFilters({});
 		}
-	}, [activeTab, firstLoading, setActiveCard, showBotMessages, setAppliedFilters]);
+	}, [setAppliedFilters, isomniChannelAdmin, showBotMessages]);
 
 	useEffect(() => {
 		setToggleStatus(status === 'active');
