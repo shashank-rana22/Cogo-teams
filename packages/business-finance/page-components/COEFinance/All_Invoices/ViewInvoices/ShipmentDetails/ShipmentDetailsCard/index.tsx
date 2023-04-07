@@ -57,7 +57,7 @@ function ShipmentDetailsCard({
 		accountNumber = '',
 		ifscCode = '',
 	} = sellerBankDetail || {};
-	console.log({ registrationNumber, sellerDetail }, 'refgknik');
+
 	const {
 		billNumber = '',
 		billDate,
