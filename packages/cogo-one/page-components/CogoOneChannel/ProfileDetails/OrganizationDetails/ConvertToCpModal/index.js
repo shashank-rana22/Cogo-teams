@@ -1,4 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
+import ROLE_IDS from '@cogoport/constants/role_ids';
 import { SelectController } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsPartnerUsers } from '@cogoport/forms/utils/getAsyncFields';
@@ -16,12 +17,13 @@ function ConvertToCpModal({
 	organizationId,
 	refetchOrgDetails,
 }) {
+	const { COGOVERSE_KAM } = ROLE_IDS;
 	const listPartnerUsers = useGetAsyncOptions(
 		merge(asyncFieldsPartnerUsers(), {
 			params: {
 				filters: {
 					status               : 'active',
-					role_sub_functions   : ['cp_portfolio'],
+					role_ids             : [COGOVERSE_KAM],
 					partner_entity_types : ['cogoport'],
 				},
 				rm_mappings_data_required : false,

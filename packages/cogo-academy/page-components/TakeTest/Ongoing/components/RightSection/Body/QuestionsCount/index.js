@@ -16,6 +16,7 @@ function QuestionsCount({
 	total_question_count,
 	user_appearance = [],
 	setSubQuestion,
+	currentQuestion,
 }) {
 	const {
 		query: { test_id },
@@ -53,7 +54,7 @@ function QuestionsCount({
 							cursor          : `${(index === 0 || question?.answer_state !== 'not_viewed')
 								? 'pointer' : 'not-allowed'}`,
 						}}
-						className={styles.question_count}
+						className={`${styles.question_count} ${Number(currentQuestion) === index + 1 && styles.active}`}
 					>
 						{index + 1}
 					</div>
@@ -64,7 +65,8 @@ function QuestionsCount({
 				<div
 					role="presentation"
 					style={{ backgroundColor: '#FDFBF6', cursor: 'not-allowed' }}
-					className={styles.question_count}
+					className={`${styles.question_count} ${Number(currentQuestion) - user_appearance.length
+						=== index + 1 && styles.active}`}
 				>
 					{user_appearance.length + index + 1}
 				</div>

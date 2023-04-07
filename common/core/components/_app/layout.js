@@ -9,6 +9,8 @@ import useGetFaqNotifications from './useGetFaqNotifications';
 
 const ChatFAQs = dynamic(() => import('../AdminLayout/FAQs'), { ssr: true });
 
+const FAQ_BUBBLE_EXCLUSION_LIST = ['external'];
+
 function Layout({ children, layout }) {
 	const hideLayout = layout === 'hidden';
 
@@ -37,7 +39,7 @@ function Layout({ children, layout }) {
 			navbar={navigationMappingAdmin}
 		>
 			<div style={{ margin: 0, padding: '24px 20px' }}>
-				{role_functions.includes('sales') && (
+				{!role_functions.some((r) => FAQ_BUBBLE_EXCLUSION_LIST.includes(r)) && (
 					<ChatFAQs
 						faqNotificationData={faqData}
 						faqNotificationApiLoading={faqNotificationApiLoading}
