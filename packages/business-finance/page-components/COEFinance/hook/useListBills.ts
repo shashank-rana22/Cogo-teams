@@ -77,7 +77,7 @@ const useListBills = (allParams) => {
 		params: {
 			jobNumbers : params.jobNumber ? [params?.jobNumber] : undefined,
 			jobSource  : 'LOGISTICS',
-			jobType    : params?.jobType,
+			jobType    : params?.jobType || undefined,
 			q          : q || undefined,
 			...restFilters,
 			amountTab  : undefined,
@@ -93,7 +93,7 @@ const useListBills = (allParams) => {
 		params: {
 			jobNumber                 : params?.jobNumber,
 			jobSource                 : 'LOGISTICS',
-			jobType                   : params?.jobType,
+			jobType                   : params?.jobType || undefined,
 			q                         : q || undefined,
 			isCreatedByDetailRequired : true,
 			...restFilters,
