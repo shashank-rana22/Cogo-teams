@@ -1,9 +1,11 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import { IcMRefresh } from '@cogoport/icons-react';
 import { Documents, Tracking } from '@cogoport/ocean-modules';
 // import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
-import React, { useState, useMemo } from 'react';
+import { useRouter } from 'next/router';
+import React, { useMemo, useState, useEffect } from 'react';
 
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
@@ -17,11 +19,14 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 import styles from './styles.module.css';
 
 function Superadmin() {
+	const router = useRouter();
+	const [activeTab, setActiveTab] = useState('overview');
+
 	const shipment_additional_methods = useMemo(() => ['main_service',
 		'documents'], []);
 
 	const { get } = useGetShipment({ additional_methods: shipment_additional_methods });
-	const { shipment_data } = get;
+	const { shipment_data, isGettingShipment } = get;
 
 	const services_additional_methods = useMemo(() => [
 		'stakeholder',
@@ -40,7 +45,42 @@ function Superadmin() {
 		...getTimeline,
 		activeStakeholder: 'Superadmin',
 	}), [get, servicesGet, getTimeline]);
-	const [activeTab, setActiveTab] = useState('overview');
+
+	const handleClick = () => {
+		router.reload();
+	};
+
+	useEffect(() => {
+		router.prefetch(router.asPath);
+	}, [router]);
+
+	if (isGettingShipment) {
+		return (
+			<div className={styles.loader}>
+				Loading Shipment Data....
+				<Loader themeType="primary" className={styles.loader_icon} />
+			</div>
+		);
+	}
+
+	if (!shipment_data) {
+		return (
+			<div className={styles.shipment_not_found}>
+				<div className={styles.section}>
+					<h1 className={styles.error}>404</h1>
+					<div className={styles.page}>Ooops!!! The page you are looking for is not found</div>
+					<Button
+						onClick={handleClick}
+						className={styles.refresh}
+					>
+						<IcMRefresh />
+						&nbsp;
+						Refresh
+					</Button>
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<ShipmentDetailContext.Provider value={contextValues}>

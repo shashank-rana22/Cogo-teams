@@ -141,36 +141,23 @@ function BLDetails() {
 			</Accordion>
 
 			{mappingModal ? (
-				<Modal
-					show={mappingModal}
-					onClose={() => {
-						setMappingModal(false);
-					}}
-				>
-					<Modal.Header title="BL Container Mapping" />
-					<BlContainersMapping
-						data={list}
-						setMappingModal={setMappingModal}
-						containerDetails={containerDetailsArray}
-						refetch={refetch}
-					/>
-				</Modal>
+				<BlContainersMapping
+					data={list}
+					setMappingModal={setMappingModal}
+					containerDetails={containerDetailsArray}
+					refetch={refetch}
+					mappingModal={mappingModal}
+				/>
+
 			) : null}
 
 			{editContainerNum ? (
-				<Modal
-					show={editContainerNum}
-					onClose={() => {
-						setEditContainerNum(false);
-					}}
-				>
-					<Modal.Header title="Update Container Number" />
-					<ContainerNmUpdate
-						setEditContainerNum={setEditContainerNum}
-						containerDetails={containerDetailsArray}
-						refetch={refetch}
-					/>
-				</Modal>
+				<ContainerNmUpdate
+					setEditContainerNum={setEditContainerNum}
+					containerDetails={containerDetailsArray}
+					refetch={refetch}
+					editContainerNum={editContainerNum}
+				/>
 			) : null}
 		</div>
 	);

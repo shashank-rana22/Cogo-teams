@@ -1,8 +1,7 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 function useGetServices({ shipment_id, additional_methods = [] }) {
 	const [{ loading : servicesLoading, data }, trigger] = useRequest({
@@ -20,7 +19,7 @@ function useGetServices({ shipment_id, additional_methods = [] }) {
 					},
 				});
 			} catch (err) {
-				Toast.error(getApiErrorString(err));
+				toastApiError(err);
 			}
 		})();
 	}, [trigger, shipment_id, additional_methods]);

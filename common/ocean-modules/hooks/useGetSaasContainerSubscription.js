@@ -1,8 +1,7 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 const useGetSaasContainerSubscription = ({
 	shipmentId = '',
@@ -21,7 +20,7 @@ const useGetSaasContainerSubscription = ({
 					},
 				});
 			} catch (error) {
-				Toast.error(getApiErrorString(error));
+				toastApiError(error);
 			}
 		})();
 	}, [shipmentId, trigger]);
