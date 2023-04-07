@@ -11,6 +11,7 @@ function Filters({
 	setFilterVisible = () => {},
 	activityTab,
 	filters: appliedFilters = null,
+	dateFilters,
 	handleFilters = () => {},
 	handleReset = () => {},
 	loading = false,
@@ -18,12 +19,13 @@ function Filters({
 }) {
 	const { FILTERS_MAPPING } = filterOptions();
 	const [values, setValues] = useState(null);
+	const [dateValues, setDateValues] = useState(null);
 
-	const emptyCheck = isEmpty(values);
+	const emptyCheck = isEmpty(values) && isEmpty(dateValues);
 
 	useEffect(() => {
-		setValues(appliedFilters);
-	}, [appliedFilters]);
+		if (activeSubTab === 'summary') { setDateValues(dateFilters); } else setValues(appliedFilters || []);
+	}, [activeSubTab, appliedFilters, dateFilters]);
 
 	const checkFilter = () => {
 		if (activityTab === 'transactional') {
@@ -42,7 +44,7 @@ function Filters({
 		}
 		if (activityTab === 'communication' && activeSubTab === 'summary') {
 			return (
-				<DateRangepicker name="fromToDate" onChange={setValues} value={values} isPreviousDaysAllowed />
+				<DateRangepicker name="fromToDate" onChange={setDateValues} value={dateValues} isPreviousDaysAllowed />
 			);
 		}
 		return (
@@ -97,7 +99,7 @@ function Filters({
 				<Button
 					size="sm"
 					themeType="accent"
-					onClick={() => handleFilters(values)}
+					onClick={activeSubTab === 'summary' ? () => handleFilters(dateValues) : () => handleFilters(values)}
 					disabled={emptyCheck}
 					loading={loading}
 				>

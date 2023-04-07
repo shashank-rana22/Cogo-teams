@@ -22,7 +22,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 	const [pagination, setPagination] = useState(1);
 	const [activeSubTab, setActiveSubTab] = useState('channels');
 
-	const { mobile_no } = activeMessageCard;
+	const { mobile_no, channel_type = '' } = activeMessageCard;
 	const {
 		user_id:messageUserId,
 		lead_user_id:messageLeadUserId = null, id = '', sender = '',
@@ -67,12 +67,20 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 
 	});
 
-	const { chatData = {} } = useListUserChatSummary({
+	const {
+		chatData = {},
+		dateFilters,
+		setDateFilters = EmptyFunction,
+		getUserChatSummary = EmptyFunction,
+	} = useListUserChatSummary({
 		mobile_no,
 		activeSubTab,
 		sender,
 		user_id,
 		lead_user_id,
+		pagination,
+		setPagination,
+		channel_type,
 	});
 
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
@@ -101,27 +109,38 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 
 	useEffect(() => {
 		setFilters(null);
+		setDateFilters(null);
 		setActiveSubTab('channels');
 		setPagination(1);
-	}, [activityTab, setFilters]);
+	}, [activityTab, setFilters, setDateFilters]);
+
+	useEffect(() => {
+		setFilters(null);
+		setDateFilters(null);
+		setPagination(1);
+	}, [activeSubTab, setFilters, setDateFilters]);
 
 	const handleFilters = (val) => {
+		if (activeSubTab === 'summary') { setDateFilters(val); } else { setFilters(val); }
 		setPagination(1);
-		setFilters(val);
+		setFilterVisible(false);
 	};
 
 	const handleReset = () => {
 		setFilters(null);
-		fetchActivityLogs();
+		setDateFilters(null);
+		if (activeSubTab === 'summary') { getUserChatSummary(); } else { fetchActivityLogs(); }
+		setFilterVisible(false);
 	};
 
-	useEffect(() => {
-		setPagination(1);
-		setFilters(null);
-	}, [activeSubTab, setFilters]);
-
-	const emptyCheck = activeSubTab !== 'channels'
-		? isEmpty(timeLineList) : (!user_id && !lead_user_id) || isEmpty(list) || isEmpty(chatDataList);
+	let emptyCheck = false;
+	if (activeSubTab === 'channels') {
+		emptyCheck = (!user_id && !lead_user_id) || isEmpty(list);
+	} else if (activeSubTab === 'summary') {
+		emptyCheck = isEmpty(chatDataList);
+	} else {
+		emptyCheck = isEmpty(timeLineList);
+	}
 
 	function ShowData() {
 		return emptyCheck ? (
@@ -196,6 +215,8 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 										activityTab={activityTab}
 										filters={filters}
 										setFilters={setFilters}
+										dateFilters={dateFilters}
+										setDateFilters={setDateFilters}
 										handleFilters={handleFilters}
 										handleReset={handleReset}
 										loading={loading}

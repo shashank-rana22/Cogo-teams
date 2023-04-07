@@ -1,4 +1,5 @@
 import { useRequest } from '@cogoport/request';
+import { format } from '@cogoport/utils';
 import { useEffect, useCallback, useState } from 'react';
 
 const useListUserChatSummary = ({
@@ -8,21 +9,31 @@ const useListUserChatSummary = ({
 	lead_user_id = '',
 	mobile_no,
 	sender,
+	pagination,
+	channel_type = '',
 }) => {
-	const [firstLoading, setFirstLoading] = useState(false);
+	const [dateFilters, setDateFilters] = useState(null);
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_user_chat_summary',
 		method : 'get',
-	}, { manual: true, autoCancel: false });
+	}, { manual: true });
 
 	const getUserChatSummary = useCallback(async () => {
 		try {
 			const payload = {
-				mobile_number : mobile_no,
-				platform_type : 'whatsapp',
-				user_id,
-				lead_user_id,
-				user_token    : sender,
+				filters: {
+					platform_type             : channel_type,
+					mobile_number             : mobile_no,
+					user_id                   : user_id || undefined,
+					lead_user_id              : lead_user_id || undefined,
+					user_token                : sender || undefined,
+					summary_date_greater_than : dateFilters?.startDate
+						? format(dateFilters?.startDate, 'dd MMM yyyy') : undefined,
+					summary_date_less_than: dateFilters?.endDate
+						? format(dateFilters?.endDate, 'dd MMM yyyy') : undefined,
+				},
+				page       : pagination,
+				page_limit : 10,
 			};
 			await trigger({
 				params: payload,
@@ -30,7 +41,12 @@ const useListUserChatSummary = ({
 		} catch (error) {
 			// console.log(error);
 		}
-	}, [lead_user_id, mobile_no, sender, trigger, user_id]);
+	}, [channel_type,
+		mobile_no, user_id,
+		lead_user_id,
+		sender,
+		dateFilters?.startDate,
+		dateFilters?.endDate, pagination, trigger]);
 
 	useEffect(() => {
 		if (activeSubTab === 'summary' && (user_id || lead_user_id || id)) {
@@ -39,11 +55,11 @@ const useListUserChatSummary = ({
 	}, [activeSubTab, getUserChatSummary, lead_user_id, user_id, id]);
 
 	return {
-		chatData                : data || {},
+		chatData           : data || {},
 		getUserChatSummary,
-		timeLineLoading         : loading,
-		firstTimeLineLoading    : firstLoading,
-		setFirstTimeLineLoading : setFirstLoading,
+		chatSummaryLoading : loading,
+		dateFilters,
+		setDateFilters,
 	};
 };
 
