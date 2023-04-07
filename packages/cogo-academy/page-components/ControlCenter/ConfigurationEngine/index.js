@@ -6,6 +6,7 @@ import CreateAudienceForm from './CreateAudienceForm';
 import CreateForm from './CreateComponent';
 import Header from './Header';
 import useCreateFaq from './hooks/useCreateFaq';
+import KeywordsComponent from './KeywordsComponent';
 import styles from './styles.module.css';
 import TagComponent from './TagComponent';
 import TopicComponent from './TopicComponent';
@@ -72,7 +73,7 @@ function ConfigurationEngine() {
 				</TabPanel>
 
 				<TabPanel name="key_words" title="Key Words">
-					<TopicComponent
+					<KeywordsComponent
 						configurationPage={configurationPage}
 						setConfigurationPage={setConfigurationPage}
 						reset={reset}
