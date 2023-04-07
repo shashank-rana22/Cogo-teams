@@ -1,4 +1,5 @@
 import { ResponsiveLine } from '@cogoport/charts/line/index';
+import { Tooltip } from '@cogoport/components';
 import globals from '@cogoport/globalization/constants/globals.json';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
@@ -73,8 +74,17 @@ const useGetColumns = ({ columnsToShow = [] }) => {
 		},
 		{
 			Header   : 'HS Code',
-			accessor : (item) => (item.hscodes || []).map((i) => `[${i.toString()}]`).join(', ') || '--',
-			key      : 'hscodes',
+			accessor : (item) => (
+				<div style={{ width: '200px' }}>
+					<Tooltip
+						content={(item.hscodes || []).map((hsCode) => `${hsCode}, `) || '--'}
+						placement="top"
+					>
+						{(item.hscodes || []).map((hsCode) => `[${hsCode}], `)}
+					</Tooltip>
+				</div>
+			),
+			key: 'hscodes',
 		},
 		{
 			Header   : 'HS CODE',
