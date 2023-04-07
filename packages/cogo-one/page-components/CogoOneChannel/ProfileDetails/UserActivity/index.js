@@ -252,7 +252,6 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 						currentPage={pagination}
 						totalItems={activeSubTab === 'agent' || activeSubTab === 'summary'
 							? subtab_count : channel_total_count}
-						// totalItems={totalItems}
 						pageSize={10}
 						onPageChange={(val) => setPagination(val)}
 					/>

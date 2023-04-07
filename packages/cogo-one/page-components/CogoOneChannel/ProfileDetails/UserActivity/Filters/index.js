@@ -69,25 +69,6 @@ function Filters({
 			</div>
 
 			{checkFilter()}
-			{/* {activityTab === 'transactional' ? (
-				<>
-					<div className={styles.label}>Enter Serial ID</div>
-					<Input
-						size="sm"
-						placeholder="Enter serial id"
-						options={FILTERS_MAPPING[activityTab]}
-						onChange={setValues}
-						value={values || ''}
-					/>
-				</>
-			) : (
-				<CheckboxGroup
-					options={FILTERS_MAPPING[activityTab]}
-					onChange={setValues}
-					value={values || []}
-					className={styles.filters}
-				/>
-			)} */}
 
 			<div className={styles.actions}>
 				<Button size="sm" themeType="tertiary" onClick={handleReset}>
