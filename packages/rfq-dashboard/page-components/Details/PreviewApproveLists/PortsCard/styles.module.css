@@ -1,0 +1,71 @@
+.main_container {
+	display: flex;
+	align-items: flex-start;
+}
+
+.port_container {
+	display: flex;
+	flex-direction: column;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+
+	/* width: 30%; */
+	padding: 10px 10px 10px 0;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+}
+
+.service {
+	display: flex;
+	flex-direction: column;
+	padding: 0 15px;
+	border-right: 1px solid #e0e0e0;
+}
+
+.service_type {
+	font-size: 14px;
+	font-weight: 600;
+	color: #356efd;
+}
+
+.icon_container {
+	svg {
+		width: 25px;
+		height: 25px;
+	}
+}
+
+.ports_tags_container {
+	display: flex;
+	flex-direction: column;
+	padding: 0 15px;
+	border-right: 1px solid #e0e0e0;
+}
+
+.location_box {
+	display: flex;
+	align-items: center;
+}
+
+.icmportarrow_icon {
+	margin: 0 10px;
+}
+
+.service_stats {
+	padding: 0 15px;
+	border-right: 1px solid #e0e0e0;
+}
+
+.price_fright_ctr_section {
+	padding: 0 15px;
+}
+
+.down_card_button {
+	cursor: pointer;
+	background-color: #fff;
+	border: none;
+}

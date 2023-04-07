@@ -1,0 +1,25 @@
+.container {
+	display: flex;
+
+	/* width: calc(55% - 10px); */
+
+	/* padding: 10px; */
+}
+
+.port_name_code {
+	display: flex;
+}
+
+.port {
+	font-size: 14px;
+}
+
+.port_name {
+	font-weight: 600;
+	color: #221f20;
+}
+
+.port_code {
+	padding-left: 3px;
+	color: #f68b21;
+}

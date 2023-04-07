@@ -1,7 +1,8 @@
 import { IcMProfile } from '@cogoport/icons-react';
 
-import { PortPairsEnterpriseShipmentSection, PromisedConAndContract }
-	from '../../../configurations/customer-past-month-data-card';
+import ServiceStats from '../../../common/ServiceStats';
+import { PortPairsEnterpriseShipmentSection } from '../../../configurations/customer-past-month-data-card';
+import { AvgPromisedConAndContract } from '../../../configurations/service-stats-data';
 
 import styles from './styles.module.css';
 
@@ -55,20 +56,7 @@ function CustomerPastMonthDataCard() {
 
 			</div>
 
-			<div className={styles.revenue_profitability_utilisation_section}>
-				{PromisedConAndContract.map((item) => (
-					<div className={styles.individual_section}>
-						<div className={styles.revenyue_profitability_utilization_name}>{item.label}</div>
-						<div className={`
-                        ${styles.revenyue_profitability_utilization_value} 
-                        ${styles[item.color]}`}
-						>
-							{item.value}
-
-						</div>
-					</div>
-				))}
-			</div>
+			<ServiceStats data={AvgPromisedConAndContract} />
 		</div>
 	);
 }

@@ -1,6 +1,51 @@
 .main_container {
 	display: flex;
 	flex-direction: column;
+
+	/* padding: 10px; */
 	background: #fff;
 	border-radius: 6px;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px;
+	border-bottom: 1px solid #e0e0e0;
+	border-radius: 6px 6px 0 0;
+
+	:global {
+		/* stylelint-disable-next-line selector-class-pattern */
+		.ui_checkbox_container {
+			padding: 0;
+		}
+	}
+}
+
+.approve_remaining_complete_shipment_section {
+	display: flex;
+	flex-direction: column;
+	padding: 0 10px 10px;
+}
+
+.shipment_lists_section {
+	margin-top: 20px;
+}
+
+.lists_heading_section {
+	display: flex;
+}
+
+.lists_heading_part {
+	font-size: 14px;
+	color: #000;
+}
+
+.port_pairs_nos {
+	font-weight: 500;
+}
+
+.ports_section {
+	margin-top: 20px;
 }

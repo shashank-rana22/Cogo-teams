@@ -1,0 +1,31 @@
+.revenue_profitability_utilisation_section {
+	display: flex;
+	gap: 25px;
+	padding-top: 10px;
+}
+
+.service_stats_ports_section {
+	padding-top: 0;
+}
+
+.revenyue_profitability_utilization_name {
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.revenyue_profitability_utilization_value {
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.revenue {
+	color: #221f20;
+}
+
+.profitability {
+	color: #849e4c;
+}
+
+.utilization {
+	color: #221f20;
+}
