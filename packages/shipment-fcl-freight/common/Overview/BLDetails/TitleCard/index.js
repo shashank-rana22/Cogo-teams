@@ -1,22 +1,18 @@
-import { cl } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
-import documentType from './documentType';
 import styles from './styles.module.css';
 
 function TitleCard({
 	item = {},
 	containerDetails = 0,
 }) {
-	const { doc_type } = documentType(item?.bl_document_type);
-
 	return (
-		<div className={cl`${styles.container} title-card`}>
+		<div className={styles.container}>
 			<div className={styles.display_card}>
 				<div className={styles.details}>
 					<div className={styles.title_container}>
 						<div className={styles.document_type}>
-							{doc_type}
+							{item?.bl_document_type === 'draft_bill_of_lading' ? 'MBL' : 'HBL'}
 							&nbsp;
 							{startCase(item?.status)}
 							:

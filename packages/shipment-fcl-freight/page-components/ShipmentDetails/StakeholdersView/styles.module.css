@@ -1,17 +1,29 @@
 .top_header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
 }
 
 .header {
-    display: flex;
-} 
+	display: flex;
+}
 
-.container{
-    margin-top: 20px;
-    background-color: #FFFFFF;
-    padding-top: 10px;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 4px; 
+.container {
+	padding-top: 10px;
+	margin-top: 20px;
+	background-color: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(0 0 0 / 20%);
+}
+
+.loader {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+.loader_icon {
+	width: 50px;
 }

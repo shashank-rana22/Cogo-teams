@@ -3,51 +3,26 @@ import React from 'react';
 
 import getConfigs from '../configurations/get-configs';
 
-import CreateNew from './CreateNew';
 import Details from './Details';
 import Header from './Header';
 import Status from './Status';
 import styles from './styles.module.css';
 
 function ServiceDetails({
-	serviceData = {},
-	serviceList = [],
+	servicesData = [],
+	servicesList = [],
 	shipmentData = {},
-	cancelUpsellFor = '',
 	refetchServices = () => {},
-	primary_service = {},
 }) {
 	const {
 		id = '',
 		service_type = '',
 		state = '',
-		service_supply_agent = '',
+		supply_agent = {},
 		payment_term = '',
-		routeLeg = '',
-		service_provider = '',
-	} = serviceData;
-
-	const { source = '', shipment_type = '' } = shipmentData;
-	const isHaulageAvailable = () => {
-		if (routeLeg.service_types[0] === 'haulage_freight_service') {
-			if (routeLeg.trade_type === 'export') {
-				return (
-					primary_service?.origin_port?.is_icd || primary_service?.port?.is_icd
-				);
-			}
-			return (
-				primary_service?.destination_port?.is_icd
-				|| primary_service?.port?.is_icd
-			);
-		}
-		return true;
-	};
-
-	const canUpsell = source !== 'consol'
-		&& !shipmentData?.is_job_closed
-		&& routeLeg.service_types[0] !== cancelUpsellFor
-		&& isHaulageAvailable
-		&& shipmentData?.state !== 'cancelled';
+		service_provider = {},
+		display_label = '',
+	} = servicesData?.[0] || {};
 
 	const service_items_key = getConfigs(service_type).details || {};
 
@@ -56,11 +31,11 @@ function ServiceDetails({
 			<Header
 				service_type={service_type}
 				id={id}
-				serviceData={[serviceData]}
+				serviceData={servicesData}
 				state={state}
-				heading={routeLeg.display}
-				service_supply_agent={service_supply_agent}
-				serviceList={serviceList}
+				heading={display_label}
+				supply_agent={supply_agent}
+				servicesList={servicesList}
 				shipmentData={shipmentData}
 				service_provider={service_provider}
 				refetchServices={refetchServices}
@@ -68,23 +43,22 @@ function ServiceDetails({
 
 			<Status state={state} payment_term={payment_term} />
 
-			<Details
-				state={state}
-				serviceItemsKey={service_items_key}
-				service_data={serviceData}
-			/>
+			{(servicesData || []).map((singleService, index) => (
+				<div
+					className={cl`${servicesData?.length === index + 1 ? styles.last : styles.other}`}
+				>
+					<Details
+						serviceData={singleService}
+						shipmentData={shipmentData}
+						serviceItemsKey={service_items_key}
+					/>
+				</div>
+			))}
+
 		</div>
 	);
 
-	const createNew = canUpsell ? (
-		<CreateNew
-			routeLeg={routeLeg}
-			serviceList={serviceList}
-			shipmentData={shipmentData}
-		/>
-	) : null;
-
-	return state ? addedServiceComponent : createNew;
+	return addedServiceComponent;
 }
 
 export default ServiceDetails;

@@ -5,6 +5,12 @@ const helperFuncs = (servicesList, possibleServices) => {
 		destinationServices : [],
 	};
 
+	const upsellServices = {
+		originServices      : [],
+		mainServices        : [],
+		destinationServices : [],
+	};
+
 	const checkIfServiceAlreadyPresent = (servicesArray, service) => {
 		let canPushService = true;
 		if (servicesArray[service.service_type]?.length) {
@@ -23,35 +29,36 @@ const helperFuncs = (servicesList, possibleServices) => {
 		(servicesList || []).forEach((service) => {
 			if (service?.service_type === serviceToIterate.service_type) {
 				isServiceAlreadyAdded = true;
-				if (service?.trade_type === 'export') {
+				if (service?.trade_type === 'export' && !serviceToIterate.is_main) {
 					const canPushService = 	checkIfServiceAlreadyPresent(serviceObj.originServices, service);
 
 					if (canPushService) {
 						if (Object.keys(serviceObj.originServices).includes(service?.service_type)) {
 							(serviceObj.originServices[service?.service_type]).push({
 								...(serviceObj.originServices[service?.service_type]),
-								display_name: serviceToIterate.display_name,
+								display_label : serviceToIterate.display_label,
+								trade_type    : serviceToIterate.trade_type,
 							});
 						} else {
 							(serviceObj.originServices)[service?.service_type] = [{
 								...service,
-								display_name: serviceToIterate.display_name,
+								display_label: serviceToIterate.display_label,
 							}];
 						}
 					}
-				} else 	if (service?.trade_type === 'import') {
+				} else 	if (service?.trade_type === 'import' && !serviceToIterate.is_main) {
 					const canPushService = 	checkIfServiceAlreadyPresent(serviceObj.destinationServices, service);
 
 					if (canPushService) {
-						if (Object.keys(serviceObj.originServices).includes(service?.service_type)) {
+						if (Object.keys(serviceObj.destinationServices).includes(service?.service_type)) {
 							(serviceObj.destinationServices[service?.service_type]).push({
 								...(serviceObj.destinationServices[service?.service_type]),
-								display_name: serviceToIterate.display_name,
+								display_label: serviceToIterate.display_label,
 							});
 						} else {
 							(serviceObj.destinationServices)[service?.service_type] = [{
 								...service,
-								display_name: serviceToIterate.display_name,
+								display_label: serviceToIterate.display_label,
 							}];
 						}
 					}
@@ -59,15 +66,16 @@ const helperFuncs = (servicesList, possibleServices) => {
 					const canPushService = 	checkIfServiceAlreadyPresent(serviceObj.destinationServices, service);
 
 					if (canPushService) {
-						if (Object.keys(serviceObj.mainServices).includes(service?.service_type)) {
-							(serviceObj.mainServices[service?.service_type]).push({
-								...(serviceObj.mainServices[service?.service_type]),
-								display_name: serviceToIterate.display_name,
+						if (Object.keys(serviceObj.mainServices).includes(service?.service_type)
+						&& serviceObj.mainServices?.[0]?.trade_type === serviceToIterate.trade_type) {
+							(serviceObj.mainServices[serviceToIterate.service_type]).push({
+								...service,
+								display_label: serviceToIterate.display_label,
 							});
-						} else {
+						} else if (!Object.keys(serviceObj.mainServices).includes(service?.service_type)) {
 							(serviceObj.mainServices)[service?.service_type] = [{
 								...service,
-								display_name: serviceToIterate.display_name,
+								display_label: serviceToIterate.display_label,
 							}];
 						}
 					}
@@ -76,18 +84,18 @@ const helperFuncs = (servicesList, possibleServices) => {
 		});
 
 		if (!isServiceAlreadyAdded) {
-			if (serviceToIterate.trade_type === 'export') {
-				(serviceObj.originServices)[serviceToIterate.service_type] = [{
-					display_name: serviceToIterate.display_name,
-				}];
-			} else if (serviceToIterate.trade_type === 'import') {
-				(serviceObj.destinationServices)[serviceToIterate.service_type] = [{
-					display_name: serviceToIterate.display_name,
-				}];
+			if (serviceToIterate.trade_type === 'export' && !serviceToIterate?.is_main) {
+				(upsellServices.originServices).push({
+					...serviceToIterate,
+				});
+			} else if (serviceToIterate.trade_type === 'import' && !serviceToIterate?.is_main) {
+				(upsellServices.destinationServices).push({
+					...serviceToIterate,
+				});
 			} else {
-				(serviceObj.mainServices)[serviceToIterate.service_type] = [{
-					display_name: serviceToIterate.display_name,
-				}];
+				(upsellServices.mainServices).push({
+					...serviceToIterate,
+				});
 			}
 		}
 	};
@@ -104,6 +112,7 @@ const helperFuncs = (servicesList, possibleServices) => {
 
 	return {
 		serviceObj,
+		upsellServices,
 	};
 };
 

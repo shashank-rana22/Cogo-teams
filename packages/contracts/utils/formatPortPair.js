@@ -42,7 +42,7 @@ const formatPortPair = ({ item }) => {
       val?.destination_port?.port_code || val?.destination_airport?.port_code,
 		service_type           : val?.service_type,
 		trade_type             : val?.trade_type || incoTermMapping[val?.inco_term],
-		commodity              : val?.commodity,
+		commodity              : val?.commodity || undefined,
 		container_size         : val?.container_size,
 		container_type         : val?.container_type,
 		status                 : val?.status,

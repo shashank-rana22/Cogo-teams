@@ -1,21 +1,21 @@
 .form_container {
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-between;
-	flex-wrap: wrap;
 	margin-top: 8px;
 
 	& > div {
 		flex: 0 0 45%;
-		margin: 4px 0px;
+		margin: 4px 0;
 	}
 }
 
 .label {
+	margin: 8px 0;
 	font-weight: 900;
 	line-height: 14px;
 	letter-spacing: 0.02em;
-	margin: 8px 0px;
 }
 
 .input_container {
@@ -23,12 +23,22 @@
 	flex-direction: column;
 
 	& > label {
-		font-weight: 900;
 		margin-bottom: 4px;
+		font-weight: 900;
 	}
 
-	& > select,input {
+	& > select,
+	input {
 		height: 38px;
 		font-size: 16px;
+	}
+
+	:global {
+		.ui_upload_droparea_container {
+			min-height: fit-content !important;
+			padding: 0 !important;
+			margin-bottom: 0 !important;
+			border: 1px solid #dedede;
+		}
 	}
 }

@@ -1,0 +1,175 @@
+.container {
+	padding: 24px 0;
+	margin-top: 40px;
+	border-radius: 6px;
+
+	@media (max-width: 768px) {
+		padding: 24px;
+	}
+}
+
+.header {
+	display: flex;
+	align-items: center;
+}
+
+.sup {
+	color: #f00;
+}
+
+.title {
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.control_container {
+	display: flex;
+	align-items: center;
+	width: 85%;
+	margin-bottom: 15px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		margin: auto;
+	}
+
+	.label {
+		flex-basis: 25%;
+		flex-shrink: 0;
+	}
+
+	.control_type {
+		display: flex;
+		flex-basis: 55%;
+	}
+}
+
+.row {
+	display: flex;
+	justify-content: space-between;
+	width: 48%;
+}
+
+.control_container_two {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 15px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		margin: auto;
+	}
+
+	:global {
+		.ui_radiogroup_container {
+			padding: 0;
+		}
+
+		.ui_radio_container {
+			padding-left: 0;
+		}
+	}
+
+	.label {
+		flex-basis: 50%;
+		flex-shrink: 0;
+	}
+
+	.control_type {
+		flex-basis: 55%;
+	}
+}
+
+.element_name {
+	flex-basis: 100%;
+}
+
+.back_icon {
+	margin-right: 8px;
+	cursor: pointer;
+}
+
+.btn {
+	float: right;
+	margin: 20px 0;
+}
+
+.control {
+	display: flex;
+	flex-direction: column;
+}
+
+.error_msg {
+	margin: 0;
+	font-size: 12px;
+	font-weight: 500;
+	color: #cb6464;
+}
+
+.file_select {
+	background-color: #fff;
+}
+
+.input_wrapper {
+	:global {
+		.ui_select_container {
+			margin-right: 20px;
+		}
+	}
+}
+
+.input_wrapper:first-child {
+	flex-shrink: 0;
+}
+
+.input_wrapper:nth-child(2) {
+	flex-grow: 1;
+}
+
+.sample_div {
+	display: flex;
+	align-items: center;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.sample_text {
+	margin-left: 4px;
+	font-size: 12px;
+	text-decoration: underline;
+}
+
+.btn_container {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 18px;
+}
+
+.btn_container > * {
+	margin-left: 8px;
+}
+
+.msg_text {
+	margin-bottom: 20px;
+	font-weight: 600;
+	text-align: center;
+}
+
+.content {
+	margin-top: 16px;
+	margin-bottom: 20px;
+	color: #4f4f4f;
+	text-align: left;
+}
+
+.save_btn {
+	display: flex;
+	justify-content: right;
+
+	:global {
+		.ui_button_container {
+			margin: 0;
+		}
+	}
+}

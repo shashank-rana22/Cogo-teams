@@ -18,6 +18,7 @@ function Info() {
 				placement="bottom"
 				content={<div className={styles.content_div}>{items}</div>}
 				interactive
+				className={styles.custom_tooltip}
 			>
 				<div className={styles.info_div}>
 					<IcMInfo />

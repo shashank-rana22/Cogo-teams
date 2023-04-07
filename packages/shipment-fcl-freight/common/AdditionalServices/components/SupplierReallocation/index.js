@@ -1,6 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { InputController, SelectController } from '@cogoport/forms';
+import { InputController, SelectController, useForm } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsOrganization } from '@cogoport/forms/utils/getAsyncFields';
 import { merge, isEmpty } from '@cogoport/utils';
@@ -33,21 +33,30 @@ function SupplierReallocation({
 }) {
 	const { shipment_data, refetch } = useContext(ShipmentDetailContext);
 
+	const { handleSubmit, control, formState: { errors }, reset } = useForm();
+
+	const afterUpdateRefetch = () => {
+		reset();
+		refetch();
+		refetchServices();
+		setShow(false);
+	};
 	const {
-		onUpdate,
-		onError,
-		errors,
-		handleSubmit,
-		loading,
-		control,
+		apiTrigger, loading,
 	} = useUpdateShipmentService({
-		serviceData,
-		setShow,
-		shipment_data,
-		isAdditional,
-		refetch,
-		refetchServices,
+		refetch        : afterUpdateRefetch,
+		successMessage : 'Service updated successfully',
 	});
+
+	const onUpdate = (values) => {
+		const payload = {
+			ids                 : serviceData?.map((item) => item?.id),
+			data                : { ...values },
+			service_type        : serviceData?.[0]?.service_type,
+			performed_by_org_id : serviceData?.[0]?.importer_exporter_id,
+		};
+		apiTrigger(payload);
+	};
 
 	const { documents } = shipment_data || {};
 
@@ -156,7 +165,7 @@ function SupplierReallocation({
 				<div className={styles.button_container}>
 					<Button
 						className="reviewed"
-						onClick={handleSubmit(onUpdate, onError)}
+						onClick={handleSubmit(onUpdate)}
 						disabled={loading}
 					>
 						Update

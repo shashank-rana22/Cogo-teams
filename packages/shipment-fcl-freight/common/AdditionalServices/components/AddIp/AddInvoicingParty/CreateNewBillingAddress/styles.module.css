@@ -1,21 +1,22 @@
 .container {
-    padding: 10px;
-    
-    label {
-        margin-bottom: 8px;
-        font-weight: 700;
-    }
+	padding: 10px;
 
-    :global {
-        .ui_checkbox_container {
-            padding: 0 !important;
-        }
-    }
+	label {
+		margin-bottom: 8px;
+		font-weight: 700;
+	}
+
+	:global {
+		.ui_checkbox_container {
+			padding: 0 !important;
+		}
+	}
 }
+
 .text {
-    color: rgb(203, 100, 100);
-    font-size: 12px;
-    text-align: left;
-    margin-bottom: 12px;
-    line-height: 1.4;
+	margin-bottom: 12px;
+	font-size: 12px;
+	line-height: 1.4;
+	color: #cb6464;
+	text-align: left;
 }

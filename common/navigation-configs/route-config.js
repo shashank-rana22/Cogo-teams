@@ -16,6 +16,7 @@ import rolesAndPermissions from './config/roles-n-permission';
 import shipmentFclFreight from './config/shipment-fcl-freight';
 import supplyDashboard from './config/supply-dashboards';
 import vendorRM from './config/vendor-rm';
+import welcome from './config/welcome';
 
 const routeConfig = {
 	...rolesAndPermissions,
@@ -37,6 +38,7 @@ const routeConfig = {
 	...performanceManagement,
 	...shipmentFclFreight,
 	...bookingDesk,
+	...welcome,
 };
 
 export default routeConfig;

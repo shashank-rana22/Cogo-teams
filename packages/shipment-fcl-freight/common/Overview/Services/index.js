@@ -1,13 +1,12 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
 
-import { possibleServices } from '../../Route/possible-full-route';
+import { possibleServices } from '../../../configurations/possible-full-route';
 
+import AddNewService from './AddNewService';
 import helperFuncs from './helpers/getHelperFuncs';
-import renderSubsidiaryServices from './helpers/renderSubsidiaryServices';
 import upsellTransportation from './helpers/upsellTransportation';
 import Loader from './Loader';
-import MutipleSimilarServices from './MutipleSimilarServices';
 import ServiceDetails from './ServiceDetails';
 import styles from './styles.module.css';
 
@@ -21,66 +20,75 @@ function Services() {
 		servicesLoading,
 	} = useContext(ShipmentDetailContext);
 
-	// const mainServiceName = primary_service?.service_type;
-	// const possibleFullRoute = possibleFullRouteConfigs?.[mainServiceName];
+	const { serviceObj, upsellServices } =	helperFuncs(servicesList, possibleServices);
 
-	const { serviceObj } =	helperFuncs(servicesList, possibleServices);
+	const { cancelUpsellDestinationFor, cancelUpsellOriginFor } = upsellTransportation(serviceObj);
 
-	console.log(serviceObj, 'newSweervicweee');
-
-	// const { cancelUpsellDestinationFor, cancelUpsellOriginFor } = upsellTransportation(serviceObj, primary_service);
-
-	// renderSubsidiaryServices(serviceObj, servicesList, primary_service);
-
-	return (
-		<div className={styles.container}>
-			{!servicesLoading || !isGettingShipment ? (
-				<div className={styles.service_container}>
-					<div className={styles.card_block}>
-						{/* {(serviceObj?.origin || []).map((service) => (
+	return !servicesLoading && !isGettingShipment
+		? (
+			<div className={styles.container}>
+				<div className={styles.services_container}>
+					<div className={styles.trade_services}>
+						{(Object.keys(serviceObj.originServices) || []).map((service) => (
 							<ServiceDetails
 								className={styles.service_details}
-								cancelUpsellFor={cancelUpsellOriginFor}
-								serviceData={service}
-								serviceList={servicesList}
+								serviceName={service}
+								servicesData={serviceObj?.originServices[service]}
+								servicesList={servicesList}
 								shipmentData={shipment_data}
-								refetchServices={refetchServices}
-								primary_service={primary_service}
-							/>
-						))} */}
-					</div>
-
-					<div className={styles.card_block}>
-						{/* {(serviceObj?.multipleMainService || []).map((service) => (
-							<MutipleSimilarServices
-								serviceList={servicesList}
-								shipmentData={shipment_data}
-								isMain
-								similarServices={service}
-								primary_service={primary_service}
 								refetchServices={refetchServices}
 							/>
 
-						))} */}
+						))}
 					</div>
 
-					<div className={styles.card_block}>
-						{/* {(serviceObj?.destination || []).map((service) => (
+					<div className={styles.trade_services}>
+						{(Object.keys(serviceObj?.mainServices) || []).map((service) => (
 							<ServiceDetails
-								cancelUpsellFor={cancelUpsellDestinationFor}
-								serviceData={service}
-								serviceList={servicesList}
+								className={styles.service_details}
+								serviceName={service}
+								servicesData={serviceObj?.mainServices[service]}
+								servicesList={servicesList}
 								shipmentData={shipment_data}
 								refetchServices={refetchServices}
-								primary_service={primary_service}
 							/>
-						))} */}
+
+						))}
+					</div>
+
+					<div className={styles.trade_services}>
+						{(Object.keys(serviceObj?.destinationServices) || []).map((service) => (
+							<ServiceDetails
+								className={styles.service_details}
+								serviceName={service}
+								servicesData={serviceObj?.destinationServices[service]}
+								servicesList={servicesList}
+								shipmentData={shipment_data}
+								refetchServices={refetchServices}
+							/>
+
+						))}
+
 					</div>
 				</div>
-			) : (
-				<Loader />
-			)}
-		</div>
-	);
+
+				<div className={styles.upselling}>
+					{Object.keys(upsellServices).map((tradeType) => (upsellServices[tradeType] || []).map((service) => (
+						<AddNewService
+							upsellableService={service}
+							servicesList={servicesList}
+							shipmentData={shipment_data}
+							primary_service={primary_service}
+							cancelUpsellDestinationFor={cancelUpsellDestinationFor}
+							cancelUpsellOriginFor={cancelUpsellOriginFor}
+						/>
+
+					)))}
+				</div>
+
+			</div>
+		)
+		: <Loader />;
 }
+
 export default Services;

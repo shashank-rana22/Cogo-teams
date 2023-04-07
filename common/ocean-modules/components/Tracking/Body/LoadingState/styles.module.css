@@ -1,33 +1,33 @@
-.main{
+.main {
 	display: flex;
 	flex-direction: column;
-	color: #393f70;
 	gap: 12px;
-	font-weight: 500;
 	font-size: 14px;
+	font-weight: 500;
 	line-height: 16px;
+	color: #393f70;
 	letter-spacing: 0.04em;
 }
 
-.gap{
+.gap {
 	display: flex;
 	flex-direction: column;
 	gap: 2px;
 }
 
-.heading{
-	font-weight: 500;
+.heading {
 	font-size: 14px;
+	font-weight: 500;
 	line-height: 18px;
 	color: #393f70;
 }
 
-.single_item{
-	display: flex;
-	align-items: center;
+.single_item {
 	position: relative;
-	height: 100px;
+	display: flex;
 	gap: 10px;
-	margin: 0 30px;
+	align-items: center;
+	height: 100px;
 	padding-bottom: 10px;
+	margin: 0 30px;
 }

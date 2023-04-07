@@ -3,33 +3,32 @@
 }
 
 .heading {
-	font-style: normal;
-	font-weight: 600;
 	display: flex;
 	align-items: center;
-
-	color: #000000;
-	margin: 16px 0px 8px 0px;
+	margin: 16px 0 8px;
+	font-style: normal;
+	font-weight: 600;
+	color: #000;
 }
 
 .compose_container {
-	background: #ffffff;
-	box-shadow: 0px 0px 4px #cbd1f8;
+	padding: 4px 16px 16px;
+	background: #fff;
 	border-radius: 8px;
-	padding: 4px 16px 16px 16px;
+	box-shadow: 0 0 4px #cbd1f8;
 
 	:global {
 		.ui_input_container {
+			width: 300px;
 			height: none;
 			border: none;
-			width: 300px;
 
 			.ui_input_control {
 				font-size: 12px;
 			}
 		}
-
 	}
+
 	.core-ui-rte-wrapper {
 		width: 100%;
 		border: none;
@@ -37,47 +36,47 @@
 }
 
 .text {
+	margin-right: 8px;
 	font-size: 12px;
 	font-weight: 600;
-	margin-right: 8px;
 }
 
 .row {
 	display: flex;
 	align-items: center;
+	padding: 4px 8px;
+
 	/* background-color: antiquewhite; */
 	border-radius: 8px;
-	padding: 4px 8px;
 }
 
 .suffix_button {
+	padding: 4px;
 	font-weight: 600;
-	border: none;
-	outline: none;
 	color: red;
 	cursor: pointer;
-	padding: 4px;
+	border: none;
 	border-radius: 4px;
+	outline: none;
 
 	&:hover {
-		background: #FDEBE9;
+		background: #fdebe9;
 	}
 }
 
 .error {
-	font-weight: 500;
 	font-size: 12px;
+	font-weight: 500;
 	line-height: 16px;
-
 	color: #cb6464;
 }
 
 .subject_preview {
 	display: flex;
 	align-items: center;
-	padding: 4px 0px 12px 0px;
-	margin: 8px 0px;
-	border-bottom: 1px solid #E0E0E0;
+	padding: 4px 0 12px;
+	margin: 8px 0;
+	border-bottom: 1px solid #e0e0e0;
 }
 
 .subject_label {
@@ -86,15 +85,15 @@
 }
 
 .preview {
-	font-weight: 500;
-	font-size: 12px;
-	color: #000000;
 	margin-left: 4px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #000;
 }
 
 .mail_type {
-	padding: 8px 0px;
-	border-bottom: 1px solid #E0E0E0;
+	padding: 8px 0;
+	border-bottom: 1px solid #e0e0e0;
 }
 
 .styled_editor {
@@ -115,23 +114,23 @@
 }
 
 .value {
-	margin-left: 12px;
 	display: flex;
-	justify-content: center;
 	align-items: center;
-	background: #FFFCE6;
+	justify-content: center;
+	padding: 2px 8px;
+	margin-left: 12px;
 	font-size: 10px;
 	font-weight: 500;
-	color: #221F20;
-	border-radius: 8px 0px 0px 8px;
-	padding: 2px 8px;
+	color: #221f20;
+	background: #fffce6;
+	border-radius: 8px 0 0 8px;
 }
 
 .cancel {
-	background: #FEF199;
-	border-radius: 0px 4px 4px 0px;
 	padding: 2px 8px;
-	cursor: pointer;
 	font-size: 10px;
 	font-weight: 600;
+	cursor: pointer;
+	background: #fef199;
+	border-radius: 0 4px 4px 0;
 }

@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import useGetSubsidiaryServiceRateCards from '../../../../../../hooks/useGetSubsidiaryServiceRateCards';
 import CardList from '../../../../../CardList';
@@ -13,7 +13,7 @@ function ViewPrice({ showPrice, setShowPrice }) {
 		item: showPrice?.item,
 	});
 
-	const line_items = [];
+	const line_items = useMemo(() => [], []);
 
 	useEffect(() => {
 		(async () => {
@@ -30,7 +30,7 @@ function ViewPrice({ showPrice, setShowPrice }) {
 			});
 			setShowPrice((p) => ({ ...p, line_items }));
 		})();
-	}, [loading, setShowPrice]);
+	}, [loading, setShowPrice, apiData?.list, line_items]);
 
 	const field = fields(showPrice?.item);
 	return (

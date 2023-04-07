@@ -23,6 +23,7 @@ function Header({
 	return (
 		<div className={styles.heading}>
 			<div className={styles.sub_heading}>
+
 				{!activeToggle ? (
 					<div className={styles.sub_heading}>
 						<Input
@@ -45,6 +46,7 @@ function Header({
 							isClearable
 						/>
 						<Select
+							className={styles.select}
 							size="sm"
 							placeholder="Select Service"
 							style={{ padding: '6px', marginRight: '6px', width: '200px' }}

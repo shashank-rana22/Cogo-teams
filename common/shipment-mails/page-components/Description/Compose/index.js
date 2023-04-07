@@ -5,7 +5,6 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import useGetEntityStakeholderMappings from '../../../hooks/useGetEntityStakeholderMappings';
-import useResetErrors from '../../../hooks/useResetErrors';
 
 import Footer from './Footer';
 import InputParam from './Input';
@@ -73,11 +72,17 @@ function Compose({
 	const [userEmailArray, setUserEmailArray] = useState([]);
 	const [ccEmailArray, setCcEmailArray] = useState([]);
 	const [bccEmailArray, setBccEmailArray] = useState([]);
-	const [errors, setErrors] = useState({});
 	const [deleteEmail, setDeleteEmail] = useState(false);
 	const [editorState, setEditorState] = useState('');
 
-	const { options } = useGetEntityStakeholderMappings();
+	const { getEntityStakeholderApi } = useGetEntityStakeholderMappings();
+	const options = (getEntityStakeholderApi.data || []).map((item) => ({
+		label : item.description,
+		value : item.description,
+	}));
+
+	options.push({ label: 'Other', value: 'Other' });
+
 	const defaultValues = getFormattedValues(
 		composingEmail,
 		action,
@@ -91,7 +96,7 @@ function Compose({
 	const {
 		control,
 		handleSubmit,
-		formState: { errors: errorVal },
+		formState: { errors },
 		setValue,
 		watch,
 	} = useForm({ defaultValues });
@@ -108,8 +113,6 @@ function Compose({
 		actualSubject = `${actualSubject} / ${pre_subject_text || ''} / ${entity_type}`;
 	}
 
-	useResetErrors({ errors, setErrors, currentStateErrors: errorVal });
-
 	const suffix = (
 		<div className={styles.row}>
 			{!isBcc
@@ -125,7 +128,6 @@ function Compose({
 			)}
 		</div>
 	);
-
 	const handleClick = (e) => {
 		if ((e.keyCode === 13 || e.keyCode === 32) && userEmail) {
 			if (!geo.regex.EMAIL.test(userEmail)) {
@@ -187,13 +189,12 @@ function Compose({
 						control={control}
 						setDeleteEmail={setDeleteEmail}
 						placeholder="Type here..."
+						rules={{ required: 'Emails are required' }}
 					/>
 					{errors?.toUserEmail ? (
 						<div className={styles.error}>
-							{handleError(
-								{ rules: { required: 'Emails are required' }, error: errors?.toUserEmail },
-								true,
-							)}
+							{handleError({ error: errors?.toUserEmail })}
+
 						</div>
 					) : null}
 				</div>
@@ -210,15 +211,6 @@ function Compose({
 						setValue={setValue}
 						setDeleteEmail={setDeleteEmail}
 					/>
-
-					{errors?.ccrecipients ? (
-						<div className={styles.error}>
-							{handleError(
-								{ rules: { required: 'Emails are required' }, error: errors?.ccrecipients },
-								true,
-							)}
-						</div>
-					) : null}
 				</div>
 
 				{isBcc
@@ -242,13 +234,11 @@ function Compose({
 					name="subject"
 					placeholder="Enter subject..."
 					control={control}
+					rules={{ required: 'Subject is required' }}
 				/>
 				{errors?.subject ? (
 					<div className={styles.error}>
-						{handleError(
-							{ rules: { required: 'Emails are required' }, error: errors?.toUserEmail },
-							true,
-						)}
+						{handleError({ error: errors?.subject })}
 					</div>
 				) : null}
 
@@ -259,14 +249,11 @@ function Compose({
 						placeholder="Select Mail type..."
 						control={control}
 						options={options}
-						rules={{ required: { value: true, message: 'Entity Type is required' } }}
+						rules={{ required: 'Entity Type is required' }}
 					/>
 					{errors?.entity_type ? (
 						<div className={styles.error}>
-							{handleError(
-								{ rules: { required: 'Emails are required' }, error: errors?.toUserEmail },
-								true,
-							)}
+							{handleError({ error: errors?.mail_type })}
 						</div>
 					) : null}
 				</div>
@@ -280,10 +267,7 @@ function Compose({
 
 				{errors?.subject ? (
 					<div className={styles.error}>
-						{handleError(
-							{ rules: { required: 'Emails are required' }, error: errors?.toUserEmail },
-							true,
-						)}
+						{handleError({ error: errors?.subject })}
 					</div>
 				) : null}
 
@@ -303,7 +287,6 @@ function Compose({
 					subject="Testing the flow wait"
 					COMPOSE_EMAIL={COMPOSE_EMAIL}
 					handleSubmit={handleSubmit}
-					onError={(err) => setErrors({ ...err })}
 					action={action}
 					composingEmail={composingEmail}
 					onCreate={() => setComposingEmail(null)}

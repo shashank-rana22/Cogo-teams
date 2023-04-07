@@ -3,6 +3,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
 
 import { AdditionalServiceList } from '../../AdditionalServices';
+import Services from '../Services';
 
 import styles from './styles.module.css';
 
@@ -16,7 +17,9 @@ function OverviewManageServices() {
 	);
 
 	return (
-		<Accordion title={getTitle}>
+		<Accordion title={getTitle} isOpen>
+
+			<Services />
 			<AdditionalServiceList
 				services={servicesList}
 				refetchServices={refetchServices}

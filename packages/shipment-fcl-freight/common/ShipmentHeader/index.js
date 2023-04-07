@@ -19,8 +19,7 @@ function ShipmentHeader() {
 		if (po_number) {
 			return (
 				<div className={styles.po_number}>
-					PO Number :
-					{' '}
+					PO Number:&nbsp;
 					{po_number}
 				</div>
 			);
@@ -55,6 +54,7 @@ function ShipmentHeader() {
 					theme="light"
 					placement="bottom"
 					maxWidth="none"
+					interactive
 					content={(
 						<div className={styles.tooltip}>
 							{importer_exporter?.business_name}

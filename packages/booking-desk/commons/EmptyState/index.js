@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 
 export default function EmptyState() {
-	const src = 'http://www.wallpaperg.com/uploads/upl7/1374819592-funny-boy-file-www.wallpaperg.com.gif';
+	const src = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man';
 	return (
 		<div className={styles.container}>
 			<div>
@@ -12,6 +12,8 @@ export default function EmptyState() {
 			<img
 				src={src}
 				alt="empty_page"
+				height="50%"
+				width="50%"
 			/>
 		</div>
 	);

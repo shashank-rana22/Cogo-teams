@@ -1,17 +1,16 @@
-
-.container{
-	border-bottom: 1px solid #bdbdbd;
+.container {
 	padding: 12px 18px;
+	border-bottom: 1px solid #bdbdbd;
 }
 
-.pill{
-	width: fit-content;
-	text-align: center;
+.pill {
 	align-items: center;
-	background: #fef6df;
-	border-radius: 4px;
+	width: fit-content;
 	padding: 4px 6px;
 	margin-right: 8px;
+	text-align: center;
+	background: #fef6df;
+	border-radius: 4px;
 
 	&.payment_state {
 		background: #fbd69f;
@@ -25,52 +24,55 @@
 	&.completed {
 		background: #e6fbe9;
 	}
+
 	&.confirmed_by_service_provider {
 		background: #e6fbe9;
 	}
+
 	&.confirmed_by_importer_exporter {
 		background: #e6fbe9;
 	}
 }
 
-.text{
-	font-weight: 400;
-	font-size: 12px;
-	line-height: 14px;
+.text {
 	display: flex;
-	color: #393f70;
 	align-items: center;
 	justify-content: center;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 14px;
+	color: #393f70;
 
 	&.cancelled {
-		color: #ffffff;
+		color: #fff;
 	}
 }
 
-.payment_text{
-	font-weight: 400;
+.payment_text {
 	font-size: 14px;
+	font-weight: 400;
 	line-height: 20px;
 	color: #828282;
 }
 
-.collect{
+.collect {
 	margin-left: 4px;
-	font-weight: 400;
 	font-size: 14px;
+	font-weight: 400;
 	line-height: 20px;
-	color: #333333;
+	color: #333;
 
 	&.cancelled {
 		color: #828282;
 	}
 }
-.payment_status{
+
+.payment_status {
 	display: flex;
 	margin-top: 8px;
 }
 
-.pill_main{
+.pill_main {
 	display: flex;
 	flex-direction: row;
 

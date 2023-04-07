@@ -36,7 +36,7 @@ const controls = [
 		rules      : { required: true },
 	},
 ];
-function UploadModal({ showUpload, setShowUpload, listAPi, edit, setEdit }) {
+function UploadModal({ showUpload, setShowUpload, listAPI, edit, setEdit }) {
 	const { control, handleSubmit, formState: { errors } } = useForm();
 	const { loading, createDocument } = useCreateShipmentDocument();
 	const { loading:updateLoading, updateDocument } = useUpdateShipmentDocument();
@@ -79,10 +79,10 @@ function UploadModal({ showUpload, setShowUpload, listAPi, edit, setEdit }) {
 			],
 		};
 		if (edit) {
-			updateDocument(payload, listAPi);
+			updateDocument(payload, listAPI);
 			setEdit(false);
 		} else {
-			createDocument(payload, listAPi);
+			createDocument(payload, listAPI);
 		}
 		setShowUpload(null);
 	};

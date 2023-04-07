@@ -1,24 +1,24 @@
 .wrapper {
 	width: 100%;
-	padding: 16px;
 	max-height: 80vh;
+	padding: 16px;
 	overflow-y: auto;
-} 
+}
 
 .action {
-	font-weight: 400;
+	padding: 12px 24px;
 	font-size: 10px;
+	font-weight: 400;
 	color: #828282;
-	padding: 12px 24px; 
 	border-bottom: none;
+
 	&:hover {
 		cursor: pointer;
 		background: #f2f2f291;
 	}
-} 
+}
 
 .action_wrapper {
-	margin: -6px -8px;
 	padding: 4px;
-} 
-
+	margin: -6px -8px;
+}

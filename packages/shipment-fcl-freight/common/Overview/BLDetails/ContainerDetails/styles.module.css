@@ -1,27 +1,27 @@
 .serial_number {
-	font-weight: 700;
-	font-size: 12px;
-	line-height: 16px;
-	color: #000000;
-	margin-right: 8px;
 	flex: 0 0 5%;
+	margin-right: 8px;
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 16px;
+	color: #000;
 }
 
 .container_number {
-	font-weight: 500;
-	font-size: 12px;
-	line-height: 14px;
-	color: #333333;
-	text-transform: uppercase;
-	margin-right: 8px;
 	flex: 0 0 38%;
+	margin-right: 8px;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 14px;
+	color: #333;
+	text-transform: uppercase;
 }
 
 .container {
-	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
+	width: 100%;
 
 	& > div {
 		flex: 0 0 40%;
@@ -30,14 +30,14 @@
 
 .container_description {
 	display: flex;
-	width: 60%;
 	align-items: center;
+	width: 60%;
 }
 
 .container_item {
 	display: flex;
 	justify-content: space-between;
-	padding: 12px 12px 0px 12px;
+	padding: 12px 12px 0;
 }
 
 .tag_wrapper {
@@ -46,11 +46,11 @@
 	justify-content: center;
 
 	& > div {
-		background-color: #e7d8af;
-		margin-right: 8px;
-		padding: 0px 8px;
-    	border-radius: 4px;
 		width: max-content;
+		padding: 0 8px;
+		margin-right: 8px;
 		font-size: 10px;
+		background-color: #e7d8af;
+		border-radius: 4px;
 	}
 }

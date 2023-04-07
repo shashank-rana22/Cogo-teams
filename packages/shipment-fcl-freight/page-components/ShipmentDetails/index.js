@@ -2,42 +2,58 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { dynamic } from '@cogoport/next';
 import React, { useMemo } from 'react';
 
-import { useStakeholderCheck } from '../../helpers/useStakeholderCheck';
 import useGetServices from '../../hooks/useGetServices';
 import useGetShipment from '../../hooks/useGetShipment';
 import useGetTimeLine from '../../hooks/useGetTimeline';
+import { useStakeholderCheck } from '../../hooks/useStakeholderCheck';
 
 const Kam = dynamic(() => import('./StakeholdersView/Kam'), { ssr: false });
 const Superadmin = dynamic(() => import('./StakeholdersView/Superadmin'), { ssr: false });
 
 function ShipmentDetails() {
-	const { get } = useGetShipment();
+	const shipment_additional_methods = useMemo(() => ['main_service',
+		'documents', 'bl_container_mappings'], []);
+
+	const { get } = useGetShipment({ additional_methods: shipment_additional_methods });
 	const { shipment_data } = get;
 
-	const additional_methods = useMemo(() => [
+	const services_additional_methods = useMemo(() => [
 		'booking_requirement',
 		'stakeholder',
 		'service_objects'], []);
 
-	const { servicesGet } = useGetServices({ shipment_data, additional_methods });
+	const { servicesGet } = useGetServices({
+		shipment_id        : shipment_data?.id,
+		additional_methods : services_additional_methods,
+	});
+
 	const { getTimeline } = useGetTimeLine({ shipment_data });
-	const { ActiveStakeholder } = useStakeholderCheck();
+	const { activeStakeholder } = useStakeholderCheck();
 
 	const contextValues = useMemo(() => ({
 		...get,
 		...servicesGet,
 		...getTimeline,
-		ActiveStakeholder,
-	}), [get, servicesGet, getTimeline, ActiveStakeholder]);
+		activeStakeholder,
+	}), [get, servicesGet, getTimeline, activeStakeholder]);
+
+	const importStakeholderView = () => {
+		switch (activeStakeholder) {
+			case 'KAM':
+				return <Kam />;
+
+			case 'Superadmin':
+			case 'Admin':
+			case 'TechSuperadmin':
+				return <Superadmin />;
+			default:
+				return null;
+		}
+	};
 
 	return (
 		<ShipmentDetailContext.Provider value={contextValues}>
-
-			{(ActiveStakeholder === 'KAM')
-				? <Kam /> : (
-					<Superadmin />
-				)}
-
+			{importStakeholderView()}
 		</ShipmentDetailContext.Provider>
 	);
 }

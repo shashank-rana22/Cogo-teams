@@ -16,7 +16,6 @@ function QuestionsList({ tabTitle = '', searchState = '', topicId = '', tagId = 
 		data,
 		loading = false,
 		paginationData,
-	// eslint-disable-next-line react-hooks/rules-of-hooks
 	} = useListFaqQuestions({ topicId, tagId, searchState });
 
 	if (loading) {
@@ -46,6 +45,12 @@ function QuestionsList({ tabTitle = '', searchState = '', topicId = '', tagId = 
 						<Questions questions={question} topicId={topicId} topicName={tabTitle} />
 					</div>
 				))}
+				{searchState && (
+					<EmptyQuestionListState
+						searchState={searchState}
+						source="list"
+					/>
+				)}
 			</div>
 
 			<div className={styles.pagination}>

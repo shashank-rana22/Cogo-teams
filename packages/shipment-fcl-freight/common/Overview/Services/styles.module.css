@@ -1,34 +1,35 @@
-.container{
-    background-color: #fff;
-}
-.service_container{
+.container {
 	display: flex;
-	width: 100%;
-	padding: 0px 22px 29px 22px;
+	justify-content: space-between;
+	background-color: #fff;
+}
+
+.services_container {
+	display: flex;
+	width: 80%;
+	padding: 0 22px 29px;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
 		width: 100%;
-		margin: 0px 10px 0px 30%;
+		margin: 0 10px 0 30%;
 	}
-
-	@media (max-width: 768px) {
-		margin: 0px 0 0px 0;
-		width: 100%;
-	}
-
-}
-.card_block {
-	display: block;
-	width: 33%;
 	@media (max-width: 768px) {
 		width: 100%;
-		margin: 0px 10px 0px 0px;
+		margin: 0;
 	}
 }
-.title{
-	font-weight: 600;
+
+.title {
 	font-size: 16px;
+	font-weight: 600;
 	line-height: 19px;
 	color: #393f70;
+}
+
+.upselling {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	width: 30%;
 }

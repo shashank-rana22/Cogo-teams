@@ -1,0 +1,16 @@
+.breadcrumb_item {
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.breadcrumb_container {
+	margin-top: 32px;
+	margin-bottom: 12px;
+
+	:global {
+		.ui_breadcrumbs_separator {
+			margin-top: 8px;
+		}
+	}
+}

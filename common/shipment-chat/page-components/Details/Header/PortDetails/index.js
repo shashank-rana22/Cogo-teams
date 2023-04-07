@@ -3,20 +3,19 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import { getServiceInfo } from '../../../../utils/getServiceInfo';
-
 import styles from './styles.module.css';
 
 function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
-	const { origin_main_port = '', destination_main_port = '' } = primary_service;
+	const {
+		origin_main_port = {},
+		destination_main_port = {},
+		origin_port = {},
+		destination_port = {},
+	} = primary_service;
 
 	if (isEmpty(data)) {
 		return null;
 	}
-
-	const { origin_port : origin, destination_port : destination } = primary_service;
-
-	const { serviceIcon } = getServiceInfo({ service: data?.shipment_type });
 
 	const handleLocationDetails = (location, icdPortInfo) => (
 		<>
@@ -28,7 +27,7 @@ function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
 						)
 					</div>
 				) : (
-					<div style={{ height: '16px' }} />
+					<div style={{ height: '20px' }} />
 				)}
 
 				<div className={styles.country}>
@@ -43,7 +42,7 @@ function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
 					<div>
 						<div style={{ fontSize: '10px' }}>{location?.display_name}</div>
 
-						{icdPortInfo ? <div className={styles.icd}>{icdPortInfo?.name}</div> : null}
+						{!isEmpty(icdPortInfo) ? <div className={styles.icd}>{icdPortInfo?.name}</div> : null}
 					</div>
 				)}
 			>
@@ -56,18 +55,18 @@ function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
 	const renderLocation = () => (
 		<>
 			<div className={styles.flex_row_origin}>
-				{handleLocationDetails(origin, origin_main_port)}
+				{handleLocationDetails(origin_port, origin_main_port)}
 			</div>
 
-			{destination ? (
+			{destination_port ? (
 				<div className={styles.icon_wrapper}>
 					<IcMPortArrow style={{ width: '1.5em', height: '1.5em' }} />
 				</div>
 			) : null}
 
-			{destination ? (
+			{destination_port ? (
 				<div className={styles.flex_row_destination}>
-					{handleLocationDetails(destination, destination_main_port)}
+					{handleLocationDetails(destination_port, destination_main_port)}
 				</div>
 			) : null}
 		</>
@@ -76,9 +75,7 @@ function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
 	return (
 		<div className={styles.container}>
 			{isShow ? (
-				<div className={styles.icons_and_service}>
-					{serviceIcon}
-				</div>
+				<div className={styles.icons_and_service} />
 			) : null}
 
 			{renderLocation()}

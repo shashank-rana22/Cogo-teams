@@ -6,7 +6,7 @@ import getValue from '../../../../../../../../utils/getValue';
 import styles from './styles.module.css';
 
 function Item({ item, fields, handleClick, loading = false }) {
-	const stylesCol = { padding: '0px 4px' };
+	const stylesCol = { padding: '0 4px' };
 
 	return (
 		<div

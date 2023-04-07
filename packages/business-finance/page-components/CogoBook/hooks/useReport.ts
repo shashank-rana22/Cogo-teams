@@ -12,7 +12,7 @@ interface FilterInterface {
 	monthPayload?:string
 }
 const useReport = ({
-	filters,
+	filters = {},
 	monthPayload,
 }:FilterInterface) => {
 	const [
