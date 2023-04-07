@@ -56,7 +56,7 @@ const useQuestionList = ({
 							country_id,
 							cogo_entity_id    : id,
 							persona           : scope === 'partner' ? 'admin_user' : 'importer_exporter',
-							q                 : query || query_name || undefined,
+							q                 : search || query_name || undefined,
 						},
 						sort_by                  : 'view_count',
 						page,
@@ -68,7 +68,7 @@ const useQuestionList = ({
 				Toast.error(error?.message);
 			}
 		},
-		[country_id, id, page, query, query_name, roleFunction, roleSubFunction, scope, topic?.id, trigger],
+		[country_id, id, page, query_name, roleFunction, roleSubFunction, scope, search, topic?.id, trigger],
 	);
 
 	useEffect(() => {
@@ -76,10 +76,10 @@ const useQuestionList = ({
 			return;
 		}
 		fetch();
-	}, [fetch, page, query, query_name, question]);
+	}, [fetch, page, query_name, question]);
 
-	const { list = [], ...pageData } = data || {};
-
+	const { list = [], response_type, gpt_answer = '', show_more = '', ...pageData } = data || {};
+	console.log(data, 'data');
 	return {
 		page,
 		setPage,
@@ -88,6 +88,10 @@ const useQuestionList = ({
 		list,
 		question,
 		setQuestion,
+		response_type,
+		gpt_answer,
+		show_more,
+
 	};
 };
 

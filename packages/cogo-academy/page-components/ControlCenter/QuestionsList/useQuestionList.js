@@ -18,7 +18,7 @@ const FILTER_MAPPING = {
 	draft     : { state: 'draft', status: 'active' },
 	inactive  : { status: 'inactive' },
 	requested : { state: 'requested', status: 'active' },
-	feedbacks : { state: 'published', status: 'active' },
+	feedbacks : { state: '', status: 'active' },
 };
 
 const addedQuestionsColumns = ({

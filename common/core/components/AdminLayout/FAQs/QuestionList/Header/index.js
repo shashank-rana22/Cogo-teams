@@ -83,7 +83,7 @@ function Header({
 					/>
 					<Button
 						type="submit"
-						size="md"
+						size="lg"
 						themeType="primary"
 					>
 						<IcMSearchlight />
