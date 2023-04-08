@@ -18,14 +18,14 @@ function UserStats({ source = '' }) {
 
 	const {
 		general: {
-			query: { user_id = '', path = '' },
+			query: { user_id = '' },
 		},
 	} = useSelector((state) => state);
 
 	const [userId, setUserId] = useState(user_id);
 
 	const handleClick = () => {
-		router.push(`${path}`);
+		router.back();
 	};
 
 	const {

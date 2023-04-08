@@ -9,7 +9,6 @@ import styles from './styles.module.css';
 function FeedbackFormModal({
 	action = '',
 	item = {},
-	getTeamFeedbackList = () => {},
 	setRefetchReportees = () => {},
 	feedbackMonth = '',
 	feedbackYear = '',
@@ -24,7 +23,6 @@ function FeedbackFormModal({
 
 	const onCloseFunction = () => {
 		setShowModal(false);
-		getTeamFeedbackList();
 	};
 
 	return (

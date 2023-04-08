@@ -18,7 +18,6 @@ const statusColorMapping = {
 };
 
 const useGetColumns = ({
-	getTeamFeedbackList = () => {},
 	refetchList = () => {},
 	source = 'hr_dashboard',
 	columnsToShow = [],
@@ -30,15 +29,12 @@ const useGetColumns = ({
 	const router = useRouter();
 
 	const handleClick = (user_id) => {
-		const {
-			forwardPath,
-			returnPath = '/performance-management/user-dashboard',
-		} =	redirectPathSourceMapping[source];
+		const forwardPath =	redirectPathSourceMapping[source];
 
 		if (forwardPath) {
 			router.push(
-				`${forwardPath}/[user_id]?path=${returnPath}`,
-				`${forwardPath}/${user_id}?path=${returnPath}`,
+				`${forwardPath}/[user_id]`,
+				`${forwardPath}/${user_id}`,
 			);
 		}
 	};
@@ -174,7 +170,6 @@ const useGetColumns = ({
 			<div className={styles.head_content}>
 				<FeedbackFormModal
 					item={item}
-					getTeamFeedbackList={getTeamFeedbackList}
 					setRefetchReportees={setRefetchReportees}
 					feedbackYear={feedbackYear}
 					feedbackMonth={feedbackMonth}
@@ -191,7 +186,6 @@ const useGetColumns = ({
 				<FeedbackFormModal
 					action="show"
 					item={item}
-					getTeamFeedbackList={getTeamFeedbackList}
 					feedbackYear={feedbackYear}
 					feedbackMonth={feedbackMonth}
 				/>
