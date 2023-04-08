@@ -5,10 +5,10 @@
 	background: #fffdee;
 	border: 1px solid #fff6b8;
 	border-radius: 16px;
+	transition: 0.6s;
 
 	&:hover {
-		box-shadow: 0 4px 20px rgb(0 0 0 / 35%);
-		transition: 0.6s;
+		box-shadow: 0 4px 16px rgb(0 0 0 / 35%);
 		transform: scale(1.02);
 	}
 }

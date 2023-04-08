@@ -37,6 +37,8 @@ function useHandleSingleQuestion({
 		reset,
 		listSetQuestions,
 		getTestQuestionTest,
+		editDetails,
+		index,
 	});
 
 	const handleDelete = () => {

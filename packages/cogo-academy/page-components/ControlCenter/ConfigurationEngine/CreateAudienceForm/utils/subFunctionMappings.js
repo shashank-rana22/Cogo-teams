@@ -125,6 +125,13 @@ const SUB_FUNCTION_MAPPING = {
 			value : 'all',
 		},
 	],
+
+	external: [
+		{
+			label : 'Enrichment',
+			value : 'enrichment',
+		},
+	],
 };
 
 export default SUB_FUNCTION_MAPPING;

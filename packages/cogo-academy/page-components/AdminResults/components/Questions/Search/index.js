@@ -3,9 +3,10 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function Search({ searchQuestion = '', setSearchQuestion = () => {}, debounceQuery = () => {} }) {
+function Search({ searchQuestion = '', setSearchQuestion = () => {}, debounceQuery = () => {}, setParams = () => {} }) {
 	const onSearch = (inputValue) => {
 		setSearchQuestion(inputValue);
+		setParams((prev) => ({ ...prev, page: 1 }));
 		debounceQuery(inputValue);
 	};
 
@@ -21,7 +22,7 @@ function Search({ searchQuestion = '', setSearchQuestion = () => {}, debounceQue
 						<IcMSearchlight />
 					</div>
 				)}
-				style={{ width: 300 }}
+				style={{ width: 300, height: '32px' }}
 			/>
 		</div>
 	);

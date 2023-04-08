@@ -1,4 +1,4 @@
-import { Tooltip, Pill } from '@cogoport/components';
+import { Pill } from '@cogoport/components';
 import getPrice from '@cogoport/forms/utils/get-formatted-price';
 import { format, getByKey, startCase } from '@cogoport/utils';
 
@@ -34,33 +34,7 @@ const invoiceStatus = {
 };
 
 const completedColumn = (refetch: Function) => [
-	{
-		Header   : 'Name',
-		id       : 'name',
-		accessor : (row) => (
 
-			(getByKey(row, 'organizationName') as string).length > 10 ? (
-				<Tooltip
-					placement="top"
-					content={getByKey(row, 'organizationName') as string}
-				>
-					<text>
-						{`${(getByKey(row, 'organizationName') as string).substring(
-							0,
-							20,
-						)}...`}
-					</text>
-				</Tooltip>
-			)
-
-				: (
-					<div>
-						{getByKey(row, 'organizationName') as string}
-					</div>
-				)
-		),
-
-	},
 	{
 		Header   : 'Invoice Number',
 		accessor : (row) => (
