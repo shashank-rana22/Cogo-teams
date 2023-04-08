@@ -1,4 +1,5 @@
 import allocations from './config/allocations';
+import bookingDesk from './config/booking-desk';
 import businessFinance from './config/business-finance';
 import cogoAcademy from './config/cogo-academy';
 import cogoOne from './config/cogo-one';
@@ -12,7 +13,10 @@ import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import performanceManagement from './config/performance-management';
 import rolesAndPermissions from './config/roles-n-permission';
+import shipmentFclFreight from './config/shipment-fcl-freight';
 import supplyDashboard from './config/supply-dashboards';
+import vendorRM from './config/vendor-rm';
+import welcome from './config/welcome';
 
 const routeConfig = {
 	...rolesAndPermissions,
@@ -21,6 +25,7 @@ const routeConfig = {
 	...supplyDashboard,
 	...contracts,
 	...businessFinance,
+	...vendorRM,
 	...cogoAcademy,
 	...myIncident,
 	...myProfile,
@@ -31,6 +36,9 @@ const routeConfig = {
 	...inventory_management,
 	...kamMonitoring,
 	...performanceManagement,
+	...shipmentFclFreight,
+	...bookingDesk,
+	...welcome,
 };
 
 export default routeConfig;

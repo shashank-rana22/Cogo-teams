@@ -1,0 +1,12 @@
+.container {
+	position: absolute;
+	bottom: 0;
+	display: flex;
+	justify-content: space-between;
+	width: 95%;
+	padding: 16px 0;
+}
+
+.right_button_container {
+	display: flex;
+}

@@ -1,4 +1,5 @@
 import { Button, cl, Popover } from '@cogoport/components';
+import { IcMProfile, IcMRefresh } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -45,13 +46,8 @@ function Header({
 		mobile_no = '',
 		channel_type,
 		user_type,
-		user_id = null,
-		lead_user_id = null,
-		sender = null,
 		search_user_name = '',
 	} = formattedData || {};
-
-	const userDetailsMissing = !(user_id || lead_user_id || sender);
 
 	const getLowerLabel = () => {
 		if (user_name?.includes('anonymous')) {
@@ -120,51 +116,44 @@ function Header({
 			</Button>
 		</div>
 	);
-	const renderRightButton = () => {
-		if (userDetailsMissing) {
-			return (
-				<Button
-					themeType="secondary"
-					size="md"
-					className={styles.styled_button}
-					onClick={() => updateUserRoom(mobile_no)}
-					loading={updateRoomLoading}
+
+	const renderRightButton = () => (
+		<div>
+			{showBotMessages && isomniChannelAdmin ? (
+				<Popover
+					placement="bottom"
+					trigger="click"
+					render={renderButtonOption()}
 				>
-					Update User
-				</Button>
-			);
-		}
-		return (
-			<div>
-				{showBotMessages && isomniChannelAdmin ? (
-					<Popover
-						placement="bottom"
-						trigger="click"
-						render={renderButtonOption()}
-					>
-						<Button
-							themeType="secondary"
-							size="md"
-							className={styles.styled_button}
-						>
-							Assign To
-						</Button>
-					</Popover>
-				) : (
 					<Button
 						themeType="secondary"
 						size="md"
-						disabled={disableAssignButton}
 						className={styles.styled_button}
-						onClick={() => assignButtonAction('assign')}
-						loading={showBotMessages && assignLoading}
 					>
-						Assign
+						Assign To
 					</Button>
-				)}
-			</div>
-		);
+				</Popover>
+			) : (
+				<Button
+					themeType="secondary"
+					size="md"
+					disabled={disableAssignButton}
+					className={styles.styled_button}
+					onClick={() => assignButtonAction('assign')}
+					loading={showBotMessages && assignLoading}
+				>
+					Assign
+				</Button>
+			)}
+		</div>
+	);
+
+	const handleUpdateUser = () => {
+		if (!updateRoomLoading) {
+			updateUserRoom(mobile_no);
+		}
 	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex_space_between}>
@@ -204,6 +193,19 @@ function Header({
 						</div>
 					)}
 					{renderRightButton()}
+					{isomniChannelAdmin && channel_type === 'whatsapp' && (
+						<div
+							role="button"
+							tabIndex="0"
+							className={cl`${styles.icon_div} ${updateRoomLoading ? styles.disable_icon : ''}`}
+							onClick={handleUpdateUser}
+						>
+							<IcMProfile width={15} height={15} fill="#221f20" />
+							<IcMRefresh className={cl`${styles.update_icon} 
+								${updateRoomLoading ? styles.disable_icon : ''}`}
+							/>
+						</div>
+					)}
 				</div>
 			</div>
 			<div className={styles.flex_space_between}>

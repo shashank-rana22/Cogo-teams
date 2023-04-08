@@ -1,0 +1,79 @@
+.send_icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	padding: 0 0 6px 2px;
+	margin-left: 12px;
+	cursor: pointer;
+	border-radius: 50%;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+
+	svg {
+		width: 22px;
+		height: 22px;
+		fill: #ee3425;
+		transform: rotate(-30deg);
+	}
+}
+
+.disabled_button {
+	cursor: not-allowed;
+
+	svg {
+		fill: #f8aea8;
+	}
+}
+
+.title {
+	font-size: 20px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.file_uploader_div {
+	:global {
+		.file_uploader {
+			height: fit-content !important;
+		}
+
+		.ui_upload_droparea_container {
+			min-height: 0 !important;
+			padding: unset !important;
+			margin-bottom: unset;
+			border: unset;
+		}
+
+		.ui_upload_droparea_heading {
+			display: none;
+		}
+
+		.ui_upload_droparea_subheading {
+			display: none;
+		}
+
+		.ui_upload_filesuccess_container {
+			display: none;
+		}
+	}
+}
+
+.upload_icon {
+	width: 22px;
+	height: 22px;
+	margin-top: 4px;
+	fill: #221f20;
+	transition: 0.4s;
+
+	&:hover {
+		transition: 0.4s;
+		transform: scale(1.25);
+	}
+}
+
+.right_top_header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}

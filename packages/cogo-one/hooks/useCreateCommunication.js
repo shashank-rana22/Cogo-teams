@@ -17,7 +17,7 @@ function useCreateCommunicationLog({
 	const {
 		orgId = '',
 		userId = '',
-	} = formatData({ activeMessageCard, activeVoiceCard });
+	} = formatData({ activeMessageCard, activeVoiceCard, activeTab });
 
 	const { partnerId, agentID } = useSelector(({ profile }) => ({
 		partnerId : profile.partner?.id || {},

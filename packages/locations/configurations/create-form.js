@@ -223,9 +223,7 @@ const fields = [
 		placeholder    : 'Select languages',
 		optionsListKey : 'languages',
 		options        : [
-			{ value: 'uk_english', label: 'English UK' },
-			{ value: 'english', label: 'English India' },
-			{ value: 'us_english', label: 'English US' },
+			{ value: 'english', label: 'English' },
 			{ value: 'spanish', label: 'Spanish' },
 			{ value: 'mandarin_chinese', label: 'Mandarin chinese' },
 			{ value: 'arabic', label: 'العربية, Arabic' },

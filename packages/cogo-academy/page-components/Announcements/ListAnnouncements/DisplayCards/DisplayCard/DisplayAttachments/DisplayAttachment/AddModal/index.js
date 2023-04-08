@@ -30,7 +30,8 @@ function AddModal({
 		video : elementInput?.video,
 	};
 	const addFunction = () => {
-		const url = URL_MAPPING[name];
+		let url = URL_MAPPING[name];
+		url = (url?.finalUrl ? url?.finalUrl : url);
 		addAttachment(announcement_id, url, name, index);
 		setShowAddModal(null);
 	};

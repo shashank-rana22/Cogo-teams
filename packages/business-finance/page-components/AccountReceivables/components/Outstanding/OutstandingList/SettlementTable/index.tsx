@@ -13,9 +13,10 @@ import styles from './styles.module.css';
 
 interface Props {
 	organizationId: string,
+	entityCode?: string
 }
 
-function SettlementTable({ organizationId }: Props) {
+function SettlementTable({ organizationId, entityCode }: Props) {
 	const {
 		singleData,
 		getHistoryChild,
@@ -29,7 +30,7 @@ function SettlementTable({ organizationId }: Props) {
 		loading,
 		settlementFilters,
 		setSettlementFilters,
-	} = useGetSettlementTable(organizationId);
+	} = useGetSettlementTable(organizationId, entityCode);
 
 	const [active, setActive] = useState(false);
 

@@ -6,6 +6,7 @@ import Filters from '../Filters';
 
 import ApprovalPending from './components/ApprovalPending';
 import ApprovedAWB from './components/ApprovedAWB';
+import FinalAWB from './components/FinalAWB';
 import NewAWB from './components/NewAWB';
 import useListShipmentPendingTasks from './hooks/useListShipmentPendingTasks';
 import styles from './styles.module.css';
@@ -23,12 +24,17 @@ const tabs = [
 		key   : 'approved_awb',
 		label : 'Approved AWB',
 	},
+	{
+		key   : 'final_awb',
+		label : 'Final AWB',
+	},
 ];
 
 const tabsComponentMapping = {
 	new_awb          : NewAWB,
 	approval_pending : ApprovalPending,
 	approved_awb     : ApprovedAWB,
+	final_awb        : FinalAWB,
 };
 
 function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
@@ -44,12 +50,12 @@ function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 
 	const {
 		data, loading, page,
-		setPage, listAPi, searchValue, setSearchValue,
+		setPage, listAPI, searchValue, setSearchValue,
 	} = useListShipmentPendingTasks({ activeTab, filter: filters, relevantToMe });
 
 	useEffect(() => {
-		listAPi();
-	}, [activeTab, listAPi]);
+		listAPI();
+	}, [activeTab, listAPI]);
 	return (
 		<div>
 			<div className={styles.container}>
@@ -65,7 +71,8 @@ function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 						>
 							{' '}
 							<div
-								className={tab.key === activeTab ? styles.sub_container_click : styles.sub_container}
+								className={`${styles.container_click} 
+								${tab.key === activeTab ? styles.sub_container_click : styles.sub_container}`}
 							>
 								{tab.label}
 
@@ -111,7 +118,8 @@ function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 					setEdit={setEdit}
 					page={page}
 					setPage={setPage}
-					listAPi={listAPi}
+					listAPI={listAPI}
+					activeTab={activeTab}
 				/>
 			)}
 		</div>

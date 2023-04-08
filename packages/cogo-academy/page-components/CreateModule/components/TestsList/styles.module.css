@@ -1,0 +1,58 @@
+.container {
+	border-radius: 6px;
+}
+
+.heading {
+	padding: 14px 0;
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.filter {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 30px 0 15px;
+	background-color: #f9f5ec;
+}
+
+.input {
+	width: 60%;
+}
+
+.sort:hover {
+	cursor: pointer;
+}
+
+.tabs_container {
+	width: 100%;
+	margin-top: 24px;
+}
+
+.styled_icon {
+	width: 16px;
+	height: 16px;
+	margin-right: 4px;
+	cursor: pointer;
+	fill: #393f70;
+	transition: transform 0.5s;
+}
+
+.tabs {
+	margin-top: 16px;
+}
+
+.filter_popover {
+	width: 16%;
+
+	:global {
+		.ui_popover_container {
+			margin-top: -8px;
+		}
+	}
+}
+
+.btn {
+	height: 40px !important;
+}

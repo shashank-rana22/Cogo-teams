@@ -6,6 +6,7 @@
 .filter_container {
 	display: flex;
 	justify-content: space-between;
+	margin-top: 16px;
 	margin-bottom: 16px;
 }
 
@@ -67,6 +68,12 @@
 	align-items: center;
 	margin-right: 8px;
 	margin-left: 8px;
+
+	:global {
+		.ui_input_control {
+			font-size: 14px !important;
+		}
+	}
 }
 
 .sort_container {
@@ -79,4 +86,13 @@
 	background-color: #fff;
 	border: 1px solid #e0e0e0;
 	border-radius: 8px;
+}
+
+.styled_input {
+	width: 300px;
+	font-size: 14px;
+}
+
+.icon_style {
+	margin-right: 4px;
 }

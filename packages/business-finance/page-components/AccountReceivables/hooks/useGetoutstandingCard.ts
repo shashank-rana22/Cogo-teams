@@ -34,7 +34,7 @@ interface InvoiceFilterProps {
 	services?: string[],
 }
 
-const useGetOutstandingCard = (organizationId: string) => {
+const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const [invoiceFilters, setinvoiceFilters] = useState<InvoiceFilterProps>({
@@ -100,13 +100,14 @@ const useGetOutstandingCard = (organizationId: string) => {
 					dueDateEnd,
 					invoiceDateStart,
 					invoiceDateEnd,
+					cogoEntity    : entityCode || undefined,
 				},
 			});
 		} catch (e) {
 			if (e?.error?.message) { Toast.error(e?.error?.message || 'Failed'); }
 		}
 	}, [dueDateEnd, dueDateStart, invoiceDateEnd, invoiceDateStart,
-		invoiceStatus, listApi, migrated, orgId, page, pageLimit, query, services, status, userData.id]);
+		invoiceStatus, listApi, migrated, orgId, page, pageLimit, query, services, status, userData.id, entityCode]);
 
 	const sendReport = async () => {
 		try {
