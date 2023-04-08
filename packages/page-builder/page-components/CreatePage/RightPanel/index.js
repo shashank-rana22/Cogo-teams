@@ -84,7 +84,7 @@ function Item(props) {
 		}),
 	});
 
-	const ref = drag(drop(itemRef));
+	drag(drop(itemRef));
 
 	const opacity = isNewItemAdding && !id ? '0.3' : '1';
 
@@ -93,7 +93,7 @@ function Item(props) {
 	return (
 		<div
 			role="presentation"
-			ref={ref}
+			ref={itemRef}
 			data-handler-id={handlerId}
 			onClick={onClick}
 			style={{
