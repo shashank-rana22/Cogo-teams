@@ -16,7 +16,7 @@ function Basic(props) {
 				content={content}
 				components={components}
 				setComponents={setComponents}
-				onClick={() => addNewItem(content.type, selectedItem?.index, true)}
+				onClick={() => addNewItem(content, selectedItem?.index, true)}
 				onNewItemAdding={onNewItemAdding}
 			/>
 		)),

@@ -106,7 +106,7 @@ function Stage({
 			const { type, id } = droppedItem;
 			if (!id) {
 		  // a new item added
-		  addNewItem(type, hoveredIndex, shouldAddBelow);
+		  addNewItem(droppedItem, hoveredIndex, shouldAddBelow);
 			} else {
 		  // the result of sorting is applying the mock data
 		  setComponents(stageItems);
@@ -140,7 +140,7 @@ function Stage({
 					..._stageItems.slice(startIndex),
 		  ]);
 			} else {
-				//   setStageItems(_stageItems);
+				  setStageItems(_stageItems);
 			}
 	  }
 	}, [isOver, draggingItemType, isNewItemAdding, shouldAddBelow, hoveredIndex]);

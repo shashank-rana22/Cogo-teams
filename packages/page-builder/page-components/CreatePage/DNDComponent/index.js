@@ -16,14 +16,15 @@ function DNDComponent() {
 	const [selectedItem, setSelectedItem] = useState({});
 
 	const handleAddNewItem = useCallback(
-		(type, hoveredIndex = components.length, shouldAddBelow = true) => {
+		(content, hoveredIndex = components.length, shouldAddBelow = true) => {
 		  const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
 
-		  setComponents([
+		  setComponents(() => ([
 				...components.slice(0, startIndex),
-				{ id: components.length + 1, type },
+
+				{ id: components.length + 1, ...content },
 				...components.slice(startIndex),
-		  ]);
+		  ]));
 
 		  setSelectedItem({
 				id    : components.length + 1,
@@ -47,6 +48,22 @@ function DNDComponent() {
 		),
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[handleAddNewItem, selectedItem],
+
+	  );
+	  const MemoRightPanel = useCallback(
+		() => (
+			<DropBox
+				components={components}
+				setComponents={setComponents}
+				addNewItem={handleAddNewItem}
+				onNewItemAdding={setNewItemAdding}
+				selectedItem={selectedItem}
+				setSelectedItem={setSelectedItem}
+				isNewItemAdding={isNewItemAdding}
+			/>
+		),
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[handleAddNewItem, selectedItem, isNewItemAdding],
 
 	  );
 
@@ -83,15 +100,7 @@ function DNDComponent() {
 					</section>
 
 					<div>
-						<DropBox
-							components={components}
-							setComponents={setComponents}
-							addNewItem={handleAddNewItem}
-							onNewItemAdding={setNewItemAdding}
-							selectedItem={selectedItem}
-							setSelectedItem={setSelectedItem}
-							isNewItemAdding={isNewItemAdding}
-						/>
+						<MemoRightPanel />
 
 					</div>
 
