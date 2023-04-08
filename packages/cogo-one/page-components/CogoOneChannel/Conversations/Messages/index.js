@@ -23,7 +23,6 @@ function Messages({
 	suggestions = [],
 	userId = '',
 	isomniChannelAdmin = false,
-	showBotMessages = false,
 }) {
 	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
@@ -43,12 +42,15 @@ function Messages({
 		channel_type = '',
 		support_agent_id = '',
 		spectators_data = [],
+		session_type = '',
 	} = activeMessageCard || {};
 
 	const {
 		sendCommunicationTemplate,
 		loading: communicationLoading,
 	} = useSendCommunicationTemplate({ formattedData, callbackfunc: closeModal, isOtherChannels: false });
+
+	const showBotMessages = session_type === 'bot';
 
 	const hasPermissionToEdit = !showBotMessages && (userId === support_agent_id || isomniChannelAdmin);
 
@@ -67,7 +69,7 @@ function Messages({
 		);
 	}
 
-	const { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions } = useSendChat({
+	const { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions, messageLoading } = useSendChat({
 		firestore,
 		channel_type,
 		id,
@@ -161,6 +163,7 @@ function Messages({
 						sendCommunicationTemplate={sendCommunicationTemplate}
 						communicationLoading={communicationLoading}
 						closeModal={closeModal}
+						messageLoading={messageLoading}
 					/>
 				</div>
 			</div>

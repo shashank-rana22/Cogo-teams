@@ -1,0 +1,36 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 100px 200px;
+	margin-top: -16px;
+	margin-bottom: 16px;
+	text-align: center;
+	background-color: #fff;
+}
+
+.img_height {
+	height: 310px;
+}
+
+.text {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.found {
+	display: flex;
+	justify-content: flex-start;
+	font-size: 28px;
+	font-weight: 600;
+}
+
+.border {
+	width: 40%;
+	border: 1px solid #ee3425;
+}
+
+.msg {
+	margin-top: 8px;
+}

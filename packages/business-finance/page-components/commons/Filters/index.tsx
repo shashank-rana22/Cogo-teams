@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import React from 'react';
 
 import { ControlProps } from '../Interfaces';
@@ -23,7 +23,9 @@ function Filter({
 	clearFilters,
 }:FilterProps) {
 	const getElement = (singlecontrol:ControlProps) => {
-		const { span = 0, name = '', type = '', groupby, showlabel = false, label, ...rest } = singlecontrol || {};
+		const {
+			span = 0, name = '', type = '', groupby, showlabel = false, label, show = true, ...rest
+		} = singlecontrol || {};
 		const customiseControl = {
 			id       : `filter-${name}`,
 			value    : filters![name as keyof typeof filters] || '',
@@ -44,6 +46,9 @@ function Filter({
 			filters,
 			...rest,
 		};
+		if (!show) {
+			return null;
+		}
 		return (
 			<div
 				className={styles.col}
@@ -60,7 +65,7 @@ function Filter({
 	};
 
 	return (
-		<div className={styles.flex}>
+		<div className={cl`${styles.flex} filter`}>
 			{(controls || []).map((control) => {
 				const { groupBy, span, name, showGroupName = true } = control;
 				if (groupBy) {

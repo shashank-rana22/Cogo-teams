@@ -52,9 +52,12 @@ const useQuestionList = ({
 						cogo_entity_id : id,
 						persona        : scope === 'partner' ? 'admin_user' : 'importer_exporter',
 						q              : query || undefined,
+
 					},
-					sort_by: 'view_count',
+					sort_by                  : 'view_count',
 					page,
+					faq_tags_data_required   : true,
+					faq_topics_data_required : true,
 				},
 			});
 		} catch (error) {

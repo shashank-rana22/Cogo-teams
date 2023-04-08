@@ -1,0 +1,19 @@
+.button_container {
+	display: flex;
+	flex-direction: column;
+}
+
+.text_container {
+	padding-left: 16px;
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.declaration {
+	display: flex;
+	align-items: flex-start;
+}
+
+.text_declaration {
+	margin-top: 10px;
+}

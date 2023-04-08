@@ -2,7 +2,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: 230px;
+	width: 100%;
 	padding: 5px 10px;
 	margin-top: 16px;
 	background: #fff;
@@ -14,24 +14,25 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 5px;
+	padding: 5px 8px;
 	cursor: pointer;
 	background: #abcd62;
 	border-radius: 6px;
 }
 
 .call_icon {
-	width: 24px;
-	height: 24px;
-	padding: 1px;
+	width: 20px;
+	height: 20px;
 	fill: #fff;
 }
 
 .call_on_div {
 	display: flex;
 	flex-direction: column;
+	align-items: flex-start;
 	justify-content: center;
-	padding: 2px 16px;
+	padding: 2px 5px;
+	margin-left: 10px;
 	font-size: 12px;
 	font-weight: 600;
 	color: #221f20;
@@ -52,8 +53,15 @@
 }
 
 .whatsapp_icon {
-	width: 35px;
-	height: 35px;
-	margin-left: 20px;
+	width: 36px;
+	height: 36px;
 	cursor: pointer;
+}
+
+.show_number {
+	color: #4f4f4f;
+}
+
+.flex_div {
+	display: flex;
 }

@@ -41,14 +41,11 @@ function CostSheet() {
 		buydata,
 		apiloading,
 		preTaxData,
-		postTaxData,
 		preTaxLoading,
-		postTaxLoading,
 		sellData,
 		buyData,
 	} = useGetShipmentCostSheet({ query });
 	const { tentativeProfit: preTaxActual, quotationalProfit: preTaxExpected } = preTaxData || {};
-	const { tentativeProfit: postTaxActual, quotationalProfit: postTaxExpected } = postTaxData || {};
 	const { data: shipmentData, loading:loadingShipment } = useListShipment(jobNumber);
 	const dataList = shipmentData?.list[0] || {};
 	const { source, tradeType } = dataList;
@@ -144,12 +141,6 @@ function CostSheet() {
 					expected={preTaxExpected}
 					actual={preTaxActual}
 					loading={preTaxLoading}
-				/>
-				<StatRect
-					heading="Profit on Shipment - Post Tax"
-					expected={postTaxExpected}
-					actual={postTaxActual}
-					loading={postTaxLoading}
 				/>
 			</div>
 			<DiscountRect
@@ -272,11 +263,21 @@ function CostSheet() {
 						loading={apiloading}
 					/>
 					<div className={styles.quotation_amount}>
-						Quotation Total :
-						<div className={styles.value_text}>
-							{sellData?.totalQuotational
-								? getFormattedPrice(sellData?.totalQuotational, 'INR')
-								: '  --' || '-'}
+						<div className={styles.credit}>
+							Credit Note :
+							<div className={styles.value_text}>
+								{sellData?.totalCreditNoteActual
+									? getFormattedPrice(sellData?.totalCreditNoteActual, 'INR')
+									: '  --'}
+							</div>
+						</div>
+						<div className={styles.credit}>
+							Quotation Total :
+							<div className={styles.value_text}>
+								{sellData?.totalQuotational
+									? getFormattedPrice(sellData?.totalQuotational, 'INR')
+									: '  --'}
+							</div>
 						</div>
 					</div>
 					{apiloading
@@ -295,11 +296,21 @@ function CostSheet() {
 						loading={apiloading}
 					/>
 					<div className={styles.quotation_amount}>
-						Quotation Total :
-						<div className={styles.value_text}>
-							{buyData?.totalQuotational
-								? getFormattedPrice(buyData?.totalQuotational, 'INR')
-								: '  --' || '-'}
+						<div className={styles.credit}>
+							Credit Note :
+							<div className={styles.value_text}>
+								{buyData?.totalCreditNoteActual
+									? getFormattedPrice(buyData?.totalCreditNoteActual, 'INR')
+									: '  --'}
+							</div>
+						</div>
+						<div className={styles.credit}>
+							Quotation Total :
+							<div className={styles.value_text}>
+								{buyData?.totalQuotational
+									? getFormattedPrice(buyData?.totalQuotational, 'INR')
+									: '  --'}
+							</div>
 						</div>
 					</div>
 					{apiloading
