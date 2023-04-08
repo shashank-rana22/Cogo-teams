@@ -12,7 +12,10 @@ const firestoreChatbotPath = '/customer_chat/platform_chat/rooms';
 
 const firestoreWhatsappPath = '/customer_chat/whatsapp/rooms';
 
+const firestoreTelegramPath = '/customer_chat/telegram/rooms';
+
 export const FIRESTORE_PATH = {
 	whatsapp      : firestoreWhatsappPath,
 	platform_chat : firestoreChatbotPath,
+	telegram      : firestoreTelegramPath,
 };
