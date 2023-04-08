@@ -10,6 +10,12 @@ const BarData = (subActiveTab: string, data?: object) => (data ? data[subActiveT
 		),
 		Amount : item?.amount,
 		Count  : item?.count,
+		year   : format(
+			item?.duration,
+			'YYYY',
+			{},
+			false,
+		),
 	}));
 
 export default BarData;

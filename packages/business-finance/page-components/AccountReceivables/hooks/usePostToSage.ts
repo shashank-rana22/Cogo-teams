@@ -19,7 +19,7 @@ const usePostToSage = (id: string) => {
 			await trigger({ data: { id } });
 			Toast.success('Post to sage successful');
 		} catch (err) {
-			Toast.error(err?.error?.message || 'Something went wrong');
+			Toast.error(err?.error?.message);
 		}
 	};
 
