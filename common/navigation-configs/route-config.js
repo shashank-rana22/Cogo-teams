@@ -11,6 +11,7 @@ import kamMonitoring from './config/kam-monitoring';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import performanceManagement from './config/performance-management';
+import referral from './config/referral';
 import rolesAndPermissions from './config/roles-n-permission';
 import supplyDashboard from './config/supply-dashboards';
 import vendorRM from './config/vendor-rm';
@@ -35,6 +36,7 @@ const routeConfig = {
 	...kamMonitoring,
 	...performanceManagement,
 	...welcome,
+	...referral,
 };
 
 export default routeConfig;

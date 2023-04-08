@@ -1,0 +1,97 @@
+.container {
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 8px 12px 24px 12px;
+    margin-top: 20px;
+}
+
+.heading{
+    display: flex;
+    align-items: center;
+    color: #849E4C;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+
+.tick_icon{
+    margin-right: 8px;
+}
+
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 16px;
+}
+
+.text{
+    font-size: 14px;
+    color: #4F4F4F;
+}
+
+.input_box{
+    width: 300px;
+    margin: 0 12px;
+}
+
+.content{
+    display: flex;
+    align-items: center;
+}
+
+.error{
+    position: absolute;
+    color: #ee3425;
+    bottom: -20px;
+    left: 14px;
+    font-size: 12px;
+}
+
+.input_controller{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.referree_reward{
+    margin-left: 32px;
+}
+
+@media (max-width: 768px) {
+    .flex{
+        flex-direction: column;
+        padding: 4px 0px;
+    }
+
+    .content{
+        flex-wrap: wrap;
+    }
+
+    .input_controller{
+        margin: 8px 0 20px 0;
+        width: 100%;
+    }
+
+    .input_box{
+        width: 100%;
+        margin: 0;
+    }
+
+    .submit_btn{
+        width: 100%;
+        margin-top: 16px;
+    }
+
+    .bonus_criteria{
+        width: 100%;
+    }
+
+    .referree_reward{
+        margin-left: 0;
+        width: 100%;
+    }
+}
+

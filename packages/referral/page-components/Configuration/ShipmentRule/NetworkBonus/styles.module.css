@@ -1,0 +1,116 @@
+.container {
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 8px 12px 24px 12px;
+    margin-top: 20px;
+}
+
+.heading{
+    display: flex;
+    align-items: center;
+    color: #849E4C;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.tick_icon{
+    margin-right: 8px;
+}
+
+.flex{
+    padding: 4px 16px;
+}
+
+.text{
+    font-size: 14px;
+    color: #4F4F4F;
+}
+
+.input_box{
+    width: 200px;
+    margin: 0 12px;
+}
+
+.select_box {
+    width: 150px;
+    margin: 0 12px;
+}
+
+
+.content{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.error{
+    position: absolute;
+    color: #ee3425;
+    bottom: -20px;
+    left: 14px;
+    font-size: 12px;
+}
+
+.input_controller{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.mt_12{
+    margin-top: 28px;
+}
+
+.btn_container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.form_content {
+    border-bottom : 1px solid #E0E0E0;
+    padding: 4px 0 24px 0px;
+}
+
+.referral_bonus{
+    padding: 12px 0 24px 0;
+    border-bottom : 1px solid #E0E0E0;
+}
+
+.remaining_bonus{
+    padding: 12px 0 24px 0;
+}
+
+.subheading{
+    font-size: 12px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 16px;
+}
+
+
+@media (max-width: 768px) {
+    .input_controller{
+        width: 100%;
+        margin: 16px 0;
+    }
+
+    .input_box{
+        width: 100%;
+        margin: 0;
+    }
+    
+    .select_box {
+        width: 100%;
+        margin: 0;
+    }
+
+    .mt_12{
+        margin-top: 12px;
+    }
+    
+}

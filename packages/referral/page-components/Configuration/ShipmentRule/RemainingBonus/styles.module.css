@@ -1,0 +1,130 @@
+.container {
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 8px 12px 24px 12px;
+    margin-top: 20px;
+}
+
+.heading{
+    display: flex;
+    align-items: center;
+    color: #849E4C;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.tick_icon{
+    margin-right: 8px;
+}
+
+.flex{
+    /* display: flex;
+    align-items: center;
+    justify-content: space-between; */
+    display: flex;
+    align-items: center;
+}
+
+.text{
+    font-size: 14px;
+    color: #4F4F4F;
+}
+
+.input_box{
+    width: 120px;
+    margin: 0 8px;
+}
+
+.select_box {
+    width: 130px;
+    margin: 0 8px;
+}
+
+
+.content{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.error{
+    position: absolute;
+    color: #ee3425;
+    bottom: -20px;
+    left: 14px;
+    font-size: 12px;
+}
+
+.input_controller{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.mt_12{
+    margin-top: 28px;
+}
+
+.btn_container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.form_content {
+    border-bottom : 1px solid #E0E0E0;
+    padding: 4px 0 24px 0px;
+}
+
+.referral_bonus{
+    padding: 12px 0 24px 0;
+    border-bottom : 1px solid #E0E0E0;
+}
+
+.subheading{
+    font-size: 12px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 16px;
+}
+
+.ml_12 {
+    margin-left: 12px;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .input_controller{
+        width: 100%;
+        margin: 16px 0;
+    }
+
+    .flex{
+        flex-wrap: wrap;
+    }
+
+    .input_box{
+        width: 100%;
+        margin: 0;
+    }
+    
+    .select_box {
+        width: 100%;
+        margin: 0;
+    }
+
+    .mt_12{
+        margin-top: 12px;
+    }
+    
+}
