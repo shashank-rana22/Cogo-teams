@@ -1,5 +1,15 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	height: 94vh;
+}
+
+.toggle_container {
+	margin-bottom: 20px;
+	margin-top: 20px;
+	max-height: 82vh;
+}
+
+.cogo_assist_container {
+	overflow: scroll;
+	max-height: 80vh;
 }
