@@ -11087,6 +11087,11 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
+			api          : 'bulk_assign_chat',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'assign_chat',
 			access_type  : 'private',
 			service_name : 'communication',
