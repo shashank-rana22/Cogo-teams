@@ -5,6 +5,13 @@
 	border-radius: 10px 0 0;
 }
 
+.cross_icon {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	cursor: pointer;
+}
+
 .wrapper {
 	align-items: center;
 	margin: 21px 14px;

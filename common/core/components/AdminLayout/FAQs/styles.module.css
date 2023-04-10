@@ -58,6 +58,7 @@
 }
 
 .modal_content {
+	position: relative;
 	display: flex;
 }
 

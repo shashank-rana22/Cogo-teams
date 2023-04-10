@@ -70,12 +70,6 @@ function FAQs({
 		);
 	};
 
-	// const getModalSize = () => {
-	// 	if (isMobile) return 'md';
-	// 	if (announcementModalData) return 'fullscreen';
-	// 	return '';
-	// };
-
 	return (
 		<div className={styles.container} draggable="false">
 			{hideSupportIcon && (
@@ -120,6 +114,7 @@ function FAQs({
 								faqNotificationApiLoading={faqNotificationApiLoading}
 								fetchFaqNotification={fetchFaqNotification}
 								refetch={refetch}
+								setShow={setShow}
 								announcementProps={announcementProps}
 								selectedAnnouncement={announcementModalData?.id}
 							/>

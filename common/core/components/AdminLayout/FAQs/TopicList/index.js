@@ -27,6 +27,7 @@ function TopicList({
 	fetchFaqNotification,
 	faqNotificationData,
 	refetch,
+	setShow,
 	announcementProps,
 	selectedAnnouncement,
 }) {
@@ -50,7 +51,21 @@ function TopicList({
 		setShowNotificationContent,
 	} = useTopicList();
 
-	const { setAnnouncementModalData, searchAnnouncement, setSearchAnnouncement } = announcementProps;
+	const {
+		announcementModalData,
+		setAnnouncementModalData,
+		searchAnnouncement,
+		setSearchAnnouncement,
+	} = announcementProps;
+
+	const announcementHeaderProps = {
+		announcementModalData,
+		setAnnouncementModalData,
+		setShow,
+		searchAnnouncement,
+		setSearchAnnouncement,
+	};
+
 	useEffect(() => {
 		fetchFaqNotification();
 	}, [fetchFaqNotification, showNotificationContent]);
@@ -212,8 +227,7 @@ function TopicList({
 				activeTab={activeTab}
 				search={search}
 				setSearch={setSearch}
-				searchAnnouncement={searchAnnouncement}
-				setSearchAnnouncement={setSearchAnnouncement}
+				announcementHeaderProps={announcementHeaderProps}
 				topic={topic}
 				setTopic={setTopic}
 				question={question}
