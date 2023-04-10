@@ -1178,8 +1178,7 @@ const navigationMappingAdmin = {
 				href          : '/booking-desk',
 				as            : '/booking-desk',
 				type          : 'link',
-				main_apis     : ['list_shipments', 'list_booking_desk_shipments'],
-				module_type   : 'crm',
+				main_apis     : ['list_booking_desk_shipments'],
 				possible_apis : [...apis.shipment, ...apis.booking_desk],
 			},
 			{
