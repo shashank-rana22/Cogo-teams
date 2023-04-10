@@ -1,20 +1,9 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 
 import Content from './Content';
-import Settings from './Settings';
-import Structure from './Structure';
 
 function LeftPanel(props) {
-	const {
-		activeTab,
-		setActiveTab,
-		components,
-		setComponents,
-		showContentModal,
-		setShowContentModal,
-		parentComponentId,
-		setParentComponentId,
-	} = props;
+	const { activeTab, setActiveTab, components, setComponents, selectedItem, onNewItemAdding, addNewItem } = props;
 
 	return (
 		<Tabs
@@ -28,27 +17,16 @@ function LeftPanel(props) {
 				<Content
 					components={components}
 					setComponents={setComponents}
-					parentComponentId={parentComponentId}
-					setParentComponentId={setParentComponentId}
-					setShowContentModal={setShowContentModal}
-				/>
-			</TabPanel>
+					addNewItem={addNewItem}
+					onNewItemAdding={onNewItemAdding}
+					selectedItem={selectedItem}
 
-			<TabPanel name="structure" title="structure">
-				<Structure
-					components={components}
-					setComponents={setComponents}
-					showContentModal={showContentModal}
-					setShowContentModal={setShowContentModal}
-					parentComponentId={parentComponentId}
-					setParentComponentId={setParentComponentId}
 				/>
 			</TabPanel>
 
 			<TabPanel name="settings" title="Settings">
-				<Settings />
+				<div>Settings</div>
 			</TabPanel>
-
 		</Tabs>
 	);
 }
