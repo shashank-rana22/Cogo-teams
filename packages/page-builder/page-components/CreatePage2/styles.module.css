@@ -43,20 +43,11 @@
 .reactGridItem {
   display: flex;
   align-items: center;
-  justify-content: center;
-  transition: all 200ms ease;
+  justify-content: center; 
+  transition: all 200ms ease; 
   transition-property: left, top;
   background: #FFFCE6;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
-}
-.deleteButton {
-  position: absolute;
-  top: 0%;
-  right: 2px;
-  background: transparent;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-  color: #EE3425;
+  /* border: 1px solid grey; */
 }
