@@ -1,0 +1,53 @@
+.container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.loader_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}
+
+.loader {
+	width: 80px;
+}
+
+.type_tag {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	width: fit-content;
+	padding: 6px 16px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #000;
+	text-align: center;
+	text-transform: uppercase;
+	background: #fde74d;
+	border-radius: 0 0 10px;
+}
+
+.title {
+	margin-top: 12px;
+	font-weight: 600;
+}
+
+.content_container {
+	height: 90%;
+	overflow-y: scroll;
+}
+
+.buttons_container {
+	position: absolute;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 100%;
+	padding: 0 28px 12px 0;
+}

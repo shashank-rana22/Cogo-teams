@@ -56,7 +56,7 @@ const useGetAnnouncementList = () => {
 		params,
 	}, { manual: false });
 
-	const announcementListApi = useCallback(async () => {
+	const fetchAnnouncements = useCallback(async () => {
 		try {
 			const res = await trigger({
 				params: {
@@ -99,9 +99,9 @@ const useGetAnnouncementList = () => {
 	}, [cogo_entity_id, country_id, params.filters.announcement_type, params.filters.q, params.filters.toggle,
 		params.page, roleSubFunction, role_functions, scope, trigger, user_id]);
 
-	const fetchAnnouncements = useCallback(() => {
-		announcementListApi();
-	}, [announcementListApi]);
+	useEffect(() => {
+		fetchAnnouncements();
+	}, [fetchAnnouncements]);
 
 	return {
 		fetchAnnouncements,

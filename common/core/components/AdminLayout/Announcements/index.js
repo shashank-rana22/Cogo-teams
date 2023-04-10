@@ -29,9 +29,7 @@ function Announcements({
 
 	const { list: data, totalCount = 0 } = announcementList;
 
-	const {
-		filters: { announcement_type = '' },
-	} = params;
+	const { filters: { announcement_type = '' } } = params;
 
 	useEffect(() => {
 		fetchAnnouncements();
@@ -73,9 +71,15 @@ function Announcements({
 
 	return (
 		<div className={styles.container}>
+
 			<div className={styles.filters_container}>
+
 				<div className={styles.toggle_container}>
-					{/* <Toggle
+					<Toggle
+						name="unread-toggle"
+						size="sm"
+						disabled={false}
+						onLabel="Unread only"
 						value={params.filters.toggle}
 						onChange={() => {
 							setParams((prev) => ({
@@ -86,9 +90,9 @@ function Announcements({
 								},
 							}));
 						}}
-					/> */}
-					<Toggle name="unread-toggle" size="sm" disabled={false} onLabel="Unread only" />
+					/>
 				</div>
+
 				<div className={styles.filter}>
 					<Popover
 						interactive
@@ -124,6 +128,7 @@ function Announcements({
 							selectedAnnouncement={selectedAnnouncement}
 						/>
 					))}
+
 					{data?.length < totalCount ? (
 						<div
 							className={styles.view_more}
@@ -136,6 +141,7 @@ function Announcements({
 							View More
 						</div>
 					) : null}
+
 				</div>
 			)}
 		</div>

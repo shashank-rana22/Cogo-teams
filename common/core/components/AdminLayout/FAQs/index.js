@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import React, { useState, useRef, useEffect } from 'react';
 
-import Preview from '../Announcements/AnnouncementModal/Preview';
+import useAnnouncementViewed from '../Announcements/AnnouncementModal/useAnnouncementViewed';
+import FloatingWidgetPreview from '../Announcements/FloatingWidgetPreview';
 import useGetAnnouncementList from '../Announcements/hooks/useGetAnnouncementList';
+import useGetSingleAnnouncement from '../Announcements/hooks/useGetSingleAnnouncement';
 
 import styles from './styles.module.css';
 import TopicList from './TopicList';
@@ -30,7 +32,11 @@ function FAQs({
 	const [isMobile, setIsMobile] = useState(false);
 	const [announcementModalData, setAnnouncementModalData] = useState(false);
 
+	const { announcementDetails, loadingSingleAnnouncement } =		useGetSingleAnnouncement(announcementModalData?.id);
+
 	const props = useGetAnnouncementList();
+
+	const { announcementViewed, announcementViewedloading } = useAnnouncementViewed(props?.fetchAnnouncements);
 
 	const announcementProps = {
 		...props,
@@ -124,18 +130,15 @@ function FAQs({
 						</div>
 						{announcementModalData && (
 							<div className={styles.announcement_preview_container}>
-								Preview
-								{/* <Preview
-							// loading={loadingSingleAnnouncement}
-							// announcementViewedloading={announcementViewedloading}
-							setShowModal={setAnnouncementModalData}
-							// data={announcementDetails}
-							modalIsOpened={announcementModalData}
-							// announcementViewed={announcementViewed}
-							isViewed={announcementModalData?.is_viewed}
-							setShow={setShow}
-							isMobile={isMobile}
-						/> */}
+								<FloatingWidgetPreview
+									loading={loadingSingleAnnouncement}
+									announcementViewedloading={announcementViewedloading}
+									data={announcementDetails}
+									announcementViewed={announcementViewed}
+									setShowModal={setAnnouncementModalData}
+									setShow={setShow}
+									// isViewed={announcementModalData?.is_viewed}
+								/>
 							</div>
 						)}
 

@@ -9,9 +9,9 @@ function Preview({
 	data = {},
 	editorValue = '',
 }) {
-	const { documents = {} } = data;
+	const { documents, announcement_attachments } = data;
 
-	const { video = [], image = [], pdf = [] } = documents;
+	const { video = [], image = [], pdf = [] } = documents || announcement_attachments || {};
 
 	const videos = video.map((item) => item.document_url);
 
