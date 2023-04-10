@@ -131,26 +131,26 @@ export const getOceanData = (
 	oceanCustomVolume,
 	volume,
 ) => [
-	{ name: 'Total', value: `${(volume[0] || totalVolume)?.toFixed(2)} (${totalVolumePer.toFixed(2)}%)` || '---' },
+	{ name: 'Total', value: `${(volume[0] || totalVolume)?.toFixed(2)} (${totalVolumePer?.toFixed(2)}%)` || '---' },
 	{
 		name  : 'FCL Exports',
-		value : `${(volume[1] || fclExportVolume)?.toFixed(2)} (${fclExportVolumePer.toFixed(2)}%)` || '---',
+		value : `${(volume[1] || fclExportVolume)?.toFixed(2)} (${fclExportVolumePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'FCL Imports',
-		value : `${(volume[2] || fclImportVolume)?.toFixed(2)} (${fclImportVolumePer.toFixed(2)}%)` || '---',
+		value : `${(volume[2] || fclImportVolume)?.toFixed(2)} (${fclImportVolumePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'LCL Exports',
-		value : `${(volume[3] || lclExportVolume)?.toFixed(2)} (${lclExportVolumePer.toFixed(2)}%)` || '---',
+		value : `${(volume[3] || lclExportVolume)?.toFixed(2)} (${lclExportVolumePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'LCL Imports',
-		value : `${(volume[4] || lclImportVolume)?.toFixed(2)} (${lclImportVolumePer.toFixed(2)}%)` || '---',
+		value : `${(volume[4] || lclImportVolume)?.toFixed(2)} (${lclImportVolumePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'Customs',
-		value : `${(volume[5] || oceanCustomVolume)?.toFixed(2)} (${oceanCustomVolumePer.toFixed(2)}%)` || '---',
+		value : `${(volume[5] || oceanCustomVolume)?.toFixed(2)} (${oceanCustomVolumePer?.toFixed(2)}%)` || '---',
 	},
 ];
 
@@ -169,26 +169,26 @@ export const getOceanDataValue = (
 	oceanCustomValuePer,
 	lclImportValuePer,
 ) => [
-	{ name: 'Total', value: `${(value[0] || totalValue)?.toFixed(2)} (${totalPerOcean.toFixed(2)}%)` || '---' },
+	{ name: 'Total', value: `${(value[0] || totalValue)?.toFixed(2)} (${totalPerOcean?.toFixed(2)}%)` || '---' },
 	{
 		name  : 'FCL Exports',
-		value : `${(value[1] || fclExportValue)?.toFixed(2)} (${fclExportValuePer.toFixed(2)}%)` || '---',
+		value : `${(value[1] || fclExportValue)?.toFixed(2)} (${fclExportValuePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'FCL Imports',
-		value : `${(value[2] || fclImportValue)?.toFixed(2)} (${fclImportValuePer.toFixed(2)}%)` || '---',
+		value : `${(value[2] || fclImportValue)?.toFixed(2)} (${fclImportValuePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'LCL Exports',
-		value : `${(value[3] || lclExportValue)?.toFixed(2)} (${lclExportValuePer.toFixed(2)}%)` || '---',
+		value : `${(value[3] || lclExportValue)?.toFixed(2)} (${lclExportValuePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'LCL Imports',
-		value : `${(value[4] || lclImportValue)?.toFixed(2)} (${lclImportValuePer.toFixed(2)}%)` || '---',
+		value : `${(value[4] || lclImportValue)?.toFixed(2)} (${lclImportValuePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'Customs',
-		value : `${(value[5] || oceanCustomValue)?.toFixed(2)} (${oceanCustomValuePer.toFixed(2)}%)` || '---',
+		value : `${(value[5] || oceanCustomValue)?.toFixed(2)} (${oceanCustomValuePer?.toFixed(2)}%)` || '---',
 	},
 ];
 
@@ -203,18 +203,18 @@ export const getAirData = (
 	airImportVolumePer,
 	airCustomVolumePer,
 ) => [
-	{ name: 'Total', value: `${(volumeAir[0] || totalAirVolume)?.toFixed(2)} (${totalPer.toFixed(2)}%)` || '---' },
+	{ name: 'Total', value: `${(volumeAir[0] || totalAirVolume)?.toFixed(2)} (${totalPer?.toFixed(2)}%)` || '---' },
 	{
 		name  : 'Air Exports',
-		value : `${(volumeAir[1] || airExportVolume)?.toFixed(2)} (${airExportVolumePer.toFixed(2)}%)` || '---',
+		value : `${(volumeAir[1] || airExportVolume)?.toFixed(2)} (${airExportVolumePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'Air Imports',
-		value : `${(volumeAir[2] || airImportVolume)?.toFixed(2)} (${airImportVolumePer.toFixed(2)}%)` || '---',
+		value : `${(volumeAir[2] || airImportVolume)?.toFixed(2)} (${airImportVolumePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'Air Customs',
-		value : `${(volumeAir[3] || airCustomVolume)?.toFixed(2)} (${airCustomVolumePer.toFixed(2)}%)` || '---',
+		value : `${(volumeAir[3] || airCustomVolume)?.toFixed(2)} (${airCustomVolumePer?.toFixed(2)}%)` || '---',
 	},
 ];
 
@@ -229,18 +229,18 @@ export const getAirDataValue = (
 	airCustomValue,
 	airCustomValuePer,
 ) => [
-	{ name: 'Total', value: `${(valueAir[0] || totalAirValue)?.toFixed(2)} (${totalPerAir.toFixed(2)}%)` || '---' },
+	{ name: 'Total', value: `${(valueAir[0] || totalAirValue)?.toFixed(2)} (${totalPerAir?.toFixed(2)}%)` || '---' },
 	{
 		name  : 'Air Exports',
-		value : `${(valueAir[1] || airExportValue)?.toFixed(2)} (${airExportValuePer.toFixed(2)}%)` || '---',
+		value : `${(valueAir[1] || airExportValue)?.toFixed(2)} (${airExportValuePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'Air Imports',
-		value : `${(valueAir[2] || airImportValue)?.toFixed(2)} (${airImportValuePer.toFixed(2)}%)` || '---',
+		value : `${(valueAir[2] || airImportValue)?.toFixed(2)} (${airImportValuePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'Air Customs',
-		value : `${(valueAir[3] || airCustomValue)?.toFixed(2)} (${airCustomValuePer.toFixed(2)}%)` || '---',
+		value : `${(valueAir[3] || airCustomValue)?.toFixed(2)} (${airCustomValuePer?.toFixed(2)}%)` || '---',
 	},
 ];
 
@@ -255,10 +255,10 @@ export const getSurfaceData = (
 ) => [
 	{
 		name  : 'Total',
-		value : `${(volumeSurface[0] || totalSurfaceVolume)?.toFixed(2)} (${totalPerSurface.toFixed(2)}%)` || '---',
+		value : `${(volumeSurface[0] || totalSurfaceVolume)?.toFixed(2)} (${totalPerSurface?.toFixed(2)}%)` || '---',
 	},
-	{ name: 'FTL', value: `${(volumeSurface[1] || ftlVolume)?.toFixed(2)} (${FTLVolumePer.toFixed(2)}%)` || '---' },
-	{ name: 'LTL', value: `${(volumeSurface[2] || ltlVolume)?.toFixed(2)} (${LTLVolumePer.toFixed(2)}%)` || '---' },
+	{ name: 'FTL', value: `${(volumeSurface[1] || ftlVolume)?.toFixed(2)} (${FTLVolumePer?.toFixed(2)}%)` || '---' },
+	{ name: 'LTL', value: `${(volumeSurface[2] || ltlVolume)?.toFixed(2)} (${LTLVolumePer?.toFixed(2)}%)` || '---' },
 ];
 
 export const getSurfaceDataValue = (
@@ -272,10 +272,10 @@ export const getSurfaceDataValue = (
 ) => [
 	{
 		name  : 'Total',
-		value : `${(valueSurface[0] || totalSurfaceValue)?.toFixed(2)} (${totalPerValueSurface.toFixed(2)}%)` || '---',
+		value : `${(valueSurface[0] || totalSurfaceValue)?.toFixed(2)} (${totalPerValueSurface?.toFixed(2)}%)` || '---',
 	},
-	{ name: 'FTL', value: `${(valueSurface[1] || ftlValue)?.toFixed(2)} (${FTLValuePer.toFixed(2)}%)` || '---' },
-	{ name: 'LTL', value: `${(valueSurface[2] || ltlValue)?.toFixed(2)} (${LTLValuePer.toFixed(2)}%)` || '---' },
+	{ name: 'FTL', value: `${(valueSurface[1] || ftlValue)?.toFixed(2)} (${FTLValuePer?.toFixed(2)}%)` || '---' },
+	{ name: 'LTL', value: `${(valueSurface[2] || ltlValue)?.toFixed(2)} (${LTLValuePer?.toFixed(2)}%)` || '---' },
 ];
 
 export const getRailData = (
@@ -286,11 +286,11 @@ export const getRailData = (
 ) => [
 	{
 		name  : 'Total',
-		value : `${(volumeRail[0] || railDomesticVolume)?.toFixed(2)} (${totalPerRail.toFixed(2)}%)` || '---',
+		value : `${(volumeRail[0] || railDomesticVolume)?.toFixed(2)} (${totalPerRail?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'Domestic',
-		value : `${(volumeRail[1] || railDomesticVolume)?.toFixed(2)} (${railVolumePer.toFixed(2)}%)` || '---',
+		value : `${(volumeRail[1] || railDomesticVolume)?.toFixed(2)} (${railVolumePer?.toFixed(2)}%)` || '---',
 	},
 ];
 
@@ -302,11 +302,11 @@ export const getRailDataValue = (
 ) => [
 	{
 		name  : 'Total',
-		value : `${(valueRail[0] || railDomesticValue)?.toFixed(2)} (${totalPerRailValue.toFixed(2)}%)` || '---',
+		value : `${(valueRail[0] || railDomesticValue)?.toFixed(2)} (${totalPerRailValue?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'Domestic',
-		value : `${(valueRail[1] || railDomesticValue)?.toFixed(2)} (${railValuePer.toFixed(2)}%)` || '---',
+		value : `${(valueRail[1] || railDomesticValue)?.toFixed(2)} (${railValuePer?.toFixed(2)}%)` || '---',
 	},
 ];
 
@@ -343,32 +343,32 @@ export const getSalaryOceanData = (
 	{
 		name  : 'Total',
 		value : `${(salaryVolume[0]
-		|| totalSalaryOcean)?.toFixed(2)} (${totalVolumePer.toFixed(2)}%)` || '---',
+		|| totalSalaryOcean)?.toFixed(2)} (${totalVolumePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'FCL Exports',
 		value : `${(salaryVolume[1]
-			|| fclExportSalaryVolume)?.toFixed(2)} (${fclExportVolumePer.toFixed(2)}%)` || '---',
+			|| fclExportSalaryVolume)?.toFixed(2)} (${fclExportVolumePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'FCL Imports',
 		value : `${(salaryVolume[2]
-			|| fclImportSalaryVolume)?.toFixed(2)} (${fclImportVolumePer.toFixed(2)}%)` || '---',
+			|| fclImportSalaryVolume)?.toFixed(2)} (${fclImportVolumePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'LCL Exports',
 		value : `${(salaryVolume[3]
-			|| lclExportSalaryVolume)?.toFixed(2)} (${lclExportVolumePer.toFixed(2)}%)` || '---',
+			|| lclExportSalaryVolume)?.toFixed(2)} (${lclExportVolumePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'LCL Imports',
 		value : `${(salaryVolume[4]
-			|| lclImportSalaryVolume)?.toFixed(2)} (${lclImportVolumePer.toFixed(2)}%)` || '---',
+			|| lclImportSalaryVolume)?.toFixed(2)} (${lclImportVolumePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'Customs',
 		value : `${(salaryVolume[5]
-			|| oceanCustomSalaryVolume)?.toFixed(2)} (${oceanCustomVolumePer.toFixed(2)}%)` || '---',
+			|| oceanCustomSalaryVolume)?.toFixed(2)} (${oceanCustomVolumePer?.toFixed(2)}%)` || '---',
 	},
 ];
 
@@ -390,28 +390,28 @@ export const getSalaryOceanDataValue = (
 	{
 		name  : 'Total',
 		value : `${(salaryValue[0]
-		|| totalSalaryOceanValue)?.toFixed(2)} (${totalPerOcean.toFixed(2)}%)` || '---',
+		|| totalSalaryOceanValue)?.toFixed(2)} (${totalPerOcean?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'FCL Exports',
-		value : `${(salaryValue[1] || fclExportSalaryValue)?.toFixed(2)} (${fclExportValuePer.toFixed(2)}%)` || '---',
+		value : `${(salaryValue[1] || fclExportSalaryValue)?.toFixed(2)} (${fclExportValuePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'FCL Imports',
-		value : `${(salaryValue[2] || fclImportSalaryValue)?.toFixed(2)} (${fclImportValuePer.toFixed(2)}%)` || '---',
+		value : `${(salaryValue[2] || fclImportSalaryValue)?.toFixed(2)} (${fclImportValuePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'LCL Exports',
-		value : `${(salaryValue[3] || lclExportSalaryValue)?.toFixed(2)} (${lclExportValuePer.toFixed(2)}%)` || '---',
+		value : `${(salaryValue[3] || lclExportSalaryValue)?.toFixed(2)} (${lclExportValuePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'LCL Imports',
-		value : `${(salaryValue[4] || lclImportSalaryValue)?.toFixed(2)} (${lclImportValuePer.toFixed(2)}%)` || '---',
+		value : `${(salaryValue[4] || lclImportSalaryValue)?.toFixed(2)} (${lclImportValuePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'Customs',
 		value : `${(salaryValue[5]
-			|| oceanCustomSalaryValue).toFixed(2)} (${oceanCustomVolumePer.toFixed(2)}%)` || '---',
+			|| oceanCustomSalaryValue)?.toFixed(2)} (${oceanCustomVolumePer?.toFixed(2)}%)` || '---',
 	},
 ];
 
@@ -429,22 +429,22 @@ export const getSalaryAirData = (
 	{
 		name  : 'Total',
 		value : `${(salaryVolumeAir[0]
-		|| totalSalaryAirVolume)?.toFixed(2)} (${totalPer.toFixed(2)}%)` || '---',
+		|| totalSalaryAirVolume)?.toFixed(2)} (${totalPer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'Air Exports',
 		value : `${(salaryVolumeAir[1]
-			|| airSalaryExportVolume)?.toFixed(2)} (${airExportVolumePer.toFixed(2)}%)` || '---',
+			|| airSalaryExportVolume)?.toFixed(2)} (${airExportVolumePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'Air Imports',
 		value : `${(salaryVolumeAir[2]
-			|| airSalaryImportVolume)?.toFixed(2)} (${airImportVolumePer.toFixed(2)}%)` || '---',
+			|| airSalaryImportVolume)?.toFixed(2)} (${airImportVolumePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'Air Customs',
 		value : `${(salaryVolumeAir[3]
-			|| airCustomImportVolume)?.toFixed(2)} (${airCustomVolumePer.toFixed(2)}%)` || '---',
+			|| airCustomImportVolume)?.toFixed(2)} (${airCustomVolumePer?.toFixed(2)}%)` || '---',
 	},
 ];
 
@@ -462,22 +462,22 @@ export const getSalaryAirDataValue = (
 	{
 		name  : 'Total',
 		value : `${(salaryValueAir[0]
-		|| totalSalaryAirValue)?.toFixed(2)} (${totalPerAir.toFixed(2)}%)` || '---',
+		|| totalSalaryAirValue)?.toFixed(2)} (${totalPerAir?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'Air Exports',
 		value : `${(salaryValueAir[1]
-			|| airSalaryExportValue)?.toFixed(2)} (${airExportValuePer.toFixed(2)}%)` || '---',
+			|| airSalaryExportValue)?.toFixed(2)} (${airExportValuePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'Air Imports',
 		value : `${(salaryValueAir[2]
-			|| airSalaryImportValue)?.toFixed(2)} (${airImportValuePer.toFixed(2)}%)` || '---',
+			|| airSalaryImportValue)?.toFixed(2)} (${airImportValuePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'Air Customs',
 		value : `${(salaryValueAir[3]
-			|| airCustomImportValue)?.toFixed(2)} (${airCustomValuePer.toFixed(2)}%)` || '---',
+			|| airCustomImportValue)?.toFixed(2)} (${airCustomValuePer?.toFixed(2)}%)` || '---',
 	},
 ];
 
@@ -493,15 +493,15 @@ export const getSalarySurfaceData = (
 	{
 		name  : 'Total',
 		value : `${(salaryVolumeSurface[0]
-			|| totalSalarySurfaceVolume)?.toFixed(2)} (${totalPerSurface.toFixed(2)}%)` || '---',
+			|| totalSalarySurfaceVolume)?.toFixed(2)} (${totalPerSurface?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'FTL',
-		value : `${(salaryVolumeSurface[1] || ftlSalaryVolume)?.toFixed(2)} (${FTLVolumePer.toFixed(2)}%)` || '---',
+		value : `${(salaryVolumeSurface[1] || ftlSalaryVolume)?.toFixed(2)} (${FTLVolumePer?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'LTL',
-		value : `${(salaryVolumeSurface[2] || ltlSalaryVolume)?.toFixed(2)} (${LTLVolumePer.toFixed(2)}%)` || '---',
+		value : `${(salaryVolumeSurface[2] || ltlSalaryVolume)?.toFixed(2)} (${LTLVolumePer?.toFixed(2)}%)` || '---',
 	},
 ];
 
@@ -517,10 +517,10 @@ export const getSalarySurfaceDataValue = (
 	{
 		name  : 'Total',
 		value : `${(valueSurface[0]
-			|| totalSalarySurfaceValue)?.toFixed(2)} (${totalPerValueSurface.toFixed(2)}%)` || '---',
+			|| totalSalarySurfaceValue)?.toFixed(2)} (${totalPerValueSurface?.toFixed(2)}%)` || '---',
 	},
-	{ name: 'FTL', value: `${(valueSurface[1] || ftlSalaryValue)?.toFixed(2)} (${FTLValuePer.toFixed(2)}%)` || '---' },
-	{ name: 'LTL', value: `${(valueSurface[2] || ltlSalaryValue)?.toFixed(2)} (${LTLValuePer.toFixed(2)}%)` || '---' },
+	{ name: 'FTL', value: `${(valueSurface[1] || ftlSalaryValue)?.toFixed(2)} (${FTLValuePer?.toFixed(2)}%)` || '---' },
+	{ name: 'LTL', value: `${(valueSurface[2] || ltlSalaryValue)?.toFixed(2)} (${LTLValuePer?.toFixed(2)}%)` || '---' },
 ];
 
 export const getRailSalaryData = (
@@ -532,12 +532,12 @@ export const getRailSalaryData = (
 	{
 		name  : 'Total',
 		value : `${(salaryVolumeRail[0]
-			|| railSalaryDomesticVolume)?.toFixed(2)} (${totalPerRail.toFixed(2)}%)` || '---',
+			|| railSalaryDomesticVolume)?.toFixed(2)} (${totalPerRail?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'Domestic',
 		value : `${(salaryVolumeRail[1]
-			|| railSalaryDomesticVolume)?.toFixed(2)} (${railVolumePer.toFixed(2)}%)` || '---',
+			|| railSalaryDomesticVolume)?.toFixed(2)} (${railVolumePer?.toFixed(2)}%)` || '---',
 	},
 ];
 
@@ -549,12 +549,12 @@ export const getRailSalaryDataValue = (
 ) => [
 	{
 		name  : 'Total',
-		value : `${(valueRail[0] || railSalaryDomesticValue)?.toFixed(2)} (${totalPerRailValue.toFixed(2)}%)` || '---',
+		value : `${(valueRail[0] || railSalaryDomesticValue)?.toFixed(2)} (${totalPerRailValue?.toFixed(2)}%)` || '---',
 	},
 	{
 		name  : 'Domestic',
 		value : `${(valueRail[1]
-		|| railSalaryDomesticValue)?.toFixed(2)} (${railValuePer.toFixed(2)}%)` || '---',
+		|| railSalaryDomesticValue)?.toFixed(2)} (${railValuePer?.toFixed(2)}%)` || '---',
 	},
 ];
 
@@ -566,12 +566,12 @@ export const getOceanRatio = (
 	lclImports,
 	lclExports,
 ) => [
-	{ name: 'Total', value: `${(ocean * 100).toFixed(2)} %` || '---' },
-	{ name: 'FCL Exports', value: `${(fclExports * 100).toFixed(2)}%` || '---' },
-	{ name: 'FCL Imports', value: `${(fclImports * 100).toFixed(2)}%` || '---' },
-	{ name: 'LCL Exports', value: `${(lclExports * 100).toFixed(2)}%` || '---' },
-	{ name: 'LCL Imports', value: `${(lclImports * 100).toFixed(2)}%` || '---' },
-	{ name: 'Customs', value: `${(oceanCustoms * 100).toFixed(2)}%` || '---' },
+	{ name: 'Total', value: `${(ocean * 100)?.toFixed(2)} %` || '---' },
+	{ name: 'FCL Exports', value: `${(fclExports * 100)?.toFixed(2)}%` || '---' },
+	{ name: 'FCL Imports', value: `${(fclImports * 100)?.toFixed(2)}%` || '---' },
+	{ name: 'LCL Exports', value: `${(lclExports * 100)?.toFixed(2)}%` || '---' },
+	{ name: 'LCL Imports', value: `${(lclImports * 100)?.toFixed(2)}%` || '---' },
+	{ name: 'Customs', value: `${(oceanCustoms * 100)?.toFixed(2)}%` || '---' },
 ];
 
 export const getAirRatio = (
@@ -580,18 +580,18 @@ export const getAirRatio = (
 	airExports,
 	airImports,
 ) => [
-	{ name: 'Total', value: `${(air * 100).toFixed(2)} %` || '---' },
+	{ name: 'Total', value: `${(air * 100)?.toFixed(2)} %` || '---' },
 	{
 		name  : 'Air Exports',
-		value : `${(airExports * 100).toFixed(2)} %` || '---',
+		value : `${(airExports * 100)?.toFixed(2)} %` || '---',
 	},
 	{
 		name  : 'Air Imports',
-		value : `${(airImports * 100).toFixed(2)} %` || '---',
+		value : `${(airImports * 100)?.toFixed(2)} %` || '---',
 	},
 	{
 		name  : 'Air Customs',
-		value : `${(airCustoms * 100).toFixed(2)} %` || '---',
+		value : `${(airCustoms * 100)?.toFixed(2)} %` || '---',
 	},
 ];
 export const getSurfaceRatio = (
@@ -601,15 +601,15 @@ export const getSurfaceRatio = (
 ) => [
 	{
 		name  : 'Total',
-		value : `${(surface * 100).toFixed(2)} %` || '---',
+		value : `${(surface * 100)?.toFixed(2)} %` || '---',
 	},
 	{
 		name  : 'FTL',
-		value : `${(ftl * 100).toFixed(2)} %` || '---',
+		value : `${(ftl * 100)?.toFixed(2)} %` || '---',
 	},
 	{
 		name  : 'LTL',
-		value : `${(ltl * 100).toFixed(2)} %` || '---',
+		value : `${(ltl * 100)?.toFixed(2)} %` || '---',
 	},
 ];
 
@@ -619,7 +619,7 @@ export const getRailRatio = (
 ) => [
 	{
 		name  : 'Total',
-		value : `${(rail * 100).toFixed(2)} %` || '---',
+		value : `${(rail * 100)?.toFixed(2)} %` || '---',
 	},
-	{ name: 'Domestic', value: `${(railDomestic * 100).toFixed(2)} %` || '---' },
+	{ name: 'Domestic', value: `${(railDomestic * 100)?.toFixed(2)} %` || '---' },
 ];

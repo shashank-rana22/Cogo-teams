@@ -8,7 +8,7 @@ const useSelectMonth = () => {
 		MonthTrigger,
 	] = useRequestBf(
 		{
-			url     : 'pnl/statement/locked-periods',
+			url     : '/pnl/statement/locked-periods',
 			method  : 'get',
 			authKey : 'get_pnl_statement_locked_periods',
 		},

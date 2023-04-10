@@ -124,28 +124,8 @@ function RevenueBifurcation({
 		}));
 	};
 	const getStatus = (key = '') => {
-		if (!OceanSum) {
-			return Toast.error('All Values Are Equal To Total ');
-		}
-		if (!AirSum) {
-			return Toast.error('All Values Are Equal To Total ');
-		}
-		if (!SurfaceSum) {
-			return Toast.error('All Values Are Equal To Total ');
-		}
-		if (!RailSum) {
-			return Toast.error('All Values Are Equal To Total ');
-		}
-		if (!OceanSumValue) {
-			return Toast.error('All Values Are Equal To Total ');
-		}
-		if (!SurfaceSumValue) {
-			return Toast.error('All Values Are Equal To Total ');
-		}
-		if (!RailSumValue) {
-			return Toast.error('All Values Are Equal To Total ');
-		}
-		if (!AirSumValue) {
+		if (!OceanSum || !AirSum || !SurfaceSum || !RailSum
+			|| !OceanSumValue || !SurfaceSumValue || !RailSumValue || !AirSumValue) {
 			return Toast.error('All Values Are Equal To Total ');
 		}
 		return setEdit((previousActions) => ({
