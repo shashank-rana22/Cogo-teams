@@ -2,8 +2,8 @@ import { TabPanel, Tabs, Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
-import PIPProbations from '../HRDashboard/TabComponents/PIPProbations';
-import Statistics from '../HRDashboard/TabComponents/PIPProbations/Dashboard/Statistics';
+import PIPProbations from '../../common/PIPProbations';
+import Statistics from '../../common/Statistics';
 
 import styles from './styles.module.css';
 import PastStats from './TabComponents/PastStats';

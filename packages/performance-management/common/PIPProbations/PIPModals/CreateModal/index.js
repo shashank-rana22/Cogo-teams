@@ -2,7 +2,7 @@ import { Button, Modal } from '@cogoport/components';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import useCreateLog from '../../../../../../hooks/useCreateLog';
+import useCreateLog from '../../../../hooks/useCreateLog';
 import DecisionModal from '../UpdateModal/DecisionModal';
 
 import EmployeesTable from './EmloyeesTable';
@@ -63,7 +63,7 @@ function CreateModal({
 			}}
 			size="lg"
 		>
-			<Modal.Header title={`Create ${startCase(logType)}`} />
+			<Modal.Header title={`Create ${startCase(logType || '---')}`} />
 			<Modal.Body
 				style={{ maxHeight: '500px' }}
 			>

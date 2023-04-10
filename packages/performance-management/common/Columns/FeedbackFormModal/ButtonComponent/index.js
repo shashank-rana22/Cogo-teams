@@ -1,21 +1,22 @@
 import { Button, Popover } from '@cogoport/components';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMEdit, IcMPlusInCircle } from '@cogoport/icons-react';
-import { format, isEmpty } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
+
+const formTypes = [
+	{ label: 'Employed', value: 'employed' },
+	{ label: 'New', value: 'new' },
+	{ label: 'Resigned', value: 'resigned' },
+];
 
 function ButtonComponent({
 	item = {}, action = '', setShowModal = () => {}, showTypePopover = false,
 	setShowTypePopover = () => {}, feedback_id = '',
 }) {
-	const currentDate = format(new Date(), 'isoUtcDateTime');
-	const formDeadline = format(item.form_deadline, 'isoUtcDateTime');
-
-	const formTypes = [
-		{ label: 'Employed', value: 'employed' },
-		{ label: 'New', value: 'new' },
-		{ label: 'Resigned', value: 'resigned' },
-	];
+	const currentDate = formatDate({ date: new Date(), formatDate: 'isoUtcDateTime' });
+	const formDeadline = formatDate(item.form_deadline, 'isoUtcDateTime');
 
 	if (action === 'show') {
 		return (

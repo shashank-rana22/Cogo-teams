@@ -62,10 +62,6 @@ const useGetColumns = ({
 		if (url) { window.open(url, '_blank'); }
 	};
 
-	const downloadError = (url) => {
-		if (url) { window.open(url, '_blank'); }
-	};
-
 	const currentDate = new Date();
 	const currentMonth = getMonth(currentDate);
 	const currentYear = getYear(currentDate);
@@ -124,7 +120,7 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>RATING</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				<div className={cl`styles.${ratingClass(item?.rating)}`}>
+				<div className={`styles.${ratingClass(item?.rating)}`}>
 					{item?.rating || '-'}
 				</div>
 			</div>
@@ -137,7 +133,7 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>SCORE</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				<div className={cl`styles.${ratingClass(item?.score)}`}>
+				<div className={`styles.${ratingClass(item?.score)}`}>
 					{item.score || '-'}
 				</div>
 				{' '}
@@ -408,7 +404,7 @@ const useGetColumns = ({
 							placement="bottom"
 						>
 							<ButtonIcon
-								onClick={() => downloadError(item.error_url)}
+								onClick={() => openCSV(item.error_url)}
 								themeType="secondary"
 								icon={<IcMExclamation height="20px" width="20px" />}
 								size="sm"

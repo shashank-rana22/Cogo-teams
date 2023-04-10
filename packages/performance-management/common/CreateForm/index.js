@@ -64,7 +64,7 @@ function CreateForm({
 					loading={loading}
 					themeType="primary"
 				>
-					{startCase(type)}
+					{startCase(type || '---')}
 				</Button>
 
 			</div>

@@ -16,7 +16,7 @@ function QuestionsBox({ question_detail = {}, questionStatus = '' }) {
 						animation="shift-away"
 						content={<div style={{ wordBreak: 'break-word' }}>{question}</div>}
 					>
-						<div className={styles.question}>{startCase(question)}</div>
+						<div className={styles.question}>{startCase(question || '---')}</div>
 					</Tooltip>
 				</div>
 

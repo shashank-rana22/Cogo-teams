@@ -1,9 +1,9 @@
 import NotifyModal from '../page-components/HRDashboard/NotifyModal';
-import CreateModal from '../page-components/HRDashboard/TabComponents/PIPProbations/PIPModals/CreateModal';
-import LogModal from '../page-components/HRDashboard/TabComponents/PIPProbations/PIPModals/LogModal';
-import PipUploadModal from '../page-components/HRDashboard/TabComponents/PIPProbations/PIPModals/PipUploadModal';
-import ReviewModal from '../page-components/HRDashboard/TabComponents/PIPProbations/PIPModals/ReviewModal';
-import UpdateModal from '../page-components/HRDashboard/TabComponents/PIPProbations/PIPModals/UpdateModal';
+import CreateModal from '../common/PIPProbations/PIPModals/CreateModal';
+import LogModal from '../common/PIPProbations/PIPModals/LogModal';
+import PipUploadModal from '../common/PIPProbations/PIPModals/PipUploadModal';
+import ReviewModal from '../common/PIPProbations/PIPModals/ReviewModal';
+import UpdateModal from '../common/PIPProbations/PIPModals/UpdateModal';
 
 const modalComoponentsMapping = {
 	update: {

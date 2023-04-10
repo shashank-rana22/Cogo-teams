@@ -51,9 +51,9 @@ function FeedbackFormModal({
 							:
 							{' '}
 							<span>
-								{startCase(item.name)}
+								{startCase(item.name || '-')}
 							</span>
-							{![true, 'employed'].includes(showModal) && ` (${startCase(showModal)})`}
+							{![true, 'employed'].includes(showModal) && ` (${startCase(showModal || '-')})`}
 						</div>
 					)}
 					/>

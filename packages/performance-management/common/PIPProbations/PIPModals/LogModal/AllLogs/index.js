@@ -2,8 +2,8 @@ import { Placeholder } from '@cogoport/components';
 import { startCase, isEmpty, format } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import EmptyState from '../../../../../../../common/EmptyState';
-import useGetAllLogs from '../../../../../../../hooks/useGetAllLogs';
+import EmptyState from '../../../../EmptyState';
+import useGetAllLogs from '../../../../../hooks/useGetAllLogs';
 
 import styles from './styles.module.css';
 

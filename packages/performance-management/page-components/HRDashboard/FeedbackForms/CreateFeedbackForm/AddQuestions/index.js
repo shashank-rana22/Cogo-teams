@@ -39,7 +39,6 @@ function AddQuestions({
 		formId,
 	});
 	const {
-		list: questions = [], form_questions: checkedQuestions = [],
 		pagination_data = {},
 	} = data;
 
@@ -52,6 +51,8 @@ function AddQuestions({
 
 	useEffect(() => {
 		if (!isEmpty(data)) {
+			const {	list: questions = [], form_questions: checkedQuestions = [] } = data;
+
 			setQuestionActionList((pv) => ({
 				...pv,
 				allList: questions,
@@ -59,8 +60,7 @@ function AddQuestions({
 				checked: isEmpty(pv.checked) ? checkedQuestions : pv.checked,
 			}));
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [data]);
+	}, [data, setQuestionActionList]);
 
 	useEffect(() => debounceQuery(searchValue), [debounceQuery, searchValue]);
 
@@ -108,7 +108,7 @@ function AddQuestions({
 								Create Form :
 								{' '}
 								<div className={styles.dep}>
-									{startCase(department)}
+									{startCase(department || '---')}
 									{' > '}
 								</div>
 

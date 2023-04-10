@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { useState } from 'react';
 
-import ReassignManager from '../../../page-components/EmployeeDirectory/TreeView/UserCard/EnlargedCard/ReassignManager';
+import ReassignManager from '../../ReassignManager';
 
 import styles from './styles.module.css';
 

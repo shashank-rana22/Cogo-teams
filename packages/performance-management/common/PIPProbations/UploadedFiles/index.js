@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 
-import useGetColumns from '../../../../../common/Columns';
-import Filters from '../../../../../common/Filters';
-import UserTableData from '../../../../../common/UserTableData';
-import feedbackDataColumns from '../../../../../constants/feedback-data-columns';
-import modalComoponentsMapping from '../../../../../constants/modal-components-mapping';
+import useGetColumns from '../../Columns';
+import Filters from '../../Filters';
+import UserTableData from '../../UserTableData';
+import feedbackDataColumns from '../../../constants/feedback-data-columns';
+import modalComoponentsMapping from '../../../constants/modal-components-mapping';
 
 import styles from './styles.module.css';
 import useListFiles from './useListFiles';

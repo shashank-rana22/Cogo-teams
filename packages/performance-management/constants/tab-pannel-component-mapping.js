@@ -1,5 +1,5 @@
-import Dashboard from '../page-components/HRDashboard/TabComponents/PIPProbations/Dashboard';
-import PendingReviews from '../page-components/HRDashboard/TabComponents/PIPProbations/PendingReviews';
+import Dashboard from '../common/PIPProbations/Dashboard';
+import PendingReviews from '../common/PIPProbations/PendingReviews';
 
 const tabPanelComponentMapping = {
 	dashboard: {

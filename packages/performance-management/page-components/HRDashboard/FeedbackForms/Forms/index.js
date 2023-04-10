@@ -42,7 +42,11 @@ function Forms({
 		? <EmptyState setFormStage={setFormStage} setOpenCreateForm={setOpenCreateForm} /> : (
 			<div className={styles.container}>
 				<div className={styles.form_header}>
-					<div className={styles.form_cat}>{`${startCase(department)}: ${startCase(designation)}`}</div>
+					<div className={styles.form_cat}>
+						{`${startCase(department || '---')}: 
+					${startCase(designation || '---')}`}
+
+					</div>
 					{!openCreateForm && !!designation && (
 						<Button themeType="primary" onClick={() => showForm()}>Create New</Button>
 					)}
@@ -88,7 +92,7 @@ function Forms({
 									<p className={styles.label}>Status</p>
 									<div className={styles.value}>
 										<Pill color={status === 'active' ? 'green' : 'red'}>
-											{startCase(status)}
+											{startCase(status || '---')}
 										</Pill>
 									</div>
 								</div>

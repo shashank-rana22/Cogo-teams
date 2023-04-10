@@ -81,7 +81,7 @@ function BulkDesignation({
 										checked
 										disabled
 									/>
-									<div className={styles.label}>{startCase(des)}</div>
+									<div className={styles.label}>{startCase(des || '---')}</div>
 								</div>
 							);
 						}
@@ -92,7 +92,7 @@ function BulkDesignation({
 									disabled={checkedDesignations.length === 1}
 									onChange={(val) => addToDesignation(val.target.checked, des)}
 								/>
-								<div className={styles.label}>{startCase(des)}</div>
+								<div className={styles.label}>{startCase(des || '---')}</div>
 							</div>
 						);
 					})}
@@ -109,7 +109,7 @@ function BulkDesignation({
 								checked={checkedDesignations.includes(newDes)}
 								onChange={(val) => addToDesignation(val.target.checked, newDes)}
 							/>
-							<div className={styles.label}>{startCase(newDes)}</div>
+							<div className={styles.label}>{startCase(newDes || '---')}</div>
 						</div>
 					);
 				})}

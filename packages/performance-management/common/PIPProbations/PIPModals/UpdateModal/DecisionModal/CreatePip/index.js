@@ -30,7 +30,7 @@ function CreatePip({ status = '', setItem = () => {}, setDisableNext = () => {} 
 		<div className={styles.container}>
 			<div className={styles.dates}>
 				<div className={styles.label}>
-					{status === 'pip' ? `${startCase(status)} Start Date` : 'Joining Date'}
+					{status === 'pip' ? `${startCase(status || '---')} Start Date` : 'Joining Date'}
 				</div>
 				<Datepicker
 					placeholder="Enter Date"
@@ -58,7 +58,7 @@ function CreatePip({ status = '', setItem = () => {}, setDisableNext = () => {} 
 
 			<div className={styles.dates}>
 				<div className={styles.label}>
-					{startCase(status)}
+					{startCase(status || '---')}
 					{' '}
 					End date
 				</div>

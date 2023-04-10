@@ -6,9 +6,9 @@ import { useIrisRequest } from '@cogoport/request';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import Filters from '../../../../../../common/Filters';
-import sampleTypeCsv from '../../../../../../constants/sample-type-csv';
-import getDefaultFeedbackMonth from '../../../../../../utils/getDefaultYearMonth';
+import Filters from '../../../Filters';
+import sampleTypeCsv from '../../../../constants/sample-type-csv';
+import getDefaultFeedbackMonth from '../../../../utils/getDefaultYearMonth';
 
 import styles from './styles.module.css';
 
@@ -67,7 +67,7 @@ function PipUploadModal({ item = {}, modal, setModal = () => {}, logType = '', s
 			show={modal === 'upload' || 'kpi_tab_upload'}
 			onClose={() => setModal('')}
 		>
-			<Modal.Header title={`Upload ${startCase(type)} CSV`} />
+			<Modal.Header title={`Upload ${startCase(type || '---')} CSV`} />
 			<div className={styles.upload_modal}>
 				<Modal.Body>
 					<div className={styles.upload_container}>
@@ -101,7 +101,7 @@ function PipUploadModal({ item = {}, modal, setModal = () => {}, logType = '', s
 							>
 								<div className={styles.upload_header}>
 									<div className={styles.label}>
-										{`Upload ${startCase(type)} CSV`}
+										{`Upload ${startCase(type || '---')} CSV`}
 									</div>
 									{type === 'normalization' && (
 										<div className={styles.filters}>

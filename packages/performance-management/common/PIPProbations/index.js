@@ -3,10 +3,10 @@ import { IcMDownload, IcMEdit, IcMUpload } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import modalComponentsMapping from '../../../../constants/modal-components-mapping';
-import tabPanelComponentMapping from '../../../../constants/tab-pannel-component-mapping';
-import useDownloadLogCsv from '../../../../hooks/useDownloadLogCSV';
-import useUpdateLog from '../../../../hooks/useUpdateLog';
+import modalComponentsMapping from '../../constants/modal-components-mapping';
+import tabPanelComponentMapping from '../../constants/tab-pannel-component-mapping';
+import useDownloadLogCsv from '../../hooks/useDownloadLogCSV';
+import useUpdateLog from '../../hooks/useUpdateLog';
 
 import PendingReviews from './PendingReviews';
 import styles from './styles.module.css';
@@ -103,7 +103,7 @@ function PIPProbations({ source = 'hr_dashboard', modal = '', setModal = () => {
 							onClick={() => downloadLogCSV(logType)}
 						>
 							<IcMDownload style={{ marginRight: '4px' }} />
-							{startCase(logType)}
+							{startCase(logType || '---')}
 							{' '}
 							CSV
 						</Button>

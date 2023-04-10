@@ -72,7 +72,7 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 							key={cntrl.name}
 							id={`${cntrl}_id`}
 							value={params[value]}
-							style={{ margin: '8px 8px 0 0' }}
+							style={{ marginRight: '8px' }}
 						/>
 					);
 				})}
@@ -92,7 +92,7 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 							key={cntrl.name}
 							id={`${cntrl}_id`}
 							value={params[value]}
-							style={{ marginRight: '8px 8px 0 0' }}
+							style={{ marginLeft: '8px' }}
 						/>
 					);
 				})}

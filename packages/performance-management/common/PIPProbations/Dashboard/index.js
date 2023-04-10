@@ -1,13 +1,13 @@
 import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import useGetColumns from '../../../../../common/Columns';
-import Filters from '../../../../../common/Filters';
-import UserTableData from '../../../../../common/UserTableData';
-import feedbackDataColumns from '../../../../../constants/feedback-data-columns';
-import useListLogs from '../../../../../hooks/useListLogs';
+import useGetColumns from '../../Columns';
+import Filters from '../../Filters';
+import Statistics from '../../Statistics';
+import UserTableData from '../../UserTableData';
+import feedbackDataColumns from '../../../constants/feedback-data-columns';
+import useListLogs from '../../../hooks/useListLogs';
 
-import Statistics from './Statistics';
 import styles from './styles.module.css';
 
 function Dashboard({
@@ -56,7 +56,7 @@ function Dashboard({
 				/>
 			</div>
 
-			<div className={styles.heading}>{`Past ${startCase(logType)} List`}</div>
+			<div className={styles.heading}>{`Past ${startCase(logType || '---')} List`}</div>
 
 			<div className={styles.filters}>
 				<Filters

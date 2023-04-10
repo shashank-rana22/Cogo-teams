@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import { SelectController, useForm } from '@cogoport/forms';
 import { useState, useEffect } from 'react';
 
-import useListReassignControls from '../../../../../../utils/list-reassign-manager-controls';
+import useListReassignControls from '../../utils/list-reassign-manager-controls';
 
 import styles from './styles.module.css';
 import useReassignManager from './useReassignManager';

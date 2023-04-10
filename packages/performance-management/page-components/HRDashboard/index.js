@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 import KPIFeedbacks from './TabComponents/KPIFeedbacks';
-import PIPProbations from './TabComponents/PIPProbations';
-import UploadedFiles from './TabComponents/PIPProbations/UploadedFiles';
+import PIPProbations from '../../common/PIPProbations';
+import UploadedFiles from '../../common/PIPProbations/UploadedFiles';
 
 function HRDashboard() {
 	const router = useRouter();

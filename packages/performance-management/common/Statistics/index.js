@@ -1,8 +1,8 @@
 import { ResponsiveBar } from '@cogoport/charts/bar';
 import { isEmpty } from '@cogoport/utils';
 
-import EmptyState from '../../../../../../common/EmptyState';
-import Filters from '../../../../../../common/Filters';
+import EmptyState from '../EmptyState';
+import Filters from '../Filters';
 
 import getLogStatsData from './getLogStatsData';
 import styles from './styles.module.css';

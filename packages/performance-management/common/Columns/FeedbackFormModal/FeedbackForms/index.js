@@ -39,7 +39,7 @@ function FeedbackForms({
 		feedbackYear,
 	});
 
-	const { form_questions = [], form_id = '', form_responses = [], feedback_data = {} } = formData;
+	const { form_id = '' } = formData;
 
 	const [rating, setRating] = useState({});
 	const [comment, setComment] = useState('');
@@ -83,7 +83,7 @@ function FeedbackForms({
 				placement="top"
 				theme="light"
 				animation="shift-away"
-				content={<div style={{ wordBreak: 'break-word' }}>{startCase(key)}</div>}
+				content={<div style={{ wordBreak: 'break-word' }}>{startCase(key || '-')}</div>}
 			>
 				{performanceIcons[key]}
 			</Tooltip>
@@ -94,6 +94,8 @@ function FeedbackForms({
 
 	useEffect(() => {
 		if (!isEmpty(formData)) {
+			const { form_questions = [], form_responses = [], feedback_data = {} } = formData;
+
 			const questions = !isEmpty(form_responses) ? form_responses : form_questions;
 
 			if (!isEmpty(form_responses)) {
@@ -110,7 +112,6 @@ function FeedbackForms({
 			}
 			setQuestionsToShow(questions);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [formData]);
 
 	if (questionsLoading) {
@@ -141,7 +142,7 @@ function FeedbackForms({
 
 					<div className={styles.rating_classes}>
 						{Object.keys(performanceClass).map((key) => (
-							<div className={styles.class} key={key}>
+							<div className={styles.performance_class} key={key}>
 								{performanceClass[key]}
 							</div>
 						))}
@@ -160,7 +161,7 @@ function FeedbackForms({
 					>
 						<div className={styles.question_rating}>
 							<div className={styles.side_heading}>
-								<div className={styles.question_container}>{startCase(question)}</div>
+								<div className={styles.question_container}>{startCase(question || '---')}</div>
 
 								{!!description && (
 									<Tooltip

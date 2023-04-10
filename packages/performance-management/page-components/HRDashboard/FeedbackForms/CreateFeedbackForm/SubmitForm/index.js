@@ -51,7 +51,7 @@ function SubmitForm({
 					Create Form :
 					{' '}
 					<div className={styles.dep}>
-						{startCase(department)}
+						{startCase(department || '---')}
 						{' > '}
 					</div>
 

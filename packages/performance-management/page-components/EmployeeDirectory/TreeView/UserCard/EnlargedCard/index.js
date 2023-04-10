@@ -3,7 +3,8 @@ import { IcMEmail, IcMCall } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import ReassignManager from './ReassignManager';
+import ReassignManager from '../../../../../common/ReassignManager';
+
 import styles from './styles.module.css';
 
 function EnlargedCard({ user = {}, avatarProps = {}, refetchTreeParams, loading = false }) {

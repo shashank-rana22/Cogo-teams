@@ -127,7 +127,7 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 		},
 	];
 
-	const FilterControls = {
+	const filterControls = {
 		left  : [],
 		right : [],
 	};
@@ -138,7 +138,7 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 		if (control.name === 'month' && selectedYear === year) {
 			updatedControl.options = monthOptions.filter((newMonth) => newMonth.index <= month);
 		}
-		FilterControls.left.push(updatedControl);
+		filterControls.left.push(updatedControl);
 	});
 
 	rightFilters.forEach(({ name, ...rest }) => {
@@ -147,10 +147,10 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 		if (control.name === 'month' && selectedYear === year) {
 			updatedControl.options = monthOptions.filter((newMonth) => newMonth.index <= month);
 		}
-		FilterControls.right.push(updatedControl);
+		filterControls.right.push(updatedControl);
 	});
 
-	return FilterControls;
+	return filterControls;
 };
 
 export default useGetControls;
