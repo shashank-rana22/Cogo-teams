@@ -1,4 +1,4 @@
-import { Button, CheckboxGroup, Input } from '@cogoport/components';
+import { Button, CheckboxGroup, Input, DateRangepicker, cl } from '@cogoport/components';
 import { IcMCross, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
@@ -11,32 +11,37 @@ function Filters({
 	setFilterVisible = () => {},
 	activityTab,
 	filters: appliedFilters = null,
+	dateFilters,
 	handleFilters = () => {},
 	handleReset = () => {},
 	loading = false,
+	activeSubTab = '',
 }) {
 	const { FILTERS_MAPPING } = filterOptions();
 	const [values, setValues] = useState(null);
+	const [dateValues, setDateValues] = useState(null);
 
-	const emptyCheck = isEmpty(values);
+	const emptyCheck = isEmpty(values) && isEmpty(dateValues);
+
+	const handleClick = () => {
+		if (activeSubTab === 'summary') {
+			handleFilters(dateValues);
+		} else {
+			handleFilters(values);
+		}
+	};
 
 	useEffect(() => {
-		setValues(appliedFilters);
-	}, [appliedFilters]);
+		if (activeSubTab === 'summary') {
+			setDateValues(dateFilters);
+		} else {
+			setValues(appliedFilters || []);
+		}
+	}, [activeSubTab, appliedFilters, dateFilters]);
 
-	return (
-		<div className={styles.container}>
-			<div className={styles.header}>
-				<div className={styles.title}>
-					Filters
-				</div>
-
-				<div className={styles.styled_icon}>
-					<IcMCross width={20} height={20} onClick={() => setFilterVisible(false)} />
-				</div>
-			</div>
-
-			{activityTab === 'transactional' ? (
+	const checkFilter = () => {
+		if (activityTab === 'transactional') {
+			return (
 				<>
 					<div className={styles.label}>Enter Serial ID</div>
 					<Input
@@ -47,14 +52,44 @@ function Filters({
 						value={values || ''}
 					/>
 				</>
-			) : (
-				<CheckboxGroup
-					options={FILTERS_MAPPING[activityTab]}
-					onChange={setValues}
-					value={values || []}
-					className={styles.filters}
+			);
+		}
+		if (activityTab === 'communication' && activeSubTab === 'summary') {
+			return (
+				<DateRangepicker
+					className={styles.date_picker}
+					name="fromToDate"
+					onChange={setDateValues}
+					value={dateValues}
+					isPreviousDaysAllowed
 				/>
-			)}
+			);
+		}
+		return (
+			<CheckboxGroup
+				options={FILTERS_MAPPING[activityTab]}
+				onChange={setValues}
+				value={values || []}
+				className={styles.filters}
+			/>
+		);
+	};
+
+	return (
+		<div className={cl`${styles.container} 
+					${activeSubTab === 'summary' ? styles.summary_container : ''}`}
+		>
+			<div className={styles.header}>
+				<div className={styles.title}>
+					Filters
+				</div>
+
+				<div className={styles.styled_icon}>
+					<IcMCross width={20} height={20} onClick={() => setFilterVisible(false)} />
+				</div>
+			</div>
+
+			{checkFilter()}
 
 			<div className={styles.actions}>
 				<Button size="sm" themeType="tertiary" onClick={handleReset}>
@@ -66,7 +101,7 @@ function Filters({
 				<Button
 					size="sm"
 					themeType="accent"
-					onClick={() => handleFilters(values)}
+					onClick={handleClick}
 					disabled={emptyCheck}
 					loading={loading}
 				>
