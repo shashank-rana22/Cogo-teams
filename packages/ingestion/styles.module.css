@@ -19,7 +19,7 @@
 }
 
 .type {
-	max-width: 240px;
+	min-width: 80px;
 }
 
 .number_of_org {
@@ -27,11 +27,11 @@
 }
 
 .re_upload {
-	min-width: 60px;
+	min-width: 80px;
 }
 
 .uploaded {
-	max-width: 80px;
+	min-width: 80px;
 	text-decoration-line: underline;
 }
 
@@ -45,6 +45,7 @@
 
 .error_type {
 	text-align: center;
+
 }
 
 .updated_at {
@@ -52,7 +53,7 @@
 }
 
 .error {
-	min-width: 80px;
+	min-width: 120px;
 }
 
 .stage {

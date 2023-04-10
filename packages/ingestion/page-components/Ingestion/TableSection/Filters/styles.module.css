@@ -26,18 +26,23 @@
 
 	@media (max-width: 768px) {
 		width: 32%;
-	}
 
-	:global {
-		.ui_select_display_container {
-			.ui_select_input_placeholder {
-				color: #cacaca;
+		:global {
+			.ui_select_display_container {
+				min-width: 134px
 			}
 		}
 	}
+	:global {
+		.ui_select_input_placeholder {
+			color: #cacaca;
+		}
+	}
+
+	
 }
 
-.form_group:not(:first-child) { margin: 10px 0; }
+.form_group:not(:first-child) { margin: 12px 0; }
 
 .field_controller {
 	width: 200px;
