@@ -1,13 +1,19 @@
-const controls = {
-	search: {
+const controls = [
+	{
 		name        : 'search',
 		type        : 'text',
 		placeholder : 'Search RFQ ID / Customer Name',
 	},
-	organization_size: {
-		name    : 'organization_size',
-		type    : 'pills',
-		options : [
+	{
+		name : 'Profitability',
+		type : 'rangeSlider',
+	},
+	{
+		name     : 'organization_size',
+		label    : 'Organization Size',
+		type     : 'chips',
+		multiple : true,
+		options  : [
 			{
 				label : 'Long Tail',
 				value : 'long_tail',
@@ -26,11 +32,11 @@ const controls = {
 			},
 		],
 	},
-	service_type: {
+	{
 		name    : 'service_type',
-		type    : 'select',
+		label   : 'Service Type',
+		type    : 'chips',
 		options : [
-
 			{
 				label : 'FCL',
 				value : 'fcl_freight',
@@ -45,16 +51,19 @@ const controls = {
 			},
 		],
 	},
-	start_date: {
-		name : 'start_date',
-		type : 'datePicker',
+	{
+		name        : 'start_date',
+		label       : 'Start Date',
+		placeholder : 'select start date',
+		type        : 'datePicker',
 	},
-	end_date: {
-		name    : 'end_date',
-		type    : 'datePicker',
-		maxDate : new Date(),
+	{
+		name        : 'end_date',
+		label       : 'End Date',
+		type        : 'datePicker',
+		placeholder : 'select end date',
+		maxDate     : new Date(),
 
-	},
-};
+	}];
 
 export default controls;
