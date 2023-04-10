@@ -1,8 +1,7 @@
-import { Toast } from '@cogoport/components';
 import { useLensRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 const useGetAttachements = ({ payload }) => {
 	const { message_id = '' } = payload;
@@ -20,7 +19,7 @@ const useGetAttachements = ({ payload }) => {
 			try {
 				await triggerGetMail();
 			} catch (err) {
-				Toast.error(getApiErrorString(err));
+				toastApiError(err);
 			}
 		})();
 	}, [triggerGetMail]);
