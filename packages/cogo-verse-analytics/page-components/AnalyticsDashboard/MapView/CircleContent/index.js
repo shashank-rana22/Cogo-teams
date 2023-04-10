@@ -13,32 +13,31 @@ const TheGlobe = dynamic(() => import('../TheGlobe'), { ssr: false });
 
 function CircleContent(props = {}) {
 	const {
-		stats={},
+		stats = {},
 		country = {},
 		date = {},
-		globeLoading = false,
+		statsLoading = false,
 		globeGL = {},
 		markerData = [],
 		circleTab = '',
 		resetGlobePosition = () => {},
-		setCircleTab = () => {},
-        
+
 	} = props || {};
-    const globeStats=stats?.list || {};
+	const globeStats = stats?.list || {};
 	return (
 		<div className={styles.circle_content}>
 			<div className={styles.circle_frame}>
 				<div className={styles.globe_container}>
 					{
 
-							(!globeLoading)
+							(!statsLoading)
 								? (
 
 									<TheGlobe
 										country={country}
 										globeGL={globeGL}
 										markerData={markerData}
-										globeLoading={globeLoading}
+										globeLoading={statsLoading}
 										resetGlobePosition={resetGlobePosition}
 										circleTab={circleTab}
 										date={date}
@@ -69,14 +68,13 @@ function CircleContent(props = {}) {
 							const { type, valueKey, label } = stat;
 
 							return (
-								// eslint-disable-next-line jsx-a11y/no-static-element-interactions
 								<div
 									className={cl`${styles.circle} ${styles[type]} 
 									${circleTab === type && styles.circle_clicked}`}
 
 								>
 									<div className={styles.stat_value}>
-										{!globeLoading
+										{!statsLoading
 											? handleValues(globeStats[valueKey] || 0) || 0
 											: 	(
 												<Placeholder

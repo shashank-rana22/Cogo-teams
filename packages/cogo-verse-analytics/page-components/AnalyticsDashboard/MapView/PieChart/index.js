@@ -8,7 +8,6 @@ import styles from './styles.module.css';
 
 function CommunicationPieChart({ conversation_data = {} }) {
 	const colors = ['#BDBDBD', '#ABCD62', '#DDEBC0'];
-console.log(conversation_data,'conversation_data');
 	const chartData = PieChartData({ conversation_data });
 
 	return (
@@ -55,7 +54,6 @@ console.log(conversation_data,'conversation_data');
 								spacing    : 10,
 							},
 						]}
-						
 						legends={[]}
 					/>
 				) : (

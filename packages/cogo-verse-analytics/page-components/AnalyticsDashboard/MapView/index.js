@@ -1,15 +1,9 @@
-/* eslint-disable max-len */
 import {
-	Select,
 	DateRangepicker,
 } from '@cogoport/components';
-import { useGetAsyncOptions } from '@cogoport/forms';
-import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import { dynamic } from '@cogoport/next';
-import { isEmpty, merge } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useRef, useEffect } from 'react';
-
-import useGetCogoverseGlobeData from '../../../hooks/useGetCogoverseGlobeData';
 
 import GlobeStatsFooter from './GlobeStatsFooter';
 import styles from './styles.module.css';
@@ -20,39 +14,22 @@ function MapView(props = {}) {
 	const globeGL = useRef();
 
 	const {
-		stats={},
+		stats = {},
 		statsLoading = false,
-		setCountry = () => {},
 		country = {},
 		date = {},
 		setDate = {},
-		chatLoading = false,
 	} = props || {};
 	const [circleTab, setCircleTab] = useState('new_users');
+	const { customer_locations = [] } = stats?.list || {};
 
-	const {
-		options:locationOptions,
-		loading:locationsLoading = false,
-		onSearch = () => {},
-	} = useGetAsyncOptions(merge(asyncFieldsLocations(), { params: { filters: { type: 'country' }, page_limit: 500 } }));
+	const countryMobileCode = country?.mobile_country_code || '';
 
-	// const { globeData = {}, globeLoading = false } = useGetCogoverseGlobeData({ country, circleTab, date });
-const globeData=stats?.list;
-	const { customer_locations = [], stats:globeStats = {} } = globeData || {};
-	console.log("customer_locations:", customer_locations);
-	const CountryMobileCode = country?.mobile_country_code || '';
-
-	let markerData = {};
-	markerData = customer_locations.map((item) => ({
+	const markerData = customer_locations.map((item) => ({
 		lat : item?.latitude,
 		lng : item?.longitude,
 		pop : 500,
-		...markerData,
 	}));
-
-	const onSelectChange = (val) => {
-		setCountry(val);
-	};
 
 	useEffect(() => {
 		if (!isEmpty(globeGL?.current?.scene()?.children[2]?.visible
@@ -61,8 +38,7 @@ const globeData=stats?.list;
 			globeGL.current.scene().children[1].intensity = 1.25;
 			globeGL.current.scene().children[2].intensity = 0.25;
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [globeGL?.current, CountryMobileCode, date, circleTab]);
+	}, [globeGL, countryMobileCode, date, circleTab]);
 
 	const resetGlobePosition = () => {
 		const defaultMapCenter = { lat: 0, lng: 78, altitude: 1.8 };
@@ -77,20 +53,7 @@ const globeData=stats?.list;
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.top_content}>
-				<div className={styles.select_container}>
-					{/* <Select
-						value={country?.mobile_country_code}
-						onChange={(_, obj) => onSelectChange(obj)}
-						placeholder="Select Country"
-						options={locationOptions}
-						id="select_country"
-						labelKey="display_name"
-						valueKey="mobile_country_code"
-						isClearable
-						onSearch={onSearch}
-						loading={locationsLoading}
-					/> */}
-				</div>
+				<div className={styles.select_container} />
 				<div className={styles.date_range_container}>
 					<DateRangepicker
 						id="select_date_range"
@@ -100,7 +63,7 @@ const globeData=stats?.list;
 						dateFormat="MMM dd, yyyy"
 						isPreviousDaysAllowed
 						maxDate={maxDate}
-						// disable={statsLoading || globeLoading || chatLoading}
+						disable={statsLoading}
 					/>
 
 				</div>
@@ -108,7 +71,6 @@ const globeData=stats?.list;
 
 			<CircleContent
 				{...props}
-				// globeLoading={globeLoading}
 				globeGL={globeGL}
 				markerData={markerData}
 				circleTab={circleTab}

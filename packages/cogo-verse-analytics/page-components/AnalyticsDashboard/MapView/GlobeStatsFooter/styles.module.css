@@ -3,7 +3,10 @@
 	background: #f9f5ec;
 }
 
-.the_stat{
+.the_stat {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 	padding: 10px 0 10px 60px;
 }
 
@@ -88,12 +91,6 @@
 	flex-direction: column;
 	justify-content: space-between;
 	height: 100%;
-}
-
-.the_stat {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
 }
 
 .stat_circle {
