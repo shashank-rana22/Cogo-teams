@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 function Preview({
 	data = {},
 	editorValue = '',
+	fromFloatingWidget = false,
 }) {
 	const { documents, announcement_attachments } = data;
 
@@ -25,9 +26,18 @@ function Preview({
 			<div className={styles.description}>
 				<div dangerouslySetInnerHTML={{ __html: editorValue }} />
 			</div>
-			<PreviewVideos videos={videos} />
-			<PreviewImages images={images} />
-			<PreviewFiles files={files} />
+
+			{(videos || []).length > 0 && (
+				<PreviewVideos videos={videos} fromFloatingWidget={fromFloatingWidget} />
+			)}
+
+			{(images || []).length > 0 && (
+				<PreviewImages images={images} fromFloatingWidget={fromFloatingWidget} />
+			)}
+
+			{(files || []).length > 0 && (
+				<PreviewFiles files={files} />
+			)}
 
 		</div>
 	);

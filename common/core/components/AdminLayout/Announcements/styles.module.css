@@ -72,8 +72,17 @@
 	min-width: 200px;
 
 	:global {
-		.ui_select_input_control {
+		.ui_select_input_control,
+		.ui_select_options_container {
 			font-size: 12px !important;
+		}
+
+		.ui_select_display_container {
+			height: fit-content !important;
+		}
+
+		.ui_select_toggle_button {
+			padding: 6px 10px;
 		}
 	}
 }

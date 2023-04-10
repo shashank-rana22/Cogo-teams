@@ -43,6 +43,5 @@
 
 .announcement_preview_container {
 	width: calc(100% - 460px);
-	margin-top: 12px;
-	margin-left: 32px;
+	padding: 24px 24px 8px 30px;
 }

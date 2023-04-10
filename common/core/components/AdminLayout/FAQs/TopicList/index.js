@@ -209,8 +209,11 @@ function TopicList({
 	return (
 		<div className={styles.container}>
 			<Header
+				activeTab={activeTab}
 				search={search}
 				setSearch={setSearch}
+				searchAnnouncement={searchAnnouncement}
+				setSearchAnnouncement={setSearchAnnouncement}
 				topic={topic}
 				setTopic={setTopic}
 				question={question}

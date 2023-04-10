@@ -3,9 +3,9 @@ import React, { useRef } from 'react';
 
 import styles from './styles.module.css';
 
-const scrollAmount = 766;
+function PreviewVideos({ videos = [], fromFloatingWidget = false }) {
+	const scrollAmount = 800;
 
-function PreviewVideos({ videos = [] }) {
 	const scrollRefVideos = useRef('');
 
 	const scrollHandlerRightVideos = () => {
@@ -15,55 +15,60 @@ function PreviewVideos({ videos = [] }) {
 	const scrollHandlerLeftVideos = () => {
 		scrollRefVideos.current.scrollLeft -= scrollAmount;
 	};
+
 	return (
-		<div>
+		<div className={styles.container}>
+			<div className={styles.heading}>VIDEOS</div>
 
-			{(videos || []).length > 0 && (
-				<div className={styles.content_container}>
+			<div className={styles.content_container}>
 
-					<div className={styles.content_header_container}>
-
-						<div className={styles.heading}>VIDEOS</div>
-
-						{videos.length > 2 && (
-							<div className={styles.icn_container}>
-								<IcMArrowLeft width={25} height={25} onClick={scrollHandlerLeftVideos} />
-								<IcMArrowRight width={25} height={25} onClick={scrollHandlerRightVideos} />
-							</div>
-						)}
-
+				{(videos || []).length > 2 && (
+					<div
+						role="presentation"
+						className={`${styles.arrow_container} ${styles.left}`}
+						onClick={() => scrollHandlerLeftVideos()}
+					>
+						<div className={styles.arrow}><IcMArrowLeft /></div>
 					</div>
+				)}
 
-					<div className={styles.content_inner_container} ref={scrollRefVideos}>
+				<div className={styles.content_inner_container} ref={scrollRefVideos}>
 
-						<div className={styles.contents}>
-
-							{videos.map((video, index) => (
-								<div
-									key={video}
-									className={styles.content_item}
-									style={{ marginLeft: `${index === 0 ? '' : '20px'}` }}
-								>
-									<iframe
-										width="366"
-										height="200"
-										src={video}
-										title="YouTube video player"
-										frameBorder="0"
-										allow="accelerometer; clipboard-write;
+					{videos.map((video, index) => (
+						<div
+							key={video}
+							className={styles.content_item}
+							style={{ marginLeft: `${index === 0 ? '' : '24px'}` }}
+						>
+							<iframe
+										// width="366"
+								width={fromFloatingWidget ? '410' : '366'}
+								height={fromFloatingWidget ? '230' : '206'}
+										// height="206"
+								src={video}
+								title="YouTube video player"
+								frameBorder="0"
+								allow="accelerometer; clipboard-write;
 										encrypted-media; gyroscope; picture-in-picture; web-share"
-										allowfullscreen
-									/>
-
-								</div>
-
-							))}
+								allowfullscreen
+							/>
 
 						</div>
 
-					</div>
+					))}
+
 				</div>
-			)}
+
+				{(videos || []).length > 2 && (
+					<div
+						role="presentation"
+						className={`${styles.arrow_container} ${styles.right}`}
+						onClick={() => scrollHandlerRightVideos()}
+					>
+						<div className={styles.arrow}><IcMArrowRight /></div>
+					</div>
+				)}
+			</div>
 
 		</div>
 	);

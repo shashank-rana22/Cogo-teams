@@ -1,11 +1,12 @@
 import { IcMArrowRight, IcMArrowLeft } from '@cogoport/icons-react';
 import React, { useRef } from 'react';
 
+import openDocument from '../../../../../../helpers/openDocument';
 import styles from '../PreviewVideos/styles.module.css';
 
-const scrollAmount = 766;
+const scrollAmount = 800;
 
-function PreviewImages({ images = [] }) {
+function PreviewImages({ images = [], fromFloatingWidget = false }) {
 	const scrollRefImages = useRef('');
 
 	const scrollHandlerRightImages = () => {
@@ -16,36 +17,55 @@ function PreviewImages({ images = [] }) {
 		scrollRefImages.current.scrollLeft -= scrollAmount;
 	};
 	return (
-		<div>
-			{(images || []).length > 0 && (
-				<div className={styles.content_container}>
-					<div className={styles.content_header_container}>
-						<div className={styles.heading}>IMAGES</div>
-						{images.length > 2 && (
-							<div className={styles.icn_container}>
-								<IcMArrowLeft width={25} height={25} onClick={scrollHandlerLeftImages} />
-								<IcMArrowRight width={25} height={25} onClick={scrollHandlerRightImages} />
-							</div>
-						)}
+		<div className={styles.container}>
+			<div className={styles.heading}>Images</div>
+
+			<div className={styles.content_container}>
+
+				{(images || []).length > 2 && (
+					<div
+						role="presentation"
+						className={`${styles.arrow_container} ${styles.left}`}
+						onClick={() => scrollHandlerLeftImages()}
+					>
+						<div className={styles.arrow}><IcMArrowLeft /></div>
 					</div>
+				)}
 
-					<div className={styles.content_inner_container} ref={scrollRefImages}>
+				<div className={styles.content_inner_container} ref={scrollRefImages}>
 
-						<div className={styles.contents}>
-							{images.map((i, index) => (
-								<div
-									key={i}
-									className={styles.content_item}
-									style={{ marginLeft: `${index === 0 ? '' : '20px'}` }}
-								>
-									<img src={i} alt="img" width={366} />
-								</div>
-							))}
+					{(images || []).map((img_item, index) => (
+						<div
+							key={img_item}
+							className={styles.content_item}
+							style={{ marginLeft: `${index === 0 ? '' : '24px'}` }}
+						>
+							<img
+								role="presentation"
+								src={img_item}
+								alt="img"
+								// width={366}
+								width={fromFloatingWidget ? 410 : 366}
+								onClick={() => openDocument(img_item)}
+							/>
+
 						</div>
 
-					</div>
+					))}
+
 				</div>
-			)}
+
+				{(images || []).length > 2 && (
+					<div
+						role="presentation"
+						className={`${styles.arrow_container} ${styles.right}`}
+						onClick={() => scrollHandlerRightImages()}
+					>
+						<div className={styles.arrow}><IcMArrowRight /></div>
+					</div>
+				)}
+			</div>
+
 		</div>
 	);
 }
