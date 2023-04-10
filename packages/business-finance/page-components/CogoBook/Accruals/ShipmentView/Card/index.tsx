@@ -138,7 +138,7 @@ function Card({
 			</div>
 			<div>
 				<div className={styles.period}>
-					Choose ETA/ETD
+					Choose Transaction Date
 					<Tooltip
 						content="Select Shipment range to be accounted"
 						placement="top"

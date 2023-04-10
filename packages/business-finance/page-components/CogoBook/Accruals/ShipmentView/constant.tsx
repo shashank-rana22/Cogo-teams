@@ -193,8 +193,11 @@ export const accrualColumn = (
 					interactive
 				>
 					<div className={styles.job_number}>
+
 						<div className={styles.job_number_data}>{ jobNumber || '-' }</div>
 						<div>{startCase(serviceType || '-')}</div>
+						{/* <div className={styles.sell_without}>Sell Without Buy</div> */}
+
 					</div>
 				</Tooltip>
 
@@ -235,19 +238,18 @@ export const accrualColumn = (
 		Cell     : ({ row: { original } }) => {
 			const {
 				expenseBooked = '',
-				expenseCurrency = '', expenseIncludesProforma = '',
+				expenseCurrency = '',
 			} = original || {};
 			return (
-				<>
-					<span>
-						{getFormattedPrice(expenseBooked, expenseCurrency)}
-					</span>
-					<span>
-						{expenseIncludesProforma && (
-							<div style={{ color: '#F06D6D' }}>Quotation</div>)}
+				<div className={styles.quotation_styles}>
+					<div>
+						<span>
+							{getFormattedPrice(expenseBooked, expenseCurrency)}
+						</span>
+					</div>
 
-					</span>
-				</>
+					<div style={{ color: '#F06D6D' }}>Quotation :- INR 2000</div>
+				</div>
 			);
 		},
 	},
@@ -274,16 +276,12 @@ export const accrualColumn = (
 		accessor : 'sales_invoice_amount',
 		id       : 'sales_invoice_amount',
 		Cell     : ({ row: { original } }) => {
-			const { actualIncome = '', incomeCurrency = '', incomeIncludesProforma } = original || {};
+			const { actualIncome = '', incomeCurrency = '' } = original || {};
 			return (
-				<>
+				<div className={styles.quotation_styles}>
 					<span>{getFormattedPrice(actualIncome, incomeCurrency) || '-' }</span>
-					{incomeIncludesProforma && (
-						<span>
-							<div style={{ color: '#F06D6D' }}>Quotation</div>
-						</span>
-					)}
-				</>
+					<div style={{ color: '#67c676' }}>Quotation :- INR 2000</div>
+				</div>
 			);
 		},
 	},
@@ -299,7 +297,7 @@ export const accrualColumn = (
 	{
 		Header: () => (
 			<div className={styles.flex_sort}>
-				Profit
+				Margin
 				<SortIcon
 					setFilters={setFilters}
 					sortingKey="PROFIT"
@@ -330,23 +328,25 @@ export const accrualColumn = (
 			}
 
 			return (
-				<>
+				<div>
 					<div>
-						<EditIcon
-							profit={profitData}
-							itemData={original}
-							profitValue={profitValue}
-							onEditProfit={editProfitHandler}
-							changeProfitHandler={changeProfitHandler}
-							onCrossProfit={crossProfitHandler}
-							onTickProfit={tickProfitHandler}
-						/>
+						<div>
+							<EditIcon
+								profit={profitData}
+								itemData={original}
+								profitValue={profitValue}
+								onEditProfit={editProfitHandler}
+								changeProfitHandler={changeProfitHandler}
+								onCrossProfit={crossProfitHandler}
+								onTickProfit={tickProfitHandler}
+							/>
+						</div>
+						<span className={renderClassName()}>
+							{getFormattedPrice(profit, expenseCurrency) || '-' }
+						</span>
 					</div>
-					<span className={renderClassName()}>
-						{getFormattedPrice(profit, expenseCurrency) || '-' }
+				</div>
 
-					</span>
-				</>
 			);
 		},
 	},
@@ -387,6 +387,19 @@ export const accrualColumn = (
 
 			);
 		},
+	},
+	{
+		Header   : '',
+		id       : 'ribbon',
+		accessor : () => (
+
+			<div>
+				<div className={styles.ribbon}>
+					Sell Without Buy
+				</div>
+			</div>
+
+		),
 	},
 
 ];

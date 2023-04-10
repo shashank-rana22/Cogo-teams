@@ -230,7 +230,7 @@ export const column = (
 		{
 			Header: () => (
 				<div className={styles.flex_sort}>
-					Profit
+					Margin
 					<SortIcon
 						setFilters={setFilters}
 						sortingKey="PROFIT"
