@@ -29,11 +29,30 @@ function useUpdateAudience({ fetchFaqAudience }) {
 		}
 	};
 
+	const onClickRestore = async (item) => {
+		try {
+			const res = await trigger({
+				data: {
+					id     : item?.id,
+					status : 'active',
+				},
+			});
+
+			if (res?.data) {
+				Toast.success('Audience Restored sucessfully');
+				fetchFaqAudience();
+			}
+		} catch (err) {
+			console.log('err', err);
+		}
+	};
+
 	return {
 		onClickDeleteIcon,
 		loading,
 		showPopOver,
 		setShowPopOver,
+		onClickRestore,
 	};
 }
 export default useUpdateAudience;
