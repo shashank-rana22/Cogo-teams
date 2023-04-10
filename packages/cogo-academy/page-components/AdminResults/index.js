@@ -59,11 +59,13 @@ function AdminResults() {
 					<p className={styles.go_back_text}>Test Result</p>
 				</div>
 
-				<Button themeType="accent" onClick={() => getTest({ test_id })} disabled={loading}>
-					Refresh
+				{ data?.status !== 'published' && (
+					<Button themeType="accent" onClick={() => getTest({ test_id })} disabled={loading}>
+						Refresh
 
-					<IcMRefresh style={{ marginLeft: 6 }} />
-				</Button>
+						<IcMRefresh style={{ marginLeft: 6 }} />
+					</Button>
+				)}
 			</div>
 
 			{status === 'published' ? <TestResults test_id={test_id} /> : null}
