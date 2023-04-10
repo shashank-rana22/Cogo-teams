@@ -1196,6 +1196,11 @@ const saas = {
 			service_name : 'cogopoint',
 		},
 		{
+			api          : 'list_cogopoint_earnables',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
 			api          : 'list_cogopoint_ledgers',
 			access_type  : 'private',
 			service_name : 'cogopoint',
