@@ -1,0 +1,22 @@
+.dialog_box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.text {
+	font-size: 12px;
+	color: #828282;
+	cursor: pointer;
+	text-align: center;
+	padding: 2px;
+
+	:hover {
+		color: #356efd;
+	}
+}
+
+.more_svg {
+    cursor: pointer;
+}
