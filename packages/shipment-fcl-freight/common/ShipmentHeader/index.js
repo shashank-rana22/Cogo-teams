@@ -1,7 +1,9 @@
 import { Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import { IcMCancel } from '@cogoport/icons-react';
 import React, { useContext, useState } from 'react';
 
+import CancelShipment from '../CancelShipment';
 import CargoDetails from '../CargoDetails';
 import PortDetails from '../PortDetails';
 
@@ -10,38 +12,11 @@ import Loader from './Loader';
 import styles from './styles.module.css';
 
 function ShipmentHeader() {
-	const [show, setShow] = useState(false);
+	const [showAddPoModal, setShowAddPoModal] = useState(false);
+	const [showShipmentCancelModal, setShowShipmentCancelModal] = useState(false);
 	const { shipment_data, primary_service, isGettingShipment, refetch } = useContext(ShipmentDetailContext);
 
 	const { po_number, importer_exporter } = shipment_data || {};
-
-	const handlePoNo = () => {
-		if (po_number) {
-			return (
-				<div className={styles.po_number}>
-					PO Number:&nbsp;
-					{po_number}
-				</div>
-			);
-		}
-
-		if (
-			!po_number
-		) {
-			return (
-				<div
-					className={styles.button}
-					role="button"
-					tabIndex={0}
-					onClick={() => setShow(true)}
-				>
-					Add Po Number
-				</div>
-			);
-		}
-
-		return null;
-	};
 
 	if (isGettingShipment) {
 		return <Loader />;
@@ -63,19 +38,47 @@ function ShipmentHeader() {
 				>
 					<div className={styles.business_name}>{importer_exporter?.business_name}</div>
 				</Tooltip>
+
 				<div className={styles.po_number}>
-					{handlePoNo()}
+					{po_number ? (
+						<div className={styles.po_number}>
+							PO Number:&nbsp;
+							{po_number}
+						</div>
+					) : (
+						<div
+							className={styles.button}
+							role="button"
+							tabIndex={0}
+							onClick={() => setShowAddPoModal(true)}
+						>
+							Add Po Number
+						</div>
+					)}
 				</div>
 			</div>
+
 			<div className={styles.port_details}>
 				<PortDetails data={shipment_data} primary_service={primary_service} />
 			</div>
+
 			<CargoDetails
 				primary_service={primary_service}
 			/>
 
-			{show ? (
-				<AddPoNumber show={show} setShow={setShow} shipment_data={shipment_data} refetch={refetch} />
+			<IcMCancel className={styles.cancel_button} onClick={() => setShowShipmentCancelModal(true)} />
+
+			{showAddPoModal ? (
+				<AddPoNumber
+					show={showAddPoModal}
+					setShow={setShowAddPoModal}
+					shipment_data={shipment_data}
+					refetch={refetch}
+				/>
+			) : null}
+
+			{showShipmentCancelModal ? (
+				<CancelShipment show={showShipmentCancelModal} setShow={setShowShipmentCancelModal} />
 			) : null}
 		</div>
 	);
