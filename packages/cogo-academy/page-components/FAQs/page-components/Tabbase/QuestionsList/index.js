@@ -10,7 +10,7 @@ import GPTAnswers from '../../GPTAnswers';
 import Questions from './Questions';
 import styles from './styles.module.css';
 
-function QuestionsList({ tabTitle = '', searchState = '', topicId = '', tagId = '' }) {
+function QuestionsList({ tabTitle = '', searchState = '', topicId = '', tagId = [] }) {
 	const {
 		page,
 		setPage,
@@ -35,12 +35,12 @@ function QuestionsList({ tabTitle = '', searchState = '', topicId = '', tagId = 
 			</div>
 		);
 	}
+	if (response_type === 'GPT' && tagId.length === 0) {
+		return <GPTAnswers answer={gpt_answer} showMore={show_more} search={searchState} />;
+	}
 
 	if (isEmpty(data?.list)) {
 		return <EmptyQuestionListState searchState={searchState} />;
-	}
-	if (response_type === 'GPT') {
-		return <GPTAnswers answer={gpt_answer} showMore={show_more} search={searchState} />;
 	}
 	return (
 		<div>

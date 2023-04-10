@@ -20,7 +20,11 @@ function Dashboard({ tabTitle = '' }) {
 			<div style={{ display: 'flex' }}>
 				<SearchInput
 					value={inputState}
-					onChange={(val) => setInputState(val)}
+					onChange={(e) => {
+						setInputState(e);
+						if (!e) setSearchState('');
+					}}
+					onKeyPress={() => { setSearchState(inputState); }}
 					size="md"
 					placeholder="Search for a keyword or a question"
 				/>
