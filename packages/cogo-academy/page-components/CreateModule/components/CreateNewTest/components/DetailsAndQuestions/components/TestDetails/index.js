@@ -25,7 +25,7 @@ const onNavigate = ({ push }) => {
 
 function CreateNewTest({
 	control, errors, data,
-	getTestLoading, setValue, watch, handleSubmit, uploadDocument, setUploadDocument,
+	getTestLoading, setValue, watch, handleSubmit, uploadDocument, setUploadDocument, radioGroupVal,
 }) {
 	const router = useRouter();
 
@@ -38,8 +38,6 @@ function CreateNewTest({
 	const { data: test_sheet_data, getTestSheet } = useGetTestSheet();
 
 	const select_user_group = watch('select_user_group') || [];
-
-	const radioGroupVal = watch('select_users') || '';
 
 	const cogoEntityWatch = watch('cogo_entity_id') || '';
 

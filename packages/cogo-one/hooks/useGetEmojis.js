@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { usePublicRequest } from '@cogoport/request';
 import { useState } from 'react';
 
