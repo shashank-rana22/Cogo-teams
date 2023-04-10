@@ -8,7 +8,7 @@ import LoadingState from '../../commons/LoadingState';
 
 import styles from './styles.module.css';
 
-function TagTable({
+function AudianceTable({
 	columns = [],
 	data = [],
 	audianceLoading = true,
@@ -77,4 +77,4 @@ function TagTable({
 	);
 }
 
-export default TagTable;
+export default AudianceTable;
