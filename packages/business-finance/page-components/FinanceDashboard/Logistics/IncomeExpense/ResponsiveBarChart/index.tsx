@@ -25,7 +25,6 @@ function ResponsiveBarChart({ barData }) {
 			axisTop={null}
 			axisRight={null}
 			innerPadding={8}
-			// minValue={-100000}
 			axisBottom={{
 				tickSize: 0, tickPadding: 20, tickRotation: 0,
 			}}
