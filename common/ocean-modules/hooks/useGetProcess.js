@@ -1,8 +1,7 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 function useGetShipmentProcess({ defaultParams, shipment_type }) {
 	const [{ loading, data }, trigger] = useRequest({
@@ -19,7 +18,7 @@ function useGetShipmentProcess({ defaultParams, shipment_type }) {
 				try {
 					await trigger();
 				} catch (err) {
-					Toast.error(getApiErrorString(err));
+					toastApiError(err);
 				}
 			}
 		)();
