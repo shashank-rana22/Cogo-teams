@@ -1,6 +1,7 @@
 import { Button, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRouter } from '@cogoport/next';
-import { format } from '@cogoport/utils';
 
 import useGetKamExpertiseCurrentConfig from '../../../hooks/useGetKamExpertiseCurrentConfig';
 
@@ -39,7 +40,11 @@ function Header() {
 							? <Placeholder height="20px" width="80px" margin="0 0 0 8px" />
 							: (
 								<div className={styles.label}>
-									{(updated_at && format(updated_at, 'dd MMM yyyy')) || ''}
+									{(updated_at && formatDate({
+										date       : updated_at,
+										dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+										formatType : 'date',
+									})) || ''}
 								</div>
 							)}
 					</div>
