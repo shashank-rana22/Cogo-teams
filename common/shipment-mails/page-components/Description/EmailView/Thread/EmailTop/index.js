@@ -7,8 +7,9 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function EmailTop({ data = {} }) {
+	const newDate = addHours(new Date(data?.receivedDateTime), 5.5);
 	const displayDate = formatDate({
-		date       : addHours(new Date(data?.receivedDateTime), 5.5),
+		date       : newDate,
 		dateFormat : GLOBAL_CONSTANTS.formats.date['eee, dd MMM, yyyy'],
 		formatType : 'date',
 	});
