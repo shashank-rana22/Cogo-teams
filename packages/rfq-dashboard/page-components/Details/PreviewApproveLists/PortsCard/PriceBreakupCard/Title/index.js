@@ -1,9 +1,8 @@
-// import { priceBreakupChildData } from '../../../../../../configurations/price-breakup-card-child-data';
-import styles from '../styles.module.css';
+import styles from './styles.module.css';
 
 function Title({ cardTitles = [], titleData = [] }) {
 	return (
-		<div className={`${styles.container} ${styles.title_container}`}>
+		<div className={styles.container}>
 
 			<div className={styles.card_title}>
 				{cardTitles.map((itm) => (
@@ -34,7 +33,6 @@ function Title({ cardTitles = [], titleData = [] }) {
 					</div>
 				))}
 			</div>
-
 		</div>
 	);
 }
