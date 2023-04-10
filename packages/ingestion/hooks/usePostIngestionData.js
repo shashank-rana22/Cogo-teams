@@ -19,8 +19,9 @@ function usePostIngestionData({ refetch = () => {} }) {
 		}));
 	};
 
-	const { profile: { partner } } = useSelector((state) => state);
+	const { profile: { partner, user } } = useSelector((state) => state);
 	const { partner_user_id = '' } = partner || {};
+	const { id: user_id = '' } = user || {};
 
 	const formProps = useForm();
 
@@ -32,10 +33,11 @@ function usePostIngestionData({ refetch = () => {} }) {
 		partner_user_id,
 		ingestion_type     : '',
 		is_channel_partner : false,
+		performed_by_id    : user_id,
 	});
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'create_ingestion',
+		url    : 'create_ingestion_request',
 		method : 'POST',
 	}, { manual: true });
 

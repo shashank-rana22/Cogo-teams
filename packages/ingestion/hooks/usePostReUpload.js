@@ -1,12 +1,23 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
 function usePostReUpload({ row = {}, setTableModal = () => {} }) {
 	const [{ loading }, trigger] = useRequest({
-		url    : 'create_ingestion',
+		url    : 'create_ingestion_request',
 		method : 'POST',
 	}, { manual: true });
+
+	const {
+		user_data,
+	} = useSelector(({ profile }) => ({
+		user_data: profile || {},
+	}));
+
+	const {
+		user: { id: user_id = '' },
+	} = user_data;
 
 	const formProps = useForm();
 
@@ -34,6 +45,7 @@ function usePostReUpload({ row = {}, setTableModal = () => {} }) {
 				agent_id,
 				ingestion_request_id : id,
 				file_name            : request_files?.sheet_name,
+				performed_by_id      : user_id,
 			};
 
 			const payload = Object.entries({ ...pay, file_url: e?.re_upload?.finalUrl })

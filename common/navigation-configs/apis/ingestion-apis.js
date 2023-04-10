@@ -5,7 +5,7 @@ const ingestion = [
 		service_name : 'partner',
 	},
 	{
-		api          : 'create_ingestion',
+		api          : 'create_ingestion_request',
 		access_type  : 'private',
 		service_name : 'ingestion',
 	},
@@ -15,7 +15,7 @@ const ingestion = [
 		service_name : 'ingestion',
 	},
 	{
-		api          : 'list_ingestion_error_request_files',
+		api          : 'list_ingestion_request_files',
 		access_type  : 'private',
 		service_name : 'ingestion',
 	},

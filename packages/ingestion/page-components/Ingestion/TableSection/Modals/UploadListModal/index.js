@@ -45,7 +45,14 @@ function UploadListModal({ tableModal = '', setTableModal = () => {}, row = {} }
 
 	return (
 
-		<Modal key={tableModal} size="lg" show={tableModal} onClose={onClose} placement="center">
+		<Modal
+			className={styles.page_container}
+			key={tableModal}
+			size="lg"
+			show={tableModal}
+			onClose={onClose}
+			placement="center"
+		>
 			<Modal.Header title={(
 				<div className={styles.header}>
 					<IcMUpload style={{ margin: '0 4px 0 0' }} />
@@ -55,26 +62,28 @@ function UploadListModal({ tableModal = '', setTableModal = () => {}, row = {} }
 			/>
 
 			<Modal.Body>
-				<div className={styles.container}>
-					<Table
-						className={styles.table}
-						columns={columns}
-						data={list || []}
-						loading={loading}
-					/>
-
-				</div>
-				{total_count > page_limit && (
-					<div className={styles.pagination_container}>
-						<Pagination
-							type="table"
-							currentPage={page}
-							totalItems={total_count || 10}
-							pageSize={page_limit || 5}
-							onPageChange={onPageChange}
+				<div>
+					<div className={styles.container}>
+						<Table
+							className={styles.table}
+							columns={columns}
+							data={list || []}
+							loading={loading}
 						/>
+
 					</div>
-				)}
+					{total_count > page_limit && (
+						<div className={styles.pagination_container}>
+							<Pagination
+								type="table"
+								currentPage={page}
+								totalItems={total_count || 10}
+								pageSize={page_limit || 5}
+								onPageChange={onPageChange}
+							/>
+						</div>
+					)}
+				</div>
 			</Modal.Body>
 
 			<Modal.Footer>

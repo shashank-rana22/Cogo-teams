@@ -21,7 +21,7 @@ function useGetUploadList(id) {
 
 	const [{ data, loading }] = useRequest({
 		method : 'get',
-		url    : 'list_ingestion_error_request_files',
+		url    : 'list_ingestion_request_files',
 		params,
 
 	}, { manual: false });
