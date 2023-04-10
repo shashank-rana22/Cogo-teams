@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 const useUpdateMessage = () => {
 	const [{ loading }, trigger] = useRequest({
@@ -23,7 +23,7 @@ const useUpdateMessage = () => {
 				Toast.success('Message unMarked as important');
 			}
 		} catch (err) {
-			Toast.error(getApiErrorString(err));
+			toastApiError(err);
 		}
 	};
 

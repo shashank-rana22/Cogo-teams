@@ -1,4 +1,4 @@
-import { Input, Button, Loader } from '@cogoport/components';
+import { Input, Button, Loader, Modal } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import useUpdateShipmentContainerDetails from '../../../../hooks/useUpdateShipmentContainerDetails';
@@ -9,6 +9,7 @@ function ContainerNmUpdate({
 	setEditContainerNum = () => { },
 	refetch = () => { },
 	containerDetails,
+	editContainerNum = false,
 }) {
 	const [containerValue, setContainerValue] = useState({});
 
@@ -21,7 +22,8 @@ function ContainerNmUpdate({
 	};
 
 	const { loading, apiTrigger } = useUpdateShipmentContainerDetails({
-		refetch: afterContainerUpdate,
+		refetch        : afterContainerUpdate,
+		successMessage : 'Container Numbers Updated Successfully!',
 	});
 
 	const onSubmit = () => {
@@ -40,20 +42,35 @@ function ContainerNmUpdate({
 	};
 
 	return (
-		loading ? <div className={styles.loader}><Loader themeType="primary" /></div> : (
-			<div className={styles.container}>
-				{(containerDetails || []).map((container) => (
-					<div className={styles.render_container}>
-						<div className={styles.container_num}>{container?.container_number}</div>
-						<Input
-							size="sm"
-							width="100%"
-							value={containerValue[container?.id]}
-							onChange={(e) => handleChange(e, container?.id)}
-						/>
-					</div>
-				))}
+		<Modal
+			show={editContainerNum}
+			onClose={() => {
+				setEditContainerNum(false);
+			}}
+		>
+			<Modal.Header title="Update Container Number" />
+			<Modal.Body>
+				{loading
+					? <div className={styles.loader}><Loader themeType="primary" /></div>
+					: (
+						<div className={styles.container}>
+							{(containerDetails || []).map((container) => (
+								<div className={styles.render_container}>
+									<div className={styles.container_num}>{container?.container_number}</div>
+									<Input
+										size="sm"
+										width="100%"
+										value={containerValue[container?.id]}
+										onChange={(e) => handleChange(e, container?.id)}
+									/>
+								</div>
+							))}
 
+						</div>
+
+					)}
+			</Modal.Body>
+			<Modal.Footer>
 				<div className={styles.button_container}>
 					<Button
 						size="md"
@@ -71,8 +88,8 @@ function ContainerNmUpdate({
 						Submit
 					</Button>
 				</div>
-			</div>
-		)
+			</Modal.Footer>
+		</Modal>
 	);
 }
 
