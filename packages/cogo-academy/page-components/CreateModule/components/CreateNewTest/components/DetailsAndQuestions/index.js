@@ -11,14 +11,14 @@ import styles from './styles.module.css';
 
 function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: getTestLoading }) {
 	const [showQuestionSet, setShowQuestionSet] = useState(false);
-
 	const [idArray, setIdArray] = useState([]);
+	const [uploadDocument, setUploadDocument] = useState('');
 
 	const { control, formState:{ errors }, handleSubmit, setValue, watch } = useForm();
 
 	const { loading, createTest } = useCreateTest({ setTestId, setActiveStepper });
 
-	const [uploadDocument, setUploadDocument] = useState();
+	const radioGroupVal = watch('select_users') || '';
 
 	const { set_data = [] } = data || {};
 
@@ -51,6 +51,7 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 				handleSubmit={handleSubmit}
 				uploadDocument={uploadDocument}
 				setUploadDocument={setUploadDocument}
+				radioGroupVal={radioGroupVal}
 			/>
 
 			<div className={styles.btn_container}>
@@ -88,6 +89,7 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 						size="md"
 						themeType="secondary"
 						style={{ marginRight: '10px' }}
+						disabled={!uploadDocument && radioGroupVal === 'excel'}
 						onClick={() => handleChange({ type: 'save_as_draft' })}
 					>
 						Save As Draft
@@ -98,6 +100,7 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 						loading={loading || getTestLoading}
 						size="md"
 						themeType="primary"
+						disabled={!uploadDocument && radioGroupVal === 'excel'}
 						onClick={() => handleChange({ type: 'review_and_set_validity' })}
 					>
 						Review And Set Validity

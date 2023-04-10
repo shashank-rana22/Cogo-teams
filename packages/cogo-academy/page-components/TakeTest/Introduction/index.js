@@ -1,12 +1,21 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { Image, useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { useMemo } from 'react';
 
 import styles from './styles.module.css';
 import useCreateTestUserMapping from './useCreateTestUserMapping';
 
 function Introduction({ setActiveState, testData = {} }) {
+	const {
+		query: { test_id },
+		user: { id: user_id },
+	} = useSelector(({ general, profile }) => ({
+		query : general.query,
+		user  : profile.user,
+	}));
+
 	const router = useRouter();
 
 	const {
@@ -33,6 +42,10 @@ function Introduction({ setActiveState, testData = {} }) {
 
 		setActiveState('ongoing');
 		localStorage.setItem('visibilityChangeCount', 1);
+		localStorage.setItem(
+			`current_question_${test_id}_${user_id}`,
+			1,
+		);
 
 		// const elem = document.getElementById('maincontainer');
 

@@ -2,7 +2,6 @@ import { TabPanel, Tabs, Tooltip } from '@cogoport/components';
 import { startCase, format } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { GenericObject } from '../../../commons/Interfaces';
 import { CARD_DETAILS } from '../../../constants/index';
 import useGetPartnerRmMapping from '../../../hooks/useGetPartnerRmMapping';
 
@@ -37,10 +36,10 @@ interface ItemProps {
 }
 interface OutstandingListProps {
 	item?: ItemProps,
-	outStandingFilters?: GenericObject,
+	entityCode?: string
 }
 
-function OutstandingList({ item, outStandingFilters }: OutstandingListProps) {
+function OutstandingList({ item, entityCode }: OutstandingListProps) {
 	const [activeTab, setActiveTab] = useState('');
 
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
@@ -74,15 +73,15 @@ function OutstandingList({ item, outStandingFilters }: OutstandingListProps) {
 	const propsData = {
 		invoice_details: {
 			organizationId,
-			outStandingFilters,
+			entityCode,
 		},
 		payments_list: {
 			organizationId,
-			outStandingFilters,
+			entityCode,
 		},
 		settlement_list: {
 			organizationId,
-			outStandingFilters,
+			entityCode,
 
 		},
 		organization_users: {

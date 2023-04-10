@@ -315,3 +315,11 @@ export const SALES_FUNNEL_OPTIONS = [
 
 export const months = ['JAN', 'FEB', 'MAR',
 	'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
+export const keyValue = {
+	101 : 'INR',
+	201 : 'EUR',
+	301 : 'INR',
+	401 : 'SGD',
+	501 : 'VND',
+};

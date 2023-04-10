@@ -137,22 +137,6 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 									<div className={styles.styled_text}>
 										Open Invoices
 									</div>
-									<div style={{ display: 'flex' }}>
-										<div>
-											<img
-												// eslint-disable-next-line max-len
-												src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shape.svg"
-												alt="Right Icon"
-											/>
-										</div>
-										<div
-											className={styles.styled_text_week}
-										>
-											{overallStats.openInvoiceAmountForPastSevenDaysPercentage || 0}
-											% this week
-										</div>
-									</div>
-
 								</div>
 							</>
 						)}
@@ -200,17 +184,6 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 									<div className={styles.styled_text}>
 										On Account Payment
 									</div>
-									<div style={{ display: 'flex' }}>
-										<img
-											src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shape.svg"
-											alt="Right Icon"
-										/>
-										<div className={styles.styled_text_week}>
-											{overallStats.onAccountAmountForPastSevenDaysPercentage || 0}
-											% this week
-										</div>
-									</div>
-
 								</div>
 							</>
 						)}
