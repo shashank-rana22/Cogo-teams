@@ -29,7 +29,7 @@ const useGetIrnGeneration = ({ id, refetch }: IrnGenerationProps) => {
 			}
 			refetch();
 		} catch (err) {
-			Toast.error(err?.error?.message || 'Something went wrong');
+			Toast.error(err?.error?.message);
 		}
 	};
 

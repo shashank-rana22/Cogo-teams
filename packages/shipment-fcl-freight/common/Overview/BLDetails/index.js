@@ -1,4 +1,4 @@
-import { Button, Modal, Accordion } from '@cogoport/components';
+import { Button, Accordion } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';

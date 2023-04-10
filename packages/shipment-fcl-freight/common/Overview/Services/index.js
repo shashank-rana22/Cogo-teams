@@ -74,7 +74,7 @@ function Services() {
 				</div>
 
 				{
-				activeStakeholder === 'kam' ? (
+				activeStakeholder === 'Kam' ? (
 					<div className={styles.upselling}>
 						{Object.keys(upsellServices).map((tradeType) => (upsellServices[tradeType]).map((service) => (
 							<AddNewService

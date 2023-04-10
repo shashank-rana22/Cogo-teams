@@ -18,19 +18,19 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 
 import styles from './styles.module.css';
 
+const shipment_additional_methods = ['main_service',
+	'documents'];
+
+const services_additional_methods = [
+	'stakeholder',
+	'service_objects'];
+
 function Superadmin() {
 	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('overview');
 
-	const shipment_additional_methods = useMemo(() => ['main_service',
-		'documents'], []);
-
 	const { get } = useGetShipment({ additional_methods: shipment_additional_methods });
 	const { shipment_data, isGettingShipment } = get;
-
-	const services_additional_methods = useMemo(() => [
-		'stakeholder',
-		'service_objects'], []);
 
 	const { servicesGet } = useGetServices({
 		shipment_id        : shipment_data?.id,

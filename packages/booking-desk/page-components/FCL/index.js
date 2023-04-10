@@ -22,11 +22,7 @@ export default function FCLDesk({ stateProps = {} }) {
 			<div className={styles.header}>
 				<h1>Booking Desk</h1>
 
-				<ScopeSelect
-					size="md"
-					defaultValues={stateProps.scopeFilters}
-					apisToConsider={['list_booking_desk_shipments']}
-				/>
+				<ScopeSelect size="md" defaultValues={stateProps.scopeFilters} />
 			</div>
 
 			<Filters stateProps={stateProps} />

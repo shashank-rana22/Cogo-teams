@@ -2,7 +2,7 @@ import { routeConfig } from '@cogoport/navigation-configs';
 import { useSelector } from '@cogoport/store';
 import { useMemo } from 'react';
 
-import { getNavData } from '../utils/getNavData';
+import getNavData from '../utils/getNavData';
 
 export default function useGetScopeOptions({ defaultValues = {}, apisToConsider = [] } = {}) {
 	const { profile, general } = useSelector((store) => store);
