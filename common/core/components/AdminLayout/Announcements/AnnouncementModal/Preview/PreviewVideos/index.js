@@ -3,8 +3,8 @@ import React, { useRef } from 'react';
 
 import styles from './styles.module.css';
 
-function PreviewVideos({ videos = [], fromFloatingWidget = false }) {
-	const scrollAmount = 800;
+function PreviewVideos({ videos = [], fromFloatingWidget = false, isMobile = false }) {
+	const scrollAmount = (isMobile ? 384 : 800);
 
 	const scrollRefVideos = useRef('');
 
@@ -22,7 +22,7 @@ function PreviewVideos({ videos = [], fromFloatingWidget = false }) {
 
 			<div className={styles.content_container}>
 
-				{(videos || []).length > 2 && (
+				{(videos || []).length > (isMobile ? 1 : 2) && (
 					<div
 						role="presentation"
 						className={`${styles.arrow_container} ${styles.left}`}
@@ -41,10 +41,8 @@ function PreviewVideos({ videos = [], fromFloatingWidget = false }) {
 							style={{ marginLeft: `${index === 0 ? '' : '24px'}` }}
 						>
 							<iframe
-										// width="366"
 								width={fromFloatingWidget ? '410' : '366'}
 								height={fromFloatingWidget ? '230' : '206'}
-										// height="206"
 								src={video}
 								title="YouTube video player"
 								frameBorder="0"
@@ -59,7 +57,7 @@ function PreviewVideos({ videos = [], fromFloatingWidget = false }) {
 
 				</div>
 
-				{(videos || []).length > 2 && (
+				{(videos || []).length > (isMobile ? 1 : 2) && (
 					<div
 						role="presentation"
 						className={`${styles.arrow_container} ${styles.right}`}

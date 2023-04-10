@@ -2,22 +2,26 @@ import { Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
+import ANNOUNCEMENT_TYPE_MAPPING from '../constants/ANNOUNCEMENT_TYPE_MAPPING.json';
+import useAnnouncementViewed from '../hooks/useAnnouncementViewed';
+
 import Footer from './Footer';
 import Preview from './Preview';
 import styles from './styles.module.css';
-import useAnnouncementViewed from './useAnnouncementViewed';
-
-const ANNOUNCEMENT_TYPE_MAPPING = {
-	general        : 'General',
-	product_update : 'Product Release / Update',
-	announcement   : 'Announcement',
-	tasks          : 'Tasks',
-};
 
 function AnnouncementModal({ data = [] }) {
 	const [singleModaldata, setSingleModaldata] = useState({});
 	const [announcementNumber, setAnnouncementNumber] = useState(0);
 	const [showModal, setShowModal] = useState(true);
+	const [isMobile, setIsMobile] = useState(false);
+
+	useEffect(() => {
+		function handleResize() {
+			setIsMobile(window.innerWidth < 768);
+		}
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	}, []);
 
 	const { announcementViewed } = useAnnouncementViewed();
 
@@ -28,6 +32,7 @@ function AnnouncementModal({ data = [] }) {
 	}, [announcementNumber, data]);
 
 	const { announcement_type = '', title = '', content = '' } = singleModaldata || {};
+
 	const getModalHeader = () => (
 		<div className={styles.modal_header_container}>
 			<div className={styles.type_tag}>{ANNOUNCEMENT_TYPE_MAPPING[announcement_type]}</div>
@@ -41,10 +46,11 @@ function AnnouncementModal({ data = [] }) {
 
 				<Modal
 					show={data.length > 0}
-					size="lg"
+					size={isMobile ? 'fullscreen' : 'lg'}
 					placement="center"
 					closeOnOuterClick={false}
 					onClose={() => setShowModal(false)}
+					className={styles.modal}
 				>
 					<Modal.Header title={getModalHeader()} style={{ paddingTop: 0, paddingLeft: 0 }} />
 
@@ -52,6 +58,7 @@ function AnnouncementModal({ data = [] }) {
 						<Preview
 							data={singleModaldata}
 							editorValue={content.toString('html')}
+							isMobile={isMobile}
 						/>
 					</Modal.Body>
 
@@ -64,6 +71,7 @@ function AnnouncementModal({ data = [] }) {
 							setAnnouncementNumber={setAnnouncementNumber}
 							setShowModal={setShowModal}
 							announcementViewed={announcementViewed}
+							isMobile={isMobile}
 						/>
 
 					</Modal.Footer>

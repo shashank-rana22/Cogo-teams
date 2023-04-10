@@ -4,10 +4,10 @@ import React, { useRef } from 'react';
 import openDocument from '../../../../../../helpers/openDocument';
 import styles from '../PreviewVideos/styles.module.css';
 
-const scrollAmount = 800;
-
-function PreviewImages({ images = [], fromFloatingWidget = false }) {
+function PreviewImages({ images = [], fromFloatingWidget = false, isMobile = false }) {
 	const scrollRefImages = useRef('');
+
+	const scrollAmount = (isMobile ? 384 : 800);
 
 	const scrollHandlerRightImages = () => {
 		scrollRefImages.current.scrollLeft += scrollAmount;
@@ -22,7 +22,7 @@ function PreviewImages({ images = [], fromFloatingWidget = false }) {
 
 			<div className={styles.content_container}>
 
-				{(images || []).length > 2 && (
+				{(images || []).length > (isMobile ? 1 : 2) && (
 					<div
 						role="presentation"
 						className={`${styles.arrow_container} ${styles.left}`}
@@ -44,7 +44,6 @@ function PreviewImages({ images = [], fromFloatingWidget = false }) {
 								role="presentation"
 								src={img_item}
 								alt="img"
-								// width={366}
 								width={fromFloatingWidget ? 410 : 366}
 								onClick={() => openDocument(img_item)}
 							/>
@@ -55,7 +54,7 @@ function PreviewImages({ images = [], fromFloatingWidget = false }) {
 
 				</div>
 
-				{(images || []).length > 2 && (
+				{(images || []).length > (isMobile ? 1 : 2) && (
 					<div
 						role="presentation"
 						className={`${styles.arrow_container} ${styles.right}`}

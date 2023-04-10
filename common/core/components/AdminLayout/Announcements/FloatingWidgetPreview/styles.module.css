@@ -46,6 +46,12 @@
 	width: 100%;
 	height: calc(100vh - 100px);
 	overflow-y: scroll;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.content_container::-webkit-scrollbar {
+	display: none;
 }
 
 .body {

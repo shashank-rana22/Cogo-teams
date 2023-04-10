@@ -4,10 +4,8 @@ import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import React, { useState, useRef, useEffect } from 'react';
 
-import useAnnouncementViewed from '../Announcements/AnnouncementModal/useAnnouncementViewed';
 import FloatingWidgetPreview from '../Announcements/FloatingWidgetPreview';
 import useGetAnnouncementList from '../Announcements/hooks/useGetAnnouncementList';
-import useGetSingleAnnouncement from '../Announcements/hooks/useGetSingleAnnouncement';
 
 import styles from './styles.module.css';
 import TopicList from './TopicList';
@@ -32,11 +30,7 @@ function FAQs({
 	const [isMobile, setIsMobile] = useState(false);
 	const [announcementModalData, setAnnouncementModalData] = useState(false);
 
-	const { announcementDetails, loadingSingleAnnouncement } = useGetSingleAnnouncement(announcementModalData?.id);
-
 	const props = useGetAnnouncementList();
-
-	const { announcementViewed, announcementViewedloading } = useAnnouncementViewed(props?.fetchAnnouncements);
 
 	const announcementProps = {
 		...props,
@@ -76,11 +70,11 @@ function FAQs({
 		);
 	};
 
-	const getModalSize = () => {
-		if (isMobile) return 'md';
-		if (announcementModalData) return 'fullscreen';
-		return '';
-	};
+	// const getModalSize = () => {
+	// 	if (isMobile) return 'md';
+	// 	if (announcementModalData) return 'fullscreen';
+	// 	return '';
+	// };
 
 	return (
 		<div className={styles.container} draggable="false">
@@ -109,17 +103,18 @@ function FAQs({
 			)}
 
 			<div />
+
 			{(show || showFaq) ? (
 				<Modal
-					className={styles.modal_wrapper}
+					className={`${styles.modal_wrapper} ${announcementModalData && styles.increase_width}`}
 					show={show || showFaq}
 					onClose={handleClose}
 					placement={isMobile ? 'fullscreen' : 'right'}
-					size={getModalSize()}
+					size={isMobile ? 'md' : ''}
 				>
 
 					<div className={styles.modal_content}>
-						<div className={styles.topiclist_container}>
+						<div className={`${styles.topiclist_container} ${announcementModalData && styles.hide_list}`}>
 							<TopicList
 								faqNotificationData={faqNotificationData}
 								faqNotificationApiLoading={faqNotificationApiLoading}
@@ -129,16 +124,16 @@ function FAQs({
 								selectedAnnouncement={announcementModalData?.id}
 							/>
 						</div>
+
 						{announcementModalData && (
 							<div className={styles.announcement_preview_container}>
 								<FloatingWidgetPreview
-									loading={loadingSingleAnnouncement}
-									announcementViewedloading={announcementViewedloading}
-									data={announcementDetails}
-									announcementViewed={announcementViewed}
+									fetchAnnouncements={announcementProps.fetchAnnouncements}
 									setShowModal={setAnnouncementModalData}
 									setShow={setShow}
 									isViewed={announcementModalData?.is_viewed}
+									currentId={announcementModalData?.id}
+									isMobile={isMobile}
 								/>
 							</div>
 						)}

@@ -3,14 +3,18 @@ import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import Preview from '../AnnouncementModal/Preview';
-// import ANNOUNCEMENT_TYPE_MAPPING from '../constants/ANNOUNCEMENT_TYPE_MAPPING.json';
+import useAnnouncementViewed from '../hooks/useAnnouncementViewed';
+import useGetSingleAnnouncement from '../hooks/useGetSingleAnnouncement';
 
 import styles from './styles.module.css';
 
 function FloatingWidgetPreview(props) {
 	const router = useRouter();
 
-	const { data = {}, announcementViewed, setShowModal, loading = false, isViewed = false } = props;
+	const { setShowModal, isViewed = false, isMobile = false, fetchAnnouncements, currentId = '', setShow } = props;
+
+	const { announcementViewed, announcementViewedloading } = useAnnouncementViewed(fetchAnnouncements);
+	const { announcementDetails: data, loadingSingleAnnouncement: loading } = useGetSingleAnnouncement(currentId);
 
 	const { title = '', content = '', redirection_url = '' } = data;
 
@@ -21,8 +25,8 @@ function FloatingWidgetPreview(props) {
 
 	const handleTakeMeThere = async (url) => {
 		await announcementViewed(data?.id);
-		setShowModal(false);
 		router.push(url, url);
+		setShow(false);
 	};
 
 	if (loading) {
@@ -53,6 +57,7 @@ function FloatingWidgetPreview(props) {
 						themeType="secondary"
 						size="md"
 						onClick={() => setShowModal(false)}
+						disabled={announcementViewedloading}
 					>
 						Close
 					</Button>
@@ -64,6 +69,7 @@ function FloatingWidgetPreview(props) {
 							size="md"
 							onClick={handleTakeMeThere}
 							style={{ marginLeft: '20px' }}
+							loading={announcementViewedloading}
 						>
 							Ok, Take Me There
 						</Button>
@@ -76,8 +82,9 @@ function FloatingWidgetPreview(props) {
 							size="md"
 							onClick={handleViewed}
 							style={{ marginLeft: '20px' }}
+							loading={announcementViewedloading}
 						>
-							Ok, I Understood
+							{isMobile ? 'Ok' : 'Ok, I Understood'}
 						</Button>
 					) : null}
 

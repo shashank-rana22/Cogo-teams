@@ -11,6 +11,7 @@ function Footer({
 	setAnnouncementNumber = () => {},
 	setShowModal = () => {},
 	announcementViewed = () => {},
+	isMobile = false,
 }) {
 	const router = useRouter();
 
@@ -79,7 +80,7 @@ function Footer({
 						size="md"
 						onClick={handleViewed}
 					>
-						Ok, I Understood
+						{isMobile ? 'OK' : 'Ok, I Understood'}
 					</Button>
 				)}
 

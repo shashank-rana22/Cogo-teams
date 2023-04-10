@@ -9,6 +9,7 @@ function Preview({
 	data = {},
 	editorValue = '',
 	fromFloatingWidget = false,
+	isMobile = false,
 }) {
 	const { documents, announcement_attachments } = data;
 
@@ -28,11 +29,11 @@ function Preview({
 			</div>
 
 			{(videos || []).length > 0 && (
-				<PreviewVideos videos={videos} fromFloatingWidget={fromFloatingWidget} />
+				<PreviewVideos videos={videos} fromFloatingWidget={fromFloatingWidget} isMobile={isMobile} />
 			)}
 
 			{(images || []).length > 0 && (
-				<PreviewImages images={images} fromFloatingWidget={fromFloatingWidget} />
+				<PreviewImages images={images} fromFloatingWidget={fromFloatingWidget} isMobile={isMobile} />
 			)}
 
 			{(files || []).length > 0 && (
