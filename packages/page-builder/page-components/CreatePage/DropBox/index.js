@@ -149,7 +149,7 @@ function Stage({
 	let backgroundColor = '#fff';
 
 	if (isActive) {
-		backgroundColor = 'darkgreen';
+		backgroundColor = 'grey';
 	} else if (canDrop) {
 		backgroundColor = 'darkkhaki';
 	}
