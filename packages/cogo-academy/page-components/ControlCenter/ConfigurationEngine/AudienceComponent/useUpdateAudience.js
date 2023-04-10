@@ -25,7 +25,7 @@ function useUpdateAudience({ fetchFaqAudience }) {
 				fetchFaqAudience();
 			}
 		} catch (err) {
-			console.log('err', err);
+			Toast.error(err?.message);
 		}
 	};
 
@@ -43,7 +43,7 @@ function useUpdateAudience({ fetchFaqAudience }) {
 				fetchFaqAudience();
 			}
 		} catch (err) {
-			console.log('err', err);
+			Toast.error(err?.message);
 		}
 	};
 

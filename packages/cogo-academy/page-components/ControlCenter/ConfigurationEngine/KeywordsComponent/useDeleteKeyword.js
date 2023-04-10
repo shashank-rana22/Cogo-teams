@@ -25,7 +25,7 @@ function useDeleteKeyword({ fetchFaqKeyword }) {
 				fetchFaqKeyword();
 			}
 		} catch (err) {
-			console.log('err', err);
+			Toast.error(err?.message);
 		}
 	};
 

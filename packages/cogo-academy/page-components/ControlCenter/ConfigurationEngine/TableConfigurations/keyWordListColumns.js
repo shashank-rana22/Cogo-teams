@@ -66,7 +66,7 @@ function keyWordListColumns({
 				<div
 					className={styles.tags}
 				>
-					{format(items.created_at, 'dd MMM yy') || '--'}
+					{format(items?.created_at, 'dd MMM yy') || '--'}
 				</div>
 			),
 		},
