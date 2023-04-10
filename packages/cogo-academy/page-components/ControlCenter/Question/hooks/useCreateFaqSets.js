@@ -11,6 +11,7 @@ function useCreateFaqSet({
 	setEditorError,
 	RichTextEditor,
 	data: apiData,
+	showAlias,
 }) {
 	const router = useRouter();
 	const {
@@ -38,7 +39,7 @@ function useCreateFaqSet({
 		}
 
 		// eslint-disable-next-line react-hooks/rules-of-hooks
-		const { payload } = useCreateFaqPayload({ values, editorValue, source: 'create', data: apiData });
+		const { payload } = useCreateFaqPayload({ values, editorValue, source: 'create', data: apiData, showAlias });
 
 		try {
 			const res = await trigger({

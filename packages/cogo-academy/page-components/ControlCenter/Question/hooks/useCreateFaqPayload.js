@@ -1,6 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
-function useCreateFaqPayload({ values, editorValue, data }) {
+function useCreateFaqPayload({ values, editorValue, data, showAlias }) {
 	const {
 		faq_topics = [], faq_audiences = [], faq_tags = [], answers = [],
 	} = data || {};
@@ -11,6 +11,8 @@ function useCreateFaqPayload({ values, editorValue, data }) {
 		topic_ids,
 		audience_ids,
 	} = values || {};
+
+	const aliasesArray = (showAlias || []).map((alias) => (alias?.value));
 
 	const getTopicIds = (faq_topics || []).map(
 		(item) => item?.id,
@@ -38,6 +40,7 @@ function useCreateFaqPayload({ values, editorValue, data }) {
 		state              : 'draft',
 		status             : 'active',
 		tag_ids,
+		aliases            : aliasesArray,
 		topic_ids,
 		inactive_topic_ids : !isEmpty(inactive_topic_ids) ? inactive_topic_ids : undefined,
 		inactive_tag_ids   : !isEmpty(inactive_tag_ids) ? inactive_tag_ids : undefined,

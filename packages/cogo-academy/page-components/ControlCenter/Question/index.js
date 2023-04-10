@@ -10,6 +10,7 @@ import Spinner from '../../../commons/Spinner';
 import CreateUserForm from '../ConfigurationEngine/CreateAudienceForm';
 import CreateForm from '../ConfigurationEngine/CreateComponent';
 
+import Aliases from './Aliases';
 import BodyTextEditor from './BodyTextEditor';
 import useCreateNewTagOrTopic from './hooks/useCreateTagOrTopic';
 import useGetQuestion from './hooks/useGetQuestion';
@@ -34,7 +35,6 @@ const userFormStyle = {
 function CreateFAQ() {
 	const router = useRouter();
 	const [editorError, setEditorError] = useState(false);
-	// const [showAlias, setShowAlias] = useState(false);
 
 	const { fetchQuestion, query, data = {}, loading, mode } = useGetQuestion();
 
@@ -63,6 +63,8 @@ function CreateFAQ() {
 		listTagsLoading,
 		listAudienceLoading,
 		apiLoading,
+		showAlias,
+		setShowAlias,
 	} = useCreateQuestions({ data, setEditorError });
 
 	const {
@@ -203,11 +205,26 @@ function CreateFAQ() {
 								</span>
 							)}
 
-							<div className={styles.alias}>
+							<div
+								className={styles.alias}
+								role="presentation"
+								onClick={() => setShowAlias([{ id: (showAlias || []).length, value: '' }])}
+							>
 								Add Alias
 							</div>
 
 						</div>
+						{
+							!isEmpty(showAlias) && (showAlias || [])
+								.map((alias) => (
+									<Aliases
+										showAlias={showAlias}
+										setShowAlias={setShowAlias}
+										key={alias?.id}
+										alias={alias}
+									/>
+								))
+							}
 
 					</div>
 
