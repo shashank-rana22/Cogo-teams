@@ -2,11 +2,11 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-function useUpdateAudience({ fetchFaqAudience }) {
+function useDeleteKeyword({ fetchFaqKeyword }) {
 	const [showPopOver, setShowPopOver] = useState(null);
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_faq_audience',
+		url    : '/update_faq_keyword',
 		method : 'POST',
 	}, { manual: true });
 
@@ -20,30 +20,30 @@ function useUpdateAudience({ fetchFaqAudience }) {
 			});
 
 			if (res?.data) {
-				Toast.success('Audience deleted sucessfully');
+				Toast.success('Keyword deleted sucessfully');
 				setShowPopOver(null);
-				fetchFaqAudience();
+				fetchFaqKeyword();
 			}
 		} catch (err) {
 			Toast.error(err?.message);
 		}
 	};
 
-	const onClickRestore = async (item) => {
+	const onClickRestore = async ({ id }) => {
 		try {
-			const res = await trigger({
-				data: {
-					id     : item?.id,
-					status : 'active',
-				},
+			const payload = {
+				id,
+				status: 'active',
+			};
+
+			await trigger({
+				data: payload,
 			});
 
-			if (res?.data) {
-				Toast.success('Audience Restored sucessfully');
-				fetchFaqAudience();
-			}
-		} catch (err) {
-			Toast.error(err?.message);
+			fetchFaqKeyword();
+			Toast.success('Keyword restored sucessfully!');
+		} catch (error) {
+			Toast.error(error?.message);
 		}
 	};
 
@@ -55,4 +55,4 @@ function useUpdateAudience({ fetchFaqAudience }) {
 		onClickRestore,
 	};
 }
-export default useUpdateAudience;
+export default useDeleteKeyword;
