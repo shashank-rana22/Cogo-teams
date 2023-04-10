@@ -14,7 +14,7 @@ const ANNOUNCEMENT_TYPE_MAPPING = {
 function AnnouncementItem({
 	data = {},
 	setAnnouncementModalData = () => {},
-	// selectedAnnouncement = false,
+	isSelected = false,
 }) {
 	const {
 		title,
@@ -33,9 +33,8 @@ function AnnouncementItem({
 	return (
 		<div
 			role="presentation"
-			className={styles.container}
+			className={`${styles.container} ${isSelected && styles.isSelected}`}
 			onClick={handleViewMore}
-			// isSelected={selectedAnnouncement === data?.id}
 		>
 			<div className={styles.header}>
 				<div className={styles.title_container}>

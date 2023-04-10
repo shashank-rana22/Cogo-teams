@@ -32,7 +32,7 @@ function FAQs({
 	const [isMobile, setIsMobile] = useState(false);
 	const [announcementModalData, setAnnouncementModalData] = useState(false);
 
-	const { announcementDetails, loadingSingleAnnouncement } =		useGetSingleAnnouncement(announcementModalData?.id);
+	const { announcementDetails, loadingSingleAnnouncement } = useGetSingleAnnouncement(announcementModalData?.id);
 
 	const props = useGetAnnouncementList();
 
@@ -126,6 +126,7 @@ function FAQs({
 								fetchFaqNotification={fetchFaqNotification}
 								refetch={refetch}
 								announcementProps={announcementProps}
+								selectedAnnouncement={announcementModalData?.id}
 							/>
 						</div>
 						{announcementModalData && (
@@ -137,7 +138,7 @@ function FAQs({
 									announcementViewed={announcementViewed}
 									setShowModal={setAnnouncementModalData}
 									setShow={setShow}
-									// isViewed={announcementModalData?.is_viewed}
+									isViewed={announcementModalData?.is_viewed}
 								/>
 							</div>
 						)}

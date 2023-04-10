@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function FloatingWidgetPreview(props) {
 	const router = useRouter();
 
-	const { data = {}, announcementViewed, setShowModal, loading = false } = props;
+	const { data = {}, announcementViewed, setShowModal, loading = false, isViewed = false } = props;
 
 	const { title = '', content = '', redirection_url = '' } = data;
 
@@ -52,31 +52,34 @@ function FloatingWidgetPreview(props) {
 						type="button"
 						themeType="secondary"
 						size="md"
-						style={{ marginRight: '20px' }}
 						onClick={() => setShowModal(false)}
 					>
 						Close
 					</Button>
 
-					{redirection_url ? (
+					{!isViewed && redirection_url ? (
 						<Button
 							type="button"
 							themeType="primary"
 							size="md"
 							onClick={handleTakeMeThere}
+							style={{ marginLeft: '20px' }}
 						>
 							Ok, Take Me There
 						</Button>
-					) : (
+					) : null}
+
+					{!isViewed ? (
 						<Button
 							type="button"
 							themeType="primary"
 							size="md"
 							onClick={handleViewed}
+							style={{ marginLeft: '20px' }}
 						>
 							Ok, I Understood
 						</Button>
-					)}
+					) : null}
 
 				</div>
 			</div>

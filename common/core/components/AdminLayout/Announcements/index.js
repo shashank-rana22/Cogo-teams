@@ -125,7 +125,7 @@ function Announcements({
 							key={item.id}
 							data={item}
 							setAnnouncementModalData={setAnnouncementModalData}
-							selectedAnnouncement={selectedAnnouncement}
+							isSelected={selectedAnnouncement === item.id}
 						/>
 					))}
 
