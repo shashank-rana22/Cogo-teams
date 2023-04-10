@@ -26,7 +26,7 @@ function ReUploadModal({ tableModal = '', setTableModal = () => {}, row = {} }) 
 				</div>
 			)}
 			/>
-			<div className={styles.container}>
+			<Modal.Body>
 				<div className={styles.modal_container}>
 					{reUploadControls.map((controlItem) => {
 						const el = { ...controlItem };
@@ -52,13 +52,13 @@ function ReUploadModal({ tableModal = '', setTableModal = () => {}, row = {} }) 
 					})}
 				</div>
 
-			</div>
-			<div className={styles.close_button}>
+			</Modal.Body>
+			<Modal.Footer>
 				<Button style={{ margin: '0 8px 0 0' }} themeType="secondary" onClick={onClose}>Close</Button>
 
 				<Button loading={loading} themeType="primary" onClick={handleSubmit(onSubmit)}>Submit</Button>
 
-			</div>
+			</Modal.Footer>
 		</Modal>
 	);
 }

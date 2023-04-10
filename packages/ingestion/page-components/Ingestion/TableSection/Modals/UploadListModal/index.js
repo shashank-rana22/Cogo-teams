@@ -8,7 +8,8 @@ import useGetUploadList from '../../../../../hooks/useGetUploadList';
 import styles from './styles.module.css';
 
 function UploadListModal({ tableModal = '', setTableModal = () => {}, row = {} }) {
-	const { columns, onPageChange, data, loading } = useGetUploadList(row?.id);
+	const { id = '', request_files = {} } = row;
+	const { columns, onPageChange, data, loading } = useGetUploadList(id);
 	const { list = [], page = 0, page_limit, total_count } = data || {};
 	const onClose = () => {
 		setTableModal('');
@@ -53,7 +54,7 @@ function UploadListModal({ tableModal = '', setTableModal = () => {}, row = {} }
 			)}
 			/>
 
-			<div>
+			<Modal.Body>
 				<div className={styles.container}>
 					<Table
 						className={styles.table}
@@ -74,32 +75,29 @@ function UploadListModal({ tableModal = '', setTableModal = () => {}, row = {} }
 						/>
 					</div>
 				)}
-			</div>
+			</Modal.Body>
 
 			<Modal.Footer>
-				<div className={styles.close_button}>
-					<Button
-						style={{ marginRight: '8px' }}
-						disabled={loading}
-						themeType="secondary"
-						onClick={onClose}
-					>
-						Close
+				<Button
+					style={{ marginRight: '8px' }}
+					disabled={loading}
+					themeType="secondary"
+					onClick={onClose}
+				>
+					Close
 
-					</Button>
+				</Button>
 
-					{(row?.request_files?.errored_data_url)
-						? (
-							<Button
-								disabled={loading}
-								themeType="secondary"
-								onClick={() => onSubmit()}
-							>
-								Re-Upload
-							</Button>
-						) : ''}
-
-				</div>
+				{(request_files?.errored_data_url)
+					? (
+						<Button
+							disabled={loading}
+							themeType="secondary"
+							onClick={() => onSubmit()}
+						>
+							Re-Upload
+						</Button>
+					) : ''}
 
 			</Modal.Footer>
 		</Modal>
