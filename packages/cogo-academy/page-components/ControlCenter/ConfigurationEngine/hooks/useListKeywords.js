@@ -1,6 +1,6 @@
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 function useListKeywords({ searchKeyWord = '', sortType }) {
 	const [keywordCurrentPage, setKeywordCurrentPage] = useState(1);
@@ -13,10 +13,9 @@ function useListKeywords({ searchKeyWord = '', sortType }) {
 
 	useEffect(() => {
 		debounceQuery(searchKeyWord);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchKeyWord]);
+	}, [searchKeyWord, debounceQuery]);
 
-	const fetchFaqKeyword = async () => {
+	const fetchFaqKeyword = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -30,10 +29,16 @@ function useListKeywords({ searchKeyWord = '', sortType }) {
 		} catch (err) {
 			console.log(err);
 		}
-	};
+	}, [activeKeyword, keywordCurrentPage, query, sortType, trigger]);
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => { fetchFaqKeyword(); }, [activeKeyword, keywordCurrentPage, query, sortType]);
+	useEffect(
+		() => { fetchFaqKeyword(); },
+		[activeKeyword,
+			keywordCurrentPage,
+			query,
+			sortType,
+			fetchFaqKeyword],
+	);
 
 	return {
 		fetchFaqKeyword,
