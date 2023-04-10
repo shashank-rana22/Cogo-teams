@@ -1,8 +1,15 @@
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestAir } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useState, useEffect, useCallback } from 'react';
 
-const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {} }) => {
+const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {}, relevantToMe }) => {
+	const {
+		user_data: userData,
+	} = useSelector(({ profile }) => ({
+		user_data: profile || {},
+	}));
+
 	const [searchValue, setSearchValue] = useState('');
 	const [page, setPage] = useState(1);
 	const { query = '', debounceQuery } = useDebounceQuery();
@@ -16,28 +23,33 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {} }) => 
 		{ manual: true },
 	);
 
-	const listAPi = useCallback(() => {
+	const listAPI = useCallback(() => {
 		(async () => {
 			const payload = {
 				new_awb: {
 					assignedStakeholder : 'service_ops2_docs',
 					status              : 'pending',
-					task                : ['upload_mawb_freight_certificate'],
+					task                : ['upload_mawb_freight_certificate', 'upload_hawb_freight_certificate'],
 				},
 				approval_pending: {
 					assignedStakeholder : 'service_ops2_docs',
 					status              : 'pending',
 					task                : ['approve_draft_airway_bill', 'amend_draft_airway_bill'],
-					documentType        : 'draft_airway_bill',
+					documentType        : ['draft_airway_bill'],
 					isDocDataRequired   : true,
 				},
 				approved_awb: {
 					assignedStakeholder : 'service_ops2_docs',
 					status              : 'completed',
-					task                : ['upload_mawb_freight_certificate'],
-					documentType        : 'draft_airway_bill',
+					task                : ['upload_mawb_freight_certificate', 'upload_hawb_freight_certificate'],
+					documentType        : ['draft_airway_bill'],
 					documentState       : 'document_accepted',
 					isDocDataRequired   : true,
+				},
+				final_awb: {
+					assignedStakeholder : 'service_ops2_docs',
+					status              : 'pending',
+					task                : ['upload_airway_bill'],
 				},
 			};
 			if (searchValue) {
@@ -52,14 +64,15 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {} }) => 
 						},
 						...filter,
 						...payload[activeTab],
-						pageIndex: page,
+						stakeholderId : relevantToMe ? userData.user.id : undefined,
+						pageIndex     : page,
 					},
 				});
 			} catch (err) {
 				console.log(err);
 			}
 		})();
-	}, [activeTab, filter, page, query, searchValue, trigger]);
+	}, [activeTab, filter, page, query, relevantToMe, searchValue, trigger, userData.user.id]);
 
 	useEffect(() => {
 		debounceQuery(searchValue);
@@ -71,13 +84,13 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {} }) => 
 	}, [activeTab]);
 
 	useEffect(() => {
-		listAPi();
-	}, [listAPi, page, query]);
+		listAPI();
+	}, [listAPI, page, query]);
 
 	return {
 		data,
 		loading,
-		listAPi,
+		listAPI,
 		setPage,
 		page,
 		searchValue,

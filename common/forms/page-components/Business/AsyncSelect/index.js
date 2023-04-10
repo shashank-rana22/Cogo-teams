@@ -14,6 +14,8 @@ import {
 	asyncFieldsListOperators,
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
+	listVendors,
+	asyncListCogoEntity,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -36,6 +38,7 @@ import {
  */
 
 const keyAsyncFieldsParamsMapping = {
+	list_vendors           : listVendors,
 	organizations          : asyncFieldsOrganizations,
 	organization_users     : asyncFieldsOrganizationUser,
 	partners               : asyncFieldsPartner,
@@ -46,6 +49,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_operators         : asyncFieldsListOperators,
 	list_rate_charge_codes : asyncFieldListRateChargeCodes,
 	allot_bank             : asyncAllotBanks,
+	list_cogo_entity       : asyncListCogoEntity,
 };
 
 function AsyncSelect(props) {

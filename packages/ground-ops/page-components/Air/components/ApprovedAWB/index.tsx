@@ -1,13 +1,14 @@
 import { Button } from '@cogoport/components';
-import { IcMDownload, IcMEdit } from '@cogoport/icons-react';
+import { IcMEyeopen, IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import List from '../../commons/List';
 import { ApprovedAWBFields } from '../../configurations/approved_awb';
+import HAWBList from '../HawbList';
 import UploadModal from '../UploadModal';
 
 function ApprovedAWB({
-	data, loading, page, setPage, setGenerate, setItem, setViewDoc, setEdit, listAPi,
+	data, loading, page, setPage, setGenerate, setItem, setViewDoc, edit, setEdit, listAPI, activeTab,
 }) {
 	const [showUpload, setShowUpload] = useState(null);
 	const { fields } = ApprovedAWBFields;
@@ -38,7 +39,7 @@ function ApprovedAWB({
 					? () => { handleClickOnDownload(singleItem.documentUrl); }
 					: () => { handleDownloadMAWB(singleItem); }}
 			>
-				<IcMDownload fill="#8B8B8B" />
+				<IcMEyeopen fill="#8B8B8B" />
 
 			</Button>
 		),
@@ -47,7 +48,7 @@ function ApprovedAWB({
 				themeType="linkUi"
 				style={{ fontSize: 12 }}
 				onClick={singleItem?.documentData?.status === 'uploaded'
-					? () => { setShowUpload(singleItem); }
+					? () => { setShowUpload(singleItem); setEdit('edit'); }
 					: () => { handleEditMAWB(singleItem, 'edit'); }}
 			>
 				<IcMEdit fill="#8B8B8B" />
@@ -65,12 +66,16 @@ function ApprovedAWB({
 				setPage={setPage}
 				loading={loading}
 				functions={functions}
+				activeTab={activeTab}
+				Child={HAWBList}
+				setViewDoc={setViewDoc}
+				setItem={setItem}
 			/>
 			<UploadModal
 				showUpload={showUpload}
 				setShowUpload={setShowUpload}
-				listAPi={listAPi}
-				edit={false}
+				listAPI={listAPI}
+				edit={edit}
 				setEdit={setEdit}
 			/>
 		</>

@@ -1,0 +1,39 @@
+.time_stamp {
+	display: flex;
+	justify-content: flex-end;
+	padding-left: 4px;
+	font-size: 10px;
+	font-weight: 500;
+}
+
+.container {
+	float: left;
+	width: 100%;
+	height: 100%;
+}
+
+.receive_message_container {
+	width: 100%;
+	height: calc(100% - 12px);
+	padding: 12px;
+	margin-top: 10px;
+	overflow-y: scroll;
+	font-size: 14px;
+	color: #828282;
+	word-break: break-word;
+	background-color: #fff;
+	border-radius: 0 6px 6px;
+	box-shadow: 0 0 4px 0 #627fac33;
+}
+
+.receive_preview_div {
+	height: calc(100% - 50px);
+}
+
+.message_div {
+	display: flex;
+	flex-direction: column;
+	width: 97%;
+	height: calc(100% - 161px);
+	padding-left: 14px;
+}

@@ -1,0 +1,98 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.filter_container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 16px;
+	margin-bottom: 16px;
+}
+
+.entity_code {
+	width: 200px;
+	margin-top: 20px;
+	margin-bottom: 12px;
+}
+
+.styled_row {
+	width: 100%;
+	cursor: pointer;
+}
+
+.styled_col {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	min-width: 180px;
+	height: 42px;
+	color: #393f70;
+	cursor: pointer;
+	background: #fff;
+	border-bottom: 1.5px solid #ee3425;
+}
+
+.styled_col:hover {
+	background: #fdebe9;
+	border-bottom: 1.5px solid #ee3425;
+}
+
+.tile_heading {
+	display: flex;
+	align-items: center;
+	padding: 0 8px;
+	font-size: 14px;
+	font-weight: 450;
+}
+
+.filter_value {
+	margin-left: 4px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #f68b21;
+}
+
+.icon_div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 15px;
+	margin-left: 8px;
+	cursor: pointer;
+}
+
+.flex_wrap {
+	display: flex;
+	align-items: center;
+	margin-right: 8px;
+	margin-left: 8px;
+
+	:global {
+		.ui_input_control {
+			font-size: 14px !important;
+		}
+	}
+}
+
+.sort_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 320px;
+	height: 40px;
+	padding: 4px;
+	background-color: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+}
+
+.styled_input {
+	width: 300px;
+	font-size: 14px;
+}
+
+.icon_style {
+	margin-right: 4px;
+}

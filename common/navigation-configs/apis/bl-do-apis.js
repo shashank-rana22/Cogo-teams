@@ -34,7 +34,7 @@ const apis = [
 		api          : 'get_shipment',
 		access_type  : 'private',
 		feature      : 'bl_do',
-		service_name : 'shipment',
+		service_name : 'bookings',
 	},
 	{
 		api          : 'get_cost_sheet_quotations',

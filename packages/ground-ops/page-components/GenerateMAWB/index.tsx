@@ -1,37 +1,28 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button, Modal, Stepper, Breadcrumb, RadioGroup } from '@cogoport/components';
+import { Modal, Loader } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useState, useEffect } from 'react';
+import { v4 as uuid } from 'uuid';
 
-import Layout from '../Air/commons/Layout';
+import useGetHawbList from '../Air/hooks/useGetHawbList';
 
+import FormContainer from './FormContainer';
+import GenerateHeader from './GenerateHeader';
 import GenerateMawbDoc from './GenerateMawbDoc';
+import { iataCodeMapping } from './Helpers/configurations/iataCodeMapping';
+import mawbControls from './Helpers/configurations/mawbControls';
+import useGetHawb from './Helpers/hooks/useGetHawb';
 import usePackingList from './Helpers/hooks/usePackingList';
-import mawbControls from './mawbControls';
 import styles from './styles.module.css';
-import UploadMAWB from './UploadMAWB';
-
-const items = [
-	{ title: 'Basic Details', key: 'basic' },
-	{ title: 'Package & Charges Detail', key: 'package' },
-	{ title: 'Handling Details', key: 'handling' },
-];
-
-const options = [
-	{ name: 'Add Manually', value: 'manual', label: 'Add Manually' },
-	{ name: 'Upload Document', value: 'upload', label: 'Upload Document' },
-];
-
-const iataCodeMapping = {
-	'7391cac2-e8db-467f-a59b-574d01dd7e7c' : '14-3-4526/0020',
-	'aa0e7e59-cbb9-43b2-98ce-1f992ae7ab19' : '14-3-4526/0005',
-	'bdef6da0-8353-4b9a-b422-550ebe9c2474' : '14-3-4526/0042',
-	'2f6f6dbc-c10b-4d1d-b9fd-e89298fb487c' : '14-3-4526/0053',
-};
 
 const agentOtherChargesCode = [{ code: 'AWB', price: '150' }, { code: 'PCA', price: '250' }];
 const carrierOtherChargesCode = [{ code: 'AMS', price: '' }, { code: 'AWC', price: '' },
 	{ code: 'XRAY', price: '' }, { code: 'CGC', price: '' }];
+const unsavedFields = ['consigneeAddress',
+	'shipperName',
+	'shipperAddress',
+	'consigneeName',
+	'chargeableWeight'];
 
 interface NestedObj {
 	[key: string]: NestedObj | React.FC ;
@@ -57,19 +48,17 @@ function GenerateMAWB({
 	const [back, setBack] = useState(false);
 	const { control, watch, setValue, handleSubmit, formState: { errors } } = useForm();
 
-	const [activeKey, setActiveKey] = useState('basic');
-
-	const [value, onChange] = useState('manual');
-
 	const [disableClass, setDisableClass] = useState(false);
+	const [hawbDetails, setHawbDetails] = useState([
+		{ id: uuid(), documentNo: null, isNew: true },
+	]);
+
+	const [activeHawb, setActiveHawb] = useState(hawbDetails[0]);
+	const [activeKey, setActiveKey] = useState('basic');
 
 	const fields = mawbControls(disableClass);
 
 	const { packingData, packingList } = usePackingList();
-
-	const onSubmit = () => {
-		setBack(true);
-	};
 
 	const formValues = watch();
 
@@ -78,7 +67,15 @@ function GenerateMAWB({
 		...formValues,
 	};
 
-	const taskItem = { ...item, ...item.documentData };
+	const { hawbData, getHawb, hawbSuccess, setHawbSuccess, loading } = useGetHawb();
+
+	const [taskItem, setTaskItem] = useState({ ...item, ...item.documentData });
+
+	const category = item.blCategory;
+	const mawbId = item.documentId;
+	const pendingTaskId = item.id;
+
+	const [activeCategory, setActiveCategory] = useState(edit ? 'mawb' : taskItem.blCategory);
 
 	const finalFields = [
 		...fields.basic,
@@ -91,13 +88,78 @@ function GenerateMAWB({
 		(+taskItem.volume * 166.67),
 	) || 0.0).toFixed(2)));
 
-	const handleDocumentList = (type) => {
-		(packingData?.list || []).forEach((itm) => {
-			if (itm.documentType === type) {
-				window.open(itm.documentUrl, '_blank');
+	const { data:hawbDataList = {}, loading:hawbListLoading, getHawbList } = useGetHawbList(item.shipmentId);
+
+	useEffect(() => {
+		if (edit && activeCategory === 'hawb') {
+			getHawbList();
+		}
+	}, [activeCategory]);
+
+	useEffect(() => {
+		if (edit && activeCategory === 'hawb') {
+			const dataList = [];
+			(hawbDataList?.data?.shipmentPendingTasks || []).forEach((hawbItem) => {
+				const pushData = {
+					id         : hawbItem?.documentId,
+					documentNo : hawbItem?.documentData?.document_number,
+					isNew      : false,
+				};
+				dataList.push(pushData);
+			});
+			setHawbDetails(dataList);
+		}
+	}, [activeCategory, hawbListLoading]);
+
+	useEffect(() => {
+		setActiveKey('basic');
+		if (activeHawb && !activeHawb.isNew && activeCategory === 'hawb') {
+			getHawb(activeHawb.id);
+		}
+		if (activeCategory === 'mawb' && edit) {
+			getHawb(mawbId);
+		}
+	}, [activeHawb, activeCategory]);
+
+	useEffect(() => {
+		if (category === 'mawb') {
+			return;
+		}
+		if (hawbSuccess) {
+			setTaskItem({
+				...hawbData.data,
+				...hawbData.data?.data,
+				originAirportId   : item.originAirportId,
+				serviceProviderId : item.serviceProviderId,
+			});
+			setHawbSuccess(false);
+		}
+		finalFields.forEach((c) => {
+			if (activeCategory === 'hawb' && activeHawb.isNew && unsavedFields.includes(c.name)) {
+				setValue(c.name, '');
+			} else if (activeCategory === 'mawb' && unsavedFields.includes(c.name) && !edit) {
+				setValue(c.name, '');
+			} else {
+				setValue(c.name, taskItem[c.name] || '');
 			}
 		});
-	};
+		setValue('executedDate', taskItem.executedDate ? new Date(taskItem.executedDate) : new Date());
+		setValue('iataCode', iataCodeMapping[taskItem?.originAirportId] || '');
+		setValue('city', 'NEW DELHI');
+		setValue('place', 'NEW DELHI');
+		setValue('class', 'q');
+		setValue('currency', 'INR');
+		setValue('commodity', taskItem.commodity
+			|| `${'SAID TO CONTAIN\n'}${taskItem.commodity || ''}`);
+		setValue('agentOtherCharges', taskItem.agentOtherCharges || agentOtherChargesCode);
+		setValue('carrierOtherCharges', activeCategory === 'hawb' && activeHawb.isNew
+			? carrierOtherChargesCode
+			: taskItem.carrierOtherCharges || carrierOtherChargesCode);
+		setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
+		setValue('shipperSignature', taskItem.customer_name || taskItem.shipperSignature);
+		setValue('amountOfInsurance', 'NIL');
+		setValue('accountingInformation', 'FREIGHT PREPAID');
+	}, [hawbSuccess, activeHawb, category, activeCategory]);
 
 	useEffect(() => {
 		setChargeableWeight(formValues.chargeableWeight);
@@ -117,12 +179,12 @@ function GenerateMAWB({
 
 	useEffect(() => {
 		packingList({ item });
-		finalFields.forEach((c:any) => {
+		finalFields.forEach((c) => {
 			setValue(c.name, taskItem[c.name]);
 		});
 		if (!viewDoc) {
-			setValue('executedDate', new Date());
-			setValue('iataCode', iataCodeMapping[taskItem?.originAirportId] || '');
+			setValue('executedDate', edit && taskItem.executedDate ? new Date(taskItem.executedDate) : new Date());
+			setValue('iataCode', edit ? taskItem.iataCode : iataCodeMapping[taskItem?.originAirportId] || '');
 			setValue('city', 'NEW DELHI');
 			setValue('place', 'NEW DELHI');
 			setValue('class', 'q');
@@ -136,6 +198,7 @@ function GenerateMAWB({
 			setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
 			setValue('shipperSignature', taskItem.customer_name);
 			setValue('amountOfInsurance', 'NIL');
+			setValue('accountingInformation', 'FREIGHT PREPAID');
 		}
 	}, []);
 
@@ -149,7 +212,7 @@ function GenerateMAWB({
 				* Number(dimensionObj.width) * 2.54
 				* Number(dimensionObj.height) * 2.54
 				* Number(dimensionObj.packages_count);
-			} else if (dimensionObj.unit === 'cm') {
+			} else if (dimensionObj.unit === 'cms') {
 				totalVolume
 				+= Number(dimensionObj.length)
 				* Number(dimensionObj.width)
@@ -165,153 +228,40 @@ function GenerateMAWB({
 
 	return (
 		<div className={styles.container}>
-			{!viewDoc
-			&& (
+			{loading && <Loader themeType="primary" className={styles.loader} />}
+			{!viewDoc && (
 				<>
-					<div className={styles.heading}>Add Export Details</div>
-					<Breadcrumb>
-						<Breadcrumb.Item label={(
-							<div
-								onClick={() => { setGenerate(false); if (edit) { setEdit(false); } }}
-								role="link"
-								tabIndex={0}
-							>
-								SO2 - Docs Dashboard
-							</div>
-						)}
-						/>
-						<Breadcrumb.Item label="Add Export Details" />
-					</Breadcrumb>
+					<GenerateHeader
+						setGenerate={setGenerate}
+						setEdit={setEdit}
+						category={category}
+						activeCategory={activeCategory}
+						setActiveCategory={setActiveCategory}
+						awbNumber={item.awbNumber}
+					/>
+
+					<FormContainer
+						back={back}
+						setBack={setBack}
+						edit={edit}
+						setEdit={setEdit}
+						packingData={packingData}
+						fields={fields}
+						control={control}
+						errors={errors}
+						item={item}
+						setGenerate={setGenerate}
+						handleSubmit={handleSubmit}
+						activeCategory={activeCategory}
+						hawbDetails={hawbDetails}
+						setHawbDetails={setHawbDetails}
+						activeHawb={activeHawb}
+						setActiveHawb={setActiveHawb}
+						activeKey={activeKey}
+						setActiveKey={setActiveKey}
+						taskItem={taskItem}
+					/>
 				</>
-			)}
-			{!viewDoc
-			&& (
-				<div className={styles.form_container}>
-					<div className={styles.header_flex}>
-						{value === 'manual' && (
-							<Stepper
-								active={activeKey}
-								setActive={setActiveKey}
-								items={items}
-							/>
-						)}
-
-						{!edit
-						&& (
-							<RadioGroup
-								options={options}
-								onChange={onChange}
-								value={value}
-								style={{ marginLeft: 'auto' }}
-							/>
-						)}
-					</div>
-					<div className={styles.flex}>
-						<Button
-							size="md"
-							themeType="primary"
-							onClick={() => handleDocumentList('packing_list')}
-							className={styles.packing_button}
-						>
-							Refer Packing List
-						</Button>
-
-						<Button
-							size="md"
-							themeType="primary"
-							onClick={() => handleDocumentList('shipping_instruction')}
-							className={styles.packing_button}
-						>
-							Refer Shipping Instruction
-						</Button>
-					</div>
-					{value === 'upload' ? <UploadMAWB item={item} setGenerate={setGenerate} />
-						: (
-							<>
-								{activeKey === 'basic'
-								&& (
-									<>
-										<Layout fields={fields?.basic} control={control} errors={errors} />
-										<div className={styles.button_container}>
-
-											{!back ? (
-												<div className={styles.button_div}>
-													<Button
-														onClick={() => {
-															setGenerate(false);
-															if (edit) { setEdit(false); }
-														}}
-														themeType="secondary"
-														style={{ border: '1px solid #333' }}
-													>
-														CANCEL
-													</Button>
-													<Button
-														onClick={handleSubmit(() => setActiveKey('package'))}
-														themeType="accent"
-													>
-														NEXT
-													</Button>
-												</div>
-											) : null}
-										</div>
-									</>
-								)}
-
-								{activeKey === 'package'
-								&& (
-									<>
-										<Layout fields={fields?.package} control={control} errors={errors} />
-										<div className={styles.button_container}>
-											{!back ? (
-												<div className={styles.button_div}>
-													<Button
-														onClick={() => setActiveKey('basic')}
-														themeType="secondary"
-														style={{ border: '1px solid #333' }}
-													>
-														BACK
-													</Button>
-													<Button
-														onClick={handleSubmit(() => setActiveKey('handling'))}
-														themeType="accent"
-													>
-														Next
-													</Button>
-												</div>
-											) : null}
-										</div>
-									</>
-								)}
-
-								{activeKey === 'handling'
-								&& (
-									<>
-										<Layout fields={fields?.handling} control={control} errors={errors} />
-										<div className={styles.button_container}>
-											{!back ? (
-												<div className={styles.button_div}>
-													<Button
-														onClick={() => setActiveKey('package')}
-														themeType="secondary"
-														style={{ border: '1px solid #333' }}
-													>
-														BACK
-													</Button>
-													<Button
-														onClick={handleSubmit(onSubmit)}
-														themeType="accent"
-													>
-														Generate Master Airway Bill
-													</Button>
-												</div>
-											) : null}
-										</div>
-									</>
-								)}
-							</>
-						)}
-				</div>
 			)}
 
 			<div className={styles.file_container}>
@@ -334,6 +284,13 @@ function GenerateMAWB({
 								viewDoc={viewDoc}
 								chargeableWeight={chargeableWeight}
 								setGenerate={setGenerate}
+								activeCategory={activeCategory}
+								hawbDetails={hawbDetails}
+								setHawbDetails={setHawbDetails}
+								setActiveHawb={setActiveHawb}
+								setActiveKey={setActiveKey}
+								activeHawb={activeHawb}
+								pendingTaskId={pendingTaskId}
 							/>
 						</Modal.Body>
 

@@ -23,32 +23,32 @@ function Messages({
 	suggestions = [],
 	userId = '',
 	isomniChannelAdmin = false,
-	showBotMessages = false,
+	setActiveMessage = () => {},
 }) {
 	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 	const [uploading, setUploading] = useState({});
+	const [disableButton, setDisableButton] = useState('');
 	const { tagOptions = [] } = useListAssignedChatTags();
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
 	const closeModal = () => setOpenModal({ type: null, data: {} });
-
 	let activeChatCollection;
-
-	const [disableButton, setDisableButton] = useState('');
-
 	const {
 		id = '',
 		channel_type = '',
 		support_agent_id = '',
 		spectators_data = [],
+		session_type = '',
 	} = activeMessageCard || {};
 
 	const {
 		sendCommunicationTemplate,
 		loading: communicationLoading,
 	} = useSendCommunicationTemplate({ formattedData, callbackfunc: closeModal, isOtherChannels: false });
+
+	const showBotMessages = session_type === 'bot';
 
 	const hasPermissionToEdit = !showBotMessages && (userId === support_agent_id || isomniChannelAdmin);
 
@@ -67,7 +67,7 @@ function Messages({
 		);
 	}
 
-	const { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions } = useSendChat({
+	const { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions, messageLoading } = useSendChat({
 		firestore,
 		channel_type,
 		id,
@@ -161,6 +161,8 @@ function Messages({
 						sendCommunicationTemplate={sendCommunicationTemplate}
 						communicationLoading={communicationLoading}
 						closeModal={closeModal}
+						messageLoading={messageLoading}
+						setActiveMessage={setActiveMessage}
 					/>
 				</div>
 			</div>

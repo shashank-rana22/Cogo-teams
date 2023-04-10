@@ -15,9 +15,9 @@ interface DataInterface {
 }
 interface HeaderInterface {
 	data?: DataInterface;
-	remarksVal: RemarksValInterface;
-	overAllRemark:string;
-	setOverAllRemark:Function;
+	remarksVal?: RemarksValInterface;
+	overAllRemark?:string;
+	setOverAllRemark?:Function;
 	lineItem?: boolean;
 	lineItemsRemarks: object;
 	status: string;
@@ -64,7 +64,8 @@ function Header({
 	const isApproveDisabled = Object.keys(lineItemsRemarks)?.length > 0
     || remarksVal?.billingPartyRemark?.length > 0
     || remarksVal?.collectionPartyRemark?.length > 0
-    || remarksVal?.invoiceDetailsRemark?.length > 0;
+	|| remarksVal?.invoiceDetailsRemark?.length > 0
+	|| remarksVal?.taggingRemark?.length > 0;
 
 	const getRoute = () => {
 		if (isShipment) {

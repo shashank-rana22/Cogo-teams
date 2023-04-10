@@ -1,0 +1,38 @@
+.null_state {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	margin: 10px;
+}
+
+.heading {
+	margin-top: 4px;
+	color: #221f20;
+}
+
+.request_question {
+	margin: 16px;
+	font-weight: 500;
+}
+
+.updated_text {
+	display: flex;
+	font-size: 16px;
+	font-weight: 300;
+}
+
+.request_text {
+	width: fit-content;
+	margin: 10px;
+	font-size: 16px;
+	font-weight: 400;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.sub_heading {
+	margin-bottom: 20px;
+	font-size: 18px;
+	font-weight: 400;
+	opacity: 0.7;
+}

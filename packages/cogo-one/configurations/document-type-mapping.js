@@ -5,6 +5,8 @@ function documentTypeMapping(type) {
 			return 'KYC Document';
 		case 'undefined':
 			return 'Wrong Document';
+		case 'some other type':
+			return '';
 		default:
 			return 'Shipment';
 	}

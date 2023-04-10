@@ -24,7 +24,7 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject,
 		if (subActiveTabReject === 'coe_rejected') {
 			return 'COE_REJECTED';
 		}
-		return 'INITIATED';
+		return 'LOCKED';
 	};
 
 	const [currentTab, setCurrentTab] = useState(getStatus());
@@ -113,7 +113,6 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject,
 				isUrgent : tab === 'Urgency_tag' ? true : undefined,
 				...sort,
 				pageSize : 10,
-				jobType  : 'SHIPMENT',
 			},
 			authKey: 'get_purchase_bills_list',
 		},
