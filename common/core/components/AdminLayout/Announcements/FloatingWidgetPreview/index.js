@@ -3,6 +3,7 @@ import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import Preview from '../AnnouncementModal/Preview';
+import ANNOUNCEMENT_TYPE_MAPPING from '../constants/ANNOUNCEMENT_TYPE_MAPPING.json';
 import useAnnouncementViewed from '../hooks/useAnnouncementViewed';
 import useGetSingleAnnouncement from '../hooks/useGetSingleAnnouncement';
 
@@ -16,7 +17,7 @@ function FloatingWidgetPreview(props) {
 	const { announcementViewed, announcementViewedloading } = useAnnouncementViewed(fetchAnnouncements);
 	const { announcementDetails: data, loadingSingleAnnouncement: loading } = useGetSingleAnnouncement(currentId);
 
-	const { title = '', content = '', redirection_url = '' } = data;
+	const { title = '', content = '', redirection_url = '', announcement_type = '' } = data;
 
 	const handleViewed = async () => {
 		await announcementViewed(data?.id);
@@ -41,7 +42,7 @@ function FloatingWidgetPreview(props) {
 			<div className={styles.content_container}>
 
 				<div className={styles.header}>
-					{/* <div className={styles.type_tag}>{ANNOUNCEMENT_TYPE_MAPPING[announcement_type]}</div> */}
+					<div className={styles.type_tag}>{ANNOUNCEMENT_TYPE_MAPPING[announcement_type]}</div>
 					<div className={styles.title}>{title}</div>
 				</div>
 

@@ -1,7 +1,7 @@
 import { Button, Popover, Select, Toggle } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import AnnouncementItem from './AnnouncementItem';
 import Loader from './Loader';
@@ -18,6 +18,8 @@ function Announcements({
 	announcementProps = {},
 	selectedAnnouncement = '',
 }) {
+	const [popoverVisible, setPopoverVisible] = useState(false);
+
 	const {
 		announcementLoading,
 		announcementList,
@@ -43,6 +45,8 @@ function Announcements({
 				announcement_type: undefined,
 			},
 		}));
+
+		setPopoverVisible(false);
 	};
 
 	const renderFilterPopover = () => (
@@ -63,6 +67,7 @@ function Announcements({
 							announcement_type: e,
 						},
 					}));
+					setPopoverVisible(false);
 				}}
 				options={FILTER_OPTIONS}
 			/>
@@ -99,9 +104,10 @@ function Announcements({
 						placement="bottom"
 						theme="light"
 						content={renderFilterPopover()}
+						visible={popoverVisible}
 					>
 						<div className={styles.filter_btn_container}>
-							<Button themeType="secondary" size="sm">
+							<Button themeType="secondary" size="sm" onClick={() => setPopoverVisible((prev) => !prev)}>
 								Filter
 								{announcement_type ? <div className={styles.filter_dot} /> : null}
 								<IcMFilter />
