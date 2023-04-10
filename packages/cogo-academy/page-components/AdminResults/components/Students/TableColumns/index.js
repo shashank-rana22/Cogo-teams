@@ -1,5 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
-// import { IcMDelete } from '@cogoport/icons-react';
+import { IcMDelete } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 
 import toFixed from '../../../../CreateModule/utils/toFixed';
@@ -154,7 +154,7 @@ const getOngoingColumns = () => [
 	},
 ];
 
-const getNotAppeardColumns = () => [
+const getNotAppeardColumns = ({ setShowModal, setUserId }) => [
 
 	{
 		Header   : 'NAME',
@@ -170,22 +170,22 @@ const getNotAppeardColumns = () => [
 			<section>{user.email}</section>
 		),
 	},
-	// {
-	// 	id       : 'delete',
-	// 	accessor : ({ user_id = '' }) => (
-	// 		<IcMDelete
-	// 			className={styles.delete}
-	// 			width={16}
-	// 			height={16}
-	// 			onClick={() => {
-	// 				setUserId(user_id);
-	// 				setShowModal(true);
-	// 			}}
-	// 		>
-	// 			Delete
-	// 		</IcMDelete>
-	// 	),
-	// },
+	{
+		id       : 'delete',
+		accessor : ({ user_id = '' }) => (
+			<IcMDelete
+				className={styles.delete}
+				width={16}
+				height={16}
+				onClick={() => {
+					setUserId(user_id);
+					setShowModal(true);
+				}}
+			>
+				Delete
+			</IcMDelete>
+		),
+	},
 ];
 
 const TABLE_MAPPING = {
