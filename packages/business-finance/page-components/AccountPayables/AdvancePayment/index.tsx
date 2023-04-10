@@ -139,7 +139,7 @@ function AdvancePayment({ activeEntity }:ItemProps) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.sub_container}>
-				<SelectFilters filters={filters} setFilters={setFilters} activeEntity={activeEntity} />
+				<SelectFilters filters={filters} setFilters={setFilters} activeEntity={activeEntity} createButton="createButton" />
 			</div>
 			<div>
 				<StyledTable

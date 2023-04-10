@@ -11,10 +11,11 @@ import styles from './styles.module.css';
 interface FilterProps {
 	filters:object,
 	setFilters: (p:object) => void,
-	activeEntity:string;
+	activeEntity?:string;
+	createButton?:string;
 }
 
-function SelectFilters({ filters, setFilters, activeEntity }:FilterProps) {
+function SelectFilters({ filters, setFilters, activeEntity, createButton }:FilterProps) {
 	const [showPayRunModal, setshowPayRunModal] = useState(false);
 	return (
 		<div className={styles.container}>
@@ -41,17 +42,20 @@ function SelectFilters({ filters, setFilters, activeEntity }:FilterProps) {
 						)}
 					/>
 				</div>
-				<div>
-					<Button
-						size="md"
-						themeType="secondary"
-						onClick={() => {
-							setshowPayRunModal(true);
-						}}
-					>
-						Create Pay Run
-					</Button>
-				</div>
+				{createButton === 'createButton'
+				&& (
+					<div>
+						<Button
+							size="md"
+							themeType="secondary"
+							onClick={() => {
+								setshowPayRunModal(true);
+							}}
+						>
+							Create Pay Run
+						</Button>
+					</div>
+				)}
 			</div>
 			{showPayRunModal && (
 				<PayRunModal
