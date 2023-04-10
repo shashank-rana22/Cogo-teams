@@ -9,7 +9,7 @@ function Header({ countryname_value, controls, control }) {
 			<div>
 				Country/Region
 				<Select
-					value="india"
+					value="INDIA"
 					placeholder="Select here..."
 					options={countryname_value}
 					style={{ width: '250px' }}
