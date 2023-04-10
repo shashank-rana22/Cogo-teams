@@ -64,7 +64,7 @@ const getCaseStudyPayload = ({
 		difficulty_level,
 	} = values || {};
 
-	const questions = case_questions.map((item) => {
+	const questions = case_questions.map((item, caseQuestionIndex) => {
 		const {
 			question_type: indQuestionType,
 			question_text: indQuestionText,
@@ -86,7 +86,7 @@ const getCaseStudyPayload = ({
 			question_type : indQuestionType,
 			question_text : indQuestionText,
 			answers,
-			explanation   : [editorValue[`case_questions_${questionIndex}_explanation`].toString('html')],
+			explanation   : [editorValue[`case_questions_${caseQuestionIndex}_explanation`].toString('html')],
 		};
 	});
 
