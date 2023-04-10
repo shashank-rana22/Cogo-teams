@@ -36,3 +36,12 @@
 .faq_icon img {
 	background: #fff;
 }
+
+.modal_content {
+	display: flex;
+}
+
+.announcement_preview_container {
+	width: calc(100% - 460px);
+	margin-top: 12px;
+}

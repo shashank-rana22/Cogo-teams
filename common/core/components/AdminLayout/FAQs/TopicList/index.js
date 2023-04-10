@@ -1,7 +1,8 @@
-import { Pagination, Tooltip } from '@cogoport/components';
+import { Pagination, Tooltip, Tabs, TabPanel } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
+import Announcements from '../../Announcements';
 import History from '../History';
 import QuestionList from '../QuestionList';
 import Header from '../QuestionList/Header';
@@ -26,7 +27,10 @@ function TopicList({
 	fetchFaqNotification,
 	faqNotificationData,
 	refetch,
+	announcementProps,
 }) {
+	const [activeTab, setActiveTab] = useState('faq');
+
 	const {
 		search,
 		setSearch,
@@ -45,9 +49,14 @@ function TopicList({
 		setShowNotificationContent,
 	} = useTopicList();
 
+	const { setAnnouncementModalData, announcementModalData } = announcementProps;
 	useEffect(() => {
 		fetchFaqNotification();
 	}, [fetchFaqNotification, showNotificationContent]);
+
+	useEffect(() => {
+		setAnnouncementModalData(false);
+	}, [activeTab, setAnnouncementModalData]);
 
 	const render = () => {
 		if (topic) {
@@ -176,6 +185,26 @@ function TopicList({
 		return render();
 	};
 
+	const TABS_MAPPING = [
+		{
+			name      : 'faq',
+			title     : 'FAQs',
+			component : renderQuestionList,
+			props     : {},
+		},
+		{
+			name      : 'announcements',
+			title     : 'Announcements',
+			component : Announcements,
+			props     : {
+				announcementProps,
+				// setShow,
+				// selectedAnnouncement,
+				// setModalData,
+			},
+		},
+	];
+
 	return (
 		<div className={styles.container}>
 			<Header
@@ -193,7 +222,26 @@ function TopicList({
 				refetch={refetch}
 			/>
 
-			{renderQuestionList()}
+			{showHistory ? (
+				renderQuestionList()
+			) : (
+				<Tabs
+					activeTab={activeTab}
+					onChange={setActiveTab}
+					fullWidth
+					themeType="primary"
+				>
+					{TABS_MAPPING.map((tabItem) => {
+						const { name, title, component: Component, props } = tabItem;
+
+						return (
+							<TabPanel key={name} name={name} title={title}>
+								<Component {...props} />
+							</TabPanel>
+						);
+					})}
+				</Tabs>
+			)}
 		</div>
 	);
 }

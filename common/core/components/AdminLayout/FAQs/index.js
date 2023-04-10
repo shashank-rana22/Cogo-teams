@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import React, { useState, useRef, useEffect } from 'react';
 
+import Preview from '../Announcements/AnnouncementModal/Preview';
+import useGetAnnouncementList from '../Announcements/hooks/useGetAnnouncementList';
+
 import styles from './styles.module.css';
 import TopicList from './TopicList';
 
@@ -25,6 +28,15 @@ function FAQs({
 
 	const [show, setShow] = useState(false);
 	const [isMobile, setIsMobile] = useState(false);
+	const [announcementModalData, setAnnouncementModalData] = useState(false);
+
+	const props = useGetAnnouncementList();
+
+	const announcementProps = {
+		...props,
+		setAnnouncementModalData,
+		announcementModalData,
+	};
 
 	useEffect(() => {
 		function handleResize() {
@@ -56,6 +68,12 @@ function FAQs({
 				showFaq: false,
 			}),
 		);
+	};
+
+	const getModalSize = () => {
+		if (isMobile) return 'md';
+		if (announcementModalData) return 'fullscreen';
+		return '';
 	};
 
 	return (
@@ -91,16 +109,36 @@ function FAQs({
 					show={show || showFaq}
 					onClose={handleClose}
 					placement={isMobile ? 'fullscreen' : 'right'}
-					size={isMobile ? 'md' : ''}
+					size={getModalSize()}
 				>
 
-					<div className={styles.topiclist_container}>
-						<TopicList
-							faqNotificationData={faqNotificationData}
-							faqNotificationApiLoading={faqNotificationApiLoading}
-							fetchFaqNotification={fetchFaqNotification}
-							refetch={refetch}
-						/>
+					<div className={styles.modal_content}>
+						<div className={styles.topiclist_container}>
+							<TopicList
+								faqNotificationData={faqNotificationData}
+								faqNotificationApiLoading={faqNotificationApiLoading}
+								fetchFaqNotification={fetchFaqNotification}
+								refetch={refetch}
+								announcementProps={announcementProps}
+							/>
+						</div>
+						{announcementModalData && (
+							<div className={styles.announcement_preview_container}>
+								Preview
+								{/* <Preview
+							// loading={loadingSingleAnnouncement}
+							// announcementViewedloading={announcementViewedloading}
+							setShowModal={setAnnouncementModalData}
+							// data={announcementDetails}
+							modalIsOpened={announcementModalData}
+							// announcementViewed={announcementViewed}
+							isViewed={announcementModalData?.is_viewed}
+							setShow={setShow}
+							isMobile={isMobile}
+						/> */}
+							</div>
+						)}
+
 					</div>
 				</Modal>
 			) : null}
