@@ -2,11 +2,9 @@ import { TabPanel, Tabs, Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
-import PIPProbations from '../../common/PIPProbations';
-import Statistics from '../../common/Statistics';
+import tabPanelComponentMapping from '../../constants/tab-panel-component-mapping';
 
 import styles from './styles.module.css';
-import PastStats from './TabComponents/PastStats';
 
 function ManagerDashboard() {
 	const router = useRouter();
@@ -16,6 +14,8 @@ function ManagerDashboard() {
 	const handleClick = () => {
 		router.push('/performance-management/manager-dashboard/feedback-management');
 	};
+
+	const tabPanels = tabPanelComponentMapping.manager_dashboard;
 
 	return (
 		<>
@@ -42,30 +42,20 @@ function ManagerDashboard() {
 					onChange={setActiveTab}
 					fullWidth
 				>
-					<TabPanel name="past_stats" title="KPI Feedbacks">
-						<PastStats />
-					</TabPanel>
-					<TabPanel name="pip" title="PIP">
-						<div className={styles.stats}><Statistics logType="pip" /></div>
-						<PIPProbations
-							key="pip"
-							modal={modal}
-							setModal={setModal}
-							logType={activeTab}
-							source="manager_dashboard"
-						/>
-					</TabPanel>
-
-					<TabPanel name="probation" title="Probation">
-						<div className={styles.stats}><Statistics logType="probation" /></div>
-						<PIPProbations
-							key="probation"
-							modal={modal}
-							setModal={setModal}
-							logType={activeTab}
-							source="manager_dashboard"
-						/>
-					</TabPanel>
+					{tabPanels.map((panel) => {
+						const { Component } = panel;
+						return (
+							<TabPanel name={panel.name} title={panel.title}>
+								<Component
+									key={panel.key}
+									modal={modal}
+									setModal={setModal}
+									logType={activeTab}
+									source="manager_dashboard"
+								/>
+							</TabPanel>
+						);
+					})}
 				</Tabs>
 			</div>
 		</>

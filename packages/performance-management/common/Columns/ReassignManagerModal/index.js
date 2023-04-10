@@ -4,22 +4,10 @@ import { useState } from 'react';
 import ReassignManager from '../../ReassignManager';
 
 import styles from './styles.module.css';
+import TitleDiv from './TitleDiv';
 
 function ReassignManagerModal({ item, refetchList = () => {} }) {
 	const [openReassign, setOpenReassign] = useState(false);
-
-	const getTitleDiv = () => (
-		<>
-			<div className={styles.user}>
-				{item.name}
-			</div>
-			<div className={styles.manager}>
-				Currently Under :
-				{' '}
-				<span className={styles.manager_name}>{item.manager_name}</span>
-			</div>
-		</>
-	);
 
 	return (
 		<>
@@ -27,7 +15,7 @@ function ReassignManagerModal({ item, refetchList = () => {} }) {
 
 			{openReassign && (
 				<Modal show={openReassign} onClose={() => setOpenReassign(false)}>
-					<Modal.Header title={getTitleDiv()} />
+					<Modal.Header title={<TitleDiv item={item} styles={styles} />} />
 					<Modal.Body>
 						<ReassignManager
 							userId={item.user_id}

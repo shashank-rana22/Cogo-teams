@@ -1,5 +1,6 @@
 import { Textarea, Button, Modal } from '@cogoport/components';
-import { startCase, addDays, format } from '@cogoport/utils';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase, addDays } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -36,7 +37,11 @@ function ReviewModal({
 
 									<div style={{ fontWeight: 'bold' }}>
 										{item.start_date
-											? format(item.start_date, 'dd-MMM-yyyy') : '---'}
+											? formatDate({
+												date       : item.start_date,
+												formatType : 'date',
+												dateFormat : 'dd MMM yyyy',
+											}) : '---'}
 									</div>
 								</div>
 
@@ -45,7 +50,11 @@ function ReviewModal({
 
 									<div style={{ fontWeight: 'bold' }}>
 										{item.end_date
-											? format(item.end_date, 'dd-MMM-yyyy') : '---'}
+											? formatDate({
+												date       : item.end_date,
+												formatType : 'date',
+												dateFormat : 'dd MMM yyyy',
+											}) : '---'}
 
 									</div>
 								</div>
@@ -67,7 +76,11 @@ function ReviewModal({
 
 									<div style={{ fontWeight: 'bold' }}>
 										{extended_date
-											? format(extended_date, 'dd-MMM-yyyy') : '---'}
+											? formatDate({
+												date       : extended_date,
+												formatType : 'date',
+												dateFormat : 'dd MMM yyyy',
+											}) : '---'}
 
 									</div>
 								</div>

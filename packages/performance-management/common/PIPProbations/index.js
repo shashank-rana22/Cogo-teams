@@ -4,7 +4,7 @@ import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import modalComponentsMapping from '../../constants/modal-components-mapping';
-import tabPanelComponentMapping from '../../constants/tab-pannel-component-mapping';
+import subTabPanelComponentMapping from '../../constants/sub-tab-pannel-component-mapping';
 import useDownloadLogCsv from '../../hooks/useDownloadLogCSV';
 import useUpdateLog from '../../hooks/useUpdateLog';
 
@@ -60,7 +60,7 @@ function PIPProbations({ source = 'hr_dashboard', modal = '', setModal = () => {
 						themeType="secondary"
 						onChange={setActiveTab}
 					>
-						{Object.values(tabPanelComponentMapping).map((tabPanelItem) => {
+						{Object.values(subTabPanelComponentMapping).map((tabPanelItem) => {
 							const { name = '', title = '', Component } = tabPanelItem;
 
 							if (!Component) return null;

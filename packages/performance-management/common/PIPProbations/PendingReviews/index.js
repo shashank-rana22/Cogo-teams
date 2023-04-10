@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 
+import feedbackDataColumns from '../../../constants/feedback-data-columns';
+import useListLogs from '../../../hooks/useListLogs';
 import useGetColumns from '../../Columns';
 import Filters from '../../Filters';
 import UserTableData from '../../UserTableData';
-import feedbackDataColumns from '../../../constants/feedback-data-columns';
-import useListLogs from '../../../hooks/useListLogs';
 
 import styles from './styles.module.css';
 

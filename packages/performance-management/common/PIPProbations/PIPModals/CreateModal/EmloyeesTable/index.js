@@ -2,11 +2,11 @@ import { Input } from '@cogoport/components';
 import { useForm, SelectController, useDebounceQuery } from '@cogoport/forms';
 import { useState, useEffect } from 'react';
 
-import useGetColumns from '../../../../Columns';
-import UserTableData from '../../../../UserTableData';
 import feedbackDataColumns from '../../../../../constants/feedback-data-columns';
 import useListReportees from '../../../../../hooks/useListReportees';
 import useListReassignControls from '../../../../../utils/list-reassign-manager-controls';
+import useGetColumns from '../../../../Columns';
+import UserTableData from '../../../../UserTableData';
 
 import styles from './styles.module.css';
 

@@ -1,5 +1,5 @@
 import { Button, Datepicker } from '@cogoport/components';
-import { format } from '@cogoport/utils';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -39,7 +39,13 @@ function DeadlineModal({
 						Current Deadline
 						<div style={{ fontWeight: '600' }}>
 							{formDeadline.toString() !== '0001-01-01T05:53:28+05:53'
-								? format(formDeadline, 'dd MMM yyyy, HH:mm') : '---'}
+								? formatDate({
+									date       : formDeadline,
+									formatType : 'date',
+									dateFormat : 'dd MMM yyyy',
+									timeFormat : 'HH:mm',
+									separator  : ',',
+								}) : '---'}
 						</div>
 					</div>
 				</div>

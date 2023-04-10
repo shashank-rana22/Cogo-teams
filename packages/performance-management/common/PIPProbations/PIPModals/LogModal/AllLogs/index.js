@@ -1,9 +1,10 @@
 import { Placeholder } from '@cogoport/components';
-import { startCase, isEmpty, format } from '@cogoport/utils';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase, isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import EmptyState from '../../../../EmptyState';
 import useGetAllLogs from '../../../../../hooks/useGetAllLogs';
+import EmptyState from '../../../../EmptyState';
 
 import styles from './styles.module.css';
 
@@ -55,7 +56,14 @@ function AllLogs({ item = {} }) {
 				<div className={styles.sub_container} key={object.created_at}>
 					<div className={styles.flex_container}>
 						<div className={styles.circle} />
-						<div className={styles.date}>{format(object.created_at, 'dd-MMM-yyyy')}</div>
+						<div className={styles.date}>
+							{formatDate({
+								date       : item.created_at,
+								formatType : 'date',
+								dateFormat : 'dd MMM yyyy',
+							})}
+
+						</div>
 					</div>
 
 					<div className={styles.content}>

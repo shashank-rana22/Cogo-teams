@@ -2,10 +2,9 @@ import { Tabs, TabPanel, Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
+import tabPanelComponentMapping from '../../constants/tab-panel-component-mapping';
+
 import styles from './styles.module.css';
-import KPIFeedbacks from './TabComponents/KPIFeedbacks';
-import PIPProbations from '../../common/PIPProbations';
-import UploadedFiles from '../../common/PIPProbations/UploadedFiles';
 
 function HRDashboard() {
 	const router = useRouter();
@@ -16,6 +15,7 @@ function HRDashboard() {
 	const routeToFeedbackForms = () => {
 		router.push('/performance-management/hr-dashboard/feedback-forms');
 	};
+	const tabPanels = tabPanelComponentMapping.hr_dashboard;
 
 	return (
 		<div className={styles.container}>
@@ -41,21 +41,15 @@ function HRDashboard() {
 					onChange={setActiveTab}
 					fullWidth
 				>
-					<TabPanel name="feedbacks" title="KPI Feedbacks">
-						<KPIFeedbacks modal={modal} setModal={setModal} />
-					</TabPanel>
+					{tabPanels.map((panel) => {
+						const { Component } = panel;
+						return (
+							<TabPanel name={panel.name} title={panel.title}>
+								<Component key={panel.key} modal={modal} setModal={setModal} logType={activeTab} />
+							</TabPanel>
+						);
+					})}
 
-					<TabPanel name="pip" title="PIP">
-						<PIPProbations key="pip" modal={modal} setModal={setModal} logType={activeTab} />
-					</TabPanel>
-
-					<TabPanel name="probation" title="Probation">
-						<PIPProbations key="probation" modal={modal} setModal={setModal} logType={activeTab} />
-					</TabPanel>
-
-					<TabPanel name="uploaded_files" title="Uploaded Files">
-						<UploadedFiles modal={modal} setModal={setModal} />
-					</TabPanel>
 				</Tabs>
 			</div>
 

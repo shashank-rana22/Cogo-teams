@@ -1,21 +1,16 @@
-import { Tooltip, ButtonIcon, Pill, Button, cl } from '@cogoport/components';
+import { Tooltip, ButtonIcon, Pill, Button } from '@cogoport/components';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMUpload, IcMExclamation, IcMArrowNext, IcMDownload, IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { isEmpty, getYear, getMonth, format, startCase } from '@cogoport/utils';
+import { isEmpty, getYear, getMonth, startCase } from '@cogoport/utils';
 
 import redirectPathSourceMapping from '../../constants/redirect-source-mapping';
+import statusColorMapping from '../../constants/status-color-mapping';
 
 import FeedbackFormModal from './FeedbackFormModal';
 import FeedbackModal from './FeedbackPopOver';
 import ReassignManagerModal from './ReassignManagerModal';
 import styles from './styles.module.css';
-
-const statusColorMapping = {
-	pip       : 'red',
-	employed  : 'green',
-	probation : 'yellow',
-	exited    : 'red',
-};
 
 const useGetColumns = ({
 	refetchList = () => {},
@@ -154,7 +149,11 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>MONTH</div>,
 		accessor : () => (
 			<div className={styles.head_content}>
-				{format(new Date(feedbackYear, feedbackMonth, 1), 'MMM yyyy')}
+				{formatDate({
+					date       : new Date(feedbackYear, feedbackMonth, 1),
+					formatType : 'date',
+					dateFormat : 'MMM, yyyy',
+				})}
 			</div>
 		),
 		id  : 'month',
@@ -335,8 +334,16 @@ const useGetColumns = ({
 				{item.created_at || item.start_date ? (
 					<div>
 						{source === 'uploaded_files'
-							? format(item.created_at, 'dd-MMM-yyyy')
-							: format(item.start_date, 'dd-MMM-yyyy')}
+							? formatDate({
+								date       : item.created_at,
+								formatType : 'date',
+								dateFormat : 'dd MMM yyyy',
+							})
+							: formatDate({
+								date       : item.created_at,
+								formatType : 'date',
+								dateFormat : 'dd MMM yyyy',
+							})}
 					</div>
 				) : '---'}
 			</div>
@@ -348,7 +355,11 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>END DATE</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				{item.end_date ? format(item.end_date, 'dd-MMM-yyyy') : '---'}
+				{item.end_date ? formatDate({
+					date       : item.end_date,
+					formatType : 'date',
+					dateFormat : 'dd MMM yyyy',
+				}) : '---'}
 			</div>
 		),
 		id  : 'end_date',

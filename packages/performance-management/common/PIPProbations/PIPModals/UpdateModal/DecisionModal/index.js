@@ -1,9 +1,9 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { isEmpty } from '@cogoport/utils';
 
+import useGetFeedbackPerformanceStats from '../../../../../hooks/useGetFeedbackPerformanceStats';
 import EmptyState from '../../../../EmptyState';
 import UserProfile from '../../../../UserStats/UserProfile';
-import useGetFeedbackPerformanceStats from '../../../../../hooks/useGetFeedbackPerformanceStats';
 
 import Create from './CreatePip';
 import styles from './styles.module.css';

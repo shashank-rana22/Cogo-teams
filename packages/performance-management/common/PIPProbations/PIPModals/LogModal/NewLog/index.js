@@ -1,24 +1,12 @@
 import { CheckboxGroup, Textarea } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
+import options from '../../../../../constants/log-modal-checkbox-options';
+
 import styles from './styles.module.css';
 
 function NewLog({ item = {}, setItem = () => {} }) {
 	const { tags = [], disabledTags = [], comment } = item;
-
-	const options = [
-		{
-			name  : 'R1',
-			value : 'Email sent to Employee',
-			label : 'Email sent to Employee',
-		},
-		{
-			name  : 'R2',
-			value : 'Email sent to Manager',
-			label : 'Email sent to Manager',
-		},
-		{ name: 'R3', value: 'Final discussion held', label: 'Final discussion held' },
-	];
 
 	const newOptions = isEmpty(disabledTags) ? options : options.map((opt) => {
 		if ((disabledTags || []).includes(opt.value)) {

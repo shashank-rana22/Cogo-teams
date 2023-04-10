@@ -1,5 +1,6 @@
 import { Pagination, Pill, Button, Placeholder } from '@cogoport/components';
-import { format, isEmpty, startCase } from '@cogoport/utils';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import useListForms from '../../../../hooks/useListForms';
 
@@ -74,11 +75,19 @@ function Forms({
 								<div className={styles.published}>
 									<p className={styles.label}>Published On</p>
 									<div className={styles.value}>
-										{format(created_at, 'dd MMM yyyy')}
+										{formatDate({
+											date       : created_at,
+											formatType : 'date',
+											dateFormat : 'dd MMM yyyy',
+										})}
 										{' '}
 										<span>
 											{' '}
-											{format(created_at, 'hh:mm a')}
+											{formatDate({
+												date       : created_at,
+												formatType : 'time',
+												timeFormat : 'HH:mm aaa',
+											})}
 										</span>
 									</div>
 								</div>

@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useIrisRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-import getDefaultFeedbackMonth from '../../../utils/getDefaultYearMonth';
+import getDefaultFeedbackMonth from '../../../../utils/getDefaultYearMonth';
 
 const useNotifyManagers = ({ setModal = () => {} }) => {
 	const { feedbackMonth, feedbackYear } = getDefaultFeedbackMonth();

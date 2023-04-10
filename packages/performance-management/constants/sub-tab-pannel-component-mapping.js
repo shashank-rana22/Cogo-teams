@@ -1,7 +1,7 @@
 import Dashboard from '../common/PIPProbations/Dashboard';
 import PendingReviews from '../common/PIPProbations/PendingReviews';
 
-const tabPanelComponentMapping = {
+const subTabPanelComponentMapping = {
 	dashboard: {
 		name      : 'dashboard',
 		title     : 'Dashboard',
@@ -14,4 +14,4 @@ const tabPanelComponentMapping = {
 	},
 };
 
-export default tabPanelComponentMapping;
+export default subTabPanelComponentMapping;

@@ -15,8 +15,19 @@ function ButtonComponent({
 	item = {}, action = '', setShowModal = () => {}, showTypePopover = false,
 	setShowTypePopover = () => {}, feedback_id = '',
 }) {
-	const currentDate = formatDate({ date: new Date(), formatDate: 'isoUtcDateTime' });
-	const formDeadline = formatDate(item.form_deadline, 'isoUtcDateTime');
+	const currentDate = formatDate({
+		date       : new Date(),
+		formatType : 'dateTime',
+		dateFormat : 'dd MM yyyy',
+		timeFormat : 'HH:mm aaa',
+	});
+
+	const formDeadline = 	formatDate({
+		date       : item.form_deadline,
+		formatType : 'dateTime',
+		dateFormat : 'dd MM yyyy',
+		timeFormat : 'HH:mm aaa',
+	});
 
 	if (action === 'show') {
 		return (
