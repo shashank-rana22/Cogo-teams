@@ -12,6 +12,7 @@ function ExtendValidityModal({
 	validity_start,
 	validity_end,
 	id,
+	fetchList,
 }) {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
@@ -25,9 +26,12 @@ function ExtendValidityModal({
 
 	const handleSubmitValidity = async () => {
 		try {
-			await trigger({ data: { ...dateRange, id } });
+			const res = await trigger({ data: { ...dateRange, id } });
 
-			showExtendValidityModal(false);
+			if (res.status === 200) {
+				setShowExtendValidityModal(false);
+				fetchList();
+			}
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

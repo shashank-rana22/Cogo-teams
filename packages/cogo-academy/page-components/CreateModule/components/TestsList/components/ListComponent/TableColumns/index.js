@@ -113,8 +113,13 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 ];
 
 export const testSetColumns = ({
-	loading, router, setShowModal, setTestId, sortFilter,
+	loading,
+	router,
+	setShowModal,
+	setTestId,
+	sortFilter,
 	setSortFilter,
+	fetchList,
 }) => ([
 	{
 		Header   : 'NAME',
@@ -343,6 +348,7 @@ export const testSetColumns = ({
 				setTestId={setTestId}
 				router={router}
 				validity_end={validity_end}
+				fetchList={fetchList}
 			/>
 		),
 	},

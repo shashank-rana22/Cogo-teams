@@ -87,6 +87,7 @@ export function TestSetButtons({
 	router,
 	validity_end = '',
 	validity_start = '',
+	fetchList = () => {},
 }) {
 	const [showExtendValidityModal, setShowExtendValidityModal] = useState(false);
 
@@ -158,6 +159,7 @@ export function TestSetButtons({
 					validity_start={validity_start}
 					setShowModal={setShowModal}
 					id={id}
+					fetchList={fetchList}
 				/>
 			) : null}
 

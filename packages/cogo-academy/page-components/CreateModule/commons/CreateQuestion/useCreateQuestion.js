@@ -157,7 +157,6 @@ const useCreateQuestion = ({
 
 				setValue(`${childKey}.question_type`, indQuestionType);
 				setValue(`${childKey}.question_text`, indQuestionText);
-				// setValue(`${childKey}.explanation`, indExplanation?.[0]);
 
 				setEditorValue((prev) => ({
 					...prev,
@@ -182,7 +181,6 @@ const useCreateQuestion = ({
 			setValue(`${childKey}.question_type`, question_type);
 			setValue(`${childKey}.difficulty_level`, difficulty_level);
 			setValue(`${childKey}.question_text`, question_text);
-			// setValue(`${childKey}.explanation`, explanation?.[0]);
 
 			setEditorValue((prev) => ({
 				...prev,
