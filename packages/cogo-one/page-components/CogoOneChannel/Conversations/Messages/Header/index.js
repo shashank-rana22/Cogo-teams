@@ -200,7 +200,10 @@ function Header({
 							className={cl`${styles.icon_div} ${updateRoomLoading ? styles.disable_icon : ''}`}
 							onClick={handleUpdateUser}
 						>
-							<IcMProfile width={15} height={15} fill="#221f20" />
+							<IcMProfile
+								className={cl`${styles.profile_icon} 
+								${updateRoomLoading ? styles.profle_load : ''}`}
+							/>
 							<IcMRefresh className={cl`${styles.update_icon} 
 								${updateRoomLoading ? styles.disable_icon : ''}`}
 							/>

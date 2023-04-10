@@ -1,0 +1,13 @@
+.search {
+	width: 30%;
+	margin-bottom: 10px;
+}
+
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.body:last-child {
+	border-bottom: unset;
+}

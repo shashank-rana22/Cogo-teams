@@ -1,9 +1,22 @@
+.settings {
+	display: flex;
+	justify-content: flex-end;
+	margin-right: -5px;
+}
+
+.settings_icon {
+	width: 25px;
+	height: 25px;
+	margin-top: -20px;
+	cursor: pointer;
+}
+
 .layout_container {
 	position: relative;
 	display: flex;
 	width: calc(100% - 14px);
-	height: 92vh;
-	margin-top: 10px;
+	height: 90vh;
+	margin-top: 5px;
 }
 
 .chat_details_continer {
