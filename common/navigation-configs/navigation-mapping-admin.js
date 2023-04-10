@@ -854,7 +854,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/business-finance/finance-dashboard/logistics',
 				type          : 'link',
 				main_apis     : [],
-				possible_apis : apis.finance_dashboard,
+				possible_apis : apis.business_finance_dashboard,
 			},
 			{
 				key           : 'business_finance-manual_invoice',
