@@ -1208,7 +1208,7 @@ const apis = [
 		access_type : 'private',
 	},
 	{
-		api         : 'get_exchange_rate_deviation_by_id',
+		api         : 'get_purchase_bills_exchange_rate_deviation_by_id',
 		access_type : 'private',
 	},
 	{
@@ -1392,6 +1392,23 @@ const apis = [
 		api          : 'update_shipment_ftl_freight_additional_service',
 		access_type  : 'private',
 		service_name : 'shipment',
+	},
+	{
+		api          : 'send_whatsapp_booking_note_delayed',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'send_whatsapp_counter_price',
+		access_type  : 'private',
+		service_name : 'communication',
+		feature      : 'revenue_desk',
+	},
+	{
+		api          : 'update_revenue_desk_shipment_sell_quotations',
+		access_type  : 'private',
+		service_name : 'shipment',
+		feature      : 'revenue_desk',
 	},
 ];
 
