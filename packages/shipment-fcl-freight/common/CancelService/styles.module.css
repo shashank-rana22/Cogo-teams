@@ -1,0 +1,29 @@
+.form_element {
+    .label {
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .error_msg {
+        color: var(--color-primary-error-red-2);
+        font-size: var(--font-size-md);
+        position: relative;
+        top: -6px;
+    }
+
+    :global {
+        .ui_radiogroup_container {
+            padding: 0;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .ui_radio_container {
+            padding: 0 10px 10px 0;
+            width: 48%;
+        }
+    }
+
+    &:not(:first-of-type){
+        margin-top: 26px;
+    }
+}
