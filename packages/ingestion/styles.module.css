@@ -36,16 +36,17 @@
 }
 
 .total_count {
+	min-width: 100px;
 	text-align: center;
 }
 
 .successfully_migrated_count {
+	min-width: 180px;
 	text-align: center;
 }
 
 .error_type {
 	text-align: center;
-
 }
 
 .updated_at {

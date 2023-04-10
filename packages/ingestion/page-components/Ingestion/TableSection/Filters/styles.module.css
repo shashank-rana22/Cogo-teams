@@ -29,17 +29,16 @@
 
 		:global {
 			.ui_select_display_container {
-				min-width: 134px
+				min-width: 134px;
 			}
 		}
 	}
+
 	:global {
 		.ui_select_input_placeholder {
 			color: #cacaca;
 		}
 	}
-
-	
 }
 
 .form_group:not(:first-child) { margin: 12px 0; }
