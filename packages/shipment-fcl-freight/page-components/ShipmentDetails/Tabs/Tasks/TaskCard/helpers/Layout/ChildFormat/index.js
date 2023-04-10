@@ -18,7 +18,7 @@ function FieldArray({
 	error,
 	...rest
 }) {
-	const { fields, append, remove } = useFieldArray({
+	const { append, remove } = useFieldArray({
 		control,
 		name,
 	});
@@ -27,7 +27,7 @@ function FieldArray({
 
 	return (
 		<div className={styles.child}>
-			{(fields || []).map((field, index) => (
+			{(controls || []).map((field, index) => (
 				<Child
 					{...rest}
 					key={field.id}
@@ -51,8 +51,7 @@ function FieldArray({
 						themeType="link"
 						onClick={() => append(childEmptyValues)}
 					>
-						+
-						{' '}
+						+&nbsp;
 						{buttonText}
 					</Button>
 				) : null}
