@@ -3,7 +3,6 @@ import React from 'react';
 
 import Filters from '../../../../../commons/Filters';
 import FilterModal from '../../../../commons/FilterModal';
-import { GenericObject } from '../../../../commons/Interfaces';
 import SearchInput from '../../../../commons/searchInput';
 import StyledTable from '../../../../commons/styledTable';
 import completedColumn from '../../../../configs/Completed_table';
@@ -14,11 +13,10 @@ import styles from './styles.module.css';
 
 interface Props {
 	organizationId: string,
-	outStandingFilters?: GenericObject
+	entityCode?: string
 }
 
-function InvoiceTable({ organizationId, outStandingFilters }: Props) {
-	const { entityCode = '' } = outStandingFilters || {};
+function InvoiceTable({ organizationId, entityCode }: Props) {
 	const {
 		listData,
 		clearInvoiceFilters,
@@ -55,7 +53,7 @@ function InvoiceTable({ organizationId, outStandingFilters }: Props) {
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<div style={{ display: 'flex', marginRight: '20px', alignItems: 'center' }}>
 						<Button
-							size="sm"
+							size="md"
 							style={{ marginRight: '8px' }}
 							onClick={() => { sendReport(); }}
 						>
@@ -71,7 +69,7 @@ function InvoiceTable({ organizationId, outStandingFilters }: Props) {
 							search: value || undefined,
 						})}
 						size="md"
-						placeholder="Search by Customer Name /Invoice number /SID"
+						placeholder="Search by /Invoice number /SID"
 					/>
 				</div>
 			</div>

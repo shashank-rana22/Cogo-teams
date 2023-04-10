@@ -4,13 +4,14 @@ import {
 	IcCFcl,
 	IcCAir,
 	IcMFftl,
-	IcMFltl,
+	IcMFltl, IcCTelegram,
 } from '@cogoport/icons-react';
 
 export const SOURCE_ICON_MAPPING = {
 	whatsapp  : <IcCWhatsapp width={25} height={25} />,
 	facebook  : <IcCFacebook width={25} height={25} />,
 	instagram : <IcCInstagram width={25} height={25} />,
+	telegram  : <IcCTelegram width={25} height={25} />,
 	email     : <img
 		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/email.svg"
 		alt=""
@@ -51,6 +52,7 @@ export const USER_ACTIVITY_MAPPING = {
 	platform      : 'Platform Activity',
 	communication : 'Communication Activity',
 	transactional : 'Transactional Activity',
+	summary       : 'Summary',
 };
 
 export const emptyChat = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg';

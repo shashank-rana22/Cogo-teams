@@ -22,10 +22,10 @@ const shipmentSpecificPayload = {
 const timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
 
 export default function getListBookingDeskShipmentsPayload({ filters, activeTab, selected_agent_id }) {
-	const { isCriticalOn, page, q, ...restFilters } = filters;
-	const { shipment_type } = filters;
+	const { isCriticalOn, page, q, shipment_type, ...restFilters } = filters;
 
-	const tabSpecificPayload = shipmentSpecificPayload[shipment_type];
+	const tabSpecificPayload = shipmentSpecificPayload[shipment_type][activeTab];
+
 	const tabs = TABS_CONFIG[shipment_type];
 
 	const isCriticalVisible = tabs.find((tab) => tab.name === activeTab).isCriticalVisible ?? false;
@@ -37,7 +37,7 @@ export default function getListBookingDeskShipmentsPayload({ filters, activeTab,
 	const payload = {
 		filters: {
 			state: shipmentStates[activeTab] || shipmentStates.in_progress,
-			...tabSpecificPayload[activeTab],
+			...(tabSpecificPayload[filters.trade_type] || tabSpecificPayload),
 			...(selected_agent_id && { selected_agent_id }),
 			...(isCriticalVisible && isCriticalOn
 				&& { schedule_departure_less_than: threeDaysLater }),
