@@ -1,33 +1,34 @@
 import { Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useRequest } from '@cogoport/request';
-import { useContext, useCallback } from 'react';
+import { useContext } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
-const useUpdateShipment = ({ setShow = () => {} }) => {
+export default function useUpdateShipment({ successCallbacks = [], successMsg = '' }) {
 	const { refetch } = useContext(ShipmentDetailContext);
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_shipment',
+		url    : 'update_shipment',
 		method : 'POST',
-	});
+	}, { manual: true });
 
-	const updateShipment = useCallback(async ({ payload }) => {
+	const updateShipment = async ({ payload }) => {
 		try {
-			await trigger({ params: payload });
-			Toast.success('Cancellation Requested');
-			setShow(false);
+			await trigger({ data: payload });
+			successCallbacks?.forEach((cb) => cb?.());
 			refetch();
+
+			if (successMsg) {
+				Toast.success(successMsg);
+			}
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [trigger, refetch, setShow]);
+	};
 
 	return {
-		updateShipmentLoading: loading,
 		updateShipment,
+		loading,
 	};
-};
-
-export default useUpdateShipment;
+}

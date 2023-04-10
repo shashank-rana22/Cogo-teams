@@ -11,12 +11,16 @@ import styles from './styles.module.css';
 
 export default function CancelShipment({ show, setShow }) {
 	const { reasonsLoading, reasons = [] } = useListShipmentCancellationReasons();
-	const { updateShipmentLoading, updateShipment } = useUpdateShipment({ setShow });
+
+	const closeModal = () => setShow(false);
+
+	const { loading: updateShipmentLoading, updateShipment } = useUpdateShipment({
+		successCallbacks : [closeModal],
+		successMsg       : 'Cancellation Requested',
+	});
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const { id } = shipment_data || {};
-
-	const closeModal = () => setShow(false);
 
 	const { control, formState: { errors }, handleSubmit } = useForm();
 

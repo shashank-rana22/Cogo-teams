@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 function ShipmentHeader() {
 	const [showAddPoModal, setShowAddPoModal] = useState(false);
 	const [showShipmentCancelModal, setShowShipmentCancelModal] = useState(false);
-	const { shipment_data, primary_service, isGettingShipment, refetch } = useContext(ShipmentDetailContext);
+	const { shipment_data, primary_service, isGettingShipment } = useContext(ShipmentDetailContext);
 
 	const { po_number, importer_exporter } = shipment_data || {};
 
@@ -39,23 +39,21 @@ function ShipmentHeader() {
 					<div className={styles.business_name}>{importer_exporter?.business_name}</div>
 				</Tooltip>
 
-				<div className={styles.po_number}>
-					{po_number ? (
-						<div className={styles.po_number}>
-							PO Number:&nbsp;
-							{po_number}
-						</div>
-					) : (
-						<div
-							className={styles.button}
-							role="button"
-							tabIndex={0}
-							onClick={() => setShowAddPoModal(true)}
-						>
-							Add Po Number
-						</div>
-					)}
-				</div>
+				{po_number ? (
+					<div className={styles.po_number}>
+						PO Number:&nbsp;
+						{po_number}
+					</div>
+				) : (
+					<div
+						className={styles.button}
+						role="button"
+						tabIndex={0}
+						onClick={() => setShowAddPoModal(true)}
+					>
+						Add Po Number
+					</div>
+				)}
 			</div>
 
 			<div className={styles.port_details}>
@@ -73,7 +71,6 @@ function ShipmentHeader() {
 					show={showAddPoModal}
 					setShow={setShowAddPoModal}
 					shipment_data={shipment_data}
-					refetch={refetch}
 				/>
 			) : null}
 
