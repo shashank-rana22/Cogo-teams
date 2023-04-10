@@ -101,6 +101,7 @@ function Stage({
 	  selectedItem,
 	  isNewItemAdding,
 	  handleNewAddingItemPropsChange,
+	  components,
 	]);
 
 	//! Portal :: useDrop for stage process
