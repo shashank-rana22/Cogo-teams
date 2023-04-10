@@ -6,8 +6,11 @@ import Structure from './Structure';
 
 function LeftPanel(props) {
 	const {
-		activeTab, setActiveTab, components, setComponents,
-		 selectedItem, onNewItemAdding, addNewItem,
+		activeTab, setActiveTab, components,
+		 setComponents,
+		 selectedItem,
+		 onNewItemAdding,
+		 addNewItem,
 		showContentModal,
 		setShowContentModal,
 		parentComponentId,
@@ -46,6 +49,7 @@ function LeftPanel(props) {
 					setParentComponentId={setParentComponentId}
 					addNewItem={addNewItem}
 					onNewItemAdding={onNewItemAdding}
+
 				/>
 			</TabPanel>
 

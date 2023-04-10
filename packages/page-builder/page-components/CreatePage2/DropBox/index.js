@@ -71,7 +71,9 @@ function Stage({
 	  [stageItems, setStageItems],
 	);
 
-	const memoItems = useMemo(() => stageItems?.map((item, index) => {
+	const rootComponents = stageItems.filter((item) => !item.parentId);
+
+	const memoItems = useMemo(() => rootComponents?.map((item, index) => {
 		const { id, type } = item;
 		return (
 			<div
@@ -108,7 +110,7 @@ function Stage({
 			const { type, id } = droppedItem;
 			if (!id) {
 		  // a new item added
-		  addNewItem(droppedItem, hoveredIndex, shouldAddBelow, parentComponentId);
+		  addNewItem(droppedItem, hoveredIndex, shouldAddBelow, parentComponentId, type);
 			} else {
 		  // the result of sorting is applying the mock data
 		  setComponents(stageItems);

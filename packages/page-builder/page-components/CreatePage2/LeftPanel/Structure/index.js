@@ -1,7 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { IcMPlusInCircle } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { v1 as uuid } from 'uuid';
 
+import Item from './Item';
 import styles from './styles.module.css';
 
 const widths = [['100%'],
@@ -19,10 +21,13 @@ const widths = [['100%'],
 function Structure(props) {
 	const {
 		components,
-		setComponents,
+		// setComponents,
 		setShowContentModal,
 		// parentComponentId,
 		setParentComponentId,
+		onNewItemAdding,
+		addNewItem,
+		selectedItem,
 	} = props;
 
 	const handleSubmitClick = ({ elementId }) => {
@@ -33,7 +38,7 @@ function Structure(props) {
 
 	const handleClick = (rows) => {
 		const parentComponent = {
-			id         : uuid(),
+			id         : components.length + 1,
 			type       : 'container',
 			isRendered : false,
 			properties : {
@@ -48,12 +53,12 @@ function Structure(props) {
 
 			return ({
 				type       : 'container',
-				id         : elementId,
+				id         : uuid(),
 				width      : row,
 				parentId   : parentComponent.id,
 				isRendered : false,
 				properties : {
-					content : <IcMPlusInCircle style={{ cursor: 'pointer' }} width={20} height={20} />,
+					content : <IcMPlusInCircle style={{ cursor: 'pointer', fill: '#222' }} width={20} height={20} />,
 					styles  : {
 						width          : row,
 						border         : '1px dashed #9ab7fe',
@@ -71,19 +76,20 @@ function Structure(props) {
 			});
 		});
 
-		setComponents([...components, parentComponent, ...childrenComponents]);
+		addNewItem([parentComponent, ...childrenComponents], selectedItem?.index, true, parentComponent.id, 'container');
 	};
+
+	const LeftPanelItems = useMemo(
+		() => (widths || []).map((row) => (
+			<Item row={row} handleClick={handleClick} onNewItemAdding={onNewItemAdding} />
+		)),
+		[addNewItem, onNewItemAdding, selectedItem],
+	);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.grid_container}>
-				{widths.map((row) => (
-					<div key={uuid()} role="presentation" onClick={() => handleClick(row)} className={styles.grid_item}>
-						{row.map((width) => (
-							<div key={uuid()} className={styles.item} style={{ width }} />
-						))}
-					</div>
-				))}
+				{LeftPanelItems}
 			</div>
 		</div>
 
