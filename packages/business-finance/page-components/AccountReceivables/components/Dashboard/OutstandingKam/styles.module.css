@@ -45,6 +45,13 @@
 			border: none;
 		}
 
+		.ui_table_head_container {
+			position: sticky;
+			top: 0;
+			z-index: 1;
+			background-color: #fff;
+		}
+
 		.ui_table_body_cell {
 			padding: 12px 8px;
 			font-size: 12px;

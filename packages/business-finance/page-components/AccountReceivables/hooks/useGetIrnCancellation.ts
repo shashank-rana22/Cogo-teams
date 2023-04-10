@@ -34,7 +34,6 @@ const useGetIrnCancellation = ({ id, setShowCancellationModal }: IrnCancellation
 			}
 		} catch (err) {
 			Toast.error(err?.error?.message || 'Something went wrong');
-			setShowCancellationModal(false);
 		}
 	};
 

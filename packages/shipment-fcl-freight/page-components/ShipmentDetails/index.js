@@ -17,7 +17,13 @@ function ShipmentDetails() {
 		case 'TechSuperadmin':
 			return <Superadmin />;
 		default:
-			return null;
+			return (
+				<h1
+					style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+				>
+					You are not allowed to visit this page!
+				</h1>
+			);
 	}
 }
 

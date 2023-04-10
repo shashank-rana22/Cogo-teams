@@ -93,6 +93,7 @@ function CogoOne() {
 		firstLoading,
 		updateLeaduser,
 		handleScroll,
+		activeRoomLoading,
 	} = useListChats({
 		firestore,
 		userId,
@@ -115,8 +116,8 @@ function CogoOne() {
 						suggestions={suggestions}
 						userId={userId}
 						isomniChannelAdmin={isomniChannelAdmin}
-						showBotMessages={showBotMessages}
 						mailProps={mailProps}
+						setActiveMessage={setActiveMessage}
 					/>
 					{activeTab !== 'mail' && (
 						<ProfileDetails
@@ -125,6 +126,9 @@ function CogoOne() {
 							activeVoiceCard={activeVoiceCard}
 							updateLeaduser={updateLeaduser}
 							activeCardId={activeCardId}
+							setActiveMessage={setActiveMessage}
+							setModalType={setModalType}
+							activeRoomLoading={activeRoomLoading}
 						/>
 					)}
 				</>
@@ -144,6 +148,12 @@ function CogoOne() {
 			setActiveMail({});
 		}
 	}, [activeTab, firstLoading, setActiveCard, showBotMessages]);
+
+	useEffect(() => {
+		if (isomniChannelAdmin) {
+			setAppliedFilters({});
+		}
+	}, [setAppliedFilters, isomniChannelAdmin, showBotMessages]);
 
 	useEffect(() => {
 		setToggleStatus(status === 'active');
