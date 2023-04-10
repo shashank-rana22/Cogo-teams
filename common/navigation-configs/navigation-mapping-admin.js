@@ -282,6 +282,7 @@ const navigationMappingAdmin = {
 			'list_spot_searches',
 			'list_margins',
 			'list_checkouts',
+			'list_partners',
 		],
 		module_type: 'dashboards',
 	},
