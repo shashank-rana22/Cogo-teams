@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+// import { IcMDelete } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 
 import toFixed from '../../../../CreateModule/utils/toFixed';
@@ -115,7 +116,8 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 	},
 ];
 
-const getNotAppeardColumns = () => [
+const getOngoingColumns = () => [
+
 	{
 		Header   : 'NAME',
 		id       : 'name',
@@ -132,12 +134,59 @@ const getNotAppeardColumns = () => [
 	},
 ];
 
-const getTableColumns = ({ sortFilter, setSortFilter, activeTab }) => {
-	if (activeTab === 'appeared') {
-		return getAppearedColumns({ sortFilter, setSortFilter });
-	}
+const getNotAppeardColumns = () => [
 
-	return getNotAppeardColumns();
+	{
+		Header   : 'NAME',
+		id       : 'name',
+		accessor : ({ user = {} }) => (
+			<section>{startCase(user.name)}</section>
+		),
+	},
+	{
+		Header   : 'EMAIL',
+		id       : 'email',
+		accessor : ({ user = {} }) => (
+			<section>{user.email}</section>
+		),
+	},
+	// {
+	// 	id       : 'delete',
+	// 	accessor : ({ user_id = '' }) => (
+	// 		<IcMDelete
+	// 			className={styles.delete}
+	// 			width={16}
+	// 			height={16}
+	// 			onClick={() => {
+	// 				setUserId(user_id);
+	// 				setShowModal(true);
+	// 			}}
+	// 		>
+	// 			Delete
+	// 		</IcMDelete>
+	// 	),
+	// },
+];
+
+const TABLE_MAPPING = {
+	appeared     : getAppearedColumns,
+	not_appeared : getNotAppeardColumns,
+	ongoing      : getOngoingColumns,
+};
+
+const getTableColumns = ({
+	sortFilter, setSortFilter,
+	activeTab, setShowModal, setUserId = () => {},
+}) => {
+	const getcolumnsFun = TABLE_MAPPING?.[activeTab] || getAppearedColumns;
+
+	const getcolumnsArg = {
+		appeared     : { sortFilter, setSortFilter },
+		not_appeared : { setShowModal, setUserId },
+		ongoing      : { },
+	};
+
+	return getcolumnsFun(getcolumnsArg[activeTab] || {});
 };
 
 export default getTableColumns;

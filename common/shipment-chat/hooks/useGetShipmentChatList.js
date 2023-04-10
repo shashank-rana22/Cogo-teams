@@ -1,8 +1,7 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 const useGetShipmentChatList = ({ payload, states = {} }) => {
 	const { list = {}, setList = () => {} } = states;
@@ -29,7 +28,7 @@ const useGetShipmentChatList = ({ payload, states = {} }) => {
 					total_page : res?.data?.total,
 				}));
 			} catch (err) {
-				Toast.error(getApiErrorString(err));
+				toastApiError(err);
 			}
 		})();
 	}, [trigger, setList]);

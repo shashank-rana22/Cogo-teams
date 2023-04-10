@@ -5,13 +5,13 @@ import { useEffect, useCallback, useRef } from 'react';
 
 import useGetScopeOptions from './useGetScopeOptions';
 
-export default function useScope({ defaultValues, closePopover }) {
+export default function useScope({ defaultValues, closePopover, apisToConsider }) {
 	const { profile } = useSelector((store) => store);
 	const dispatch = useDispatch();
 
 	const { authParams, selected_agent_id: selectedAgentId, ...restProfile } = profile || {};
 
-	const { scopeData, navigation, pathname } = useGetScopeOptions({ defaultValues });
+	const { scopeData, navigation, pathname } = useGetScopeOptions({ defaultValues, apisToConsider });
 
 	const { defaultScope, defaultView, defaultAgentId } = scopeData;
 	const [, scope, viewType = ''] = (authParams || '').split(':');
