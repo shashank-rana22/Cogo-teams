@@ -50,7 +50,8 @@ import {
 	IcMDunning,
 	IcMDashboard,
 	IcMCreditRequest,
-	IcCCogoassured, IcMOverview,
+	IcCCogoassured,
+	IcMOverview,
 	IcMFaq,
 } from '@cogoport/icons-react';
 
@@ -904,7 +905,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_incentive_plans'],
 				possible_apis : apis.incentives,
-
 			},
 			{
 				key           : 'incentives-kpi_plans',
@@ -1100,7 +1100,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.booking_tasks,
-
 			},
 			{
 				key           : 'coe-shipments',
@@ -1110,7 +1109,12 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				statsKey      : 'shipments',
 				main_apis     : ['list_shipments'],
-				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback, ...apis.cargo_insurance],
+				possible_apis : [
+					...apis.shipment,
+					...apis.search,
+					...apis.feedback,
+					...apis.cargo_insurance,
+				],
 			},
 			{
 				key           : 'coe-bn_salvage',
@@ -1129,7 +1133,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.okam_task_apis,
-
 			},
 			{
 				key           : 'coe-finance',
@@ -1139,7 +1142,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : [...apis.coe_finance, ...apis.shipment],
-
 			},
 			{
 				key           : 'coe-booking_note_desk',
@@ -1159,7 +1161,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-lcl_revenue_desk',
@@ -1169,7 +1170,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : [...apis.shipment, ...apis.air_revenue_desk],
-
 			},
 			{
 				key           : 'coe-air_revenue_desk',
@@ -1179,7 +1179,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : [...apis.shipment, ...apis.air_revenue_desk],
-
 			},
 			{
 				key           : 'coe-domestic_air_revenue_desk',
@@ -1189,7 +1188,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-ftl_revenue_desk',
@@ -1199,7 +1197,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-ltl_revenue_desk',
@@ -1209,7 +1206,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-air-customs_revenue_desk',
@@ -1246,7 +1242,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-lcl-customs_revenue_desk',
@@ -1256,7 +1251,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-bl_do',
@@ -1267,7 +1261,6 @@ const navigationMappingAdmin = {
 				main_apis     : ['list_shipments'],
 				module_type   : 'dashboards',
 				possible_apis : apis.bl_do,
-
 			},
 			{
 				key           : 'coe-cost_booking_desk',
@@ -1277,7 +1270,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_cost_booking_desk_shipments'],
 				possible_apis : [...apis.cost_booking_desk, ...apis.cogolens],
-
 			},
 			{
 				key           : 'coe-cancellation_policies',
@@ -1287,7 +1279,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipment_cancellation_charges'],
 				possible_apis : apis.shipment_cancellation_policies,
-
 			},
 			{
 				key   : 'coe-communication',
@@ -1304,7 +1295,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
 				key           : 'coe-kam-payments-dashboard',
@@ -1323,7 +1313,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : [...apis.shipment, ...apis.ltl_operations],
-
 			},
 			{
 				key           : 'coe-bl_do_collection_release',
@@ -1333,7 +1322,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipment_document_collections'],
 				possible_apis : [...apis.bl_do_collection_release, ...apis.shipment],
-
 			},
 			{
 				key           : 'coe-kam_desk',
@@ -1342,7 +1330,12 @@ const navigationMappingAdmin = {
 				as            : '/kam-desk',
 				type          : 'link',
 				main_apis     : ['list_kam_desk_shipments'],
-				possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens, ...apis.cargo_insurance],
+				possible_apis : [
+					...apis.kam_desk,
+					...apis.search,
+					...apis.cogolens,
+					...apis.cargo_insurance,
+				],
 			},
 			{
 				key           : 'coe-document_desk',
@@ -1424,7 +1417,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.segmentation,
-
 			},
 			{
 				key           : 'marketing-marketing_campaign-dashboard',
@@ -1446,7 +1438,6 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				module_type   : 'crm',
 				possible_apis : apis.templates,
-
 			},
 			{
 				key           : 'marketing-marketing_cogo_points',
@@ -1632,7 +1623,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.promotions,
-
 			},
 			{
 				key           : 'promotions-budget_allocation',
@@ -1642,7 +1632,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.promotions,
-
 			},
 		],
 		module_type: 'dashboards',
@@ -1655,7 +1644,6 @@ const navigationMappingAdmin = {
 		type          : 'link',
 		main_apis     : [],
 		possible_apis : apis.voice_call,
-
 	},
 	transaction_setting: {
 		key       : 'transaction_setting',
@@ -1670,7 +1658,6 @@ const navigationMappingAdmin = {
 				as            : '/pass-through-customers',
 				main_apis     : [],
 				possible_apis : apis.pass_through_customers,
-
 			},
 			{
 				key           : 'transaction_setting-convenience_rate',
@@ -1742,7 +1729,6 @@ const navigationMappingAdmin = {
 		module_type   : 'dashboards',
 		possible_apis : apis.my_profile,
 		showInNav     : false,
-
 	},
 	allocations: {
 		key         : 'allocations',
@@ -2060,13 +2046,16 @@ const navigationMappingAdmin = {
 				possible_apis : apis.analytics_dashboard_management,
 			},
 			{
-				key           : 'analytics_dashboard-view',
-				title         : 'Dashboard',
-				href          : '/analytics-dashboard',
-				as            : '/analytics-dashboard',
-				type          : 'link',
-				main_apis     : ['list_analytics_dashboard_widgets', 'get_analytics_widget_data'],
-				possible_apis : apis.analytics_dashboard,
+				key       : 'analytics_dashboard-view',
+				title     : 'Dashboard',
+				href      : '/analytics-dashboard',
+				as        : '/analytics-dashboard',
+				type      : 'link',
+				main_apis : [
+					'list_analytics_dashboard_widgets',
+					'get_analytics_widget_data',
+				],
+				possible_apis: apis.analytics_dashboard,
 			},
 		],
 	},
@@ -2100,6 +2089,22 @@ const navigationMappingAdmin = {
 				possible_apis : apis.performance_management,
 			},
 		],
+	},
+	saas_tools: {
+  	key       : 'saas_tools',
+  	title     : 'Saas Tools',
+  	icon      : IcMTechops,
+  	isSubNavs : true,
+  	main_apis : [],
+  	options   : [
+  		{
+  			key           : 'saas_tools-standard_milestones',
+  			title         : 'Standard Milestones',
+  			href          : '/v2/saas-tools/standard-milestones',
+  			as            : '/v2/saas-tools/standard-milestones',
+  			possible_apis : apis.saas_tools_standard_milestones,
+  		},
+  	],
 	},
 };
 
