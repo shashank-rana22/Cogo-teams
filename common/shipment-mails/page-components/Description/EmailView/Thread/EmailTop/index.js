@@ -1,13 +1,14 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMProfile } from '@cogoport/icons-react';
+import { addHours } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function EmailTop({ data = {} }) {
 	const displayDate = formatDate({
-		date       : data?.receivedDateTime,
+		date       : addHours(new Date(data?.receivedDateTime), 5.5),
 		dateFormat : GLOBAL_CONSTANTS.formats.date['eee, dd MMM, yyyy'],
 		formatType : 'date',
 	});
