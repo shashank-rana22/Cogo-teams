@@ -85,7 +85,6 @@ function QuestionList({
 									<div className={styles.question_container}>
 										<div style={{ marginRight: 4 }}>
 											{item?.question_abstract}
-											?
 										</div>
 										<div>
 											<IcMArrowRight
@@ -108,6 +107,7 @@ function QuestionList({
 								</div>
 							</div>
 						))}
+						{ search && <EmptySearchState search={search} source="list" />}
 					</div>
 
 					{(pageData?.total_count || 0) > 10 ? (

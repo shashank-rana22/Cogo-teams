@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"sideEffects": false,
 	"dependencies": {
-		"@cogoport/charts": "^1.0.1",
+		"@cogoport/charts": "^1.0.2",
 		"@cogoport/components": "^1.0.359",
 		"@cogoport/forms": "workspace:*",
 		"@cogoport/globalization": "workspace:*",

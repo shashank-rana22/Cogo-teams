@@ -67,6 +67,7 @@
 }
 
 .sidetext {
+	margin-bottom: 8px;
 	font-size: 11px;
 	font-style: normal;
 	font-weight: 400;
@@ -120,7 +121,7 @@
 }
 
 .aftercheckbox {
-	margin-top: 12px;
+	margin: 8px 0;
 	font-weight: 600;
 }
 
@@ -150,4 +151,21 @@
 			border-radius: 16px;
 		}
 	}
+}
+
+.line {
+	margin: 16px 0;
+	border-bottom: 1px solid #000;
+	opacity: 0.1;
+}
+
+.submit_btn {
+	display: flex !important;
+	justify-content: flex-end;
+	width: 100%;
+}
+
+.liked_wrapper {
+	display: flex;
+	flex-direction: column;
 }

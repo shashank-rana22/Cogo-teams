@@ -137,7 +137,7 @@ function ContainerDetails({
 									`}
 									>
 										<p style={{ fontSize: 11 }} className="volume_box">
-											{`${formData.volumetricWeight} Kgs(Cms)`}
+											{`${formData.volumetricWeight} Kgs(${dimension?.[0]?.unit || 'Cms'})`}
 										</p>
 									</div>
 								</div>
@@ -151,7 +151,7 @@ function ContainerDetails({
 									`}
 									>
 										<p style={{ fontSize: 11 }} className="volume_box">
-											{dimension.map((item) => item.length && `${item.length}x${item.width}x${item.height}/${item.packages_count} 
+											{dimension && dimension.map((item) => item.length && `${item.length}x${item.width}x${item.height}/${item.packages_count} 
 											`)}
 										</p>
 									</div>

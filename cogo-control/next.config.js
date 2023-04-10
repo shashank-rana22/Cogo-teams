@@ -35,7 +35,19 @@ module.exports = withBundleAnalyzer({
 	basePath          : '/v2',
 	transpilePackages : modulesToTranspile,
 	i18n,
-	webpack           : (config) => {
+	images            : {
+		remotePatterns: [
+			{
+				protocol : 'https',
+				hostname : 'cogoport-production.sgp1.digitaloceanspaces.com',
+			},
+			{
+				protocol : 'https',
+				hostname : 'cdn.cogoport.io',
+			},
+		],
+	},
+	webpack: (config) => {
 		const newConfig = { ...config };
 		newConfig.module.rules.push({
 			test : /\.svg$/i,

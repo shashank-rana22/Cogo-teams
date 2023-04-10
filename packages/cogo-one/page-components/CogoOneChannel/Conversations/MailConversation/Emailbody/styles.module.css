@@ -1,0 +1,41 @@
+.email_body {
+	display: flex;
+	padding: 10px;
+	margin-top: 15px;
+}
+
+.body_header {
+	display: flex;
+	align-items: center;
+}
+
+.header_details {
+	margin: 0 10px;
+}
+
+.header_name {
+	font-size: 14px;
+	font-weight: 500;
+
+	span {
+		margin-left: 4px;
+		font-size: 12px;
+	}
+}
+
+.header_to_cc {
+	display: flex;
+	align-items: center;
+}
+
+.name {
+	display: flex;
+	align-items: center;
+	margin: 0 4px;
+	font-size: 12px;
+	text-align: center;
+}
+
+.name_div {
+	display: flex;
+}
