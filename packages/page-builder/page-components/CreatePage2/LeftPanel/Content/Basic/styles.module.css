@@ -1,0 +1,21 @@
+.container {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	padding: 10px;
+	margin-top: 12px;
+	background-color: #fff;
+}
+
+.grid_item {
+	padding: 20px;
+	margin: 4px;
+	text-align: center;
+	background-color: rgb(255 255 255 / 80%);
+	border: 1px solid #88cad1;
+	box-shadow: 0 0 40px rgb(98 127 172 / 10%);
+
+	&:hover {
+		cursor: pointer;
+		border: 1.5px solid #88cad1;
+	}
+}
