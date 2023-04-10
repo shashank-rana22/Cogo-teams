@@ -22,7 +22,7 @@ const mawbControls = (disableClass) => ({
 			label       : "Shipper's Address",
 			type        : 'textarea',
 			span        : 7,
-			maxLength   : 150,
+			maxLength   : 200,
 			row         : 4,
 			placeholder : 'Enter Address',
 			rules       : {
@@ -49,7 +49,7 @@ const mawbControls = (disableClass) => ({
 			label       : "Consignee's Address",
 			type        : 'textarea',
 			span        : 7,
-			maxLength   : 150,
+			maxLength   : 200,
 			row         : 4,
 			placeholder : 'Enter Address',
 			rules       : {
@@ -349,7 +349,7 @@ const mawbControls = (disableClass) => ({
 			label       : 'Remarks',
 			type        : 'textarea',
 			span        : 7,
-			maxLength   : 150,
+			maxLength   : 500,
 			placeholder : 'Remarks',
 			rows        : 3,
 		},

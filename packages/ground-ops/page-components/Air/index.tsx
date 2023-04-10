@@ -81,7 +81,7 @@ function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 							>
 								{tab.label}
 								{loading ? <Placeholder width="20px" margin="0px 0px 0px 10px" />
-									: <div className={styles.stats}>{data?.data?.stats[tab.count] || 0}</div>}
+									: <div className={styles.stats}>{data?.data?.stats?.[tab.count] || 0}</div>}
 
 							</div>
 

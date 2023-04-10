@@ -199,54 +199,61 @@ function GenerateMAWB({
 	}, [formValues.chargeableWeight, formValues.ratePerKg, formValues.class]);
 
 	useEffect(() => {
-		setTaskItem((prev) => ({
-			...prev,
-			airline         : operatorList[0]?.business_name,
-			airlineIataCode : operatorList[0]?.iata_code,
-		}));
-		setValue('airline', operatorList[0]?.business_name);
-		setValue('airlineIataCode', operatorList[0]?.iata_code);
+		if (operatorList.length > 0) {
+			setTaskItem((prev) => ({
+				...prev,
+				airline         : operatorList[0]?.business_name,
+				airlineIataCode : operatorList[0]?.iata_code,
+			}));
+			setValue('airline', operatorList[0]?.business_name);
+			setValue('airlineIataCode', operatorList[0]?.iata_code);
+		}
 	}, [operatorList]);
 
 	useEffect(() => {
-		setTaskItem((prev) => ({
-			...prev,
-			customer_name: organizationList[0]?.business_name,
-		}));
-		setValue('customer_name', organizationList[0]?.business_name);
+		if (organizationList.length > 0) {
+			setTaskItem((prev) => ({
+				...prev,
+				customer_name: organizationList[0]?.business_name,
+			}));
+			setValue('customer_name', organizationList[0]?.business_name);
+			setValue('shipperSignature', organizationList[0]?.business_name);
+		}
 	}, [organizationList]);
 
 	useEffect(() => {
-		(airportList || []).forEach((airItem) => {
-			if (airItem.id === item.originAirportId) {
-				setTaskItem((prev) => ({
-					...prev,
-					origin         : airItem.name,
-					originPortCode : airItem.port_code,
-				}));
-				setValue('origin', airItem.name);
-				setValue('originPortCode', airItem.port_code);
-			} else if (airItem.id === item.destinationAirportId) {
-				setTaskItem((prev) => ({
-					...prev,
-					destination         : airItem.name,
-					destinationPortCode : airItem.port_code,
-				}));
-				setValue('destination', airItem.name);
-				setValue('destinationPortCode', airItem.port_code);
-			}
-		});
+		if (airportList.length > 0) {
+			(airportList || []).forEach((airItem) => {
+				if (airItem.id === item.originAirportId) {
+					setTaskItem((prev) => ({
+						...prev,
+						origin         : airItem.name,
+						originPortCode : airItem.port_code,
+					}));
+					setValue('origin', airItem.name);
+					setValue('originPortCode', airItem.port_code);
+				} else if (airItem.id === item.destinationAirportId) {
+					setTaskItem((prev) => ({
+						...prev,
+						destination         : airItem.name,
+						destinationPortCode : airItem.port_code,
+					}));
+					setValue('destination', airItem.name);
+					setValue('destinationPortCode', airItem.port_code);
+				}
+			});
+		}
 	}, [airportList]);
 
 	useEffect(() => {
-		listAirport();
-		listOperator();
-		listOrganization();
-		packingList({ item });
 		finalFields.forEach((c) => {
 			setValue(c.name, taskItem[c.name]);
 		});
 		if (!viewDoc) {
+			listAirport();
+			listOperator();
+			listOrganization();
+			packingList({ item });
 			setValue('executedDate', edit && taskItem.executedDate ? new Date(taskItem.executedDate) : new Date());
 			setValue('iataCode', edit ? taskItem.iataCode : iataCodeMapping[taskItem?.originAirportId] || '');
 			setValue('city', 'NEW DELHI');
