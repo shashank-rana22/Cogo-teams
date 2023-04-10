@@ -1,5 +1,5 @@
-// eslint-disable-next-line import/no-relative-packages
-import TopicList from '../../../../../../../../common/core/components/AdminLayout/FAQs/TopicList';
+import TopicList from '@cogoport/core/components/AdminLayout/FAQs/TopicList';
+
 import useGetFaqNotifications from '../../../hooks/useGetFaqNotifications';
 
 import styles from './styles.module.css';

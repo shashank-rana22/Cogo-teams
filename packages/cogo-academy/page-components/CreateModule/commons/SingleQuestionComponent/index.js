@@ -9,7 +9,7 @@ import useHandleSingleQuestion from './useHandleSingleQuestion';
 let RichTextEditor;
 
 if (typeof window !== 'undefined') {
-	// eslint-disable-next-line global-require, import/no-unresolved
+	// eslint-disable-next-line global-require
 	RichTextEditor = require('react-rte').default;
 }
 
