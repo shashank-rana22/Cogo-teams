@@ -39,18 +39,16 @@ function KeywordsTable({
 
 				</div>
 
-				{listKeywordsData.lenth > 10
-					&& (
-						<div className={styles.pagination_container}>
-							<Pagination
-								type="table"
-								currentPage={keywordCurrentPage}
-								totalItems={total_count}
-								pageSize={10}
-								onPageChange={setKeywordCurrentPage}
-							/>
-						</div>
-					)}
+				<div className={styles.pagination_container}>
+					<Pagination
+						type="table"
+						currentPage={keywordCurrentPage}
+						totalItems={total_count}
+						pageSize={10}
+						onPageChange={setKeywordCurrentPage}
+					/>
+				</div>
+
 			</div>
 		);
 	};
