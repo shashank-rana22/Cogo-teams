@@ -1,0 +1,31 @@
+.btn_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-top: 44px;
+}
+
+.date_container {
+	display: flex;
+	justify-content: center;
+    flex-direction: column;
+
+    :global {
+        .ui_datepicker_container {
+            margin-right: 6px;
+        }
+    }
+}
+
+.container {
+	align-items: center;
+	padding: 8px;
+}
+
+.extend_button {
+	margin-left: 12px;
+}
+
+.text {
+    margin-bottom: 6px;
+}
