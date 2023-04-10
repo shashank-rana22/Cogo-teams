@@ -1,28 +1,75 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import React, { useCallback, useState } from 'react';
 
 import DropBox from '../DropBox';
 import LeftPanel from '../LeftPanel';
+import Content from '../LeftPanel/Content';
 
 import styles from './styles.module.css';
+
+const CONTENT_MAPPING = {
+	text: {
+		properties : { content: 'start typing here...' },
+		layout     : {},
+		attributes : {
+			contenteditable: true,
+		},
+	},
+
+	image: {
+		properties: {
+			// eslint-disable-next-line max-len
+			content : 'https://www.cogoport.com/_next/image/?url=https%3A%2F%2Fcdn.cogoport.io%2Fcms-prod%2Fcogo_public%2Fvault%2Foriginal%2Fchannel-partner-header-2.png&w=1920&q=75',
+			style   : {
+				backgroundColor : 'red',
+				padding         : '20px',
+			},
+		},
+		alt        : 'add-img-url',
+		layout     : {},
+		attributes : {},
+	},
+
+	button: {
+		properties: {
+			content: 'Click Me!',
+		},
+		redirectUrl : 'https://www.cogoport.com/en-IN/company/careers/',
+		themeType   : 'primary',
+		size        : 'md',
+		layout      : {},
+		type        : 'button',
+		attributes  : {
+			onClick: 'handleSubmitClick',
+		},
+
+	},
+};
 
 function DNDComponent() {
 	const [activeTab, setActiveTab] = useState('content');
 	const [components, setComponents] = useState([]);
+	const [showContentModal, setShowContentModal] = useState(false);
+	const [parentComponentId, setParentComponentId] = useState(null);
 
 	const [isNewItemAdding, setNewItemAdding] = useState(false);
 
 	const [selectedItem, setSelectedItem] = useState({});
 
 	const handleAddNewItem = useCallback(
-		(content, hoveredIndex = components.length, shouldAddBelow = true) => {
+		(content, hoveredIndex = components.length, shouldAddBelow = true, parentId) => {
 		  const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
 
 		  setComponents(() => ([
 				...components.slice(0, startIndex),
 
-				{ id: components.length + 1, ...content },
+				{
+					...CONTENT_MAPPING[content.type],
+					id   : components.length + 1,
+					type : content.type,
+					parentId,
+				},
 				...components.slice(startIndex),
 		  ]));
 
@@ -30,9 +77,15 @@ function DNDComponent() {
 				id    : components.length + 1,
 				index : startIndex,
 		  });
+
+		  setShowContentModal(false);
 		},
 		[components],
 	  );
+
+	  const onClose = () => {
+		setShowContentModal(false);
+	};
 
 	  const MemoLeftPanel = useCallback(
 		() => (
@@ -44,10 +97,14 @@ function DNDComponent() {
 				addNewItem={handleAddNewItem}
 				onNewItemAdding={setNewItemAdding}
 				selectedItem={selectedItem}
+				showContentModal={showContentModal}
+				setShowContentModal={setShowContentModal}
+				parentComponentId={parentComponentId}
+				setParentComponentId={setParentComponentId}
 			/>
 		),
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[handleAddNewItem, selectedItem],
+		[handleAddNewItem, selectedItem, activeTab],
 
 	  );
 	  const MemoRightPanel = useCallback(
@@ -60,6 +117,7 @@ function DNDComponent() {
 				selectedItem={selectedItem}
 				setSelectedItem={setSelectedItem}
 				isNewItemAdding={isNewItemAdding}
+				parentComponentId={parentComponentId}
 			/>
 		),
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -106,6 +164,29 @@ function DNDComponent() {
 
 				</div>
 
+			</section>
+			<section>
+
+				<Modal
+					size="md"
+					show={showContentModal}
+					onClose={onClose}
+					placement="top"
+					scroll={false}
+				>
+					<Modal.Header title="choose content" />
+					<Content
+						components={components}
+						setComponents={setComponents}
+						parentComponentId={parentComponentId}
+						setParentComponentId={setParentComponentId}
+						setShowContentModal={setShowContentModal}
+						addNewItem={handleAddNewItem}
+						onNewItemAdding={setNewItemAdding}
+						selectedItem={selectedItem}
+					/>
+
+				</Modal>
 			</section>
 		</div>
 	);

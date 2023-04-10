@@ -12,9 +12,10 @@ import RightPanel from '../RightPanel';
 import styles from './styles.module.css';
 
 const ITEM_TYPES = {
-	text   : 'text',
-	button : 'button',
-	image  : 'image',
+	text      : 'text',
+	button    : 'button',
+	image     : 'image',
+	container : 'container',
 };
 
 function Stage({
@@ -24,6 +25,7 @@ function Stage({
 	isNewItemAdding,
 	setSelectedItem,
 	selectedItem,
+	parentComponentId,
 }) {
 	const [stageItems, setStageItems] = useState(components);
 
@@ -106,7 +108,7 @@ function Stage({
 			const { type, id } = droppedItem;
 			if (!id) {
 		  // a new item added
-		  addNewItem(droppedItem, hoveredIndex, shouldAddBelow);
+		  addNewItem(droppedItem, hoveredIndex, shouldAddBelow, parentComponentId);
 			} else {
 		  // the result of sorting is applying the mock data
 		  setComponents(stageItems);

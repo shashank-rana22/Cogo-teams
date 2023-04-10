@@ -1,3 +1,4 @@
+import { isEmpty } from '@cogoport/utils';
 import React, { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
@@ -6,10 +7,84 @@ import ImageComponent from '../../../commons/widgets/ImageComponent';
 import TextComponent from '../../../commons/widgets/TextComponent';
 
 const ITEM_TYPES = {
-	text   : 'text',
-	button : 'button',
-	image  : 'image',
+	text      : 'text',
+	button    : 'button',
+	image     : 'image',
+	container : 'container',
 };
+
+function ComponentBuilder({ component, components, setComponents }) {
+	const { id: elementId, isRendered = false } = component;
+	if (isRendered && isEmpty(component)) {
+		return null; // skip rendering if already rendered
+	}
+
+	const { type } = component;
+
+	const { content = '', styles, attributes = {} } = component.properties;
+
+	const COMPONENT_MAPPING = {
+		text: (
+			<TextComponent
+				text={content}
+				elementId={elementId}
+				components={components}
+				setComponents={setComponents}
+			/>
+		),
+		image: (
+			<ImageComponent
+				src={content}
+				elementId={elementId}
+				component={component}
+				components={components}
+				setComponents={setComponents}
+			/>
+		),
+		button: (
+			<ButtonComponent
+				label={content}
+				elementId={elementId}
+				components={components}
+				setComponents={setComponents}
+			/>
+		),
+	};
+
+	if (['text', 'image', 'button'].includes(type)) {
+		return <div style={{ background: 'lavender', width: '100%', height: '100%' }}>{COMPONENT_MAPPING[type]}</div>;
+	}
+
+	let childComponents = [];
+
+	if (type === 'container') {
+		childComponents = components.filter((item) => item.parentId === elementId);
+
+		return (
+			<div style={styles}>
+				{childComponents.length === 0
+					? (
+						<div
+							role="presentation"
+							onClick={attributes.onClick}
+						>
+							{content}
+						</div>
+					)
+					: childComponents.map((childComponent) => (
+						<ComponentBuilder
+							key={childComponent.id}
+							component={childComponent}
+							components={components}
+							setComponents={setComponents}
+						/>
+					))}
+			</div>
+		);
+	}
+
+	return null;
+}
 
 function Item(props) {
 	const {
@@ -90,12 +165,26 @@ function Item(props) {
 
 	const border = isSelected ? '3px dashed blue' : '1px solid silver';
 
+	// const rootComponents = components.filter((item) => !item.parentId);
+
+	console.log('sdijisdj', components);
+
+	// const renderedComponents = rootComponents.map((component) => (
+	// 	<ComponentBuilder
+	// 		key={component.id}
+	// 		component={component}
+	// 		components={components}
+	// 		setComponents={setComponents}
+	// 	/>
+	// ));
+
 	return (
 		<div
 			role="presentation"
 			ref={itemRef}
 			data-handler-id={handlerId}
 			onClick={onClick}
+			className="drag-handle"
 			style={{
 				opacity,
 				border,
@@ -104,6 +193,7 @@ function Item(props) {
 			}}
 		>
 
+			{/* {renderedComponents} */}
 			{type === 'text' && (
 				<TextComponent
 					key={elementId}
@@ -136,6 +226,9 @@ function Item(props) {
 					setComponents={setComponents}
 					elementId={elementId}
 				/>
+			)}
+			{type === 'conatiner' && (
+				<div>container</div>
 			)}
 		</div>
 	);

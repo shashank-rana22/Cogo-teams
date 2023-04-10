@@ -7,16 +7,14 @@ import Item from './Item';
 import styles from './styles.module.css';
 
 function Basic(props) {
-	const { components, setComponents, addNewItem, onNewItemAdding, selectedItem } = props;
+	const { addNewItem, onNewItemAdding, selectedItem, parentComponentId } = props;
 
 	const LeftPanelItems = useMemo(
 		() => (contents || []).map((content) => (
 			<Item
 				itemType={content.type}
 				content={content}
-				components={components}
-				setComponents={setComponents}
-				onClick={() => addNewItem(content, selectedItem?.index, true)}
+				onClick={() => addNewItem(content, selectedItem?.index, true, parentComponentId)}
 				onNewItemAdding={onNewItemAdding}
 			/>
 		)),
