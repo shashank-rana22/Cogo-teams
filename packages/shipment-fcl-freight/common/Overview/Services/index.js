@@ -21,8 +21,6 @@ function Services() {
 		activeStakeholder,
 	} = useContext(ShipmentDetailContext);
 
-	console.log(activeStakeholder, 'activee');
-
 	const { serviceObj, upsellServices } =	helperFuncs(servicesList, possibleServices);
 
 	const { cancelUpsellDestinationFor, cancelUpsellOriginFor } = upsellTransportation(serviceObj);
