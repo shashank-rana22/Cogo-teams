@@ -6,15 +6,15 @@ import Logistics from './Logistics';
 import Overheads from './Overheads';
 import styles from './styles.module.css';
 
-function CFODashboard() {
+function FinanceDashboard() {
 	const { query, push } = useRouter();
 
 	const [activeTab, setActiveTab] = useState(query?.activeTab || 'logistics');
 	const handleTabChange = (tab:string) => {
 		setActiveTab(tab);
 		push(
-			'/business-finance/cfo-dashboard/[activeTab]',
-			`/business-finance/cfo-dashboard/${tab}`,
+			'/business-finance/finance-dashboard/[activeTab]',
+			`/business-finance/finance-dashboard/${tab}`,
 		);
 	};
 
@@ -46,4 +46,4 @@ function CFODashboard() {
 	);
 }
 
-export default CFODashboard;
+export default FinanceDashboard;

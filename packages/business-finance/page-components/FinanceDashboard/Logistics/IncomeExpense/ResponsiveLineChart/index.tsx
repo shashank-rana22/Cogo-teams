@@ -13,7 +13,7 @@ function ResponsiveLineChart({ lineData }) {
 	(lineData || []).forEach((item:any) => {
 		const pushData = {
 			y : Number(item.income - item.expense),
-			x : item.month,
+			x : (item.month[0].toUpperCase() + item.month.slice(1).toLowerCase()).substring(0, 3),
 			z : item.income !== 0 ? Number((item.income - item.expense) / item.income) * 100 : 0,
 		};
 		lineChartData[0].data.push(pushData);
@@ -64,7 +64,7 @@ function ResponsiveLineChart({ lineData }) {
 				tickSize: 0, tickPadding: 10, tickRotation: 0,
 			}}
 			axisLeft={{
-				tickSize       : 20,
+				tickSize       : 10,
 				tickPadding    : -3,
 				tickRotation   : 0,
 				legendOffset   : 40,

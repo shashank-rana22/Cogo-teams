@@ -13,7 +13,7 @@ function Statistics({ globalFilters, entityTabFilters }) {
 	const { todayStatsData, todayStatsLoading } = useGetTodayStats({ globalFilters, entityTabFilters });
 	const {
 		todayPurchaseStats, todaySalesStats,
-		totalCashFlow = 0, cashFlowDiffFromYesterday = 0,
+		totalCashFlow = 0, cashFlowDiffFromYesterday = 0, yesterdayCashFlow = 0,
 	} = todayStatsData || {};
 	const { totalBills = 0, totalExpense = 0, totalPurchaseOrgs = 0 } = todayPurchaseStats || {};
 	const { totalInvoices = 0, totalRevenue = 0, totalSalesOrgs = 0 } = todaySalesStats || {};
@@ -132,7 +132,24 @@ function Statistics({ globalFilters, entityTabFilters }) {
 									</div>
 									<div style={{ display: 'flex' }}>
 										<div style={{ marginRight: '2px' }}>
-											{cashFlowDiffFromYesterday}
+
+											<Tooltip
+												content={(
+													<div className={styles.tooltip_text}>
+														<div>
+															Yesterday Cash Flow Amount :
+														</div>
+														<div>
+															{getFormattedPrice(yesterdayCashFlow, 'INR')}
+														</div>
+													</div>
+												)}
+											>
+												<div>
+													{cashFlowDiffFromYesterday}
+												</div>
+											</Tooltip>
+
 										</div>
 										%
 										<span style={{ marginLeft: '10px' }}>

@@ -123,7 +123,7 @@ function Profitabillity({ globalFilters, entityTabFilters }) {
 				<StyledTable
 					data={tabs === 'shipment' ? shipmentList : customerList || []}
 					columns={columns}
-					imageFind="cfoDashboard"
+					imageFind="FinanceDashboard"
 					{...rest}
 				/>
 				<div style={{ display: 'flex', justifyContent: 'flex-end' }}>

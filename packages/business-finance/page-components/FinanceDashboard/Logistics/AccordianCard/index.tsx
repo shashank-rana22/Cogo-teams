@@ -211,8 +211,21 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 												}}
 												role="presentation"
 											>
+
 												{subActiveTab === val.key ? (
-													<span className={styles.overall_text}>{val.label}</span>
+													<div>
+														{accordianStatsLoading
+															? (
+																<Placeholder
+																	height="20px"
+																	width="100px"
+																	margin="10px 40px 20px 50px"
+																/>
+															)
+															: (
+																<span className={styles.overall_text}>{val.label}</span>
+															)}
+													</div>
 												)
 													: (
 														<div className={styles.import_export_style}>
@@ -333,8 +346,8 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 												{accordianStatsLoading ? (
 													<Placeholder
 														height="20px"
-														width="152px"
-														margin="	10px 40px 20px 0px"
+														width="100px"
+														margin="10px 40px 20px 0px"
 													/>
 												) : (
 													<>

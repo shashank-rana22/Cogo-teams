@@ -15,8 +15,8 @@ function ResponsiveBarChart({ barData }) {
 			valueScale={{ type: 'linear' }}
 			indexScale={{ type: 'band', round: true }}
 			colors={['#DDEBC0', '#ACDADF']}
-			enableLabel
 			enableGridY
+			enableLabel
 			layout="vertical"
 			groupMode="grouped"
 			borderColor={{
@@ -25,7 +25,6 @@ function ResponsiveBarChart({ barData }) {
 			axisTop={null}
 			axisRight={null}
 			innerPadding={8}
-			minValue={0}
 			axisBottom={{
 				tickSize: 0, tickPadding: 20, tickRotation: 0,
 			}}

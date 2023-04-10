@@ -848,13 +848,13 @@ const navigationMappingAdmin = {
 				possible_apis : apis.incident_controller,
 			},
 			{
-				key           : 'business_finance-cfo_dashboard',
+				key           : 'business_finance-finance_dashboard',
 				title         : 'Finance Dashboard',
-				href          : '/v2/business-finance/cfo-dashboard/[activeTab]',
-				as            : '/v2/business-finance/cfo-dashboard/logistics',
+				href          : '/v2/business-finance/finance-dashboard/[activeTab]',
+				as            : '/v2/business-finance/finance-dashboard/logistics',
 				type          : 'link',
 				main_apis     : [],
-				possible_apis : apis.cfo_dashboard,
+				possible_apis : apis.business_finance_dashboard,
 			},
 			{
 				key           : 'business_finance-manual_invoice',
