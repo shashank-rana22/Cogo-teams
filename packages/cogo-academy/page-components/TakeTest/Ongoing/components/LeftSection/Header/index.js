@@ -5,7 +5,7 @@ import toFixed from '../../../../../CreateModule/utils/toFixed';
 import styles from './styles.module.css';
 import Timer from './Timer';
 
-function Header({ total_question, testData,	setShowTimeOverModal, start_time }) {
+function Header({ total_question, testData,	setShowTimeOverModal, start_time, user_appearance = [] }) {
 	const time = new Date(start_time).getTime();
 
 	return (
@@ -13,12 +13,12 @@ function Header({ total_question, testData,	setShowTimeOverModal, start_time }) 
 			<div className={styles.heading}>{testData?.name}</div>
 
 			<div className={styles.progress}>
-				<ProgressBar progress={toFixed(((1 / total_question) * 100), 2)} uploadText=" " />
-				{1}
-				{' '}
+				<ProgressBar progress={toFixed(((user_appearance.length / total_question) * 100), 2)} uploadText=" " />
+				{user_appearance.length}
 				/
-				{' '}
 				{total_question}
+				{' '}
+				Questions
 			</div>
 
 			<Timer

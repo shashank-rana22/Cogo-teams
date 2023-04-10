@@ -1,0 +1,74 @@
+.container {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	background-color: #f6f5fe;
+}
+
+.bl_overview_card {
+	height: auto;
+	padding-left: 15px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #393f70;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 10 rgb(0 0 0 / 20%);
+}
+
+.button_container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+
+	& > button {
+		margin-right: 8px;
+	}
+}
+
+.bl_count_container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 19px;
+	color: #393f70;
+	white-space: nowrap;
+
+	.bl-count {
+		margin: 0 8px;
+		font-weight: 400;
+		color: #828282;
+
+		@media (max-width: 768px) {
+			font-size: 10;
+		}
+	}
+
+	@media (max-width: 768px) {
+		font-size: 11px;
+	}
+}
+
+.manage_services_div {
+	padding: 28px 32px 8px;
+}
+
+.service_card {
+	margin-bottom: 16px;
+	border: 1px solid #ded7fc;
+	border-radius: 4px;
+
+	:global {
+		.ui_accordion_title {
+			width: 96% !important;
+		}
+	}
+}
+
+.button_div {
+	position: absolute;
+	top: 5px;
+	left: 410px;
+}

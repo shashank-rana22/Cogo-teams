@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
-import { format } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import VERSION_KEYS from '../../../../constants/version-keys-mapping';
 import useSetVersionFilter from '../../../../hooks/useSetVersionFilter';
@@ -98,7 +99,11 @@ function Header(props) {
 						{' '}
 						<strong>
 							{ audit_data?.updated_at
-								? format(audit_data?.updated_at, 'dd MMM yyyy') : ''}
+								? formatDate({
+									date       : audit_data.updated_at,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+									formatType : 'date',
+								}) : ''}
 						</strong>
 					</div>
 
@@ -116,7 +121,7 @@ function Header(props) {
 				<Button
 					onClick={onClickViewAllConfig}
 					themeType="secondary"
-					className={styles.configButton}
+					className={styles.config_button}
 				>
 					View All Configurations
 				</Button>

@@ -48,7 +48,6 @@ const ApproveReject = ({
 		},
 		{ autoCancel: false },
 	);
-
 	const rejectApproveApi = async () => {
 		try {
 			await trigger({

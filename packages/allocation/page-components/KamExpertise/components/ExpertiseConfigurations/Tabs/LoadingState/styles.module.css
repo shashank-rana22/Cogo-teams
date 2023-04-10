@@ -1,6 +1,12 @@
-.collapse {
-	:global(.ui_collapse_title) {
-		width: 100%;
+.cards_collapse_container {
+	:global {
+		.ui_collapse_title {
+			width: 100%;
+		}
+
+		.ui_collapse_main > div {
+			margin-bottom: 10px;
+		}
 	}
 }
 

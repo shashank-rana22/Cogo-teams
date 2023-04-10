@@ -1,15 +1,18 @@
-import { Pagination, Table, TabPanel, Tabs } from '@cogoport/components';
+import { Pagination, Table, TabPanel, Tabs, Modal, Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import EmptyState from '../../../CreateModule/components/EmptyState';
 import Filters from '../../commons/Filters';
 
 import useStudentWiseTestResult from './hooks/useStudentWiseTestResult';
+import useUpdateTestUserMapping from './hooks/useUpdateTestUserMapping';
 import styles from './styles.module.css';
 import getTableColumns from './TableColumns';
 
 function StudentsComponent({ test_id }) {
+	const [showModal, setShowModal] = useState(false);
+
 	const {
 		data = {},
 		loading,
@@ -28,9 +31,23 @@ function StudentsComponent({ test_id }) {
 		STUDENTS_MAPPING,
 	} = useStudentWiseTestResult({ test_id });
 
+	const { userSessionMapping, setUserId } = useUpdateTestUserMapping({ refetch });
+
 	const { stats = [], page_limit = 0, total_count = 0, list } = data || {};
 
-	const columns = getTableColumns({ sortFilter, setSortFilter, activeTab });
+	const handleDelete = () => {
+		userSessionMapping(test_id);
+	};
+
+	const columns = getTableColumns({
+		sortFilter,
+		setSortFilter,
+		activeTab,
+		showModal,
+		setShowModal,
+		handleDelete,
+		setUserId,
+	});
 
 	useEffect(() => {
 		refetch();
@@ -67,6 +84,40 @@ function StudentsComponent({ test_id }) {
 				debounceQuery={debounceQuery}
 				activeTab={activeTab}
 			/>
+
+			<Modal
+				size="sm"
+				show={showModal}
+				onClose={() => setShowModal(false)}
+				placement="center"
+				showCloseIcon={false}
+			>
+				<Modal.Header title="Are you sure you want to delete this User?" />
+
+				<Modal.Body>
+					<div className={styles.btn_container}>
+						<Button
+							type="button"
+							themeType="secondary"
+							onClick={() => setShowModal(false)}
+							className={styles.btn_container}
+						>
+							Cancel
+						</Button>
+
+						<Button
+							type="button"
+							style={{ marginLeft: '8px' }}
+							onClick={() => {
+								handleDelete();
+								setShowModal(false);
+							}}
+						>
+							Delete
+						</Button>
+					</div>
+				</Modal.Body>
+			</Modal>
 
 			{!loading && isEmpty(data?.list)
 				? <EmptyState />

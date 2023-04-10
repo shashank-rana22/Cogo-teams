@@ -23,26 +23,26 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {}, relev
 		{ manual: true },
 	);
 
-	const listAPi = useCallback(() => {
+	const listAPI = useCallback(() => {
 		(async () => {
 			const payload = {
 				new_awb: {
 					assignedStakeholder : 'service_ops2_docs',
 					status              : 'pending',
-					task                : ['upload_mawb_freight_certificate'],
+					task                : ['upload_mawb_freight_certificate', 'upload_hawb_freight_certificate'],
 				},
 				approval_pending: {
 					assignedStakeholder : 'service_ops2_docs',
 					status              : 'pending',
 					task                : ['approve_draft_airway_bill', 'amend_draft_airway_bill'],
-					documentType        : 'draft_airway_bill',
+					documentType        : ['draft_airway_bill'],
 					isDocDataRequired   : true,
 				},
 				approved_awb: {
 					assignedStakeholder : 'service_ops2_docs',
 					status              : 'completed',
-					task                : ['upload_mawb_freight_certificate'],
-					documentType        : 'draft_airway_bill',
+					task                : ['upload_mawb_freight_certificate', 'upload_hawb_freight_certificate'],
+					documentType        : ['draft_airway_bill'],
 					documentState       : 'document_accepted',
 					isDocDataRequired   : true,
 				},
@@ -84,13 +84,13 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {}, relev
 	}, [activeTab]);
 
 	useEffect(() => {
-		listAPi();
-	}, [listAPi, page, query]);
+		listAPI();
+	}, [listAPI, page, query]);
 
 	return {
 		data,
 		loading,
-		listAPi,
+		listAPI,
 		setPage,
 		page,
 		searchValue,

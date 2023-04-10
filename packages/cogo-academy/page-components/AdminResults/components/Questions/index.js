@@ -56,6 +56,7 @@ function QuestionsComponent({ test_id }) {
 				searchQuestion={searchQuestion}
 				setSearchQuestion={setSearchQuestion}
 				debounceQuery={debounceQuery}
+				setParams={setParams}
 			/>
 
 			{loading && (

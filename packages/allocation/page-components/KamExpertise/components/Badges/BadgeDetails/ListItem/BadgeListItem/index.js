@@ -1,5 +1,7 @@
 import { Button, Pill } from '@cogoport/components';
-import { format, startCase } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 
 import BadgeCard from './BadgeCard';
 import styles from './styles.module.css';
@@ -84,7 +86,11 @@ function BadgeListItem(props) {
 						<div style={{ paddingRight: '4px' }}>
 							Last Modified :
 							{' '}
-							{updated_at ? format(updated_at, 'dd MMMM yyyy') : '_'}
+							{updated_at ? formatDate({
+								date       : updated_at,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+								formatType : 'date',
+							}) : '_'}
 						</div>
 
 						<div>

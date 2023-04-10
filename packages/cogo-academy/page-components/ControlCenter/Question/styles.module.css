@@ -1,3 +1,14 @@
+.container {
+	display: flex;
+	width: 100%;
+}
+
+.question_container {
+	flex: 1.75;
+	width: 66%;
+	padding-right: 50px;
+}
+
 .back_div {
 	display: flex;
 	cursor: pointer;
@@ -32,7 +43,7 @@
 }
 
 .form_container {
-	width: 74%;
+	width: 100%;
 }
 
 .input_container {
@@ -74,4 +85,8 @@
 
 .text_wrapper {
 	padding: 8px 0;
+}
+
+.feedback_container {
+	flex: 1;
 }

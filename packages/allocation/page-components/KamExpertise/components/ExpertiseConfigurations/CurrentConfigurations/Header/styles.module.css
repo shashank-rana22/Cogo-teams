@@ -39,11 +39,10 @@
 	margin-left: auto;
 }
 
-.button_container{
+.button_container {
 	display: flex;
-
 }
 
-.configButton{
+.config_button {
 	margin-right: 20px;
 }

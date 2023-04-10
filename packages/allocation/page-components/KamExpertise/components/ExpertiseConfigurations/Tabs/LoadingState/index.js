@@ -30,13 +30,15 @@ function LoadingState({ columnsToLoad }) {
 	const [value, onChange] = useState('');
 
 	return (
-		<Collapse
-			panels={options}
-			activeKey={value}
-			setActive={onChange}
-			type="text"
-			className={styles.collapse}
-		/>
+		<div className={styles.cards_collapse_container}>
+			<Collapse
+				panels={options}
+				activeKey={value}
+				setActive={onChange}
+				type="text"
+			/>
+		</div>
+
 	);
 }
 

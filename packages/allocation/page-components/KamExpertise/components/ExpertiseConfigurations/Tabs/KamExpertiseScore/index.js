@@ -10,10 +10,10 @@ import getControls from '../../../../configurations/get-add-conditions-controls'
 import EXPERTISE_CARDS_COLUMNS_MAPPING from '../../../../constants/expertise-cards-columns-mapping';
 import ICON_MAPPING from '../../../../constants/icon-mapping';
 import useCreateAllocationKamExpertiseEventScoring from '../../../../hooks/useCreateAllocationKamExpertiseEventScoring';
+import Header from '../Header';
 import LoadingState from '../LoadingState';
 
 import ExpertiseParameters from './ExpertiseParameters';
-import Header from './Header';
 import styles from './styles.module.css';
 
 const titleSection = (expertiseItem = {}) => (

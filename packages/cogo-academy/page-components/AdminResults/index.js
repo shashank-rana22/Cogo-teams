@@ -56,7 +56,7 @@ function AdminResults() {
 				<div role="presentation" onClick={handleGoBack} className={styles.go_back}>
 					<IcMArrowBack />
 
-					<p className={styles.go_back_text}>Dashboard</p>
+					<p className={styles.go_back_text}>Test Result</p>
 				</div>
 
 				<Button themeType="accent" onClick={() => getTest({ test_id })} disabled={loading}>

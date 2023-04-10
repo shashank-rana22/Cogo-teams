@@ -89,24 +89,21 @@ function BadgeUpdateCard(props) {
 
 				<div>
 					{watch_image_value
-						? (
+						&& (
 							<div className={styles.preview}>
 								<img src={watch_image_value} alt="preview_image" />
 							</div>
-						)
-						: null}
+						)}
 
 					{!isEmpty(badgeItemData) && !watch_image_value
-						? (
+						&& (
 							<div className={styles.preview}>
 								<img
 									src={MEDAL_IMAGE_MAPPING[medalType]?.image_url}
-									alt="badge img preview"
+									alt="badge-img-preview"
 								/>
 							</div>
-						)
-						: null}
-
+						)}
 				</div>
 			</div>
 

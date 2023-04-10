@@ -1,10 +1,10 @@
 import { Collapse } from '@cogoport/components';
 import { useState } from 'react';
 
+import Header from '../Header';
 import LoadingState from '../LoadingState';
 
 import Footer from './Footer';
-import Header from './Header';
 import KamLevelCard from './KamLevelCard';
 import KamLevelDropDown from './KamLevelDropDown';
 import styles from './styles.module.css';
@@ -52,13 +52,16 @@ function KamLevel(props) {
 			{levelLoading
 				? (<LoadingState columnsToLoad={4} />)
 				: (
-					<Collapse
-						panels={options}
-						activeKey={activeCard}
-						setActive={setActiveCard}
-						type="text"
-						className={styles.collapse}
-					/>
+					<div className={styles.level_card_collapse}>
+						<Collapse
+							panels={options}
+							activeKey={activeCard}
+							setActive={setActiveCard}
+							type="text"
+							className={styles.collapse}
+						/>
+					</div>
+
 				)}
 
 			<div className={styles.response_card}>
