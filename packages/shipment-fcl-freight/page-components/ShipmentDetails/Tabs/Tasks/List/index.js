@@ -1,3 +1,6 @@
+import { Button } from '@cogoport/components';
+import { IcMArrowBack } from '@cogoport/icons-react';
+
 import useListShipmentPendingTasks from '../../../../../hooks/useListShipmentPendingTasks';
 import TaskCard from '../TaskCard';
 
@@ -35,13 +38,15 @@ function List() {
 
 			{
 				selectedTaskId ? (
-					<div className={styles.see_all_tasks} onClick={() => setSelectedTaskId(null)}>
-						<img
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/arrow.svg"
-							alt="arrow"
-						/>
-						<div>See All Tasks</div>
-					</div>
+					<Button
+						className={styles.see_all_tasks}
+						onClick={() => setSelectedTaskId(null)}
+						themeType="link"
+						size="md"
+					>
+						<IcMArrowBack width={50} />
+						<div style={{ width: 200 }}>See All Tasks</div>
+					</Button>
 				) : null
 			}
 
@@ -57,6 +62,7 @@ function List() {
 
 					<TaskCard
 						task={tasksList.find((task) => task.id === selectedTaskId)}
+						onCancel={() => { setSelectedTaskId(null); }}
 						shipment_data={shipment_data}
 					/>
 				</>

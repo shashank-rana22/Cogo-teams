@@ -12,7 +12,6 @@ import UploadController from '@cogoport/forms/page-components/Controlled/UploadC
 import DepartureDateSelectController from './DepartureDateSelect/index';
 
 const getElementController = (type = 'text') => {
-	console.log('typeeeeee', type);
 	switch (type) {
 		case 'async-select':
 			return AsyncSelectController;
@@ -34,7 +33,6 @@ const getElementController = (type = 'text') => {
 
 		case 'date_picker':
 		case 'datepicker':
-			console.log('datePicker');
 			return DatepickerController;
 
 		case 'departure_date':

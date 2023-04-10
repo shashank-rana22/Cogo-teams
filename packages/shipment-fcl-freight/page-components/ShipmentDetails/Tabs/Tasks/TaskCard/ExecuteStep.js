@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 
 import Layout from './helpers/Layout';
+import useHandleSubmit from './helpers/useHandleSubmit';
 import useStepExecution from './helpers/useStepExecution';
 import styles from './styles.module.css';
 
@@ -9,6 +10,7 @@ function ExecuteStep({
 	stepConfig = {},
 	onCancel = () => {},
 	refetch = () => {},
+	currentStep = 0,
 	isLastStep = false,
 	primaryService = {},
 	getApisData = {},
@@ -19,8 +21,8 @@ function ExecuteStep({
 		// error,
 		fields,
 		isLoading,
-		// setIsLoading,
-		// onError,
+		setIsLoading,
+		onError,
 	} = useStepExecution({
 		task,
 		stepConfig,
@@ -28,7 +30,19 @@ function ExecuteStep({
 		getApisData,
 		// selectedMail,
 	});
-	const { control, error } = formProps;
+	const { control, error, handleSubmit } = formProps;
+	const { onSubmit } = useHandleSubmit({
+		finalConfig: stepConfig,
+		task,
+		onCancel,
+		refetch,
+		setIsLoading,
+		// serviceIdMapping,
+		currentStep,
+		isLastStep,
+		getApisData,
+		// showElements,
+	});
 
 	console.log('fields', fields, uiConfig, refetch);
 
@@ -52,7 +66,7 @@ function ExecuteStep({
 					CANCEL
 				</Button>
 
-				<Button disabled={isLoading}>
+				<Button disabled={isLoading} onClick={handleSubmit(onSubmit, onError)}>
 					{isLastStep ? 'SUBMIT' : 'NEXT'}
 				</Button>
 			</div>
