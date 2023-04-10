@@ -9,3 +9,7 @@
 	color: #221f20;
 	border-bottom: 2px solid #fff;
 }
+
+.question_card {
+	border-bottom: 1px dotted #4F4F4F;
+}

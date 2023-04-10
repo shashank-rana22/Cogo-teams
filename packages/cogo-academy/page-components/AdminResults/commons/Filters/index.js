@@ -38,7 +38,6 @@ function Filters({
 
 			{activeTab === 'appeared' ? (
 				<div className={styles.filters}>
-
 					<Select
 						prefix={(<IcMFilter />)}
 						value={filter}

@@ -1,4 +1,5 @@
 import { Pagination, Table, TabPanel, Tabs, Modal, Button } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
@@ -11,6 +12,8 @@ import styles from './styles.module.css';
 import getTableColumns from './TableColumns';
 
 function StudentsComponent({ test_id }) {
+	const router = useRouter();
+
 	const [showModal, setShowModal] = useState(false);
 
 	const {
@@ -47,6 +50,7 @@ function StudentsComponent({ test_id }) {
 		setShowModal,
 		handleDelete,
 		setUserId,
+		router,
 	});
 
 	useEffect(() => {

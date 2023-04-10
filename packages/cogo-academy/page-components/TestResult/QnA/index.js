@@ -1,20 +1,11 @@
 import { Placeholder } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 
 import CaseStudy from './CaseStudy';
 import QnAItem from './QnAItem';
 import styles from './styles.module.css';
 
-function QnA({ user_name = '' }) {
-	const {
-		query: { test_id },
-		user: { id: user_id },
-	} = useSelector(({ general, profile }) => ({
-		query : general.query,
-		user  : profile.user,
-	}));
-
+function QnA({ user_name = '', test_id, user_id }) {
 	const [{ data, loading }] = useRequest({
 		method : 'GET',
 		url    : '/get_questions_analysis',
