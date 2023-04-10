@@ -119,6 +119,7 @@
 }
 
 .styled_div {
+	position: relative;
 	height: 100%;
 }
 
@@ -251,4 +252,10 @@
 
 .refresh_icon {
 	cursor: pointer;
+}
+
+.other_channel_ids {
+	position: absolute;
+	top: 30%;
+	right: 3px;
 }
