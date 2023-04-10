@@ -84,11 +84,12 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 
 			extraDocumentUploaded = (extraDocumentUploaded || []).map((child) => ({
 				...child,
-				task       : `upload_${child.document_type}`,
-				label      : `Upload ${startCase(child.document_type)}`,
+				task       : `upload_${child?.document_type}`,
+				label      : `Upload ${startCase(child?.document_type)}`,
 				extra      : true,
 				trade_type : primary_service?.trade_type,
 			}));
+
 			const restList = [];
 			const pendingList = [];
 			const uploadedList = [];

@@ -4,7 +4,7 @@ import React from 'react';
 import Content from './Content';
 
 const Card = ({
-	data,
+	taskList,
 	completedDocs,
 	emailDocs,
 	shipment_data,
@@ -20,28 +20,24 @@ const Card = ({
 		}
 	};
 
-	return (data || []).map((item, idx) => {
+	return (taskList || []).map((item, idx) => {
 		const docType =	item?.document_type || item?.task.split('upload_').slice(-1)[0];
 
-		let allExtraItem =	(completedDocs || []).filter((doc) => doc.document_type === docType)
+		const allUploadedDocs =	(completedDocs || []).filter((doc) => doc.document_type === docType)
 			|| emailDocs.filter((doc) => doc?.entity_type === docType);
 
-		if (allExtraItem.length === 0) {
-			allExtraItem = [{}];
-		}
-
-		return allExtraItem.map((extraItem) => {
-			const isChecked = extraItem?.document_type === docType;
-			const receivedViaEmail = !isChecked && extraItem?.entity_type === docType;
-			const showUploadButton = item?.pendingItem ? 'Upload' : '';
+		return (allUploadedDocs || []).map((uploadedItem) => {
+			const isChecked = uploadedItem?.document_type === docType;
+			const receivedViaEmail = !isChecked && uploadedItem?.entity_type === docType;
+			const showUploadText = item?.pendingItem ? 'Upload' : '';
 
 			return (
 				<Content
-					extraItem={extraItem}
+					uploadedItem={uploadedItem}
 					receivedViaEmail={receivedViaEmail}
-					showUploadButton={showUploadButton}
+					showUploadText={showUploadText}
 					idx={idx}
-					data={data}
+					taskList={taskList}
 					isChecked={isChecked}
 					shipment_data={shipment_data}
 					item={item}

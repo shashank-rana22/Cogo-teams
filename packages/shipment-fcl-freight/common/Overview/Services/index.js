@@ -39,7 +39,6 @@ function Services() {
 								shipmentData={shipment_data}
 								refetchServices={refetchServices}
 							/>
-
 						))}
 					</div>
 
@@ -85,11 +84,10 @@ function Services() {
 								cancelUpsellDestinationFor={cancelUpsellDestinationFor}
 								cancelUpsellOriginFor={cancelUpsellOriginFor}
 							/>
-
 						)))}
 					</div>
 				) : null
-}
+			}
 
 			</div>
 		)

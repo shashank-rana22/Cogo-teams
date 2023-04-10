@@ -63,9 +63,11 @@ function ShipmentHeader() {
 				>
 					<div className={styles.business_name}>{importer_exporter?.business_name}</div>
 				</Tooltip>
+
 				<div className={styles.po_number}>
 					{handlePoNo()}
 				</div>
+
 			</div>
 			<div className={styles.port_details}>
 				<PortDetails data={shipment_data} primary_service={primary_service} />

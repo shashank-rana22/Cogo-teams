@@ -105,9 +105,6 @@ function Kam() {
 						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
 							{/* <TimelineAndTask /> */}
 						</TabPanel>
-						<TabPanel name="sales_live_invoice" title="Sales Live Invoice">
-							{/* <SalesInvoice /> */}
-						</TabPanel>
 						<TabPanel name="documents" title="Documents">
 							<Documents />
 						</TabPanel>

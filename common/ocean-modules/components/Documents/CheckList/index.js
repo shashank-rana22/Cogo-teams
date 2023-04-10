@@ -2,10 +2,11 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import React, { useContext } from 'react';
 
 import Card from './Card';
+import DocumentActions from './DocumentActions';
 import styles from './styles.module.css';
 
 function CheckList({
-	data,
+	taskList,
 	emailDocs,
 	completedDocs,
 
@@ -15,12 +16,14 @@ function CheckList({
 	return (
 		<div className={styles.wrapper}>
 			<Card
-				data={data}
+				taskList={taskList}
 				completedDocs={completedDocs}
 				emailDocs={emailDocs}
 				shipment_data={shipment_data}
 				primary_service={primary_service}
 			/>
+
+			<DocumentActions />
 		</div>
 	);
 }

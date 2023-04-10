@@ -49,7 +49,7 @@ function Documents() {
 
 				{!activeToggle ? (
 					<CheckList
-						data={taskList}
+						taskList={taskList}
 						emailDocs={emailList}
 						completedDocs={completedDocs?.list}
 					/>
