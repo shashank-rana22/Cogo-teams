@@ -115,7 +115,11 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
-
+		{
+			api          : 'get_faq_feedback',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
 	],
 	faq: [
 		{
