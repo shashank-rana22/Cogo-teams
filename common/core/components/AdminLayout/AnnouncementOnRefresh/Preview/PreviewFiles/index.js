@@ -1,16 +1,8 @@
-import { Button } from '@cogoport/components';
 import React from 'react';
 
-// import openDocument from '../../../../../../commons/OpenDocument';
+import FullView from '../FullView';
 
 import styles from './styles.module.css';
-
-const truncateString = (str, num) => {
-	if (str.length > num) {
-		return `${str.substring(0, num)}/.../${str.substring(str.length - num)}`;
-	}
-	return str;
-};
 
 function PreviewFiles({ files = [] }) {
 	return (
@@ -21,16 +13,19 @@ function PreviewFiles({ files = [] }) {
 
 					<div className={styles.files}>
 						{files.map((file) => (
-							<Button
-								key={file}
-								size="md"
-								themeType="linkUi"
-								// onClick={() => openDocument(file)}
-							>
-								{truncateString(file, 30)}
-
-							</Button>
-
+							<div key={file} style={{ display: 'flex' }}>
+								<div className={styles.document} key={file}>
+									<object
+										data={file}
+										width="100%"
+										height="100%"
+										style={{ border: '1px solid #bdbdbd' }}
+									>
+										<a href={file}>Document</a>
+									</object>
+									<FullView url={file} />
+								</div>
+							</div>
 						))}
 					</div>
 

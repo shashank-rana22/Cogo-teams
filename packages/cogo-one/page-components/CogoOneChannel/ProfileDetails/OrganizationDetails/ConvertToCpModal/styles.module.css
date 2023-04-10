@@ -1,0 +1,18 @@
+.container {
+	padding: 5px;
+}
+
+.footer_buttons {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding-top: 23px;
+}
+
+.select_label {
+	padding-top: 10px;
+}
+
+.select_controller {
+	margin: 17px 0;
+}
