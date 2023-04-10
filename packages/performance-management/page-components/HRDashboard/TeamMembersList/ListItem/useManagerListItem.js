@@ -27,8 +27,7 @@ const useManagerListItem = ({ item, searchValue = '', pageParams = {} }) => {
 
 	const setPage = (p) => { setParams({ ...params, Page: p }); };
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => setParams({ ...params, Q: searchValue || undefined, Page: 1 }), [searchValue]);
+	useEffect(() => setParams((pv) => ({ ...pv, Q: searchValue || undefined, Page: 1 })), [searchValue]);
 
 	return { data, loading, setParams, params, setPage };
 };

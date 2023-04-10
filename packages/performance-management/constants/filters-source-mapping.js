@@ -29,6 +29,15 @@ const filtersSourceMapping = {
 			{ name: 'Q' },
 		],
 	},
+	manager_feedback: {
+		left: [
+			{ name: 'Department' },
+			{ name: 'Designation' },
+		],
+		right: [
+			{ name: 'Q', placeholder: 'Search User...' },
+		],
+	},
 	hr_pip_dashboard: {
 		left: [
 			{ name: 'Department' },

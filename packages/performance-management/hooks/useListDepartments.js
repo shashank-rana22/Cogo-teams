@@ -17,9 +17,12 @@ const useListDepartments = () => {
 	};
 
 	useEffect(() => {
-		getListDepartments();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+		try {
+			trigger();
+		} catch (e) {
+			Toast.error(e.response?.data.error?.toString());
+		}
+	}, [trigger]);
 
 	return { data, loading, getListDepartments };
 };

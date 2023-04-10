@@ -17,9 +17,8 @@ const useNotifyManagers = ({ setModal = () => {} }) => {
 		try {
 			await trigger({
 				data: {
-					SendToAll : sendToAll,
-					Year      : feedbackYear,
-					Month     : feedbackMonth,
+					Year  : feedbackYear,
+					Month : feedbackMonth,
 				},
 			});
 			const { manager_count } = data;

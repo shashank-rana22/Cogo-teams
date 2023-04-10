@@ -32,7 +32,7 @@ function AddQuestions({
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const {
-		data = {}, loading = false, params, setParams, trigger: refetchQuestions = () => {},
+		data = {}, loading = false, params, setParams, refetchQuestions = () => {},
 		setPage,
 	} = useListFeedbackQuestions({
 		searchValue: query,
@@ -52,29 +52,31 @@ function AddQuestions({
 
 	useEffect(() => {
 		if (!isEmpty(data)) {
-			setQuestionActionList({
-				...questionActionList,
+			setQuestionActionList((pv) => ({
+				...pv,
 				allList: questions,
 
-				checked: isEmpty(questionActionList.checked) ? checkedQuestions : questionActionList.checked,
-			});
+				checked: isEmpty(pv.checked) ? checkedQuestions : pv.checked,
+			}));
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data]);
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => debounceQuery(searchValue), [searchValue]);
+	useEffect(() => debounceQuery(searchValue), [debounceQuery, searchValue]);
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => setParams({ ...params, Tags: (tags || []).join(',') || undefined, Page: 1 }), [tags]);
+	useEffect(() => setParams((pv) => ({
+		...pv,
+		Tags: (
+			tags || []).join(',') || undefined,
+		Page: 1,
+	})), [setParams, tags]);
 
 	useEffect(() => {
 		if (refetchList) {
-			refetchQuestions({ params: { ...params, Page: 1 } });
+			refetchQuestions({ Page: 1 });
 		}
 		setRefetchList(false);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [refetchList]);
+	}, [refetchList, refetchQuestions]);
 
 	const showLoading = () => (
 		<div className={styles.questions}>
@@ -93,8 +95,7 @@ function AddQuestions({
 
 	useEffect(() => {
 		setFormsParams((pv) => ({ ...pv, bulkDesignations }));
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [bulkDesignations]);
+	}, [bulkDesignations, setFormsParams]);
 
 	return (
 		<>

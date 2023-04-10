@@ -70,8 +70,12 @@ function FeedbackForms() {
 		router.push('/performance-management/hr-dashboard');
 	};
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => { if (refetchedLists) { getListDepartments(); } setRefetchedLists(false); }, [refetchedLists]);
+	useEffect(() => {
+		if (refetchedLists) {
+			getListDepartments();
+		}
+		setRefetchedLists(false);
+	}, [getListDepartments, refetchedLists, setRefetchedLists]);
 
 	return (
 		<div className={styles.container}>

@@ -54,8 +54,7 @@ function BulkDesignation({
 		}
 	};
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => debounceQuery(searchValue), [searchValue]);
+	useEffect(() => debounceQuery(searchValue), [debounceQuery, searchValue]);
 
 	return (
 		<div className={styles.bulk_modal}>

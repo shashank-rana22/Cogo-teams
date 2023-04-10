@@ -34,10 +34,9 @@ function CreateFeedbackForm({
 
 	useEffect(() => {
 		const { checkList = [], stage = '' } = fetchLocalCheckList(department, designation);
-		setQuestionActionList({ ...questionActionList, checked: checkList });
+		setQuestionActionList((pv) => ({ ...pv, checked: checkList }));
 		setFormStage(stage || 'add_questions');
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [designation]);
+	}, [department, designation, setFormStage]);
 
 	const renderFormStage = () => {
 		if (formStage === 'add_questions') {

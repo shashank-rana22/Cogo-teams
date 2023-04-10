@@ -35,12 +35,11 @@ const useListReportees = ({
 	const setPage = (p) => { setParams({ ...params, Page: p }); };
 
 	useEffect(() => {
-		setParams({
-			...params,
+		setParams((pv) => ({
+			...pv,
 			Q    : searchValue || undefined,
 			Page : 1,
-		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		}));
 	}, [searchValue]);
 
 	return {
