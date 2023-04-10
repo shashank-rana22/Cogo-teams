@@ -1,9 +1,8 @@
-import { Toast } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 function useGetShipment({ additional_methods }) {
 	const router = useRouter();
@@ -24,7 +23,7 @@ function useGetShipment({ additional_methods }) {
 					},
 				});
 			} catch (err) {
-				Toast.error(getApiErrorString(err));
+				toastApiError(err);
 			}
 		})();
 	}, [trigger, shipment_id, additional_methods]);

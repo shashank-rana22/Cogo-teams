@@ -14,7 +14,7 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 
 	const { id, shipment_type } = shipment_data;
 
-	const { data: taskConfigs } = useGetProcess({
+	const { data: taskConfigs, loading : taskConfigLoading } = useGetProcess({
 		defaultParams: {
 			status: 'active',
 		},
@@ -22,7 +22,7 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 	});
 
 	const {
-		loading,
+		loading : documentsLoading,
 		list : uploadedShipmentDocuments,
 	} = useGetListDocuments({
 		filters,
@@ -37,7 +37,7 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 		shipment_type,
 	});
 
-	const { data : pendingTasks } = useGetPendingTasks({
+	const { data : pendingTasks, loading : tasksLoading } = useGetPendingTasks({
 		defaultFilters: {
 			task_type   : 'upload_document',
 			status      : 'pending',
@@ -126,9 +126,9 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 		filters,
 		setFilters,
 		taskList,
-		completedDocs: uploadedShipmentDocuments,
+		completedDocs : uploadedShipmentDocuments,
 		docTypes,
-		loading,
+		loading       : tasksLoading || documentsLoading || taskConfigLoading,
 	};
 };
 

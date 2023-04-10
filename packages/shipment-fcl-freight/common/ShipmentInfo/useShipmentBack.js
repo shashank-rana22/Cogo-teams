@@ -44,9 +44,7 @@ export default function useShipmentBack() {
 		} else if (version === 'v2') {
 			router.push(navToRedirect?.href, navToRedirect?.as);
 		} else {
-			let newUrl = window.location.href.split('/booking')[0];
-			newUrl = newUrl.replace('v2/en-IN/', '');
-			newUrl += navToRedirect.href;
+			const newUrl = `${window.location.origin}/${router?.query?.partner_id}/${navToRedirect.href}`;
 
 			window.location.href = newUrl;
 		}
