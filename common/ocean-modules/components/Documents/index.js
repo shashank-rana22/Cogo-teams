@@ -6,6 +6,7 @@ import useGetShipmentMails from '../../hooks/useListRpaMails';
 
 import CheckList from './CheckList';
 import HeaderComponent from './Header';
+import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 import Wallet from './Wallet';
 
@@ -32,30 +33,30 @@ function Documents() {
 		payload: emailPayload,
 	});
 
-	return (
-		<div className={styles.main_container}>
-			<HeaderComponent
-				activeToggle={activeToggle}
-				setActiveToggle={setActiveToggle}
-				shipment_data={shipment_data}
-				data={completedDocs?.organizations}
-				filters={filters}
-				setFilters={setFilters}
-				activeWallet={activeWallet}
-				setActiveWallet={setActiveWallet}
-			/>
-
-			{!activeToggle ? (
-				<CheckList
-					data={taskList}
-					loading={loading}
-					emailDocs={emailList}
-					completedDocs={completedDocs?.list}
+	return !loading
+		? (
+			<div className={styles.main_container}>
+				<HeaderComponent
+					activeToggle={activeToggle}
+					setActiveToggle={setActiveToggle}
+					shipment_data={shipment_data}
+					data={completedDocs?.organizations}
+					filters={filters}
+					setFilters={setFilters}
+					activeWallet={activeWallet}
+					setActiveWallet={setActiveWallet}
 				/>
-			) : <Wallet activeWallet={activeWallet} />}
 
-		</div>
-	);
+				{!activeToggle ? (
+					<CheckList
+						data={taskList}
+						emailDocs={emailList}
+						completedDocs={completedDocs?.list}
+					/>
+				) : <Wallet activeWallet={activeWallet} />}
+
+			</div>
+		) : <LoadingState />;
 }
 
 export default Documents;
