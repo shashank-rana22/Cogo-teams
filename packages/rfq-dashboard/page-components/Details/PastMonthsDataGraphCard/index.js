@@ -33,7 +33,7 @@ function GraphDataCard() {
 					height={120}
 					data={graphPastMonthData}
 					colors={['#FFEBAD']}
-					margin={{ top: 15, right: 20, bottom: 30, left: 45 }}
+					margin={{ top: 15, right: 20, bottom: 35, left: 45 }}
 					xScale={{ type: 'point' }}
 					yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
 					yFormat=" >-.2f"

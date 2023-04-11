@@ -30,3 +30,13 @@
 .utilization {
 	color: #221f20;
 }
+
+.individual_section {
+	display: flex;
+	align-items: center;
+}
+
+.individual_section .revenyue_profitability_utilization_value {
+	padding-left: 3px;
+	font-size: 16px;
+}

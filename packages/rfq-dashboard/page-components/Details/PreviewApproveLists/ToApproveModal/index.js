@@ -1,0 +1,65 @@
+import { Modal, Button } from '@cogoport/components';
+
+import ServiceStats from '../../../../common/ServiceStats';
+import { AvgPromisedConAndContract } from '../../../../configurations/service-stats-data';
+import PortsCard from '../PortsCard';
+
+// import { PortsOriginDestinationDetailsData } from '../../../../configurations/details-ports-origin-destination';
+
+import styles from './styles.module.css';
+
+function ToApproveModal({ show, setShow = () => {}, data = [], selected, changeSelection = () => {} }) {
+	return (
+		<Modal
+			size="xl"
+			show={show}
+			onClose={() => setShow(false)}
+			className={styles.modal_container}
+		>
+			<Modal.Header
+				// className={styles.modal_header}
+				title={(
+					<div className={styles.modal_header}>
+						<h2>Preview</h2>
+						<ServiceStats data={AvgPromisedConAndContract} type="preview-stats" />
+					</div>
+				)}
+			/>
+			<Modal.Body className={styles.modal_body}>
+				<span className={styles.port_numbers}>8 Port Pairs</span>
+				<div className={styles.ports_card}>
+					{
+						(data || []).map((item) => (
+							<div>
+								<PortsCard
+									{...item}
+									data={item}
+									selected={selected}
+									changeSelection={changeSelection}
+								/>
+							</div>
+						))
+					}
+				</div>
+			</Modal.Body>
+
+			<Modal.Footer>
+				<div className={styles.buttons_container}>
+					<Button
+						size="md"
+						themeType="tertiary"
+						onClick={() => setShow(false)}
+
+					>
+						Cancel
+					</Button>
+					<Button size="md" themeType="accent">
+						Approve
+					</Button>
+				</div>
+			</Modal.Footer>
+		</Modal>
+
+	);
+}
+export default ToApproveModal;

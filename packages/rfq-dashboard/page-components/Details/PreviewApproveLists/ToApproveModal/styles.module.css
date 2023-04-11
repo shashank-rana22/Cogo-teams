@@ -1,0 +1,26 @@
+.modal_container {
+	background-color: #fff;
+}
+
+.port_numbers {
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.buttons_container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.modal_header {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	margin-right: 8px;
+}
+
+.modal_body {
+	display: flex;
+	flex-direction: column;
+}
