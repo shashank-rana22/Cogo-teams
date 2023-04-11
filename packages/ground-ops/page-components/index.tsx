@@ -28,8 +28,8 @@ function GroundOps() {
 					</div>
 				</>
 			)}
-			{(generate || viewDoc) && item.blCategory === 'mawb'
-			&& (
+
+			{(generate || viewDoc) && (
 				<GenerateMAWB
 					viewDoc={viewDoc}
 					setViewDoc={setViewDoc}

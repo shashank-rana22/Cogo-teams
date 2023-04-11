@@ -6,6 +6,7 @@ const functionSubFunctionMapping = {
 		{ label: 'CP Sales', value: 'cp_sales' },
 		{ label: 'Acquisition', value: 'acquisition' },
 		{ label: 'CP Portfolio', value: 'cp_portfolio' },
+		{ label: 'Customer Operations', value: 'customer_operations' },
 	],
 	supply: [
 		{ label: 'Shipping Line', value: 'shipping_line' },
@@ -30,6 +31,9 @@ const functionSubFunctionMapping = {
 		{ label: 'HR Admin', value: 'hr_admin' },
 		{ label: 'HRBP', value: 'hrbp' },
 		{ label: 'Talent Acquisition', value: 'talent_acquisition' },
+	],
+	external: [
+		{ label: 'Enrichment', value: 'enrichment' },
 	],
 };
 

@@ -52,6 +52,7 @@ const useCreateQuestion = ({
 		setAllKeysSaved,
 		reset,
 		listSetQuestions,
+		editDetails,
 	});
 
 	const {
@@ -74,7 +75,7 @@ const useCreateQuestion = ({
 				testQuestionId : editDetailsId,
 			});
 		} else {
-			createTestQuestion({ values });
+			createTestQuestion({ values, editDetails });
 		}
 	};
 
@@ -137,7 +138,6 @@ const useCreateQuestion = ({
 
 				setValue(`${childKey}.question_type`, indQuestionType);
 				setValue(`${childKey}.question_text`, indQuestionText);
-				setValue(`${childKey}.audience_ids`, []);
 				setValue(`${childKey}.explanation`, indExplanation?.[0]);
 
 				indTestQuestionAnswers.forEach((answer, answerIndex) => {

@@ -1,16 +1,17 @@
 interface StatsDataInterface {
 	INITIATED?:string
 	FINANCE_ACCEPTED?:string
-	ON_HOLD?:string
+	ON_HOLD?: string
+	LOCKED?: string
 }
 function filtersData(statsData:StatsDataInterface) {
-	const { INITIATED = '', FINANCE_ACCEPTED = '', ON_HOLD = '' } = statsData || {};
+	const { LOCKED = '', FINANCE_ACCEPTED = '', ON_HOLD = '' } = statsData || {};
 
 	return [
 		{
-			label : 'Initiated',
-			value : 'INITIATED',
-			badge : INITIATED || '0',
+			label : 'Locked',
+			value : 'LOCKED',
+			badge : LOCKED || '0',
 		},
 		{
 			label : 'On Hold',

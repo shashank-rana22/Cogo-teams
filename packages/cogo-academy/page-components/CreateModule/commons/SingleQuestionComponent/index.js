@@ -105,17 +105,17 @@ function SingleQuestionComponent({
 						Delete
 					</Button>
 
-					{isNewQuestion ? (
-						<Button
-							style={{ marginLeft: '12px' }}
-							loading={loading}
-							onClick={() => handleUpdateCaseStudyQuestion()}
-							size="sm"
-							type="button"
-						>
-							{field?.isNew ? 'Save' : 'Edit'}
-						</Button>
-					) : null}
+					{/* {isNewQuestion ? ( */}
+					<Button
+						style={{ marginLeft: '12px' }}
+						loading={loading}
+						onClick={() => handleUpdateCaseStudyQuestion()}
+						size="sm"
+						type="button"
+					>
+						{field?.isNew ? 'Save' : 'Edit'}
+					</Button>
+					{/* ) : null} */}
 				</div>
 			) : null}
 		</div>

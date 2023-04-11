@@ -22,4 +22,8 @@
 	background: #fdfbf6;
 	border-radius: 6px;
 	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+
+	&.active {
+		border: 3px solid #000;
+	}
 }

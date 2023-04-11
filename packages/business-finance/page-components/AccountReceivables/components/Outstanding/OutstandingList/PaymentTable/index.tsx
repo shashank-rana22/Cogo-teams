@@ -2,7 +2,6 @@ import { Pagination, Input, MultiSelect } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import React from 'react';
 
-import { GenericObject } from '../../../../commons/Interfaces';
 import StyledTable from '../../../../commons/styledTable';
 import PaymentList from '../../../../configs/Payment_Table';
 import { UTILIZATION_STATUS } from '../../../../constants';
@@ -12,12 +11,10 @@ import styles from './styles.module.css';
 
 interface Props {
 	organizationId: string,
-	outStandingFilters?: GenericObject,
+	entityCode?: string
 }
 
-function PaymentTable({ organizationId,	outStandingFilters }: Props) {
-	const { entityCode = '' } = outStandingFilters || {};
-
+function PaymentTable({ organizationId,	entityCode }: Props) {
 	const {
 		paymentList,
 		paymentLoading,

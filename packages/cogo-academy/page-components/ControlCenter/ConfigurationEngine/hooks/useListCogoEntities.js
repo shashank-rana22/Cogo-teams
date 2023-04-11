@@ -1,31 +1,24 @@
 import { useRequest } from '@cogoport/request';
+import { useMemo } from 'react';
 
 const useListCogoEntity = () => {
-	const [{ data, loading }, trigger] = useRequest({
+	const params = useMemo(() => ({
+		filters: {
+			status: 'active',
+		},
+		page_limit : 100,
+		page       : 1,
+	}), []);
+
+	const [{ data, loading }] = useRequest({
 		method : 'get',
 		url    : '/list_cogo_entities',
+		params,
 	}, { manual: false });
-
-	const listCogoEntities = async () => {
-		try {
-			await trigger({
-				params: {
-					filters: {
-						status: 'active',
-					},
-					page_limit : 100,
-					page       : 1,
-				},
-			});
-		} catch (e) {
-			console.log(e, 'e');
-		}
-	};
 
 	return {
 		loading,
 		entity_data: data?.list || [],
-		listCogoEntities,
 	};
 };
 

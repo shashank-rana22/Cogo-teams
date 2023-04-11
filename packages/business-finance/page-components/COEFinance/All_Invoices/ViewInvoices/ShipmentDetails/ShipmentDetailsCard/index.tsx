@@ -51,12 +51,13 @@ function ShipmentDetailsCard({
 		registrationNumber: registrationNumberBuyer = '',
 		taxNumber: taxNumberBuyer = '',
 	} = buyerDetail || {};
-	const { organizationName = '', taxNumber = '' } = sellerDetail || {};
+	const { organizationName = '', taxNumber = '', registrationNumber = '' } = sellerDetail || {};
 	const {
 		bankName = '',
 		accountNumber = '',
 		ifscCode = '',
 	} = sellerBankDetail || {};
+
 	const {
 		billNumber = '',
 		billDate,
@@ -247,7 +248,7 @@ function ShipmentDetailsCard({
 														<div className={styles.margin_bottom}>
 															PAN Number -
 															{' '}
-															<span>{(taxNumber || '').slice(2, 12)}</span>
+															<span>{(registrationNumber || '')}</span>
 														</div>
 													</div>
 
@@ -432,7 +433,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={status !== 'LOCKED'}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -442,7 +443,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={status !== 'LOCKED'}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}
@@ -488,7 +489,7 @@ function ShipmentDetailsCard({
 											<div className={styles.margin_bottom}>
 												PAN Number -
 												{' '}
-												<span>{(taxNumber || '').slice(2, 12)}</span>
+												<span>{(registrationNumber || '')}</span>
 											</div>
 											<div className={styles.margin_bottom}>
 												GST Number -
@@ -538,7 +539,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={status !== 'LOCKED'}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -548,7 +549,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={status !== 'LOCKED'}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}
@@ -636,7 +637,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={status !== 'LOCKED'}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -646,7 +647,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={status !== 'LOCKED'}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}

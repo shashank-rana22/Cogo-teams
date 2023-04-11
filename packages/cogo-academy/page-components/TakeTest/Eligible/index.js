@@ -49,22 +49,22 @@ function Eligible({ currentQuestionId }) {
 	}, [setActiveState, test_user_mapping_state]);
 
 	useEffect(() => {
-		if (localStorage.getItem(`current_question_${test_id}_${user_id}`)) {
+		if (page || (currentQuestionId && currentQuestionId !== 'undefined')) {
 			setActiveState('ongoing');
 
-			const elem = document.getElementById('maincontainer');
+			// const elem = document.getElementById('maincontainer');
 
-			if (elem?.requestFullscreen) {
-				elem?.requestFullscreen();
-			} else if (elem?.webkitRequestFullscreen) { /* Safari */
-				elem?.webkitRequestFullscreen();
-			} else if (elem?.msRequestFullscreen) { /* IE11 */
-				elem?.msRequestFullscreen();
-			}
+			// if (elem?.requestFullscreen) {
+			// 	elem?.requestFullscreen();
+			// } else if (elem?.webkitRequestFullscreen) { /* Safari */
+			// 	elem?.webkitRequestFullscreen();
+			// } else if (elem?.msRequestFullscreen) { /* IE11 */
+			// 	elem?.msRequestFullscreen();
+			// }
 		}
 
 		localStorage.setItem('visibilityChangeCount', 1);
-	}, [test_id, user_id]);
+	}, [currentQuestionId, page, test_id, user_id]);
 
 	const Component = COMPONENT_MAPPING?.[activeState]?.component || Introduction;
 
@@ -89,7 +89,8 @@ function Eligible({ currentQuestionId }) {
 				currentQuestionId={currentQuestionId}
 				loading={loading}
 				testData={data}
-				page={page}
+				page={Number(page)}
+				test_user_mapping_state={test_user_mapping_state}
 			/>
 		</div>
 	);
