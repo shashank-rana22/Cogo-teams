@@ -115,9 +115,9 @@
 
 .explanation {
 	width: 40%;
+	max-height: 200px;
 	padding: 12px;
+	overflow: auto;
 	background: #fff;
 	border-radius: 6px;
-	max-height: 200px;
-	overflow: auto;
 }
