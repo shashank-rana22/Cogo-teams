@@ -12,6 +12,7 @@ import PocSop from '../../../common/PocSop';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Timeline from '../../../common/TimeLine';
+import useGetBuyers from '../../../hooks/useGetBuyers';
 import useGetServices from '../../../hooks/useGetServices';
 import useGetShipment from '../../../hooks/useGetShipment';
 import useGetTimeLine from '../../../hooks/useGetTimeline';
@@ -27,6 +28,10 @@ function Kam() {
 
 	const { get } = useGetShipment({ additional_methods: shipment_additional_methods });
 	const { shipment_data, isGettingShipment } = get;
+
+	const { data } = useGetBuyers({ shipment_id: shipment_data?.id });
+
+	console.log({ data });
 
 	const { servicesGet } = useGetServices({
 		shipment_id        : shipment_data?.id,
