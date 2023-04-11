@@ -22,10 +22,10 @@ const generalIcon = (
 );
 
 function TopicList({
-	faqNotificationApiLoading,
-	fetchFaqNotification,
-	faqNotificationData,
-	refetch,
+	faqNotificationApiLoading = false,
+	fetchFaqNotification = () => {},
+	faqNotificationData = {},
+	refetch = () => {},
 	from = 'cogo_assist',
 }) {
 	const {
