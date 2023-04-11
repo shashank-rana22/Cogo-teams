@@ -82,6 +82,7 @@ const useListBills = (allParams) => {
 			...restFilters,
 			amountTab  : undefined,
 			pageIndex  : currentPage || restFilters?.pageIndex,
+			excludeStatus:'INITIATED',
 			pageSize   : 10,
 		},
 	});
