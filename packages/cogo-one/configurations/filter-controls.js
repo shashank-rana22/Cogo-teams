@@ -128,6 +128,16 @@ const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMe
 			},
 			options: tagOptions,
 		},
+		{
+			label     : 'Shipments',
+			name      : 'shipment_filters',
+			type      : 'checkboxgroup',
+			className : 'channels_field_controller',
+			multiple  : false,
+			options   : [
+				{ label: 'Is likely To Book Shipment', value: 'likely_to_book_Shipment' },
+			],
+		},
 	];
 
 	const newControls = controls.filter((item) => !(HIDE_CONTROLS_MAPPING[isomniChannelAdmin ? 'ADMIN' : 'KAM'])

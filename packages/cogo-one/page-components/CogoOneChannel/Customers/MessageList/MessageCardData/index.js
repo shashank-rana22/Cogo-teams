@@ -33,6 +33,7 @@ function MessageCardData({
 		last_message = '',
 		last_message_document = null,
 		new_message_count = 0,
+		is_likely_to_book_shipment = false,
 	} = getActiveCardDetails(item) || {};
 
 	const lastMessageVar = last_message_document || last_message;
@@ -76,6 +77,7 @@ function MessageCardData({
 						${styles.card_container} 
 						${!autoAssignChats ? styles.card_with_checkbox : ''}
 						${checkActiveCard ? styles.active_card : ''} 
+						${is_likely_to_book_shipment ? styles.likely_to_book_shipment : ''} 
 							`}
 				onClick={() => setActiveMessage(item)}
 			>
