@@ -1,8 +1,7 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 const useListOrganizationInvoicingParties = ({ params }) => {
 	const [{ data, loading }, trigger] = useRequest({
@@ -17,7 +16,7 @@ const useListOrganizationInvoicingParties = ({ params }) => {
 					params,
 				});
 			} catch (err) {
-				Toast.error(getApiErrorString(err));
+				toastApiError(err);
 			}
 		})();
 	}, [trigger, params]);

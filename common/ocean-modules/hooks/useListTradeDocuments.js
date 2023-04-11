@@ -1,8 +1,7 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 const useListTradeDocuments = ({ defaultFilters = {} }) => {
 	const [{ loading, data }, trigger] = useRequest({
@@ -19,7 +18,7 @@ const useListTradeDocuments = ({ defaultFilters = {} }) => {
 		try {
 			await trigger();
 		} catch (err) {
-			Toast.error(getApiErrorString(err));
+			toastApiError(err);
 		}
 	}, [trigger]);
 
