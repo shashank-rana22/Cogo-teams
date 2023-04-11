@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import { Toggle, Placeholder } from '@cogoport/components';
 
 import styles from './styles.module.css';
@@ -20,7 +19,14 @@ function AgentDetail({
 	};
 
 	return (
-		<div className={styles.agent_container} key={agent_id}>
+		<div
+			className={
+				status === 'inactive'
+					? styles.inactive_agent_container
+					: styles.agent_container
+				}
+			key={agent_id}
+		>
 			{loading ? <Placeholder height="30px" width="75%" margin="10px 0px 0px" /> : agent}
 			{loading
 				? <Placeholder height="30px" width="10%" margin="10px 0px 0px" />
@@ -33,6 +39,7 @@ function AgentDetail({
 						value={status}
 						onChange={onToggle}
 						disabled={createLoading}
+						className={styles.toggle}
 					/>
 				)}
 		</div>

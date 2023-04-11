@@ -37,8 +37,8 @@ function AgentModal({
 			onClose={() => setAgentDetails(false)}
 			placement="center"
 		>
-			<Modal.Header title="Agent Details" />
-			<Modal.Body>
+			<Modal.Header title="Agent Status" />
+			<Modal.Body className={styles.modal_body}>
 				<Input
 					size="sm"
 					placeholder="Search here"
@@ -46,8 +46,8 @@ function AgentModal({
 					prefix={<IcMSearchlight />}
 					onChange={setSearch}
 				/>
-				<div className={styles.body}>
-					{modifiedList?.map(({ name = '', status = '', agent_id = '' }) => (
+				<div>
+					{modifiedList.length ? modifiedList?.map(({ name = '', status = '', agent_id = '' }) => (
 						<AgentDetail
 							createLoading={createLoading}
 							updateAgentPreference={updateAgentPreference}
@@ -57,7 +57,7 @@ function AgentModal({
 							agent_id={agent_id}
 						/>
 
-					))}
+					)) : <div className={styles.empty_state}>No data found</div>}
 				</div>
 			</Modal.Body>
 			<Modal.Footer>

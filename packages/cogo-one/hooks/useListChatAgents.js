@@ -16,7 +16,7 @@ function useListChatAgents(search) {
 	const getListChatAgents = useCallback(async () => {
 		try {
 			await trigger({
-				params: { filters: { q: query }, page: pagination },
+				params: { filters: { q: query || undefined }, page: pagination, page_limit: 10 },
 			});
 		} catch (error) {
 			// console.log(error);
@@ -26,6 +26,10 @@ function useListChatAgents(search) {
 	useEffect(() => {
 		debounceQuery(search);
 	}, [debounceQuery, search]);
+
+	useEffect(() => {
+		setPagination(1);
+	}, [query]);
 
 	useEffect(() => {
 		getListChatAgents();

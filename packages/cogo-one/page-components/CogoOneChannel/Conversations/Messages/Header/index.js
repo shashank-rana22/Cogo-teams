@@ -202,7 +202,7 @@ function Header({
 						>
 							<IcMProfile
 								className={cl`${styles.profile_icon} 
-								${updateRoomLoading ? styles.profle_load : ''}`}
+								${updateRoomLoading ? styles.disable_icon : ''}`}
 							/>
 							<IcMRefresh className={cl`${styles.update_icon} 
 								${updateRoomLoading ? styles.disable_icon : ''}`}

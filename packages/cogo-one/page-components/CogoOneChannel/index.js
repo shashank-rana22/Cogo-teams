@@ -244,7 +244,7 @@ function CogoOne() {
 					/>
 				)}
 			</div>
-			{agentDetails && (
+			{isomniChannelAdmin && agentDetails && (
 				<AgentModal
 					agentDetails={agentDetails}
 					setAgentDetails={setAgentDetails}

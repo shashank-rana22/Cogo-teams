@@ -4,3 +4,21 @@
 	justify-content: space-between;
 	border-bottom: 1px solid #dedede;
 }
+
+.inactive_agent_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	color: #a1a1a1;
+	border-bottom: 1px solid #dedede;
+}
+
+.toggle {
+	:global {
+		.ui_toggle_switch {
+			.ui_inner::after {
+				background-color: #d0d0d0;
+			}
+		}
+	}
+}
