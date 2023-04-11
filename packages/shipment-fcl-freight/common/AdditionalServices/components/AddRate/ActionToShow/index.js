@@ -16,8 +16,6 @@ function ActionsToShow({
 }) {
 	const {
 		handleShipperConfirm,
-		handleShipperSideCancel,
-		handleBuyPriceReRequest,
 		requestRateFromTechops,
 	} = updateResponse;
 
@@ -25,7 +23,7 @@ function ActionsToShow({
 		return (
 			<div className={styles.button_container}>
 				<Button
-					// onClick={() => setSecondStep(true)}
+					onClick={() => setSecondStep(true)}
 					disabled={loading}
 					themeType="secondary"
 				>
@@ -39,40 +37,7 @@ function ActionsToShow({
 		);
 	}
 
-	if (
-		status?.status === 'amendment_requested_by_importer_exporter'
-	) {
-		return (
-			<div className={styles.button_container}>
-				<Button
-					onClick={handleShipperSideCancel}
-					disabled={loading}
-					themeType="secondary"
-				>
-					Cancel Service
-				</Button>
-				<Button
-					onClick={handleBuyPriceReRequest}
-					disabled={loading}
-					themeType="primary"
-				>
-					RE-REQUEST BUY PRICE
-				</Button>
-				<Button
-					onClick={() => {
-						handleSubmit(onAddRate)();
-					}}
-					disabled={loading}
-				>
-					RE-ADJUST SELL PRICE
-				</Button>
-			</div>
-		);
-	}
-
-	if (
-		status?.status === 'cancelled_by_supplier'
-	) {
+	if (status?.status === 'cancelled_by_supplier') {
 		return (
 			<div className={styles.button_container}>
 				<Button

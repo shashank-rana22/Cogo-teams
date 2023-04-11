@@ -76,20 +76,6 @@ const actions = ({
 	}
 
 	if (
-		status.status === 'amendment_requested_by_importer_exporter'
-	) {
-		return (
-			<Button
-				themeType="secondary"
-				style={{ marginLeft: 10, height: '24px' }}
-				onClick={() => setItem({ serviceListItem, status })}
-			>
-				REVIEW COMMENTS
-			</Button>
-		);
-	}
-
-	if (
 		(!IP_STATE_CONDITONS.includes(serviceListItem.state)
 			|| !serviceListItem.invoice_preference)
 	) {

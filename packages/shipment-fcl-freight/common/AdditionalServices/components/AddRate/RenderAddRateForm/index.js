@@ -45,6 +45,7 @@ function RenderAddRateForm({
 								placeholder={ctrl.placeholder}
 								rules={ctrl.rules}
 								{...serviceProviderEmbededOptions}
+								disabled={ctrl.disabled}
 							/>
 							{errors[ctrl.name] && <span>{errors[ctrl.name].message}</span>}
 						</div>
@@ -62,7 +63,7 @@ function RenderAddRateForm({
 								size="sm"
 								placeholder={ctrl.placeholder}
 								rules={ctrl.rules}
-								disabled={source === 'task'}
+								disabled={ctrl.disabled}
 							/>
 							{errors[ctrl.name] && <span>{errors[ctrl.name].message}</span>}
 						</div>
@@ -81,7 +82,7 @@ function RenderAddRateForm({
 								options={ctrl.options}
 								placeholder={ctrl.placeholder}
 								rules={ctrl.rules}
-								disabled={source === 'task'}
+								disabled={ctrl.disabled}
 							/>
 							{errors[ctrl.name] && <span>{errors[ctrl.name].message}</span>}
 						</div>

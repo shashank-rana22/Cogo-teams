@@ -38,6 +38,7 @@ function AdditionsService({
 			onCancel={onCancel}
 			refetch={refetch}
 			source="task"
+			task={task}
 		/>
 	);
 }

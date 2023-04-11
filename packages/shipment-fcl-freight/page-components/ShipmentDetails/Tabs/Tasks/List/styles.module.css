@@ -1,20 +1,21 @@
-.container{
-  padding: 16px 12px 14px 12px;
-  & > div{
-      margin-bottom: 22px;
-  }
+.container {
+	padding: 16px 12px 14px;
+
+	& > div {
+		margin-bottom: 22px;
+	}
 }
 
-.see_all_tasks{
-  display: flex;
+.see_all_tasks {
+	display: flex;
 	align-items: center;
-	height: 50px;
-	cursor: pointer;
 	justify-content: space-between;
 	width: 130px;
-	text-decoration: underline;
-	color: red;
+	height: 50px;
+	margin-top: -10px;
 	font-size: 16px;
 	font-weight: 400;
-	margin-top: -10px;
+	color: red;
+	text-decoration: underline;
+	cursor: pointer;
 }

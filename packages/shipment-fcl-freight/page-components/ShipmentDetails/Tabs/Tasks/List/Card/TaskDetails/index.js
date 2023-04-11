@@ -1,7 +1,11 @@
+import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMTaskCompleted, IcMTaskNotCompleted } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useContext } from 'react';
+
+import CargoDetails from '../../../../../../../common/CargoDetails';
 
 import styles from './styles.module.css';
 
@@ -9,6 +13,8 @@ function TaskDetails({
 	task = {},
 	services = [],
 }) {
+	const { primary_service } = useContext(ShipmentDetailContext);
+
 	const requiredServiceArr = [];
 	(task.task_field_ids || []).forEach((id) => {
 		(services || []).forEach((serviceObj) => {
@@ -82,7 +88,7 @@ function TaskDetails({
 			</div>
 
 			<div className={styles.cargo_details}>
-				Cargo details pills
+				<CargoDetails primary_service={primary_service} />
 			</div>
 		</div>
 	);

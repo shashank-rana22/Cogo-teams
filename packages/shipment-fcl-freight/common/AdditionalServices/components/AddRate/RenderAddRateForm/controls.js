@@ -26,6 +26,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			options : currencyOptions,
 			rules   : { required: 'Currency is required' },
 			show    : source === 'task' || source === 'overview',
+
 		},
 		{
 			name        : 'buy_price',
@@ -34,16 +35,19 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			span        : 6,
 			placeholder : 'Enter Buy Price',
 			rules       : { required: 'Buy Price is required' },
-			show        : source !== 'task' || source === 'overview',
+			show        : source !== 'task' || source === 'overview'
+			|| serviceData?.state === 'amendment_requested_by_importer_exporter',
+			disabled: serviceData?.state === 'amendment_requested_by_importer_exporter',
 		},
 		{
-			name    : 'unit',
-			label   : 'Unit',
-			type    : 'select',
-			span    : 6,
-			options : unitOptions,
-			rules   : { required: 'Unit is required' },
-			show    : source === 'task' || source === 'overview',
+			name     : 'unit',
+			label    : 'Unit',
+			type     : 'select',
+			span     : 6,
+			options  : unitOptions,
+			rules    : { required: 'Unit is required' },
+			show     : source === 'task' || source === 'overview',
+			disabled : serviceData?.state === 'amendment_requested_by_importer_exporter',
 		},
 		{
 			name        : 'quantity',
@@ -78,7 +82,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			span        : 8,
 			placeholder : 'Select Service Provider',
 			rules       : { required: 'Service Provider is required' },
-			show        : source !== 'task' || source === 'overview',
+			show        : source !== 'task' && source !== 'overview',
 		},
 	];
 
