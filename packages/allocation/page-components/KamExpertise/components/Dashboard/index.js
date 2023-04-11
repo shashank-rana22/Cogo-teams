@@ -10,42 +10,7 @@ import styles from './styles.module.css';
 function KamExpertise() {
 	const [activeTab, setActiveTab] = useState('this_week');
 
-	const { weekEnd = '', monthEnd = '', startFullQuarter = '', yearEnd = '', currentTime = '' } = getDateParams();
-
-	const TAB_PANEL_MAPPING = {
-		this_week: {
-			name   : 'this_week',
-			title  : 'This Week',
-			params : {
-				start_date : weekEnd,
-				end_date   : currentTime,
-			},
-		},
-		this_month: {
-			name   : 'this_month',
-			title  : 'This Month',
-			params : {
-				start_date : monthEnd,
-				end_date   : currentTime,
-			},
-		},
-		this_quarter: {
-			name   : 'this_quarter',
-			title  : 'This Quarter',
-			params : {
-				start_date : startFullQuarter,
-				end_date   : currentTime,
-			},
-		},
-		this_year: {
-			name   : 'this_year',
-			title  : 'This Year',
-			params : {
-				start_date : yearEnd,
-				end_date   : currentTime,
-			},
-		},
-	};
+	const TAB_PANEL_MAPPING = getDateParams();
 
 	return (
 		<section className={styles.container} id="kam_expertise_container">
