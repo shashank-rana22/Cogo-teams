@@ -3,6 +3,7 @@ import { IcMFcl, IcMPortArrow, IcMArrowRotateDown } from '@cogoport/icons-react'
 import { useState } from 'react';
 
 import ServiceStats from '../../../../common/ServiceStats';
+import { priceBreakupChildData } from '../../../../configurations/price-breakup-card-child-data';
 import { PromisedConAndContract } from '../../../../configurations/service-stats-data';
 
 import CommodityMapping from './CommodityMapping';
@@ -13,6 +14,17 @@ import styles from './styles.module.css';
 
 function PortsCard() {
 	const [showPrice, setShowPrice] = useState(false);
+
+	const prefilledValues = [];
+	priceBreakupChildData?.forEach((item) => {
+		item?.data.forEach((dataItem) => {
+			prefilledValues.push({
+				margin_type           : dataItem.margin_type,
+				margin_value_currency : dataItem.margin_value_currency,
+				margin_value          : dataItem.margin_value,
+			});
+		});
+	});
 
 	return (
 		<div className={styles.main_container}>
@@ -53,7 +65,12 @@ function PortsCard() {
 						<IcMArrowRotateDown />
 					</button>
 				</div>
-				{showPrice && <PriceBreakupCard />}
+				{showPrice && (
+					<PriceBreakupCard
+						priceBreakupChildData={priceBreakupChildData}
+						prefilledValues={prefilledValues}
+					/>
+				)}
 			</div>
 		</div>
 	);

@@ -26,23 +26,23 @@
 }
 
 .service_card_title {
-	width: 40%;
+	width: 35%;
 }
 
 .base_price_card_title {
-	width: 15%;
+	width: 12%;
 }
 
 .margin_type_card_title {
-	width: 15%;
+	width: 16%;
 }
 
 .margin_value_card_title {
-	width: 15%;
+	width: 24%;
 }
 
 .sell_price_card_title {
-	width: 15%;
+	width: 11%;
 }
 
 /* .tags {

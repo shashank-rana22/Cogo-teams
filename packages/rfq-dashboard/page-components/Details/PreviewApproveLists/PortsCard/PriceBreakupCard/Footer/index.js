@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function FooterPriceBreakUpCard() {
+function FooterPriceBreakUpCard({ saveChanges = () => {} }) {
 	const ctrProfitabilityRevenue = [{
 		label : 'Projected Revenue :',
 		value : '$1,80,000',
@@ -30,7 +30,7 @@ function FooterPriceBreakUpCard() {
 					</div>
 				))
 			}
-			<Button size="md" themeType="secondary">Save Changes</Button>
+			<Button size="md" themeType="secondary" onClick={saveChanges}>Save Changes</Button>
 		</div>
 	);
 }
