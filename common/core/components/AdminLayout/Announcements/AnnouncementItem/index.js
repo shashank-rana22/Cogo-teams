@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import React from 'react';
@@ -25,6 +26,36 @@ function AnnouncementItem({
 		setAnnouncementModalData(data);
 	};
 
+	const COUNT_PILL_MAPPING = {
+		video: {
+			count : video_count,
+			text  : 'Video',
+		},
+		image: {
+			count : image_count,
+			text  : 'Image',
+		},
+		pdf: {
+			count : pdf_count,
+			text  : 'Document',
+		},
+	};
+
+	const renderCountPill = (type) => {
+		const { count, text } = COUNT_PILL_MAPPING[type];
+
+		if (count > 0) {
+			return (
+				<div className={styles.pill}>
+					{count}
+					{' '}
+					{count === 1 ? text : `${text}s`}
+				</div>
+			);
+		}
+		return null;
+	};
+
 	return (
 		<div
 			role="presentation"
@@ -50,32 +81,15 @@ function AnnouncementItem({
 						{ANNOUNCEMENT_TYPE_MAPPING[announcement_type]}
 					</div>
 
-					{video_count > 0 ? (
-						<div className={styles.pill}>
-							{`${video_count} ${
-								video_count === 1 ? 'Video' : 'Videos'
-							}`}
-						</div>
-					) : null}
+					{Object.keys(COUNT_PILL_MAPPING).map((key) => (
+						renderCountPill(key)
+					))}
 
-					{image_count > 0 ? (
-						<div className={styles.pill}>
-							{`${image_count} ${
-								image_count === 1 ? 'Image' : 'Images'
-							}`}
-						</div>
-					) : null}
-
-					{pdf_count > 0 ? (
-						<div className={styles.pill}>
-							{`${pdf_count} ${
-								pdf_count === 1 ? 'Document' : 'Documents'
-							}`}
-						</div>
-					) : null}
 				</div>
 
-				<div className={styles.date_tag}>{format(validity_start, 'dd MMM yyyy hh:mm a')}</div>
+				<div className={styles.date_tag}>
+					{format(validity_start, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}
+				</div>
 			</div>
 		</div>
 	);

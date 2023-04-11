@@ -1,8 +1,7 @@
 import React from 'react';
 
+import PreviewContent from './PreviewContent';
 import PreviewFiles from './PreviewFiles';
-import PreviewImages from './PreviewImages';
-import PreviewVideos from './PreviewVideos';
 import styles from './styles.module.css';
 
 function Preview({
@@ -29,11 +28,21 @@ function Preview({
 			</div>
 
 			{(videos || []).length > 0 && (
-				<PreviewVideos videos={videos} fromFloatingWidget={fromFloatingWidget} isMobile={isMobile} />
+				<PreviewContent
+					data={videos}
+					fromFloatingWidget={fromFloatingWidget}
+					isMobile={isMobile}
+					type="videos"
+				/>
 			)}
 
 			{(images || []).length > 0 && (
-				<PreviewImages images={images} fromFloatingWidget={fromFloatingWidget} isMobile={isMobile} />
+				<PreviewContent
+					data={images}
+					fromFloatingWidget={fromFloatingWidget}
+					isMobile={isMobile}
+					type="images"
+				/>
 			)}
 
 			{(files || []).length > 0 && (
