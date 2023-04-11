@@ -26,6 +26,7 @@ function TopicList({
 	fetchFaqNotification,
 	faqNotificationData,
 	refetch,
+	from = 'cogo_assist',
 }) {
 	const {
 		search,
@@ -191,6 +192,7 @@ function TopicList({
 				showNotificationContent={showNotificationContent}
 				fetchFaqNotification={fetchFaqNotification}
 				refetch={refetch}
+				from={from}
 			/>
 
 			{renderQuestionList()}
