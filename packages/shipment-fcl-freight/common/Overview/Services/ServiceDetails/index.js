@@ -10,17 +10,14 @@ import styles from './styles.module.css';
 
 function ServiceDetails({
 	servicesData = [],
-	servicesList = [],
 	shipmentData = {},
-	refetchServices = () => {},
 }) {
 	const {
 		id = '',
 		service_type = '',
 		state = '',
-		supply_agent = {},
+		trade_type = '',
 		payment_term = '',
-		service_provider = {},
 		display_label = '',
 	} = servicesData?.[0] || {};
 
@@ -29,16 +26,11 @@ function ServiceDetails({
 	const addedServiceComponent = (
 		<div className={cl`${styles.container} ${state}`}>
 			<Header
-				service_type={service_type}
 				id={id}
-				serviceData={servicesData}
 				state={state}
+				trade_type={trade_type}
 				heading={display_label}
-				supply_agent={supply_agent}
-				servicesList={servicesList}
-				shipmentData={shipmentData}
-				service_provider={service_provider}
-				refetchServices={refetchServices}
+				service_type={service_type}
 			/>
 
 			<Status state={state} payment_term={payment_term} />

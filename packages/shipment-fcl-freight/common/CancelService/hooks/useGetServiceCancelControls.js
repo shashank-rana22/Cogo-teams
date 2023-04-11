@@ -1,46 +1,27 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
-import { useContext, useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
-import cancelControls from '../../../configurations/cancel-service-controls.json';
-import getCancelExtraControls from '../utils/get-cancel-controls';
-import getCancelReasons from '../utils/get-cancel-reasons';
+import useUpdateShipmentService from '../../../hooks/useUpdateShipmentService';
+import getCancelControls from '../utils/get-cancel-controls';
+import getServiceCancelPayload from '../utils/getServiceCancelPayload';
 
+// isSeller = Shipper ?? Supplier (View)
 export default function useGetServiceCancelControls({
-	isSeller = false, viewAs = '',
-} = {}) {
+	trade_type = '',
+	isSeller = true,
+	closeModal,
+	service_type = '',
+}) {
 	const [selectedReason, setSelectedReason] = useState(null);
-	const { shipment_data = {} } = useContext(ShipmentDetailContext);
-	// const isSupplyAgent =
-	// isConditionMatches([...CC.SUPPLY_AGENT_VIEW, ...CC.GLOBAL_VIEW], 'or') &&
-	// viewAs === 'service_provider' &&
-	// scope === 'partner';
-	const isSupplyAgent = false;
 
-	const type = isSeller ? 'service_supplier' : 'service_shipper';
+	const { servicesList, refetchServices, shipment_data } = useContext(ShipmentDetailContext);
+	const refetchFuncs = () => {
+		closeModal();
+		refetchServices();
+	};
 
-	const cancelReasons = getCancelReasons(type);
-
-	const serviceProviderCancelled = isSupplyAgent && shipment_data.state === 'cancelled';
-
-	let allControls = cancelControls.default;
-	if (serviceProviderCancelled) {
-		allControls = cancelControls.supply_agent;
-	} else if (isSupplyAgent) {
-		allControls = [...cancelControls.default, ...cancelControls.supply_agent];
-	}
-
-	allControls = [
-		...allControls,
-		...getCancelExtraControls({ selectedReason, cancelReasons, serviceProviderCancelled }),
-	];
-
-	allControls.some((control, index) => {
-		if (control.name === 'cancellation_reason') {
-			allControls[index].options = cancelReasons;
-			return true;
-		} return false;
-	});
+	const controls = getCancelControls({ selectedReason, isSeller });
 
 	const { control, watch, formState: { errors }, handleSubmit, setValue } = useForm();
 
@@ -54,7 +35,17 @@ export default function useGetServiceCancelControls({
 		}
 	}, [cancellation_reason, selectedReason, setValue]);
 
-	return {
-		control, handleSubmit, watch, controls: allControls, errors,
+	const {
+		apiTrigger: updateShipmentService, loading,
+	} = useUpdateShipmentService({ refetch: refetchFuncs, successMessage: 'Service Cancelled' });
+
+	const onSubmit = async (formData) => {
+		if (formData) {
+			updateShipmentService(getServiceCancelPayload({
+				controls, servicesList, service_type, trade_type, formData, shipment_data,
+			}));
+		}
 	};
+
+	return { control, handleSubmit, onSubmit, controls, errors, loading };
 }

@@ -1,22 +1,27 @@
 import { Popover } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMOverflowDot } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import { useSelector } from '@cogoport/store';
+import React, { useState, useContext } from 'react';
 
 import CancelService from '../CancelService';
 
-import getCancelServiceFlag from './getCancelServiceFlag';
+import getCanCancelService from './getCanCancelService';
 import styles from './styles.module.css';
 
-function EditCancelService({ state = '' }) {
+function EditCancelService({ state, service_type, trade_type }) {
 	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
+
+	const user_data = useSelector((({ profile }) => profile?.user));
+	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const openModal = (modalKey) => {
 		setShowModal(modalKey);
 		setShowPopover(false);
 	};
 
-	const isServiceCancellable = getCancelServiceFlag({ user_data: { email: 'ajeet@cogoport.com' } });
+	const isServiceCancellable = getCanCancelService({ shipment_data, user_data, state });
 
 	const content = (
 		<>
@@ -56,7 +61,13 @@ function EditCancelService({ state = '' }) {
 
 			{/* {showModal === 'edit' ? <EditParams /> : null} */}
 
-			{showModal === 'cancel' ? <CancelService setShow={setShowModal} /> : null}
+			{showModal === 'cancel' ? (
+				<CancelService
+					setShow={setShowModal}
+					trade_type={trade_type}
+					service_type={service_type}
+				/>
+			) : null}
 		</div>
 	);
 }
