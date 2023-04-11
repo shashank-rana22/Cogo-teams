@@ -14,7 +14,7 @@ function Child(props) {
 		showDeleteButton = true,
 		noDeleteButtonTill = 0,
 		disabled = false,
-		error = '',
+		error = {},
 	} = props;
 
 	return (
