@@ -13,6 +13,10 @@
 		width: 360px;
 	}
 }
+.topiclist_container::-webkit-scrollbar {
+			display: none;
+	
+	}
 
 .faq_icon {
 	position: fixed;

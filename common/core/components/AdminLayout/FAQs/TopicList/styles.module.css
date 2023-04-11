@@ -1,6 +1,8 @@
 .container {
 	width: 100%;
 	height: fit-content;
+	transition: right 0.5s ease-in-out;
+	right:100%
 }
 
 .title {
