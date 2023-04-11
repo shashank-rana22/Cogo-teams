@@ -1,4 +1,5 @@
 import allocations from './config/allocations';
+import athenaDashboard from './config/athena-dashboard';
 import bookingDesk from './config/booking-desk';
 import businessFinance from './config/business-finance';
 import cogoAcademy from './config/cogo-academy';
@@ -39,6 +40,7 @@ const routeConfig = {
 	...shipmentFclFreight,
 	...bookingDesk,
 	...welcome,
+	...athenaDashboard,
 };
 
 export default routeConfig;
