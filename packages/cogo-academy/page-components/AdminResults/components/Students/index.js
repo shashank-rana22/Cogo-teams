@@ -36,7 +36,7 @@ function StudentsComponent({ test_id }) {
 
 	const { userSessionMapping, setUserId } = useUpdateTestUserMapping({ refetch });
 
-	const { stats = [], page_limit = 0, total_count = 0, list } = data || {};
+	const { page_limit = 0, total_count = 0, list } = data || {};
 
 	const handleDelete = () => {
 		userSessionMapping(test_id);
