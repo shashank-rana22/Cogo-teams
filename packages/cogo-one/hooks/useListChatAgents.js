@@ -1,22 +1,31 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
-function useListChatAgents() {
+function useListChatAgents(search) {
 	const [pagination, setPagination] = useState(1);
-	const [{ loading, data: listAgentStatus }, trigger] = useRequest({
-		url    : '/list_chat_agents',
-		method : 'get',
-	}, { manual: true });
+	const { query = '', debounceQuery } = useDebounceQuery();
+	const [{ loading, data: listAgentStatus }, trigger] = useRequest(
+		{
+			url    : '/list_chat_agents',
+			method : 'get',
+		},
+		{ manual: true },
+	);
 
 	const getListChatAgents = useCallback(async () => {
 		try {
 			await trigger({
-				params: { page: pagination, page_limit: 10 },
+				params: { filters: { q: query }, page: pagination },
 			});
 		} catch (error) {
 			// console.log(error);
 		}
-	}, [trigger, pagination]);
+	}, [trigger, pagination, query]);
+
+	useEffect(() => {
+		debounceQuery(search);
+	}, [debounceQuery, search]);
 
 	useEffect(() => {
 		getListChatAgents();

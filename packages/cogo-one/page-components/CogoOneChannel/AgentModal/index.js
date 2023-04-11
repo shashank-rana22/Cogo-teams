@@ -1,6 +1,6 @@
 import { Modal, Input, Pagination } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
 
 import useListChatAgents from '../../../hooks/useListChatAgents';
 import useUpdateAgentPreference from '../../../hooks/useUpdateAgentPreference';
@@ -12,12 +12,13 @@ function AgentModal({
 	agentDetails,
 	setAgentDetails = () => {},
 }) {
+	const [search, setSearch] = useState('');
 	const {
 		getListChatAgents = () => {},
 		loading = false,
 		listAgentStatus = {},
 		setPagination = () => {},
-	} = useListChatAgents();
+	} = useListChatAgents(search);
 
 	const { updateAgentPreference, createLoading = false } = useUpdateAgentPreference({ getListChatAgents });
 
@@ -43,6 +44,7 @@ function AgentModal({
 					placeholder="Search here"
 					className={styles.search}
 					prefix={<IcMSearchlight />}
+					onChange={setSearch}
 				/>
 				<div className={styles.body}>
 					{modifiedList?.map(({ name = '', status = '', agent_id = '' }) => (
