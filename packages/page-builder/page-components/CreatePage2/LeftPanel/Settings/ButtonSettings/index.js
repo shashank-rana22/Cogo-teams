@@ -1,61 +1,108 @@
-function ButtonSettings({ item, onChange }) {
-	const { text, color, backgroundColor, fontSize, borderRadius } = item;
+import React, { useCallback } from 'react';
 
-	const handleTextChange = (e) => {
-		onChange({ ...item, text: e.target.value });
-	};
+function ButtonSettings({ item }) {
+	const handleChange = useCallback((key, value) => {
+		console.log(`Setting ${key} to ${value}`);
+	}, []);
 
-	const handleColorChange = (e) => {
-		onChange({ ...item, color: e.target.value });
-	};
+	const settings = [
+		{ label: 'Text', key: 'text' },
+		{ label: 'Background Color', key: 'backgroundColor', type: 'color' },
+		{ label: 'Text Color', key: 'color', type: 'color' },
+		{
+			label   : 'Border Style',
+			key     : 'borderStyle',
+			type    : 'select',
+			options : ['none', 'solid', 'dashed', 'dotted'],
+		},
+		{
+			label : 'Border Width',
+			key   : 'borderWidth',
+			type  : 'number',
+		},
+		{
+			label : 'Border Color',
+			key   : 'borderColor',
+			type  : 'color',
+		},
+		{
+			label : 'Border Radius',
+			key   : 'borderRadius',
+			type  : 'number',
+		},
+		{
+			label   : 'Font Weight',
+			key     : 'fontWeight',
+			type    : 'select',
+			options : ['normal', 'bold'],
+		},
+		{
+			label : 'Font Size',
+			key   : 'fontSize',
+			type  : 'number',
+		},
+		{
+			label   : 'Text Align',
+			key     : 'textAlign',
+			type    : 'select',
+			options : ['left', 'center', 'right', 'justify'],
+		},
+		{
+			label : 'Padding',
+			key   : 'padding',
+			type  : 'number',
+		},
+		{
+			label : 'Margin',
+			key   : 'margin',
+			type  : 'number',
+		},
+	];
 
-	const handleBackgroundColorChange = (e) => {
-		onChange({ ...item, backgroundColor: e.target.value });
-	};
+	const handleInputChange = useCallback((e, key) => {
+		const { value } = e.target;
+		handleChange(key, value);
+	}, [handleChange]);
 
-	const handleFontSizeChange = (e) => {
-		onChange({ ...item, fontSize: e.target.value });
-	};
-
-	const handleBorderRadiusChange = (e) => {
-		onChange({ ...item, borderRadius: e.target.value });
-	};
+	const handleSelectChange = useCallback((value, key) => {
+		handleChange(key, value);
+	}, [handleChange]);
 
 	return (
-		<div>
-			<div>Button Settings:</div>
-			<label>
-				Text:
-				<input type="text" value={text} onChange={handleTextChange} />
-			</label>
-			<br />
-			<label>
-				Color:
-				<input type="color" value={color} onChange={handleColorChange} />
-			</label>
-			<br />
-			<label>
-				Background Color:
-				<input type="color" value={backgroundColor} onChange={handleBackgroundColorChange} />
-			</label>
-			<br />
-			<label>
-				Font Size:
-				<input type="range" min="12" max="72" value={fontSize} onChange={handleFontSizeChange} />
-				<span>
-					{fontSize}
-					px
-				</span>
-			</label>
-			<br />
-			<label>
-				Border Radius:
-				<input type="range" min="0" max="50" value={borderRadius} onChange={handleBorderRadiusChange} />
-				<span>
-					{borderRadius}
-					px
-				</span>
-			</label>
+		<div className="container">
+			{settings.map(({ label, key, type, options }) => (
+				<div
+					key={key}
+					style={{
+						margin         : '8px 0',
+						padding        : '8px',
+						display        : 'flex',
+						justifyContent : 'space-between',
+					}}
+				>
+					<div style={{ marginRight: '8px' }}>{label}</div>
+					{type === 'select' ? (
+						<select
+							value={item[key]}
+							onChange={(e) => handleSelectChange(e.target.value, key)}
+							style={{ width: '200px' }}
+						>
+							{options.map((option) => (
+								<option key={option} value={option}>
+									{option}
+								</option>
+							))}
+						</select>
+					) : (
+						<input
+							value={item[key]}
+							type={type || 'text'}
+							style={{ width: '200px' }}
+							onChange={(e) => handleInputChange(e, key)}
+						/>
+					)}
+				</div>
+			))}
 		</div>
 	);
 }

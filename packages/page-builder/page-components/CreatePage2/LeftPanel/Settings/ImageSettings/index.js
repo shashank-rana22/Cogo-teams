@@ -1,52 +1,69 @@
-function ImageSettings({ item, onChange }) {
-	const { src, alt, width, height } = item;
+import { Input, Select } from '@cogoport/components';
+import React, { useCallback } from 'react';
 
-	const handleSrcChange = (e) => {
-		onChange({ ...item, src: e.target.value });
-	};
+function ImageSettings({ item }) {
+	const handleChange = useCallback((key, value) => {
+		console.log(`Setting ${key} to ${value}`);
+	}, []);
 
-	const handleAltChange = (e) => {
-		onChange({ ...item, alt: e.target.value });
-	};
+	const settings = [
+		{ label: 'Width', key: 'width', type: 'number' },
+		{ label: 'Height', key: 'height', type: 'number' },
+		{
+			label   : 'Border',
+			key     : 'border',
+			type    : 'select',
+			options : ['none', 'solid', 'dashed', 'dotted'],
+		},
+		{ label: 'Border Width', key: 'borderWidth', type: 'number' },
+		{ label: 'Border Color', key: 'borderColor', type: 'color' },
+	];
 
-	const handleWidthChange = (e) => {
-		onChange({ ...item, width: e.target.value });
-	};
+	const handleInputChange = useCallback(
+		(e, key) => {
+			const { value } = e.target;
+			handleChange(key, value);
+		},
+		[handleChange],
+	);
 
-	const handleHeightChange = (e) => {
-		onChange({ ...item, height: e.target.value });
-	};
+	const handleSelectChange = useCallback(
+		(value, key) => {
+			handleChange(key, value);
+		},
+		[handleChange],
+	);
 
 	return (
-		<div>
-			<div>Image Settings:</div>
-			<label>
-				Source:
-				<input type="text" value={src} onChange={handleSrcChange} />
-			</label>
-			<br />
-			<label>
-				Alt:
-				<input type="text" value={alt} onChange={handleAltChange} />
-			</label>
-			<br />
-			<label>
-				Width:
-				<input type="range" min="50" max="800" value={width} onChange={handleWidthChange} />
-				<span>
-					{width}
-					px
-				</span>
-			</label>
-			<br />
-			<label>
-				Height:
-				<input type="range" min="50" max="800" value={height} onChange={handleHeightChange} />
-				<span>
-					{height}
-					px
-				</span>
-			</label>
+		<div className="container">
+			{settings.map(({ label, key, type, options }) => (
+				<div
+					key={key}
+					style={{
+						margin         : '8px 0',
+						padding        : '8px',
+						display        : 'flex',
+						justifyContent : 'space-between',
+					}}
+				>
+					<div style={{ marginRight: '8px' }}>{label}</div>
+					{type === 'select' ? (
+						<Select
+							value={item[key]}
+							onChange={(value) => handleSelectChange(value, key)}
+							style={{ width: '200px' }}
+							options={options}
+						/>
+					) : (
+						<Input
+							value={item[key]}
+							type={type || 'text'}
+							style={{ width: '200px' }}
+							onChange={(e) => handleInputChange(e, key)}
+						/>
+					)}
+				</div>
+			))}
 		</div>
 	);
 }

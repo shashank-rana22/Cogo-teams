@@ -4,19 +4,19 @@ import styles from './styles.module.css';
 import TextSettings from './TextSettings';
 
 function Settings(props) {
-	const { selectedItem } = props;
+	const { selectedItem, onChange } = props;
 
 	let settingsComponent = null;
 
 	switch (selectedItem?.type) {
 		case 'text':
-			settingsComponent = <TextSettings item={selectedItem} />;
+			settingsComponent = <TextSettings item={selectedItem} onChange={onChange} />;
 			break;
 		case 'button':
-			settingsComponent = <ButtonSettings item={selectedItem} />;
+			settingsComponent = <ButtonSettings item={selectedItem} onChange={onChange} />;
 			break;
 		case 'image':
-			settingsComponent = <ImageSettings item={selectedItem} />;
+			settingsComponent = <ImageSettings item={selectedItem} onChange={onChange} />;
 			break;
 		default:
 			break;
