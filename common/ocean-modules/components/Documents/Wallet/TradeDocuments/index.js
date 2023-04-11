@@ -11,15 +11,21 @@ import Loader from '../Loader';
 
 import styles from './styles.module.css';
 
-function TradeDocuments({ forModal = false, handleSave = () => {}, handleView = () => {} }) {
+function TradeDocuments({
+	forModal = false,
+	handleSave = () => {},
+	handleView = () => {},
+	searchTasksVal,
+	handleDocClick,
+}) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const { id = '', importer_exporter_id = '' } = shipment_data;
+	const { importer_exporter_id = '' } = shipment_data;
 	const { data, getList, loading } = useListTradeDocuments({
 		defaultFilters: {
-			status          : ['accepted'],
+			q               : searchTasksVal || undefined,
+			status          : 'active',
 			organization_id : importer_exporter_id,
-			shipment_id     : id || undefined,
 		},
 	});
 
@@ -57,7 +63,10 @@ function TradeDocuments({ forModal = false, handleSave = () => {}, handleView = 
 			<>
 				{(data?.list || []).map((doc) => (
 					<div
+						role="button"
+						tabIndex={0}
 						className={styles.single_doc}
+						onClick={() => handleDocClick(doc)}
 					>
 
 						<Popover

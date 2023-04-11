@@ -17,7 +17,9 @@ function Content({
 	primary_service,
 	receivedViaEmail,
 	showUploadText,
-	// docType,
+	setShow,
+	// setShowConfirmed,
+	docType,
 }) {
 	const isBlReleased = [
 		'approved',
@@ -102,31 +104,31 @@ function Content({
 										Download
 									</Button>
 								</>
-							) : (
-								<div
-									role="button"
-									tabIndex={0}
-									className="primary md text"
-									// onClick={() => (
-									// 	receivedViaEmail
-									// 		? setShowConfirmed({
-									// 			...item,
-									// 			document_type : docType,
-									// 			document_url  : uploadedItem?.file_url,
-									// 			mail_id       : uploadedItem?.id,
-									// 			type          : 'task',
-									// 		})
-									// 		: setShow({
-									// 			...item,
-									// 			document_type: docType,
-									// 		}))}
-								>
-									{receivedViaEmail ? 'Approve Document' : showUploadText}
-								</div>
-							)}
+							) : null}
 
 					</div>
-				) : null }
+				) : (
+					<Button
+						themeType="link"
+						className="primary md text"
+						onClick={() => (
+							// receivedViaEmail
+							// 	? setShowConfirmed({
+							// 		...item,
+							// 		document_type : docType,
+							// 		document_url  : uploadedItem?.file_url,
+							// 		mail_id       : uploadedItem?.id,
+							// 		type          : 'task',
+							// 	})
+							// 	:
+							setShow({
+								...item,
+								document_type: docType,
+							}))}
+					>
+						{receivedViaEmail ? 'Approve Document' : showUploadText}
+					</Button>
+				) }
 
 			</div>
 

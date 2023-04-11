@@ -1,3 +1,4 @@
+import { Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { React, useState, useContext } from 'react';
 
@@ -8,9 +9,12 @@ import CheckList from './CheckList';
 import HeaderComponent from './Header';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
+import UploadForm from './UploadForm';
 import Wallet from './Wallet';
 
 function Documents() {
+	const [show, setShow] = useState(null);
+	// const [showConfirmed, setShowConfirmed] = useState(false);
 	const [activeToggle, setActiveToggle] = useState(false);
 	const [activeWallet, setActiveWallet] = useState('trade_documents');
 	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
@@ -22,6 +26,7 @@ function Documents() {
 		docTypes,
 		filters,
 		setFilters,
+		refetch,
 	} = useCreateTaskList({ shipment_data, primary_service });
 
 	const emailPayload = {
@@ -52,8 +57,27 @@ function Documents() {
 						taskList={taskList}
 						emailDocs={emailList}
 						completedDocs={completedDocs?.list}
+						setShow={setShow}
+						// setShowConfirmed={setShowConfirmed}
 					/>
 				) : <Wallet activeWallet={activeWallet} />}
+
+				<Modal
+					show={show}
+					size="lg"
+					onClose={() => setShow(null)}
+					onOuterClick={() => {
+						setShow(null);
+					}}
+				>
+					<UploadForm
+						show={show}
+						setShow={setShow}
+						refetch={refetch}
+						activeWallet={activeWallet}
+						setActiveWallet={setActiveWallet}
+					/>
+				</Modal>
 
 			</div>
 		) : <LoadingState />;

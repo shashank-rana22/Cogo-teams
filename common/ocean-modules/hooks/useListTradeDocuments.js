@@ -8,7 +8,8 @@ const useListTradeDocuments = ({ defaultFilters = {} }) => {
 		url    : '/list_trade_documents',
 		method : 'GET',
 		params : {
-			filters: {
+			page_limit : 1000,
+			filters    : {
 				...defaultFilters,
 			},
 		},

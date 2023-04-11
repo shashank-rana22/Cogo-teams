@@ -11,7 +11,13 @@ import Loader from '../Loader';
 
 import styles from './styles.module.css';
 
-function OrganizationDocuments({ forModal = false, handleSave = () => {}, handleView = () => {} }) {
+function OrganizationDocuments({
+	forModal = false,
+	handleSave = () => {},
+	handleView = () => {},
+	searchTasksVal,
+	handleDocClick,
+}) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const { importer_exporter_id = '' } = shipment_data;
@@ -22,11 +28,12 @@ function OrganizationDocuments({ forModal = false, handleSave = () => {}, handle
 		loading,
 	} =	useListOrganizationDocuments({
 		defaultFilters: {
-			status          : ['accepted'],
+			status          : 'active',
 			organization_id : importer_exporter_id,
+			q               : searchTasksVal || undefined,
 		},
 		defaultParams: {
-			page: 1000,
+			page_limit: 1000,
 		},
 	});
 
@@ -59,12 +66,14 @@ function OrganizationDocuments({ forModal = false, handleSave = () => {}, handle
 		if (!loading && data?.list?.length === 0) {
 			return <EmptyState />;
 		}
-
 		return (
 			<>
 				{(data?.list || []).map((doc) => (
 					<div
+						role="button"
+						tabIndex={0}
 						className={styles.single_doc}
+						onClick={() => handleDocClick(doc)}
 					>
 
 						<Popover

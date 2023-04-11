@@ -8,8 +8,7 @@ const useListOrganizationDocuments = ({ defaultFilters = {}, defaultParams = {} 
 		url    : '/list_organization_documents',
 		method : 'GET',
 		params : {
-			page    : 1000,
-			filters : {
+			filters: {
 				...defaultFilters,
 			},
 			...defaultParams,

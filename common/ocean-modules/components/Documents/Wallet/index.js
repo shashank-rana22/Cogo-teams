@@ -5,7 +5,12 @@ import OrganizationDocuments from './OrganisationDocuments';
 import styles from './styles.module.css';
 import TradeDocuments from './TradeDocuments';
 
-function Wallet({ forModal = false, activeWallet = '' }) {
+function Wallet({
+	forModal = false,
+	activeWallet = '',
+	searchTasksVal,
+	handleDocClick,
+}) {
 	const handleView = (e, image_url) => {
 		e.stopPropagation();
 		window.open(image_url, '_blank');
@@ -27,6 +32,9 @@ function Wallet({ forModal = false, activeWallet = '' }) {
 						forModal={forModal}
 						handleView={handleView}
 						handleSave={handleSave}
+						searchTasksVal={searchTasksVal}
+						handleDocClick={handleDocClick}
+
 					/>
 				)
 
@@ -35,6 +43,8 @@ function Wallet({ forModal = false, activeWallet = '' }) {
 						forModal={forModal}
 						handleView={handleView}
 						handleSave={handleSave}
+						searchTasksVal={searchTasksVal}
+						handleDocClick={handleDocClick}
 					/>
 				)
 

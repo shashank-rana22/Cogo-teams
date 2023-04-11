@@ -1,19 +1,30 @@
 import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
+import styles from './styles.module.css';
+
 function Loader({ forModal }) {
 	return (
-		<>
-			<Placeholder
-				width={forModal ? '218px' : '582px'}
-				height={forModal ? '146px' : '180px'}
-			/>
-			<Placeholder
-				width={forModal ? '218px' : '582px'}
-				height={forModal ? '146px' : '180px'}
-			/>
-			{forModal ? <Placeholder width="218px" height="146px" /> : null}
-		</>
+		<div className={styles.container}>
+			<div className={styles.comments_wrap}>
+
+				<Placeholder
+					width={forModal ? '109px' : '291px'}
+					height={forModal ? '73px' : '90px'}
+				/>
+
+				<Placeholder
+					width={forModal ? '109px' : '291px'}
+					height={forModal ? '73px' : '90px'}
+				/>
+
+				{forModal ? (
+
+					<Placeholder width="109px" height="73px" />
+
+				) : null}
+			</div>
+		</div>
 	);
 }
 
