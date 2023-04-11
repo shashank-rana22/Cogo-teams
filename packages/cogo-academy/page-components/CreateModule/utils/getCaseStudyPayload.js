@@ -11,9 +11,14 @@ const getCaseStudyPayload = ({
 	questionSetId,
 	editDetails = {},
 	index: questionIndex = '',
+	editorValue = {},
 }) => {
 	if (editType === 'case_question') {
-		const { question_text, options = [], question_type, explanation } = values || {};
+		const { question_text, options = [], question_type } = values || {};
+
+		if (action === 'delete') {
+			return { id: caseStudyQuestionId, status: 'inactive', answers: [] };
+		}
 
 		const hasError = [];
 
@@ -23,7 +28,7 @@ const getCaseStudyPayload = ({
 			hasError.push(checkError);
 		}
 
-		if (!isEmpty(hasError) && action !== 'delete') {
+		if (!isEmpty(hasError)) {
 			return { hasError };
 		}
 
@@ -48,7 +53,7 @@ const getCaseStudyPayload = ({
 			question_text,
 			question_type,
 			answers,
-			explanation: [explanation],
+			explanation: [editorValue[`case_questions_${questionIndex}_explanation`].toString('html')],
 		};
 	}
 	const {
@@ -59,12 +64,11 @@ const getCaseStudyPayload = ({
 		difficulty_level,
 	} = values || {};
 
-	const questions = case_questions.map((item) => {
+	const questions = case_questions.map((item, caseQuestionIndex) => {
 		const {
 			question_type: indQuestionType,
 			question_text: indQuestionText,
 			options,
-			explanation,
 		} = item || {};
 
 		const answers = options.map((option, index) => {
@@ -82,7 +86,7 @@ const getCaseStudyPayload = ({
 			question_type : indQuestionType,
 			question_text : indQuestionText,
 			answers,
-			explanation   : [explanation],
+			explanation   : [editorValue[`case_questions_${caseQuestionIndex}_explanation`].toString('html')],
 		};
 	});
 

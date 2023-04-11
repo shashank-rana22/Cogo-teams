@@ -34,6 +34,8 @@ function CreateQuestion({
 		handleSubmit = () => {},
 		formState: { errors = {} },
 		register,
+		editorValue,
+		setEditorValue,
 	} = useCreateQuestion({
 		item,
 		setSavedQuestionDetails,
@@ -84,6 +86,8 @@ function CreateQuestion({
 						mode={mode}
 						questionTypeWatch={questionTypeWatch}
 						listSetQuestions={listSetQuestions}
+						editorValue={editorValue}
+						setEditorValue={setEditorValue}
 					/>
 				</div>
 
