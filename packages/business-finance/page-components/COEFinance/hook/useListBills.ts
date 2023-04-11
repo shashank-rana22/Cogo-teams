@@ -75,15 +75,15 @@ const useListBills = (allParams) => {
 		currentPage: DataType,
 	) => listExpenseInvoicesTrigger({
 		params: {
-			jobNumbers : params.jobNumber ? [params?.jobNumber] : undefined,
-			jobSource  : 'LOGISTICS',
-			jobType    : params?.jobType || undefined,
-			q          : q || undefined,
+			jobNumbers    : params.jobNumber ? [params?.jobNumber] : undefined,
+			jobSource     : 'LOGISTICS',
+			jobType       : params?.jobType || undefined,
+			q             : q || undefined,
 			...restFilters,
-			amountTab  : undefined,
-			pageIndex  : currentPage || restFilters?.pageIndex,
-			excludeStatus:'INITIATED',
-			pageSize   : 10,
+			amountTab     : undefined,
+			pageIndex     : currentPage || restFilters?.pageIndex,
+			excludeStatus : 'INITIATED',
+			pageSize      : 10,
 		},
 	});
 
