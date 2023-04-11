@@ -29,11 +29,12 @@ function UploadListModal({ tableModal = '', setTableModal = () => {}, row = {} }
 					</div>
 				)}
 				/>
+				<Modal.Body>
+					<EmptyState height="200px" width="720px" />
+				</Modal.Body>
 
 				<Modal.Footer>
-					<div className={styles.empty}>
-						<EmptyState height="200px" width="720px" />
-					</div>
+
 					<div className={styles.close_button}>
 						<Button themeType="secondary" onClick={onClose}>Close</Button>
 					</div>

@@ -45,7 +45,7 @@ function usePostReUpload({ row = {}, setTableModal = () => {} }) {
 				agent_id,
 				ingestion_request_id : id,
 				file_name            : request_files?.sheet_name,
-				performed_by_id      : user_id,
+				user_id,
 			};
 
 			const payload = Object.entries({ ...pay, file_url: e?.re_upload?.finalUrl })

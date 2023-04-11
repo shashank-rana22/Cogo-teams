@@ -10,7 +10,7 @@ const PARTNER_OPTIONS = [
 const controls = [
 
 	{
-		name        : 'country_id',
+		name        : 'ingestion_country_id',
 		label       : 'Country',
 		type        : 'asyncSelect',
 		params      : { filters: { type: ['country'] } },
@@ -22,7 +22,7 @@ const controls = [
 
 	},
 	{
-		name        : 'partner_id',
+		name        : 'ingestion_partner_id',
 		label       : 'Partner',
 		type        : 'select',
 		placeholder : 'Partner ID',
