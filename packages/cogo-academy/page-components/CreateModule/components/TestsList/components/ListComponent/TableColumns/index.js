@@ -1,6 +1,6 @@
 import { Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
-import { IcMArrowNext, IcMShare } from '@cogoport/icons-react';
+import { IcMShare } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
 
@@ -8,6 +8,7 @@ import SortComponent from '../../SortComponent';
 import copyToClipboard from '../helpers/copyToClipboard';
 
 import { QuestionSetButtons, TestSetButtons } from './ButtonComponent';
+import ShowTime from './ShowTime';
 import styles from './styles.module.css';
 
 export const questionSetColumns = ({ loading, router, setShowModal, setQuestionSetId, sortFilter, setSortFilter }) => [
@@ -234,21 +235,7 @@ export const testSetColumns = ({
 								</Pill>
 							</div>
 						</section>
-						<div className={styles.status_time}>
-							<section className={styles.time}>
-								<div>{format(validity_start, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}</div>
-
-								<div>{format(validity_start, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}</div>
-							</section>
-
-							<div className={styles.middle_div}><IcMArrowNext height={16} width={16} /></div>
-
-							<section className={styles.time}>
-								<div>{format(validity_end, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}</div>
-
-								<div>{format(validity_end, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}</div>
-							</section>
-						</div>
+						<ShowTime validity_end={validity_end} validity_start={validity_start} />
 					</section>
 				);
 			} if (current_status === 'published') {
@@ -264,21 +251,7 @@ export const testSetColumns = ({
 							{' '}
 							{startCase(current_status)}
 						</Pill>
-						<div className={styles.status_time}>
-							<section className={styles.time}>
-								<div>{format(validity_start, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}</div>
-
-								<div>{format(validity_start, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}</div>
-							</section>
-
-							<div className={styles.middle_div}><IcMArrowNext height={16} width={16} /></div>
-
-							<section className={styles.time}>
-								<div>{format(validity_end, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}</div>
-
-								<div>{format(validity_end, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}</div>
-							</section>
-						</div>
+						<ShowTime validity_end={validity_end} validity_start={validity_start} />
 					</section>
 				);
 			}
@@ -294,21 +267,7 @@ export const testSetColumns = ({
 						>
 							{startCase(current_status)}
 						</Pill>
-						<div className={styles.status_time}>
-							<section className={styles.time}>
-								<div>{format(validity_start, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}</div>
-
-								<div>{format(validity_start, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}</div>
-							</section>
-
-							<div className={styles.middle_div}><IcMArrowNext height={16} width={16} /></div>
-
-							<section className={styles.time}>
-								<div>{format(validity_end, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}</div>
-
-								<div>{format(validity_end, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}</div>
-							</section>
-						</div>
+						<ShowTime validity_end={validity_end} validity_start={validity_start} />
 					</section>
 
 				);
@@ -324,22 +283,6 @@ export const testSetColumns = ({
 					>
 						{startCase(current_status)}
 					</Pill>
-
-					<div className={styles.status_time}>
-						<section className={styles.time}>
-							<div>{format(validity_start, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}</div>
-
-							<div>{format(validity_start, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}</div>
-						</section>
-
-						<div className={styles.middle_div}><IcMArrowNext height={16} width={16} /></div>
-
-						<section className={styles.time}>
-							<div>{format(validity_end, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}</div>
-
-							<div>{format(validity_end, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}</div>
-						</section>
-					</div>
 				</section>
 
 			);
