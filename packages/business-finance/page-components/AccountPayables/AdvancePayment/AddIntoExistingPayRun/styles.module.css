@@ -1,0 +1,80 @@
+.bread_crumb{
+    margin-left: -4px;
+}
+.sub_container{
+    display: flex;
+    box-sizing: border-box;
+    background: #FFFFFF;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 16px;
+}
+.text{
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;  
+    color: #000000;
+    width: 22%;
+}
+.info_container{
+    box-sizing: border-box;
+    background: #FDEBE9;
+    border: 1px solid #EE3425;
+    border-radius: 8px;
+    margin-top: 16px;
+    padding: 8px;
+    display: flex;
+    margin-bottom: 16px;
+}
+.info_text{
+    font-weight: 500;
+    font-size: 12px;
+    color: #EE3425;
+    padding-left: 16px;
+}
+.info{
+    display: flex;
+    align-items: center;
+    padding-left: 16px;
+}
+.select_card{
+    display: flex;
+    background: #FFFFFF;
+    border-radius: 8px;
+    margin: 12px 0px 8px 0px;
+    padding: 16px 16px 16px 4px;
+}
+.card{
+    background: #CFEAED;
+    border: 1px solid #88CAD1;
+    border-radius: 4px;
+    margin-left: 20px;
+    padding: 2px 16px 2px 16px;
+}
+.bread_crumb{
+    margin-left: -4px;
+}
+.container{
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 16px;
+}
+.filter{
+    margin-bottom: 16px;
+}
+.link{
+    cursor: pointer;
+}
+.back{
+    display: flex;
+    align-items: center;
+    margin-top: 12px;
+    margin-bottom: -8px;
+}
+.button{
+    display: flex;
+    font-weight: 600;
+    font-size: 18px;
+    margin-top: -8px;
+}

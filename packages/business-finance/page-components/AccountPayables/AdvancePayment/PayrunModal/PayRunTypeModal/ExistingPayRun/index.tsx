@@ -1,4 +1,5 @@
 import { Radio, Modal, Button } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import List from '../../../../../commons/List';
@@ -24,6 +25,10 @@ const list = {
 };
 
 function ExitingPayRun({ exitPayRun, setExitPayRun }) {
+	const {push} =useRouter();
+	const handleClick = () => (
+		push('/business-finance/account-payables/advance-payment/add-into-existing-payrun')
+	);
 	const functions = {
 		renderRadio: (itemData) => {
 			const handleRadioChange = () => {
@@ -65,7 +70,7 @@ function ExitingPayRun({ exitPayRun, setExitPayRun }) {
 				<Modal.Footer>
 					<Button themeType="secondary" onClick={() => { setExitPayRun(false); }}>Cancel</Button>
 					<div className={styles.button}>
-						<Button onClick={() => { setExitPayRun(false); }}>Confirm</Button>
+						<Button onClick={handleClick}>Confirm</Button>
 					</div>
 				</Modal.Footer>
 			</Modal>
