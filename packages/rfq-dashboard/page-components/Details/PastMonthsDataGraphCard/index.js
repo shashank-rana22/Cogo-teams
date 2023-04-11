@@ -45,6 +45,10 @@ function GraphDataCard() {
 						tickPadding    : 20,
 						tickRotation   : 0,
 						legendPosition : 'middle',
+						axisLine       : {
+							stroke      : '#000000',
+							strokeWidth : 1,
+						},
 					}}
 					axisLeft={{
 						orient       : 'left',
@@ -52,6 +56,10 @@ function GraphDataCard() {
 						tickValues   : 0,
 						legend       : 'Volume',
 						legendOffset : -25,
+						axisLine     : {
+							stroke      : '#000000',
+							strokeWidth : 1,
+						},
 					}}
 					pointSize={0}
 				// pointColor={{ theme: 'background' }}
@@ -59,11 +67,26 @@ function GraphDataCard() {
 					pointBorderColor={{ from: 'serieColor' }}
 					pointLabelYOffset={-12}
 					enableArea
-					areaOpacity={0.15}
+					areaOpacity={2}
 					useMesh
 					enableGridX={false}
 					enableGridY={false}
 					enablePoints={false}
+					defs={[{
+						id     : 'gradientC',
+						type   : 'linearGradient',
+						colors : [
+							{ offset: 0, color: '#FFEBAD' },
+							{ offset: 27, color: '#FFEBAD' },
+							{ offset: 100, color: '#FFFFFF45' },
+						],
+					}]}
+					fill={[
+						{ match: '*', id: 'gradientC' },
+					]}
+					animate
+					// colors="linear-gradient(to bottom, #FFEBAD, #FFFFFF45)"
+					colorBy="id"
 				/>
 				<div className={styles.legend_sections}>
 					{(LegendsData || []).map((item) => (
