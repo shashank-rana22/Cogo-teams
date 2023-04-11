@@ -54,8 +54,7 @@ const useGetAnnouncementList = () => {
 	const [{ loading }, trigger] = useRequest({
 		method : 'GET',
 		url    : '/list_announcements',
-		params,
-	}, { manual: false });
+	}, { manual: true });
 
 	const fetchAnnouncements = useCallback(async () => {
 		try {
@@ -97,12 +96,8 @@ const useGetAnnouncementList = () => {
 		} catch (error) {
 			Toast.error(error?.message);
 		}
-	}, [cogo_entity_id, country_id, params.filters.announcement_type, params.filters.q, params.filters.toggle,
-		params.page, roleSubFunction, role_functions, scope, trigger, user_id]);
-
-	useEffect(() => {
-		fetchAnnouncements();
-	}, [fetchAnnouncements]);
+	}, [cogo_entity_id, country_id, params.filters.announcement_type, params.filters.q,
+		params.filters.toggle, params.page, roleSubFunction, role_functions, scope, trigger, user_id]);
 
 	return {
 		fetchAnnouncements,

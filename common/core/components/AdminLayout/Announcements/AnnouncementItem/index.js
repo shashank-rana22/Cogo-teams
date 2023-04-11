@@ -28,7 +28,7 @@ function AnnouncementItem({
 	return (
 		<div
 			role="presentation"
-			className={`${styles.container} ${isSelected && styles.isSelected}`}
+			className={`${styles.container} ${isSelected && styles.is_selected}`}
 			onClick={handleViewMore}
 		>
 			<div className={styles.header}>
