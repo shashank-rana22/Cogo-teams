@@ -3,27 +3,51 @@ export const graphPastMonthData = 	[
 		id   : 'shipment',
 		data : [
 			{
-				x : '7 Aug',
+				x : 'Jan',
 				y : 10,
 			},
 			{
-				x : '12 Aug',
+				x : 'Feb',
 				y : 30,
 			},
 			{
-				x : '24 Aug',
+				x : 'Mar',
 				y : 20,
 			},
 			{
-				x : '7 Sep',
+				x : 'Apr',
 				y : 70,
 			},
 			{
-				x : '12 Sep',
+				x : 'May',
 				y : 40,
 			},
 			{
-				x : '24 Sep',
+				x : 'June',
+				y : 60,
+			},
+			{
+				x : 'July',
+				y : 10,
+			},
+			{
+				x : 'Aug',
+				y : 20,
+			},
+			{
+				x : 'Sep',
+				y : 20,
+			},
+			{
+				x : 'Oct',
+				y : 70,
+			},
+			{
+				x : 'Nov',
+				y : 40,
+			},
+			{
+				x : 'Dec',
 				y : 60,
 			},
 		],

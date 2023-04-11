@@ -1,11 +1,13 @@
 .main_container {
 	display: flex;
 	align-items: flex-start;
+	margin-top: 30px;
 
 	:global {
 		/* stylelint-disable-next-line selector-class-pattern */
 		.ui_checkbox_container {
 			padding: 0 10px 0 0;
+			margin-top: 20px;
 		}
 	}
 }

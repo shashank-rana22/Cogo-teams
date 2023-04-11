@@ -32,31 +32,27 @@ function GraphDataCard() {
 					width={340}
 					height={120}
 					data={graphPastMonthData}
-				// colors={#FFEBAD}
-					margin={{ top: 15, right: 20, bottom: 25, left: 25 }}
+					colors={['#FFEBAD']}
+					margin={{ top: 15, right: 20, bottom: 30, left: 45 }}
 					xScale={{ type: 'point' }}
 					yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
 					yFormat=" >-.2f"
 					axisTop={null}
 					axisRight={null}
-				// axisBottom={{
-				//     orient: 'bottom',
-				//     tickSize: 0,
-				//     tickPadding: 0,
-				//     tickRotation: 0,
-				//     legend: 'transportation',
-				//     legendOffset: 36,
-				//     legendPosition: 'middle'
-				// }}
-				// axisLeft={{
-				//     orient: 'left',
-				//     tickSize: 0,
-				//     tickPadding: 0,
-				//     tickRotation: 0,
-				//     legend: 'Volume',
-				//     legendOffset: -25,
-				//     legendPosition: 'middle'
-				// }}
+					axisBottom={{
+						orient         : 'bottom',
+						tickSize       : 0,
+						tickPadding    : 20,
+						tickRotation   : 0,
+						legendPosition : 'middle',
+					}}
+					axisLeft={{
+						orient       : 'left',
+						tickSize     : 0,
+						tickValues   : 0,
+						legend       : 'Volume',
+						legendOffset : -25,
+					}}
 					pointSize={0}
 				// pointColor={{ theme: 'background' }}
 					pointBorderWidth={2}

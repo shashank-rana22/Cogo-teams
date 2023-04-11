@@ -1,3 +1,5 @@
+import { Button } from '@cogoport/components';
+
 import styles from './styles.module.css';
 
 function FooterPriceBreakUpCard() {
@@ -28,7 +30,7 @@ function FooterPriceBreakUpCard() {
 					</div>
 				))
 			}
-			<button className={styles.save_changes_button}>Save Changes</button>
+			<Button size="md" themeType="secondary">Save Changes</Button>
 		</div>
 	);
 }
