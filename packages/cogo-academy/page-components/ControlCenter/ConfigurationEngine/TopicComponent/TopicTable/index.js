@@ -60,7 +60,7 @@ function TopicTable({
 						type="table"
 						currentPage={topicCurrentPage}
 						totalItems={total_count}
-						pageSize={5}
+						pageSize={10}
 						onPageChange={setTopicCurrentPage}
 					/>
 				</div>
