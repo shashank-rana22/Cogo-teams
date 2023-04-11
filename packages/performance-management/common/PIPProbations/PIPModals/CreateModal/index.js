@@ -63,7 +63,7 @@ function CreateModal({
 			}}
 			size="lg"
 		>
-			<Modal.Header title={`Create ${startCase(logType)}`} />
+			<Modal.Header title={`Create ${startCase(modal === 'manual_feedback' ? 'manual_feedback' : logType)}`} />
 			<Modal.Body
 				style={{ maxHeight: '500px' }}
 			>

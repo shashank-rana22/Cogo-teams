@@ -1,4 +1,4 @@
-import { Modal, Tooltip, Toast, Button } from '@cogoport/components';
+import { Modal, Tooltip, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import UploadController from '@cogoport/forms/page-components/Controlled/UploadController';
 import { IcMInfo } from '@cogoport/icons-react';
@@ -46,7 +46,7 @@ function PipUploadModal({ item = {}, modal, setModal = () => {}, logType = '', s
 			show={modal === 'upload' || 'kpi_tab_upload'}
 			onClose={() => setModal('')}
 		>
-			<Modal.Header title={`Upload ${startCase(type || '---')} CSV`} />
+			<Modal.Header title={`Upload ${startCase(type)} CSV`} />
 			<div className={styles.upload_modal}>
 				<Modal.Body>
 					<div className={styles.upload_container}>
