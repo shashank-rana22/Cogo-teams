@@ -1,5 +1,4 @@
 import { Select } from '@cogoport/components';
-import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 
 import SegmentedControl from '../../../commons/SegmentedControl';
 import { SERVICE_PROVIDER, SHIPMENT_TYPE_OPTIONS } from '../../constants';
@@ -15,7 +14,7 @@ import SalesFunnel from './SalesFunnel';
 import ServiceCard from './ServiceCard';
 import styles from './styles.module.css';
 
-function Dashboard() {
+function Dashboard({ entityCode }) {
 	const {
 		dashboard,
 		loading,
@@ -23,7 +22,7 @@ function Dashboard() {
 		setFilterValue,
 		salesFunnelMonth,
 		setSalesFunnelMonth,
-	} = useReceivablesDashboard();
+	} = useReceivablesDashboard(entityCode);
 
 	const {
 		outstandingAgeData = [],
@@ -49,26 +48,11 @@ function Dashboard() {
 
 	return (
 		<div>
-			<div className={styles.entity_container}>
-
-				<div className={styles.styled_text}>Entity Code</div>
-				<div className={styles.input}>
-					<AsyncSelect
-						name="business_name"
-						asyncKey="list_cogo_entity"
-						valueKey="entity_code"
-						initialCall
-						onChange={(userId:string) => onChange(userId, 'entityCode')}
-						value={filterValue.entityCode}
-						placeholder="Select Entity Code"
-						size="sm"
-					/>
-				</div>
-			</div>
 			<DateAndAccount outstandingData={outstandingData} outstandingLoading={outstandingLoading} />
+			<DailySales filterValue={filterValue} entityCode={entityCode} />
 			<ServiceCard outstandingData={outstandingData} outstandingLoading={outstandingLoading} />
 			<div className={styles.filter_container}>
-				<div style={{ display: 'flex', marginBottom: '12px' }}>
+				<div style={{ display: 'flex' }}>
 					<div className={styles.input}>
 						<Select
 							value={filterValue.serviceType}
@@ -89,7 +73,7 @@ function Dashboard() {
 						/>
 					</div>
 				</div>
-				<div style={{ display: 'flex' }}>
+				<div style={{ display: 'flex', marginTop: '12px' }}>
 					<div style={{ width: '60%' }}>
 						<OutstandingAge
 							data={outstandingAgeData}
@@ -113,8 +97,7 @@ function Dashboard() {
 				</div>
 
 			</div>
-			<InvoiceJourney filterValue={filterValue} />
-			<DailySales filterValue={filterValue} />
+			<InvoiceJourney filterValue={filterValue} entityCode={entityCode} />
 			<DailySalesOutstanding
 				dailySalesOutstandingData={dailySalesOutstandingData}
 				dailySalesOutstandingApiLoading={dailySalesOutstandingApiLoading}

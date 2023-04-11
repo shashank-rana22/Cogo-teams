@@ -1,0 +1,163 @@
+.card {
+	padding: 16px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.container {
+	display: flex;
+	justify-content: space-between;
+	margin: 0 0 0 24px;
+}
+
+.flex {
+	display: flex;
+}
+
+.sub_container_click {
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+	padding: 12px 16px;
+	margin-right: 16px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #ed3726;
+	cursor: pointer;
+	background: #fffaeb;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.sub_container_click:hover {
+	width: 94%;
+	height: 46px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 30%);
+	transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
+}
+
+.sub_container {
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+	height: 42px;
+	padding: 12px 16px;
+	margin-right: 16px;
+	font-size: 12px;
+	font-weight: 600;
+	cursor: pointer;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.sub_container:hover {
+	width: 94%;
+	height: 46px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 30%);
+	transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
+}
+
+.filter_button {
+	:global {
+		.ui_select_display_container {
+			width: 74%;
+			height: 30px;
+			margin-left: 32px;
+		}
+	}
+}
+
+.search {
+	display: flex;
+	gap: 20px;
+
+	:global {
+		width: 35%;
+		margin-right: 20px;
+
+		.ui_input_container {
+			height: 38px;
+		}
+	}
+
+	::placeholder {
+		font-size: 12px;
+		font-weight: 400;
+		color: #8f8f8f;
+	}
+}
+
+.text_filters_gap {
+	display: flex;
+	margin-left: 24px;
+}
+
+.text_style {
+	margin: 20px 0 16px;
+	font-size: 18px;
+	font-weight: 600;
+	color: #333;
+}
+
+.icon {
+	margin: 28px 0 0 5px;
+	cursor: pointer;
+}
+
+.border {
+	width: 70px;
+	height: 2px;
+	margin: 4px 0 0 2px;
+	background: #ed3726;
+	border-radius: 4px;
+}
+
+.text_styles {
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 150%;
+}
+
+.sort_top_icon {
+	height: 12px;
+}
+
+.sorting {
+	display: flex;
+
+	:global {
+		.ui_button_container {
+			min-width: 0;
+			height: 8px;
+			padding: 0;
+			margin-top: 6px;
+			font-size: 12px;
+		}
+	}
+}
+
+.sort_bottom_icon {
+	height: 12px;
+}
+
+.sort_active {
+	height: 12px;
+	color: #f68b21;
+	cursor: pointer;
+}
+
+.sort_active:hover {
+	color: #f68b21;
+}
+
+.sort_inactive {
+	height: 12px;
+	color: #c0c0c0;
+	cursor: pointer;
+}
+
+.sort_inactive:hover {
+	color: #c0c0c0;
+}

@@ -39,6 +39,9 @@ const formatTypeFunMapping = {
  *  @property {String}            [separator]
  */
 const formatDate = (params) => {
+	if (typeof window === 'undefined') {
+		return null;
+	}
 	const { date, formatType } = params;
 
 	if (!date) {

@@ -38,7 +38,7 @@ function useCreateFaqSet({
 		}
 
 		// eslint-disable-next-line react-hooks/rules-of-hooks
-		const { payload } = useCreateFaqPayload({ values, editorValue, source: 'create', apiData });
+		const { payload } = useCreateFaqPayload({ values, editorValue, source: 'create', data: apiData });
 
 		try {
 			const res = await trigger({
@@ -68,7 +68,6 @@ function useCreateFaqSet({
 			answers : [{
 				state  : 'published',
 				status : 'active',
-
 			}],
 		};
 

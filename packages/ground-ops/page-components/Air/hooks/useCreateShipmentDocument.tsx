@@ -7,12 +7,12 @@ const useCreateShipmentDocument = () => {
 		method : 'POST',
 	});
 
-	const createDocument = async (payload, listAPi) => {
+	const createDocument = async (payload, listAPI) => {
 		try {
 			await trigger({
 				data: payload,
 			});
-			listAPi({ filters: {} });
+			listAPI({ filters: {} });
 			Toast.success('Document Created Successfully');
 		} catch (err) {
 			Toast.error(err || 'Failed to Upload');

@@ -1,0 +1,17 @@
+.container {
+	min-height: 90vh;
+	background: var(--color-secondary-5);
+	border-radius: 4px;
+
+	:global {
+		.ui_pagination_table_container {
+			justify-content: flex-end;
+			padding: 10px 0 4px;
+			font-size: var(--font-size-md);
+		}
+	}
+}
+
+.list_container {
+	padding: 0 10px;
+}

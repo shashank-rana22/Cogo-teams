@@ -28,12 +28,25 @@ function getFireStoreQuery({
 				...queryFilters,
 				where('channel_type', 'in', appliedFilters[item]),
 			];
-		} else if (item === 'status' && appliedFilters[item] === 'unread') {
-			queryFilters = [
-				...queryFilters,
-				where('new_message_count', '>', 0),
-				orderBy('new_message_count', 'desc'),
-			];
+		} else if (item === 'status') {
+			if (appliedFilters[item] === 'unread') {
+				queryFilters = [
+					...queryFilters,
+					where('has_admin_unread_messages', '==', true),
+				];
+			} else if (appliedFilters[item] === 'seen_by_user') {
+				const currentTime = new Date();
+				currentTime.setMinutes(currentTime.getMinutes() - 15);
+				const epochTimestamp = currentTime.getTime();
+
+				queryFilters = [
+					...queryFilters,
+					where('last_message_document.conversation_type', '==', 'received'),
+					where('last_message_document.message_type', '==', 'text'),
+					where('last_message_document.created_at', '<=', epochTimestamp),
+					orderBy('last_message_document.created_at', 'desc'),
+				];
+			}
 		} else if (item === 'escalation') {
 			queryFilters = [
 				...queryFilters,

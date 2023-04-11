@@ -96,11 +96,11 @@ function TestCard({ test_card }) {
 				)}
 			</div>
 
-			{current_status === 'active_test' || (current_status === 'completed' && attempts_count < maximum_attempts)
+			{current_status === 'active' || (current_status === 'completed' && attempts_count < maximum_attempts)
 				? (
 					<div
 						role="presentation"
-						onClick={() => handleRedirect({ test_id: id, redirect_to: 'test' })}
+						onClick={() => handleRedirect({ test_id: id, redirect_to: 'test', push })}
 						className={styles.arrow}
 					>
 						<IcMArrowRight

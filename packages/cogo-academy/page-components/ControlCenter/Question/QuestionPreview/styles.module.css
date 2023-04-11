@@ -2,6 +2,10 @@
 	padding-left: 24px;
 }
 
+.question_container {
+	width: 80%;
+}
+
 .heading {
 	font-style: normal;
 	font-weight: 600;
