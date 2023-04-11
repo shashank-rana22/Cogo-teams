@@ -1,6 +1,6 @@
 import { Pagination, Table, TabPanel, Tabs, Modal, Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, snakeCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import EmptyState from '../../../CreateModule/components/EmptyState';
@@ -66,13 +66,13 @@ function StudentsComponent({ test_id }) {
 					onChange={setActiveTab}
 				>
 					{Object.keys(STUDENTS_MAPPING).map((item) => {
-						const { title, index } = STUDENTS_MAPPING[item];
-
+						const { title } = STUDENTS_MAPPING[item];
+						const count = snakeCase(title);
 						return (
 							<TabPanel
 								key={item}
 								name={item}
-								badge={stats[index]?.[item] || '0'}
+								badge={data?.stats?.[count] || '0'}
 								title={title}
 							/>
 						);
