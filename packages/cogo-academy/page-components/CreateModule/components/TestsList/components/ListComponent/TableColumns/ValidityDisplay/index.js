@@ -4,7 +4,7 @@ import { format } from '@cogoport/utils';
 
 import styles from '../styles.module.css';
 
-function ShowTime({ validity_start = '', validity_end = '' }) {
+function ValidityDisplay({ validity_start = '', validity_end = '' }) {
 	return (
 		<div className={styles.status_time}>
 			<section className={styles.time}>
@@ -24,4 +24,4 @@ function ShowTime({ validity_start = '', validity_end = '' }) {
 
 	);
 }
-export default ShowTime;
+export default ValidityDisplay;

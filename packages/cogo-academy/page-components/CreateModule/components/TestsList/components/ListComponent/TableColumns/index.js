@@ -8,8 +8,8 @@ import SortComponent from '../../SortComponent';
 import copyToClipboard from '../helpers/copyToClipboard';
 
 import { QuestionSetButtons, TestSetButtons } from './ButtonComponent';
-import ShowTime from './ShowTime';
 import styles from './styles.module.css';
+import ValidityDisplay from './ValidityDisplay';
 
 export const questionSetColumns = ({ loading, router, setShowModal, setQuestionSetId, sortFilter, setSortFilter }) => [
 	{
@@ -236,11 +236,11 @@ export const testSetColumns = ({
 							</div>
 						</section>
 
-						<ShowTime validity_end={validity_end} validity_start={validity_start} />
+						<ValidityDisplay validity_end={validity_end} validity_start={validity_start} />
 					</section>
 				);
-			} 
-			
+			}
+
 			if (current_status === 'published') {
 				return (
 					<section>
@@ -255,7 +255,7 @@ export const testSetColumns = ({
 							{startCase(current_status)}
 						</Pill>
 
-						<ShowTime validity_end={validity_end} validity_start={validity_start} />
+						<ValidityDisplay validity_end={validity_end} validity_start={validity_start} />
 					</section>
 				);
 			}
@@ -271,8 +271,8 @@ export const testSetColumns = ({
 						>
 							{startCase(current_status)}
 						</Pill>
-						
-						<ShowTime validity_end={validity_end} validity_start={validity_start} />
+
+						<ValidityDisplay validity_end={validity_end} validity_start={validity_start} />
 					</section>
 
 				);
