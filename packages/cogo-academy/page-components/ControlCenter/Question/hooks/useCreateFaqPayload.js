@@ -5,6 +5,8 @@ function useCreateFaqPayload({ values, editorValue, data, showAlias }) {
 		faq_topics = [], faq_audiences = [], faq_tags = [], answers = [],
 	} = data || {};
 
+	console.log('data', data);
+
 	const {
 		question_abstract,
 		tag_ids,
@@ -40,7 +42,7 @@ function useCreateFaqPayload({ values, editorValue, data, showAlias }) {
 		state              : 'draft',
 		status             : 'active',
 		tag_ids,
-		aliases            : aliasesArray,
+		// aliases            : {id:},
 		topic_ids,
 		inactive_topic_ids : !isEmpty(inactive_topic_ids) ? inactive_topic_ids : undefined,
 		inactive_tag_ids   : !isEmpty(inactive_tag_ids) ? inactive_tag_ids : undefined,

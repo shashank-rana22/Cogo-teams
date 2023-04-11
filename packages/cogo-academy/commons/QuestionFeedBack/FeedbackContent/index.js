@@ -2,12 +2,17 @@ import { Avatar } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useSelector } from '@cogoport/store';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
+import useCreateFaqQuestionAlias from './useCreateFaqQuestionAlias';
 
 function FeedBackContent({ feedback, onClickEdit = () => {}, source = '' }) {
+	const [addAlias, setAddAlias] = useState(false);
 	const { general } = useSelector((state) => state);
 	const { feedbackId:id = '' } = general.query || {};
+
+	console.log('addAlias', addAlias);
 
 	const {
 		suggested_answer = '',
@@ -17,6 +22,8 @@ function FeedBackContent({ feedback, onClickEdit = () => {}, source = '' }) {
 		remark,
 		id:feedbackId = '',
 	} = feedback || {};
+
+	const { onClickAddAlias } = useCreateFaqQuestionAlias({ suggested_question_abstract, setAddAlias });
 
 	const { name = '', picture = '' } = author?.[0] || {};
 
@@ -67,6 +74,18 @@ function FeedBackContent({ feedback, onClickEdit = () => {}, source = '' }) {
 						</div>
 
 					</div>
+
+					{suggested_question_abstract
+
+					&& (
+						<div
+							className={styles.anchor_text}
+							role="presentation"
+							onClick={onClickAddAlias}
+						>
+							Add as an Alias
+						</div>
+					)}
 
 					<div className={styles.answer_container}>
 						<div className={styles.body_heading}>Answer</div>
