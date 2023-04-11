@@ -43,11 +43,13 @@ function AnnouncementItem({
 					style={{ color: '#ea3925' }}
 				/>
 			</div>
+
 			<div className={styles.tags_container}>
 				<div className={styles.all_other_tags}>
 					<div className={`${styles.pill}`} style={{ fontWeight: 600 }}>
 						{ANNOUNCEMENT_TYPE_MAPPING[announcement_type]}
 					</div>
+
 					{video_count > 0 ? (
 						<div className={styles.pill}>
 							{`${video_count} ${
@@ -55,6 +57,7 @@ function AnnouncementItem({
 							}`}
 						</div>
 					) : null}
+
 					{image_count > 0 ? (
 						<div className={styles.pill}>
 							{`${image_count} ${
@@ -62,6 +65,7 @@ function AnnouncementItem({
 							}`}
 						</div>
 					) : null}
+
 					{pdf_count > 0 ? (
 						<div className={styles.pill}>
 							{`${pdf_count} ${
@@ -70,6 +74,7 @@ function AnnouncementItem({
 						</div>
 					) : null}
 				</div>
+				
 				<div className={styles.date_tag}>{format(validity_start, 'dd MMM yyyy hh:mm a')}</div>
 			</div>
 		</div>
