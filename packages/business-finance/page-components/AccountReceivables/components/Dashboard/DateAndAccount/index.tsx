@@ -48,7 +48,7 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 										<Tooltip content={(
 											<div>
 												{getFormattedPrice(
-													overallStats?.openInvoicesAmount,
+													overallStats?.openInvoicesAmount || 0,
 													overallStats?.dashboardCurrency,
 
 												)}
@@ -108,7 +108,7 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 										<Tooltip content={(
 											<div>
 												{getFormattedPrice(
-													overallStats?.onAccountAmount,
+													overallStats?.onAccountAmount || 0,
 													overallStats?.dashboardCurrency,
 												)}
 											</div>
@@ -156,7 +156,7 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 										<Tooltip content={(
 											<div>
 												{getFormattedPrice(
-													overallStats?.totalOutstandingAmount,
+													overallStats?.totalOutstandingAmount || 0,
 													overallStats?.dashboardCurrency,
 												)}
 											</div>
