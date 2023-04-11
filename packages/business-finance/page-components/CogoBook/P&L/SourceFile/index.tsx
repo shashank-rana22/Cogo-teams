@@ -4,6 +4,7 @@ import { useRouter } from '@cogoport/next';
 import { isEmpty, format } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
+import { optionsEntity } from '../../Accruals/constant';
 import useList from '../../hooks/useList';
 import EmptyState from '../EmptyState';
 import { entityMapping } from '../PLStatement/constant';
@@ -71,12 +72,7 @@ function SourceFile() {
 							value={filters?.entity}
 							onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
 							placeholder="Entity"
-							options={[
-								{ label: 'Entity 201', value: '201' },
-								{ label: 'Entity 301', value: '301' },
-								{ label: 'Entity 401', value: '401' },
-								{ label: 'Entity 501', value: '501' },
-							]}
+							options={optionsEntity}
 							isClearable
 							style={{ width: '150px' }}
 						/>
