@@ -1,7 +1,7 @@
 import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
-import { Documents, Tracking } from '@cogoport/ocean-modules';
+import { Documents } from '@cogoport/ocean-modules';
 // import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
@@ -17,9 +17,9 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 
 import styles from './styles.module.css';
 
-const services_additional_methods = ['stakeholder', 'service_objects'];
+const services_additional_methods = ['stakeholder', 'service_objects', 'booking_requirement'];
 
-function Superadmin({ get }) {
+function DKam({ get }) {
 	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('overview');
 
@@ -28,7 +28,7 @@ function Superadmin({ get }) {
 	const { servicesGet } = useGetServices({
 		shipment_data,
 		additional_methods : services_additional_methods,
-		activeStakeholder  : 'Superadmin',
+		activeStakeholder  : 'DKam',
 	});
 
 	const { getTimeline } = useGetTimeLine({ shipment_data });
@@ -37,7 +37,7 @@ function Superadmin({ get }) {
 		...get,
 		...servicesGet,
 		...getTimeline,
-		activeStakeholder: 'Superadmin',
+		activeStakeholder: 'DKam',
 	}), [get, servicesGet, getTimeline]);
 
 	const handleClick = () => {
@@ -113,9 +113,6 @@ function Superadmin({ get }) {
 								pre_subject_text={`${shipment_data?.serial_id}`}
 							/>
 						</TabPanel>
-						<TabPanel name="tracking" title="Tracking">
-							<Tracking shipmentData={shipment_data} />
-						</TabPanel>
 					</Tabs>
 				</div>
 			</div>
@@ -123,4 +120,4 @@ function Superadmin({ get }) {
 	);
 }
 
-export default Superadmin;
+export default DKam;

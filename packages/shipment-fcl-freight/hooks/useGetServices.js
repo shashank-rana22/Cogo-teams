@@ -1,38 +1,74 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
-function useGetServices({ shipment_id, additional_methods = [] }) {
-	const [{ loading : servicesLoading, data }, trigger] = useRequest({
+function useGetServices({ shipment_data = {}, additional_methods = [], activeStakeholder = '' }) {
+	const [{ loading : servicesLoading }, trigger] = useRequest({
 		url    : 'fcl_freight/get_services',
 		method : 'GET',
 	}, { manual: true });
 
-	const listServices = useCallback(() => {
-		(async () => {
+	const [servicesData, setServicesData] = useState([]);
+
+	const { id = '', importer_exporter_id = '', shipper_consignee_id = '' } = shipment_data;
+
+	const listServices = useCallback(
+		async () => {
 			try {
-				await trigger({
+				const res = await trigger({
 					params: {
-						shipment_id,
+						shipment_id: id,
 						additional_methods,
 					},
 				});
+
+				if (res.status === 200) {
+					setServicesData(res?.data?.summary);
+					if (activeStakeholder === 'Kam') {
+						const servicesToShow = [];
+
+						(res?.data?.summary || []).forEach((service) => {
+							if (service?.importer_exporter_id === importer_exporter_id) {
+								servicesToShow.push(service);
+							}
+						});
+						setServicesData(servicesToShow);
+					}
+
+					if (activeStakeholder === 'DKam') {
+						const servicesToShow = [];
+
+						(res?.data?.summary || []).forEach((service) => {
+							if (service?.importer_exporter_id === shipper_consignee_id) {
+								servicesToShow.push(service);
+							}
+						});
+
+						setServicesData(servicesToShow);
+					}
+				}
 			} catch (err) {
 				toastApiError(err);
 			}
-		})();
-	}, [trigger, shipment_id, additional_methods]);
+		},
+		[trigger,
+			id,
+			additional_methods,
+			activeStakeholder,
+			shipper_consignee_id,
+			importer_exporter_id],
+	);
 
 	useEffect(() => {
-		if (shipment_id) listServices();
-	}, [listServices, shipment_id]);
+		if (id) listServices();
+	}, [listServices, id]);
 
 	return {
 		servicesGet: {
 			servicesLoading,
 			refetchServices : listServices,
-			servicesList    : data?.summary || [],
+			servicesList    : servicesData,
 		},
 
 	};

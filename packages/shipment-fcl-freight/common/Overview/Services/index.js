@@ -73,8 +73,7 @@ function Services() {
 					</div>
 				</div>
 
-				{
-				activeStakeholder === 'Kam' ? (
+				{['Kam', 'DKam'].includes(activeStakeholder) ? (
 					<div className={styles.upselling}>
 						{Object.keys(upsellServices).map((tradeType) => (upsellServices[tradeType]).map((service) => (
 							<AddNewService
@@ -85,11 +84,9 @@ function Services() {
 								cancelUpsellDestinationFor={cancelUpsellDestinationFor}
 								cancelUpsellOriginFor={cancelUpsellOriginFor}
 							/>
-
 						)))}
 					</div>
-				) : null
-}
+				) : null}
 
 			</div>
 		)

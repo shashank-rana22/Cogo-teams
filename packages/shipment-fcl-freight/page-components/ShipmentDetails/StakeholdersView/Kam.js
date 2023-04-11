@@ -12,30 +12,23 @@ import PocSop from '../../../common/PocSop';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Timeline from '../../../common/TimeLine';
-import useGetBuyers from '../../../hooks/useGetBuyers';
 import useGetServices from '../../../hooks/useGetServices';
-import useGetShipment from '../../../hooks/useGetShipment';
 import useGetTimeLine from '../../../hooks/useGetTimeline';
 
 import styles from './styles.module.css';
 
 const services_additional_methods = ['stakeholder', 'service_objects', 'booking_requirement'];
-const shipment_additional_methods = ['main_service', 'documents'];
 
-function Kam() {
+function Kam({ get }) {
 	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('overview');
 
-	const { get } = useGetShipment({ additional_methods: shipment_additional_methods });
 	const { shipment_data, isGettingShipment } = get;
 
-	const { data } = useGetBuyers({ shipment_id: shipment_data?.id });
-
-	console.log({ data });
-
 	const { servicesGet } = useGetServices({
-		shipment_id        : shipment_data?.id,
+		shipment_data,
 		additional_methods : services_additional_methods,
+		activeStakeholder  : 'Kam',
 	});
 
 	const { getTimeline } = useGetTimeLine({ shipment_data });
