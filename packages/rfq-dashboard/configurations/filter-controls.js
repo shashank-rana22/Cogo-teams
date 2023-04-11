@@ -33,6 +33,26 @@ const controls = [
 		],
 	},
 	{
+		name     : 'status',
+		label    : 'RFQ Status',
+		type     : 'checkbox',
+		multiple : true,
+		options  : [
+			{
+				label : 'RFQ Sent',
+				value : 'sent',
+			},
+			{
+				label : 'Contract Live',
+				value : 'live',
+			},
+			{
+				label : 'Pending',
+				value : 'pending',
+			},
+		],
+	},
+	{
 		name    : 'service_type',
 		label   : 'Service Type',
 		type    : 'chips',
@@ -52,17 +72,20 @@ const controls = [
 		],
 	},
 	{
-		name        : 'start_date',
-		label       : 'Start Date',
-		placeholder : 'select start date',
-		type        : 'datePicker',
+		name                  : 'start_date',
+		label                 : 'Start Date',
+		type                  : 'datePicker',
+		placeholder           : 'select start date',
+		isPreviousDaysAllowed : true,
+		maxDate               : new Date(),
 	},
 	{
-		name        : 'end_date',
-		label       : 'End Date',
-		type        : 'datePicker',
-		placeholder : 'select end date',
-		maxDate     : new Date(),
+		name                  : 'end_date',
+		label                 : 'End Date',
+		type                  : 'datePicker',
+		placeholder           : 'select end date',
+		isPreviousDaysAllowed : true,
+		maxDate               : new Date(),
 
 	}];
 

@@ -32,5 +32,19 @@
 		.ui_chips_container {
 			flex-wrap: wrap;
 		}
+
+		.ui_chip_container {
+			min-width: unset;
+			font-size: 14px;
+		}
+
+		.ui_checkbox_group_container {
+			padding: unset;
+
+			.ui_checkbox_container {
+				padding-top: unset;
+				padding-left: unset;
+			}
+		}
 	}
 }
