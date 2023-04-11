@@ -41,7 +41,7 @@
 }
 
 .successfully_migrated_count {
-	min-width: 180px;
+	min-width: 160px;
 	text-align: center;
 }
 
@@ -61,4 +61,8 @@
 	display: flex;
 	justify-content: start;
 	min-width: 60px;
+}
+
+.remark {
+	min-width: 120px;
 }

@@ -23,9 +23,9 @@ const controls = [
 	},
 	{
 		name        : 'ingestion_partner_id',
-		label       : 'Partner',
+		label       : 'Cogo Entity',
 		type        : 'select',
-		placeholder : 'Partner ID',
+		placeholder : 'Cogo Entity',
 		options     : PARTNER_OPTIONS,
 		isClearable : true,
 		rules       : { required: 'Partner is Required' },

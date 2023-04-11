@@ -32,6 +32,7 @@ function Ingestion() {
 				formProps={formProps}
 				params={params}
 				setParams={setParams}
+				refetch={refetch}
 			/>
 		</>
 

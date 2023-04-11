@@ -71,7 +71,7 @@ function useGetUploadList(id) {
 			accessor : ({ errored_data_url }) => (
 				<div className={styles.name}>
 					{errored_data_url ? (
-						<Button onClick={() => { downloadErrorCsv(errored_data_url); }} size="md" themeType="tertiary">
+						<Button onClick={() => { downloadErrorCsv(errored_data_url); }} size="sm" themeType="tertiary">
 							<IcMDownload style={{ marginRight: '4px' }} />
 							Download
 						</Button>
@@ -94,6 +94,21 @@ function useGetUploadList(id) {
 			accessor : ({ successfully_migrated_count }) => (
 				<div className={styles.successfully_migrated_count}>{successfully_migrated_count || '___'}</div>
 
+			),
+		},
+		{
+			key      : 'remark',
+			Header   : 'REMARKS REPORT',
+			accessor : ({ errored_data_url }) => (
+				<div className={styles.remark}>
+					{errored_data_url ? (
+						<Button onClick={() => { downloadErrorCsv(errored_data_url); }} size="sm" themeType="tertiary">
+							<IcMDownload style={{ marginRight: '4px' }} />
+							Download
+						</Button>
+					) : null}
+
+				</div>
 			),
 		},
 

@@ -10,22 +10,26 @@
 	width: 24%;
 
 	@media (max-width: 768px) {
-		width: 40%;
+		width: 20%;
 	}
 }
 
 .filter {
 	display: flex;
 	width: 70%;
+
+	@media (max-width: 768px) {
+		width: 80%;
+	}
 }
 
 .form_group {
 	display: flex;
 	align-items: center;
-	margin-right: 4px;
 
 	@media (max-width: 768px) {
-		width: 32%;
+		width: 24%;
+		margin-right: 4px;
 
 		:global {
 			.ui_select_display_container {
@@ -45,4 +49,19 @@
 
 .field_controller {
 	width: 200px;
+	margin-right: 4px;
+
+	@media (max-width: 768px) {
+		width: 120px;
+		margin-right: 0;
+	}
+}
+
+.field_controller_scope {
+	width: 200px;
+
+	@media (max-width: 768px) {
+		width: 180px;
+		margin: 0 4px 0 16px;
+	}
 }

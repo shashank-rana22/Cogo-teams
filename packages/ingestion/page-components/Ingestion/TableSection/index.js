@@ -17,6 +17,7 @@ function TableSection(props) {
 		formProps = {},
 		params = {},
 		setParams = () => {},
+		refetch = () => {},
 	} = props;
 
 	const {
@@ -33,7 +34,7 @@ function TableSection(props) {
 	return (
 		<>
 
-			<Filters setParams={setParams} params={params} formProps={formProps} />
+			<Filters setParams={setParams} params={params} formProps={formProps} refetch={refetch} />
 			<List
 				columns={columns}
 				onPageChange={onPageChange}

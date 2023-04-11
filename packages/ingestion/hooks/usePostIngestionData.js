@@ -60,20 +60,20 @@ function usePostIngestionData({ refetch = () => {} }) {
 			Toast.error(error?.message);
 		}
 	};
-	const { country_id = '', partner_id = '' } = watch();
+	const { ingestion_country_id = '', ingestion_partner_id = '' } = watch();
 
 	const mutatedControls = controls.map((control) => {
 		let newControl = { ...control };
 
 		if (newControl.name === 'agent') {
-			if (country_id || partner_id) {
+			if (ingestion_country_id || ingestion_partner_id) {
 				newControl = {
 					...newControl,
 					params: {
 						filters: {
 							...newControl?.params?.filters,
-							country_id : country_id || undefined,
-							partner_id : partner_id || undefined,
+							ingestion_country_id : ingestion_country_id || undefined,
+							ingestion_partner_id : ingestion_partner_id || undefined,
 						},
 					},
 				};

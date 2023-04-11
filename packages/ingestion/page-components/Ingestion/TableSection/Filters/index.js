@@ -1,6 +1,8 @@
 import { Input } from '@cogoport/components';
 import { useForm, useDebounceQuery } from '@cogoport/forms';
 import { IcMSearchlight } from '@cogoport/icons-react';
+import ScopeSelect from '@cogoport/scope-select';
+import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
 import filterControls from '../../../../utils/filter-controls';
@@ -8,7 +10,9 @@ import { getElementController } from '../../../../utils/get-element-controls';
 
 import styles from './styles.module.css';
 
-function Filters({ setParams = () => {} }) {
+function Filters({ setParams = () => {}, refetch = () => {} }) {
+	const { profile = {} } = useSelector((state) => state);
+	const [scopeFilters] = useState({});
 	const [search, setSearch] = useState('');
 
 	const formProps = useForm();
@@ -36,6 +40,7 @@ function Filters({ setParams = () => {} }) {
 	}, [query, uploadDate, uploadBy, setParams]);
 
 	useEffect(() => debounceQuery(search), [debounceQuery, search]);
+	useEffect(() => { refetch(); }, [profile.authParams, refetch]);
 
 	return (
 		<div className={styles.filter_container}>
@@ -60,8 +65,18 @@ function Filters({ setParams = () => {} }) {
 						);
 					})
 				}
+				<div className={styles.form_group}>
+					<ScopeSelect
+						size="lg"
+						defaultValues={scopeFilters}
+						popoverSize="md"
+						showChooseAgent={false}
+						className={styles.field_controller_scope}
+					/>
+				</div>
 
 			</div>
+
 			<div className={styles.search}>
 				<Input
 					onChange={(val) => setSearch(val)}
