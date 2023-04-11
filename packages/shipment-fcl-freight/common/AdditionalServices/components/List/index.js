@@ -16,12 +16,10 @@ import actions from './ItemAdded/actions';
 import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
 
-function List({
-	services = [],
-	isSeller = false,
-	refetchServices = () => { },
-}) {
-	const { shipment_data } = useContext(ShipmentDetailContext);
+function List({ isSeller = false }) {
+	const { servicesList, refetchServices, shipment_data } = useContext(
+		ShipmentDetailContext,
+	);
 
 	const [addSellPrice, setAddSellPrice] = useState(false);
 	const [showChargeCodes, setShowChargeCodes] = useState(false);
@@ -73,7 +71,7 @@ function List({
 									shipment_data,
 								})}
 								refetch={handleRefetch}
-								services={services}
+								services={servicesList}
 								isSeller={isSeller}
 							/>
 						);
@@ -158,7 +156,7 @@ function List({
 			{showChargeCodes ? (
 				<AddService
 					shipmentId={shipment_data?.id}
-					services={services}
+					services={servicesList}
 					isSeller={isSeller}
 					refetch={refetch}
 					setItem={setItem}

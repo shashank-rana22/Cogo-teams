@@ -6,13 +6,13 @@ const showCancellationStakeholders = [
 	'service_ops3',
 	'prod_process owner',
 ];
-const shipmentCompletedOrCancelled = ['completed', 'cancelled'];
+const serviceCompletedOrCancelled = ['completed', 'cancelled'];
 
 export default function getCanCancelService({ shipment_data, user_data, state }) {
 	if (user_data?.email === 'ajeet@cogoport.com') {
 		return true;
 	}
-	if (shipment_data?.serial_id <= 120347 && !shipmentCompletedOrCancelled.includes(state)) {
+	if (shipment_data?.serial_id <= 120347 && !serviceCompletedOrCancelled.includes(state)) {
 		return true;
 	}
 

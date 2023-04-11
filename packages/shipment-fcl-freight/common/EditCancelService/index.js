@@ -5,8 +5,10 @@ import { useSelector } from '@cogoport/store';
 import React, { useState, useContext } from 'react';
 
 import CancelService from '../CancelService';
+import SupplierReallocation from '../SupplierReallocation';
 
 import getCanCancelService from './getCanCancelService';
+import getCanEditSupplier from './getCanEditSupplier';
 import styles from './styles.module.css';
 
 function EditCancelService({ state, service_type, trade_type }) {
@@ -22,17 +24,20 @@ function EditCancelService({ state, service_type, trade_type }) {
 	};
 
 	const isServiceCancellable = getCanCancelService({ shipment_data, user_data, state });
+	const canEditSupplier = getCanEditSupplier({ shipment_data, user_data, state });
 
 	const content = (
 		<>
-			<div
-				role="button"
-				tabIndex={0}
-				className={styles.action_button}
-				onClick={() => openModal('edit')}
-			>
-				Edit
-			</div>
+			{canEditSupplier ? (
+				<div
+					role="button"
+					tabIndex={0}
+					className={styles.action_button}
+					onClick={() => openModal('edit')}
+				>
+					Edit
+				</div>
+			) : null}
 
 			{isServiceCancellable ? (
 				<div
@@ -59,7 +64,7 @@ function EditCancelService({ state, service_type, trade_type }) {
 				<IcMOverflowDot className={styles.three_dots} onClick={() => setShowPopover(!showPopover)} />
 			</Popover>
 
-			{/* {showModal === 'edit' ? <EditParams /> : null} */}
+			{showModal === 'supplier_reallocation' ? <SupplierReallocation /> : null}
 
 			{showModal === 'cancel' ? (
 				<CancelService

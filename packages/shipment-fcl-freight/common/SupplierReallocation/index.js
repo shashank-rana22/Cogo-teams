@@ -6,7 +6,7 @@ import { asyncFieldsOrganization } from '@cogoport/forms/utils/getAsyncFields';
 import { merge, isEmpty } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
-import useUpdateShipmentService from '../../../../hooks/useUpdateShipmentService';
+import useUpdateShipmentService from '../../hooks/useUpdateShipmentService';
 
 import styles from './styles.module.css';
 
@@ -27,11 +27,9 @@ const serviceProviderInitalControl = {
 function SupplierReallocation({
 	serviceData = [],
 	setShow = () => {},
-	show = false,
 	isAdditional = false,
-	refetchServices = () => {},
 }) {
-	const { shipment_data, refetch } = useContext(ShipmentDetailContext);
+	const { shipment_data, refetch, refetchServices } = useContext(ShipmentDetailContext);
 
 	const { handleSubmit, control, formState: { errors }, reset } = useForm();
 
@@ -95,72 +93,69 @@ function SupplierReallocation({
 
 	return (
 		<Modal
-			show={show}
+			show
 			onClose={() => setShow(false)}
 			className={styles.styled_modal_container}
 		>
 			<Modal.Body>
 				<Modal.Header title={(
 					<div className={styles.header}>
-						{!isAdditional ? 'Edit Parameters' : 'Supplier Reallocation'}
+						{isAdditional ? 'Supplier Reallocation' : 'Edit Parameters'}
 					</div>
 				)}
 				/>
-
-				{
-					(isEmpty(documents) && !isAdditional)
-						? (
-							<div className={styles.form_wrapper}>
-								{serviceProviderController}
-								<div>
-									<div className={styles.label}>
-										BL Count
-									</div>
-									<InputController
-										control={control}
-										name="bls_count"
-										type="number"
-										value={serviceData?.[0]?.bls_count}
-										span={8}
-										placeholder="Enter BL Count"
-										rules={{ required: 'BL Count required' }}
-									/>
-									{errors.bls_count && (
-										<span className={styles.errors}>
-											{errors.bls_count.message}
-										</span>
-									)}
+				{(isEmpty(documents) && !isAdditional)
+					? (
+						<div className={styles.form_wrapper}>
+							{serviceProviderController}
+							<div>
+								<div className={styles.label}>
+									BL Count
 								</div>
+								<InputController
+									control={control}
+									name="bls_count"
+									type="number"
+									value={serviceData?.[0]?.bls_count}
+									span={8}
+									placeholder="Enter BL Count"
+									rules={{ required: 'BL Count required' }}
+								/>
+								{errors.bls_count && (
+									<span className={styles.errors}>
+										{errors.bls_count.message}
+									</span>
+								)}
+							</div>
 
-								<div>
-									<div className={styles.label}>
-										Bl Category
-									</div>
-									<SelectController
-										control={control}
-										name="bl_category"
-										type="select"
-										options={BL_CATEGORY_OPTIONS}
-										value={serviceData?.[0]?.bl_category}
-										span={8}
-										placeholder="Enter Bl Category"
-										rules={{ required: 'BL Category is required' }}
-										className={styles.hello}
-									/>
-									{errors.bl_category && (
-										<span className={styles.errors}>
-											{errors.bl_category.message}
-										</span>
-									)}
+							<div>
+								<div className={styles.label}>
+									Bl Category
 								</div>
+								<SelectController
+									control={control}
+									name="bl_category"
+									type="select"
+									options={BL_CATEGORY_OPTIONS}
+									value={serviceData?.[0]?.bl_category}
+									span={8}
+									placeholder="Enter Bl Category"
+									rules={{ required: 'BL Category is required' }}
+									className={styles.hello}
+								/>
+								{errors.bl_category && (
+									<span className={styles.errors}>
+										{errors.bl_category.message}
+									</span>
+								)}
 							</div>
-						)
-						: (
-							<div className={styles.form_wrapper}>
-								{serviceProviderController}
-							</div>
-						)
-				}
+						</div>
+					)
+					: (
+						<div className={styles.form_wrapper}>
+							{serviceProviderController}
+						</div>
+					)}
 
 				<div className={styles.button_container}>
 					<Button
