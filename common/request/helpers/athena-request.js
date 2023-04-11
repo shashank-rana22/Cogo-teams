@@ -25,7 +25,7 @@ athenaRequest.interceptors.request.use((oldConfig) => {
 		newConfig.url = `/${serviceName}/${apiPath}`;
 	}
 
-	const authToken = process.env.LAMBDA_SECRET_TOKEN_USER;
+	const authToken = process.env.DATA_PIPELINE_SECRET_KEY;
 
 	return {
 		...newConfig,
