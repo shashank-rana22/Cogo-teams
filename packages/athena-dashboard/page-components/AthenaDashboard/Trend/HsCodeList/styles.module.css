@@ -1,0 +1,19 @@
+.checkbox {
+	width: 120px;
+	background-color: #e0e0e0;
+	border-radius: 10px;
+}
+
+.codes {
+	display: block;
+	margin-top: 24px;
+}
+
+.description {
+	margin-top: 8px;
+	margin-left: 28px;
+}
+
+.result_container {
+	display: flex;
+}

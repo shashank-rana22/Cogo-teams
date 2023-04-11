@@ -115,6 +115,7 @@ export const getAllShipment = [{
 },
 
 ];
+const options = { style: 'decimal', maximumFractionDigits: 2 };
 
 export const getOceanData = (
 	totalVolumePer,
@@ -131,12 +132,42 @@ export const getOceanData = (
 	oceanCustomVolume,
 	volume,
 ) => [
-	{ name: 'Total', value: `${volume[0] || totalVolume} (${totalVolumePer.toFixed(2)}%)` || '---' },
-	{ name: 'FCL Exports', value: `${volume[1] || fclExportVolume} (${fclExportVolumePer.toFixed(2)}%)` || '---' },
-	{ name: 'FCL Imports', value: `${volume[2] || fclImportVolume} (${fclImportVolumePer.toFixed(2)}%)` || '---' },
-	{ name: 'LCL Exports', value: `${volume[3] || lclExportVolume} (${lclExportVolumePer.toFixed(2)}%)` || '---' },
-	{ name: 'LCL Imports', value: `${volume[4] || lclImportVolume} (${lclImportVolumePer.toFixed(2)}%)` || '---' },
-	{ name: 'Customs', value: `${volume[5] || oceanCustomVolume} (${oceanCustomVolumePer.toFixed(2)}%)` || '---' },
+	{
+		name  : 'Total',
+		value : `${(volume[0]
+		|| totalVolume)?.toLocaleString('en-IN', options)}
+		(${totalVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
+	},
+	{
+		name  : 'FCL Exports',
+		value : `${(volume[1]
+			|| fclExportVolume)?.toLocaleString('en-IN', options)} 
+			(${fclExportVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
+	},
+	{
+		name  : 'FCL Imports',
+		value : `${(volume[2]
+			|| fclImportVolume)?.toLocaleString('en-IN', options)} 
+			(${fclImportVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
+	},
+	{
+		name  : 'LCL Exports',
+		value : `${(volume[3]
+			|| lclExportVolume)?.toLocaleString('en-IN', options)} 
+			(${lclExportVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
+	},
+	{
+		name  : 'LCL Imports',
+		value : `${(volume[4]
+			|| lclImportVolume)?.toLocaleString('en-IN', options)} 
+			(${lclImportVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
+	},
+	{
+		name  : 'Customs',
+		value : `${(volume[5]
+			|| oceanCustomVolume)?.toLocaleString('en-IN', options)} 
+			(${oceanCustomVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
+	},
 ];
 
 export const getOceanDataValue = (
@@ -154,12 +185,36 @@ export const getOceanDataValue = (
 	oceanCustomValuePer,
 	lclImportValuePer,
 ) => [
-	{ name: 'Total', value: `${(value[0] || totalValue)} (${totalPerOcean.toFixed(2)}%)` || '---' },
-	{ name: 'FCL Exports', value: `${(value[1] || fclExportValue)} (${fclExportValuePer.toFixed(2)}%)` || '---' },
-	{ name: 'FCL Imports', value: `${(value[2] || fclImportValue)} (${fclImportValuePer.toFixed(2)}%)` || '---' },
-	{ name: 'LCL Exports', value: `${(value[3] || lclExportValue)} (${lclExportValuePer.toFixed(2)}%)` || '---' },
-	{ name: 'LCL Imports', value: `${(value[4] || lclImportValue)} (${lclImportValuePer.toFixed(2)}%)` || '---' },
-	{ name: 'Customs', value: `${(value[5] || oceanCustomValue)} (${oceanCustomValuePer.toFixed(2)}%)` || '---' },
+	{
+		name  : 'Total',
+		value : `${(value[0] || totalValue)?.toLocaleString('en-IN', options)} 
+	(${totalPerOcean?.toLocaleString('en-IN', options)}%)` || '---',
+	},
+	{
+		name  : 'FCL Exports',
+		value : `${(value[1] || fclExportValue)?.toLocaleString('en-IN', options)} 
+		(${fclExportValuePer?.toLocaleString('en-IN', options)}%)` || '---',
+	},
+	{
+		name  : 'FCL Imports',
+		value : `${(value[2] || fclImportValue)?.toLocaleString('en-IN', options)} 
+		(${fclImportValuePer?.toLocaleString('en-IN', options)}%)` || '---',
+	},
+	{
+		name  : 'LCL Exports',
+		value : `${(value[3] || lclExportValue)?.toLocaleString('en-IN', options)} 
+		(${lclExportValuePer?.toLocaleString('en-IN', options)}%)` || '---',
+	},
+	{
+		name  : 'LCL Imports',
+		value : `${(value[4] || lclImportValue)?.toLocaleString('en-IN', options)} 
+		(${lclImportValuePer?.toLocaleString('en-IN', options)}%)` || '---',
+	},
+	{
+		name  : 'Customs',
+		value : `${(value[5] || oceanCustomValue)?.toLocaleString('en-IN', options)} 
+		(${oceanCustomValuePer?.toLocaleString('en-IN', options)}%)` || '---',
+	},
 ];
 
 export const getAirData = (
@@ -173,18 +228,25 @@ export const getAirData = (
 	airImportVolumePer,
 	airCustomVolumePer,
 ) => [
-	{ name: 'Total', value: `${(volumeAir[0] || totalAirVolume)} (${totalPer.toFixed(2)}%)` || '---' },
+	{
+		name  : 'Total',
+		value : `${(volumeAir[0] || totalAirVolume)?.toLocaleString('en-IN', options)} 
+	(${totalPer?.toLocaleString('en-IN', options)}%)` || '---',
+	},
 	{
 		name  : 'Air Exports',
-		value : `${(volumeAir[1] || airExportVolume)} (${airExportVolumePer.toFixed(2)}%)` || '---',
+		value : `${(volumeAir[1] || airExportVolume)?.toLocaleString('en-IN', options)} 
+		(${airExportVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'Air Imports',
-		value : `${(volumeAir[2] || airImportVolume)} (${airImportVolumePer.toFixed(2)}%)` || '---',
+		value : `${(volumeAir[2] || airImportVolume)?.toLocaleString('en-IN', options)} 
+		(${airImportVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'Air Customs',
-		value : `${(volumeAir[3] || airCustomVolume)} (${airCustomVolumePer.toFixed(2)}%)` || '---',
+		value : `${(volumeAir[3] || airCustomVolume)?.toLocaleString('en-IN', options)} 
+		(${airCustomVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 ];
 
@@ -199,18 +261,25 @@ export const getAirDataValue = (
 	airCustomValue,
 	airCustomValuePer,
 ) => [
-	{ name: 'Total', value: `${(valueAir[0] || totalAirValue)} (${totalPerAir.toFixed(2)}%)` || '---' },
+	{
+		name  : 'Total',
+		value : `${(valueAir[0] || totalAirValue)?.toLocaleString('en-IN', options)} 
+	(${totalPerAir?.toLocaleString('en-IN', options)}%)` || '---',
+	},
 	{
 		name  : 'Air Exports',
-		value : `${(valueAir[1] || airExportValue)} (${airExportValuePer.toFixed(2)}%)` || '---',
+		value : `${(valueAir[1] || airExportValue)?.toLocaleString('en-IN', options)} 
+		(${airExportValuePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'Air Imports',
-		value : `${(valueAir[2] || airImportValue)} (${airImportValuePer.toFixed(2)}%)` || '---',
+		value : `${(valueAir[2] || airImportValue)?.toLocaleString('en-IN', options)} 
+		(${airImportValuePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'Air Customs',
-		value : `${(valueAir[3] || airCustomValue)} (${airCustomValuePer.toFixed(2)}%)` || '---',
+		value : `${(valueAir[3] || airCustomValue)?.toLocaleString('en-IN', options)} 
+		(${airCustomValuePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 ];
 
@@ -223,9 +292,21 @@ export const getSurfaceData = (
 	FTLVolumePer,
 	LTLVolumePer,
 ) => [
-	{ name: 'Total', value: `${(volumeSurface[0] || totalSurfaceVolume)} (${totalPerSurface.toFixed(2)}%)` || '---' },
-	{ name: 'FTL', value: `${(volumeSurface[1] || ftlVolume)} (${FTLVolumePer.toFixed(2)}%)` || '---' },
-	{ name: 'LTL', value: `${(volumeSurface[2] || ltlVolume)} (${LTLVolumePer.toFixed(2)}%)` || '---' },
+	{
+		name  : 'Total',
+		value : `${(volumeSurface[0] || totalSurfaceVolume)?.toLocaleString('en-IN', options)} 
+		(${totalPerSurface?.toLocaleString('en-IN', options)}%)` || '---',
+	},
+	{
+		name  : 'FTL',
+		value : `${(volumeSurface[1] || ftlVolume)?.toLocaleString('en-IN', options)} 
+	(${FTLVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
+	},
+	{
+		name  : 'LTL',
+		value : `${(volumeSurface[2] || ltlVolume)?.toLocaleString('en-IN', options)} 
+	(${LTLVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
+	},
 ];
 
 export const getSurfaceDataValue = (
@@ -239,10 +320,19 @@ export const getSurfaceDataValue = (
 ) => [
 	{
 		name  : 'Total',
-		value : `${(valueSurface[0] || totalSurfaceValue)} (${totalPerValueSurface.toFixed(2)}%)` || '---',
+		value : `${(valueSurface[0] || totalSurfaceValue)?.toLocaleString('en-IN', options)} 
+		(${totalPerValueSurface?.toLocaleString('en-IN', options)}%)` || '---',
 	},
-	{ name: 'FTL', value: `${(valueSurface[1] || ftlValue)} (${FTLValuePer.toFixed(2)}%)` || '---' },
-	{ name: 'LTL', value: `${(valueSurface[2] || ltlValue)} (${LTLValuePer.toFixed(2)}%)` || '---' },
+	{
+		name  : 'FTL',
+		value : `${(valueSurface[1] || ftlValue)?.toLocaleString('en-IN', options)} 
+	(${FTLValuePer?.toLocaleString('en-IN', options)}%)` || '---',
+	},
+	{
+		name  : 'LTL',
+		value : `${(valueSurface[2] || ltlValue)?.toLocaleString('en-IN', options)} 
+	(${LTLValuePer?.toLocaleString('en-IN', options)}%)` || '---',
+	},
 ];
 
 export const getRailData = (
@@ -251,8 +341,16 @@ export const getRailData = (
 	railVolumePer,
 	volumeRail,
 ) => [
-	{ name: 'Total', value: `${(volumeRail[0] || railDomesticVolume)} (${totalPerRail.toFixed(2)}%)` || '---' },
-	{ name: 'Domestic', value: `${(volumeRail[1] || railDomesticVolume)} (${railVolumePer.toFixed(2)}%)` || '---' },
+	{
+		name  : 'Total',
+		value : `${(volumeRail[0] || railDomesticVolume)?.toLocaleString('en-IN', options)} 
+		(${totalPerRail?.toLocaleString('en-IN', options)}%)` || '---',
+	},
+	{
+		name  : 'Domestic',
+		value : `${(volumeRail[1] || railDomesticVolume)?.toLocaleString('en-IN', options)} 
+		(${railVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
+	},
 ];
 
 export const getRailDataValue = (
@@ -261,8 +359,16 @@ export const getRailDataValue = (
 	railValuePer,
 	valueRail,
 ) => [
-	{ name: 'Total', value: `${(valueRail[0] || railDomesticValue)} (${totalPerRailValue.toFixed(2)}%)` || '---' },
-	{ name: 'Domestic', value: `${(valueRail[1] || railDomesticValue)} (${railValuePer.toFixed(2)}%)` || '---' },
+	{
+		name  : 'Total',
+		value : `${(valueRail[0] || railDomesticValue)?.toLocaleString('en-IN', options)} 
+		(${totalPerRailValue?.toLocaleString('en-IN', options)}%)` || '---',
+	},
+	{
+		name  : 'Domestic',
+		value : `${(valueRail[1] || railDomesticValue)?.toLocaleString('en-IN', options)} 
+		(${railValuePer?.toLocaleString('en-IN', options)}%)` || '---',
+	},
 ];
 
 export const getProjectData = [
@@ -297,29 +403,39 @@ export const getSalaryOceanData = (
 ) => [
 	{
 		name  : 'Total',
-		value : `${salaryVolume[0]
-		|| totalSalaryOcean.toFixed(2)} (${totalVolumePer.toFixed(2)}%)` || '---',
+		value : `${(salaryVolume[0]
+		|| totalSalaryOcean)?.toLocaleString('en-IN', options)} 
+		(${totalVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'FCL Exports',
-		value : `${salaryVolume[1] || fclExportSalaryVolume.toFixed(2)} (${fclExportVolumePer.toFixed(2)}%)` || '---',
+		value : `${(salaryVolume[1]
+			|| fclExportSalaryVolume)?.toLocaleString('en-IN', options)} 
+			(${fclExportVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'FCL Imports',
-		value : `${salaryVolume[2] || fclImportSalaryVolume.toFixed(2)} (${fclImportVolumePer.toFixed(2)}%)` || '---',
+		value : `${(salaryVolume[2]
+			|| fclImportSalaryVolume)?.toLocaleString('en-IN', options)} 
+			(${fclImportVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'LCL Exports',
-		value : `${salaryVolume[3] || lclExportSalaryVolume.toFixed(2)} (${lclExportVolumePer.toFixed(2)}%)` || '---',
+		value : `${(salaryVolume[3]
+			|| lclExportSalaryVolume)?.toLocaleString('en-IN', options)} 
+			(${lclExportVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'LCL Imports',
-		value : `${salaryVolume[4] || lclImportSalaryVolume.toFixed(2)} (${lclImportVolumePer.toFixed(2)}%)` || '---',
+		value : `${(salaryVolume[4]
+			|| lclImportSalaryVolume)?.toLocaleString('en-IN', options)} 
+			(${lclImportVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'Customs',
-		value : `${salaryVolume[5]
-			|| oceanCustomSalaryVolume.toFixed(2)} (${oceanCustomVolumePer.toFixed(2)}%)` || '---',
+		value : `${(salaryVolume[5]
+			|| oceanCustomSalaryVolume)?.toLocaleString('en-IN', options)} 
+			(${oceanCustomVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 ];
 
@@ -340,29 +456,35 @@ export const getSalaryOceanDataValue = (
 ) => [
 	{
 		name  : 'Total',
-		value : `${salaryValue[0]
-		|| totalSalaryOceanValue.toFixed(2)} (${totalPerOcean.toFixed(2)}%)` || '---',
+		value : `${(salaryValue[0]
+		|| totalSalaryOceanValue)?.toLocaleString('en-IN', options)} 
+		(${totalPerOcean?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'FCL Exports',
-		value : `${salaryValue[1] || fclExportSalaryValue.toFixed(2)} (${fclExportValuePer.toFixed(2)}%)` || '---',
+		value : `${(salaryValue[1] || fclExportSalaryValue)?.toLocaleString('en-IN', options)} 
+		(${fclExportValuePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'FCL Imports',
-		value : `${salaryValue[2] || fclImportSalaryValue.toFixed(2)} (${fclImportValuePer.toFixed(2)}%)` || '---',
+		value : `${(salaryValue[2] || fclImportSalaryValue)?.toLocaleString('en-IN', options)} 
+		(${fclImportValuePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'LCL Exports',
-		value : `${salaryValue[3] || lclExportSalaryValue.toFixed(2)} (${lclExportValuePer.toFixed(2)}%)` || '---',
+		value : `${(salaryValue[3] || lclExportSalaryValue)?.toLocaleString('en-IN', options)} 
+		(${lclExportValuePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'LCL Imports',
-		value : `${salaryValue[4] || lclImportSalaryValue.toFixed(2)} (${lclImportValuePer.toFixed(2)}%)` || '---',
+		value : `${(salaryValue[4] || lclImportSalaryValue)?.toLocaleString('en-IN', options)} 
+		(${lclImportValuePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'Customs',
-		value : `${salaryValue[5]
-			|| oceanCustomSalaryValue.toFixed(2)} (${oceanCustomVolumePer.toFixed(2)}%)` || '---',
+		value : `${(salaryValue[5]
+			|| oceanCustomSalaryValue)?.toLocaleString('en-IN', options)} 
+			(${oceanCustomVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 ];
 
@@ -380,22 +502,26 @@ export const getSalaryAirData = (
 	{
 		name  : 'Total',
 		value : `${(salaryVolumeAir[0]
-		|| totalSalaryAirVolume.toFixed(2))} (${totalPer.toFixed(2)}%)` || '---',
+		|| totalSalaryAirVolume)?.toLocaleString('en-IN', options)} 
+		(${totalPer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'Air Exports',
 		value : `${(salaryVolumeAir[1]
-			|| airSalaryExportVolume.toFixed(2))} (${airExportVolumePer.toFixed(2)}%)` || '---',
+			|| airSalaryExportVolume)?.toLocaleString('en-IN', options)}
+			 (${airExportVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'Air Imports',
 		value : `${(salaryVolumeAir[2]
-			|| airSalaryImportVolume.toFixed(2))} (${airImportVolumePer.toFixed(2)}%)` || '---',
+			|| airSalaryImportVolume)?.toLocaleString('en-IN', options)} 
+			(${airImportVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'Air Customs',
 		value : `${(salaryVolumeAir[3]
-			|| airCustomImportVolume.toFixed(2))} (${airCustomVolumePer.toFixed(2)}%)` || '---',
+			|| airCustomImportVolume)?.toLocaleString('en-IN', options)} 
+			(${airCustomVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 ];
 
@@ -413,22 +539,26 @@ export const getSalaryAirDataValue = (
 	{
 		name  : 'Total',
 		value : `${(salaryValueAir[0]
-		|| totalSalaryAirValue.toFixed(2))} (${totalPerAir.toFixed(2)}%)` || '---',
+		|| totalSalaryAirValue)?.toLocaleString('en-IN', options)}
+		(${totalPerAir?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'Air Exports',
 		value : `${(salaryValueAir[1]
-			|| airSalaryExportValue.toFixed(2))} (${airExportValuePer.toFixed(2)}%)` || '---',
+			|| airSalaryExportValue)?.toLocaleString('en-IN', options)} 
+			(${airExportValuePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'Air Imports',
 		value : `${(salaryValueAir[2]
-			|| airSalaryImportValue.toFixed(2))} (${airImportValuePer.toFixed(2)}%)` || '---',
+			|| airSalaryImportValue)?.toLocaleString('en-IN', options)} 
+			(${airImportValuePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'Air Customs',
 		value : `${(salaryValueAir[3]
-			|| airCustomImportValue.toFixed(2))} (${airCustomValuePer.toFixed(2)}%)` || '---',
+			|| airCustomImportValue)?.toLocaleString('en-IN', options)} 
+			(${airCustomValuePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 ];
 
@@ -444,15 +574,18 @@ export const getSalarySurfaceData = (
 	{
 		name  : 'Total',
 		value : `${(salaryVolumeSurface[0]
-			|| totalSalarySurfaceVolume.toFixed(2))} (${totalPerSurface.toFixed(2)}%)` || '---',
+			|| totalSalarySurfaceVolume)?.toLocaleString('en-IN', options)} 
+			(${totalPerSurface?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'FTL',
-		value : `${(salaryVolumeSurface[1] || ftlSalaryVolume.toFixed(2))} (${FTLVolumePer.toFixed(2)}%)` || '---',
+		value : `${(salaryVolumeSurface[1] || ftlSalaryVolume)?.toLocaleString('en-IN', options)} 
+		(${FTLVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'LTL',
-		value : `${(salaryVolumeSurface[2] || ltlSalaryVolume.toFixed(2))} (${LTLVolumePer.toFixed(2)}%)` || '---',
+		value : `${(salaryVolumeSurface[2] || ltlSalaryVolume)?.toLocaleString('en-IN', options)} 
+		(${LTLVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 ];
 
@@ -467,10 +600,20 @@ export const getSalarySurfaceDataValue = (
 ) => [
 	{
 		name  : 'Total',
-		value : `${(valueSurface[0] || totalSalarySurfaceValue)} (${totalPerValueSurface.toFixed(2)}%)` || '---',
+		value : `${(valueSurface[0]
+			|| totalSalarySurfaceValue)?.toLocaleString('en-IN', options)} 
+			(${totalPerValueSurface?.toLocaleString('en-IN', options)}%)` || '---',
 	},
-	{ name: 'FTL', value: `${(valueSurface[1] || ftlSalaryValue)} (${FTLValuePer.toFixed(2)}%)` || '---' },
-	{ name: 'LTL', value: `${(valueSurface[2] || ltlSalaryValue)} (${LTLValuePer.toFixed(2)}%)` || '---' },
+	{
+		name  : 'FTL',
+		value : `${(valueSurface[1] || ftlSalaryValue)?.toLocaleString('en-IN', options)} 
+	(${FTLValuePer?.toLocaleString('en-IN', options)}%)` || '---',
+	},
+	{
+		name  : 'LTL',
+		value : `${(valueSurface[2] || ltlSalaryValue)?.toLocaleString('en-IN', options)} 
+	(${LTLValuePer?.toLocaleString('en-IN', options)}%)` || '---',
+	},
 ];
 
 export const getRailSalaryData = (
@@ -481,11 +624,15 @@ export const getRailSalaryData = (
 ) => [
 	{
 		name  : 'Total',
-		value : `${(salaryVolumeRail[0] || railSalaryDomesticVolume)} (${totalPerRail.toFixed(2)}%)` || '---',
+		value : `${(salaryVolumeRail[0]
+			|| railSalaryDomesticVolume)?.toLocaleString('en-IN', options)} 
+			(${totalPerRail?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 	{
 		name  : 'Domestic',
-		value : `${(salaryVolumeRail[1] || railSalaryDomesticVolume)} (${railVolumePer.toFixed(2)}%)` || '---',
+		value : `${(salaryVolumeRail[1]
+			|| railSalaryDomesticVolume)?.toLocaleString('en-IN', options)} 
+			(${railVolumePer?.toLocaleString('en-IN', options)}%)` || '---',
 	},
 ];
 
@@ -497,9 +644,15 @@ export const getRailSalaryDataValue = (
 ) => [
 	{
 		name  : 'Total',
-		value : `${(valueRail[0] || railSalaryDomesticValue)} (${totalPerRailValue.toFixed(2)}%)` || '---',
+		value : `${(valueRail[0] || railSalaryDomesticValue)?.toLocaleString('en-IN', options)} 
+		(${totalPerRailValue?.toLocaleString('en-IN', options)}%)` || '---',
 	},
-	{ name: 'Domestic', value: `${(valueRail[1] || railSalaryDomesticValue)} (${railValuePer.toFixed(2)}%)` || '---' },
+	{
+		name  : 'Domestic',
+		value : `${(valueRail[1]
+		|| railSalaryDomesticValue)?.toLocaleString('en-IN', options)} 
+		(${railValuePer?.toLocaleString('en-IN', options)}%)` || '---',
+	},
 ];
 
 export const getOceanRatio = (
@@ -510,12 +663,12 @@ export const getOceanRatio = (
 	lclImports,
 	lclExports,
 ) => [
-	{ name: 'Total', value: `${ocean * 100} %` || '---' },
-	{ name: 'FCL Exports', value: `${fclExports * 100}%` || '---' },
-	{ name: 'FCL Imports', value: `${fclImports * 100}%` || '---' },
-	{ name: 'LCL Exports', value: `${lclExports * 100}%` || '---' },
-	{ name: 'LCL Imports', value: `${lclImports * 100}%` || '---' },
-	{ name: 'Customs', value: `${oceanCustoms * 100}%` || '---' },
+	{ name: 'Total', value: `${(ocean * 100)?.toLocaleString('en-IN', options)} %` || '---' },
+	{ name: 'FCL Exports', value: `${(fclExports * 100)?.toLocaleString('en-IN', options)}%` || '---' },
+	{ name: 'FCL Imports', value: `${(fclImports * 100)?.toLocaleString('en-IN', options)}%` || '---' },
+	{ name: 'LCL Exports', value: `${(lclExports * 100)?.toLocaleString('en-IN', options)}%` || '---' },
+	{ name: 'LCL Imports', value: `${(lclImports * 100)?.toLocaleString('en-IN', options)}%` || '---' },
+	{ name: 'Customs', value: `${(oceanCustoms * 100)?.toLocaleString('en-IN', options)}%` || '---' },
 ];
 
 export const getAirRatio = (
@@ -524,18 +677,18 @@ export const getAirRatio = (
 	airExports,
 	airImports,
 ) => [
-	{ name: 'Total', value: `${air * 100} %` || '---' },
+	{ name: 'Total', value: `${(air * 100)?.toLocaleString('en-IN', options)} %` || '---' },
 	{
 		name  : 'Air Exports',
-		value : `${airExports * 100} %` || '---',
+		value : `${(airExports * 100)?.toLocaleString('en-IN', options)} %` || '---',
 	},
 	{
 		name  : 'Air Imports',
-		value : `${airImports * 100} %` || '---',
+		value : `${(airImports * 100)?.toLocaleString('en-IN', options)} %` || '---',
 	},
 	{
 		name  : 'Air Customs',
-		value : `${airCustoms * 100} %` || '---',
+		value : `${(airCustoms * 100)?.toLocaleString('en-IN', options)} %` || '---',
 	},
 ];
 export const getSurfaceRatio = (
@@ -545,15 +698,15 @@ export const getSurfaceRatio = (
 ) => [
 	{
 		name  : 'Total',
-		value : `${surface * 100} %` || '---',
+		value : `${(surface * 100)?.toLocaleString('en-IN', options)} %` || '---',
 	},
 	{
 		name  : 'FTL',
-		value : `${ftl * 100} %` || '---',
+		value : `${(ftl * 100)?.toLocaleString('en-IN', options)} %` || '---',
 	},
 	{
 		name  : 'LTL',
-		value : `${ltl * 100} %` || '---',
+		value : `${(ltl * 100)?.toLocaleString('en-IN', options)} %` || '---',
 	},
 ];
 
@@ -563,7 +716,7 @@ export const getRailRatio = (
 ) => [
 	{
 		name  : 'Total',
-		value : `${rail * 100} %` || '---',
+		value : `${(rail * 100)?.toLocaleString('en-IN', options)} %` || '---',
 	},
-	{ name: 'Domestic', value: `${railDomestic * 100} %` || '---' },
+	{ name: 'Domestic', value: `${(railDomestic * 100)?.toLocaleString('en-IN', options)} %` || '---' },
 ];

@@ -4,7 +4,7 @@ import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useContext } from 'react';
 
-import getApiErrorString from '../../../utils/getApiErrorString';
+import toastApiError from '../../../utils/toastApiError';
 import { getPrefillValue, getDateForPayload } from '../../utils/dateFormatter';
 import controls from '../EditSchedule/controls';
 
@@ -72,7 +72,7 @@ export default function useEditServiceSchedule({
 				shipmentRefetch();
 			}
 		} catch (err) {
-			Toast.error(getApiErrorString(err));
+			toastApiError(err);
 		}
 	};
 

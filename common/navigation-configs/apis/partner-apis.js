@@ -7876,7 +7876,7 @@ const partner = {
 			access_type : 'private',
 		},
 	],
-	cfo_dashboard: [
+	business_finance_dashboard: [
 		{
 			api         : 'get_payments_dashboard_finance_profitability_shipment',
 			access_type : 'private',
