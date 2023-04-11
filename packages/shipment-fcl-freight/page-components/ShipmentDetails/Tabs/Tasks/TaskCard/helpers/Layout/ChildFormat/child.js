@@ -95,20 +95,20 @@ function Child({
 							</div>
 						);
 					})}
-					<div style={{ width: '2em', marginTop: '24px' }}>
-						{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
-							<IcMDelete
-								className={`form-fieldArray-${name}-remove`}
-								onClick={() => remove(index, 1)}
-								style={{
-									width: '2em', height: '2em', marginTop: '8px', cursor: 'pointer',
-								}}
-							/>
-						) : null}
 
-					</div>
 				</div>
 			))}
+			<div style={{ width: '2em', marginTop: '24px' }}>
+				{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
+					<IcMDelete
+						className={`form-fieldArray-${name}-remove`}
+						onClick={() => remove(index, 1)}
+						style={{
+							width: '2em', height: '2em', marginTop: '8px', cursor: 'pointer',
+						}}
+					/>
+				) : null}
+			</div>
 		</div>
 	);
 }
