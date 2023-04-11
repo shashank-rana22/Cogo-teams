@@ -20,7 +20,10 @@ function AgentModal({
 		setPagination = () => {},
 	} = useListChatAgents(search);
 
-	const { updateAgentPreference, createLoading = false } = useUpdateAgentPreference({ getListChatAgents });
+	const {
+		updateAgentPreference,
+		createLoading = false,
+	} = useUpdateAgentPreference({ getListChatAgents });
 
 	const {
 		list = [],
@@ -30,6 +33,7 @@ function AgentModal({
 	} = listAgentStatus;
 
 	const modifiedList = loading ? [{}, {}, {}, {}, {}, {}, {}, {}] : list;
+
 	return (
 		<Modal
 			size="md"

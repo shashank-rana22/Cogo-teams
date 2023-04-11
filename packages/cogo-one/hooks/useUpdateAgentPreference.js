@@ -17,7 +17,7 @@ function useUpdateAgentPreference({ getListChatAgents }) {
 			Toast.success('Successfully Updated');
 			getListChatAgents();
 		} catch (error) {
-			Toast.error(getApiErrorString(error));
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 	return {
