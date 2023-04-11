@@ -53,6 +53,7 @@ importers:
     specifiers:
       '@cogoport/access-management': workspace:0.1.0
       '@cogoport/allocation': workspace:0.1.0
+      '@cogoport/athena-dashboard': workspace:0.1.0
       '@cogoport/authentication': workspace:0.1.0
       '@cogoport/booking-desk': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
@@ -96,6 +97,7 @@ importers:
     dependencies:
       '@cogoport/access-management': link:../packages/access-management
       '@cogoport/allocation': link:../packages/allocation
+      '@cogoport/athena-dashboard': link:../packages/athena-dashboard
       '@cogoport/authentication': link:../packages/authentication
       '@cogoport/booking-desk': link:../packages/booking-desk
       '@cogoport/business-finance': link:../packages/business-finance
@@ -435,6 +437,32 @@ importers:
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.6
+      react: 18.2.0
+
+  packages/athena-dashboard:
+    specifiers:
+      '@cogoport/charts': ^1.0.1
+      '@cogoport/components': ^1.0.395
+      '@cogoport/forms': workspace:0.1.0
+      '@cogoport/globalization': workspace:^0.0.1
+      '@cogoport/icons-react': ^1.0.65
+      '@cogoport/navigation-configs': workspace:0.1.0
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:0.1.0
+      '@cogoport/store': workspace:0.1.0
+      '@cogoport/utils': ^1.2.3
+      react: 18.2.0
+    dependencies:
+      '@cogoport/charts': 1.0.2_react@18.2.0
+      '@cogoport/components': 1.0.396_n4iqapq6hltb5mr4rez3emws4q
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
+      '@cogoport/icons-react': 1.0.66_react@18.2.0
+      '@cogoport/navigation-configs': link:../../common/navigation-configs
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
       react: 18.2.0
 
   packages/authentication:

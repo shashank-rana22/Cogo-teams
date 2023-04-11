@@ -3,7 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback } from 'react';
 
-const useSaveCustomList = ({ deleteData, setCustomModal }) => {
+const useSaveCustomList = ({ setCustomModal }) => {
 	const { profile } = useSelector((state) => state || {});
 
 	const [
@@ -34,7 +34,6 @@ const useSaveCustomList = ({ deleteData, setCustomModal }) => {
 		try {
 			const res = await saveTrigger({
 				params: {
-
 					createdBy: profile.partner?.id,
 				},
 			});
@@ -46,11 +45,11 @@ const useSaveCustomList = ({ deleteData, setCustomModal }) => {
 		}
 	}, [profile.partner?.id, saveTrigger, setCustomModal]);
 
-	const refetchDelete = useCallback(async () => {
+	const refetchDelete = useCallback(async (item) => {
 		try {
 			const res = await deleteTrigger({
-				params: {
-					id: deleteData?.id,
+				data: {
+					id: item?.id,
 				},
 			});
 			if (res.data) {
@@ -60,7 +59,7 @@ const useSaveCustomList = ({ deleteData, setCustomModal }) => {
 		} catch (error) {
 			Toast.error(error?.response?.data?.message);
 		}
-	}, [deleteData?.id, deleteTrigger, refetch]);
+	}, [deleteTrigger, refetch]);
 
 	return {
 		refetch,
