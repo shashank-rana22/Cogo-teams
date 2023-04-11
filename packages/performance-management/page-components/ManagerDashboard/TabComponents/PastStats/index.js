@@ -9,7 +9,7 @@ import TeamMembersList from '../../TeamMembersList';
 import styles from './styles.module.css';
 
 function PastStats() {
-	const { data = {}, loading = false, params, setParams, setPage } = useGetMonthStats();
+	const { data = {}, loading = false, params = {}, setParams, setPage } = useGetMonthStats();
 
 	const { list = [], pagination_data = {}, is_manager = true } = data;
 

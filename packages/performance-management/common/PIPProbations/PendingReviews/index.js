@@ -29,15 +29,9 @@ function PendingReviews({
 	const { list = [], pagination_data = {} } = employeeData;
 	const { page_limit, page, total_count } = pagination_data;
 
-	useEffect(() => {
-		if (refetchList) {
-			onSubmitModal();
-			setRefetchList(false);
-		}
-	}, [onSubmitModal, refetchList, setRefetchList]);
-
 	const columnsToShow = source === 'hr_dashboard' ? feedbackDataColumns.pendingReviewsList[logType]
 		: feedbackDataColumns.managerProbationList;
+
 	const columns = useGetColumns({
 		columnsToShow,
 		setItem,
@@ -45,6 +39,13 @@ function PendingReviews({
 		activeTab,
 		setModal,
 	});
+
+	useEffect(() => {
+		if (refetchList) {
+			onSubmitModal();
+			setRefetchList(false);
+		}
+	}, [onSubmitModal, refetchList, setRefetchList]);
 
 	return (
 		<div className={styles.container}>

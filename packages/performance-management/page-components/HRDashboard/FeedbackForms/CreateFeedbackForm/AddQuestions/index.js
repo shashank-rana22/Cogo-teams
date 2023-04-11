@@ -49,6 +49,21 @@ function AddQuestions({
 
 	const tags = watch('tags');
 
+	const showLoading = () => (
+		<div className={styles.questions}>
+			{Array(6).fill().map((i) => (
+				<Placeholder
+					height="80px"
+					margin="0 0 8px 0"
+					key={i}
+				/>
+			))}
+		</div>
+	);
+
+	const areFiltersApplied = params.Tags || params.Q;
+	const currentDesignation = bulkDesignations.length > 1 ? '...' : designation;
+
 	useEffect(() => {
 		if (!isEmpty(data)) {
 			const {	list: questions = [], form_questions: checkedQuestions = [] } = data;
@@ -77,21 +92,6 @@ function AddQuestions({
 		}
 		setRefetchList(false);
 	}, [refetchList, refetchQuestions]);
-
-	const showLoading = () => (
-		<div className={styles.questions}>
-			{[1, 2, 3, 4, 5, 6].map((i) => (
-				<Placeholder
-					height="80px"
-					margin="0 0 8px 0"
-					key={i}
-				/>
-			))}
-		</div>
-	);
-
-	const areFiltersApplied = params.Tags || params.Q;
-	const currentDesignation = bulkDesignations.length > 1 ? '...' : designation;
 
 	useEffect(() => {
 		setFormsParams((pv) => ({ ...pv, bulkDesignations }));

@@ -6,7 +6,7 @@ import ReassignManager from '../../ReassignManager';
 import styles from './styles.module.css';
 import TitleDiv from './TitleDiv';
 
-function ReassignManagerModal({ item, refetchList = () => {} }) {
+function ReassignManagerModal({ item = {}, refetchList = () => {} }) {
 	const [openReassign, setOpenReassign] = useState(false);
 
 	return (

@@ -82,7 +82,7 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>ID</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				{startCase(item.cogo_id || '-')}
+				{startCase(item?.cogo_id || '-')}
 			</div>
 		),
 		id  : 'cogo_id',
@@ -93,7 +93,7 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>DEPARTMENT</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				{startCase(item.department || '-')}
+				{startCase(item?.department || '-')}
 			</div>
 		),
 		id  : 'department',
@@ -104,7 +104,7 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>DESIGNATION</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				{startCase(item.designation || '-')}
+				{startCase(item?.designation || '-')}
 			</div>
 		),
 		id  : 'designation',
@@ -129,7 +129,7 @@ const useGetColumns = ({
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<div className={`styles.${ratingClass(item?.score)}`}>
-					{item.score || '-'}
+					{item?.score || '-'}
 				</div>
 				{' '}
 			</div>
@@ -203,7 +203,7 @@ const useGetColumns = ({
 		Header   : <div className={styles.head} />,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				<Button onClick={() => handleClick(item.user_id)} themeType="link">
+				<Button onClick={() => handleClick(item?.user_id)} themeType="link">
 					View Details
 					{' '}
 					<IcMArrowNext style={{ marginLeft: '8px' }} />
@@ -283,9 +283,9 @@ const useGetColumns = ({
 		accessor : (item) => (
 			<div className={styles.head_content}>
 				<Pill
-					color={statusColorMapping[item.employment_status]}
+					color={statusColorMapping[item?.employment_status]}
 				>
-					{startCase(item.employment_status || 'Not Known')}
+					{startCase(item?.employment_status || 'Not Known')}
 				</Pill>
 			</div>
 		),
@@ -300,7 +300,7 @@ const useGetColumns = ({
 					color={item.final_decision === 'confirmed' ? 'green' : 'yellow'}
 				>
 					{isEmpty(item.final_decision)
-						? (`in ${item.log_type}`) : (`${item.log_type} ${item.final_decision}`)}
+						? (`in ${item?.log_type || '-'}`) : (`${item?.log_type || '-'} ${item?.final_decision || '-'}`)}
 
 				</Pill>
 			</div>
@@ -382,7 +382,7 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>EMPLOYEES AFFECTED</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				{item.employee_count || '-'}
+				{item?.employee_count || '-'}
 			</div>
 		),
 		id  : 'number_of_employees',
@@ -392,7 +392,7 @@ const useGetColumns = ({
 		Header   : <div className={styles.head}>UPLOADED BY</div>,
 		accessor : (item) => (
 			<div className={styles.head_content}>
-				{startCase(item.uploaded_by || '---')}
+				{startCase(item?.uploaded_by || '---')}
 			</div>
 		),
 		id  : 'uploaded_by',

@@ -32,12 +32,6 @@ function CreateFeedbackForm({
 		});
 	};
 
-	useEffect(() => {
-		const { checkList = [], stage = '' } = fetchLocalCheckList(department, designation);
-		setQuestionActionList((pv) => ({ ...pv, checked: checkList }));
-		setFormStage(stage || 'add_questions');
-	}, [department, designation, setFormStage]);
-
 	const renderFormStage = () => {
 		if (formStage === 'add_questions') {
 			return (
@@ -81,6 +75,12 @@ function CreateFeedbackForm({
 
 		return null;
 	};
+
+	useEffect(() => {
+		const { checkList = [], stage = '' } = fetchLocalCheckList(department, designation);
+		setQuestionActionList((pv) => ({ ...pv, checked: checkList }));
+		setFormStage(stage || 'add_questions');
+	}, [department, designation, setFormStage]);
 
 	return renderFormStage();
 }

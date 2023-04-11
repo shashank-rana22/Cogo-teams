@@ -2,7 +2,6 @@ import { Modal, Tooltip, Toast, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import UploadController from '@cogoport/forms/page-components/Controlled/UploadController';
 import { IcMInfo } from '@cogoport/icons-react';
-import { useIrisRequest } from '@cogoport/request';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -11,6 +10,7 @@ import getDefaultFeedbackMonth from '../../../../utils/getDefaultYearMonth';
 import Filters from '../../../Filters';
 
 import styles from './styles.module.css';
+import useUploadCSV from './useUploadCSV';
 
 function PipUploadModal({ item = {}, modal, setModal = () => {}, logType = '', setRefetchList = () => {} }) {
 	const [type, setType] = useState(logType);
@@ -21,40 +21,19 @@ function PipUploadModal({ item = {}, modal, setModal = () => {}, logType = '', s
 		Month : feedbackMonth,
 	});
 
-	const [{ loading : uploadLoading = false }, trigger] = useIrisRequest({
-		url    : logType === 'correction' ? 'post_iris_update_file' : 'post_iris_create_file',
-		method : 'post',
-	}, { manual: true });
+	const { uploadLoading = false, uploadCSVs = () => {} } = useUploadCSV({
+		item,
+		params,
+		type,
+		setModal,
+		setRefetchList,
+	});
 
 	const { control, watch, formState:{ errors } } = useForm();
 
 	const uploadedCSVFile = watch('uploaded_csv_file');
 
 	const isUploadPossible = type === 'normalization' ? !!params.Month : true;
-
-	const uploadCSVs = async () => {
-		try {
-			await trigger({
-				data: {
-					...(type === 'correction' ? { Url: uploadedCSVFile?.finalUrl, FileID: item.id } : {
-						CsvUrl: uploadedCSVFile?.finalUrl,
-						...(type === 'normalization' && {
-							Year  : params.Year?.toString(),
-							Month : params.Month?.toString(),
-						}),
-						CsvType  : type === 'normalization' ? 'approve_ratings' : type,
-						FileName : uploadedCSVFile?.fileName,
-					}),
-				},
-			});
-
-			Toast.success('File sent for processing. Please check after some time...');
-			setModal('');
-			setRefetchList(true);
-		} catch (e) {
-			Toast.error(e.response?.data.error?.toString());
-		}
-	};
 
 	const downloadSampleCsv = () => {
 		window.open(sampleTypeCsv[type], '_blank');
@@ -145,7 +124,7 @@ function PipUploadModal({ item = {}, modal, setModal = () => {}, logType = '', s
 							{type && (
 								<Button
 									themeType="primary"
-									onClick={() => uploadCSVs()}
+									onClick={() => uploadCSVs(uploadedCSVFile)}
 									disabled={!isUploadPossible || isEmpty(uploadedCSVFile)}
 									loading={uploadLoading}
 								>

@@ -31,13 +31,6 @@ function Dashboard({
 	const { list = [], pagination_data = {} } = employeeData;
 	const { page_limit, page, total_count } = pagination_data;
 
-	useEffect(() => {
-		if (refetchList) {
-			onSubmitModal();
-			setRefetchList(false);
-		}
-	}, [onSubmitModal, refetchList, setRefetchList]);
-
 	const columnsToShow = feedbackDataColumns.pipProbationList;
 	const columns = useGetColumns({
 		columnsToShow,
@@ -47,6 +40,13 @@ function Dashboard({
 		setModal,
 		setOpenLogModal,
 	});
+
+	useEffect(() => {
+		if (refetchList) {
+			onSubmitModal();
+			setRefetchList(false);
+		}
+	}, [onSubmitModal, refetchList, setRefetchList]);
 
 	return (
 		<div className={styles.container}>

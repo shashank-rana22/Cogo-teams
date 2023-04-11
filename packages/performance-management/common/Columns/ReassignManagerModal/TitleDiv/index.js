@@ -1,4 +1,4 @@
-function TitleDiv({ item, styles }) {
+function TitleDiv({ item = {}, styles }) {
 	return (
 		<>
 			<div className={styles.user}>

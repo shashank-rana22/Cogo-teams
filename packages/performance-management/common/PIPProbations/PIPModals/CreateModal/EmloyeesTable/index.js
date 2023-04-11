@@ -34,6 +34,13 @@ function EmployeesTable({ source = 'log_modal', setItem = () => {} }) {
 	const { list: newTeamList = [], pagination_data = {} } = feedbackData;
 	const { total_count = '' } = pagination_data;
 
+	const cogoUsersControl = useListReassignControls();
+
+	const columnsToShow = [
+		...(source === 'log_modal' ? feedbackDataColumns.logModal : feedbackDataColumns.manualFeedbacks)];
+
+	const columns = useGetColumns({ setRefetchReportees, columnsToShow, source, setItem });
+
 	useEffect(() => {
 		setParams((previousParams) => ({
 			...previousParams,
@@ -42,13 +49,6 @@ function EmployeesTable({ source = 'log_modal', setItem = () => {} }) {
 	}, [managerId, setParams]);
 
 	useEffect(() => debounceQuery(searchValue), [debounceQuery, searchValue]);
-
-	const cogoUsersControl = useListReassignControls();
-
-	const columnsToShow = [
-		...(source === 'log_modal' ? feedbackDataColumns.logModal : feedbackDataColumns.manualFeedbacks)];
-
-	const columns = useGetColumns({ setRefetchReportees, columnsToShow, source, setItem });
 
 	useEffect(() => {
 		if (refetchReportees) {
