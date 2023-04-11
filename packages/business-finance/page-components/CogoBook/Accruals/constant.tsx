@@ -24,6 +24,13 @@ export const monthData = {
 	12 : 'December',
 };
 
+export const optionsEntity = [
+	{ label: '201', value: '201' },
+	{ label: '301', value: '301' },
+	{ label: '401', value: '401' },
+	{ label: '501', value: '501' },
+];
+
 const content = (purchaseInvoicesCount, salesInvoicesCount) => {
 	const { creditNoteCount = '', invoiceCount = '', proformaCount = ''	} = purchaseInvoicesCount || {};
 	const {
@@ -84,9 +91,6 @@ export const column = (
 		setFilters,
 	}:ColumnInterface,
 ) => {
-	const handleCloseModal = () => {
-		setOpenDeleteModal(false);
-	};
 	const handleDelete = (key = '') => {
 		setOpenDeleteModal((previousActions) => ({
 			...previousActions,
@@ -333,7 +337,7 @@ export const column = (
 						{openDeleteModal[id] && (
 							<DeleteModal
 								openDeleteModal={openDeleteModal}
-								handleCloseModal={handleCloseModal}
+								handleDelete={handleDelete}
 								setOpenDeleteModal={setOpenDeleteModal}
 								deleteSelected={deleteSelected}
 								id={id}

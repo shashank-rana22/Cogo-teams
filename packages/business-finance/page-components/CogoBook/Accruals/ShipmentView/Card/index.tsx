@@ -4,6 +4,7 @@ import { startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import SelectAccrual from '../../../../commons/SelectAccrual';
+import { optionsEntity } from '../../constant';
 import { FilterInterface } from '../../interface';
 import { optionSelect, optionsMonth, optionsPills, optionsShipment, optionsYear } from '../constant';
 
@@ -20,11 +21,12 @@ interface CardInterface {
 	setShowBtn: React.Dispatch<React.SetStateAction<boolean>>
 	setCheckedRows: React.Dispatch<React.SetStateAction<{}>>
 	setPayload: React.Dispatch<React.SetStateAction<any[]>>
+	isApplyEnable?:boolean
 }
 
 function Card({
 	refetch, filters, setFilters, shipmentLoading, setViewSelected,
-	setShowBtn, setCheckedRows, setPayload,
+	setShowBtn, setCheckedRows, setPayload, isApplyEnable,
 }:CardInterface) {
 	const [selectFilter, setSelectFilter] = useState(false);
 
@@ -179,6 +181,15 @@ function Card({
 				</div>
 				<div className={styles.hr_filter} />
 				<div className={styles.select_container}>
+					<Select
+						value={filters?.entity}
+						onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
+						placeholder="Entity"
+						options={optionsEntity}
+						isClearable
+						style={{ width: '100px' }}
+					/>
+
 					<Popover
 						placement="bottom"
 						caret={false}
@@ -206,8 +217,9 @@ function Card({
 						placeholder="Shipment Type"
 						options={optionsShipment}
 						isClearable
-						style={{ width: '200px' }}
+						style={{ width: '150px' }}
 					/>
+
 				</div>
 			</div>
 			<div className={styles.more_filter}>
@@ -228,7 +240,7 @@ function Card({
 				<Button
 					size="lg"
 					onClick={() => { onSubmit(); }}
-					disabled={!filters.year && !filters.month}
+					disabled={!isApplyEnable}
 					loading={shipmentLoading}
 				>
 					Apply
