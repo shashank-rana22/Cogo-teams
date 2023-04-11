@@ -1,21 +1,26 @@
 import { Avatar } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { useSelector } from '@cogoport/store';
 
 import styles from './styles.module.css';
 
-function FeedBackContent({ feedback, onClickEdit = () => {}, id, source = '' }) {
+function FeedBackContent({ feedback, onClickEdit = () => {}, source = '' }) {
+	const { general } = useSelector((state) => state);
+	const { feedbackId:id = '' } = general.query || {};
+
 	const {
 		suggested_answer = '',
 		suggested_question_abstract = '',
 		author = {},
 		updated_at,
-		remark = '',
+		remark,
+		id:feedbackId = '',
 	} = feedback || {};
 
 	const { name = '', picture = '' } = author?.[0] || {};
 
-	const remarkContent = (remark || '').split('.');
+	const remarkContent = (remark || '').split('.') || [];
 
 	return (
 		<div>
@@ -25,9 +30,8 @@ function FeedBackContent({ feedback, onClickEdit = () => {}, id, source = '' }) 
 					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 					formatType : 'date',
 				})}
-				{' '}
 				,
-
+				{' '}
 				{formatDate({
 					date       : updated_at,
 					timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
@@ -37,7 +41,10 @@ function FeedBackContent({ feedback, onClickEdit = () => {}, id, source = '' }) 
 
 			</div>
 
-			<div className={styles.card}>
+			<div
+				className={styles.card}
+				style={{ borderColor: feedbackId === id ? 'red' : '#ddd' }}
+			>
 				<div className={styles.card_header}>
 					<Avatar
 						src={picture || 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/img_avatar.png'}
@@ -72,7 +79,7 @@ function FeedBackContent({ feedback, onClickEdit = () => {}, id, source = '' }) 
 							<div
 								className={styles.anchor_text}
 								role="presentation"
-								onClick={() => onClickEdit(id)}
+								onClick={() => onClickEdit(feedbackId)}
 							>
 								Edit Answer
 							</div>

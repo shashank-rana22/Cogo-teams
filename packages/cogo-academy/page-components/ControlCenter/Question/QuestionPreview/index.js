@@ -57,8 +57,10 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 		}
 	}, [fetchQuestion, query?.id]);
 
-	const onclickEdit = () => {
-		const href = `/learning/faq/create/question?mode=create&id=${id}`;
+	const onclickEdit = (feedbackId) => {
+		const showFeedbackId = feedbackId ? `&feedbackId=${feedbackId}` : '';
+
+		const href = `/learning/faq/create/question?mode=create&id=${id}${showFeedbackId}`;
 		router.push(href, href);
 		setQuestionPreview('create');
 	};
@@ -177,7 +179,7 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 						themeType="primary"
 						size="md"
 						className={styles.publish_button}
-						onClick={() => onclickEdit(id)}
+						onClick={() => onclickEdit()}
 					>
 						Edit
 					</Button>

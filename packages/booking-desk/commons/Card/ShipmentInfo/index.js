@@ -20,7 +20,8 @@ export default function ShipmentInfo({ item = {} }) {
 			</Tooltip>
 			{stakeholder?.name ? (
 				<div className={so1_container}>
-					SO1 :
+					SO1:
+					{' '}
 					{stakeholder.name}
 				</div>
 			) : null}
