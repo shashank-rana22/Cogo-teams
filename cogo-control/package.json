@@ -18,6 +18,7 @@
     "@cogoport/business-finance": "workspace:0.1.0",
     "@cogoport/ground-ops": "workspace:0.1.0",
     "@cogoport/cogo-academy": "workspace:0.1.0",
+    "@cogoport/athena-dashboard": "workspace:0.1.0",
     "@cogoport/cogo-one": "workspace:0.1.1",
     "@cogoport/cogo-verse-analytics": "workspace:0.1.0",
     "@cogoport/components": "^1.0.359",
