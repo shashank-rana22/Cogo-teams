@@ -71,9 +71,7 @@ function Stage({
 		[stageItems, setStageItems],
 	);
 
-	const rootComponents = stageItems.filter((item) => !item.parentId);
-
-	const memoItems = useMemo(() => rootComponents?.map((item, index) => {
+	const memoItems = useMemo(() => stageItems?.map((item, index) => {
 		const { id, type } = item;
 		return (
 			<div
@@ -101,30 +99,22 @@ function Stage({
 	  selectedItem,
 	  isNewItemAdding,
 	  handleNewAddingItemPropsChange,
-	  components,
 	]);
 
 	//! Portal :: useDrop for stage process
 	const [{ canDrop, isOver, draggingItemType }, dropRef] = useDrop({
-		accept : Object.keys(ITEM_TYPES),
-		drop   : (droppedItem) => {
-			const { type, id } = droppedItem;
+	  accept : Object.keys(ITEM_TYPES),
+	  drop   : (droppedItem) => {
+			const { id } = droppedItem;
 			if (!id) {
-				// a new item added
-				addNewItem(droppedItem, hoveredIndex, shouldAddBelow, parentComponentId, type);
+		  // a new item added
+		  		addNewItem(droppedItem, hoveredIndex, shouldAddBelow, parentComponentId);
 			} else {
-				// the result of sorting is applying the mock data
-				setComponents(stageItems);
+		  // the result of sorting is applying the mock data
+		  		setComponents(stageItems);
 			}
-			console.log(
-				'droppedItem: ',
-				type,
-				'order: ',
-				hoveredIndex,
-				isNewItemAdding ? 'new item added!' : '',
-			);
-		},
-		collect: (monitor) => ({
+	  },
+	  collect: (monitor) => ({
 			isOver           : monitor.isOver(),
 			draggingItemType : monitor.getItemType(),
 			canDrop          : monitor.canDrop(),

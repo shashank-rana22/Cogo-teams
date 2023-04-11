@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 // import { startCase } from '@cogoport/utils';
 import React, { useEffect } from 'react';
@@ -7,10 +6,10 @@ import { v1 as uuid } from 'uuid';
 
 import styles from './styles.module.css';
 
-function Item({ onNewItemAdding, row, handleClick }) {
+function Item({ onNewItemAdding, row, handleClick, components, parentComponent, childrenComponents }) {
 	const [{ isDragging }, dragRef] = useDrag({
 		type    : 'container',
-		item    : { type: 'container' },
+		item    : { ...parentComponent, children: childrenComponents },
 		collect : (monitor) => ({
 			isDragging: monitor.isDragging(),
 		}),

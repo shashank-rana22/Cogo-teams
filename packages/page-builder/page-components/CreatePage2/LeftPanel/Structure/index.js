@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { IcMPlusInCircle } from '@cogoport/icons-react';
 import React, { useMemo } from 'react';
@@ -36,18 +37,18 @@ function Structure(props) {
 		setShowContentModal(true);
 	};
 
-	const handleClick = (rows) => {
-		const parentComponent = {
-			id         : components.length + 1,
-			type       : 'container',
-			isRendered : false,
-			properties : {
-				content : '',
-				styles  : {
-					display: 'flex',
-				},
+	const parentComponent = {
+		type       : 'container',
+		isRendered : false,
+		properties : {
+			content : '',
+			styles  : {
+				display: 'flex',
 			},
-		};
+		},
+	};
+
+	const getChildrenComponents = (rows) => {
 		const childrenComponents = rows.map((row) => {
 			const elementId = uuid();
 
@@ -76,12 +77,12 @@ function Structure(props) {
 			});
 		});
 
-		addNewItem([parentComponent, ...childrenComponents], selectedItem?.index, true, parentComponent.id, 'container');
+		return childrenComponents;
 	};
 
 	const LeftPanelItems = useMemo(
 		() => (widths || []).map((row) => (
-			<Item row={row} handleClick={handleClick} onNewItemAdding={onNewItemAdding} />
+			<Item row={row} handleClick={() => addNewItem({ ...parentComponent, children: getChildrenComponents(row) }, selectedItem?.index, true, parentComponent.id)} onNewItemAdding={onNewItemAdding} components={components} parentComponent={parentComponent} childrenComponents={getChildrenComponents(row)} />
 		)),
 		[addNewItem, onNewItemAdding, selectedItem],
 	);

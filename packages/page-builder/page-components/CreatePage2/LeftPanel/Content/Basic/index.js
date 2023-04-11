@@ -14,7 +14,7 @@ function Basic(props) {
 			<Item
 				itemType={content.type}
 				content={content}
-				onClick={() => addNewItem(content, selectedItem?.index, true, parentComponentId, content.type)}
+				onClick={() => addNewItem(content, selectedItem?.index, true, parentComponentId)}
 				onNewItemAdding={onNewItemAdding}
 			/>
 		)),

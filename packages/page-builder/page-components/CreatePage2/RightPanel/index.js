@@ -1,4 +1,3 @@
-import { isEmpty } from '@cogoport/utils';
 import React, { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
@@ -13,42 +12,30 @@ const ITEM_TYPES = {
 	container : 'container',
 };
 
-function ComponentBuilder({ widget, components, setComponents }) {
-	if (isEmpty(widget)) {
-		return null; // skip rendering if already rendered
-	}
+// function ComponentBuilder({ widget }) {
+// 	const { children, properties } = widget || {};
 
-	const { id: elementId } = widget || {};
+// 	const { styles: style } = properties || {};
 
-	let childComponents = [];
+// 	return (
+// 		<div style={style}>
 
-	childComponents = components.filter((item) => item.parentId === elementId);
-
-	const { content = '', styles, attributes = {} } = widget.properties || {};
-
-	return (
-		<div style={styles}>
-
-			{childComponents.length === 0
-				? (
-					<div
-						role="presentation"
-						onClick={attributes.onClick}
-					>
-						{content}
-					</div>
-				)
-				: childComponents.map((childComponent) => (
-					<ComponentBuilder
-						key={childComponent.id}
-						widget={childComponent}
-						components={components}
-						setComponents={setComponents}
-					/>
-				))}
-		</div>
-	);
-}
+// 			{ (children || []).map((childComponent) => {
+// 				const { content = '', styles, attributes = {} } = childComponent.properties || {};
+// 				return (
+// 					<div style={styles}>
+// 						<div
+// 							role="presentation"
+// 							onClick={attributes.onClick}
+// 						>
+// 							{content}
+// 						</div>
+// 					</div>
+// 				);
+// 			})}
+// 		</div>
+// 	);
+// }
 
 function Item(props) {
 	const {
@@ -179,7 +166,8 @@ function Item(props) {
 			)}
 
 			{type === 'container' && (
-				<ComponentBuilder widget={widget} components={components} setComponents={setComponents} />
+				// <ComponentBuilder widget={widget} />
+				<div style={{ color: '#222' }}>structure</div>
 			)}
 		</div>
 	);
