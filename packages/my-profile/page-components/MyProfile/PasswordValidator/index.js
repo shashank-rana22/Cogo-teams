@@ -23,23 +23,26 @@ const VALID_PASSWORD_MAPPINGS = {
 	},
 };
 
-function PasswordValidator() {
+function PasswordValidator({ errorMessage = '' }) {
 	return (
+		<div>
+			<div className={styles.error_message}>
+				{errorMessage}
+			</div>
+			<div className={styles.password_validator}>
+				<div className="title">Password must contain:</div>
 
-		<div className={styles.password_validator}>
-			<div className="title">Password must contain:</div>
+				<div className="list">
+					{Object.entries(VALID_PASSWORD_MAPPINGS)?.map(([key, value]) => {
+						const { message = '' } = value;
 
-			<div className="list">
-				{Object.entries(VALID_PASSWORD_MAPPINGS)?.map(([key, value]) => {
-					const { message = '' } = value;
+						// const regex = new RegExp(pattern);
 
-					// const regex = new RegExp(pattern);
+						// const isValid = regex.test(password);
 
-					// const isValid = regex.test(password);
-
-					return (
-						<div className={`item item--${key}}`} style={{ display: 'flex', alignItems: 'center' }}>
-							{/* <div className={`icon icon--${isValid ? 'tick' : 'dot'}`}>
+						return (
+							<div className={`item item--${key}}`} style={{ display: 'flex', alignItems: 'center' }}>
+								{/* <div className={`icon icon--${isValid ? 'tick' : 'dot'}`}>
 								{isValid ? (
 									<img
 										alt="tick"
@@ -53,20 +56,20 @@ function PasswordValidator() {
 								)}
 							</div> */}
 
-							<div className="icon icon--dot">
-								<img
-									alt="dot"
-									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dot.svg"
-								/>
-							</div>
+								<div className="icon icon--dot">
+									<img
+										alt="dot"
+										src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dot.svg"
+									/>
+								</div>
 
-							<div className="message">{message}</div>
-						</div>
-					);
-				})}
+								<div className="message">{message}</div>
+							</div>
+						);
+					})}
+				</div>
 			</div>
 		</div>
-
 	);
 }
 

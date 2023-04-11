@@ -37,6 +37,7 @@ function MyProfile() {
 		handleSubmit = () => {},
 		getValues,
 		hideOrganizationHierarchy,
+		patternError,
 	} = useChangePassword({
 		refetch,
 		personDetails : detailsData,
@@ -119,6 +120,7 @@ function MyProfile() {
 					control={control}
 					errors={errors}
 					password={password}
+					patternError={patternError}
 
 				/>
 				<Modal.Footer>

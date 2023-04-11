@@ -19,6 +19,7 @@ const useChangePassword = ({
 	const { role_functions = [], role_sub_functions = [] } = auth_role_data || {};
 
 	const [error, setError] = useState({});
+	const [patternError, setPatternError] = useState('');
 
 	const [{ loading = false }, trigger] = useRequest({
 		url    : 'update_user_password',
@@ -37,6 +38,8 @@ const useChangePassword = ({
 				message : '',
 			},
 		}));
+
+		setPatternError('');
 	}, [watchPassword]);
 
 	const onCreate = async (values = {}) => {
@@ -57,6 +60,8 @@ const useChangePassword = ({
 			Toast.error(
 				getApiErrorString(err?.response?.data) || 'Invalid Password',
 			);
+
+			setPatternError(getApiErrorString(err?.response?.data));
 		}
 	};
 
@@ -77,6 +82,7 @@ const useChangePassword = ({
 		hideOrganizationHierarchy,
 		errors,
 		getValues,
+		patternError,
 	};
 };
 

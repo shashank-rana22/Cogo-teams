@@ -9,6 +9,7 @@ function ChangePassword({
 	control,
 	errors,
 	password,
+	patternError = '',
 }) {
 	return (
 		<div className={styles.container}>
@@ -23,7 +24,7 @@ function ChangePassword({
 			/>
 
 			<div className={styles.password_validator}>
-				<PasswordValidator password={password} />
+				<PasswordValidator errorMessage={patternError} password={password} />
 			</div>
 
 		</div>
