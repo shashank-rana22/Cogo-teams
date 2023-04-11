@@ -1969,5 +1969,7 @@ const saas = {
 		},
 	],
 
+	app_saas_cogostore:[]
+
 };
 export default saas;
