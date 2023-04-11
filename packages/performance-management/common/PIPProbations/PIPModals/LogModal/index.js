@@ -13,7 +13,6 @@ function LogModal({
 	onSubmit = () => {},
 	source = '',
 }) {
-	console.log('source::', source);
 	const [activeLogTab, setActiveLogTab] = useState(
 		(item.final_decision || source === 'manager_dashboard') ? 'all' : 'new',
 	);
