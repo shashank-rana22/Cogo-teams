@@ -25,7 +25,7 @@ function Filters({
 		<div className={styles.container}>
 			<Input
 				size="md"
-				placeholder="Search for Student name"
+				placeholder="Search by Student name"
 				value={searchValue}
 				onChange={handleSearchValue}
 				suffix={(
