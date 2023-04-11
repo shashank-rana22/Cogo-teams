@@ -95,12 +95,13 @@ function Stage({
 				/>
 			</div>
 		);
-	}), [
-		stageItems,
-		moveItem,
-		selectedItem,
-		isNewItemAdding,
-		handleNewAddingItemPropsChange,
+	  }), [
+	  stageItems,
+	  moveItem,
+	  selectedItem,
+	  isNewItemAdding,
+	  handleNewAddingItemPropsChange,
+	  components,
 	]);
 
 	//! Portal :: useDrop for stage process

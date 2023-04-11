@@ -81,6 +81,7 @@ function DNDComponent() {
 		  });
 
 		  setShowContentModal(false);
+		  setParentComponentId(null);
 		},
 		[components],
 	  );
@@ -121,6 +122,7 @@ function DNDComponent() {
 				isNewItemAdding={isNewItemAdding}
 				parentComponentId={parentComponentId}
 			/>
+
 		),
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[handleAddNewItem, selectedItem, isNewItemAdding],
@@ -161,7 +163,6 @@ function DNDComponent() {
 
 					<div>
 						<MemoRightPanel />
-
 					</div>
 
 				</div>
