@@ -107,10 +107,11 @@ function Announcements({
 						visible={popoverVisible}
 					>
 						<div className={styles.filter_btn_container}>
+
 							<Button themeType="secondary" size="sm" onClick={() => setPopoverVisible((prev) => !prev)}>
 								Filter
 								{announcement_type ? <div className={styles.filter_dot} /> : null}
-								<IcMFilter />
+								<IcMFilter style={{ marginLeft: '2px' }} />
 							</Button>
 
 						</div>
