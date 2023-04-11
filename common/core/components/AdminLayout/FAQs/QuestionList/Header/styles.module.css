@@ -64,7 +64,7 @@
 	margin-bottom: -15px;
 
 	&.test_module {
-		margin-bottom: unset;
 		margin-top: 40px;
+		margin-bottom: unset;
 	}
 }
