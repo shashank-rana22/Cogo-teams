@@ -1,6 +1,7 @@
 import { Tabs, TabPanel } from '@cogoport/components';
-import { startOfWeek, startOfMonth, getYear, getMonth, getDate } from '@cogoport/utils';
 import { useState } from 'react';
+
+import getDateParams from '../../utils/get-date-params';
 
 import Header from './Header';
 import KamData from './KamData';
@@ -9,19 +10,7 @@ import styles from './styles.module.css';
 function KamExpertise() {
 	const [activeTab, setActiveTab] = useState('this_week');
 
-	const currentTime = new Date();
-	const month = getMonth(currentTime);
-	const day = getDate(currentTime);
-	const year = getYear(currentTime);
-
-	const weekEnd = startOfWeek(new Date(year, month, day));
-
-	const monthEnd = startOfMonth(new Date(year, month, day));
-
-	const quarter = Math.floor(((month + 1) / 3));
-	const startFullQuarter = new Date(year, quarter * 3 - 3, 1);
-
-	const yearEnd = new Date(year, 0, 1);
+	const { weekEnd = '', monthEnd = '', startFullQuarter = '', yearEnd = '', currentTime = '' } = getDateParams();
 
 	const TAB_PANEL_MAPPING = {
 		this_week: {
