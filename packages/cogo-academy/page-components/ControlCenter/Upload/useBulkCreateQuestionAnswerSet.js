@@ -49,10 +49,10 @@ const useBulkCreateQuestionAnswerSet = () => {
 
 	const bulkCreateQuestionAnswerSet = async (val) => {
 		try {
-			const { upload_question } = val || {};
+			const { finalUrl } = val?.upload_question || {};
 
 			const payload = {
-				file_url: upload_question,
+				file_url: finalUrl,
 			};
 
 			await trigger({ data: payload });

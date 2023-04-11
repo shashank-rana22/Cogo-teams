@@ -7521,7 +7521,6 @@ const partner = {
 			access_type : 'private',
 			module      : 'myIncident',
 			feature     : 'myIncident',
-
 		},
 	],
 	vendor_payment: [
@@ -7928,7 +7927,6 @@ const partner = {
 			api         : 'post_translation_translate_bulk',
 			access_type : 'private',
 		},
-
 	],
 	reports: [
 		{
@@ -8973,6 +8971,11 @@ const partner = {
 			service_name : 'checkout',
 		},
 		{
+			api          : 'create_cogopoint_redemption_rule',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
+		{
 			api          : 'create_cogopoint_credit_rule',
 			access_type  : 'private',
 			service_name : 'cogopoint',
@@ -9237,11 +9240,9 @@ const partner = {
 			service_name : 'segmentation',
 		},
 		{
-
 			api          : 'create_duplicate_promotion',
 			access_type  : 'private',
 			service_name : 'promotion',
-
 		},
 		{
 			api          : 'get_promotion_shipment_stats',
@@ -10591,7 +10592,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
-
 	],
 	omni_channel: [
 		{
@@ -10656,7 +10656,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'unified_dashboard',
 		},
-
 	],
 	constants: [
 		{
@@ -11012,7 +11011,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'inventory_management',
 		},
-
 	],
 	cogo_one: [
 		{
@@ -11081,7 +11079,6 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
-
 			api          : 'check_outgoing_call_status',
 			access_type  : 'private',
 			service_name : 'voice_call',
