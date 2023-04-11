@@ -38,7 +38,7 @@ const useUpdateShipmentAdditionalService = ({
 
 	const handleShipperConfirm = () => {
 		const payload = {
-			id    : item.serviceListItem.id,
+			id    : item?.id,
 			state : 'accepted_by_importer_exporter',
 		};
 		handleSubmit(payload);

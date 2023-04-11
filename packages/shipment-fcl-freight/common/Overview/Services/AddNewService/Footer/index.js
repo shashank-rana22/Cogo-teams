@@ -26,7 +26,7 @@ function Footer({
 	return (
 		<div className={styles.container}>
 			<Button
-				className="secondary md"
+				themeType="secondary"
 				onClick={onClose}
 				disabled={loading}
 				id="shipment_form_header_cancel"

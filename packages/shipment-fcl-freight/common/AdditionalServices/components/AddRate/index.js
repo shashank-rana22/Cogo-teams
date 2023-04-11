@@ -1,8 +1,10 @@
 import { useForm } from '@cogoport/forms';
+import login_apis from '@cogoport/navigation-configs/apis/login_apis';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useCreateShipmentAdditionalService from '../../../../hooks/useCreateShipmentAdditionalService';
+import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
 
 import ActionsToShow from './ActionToShow';
 import BillToCustomer from './BillToCustomer';
@@ -25,16 +27,33 @@ function AddRate({
 	refetch,
 	onCancel = () => {},
 	filters,
-	updateResponse = () => {},
 	setShowChargeCodes = () => {},
+	source = 'overview',
 }) {
 	const [billToCustomer, setBillToCustomer] = useState(false);
+
+	const refetchForUpdateSubService = () => {
+		refetch();
+	};
+
+	const updateResponse = useUpdateShipmentAdditionalService({
+		item,
+		refetch: refetchForUpdateSubService,
+	});
 
 	const {
 		handleSubmit,
 		control,
 		formState: { errors },
+		setValue,
 	} = useForm();
+
+	useEffect(() => {
+		setValue('currency', item?.currency);
+		setValue('quantity', item?.quantity);
+		setValue('unit', item?.unit);
+		setValue('price', item?.price);
+	}, [item, setValue]);
 
 	const afterAddRate = () => {
 		setAddRate(false);
@@ -117,6 +136,7 @@ function AddRate({
 				control={control}
 				errors={errors}
 				serviceData={item}
+				source={source}
 			/>
 
 			<ActionsToShow

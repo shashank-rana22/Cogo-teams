@@ -10,6 +10,7 @@ function RenderAddRateForm({
 	control,
 	errors,
 	serviceData = {},
+	source = 'overview',
 }) {
 	const serviceProviderEmbededOptions = useGetAsyncOptions(
 		merge(asyncFieldsOrganization(), {
@@ -26,55 +27,65 @@ function RenderAddRateForm({
 		}),
 	);
 
-	const { formControl } = controls({ serviceData });
+	const { formControl } = controls({ serviceData, source });
 
-	const renderForm = (field) => {
-		switch (field.type) {
+	const renderForm = (ctrl) => {
+		switch (ctrl.type) {
 			case 'async-select':
 				return (
-					<div className={styles.input_container}>
-						<label>{field.label}</label>
-						<SelectController
-							name={field.name}
-							control={control}
-							size="sm"
-							options={field.options}
-							placeholder={field.placeholder}
-							rules={field.rules}
-							{...serviceProviderEmbededOptions}
-
-						/>
-						{errors[field.name] && <span>{errors[field.name].message}</span>}
-					</div>
+					ctrl.show
+					&& 					(
+						<div className={styles.input_container}>
+							<label>{ctrl.label}</label>
+							<SelectController
+								name={ctrl.name}
+								control={control}
+								size="sm"
+								options={ctrl.options}
+								placeholder={ctrl.placeholder}
+								rules={ctrl.rules}
+								{...serviceProviderEmbededOptions}
+							/>
+							{errors[ctrl.name] && <span>{errors[ctrl.name].message}</span>}
+						</div>
+					)
 				);
 			case 'input':
 				return (
-					<div className={styles.input_container}>
-						<label htmlFor={field.name}>{field.label}</label>
-						<InputController
-							name={field.name}
-							control={control}
-							size="sm"
-							placeholder={field.placeholder}
-							rules={field.rules}
-						/>
-						{errors[field.name] && <span>{errors[field.name].message}</span>}
-					</div>
+					ctrl.show
+					&& 					(
+						<div className={styles.input_container}>
+							<label htmlFor={ctrl.name}>{ctrl.label}</label>
+							<InputController
+								name={ctrl.name}
+								control={control}
+								size="sm"
+								placeholder={ctrl.placeholder}
+								rules={ctrl.rules}
+								disabled={source === 'task'}
+							/>
+							{errors[ctrl.name] && <span>{errors[ctrl.name].message}</span>}
+						</div>
+					)
 				);
 			case 'select':
 				return (
-					<div className={styles.input_container}>
-						<label>{field.label}</label>
-						<SelectController
-							name={field.name}
-							control={control}
-							size="sm"
-							options={field.options}
-							placeholder={field.placeholder}
-							rules={field.rules}
-						/>
-						{errors[field.name] && <span>{errors[field.name].message}</span>}
-					</div>
+					ctrl.show
+					&& 						(
+						<div className={styles.input_container}>
+							<label>{ctrl.label}</label>
+							<SelectController
+								name={ctrl.name}
+								control={control}
+								size="sm"
+								options={ctrl.options}
+								placeholder={ctrl.placeholder}
+								rules={ctrl.rules}
+								disabled={source === 'task'}
+							/>
+							{errors[ctrl.name] && <span>{errors[ctrl.name].message}</span>}
+						</div>
+					)
 				);
 			default:
 				return null;
@@ -83,7 +94,7 @@ function RenderAddRateForm({
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.form_container}>
-			{ formControl.map((field) => renderForm(field))}
+			{ formControl.map((ctrl) => renderForm(ctrl))}
 		</form>
 	);
 }

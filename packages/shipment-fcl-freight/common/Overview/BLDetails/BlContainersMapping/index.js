@@ -86,6 +86,7 @@ function BlContainersMapping({
 						setMappingModal(false);
 					}}
 					size="md"
+					themeType="secondary"
 					style={{ marginRight: 10 }}
 				>
 					Cancel

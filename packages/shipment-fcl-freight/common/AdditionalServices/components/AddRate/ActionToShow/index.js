@@ -10,7 +10,7 @@ function ActionsToShow({
 	handleSubmit,
 	setSecondStep,
 	setAddSellPrice = () => {},
-	updateResponse,
+	updateResponse = {},
 	loading,
 	onCancel = () => {},
 }) {
@@ -25,14 +25,14 @@ function ActionsToShow({
 		return (
 			<div className={styles.button_container}>
 				<Button
-					onClick={() => setSecondStep(true)}
+					// onClick={() => setSecondStep(true)}
 					disabled={loading}
-					themeType="primary"
+					themeType="secondary"
 				>
 					Request Changes
 				</Button>
 
-				<Button disabled={loading} onClick={handleSubmit(handleShipperConfirm)}>
+				<Button disabled={loading} onClick={handleShipperConfirm}>
 					Accept Service
 				</Button>
 			</div>
@@ -47,7 +47,7 @@ function ActionsToShow({
 				<Button
 					onClick={handleShipperSideCancel}
 					disabled={loading}
-					themeType="primary"
+					themeType="secondary"
 				>
 					Cancel Service
 				</Button>
@@ -80,7 +80,7 @@ function ActionsToShow({
 						onCancel();
 					}}
 					disabled={loading}
-					themeType="primary"
+					themeType="secondary"
 				>
 					Cancel
 				</Button>
@@ -106,7 +106,7 @@ function ActionsToShow({
 					setAddRate(false);
 					setAddSellPrice(false);
 				}}
-				themeType="primary"
+				themeType="secondary"
 				disabled={loading}
 			>
 				Cancel
