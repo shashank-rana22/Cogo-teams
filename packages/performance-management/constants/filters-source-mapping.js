@@ -33,7 +33,7 @@ const filtersSourceMapping = {
 		left: [
 			{ name: 'Department' },
 			{ name: 'Designation' },
-			{ name: 'Status' },
+			{ name: 'FeedbackStatus' },
 		],
 		right: [
 			{ name: 'Q', placeholder: 'Search User...' },

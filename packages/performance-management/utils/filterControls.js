@@ -91,7 +91,7 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 			],
 		},
 		{
-			name        : 'Status',
+			name        : 'FeedbackStatus',
 			label       : 'Status',
 			placeholder : 'Status...',
 			type        : 'select',

@@ -33,24 +33,24 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 	const {
 		Department = '', Designation = '',
 		ManagerID = '', Year = '', Month = '', date_range = {},
-		Q = '', CsvType = '', Status = '',
+		Q = '', CsvType = '', FeedbackStatus = '',
 	} = watch();
 
 	useEffect(() => {
 		setParams((previousParams) => ({
 			...previousParams,
-			Q           : query || undefined,
-			Department  : Department || undefined,
-			Designation : Designation || undefined,
-			Status      : Status || undefined,
-			Year        : Year || undefined,
-			Month       : Month || undefined,
-			ManagerID   : ManagerID || undefined,
-			StartDate   : date_range?.startDate || undefined,
-			EndDate     : date_range?.endDate || undefined,
-			CsvType     : CsvType || undefined,
+			Q              : query || undefined,
+			Department     : Department || undefined,
+			Designation    : Designation || undefined,
+			FeedbackStatus : FeedbackStatus || undefined,
+			Year           : Year || undefined,
+			Month          : Month || undefined,
+			ManagerID      : ManagerID || undefined,
+			StartDate      : date_range?.startDate || undefined,
+			EndDate        : date_range?.endDate || undefined,
+			CsvType        : CsvType || undefined,
 		}));
-	}, [query, setParams, Month, Department, Designation, Year, ManagerID, CsvType, Status,
+	}, [query, setParams, Month, Department, Designation, Year, ManagerID, CsvType, FeedbackStatus,
 		date_range?.startDate, date_range?.endDate]);
 
 	useEffect(() => {
