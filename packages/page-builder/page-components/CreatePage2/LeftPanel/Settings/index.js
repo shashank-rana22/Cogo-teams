@@ -1,4 +1,5 @@
 import ButtonSettings from './ButtonSettings';
+// import DivSettings from './DivSettings';
 import ImageSettings from './ImageSettings';
 import styles from './styles.module.css';
 import TextSettings from './TextSettings';
