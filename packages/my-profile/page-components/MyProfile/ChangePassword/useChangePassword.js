@@ -55,7 +55,7 @@ const useChangePassword = ({
 			setShowModal(false);
 		} catch (err) {
 			Toast.error(
-				getApiErrorString(err?.data) || 'Invalid Password',
+				getApiErrorString(err?.response?.data) || 'Invalid Password',
 			);
 		}
 	};
