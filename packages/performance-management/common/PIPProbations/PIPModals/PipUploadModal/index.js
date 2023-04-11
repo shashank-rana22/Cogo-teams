@@ -80,7 +80,7 @@ function PipUploadModal({ item = {}, modal, setModal = () => {}, logType = '', s
 							>
 								<div className={styles.upload_header}>
 									<div className={styles.label}>
-										{`Upload ${startCase(type || '---')} CSV`}
+										{`Upload ${startCase(type)} CSV`}
 									</div>
 									{type === 'normalization' && (
 										<div className={styles.filters}>

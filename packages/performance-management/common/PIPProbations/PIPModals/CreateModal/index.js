@@ -10,7 +10,7 @@ import EmployeesTable from './EmloyeesTable';
 function CreateModal({
 	item = {},
 	source = 'log_modal',
-	logType,
+	logType = '',
 	modal,
 	setModal = () => {},
 	setItem = () => {},
@@ -63,7 +63,7 @@ function CreateModal({
 			}}
 			size="lg"
 		>
-			<Modal.Header title={`Create ${startCase(logType || '---')}`} />
+			<Modal.Header title={`Create ${startCase(logType)}`} />
 			<Modal.Body
 				style={{ maxHeight: '500px' }}
 			>
