@@ -31,8 +31,8 @@ function Structure(props) {
 		selectedItem,
 	} = props;
 
-	const handleSubmitClick = ({ elementId }) => {
-		setParentComponentId(elementId);
+	const handleSubmitClick = ({ index, parentId }) => {
+		setParentComponentId({ childId: index, parentId });
 
 		setShowContentModal(true);
 	};
@@ -40,6 +40,7 @@ function Structure(props) {
 	const parentComponent = {
 		type       : 'container',
 		isRendered : false,
+		parentId   : uuid(),
 		properties : {
 			content : '',
 			styles  : {
@@ -49,17 +50,17 @@ function Structure(props) {
 	};
 
 	const getChildrenComponents = (rows) => {
-		const childrenComponents = rows.map((row) => {
-			const elementId = uuid();
+		const childrenComponents = rows.map((row, index) => {
+			const { parentId } =	parentComponent || {};
 
 			return ({
 				type       : 'container',
-				id         : uuid(),
+				id         : index,
 				width      : row,
-				parentId   : parentComponent.id,
+				parentId,
 				isRendered : false,
 				properties : {
-					content : <IcMPlusInCircle style={{ cursor: 'pointer', fill: '#222' }} width={20} height={20} />,
+					content : { icon: <IcMPlusInCircle style={{ cursor: 'pointer', fill: '#222' }} width={20} height={20} /> },
 					styles  : {
 						width          : row,
 						border         : '1px dashed #9ab7fe',
@@ -70,7 +71,7 @@ function Structure(props) {
 						alignItems     : 'center',
 					},
 					attributes: {
-						onClick: () => handleSubmitClick({ elementId }),
+						onClick: () => handleSubmitClick({ index, parentId }),
 					},
 
 				},
@@ -82,7 +83,7 @@ function Structure(props) {
 
 	const LeftPanelItems = useMemo(
 		() => (widths || []).map((row) => (
-			<Item row={row} handleClick={() => addNewItem({ ...parentComponent, children: getChildrenComponents(row) }, selectedItem?.index, true, parentComponent.id)} onNewItemAdding={onNewItemAdding} components={components} parentComponent={parentComponent} childrenComponents={getChildrenComponents(row)} />
+			<Item row={row} handleClick={() => addNewItem({ ...parentComponent, children: getChildrenComponents(row) }, selectedItem?.index, true, parentComponent.id, null)} onNewItemAdding={onNewItemAdding} components={components} parentComponent={parentComponent} childrenComponents={getChildrenComponents(row)} />
 		)),
 		[addNewItem, onNewItemAdding, selectedItem],
 	);

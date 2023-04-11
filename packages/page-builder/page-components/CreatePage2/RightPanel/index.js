@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+import { isEmpty } from '@cogoport/utils';
 import React, { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
@@ -12,30 +14,40 @@ const ITEM_TYPES = {
 	container : 'container',
 };
 
-// function ComponentBuilder({ widget }) {
-// 	const { children, properties } = widget || {};
+function ComponentBuilder({ widget, renderComponent }) {
+	const { children, properties } = widget || {};
 
-// 	const { styles: style } = properties || {};
+	const { styles: style } = properties || {};
 
-// 	return (
-// 		<div style={style}>
+	if (isEmpty(children)) {
+		return <div style={{ height: '150px' }}> Blocks loading...</div>;
+	}
 
-// 			{ (children || []).map((childComponent) => {
-// 				const { content = '', styles, attributes = {} } = childComponent.properties || {};
-// 				return (
-// 					<div style={styles}>
-// 						<div
-// 							role="presentation"
-// 							onClick={attributes.onClick}
-// 						>
-// 							{content}
-// 						</div>
-// 					</div>
-// 				);
-// 			})}
-// 		</div>
-// 	);
-// }
+	return (
+		<div style={style}>
+
+			{ (children || []).map((childComponent) => {
+				const { content = '', styles, attributes = {} } = childComponent.properties || {};
+				const { icon, type } = content || {};
+
+				return (
+					<div style={styles}>
+
+						{!type ? (
+							<div
+								role="presentation"
+								onClick={attributes.onClick}
+							>
+								{icon}
+							</div>
+						) : renderComponent(type) }
+
+					</div>
+				);
+			})}
+		</div>
+	);
+}
 
 function Item(props) {
 	const {
@@ -116,6 +128,42 @@ function Item(props) {
 
 	const border = isSelected ? '3px dashed blue' : '1px solid silver';
 
+	const COMPONENT_MAPPING = {
+		text: (
+			<TextComponent
+				key={elementId}
+				text={widget.content}
+				components={components}
+				setComponents={setComponents}
+				elementId={elementId}
+			/>
+		),
+		image: (
+			<ImageComponent
+				key={elementId}
+				src={widget.content}
+				alt={widget.alt}
+				components={components}
+				setComponents={setComponents}
+				elementId={elementId}
+			/>
+		),
+		button: (
+			<ButtonComponent
+				key={elementId}
+				label={widget.content}
+				themeType={widget.themeType}
+				size={widget.size}
+				type={widget.type}
+				components={components}
+				setComponents={setComponents}
+				elementId={elementId}
+			/>
+		),
+	};
+
+	const renderComponent = (componentType) => <div style={{ background: 'lavender', width: '100%', height: '100%' }}>{COMPONENT_MAPPING[componentType]}</div>;
+
 	return (
 		<div
 			role="presentation"
@@ -131,43 +179,10 @@ function Item(props) {
 			}}
 		>
 
-			{type === 'text' && (
-				<TextComponent
-					key={elementId}
-					text={widget.content}
-					components={components}
-					setComponents={setComponents}
-					elementId={elementId}
-				/>
-			)}
-
-			{type === 'image' && (
-				<ImageComponent
-					key={elementId}
-					src={widget.content}
-					alt={widget.alt}
-					components={components}
-					setComponents={setComponents}
-					elementId={elementId}
-				/>
-			)}
-
-			{type === 'button' && (
-				<ButtonComponent
-					key={elementId}
-					label={widget.content}
-					themeType={widget.themeType}
-					size={widget.size}
-					type={widget.type}
-					components={components}
-					setComponents={setComponents}
-					elementId={elementId}
-				/>
-			)}
+			{renderComponent(type)}
 
 			{type === 'container' && (
-				// <ComponentBuilder widget={widget} />
-				<div style={{ color: '#222' }}>structure</div>
+				<ComponentBuilder widget={widget} renderComponent={renderComponent} />
 			)}
 		</div>
 	);

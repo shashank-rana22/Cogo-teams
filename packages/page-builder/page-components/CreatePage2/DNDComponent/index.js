@@ -58,19 +58,30 @@ function DNDComponent() {
 	const [selectedItem, setSelectedItem] = useState({});
 
 	const handleAddNewItem = useCallback(
-		(content, hoveredIndex = components.length, shouldAddBelow = true, parentId) => {
+		(content, hoveredIndex = components.length, shouldAddBelow = true, parentDetails, componentType) => {
 		  const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
 
-		  setComponents(() => ([
-				...components.slice(0, startIndex),
-				{
-					...CONTENT_MAPPING[content.type],
-					...content,
-					id: components.length + 1,
-					parentId,
-				},
-				...components.slice(startIndex),
+		  if (componentType === 'child') {
+				const { childId, parentId } = parentDetails || {};
+				const data = components;
+
+				const objIndex = data.findIndex((item) => item.parentId === parentId);
+
+				 data[objIndex].children[childId].properties.content = content;
+
+				 setComponents(data);
+		  } else {
+				setComponents(() => ([
+					...components.slice(0, startIndex),
+					{
+						...CONTENT_MAPPING[content.type],
+						...content,
+						id: components.length + 1,
+						// parentId,
+					},
+					...components.slice(startIndex),
 		  ]));
+		  }
 
 		  setSelectedItem({
 				id    : components.length + 1,
@@ -122,7 +133,7 @@ function DNDComponent() {
 
 		),
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[handleAddNewItem, isNewItemAdding],
+		[handleAddNewItem, isNewItemAdding, selectedItem],
 
 	  );
 
@@ -184,6 +195,7 @@ function DNDComponent() {
 						addNewItem={handleAddNewItem}
 						onNewItemAdding={setNewItemAdding}
 						selectedItem={selectedItem}
+						componentType="child"
 					/>
 
 				</Modal>

@@ -108,7 +108,7 @@ function Stage({
 			const { id } = droppedItem;
 			if (!id) {
 		  // a new item added
-		  		addNewItem(droppedItem, hoveredIndex, shouldAddBelow, parentComponentId);
+		  		addNewItem(droppedItem, hoveredIndex, shouldAddBelow, parentComponentId, null);
 			} else {
 		  // the result of sorting is applying the mock data
 		  		setComponents(stageItems);
