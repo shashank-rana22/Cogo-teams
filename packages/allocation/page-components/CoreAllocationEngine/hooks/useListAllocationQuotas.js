@@ -6,7 +6,7 @@ import { format } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import Actions from '../components/AllocationQuotas/List/Actions';
-import styles from '../styles.module.css';
+import styles from '../components/AllocationQuotas/List/styles.module.css';
 
 const useListAllocationQuotas = () => {
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();

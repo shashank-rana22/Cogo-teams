@@ -1,35 +1,42 @@
 import { cl, Input, Button, Placeholder, Pill } from '@cogoport/components';
 import { useForm, TextAreaController, InputController } from '@cogoport/forms';
-import { IcMSearchlight } from '@cogoport/icons-react';
-import { useSelector } from '@cogoport/store';
+import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectMobileNumber';
+import { IcMSearchlight, IcCSendWhatsapp } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import controls from '../../configurations/create-instant-reply';
 import { statusMapping, statusColorMapping } from '../../constants';
-import { hasPermission } from '../../constants/IDS_CONSTANTS';
 import useCreateCommunicationTemplate from '../../hooks/useCreateCommunicationTemplate';
 import useListTemplate from '../../hooks/useListTemplates';
+import hideDetails from '../../utils/hideDetails';
 
 import styles from './styles.module.css';
 
 function Templates({
-	activeTab,
 	openCreateReply,
 	setOpenCreateReply = () => {},
 	data = {},
+	type = '',
+	dialNumber = '',
+	setDialNumber = () => {},
 }) {
-	const { sendCommunicationTemplate, communicationLoading } = data || {};
+	const {
+		sendCommunicationTemplate = () => {},
+		communicationLoading = false,
+	} = data || {};
 	const [showPreview, setShowPreview] = useState(false);
 	const [previewData, setPreviewData] = useState();
 	const [templateName, setTemplateName] = useState('');
 	const [activeCard, setActiveCard] = useState('');
 	const { title, content = '' } = controls;
-	const { userRoleIds } = useSelector(({ profile }) => ({
-		userRoleIds: profile.partner?.user_role_ids || [],
-	}));
 
-	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
+	const isDefaultOpen = type === 'whatsapp_new_message_modal';
+	const maskMobileNumber = type === 'voice_call_component';
+
+	const maskedMobileNumber = `${dialNumber?.country_code}
+	 ${hideDetails({ type: 'number', data: dialNumber?.number })}`;
+
 	const {
 		control,
 		handleSubmit,
@@ -44,7 +51,7 @@ function Templates({
 		infiniteList: { list = [] },
 		loading,
 		refetch,
-	} = useListTemplate({ activeTab });
+	} = useListTemplate();
 
 	const { createTemplate, loading: CreateLoading } = useCreateCommunicationTemplate({
 		reset: () => {
@@ -54,25 +61,24 @@ function Templates({
 		setOpenCreateReply,
 	});
 
-	const handleSelect = (val, status, name, Id) => {
-		if (!previewData && status === 'approved' && !openCreateReply) {
+	const handleSelect = (val, status, name, id) => {
+		if (status === 'approved' && !openCreateReply) {
 			setShowPreview(true);
 			setPreviewData(val);
 			setTemplateName(name);
-			setActiveCard((prev) => {
-				if (prev !== Id) {
-					return Id;
-				}
-				return '';
-			});
+			setActiveCard(id);
 		}
 	};
 
 	const handleClick = () => {
-		sendCommunicationTemplate({ template_name: templateName, type: 'whatsapp' });
+		sendCommunicationTemplate({
+			template_name : templateName,
+			type          : 'whatsapp',
+			tags          : ['update_time'],
+		});
 	};
 
-	function CreateReactComponent() {
+	function handlePreview() {
 		const preview = previewData
 			?.replaceAll(/<p>\s+(<[/]p>)/g, '<br>')
 			?.replaceAll(/<p>(<[/]p>)/g, '<br>')
@@ -91,94 +97,136 @@ function Templates({
 		</div>
 	));
 
+	useEffect(() => {
+		setShowPreview(isDefaultOpen);
+	}, [isDefaultOpen]);
+
+	const createAction = () => {
+		setOpenCreateReply(true);
+		setShowPreview(false);
+		setActiveCard('');
+		setPreviewData('');
+		setTemplateName('');
+	};
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.messages_container}>
-				<div className={styles.container}>
-					<Input
-						value={qfilter}
-						onChange={(e) => setQfilter(e)}
-						placeholder="Search saved template here..."
-						prefix={<IcMSearchlight />}
-					/>
-					<div
-						className={styles.message_container}
-						onScroll={(e) => handleScroll(
-							e.target.clientHeight,
-							e.target.scrollTop,
-							e.target.scrollHeight,
-						)}
-					>
-						{(list || []).map(
-							({
-								content: { name: messageTitle },
-								description: messageContent = '',
-								whatsapp_approval_status,
-								html_template,
-								name: templateTitle,
-								id,
-							}) => (
-								<div
-									role="presentation"
-									className={cl`${
-										activeCard === id
-											? styles.active
-											: styles.each_message
-									}`}
-									onClick={() => handleSelect(
-										html_template,
-										whatsapp_approval_status,
-										templateTitle,
-										id,
-									)}
-									style={{
-										cursor:
-											previewData
-											|| whatsapp_approval_status
-												!== 'approved'
-											|| openCreateReply
-												? 'not-allowed'
-												: 'pointer',
-									}}
-								>
-									<div className={styles.wrap}>
-										<div className={styles.title}>
-											{messageTitle}
-										</div>
-										<div>
-											<Pill size="md" color={statusColorMapping[whatsapp_approval_status]}>
-												{statusMapping[whatsapp_approval_status]}
-											</Pill>
-										</div>
-									</div>
-									<div className={styles.message}>
-										{messageContent}
-									</div>
-								</div>
-							),
-						)}
-						{loading && loader()}
-						{isEmpty(list) && !loading && (
-							<div className={styles.empty_div}>
-								No Templates Found
+				<div>
+					{isDefaultOpen && (
+						<>
+							<div className={styles.wrap_heading}>
+								<div>Enter mobile number</div>
 							</div>
-						)}
+							<div className={styles.wrap_mobile_number}>
+								<SelectMobileNumber
+									value={dialNumber}
+									onChange={(val) => setDialNumber(val)}
+									inputType="number"
+									placeholder="Enter number"
+								/>
+							</div>
+							<div className={styles.template_heading}>
+								<div>Select a template</div>
+							</div>
+						</>
+					)}
+					{
+						maskMobileNumber && (
+							<div className={styles.flex_div}>
+								<div className={styles.mobile_number}>To</div>
+								<IcCSendWhatsapp className={styles.whatsapp_icon} />
+								<div className={styles.mobile_number}>{maskedMobileNumber}</div>
+							</div>
+						)
+					}
+					<div className={styles.container}>
+						<Input
+							value={qfilter}
+							onChange={(e) => setQfilter(e)}
+							placeholder="Search saved template here..."
+							prefix={<IcMSearchlight />}
+						/>
+						<div
+							className={styles.message_container}
+							onScroll={(e) => handleScroll(
+								e.target.clientHeight,
+								e.target.scrollTop,
+								e.target.scrollHeight,
+							)}
+						>
+							{(list || []).map(
+								({
+									content: { name: messageTitle = '' } = {},
+									description: messageContent = '',
+									whatsapp_approval_status,
+									html_template,
+									name: templateTitle,
+									id,
+								}) => (
+									<div
+										role="presentation"
+										className={cl`${
+											activeCard === id
+												? styles.active
+												: styles.each_message
+										}`}
+										onClick={() => handleSelect(
+											html_template,
+											whatsapp_approval_status,
+											templateTitle,
+											id,
+										)}
+										style={{
+											cursor:
+                                                whatsapp_approval_status
+                                                    !== 'approved'
+                                                || openCreateReply ? 'not-allowed' : 'pointer',
+										}}
+									>
+										<div className={styles.wrap}>
+											<div className={styles.title}>
+												{messageTitle}
+											</div>
+											<div>
+												<Pill
+													size="md"
+													color={
+                                                        statusColorMapping[whatsapp_approval_status || 'pending']
+                                                    }
+												>
+													{
+                                                        statusMapping[whatsapp_approval_status || 'pending']
+                                                    }
+												</Pill>
+											</div>
+										</div>
+										<div className={styles.message}>
+											{messageContent}
+										</div>
+									</div>
+								),
+							)}
+							{loading && loader()}
+							{isEmpty(list) && !loading && (
+								<div className={styles.empty_div}>
+									No Templates Found
+								</div>
+							)}
+						</div>
 					</div>
 				</div>
 				<div className={styles.footer}>
-					{isomniChannelAdmin && (
-						<Button
-							themeType="accent"
-							size="md"
-							disabled={openCreateReply || showPreview}
-							onClick={() => setOpenCreateReply(true)}
-						>
-							+ Create Template
-						</Button>
-					)}
+					<Button
+						themeType="accent"
+						size="md"
+						disabled={openCreateReply}
+						onClick={createAction}
+					>
+						+ Create Template
+					</Button>
 				</div>
 			</div>
-			{openCreateReply && (
+			{openCreateReply && !showPreview && (
 				<div className={styles.create_container}>
 					<div>
 						<div className={styles.label}>Name</div>
@@ -198,6 +246,7 @@ function Templates({
 								control={control}
 								{...content}
 								id="content"
+								rows={10}
 							/>
 							{errors?.content && (
 								<div className={styles.error_text}>
@@ -211,7 +260,10 @@ function Templates({
 							themeType="tertiary"
 							size="md"
 							className={styles.button_styles}
-							onClick={() => setOpenCreateReply(!openCreateReply)}
+							onClick={() => {
+								setOpenCreateReply((p) => !p);
+								setShowPreview(isDefaultOpen);
+							}}
 						>
 							Cancel
 						</Button>
@@ -227,35 +279,37 @@ function Templates({
 				</div>
 			)}
 
-			{showPreview && (
+			{showPreview && !openCreateReply && (
 				<div className={styles.create_container}>
 					<div className={styles.preview}>
 						<div className={styles.whatsapp}>
 							<div className={styles.overflow_div}>
 								<div className={styles.preview_div}>
-									{CreateReactComponent()}
+									{handlePreview()}
 								</div>
 							</div>
 						</div>
 					</div>
 					<div className={styles.create_footer}>
-						<Button
-							themeType="tertiary"
-							size="md"
-							className={styles.button_styles}
-							onClick={() => {
-								setShowPreview(false);
-								setActiveCard('');
-								setPreviewData('');
-							}}
-						>
-							Cancel
-						</Button>
+						{!isDefaultOpen && (
+							<Button
+								themeType="tertiary"
+								size="md"
+								className={styles.button_styles}
+								onClick={() => {
+									setShowPreview(false);
+									setActiveCard('');
+									setPreviewData('');
+								}}
+							>
+								Cancel
+							</Button>
+						)}
 						<Button
 							themeType="accent"
 							size="md"
 							onClick={handleClick}
-							disabled={communicationLoading}
+							disabled={!templateName || communicationLoading}
 						>
 							Send
 						</Button>

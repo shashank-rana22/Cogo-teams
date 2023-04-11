@@ -8,6 +8,8 @@ import {
 } from 'firebase/firestore';
 import { useState, useEffect, useRef } from 'react';
 
+import useListCogooneTimeline from './useListCogooneTimeline';
+
 const useGetMessages = ({ activeChatCollection, id }) => {
 	const [messagesState, setMessagesState] = useState({});
 
@@ -15,6 +17,12 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 	const [firstLoadingMessages, setFirstLoadingMessages] = useState(false);
 
 	const [loadingPrevMessages, setLoadingPrevMessages] = useState(false);
+
+	const {
+		getCogooneTimeline,
+		loading, firstTimeLineLoading, setFirstTimeLineLoading = () => {},
+	} = useListCogooneTimeline({ id, setMessagesState, type: 'messages' });
+
 	const snapshotCleaner = () => {
 		if (firstMessages.current) {
 			firstMessages.current();
@@ -24,69 +32,70 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 
 	const mountSnapShot = () => {
 		setFirstLoadingMessages(true);
+		setFirstTimeLineLoading(true);
 		snapshotCleaner();
-		const chatCollectionQuery = query(
-			activeChatCollection,
-			orderBy('created_at', 'desc'),
-			limit(10),
-		);
+		if (activeChatCollection) {
+			const chatCollectionQuery = query(
+				activeChatCollection,
+				orderBy('created_at', 'desc'),
+				limit(10),
+			);
+			firstMessages.current = onSnapshot(
+				chatCollectionQuery,
+				(querySnapshot) => {
+					const lastDocumentTimeStamp = querySnapshot.docs[querySnapshot.docs.length - 1]?.data()?.created_at;
+					const islastPage = querySnapshot.docs.length < 10;
+					let prevMessageData = {};
+					querySnapshot.forEach((mes) => {
+						const timeStamp = mes.data()?.created_at;
+						prevMessageData = { ...prevMessageData, [timeStamp]: mes.data() };
+					});
 
-		let prevMessageData = { ...messagesState?.[id]?.messagesData } || {};
-
-		firstMessages.current = onSnapshot(
-			chatCollectionQuery,
-			(querySnapshot) => {
-				const lastDocumentTimeStamp = querySnapshot.docs[querySnapshot.docs.length - 1]?.data()?.created_at;
-				const islastPage = querySnapshot.docs.length < 10;
-				querySnapshot.forEach((mes) => {
-					const timeStamp = mes.data()?.created_at;
-					prevMessageData = { ...prevMessageData, [timeStamp]: mes.data() };
-				});
-
-				setMessagesState((p) => ({
-					...p,
-					[id]: {
-						messagesData: { ...prevMessageData },
+					getCogooneTimeline({
+						startDate : lastDocumentTimeStamp,
+						endDate   : Date.now(),
+						prevMessageData,
 						lastDocumentTimeStamp,
 						islastPage,
-					},
-				}));
-				setFirstLoadingMessages(false);
-			},
-		);
+					});
+					setFirstLoadingMessages(false);
+				},
+			);
+		}
 	};
 
 	const getNextData = async () => {
+		const prevTimeStamp = Number(messagesState?.[id]?.lastDocumentTimeStamp);
+
 		const chatCollectionQuery = query(
 			activeChatCollection,
 			where(
 				'created_at',
 				'<',
-				Number(messagesState?.[id]?.lastDocumentTimeStamp),
+				prevTimeStamp,
 			),
 			orderBy('created_at', 'desc'),
 			limit(10),
 		);
-		let prevMessageData = messagesState?.[id]?.messagesData || {};
+
 		setLoadingPrevMessages(true);
 		const prevMessagesPromise = await getDocs(chatCollectionQuery);
 		const prevMessages = prevMessagesPromise?.docs;
 		const lastDocumentTimeStamp = prevMessages[(prevMessages?.length || 0) - 1]?.data()?.created_at;
 		const islastPage = prevMessages?.length < 10;
-
+		let prevMessageData = {};
 		prevMessages.forEach((mes) => {
 			const timeStamp = mes.data()?.created_at;
 			prevMessageData = { ...prevMessageData, [timeStamp]: mes.data() };
 		});
-		setMessagesState((p) => ({
-			...p,
-			[id]: {
-				...(messagesState?.[id] || {}),
-				messagesData: prevMessageData,
-				lastDocumentTimeStamp,
-				islastPage,
-			},
-		}));
+
+		getCogooneTimeline({
+			startDate : lastDocumentTimeStamp,
+			endDate   : prevTimeStamp,
+			prevMessageData,
+			lastDocumentTimeStamp,
+			islastPage,
+		});
 		setLoadingPrevMessages(false);
 	};
 
@@ -106,10 +115,10 @@ const useGetMessages = ({ activeChatCollection, id }) => {
 
 	return {
 		getNextData,
-		lastPage     : messagesState?.[id]?.islastPage,
-		messagesData : sortedMessageData,
-		firstLoadingMessages,
-		loadingPrevMessages,
+		lastPage             : messagesState?.[id]?.islastPage,
+		messagesData         : sortedMessageData,
+		firstLoadingMessages : firstLoadingMessages || firstTimeLineLoading,
+		loadingPrevMessages  : loadingPrevMessages || loading,
 		messagesState,
 	};
 };

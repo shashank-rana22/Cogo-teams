@@ -1,0 +1,109 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.title {
+	padding-right: 8px;
+	font-size: 22px;
+	font-weight: 600;
+}
+
+.div_footer {
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 95%;
+	height: 78px;
+	padding: 16px 24px 16px 20px;
+	margin-left: -20px;
+	background: #fff;
+	box-shadow: rgb(0 0 0 / 15%) 1px -5px 14.6px;
+}
+
+.div_currency {
+	display: flex;
+	align-items: center;
+	padding: 0 10px;
+}
+
+.currency {
+	padding-right: 5px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.currency_value {
+	font-size: 24px;
+	font-weight: 600;
+	color: #80839e;
+}
+
+.div_sid {
+	font-size: 24px;
+	font-weight: 600;
+	color: #80839e;
+}
+
+.button_div {
+	display: flex;
+	align-items: center;
+	margin-left: 75px;
+}
+
+.alert_icon_div {
+	margin-top: 5px;
+
+	@keyframes blinker {
+		from {
+			opacity: 1;
+		}
+
+		to {
+			opacity: 0;
+		}
+	}
+}
+
+.alert_icon {
+	text-decoration: blink;
+	animation-name: blinker;
+	animation-duration: 0.6s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+
+.alert_icon:hover {
+	animation: none;
+}
+
+.button_container {
+	display: flex;
+	margin-left: 20px;
+}
+
+.add_to_select {
+	margin-right: 22px;
+}
+
+.flex_modal {
+	display: flex;
+	flex-direction: column;
+}
+
+.flex {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.margin {
+	margin: 20px;
+}
+
+.margin_not {
+	margin: 20px 20px 0;
+}

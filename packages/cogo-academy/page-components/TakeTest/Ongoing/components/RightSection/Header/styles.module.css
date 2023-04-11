@@ -1,0 +1,16 @@
+.main_container {
+	display: flex;
+	justify-content: space-between;
+	padding: 32px;
+}
+
+.instructions {
+	font-size: 12px;
+	color: #221f20;
+	text-decoration-line: underline;
+	cursor: pointer;
+}
+
+.expand_icon {
+	cursor: pointer;
+}

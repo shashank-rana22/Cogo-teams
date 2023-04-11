@@ -1,0 +1,46 @@
+.container {
+	padding: 0 30px;
+
+	@media (max-width: 768px) {
+		margin-top: 80px;
+	}
+}
+
+.back_div {
+	display: flex;
+}
+
+.back {
+	margin-left: 10px;
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.add_topic {
+	margin-top: 12px;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.upload_faq {
+	font-size: 15px;
+	font-weight: 100;
+	color: #6d6d6d;
+}
+
+.btn_row {
+	display: flex;
+	margin-top: 24px;
+}
+
+.container2 {
+	padding: 50px 50px 0;
+}
+
+.uploader {
+	margin-top: 10px;
+}
+
+.error_msg {
+	color: red;
+}

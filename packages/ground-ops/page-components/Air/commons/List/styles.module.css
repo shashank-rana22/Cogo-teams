@@ -14,7 +14,7 @@
 
 .pagination {
 	display: flex;
-	justify-content: end;
+	justify-content: flex-end;
 	padding: 16px;
 }
 
@@ -44,6 +44,7 @@
 .col {
 	display: flex;
 	flex: var(--span);
+	justify-content: center;
 	padding: 4px;
 	font-size: 12px;
 	font-weight: 500;
@@ -86,10 +87,11 @@
 
 .accordian_style {
 	position: relative;
+	top: var(--length);
 	width: 60px;
 	height: 16px;
 	margin-right: auto;
-	margin-bottom: 8px;
+	margin-bottom: var(--length);
 	margin-left: auto;
 	text-align: center;
 	background: #fff;
@@ -98,10 +100,6 @@
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
 	box-shadow: 0 5px 10px rgb(0 0 0 / 5%);
-}
-
-.accordian_style:hover {
-	background: #fff;
 }
 
 .info_content {
@@ -141,7 +139,8 @@
 	display: flex;
 	flex-direction: column;
 	padding: 8px 20px;
-	margin: 16px 0;
+	margin: 16px 0 0;
+	margin-bottom: var(--open-margin);
 	word-wrap: wrap;
 	background: #fff;
 	filter: drop-shadow(0 0 5.9029px rgb(0 0 0 / 15%));

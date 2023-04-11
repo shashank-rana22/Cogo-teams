@@ -105,23 +105,23 @@ function ComposeEmail({
 
 					<div className={styles.attachments_scroll}>
 						<div className={styles.uploading}>{uploading && 'Uploading...'}</div>
-						{(attachments || []).map((data) => (
-							<div className={styles.uploaded_files}>
-								<div className={styles.uploaded_files_content}>
-									{decode(data)?.fileIcon}
-									<div className={styles.content_div}>
-										{decode(data)?.uploadedFileName}
+						{(attachments || []).map((eachAttachement) => {
+							const { fileIcon, uploadedFileName } = decode(eachAttachement);
+							return (
+								<div className={styles.uploaded_files}>
+									<div className={styles.uploaded_files_content}>
+										{fileIcon}
+										<div className={styles.content_div}>
+											{uploadedFileName}
+										</div>
 									</div>
+									<IcMCross
+										className={styles.cross_svg}
+										onClick={() => handleDelete(eachAttachement)}
+									/>
 								</div>
-								<IcMCross
-									className={styles.cross_svg}
-									onClick={(e) => {
-										e.stopPropagation();
-										handleDelete(data);
-									}}
-								/>
-							</div>
-						))}
+							);
+						})}
 					</div>
 
 				</div>

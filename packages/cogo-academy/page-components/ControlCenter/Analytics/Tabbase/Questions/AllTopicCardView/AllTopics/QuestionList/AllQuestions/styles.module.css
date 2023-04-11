@@ -1,0 +1,41 @@
+.container {
+	background-color: rgb(255 255 255 / 80%);
+}
+
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.question {
+	width: 400px;
+	padding-left: 20px;
+	font-weight: 1000;
+	text-align: left;
+}
+
+.likes {
+	padding-left: 48px;
+	font-weight: 1000;
+	text-align: left;
+}
+
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: right;
+	width: 400px;
+	padding-left: 2px;
+}
+
+.sort_arrow {
+	margin-left: 4px;
+	transition: 0.3s;
+	transform: rotate(90deg);
+}
+
+.sort_title {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}

@@ -36,6 +36,7 @@ function RfqEnquiries() {
 							loading={loading}
 							filters={filters}
 							hookSetters={hookSetters}
+							refetch={refetch}
 						/>
 					</div>
 				</div>

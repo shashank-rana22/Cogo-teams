@@ -1,0 +1,86 @@
+.error {
+	font-weight: 500;
+	color: #cb6464;
+}
+
+.form {
+	padding: 10px;
+	overflow: scroll;
+}
+
+.container {
+	display: flex;
+	align-items: flex-end;
+	width: 100%;
+}
+
+.childs_container {
+	width: 100%;
+}
+
+.child {
+	width: 100%;
+}
+
+.heading {
+	margin-bottom: 8px;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 14px;
+	color: #4f4f4f;
+}
+
+.add_button {
+	margin-bottom: 20px;
+	margin-left: 8px;
+}
+
+.remove_icon {
+	width: 20px;
+	height: 20px;
+	margin-left: 4px;
+	cursor: pointer;
+}
+
+.flex_container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.flex_item {
+	flex-basis: 33%;
+	padding: 10px;
+}
+
+.form_item {
+	width: 100%;
+	margin-bottom: 16px;
+
+	:global {
+		.ui_input_container {
+			padding: 0;
+			border: none;
+		}
+
+		.ui_input_control {
+			padding: 4px 8px;
+			font-size: 12px !important;
+			border: 1px solid #dedede;
+			border-radius: 4px;
+		}
+	}
+}
+
+.content {
+	display: flex;
+	align-items: last baseline;
+	justify-content: last baseline;
+}
+
+.error_message {
+	color: #e42525;
+}
+
+.form_container {
+	width: 100%;
+}

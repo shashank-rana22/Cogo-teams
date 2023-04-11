@@ -10,6 +10,7 @@ import styles from './styles.module.css';
 
 function SentDiv({
 	eachMessage = {},
+	messageStatus = false,
 }) {
 	const {
 		message_type = 'text',
@@ -20,7 +21,7 @@ function SentDiv({
 		message_status = '',
 	} = eachMessage;
 
-	const { btns = [], list = [] } = response;
+	const { btns = [], list = [] } = response || {};
 	const [showList, setShowList] = useState(false);
 
 	const date = format(new Date(created_at), 'dd MMM YYYY, HH:mm');
@@ -48,7 +49,8 @@ function SentDiv({
 						<div
 							className={styles.message_tick_container}
 						>
-							{(message_status === 'seen') ? <IcMDoubleTick fill="#0000FF" /> : <IcMTick />}
+							{((message_status === 'seen') || messageStatus
+								? <IcMDoubleTick fill="#0000FF" /> : <IcMTick />)}
 						</div>
 
 					</div>

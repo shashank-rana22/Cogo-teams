@@ -40,10 +40,10 @@ interface ItemProps {
 interface Props {
 	filters: GenericObject;
 	setFilters: (p: object) => void;
-	subActiveTab: string;
+	subActiveTabReject: string;
 }
 
-function CommonListData({ filters, setFilters, subActiveTab }: Props) {
+function CommonListData({ filters, setFilters, subActiveTabReject }: Props) {
 	const [sort, setSort] = useState({});
 
 	const {
@@ -51,7 +51,7 @@ function CommonListData({ filters, setFilters, subActiveTab }: Props) {
 		loading,
 		setSearchValue,
 		searchValue,
-	} = useGetPurchaseViewList({ filters, setFilters, sort, subActiveTab });
+	} = useGetPurchaseViewList({ filters, setFilters, sort, subActiveTabReject });
 
 	const functions: any = {
 		renderStatus    : (itemData: ItemProps) => <RenderStatus item={itemData} />,
@@ -91,7 +91,7 @@ function CommonListData({ filters, setFilters, subActiveTab }: Props) {
 				handlePageChange={(pageValue: number) => {
 					setFilters((p: GenericObject) => ({ ...p, pageIndex: pageValue }));
 				}}
-				subActiveTab={subActiveTab}
+				subActiveTab={subActiveTabReject}
 				showPagination
 			/>
 		</div>
