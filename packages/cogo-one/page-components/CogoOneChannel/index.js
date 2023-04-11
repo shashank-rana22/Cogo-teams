@@ -164,12 +164,14 @@ function CogoOne() {
 
 	return (
 		<>
-			<div className={styles.settings}>
-				<IcMSettings
-					className={styles.settings_icon}
-					onClick={() => setAgentDetails(true)}
-				/>
-			</div>
+			{isomniChannelAdmin && (
+				<div className={styles.settings}>
+					<IcMSettings
+						className={styles.settings_icon}
+						onClick={() => setAgentDetails(true)}
+					/>
+				</div>
+			)}
 			<div className={styles.layout_container}>
 				<Customers
 					isomniChannelAdmin={isomniChannelAdmin}
@@ -216,7 +218,8 @@ function CogoOne() {
 					className={styles.download_apk}
 				>
 					<div
-						role="presentation"
+						role="button"
+						tabIndex={0}
 						className={styles.download_div}
 						onClick={() => window.open(ANDRIOD_APK, '_blank')}
 					>
@@ -244,7 +247,7 @@ function CogoOne() {
 					/>
 				)}
 			</div>
-			{isomniChannelAdmin && agentDetails && (
+			{agentDetails && (
 				<AgentModal
 					agentDetails={agentDetails}
 					setAgentDetails={setAgentDetails}

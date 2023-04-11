@@ -33,7 +33,7 @@ function AgentModal({
 		page,
 	} = listAgentStatus;
 
-	const modifiedList = loading ? [{}, {}, {}, {}, {}, {}, {}, {}] : list || [];
+	const modifiedList = loading ? [...Array(8).fill({})] : list || [];
 
 	return (
 		<Modal
@@ -51,19 +51,17 @@ function AgentModal({
 					prefix={<IcMSearchlight />}
 					onChange={setSearch}
 				/>
-				<div>
-					{!isEmpty(modifiedList) ? modifiedList.map(({ name = '', status = '', agent_id = '' }) => (
-						<AgentDetail
-							createLoading={createLoading}
-							updateAgentPreference={updateAgentPreference}
-							loading={loading}
-							agent={name}
-							status={status}
-							agent_id={agent_id}
-						/>
+				{!isEmpty(modifiedList) ? modifiedList?.map(({ name = '', status = '', agent_id = '' }) => (
+					<AgentDetail
+						createLoading={createLoading}
+						updateAgentPreference={updateAgentPreference}
+						loading={loading}
+						agent={name}
+						status={status}
+						agent_id={agent_id}
+					/>
 
-					)) : <div className={styles.empty_state}>No data found</div>}
-				</div>
+				)) : <div className={styles.empty_state}>No data found</div>}
 			</Modal.Body>
 			<Modal.Footer>
 				<Pagination

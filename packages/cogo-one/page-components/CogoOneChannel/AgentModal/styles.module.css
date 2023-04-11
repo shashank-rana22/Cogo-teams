@@ -9,11 +9,14 @@
 }
 
 .modal_body {
-	min-height: 464px;
+	height: 464px;
 }
 
 .empty_state {
-	margin-top: 150px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
 	font-size: 16px;
 	text-align: center;
 }
