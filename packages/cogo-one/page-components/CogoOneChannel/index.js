@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { IcMDownload, IcMSettings } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -104,11 +105,11 @@ function CogoOne() {
 		showBotMessages,
 		searchValue,
 	});
-
+	const hideEmptyPage = (activeTab === 'message' && !isEmpty(activeMessageCard))
+	|| (activeTab === 'voice' && !isEmpty(activeVoiceCard))
+	|| (activeTab === 'mail' && !isEmpty(activeMail));
 	const renderComponent = () => {
-		if ((activeTab === 'message' && !isEmpty(activeMessageCard))
-			|| (activeTab === 'voice' && !isEmpty(activeVoiceCard))
-			|| (activeTab === 'mail' && !isEmpty(activeMail))) {
+		if (hideEmptyPage) {
 			return (
 				<>
 					<Conversations
@@ -165,10 +166,11 @@ function CogoOne() {
 	return (
 		<>
 			{isomniChannelAdmin && (
-				<div className={styles.settings}>
+				<div className={cl`${styles.settings} ${hideEmptyPage ? styles.margin_change_on_open : ''}`}>
 					<IcMSettings
 						className={styles.settings_icon}
 						onClick={() => setAgentDetails(true)}
+						fill="#4f4f4f"
 					/>
 				</div>
 			)}
