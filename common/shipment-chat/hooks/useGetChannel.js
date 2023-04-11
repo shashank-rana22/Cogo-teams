@@ -1,8 +1,7 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 const useGetChannel = ({ payload }) => {
 	const { id } = payload;
@@ -20,7 +19,7 @@ const useGetChannel = ({ payload }) => {
 			try {
 				await trigger();
 			} catch (err) {
-				Toast.error(getApiErrorString(err));
+				toastApiError(err);
 			}
 		})();
 	}, [trigger]);

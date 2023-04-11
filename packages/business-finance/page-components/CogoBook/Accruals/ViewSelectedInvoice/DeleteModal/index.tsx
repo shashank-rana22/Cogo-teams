@@ -4,17 +4,17 @@ import styles from './styles.module.css';
 
 interface DeleteInterface {
 	openDeleteModal?: object
-	handleCloseModal?: () => void
 	setOpenDeleteModal?: React.Dispatch<React.SetStateAction<{}>>
 	deleteSelected?: Function
 	id?: string
+	handleDelete: (key?: string) => void
 }
 function DeleteModal({
-	openDeleteModal, handleCloseModal, setOpenDeleteModal, deleteSelected,
-	id:idData,
+	openDeleteModal, setOpenDeleteModal, deleteSelected,
+	id:idData, handleDelete,
 }:DeleteInterface) {
 	return (
-		<Modal show={openDeleteModal[idData]} onClose={handleCloseModal}>
+		<Modal show={openDeleteModal[idData]}>
 			<Modal.Body>
 				<div
 					className={styles.flex_modal}
@@ -33,7 +33,7 @@ function DeleteModal({
 						<Button
 							id="approve-modal-btn"
 							themeType="primary"
-							onClick={() => { deleteSelected({ id: idData, handleCloseModal }); }}
+							onClick={() => { deleteSelected({ id: idData, handleDelete, openDeleteModal }); }}
 						>
 							Yes
 						</Button>

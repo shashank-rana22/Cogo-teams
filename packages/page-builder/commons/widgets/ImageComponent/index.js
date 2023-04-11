@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import FileUploader from '../FileUploader';
+import FileUploader from '../../FileUploader';
 
 // import styles from './styles.module.css';
 
@@ -30,15 +30,14 @@ function ImageComponent(props) {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [fileValue]);
 
-	const editorStyle = {
-		border  : isFocused ? '1.5px solid #88cad1' : '1px solid #ccc',
-		padding : '10px',
-		margin  : '20px',
-
-	};
+	// const editorStyle = {
+	// 	border  : isFocused ? '1.5px solid #88cad1' : '1px solid #ccc',
+	// 	padding : '10px',
+	// 	margin  : '20px',
+	// };
 
 	return (
-		<div style={editorStyle}>
+		<div>
 
 			{fileValue ? (
 				<div
@@ -50,7 +49,7 @@ function ImageComponent(props) {
 						<IcMEdit fil="#88cad1" />
 					</span> */}
 
-					<img src={src} style={style} alt="upload-img" />
+					<img width="100%" src={src} style={style} alt="upload-img" />
 				</div>
 			) : (
 				<FileUploader

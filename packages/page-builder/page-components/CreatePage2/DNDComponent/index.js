@@ -21,10 +21,7 @@ const CONTENT_MAPPING = {
 		properties: {
 			// eslint-disable-next-line max-len
 			content : 'https://www.cogoport.com/_next/image/?url=https%3A%2F%2Fcdn.cogoport.io%2Fcms-prod%2Fcogo_public%2Fvault%2Foriginal%2Fchannel-partner-header-2.png&w=1920&q=75',
-			style   : {
-				backgroundColor : 'red',
-				padding         : '20px',
-			},
+			style   : {},
 		},
 		alt        : 'add-img-url',
 		layout     : {},
@@ -84,6 +81,7 @@ function DNDComponent() {
 		  }
 
 		  setSelectedItem({
+				...content,
 				id    : components.length + 1,
 				index : startIndex,
 		  });
