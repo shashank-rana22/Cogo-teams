@@ -91,6 +91,18 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 			],
 		},
 		{
+			name        : 'Status',
+			label       : 'Status',
+			placeholder : 'Status...',
+			type        : 'select',
+			isClearable : true,
+			style       : { marginLeft: '1px', marginRight: '1px' },
+			options     : [
+				{ label: 'Pending', value: 'pending' },
+				{ label: 'Submitted', value: 'successful' },
+			],
+		},
+		{
 			name                  : 'date_range',
 			label                 : 'Select Date',
 			type                  : 'dateRangePicker',
