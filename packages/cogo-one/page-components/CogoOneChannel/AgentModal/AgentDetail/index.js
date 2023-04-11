@@ -1,4 +1,4 @@
-import { Toggle, Placeholder } from '@cogoport/components';
+import { Toggle, Placeholder, cl } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
@@ -20,16 +20,12 @@ function AgentDetail({
 
 	return (
 		<div
-			className={
-				status === 'inactive'
-					? styles.inactive_agent_container
-					: styles.agent_container
-				}
+			className={cl`${styles.agent_container} ${status === 'inactive' ? styles.inactive_agent_container : ''}`}
 			key={agent_id}
 		>
-			{loading ? <Placeholder height="30px" width="75%" margin="10px 0px 0px" /> : agent}
+			{loading ? <Placeholder className={styles.agent_ph} /> : agent}
 			{loading
-				? <Placeholder height="30px" width="10%" margin="10px 0px 0px" />
+				? <Placeholder className={styles.toggle_ph} />
 				: (
 					<Toggle
 						key={agent_id}

@@ -6,11 +6,7 @@
 }
 
 .inactive_agent_container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
 	color: #a1a1a1;
-	border-bottom: 1px solid #dedede;
 }
 
 .toggle {
@@ -21,4 +17,16 @@
 			}
 		}
 	}
+}
+
+.agent_ph {
+	width: 75%;
+	height: 30px;
+	margin: 10px 0 0;
+}
+
+.toggle_ph {
+	width: 10%;
+	height: 30px;
+	margin: 10px 0 0;
 }
