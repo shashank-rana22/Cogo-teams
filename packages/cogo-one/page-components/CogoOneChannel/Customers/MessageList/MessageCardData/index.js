@@ -1,5 +1,5 @@
 import { cl, Tooltip, Checkbox } from '@cogoport/components';
-import { IcCPin, IcMPin } from '@cogoport/icons-react';
+import { IcCPin, IcMPin, IcMShip } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import UserAvatar from '../../../../../common/UserAvatar';
@@ -77,7 +77,6 @@ function MessageCardData({
 						${styles.card_container} 
 						${!autoAssignChats ? styles.card_with_checkbox : ''}
 						${checkActiveCard ? styles.active_card : ''} 
-						${is_likely_to_book_shipment ? styles.likely_to_book_shipment : ''} 
 							`}
 				onClick={() => setActiveMessage(item)}
 			>
@@ -154,6 +153,11 @@ function MessageCardData({
 							/>
 						)}
 				</div>
+				{is_likely_to_book_shipment && (
+					<div className={styles.likely_to_book_shipment}>
+						<IcMShip className={styles.ship_icon_container} fill="#849E4C" />
+					</div>
+				)}
 			</div>
 		</div>
 
