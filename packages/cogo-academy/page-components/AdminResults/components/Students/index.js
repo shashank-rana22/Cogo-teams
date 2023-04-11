@@ -36,7 +36,7 @@ function StudentsComponent({ test_id }) {
 
 	const { userSessionMapping, setUserId } = useUpdateTestUserMapping({ refetch });
 
-	const { page_limit = 0, total_count = 0, list } = data || {};
+	const { page_limit = 0, total_count = 0, list = [], stats = {} } = data || {};
 
 	const handleDelete = () => {
 		userSessionMapping(test_id);
@@ -72,7 +72,7 @@ function StudentsComponent({ test_id }) {
 							<TabPanel
 								key={item}
 								name={item}
-								badge={data?.stats?.[item] || '0'}
+								badge={stats?.[item] || '0'}
 								title={title}
 							/>
 						);
@@ -123,7 +123,7 @@ function StudentsComponent({ test_id }) {
 				</Modal.Body>
 			</Modal>
 
-			{!loading && isEmpty(data?.list)
+			{!loading && isEmpty(list)
 				? <EmptyState />
 				: (
 					<div className={styles.table_container}>
