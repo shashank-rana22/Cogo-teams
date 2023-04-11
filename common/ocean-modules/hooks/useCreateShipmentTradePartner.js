@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 const useCreateShipmentTradePartner = ({
 	shipment_id = '',
@@ -21,7 +21,7 @@ const useCreateShipmentTradePartner = ({
 				refetch();
 			}
 		} catch (err) {
-			Toast.error(getApiErrorString(err));
+			toastApiError(err);
 		}
 	};
 

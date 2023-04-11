@@ -50,9 +50,10 @@ function ViewSelectedInvoice() {
 	const { list = [], totalRecords = 0, pageSize = 10 } = viewSelectedSidData || {};
 
 	const { page } = filters || {};
-	const [openDeleteModal, setOpenDeleteModal] = useState(false);
+	const [openDeleteModal, setOpenDeleteModal] = useState({});
 
 	const { year = '', startDate, endDate, month = '', tradeType = '', service = '', shipmentType = '' } = query || {};
+
 	return (
 		<div>
 
