@@ -20,6 +20,7 @@ function useUpdateCaseStudyQuestion({
 	listSetQuestions,
 	editDetails,
 	index,
+	editorValue,
 }) {
 	const [{ loading:loadingUpdate }, triggerUpdate] = useRequest({
 		method : 'post',
@@ -53,6 +54,7 @@ function useUpdateCaseStudyQuestion({
 			testQuestionId,
 			editDetails,
 			index,
+			editorValue,
 		});
 
 		if (!isEmpty(hasError)) {
@@ -66,10 +68,7 @@ function useUpdateCaseStudyQuestion({
 
 		try {
 			await triggerToUse({
-				data:
-						action === 'delete'
-							? { id: caseStudyQuestionId, status: 'inactive', answers: [] }
-							: payload,
+				data: payload,
 			});
 
 			Toast.success(`Case study question ${actionNameMapping[action]} successfully`);

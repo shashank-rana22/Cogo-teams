@@ -12,7 +12,7 @@ import Summary from './Summary';
 
 function TestResult() {
 	const {
-		query: { test_id },
+		query: { test_id, view, id, name: userName },
 		user: { id: user_id, name },
 	} = useSelector(({ general, profile }) => ({
 		query : general.query,
@@ -26,7 +26,7 @@ function TestResult() {
 		url    : '/get_user_performance',
 		params : {
 			test_id,
-			user_id,
+			user_id: view === 'admin' ? id : user_id,
 		},
 	}, { manual: false });
 
@@ -48,11 +48,15 @@ function TestResult() {
 				<p className={styles.go_back_text}>Dashboard</p>
 			</div>
 
-			<TestResultMessage stats_data={summaryData} />
+			{view !== 'admin' ? <TestResultMessage stats_data={summaryData} /> : null}
 
 			<Summary summaryData={summaryData} />
 
-			<QnA user_name={name} />
+			<QnA
+				user_name={view === 'admin' ? userName : name}
+				test_id={test_id}
+				user_id={view === 'admin' ? id : user_id}
+			/>
 		</div>
 	);
 }

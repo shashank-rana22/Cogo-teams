@@ -1171,6 +1171,16 @@ const saas = {
 			service_name : 'cogopoint',
 		},
 		{
+			api          : 'list_cogopoint_milestones',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'get_cogopoint_user_profile',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
 			api          : 'get_cogopoint_history_detail',
 			access_type  : 'private',
 			service_name : 'cogopoint',
@@ -1182,6 +1192,16 @@ const saas = {
 		},
 		{
 			api          : 'list_user_cogopoint_histories',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogopoint_earnables',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogopoint_ledgers',
 			access_type  : 'private',
 			service_name : 'cogopoint',
 		},
@@ -1952,7 +1972,6 @@ const saas = {
 			module      : 'trader-eligibility-check',
 			feature     : 'trader-eligibility-check',
 		},
-
 	],
 	app_saas_order_history: [
 		{

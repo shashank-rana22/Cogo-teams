@@ -485,19 +485,20 @@ const navigationMappingShipper = {
 		possible_apis : app_apis.app_pricing,
 		module_type   : 'dashboards',
 	},
-	// saas_cogopoint: {
-	// 	key           : 'saas_cogopoint',
-	// 	title         : 'Cogopoints',
-	// 	href          : '/saas/cogopoint',
-	// 	as            : '/saas/cogopoint',
-	// 	type          : 'link',
-	// 	line          : true,
-	// 	icon          : 'nav-payments',
-	// 	main_apis     : [],
-	// 	possible_apis : app_apis.saas_cogopoint,
-	// 	module_type   : 'dashboards',
-	// 	onlyMobile    : 'true',
-	// },
+	saas_cogopoint: {
+		key           : 'saas_cogopoint',
+		title         : 'Cogopoints',
+		href          : '/saas/cogopoint',
+		as            : '/saas/cogopoint',
+		type          : 'link',
+		line          : true,
+		icon          : 'nav-payments',
+		main_apis     : [],
+		possible_apis : app_apis.saas_cogopoint,
+		module_type   : 'dashboards',
+		showInNav     : false,
+
+	},
 
 };
 export default navigationMappingShipper;
