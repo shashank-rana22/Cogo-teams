@@ -1,4 +1,5 @@
 import { Input, Select } from '@cogoport/components';
+import { IcMAttach } from '@cogoport/icons-react';
 import React, { useCallback } from 'react';
 
 function TextSettings({ item }) {
@@ -7,6 +8,12 @@ function TextSettings({ item }) {
 	}, []);
 
 	const settings = [
+		{
+			label : 'Background Image',
+			key   : 'backgroundImage',
+			type  : 'file',
+		},
+
 		{ label: 'Text', key: 'text' },
 		{ label: 'Font Size', key: 'fontSize', type: 'number' },
 		{ label: 'Color', key: 'color', type: 'color' },
@@ -62,6 +69,7 @@ function TextSettings({ item }) {
 			type    : 'select',
 			options : ['baseline', 'top', 'middle', 'bottom'],
 		},
+
 	];
 
 	const handleInputChange = useCallback(
@@ -93,14 +101,20 @@ function TextSettings({ item }) {
 				>
 					<div style={{ marginRight: '8px' }}>{label}</div>
 
-					{type === 'select' ? (
+					{type === 'file' && (
+						<IcMAttach width={20} height={20} />
+					)}
+
+					{type === 'select' && (
 						<Select
 							value={item[key]}
 							onChange={(value) => handleSelectChange(value, key)}
 							style={{ width: '200px' }}
 							options={options}
 						/>
-					) : (
+					)}
+
+					{!['file', 'select'].includes(type) && (
 						<Input
 							value={item[key]}
 							type={type || 'text'}
@@ -108,6 +122,7 @@ function TextSettings({ item }) {
 							onChange={(e) => handleInputChange(e, key)}
 						/>
 					)}
+
 				</div>
 			))}
 		</div>

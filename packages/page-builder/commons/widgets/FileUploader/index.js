@@ -1,7 +1,10 @@
 import { Upload, Toast } from '@cogoport/components';
-import { IcMCloudUpload } from '@cogoport/icons-react';
+import { IcMDocument, IcMCloudUpload } from '@cogoport/icons-react';
 import { publicRequest, request } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
+
+import styles from './styles.module.css';
 
 function FileUploader(props) {
 	const {
@@ -16,6 +19,7 @@ function FileUploader(props) {
 	const [fileName, setFileName] = useState(null); // remove
 	const [loading, setLoading] = useState(true); // remove
 	const [urlStore, setUrlStore] = useState([]);
+	const [progress, setProgress] = useState({});
 
 	useEffect(() => {
 		setLoading(true);
@@ -45,7 +49,19 @@ function FileUploader(props) {
 		}
 	}, [multiple, urlStore, onChange]);
 
-	const uploadFile = () => async (file) => {
+	const onUploadProgress = (index) => (file) => {
+		setProgress((previousProgress) => ({
+			...previousProgress,
+			[`${index}`]: (() => {
+				const { loaded, total } = file;
+				const percentCompleted = Math.floor((loaded * 100) / total);
+
+				return percentCompleted;
+			})(),
+		}));
+	};
+
+	const uploadFile = (index) => async (file) => {
 		const { data } = await request({
 			method : 'GET',
 			url    : '/get_media_upload_url',
@@ -64,6 +80,7 @@ function FileUploader(props) {
 				...headers,
 				'Content-Type': file.type,
 			},
+			onUploadProgress: onUploadProgress(index),
 		});
 
 		const finalUrl = url.split('?')[0];
@@ -76,6 +93,8 @@ function FileUploader(props) {
 			setLoading(true);
 
 			if (values.length > 0) {
+				setProgress({});
+
 				const promises = values.map((value, index) => uploadFile(index)(value));
 
 				const allUrls = await Promise.all(promises);
@@ -109,17 +128,41 @@ function FileUploader(props) {
 	};
 
 	return (
-		<Upload
-			{...rest}
-			value={fileName}
-			multiple={multiple}
-			onChange={handleChange}
-			onClick={handleDelete}
-			loading={loading}
-			uploadDesc={uploadDesc || 'Upload files'}
-			uploadIcon={uploadIcon || <IcMCloudUpload color="#ACDADF" height={40} width={40} />}
-			fileData={urlStore}
-		/>
+		<>
+			{!loading && (
+				<Upload
+					{...rest}
+					value={fileName}
+					multiple={multiple}
+					onChange={handleChange}
+					onClick={handleDelete}
+					loading={loading}
+					uploadDesc={uploadDesc || 'Upload files'}
+					uploadIcon={uploadIcon || <IcMCloudUpload color="#ACDADF" height={40} width={40} />}
+					fileData={urlStore}
+					className={styles.ui_upload_droparea_container}
+				/>
+			)}
+			{true && !isEmpty(progress) && Object.keys(progress).map((key) => (
+				<div className={styles.progress_container}>
+					<IcMDocument
+						style={{ height: '30', width: '30', color: '#2C3E50' }}
+					/>
+					<div>
+						<div className={styles.file_name}>
+							{`File uploading (${progress[key]}%)...`}
+						</div>
+						<div className={styles.progress_bar}>
+							<div
+								className={styles.progress}
+								style={{ width: `${progress[key]}%` }}
+							/>
+						</div>
+					</div>
+				</div>
+			))}
+
+		</>
 	);
 }
 
