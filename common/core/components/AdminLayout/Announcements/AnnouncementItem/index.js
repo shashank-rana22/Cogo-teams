@@ -74,7 +74,7 @@ function AnnouncementItem({
 						</div>
 					) : null}
 				</div>
-				
+
 				<div className={styles.date_tag}>{format(validity_start, 'dd MMM yyyy hh:mm a')}</div>
 			</div>
 		</div>

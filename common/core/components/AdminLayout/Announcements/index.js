@@ -73,12 +73,9 @@ function Announcements({
 			/>
 		</div>
 	);
-
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.filters_container}>
-
 				<div className={styles.toggle_container}>
 					<Toggle
 						name="unread-toggle"

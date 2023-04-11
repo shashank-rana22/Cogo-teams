@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
@@ -16,7 +17,7 @@ const useGetSingleAnnouncement = (id = '') => {
 					},
 				});
 			} catch (error) {
-				console.log('error :: ', error);
+				Toast.error(error?.message);
 			}
 		}
 	}, [id, trigger]);

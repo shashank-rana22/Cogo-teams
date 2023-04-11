@@ -7,7 +7,7 @@ import styles from '../PreviewVideos/styles.module.css';
 function PreviewImages({ images = [], fromFloatingWidget = false, isMobile = false }) {
 	const scrollRefImages = useRef('');
 
-	const scrollAmount = (isMobile ? 360 : 800);
+	const scrollAmount = isMobile ? 360 : 800;
 
 	const scrollHandlerRightImages = () => {
 		scrollRefImages.current.scrollLeft += scrollAmount;

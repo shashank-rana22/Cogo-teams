@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -32,7 +33,7 @@ const useAnnouncementViewed = (fetchAnnouncements = () => {}) => {
 
 			fetchAnnouncements();
 		} catch (error) {
-			console.log('error :: ', error);
+			Toast.error(error?.message);
 		}
 	};
 

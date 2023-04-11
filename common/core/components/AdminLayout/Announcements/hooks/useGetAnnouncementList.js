@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -94,7 +95,7 @@ const useGetAnnouncementList = () => {
 				totalCount: data?.total_count,
 			}));
 		} catch (error) {
-			console.log('error :: ', error);
+			Toast.error(error?.message);
 		}
 	}, [cogo_entity_id, country_id, params.filters.announcement_type, params.filters.q, params.filters.toggle,
 		params.page, roleSubFunction, role_functions, scope, trigger, user_id]);
