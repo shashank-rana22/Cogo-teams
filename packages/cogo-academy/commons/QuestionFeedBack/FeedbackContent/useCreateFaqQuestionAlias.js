@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useCreateFaqQuestionAlias = ({ suggested_question_abstract, setAddAlias }) => {
+const useCreateFaqQuestionAlias = ({ suggested_question_abstract, fetchListFaqFeedback }) => {
 	const general = useSelector((state) => state.general || {});
 
 	const { id = '' } = general?.query || {};
@@ -14,16 +14,21 @@ const useCreateFaqQuestionAlias = ({ suggested_question_abstract, setAddAlias })
 	}, { manual: true });
 
 	const onClickAddAlias = async () => {
-		const payload = { parent_question_id: id, alias: suggested_question_abstract };
+		const payload = {
+			parent_question_id      : id,
+			alias_question_abstract : suggested_question_abstract,
+		};
 
 		try {
 			await trigger({
-				data: payload,
+				data:
+					payload,
+
 			});
 			Toast.sucess('Aliases added sucessfully');
-			setAddAlias(true);
-		} catch (e) {
-			Toast.error(getApiErrorString(e?.response?.data));
+			fetchListFaqFeedback();
+		} catch (err) {
+			Toast.error(getApiErrorString(err?.response?.data));
 		}
 	};
 

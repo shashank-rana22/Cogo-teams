@@ -3,20 +3,20 @@ import { IcMDelete, IcMPlusInCircle } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function Aliases({ showAlias, setShowAlias = () => {}, alias = {} }) {
+function Aliases({ showAlias, setShowAlias = () => {}, alias = {}, filteredAliases = [] }) {
 	const id = alias?.id;
 
-	const showAddIcon = showAlias.slice(-1)[0];
+	const aliasIndex = showAlias.findIndex((obj) => obj.id === id);
 
-	const { id: showAddIconId, value } = showAddIcon || {};
+	const showAddIcon = filteredAliases.slice(-1)[0];
+
+	const { id: showAddIconId, question_abstract } = showAddIcon || {};
 
 	const onClickDeleteIcon = () => {
-		const index = showAlias.findIndex((obj) => obj.id === id);
-
-		if (index !== -1) {
-			const updatedArray = showAlias.filter((obj) => obj.id !== id);
-			setShowAlias(updatedArray);
-		}
+		const updatedAlias = [...showAlias];
+		const index = updatedAlias.findIndex((aliass) => aliass.id === id);
+		updatedAlias[index] = { ...updatedAlias[index], status: 'inactive' };
+		setShowAlias(updatedAlias);
 	};
 
 	return (
@@ -25,15 +25,15 @@ function Aliases({ showAlias, setShowAlias = () => {}, alias = {} }) {
 				<Input
 					size="md"
 					placeholder="Enter alias"
-					value={showAlias[id]?.value}
+					value={showAlias[aliasIndex]?.question_abstract}
 					onChange={(event) => {
 						setShowAlias((prevAliases) => {
 							const existingAliasIndex = prevAliases.findIndex(
-								(al) => al.id === id,
+								(element) => element.id === id,
 							);
-							return prevAliases.map((al, index) => (index === existingAliasIndex
-								? { id, value: event }
-								: al));
+							return prevAliases.map((element, index) => (index === existingAliasIndex
+								? { id, question_abstract: event }
+								: element));
 						});
 					}}
 
@@ -47,7 +47,7 @@ function Aliases({ showAlias, setShowAlias = () => {}, alias = {} }) {
 						onClick={onClickDeleteIcon}
 					/>
 
-					{showAddIconId === id && value && (
+					{showAddIconId === id && question_abstract && (
 						<IcMPlusInCircle
 							width={26}
 							height={26}

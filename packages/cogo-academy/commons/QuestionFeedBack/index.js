@@ -21,6 +21,7 @@ function QuestionFeedBack({ id, source = '', onClickEdit = () => {} }) {
 		answer_remark,
 		question_answer_remark,
 		question_remark,
+		fetchListFaqFeedback,
 	} = useListfaqFeedback({ id, feedbackId });
 
 	const { data = {} } = useGetFaqFeedback({ feedbackId, page });
@@ -86,6 +87,7 @@ function QuestionFeedBack({ id, source = '', onClickEdit = () => {} }) {
 						onClickEdit={onClickEdit}
 						source={source}
 						key={id}
+						fetchListFaqFeedback={fetchListFaqFeedback}
 
 					/>
 				))}

@@ -91,3 +91,12 @@
 	margin-right: 8px;
 	cursor: pointer;
 }
+
+.alias{
+	padding-left: 8px;
+}
+
+.span{
+	font-weight: 500;
+	padding-right: 6px;
+}

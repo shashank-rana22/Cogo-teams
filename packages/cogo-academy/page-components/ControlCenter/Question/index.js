@@ -91,6 +91,7 @@ function CreateFAQ() {
 		answers,
 		faq_audiences,
 		id,
+		question_aliases,
 	} = data || {};
 
 	useEffect(() => {
@@ -111,6 +112,7 @@ function CreateFAQ() {
 			setQuestionValue('topic_ids', filterTopics);
 			setQuestionValue('audience_ids', filterAudiences);
 			setEditorValue(RichTextEditor?.createValueFromString((answer || ''), 'html'));
+			setShowAlias(question_aliases);
 		}
 	}, [listTopicsLoading,
 		listTagsLoading,
@@ -124,7 +126,8 @@ function CreateFAQ() {
 		setEditorValue,
 		RichTextEditor,
 		answer,
-	]);
+		setShowAlias,
+		question_aliases]);
 
 	useEffect(() => {
 		if (questionPreview !== 'preview') {
@@ -143,6 +146,8 @@ function CreateFAQ() {
 		setQuestionPreview('preview');
 		router.back();
 	};
+
+	const filteredAliases = (showAlias || []).filter((ele) => ele?.status !== 'inactive');
 
 	if (questionPreview === 'preview' && editorValue.toString('html') !== '') {
 		return (
@@ -204,24 +209,28 @@ function CreateFAQ() {
 									{errors.question_abstract.message}
 								</span>
 							)}
-
-							<div
-								className={styles.alias}
-								role="presentation"
-								onClick={() => setShowAlias([{ id: (showAlias || []).length, value: '' }])}
-							>
-								Add Alias
-							</div>
+							{ isEmpty(filteredAliases) && (
+								<div
+									className={styles.alias}
+									role="presentation"
+									onClick={() => setShowAlias(
+										[{ id: (showAlias || []).length, question_abstract: '' }],
+									)}
+								>
+									Add Alias
+								</div>
+							)}
 
 						</div>
 						{
-							!isEmpty(showAlias) && (showAlias || [])
+							!isEmpty(filteredAliases) && (filteredAliases || [])
 								.map((alias) => (
 									<Aliases
 										showAlias={showAlias}
 										setShowAlias={setShowAlias}
 										key={alias?.id}
 										alias={alias}
+										filteredAliases={filteredAliases}
 									/>
 								))
 							}

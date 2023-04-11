@@ -94,3 +94,12 @@
 	border: 1px solid #ffe4af;
 	border-radius: 16px;
 }
+
+.question_type{
+	border: 1px solid #ffe4af;
+	width:66px;
+	text-align: center;
+	border-radius: 16px;
+	color:#ffffff
+
+}

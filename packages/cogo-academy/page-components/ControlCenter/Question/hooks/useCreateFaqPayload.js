@@ -5,8 +5,6 @@ function useCreateFaqPayload({ values, editorValue, data, showAlias }) {
 		faq_topics = [], faq_audiences = [], faq_tags = [], answers = [],
 	} = data || {};
 
-	console.log('data', data);
-
 	const {
 		question_abstract,
 		tag_ids,
@@ -14,7 +12,27 @@ function useCreateFaqPayload({ values, editorValue, data, showAlias }) {
 		audience_ids,
 	} = values || {};
 
-	const aliasesArray = (showAlias || []).map((alias) => (alias?.value));
+	// const questionAlias =
+
+	const aliasesArray = (showAlias || []).map((alias) => (alias?.question_abstract));
+
+	const updatedAlias = [];
+
+	(showAlias || []).forEach((ele, index) => {
+		const { id = '', question_abstract:alias_question_abstract = '', status } = ele || {};
+
+		const filteredId = id !== index ? id : undefined;
+		const obj = {
+			id     : filteredId,
+			alias_question_abstract,
+			status : status || undefined,
+		};
+
+		if (obj[id] === undefined) {
+			delete obj[id];
+		}
+		updatedAlias.push(obj);
+	});
 
 	const getTopicIds = (faq_topics || []).map(
 		(item) => item?.id,
@@ -42,7 +60,7 @@ function useCreateFaqPayload({ values, editorValue, data, showAlias }) {
 		state              : 'draft',
 		status             : 'active',
 		tag_ids,
-		// aliases            : {id:},
+		aliases            : isEmpty(data) ? aliasesArray : updatedAlias,
 		topic_ids,
 		inactive_topic_ids : !isEmpty(inactive_topic_ids) ? inactive_topic_ids : undefined,
 		inactive_tag_ids   : !isEmpty(inactive_tag_ids) ? inactive_tag_ids : undefined,
