@@ -105,11 +105,11 @@ function CogoOne() {
 		showBotMessages,
 		searchValue,
 	});
-	const hideEmptyPage = (activeTab === 'message' && !isEmpty(activeMessageCard))
-	|| (activeTab === 'voice' && !isEmpty(activeVoiceCard))
-	|| (activeTab === 'mail' && !isEmpty(activeMail));
+
 	const renderComponent = () => {
-		if (hideEmptyPage) {
+		if ((activeTab === 'message' && !isEmpty(activeMessageCard))
+		|| (activeTab === 'voice' && !isEmpty(activeVoiceCard))
+		|| (activeTab === 'mail' && !isEmpty(activeMail))) {
 			return (
 				<>
 					<Conversations
@@ -166,7 +166,7 @@ function CogoOne() {
 	return (
 		<>
 			{isomniChannelAdmin && (
-				<div className={cl`${styles.settings} ${hideEmptyPage ? styles.margin_change_on_open : ''}`}>
+				<div className={styles.settings}>
 					<IcMSettings
 						className={styles.settings_icon}
 						onClick={() => setAgentDetails(true)}

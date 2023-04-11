@@ -1,11 +1,7 @@
 .settings {
 	display: flex;
 	justify-content: flex-end;
-	margin-right: 20px;
-}
-
-.margin_change_on_open {
-	margin-right: -6px;
+	margin-right: -17px;
 }
 
 .settings_icon {

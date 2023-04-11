@@ -123,13 +123,20 @@ function MessageCardData({
 
 					<div className={styles.content_div}>
 						{formatLastMessage(lastMessageVar)}
-						{new_message_count > 0 && (
-							<div className={styles.new_message_count}>
-								{new_message_count > 100 ? '99+' : (
-									new_message_count
-								)}
-							</div>
-						)}
+						<div className={styles.flex_div}>
+							{new_message_count > 0 && (
+								<div className={styles.new_message_count}>
+									{new_message_count > 100 ? '99+' : (
+										new_message_count
+									)}
+								</div>
+							)}
+							{is_likely_to_book_shipment && (
+								<div className={styles.likely_to_book_shipment}>
+									<IcMShip className={styles.ship_icon_container} fill="#849E4C" />
+								</div>
+							)}
+						</div>
 					</div>
 				</div>
 				{isImportant && (
@@ -153,11 +160,7 @@ function MessageCardData({
 							/>
 						)}
 				</div>
-				{is_likely_to_book_shipment && (
-					<div className={styles.likely_to_book_shipment}>
-						<IcMShip className={styles.ship_icon_container} fill="#849E4C" />
-					</div>
-				)}
+
 			</div>
 		</div>
 
