@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import FileUploader from '../FileUploader';
+import FileUploader from '../../FileUploader';
 
 // import styles from './styles.module.css';
 

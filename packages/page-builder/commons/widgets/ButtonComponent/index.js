@@ -20,14 +20,14 @@ function ButtonComponent(props) {
 	const [isFocused, setIsFocused] = useState(false);
 	const [editorValue, setEditorValue] = useState(label);
 
-	const editorStyle = {
-		border         : isFocused ? '1.5px solid #88cad1' : '1px solid #ccc',
-		padding        : '10px',
-		margin         : '20px',
-		display        : 'flex',
-		justifyContent : 'center',
+	// const editorStyle = {
+	// 	border         : isFocused ? '1.5px solid #88cad1' : '1px solid #ccc',
+	// 	padding        : '10px',
+	// 	margin         : '20px',
+	// 	display        : 'flex',
+	// 	justifyContent : 'center',
 
-	};
+	// };
 
 	const handleEditorChange = (value) => {
 		setEditorValue(value);
@@ -49,7 +49,7 @@ function ButtonComponent(props) {
 	};
 
 	return (
-		<div style={editorStyle}>
+		<div>
 			<Button
 				type={type}
 				themeType={themeType}
