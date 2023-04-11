@@ -1,13 +1,36 @@
 .container {
 	width: 25%;
-	padding: 12px;
 	background: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 10%);
 }
 
 .title {
+	padding: 12px 16px;
 	font-size: 14px;
 	font-weight: 700;
 	color: #221f20;
+	border-bottom: 1px solid #ffeddd;
+}
+
+.label {
+	margin-bottom: 8px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.form {
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.control_container {
+	padding: 12px;
+	border-bottom: 1px solid #e0e0e0;
+
+	:global {
+		.ui_chips_container {
+			flex-wrap: wrap;
+		}
+	}
 }
