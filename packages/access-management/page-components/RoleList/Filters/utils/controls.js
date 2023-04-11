@@ -25,6 +25,7 @@ const FUNCTION_SUB_FUNCTION_MAPPING = {
 		{ label: 'CP Sales', value: 'cp_sales' },
 		{ label: 'Acquisition', value: 'acquisition' },
 		{ label: 'CP Portfolio', value: 'cp_portfolio' },
+		{ label: 'Customer Operations', value: 'customer_operations' },
 	],
 	supply: [
 		{ label: 'Shipping Line', value: 'shipping_line' },
@@ -49,6 +50,9 @@ const FUNCTION_SUB_FUNCTION_MAPPING = {
 		{ label: 'HR Admin', value: 'hr_admin' },
 		{ label: 'HRBP', value: 'hrbp' },
 		{ label: 'Talent Acquisition', value: 'talent_acquisition' },
+	],
+	external: [
+		{ label: 'Enrichment', value: 'enrichment' },
 	],
 };
 
@@ -113,6 +117,10 @@ export const controls = (role_functions, partnerOptions) => [
 			{
 				label : 'Finance',
 				value : 'finance',
+			},
+			{
+				label : 'External',
+				value : 'external',
 			},
 		],
 		params: { filters: { status: 'active' } },

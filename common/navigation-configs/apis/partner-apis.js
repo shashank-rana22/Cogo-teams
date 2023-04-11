@@ -3249,6 +3249,12 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'spot_search',
 		},
+		{
+			api          : 'list_cogo_assured_rate_feedbacks',
+			access_type  : 'private',
+			service_name : 'cogo_assured_rate',
+			feature      : 'rate_feedbacks',
+		},
 	],
 	okam_dashboard: [
 		{
@@ -6493,7 +6499,7 @@ const partner = {
 		{
 			api          : 'get_shipment',
 			access_type  : 'private',
-			service_name : 'shipment',
+			service_name : 'bookings',
 		},
 		{
 			api          : 'list_organization_invoicing_parties',
@@ -6618,7 +6624,7 @@ const partner = {
 		{
 			api          : 'get_shipment',
 			access_type  : 'private',
-			service_name : 'shipment',
+			service_name : 'bookings',
 		},
 		{
 			api          : 'list_organization_invoicing_parties',
@@ -6755,7 +6761,7 @@ const partner = {
 		{
 			api          : 'get_shipment',
 			access_type  : 'private',
-			service_name : 'shipment',
+			service_name : 'bookings',
 		},
 		{
 			api          : 'list_organization_invoicing_parties',
@@ -7890,7 +7896,7 @@ const partner = {
 			access_type : 'private',
 		},
 	],
-	cfo_dashboard: [
+	business_finance_dashboard: [
 		{
 			api         : 'get_payments_dashboard_finance_profitability_shipment',
 			access_type : 'private',
@@ -10899,6 +10905,10 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_air_coe_documents',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_locations',
 			access_type  : 'private',
 			service_name : 'location',
@@ -11097,6 +11107,11 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
+			api          : 'bulk_assign_chat',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'assign_chat',
 			access_type  : 'private',
 			service_name : 'communication',
@@ -11216,6 +11231,11 @@ const partner = {
 			api          : 'convert_importer_exporter_to_channel_partner',
 			access_type  : 'private',
 			service_name : 'partner',
+		},
+		{
+			api          : 'list_user_chat_summary',
+			access_type  : 'private',
+			service_name : 'communication',
 		},
 	],
 	analytics_dashboard: [

@@ -9,7 +9,6 @@ interface Outstanding {
 	page?:number,
 	pageLimit?:number,
 	search?:string,
-	entityCode:string,
 	organizationSerialId?:string
 	q?:string
 	sageId?:string
@@ -18,13 +17,13 @@ interface Outstanding {
 
 interface GetOrgOutstanding {
 	formFilters?: GenericObject
+	entityCode?: string
 }
 
-const useGetOrgOutstanding = ({ formFilters }: GetOrgOutstanding) => {
+const useGetOrgOutstanding = ({ formFilters, entityCode }: GetOrgOutstanding) => {
 	const [outStandingFilters, setoutStandingFilters] = useState<Outstanding>({
-		page       : 1,
-		pageLimit  : 10,
-		entityCode : '301',
+		page      : 1,
+		pageLimit : 10,
 	});
 
 	const [queryKey, setQueryKey] = useState('q');
@@ -34,7 +33,7 @@ const useGetOrgOutstanding = ({ formFilters }: GetOrgOutstanding) => {
 		label : 'Total Outstanding Amount',
 	});
 	const {
-		search, entityCode, organizationSerialId, pageLimit, page, q, sageId, tradePartySerialId,
+		search, organizationSerialId, pageLimit, page, q, sageId, tradePartySerialId,
 	} = outStandingFilters || {};
 
 	const { kamId, salesAgentId, creditControllerId, companyType } = formFilters;

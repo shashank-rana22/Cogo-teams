@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { useCallback } from 'react';
 
 const useEndTest = ({ setActiveState = () => {}, setShowTimeOverModal, test_user_mapping_id }) => {
 	const {
@@ -17,7 +18,7 @@ const useEndTest = ({ setActiveState = () => {}, setShowTimeOverModal, test_user
 		url    : '/submit_test',
 	});
 
-	const endTest = async () => {
+	const endTest = useCallback(async () => {
 		try {
 			await trigger({
 				data: {
@@ -36,7 +37,7 @@ const useEndTest = ({ setActiveState = () => {}, setShowTimeOverModal, test_user
 				Toast.error(getApiErrorString(error.response?.data));
 			}
 		}
-	};
+	}, [setActiveState, setShowTimeOverModal, test_id, test_user_mapping_id, trigger, user_id]);
 
 	return {
 		endTest,

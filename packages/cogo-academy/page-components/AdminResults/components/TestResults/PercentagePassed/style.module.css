@@ -2,6 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	width: 20%;
 }
 
 .circle {
@@ -12,7 +13,7 @@
 	width: 156px;
 	height: 156px;
 	background: #f7faef;
-	border: 5px solid  #ddebc0;
+	border: 5px solid #ddebc0;
 	border-radius: 50%;
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }

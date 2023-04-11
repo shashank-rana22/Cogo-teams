@@ -1,0 +1,61 @@
+{
+    "fcl_freight": [
+        {
+            "name": "place_booking",
+            "title" : "Place Booking",
+            "isCriticalVisible": true
+        },
+        {
+            "name": "upload_bn",
+            "title" : "Upload BN",
+            "isCriticalVisible": true
+        },
+        {
+            "name": "amend_bn",
+            "title" : "Amend BN",
+            "isCriticalVisible": true
+        },
+        {
+            "name": "container_pick_up",
+            "title" : "Container Pick Up",
+            "isCriticalVisible": true
+        },
+        {
+            "name": "completed",
+            "title" : "Completed"
+        },
+        {
+            "name": "cancelled",
+            "title" : "Cancelled"
+        }
+    ],
+    "fcl_freight_local": [
+        {
+            "name": "place_booking",
+            "title" : "Place Booking"
+        },
+        {
+            "name": "completed",
+            "title" : "Completed"
+        },
+        {
+            "name": "cancelled",
+            "title" : "Cancelled"
+        }
+    ],
+    "lcl_freight": [
+        {
+            "name": "place_booking",
+            "title" : "Place Booking",
+            "isCriticalVisible": true
+        },
+        {
+            "name": "completed",
+            "title" : "Completed"
+        },
+        {
+            "name": "cancelled",
+            "title" : "Cancelled"
+        }
+    ]
+}

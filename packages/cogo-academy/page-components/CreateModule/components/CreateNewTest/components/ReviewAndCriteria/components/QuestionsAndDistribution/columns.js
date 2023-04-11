@@ -1,4 +1,4 @@
-import { Pill } from '@cogoport/components';
+import { Pill, Tooltip } from '@cogoport/components';
 import { InputController } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
 
@@ -11,36 +11,42 @@ const getColumns = ({ errors, control }) => {
 			Header   : 'QUESTION SET NAME',
 			id       : 'question_set_name',
 			accessor : ({ name = '' }) => (
-				<section>
-					{startCase(name) || '-'}
-				</section>
+				<Tooltip content={name} placement="top">
+					<div className={styles.question_set_name}>
+						{startCase(name) || '-'}
+					</div>
+				</Tooltip>
 			),
 		},
 		{
 			Header   : 'TOPIC',
 			id       : 'topic',
 			accessor : ({ topic = '-' }) => (
-				<section>
+				<Tooltip content={topic} placement="top">
 					<Pill
 						key={topic}
 						size="sm"
-						color="blue"
+						color="#F3FAFA"
+						className={styles.topic}
 					>
-						{startCase(topic)}
+						<div className={styles.topic_names}>
+							{startCase(topic)}
+						</div>
 					</Pill>
-				</section>
+				</Tooltip>
+
 			),
 		},
 		{
 			Header   : 'USER GROUPS',
 			id       : 'user_groups',
 			accessor : ({ audience_ids = [] }) => (
-				<section>
+				<section className={styles.usergroups}>
 					{audience_ids.map((audience_id) => (
 						<Pill
 							key={audience_id}
 							size="sm"
-							color="orange"
+							color="#FEF3E9"
 						>
 							{startCase(audience_id)}
 						</Pill>
@@ -53,7 +59,9 @@ const getColumns = ({ errors, control }) => {
 			Header   : 'AVAILABLE QUESTIONS',
 			id       : 'available_questions',
 			accessor : ({ non_case_study_question_count = 0 }) => (
-				<section>{non_case_study_question_count}</section>
+				<section className={styles.count}>
+					{non_case_study_question_count}
+				</section>
 			),
 		},
 		{
@@ -63,14 +71,17 @@ const getColumns = ({ errors, control }) => {
 				case_study_question_count
 				= 0,
 			}) => (
-				<section>{case_study_question_count}</section>
+				<section className={styles.case_study_question_count}>{case_study_question_count}</section>
 			),
 		},
 		{
 			Header: (
 				<div className={styles.content}>
 					<div className={styles.subcontent}>
-						<span>DISTRIBUTION</span>
+						<span className={styles.usable}>
+							DISTRIBUTION
+							<sup className={styles.sup}>*</sup>
+						</span>
 
 						<span className={styles.matter}>
 							Questions and cases from each Set
@@ -81,6 +92,7 @@ const getColumns = ({ errors, control }) => {
 			id       : 'distribution',
 			accessor : ({ non_case_study_question_count = 0, case_study_question_count = 0, id = '' }) => {
 				const controlItem1 = getControls(id, non_case_study_question_count)[0];
+
 				const controlItem2 = getControls(id, case_study_question_count)[1];
 
 				return (

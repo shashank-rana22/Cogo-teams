@@ -36,7 +36,7 @@ function ReviewAndCriteria(props) {
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<IcMArrowBack className={styles.back_icon} width={20} height={20} onClick={onNavigate} />
-				<div className={styles.title}>New Test</div>
+				<div className={styles.title}>Review and Set Criteria</div>
 			</div>
 
 			{(loading || isEmpty(data)) ? (
@@ -53,7 +53,7 @@ function ReviewAndCriteria(props) {
 						<div className={styles.subtopic}>Topics </div>
 						<div className={styles.topic_pill_container}>
 							{set_data.map((question_set) => (
-								<Pill size="md" color="blue" className={styles.names}>
+								<Pill size="md" color="#F3FAFA" className={styles.names}>
 									<span className={styles.names}>{question_set?.topic}</span>
 								</Pill>
 							))}
@@ -68,7 +68,11 @@ function ReviewAndCriteria(props) {
 					<div className={styles.topic}>
 						<div className={styles.subtopic}> Users </div>
 						<div>
-							<Pill size="md" color="#FEF3E9" className={styles.names}>{ eligible_users || '-'}</Pill>
+							<Pill size="md" color="#FEF3E9" className={styles.names}>
+								<div className={styles.eligible}>
+									{eligible_users || '-'}
+								</div>
+							</Pill>
 						</div>
 					</div>
 				</div>
@@ -98,6 +102,7 @@ function ReviewAndCriteria(props) {
 				{...props}
 				showModal={showModal}
 				setShowModal={setShowModal}
+				watch={watch}
 			/>
 
 			<div className={styles.instructions}>
@@ -153,7 +158,7 @@ function ReviewAndCriteria(props) {
 					size="md"
 					themeType="primary"
 					type="button"
-					onClick={() => handleSubmit(checkError)}
+					onClick={handleSubmit(checkError)}
 				>
 					Publish Test
 				</Button>

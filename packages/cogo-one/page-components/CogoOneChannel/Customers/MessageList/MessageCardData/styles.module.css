@@ -1,7 +1,27 @@
+.chat_card_main_container {
+	display: flex;
+	justify-content: space-between;
+
+	:global {
+		.ui_checkbox_container {
+			padding: 1px;
+		}
+
+		.ui_checkbox_normal {
+			margin: 0 !important;
+		}
+	}
+}
+
 .card_container {
 	position: relative;
+	width: 100%;
 	padding: 10px 8px;
 	margin: 4px;
+}
+
+.card_with_checkbox {
+	width: 95%;
 }
 
 .card_container:hover {

@@ -17,6 +17,7 @@ interface AllParams {
 	billNumber?: number;
 	orgId?: number;
 	jobNumber?: string;
+	jobType?:string;
 	status?: string;
 	amountTab?: string;
 	setDataCard:Function
@@ -76,7 +77,7 @@ const useListBills = (allParams) => {
 		params: {
 			jobNumbers : params.jobNumber ? [params?.jobNumber] : undefined,
 			jobSource  : 'LOGISTICS',
-			jobType    : 'SHIPMENT',
+			jobType    : params?.jobType || undefined,
 			q          : q || undefined,
 			...restFilters,
 			amountTab  : undefined,
@@ -92,7 +93,7 @@ const useListBills = (allParams) => {
 		params: {
 			jobNumber                 : params?.jobNumber,
 			jobSource                 : 'LOGISTICS',
-			jobType                   : 'SHIPMENT',
+			jobType                   : params?.jobType || undefined,
 			q                         : q || undefined,
 			isCreatedByDetailRequired : true,
 			...restFilters,

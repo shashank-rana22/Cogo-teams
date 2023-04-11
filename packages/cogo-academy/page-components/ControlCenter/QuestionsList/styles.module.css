@@ -4,6 +4,7 @@
 }
 
 .question {
+	width: 300px;
 	white-space: initial;
 }
 
@@ -54,4 +55,42 @@
 			}
 		}
 	}
+}
+
+.chips_container {
+	margin-right: 8px;
+}
+
+.feedback_count_space {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 34px;
+}
+
+.feedback_count {
+	margin-left: 4px;
+}
+
+.pills {
+	:global {
+		.ui_pill_container.ui_ps_size_sm {
+			padding: 4px 8px;
+			font-size: 10px;
+			font-weight: 600;
+			background: #fff;
+			border: 1px solid #ffe4af;
+			border-radius: 16px;
+		}
+	}
+}
+
+.inner_pills {
+	display: "flex";
+	flex-direction: "column";
+	font-weight: 600;
+	background: #fff;
+	border: "1px";
+	border: 1px solid #ffe4af;
+	border-radius: 16px;
 }
