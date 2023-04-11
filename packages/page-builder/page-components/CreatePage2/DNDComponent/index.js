@@ -61,16 +61,16 @@ function DNDComponent() {
 		(content, hoveredIndex = components.length, shouldAddBelow = true, parentId, type = '') => {
 		  const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
 
-		  const dataContent = type !== 'container' ? [{
-				...CONTENT_MAPPING[content.type],
-				id   : components.length + 1,
-				type : content.type,
-				parentId,
-			}] : content;
+			//   const dataContent = type !== 'container' ? [] : content;
 
 		  setComponents(() => ([
 				...components.slice(0, startIndex),
-				...dataContent,
+				{
+					...CONTENT_MAPPING[content.type],
+					...content,
+					id: components.length + 1,
+					parentId,
+				},
 				...components.slice(startIndex),
 		  ]));
 

@@ -71,9 +71,7 @@ function Stage({
 	  [stageItems, setStageItems],
 	);
 
-	const rootComponents = stageItems.filter((item) => !item.parentId);
-
-	const memoItems = useMemo(() => rootComponents?.map((item, index) => {
+	const memoItems = useMemo(() => stageItems?.map((item, index) => {
 		const { id, type } = item;
 		return (
 			<div
@@ -101,7 +99,6 @@ function Stage({
 	  selectedItem,
 	  isNewItemAdding,
 	  handleNewAddingItemPropsChange,
-	  components,
 	]);
 
 	//! Portal :: useDrop for stage process
