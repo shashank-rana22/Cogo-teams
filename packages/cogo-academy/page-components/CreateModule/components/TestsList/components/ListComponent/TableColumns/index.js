@@ -235,10 +235,13 @@ export const testSetColumns = ({
 								</Pill>
 							</div>
 						</section>
+
 						<ShowTime validity_end={validity_end} validity_start={validity_start} />
 					</section>
 				);
-			} if (current_status === 'published') {
+			} 
+			
+			if (current_status === 'published') {
 				return (
 					<section>
 						<Pill
@@ -251,6 +254,7 @@ export const testSetColumns = ({
 							{' '}
 							{startCase(current_status)}
 						</Pill>
+
 						<ShowTime validity_end={validity_end} validity_start={validity_start} />
 					</section>
 				);
@@ -267,6 +271,7 @@ export const testSetColumns = ({
 						>
 							{startCase(current_status)}
 						</Pill>
+						
 						<ShowTime validity_end={validity_end} validity_start={validity_start} />
 					</section>
 
