@@ -12,6 +12,7 @@
 		color: #f26054;
 		background: #fdebe8;
 		transition: 0.3s;
+		transform: scale(1.02);
 	}
 }
 
