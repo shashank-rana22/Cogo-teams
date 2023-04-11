@@ -1,4 +1,4 @@
-const PASSWORD_PATTERN =	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm;
+// const PASSWORD_PATTERN =	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm;
 
 const updatePasswordControls = () => [
 	{
@@ -9,11 +9,11 @@ const updatePasswordControls = () => [
 		span        : 12,
 		placeholder : 'Enter password',
 		rules       : {
-			required : true,
-			pattern  : {
-				value   : PASSWORD_PATTERN,
-				message : 'Password is invalid',
-			},
+			required: true,
+			// pattern  : {
+			// 	value   : PASSWORD_PATTERN,
+			// 	message : 'Password is invalid',
+			// },
 		},
 	},
 ];
