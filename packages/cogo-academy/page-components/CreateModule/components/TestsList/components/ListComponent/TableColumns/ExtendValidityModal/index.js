@@ -26,12 +26,10 @@ function ExtendValidityModal({
 
 	const handleSubmitValidity = async () => {
 		try {
-			const res = await trigger({ data: { ...dateRange, id } });
+			await trigger({ data: { ...dateRange, id } });
 
-			if (res.status === 200) {
-				setShowExtendValidityModal(false);
-				fetchList();
-			}
+			setShowExtendValidityModal(false);
+			fetchList();
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

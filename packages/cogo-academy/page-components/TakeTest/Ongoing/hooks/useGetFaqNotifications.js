@@ -6,7 +6,7 @@ import { useCallback } from 'react';
 const useGetFaqNotifications = () => {
 	const [{ data, loading: faqNotificationApiLoading }, trigger] = useRequest({
 		method : 'get',
-		url    : 'get_faq_notification',
+		url    : '/get_faq_notification',
 	}, { manual: false });
 
 	const fetchFaqNotification = useCallback(async () => {
