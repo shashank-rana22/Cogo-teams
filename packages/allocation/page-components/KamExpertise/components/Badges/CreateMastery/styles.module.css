@@ -21,7 +21,6 @@
 	justify-content: space-between;
 	width: 100%;
 	padding: 20px;
-	margin-top: -20px;
 	background: rgb(249 249 249 / 90%);
 	border-radius: 10px;
 
@@ -102,6 +101,8 @@
 }
 
 .form_container {
+	margin-top: 20px;
+
 	@media (max-width: 576px) {
 		padding-bottom: 20px;
 	}

@@ -8,6 +8,8 @@ import styles from './styles.module.css';
 function OverviewCard(props) {
 	const { data = {}, overviewLoading = false } = props;
 
+	const { expertise_type = '', avg_score = 0, max_condition } = data;
+
 	if (overviewLoading) {
 		return (
 			<Card
@@ -43,9 +45,9 @@ function OverviewCard(props) {
 		>
 			<Card.Title title={(
 				<div className={styles.title}>
-					<div style={{ fontSize: '24px' }}>{ICON_MAPPING[data?.expertise_type]}</div>
+					<div style={{ fontSize: '24px' }}>{ICON_MAPPING[expertise_type] || ''}</div>
 
-					<span className={styles.title_text}>{startCase(data?.expertise_type)}</span>
+					<span className={styles.title_text}>{startCase(expertise_type)}</span>
 				</div>
 			)}
 			/>
@@ -55,24 +57,24 @@ function OverviewCard(props) {
 					<span>Avg. Score</span>
 
 					<span className={styles.values}>
-						{data?.avg_score || 0}
+						{avg_score}
 					</span>
 				</div>
 
 				<Tooltip
 					content={(
 						<div className={styles.tooltip_text}>
-							{startCase(data?.max_condition) || 'NA'}
+							{startCase(max_condition) || 'NA'}
 						</div>
 					)}
-					disabled={!(data?.max_condition)}
+					disabled={!(max_condition)}
 					placement="top"
 				>
 					<div className={styles.display_flex}>
 						<span> Most Points in</span>
 
 						<div className={styles.values}>
-							{startCase(data?.max_condition) || 'NA'}
+							{startCase(max_condition) || 'NA'}
 						</div>
 					</div>
 				</Tooltip>

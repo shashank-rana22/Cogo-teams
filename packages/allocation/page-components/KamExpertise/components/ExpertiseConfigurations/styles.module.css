@@ -52,4 +52,8 @@
 	top: 0;
 	right: 0;
 	width: 92px;
+
+	@media (max-width: 768px){
+		top: 30px;
+	}
 }

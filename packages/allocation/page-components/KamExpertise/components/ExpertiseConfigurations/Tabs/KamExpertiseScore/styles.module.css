@@ -2,10 +2,6 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-
-	@media (max-width: 576px) {
-		padding-top: 50px;
-	}
 }
 
 .icon_container {
