@@ -1,5 +1,6 @@
 import { Modal, Input, Pagination } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useListChatAgents from '../../../hooks/useListChatAgents';
@@ -32,7 +33,7 @@ function AgentModal({
 		page,
 	} = listAgentStatus;
 
-	const modifiedList = loading ? [{}, {}, {}, {}, {}, {}, {}, {}] : list;
+	const modifiedList = loading ? [{}, {}, {}, {}, {}, {}, {}, {}] : list || [];
 
 	return (
 		<Modal
@@ -51,7 +52,7 @@ function AgentModal({
 					onChange={setSearch}
 				/>
 				<div>
-					{modifiedList.length ? modifiedList?.map(({ name = '', status = '', agent_id = '' }) => (
+					{!isEmpty(modifiedList) ? modifiedList.map(({ name = '', status = '', agent_id = '' }) => (
 						<AgentDetail
 							createLoading={createLoading}
 							updateAgentPreference={updateAgentPreference}
