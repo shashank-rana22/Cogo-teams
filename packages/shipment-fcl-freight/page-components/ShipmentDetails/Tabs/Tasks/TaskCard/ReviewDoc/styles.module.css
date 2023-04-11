@@ -1,0 +1,53 @@
+
+.container{};
+
+.display_details{
+	border-bottom: 1px solid #e0e0e0;
+	background: #f9f9f9;
+	padding: 16px 12px;
+};
+
+.sub_heading{
+	font-weight: 600;
+	font-size: 14px;
+	color: #4f4f4f;
+};
+
+.sub_detail{
+	margin-left: 8px;
+	font-weight: 400;
+	font-size: 14px;
+	color: #393f70;
+};
+
+.row{
+	display: flex;
+	width: 50%;
+};
+
+.sub_half_detail{
+	display: flex;
+};
+
+.action_buttons{
+	display: flex;
+	justify-content: flex-end;
+
+	.core-ui-button-root {
+		margin-right: 8px;
+	}
+};
+
+.file_view{
+	margin: 12px 0px;
+	height: 250px;
+	display: flex;
+	justify-content: center;
+};
+
+.remark{
+	margin: 12px 0px;
+	.ui-textarea {
+		padding: 6px;
+	}
+};

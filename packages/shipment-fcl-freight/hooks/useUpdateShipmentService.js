@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 const useUpdateShipmentService = ({
 	refetch = () => {},
@@ -18,7 +18,7 @@ const useUpdateShipmentService = ({
 			Toast.success(successMessage);
 			refetch();
 		} catch (err) {
-			Toast.error(getApiErrorString(err));
+			toastApiError(err);
 		}
 	};
 

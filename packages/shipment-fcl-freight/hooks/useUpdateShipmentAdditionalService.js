@@ -3,7 +3,7 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 const geo = getGeoConstants();
 
@@ -32,7 +32,7 @@ const useUpdateShipmentAdditionalService = ({
 			setRemarks(null);
 			refetch();
 		} catch (err) {
-			Toast.error(getApiErrorString(err));
+			toastApiError(err);
 		}
 	};
 
@@ -154,7 +154,7 @@ const useUpdateShipmentAdditionalService = ({
 				onComplete();
 			}
 		} catch (err) {
-			Toast.error(getApiErrorString(err));
+			toastApiError(err);
 		}
 	};
 
@@ -162,7 +162,7 @@ const useUpdateShipmentAdditionalService = ({
 		try {
 			await handleSubmit(payload);
 		} catch (err) {
-			Toast.error(getApiErrorString(err));
+			toastApiError(err);
 		}
 	};
 

@@ -9,7 +9,7 @@ function Header({ setSwitchDashboard = () => {} }) {
 
 			<div className={styles.button_container}>
 				<Button type="button" themeType="primary" onClick={() => setSwitchDashboard(true)}>
-					Creator Management Dashboard
+					Control Center
 				</Button>
 			</div>
 		</div>

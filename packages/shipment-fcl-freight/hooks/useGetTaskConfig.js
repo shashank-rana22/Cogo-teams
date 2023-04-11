@@ -1,8 +1,7 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 function useGetTaskConfig({ task = {}, onCancel = () => {} }) {
 	const [{ loading, data }, trigger] = useRequest({
@@ -20,7 +19,7 @@ function useGetTaskConfig({ task = {}, onCancel = () => {} }) {
 					onCancel();
 				}
 			} catch (err) {
-				Toast.error(getApiErrorString(err));
+				toastApiError(err);
 			}
 		})();
 	}, [trigger, task.id, onCancel]);

@@ -1,18 +1,28 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { StreamDatum } from '@cogoport/charts/stream/index';
 import { Loader } from '@cogoport/components';
+import { getFormattedPrice } from '@cogoport/forms';
 
 import getAmountInLakhCrK from '../../../../../../../commons/getAmountInLakhCrK';
 import EmptyState from '../../../../../../commons/EmptyStateDocs';
+import { keyValue } from '../../../../../../constants';
 
 import styles from './styles.module.css';
 
 interface ResponsiveChartProps {
 	data?: StreamDatum[],
-	loadingData?: boolean
+	loadingData?: boolean,
+	entityCode?: string,
+	showCount?: boolean,
 }
 
-function ResponsiveChart({ data, loadingData }: ResponsiveChartProps) {
+function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true }: ResponsiveChartProps) {
+	data?.sort((a, b) => {
+		const dateA = new Date(`${a.year}-${a.date} 00:00:00`);
+		const dateB = new Date(`${b.year}-${b.date} 00:00:00`);
+		return dateA.getTime() - dateB.getTime();
+	});
+
 	const AmountData = [];
 	const CountData = [];
 
@@ -38,20 +48,28 @@ function ResponsiveChart({ data, loadingData }: ResponsiveChartProps) {
 		},
 	];
 
-	if (data === undefined) {
+	const formatdata = showCount ? finalData : [
+		{
+			id   : 'Amount',
+			data : AmountData,
+		},
+	];
+
+	if (!data) {
 		return <EmptyState />;
 	}
 	return (
 		loadingData ? <div className={styles.loader}><Loader style={{ height: '100px', width: '50px' }} /></div>
 			: (
 				<ResponsiveLine
-					data={finalData}
+					data={formatdata}
 					margin={{ top: 10, right: 120, bottom: 100, left: 90 }}
 					xScale={{ type: 'point' }}
 					enableGridX={false}
 					colors={['#88CAD1', '#F68B21']}
 					enableSlices="x"
 					yScale={{ type: 'linear', min: 0, max: 'auto' }}
+					yFormat={(value) => getFormattedPrice(value, keyValue[entityCode])}
 					axisTop={null}
 					axisRight={null}
 					axisBottom={{

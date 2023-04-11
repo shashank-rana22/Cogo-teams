@@ -11087,6 +11087,11 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
+			api          : 'bulk_assign_chat',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'assign_chat',
 			access_type  : 'private',
 			service_name : 'communication',
@@ -11206,6 +11211,11 @@ const partner = {
 			api          : 'convert_importer_exporter_to_channel_partner',
 			access_type  : 'private',
 			service_name : 'partner',
+		},
+		{
+			api          : 'list_user_chat_summary',
+			access_type  : 'private',
+			service_name : 'communication',
 		},
 	],
 	analytics_dashboard: [

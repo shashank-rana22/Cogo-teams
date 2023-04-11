@@ -1,9 +1,8 @@
-import { Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useRequest } from '@cogoport/request';
 import { useContext, useState, useEffect, useCallback } from 'react';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 function useListShipmentPendingTasks() {
 	const [selectedTaskId, setSelectedTaskId] = useState(null);
@@ -33,7 +32,7 @@ function useListShipmentPendingTasks() {
 						},
 					});
 				} catch (error) {
-					Toast.error((getApiErrorString(error)));
+					toastApiError(error);
 				}
 			}
 		)();
