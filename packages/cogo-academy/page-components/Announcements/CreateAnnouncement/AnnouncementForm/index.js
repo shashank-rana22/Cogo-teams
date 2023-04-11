@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import Spinner from '../../../../commons/Spinner';
 import BodyTextEditor from '../../../ControlCenter/Question/BodyTextEditor';
+import ANNOUNCEMENT_TYPE_MAPPING from '../../constants/ANNOUNCEMENT_TYPE_MAPPING.json';
 import useCreateAnnouncements from '../useCreateAnnouncement';
 
 import CreateAudienceForm from './CreateAudienceForm';
@@ -12,13 +13,6 @@ import FormElement from './FormElement';
 import Preview from './Preview';
 import styles from './styles.module.css';
 import useListAudiences from './useListAudiences';
-
-const ANNOUNCEMENT_TYPE_MAPPING = {
-	general        : 'General',
-	product_update : 'Product Release / Update',
-	announcement   : 'Announcement',
-	tasks          : 'Tasks',
-};
 
 function AnnouncementForm({
 	defaultValues = {},

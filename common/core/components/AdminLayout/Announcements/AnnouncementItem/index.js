@@ -2,14 +2,9 @@ import { IcMArrowRight } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import React from 'react';
 
-import styles from './styles.module.css';
+import ANNOUNCEMENT_TYPE_MAPPING from '../constants/ANNOUNCEMENT_TYPE_MAPPING.json';
 
-const ANNOUNCEMENT_TYPE_MAPPING = {
-	general        : 'General',
-	product_update : 'Product Release / Update',
-	announcement   : 'Announcement',
-	tasks          : 'Tasks',
-};
+import styles from './styles.module.css';
 
 function AnnouncementItem({
 	data = {},

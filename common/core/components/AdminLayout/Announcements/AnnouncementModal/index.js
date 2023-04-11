@@ -16,6 +16,10 @@ function AnnouncementModal({ data = [] }) {
 	const [isMobile, setIsMobile] = useState(false);
 
 	useEffect(() => {
+		if (window.innerWidth < 768) {
+			setIsMobile(true);
+		}
+
 		function handleResize() {
 			setIsMobile(window.innerWidth < 768);
 		}
