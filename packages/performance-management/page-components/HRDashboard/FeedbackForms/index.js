@@ -170,6 +170,7 @@ function FeedbackForms() {
 								openCreateForm={openCreateForm}
 								setOpenCreateForm={setOpenCreateForm}
 								formStage={formStage}
+								activationStatus={activationStatus}
 								setFormStage={setFormStage}
 								setFormId={setFormId}
 							/>

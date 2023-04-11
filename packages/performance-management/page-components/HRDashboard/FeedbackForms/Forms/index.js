@@ -12,6 +12,7 @@ function Forms({
 	setOpenCreateForm = () => {},
 	openCreateForm = false,
 	setFormStage = () => {},
+	activationStatus = 'add',
 	setFormId = () => {},
 }) {
 	const openOldForm = (Id) => {
@@ -49,7 +50,13 @@ function Forms({
 
 					</div>
 					{!openCreateForm && !!designation && (
-						<Button themeType="primary" onClick={() => showForm()}>Create New</Button>
+						<Button
+							themeType="primary"
+							onClick={() => showForm()}
+							disabled={activationStatus === 'Edit'}
+						>
+							Create New
+						</Button>
 					)}
 				</div>
 
@@ -107,7 +114,13 @@ function Forms({
 								</div>
 
 								<div className={styles.action}>
-									<Button themeType="tertiary" onClick={() => openOldForm(id)}>Use</Button>
+									<Button
+										themeType="tertiary"
+										onClick={() => openOldForm(id)}
+										disabled={activationStatus === 'Edit'}
+									>
+										Use
+									</Button>
 								</div>
 							</div>
 						);
