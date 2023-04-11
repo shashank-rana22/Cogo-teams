@@ -13,7 +13,42 @@ import showInTooltop from '../../utils/getOverFlowData';
 import { getAmountInLakhCrK } from '../getAmountInLakhCrK';
 import styles from '../styles.module.css';
 
+import ResponsivePieChart from './ResponsivePieChart';
+
 function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
+	const pieData = 	[
+		{
+		  id    : 'elixir',
+		  label : 'elixir',
+		  value : 121,
+		  color : 'hsl(136, 70%, 50%)',
+		},
+		{
+		  id    : 'hack',
+		  label : 'hack',
+		  value : 422,
+		  color : 'hsl(54, 70%, 50%)',
+		},
+		{
+		  id    : 'javascript',
+		  label : 'javascript',
+		  value : 59,
+		  color : 'hsl(124, 70%, 50%)',
+		},
+		{
+		  id    : 'c',
+		  label : 'c',
+		  value : 101,
+		  color : 'hsl(284, 70%, 50%)',
+		},
+		{
+		  id    : 'rust',
+		  label : 'rust',
+		  value : 290,
+		  color : 'hsl(191, 70%, 50%)',
+		},
+	  ];
+
 	const {
 		receivablesData,
 		recievablesTab,
@@ -154,6 +189,15 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 									</span>
 								</div>
 							</div>
+							<div className={styles.account_payment_box}>
+								<div>
+									<ResponsivePieChart pieData={pieData} />
+								</div>
+								<div className={styles.border_left} />
+								<div>
+									On Account Payment
+								</div>
+							</div>
 						</>
 					)}
 
@@ -243,6 +287,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 									</span>
 								</div>
 							</div>
+
 						</>
 					)}
 				</div>

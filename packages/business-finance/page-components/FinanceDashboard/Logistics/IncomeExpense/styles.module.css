@@ -7,7 +7,6 @@
 
 .main_div {
 	position: relative;
-	z-index: 10;
 	display: flex;
 	justify-content: space-between;
 	margin: 12px 0 0 20px;
@@ -17,7 +16,6 @@
 .responsive_bar_chart {
 	min-width: 35%;
 	height: 420px;
-	margin-top: -20px;
 	margin-left: 40px;
 	background: #fff;
 	border-radius: 8px;
@@ -64,6 +62,8 @@
 }
 
 .icon {
+	position: relative;
+	z-index: 10;
 	margin: 19px 0 0 5px;
 	cursor: pointer;
 }
@@ -104,4 +104,17 @@
 	font-size: 12px;
 	font-weight: 500;
 	line-height: 150%;
+}
+
+.toggle_div {
+	z-index: 10;
+	display: flex;
+	gap: 8px;
+	margin-right: 50px;
+}
+
+.input_div {
+	position: relative;
+	z-index: 10;
+	width: 140px;
 }
