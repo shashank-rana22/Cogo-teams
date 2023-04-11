@@ -5,19 +5,15 @@ import EditCancelService from '../../../../EditCancelService';
 
 import styles from './styles.module.css';
 
-function Header({
-	state = '',
-	heading = '',
-	trade_type,
-	service_provider = {},
-	service_type,
-}) {
+function Header({ serviceData }) {
+	const { state, display_label, service_provider } = serviceData || {};
+
 	return (
 		<div className={cl`${state} ${styles.container}`}>
 			<div className={styles.heading_content}>
-				<div className={cl`${styles.heading} ${state}`}>{heading}</div>
+				<div className={cl`${styles.heading} ${state}`}>{display_label}</div>
 
-				<EditCancelService state={state} service_type={service_type} trade_type={trade_type} />
+				<EditCancelService serviceData={serviceData} />
 			</div>
 			<div className={cl`${styles.sub_heading} ${state}`}>
 				{service_provider?.business_name}

@@ -33,11 +33,7 @@ function Services() {
 					{serviceCategories.map((serviceCategory) => (
 						<div className={styles.trade_services}>
 							{(Object.keys(serviceObj[serviceCategory])).map((service) => (
-								<ServiceDetails
-									className={styles.service_details}
-									servicesData={serviceObj[serviceCategory][service]}
-									shipmentData={shipment_data}
-								/>
+								<ServiceDetails servicesData={serviceObj[serviceCategory][service]} />
 							))}
 						</div>
 					))}

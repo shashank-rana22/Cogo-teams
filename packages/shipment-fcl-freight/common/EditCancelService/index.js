@@ -11,12 +11,16 @@ import getCanCancelService from './getCanCancelService';
 import getCanEditSupplier from './getCanEditSupplier';
 import styles from './styles.module.css';
 
-function EditCancelService({ state, service_type, trade_type }) {
+function EditCancelService({ serviceData = {} }) {
 	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
 
+	const { state, trade_type, service_type } = serviceData || {};
+
 	const user_data = useSelector((({ profile }) => profile?.user));
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
+
+	const servicesData = (servicesList || []).filter((service) => service.service_type === service_type);
 
 	const openModal = (modalKey) => {
 		setShowModal(modalKey);
@@ -33,7 +37,7 @@ function EditCancelService({ state, service_type, trade_type }) {
 					role="button"
 					tabIndex={0}
 					className={styles.action_button}
-					onClick={() => openModal('edit')}
+					onClick={() => openModal('supplier_reallocation')}
 				>
 					Edit
 				</div>
@@ -64,7 +68,9 @@ function EditCancelService({ state, service_type, trade_type }) {
 				<IcMOverflowDot className={styles.three_dots} onClick={() => setShowPopover(!showPopover)} />
 			</Popover>
 
-			{showModal === 'supplier_reallocation' ? <SupplierReallocation /> : null}
+			{showModal === 'supplier_reallocation'
+				? <SupplierReallocation setShow={setShowModal} serviceData={servicesData} />
+				: null}
 
 			{showModal === 'cancel' ? (
 				<CancelService

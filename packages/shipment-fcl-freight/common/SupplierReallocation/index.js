@@ -1,28 +1,30 @@
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { InputController, SelectController, useForm } from '@cogoport/forms';
-import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-import { asyncFieldsOrganization } from '@cogoport/forms/utils/getAsyncFields';
-import { merge, isEmpty } from '@cogoport/utils';
+import { InputController, SelectController, AsyncSelectController, useForm } from '@cogoport/forms';
 import React, { useContext } from 'react';
 
 import useUpdateShipmentService from '../../hooks/useUpdateShipmentService';
 
+import getControls from './getControls';
 import styles from './styles.module.css';
 
-const BL_CATEGORY_OPTIONS = [
-	{ label: 'Mbl', value: 'mbl' },
-	{ label: 'Hbl', value: 'hbl' },
-];
+const controlsMapping = { asyncSelect: AsyncSelectController, select: SelectController, number: InputController };
 
-const serviceProviderInitalControl = {
-	name        : 'service_provider_id',
-	label       : 'Service provider',
-	type        : 'select',
-	span        : 8,
-	placeholder : 'Select Service Provider',
-	rules       : { required: 'Service Provider is required' },
-};
+function FormElement(props) {
+	const { name, type, label, errors } = props;
+	const Element = controlsMapping[type];
+
+	if (type in controlsMapping) {
+		return (
+			<div>
+				<div className={styles.label}>{label}</div>
+				<Element {...props} />
+				{errors[name] && (<span className={styles.errors}>{errors[name].message}</span>)}
+			</div>
+		);
+	}
+	return null;
+}
 
 function SupplierReallocation({
 	serviceData = [],
@@ -30,11 +32,14 @@ function SupplierReallocation({
 	isAdditional = false,
 }) {
 	const { shipment_data, refetch, refetchServices } = useContext(ShipmentDetailContext);
+	const { documents } = shipment_data || {};
 
-	const { handleSubmit, control, formState: { errors }, reset } = useForm();
+	const serviceObj = serviceData?.[0] || {};
+	const { service_type, importer_exporter_id } = serviceObj;
+
+	const { handleSubmit, control, formState: { errors } } = useForm();
 
 	const afterUpdateRefetch = () => {
-		reset();
 		refetch();
 		refetchServices();
 		setShow(false);
@@ -50,52 +55,20 @@ function SupplierReallocation({
 		const payload = {
 			ids                 : serviceData?.map((item) => item?.id),
 			data                : { ...values },
-			service_type        : serviceData?.[0]?.service_type,
-			performed_by_org_id : serviceData?.[0]?.importer_exporter_id,
+			service_type,
+			performed_by_org_id : importer_exporter_id,
 		};
 		apiTrigger(payload);
 	};
 
-	const { documents } = shipment_data || {};
-
-	const serviceProviderEmbededOptions = useGetAsyncOptions(
-		merge(asyncFieldsOrganization(), {
-			params: {
-				filters: {
-					account_type : 'service_provider',
-					kyc_status   : 'verified',
-					service      : serviceData?.[0]?.service_type?.split('_', 2)?.join('_'),
-				},
-			},
-		}),
-	);
-
-	const newServiceProviderControl = { ...serviceProviderInitalControl, ...serviceProviderEmbededOptions };
-
-	const serviceProviderController = (
-		<div>
-			<div className={styles.label}>
-				Service Provider
-			</div>
-			<SelectController
-				{...newServiceProviderControl}
-				name="service_provider_id"
-				control={control}
-				errors={errors}
-			/>
-			{errors.service_provider_id && (
-				<span className={styles.errors}>
-					{errors.service_provider_id.message}
-				</span>
-			)}
-		</div>
-	);
+	const controls = getControls({ serviceObj, documents, isAdditional });
 
 	return (
 		<Modal
 			show
 			onClose={() => setShow(false)}
 			className={styles.styled_modal_container}
+			showCloseIcon={!loading}
 		>
 			<Modal.Body>
 				<Modal.Header title={(
@@ -104,58 +77,9 @@ function SupplierReallocation({
 					</div>
 				)}
 				/>
-				{(isEmpty(documents) && !isAdditional)
-					? (
-						<div className={styles.form_wrapper}>
-							{serviceProviderController}
-							<div>
-								<div className={styles.label}>
-									BL Count
-								</div>
-								<InputController
-									control={control}
-									name="bls_count"
-									type="number"
-									value={serviceData?.[0]?.bls_count}
-									span={8}
-									placeholder="Enter BL Count"
-									rules={{ required: 'BL Count required' }}
-								/>
-								{errors.bls_count && (
-									<span className={styles.errors}>
-										{errors.bls_count.message}
-									</span>
-								)}
-							</div>
-
-							<div>
-								<div className={styles.label}>
-									Bl Category
-								</div>
-								<SelectController
-									control={control}
-									name="bl_category"
-									type="select"
-									options={BL_CATEGORY_OPTIONS}
-									value={serviceData?.[0]?.bl_category}
-									span={8}
-									placeholder="Enter Bl Category"
-									rules={{ required: 'BL Category is required' }}
-									className={styles.hello}
-								/>
-								{errors.bl_category && (
-									<span className={styles.errors}>
-										{errors.bl_category.message}
-									</span>
-								)}
-							</div>
-						</div>
-					)
-					: (
-						<div className={styles.form_wrapper}>
-							{serviceProviderController}
-						</div>
-					)}
+				<div className={styles.form_wrapper}>
+					{controls.map((ctrl) => <FormElement {...ctrl} control={control} errors={errors} />)}
+				</div>
 
 				<div className={styles.button_container}>
 					<Button

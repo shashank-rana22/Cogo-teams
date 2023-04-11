@@ -31,9 +31,7 @@ function Item({
 
 	const showEditBtn = status?.status === 'approved';
 
-	const serviceData = services?.filter(
-		(service) => service?.service_name === item?.name,
-	);
+	const serviceData = services?.filter((service) => service?.service_type === item?.name);
 
 	const price = isSeller ? item?.buy_price : item?.price;
 
