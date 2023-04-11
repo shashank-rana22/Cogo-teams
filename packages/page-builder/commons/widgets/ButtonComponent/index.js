@@ -2,8 +2,6 @@ import { Button } from '@cogoport/components';
 // eslint-disable-next-line import/no-unresolved
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
-
-// import styles from './styles.module.css';
 import 'react-quill/dist/quill.bubble.css';
 
 const ReactQuill = dynamic(import('react-quill'), { ssr: false });
@@ -31,27 +29,6 @@ function ButtonComponent(props) {
 
 	};
 
-	// const modules = {
-	// 	toolbar: [
-	// 		['bold', 'italic', 'underline', 'strike'],
-	// 		['blockquote', 'code-block'],
-	// 		[{ header: 1 }, { header: 2 }],
-	// 		[{ list: 'ordered' }, { list: 'bullet' }],
-	// 		[{ script: 'sub' }, { script: 'super' }],
-	// 		[{ indent: '-1' }, { indent: '+1' }],
-	// 		[{ direction: 'rtl' }],
-
-	// 		[{ size: ['small', false, 'large', 'huge'] }],
-	// 		[{ header: [1, 2, 3, 4, 5, 6, false] }],
-
-	// 		[{ color: [] }, { background: [] }],
-	// 		[{ font: [] }],
-	// 		[{ align: [] }],
-
-	// 		['clean'],
-	// 	],
-	// };
-
 	const handleEditorChange = (value) => {
 		setEditorValue(value);
 
@@ -74,7 +51,6 @@ function ButtonComponent(props) {
 	return (
 		<div style={editorStyle}>
 			<Button
-				// className={styles.button}
 				type={type}
 				themeType={themeType}
 				size={size}
@@ -84,8 +60,6 @@ function ButtonComponent(props) {
 				<ReactQuill
 					theme="bubble"
 					value={editorValue}
-					// modules={modules}
-					// style={styles}
 					onChange={handleEditorChange}
 				/>
 

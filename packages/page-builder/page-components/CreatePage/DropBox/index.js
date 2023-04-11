@@ -86,7 +86,7 @@ function Stage({
 					moveItem={moveItem}
 					isNewItemAdding={isNewItemAdding}
 					onNewAddingItemProps={handleNewAddingItemPropsChange}
-					onClick={() => setSelectedItem({ id, index })}
+					onClick={() => setSelectedItem({ ...item, id, index })}
 					isSelected={!!id && id === selectedItem?.id}
 				/>
 			</div>

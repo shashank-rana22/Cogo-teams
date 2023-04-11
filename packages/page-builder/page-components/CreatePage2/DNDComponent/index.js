@@ -58,7 +58,7 @@ function DNDComponent() {
 	const [selectedItem, setSelectedItem] = useState({});
 
 	const handleAddNewItem = useCallback(
-		(content, hoveredIndex = components.length, shouldAddBelow = true, parentId, type = '') => {
+		(content, parentId, type = '', hoveredIndex = components.length, shouldAddBelow = true) => {
 		  const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
 
 		  const dataContent = type !== 'container' ? [{
@@ -75,6 +75,7 @@ function DNDComponent() {
 		  ]));
 
 		  setSelectedItem({
+				...content,
 				id    : components.length + 1,
 				index : startIndex,
 		  });

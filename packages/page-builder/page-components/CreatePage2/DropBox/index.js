@@ -30,8 +30,8 @@ function Stage({
 	const [stageItems, setStageItems] = useState(components);
 
 	const [newAddingItemProps, setNewAddingItemProps] = useState({
-	  hoveredIndex   : 0,
-	  shouldAddBelow : false,
+		hoveredIndex   : 0,
+		shouldAddBelow : false,
 	});
 
 	const { hoveredIndex, shouldAddBelow } = newAddingItemProps;
@@ -39,25 +39,25 @@ function Stage({
 	//! Portal :: we are already use this hooks some other purposes
 	//! Portal :: We should update the newAddingItemProps & updatedProps states with together to avoid any flicking!
 	const handleNewAddingItemPropsChange = useCallback(
-	  (updatedProps) => {
+		(updatedProps) => {
 			setNewAddingItemProps({
-		  ...newAddingItemProps,
-		  ...updatedProps,
+				...newAddingItemProps,
+				...updatedProps,
 			});
-	  },
-	  [setNewAddingItemProps],
+		},
+		[setNewAddingItemProps],
 	);
 
 	//! Portal :: mimic behavior of portal stage
 	useEffect(() => {
-	  if (!isEqual(stageItems, components)) {
+		if (!isEqual(stageItems, components)) {
 			setStageItems(components);
-	  }
+		}
 	}, [components]);
 
 	//! Portal :: "update" method mutate the array, we might use alternative to this Eg. arrayMove
 	const moveItem = useCallback(
-	  (dragIndex, hoverIndex) => {
+		(dragIndex, hoverIndex) => {
 			const dragItem = stageItems[dragIndex];
 			const hoverItem = stageItems[hoverIndex];
 			// Swap places of dragItem and hoverItem in the pets array
@@ -67,8 +67,8 @@ function Stage({
 				updatedPets[hoverIndex] = dragItem;
 				return updatedPets;
 			});
-	  },
-	  [stageItems, setStageItems],
+		},
+		[stageItems, setStageItems],
 	);
 
 	const rootComponents = stageItems.filter((item) => !item.parentId);
@@ -90,49 +90,49 @@ function Stage({
 					moveItem={moveItem}
 					isNewItemAdding={isNewItemAdding}
 					onNewAddingItemProps={handleNewAddingItemPropsChange}
-					onClick={() => setSelectedItem({ id, index })}
+					onClick={() => setSelectedItem({ ...item, id, index })}
 					isSelected={!!id && id === selectedItem?.id}
 				/>
 			</div>
 		);
-	  }), [
-	  stageItems,
-	  moveItem,
-	  selectedItem,
-	  isNewItemAdding,
-	  handleNewAddingItemPropsChange,
+	}), [
+		stageItems,
+		moveItem,
+		selectedItem,
+		isNewItemAdding,
+		handleNewAddingItemPropsChange,
 	]);
 
 	//! Portal :: useDrop for stage process
 	const [{ canDrop, isOver, draggingItemType }, dropRef] = useDrop({
-	  accept : Object.keys(ITEM_TYPES),
-	  drop   : (droppedItem) => {
+		accept : Object.keys(ITEM_TYPES),
+		drop   : (droppedItem) => {
 			const { type, id } = droppedItem;
 			if (!id) {
-		  // a new item added
-		  addNewItem(droppedItem, hoveredIndex, shouldAddBelow, parentComponentId, type);
+				// a new item added
+				addNewItem(droppedItem, hoveredIndex, shouldAddBelow, parentComponentId, type);
 			} else {
-		  // the result of sorting is applying the mock data
-		  setComponents(stageItems);
+				// the result of sorting is applying the mock data
+				setComponents(stageItems);
 			}
 			console.log(
-		  'droppedItem: ',
-		  type,
-		  'order: ',
-		  hoveredIndex,
-		  isNewItemAdding ? 'new item added!' : '',
+				'droppedItem: ',
+				type,
+				'order: ',
+				hoveredIndex,
+				isNewItemAdding ? 'new item added!' : '',
 			);
-	  },
-	  collect: (monitor) => ({
+		},
+		collect: (monitor) => ({
 			isOver           : monitor.isOver(),
 			draggingItemType : monitor.getItemType(),
 			canDrop          : monitor.canDrop(),
-	  }),
+		}),
 	});
 
 	//! Portal :: placeholder item while new item adding
 	useEffect(() => {
-	  if (isNewItemAdding) {
+		if (isNewItemAdding) {
 			const _stageItems = stageItems.filter(({ id }) => !!id);
 			if (isOver && isNewItemAdding) {
 				const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
@@ -142,11 +142,11 @@ function Stage({
 						type: draggingItemType,
 					},
 					..._stageItems.slice(startIndex),
-		  ]);
+				]);
 			} else {
-				  setStageItems(_stageItems);
+				setStageItems(_stageItems);
 			}
-	  }
+		}
 	}, [isOver, draggingItemType, isNewItemAdding, shouldAddBelow, hoveredIndex]);
 	const isActive = canDrop && isOver;
 
