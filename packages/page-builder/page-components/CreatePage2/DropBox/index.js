@@ -105,21 +105,14 @@ function Stage({
 	const [{ canDrop, isOver, draggingItemType }, dropRef] = useDrop({
 	  accept : Object.keys(ITEM_TYPES),
 	  drop   : (droppedItem) => {
-			const { type, id } = droppedItem;
+			const { id } = droppedItem;
 			if (!id) {
 		  // a new item added
-		  addNewItem(droppedItem, hoveredIndex, shouldAddBelow, parentComponentId, type);
+		  		addNewItem(droppedItem, hoveredIndex, shouldAddBelow, parentComponentId);
 			} else {
 		  // the result of sorting is applying the mock data
-		  setComponents(stageItems);
+		  		setComponents(stageItems);
 			}
-			console.log(
-		  'droppedItem: ',
-		  type,
-		  'order: ',
-		  hoveredIndex,
-		  isNewItemAdding ? 'new item added!' : '',
-			);
 	  },
 	  collect: (monitor) => ({
 			isOver           : monitor.isOver(),

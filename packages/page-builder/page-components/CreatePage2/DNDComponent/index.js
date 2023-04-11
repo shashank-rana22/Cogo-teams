@@ -58,10 +58,8 @@ function DNDComponent() {
 	const [selectedItem, setSelectedItem] = useState({});
 
 	const handleAddNewItem = useCallback(
-		(content, hoveredIndex = components.length, shouldAddBelow = true, parentId, type = '') => {
+		(content, hoveredIndex = components.length, shouldAddBelow = true, parentId) => {
 		  const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
-
-			//   const dataContent = type !== 'container' ? [] : content;
 
 		  setComponents(() => ([
 				...components.slice(0, startIndex),
@@ -124,7 +122,7 @@ function DNDComponent() {
 
 		),
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[handleAddNewItem, selectedItem, isNewItemAdding],
+		[handleAddNewItem, isNewItemAdding],
 
 	  );
 
