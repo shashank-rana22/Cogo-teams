@@ -15,6 +15,7 @@ function CogoAssist() {
 	return (
 		<div className={styles.container}>
 			<TopicList
+				from="test_module"
 				faqNotificationData={faqData}
 				faqNotificationApiLoading={faqNotificationApiLoading}
 				fetchFaqNotification={fetchFaqNotification}
