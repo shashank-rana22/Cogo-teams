@@ -59,7 +59,7 @@ function AdminResults() {
 					<p className={styles.go_back_text}>Test Result</p>
 				</div>
 
-				{ data?.status !== 'published' && (
+				{data?.status !== 'published' && (
 					<Button themeType="accent" onClick={() => getTest({ test_id })} disabled={loading}>
 						Refresh
 

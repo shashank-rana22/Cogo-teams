@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 const useCreateOrganizationPoc = ({
 	shipment_id = '', organization_id = '', refetch = () => {},
@@ -20,7 +20,7 @@ const useCreateOrganizationPoc = ({
 				refetch();
 			}
 		} catch (err) {
-			Toast.error(getApiErrorString(err));
+			toastApiError(err);
 		}
 	};
 

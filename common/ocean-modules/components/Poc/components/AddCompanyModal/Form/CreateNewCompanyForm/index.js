@@ -105,8 +105,8 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							control={control}
 							size="sm"
 							placeholder="Enter or Select Country"
-							valueKey="id"
-							rules={{ required: { value: true, message: 'Country of Registration is required' } }}
+							optionValueKey="id"
+							rules={{ required: 'Country of Registration is required' }}
 						/>
 						{Error('country')}
 					</div>
@@ -140,7 +140,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 						name="address"
 						placeholder="Enter Address"
 						options={addressOptions}
-						rules={{ required: { value: true, message: 'Address is required' } }}
+						rules={{ required: 'Address is required' }}
 
 					/>
 					{Error('address')}
@@ -152,7 +152,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 						name="business_name"
 						control={control}
 						size="sm"
-						rules={{ required: { value: true, message: 'Company Name is required' } }}
+						rules={{ required: 'Company Name is required' }}
 						placeholder="Enter Company Name"
 					/>
 					{Error('business_name')}
@@ -166,7 +166,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							size="sm"
 							control={control}
 							name="pincode"
-							rules={{ required: { value: true, message: 'Pincode is required' } }}
+							rules={{ required: 'Pincode is required' }}
 						/>
 						{Error('pincode')}
 					</div>

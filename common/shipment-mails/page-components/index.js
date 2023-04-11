@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import EmptyState from '../common/EmptyState';
 import RPA from '../constants/RPA';
 
 import Description from './Description';
@@ -50,14 +51,14 @@ function ShipmentMails({
 	const COMPOSE_EMAIL = RPA.BOOKINGS_DEFAULT_COMPOSE_EMAIL;
 	const RECIEVE_EMAIL = RPA.BOOKINGS_DEFAULT_RECIEVE_EMAIL;
 
-	if (
-		process.env.REST_BASE_API_URL !== 'https://api.cogoport.com'
-		|| process.env.NODE_ENV !== 'production'
-	) {
+	if (process.env.REST_BASE_API_URL !== 'https://api.cogoport.com') {
 		return (
 			<div>
-				Thank you for visiting but this feature is enabled only for production
-				usage.
+				<EmptyState showContent={{
+					heading     : '',
+					description : 'Thank you for visiting but this feature is enabled only for production usage.',
+				}}
+				/>
 			</div>
 		);
 	}
