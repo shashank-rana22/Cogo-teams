@@ -42,14 +42,14 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 							<>
 								<div className={styles.account_receivables_line}>
 									<div className={styles.dashboard_currency}>
-										{overallStats.dashboardCurrency || GLOBAL_CONSTANTS.currency_code.INR}
+										{overallStats?.dashboardCurrency || GLOBAL_CONSTANTS.currency_code.INR}
 									</div>
 									<div className={styles.account_receivables_amount}>
 										<Tooltip content={(
 											<div>
 												{getFormattedPrice(
-													overallStats.totalOutstandingAmount,
-													overallStats.dashboardCurrency,
+													overallStats?.openInvoicesAmount,
+													overallStats?.dashboardCurrency,
 
 												)}
 											</div>
@@ -57,8 +57,8 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 										>
 											<div className={styles.wrapper}>
 												{getFormattedPrice(
-													overallStats.totalOutstandingAmount || 0,
-													overallStats.dashboardCurrency,
+													overallStats?.openInvoicesAmount || 0,
+													overallStats?.dashboardCurrency,
 													{
 														notation              : 'compact',
 														compactDisplay        : 'short',
@@ -81,63 +81,14 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 										className={styles.invoice_text}
 									>
 										Open Invoices -
-										{overallStats.openInvoicesCount || 0}
+										{overallStats?.openInvoicesCount || 0}
 										{' | '}
 										Customers -
-										{overallStats.customersCount || 0}
+										{overallStats?.customersCount || 0}
 									</div>
 
 								</div>
 
-							</>
-						)}
-				</div>
-
-				<div className={styles.open_invoices}>
-
-					{outstandingLoading ? <Placeholder className={styles.placeholder_container} />
-						: (
-							<>
-								<div className={styles.account_receivables_open_line}>
-									<div className={styles.dashboard_currency}>
-										{overallStats.dashboardCurrency || GLOBAL_CONSTANTS.currency_code.INR}
-									</div>
-
-									<div
-										className={styles.account_receivables_amount}
-									>
-										<Tooltip content={(
-											<div>
-												{getFormattedPrice(
-													overallStats.openInvoicesAmount,
-													overallStats.dashboardCurrency,
-												)}
-											</div>
-										)}
-										>
-											<div className={styles.wrapper}>
-												{getFormattedPrice(
-													overallStats.openInvoicesAmount || 0,
-													overallStats.dashboardCurrency,
-													{
-														notation              : 'compact',
-														compactDisplay        : 'short',
-														maximumFractionDigits : 2,
-														style                 : 'decimal',
-													},
-												)}
-											</div>
-
-										</Tooltip>
-
-									</div>
-								</div>
-
-								<div className={styles.sub_invoices}>
-									<div className={styles.styled_text}>
-										Open Invoices
-									</div>
-								</div>
 							</>
 						)}
 				</div>
@@ -148,7 +99,7 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 							<>
 								<div className={styles.account_receivables_open_line}>
 									<div className={styles.dashboard_currency}>
-										{overallStats.dashboardCurrency || GLOBAL_CONSTANTS.currency_code.INR}
+										{overallStats?.dashboardCurrency || GLOBAL_CONSTANTS.currency_code.INR}
 									</div>
 
 									<div
@@ -157,16 +108,16 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 										<Tooltip content={(
 											<div>
 												{getFormattedPrice(
-													overallStats.onAccountAmount,
-													overallStats.dashboardCurrency,
+													overallStats?.onAccountAmount,
+													overallStats?.dashboardCurrency,
 												)}
 											</div>
 										)}
 										>
 											<div className={styles.wrapper}>
 												{getFormattedPrice(
-													overallStats.onAccountAmount || 0,
-													overallStats.dashboardCurrency,
+													overallStats?.onAccountAmount || 0,
+													overallStats?.dashboardCurrency,
 													{
 														notation              : 'compact',
 														compactDisplay        : 'short',
@@ -188,6 +139,56 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 							</>
 						)}
 				</div>
+
+				<div className={styles.open_invoices}>
+
+					{outstandingLoading ? <Placeholder className={styles.placeholder_container} />
+						: (
+							<>
+								<div className={styles.account_receivables_open_line}>
+									<div className={styles.dashboard_currency}>
+										{overallStats?.dashboardCurrency || GLOBAL_CONSTANTS.currency_code.INR}
+									</div>
+
+									<div
+										className={styles.account_receivables_amount}
+									>
+										<Tooltip content={(
+											<div>
+												{getFormattedPrice(
+													overallStats?.totalOutstandingAmount,
+													overallStats?.dashboardCurrency,
+												)}
+											</div>
+										)}
+										>
+											<div className={styles.wrapper}>
+												{getFormattedPrice(
+													overallStats?.totalOutstandingAmount || 0,
+													overallStats?.dashboardCurrency,
+													{
+														notation              : 'compact',
+														compactDisplay        : 'short',
+														maximumFractionDigits : 2,
+														style                 : 'decimal',
+													},
+												)}
+											</div>
+
+										</Tooltip>
+
+									</div>
+								</div>
+
+								<div className={styles.sub_invoices}>
+									<div className={styles.styled_text}>
+										Total Outstanding
+									</div>
+								</div>
+							</>
+						)}
+				</div>
+
 			</div>
 
 		</div>
