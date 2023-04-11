@@ -22,6 +22,7 @@ function AudienceComponent({ configurationPage, setConfigurationPage }) {
 
 	const {
 		onClickDeleteIcon = () => {},
+		onClickRestore = () => {},
 		showPopOver,
 		setShowPopOver,
 		loading:updateApiLoading,
@@ -32,6 +33,8 @@ function AudienceComponent({ configurationPage, setConfigurationPage }) {
 		showPopOver,
 		setShowPopOver,
 		updateApiLoading,
+		activeAudience,
+		onClickRestore,
 	});
 
 	useEffect(() => {
