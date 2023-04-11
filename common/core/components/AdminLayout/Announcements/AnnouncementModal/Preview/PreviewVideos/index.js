@@ -4,7 +4,7 @@ import React, { useRef } from 'react';
 import styles from './styles.module.css';
 
 function PreviewVideos({ videos = [], fromFloatingWidget = false, isMobile = false }) {
-	const scrollAmount = (isMobile ? 384 : 800);
+	const scrollAmount = isMobile ? 360 : 800;
 
 	const scrollRefVideos = useRef('');
 
@@ -14,6 +14,18 @@ function PreviewVideos({ videos = [], fromFloatingWidget = false, isMobile = fal
 
 	const scrollHandlerLeftVideos = () => {
 		scrollRefVideos.current.scrollLeft -= scrollAmount;
+	};
+
+	const getWidth = () => {
+		if (isMobile) return '330';
+		if (fromFloatingWidget) return '410';
+		return '366';
+	};
+
+	const getHeight = () => {
+		if (isMobile) return '186';
+		if (fromFloatingWidget) return '230';
+		return '206';
 	};
 
 	return (
@@ -41,8 +53,8 @@ function PreviewVideos({ videos = [], fromFloatingWidget = false, isMobile = fal
 							style={{ marginLeft: `${index === 0 ? '' : '24px'}` }}
 						>
 							<iframe
-								width={fromFloatingWidget ? '410' : '366'}
-								height={fromFloatingWidget ? '230' : '206'}
+								width={getWidth()}
+								height={getHeight()}
 								src={video}
 								title="YouTube video player"
 								frameBorder="0"

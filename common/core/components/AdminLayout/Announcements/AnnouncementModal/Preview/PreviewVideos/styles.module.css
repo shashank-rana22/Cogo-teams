@@ -51,7 +51,12 @@
 
 .arrow {
 	padding: 0 12px;
-	font-size: 32px;
+	font-size: 30px;
+
+	@media (max-width: 768px) {
+		padding: 0 8px;
+		font-size: 22px;
+	}
 }
 
 .content_inner_container {

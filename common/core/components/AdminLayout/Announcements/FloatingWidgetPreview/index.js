@@ -54,7 +54,12 @@ function FloatingWidgetPreview(props) {
 				</div>
 
 				<div className={styles.body}>
-					<Preview data={data} editorValue={content.toString('html')} fromFloatingWidget />
+					<Preview
+						data={data}
+						editorValue={content.toString('html')}
+						fromFloatingWidget
+						isMobile={isMobile}
+					/>
 				</div>
 			</div>
 

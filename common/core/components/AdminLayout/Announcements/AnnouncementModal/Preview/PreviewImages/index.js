@@ -7,7 +7,7 @@ import styles from '../PreviewVideos/styles.module.css';
 function PreviewImages({ images = [], fromFloatingWidget = false, isMobile = false }) {
 	const scrollRefImages = useRef('');
 
-	const scrollAmount = (isMobile ? 384 : 800);
+	const scrollAmount = (isMobile ? 360 : 800);
 
 	const scrollHandlerRightImages = () => {
 		scrollRefImages.current.scrollLeft += scrollAmount;
@@ -16,6 +16,13 @@ function PreviewImages({ images = [], fromFloatingWidget = false, isMobile = fal
 	const scrollHandlerLeftImages = () => {
 		scrollRefImages.current.scrollLeft -= scrollAmount;
 	};
+
+	const getWidth = () => {
+		if (isMobile) return 330;
+		if (fromFloatingWidget) return 410;
+		return 366;
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Images</div>
@@ -44,7 +51,7 @@ function PreviewImages({ images = [], fromFloatingWidget = false, isMobile = fal
 								role="presentation"
 								src={img_item}
 								alt="img"
-								width={fromFloatingWidget ? 410 : 366}
+								width={getWidth()}
 								onClick={() => openDocument(img_item)}
 							/>
 
