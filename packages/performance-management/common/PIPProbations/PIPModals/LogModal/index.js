@@ -13,6 +13,7 @@ function LogModal({
 	onSubmit = () => {},
 	source = '',
 }) {
+	console.log('source::', source);
 	const [activeLogTab, setActiveLogTab] = useState(
 		(item.final_decision || source === 'manager_dashboard') ? 'all' : 'new',
 	);
@@ -38,7 +39,7 @@ function LogModal({
 						themeType="primary"
 						onChange={setActiveLogTab}
 					>
-						{!item?.final_decision && (
+						{!(item.final_decision || source === 'manager_dashboard') && (
 							<TabPanel
 								name="new"
 								title="New Log"
