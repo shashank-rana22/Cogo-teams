@@ -1,5 +1,6 @@
 import { Button, Loader } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import Preview from '../AnnouncementModal/Preview';
@@ -33,6 +34,12 @@ function FloatingWidgetPreview(props) {
 	if (loading) {
 		return (
 			<div className={styles.loader_container}><Loader themeType="primary" className={styles.loader} /></div>
+		);
+	}
+
+	if (isEmpty(data)) {
+		return (
+			<div className={styles.nothing_to_preview}>Something went wrong! Please try again</div>
 		);
 	}
 
