@@ -1999,7 +1999,7 @@ const saas = {
 			service_name : 'saas_subscriptions_v2',
 		},
 		{
-			api         : 'post_saas_trade_engine_document_draft',
+			api         : 'post_saas_trade_engine_documents_draft',
 			access_type : 'private',
 			module      : 'import-export-documents',
 			feature     : 'import-export-documents',
