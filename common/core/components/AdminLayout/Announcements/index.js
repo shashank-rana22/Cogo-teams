@@ -21,10 +21,10 @@ function Announcements({
 	const [popoverVisible, setPopoverVisible] = useState(false);
 
 	const {
-		announcementLoading,
-		announcementList,
-		params,
-		setParams,
+		announcementLoading = false,
+		announcementList = {},
+		params = {},
+		setParams = () => {},
 		fetchAnnouncements = () => {},
 		setAnnouncementModalData = () => {},
 	} = announcementProps;

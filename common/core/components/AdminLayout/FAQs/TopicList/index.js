@@ -23,13 +23,15 @@ const generalIcon = (
 );
 
 function TopicList({
-	faqNotificationApiLoading,
-	fetchFaqNotification,
-	faqNotificationData,
-	refetch,
-	setShow,
-	announcementProps,
-	selectedAnnouncement,
+	faqNotificationApiLoading = false,
+	fetchFaqNotification = () => {},
+	faqNotificationData = {},
+	refetch = () => {},
+	from = 'cogo_assist',
+	setShow = () => {},
+	announcementProps = {},
+	selectedAnnouncement = '',
+
 }) {
 	const [activeTab, setActiveTab] = useState('faq');
 
@@ -52,10 +54,10 @@ function TopicList({
 	} = useTopicList();
 
 	const {
-		announcementModalData,
-		setAnnouncementModalData,
-		searchAnnouncement,
-		setSearchAnnouncement,
+		announcementModalData = {},
+		setAnnouncementModalData = () => {},
+		searchAnnouncement = '',
+		setSearchAnnouncement = () => {},
 	} = announcementProps;
 
 	const announcementHeaderProps = {
@@ -71,10 +73,11 @@ function TopicList({
 	}, [fetchFaqNotification, showNotificationContent]);
 
 	useEffect(() => {
+		if (from === 'test_module') return;
 		setAnnouncementModalData({});
 		setSearch('');
 		setSearchAnnouncement('');
-	}, [activeTab, setAnnouncementModalData, setSearch, setSearchAnnouncement]);
+	}, [activeTab, from, setAnnouncementModalData, setSearch, setSearchAnnouncement]);
 
 	const render = () => {
 		if (topic) {
@@ -238,9 +241,10 @@ function TopicList({
 				showNotificationContent={showNotificationContent}
 				fetchFaqNotification={fetchFaqNotification}
 				refetch={refetch}
+				from={from}
 			/>
 
-			{showHistory ? (
+			{showHistory || from === 'test_module' ? (
 				renderQuestionList()
 			) : (
 				<Tabs

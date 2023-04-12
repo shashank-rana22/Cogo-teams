@@ -5,7 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function Header({
-	activeTab = '',
+	activeTab = 'faq',
 	search = '',
 	setSearch = () => {},
 	announcementHeaderProps = {},
@@ -18,13 +18,14 @@ function Header({
 	setShowNotificationContent = () => {},
 	showNotificationContent,
 	refetch,
+	from,
 }) {
 	const {
-		announcementModalData,
-		setAnnouncementModalData,
-		setShow,
-		searchAnnouncement,
-		setSearchAnnouncement,
+		announcementModalData = {},
+		setAnnouncementModalData = () => {},
+		setShow = () => {},
+		searchAnnouncement = '',
+		setSearchAnnouncement = () => {},
 	} = announcementHeaderProps;
 
 	const suffix = !search && !searchAnnouncement ? (
@@ -81,23 +82,27 @@ function Header({
 	};
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.cross_icon}><IcMCross width={20} height={20} onClick={handleClose} /></div>
+
+		<div className={`${styles.container} ${styles[from]}`}>
+			{from !== 'test_module' ? (
+				<div className={styles.cross_icon}><IcMCross width={20} height={20} onClick={handleClose} /></div>
+			) : null}
+
 			<div className={styles.wrapper}>
-				<div className={styles.heading_container}>
+				{from !== 'test_module' ? (
+					<div className={styles.heading_container}>
+						{showBackIcon && TABS_CONTENT_MAPPING[activeTab].back_icon_visible ? (
+							<div role="presentation" className={styles.arrow} onClick={onClickBackButton}>
+								<IcMArrowLeft style={{ height: '25px', width: '25px' }} />
+							</div>
+						) : (
+							<div className={styles.gap} />
+						)}
+						<div className={styles.title}>Cogo Assist</div>
+					</div>
+				) : null}
 
-					{showBackIcon && TABS_CONTENT_MAPPING[activeTab].back_icon_visible ? (
-						<div role="presentation" className={styles.arrow} onClick={onClickBackButton}>
-							<IcMArrowLeft style={{ height: '25px', width: '25px' }} />
-						</div>
-					) : (
-						<div className={styles.gap} />
-					)}
-
-					<div className={styles.title}>Cogo Assist</div>
-				</div>
-
-				<div className={styles.input_container}>
+				<div className={`${styles.input_container} ${styles[from]}`}>
 					<Input
 						className="primary lg"
 						placeholder={TABS_CONTENT_MAPPING[activeTab].placeholder}

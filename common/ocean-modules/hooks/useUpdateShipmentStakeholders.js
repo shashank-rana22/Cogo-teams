@@ -15,7 +15,7 @@ const useUpdateShipmentStakeholders = ({
 
 	const apiTrigger = async (val) => {
 		try {
-			await trigger({ params: { id: shipment_id, ...val } });
+			await trigger({ data: { id: shipment_id, ...val } });
 
 			Toast.success(successMessage);
 			refetch();

@@ -1,0 +1,22 @@
+.container {
+	position: relative;
+	margin: 16px 0;
+}
+
+.button_container {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.pip_select {
+	display: flex;
+	justify-content: center;
+}
+
+.pip_select_btn {
+	margin: 8px;
+	border: solid 1px #88cad1;
+}
