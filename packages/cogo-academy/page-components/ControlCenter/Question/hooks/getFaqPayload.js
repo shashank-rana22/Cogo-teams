@@ -1,6 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
-function useCreateFaqPayload({ values, editorValue, data }) {
+function getFaqPayload({ values, editorValue, data, showAlias }) {
 	const {
 		faq_topics = [], faq_audiences = [], faq_tags = [], answers = [],
 	} = data || {};
@@ -12,12 +12,31 @@ function useCreateFaqPayload({ values, editorValue, data }) {
 		audience_ids,
 	} = values || {};
 
+	const aliasesArray = (showAlias || []).map((alias) => (alias?.question_abstract));
+
+	const updatedAlias = [];
+
+	(showAlias || []).forEach((ele, index) => {
+		const { id = '', question_abstract:alias_question_abstract = '', status } = ele || {};
+
+		const filteredId = id !== index ? id : undefined;
+		const obj = {
+			id     : filteredId,
+			alias_question_abstract,
+			status : status || undefined,
+		};
+
+		updatedAlias.push(obj);
+	});
+
 	const getTopicIds = (faq_topics || []).map(
 		(item) => item?.id,
 	);
+
 	const getTagIds = (faq_tags || []).map(
 		(item) => item?.id,
 	);
+
 	const getAudienceIds = (faq_audiences || []).map(
 		(item) => item?.id,
 	);
@@ -29,6 +48,7 @@ function useCreateFaqPayload({ values, editorValue, data }) {
 	const inactive_tag_ids = (getTagIds || []).filter(
 		(id) => !(tag_ids || []).includes(id),
 	);
+
 	const inactive_audience_ids = (getAudienceIds || []).filter(
 		(id) => !(audience_ids || []).includes(id),
 	);
@@ -38,6 +58,7 @@ function useCreateFaqPayload({ values, editorValue, data }) {
 		state              : 'draft',
 		status             : 'active',
 		tag_ids,
+		aliases            : isEmpty(data) ? aliasesArray : updatedAlias,
 		topic_ids,
 		inactive_topic_ids : !isEmpty(inactive_topic_ids) ? inactive_topic_ids : undefined,
 		inactive_tag_ids   : !isEmpty(inactive_tag_ids) ? inactive_tag_ids : undefined,
@@ -52,9 +73,7 @@ function useCreateFaqPayload({ values, editorValue, data }) {
 		}],
 	};
 
-	return {
-		payload,
-	};
+	return payload;
 }
 
-export default useCreateFaqPayload;
+export default getFaqPayload;

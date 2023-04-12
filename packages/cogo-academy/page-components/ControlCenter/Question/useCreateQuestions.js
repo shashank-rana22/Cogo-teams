@@ -20,6 +20,7 @@ function useCreateQuestions({ data, setEditorError }) {
 	const [showModalOnCancel, setShowModalOnCancel] = useState(false);
 	const [searchAudience, setSearchAudience] = useState(null);
 	const [questionPreview, setQuestionPreview] = useState(mode || 'create');
+	const [showAlias, setShowAlias] = useState([]);
 
 	const {
 		onSubmit,
@@ -32,6 +33,8 @@ function useCreateQuestions({ data, setEditorError }) {
 		RichTextEditor,
 		setEditorError,
 		data,
+		showAlias,
+
 	});
 
 	const apiLoading = loading || false;
@@ -91,6 +94,8 @@ function useCreateQuestions({ data, setEditorError }) {
 		listTagsLoading,
 		listAudienceLoading,
 		apiLoading,
+		showAlias,
+		setShowAlias,
 	};
 }
 

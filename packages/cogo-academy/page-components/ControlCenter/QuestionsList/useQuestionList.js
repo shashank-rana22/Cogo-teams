@@ -46,6 +46,20 @@ const addedQuestionsColumns = ({
 			),
 		},
 		{
+			Header   : 'QUESTION TYPE',
+			accessor : (items) => (
+
+				<Pill
+					size="sm"
+					color={items?.is_parent ? 'yellow' : 'green'}
+				>
+					{items?.is_parent ? 'Parent' : 'Alias'}
+
+				</Pill>
+
+			),
+		},
+		{
 			Header   : 'TOPICS',
 			accessor : (items) => (!isEmpty(items?.faq_topics || []) ? (
 				<div className={styles.topics}>

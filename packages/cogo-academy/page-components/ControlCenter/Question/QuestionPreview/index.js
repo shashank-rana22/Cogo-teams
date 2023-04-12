@@ -1,4 +1,3 @@
-/* eslint-disable react/no-danger */
 import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -23,10 +22,10 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 		answers = [],
 		faq_topics = [],
 		faq_tags = [],
-		faq_audiences = [],
 		id = '',
+		question_aliases = [],
 	} = data || {};
-
+	const { faq_audiences = [] } = answers[0] || [];
 	const tags = [];
 	const topics = [];
 	const audiences = [];
@@ -97,18 +96,49 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 					<h1 className={styles.heading}>Preview Question</h1>
 
 				</div>
+
 				<div>
 					<h5 className={styles.question_title}>Question</h5>
 					<h1 className={styles.question}>
 						{question_abstract}
 					</h1>
 				</div>
+
+				{
+					!isEmpty(question_aliases) && (
+
+						<div>
+							<h5 className={styles.answer_title}>Aliases</h5>
+							<p className={styles.answer_content}>
+								{
+							(question_aliases || []).map((alias, index) => {
+								const { question_abstract:aliasQuestionAbstract = ' ' } = alias;
+								return (
+									<div className={styles.alias}>
+										<span className={styles.span}>
+											{index + 1}
+											.
+										</span>
+
+										{' '}
+										{aliasQuestionAbstract}
+									</div>
+								);
+							})
+						}
+
+							</p>
+						</div>
+					)
+				}
+
 				<div>
 					<h5 className={styles.answer_title}>Answer</h5>
 					<p className={styles.answer_content}>
 						<div dangerouslySetInnerHTML={{ __html: answer }} />
 					</p>
 				</div>
+
 				<div>
 					{!isEmpty(tags)
 					&& <h5 className={styles.tags_title}>Tags</h5>}
@@ -199,7 +229,11 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 
 			</div>
 
-			<QuestionFeedBack id={id} onClickEdit={onclickEdit} />
+			<QuestionFeedBack
+				id={id}
+				onClickEdit={onclickEdit}
+				faqAudiences={faq_audiences}
+			/>
 
 		</div>
 	);

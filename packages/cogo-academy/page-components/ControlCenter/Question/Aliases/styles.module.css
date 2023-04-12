@@ -1,0 +1,17 @@
+.container {
+	padding-top: 20px;
+}
+
+.input_container {
+	display: flex;
+
+	.ui_input_container {
+		width: 96%;
+	}
+}
+
+.icon_wrapper {
+	display: flex;
+	align-items: center;
+	padding-left: 8px;
+}

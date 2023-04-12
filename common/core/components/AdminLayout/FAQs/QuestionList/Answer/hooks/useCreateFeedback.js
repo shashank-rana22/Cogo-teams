@@ -20,7 +20,7 @@ const useCreateFeedback = ({ question }) => {
 
 	const watchQuestionCheckbox = watch('question_checkbox');
 	const watchAnswerCheckbox = watch('answer_checkbox');
-
+	const watchRemark = watch('remark');
 	const [show, setShow] = useState(false);
 	const [load, setload] = useState(true);
 
@@ -169,6 +169,7 @@ const useCreateFeedback = ({ question }) => {
 		setIsLiked,
 		watchAnswerCheckbox,
 		watchQuestionCheckbox,
+		watchRemark,
 		is_positive,
 		FEEDBACK_MAPPING_ISLIKED,
 

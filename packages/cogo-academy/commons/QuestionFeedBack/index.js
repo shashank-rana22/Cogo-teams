@@ -8,8 +8,8 @@ import styles from './styles.module.css';
 import useGetFaqFeedback from './useGetFaqFeedback';
 import useListfaqFeedback from './useListFaqFeedback';
 
-function QuestionFeedBack({ id, source = '', onClickEdit = () => {} }) {
-	const { general } = useSelector((state) => state);
+function QuestionFeedBack({ id, source = '', onClickEdit = () => {}, fetchQuestion, faqAudiences }) {
+	const general = useSelector((state) => state.general || {});
 	const { feedbackId = '' } = general.query || {};
 
 	const {
@@ -21,6 +21,7 @@ function QuestionFeedBack({ id, source = '', onClickEdit = () => {} }) {
 		answer_remark,
 		question_answer_remark,
 		question_remark,
+		fetchListFaqFeedback,
 	} = useListfaqFeedback({ id, feedbackId });
 
 	const { data = {} } = useGetFaqFeedback({ feedbackId, page });
@@ -86,6 +87,9 @@ function QuestionFeedBack({ id, source = '', onClickEdit = () => {} }) {
 						onClickEdit={onClickEdit}
 						source={source}
 						key={id}
+						fetchListFaqFeedback={fetchListFaqFeedback}
+						fetchQuestion={fetchQuestion}
+						faqAudiences={faqAudiences}
 
 					/>
 				))}
