@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import StyledTable from '../../common/StyledTable';
 import useArchive from '../../hooks/useArchive';
-import { serviceTypeOptions } from '../constant';
+import { optionsEntity, serviceTypeOptions } from '../constant';
 
 import { ARCHIVE_DECLARED, ARCHIVE_MONTH_ACCRUED, ARCHIVE_MONTH_BOOKED } from './configuration';
 import Freeze from './Freeze';
@@ -129,6 +129,18 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 								/>
 							</div>
 						)}
+						<div className={styles.div_select}>
+							<Select
+								value={globalFilters?.entity}
+								onChange={(val:string) => {
+									setGlobalFilters((prev) => ({ ...prev, entity: val }));
+								}}
+								placeholder="Entity"
+								options={optionsEntity}
+								isClearable
+								style={{ width: '150px' }}
+							/>
+						</div>
 					</div>
 					{particularMonth ? (
 						<div className={styles.search_container}>

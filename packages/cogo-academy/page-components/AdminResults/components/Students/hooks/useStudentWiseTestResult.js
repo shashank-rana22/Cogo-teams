@@ -16,8 +16,7 @@ const useStudentWiseTestResult = ({ test_id = '' }) => {
 
 	const STUDENTS_MAPPING = {
 		appeared: {
-			index   : 0,
-			payload : {
+			payload: {
 				sort_by   : sortBy,
 				sort_type : sortType,
 				filters   : { test_id, q: query, result_status: filter, is_appeared: true, status: 'active' },
@@ -26,8 +25,7 @@ const useStudentWiseTestResult = ({ test_id = '' }) => {
 			title: 'Appeared',
 		},
 		ongoing: {
-			index   : 1,
-			payload : {
+			payload: {
 				sort_by   : sortBy,
 				sort_type : sortType,
 				filters   : { test_id, q: query, result_status: filter, state: 'ongoing' },
@@ -36,8 +34,7 @@ const useStudentWiseTestResult = ({ test_id = '' }) => {
 			title: 'Ongoing',
 		},
 		not_appeared: {
-			index   : 2,
-			payload : {
+			payload: {
 				filters: { test_id, q: query, is_appeared: false, status: 'active' },
 				...params,
 			},

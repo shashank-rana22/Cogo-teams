@@ -6,6 +6,12 @@ import useCreateTestQuestion from '../../hooks/useCreateTestQuestion';
 import useUpdateCaseStudy from '../../hooks/useUpdateCaseStudy';
 import useUpdateStandAloneTestQuestion from '../../hooks/useUpdateStandAloneTestQuestion';
 
+let RichTextEditor;
+if (typeof window !== 'undefined') {
+	// eslint-disable-next-line global-require
+	RichTextEditor = require('react-rte').default;
+}
+
 const useCreateQuestion = ({
 	item,
 	setSavedQuestionDetails,
@@ -18,6 +24,11 @@ const useCreateQuestion = ({
 	listSetQuestions,
 }) => {
 	const [questionTypeWatch, setQuestionTypeWatch] = useState('stand_alone');
+	const [editorValue, setEditorValue] = useState(
+		questionTypeWatch === 'stand_alone'
+			? { question_0_explanation: RichTextEditor.createEmptyValue() }
+			: { case_questions_0_explanation: RichTextEditor.createEmptyValue() },
+	);
 
 	const { isNew: isNewQuestion = false, id } = item || {};
 
@@ -43,6 +54,7 @@ const useCreateQuestion = ({
 		getTestQuestionTest,
 		questionSetId,
 		listSetQuestions,
+		editorValue,
 	});
 
 	const { updateStandAloneTestQuestion } = useUpdateStandAloneTestQuestion({
@@ -53,6 +65,7 @@ const useCreateQuestion = ({
 		reset,
 		listSetQuestions,
 		editDetails,
+		editorValue,
 	});
 
 	const {
@@ -114,7 +127,13 @@ const useCreateQuestion = ({
 
 	useEffect(() => {
 		setQuestionTypeWatch(watchQuestionType);
-	}, [watchQuestionType]);
+
+		if (isEmpty(editDetails)) {
+			setEditorValue(watchQuestionType === 'stand_alone'
+				? { question_0_explanation: RichTextEditor.createEmptyValue() }
+				: { case_questions_0_explanation: RichTextEditor.createEmptyValue() });
+		}
+	}, [editDetails, watchQuestionType]);
 
 	useEffect(() => {
 		if (isEmpty(editDetails)) {
@@ -138,7 +157,13 @@ const useCreateQuestion = ({
 
 				setValue(`${childKey}.question_type`, indQuestionType);
 				setValue(`${childKey}.question_text`, indQuestionText);
-				setValue(`${childKey}.explanation`, indExplanation?.[0]);
+
+				setEditorValue((prev) => ({
+					...prev,
+					[`case_questions_${index}_explanation`]: isEmpty(indExplanation)
+						? RichTextEditor.createEmptyValue()
+						: RichTextEditor?.createValueFromString((indExplanation?.[0] || ''), 'html'),
+				}));
 
 				indTestQuestionAnswers.forEach((answer, answerIndex) => {
 					const { answer_text, is_correct } = answer || {};
@@ -156,7 +181,13 @@ const useCreateQuestion = ({
 			setValue(`${childKey}.question_type`, question_type);
 			setValue(`${childKey}.difficulty_level`, difficulty_level);
 			setValue(`${childKey}.question_text`, question_text);
-			setValue(`${childKey}.explanation`, explanation?.[0]);
+
+			setEditorValue((prev) => ({
+				...prev,
+				question_0_explanation: isEmpty(explanation)
+					? RichTextEditor.createEmptyValue()
+					: RichTextEditor?.createValueFromString((explanation?.[0] || ''), 'html'),
+			}));
 
 			test_question_answers.forEach((answer, index) => {
 				const { answer_text, is_correct } = answer || {};
@@ -187,6 +218,8 @@ const useCreateQuestion = ({
 		deleteQuestion,
 		updateCaseStudyLoading,
 		onSubmit,
+		editorValue,
+		setEditorValue,
 		...restFormProps,
 	};
 };
