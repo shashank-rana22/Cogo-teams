@@ -6,16 +6,26 @@ import { useDrag, useDrop } from 'react-dnd';
 import RenderComponents from './RenderComponent';
 
 const ITEM_TYPES = {
-	text      : 'text',
-	button    : 'button',
-	image     : 'image',
-	container : 'container',
+	text        : 'text',
+	button      : 'button',
+	image       : 'image',
+	container   : 'container',
+	rootElement : 'rootElement',
 };
 
 function ComponentBuilder({ widget, components, setComponents }) {
-	const { children, properties } = widget || {};
+	const { type: componetType, children, properties } = widget || {};
 
 	const { styles: style } = properties || {};
+
+	if (componetType === 'rootElement') {
+		return (
+			<div style={style}>
+
+				<h1>Welcome to cogoport</h1>
+			</div>
+		);
+	}
 
 	if (isEmpty(children)) {
 		return <div style={{ height: '150px' }}> Blocks loading...</div>;
@@ -145,7 +155,7 @@ function Item(props) {
 
 			<RenderComponents componentType={type} widget={widget} components={components} setComponents={setComponents} elementId={elementId} />
 
-			{type === 'container' && (
+			{['container', 'rootElement'].includes(type) && (
 				<ComponentBuilder widget={widget} components={components} setComponents={setComponents} />
 			)}
 		</div>

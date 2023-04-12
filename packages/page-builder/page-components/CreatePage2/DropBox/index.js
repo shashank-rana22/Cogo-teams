@@ -12,10 +12,12 @@ import RightPanel from '../RightPanel';
 import styles from './styles.module.css';
 
 const ITEM_TYPES = {
-	text      : 'text',
-	button    : 'button',
-	image     : 'image',
-	container : 'container',
+	text        : 'text',
+	button      : 'button',
+	image       : 'image',
+	container   : 'container',
+	rootElement : 'rootElement',
+
 };
 
 function Stage({
@@ -28,8 +30,6 @@ function Stage({
 	parentComponentId,
 }) {
 	const [stageItems, setStageItems] = useState(components);
-
-	console.log('djskjdksjd', components);
 
 	const [newAddingItemProps, setNewAddingItemProps] = useState({
 		hoveredIndex   : 0,
@@ -75,6 +75,8 @@ function Stage({
 
 	const memoItems = useMemo(() => stageItems?.map((item, index) => {
 		const { id, type } = item;
+
+		console.log('type ::', type);
 		return (
 			<div
 				key={item.id}

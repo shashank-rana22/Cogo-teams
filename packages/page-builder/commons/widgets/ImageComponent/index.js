@@ -56,7 +56,7 @@ function ImageComponent(props) {
 					value={fileValue}
 					onChange={setFileValue}
 					accept="png"
-					uploadDesc="Upload your image here"
+					uploadDesc="Upload"
 				/>
 			) }
 

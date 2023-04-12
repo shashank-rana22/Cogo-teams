@@ -1,5 +1,3 @@
-import { isEmpty } from '@cogoport/utils';
-
 import ButtonSettings from './ButtonSettings';
 import DivSettings from './DivSettings';
 // import DivSettings from './DivSettings';
@@ -8,31 +6,24 @@ import styles from './styles.module.css';
 import TextSettings from './TextSettings';
 
 function Settings(props) {
-	const { selectedItem, onChange } = props;
+	const { selectedItem, components, onChange } = props;
 
-	if (isEmpty(selectedItem)) {
-		<DivSettings />;
-	}
+	const { type = '' } = selectedItem;
 
-	let settingsComponent = null;
+	console.log('selected item ::', selectedItem);
+	console.log('components ::', components);
 
-	switch (selectedItem?.type) {
-		case 'text':
-			settingsComponent = <TextSettings item={selectedItem} onChange={onChange} />;
-			break;
-		case 'button':
-			settingsComponent = <ButtonSettings item={selectedItem} onChange={onChange} />;
-			break;
-		case 'image':
-			settingsComponent = <ImageSettings item={selectedItem} onChange={onChange} />;
-			break;
-		default:
-			break;
-	}
+	const COMPONENT_MAPPING = {
+		text   : <TextSettings item={selectedItem} onChange={onChange} />,
+		button : <ButtonSettings item={selectedItem} onChange={onChange} />,
+		image  : <ImageSettings item={selectedItem} onChange={onChange} />,
+	};
 
 	return (
 		<div className={styles.container}>
-			{settingsComponent}
+
+			{['text', 'button', 'image'].includes(type) ? COMPONENT_MAPPING[type] : <DivSettings />}
+
 		</div>
 	);
 }

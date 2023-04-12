@@ -1,6 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { Button, Modal } from '@cogoport/components';
 import React, { useCallback, useState } from 'react';
+import { v1 as uuid } from 'uuid';
 
 import DropBox from '../DropBox';
 import LeftPanel from '../LeftPanel';
@@ -44,9 +45,20 @@ const CONTENT_MAPPING = {
 	},
 };
 
+const initialComponent = {
+	id         : uuid(),
+	type       : 'rootElement',
+	children   : [],
+	properties : {
+		content : '',
+		styles  : {},
+	},
+
+};
+
 function DNDComponent() {
 	const [activeTab, setActiveTab] = useState('content');
-	const [components, setComponents] = useState([]);
+	const [components, setComponents] = useState([initialComponent]);
 	const [showContentModal, setShowContentModal] = useState(false);
 	const [parentComponentId, setParentComponentId] = useState(null);
 
@@ -56,18 +68,18 @@ function DNDComponent() {
 
 	const handleAddNewItem = useCallback(
 		(content, hoveredIndex = components.length, shouldAddBelow = true, parentDetails, componentType) => {
-		  const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
+			const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
 
-		  if (componentType === 'child') {
+			if (componentType === 'child') {
 				const { childId, parentId } = parentDetails || {};
 				const data = components;
 
 				const objIndex = data.findIndex((item) => item.parentId === parentId);
 
-				 data[objIndex].children[childId].properties.content = content;
+				data[objIndex].children[childId].properties.content = content;
 
-				 setComponents(data);
-		  } else {
+				setComponents(data);
+			} else {
 				setComponents(() => ([
 					...components.slice(0, startIndex),
 					{
@@ -77,26 +89,26 @@ function DNDComponent() {
 						// parentId,
 					},
 					...components.slice(startIndex),
-		  ]));
-		  }
+				]));
+			}
 
-		  setSelectedItem({
+			setSelectedItem({
 				...content,
 				id    : components.length + 1,
 				index : startIndex,
-		  });
+			});
 
-		  setShowContentModal(false);
-		  setParentComponentId(null);
+			setShowContentModal(false);
+			setParentComponentId(null);
 		},
 		[components],
-	  );
+	);
 
-	  const onClose = () => {
+	const onClose = () => {
 		setShowContentModal(false);
 	};
 
-	  const MemoLeftPanel = useCallback(
+	const MemoLeftPanel = useCallback(
 		() => (
 			<LeftPanel
 				activeTab={activeTab}
@@ -115,7 +127,7 @@ function DNDComponent() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[handleAddNewItem, selectedItem, activeTab],
 
-	  );
+	);
 	//   const MemoRightPanel = useCallback(
 	// 	() => (
 

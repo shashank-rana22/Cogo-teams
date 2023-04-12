@@ -1,23 +1,23 @@
 import { Input, Select } from '@cogoport/components';
 import React, { useCallback } from 'react';
 
+const settings = [
+	{ label: 'Width', key: 'width', type: 'number' },
+	{ label: 'Height', key: 'height', type: 'number' },
+	{
+		label   : 'Border',
+		key     : 'border',
+		type    : 'select',
+		options : ['none', 'solid', 'dashed', 'dotted'],
+	},
+	{ label: 'Border Width', key: 'borderWidth', type: 'number' },
+	{ label: 'Border Color', key: 'borderColor', type: 'color' },
+];
+
 function ImageSettings({ item }) {
 	const handleChange = useCallback((key, value) => {
 		console.log(`Setting ${key} to ${value}`);
 	}, []);
-
-	const settings = [
-		{ label: 'Width', key: 'width', type: 'number' },
-		{ label: 'Height', key: 'height', type: 'number' },
-		{
-			label   : 'Border',
-			key     : 'border',
-			type    : 'select',
-			options : ['none', 'solid', 'dashed', 'dotted'],
-		},
-		{ label: 'Border Width', key: 'borderWidth', type: 'number' },
-		{ label: 'Border Color', key: 'borderColor', type: 'color' },
-	];
 
 	const handleInputChange = useCallback(
 		(e, key) => {
