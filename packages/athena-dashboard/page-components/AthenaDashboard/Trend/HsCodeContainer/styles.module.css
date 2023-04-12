@@ -1,0 +1,45 @@
+.selected_hscode_container {
+	display: flex;
+	min-height: 200px;
+	background-color: #f9f9f9;
+}
+
+.selected_hscodes {
+	display: block;
+	margin-top: 20px;
+	margin-left: 48px;
+}
+
+.display_selected_code {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 20px;
+}
+
+.hscode {
+	width: 100px;
+	margin: 4px;
+	text-align: center;
+	background-color: #e0e0e0;
+	border-radius: 10px;
+}
+
+.hscode_text {
+	padding: 4px;
+	margin-top: 8px;
+}
+
+.button_group {
+	display: flex;
+}
+
+.build_report_button {
+	margin-top: 20px;
+}
+
+.selected_hscode_container_text {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	padding-top: 90px;
+}

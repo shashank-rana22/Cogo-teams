@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 
-// import handleMinimizeTest from '../../../../utils/handleMinimizeTest';
+import handleMinimizeTest from '../../../../utils/handleMinimizeTest';
 
 import styles from './styles.module.css';
 
@@ -9,7 +9,7 @@ function Footer({
 }) {
 	const handleSubmitTest = () => {
 		setShowSubmitTestModal(true);
-		// handleMinimizeTest();
+		handleMinimizeTest();
 	};
 
 	return (

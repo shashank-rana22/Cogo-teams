@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 const useCreateOrganizationTradePartyPoc = ({
 	shipment_id = '', organization_id = '', refetch = () => {},
@@ -14,13 +14,13 @@ const useCreateOrganizationTradePartyPoc = ({
 
 	const apiTrigger = async (val) => {
 		try {
-			const res = await trigger({ params: { shipment_id, organization_id, ...val } });
+			const res = await trigger({ data: { shipment_id, organization_id, ...val } });
 			if (!res.hasError) {
 				Toast.success(successMessage);
 				refetch();
 			}
 		} catch (err) {
-			Toast.error(getApiErrorString(err));
+			toastApiError(err);
 		}
 	};
 
