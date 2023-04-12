@@ -24,7 +24,7 @@ function Aliases({ showAlias, setShowAlias = () => {}, alias = {}, filteredAlias
 			<div className={styles.input_container}>
 				<Input
 					size="md"
-					placeholder="Enter alias"
+					placeholder="Add alias"
 					value={showAlias[aliasIndex]?.question_abstract}
 					onChange={(event) => {
 						setShowAlias((prevAliases) => {

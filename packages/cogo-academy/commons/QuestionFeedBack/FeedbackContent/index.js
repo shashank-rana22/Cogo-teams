@@ -1,13 +1,19 @@
-import { Avatar } from '@cogoport/components';
+import { Avatar, Input, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcCFtick, IcMFtick } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 
 import styles from './styles.module.css';
 import useCreateFaqQuestionAlias from './useCreateFaqQuestionAlias';
 
-function FeedBackContent({ feedback, onClickEdit = () => {}, source = '', fetchListFaqFeedback = () => {} }) {
-	// const [addAlias, setAddAlias] = useState(false);
+function FeedBackContent({
+	feedback,
+	onClickEdit = () => {},
+	source = '',
+	fetchListFaqFeedback = () => {},
+	fetchQuestion,
+}) {
 	const { general } = useSelector((state) => state);
 	const { feedbackId:id = '' } = general.query || {};
 
@@ -18,10 +24,17 @@ function FeedBackContent({ feedback, onClickEdit = () => {}, source = '', fetchL
 		updated_at,
 		remark,
 		id:feedbackId = '',
-		is_suggested_question_added = false,
+		is_suggestion_accepted = false,
 	} = feedback || {};
 
-	const { onClickAddAlias } = useCreateFaqQuestionAlias({ suggested_question_abstract, fetchListFaqFeedback });
+	const {
+		onClickAddAlias,
+		showAliasInput,
+		setShowAliasInput,
+		inputAlias,
+		setInputAlias,
+		loading,
+	} = useCreateFaqQuestionAlias({ suggested_question_abstract, fetchListFaqFeedback, feedbackId, fetchQuestion });
 
 	const { name = '', picture = '' } = author?.[0] || {};
 
@@ -77,9 +90,50 @@ function FeedBackContent({ feedback, onClickEdit = () => {}, source = '', fetchL
 						<div
 							className={styles.anchor_text}
 							role="presentation"
-							onClick={onClickAddAlias}
+							style={{ cursor: !is_suggestion_accepted ? 'pointer' : 'default' }}
+							onClick={() => (!is_suggestion_accepted ? setShowAliasInput(true) : null)}
 						>
-							{is_suggested_question_added ? 'aaa' : 'Add as an Alias'}
+							{is_suggestion_accepted
+								? (
+									<div className={styles.updated_alias}>
+										<div className={styles.icon_wrapper}>
+											<IcMFtick width={24} height={24} fill="#028a0f" />
+										</div>
+										Question added as an alias successfully
+									</div>
+								) : 'Add as an Alias'}
+						</div>
+					)}
+
+					{showAliasInput && (
+						<div className={styles.alias_input}>
+							<Input
+								size="sm"
+								value={inputAlias}
+								onChange={(value) => setInputAlias(value)}
+							/>
+							<div className={styles.button_wrapper}>
+								<Button
+									size="md"
+									themeType="tertiary"
+									onClick={() => setShowAliasInput(false)}
+									disabled={loading}
+								>
+									Cancel
+
+								</Button>
+
+								<Button
+									size="md"
+									themeType="primary"
+									onClick={onClickAddAlias}
+									loading={loading}
+								>
+									Submit
+
+								</Button>
+
+							</div>
 						</div>
 					)}
 

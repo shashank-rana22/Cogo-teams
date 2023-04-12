@@ -61,4 +61,25 @@
 	font-weight: 600;
 	color: #00f;
 	cursor: pointer;
+
+	
+}
+
+.alias_input{
+	padding-bottom: 8px;
+}
+
+.button_wrapper{
+	margin-top: 10px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.updated_alias{
+	display: flex;
+	color:#028a0f
+}
+
+.icon_wrapper{
+	padding-right: 4px;
 }

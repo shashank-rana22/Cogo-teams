@@ -12,8 +12,6 @@ function useCreateFaqPayload({ values, editorValue, data, showAlias }) {
 		audience_ids,
 	} = values || {};
 
-	// const questionAlias =
-
 	const aliasesArray = (showAlias || []).map((alias) => (alias?.question_abstract));
 
 	const updatedAlias = [];
@@ -37,9 +35,11 @@ function useCreateFaqPayload({ values, editorValue, data, showAlias }) {
 	const getTopicIds = (faq_topics || []).map(
 		(item) => item?.id,
 	);
+
 	const getTagIds = (faq_tags || []).map(
 		(item) => item?.id,
 	);
+
 	const getAudienceIds = (faq_audiences || []).map(
 		(item) => item?.id,
 	);
@@ -51,6 +51,7 @@ function useCreateFaqPayload({ values, editorValue, data, showAlias }) {
 	const inactive_tag_ids = (getTagIds || []).filter(
 		(id) => !(tag_ids || []).includes(id),
 	);
+
 	const inactive_audience_ids = (getAudienceIds || []).filter(
 		(id) => !(audience_ids || []).includes(id),
 	);

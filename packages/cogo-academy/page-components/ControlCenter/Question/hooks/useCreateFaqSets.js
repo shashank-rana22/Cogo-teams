@@ -38,6 +38,13 @@ function useCreateFaqSet({
 			return;
 		}
 
+		const emptyAlias = (showAlias || []).find((alias) => alias?.status !== 'inactive' && !alias?.question_abstract);
+
+		if (emptyAlias) {
+			Toast.error('Alias can not be empty');
+			return;
+		}
+
 		// eslint-disable-next-line react-hooks/rules-of-hooks
 		const { payload } = useCreateFaqPayload({ values, editorValue, source: 'create', data: apiData, showAlias });
 

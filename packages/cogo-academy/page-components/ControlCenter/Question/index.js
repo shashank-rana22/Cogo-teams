@@ -189,26 +189,33 @@ function CreateFAQ() {
 				<form className={styles.form_container} onSubmit={handleSubmit(onSubmit)}>
 
 					<div className={styles.input_container}>
-						<div className={styles.input_label}>
-							Question
+						<div>
+							<div className={styles.input_label}>
+								Question
+							</div>
+
 						</div>
 
 						<div className={styles.question_alias}>
+							<div style={{ width: '90%' }}>
 
-							<InputController
-								control={control}
-								name="question_abstract"
-								type="input"
-								placeholder="Create a question."
-								key={question_abstract}
-								rules={{ required: 'Question is required.' }}
-							/>
+								<InputController
+									control={control}
+									name="question_abstract"
+									type="input"
+									placeholder="Create a question."
+									key={question_abstract}
+									rules={{ required: 'Question is required.' }}
+								/>
 
-							{errors?.question_abstract && (
-								<span className={styles.errors}>
-									{errors.question_abstract.message}
-								</span>
-							)}
+								{errors?.question_abstract && (
+									<span className={styles.errors}>
+										{errors.question_abstract.message}
+									</span>
+								)}
+
+							</div>
+
 							{ isEmpty(filteredAliases) && (
 								<div
 									className={styles.alias}
@@ -479,7 +486,7 @@ function CreateFAQ() {
 			</div>
 
 			<div className={styles.feedback_container}>
-				<QuestionFeedBack id={id} source="create" />
+				<QuestionFeedBack id={id} source="create" fetchQuestion={fetchQuestion} />
 			</div>
 
 		</div>
