@@ -89,11 +89,10 @@ function CreateFAQ() {
 		faq_tags,
 		faq_topics,
 		answers,
-		faq_audiences,
 		id,
 		question_aliases = [],
 	} = data || {};
-
+	const { faq_audiences } = answers?.[0] || [];
 	useEffect(() => {
 		if (query?.id) {
 			fetchQuestion();
