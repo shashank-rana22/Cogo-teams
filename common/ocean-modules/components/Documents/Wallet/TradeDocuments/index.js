@@ -16,6 +16,7 @@ function TradeDocuments({
 	handleSave = () => {},
 	handleView = () => {},
 	searchTasksVal,
+	showWalletDocs,
 	handleDocClick,
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
@@ -68,18 +69,20 @@ function TradeDocuments({
 						className={styles.single_doc}
 						onClick={() => handleDocClick(doc)}
 					>
+						{!showWalletDocs && (
+							<Popover
+								interactive
+								placement="bottom"
+								theme="light"
+								trigger="click"
+								content={content(doc)}
+							>
+								<div className={styles.dots}>
+									<IcMOverflowDot />
+								</div>
+							</Popover>
+						)}
 
-						<Popover
-							interactive
-							placement="bottom"
-							theme="light"
-							trigger="click"
-							content={content(doc)}
-						>
-							<div className={styles.dots}>
-								<IcMOverflowDot />
-							</div>
-						</Popover>
 						{doc.type === 'pdf' ? (
 							<IcMPdf fontSize="32px" />
 						) : (

@@ -6,6 +6,7 @@ import styles from './styles.module.css';
 import TradeDocuments from './TradeDocuments';
 
 function Wallet({
+	showWalletDocs,
 	forModal = false,
 	activeWallet = '',
 	searchTasksVal,
@@ -32,6 +33,7 @@ function Wallet({
 						forModal={forModal}
 						handleView={handleView}
 						handleSave={handleSave}
+						showWalletDocs={showWalletDocs}
 						searchTasksVal={searchTasksVal}
 						handleDocClick={handleDocClick}
 
@@ -43,6 +45,7 @@ function Wallet({
 						forModal={forModal}
 						handleView={handleView}
 						handleSave={handleSave}
+						showWalletDocs={showWalletDocs}
 						searchTasksVal={searchTasksVal}
 						handleDocClick={handleDocClick}
 					/>

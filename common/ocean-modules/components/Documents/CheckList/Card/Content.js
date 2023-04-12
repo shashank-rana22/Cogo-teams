@@ -17,7 +17,7 @@ function Content({
 	primary_service,
 	receivedViaEmail,
 	showUploadText,
-	setShow,
+	setShowDoc,
 	// setShowConfirmed,
 	docType,
 }) {
@@ -121,7 +121,7 @@ function Content({
 							// 		type          : 'task',
 							// 	})
 							// 	:
-							setShow({
+							setShowDoc({
 								...item,
 								document_type: docType,
 							}))}

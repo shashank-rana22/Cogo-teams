@@ -9,7 +9,7 @@ const Card = ({
 	emailDocs,
 	shipment_data,
 	primary_service,
-	setShow,
+	setShowDoc,
 	// setShowConfirmed,
 }) => {
 	const handleView = (url) => {
@@ -51,7 +51,7 @@ const Card = ({
 					handleView={handleView}
 					handleSave={handleSave}
 					primary_service={primary_service}
-					setShow={setShow}
+					setShowDoc={setShowDoc}
 					// setShowConfirmed={setShowConfirmed}
 				/>
 			);

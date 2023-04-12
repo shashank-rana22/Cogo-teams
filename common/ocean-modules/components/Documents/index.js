@@ -13,7 +13,7 @@ import UploadForm from './UploadForm';
 import Wallet from './Wallet';
 
 function Documents() {
-	const [show, setShow] = useState(null);
+	const [showDoc, setShowDoc] = useState(null);
 	// const [showConfirmed, setShowConfirmed] = useState(false);
 	const [activeToggle, setActiveToggle] = useState(false);
 	const [activeWallet, setActiveWallet] = useState('trade_documents');
@@ -57,22 +57,22 @@ function Documents() {
 						taskList={taskList}
 						emailDocs={emailList}
 						completedDocs={completedDocs?.list}
-						setShow={setShow}
+						setShowDoc={setShowDoc}
 						// setShowConfirmed={setShowConfirmed}
 					/>
 				) : <Wallet activeWallet={activeWallet} />}
 
 				<Modal
-					show={show}
+					show={showDoc}
 					size="lg"
-					onClose={() => setShow(null)}
+					onClose={() => setShowDoc(null)}
 					onOuterClick={() => {
-						setShow(null);
+						setShowDoc(null);
 					}}
 				>
 					<UploadForm
-						show={show}
-						setShow={setShow}
+						showDoc={showDoc}
+						setShowDoc={setShowDoc}
 						refetch={refetch}
 						activeWallet={activeWallet}
 						setActiveWallet={setActiveWallet}

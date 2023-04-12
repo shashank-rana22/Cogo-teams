@@ -9,7 +9,7 @@ function CheckList({
 	taskList,
 	emailDocs,
 	completedDocs,
-	setShow,
+	setShowDoc,
 	// setShowConfirmed,
 
 }) {
@@ -23,7 +23,7 @@ function CheckList({
 				emailDocs={emailDocs}
 				shipment_data={shipment_data}
 				primary_service={primary_service}
-				setShow={setShow}
+				setShowDoc={setShowDoc}
 				// setShowConfirmed={setShowConfirmed}
 			/>
 

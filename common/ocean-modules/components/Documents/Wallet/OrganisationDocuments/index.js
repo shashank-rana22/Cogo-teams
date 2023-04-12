@@ -16,7 +16,8 @@ function OrganizationDocuments({
 	handleSave = () => {},
 	handleView = () => {},
 	searchTasksVal,
-	handleDocClick,
+	showWalletDocs,
+	handleDocClick = () => {},
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
@@ -75,18 +76,19 @@ function OrganizationDocuments({
 						className={styles.single_doc}
 						onClick={() => handleDocClick(doc)}
 					>
-
-						<Popover
-							interactive
-							placement="bottom"
-							theme="light"
-							trigger="click"
-							content={content(doc)}
-						>
-							<div className={styles.dots}>
-								<IcMOverflowDot />
-							</div>
-						</Popover>
+						{!showWalletDocs && (
+							<Popover
+								interactive
+								placement="bottom"
+								theme="light"
+								trigger="click"
+								content={content(doc)}
+							>
+								<div className={styles.dots}>
+									<IcMOverflowDot />
+								</div>
+							</Popover>
+						)}
 						{doc.type === 'pdf' ? (
 							<IcMPdf fontSize="32px" />
 						) : (

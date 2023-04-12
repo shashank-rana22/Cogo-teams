@@ -6,31 +6,32 @@ import styles from './styles.module.css';
 import WalletForm from './WalletForm';
 
 function UploadForm({
-	show,
-	setShow,
+	showDoc,
+	setShowDoc,
 	activeWallet,
 	setActiveWallet,
 	// refetch,
 }) {
 	const handleDocClick = (doc) => {
-		setShow({
-			...show,
+		setShowDoc({
+			...showDoc,
 			url  : doc.image_url,
 			type : 'task',
 		});
 	};
 
 	let content;
-	switch (show?.type) {
+	switch (showDoc?.type) {
 		case 'task':
-			// content = <Task show={show} setShow={setShow} refetch={refetch} />;
+			// content = <Task show={show} setShowDoc={setShowDoc} refetch={refetch} />;
 			break;
 		case 'wallet':
 			content = (
 				<WalletForm
+					showWalletDocs={showDoc.type}
 					activeWallet={activeWallet}
 					setActiveWallet={setActiveWallet}
-					show={show}
+					showDoc={showDoc}
 					handleDocClick={handleDocClick}
 				/>
 			);
@@ -44,7 +45,7 @@ function UploadForm({
 						role="button"
 						tabIndex={0}
 						className={styles.Choose_from_wallet}
-						onClick={() => setShow({ ...show, type: 'wallet' })}
+						onClick={() => setShowDoc({ ...showDoc, type: 'wallet' })}
 					>
 						<div>
 							<IcMPdf fontSize="2rem" />
@@ -57,7 +58,7 @@ function UploadForm({
 					<StyledButton>
 						<Button
 							onClick={() => {
-								setShow({ ...show, type: 'task' });
+								setShowDoc({ ...showDoc, type: 'task' });
 							}}
 						>
 							Manual Upload
@@ -67,7 +68,7 @@ function UploadForm({
 						<Button
 							className="secondary md"
 							onClick={() => {
-								setShow(null);
+								setShowDoc(null);
 							}}
 						>
 							Cancel

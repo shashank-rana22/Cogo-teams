@@ -7,9 +7,10 @@ import Wallet from '../../Wallet';
 import styles from './styles.module.css';
 
 function WalletForm({
+	showWalletDocs,
 	activeWallet,
 	setActiveWallet,
-	show,
+	showDoc,
 	handleDocClick,
 }) {
 	const [searchTask, setSearchTask] = useState('');
@@ -43,8 +44,9 @@ function WalletForm({
 					<TabPanel name="organization_documents" title="Organization Documents" />
 				</Tabs>
 				<Wallet
+					showWalletDocs={showWalletDocs}
 					searchTasksVal={searchTask}
-					show={show}
+					showDoc={showDoc}
 					handleDocClick={handleDocClick}
 					activeWallet={activeWallet}
 				/>
