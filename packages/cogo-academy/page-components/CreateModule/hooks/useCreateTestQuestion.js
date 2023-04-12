@@ -10,7 +10,13 @@ const actionNameMapping = {
 	case_study  : 'Case Study',
 };
 
-function useCreateTestQuestion({ reset, getTestQuestionTest, questionSetId, listSetQuestions }) {
+function useCreateTestQuestion({
+	reset,
+	getTestQuestionTest,
+	questionSetId,
+	listSetQuestions,
+	editorValue = {},
+}) {
 	const [{ loading: loadingCaseStudy }, triggerCaseStudy] = useRequest({
 		method : 'post',
 		url    : '/create_case_study_test_question',
@@ -29,7 +35,12 @@ function useCreateTestQuestion({ reset, getTestQuestionTest, questionSetId, list
 	const createTestQuestion = async ({ values }) => {
 		const { question_type = '' } = values || {};
 
-		const { hasError, ...payload } = getPayload({ values, questionSetId, type: question_type });
+		const { hasError, ...payload } = getPayload({
+			values,
+			questionSetId,
+			type: question_type,
+			editorValue,
+		});
 
 		if (!isEmpty(hasError)) {
 			hasError.forEach((item) => {
