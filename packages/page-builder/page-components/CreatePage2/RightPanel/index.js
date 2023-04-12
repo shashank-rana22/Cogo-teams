@@ -3,9 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
-import ButtonComponent from '../../../commons/widgets/ButtonComponent';
-import ImageComponent from '../../../commons/widgets/ImageComponent';
-import TextComponent from '../../../commons/widgets/TextComponent';
+import RenderComponents from './RenderComponent';
 
 const ITEM_TYPES = {
 	text      : 'text',
@@ -14,7 +12,7 @@ const ITEM_TYPES = {
 	container : 'container',
 };
 
-function ComponentBuilder({ widget, renderComponent }) {
+function ComponentBuilder({ widget, components, setComponents }) {
 	const { children, properties } = widget || {};
 
 	const { styles: style } = properties || {};
@@ -27,6 +25,7 @@ function ComponentBuilder({ widget, renderComponent }) {
 		<div style={style}>
 
 			{ (children || []).map((childComponent) => {
+				const { id } = childComponent || {};
 				const { content = '', styles, attributes = {} } = childComponent.properties || {};
 				const { icon, type } = content || {};
 
@@ -40,7 +39,7 @@ function ComponentBuilder({ widget, renderComponent }) {
 							>
 								{icon}
 							</div>
-						) : renderComponent(type) }
+						) : <RenderComponents componentType={type} widget={childComponent} components={components} setComponents={setComponents} elementId={id} /> }
 
 					</div>
 				);
@@ -63,7 +62,7 @@ function Item(props) {
 		isSelected,
 	} = props;
 
-	const { type, id: elementId } = widget;
+	const { type, id: elementId } = widget || {};
 
 	const itemRef = useRef(null);
 
@@ -128,48 +127,13 @@ function Item(props) {
 
 	const border = isSelected ? '3px dashed blue' : '1px solid silver';
 
-	const COMPONENT_MAPPING = {
-		text: (
-			<TextComponent
-				key={elementId}
-				text={widget.content}
-				components={components}
-				setComponents={setComponents}
-				elementId={elementId}
-			/>
-		),
-		image: (
-			<ImageComponent
-				key={elementId}
-				src={widget.content}
-				alt={widget.alt}
-				components={components}
-				setComponents={setComponents}
-				elementId={elementId}
-			/>
-		),
-		button: (
-			<ButtonComponent
-				key={elementId}
-				label={widget.content}
-				themeType={widget.themeType}
-				size={widget.size}
-				type={widget.type}
-				components={components}
-				setComponents={setComponents}
-				elementId={elementId}
-			/>
-		),
-	};
-
-	const renderComponent = (componentType) => <div style={{ background: 'lavender', width: '100%', height: '100%' }}>{COMPONENT_MAPPING[componentType]}</div>;
-
 	return (
 		<div
 			role="presentation"
 			ref={itemRef}
 			data-handler-id={handlerId}
 			onClick={onClick}
+			key={elementId}
 			className="drag-handle"
 			style={{
 				opacity,
@@ -179,10 +143,10 @@ function Item(props) {
 			}}
 		>
 
-			{renderComponent(type)}
+			<RenderComponents componentType={type} widget={widget} components={components} setComponents={setComponents} elementId={elementId} />
 
 			{type === 'container' && (
-				<ComponentBuilder widget={widget} renderComponent={renderComponent} />
+				<ComponentBuilder widget={widget} components={components} setComponents={setComponents} />
 			)}
 		</div>
 	);

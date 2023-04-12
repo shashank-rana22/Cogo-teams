@@ -29,6 +29,8 @@ function Stage({
 }) {
 	const [stageItems, setStageItems] = useState(components);
 
+	console.log('djskjdksjd', components);
+
 	const [newAddingItemProps, setNewAddingItemProps] = useState({
 		hoveredIndex   : 0,
 		shouldAddBelow : false,
@@ -80,7 +82,7 @@ function Stage({
 				<RightPanel
 					widget={item}
 					components={stageItems}
-					setComponents={setStageItems}
+					setComponents={setComponents}
 					index={index}
 					id={id}
 					key={id}
@@ -123,8 +125,8 @@ function Stage({
 
 	//! Portal :: placeholder item while new item adding
 	useEffect(() => {
+		const _stageItems = stageItems.filter(({ id }) => !!id);
 		if (isNewItemAdding) {
-			const _stageItems = stageItems.filter(({ id }) => !!id);
 			if (isOver && isNewItemAdding) {
 				const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
 				setStageItems([
@@ -134,9 +136,9 @@ function Stage({
 					},
 					..._stageItems.slice(startIndex),
 				]);
-			} else {
-				setStageItems(_stageItems);
 			}
+		} else {
+			setStageItems(_stageItems);
 		}
 	}, [isOver, draggingItemType, isNewItemAdding, shouldAddBelow, hoveredIndex]);
 	const isActive = canDrop && isOver;

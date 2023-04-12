@@ -24,11 +24,11 @@ function TextComponent(props) {
 		};
 
 		// use map instead slice
-		setComponents((prevComponents) => [
-			...prevComponents.slice(0, selectedComponentIndex),
-			updatedComponent,
-			...prevComponents.slice(selectedComponentIndex + 1),
-		]);
+		// setComponents((prevComponents) => [
+		// 	...prevComponents.slice(0, selectedComponentIndex),
+		// 	updatedComponent,
+		// 	...prevComponents.slice(selectedComponentIndex + 1),
+		// ]);
 	};
 
 	const modules = {
