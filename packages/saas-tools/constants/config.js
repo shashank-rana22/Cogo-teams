@@ -18,7 +18,6 @@ const CONFIG = [
 	{
 		label : 'Source',
 		key   : 'source',
-		// type  : 'datetime',
 		flex  : 1,
 	},
 	{

@@ -209,10 +209,6 @@ function asyncShippingLines() {
 		endpoint    : 'get_saas_container_shipping_lines',
 		initialCall : false,
 		// microService : 'business_finance',
-		// params      : {
-		// 	entityCode : 301,
-		// 	currency   : 'INR',
-		// },
 	};
 }
 
