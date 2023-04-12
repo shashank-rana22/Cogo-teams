@@ -1,62 +1,55 @@
-import useAxios from 'axios-hooks';
+import { useLensRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
+
+import toastApiError from '../utils/toastApiError';
 
 /**
  * Single utility hook to get mail from Cogo RPA using id of email
- */
+*/
 
-const useGetMail = (email_address, message_id, mail_id) => {
-	const [getMailApi, triggerGetMail] = useAxios(
-		{
-			url    : `${process.env.COGO_LENS_URL}/get_mail`,
-			method : 'GET',
+const useGetMail = ({ payload }) => {
+	const { email_address, message_id, mail_id } = payload;
+
+	const [getMailApi, triggerGetMail] = useLensRequest({
+		url    : 'get_mail',
+		method : 'GET',
+		params : {
+			email_address,
+			message_id,
 		},
-		{ manual: true },
-	);
-	const [getMailRpaApi, triggerGetRpaMail] = useAxios(
-		{
-			url    : `${process.env.COGO_LENS_URL}/get_rpa_mail`,
-			method : 'GET',
+	}, { manual: true });
+
+	const [getMailRpaApi, triggerGetRpaMail] = useLensRequest({
+		url    : 'get_rpa_mail',
+		method : 'GET',
+		params : {
+			mail_id,
 		},
-		{ manual: true },
-	);
+	}, { manual: true });
 
 	const getRpaMail = useCallback(() => {
 		(async () => {
 			try {
-				await triggerGetRpaMail({
-					params: {
-						mail_id,
-					},
-				});
+				await triggerGetRpaMail();
 			} catch (err) {
-				console.log(err);
+				toastApiError(err);
 			}
 		}
 		)();
-	}, [triggerGetRpaMail, mail_id]);
+	}, [triggerGetRpaMail]);
 
-	/**
-	 *
-	 * @param {String} id Id of mail
-	 */
 	const getEmail = useCallback(() => {
 		(async () => {
 			try {
-				const res = await triggerGetMail({
-					params: {
-						email_address,
-						message_id,
-					},
-				});
+				const res = await triggerGetMail();
 				if (res?.data?.error?.code === 'ErrorItemNotFound') {
 					getRpaMail();
 				}
 			} catch (err) {
-				console.log(err);
+				toastApiError(err);
 			}
 		})();
-	}, [email_address, message_id, triggerGetMail, getRpaMail]);
+	}, [triggerGetMail, getRpaMail]);
 
 	useEffect(() => {
 		if (message_id) {
@@ -64,35 +57,9 @@ const useGetMail = (email_address, message_id, mail_id) => {
 		}
 	}, [message_id, getEmail]);
 
-	const isFromRpa = getMailApi?.data?.error?.code === 'ErrorItemNotFound';
-
-	const rpaData = getMailRpaApi?.data;
-
-	const rpaMailData = {
-		...(rpaData || {}),
-		body: {
-			content: rpaData?.body,
-		},
-		ccRecipients: (rpaData?.cc_mails || []).map((item) => ({
-			emailAddress: { address: item },
-		})),
-		toRecipients: (rpaData?.to_mails || []).map((item) => ({
-			emailAddress: { address: item },
-		})),
-		from             : { emailAddress: { address: rpaData?.sender } },
-		receivedDateTime : rpaData?.received_time,
-		isFromRpa,
-	};
-
-	const emailData = isFromRpa ? rpaMailData : getMailApi?.data;
-	const loading = isFromRpa ? getMailRpaApi?.loading : getMailApi?.loading;
-
 	return {
 		getMailApi,
-		getEmail,
 		getMailRpaApi,
-		emailData,
-		loading,
 	};
 };
 

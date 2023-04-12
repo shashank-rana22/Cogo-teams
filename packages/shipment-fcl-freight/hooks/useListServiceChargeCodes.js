@@ -1,60 +1,36 @@
 import { useRequest } from '@cogoport/request';
-import { startCase } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 
-const useListServiceChargeCodes = ({ shipment_id, services, isSeller = false }) => {
-	const [filters, setFilters] = useState({
-		name         : undefined,
-		service_type : undefined,
-	});
+import toastApiError from '../utils/toastApiError';
 
-	const [{ data, loading }, trigger] = useRequest({
+const useListServiceChargeCodes = ({ shipmentId }) => {
+	const [apiData, setApiData] = useState({});
+
+	const [{ loading }, trigger] = useRequest({
 		url    : '/get_shipment_additional_service_codes',
 		method : 'GET',
+		params : { filters: { shipment_id: shipmentId } },
 	});
 
+	const getListChargeCodes = useCallback(async () => {
+		try {
+			const res = await trigger();
+			setApiData(res.data || {});
+		} catch (err) {
+			setApiData({});
+			toastApiError(err);
+		}
+	}, [trigger]);
+
 	useEffect(() => {
-		(async () => {
-			try {
-				if (shipment_id) {
-					await trigger({
-						params: { filters: { shipment_id } },
-					});
-				}
-			} catch (err) {
-				console.log(err);
-			}
-		})();
-	}, [trigger, shipment_id]);
-
-	let intialList = (data?.list || []).map((item) => ({
-		...item,
-		shipment_id,
-		services,
-		isSeller,
-		name: `${item.code} ${startCase(item.name)}`,
-	}));
-
-	if (filters.name) {
-		intialList = intialList.filter((item) => item.name.toLowerCase().includes(filters.name.toLowerCase()));
-	}
-
-	if (filters.service_type) {
-		intialList = intialList.filter((item) => {
-			if (filters?.service_type?.includes('?')) {
-				return item.service_type === filters?.service_type?.split('?')?.[0];
-			}
-			return item.service_type === filters?.service_type;
-		});
-	}
+		getListChargeCodes();
+	}, [getListChargeCodes, shipmentId]);
 
 	return {
 		loading,
-		apiList           : data,
-		list              : intialList,
-		serviceCountTotal : data?.length || 0,
-		filters,
-		setFilters        : (values) => setFilters({ ...filters, ...values }),
+		list    : apiData?.list || [],
+		refetch : getListChargeCodes,
+		apiList : apiData,
 	};
 };
 export default useListServiceChargeCodes;

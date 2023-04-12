@@ -177,6 +177,22 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api         : 'get_purchase_bills_exchange_rate_deviation_by_id',
+		access_type : 'private',
+	},
+	{
+		api         : 'post_purchase_bills',
+		access_type : 'private',
+	},
+	{
+		api         : 'put_purchase_bills',
+		access_type : 'private',
+	},
+	{
+		api         : 'get_purchase_bills_tagging_map',
+		access_type : 'private',
+	},
+	{
 		api          : 'update_shipment_collection_party',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -238,6 +254,26 @@ const apis = [
 	},
 	{
 		api          : 'update_shipment_operating_instruction',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_checkout_applicable_promocodes',
+		access_type  : 'private',
+		service_name : 'checkout',
+	},
+	{
+		api          : 'list_shipment_trade_partners',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_organizations',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_invoice_preference',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},

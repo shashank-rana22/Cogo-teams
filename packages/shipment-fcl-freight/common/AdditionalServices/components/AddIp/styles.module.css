@@ -1,14 +1,16 @@
-.button_div{
+.button_div {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
 }
 
-.ip_modal_container{
-	:global{
-		.ui_modal_body_container{
+.ip_modal_container {
+	:global {
+		.ui_modal_body_container {
 			height: 400px;
-			max-height: 400px ;
+			max-height: 400px;
 		}
+
+		width: 1000px;
 	}
 }

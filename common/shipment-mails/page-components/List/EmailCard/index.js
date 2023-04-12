@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { IcMProfile, IcMAttach } from '@cogoport/icons-react';
 import { subtractDays, format } from '@cogoport/utils';
 import { formatDistanceToNow } from 'date-fns';
@@ -5,17 +6,18 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function EmailCard({ data, onClick }) {
+function EmailCard({ activeMail, data = {}, onClick = () => {} }) {
 	const yesterday = subtractDays(new Date(), 1);
-	const displayDate =		new Date(data.receivedDateTime) > yesterday
-		? formatDistanceToNow(data.receivedDateTime)
+	const displayDate =	new Date(data?.receivedDateTime) > yesterday
+		? formatDistanceToNow(new Date(data?.receivedDateTime), { addSuffix: true })
 		: format(
-			data.receivedDateTime,
-			' dd MMM, yyyy',
+			data?.receivedDateTime,
+			'dd MMM, yyyy',
 		);
+
 	return (
 		<div
-			className={styles.container}
+			className={cl`${styles.container} ${data?.id === activeMail?.id ? styles.active : ''}`}
 			role="button"
 			tabIndex={0}
 			onClick={() => onClick(data)}
@@ -23,6 +25,7 @@ function EmailCard({ data, onClick }) {
 			<div className={styles.circle}>
 				<IcMProfile />
 			</div>
+
 			<div className={styles.content}>
 				<div className={styles.row}>
 					<div className={styles.sender}>
@@ -30,7 +33,8 @@ function EmailCard({ data, onClick }) {
 					</div>
 					{data?.hasAttachments ? <IcMAttach /> : null}
 				</div>
-				<div className={styles.row}>
+
+				<div>
 					<div className={styles.subject}>{data.subject}</div>
 					<div className={styles.subject}>
 						{displayDate}

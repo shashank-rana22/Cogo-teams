@@ -12,6 +12,7 @@ function SideBar({
 	setActiveBox,
 }) {
 	const SIDE_BAR_ITEMS = sideBarConfigs;
+
 	return (
 		<div className={styles.container}>
 
@@ -19,9 +20,9 @@ function SideBar({
 				<Button
 					onClick={onCompose}
 					disabled={composingEmail}
-					style={{ width: '90%' }}
+					style={{ width: '70%' }}
 				>
-					+ Compose New
+					+ Compose
 				</Button>
 			</div>
 

@@ -1,35 +1,37 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-const useUpdateSeen = ({ channel_id, showUnreadChat }) => {
+import toastApiError from '../utils/toastApiError';
+
+const useUpdateSeen = ({ payload }) => {
+	const { id = '', showUnreadChat = false } = payload;
+
 	const [{ loading }, trigger] = useRequest({
 		url    : 'update_chat_channel_seen',
 		method : 'POST',
+		data   : {
+			id,
+		},
 	}, { manual: true });
 
-	const onCreate = useCallback(() => {
+	const onSeen = useCallback(() => {
 		(async () => {
 			try {
-				await trigger({
-					data: {
-						id: channel_id,
-					},
-				});
+				await trigger();
 			} catch (err) {
-				Toast.error(err?.data);
+				toastApiError(err);
 			}
 		})();
-	}, [trigger, channel_id]);
+	}, [trigger]);
 
 	useEffect(() => {
-		if (channel_id && !showUnreadChat) {
-			onCreate();
+		if (id && !showUnreadChat) {
+			onSeen();
 		}
-	}, [channel_id, onCreate, showUnreadChat]);
+	}, [id, onSeen, showUnreadChat]);
 
 	return {
-		onCreate,
+		onSeen,
 		loading,
 	};
 };

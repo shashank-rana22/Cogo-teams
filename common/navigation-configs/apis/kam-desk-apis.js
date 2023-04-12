@@ -484,7 +484,7 @@ const apis = [
 	{
 		api          : 'create_spot_search',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'spot_search',
 	},
 	{
 		api          : 'get_all_exchange_rates',
@@ -643,6 +643,16 @@ const apis = [
 	},
 	{
 		api          : 'update_shipment_operating_instruction',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_checkout_applicable_promocodes',
+		access_type  : 'private',
+		service_name : 'checkout',
+	},
+	{
+		api          : 'list_shipment_cancellation_reasons',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},

@@ -1,52 +1,28 @@
 import { Toast } from '@cogoport/components';
-import useAxios from 'axios-hooks';
+import { useLensRequest } from '@cogoport/request';
+
+import toastApiError from '../utils/toastApiError';
 /**
  * Single utility hook to Reply mails from Cogo RPA
  */
 
-const useReplyEmail = () => {
-	const [replyMailApi, triggerReplyMail] = useAxios(
-		{
-			url    : `${process.env.COGO_LENS_URL}/reply_mail`,
-			method : 'POST',
-		},
-		{ manual: true },
-	);
+const useReplyEmail = ({ refetch = () => {} }) => {
+	const [replyMailApi, triggerReplyMail] = useLensRequest({
+		url    : 'reply_mail',
+		method : 'POST',
+	}, { manual: true });
 
-	/**
-	 *
-	 * @param {Object} param0
-	 */
-	const replyEmail = async ({
-		sender = '',
-		toUserEmail = [],
-		ccrecipients = [],
-		subject,
-		content,
-		attachments,
-		msgId,
-		userId,
-		onCreate,
-	}) => {
+	const replyEmail = async ({ payload }) => {
 		try {
 			await triggerReplyMail({
 				data: {
-					sender,
-					toUserEmail,
-					ccrecipients,
-					subject,
-					content,
-					attachments,
-					msgId,
-					userId: userId || sender,
+					...payload,
 				},
 			});
 			Toast.success('Email Sent');
-			if (onCreate) {
-				onCreate();
-			}
+			refetch();
 		} catch (err) {
-			Toast.error(err?.data);
+			toastApiError(err);
 		}
 	};
 

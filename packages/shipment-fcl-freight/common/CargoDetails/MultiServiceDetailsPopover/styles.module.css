@@ -1,8 +1,14 @@
 .container {
 	padding-bottom: 10px;
+	margin-bottom: -10px;
 	font-size: 10px;
-    margin-bottom: -10px;
+}
 
-
-	
+.tooltop_customise {
+	height: auto;
+	padding: 0;
+	font-size: 12px;
+	color: #366efd;
+	background: none;
+	border: none;
 }

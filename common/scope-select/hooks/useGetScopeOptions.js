@@ -2,9 +2,9 @@ import { routeConfig } from '@cogoport/navigation-configs';
 import { useSelector } from '@cogoport/store';
 import { useMemo } from 'react';
 
-import { getNavData } from '../utils/getNavData';
+import getNavData from '../utils/getNavData';
 
-export default function useGetScopeOptions({ defaultValues = {} } = {}) {
+export default function useGetScopeOptions({ defaultValues = {}, apisToConsider = [] } = {}) {
 	const { profile, general } = useSelector((store) => store);
 	const { pathname } = general || {};
 	const { permissions_navigations } = profile || {};
@@ -12,10 +12,12 @@ export default function useGetScopeOptions({ defaultValues = {} } = {}) {
 
 	const scopeValues = useMemo(() => {
 		const navData = getNavData(navigation) || {};
-		const { main_apis } = navData;
+		let { main_apis } = navData;
 		const allNavApis = (permissions_navigations || {})[navigation] || {};
 
-		const scopes = [];
+		main_apis = apisToConsider?.length > 0 ? apisToConsider : main_apis;
+
+		let scopes = [];
 		const viewTypes = {};
 		let defaultScope = null;
 		let defaultView = null;
@@ -27,9 +29,9 @@ export default function useGetScopeOptions({ defaultValues = {} } = {}) {
 
 				if (type !== 'none') {
 					scopes.push(type);
-					viewTypes[type] = through_criteria || [];
+					viewTypes[type] = Array.from(new Set(through_criteria)) || [];
 
-					if (defaultValues?.scope === type || (is_default && !defaultScope)) {
+					if ((!defaultScope && is_default) || defaultValues.scope === type) {
 						defaultScope = type;
 
 						defaultView = viewTypes[type].includes(defaultValues?.view_type)
@@ -39,9 +41,10 @@ export default function useGetScopeOptions({ defaultValues = {} } = {}) {
 				}
 			});
 		});
+		scopes = Array.from(new Set(scopes));
 
 		return { scopes, viewTypes, defaultScope, defaultView, defaultAgentId };
-	}, [navigation, permissions_navigations, defaultValues]);
+	}, [navigation, permissions_navigations, defaultValues, apisToConsider]);
 
 	return {
 		scopeData: scopeValues,

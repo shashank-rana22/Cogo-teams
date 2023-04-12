@@ -1,11 +1,28 @@
-
-.box{
+.box {
+	display: inline-block;
+	height: fit-content;
+	padding: 2px 6px;
+	margin: 3px;
+	margin-right: 4px;
+	font-size: 10px;
 	background: #f2f2f2;
 	border-radius: 4px;
-	margin-right: 4px;
-	padding: 2px 6px;
-	display: inline-block;
-	font-size: 10px; 
-	margin: 3px;
-	height: fit-content;
+}
+
+.certificate_container {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	a {
+		display: flex;
+		align-items: center;
+		font-size: 14px;
+		font-weight: 400;
+		color: #a8acce;
+
+		svg {
+			margin-left: 4px;
+		}
+	}
 }

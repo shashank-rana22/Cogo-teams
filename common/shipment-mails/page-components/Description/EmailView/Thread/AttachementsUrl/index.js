@@ -1,10 +1,11 @@
-import { Popover } from '@cogoport/components';
+import { Modal, Popover, cl } from '@cogoport/components';
 import { IcMDocument, IcMArrowDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
 function AttachementsUrl({ externalAttachements }) {
+	const [showPreview, setShowPreview] = useState(null);
 	const [showPopover, setShowPopover] = useState(false);
 	const attachements = (externalAttachements || []).map((attachment) => {
 		const parts = attachment.split('/');
@@ -25,9 +26,19 @@ function AttachementsUrl({ externalAttachements }) {
 			<div className={styles.row}>
 				{attachements.map((item) => (
 					<div className={styles.item} key={item.id}>
-						<div className={styles.row} tabIndex={0} role="button" onClick={() => setPreview(item)}>
-							<IcMDocument />
-							<div className={styles.item_name}>{item.name}</div>
+						<div
+							className={cl`${styles.row} ${styles.doc}`}
+							role="button"
+							tabIndex={0}
+							onClick={() => setShowPreview(item)}
+						>
+							<IcMDocument style={{ width: '1.5em', height: '1.5em' }} />
+							<div
+								className={cl`${styles.item_name} ${styles.name}`}
+							>
+								{item.name}
+
+							</div>
 						</div>
 						<Popover
 							theme="light"
@@ -36,21 +47,23 @@ function AttachementsUrl({ externalAttachements }) {
 							content={(
 								<div>
 									<div
+										className={styles.action}
 										role="button"
 										tabIndex={0}
 										onClick={() => {
+											setShowPreview(item);
 											setShowPopover(false);
 										}}
 									>
 										Preview
 									</div>
 									<div
+										className={styles.action}
 										role="button"
 										tabIndex={0}
 										onClick={() => handleDownLoad(item)}
 									>
 										Download
-
 									</div>
 								</div>
 							)}
@@ -58,7 +71,12 @@ function AttachementsUrl({ externalAttachements }) {
 							animation="shift-away"
 							onClickOutside={() => setShowPopover(false)}
 						>
-							<div className={styles.row} role="button" tabIndex={0} onClick={() => setShowPopover(true)}>
+							<div
+								className={cl`${styles.row} ${styles.icon}`}
+								role="button"
+								tabIndex={0}
+								onClick={() => setShowPopover(true)}
+							>
 								<div>
 									<IcMArrowDown />
 								</div>
@@ -67,7 +85,22 @@ function AttachementsUrl({ externalAttachements }) {
 					</div>
 				))}
 			</div>
-
+			{showPreview ? (
+				<Modal
+					show={showPreview}
+					onClose={() => setShowPreview(null)}
+					className="primary lg"
+					onOuterClick={() => setShowPreview(null)}
+					closable={false}
+				>
+					<object
+						height="700px"
+						width="800px"
+						aria-label="Doc Preview"
+						data={showPreview.url}
+					/>
+				</Modal>
+			) : null}
 		</div>
 	);
 }

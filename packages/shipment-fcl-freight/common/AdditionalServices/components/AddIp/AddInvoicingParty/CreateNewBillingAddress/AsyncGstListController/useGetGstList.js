@@ -1,6 +1,8 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
+import toastApiError from '../../../../../../../utils/toastApiError';
+
 function useGetGstList({ registrationNumber }) {
 	const [{ data }, trigger] = useRequest({
 		url    : '/get_cogoscore_tax_numbers',
@@ -16,7 +18,7 @@ function useGetGstList({ registrationNumber }) {
 					},
 				});
 			} catch (err) {
-				console.log(err);
+				toastApiError(err);
 			}
 		})();
 	}, [trigger, registrationNumber]);

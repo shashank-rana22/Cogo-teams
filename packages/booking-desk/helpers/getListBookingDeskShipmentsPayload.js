@@ -1,7 +1,7 @@
-import fclTabSpecificPayload from '../config/FCL/tabSpecificPayload.json';
-import fclLocalTabSpecificPayload from '../config/FCL-Local/tabSpecificPayload.json';
-import lclTabSpecificPayload from '../config/LCL/tabSpecificPayload.json';
 import TABS_CONFIG from '../config/TABS_CONFIG.json';
+import FCL from '../config/tabSpecificPayload/FCL.json';
+import FCL_Local from '../config/tabSpecificPayload/FCL_LOCAL.json';
+import LCL from '../config/tabSpecificPayload/LCL.json';
 
 const shipmentStates = {
 	in_progress: [
@@ -14,18 +14,18 @@ const shipmentStates = {
 shipmentStates.completed = [...shipmentStates.in_progress, 'completed'];
 
 const shipmentSpecificPayload = {
-	fcl_freight       : fclTabSpecificPayload,
-	fcl_freight_local : fclLocalTabSpecificPayload,
-	lcl_freight       : lclTabSpecificPayload,
+	fcl_freight       : FCL,
+	fcl_freight_local : FCL_Local,
+	lcl_freight       : LCL,
 };
 
 const timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
 
 export default function getListBookingDeskShipmentsPayload({ filters, activeTab, selected_agent_id }) {
-	const { isCriticalOn, page, q, ...restFilters } = filters;
-	const { shipment_type } = filters;
+	const { isCriticalOn, page, q, shipment_type, ...restFilters } = filters;
 
-	const tabSpecificPayload = shipmentSpecificPayload[shipment_type];
+	const tabSpecificPayload = shipmentSpecificPayload[shipment_type][activeTab];
+
 	const tabs = TABS_CONFIG[shipment_type];
 
 	const isCriticalVisible = tabs.find((tab) => tab.name === activeTab).isCriticalVisible ?? false;
@@ -37,8 +37,8 @@ export default function getListBookingDeskShipmentsPayload({ filters, activeTab,
 	const payload = {
 		filters: {
 			state: shipmentStates[activeTab] || shipmentStates.in_progress,
-			...tabSpecificPayload[activeTab],
-			selected_agent_id,
+			...(tabSpecificPayload[filters.trade_type] || tabSpecificPayload),
+			...(selected_agent_id && { selected_agent_id }),
 			...(isCriticalVisible && isCriticalOn
 				&& { schedule_departure_less_than: threeDaysLater }),
 			...(q && { q }),

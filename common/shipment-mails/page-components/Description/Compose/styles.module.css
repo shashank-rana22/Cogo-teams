@@ -1,89 +1,99 @@
 .container {
-	margin: 10px 24px;
 	flex: 1;
 }
 
 .heading {
-	font-style: normal;
-	font-weight: 600;
-	font-size: 16px;
-	line-height: 150%;
 	display: flex;
 	align-items: center;
-
-	color: #000000;
-	margin-bottom: 12px;
+	margin: 16px 0 8px;
+	font-style: normal;
+	font-weight: 600;
+	color: #000;
 }
 
 .compose_container {
-	background: #ffffff;
-	box-shadow: 0px 0px 4px #cbd1f8;
+	padding: 4px 16px 16px;
+	background: #fff;
 	border-radius: 8px;
-	padding: 16px;
+	box-shadow: 0 0 4px #cbd1f8;
 
 	:global {
 		.ui_input_container {
+			width: 300px;
 			height: none;
 			border: none;
-			width: 300px;
 
 			.ui_input_control {
 				font-size: 12px;
 			}
 		}
-
 	}
+
 	.core-ui-rte-wrapper {
 		width: 100%;
 		border: none;
 	}
 }
 
+.text {
+	margin-right: 8px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
 .row {
 	display: flex;
 	align-items: center;
+	padding: 4px 8px;
+
+	/* background-color: antiquewhite; */
+	border-radius: 8px;
 }
 
 .suffix_button {
-	font-weight: 500;
-	font-size: 12px;
-	line-height: 150%;
-	border: none;
-	outline: none;
-	padding: 0px;
-	color: #333333;
-	margin-right: 24px;
-	background: none;
+	padding: 4px;
+	font-weight: 600;
+	color: red;
 	cursor: pointer;
+	border: none;
+	border-radius: 4px;
+	outline: none;
+
+	&:hover {
+		background: #fdebe9;
+	}
 }
 
 .error {
-	font-weight: 500;
 	font-size: 12px;
+	font-weight: 500;
 	line-height: 16px;
-
 	color: #cb6464;
 }
 
 .subject_preview {
 	display: flex;
 	align-items: center;
-	margin: 8px 0px;
+	padding: 4px 0 12px;
+	margin: 8px 0;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.subject_label {
+	font-weight: 600;
+	color: #828282;
 }
 
 .preview {
-	font-weight: 500;
+	margin-left: 4px;
 	font-size: 12px;
-	line-height: 16px;
-	color: #000000;
-	&.label {
-		margin: 0px;
-		font-weight: 700;
-		font-size: 14px;
-		line-height: 150%;
+	font-weight: 500;
+	color: #000;
+}
 
-		color: #333333;
-	}
+.mail_type {
+	padding: 8px 0;
+	border-bottom: 1px solid #e0e0e0;
 }
 
 .styled_editor {
@@ -94,11 +104,33 @@
 		}
 
 		.DraftEditor-editorContainer {
-			border: 1px solid black;
+			/* border: 1px solid black; */
 		}
 
 		.public-DraftEditorPlaceholder-root {
 			font-size: 14px;
 		}
 	}
+}
+
+.value {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 2px 8px;
+	margin-left: 12px;
+	font-size: 10px;
+	font-weight: 500;
+	color: #221f20;
+	background: #fffce6;
+	border-radius: 8px 0 0 8px;
+}
+
+.cancel {
+	padding: 2px 8px;
+	font-size: 10px;
+	font-weight: 600;
+	cursor: pointer;
+	background: #fef199;
+	border-radius: 0 4px 4px 0;
 }

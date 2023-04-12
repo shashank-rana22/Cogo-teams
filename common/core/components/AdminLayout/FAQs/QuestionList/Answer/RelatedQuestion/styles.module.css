@@ -1,0 +1,23 @@
+.title {
+	padding-top: 0.3%;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.related_question {
+	font-size: 15px;
+	font-style: normal;
+	font-weight: 900;
+	color: #221f20;
+	opacity: 0.5;
+}
+
+.related_question_clickable {
+	width: fit-content;
+	padding-bottom: 2px;
+	cursor: pointer;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}

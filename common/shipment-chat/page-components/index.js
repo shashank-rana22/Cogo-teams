@@ -8,24 +8,24 @@ import List from './List';
 import styles from './styles.module.css';
 
 function ShipmentChat({ setMessagesCount = () => { } }) {
-	const { user_id } = useSelector((s) => ({ user_id: s?.profile?.user.id }));
+	const { user_id } = useSelector((state) => ({ user_id: state?.profile?.user.id }));
 
 	const [show, setShow] = useState(false);
 	const [seenLoading, setSeenLoading] = useState(false);
 
 	const { msgSeen } = useSeen();
 
-	const MessageContentArr = [];
+	const messageContentArr = [];
 	Object.keys(msgSeen || {}).forEach((key) => {
 		const newObj = {
 			...msgSeen[key],
 			mainKey: key,
 		};
-		MessageContentArr.push(newObj);
+		messageContentArr.push(newObj);
 	});
 
 	let totalCount = [];
-	MessageContentArr?.map((count) => totalCount.push(count[user_id]));
+	messageContentArr?.map((count) => totalCount.push(count[user_id]));
 
 	totalCount = totalCount?.filter((item) => item !== undefined);
 
@@ -43,14 +43,14 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 				role="button"
 				tabIndex={0}
 				onClick={() => setShow(true)}
-				size={400}
 			>
-				{count > 0 && !show ? <div className={styles.circle}>{count || '5'}</div> : null}
-				<img
-					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipment-chat-icon.svg"
-					alt="chat"
-					style={{ width: 50, height: 50, margin: '0px 20px 8px 0px' }}
-				/>
+				{count > 0 && !show ? <div className={styles.circle}>{count}</div> : null}
+				<div className={styles.icon}>
+					<img
+						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipment-chat-icon.svg"
+						alt="chat"
+					/>
+				</div>
 			</div>
 
 			{show ? (
@@ -65,7 +65,7 @@ function ShipmentChat({ setMessagesCount = () => { } }) {
 					<Modal.Body>
 						<List
 							setShow={setShow}
-							MessageContentArr={MessageContentArr}
+							messageContentArr={messageContentArr}
 							user_id={user_id}
 							setSeenLoading={setSeenLoading}
 						/>

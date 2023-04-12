@@ -4,23 +4,25 @@ import Filters from '../../commons/Filters';
 import List from '../../commons/List';
 import Loader from '../../commons/Loader';
 import Tabs from '../../commons/Tabs';
-import { fcl_freight_local as tabs } from '../../config/TABS_CONFIG.json';
+import allTabs from '../../config/TABS_CONFIG.json';
 import useListBookingDeskShipments from '../../hooks/useListBookingDeskShipments';
 
 import Card from './Card';
 import styles from './styles.module.css';
 
+const { fcl_freight_local: tabs } = allTabs;
+
 export default function FCLLocalDesk({ stateProps = {} }) {
 	const { loading, data } = useListBookingDeskShipments({ stateProps, prefix: 'fcl_local' });
 
-	const isCardAnimatable = !!tabs.find((tab) => tab.name === stateProps.activeTab).isCriticalVisible;
+	const couldBeCardsCritical = !!tabs.find((tab) => tab.name === stateProps.activeTab).isCriticalVisible;
 
 	return (
 		<>
 			<div className={styles.header}>
 				<h1>Booking Desk</h1>
 
-				<ScopeSelect defaultValues={stateProps.scopeFilters} />
+				<ScopeSelect size="md" defaultValues={stateProps.scopeFilters} />
 			</div>
 
 			<Filters stateProps={stateProps} />
@@ -33,7 +35,7 @@ export default function FCLLocalDesk({ stateProps = {} }) {
 						data={data}
 						stateProps={stateProps}
 						Card={Card}
-						isCardAnimatable={isCardAnimatable}
+						couldBeCardsCritical={couldBeCardsCritical}
 					/>
 				)}
 			</div>

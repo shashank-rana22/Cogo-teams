@@ -8,9 +8,7 @@
 }
 
 .element {
-	/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 	:global {
-		/* stylelint-disable-next-line selector-class-pattern */
 		.react-datepicker__input-container {
 			width: 100%;
 
@@ -58,11 +56,6 @@
 			}
 		}
 
-		/* stylelint-disable-next-line selector-id-pattern */
-		#booking_rate_procurement_proof {
-			height: unset;
-		}
-
 		.ui_upload_droparea_heading {
 			font-size: 14px;
 			font-weight: 400;
@@ -73,6 +66,10 @@
 			font-size: 12px;
 			font-weight: 400;
 			color: #bdbdbd;
+		}
+
+		.ui_chips_container {
+			flex-wrap: wrap;
 		}
 	}
 }

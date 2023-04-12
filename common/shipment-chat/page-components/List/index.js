@@ -18,7 +18,7 @@ import styles from './styles.module.css';
 
 function List({
 	setShow = () => { },
-	MessageContentArr = [],
+	messageContentArr = [],
 	user_id = '',
 	setSeenLoading = () => { },
 }) {
@@ -26,23 +26,52 @@ function List({
 	const [id, setId] = useState();
 	const [showUnreadChat, setShowUnreadChat] = useState(false);
 	const [status, setStatus] = useState('active');
+	const [list, setList] = useState({
+		data       : [],
+		total      : 0,
+		total_page : 0,
+	});
+	const [filters, setFilters] = useState({ page: 1 });
+	const { page, q } = filters;
 
-	const {
-		ListData, page, total_page, filters, setFilters,
-		loading,
-	} = useGetShipmentChatList({ status });
+	const getListPayload = {
+		page,
+		filters: {
+			subscribe_user_id: user_id,
+			status,
+			q,
+		},
+	};
+	const states = { list, setList };
+	const { listData, total_page, loading } = useGetShipmentChatList({ payload: getListPayload, states });
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
-	const defaultChannel = ListData?.find((obj) => obj?.source_id === shipment_data?.id);
-	const data = defaultChannel ? defaultChannel?.id : ListData[0]?.id;
+	const defaultChannel = listData?.find((obj) => obj?.source_id === shipment_data?.id);
+	const channelId = defaultChannel ? defaultChannel?.id : listData[0]?.id;
 
-	const { loading: seenLoading } = useUpdateSeen({ channel_id: id, showUnreadChat });
-	const { get, personal_data } = useGetChannel({ channel_id: id });
+	const updateSeenPayload = { id, showUnreadChat };
+	const { loading: seenLoading } = useUpdateSeen({ payload: updateSeenPayload });
+
+	const getChannelPayload = { id };
+	const {
+		loadingChannel,
+		getChannel,
+		channel,
+	} = useGetChannel({ payload: getChannelPayload });
+
+	const get = {
+		loadingChannel,
+		refetch : getChannel,
+		data    : {
+			channelData    : channel?.summary || {},
+			primaryService : channel?.primary_service_detail,
+		},
+	};
 
 	let unSeenMsg = [];
-	unSeenMsg = MessageContentArr.filter((item) => item[user_id]);
+	unSeenMsg = messageContentArr.filter((item) => item[user_id]);
 	const unreadDataList = unSeenMsg?.map((obj) => obj?.channel_details);
-	const channelList = showUnreadChat ? unreadDataList : ListData;
+	const channelList = showUnreadChat ? unreadDataList : listData;
 
 	const handleClick = () => {
 		refOuter.current.scrollTop = 0;
@@ -50,8 +79,8 @@ function List({
 	};
 
 	useEffect(() => {
-		setId(data);
-	}, [data]);
+		setId(channelId);
+	}, [channelId]);
 
 	useEffect(() => {
 		setSeenLoading(seenLoading);
@@ -71,7 +100,7 @@ function List({
 	}, [loading, filters, setFilters, page]);
 
 	const renderContent = () => {
-		if (loading && isEmpty(ListData)) {
+		if (loading && isEmpty(listData)) {
 			return <ListLoader />;
 		}
 
@@ -101,7 +130,7 @@ function List({
 					</div>
 				</div>
 
-				{(MessageContentArr || []).map((obj) => (
+				{(messageContentArr || []).map((obj) => (
 					obj?.mainKey === item?.id && obj[user_id] > 0 && id !== item?.id ? (
 						<div className={styles.circle}>{obj[user_id]}</div>
 					) : null))}
@@ -134,7 +163,7 @@ function List({
 						{renderContent()}
 					</InfiniteScroll>
 
-					{loading && !isEmpty(ListData) && !showUnreadChat && (
+					{loading && !isEmpty(listData) && !showUnreadChat && (
 						<div className={styles.custom_loader}>Loading...</div>
 					)}
 				</div>
@@ -146,12 +175,11 @@ function List({
 					<img
 						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-initialstate.svg"
 						alt="empty"
-						style={{ width: '38em', height: '17em' }}
 					/>
 
-					<span style={{ fontSize: '18px', fontWeight: '600' }}>
+					<div className={styles.text}>
 						Welcome to Cogo Chat
-					</span>
+					</div>
 				</div>
 			) : (
 				channelList?.map((item) => (
@@ -163,7 +191,7 @@ function List({
 						sourceId={item?.source_id}
 						source={item?.source}
 						get={get}
-						personal_data={personal_data}
+						personalData={channel}
 					/>
 				))
 			)}

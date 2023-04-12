@@ -1,38 +1,28 @@
-import useAxios from 'axios-hooks';
+import { useLensRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-/**
- * Single utility hook to get mail from Cogo RPA using id of email
- */
+import toastApiError from '../utils/toastApiError';
 
-const useGetAttachements = (email_address, message_id) => {
-	const [getAttachementsApi, triggerGetMail] = useAxios(
-		{
-			url    : `${process.env.COGO_LENS_URL}/get_attachments`,
-			method : 'GET',
+const useGetAttachements = ({ payload }) => {
+	const { message_id = '' } = payload;
+
+	const [getAttachementsApi, triggerGetMail] = useLensRequest({
+		url    : 'get_attachments',
+		method : 'GET',
+		params : {
+			...payload,
 		},
-		{ manual: true },
-	);
+	}, { manual: true });
 
-	/**
-	 *
-	 * @param {String} id Id of mail
-	 */
 	const getAttachements = useCallback(() => {
 		(async () => {
 			try {
-				await triggerGetMail({
-					params: {
-						email_address,
-						message_id,
-					},
-				});
+				await triggerGetMail();
 			} catch (err) {
-				console.log(err);
+				toastApiError(err);
 			}
-		}
-		)();
-	}, [email_address, message_id, triggerGetMail]);
+		})();
+	}, [triggerGetMail]);
 
 	useEffect(() => {
 		if (message_id) {

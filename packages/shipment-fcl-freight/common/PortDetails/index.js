@@ -6,20 +6,23 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function PortDetails({ data = {}, primary_service = {} }) {
-	const { origin_main_port = '', destination_main_port = '' } = primary_service;
+	const {
+		origin_main_port = {},
+		destination_main_port = {},
+		origin_port = {},
+		destination_port = {},
+	} = primary_service;
 
 	if (isEmpty(data)) {
 		return null;
 	}
-
-	const { origin_port, destination_port } = primary_service;
 
 	const handleLocationDetails = (location, icdPortInfo) => (
 		<>
 			<div className={styles.port_code}>
 				<div className={` ${styles.code}`}>
 					(
-					{location?.port_code}
+					{location?.port_code || location?.postal_code}
 					)
 				</div>
 

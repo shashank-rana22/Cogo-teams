@@ -1,4 +1,3 @@
-/* eslint-disable react/no-danger */
 import { Button } from '@cogoport/components';
 import React from 'react';
 
@@ -7,7 +6,7 @@ import AttachementsUrl from './AttachementsUrl';
 import EmailTop from './EmailTop';
 import styles from './styles.module.css';
 
-function Thread({ content, allAttachements, emailData, onAction }) {
+function Thread({ content, emailData, onAction, allAttachements }) {
 	const externalAttachements = allAttachements.filter((att) => !att.isInline);
 	const cc = emailData?.ccRecipients || [];
 	const to = emailData?.toRecipients || [];
@@ -16,18 +15,23 @@ function Thread({ content, allAttachements, emailData, onAction }) {
 	const from = emailData?.from;
 	const showReply = !!from && !isFromRpa;
 	const showReplyAll = combinedLength > 1 && !isFromRpa;
+
 	return (
 		<div className={styles.container}>
+
 			<EmailTop data={emailData || {}} />
+
 			{isFromRpa ? (
 				<AttachementsUrl externalAttachements={emailData?.file_url || []} />
 			) : (
 				<Attachements externalAttachements={externalAttachements} />
 			)}
+
 			<div
 				className={styles.email_container}
 				dangerouslySetInnerHTML={{ __html: content }}
 			/>
+
 			<div className={styles.footer}>
 				<div className={styles.button_div}>
 					{showReplyAll ? (
@@ -39,6 +43,7 @@ function Thread({ content, allAttachements, emailData, onAction }) {
 							Reply All
 						</Button>
 					) : null}
+
 					{showReply ? (
 						<Button
 							className="secondary md"
@@ -48,6 +53,7 @@ function Thread({ content, allAttachements, emailData, onAction }) {
 							Reply
 						</Button>
 					) : null}
+
 					<Button
 						className="secondary md"
 						onClick={() => onAction(emailData, 'forward')}

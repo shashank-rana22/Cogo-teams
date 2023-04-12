@@ -6,25 +6,33 @@
 .chat_icon {
 	z-index: 100;
 	display: flex;
-	justify-content: center;
 	align-items: center;
-	border-radius: 50%;
+	justify-content: center;
 	cursor: pointer;
+	border-radius: 50%;
+}
+
+.icon {
+	display: flex;
+	justify-content: center;
+	width: 50px;
+	height: 50px;
+	margin-bottom: 8px;
 }
 
 .circle {
-	background-color: #f68b21;
-	color: #ffffff;
 	position: absolute;
-	width: fit-content;
-	height: 20px;
-	font-size: 11px;
-	padding: 2px 4px;
-	top: -5px;
-	right: 0;
+	top: 16px;
+	right: 20px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	width: fit-content;
+	height: 20px;
+	padding: 2px 4px;
+	font-size: 11px;
+	color: #fff;
+	background-color: #f68b21;
 	border-radius: 10px;
 }
 
@@ -34,9 +42,9 @@
 	:global {
 		.ui_modal_body_container {
 			min-height: 472px;
+			padding: 0;
 			border-top: none !important;
 			border-bottom: none !important;
-			padding: 0px;
 		}
 	}
 }

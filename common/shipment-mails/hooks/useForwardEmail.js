@@ -1,52 +1,25 @@
 import { Toast } from '@cogoport/components';
-import useAxios from 'axios-hooks';
-/**
- * Single utility hook to Forward mails from Cogo RPA
- */
+import { useLensRequest } from '@cogoport/request';
 
-const useForwardEmail = () => {
-	const [forwardMailApi, triggerForwardMail] = useAxios(
-		{
-			url    : `${process.env.COGO_LENS_URL}/forward_mail`,
-			method : 'POST',
-		},
-		{ manual: true },
-	);
+import toastApiError from '../utils/toastApiError';
 
-	/**
-	 *
-	 * @param {Object} param0
-	 */
-	const forwardEmail = async ({
-		sender = '',
-		toUserEmail = [],
-		ccrecipients = [],
-		subject,
-		content,
-		attachments,
-		msgId,
-		userId,
-		onCreate,
-	}) => {
+const useForwardEmail = ({ refetch = () => {} }) => {
+	const [forwardMailApi, triggerForwardMail] = useLensRequest({
+		url    : 'forward_mail',
+		method : 'POST',
+	}, { manual: true });
+
+	const forwardEmail = async ({ payload }) => {
 		try {
 			await triggerForwardMail({
 				data: {
-					sender,
-					toUserEmail,
-					ccrecipients,
-					subject,
-					content,
-					attachments,
-					msgId,
-					userId: userId || sender,
+					...payload,
 				},
 			});
 			Toast.success('Email Sent');
-			if (onCreate) {
-				onCreate();
-			}
+			refetch();
 		} catch (err) {
-			Toast.error(err?.data);
+			toastApiError(err);
 		}
 	};
 

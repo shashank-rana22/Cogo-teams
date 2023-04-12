@@ -6,16 +6,10 @@ import styles from './styles.module.css';
 
 export const renderValue = (label, detail) => {
 	const { packages = [] } = detail || {};
-	const isAir = detail?.service_type === 'air_freight_service'
-		|| detail?.service_type === 'domestic_air_freight_service';
-	const isLTL = detail?.service_type === 'ltl_freight_service'
-		|| detail?.services?.includes('ltl_freight_service');
 
 	const valueForInput = Array.isArray(packages) && packages?.length > 0 ? packages[0] : null;
 
-	const chargableWeight = isLTL
-		? detail?.chargable_weight || detail?.weight
-		: Math.max(detail.volume * 166.67, detail?.weight);
+	const chargableWeight = Math.max(detail.volume * 166.67, detail?.weight);
 
 	const dimension = valueForInput?.length
 		? `${valueForInput?.length}cm X ${valueForInput?.width}cm X ${valueForInput?.height}cm,`
@@ -27,10 +21,7 @@ export const renderValue = (label, detail) => {
 		)}`
 		: '';
 
-	const lr_number = detail?.lr_number;
-	const eway_bill_number = detail?.eway_bill_number;
-
-	const volume = ` ${detail.volume} ${isLTL ? 'cc' : 'cbm'}`;
+	const volume = ` ${detail.volume} cbm`;
 
 	const packageDetails = () => {
 		if (packages?.length > 1) {
@@ -51,7 +42,7 @@ export const renderValue = (label, detail) => {
 					)}
 				>
 					<div className="cargo-details-info">
-						{`Package: ${inputValue} + ${packages?.length - 1
+						{`Package: ${inputValue} + ${packages.length - 1
 						} more`}
 
 					</div>
@@ -97,10 +88,10 @@ export const renderValue = (label, detail) => {
 
 	switch (label) {
 		case 'container_size':
-			if (detail.container_size.includes('HC')) {
-				return detail.container_size.replace('HC', 'ft HC');
+			if (detail?.container_size?.includes('HC')) {
+				return detail?.container_size?.replace('HC', ' ft HC');
 			}
-			return `${detail.container_size || '--'}ft`;
+			return `${detail?.container_size || '--'}ft`;
 		case 'containers_count':
 			if (!detail.containers_count) {
 				return null;
@@ -155,33 +146,6 @@ export const renderValue = (label, detail) => {
 				? ''
 				: `, Chargeable Weight: ${chargableWeight.toFixed(2)} kg`
 			}`;
-
-		case 'lr_number':
-			if (isLTL) {
-				return `Docket Number : ${lr_number || ''}`;
-			}
-			return '';
-
-		case 'master_airway_bill_number':
-			if (isAir) {
-				return `MAWB Number: ${detail?.master_airway_bill_number || ''}`;
-			}
-			return '';
-		case 'house_airway_bill_number':
-			if (isAir) {
-				return `HAWB Number: ${detail?.house_airway_bill_number || ''}`;
-			}
-			return '';
-		case 'eway_bill_number':
-			if (isLTL) {
-				return `Eway Bill Number : ${eway_bill_number || ''}`;
-			}
-			return '';
-		case 'airline':
-			if (isAir) {
-				return `Airline : ${detail?.airline?.business_name || ''}`;
-			}
-			return '';
 		case 'weight':
 			return ` ${detail.weight} kgs`;
 		case 'haulage_type':
@@ -262,9 +226,6 @@ export const renderValue = (label, detail) => {
 			return `${detail?.hs_code?.hs_code} - ${detail?.hs_code?.name}`;
 		case 'delivery_date':
 			return format(detail?.delivery_date, 'dd MMM yyyy');
-		case 'container_load_type':
-			return startCase(detail?.container_load_type);
-
 		default:
 			return detail[label] || null;
 	}

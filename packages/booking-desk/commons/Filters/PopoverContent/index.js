@@ -33,14 +33,16 @@ export default function PopoverContent({ stateProps, setShowPopover }) {
 
 	const actionButtons = [
 		{
-			label    : 'Clear Filters',
-			onClick  : clearFilters,
-			disabled : !isFiltersApplied && !isFiltersChanged,
+			label     : 'Clear',
+			onClick   : clearFilters,
+			disabled  : !isFiltersApplied && !isFiltersChanged,
+			themeType : 'secondary',
 		},
 		{
-			label    : 'Apply Filters',
-			onClick  : () => applyPopoverFilters({ stateProps, formValues, setShowPopover }),
-			disabled : !isFiltersChanged,
+			label     : 'Apply',
+			onClick   : () => applyPopoverFilters({ stateProps, formValues, setShowPopover }),
+			disabled  : !isFiltersChanged,
+			themeType : 'primary',
 		},
 	];
 
@@ -53,8 +55,7 @@ export default function PopoverContent({ stateProps, setShowPopover }) {
 			<div className={styles.action_button_container}>
 				{actionButtons.map((button) => (
 					<Button
-						themeType="secondary"
-						size="sm"
+						size="md"
 						className={`${styles.action_button} ${styles.disabled_button}`}
 						{...button}
 					>

@@ -1,10 +1,11 @@
-import { Popover } from '@cogoport/components';
+import { Modal, Popover, cl } from '@cogoport/components';
 import { IcMDocument, IcMArrowDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
 function Attachements({ externalAttachements }) {
+	const [showPreview, setShowPreview] = useState(null);
 	const [showPopover, setShowPopover] = useState(false);
 	function base64ToArrayBuffer(base64) {
 		const binaryString = window.atob(base64);
@@ -37,10 +38,20 @@ function Attachements({ externalAttachements }) {
 			<div className={styles.row}>
 				{externalAttachements.map((item) => (
 					<div className={styles.item} key={item.id}>
-						<div className={styles.row} role="button" tabIndex={0} onClick={() => setPreview(item)}>
-							<IcMDocument />
-							<span className={styles.item_name}>{item.name}</span>
+						<div
+							className={cl`${styles.row} ${styles.doc}`}
+							role="button"
+							tabIndex={0}
+							onClick={() => setShowPreview(item)}
+						>
+							<IcMDocument style={{ width: '1.5em', height: '1.5em' }} />
+							<div
+								className={cl`${styles.item_name} ${styles.name}`}
+							>
+								{item.name}
+							</div>
 						</div>
+
 						<Popover
 							theme="light"
 							interactive
@@ -48,10 +59,11 @@ function Attachements({ externalAttachements }) {
 							content={(
 								<div>
 									<div
+										className={styles.action}
 										role="button"
 										tabIndex={0}
-										className={styles.action}
 										onClick={() => {
+											setShowPreview(item);
 											setShowPopover(false);
 										}}
 									>
@@ -73,7 +85,7 @@ function Attachements({ externalAttachements }) {
 							onClickOutside={() => setShowPopover(false)}
 						>
 							<div
-								className={styles.row}
+								className={cl`${styles.row} ${styles.icon}`}
 								role="button"
 								tabIndex={0}
 								onClick={() => setShowPopover(true)}
@@ -86,7 +98,23 @@ function Attachements({ externalAttachements }) {
 					</div>
 				))}
 			</div>
-
+			{showPreview ? (
+				<Modal
+					show={showPreview}
+					onClose={() => setShowPreview(null)}
+					className="primary lg"
+					onOuterClick={() => setShowPreview(null)}
+					closable={false}
+				>
+					<object
+						height="700px"
+						width="800px"
+						aria-label="Doc Preview"
+						data={`data:${externalAttachements[0].contentType};base64,
+						${externalAttachements[0].contentBytes}`}
+					/>
+				</Modal>
+			) : null}
 		</div>
 	);
 }

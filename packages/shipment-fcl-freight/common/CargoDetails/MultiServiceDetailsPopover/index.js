@@ -28,16 +28,7 @@ function MultiServiceDetailsPopover({
 			interactive
 			content={renderBody()}
 		>
-			<div
-				style={{
-					background : 'none',
-					padding    : 0,
-					color      : '#366EFD',
-					border     : 'none',
-					height     : 'auto',
-					fontSize   : '12px',
-				}}
-			>
+			<div className={styles.tooltip_customise}>
 				{children}
 			</div>
 

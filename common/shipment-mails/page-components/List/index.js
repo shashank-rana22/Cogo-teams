@@ -1,20 +1,30 @@
 import { Input } from '@cogoport/components';
 import { IcMSearchlight, IcMRefresh } from '@cogoport/icons-react';
-import { React } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { React, useState } from 'react';
 
+import EmptyState from '../../common/EmptyState';
 import useGetMails from '../../hooks/useGetMails';
 
 import EmailCard from './EmailCard';
+import Loader from './ListLoader';
 import styles from './styles.module.css';
 
-function Emails({ activeBox, RECIEVE_EMAIL, onMailClick, source, filters }) {
-	const { mailApi, page, setPage, search, setSearch, getEmails } = useGetMails(
-		RECIEVE_EMAIL,
-		activeBox,
-		10,
+function Emails({ activeBox, RECIEVE_EMAIL, onMailClick, source, filters, activeMail }) {
+	const [page, setPage] = useState(1);
+	const [search, setSearch] = useState(undefined);
+
+	const payload = {
+		email_address : RECIEVE_EMAIL,
+		foldername    : activeBox,
+		page,
+		search,
+		page_limit    : 10,
 		source,
 		filters,
-	);
+	};
+
+	const { mailApi, getEmails } = useGetMails({ payload });
 
 	const handleRefresh = () => {
 		if (page === 1) {
@@ -31,22 +41,23 @@ function Emails({ activeBox, RECIEVE_EMAIL, onMailClick, source, filters }) {
 				<Input
 					className="primary md"
 					value={search}
-					style={{ width: '284px' }}
-					placeholder="Search..."
+					placeholder="Search a mail"
 					suffix={<IcMSearchlight style={{ fontSize: '1rem' }} />}
 					onChange={(e) => {
-						setSearch(e.target.value);
+						setSearch(e);
 					}}
 				/>
 			</div>
+
 			<div className={styles.line} />
+
 			<div className={styles.pagination_container}>
 				<IcMRefresh
 					style={{ marginRight: 10, cursor: 'pointer' }}
 					onClick={handleRefresh}
 				/>
 				<div
-					className={page > 1 ? 'primary  sm text' : 'secondary  sm text'}
+					className={page > 1 ? 'primary sm text' : 'secondary sm text'}
 					onClick={page > 1 ? () => setPage(page - 1) : null}
 					disabled={page === 1}
 				>
@@ -63,13 +74,14 @@ function Emails({ activeBox, RECIEVE_EMAIL, onMailClick, source, filters }) {
 					Next &gt;&gt;
 				</div>
 			</div>
+
 			<div className={styles.card_container}>
 				{loading ? (
-					<p>loading emails .....</p>
+					<Loader />
 				) : (
-					(mails || []).map((item) => <EmailCard data={item} onClick={onMailClick} />)
+					(mails || []).map((item) => <EmailCard data={item} onClick={onMailClick} activeMail={activeMail} />)
 				)}
-				{/* {!loading && isEmpty(list) && <EmptyState />} */}
+				{!loading && isEmpty(mails) && <EmptyState />}
 			</div>
 		</div>
 	);

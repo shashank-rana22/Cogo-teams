@@ -1,17 +1,17 @@
-// import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { Toast } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
+import toastApiError from '../utils/toastApiError';
+
+const geo = getGeoConstants();
+
 const useUpdateShipmentAdditionalService = ({
 	item = {},
-	setAddRate = () => {},
 	refetch = () => {},
-	onCancel = () => {},
 	showIp = false,
-	setShowIp = () => {},
 }) => {
-	// const geo = getGeoConstants();
 	const [remarks, setRemarks] = useState(null);
 
 	const [{ loading }, trigger] = useRequest({
@@ -21,28 +21,18 @@ const useUpdateShipmentAdditionalService = ({
 
 	const handleSubmit = async (data) => {
 		try {
-			const res = await trigger({
+			await trigger({
 				data: {
 					...data,
 					pending_task_id: showIp ? undefined : item?.pending_task_id,
 				},
 			});
 
-			if (res.status === 200) {
-				Toast.success('Service Updated successfully');
-
-				if (showIp) {
-					setShowIp(false);
-				}
-				setRemarks(null);
-				setAddRate(null);
-
-				onCancel();
-
-				refetch();
-			}
+			Toast.success('Service Updated successfully');
+			setRemarks(null);
+			refetch();
 		} catch (err) {
-			Toast.error(err?.data);
+			toastApiError(err);
 		}
 	};
 
@@ -116,32 +106,35 @@ const useUpdateShipmentAdditionalService = ({
 		handleSubmit(payload);
 	};
 
-	const handleInvoicingParty = (ba) => {
-		if (!ba) {
+	const handleInvoicingParty = (billing_address) => {
+		if (!billing_address) {
 			Toast.error('Please select invoicing party');
 			return;
 		}
+
+		const {
+			tax_number, poc, pincode, organization_country_id, organization_id, is_sez, address,
+			organization_trade_party_id, business_name, name, invoice_currency, registration_number,
+		} = billing_address;
 
 		const payload = {
 			id                 : item.serviceListItem.id,
 			invoice_preference : {
 				billing_address: {
-					tax_number                  : ba.tax_number,
-					poc                         : ba.poc,
-					pincode                     : ba.pincode,
-					organization_id             : ba.organization_id,
-					organization_country_id     : ba.organization_country_id,
-					name                        : ba.name,
-					is_sez                      : ba.is_sez,
-					business_name               : ba.business_name,
-					address                     : ba.address,
-					invoice_currency            : ba.invoice_currency || 'INR',
-					// invoice_currency            : ba.invoice_currency || geo.country.currency.code,
-					organization_trade_party_id : ba.organization_trade_party_id,
-					registration_number         : ba.registration_number,
+					tax_number,
+					poc,
+					pincode,
+					organization_id,
+					organization_country_id,
+					name,
+					is_sez,
+					business_name,
+					address,
+					invoice_currency: invoice_currency || geo.country.currency.code,
+					organization_trade_party_id,
+					registration_number,
 				},
-				// invoice_currency: ba.invoice_currency || geo.country.currency.code,
-				invoice_currency: ba.invoice_currency || 'INR',
+				invoice_currency: invoice_currency || geo.country.currency.code,
 			},
 		};
 
@@ -161,7 +154,15 @@ const useUpdateShipmentAdditionalService = ({
 				onComplete();
 			}
 		} catch (err) {
-			Toast.error(err?.data);
+			toastApiError(err);
+		}
+	};
+
+	const cancelAdditionalService = async (payload) => {
+		try {
+			await handleSubmit(payload);
+		} catch (err) {
+			toastApiError(err);
 		}
 	};
 
@@ -175,6 +176,7 @@ const useUpdateShipmentAdditionalService = ({
 		requestRateFromTechops,
 		handleInvoicingParty,
 		updateBillingInfo,
+		cancelAdditionalService,
 		remarks,
 		setRemarks,
 		loading,

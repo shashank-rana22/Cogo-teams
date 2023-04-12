@@ -1,62 +1,62 @@
 .ellipsis_text {
-    display: inline-block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .popover_children {
-    border-radius: 4px;
+	border-radius: 4px;
 
-    .view_type {
-        display: flex;
-        align-items: center;
-        margin: 2px;
-    }
+	.view_type {
+		display: flex;
+		align-items: center;
+		margin: 2px;
+	}
 
-    .agent_icon {
-        fill: var(--color-primary-error-red-2);
-    }
+	.agent_icon {
+		fill: var(--color-primary-error-red-2);
+	}
 
-    &.sm {
-        padding: 2px 4px;
-        font-size: var(--font-size-sm);
+	&.sm {
+		padding: 2px 4px;
+		font-size: var(--font-size-sm);
 
-        .ellipsis_text {
-            max-width: 70px;
-        }
+		.ellipsis_text {
+			max-width: 70px;
+		}
 
-        .agent_icon {
-            width: 1.4em;
-            height: 1.4em;
-        }
-    }
+		.agent_icon {
+			width: 1.4em;
+			height: 1.4em;
+		}
+	}
 
-    &.md {
-        padding: 4px 6px;
-        font-size: var(--font-size-md);
+	&.md {
+		padding: 4px 6px;
+		font-size: var(--font-size-md);
 
-        .ellipsis_text {
-            max-width: 110px;
-        }
+		.ellipsis_text {
+			max-width: 110px;
+		}
 
-        .agent_icon {
-            width: 1.6em;
-            height: 1.6em;
-        }
-    }
+		.agent_icon {
+			width: 1.6em;
+			height: 1.6em;
+		}
+	}
 
-    &.lg {
-        padding: 6px 8px;
-        font-size: var(--font-size-lg);
+	&.lg {
+		padding: 6px 8px;
+		font-size: var(--font-size-lg);
 
-        .ellipsis_text {
-            max-width: 150px;
-        }
-		
-        .agent_icon {
-            width: 1.8em;
-            height: 1.8em;
-        }
-    }
+		.ellipsis_text {
+			max-width: 150px;
+		}
+
+		.agent_icon {
+			width: 1.8em;
+			height: 1.8em;
+		}
+	}
 }

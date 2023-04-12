@@ -52,7 +52,7 @@ function FieldArray({
 						onClick={() => append(childEmptyValues)}
 					>
 						+
-						{' '}
+						&nbsp;
 						{buttonText}
 					</Button>
 				) : null}

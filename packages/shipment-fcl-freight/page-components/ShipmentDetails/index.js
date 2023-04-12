@@ -1,45 +1,30 @@
-import { ShipmentDetailContext } from '@cogoport/context';
-import { ShipmentChat } from '@cogoport/shipment-chat';
-import React, { useMemo } from 'react';
+import { dynamic } from '@cogoport/next';
+import React from 'react';
 
-import useGetShipment from '../../hooks/useGetShipment';
-import useGetShipmentTimeLine from '../../hooks/useGetShipmentTimeline';
-import useListShipmentServices from '../../hooks/useListShipmentServices';
+import { useStakeholderCheck } from '../../hooks/useStakeholderCheck';
 
-import ShipmentInfo from './ShipmentInfo';
-import styles from './styles.module.css';
-import Tab from './Tabs';
-import Timeline from './TimeLine';
-import TopBar from './TopBar';
+const Kam = dynamic(() => import('./StakeholdersView/Kam'), { ssr: false });
+const Superadmin = dynamic(() => import('./StakeholdersView/Superadmin'), { ssr: false });
 
 function ShipmentDetails() {
-	const { get } = useGetShipment();
-	const { shipment_data } = get;
-	const { servicesGet } = useListShipmentServices({ shipment_data });
+	const { activeStakeholder } = useStakeholderCheck();
 
-	const {
-		loading: shipmentTimelineLoading,
-		getShipmentTimeline, timelineData,
-	} = useGetShipmentTimeLine({ shipment_data });
-
-	const contextValues = useMemo(() => ({
-		...get,
-		...servicesGet,
-		getShipmentTimeline,
-	}), [get, servicesGet, getShipmentTimeline]);
-
-	return (
-		<ShipmentDetailContext.Provider value={contextValues}>
-			<div className={styles.header}>
-				<ShipmentInfo />
-				<ShipmentChat />
-			</div>
-
-			<TopBar />
-			<Timeline timelineData={timelineData} loading={shipmentTimelineLoading} />
-			<Tab shipment_data={shipment_data} />
-		</ShipmentDetailContext.Provider>
-	);
+	switch (activeStakeholder) {
+		case 'Kam':
+			return <Kam />;
+		case 'Superadmin':
+		case 'Admin':
+		case 'TechSuperadmin':
+			return <Superadmin />;
+		default:
+			return (
+				<h1
+					style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+				>
+					You are not allowed to visit this page!
+				</h1>
+			);
+	}
 }
 
 export default ShipmentDetails;

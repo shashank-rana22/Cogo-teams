@@ -1,44 +1,61 @@
-import { RTE } from '@cogoport/components';
-import { useForm, handleError, InputController } from '@cogoport/forms';
-// import useEditorState from '@cogoport/front/rich-text/useEditorState';
+import { RTE, Toast } from '@cogoport/components';
+import { useForm, handleError } from '@cogoport/forms';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import useGetEntityStakeholderMappings from '../../../hooks/useGetEntityStakeholderMappings';
-import useResetErrors from '../../../hooks/useResetErrors';
 
 import Footer from './Footer';
 import InputParam from './Input';
 import SelectParam from './Select';
 import styles from './styles.module.css';
 
-const getFormattedValues = (emailData, action) => {
+const geo = getGeoConstants();
+
+const getFormattedValues = (
+	emailData,
+	action,
+	userEmailArray,
+	setUserEmailArray,
+	ccEmailArray,
+	setCcEmailArray,
+	deleteEmail,
+) => {
 	const sender = emailData?.sender?.emailAddress?.address;
 
 	if (action === 'forward' || action === 'send') {
 		return {
-			toUserEmail  : [],
-			ccrecipients : [],
+			toUserEmail  : '',
+			ccrecipients : '',
 			subject      : emailData.subject || undefined,
 		};
 	}
-	if (action === 'reply') {
+	if (action === 'reply' && userEmailArray?.length === 0 && !deleteEmail) {
+		setUserEmailArray([
+			sender,
+		]);
 		return {
-			toUserEmail  : sender,
-			ccrecipients : [],
+			toUserEmail  : '',
+			ccrecipients : '',
 			subject      : emailData.subject,
 		};
 	}
+
 	const cc = (emailData?.ccRecipients || [])
-		.map((item) => item?.emailAddress?.address)
-		.join(', ');
+		.map((item) => item?.emailAddress?.address);
+
 	const to = (emailData?.toRecipients || [])
-		.map((item) => item?.emailAddress?.address)
-		.join(',');
+		.map((item) => item?.emailAddress?.address);
+
+	if (userEmailArray?.length === 0 && ccEmailArray?.length === 0 && !deleteEmail) {
+		setUserEmailArray([...to, sender]);
+		setCcEmailArray(cc);
+	}
 
 	return {
-		toUserEmail  : `${sender}, ${to}`,
-		ccrecipients : cc,
+		toUserEmail  : '',
+		ccrecipients : '',
 		subject      : emailData.subject,
 	};
 };
@@ -51,57 +68,107 @@ function Compose({
 	pre_subject_text,
 	subject_position,
 }) {
-	const defaultValues = getFormattedValues(composingEmail, action);
-	const defaultCC = defaultValues.ccrecipients.length > 0;
-	const [isCC, setIsCC] = useState(defaultCC);
 	const [isBcc, setIsBcc] = useState(false);
-	const [errors, setErrors] = useState({});
-	const [editorState, setEditorState] = useState();
-	const { options } = useGetEntityStakeholderMappings();
+	const [userEmailArray, setUserEmailArray] = useState([]);
+	const [ccEmailArray, setCcEmailArray] = useState([]);
+	const [bccEmailArray, setBccEmailArray] = useState([]);
+	const [deleteEmail, setDeleteEmail] = useState(false);
+	const [editorState, setEditorState] = useState('');
+
+	const { getEntityStakeholderApi } = useGetEntityStakeholderMappings();
+	const options = (getEntityStakeholderApi.data || []).map((item) => ({
+		label : item.description,
+		value : item.description,
+	}));
+
+	options.push({ label: 'Other', value: 'Other' });
+
+	const defaultValues = getFormattedValues(
+		composingEmail,
+		action,
+		userEmailArray,
+		setUserEmailArray,
+		ccEmailArray,
+		setCcEmailArray,
+		deleteEmail,
+	);
 
 	const {
 		control,
 		handleSubmit,
-		formState: { errors: errorVal },
+		formState: { errors },
+		setValue,
 		watch,
 	} = useForm({ defaultValues });
 
 	let actualSubject = watch('subject');
 	const entity_type = watch('entity_type');
+	const userEmail = watch('toUserEmail');
+	const ccEmail = watch('ccrecipients');
+	const bccEmail = watch('bccrecipients');
 
 	if (pre_subject_text && subject_position === 'prefix') {
 		actualSubject = `${pre_subject_text} / ${entity_type} / ${actualSubject}`;
 	} else {
-		actualSubject = `${actualSubject} / ${pre_subject_text} / ${entity_type}`;
+		actualSubject = `${actualSubject} / ${pre_subject_text || ''} / ${entity_type}`;
 	}
-
-	useResetErrors({ errors, setErrors, currentStateErrors: errorVal });
 
 	const suffix = (
 		<div className={styles.row}>
-			<div
-				className={styles.suffix_button}
-				role="button"
-				tabIndex={0}
-				onClick={() => setIsCC(!isCC)}
-			>
-				cc
-			</div>
-			<div
-				className={styles.suffix_button}
-				role="button"
-				tabIndex={0}
-				onClick={() => setIsBcc(!isBcc)}
-			>
-				bcc
-			</div>
+			{!isBcc
+			&& (
+				<div
+					className={styles.suffix_button}
+					role="button"
+					tabIndex={0}
+					onClick={() => setIsBcc(!isBcc)}
+				>
+					Bcc
+				</div>
+			)}
 		</div>
 	);
+	const handleClick = (e) => {
+		if ((e.keyCode === 13 || e.keyCode === 32) && userEmail) {
+			if (!geo.regex.EMAIL.test(userEmail)) {
+				Toast.error('Please Enter Valid Email Address');
+			} else {
+				setUserEmailArray([
+					...userEmailArray,
+					userEmail,
+				]);
+				setValue('toUserEmail', '');
+			}
+		}
+		if ((e.keyCode === 13 || e.keyCode === 32) && ccEmail) {
+			if (!geo.regex.EMAIL.test(ccEmail)) {
+				Toast.error('Please Enter Valid Email Address');
+			} else {
+				setCcEmailArray([
+					...ccEmailArray,
+					ccEmail,
+				]);
+				setValue('ccrecipients', '');
+			}
+		}
+		if ((e.keyCode === 13 || e.keyCode === 32) && bccEmail) {
+			if (!geo.regex.EMAIL.test(bccEmail)) {
+				Toast.error('Please Enter Valid Email Address');
+			} else {
+				setBccEmailArray([
+					...bccEmailArray,
+					bccEmail,
+				]);
+				setValue('bccrecipients', '');
+			}
+		}
+	};
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
 				<IcMArrowBack
+					className={styles.back_icon}
 					style={{ marginRight: 10, cursor: 'pointer' }}
 					onClick={() => setComposingEmail(null)}
 				/>
@@ -112,82 +179,87 @@ function Compose({
 
 				<div className={styles.user_email}>
 					<InputParam
-						prefix="To:"
+						prefix="To :"
 						suffix={suffix}
 						name="toUserEmail"
+						onKeyDown={(e) => handleClick(e)}
+						emailValue={userEmailArray}
+						setEmailValue={setUserEmailArray}
+						setValue={setValue}
 						control={control}
-						placeholder="put comma (,) seperated multiple emails"
-						rules={{ required: { value: true, message: 'Email is required' } }}
+						setDeleteEmail={setDeleteEmail}
+						placeholder="Type here..."
+						rules={{ required: 'Emails are required' }}
 					/>
 					{errors?.toUserEmail ? (
 						<div className={styles.error}>
-							{handleError(
-								{ rules: { required: 'Emails are required' }, error: errors?.toUserEmail },
-								true,
-							)}
+							{handleError({ error: errors?.toUserEmail })}
+
 						</div>
 					) : null}
 				</div>
 
-				{isCC ? (
+				<div>
 					<InputParam
-						prefix="Cc:"
+						prefix="Cc :"
 						name="ccrecipients"
 						control={control}
-						placeholder="put comma (,) seperated multiple emails"
+						placeholder="Type here..."
+						onKeyDown={(e) => handleClick(e)}
+						emailValue={ccEmailArray}
+						setEmailValue={setCcEmailArray}
+						setValue={setValue}
+						setDeleteEmail={setDeleteEmail}
 					/>
-				) : null}
-				{errors?.ccrecipients ? (
-					<div className={styles.error}>
-						{handleError(
-							{ rules: { required: 'Emails are required' }, error: errors?.ccrecipients },
-							true,
-						)}
-					</div>
-				) : null}
+				</div>
+
 				{isBcc
 					? (
-						<InputController
-							prefix="Bcc:"
+						<InputParam
+							prefix="Bcc :"
 							name="bccrecipients"
 							control={control}
-							placeholder="put comma (,) seperated multiple emails"
+							placeholder="Type here..."
+							onKeyDown={(e) => handleClick(e)}
+							emailValue={bccEmailArray}
+							setEmailValue={setBccEmailArray}
+							setValue={setValue}
+							setDeleteEmail={setDeleteEmail}
 						/>
 					)
 					: null}
 
 				<InputParam
-					prefix="Subject:"
+					prefix="Subject :"
 					name="subject"
 					placeholder="Enter subject..."
 					control={control}
+					rules={{ required: 'Subject is required' }}
 				/>
 				{errors?.subject ? (
 					<div className={styles.error}>
-						{handleError(
-							{ rules: { required: 'Emails are required' }, error: errors?.toUserEmail },
-							true,
-						)}
+						{handleError({ error: errors?.subject })}
 					</div>
 				) : null}
-				<SelectParam
-					prefix="Mail Type:"
-					name="entity_type"
-					placeholder="Select Mail type..."
-					control={control}
-					options={options}
-					rules={{ required: { value: true, message: 'Entity Type is required' } }}
-				/>
-				{errors?.entity_type ? (
-					<div className={styles.error}>
-						{handleError(
-							{ rules: { required: 'Emails are required' }, error: errors?.toUserEmail },
-							true,
-						)}
-					</div>
-				) : null}
+
+				<div className={styles.mail_type}>
+					<SelectParam
+						prefix="Mail Type :"
+						name="entity_type"
+						placeholder="Select Mail type..."
+						control={control}
+						options={options}
+						rules={{ required: 'Entity Type is required' }}
+					/>
+					{errors?.entity_type ? (
+						<div className={styles.error}>
+							{handleError({ error: errors?.mail_type })}
+						</div>
+					) : null}
+				</div>
+
 				<div className={styles.subject_preview}>
-					<div className={styles.preview}>Subject Preview :</div>
+					<div className={styles.subject_label}>Subject Preview :</div>
 					<div className={styles.preview}>
 						{actualSubject}
 					</div>
@@ -195,10 +267,7 @@ function Compose({
 
 				{errors?.subject ? (
 					<div className={styles.error}>
-						{handleError(
-							{ rules: { required: 'Emails are required' }, error: errors?.toUserEmail },
-							true,
-						)}
+						{handleError({ error: errors?.subject })}
 					</div>
 				) : null}
 
@@ -218,10 +287,12 @@ function Compose({
 					subject="Testing the flow wait"
 					COMPOSE_EMAIL={COMPOSE_EMAIL}
 					handleSubmit={handleSubmit}
-					onError={(err) => setErrors({ ...err })}
 					action={action}
 					composingEmail={composingEmail}
 					onCreate={() => setComposingEmail(null)}
+					userEmailArray={userEmailArray}
+					ccEmailArray={ccEmailArray}
+					bccEmailArray={bccEmailArray}
 				/>
 			</div>
 		</div>

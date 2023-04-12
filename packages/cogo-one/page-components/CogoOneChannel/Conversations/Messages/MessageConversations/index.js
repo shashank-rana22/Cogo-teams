@@ -50,7 +50,7 @@ function MessageConversations({
 	sendCommunicationTemplate = () => {},
 	communicationLoading = false,
 	lastPage = false,
-
+	messageLoading = false,
 }) {
 	const messageRef = useRef();
 	const { id = '', channel_type = '', new_user_message_count = 0 } = activeMessageCard;
@@ -253,7 +253,7 @@ function MessageConversations({
 									className={styles.tag_div}
 									role="presentation"
 									onClick={() => {
-										if (hasPermissionToEdit) {
+										if (hasPermissionToEdit && !messageLoading) {
 											sentQuickSuggestions(
 												eachSuggestion,
 												scrollToBottom,
@@ -261,7 +261,7 @@ function MessageConversations({
 										}
 									}}
 									style={{
-										cursor: !hasPermissionToEdit ? 'not-allowed' : 'pointer',
+										cursor: (!hasPermissionToEdit || messageLoading) ? 'not-allowed' : 'pointer',
 									}}
 								>
 									{eachSuggestion}
@@ -374,12 +374,13 @@ function MessageConversations({
 						<IcMSend
 							fill="#EE3425"
 							onClick={() => {
-								if (hasPermissionToEdit) {
+								if (hasPermissionToEdit && !messageLoading) {
 									sendChatMessage(scrollToBottom);
 								}
 							}}
 							style={{
-								cursor: !hasPermissionToEdit || !(isEmpty(draftMessage?.trim()) || !finalUrl)
+								cursor: !hasPermissionToEdit || messageLoading
+								|| (isEmpty(draftMessage?.trim()) && !finalUrl)
 									? 'not-allowed'
 									: 'pointer',
 							}}

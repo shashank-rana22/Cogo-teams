@@ -7,14 +7,14 @@ import MsgLoader from '../MsgLoader';
 import MessageContent from './MessageContent';
 import styles from './styles.module.css';
 
-function MessageContainer({ msgContent, isGettingShipment, showImpMsg }) {
-	const { user_id } = useSelector((s) => ({ user_id: s?.profile?.user.id }));
-	const { onCreate } = useUpdateMessage();
+function MessageContainer({ msgContent, loadingChannel, showImpMsg }) {
+	const { user_id } = useSelector((state) => ({ user_id: state?.profile?.user.id }));
+	const { onUpdateMessage } = useUpdateMessage();
 	const containerRef = useRef(null);
 
 	const handleClick = (msg) => {
-		onCreate({
-			params: {
+		onUpdateMessage({
+			payload: {
 				id: msg?.mainKey, important: !msg?.important,
 			},
 		});
@@ -48,7 +48,7 @@ function MessageContainer({ msgContent, isGettingShipment, showImpMsg }) {
 
 	return (
 		<div className={styles.main_container} ref={containerRef}>
-			{isGettingShipment ? (
+			{loadingChannel ? (
 				<MsgLoader />
 			) : (
 				<>

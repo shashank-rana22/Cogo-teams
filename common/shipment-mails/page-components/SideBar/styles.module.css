@@ -1,42 +1,46 @@
-
 .container {
-	width: 172px; 
-	padding: 8px;
-
+	width: 12%;
+	padding-top: 28px;
 }
 
 .item {
 	padding: 8px 16px;
+	border-bottom: 1px solid #e0e0e0;
+
 	&.active {
-		border-left: 1px solid #a06222; 
+		border-left: 3px solid #f9ae64;
 	}
+
 	&:hover {
-		background:#fbeee0;
 		cursor: pointer;
+		background: #fbeee0;
 	}
 }
 
 .items {
-	margin-top: 16px;
+	margin-top: 24px;
 }
 
 .actions {
-	width: 100%;
 	display: flex;
-	justify-content: center;
-	flex-direction: column;
 	align-items: center;
+	justify-content: center;
+	width: 100%;
+
+	:global {
+		.ui_button_container.ui_ps_size_md {
+			height: 28px;
+		}
+	}
 }
 
 .item_name {
-	font-weight: normal;
 	font-size: 16px;
-	line-height: 20px;
-	opacity: 0.6;
+	font-weight: normal;
+	color: #221f20;
 
-	color: #373f6f;
 	&.active {
 		font-weight: 700;
-		opacity: unset;
+		color: #f9ae64;
 	}
 }

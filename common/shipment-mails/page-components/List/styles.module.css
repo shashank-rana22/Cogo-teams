@@ -1,40 +1,54 @@
 .card_container {
 	gap: 12px;
-	max-height: 78vh;
+	min-height: 50vh;
+	max-height: 75vh;
 	overflow: auto;
 }
 
 .main_container {
-	width: 320px;
-	border-left: 1px solid #cbcfeb;
+	width: 27%;
+	padding: 28px 0 8px;
 	border-right: 1px solid #cbcfeb;
-	padding: 0px 8px;
+	border-left: 1px solid #cbcfeb;
 }
-.heading {
-	font-weight: 500;
-	font-size: 1rem;
-	line-height: 19px;
-	color: #393f70;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
+
 .search_container {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
+	padding: 0 12px;
+
+	:global {
+		.ui_input_container.ui_ps_size_md {
+			height: 32px;
+		}
+
+		.ui_input_suffix {
+			margin-right: 12px;
+		}
+
+		.ui_input_container.ui_ps_size_md .ui_input_control {
+			font-size: 14px;
+			color: #bdbdbd;
+		}
+	}
 }
+
 .line {
-	border: 1px solid #cbcff5;
 	margin-top: 10px;
+	border: 1px solid #cbcff5;
 }
+
 .header {
 	display: flex;
 	flex-direction: column;
 	gap: 0.75rem;
 }
+
 .pagination_container {
-	justify-content: flex-end;
 	display: flex;
 	align-items: center;
-	margin: 10px 0px;
+	justify-content: flex-end;
+	margin: 10px 24px;
+	font-size: 12px;
+	font-weight: 600;
 }
