@@ -45,20 +45,14 @@ const CONTENT_MAPPING = {
 	},
 };
 
-const initialComponent = {
-	id         : uuid(),
-	type       : 'rootElement',
-	children   : [],
-	properties : {
-		content : '',
-		styles  : {},
-	},
-
-};
-
 function DNDComponent() {
 	const [activeTab, setActiveTab] = useState('content');
-	const [components, setComponents] = useState([initialComponent]);
+	const [components, setComponents] = useState({
+		layout : [],
+		styles : {},
+
+	});
+
 	const [showContentModal, setShowContentModal] = useState(false);
 	const [parentComponentId, setParentComponentId] = useState(null);
 
@@ -67,29 +61,32 @@ function DNDComponent() {
 	const [selectedItem, setSelectedItem] = useState({});
 
 	const handleAddNewItem = useCallback(
-		(content, hoveredIndex = components.length, shouldAddBelow = true, parentDetails, componentType) => {
+		(content, hoveredIndex = components.layout.length, shouldAddBelow = true, parentDetails, componentType) => {
 			const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
 
 			if (componentType === 'child') {
 				const { childId, parentId } = parentDetails || {};
 				const data = components;
 
-				const objIndex = data.findIndex((item) => item.parentId === parentId);
+				const objIndex = data.layout.findIndex((item) => item.parentId === parentId);
 
-				data[objIndex].children[childId].properties.content = content;
+				data.layout[objIndex].children[childId].properties.content = content;
 
 				setComponents(data);
 			} else {
-				setComponents(() => ([
-					...components.slice(0, startIndex),
-					{
-						...CONTENT_MAPPING[content.type],
-						...content,
-						id: components.length + 1,
+				setComponents((prev) => ({
+					...prev,
+					layout: [
+						...components.layout.slice(0, startIndex),
+						{
+							...CONTENT_MAPPING[content.type],
+							...content,
+							id: components.layout.length + 1,
 						// parentId,
-					},
-					...components.slice(startIndex),
-				]));
+						},
+						...components.layout.slice(startIndex),
+					],
+				}));
 			}
 
 			setSelectedItem({
@@ -113,7 +110,7 @@ function DNDComponent() {
 			<LeftPanel
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
-				components={components}
+				components={components.layout}
 				setComponents={setComponents}
 				addNewItem={handleAddNewItem}
 				onNewItemAdding={setNewItemAdding}
@@ -171,7 +168,7 @@ function DNDComponent() {
 
 					<div>
 						<DropBox
-							components={components}
+							components={components.layout}
 							setComponents={setComponents}
 							addNewItem={handleAddNewItem}
 							onNewItemAdding={setNewItemAdding}
