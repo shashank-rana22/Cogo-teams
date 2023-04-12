@@ -146,8 +146,11 @@ function Item(props) {
 
 	const handleDelete = (itemList) => {
 		const { id: sId } = itemList || {};
-		const selectedComponentIndex = (components || []).findIndex((component) => (component.id === sId));
-		components.splice(selectedComponentIndex, 1);
+		const data = components;
+
+		const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === sId));
+		data.layouts.splice(selectedComponentIndex, 1);
+		setComponents((prev) => ({ ...prev, layouts: data.layouts }));
 	};
 
 	// const onResize = (event, { element, size }) => {

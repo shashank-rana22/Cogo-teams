@@ -66,7 +66,7 @@ function Stage({
 			const hoverItem = stageItems.layouts[hoverIndex];
 			// Swap places of dragItem and hoverItem in the pets array
 			setStageItems((pets) => {
-				const updatedPets = [...pets];
+				const updatedPets = pets;
 				updatedPets.layouts[dragIndex] = hoverItem;
 				updatedPets.layouts[hoverIndex] = dragItem;
 				return updatedPets;
