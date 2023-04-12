@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -64,11 +65,20 @@ function useCreateFaqSet({
 				setQuestionPreview('preview');
 			}
 		} catch (err) {
-			console.log('err', err);
+			Toast.error(getApiErrorString(err?.response?.data));
 		}
 	};
 
 	const onClickPublish = async ({ data }) => {
+		const { question_aliases = [] } = data || {};
+		const updatedAlias = [];
+
+		(question_aliases || []).forEach((alias) => {
+			const { id = '' } = alias || {};
+			const aliasObj = { id };
+			updatedAlias.push(aliasObj);
+		});
+
 		const payload = {
 			id      : data?.id,
 			state   : 'published',
@@ -77,6 +87,7 @@ function useCreateFaqSet({
 				state  : 'published',
 				status : 'active',
 			}],
+			aliases: updatedAlias,
 		};
 
 		try {

@@ -26,9 +26,6 @@ function useCreateFaqPayload({ values, editorValue, data, showAlias }) {
 			status : status || undefined,
 		};
 
-		if (obj[id] === undefined) {
-			delete obj[id];
-		}
 		updatedAlias.push(obj);
 	});
 

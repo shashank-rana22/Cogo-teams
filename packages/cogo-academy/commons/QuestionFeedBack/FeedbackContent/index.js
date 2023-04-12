@@ -1,7 +1,7 @@
 import { Avatar, Input, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcCFtick, IcMFtick } from '@cogoport/icons-react';
+import { IcMFtick } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 
 import styles from './styles.module.css';
@@ -99,7 +99,8 @@ function FeedBackContent({
 										<div className={styles.icon_wrapper}>
 											<IcMFtick width={24} height={24} fill="#028a0f" />
 										</div>
-										Question added as an alias successfully
+										Suggested question has been successfully added as an alias.
+
 									</div>
 								) : 'Add as an Alias'}
 						</div>

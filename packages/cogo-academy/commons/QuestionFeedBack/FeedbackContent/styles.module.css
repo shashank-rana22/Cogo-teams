@@ -67,6 +67,7 @@
 
 .alias_input{
 	padding-bottom: 8px;
+	max-width: 100%;
 }
 
 .button_wrapper{

@@ -9,7 +9,7 @@ import useGetFaqFeedback from './useGetFaqFeedback';
 import useListfaqFeedback from './useListFaqFeedback';
 
 function QuestionFeedBack({ id, source = '', onClickEdit = () => {}, fetchQuestion }) {
-	const { general } = useSelector((state) => state);
+	const general = useSelector((state) => state.general || {});
 	const { feedbackId = '' } = general.query || {};
 
 	const {

@@ -32,9 +32,7 @@ const useCreateFaqQuestionAlias = ({
 
 		try {
 			await trigger({
-				data:
-					payload,
-
+				data: payload,
 			});
 			Toast.success('Aliases added sucessfully');
 			setShowAliasInput(false);
