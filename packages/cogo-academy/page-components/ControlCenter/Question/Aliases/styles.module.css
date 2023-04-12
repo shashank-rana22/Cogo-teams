@@ -1,18 +1,17 @@
-.container{
-padding-top: 20px;
+.container {
+	padding-top: 20px;
 }
 
-.input_container{
-    display: flex;
+.input_container {
+	display: flex;
 
-    .ui_input_container{
-        width:96%
-    }
+	.ui_input_container {
+		width: 96%;
+	}
 }
 
-.icon_wrapper{
-    padding-left: 8px;
-    display: flex;
-    align-items: center;
-    
+.icon_wrapper {
+	display: flex;
+	align-items: center;
+	padding-left: 8px;
 }

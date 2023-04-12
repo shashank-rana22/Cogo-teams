@@ -92,11 +92,11 @@
 	cursor: pointer;
 }
 
-.alias{
+.alias {
 	padding-left: 8px;
 }
 
-.span{
-	font-weight: 500;
+.span {
 	padding-right: 6px;
+	font-weight: 500;
 }

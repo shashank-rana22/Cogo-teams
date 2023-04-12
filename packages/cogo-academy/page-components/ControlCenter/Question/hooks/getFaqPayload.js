@@ -1,6 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
-function useCreateFaqPayload({ values, editorValue, data, showAlias }) {
+function getFaqPayload({ values, editorValue, data, showAlias }) {
 	const {
 		faq_topics = [], faq_audiences = [], faq_tags = [], answers = [],
 	} = data || {};
@@ -73,9 +73,7 @@ function useCreateFaqPayload({ values, editorValue, data, showAlias }) {
 		}],
 	};
 
-	return {
-		payload,
-	};
+	return payload;
 }
 
-export default useCreateFaqPayload;
+export default getFaqPayload;

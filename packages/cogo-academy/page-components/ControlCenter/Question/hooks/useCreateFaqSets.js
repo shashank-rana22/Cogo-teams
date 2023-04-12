@@ -4,7 +4,7 @@ import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-import useCreateFaqPayload from './useCreateFaqPayload';
+import getFaqPayload from './getFaqPayload';
 
 function useCreateFaqSet({
 	setQuestionPreview,
@@ -46,8 +46,7 @@ function useCreateFaqSet({
 			return;
 		}
 
-		// eslint-disable-next-line react-hooks/rules-of-hooks
-		const { payload } = useCreateFaqPayload({ values, editorValue, source: 'create', data: apiData, showAlias });
+		const payload = getFaqPayload({ values, editorValue, source: 'create', data: apiData, showAlias });
 
 		try {
 			const res = await trigger({

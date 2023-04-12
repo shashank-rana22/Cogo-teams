@@ -61,26 +61,24 @@
 	font-weight: 600;
 	color: #00f;
 	cursor: pointer;
-
-	
 }
 
-.alias_input{
-	padding-bottom: 8px;
+.alias_input {
 	max-width: 100%;
+	padding-bottom: 8px;
 }
 
-.button_wrapper{
-	margin-top: 10px;
+.button_wrapper {
 	display: flex;
 	justify-content: flex-end;
+	margin-top: 10px;
 }
 
-.updated_alias{
+.updated_alias {
 	display: flex;
-	color:#028a0f
+	color: #028a0f;
 }
 
-.icon_wrapper{
+.icon_wrapper {
 	padding-right: 4px;
 }

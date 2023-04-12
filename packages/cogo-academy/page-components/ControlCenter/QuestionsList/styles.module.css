@@ -95,11 +95,10 @@
 	border-radius: 16px;
 }
 
-.question_type{
-	border: 1px solid #ffe4af;
-	width:66px;
+.question_type {
+	width: 66px;
+	color: #fff;
 	text-align: center;
+	border: 1px solid #ffe4af;
 	border-radius: 16px;
-	color:#ffffff
-
 }

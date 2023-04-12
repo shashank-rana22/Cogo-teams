@@ -51,7 +51,6 @@
 	flex-direction: column;
 }
 
-	
 
 
 .button_container {
@@ -94,18 +93,18 @@
 	flex: 1;
 }
 
-.question_alias{
+.question_alias {
 	display: flex;
 }
 
-.alias{
-	padding-left: 18px;
+.alias {
 	display: flex;
-	justify-content: center;
 	align-items: center;
-	font-weight: 600;
-	color:#034AFD;
-	cursor:pointer;
-	text-decoration: underline;
+	justify-content: center;
+	padding-left: 18px;
 	font-size: 15px;
+	font-weight: 600;
+	color: #034afd;
+	text-decoration: underline;
+	cursor: pointer;
 }
