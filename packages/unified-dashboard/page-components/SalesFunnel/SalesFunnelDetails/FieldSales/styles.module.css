@@ -38,7 +38,6 @@
 	position: relative;
 	display: flex;
 	flex: 25%;
-	flex-direction: row;
 	align-items: center;
 	padding: 14px;
 	cursor: pointer;

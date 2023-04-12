@@ -88,7 +88,6 @@
 	position: relative;
 	display: flex;
 	flex: 25%;
-	flex-direction: row;
 	align-items: center;
 	padding-bottom: 0;
 	padding-left: 10px;
