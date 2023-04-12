@@ -13,12 +13,11 @@
 .checkbox {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	margin-top: 8px;
 }
 
 .checkbox_label {
-	font-size: 14px;
-
 	span {
 		font-weight: 700;
 	}

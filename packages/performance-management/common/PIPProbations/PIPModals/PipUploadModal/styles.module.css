@@ -19,16 +19,6 @@
 	margin: 8px 0;
 }
 
-.filters {
-	display: flex;
-
-	:global {
-		.ui_select_display_container {
-			width: 140px;
-		}
-	}
-}
-
 .info_tool {
 	display: flex;
 	align-items: center;
@@ -40,9 +30,32 @@
 
 .tooltip_text {
 	text-align: justify;
+	word-break: break-word;
+}
+
+.button_container {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.select_btn {
+	margin: 8px;
+	border: solid 1px #88cad1;
 }
 
 .submit {
+	display: flex;
 	align-self: flex-end;
 	margin-top: 16px;
+}
+
+.filters {
+	display: flex;
+
+	:global {
+		.ui_select_display_container {
+			width: 140px;
+		}
+	}
 }

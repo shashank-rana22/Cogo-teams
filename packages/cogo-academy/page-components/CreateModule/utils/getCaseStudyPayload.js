@@ -53,7 +53,7 @@ const getCaseStudyPayload = ({
 			question_text,
 			question_type,
 			answers,
-			explanation: [editorValue[`case_questions_${questionIndex}_explanation`].toString('html')],
+			explanation: [editorValue?.[`case_questions_${questionIndex}_explanation`].toString('html')],
 		};
 	}
 	const {
@@ -86,7 +86,7 @@ const getCaseStudyPayload = ({
 			question_type : indQuestionType,
 			question_text : indQuestionText,
 			answers,
-			explanation   : [editorValue[`case_questions_${caseQuestionIndex}_explanation`].toString('html')],
+			explanation   : [editorValue?.[`case_questions_${caseQuestionIndex}_explanation`].toString('html')],
 		};
 	});
 
