@@ -29,12 +29,12 @@ function RenderAddRateForm({
 	const { formControl } = controls({ serviceData });
 
 	const renderForm = (field) => {
-		const { name, options, ...rest } = field;
-		switch (field.type) {
+		const { name, options, label, type, ...rest } = field;
+		switch (type) {
 			case 'async-select':
 				return (
 					<div className={styles.input_container}>
-						<label>{field.label}</label>
+						<label>{label}</label>
 						<SelectController
 							name={name}
 							control={control}
@@ -48,7 +48,7 @@ function RenderAddRateForm({
 			case 'input':
 				return (
 					<div className={styles.input_container}>
-						<label htmlFor={name}>{field.label}</label>
+						<label>{label}</label>
 						<InputController
 							name={name}
 							control={control}
@@ -60,7 +60,7 @@ function RenderAddRateForm({
 			case 'number':
 				return (
 					<div className={styles.input_container}>
-						<label htmlFor={name}>{field.label}</label>
+						<label>{label}</label>
 						<InputController
 							name={name}
 							control={control}
@@ -72,7 +72,7 @@ function RenderAddRateForm({
 			case 'select':
 				return (
 					<div className={styles.input_container}>
-						<label>{field.label}</label>
+						<label>{label}</label>
 						<SelectController
 							name={name}
 							control={control}
