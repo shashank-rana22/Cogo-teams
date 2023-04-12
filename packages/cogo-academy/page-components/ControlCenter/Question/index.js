@@ -197,7 +197,7 @@ function CreateFAQ() {
 						</div>
 
 						<div className={styles.question_alias}>
-							<div style={{ width: '90%' }}>
+							<div style={{ width: isEmpty(filteredAliases) ? '88%' : '100%' }}>
 
 								<InputController
 									control={control}

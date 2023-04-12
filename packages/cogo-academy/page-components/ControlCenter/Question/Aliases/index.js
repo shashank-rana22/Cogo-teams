@@ -41,16 +41,16 @@ function Aliases({ showAlias, setShowAlias = () => {}, alias = {}, filteredAlias
 
 				<div className={styles.icon_wrapper}>
 					<IcMDelete
-						width={26}
-						height={26}
+						width={30}
+						height={30}
 						style={{ cursor: 'pointer' }}
 						onClick={onClickDeleteIcon}
 					/>
 
 					{showAddIconId === id && question_abstract && (
 						<IcMPlusInCircle
-							width={26}
-							height={26}
+							width={28}
+							height={28}
 							onClick={() => setShowAlias((pv) => (
 								[...pv, { id: (showAlias || []).length }]))}
 							style={{ marginLeft: '6px', cursor: 'pointer' }}
