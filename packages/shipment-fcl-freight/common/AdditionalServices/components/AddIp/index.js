@@ -1,8 +1,6 @@
 import { Modal } from '@cogoport/components';
 import React from 'react';
 
-import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
-
 import AddInvoicingParty from './AddInvoicingParty';
 import styles from './styles.module.css';
 
@@ -10,7 +8,7 @@ function AddIp({
 	shipmentData,
 	showIp,
 	setShowIp = () => {},
-	refetch,
+	updateInvoicingParty = () => {},
 }) {
 	const organizationDetails = {
 		id         : shipmentData?.importer_exporter?.id || undefined,
@@ -21,16 +19,6 @@ function AddIp({
 	} else {
 		organizationDetails.is_tax_applicable =	shipmentData?.importer_exporter?.is_tax_applicable;
 	}
-
-	const refetchForUpdateSubService = () => {
-		setShowIp(false);
-		refetch();
-	};
-
-	const { updateInvoicingParty } = useUpdateShipmentAdditionalService({
-		refetch: refetchForUpdateSubService,
-		showIp,
-	});
 
 	return (
 		<Modal

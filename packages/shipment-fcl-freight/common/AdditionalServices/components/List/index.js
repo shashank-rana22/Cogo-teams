@@ -4,6 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
 import useListAdditionalServices from '../../../../hooks/useListAdditionalServices';
+import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
 import AddIp from '../AddIp';
 import AddRate from '../AddRate';
 import Loader from '../Loader';
@@ -37,6 +38,18 @@ function List({
 		refetchServices();
 		refetch();
 	};
+
+	const refetchForUpdateSubService = () => {
+		setShowIp(false);
+		refetch();
+	};
+
+	const updateResponse = useUpdateShipmentAdditionalService({
+		item,
+		setShowIp,
+		refetch: refetchForUpdateSubService,
+		showIp,
+	});
 
 	return (
 		<div className={styles.container}>
@@ -136,7 +149,7 @@ function List({
 					shipmentData={shipment_data}
 					setShowIp={setShowIp}
 					showIp={showIp}
-					refetch={refetch}
+					updateInvoicingParty={(ip) => updateResponse.handleInvoicingParty(ip)}
 				/>
 
 			) : null}
