@@ -49,30 +49,33 @@ function Announcements({
 		setPopoverVisible(false);
 	};
 
-	const renderFilterPopover = () => (
-		<div className={styles.popover_modal}>
-			<div className={styles.header}>
-				<div className={styles.label}>Sort By Type</div>
-				<Button type="button" themeType="primary" size="sm" onClick={handleReset}>Reset</Button>
+	function RenderFilterPopover() {
+		return (
+			<div className={styles.popover_modal}>
+				<div className={styles.header}>
+					<div className={styles.label}>Sort By Type</div>
+					<Button type="button" themeType="primary" size="sm" onClick={handleReset}>Reset</Button>
+				</div>
+				<Select
+					placeholder="Select Type"
+					style={{ marginBottom: 8 }}
+					value={params.filters.announcement_type}
+					onChange={(e) => {
+						setParams((prev) => ({
+							page    : 1,
+							filters : {
+								...prev.filters,
+								announcement_type: e,
+							},
+						}));
+						setPopoverVisible(false);
+					}}
+					options={FILTER_OPTIONS}
+				/>
 			</div>
-			<Select
-				placeholder="Select Type"
-				style={{ marginBottom: 8 }}
-				value={params.filters.announcement_type}
-				onChange={(e) => {
-					setParams((prev) => ({
-						page    : 1,
-						filters : {
-							...prev.filters,
-							announcement_type: e,
-						},
-					}));
-					setPopoverVisible(false);
-				}}
-				options={FILTER_OPTIONS}
-			/>
-		</div>
-	);
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.filters_container}>
@@ -100,7 +103,7 @@ function Announcements({
 						interactive
 						placement="bottom"
 						theme="light"
-						content={renderFilterPopover()}
+						content={<RenderFilterPopover />}
 						visible={popoverVisible}
 					>
 						<div className={styles.filter_btn_container}>

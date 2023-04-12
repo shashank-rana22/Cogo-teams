@@ -41,7 +41,7 @@ function AnnouncementItem({
 		},
 	};
 
-	const renderCountPill = (type) => {
+	function RenderCountPill({ type }) {
 		const { count, text } = COUNT_PILL_MAPPING[type];
 
 		if (count === 0) return null;
@@ -53,7 +53,7 @@ function AnnouncementItem({
 				{count === 1 ? text : `${text}s`}
 			</div>
 		);
-	};
+	}
 
 	return (
 		<div
@@ -81,9 +81,8 @@ function AnnouncementItem({
 					</div>
 
 					{Object.keys(COUNT_PILL_MAPPING).map((key) => (
-						renderCountPill(key)
+						<RenderCountPill key={key} type={key} />
 					))}
-
 				</div>
 
 				<div className={styles.date_tag}>

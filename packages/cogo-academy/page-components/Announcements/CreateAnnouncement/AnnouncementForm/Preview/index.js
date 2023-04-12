@@ -1,3 +1,4 @@
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import Spinner from '../../../../../commons/Spinner';
@@ -47,7 +48,7 @@ function Preview({
 				<div dangerouslySetInnerHTML={{ __html: editorValue }} />
 			</div>
 
-			{(videos || []).length > 0 && (
+			{!isEmpty(videos) && (
 				<PreviewContent
 					data={videos}
 					isMobile={isMobile}
@@ -55,7 +56,7 @@ function Preview({
 				/>
 			)}
 
-			{(images || []).length > 0 && (
+			{!isEmpty(videos) && (
 				<PreviewContent
 					data={images}
 					isMobile={isMobile}
@@ -63,7 +64,7 @@ function Preview({
 				/>
 			)}
 
-			{(files || []).length > 0 && (
+			{!isEmpty(videos) && (
 				<PreviewFiles files={files} />
 			)}
 

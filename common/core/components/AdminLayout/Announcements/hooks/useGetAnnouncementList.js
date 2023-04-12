@@ -100,8 +100,7 @@ const useGetAnnouncementList = () => {
 				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}
 		}
-	}, [cogo_entity_id, country_id, params.filters.announcement_type, params.filters.q,
-		params.filters.toggle, params.page, roleSubFunction, role_functions, scope, trigger, user_id]);
+	}, [cogo_entity_id, country_id, params, roleSubFunction, role_functions, scope, trigger, user_id]);
 
 	return {
 		fetchAnnouncements,

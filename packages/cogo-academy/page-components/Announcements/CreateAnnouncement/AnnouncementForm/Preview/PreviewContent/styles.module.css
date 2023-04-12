@@ -66,10 +66,6 @@
 	scroll-behavior: smooth;
 }
 
-.content_inner_container::-webkit-scrollbar {
-	display: none;
-}
-
 .content_item {
 	width: 100%;
 	height: 100%;
