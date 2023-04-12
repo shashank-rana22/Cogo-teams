@@ -44,7 +44,7 @@ const useTrendSearch = (item = {}) => {
 
 		if (e.target.checked) {
 			arr = [...hscodeArr, newItem.hs_code];
-		} else if (arr.includes(newItem)) {
+		} else {
 			const index = arr.indexOf(newItem.hs_code);
 
 			arr.splice(index, 1);
