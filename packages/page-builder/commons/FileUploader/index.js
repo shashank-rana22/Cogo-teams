@@ -138,7 +138,7 @@ function FileUploader(props) {
 					onClick={handleDelete}
 					loading={loading}
 					uploadDesc={uploadDesc || 'Upload files'}
-					uploadIcon={uploadIcon || <IcMCloudUpload color="#ACDADF" height={40} width={40} />}
+					uploadIcon={uploadIcon || <IcMCloudUpload color="#6FA5AB" height={40} width={40} />}
 					fileData={urlStore}
 					className={styles.ui_upload_droparea_container}
 				/>

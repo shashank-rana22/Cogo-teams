@@ -1,4 +1,7 @@
+import { isEmpty } from '@cogoport/utils';
+
 import ButtonSettings from './ButtonSettings';
+import DivSettings from './DivSettings';
 // import DivSettings from './DivSettings';
 import ImageSettings from './ImageSettings';
 import styles from './styles.module.css';
@@ -6,6 +9,10 @@ import TextSettings from './TextSettings';
 
 function Settings(props) {
 	const { selectedItem, onChange } = props;
+
+	if (isEmpty(selectedItem)) {
+		<DivSettings />;
+	}
 
 	let settingsComponent = null;
 
