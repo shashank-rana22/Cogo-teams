@@ -7,3 +7,25 @@
 .list_view {
 	margin-top: 20px;
 }
+.no_data{
+	box-sizing: border-box;
+    width: 100%;
+    padding: 46px;
+    margin-top: 16px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 4px rgba(98,127,172,.2);
+	text-align:center;
+}
+.loading{
+    display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100vw;
+	height: 100vh;
+
+	img {
+		width: 200px;
+		height: 200px;
+	}
+}
