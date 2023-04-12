@@ -13,7 +13,6 @@ function ReviewDoc({
 	onClose = () => {},
 }) {
 	const [approvalState, setApprovalState] = useState(null);
-	const [params, setParams] = useState({});
 	const [remarkValue, setRemarkValue] = useState('');
 	const newRefetch = () => {
 		onClose();
@@ -22,32 +21,33 @@ function ReviewDoc({
 
 	const { list, loading } = useListDocuments({
 		defaultFilters: {
-			id                  : task.task_field_id,
-			pending_task_id     : task.id,
-			performed_by_org_id : task.organization_id,
+
 		},
 	});
 
 	let doc_data = {};
-	const defaultParams = {};
+	let params = {};
+
 	if (!loading && list?.length) {
 		doc_data = list?.[0] || {};
-		setParams({
-			id            : doc_data.id,
-			document_type : doc_data.document_type,
-		});
+		params = {
+			id                  : doc_data.id,
+			pending_task_id     : task.id,
+			document_type       : doc_data.document_type,
+			performed_by_org_id : task.organization_id,
+		};
 	}
 	const { updateDocument } = useUpdateShipmentDocuments(
-		{ defaultParams, refetch: newRefetch, params },
+		{ refetch: newRefetch },
 	);
 
 	const handleApprove = async () => {
-		setParams({
+		params = {
 			...params,
 			state: 'document_accepted',
-		});
+		};
 
-		updateDocument();
+		updateDocument(params);
 	};
 
 	const handleAmmend = () => {
@@ -59,18 +59,18 @@ function ReviewDoc({
 			if (!remarkValue) {
 				Toast.error('Please provide amendment reason');
 			}
-			setParams({
+			params = {
 				...params,
 				state   : 'document_amendment_requested',
 				remarks : [remarkValue],
-			});
-			updateDocument();
+			};
+			updateDocument(params);
 		} else {
-			setParams({
+			params = {
 				...params,
 				state: 'document_accepted',
-			});
-			updateDocument();
+			};
+			updateDocument(params);
 		}
 	};
 
