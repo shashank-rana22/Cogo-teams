@@ -74,6 +74,7 @@ function SingleQuestionComponent({
 			</div>
 
 			<OptionsComponent
+				key={JSON.stringify(editorValue)}
 				control={control}
 				{...NAME_CONTROL_MAPPING.options}
 				register={register}
