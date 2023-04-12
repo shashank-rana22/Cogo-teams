@@ -1,7 +1,6 @@
 import {
 	IcMSearchdark,
 	IcMDocument,
-	IcMHelpInCircle,
 } from '@cogoport/icons-react';
 
 const IconMapping = [
@@ -76,7 +75,11 @@ const IconMapping = [
 	{
 		name    : 'help_desk',
 		content : 'Help Desk',
-		icon    : <IcMHelpInCircle width={18} height={18} />,
+		icon    : <img
+			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/faq-icon-final.svg"
+			alt="faq"
+			style={{ width: '25px', heigh: '25px' }}
+		/>,
 	},
 ];
 

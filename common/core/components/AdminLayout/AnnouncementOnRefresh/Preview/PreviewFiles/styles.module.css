@@ -7,16 +7,13 @@
 
 .files {
 	display: flex;
-	flex-direction: column;
-	gap: 10px;
 	width: 100%;
+	overflow-x: scroll;
+	scroll-behavior: smooth;
+}
 
-	:global {
-		.ui_button_container {
-			justify-content: flex-start;
-			padding-left: 0;
-		}
-	}
+.files::-webkit-scrollbar {
+	display: none;
 }
 
 .heading {
@@ -26,15 +23,10 @@
 	color: #000;
 }
 
-.file_item {
-	font-size: 14px;
-	font-style: normal;
-	font-weight: 500;
-	line-height: 180%;
-	color: #ee3425;
-	cursor: pointer;
-}
-
-.file_item:hover {
-	text-decoration: underline;
+.document {
+	position: relative;
+	width: 174px;
+	height: 190px;
+	margin: 8px;
+	background: #f9f9f9;
 }

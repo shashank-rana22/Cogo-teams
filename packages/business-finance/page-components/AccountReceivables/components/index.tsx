@@ -1,22 +1,29 @@
-import { TabPanel, Tabs } from '@cogoport/components';
+import { TabPanel, Tabs, Select, Placeholder } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
+import { upperCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import useListCogoEntity from '../hooks/useListCogoEntity';
+
+import Dashboard from './Dashboard';
 import Outstanding from './Outstanding';
 import styles from './styles.module.css';
 
 function AccountReceivables() {
-	const { push } = useRouter();
-	const [receivables, setReceivables] = useState<string>('outstanding');
+	const { push, query } = useRouter();
+	const [receivables, setReceivables] = useState<string>(query.active_tab || 'dashboard');
+	const { loading, EntityData = [] } = useListCogoEntity();
+
+	const [entityCode, setEntityCode] = useState('301');
 
 	const profile = useSelector((state) => state);
 	const { profile:{ partner } } = profile || {};
 	const { id: partnerId } = partner || {};
 
 	const handleChange = (val:string) => {
-		if (['dashboard', 'invoices', 'defaulters', 'manageBpr'].includes(val)) {
-			window.location.href = `/${partnerId}/business-finance/account-receivables`;
+		if (['invoices', 'defaulters', 'manageBpr'].includes(val)) {
+			window.location.href = `/${partnerId}/business-finance/account-receivables/${val}`;
 			return;
 		}
 		setReceivables(val);
@@ -26,6 +33,11 @@ function AccountReceivables() {
 		);
 	};
 
+	const EntityOptions = EntityData.map((entityData) => ({
+		label : `${entityData.entity_code}-${upperCase(entityData.business_name)}`,
+		value : entityData.entity_code,
+	}));
+
 	return (
 		<div>
 
@@ -33,6 +45,23 @@ function AccountReceivables() {
 				<div className={styles.header_style}>
 					Account Receivables
 				</div>
+
+				{loading ? (
+					<Placeholder width="200px" height="30px" />
+				)
+
+					: (
+						<div className={styles.input}>
+							<Select
+								name="business_name"
+								onChange={(entityVal: string) => setEntityCode(entityVal)}
+								value={EntityOptions[2]?.value}
+								options={EntityOptions}
+								placeholder="Select Entity Code"
+								size="sm"
+							/>
+						</div>
+					)}
 			</div>
 
 			<div className={styles.tabs_container}>
@@ -43,13 +72,13 @@ function AccountReceivables() {
 					themeType="primary"
 				>
 					<TabPanel name="dashboard" title="Dashboard">
-						--
+						<Dashboard entityCode={entityCode} />
 					</TabPanel>
 					<TabPanel name="invoices" title="Invoices">
 						--
 					</TabPanel>
-					<TabPanel name="outstanding" title="OUTSTANDING">
-						<Outstanding />
+					<TabPanel name="outstanding" title="Outstanding">
+						<Outstanding entityCode={entityCode} />
 					</TabPanel>
 
 					<TabPanel name="defaulters" title="Defaulters">

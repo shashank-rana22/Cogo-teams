@@ -11,9 +11,10 @@ import styles from './styles.module.css';
 
 interface Props {
 	organizationId: string,
+	entityCode?: string
 }
 
-function PaymentTable({ organizationId }: Props) {
+function PaymentTable({ organizationId,	entityCode }: Props) {
 	const {
 		paymentList,
 		paymentLoading,
@@ -21,7 +22,7 @@ function PaymentTable({ organizationId }: Props) {
 		setPaymentFilters,
 		orderBy,
 		setOrderBy,
-	} = useGetPaymentTable(organizationId);
+	} = useGetPaymentTable(organizationId, entityCode);
 
 	const { list = [], pageNo, totalRecords } = paymentList || {};
 

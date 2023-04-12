@@ -997,7 +997,7 @@ const saas = {
 		{
 			api          : 'get_exchange_rate',
 			access_type  : 'private',
-			service_name : 'organization',
+			service_name : 'exchange_rate',
 		},
 		{
 			api          : 'create_spot_search',
@@ -1171,6 +1171,16 @@ const saas = {
 			service_name : 'cogopoint',
 		},
 		{
+			api          : 'list_cogopoint_milestones',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'get_cogopoint_user_profile',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
 			api          : 'get_cogopoint_history_detail',
 			access_type  : 'private',
 			service_name : 'cogopoint',
@@ -1182,6 +1192,16 @@ const saas = {
 		},
 		{
 			api          : 'list_user_cogopoint_histories',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogopoint_earnables',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogopoint_ledgers',
 			access_type  : 'private',
 			service_name : 'cogopoint',
 		},
@@ -1442,7 +1462,7 @@ const saas = {
 		{
 			api          : 'get_exchange_rate',
 			access_type  : 'private',
-			service_name : 'organization',
+			service_name : 'exchange_rate',
 		},
 		{
 			api          : 'list_organization_billing_addresses',
@@ -1758,10 +1778,11 @@ const saas = {
 			feature     : 'dutiesTaxes',
 		},
 		{
-			api         : 'get_exchange_rate',
-			access_type : 'private',
-			module      : 'dutiesTaxes',
-			feature     : 'dutiesTaxes',
+			api          : 'get_exchange_rate',
+			access_type  : 'private',
+			module       : 'dutiesTaxes',
+			feature      : 'dutiesTaxes',
+			service_name : 'exchange_rate',
 		},
 		{
 			api         : 'saas_get_user_quota_usage',
@@ -1776,10 +1797,11 @@ const saas = {
 			feature     : 'dutiesTaxes',
 		},
 		{
-			api         : 'get_exchange_rate',
-			access_type : 'private',
-			module      : 'dutiesTaxes',
-			feature     : 'dutiesTaxes',
+			api          : 'get_exchange_rate',
+			access_type  : 'private',
+			module       : 'dutiesTaxes',
+			feature      : 'dutiesTaxes',
+			service_name : 'exchange_rate',
 		},
 		{
 			api         : 'post_saas_trade_engine_duties_draft',
@@ -1950,7 +1972,6 @@ const saas = {
 			module      : 'trader-eligibility-check',
 			feature     : 'trader-eligibility-check',
 		},
-
 	],
 	app_saas_order_history: [
 		{
@@ -1966,6 +1987,5 @@ const saas = {
 			feature     : 'order-history',
 		},
 	],
-
 };
 export default saas;

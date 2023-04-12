@@ -1,0 +1,20 @@
+.container {
+	width: 100%;
+	padding: 14px 10px;
+}
+
+.input_container {
+	margin: 20px 8px 0;
+}
+
+.tab_panel {
+	:global {
+		.ui_tab_list_container {
+			align-items: inherit;
+		}
+	}
+}
+
+.icon_wrapper {
+	padding-right: 8px;
+}

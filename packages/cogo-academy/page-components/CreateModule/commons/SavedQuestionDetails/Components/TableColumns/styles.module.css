@@ -1,0 +1,15 @@
+.question_div {
+	max-width: 360px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.updated_at {
+	display: flex;
+	align-items: center;
+}
+
+.updated_at_text {
+	margin-right: 6px;
+}
