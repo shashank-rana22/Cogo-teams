@@ -20,38 +20,34 @@ function Aliases({ showAlias, setShowAlias = () => {}, alias = {}, filteredAlias
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.input_container}>
-				<Input
-					size="md"
-					placeholder="Add alias"
-					value={showAlias[index]?.question_abstract}
-					onChange={(event) => {
-						updatedAlias[index] = { ...updatedAlias[index], question_abstract: event };
-						setShowAlias(updatedAlias);
-					}}
+			<Input
+				size="md"
+				placeholder="Add alias"
+				value={showAlias[index]?.question_abstract}
+				onChange={(event) => {
+					updatedAlias[index] = { ...updatedAlias[index], question_abstract: event };
+					setShowAlias(updatedAlias);
+				}}
+			/>
 
+			<div className={styles.icon_wrapper}>
+				<IcMDelete
+					width={30}
+					height={30}
+					style={{ cursor: 'pointer' }}
+					onClick={onClickDeleteIcon}
 				/>
 
-				<div className={styles.icon_wrapper}>
-					<IcMDelete
-						width={30}
-						height={30}
-						style={{ cursor: 'pointer' }}
-						onClick={onClickDeleteIcon}
+				{showAddIconId === id && question_abstract && (
+					<IcMPlusInCircle
+						width={28}
+						height={28}
+						onClick={() => setShowAlias((pv) => (
+							[...pv, { id: (showAlias || []).length }]))}
+						style={{ marginLeft: '6px', cursor: 'pointer' }}
 					/>
 
-					{showAddIconId === id && question_abstract && (
-						<IcMPlusInCircle
-							width={28}
-							height={28}
-							onClick={() => setShowAlias((pv) => (
-								[...pv, { id: (showAlias || []).length }]))}
-							style={{ marginLeft: '6px', cursor: 'pointer' }}
-						/>
-
-					)}
-
-				</div>
+				)}
 			</div>
 		</div>
 	);
