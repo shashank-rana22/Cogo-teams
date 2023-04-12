@@ -1,7 +1,9 @@
 .settings {
+	position: absolute;
+	top: 4px;
+	right: 4px;
 	display: flex;
 	justify-content: flex-end;
-	margin: -20px -17px 0 0;
 }
 
 .settings_icon {
