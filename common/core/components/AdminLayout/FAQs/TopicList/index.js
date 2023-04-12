@@ -78,14 +78,16 @@ function TopicList({
 		setAnnouncementModalData({});
 		setSearch('');
 		setSearchAnnouncement('');
-		setParams({
-			page    : 1,
-			filters : {
-				q                 : '',
-				toggle            : false,
-				announcement_type : '',
-			},
-		});
+		if (activeTab === 'faq') {
+			setParams({
+				page    : 1,
+				filters : {
+					q                 : '',
+					toggle            : false,
+					announcement_type : '',
+				},
+			});
+		}
 	}, [activeTab, from, setAnnouncementModalData, setParams, setSearch, setSearchAnnouncement]);
 
 	const render = () => {
