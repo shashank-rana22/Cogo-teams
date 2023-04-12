@@ -66,9 +66,8 @@ function Documents() {
 					show={showDoc}
 					size="lg"
 					onClose={() => setShowDoc(null)}
-					onOuterClick={() => {
-						setShowDoc(null);
-					}}
+					placement="top"
+					// closeOnOuterClick={false}
 				>
 					<UploadForm
 						showDoc={showDoc}

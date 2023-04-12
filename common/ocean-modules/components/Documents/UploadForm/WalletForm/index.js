@@ -1,4 +1,4 @@
-import { Input, Tabs, TabPanel } from '@cogoport/components';
+import { Input, Tabs, TabPanel, Modal } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -17,9 +17,10 @@ function WalletForm({
 
 	return (
 		<div>
+			<Modal.Header title="Document Wallet" />
 			<div className={styles.main_container}>
 				<div className={styles.header}>
-					<div className={styles.heading}>Document Wallet</div>
+					{/* <div className={styles.heading}>Document Wallet</div> */}
 					<div className={styles.search_container}>
 						<Input
 							className="primary md"

@@ -30,6 +30,34 @@ function Content({
 
 	const tradeType = primary_service?.trade_type;
 
+	const getUploadButton = () => {
+		if (showUploadText.length) {
+			return (
+				<Button
+					themeType="link"
+					className="primary md text"
+					onClick={() => (
+						// receivedViaEmail
+						// 	? setShowConfirmed({
+						// 		...item,
+						// 		document_type : docType,
+						// 		document_url  : uploadedItem?.file_url,
+						// 		mail_id       : uploadedItem?.id,
+						// 		type          : 'task',
+						// 	})
+						// 	:
+						setShowDoc({
+							...item,
+							document_type: docType,
+						}))}
+				>
+					{receivedViaEmail ? 'Approve Document' : showUploadText}
+				</Button>
+			);
+		}
+		return null;
+	};
+
 	return (
 		<div className={styles.single_item}>
 			<VerticleLine
@@ -107,28 +135,7 @@ function Content({
 							) : null}
 
 					</div>
-				) : (
-					<Button
-						themeType="link"
-						className="primary md text"
-						onClick={() => (
-							// receivedViaEmail
-							// 	? setShowConfirmed({
-							// 		...item,
-							// 		document_type : docType,
-							// 		document_url  : uploadedItem?.file_url,
-							// 		mail_id       : uploadedItem?.id,
-							// 		type          : 'task',
-							// 	})
-							// 	:
-							setShowDoc({
-								...item,
-								document_type: docType,
-							}))}
-					>
-						{receivedViaEmail ? 'Approve Document' : showUploadText}
-					</Button>
-				) }
+				) : getUploadButton()}
 
 			</div>
 

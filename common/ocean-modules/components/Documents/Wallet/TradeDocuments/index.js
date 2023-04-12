@@ -70,17 +70,15 @@ function TradeDocuments({
 						onClick={() => handleDocClick(doc)}
 					>
 						{!showWalletDocs && (
-							<Popover
-								interactive
-								placement="bottom"
-								theme="light"
-								trigger="click"
-								content={content(doc)}
-							>
-								<div className={styles.dots}>
+							<div className={styles.dots}>
+								<Popover
+									interactive
+									placement="bottom-end"
+									content={content(doc)}
+								>
 									<IcMOverflowDot />
-								</div>
-							</Popover>
+								</Popover>
+							</div>
 						)}
 
 						{doc.type === 'pdf' ? (

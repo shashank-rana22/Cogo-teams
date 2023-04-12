@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { IcMPdf } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -40,7 +40,8 @@ function UploadForm({
 		default:
 			content = (
 				<>
-					<div className={styles.label}>Choose From Document Wallet</div>
+					<Modal.Header title="Document Wallet" />
+					{/* <div className={styles.label}>Document Wallet</div> */}
 					<div
 						role="button"
 						tabIndex={0}
