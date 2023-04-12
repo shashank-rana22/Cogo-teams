@@ -121,6 +121,11 @@ function ShipmentView() {
 							{filters?.tradeType}
 						</div>
 					)}
+					<div className={styles.card_small}>
+						Remaining -
+						{' '}
+						<span className={styles.color}>{totalRecords}</span>
+					</div>
 				</div>
 
 				<div className={styles.input_container}>

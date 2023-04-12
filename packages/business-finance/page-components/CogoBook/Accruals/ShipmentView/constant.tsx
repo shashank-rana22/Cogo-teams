@@ -387,11 +387,11 @@ export const accrualColumn = (
 	{
 		Header   : '',
 		id       : 'ribbon',
-		accessor : () => (
+		accessor : (row) => (
 
 			<div>
 				<div className={styles.ribbon}>
-					Shipment
+					{row?.shipmentType || '-'}
 				</div>
 			</div>
 

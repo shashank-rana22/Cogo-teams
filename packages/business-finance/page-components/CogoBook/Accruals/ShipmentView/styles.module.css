@@ -128,3 +128,12 @@
   display: flex;
   align-items: center;
 }
+.color {
+  color: #f68b21;
+  font-weight: 600;
+}
+.purchase {
+  font-weight: 600;
+  margin: 4px 0px;
+  text-decoration: underline;
+}

@@ -6,22 +6,16 @@ import StyledTable from '../../common/StyledTable';
 import useArchive from '../../hooks/useArchive';
 import { optionsEntity, serviceTypeOptions } from '../constant';
 
-import { ARCHIVE_DECLARED, ARCHIVE_MONTH_ACCRUED, ARCHIVE_MONTH_BOOKED } from './configuration';
+import { ARCHIVE_DECLARED, ARCHIVE_MONTH_BOOKED } from './configuration';
 import Freeze from './Freeze';
 import MonthInfo from './MonthInfo';
 import styles from './styles.module.css';
 
 function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateAction<boolean>> }) {
 	const [toggleValue, setToggleValue] = useState('declared');
-	const [isBookedActive, setIsBookActive] = useState(true);
-	const [showSub, setShowSub] = useState(false);
-	let ARCHIVE_MONTH_CONFIG;
 
-	if (isBookedActive) {
-		ARCHIVE_MONTH_CONFIG = ARCHIVE_MONTH_BOOKED;
-	} else {
-		ARCHIVE_MONTH_CONFIG = ARCHIVE_MONTH_ACCRUED;
-	}
+	const [showSub, setShowSub] = useState(false);
+
 	const {
 		apiData,
 		drillData,
@@ -77,38 +71,6 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 						loading={loading}
 					/>
 					<div className={styles.button_container}>
-						<div className={styles.button_value}>
-							<div
-								className={isBookedActive ? styles.selected : styles.button_tab}
-								onClick={() => {
-									setGlobalFilters((p) => ({
-										...p,
-										archivedStatus: 'BOOKED',
-									}));
-									getDrillDownArchive(monthData);
-									setIsBookActive(true);
-								}}
-								role="presentation"
-							>
-								Booked
-							</div>
-
-							<div
-								className={!isBookedActive ? styles.selected : styles.button_tab}
-								onClick={() => {
-									setGlobalFilters((p) => ({
-										...p,
-										archivedStatus: 'ACCRUED',
-									}));
-									getDrillDownArchive(monthData);
-									setIsBookActive(false);
-								}}
-								role="presentation"
-							>
-								Accrued
-							</div>
-
-						</div>
 						<div
 							onClick={() => { setShowSub(!showSub); }}
 							className={styles.hide_data}
@@ -155,6 +117,20 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 						</div>
 						<div className={styles.div_select}>
 							<Select
+								value={globalFilters?.archivedStatus}
+								onChange={(val:string) => {
+									setGlobalFilters((prev) => ({ ...prev, archivedStatus: val }));
+								}}
+								placeholder="Archived Status"
+								options={[
+									{ label: 'Booked', value: 'BOOKED' },
+									{ label: 'Accrued', value: 'ACCRUED' }]}
+								isClearable
+								style={{ width: '180px' }}
+							/>
+						</div>
+						<div className={styles.div_select}>
+							<Select
 								value={globalFilters?.entity}
 								onChange={(val:string) => {
 									setGlobalFilters((prev) => ({ ...prev, entity: val }));
@@ -189,7 +165,7 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 									total={particularMonth ? TotalRecords : totalRecords}
 									pageSize={10}
 									data={particularMonth ? drillDataList : list}
-									columns={particularMonth ? ARCHIVE_MONTH_CONFIG : ARCHIVE_DECLARED(
+									columns={particularMonth ? ARCHIVE_MONTH_BOOKED : ARCHIVE_DECLARED(
 										setMonthData,
 										particularMonth,
 										setParticularMonth,
