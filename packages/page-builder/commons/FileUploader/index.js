@@ -128,20 +128,22 @@ function FileUploader(props) {
 	};
 
 	return (
-		<>
+		<div className={styles.container}>
 			{!loading && (
-				<Upload
-					{...rest}
-					value={fileName}
-					multiple={multiple}
-					onChange={handleChange}
-					onClick={handleDelete}
-					loading={loading}
-					uploadDesc={uploadDesc || 'Upload files'}
-					uploadIcon={uploadIcon || <IcMCloudUpload color="#6FA5AB" height={40} width={40} />}
-					fileData={urlStore}
-					className={styles.ui_upload_droparea_container}
-				/>
+				<div className={styles.uploader_box}>
+					<Upload
+						{...rest}
+						value={fileName}
+						multiple={multiple}
+						onChange={handleChange}
+						onClick={handleDelete}
+						loading={loading}
+						uploadDesc={uploadDesc || 'Upload files'}
+						uploadIcon={uploadIcon || <IcMCloudUpload color="#6FA5AB" height={40} width={40} />}
+						fileData={urlStore}
+						className={styles.ui_upload_droparea_container}
+					/>
+				</div>
 			)}
 			{true && !isEmpty(progress) && Object.keys(progress).map((key) => (
 				<div className={styles.progress_container}>
@@ -162,7 +164,7 @@ function FileUploader(props) {
 				</div>
 			))}
 
-		</>
+		</div>
 	);
 }
 

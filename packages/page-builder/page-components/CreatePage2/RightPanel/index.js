@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import { IcMCrossInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
@@ -6,7 +7,7 @@ import { useDrag, useDrop } from 'react-dnd';
 // import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css';
 import RenderComponents from './RenderComponent';
-// import styles from './styles.module.css';
+import styles from './styles.module.css';
 
 const ITEM_TYPES = {
 	text        : 'text',
@@ -143,13 +144,22 @@ function Item(props) {
 
 	drag(drop(itemRef));
 
+	const handleDelete = (itemList) => {
+		const { id: sId } = itemList || {};
+		const data = components;
+
+		const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === sId));
+		data.layouts.splice(selectedComponentIndex, 1);
+		setComponents((prev) => ({ ...prev, layouts: data.layouts }));
+	};
+
 	// const onResize = (event, { element, size }) => {
 	// 	setState({ width: size.width, height: size.height });
 	//   };
 
 	const opacity = isNewItemAdding && !id ? '0.3' : '1';
 
-	const border = isSelected ? '1px solid #88cad1' : 'none';
+	const border = isSelected && '1px solid #88cad1';
 
 	return (
 
@@ -168,19 +178,19 @@ function Item(props) {
 			data-handler-id={handlerId}
 			onClick={onClick}
 			key={elementId}
-			className="drag-handle"
 			style={{
 				opacity,
 				border,
-				// width   : `${width}px`,
-				// height  : `${height}px`,
-
 			}}
+			className={styles.element_Container}
 		>
 
-			{type === 'container'
-				? <ComponentBuilder widget={widget} components={components} setComponents={setComponents} />
-				: <RenderComponents componentType={type} widget={widget} components={components} setComponents={setComponents} elementId={elementId} />}
+			<div>
+				{type === 'container'
+					? <ComponentBuilder widget={widget} components={components} setComponents={setComponents} />
+					: <RenderComponents componentType={type} widget={widget} components={components} setComponents={setComponents} elementId={elementId} />}
+			</div>
+			<div role="presentation" className={styles.change} onClick={() => handleDelete(widget)}><IcMCrossInCircle height="24px" width="24px" cursor="pointer" /></div>
 		</div>
 	// </ResizableBox>
 	);
