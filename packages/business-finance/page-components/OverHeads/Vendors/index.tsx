@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
 import { formatDate } from '../../commons/utils/formatDate';
+import getFormattedPrice from '../../commons/utils/getFormattedPrice';
 import List from '../commons/List';
 
 import CreateVendorModal from './CreateVendorModal';
@@ -162,9 +163,12 @@ function VenderComponent() {
 
 		return (
 			<div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-				{totalPaidAmount}
+				{getFormattedPrice(totalPaidAmount, currency)}
 				{' '}
-				<Tooltip content={`Current Month: ${currency} ${currentMonthPaidAmount}`} placement="top">
+				<Tooltip
+					content={`Current Month: ${getFormattedPrice(currentMonthPaidAmount, currency)}`}
+					placement="top"
+				>
 					<IcMInfo />
 				</Tooltip>
 			</div>
@@ -175,9 +179,7 @@ function VenderComponent() {
 		const { openInvoices = 0, openInvoiceAmount = 0, currency = '' } = item;
 		return (
 			<div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-				{currency}
-				{' '}
-				{openInvoiceAmount}
+				{getFormattedPrice(openInvoiceAmount, currency)}
 				<div>
 					(
 					{openInvoices}

@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 
 import showOverflowingNumber from '../../../commons/showOverflowingNumber';
 import { formatDate } from '../../../commons/utils/formatDate';
+import getFormattedPrice from '../../../commons/utils/getFormattedPrice';
 import useListExpense from '../hooks/useListExpense';
 import useSendEmail from '../hooks/useSendEmail';
 
@@ -14,7 +15,7 @@ interface BillInterface {
 	billNumber?:string | number,
 	paidTds ?: number,
 	grandTotal?:number,
-	paidAmount?:number | string,
+	paidAmount?:number,
 	dueDate?:Date,
 	billDate?:Date,
 	subCategory?:string,
@@ -25,6 +26,7 @@ interface BillInterface {
 	billDocumentUrl?:string,
 	approvedByName?:string,
 	approvedByUser?:{ id?:string | number },
+	billCurrency?:string,
 }
 
 interface Props {
@@ -106,6 +108,7 @@ function ShowMore({ id, recurringState, showExpenseModal }:Props) {
 											dueDate, billDate, createdDate, status, approvedByName, updatedAt,
 											billDocumentUrl = '',
 											subCategory = '',
+											billCurrency = '',
 										} = bill || {};
 										const subCategoryFormatted = (subCategory || '').replaceAll('_', ' ');
 
@@ -131,15 +134,15 @@ function ShowMore({ id, recurringState, showExpenseModal }:Props) {
 												</div>
 												<div className={styles.section}>
 													<div>Payable</div>
-													<div className={styles.element}>{grandTotal - payableTds}</div>
+													<div className={styles.element}>{getFormattedPrice(grandTotal - payableTds, billCurrency)}</div>
 												</div>
 												<div className={styles.section}>
 													<div>TDS</div>
-													<div className={styles.element}>{payableTds}</div>
+													<div className={styles.element}>{getFormattedPrice(payableTds, billCurrency)}</div>
 												</div>
 												<div className={styles.section}>
 													<div>Paid</div>
-													<div className={styles.element}>{paidAmount }</div>
+													<div className={styles.element}>{getFormattedPrice(paidAmount, billCurrency) }</div>
 												</div>
 												<div className={styles.section}>
 													<div>Due Date</div>

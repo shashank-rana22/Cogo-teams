@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import SegmentedControl from '../../../commons/SegmentedControl';
 import showOverflowingNumber from '../../../commons/showOverflowingNumber';
 import { formatDate } from '../../../commons/utils/formatDate';
+import getFormattedPrice from '../../../commons/utils/getFormattedPrice';
 import List from '../../commons/List';
 import useListExpense from '../hooks/useListExpense';
 import { expenseConfig } from '../utils/config';
@@ -51,9 +52,7 @@ function ShowMore({ vendorId }:Props) {
 			const { grandTotal, paidAmount, billCurrency = '' } = itemData || {};
 			return (
 				<div>
-					{billCurrency}
-					{' '}
-					{(grandTotal >= 0 && paidAmount >= 0) ? (grandTotal - paidAmount) : '-'}
+					{(grandTotal >= 0 && paidAmount >= 0) ? getFormattedPrice(grandTotal - paidAmount, billCurrency) : '-'}
 				</div>
 			);
 		},
@@ -123,7 +122,7 @@ function ShowMore({ vendorId }:Props) {
 		},
 		renderInvoiceAmount: (itemData:any) => {
 			const { grandTotal, billCurrency = '' } = itemData || {};
-			const amount = `${billCurrency} ${grandTotal}`;
+			const amount = getFormattedPrice(grandTotal, billCurrency);
 			return (
 				<div>
 					{showOverflowingNumber(amount || '', 12)}
@@ -132,7 +131,7 @@ function ShowMore({ vendorId }:Props) {
 		},
 		renderTds: (itemData:any) => {
 			const { payableTds, billCurrency = '' } = itemData || {};
-			const amount = `${billCurrency} ${payableTds}`;
+			const amount = getFormattedPrice(payableTds, billCurrency);
 			return (
 				<div>
 					{showOverflowingNumber(amount || '', 12)}
@@ -141,7 +140,7 @@ function ShowMore({ vendorId }:Props) {
 		},
 		renderPaid: (itemData:any) => {
 			const { paidAmount, billCurrency = '' } = itemData || {};
-			const amount = `${billCurrency} ${paidAmount}`;
+			const amount = getFormattedPrice(paidAmount, billCurrency);
 			return (
 				<div>
 					{showOverflowingNumber(amount || '', 12)}
