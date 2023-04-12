@@ -1,5 +1,7 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { startCase } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
 const useGetSingleAnnouncement = (id = '') => {
@@ -16,7 +18,9 @@ const useGetSingleAnnouncement = (id = '') => {
 				},
 			});
 		} catch (error) {
-			Toast.error(error?.message);
+			if (error?.response) {
+				Toast.error(startCase(getApiErrorString(error?.response?.data)) || 'Something went wrong');
+			}
 		}
 	}, [id, trigger]);
 

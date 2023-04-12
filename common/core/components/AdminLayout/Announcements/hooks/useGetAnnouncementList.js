@@ -1,8 +1,9 @@
 import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect, useCallback } from 'react';
 
 const useGetAnnouncementList = () => {
@@ -95,7 +96,9 @@ const useGetAnnouncementList = () => {
 				totalCount: data?.total_count,
 			}));
 		} catch (error) {
-			Toast.error(error?.message);
+			if (error?.response) {
+				Toast.error(startCase(getApiErrorString(error?.response?.data)) || 'Something went wrong');
+			}
 		}
 	}, [cogo_entity_id, country_id, params.filters.announcement_type, params.filters.q,
 		params.filters.toggle, params.page, roleSubFunction, role_functions, scope, trigger, user_id]);
