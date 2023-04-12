@@ -67,8 +67,6 @@ function CreateFAQ() {
 		setShowAlias,
 	} = useCreateQuestions({ data, setEditorError });
 
-	console.log('showAlias', showAlias);
-
 	const {
 		setConfigurationPage,
 		handleSubmit: handleCreate,
