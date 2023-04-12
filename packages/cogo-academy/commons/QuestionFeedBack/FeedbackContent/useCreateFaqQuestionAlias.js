@@ -33,13 +33,13 @@ const useCreateFaqQuestionAlias = ({
 			alias_question_abstract : inputAlias,
 			faq_feedback_id         : feedbackId,
 			audience_ids,
-
 		};
 
 		try {
 			await trigger({
 				data: payload,
 			});
+
 			Toast.success('Aliases added sucessfully');
 			setShowAliasInput(false);
 			fetchListFaqFeedback();
