@@ -27,7 +27,7 @@ const useGetTreasuryStats = (tabs:string) => {
 			try {
 				trigger({
 					params: {
-						entityCode : tabs === '101' || tabs === '301' ? tabs : undefined,
+						entityCode : tabs === 'all' ? ['101', '301'] : tabs,
 						fromDate   : startDate ? format(startDate as Date, 'yyyy-MM-dd 00:00:00', {}, false)
 							: undefined,
 						toDate: endDate

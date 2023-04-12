@@ -1,5 +1,5 @@
 import { Legend, ProgressBar, cl, Popover, Placeholder, Tooltip } from '@cogoport/components';
-import { IcMInfo, IcMArrowRotateDown } from '@cogoport/icons-react';
+import { IcMInfo, IcMArrowRotateDown, IcMArrowNext } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
 import SegmentedControl from '../../../commons/SegmentedControl/index';
@@ -16,51 +16,25 @@ import styles from '../styles.module.css';
 import ResponsivePieChart from './ResponsivePieChart';
 
 function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
-	const pieData = 	[
-		{
-		  id    : 'elixir',
-		  label : 'elixir',
-		  value : 121,
-		  color : 'hsl(136, 70%, 50%)',
-		},
-		{
-		  id    : 'hack',
-		  label : 'hack',
-		  value : 422,
-		  color : 'hsl(54, 70%, 50%)',
-		},
-		{
-		  id    : 'javascript',
-		  label : 'javascript',
-		  value : 59,
-		  color : 'hsl(124, 70%, 50%)',
-		},
-		{
-		  id    : 'c',
-		  label : 'c',
-		  value : 101,
-		  color : 'hsl(284, 70%, 50%)',
-		},
-		{
-		  id    : 'rust',
-		  label : 'rust',
-		  value : 290,
-		  color : 'hsl(191, 70%, 50%)',
-		},
-	  ];
-
 	const {
 		receivablesData,
 		recievablesTab,
 		setRecievablesTab,
 		receivablesLoading,
 	} = useGetReceivablesList({ globalFilters, entityTabFilters });
+	console.log(receivablesData, 'receivablesData');
 
 	const { payablesData, payablesLoading } = useGetPayablesList({ globalFilters, entityTabFilters });
-	const { overdueAmount = 0, nonOverdueAmount = 0, notPaidDocumentCount = 0 } = receivablesData || {};
+	const {
+		overdueAmount = 0, nonOverdueAmount = 0, notPaidDocumentCount = 0,
+		onAccountAndOutStandingData = [], onAccountChangeFromYesterday = 0, outstandingChangeFromYesterday = 0,
+	} = receivablesData || {};
 	const {
 		overdueAmount:payOverdueAmount = 0, nonOverdueAmount:payNonOverdueAmount = 0,
 		notPaidDocumentCount:payNotPaidDocumentCount = 0,
+		onAccountAndOutStandingData:AccountAndOutStandingData = [],
+		onAccountChangeFromYesterday:AccountChangeFromYesterday = 0,
+		outstandingChangeFromYesterday:outstandingChangeYesterday = 0,
 	} = payablesData || {};
 
 	const progressDataReceivables = overdueAmount + nonOverdueAmount;
@@ -190,12 +164,83 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 								</div>
 							</div>
 							<div className={styles.account_payment_box}>
-								<div>
-									<ResponsivePieChart pieData={pieData} />
+								<div className={styles.responsive_pie_chart}>
+									<ResponsivePieChart pieData={onAccountAndOutStandingData} />
 								</div>
 								<div className={styles.border_left} />
-								<div>
-									On Account Payment
+								<div style={{ marginRight: '60px' }}>
+									<div style={{ marginRight: '30px', marginTop: '20px' }}>
+										<div style={{ display: 'flex' }}>
+											<span>
+												{showInTooltop(
+													getFormattedPrice(onAccountAndOutStandingData?.[1]?.value, 'INR'),
+													getAmountInLakhCrK(onAccountAndOutStandingData?.[1]?.value, 'INR'),
+												)}
+											</span>
+											<div className={styles.on_account}>On Account Payment</div>
+										</div>
+
+										<div className={styles.accounts_text_style}>
+											<div style={{ marginRight: '2px' }}>
+
+												<div className={styles.account_change_text_style}>
+													<div className={styles.color_box} />
+													<div className={onAccountChangeFromYesterday >= 0
+														? styles.icon_plus_styles : styles.icon_minus_styles}
+													>
+														<IcMArrowNext height={20} width={20} />
+
+													</div>
+													<div>
+														{onAccountChangeFromYesterday}
+													</div>
+												</div>
+
+											</div>
+											%
+											<span className={styles.yesterday_text_style}>
+												{onAccountChangeFromYesterday >= 0 ? 'more' : 'less'}
+												{' '}
+												than yesterday
+											</span>
+										</div>
+									</div>
+									<div style={{ marginRight: '30px', marginTop: '20px' }}>
+										<div style={{ display: 'flex' }}>
+											<span>
+												{showInTooltop(
+													getFormattedPrice(onAccountAndOutStandingData?.[0]?.value, 'INR'),
+													getAmountInLakhCrK(onAccountAndOutStandingData?.[0]?.value, 'INR'),
+												)}
+											</span>
+											<div className={styles.on_account}>Outstanding</div>
+										</div>
+
+										<div className={styles.accounts_text_style}>
+											<div style={{ marginRight: '2px' }}>
+
+												<div className={styles.account_change_text_style}>
+													<div className={styles.color_box_outstanding} />
+													<div className={outstandingChangeFromYesterday >= 0
+														? styles.icon_plus_styles : styles.icon_minus_styles}
+													>
+														<IcMArrowNext height={20} width={20} />
+
+													</div>
+													<div>
+														{outstandingChangeFromYesterday}
+													</div>
+												</div>
+
+											</div>
+											%
+											<span className={styles.yesterday_text_style}>
+												{outstandingChangeFromYesterday >= 0 ? 'more' : 'less'}
+												{' '}
+												than yesterday
+											</span>
+										</div>
+									</div>
 								</div>
 							</div>
 						</>
@@ -285,6 +330,87 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 										{payNotPaidDocumentCount}
 										)
 									</span>
+								</div>
+							</div>
+
+							<div className={styles.account_payment_box}>
+								<div className={styles.responsive_pie_chart}>
+									<ResponsivePieChart pieData={AccountAndOutStandingData} />
+								</div>
+								<div className={styles.border_left} />
+								<div style={{ marginRight: '60px' }}>
+									<div style={{ marginRight: '30px', marginTop: '20px' }}>
+										<div style={{ display: 'flex' }}>
+											<span>
+												{showInTooltop(
+													getFormattedPrice(AccountAndOutStandingData?.[1]?.value, 'INR'),
+													getAmountInLakhCrK(AccountAndOutStandingData?.[1]?.value, 'INR'),
+												)}
+											</span>
+											<div className={styles.on_account}>On Account Payment</div>
+										</div>
+
+										<div className={styles.accounts_text_style}>
+											<div style={{ marginRight: '2px' }}>
+
+												<div className={styles.account_change_text_style}>
+													<div className={styles.color_box} />
+													<div className={AccountChangeFromYesterday >= 0
+														? styles.icon_plus_styles : styles.icon_minus_styles}
+													>
+														<IcMArrowNext height={20} width={20} />
+
+													</div>
+													<div>
+														{AccountChangeFromYesterday}
+													</div>
+												</div>
+
+											</div>
+											%
+											<span className={styles.yesterday_text_style}>
+												{AccountChangeFromYesterday >= 0 ? 'more' : 'less'}
+												{' '}
+												than yesterday
+											</span>
+										</div>
+									</div>
+									<div style={{ marginRight: '30px', marginTop: '20px' }}>
+										<div style={{ display: 'flex' }}>
+											<span>
+												{showInTooltop(
+													getFormattedPrice(AccountAndOutStandingData?.[0]?.value, 'INR'),
+													getAmountInLakhCrK(AccountAndOutStandingData?.[0]?.value, 'INR'),
+												)}
+											</span>
+											<div className={styles.on_account}>Outstanding</div>
+										</div>
+
+										<div className={styles.accounts_text_style}>
+											<div style={{ marginRight: '2px' }}>
+
+												<div className={styles.account_change_text_style}>
+													<div className={styles.color_box_outstanding} />
+													<div className={outstandingChangeYesterday >= 0
+														? styles.icon_plus_styles : styles.icon_minus_styles}
+													>
+														<IcMArrowNext height={20} width={20} />
+
+													</div>
+													<div>
+														{outstandingChangeYesterday}
+													</div>
+												</div>
+
+											</div>
+											%
+											<span className={styles.yesterday_text_style}>
+												{outstandingChangeYesterday >= 0 ? 'more' : 'less'}
+												{' '}
+												than yesterday
+											</span>
+										</div>
+									</div>
 								</div>
 							</div>
 
