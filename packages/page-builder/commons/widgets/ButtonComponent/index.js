@@ -49,7 +49,7 @@ function ButtonComponent(props) {
 	// };
 
 	return (
-		<div>
+		<div style={{ height: '60px' }}>
 			<Button
 				type={type}
 				themeType={themeType}
