@@ -79,6 +79,7 @@ function Stage({
 		console.log('type ::', type);
 		return (
 			<div
+				style={{ position: 'relative' }}
 				key={item.id}
 			>
 				<RightPanel

@@ -21,11 +21,11 @@ function ImageComponent(props) {
 			};
 
 			// use map instead slice
-			setComponents((prevComponents) => [
-				...prevComponents.slice(0, selectedComponentIndex),
-				updatedComponent,
-				...prevComponents.slice(selectedComponentIndex + 1),
-			]);
+			// setComponents((prevComponents) => [
+			// 	...prevComponents.slice(0, selectedComponentIndex),
+			// 	updatedComponent,
+			// 	...prevComponents.slice(selectedComponentIndex + 1),
+			// ]);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [fileValue]);
