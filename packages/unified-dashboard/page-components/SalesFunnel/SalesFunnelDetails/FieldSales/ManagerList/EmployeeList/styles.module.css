@@ -73,8 +73,6 @@
 .row {
 	display: flex;
 	margin-bottom: 10px;
-	font-size: 14px;
-	font-weight: 400;
 }
 
 .revenue_arrow {

@@ -69,13 +69,11 @@
 	display: flex;
 	align-items: center;
 	padding-left: 0;
-	font-size: 14px;
 	background: #e0e0e0;
 }
 
 .vertical_text {
 	padding-top: 0;
-	margin-left: -6px;
 	writing-mode: vertical-rl;
 	transform: rotate(180deg);
 }

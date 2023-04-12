@@ -27,23 +27,10 @@ function SalesFunnel({ headerFilters }) {
 	const ref = useRef(null);
 	const inViewport = useIsInViewport(ref, '-200px');
 
-	useEffect(() => {
-		if (!salesFunnelInViewport) {
-			setsalesFunnelInViewport(inViewport);
-		}
-	}, [inViewport, salesFunnelInViewport]);
-
 	const {
 		salesFunnel, setFilters, filters,
 		loading, range, setRange,
 	} =	useListSalesFunnelData(salesFunnelInViewport);
-	useEffect(() => {
-		setFilters((prevFilters) => ({
-			...prevFilters,
-			to_currency : currency,
-			entity_code : entity_code?.length > 0 ? entity_code : undefined,
-		}));
-	}, [headerFilters, currency, entity_code, setFilters]);
 
 	const { revenue_per_month } = salesFunnel?.summary || {};
 	const revenueMonth = (revenue_per_month || [])?.map((item) => ({
@@ -58,6 +45,20 @@ function SalesFunnel({ headerFilters }) {
 			show_my_zone: !!val,
 		}));
 	};
+
+	useEffect(() => {
+		if (!salesFunnelInViewport) {
+			setsalesFunnelInViewport(inViewport);
+		}
+	}, [inViewport, salesFunnelInViewport]);
+
+	useEffect(() => {
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			to_currency : currency,
+			entity_code : entity_code?.length > 0 ? entity_code : undefined,
+		}));
+	}, [headerFilters, currency, entity_code, setFilters]);
 
 	return (
 		<div className={styles.card_wrapper} ref={ref}>

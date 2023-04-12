@@ -30,6 +30,8 @@ function CommonData({
 		? GLOBAL_CONSTANTS.currency_code.INR
 		: GLOBAL_CONSTANTS.currency_code.USD;
 
+	const rev = revenue_analysis[0] || [];
+
 	useEffect(() => {
 		setParam((prevF) => ({
 			...prevF,
@@ -38,8 +40,6 @@ function CommonData({
 			period_type : selectedFilter,
 		}));
 	}, [selectedFilter, setParam]);
-
-	const rev = revenue_analysis[0] || [];
 
 	const currentMonth = `${getMonthYear()?.getMonth}${getMonthYear()?.getYear}`;
 

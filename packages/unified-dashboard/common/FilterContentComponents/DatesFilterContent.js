@@ -56,14 +56,12 @@ function DatesFilterContent({
 				<Button
 					className={styles.cancel_btn}
 					onClick={() => setOpen(false)}
-					id="cancel_button"
 				>
 					CANCEL
 				</Button>
 
 				<Button
 					onClick={() => handleClick()}
-					id="apply_button"
 					className={styles.apply_btn}
 				>
 					APPLY

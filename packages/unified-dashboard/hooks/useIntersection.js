@@ -16,7 +16,7 @@ function useIsInViewport(ref, rootMargin) {
 
 	useEffect(() => {
 		window.addEventListener('resize', handleResize);
-	});
+	}, []);
 
 	const observer = useMemo(() => {
 		let observerBool = null;

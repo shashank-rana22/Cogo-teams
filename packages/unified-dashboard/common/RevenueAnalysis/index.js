@@ -33,15 +33,6 @@ function RevenueAnalysis({
 		? GLOBAL_CONSTANTS.currency_code.INR
 		: GLOBAL_CONSTANTS.currency_code.USD;
 
-	useEffect(() => {
-		setParam((prevF) => ({
-			...prevF,
-			start_date  : null,
-			end_date    : null,
-			period_type : selectedFilter,
-		}));
-	}, [selectedFilter, setParam]);
-
 	const isClickable = isNextRevenueAllowed(
 		selectedFilterTab,
 		revenue_analysis[0],
@@ -59,6 +50,16 @@ function RevenueAnalysis({
 			);
 		}
 	};
+
+	useEffect(() => {
+		setParam((prevF) => ({
+			...prevF,
+			start_date  : null,
+			end_date    : null,
+			period_type : selectedFilter,
+		}));
+	}, [selectedFilter, setParam]);
+
 	const currentMonth = `${getMonthYear()?.getMonth}${getMonthYear()?.getYear}`;
 
 	if (loading) {

@@ -12,7 +12,11 @@ const GetDashBoardTabs = () => {
 
 	useEffect(() => {
 		const getFileContent = async () => {
-			await trigger();
+			try {
+				await trigger();
+			} catch (error) {
+				console.log(error, 'error');
+			}
 		};
 
 		if (process.env.NODE_ENV === 'production') {

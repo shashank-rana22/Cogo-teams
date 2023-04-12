@@ -11,6 +11,10 @@ function PopoverFilter({
 	const [popoverVisible, setPopoverVisible] = useState(false);
 	const [isFilterApplied, setIsFilterApplied] = useState(false);
 
+	const closePopover = () => {
+		setPopoverVisible(false);
+	};
+
 	useEffect(() => {
 		if (params.shipment_type.length !== 12 || params.trade_type.length !== 4) {
 			setIsFilterApplied(true);
@@ -19,9 +23,6 @@ function PopoverFilter({
 		}
 	}, [params]);
 
-	const closePopover = () => {
-		setPopoverVisible(false);
-	};
 	return (
 		<div className={styles.popover}>
 			<Popover

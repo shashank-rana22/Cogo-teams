@@ -21,7 +21,6 @@
 	display: flex;
 	justify-content: space-evenly;
 	margin: 8px 24px 24px;
-	font-size: 14px;
 	font-weight: bold;
 }
 
@@ -53,7 +52,6 @@
 
 .text_month {
 	padding-top: 3px;
-	font-weight: 400;
 }
 
 .month_container {

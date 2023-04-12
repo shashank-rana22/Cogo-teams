@@ -41,10 +41,9 @@ function Filters({
 					/>
 				)}
 				visible={open}
-				id="filter_popover"
 			>
 				{children || (
-					<Button id="filter_btn" onClick={() => setOpen(!open)}>
+					<Button onClick={() => setOpen(!open)}>
 						{name}
 					</Button>
 				)}

@@ -22,20 +22,13 @@
 
 .revenue_text {
 	font-size: 12px;
-	font-weight: 400;
 	text-align: center;
 	background-color: #fff;
 }
 
 .text {
 	font-size: 12px;
-	font-weight: 400;
 	text-align: center;
-}
-
-.shipment_text {
-	font-size: 14px;
-	font-weight: 400;
 }
 
 .revenue_row_data {
@@ -61,7 +54,6 @@
 
 .text_bookings {
 	font-size: 12px;
-	font-weight: 400;
 	text-align: center;
 }
 

@@ -30,17 +30,19 @@ const useGetMonthlyRevenue = ({
 
 	const getMonthlyRevenue = useCallback(async (page) => {
 		try {
-			await trigger({
-				params: {
-					page         : page || filters.page,
-					visualize_by : revenueFilter,
-					entity_code  : entity_code?.length > 0 ? entity_code : undefined,
-				},
-			});
+			if (apiKey) {
+				await trigger({
+					params: {
+						page         : page || filters.page,
+						visualize_by : revenueFilter,
+						entity_code  : entity_code?.length > 0 ? entity_code : undefined,
+					},
+				});
+			}
 		} catch (err) {
 			console.log(err, 'err');
 		}
-	}, [revenueFilter, entity_code, filters.page, trigger]);
+	}, [apiKey, revenueFilter, entity_code, filters.page, trigger]);
 
 	useEffect(() => {
 		if (!isDataSelected && inViewport) getMonthlyRevenue();

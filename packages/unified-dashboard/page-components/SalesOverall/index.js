@@ -25,16 +25,17 @@ function SalesOverall({ headerFilters }) {
 	const ref = useRef(null);
 	const inViewport = useIsInViewport(ref, '-200px');
 
+	const {
+		salesOverall, setFilters, filters,
+		loading, range, setRange,
+	} = useListSalesOverallData(salesCompInViewport);
+
 	useEffect(() => {
 		if (!salesCompInViewport) {
 			setsalesCompInViewport(inViewport);
 		}
 	}, [inViewport, salesCompInViewport]);
 
-	const {
-		salesOverall, setFilters, filters,
-		loading, range, setRange,
-	} = useListSalesOverallData(salesCompInViewport);
 	useEffect(() => {
 		setFilters((prevFilters) => ({
 			...prevFilters,
@@ -42,7 +43,9 @@ function SalesOverall({ headerFilters }) {
 			entity_code : entity_code?.length > 0 ? entity_code : undefined,
 		}));
 	}, [headerFilters, currency, entity_code, setFilters]);
+
 	const { revenue_per_month } = salesOverall?.summary || {};
+
 	const revenueMonth = (revenue_per_month || [])?.map((item) => ({
 		id    : (item.invoice_month || '').trim(),
 		value : item?.revenue_amount,

@@ -33,12 +33,6 @@ function RevenueVisualization({ headerFilters }) {
 
 	const isDataSelected = selectedBarData !== undefined;
 
-	useEffect(() => {
-		setSelectedBarData();
-		setSelectedPieData();
-		setRevenueFilter('shipment_created_at');
-	}, [entity_code]);
-
 	const handleResetCharts = () => {
 		setSelectedBarData();
 		setSelectedPieData();
@@ -50,6 +44,12 @@ function RevenueVisualization({ headerFilters }) {
 		setSelectedBarData();
 		setSelectedPieData();
 	};
+
+	useEffect(() => {
+		setSelectedBarData();
+		setSelectedPieData();
+		setRevenueFilter('shipment_created_at');
+	}, [entity_code]);
 
 	useEffect(() => {
 		if (!isComponentInViewport) {
