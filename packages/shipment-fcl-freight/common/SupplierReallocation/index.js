@@ -35,9 +35,11 @@ function SupplierReallocation({
 	const { documents } = shipment_data || {};
 
 	const serviceObj = serviceData?.[0] || {};
-	const { service_type, importer_exporter_id } = serviceObj;
+	const { service_type, importer_exporter } = serviceObj;
 
-	const { handleSubmit, control, formState: { errors } } = useForm();
+	const { defaultValues, controls } = getControls({ serviceObj, documents, isAdditional });
+
+	const { handleSubmit, control, formState: { errors } } = useForm({ defaultValues });
 
 	const afterUpdateRefetch = () => {
 		refetch();
@@ -56,12 +58,10 @@ function SupplierReallocation({
 			ids                 : serviceData?.map((item) => item?.id),
 			data                : { ...values },
 			service_type,
-			performed_by_org_id : importer_exporter_id,
+			performed_by_org_id : importer_exporter?.id,
 		};
 		apiTrigger(payload);
 	};
-
-	const controls = getControls({ serviceObj, documents, isAdditional });
 
 	return (
 		<Modal

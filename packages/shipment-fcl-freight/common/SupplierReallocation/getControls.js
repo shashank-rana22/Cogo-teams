@@ -3,7 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 export default function getControls({ serviceObj, documents, isAdditional }) {
 	const showAllControls = isEmpty(documents) && !isAdditional;
 
-	const { service_type, bls_count, bl_category } = serviceObj || {};
+	const { service_provider, service_type, bls_count, bl_category } = serviceObj || {};
 
 	const controls = [
 		{
@@ -25,7 +25,6 @@ export default function getControls({ serviceObj, documents, isAdditional }) {
 			name        : 'bls_count',
 			label       : 'BL Count',
 			type        : 'number',
-			value       : bls_count,
 			placeholder : 'Enter BL Count',
 			rules       : { required: 'BL Count required' },
 		},
@@ -37,11 +36,17 @@ export default function getControls({ serviceObj, documents, isAdditional }) {
 				{ label: 'Mbl', value: 'mbl' },
 				{ label: 'Hbl', value: 'hbl' },
 			],
-			value       : bl_category,
 			placeholder : 'Enter Bl Category',
 			rules       : { required: 'BL Category is required' },
 		},
 	];
 
-	return showAllControls ? controls : controls.splice(0, 1);
+	return {
+		controls      : showAllControls ? controls : controls.splice(0, 1),
+		defaultValues : {
+			service_provider_id: service_provider?.id,
+			bls_count,
+			bl_category,
+		},
+	};
 }
