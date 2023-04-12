@@ -48,9 +48,7 @@ function DNDComponent() {
 	const [activeTab, setActiveTab] = useState('content');
 	const [component, setComponent] = useState({
 		layouts : [],
-		style   : {
-			border: '2px solid red',
-		},
+		style   : {},
 
 	});
 

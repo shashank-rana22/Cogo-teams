@@ -85,7 +85,7 @@ function Stage({
 			>
 				<RightPanel
 					widget={item}
-					components={stageItems}
+					components={stageItems.layouts}
 					setComponents={setComponent}
 					index={index}
 					id={id}
