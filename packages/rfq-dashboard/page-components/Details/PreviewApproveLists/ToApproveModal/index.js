@@ -8,7 +8,7 @@ import PortsCard from '../PortsCard';
 
 import styles from './styles.module.css';
 
-function ToApproveModal({ show, setShow = () => {}, data = [], selected, changeSelection = () => {} }) {
+function ToApproveModal({ show, setShow = () => {}, selected, changeSelection = () => {}, isClickable = true }) {
 	return (
 		<Modal
 			size="xl"
@@ -17,7 +17,6 @@ function ToApproveModal({ show, setShow = () => {}, data = [], selected, changeS
 			className={styles.modal_container}
 		>
 			<Modal.Header
-				// className={styles.modal_header}
 				title={(
 					<div className={styles.modal_header}>
 						<h2>Preview</h2>
@@ -26,16 +25,22 @@ function ToApproveModal({ show, setShow = () => {}, data = [], selected, changeS
 				)}
 			/>
 			<Modal.Body className={styles.modal_body}>
-				<span className={styles.port_numbers}>8 Port Pairs</span>
+				<span className={styles.port_numbers}>
+					{selected.length}
+					{' '}
+					Port Pairs
+				</span>
 				<div className={styles.ports_card}>
 					{
-						(data || []).map((item) => (
+						(selected || []).map((item) => (
 							<div>
 								<PortsCard
 									{...item}
 									data={item}
 									selected={selected}
 									changeSelection={changeSelection}
+									isClickable={isClickable}
+									source="modal"
 								/>
 							</div>
 						))
@@ -49,7 +54,6 @@ function ToApproveModal({ show, setShow = () => {}, data = [], selected, changeS
 						size="md"
 						themeType="tertiary"
 						onClick={() => setShow(false)}
-
 					>
 						Cancel
 					</Button>
@@ -59,7 +63,6 @@ function ToApproveModal({ show, setShow = () => {}, data = [], selected, changeS
 				</div>
 			</Modal.Footer>
 		</Modal>
-
 	);
 }
 export default ToApproveModal;

@@ -1,5 +1,11 @@
 .modal_container {
 	background-color: #fff;
+
+	:global {
+		.ui_modal_close_button {
+			margin-left: 20px;
+		}
+	}
 }
 
 .port_numbers {

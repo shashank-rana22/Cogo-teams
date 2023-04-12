@@ -21,17 +21,17 @@ export const PortsOriginDestinationDetailsData = [
 		id          : 2,
 		origin_port : [
 			{
-				display_name : 'ICD Dadri (INDER), Delhi, India',
-				name         : 'ICD Dadri',
-				port_code    : 'INDER',
+				display_name : 'Jebel Ali (AEJEA), Dubai, United Arab Emirates',
+				name         : 'Jebel Ali',
+				port_code    : 'AEJEA',
 			},
 		],
 
 		destination_port: [
 			{
-				display_name : 'Jebel Ali (AEJEA), Dubai, United Arab Emirates',
-				name         : 'Jebel Ali',
-				port_code    : 'AEJEA',
+				display_name : 'ICD Dadri (INDER), Delhi, India',
+				name         : 'ICD Dadri',
+				port_code    : 'INDER',
 			},
 		],
 	},
@@ -39,16 +39,16 @@ export const PortsOriginDestinationDetailsData = [
 		id          : 3,
 		origin_port : [
 			{
-				display_name : 'ICD Dadri (INDER), Delhi, India',
-				name         : 'ICD Dadri',
-				port_code    : 'INDER',
+				display_name : 'ABCDEFGHI (INDER), ABCDEFGHI, ABCDEFGHI',
+				name         : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+				port_code    : 'AEJEA',
 			},
 		],
 
 		destination_port: [
 			{
-				display_name : 'Jebel Ali (AEJEA), Dubai, United Arab Emirates',
-				name         : 'Jebel Ali',
+				display_name : 'ABCDEFGHI (INDER), ABCDEFGHI, ABCDEFGHI',
+				name         : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
 				port_code    : 'AEJEA',
 			},
 		],

@@ -1,5 +1,5 @@
 import { Checkbox } from '@cogoport/components';
-import { IcMFcl, IcMPortArrow, IcMArrowRotateDown } from '@cogoport/icons-react';
+import { IcMFcl, IcMPortArrow, IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import ServiceStats from '../../../../common/ServiceStats';
@@ -17,7 +17,7 @@ function PortsCard(props) {
 
 	const {
 		data = {}, origin_port = [],
-		destination_port = [], changeSelection = () => {}, selected = [], isClickable = true,
+		destination_port = [], changeSelection = () => {}, selected = [], isClickable = true, source = '',
 	} = props;
 
 	const prefilledValues = [];
@@ -38,8 +38,8 @@ function PortsCard(props) {
 			&& (
 				<Checkbox
 					value="a3"
-					checked={selected.find((item) => item === data.id)}
-					onChange={(e) => changeSelection(data.id, e.target.checked)}
+					checked={selected.find((item) => item.id === data.id)}
+					onChange={(e) => changeSelection(data, e.target.checked)}
 				/>
 			)
 			}
@@ -53,14 +53,14 @@ function PortsCard(props) {
 					</div>
 					<div className={styles.ports_tags_container}>
 						<div className={styles.location_box}>
-							<LocationDetails data={origin_port[0]} />
+							<LocationDetails data={origin_port[0]} source={source} />
 							<IcMPortArrow className={styles.icmportarrow_icon} />
-							<LocationDetails data={destination_port[0]} />
+							<LocationDetails data={destination_port[0]} source={source} />
 						</div>
 						<CommodityMapping />
 					</div>
 					<div className={styles.service_stats}>
-						<ServiceStats data={PromisedConAndContract} />
+						<ServiceStats data={PromisedConAndContract} source="ports-card" />
 					</div>
 					<div className={styles.price_fright_ctr_section}>
 						<PriceFreightCtr />
@@ -72,15 +72,16 @@ function PortsCard(props) {
 							setShowPrice(!showPrice);
 						}}
 					>
-						<IcMArrowRotateDown />
+						{showPrice ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
 					</button>
 				</div>
-				{showPrice && (
-					<PriceBreakupCard
-						priceBreakupChildData={priceBreakupChildData}
-						prefilledValues={prefilledValues}
-					/>
-				)}
+				{/* {showPrice && ( */}
+				<PriceBreakupCard
+					priceBreakupChildData={priceBreakupChildData}
+					prefilledValues={prefilledValues}
+					showPrice={showPrice}
+				/>
+				{/* )} */}
 			</div>
 		</div>
 	);

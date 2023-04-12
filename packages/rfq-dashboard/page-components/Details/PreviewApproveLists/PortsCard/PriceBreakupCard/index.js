@@ -95,7 +95,7 @@ const formControls = [
 		],
 	},
 ];
-function PriceBreakupCard({ show, prefilledValues = [{}], priceBreakupChildData = [] }) {
+function PriceBreakupCard({ prefilledValues = [{}], priceBreakupChildData = [], showPrice = false }) {
 	const cardTitles = [
 		{ label: 'Service', name: 'service' },
 		{ label: 'Base Price', name: 'base_price' },
@@ -135,7 +135,7 @@ function PriceBreakupCard({ show, prefilledValues = [{}], priceBreakupChildData 
 	// console.log('$$$$', fields, 'fields');
 
 	return (
-		<div className={`${styles.container} ${show ? styles.expand_div : styles.collapse_div}`}>
+		<div className={`${styles.container} ${showPrice ? styles.expand_div : styles.collapse_div}`}>
 			<div className={`${styles.card_title} ${styles.card_item_singular}`}>
 				{
 					cardTitles.map((itm) => (

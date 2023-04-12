@@ -3,10 +3,25 @@
 	flex-direction: column;
 	width: 100%;
 	padding-top: 10px;
+	overflow: hidden;
 	background-color: #f9f9f9;
 	border-bottom-right-radius: 6px;
 	border-bottom-left-radius: 6px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+}
+
+.expand_div {
+	/* max-height: fit-content; */
+
+	/* max-height: 1000px; */
+
+	/* transition: all 1s ease-in-out; */
+}
+
+.collapse_div {
+	/* max-height: 0; */
+
+	display: none;
 }
 
 /* .title_container {

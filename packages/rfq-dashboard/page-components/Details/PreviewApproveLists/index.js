@@ -17,7 +17,9 @@ function PreviewAndApproveLists() {
 		if (e.target.checked) {
 			const list = [];
 			PortsOriginDestinationDetailsData.forEach((item) => {
-				list.push(item.id);
+				// list.push(item.id);
+				list.push(item);
+				// console.log('list:', list);
 			});
 			setSelected(list);
 			setCheckAll(true);
@@ -26,11 +28,13 @@ function PreviewAndApproveLists() {
 			setSelected([]);
 		}
 	};
-	const changeSelection = (id, state) => {
+
+	console.log(selected, 'litx');
+	const changeSelection = (item, state) => {
 		if (state) {
-			setSelected([...selected, id]);
+			setSelected([...selected, { ...item }]);
 		} else {
-			setSelected(selected.filter((item) => item !== id));
+			setSelected(selected.filter((elem) => elem?.id !== item?.id));
 		}
 	};
 
@@ -38,7 +42,8 @@ function PreviewAndApproveLists() {
 	// console.log(selectedPortsItems, 'selectedPortsItems');
 
 	useEffect(() => {
-		console.log('selected', selected?.[0]);
+		// console.log('selected', selected?.[0]);
+		// console.log('selected', selected);
 		if (selected?.length === PortsOriginDestinationDetailsData?.length)setCheckAll(true);
 		else setCheckAll(false);
 	}, [selected]);
@@ -76,6 +81,7 @@ function PreviewAndApproveLists() {
 							// data={selectedPortsItems}
 							selected={selected}
 							changeSelection={changeSelection}
+							isClickable={false}
 						/>
 					)
 				}
@@ -98,6 +104,7 @@ function PreviewAndApproveLists() {
 						PortsOriginDestinationDetailsData.map((item) => (
 							<div className={styles.ports_section}>
 								<PortsCard
+									id={item.id}
 									{...item}
 									data={item}
 									selected={selected}

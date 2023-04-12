@@ -1,13 +1,12 @@
 import { cl } from '@cogoport/components';
 
-import { PromisedConAndContract } from '../../configurations/service-stats-data';
-
 import styles from './styles.module.css';
 
-function ServiceStats({ data = [], type = '' }) {
+function ServiceStats({ data = [], type = '', source = '' }) {
 	return (
 		<div className={cl`${styles.revenue_profitability_utilisation_section} 
-        ${(data === PromisedConAndContract) ? styles.service_stats_ports_section : ''}`}
+        ${(source
+			=== 'ports-card') ? styles.service_stats_ports_section : ''}`}
 		>
 			{data.map((item) => (
 				<div className={cl`${type === 'preview-stats' ? styles.individual_section : ''}`}>
@@ -16,7 +15,7 @@ function ServiceStats({ data = [], type = '' }) {
                         ${styles.revenyue_profitability_utilization_value} 
                         ${styles[item.color]}`}
 					>
-						{item.value}
+						{item.key === 'revenue' ? item.value : `${item.value} %`}
 					</div>
 				</div>
 			))}
