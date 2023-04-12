@@ -22,10 +22,11 @@ const generalIcon = (
 );
 
 function TopicList({
-	faqNotificationApiLoading,
-	fetchFaqNotification,
-	faqNotificationData,
-	refetch,
+	faqNotificationApiLoading = false,
+	fetchFaqNotification = () => {},
+	faqNotificationData = {},
+	refetch = () => {},
+	from = 'cogo_assist',
 }) {
 	const {
 		search,
@@ -191,6 +192,7 @@ function TopicList({
 				showNotificationContent={showNotificationContent}
 				fetchFaqNotification={fetchFaqNotification}
 				refetch={refetch}
+				from={from}
 			/>
 
 			{renderQuestionList()}
