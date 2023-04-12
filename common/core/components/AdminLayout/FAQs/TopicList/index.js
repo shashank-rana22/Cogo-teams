@@ -58,6 +58,7 @@ function TopicList({
 		setAnnouncementModalData = () => {},
 		searchAnnouncement = '',
 		setSearchAnnouncement = () => {},
+		setParams = () => {},
 	} = announcementProps;
 
 	const announcementHeaderProps = {
@@ -77,7 +78,15 @@ function TopicList({
 		setAnnouncementModalData({});
 		setSearch('');
 		setSearchAnnouncement('');
-	}, [activeTab, from, setAnnouncementModalData, setSearch, setSearchAnnouncement]);
+		setParams({
+			page    : 1,
+			filters : {
+				q                 : '',
+				toggle            : false,
+				announcement_type : '',
+			},
+		});
+	}, [activeTab, from, setAnnouncementModalData, setParams, setSearch, setSearchAnnouncement]);
 
 	const render = () => {
 		if (topic) {
