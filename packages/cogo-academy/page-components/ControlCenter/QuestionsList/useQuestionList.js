@@ -51,7 +51,7 @@ const addedQuestionsColumns = ({
 
 				<Pill
 					size="sm"
-					color={items?.is_parent ? 'yellow' : 'green'}
+					color={items?.is_parent ? 'green' : 'yellow'}
 				>
 					{items?.is_parent ? 'Parent' : 'Alias'}
 
