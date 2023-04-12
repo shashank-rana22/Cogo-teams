@@ -6,7 +6,7 @@ import {
 	//  SelectController,
 } from '@cogoport/forms';
 // import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
-// import { useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 
 // import { getFieldController } from '../../../../../../common/Form/getFieldController';
 // import { priceBreakupChildData } from '../../../../../configurations/price-breakup-card-child-data';
@@ -115,24 +115,20 @@ function PriceBreakupCard({ prefilledValues = [{}], priceBreakupChildData = [], 
 		console.log('payload', data);
 	}
 	const { control, watch, handleSubmit } = formProps || {};
-	// append({
-	// 	margin_type           : 'absolute_total',
-	// 	margin_value_currency : 'usd',
-	// 	margin_value          : 1,
-	// });
-	// const { fields, append, remove } = useFieldArray({ control, name: 'services' });
-	// useEffect(() => {
-	// 	priceBreakupChildData?.forEach((item) => {
-	// 		item?.data.forEach((dataItem) => {
-	// 			append({
-	// 				margin_type           : 'absolute_total',
-	// 				margin_value_currency : 'usd',
-	// 				margin_value          : 1,
-	// 			});
-	// 		});
-	// 	});
-	// }, [append]);
-	// console.log('$$$$', fields, 'fields');
+
+	// -----------
+	let count = -1;
+	const emptyValues = priceBreakupChildData.map((item) => {
+		const newArr = item.data.map(() => {
+			count += 1;
+			return count;
+		});
+		return newArr;
+	});
+	console.log('emptyValues', emptyValues);
+	const totalLength = priceBreakupChildData.reduce((total, val) => total + val.data.length, 0);
+	const watchFields = Array(totalLength).fill(0).map((item, index) => watch(`services.${index}.margin_value`));
+	// ------------
 
 	return (
 		<div className={`${styles.container} ${showPrice ? styles.expand_div : styles.collapse_div}`}>
@@ -146,7 +142,14 @@ function PriceBreakupCard({ prefilledValues = [{}], priceBreakupChildData = [], 
 			{
 				priceBreakupChildData.map((dataItem, parentIndex) => (
 					<div className={styles.card_item_singular}>
-						<Title cardTitles={cardTitles} titleData={dataItem.title} />
+						<Title
+							cardTitles={cardTitles}
+							titleData={dataItem.title}
+							rowData={dataItem.data}
+							parentIndex={parentIndex}
+							watchFields={watchFields}
+							emptyValues={emptyValues}
+						/>
 						<PriceBreakupData
 							{...formProps}
 							// fields={fields}
@@ -156,6 +159,8 @@ function PriceBreakupCard({ prefilledValues = [{}], priceBreakupChildData = [], 
 							cardTitles={cardTitles}
 							data={dataItem.data}
 							parentIndex={parentIndex}
+							watchFields={watchFields}
+							emptyValues={emptyValues}
 						/>
 					</div>
 				))

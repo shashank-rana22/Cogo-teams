@@ -7,18 +7,20 @@ import {
 
 // import { getFieldController } from '../../../../../../common/Form/getFieldController';
 // import { useFieldArray } from '@cogoport/forms';
-// import { useEffect } from 'react';
+// import { useState } from 'react';
 
 import styles from './styles.module.css';
 
 function PriceBreakupData({
 	fieldArrayControls,
-	watch = () => {},
 	// fields,
 	control, register,
 	cardTitles = [], data = [], parentIndex = 0,
+	watchFields = [],
+	emptyValues = [],
 }) {
 	// console.log('control:', control);
+
 	// const getMarginControls = [
 	// 	{
 	// 		name             : 'nameKey',
@@ -119,6 +121,7 @@ function PriceBreakupData({
 	// }, [fields, append]);
 
 	// console.log(fields, 'fields');
+
 	return (
 		<>
 			{
@@ -126,9 +129,7 @@ function PriceBreakupData({
 				<div className={styles.container}>
 					<div className={styles.card_title}>
 						{cardTitles.map((item) => {
-							const trueIndex = Number(Number(parentIndex) + Number(childIndex));
-							console.log('trueIndex', trueIndex);
-							console.log(`services.${trueIndex}.${fieldArrayControls[0]?.name}`);
+							const trueIndex = emptyValues[parentIndex][childIndex];
 							// const Element = getFieldController('select');
 
 							if (item.name === 'margin_type') {
@@ -201,8 +202,15 @@ function PriceBreakupData({
 								return (
 									<div className={`${styles.column_labels} ${styles[`${item.name}_card_title`]}`}>
 										<p className={styles.data_labels}>
+											{/* {Number(dataItem.base_price)
+											+ Number(watch(`services.${trueIndex}.margin_value`))} */}
+											{/* {makeTotal(
+												Number(dataItem.base_price),
+												Number(watch(`services.${trueIndex}.margin_value`)),
+												trueIndex,
+											)} */}
 											{Number(dataItem.base_price)
-											+ Number(watch(`services.${trueIndex}.margin_value`))}
+											+ Number(watchFields[trueIndex])}
 										</p>
 									</div>
 								);

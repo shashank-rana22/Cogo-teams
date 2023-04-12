@@ -12,6 +12,10 @@
 	}
 }
 
+.empty_space {
+	margin-left: 25px;
+}
+
 .port_container {
 	display: flex;
 	flex-direction: column;

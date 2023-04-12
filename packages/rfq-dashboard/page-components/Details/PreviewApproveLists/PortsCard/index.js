@@ -34,14 +34,13 @@ function PortsCard(props) {
 	return (
 		<div className={styles.main_container}>
 			{
-				isClickable
-			&& (
-				<Checkbox
-					value="a3"
-					checked={selected.find((item) => item.id === data.id)}
-					onChange={(e) => changeSelection(data, e.target.checked)}
-				/>
-			)
+				isClickable	? (
+					<Checkbox
+						value="a3"
+						checked={selected.find((item) => item.id === data.id)}
+						onChange={(e) => changeSelection(data, e.target.checked)}
+					/>
+				) : <div className={styles.empty_space} />
 			}
 			<div className={styles.port_container}>
 				<div className={styles.container}>

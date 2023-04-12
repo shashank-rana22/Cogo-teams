@@ -11,6 +11,14 @@ export const priceBreakupChildData = [
 				margin_value          : '21500',
 				sell_price            : '121500',
 			},
+			{
+				service               : 'Basic Fright',
+				base_price            : '100000',
+				margin_type           : 'absolute_total',
+				margin_value_currency : 'usd',
+				margin_value          : '21500',
+				sell_price            : '121500',
+			},
 		],
 	},
 	{

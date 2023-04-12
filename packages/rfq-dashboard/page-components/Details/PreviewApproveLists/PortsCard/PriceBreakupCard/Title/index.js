@@ -1,6 +1,17 @@
+import { useEffect, useState } from 'react';
+
 import styles from './styles.module.css';
 
-function Title({ cardTitles = [], titleData = [] }) {
+function Title({ cardTitles = [], titleData = [], rowData = [], watchFields = [], parentIndex = 0, emptyValues = [] }) {
+	const [rowTotal, setRowTotal] = useState(0);
+	useEffect(() => {
+		let sum = 0;
+		for (let i = 0; i < rowData.length; i += 1) {
+			sum += Number(watchFields[emptyValues[parentIndex][i]]) + Number(rowData[i].base_price);
+		}
+		setRowTotal(sum);
+	}, [watchFields, emptyValues, rowData, parentIndex]);
+
 	return (
 		<div className={styles.container}>
 
@@ -11,7 +22,10 @@ function Title({ cardTitles = [], titleData = [] }) {
 							<span className={styles.green_text}>
 								Total:
 								{' '}
-								{titleData?.[`${itm.name}`]}
+								{/* {titleData?.[`${itm.name}`]} */}
+								{/* {total.reduce((t, v) => t + v)} */}
+								{/* {JSON.stringify(values)} */}
+								{rowTotal}
 								{' '}
 							</span>
 						) : (
