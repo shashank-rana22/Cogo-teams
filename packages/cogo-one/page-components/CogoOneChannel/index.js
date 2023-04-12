@@ -107,8 +107,8 @@ function CogoOne() {
 
 	const renderComponent = () => {
 		if ((activeTab === 'message' && !isEmpty(activeMessageCard))
-		|| (activeTab === 'voice' && !isEmpty(activeVoiceCard))
-		|| (activeTab === 'mail' && !isEmpty(activeMail))) {
+			|| (activeTab === 'voice' && !isEmpty(activeVoiceCard))
+			|| (activeTab === 'mail' && !isEmpty(activeMail))) {
 			return (
 				<>
 					<Conversations

@@ -16,7 +16,11 @@ function useListChatAgents(search) {
 	const getListChatAgents = useCallback(async () => {
 		try {
 			await trigger({
-				params: { filters: { q: query || undefined }, page: pagination, page_limit: 10 },
+				params: {
+					filters    : { q: query || undefined },
+					page       : pagination,
+					page_limit : 10,
+				},
 			});
 		} catch (error) {
 			console.log(error);
