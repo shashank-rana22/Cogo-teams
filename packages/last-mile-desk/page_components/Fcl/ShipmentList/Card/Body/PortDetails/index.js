@@ -26,7 +26,7 @@ function PortDetails({ item }) {
 					</Tooltip>
 				</div>
 
-				<div className={styles.est_time}>{`${est_label}: ${format(est_key, 'dd MMM yyyy')}`}</div>
+				<div className={styles.est_time}>{`${est_label}: ${format(est_key, 'dd MMM yyyy', null, true)}`}</div>
 			</div>
 		);
 	}
