@@ -6,8 +6,10 @@ import Structure from './Structure';
 
 function LeftPanel(props) {
 	const {
-		activeTab, setActiveTab, components,
-		setComponents,
+		activeTab,
+		setActiveTab,
+		component,
+		setComponent,
 		selectedItem,
 		onNewItemAdding,
 		addNewItem,
@@ -27,8 +29,6 @@ function LeftPanel(props) {
 
 			<TabPanel name="content" title="Content">
 				<Content
-					components={components}
-					setComponents={setComponents}
 					addNewItem={addNewItem}
 					onNewItemAdding={onNewItemAdding}
 					selectedItem={selectedItem}
@@ -41,12 +41,8 @@ function LeftPanel(props) {
 
 			<TabPanel name="structure" title="Structure">
 				<Structure
-					components={components}
 					selectedItem={selectedItem}
-					setComponents={setComponents}
-					showContentModal={showContentModal}
 					setShowContentModal={setShowContentModal}
-					parentComponentId={parentComponentId}
 					setParentComponentId={setParentComponentId}
 					addNewItem={addNewItem}
 					onNewItemAdding={onNewItemAdding}
@@ -56,9 +52,9 @@ function LeftPanel(props) {
 
 			<TabPanel name="settings" title="Settings">
 				<Settings
-					components={components}
+					component={component}
 					selectedItem={selectedItem}
-					setComponents={setComponents}
+					setComponent={setComponent}
 					showContentModal={showContentModal}
 					setShowContentModal={setShowContentModal}
 					parentComponentId={parentComponentId}

@@ -21,15 +21,15 @@ const ITEM_TYPES = {
 };
 
 function Stage({
-	components,
-	setComponents,
+	component,
+	setComponent,
 	addNewItem,
 	isNewItemAdding,
 	setSelectedItem,
 	selectedItem,
 	parentComponentId,
 }) {
-	const [stageItems, setStageItems] = useState(components);
+	const [stageItems, setStageItems] = useState(component);
 
 	const [newAddingItemProps, setNewAddingItemProps] = useState({
 		hoveredIndex   : 0,
@@ -50,33 +50,34 @@ function Stage({
 		[setNewAddingItemProps],
 	);
 
+	console.log('aaaa', stageItems);
+
 	//! Portal :: mimic behavior of portal stage
 	useEffect(() => {
-		if (!isEqual(stageItems, components)) {
-			setStageItems(components);
+		if (!isEqual(stageItems, component)) {
+			setStageItems(component);
 		}
-	}, [components]);
+	}, [component]);
 
 	//! Portal :: "update" method mutate the array, we might use alternative to this Eg. arrayMove
 	const moveItem = useCallback(
 		(dragIndex, hoverIndex) => {
-			const dragItem = stageItems[dragIndex];
-			const hoverItem = stageItems[hoverIndex];
+			const dragItem = stageItems.layouts[dragIndex];
+			const hoverItem = stageItems.layouts[hoverIndex];
 			// Swap places of dragItem and hoverItem in the pets array
 			setStageItems((pets) => {
 				const updatedPets = [...pets];
-				updatedPets[dragIndex] = hoverItem;
-				updatedPets[hoverIndex] = dragItem;
+				updatedPets.layouts[dragIndex] = hoverItem;
+				updatedPets.layouts[hoverIndex] = dragItem;
 				return updatedPets;
 			});
 		},
 		[stageItems, setStageItems],
 	);
 
-	const memoItems = useMemo(() => stageItems?.map((item, index) => {
+	const memoItems = useMemo(() => (stageItems.layouts || [])?.map((item, index) => {
 		const { id, type } = item;
 
-		console.log('type ::', type);
 		return (
 			<div
 				key={item.id}
@@ -84,7 +85,7 @@ function Stage({
 				<RightPanel
 					widget={item}
 					components={stageItems}
-					setComponents={setComponents}
+					setComponents={setComponent}
 					index={index}
 					id={id}
 					key={id}
@@ -115,7 +116,7 @@ function Stage({
 		  		addNewItem(droppedItem, hoveredIndex, shouldAddBelow, parentComponentId, null);
 			} else {
 		  // the result of sorting is applying the mock data
-		  		setComponents(stageItems);
+		  		setComponent(stageItems);
 			}
 	  },
 	  collect: (monitor) => ({
@@ -127,20 +128,23 @@ function Stage({
 
 	//! Portal :: placeholder item while new item adding
 	useEffect(() => {
-		const _stageItems = stageItems.filter(({ id }) => !!id);
+		const _stageItems = (stageItems.layouts || []).filter(({ id }) => !!id);
 		if (isNewItemAdding) {
 			if (isOver && isNewItemAdding) {
 				const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
-				setStageItems([
-					..._stageItems.slice(0, startIndex),
-					{
-						type: draggingItemType,
-					},
-					..._stageItems.slice(startIndex),
-				]);
+				setStageItems((prev) => ({
+					...prev,
+					layouts: [
+						..._stageItems.slice(0, startIndex),
+						{
+							type: draggingItemType,
+						},
+						..._stageItems.slice(startIndex),
+					],
+				}));
 			}
 		} else {
-			setStageItems(_stageItems);
+			setStageItems((prev) => ({ ...prev, layouts: _stageItems }));
 		}
 	}, [isOver, draggingItemType, isNewItemAdding, shouldAddBelow, hoveredIndex]);
 	const isActive = canDrop && isOver;
@@ -157,7 +161,10 @@ function Stage({
 		<div
 			ref={dropRef}
 			className={styles.container}
-			style={{ backgroundColor }}
+			style={{
+				...component.style,
+				backgroundColor,
+			}}
 			data-testid="dustbin"
 		>
 			{isActive ? 'Release to drop' : 'Drag a box here'}
