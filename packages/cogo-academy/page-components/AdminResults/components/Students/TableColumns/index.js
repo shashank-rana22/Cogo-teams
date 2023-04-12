@@ -1,5 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
-// import { IcMDelete } from '@cogoport/icons-react';
+import { IcMDelete } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 
 import toFixed from '../../../../CreateModule/utils/toFixed';
@@ -7,8 +7,16 @@ import SortComponent from '../../../commons/SortComponent';
 
 import styles from './styles.module.css';
 
-const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
+const handleRedirectToDashboard = ({ router, user, test_id }) => {
+	const { id, name } = user || {};
 
+	router.push(
+		`/learning/tests/dashboard/[test_id]?view=admin&id=${id}&name=${name}`,
+		`/learning/tests/dashboard/${test_id}?view=admin&id=${id}&name=${name}`,
+	);
+};
+
+const getAppearedColumns = ({ sortFilter, setSortFilter, router }) => [
 	{
 		Header: (
 			<div className={styles.container}>
@@ -91,7 +99,6 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 			);
 		},
 	},
-
 	{
 		Header: (
 			<div className={styles.container}>
@@ -114,6 +121,19 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 			</section>
 		),
 	},
+	{
+		Header   : '',
+		id       : 'see_more',
+		accessor : ({ user = {}, test_id = '' }) => (
+			<div
+				role="presentation"
+				onClick={() => handleRedirectToDashboard({ router, user, test_id })}
+				className={styles.see_more}
+			>
+				See More
+			</div>
+		),
+	},
 ];
 
 const getOngoingColumns = () => [
@@ -134,7 +154,7 @@ const getOngoingColumns = () => [
 	},
 ];
 
-const getNotAppeardColumns = () => [
+const getNotAppeardColumns = ({ setShowModal, setUserId }) => [
 
 	{
 		Header   : 'NAME',
@@ -150,22 +170,22 @@ const getNotAppeardColumns = () => [
 			<section>{user.email}</section>
 		),
 	},
-	// {
-	// 	id       : 'delete',
-	// 	accessor : ({ user_id = '' }) => (
-	// 		<IcMDelete
-	// 			className={styles.delete}
-	// 			width={16}
-	// 			height={16}
-	// 			onClick={() => {
-	// 				setUserId(user_id);
-	// 				setShowModal(true);
-	// 			}}
-	// 		>
-	// 			Delete
-	// 		</IcMDelete>
-	// 	),
-	// },
+	{
+		id       : 'delete',
+		accessor : ({ user_id = '' }) => (
+			<IcMDelete
+				className={styles.delete}
+				width={16}
+				height={16}
+				onClick={() => {
+					setUserId(user_id);
+					setShowModal(true);
+				}}
+			>
+				Delete
+			</IcMDelete>
+		),
+	},
 ];
 
 const TABLE_MAPPING = {
@@ -176,12 +196,15 @@ const TABLE_MAPPING = {
 
 const getTableColumns = ({
 	sortFilter, setSortFilter,
-	activeTab, setShowModal, setUserId = () => {},
+	activeTab,
+	setShowModal,
+	setUserId = () => {},
+	router,
 }) => {
 	const getcolumnsFun = TABLE_MAPPING?.[activeTab] || getAppearedColumns;
 
 	const getcolumnsArg = {
-		appeared     : { sortFilter, setSortFilter },
+		appeared     : { sortFilter, setSortFilter, router },
 		not_appeared : { setShowModal, setUserId },
 		ongoing      : { },
 	};

@@ -25,7 +25,25 @@ function useUpdateAudience({ fetchFaqAudience }) {
 				fetchFaqAudience();
 			}
 		} catch (err) {
-			console.log('err', err);
+			Toast.error(err?.message);
+		}
+	};
+
+	const onClickRestore = async (item) => {
+		try {
+			const res = await trigger({
+				data: {
+					id     : item?.id,
+					status : 'active',
+				},
+			});
+
+			if (res?.data) {
+				Toast.success('Audience Restored sucessfully');
+				fetchFaqAudience();
+			}
+		} catch (err) {
+			Toast.error(err?.message);
 		}
 	};
 
@@ -34,6 +52,7 @@ function useUpdateAudience({ fetchFaqAudience }) {
 		loading,
 		showPopOver,
 		setShowPopOver,
+		onClickRestore,
 	};
 }
 export default useUpdateAudience;
