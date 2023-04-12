@@ -6,7 +6,6 @@ import useAddPoNumber from '../../../hooks/useUpdateShipment';
 import styles from './styles.module.css';
 
 function AddPoNumber({
-	show = '',
 	setShow = () => {},
 	shipment_data = {},
 }) {
@@ -31,9 +30,10 @@ function AddPoNumber({
 	return (
 		<div className={styles.container}>
 			<Modal
-				show={show}
+				show
 				onClose={closeModal}
-				onOuterClick={closeModal}
+				showCloseIcon={false}
+				closeOnOuterClick={false}
 			>
 				<div className={styles.modal_container}>
 					<div className={styles.title}>Add PO Number</div>

@@ -9,7 +9,7 @@ import useUpdateShipment from '../../hooks/useUpdateShipment';
 import getCancelShipmentPayload from './getCancelShipmentPayload';
 import styles from './styles.module.css';
 
-export default function CancelShipment({ show, setShow }) {
+export default function CancelShipment({ setShow }) {
 	const { reasonsLoading, reasons = [] } = useListShipmentCancellationReasons();
 
 	const closeModal = () => setShow(false);
@@ -84,10 +84,10 @@ export default function CancelShipment({ show, setShow }) {
 
 	return (
 		<Modal
-			show={show}
+			show
 			onClose={closeModal}
 			closeOnOuterClick={false}
-			showCloseIcon={!updateShipmentLoading}
+			showCloseIcon={false}
 			className={styles.customized_modal}
 			size="lg"
 		>

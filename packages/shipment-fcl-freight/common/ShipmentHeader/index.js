@@ -12,9 +12,12 @@ import Loader from './Loader';
 import styles from './styles.module.css';
 
 function ShipmentHeader() {
-	const [showAddPoModal, setShowAddPoModal] = useState(false);
-	const [showShipmentCancelModal, setShowShipmentCancelModal] = useState(false);
-	const { shipment_data, primary_service, isGettingShipment } = useContext(ShipmentDetailContext);
+	const [showModal, setShowModal] = useState(false);
+
+	const {
+		shipment_data, primary_service, isGettingShipment,
+		activeStakeholder = '',
+	} = useContext(ShipmentDetailContext);
 
 	const { po_number, importer_exporter } = shipment_data || {};
 
@@ -49,7 +52,7 @@ function ShipmentHeader() {
 						className={styles.button}
 						role="button"
 						tabIndex={0}
-						onClick={() => setShowAddPoModal(true)}
+						onClick={() => setShowModal('add_po_number')}
 					>
 						Add Po Number
 					</div>
@@ -64,18 +67,17 @@ function ShipmentHeader() {
 				primary_service={primary_service}
 			/>
 
-			<IcMCancel className={styles.cancel_button} onClick={() => setShowShipmentCancelModal(true)} />
+			<IcMCancel className={styles.cancel_button} onClick={() => setShowModal('cancel_shipment')} />
 
-			{showAddPoModal ? (
+			{showModal === 'add_po_number' ? (
 				<AddPoNumber
-					show={showAddPoModal}
-					setShow={setShowAddPoModal}
+					setShow={setShowModal}
 					shipment_data={shipment_data}
 				/>
 			) : null}
 
-			{showShipmentCancelModal ? (
-				<CancelShipment show={showShipmentCancelModal} setShow={setShowShipmentCancelModal} />
+			{showModal === 'cancel_shipment' ? (
+				<CancelShipment setShow={setShowModal} />
 			) : null}
 		</div>
 	);
