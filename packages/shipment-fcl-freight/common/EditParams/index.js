@@ -6,6 +6,7 @@ import useUpdateShipmentBookingParamter from '../../hooks/useUpdateShipmentBooki
 
 import ParameterDetails from './ParamterDetails';
 import styles from './styles.module.css';
+import checkValuesChanged from './utils/checkValuesChanged';
 import getUpdateBookingParameterPaylaod from './utils/getUpdateBookingParameterPayload';
 
 export default function EditParams({ setShow, serviceData }) {
@@ -34,9 +35,14 @@ export default function EditParams({ setShow, serviceData }) {
 
 		if (isFormValid) {
 			const formValues = formRefs.current.map(({ getValues }) => getValues());
-			const payload = getUpdateBookingParameterPaylaod({ formValues, shipment_data, serviceData, servicesList });
 
-			updateBookingParams(payload);
+			if (checkValuesChanged({ formRefs })) {
+				const payload = getUpdateBookingParameterPaylaod({
+					formValues, shipment_data, serviceData, servicesList,
+				});
+
+				updateBookingParams(payload);
+			}
 		}
 	};
 
@@ -51,7 +57,7 @@ export default function EditParams({ setShow, serviceData }) {
 		>
 			<Modal.Header title={(
 				<>
-					<h4 className={styles.heading}>Update Details</h4>
+					<h4>Update Details</h4>
 					<p className={styles.sub_heading}>Updating the booking details will impact the quotation(s)</p>
 				</>
 			)}
@@ -67,6 +73,8 @@ export default function EditParams({ setShow, serviceData }) {
 			</Modal.Body>
 
 			<Modal.Footer>
+				<Button themeType="secondary" disabled={loading} onClick={closeModal}>Cancel</Button>
+
 				<Button disabled={loading} onClick={handleSubmit}>Update</Button>
 			</Modal.Footer>
 		</Modal>

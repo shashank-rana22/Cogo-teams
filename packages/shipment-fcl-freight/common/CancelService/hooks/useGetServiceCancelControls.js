@@ -6,11 +6,10 @@ import useUpdateShipmentService from '../../../hooks/useUpdateShipmentService';
 import getCancelControls from '../utils/get-cancel-controls';
 import getServiceCancelPayload from '../utils/getServiceCancelPayload';
 
-// isSeller = Shipper ?? Supplier (View)
 export default function useGetServiceCancelControls({
 	trade_type = '',
-	isSeller = true,
-	closeModal,
+	isSeller = false,
+	closeModal = () => {},
 	service_type = '',
 }) {
 	const [selectedReason, setSelectedReason] = useState(null);

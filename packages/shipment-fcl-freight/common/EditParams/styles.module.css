@@ -4,6 +4,11 @@
             padding-bottom: 0;
             align-items: flex-start;
         }
+        .ui_modal_footer_container{
+            .ui_button_container:not(:first-of-type) {
+                margin-left: 10px;
+            }
+        }
     }
 }
 

@@ -39,6 +39,10 @@ function EditCancelService({ serviceData = {} }) {
 	actionButtons[1].show = getCanEditParams({ shipment_data, user_data, serviceData });
 	actionButtons[2].show = getCanCancelService({ shipment_data, user_data, state });
 
+	if (!actionButtons.some((actionButton) => actionButton.show)) {
+		return null;
+	}
+
 	const content = actionButtons.map(({ label, value, show }) => (show ? (
 		<div
 			role="button"

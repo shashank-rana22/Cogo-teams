@@ -27,16 +27,16 @@ function renderValue(label, value) {
 export default forwardRef(({ service }, ref) => {
 	const { controls, defaultValues } = getControls({ service });
 
-	const { control, formState: { errors }, trigger, getValues, handleSubmit } = useForm({ defaultValues });
+	const { control, formState: { errors }, trigger, getValues } = useForm({ defaultValues });
 
 	useImperativeHandle(
 		ref,
 		() => ({
-			submitForm: handleSubmit,
 			trigger,
 			getValues,
+			defaultValues,
 		}),
-		[handleSubmit, trigger, getValues],
+		[trigger, getValues, defaultValues],
 	);
 
 	return (
