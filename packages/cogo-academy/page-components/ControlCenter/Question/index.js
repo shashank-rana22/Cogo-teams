@@ -67,6 +67,8 @@ function CreateFAQ() {
 		setShowAlias,
 	} = useCreateQuestions({ data, setEditorError });
 
+	console.log('showAlias', showAlias);
+
 	const {
 		setConfigurationPage,
 		handleSubmit: handleCreate,
@@ -91,7 +93,7 @@ function CreateFAQ() {
 		answers,
 		faq_audiences,
 		id,
-		question_aliases,
+		question_aliases = [],
 	} = data || {};
 
 	useEffect(() => {
@@ -106,7 +108,7 @@ function CreateFAQ() {
 	const answer = answers?.[0]?.answer;
 
 	useEffect(() => {
-		if (!loading) {
+		if (!loading && !isEmpty(data)) {
 			setQuestionValue('question_abstract', question_abstract);
 			setQuestionValue('tag_ids', filterTags);
 			setQuestionValue('topic_ids', filterTopics);
@@ -114,20 +116,10 @@ function CreateFAQ() {
 			setEditorValue(RichTextEditor?.createValueFromString((answer || ''), 'html'));
 			setShowAlias(question_aliases);
 		}
-	}, [listTopicsLoading,
-		listTagsLoading,
-		listAudienceLoading,
-		loading,
-		setQuestionValue,
-		question_abstract,
-		filterTags,
-		filterTopics,
-		filterAudiences,
-		setEditorValue,
-		RichTextEditor,
-		answer,
-		setShowAlias,
-		question_aliases]);
+	}, [listTopicsLoading, listTagsLoading, listAudienceLoading,
+		loading, setQuestionValue, question_abstract, filterTags,
+		filterTopics, filterAudiences, setEditorValue, RichTextEditor,
+		answer, setShowAlias, question_aliases, data]);
 
 	useEffect(() => {
 		if (questionPreview !== 'preview') {
@@ -221,7 +213,7 @@ function CreateFAQ() {
 									className={styles.alias}
 									role="presentation"
 									onClick={() => setShowAlias(
-										[{ id: (showAlias || []).length, question_abstract: '' }],
+										[...showAlias, { id: (showAlias || []).length, question_abstract: '' }],
 									)}
 								>
 									Add Alias

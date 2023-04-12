@@ -34,7 +34,7 @@ function useCreateQuestions({ data, setEditorError }) {
 		setEditorError,
 		data,
 		showAlias,
-		setShowAlias,
+
 	});
 
 	const apiLoading = loading || false;
