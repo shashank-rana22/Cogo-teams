@@ -133,7 +133,7 @@ function MessageCardData({
 							)}
 							{is_likely_to_book_shipment && (
 								<div className={styles.likely_to_book_shipment}>
-									<IcMShip className={styles.ship_icon_container} fill="#849E4C" />
+									<IcMShip className={styles.ship_icon_container} />
 								</div>
 							)}
 						</div>

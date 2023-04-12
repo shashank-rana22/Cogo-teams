@@ -19,7 +19,7 @@ function useListChatAgents(search) {
 				params: { filters: { q: query || undefined }, page: pagination, page_limit: 10 },
 			});
 		} catch (error) {
-			// console.log(error);
+			console.log(error);
 		}
 	}, [trigger, pagination, query]);
 

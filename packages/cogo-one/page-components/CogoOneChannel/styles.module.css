@@ -9,6 +9,7 @@
 	height: 25px;
 	margin-top: -20px;
 	cursor: pointer;
+	fill: #4f4f4f;
 }
 
 .layout_container {
@@ -67,4 +68,5 @@
 .download_icon {
 	height: 15px;
 	margin-right: 5px;
+	fill: "#EE3425";
 }

@@ -1,4 +1,3 @@
-import { cl } from '@cogoport/components';
 import { IcMDownload, IcMSettings } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -170,7 +169,6 @@ function CogoOne() {
 					<IcMSettings
 						className={styles.settings_icon}
 						onClick={() => setAgentDetails(true)}
-						fill="#4f4f4f"
 					/>
 				</div>
 			)}
@@ -233,7 +231,6 @@ function CogoOne() {
 						<div className={styles.text_styles}>
 							<div className={styles.flex}>
 								<IcMDownload
-									fill="#EE3425"
 									className={styles.download_icon}
 								/>
 								<div>Get the</div>
