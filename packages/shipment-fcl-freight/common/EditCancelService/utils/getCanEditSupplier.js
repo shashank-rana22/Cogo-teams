@@ -1,5 +1,5 @@
 const editSupplierServiceStates = ['init', 'awaiting_service_provider_confirmation', 'confirmed_by_service_provider'];
-const showEditSupplier = [
+const showEditSupplierStakeholders = [
 	'superadmin',
 	'service_ops1',
 	'service_ops2',
@@ -13,7 +13,7 @@ export default function getCanEditSupplier({ shipment_data, user_data, state }) 
 		return true;
 	}
 
-	const userCanCancel = shipment_data?.stakeholder_types?.some((e) => showEditSupplier.includes(e));
+	const userCanCancel = shipment_data?.stakeholder_types?.some((e) => showEditSupplierStakeholders.includes(e));
 
 	const serviceInEditSupplierState = editSupplierServiceStates?.includes(state);
 

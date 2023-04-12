@@ -1,0 +1,19 @@
+.form_element {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.label, .value {
+    width: 48%;
+}
+
+.value {
+    font-weight: 600;
+}
+
+.error {
+    color: var(--color-primary-error-red-2);
+    font-size: var(--font-size-md);
+}

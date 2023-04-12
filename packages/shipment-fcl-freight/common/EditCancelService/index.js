@@ -5,11 +5,19 @@ import { useSelector } from '@cogoport/store';
 import React, { useState, useContext } from 'react';
 
 import CancelService from '../CancelService';
+import EditParams from '../EditParams';
 import SupplierReallocation from '../SupplierReallocation';
 
-import getCanCancelService from './getCanCancelService';
-import getCanEditSupplier from './getCanEditSupplier';
 import styles from './styles.module.css';
+import getCanCancelService from './utils/getCanCancelService';
+import getCanEditParams from './utils/getCanEditParams';
+import getCanEditSupplier from './utils/getCanEditSupplier';
+
+const actionButtons = [
+	{ label: 'Edit', value: 'supplier_reallocation' },
+	{ label: 'Edit Params', value: 'edit_params' },
+	{ label: 'Cancel', value: 'cancel' },
+];
 
 function EditCancelService({ serviceData = {} }) {
 	const [showModal, setShowModal] = useState(false);
@@ -27,34 +35,20 @@ function EditCancelService({ serviceData = {} }) {
 		setShowPopover(false);
 	};
 
-	const isServiceCancellable = getCanCancelService({ shipment_data, user_data, state });
-	const canEditSupplier = getCanEditSupplier({ shipment_data, user_data, state });
+	actionButtons[0].show = getCanEditSupplier({ shipment_data, user_data, state });
+	actionButtons[1].show = getCanEditParams({ shipment_data, user_data, serviceData });
+	actionButtons[2].show = getCanCancelService({ shipment_data, user_data, state });
 
-	const content = (
-		<>
-			{canEditSupplier ? (
-				<div
-					role="button"
-					tabIndex={0}
-					className={styles.action_button}
-					onClick={() => openModal('supplier_reallocation')}
-				>
-					Edit
-				</div>
-			) : null}
-
-			{isServiceCancellable ? (
-				<div
-					role="button"
-					tabIndex={0}
-					className={styles.action_button}
-					onClick={() => openModal('cancel')}
-				>
-					Cancel
-				</div>
-			) : null}
-		</>
-	);
+	const content = actionButtons.map(({ label, value, show }) => (show ? (
+		<div
+			role="button"
+			tabIndex={0}
+			className={styles.action_button}
+			onClick={() => openModal(value)}
+		>
+			{label}
+		</div>
+	) : null));
 
 	return (
 		<div className={styles.container}>
@@ -69,16 +63,18 @@ function EditCancelService({ serviceData = {} }) {
 			</Popover>
 
 			{showModal === 'supplier_reallocation'
-				? <SupplierReallocation setShow={setShowModal} serviceData={servicesData} />
-				: null}
+			&& <SupplierReallocation setShow={setShowModal} serviceData={servicesData} />}
 
-			{showModal === 'cancel' ? (
+			{showModal === 'edit_params'
+			&& <EditParams setShow={setShowModal} serviceData={serviceData} />}
+
+			{showModal === 'cancel' && 	(
 				<CancelService
 					setShow={setShowModal}
 					trade_type={trade_type}
 					service_type={service_type}
 				/>
-			) : null}
+			)}
 		</div>
 	);
 }
