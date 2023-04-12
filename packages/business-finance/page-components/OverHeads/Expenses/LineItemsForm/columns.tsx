@@ -13,6 +13,7 @@ const lineItemColumns = ({
 			accessor : (row:any, index:number) => (
 				<div style={{ width: '76px' }}>
 					<InputController
+						key={row?.id}
 						size="xs"
 						control={control}
 						value={lineItemsList[index]?.itemName}
@@ -27,6 +28,7 @@ const lineItemColumns = ({
 			accessor : (row:any, index:number) => (
 				<div style={{ width: '76px' }}>
 					<InputController
+						key={row?.id}
 						size="xs"
 						type="number"
 						control={control}
@@ -42,6 +44,7 @@ const lineItemColumns = ({
 			accessor : (row:any, index:number) => (
 				<div style={{ width: '90px' }}>
 					<SelectController
+						key={row?.id}
 						control={control}
 						options={taxOptions}
 						name={`line_items.${index}.tax`}
@@ -57,6 +60,7 @@ const lineItemColumns = ({
 			accessor : (row:any, index:number) => (
 				<div style={{ width: '80px' }}>
 					<InputController
+						key={row?.id}
 						size="xs"
 						type="number"
 						control={control}
@@ -73,6 +77,7 @@ const lineItemColumns = ({
 			accessor : (row:any, index:number) => (
 				<div style={{ width: '50px' }}>
 					<InputController
+						key={row?.id}
 						size="xs"
 						type="number"
 						control={control}
@@ -88,6 +93,7 @@ const lineItemColumns = ({
 			accessor : (row:any, index:number) => (
 				<div style={{ width: '80px' }}>
 					<InputController
+						key={row?.id}
 						size="xs"
 						type="number"
 						control={control}
@@ -104,6 +110,7 @@ const lineItemColumns = ({
 				<div>
 					{index !== 0 && (
 						<IcMDelete
+							key={row?.id}
 							color="#ED3726"
 							onClick={() => {
 								remove(index);
