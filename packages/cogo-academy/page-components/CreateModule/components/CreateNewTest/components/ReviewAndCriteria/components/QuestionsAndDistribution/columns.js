@@ -37,26 +37,26 @@ const getColumns = ({ errors, control }) => {
 
 			),
 		},
+		// {
+		// 	Header   : 'USER GROUPS',
+		// 	id       : 'user_groups',
+		// 	accessor : ({ audience_ids = [] }) => (
+		// 		<section className={styles.usergroups}>
+		// 			{audience_ids.map((audience_id) => (
+		// 				<Pill
+		// 					key={audience_id}
+		// 					size="sm"
+		// 					color="#FEF3E9"
+		// 				>
+		// 					{startCase(audience_id)}
+		// 				</Pill>
+		// 			))}
+		// 			{audience_ids.length === 0 && '-'}
+		// 		</section>
+		// 	),
+		// },
 		{
-			Header   : 'USER GROUPS',
-			id       : 'user_groups',
-			accessor : ({ audience_ids = [] }) => (
-				<section className={styles.usergroups}>
-					{audience_ids.map((audience_id) => (
-						<Pill
-							key={audience_id}
-							size="sm"
-							color="#FEF3E9"
-						>
-							{startCase(audience_id)}
-						</Pill>
-					))}
-					{audience_ids.length === 0 && '-'}
-				</section>
-			),
-		},
-		{
-			Header   : 'AVAILABLE QUESTIONS',
+			Header   : 'APPLICABLE QUESTIONS',
 			id       : 'available_questions',
 			accessor : ({ non_case_study_question_count = 0 }) => (
 				<section className={styles.count}>
@@ -65,13 +65,23 @@ const getColumns = ({ errors, control }) => {
 			),
 		},
 		{
-			Header   : 'AVAILABLE CASES',
+			Header   : 'APPLICABLE CASES',
 			id       : 'available_cases',
 			accessor : ({
 				case_study_question_count
 				= 0,
 			}) => (
 				<section className={styles.case_study_question_count}>{case_study_question_count}</section>
+			),
+		},
+		{
+			Header   : 'APPLICABLE SUBJECTIVE',
+			id       : 'available_subjective',
+			accessor : ({
+				subjective_question_count
+				= 0,
+			}) => (
+				<section className={styles.subjective_question_count}>{subjective_question_count}</section>
 			),
 		},
 		{
@@ -90,10 +100,16 @@ const getColumns = ({ errors, control }) => {
 				</div>
 			),
 			id       : 'distribution',
-			accessor : ({ non_case_study_question_count = 0, case_study_question_count = 0, id = '' }) => {
+			accessor : ({
+				non_case_study_question_count = 0,
+				case_study_question_count = 0,
+				subjective_question_count = 0, id = '',
+			}) => {
 				const controlItem1 = getControls(id, non_case_study_question_count)[0];
 
 				const controlItem2 = getControls(id, case_study_question_count)[1];
+
+				const controlItem3 = getControls(id, subjective_question_count)[2];
 
 				return (
 					<section className={styles.distribution}>
@@ -110,6 +126,12 @@ const getColumns = ({ errors, control }) => {
 							<InputController control={control} {...controlItem2} className={styles.input} />
 							{errors[`${id}c`] && <div className={styles.error_msg}>{errors[`${id}c`]?.message}</div>}
 						</div>
+
+						<div className={styles.input_container}>
+							<InputController control={control} {...controlItem3} className={styles.input} />
+							{errors[`${id}c`] && <div className={styles.error_msg}>{errors[`${id}c`]?.message}</div>}
+						</div>
+
 					</section>
 				);
 			},

@@ -18,7 +18,7 @@ function useCreateTestQuestion({ reset, getTestQuestionTest, questionSetId, list
 
 	const [{ loading: loadingStandAlone }, triggerStandAlone] = useRequest({
 		method : 'post',
-		url    : '/create_stand_alone_test_question',
+		url    : '/create_non_case_test_question',
 	}, { manual: true });
 
 	const TriggerMapping = {
