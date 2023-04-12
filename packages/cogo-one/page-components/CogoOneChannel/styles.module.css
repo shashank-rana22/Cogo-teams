@@ -1,13 +1,12 @@
 .settings {
 	display: flex;
 	justify-content: flex-end;
-	margin-right: -17px;
+	margin: -20px -17px 0 0;
 }
 
 .settings_icon {
 	width: 25px;
 	height: 25px;
-	margin-top: -20px;
 	cursor: pointer;
 	fill: #4f4f4f;
 }
