@@ -3,7 +3,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useCallback } from 'react';
 
 const useGetAnnouncementList = () => {
@@ -97,7 +97,7 @@ const useGetAnnouncementList = () => {
 			}));
 		} catch (error) {
 			if (error?.response) {
-				Toast.error(startCase(getApiErrorString(error?.response?.data)) || 'Something went wrong');
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}
 		}
 	}, [cogo_entity_id, country_id, params.filters.announcement_type, params.filters.q,

@@ -2,7 +2,6 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { startCase } from '@cogoport/utils';
 
 const useAnnouncementViewed = (fetchAnnouncements = () => {}) => {
 	const { profile = {} } = useSelector((state) => state);
@@ -36,7 +35,7 @@ const useAnnouncementViewed = (fetchAnnouncements = () => {}) => {
 			fetchAnnouncements();
 		} catch (error) {
 			if (error?.response) {
-				Toast.error(startCase(getApiErrorString(error?.response?.data)) || 'Something went wrong');
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}
 		}
 	};
