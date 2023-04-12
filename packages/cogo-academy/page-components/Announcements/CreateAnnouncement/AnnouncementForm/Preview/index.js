@@ -56,7 +56,7 @@ function Preview({
 				/>
 			)}
 
-			{!isEmpty(videos) && (
+			{!isEmpty(images) && (
 				<PreviewContent
 					data={images}
 					isMobile={isMobile}
@@ -64,7 +64,7 @@ function Preview({
 				/>
 			)}
 
-			{!isEmpty(videos) && (
+			{!isEmpty(files) && (
 				<PreviewFiles files={files} />
 			)}
 
