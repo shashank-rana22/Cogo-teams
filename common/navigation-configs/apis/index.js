@@ -127,7 +127,7 @@ const apis = {
 	login_apis,
 	enrichment,
 	...faq,
-	performance_management,
+	...performance_management,
 	booking_desk,
 	poc,
 	...athena_dashboard,
