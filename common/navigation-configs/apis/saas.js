@@ -2052,6 +2052,48 @@ const saas = {
 			module      : 'import-export-documents',
 			feature     : 'import-export-documents',
 		},
+		{
+			api         : 'get_saas_product_category_list',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_product_list',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_hs_code_section',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_hs_code_heading',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_hs_code',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_hs_code_search',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_hs_code_countries',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
 	],
 
 };
