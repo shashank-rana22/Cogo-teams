@@ -13,6 +13,7 @@ function FeedBackContent({
 	source = '',
 	fetchListFaqFeedback = () => {},
 	fetchQuestion,
+	faqAudiences,
 }) {
 	const { general } = useSelector((state) => state);
 	const { feedbackId:id = '' } = general.query || {};
@@ -34,7 +35,13 @@ function FeedBackContent({
 		inputAlias,
 		setInputAlias,
 		loading,
-	} = useCreateFaqQuestionAlias({ suggested_question_abstract, fetchListFaqFeedback, feedbackId, fetchQuestion });
+	} = useCreateFaqQuestionAlias({
+		suggested_question_abstract,
+		fetchListFaqFeedback,
+		feedbackId,
+		fetchQuestion,
+		faqAudiences,
+	});
 
 	const { name = '', picture = '' } = author?.[0] || {};
 

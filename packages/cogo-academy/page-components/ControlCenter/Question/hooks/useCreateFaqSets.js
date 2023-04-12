@@ -69,7 +69,8 @@ function useCreateFaqSet({
 	};
 
 	const onClickPublish = async ({ data }) => {
-		const { question_aliases = [] } = data || {};
+		const { question_aliases = [], answers = {} } = data || {};
+		const { id :answerId } = answers?.[0] || {};
 		const updatedAlias = [];
 
 		(question_aliases || []).forEach((alias) => {
@@ -85,6 +86,7 @@ function useCreateFaqSet({
 			answers : [{
 				state  : 'published',
 				status : 'active',
+				id     : answerId,
 			}],
 			aliases: updatedAlias,
 		};

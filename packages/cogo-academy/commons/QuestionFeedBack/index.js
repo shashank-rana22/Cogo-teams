@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 import useGetFaqFeedback from './useGetFaqFeedback';
 import useListfaqFeedback from './useListFaqFeedback';
 
-function QuestionFeedBack({ id, source = '', onClickEdit = () => {}, fetchQuestion }) {
+function QuestionFeedBack({ id, source = '', onClickEdit = () => {}, fetchQuestion, faqAudiences }) {
 	const general = useSelector((state) => state.general || {});
 	const { feedbackId = '' } = general.query || {};
 
@@ -89,6 +89,7 @@ function QuestionFeedBack({ id, source = '', onClickEdit = () => {}, fetchQuesti
 						key={id}
 						fetchListFaqFeedback={fetchListFaqFeedback}
 						fetchQuestion={fetchQuestion}
+						faqAudiences={faqAudiences}
 
 					/>
 				))}

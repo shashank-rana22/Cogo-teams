@@ -89,10 +89,11 @@ function CreateFAQ() {
 		faq_tags,
 		faq_topics,
 		answers,
-		faq_audiences,
 		id,
 		question_aliases = [],
 	} = data || {};
+
+	const { faq_audiences } = answers?.[0] || [];
 
 	useEffect(() => {
 		if (query?.id) {
@@ -476,7 +477,12 @@ function CreateFAQ() {
 			</div>
 
 			<div className={styles.feedback_container}>
-				<QuestionFeedBack id={id} source="create" fetchQuestion={fetchQuestion} />
+				<QuestionFeedBack
+					id={id}
+					source="create"
+					fetchQuestion={fetchQuestion}
+					faqAudiences={faq_audiences}
+				/>
 			</div>
 
 		</div>
