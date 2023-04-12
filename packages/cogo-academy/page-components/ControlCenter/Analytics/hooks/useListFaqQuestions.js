@@ -32,7 +32,7 @@ function useListFaqQuestions({
 							q            : query || undefined,
 							state        : 'published',
 							status       : 'active',
-
+							is_parent    : true,
 						},
 						sort_by                  : 'view_count',
 						sort_type                : sortType,

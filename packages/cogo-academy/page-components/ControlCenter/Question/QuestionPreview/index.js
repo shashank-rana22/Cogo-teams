@@ -22,11 +22,10 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 		answers = [],
 		faq_topics = [],
 		faq_tags = [],
-		faq_audiences = [],
 		id = '',
 		question_aliases = [],
 	} = data || {};
-
+	const { faq_audiences = [] } = answers[0] || [];
 	const tags = [];
 	const topics = [];
 	const audiences = [];

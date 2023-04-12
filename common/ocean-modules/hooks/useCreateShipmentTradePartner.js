@@ -15,7 +15,7 @@ const useCreateShipmentTradePartner = ({
 
 	const apiTrigger = async (val) => {
 		try {
-			const res = await trigger({ params: { ...val, shipment_id } });
+			const res = await trigger({ data: { ...val, shipment_id } });
 			if (!res.hasError) {
 				Toast.success(successMessage);
 				refetch();
