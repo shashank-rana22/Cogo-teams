@@ -99,10 +99,10 @@ function useGetUploadList(id) {
 		{
 			key      : 'remark',
 			Header   : 'REMARKS REPORT',
-			accessor : ({ errored_data_url }) => (
+			accessor : ({ remarks_data_url }) => (
 				<div className={styles.remark}>
-					{errored_data_url ? (
-						<Button onClick={() => { downloadErrorCsv(errored_data_url); }} size="sm" themeType="tertiary">
+					{remarks_data_url ? (
+						<Button onClick={() => { downloadErrorCsv(remarks_data_url); }} size="sm" themeType="tertiary">
 							<IcMDownload style={{ marginRight: '4px' }} />
 							Download
 						</Button>

@@ -1,6 +1,6 @@
-import { Button, Pill } from '@cogoport/components';
+import { Tooltip, Button, Pill } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { IcMDownload } from '@cogoport/icons-react';
+import { IcMDownload, IcMInfo } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import { startCase, format } from '@cogoport/utils';
 import { useState } from 'react';
@@ -72,10 +72,22 @@ function useGetIngestionList() {
 			),
 		},
 		{
+			key      : 'description',
+			Header   : 'DESCRIPTION',
+			accessor : ({ description = '' }) => (
+				<div className={styles.pop_container}>
+					<Tooltip className={styles.popover} content={description || '___'} placement="left">
+						<div className={styles.description}>{description || '___'}</div>
+					</Tooltip>
+				</div>
+
+			),
+		},
+		{
 			key      : 'uploaded_by',
 			Header   : 'UPLOADED BY',
 			accessor : ({ user_detail }) => (
-				<div className={styles.name}>{startCase(user_detail?.name || '___')}</div>
+				<div className={styles.uploaded_by}>{startCase(user_detail?.name || '___')}</div>
 			),
 		},
 		{

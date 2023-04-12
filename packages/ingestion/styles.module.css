@@ -66,3 +66,26 @@
 .remark {
 	min-width: 120px;
 }
+
+.description {
+	min-width: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.uploaded_by {
+	min-width: 120px;
+}
+
+.popover {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.pop_container {
+	width: 120px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
