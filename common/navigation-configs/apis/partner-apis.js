@@ -10434,6 +10434,12 @@ const partner = {
 			service_name : 'fcl_freight_rate',
 			feature      : 'detention_demurrage',
 		},
+		{
+			api          : 'list_shipment_invoice_combinations',
+			access_type  : 'private',
+			service_name : 'shipment',
+			feature      : 'detention_demurrage',
+		},
 	],
 	my_profile: [
 		{
