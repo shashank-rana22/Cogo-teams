@@ -111,7 +111,7 @@ export const expenseConfig = () => ({
 		},
 		{
 			label : 'Payable',
-			span  : 1.5,
+			span  : 1.2,
 			func  : 'getPayable',
 		},
 		{
