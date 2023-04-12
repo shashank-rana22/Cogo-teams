@@ -41,11 +41,11 @@ function useGetServices({ shipment_data = {}, additional_methods = [], activeSta
 						const servicesToShow = [];
 
 						(res?.data?.summary || []).forEach((service) => {
-							if (service?.importer_exporter_id === consignee_shipper_id) {
+							const { importer_exporter = {} } = service;
+							if (importer_exporter?.id === consignee_shipper_id) {
 								servicesToShow.push(service);
 							}
 						});
-
 						setServicesData(servicesToShow);
 					}
 				}

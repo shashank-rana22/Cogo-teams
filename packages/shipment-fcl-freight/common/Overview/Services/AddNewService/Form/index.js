@@ -33,7 +33,7 @@ function Form({
 		<Modal
 			show={upsellModal}
 			onClose={() => setUpsellModal(false)}
-			showCloseIcon={!haveToUpsell}
+			showCloseIcon={false}
 			closeOnOuterClick={false}
 			disabled={haveToUpsell}
 			className={styles.custom_modal}
