@@ -38,11 +38,11 @@ function AddNewService({
 
 	const haveToUpsell = servicesList?.length === 0 && upsellableService.service_type === 'fcl_freight_local_service';
 
-	// useEffect(() => {
-	// 	if (haveToUpsell) {
-	// 		setUpsellModal(true);
-	// 	}
-	// }, [haveToUpsell, setUpsellModal]);
+	useEffect(() => {
+		if (haveToUpsell) {
+			setUpsellModal(true);
+		}
+	}, [haveToUpsell, setUpsellModal]);
 
 	return (
 		<>

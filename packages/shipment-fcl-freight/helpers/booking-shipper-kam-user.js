@@ -14,7 +14,7 @@ const userLoggedIn = ({ orgIds, shipment_data = {}, activeStakeholder = '' }) =>
 
 	let kamLoggedIn = '';
 
-	if (is_importer_exporter_kam && !is_consignee_shipper_kam && activeStakeholder === 'kam') {
+	if (is_importer_exporter_kam && !is_consignee_shipper_kam && activeStakeholder === 'Kam') {
 		kamLoggedIn = 'ieKam';
 	} else if (!is_importer_exporter_kam && is_consignee_shipper_kam) {
 		kamLoggedIn = 'scKam';
