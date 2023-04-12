@@ -15,6 +15,7 @@ function ShipmentView() {
 	const [checkedRows, setCheckedRows] = useState({});
 	const [showBtn, setShowBtn] = useState(false);
 	const [bulkSection, setBulkSection] = useState({ value: false, bulkAction: '' });
+	const [showSub, setShowSub] = useState(false);
 	const [filters, setFilters] = useState({
 		year               : '',
 		month              : '',
@@ -69,6 +70,29 @@ function ShipmentView() {
 	const { page, year, month } = filters || {};
 
 	const isApplyEnable = year?.length > 0 && month?.length > 0;
+	const subComponent = (itemData: object) => {
+		console.log(itemData, 'itemData');
+
+		return (
+			<div className={styles.sub_comp}>
+				<div className={styles.quo}>
+					Quotation
+					<div className={styles.quo_border} />
+				</div>
+
+				<div>Purchase : INR 2,00,000</div>
+				<div>Sales : INR 2,20,000</div>
+				<div>Margin : 20,000 (10%)</div>
+				<div>
+					Shipment Type :
+					{' '}
+					{' '}
+					<span className={styles.span_val}>Sell Without Buy</span>
+				</div>
+			</div>
+		);
+	};
+
 	return (
 		<div>
 			<Card
@@ -98,7 +122,16 @@ function ShipmentView() {
 						</div>
 					)}
 				</div>
+
 				<div className={styles.input_container}>
+					<div
+						onClick={() => { setShowSub(!showSub); }}
+						className={styles.hide_data}
+						role="presentation"
+					>
+						{showSub ? 'Hide All Quotations' : 'View All Quotations'}
+
+					</div>
 					<Input
 						value={filters?.query}
 						onChange={(val) => { setFilters((prev) => ({ ...prev, query: val })); }}
@@ -115,6 +148,7 @@ function ShipmentView() {
 					total={totalRecords}
 					pageSize={10}
 					data={list}
+					renderRowSubComponent={subComponent}
 					columns={accrualColumn(
 						getTableBodyCheckbox,
 						getTableHeaderCheckbox,
@@ -127,9 +161,11 @@ function ShipmentView() {
 						filters,
 						setFilters,
 					)}
+					selectType="multiple"
 					loading={shipmentLoading}
 					setFilters={setFilters}
 					filters={filters}
+					showAllNestedOptions={showSub}
 				/>
 			</div>
 			<div>

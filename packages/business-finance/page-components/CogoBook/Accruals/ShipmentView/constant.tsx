@@ -56,12 +56,12 @@ export const optionSelect = [
 ];
 export const optionsRadio = [
 	{
-		label : 'Amount',
+		label : 'By Amount',
 		value : 'amount',
 		name  : 'amount',
 	},
 	{
-		label : 'Percentage',
+		label : 'By Percentage',
 		value : 'percentage',
 		name  : 'percentage',
 	},
@@ -69,23 +69,23 @@ export const optionsRadio = [
 
 export const optionsData = [
 	{
-		label : '> Greater than',
+		label : 'Greater than',
 		value : '>',
 	},
 	{
-		label : '>= Greater than or equal to',
+		label : 'Greater than or equal to',
 		value : '>=',
 	},
 	{
-		label : '<=x=< Between',
+		label : 'Between',
 		value : '<=x=<',
 	},
 	{
-		label : '< less than ',
+		label : 'less than ',
 		value : '<',
 	},
 	{
-		label : '<= less than or equal to',
+		label : 'less than or equal to',
 		value : '<=',
 	},
 ];
@@ -196,8 +196,6 @@ export const accrualColumn = (
 
 						<div className={styles.job_number_data}>{ jobNumber || '-' }</div>
 						<div>{startCase(serviceType || '-')}</div>
-						{/* <div className={styles.sell_without}>Sell Without Buy</div> */}
-
 					</div>
 				</Tooltip>
 
@@ -248,7 +246,6 @@ export const accrualColumn = (
 						</span>
 					</div>
 
-					<div style={{ color: '#F06D6D' }}>Quotation :- INR 2000</div>
 				</div>
 			);
 		},
@@ -280,7 +277,6 @@ export const accrualColumn = (
 			return (
 				<div className={styles.quotation_styles}>
 					<span>{getFormattedPrice(actualIncome, incomeCurrency) || '-' }</span>
-					<div style={{ color: '#67c676' }}>Quotation :- INR 2000</div>
 				</div>
 			);
 		},
@@ -395,7 +391,7 @@ export const accrualColumn = (
 
 			<div>
 				<div className={styles.ribbon}>
-					Sell Without Buy
+					Shipment
 				</div>
 			</div>
 

@@ -23,19 +23,25 @@ interface TableProps {
 	onRowSelect?: (row: object) => void;
 	onRowClick?: (row: object) => void;
 	getRowId?: (row: object) => string;
+	renderRowSubComponent?:Function
+	showAllNestedOptions?:boolean
 }
 
 function StyledTable({
-	id, className, columns, data, pageSize, page, total, setFilters, filters, loading, ...rest
+	id, className, columns, selectType, showAllNestedOptions,
+	data, renderRowSubComponent, pageSize, page, total, setFilters, filters, loading, ...rest
 }: TableProps) {
 	return (
 		<div className={styles.table}>
 			<Table
 				columns={columns}
+				renderRowSubComponent={renderRowSubComponent}
 				data={data}
 				id={id}
 				className={className}
 				loading={loading}
+				selectType={selectType}
+				showAllNestedOptions={showAllNestedOptions}
 				{...rest}
 			/>
 

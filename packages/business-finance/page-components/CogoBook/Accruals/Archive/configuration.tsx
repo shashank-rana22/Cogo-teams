@@ -97,21 +97,21 @@ export const ARCHIVE_MONTH_ACCRUED = [
 		},
 	},
 	{
-		Header   : 'Expense Booked',
-		accessor : 'expenseBooked',
-		id       : 'expenseBooked',
+		Header   : 'Expense Accrued',
+		accessor : 'expenseAccrued',
+		id       : 'expenseAccrued',
 		Cell     : ({ row: { original } }) => {
-			const { expenseBooked, expenseCurrency } = original || {};
-			return <span>{getFormattedPrice(expenseBooked, expenseCurrency) || '-' }</span>;
+			const { expenseAccrued, expenseCurrency } = original || {};
+			return <span>{getFormattedPrice(expenseAccrued, expenseCurrency) || '-' }</span>;
 		},
 	},
 	{
-		Header   : 'Income Booked',
-		accessor : 'incomeBooked',
-		id       : 'incomeBooked',
+		Header   : 'Income Accrued',
+		accessor : 'incomeAccrued',
+		id       : 'incomeAccrued',
 		Cell     : ({ row: { original } }) => {
-			const { incomeBooked, incomeCurrency } = original || {};
-			return <span>{getFormattedPrice(incomeBooked, incomeCurrency) || '-' }</span>;
+			const { incomeAccrued, incomeCurrency } = original || {};
+			return <span>{getFormattedPrice(incomeAccrued, incomeCurrency) || '-' }</span>;
 		},
 	},
 	{

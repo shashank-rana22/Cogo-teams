@@ -18,11 +18,18 @@
 }
 
 .input_container {
-  width: 400px;
+  display: flex;
+  align-items: center;
+  width: 550px;
 }
 
 .table_data {
   margin-top: 16px;
+  :global {
+    .ui_table_body_row {
+      cursor: pointer;
+    }
+  }
 }
 
 .flex_sort {
@@ -66,7 +73,7 @@
   flex-direction: column;
 }
 .sell_without {
-  background: #cfeaed;
+  background: #fbc8c2;
   border-radius: 4px;
   font-size: 10px;
   padding: 2px 16px;
@@ -79,7 +86,7 @@
   position: absolute;
   top: 1px;
   right: -30px;
-  padding: 0 4px var(--f) calc(8px + var(--r));
+  padding: 0 10px var(--f) calc(8px + var(--r));
   clip-path: polygon(
     0 0,
     100% 0,
@@ -89,6 +96,35 @@
     0 calc(100% - var(--f)),
     var(--r) calc(50% - var(--f) / 2)
   );
-  font-size: 8px;
-  background: #cfeaed;
+  font-size: 10px;
+  background: #fbc8c2;
+}
+.sub_comp {
+  background: #f8f2e7;
+  border: 1px solid #f2e3c3;
+  padding: 14px 36px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 0px 40px 0px;
+  align-items: center;
+}
+.span_val {
+  background: #ddebc0;
+  border-radius: 4px;
+  padding: 2px 16px;
+}
+.hide_data {
+  color: #f68b21;
+  text-decoration: underline;
+  cursor: pointer;
+  width: 200px;
+}
+.quo_border {
+  height: 30px;
+  border: 1px solid #f2e3c3;
+  margin-left: 50px;
+}
+.quo {
+  display: flex;
+  align-items: center;
 }

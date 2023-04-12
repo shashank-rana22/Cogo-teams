@@ -1,4 +1,4 @@
-import { Button, Select, RadioGroup, Popover, Input } from '@cogoport/components';
+import { Button, Select, RadioGroup, Input } from '@cogoport/components';
 
 import { FilterInterface } from '../../../interface';
 import { optionsData, optionsJobData, optionsRadio } from '../../constant';
@@ -14,13 +14,32 @@ interface MoreFilterInterface {
 }
 
 function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMoreFilter }:MoreFilterInterface) {
+	const getPlaceHolder = () => {
+		if (filters?.profitType === 'percentage' && filters?.range === '<=x=<') {
+			return 'To Percentage';
+		}
+		if (filters?.profitType === 'amount' && filters?.range === '<=x=<') {
+			return 'To Amount';
+		}
+		if (filters?.profitType === 'amount') {
+			return 'Amount';
+		}
+		if (filters?.profitType === 'percentage') {
+			return 'Percentage';
+		}
+
+		return null;
+	};
 	const content = () => (
 		<div className={styles.content_container}>
 			<div className={styles.radio}>
 				<RadioGroup
 					options={optionsRadio}
 					value={filters?.profitType}
-					onChange={(item:string) => setFilters((prev) => ({ ...prev, profitType: item }))}
+					onChange={(item:string) => {
+						setFilters((prev) => ({ ...prev, profitType: item }));
+						setProfitNumber('');
+					}}
 				/>
 			</div>
 
@@ -31,7 +50,7 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 					placeholder="All"
 					options={optionsData}
 					isClearable
-					style={{ width: '250px' }}
+					style={{ width: '300px' }}
 				/>
 			</div>
 
@@ -56,6 +75,8 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 								}));
 							}
 						}}
+						suffix={filters?.profitType === 'percentage' && '%'}
+						prefix={filters?.profitType === 'amount' && 'INR'}
 					/>
 				</div>
 			)}
@@ -63,7 +84,7 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 			<div className={styles.input_container}>
 				<Input
 					className="primary md"
-					placeholder={filters?.profitType === 'amount' ? 'Amount' : 'Percentage'}
+					placeholder={getPlaceHolder()}
 					value={profitNumber || ''}
 					onChange={(e:string) => {
 						setProfitNumber(e);
@@ -81,26 +102,16 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 							}));
 						}
 					}}
+					suffix={filters?.profitType === 'percentage' && '%'}
+					prefix={filters?.profitType === 'amount' && 'INR'}
 				/>
 			</div>
 
 		</div>
 	);
 
-	const getAmount = filters?.profitAmount || filters?.profitPercent;
-	const getUpperAmount = filters?.profitAmountUpper || filters?.profitPercentUpper;
-
 	return (
 		<div>
-			<Popover
-				placement="bottom"
-				render={content()}
-			>
-				<Input
-					placeholder="Profit"
-					value={(filters?.range === '<=x=<' ? getUpperAmount : '') + filters.range + getAmount}
-				/>
-			</Popover>
 			<div className={styles.select_container}>
 				<Select
 					value={filters?.jobState}
@@ -108,9 +119,19 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 					placeholder="Job Type"
 					options={optionsJobData}
 					isClearable
-					style={{ width: '250px' }}
 				/>
 			</div>
+
+			<div className={styles.profit_hr}>
+				{' '}
+				<div className={styles.profit}> Profitability</div>
+
+				{' '}
+				<div className={styles.hr} />
+			</div>
+
+			{content()}
+
 			<div className={styles.button_container}>
 				<Button
 					size="sm"

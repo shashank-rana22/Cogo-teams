@@ -1,4 +1,4 @@
-import { Input, SingleDateRange, Select, Toggle } from '@cogoport/components';
+import { Input, Select, Toggle } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -14,6 +14,7 @@ import styles from './styles.module.css';
 function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateAction<boolean>> }) {
 	const [toggleValue, setToggleValue] = useState('declared');
 	const [isBookedActive, setIsBookActive] = useState(true);
+	const [showSub, setShowSub] = useState(false);
 	let ARCHIVE_MONTH_CONFIG;
 
 	if (isBookedActive) {
@@ -42,6 +43,29 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 
 	const { page } = globalFilters || {};
 
+	const subComponent = (itemData: object) => {
+		console.log(itemData, 'itemData');
+
+		return (
+			<div className={styles.sub_comp}>
+				<div className={styles.quo}>
+					Quotation
+					<div className={styles.quo_border} />
+				</div>
+
+				<div>Purchase : INR 2,00,000</div>
+				<div>Sales : INR 2,20,000</div>
+				<div>Margin : 20,000 (10%)</div>
+				<div>
+					Shipment Type :
+					{' '}
+					{' '}
+					<span className={styles.span_val}>Sell Without Buy</span>
+				</div>
+			</div>
+		);
+	};
+
 	return (
 		<div>
 			{particularMonth ? (
@@ -53,34 +77,45 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 						loading={loading}
 					/>
 					<div className={styles.button_container}>
-						<div
-							className={isBookedActive ? styles.selected : styles.button_tab}
-							onClick={() => {
-								setGlobalFilters((p) => ({
-									...p,
-									archivedStatus: 'BOOKED',
-								}));
-								getDrillDownArchive(monthData);
-								setIsBookActive(true);
-							}}
-							role="presentation"
-						>
-							Booked
-						</div>
+						<div className={styles.button_value}>
+							<div
+								className={isBookedActive ? styles.selected : styles.button_tab}
+								onClick={() => {
+									setGlobalFilters((p) => ({
+										...p,
+										archivedStatus: 'BOOKED',
+									}));
+									getDrillDownArchive(monthData);
+									setIsBookActive(true);
+								}}
+								role="presentation"
+							>
+								Booked
+							</div>
 
+							<div
+								className={!isBookedActive ? styles.selected : styles.button_tab}
+								onClick={() => {
+									setGlobalFilters((p) => ({
+										...p,
+										archivedStatus: 'ACCRUED',
+									}));
+									getDrillDownArchive(monthData);
+									setIsBookActive(false);
+								}}
+								role="presentation"
+							>
+								Accrued
+							</div>
+
+						</div>
 						<div
-							className={!isBookedActive ? styles.selected : styles.button_tab}
-							onClick={() => {
-								setGlobalFilters((p) => ({
-									...p,
-									archivedStatus: 'ACCRUED',
-								}));
-								getDrillDownArchive(monthData);
-								setIsBookActive(false);
-							}}
+							onClick={() => { setShowSub(!showSub); }}
+							className={styles.hide_data}
 							role="presentation"
 						>
-							Accrued
+							{showSub ? 'Hide All Quotations' : 'View All Quotations'}
+
 						</div>
 					</div>
 				</>
@@ -118,17 +153,6 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 								style={{ width: '200px' }}
 							/>
 						</div>
-						{particularMonth && (
-							<div className={styles.div_select}>
-								<SingleDateRange
-									placeholder="Date"
-									dateFormat="MM/dd/yyyy"
-									name="date"
-									onChange={(val:any) => { setGlobalFilters((prev) => ({ ...prev, date: val })); }}
-									value={globalFilters?.date}
-								/>
-							</div>
-						)}
 						<div className={styles.div_select}>
 							<Select
 								value={globalFilters?.entity}
@@ -162,7 +186,7 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 							<div className={styles.table_container}>
 								<StyledTable
 									page={page}
-									total={totalRecords || TotalRecords}
+									total={particularMonth ? TotalRecords : totalRecords}
 									pageSize={10}
 									data={particularMonth ? drillDataList : list}
 									columns={particularMonth ? ARCHIVE_MONTH_CONFIG : ARCHIVE_DECLARED(
@@ -173,6 +197,9 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 										setShowTab,
 									)}
 									loading={loading}
+									renderRowSubComponent={particularMonth && subComponent}
+									selectType="multiple"
+									showAllNestedOptions={particularMonth && showSub}
 									setFilters={setGlobalFilters}
 									filters={globalFilters}
 								/>

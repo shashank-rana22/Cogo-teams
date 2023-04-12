@@ -87,7 +87,7 @@ function Card({
 			filters={filters}
 		/>
 	);
-	const rest = { onClickOutside: () => { setSelectFilter(false); } };
+	const rest = { onClickOutside: () => { setSelectFilter(false); setMoreFilter(false); } };
 
 	const onSubmit = () => {
 		setPayload([]);
@@ -227,6 +227,7 @@ function Card({
 					placement="bottom"
 					render={contentMoreFilter()}
 					visible={moreFilter}
+					{...rest}
 				>
 					<Button
 						onClick={() => { setMoreFilter(!moreFilter); }}
