@@ -2,12 +2,11 @@ import { IcMArrowRight, IcMArrowLeft } from '@cogoport/icons-react';
 import { upperCase } from '@cogoport/utils';
 import React, { useRef } from 'react';
 
-import openDocument from '../../../../../../helpers/openDocument';
-import { getHeight, getWidth } from '../utils/getDimensions';
+import openDocument from '../../../../../../commons/OpenDocument';
 
 import styles from './styles.module.css';
 
-function PreviewContent({ data = [], fromFloatingWidget = false, isMobile = false, type = '' }) {
+function PreviewContent({ data = [], isMobile = false, type = '' }) {
 	const scrollRef = useRef('');
 
 	const scrollAmount = isMobile ? 360 : 800;
@@ -49,13 +48,13 @@ function PreviewContent({ data = [], fromFloatingWidget = false, isMobile = fals
 									role="presentation"
 									src={item}
 									alt="img"
-									width={getWidth({ isMobile, fromFloatingWidget })}
+									width={isMobile ? 330 : 366}
 									onClick={() => openDocument(item)}
 								/>
 							) : (
 								<iframe
-									width={getWidth({ isMobile, fromFloatingWidget })}
-									height={getHeight({ isMobile, fromFloatingWidget })}
+									width={isMobile ? '330' : '366'}
+									height={isMobile ? '186' : '206'}
 									src={item}
 									title="YouTube video player"
 									frameBorder="0"

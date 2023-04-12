@@ -9,21 +9,19 @@ const useGetSingleAnnouncement = (id = '') => {
 	}, { manual: true });
 
 	const fetchDetails = useCallback(() => {
-		if (id) {
-			try {
-				trigger({
-					params: {
-						id,
-					},
-				});
-			} catch (error) {
-				Toast.error(error?.message);
-			}
+		try {
+			trigger({
+				params: {
+					id,
+				},
+			});
+		} catch (error) {
+			Toast.error(error?.message);
 		}
 	}, [id, trigger]);
 
 	useEffect(() => {
-		fetchDetails();
+		if (id) { fetchDetails(); }
 	}, [fetchDetails, id]);
 
 	return {

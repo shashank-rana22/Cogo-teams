@@ -20,6 +20,7 @@ function AnnouncementForm({
 	announcement_id = '',
 	actionType,
 	loadingForm = false,
+	isMobile = false,
 }) {
 	const [showCreateAudience, setShowCreateAudience] = useState(false);
 	const [showSubmitModal, setShowSubmitModal] = useState(false);
@@ -191,6 +192,7 @@ function AnnouncementForm({
 						<Preview
 							formValues={formValues}
 							editorValue={editorValue.toString('html')}
+							isMobile={isMobile}
 						/>
 					</Modal.Body>
 				</Modal>

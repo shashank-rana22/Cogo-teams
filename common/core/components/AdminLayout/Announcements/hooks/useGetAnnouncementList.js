@@ -37,6 +37,7 @@ const useGetAnnouncementList = () => {
 			},
 		}));
 	}, [query]);
+
 	const { scope = '' } = general || {};
 
 	const { auth_role_data = {}, partner = {}, user } = profile;

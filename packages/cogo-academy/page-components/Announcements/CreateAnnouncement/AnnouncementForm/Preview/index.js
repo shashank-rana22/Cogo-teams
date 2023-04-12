@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import Spinner from '../../../../../commons/Spinner';
 
+import PreviewContent from './PreviewContent';
 import PreviewFiles from './PreviewFiles';
-import PreviewImages from './PreviewImages';
-import PreviewVideos from './PreviewVideos';
 import styles from './styles.module.css';
 
 function Preview({
@@ -12,6 +11,7 @@ function Preview({
 	announcement_id = '',
 	previewLoading = false,
 	editorValue = '',
+	isMobile = false,
 }) {
 	const [videos, setVideos] = useState([]);
 	const [files, setFiles] = useState([]);
@@ -46,9 +46,26 @@ function Preview({
 			<div className={styles.description}>
 				<div dangerouslySetInnerHTML={{ __html: editorValue }} />
 			</div>
-			<PreviewVideos videos={videos} />
-			<PreviewImages images={images} />
-			<PreviewFiles files={files} />
+
+			{(videos || []).length > 0 && (
+				<PreviewContent
+					data={videos}
+					isMobile={isMobile}
+					type="videos"
+				/>
+			)}
+
+			{(images || []).length > 0 && (
+				<PreviewContent
+					data={images}
+					isMobile={isMobile}
+					type="images"
+				/>
+			)}
+
+			{(files || []).length > 0 && (
+				<PreviewFiles files={files} />
+			)}
 
 		</div>
 	);
