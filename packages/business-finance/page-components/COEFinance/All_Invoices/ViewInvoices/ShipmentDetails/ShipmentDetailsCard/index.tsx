@@ -51,12 +51,13 @@ function ShipmentDetailsCard({
 		registrationNumber: registrationNumberBuyer = '',
 		taxNumber: taxNumberBuyer = '',
 	} = buyerDetail || {};
-	const { organizationName = '', taxNumber = '' } = sellerDetail || {};
+	const { organizationName = '', taxNumber = '', registrationNumber = '' } = sellerDetail || {};
 	const {
 		bankName = '',
 		accountNumber = '',
 		ifscCode = '',
 	} = sellerBankDetail || {};
+
 	const {
 		billNumber = '',
 		billDate,
@@ -247,7 +248,7 @@ function ShipmentDetailsCard({
 														<div className={styles.margin_bottom}>
 															PAN Number -
 															{' '}
-															<span>{(taxNumber || '').slice(2, 12)}</span>
+															<span>{(registrationNumber || '')}</span>
 														</div>
 													</div>
 
@@ -488,7 +489,7 @@ function ShipmentDetailsCard({
 											<div className={styles.margin_bottom}>
 												PAN Number -
 												{' '}
-												<span>{(taxNumber || '').slice(2, 12)}</span>
+												<span>{(registrationNumber || '')}</span>
 											</div>
 											<div className={styles.margin_bottom}>
 												GST Number -

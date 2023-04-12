@@ -1,8 +1,7 @@
-import { Toast } from '@cogoport/components';
 import { useLensRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 /**
  * Single utility hook to get entity stakeholder mappings
@@ -19,7 +18,7 @@ const useGetEntityStakeholderMappings = () => {
 			try {
 				await triggerGetEntityStakeholder();
 			} catch (err) {
-				Toast.error(getApiErrorString(err));
+				toastApiError(err);
 			}
 		})();
 	}, [triggerGetEntityStakeholder]);

@@ -1,14 +1,19 @@
 import { Pill, Pagination } from '@cogoport/components';
+import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import FeedBackContent from './FeedbackContent';
 import styles from './styles.module.css';
+import useGetFaqFeedback from './useGetFaqFeedback';
 import useListfaqFeedback from './useListFaqFeedback';
 
 function QuestionFeedBack({ id, source = '', onClickEdit = () => {} }) {
+	const { general } = useSelector((state) => state);
+	const { feedbackId = '' } = general.query || {};
+
 	const {
-		list,
+		list = [],
 		page,
 		setPage,
 		total_count,
@@ -16,13 +21,39 @@ function QuestionFeedBack({ id, source = '', onClickEdit = () => {} }) {
 		answer_remark,
 		question_answer_remark,
 		question_remark,
-	} = useListfaqFeedback({ id });
+	} = useListfaqFeedback({ id, feedbackId });
+
+	const { data = {} } = useGetFaqFeedback({ feedbackId, page });
+
+	const feedbacksList = page === 1 && feedbackId ? [data] : [];
+
+	(list || []).map((feedback) => {
+		feedbacksList.push(feedback);
+
+		return feedbacksList;
+	});
+
+	let feedbackOnquestion = 0;
+	let feedbackOnAnswer = 0;
+	let feedbackonBoth = 0;
+
+	const { remark = '' } = data || {};
+
+	if ((remark || '').includes('Question not satisfactory.')) {
+		feedbackOnquestion += 1;
+	}
+	if ((remark || '').includes('Answer not satisfactory')) {
+		feedbackOnAnswer += 1;
+	}
+	if ((remark || '').includes('Answer not satisfactory') && remark.includes('Question not satisfactory.')) {
+		feedbackonBoth += 1;
+	}
 
 	const FEEDBACK_COUNT_MAPPING = {
-		all                      : total_count,
-		questions                : question_remark,
-		answer                   : answer_remark,
-		both_question_and_answer : question_answer_remark,
+		all                      : !isEmpty(data) ? total_count + 1 : total_count,
+		questions                : question_remark + feedbackOnquestion,
+		answer                   : answer_remark + feedbackOnAnswer,
+		both_question_and_answer : question_answer_remark + feedbackonBoth,
 	};
 
 	if (isEmpty(list)) {
@@ -49,11 +80,10 @@ function QuestionFeedBack({ id, source = '', onClickEdit = () => {} }) {
 			</div>
 
 			<div className={styles.scrollable_container}>
-				{(list || []).map((element) => (
+				{(feedbacksList || []).map((element) => (
 					<FeedBackContent
 						feedback={element}
 						onClickEdit={onClickEdit}
-						id={id}
 						source={source}
 						key={id}
 

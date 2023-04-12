@@ -34,7 +34,7 @@ interface InvoiceFilterProps {
 	services?: string[],
 }
 
-const useGetOutstandingCard = (organizationId: string, entityCode: number) => {
+const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const [invoiceFilters, setinvoiceFilters] = useState<InvoiceFilterProps>({
@@ -100,7 +100,7 @@ const useGetOutstandingCard = (organizationId: string, entityCode: number) => {
 					dueDateEnd,
 					invoiceDateStart,
 					invoiceDateEnd,
-					entityCode,
+					cogoEntity    : entityCode || undefined,
 				},
 			});
 		} catch (e) {

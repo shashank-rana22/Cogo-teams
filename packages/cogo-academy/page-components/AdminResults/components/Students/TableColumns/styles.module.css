@@ -11,3 +11,12 @@
 .section {
 	padding-left: 24px;
 }
+
+.delete {
+	cursor: pointer;
+}
+
+.see_more {
+	text-decoration-line: underline;
+	cursor: pointer;
+}
