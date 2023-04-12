@@ -6,12 +6,9 @@ import styles from './styles.module.css';
 import TextSettings from './TextSettings';
 
 function Settings(props) {
-	const { selectedItem, components, onChange } = props;
+	const { selectedItem, component, setComponent, onChange } = props;
 
 	const { type = '' } = selectedItem;
-
-	console.log('selected item ::', selectedItem);
-	console.log('components ::', components);
 
 	const COMPONENT_MAPPING = {
 		text    : <TextSettings item={selectedItem} onChange={onChange} />,
@@ -23,7 +20,9 @@ function Settings(props) {
 	return (
 		<div className={styles.container}>
 
-			{['text', 'button', 'image'].includes(type) ? COMPONENT_MAPPING[type || 'default'] : <DivSettings />}
+			{['text', 'button', 'image'].includes(type)
+				? COMPONENT_MAPPING[type || 'default']
+				: <DivSettings component={component} setComponent={setComponent} />}
 
 		</div>
 	);

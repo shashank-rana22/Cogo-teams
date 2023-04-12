@@ -90,7 +90,9 @@ const settings = [
 	},
 ];
 
-function DivSettings() {
+function DivSettings(props) {
+	const { component, setComponent } = props;
+
 	return (
 		<div className={styles.container}>
 
@@ -114,7 +116,13 @@ function DivSettings() {
 							))}
 						</select>
 					) : (
-						<input style={{ width: '120px' }} type={type} id={key} name={key} />
+						<input
+							style={{ width: '120px' }}
+							type={type}
+							id={key}
+							name={key}
+						/>
+
 					)}
 				</div>
 			))}

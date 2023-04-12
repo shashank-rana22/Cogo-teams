@@ -1,7 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { Button, Modal } from '@cogoport/components';
 import React, { useCallback, useState } from 'react';
-import { v1 as uuid } from 'uuid';
 
 import DropBox from '../DropBox';
 import LeftPanel from '../LeftPanel';
@@ -47,9 +46,11 @@ const CONTENT_MAPPING = {
 
 function DNDComponent() {
 	const [activeTab, setActiveTab] = useState('content');
-	const [components, setComponents] = useState({
-		layout : [],
-		styles : {},
+	const [component, setComponent] = useState({
+		layouts : [],
+		style   : {
+			border: '2px solid red',
+		},
 
 	});
 
@@ -66,44 +67,44 @@ function DNDComponent() {
 	const [selectedItem, setSelectedItem] = useState({});
 
 	const handleAddNewItem = useCallback(
-		(content, hoveredIndex = components.layout.length, shouldAddBelow = true, parentDetails, componentType) => {
+		(content, hoveredIndex = component.layouts.length, shouldAddBelow = true, parentDetails, componentType) => {
 			const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
 
 			if (componentType === 'child') {
 				const { childId, parentId } = parentDetails || {};
-				const data = components;
+				const data = component;
 
 				const objIndex = data.layout.findIndex((item) => item.parentId === parentId);
 
 				data.layout[objIndex].children[childId].properties.content = content;
 
-				setComponents(data);
+				setComponent(data);
 			} else {
-				setComponents((prev) => ({
+				setComponent((prev) => ({
 					...prev,
-					layout: [
-						...components.layout.slice(0, startIndex),
+					layouts: [
+						...component.layouts.slice(0, startIndex),
 						{
 							...CONTENT_MAPPING[content.type],
 							...content,
-							id: components.layout.length + 1,
+							id: component.layouts.length + 1,
 						// parentId,
 						},
-						...components.layout.slice(startIndex),
+						...component.layouts.slice(startIndex),
 					],
 				}));
 			}
 
 			setSelectedItem({
 				...content,
-				id    : components.layout.length + 1,
+				id    : component.layouts.length + 1,
 				index : startIndex,
 			});
 
 			setShowContentModal(false);
 			setParentComponentId(null);
 		},
-		[components],
+		[component],
 	);
 
 	const onClose = () => {
@@ -115,8 +116,8 @@ function DNDComponent() {
 			<LeftPanel
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
-				components={components.layout}
-				setComponents={setComponents}
+				component={component}
+				setComponent={setComponent}
 				addNewItem={handleAddNewItem}
 				onNewItemAdding={setNewItemAdding}
 				selectedItem={selectedItem}
@@ -187,8 +188,8 @@ function DNDComponent() {
 
 					<div>
 						<DropBox
-							components={components.layout}
-							setComponents={setComponents}
+							component={component}
+							setComponent={setComponent}
 							addNewItem={handleAddNewItem}
 							onNewItemAdding={setNewItemAdding}
 							selectedItem={selectedItem}
@@ -212,11 +213,7 @@ function DNDComponent() {
 				>
 					<Modal.Header title="choose content" />
 					<Content
-						components={components}
-						setComponents={setComponents}
 						parentComponentId={parentComponentId}
-						setParentComponentId={setParentComponentId}
-						setShowContentModal={setShowContentModal}
 						addNewItem={handleAddNewItem}
 						onNewItemAdding={setNewItemAdding}
 						selectedItem={selectedItem}
