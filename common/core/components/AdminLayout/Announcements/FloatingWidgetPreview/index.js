@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 function FloatingWidgetPreview(props) {
 	const router = useRouter();
 
-	const { setShowModal, isViewed = false, isMobile = false, fetchAnnouncements, currentId = '', setShow } = props;
+	const { setModalData, isViewed = false, isMobile = false, fetchAnnouncements, currentId = '', setShow } = props;
 
 	const { announcementViewed, announcementViewedloading } = useAnnouncementViewed(fetchAnnouncements);
 	const { announcementDetails: data, loadingSingleAnnouncement: loading } = useGetSingleAnnouncement(currentId);
@@ -22,12 +22,13 @@ function FloatingWidgetPreview(props) {
 
 	const handleViewed = async () => {
 		await announcementViewed(data?.id);
-		setShowModal(false);
+		setModalData({});
 	};
 
 	const handleTakeMeThere = async (url) => {
 		await announcementViewed(data?.id);
 		router.push(url, url);
+		setModalData({});
 		setShow(false);
 	};
 
@@ -69,7 +70,7 @@ function FloatingWidgetPreview(props) {
 						type="button"
 						themeType="secondary"
 						size="md"
-						onClick={() => setShowModal(false)}
+						onClick={() => setModalData({})}
 						disabled={announcementViewedloading}
 					>
 						Close

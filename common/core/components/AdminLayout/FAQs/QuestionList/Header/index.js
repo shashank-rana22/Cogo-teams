@@ -75,9 +75,9 @@ function Header({
 	};
 
 	const handleClose = () => {
-		if (announcementModalData) {
-			setAnnouncementModalData(false);
-		} else setShow(false);
+		if (isEmpty(announcementModalData)) {
+			setShow(false);
+		} else setAnnouncementModalData({});
 	};
 
 	return (

@@ -65,12 +65,6 @@
 	width: 100%;
 	height: calc(100vh - 100px);
 	overflow-y: scroll;
-	-ms-overflow-style: none;
-	scrollbar-width: none;
-}
-
-.content_container::-webkit-scrollbar {
-	display: none;
 }
 
 .body {
@@ -83,7 +77,7 @@
 	display: flex;
 	justify-content: flex-end;
 	width: 100%;
-	padding: 6px 8px 6px 0;
+	padding: 6px 20px 6px 0;
 }
 
 .buttons_container {

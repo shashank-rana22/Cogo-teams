@@ -71,7 +71,7 @@ function TopicList({
 	}, [fetchFaqNotification, showNotificationContent]);
 
 	useEffect(() => {
-		setAnnouncementModalData(false);
+		setAnnouncementModalData({});
 		setSearch('');
 		setSearchAnnouncement('');
 	}, [activeTab, setAnnouncementModalData, setSearch, setSearchAnnouncement]);
