@@ -10,7 +10,7 @@ const Card = ({
 	shipment_data,
 	primary_service,
 	setShowDoc,
-	// setShowConfirmed,
+	setShowApproved,
 }) => {
 	const handleView = (url) => {
 		window.open(url, '_blank');
@@ -52,7 +52,7 @@ const Card = ({
 					handleSave={handleSave}
 					primary_service={primary_service}
 					setShowDoc={setShowDoc}
-					// setShowConfirmed={setShowConfirmed}
+					setShowApproved={setShowApproved}
 				/>
 			);
 		});

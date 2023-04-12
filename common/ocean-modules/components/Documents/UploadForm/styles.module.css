@@ -1,10 +1,10 @@
-.label {
+/* .label {
 	margin-bottom: 8px;
 	font-size: 12px;
 	font-weight: 600;
 	line-height: 14px;
 	color: #4f4f4f;
-}
+} */
 .buttons_container{
     display: flex;
 	justify-content: flex-end;

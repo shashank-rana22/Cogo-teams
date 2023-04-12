@@ -4,7 +4,9 @@ import { React, useState, useContext } from 'react';
 
 import useCreateTaskList from '../../hooks/useCreateTaskList';
 import useGetShipmentMails from '../../hooks/useListRpaMails';
+import useUpdateDocument from '../../hooks/useUpdateDocument';
 
+import Approve from './Approve';
 import CheckList from './CheckList';
 import HeaderComponent from './Header';
 import LoadingState from './LoadingState';
@@ -14,9 +16,12 @@ import Wallet from './Wallet';
 
 function Documents() {
 	const [showDoc, setShowDoc] = useState(null);
-	// const [showConfirmed, setShowConfirmed] = useState(false);
+	const [showApproved, setShowApproved] = useState(false);
 	const [activeToggle, setActiveToggle] = useState(false);
 	const [activeWallet, setActiveWallet] = useState('trade_documents');
+	const [addToWallet, setAddToWallet] = useState(true);
+
+	const { updateDocument } = useUpdateDocument();
 	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
 
 	const {
@@ -38,6 +43,21 @@ function Documents() {
 		payload: emailPayload,
 	});
 
+	const handleApprove = async () => {
+		setShowDoc(showApproved);
+		setShowApproved(null);
+		if (addToWallet) {
+			await updateDocument({
+				values: {
+					name            : showApproved?.file_name || showApproved?.document_url,
+					document_type   : showApproved?.document_type,
+					image_url       : showApproved?.document_url,
+					organization_id : showApproved?.organization_id,
+				},
+			});
+		}
+	};
+
 	return !loading
 		? (
 			<div className={styles.main_container}>
@@ -58,7 +78,7 @@ function Documents() {
 						emailDocs={emailList}
 						completedDocs={completedDocs?.list}
 						setShowDoc={setShowDoc}
-						// setShowConfirmed={setShowConfirmed}
+						setShowApproved={setShowApproved}
 					/>
 				) : <Wallet activeWallet={activeWallet} />}
 
@@ -77,6 +97,14 @@ function Documents() {
 						setActiveWallet={setActiveWallet}
 					/>
 				</Modal>
+				<Approve
+					showApproved={showApproved}
+					setShowApproved={setShowApproved}
+					addToWallet={addToWallet}
+					setAddToWallet={setAddToWallet}
+					handleApprove={handleApprove}
+					setShowDoc={setShowDoc}
+				/>
 
 			</div>
 		) : <LoadingState />;

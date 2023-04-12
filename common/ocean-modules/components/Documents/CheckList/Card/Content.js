@@ -12,13 +12,14 @@ function Content({
 	taskList,
 	isChecked,
 	item,
+	shipment_data,
 	handleSave,
 	handleView,
 	primary_service,
 	receivedViaEmail,
 	showUploadText,
 	setShowDoc,
-	// setShowConfirmed,
+	setShowApproved,
 	docType,
 }) {
 	const isBlReleased = [
@@ -37,21 +38,21 @@ function Content({
 					themeType="link"
 					className="primary md text"
 					onClick={() => (
-						// receivedViaEmail
-						// 	? setShowConfirmed({
-						// 		...item,
-						// 		document_type : docType,
-						// 		document_url  : uploadedItem?.file_url,
-						// 		mail_id       : uploadedItem?.id,
-						// 		type          : 'task',
-						// 	})
-						// 	:
-						setShowDoc({
-							...item,
-							document_type: docType,
-						}))}
+						!receivedViaEmail
+							? setShowApproved({
+								...item,
+								document_type   : docType,
+								document_url    : uploadedItem?.file_url,
+								mail_id         : uploadedItem?.id,
+								organization_id : shipment_data?.importer_exporter_id,
+								type            : 'task',
+							})
+							: setShowDoc({
+								...item,
+								document_type: docType,
+							}))}
 				>
-					{receivedViaEmail ? 'Approve Document' : showUploadText}
+					{!receivedViaEmail ? 'Approve Document' : showUploadText}
 				</Button>
 			);
 		}

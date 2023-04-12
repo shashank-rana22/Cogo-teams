@@ -10,7 +10,7 @@ function CheckList({
 	emailDocs,
 	completedDocs,
 	setShowDoc,
-	// setShowConfirmed,
+	setShowApproved,
 
 }) {
 	const { primary_service, shipment_data } = useContext(ShipmentDetailContext);
@@ -24,7 +24,7 @@ function CheckList({
 				shipment_data={shipment_data}
 				primary_service={primary_service}
 				setShowDoc={setShowDoc}
-				// setShowConfirmed={setShowConfirmed}
+				setShowApproved={setShowApproved}
 			/>
 
 			{/* <DocumentActions /> */}
