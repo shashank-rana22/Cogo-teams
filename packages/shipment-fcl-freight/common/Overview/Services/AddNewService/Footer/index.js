@@ -26,9 +26,9 @@ function Footer({
 	return (
 		<div className={styles.container}>
 			<Button
-				className="secondary md"
 				onClick={onClose}
 				disabled={loading}
+				themeType="secondary"
 				id="shipment_form_header_cancel"
 			>
 				Cancel
@@ -36,10 +36,9 @@ function Footer({
 
 			<Button
 				type="submit"
-				className="primary md"
 				disabled={loading}
 				onClick={() => (onAddService(formValues))}
-				style={{ marginLeft: 16 }}
+				style={{ marginLeft: 12 }}
 				id="shipment_form_header_submit"
 			>
 				{loading ? 'Adding Service...' : 'Submit'}

@@ -19,13 +19,15 @@ export default function getControls({ serviceObj, documents, isAdditional }) {
 					service      : (service_type || '').split('_', 2).join('_'),
 				},
 			},
-			rules: { required: 'Service Provider is required' },
+			size  : 'sm',
+			rules : { required: 'Service Provider is required' },
 		},
 		{
 			name        : 'bls_count',
 			label       : 'BL Count',
 			type        : 'number',
 			placeholder : 'Enter BL Count',
+			size        : 'sm',
 			rules       : { required: 'BL Count required' },
 		},
 		{
@@ -37,6 +39,7 @@ export default function getControls({ serviceObj, documents, isAdditional }) {
 				{ label: 'Hbl', value: 'hbl' },
 			],
 			placeholder : 'Enter Bl Category',
+			size        : 'sm',
 			rules       : { required: 'BL Category is required' },
 		},
 	];

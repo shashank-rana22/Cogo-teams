@@ -58,7 +58,12 @@ export default function CancelShipment({ setShow }) {
 					{errors?.remarks
 						? <div className={styles.error_message}>{errors.remarks.message}</div>
 						: null}
-					<InputController name="remarks" control={control} rules={{ required: 'Remarks is required' }} />
+					<InputController
+						name="remarks"
+						control={control}
+						rules={{ required: 'Remarks is required' }}
+						size="sm"
+					/>
 				</Modal.Body>
 
 				<Modal.Footer>

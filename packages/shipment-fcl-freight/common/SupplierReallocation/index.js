@@ -63,10 +63,12 @@ function SupplierReallocation({
 		apiTrigger(payload);
 	};
 
+	const closeModal = () => setShow(false);
+
 	return (
 		<Modal
 			show
-			onClose={() => setShow(false)}
+			onClose={closeModal}
 			className={styles.styled_modal_container}
 			showCloseIcon={!loading}
 		>
@@ -81,16 +83,25 @@ function SupplierReallocation({
 					{controls.map((ctrl) => <FormElement {...ctrl} control={control} errors={errors} />)}
 				</div>
 
-				<div className={styles.button_container}>
-					<Button
-						className="reviewed"
-						onClick={handleSubmit(onUpdate)}
-						disabled={loading}
-					>
-						Update
-					</Button>
-				</div>
 			</Modal.Body>
+			<Modal.Footer>
+				<Button
+					themeType="secondary"
+					onClick={closeModal}
+					disabled={loading}
+					style={{ marginRight: '12px' }}
+				>
+					Cancel
+				</Button>
+
+				<Button
+					className="reviewed"
+					onClick={handleSubmit(onUpdate)}
+					disabled={loading}
+				>
+					Update
+				</Button>
+			</Modal.Footer>
 		</Modal>
 	);
 }

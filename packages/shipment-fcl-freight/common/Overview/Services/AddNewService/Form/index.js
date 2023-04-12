@@ -12,7 +12,6 @@ function Form({
 	upsellableService,
 	servicesList, shipmentData,
 	primary_service,
-	upsellModal,
 	setUpsellModal,
 }) {
 	const [truckTypeToggle, setTruckTypeToggle] = useState(false);
@@ -28,9 +27,10 @@ function Form({
 
 	return (
 		<Modal
-			show={upsellModal}
+			show
 			onClose={() => setUpsellModal(false)}
 			className={styles.custom_modal}
+			closeOnOuterClick={false}
 		>
 			<Modal.Header title={`${startCase(primary_service?.trade_type)} ${startCase(service)}`} />
 			<Modal.Body>
