@@ -1,9 +1,12 @@
 /* eslint-disable max-len */
 import { isEmpty } from '@cogoport/utils';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
+// import { ResizableBox } from 'react-resizable';
+import 'react-resizable/css/styles.css';
 import RenderComponents from './RenderComponent';
+// import styles from './styles.module.css';
 
 const ITEM_TYPES = {
 	text      : 'text',
@@ -64,6 +67,13 @@ function Item(props) {
 
 	const { type, id: elementId } = widget || {};
 
+	// const [state, setState] = useState({
+	// 	width  : 800,
+	// 	height : 170,
+	// });
+
+	// const { width, height } = state || {};
+
 	const itemRef = useRef(null);
 
 	const [{ handlerId }, drop] = useDrop({
@@ -123,11 +133,25 @@ function Item(props) {
 
 	drag(drop(itemRef));
 
+	// const onResize = (event, { element, size }) => {
+	// 	setState({ width: size.width, height: size.height });
+	//   };
+
 	const opacity = isNewItemAdding && !id ? '0.3' : '1';
 
-	const border = isSelected ? '3px dashed blue' : '1px solid silver';
+	const border = isSelected ? '1px solid #88cad1' : 'none';
 
 	return (
+
+	// <ResizableBox
+	// 	className="box"
+	// 	axis={type === 'container' ? 'none' : 'both'}
+	// 	minConstraints={[200, 200]}
+	// 	maxConstraints={[800, 400]}
+	// 	height={height}
+	// 	width={width}
+	// 	onResize={onResize}
+	// >
 		<div
 			role="presentation"
 			ref={itemRef}
@@ -138,17 +162,17 @@ function Item(props) {
 			style={{
 				opacity,
 				border,
-				padding : '10px',
-				margin  : '10px',
+				// width   : `${width}px`,
+				// height  : `${height}px`,
+
 			}}
 		>
 
-			<RenderComponents componentType={type} widget={widget} components={components} setComponents={setComponents} elementId={elementId} />
-
-			{type === 'container' && (
-				<ComponentBuilder widget={widget} components={components} setComponents={setComponents} />
-			)}
+			{type === 'container'
+				? <ComponentBuilder widget={widget} components={components} setComponents={setComponents} />
+				: <RenderComponents componentType={type} widget={widget} components={components} setComponents={setComponents} elementId={elementId} />}
 		</div>
+	// </ResizableBox>
 	);
 }
 

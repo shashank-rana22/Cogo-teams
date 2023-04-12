@@ -49,6 +49,11 @@ function DNDComponent() {
 	const [components, setComponents] = useState([]);
 	const [showContentModal, setShowContentModal] = useState(false);
 	const [parentComponentId, setParentComponentId] = useState(null);
+	const [mode, setMode] = useState({
+		modeType: 'edit',
+	});
+
+	const { modeType } = mode || {};
 
 	const [isNewItemAdding, setNewItemAdding] = useState(false);
 
@@ -132,15 +137,29 @@ function DNDComponent() {
 			</section>
 
 			<section className={styles.body}>
-				<div className={styles.left_panel}>
-					<MemoLeftPanel />
-				</div>
 
-				<div className={styles.right_panel}>
+				{modeType === 'edit' && (
+					<div className={styles.left_panel}>
+						<MemoLeftPanel />
+					</div>
+				)}
+
+				<div className={styles.right_panel} style={{ width: modeType === 'edit' ? '70%' : '100%' }}>
 
 					<section className={styles.header}>
 						<div>
-							<Button type="button" size="md" themeType="secondary">Preview</Button>
+							<Button
+								onClick={() => {
+									setMode({ modeType: modeType === 'edit' ? 'preview' : 'edit' });
+									setSelectedItem({});
+								}}
+								type="button"
+								size="md"
+								themeType="secondary"
+							>
+								{modeType === 'edit' ? 'Preview' : 'Back to editor'}
+
+							</Button>
 						</div>
 
 						<div className={styles.button_container}>

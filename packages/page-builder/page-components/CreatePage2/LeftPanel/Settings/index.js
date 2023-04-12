@@ -5,26 +5,19 @@ import TextSettings from './TextSettings';
 
 function Settings(props) {
 	const { selectedItem, onChange } = props;
+	const { type } = selectedItem || {};
 
-	let settingsComponent = null;
+	const SETTING_COMPONENT = {
+		text    : <TextSettings item={selectedItem} onChange={onChange} />,
+		button  : <ButtonSettings item={selectedItem} onChange={onChange} />,
+		image   : <ImageSettings item={selectedItem} onChange={onChange} />,
+		default : <div>Select an element to edit its style</div>,
 
-	switch (selectedItem?.type) {
-		case 'text':
-			settingsComponent = <TextSettings item={selectedItem} onChange={onChange} />;
-			break;
-		case 'button':
-			settingsComponent = <ButtonSettings item={selectedItem} onChange={onChange} />;
-			break;
-		case 'image':
-			settingsComponent = <ImageSettings item={selectedItem} onChange={onChange} />;
-			break;
-		default:
-			break;
-	}
+	};
 
 	return (
 		<div className={styles.container}>
-			{settingsComponent}
+			{SETTING_COMPONENT[type || 'default']}
 		</div>
 	);
 }

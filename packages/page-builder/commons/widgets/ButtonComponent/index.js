@@ -8,7 +8,7 @@ import 'react-quill/dist/quill.bubble.css';
 
 function ButtonComponent(props) {
 	const {
-		// label = 'submit',
+		label = 'submit',
 		themeType = 'primary',
 		size = 'md',
 		type = 'button',
@@ -49,7 +49,7 @@ function ButtonComponent(props) {
 	// };
 
 	return (
-		<div style={{ height: '60px' }}>
+		<div style={{ height: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 			<Button
 				type={type}
 				themeType={themeType}
@@ -57,7 +57,7 @@ function ButtonComponent(props) {
 				onClick={() => setIsFocused(!isFocused)}
 
 			>
-				Submit
+				{label}
 				{/* <ReactQuill
 					theme="bubble"
 					value={editorValue}

@@ -5,7 +5,7 @@ import DNDComponent from './DNDComponent';
 
 function CreatePage() {
 	return (
-		<div className="App">
+		<div>
 			<DndProvider backend={HTML5Backend}>
 				<DNDComponent />
 			</DndProvider>

@@ -38,7 +38,7 @@ function RenderComponents({ componentType, widget, components, setComponents, el
 	};
 
 	return (
-		<div style={{ background: 'lavender', width: '100%', height: '100%' }}>
+		<div style={{ width: '100%', height: '100%', color: '#222' }}>
 			{COMPONENT_MAPPING[componentType]}
 		</div>
 	);

@@ -22,10 +22,7 @@
   }
   
   .right_panel {
-    width: 70%;
     background-color: #fff;
-    padding: 12px;
-    border: 20px solid #f2e3c3;
     min-height: 100vh;
   }
   
@@ -33,6 +30,8 @@
       display: flex;
       justify-content: space-between;
       padding: 12px;
+      border-bottom: 1px solid #ee3425;
+      
   }
   
   .button_container {
