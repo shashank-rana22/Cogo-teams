@@ -1,3 +1,5 @@
+import { isEmpty } from '@cogoport/utils';
+
 import styles from './styles.module.css';
 
 const VALID_PASSWORD_MAPPINGS = {
@@ -27,7 +29,7 @@ function PasswordValidator({ errorMessage = '' }) {
 	return (
 		<div>
 			<div className={styles.error_message}>
-				{errorMessage}
+				{!isEmpty(errorMessage) ? 'Invalid Password' : null}
 			</div>
 			<div className={styles.password_validator}>
 				<div className="title">Password must contain:</div>
