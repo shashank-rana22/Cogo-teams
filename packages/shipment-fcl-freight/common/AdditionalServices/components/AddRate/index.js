@@ -1,12 +1,14 @@
 import { useForm } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useCreateShipmentAdditionalService from '../../../../hooks/useCreateShipmentAdditionalService';
+import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
 
 import ActionsToShow from './ActionToShow';
 import BillToCustomer from './BillToCustomer';
 import RenderAddRateForm from './RenderAddRateForm';
+import SecondStep from './SecondStep';
 import styles from './styles.module.css';
 
 const showRemarksStatus = [
@@ -25,16 +27,38 @@ function AddRate({
 	refetch,
 	onCancel = () => {},
 	filters,
-	updateResponse = () => {},
 	setShowChargeCodes = () => {},
+	source = 'overview',
+	task = {},
 }) {
 	const [billToCustomer, setBillToCustomer] = useState(false);
+	const [showSecondStep, setSecondStep] = useState(false);
+
+	const refetchForUpdateSubService = () => {
+		refetch();
+		onCancel();
+	};
+
+	const updateResponse = useUpdateShipmentAdditionalService({
+		item,
+		task,
+		refetch: refetchForUpdateSubService,
+	});
 
 	const {
 		handleSubmit,
 		control,
 		formState: { errors },
+		setValue,
 	} = useForm();
+
+	useEffect(() => {
+		setValue('currency', item?.currency);
+		setValue('quantity', item?.quantity);
+		setValue('unit', item?.unit);
+		setValue('price', item?.price);
+		setValue('alias', item?.alias);
+	}, [item, setValue]);
 
 	const afterAddRate = () => {
 		setAddRate(false);
@@ -77,10 +101,22 @@ function AddRate({
 			pending_task_id       : pending_task_id || undefined,
 			add_to_sell_quotation : true,
 			alias                 : alias || undefined,
+			state                 : 'requested_for_importer_exporter',
 		};
 
 		apiTrigger(payload);
 	};
+
+	if (showSecondStep) {
+		return (
+			<SecondStep
+				item={item}
+				setSecondStep={setSecondStep}
+				updateResponse={updateResponse}
+				onCancel={onCancel}
+			/>
+		);
+	}
 
 	if (
 		status?.status === 'charges_incurred'
@@ -105,9 +141,10 @@ function AddRate({
 				)
 			</div>
 			{showRemarksStatus.includes(status?.status) ? (
-				<p>
-					Comments:
-					{item.remarks[0]}
+				<p style={{ marginTop: '8px' }}>
+					<strong> Comment:</strong>
+					&nbsp;
+					{item?.remarks[0]}
 				</p>
 			) : null}
 
@@ -117,6 +154,7 @@ function AddRate({
 				control={control}
 				errors={errors}
 				serviceData={item}
+				source={source}
 			/>
 
 			<ActionsToShow
@@ -128,6 +166,7 @@ function AddRate({
 				loading={loading || updateResponse.loading}
 				onCancel={() => onCancel()}
 				setAddSellPrice={setAddSellPrice}
+				setSecondStep={setSecondStep}
 			/>
 		</div>
 	);

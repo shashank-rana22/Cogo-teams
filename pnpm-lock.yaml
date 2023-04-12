@@ -811,7 +811,7 @@ importers:
       file-saver: 2.0.5
       prop-types: 15.8.1
       react: 18.2.0
-      react-hook-form: 7.43.7_react@18.2.0
+      react-hook-form: 7.43.5_react@18.2.0
 
   packages/supply-dashboards:
     specifiers:

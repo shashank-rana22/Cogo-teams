@@ -37,7 +37,7 @@ function AddPoNumber({
 					/>
 					<div className={styles.button}>
 						<Button
-							className="md"
+							themeType="secondary"
 							onClick={() => setShow(false)}
 							disabled={loading}
 							style={{ marginRight: '8px' }}

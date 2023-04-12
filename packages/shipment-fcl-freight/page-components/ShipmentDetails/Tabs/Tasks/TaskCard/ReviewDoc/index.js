@@ -152,7 +152,7 @@ function ReviewDoc({
 						onClick={() => {
 							onClose();
 						}}
-						className="secondary md"
+						themeType="secondary"
 						disabled={loading}
 					>
 						Cancel

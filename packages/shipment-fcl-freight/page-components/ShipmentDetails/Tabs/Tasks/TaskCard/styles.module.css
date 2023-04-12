@@ -1,23 +1,19 @@
-.container{
+.task_container {
+	margin-left: 8px;
 
+	.core-ui-select__menu {
+		width: 100% !important;
+		min-width: 100% !important;
+	}
 }
 
-.task_container{
-	margin-left: 8px;
-	.core-ui-select__menu {
-		min-width: 100% !important;
-		width: 100% !important;
-	}
-};
-
-.button_wrap{
-	margin: 20px 0px;
+.button_wrap {
 	display: flex;
 	justify-content: flex-end;
+	margin: 20px 0;
+}
 
-};
-
-.form{
-	overflow-y: auto;
+.form {
 	max-height: calc(100vh - 39.5vh);
-};
+	overflow-y: auto;
+}

@@ -11,7 +11,7 @@ const currencyOptions = [
 	value : currency,
 }));
 
-const controls = ({ serviceData }) => {
+const controls = ({ serviceData = {}, source = '' }) => {
 	const unitOptions = [];
 	if (serviceData?.units) {
 		serviceData?.units?.forEach((unit) => { unitOptions.push({ label: startCase(unit), value: unit }); });
@@ -25,6 +25,8 @@ const controls = ({ serviceData }) => {
 			span    : 6,
 			options : currencyOptions,
 			rules   : { required: 'Currency is required' },
+			show    : source === 'task' || source === 'overview',
+
 		},
 		{
 			name        : 'buy_price',
@@ -33,14 +35,19 @@ const controls = ({ serviceData }) => {
 			span        : 6,
 			placeholder : 'Enter Buy Price',
 			rules       : { required: 'Buy Price is required' },
+			show        : source !== 'task' || source === 'overview'
+			|| serviceData?.state === 'amendment_requested_by_importer_exporter',
+			disabled: serviceData?.state === 'amendment_requested_by_importer_exporter',
 		},
 		{
-			name    : 'unit',
-			label   : 'Unit',
-			type    : 'select',
-			span    : 6,
-			options : unitOptions,
-			rules   : { required: 'Unit is required' },
+			name     : 'unit',
+			label    : 'Unit',
+			type     : 'select',
+			span     : 6,
+			options  : unitOptions,
+			rules    : { required: 'Unit is required' },
+			show     : source === 'task' || source === 'overview',
+			disabled : serviceData?.state === 'amendment_requested_by_importer_exporter',
 		},
 		{
 			name        : 'quantity',
@@ -49,14 +56,16 @@ const controls = ({ serviceData }) => {
 			span        : 6,
 			placeholder : 'Enter quantity here',
 			rules       : { required: 'Quantity is required' },
+			show        : source === 'task' || source === 'overview',
 		},
 		{
 			name        : 'price',
-			label       : 'Sell Price',
+			label       : 'Price',
 			type        : 'input',
 			span        : 6,
-			placeholder : 'Enter Sell Price',
+			placeholder : 'Enter Price',
 			rules       : { required: 'Price is required' },
+			show        : source === 'task' || source === 'overview',
 		},
 		{
 			name        : 'alias',
@@ -64,6 +73,7 @@ const controls = ({ serviceData }) => {
 			type        : 'input',
 			span        : 6,
 			placeholder : 'Enter Alias (Only if required)',
+			show        : source === 'task' || source === 'overview',
 		},
 		{
 			name        : 'service_provider_id',
@@ -72,6 +82,7 @@ const controls = ({ serviceData }) => {
 			span        : 8,
 			placeholder : 'Select Service Provider',
 			rules       : { required: 'Service Provider is required' },
+			show        : source !== 'task' && source !== 'overview',
 		},
 	];
 

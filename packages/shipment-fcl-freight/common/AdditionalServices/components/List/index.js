@@ -139,7 +139,6 @@ function List({
 							item={item?.serviceListItem}
 							status={item?.status}
 							setAddSellPrice={setAddSellPrice}
-							updateResponse={updateResponse}
 						/>
 					</Modal.Body>
 				</Modal>

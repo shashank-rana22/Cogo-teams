@@ -76,6 +76,7 @@ function ContainerNmUpdate({
 						size="md"
 						onClick={() => setEditContainerNum(false)}
 						disabled={loading}
+						themeType="secondary"
 					>
 						Cancel
 					</Button>

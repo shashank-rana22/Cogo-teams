@@ -1,3 +1,4 @@
+import AdditionsService from './AdditionalService';
 import ExecuteTask from './ExecuteTask';
 import ReviewDoc from './ReviewDoc';
 
@@ -23,15 +24,13 @@ function TaskCard({ task = {}, onCancel = () => {}, refetch = () => {} }) {
 			'amend_quote_additional_service',
 		].includes(task?.task_type)
 	) {
-		// return (
-		// 	<AdditionsService
-		// 		onCancel={onCancel}
-		// 		task={task}
-		// 		shipment_data={shipment_data}
-		// 		Loader={Loader}
-		// 		refetch={refetch}
-		// 	/>
-		// );
+		return (
+			<AdditionsService
+				onCancel={onCancel}
+				task={task}
+				refetch={refetch}
+			/>
+		);
 	}
 	return (
 		<div>

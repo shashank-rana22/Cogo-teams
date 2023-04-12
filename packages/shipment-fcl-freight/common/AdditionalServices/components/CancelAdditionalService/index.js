@@ -49,7 +49,7 @@ function CancelAdditionalService({
 					</div>
 					<div className={styles.button_container}>
 						<Button
-							themeType="primary"
+							themeType="secondary"
 							style={{ marginRight: '6px' }}
 							onClick={() => {
 								setShowCancel(false);
