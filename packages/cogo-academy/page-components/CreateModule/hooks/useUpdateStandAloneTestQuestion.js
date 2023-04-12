@@ -49,10 +49,7 @@ function useUpdateStandAloneTestQuestion({
 			}
 
 			await trigger({
-				data:
-						action === 'delete'
-							? { id: testQuestionId, status: 'inactive' }
-							: payload,
+				data: payload,
 			});
 
 			Toast.success(`StandAlone Question has been ${MAPPING[action]} successfully`);

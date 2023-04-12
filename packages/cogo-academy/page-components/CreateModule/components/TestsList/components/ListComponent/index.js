@@ -21,7 +21,14 @@ const columnsMapping = {
 };
 
 function ListComponent({
-	data, loading, setParams, activeTab, params, fetchList, sortFilter, setSortFilter,
+	data,
+	loading,
+	setParams,
+	activeTab,
+	params,
+	fetchList,
+	sortFilter,
+	setSortFilter,
 }) {
 	const router = useRouter();
 
@@ -46,6 +53,7 @@ function ListComponent({
 			setTestId,
 			sortFilter,
 			setSortFilter,
+			fetchList,
 		},
 		question_set: {
 			loading: updateLoading,
