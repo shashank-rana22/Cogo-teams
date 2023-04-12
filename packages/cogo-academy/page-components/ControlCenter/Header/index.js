@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Header({ setSwitchDashboard = () => {}, activeTab }) {
+function Header() {
 	const router = useRouter();
 
 	const onClickConfiguration = () => {
@@ -19,14 +19,6 @@ function Header({ setSwitchDashboard = () => {}, activeTab }) {
 			<div className={styles.header}>Control Center</div>
 
 			<div className={styles.button_container}>
-				{activeTab === 'manage_faq' ? (
-					<Button
-						type="button"
-						onClick={() => setSwitchDashboard(false)}
-					>
-						Analytics
-					</Button>
-				) : null}
 
 				<Button
 					type="button"
