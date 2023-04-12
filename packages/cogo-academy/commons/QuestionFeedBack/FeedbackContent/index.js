@@ -16,7 +16,7 @@ function FeedBackContent({
 	faqAudiences,
 }) {
 	const { general } = useSelector((state) => state);
-	const { feedbackId:id = '' } = general.query || {};
+	const { feedbackId: id = '' } = general.query || {};
 
 	const {
 		suggested_answer = '',
@@ -61,7 +61,6 @@ function FeedBackContent({
 					formatType : 'time',
 
 				})}
-
 			</div>
 
 			<div
