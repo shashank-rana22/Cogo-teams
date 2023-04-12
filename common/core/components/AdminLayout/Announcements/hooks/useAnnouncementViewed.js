@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -32,7 +34,9 @@ const useAnnouncementViewed = (fetchAnnouncements = () => {}) => {
 
 			fetchAnnouncements();
 		} catch (error) {
-			console.log('error :: ', error);
+			if (error?.response) {
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+			}
 		}
 	};
 
