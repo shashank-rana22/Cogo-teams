@@ -10,10 +10,12 @@ import styles from './styles.module.css';
 
 function Form({
 	upsellableService,
-	servicesList, shipmentData,
+	servicesList,
+	shipmentData,
 	primary_service,
 	upsellModal,
 	setUpsellModal,
+	haveToUpsell,
 }) {
 	const [truckTypeToggle, setTruckTypeToggle] = useState(false);
 
@@ -24,17 +26,23 @@ function Form({
 		services: servicesList,
 		truckTypeToggle,
 		setTruckTypeToggle,
+		upsellableService,
 	});
 
 	return (
 		<Modal
 			show={upsellModal}
 			onClose={() => setUpsellModal(false)}
+			showCloseIcon={!haveToUpsell}
+			closeOnOuterClick={false}
+			disabled={haveToUpsell}
 			className={styles.custom_modal}
 		>
-			<Modal.Header title={`${startCase(primary_service?.trade_type)} ${startCase(service)}`} />
+			<Modal.Header title={`${startCase(upsellableService.trade_type)} ${startCase(service)}`} />
 			<Modal.Body>
-				<Layout controls={controls} formProps={formProps} />
+				{ controls?.length === 0
+					? <div> Are you sure you want to upsell this service?</div>
+					: <Layout controls={controls} formProps={formProps} />}
 			</Modal.Body>
 			<Modal.Footer>
 				<Footer
@@ -43,6 +51,7 @@ function Form({
 					service={upsellableService}
 					shipmentData={shipmentData}
 					primary_service={primary_service}
+					haveToUpsell={haveToUpsell}
 				/>
 			</Modal.Footer>
 		</Modal>

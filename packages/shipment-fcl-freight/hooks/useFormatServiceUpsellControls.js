@@ -10,14 +10,18 @@ const formatControls = (controls, service) => controls.map((control) => {
 		return {
 			...control,
 			options: control.options.filter(
-				(item) => !item.type || item.type === service.type,
+				(item) => !item.type || item.type === service.trade_type,
 			),
 		};
 	}
 	return control;
 });
 
-function useServiceUpsellControls({ service = {}, services = [], truckTypeToggle, setTruckTypeToggle }) {
+function useServiceUpsellControls({
+	service = '', services = [],
+	truckTypeToggle, setTruckTypeToggle,
+	upsellableService,
+}) {
 	const newServices = services.map((item) => ({
 		...item,
 		service_type: item?.service_type.split('_service')[0],
@@ -26,10 +30,10 @@ function useServiceUpsellControls({ service = {}, services = [], truckTypeToggle
 
 	const rawControls = formatControls(
 		serviceWiseControls[service] || [],
-		service,
+		upsellableService,
 	);
 
-	const prefilledValues = getServiceValues(service, rawControls, {
+	const prefilledValues = getServiceValues(upsellableService, rawControls, {
 		service_details: newServices,
 	});
 

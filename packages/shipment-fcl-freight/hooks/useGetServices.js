@@ -11,7 +11,7 @@ function useGetServices({ shipment_data = {}, additional_methods = [], activeSta
 
 	const [servicesData, setServicesData] = useState([]);
 
-	const { id = '', importer_exporter_id = '', shipper_consignee_id = '' } = shipment_data;
+	const { id = '', importer_exporter_id = '', consignee_shipper_id = '' } = shipment_data;
 
 	const listServices = useCallback(
 		async () => {
@@ -40,7 +40,7 @@ function useGetServices({ shipment_data = {}, additional_methods = [], activeSta
 						const servicesToShow = [];
 
 						(res?.data?.summary || []).forEach((service) => {
-							if (service?.importer_exporter_id === shipper_consignee_id) {
+							if (service?.importer_exporter_id === consignee_shipper_id) {
 								servicesToShow.push(service);
 							}
 						});
@@ -56,7 +56,7 @@ function useGetServices({ shipment_data = {}, additional_methods = [], activeSta
 			id,
 			additional_methods,
 			activeStakeholder,
-			shipper_consignee_id,
+			consignee_shipper_id,
 			importer_exporter_id],
 	);
 

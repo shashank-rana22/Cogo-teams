@@ -83,6 +83,7 @@ function Services() {
 								primary_service={primary_service}
 								cancelUpsellDestinationFor={cancelUpsellDestinationFor}
 								cancelUpsellOriginFor={cancelUpsellOriginFor}
+								activeStakeholder={activeStakeholder}
 							/>
 						)))}
 					</div>

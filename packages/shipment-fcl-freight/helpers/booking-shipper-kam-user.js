@@ -1,22 +1,22 @@
 const userLoggedIn = ({ orgIds, shipment_data = {}, activeStakeholder = '' }) => {
-	const { importer_exporter_id, shipper_consignee_id } = shipment_data;
+	const { importer_exporter_id, consignee_shipper_id } = shipment_data;
 
 	let is_importer_exporter_kam = false;
-	let is_shipper_consignee_kam = false;
+	let is_consignee_shipper_kam = false;
 
 	orgIds.forEach((id) => {
 		if (id === importer_exporter_id && importer_exporter_id) {
 			is_importer_exporter_kam = true;
-		} else if (id === shipper_consignee_id && shipper_consignee_id) {
-			is_shipper_consignee_kam = true;
+		} else if (id === consignee_shipper_id && consignee_shipper_id) {
+			is_consignee_shipper_kam = true;
 		}
 	});
 
 	let kamLoggedIn = '';
 
-	if (is_importer_exporter_kam && !is_shipper_consignee_kam && activeStakeholder === 'kam') {
+	if (is_importer_exporter_kam && !is_consignee_shipper_kam && activeStakeholder === 'kam') {
 		kamLoggedIn = 'ieKam';
-	} else if (!is_importer_exporter_kam && is_shipper_consignee_kam) {
+	} else if (!is_importer_exporter_kam && is_consignee_shipper_kam) {
 		kamLoggedIn = 'scKam';
 	}
 

@@ -11,9 +11,15 @@ import styles from './styles.module.css';
 
 function ShipmentHeader() {
 	const [show, setShow] = useState(false);
-	const { shipment_data, primary_service, isGettingShipment, refetch } = useContext(ShipmentDetailContext);
+	const {
+		shipment_data,
+		primary_service,
+		isGettingShipment,
+		refetch,
+		activeStakeholder = '',
+	} = useContext(ShipmentDetailContext);
 
-	const { po_number, importer_exporter } = shipment_data || {};
+	const { po_number, importer_exporter = {}, consignee_shipper = {} } = shipment_data || {};
 
 	const handlePoNo = () => {
 		if (po_number) {
@@ -57,11 +63,18 @@ function ShipmentHeader() {
 					interactive
 					content={(
 						<div className={styles.tooltip}>
-							{importer_exporter?.business_name}
+							{activeStakeholder !== 'DKam'
+								? importer_exporter?.business_name
+								: consignee_shipper?.business_name}
 						</div>
 					)}
 				>
-					<div className={styles.business_name}>{importer_exporter?.business_name}</div>
+					<div className={styles.business_name}>
+
+						{activeStakeholder !== 'DKam'
+							? importer_exporter?.business_name
+							: consignee_shipper?.business_name}
+					</div>
 				</Tooltip>
 				<div className={styles.po_number}>
 					{handlePoNo()}
