@@ -11,14 +11,12 @@ import styles from './styles.module.css';
 function ProviderSelectModal({ setShow = () => {}, setUploadData = () => {}, uploadData, formProps = {} }) {
 	const { reset } = formProps;
 
-	let ProviderButtonOptions = [];
-
 	const PROVIDER_BUTTON_MAPPING = {
 		lead    : ProviderLeadOptions,
 		partner : ProviderCpOptions,
 	};
 
-	ProviderButtonOptions = PROVIDER_BUTTON_MAPPING[uploadData?.ingestion_type] || '';
+	const ProviderButtonOptions = PROVIDER_BUTTON_MAPPING[uploadData?.ingestion_type] || '';
 
 	const onChoose = (input) => {
 		setUploadData({
