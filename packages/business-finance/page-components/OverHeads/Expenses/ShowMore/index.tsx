@@ -183,7 +183,7 @@ function ShowMore({ id, recurringState, showExpenseModal }:Props) {
 													<div>Approved By</div>
 													<div className={`${styles.element} `}>
 														<div>
-															{status !== 'INITIATED' ? (
+															{status !== 'LOCKED' ? (
 																<div style={{ fontSize: '12px' }}>
 																	<div>{approvedByName}</div>
 																	<div>{formatDate(updatedAt, 'dd MMM yyyy', {}, false) }</div>

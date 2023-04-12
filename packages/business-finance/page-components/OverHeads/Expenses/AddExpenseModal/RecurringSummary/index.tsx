@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import { formatDate } from '../../../../commons/utils/formatDate';
+import getFormattedPrice from '../../../../commons/utils/getFormattedPrice';
 import { SummaryInterface } from '../../../commons/Interfaces';
 import { DURATION_MAPPING } from '../../../constants/DURATION_MAPPING';
 import { officeLocations } from '../../../utils/officeLocations';
@@ -35,7 +36,7 @@ interface Data {
 	stakeholderName?:string,
 	invoiceCurrency?:string,
 	vendorID?:number | string,
-	payableAmount?: number | string,
+	payableAmount?: number,
 	startDate?: Date,
 	endDate?: Date,
 	repeatEvery?: string,
@@ -136,9 +137,7 @@ function Summary({ expenseData, setExpenseData, rowData }:Props) {
 			title : 'Payable Amount',
 			value : (currency && payableAmount) ? (
 				<div>
-					{currency}
-					{' '}
-					{payableAmount}
+					{getFormattedPrice(payableAmount, currency)}
 				</div>
 			) : '-',
 		},

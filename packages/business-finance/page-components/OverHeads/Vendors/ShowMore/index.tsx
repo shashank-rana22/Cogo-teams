@@ -90,7 +90,7 @@ function ShowMore({ vendorId }:Props) {
 			const { name = '' } = approvedByUser || {};
 			return (
 				<div>
-					{status !== 'INITIATED' ? (
+					{status !== 'LOCKED' ? (
 						<div style={{ fontSize: '12px' }}>
 							<div>{name}</div>
 							<div>{formatDate(updatedAt, 'dd MMM yyyy', {}, false) || '-' }</div>
