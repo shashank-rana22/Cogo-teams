@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 function Loader() {
 	return (
 		<div className={styles.container}>
-			{Array.from(Array(5)).map(() => (
+			{[...Array(5)].map(() => (
 				<div className={styles.loader_item}>
 					<div className={styles.top_part}>
 						<Placeholder
@@ -17,7 +17,7 @@ function Loader() {
 					</div>
 					<div className={styles.bottom_part}>
 						<div className={styles.tags_section}>
-							{Array.from(Array(3)).map(() => (
+							{[...Array(3)].map(() => (
 								<Placeholder
 									width="60px"
 									height="16px"

@@ -68,7 +68,7 @@
 	padding: 4px 8px;
 	margin: 8px 12px 0 0;
 	font-size: 8px;
-	background: white;
+	background: #fff;
 	border: 1px solid #ffe4af;
 	border-radius: 10px;
 	opacity: 0.8;
@@ -104,7 +104,7 @@
 		left: -3px;
 		z-index: -1;
 		content: "";
-		background-color: red;
+		background-color: #f00;
 		border-radius: 50%;
 		opacity: 0.6;
 		animation: blink 1s infinite;
@@ -118,7 +118,7 @@
 		left: -6px;
 		z-index: -2;
 		content: "";
-		background-color: red;
+		background-color: #f00;
 		border-radius: 50%;
 		opacity: 0.3;
 		animation: blink 2s infinite;

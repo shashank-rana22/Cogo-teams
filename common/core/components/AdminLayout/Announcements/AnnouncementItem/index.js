@@ -44,16 +44,15 @@ function AnnouncementItem({
 	const renderCountPill = (type) => {
 		const { count, text } = COUNT_PILL_MAPPING[type];
 
-		if (count > 0) {
-			return (
-				<div className={styles.pill}>
-					{count}
-					{' '}
-					{count === 1 ? text : `${text}s`}
-				</div>
-			);
-		}
-		return null;
+		if (count === 0) return null;
+
+		return (
+			<div className={styles.pill}>
+				{count}
+				{' '}
+				{count === 1 ? text : `${text}s`}
+			</div>
+		);
 	};
 
 	return (

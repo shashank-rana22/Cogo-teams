@@ -1,13 +1,13 @@
 import { Button } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-function EmptyState({
-	text = 'Empty state',
-	btn_text = '',
-	onClick = () => {},
-}) {
+function EmptyState({ activeTab = 'active' }) {
+	const { push } = useRouter();
+
 	return (
 		<div className={styles.container}>
 
@@ -21,12 +21,24 @@ function EmptyState({
 			<div className={styles.details_container}>
 				<div className={styles.txt}>
 					{' '}
-					{text}
+					{`No ${startCase(activeTab)} Announcements Found`}
 					{' '}
 				</div>
 
 				<div className={styles.btn}>
-					{btn_text ? <Button onClick={onClick} themeType="accent">{btn_text}</Button> : ''}
+					{activeTab === 'active' ? (
+						<Button
+							onClick={() => {
+								push(
+									'/announcements/create',
+									'/announcements/create',
+								);
+							}}
+							themeType="accent"
+						>
+							Create Now
+						</Button>
+					) : ''}
 				</div>
 			</div>
 

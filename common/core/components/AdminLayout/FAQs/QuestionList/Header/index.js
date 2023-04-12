@@ -79,6 +79,7 @@ function Header({
 			setAnnouncementModalData(false);
 		} else setShow(false);
 	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.cross_icon}><IcMCross width={20} height={20} onClick={handleClose} /></div>

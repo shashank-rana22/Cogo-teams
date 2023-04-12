@@ -53,7 +53,7 @@ function Announcements({
 		<div className={styles.popover_modal}>
 			<div className={styles.header}>
 				<div className={styles.label}>Sort By Type</div>
-				<Button themeType="primary" size="sm" onClick={handleReset}>Reset</Button>
+				<Button type="button" themeType="primary" size="sm" onClick={handleReset}>Reset</Button>
 			</div>
 			<Select
 				placeholder="Select Type"
@@ -105,7 +105,12 @@ function Announcements({
 					>
 						<div className={styles.filter_btn_container}>
 
-							<Button themeType="secondary" size="sm" onClick={() => setPopoverVisible((prev) => !prev)}>
+							<Button
+								type="button"
+								themeType="secondary"
+								size="sm"
+								onClick={() => setPopoverVisible((prev) => !prev)}
+							>
 								Filter
 								{announcement_type ? <div className={styles.filter_dot} /> : null}
 								<IcMFilter style={{ marginLeft: '2px' }} />
