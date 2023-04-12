@@ -1,10 +1,17 @@
 import { Button } from '@cogoport/components';
-import { TextAreaController, SelectController, InputController, ChipsController } from '@cogoport/forms';
+import { SelectController, InputController, ChipsController } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 
 import OptionsComponent from './OptionsComponent';
 import styles from './styles.module.css';
 import useHandleSingleQuestion from './useHandleSingleQuestion';
+
+let RichTextEditor;
+
+if (typeof window !== 'undefined') {
+	// eslint-disable-next-line global-require
+	RichTextEditor = require('react-rte').default;
+}
 
 function SingleQuestionComponent({
 	control,
@@ -17,6 +24,8 @@ function SingleQuestionComponent({
 	questionTypeWatch,
 	editDetails,
 	mode,
+	editorValue,
+	setEditorValue,
 	...restProps
 }) {
 	const {
@@ -24,11 +33,15 @@ function SingleQuestionComponent({
 		handleDelete,
 		loading,
 		NAME_CONTROL_MAPPING,
+		handleChangeEditorValue,
 	} = useHandleSingleQuestion({
 		mode,
 		editDetails,
 		field,
 		index,
+		questionTypeWatch,
+		editorValue,
+		setEditorValue,
 		...restProps,
 	});
 
@@ -86,10 +99,24 @@ function SingleQuestionComponent({
 			) : null}
 
 			<div className={styles.textarea_container}>
-				<TextAreaController
-					control={control}
-					{...NAME_CONTROL_MAPPING.explanation}
-					name={`${name}.${index}.explanation`}
+				<RichTextEditor
+					value={
+					questionTypeWatch === 'stand_alone'
+						? editorValue.question_0_explanation
+						: editorValue[`case_questions_${index}_explanation`]
+					}
+					onChange={handleChangeEditorValue}
+					required
+					id="body-text"
+					name="bodyText"
+					type="string"
+					multiline
+					variant="filled"
+					rootStyle={{
+						zIndex    : 0,
+						position  : 'relative',
+						minHeight : '200px',
+					}}
 				/>
 			</div>
 

@@ -55,15 +55,8 @@ function ButtonComponent(props) {
 				themeType={themeType}
 				size={size}
 				onClick={() => setIsFocused(!isFocused)}
-
 			>
 				{label}
-				{/* <ReactQuill
-					theme="bubble"
-					value={editorValue}
-					onChange={handleEditorChange}
-				/> */}
-
 			</Button>
 
 		</div>

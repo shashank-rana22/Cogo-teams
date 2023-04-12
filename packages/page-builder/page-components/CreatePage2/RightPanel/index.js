@@ -9,16 +9,26 @@ import RenderComponents from './RenderComponent';
 // import styles from './styles.module.css';
 
 const ITEM_TYPES = {
-	text      : 'text',
-	button    : 'button',
-	image     : 'image',
-	container : 'container',
+	text        : 'text',
+	button      : 'button',
+	image       : 'image',
+	container   : 'container',
+	rootElement : 'rootElement',
 };
 
 function ComponentBuilder({ widget, components, setComponents }) {
-	const { children, properties } = widget || {};
+	const { type: componetType, children, properties } = widget || {};
 
 	const { styles: style } = properties || {};
+
+	if (componetType === 'rootElement') {
+		return (
+			<div style={style}>
+
+				<h1>Welcome to cogoport</h1>
+			</div>
+		);
+	}
 
 	if (isEmpty(children)) {
 		return <div style={{ height: '150px' }}> Blocks loading...</div>;
