@@ -4,6 +4,8 @@ export const PaymentReadyConfig = {
 		border       : '1px solid #333333',
 		margin       : '12px',
 		borderRadius : '12px',
+		fontSize     : '12px',
+		fontWeight   : '500',
 	},
 	fields: [
 		{
@@ -13,22 +15,27 @@ export const PaymentReadyConfig = {
 		},
 		{
 			key  : 'payrunName',
-			span : 4,
+			span : 3.5,
 		},
 		{
 			key  : 'amount',
-			span : 2,
-			// func : 'renderAmountWithCurrency',
+			span : 4,
+			func : 'renderAmountWithCurrency',
 		},
 		{
 			key  : 'count',
-			span : 2,
-			// func : 'renderNoOfInvoices',
+			span : 3,
+			func : 'renderInvoiceCount',
 		},
 		{
 			key  : 'date',
 			span : 3,
-			// func : 'renderDateWithTime',
+			func : 'renderDateWithTime',
+		},
+		{
+			key  : 'ribbon',
+			func : 'renderRibbon',
+			span : 1,
 		},
 	],
 };

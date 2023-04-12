@@ -1,40 +1,52 @@
-.select_card{
-    display: flex;
-    background: #FFFFFF;
-    border-radius: 8px;
-    margin: 12px 0px 8px 0px;
-    padding: 16px 16px 16px 4px;
+.select_card {
+	display: flex;
+	padding: 16px 16px 16px 4px;
+	margin: 12px 0 8px;
+	background: #fff;
+	border-radius: 8px;
 }
-.card{
-    background: #CFEAED;
-    border: 1px solid #88CAD1;
-    border-radius: 4px;
-    margin-left: 20px;
-    padding: 2px 16px 2px 16px;
+
+.card {
+	padding: 2px 16px;
+	margin-left: 20px;
+	background: #cfeaed;
+	border: 1px solid #88cad1;
+	border-radius: 4px;
 }
-.bread_crumb{
-    margin-left: -4px;
+
+.bread_crumb {
+	margin-left: -4px;
 }
-.container{
-    background: #FFFFFF;
-    border-radius: 8px;
-    padding: 16px;
+
+.container {
+	padding: 16px;
+	background: #fff;
+	border-radius: 8px;
 }
-.filter{
-    margin-bottom: 16px;
+
+.filter {
+	margin-bottom: 16px;
 }
-.link{
-    cursor: pointer;
+
+.link {
+	cursor: pointer;
 }
-.back{
-    display: flex;
-    align-items: center;
-    margin-top: 12px;
-    margin-bottom: -8px;
+
+.back {
+	display: flex;
+	align-items: center;
+	margin-top: 12px;
+	margin-bottom: -8px;
 }
-.button{
-    display: flex;
-    font-weight: 600;
-    font-size: 18px;
-    margin-top: -8px;
+
+.button {
+	display: flex;
+	margin-top: -8px;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.checkbox_style {
+	margin-right: -60px;
+	margin-left: 20px;
 }

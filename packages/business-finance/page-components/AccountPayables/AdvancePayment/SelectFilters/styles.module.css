@@ -3,7 +3,8 @@
 	align-items: center;
 	justify-content: space-between;
 }
-.search_filter{
+
+.search_filter {
 	display: flex;
 	gap: 12px;
 }

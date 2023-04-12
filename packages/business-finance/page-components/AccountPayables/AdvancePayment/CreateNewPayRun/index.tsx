@@ -9,8 +9,12 @@ import { VIEW_SELECTED_CONFIG } from '../Columns/viewSelectedConfig';
 import SelectFilters from '../SelectFilters';
 
 import Footer from './Footer';
+import AmountWithCurrency from './renderFunction/AmountWithCurrency';
+import BankDetails from './renderFunction/BankDetails';
 import DeleteModal from './renderFunction/DeleteModal/index';
+import IncidentNumber from './renderFunction/IncidentNumber';
 import InvoiceDetails from './renderFunction/InvoiceDetails';
+import SIDnumber from './renderFunction/SIDnumber';
 import styles from './styles.module.css';
 
 const list = {
@@ -20,8 +24,16 @@ const list = {
 			sidNumber      : '529875',
 			businessName   : 'Cogoport private Limited',
 			advancedAmount : '20000000000',
-			bankName       : 'Retesh singh',
-			document       : ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+			bankDetails    : {
+				accountNo         : '914020036759730',
+				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
+				bankName          : 'AXIS BANK LTD',
+				branchCode        : 'Dharavi',
+				branchName        : null,
+				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
+				ifscCode          : 'UTIB0001701',
+			},
+			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
@@ -34,8 +46,16 @@ const list = {
 			sidNumber      : '529875',
 			businessName   : 'Cogoport private Limited',
 			advancedAmount : '20000000000',
-			bankName       : 'jaiprakash kushwaha',
-			document       : ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+			bankDetails    : {
+				accountNo         : '914020036759730',
+				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
+				bankName          : 'AXIS BANK LTD',
+				branchCode        : 'Dharavi',
+				branchName        : null,
+				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
+				ifscCode          : 'UTIB0001701',
+			},
+			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 
@@ -46,8 +66,16 @@ const list = {
 			sidNumber      : '529875',
 			businessName   : 'Cogoport private Limited',
 			advancedAmount : '20000000000',
-			bankName       : 'Retesh singh',
-			document       : ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+			bankDetails    : {
+				accountNo         : '914020036759730',
+				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
+				bankName          : 'AXIS BANK LTD',
+				branchCode        : 'Dharavi',
+				branchName        : null,
+				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
+				ifscCode          : 'UTIB0001701',
+			},
+			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 
 			],
@@ -57,33 +85,16 @@ const list = {
 			sidNumber      : '529875',
 			businessName   : 'Cogoport private Limited',
 			advancedAmount : '20000000000',
-			bankName       : 'Retesh singh',
-			document       : ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-
-			],
-		},
-		{
-			incidentNumber : '5425365',
-			sidNumber      : '529875',
-			businessName   : 'Cogoport private Limited',
-			advancedAmount : '20000000000',
-			bankName       : 'Retesh singh',
-			document       : ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-
-			],
-		},
-		{
-			incidentNumber : '5425365',
-			sidNumber      : '529875',
-			businessName   : 'Cogoport private Limited',
-			advancedAmount : '20000000000',
-			bankName       : 'Retesh singh',
-			document       : ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+			bankDetails    : {
+				accountNo         : '914020036759730',
+				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
+				bankName          : 'AXIS BANK LTD',
+				branchCode        : 'Dharavi',
+				branchName        : null,
+				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
+				ifscCode          : 'UTIB0001701',
+			},
+			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 
@@ -94,8 +105,17 @@ const list = {
 			sidNumber      : '529875',
 			businessName   : 'Cogoport private Limited',
 			advancedAmount : '20000000000',
-			bankName       : 'Retesh singh',
-			document       : ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+			bankDetails    : {
+				accountNo         : '914020036759730',
+				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
+				bankName          : 'AXIS BANK LTD',
+				branchCode        : 'Dharavi',
+				branchName        : null,
+				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
+				ifscCode          : 'UTIB0001701',
+			},
+			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 
 			],
@@ -105,8 +125,56 @@ const list = {
 			sidNumber      : '529875',
 			businessName   : 'Cogoport private Limited',
 			advancedAmount : '20000000000',
-			bankName       : 'Retesh singh',
-			document       : ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+			bankDetails    : {
+				accountNo         : '914020036759730',
+				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
+				bankName          : 'AXIS BANK LTD',
+				branchCode        : 'Dharavi',
+				branchName        : null,
+				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
+				ifscCode          : 'UTIB0001701',
+			},
+			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+
+			],
+		},
+		{
+			incidentNumber : '5425365',
+			sidNumber      : '529875',
+			businessName   : 'Cogoport private Limited',
+			advancedAmount : '20000000000',
+			bankDetails    : {
+				accountNo         : '914020036759730',
+				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
+				bankName          : 'AXIS BANK LTD',
+				branchCode        : 'Dharavi',
+				branchName        : null,
+				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
+				ifscCode          : 'UTIB0001701',
+			},
+			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+
+			],
+		},
+		{
+			incidentNumber : '5425365',
+			sidNumber      : '529875',
+			businessName   : 'Cogoport private Limited',
+			advancedAmount : '20000000000',
+			bankDetails    : {
+				accountNo         : '914020036759730',
+				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
+				bankName          : 'AXIS BANK LTD',
+				branchCode        : 'Dharavi',
+				branchName        : null,
+				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
+				ifscCode          : 'UTIB0001701',
+			},
+			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 
 			],
 		},
@@ -186,20 +254,31 @@ function CreateNewPayRun() {
 		// 	/>
 		// ),
 		// renderInvoiceDates: (itemData) => <InvoiceDates itemData={itemData} />,
-		// renderBankData: (itemData) => <BankData item={itemData} />,
-		renderIcDelete: () => (
+		renderBankDetails : (itemData) => <BankDetails itemData={itemData} />,
+		renderIcDelete    : () => (
 			<DeleteModal />
 		),
 		// remarksRender: (itemData) => <Remark itemData={itemData} overflowDot />,
 		renderInvoiceDetails: () => (
 			<InvoiceDetails />
 		),
+		renderAmountWithCurrency: (itemData) => (
+			<AmountWithCurrency itemData={itemData} />
+		),
+		renderIncidentNumber: (itemData) => (
+			<IncidentNumber itemData={itemData} />
+		),
+		renderSIDnumber: (itemData) => (
+			<SIDnumber itemData={itemData} />
+		),
 	};
 	const getTableHeaderCheckbox = () => (
-		<Checkbox
-			value="check"
-			disabled={false}
-		/>
+		<div className={styles.checkbox_style}>
+			<Checkbox
+				value="check"
+				disabled={false}
+			/>
+		</div>
 	);
 	return (
 		<div>

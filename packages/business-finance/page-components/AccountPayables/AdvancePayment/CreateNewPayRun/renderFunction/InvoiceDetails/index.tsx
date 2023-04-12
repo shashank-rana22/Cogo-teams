@@ -1,17 +1,14 @@
-import { IcMArrowRotateUp } from '@cogoport/icons-react';
-import { IcMArrowRotateDown } from '@cogoport/icons-react';
-import { IcMArrowRotateLeft, IcMOverview } from '@cogoport/icons-react';
+import { IcMArrowRotateUp, IcMArrowRotateDown, IcMArrowRotateLeft, IcMOverview } from '@cogoport/icons-react';
 import React, { useState } from 'react';
+
 import ApprovedBy from './ApprovedBy';
 import RequestedBy from './RequestedBy';
-
 import styles from './styles.module.css';
 
 const INVOICE_DATA_MAPPING = [
 	{ id: '1', label: 'Requested by & on' },
 	{ id: '2', label: 'Approved by & on' },
 ];
-
 
 function InvoiceDetails() {
 	const [showDetailsCard, setShowDetailsCard] = useState(false);
@@ -54,39 +51,43 @@ function InvoiceDetails() {
 
 							</div>
 							<div className={styles.body_details}>
-								
-								{INVOICE_DATA_MAPPING.map((item)=>{
+
+								{INVOICE_DATA_MAPPING.map((item) => {
 									const { id, label } = item;
-									return(
+									return (
 										<div className={styles.information} key={id}>
-											<div className={styles.data_container}
-											 onClick={() => {
-														handleDropdown(id);	
-													}} role='presentation'>
-{label}
-<div>
-{dropDownData[id] ? (
-															<IcMArrowRotateUp width={15} height={15} />
-														) : (
-															<IcMArrowRotateDown width={15} height={15} />
-														)}
-	</div>
+											<div
+												className={styles.data_container}
+												onClick={() => {
+											 	handleDropdown(id);
+												}}
+												role="presentation"
+											>
+												{label}
+												<div>
+													{dropDownData[id] ? (
+														<IcMArrowRotateUp width={15} height={15} />
+													) : (
+														<IcMArrowRotateDown width={15} height={15} />
+													)}
+												</div>
 											</div>
 											{dropDownData[id] && <div className={styles.hr} />}
-											{dropDownData[id] && ( <div>
+											{dropDownData[id] && (
+												<div>
 													<div className={styles.information_data}>
-													{label === 'Requested by & on' && (
-																<RequestedBy/>
-															)}
-															{label === 'Approved by & on' && (
-																<ApprovedBy/>
-															)}
+														{label === 'Requested by & on' && (
+															<RequestedBy />
+														)}
+														{label === 'Approved by & on' && (
+															<ApprovedBy />
+														)}
 													</div>
 												</div>
-												)}
+											)}
 
 										</div>
-									)
+									);
 								})}
 							</div>
 						</div>

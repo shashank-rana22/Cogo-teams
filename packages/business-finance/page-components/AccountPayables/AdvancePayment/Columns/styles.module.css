@@ -2,25 +2,28 @@
 	padding: 4px;
 	font-size: 12px;
 	font-weight: 500;
+	color: #f68b21;
 	text-decoration: underline;
 	word-break: break-all;
 	cursor: pointer;
-    color: #F68B21;
 }
-.document_number{
-    padding: 4px;
+
+.document_number {
+	padding: 4px;
 	font-size: 12px;
 	font-weight: 500;
 	text-decoration: underline;
 	word-break: break-all;
 	cursor: pointer;
 }
-.date{
-    display: flex;
-    align-items: center;
+
+.date {
+	display: flex;
+	align-items: center;
 }
-.incident{
-    color: #F68B21;
-    font-size: 12px;
-    text-decoration: underline;
+
+.incident {
+	font-size: 12px;
+	color: #f68b21;
+	text-decoration: underline;
 }

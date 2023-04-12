@@ -1,16 +1,20 @@
-import React, { useState } from 'react'
 import { Breadcrumb, Checkbox, Button, Popover } from '@cogoport/components';
-import styles from './styles.module.css';
-import { IcMInfo } from '@cogoport/icons-react';
-import DeleteModal from './renderFunction/DeleteModal';
-import InvoiceDetails from './renderFunction/InvoiceDetails';
-import { IcMArrowBack } from '@cogoport/icons-react';
-import SelectFilters from '../SelectFilters';
+import { IcMInfo, IcMArrowBack } from '@cogoport/icons-react';
+import React, { useState } from 'react';
+
 import List from '../../../commons/List';
-import Footer from './Footer';
 import { CREATE_NEW_PAYRUN_CONFIG } from '../Columns/createNewPayRunConfig';
 import { VIEW_SELECTED_CONFIG } from '../Columns/viewSelectedConfig';
+import SelectFilters from '../SelectFilters';
 
+import Footer from './Footer';
+import AmountWithCurrency from './renderFunction/AmountWithCurrency';
+import BankDetails from './renderFunction/BankDetails';
+import DeleteModal from './renderFunction/DeleteModal';
+import IncidentNumber from './renderFunction/IncidentNumber';
+import InvoiceDetails from './renderFunction/InvoiceDetails';
+import SIDnumber from './renderFunction/SIDnumber';
+import styles from './styles.module.css';
 
 const list = {
 	list: [
@@ -19,8 +23,16 @@ const list = {
 			sidNumber      : '529875',
 			businessName   : 'Cogoport private Limited',
 			advancedAmount : '20000000000',
-			bankName       : 'Retesh singh',
-			document       : ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+			bankDetails    : {
+				accountNo         : '914020036759730',
+				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
+				bankName          : 'AXIS BANK LTD',
+				branchCode        : 'Dharavi',
+				branchName        : null,
+				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
+				ifscCode          : 'UTIB0001701',
+			},
+			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
@@ -33,8 +45,16 @@ const list = {
 			sidNumber      : '529875',
 			businessName   : 'Cogoport private Limited',
 			advancedAmount : '20000000000',
-			bankName       : 'jaiprakash kushwaha',
-			document       : ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+			bankDetails    : {
+				accountNo         : '914020036759730',
+				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
+				bankName          : 'AXIS BANK LTD',
+				branchCode        : 'Dharavi',
+				branchName        : null,
+				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
+				ifscCode          : 'UTIB0001701',
+			},
+			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 
@@ -45,8 +65,16 @@ const list = {
 			sidNumber      : '529875',
 			businessName   : 'Cogoport private Limited',
 			advancedAmount : '20000000000',
-			bankName       : 'Retesh singh',
-			document       : ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+			bankDetails    : {
+				accountNo         : '914020036759730',
+				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
+				bankName          : 'AXIS BANK LTD',
+				branchCode        : 'Dharavi',
+				branchName        : null,
+				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
+				ifscCode          : 'UTIB0001701',
+			},
+			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 
 			],
@@ -56,33 +84,16 @@ const list = {
 			sidNumber      : '529875',
 			businessName   : 'Cogoport private Limited',
 			advancedAmount : '20000000000',
-			bankName       : 'Retesh singh',
-			document       : ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-
-			],
-		},
-		{
-			incidentNumber : '5425365',
-			sidNumber      : '529875',
-			businessName   : 'Cogoport private Limited',
-			advancedAmount : '20000000000',
-			bankName       : 'Retesh singh',
-			document       : ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-
-			],
-		},
-		{
-			incidentNumber : '5425365',
-			sidNumber      : '529875',
-			businessName   : 'Cogoport private Limited',
-			advancedAmount : '20000000000',
-			bankName       : 'Retesh singh',
-			document       : ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+			bankDetails    : {
+				accountNo         : '914020036759730',
+				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
+				bankName          : 'AXIS BANK LTD',
+				branchCode        : 'Dharavi',
+				branchName        : null,
+				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
+				ifscCode          : 'UTIB0001701',
+			},
+			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 
@@ -93,8 +104,17 @@ const list = {
 			sidNumber      : '529875',
 			businessName   : 'Cogoport private Limited',
 			advancedAmount : '20000000000',
-			bankName       : 'Retesh singh',
-			document       : ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+			bankDetails    : {
+				accountNo         : '914020036759730',
+				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
+				bankName          : 'AXIS BANK LTD',
+				branchCode        : 'Dharavi',
+				branchName        : null,
+				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
+				ifscCode          : 'UTIB0001701',
+			},
+			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 
 			],
@@ -104,30 +124,75 @@ const list = {
 			sidNumber      : '529875',
 			businessName   : 'Cogoport private Limited',
 			advancedAmount : '20000000000',
-			bankName       : 'Retesh singh',
-			document       : ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+			bankDetails    : {
+				accountNo         : '914020036759730',
+				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
+				bankName          : 'AXIS BANK LTD',
+				branchCode        : 'Dharavi',
+				branchName        : null,
+				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
+				ifscCode          : 'UTIB0001701',
+			},
+			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+
+			],
+		},
+		{
+			incidentNumber : '5425365',
+			sidNumber      : '529875',
+			businessName   : 'Cogoport private Limited',
+			advancedAmount : '20000000000',
+			bankDetails    : {
+				accountNo         : '914020036759730',
+				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
+				bankName          : 'AXIS BANK LTD',
+				branchCode        : 'Dharavi',
+				branchName        : null,
+				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
+				ifscCode          : 'UTIB0001701',
+			},
+			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
+
+			],
+		},
+		{
+			incidentNumber : '5425365',
+			sidNumber      : '529875',
+			businessName   : 'Cogoport private Limited',
+			advancedAmount : '20000000000',
+			bankDetails    : {
+				accountNo         : '914020036759730',
+				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
+				bankName          : 'AXIS BANK LTD',
+				branchCode        : 'Dharavi',
+				branchName        : null,
+				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
+				ifscCode          : 'UTIB0001701',
+			},
+			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
 
 			],
 		},
 	],
 };
 
-const AddIntoExistingPayRun = () => {
-    const [filters, setFilters] = useState({
+function AddIntoExistingPayRun() {
+	const [filters, setFilters] = useState({
 		service: undefined,
 	});
 
 	const [viewSelectedInvoice, setViewSelectedInvoice] = useState(false);
 
 	const functions = {
-		// renderBankDetails: (itemData) => (
-		// 	<BankDetails
-		// 		itemData={itemData}
-		// 		setEditedValue={setEditedValue}
-		// 		setEditedTdsValue={setEditedTdsValue}
-		// 		payrun_type={payrun_type}
-		// 	/>
-		// ),
+		renderBankDetails: (itemData) => (
+			<BankDetails
+				itemData={itemData}
+			/>
+		),
 		// renderRemarks: (itemData) => <Remark itemData={itemData} />,
 		renderCheckbox: () => (
 			<Checkbox
@@ -160,6 +225,12 @@ const AddIntoExistingPayRun = () => {
 				</div>
 			);
 		},
+		renderIncidentNumber: (itemData) => (
+			<IncidentNumber itemData={itemData} />
+		),
+		renderSIDnumber: (itemData) => (
+			<SIDnumber itemData={itemData} />
+		),
 		// renderTdsEdit: (itemData) => (
 		// 	<EditTdsPayrun
 		// 		setEditedTdsValue={setEditedTdsValue}
@@ -193,16 +264,22 @@ const AddIntoExistingPayRun = () => {
 		renderInvoiceDetails: () => (
 			<InvoiceDetails />
 		),
+		renderAmountWithCurrency: (itemData) => (
+			<AmountWithCurrency itemData={itemData} />
+		),
+
 	};
 	const getTableHeaderCheckbox = () => (
-		<Checkbox
-			value="check"
-			disabled={false}
-		/>
+		<div className={styles.checkbox_style}>
+			<Checkbox
+				value="check"
+				disabled={false}
+			/>
+		</div>
 	);
-  return (
-    <div>
-            <div className={styles.bread_crumb}>
+	return (
+		<div>
+			<div className={styles.bread_crumb}>
 				<Breadcrumb>
 					<Breadcrumb.Item label="Advance Payments" />
 					<Breadcrumb.Item label="PayRun Creation" />
@@ -210,7 +287,7 @@ const AddIntoExistingPayRun = () => {
 				</Breadcrumb>
 			</div>
 
-            {viewSelectedInvoice
+			{viewSelectedInvoice
 			&& (
 				<div className={styles.back}>
 					<div>
@@ -226,30 +303,32 @@ const AddIntoExistingPayRun = () => {
 				</div>
 			)}
 
-            <div className={styles.sub_container}>
-                <div className={styles.text}>
-                PayRun_301_0401_10:20_243
-                </div>
-                <div className={styles.text}>
-                Total value - ₹19,888,723.46
-                </div>
-                <div className={styles.text}>
-                No. of invoices - 243
-                </div>
-                <div className={styles.text}>
-                10:42AM 01-04-2023
-                </div>
-            </div>
-            <div className={styles.info_container}>
-        
-                <div className={styles.info}>
-                    <IcMInfo color="#ED3726"/>
-                </div>
-                <div className={styles.info_text}>
-                     You are adding these advance payments to an existent Payment ready pay run.
-                </div>
-            </div>
-           
+			<div className={styles.sub_container}>
+				<div className={styles.text}>
+					PayRun_301_0401_10:20_243
+				</div>
+				<div className={styles.text}>
+					Total value - ₹19,888,723.46
+				</div>
+				<div className={styles.text}>
+					No. of invoices - 243
+				</div>
+				<div className={styles.text}>
+					10:42AM 01-04-2023
+				</div>
+				<div className={styles.ribbons}>
+					<div className={styles.ribbon}>Adv. Payment</div>
+				</div>
+			</div>
+			<div className={styles.info_container}>
+
+				<div className={styles.info}>
+					<IcMInfo color="#ED3726" />
+				</div>
+				<div className={styles.info_text}>
+					You are adding these advance payments to an existent Payment ready pay run.
+				</div>
+			</div>
 
 			<div className={styles.container}>
 				<div className={styles.filter}>
@@ -261,8 +340,8 @@ const AddIntoExistingPayRun = () => {
 				<Footer viewSelectedInvoice={viewSelectedInvoice} setViewSelectedInvoice={setViewSelectedInvoice} />
 			</div>
 
-    </div>
-  )
+		</div>
+	);
 }
 
 export default AddIntoExistingPayRun;

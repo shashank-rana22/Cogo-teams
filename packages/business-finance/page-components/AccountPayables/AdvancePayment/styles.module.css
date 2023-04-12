@@ -1,6 +1,6 @@
-.container{
-    background: #FFFFFF;
-    border-radius: 8px; 
-    padding: 16px;
-    margin-top: 16px;
+.container {
+	padding: 16px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
 }

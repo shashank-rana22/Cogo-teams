@@ -99,8 +99,8 @@ function PayRunModal({ show, setShow, activeEntity }) {
 								}}
 								role="presentation"
 							>
-								<div className={styles.iconShow}>{item.icon}</div>
-								<div className={styles.textShow}>{item.text}</div>
+								<div className={styles.icon_show}>{item.icon}</div>
+								<div className={styles.text_show}>{item.text}</div>
 							</div>
 						))}
 					</div>

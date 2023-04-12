@@ -21,17 +21,11 @@ export const CREATE_NEW_PAYRUN_CONFIG = {
 		{
 			func : 'renderCheckbox',
 			span : 0.4,
-			// style : {
-			// 	position   : 'sticky',
-			// 	left       : '2px',
-			// 	background : 'white',
-			// 	transform  : 'translateX(-2px)',
-			// 	zIndex     : 1,
-			// },
 		},
 		{
 			label : 'Incident Number',
 			key   : 'incidentNumber',
+			func  : 'renderIncidentNumber',
 			// topKey : {
 			// 	key     : 'incidentNumber',
 			// 	type    : 'pdfView',
@@ -64,12 +58,12 @@ export const CREATE_NEW_PAYRUN_CONFIG = {
 			// 	key  : 'serviceType',
 			// 	type : 'serviceType',
 			// },
-			// func : 'renderFieldPair',
+			func  : 'renderSIDnumber',
 			span  : 0.7,
 		},
 		{
 			key   : 'businessName',
-			label : 'Name',
+			label : 'Organisation',
 			// func      : 'renderName',
 			// className : 'vendor_text',
 			span  : 1.4,
@@ -84,20 +78,20 @@ export const CREATE_NEW_PAYRUN_CONFIG = {
 		{
 			label : 'Advance Amount',
 			key   : 'advancedAmount',
-			// func  : 'renderAmount',
+			func  : 'renderAmountWithCurrency',
 			span  : 1,
 		},
 		{
 			key   : 'bankName',
 			label : 'Bank Account Details',
-			// func  : 'renderBankDetails',
-			span  : 1.5,
+			func  : 'renderBankDetails',
+			span  : 2.5,
 		},
 
 		{
 			label : 'Document',
 			func  : 'renderDocument',
-			span  : 2,
+			span  : 1,
 		},
 		{
 			key  : 'invoiceDetails',

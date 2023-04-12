@@ -1,9 +1,10 @@
-.icon{
-    display: flex;
-    justify-content: center;
-    padding-top: 8px;
+.icon {
+	display: flex;
+	justify-content: center;
+	padding-top: 8px;
 }
-.container{
-    margin-bottom: 16px;
-    margin-top: 16px;
+
+.container {
+	margin-top: 16px;
+	margin-bottom: 16px;
 }
