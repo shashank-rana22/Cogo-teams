@@ -3,28 +3,51 @@ import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useListDocuments from '../../../../../../hooks/useListDocuments';
+import useUpdateShipmentDocuments from '../../../../../../hooks/useUpdateShipmentDocuments';
 
 import styles from './styles.module.css';
 
 function ReviewDoc({
 	task = {},
-	// refetch = () => {},
+	refetch = () => {},
 	onClose = () => {},
 }) {
 	const [approvalState, setApprovalState] = useState(null);
+	const [params, setParams] = useState({});
 	const [remarkValue, setRemarkValue] = useState('');
+	const newRefetch = () => {
+		onClose();
+		refetch();
+	};
 
 	const { list, loading } = useListDocuments({
-		defaultFilters: { id: task.task_field_id },
+		defaultFilters: {
+			id                  : task.task_field_id,
+			pending_task_id     : task.id,
+			performed_by_org_id : task.organization_id,
+		},
 	});
 
 	let doc_data = {};
+	const defaultParams = {};
 	if (!loading && list?.length) {
 		doc_data = list?.[0] || {};
+		setParams({
+			id            : doc_data.id,
+			document_type : doc_data.document_type,
+		});
 	}
+	const { updateDocument } = useUpdateShipmentDocuments(
+		{ defaultParams, refetch: newRefetch, params },
+	);
 
 	const handleApprove = async () => {
-		// await updateDocument('document_accepted');
+		setParams({
+			...params,
+			state: 'document_accepted',
+		});
+
+		updateDocument();
 	};
 
 	const handleAmmend = () => {
@@ -36,9 +59,18 @@ function ReviewDoc({
 			if (!remarkValue) {
 				Toast.error('Please provide amendment reason');
 			}
-			// await updateDocument('document_amendment_requested');
+			setParams({
+				...params,
+				state   : 'document_amendment_requested',
+				remarks : [remarkValue],
+			});
+			updateDocument();
 		} else {
-			// await updateDocument('document_accepted');
+			setParams({
+				...params,
+				state: 'document_accepted',
+			});
+			updateDocument();
 		}
 	};
 
