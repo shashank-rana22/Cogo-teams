@@ -16,12 +16,12 @@ function TextComponent(props) {
 		setEditorValue(value);
 
 		// eslint-disable-next-line max-len, max-len, max-len
-		const selectedComponentIndex = (components || []).findIndex((component) => (component.id === elementId));
+		// const selectedComponentIndex = (components || []).findIndex((component) => (component.id === elementId));
 
-		const updatedComponent = {
-			...components[selectedComponentIndex],
-			content: value,
-		};
+		// const updatedComponent = {
+		// 	...components[selectedComponentIndex],
+		// 	content: value,
+		// };
 
 		// use map instead slice
 		// setComponents((prevComponents) => [

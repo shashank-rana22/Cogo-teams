@@ -74,9 +74,9 @@ function DNDComponent() {
 				const { childId, parentId } = parentDetails || {};
 				const data = component;
 
-				const objIndex = data.layout.findIndex((item) => item.parentId === parentId);
+				const objIndex = data.layouts.findIndex((item) => item.parentId === parentId);
 
-				data.layout[objIndex].children[childId].properties.content = content;
+				data.layouts[objIndex].children[childId].properties.content = content;
 
 				setComponent(data);
 			} else {

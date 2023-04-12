@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { IcMCrossInCircle } from '@cogoport/icons-react';
+import { IcMCrossInCircle, IcMDuplicate } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
@@ -153,6 +153,24 @@ function Item(props) {
 		setComponents((prev) => ({ ...prev, layouts: data.layouts }));
 	};
 
+	const handleCopy = (itemList) => {
+		const { id: sId } = itemList || {};
+		const data = components;
+
+		const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === sId));
+
+		setComponents((prev) => ({
+			...prev,
+			layouts: [...data.layouts.slice(0, selectedComponentIndex + 1),
+				{
+					...itemList,
+					id: data.layouts.length + 1,
+					// parentId,
+				},
+				...data.layouts.slice(selectedComponentIndex + 1)],
+		}));
+	};
+
 	// const onResize = (event, { element, size }) => {
 	// 	setState({ width: size.width, height: size.height });
 	//   };
@@ -190,7 +208,10 @@ function Item(props) {
 					? <ComponentBuilder widget={widget} components={components} setComponents={setComponents} />
 					: <RenderComponents componentType={type} widget={widget} components={components} setComponents={setComponents} elementId={elementId} />}
 			</div>
-			<div role="presentation" className={styles.change} onClick={() => handleDelete(widget)}><IcMCrossInCircle height="24px" width="24px" cursor="pointer" /></div>
+			<div role="presentation" className={styles.change}>
+				<IcMCrossInCircle height="24px" width="24px" cursor="pointer" onClick={() => handleDelete(widget)} />
+				<IcMDuplicate height="24px" width="24px" cursor="pointer" onClick={() => handleCopy(widget)} />
+			</div>
 		</div>
 	// </ResizableBox>
 	);
