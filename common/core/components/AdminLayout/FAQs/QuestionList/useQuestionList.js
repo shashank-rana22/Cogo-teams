@@ -79,7 +79,6 @@ const useQuestionList = ({
 	}, [fetch, page, query_name, question]);
 
 	const { list = [], response_type, gpt_answer = '', show_more = '', ...pageData } = data || {};
-	console.log(data, 'data');
 	return {
 		page,
 		setPage,
