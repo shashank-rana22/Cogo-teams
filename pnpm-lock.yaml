@@ -548,6 +548,7 @@ importers:
     specifiers:
       '@cogoport/charts': ^1.0.2
       '@cogoport/components': ^1.0.359
+      '@cogoport/core': workspace:*
       '@cogoport/forms': workspace:*
       '@cogoport/globalization': workspace:*
       '@cogoport/icons-react': ^1.0.58
@@ -562,6 +563,7 @@ importers:
     dependencies:
       '@cogoport/charts': 1.0.2_react@18.2.0
       '@cogoport/components': 1.0.366_4o7yor53awafeuvdjrs2cbhz3i
+      '@cogoport/core': link:../../common/core
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
       '@cogoport/icons-react': 1.0.58_react@18.2.0

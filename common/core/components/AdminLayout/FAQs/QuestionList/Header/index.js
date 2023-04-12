@@ -16,6 +16,7 @@ function Header({
 	setShowNotificationContent = () => {},
 	showNotificationContent,
 	refetch,
+	from,
 }) {
 	const suffix = !search ? (
 		<IcMSearchlight />
@@ -50,22 +51,24 @@ function Header({
 	const showBackIcon = (!search && topic) || question || showHistory || showNotificationContent;
 
 	return (
-		<div className={styles.container}>
+		<div className={`${styles.container} ${styles[from]}`}>
 			<div className={styles.wrapper}>
-				<div className={styles.heading_container}>
+				{from !== 'test_module' ? (
+					<div className={styles.heading_container}>
 
-					{showBackIcon ? (
-						<div role="presentation" className={styles.arrow} onClick={onClickBackButton}>
-							<IcMArrowLeft style={{ height: '25px', width: '25px' }} />
-						</div>
-					) : (
-						<div className={styles.gap} />
-					)}
+						{showBackIcon ? (
+							<div role="presentation" className={styles.arrow} onClick={onClickBackButton}>
+								<IcMArrowLeft style={{ height: '25px', width: '25px' }} />
+							</div>
+						) : (
+							<div className={styles.gap} />
+						)}
 
-					<div className={styles.title}>Cogo Assist</div>
-				</div>
+						<div className={styles.title}>Cogo Assist</div>
+					</div>
+				) : null}
 
-				<div className={styles.input_container}>
+				<div className={`${styles.input_container} ${styles[from]}`}>
 					<Input
 						className="primary lg"
 						placeholder="Search for a question or a topic"

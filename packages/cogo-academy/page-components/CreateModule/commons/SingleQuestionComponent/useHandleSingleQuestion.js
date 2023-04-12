@@ -17,6 +17,9 @@ function useHandleSingleQuestion({
 	editDetails,
 	field,
 	index,
+	questionTypeWatch,
+	editorValue,
+	setEditorValue,
 }) {
 	const NAME_CONTROL_MAPPING = useMemo(() => {
 		const hash = {};
@@ -39,11 +42,14 @@ function useHandleSingleQuestion({
 		getTestQuestionTest,
 		editDetails,
 		index,
+		editorValue,
 	});
 
 	const handleDelete = () => {
 		if (field.isNew) {
 			remove(index, 1);
+
+			setEditorValue((prev) => ({ ...prev, [`case_questions_${index}_explanation`]: undefined }));
 		} else {
 			updateCaseStudyQuestion({
 				action              : 'delete',
@@ -64,11 +70,22 @@ function useHandleSingleQuestion({
 		});
 	};
 
+	const handleChangeEditorValue = (value) => {
+		if (questionTypeWatch === 'stand_alone') {
+			setEditorValue({ question_0_explanation: value });
+		} else {
+			setEditorValue((prev) => ({ ...prev, [`case_questions_${index}_explanation`]: value }));
+		}
+	};
+
 	return {
 		handleUpdateCaseStudyQuestion,
 		handleDelete,
 		loading,
 		NAME_CONTROL_MAPPING,
+		editorValue,
+		setEditorValue,
+		handleChangeEditorValue,
 	};
 }
 
