@@ -6,7 +6,7 @@ import { v1 as uuid } from 'uuid';
 
 import styles from './styles.module.css';
 
-function Item({ onNewItemAdding, row, handleClick, components, parentComponent, childrenComponents }) {
+function Item({ onNewItemAdding, row, handleClick, parentComponent, childrenComponents }) {
 	const [{ isDragging }, dragRef] = useDrag({
 		type    : 'container',
 		item    : { ...parentComponent, children: childrenComponents },

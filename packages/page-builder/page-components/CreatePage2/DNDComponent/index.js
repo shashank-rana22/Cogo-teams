@@ -96,7 +96,7 @@ function DNDComponent() {
 
 			setSelectedItem({
 				...content,
-				id    : components.length + 1,
+				id    : components.layout.length + 1,
 				index : startIndex,
 			});
 
