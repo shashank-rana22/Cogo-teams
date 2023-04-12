@@ -2,7 +2,11 @@ import { Toast } from '@cogoport/components';
 import { useIrisRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useNotifyManagers = ({ setNotifyModal = () => {} }) => {
+import getDefaultFeedbackMonth from '../../../../utils/getDefaultYearMonth';
+
+const useNotifyManagers = ({ setModal = () => {} }) => {
+	const { feedbackMonth, feedbackYear } = getDefaultFeedbackMonth();
+
 	const [sendToAll, setSendToAll] = useState(false);
 	const [{ loading = false, data = {} }, trigger] = useIrisRequest({
 		url    : 'post_iris_notify_managers',
@@ -11,10 +15,15 @@ const useNotifyManagers = ({ setNotifyModal = () => {} }) => {
 
 	const notify = async () => {
 		try {
-			await trigger({ data: { SendToAll: sendToAll } });
+			await trigger({
+				data: {
+					Year  : feedbackYear,
+					Month : feedbackMonth,
+				},
+			});
 			const { manager_count } = data;
 
-			setNotifyModal(false);
+			setModal('');
 			Toast.success(`${manager_count} Managers Notified...`);
 		} catch (e) {
 			Toast.error(e.response?.data.error?.toString());
