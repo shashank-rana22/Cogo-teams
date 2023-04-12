@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import styles from './styles.module.css';
 
 const settings = [
-	{ label: 'Background Color', key: 'backgroundColor', type: 'color' },
-	{ label: 'Border Color', key: 'borderColor', type: 'color' },
-	{ label: 'Border Width', key: 'borderWidth', type: 'number' },
+	{ label: 'Background Color', key: 'background-color', type: 'color' },
+	{ label: 'Border Color', key: 'border-color', type: 'color' },
+	{ label: 'Border Width', key: 'border-width', type: 'number' },
 	{
 		label   : 'Border Style',
-		key     : 'borderStyle',
+		key     : 'border-style',
 		type    : 'select',
 		options : ['none', 'solid', 'dotted', 'dashed', 'double', 'groove', 'ridge', 'inset', 'outset'],
 	},
 	{
 		label : 'Box Shadow',
-		key   : 'boxShadow',
+		key   : 'box-shadow',
 		type  : 'text',
 	},
 	{
@@ -35,46 +35,46 @@ const settings = [
 	},
 	{
 		label   : 'Flex Direction',
-		key     : 'flexDirection',
+		key     : 'flex-direction',
 		type    : 'select',
 		options : ['row', 'row-reverse', 'column', 'column-reverse'],
 	},
 	{
 		label : 'Flex Grow',
-		key   : 'flexGrow',
+		key   : 'flex-grow',
 		type  : 'number',
 	},
 	{
 		label : 'Flex Shrink',
-		key   : 'flexShrink',
+		key   : 'flex-shrink',
 		type  : 'number',
 	},
 	{
 		label : 'Flex Basis',
-		key   : 'flexBasis',
+		key   : 'flex-basis',
 		type  : 'number',
 	},
 	{
 		label   : 'Align Items',
-		key     : 'alignItems',
+		key     : 'align-items',
 		type    : 'select',
 		options : ['stretch', 'center', 'flex-start', 'flex-end', 'baseline'],
 	},
 	{
 		label   : 'Align Content',
-		key     : 'alignContent',
+		key     : 'align-content',
 		type    : 'select',
 		options : ['stretch', 'center', 'flex-start', 'flex-end', 'space-between', 'space-around'],
 	},
 	{
 		label   : 'Align Self',
-		key     : 'alignSelf',
+		key     : 'align-self',
 		type    : 'select',
 		options : ['auto', 'flex-start', 'flex-end', 'center', 'baseline', 'stretch'],
 	},
 	{
 		label   : 'Justify Content',
-		key     : 'justifyContent',
+		key     : 'justify-content',
 		type    : 'select',
 		options : ['flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly'],
 	},
@@ -93,6 +93,27 @@ const settings = [
 function DivSettings(props) {
 	const { component, setComponent } = props;
 
+	const handleChange = useCallback((key, value) => {
+		setComponent((prev) => ({
+			...prev,
+			style: {
+				...component.style,
+				[key]: value,
+			},
+
+		}));
+	}, []);
+
+	const handleInputChange = useCallback((e, key) => {
+		const { value } = e.target;
+
+		handleChange(key, value);
+	}, [handleChange]);
+
+	const handleSelectChange = useCallback((value, key) => {
+		handleChange(key, value);
+	}, [handleChange]);
+
 	return (
 		<div className={styles.container}>
 
@@ -108,7 +129,12 @@ function DivSettings(props) {
 				>
 					<label htmlFor={key}>{label}</label>
 					{type === 'select' ? (
-						<select style={{ width: '120px' }} id={key} name={key}>
+						<select
+							style={{ width: '120px' }}
+							id={key}
+							name={key}
+							onChange={(e) => handleSelectChange(e.target.value, key)}
+						>
 							{options.map((option) => (
 								<option key={option} value={option}>
 									{option}
@@ -121,6 +147,7 @@ function DivSettings(props) {
 							type={type}
 							id={key}
 							name={key}
+							onChange={(e) => handleInputChange(e, key)}
 						/>
 
 					)}
