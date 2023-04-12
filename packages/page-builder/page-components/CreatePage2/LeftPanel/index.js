@@ -39,7 +39,7 @@ function LeftPanel(props) {
 				/>
 			</TabPanel>
 
-			<TabPanel name="structure" title="structure">
+			<TabPanel name="structure" title="Structure">
 				<Structure
 					components={components}
 					selectedItem={selectedItem}

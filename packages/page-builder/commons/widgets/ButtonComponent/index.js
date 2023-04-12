@@ -1,24 +1,24 @@
 import { Button } from '@cogoport/components';
 // eslint-disable-next-line import/no-unresolved
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import 'react-quill/dist/quill.bubble.css';
 
-const ReactQuill = dynamic(import('react-quill'), { ssr: false });
+// const ReactQuill = dynamic(import('react-quill'), { ssr: false });
 
 function ButtonComponent(props) {
 	const {
-		label = 'submit',
+		// label = 'submit',
 		themeType = 'primary',
 		size = 'md',
 		type = 'button',
-		components,
-		setComponents,
-		elementId,
+		// components,
+		// setComponents,
+		// elementId,
 	} = props;
 
 	const [isFocused, setIsFocused] = useState(false);
-	const [editorValue, setEditorValue] = useState(label);
+	// const [editorValue, setEditorValue] = useState(label);
 
 	// const editorStyle = {
 	// 	border         : isFocused ? '1.5px solid #88cad1' : '1px solid #ccc',
@@ -29,24 +29,24 @@ function ButtonComponent(props) {
 
 	// };
 
-	const handleEditorChange = (value) => {
-		setEditorValue(value);
+	// const handleEditorChange = (value) => {
+	// 	setEditorValue(value);
 
-		// eslint-disable-next-line max-len, max-len, max-len
-		const selectedComponentIndex = (components || []).findIndex((component) => (component.id === elementId));
+	// 	// eslint-disable-next-line max-len, max-len, max-len
+	// 	const selectedComponentIndex = (components || []).findIndex((component) => (component.id === elementId));
 
-		const updatedComponent = {
-			...components[selectedComponentIndex],
-			content: value,
-		};
+	// 	const updatedComponent = {
+	// 		...components[selectedComponentIndex],
+	// 		content: value,
+	// 	};
 
-		// use map instead slice
-		setComponents((prevComponents) => [
-			...prevComponents.slice(0, selectedComponentIndex),
-			updatedComponent,
-			...prevComponents.slice(selectedComponentIndex + 1),
-		]);
-	};
+	// 	// use map instead slice
+	// 	setComponents((prevComponents) => [
+	// 		...prevComponents.slice(0, selectedComponentIndex),
+	// 		updatedComponent,
+	// 		...prevComponents.slice(selectedComponentIndex + 1),
+	// 	]);
+	// };
 
 	return (
 		<div>
@@ -57,11 +57,12 @@ function ButtonComponent(props) {
 				onClick={() => setIsFocused(!isFocused)}
 
 			>
-				<ReactQuill
+				Submit
+				{/* <ReactQuill
 					theme="bubble"
 					value={editorValue}
 					onChange={handleEditorChange}
-				/>
+				/> */}
 
 			</Button>
 

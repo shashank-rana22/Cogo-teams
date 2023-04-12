@@ -116,24 +116,14 @@ function DNDComponent() {
 		[handleAddNewItem, selectedItem, activeTab],
 
 	  );
-	  const MemoRightPanel = useCallback(
-		() => (
-			<DropBox
-				components={components}
-				setComponents={setComponents}
-				addNewItem={handleAddNewItem}
-				onNewItemAdding={setNewItemAdding}
-				selectedItem={selectedItem}
-				setSelectedItem={setSelectedItem}
-				isNewItemAdding={isNewItemAdding}
-				parentComponentId={parentComponentId}
-			/>
+	//   const MemoRightPanel = useCallback(
+	// 	() => (
 
-		),
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[handleAddNewItem, isNewItemAdding, selectedItem],
+	// 	),
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// 	[handleAddNewItem, isNewItemAdding, selectedItem],
 
-	  );
+	//   );
 
 	return (
 		<div>
@@ -168,7 +158,16 @@ function DNDComponent() {
 					</section>
 
 					<div>
-						<MemoRightPanel />
+						<DropBox
+							components={components}
+							setComponents={setComponents}
+							addNewItem={handleAddNewItem}
+							onNewItemAdding={setNewItemAdding}
+							selectedItem={selectedItem}
+							setSelectedItem={setSelectedItem}
+							isNewItemAdding={isNewItemAdding}
+							parentComponentId={parentComponentId}
+						/>
 					</div>
 
 				</div>
