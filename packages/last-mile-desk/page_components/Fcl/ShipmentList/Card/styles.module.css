@@ -1,16 +1,16 @@
 .container {
-    background-color: #fff;
-    box-shadow: 0px 1px 6px rgba(169, 188, 218, 0.65);
 	margin: 14px 0;
-    border-radius: 4px;
+	background-color: #fff;
+	border-radius: 4px;
+	box-shadow: 0 1px 6px rgb(169 188 218 / 65%);
 }
 
 .animate_card {
-    background: linear-gradient(90deg, #fff, #fae7e7, #fff);
-    background-size: 400% 400%;
-    animation: background_anim 5s ease-in-out infinite alternate;
+	background: linear-gradient(90deg, #fff, #fae7e7, #fff);
+	background-size: 400% 400%;
+	animation: background-anim 5s ease-in-out infinite alternate;
 
-    @keyframes background_anim {
+	@keyframes background-anim {
 		from {
 			background-position: 100% 0;
 		}

@@ -1,53 +1,53 @@
 .container {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .container > div {
-    margin-left: 10px;
+	margin-left: 10px;
 }
 
 .toggle_container {
-    :global {
-        .ui_toggle_container {
-            align-items: center;
-            padding: 0 10px;
-        }
+	:global {
+		.ui_toggle_container {
+			align-items: center;
+			padding: 0 10px;
+		}
 
-        .ui_toggle_offlabel {
-            color: var(--color-secondary-greyscale-2);
-        }
-    }
+		.ui_toggle_offlabel {
+			color: var(--color-secondary-greyscale-2);
+		}
+	}
 }
 
 .input_container {
-    :global {
-        .ui_input_container {
-            padding-right: 6px;
-            min-width: 250px;
-        }
-    }
+	:global {
+		.ui_input_container {
+			min-width: 250px;
+			padding-right: 6px;
+		}
+	}
 }
 
 .popover_container {
-    :global {
-        .ui_popover_container {
-           width: 350px;
-        }
+	:global {
+		.ui_popover_container {
+			width: 350px;
+		}
 
-        .tippy-content {
-            width: 100%;
-        }
-    }
+		.tippy-content {
+			width: 100%;
+		}
+	}
 }
 
 .popover_button_text {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .button_text {
-    font-size: 14px;
-    margin-left: 8px;
+	margin-left: 8px;
+	font-size: 14px;
 }
