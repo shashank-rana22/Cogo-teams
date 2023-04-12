@@ -29,36 +29,44 @@ function RenderAddRateForm({
 	const { formControl } = controls({ serviceData });
 
 	const renderForm = (field) => {
+		const { name, options, ...rest } = field;
 		switch (field.type) {
 			case 'async-select':
 				return (
 					<div className={styles.input_container}>
 						<label>{field.label}</label>
 						<SelectController
-							name={field.name}
+							name={name}
 							control={control}
-							size="sm"
-							options={field.options}
-							placeholder={field.placeholder}
-							rules={field.rules}
+							options={options}
+							{...rest}
 							{...serviceProviderEmbededOptions}
-
 						/>
-						{errors[field.name] && <span>{errors[field.name].message}</span>}
+						{errors[name] && <span>{errors[name].message}</span>}
 					</div>
 				);
 			case 'input':
 				return (
 					<div className={styles.input_container}>
-						<label htmlFor={field.name}>{field.label}</label>
+						<label htmlFor={name}>{field.label}</label>
 						<InputController
-							name={field.name}
+							name={name}
 							control={control}
-							size="sm"
-							placeholder={field.placeholder}
-							rules={field.rules}
+							{...rest}
 						/>
-						{errors[field.name] && <span>{errors[field.name].message}</span>}
+						{errors[name] && <span>{errors[name].message}</span>}
+					</div>
+				);
+			case 'number':
+				return (
+					<div className={styles.input_container}>
+						<label htmlFor={name}>{field.label}</label>
+						<InputController
+							name={name}
+							control={control}
+							{...rest}
+						/>
+						{errors[name] && <span>{errors[name].message}</span>}
 					</div>
 				);
 			case 'select':
@@ -66,14 +74,12 @@ function RenderAddRateForm({
 					<div className={styles.input_container}>
 						<label>{field.label}</label>
 						<SelectController
-							name={field.name}
+							name={name}
 							control={control}
-							size="sm"
-							options={field.options}
-							placeholder={field.placeholder}
-							rules={field.rules}
+							options={options}
+							{...rest}
 						/>
-						{errors[field.name] && <span>{errors[field.name].message}</span>}
+						{errors[name] && <span>{errors[name].message}</span>}
 					</div>
 				);
 			default:

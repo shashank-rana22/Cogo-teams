@@ -58,6 +58,7 @@ function BlContainersMapping({
 										control={control}
 										{...register(`bl_mappings.${index}.bl_number`)}
 										size="sm"
+										disabled
 									/>
 								</div>
 								<div className={styles.input_container}>
