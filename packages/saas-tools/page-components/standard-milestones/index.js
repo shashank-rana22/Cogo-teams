@@ -27,6 +27,7 @@ function StandardMilestones() {
 				onClickCard={onClickCard}
 				setSideBar={setSideBar}
 				setSelectedLocation={setSelected}
+				sideBar={sideBar}
 			/>
 			<SideBarComponent
 				setSideBar={setSideBar}

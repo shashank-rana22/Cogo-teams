@@ -2,11 +2,10 @@ import { Button } from '@cogoport/components';
 
 import getElementController from '../../../constants/getController';
 import useCreateUpdate from '../../../hooks/useCreateUpdate';
-// import FieldArray from '../../FieldArray';
 
 import styles from './styles.module.css';
 
-function CreateUpdateForm({ selected = {} }) {
+function CreateUpdateForm({ selected = {}, onClose = () => {} }) {
 	const {
 		handleSubmit,
 		errors,
@@ -15,7 +14,7 @@ function CreateUpdateForm({ selected = {} }) {
 		loading,
 		onCreate,
 		fields,
-	} = useCreateUpdate({ selected });
+	} = useCreateUpdate({ selected, onClose });
 
 	const watchType = watch('type');
 	return (

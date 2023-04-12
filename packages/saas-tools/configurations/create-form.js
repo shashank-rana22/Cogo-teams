@@ -3,10 +3,12 @@ const fields = [
 	{
 		name        : 'shipping_line_id',
 		label       : 'Shpping Line',
-		type        : 'text',
+		type        : 'asyncSelect',
 		placeholder : 'Enter Shpping Line',
+		asyncKey    : 'shipping_lines',
+		labelKey    : 'business_name',
+		valueKey    : 'id',
 	},
-
 	{
 		name        : 'milestone',
 		label       : 'Milestone',

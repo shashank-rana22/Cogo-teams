@@ -1,11 +1,10 @@
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
-const useGetMilestones = () => {
+const useGetMilestones = ({ sideBar }) => {
 	const [filters, setFilters] = useState({
 		page       : 1,
 		page_limit : 10,
-		// type       : 'continent',
 	});
 
 	const [list, setList] = useState({
@@ -15,8 +14,7 @@ const useGetMilestones = () => {
 		fullResponse : {},
 	});
 
-	const { page, page_limit, ...restFilters } = filters;
-
+	const { page, page_limit, source, ...restFilters } = filters;
 	const [{ error, loading }, refetch] = useRequest({
 		url    : '/list_standard_event_mapping',
 		method : 'GET',
@@ -25,6 +23,7 @@ const useGetMilestones = () => {
 			page_limit,
 			filters: {
 				...(restFilters || {}),
+				source: source || undefined,
 			},
 		},
 	});
@@ -50,7 +49,7 @@ const useGetMilestones = () => {
 				}));
 			});
 		// eslint-disable-next-line
-	}, [filters]);
+	}, [filters,sideBar]);
 
 	const hookSetters = {
 		setFilters,

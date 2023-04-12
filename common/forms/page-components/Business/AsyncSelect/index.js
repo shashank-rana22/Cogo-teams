@@ -14,6 +14,7 @@ import {
 	asyncFieldsListOperators,
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
+	asyncShippingLines,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -46,6 +47,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_operators         : asyncFieldsListOperators,
 	list_rate_charge_codes : asyncFieldListRateChargeCodes,
 	allot_bank             : asyncAllotBanks,
+	shipping_lines         : asyncShippingLines,
 };
 
 function AsyncSelect(props) {

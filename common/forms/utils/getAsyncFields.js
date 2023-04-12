@@ -202,6 +202,19 @@ function asyncAllotBanks() {
 		},
 	};
 }
+function asyncShippingLines() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'get_saas_container_shipping_lines',
+		initialCall : false,
+		// microService : 'business_finance',
+		// params      : {
+		// 	entityCode : 301,
+		// 	currency   : 'INR',
+		// },
+	};
+}
 
 export {
 	asyncFieldsLocations,
@@ -219,4 +232,5 @@ export {
 	asyncFieldsListAgents,
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
+	asyncShippingLines,
 };

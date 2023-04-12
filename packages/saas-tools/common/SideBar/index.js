@@ -18,9 +18,9 @@ function SideBarComponent({
 	const renderBody = () => {
 		switch (sideBar) {
 			case 'create':
-				return <CreateUpdateForm />;
+				return <CreateUpdateForm onClose={onClose} />;
 			case 'update':
-				return <CreateUpdateForm selected={selected} />;
+				return <CreateUpdateForm selected={selected} onClose={onClose} />;
 			default:
 				return null;
 		}
