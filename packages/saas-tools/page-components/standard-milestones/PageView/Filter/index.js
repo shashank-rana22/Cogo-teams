@@ -26,12 +26,12 @@ function Filter({ hookSetters = () => {}, filters }) {
 			<Select
 				name="source"
 				label="Source"
-				placeholder="Enter Source"
+				placeholder="Select Source"
 				options={[
 					{ label: 'Tracking Job', value: 'tracking_job' },
 					{ label: 'Default', value: 'default' },
 				]}
-				style={{ width: '150px' }}
+				style={{ width: '200px' }}
 				onChange={(e) => setValue('source', e)}
 				value={filters.source}
 				isClearable
@@ -39,8 +39,8 @@ function Filter({ hookSetters = () => {}, filters }) {
 			/>
 			<Select
 				name="status"
-				placeholder="Enter Source"
-				style={{ width: '150px' }}
+				placeholder="Select Status"
+				style={{ width: '200px' }}
 				onChange={(e) => setValue('status', e)}
 				value={filters.status}
 				options={[
