@@ -13,7 +13,9 @@ const useGetFaqNotifications = () => {
 		try {
 			await trigger();
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response?.data));
+			if (error?.response) {
+				Toast.error(getApiErrorString(error?.response?.data));
+			}
 		}
 	}, [trigger]);
 
