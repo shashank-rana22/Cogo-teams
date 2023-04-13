@@ -16,10 +16,6 @@ function PasswordValidator({ password = '', errorMessage = '' }) {
 					{Object.entries(VALID_PASSWORD_MAPPINGS)?.map(([key, value]) => {
 						const { message = '', length = 0, characters = [] } = value;
 
-						// const regex = new RegExp(pattern);
-
-						// const isValid = regex.test(password);
-
 						let isValid = false;
 						if (key === 'minLength') {
 							isValid = password.length >= length;
