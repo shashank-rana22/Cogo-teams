@@ -46,9 +46,7 @@ function Header({
 					setShowNotificationContent(false);
 				}
 			} catch (e) {
-				if (e?.response) {
-					Toast.error(getApiErrorString(e?.response?.data));
-				}
+				if (e.response?.data) Toast.error(getApiErrorString(e.response?.data));
 			}
 		} else {
 			setTopic(null);

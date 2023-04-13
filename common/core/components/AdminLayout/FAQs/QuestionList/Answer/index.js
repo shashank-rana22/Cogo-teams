@@ -44,6 +44,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 		setIsLiked = () => {},
 		watchAnswerCheckbox,
 		watchQuestionCheckbox,
+		watchRemark,
 		is_positive,
 		FEEDBACK_MAPPING_ISLIKED,
 	} = useCreateFeedback({ question });
@@ -158,6 +159,7 @@ function Answer({ topic = {}, question, setQuestion }) {
 							themeType="primary"
 							onClick={handleSubmit(onSubmit)}
 							loading={feedbackLoading}
+							disabled={!(watchAnswerCheckbox || watchQuestionCheckbox || watchRemark)}
 						>
 							Submit
 						</Button>
