@@ -1,6 +1,7 @@
 .container {
 	display: flex;
 	flex-direction: column;
+	width: 50%;
 }
 
 .question_heading {
@@ -39,6 +40,7 @@
 }
 
 .peer_percentage {
+	min-width: max-content;
 	font-size: 12px;
 	font-weight: 600;
 	color: #4f4f4f;
