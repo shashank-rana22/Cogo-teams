@@ -101,7 +101,7 @@ MyApp.getInitialProps = async () => {
 			console.log(error);
 		});
 
-		return { pageProps: { layout: 'none' }, firestoreCustomToken };
+	return { pageProps: { layout: 'none' }, firestoreCustomToken };
 };
 
 export default appWithTranslation(MyApp);

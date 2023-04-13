@@ -52,8 +52,8 @@ module.exports = withBundleAnalyzer({
 
 		newConfig.resolve.fallback = {
 			...newConfig.resolve.fallback,
-			request       : false,
-			encoding   	  : false,
+			request  : false,
+			encoding : false,
 			...(isServer
 				? {}
 				: {
@@ -61,7 +61,7 @@ module.exports = withBundleAnalyzer({
 					child_process : false,
 					net           : false,
 					tls           : false,
-				  }),
+				}),
 		};
 
 		newConfig.module.rules.push({
