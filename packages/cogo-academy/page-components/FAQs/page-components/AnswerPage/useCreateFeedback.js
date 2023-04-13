@@ -98,7 +98,8 @@ const useCreateFeedback = ({ refetchQuestions, answerData, loading }) => {
 		setload(false);
 		setIsLiked('disliked');
 
-		let remark = values?.remark;
+		let remark = values?.remark ? values.remark : '';
+
 
 		if (values?.answer_checkbox) {
 			remark = `Answer not satisfactory. ${remark}`;
