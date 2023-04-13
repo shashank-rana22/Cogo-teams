@@ -1,9 +1,9 @@
 const CONFIG = [
 	{
-		label : 'Shpping Line',
+		label : 'Shipping Line',
 		key   : 'shipping_line_id',
 		type  : 'shpping_line',
-		flex  : 1,
+		flex  : 1.4,
 	},
 	{
 		label : 'Milestone',
@@ -18,13 +18,19 @@ const CONFIG = [
 	{
 		label : 'Source',
 		key   : 'source',
-		flex  : 1,
+		flex  : 0.8,
 	},
 	{
 		label : 'Status',
 		key   : 'status',
 		type  : 'status',
-		flex  : 1,
+		flex  : 0.8,
+	},
+	{
+		label : 'Transport Type',
+		key   : 'transport_type',
+		type  : 'status',
+		flex  : 0.8,
 	},
 	{
 		label : '',

@@ -14,22 +14,21 @@ function List({
 	return (
 		<div className={styles.container}>
 			{columns.map((singleItem) => {
-      	const { key, flex, label } = singleItem;
-
-      	return (
-	<div
-		role="presentation"
-		className={styles.item}
-		key={key || label}
-		style={{ flex }}
-	>
-		{loading ? (
-			<Placeholder />
-		) : (
-			getValue(item, singleItem, onClick, shippingInfo)
-		)}
-	</div>
-);
+				const { key, flex, label } = singleItem;
+				return (
+					<div
+						role="presentation"
+						className={styles.item}
+						key={key || label}
+						style={{ flex }}
+					>
+						{loading ? (
+							<Placeholder />
+						) : (
+							getValue(item, singleItem, onClick, shippingInfo)
+						)}
+					</div>
+				);
 			})}
 		</div>
 	);

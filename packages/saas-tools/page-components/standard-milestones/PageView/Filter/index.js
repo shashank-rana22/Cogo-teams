@@ -1,5 +1,8 @@
-import { Select } from '@cogoport/components';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Input, Select } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
+import { useEffect, useState, useMemo } from 'react';
 
 import styles from './styles.module.css';
 
@@ -7,12 +10,18 @@ function Filter({ hookSetters = () => {}, filters }) {
 	const setValue = (name, e) => {
 		hookSetters.setFilters((prev) => ({ ...prev, [name]: e }));
 	};
+	const [inputValue, setInputValue] = useState('');
+	const { query, debounceQuery } = useDebounceQuery();
+	useEffect(() => {
+		debounceQuery(inputValue);
+	}, [inputValue]);
+	useMemo(() => { setValue('search_term', query); }, [query]);
 	return (
 		<div className={styles.container}>
 			<AsyncSelect
 				name="shipping_line_id"
-				label="Shpping Line"
-				placeholder="Enter Shpping Line"
+				label="Shipping Line"
+				placeholder="Enter Shipping Line"
 				asyncKey="shipping_lines"
 				labelKey="business_name"
 				valueKey="id"
@@ -30,6 +39,7 @@ function Filter({ hookSetters = () => {}, filters }) {
 				options={[
 					{ label: 'Tracking Job', value: 'tracking_job' },
 					{ label: 'Default', value: 'default' },
+					{ label: 'LDB', value: 'ldb' },
 				]}
 				style={{ width: '200px' }}
 				onChange={(e) => setValue('source', e)}
@@ -48,6 +58,14 @@ function Filter({ hookSetters = () => {}, filters }) {
 					{ label: 'Inactive', value: 'inactive' },
 					{ label: 'Unmapped', value: 'unmapped' },
 				]}
+				isClearable
+			/>
+			<Input
+				name="search_term"
+				placeholder="Search by Milestone/Standard Milestone"
+				style={{ width: '320px' }}
+				onChange={(e) => setInputValue(e)}
+				value={inputValue}
 				isClearable
 			/>
 

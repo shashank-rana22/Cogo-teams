@@ -2,9 +2,9 @@ const fields = [
 
 	{
 		name        : 'shipping_line_id',
-		label       : 'Shpping Line',
+		label       : 'Shipping',
 		type        : 'asyncSelect',
-		placeholder : 'Enter Shpping Line',
+		placeholder : 'Enter Shipping Line',
 		asyncKey    : 'shipping_lines',
 		labelKey    : 'business_name',
 		valueKey    : 'id',
@@ -37,6 +37,12 @@ const fields = [
 			{ label: 'Inactive', value: 'inactive' },
 			{ label: 'Unmapped', value: 'unmapped' },
 		],
+	},
+	{
+		label       : 'Transport Type',
+		name        : 'transport_type',
+		type        : 'text',
+		placeholder : 'Enter Transport Type',
 	},
 
 ];
