@@ -40,6 +40,7 @@ export default function EditSchedule({ setShow = () => {}, timelineData = [] }) 
 			onClose={closeModal}
 			showCloseIcon={!loading}
 			closeOnOuterClick={false}
+			className={styles.custom_modal}
 		>
 			<Modal.Header title="Edit Timeline" />
 			<Modal.Body>
@@ -58,7 +59,6 @@ export default function EditSchedule({ setShow = () => {}, timelineData = [] }) 
 					disabled={loading}
 					onClick={closeModal}
 					themeType="secondary"
-					style={{ marginRight: '12px' }}
 				>
 					Cancel
 				</Button>

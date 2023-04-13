@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 
 import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
 
+import styles from './styles.module.css';
+
 function CancelAdditionalService({
 	id = '',
 	showCancel = false,
@@ -30,6 +32,7 @@ function CancelAdditionalService({
 			onClose={closeModal}
 			showCloseIcon={!loading}
 			closeOnOuterClick={false}
+			className={styles.custom_modal}
 		>
 			<Modal.Header title="Cancel Service" />
 			<Modal.Body>
@@ -37,14 +40,12 @@ function CancelAdditionalService({
 					value={remarkValues}
 					onChange={(e) => setRemarkValues(e)}
 					placeholder="State reason for cancellation"
-					style={{ height: '100px' }}
 				/>
 
 			</Modal.Body>
 			<Modal.Footer>
 				<Button
 					themeType="secondary"
-					style={{ marginRight: '12px' }}
 					onClick={closeModal}
 					disabled={loading}
 				>

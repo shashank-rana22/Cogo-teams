@@ -37,3 +37,11 @@
 	font-size: 10px;
 	color: #ee3426;
 }
+
+.custom_modal {
+	:global {
+		.ui_button_container:not(:first-of-type) {
+            margin-left: 10px;
+        }
+	}
+}

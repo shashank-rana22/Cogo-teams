@@ -44,7 +44,7 @@ export default function CancelService({ setShow, service_type, trade_type }) {
 			</Modal.Body>
 
 			<Modal.Footer>
-				<Button onClick={closeModal} themeType="secondary" style={{ marginRight: '12px' }}>Cancel</Button>
+				<Button onClick={closeModal} themeType="secondary">Cancel</Button>
 				<Button onClick={handleSubmit(onSubmit)}>Confirm</Button>
 			</Modal.Footer>
 		</Modal>
