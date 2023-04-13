@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
@@ -66,7 +67,8 @@ const useCreateFeedback = ({ question }) => {
 
 			fetch();
 		} catch (error) {
-			Toast.error(error?.message);
+			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
+
 			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
 	};
@@ -85,7 +87,8 @@ const useCreateFeedback = ({ question }) => {
 
 			fetch();
 		} catch (error) {
-			Toast.error(error?.message);
+			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
+
 			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
 	};
@@ -146,7 +149,8 @@ const useCreateFeedback = ({ question }) => {
 			setShow(false);
 			fetch();
 		} catch (error) {
-			Toast.error(error?.message);
+			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
+
 			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
 	};
