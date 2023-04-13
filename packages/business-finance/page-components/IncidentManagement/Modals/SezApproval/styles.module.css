@@ -44,6 +44,6 @@
 }
 
 .file_link {
-	color: #00e;
-	text-decoration: underline;
+	color: #00e !important;
+	text-decoration: underline !important;
 }

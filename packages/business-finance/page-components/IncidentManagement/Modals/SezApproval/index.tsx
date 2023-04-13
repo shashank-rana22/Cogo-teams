@@ -21,13 +21,15 @@ interface Org {
 }
 
 interface Props {
-	sezRequest: SezInterface,
-	id: string,
-	refetch:()=>void,
+	sezRequest?: SezInterface,
+	id?: string,
+	refetch?:()=>void,
 	organization?:Org,
+	isEditable?:boolean,
+	remark?:string,
 }
 
-function SezApproval({ sezRequest, organization, id, refetch }:Props) {
+function SezApproval({ sezRequest, organization, id, refetch = () => {}, isEditable = true, remark }:Props) {
 	const [showModal, setShowModal] = useState(false);
 	const [inputValues, setInputValues] = useState({
 		remarks: null,
@@ -116,38 +118,42 @@ function SezApproval({ sezRequest, organization, id, refetch }:Props) {
 									name="remark"
 									size="sm"
 									placeholder="Enter Remarks Here..."
+									disabled={!isEditable}
 									onChange={(value: string) => setInputValues({ ...inputValues, remarks: value })}
+									value={remark}
 									className={styles.text_area}
 								/>
 							</div>
 						</div>
 
 					</Modal.Body>
-					<Modal.Footer>
-						<div className={styles.button}>
-							<Button
-								size="md"
-								style={{ marginRight: '8px' }}
-								disabled={isDisabled}
-								onClick={() => {
-									OnAction({ inputValues, status: 'APPROVED' });
-								}}
-							>
-								Approve
-							</Button>
-							<Button
-								themeType="secondary"
-								size="md"
-								style={{ marginRight: '8px' }}
-								disabled={isDisabled}
-								onClick={() => {
-									OnAction({ inputValues, status: 'REJECTED' });
-								}}
-							>
-								Reject
-							</Button>
-						</div>
-					</Modal.Footer>
+					{isEditable && (
+						<Modal.Footer>
+							<div className={styles.button}>
+								<Button
+									size="md"
+									style={{ marginRight: '8px' }}
+									disabled={isDisabled}
+									onClick={() => {
+										OnAction({ inputValues, status: 'APPROVED' });
+									}}
+								>
+									Approve
+								</Button>
+								<Button
+									themeType="secondary"
+									size="md"
+									style={{ marginRight: '8px' }}
+									disabled={isDisabled}
+									onClick={() => {
+										OnAction({ inputValues, status: 'REJECTED' });
+									}}
+								>
+									Reject
+								</Button>
+							</div>
+						</Modal.Footer>
+					)}
 				</Modal>
 			)}
 		</div>
