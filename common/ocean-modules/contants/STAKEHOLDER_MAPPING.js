@@ -31,4 +31,8 @@ export const STAKEHOLDER_CAN_BE_ADDED = {
 	consignee_booking_agent : 'DKAM',
 };
 
+export const SERVICE_LEVEL_STATKEHOLDERS = [
+	'supply_agent', 'service_ops1', 'service_ops2', 'service_ops3',
+];
+
 export default STAKEHOLDER_MAPPING;
