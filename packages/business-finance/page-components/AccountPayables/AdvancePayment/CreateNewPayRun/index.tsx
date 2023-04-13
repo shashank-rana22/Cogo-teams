@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import { Breadcrumb, Checkbox, Popover, Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { Link } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import List from '../../../commons/List';
@@ -14,6 +15,7 @@ import BankDetails from './renderFunction/BankDetails';
 import DeleteModal from './renderFunction/DeleteModal/index';
 import IncidentNumber from './renderFunction/IncidentNumber';
 import InvoiceDetails from './renderFunction/InvoiceDetails';
+import OrganizationName from './renderFunction/OrganizationName';
 import SIDnumber from './renderFunction/SIDnumber';
 import styles from './styles.module.css';
 
@@ -185,6 +187,7 @@ function CreateNewPayRun() {
 	const [filters, setFilters] = useState({
 		service: undefined,
 	});
+	const [sort, setSort] = useState({});
 
 	const [viewSelectedInvoice, setViewSelectedInvoice] = useState(false);
 
@@ -222,7 +225,10 @@ function CreateNewPayRun() {
 				<div className={styles.link}>
 					<Popover placement="top" render={content}>
 						<>
-						 {document?.length}{' '} document
+							{document?.length}
+							{' '}
+							{' '}
+							document
 						</>
 					</Popover>
 				</div>
@@ -270,12 +276,16 @@ function CreateNewPayRun() {
 		renderSIDnumber: (itemData) => (
 			<SIDnumber itemData={itemData} />
 		),
+		renderOrganization: (itemData) => (
+			<OrganizationName itemData={itemData} />
+		),
 	};
 	const getTableHeaderCheckbox = () => (
 		<div className={styles.checkbox_style}>
 			<Checkbox
 				value="check"
 				disabled={false}
+				className={styles.checkbox}
 			/>
 		</div>
 	);
@@ -283,7 +293,12 @@ function CreateNewPayRun() {
 		<div>
 			<div className={styles.bread_crumb}>
 				<Breadcrumb>
-					<Breadcrumb.Item label="Advance Payments" />
+					<Breadcrumb.Item label={(
+						<Link href="/business-finance/account-payables/advance-payment">
+							Advance Payment
+						</Link>
+					)}
+					/>
 					<Breadcrumb.Item label="PayRun Creation" />
 					<Breadcrumb.Item label="Select Invoices" />
 				</Breadcrumb>
@@ -316,7 +331,15 @@ function CreateNewPayRun() {
 					<SelectFilters filters={filters} setFilters={setFilters} />
 				</div>
 				<div>
-					<List itemData={list} config={viewSelectedInvoice ? VIEW_SELECTED_CONFIG : CREATE_NEW_PAYRUN_CONFIG} functions={functions} renderHeaderCheckbox={getTableHeaderCheckbox} />
+					<List
+						itemData={list}
+						config={viewSelectedInvoice ? VIEW_SELECTED_CONFIG : CREATE_NEW_PAYRUN_CONFIG}
+						functions={functions}
+						renderHeaderCheckbox={getTableHeaderCheckbox}
+						sort={sort}
+						setSort={setSort}
+						showPagination
+					/>
 				</div>
 				<Footer viewSelectedInvoice={viewSelectedInvoice} setViewSelectedInvoice={setViewSelectedInvoice} />
 			</div>

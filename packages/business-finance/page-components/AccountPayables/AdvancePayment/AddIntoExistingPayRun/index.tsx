@@ -1,5 +1,6 @@
 import { Breadcrumb, Checkbox, Button, Popover } from '@cogoport/components';
 import { IcMInfo, IcMArrowBack } from '@cogoport/icons-react';
+import { Link } from '@cogoport/next';
 import React, { useState } from 'react';
 /* eslint-disable max-len */
 
@@ -14,6 +15,7 @@ import BankDetails from './renderFunction/BankDetails';
 import DeleteModal from './renderFunction/DeleteModal';
 import IncidentNumber from './renderFunction/IncidentNumber';
 import InvoiceDetails from './renderFunction/InvoiceDetails';
+import OrganizationName from './renderFunction/OrganizationName';
 import SIDnumber from './renderFunction/SIDnumber';
 import styles from './styles.module.css';
 
@@ -185,6 +187,7 @@ function AddIntoExistingPayRun() {
 	const [filters, setFilters] = useState({
 		service: undefined,
 	});
+	const [sort, setSort] = useState({});
 
 	const [viewSelectedInvoice, setViewSelectedInvoice] = useState(false);
 
@@ -218,10 +221,11 @@ function AddIntoExistingPayRun() {
 			return (
 				<div className={styles.link}>
 					<Popover placement="top" render={content}>
-						<>						
-							{document?.length}{' '}document
+						<>
+							{document?.length}
+							{' '}
+							document
 						</>
-
 					</Popover>
 				</div>
 			);
@@ -268,6 +272,9 @@ function AddIntoExistingPayRun() {
 		renderAmountWithCurrency: (itemData) => (
 			<AmountWithCurrency itemData={itemData} />
 		),
+		renderOrganization: (itemData) => (
+			<OrganizationName itemData={itemData} />
+		),
 
 	};
 	const getTableHeaderCheckbox = () => (
@@ -282,7 +289,12 @@ function AddIntoExistingPayRun() {
 		<div>
 			<div className={styles.bread_crumb}>
 				<Breadcrumb>
-					<Breadcrumb.Item label="Advance Payments" />
+					<Breadcrumb.Item label={(
+						<Link href="/business-finance/account-payables/advance-payment">
+							Advance Payment
+						</Link>
+					)}
+					/>
 					<Breadcrumb.Item label="PayRun Creation" />
 					<Breadcrumb.Item label="Select Invoices" />
 				</Breadcrumb>
@@ -336,7 +348,14 @@ function AddIntoExistingPayRun() {
 					<SelectFilters filters={filters} setFilters={setFilters} />
 				</div>
 				<div>
-					<List itemData={list} config={viewSelectedInvoice ? VIEW_SELECTED_CONFIG : CREATE_NEW_PAYRUN_CONFIG} functions={functions} renderHeaderCheckbox={getTableHeaderCheckbox} />
+					<List
+						itemData={list}
+						sort={sort}
+						setSort={setSort}
+						config={viewSelectedInvoice ? VIEW_SELECTED_CONFIG : CREATE_NEW_PAYRUN_CONFIG}
+						functions={functions}
+						renderHeaderCheckbox={getTableHeaderCheckbox}
+					/>
 				</div>
 				<Footer viewSelectedInvoice={viewSelectedInvoice} setViewSelectedInvoice={setViewSelectedInvoice} />
 			</div>

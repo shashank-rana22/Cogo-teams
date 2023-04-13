@@ -9,6 +9,7 @@ export const VIEW_SELECTED_CONFIG = {
 		// borderBottom : '1.5px solid #F68B21',
 		// marginTop    : '20px',
 		// paddingLeft  : '14px',
+		marginLeft   : '8px',
 	},
 	bodyStyles: {
 		color      : ' #333333',
@@ -59,7 +60,7 @@ export const VIEW_SELECTED_CONFIG = {
 		{
 			key   : 'businessName',
 			label : 'Organisation',
-			// func      : 'renderName',
+			func  : 'renderOrganization',
 			// className : 'vendor_text',
 			span  : 1.4,
 			// style     : {
@@ -71,10 +72,11 @@ export const VIEW_SELECTED_CONFIG = {
 			// },
 		},
 		{
-			label : 'Advance Amount',
-			key   : 'advancedAmount',
-			func  : 'renderAmountWithCurrency',
-			span  : 1,
+			label   : 'Advance Amount',
+			key     : 'advancedAmount',
+			func    : 'renderAmountWithCurrency',
+			sorting : { name: 'amountSortType' },
+			span    : 1.5,
 		},
 		{
 			key   : 'bankName',

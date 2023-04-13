@@ -1,33 +1,27 @@
-export const CREATE_NEW_PAYRUN_CONFIG = {
-	showHeader         : true,
-	showHeaderCheckbox : true,
-	pageLimit          : 20,
-	headerStyles       : {
+export const ADVANCE_CONFIG = {
+	showHeader   : true,
+	pageLimit    : 20,
+	headerStyles : {
 		// marginBottom : '16px',
 		borderRadius : '8px',
 		background   : 'none',
-		color        : '#333',
+		color        : 'black',
 		// borderBottom : '1.5px solid #F68B21',
 		// marginTop    : '20px',
-		marginLeft   : '-56px',
+		// paddingLeft  : '14px',
+		marginLeft   : '8px',
 	},
 	bodyStyles: {
-		color      : '#333333',
+		color      : ' #333333',
 		fontWeight : '400',
 		fontSize   : '12px',
 		borderTop  : '1.8px solid #F68B21',
 	},
 	fields: [
 		{
-			func   : 'renderCheckbox',
-			span   : 0.1,
-			styles : { marginLeft: '-16px' },
-		},
-		{
-			label  : 'Incident Number',
-			key    : 'incidentNumber',
-			func   : 'renderIncidentNumber',
-			styles : { marginLeft: '32px' },
+			label : 'Incident Number',
+			key   : 'incidentNumber',
+			func  : 'renderIncidentNumber',
 			// topKey : {
 			// 	key     : 'incidentNumber',
 			// 	type    : 'pdfView',
@@ -46,7 +40,7 @@ export const CREATE_NEW_PAYRUN_CONFIG = {
 			// 	transform  : 'translateX(-2px)',
 			// 	zIndex     : 1,
 			// },
-			span   : 0.8,
+			span  : 0.8,
 		},
 		{
 			label : 'SID',
@@ -64,18 +58,16 @@ export const CREATE_NEW_PAYRUN_CONFIG = {
 			span  : 0.7,
 		},
 		{
+			label : 'Entity',
+			key   : 'entity',
+			span  : 0.5,
+
+		},
+		{
 			key   : 'businessName',
 			label : 'Organisation',
 			func  : 'renderOrganization',
-			// className : 'vendor_text',
 			span  : 1.4,
-			// style     : {
-			// 	position   : 'sticky',
-			// 	left       : '52px',
-			// 	background : 'white',
-			// 	transform  : 'translateX(-2px)',
-			// 	zIndex     : 1,
-			// },
 		},
 		{
 			label   : 'Advance Amount',
@@ -85,21 +77,23 @@ export const CREATE_NEW_PAYRUN_CONFIG = {
 			span    : 1.5,
 		},
 		{
-			key   : 'bankName',
-			label : 'Bank Account Details',
-			func  : 'renderBankDetails',
-			span  : 2.5,
+			key     : 'reuestedByName',
+			label   : 'Requested by & on',
+			sorting : { name: 'requestedDateSortType' },
+			span    : 1.5,
+			func    : 'renderRequestedBy',
 		},
-
+		{
+			label   : 'Approved by & on',
+			key     : 'approvedByName',
+			sorting : { name: 'approvedDateSortType' },
+			span    : 1.5,
+			func    : 'renderApprovedBy',
+		},
 		{
 			label : 'Document',
 			func  : 'renderDocument',
-			span  : 1,
-		},
-		{
-			key  : 'invoiceDetails',
-			func : 'renderInvoiceDetails',
-			span : 0.2,
+			span  : 0.8,
 		},
 	],
 };
