@@ -104,7 +104,6 @@ const addedQuestionsColumns = ({
 						})}
 						,
 						{' '}
-
 						{formatDate({
 							date,
 							timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
@@ -314,7 +313,6 @@ const useQuestionList = () => {
 						id,
 						status: 'inactive',
 					},
-
 				},
 			);
 			getQuestionsList();
