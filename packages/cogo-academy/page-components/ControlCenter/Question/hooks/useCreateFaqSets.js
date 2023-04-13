@@ -73,13 +73,8 @@ function useCreateFaqSet({
 	const onClickPublish = async ({ data }) => {
 		const { question_aliases = [], answers = {} } = data || {};
 		const { id :answerId } = answers?.[0] || {};
-		const updatedAlias = [];
 
-		(question_aliases || []).forEach((alias) => {
-			const { id = '' } = alias || {};
-			const aliasObj = { id };
-			updatedAlias.push(aliasObj);
-		});
+		const updatedAlias = (question_aliases || []).map(({ id = '' }) => ({ id }));
 
 		const payload = {
 			id      : data?.id,

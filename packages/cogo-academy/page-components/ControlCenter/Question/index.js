@@ -180,11 +180,8 @@ function CreateFAQ() {
 				<form className={styles.form_container} onSubmit={handleSubmit(onSubmit)}>
 
 					<div className={styles.input_container}>
-						<div>
-							<div className={styles.input_label}>
-								Question
-							</div>
-
+						<div className={styles.input_label}>
+							Question
 						</div>
 
 						<div className={styles.question_alias}>

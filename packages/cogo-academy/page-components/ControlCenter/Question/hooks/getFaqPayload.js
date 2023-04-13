@@ -14,19 +14,14 @@ function getFaqPayload({ values, editorValue, data, showAlias }) {
 
 	const aliasesArray = (showAlias || []).map((alias) => (alias?.question_abstract));
 
-	const updatedAlias = [];
+	const updatedAlias = (showAlias || []).map((ele, index) => {
+		const { id, question_abstract: alias_question_abstract = '', status } = ele;
 
-	(showAlias || []).forEach((ele, index) => {
-		const { id = '', question_abstract:alias_question_abstract = '', status } = ele || {};
-
-		const filteredId = id !== index ? id : undefined;
-		const obj = {
-			id     : filteredId,
+		return {
+			id      : id !== index ? id : undefined,
 			alias_question_abstract,
-			status : status || undefined,
+			sstatus : status || undefined,
 		};
-
-		updatedAlias.push(obj);
 	});
 
 	const getTopicIds = (faq_topics || []).map(

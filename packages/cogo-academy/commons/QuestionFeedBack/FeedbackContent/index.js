@@ -17,7 +17,7 @@ function FeedBackContent({
 	fetchQuestion,
 	faqAudiences,
 }) {
-	const { general } = useSelector((state) => state);
+	const general = useSelector((state) => state.general || {});
 	const { feedbackId: id = '' } = general.query || {};
 
 	const {
@@ -128,6 +128,7 @@ function FeedBackContent({
 									themeType="tertiary"
 									onClick={() => setShowAliasInput(false)}
 									disabled={loading}
+									type="button"
 								>
 									Cancel
 								</Button>
@@ -136,6 +137,8 @@ function FeedBackContent({
 									themeType="primary"
 									onClick={onClickAddAlias}
 									loading={loading}
+									type="submit"
+
 								>
 									Submit
 								</Button>
