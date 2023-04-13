@@ -1,5 +1,6 @@
-import { Button } from '@cogoport/components';
+import { Button, Loader } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 
 import useListShipmentPendingTasks from '../../hooks/useListShipmentPendingTasks';
 
@@ -17,17 +18,21 @@ function List() {
 
 	if (loading) {
 		return (
-			<div className={styles.container}>
-				Loading
-			</div>
-		);
-	} if ((tasksList || []).length === 0) {
-		return (
-			<div>
-				Empty State
+			<div className={styles.loading_container}>
+				Loading Tasks....
+				<Loader themeType="primary" className={styles.loader_icon} />
 			</div>
 		);
 	}
+
+	if ((tasksList || []).length === 0) {
+		return (
+			<div>
+				<EmptyState />
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 			<Header

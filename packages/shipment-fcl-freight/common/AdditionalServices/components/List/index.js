@@ -126,7 +126,9 @@ function List({ isSeller = false }) {
 						show
 						onClose={() => setShowModal(false)}
 						closeOnOuterClick={false}
+						showCloseIcon={!updateResponse.loading}
 					>
+						<Modal.Header title="Add Sell Price" />
 						<Modal.Body>
 							<AddRate
 								item={item?.serviceListItem}
