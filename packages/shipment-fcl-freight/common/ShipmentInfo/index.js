@@ -1,4 +1,4 @@
-import { Placeholder, Breadcrumb, Tags } from '@cogoport/components';
+import { Placeholder, Breadcrumb, Pill } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
@@ -27,14 +27,13 @@ function ShipmentInfo() {
 				/>
 			</Breadcrumb>
 
-			{shipment_data?.source ? <Tags size="sm">{sourceText}</Tags> : null}
+			{shipment_data?.source ? <Pill size="sm" color="blue">{sourceText}</Pill> : null}
+
 			{shipment_data?.is_cogo_assured ? (
 				<img
 					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-assured.svg"
 					alt="cogo-assured"
-					width="8em"
-					height="2em"
-					style={{ marginLeft: '20px' }}
+					height={16}
 				/>
 			) : null}
 

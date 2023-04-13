@@ -1,14 +1,10 @@
 const serviceCancellationStates = ['init', 'awaiting_service_provider_confirmation', 'confirmed_by_service_provider'];
-const showCancellationStakeholders = [
-	'superadmin',
-	'service_ops1',
-	'service_ops2',
-	'service_ops3',
-	'prod_process owner',
-];
+
+const showCancellationStakeholders = ['superadmin', 'booking_desk', 'document_desk', 'costbooking_ops'];
+
 const serviceCompletedOrCancelled = ['completed', 'cancelled'];
 
-export default function getCanCancelService({ shipment_data, user_data, state }) {
+export default function getCanCancelService({ shipment_data, user_data, state, activeStakeholder }) {
 	if (user_data?.email === 'ajeet@cogoport.com') {
 		return true;
 	}
@@ -16,7 +12,7 @@ export default function getCanCancelService({ shipment_data, user_data, state })
 		return true;
 	}
 
-	const userCanCancel = shipment_data?.stakeholder_types?.some((e) => showCancellationStakeholders.includes(e));
+	const userCanCancel = showCancellationStakeholders.includes(activeStakeholder);
 	const serviceInCancellationState = serviceCancellationStates.includes(state);
 
 	return serviceInCancellationState && userCanCancel;

@@ -26,7 +26,7 @@ function EditCancelService({ serviceData = {} }) {
 	const { state, trade_type, service_type } = serviceData || {};
 
 	const user_data = useSelector((({ profile }) => profile?.user));
-	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
+	const { shipment_data, servicesList, activeStakeholder } = useContext(ShipmentDetailContext);
 
 	const servicesData = (servicesList || []).filter((service) => service.service_type === service_type);
 
@@ -35,9 +35,9 @@ function EditCancelService({ serviceData = {} }) {
 		setShowPopover(false);
 	};
 
-	actionButtons[0].show = getCanEditSupplier({ shipment_data, user_data, state });
-	actionButtons[1].show = getCanEditParams({ shipment_data, user_data, serviceData });
-	actionButtons[2].show = getCanCancelService({ shipment_data, user_data, state });
+	actionButtons[0].show = getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder });
+	actionButtons[1].show = getCanEditParams({ shipment_data, user_data, serviceData, activeStakeholder });
+	actionButtons[2].show = getCanCancelService({ shipment_data, user_data, state, activeStakeholder });
 
 	if (!actionButtons.some((actionButton) => actionButton.show)) {
 		return null;
