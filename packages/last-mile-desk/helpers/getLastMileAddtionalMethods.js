@@ -1,4 +1,6 @@
-const getLastMileAddtionalMethods = ({ activeTab }) => {
+const getLastMileAddtionalMethods = ({ lastMileContextValues }) => {
+	const { activeTab } = lastMileContextValues;
+
 	const additional_methods = ['pagination'];
 	if (['vessel_arrived', 'container_gated_out'].includes(activeTab)) {
 		additional_methods.push('documents');

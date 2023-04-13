@@ -4,6 +4,7 @@ import styles from './styles.module.css';
 
 function RequiredDocs({ item }) {
 	const { documents = [] } = item || {};
+
 	return (
 		<div className={styles.container}>
 			{documents?.map((doc) => {
