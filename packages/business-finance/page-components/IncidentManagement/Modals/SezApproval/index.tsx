@@ -2,49 +2,54 @@
 import { Textarea, Modal, Button } from '@cogoport/components';
 import { useEffect, useState } from 'react';
 
-import useApproveConcor from '../../apisModal/useApproveConcor';
+import useSezApproveReject from '../../apisModal/useSezApproveReject';
 import ViewButton from '../../common/ViewButton';
 
 import styles from './styles.module.css';
 
-interface ConcorInterface {
-	bookingProof: string[],
-	quotation: string[],
-	sid: string,
-	totalBuyPrice: number | string,
+interface SezInterface {
+	name?: string,
+	pincode?: number | string,
+	taxNumber?: number | string,
+	address?: string,
+	documentUrls?: string[],
+}
+
+interface Org {
+	businessName?:string,
+	tradePartyType?:string,
 }
 
 interface Props {
-	concorData: ConcorInterface,
+	sezRequest: SezInterface,
 	id: string,
 	refetch:()=>void,
+	organization?:Org,
 }
 
-function SezApproval({ concorData, id, refetch }:Props) {
-	console.log('concorDAta-', concorData);
-
+function SezApproval({ sezRequest, organization, id, refetch }:Props) {
 	const [showModal, setShowModal] = useState(false);
 	const [inputValues, setInputValues] = useState({
 		remarks: null,
 	});
 
-	const { name, pincode, taxNumber, address, documentUrls } = concorData || {};
+	const { name, pincode, taxNumber, address, documentUrls } = sezRequest || {};
+	const { businessName:organizationName, tradePartyType = '' } = organization || {};
 
-	// const { useOnAction:OnAction, loading } = useApproveConcor({
-	// 	refetch,
-	// 	setShowModal,
-	// 	id,
-	// 	bookingProof,
-	// 	quotation,
-	// 	sid,
-	// 	totalBuyPrice,
-	// });
+	const { useOnAction:OnAction, loading } = useSezApproveReject({
+		refetch,
+		setShowModal,
+		id,
+		sezRequest,
+	});
 
-	const concorDetails = [
-		{ title: 'Name', value: <div>{name}</div> },
-		{ title: 'Address', value: <div>{address}</div> },
-		{ title: 'Pincode', value: <div>{pincode}</div> },
-		{ title: 'Tax Number', value: <div>{taxNumber}</div> },
+	const details = [
+		{ title: 'Organization Name', value: <div>{organizationName || ''}</div> },
+		{ title: 'Trade Party Type', value: <div>{tradePartyType?.replaceAll('_', ' ') || ''}</div> },
+		{ title: 'Business Name', value: <div>{name || ''}</div> },
+		{ title: 'Bill Address', value: <div>{address || ''}</div> },
+		{ title: 'Pincode', value: <div>{pincode || ''}</div> },
+		{ title: 'Tax Number', value: <div>{taxNumber || ''}</div> },
 		{
 			title : 'Documents',
 			value : <div>
@@ -53,7 +58,7 @@ function SezApproval({ concorData, id, refetch }:Props) {
 						<a
 							target="_blank"
 							href={item}
-							style={{ color: '#0000EE', textDecoration: 'underline' }}
+							className={styles.file_link}
 							rel="noreferrer"
 						>
 							{item?.split('/')?.pop()}
@@ -64,17 +69,12 @@ function SezApproval({ concorData, id, refetch }:Props) {
 		},
 	];
 
-	// const isDisabled = loading || !inputValues.remarks;
+	const isDisabled = loading || !inputValues.remarks;
 
 	useEffect(() => {
 		if (!showModal) {
 			setInputValues({
-				utr           : null,
-				paymentProof  : null,
-				remarks       : null,
-				bankAccountNo : null,
-				bankId        : null,
-				bankname      : null,
+				remarks: null,
 			});
 		}
 	}, [showModal]);
@@ -94,7 +94,7 @@ function SezApproval({ concorData, id, refetch }:Props) {
 				>
 					<Modal.Header title="Sez Approval" />
 					<Modal.Body>
-						{concorDetails.map((detail) => (
+						{details?.map((detail) => (
 							<div key={detail.title} className={styles.flex}>
 								<div className={styles.title}>
 									{detail.title}
@@ -117,7 +117,7 @@ function SezApproval({ concorData, id, refetch }:Props) {
 									size="sm"
 									placeholder="Enter Remarks Here..."
 									onChange={(value: string) => setInputValues({ ...inputValues, remarks: value })}
-									style={{ height: '100px', marginBottom: '12px' }}
+									className={styles.text_area}
 								/>
 							</div>
 						</div>
@@ -128,12 +128,23 @@ function SezApproval({ concorData, id, refetch }:Props) {
 							<Button
 								size="md"
 								style={{ marginRight: '8px' }}
-								// disabled={isDisabled}
+								disabled={isDisabled}
 								onClick={() => {
-									// OnAction(inputValues);
+									OnAction({ inputValues, status: 'APPROVED' });
 								}}
 							>
 								Approve
+							</Button>
+							<Button
+								themeType="secondary"
+								size="md"
+								style={{ marginRight: '8px' }}
+								disabled={isDisabled}
+								onClick={() => {
+									OnAction({ inputValues, status: 'REJECTED' });
+								}}
+							>
+								Reject
 							</Button>
 						</div>
 					</Modal.Footer>

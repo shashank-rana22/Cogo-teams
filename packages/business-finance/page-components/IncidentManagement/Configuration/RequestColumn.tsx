@@ -221,7 +221,8 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 					{
 						type === 'SEZ_APPROVAL' && (
 							<SezApproval
-								concorData={sezRequest}
+								sezRequest={sezRequest}
+								organization={organization}
 								id={id}
 								refetch={getIncidentData}
 							/>

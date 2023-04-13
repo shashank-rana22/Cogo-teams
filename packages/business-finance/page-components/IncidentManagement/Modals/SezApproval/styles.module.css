@@ -37,7 +37,13 @@
 	font-weight: 600;
 }
 
-.link {
-	color: blue !important;
-	text-decoration: underline !important;
+.text_area{
+	height: 100px;
+	margin-bottom: 12px;
+	padding: 4px;
+}
+
+.file_link{
+	color: #0000EE;
+	text-decoration: underline;
 }
