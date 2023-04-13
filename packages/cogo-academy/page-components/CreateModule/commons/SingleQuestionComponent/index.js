@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Radio, Button } from '@cogoport/components';
 import { SelectController, InputController, ChipsController } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 
@@ -46,8 +46,8 @@ function SingleQuestionComponent({
 		setEditorValue,
 		...restProps,
 	});
-	console.log(subjectiveEditorValue.toString('html'));
-	console.log(questionTypeWatch);
+	// console.log(subjectiveEditorValue.toString('html'));
+	// console.log(questionTypeWatch);
 	return (
 		<div className={styles.container}>
 			<div
@@ -63,18 +63,19 @@ function SingleQuestionComponent({
 					control={control}
 					name={`${name}.${index}.question_text`}
 				/>
+				{ questionTypeWatch !== 'subjective' && (
+					<SelectController
+						className={`${styles.question_type} ${
+							errors?.question_type
+								? styles.question_type_err
+								: null
+						}`}
+						{...NAME_CONTROL_MAPPING.question_type}
+						control={control}
+						name={`${name}.${index}.question_type`}
+					/>
+				)}
 
-				<SelectController
-					className={`${styles.question_type} ${
-						errors?.question_type
-							? styles.question_type_err
-							: null
-					}`}
-					{...NAME_CONTROL_MAPPING.question_type}
-					control={control}
-					name={`${name}.${index}.question_type`}
-					disabled={questionTypeWatch === 'subjective'}
-				/>
 			</div>
 			{
 				questionTypeWatch !== 'subjective' ? (
@@ -113,60 +114,70 @@ function SingleQuestionComponent({
 				) : null
 			}
 
-			{questionTypeWatch !== 'case_study' ? (
-				<div className={styles.difficulty_level}>
-					<div className={styles.label}>Set Difficulty level</div>
+			<div className={styles.difficulty_level}>
+				{
+					questionTypeWatch !== 'case_study' ? (
+						<div className={styles.diff_level}>
+							<div className={styles.label}>Set Difficulty level</div>
 
-					<div className={styles.control}>
-						<ChipsController
-							control={control}
-							{...NAME_CONTROL_MAPPING.difficulty_level}
-							name={`${name}.${index}.difficulty_level`}
-						/>
-						{errors?.difficulty_level && <div className={styles.error_msg}>This is required</div>}
-					</div>
-					<div>
-						<div>
-							Set Max Marks
-							<InputController
-								control={control}
-								name={`${name}.${index}.max_marks`}
-								placeholder="Marks"
-							/>
+							<div className={styles.control}>
+								<ChipsController
+									control={control}
+									{...NAME_CONTROL_MAPPING.difficulty_level}
+									name={`${name}.${index}.difficulty_level`}
+								/>
+								{errors?.difficulty_level && <div className={styles.error_msg}>This is required</div>}
+							</div>
 						</div>
-						<div>
+					) : null
+				}
+				{
+					questionTypeWatch === 'subjective' ? (
+						<div style={{ marginTop: '12px' }}>
 							Set Character Limit
 							<InputController
 								control={control}
 								name={`${name}.${index}.character_limit`}
 								placeholder="No Limit"
+								type="number"
 							/>
 						</div>
-					</div>
-				</div>
-			) : null}
+					) : null
+				}
 
-			<div className={styles.textarea_container}>
-				<RichTextEditor
-					value={
-					questionTypeWatch === 'stand_alone'
-						? editorValue.question_0_explanation
-						: editorValue[`case_questions_${index}_explanation`]
-					}
-					onChange={handleChangeEditorValue}
-					required
-					id="body-text"
-					name="bodyText"
-					type="string"
-					multiline
-					variant="filled"
-					rootStyle={{
-						zIndex    : 0,
-						position  : 'relative',
-						minHeight : '200px',
-					}}
-				/>
 			</div>
+
+			{
+	questionTypeWatch === 'subjective' && (
+		<div>
+			<Radio name="upload" label="Option of Upload Answer" />
+		</div>
+	)
+}
+
+			{			questionTypeWatch !== 'subjective' && (
+				<div className={styles.textarea_container}>
+					<RichTextEditor
+						value={
+				questionTypeWatch === 'stand_alone'
+					? editorValue.question_0_explanation
+					: editorValue[`case_questions_${index}_explanation`]
+				}
+						onChange={handleChangeEditorValue}
+						required
+						id="body-text"
+						name="bodyText"
+						type="string"
+						multiline
+						variant="filled"
+						rootStyle={{
+							zIndex    : 0,
+							position  : 'relative',
+							minHeight : '200px',
+						}}
+					/>
+				</div>
+			)}
 
 			{questionTypeWatch === 'case_study' && mode !== 'view' && !isEmpty(editDetails) ? (
 				<div className={styles.button_container}>

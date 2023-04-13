@@ -7,6 +7,8 @@ function Footer({
 	currentQuestion,
 	total_question,
 	fetchQuestions,
+	subjectiveAnswer,
+	setSubjectiveAnswer,
 	loading: getLoading,
 	...restProps
 }) {
@@ -18,6 +20,8 @@ function Footer({
 		currentQuestion,
 		total_question,
 		fetchQuestions,
+		subjectiveAnswer,
+		setSubjectiveAnswer,
 		...restProps,
 	});
 
