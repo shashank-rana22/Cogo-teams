@@ -7,7 +7,7 @@ import toastApiError from '../utils/toastApiError';
 function useListShipmentPendingTasks() {
 	const [selectedTaskId, setSelectedTaskId] = useState(null);
 	const [hideCompletedTasks, setHideCompletedTasks] = useState(false);
-	const [showMyTasks, setShowMyTasks] = useState(false);
+	const [showMyTasks, setShowMyTasks] = useState(true);
 
 	const { shipment_data, isGettingShipment } = useContext(ShipmentDetailContext);
 	const { id: shipment_id } = shipment_data || '';
@@ -63,6 +63,7 @@ function useListShipmentPendingTasks() {
 		tasksList,
 		completedTaskCount,
 		shipment_data,
+		hideCompletedTasks,
 		setHideCompletedTasks,
 		handleClick,
 		setSelectedTaskId,

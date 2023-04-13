@@ -5,7 +5,7 @@ import { IcMTaskCompleted, IcMTaskNotCompleted } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useContext } from 'react';
 
-import CargoDetails from '../../../../../../../common/CargoDetails';
+import CargoDetails from '../../../../CargoDetails';
 
 import styles from './styles.module.css';
 

@@ -1,4 +1,4 @@
-import useGetTaskConfig from '../../../../../hooks/useGetTaskConfig';
+import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';

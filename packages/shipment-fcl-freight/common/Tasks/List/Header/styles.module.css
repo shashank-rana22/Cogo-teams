@@ -14,7 +14,7 @@
 	color: red;
 }
 
-.left_panel {
+.left_content {
 	font-size: 18px;
 	font-weight: 600;
 	line-height: 21px;
@@ -24,7 +24,17 @@
 	}
 }
 
-.right_panel {
+.right_content {
 	display: flex;
 	justify-content: space-between;
+}
+
+.toggle_container{
+	display: flex;
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 16px;
+	text-align: center;
+	color: #393f70;
+	margin-left: 22px;
 }

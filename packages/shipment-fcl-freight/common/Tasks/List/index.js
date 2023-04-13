@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 
-import useListShipmentPendingTasks from '../../../../../hooks/useListShipmentPendingTasks';
+import useListShipmentPendingTasks from '../../../hooks/useListShipmentPendingTasks';
 import TaskCard from '../TaskCard';
 
 import Card from './Card';
@@ -11,8 +11,8 @@ import styles from './styles.module.css';
 function List() {
 	const {
 		count, completedTaskCount, tasksList, loading,
-		setHideCompletedTasks, handleClick, selectedTaskId, setSelectedTaskId,
-		shipment_data,
+		hideCompletedTasks, setHideCompletedTasks, handleClick, selectedTaskId,
+		setSelectedTaskId, shipment_data, showMyTasks, setShowMyTasks,
 	} = useListShipmentPendingTasks();
 
 	if (loading) {
@@ -33,7 +33,10 @@ function List() {
 			<Header
 				count={count}
 				completedTaskCount={completedTaskCount}
+				hideCompletedTasks={hideCompletedTasks}
 				setHideCompletedTasks={setHideCompletedTasks}
+				showMyTasks={showMyTasks}
+				setShowMyTasks={setShowMyTasks}
 			/>
 
 			{

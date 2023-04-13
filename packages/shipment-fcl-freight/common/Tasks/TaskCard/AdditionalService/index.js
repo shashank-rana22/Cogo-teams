@@ -2,9 +2,9 @@ import { Loader } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import React, { useState, useContext } from 'react';
 
-import AddRate from '../../../../../../common/AdditionalServices/components/AddRate';
-import getStaus from '../../../../../../common/AdditionalServices/components/List/ItemAdded/get_status';
-import useListAdditionalServices from '../../../../../../hooks/useListAdditionalServices';
+import useListAdditionalServices from '../../../../hooks/useListAdditionalServices';
+import AddRate from '../../../AdditionalServices/components/AddRate';
+import getStaus from '../../../AdditionalServices/components/List/ItemAdded/get_status';
 
 function AdditionsService({
 	task = {},

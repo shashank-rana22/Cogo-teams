@@ -2,8 +2,8 @@ import { Button, Toast } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import useListDocuments from '../../../../../../hooks/useListDocuments';
-import useUpdateShipmentDocuments from '../../../../../../hooks/useUpdateShipmentDocuments';
+import useListDocuments from '../../../../hooks/useListDocuments';
+import useUpdateShipmentDocuments from '../../../../hooks/useUpdateShipmentDocuments';
 
 import styles from './styles.module.css';
 
