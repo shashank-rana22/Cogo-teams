@@ -22,12 +22,12 @@ function CancelAdditionalService({
 		cancelAdditionalService(payload);
 	};
 
+	const closeModal = () => setShowCancel(false);
+
 	return showCancel ? (
 		<Modal
 			show
-			onClose={() => {
-				setShowCancel(false);
-			}}
+			onClose={closeModal}
 			showCloseIcon={!loading}
 			closeOnOuterClick={false}
 		>
@@ -45,9 +45,7 @@ function CancelAdditionalService({
 				<Button
 					themeType="secondary"
 					style={{ marginRight: '12px' }}
-					onClick={() => {
-						setShowCancel(false);
-					}}
+					onClick={closeModal}
 					disabled={loading}
 				>
 					Cancel

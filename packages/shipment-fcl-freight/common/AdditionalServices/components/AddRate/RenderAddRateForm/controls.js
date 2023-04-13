@@ -61,17 +61,28 @@ const controls = ({ serviceData }) => {
 		{
 			name        : 'alias',
 			label       : 'Alias (Optional)',
-			type        : 'input',
+			type        : 'text',
 			placeholder : 'Enter Alias (Only if required)',
 			size        : 'sm',
 		},
 		{
 			name        : 'service_provider_id',
 			label       : 'Service provider',
-			type        : 'async-select',
+			type        : 'asyncSelect',
 			placeholder : 'Select Service Provider',
+			asyncKey    : 'organizations',
 			rules       : { required: 'Service Provider is required' },
-			size        : 'sm',
+			params      : {
+				filters: {
+					account_type : 'service_provider',
+					kyc_status   : 'verified',
+					service:
+						serviceData?.service_type === 'rail_domestic_freight_service'
+							? serviceData?.service_type?.split('_', 3)?.join('_')
+							: serviceData?.service_type?.split('_', 2)?.join('_'),
+				},
+			},
+			size: 'sm',
 		},
 	];
 
