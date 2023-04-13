@@ -57,7 +57,7 @@ const useCreateQuestion = ({
 		editorValue,
 	});
 
-	const { updateStandAloneTestQuestion } = useUpdateStandAloneTestQuestion({
+	const { updateStandAloneTestQuestion, loading: updateStandAloneLoading } = useUpdateStandAloneTestQuestion({
 		questionSetId,
 		getTestQuestionTest,
 		setEditDetails,
@@ -220,6 +220,7 @@ const useCreateQuestion = ({
 		onSubmit,
 		editorValue,
 		setEditorValue,
+		updateStandAloneLoading,
 		...restFormProps,
 	};
 };
