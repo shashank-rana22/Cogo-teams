@@ -2328,6 +2328,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'list_organization_assets',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_asset',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization_asset',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	support_crm: [
 		{
