@@ -1,11 +1,12 @@
 import { useEffect, useRef } from 'react';
 
-export default function useCallApi({ listShipments, filters, authParams, activeTab, selected_agent_id }) {
-	const debounceQuery = useRef({ q: filters.q });
+export default function useCallApi({ listShipments, filters, authParams, activeTab, selected_agent_id, pathname }) {
+	const debounceQuery = useRef({ q: filters.q, pathname });
 
 	useEffect(() => {
 		const [, scope, view_type] = (authParams || '').split(':');
-		if (!scope) {
+
+		if (pathname !== debounceQuery.current.pathname) {
 			return;
 		}
 
@@ -22,5 +23,5 @@ export default function useCallApi({ listShipments, filters, authParams, activeT
 			'booking_desk_stored_values',
 			JSON.stringify({ filters, activeTab, scopeFilters: { scope, view_type, selected_agent_id } }),
 		);
-	}, [listShipments, activeTab, filters, authParams, selected_agent_id]);
+	}, [listShipments, activeTab, filters, authParams, selected_agent_id, pathname]);
 }

@@ -1171,6 +1171,16 @@ const saas = {
 			service_name : 'cogopoint',
 		},
 		{
+			api          : 'list_cogopoint_milestones',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'get_cogopoint_user_profile',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
 			api          : 'get_cogopoint_history_detail',
 			access_type  : 'private',
 			service_name : 'cogopoint',
@@ -1182,6 +1192,16 @@ const saas = {
 		},
 		{
 			api          : 'list_user_cogopoint_histories',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogopoint_earnables',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogopoint_ledgers',
 			access_type  : 'private',
 			service_name : 'cogopoint',
 		},
@@ -1952,7 +1972,6 @@ const saas = {
 			module      : 'trader-eligibility-check',
 			feature     : 'trader-eligibility-check',
 		},
-
 	],
 	app_saas_order_history: [
 		{
@@ -1966,6 +1985,72 @@ const saas = {
 			access_type : 'private',
 			module      : 'order-history',
 			feature     : 'order-history',
+		},
+	],
+	app_saas_import_export_doc: [
+		{
+			api          : 'saas_get_user_quota_usage',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'get_saas_bill_status',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api         : 'post_saas_trade_engine_document_draft',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
+			api         : 'get_saas_bill_product_codes',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
+			api         : 'get_saas_trade_engine_service_rates',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
+			api         : 'post_saas_payment',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
+			api         : 'get_saas_trade_engine',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
+			api         : 'post_saas_trade_engine',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
+			api         : 'get_saas_trade_engine_verify_six_digit',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
+			api         : 'post_saas_trade_engine_hs_engine',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
+			api         : 'get_saas_trade_engine_pdf',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
 		},
 	],
 

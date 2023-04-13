@@ -34,7 +34,7 @@ function SopAndPoc() {
 			{show
 				&& (
 					<Modal
-						show={show}
+						show
 						placement="top-right"
 						size="md"
 						scroll={false}

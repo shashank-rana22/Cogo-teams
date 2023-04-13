@@ -33,10 +33,10 @@ const renderImage = (loading, data) => {
 };
 
 const renderKPI = (kpi) => (
-	<div>
+	<>
 		<div className={styles.kpi_text}>Current KPI</div>
 		<div className={styles.kpi_value}>{kpi || '---'}</div>
-	</div>
+	</>
 );
 
 const colorScheme = (rating) => kpiColorMapping[rating?.toString()] || '#B3D5FB';

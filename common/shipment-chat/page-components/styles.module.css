@@ -1,6 +1,9 @@
 .chat_container {
 	z-index: 100;
 	transition: 150ms ease-in-out;
+	position: fixed;
+    right: 20px;
+    top: 20px;
 }
 
 .chat_icon {

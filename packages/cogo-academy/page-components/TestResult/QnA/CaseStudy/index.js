@@ -6,7 +6,7 @@ function CaseStudy({ case_study, user_name }) {
 	const { questions_description: { description = '' } = {}, questions } = case_study || {};
 
 	return (
-		<div>
+		<div className={styles.container}>
 			<div className={styles.description}>{description}</div>
 
 			{(questions || []).map((question, index) => (

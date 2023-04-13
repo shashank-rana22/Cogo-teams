@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 
 import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
 
-import styles from './styles.module.css';
-
 function CancelAdditionalService({
 	id = '',
 	showCancel = false,
@@ -12,10 +10,6 @@ function CancelAdditionalService({
 	refetch = () => {},
 }) {
 	const [remarkValues, setRemarkValues] = useState('');
-
-	const onOuterClick = () => {
-		setShowCancel(false);
-	};
 
 	const { cancelAdditionalService, loading } = useUpdateShipmentAdditionalService({ refetch });
 
@@ -30,39 +24,38 @@ function CancelAdditionalService({
 
 	return showCancel ? (
 		<Modal
-			show={showCancel}
+			show
 			onClose={() => {
 				setShowCancel(false);
 			}}
-			closable={false}
-			onOuterClick={onOuterClick}
+			showCloseIcon={!loading}
+			closeOnOuterClick={false}
 		>
 			<Modal.Header title="Cancel Service" />
 			<Modal.Body>
-				<div className={styles.container}>
-					<div style={{ height: '40vh' }}>
-						<Textarea
-							value={remarkValues}
-							onChange={(e) => setRemarkValues(e)}
-							placeholder="State reason for cancellation"
-						/>
-					</div>
-					<div className={styles.button_container}>
-						<Button
-							themeType="secondary"
-							style={{ marginRight: '6px' }}
-							onClick={() => {
-								setShowCancel(false);
-							}}
-						>
-							Cancel
-						</Button>
-						<Button onClick={onSubmit} disabled={loading} themeType="primary">
-							Submit
-						</Button>
-					</div>
-				</div>
+				<Textarea
+					value={remarkValues}
+					onChange={(e) => setRemarkValues(e)}
+					placeholder="State reason for cancellation"
+					style={{ height: '100px' }}
+				/>
+
 			</Modal.Body>
+			<Modal.Footer>
+				<Button
+					themeType="secondary"
+					style={{ marginRight: '12px' }}
+					onClick={() => {
+						setShowCancel(false);
+					}}
+					disabled={loading}
+				>
+					Cancel
+				</Button>
+				<Button onClick={onSubmit} disabled={loading} themeType="primary">
+					Submit
+				</Button>
+			</Modal.Footer>
 		</Modal>
 	) : null;
 }

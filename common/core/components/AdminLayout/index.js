@@ -3,7 +3,7 @@ import getSideBarConfigs from '@cogoport/navigation-configs/side-bar';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
-import AnnouncementOnRefresh from './AnnouncementOnRefresh';
+import AnnouncementModal from './Announcements/AnnouncementModal';
 import Navbar from './Navbar';
 import styles from './styles.module.css';
 import Topbar from './Topbar';
@@ -72,7 +72,7 @@ function AdminLayout({
 				/>
 			) : null}
 			<VoiceCall />
-			<AnnouncementOnRefresh data={announcements} />
+			<AnnouncementModal data={announcements} />
 		</div>
 	);
 }

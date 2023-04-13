@@ -12,7 +12,6 @@ function BlContainersMapping({
 	setMappingModal = () => { },
 	refetch = () => {},
 	containerDetails,
-	mappingModal = false,
 }) {
 	const {
 		errors, control, register,
@@ -39,10 +38,12 @@ function BlContainersMapping({
 
 	return (
 		<Modal
-			show={mappingModal}
+			show
 			onClose={() => {
 				setMappingModal(false);
 			}}
+			showCloseIcon={!loading}
+			closeOnOuterClick={false}
 			className={styles.custom_modal}
 		>
 			<Modal.Header title="BL Container Mapping" />
@@ -58,6 +59,7 @@ function BlContainersMapping({
 										control={control}
 										{...register(`bl_mappings.${index}.bl_number`)}
 										size="sm"
+										disabled
 									/>
 								</div>
 								<div className={styles.input_container}>
