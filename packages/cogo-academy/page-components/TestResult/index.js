@@ -30,7 +30,7 @@ function TestResult() {
 		},
 	}, { manual: false });
 
-	const { data: summaryData } = data || {};
+	const { data: summaryData = {} } = data || {};
 
 	const handleGoBack = () => {
 		back();
