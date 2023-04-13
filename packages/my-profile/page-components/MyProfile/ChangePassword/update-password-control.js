@@ -1,5 +1,3 @@
-// const PASSWORD_PATTERN =	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm;
-
 import validatePassword from '../PasswordValidator/utils/validatePassword';
 
 const updatePasswordControls = () => [
