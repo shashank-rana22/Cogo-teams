@@ -1,7 +1,8 @@
-import { Pagination, Tooltip } from '@cogoport/components';
+import { Pagination, Tooltip, Tabs, TabPanel } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
+import Announcements from '../../Announcements';
 import History from '../History';
 import QuestionList from '../QuestionList';
 import Header from '../QuestionList/Header';
@@ -27,7 +28,13 @@ function TopicList({
 	faqNotificationData = {},
 	refetch = () => {},
 	from = 'cogo_assist',
+	setShow = () => {},
+	announcementProps = {},
+	selectedAnnouncement = '',
+
 }) {
+	const [activeTab, setActiveTab] = useState('faq');
+
 	const {
 		search,
 		setSearch,
@@ -46,9 +53,42 @@ function TopicList({
 		setShowNotificationContent,
 	} = useTopicList();
 
+	const {
+		announcementModalData = {},
+		setAnnouncementModalData = () => {},
+		searchAnnouncement = '',
+		setSearchAnnouncement = () => {},
+		setParams = () => {},
+	} = announcementProps;
+
+	const announcementHeaderProps = {
+		announcementModalData,
+		setAnnouncementModalData,
+		setShow,
+		searchAnnouncement,
+		setSearchAnnouncement,
+	};
+
 	useEffect(() => {
 		fetchFaqNotification();
 	}, [fetchFaqNotification, showNotificationContent]);
+
+	useEffect(() => {
+		if (from === 'test_module') return;
+		setAnnouncementModalData({});
+		setSearch('');
+		setSearchAnnouncement('');
+		if (activeTab === 'faq') {
+			setParams({
+				page    : 1,
+				filters : {
+					q                 : '',
+					toggle            : false,
+					announcement_type : '',
+				},
+			});
+		}
+	}, [activeTab, from, setAnnouncementModalData, setParams, setSearch, setSearchAnnouncement]);
 
 	const render = () => {
 		if (topic) {
@@ -177,11 +217,31 @@ function TopicList({
 		return render();
 	};
 
+	const TABS_MAPPING = [
+		{
+			name      : 'faq',
+			title     : 'FAQs',
+			component : renderQuestionList,
+			props     : {},
+		},
+		{
+			name      : 'announcements',
+			title     : 'Announcements',
+			component : Announcements,
+			props     : {
+				announcementProps,
+				selectedAnnouncement,
+			},
+		},
+	];
+
 	return (
 		<div className={styles.container}>
 			<Header
+				activeTab={activeTab}
 				search={search}
 				setSearch={setSearch}
+				announcementHeaderProps={announcementHeaderProps}
 				topic={topic}
 				setTopic={setTopic}
 				question={question}
@@ -195,7 +255,26 @@ function TopicList({
 				from={from}
 			/>
 
-			{renderQuestionList()}
+			{showHistory || from === 'test_module' ? (
+				renderQuestionList()
+			) : (
+				<Tabs
+					activeTab={activeTab}
+					onChange={setActiveTab}
+					fullWidth
+					themeType="primary"
+				>
+					{TABS_MAPPING.map((tabItem) => {
+						const { name, title, component: Component, props } = tabItem;
+
+						return (
+							<TabPanel key={name} name={name} title={title}>
+								<Component {...props} />
+							</TabPanel>
+						);
+					})}
+				</Tabs>
+			)}
 		</div>
 	);
 }
