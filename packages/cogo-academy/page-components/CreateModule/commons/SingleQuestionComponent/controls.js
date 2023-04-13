@@ -18,7 +18,7 @@ const getControls = ({ mode }) => [
 			{ label: 'Multi Correct', value: 'multi_correct' },
 			{ label: 'Subjective Answer', value: 'subjective_answer' },
 		],
-		rules: { required: 'This is required' },
+		// rules: { required: 'This is required' },
 	},
 	{
 		name        : 'options',
