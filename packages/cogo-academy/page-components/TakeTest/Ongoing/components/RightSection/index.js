@@ -8,44 +8,22 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 const COMPONENT_MAPPING = {
-	questions   : Body,
-	cogo_assist : CogoAssist,
+	questions: {
+		Component : Body,
+		title     : 'Questions',
+	},
+	cogo_assist: {
+		Component : CogoAssist,
+		title     : 'Cogo Assist',
+	},
 };
 
 function RightSection({
-	data = {},
-	loading,
-	setCurrentQuestion,
-	currentQuestion,
-	fetchQuestions,
+	setShowSubmitTestModal,
 	setShowInstructionsModal,
 	setActiveState,
-	setShowSubmitTestModal,
-	total_question_count,
-	user_appearance,
-	setSubQuestion,
 }) {
 	const [activeTab, setActiveTab] = useState('questions');
-
-	const tabPropsProps = {
-		questions: {
-			title : 'Questions',
-			props : {
-				data,
-				loading,
-				setCurrentQuestion,
-				currentQuestion,
-				fetchQuestions,
-				total_question_count,
-				user_appearance,
-				setSubQuestion,
-			},
-		},
-		cogo_assist: {
-			title : 'Cogo Assist',
-			props : {},
-		},
-	};
 
 	return (
 		<div className={styles.container}>
@@ -59,13 +37,12 @@ function RightSection({
 					onChange={setActiveTab}
 				>
 					{Object.keys(COMPONENT_MAPPING).map((key) => {
-						const ActiveComponent = COMPONENT_MAPPING[key];
-						const { title, props } = tabPropsProps[key];
+						const { Component: ActiveComponent, title } = COMPONENT_MAPPING[key];
 
 						return (
 							<TabPanel key={key} name={key} title={title}>
 								<div className={styles.component_container}>
-									<ActiveComponent {...props} />
+									<ActiveComponent />
 								</div>
 							</TabPanel>
 						);

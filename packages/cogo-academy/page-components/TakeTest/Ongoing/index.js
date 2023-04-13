@@ -1,5 +1,5 @@
 import { Toast } from '@cogoport/components';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 import handleMinimizeTest from '../utils/handleMinimizeTest';
 
@@ -7,6 +7,7 @@ import LeftSection from './components/LeftSection';
 import LeaveTest from './components/LeftSection/Footer/LeaveTest';
 import EndTimer from './components/LeftSection/Header/Timer/EndTimer';
 import WarningModal from './components/LeftSection/WarningModal';
+import { QuestionStatsContext } from './components/QuestionStatsContext';
 import RightSection from './components/RightSection';
 import SubmitTest from './components/RightSection/Footer/SubmitTest';
 import InstructionsModal from './components/RightSection/InstructionsModal';
@@ -29,7 +30,7 @@ function Ongoing({ testData, setActiveState, currentQuestionId, test_user_mappin
 		getUserTestQuestion,
 		loading,
 		start_time,
-		question_data,
+		question_data = {},
 		test_user_mapping_id,
 		total_question_count,
 		user_appearance = [],
@@ -87,6 +88,16 @@ function Ongoing({ testData, setActiveState, currentQuestionId, test_user_mappin
 			setCurrentQuestion(Number(page));
 		}
 	}, [currentQuestionId, page]);
+
+	const questionProps = useMemo(() => ({
+		total_question_count,
+		user_appearance,
+		setSubQuestion,
+		data           : question_data,
+		setCurrentQuestion,
+		currentQuestion,
+		fetchQuestions : getUserTestQuestion,
+	}), [currentQuestion, getUserTestQuestion, question_data, total_question_count, user_appearance]);
 
 	if (showTimeOverModal) {
 		return (
@@ -175,21 +186,15 @@ function Ongoing({ testData, setActiveState, currentQuestionId, test_user_mappin
 				/>
 			</div>
 
-			<div className={styles.right_container}>
-				<RightSection
-					data={question_data}
-					loading={loading}
-					currentQuestion={currentQuestion}
-					fetchQuestions={getUserTestQuestion}
-					setCurrentQuestion={setCurrentQuestion}
-					setShowSubmitTestModal={setShowSubmitTestModal}
-					setShowInstructionsModal={setShowInstructionsModal}
-					setActiveState={setActiveState}
-					total_question_count={total_question_count}
-					user_appearance={user_appearance}
-					setSubQuestion={setSubQuestion}
-				/>
-			</div>
+			<QuestionStatsContext.Provider value={questionProps}>
+				<div className={styles.right_container}>
+					<RightSection
+						setShowSubmitTestModal={setShowSubmitTestModal}
+						setShowInstructionsModal={setShowInstructionsModal}
+						setActiveState={setActiveState}
+					/>
+				</div>
+			</QuestionStatsContext.Provider>
 		</div>
 	);
 }

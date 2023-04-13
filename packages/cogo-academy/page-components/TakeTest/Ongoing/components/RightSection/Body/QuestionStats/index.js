@@ -1,3 +1,7 @@
+import { useContext } from 'react';
+
+import { QuestionStatsContext } from '../../../QuestionStatsContext';
+
 import styles from './styles.module.css';
 
 const STATS_MAPPING = {
@@ -23,7 +27,12 @@ const STATS_MAPPING = {
 	},
 };
 
-function QuestionStats({ total_question_count, user_appearance = [] }) {
+function QuestionStats() {
+	const {
+		total_question_count,
+		user_appearance,
+	} = useContext(QuestionStatsContext);
+
 	let total_count = 0;
 
 	return (
