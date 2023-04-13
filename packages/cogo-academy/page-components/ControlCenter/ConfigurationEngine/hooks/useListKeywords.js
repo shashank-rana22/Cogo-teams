@@ -19,7 +19,7 @@ function useListKeywords({ searchKeyWord = '', sortType }) {
 		try {
 			await trigger({
 				params: {
-					page                 : keywordCurrentPage,
+					page                 : !query ? keywordCurrentPage : '1',
 					page_limit           : 10,
 					author_data_required : true,
 					filters              : { q: query, status: activeKeyword },
