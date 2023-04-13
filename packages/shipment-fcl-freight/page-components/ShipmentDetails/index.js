@@ -7,8 +7,8 @@ import useGetShipment from '../../hooks/useGetShipment';
 import { useStakeholderCheck } from '../../hooks/useStakeholderCheck';
 
 const Superadmin = dynamic(() => import('./StakeholdersView/Superadmin'), { ssr: false });
-const DKam = dynamic(() => import('./StakeholdersView/DKam'), { ssr: false });
-const Kam = dynamic(() => import('./StakeholdersView/Kam'), { ssr: false });
+const DKam = dynamic(() => import('./StakeholdersView/ConsigneeShipperBookingAgent'), { ssr: false });
+const Kam = dynamic(() => import('./StakeholdersView/BookingAgent'), { ssr: false });
 
 const shipment_additional_methods = ['main_service', 'documents'];
 
@@ -25,15 +25,14 @@ function ShipmentDetails() {
 	const { kamLoggedIn } = userLoggedIn({ orgIds, shipment_data, activeStakeholder });
 
 	switch (activeStakeholder) {
-		case 'Kam':
-			if (kamLoggedIn === 'ieKam') {
-				return <Kam get={get} />;
+		case 'booking_agent':
+			if (kamLoggedIn === 'importer_exporter_kam') {
+				return <Kam get={get} activeStakeholder="booking_agent" />;
 			}
-			return <DKam get={get} />;
-		case 'Superadmin':
-		case 'Admin':
-		case 'TechSuperadmin':
-			return <Superadmin get={get} />;
+			return <DKam get={get} activeStakeholder="consignee_shipper_booking_agent" />;
+		case 'superadmin':
+		case 'admin':
+			return <Superadmin get={get} activeStakeholder="superadmin" />;
 		default:
 			return (
 				<h1

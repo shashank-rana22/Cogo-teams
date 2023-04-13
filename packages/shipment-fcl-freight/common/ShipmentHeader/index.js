@@ -63,7 +63,7 @@ function ShipmentHeader() {
 					interactive
 					content={(
 						<div className={styles.tooltip}>
-							{activeStakeholder !== 'DKam'
+							{activeStakeholder !== 'consignee_shipper_booking_agent'
 								? importer_exporter?.business_name
 								: consignee_shipper?.business_name}
 						</div>
@@ -71,7 +71,7 @@ function ShipmentHeader() {
 				>
 					<div className={styles.business_name}>
 
-						{activeStakeholder !== 'DKam'
+						{activeStakeholder !== 'consignee_shipper_booking_agent'
 							? importer_exporter?.business_name
 							: consignee_shipper?.business_name}
 					</div>

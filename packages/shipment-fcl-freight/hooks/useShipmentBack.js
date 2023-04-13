@@ -3,7 +3,10 @@ import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect, useMemo } from 'react';
 
-import { backAllowed, eventListener, getRedirectNavMapping } from './helpers/getRedirectNavMapping';
+import {
+	backAllowed,
+	eventListener, getRedirectNavMapping,
+} from '../common/ShipmentInfo/helpers/getRedirectNavMapping';
 
 export default function useShipmentBack() {
 	const profileData = useSelector(({ profile }) => profile);

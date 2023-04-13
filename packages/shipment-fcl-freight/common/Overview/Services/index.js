@@ -73,7 +73,7 @@ function Services() {
 					</div>
 				</div>
 
-				{['Kam', 'DKam'].includes(activeStakeholder) ? (
+				{['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder) ? (
 					<div className={styles.upselling}>
 						{Object.keys(upsellServices).map((tradeType) => (upsellServices[tradeType]).map((service) => (
 							<AddNewService

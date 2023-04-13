@@ -30,13 +30,16 @@ function AddNewService({
 
 	let canUpsellForTradeType = true;
 
-	if (activeStakeholder === 'Kam' && primary_service?.trade_type !== upsellableService.trade_type) {
+	if (activeStakeholder === 'booking_agent' && primary_service?.trade_type !== upsellableService.trade_type) {
 		canUpsellForTradeType = false;
-	} else if (activeStakeholder === 'DKam' && primary_service?.trade_type === upsellableService.trade_type) {
+	} else if (activeStakeholder === 'consignee_shipper_booking_agent'
+	&& primary_service?.trade_type === upsellableService.trade_type) {
 		canUpsellForTradeType = false;
 	}
 
-	const haveToUpsell = servicesList?.length === 0 && upsellableService.service_type === 'fcl_freight_local_service';
+	const haveToUpsell = servicesList?.length === 0
+	&& upsellableService.service_type === 'fcl_freight_local_service'
+	&& primary_service?.bl_category === 'hbl';
 
 	useEffect(() => {
 		if (haveToUpsell) {

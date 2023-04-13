@@ -19,7 +19,7 @@ import styles from './styles.module.css';
 
 const services_additional_methods = ['stakeholder', 'service_objects'];
 
-function Superadmin({ get }) {
+function Superadmin({ get, activeStakeholder = '' }) {
 	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('overview');
 
@@ -27,8 +27,8 @@ function Superadmin({ get }) {
 
 	const { servicesGet } = useGetServices({
 		shipment_data,
-		additional_methods : services_additional_methods,
-		activeStakeholder  : 'Superadmin',
+		additional_methods: services_additional_methods,
+		activeStakeholder,
 	});
 
 	const { getTimeline } = useGetTimeLine({ shipment_data });
@@ -37,8 +37,8 @@ function Superadmin({ get }) {
 		...get,
 		...servicesGet,
 		...getTimeline,
-		activeStakeholder: 'Superadmin',
-	}), [get, servicesGet, getTimeline]);
+		activeStakeholder,
+	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
 	const handleClick = () => {
 		router.reload();

@@ -1,7 +1,7 @@
 import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
-import { Documents, Tracking } from '@cogoport/ocean-modules';
+import { Documents } from '@cogoport/ocean-modules';
 // import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
@@ -19,7 +19,7 @@ import styles from './styles.module.css';
 
 const services_additional_methods = ['stakeholder', 'service_objects', 'booking_requirement'];
 
-function Kam({ get }) {
+function ConsigneeShipperBookingAgent({ get, activeStakeholder = 'consignee_shipper_booking_agent' }) {
 	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('overview');
 
@@ -27,8 +27,8 @@ function Kam({ get }) {
 
 	const { servicesGet } = useGetServices({
 		shipment_data,
-		additional_methods : services_additional_methods,
-		activeStakeholder  : 'Kam',
+		additional_methods: services_additional_methods,
+		activeStakeholder,
 	});
 
 	const { getTimeline } = useGetTimeLine({ shipment_data });
@@ -37,8 +37,8 @@ function Kam({ get }) {
 		...get,
 		...servicesGet,
 		...getTimeline,
-		activeStakeholder: 'Kam',
-	}), [get, servicesGet, getTimeline]);
+		activeStakeholder,
+	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
 	const handleClick = () => {
 		router.reload();
@@ -103,9 +103,6 @@ function Kam({ get }) {
 						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
 							{/* <TimelineAndTask /> */}
 						</TabPanel>
-						<TabPanel name="sales_live_invoice" title="Sales Live Invoice">
-							{/* <SalesInvoice /> */}
-						</TabPanel>
 						<TabPanel name="documents" title="Documents">
 							<Documents />
 						</TabPanel>
@@ -116,9 +113,6 @@ function Kam({ get }) {
 								pre_subject_text={`${shipment_data?.serial_id}`}
 							/>
 						</TabPanel>
-						<TabPanel name="tracking" title="Tracking">
-							<Tracking shipmentData={shipment_data} />
-						</TabPanel>
 					</Tabs>
 				</div>
 			</div>
@@ -126,4 +120,4 @@ function Kam({ get }) {
 	);
 }
 
-export default Kam;
+export default ConsigneeShipperBookingAgent;

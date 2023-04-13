@@ -14,10 +14,10 @@ const userLoggedIn = ({ orgIds, shipment_data = {}, activeStakeholder = '' }) =>
 
 	let kamLoggedIn = '';
 
-	if (is_importer_exporter_kam && !is_consignee_shipper_kam && activeStakeholder === 'Kam') {
-		kamLoggedIn = 'ieKam';
+	if (is_importer_exporter_kam && !is_consignee_shipper_kam && activeStakeholder === 'booking_agent') {
+		kamLoggedIn = 'importer_exporter_kam';
 	} else if (!is_importer_exporter_kam && is_consignee_shipper_kam) {
-		kamLoggedIn = 'scKam';
+		kamLoggedIn = 'consignee_shipper_kam';
 	}
 
 	return {

@@ -3,8 +3,9 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
+import useShipmentBack from '../../hooks/useShipmentBack';
+
 import styles from './styles.module.css';
-import useShipmentBack from './useShipmentBack';
 
 function ShipmentInfo() {
 	const { shipment_data, isGettingShipment } = useContext(ShipmentDetailContext);

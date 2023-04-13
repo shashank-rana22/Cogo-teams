@@ -1,7 +1,7 @@
 import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
-import { Documents } from '@cogoport/ocean-modules';
+import { Documents, Tracking } from '@cogoport/ocean-modules';
 // import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
@@ -19,7 +19,7 @@ import styles from './styles.module.css';
 
 const services_additional_methods = ['stakeholder', 'service_objects', 'booking_requirement'];
 
-function DKam({ get }) {
+function BookingAgent({ get, activeStakeholder }) {
 	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('overview');
 
@@ -27,8 +27,8 @@ function DKam({ get }) {
 
 	const { servicesGet } = useGetServices({
 		shipment_data,
-		additional_methods : services_additional_methods,
-		activeStakeholder  : 'DKam',
+		additional_methods: services_additional_methods,
+		activeStakeholder,
 	});
 
 	const { getTimeline } = useGetTimeLine({ shipment_data });
@@ -37,8 +37,8 @@ function DKam({ get }) {
 		...get,
 		...servicesGet,
 		...getTimeline,
-		activeStakeholder: 'DKam',
-	}), [get, servicesGet, getTimeline]);
+		activeStakeholder,
+	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
 	const handleClick = () => {
 		router.reload();
@@ -103,6 +103,9 @@ function DKam({ get }) {
 						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
 							{/* <TimelineAndTask /> */}
 						</TabPanel>
+						<TabPanel name="sales_live_invoice" title="Sales Live Invoice">
+							{/* <SalesInvoice /> */}
+						</TabPanel>
 						<TabPanel name="documents" title="Documents">
 							<Documents />
 						</TabPanel>
@@ -113,6 +116,9 @@ function DKam({ get }) {
 								pre_subject_text={`${shipment_data?.serial_id}`}
 							/>
 						</TabPanel>
+						<TabPanel name="tracking" title="Tracking">
+							<Tracking shipmentData={shipment_data} />
+						</TabPanel>
 					</Tabs>
 				</div>
 			</div>
@@ -120,4 +126,4 @@ function DKam({ get }) {
 	);
 }
 
-export default DKam;
+export default BookingAgent;

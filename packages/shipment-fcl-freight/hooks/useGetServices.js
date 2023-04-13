@@ -25,7 +25,7 @@ function useGetServices({ shipment_data = {}, additional_methods = [], activeSta
 
 				if (res.status === 200) {
 					setServicesData(res?.data?.summary);
-					if (activeStakeholder === 'Kam') {
+					if (activeStakeholder === 'booking_agent') {
 						const servicesToShow = [];
 
 						(res?.data?.summary || []).forEach((service) => {
@@ -37,7 +37,7 @@ function useGetServices({ shipment_data = {}, additional_methods = [], activeSta
 						setServicesData(servicesToShow);
 					}
 
-					if (activeStakeholder === 'DKam') {
+					if (activeStakeholder === 'consignee_shipper_booking_agent') {
 						const servicesToShow = [];
 
 						(res?.data?.summary || []).forEach((service) => {
