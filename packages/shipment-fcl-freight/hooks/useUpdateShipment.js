@@ -5,23 +5,23 @@ import { useContext } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
-export default function useUpdateShipment({ successCallbacks = [], successMsg = '' }) {
-	const { refetch } = useContext(ShipmentDetailContext);
+export default function useUpdateShipment({
+	refetch = () => {},
+	successMessage = 'Shipment updated successfully!',
+}) {
+	const { refetch: shipmentRefetch } = useContext(ShipmentDetailContext);
 
 	const [{ loading }, trigger] = useRequest({
 		url    : 'update_shipment',
 		method : 'POST',
 	}, { manual: true });
 
-	const updateShipment = async ({ payload }) => {
+	const updateShipment = async (payload) => {
 		try {
 			await trigger({ data: payload });
-			successCallbacks?.forEach((cb) => cb?.());
 			refetch();
-
-			if (successMsg) {
-				Toast.success(successMsg);
-			}
+			shipmentRefetch();
+			Toast.success(successMessage);
 		} catch (err) {
 			toastApiError(err);
 		}
