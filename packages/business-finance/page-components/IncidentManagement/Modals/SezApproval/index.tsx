@@ -1,4 +1,5 @@
 import { Textarea, Modal, Button } from '@cogoport/components';
+import { IcMEyeopen } from '@cogoport/icons-react';
 import { useEffect, useState } from 'react';
 
 import useSezApproveReject from '../../apisModal/useSezApproveReject';
@@ -56,15 +57,16 @@ function SezApproval({ sezRequest, organization, id, refetch = () => {}, isEdita
 			value : (
 				<div>
 					{(documentUrls || []).map((item) => (
-						<div>
+						<div className={styles.doc}>
 							<a
 								target="_blank"
 								href={item}
 								className={styles.file_link}
 								rel="noreferrer"
 							>
-								{item?.split('/')?.pop()}
+								View Document
 							</a>
+							<div className={styles.eye}><IcMEyeopen /></div>
 						</div>
 					))}
 				</div>),

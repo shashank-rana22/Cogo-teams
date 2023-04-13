@@ -44,6 +44,13 @@
 }
 
 .file_link {
-	color: #00e !important;
+	color: #07b02c !important;
 	text-decoration: underline !important;
+}
+.doc{
+	display: flex;
+	align-items: center;
+}
+.eye{
+	margin: 4px 0px 0px 4px;
 }
