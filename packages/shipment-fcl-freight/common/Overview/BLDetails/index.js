@@ -1,10 +1,10 @@
 import { Button, Accordion } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
 import useListBillOfLadings from '../../../hooks/useListBillOfLadings';
-import EmptyState from '../../EmptyState';
 
 import BlContainersMapping from './BlContainersMapping';
 import ContainerDetails from './ContainerDetails';
