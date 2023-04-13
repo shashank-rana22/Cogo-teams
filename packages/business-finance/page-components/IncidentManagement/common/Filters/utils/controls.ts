@@ -1,3 +1,5 @@
+import styles from './styles.module.css';
+
 export const requestControls = (isSettlementExecutive = false) => {
 	let optionsVal = [{}];
 	if (isSettlementExecutive) {
@@ -57,6 +59,7 @@ export const requestControls = (isSettlementExecutive = false) => {
 			isPreviousDaysAllowed : true,
 			caret                 : true,
 			isClearable           : true,
+			className             : styles.date,
 		},
 	];
 };
@@ -109,6 +112,7 @@ export const remainControls = (isSettlementExecutive = false) => {
 			caret                 : true,
 			isPreviousDaysAllowed : true,
 			isClearable           : true,
+			className             : styles.date,
 		},
 	];
 };
