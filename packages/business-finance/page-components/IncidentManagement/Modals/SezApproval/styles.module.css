@@ -1,0 +1,43 @@
+.button {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.title {
+	min-width: 200px;
+	font-weight: 600;
+}
+
+.flex {
+	display: flex;
+	margin-bottom: 8px;
+}
+
+.name {
+	padding: 0 4px;
+}
+
+.remarks {
+	margin: 8px 0;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.divider {
+	margin-right: 16px;
+}
+
+.section {
+	display: flex;
+	margin-bottom: 8px;
+}
+
+.input_titles {
+	min-width: 200px;
+	font-weight: 600;
+}
+
+.link {
+	color: blue !important;
+	text-decoration: underline !important;
+}
