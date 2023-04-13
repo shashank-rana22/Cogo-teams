@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-/* eslint-disable no-mixed-spaces-and-tabs */
 import { Button, Modal } from '@cogoport/components';
 import React, { useCallback, useState } from 'react';
 
@@ -20,7 +19,6 @@ const CONTENT_MAPPING = {
 
 	image: {
 		properties: {
-			// eslint-disable-next-line max-len
 			content : 'https://www.cogoport.com/_next/image/?url=https%3A%2F%2Fcdn.cogoport.io%2Fcms-prod%2Fcogo_public%2Fvault%2Foriginal%2Fchannel-partner-header-2.png&w=1920&q=75',
 			style   : {},
 		},
@@ -66,7 +64,7 @@ function DNDComponent() {
 	const [selectedItem, setSelectedItem] = useState({});
 
 	const handleAddNewItem = useCallback(
-		(content, hoveredIndex = component.layouts.length, shouldAddBelow = true, parentDetails, componentType) => {
+		(content, hoveredIndex = component.layouts.length, shouldAddBelow = true, parentDetails = {}, componentType = '') => {
 			const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
 
 			if (componentType === 'child') {
@@ -88,7 +86,7 @@ function DNDComponent() {
 							...CONTENT_MAPPING[content.type],
 							...content,
 							id: component.layouts.length + 1,
-						// parentId,
+							// parentId,
 						},
 						...component.layouts.slice(startIndex),
 					],
@@ -131,14 +129,6 @@ function DNDComponent() {
 		[handleAddNewItem, selectedItem, activeTab],
 
 	);
-	//   const MemoRightPanel = useCallback(
-	// 	() => (
-
-	// 	),
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// 	[handleAddNewItem, isNewItemAdding, selectedItem],
-
-	//   );
 
 	return (
 		<div>
@@ -227,19 +217,3 @@ function DNDComponent() {
 }
 
 export default DNDComponent;
-
-// className={styles.reactGridItem}
-// key={widget.i}
-// data-grid={{
-// 	i           : widget?.i,
-// 	x           : widget?.x,
-// 	y           : widget?.y,
-// 	w           : widget?.w,
-// 	h           : widget?.h,
-// 	minW        : 2,
-// 	maxW        : Infinity,
-// 	minH        : 2,
-// 	maxH        : Infinity,
-// 	isDraggable : true,
-// 	isResizable : true,
-// }}
