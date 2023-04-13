@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-closing-tag-location */
 import { Textarea, Modal, Button } from '@cogoport/components';
 import { useEffect, useState } from 'react';
 
@@ -54,20 +53,21 @@ function SezApproval({ sezRequest, organization, id, refetch = () => {}, isEdita
 		{ title: 'Tax Number', value: <div>{taxNumber || ''}</div> },
 		{
 			title : 'Documents',
-			value : <div>
-				{(documentUrls || []).map((item) => (
-					<div>
-						<a
-							target="_blank"
-							href={item}
-							className={styles.file_link}
-							rel="noreferrer"
-						>
-							{item?.split('/')?.pop()}
-						</a>
-					</div>
-				))}
-			</div>,
+			value : (
+				<div>
+					{(documentUrls || []).map((item) => (
+						<div>
+							<a
+								target="_blank"
+								href={item}
+								className={styles.file_link}
+								rel="noreferrer"
+							>
+								{item?.split('/')?.pop()}
+							</a>
+						</div>
+					))}
+				</div>),
 		},
 	];
 
