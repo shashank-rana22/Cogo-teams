@@ -7,6 +7,8 @@ import { useSelector } from '@cogoport/store';
 import styles from './styles.module.css';
 import useCreateFaqQuestionAlias from './useCreateFaqQuestionAlias';
 
+const DEFAULT_IMG = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/img_avatar.png';
+
 function FeedBackContent({
 	feedback,
 	onClickEdit = () => {},
@@ -16,7 +18,7 @@ function FeedBackContent({
 	faqAudiences,
 }) {
 	const { general } = useSelector((state) => state);
-	const { feedbackId:id = '' } = general.query || {};
+	const { feedbackId: id = '' } = general.query || {};
 
 	const {
 		suggested_answer = '',
@@ -59,9 +61,7 @@ function FeedBackContent({
 					date       : updated_at,
 					timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
 					formatType : 'time',
-
 				})}
-
 			</div>
 
 			<div
@@ -70,7 +70,7 @@ function FeedBackContent({
 			>
 				<div className={styles.card_header}>
 					<Avatar
-						src={picture || 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/img_avatar.png'}
+						src={picture || DEFAULT_IMG}
 						alt="img"
 						size="40px"
 					/>
@@ -92,7 +92,6 @@ function FeedBackContent({
 					</div>
 
 					{suggested_question_abstract
-
 					&& (
 						<div
 							className={styles.anchor_text}
@@ -107,7 +106,6 @@ function FeedBackContent({
 											<IcMFtick width={24} height={24} fill="#028a0f" />
 										</div>
 										Suggested question has been successfully added as an alias.
-
 									</div>
 								) : 'Add as an Alias'}
 						</div>
@@ -123,6 +121,7 @@ function FeedBackContent({
 								value={inputAlias}
 								onChange={(value) => setInputAlias(value)}
 							/>
+
 							<div className={styles.button_wrapper}>
 								<Button
 									size="md"
@@ -131,9 +130,7 @@ function FeedBackContent({
 									disabled={loading}
 								>
 									Cancel
-
 								</Button>
-
 								<Button
 									size="md"
 									themeType="primary"
@@ -141,9 +138,7 @@ function FeedBackContent({
 									loading={loading}
 								>
 									Submit
-
 								</Button>
-
 							</div>
 						</div>
 					)}
@@ -152,7 +147,6 @@ function FeedBackContent({
 						<div className={styles.body_heading}>Answer</div>
 						<div className={styles.answer_content}>
 							{suggested_answer || '-'}
-
 						</div>
 						{suggested_answer
 						&& source !== 'create' && (
@@ -164,7 +158,6 @@ function FeedBackContent({
 								Edit Answer
 							</div>
 						)}
-
 					</div>
 
 					<div className={styles.answer_container}>

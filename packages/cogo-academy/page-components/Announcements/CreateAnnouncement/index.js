@@ -1,6 +1,6 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useGetSingleAnnouncement from '../ListAnnouncements/DisplayCards/useGetSingleAnnouncement';
 
@@ -9,6 +9,20 @@ import styles from './styles.module.css';
 
 function CreateAnnouncement() {
 	const { query, push } = useRouter();
+
+	const [isMobile, setIsMobile] = useState(false);
+
+	useEffect(() => {
+		if (window.innerWidth < 768) {
+			setIsMobile(true);
+		}
+
+		function handleResize() {
+			setIsMobile(window.innerWidth < 768);
+		}
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	}, []);
 
 	const onClickBackIcon = () => {
 		push(
@@ -46,6 +60,7 @@ function CreateAnnouncement() {
 					loadingForm={loadingSingleAnnouncement}
 					announcement_id={announcement_id}
 					actionType={actionType}
+					isMobile={isMobile}
 				/>
 			</div>
 		</div>
