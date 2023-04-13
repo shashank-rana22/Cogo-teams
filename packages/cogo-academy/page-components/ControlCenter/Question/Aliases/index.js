@@ -36,12 +36,14 @@ function Aliases({ showAlias, setShowAlias = () => {}, alias = {}, filteredAlias
 					height={30}
 					style={{ cursor: 'pointer' }}
 					onClick={onClickDeleteIcon}
+					fill="#ee3425"
 				/>
 
-				{showAddIconId === id && question_abstract && (
+				{showAddIconId === id && ((question_abstract || '').trim()) && (
 					<IcMPlusInCircle
 						width={28}
 						height={28}
+						fill="#008a10"
 						onClick={() => setShowAlias((pv) => (
 							[...pv, { id: (showAlias || []).length }]))}
 						style={{ marginLeft: '6px', cursor: 'pointer' }}

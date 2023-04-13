@@ -39,7 +39,9 @@ function useCreateFaqSet({
 			return;
 		}
 
-		const emptyAlias = (showAlias || []).find((alias) => alias?.status !== 'inactive' && !alias?.question_abstract);
+		const emptyAlias = (showAlias || []).find((
+			alias,
+		) => alias?.status !== 'inactive' && (!(alias?.question_abstract || '').trim()));
 
 		if (emptyAlias) {
 			Toast.error('Alias can not be empty');
