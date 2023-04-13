@@ -1,9 +1,9 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal } from '@cogoport/components';
+import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useListServiceChargeCodes from '../../../../../hooks/useListServiceChargeCodes';
-import EmptyState from '../../../../EmptyState';
 import AddRate from '../../AddRate';
 
 import ChooseService from './ChooseService';
