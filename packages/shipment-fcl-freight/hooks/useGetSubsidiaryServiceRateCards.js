@@ -1,8 +1,8 @@
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback, useMemo } from 'react';
 
 import { formatPayloadForSubsidiaryServiceRateCards } from '../helpers/format-payload-service-rate-cards';
-import toastApiError from '../utils/toastApiError';
 
 const useGetSubsidiaryServiceRateCards = ({ item }) => {
 	const [apiData, setApiData] = useState({});

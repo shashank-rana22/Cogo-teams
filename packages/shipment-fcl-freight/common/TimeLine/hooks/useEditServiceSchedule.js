@@ -1,10 +1,10 @@
 import { Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useContext } from 'react';
 
-import toastApiError from '../../../utils/toastApiError';
 import { getPrefillValue, getDateForPayload } from '../../utils/dateFormatter';
 import controls from '../EditSchedule/controls';
 

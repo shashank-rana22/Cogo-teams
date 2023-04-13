@@ -1,9 +1,8 @@
 import { Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useContext } from 'react';
-
-import toastApiError from '../utils/toastApiError';
 
 export default function useUpdateShipment({
 	refetch = () => {},

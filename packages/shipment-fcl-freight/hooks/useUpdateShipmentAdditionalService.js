@@ -1,9 +1,8 @@
 import { Toast } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
-
-import toastApiError from '../utils/toastApiError';
 
 const geo = getGeoConstants();
 

@@ -1,7 +1,6 @@
 import { Toast } from '@cogoport/components';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-
-import toastApiError from '../utils/toastApiError';
 
 const useUpdateShipmentContainerDetails = ({
 	refetch = () => {},

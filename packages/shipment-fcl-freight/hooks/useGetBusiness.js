@@ -1,8 +1,7 @@
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
-
-import toastApiError from '../utils/toastApiError';
 
 const useGetBusiness = (props) => {
 	const {
