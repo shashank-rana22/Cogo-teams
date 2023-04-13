@@ -21,7 +21,10 @@ function ReviewDoc({
 
 	const { list, loading } = useListDocuments({
 		defaultFilters: {
-
+			shipment_id: task.shipment_id, id: task.task_field_id,
+		},
+		defaultParams: {
+			performed_by_org_id: task.organization_id,
 		},
 	});
 

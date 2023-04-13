@@ -1,19 +1,18 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 
-import useListShipmentPendingTasks from '../../hooks/useListShipmentPendingTasks';
-
 import Card from './Card';
 import Header from './Header';
 import styles from './styles.module.css';
 import TaskExecution from './TaskExecution';
+import useListTasksHelper from './useListTasksHelper';
 
 function List() {
 	const {
 		count, completedTaskCount, tasksList, loading, refetch,
 		hideCompletedTasks, setHideCompletedTasks, handleClick, selectedTaskId,
 		setSelectedTaskId, shipment_data, showMyTasks, setShowMyTasks,
-	} = useListShipmentPendingTasks();
+	} = useListTasksHelper();
 
 	if (loading) {
 		return (

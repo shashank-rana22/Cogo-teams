@@ -8,6 +8,7 @@ function Header({
 	showMyTasks = true,
 	setShowMyTasks = () => {},
 }) {
+	console.log('task', showMyTasks);
 	return (
 		<div className={styles.container}>
 			<div className={styles.top_panel}>
@@ -31,7 +32,8 @@ function Header({
 				</div>
 			</div>
 
-			<div className={styles.bottom_panel}> Bottom</div>
+			{/* Booking Requirements to be integrated in bottom panel */}
+			{/* <div className={styles.bottom_panel}> Bottom</div> */}
 		</div>
 	);
 }
