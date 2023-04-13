@@ -5,9 +5,6 @@ export default function useCallApi({ listShipments, filters, authParams, activeT
 
 	useEffect(() => {
 		const [, scope, view_type] = (authParams || '').split(':');
-		if (!scope) {
-			return;
-		}
 
 		if (debounceQuery.current.q !== filters.q) {
 			clearTimeout(debounceQuery.current.timerId);

@@ -1,6 +1,7 @@
 import { Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMCancel } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import React, { useContext, useState } from 'react';
 
 import CancelShipment from '../CancelShipment';
@@ -10,20 +11,22 @@ import PortDetails from '../PortDetails';
 import AddPoNumber from './AddPoNumber';
 import Loader from './Loader';
 import styles from './styles.module.css';
+import getCanCancelShipment from './utils/getCanCancelShipment';
 
 function ShipmentHeader() {
 	const [showModal, setShowModal] = useState(false);
 
-	const {
-		shipment_data, primary_service, isGettingShipment,
-		activeStakeholder = '',
-	} = useContext(ShipmentDetailContext);
+	const { shipment_data, primary_service, isGettingShipment, activeStakeholder } = useContext(ShipmentDetailContext);
+
+	const user_data = useSelector((({ profile }) => profile?.user));
 
 	const { po_number, importer_exporter } = shipment_data || {};
 
 	if (isGettingShipment) {
 		return <Loader />;
 	}
+
+	const showCancelShipmentIcon = getCanCancelShipment({ shipment_data, user_data, activeStakeholder });
 
 	return (
 		<div className={styles.container}>
@@ -63,11 +66,10 @@ function ShipmentHeader() {
 				<PortDetails data={shipment_data} primary_service={primary_service} />
 			</div>
 
-			<CargoDetails
-				primary_service={primary_service}
-			/>
+			<CargoDetails primary_service={primary_service} />
 
-			<IcMCancel className={styles.cancel_button} onClick={() => setShowModal('cancel_shipment')} />
+			{showCancelShipmentIcon
+			&& <IcMCancel className={styles.cancel_button} onClick={() => setShowModal('cancel_shipment')} />}
 
 			{showModal === 'add_po_number' ? (
 				<AddPoNumber
