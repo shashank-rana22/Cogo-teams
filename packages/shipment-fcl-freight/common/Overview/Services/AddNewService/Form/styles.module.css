@@ -5,3 +5,19 @@
 		}
 	}
 }
+
+.header {
+	display: flex; 
+	align-items: center;
+} 
+
+.button {
+	margin-right: 8px; 
+	cursor: pointer;   
+	display: flex; 
+	
+
+	&:hover {
+		color: #ee3427; 
+	} 
+}

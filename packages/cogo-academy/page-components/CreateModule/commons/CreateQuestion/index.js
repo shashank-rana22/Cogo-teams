@@ -34,6 +34,9 @@ function CreateQuestion({
 		handleSubmit = () => {},
 		formState: { errors = {} },
 		register,
+		editorValue,
+		setEditorValue,
+		updateStandAloneLoading,
 	} = useCreateQuestion({
 		item,
 		setSavedQuestionDetails,
@@ -84,6 +87,8 @@ function CreateQuestion({
 						mode={mode}
 						questionTypeWatch={questionTypeWatch}
 						listSetQuestions={listSetQuestions}
+						editorValue={editorValue}
+						setEditorValue={setEditorValue}
 					/>
 				</div>
 
@@ -92,7 +97,7 @@ function CreateQuestion({
 						{!isNewQuestion ? (
 							<Button
 								themeType="accent"
-								loading={loading || updateCaseStudyLoading}
+								loading={loading || updateCaseStudyLoading || updateStandAloneLoading}
 								onClick={() => handleDeleteStandAloneQuestion()}
 								type="button"
 							>
@@ -102,7 +107,7 @@ function CreateQuestion({
 
 						{!(editDetails?.question_type === 'case_study') ? (
 							<Button
-								loading={loading || updateCaseStudyLoading}
+								loading={loading || updateCaseStudyLoading || updateStandAloneLoading}
 								type="submit"
 								themeType="primary"
 								className={styles.save_button}

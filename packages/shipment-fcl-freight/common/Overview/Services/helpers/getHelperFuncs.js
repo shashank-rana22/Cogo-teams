@@ -27,8 +27,11 @@ const helperFuncs = (servicesList, possibleServices) => {
 		let isServiceAlreadyAdded = false;
 
 		(servicesList || []).forEach((service) => {
-			if (service?.service_type === serviceToIterate.service_type) {
+			if (service?.service_type === serviceToIterate.service_type
+				&& ((serviceToIterate.trade_type === service?.trade_type)
+				|| (service?.service_type === 'fcl_freight_service'))) {
 				isServiceAlreadyAdded = true;
+
 				if (service?.trade_type === 'export' && !serviceToIterate.is_main) {
 					const canPushService = 	checkIfServiceAlreadyPresent(serviceObj.originServices, service);
 

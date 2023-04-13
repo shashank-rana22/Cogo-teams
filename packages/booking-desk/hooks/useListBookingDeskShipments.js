@@ -10,7 +10,9 @@ import useCallApi from './useCallApi';
 const emptyData = { list: [], total: 0, total_page: 0 };
 
 export default function useListBookingDeskShipments({ stateProps, prefix }) {
-	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
+	const { general, profile } = useSelector((store) => store) || {};
+	const { pathname } = general || {};
+	const { authParams, selected_agent_id } = profile || {};
 
 	const { filters, setFilters, activeTab } = stateProps;
 
@@ -39,7 +41,7 @@ export default function useListBookingDeskShipments({ stateProps, prefix }) {
 		}
 	}, [filters, setFilters, activeTab, trigger, selected_agent_id]);
 
-	useCallApi({ listShipments, filters, authParams, activeTab, selected_agent_id });
+	useCallApi({ listShipments, filters, authParams, activeTab, selected_agent_id, pathname });
 
 	return {
 		data: {

@@ -9,7 +9,6 @@ function ContainerNmUpdate({
 	setEditContainerNum = () => { },
 	refetch = () => { },
 	containerDetails,
-	editContainerNum = false,
 }) {
 	const [containerValue, setContainerValue] = useState({});
 
@@ -43,10 +42,12 @@ function ContainerNmUpdate({
 
 	return (
 		<Modal
-			show={editContainerNum}
+			show
 			onClose={() => {
 				setEditContainerNum(false);
 			}}
+			showCloseIcon={!loading}
+			closeOnOuterClick={false}
 		>
 			<Modal.Header title="Update Container Number" />
 			<Modal.Body>
@@ -71,24 +72,23 @@ function ContainerNmUpdate({
 					)}
 			</Modal.Body>
 			<Modal.Footer>
-				<div className={styles.button_container}>
-					<Button
-						size="md"
-						onClick={() => setEditContainerNum(false)}
-						disabled={loading}
-						themeType="secondary"
-					>
-						Cancel
-					</Button>
+				<Button
+					size="md"
+					themeType="secondary"
+					onClick={() => setEditContainerNum(false)}
+					disabled={loading}
+					style={{ marginRight: '12px' }}
+				>
+					Cancel
+				</Button>
 
-					<Button
-						size="md"
-						onClick={onSubmit}
-						disabled={loading}
-					>
-						Submit
-					</Button>
-				</div>
+				<Button
+					size="md"
+					onClick={onSubmit}
+					disabled={loading}
+				>
+					Submit
+				</Button>
 			</Modal.Footer>
 		</Modal>
 	);

@@ -7,9 +7,8 @@ const actions = ({
 	status,
 	serviceListItem,
 	addRate,
-	setShowIp = () => {},
+	setShowModal = () => {},
 	setItem = () => {},
-	setAddSellPrice = () => {},
 }) => {
 	const isSameItem = serviceListItem.id === addRate?.item?.id;
 
@@ -24,7 +23,7 @@ const actions = ({
 			<Button
 				themeType="secondary"
 				style={{ marginLeft: 10, height: '24px' }}
-				onClick={() => setAddSellPrice(true)}
+				onClick={() => setShowModal('add_sell_price')}
 			>
 				{addRate && isSameItem ? 'CLOSE' : 'ADD SELL PRICE'}
 			</Button>
@@ -40,7 +39,7 @@ const actions = ({
 				style={{ marginLeft: 10, height: '24px' }}
 				onClick={() => {
 					onClick();
-					setAddSellPrice(true);
+					setShowModal('add_sell_price');
 				}}
 			>
 				{addRate && isSameItem ? 'CLOSE' : 'REVIEW PRICE'}
@@ -85,7 +84,7 @@ const actions = ({
 				style={{ marginLeft: 10, height: '24px' }}
 				onClick={() => {
 					onClick();
-					setShowIp(true);
+					setShowModal('ip');
 				}}
 			>
 				{ isSameItem ? 'CLOSE' : 'ADD IP'}

@@ -15,11 +15,6 @@
 	margin: 12px;
 }
 
-.button_container {
-	display: flex;
-	justify-content: flex-end;
-}
-
 .button_container > button:first-child {
 	margin-right: 8px;
 }

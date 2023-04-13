@@ -16,7 +16,7 @@ const useUpdateShipmentOperatingInstruction = ({
 
 	const apiTrigger = async (val) => {
 		try {
-			await trigger({ params: { instruction, procedure_id, ...val } });
+			await trigger({ data: { instruction, procedure_id, ...val } });
 
 			Toast.success(successMessage);
 			refetch();

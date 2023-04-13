@@ -1,10 +1,10 @@
 import { Button, Accordion } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
 import useListBillOfLadings from '../../../hooks/useListBillOfLadings';
-import EmptyState from '../../EmptyState';
 
 import BlContainersMapping from './BlContainersMapping';
 import ContainerDetails from './ContainerDetails';
@@ -15,8 +15,7 @@ import TitleCard from './TitleCard';
 function BLDetails() {
 	const [open, setOpen] = useState(false);
 	const [activeId, setActiveId] = useState('');
-	const [mappingModal, setMappingModal] = useState(false);
-	const [editContainerNum, setEditContainerNum] = useState(false);
+	const [showModal, setShowModal] = useState(false);
 
 	const { shipment_data, primary_service } = useContext(
 		ShipmentDetailContext,
@@ -52,7 +51,7 @@ function BLDetails() {
 				? (
 					<Button
 						onClick={(e) => {
-							setMappingModal(true);
+							setShowModal('container_mapping');
 							e.stopPropagation();
 						}}
 						size="md"
@@ -68,7 +67,7 @@ function BLDetails() {
 				? (
 					<Button
 						onClick={(e) => {
-							setEditContainerNum(true);
+							setShowModal('container_num_update');
 							e.stopPropagation();
 						}}
 						size="md"
@@ -140,23 +139,21 @@ function BLDetails() {
 				)}
 			</Accordion>
 
-			{mappingModal ? (
+			{showModal === 'container_mapping' ? (
 				<BlContainersMapping
 					data={list}
-					setMappingModal={setMappingModal}
+					setMappingModal={setShowModal}
 					containerDetails={containerDetailsArray}
 					refetch={refetch}
-					mappingModal={mappingModal}
 				/>
 
 			) : null}
 
-			{editContainerNum ? (
+			{showModal === 'container_num_update' ? (
 				<ContainerNmUpdate
-					setEditContainerNum={setEditContainerNum}
+					setEditContainerNum={setShowModal}
 					containerDetails={containerDetailsArray}
 					refetch={refetch}
-					editContainerNum={editContainerNum}
 				/>
 			) : null}
 		</div>
