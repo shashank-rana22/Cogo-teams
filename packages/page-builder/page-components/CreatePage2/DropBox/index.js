@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import isEqual from 'lodash.isequal';
 import React, {
 	useCallback,
@@ -50,11 +51,14 @@ function Stage({
 		[setNewAddingItemProps],
 	);
 
+	// console.log('aaaa', stageItems);
+
 	//! Portal :: mimic behavior of portal stage
 	useEffect(() => {
-		if (!isEqual(stageItems, component)) {
-			setStageItems(component);
-		}
+		// console.log('sdjnsdnjsndjn', stageItems, !isEqual(stageItems, component));
+		// if (!isEqual(stageItems, component)) {
+		setStageItems(component);
+		// }
 	}, [component]);
 
 	//! Portal :: "update" method mutate the array, we might use alternative to this Eg. arrayMove
@@ -83,8 +87,8 @@ function Stage({
 			>
 				<RightPanel
 					widget={item}
-					components={stageItems.layouts}
-					setComponents={setComponent}
+					components={stageItems}
+					setComponents={setStageItems}
 					index={index}
 					id={id}
 					key={id}
@@ -94,31 +98,32 @@ function Stage({
 					onNewAddingItemProps={handleNewAddingItemPropsChange}
 					onClick={() => setSelectedItem({ ...item, id, index })}
 					isSelected={!!id && id === selectedItem?.id}
+					selectedItem={selectedItem}
 				/>
 			</div>
 		);
-	  }), [
-	  stageItems,
-	  moveItem,
-	  selectedItem,
-	  isNewItemAdding,
-	  handleNewAddingItemPropsChange,
+	}), [
+		stageItems,
+		moveItem,
+		selectedItem,
+		isNewItemAdding,
+		handleNewAddingItemPropsChange,
 	]);
 
 	//! Portal :: useDrop for stage process
 	const [{ canDrop, isOver, draggingItemType }, dropRef] = useDrop({
-	  accept : Object.keys(ITEM_TYPES),
-	  drop   : (droppedItem) => {
+		accept : Object.keys(ITEM_TYPES),
+		drop   : (droppedItem) => {
 			const { id } = droppedItem;
 			if (!id) {
-		  // a new item added
-		  		addNewItem(droppedItem, hoveredIndex, shouldAddBelow, parentComponentId, null);
+				// a new item added
+				addNewItem(droppedItem, hoveredIndex, shouldAddBelow, parentComponentId, null);
 			} else {
-		  // the result of sorting is applying the mock data
-		  		setComponent(stageItems);
+				// the result of sorting is applying the mock data
+				setComponent(stageItems);
 			}
-	  },
-	  collect: (monitor) => ({
+		},
+		collect: (monitor) => ({
 			isOver           : monitor.isOver(),
 			draggingItemType : monitor.getItemType(),
 			canDrop          : monitor.canDrop(),
@@ -127,23 +132,23 @@ function Stage({
 
 	//! Portal :: placeholder item while new item adding
 	useEffect(() => {
-		const _stageItems = (stageItems.layouts || []).filter(({ id }) => !!id);
+		const stagedItems = (stageItems.layouts || []).filter(({ id }) => !!id);
 		if (isNewItemAdding) {
 			if (isOver && isNewItemAdding) {
 				const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
 				setStageItems((prev) => ({
 					...prev,
 					layouts: [
-						..._stageItems.slice(0, startIndex),
+						...stagedItems.slice(0, startIndex),
 						{
 							type: draggingItemType,
 						},
-						..._stageItems.slice(startIndex),
+						...stagedItems.slice(startIndex),
 					],
 				}));
 			}
 		} else {
-			setStageItems((prev) => ({ ...prev, layouts: _stageItems }));
+			setStageItems((prev) => ({ ...prev, layouts: stagedItems }));
 		}
 	}, [isOver, draggingItemType, isNewItemAdding, shouldAddBelow, hoveredIndex]);
 	const isActive = canDrop && isOver;

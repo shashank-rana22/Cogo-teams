@@ -46,7 +46,6 @@ function LeftPanel(props) {
 					setParentComponentId={setParentComponentId}
 					addNewItem={addNewItem}
 					onNewItemAdding={onNewItemAdding}
-
 				/>
 			</TabPanel>
 

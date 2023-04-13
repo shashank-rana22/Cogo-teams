@@ -3,6 +3,7 @@ import { IcMCrossInCircle, IcMDuplicate } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
+import { v1 as uuid } from 'uuid';
 
 // import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css';
@@ -17,9 +18,9 @@ const ITEM_TYPES = {
 	rootElement : 'rootElement',
 };
 
-function ComponentBuilder({ widget, components, setComponents }) {
-	const { type: componetType, children, properties } = widget || {};
-
+function ComponentBuilder({ widget, components, setComponents, selectedItem, childId, setChildId }) {
+	const { type: componetType, children, properties, id: componentId } = widget || {};
+	const { id: selectedItemId } = selectedItem || {};
 	const { styles: style } = properties || {};
 
 	if (componetType === 'rootElement') {
@@ -40,11 +41,19 @@ function ComponentBuilder({ widget, components, setComponents }) {
 
 			{ (children || []).map((childComponent) => {
 				const { id } = childComponent || {};
-				const { content = '', styles, attributes = {} } = childComponent.properties || {};
+				const { content = '', styles: allStyles, attributes = {} } = childComponent.properties || {};
 				const { icon, type } = content || {};
+				const isChildSelected = childId === id && componentId === selectedItemId && type;
+				const border = isChildSelected ? '1px solid red' : allStyles.border;
 
 				return (
-					<div style={styles}>
+
+					<div
+						role="presentation"
+						className={styles.content_container}
+						style={{ ...allStyles, border }}
+						onClick={() => setChildId(id)}
+					>
 
 						{!type ? (
 							<div
@@ -53,7 +62,7 @@ function ComponentBuilder({ widget, components, setComponents }) {
 							>
 								{icon}
 							</div>
-						) : <RenderComponents componentType={type} widget={childComponent} components={components} setComponents={setComponents} elementId={id} /> }
+						) : <RenderComponents componentType={type} widget={childComponent} components={components} setComponents={setComponents} elementId={id} childId={childId} selectedItem={selectedItem} /> }
 
 					</div>
 				);
@@ -74,7 +83,9 @@ function Item(props) {
 		onNewAddingItemProps,
 		onClick,
 		isSelected,
+		selectedItem,
 	} = props;
+	const [childId, setChildId] = useState('');
 
 	const { type, id: elementId } = widget || {};
 
@@ -82,6 +93,7 @@ function Item(props) {
 	// 	width  : 800,
 	// 	height : 170,
 	// });
+	console.log('Sdsjhdkh', widget);
 
 	// const { width, height } = state || {};
 
@@ -147,33 +159,37 @@ function Item(props) {
 	const handleDelete = (itemList) => {
 		const { id: sId } = itemList || {};
 		const data = components;
-
-		const selectedComponentIndex = (data || []).findIndex((component) => (component.id === sId));
-		data.splice(selectedComponentIndex, 1);
-		setComponents((prev) => ({ ...prev, layouts: data }));
+		const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === sId));
+		data.layouts.splice(selectedComponentIndex, 1);
+		setComponents(data);
 	};
 
 	const handleCopy = (itemList) => {
-		const { id: sId } = itemList || {};
+		const { id: sId, parentId, children } = itemList || {};
+		const newId = uuid();
 		const data = components;
-
 		const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === sId));
+		const duplicateChildren = (children || []).map((item) => ({ ...item, parentId: newId }));
+
+		const duplicateData = parentId ? {
+			...itemList,
+			children : duplicateChildren,
+			id       : data.layouts.length + 1,
+			parentId : newId,
+		} : {
+			...itemList,
+			id: data.layouts.length + 1,
+		};
 
 		setComponents((prev) => ({
 			...prev,
 			layouts: [...data.layouts.slice(0, selectedComponentIndex + 1),
 				{
-					...itemList,
-					id: data.layouts.length + 1,
-					// parentId,
+					...duplicateData,
 				},
 				...data.layouts.slice(selectedComponentIndex + 1)],
 		}));
 	};
-
-	// const onResize = (event, { element, size }) => {
-	// 	setState({ width: size.width, height: size.height });
-	//   };
 
 	const opacity = isNewItemAdding && !id ? '0.3' : '1';
 
@@ -205,9 +221,10 @@ function Item(props) {
 
 			<div>
 				{type === 'container'
-					? <ComponentBuilder widget={widget} components={components} setComponents={setComponents} />
-					: <RenderComponents componentType={type} widget={widget} components={components} setComponents={setComponents} elementId={elementId} />}
+					? <ComponentBuilder widget={widget} components={components} setComponents={setComponents} selectedItem={selectedItem} childId={childId} setChildId={setChildId} />
+					: <RenderComponents componentType={type} widget={widget} components={components} setComponents={setComponents} elementId={elementId} childId={childId} selectedItem={selectedItem} />}
 			</div>
+
 			<div role="presentation" className={styles.change}>
 				<IcMCrossInCircle height="24px" width="24px" cursor="pointer" onClick={() => handleDelete(widget)} />
 				<IcMDuplicate height="24px" width="24px" cursor="pointer" onClick={() => handleCopy(widget)} />

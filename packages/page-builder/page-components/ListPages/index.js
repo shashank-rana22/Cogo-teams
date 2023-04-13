@@ -8,9 +8,9 @@ function ListPages() {
 		height : 200,
 	});
 
-	const onResize = (event, { element, size }) => {
+	const onResize = (_, { size }) => {
 		setState({ width: size.width, height: size.height });
-	  };
+	};
 
 	const { width, height } = state || {};
 	return (
@@ -31,7 +31,7 @@ function ListPages() {
 						backgroundColor : 'lightblue',
 					}}
 				>
-					<span className="text">hello</span>
+					<span className="text">Welcome to Cogo Page Builder 😛🍻</span>
 				</div>
 			</Resizable>
 		</div>

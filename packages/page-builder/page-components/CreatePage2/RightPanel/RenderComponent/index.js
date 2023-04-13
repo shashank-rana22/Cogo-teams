@@ -2,7 +2,7 @@ import ButtonComponent from '../../../../commons/widgets/ButtonComponent';
 import ImageComponent from '../../../../commons/widgets/ImageComponent';
 import TextComponent from '../../../../commons/widgets/TextComponent';
 
-function RenderComponents({ componentType, widget, components, setComponents, elementId }) {
+function RenderComponents({ componentType, widget, components, setComponents, elementId, childId, selectedItem }) {
 	const COMPONENT_MAPPING = {
 		text: (
 			<TextComponent
@@ -10,19 +10,22 @@ function RenderComponents({ componentType, widget, components, setComponents, el
 				text={widget.content}
 				components={components}
 				setComponents={setComponents}
-				elementId={elementId}
+				childId={childId}
+				selectedItem={selectedItem}
 			/>
 		),
+
 		image: (
 			<ImageComponent
 				key={elementId}
 				src={widget.content}
-				alt={widget.alt}
 				components={components}
 				setComponents={setComponents}
-				elementId={elementId}
+				childId={childId}
+				selectedItem={selectedItem}
 			/>
 		),
+
 		button: (
 			<ButtonComponent
 				key={elementId}
