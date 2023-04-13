@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { Button, Modal } from '@cogoport/components';
 import React, { useCallback, useState } from 'react';
@@ -77,6 +78,7 @@ function DNDComponent() {
 				const objIndex = data.layouts.findIndex((item) => item.parentId === parentId);
 
 				data.layouts[objIndex].children[childId].properties.content = content;
+				data.layouts[objIndex].children[childId].properties.styles = { ...data.layouts[objIndex].children[childId].properties.styles, border: undefined };
 
 				setComponent(data);
 			} else {

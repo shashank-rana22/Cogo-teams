@@ -96,6 +96,7 @@ function Stage({
 					onNewAddingItemProps={handleNewAddingItemPropsChange}
 					onClick={() => setSelectedItem({ ...item, id, index })}
 					isSelected={!!id && id === selectedItem?.id}
+					selectedItem={selectedItem}
 				/>
 			</div>
 		);
