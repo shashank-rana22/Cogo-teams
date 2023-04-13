@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export default function useCallApi({ listShipments, filters, authParams, activeTab, selected_agent_id }) {
+export default function useCallApi({ listShipments, filters = {}, authParams, activeTab, selected_agent_id }) {
 	const [, scope, view_type] = (authParams || '').split(':');
 
 	const debounceQuery = useRef({ q: filters.q });

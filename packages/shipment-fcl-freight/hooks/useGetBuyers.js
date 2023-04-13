@@ -28,7 +28,7 @@ function useGetBuyers({ shipment_id }) {
 	}, [listBuyerServices, shipment_id]);
 
 	return {
-		data: data?.summary,
+		data: data?.summary || {},
 
 	};
 }

@@ -49,8 +49,6 @@ export default forwardRef(({ service }, ref) => {
 							<>
 								<div className={styles.label}>
 									<div>{label}</div>
-									{errors[name]
-                                    && <div className={styles.error}>{errors[name].message}</div>}
 								</div>
 								<InputController
 									className={styles.value}
@@ -58,6 +56,8 @@ export default forwardRef(({ service }, ref) => {
 									control={control}
 									{...rest}
 								/>
+								{errors[name]
+                                    && <div className={styles.error}>{errors[name].message}</div>}
 							</>
 						) : (
 							<>

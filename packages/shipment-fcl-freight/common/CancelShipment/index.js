@@ -26,9 +26,7 @@ export default function CancelShipment({ setShow }) {
 
 	const onSubmit = useCallback((data) => {
 		updateShipment({
-			id,
-			state: 'cancelled',
-			...getCancelShipmentPayload(data),
+			...getCancelShipmentPayload(data, id),
 		});
 	}, [updateShipment, id]);
 
