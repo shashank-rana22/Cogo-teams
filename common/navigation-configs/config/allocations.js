@@ -19,6 +19,10 @@ const allocations = {
 		navigation : 'allocations-crm_feedback_dashboard',
 		isMainNav  : false,
 	},
+	'/[partner_id]/allocation/account_scoring': {
+		navigation : 'allocations-account_scoring',
+		isMainNav  : true,
+	},
 };
 
 module.exports = allocations;

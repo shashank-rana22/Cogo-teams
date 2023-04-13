@@ -227,6 +227,8 @@ const allocation = {
 
 		},
 	],
+	account_scoring: [
+	],
 };
 
 export default allocation;
