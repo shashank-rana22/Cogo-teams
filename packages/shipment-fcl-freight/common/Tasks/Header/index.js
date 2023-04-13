@@ -17,16 +17,16 @@ function Header({
 				</div>
 				<div className={styles.right_content}>
 					<div className={styles.toggle_container}>
-						<div style={{ marginTop: '2px' }}>Hide completed tasks</div>
+						<div style={{ marginTop: '12px' }}>Hide completed tasks</div>
 						<Toggle
-							value={hideCompletedTasks}
+							checked={hideCompletedTasks}
 							onChange={() => setHideCompletedTasks((prevVal) => !prevVal)}
 						/>
 					</div>
 					<div className={styles.toggle_container}>
-						<div style={{ marginTop: '2px' }}>Show only my tasks</div>
+						<div style={{ marginTop: '12px' }}>Show only my tasks</div>
 
-						<Toggle value={showMyTasks} onChange={() => setShowMyTasks((preVal) => !preVal)} />
+						<Toggle checked={showMyTasks} onChange={() => setShowMyTasks((preVal) => !preVal)} />
 					</div>
 				</div>
 			</div>

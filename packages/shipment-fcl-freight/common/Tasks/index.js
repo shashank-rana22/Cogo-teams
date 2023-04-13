@@ -10,7 +10,7 @@ import TaskExecution from './TaskExecution';
 
 function List() {
 	const {
-		count, completedTaskCount, tasksList, loading,
+		count, completedTaskCount, tasksList, loading, refetch,
 		hideCompletedTasks, setHideCompletedTasks, handleClick, selectedTaskId,
 		setSelectedTaskId, shipment_data, showMyTasks, setShowMyTasks,
 	} = useListShipmentPendingTasks();
@@ -67,6 +67,7 @@ function List() {
 						task={tasksList.find((task) => task.id === selectedTaskId)}
 						onCancel={() => setSelectedTaskId(null)}
 						shipment_data={shipment_data}
+						refetch={refetch}
 					/>
 				</>
 			) : null }

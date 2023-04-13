@@ -3,7 +3,7 @@ import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
-function ExecuteTask({ task = {}, onCancel = () => {} }) {
+function ExecuteTask({ task = {}, onCancel = () => {}, refetch = () => {} }) {
 	const { taskConfigData, loading } = useGetTaskConfig({ task, onCancel });
 
 	const {
@@ -24,7 +24,7 @@ function ExecuteTask({ task = {}, onCancel = () => {} }) {
 				task={task}
 				stepConfig={stepConfigValue}
 				onCancel={onCancel}
-				// refetch={refetch}
+				refetch={refetch}
 				primaryService={primaryService}
 				isLastStep={currentStep === steps.length - 1}
 				currentStep={currentStep}
