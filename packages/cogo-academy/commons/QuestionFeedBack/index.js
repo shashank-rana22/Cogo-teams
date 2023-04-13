@@ -57,7 +57,7 @@ function QuestionFeedBack({ id, source = '', onClickEdit = () => {}, fetchQuesti
 		both_question_and_answer : question_answer_remark + feedbackonBoth,
 	};
 
-	if (isEmpty(list)) {
+	if (isEmpty(feedbacksList)) {
 		return null;
 	}
 
