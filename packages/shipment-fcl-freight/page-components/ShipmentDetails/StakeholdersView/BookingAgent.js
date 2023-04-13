@@ -2,7 +2,7 @@ import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { Documents, Tracking } from '@cogoport/ocean-modules';
-// import { ShipmentChat } from '@cogoport/shipment-chat';
+import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect } from 'react';
@@ -81,7 +81,7 @@ function BookingAgent({ get, activeStakeholder }) {
 			<div>
 				<div className={styles.top_header}>
 					<ShipmentInfo />
-					{/* <ShipmentChat /> */}
+					<ShipmentChat />
 				</div>
 
 				<div className={styles.header}>
@@ -102,9 +102,6 @@ function BookingAgent({ get, activeStakeholder }) {
 						</TabPanel>
 						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
 							{/* <TimelineAndTask /> */}
-						</TabPanel>
-						<TabPanel name="sales_live_invoice" title="Sales Live Invoice">
-							{/* <SalesInvoice /> */}
 						</TabPanel>
 						<TabPanel name="documents" title="Documents">
 							<Documents />

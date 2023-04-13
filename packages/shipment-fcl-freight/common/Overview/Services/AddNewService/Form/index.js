@@ -15,7 +15,6 @@ function Form({
 	servicesList,
 	shipmentData,
 	primary_service,
-	upsellModal,
 	setUpsellModal,
 	haveToUpsell,
 }) {
@@ -35,12 +34,13 @@ function Form({
 
 	return (
 		<Modal
-			show={upsellModal}
+			show
 			onClose={() => setUpsellModal(false)}
 			showCloseIcon={false}
 			closeOnOuterClick={false}
 			disabled={haveToUpsell}
 			className={styles.custom_modal}
+			closeOnOuterClick={false}
 		>
 			<Modal.Header title={(
 				<div className={styles.header}>

@@ -1,4 +1,4 @@
-import { Modal } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -16,7 +16,6 @@ function AddService({
 	isSeller,
 	refetch = () => {},
 	show = false,
-	showChargeCodes = false,
 	setShowChargeCodes = () => {},
 }) {
 	const [showAddRate, setAddRate] = useState(null);
@@ -59,10 +58,10 @@ function AddService({
 	return (
 		<Modal
 			size="xl"
-			show={showChargeCodes}
+			show
 			onClose={() => setShowChargeCodes(false)}
-			placement="top"
 			className={styles.modal_container}
+			closeOnOuterClick={false}
 		>
 			<Modal.Header title="ADD NEW SERVICE" />
 			<Modal.Body>

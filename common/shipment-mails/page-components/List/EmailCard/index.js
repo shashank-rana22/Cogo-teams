@@ -1,6 +1,8 @@
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMProfile, IcMAttach } from '@cogoport/icons-react';
-import { subtractDays, format } from '@cogoport/utils';
+import { subtractDays } from '@cogoport/utils';
 import { formatDistanceToNow } from 'date-fns';
 import React from 'react';
 
@@ -8,12 +10,13 @@ import styles from './styles.module.css';
 
 function EmailCard({ activeMail, data = {}, onClick = () => {} }) {
 	const yesterday = subtractDays(new Date(), 1);
-	const displayDate =	new Date(data?.receivedDateTime) > yesterday
-		? formatDistanceToNow(new Date(data?.receivedDateTime), { addSuffix: true })
-		: format(
-			data?.receivedDateTime,
-			'dd MMM, yyyy',
-		);
+	const displayDate =	new Date(data.receivedDateTime) > yesterday
+		? formatDistanceToNow(data?.receivedDateTime)
+		: formatDate({
+			date       : data?.receivedDateTime,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['eee, dd MMM, yyyy'],
+			formatType : 'date',
+		});
 
 	return (
 		<div

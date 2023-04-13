@@ -1,4 +1,3 @@
-import { cl } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
@@ -52,7 +51,7 @@ function AddNewService({
 			{ !cancelUpsell && isUpsellable && canUpsellForTradeType
 				? (
 					<div
-						className={cl` ${styles.container} ie_create_new_service `}
+						className={styles.container}
 						onClick={() => setUpsellModal(true)}
 						role="button"
 						tabIndex={0}
@@ -64,7 +63,6 @@ function AddNewService({
 
 			{upsellModal ? (
 				<Form
-					upsellModal={upsellModal}
 					setUpsellModal={setUpsellModal}
 					servicesList={servicesList}
 					shipmentData={shipmentData}
