@@ -61,7 +61,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 		{
 			name        : 'price',
 			label       : 'Price',
-			type        : 'input',
+			type        : 'number',
 			span        : 6,
 			placeholder : 'Enter Price',
 			rules       : { required: 'Price is required' },

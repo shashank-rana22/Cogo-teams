@@ -32,9 +32,7 @@ function TaskExecution({ task = {}, onCancel = () => {}, refetch = () => {} }) {
 		);
 	}
 	return (
-		<div>
-			<ExecuteTask task={task} onCancel={onCancel} refetch={refetch} />
-		</div>
+		<ExecuteTask task={task} onCancel={onCancel} refetch={refetch} />
 	);
 }
 

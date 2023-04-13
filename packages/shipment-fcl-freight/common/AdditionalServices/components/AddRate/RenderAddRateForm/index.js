@@ -30,58 +30,74 @@ function RenderAddRateForm({
 	const { formControl } = controls({ serviceData, source });
 
 	const renderForm = (field) => {
-		const { name, options, label, type, ...rest } = field;
+		const { name, options, label, type, show, ...rest } = field;
 		switch (type) {
 			case 'async-select':
 				return (
-					<div className={styles.input_container}>
-						<label>{label}</label>
-						<SelectController
-							name={name}
-							control={control}
-							options={options}
-							{...rest}
-							{...serviceProviderEmbededOptions}
-						/>
-						{errors[name] && <span>{errors[name].message}</span>}
-					</div>
+					show
+					&& (
+						<div className={styles.input_container}>
+							<label>{label}</label>
+							<SelectController
+								name={name}
+								control={control}
+								options={options}
+								type={type}
+								{...rest}
+								{...serviceProviderEmbededOptions}
+							/>
+							{errors[name] && <span>{errors[name].message}</span>}
+						</div>
+					)
 				);
 			case 'input':
 				return (
-					<div className={styles.input_container}>
-						<label>{label}</label>
-						<InputController
-							name={name}
-							control={control}
-							{...rest}
-						/>
-						{errors[name] && <span>{errors[name].message}</span>}
-					</div>
+					show
+					&& (
+						<div className={styles.input_container}>
+							<label>{label}</label>
+							<InputController
+								name={name}
+								control={control}
+								type={type}
+								{...rest}
+							/>
+							{errors[name] && <span>{errors[name].message}</span>}
+						</div>
+					)
 				);
 			case 'number':
 				return (
-					<div className={styles.input_container}>
-						<label>{label}</label>
-						<InputController
-							name={name}
-							control={control}
-							{...rest}
-						/>
-						{errors[name] && <span>{errors[name].message}</span>}
-					</div>
+					show
+					&& (
+						<div className={styles.input_container}>
+							<label>{label}</label>
+							<InputController
+								name={name}
+								control={control}
+								type={type}
+								{...rest}
+							/>
+							{errors[name] && <span>{errors[name].message}</span>}
+						</div>
+					)
 				);
 			case 'select':
 				return (
-					<div className={styles.input_container}>
-						<label>{label}</label>
-						<SelectController
-							name={name}
-							control={control}
-							options={options}
-							{...rest}
-						/>
-						{errors[name] && <span>{errors[name].message}</span>}
-					</div>
+					show
+					&& (
+						<div className={styles.input_container}>
+							<label>{label}</label>
+							<SelectController
+								name={name}
+								control={control}
+								options={options}
+								type={type}
+								{...rest}
+							/>
+							{errors[name] && <span>{errors[name].message}</span>}
+						</div>
+					)
 				);
 			default:
 				return null;
