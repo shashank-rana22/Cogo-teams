@@ -21,7 +21,7 @@ function useLIstFaqAudience({ searchAudienceInput = '' }) {
 		try {
 			await trigger({
 				params: {
-					page       : audienceCurrentPage,
+					page       : !query ? audienceCurrentPage : '1',
 					page_limit : 10,
 					filters    : { q: query, status: activeAudience },
 				},

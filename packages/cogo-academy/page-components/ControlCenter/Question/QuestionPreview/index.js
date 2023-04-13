@@ -114,9 +114,9 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 							<p className={styles.answer_content}>
 								{
 							(question_aliases || []).map((alias, index) => {
-								const { question_abstract:aliasQuestionAbstract = ' ' } = alias;
+								const { question_abstract:aliasQuestionAbstract = ' ', id:aliasId } = alias;
 								return (
-									<div className={styles.alias}>
+									<div className={styles.alias} key={aliasId}>
 										<span className={styles.span}>
 											{index + 1}
 											.

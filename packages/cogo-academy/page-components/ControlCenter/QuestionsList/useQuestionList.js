@@ -287,7 +287,7 @@ const useQuestionList = () => {
 						q                    : query || undefined,
 						is_feedback_positive : activeList === 'feedbacks' ? false : undefined,
 					},
-					page,
+					page                   : !query ? page : '1',
 					is_admin_view          : true,
 					sort_by                : SORT_MODE,
 					sort_type              : SORT_TYPE,
