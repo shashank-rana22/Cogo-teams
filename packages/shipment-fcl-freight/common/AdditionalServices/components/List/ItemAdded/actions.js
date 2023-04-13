@@ -9,6 +9,7 @@ const actions = ({
 	addRate,
 	setShowModal = () => {},
 	setItem = () => {},
+	activeStakeholder = '',
 }) => {
 	const isSameItem = serviceListItem.id === addRate?.item?.id;
 
@@ -61,7 +62,7 @@ const actions = ({
 	// }
 
 	if (
-		status.status === 'cancelled_by_supplier'
+		status.status === 'cancelled_by_supplier' && activeStakeholder === 'service_ops_1'
 	) {
 		return (
 			<Button
@@ -75,13 +76,16 @@ const actions = ({
 	}
 
 	if (
-		status.status === 'amendment_requested_by_importer_exporter'
+		status.status === 'amendment_requested_by_importer_exporter' && activeStakeholder === 'booking_agent'
 	) {
 		return (
 			<Button
 				themeType="secondary"
 				style={{ marginLeft: 10, height: '24px' }}
-				onClick={() => setItem({ serviceListItem, status })}
+				onClick={() => {
+					setItem({ serviceListItem, status });
+					setShowModal('add_sell_price');
+				}}
 			>
 				REVIEW COMMENTS
 			</Button>

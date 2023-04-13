@@ -58,13 +58,14 @@ function AddRate({
 			}
 			return service.service_type === item?.service_type;
 		});
-		const { name, code, shipmentId, service_type, pending_task_id } = item;
+
+		const { name, code, shipment_id, service_type, pending_task_id } = item;
 		const { quantity, buy_price, currency, unit, service_provider_id, alias, price } = data;
 
 		const payload = {
 			name,
 			code,
-			shipment_id           : shipmentId,
+			shipment_id,
 			service_type,
 			service_id            : addedService?.id,
 			is_rate_available     : true,

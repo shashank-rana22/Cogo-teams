@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
-import React from 'react';
+import { ShipmentDetailContext } from '@cogoport/context';
+import React, { useContext } from 'react';
 
 import styles from './styles.module.css';
 
@@ -14,6 +15,8 @@ function ActionsToShow({
 	loading,
 	onCancel = () => {},
 }) {
+	const { activeStakeholder } = useContext(ShipmentDetailContext);
+
 	const {
 		handleShipperConfirm,
 		handleShipperSideCancel,
@@ -40,7 +43,7 @@ function ActionsToShow({
 	}
 
 	if (
-		status?.status === 'amendment_requested_by_importer_exporter'
+		status?.status === 'amendment_requested_by_importer_exporter' && activeStakeholder === 'booking_agent'
 	) {
 		return (
 			<div className={styles.button_container}>
@@ -71,7 +74,7 @@ function ActionsToShow({
 	}
 
 	if (
-		status?.status === 'cancelled_by_supplier'
+		status?.status === 'cancelled_by_supplier' && activeStakeholder === 'service_ops_1'
 	) {
 		return (
 			<div className={styles.button_container}>
