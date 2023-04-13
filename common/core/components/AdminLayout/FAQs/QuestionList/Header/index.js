@@ -45,9 +45,7 @@ function Header({
 					setShowNotificationContent(false);
 				}
 			} catch (e) {
-				if (e?.response) {
-					Toast.error(e);
-				}
+				Toast.error(e);
 			}
 		} else {
 			setTopic(null);

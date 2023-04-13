@@ -93,6 +93,7 @@ function RenderComponent({
 					<div className={styles.display_topics}>
 						{(list || []).map((item) => (
 							<div
+								key={item.id}
 								role="presentation"
 								onClick={() => setTopic(item)}
 								className={styles.square_div}
@@ -103,12 +104,12 @@ function RenderComponent({
 									<div className={styles.display_name_and_topic}>
 										<Tooltip
 											theme="light"
-											content={startCase(item?.display_name)}
+											content={startCase(item?.display_name || '')}
 											placement="bottom"
 											animation="shift-away"
 										>
 											<div className={styles.display_name}>
-												{startCase(item?.display_name)}
+												{startCase(item?.display_name || '')}
 											</div>
 										</Tooltip>
 										<div className={styles.question_count}>
