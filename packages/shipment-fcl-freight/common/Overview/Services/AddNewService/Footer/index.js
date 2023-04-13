@@ -11,6 +11,7 @@ function Footer({
 	service = {},
 	shipmentData = {},
 	formProps = {},
+	haveToUpsell = false,
 
 }) {
 	const { watch } = formProps;
@@ -27,7 +28,7 @@ function Footer({
 		<div className={styles.container}>
 			<Button
 				onClick={onClose}
-				disabled={loading}
+				disabled={loading || haveToUpsell}
 				themeType="secondary"
 				id="shipment_form_header_cancel"
 			>
