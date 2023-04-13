@@ -1,7 +1,7 @@
 import { Loader, Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { InputController, RadioGroupController, useForm } from '@cogoport/forms';
-import { useCallback, useContext } from 'react';
+import { useCallback, useContext, useEffect } from 'react';
 
 import useListShipmentCancellationReasons from '../../hooks/useListShipmentCancellationReasons';
 import useUpdateShipment from '../../hooks/useUpdateShipment';
@@ -9,18 +9,34 @@ import useUpdateShipment from '../../hooks/useUpdateShipment';
 import getCancelShipmentPayload from './getCancelShipmentPayload';
 import styles from './styles.module.css';
 
-export default function CancelShipment({ setShow }) {
-	const { reasonsLoading, reasons = [] } = useListShipmentCancellationReasons();
+const stakeholderMapping = {
+	booking_desk: 'service_ops1',
+};
 
+export default function CancelShipment({ setShow }) {
 	const closeModal = () => setShow(false);
+
+	const { reasonsLoading, reasons = [], getReasons } = useListShipmentCancellationReasons();
 
 	const { loading: updateShipmentLoading, updateShipment } = useUpdateShipment({
 		refetch        : closeModal,
 		successMessage : 'Shipment has been cancelled!!',
 	});
 
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data, activeStakeholder } = useContext(ShipmentDetailContext);
 	const { id } = shipment_data || {};
+
+	useEffect(() => {
+		getReasons({
+			filters: {
+				stakeholder_type: activeStakeholder in stakeholderMapping
+					? stakeholderMapping[activeStakeholder]
+					: activeStakeholder,
+			},
+			shipment_id          : id,
+			options_key_required : true,
+		});
+	}, [id, activeStakeholder, getReasons]);
 
 	const { control, formState: { errors }, handleSubmit } = useForm();
 
