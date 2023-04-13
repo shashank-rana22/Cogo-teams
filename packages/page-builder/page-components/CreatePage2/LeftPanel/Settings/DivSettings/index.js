@@ -1,14 +1,79 @@
 import { Input, Select } from '@cogoport/components';
-import React, { useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import styles from './styles.module.css';
 
-const settings = [
+const divSettings = [
 	{
-		label : 'Background Color',
-		key   : 'background-color',
-		type  : 'color',
+		type    : 'Background',
+		options : [
+			{
+				label : 'Color',
+				key   : 'background-color',
+				type  : 'color',
+			},
+			// {
+			// 	label : 'Image',
+			// 	key   : 'background-image',
+			// 	type  : '',
+			// },
+		],
+
 	},
+	{
+		type    : 'Margin',
+		options : [
+			{
+				label : 'Top',
+				key   : 'margin-top',
+				type  : 'number',
+			},
+			{
+				label : 'Left',
+				key   : 'margin-left',
+				type  : 'number',
+			},
+			{
+				label : 'Bottom',
+				key   : 'margin-bottom',
+				type  : 'number',
+			},
+			{
+				label : 'Right',
+				key   : 'margin-right',
+				type  : 'number',
+			},
+		],
+	},
+	{
+		type    : 'Border',
+		options : [
+			{
+				label : 'Color',
+				key   : 'border-color',
+				type  : 'color',
+			},
+			{
+				label : 'Width',
+				key   : 'border-width',
+				type  : 'number',
+			},
+			{
+				label   : 'Style',
+				key     : 'border-style',
+				type    : 'select',
+				options : [
+					{ label: 'None', value: 'none' },
+					{ label: 'Solid', value: 'solid' },
+					{ label: 'Dotted', value: 'dotted' },
+					{ label: 'Dashed', value: 'dashed' },
+				],
+			},
+		],
+	},
+];
+
+const settings = [
 	{
 		label : 'Border Color',
 		key   : 'border-color',
@@ -106,7 +171,6 @@ const settings = [
 			{ value: 'baseline', label: 'Baseline' },
 			{ value: 'stretch', label: 'Stretch' },
 		],
-
 	},
 	{
 		label   : 'Justify Content',
@@ -120,7 +184,6 @@ const settings = [
 			{ value: 'space-around', label: 'Space Around' },
 			{ value: 'space-evenly', label: 'Space Evenly' },
 		],
-
 	},
 	{
 		label : 'Margin',
@@ -136,6 +199,7 @@ const settings = [
 
 function DivSettings(props) {
 	const { component, setComponent } = props;
+	const [color, setColor] = useState('#000000');
 
 	const handleChange = useCallback((key, value) => {
 		setComponent((prev) => ({
@@ -144,56 +208,95 @@ function DivSettings(props) {
 				...component.style,
 				[key]: value,
 			},
-
 		}));
 	}, []);
 
-	const handleInputChange = useCallback((val, key) => {
-		// console.log('key ::', key);
-		handleChange(key, val);
-	}, [handleChange]);
+	const handleInputChange = useCallback(
+		(val, key) => {
+			handleChange(key, val);
+		},
+		[handleChange],
+	);
 
-	const handleSelectChange = useCallback((value, key) => {
-		handleChange(key, value);
-	}, [handleChange]);
+	const handleSelectChange = useCallback(
+		(value, key) => {
+			handleChange(key, value);
+		},
+		[handleChange],
+	);
 
 	return (
-		<div className={styles.container}>
+		<div>
+			{divSettings.map((setting) => (
+				<div key={setting.type}>
+					<div className={styles.label}>{setting.type}</div>
 
-			{settings.map(({ label, key, type, options }) => (
-				<div
-					key={key}
-					style={{
-						margin         : '8px 0',
-						padding        : '8px',
-						display        : 'flex',
-						justifyContent : 'space-between',
-					}}
-				>
-					<label htmlFor={key}>{label}</label>
-					{type === 'select' ? (
+					<div className={styles.section}>
+						{setting.options.map((option) => {
+							const { type, key, label, options } = option;
+							return (
+								<div key={key}>
+									<div className={styles.section_label}>{label}</div>
+									{option.type === 'select' ? (
+										<Select
+											value={component.style[key]}
+											onChange={(value) => handleSelectChange(value, key)}
+											style={{ width: '160px' }}
+											options={options}
+											placeholder="Select"
+										/>
+									) : (
 
-						<Select
-							value={component.style[key]}
-							onChange={(value) => handleSelectChange(value, key)}
-							style={{ width: '200px' }}
-							options={options}
-							placeholder="Select"
-						/>
-					) : (
+										<div>
+											<Input
+												type={type}
+												defaultValue={type === 'color' ? '#ffffff' : undefined}
+												value={component.style[key]}
+												onChange={(val) => handleInputChange(val, key)}
+												className={type === 'color' && styles.ui_input_control}
+											/>
 
-						<Input
-							type={type}
-							value={component.style[key]}
-							style={{ width: '200px' }}
-							onChange={(val) => handleInputChange(val, key)}
-						/>
+											{type === 'color' && (
+												<div style={{ marginTop: '4px' }}>
+													<span>{component.style[key] || '#ffffff'}</span>
+												</div>
+											)}
 
-					)}
+										</div>
+
+									)}
+								</div>
+							);
+						})}
+
+					</div>
+
 				</div>
 			))}
-
 		</div>
+
+	// <div className={styles.container}>
+
+	// 	{settings.map(({ label, key, type, options }) => (
+	// 		<div
+	// 			key={key}
+	// 			style={{
+	// 				margin         : '8px 0',
+	// 				padding        : '8px',
+	// 				display        : 'flex',
+	// 				justifyContent : 'space-between',
+	// 			}}
+	// 		>
+	// 			<label htmlFor={key}>{label}</label>
+	// 			{type === 'select' ? (
+
+	// 			) : (
+
+	// 			)}
+	// 		</div>
+	// 	))}
+
+	// </div>
 	);
 }
 

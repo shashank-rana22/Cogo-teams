@@ -2,7 +2,11 @@ import { Modal } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useRef, useEffect } from 'react';
+
+import FloatingWidgetPreview from '../Announcements/FloatingWidgetPreview';
+import useGetAnnouncementList from '../Announcements/hooks/useGetAnnouncementList';
 
 import styles from './styles.module.css';
 import TopicList from './TopicList';
@@ -25,6 +29,15 @@ function FAQs({
 
 	const [show, setShow] = useState(false);
 	const [isMobile, setIsMobile] = useState(false);
+	const [announcementModalData, setAnnouncementModalData] = useState({});
+
+	const props = useGetAnnouncementList();
+
+	const announcementProps = {
+		...props,
+		setAnnouncementModalData,
+		announcementModalData,
+	};
 
 	useEffect(() => {
 		function handleResize() {
@@ -85,22 +98,44 @@ function FAQs({
 			)}
 
 			<div />
+
 			{(show || showFaq) ? (
 				<Modal
-					className={styles.modal_wrapper}
+					className={`${styles.modal_wrapper} ${!isEmpty(announcementModalData) && styles.increase_width}`}
 					show={show || showFaq}
 					onClose={handleClose}
 					placement={isMobile ? 'fullscreen' : 'right'}
 					size={isMobile ? 'md' : ''}
 				>
 
-					<div className={styles.topiclist_container}>
-						<TopicList
-							faqNotificationData={faqNotificationData}
-							faqNotificationApiLoading={faqNotificationApiLoading}
-							fetchFaqNotification={fetchFaqNotification}
-							refetch={refetch}
-						/>
+					<div className={styles.modal_content}>
+						<div className={`${styles.topiclist_container} 
+						${!isEmpty(announcementModalData) && styles.hide_list}`}
+						>
+							<TopicList
+								faqNotificationData={faqNotificationData}
+								faqNotificationApiLoading={faqNotificationApiLoading}
+								fetchFaqNotification={fetchFaqNotification}
+								refetch={refetch}
+								setShow={setShow}
+								announcementProps={announcementProps}
+								selectedAnnouncement={announcementModalData?.id}
+							/>
+						</div>
+
+						{!isEmpty(announcementModalData) && (
+							<div className={styles.announcement_preview_container}>
+								<FloatingWidgetPreview
+									fetchAnnouncements={announcementProps.fetchAnnouncements}
+									setModalData={setAnnouncementModalData}
+									setShow={setShow}
+									isViewed={announcementModalData?.is_viewed}
+									currentId={announcementModalData?.id}
+									isMobile={isMobile}
+								/>
+							</div>
+						)}
+
 					</div>
 				</Modal>
 			) : null}

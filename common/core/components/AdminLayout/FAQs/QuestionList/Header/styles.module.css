@@ -8,6 +8,14 @@
 	}
 }
 
+.cross_icon {
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	z-index: 100;
+	cursor: pointer;
+}
+
 .wrapper {
 	align-items: center;
 	margin: 21px 14px;

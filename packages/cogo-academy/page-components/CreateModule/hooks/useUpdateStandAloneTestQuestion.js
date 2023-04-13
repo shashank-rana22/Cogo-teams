@@ -20,6 +20,7 @@ function useUpdateStandAloneTestQuestion({
 	setQuestionToDelete = () => {},
 	listSetQuestions,
 	editDetails,
+	editorValue = {},
 }) {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
@@ -39,6 +40,7 @@ function useUpdateStandAloneTestQuestion({
 				action,
 				testQuestionId,
 				editDetails,
+				editorValue,
 			});
 
 			if (!isEmpty(hasError)) {
