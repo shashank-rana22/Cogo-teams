@@ -1,0 +1,22 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	padding: 16px 30px;
+	margin: 24px 0;
+	background: #fdfbf6;
+	border: 1px solid #d6b300;
+	border-radius: 6px;
+}
+
+.left_section {
+	display: flex;
+	align-items: center;
+}
+
+.text {
+	margin-left: 20px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+}

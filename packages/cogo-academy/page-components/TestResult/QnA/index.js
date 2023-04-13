@@ -1,13 +1,21 @@
 import { Placeholder } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
+import { useRef } from 'react';
 
+import Banner from './Banner';
 import CaseStudy from './CaseStudy';
 import StandAlone from './StandAlone';
 import styles from './styles.module.css';
 import Subjective from './Subjective';
 
 function QnA({ user_name = '', test_id, user_id, view }) {
+	const ref = useRef();
+
+	const scrollToSubjective = () => {
+		ref.current.scrollIntoView({ behavior: 'smooth' });
+	};
+
 	const [{ data, loading }] = useRequest({
 		method : 'GET',
 		url    : '/get_questions_analysis',
@@ -24,14 +32,25 @@ function QnA({ user_name = '', test_id, user_id, view }) {
 		);
 	}
 
+	if (isEmpty(stand_alone_questions) && isEmpty(case_study_questions) && isEmpty(subjective_questions)) {
+		return (
+			<div className={styles.empty_state}>Nothing To Show Here</div>
+		);
+	}
+
+	const showBanner = view === 'admin' && !isEmpty(subjective_questions);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
 				Questions wise analysis
 			</div>
 
-			<div className={styles.question_cards_container}>
+			{showBanner ? (
+				<Banner scrollToSubjective={scrollToSubjective} />
+			) : null}
 
+			<div className={styles.question_cards_container}>
 				{!isEmpty(stand_alone_questions) ? (
 					<StandAlone questions={stand_alone_questions} user_name={user_name} />
 				) : null}
@@ -48,15 +67,16 @@ function QnA({ user_name = '', test_id, user_id, view }) {
 				) : null}
 
 				{!isEmpty(subjective_questions) ? (
-					<Subjective
-						questions={subjective_questions}
-						user_id={user_id}
-						test_id={test_id}
-						count_till_now={stand_alone_questions.length + case_study_questions.length}
-						view={view}
-					/>
+					<div ref={ref}>
+						<Subjective
+							questions={subjective_questions}
+							user_id={user_id}
+							test_id={test_id}
+							count_till_now={stand_alone_questions.length + case_study_questions.length}
+							view={view}
+						/>
+					</div>
 				) : null}
-
 			</div>
 		</div>
 	);

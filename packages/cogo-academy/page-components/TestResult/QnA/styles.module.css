@@ -13,3 +13,9 @@
 .question_card {
 	border-bottom: 1px dotted #4f4f4f;
 }
+
+.empty_state {
+	font-size: 20px;
+	font-weight: 600;
+	color: #221f20;
+}
