@@ -33,7 +33,10 @@ function Messages({
 	const [disableButton, setDisableButton] = useState('');
 	const { tagOptions = [] } = useListAssignedChatTags();
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
-	const closeModal = () => setOpenModal({ type: null, data: {} });
+	const closeModal = () => {
+		setOpenModal({ type: null, data: {} });
+		setDisableButton('');
+	};
 	let activeChatCollection;
 	const {
 		id = '',

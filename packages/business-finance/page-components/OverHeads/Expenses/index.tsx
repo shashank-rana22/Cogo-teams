@@ -8,6 +8,7 @@ import Filter from '../../commons/Filters';
 import SegmentedControl from '../../commons/SegmentedControl';
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
 import { formatDate } from '../../commons/utils/formatDate';
+import getFormattedPrice from '../../commons/utils/getFormattedPrice';
 import List from '../commons/List';
 import { nonRecurringFilters, recurringFilters } from '../Controls/nonRecurringFilters';
 
@@ -35,14 +36,14 @@ interface ItemDataInterface {
 	billDocumentUrl?:string,
 	startDate?:Date,
 	endDate?:Date,
-	maxPayoutAllowed?:number | string,
+	maxPayoutAllowed?:number,
 	currency?:string,
 	updatedAt?:Date,
 	proofDocuments?:string[],
 	createdAt?:Date,
 	category?:string,
 	billCurrency?:string,
-	payableTds?:number | string,
+	payableTds?:number,
 }
 
 function ExpenseComponent() {
@@ -229,11 +230,7 @@ function ExpenseComponent() {
 				<div className={styles.data_container}>
 					<div className={styles.recurring_amount_data}>
 						<div>
-							{currency}
-						</div>
-						<div>
-                            &nbsp;
-							{maxPayoutAllowed || '-'}
+							{getFormattedPrice(maxPayoutAllowed, currency) || '-'}
 						</div>
 					</div>
 					{/* <Tooltip content="Due on xth every month">
@@ -244,11 +241,11 @@ function ExpenseComponent() {
 		},
 		getPayable: (itemData:ItemDataInterface) => {
 			const { grandTotal, paidAmount, billCurrency = '' } = itemData || {};
+			const value = grandTotal - paidAmount;
+			const amount = getFormattedPrice(value, billCurrency);
 			return (
 				<div>
-					{billCurrency}
-					{' '}
-					{(grandTotal >= 0 && paidAmount >= 0) ? (grandTotal - paidAmount) : '-'}
+					{(grandTotal >= 0 && paidAmount >= 0) ? amount : '-'}
 				</div>
 			);
 		},
@@ -285,7 +282,7 @@ function ExpenseComponent() {
 			const { name = '' } = approvedByUser || {};
 			return (
 				<div>
-					{status !== 'INITIATED' ? (
+					{status !== 'LOCKED' ? (
 						<div style={{ fontSize: '12px' }}>
 							<div>{name}</div>
 							<div>{formatDate(updatedAt, 'dd MMM yyyy', {}, false) || '-' }</div>
@@ -393,7 +390,7 @@ function ExpenseComponent() {
 		},
 		renderInvoiceAmount: (itemData:ItemDataInterface) => {
 			const { grandTotal, billCurrency = '' } = itemData || {};
-			const amount = `${billCurrency} ${grandTotal}`;
+			const amount = getFormattedPrice(grandTotal, billCurrency);
 			return (
 				<div>
 					{showOverflowingNumber(amount || '', 12)}
@@ -402,7 +399,7 @@ function ExpenseComponent() {
 		},
 		renderTds: (itemData:ItemDataInterface) => {
 			const { payableTds, billCurrency = '' } = itemData || {};
-			const amount = `${billCurrency} ${payableTds}`;
+			const amount = getFormattedPrice(payableTds, billCurrency);
 			return (
 				<div>
 					{showOverflowingNumber(amount || '', 12)}
@@ -411,7 +408,7 @@ function ExpenseComponent() {
 		},
 		renderPaid: (itemData:ItemDataInterface) => {
 			const { paidAmount, billCurrency = '' } = itemData || {};
-			const amount = `${billCurrency} ${paidAmount}`;
+			const amount = getFormattedPrice(paidAmount, billCurrency);
 			return (
 				<div>
 					{showOverflowingNumber(amount || '', 12)}
