@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import FileUploader from '../../FileUploader';
+import FileUploader from '../FileUploader';
 
 function ImageComponent(props) {
 	const { src, components, setComponents, childId, selectedItem } = props;

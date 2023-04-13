@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Resizable } from 'react-resizable';
-import 'react-resizable/css/styles.css';
 
 function ListPages() {
 	const [state, setState] = useState({
@@ -8,9 +7,9 @@ function ListPages() {
 		height : 200,
 	});
 
-	const onResize = (event, { element, size }) => {
+	const onResize = ({ size }) => {
 		setState({ width: size.width, height: size.height });
-	  };
+	};
 
 	const { width, height } = state || {};
 	return (
@@ -31,7 +30,7 @@ function ListPages() {
 						backgroundColor : 'lightblue',
 					}}
 				>
-					<span className="text">hello</span>
+					<span className="text">Welcome to Cogo Page Builder 😛🍻</span>
 				</div>
 			</Resizable>
 		</div>
