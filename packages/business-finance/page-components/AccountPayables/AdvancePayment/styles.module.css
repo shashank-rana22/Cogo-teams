@@ -8,3 +8,9 @@
 .list {
 	margin-top: 16px;
 }
+
+.link {
+	color: #f68b21;
+	text-decoration: underline;
+	cursor: pointer;
+}
