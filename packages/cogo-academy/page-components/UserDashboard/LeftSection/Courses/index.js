@@ -3,16 +3,16 @@ import { Button } from '@cogoport/components';
 import courseData from './coursesData';
 import styles from './styles.module.css';
 
+const openLink = (url) => {
+	window.open(url, '_blank');
+};
+
 function Courses() {
 	const { icon_url, heading, title, description, href, tag } = courseData;
 
 	const { label, url: redirection_url } = href;
 
 	const { icon: tag_icon, text: tag_text } = tag;
-
-	const openLink = (url) => {
-		window.open(url, '_blank');
-	};
 
 	return (
 		<div className={styles.container}>
