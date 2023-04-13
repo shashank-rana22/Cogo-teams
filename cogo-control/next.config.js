@@ -58,6 +58,7 @@ module.exports = withBundleAnalyzer({
 				net           : false,
 				tls           : false,
 				request       : false,
+				encoding   	  : false,
 			};
 		} else {
 			newConfig.resolve.fallback = { ...newConfig.resolve.fallback };
