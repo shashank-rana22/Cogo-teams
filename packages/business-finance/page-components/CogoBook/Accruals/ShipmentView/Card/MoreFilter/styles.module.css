@@ -1,42 +1,47 @@
 .radio {
-  width: 300px;
+	width: 300px;
 }
 
 .input_container {
-  margin-top: 16px;
-  :global {
-    .ui_input_container {
-      .ui_input_prefix {
-        width: 50px;
-      }
-      .ui_input_suffix {
-        width: 50px;
-      }
-    }
-  }
+	margin-top: 16px;
+
+	:global {
+		.ui_input_container {
+			.ui_input_prefix {
+				width: 50px;
+			}
+
+			.ui_input_suffix {
+				width: 50px;
+			}
+		}
+	}
 }
 
 .select_container {
-  margin-top: 16px;
+	margin-top: 16px;
 }
 
 .button_container {
-  display: flex;
-  gap: 6px;
-  justify-content: flex-end;
-  margin-top: 8px;
+	display: flex;
+	gap: 6px;
+	justify-content: flex-end;
+	margin-top: 8px;
 }
+
 .hr {
-  border: 1px solid #ee3425;
-  width: 25%;
+	width: 25%;
+	border: 1px solid #ee3425;
 }
+
 .profit {
-  font-size: 14px;
-  font-weight: 600;
+	font-size: 14px;
+	font-weight: 600;
 }
+
 .profit_hr {
-  margin: 24px 0px 0px 0px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin: 24px 0 0;
 }

@@ -1,4 +1,5 @@
 import { Modal, Input, Tooltip, Button, Breadcrumb } from '@cogoport/components';
+import { getFormattedPrice } from '@cogoport/forms';
 import { IcMSearchlight, IcMArrowBack } from '@cogoport/icons-react';
 import { Link, useRouter } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
@@ -55,8 +56,11 @@ function ViewSelectedInvoice() {
 
 	const { year = '', startDate, endDate, month = '', tradeType = '', service = '', shipmentType = '' } = query || {};
 
-	const subComponent = (itemData: object) => {
-		console.log(itemData, 'itemData');
+	const subComponent = (itemData) => {
+		const {
+			sellQuotation = '', buyQuotation = '', quotationProfit = '',
+			quotationMargin = '', bookingType = '',
+		} = itemData || {};
 
 		return (
 			<div className={styles.sub_comp}>
@@ -65,14 +69,30 @@ function ViewSelectedInvoice() {
 					<div className={styles.quo_border} />
 				</div>
 
-				<div>Purchase : INR 2,00,000</div>
-				<div>Sales : INR 2,20,000</div>
-				<div>Margin : 20,000 (10%)</div>
+				<div>
+					Purchase :
+					{' '}
+					{getFormattedPrice(buyQuotation, 'INR') || '-'}
+				</div>
+				<div>
+					Sales :
+					{' '}
+					{getFormattedPrice(sellQuotation, 'INR') || '-' }
+				</div>
+				<div>
+					Margin :
+					{' '}
+					{quotationProfit || '0'}
+					{' '}
+					(
+					{quotationMargin || '0'}
+					%)
+				</div>
 				<div>
 					Shipment Type :
 					{' '}
 					{' '}
-					<span className={styles.span_val}>Sell Without Buy</span>
+					<span className={styles.span_val}>{bookingType || '-'}</span>
 				</div>
 			</div>
 		);

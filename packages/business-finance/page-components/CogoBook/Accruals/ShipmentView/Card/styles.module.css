@@ -1,177 +1,180 @@
 /* stylelint-disable selector-class-pattern */
 .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 32px 36px;
-  margin-top: 16px;
-  background: #fff;
-  border-radius: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 32px 36px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
 }
 
 .period {
-  display: flex;
-  width: fit-content;
-  margin-right: 5px;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 20px;
+	display: flex;
+	width: fit-content;
+	margin-right: 5px;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 20px;
 }
 
 .hr_period {
-  width: 25%;
-  border: 1px solid #ee3425;
+	width: 25%;
+	border: 1px solid #ee3425;
 }
 
 .hr {
-  width: 36%;
-  border: 1px solid #ee3425;
+	width: 36%;
+	border: 1px solid #ee3425;
 }
 
 .info_icon_container {
-  padding: 2px 0 0 4px;
+	padding: 2px 0 0 4px;
 }
 
 .select_container {
-  display: flex;
-  gap: 8px;
-  width: fit-content;
-  margin-top: 16px;
+	display: flex;
+	gap: 8px;
+	width: fit-content;
+	margin-top: 16px;
 }
 
 .chips {
-  :global {
-    .ui_chip_container {
-      min-width: 0 !important;
-    }
-  }
+	:global {
+		.ui_chip_container {
+			min-width: 0 !important;
+		}
+	}
 
-  padding-bottom: 8px;
-  border-bottom: 1px solid #f8d468;
+	padding-bottom: 8px;
+	border-bottom: 1px solid #f8d468;
 }
 
 .date_range {
-  width: fit-content;
-  margin-top: 16px;
+	width: fit-content;
+	margin-top: 16px;
 
-  :global {
-    .react-datepicker__input-container {
-      .react-datepicker__close-icon::after {
-        background: none !important;
-      }
+	:global {
+		.react-datepicker__input-container {
+			.react-datepicker__close-icon::after {
+				background: none !important;
+			}
 
-      .react-datepicker__close-icon {
-        right: -9px;
-        border: none;
-      }
-    }
-  }
+			.react-datepicker__close-icon {
+				right: -9px;
+				border: none;
+			}
+		}
+	}
 }
 
 .hr_filter {
-  width: 15%;
-  border: 1px solid #ee3425;
+	width: 15%;
+	border: 1px solid #ee3425;
 }
 
 .select_popover {
-  :global {
-    .ui_select_options_container {
-      display: none !important;
-    }
-  }
+	:global {
+		.ui_select_options_container {
+			display: none !important;
+		}
+	}
 }
 
 .content_container {
-  max-height: 250px;
-  overflow-y: scroll;
+	max-height: 250px;
+	overflow-y: scroll;
 }
 
 .more_filter {
-  display: flex;
-  gap: 30px;
-  align-items: center;
-  margin-top: 40px;
+	display: flex;
+	gap: 30px;
+	align-items: center;
+	margin-top: 40px;
 }
 
 .job_number {
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	cursor: pointer;
 }
 
 .job_number_data {
-  font-weight: 600;
-  text-decoration: underline;
+	font-weight: 600;
+	text-decoration: underline;
 }
 
 .flex_jobs {
-  display: flex;
-  gap: 8px;
+	display: flex;
+	gap: 8px;
 }
 
 .purchase {
-  font-size: 16px;
-  font-weight: 600;
+	font-size: 16px;
+	font-weight: 600;
 }
 
 .header_checkbox {
-  padding-left: 4px;
+	padding-left: 4px;
 }
 
 .status {
-  padding: 4px 8px;
-  background: #fef1df;
-  border-radius: 4px;
+	padding: 4px 8px;
+	background: #fef1df;
+	border-radius: 4px;
 }
 
 .status_fin {
-  padding: 4px 8px;
-  background: #ddebc0;
-  border-radius: 4px;
+	padding: 4px 8px;
+	background: #ddebc0;
+	border-radius: 4px;
 }
 
 .status_op {
-  padding: 4px 8px;
-  background: #ddebc0;
-  border-radius: 4px;
+	padding: 4px 8px;
+	background: #ddebc0;
+	border-radius: 4px;
 }
 
 .date_range_not {
-  width: fit-content;
-  margin-top: 16px;
+	width: fit-content;
+	margin-top: 16px;
 
-  :global {
-    .react-datepicker__input-container {
-      .react-datepicker__close-icon::after {
-        background: none !important;
-      }
+	:global {
+		.react-datepicker__input-container {
+			.react-datepicker__close-icon::after {
+				background: none !important;
+			}
 
-      input {
-        cursor: not-allowed !important;
-      }
+			input {
+				cursor: not-allowed !important;
+			}
 
-      .react-datepicker__close-icon {
-        right: -9px;
-        border: none;
-      }
-    }
-  }
+			.react-datepicker__close-icon {
+				right: -9px;
+				border: none;
+			}
+		}
+	}
 }
 
 .profit_data {
-  color: #67c676;
+	color: #67c676;
 }
 
 .profit_color {
-  color: #ee3425;
+	color: #ee3425;
 }
+
 .font_size_tooltip {
-  font-size: 13px;
+	font-size: 13px;
 }
+
 .font_tooltip {
-  font-size: 13.5px;
+	font-size: 13.5px;
 }
+
 .fon_tooltip {
-  font-size: 12.5px;
+	font-size: 12.5px;
 }

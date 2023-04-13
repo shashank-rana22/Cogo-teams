@@ -1,5 +1,5 @@
 import { Pagination, Table } from '@cogoport/components';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import { FilterInterface } from '../../Accruals/interface';
 import EmptyState from '../EmptyState';
@@ -23,7 +23,7 @@ interface TableProps {
 	onRowSelect?: (row: object) => void;
 	onRowClick?: (row: object) => void;
 	getRowId?: (row: object) => string;
-	renderRowSubComponent?:Function
+	renderRowSubComponent?:(itemData: object) => ReactNode
 	showAllNestedOptions?:boolean
 }
 
