@@ -90,7 +90,7 @@ export default function CancelShipment({ setShow }) {
 			show
 			onClose={closeModal}
 			closeOnOuterClick={false}
-			showCloseIcon={false}
+			showCloseIcon={!updateShipmentLoading}
 			className={styles.customized_modal}
 			size="lg"
 		>
