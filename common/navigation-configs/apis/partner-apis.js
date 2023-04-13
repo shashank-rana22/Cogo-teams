@@ -11220,6 +11220,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'request_assign_chat',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 	analytics_dashboard: [
 		{

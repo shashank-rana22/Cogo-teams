@@ -36,6 +36,8 @@ function Header({
 	disableButton = '',
 	updateRoomLoading = false,
 	updateUserRoom = () => {},
+	requestForAssignChat = () => {},
+	requestAssignLoading = false,
 }) {
 	const [isVisible, setIsVisible] = useState(false);
 	const [openPopover, setOpenPopover] = useState(false);
@@ -49,6 +51,10 @@ function Header({
 		user_type,
 		search_user_name = '',
 		has_requested_by = {},
+		lead_user_id = '',
+		user_id = '',
+		sender = '',
+		id = '',
 	} = formattedData || {};
 
 	const { agent_id = '', agent_name = '' } = has_requested_by || {};
@@ -91,6 +97,16 @@ function Header({
 		assignChat({ ...agentIdPayload, is_allowed_to_chat: true });
 	};
 
+	const requestAssignPaylod = () => {
+		const payload = {
+			lead_user_id    : lead_user_id || undefined,
+			user_id         : user_id || undefined,
+			sender          : sender || undefined,
+			channel         : channel_type,
+			channel_chat_id : id,
+		};
+		requestForAssignChat(payload);
+	};
 	const renderPopoverOption = () => (
 		<div className={styles.button_container}>
 			<Button
@@ -135,7 +151,6 @@ function Header({
 					size="md"
 					className={styles.styled_button}
 					onClick={openAssignModal}
-					loading={assignLoading}
 				>
 					Assign
 				</Button>
@@ -168,7 +183,7 @@ function Header({
 					size="md"
 					className={styles.styled_button}
 					onClick={() => assignButtonAction('approve_request')}
-					// loading={}
+					loading={assignLoading}
 				>
 					Assign to
 					{agent_name}
@@ -182,8 +197,8 @@ function Header({
 					size="md"
 					disabled={hasAnyRequests}
 					className={styles.styled_button}
-					onClick={() => console.log('hi')}
-					loading={assignLoading}
+					onClick={requestAssignPaylod}
+					loading={requestAssignLoading}
 				>
 					{hasAnyRequests ? 'Requested' : 'Request for Assign'}
 				</Button>

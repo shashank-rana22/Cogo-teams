@@ -26,7 +26,7 @@ const useListChats = ({
 	const { query:searchQuery, debounceQuery } = useDebounceQuery();
 
 	const {
-		query: { assigned_chat = '', channel_type = '' },
+		query: { assigned_chat = '', channel_type:queryChannelType = '' },
 	} = useRouter();
 
 	const snapshotListener = useRef(null);
@@ -69,10 +69,10 @@ const useListChats = ({
 	}, [debounceQuery, searchValue]);
 
 	useEffect(() => {
-		if (assigned_chat && channel_type && firstMount) {
-			setActiveCard({ activeCardId: assigned_chat, activeCardData: { channel_type } });
+		if (assigned_chat && queryChannelType && firstMount) {
+			setActiveCard({ activeCardId: assigned_chat, activeCardData: { channel_type: queryChannelType } });
 		}
-	}, [assigned_chat, firstMount, channel_type]);
+	}, [assigned_chat, firstMount, queryChannelType]);
 
 	const dataFormatter = (list) => {
 		let resultList = {};
