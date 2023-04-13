@@ -1,16 +1,35 @@
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
+
+import { getFormattedAmount } from '../../../../../../common/helpers/getFormattedSum';
 
 import styles from './styles.module.css';
 
-function Title({ cardTitles = [], titleData = [], rowData = [], watchFields = [], parentIndex = 0, emptyValues = [] }) {
-	const [rowTotal, setRowTotal] = useState(0);
-	useEffect(() => {
-		let sum = 0;
-		for (let i = 0; i < rowData.length; i += 1) {
-			sum += Number(watchFields[emptyValues[parentIndex][i]]) + Number(rowData[i].base_price);
-		}
-		setRowTotal(sum);
-	}, [watchFields, emptyValues, rowData, parentIndex]);
+function Title({
+	cardTitles = [], titleData = [],
+	rowData = [], watchFields = [], parentIndex = 0,
+	emptyValues = [], setIndividualTotal = [], individualTotal = 0,
+}) {
+	// useEffect(() => {
+	// 	let sum = 0;
+	// 	for (let i = 0; i < rowData.length; i += 1) {
+	// 		sum += Number(watchFields[emptyValues[parentIndex][i]]) + Number(rowData[i].base_price);
+	// 	}
+	// 	setRowTotal(sum);
+	// }, [watchFields, emptyValues, rowData, parentIndex]);
+	// useEffect(() => {
+	const sum = rowData.reduce((acc, curr, i) => {
+		const currentValue = Number(watchFields[emptyValues[parentIndex][i]]) + Number(curr.base_price);
+		return acc + currentValue;
+	}, 0);
+
+	useMemo(() => {
+		setIndividualTotal((prev) => {
+			const newArr = prev;
+			newArr[parentIndex] = sum;
+			return [...newArr];
+		});
+	}, [sum, parentIndex, setIndividualTotal]);
+	// }, [watchFields, emptyValues, rowData, parentIndex, setIndividualTotal]);
 
 	return (
 		<div className={styles.container}>
@@ -25,7 +44,7 @@ function Title({ cardTitles = [], titleData = [], rowData = [], watchFields = []
 								{/* {titleData?.[`${itm.name}`]} */}
 								{/* {total.reduce((t, v) => t + v)} */}
 								{/* {JSON.stringify(values)} */}
-								{rowTotal}
+								{getFormattedAmount(individualTotal[parentIndex], 'INR')}
 								{' '}
 							</span>
 						) : (

@@ -4,8 +4,6 @@ import ServiceStats from '../../../../common/ServiceStats';
 import { AvgPromisedConAndContract } from '../../../../configurations/service-stats-data';
 import PortsCard from '../PortsCard';
 
-// import { PortsOriginDestinationDetailsData } from '../../../../configurations/details-ports-origin-destination';
-
 import styles from './styles.module.css';
 
 function ToApproveModal({ show, setShow = () => {}, selected, changeSelection = () => {}, isClickable = true }) {
@@ -19,17 +17,21 @@ function ToApproveModal({ show, setShow = () => {}, selected, changeSelection = 
 			<Modal.Header
 				title={(
 					<div className={styles.modal_header}>
-						<h2>Preview</h2>
+						<div className={styles.preview_ports_nos_section}>
+							<span className={styles.text_preview}>Preview</span>
+							<span className={styles.port_numbers}>
+								(
+								{selected.length}
+								{' '}
+								Port Pairs)
+							</span>
+
+						</div>
 						<ServiceStats data={AvgPromisedConAndContract} type="preview-stats" />
 					</div>
 				)}
 			/>
 			<Modal.Body className={styles.modal_body}>
-				<span className={styles.port_numbers}>
-					{selected.length}
-					{' '}
-					Port Pairs
-				</span>
 				<div className={styles.ports_card}>
 					{
 						(selected || []).map((item) => (

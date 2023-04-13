@@ -29,7 +29,6 @@ function PreviewAndApproveLists() {
 		}
 	};
 
-	console.log(selected, 'litx');
 	const changeSelection = (item, state) => {
 		if (state) {
 			setSelected([...selected, { ...item }]);

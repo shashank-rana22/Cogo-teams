@@ -1,13 +1,9 @@
-import {
-	//  useForm,
-	InputController,
-	SelectController,
-} from '@cogoport/forms';
-// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import { InputController, SelectController } from '@cogoport/forms';
 
 // import { getFieldController } from '../../../../../../common/Form/getFieldController';
 // import { useFieldArray } from '@cogoport/forms';
-// import { useState } from 'react';
+
+import { getFormattedAmount, getFormattedSum } from '../../../../../../common/helpers/getFormattedSum';
 
 import styles from './styles.module.css';
 
@@ -121,7 +117,6 @@ function PriceBreakupData({
 	// }, [fields, append]);
 
 	// console.log(fields, 'fields');
-
 	return (
 		<>
 			{
@@ -209,8 +204,16 @@ function PriceBreakupData({
 												Number(watch(`services.${trueIndex}.margin_value`)),
 												trueIndex,
 											)} */}
-											{Number(dataItem.base_price)
-											+ Number(watchFields[trueIndex])}
+											{getFormattedSum(dataItem.base_price, watchFields[trueIndex])}
+										</p>
+									</div>
+								);
+							}
+							if (item.name === 'base_price') {
+								return (
+									<div className={`${styles.column_labels} ${styles[`${item.name}_card_title`]}`}>
+										<p className={styles.data_labels}>
+											{getFormattedAmount(dataItem[item.name], 'INR')}
 										</p>
 									</div>
 								);

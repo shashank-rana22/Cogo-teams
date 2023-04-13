@@ -1,4 +1,3 @@
-// import { cl } from '@cogoport/components';
 import {
 	useForm,
 	// useFieldArray,
@@ -6,7 +5,7 @@ import {
 	//  SelectController,
 } from '@cogoport/forms';
 // import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
-// import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 // import { getFieldController } from '../../../../../../common/Form/getFieldController';
 // import { priceBreakupChildData } from '../../../../../configurations/price-breakup-card-child-data';
@@ -104,6 +103,8 @@ function PriceBreakupCard({ prefilledValues = [{}], priceBreakupChildData = [], 
 		{ label: 'Sell Price', name: 'sell_price' },
 	];
 
+	const [individualTotal, setIndividualTotal] = useState(Array(priceBreakupChildData.length).fill(0));
+
 	// const formProps = useForm();
 	const formProps = useForm({
 		defaultValues: {
@@ -117,6 +118,13 @@ function PriceBreakupCard({ prefilledValues = [{}], priceBreakupChildData = [], 
 	const { control, watch, handleSubmit } = formProps || {};
 
 	// -----------
+	// const emptyValues = React.useMemo(() => {
+	// 	let count = -1;
+	// 	return priceBreakupChildData.map((item) => item.data.map(() => {
+	// 		count += 1;
+	// 		return count;
+	// 	}));
+	// }, [priceBreakupChildData]);
 	let count = -1;
 	const emptyValues = priceBreakupChildData.map((item) => {
 		const newArr = item.data.map(() => {
@@ -149,6 +157,8 @@ function PriceBreakupCard({ prefilledValues = [{}], priceBreakupChildData = [], 
 							parentIndex={parentIndex}
 							watchFields={watchFields}
 							emptyValues={emptyValues}
+							setIndividualTotal={setIndividualTotal}
+							individualTotal={individualTotal}
 						/>
 						<PriceBreakupData
 							{...formProps}
@@ -165,7 +175,7 @@ function PriceBreakupCard({ prefilledValues = [{}], priceBreakupChildData = [], 
 					</div>
 				))
 			}
-			<FooterPriceBreakUpCard saveChanges={handleSubmit(handlePayload)} />
+			<FooterPriceBreakUpCard individualTotal={individualTotal} saveChanges={handleSubmit(handlePayload)} />
 		</div>
 	);
 }

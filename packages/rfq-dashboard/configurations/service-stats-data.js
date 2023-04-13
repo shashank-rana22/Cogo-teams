@@ -1,7 +1,7 @@
 export const AvgPromisedConAndContract = [{
 	key   : 'revenue',
 	label : 'Promised Con Revenue',
-	value : '$1,40,000',
+	value : '140000',
 	color : 'revenue',
 },
 {
@@ -21,7 +21,7 @@ export const AvgPromisedConAndContract = [{
 export const PromisedConAndContract = [{
 	key   : 'revenue',
 	label : 'Promised Revenue',
-	value : '$1,40,000',
+	value : '140000',
 	color : 'revenue',
 },
 {

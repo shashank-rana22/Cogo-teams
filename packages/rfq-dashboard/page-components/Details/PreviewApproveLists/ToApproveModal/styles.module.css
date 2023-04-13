@@ -5,7 +5,23 @@
 		.ui_modal_close_button {
 			margin-left: 20px;
 		}
+
+		.ui_modal_body_container {
+			padding-top: 0;
+		}
 	}
+}
+
+.preview_ports_nos_section {
+	display: flex;
+	align-items: center;
+}
+
+.text_preview {
+	padding-right: 30px;
+	font-size: 18px;
+	font-weight: 600;
+	color: #000;
 }
 
 .port_numbers {
