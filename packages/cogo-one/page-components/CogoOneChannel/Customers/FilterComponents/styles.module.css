@@ -1,5 +1,4 @@
 .container {
-	width: 180px;
 	padding: 0 0 15px;
 }
 
@@ -51,8 +50,4 @@
 			margin: 0 5px 0 0 !important;
 		}
 	}
-}
-
-.disabled {
-	cursor: not-allowed !important;
 }

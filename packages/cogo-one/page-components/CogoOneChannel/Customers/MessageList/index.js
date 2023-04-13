@@ -1,61 +1,77 @@
-import { cl, Input, Popover, Tooltip } from '@cogoport/components';
-import { IcMFilter, IcMSearchlight, IcMPlusInCircle } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { Input, Popover, cl } from '@cogoport/components';
+import {
+	IcMFilter,
+	IcMSearchlight,
+	IcMArrowRotateRight,
+	IcMArrowRotateDown,
+} from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
-import UserAvatar from '../../../../common/UserAvatar';
-import { PLATFORM_MAPPING } from '../../../../constants';
-import dateTimeConverter from '../../../../utils/dateTimeConverter';
-import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
+import useBulkAssignChat from '../../../../hooks/useBulkAssignChat';
 import FilterComponents from '../FilterComponents';
 import LoadingState from '../LoadingState';
 import NewWhatsappMessage from '../NewWhatsappMessage';
 
+import AutoAssignComponent from './AutoAssignComponent';
+import MessageCardData from './MessageCardData';
 import styles from './styles.module.css';
 
-function MessageList({
-	messagesList,
-	setSearchValue = () => { },
-	filterVisible,
-	searchValue,
-	setFilterVisible = () => { },
-	setAppliedFilters = () => { },
-	appliedFilters,
-	messagesLoading = false,
-	activeCardId = '',
-	setActiveMessage,
-	setActiveCardId = () => {},
-	showBotMessages = false,
-	setShowBotMessages = () => {},
-	isomniChannelAdmin = false,
-}) {
-	const [modalType, setModalType] = useState(false);
-	function getShowChat({ user_name }) {
-		if (searchValue) {
-			const searchName = user_name?.toLowerCase();
-			return searchName?.includes(searchValue?.toLowerCase());
+function MessageList(messageProps) {
+	const {
+		messagesList,
+		setSearchValue = () => { },
+		filterVisible,
+		searchValue,
+		setFilterVisible = () => { },
+		setAppliedFilters = () => { },
+		appliedFilters,
+		messagesLoading = false,
+		activeCardId = '',
+		setActiveMessage,
+		showBotMessages = false,
+		setShowBotMessages = () => {},
+		isomniChannelAdmin = false,
+		setModalType = () => {},
+		modalType = '',
+		handleScroll = () => {},
+		tagOptions = [],
+		userId,
+		sortedPinnedChatList = [],
+		firestore,
+	} = messageProps;
+	const [openPinnedChats, setOpenPinnedChats] = useState(true);
+	const [autoAssignChats, setAutoAssignChats] = useState(true);
+	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
+
+	const handleCheckedChats = (item, id) => {
+		if (id in selectedAutoAssign) {
+			setSelectedAutoAssign((p) => {
+				const arg = p;
+				delete (arg[id]);
+				return { ...p };
+			});
+		} else {
+			setSelectedAutoAssign((p) => ({ ...p, [id]: item }));
 		}
-
-		return true;
-	}
-
-	if (messagesLoading) {
-		return <LoadingState />;
-	}
-
-	function lastMessagePreview(previewData = '') {
-		return (
-			<div
-				className={styles.content}
-				dangerouslySetInnerHTML={{ __html: previewData }}
-			/>
-		);
-	}
-
-	const openModelForNewContact = () => {
-		setModalType(true);
 	};
-	const disabled = true;
+
+	const {
+		bulkAssignChat = () => {},
+		bulkAssignLoading = false,
+	} = useBulkAssignChat({ setSelectedAutoAssign, setAutoAssignChats });
+
+	const handleAutoAssignBack = () => {
+		setAutoAssignChats(true);
+		setSelectedAutoAssign({});
+	};
+
+	useEffect(() => {
+		handleAutoAssignBack();
+	}, [showBotMessages, appliedFilters]);
+
+	const ActiveIcon = openPinnedChats ? IcMArrowRotateDown : IcMArrowRotateRight;
+	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;
 	return (
 		<>
 			<div className={styles.filters_container}>
@@ -78,10 +94,10 @@ function MessageList({
 									filterVisible={filterVisible}
 									appliedFilters={appliedFilters}
 									setAppliedFilters={setAppliedFilters}
-									setActiveCardId={setActiveCardId}
 									setShowBotMessages={setShowBotMessages}
 									showBotMessages={showBotMessages}
 									isomniChannelAdmin={isomniChannelAdmin}
+									tagOptions={tagOptions}
 								/>
 							)
 						)}
@@ -99,117 +115,80 @@ function MessageList({
 				</div>
 			</div>
 
-			{ isEmpty(messagesList) ? (
+			{ isEmpty(messagesList) && isPinnedChatEmpty && !messagesLoading ? (
 				<div className={styles.list_container}>
 					<div className={styles.empty_state}>
 						No Messages Yet..
 					</div>
 				</div>
 			) : (
-				<div className={styles.list_container}>
-					{(messagesList || []).map((item) => {
-						const { chat_status = '' } = item || {};
-						const userData = getActiveCardDetails(item);
-						const {
-							user_name = '',
-							organization_name = '',
-							user_type = '',
-						} = userData || {};
-
-						const lastActive = new Date(item.new_message_sent_at);
-						const checkActiveCard = activeCardId === item?.id;
-
-						const showOrganization = () => {
-							if ((user_name?.toLowerCase() || '').includes('anonymous')) {
-								return startCase(PLATFORM_MAPPING[user_type] || '');
-							}
-							return startCase(organization_name);
-						};
-
-						const show = getShowChat({ user_name, item, appliedFilters, searchValue });
-
-						return (
-							show && (
+				<>
+					{showBotMessages && isomniChannelAdmin && (
+						<AutoAssignComponent
+							autoAssignChats={autoAssignChats}
+							setAutoAssignChats={setAutoAssignChats}
+							handleAutoAssignBack={handleAutoAssignBack}
+							selectedAutoAssign={selectedAutoAssign}
+							bulkAssignLoading={bulkAssignLoading}
+							bulkAssignChat={bulkAssignChat}
+						/>
+					)}
+					<div
+						className={cl`${styles.list_container} 
+						${(showBotMessages && isomniChannelAdmin) ? styles.bot_list_container : ''}`}
+						onScroll={handleScroll}
+					>
+						{!isPinnedChatEmpty && (
+							<>
 								<div
-									key={item?.id}
-									role="presentation"
-									className={cl`
-												${styles.card_container} 
-												${checkActiveCard ? styles.active_card : ''} 
-												`}
-									onClick={() => setActiveMessage(item)}
+									role="button"
+									tabIndex={0}
+									className={styles.pinned_chat_flex}
+									onClick={() => setOpenPinnedChats((p) => !p)}
 								>
-									<div className={styles.card}>
-										<div className={styles.user_information}>
-											<div className={styles.avatar_container}>
-												<UserAvatar
-													type={item.channel_type}
-													imageSource={item.image}
-												/>
-												<div className={styles.user_details}>
-													<Tooltip content={startCase(user_name) || 'User'} placement="top">
-														<div className={styles.user_name}>
-															{startCase(user_name) || 'User'}
-														</div>
-													</Tooltip>
-
-													<div className={styles.organisation}>
-														{showOrganization()}
-													</div>
-												</div>
-											</div>
-
-											<div className={styles.user_activity}>
-												<div className={styles.tags_conatiner}>
-													{!isEmpty(chat_status) && (
-														<div
-															className={cl`
-																${styles.tags}
-																${chat_status === 'warning' ? styles.warning : ''}
-																${chat_status === 'escalated' ? styles.escalated : ''}
-															`}
-														>
-															{startCase(chat_status)}
-														</div>
-													)}
-												</div>
-
-												<div className={styles.activity_duration}>
-													{dateTimeConverter(
-														Date.now() - Number(lastActive),
-														Number(lastActive),
-													)?.renderTime}
-												</div>
-											</div>
-										</div>
-
-										<div className={styles.content_div}>
-											{lastMessagePreview(item?.last_message || '')}
-											{item.new_message_count > 0 && (
-												<div className={styles.new_message_count}>
-													{item.new_message_count > 100 ? '99+' : (
-														item.new_message_count
-													)}
-												</div>
-											)}
-										</div>
-									</div>
+									<ActiveIcon className={styles.icon} />
+									<div className={styles.pin_text}>pinned chats</div>
 								</div>
-							)
-						);
-					})}
-				</div>
+								{openPinnedChats && (
+									<div className={styles.pinned_chats_div}>
+										{(sortedPinnedChatList || []).map((item) => (
+											<MessageCardData
+												item={item}
+												activeCardId={activeCardId}
+												userId={userId}
+												setActiveMessage={setActiveMessage}
+												firestore={firestore}
+												autoAssignChats={autoAssignChats}
+												handleCheckedChats={handleCheckedChats}
+												showBotMessages={showBotMessages}
+											/>
+										))}
+									</div>
+								)}
+							</>
+						)}
+						<div className={styles.recent_text}>Recent</div>
+						{(messagesList || []).map((item) => (
+							<MessageCardData
+								item={item}
+								activeCardId={activeCardId}
+								userId={userId}
+								setActiveMessage={setActiveMessage}
+								firestore={firestore}
+								autoAssignChats={autoAssignChats}
+								handleCheckedChats={handleCheckedChats}
+
+							/>
+						))}
+						{messagesLoading && <LoadingState />}
+					</div>
+				</>
 			)}
-			{!disabled && (
-				<div
-					className={styles.plus_circle}
-				>
-					<IcMPlusInCircle onClick={openModelForNewContact} fill="red" width={50} height={50} />
-				</div>
-			)}
-			{modalType && (
+
+			{modalType?.type && (
 				<NewWhatsappMessage
 					setModalType={setModalType}
+					modalType={modalType}
 				/>
 			)}
 		</>

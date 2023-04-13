@@ -41,14 +41,11 @@ function CostSheet() {
 		buydata,
 		apiloading,
 		preTaxData,
-		postTaxData,
 		preTaxLoading,
-		postTaxLoading,
 		sellData,
 		buyData,
 	} = useGetShipmentCostSheet({ query });
 	const { tentativeProfit: preTaxActual, quotationalProfit: preTaxExpected } = preTaxData || {};
-	const { tentativeProfit: postTaxActual, quotationalProfit: postTaxExpected } = postTaxData || {};
 	const { data: shipmentData, loading:loadingShipment } = useListShipment(jobNumber);
 	const dataList = shipmentData?.list[0] || {};
 	const { source, tradeType } = dataList;
@@ -90,10 +87,12 @@ function CostSheet() {
 				<Button
 					size="md"
 					themeType="secondary"
-					onClick={() => Router.push(
-						'/business-finance/coe-finance/[active_tab]/[view]',
-						'/business-finance/coe-finance/all_invoices/shipment-view' as never as null,
-					)}
+					onClick={() => {
+						Router.push(
+							`/business-finance/coe-finance/[active_tab]/[view]?jobNumber=${jobNumber}`,
+							`/business-finance/coe-finance/all_invoices/shipment-view?jobNumber=${jobNumber}`,
+						);
+					}}
 				>
 					Go Back
 				</Button>
@@ -142,12 +141,6 @@ function CostSheet() {
 					expected={preTaxExpected}
 					actual={preTaxActual}
 					loading={preTaxLoading}
-				/>
-				<StatRect
-					heading="Profit on Shipment - Post Tax"
-					expected={postTaxExpected}
-					actual={postTaxActual}
-					loading={postTaxLoading}
 				/>
 			</div>
 			<DiscountRect
@@ -204,6 +197,18 @@ function CostSheet() {
 		<div className={styles.tags_container}>
 			{getPills()}
 		</div>
+
+		<div className={styles.sid}>
+			{' '}
+			SID
+			{' '}
+			<div className={styles.job}>
+				#
+				{jobNumber}
+			</div>
+
+		</div>
+
 	</span>
         ) as unknown as string
         }
@@ -218,6 +223,7 @@ function CostSheet() {
 					dataList={shipmentData?.list?.[0]}
 					shipmentId={shipmentId}
 				/>
+
 			</Accordion>
 			<div className={styles.heading}>Cost Sheet</div>
 			<Line width="60px" color="#F68B21" margin="5px 0px 0px 0px" />
@@ -257,11 +263,21 @@ function CostSheet() {
 						loading={apiloading}
 					/>
 					<div className={styles.quotation_amount}>
-						Quotation Total :
-						<div className={styles.value_text}>
-							{sellData?.totalQuotational
-								? getFormattedPrice(sellData?.totalQuotational, 'INR')
-								: '  --' || '-'}
+						<div className={styles.credit}>
+							Credit Note :
+							<div className={styles.value_text}>
+								{sellData?.totalCreditNoteActual
+									? getFormattedPrice(sellData?.totalCreditNoteActual, 'INR')
+									: '  --'}
+							</div>
+						</div>
+						<div className={styles.credit}>
+							Quotation Total :
+							<div className={styles.value_text}>
+								{sellData?.totalQuotational
+									? getFormattedPrice(sellData?.totalQuotational, 'INR')
+									: '  --'}
+							</div>
 						</div>
 					</div>
 					{apiloading
@@ -280,11 +296,21 @@ function CostSheet() {
 						loading={apiloading}
 					/>
 					<div className={styles.quotation_amount}>
-						Quotation Total :
-						<div className={styles.value_text}>
-							{buyData?.totalQuotational
-								? getFormattedPrice(buyData?.totalQuotational, 'INR')
-								: '  --' || '-'}
+						<div className={styles.credit}>
+							Credit Note :
+							<div className={styles.value_text}>
+								{buyData?.totalCreditNoteActual
+									? getFormattedPrice(buyData?.totalCreditNoteActual, 'INR')
+									: '  --'}
+							</div>
+						</div>
+						<div className={styles.credit}>
+							Quotation Total :
+							<div className={styles.value_text}>
+								{buyData?.totalQuotational
+									? getFormattedPrice(buyData?.totalQuotational, 'INR')
+									: '  --'}
+							</div>
 						</div>
 					</div>
 					{apiloading

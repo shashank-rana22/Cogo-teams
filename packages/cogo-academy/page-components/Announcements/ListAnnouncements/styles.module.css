@@ -1,0 +1,13 @@
+.container {
+	margin-top: 20px;
+}
+
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.action_container {
+	display: flex;
+	margin: 8px 0;
+}

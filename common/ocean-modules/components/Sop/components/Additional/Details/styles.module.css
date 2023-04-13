@@ -1,0 +1,52 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.add {
+	width: 20%;
+	margin-bottom: 10px;
+}
+
+.addtional_container {
+	width: 80%;
+}
+
+.label_value_container {
+	width: 49%;
+	font-size: var(--font-size-md);
+
+	.label {
+		font-weight: 600;
+	}
+
+	&.document_value {
+		width: 100%;
+		margin-top: 6px;
+	}
+}
+
+.no_data {
+	padding: 8px 0;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.addtional_data {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding-bottom: 4px;
+	margin-bottom: 10px;
+
+	&:not(:last-of-type) {
+		border-bottom: 1px dashed var(--color-secondary-3);
+	}
+
+	:global {
+		.ui_button_container {
+			height: min-content;
+			padding: 0;
+		}
+	}
+}

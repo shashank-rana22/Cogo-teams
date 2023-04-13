@@ -47,7 +47,7 @@ function TopicList({ searchState = '', tagId = [] }) {
 			<div className={styles.grid_container} style={{ display: 'flex' }}>
 				<div
 					style={{
-						margin : '5px 0',
+						margin : '4px 0',
 						width  : '100%',
 						height : '65vh',
 						flex   : 1,

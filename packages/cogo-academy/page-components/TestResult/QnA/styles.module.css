@@ -1,0 +1,15 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.heading {
+	font-size: 18px;
+	font-weight: 500;
+	color: #221f20;
+	border-bottom: 2px solid #fff;
+}
+
+.question_card {
+	border-bottom: 1px dotted #4f4f4f;
+}

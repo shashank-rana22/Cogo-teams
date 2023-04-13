@@ -1,0 +1,22 @@
+.search {
+	width: 30%;
+	margin-bottom: 10px;
+}
+
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.modal_body {
+	height: 464px;
+}
+
+.empty_state {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	font-size: 16px;
+	text-align: center;
+}

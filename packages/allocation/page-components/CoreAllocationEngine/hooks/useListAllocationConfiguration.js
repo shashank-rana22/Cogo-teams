@@ -100,9 +100,9 @@ const useListAllocationConfigurations = () => {
 		{
 			Header   : 'Users',
 			accessor : ({ users = [] }) => {
-				const totalRoles = users.length;
+				const totalUsers = users.length;
 
-				if (totalRoles === 0) {
+				if (totalUsers === 0) {
 					return '___';
 				}
 
@@ -118,10 +118,43 @@ const useListAllocationConfigurations = () => {
 							<div className={styles.roles_container}>
 								{startCase(users?.[0]?.name || '___')}
 							</div>
-							{totalRoles > 1 && (
+							{totalUsers > 1 && (
 								<strong>
 									(+
-									{totalRoles - 1}
+									{totalUsers - 1}
+									)
+								</strong>
+							)}
+						</div>
+					</Tooltip>
+				);
+			},
+		},
+		{
+			Header   : 'Excluded Users',
+			accessor : ({ exclusion_users = [] }) => {
+				const totalExcludedUsers = exclusion_users.length;
+
+				if (totalExcludedUsers === 0) {
+					return '___';
+				}
+
+				const renderToolTip = exclusion_users.map((user) => (
+					<Pill size="md" color="orange">
+						{startCase(user.name)}
+					</Pill>
+				));
+
+				return (
+					<Tooltip content={renderToolTip} placement="bottom">
+						<div className={styles.overflow_flex}>
+							<div className={styles.roles_container}>
+								{startCase(exclusion_users?.[0]?.name || '___')}
+							</div>
+							{totalExcludedUsers > 1 && (
+								<strong>
+									(+
+									{totalExcludedUsers - 1}
 									)
 								</strong>
 							)}

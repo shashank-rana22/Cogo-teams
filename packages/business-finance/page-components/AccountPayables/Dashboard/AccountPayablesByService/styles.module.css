@@ -1,0 +1,151 @@
+.container {
+	max-height: 430px;
+	padding: 18px;
+	overflow: hidden;
+	background: #fff;
+	border-radius: 8px;
+	transition: max-height 0.3s ease-in-out;
+}
+
+.value {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	font-weight: 500;
+	color: #ed3726;
+}
+
+.heading {
+	display: flex;
+	align-items: center;
+	margin-left: 8px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #333;
+}
+
+.hr {
+	width: 100%;
+	height: 1px;
+	margin-top: 8px;
+	margin-bottom: 8px;
+	background: #ed3726;
+	border-radius: 10px;
+}
+
+.label {
+	display: flex;
+	align-items: center;
+	margin-right: 16px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #333;
+}
+
+.amount_container {
+	display: flex;
+	margin-top: 16px;
+
+	:hover {
+		background: #fdebe9;
+	}
+}
+
+.amount {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 16%;
+	padding: 12px 16px;
+	margin-right: 16px;
+	cursor: pointer;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.footer {
+	width: 100%;
+	height: 25px;
+	margin-top: -6px;
+	cursor: pointer;
+	background: #fffaeb;
+	border-radius: 0 0 8px 8px;
+	box-shadow: 0 2px 2px rgb(0 0 0 / 25%);
+}
+
+.footer_text {
+	padding: 4px;
+	font-size: 12px;
+	font-weight: 500px;
+	color: #f68b21;
+	text-align: center;
+	text-decoration-line: underline;
+}
+
+.down {
+	margin-bottom: -4px;
+	margin-left: 4px;
+}
+
+.imports_container {
+	display: flex;
+	padding: 16px;
+	margin-top: 16px;
+	background: #fff;
+	border: 1px solid #bdbdbd;
+	border-radius: 8px;
+}
+
+.ocean_value {
+	display: flex;
+	align-items: center;
+	font-size: 13px;
+	font-weight: 600;
+	color: #333;
+}
+
+.vr {
+	width: 1px;
+	margin-right: 36px;
+	background: #bdbdbd;
+	border-radius: 10px;
+}
+
+.sub_container {
+	display: flex;
+	flex-direction: column;
+	width: 20%;
+}
+
+.ocean_text {
+	padding: 12px 12px 12px 54px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #ed3726;
+}
+
+.sub_container_click {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 16%;
+	padding: 12px 16px;
+	margin-right: 16px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #ed3726;
+	cursor: pointer;
+	background: #fdebe9;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.div_container {
+	max-height: 125px;
+	padding: 18px;
+	overflow: hidden;
+	background: #fff;
+	border-radius: 8px;
+	transition: max-height 0.3s ease-in-out;
+}

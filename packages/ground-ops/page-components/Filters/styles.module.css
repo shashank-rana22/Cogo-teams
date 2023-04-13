@@ -12,6 +12,10 @@
 				width: 100%;
 			}
 		}
+
+		.ui_select_options_container {
+			width: 150%;
+		}
 	}
 }
 

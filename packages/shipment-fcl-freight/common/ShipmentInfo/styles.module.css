@@ -1,0 +1,21 @@
+.container {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	font-weight: 600;
+	color: #4f4f4f;
+
+	.link {
+		cursor: pointer;
+
+		:hover {
+			text-decoration: underline;
+		}
+	}
+
+	.inactive {
+		> div {
+			cursor: initial;
+		}
+	}
+}

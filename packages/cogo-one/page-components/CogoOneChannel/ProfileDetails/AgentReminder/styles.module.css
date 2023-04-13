@@ -1,4 +1,3 @@
-/* stylelint-disable selector-class-pattern */
 .container {
 	display: flex;
 	flex-direction: column;
@@ -7,12 +6,12 @@
 	overflow: hidden;
 
 	:global {
-		.react-datepicker-popper {
-			transform: translate3d(936.5px, 199px, 0) !important;
-		}
-
-		.react-datepicker__time-container {
-			right: -175px !important;
+		/* stylelint-disable-next-line selector-class-pattern */
+		.react-datepicker__month-container {
+			@media (max-width: 1280px) {
+				width: 300px;
+				padding: 16px 12px;
+			}
 		}
 	}
 }
@@ -29,17 +28,6 @@
 
 .wrapper {
 	padding-top: 22px;
-
-	:global {
-		.ui_input_container.ui_x-NGo {
-			height: 120px !important;
-		}
-
-		.ui_input_container.ui_ps_size_md .ui_input_control.ui_HZPDt {
-			font-family: Poppins, sans-serif;
-			font-size: 12px !important;
-		}
-	}
 }
 
 .label {
@@ -48,16 +36,6 @@
 
 .date_wrapper {
 	padding-top: 16px;
-
-	:global {
-		.react-datepicker-popper {
-			position: fixed !important;
-		}
-
-		.react-datepicker-popper[data-placement^="bottom"] {
-			padding-top: 40px !important;
-		}
-	}
 }
 
 .time_title {

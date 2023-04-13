@@ -1,17 +1,18 @@
-import { Button, Modal } from '@cogoport/components';
-import { IcMDownload, IcMEdit } from '@cogoport/icons-react';
+import { Button, Modal, Tooltip } from '@cogoport/components';
+import { IcMEyeopen, IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import List from '../../commons/List';
 import { ApprovalPendingFields } from '../../configurations/approval_pending_fields';
 import useUpdateShipmentDocument from '../../hooks/useUpdateShipmentDocument';
+import HAWBList from '../HawbList';
 import UploadModal from '../UploadModal';
 
 import DownloadModal from './DownloadModal';
 import styles from './styles.module.css';
 
 function ApprovalPending({
-	data, loading, page, setPage, setGenerate, setItem, setViewDoc, setEdit, listAPi,
+	data, loading, page, setPage, setGenerate, setItem, setViewDoc, edit, setEdit, listAPI, activeTab,
 }) {
 	const { fields } = ApprovalPendingFields;
 	const [showApprove, setShowApprove] = useState(null);
@@ -37,6 +38,16 @@ function ApprovalPending({
 		}
 	};
 
+	const handleOnEdit = (singleItem) => {
+		if (singleItem?.documentState === 'document_amendment_requested') {
+			handleEditMAWB(singleItem, '');
+		} else if (singleItem?.documentData?.status === 'uploaded') {
+			setShowUpload(singleItem); setEdit('edit');
+		} else if (singleItem?.documentData?.status === 'generated') {
+			handleEditMAWB(singleItem, 'edit');
+		}
+	};
+
 	const handleUpdate = async (values) => {
 		const serialId = values?.serialId || '';
 		const payload = {
@@ -53,7 +64,7 @@ function ApprovalPending({
 			`Draft_Airway_Bill_For_Shipment_${serialId}_${new Date().getTime()}`
 			|| undefined,
 		};
-		await updateDocument(payload, listAPi);
+		await updateDocument(payload, listAPI);
 		setShowApprove(null);
 	};
 
@@ -66,7 +77,7 @@ function ApprovalPending({
 					? () => { handleClickOnDownload(singleItem.documentUrl); }
 					: () => { handleDownloadMAWB(singleItem); }}
 			>
-				<IcMDownload fill="#8B8B8B" />
+				<IcMEyeopen fill="#8B8B8B" />
 
 			</Button>
 		),
@@ -74,9 +85,7 @@ function ApprovalPending({
 			<Button
 				themeType="linkUi"
 				style={{ fontSize: 12 }}
-				onClick={singleItem?.documentData?.status === 'uploaded'
-					? () => { setShowUpload(singleItem); }
-					: () => { handleEditMAWB(singleItem, 'edit'); }}
+				onClick={() => { handleOnEdit(singleItem); }}
 			>
 				<IcMEdit fill="#8B8B8B" />
 			</Button>
@@ -84,18 +93,30 @@ function ApprovalPending({
 		handleStatus: (singleItem) => (
 			singleItem.documentState === 'document_amendment_requested'
 				? (
+					<Tooltip
+						content={singleItem?.remarks?.toString()}
+						placement="top"
+					>
+						<div className={styles.tooltip}>
+							<Button
+								themeType="secondary"
+								style={{ border: '1px solid #ED3726', color: '#ED3726' }}
+								disabled={updateLoading}
+								onClick={() => { handleEditMAWB(singleItem, ''); }}
+							>
+								Amend
+							</Button>
+						</div>
+					</Tooltip>
+				) : (
 					<Button
 						themeType="secondary"
-						style={{ border: '1px solid #ED3726', color: '#ED3726' }}
+						style={{ border: '1px solid #333' }}
 						disabled={updateLoading}
-						onClick={() => { handleEditMAWB(singleItem, ''); }}
+						onClick={() => { setShowApprove(singleItem); }}
 					>
-						Amend
+						Approve
 					</Button>
-				) : (
-					<div>
-						Approval Pending
-					</div>
 				)
 		),
 	};
@@ -108,6 +129,10 @@ function ApprovalPending({
 				page={page}
 				setPage={setPage}
 				functions={functions}
+				activeTab={activeTab}
+				Child={HAWBList}
+				setViewDoc={setViewDoc}
+				setItem={setItem}
 			/>
 			{show && <DownloadModal show={show} setShow={setShow} />}
 			{showApprove && (
@@ -145,7 +170,13 @@ function ApprovalPending({
 					</Modal.Footer>
 				</Modal>
 			)}
-			<UploadModal showUpload={showUpload} setShowUpload={setShowUpload} listAPi={listAPi} />
+			<UploadModal
+				showUpload={showUpload}
+				setShowUpload={setShowUpload}
+				edit={edit}
+				setEdit={setEdit}
+				listAPI={listAPI}
+			/>
 		</>
 	);
 }

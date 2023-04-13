@@ -1,0 +1,15 @@
+.tabs_container {
+	button {
+		border-right: 1px solid #e0e0e0;
+	}
+}
+
+.header_style {
+	flex-direction: column;
+	font-size: 28px;
+	font-weight: 600;
+}
+
+.header {
+	padding-bottom: 16px;
+}
