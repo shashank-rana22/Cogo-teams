@@ -25,7 +25,7 @@ function TradeDocuments({
 	const { data, getList, loading } = useListTradeDocuments({
 		defaultFilters: {
 			q               : searchTasksVal || undefined,
-			status          : 'active',
+			status          : 'accepted',
 			organization_id : importer_exporter_id,
 		},
 	});
@@ -33,7 +33,7 @@ function TradeDocuments({
 	const { deleteDocument } = useUpdateOrganizationDocument({
 		refetch       : getList,
 		defaultParams : {
-			status: 'inactive',
+			status: 'pending',
 		},
 	});
 
