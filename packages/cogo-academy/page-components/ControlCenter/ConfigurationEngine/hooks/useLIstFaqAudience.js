@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
@@ -26,7 +27,7 @@ function useLIstFaqAudience({ searchAudienceInput = '' }) {
 				},
 			});
 		} catch (err) {
-			Toast?.error(err?.message);
+			if (err.response?.data) { Toast.error(getApiErrorString(err.response?.data)); }
 		}
 	}, [activeAudience, audienceCurrentPage, query, trigger]);
 

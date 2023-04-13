@@ -1,4 +1,5 @@
 import { Toast, Input } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { IcMSearchlight, IcMCross, IcMArrowLeft } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
@@ -48,7 +49,7 @@ function Header({
 					setShowNotificationContent(false);
 				}
 			} catch (e) {
-				Toast.error(e);
+				if (e.response?.data) { Toast.error(getApiErrorString(e.response?.data)); }
 			}
 		} else {
 			setTopic(null);

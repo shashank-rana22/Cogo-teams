@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
@@ -71,7 +72,8 @@ const useCreateFeedback = ({ refetchQuestions, answerData, loading }) => {
 
 			refetchQuestions();
 		} catch (error) {
-			Toast.error(error?.message);
+			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
+
 			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
 	};
@@ -90,6 +92,8 @@ const useCreateFeedback = ({ refetchQuestions, answerData, loading }) => {
 
 			refetchQuestions();
 		} catch (error) {
+			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
+
 			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
 	};
@@ -99,7 +103,6 @@ const useCreateFeedback = ({ refetchQuestions, answerData, loading }) => {
 		setIsLiked('disliked');
 
 		let remark = values?.remark ? values.remark : '';
-
 
 		if (values?.answer_checkbox) {
 			remark = `Answer not satisfactory. ${remark}`;
@@ -136,6 +139,8 @@ const useCreateFeedback = ({ refetchQuestions, answerData, loading }) => {
 			setShow(false);
 			refetchQuestions();
 		} catch (error) {
+			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
+
 			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
 	};
