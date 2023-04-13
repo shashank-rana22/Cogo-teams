@@ -1,5 +1,5 @@
-import Loader from '../FAQs/Loader';
 import QuestionList from '../FAQs/QuestionList';
+import Loader from '../FAQs/TopicList/Loader';
 
 import RenderComponent from './RenderComponent';
 
@@ -23,8 +23,6 @@ function QuestionListComponent({
 	showNotificationContent,
 	setShowNotificationContent,
 }) {
-	if (loading) return <Loader />;
-
 	if (search) {
 		return (
 			<QuestionList
@@ -34,6 +32,8 @@ function QuestionListComponent({
 			/>
 		);
 	}
+
+	if (loading) return <Loader />;
 
 	return (
 		<RenderComponent

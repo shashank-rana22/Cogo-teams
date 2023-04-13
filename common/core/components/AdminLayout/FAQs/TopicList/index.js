@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 
 import Announcements from '../../Announcements';
 import QuestionListComponent from '../../QuestionListComponent';
-import QuestionList from '../QuestionList';
 import Header from '../QuestionList/Header';
 
 import styles from './styles.module.css';
@@ -115,7 +114,7 @@ function TopicList({
 	];
 
 	return (
-		<div className={styles.container}>
+		<div className={`${styles.container} ${(showHistory || from === 'test_module') && styles.hide_tabs}`}>
 			<Header
 				activeTab={activeTab}
 				search={search}
@@ -134,26 +133,23 @@ function TopicList({
 				from={from}
 			/>
 
-			{showHistory || from === 'test_module' ? (
-				<QuestionList />
-			) : (
-				<Tabs
-					activeTab={activeTab}
-					onChange={setActiveTab}
-					fullWidth
-					themeType="primary"
-				>
-					{TABS_MAPPING.map((tabItem) => {
-						const { name, title, component: Component, props } = tabItem;
+			<Tabs
+				activeTab={activeTab}
+				onChange={setActiveTab}
+				fullWidth
+				className={styles.tab_hide}
+				themeType="main_tabs"
+			>
+				{TABS_MAPPING.map((tabItem) => {
+					const { name, title, component: Component, props } = tabItem;
 
-						return (
-							<TabPanel key={name} name={name} title={title}>
-								<Component {...props} />
-							</TabPanel>
-						);
-					})}
-				</Tabs>
-			)}
+					return (
+						<TabPanel key={name} name={name} title={title}>
+							<Component {...props} />
+						</TabPanel>
+					);
+				})}
+			</Tabs>
 		</div>
 	);
 }
