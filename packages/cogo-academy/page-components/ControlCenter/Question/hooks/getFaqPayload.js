@@ -18,9 +18,9 @@ function getFaqPayload({ values, editorValue, data, showAlias }) {
 		const { id, question_abstract: alias_question_abstract = '', status } = ele;
 
 		return {
-			id      : id !== index ? id : undefined,
+			id     : id !== index ? id : undefined,
 			alias_question_abstract,
-			sstatus : status || undefined,
+			status : status || undefined,
 		};
 	});
 

@@ -118,55 +118,60 @@ const addedQuestionsColumns = ({
 		},
 		{
 			Header   : 'ACTIONS',
-			accessor : (items) => (
-				<div className={styles.button_container}>
-					{!['inactive', 'draft'].includes(activeList)
-						? (
-							<Button
-								type="button"
-								themeType="primary"
-								size="sm"
-								style={{ marginRight: 8 }}
-								onClick={() => onClickViewButton(items?.id)}
-							>
-								VIEW
-							</Button>
-						)
-						: null}
-					<Button
-						type="button"
-						themeType="secondary"
-						size="sm"
-						style={{ marginRight: 8 }}
-						onClick={() => onClickEditButton(items?.id)}
-					>
-						EDIT
-					</Button>
-					{activeList !== 'inactive' ? (
-						<Popover
-							content={(
-								<PopOverContent
-									source="question"
-									onCLickYesButton={() => deactivateQuestion(items.id)}
-									onClickNoButton={() => onClickNoButton(items)}
-								/>
-							)}
-							visible={showPopOver === items?.id}
+			accessor : (items) => {
+				const { parent_question_id, id } = items || {};
+
+				return (
+					<div className={styles.button_container}>
+						{!['inactive', 'draft'].includes(activeList)
+							? (
+								<Button
+									type="button"
+									themeType="primary"
+									size="sm"
+									style={{ marginRight: 8 }}
+									onClick={() => onClickViewButton(parent_question_id || id)}
+								>
+									VIEW
+								</Button>
+							)
+							: null}
+						<Button
+							type="button"
+							themeType="secondary"
+							size="sm"
+							style={{ marginRight: 8 }}
+							onClick={() => onClickEditButton(parent_question_id || id)}
 						>
-							<IcMDelete
-								height={20}
-								width={20}
-								style={{ cursor: 'pointer' }}
-								onClick={
+							EDIT
+						</Button>
+
+						{activeList !== 'inactive' && (
+							<Popover
+								content={(
+									<PopOverContent
+										source="question"
+										onCLickYesButton={() => deactivateQuestion(items.id)}
+										onClickNoButton={() => onClickNoButton(items)}
+									/>
+								)}
+								visible={showPopOver === items?.id}
+							>
+								<IcMDelete
+									height={20}
+									width={20}
+									style={{ cursor: 'pointer' }}
+									onClick={
 								() => setShowPopOver(() => (showPopOver === items?.id ? null : items?.id))
 }
-							/>
-						</Popover>
+								/>
+							</Popover>
 
-					) : null}
+						)}
 
-				</div>
-			),
+					</div>
+				);
+			},
 		},
 	];
 };
