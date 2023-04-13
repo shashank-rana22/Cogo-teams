@@ -159,9 +159,9 @@ function Item(props) {
 		const { id: sId } = itemList || {};
 		const data = components;
 
-		const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === sId));
-		data.layouts.splice(selectedComponentIndex, 1);
-		setComponents((prev) => ({ ...prev, layouts: data.layouts }));
+		const selectedComponentIndex = (data || []).findIndex((component) => (component.id === sId));
+		data.splice(selectedComponentIndex, 1);
+		setComponents((prev) => ({ ...prev, layouts: data }));
 	};
 
 	const handleCopy = (itemList) => {

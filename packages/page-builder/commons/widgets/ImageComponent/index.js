@@ -7,11 +7,12 @@ import FileUploader from '../../FileUploader';
 function ImageComponent(props) {
 	const { src, style, components, setComponents, elementId } = props;
 
-	const [fileValue, setFileValue] = useState();
+	const [fileValue, setFileValue] = useState(src);
 	const [isFocused, setIsFocused] = useState(false);
 
 	useEffect(() => {
 		if (fileValue) {
+			console.log('component ::', components);
 			// eslint-disable-next-line max-len, max-len, max-len
 			const selectedComponentIndex = (components || []).findIndex((component) => (component.id === elementId));
 
@@ -21,11 +22,17 @@ function ImageComponent(props) {
 			};
 
 			// use map instead slice
-			// setComponents((prevComponents) => [
-			// 	...prevComponents.slice(0, selectedComponentIndex),
-			// 	updatedComponent,
-			// 	...prevComponents.slice(selectedComponentIndex + 1),
-			// ]);
+			setComponents((prev) => ({
+				...prev,
+				layouts: [
+					...prev.layouts.slice(0, selectedComponentIndex),
+					updatedComponent,
+					...prev.layouts.slice(selectedComponentIndex + 1),
+				],
+				// ...prevComponents.slice(0, selectedComponentIndex),
+				// updatedComponent,
+				// ...prevComponents.slice(selectedComponentIndex + 1),
+			}));
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [fileValue]);
