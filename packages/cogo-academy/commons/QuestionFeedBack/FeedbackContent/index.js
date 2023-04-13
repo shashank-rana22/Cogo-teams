@@ -114,7 +114,10 @@ function FeedBackContent({
 					)}
 
 					{showAliasInput && (
-						<div className={styles.alias_input}>
+						<div
+							className={styles.alias_input}
+							style={{ width: source === 'create' ? '100%' : '80%' }}
+						>
 							<Input
 								size="sm"
 								value={inputAlias}

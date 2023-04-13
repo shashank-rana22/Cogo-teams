@@ -16,9 +16,7 @@ const useCreateFaqQuestionAlias = ({
 
 	const general = useSelector((state) => state.general || {});
 
-	const audience_ids = [];
-
-	(faqAudiences || []).map((audience) => audience_ids.push(audience?.id));
+	const audience_ids = (faqAudiences || []).map((audience) => (audience?.id));
 
 	const { id = '' } = general?.query || {};
 

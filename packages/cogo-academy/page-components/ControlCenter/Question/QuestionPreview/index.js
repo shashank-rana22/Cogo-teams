@@ -108,7 +108,9 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 					!isEmpty(question_aliases) && (
 
 						<div>
-							<h5 className={styles.answer_title}>Aliases</h5>
+							<h5 className={styles.answer_title}>
+								{(question_aliases || []).length > 1 ? 'Aliases' : 'Alias'}
+							</h5>
 							<p className={styles.answer_content}>
 								{
 							(question_aliases || []).map((alias, index) => {
