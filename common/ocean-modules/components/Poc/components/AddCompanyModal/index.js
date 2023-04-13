@@ -51,6 +51,7 @@ function AddCompanyModal({
 			...formValues,
 			trade_party_type,
 			importer_exporter_id,
+			organization_id,
 			companyType,
 		});
 		createTrigger(params);
