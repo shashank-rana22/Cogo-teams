@@ -36,7 +36,7 @@ if (process.env.NODE_ENV === 'production') {
 	}
 }
 
-function MyApp({ Component, pageProps, firestoreCustomToken }) {
+function MyApp({ Component, pageProps, firestoreCustomToken = '' }) {
 	useEffect(() => {
 		Router.events.on('routeChangeStart', () => {
 			pageProgessBar.start();
@@ -100,7 +100,8 @@ MyApp.getInitialProps = async () => {
 		.catch((error) => {
 			console.log(error);
 		});
-	return { pageProps: { layout: 'none' }, firestoreCustomToken };
+
+		return { pageProps: { layout: 'none' }, firestoreCustomToken };
 };
 
 export default appWithTranslation(MyApp);
