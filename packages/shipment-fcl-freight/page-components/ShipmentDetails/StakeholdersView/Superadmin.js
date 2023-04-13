@@ -11,7 +11,7 @@ import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
-import Tasks from '../../../common/Tasks/List';
+import Tasks from '../../../common/Tasks';
 import Timeline from '../../../common/TimeLine';
 import useGetServices from '../../../hooks/useGetServices';
 import useGetShipment from '../../../hooks/useGetShipment';

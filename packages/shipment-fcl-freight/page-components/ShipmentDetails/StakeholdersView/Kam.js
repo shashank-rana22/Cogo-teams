@@ -11,6 +11,7 @@ import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
+import TaskDetails from '../../../common/Tasks';
 import Timeline from '../../../common/TimeLine';
 import useGetServices from '../../../hooks/useGetServices';
 import useGetShipment from '../../../hooks/useGetShipment';
@@ -103,7 +104,7 @@ function Kam() {
 							<Overview shipmentData={shipment_data} />
 						</TabPanel>
 						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
-							{/* <TimelineAndTask /> */}
+							<TaskDetails />
 						</TabPanel>
 						<TabPanel name="sales_live_invoice" title="Sales Live Invoice">
 							{/* <SalesInvoice /> */}

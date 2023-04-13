@@ -6,7 +6,7 @@ import useListAdditionalServices from '../../../../hooks/useListAdditionalServic
 import AddRate from '../../../AdditionalServices/components/AddRate';
 import getStaus from '../../../AdditionalServices/components/List/ItemAdded/get_status';
 
-function AdditionsService({
+function AdditionsServicesTasks({
 	task = {},
 	onCancel = () => {},
 	refetch = () => {},
@@ -43,4 +43,4 @@ function AdditionsService({
 	);
 }
 
-export default AdditionsService;
+export default AdditionsServicesTasks;
