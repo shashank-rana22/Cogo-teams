@@ -40,14 +40,15 @@ function ContainerNmUpdate({
 		apiTrigger(payload);
 	};
 
+	const closeModal = () => setEditContainerNum(false);
+
 	return (
 		<Modal
 			show
-			onClose={() => {
-				setEditContainerNum(false);
-			}}
+			onClose={closeModal}
 			showCloseIcon={!loading}
 			closeOnOuterClick={false}
+			className={styles.custom_modal}
 		>
 			<Modal.Header title="Update Container Number" />
 			<Modal.Body>
@@ -75,9 +76,8 @@ function ContainerNmUpdate({
 				<Button
 					size="md"
 					themeType="secondary"
-					onClick={() => setEditContainerNum(false)}
+					onClick={closeModal}
 					disabled={loading}
-					style={{ marginRight: '12px' }}
 				>
 					Cancel
 				</Button>

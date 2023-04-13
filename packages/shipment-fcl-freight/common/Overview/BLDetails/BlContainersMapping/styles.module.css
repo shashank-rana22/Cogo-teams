@@ -46,5 +46,9 @@
 			height: 400px;
 			max-height: 400px;
 		}
+
+		.ui_button_container:not(:first-of-type) {
+            margin-left: 10px;
+        }
 	}
 }

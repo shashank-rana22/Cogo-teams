@@ -36,12 +36,12 @@ function BlContainersMapping({
 		apiTrigger(payload);
 	};
 
+	const closeModal = () => setMappingModal(false);
+
 	return (
 		<Modal
 			show
-			onClose={() => {
-				setMappingModal(false);
-			}}
+			onClose={closeModal}
 			showCloseIcon={!loading}
 			closeOnOuterClick={false}
 			className={styles.custom_modal}
@@ -84,12 +84,9 @@ function BlContainersMapping({
 			</Modal.Body>
 			<Modal.Footer>
 				<Button
-					onClick={() => {
-						setMappingModal(false);
-					}}
+					onClick={closeModal}
 					size="md"
 					themeType="secondary"
-					style={{ marginRight: 10 }}
 				>
 					Cancel
 				</Button>

@@ -30,10 +30,10 @@ function AddService({
 
 	let finalList = (list || []).map((item) => ({
 		...item,
-		shipmentId,
+		shipment_id : shipmentId,
 		services,
 		isSeller,
-		name: `${item.code} ${startCase(item.name)}`,
+		name        : `${item.code} ${startCase(item.name)}`,
 	}));
 
 	if (filters.name) {

@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 
 import useUpdateShipment from '../../../hooks/useUpdateShipment';
 
+import styles from './styles.module.css';
+
 function AddPoNumber({
 	setShow = () => {},
 	shipment_data = {},
@@ -29,6 +31,7 @@ function AddPoNumber({
 			onClose={closeModal}
 			showCloseIcon={!loading}
 			closeOnOuterClick={false}
+			className={styles.custom_modal}
 		>
 			<Modal.Header title="Add PO Number" />
 			<Modal.Body>
@@ -44,7 +47,6 @@ function AddPoNumber({
 					themeType="secondary"
 					onClick={closeModal}
 					disabled={loading}
-					style={{ marginRight: '12px' }}
 				>
 					Cancel
 				</Button>

@@ -69,7 +69,7 @@ function SupplierReallocation({
 		<Modal
 			show
 			onClose={closeModal}
-			className={styles.styled_modal_container}
+			className={styles.custom_modal}
 			showCloseIcon={!loading}
 		>
 			<Modal.Body>
@@ -89,7 +89,6 @@ function SupplierReallocation({
 					themeType="secondary"
 					onClick={closeModal}
 					disabled={loading}
-					style={{ marginRight: '12px' }}
 				>
 					Cancel
 				</Button>

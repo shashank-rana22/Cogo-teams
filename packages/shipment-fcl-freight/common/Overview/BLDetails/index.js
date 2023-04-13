@@ -50,9 +50,8 @@ function BLDetails() {
 			{!isEmpty(list)
 				? (
 					<Button
-						onClick={(e) => {
+						onClick={() => {
 							setShowModal('container_mapping');
-							e.stopPropagation();
 						}}
 						size="md"
 						style={{ marginLeft: '6px' }}
@@ -66,9 +65,8 @@ function BLDetails() {
 			{!isEmpty(containerDetailsArray)
 				? (
 					<Button
-						onClick={(e) => {
+						onClick={() => {
 							setShowModal('container_num_update');
-							e.stopPropagation();
 						}}
 						size="md"
 					>
