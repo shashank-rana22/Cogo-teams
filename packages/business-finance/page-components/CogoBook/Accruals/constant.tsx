@@ -373,6 +373,6 @@ export const serviceTypeOptions = [
 ];
 
 export const optionsRadio = [
-	{ name: 'r1', value: 'BULK', label: 'ALL' },
-	{ name: 'r2', value: 'PAGE', label: 'CURRENT' },
+	{ name: 'r1', value: 'BULK', label: 'All Shipments' },
+	{ name: 'r2', value: 'PAGE', label: 'Currently Selected Shipments' },
 ];

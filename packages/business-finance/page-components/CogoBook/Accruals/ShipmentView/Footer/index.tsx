@@ -213,7 +213,7 @@ function Footer({
 				)}
 			</div>
 			{openModal && (
-				<Modal show={openModal} onClose={() => setOpenModal(false)} size="sm">
+				<Modal show={openModal} onClose={() => setOpenModal(false)}>
 					<Modal.Body>
 						<div className={styles.flex_modal}>
 							<div className={!value ? styles.margin : styles.margin_not}>

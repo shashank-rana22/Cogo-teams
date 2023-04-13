@@ -110,7 +110,7 @@ function ViewSelectedInvoice() {
 							</Link>
 						)}
 					/>
-					<Breadcrumb.Item label="Selected Invoices" />
+					<Breadcrumb.Item label="Selected Shipments" />
 				</Breadcrumb>
 			</div>
 			<div className={styles.header_container}>

@@ -114,7 +114,7 @@ const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 			});
 			if (rep) {
 				viewSelected();
-				Toast.success('successfully');
+				Toast.success('Successfully');
 			}
 			setShow(false);
 		} catch (error) {
