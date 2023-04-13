@@ -50,13 +50,13 @@ function Stage({
 		[setNewAddingItemProps],
 	);
 
-	console.log('aaaa', stageItems);
+	console.log('aaaa', stageItems, component);
 
 	//! Portal :: mimic behavior of portal stage
 	useEffect(() => {
-		if (!isEqual(stageItems, component)) {
-			setStageItems(component);
-		}
+		// if (!isEqual(stageItems, component)) {
+		setStageItems(component);
+		// }
 	}, [component]);
 
 	//! Portal :: "update" method mutate the array, we might use alternative to this Eg. arrayMove
@@ -85,7 +85,7 @@ function Stage({
 			>
 				<RightPanel
 					widget={item}
-					components={stageItems.layouts}
+					components={stageItems}
 					setComponents={setComponent}
 					index={index}
 					id={id}

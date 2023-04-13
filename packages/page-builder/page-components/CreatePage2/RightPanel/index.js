@@ -18,8 +18,7 @@ const ITEM_TYPES = {
 	rootElement : 'rootElement',
 };
 
-function ComponentBuilder({ widget, components, setComponents, selectedItem }) {
-	const [childId, setChildId] = useState('');
+function ComponentBuilder({ widget, components, setComponents, selectedItem, childId, setChildId }) {
 	const { type: componetType, children, properties, id: componentId } = widget || {};
 	const { id: selectedItemId } = selectedItem || {};
 	const { styles: style } = properties || {};
@@ -63,7 +62,7 @@ function ComponentBuilder({ widget, components, setComponents, selectedItem }) {
 							>
 								{icon}
 							</div>
-						) : <RenderComponents componentType={type} widget={childComponent} components={components} setComponents={setComponents} elementId={id} /> }
+						) : <RenderComponents componentType={type} widget={childComponent} components={components} setComponents={setComponents} elementId={id} childId={childId} selectedItem={selectedItem} /> }
 
 					</div>
 				);
@@ -86,6 +85,7 @@ function Item(props) {
 		isSelected,
 		selectedItem,
 	} = props;
+	const [childId, setChildId] = useState('');
 
 	const { type, id: elementId } = widget || {};
 
@@ -93,6 +93,7 @@ function Item(props) {
 	// 	width  : 800,
 	// 	height : 170,
 	// });
+	console.log('Sdsjhdkh', widget);
 
 	// const { width, height } = state || {};
 
@@ -158,10 +159,9 @@ function Item(props) {
 	const handleDelete = (itemList) => {
 		const { id: sId } = itemList || {};
 		const data = components;
-
-		const selectedComponentIndex = (data || []).findIndex((component) => (component.id === sId));
-		data.splice(selectedComponentIndex, 1);
-		setComponents((prev) => ({ ...prev, layouts: data }));
+		const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === sId));
+		data.layouts.splice(selectedComponentIndex, 1);
+		setComponents(data);
 	};
 
 	const handleCopy = (itemList) => {
@@ -221,9 +221,10 @@ function Item(props) {
 
 			<div>
 				{type === 'container'
-					? <ComponentBuilder widget={widget} components={components} setComponents={setComponents} selectedItem={selectedItem} />
-					: <RenderComponents componentType={type} widget={widget} components={components} setComponents={setComponents} elementId={elementId} />}
+					? <ComponentBuilder widget={widget} components={components} setComponents={setComponents} selectedItem={selectedItem} childId={childId} setChildId={setChildId} />
+					: <RenderComponents componentType={type} widget={widget} components={components} setComponents={setComponents} elementId={elementId} childId={childId} selectedItem={selectedItem} />}
 			</div>
+
 			<div role="presentation" className={styles.change}>
 				<IcMCrossInCircle height="24px" width="24px" cursor="pointer" onClick={() => handleDelete(widget)} />
 				<IcMDuplicate height="24px" width="24px" cursor="pointer" onClick={() => handleCopy(widget)} />

@@ -1,72 +1,48 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import FileUploader from '../../FileUploader';
 
-// import styles from './styles.module.css';
-
 function ImageComponent(props) {
-	const { src, style, components, setComponents, elementId } = props;
+	const { src, components, setComponents, childId, selectedItem } = props;
 
-	const [fileValue, setFileValue] = useState(src);
+	const [fileValue, setFileValue] = useState();
 	const [isFocused, setIsFocused] = useState(false);
 
-	useEffect(() => {
-		if (fileValue) {
-			console.log('component ::', components);
-			// eslint-disable-next-line max-len, max-len, max-len
-			const selectedComponentIndex = (components || []).findIndex((component) => (component.id === elementId));
+	const handleFileChange = (val) => {
+		if (val) {
+			const { parentId, id } = selectedItem || {};
+			const data = components;
+			const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === id));
 
-			const updatedComponent = {
-				...components[selectedComponentIndex],
-				content: fileValue,
-			};
+			if (parentId) {
+				data.layouts[selectedComponentIndex].children[childId].content = val;
+			} else {
+				data.layouts[selectedComponentIndex].content = val;
+			}
 
-			// use map instead slice
-			setComponents((prev) => ({
-				...prev,
-				layouts: [
-					...prev.layouts.slice(0, selectedComponentIndex),
-					updatedComponent,
-					...prev.layouts.slice(selectedComponentIndex + 1),
-				],
-				// ...prevComponents.slice(0, selectedComponentIndex),
-				// updatedComponent,
-				// ...prevComponents.slice(selectedComponentIndex + 1),
-			}));
+			setFileValue(val);
+
+			setComponents((prev) => ({ ...prev, layouts: data.layouts }));
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [fileValue]);
-
-	// const editorStyle = {
-	// 	border  : isFocused ? '1.5px solid #88cad1' : '1px solid #ccc',
-	// 	padding : '10px',
-	// 	margin  : '20px',
-	// };
+	};
 
 	return (
 		<div>
-
 			{fileValue ? (
 				<div
-					// className={`${styles['my-div']} ${isFocused ? styles.focused : ''}`}
 					role="presentation"
 					onClick={() => setIsFocused(!isFocused)}
 				>
-					{/* <span className={styles['edit-icon']}>
-						<IcMEdit fil="#88cad1" />
-					</span> */}
-
-					<img width="100%" src={src} style={style} alt="upload-img" />
+					<img width="100%" src={src} alt="upload-img" />
 				</div>
 			) : (
 				<FileUploader
-					value={fileValue}
-					onChange={setFileValue}
+					value={src}
+					onChange={(val) => handleFileChange(val)}
 					accept="png"
 					uploadDesc="Upload"
 				/>
 			) }
-
 		</div>
 	);
 }

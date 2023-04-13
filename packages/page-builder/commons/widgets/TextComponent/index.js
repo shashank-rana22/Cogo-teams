@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
@@ -7,28 +6,24 @@ import 'react-quill/dist/quill.bubble.css';
 const ReactQuill = dynamic(import('react-quill'), { ssr: false });
 
 function TextComponent(props) {
-	const { text, components, setComponents, elementId } = props;
+	const { text, components, setComponents, childId, selectedItem } = props;
 
 	const [editorValue, setEditorValue] = useState(text);
-	const [isFocused, setIsFocused] = useState(false);
 
 	const handleEditorChange = (value) => {
+		const { parentId, id } = selectedItem || {};
+
+		const data = components;
+		const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === id));
+
+		if (parentId) {
+			data.layouts[selectedComponentIndex].children[childId].content = value;
+		} else {
+			data.layouts[selectedComponentIndex].content = value;
+		}
+
 		setEditorValue(value);
-
-		// eslint-disable-next-line max-len, max-len, max-len
-		// const selectedComponentIndex = (components || []).findIndex((component) => (component.id === elementId));
-
-		// const updatedComponent = {
-		// 	...components[selectedComponentIndex],
-		// 	content: value,
-		// };
-
-		// use map instead slice
-		// setComponents((prevComponents) => [
-		// 	...prevComponents.slice(0, selectedComponentIndex),
-		// 	updatedComponent,
-		// 	...prevComponents.slice(selectedComponentIndex + 1),
-		// ]);
+		setComponents((prev) => ({ ...prev, layouts: data.layouts }));
 	};
 
 	const modules = {
@@ -60,8 +55,6 @@ function TextComponent(props) {
 			value={editorValue}
 			modules={modules}
 			onChange={handleEditorChange}
-			onFocus={() => setIsFocused(true)}
-			onBlur={() => setIsFocused(false)}
 		/>
 
 	);
