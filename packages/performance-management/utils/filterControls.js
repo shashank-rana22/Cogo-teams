@@ -1,21 +1,44 @@
-const useGetControls = ({ name = 'manager' }) => {
+import monthOptions from '../constants/month-options';
+import useGetCustomAsyncOptions from '../hooks/useCustomAsyncOptions';
+
+const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} }) => {
+	const { Department = '', Designation = '', Month:selectedMonth, Year:selectedYear } = filterProps;
 	const currentDate = new Date();
 	const year = currentDate.getFullYear();
+	const month = currentDate.getMonth();
+
+	const designationOptions = useGetCustomAsyncOptions({
+		endpoint    : 'get_iris_get_department_mappings',
+		initialCall : false,
+		params      : { Department },
+		valueKey    : 'designation',
+		labelKey    : 'designation',
+		filterKey   : 'Qdesignation',
+	});
+
+	const asyncManagerOptions = useGetCustomAsyncOptions({
+		endpoint    : 'get_iris_list_reportees',
+		initialCall : false,
+		params      : { IncludingCeos: true },
+		valueKey    : 'user_id',
+		labelKey    : 'name',
+		filterKey   : 'Q',
+	});
 
 	const control = [
 		{
 			label       : 'Manager Name',
-			name        : 'manager_name',
-			placeholder : 'Search Manager...',
-			type        : 'input',
+			name        : 'Q',
+			placeholder : 'Search User...',
+			type        : 'text',
 			isClearable : true,
 		},
 		{
-			name        : 'rating',
-			label       : 'Rating',
+			name        : 'Rating',
+			label       : 'rating',
 			type        : 'select',
 			isClearable : true,
-			placeholder : 'Select..',
+			placeholder : 'Rating...',
 			options     : [
 				{ label: '1', value: 1 },
 				{ label: '2', value: 2 },
@@ -25,31 +48,17 @@ const useGetControls = ({ name = 'manager' }) => {
 			],
 		},
 		{
-			name        : 'created_at_month',
-			label       : 'Select Month',
-			type        : 'select',
+			name       	: 'ManagerID',
+			placeholder	: 'Manager...',
+			type       	: 'select',
 			isClearable : true,
-			placeholder : 'Month',
-			options     : [
-				{ label: 'January', value: 1 },
-				{ label: 'February', value: 2 },
-				{ label: 'March', value: 3 },
-				{ label: 'April', value: 4 },
-				{ label: 'May', value: 5 },
-				{ label: 'June', value: 6 },
-				{ label: 'July', value: 7 },
-				{ label: 'August', value: 8 },
-				{ label: 'September', value: 9 },
-				{ label: 'October', value: 10 },
-				{ label: 'November', value: 11 },
-				{ label: 'December', value: 12 },
-			],
+			...asyncManagerOptions,
 		},
 		{
-			name        : 'created_at_year',
+			name        : 'Year',
 			label       : 'Select Year',
 			type        : 'select',
-			isClearable : true,
+			isClearable : !selectedMonth,
 			placeholder : 'Year',
 			options     : [
 				{ label: `${year}`, value: year },
@@ -57,9 +66,103 @@ const useGetControls = ({ name = 'manager' }) => {
 				{ label: `${year - 2}`, value: year - 2 },
 			],
 		},
+		{
+			name        : 'Month',
+			label       : 'Select Month',
+			type        : 'select',
+			isClearable : true,
+			disabled    : !selectedYear,
+			placeholder : 'Month',
+			options     : selectedYear === year
+				? monthOptions.filter((newMonth) => newMonth.index <= month) : monthOptions,
+		},
+		{
+			name        : 'CsvType',
+			label       : 'CSV Type',
+			placeholder : 'Type',
+			type        : 'select',
+			isClearable : true,
+			style       : { marginLeft: '1px', marginRight: '1px' },
+			options     : [
+				{ label: 'PIP', value: 'pip' },
+				{ label: 'Probation', value: 'probation' },
+				{ label: 'Normalization', value: 'approve_ratings' },
+				{ label: 'Onboarding', value: 'onboarding' },
+			],
+		},
+		{
+			name        : 'FeedbackStatus',
+			label       : 'Status',
+			placeholder : 'Status...',
+			type        : 'select',
+			isClearable : true,
+			style       : { marginLeft: '1px', marginRight: '1px' },
+			options     : [
+				{ label: 'Pending', value: 'pending' },
+				{ label: 'Submitted', value: 'successful' },
+			],
+		},
+		{
+			name                  : 'date_range',
+			label                 : 'Select Date',
+			type                  : 'dateRangePicker',
+			isPreviousDaysAllowed : true,
+		}, {
+			name        : 'Department',
+			placeholder : 'Department...',
+			label       : 'Department',
+			type        : 'select',
+			span        : 5,
+			isClearable : !Designation,
+			style       : { marginLeft: '1px', marginRight: '1px' },
+			rules       : { required: 'Required' },
+			options     : [
+				{ label: 'Technology', value: 'Technology' },
+				{ label: 'Marketing', value: 'Marketing' },
+				{ label: 'Design', value: 'Design' },
+				{ label: 'Business Development', value: 'Business Development' },
+				{ label: 'Quality', value: 'Quality' },
+				{ label: 'Product', value: 'Product' },
+			],
+		},
+		{
+			...designationOptions,
+			name        : 'Designation',
+			placeholder : 'Designation...',
+			label       : 'Designation',
+			type        : 'select',
+			span        : 5,
+			disabled    : !Department,
+			style       : { marginLeft: '1px', marginRight: '1px' },
+			rules       : { required: 'Required' },
+			isClearable : true,
+		},
 	];
 
-	return control.find((cntrl) => cntrl.name === name);
+	const filterControls = {
+		left  : [],
+		right : [],
+	};
+
+	leftFilters.forEach(({ name, ...rest }) => {
+		let updatedControl = control.find((ctrl) => ctrl.name === name);
+		updatedControl = { ...updatedControl, ...rest };
+		if (control.name === 'month' && selectedYear === year) {
+			updatedControl.options = monthOptions.filter((newMonth) => newMonth.index <= month);
+		}
+		filterControls.left.push(updatedControl);
+	});
+
+	rightFilters.forEach(({ name, ...rest }) => {
+		let updatedControl = control.find((ctrl) => ctrl.name === name);
+		updatedControl = { ...updatedControl, ...rest };
+		if (control.name === 'month' && selectedYear === year) {
+			updatedControl.options = monthOptions.filter((newMonth) => newMonth.index <= month);
+		}
+		filterControls.right.push(updatedControl);
+	});
+
+	return filterControls;
 };
 
 export default useGetControls;
