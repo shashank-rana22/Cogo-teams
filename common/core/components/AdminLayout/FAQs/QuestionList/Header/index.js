@@ -22,9 +22,6 @@ function Header({
 	from,
 }) {
 	const {
-		announcementModalData = {},
-		setAnnouncementModalData = () => {},
-		setShow = () => {},
 		searchAnnouncement = '',
 		setSearchAnnouncement = () => {},
 	} = announcementHeaderProps;
@@ -49,7 +46,7 @@ function Header({
 					setShowNotificationContent(false);
 				}
 			} catch (e) {
-				if (e.response?.data) { Toast.error(getApiErrorString(e.response?.data)); }
+				if (e.response?.data) Toast.error(getApiErrorString(e.response?.data));
 			}
 		} else {
 			setTopic(null);
@@ -76,18 +73,9 @@ function Header({
 		},
 	};
 
-	const handleClose = () => {
-		if (isEmpty(announcementModalData)) {
-			setShow(false);
-		} else setAnnouncementModalData({});
-	};
-
 	return (
 
 		<div className={`${styles.container} ${styles[from]}`}>
-			{from !== 'test_module' ? (
-				<div className={styles.cross_icon}><IcMCross width={20} height={20} onClick={handleClose} /></div>
-			) : null}
 
 			<div className={styles.wrapper}>
 				{from !== 'test_module' ? (

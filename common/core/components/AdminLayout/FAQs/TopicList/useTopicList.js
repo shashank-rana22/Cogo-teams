@@ -44,7 +44,9 @@ const useTopicList = () => {
 				},
 			});
 		} catch (error) {
-			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
+			if (error?.response) {
+				Toast.error(getApiErrorString(error?.response?.data));
+			}
 		}
 	}, [country_id, id, page, role_functions, role_sub_functions, scope, trigger]);
 
