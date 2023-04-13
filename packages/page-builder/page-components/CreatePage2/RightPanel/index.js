@@ -127,9 +127,11 @@ function RightPanel(props) {
 			if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
 				return;
 			}
+
 			if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
 				return;
 			}
+
 			if (!isNewItemAdding) {
 				onNewAddingItemProps({ hoveredIndex: hoverIndex });
 				moveItem(dragIndex, hoverIndex);
@@ -139,6 +141,7 @@ function RightPanel(props) {
 			} else {
 				const belowThreshold = top + height / 2;
 				const newShould = y >= belowThreshold;
+
 				onNewAddingItemProps({
 					hoveredIndex   : hoverIndex,
 					shouldAddBelow : newShould,
