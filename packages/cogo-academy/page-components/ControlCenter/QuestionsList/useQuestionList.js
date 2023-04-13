@@ -54,7 +54,6 @@ const addedQuestionsColumns = ({
 					color={items?.is_parent ? 'green' : 'yellow'}
 				>
 					{items?.is_parent ? 'Parent' : 'Alias'}
-
 				</Pill>
 
 			),
@@ -110,7 +109,6 @@ const addedQuestionsColumns = ({
 							date,
 							timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
 							formatType : 'time',
-
 						})}
 					</div>
 				);
@@ -157,14 +155,10 @@ const addedQuestionsColumns = ({
 								height={20}
 								width={20}
 								style={{ cursor: 'pointer' }}
-								onClick={
-								() => setShowPopOver(() => (showPopOver === items?.id ? null : items?.id))
-}
+								onClick={() => setShowPopOver(() => (showPopOver === items?.id ? null : items?.id))}
 							/>
 						</Popover>
-
 					) : null}
-
 				</div>
 			),
 		},
@@ -200,8 +194,7 @@ const requestedQuestionsColumns = ({
 					formatType : 'date',
 				})}
 			</div>
-		)
-		,
+		),
 	},
 	{
 		Header   : 'ACTIONS',
@@ -226,19 +219,14 @@ const requestedQuestionsColumns = ({
 
 					)}
 					visible={showPopOver === items?.id}
-
 				>
 					<IcMDelete
 						height={20}
 						width={20}
 						style={{ cursor: 'pointer' }}
-						onClick={
-							() => setShowPopOver(() => (showPopOver === items?.id ? null : items?.id))
-}
-
+						onClick={() => setShowPopOver(() => (showPopOver === items?.id ? null : items?.id))}
 					/>
 				</Popover>
-
 			</div>
 		),
 	},
@@ -293,16 +281,13 @@ const useQuestionList = () => {
 					sort_type              : SORT_TYPE,
 					faq_tags_data_required : ['published', 'draft']
 						.includes(FILTER_MAPPING[activeList].state),
-
 					faq_topics_data_required: ['published', 'draft', 'feedbacks']
 						.includes(FILTER_MAPPING[activeList].state),
-
 					author_data_required              : FILTER_MAPPING[activeList].state === 'requested',
 					requested_question_count_required : true,
 					faq_feedback_count_required       : true,
 					answers_data_required             : undefined,
 					last_updated_feedback_required    : activeList === 'feedbacks',
-
 				},
 			});
 		} catch (err) {
