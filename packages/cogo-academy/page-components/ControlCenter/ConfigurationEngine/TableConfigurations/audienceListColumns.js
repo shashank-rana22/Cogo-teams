@@ -1,5 +1,3 @@
-// import { Button } from '@cogoport/components';
-import { Popover } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -11,12 +9,15 @@ import countries from '../../../../../../.data-store/constants/countries.json';
 import WORK_SCOPES_OPTIONS from '../CreateAudienceForm/utils/workScopeMappings';
 
 import styles from './styles.module.css';
+import { Button,Popover } from '@cogoport/components';
 
 function audienceListColumns({ 
-	onClickDeleteIcon,
+	onClickDeleteIcon=()=>{},
 	showPopOver,
 	setShowPopOver,
-	updateApiLoading
+	updateApiLoading,
+	activeAudience,
+	onClickRestore=()=>{},
  }) {
 
 	const onClickNoButton = (item)=>{
@@ -87,10 +88,12 @@ function audienceListColumns({
 		{
 			Header   : 'ACTIONS',
 			accessor : (item) => {
-				
 				return(
+			<div>
+					{
+				activeAudience === 'active'? (					
 					<Popover
-					    placement="top"
+						placement="top"
 						interactive
 						visible={showPopOver===item?.id}
 						styles={{marginRight:'20px'}}
@@ -104,8 +107,8 @@ function audienceListColumns({
 						)}
 					>
 						<div className={styles.button_container}>
-
- 							<div className={styles.delete_button}>
+	
+							 <div className={styles.delete_button}>
 							<IcMDelete 
 							height={20} 
 							width={20}  
@@ -113,10 +116,22 @@ function audienceListColumns({
 								()=>{setShowPopOver(() => 
 								(showPopOver ===item?.id ? null : item?.id));}}
 								/>
-                            </div>
-
-   						</div>
-					</Popover>
+							</div>
+	
+						   </div>
+					</Popover>): (
+												<Button
+												themeType="secondary"
+												size="sm"
+												style={{ marginRight: 8 }}
+												onClick={()=>onClickRestore(item)}
+											>
+												RESTORE
+					
+									</Button>
+					)
+					}
+				</div>
 				)
 				
 			},

@@ -9,9 +9,9 @@ function WelcomeText() {
 			<div className={styles.text_container}>
 
 				<div className={styles.text}>
-					I want to congratulate each and every one of you on your selection to join our team! Generally,
-					we hire only 1 out of every 100 applications;
-					so congrats once again for being a part of the selected few.
+					I want to congratulate each and every one of you on your selection to join
+					our team! Generally, we hire only 1 out of every 100 applications; so congrats
+					once again for being a part of the selected few.
 				</div>
 
 				<div className={styles.text}>
@@ -33,9 +33,9 @@ function WelcomeText() {
 
 				<div className={styles.text}>
 					To ensure that I can spend quality time with you all,
-					I am cancelling all my travel plans and meetings
-					during the first 2 days of your joining. It is up to you to make the most of this time and ask me
-					anything related to Cogoport.
+					I am cancelling all my travel plans and meetings during the
+					first 2 days of your joining. It is up to you to make the most
+					of this time and ask me anything related to Cogoport.
 				</div>
 
 				<div className={styles.text}>

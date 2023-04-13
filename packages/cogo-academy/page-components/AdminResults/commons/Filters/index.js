@@ -25,7 +25,7 @@ function Filters({
 		<div className={styles.container}>
 			<Input
 				size="md"
-				placeholder="Search for Student name"
+				placeholder="Search by Student name"
 				value={searchValue}
 				onChange={handleSearchValue}
 				suffix={(
@@ -33,12 +33,11 @@ function Filters({
 						<IcMSearchlight />
 					</div>
 				)}
-				style={{ width: 300 }}
+				style={{ width: '300px', height: '32px' }}
 			/>
 
 			{activeTab === 'appeared' ? (
 				<div className={styles.filters}>
-
 					<Select
 						prefix={(<IcMFilter />)}
 						value={filter}

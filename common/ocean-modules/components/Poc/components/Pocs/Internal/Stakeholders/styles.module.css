@@ -1,0 +1,19 @@
+.stakeholder_container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.stakeholder_type {
+	color: #828282;
+}
+
+.stakeholder {
+	width: 70%;
+}
+
+.action_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 20%;
+}

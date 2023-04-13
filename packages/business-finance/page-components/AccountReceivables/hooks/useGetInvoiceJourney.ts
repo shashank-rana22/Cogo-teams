@@ -1,23 +1,22 @@
-import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
 import { months } from '../constants';
 
 interface FilterInterface {
-	entityCode?:string
 	serviceType?:string
 	companyType?:string
 }
 interface ParamsInterface {
 	filterValue?:FilterInterface
+	entityCode?: string
 }
 
-const useGetInvoiceJourney = ({ filterValue }:ParamsInterface) => {
-	const { entityCode = '', serviceType = '', companyType = '' } = filterValue || {};
+const useGetInvoiceJourney = ({ filterValue, entityCode }:ParamsInterface) => {
+	const { serviceType = '', companyType = '' } = filterValue || {};
 
-	const d = new Date();
-	const currentMonth = months[d.getMonth()];
+	const CurrentDate = new Date();
+	const currentMonth = months[CurrentDate.getMonth()];
 
 	const currentYearsState = new Date().getFullYear();
 
@@ -43,20 +42,16 @@ const useGetInvoiceJourney = ({ filterValue }:ParamsInterface) => {
 	);
 	useEffect(() => {
 		const getJourneyData = async () => {
-			try {
-				await journeyTrigger({
-					params: {
-						entityCode  : entityCode || undefined,
-						serviceType : serviceType || undefined,
-						companyType : companyType !== 'All' ? companyType : undefined,
-						month       : dateFilter.month || undefined,
-						year        : dateFilter.year || undefined,
+			await journeyTrigger({
+				params: {
+					entityCode  : entityCode || undefined,
+					serviceType : serviceType || undefined,
+					companyType : companyType !== 'All' ? companyType : undefined,
+					month       : dateFilter.month || undefined,
+					year        : dateFilter.year || undefined,
 
-					},
-				});
-			} catch (e) {
-				Toast.error(e?.error?.message || 'Something went wrong');
-			}
+				},
+			});
 		};
 		getJourneyData();
 	}, [journeyTrigger, entityCode, serviceType,

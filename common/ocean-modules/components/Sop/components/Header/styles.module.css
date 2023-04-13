@@ -1,0 +1,16 @@
+.header_container {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 0;
+	margin-bottom: 10px;
+	border-bottom: 1px solid var(--color-secondary-2);
+}
+
+.label {
+	margin-right: 4px;
+	font-weight: 600;
+}
+
+.last_update_details {
+	font-size: 12px;
+}
