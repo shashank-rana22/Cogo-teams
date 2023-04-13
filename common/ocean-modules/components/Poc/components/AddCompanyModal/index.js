@@ -47,7 +47,12 @@ function AddCompanyModal({
 	}, [trade_party_type]);
 
 	const onSubmit = (formValues) => {
-		const params = getCreateTradePartnerParams({ ...formValues, trade_party_type });
+		const params = getCreateTradePartnerParams({
+			...formValues,
+			trade_party_type,
+			importer_exporter_id,
+			companyType,
+		});
 		createTrigger(params);
 	};
 

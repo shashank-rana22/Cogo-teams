@@ -55,7 +55,7 @@ const getStandAlonePayload = ({
 		topic,
 		difficulty_level,
 		question_text,
-		explanation: [editorValue?.question_0_explanation.toString('html')],
+		...(!isEmpty(editorValue) ? { explanation: [editorValue?.question_0_explanation.toString('html')] } : {}),
 		answers,
 	};
 };
