@@ -37,13 +37,13 @@
 	font-weight: 600;
 }
 
-.text_area{
+.text_area {
 	height: 100px;
-	margin-bottom: 12px;
 	padding: 4px;
+	margin-bottom: 12px;
 }
 
-.file_link{
-	color: #0000EE;
+.file_link {
+	color: #00e;
 	text-decoration: underline;
 }
