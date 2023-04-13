@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Resizable } from 'react-resizable';
+import 'react-resizable/css/styles.css';
 
 function ListPages() {
 	const [state, setState] = useState({
@@ -7,7 +8,7 @@ function ListPages() {
 		height : 200,
 	});
 
-	const onResize = ({ size }) => {
+	const onResize = (_, { size }) => {
 		setState({ width: size.width, height: size.height });
 	};
 
