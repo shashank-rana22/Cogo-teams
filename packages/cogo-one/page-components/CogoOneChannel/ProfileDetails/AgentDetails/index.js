@@ -1,10 +1,10 @@
-/* eslint-disable no-undef, max-len */
 import { Avatar, Pill, Placeholder, Toast } from '@cogoport/components';
 import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
 import { isEmpty, snakeCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
+import { OMNICHANNEL_URL } from '../../../../constants';
 import useCreateLeadProfile from '../../../../hooks/useCreateLeadProfile';
 import useGetUser from '../../../../hooks/useGetUser';
 import hideDetails from '../../../../utils/hideDetails';
@@ -24,7 +24,7 @@ function AgentDetails({
 	setActiveMessage = () => {},
 	activeRoomLoading,
 }) {
-	const { user_details = null, user_type, id = '' } = activeMessageCard || {};
+	const { user_details = null, user_type, id = '', channel_type = '' } = activeMessageCard || {};
 	const {
 		user_id,
 		lead_user_id,
@@ -104,7 +104,7 @@ function AgentDetails({
 	};
 
 	const handleClick = () => {
-		navigator.clipboard.writeText(`https://admin.cogoport.com/v2/6fd98605-9d5d-479d-9fac-cf905d292b88/cogo-one/omni-channel?assigned_chat=${id}`);
+		navigator.clipboard.writeText(`${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`);
 		Toast.success('Copied!!!');
 	};
 

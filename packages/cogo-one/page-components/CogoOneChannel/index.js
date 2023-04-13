@@ -93,7 +93,7 @@ function CogoOne() {
 		loading,
 		setActiveCard,
 		activeCardId,
-		firstLoading,
+		setFirstMount,
 		updateLeaduser,
 		handleScroll,
 		activeRoomLoading,
@@ -145,18 +145,14 @@ function CogoOne() {
 	};
 
 	useEffect(() => {
-		if (!firstLoading) {
-			setActiveVoiceCard({});
-			setActiveCard({});
-			setActiveMail({});
-		}
-	}, [activeTab, firstLoading, setActiveCard, showBotMessages]);
-
-	useEffect(() => {
+		setActiveVoiceCard({});
+		setActiveCard({});
+		setActiveMail({});
+		setFirstMount(true);
 		if (isomniChannelAdmin) {
 			setAppliedFilters({});
 		}
-	}, [setAppliedFilters, isomniChannelAdmin, showBotMessages]);
+	}, [activeTab, setActiveCard, showBotMessages, setFirstMount, setAppliedFilters, isomniChannelAdmin]);
 
 	useEffect(() => {
 		setToggleStatus(status === 'active');
