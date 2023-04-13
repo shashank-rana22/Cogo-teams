@@ -2318,6 +2318,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'user',
 		},
+		{
+			api          : 'update_user',
+			access_type  : 'private',
+			service_name : 'user',
+		},
+		{
+			api          : 'get_organization_verification_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	support_crm: [
 		{
