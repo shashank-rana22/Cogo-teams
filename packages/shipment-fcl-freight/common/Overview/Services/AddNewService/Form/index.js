@@ -40,7 +40,6 @@ function Form({
 			closeOnOuterClick={false}
 			disabled={haveToUpsell}
 			className={styles.custom_modal}
-			closeOnOuterClick={false}
 		>
 			<Modal.Header title={(
 				<div className={styles.header}>

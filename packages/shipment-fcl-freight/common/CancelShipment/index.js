@@ -15,8 +15,8 @@ export default function CancelShipment({ setShow }) {
 	const closeModal = () => setShow(false);
 
 	const { loading: updateShipmentLoading, updateShipment } = useUpdateShipment({
-		successCallbacks : [closeModal],
-		successMsg       : 'Cancellation Requested',
+		refetch        : closeModal,
+		successMessage : 'Shipment has been cancelled!!',
 	});
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
@@ -26,11 +26,9 @@ export default function CancelShipment({ setShow }) {
 
 	const onSubmit = useCallback((data) => {
 		updateShipment({
-			payload: {
-				id,
-				state: 'cancelled',
-				...getCancelShipmentPayload(data),
-			},
+			id,
+			state: 'cancelled',
+			...getCancelShipmentPayload(data),
 		});
 	}, [updateShipment, id]);
 

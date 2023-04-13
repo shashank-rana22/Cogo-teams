@@ -1,9 +1,7 @@
 import { Button, Modal, Input } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import useAddPoNumber from '../../../hooks/useUpdateShipment';
-
-import styles from './styles.module.css';
+import useUpdateShipment from '../../../hooks/useUpdateShipment';
 
 function AddPoNumber({
 	setShow = () => {},
@@ -13,17 +11,15 @@ function AddPoNumber({
 
 	const closeModal = () => setShow(false);
 
-	const { loading, updateShipment } = useAddPoNumber({
-		successCallbacks : [closeModal],
-		successMsg       : 'Purchase Order Number Added!',
+	const { loading, updateShipment } = useUpdateShipment({
+		refetch        : closeModal,
+		successMessage : 'Purchase Order Number Added!',
 	});
 
 	const onCreate = () => {
 		updateShipment({
-			payload: {
-				id        : shipment_data?.id,
-				po_number : poNumber,
-			},
+			id        : shipment_data?.id,
+			po_number : poNumber,
 		});
 	};
 
