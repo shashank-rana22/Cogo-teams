@@ -50,8 +50,6 @@ function Stage({
 		[setNewAddingItemProps],
 	);
 
-	console.log('aaaa', stageItems);
-
 	//! Portal :: mimic behavior of portal stage
 	useEffect(() => {
 		if (!isEqual(stageItems, component)) {

@@ -3,13 +3,13 @@
     margin: 12px 0px 4px 0;
 }
 .section{
-    display: grid;
-    grid-template-columns: auto auto;
+   display: flex;
+   flex-wrap: wrap;
 }
 .section_label{
     margin: 8px 0px;
 }
-& .ui_input_control  {
+.ui_input_control * {
     width: 40px;
     border-radius: 50%;
     height: 40px,
