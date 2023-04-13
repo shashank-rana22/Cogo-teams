@@ -29,9 +29,9 @@ const useGetTableColumns = ({
 		{
 			Header   : 'QUESTION TYPE',
 			id       : 'question_type',
-			accessor : ({ question_type }) => (
+			accessor : ({ question_type = '' }) => (
 				<section>
-					{question_type === 'case_study' ? 'Case Study' : 'Stand Alone'}
+					{startCase(question_type) || ''}
 				</section>
 			),
 		},

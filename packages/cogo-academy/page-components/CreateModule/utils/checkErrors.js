@@ -5,6 +5,8 @@ const checkErrors = ({ options, question_type }) => {
 
 	const uniqueOptions = new Set(allOptions);
 
+	console.log('options', options);
+
 	const correctOptionsLength = correctOptions.length;
 
 	if (allOptions.length < 2) {

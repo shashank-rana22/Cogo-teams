@@ -169,9 +169,9 @@ export const testSetColumns = ({
 	{
 		Header   : 'TOTAL QUESTIONS/CASES',
 		id       : 'total_questions',
-		accessor : ({ case_study_questions = 0, stand_alone_questions = 0 }) => (
+		accessor : ({ case_study_questions = 0, stand_alone_questions = 0, subjective_questions = 0 }) => (
 			<section>
-				{stand_alone_questions || 0}
+				{stand_alone_questions + subjective_questions || 0}
 				{' '}
 				Q +
 				{' '}

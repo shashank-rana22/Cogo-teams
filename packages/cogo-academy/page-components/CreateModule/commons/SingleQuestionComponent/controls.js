@@ -16,6 +16,7 @@ const getControls = ({ mode }) => [
 		options     : [
 			{ label: 'Single Correct', value: 'single_correct' },
 			{ label: 'Multi Correct', value: 'multi_correct' },
+			{ label: 'Subjective Answer', value: 'subjective_answer' },
 		],
 		rules: { required: 'This is required' },
 	},

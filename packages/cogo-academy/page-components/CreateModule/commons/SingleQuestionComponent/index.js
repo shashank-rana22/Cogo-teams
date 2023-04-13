@@ -26,6 +26,8 @@ function SingleQuestionComponent({
 	mode,
 	editorValue,
 	setEditorValue,
+	subjectiveEditorValue,
+	setSubjectiveEditorValue = () => {},
 	...restProps
 }) {
 	const {
@@ -44,7 +46,8 @@ function SingleQuestionComponent({
 		setEditorValue,
 		...restProps,
 	});
-
+	console.log(subjectiveEditorValue.toString('html'));
+	console.log(questionTypeWatch);
 	return (
 		<div className={styles.container}>
 			<div
@@ -70,19 +73,45 @@ function SingleQuestionComponent({
 					{...NAME_CONTROL_MAPPING.question_type}
 					control={control}
 					name={`${name}.${index}.question_type`}
+					disabled={questionTypeWatch === 'subjective'}
 				/>
 			</div>
+			{
+				questionTypeWatch !== 'subjective' ? (
+					<OptionsComponent
+						key={JSON.stringify(editorValue)}
+						control={control}
+						{...NAME_CONTROL_MAPPING.options}
+						register={register}
+						errors={errors?.options || {}}
+						name={`${name}.${index}.options`}
+						mode={mode}
+						isNewQuestion={questionTypeWatch === 'case_study' ? isNewQuestion : isEmpty(editDetails)}
+					/>
+				) : null
+			}
 
-			<OptionsComponent
-				key={JSON.stringify(editorValue)}
-				control={control}
-				{...NAME_CONTROL_MAPPING.options}
-				register={register}
-				errors={errors?.options || {}}
-				name={`${name}.${index}.options`}
-				mode={mode}
-				isNewQuestion={questionTypeWatch === 'case_study' ? isNewQuestion : isEmpty(editDetails)}
-			/>
+			{
+				questionTypeWatch === 'subjective' ? (
+					<div className={styles.subjective_editor}>
+						<RichTextEditor
+							value={subjectiveEditorValue}
+							onChange={((val) => { setSubjectiveEditorValue(val); })}
+							required
+							id="body-text"
+							name="bodyText"
+							type="string"
+							multiline
+							variant="filled"
+							rootStyle={{
+								zIndex    : 0,
+								position  : 'relative',
+								minHeight : '200px',
+							}}
+						/>
+					</div>
+				) : null
+			}
 
 			{questionTypeWatch !== 'case_study' ? (
 				<div className={styles.difficulty_level}>
@@ -95,6 +124,24 @@ function SingleQuestionComponent({
 							name={`${name}.${index}.difficulty_level`}
 						/>
 						{errors?.difficulty_level && <div className={styles.error_msg}>This is required</div>}
+					</div>
+					<div>
+						<div>
+							Set Max Marks
+							<InputController
+								control={control}
+								name={`${name}.${index}.max_marks`}
+								placeholder="Marks"
+							/>
+						</div>
+						<div>
+							Set Character Limit
+							<InputController
+								control={control}
+								name={`${name}.${index}.character_limit`}
+								placeholder="No Limit"
+							/>
+						</div>
 					</div>
 				</div>
 			) : null}

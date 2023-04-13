@@ -4,9 +4,10 @@ import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 
 const QUESTION_TYPE_MAPPING = {
-	stand_alone : 'q',
-	case_study  : 'c',
-	subjective  : 's',
+	q : 'stand_alone',
+	c : 'case_study',
+	s : 'subjective',
+
 };
 
 function useUpdateTest() {

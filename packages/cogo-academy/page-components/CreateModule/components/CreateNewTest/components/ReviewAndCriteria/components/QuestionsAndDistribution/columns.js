@@ -58,9 +58,9 @@ const getColumns = ({ errors, control }) => {
 		{
 			Header   : 'APPLICABLE QUESTIONS',
 			id       : 'available_questions',
-			accessor : ({ non_case_study_question_count = 0 }) => (
+			accessor : ({ stand_alone_question_count = 0 }) => (
 				<section className={styles.count}>
-					{non_case_study_question_count}
+					{stand_alone_question_count}
 				</section>
 			),
 		},
@@ -101,11 +101,11 @@ const getColumns = ({ errors, control }) => {
 			),
 			id       : 'distribution',
 			accessor : ({
-				non_case_study_question_count = 0,
+				stand_alone_question_count = 0,
 				case_study_question_count = 0,
 				subjective_question_count = 0, id = '',
 			}) => {
-				const controlItem1 = getControls(id, non_case_study_question_count)[0];
+				const controlItem1 = getControls(id, stand_alone_question_count)[0];
 
 				const controlItem2 = getControls(id, case_study_question_count)[1];
 

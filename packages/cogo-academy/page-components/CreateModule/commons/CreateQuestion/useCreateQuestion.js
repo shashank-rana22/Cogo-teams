@@ -30,6 +30,8 @@ const useCreateQuestion = ({
 			: { case_questions_0_explanation: RichTextEditor.createEmptyValue() },
 	);
 
+	const [subjectiveEditorValue, setSubjectiveEditorValue] = useState(RichTextEditor.createEmptyValue());
+
 	const { isNew: isNewQuestion = false, id } = item || {};
 
 	const {
@@ -55,6 +57,8 @@ const useCreateQuestion = ({
 		questionSetId,
 		listSetQuestions,
 		editorValue,
+		subjectiveEditorValue,
+		setSubjectiveEditorValue,
 	});
 
 	const { updateStandAloneTestQuestion, loading: updateStandAloneLoading } = useUpdateStandAloneTestQuestion({
@@ -81,6 +85,7 @@ const useCreateQuestion = ({
 	});
 
 	const onSubmit = (values) => {
+		console.log('values', values);
 		if (!isNewQuestion && question_type !== 'case_study') {
 			updateStandAloneTestQuestion({
 				values,
@@ -221,6 +226,8 @@ const useCreateQuestion = ({
 		editorValue,
 		setEditorValue,
 		updateStandAloneLoading,
+		subjectiveEditorValue,
+		setSubjectiveEditorValue,
 		...restFormProps,
 	};
 };

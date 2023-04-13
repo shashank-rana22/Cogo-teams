@@ -8,6 +8,7 @@ import getPayload from '../utils/getPayload';
 const actionNameMapping = {
 	stand_alone : 'Stand Alone',
 	case_study  : 'Case Study',
+	subjective 	: 'Subjective',
 };
 
 function useCreateTestQuestion({
@@ -16,20 +17,22 @@ function useCreateTestQuestion({
 	questionSetId,
 	listSetQuestions,
 	editorValue = {},
+	subjectiveEditorValue = '',
 }) {
 	const [{ loading: loadingCaseStudy }, triggerCaseStudy] = useRequest({
 		method : 'post',
 		url    : '/create_case_study_test_question',
 	}, { manual: true });
 
-	const [{ loading: loadingStandAlone }, triggerStandAlone] = useRequest({
+	const [{ loading: loadingNonCase }, triggerNonCase] = useRequest({
 		method : 'post',
 		url    : '/create_non_case_test_question',
 	}, { manual: true });
 
 	const TriggerMapping = {
-		stand_alone : triggerStandAlone,
+		stand_alone : triggerNonCase,
 		case_study  : triggerCaseStudy,
+		subjective 	: triggerNonCase,
 	};
 
 	const createTestQuestion = async ({ values }) => {
@@ -40,7 +43,10 @@ function useCreateTestQuestion({
 			questionSetId,
 			type: question_type,
 			editorValue,
+			subjectiveEditorValue,
 		});
+
+		console.log('payload', payload);
 
 		if (!isEmpty(hasError)) {
 			hasError.forEach((item) => {
@@ -48,10 +54,10 @@ function useCreateTestQuestion({
 			});
 			return;
 		}
-
-		const triggerToUse = TriggerMapping?.[question_type] || triggerStandAlone;
+		const triggerToUse = TriggerMapping?.[question_type] || triggerNonCase;
 
 		try {
+			console.log('payload', payload);
 			await triggerToUse({
 				data: payload,
 			});
@@ -67,7 +73,7 @@ function useCreateTestQuestion({
 	};
 
 	return {
-		loading: loadingCaseStudy || loadingStandAlone,
+		loading: loadingCaseStudy || loadingNonCase,
 		createTestQuestion,
 	};
 }

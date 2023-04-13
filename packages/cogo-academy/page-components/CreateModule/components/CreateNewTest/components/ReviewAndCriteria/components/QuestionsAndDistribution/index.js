@@ -16,8 +16,8 @@ function QuestionsAndDistribution(props) {
 			test_question_set_id = '',
 			distribution_count = 0,
 		}) => {
-			if (question_type === 'stand_alone') {
-				setValue(`${test_question_set_id}q`, (!(distribution_count || distribution_count === 0))
+			if (question_type === 'subjective') {
+				setValue(`${test_question_set_id}s`, (!(distribution_count || distribution_count === 0))
 					? ''
 					: distribution_count || '0');
 			} else if (question_type === 'case_study') {
@@ -25,7 +25,7 @@ function QuestionsAndDistribution(props) {
 					? ''
 					: distribution_count || '0');
 			} else {
-				setValue(`${test_question_set_id}s`, (!(distribution_count || distribution_count === 0))
+				setValue(`${test_question_set_id}q`, (!(distribution_count || distribution_count === 0))
 					? ''
 					: distribution_count || '0');
 			}
@@ -61,7 +61,7 @@ function QuestionsAndDistribution(props) {
 
 	set_data.forEach((value) => {
 		total = total + value.case_study_question_count
-			+ value.non_case_study_question_count + value.subjective_question_count;
+			+ value.stand_alone_question_count + value.subjective_question_count;
 	});
 
 	return (
