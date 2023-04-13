@@ -16,7 +16,6 @@
     "@cogoport/globalization": "workspace:^0.0.1",
     "@cogoport/utils": "^1.2.6",
     "firebase": "^9.17.2",
-    "firebase-admin": "^11.5.0",
     "react": "18.2.0",
     "stylelint": "^14.16.1",
     "uuid": "^9.0.0"

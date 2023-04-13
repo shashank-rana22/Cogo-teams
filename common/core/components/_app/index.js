@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 
 import Layout from './layout';
 import SessionCheck from './SessionCheck';
+import useGetFirestoreCustomToken from './useGetFirestoreCustomToken';
 
 if (process.env.NODE_ENV === 'production') {
 	const SENTRY_DSN = process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN;
@@ -47,6 +48,8 @@ function MyApp({ Component, pageProps }) {
 			pageProgessBar.done();
 		});
 	}, []);
+
+	useGetFirestoreCustomToken();
 
 	return (
 		<Provider store={store}>
