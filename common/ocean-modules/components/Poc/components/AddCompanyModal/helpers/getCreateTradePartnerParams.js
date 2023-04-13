@@ -26,7 +26,7 @@ const getCreateTradePartnerParams = (values) => {
 			alternate_mobile_country_code : alternate_mobile_number?.country_code,
 			alternate_mobile_number       : alternate_mobile_number?.number,
 		}),
-		...(ORG_ID_REQUIRED.includes(companyType) ? { organization_id: organization_id || importer_exporter_id } : {}),
+		...(ORG_ID_REQUIRED.includes(companyType) && { organization_id: organization_id || importer_exporter_id }),
 		...restValues,
 	};
 
