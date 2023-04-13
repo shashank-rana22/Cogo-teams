@@ -58,9 +58,7 @@ function InvoiceDetails() {
 										<div className={styles.information} key={id}>
 											<div
 												className={styles.data_container}
-												onClick={() => {
-											 	handleDropdown(id);
-												}}
+												onClick={() => { handleDropdown(id); }}
 												role="presentation"
 											>
 												{label}

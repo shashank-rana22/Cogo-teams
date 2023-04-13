@@ -53,6 +53,7 @@ function ExitingPayRun({ exitPayRun, setExitPayRun }) {
 
 				>
 					<Radio
+					    name="payrun"
 						className="primary lg"
 						checked={itemData.selectedRadio}
 						onChange={handleRadioChange}

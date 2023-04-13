@@ -139,10 +139,9 @@ const advancedColumn = ({ isSortActive, setIsSortActive, setFilters }) => [
 			return (
 				<div className={styles.link}>
 					<Popover placement="top" render={content}>
-						{document?.length}
-						{' '}
-						{' '}
-						document
+						<>
+						 {document?.length}{' '}document
+						</>
 					</Popover>
 				</div>
 			);

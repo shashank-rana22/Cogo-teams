@@ -1,6 +1,7 @@
 import { Breadcrumb, Checkbox, Button, Popover } from '@cogoport/components';
 import { IcMInfo, IcMArrowBack } from '@cogoport/icons-react';
 import React, { useState } from 'react';
+/* eslint-disable max-len */
 
 import List from '../../../commons/List';
 import { CREATE_NEW_PAYRUN_CONFIG } from '../Columns/createNewPayRunConfig';
@@ -217,10 +218,10 @@ function AddIntoExistingPayRun() {
 			return (
 				<div className={styles.link}>
 					<Popover placement="top" render={content}>
-						{document?.length}
-						{' '}
-						{' '}
-						document
+						<>						
+							{document?.length}{' '}document
+						</>
+
 					</Popover>
 				</div>
 			);
