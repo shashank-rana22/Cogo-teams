@@ -20,7 +20,7 @@ function useUpdateCaseStudyQuestion({
 	listSetQuestions,
 	editDetails,
 	index,
-	editorValue,
+	editorValue = {},
 }) {
 	const [{ loading:loadingUpdate }, triggerUpdate] = useRequest({
 		method : 'post',

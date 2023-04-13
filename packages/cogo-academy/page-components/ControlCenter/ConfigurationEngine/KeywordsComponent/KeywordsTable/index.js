@@ -17,7 +17,7 @@ function KeywordsTable({
 	const { list:listKeywordsData = [], total_count } = data || {};
 
 	const renderTable = () => {
-		if (isEmpty(data?.list)) {
+		if (!keywordsLoading && isEmpty(data?.list)) {
 			return (
 				setActiveKeyword === 'active'
 					? (
