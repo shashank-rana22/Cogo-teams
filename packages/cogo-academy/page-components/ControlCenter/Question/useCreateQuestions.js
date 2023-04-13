@@ -34,7 +34,6 @@ function useCreateQuestions({ data, setEditorError }) {
 		setEditorError,
 		data,
 		showAlias,
-
 	});
 
 	const apiLoading = loading || false;
@@ -59,6 +58,7 @@ function useCreateQuestions({ data, setEditorError }) {
 		if (typeof searchAudience === 'string') {
 			return o.q.toLowerCase().includes(searchAudience.toLowerCase());
 		}
+
 		return true;
 	});
 

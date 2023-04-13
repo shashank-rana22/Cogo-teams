@@ -104,7 +104,6 @@ const addedQuestionsColumns = ({
 						})}
 						,
 						{' '}
-
 						{formatDate({
 							date,
 							timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
@@ -282,7 +281,7 @@ const useQuestionList = () => {
 						q                    : query || undefined,
 						is_feedback_positive : activeList === 'feedbacks' ? false : undefined,
 					},
-					page                   : !query ? page : '1',
+					page                   : !query ? page : 1,
 					is_admin_view          : true,
 					sort_by                : SORT_MODE,
 					sort_type              : SORT_TYPE,
@@ -314,7 +313,6 @@ const useQuestionList = () => {
 						id,
 						status: 'inactive',
 					},
-
 				},
 			);
 			getQuestionsList();
