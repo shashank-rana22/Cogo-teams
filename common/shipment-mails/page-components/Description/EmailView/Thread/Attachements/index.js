@@ -104,9 +104,8 @@ function Attachements({ externalAttachements }) {
 					size="lg"
 					placement="top"
 					show={showPreview}
-					onOuterClick={() => setShowPreview(null)}
+					closeOnOuterClick={false}
 					onClose={() => setShowPreview(null)}
-					closable={false}
 				>
 					<Modal.Body>
 						<object
