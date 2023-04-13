@@ -1,5 +1,5 @@
 .container {
-	background: rgba(255, 255, 255, 0.4);
+	background: rgb(255 255 255 / 40%);
 	border-radius: 6px;
 }
 
@@ -13,8 +13,8 @@
 }
 
 .card_heading {
-	font-size: 18px;
 	width: 20%;
+	font-size: 18px;
 	font-weight: 600;
 	color: #221f20;
 }
@@ -40,10 +40,10 @@
 }
 
 .description {
+	width: 70%;
 	margin-bottom: 24px;
 	font-size: 12px;
 	font-weight: 400;
-	width: 70%;
 	color: #221f20;
 }
 
@@ -58,15 +58,15 @@
 	display: flex;
 	align-items: center;
 	padding: 2px 4px;
-	background: #FFFCE6;
+	background: #fffce6;
 	border-radius: 6px;
 }
 
 .tag_count_text {
-	font-size: 12px;
+	margin-left: 10px;
+	font-size: 14px;
 	font-weight: 500;
 	color: #221f20;
-	margin-left: 10px;
 }
 
 .button_text {
