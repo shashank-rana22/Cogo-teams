@@ -109,27 +109,6 @@ function DNDComponent() {
 		setShowContentModal(false);
 	};
 
-	const MemoLeftPanel = useCallback(
-		() => (
-			<LeftPanel
-				activeTab={activeTab}
-				setActiveTab={setActiveTab}
-				component={component}
-				setComponent={setComponent}
-				addNewItem={handleAddNewItem}
-				onNewItemAdding={setNewItemAdding}
-				selectedItem={selectedItem}
-				showContentModal={showContentModal}
-				setShowContentModal={setShowContentModal}
-				parentComponentId={parentComponentId}
-				setParentComponentId={setParentComponentId}
-			/>
-		),
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[handleAddNewItem, selectedItem, activeTab],
-
-	);
-
 	return (
 		<div>
 			<section className={styles.heading_container}>
@@ -140,7 +119,19 @@ function DNDComponent() {
 
 				{modeType === 'edit' && (
 					<div className={styles.left_panel}>
-						<MemoLeftPanel />
+						<LeftPanel
+							activeTab={activeTab}
+							setActiveTab={setActiveTab}
+							component={component}
+							setComponent={setComponent}
+							addNewItem={handleAddNewItem}
+							onNewItemAdding={setNewItemAdding}
+							selectedItem={selectedItem}
+							showContentModal={showContentModal}
+							setShowContentModal={setShowContentModal}
+							parentComponentId={parentComponentId}
+							setParentComponentId={setParentComponentId}
+						/>
 					</div>
 				)}
 
