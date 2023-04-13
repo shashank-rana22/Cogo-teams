@@ -1,6 +1,6 @@
 import getCancelReasons from './get-cancel-reasons';
 
-export default function getCancelExtraControls({
+export default function getCancelControls({
 	selectedReason,
 	isSeller,
 }) {
