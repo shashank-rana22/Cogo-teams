@@ -30,12 +30,19 @@ function TestDetailsModal(props) {
 
 	const caseStudyQuestions = watch((set_data || []).map(({ id }) => (`${id}c`)));
 
+	const subjectiveQuestions = watch((set_data || []).map(({ id }) => (`${id}s`)));
+
 	const questionsCount = (standAloneQuestions || []).reduce(
 		(total, currValue) => total + (Number(currValue) || 0),
 		0,
 	);
 
 	const casesCount = (caseStudyQuestions || []).reduce(
+		(total, currValue) => total + (Number(currValue) || 0),
+		0,
+	);
+
+	const subjectiveCount = (subjectiveQuestions || []).reduce(
 		(total, currValue) => total + (Number(currValue) || 0),
 		0,
 	);
@@ -94,7 +101,7 @@ function TestDetailsModal(props) {
 								Ques/Case
 							</h5>
 							<p>
-								{questionsCount}
+								{questionsCount + subjectiveCount}
 								Q
 								{' '}
 								+
