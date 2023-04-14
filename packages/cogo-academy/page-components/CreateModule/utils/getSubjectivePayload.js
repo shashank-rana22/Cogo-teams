@@ -12,8 +12,6 @@ const getSubjectivePayload = ({
 		character_limit,
 	} = subjective?.[0] || {};
 
-	// const { test_question_answers = [] } = editDetails || {};
-
 	return {
 		test_question_set_id : questionSetId,
 		question_type,
@@ -28,6 +26,7 @@ const getSubjectivePayload = ({
 			sequence_number : 0,
 		}],
 		explanation: [subjectiveEditorValue.toString('html')],
+		// uploadable: uploadable,
 
 	};
 };

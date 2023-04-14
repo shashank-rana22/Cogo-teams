@@ -14,15 +14,11 @@ function Body({
 	setSubQuestion,
 	setSubjectiveAnswer,
 	subjectiveAnswer,
+	uploadValue,
+	setUploadValue,
 }) {
 	const { question_type } = data || {};
 
-	// console.log('data', data);
-	// console.log('currentQuestion', currentQuestion);
-	// console.log('total_question', total_question);
-	// console.log('answer', answer);
-
-	console.log(question_type);
 	return (
 		<div key={`${loading}_${subQuestion}`}>
 			{(question_type === 'single_correct' || question_type === 'multi_correct')
@@ -58,6 +54,8 @@ function Body({
 						question={data}
 						subjectiveAnswer={subjectiveAnswer}
 						setSubjectiveAnswer={setSubjectiveAnswer}
+						uploadValue={uploadValue}
+						setUploadValue={setUploadValue}
 					/>
 				)
 			}

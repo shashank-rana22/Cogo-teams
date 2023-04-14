@@ -110,3 +110,8 @@
 .diff_level {
 	display: flex;
 }
+
+.character_limit {
+	display: flex;
+	width: 40%;
+}

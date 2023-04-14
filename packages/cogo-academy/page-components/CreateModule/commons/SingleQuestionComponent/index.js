@@ -27,6 +27,8 @@ function SingleQuestionComponent({
 	editorValue,
 	setEditorValue,
 	subjectiveEditorValue,
+	setUploadable = () => {},
+	uploadable,
 	setSubjectiveEditorValue = () => {},
 	...restProps
 }) {
@@ -46,8 +48,7 @@ function SingleQuestionComponent({
 		setEditorValue,
 		...restProps,
 	});
-	// console.log(subjectiveEditorValue.toString('html'));
-	// console.log(questionTypeWatch);
+
 	return (
 		<div className={styles.container}>
 			<div
@@ -133,8 +134,8 @@ function SingleQuestionComponent({
 				}
 				{
 					questionTypeWatch === 'subjective' ? (
-						<div style={{ marginTop: '12px' }}>
-							Set Character Limit
+						<div className={styles.character_limit}>
+							<div style={{ width: '100%' }}>Set Character Limit</div>
 							<InputController
 								control={control}
 								name={`${name}.${index}.character_limit`}
@@ -150,7 +151,11 @@ function SingleQuestionComponent({
 			{
 	questionTypeWatch === 'subjective' && (
 		<div>
-			<Radio name="upload" label="Option of Upload Answer" />
+			<Radio
+				name="upload"
+				label="Option of Upload Answer"
+				onChange={() => { setUploadable(!uploadable); }}
+			/>
 		</div>
 	)
 }

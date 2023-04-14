@@ -39,6 +39,8 @@ function CreateQuestion({
 		updateStandAloneLoading,
 		subjectiveEditorValue,
 		setSubjectiveEditorValue = () => {},
+		uploadable,
+		setUploadable,
 	} = useCreateQuestion({
 		item,
 		setSavedQuestionDetails,
@@ -93,6 +95,8 @@ function CreateQuestion({
 						setEditorValue={setEditorValue}
 						subjectiveEditorValue={subjectiveEditorValue}
 						setSubjectiveEditorValue={setSubjectiveEditorValue}
+						uploadable={uploadable}
+						setUploadable={setUploadable}
 					/>
 				</div>
 

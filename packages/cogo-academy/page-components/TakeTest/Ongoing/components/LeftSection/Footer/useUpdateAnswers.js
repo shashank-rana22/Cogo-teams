@@ -12,12 +12,12 @@ if (typeof window !== 'undefined') {
 	RichTextEditor = require('react-rte').default;
 }
 
-const getAnswerState = ({ type, answer }) => {
+const getAnswerState = ({ type, answer, subjectiveAnswer }) => {
 	let answerState = 'answered';
 
 	if (type === 'marked_for_review') {
 		answerState = type;
-	} else if (isEmpty(answer)) {
+	} else if (isEmpty(answer) || subjectiveAnswer.toString('html') === '<p><br></p>') {
 		answerState = 'viewed';
 	}
 	// change this for subjective
@@ -37,6 +37,8 @@ function useUpdateAnswers({
 	fetchQuestions,
 	total_question,
 	subjectiveAnswer,
+	uploadValue,
+	setUploadValue,
 	setSubjectiveAnswer = () => {},
 }) {
 	const {
@@ -55,7 +57,7 @@ function useUpdateAnswers({
 	const { id, question_type, sub_questions = [] } = data || {};
 
 	const handleUpdate = async ({ type }) => {
-		const answerState = getAnswerState({ type, answer });
+		const answerState = getAnswerState({ type, answer, subjectiveAnswer });
 
 		let answerArray = answer;
 
@@ -74,6 +76,9 @@ function useUpdateAnswers({
 
 			...(question_type === 'subjective'
 				? { answer_text: subjectiveAnswer.toString('html') } : null),
+
+			...(question_type === 'subjective'
+				? { answer_url: uploadValue } : null),
 
 			...(question_type !== 'subjective'
 				? { test_question_answer_ids: answerArray || [] } : null),
@@ -122,6 +127,7 @@ function useUpdateAnswers({
 		});
 		setSubQuestion(1);
 		setSubjectiveAnswer(RichTextEditor.createEmptyValue());
+		setUploadValue('');
 	};
 
 	const handleLeaveTest = () => {

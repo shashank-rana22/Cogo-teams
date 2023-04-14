@@ -22,10 +22,23 @@
 }
 
 .question_01 {
+	display: flex;
 	padding-top: 42px;
 }
 
 .text {
+	margin-left: 4px;
 	font-weight: 600;
 	color: #221f20;
+}
+
+.uploader {
+	margin-top: 24px;
+
+	:global {
+		.ui_upload_droparea_container {
+			height: 80px;
+			background: #fff;
+		}
+	}
 }

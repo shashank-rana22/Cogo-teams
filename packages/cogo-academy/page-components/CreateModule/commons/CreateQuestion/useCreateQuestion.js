@@ -24,6 +24,7 @@ const useCreateQuestion = ({
 	listSetQuestions,
 }) => {
 	const [questionTypeWatch, setQuestionTypeWatch] = useState('stand_alone');
+	const [uploadable, setUploadable] = useState('false');
 	const [editorValue, setEditorValue] = useState(
 		questionTypeWatch === 'stand_alone'
 			? { question_0_explanation: RichTextEditor.createEmptyValue() }
@@ -59,6 +60,8 @@ const useCreateQuestion = ({
 		editorValue,
 		subjectiveEditorValue,
 		setSubjectiveEditorValue,
+		uploadable,
+		setUploadable,
 	});
 
 	const { updateStandAloneTestQuestion, loading: updateStandAloneLoading } = useUpdateStandAloneTestQuestion({
@@ -85,7 +88,6 @@ const useCreateQuestion = ({
 	});
 
 	const onSubmit = (values) => {
-		console.log('values', values);
 		if (!isNewQuestion && question_type !== 'case_study') {
 			updateStandAloneTestQuestion({
 				values,
@@ -179,6 +181,10 @@ const useCreateQuestion = ({
 					setValue(`${subChildKey}.is_correct`, is_correct ? 'true' : 'false');
 				});
 			});
+		} else if (question_type === 'subjective') {
+			setValue('question_type', question_type);
+			setValue('question_text', question_text);
+			setValue('difficulty_level', difficulty_level);
 		} else {
 			const childKey = 'question.0';
 
@@ -228,6 +234,8 @@ const useCreateQuestion = ({
 		updateStandAloneLoading,
 		subjectiveEditorValue,
 		setSubjectiveEditorValue,
+		uploadable,
+		setUploadable,
 		...restFormProps,
 	};
 };
