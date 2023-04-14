@@ -38,7 +38,7 @@ function DeadlineModal({
 					<div className={styles.current_deadline}>
 						Current Deadline
 						<div style={{ fontWeight: '600' }}>
-							{formDeadline.toString() !== '0001-01-01T00:00:00Z'
+							{(formDeadline || '').toString() !== '0001-01-01T00:00:00Z'
 								? formatDate({
 									date       : formDeadline,
 									formatType : 'dateTime',
