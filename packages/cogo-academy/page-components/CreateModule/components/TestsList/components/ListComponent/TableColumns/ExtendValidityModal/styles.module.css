@@ -29,3 +29,7 @@
 .text {
 	margin-bottom: 6px;
 }
+
+.modal_container {
+	top: 32px !important;
+}

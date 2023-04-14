@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useMemo } from 'react';
 
@@ -23,7 +24,7 @@ const useAnswer = ({ question }) => {
 				params,
 			});
 		} catch (error) {
-			Toast.error(error?.message);
+			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
 		}
 	}, [params, trigger]);
 
