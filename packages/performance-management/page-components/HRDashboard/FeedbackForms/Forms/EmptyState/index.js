@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function EmptyState({ setFormStage = () => {}, setOpenCreateForm = () => {} }) {
+function EmptyState({ setFormStage = () => {}, setOpenCreateForm = () => {}, activationStatus = 'add' }) {
 	return (
 		<div className={styles.empty_state}>
 			<div>No Forms available yet,. Kindly create new forms to use them for feedbacks...</div>
@@ -14,6 +14,7 @@ function EmptyState({ setFormStage = () => {}, setOpenCreateForm = () => {} }) {
 					setOpenCreateForm(true);
 				}}
 				style={{ marginTop: '8px' }}
+				disabled={activationStatus === 'Edit'}
 			>
 				Create Form
 			</Button>

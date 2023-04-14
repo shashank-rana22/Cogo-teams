@@ -97,29 +97,21 @@ function FeedbackForms() {
 					</div>
 				</div>
 
-				{activationStatus === 'disabled' ? (
-					<Tooltip
-						content={<div style={{ wordBreak: 'break-word' }}>Forms disabled for this Month.</div>}
-						placement="left"
-					>
-						<Button
-							size="lg"
-							onClick={() => setOpenActivateModal(true)}
-							disabled={activationStatus === 'disabled'}
-							loading={deadlineDataLoading}
-						>
-							{buttonText}
-						</Button>
-					</Tooltip>
-				) : (
+				<Tooltip
+					content={<div style={{ wordBreak: 'break-word' }}>Forms disabled for this Month.</div>}
+					placement="left"
+					disabled={activationStatus !== 'disabled'}
+				>
 					<Button
 						size="lg"
 						onClick={() => setOpenActivateModal(true)}
+						disabled={activationStatus === 'disabled'}
 						loading={deadlineDataLoading}
 					>
 						{buttonText}
 					</Button>
-				)}
+				</Tooltip>
+
 			</div>
 
 			<div className={styles.form_container}>

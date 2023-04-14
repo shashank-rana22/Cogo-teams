@@ -12,7 +12,7 @@ function Forms({
 	setOpenCreateForm = () => {},
 	openCreateForm = false,
 	setFormStage = () => {},
-	activationStatus = 'add',
+	activationStatus = 'Add',
 	setFormId = () => {},
 }) {
 	const openOldForm = (Id) => {
@@ -41,7 +41,13 @@ function Forms({
 	};
 
 	return (isEmpty(formList) && !loading
-		? <EmptyState setFormStage={setFormStage} setOpenCreateForm={setOpenCreateForm} /> : (
+		? (
+			<EmptyState
+				setFormStage={setFormStage}
+				setOpenCreateForm={setOpenCreateForm}
+				activationStatus={activationStatus}
+			/>
+		) : (
 			<div className={styles.container}>
 				<div className={styles.form_header}>
 					<div className={styles.form_cat}>
