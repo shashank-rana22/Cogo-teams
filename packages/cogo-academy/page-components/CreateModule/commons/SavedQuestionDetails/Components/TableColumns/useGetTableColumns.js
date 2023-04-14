@@ -4,9 +4,9 @@ import { format, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import AnswerKey from '../AnswerKey';
-import ButtonsComponent from '../ButtonsComponent';
 import CaseAnswerType from '../CaseAnswerType';
 import CaseQuestion from '../CaseQuestion';
+import OptionsComponent from '../OptionsComponent';
 import SortComponent from '../SortComponent';
 
 import styles from './styles.module.css';
@@ -107,7 +107,7 @@ const useGetTableColumns = ({
 			Header   : '',
 			id       : 'options',
 			accessor : (item) => (
-				<ButtonsComponent
+				<OptionsComponent
 					item={item}
 					setAllKeysSaved={setAllKeysSaved}
 					getTestQuestionTest={getTestQuestionTest}

@@ -1,0 +1,42 @@
+.answer_text {
+	padding: 4px;
+
+	&.correct {
+		color: green;
+	}
+}
+
+.question_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 12px;
+}
+
+.question_type {
+	font-size: 12px;
+	color: #828282;
+}
+
+.question_text {
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.container {
+	margin-bottom: 20px;
+}
+
+.explanation {
+	width: 100%;
+	padding: 12px;
+	margin-top: 12px;
+	background: #f9f5ec;
+	border-radius: 6px;
+}
+
+.border {
+	margin: 16px 0;
+	border: 0.5px dotted black;
+}

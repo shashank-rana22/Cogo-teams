@@ -10,6 +10,7 @@ const useSavedQuestionDetails = ({
 	setEditDetails,
 	listSetQuestions,
 	editDetails,
+	setQuestionDetails,
 }) => {
 	const [questionToDelete, setQuestionToDelete] = useState({});
 
@@ -21,6 +22,7 @@ const useSavedQuestionDetails = ({
 		setQuestionToDelete,
 		listSetQuestions,
 		editDetails,
+		setQuestionDetails,
 	});
 
 	const {
@@ -33,11 +35,13 @@ const useSavedQuestionDetails = ({
 		questionSetId,
 		setQuestionToDelete,
 		listSetQuestions,
+		setQuestionDetails,
 	});
 
 	const handleEditQuestion = ({ item }) => {
 		setAllKeysSaved(false);
 		setEditDetails(item);
+		setQuestionDetails({});
 	};
 
 	const handleDeleteQuestion = ({ item }) => {
