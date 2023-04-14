@@ -75,7 +75,7 @@ function SupplierReallocation({
 			<Modal.Body>
 				<Modal.Header title={(
 					<div className={styles.header}>
-						{isAdditional ? 'Supplier Reallocation' : 'Edit Parameters'}
+						Supplier Reallocation & BL Details
 					</div>
 				)}
 				/>

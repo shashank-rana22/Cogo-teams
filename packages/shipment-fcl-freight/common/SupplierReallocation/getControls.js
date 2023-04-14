@@ -28,7 +28,13 @@ export default function getControls({ serviceObj, documents, isAdditional }) {
 			type        : 'number',
 			placeholder : 'Enter BL Count',
 			size        : 'sm',
-			rules       : { required: 'BL Count required' },
+			rules       : {
+				required : 'BL Count required',
+				min      : {
+					value   : 1,
+					message : 'BL count cannot be less than 0',
+				},
+			},
 		},
 		{
 			name    : 'bl_category',
