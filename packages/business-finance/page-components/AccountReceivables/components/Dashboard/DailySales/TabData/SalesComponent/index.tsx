@@ -3,6 +3,7 @@ import { getFormattedPrice } from '@cogoport/forms';
 import { isEmpty, format } from '@cogoport/utils';
 import React from 'react';
 
+import { keyValue } from '../../../../../constants';
 import useGetGraph from '../../../../../hooks/useGetGraph';
 import ResponsiveChart from '../CardComponent/ResponsiveChart';
 
@@ -121,11 +122,11 @@ function SalesComponent({
 							{' '}
 							<div className={styles.styled_credit}>
 								{getFormattedPrice(
-									getDataFromDuration(invoiceArray, durations[val - 1])?.[0]?.amount,
+									getDataFromDuration(invoiceArray, durations[val - 1])?.[0]?.amount || 0,
 									getDataFromDuration(
 										invoiceArray,
 										durations[val - 1],
-									)?.[0]?.dashboardCurrency,
+									)?.[0]?.dashboardCurrency || keyValue[entityCode],
 									{
 										style                 : 'currency',
 										currencyDisplay       : 'code',
@@ -138,11 +139,11 @@ function SalesComponent({
 								{' '}
 
 								{getFormattedPrice(
-									getDataFromDuration(creditNoteArray, durations[val - 1])?.[0]?.amount,
+									getDataFromDuration(creditNoteArray, durations[val - 1])?.[0]?.amount || 0,
 									getDataFromDuration(
 										creditNoteArray,
 										durations[val - 1],
-									)?.[0]?.dashboardCurrency,
+									)?.[0]?.dashboardCurrency || keyValue[entityCode],
 									{
 										style                 : 'currency',
 										currencyDisplay       : 'code',
@@ -169,8 +170,11 @@ function SalesComponent({
 							<span className={styles.styled_amount}>
 
 								{getFormattedPrice(
-									getDataFromDuration(revenueArray, durations[val - 1])?.[0]?.amount,
-									getDataFromDuration(revenueArray, durations[val - 1])?.[0]?.dashboardCurrency,
+									getDataFromDuration(revenueArray, durations[val - 1])?.[0]?.amount || 0,
+									getDataFromDuration(
+										revenueArray,
+										durations[val - 1],
+									)?.[0]?.dashboardCurrency || keyValue[entityCode],
 									{
 										style                 : 'currency',
 										currencyDisplay       : 'code',
@@ -186,7 +190,7 @@ function SalesComponent({
 			</table>
 		</div>
 	);
-	if (loading || loadingData) {
+	if (loading) {
 		return (
 			<div className={styles.place}>
 				{
