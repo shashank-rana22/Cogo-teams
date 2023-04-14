@@ -177,6 +177,8 @@ function DNDComponent() {
 							setSelectedItem={setSelectedItem}
 							isNewItemAdding={isNewItemAdding}
 							parentComponentId={parentComponentId}
+							setShowContentModal={setShowContentModal}
+							setParentComponentId={setParentComponentId}
 						/>
 					</div>
 

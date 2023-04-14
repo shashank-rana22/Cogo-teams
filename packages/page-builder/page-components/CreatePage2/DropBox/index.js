@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import isEqual from 'lodash.isequal';
+// import isEqual from 'lodash.isequal';
 import React, {
 	useCallback,
 	useEffect,
@@ -29,6 +29,9 @@ function Stage({
 	setSelectedItem,
 	selectedItem,
 	parentComponentId,
+	setShowContentModal,
+	setParentComponentId,
+
 }) {
 	const [stageItems, setStageItems] = useState(component);
 
@@ -88,7 +91,7 @@ function Stage({
 				<RightPanel
 					widget={item}
 					components={stageItems}
-					setComponents={setStageItems}
+					setComponents={setComponent}
 					index={index}
 					id={id}
 					key={id}
@@ -99,6 +102,8 @@ function Stage({
 					onClick={() => setSelectedItem({ ...item, id, index })}
 					isSelected={!!id && id === selectedItem?.id}
 					selectedItem={selectedItem}
+					setShowContentModal={setShowContentModal}
+					setParentComponentId={setParentComponentId}
 				/>
 			</div>
 		);
@@ -153,7 +158,7 @@ function Stage({
 	}, [isOver, draggingItemType, isNewItemAdding, shouldAddBelow, hoveredIndex]);
 	const isActive = canDrop && isOver;
 
-	let backgroundColor = '#fff';
+	let backgroundColor = component.style['background-color'] || '#fff';
 
 	if (isActive) {
 		backgroundColor = 'grey';

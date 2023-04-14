@@ -71,7 +71,7 @@ function ComponentBuilder({ widget, components, setComponents, selectedItem, chi
 	);
 }
 
-function Item(props) {
+function RightPanel(props) {
 	const {
 		widget,
 		components,
@@ -84,6 +84,8 @@ function Item(props) {
 		onClick,
 		isSelected,
 		selectedItem,
+		setShowContentModal,
+		setParentComponentId,
 	} = props;
 	const [childId, setChildId] = useState('');
 
@@ -93,7 +95,6 @@ function Item(props) {
 	// 	width  : 800,
 	// 	height : 170,
 	// });
-	console.log('Sdsjhdkh', widget);
 
 	// const { width, height } = state || {};
 
@@ -126,9 +127,11 @@ function Item(props) {
 			if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
 				return;
 			}
+
 			if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
 				return;
 			}
+
 			if (!isNewItemAdding) {
 				onNewAddingItemProps({ hoveredIndex: hoverIndex });
 				moveItem(dragIndex, hoverIndex);
@@ -138,6 +141,7 @@ function Item(props) {
 			} else {
 				const belowThreshold = top + height / 2;
 				const newShould = y >= belowThreshold;
+
 				onNewAddingItemProps({
 					hoveredIndex   : hoverIndex,
 					shouldAddBelow : newShould,
@@ -164,12 +168,27 @@ function Item(props) {
 		setComponents(data);
 	};
 
+	const handleSubmitClick = ({ childrenId, parentId }) => {
+		setParentComponentId({ childId: childrenId, parentId });
+
+		setShowContentModal(true);
+	};
+
 	const handleCopy = (itemList) => {
 		const { id: sId, parentId, children } = itemList || {};
 		const newId = uuid();
 		const data = components;
 		const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === sId));
-		const duplicateChildren = (children || []).map((item) => ({ ...item, parentId: newId }));
+
+		const duplicateChildren = (children || []).map((item) => {
+			const { properties } = item || {};
+			const { content, attributes } = properties || {};
+			const { type: childType } = content || {};
+
+			const newAttributes = !childType ? { onClick: () => handleSubmitClick({ childrenId: item.id, parentId: newId }) } : attributes;
+
+			return ({ ...item, parentId: newId, properties: { ...properties, attributes: newAttributes } });
+		});
 
 		const duplicateData = parentId ? {
 			...itemList,
@@ -234,4 +253,4 @@ function Item(props) {
 	);
 }
 
-export default Item;
+export default RightPanel;
