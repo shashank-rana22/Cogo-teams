@@ -23,7 +23,7 @@ function TestResult() {
 
 	const [{ data, loading }] = useRequest({
 		method : 'GET',
-		url    : '/get_user_test_performance',
+		url    : '/get_user_performance',
 		params : {
 			test_id,
 			user_id: view === 'admin' ? id : user_id,
