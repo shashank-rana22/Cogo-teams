@@ -36,7 +36,7 @@ export const bonusType = [
 const getNodeOptions = () => {
 	const options = [...Array(39).keys()].map((i) => {
 		const label = `N-${i + 2}`;
-		const value = i + 2;
+		const value = `-${i + 2}`;
 		return { label, value };
 	});
 

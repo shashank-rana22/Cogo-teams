@@ -30,7 +30,7 @@ function KYCRule() {
 
 	const handleSave = async (values, e) => {
 		e.stopPropagation();
-		await createRule({ ...values, overall_limit: Number(values.overall_limit), event: 'kyc_registration' });
+		await createRule({ ...values, total_cogopoints: Number(values.total_cogopoints), event: 'kyc_registration' });
 		setIsEdit(true);
 		setApiState('Updated');
 	};
@@ -54,7 +54,7 @@ function KYCRule() {
 					<div className={styles.input_controller}>
 						<InputController
 							control={control}
-							name="overall_limit"
+							name="total_cogopoints"
 							className={styles.input_box}
 							size="sm"
 							type="number"
@@ -63,7 +63,7 @@ function KYCRule() {
 							rules={{ required: true }}
 							prefix={<IcCCogoCoin />}
 						/>
-						{errors.overall_limit && (
+						{errors.total_cogopoints && (
 							<span className={styles.error}>Required</span>
 						)}
 					</div>
