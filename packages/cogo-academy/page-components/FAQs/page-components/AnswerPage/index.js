@@ -45,7 +45,8 @@ function AnswerPage() {
 	} = useCreateFeedback({ refetchQuestions, answerData, loading });
 
 	const onClickBackIcon = () => {
-		const href = `/learning/faq${topicId ? `?topicId=${topicId}` : ''}`;
+		const showTopicId = topicId ? `?topicId=${topicId}` : '';
+		const href = `/learning/faq${showTopicId}`;
 		router.push(href, href);
 	};
 
