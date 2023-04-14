@@ -9735,14 +9735,14 @@ const partner = {
 			service_name : 'saas_traceability',
 		},
 		{
-			api          : 'list_shipment_ftl_freight_service_trackers',
+			api          : 'get_saas_ftl_freight_service_tracker',
 			access_type  : 'private',
-			service_name : 'shipment',
+			service_name : 'saas_traceability',
 		},
 		{
-			api          : 'get_shipment_ftl_freight_service_tracker',
+			api          : 'list_saas_ftl_freight_service_trackers',
 			access_type  : 'private',
-			service_name : 'shipment',
+			service_name : 'saas_traceability',
 		},
 	],
 

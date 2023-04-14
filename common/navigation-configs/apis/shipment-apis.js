@@ -1303,22 +1303,7 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'get_shipment_ftl_freight_service_tracker',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
 		api          : 'send_liners_invoice_email',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'start_shipment_ftl_freight_service_tracking',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
-		api          : 'get_shipment_ftl_freight_service_tracking_consent',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
@@ -1338,9 +1323,24 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'update_shipment_ftl_freight_service_tracking',
+		api          : 'update_saas_ftl_freight_service_tracking',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'get_saas_ftl_freight_service_tracking_consent',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'get_saas_ftl_freight_service_tracker',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'get_saas_ftl_tracking_status',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
 	},
 ];
 
