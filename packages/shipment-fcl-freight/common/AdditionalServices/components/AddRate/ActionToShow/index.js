@@ -74,7 +74,7 @@ function ActionsToShow({
 	}
 
 	if (
-		status?.status === 'cancelled_by_supplier' && activeStakeholder === 'service_ops_1'
+		status?.status === 'cancelled_by_supplier' && activeStakeholder === 'booking_desk'
 	) {
 		return (
 			<div className={styles.button_container}>

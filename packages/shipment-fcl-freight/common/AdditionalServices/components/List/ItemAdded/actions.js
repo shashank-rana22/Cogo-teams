@@ -13,9 +13,8 @@ const actions = ({
 }) => {
 	const isSameItem = serviceListItem.id === addRate?.item?.id;
 
-	const onClick = () => {
-		setItem({ serviceListItem, status });
-	};
+	const onClickSetItem = () => setItem({ serviceListItem, status });
+
 	if (
 		status.status === 'quoted_by_service_provider'
 		|| status.status === 'price_recieved'
@@ -39,7 +38,7 @@ const actions = ({
 				themeType="secondary"
 				style={{ marginLeft: 10, height: '24px' }}
 				onClick={() => {
-					onClick();
+					onClickSetItem();
 					setShowModal('add_sell_price');
 				}}
 			>
@@ -68,7 +67,7 @@ const actions = ({
 			<Button
 				themeType="secondary"
 				style={{ marginLeft: 10, height: '24px' }}
-				onClick={() => setItem({ serviceListItem, status })}
+				onClick={onClickSetItem}
 			>
 				REALLOCATE
 			</Button>
@@ -83,7 +82,7 @@ const actions = ({
 				themeType="secondary"
 				style={{ marginLeft: 10, height: '24px' }}
 				onClick={() => {
-					setItem({ serviceListItem, status });
+					onClickSetItem();
 					setShowModal('add_sell_price');
 				}}
 			>
@@ -101,7 +100,7 @@ const actions = ({
 				themeType="secondary"
 				style={{ marginLeft: 10, height: '24px' }}
 				onClick={() => {
-					onClick();
+					onClickSetItem();
 					setShowModal('ip');
 				}}
 			>
