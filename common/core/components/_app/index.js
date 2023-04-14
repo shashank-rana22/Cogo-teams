@@ -3,7 +3,6 @@ import '@cogoport/components/dist/themes/dawn.css';
 import { Router } from '@cogoport/next';
 import store, { Provider } from '@cogoport/store';
 import * as Sentry from '@sentry/nextjs';
-import { appWithTranslation } from 'next-i18next';
 import pageProgessBar from 'nprogress';
 import './global.css';
 import 'nprogress/nprogress.css';
@@ -60,4 +59,4 @@ function MyApp({ Component, pageProps }) {
 	);
 }
 
-export default appWithTranslation(MyApp);
+export default MyApp;
