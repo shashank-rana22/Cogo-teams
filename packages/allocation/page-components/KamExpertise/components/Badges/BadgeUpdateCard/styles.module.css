@@ -1,0 +1,89 @@
+.card_container {
+	flex: 1;
+	padding: 0 10px 0 30px;
+	margin-top: 10px;
+	border-right: 1px solid #000;
+
+	@media (max-width: 576px) {
+		padding-bottom: 20px;
+		border-right: none;
+		border-bottom: 1px solid #03030346;
+	}
+}
+
+.last_item {
+	border-right: none;
+
+	@media (max-width: 576px) {
+		padding-bottom: 20px;
+		border-bottom: none;
+	}
+}
+
+.display_flex {
+	display: flex;
+
+	@media (max-width: 576px) {
+		flex-direction: column;
+	}
+}
+
+.vertical_line {
+	width: 1px;
+	height: 100%;
+	margin: 0 28px;
+	background-color: #000;
+}
+
+.error_message {
+	font-size: 10px;
+	color: #cb6464;
+}
+
+.lower_subheader2 {
+	display: flex;
+	align-items: center;
+	margin-top: 20px;
+	font-weight: 500;
+	color: #4f4f4f;
+}
+
+.icm_info {
+	width: 15px;
+	height: 15px;
+	margin-left: 4px;
+	color: black;
+}
+
+.file_select_style {
+	margin: 20px 10px 0 0;
+
+	:global(.ui_upload_droparea_container) {
+		margin-bottom: 0;
+		border-radius: 8px;
+	}
+}
+
+.preview {
+	display: flex;
+	justify-content: center;
+	height: auto;
+}
+
+.preview img {
+	width: 30%;
+	height: 30%;
+	margin-top: 20px;
+}
+
+.save_update {
+	display: flex;
+	justify-content: flex-end;
+	padding-right: 22px;
+	margin-top: 20px;
+}
+
+.medal_text {
+	margin-bottom: 16px;
+	color: #4f4f4f;
+}
