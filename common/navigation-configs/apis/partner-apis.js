@@ -269,7 +269,7 @@ const partner = {
 		{
 			api          : 'get_business',
 			access_type  : 'private',
-			service_name : 'business',
+			service_name : 'shipment',
 		},
 		{
 			api          : 'update_user_password',
@@ -447,7 +447,7 @@ const partner = {
 		{
 			api          : 'get_business',
 			access_type  : 'private',
-			service_name : 'business',
+			service_name : 'shipment',
 		},
 		{
 			api          : 'get_profile_completion_sectional_progress',
@@ -1180,7 +1180,7 @@ const partner = {
 			api          : 'get_business',
 			access_type  : 'private',
 			feature      : 'demand_crm',
-			service_name : 'business',
+			service_name : 'shipment',
 		},
 		{
 			api          : 'get_cogoscore_tax_numbers',
@@ -1862,7 +1862,7 @@ const partner = {
 			feature      : 'supply_crm',
 			api          : 'get_business',
 			access_type  : 'private',
-			service_name : 'business',
+			service_name : 'shipment',
 		},
 		{
 			api          : 'get_cogoscore_tax_numbers',
@@ -2214,7 +2214,7 @@ const partner = {
 		{
 			api          : 'get_business',
 			access_type  : 'private',
-			service_name : 'business',
+			service_name : 'shipment',
 		},
 		{
 			api          : 'validate_channel_partner_registration_number',
@@ -3876,19 +3876,22 @@ const partner = {
 			feature      : 'rate_density',
 		},
 		{
-			api         : 'list_shipment_flash_booking_rates',
-			access_type : 'private',
-			feature     : 'live_booking',
+			api          : 'list_shipment_flash_booking_rates',
+			access_type  : 'private',
+			feature      : 'live_booking',
+			service_name : 'shipment',
 		},
 		{
-			api         : 'create_shipment_flash_booking_rate',
-			access_type : 'private',
-			feature     : 'live_booking',
+			api          : 'create_shipment_flash_booking_rate',
+			access_type  : 'private',
+			feature      : 'live_booking',
+			service_name : 'shipment',
 		},
 		{
-			api         : 'update_shipment_flash_booking_rate',
-			access_type : 'private',
-			feature     : 'live_booking',
+			api          : 'update_shipment_flash_booking_rate',
+			access_type  : 'private',
+			feature      : 'live_booking',
+			service_name : 'shipment',
 		},
 		{
 			api         : 'get_shipment_services_quotation',
@@ -4769,7 +4772,7 @@ const partner = {
 		{
 			api          : 'get_business',
 			access_type  : 'private',
-			service_name : 'business',
+			service_name : 'shipment',
 		},
 		{
 			api          : 'list_partner_users',
@@ -7002,8 +7005,9 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'list_organization_documents',
-			access_type : 'private',
+			api          : 'list_organization_documents',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 		{
 			api          : 'list_cogo_entities',
