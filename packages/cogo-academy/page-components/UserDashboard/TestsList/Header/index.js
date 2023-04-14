@@ -49,7 +49,7 @@ function Header({ debounceQuery, testCategory, setTestCategory }) {
 					<Select
 						size="sm"
 						value={testCategory}
-						placeholder="Select Day"
+						placeholder="Select Test"
 						options={testCategoryOptions}
 						onChange={setTestCategory}
 					/>

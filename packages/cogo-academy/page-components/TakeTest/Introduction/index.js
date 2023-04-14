@@ -47,15 +47,15 @@ function Introduction({ setActiveState, testData = {} }) {
 			1,
 		);
 
-		const elem = document.getElementById('maincontainer');
+		// const elem = document.getElementById('maincontainer');
 
-		if (elem?.requestFullscreen) {
-			elem?.requestFullscreen();
-		} else if (elem?.webkitRequestFullscreen) { /* Safari */
-			elem?.webkitRequestFullscreen();
-		} else if (elem?.msRequestFullscreen) { /* IE11 */
-			elem?.msRequestFullscreen();
-		}
+		// if (elem?.requestFullscreen) {
+		// 	elem?.requestFullscreen();
+		// } else if (elem?.webkitRequestFullscreen) { /* Safari */
+		// 	elem?.webkitRequestFullscreen();
+		// } else if (elem?.msRequestFullscreen) { /* IE11 */
+		// 	elem?.msRequestFullscreen();
+		// }
 	};
 
 	const items = [
@@ -143,9 +143,16 @@ function Introduction({ setActiveState, testData = {} }) {
 
 			<div className={styles.instructions_container}>
 				<div className={styles.title}>Test Instructions</div>
+
 				<div>
 					Please read all the instructions carefully before clicking on Begin Test.
 					The timer will start once you click on Begin test
+				</div>
+
+				<div className={styles.warning}>
+					In case of any issues with taking the test or submitting answers,
+					use the shortcut Command + Shift + R
+					for Mac OS or Ctrl+F5 for Windows.
 				</div>
 
 				<ol className={styles.list}>
