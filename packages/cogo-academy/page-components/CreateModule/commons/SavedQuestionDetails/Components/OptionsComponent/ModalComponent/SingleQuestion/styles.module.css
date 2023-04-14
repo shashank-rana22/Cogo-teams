@@ -2,7 +2,8 @@
 	padding: 4px;
 
 	&.correct {
-		color: green;
+		font-weight: 600;
+		color: #849e4c;
 	}
 }
 
@@ -38,5 +39,5 @@
 
 .border {
 	margin: 16px 0;
-	border: 0.5px dotted black;
+	border: 0.5px dotted #221f20;
 }

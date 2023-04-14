@@ -1,4 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { IcMCross, IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { format, isEmpty } from '@cogoport/utils';
 
@@ -19,7 +20,7 @@ function ModalComponent({
 	editDetails,
 	questionDetails,
 	setQuestionDetails,
-	allKeysSaved
+	allKeysSaved,
 }) {
 	const {
 		handleEditQuestion,
@@ -40,8 +41,6 @@ function ModalComponent({
 
 	const { created_at, question_type = '', test_case_study_questions = [] } = item || {};
 
-	console.log('allKeysSaved',allKeysSaved);
-	
 	return (
 		<div>
 			<Modal
@@ -78,7 +77,9 @@ function ModalComponent({
 
 						<div className={styles.footer}>
 							<div className={styles.created_at}>
-								{format(created_at, 'dd MMM yyyy hh:mm a')}
+								<span>{format(created_at, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}</span>
+								<span>{', '}</span>
+								<span>{format(created_at, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}</span>
 							</div>
 
 							{mode !== 'view' && allKeysSaved ? (
@@ -87,7 +88,6 @@ function ModalComponent({
 										type="button"
 										themeType="secondary"
 										className={styles.btn}
-										loading={loading || caseStudyLoading}
 										onClick={() => {
 											setQuestionToDelete(item);
 										}}
@@ -102,7 +102,6 @@ function ModalComponent({
 										type="button"
 										onClick={() => handleEditQuestion({ item })}
 										themeType="accent"
-										disabled={loading || caseStudyLoading}
 										style={{ marginLeft: '16px' }}
 									>
 										<IcMEdit />
@@ -123,6 +122,8 @@ function ModalComponent({
 				questionToDelete={questionToDelete}
 				setQuestionToDelete={setQuestionToDelete}
 				handleDeleteQuestion={handleDeleteQuestion}
+				loading={loading}
+				caseStudyLoading={caseStudyLoading}
 			/>
 		</div>
 	);
