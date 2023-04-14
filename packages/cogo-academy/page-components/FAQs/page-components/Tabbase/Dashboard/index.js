@@ -1,8 +1,6 @@
-import { Button } from '@cogoport/components';
+import { Button, Input } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
-
-import SearchInput from '../../../../../commons/SearchInput';
 
 import PopularTags from './PopularTags';
 
@@ -17,14 +15,19 @@ function Dashboard({ tabTitle = '' }) {
 
 	return (
 		<div style={{ marginTop: 12 }}>
-			<div style={{ display: 'flex' }}>
-				<SearchInput
+			<form
+				style={{ display: 'flex' }}
+				onSubmit={(e) => {
+					e.preventDefault();
+					setSearchState(inputState);
+				}}
+			>
+				<Input
 					value={inputState}
 					onChange={(e) => {
 						setInputState(e);
 						if (!e) setSearchState('');
 					}}
-					onKeyPress={() => { setSearchState(inputState); }}
 					size="md"
 					placeholder="Search for a keyword or a question"
 				/>
@@ -33,11 +36,10 @@ function Dashboard({ tabTitle = '' }) {
 					size="lg"
 					themeType="primary"
 					style={{ marginLeft: '10px' }}
-					onClick={() => { setSearchState(inputState); }}
 				>
 					<IcMSearchlight />
 				</Button>
-			</div>
+			</form>
 
 			<PopularTags
 				tabTitle={tabTitle}
