@@ -164,8 +164,7 @@ const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 		} catch (error) {
 			if (error?.response?.data?.message) {
 				Toast.error(error?.response?.data?.message);
-			}
-			else{
+			} else {
 				Toast.error('Something Went Wrong');
 			}
 		}
