@@ -89,7 +89,6 @@ const useCreateQuestion = ({
 	});
 
 	const onSubmit = (values) => {
-		console.log(values);
 		if (!isNewQuestion && question_type !== 'case_study') {
 			updateStandAloneTestQuestion({
 				values,

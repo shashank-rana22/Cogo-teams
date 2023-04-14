@@ -11,6 +11,13 @@ const MAPPING = {
 	create : 'added',
 };
 
+const TYPE_MAPPING = {
+	single_correct : 'StandAlone',
+	multi_correct  : 'StandAlone',
+	subjective     : 'Subjective',
+
+};
+
 function useUpdateStandAloneTestQuestion({
 	questionSetId,
 	getTestQuestionTest,
@@ -24,13 +31,14 @@ function useUpdateStandAloneTestQuestion({
 }) {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
-		url    : '/update_stand_alone_test_question',
+		url    : '/update_non_case_study_test_question',
 	}, { manual: true });
 
 	const updateStandAloneTestQuestion = async ({
 		values,
 		action,
 		testQuestionId,
+		question_type = 'single_correct',
 	}) => {
 		try {
 			const { hasError, ...payload } = getPayload({
@@ -54,7 +62,7 @@ function useUpdateStandAloneTestQuestion({
 				data: payload,
 			});
 
-			Toast.success(`StandAlone Question has been ${MAPPING[action]} successfully`);
+			Toast.success(`${TYPE_MAPPING[question_type]} Question has been ${MAPPING[action]} successfully`);
 
 			listSetQuestions({
 				questionSetId,
