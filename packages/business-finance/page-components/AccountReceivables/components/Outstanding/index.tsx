@@ -28,9 +28,6 @@ function Outstanding({ entityCode }) {
 		queryKey,
 	} = useGetOrgOutstanding({ formFilters, entityCode });
 
-	console.log("outStandingData", outStandingData);
-	
-
 	const { page, pageLimit } = outStandingFilters || {};
 	const { totalRecords, list = [] } = outStandingData || {};
 
