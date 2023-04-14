@@ -46,7 +46,9 @@ function ProfileDetails({
 		type: 'count',
 	});
 
-	useEffect(() => { setShowMore(false); }, [activeSelect]);
+	useEffect(() => {
+		setShowMore(false);
+	}, [activeSelect]);
 
 	return (
 		<div className={styles.profile_div}>
