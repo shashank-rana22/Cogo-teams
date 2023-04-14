@@ -9,7 +9,6 @@ function QuestionsAndDistribution(props) {
 	const { data, loading, errors, control, setValue, watch, setError } = props;
 
 	const columns = getColumns({ errors, control });
-
 	useEffect(() => {
 		data?.test_set_distribution_data?.forEach(({
 			question_type = '',

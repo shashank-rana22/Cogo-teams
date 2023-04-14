@@ -7,7 +7,6 @@ const QUESTION_TYPE_MAPPING = {
 	q : 'stand_alone',
 	c : 'case_study',
 	s : 'subjective',
-
 };
 
 function useUpdateTest() {
@@ -45,9 +44,10 @@ function useUpdateTest() {
 						].includes(key),
 					)
 					.map(([key, value]) => {
-						const question_type = QUESTION_TYPE_MAPPING[key.slice(-1)];
+						const question_type = QUESTION_TYPE_MAPPING[key.slice(key.length - 1)];
 
 						const distribution_count = Number(value);
+
 						const test_question_set_id = key.substring(0, key.length - 1);
 
 						return {
