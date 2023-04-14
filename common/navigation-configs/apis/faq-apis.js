@@ -120,6 +120,12 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
+			api          : 'create_faq_question_alias',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+
 	],
 	faq: [
 		{
