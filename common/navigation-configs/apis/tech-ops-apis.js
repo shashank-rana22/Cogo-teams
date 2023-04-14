@@ -237,6 +237,36 @@ const apis = [
 		feature      : 'tech_ops',
 		service_name : 'contract',
 	},
+	{
+		api          : 'get_fcl_freight_rate',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'fcl_freight_rate',
+	},
+	{
+		api          : 'list_fcl_freight_rate_free_day_requests',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'fcl_freight_rate',
+	},
+	{
+		api          : 'delete_fcl_freight_rate_free_day_request',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'fcl_freight_rate',
+	},
+	{
+		api          : 'create_fcl_freight_rate_free_day',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'fcl_freight_rate',
+	},
+	{
+		api          : 'update_shipment_additional_service_quotation',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;

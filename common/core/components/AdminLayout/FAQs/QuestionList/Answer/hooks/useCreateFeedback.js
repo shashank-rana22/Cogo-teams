@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
@@ -20,7 +21,7 @@ const useCreateFeedback = ({ question }) => {
 
 	const watchQuestionCheckbox = watch('question_checkbox');
 	const watchAnswerCheckbox = watch('answer_checkbox');
-
+	const watchRemark = watch('remark');
 	const [show, setShow] = useState(false);
 	const [load, setload] = useState(true);
 
@@ -66,7 +67,8 @@ const useCreateFeedback = ({ question }) => {
 
 			fetch();
 		} catch (error) {
-			Toast.error(error?.message);
+			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
+
 			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
 	};
@@ -85,7 +87,8 @@ const useCreateFeedback = ({ question }) => {
 
 			fetch();
 		} catch (error) {
-			Toast.error(error?.message);
+			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
+
 			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
 	};
@@ -109,7 +112,7 @@ const useCreateFeedback = ({ question }) => {
 		setload(false);
 		setIsLiked('disliked');
 
-		let remark = values?.remark;
+		let remark = values?.remark ? values.remark : '';
 
 		if (values?.answer_checkbox) {
 			remark = `Answer not satisfactory. ${remark}`;
@@ -146,7 +149,8 @@ const useCreateFeedback = ({ question }) => {
 			setShow(false);
 			fetch();
 		} catch (error) {
-			Toast.error(error?.message);
+			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
+
 			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
 	};
@@ -169,6 +173,7 @@ const useCreateFeedback = ({ question }) => {
 		setIsLiked,
 		watchAnswerCheckbox,
 		watchQuestionCheckbox,
+		watchRemark,
 		is_positive,
 		FEEDBACK_MAPPING_ISLIKED,
 

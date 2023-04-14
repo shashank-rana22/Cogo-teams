@@ -1,0 +1,16 @@
+.cards_collapse_container {
+	:global {
+		.ui_collapse_title {
+			width: 100%;
+		}
+
+		.ui_collapse_main > div {
+			margin-bottom: 10px;
+		}
+	}
+}
+
+.sub_container {
+	display: flex;
+	justify-content: space-between;
+}
