@@ -153,3 +153,19 @@
 	display: flex;
 	width: 100%;
 }
+
+.steps {
+	font-weight: 600;
+	color: #ee3425;
+}
+
+.card_small {
+	padding: 8px 20px;
+	background-color: #fff;
+	border-radius: 8px;
+}
+
+.job_number_data {
+	font-weight: 600;
+	text-decoration: underline;
+}

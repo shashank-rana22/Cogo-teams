@@ -44,17 +44,17 @@ const content = (purchaseInvoicesCount, salesInvoicesCount) => {
 				<div>
 					CreditNote :
 					{' '}
-					{creditNoteCount}
+					{creditNoteCount || 0}
 				</div>
 				<div>
 					Invoice :
 					{' '}
-					{invoiceCount}
+					{invoiceCount || 0}
 				</div>
 
 				Proforma :
 				{' '}
-				{proformaCount}
+				{proformaCount || 0}
 			</div>
 
 			<div>
@@ -62,17 +62,17 @@ const content = (purchaseInvoicesCount, salesInvoicesCount) => {
 				<div>
 					CreditNote :
 					{' '}
-					{salesCreditNoteCount}
+					{salesCreditNoteCount || 0}
 				</div>
 				<div>
 					Invoice :
 					{' '}
-					{salesInvoiceCount}
+					{salesInvoiceCount || 0}
 				</div>
 
 				Proforma :
 				{' '}
-				{salesProformaCount}
+				{salesProformaCount || 0}
 			</div>
 
 		</div>

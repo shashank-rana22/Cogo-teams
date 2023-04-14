@@ -25,14 +25,16 @@ interface TableProps {
 	getRowId?: (row: object) => string;
 	renderRowSubComponent?:(itemData: object) => ReactNode
 	showAllNestedOptions?:boolean
+	showEmptyState?:string
 }
 
 function StyledTable({
-	id, className, columns, selectType, showAllNestedOptions,
+	id, className, columns, selectType, showAllNestedOptions, showEmptyState,
 	data, renderRowSubComponent, pageSize, page, total, setFilters, filters, loading, ...rest
 }: TableProps) {
 	return (
 		<div className={styles.table}>
+
 			<Table
 				columns={columns}
 				renderRowSubComponent={renderRowSubComponent}
@@ -45,8 +47,7 @@ function StyledTable({
 				{...rest}
 			/>
 
-			{data?.length === 0 && <EmptyState />}
-
+			{data?.length === 0 && !loading && <EmptyState showEmptyState={showEmptyState} />}
 			<div className={styles.pagination_container}>
 				<Pagination
 					type="table"

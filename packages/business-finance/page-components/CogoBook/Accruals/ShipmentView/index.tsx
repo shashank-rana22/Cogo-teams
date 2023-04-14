@@ -1,6 +1,6 @@
 import { Input } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { IcMOverview, IcMSearchlight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -74,7 +74,8 @@ function ShipmentView() {
 	const subComponent = (itemData) => {
 		const {
 			sellQuotation = '', buyQuotation = '', quotationProfit = '',
-			quotationMargin = '', bookingType = '',
+			quotationMargin = '', bookingType = '', buyQuotationCurrency = '',
+			sellQuotationCurrency = '',
 		} = itemData || {};
 
 		return (
@@ -87,12 +88,12 @@ function ShipmentView() {
 				<div>
 					Purchase :
 					{' '}
-					{getFormattedPrice(buyQuotation, 'INR') || '-'}
+					{getFormattedPrice(buyQuotation, buyQuotationCurrency) || '-'}
 				</div>
 				<div>
 					Sales :
 					{' '}
-					{getFormattedPrice(sellQuotation, 'INR') || '-' }
+					{getFormattedPrice(sellQuotation, sellQuotationCurrency) || '-' }
 				</div>
 				<div>
 					Margin :
@@ -126,6 +127,7 @@ function ShipmentView() {
 				filters={filters}
 				isApplyEnable={isApplyEnable}
 			/>
+
 			<div className={styles.flex}>
 				<div className={styles.sub_flex}>
 					{filters?.service && (
@@ -135,12 +137,21 @@ function ShipmentView() {
 							{startCase(filters?.service)}
 						</div>
 					)}
+
 					{filters?.tradeType && (
 						<div className={styles.card_small}>
 							{' '}
 							{filters?.tradeType}
 						</div>
 					)}
+
+					<div className={styles.card_small}>
+						<span className={styles.steps}>Step 1 -</span>
+
+						{' '}
+						<span className={styles.text_step}>Select The Shipments You Want To Accrue/Book</span>
+					</div>
+
 					<div className={styles.card_small}>
 						Remaining -
 						{' '}
@@ -148,26 +159,31 @@ function ShipmentView() {
 					</div>
 				</div>
 
-				<div className={styles.input_container}>
-					<div
-						onClick={() => { setShowSub(!showSub); }}
-						className={styles.hide_data}
-						role="presentation"
-					>
-						{showSub ? 'Hide All Quotations' : 'View All Quotations'}
-
-					</div>
-					<Input
-						value={filters?.query}
-						onChange={(val) => { setFilters((prev) => ({ ...prev, query: val })); }}
-						placeholder="Search by SID"
-						disabled={!isApplyEnable}
-						suffix={<IcMSearchlight height="20px" width="20px" style={{ marginRight: '8px' }} />}
-					/>
-				</div>
-
 			</div>
+
 			<div className={styles.table_data}>
+				<div className={styles.input_data_container}>
+					<div className={styles.icon_container}>
+						<div
+							onClick={() => { setShowSub(!showSub); }}
+							className={styles.hide_data}
+							role="presentation"
+						>
+							{showSub ? 'Hide All Quotations' : 'View All Quotations'}
+						</div>
+						<div className={styles.icon}><IcMOverview height="20px" width="20px" /></div>
+					</div>
+
+					<div className={styles.input_container}>
+						<Input
+							value={filters?.query}
+							onChange={(val) => { setFilters((prev) => ({ ...prev, query: val })); }}
+							placeholder="Search by SID"
+							disabled={!isApplyEnable}
+							suffix={<IcMSearchlight height="20px" width="20px" style={{ marginRight: '8px' }} />}
+						/>
+					</div>
+				</div>
 				<StyledTable
 					page={page}
 					total={totalRecords}

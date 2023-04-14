@@ -59,7 +59,8 @@ function ViewSelectedInvoice() {
 	const subComponent = (itemData) => {
 		const {
 			sellQuotation = '', buyQuotation = '', quotationProfit = '',
-			quotationMargin = '', bookingType = '',
+			quotationMargin = '', bookingType = '', buyQuotationCurrency = '',
+			sellQuotationCurrency = '',
 		} = itemData || {};
 
 		return (
@@ -72,12 +73,12 @@ function ViewSelectedInvoice() {
 				<div>
 					Purchase :
 					{' '}
-					{getFormattedPrice(buyQuotation, 'INR') || '-'}
+					{getFormattedPrice(buyQuotation, buyQuotationCurrency) || '-'}
 				</div>
 				<div>
 					Sales :
 					{' '}
-					{getFormattedPrice(sellQuotation, 'INR') || '-' }
+					{getFormattedPrice(sellQuotation, sellQuotationCurrency) || '-' }
 				</div>
 				<div>
 					Margin :
@@ -111,7 +112,14 @@ function ViewSelectedInvoice() {
 						)}
 					/>
 					<Breadcrumb.Item label="Selected Shipments" />
+					<div>
+						<span className={styles.steps}>Step 2 -</span>
+
+						{' '}
+						<span className={styles.text_step}>Review The Selected Shipments And Accrue/Book Them</span>
+					</div>
 				</Breadcrumb>
+
 			</div>
 			<div className={styles.header_container}>
 				<div className={styles.div_left}>
@@ -236,6 +244,7 @@ function ViewSelectedInvoice() {
 						role="presentation"
 					>
 						Accrued
+
 					</div>
 				</div>
 				<div
@@ -255,6 +264,7 @@ function ViewSelectedInvoice() {
 					total={totalRecords}
 					pageSize={pageSize}
 					data={list}
+					showEmptyState={isBookedActive ? 'BOOKED' : 'ACCRUED'}
 					renderRowSubComponent={subComponent}
 					selectType="multiple"
 					showAllNestedOptions={showSub}

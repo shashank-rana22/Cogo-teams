@@ -41,7 +41,8 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 	const subComponent = (itemData) => {
 		const {
 			sellQuotation = '', buyQuotation = '', quotationProfit = '',
-			quotationMargin = '', bookingType = '',
+			quotationMargin = '', bookingType = '', buyQuotationCurrency = '',
+			sellQuotationCurrency = '',
 		} = itemData || {};
 
 		return (
@@ -54,12 +55,12 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 				<div>
 					Purchase :
 					{' '}
-					{getFormattedPrice(buyQuotation, 'INR') || '-'}
+					{getFormattedPrice(buyQuotation, buyQuotationCurrency) || '-'}
 				</div>
 				<div>
 					Sales :
 					{' '}
-					{getFormattedPrice(sellQuotation, 'INR') || '-' }
+					{getFormattedPrice(sellQuotation, sellQuotationCurrency) || '-' }
 				</div>
 				<div>
 					Margin :

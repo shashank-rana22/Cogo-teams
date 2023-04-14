@@ -20,11 +20,11 @@
 .input_container {
 	display: flex;
 	align-items: center;
-	width: 550px;
+	width: 500px;
 }
 
 .table_data {
-	margin-top: 16px;
+	background-color: #fff;
 
 	:global {
 		.ui_table_body_row {
@@ -122,7 +122,7 @@
 }
 
 .hide_data {
-	width: 200px;
+	padding: 0 0 0 44px;
 	color: #f68b21;
 	text-decoration: underline;
 	cursor: pointer;
@@ -153,4 +153,28 @@
 .job_number_data {
 	font-weight: 600;
 	text-decoration: underline;
+}
+
+.steps {
+	font-weight: 600;
+	color: #ee3425;
+}
+
+.input_data_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 16px 0 0;
+	margin-top: 16px;
+}
+
+.icon_container {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+}
+
+.icon {
+	margin-top: 4px;
+	color: #f68b21;
 }
