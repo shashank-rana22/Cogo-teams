@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
-// import handleMinimizeTest from '../../../../utils/handleMinimizeTest';
+import handleMinimizeTest from '../../../../utils/handleMinimizeTest';
 
 const getAnswerState = ({ type, answer }) => {
 	let answerState = 'answered';
@@ -70,7 +70,7 @@ function useUpdateAnswers({
 		});
 
 		if (res?.status !== 200) {
-			// handleMinimizeTest();
+			handleMinimizeTest();
 			Toast.error('Something is wrong');
 			return;
 		}
@@ -109,7 +109,7 @@ function useUpdateAnswers({
 	};
 
 	const handleLeaveTest = () => {
-		// handleMinimizeTest();
+		handleMinimizeTest();
 		setShowLeaveTestModal(true);
 	};
 

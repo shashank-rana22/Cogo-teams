@@ -1,0 +1,78 @@
+.container {
+	padding: 16px;
+	margin-bottom: 16px;
+	background-color: #fff;
+	border-radius: 16px;
+
+	@media (max-width: 768px) {
+		padding-top: 50px;
+	}
+}
+
+.number_tag {
+	display: flex;
+	justify-content: space-between;
+}
+
+.badge_name_tag {
+	display: flex;
+	justify-content: flex-start;
+	font-weight: 500;
+}
+
+.desc {
+	display: flex;
+	font-weight: 500;
+}
+
+.events {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.modified {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 0;
+	font-weight: 500;
+
+	@media (max-width: 768px) {
+		padding-top: 20px;
+	}
+}
+
+.card_description {
+	display: flex;
+	flex: 2.2;
+	flex-direction: column;
+	justify-content: space-between;
+	margin-bottom: 0;
+}
+
+.score_badge {
+	display: flex;
+	flex: 3;
+	justify-content: space-between;
+}
+
+.main_card {
+	display: flex;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+}
+
+.score_container {
+	display: flex;
+	flex: 3;
+	flex-direction: column;
+	padding-left: 40px;
+	margin-bottom: 40px;
+
+	@media (max-width: 768px) {
+		padding: 0;
+		margin-top: 30px;
+	}
+}

@@ -1,11 +1,12 @@
 import { useSelector } from '@cogoport/store';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import EmptyState from '../../../../commons/EmpyState';
+import EmptyState from '../../common/EmptyState';
+import LoadingState from '../../common/Loading';
 
 import DisplayCard from './DisplayCard';
-import LoadingState from './loading';
+import ListHeader from './ListHeader';
 import styles from './styles.module.css';
 import useGetSingleAnnouncement from './useGetSingleAnnouncement';
 
@@ -20,15 +21,10 @@ function DisplayCards({
 	deleteAnnouncement = () => {},
 	goLive = () => {},
 }) {
-	const {
-		user_data,
-	} = useSelector(({ profile }) => ({
-		user_data: profile || {},
-	}));
+	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
 
-	const {
-		user: { id: user_id = '' },
-	} = user_data;
+	const { user: { id: user_id = '' } } = user_data;
+
 	const {
 		handleAnnouncementDetails = () => {},
 		refetch = () => {},
@@ -37,21 +33,25 @@ function DisplayCards({
 	} = useGetSingleAnnouncement({ currentAnnouncement, setCurrentAnnouncement, listData: data });
 
 	if (loading) {
-		if (activeTab === 'active') {
-			return <LoadingState loadingCount={5} height="90px" itemHeight="32px" />;
-		}
+		return (
+			<div className={styles.container}>
+				<ListHeader />
 
-		return <LoadingState loadingCount={6} height="80px" itemHeight="28px" />;
+				<LoadingState activeTab={activeTab} />
+			</div>
+		);
 	}
 
 	if (isEmpty(data)) {
 		return (
-			<EmptyState text={`No ${startCase(activeTab)} Announcements Found`} />
+			<EmptyState activeTab={activeTab} />
 		);
 	}
 
 	return (
 		<div className={styles.container}>
+			<ListHeader />
+
 			{data.map((item, index) => (
 				<DisplayCard
 					key={item.id}

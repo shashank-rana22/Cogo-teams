@@ -1,0 +1,51 @@
+.heading {
+	display: flex;
+	justify-content: space-between;
+}
+
+.actions {
+	display: flex;
+}
+
+.edit {
+	margin-right: 8px;
+}
+
+.label {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}
+
+.value {
+	margin-bottom: 10px;
+	font-size: var(--font-size-md);
+}
+
+.container {
+	display: flex;
+}
+
+.each_pref {
+	display: flex;
+	justify-content: space-between;
+
+	&:not(:last-child) {
+		border-bottom: 1px solid black;
+	}
+
+	&:not(:first-child) {
+		margin-top: 10px;
+	}
+}
+
+.columns {
+	display: flex;
+	flex-direction: column;
+	width: 30%;
+}
+
+.no_data {
+	padding: 8px 0;
+	font-size: 12px;
+	font-weight: 600;
+}

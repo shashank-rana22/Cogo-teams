@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -49,10 +50,10 @@ const useBulkCreateQuestionAnswerSet = () => {
 
 	const bulkCreateQuestionAnswerSet = async (val) => {
 		try {
-			const { upload_question } = val || {};
+			const { finalUrl } = val?.upload_question || {};
 
 			const payload = {
-				file_url: upload_question,
+				file_url: finalUrl,
 			};
 
 			await trigger({ data: payload });
@@ -61,7 +62,7 @@ const useBulkCreateQuestionAnswerSet = () => {
 			router.back();
 		} catch (error) {
 			if (error?.message || error?.error?.message) {
-				Toast(error?.message || error?.error?.message);
+				if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
 			}
 		}
 	};
