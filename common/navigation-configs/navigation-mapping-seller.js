@@ -586,7 +586,7 @@ const navigationMappingSeller = {
 		as            : '/saas/cogo-store',
 		type          : 'link',
 		line          : true,
-		showInNav: true,
+		showInNav     : true,
 		icon          : 'nav-payments',
 		main_apis     : [],
 		possible_apis : app_apis.saas_cogostore,
