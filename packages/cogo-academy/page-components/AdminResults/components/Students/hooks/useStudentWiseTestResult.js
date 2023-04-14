@@ -70,7 +70,7 @@ const useStudentWiseTestResult = ({ test_id = '' }) => {
 
 			refetch();
 		} catch (err) {
-			Toast.error(getApiErrorString(err.response.data));
+			Toast.error(getApiErrorString(err?.response?.data));
 		}
 	};
 
