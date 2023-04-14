@@ -75,10 +75,10 @@ function useUpdateAnswers({
 				? { test_case_study_question_id: sub_questions?.[subQuestion - 1]?.id } : null),
 
 			...(question_type === 'subjective'
-				? { answer_text: subjectiveAnswer.toString('html') } : null),
+				? { subjective_answer_text: subjectiveAnswer.toString('html') } : null),
 
 			...(question_type === 'subjective'
-				? { answer_url: uploadValue } : null),
+				? { subjective_file_url: uploadValue } : null),
 
 			...(question_type !== 'subjective'
 				? { test_question_answer_ids: answerArray || [] } : null),
