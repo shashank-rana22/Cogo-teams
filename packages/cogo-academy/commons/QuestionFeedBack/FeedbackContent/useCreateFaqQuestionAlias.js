@@ -12,7 +12,7 @@ const useCreateFaqQuestionAlias = ({
 	faqAudiences,
 }) => {
 	const [showAliasInput, setShowAliasInput] = useState(false);
-	const [inputAlias, setInputAlias] = useState(suggested_question_abstract || 'ppp');
+	const [inputAlias, setInputAlias] = useState(suggested_question_abstract);
 
 	useEffect(() => {
 		setInputAlias(suggested_question_abstract);

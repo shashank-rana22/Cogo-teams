@@ -7,7 +7,6 @@ const useAnswer = ({ question, setIsLiked, FEEDBACK_MAPPING_ISLIKED }) => {
 	const params = useMemo(
 		() => ({
 			id: question?.id,
-
 		}),
 		[question?.id],
 	);
