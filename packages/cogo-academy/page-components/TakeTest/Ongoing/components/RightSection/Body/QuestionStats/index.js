@@ -49,7 +49,7 @@ function QuestionStats() {
 				return (
 					<div key={key} className={styles.stats_container}>
 						<div style={{ backgroundColor: color }} className={styles.stats_count}>
-							{count}
+							{count || 0}
 						</div>
 
 						<p className={styles.label}>{label}</p>

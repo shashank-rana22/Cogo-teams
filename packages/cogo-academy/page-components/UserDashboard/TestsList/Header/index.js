@@ -49,7 +49,8 @@ function Header({ debounceQuery, testCategory, setTestCategory }) {
 					<Select
 						size="sm"
 						value={testCategory}
-						placeholder="Select Day"
+						isClearable
+						placeholder="All"
 						options={testCategoryOptions}
 						onChange={setTestCategory}
 					/>
