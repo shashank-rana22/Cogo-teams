@@ -8713,7 +8713,7 @@ const partner = {
 			service_name : 'campaign',
 		},
 		{
-			api          : 'list_campaign_email_configuration',
+			api          : 'list_campaign_configuration',
 			access_type  : 'private',
 			service_name : 'campaign',
 		},
@@ -8752,6 +8752,12 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'campaign',
 		},
+		{
+			api          : 'update_campaign_channel_availability',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+
 		{
 			api          : 'verify_segment',
 			access_type  : 'private',
