@@ -7,7 +7,7 @@ function useListTasksHelper() {
 	const [selectedTaskId, setSelectedTaskId] = useState(null);
 	const [hideCompletedTasks, setHideCompletedTasks] = useState(false);
 	const [showMyTasks, setShowMyTasks] = useState(true);
-	const [filters, setFilters] = useState({});
+	const [filters] = useState({});
 
 	const { shipment_data, isGettingShipment } = useContext(ShipmentDetailContext);
 	const { id: shipment_id } = shipment_data || '';
@@ -28,12 +28,12 @@ function useListTasksHelper() {
 		: (list?.list || []);
 
 	const handleClick = (task) => {
-		if (Object.keys(task).includes('id')) {
+		if ('id' in task) {
 			setSelectedTaskId(task.id);
 		}
 	};
 
-	console.log('setFilters', setFilters);
+	// console.log('setFilters', setFilters);
 
 	return {
 		loading : loading || isGettingShipment,

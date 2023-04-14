@@ -28,7 +28,6 @@ function useGetTaskConfig({ task = {}, onCancel = () => {} }) {
 		getTaskConfigTrigger();
 	}, [getTaskConfigTrigger]);
 
-	console.log('sfwefrwerwdaswfwef', data);
 	return {
 		loading,
 		taskConfigData: data,

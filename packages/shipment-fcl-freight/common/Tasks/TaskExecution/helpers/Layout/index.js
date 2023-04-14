@@ -5,41 +5,42 @@ import Item from './Item';
 import styles from './styles.module.css';
 
 function Layout({
-	control, fields, showElements = {}, register,
-	// errors,
+	control, fields, showElements = {}, errors,
 }) {
 	let rowWiseFields = [];
 	const totalFields = [];
 	let span = 0;
 	(fields || []).forEach((field) => {
-		if (!(field.name in showElements) || showElements[field.name]) {
+		const { [field.name]: showItem = true } = showElements;
+		if (showItem) {
 			span += field.span || 12;
 			if (span === 12) {
+				span = 0;
 				rowWiseFields.push(field);
 				totalFields.push(rowWiseFields);
 				rowWiseFields = [];
+			} else if (span > 12) {
 				span = 0;
-			} else if (span < 12) {
+				totalFields.push(rowWiseFields);
+				rowWiseFields = [];
 				rowWiseFields.push(field);
 			} else {
-				totalFields.push(rowWiseFields);
-				rowWiseFields = [];
 				rowWiseFields.push(field);
-				span = field.span;
 			}
 		}
 	});
 	if (rowWiseFields.length) {
 		totalFields.push(rowWiseFields);
 	}
+
 	return (
 		<div className={styles.layout}>
-			{totalFields.map((field) => (
+			{totalFields.map((rowFields) => (
 				<div className={styles.row}>
-					{field.map((fieldsItem) => {
-						const { type, heading = '' } = fieldsItem;
-						const show = (!(field.name in showElements) || showElements[fieldsItem.name]);
-						if (type === 'fieldArray' && show) {
+					{rowFields.map((field) => {
+						const { type, heading = '' } = field;
+
+						if (type === 'fieldArray') {
 							return (
 								<div style={{ width: '100%' }}>
 									<div className={styles.heading}>
@@ -47,26 +48,21 @@ function Layout({
 									</div>
 
 									<FieldArray
-										{...fieldsItem}
-										error="ada"
+										{...field}
+										error={errors[field.name]}
 										control={control}
-										register={register}
 										showElements={showElements}
 									/>
-
 								</div>
 							);
 						}
-						return show
-							? (
-								<Item
-									control={control}
-									error="aasda"
-									{...fieldsItem}
-								/>
-
-							)
-							: null;
+						return (
+							<Item
+								control={control}
+								error="aasda"
+								{...field}
+							/>
+						);
 					})}
 				</div>
 			))}

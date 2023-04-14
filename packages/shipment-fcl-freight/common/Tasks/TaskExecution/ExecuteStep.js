@@ -14,15 +14,12 @@ function ExecuteStep({
 	isLastStep = false,
 	primaryService = {},
 	getApisData = {},
-	uiConfig = {},
+	// uiConfig = {},
 }) {
 	const {
 		formProps,
-		// error,
 		fields,
-		isLoading,
-		setIsLoading,
-		onError,
+		showElements,
 	} = useStepExecution({
 		task,
 		stepConfig,
@@ -30,21 +27,19 @@ function ExecuteStep({
 		getApisData,
 		// selectedMail,
 	});
-	const { control, error, handleSubmit } = formProps;
-	const { onSubmit } = useHandleSubmit({
+	const { control, formState: { errors }, handleSubmit } = formProps;
+
+	const { loading: isLoading, onSubmit } = useHandleSubmit({
 		finalConfig: stepConfig,
 		task,
 		onCancel,
 		refetch,
-		setIsLoading,
 		// serviceIdMapping,
 		currentStep,
 		isLastStep,
 		getApisData,
-		// showElements,
+		showElements,
 	});
-
-	console.log('fields', fields, uiConfig, refetch);
 
 	return (
 		<div className={styles.container}>
@@ -52,8 +47,8 @@ function ExecuteStep({
 				<Layout
 					fields={fields}
 					control={control}
-					errrors={error}
-					// showElements={showElements}
+					errors={errors}
+					showElements={showElements}
 				/>
 			</div>
 
@@ -66,7 +61,7 @@ function ExecuteStep({
 					CANCEL
 				</Button>
 
-				<Button disabled={isLoading} onClick={handleSubmit(onSubmit, onError)}>
+				<Button disabled={isLoading} onClick={handleSubmit(onSubmit)}>
 					{isLastStep ? 'SUBMIT' : 'NEXT'}
 				</Button>
 			</div>

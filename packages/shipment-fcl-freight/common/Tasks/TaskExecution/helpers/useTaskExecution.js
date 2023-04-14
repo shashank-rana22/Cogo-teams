@@ -1,5 +1,5 @@
 import { ShipmentDetailContext } from '@cogoport/context';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 
 import prepareSteps from '../utils/prepareSteps';
 
@@ -32,10 +32,6 @@ function useTaskExecution({ task = {}, taskConfigData = {} }) {
 	}
 
 	const [currentStep, setCurrentStep] = useState(initialStep);
-
-	useEffect(() => {
-		setCurrentStep(initialStep);
-	}, [initialStep]);
 
 	return {
 		steps: dataConfig.steps || [],

@@ -43,19 +43,17 @@ function List() {
 				setShowMyTasks={setShowMyTasks}
 			/>
 
-			{
-				selectedTaskId ? (
-					<Button
-						className={styles.see_all_tasks}
-						onClick={() => setSelectedTaskId(null)}
-						themeType="link"
-						size="md"
-					>
-						<IcMArrowBack width={50} />
-						<div style={{ width: 200 }}>See All Tasks</div>
-					</Button>
-				) : null
-			}
+			{selectedTaskId ? (
+				<Button
+					className={styles.see_all_tasks}
+					onClick={() => setSelectedTaskId(null)}
+					themeType="link"
+					size="md"
+				>
+					<IcMArrowBack width={50} />
+					<div style={{ width: 200 }}>See All Tasks</div>
+				</Button>
+			) : null}
 
 			{!selectedTaskId ? (tasksList || []).map((task) => <Card task={task} handleClick={handleClick} />) : null}
 

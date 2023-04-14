@@ -16,23 +16,25 @@ function ExecuteTask({ task = {}, onCancel = () => {}, refetch = () => {} }) {
 	const stepConfigValue = steps.length
 		? steps[currentStep] || steps[steps.length - 1]
 		: {};
-	console.log('laoding', loading);
 
+	if (loading) {
+		return <div>Loading...</div>;
+	}
 	return (
-		<div>
-			<ExecuteStep
-				task={task}
-				stepConfig={stepConfigValue}
-				onCancel={onCancel}
-				refetch={refetch}
-				primaryService={primaryService}
-				isLastStep={currentStep === steps.length - 1}
-				currentStep={currentStep}
-				setCurrentStep={setCurrentStep}
-				getApisData={taskConfigData?.apis_data}
-				uiConfig={taskConfigData?.task_config?.ui_config[currentStep]}
-			/>
-		</div>
+	// <div>
+		<ExecuteStep
+			task={task}
+			stepConfig={stepConfigValue}
+			onCancel={onCancel}
+			refetch={refetch}
+			primaryService={primaryService}
+			isLastStep={currentStep === steps.length - 1}
+			currentStep={currentStep}
+			setCurrentStep={setCurrentStep}
+			getApisData={taskConfigData?.apis_data}
+			uiConfig={taskConfigData?.task_config?.ui_config[currentStep]}
+		/>
+	// </div>
 	);
 }
 

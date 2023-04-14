@@ -12,6 +12,7 @@ function Child({
 	index,
 	name,
 	remove,
+	showElements = {},
 	showDeleteButton = true,
 	noDeleteButtonTill = 0,
 	field,
@@ -21,20 +22,23 @@ function Child({
 	let rowWiseFields = [];
 	const totalFields = [];
 	let span = 0;
-	controls.forEach((fields) => {
-		span += fields.span || 11;
-		if (span === 11) {
-			rowWiseFields.push(fields);
-			totalFields.push(rowWiseFields);
-			rowWiseFields = [];
-			span = 0;
-		} else if (span < 11) {
-			rowWiseFields.push(fields);
-		} else {
-			totalFields.push(rowWiseFields);
-			rowWiseFields = [];
-			rowWiseFields.push(fields);
-			span = fields.span;
+	(controls || []).forEach((ctrl) => {
+		const { [ctrl.name]: showItem = true } = showElements;
+		if (showItem) {
+			span += ctrl.span || 11;
+			if (span === 11) {
+				span = 0;
+				rowWiseFields.push(ctrl);
+				totalFields.push(rowWiseFields);
+				rowWiseFields = [];
+			} else if (span > 11) {
+				span = 0;
+				totalFields.push(rowWiseFields);
+				rowWiseFields = [];
+				rowWiseFields.push(ctrl);
+			} else {
+				rowWiseFields.push(ctrl);
+			}
 		}
 	});
 	if (rowWiseFields.length) {
@@ -43,9 +47,9 @@ function Child({
 
 	return (
 		<div className={styles.fieldarray} key={field.id}>
-			{totalFields.map((fields) => (
+			{totalFields.map((rowFields) => (
 				<div className={styles.row}>
-					{fields.map((controlItem) => {
+					{rowFields.map((controlItem) => {
 						const Element = getElementController(controlItem.type);
 
 						const errorOriginal = getErrorMessage({

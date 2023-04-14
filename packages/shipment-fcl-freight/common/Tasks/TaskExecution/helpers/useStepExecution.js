@@ -1,23 +1,26 @@
-import { ShipmentDetailContext } from '@cogoport/context';
+// import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
-import { useContext, useState } from 'react';
+// import { useContext } from 'react';
 
 import getShowTaskFields from '../utils/get-show-task-fields';
 import injectValues from '../utils/inject-Values';
-// import useForm from './useForm';
 
 const getDefaultValues = (oldfields) => {
 	const defaultValues = {};
-	const newfields = oldfields.map((field) => {
+	oldfields.forEach((field) => {
 		const { value, ...rest } = field;
 		if (field.type === 'fieldArray') {
-			defaultValues[field.name] = value || [];
+			const childDeafultValues = {};
+			field.controls.forEach((ctrl) => {
+				childDeafultValues[ctrl.name] = defaultValues[ctrl.name];
+			});
+			defaultValues[field.name] = value || childDeafultValues;
 		} else {
 			defaultValues[field.name] = value || '';
 		}
 		return rest;
 	});
-	return { defaultValues, fields: newfields };
+	return defaultValues;
 };
 
 // here controls manipulation can take place people had done prefilling here but it is not recommended
@@ -89,7 +92,7 @@ function useStepExecution({
 	getApisData = {},
 	selectedMail,
 }) {
-	const { servicesList } = useContext(ShipmentDetailContext);
+	// const { servicesList } = useContext(ShipmentDetailContext);
 
 	const populatedControls = populateControls(stepConfig.controls);
 
@@ -102,29 +105,19 @@ function useStepExecution({
 		stepConfig,
 	);
 
-	const { defaultValues, fields } = getDefaultValues(valueInjectedControls);
+	const defaultValues = getDefaultValues(valueInjectedControls);
 
 	const formProps = useForm({ defaultValues });
 
+	const showElements = {};
+
 	// Here some more manipulation is done
 
-	const [error, setError] = useState({});
-
-	const [isLoading, setIsLoading] = useState(false);
-
-	const onError = (err) => {
-		setError(err);
-	};
-
 	return {
-		fields,
+		fields: valueInjectedControls,
 		formProps,
-		error,
-		setError,
-		isLoading,
-		setIsLoading,
-		onError,
-		servicesList,
+		showElements,
+		// servicesList,
 	};
 }
 export default useStepExecution;

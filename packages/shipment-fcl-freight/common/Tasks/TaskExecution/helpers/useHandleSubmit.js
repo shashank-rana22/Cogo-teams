@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 import getRpaMappings from '../utils/get-rpa-mappings';
 
@@ -320,15 +320,15 @@ const formatForPayload = (
 function useHandleSubmit({
 	finalConfig = {},
 	task = {},
-	setIsLoading = () => {},
 	serviceIdMapping = {},
 	onCancel = () => {},
 	refetch = () => {},
 	currentStep = 0,
 	isLastStep = 0,
 	getApisData,
-	// showElements,
 }) {
+	const [isLoading, setIsLoading] = useState();
+
 	const {
 		shipment_data,
 		// isGettingShipment,
@@ -352,6 +352,8 @@ function useHandleSubmit({
 	let dataFromApi = {};
 
 	const onSubmit = async (rawValues) => {
+		setIsLoading(true);
+
 		if (finalConfig.end_point) {
 			(finalConfig.data_from_api || []).forEach((obj) => {
 				if (!task[obj.key_from_api] && obj.alternative === 'undefined') {
@@ -390,8 +392,6 @@ function useHandleSubmit({
 				...(dataFromApi || {}),
 			};
 		}
-
-		setIsLoading(true);
 
 		try {
 			const skipUpdateTask =				finalConfig?.end_point === 'send_nomination_notification'
@@ -454,7 +454,7 @@ function useHandleSubmit({
 
 	return {
 		onSubmit,
-		loading: loading || loadingTask,
+		loading: loading || loadingTask || isLoading,
 	};
 }
 export default useHandleSubmit;
