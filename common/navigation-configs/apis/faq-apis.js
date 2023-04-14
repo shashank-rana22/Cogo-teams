@@ -284,6 +284,11 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
+			api          : 'get_user_test_performance',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
 	],
 	create_test_set: [
 		{
