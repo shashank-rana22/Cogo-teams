@@ -65,8 +65,8 @@ function Header({
 		faq: {
 			back_icon_visible : true,
 			placeholder       : 'Search for a question or a topic',
-			input_value       : input,
-			input_onchange    : setInput,
+			input_value       : search,
+			input_onchange    : setSearch,
 		},
 		announcements: {
 			back_icon_visible : false,
@@ -95,16 +95,20 @@ function Header({
 				) : null}
 
 				<form
-					onSubmit={(e) => { e.preventDefault(); setSearch(input); setQuestion(null); }}
+					onSubmit={(e) => {
+						e.preventDefault();
+						const searchFn = TABS_CONTENT_MAPPING[activeTab].input_onchange;
+						searchFn(input);
+						setQuestion(null);
+					}}
 					className={`${styles.input_container} ${styles[from]}`}
 				>
 					<Input
 						className="primary lg"
 						placeholder={TABS_CONTENT_MAPPING[activeTab].placeholder}
-						value={TABS_CONTENT_MAPPING[activeTab].input_value}
+						value={input}
 						onChange={(e) => {
-							const searchFn = TABS_CONTENT_MAPPING[activeTab].input_onchange;
-							searchFn(e);
+							setInput(e);
 							if (!e) setSearch('');
 							setQuestion(null);
 						}}
