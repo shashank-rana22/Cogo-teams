@@ -50,11 +50,11 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 		),
 	},
 	{
-		Header   : 'NO. OF QUESTIONS',
+		Header   : 'NO. OF STANDALONE QUESTIONS',
 		id       : 'questions',
-		accessor : ({ non_case_study_question_count = 0 }) => (
+		accessor : ({ stand_alone_question_count = 0 }) => (
 			<section>
-				{non_case_study_question_count || 0}
+				{stand_alone_question_count || 0}
 			</section>
 		),
 	},
@@ -64,6 +64,15 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 		accessor : ({ case_study_question_count = 0 }) => (
 			<section>
 				{case_study_question_count || 0}
+			</section>
+		),
+	},
+	{
+		Header   : 'NO. OF SUBJECTIVE QUESTIONS',
+		id       : 'subjective_questions',
+		accessor : ({ subjective_question_count = 0 }) => (
+			<section>
+				{subjective_question_count || 0}
 			</section>
 		),
 	},
