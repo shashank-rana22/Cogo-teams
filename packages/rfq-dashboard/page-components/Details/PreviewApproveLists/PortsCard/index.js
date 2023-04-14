@@ -7,6 +7,7 @@ import { priceBreakupChildData } from '../../../../configurations/price-breakup-
 import { PromisedConAndContract } from '../../../../configurations/service-stats-data';
 
 import CommodityMapping from './CommodityMapping';
+import LoaderPortsCard from './LoaderPortsCard';
 import LocationDetails from './LocationDetails';
 import PriceBreakupCard from './PriceBreakupCard';
 import PriceFreightCtr from './PriceFrieghtCtr';
@@ -17,7 +18,7 @@ function PortsCard(props) {
 
 	const {
 		data = {}, origin_port = [],
-		destination_port = [], changeSelection = () => {}, selected = [], isClickable = true, source = '',
+		destination_port = [], changeSelection = () => {}, selected = [], isClickable = true, source = '', loading,
 	} = props;
 
 	const prefilledValues = [];
@@ -39,31 +40,35 @@ function PortsCard(props) {
 						value="a3"
 						checked={selected.find((item) => item.id === data.id)}
 						onChange={(e) => changeSelection(data, e.target.checked)}
+						disabled={loading}
 					/>
 				) : <div className={styles.empty_space} />
 			}
 			<div className={styles.port_container}>
 				<div className={styles.container}>
-					<div className={styles.service}>
-						<div className={styles.icon_container}>
-							<IcMFcl fill="#436DF4" className={styles.icmfcl_icon} />
-						</div>
-						<span className={styles.service_type}>FCL</span>
-					</div>
-					<div className={styles.ports_tags_container}>
-						<div className={styles.location_box}>
-							<LocationDetails data={origin_port[0]} source={source} />
-							<IcMPortArrow className={styles.icmportarrow_icon} />
-							<LocationDetails data={destination_port[0]} source={source} />
-						</div>
-						<CommodityMapping />
-					</div>
-					<div className={styles.service_stats}>
-						<ServiceStats data={PromisedConAndContract} source="ports-card" />
-					</div>
-					<div className={styles.price_fright_ctr_section}>
-						<PriceFreightCtr />
-					</div>
+					{loading ? <LoaderPortsCard />
+						: (
+							<>
+								<div className={styles.service}>
+									<IcMFcl fill="#436DF4" className={styles.icmfcl_icon} />
+									<span className={styles.service_type}>FCL</span>
+								</div>
+								<div className={styles.ports_tags_container}>
+									<div className={styles.location_box}>
+										<LocationDetails data={origin_port[0]} source={source} />
+										<IcMPortArrow className={styles.icmportarrow_icon} />
+										<LocationDetails data={destination_port[0]} source={source} />
+									</div>
+									<CommodityMapping />
+								</div>
+								<div className={styles.service_stats}>
+									<ServiceStats data={PromisedConAndContract} source="ports-card" />
+								</div>
+								<div className={styles.price_fright_ctr_section}>
+									<PriceFreightCtr />
+								</div>
+							</>
+						)}
 
 					<button
 						className={styles.down_card_button}
@@ -79,6 +84,7 @@ function PortsCard(props) {
 					priceBreakupChildData={priceBreakupChildData}
 					prefilledValues={prefilledValues}
 					showPrice={showPrice}
+					loading={loading}
 				/>
 				{/* )} */}
 			</div>

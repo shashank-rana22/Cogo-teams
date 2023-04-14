@@ -4,3 +4,4 @@ export const PortPairsEnterpriseShipmentSection = {
 	last_shipment          : '1 Month',
 	labels                 : ['SME Enterprise'],
 };
+// export const PortPairsEnterpriseShipmentSection = {};

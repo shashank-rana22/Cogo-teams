@@ -39,19 +39,17 @@
 	width: 65px;
 	padding: 0 15px;
 	border-right: 1px solid #e0e0e0;
+
+	svg {
+		width: 25px;
+		height: 25px;
+	}
 }
 
 .service_type {
 	font-size: 14px;
 	font-weight: 600;
 	color: #356efd;
-}
-
-.icon_container {
-	svg {
-		width: 25px;
-		height: 25px;
-	}
 }
 
 .ports_tags_container {

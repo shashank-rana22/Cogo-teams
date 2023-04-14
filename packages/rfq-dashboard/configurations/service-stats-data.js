@@ -17,6 +17,7 @@ export const AvgPromisedConAndContract = [{
 	color : 'utilization',
 },
 ];
+// export const AvgPromisedConAndContract = [];
 
 export const PromisedConAndContract = [{
 	key   : 'revenue',

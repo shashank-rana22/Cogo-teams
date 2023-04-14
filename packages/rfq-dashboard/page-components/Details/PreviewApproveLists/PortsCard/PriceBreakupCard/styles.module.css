@@ -82,3 +82,9 @@
 	margin: 0 15px;
 	border-bottom: 1px solid #f2e3c3;
 }
+
+.loader_box {
+	display: flex;
+	justify-content: center;
+	background: #f9f9f9;
+}

@@ -9,14 +9,6 @@ function Title({
 	rowData = [], watchFields = [], parentIndex = 0,
 	emptyValues = [], setIndividualTotal = [], individualTotal = 0,
 }) {
-	// useEffect(() => {
-	// 	let sum = 0;
-	// 	for (let i = 0; i < rowData.length; i += 1) {
-	// 		sum += Number(watchFields[emptyValues[parentIndex][i]]) + Number(rowData[i].base_price);
-	// 	}
-	// 	setRowTotal(sum);
-	// }, [watchFields, emptyValues, rowData, parentIndex]);
-	// useEffect(() => {
 	const sum = rowData.reduce((acc, curr, i) => {
 		const currentValue = Number(watchFields[emptyValues[parentIndex][i]]) + Number(curr.base_price);
 		return acc + currentValue;
@@ -29,7 +21,6 @@ function Title({
 			return [...newArr];
 		});
 	}, [sum, parentIndex, setIndividualTotal]);
-	// }, [watchFields, emptyValues, rowData, parentIndex, setIndividualTotal]);
 
 	return (
 		<div className={styles.container}>
@@ -41,9 +32,6 @@ function Title({
 							<span className={styles.green_text}>
 								Total:
 								{' '}
-								{/* {titleData?.[`${itm.name}`]} */}
-								{/* {total.reduce((t, v) => t + v)} */}
-								{/* {JSON.stringify(values)} */}
 								{getFormattedAmount(individualTotal[parentIndex], 'INR')}
 								{' '}
 							</span>

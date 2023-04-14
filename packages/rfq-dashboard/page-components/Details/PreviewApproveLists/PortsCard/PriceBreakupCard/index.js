@@ -1,3 +1,4 @@
+import { Loader } from '@cogoport/components';
 import {
 	useForm,
 	// useFieldArray,
@@ -94,7 +95,7 @@ const formControls = [
 		],
 	},
 ];
-function PriceBreakupCard({ prefilledValues = [{}], priceBreakupChildData = [], showPrice = false }) {
+function PriceBreakupCard({ prefilledValues = [{}], priceBreakupChildData = [], showPrice = false, loading }) {
 	const cardTitles = [
 		{ label: 'Service', name: 'service' },
 		{ label: 'Base Price', name: 'base_price' },
@@ -105,7 +106,6 @@ function PriceBreakupCard({ prefilledValues = [{}], priceBreakupChildData = [], 
 
 	const [individualTotal, setIndividualTotal] = useState(Array(priceBreakupChildData.length).fill(0));
 
-	// const formProps = useForm();
 	const formProps = useForm({
 		defaultValues: {
 			services: prefilledValues,
@@ -117,14 +117,6 @@ function PriceBreakupCard({ prefilledValues = [{}], priceBreakupChildData = [], 
 	}
 	const { control, watch, handleSubmit } = formProps || {};
 
-	// -----------
-	// const emptyValues = React.useMemo(() => {
-	// 	let count = -1;
-	// 	return priceBreakupChildData.map((item) => item.data.map(() => {
-	// 		count += 1;
-	// 		return count;
-	// 	}));
-	// }, [priceBreakupChildData]);
 	let count = -1;
 	const emptyValues = priceBreakupChildData.map((item) => {
 		const newArr = item.data.map(() => {
@@ -136,18 +128,26 @@ function PriceBreakupCard({ prefilledValues = [{}], priceBreakupChildData = [], 
 	console.log('emptyValues', emptyValues);
 	const totalLength = priceBreakupChildData.reduce((total, val) => total + val.data.length, 0);
 	const watchFields = Array(totalLength).fill(0).map((item, index) => watch(`services.${index}.margin_value`));
-	// ------------
 
 	return (
 		<div className={`${styles.container} ${showPrice ? styles.expand_div : styles.collapse_div}`}>
-			<div className={`${styles.card_title} ${styles.card_item_singular}`}>
-				{
+
+			{loading
+				? (
+					<div className={styles.loader_box}>
+						<Loader themeType="primary" />
+					</div>
+				)
+				: (
+					<>
+						<div className={`${styles.card_title} ${styles.card_item_singular}`}>
+							{
 					cardTitles.map((itm) => (
 						<div className={`${styles.column_labels} ${styles[`${itm.name}_card_title`]}`}>{itm.label}</div>
 					))
 				}
-			</div>
-			{
+						</div>
+						{
 				priceBreakupChildData.map((dataItem, parentIndex) => (
 					<div className={styles.card_item_singular}>
 						<Title
@@ -175,7 +175,13 @@ function PriceBreakupCard({ prefilledValues = [{}], priceBreakupChildData = [], 
 					</div>
 				))
 			}
-			<FooterPriceBreakUpCard individualTotal={individualTotal} saveChanges={handleSubmit(handlePayload)} />
+						<FooterPriceBreakUpCard
+							individualTotal={individualTotal}
+							saveChanges={handleSubmit(handlePayload)}
+						/>
+					</>
+				)}
+
 		</div>
 	);
 }

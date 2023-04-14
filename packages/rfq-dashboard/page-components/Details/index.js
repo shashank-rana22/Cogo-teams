@@ -5,15 +5,16 @@ import PreviewAndApproveLists from './PreviewApproveLists';
 import styles from './styles.module.css';
 
 function Details() {
+	const loading = false;
 	return (
 		<div className={styles.details_prime_container}>
-			<Header />
+			<Header loading={loading} />
 			<div className={styles.customer_cards_past_month}>
-				<CustomerPastMonthDataCard />
-				<GraphDataCard />
+				<CustomerPastMonthDataCard loading={loading} />
+				<GraphDataCard loading={loading} />
 			</div>
 			<div className={styles.lists_approve_section}>
-				<PreviewAndApproveLists />
+				<PreviewAndApproveLists loading={loading} />
 			</div>
 		</div>
 	);
