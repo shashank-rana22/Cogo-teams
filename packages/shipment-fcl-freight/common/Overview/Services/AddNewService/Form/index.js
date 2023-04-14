@@ -38,7 +38,6 @@ function Form({
 			onClose={closeModal}
 			showCloseIcon={!haveToUpsell}
 			closeOnOuterClick={false}
-			disabled={haveToUpsell}
 			className={styles.custom_modal}
 		>
 			<Modal.Header title={(

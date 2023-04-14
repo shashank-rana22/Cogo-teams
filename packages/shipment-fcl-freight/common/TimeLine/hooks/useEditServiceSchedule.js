@@ -64,13 +64,10 @@ export default function useEditServiceSchedule({
 		};
 
 		try {
-			const res = await updateShipmentService({ data: payloadForUpdateShipment });
-
-			if (res.status === 200) {
-				Toast.success('Booking Note Updated Successfully !');
-				setShow(false);
-				shipmentRefetch();
-			}
+			await updateShipmentService({ data: payloadForUpdateShipment });
+			Toast.success('Booking Note Updated Successfully !');
+			setShow(false);
+			shipmentRefetch();
 		} catch (err) {
 			toastApiError(err);
 		}

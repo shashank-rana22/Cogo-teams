@@ -47,7 +47,7 @@ function AddNewService({
 	}
 
 	const closeModal = () => {
-		setUpsellModal(false);
+		setUpsellModal(!upsellModal);
 	};
 
 	return (
