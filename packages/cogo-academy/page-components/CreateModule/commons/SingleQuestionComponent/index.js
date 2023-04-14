@@ -112,6 +112,7 @@ function SingleQuestionComponent({
 					name="bodyText"
 					type="string"
 					multiline
+					placeholder="Type your explanation here"
 					variant="filled"
 					rootStyle={{
 						zIndex    : 0,
