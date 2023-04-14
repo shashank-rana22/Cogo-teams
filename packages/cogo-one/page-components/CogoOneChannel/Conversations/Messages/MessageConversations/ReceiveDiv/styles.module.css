@@ -21,7 +21,7 @@
 .receive_message_container {
 	width: fit-content;
 	max-width: 320px;
-	padding: 12px;
+	padding: 0 0 12px 12px;
 	margin-top: 10px;
 	font-size: 14px;
 	line-height: 21px;
@@ -30,4 +30,25 @@
 	background-color: #fff;
 	border-radius: 0 6px 6px;
 	box-shadow: 0 0 4px 0 #627fac33;
+}
+
+.hamburger_styles {
+	width: 15px;
+	height: 100%;
+	height: 15px;
+	cursor: pointer;
+	fill: #828282;
+	transform: rotate(90deg);
+}
+
+.flex_div {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 100%;
+	padding: 5px 10px 0 0;
+}
+
+.message_div {
+	padding: 5px 15px 0 0;
 }

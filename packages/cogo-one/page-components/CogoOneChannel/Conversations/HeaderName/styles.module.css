@@ -1,0 +1,32 @@
+.flex {
+	display: flex;
+	align-items: center;
+
+	svg {
+		cursor: pointer;
+	}
+}
+
+.name {
+	max-width: 410px;
+	overflow: hidden;
+	font-size: 16px;
+	line-height: 24px;
+	color: #4f4f4f;
+	text-align: left;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.span_whatsapp_name {
+	margin-left: 5px;
+	font-size: 12px;
+	color: #4f4f4f;
+	text-align: left;
+}
+
+.phone_number {
+	font-size: 12px;
+	color: #828282;
+	text-align: left;
+}

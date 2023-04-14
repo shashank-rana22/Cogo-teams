@@ -1,5 +1,5 @@
-/* eslint-disable max-len */
-import { cl } from '@cogoport/components';
+import { cl, Tooltip } from '@cogoport/components';
+import { IcMOverflowDot } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 
 import MessageBody from '../../../../../../common/MessageBody';
@@ -8,6 +8,8 @@ import styles from './styles.module.css';
 
 function ReceiveDiv({
 	eachMessage = {},
+	canRaiseTicket = true,
+	ticketPopoverContent = () => {},
 }) {
 	const {
 		message_type = 'text',
@@ -25,10 +27,19 @@ function ReceiveDiv({
 				</div>
 
 				<div className={cl`${message_type === 'contacts' ? '' : styles.receive_message_container}`}>
-					<MessageBody
-						response={response}
-						message_type={message_type}
-					/>
+					{canRaiseTicket && (
+						<Tooltip placement="right" content={ticketPopoverContent(eachMessage)} interactive>
+							<div className={styles.flex_div}>
+								<IcMOverflowDot className={styles.hamburger_styles} />
+							</div>
+						</Tooltip>
+					)}
+					<div className={styles.message_div}>
+						<MessageBody
+							response={response}
+							message_type={message_type}
+						/>
+					</div>
 				</div>
 			</div>
 		</div>

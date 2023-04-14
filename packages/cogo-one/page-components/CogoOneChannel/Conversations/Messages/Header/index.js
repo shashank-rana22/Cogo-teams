@@ -1,12 +1,10 @@
 import { Button, cl, Popover } from '@cogoport/components';
 import { IcMProfile, IcMRefresh } from '@cogoport/icons-react';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import AssigneeAvatar from '../../../../../common/AssigneeAvatar';
-import UserAvatar from '../../../../../common/UserAvatar';
-import { PLATFORM_MAPPING } from '../../../../../constants';
-import hideDetails from '../../../../../utils/hideDetails';
+import HeaderName from '../../HeaderName';
 
 import Assignes from './Assignes';
 import TagsPopOver from './HeaderFuncs';
@@ -42,22 +40,10 @@ function Header({
 	const { chat_tags = [] } = activeMessageCard || {};
 
 	const {
-		user_name = '',
-		business_name = '',
 		mobile_no = '',
 		channel_type,
-		user_type,
-		search_user_name = '',
 	} = formattedData || {};
 
-	const getLowerLabel = () => {
-		if (user_name?.includes('anonymous')) {
-			return PLATFORM_MAPPING[user_type] || '';
-		}
-		return mobile_no
-			? `+${hideDetails({ data: mobile_no, type: 'number' })}`
-			: business_name;
-	};
 	const disableAssignButton = showBotMessages && !isomniChannelAdmin;
 
 	const openAssignModal = () => {
@@ -220,24 +206,7 @@ function Header({
 				</div>
 			</div>
 			<div className={styles.flex_space_between}>
-				<div className={styles.flex}>
-					<UserAvatar type={channel_type} />
-					<div>
-						<div className={styles.name}>
-							{startCase(user_name) || 'User'}
-							{channel_type === 'whatsapp' && (
-								<span className={styles.span_whatsapp_name}>
-									(
-									{startCase(search_user_name) || 'User'}
-									)
-								</span>
-							)}
-						</div>
-						<div className={styles.phone_number}>
-							{getLowerLabel()}
-						</div>
-					</div>
-				</div>
+				<HeaderName formattedData={formattedData} />
 				<Button
 					themeType="primary"
 					size="sm"

@@ -144,6 +144,7 @@ function Messages({
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
+						formattedData={formattedData}
 						messagesData={messagesData}
 						uploading={uploading}
 						draftMessage={draftMessages?.[id]}
