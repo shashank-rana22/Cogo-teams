@@ -72,6 +72,7 @@ function SupplierReallocation({
 			show
 			onClose={closeModal}
 			className={styles.custom_modal}
+			closeOnOuterClick={false}
 			showCloseIcon={!loading}
 		>
 			<Modal.Body>
