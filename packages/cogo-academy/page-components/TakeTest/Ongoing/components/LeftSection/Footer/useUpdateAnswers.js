@@ -12,15 +12,16 @@ if (typeof window !== 'undefined') {
 	RichTextEditor = require('react-rte').default;
 }
 
-const getAnswerState = ({ type, answer, subjectiveAnswer }) => {
+const getAnswerState = ({ type, answer, subjectiveAnswer, question_type }) => {
 	let answerState = 'answered';
 
 	if (type === 'marked_for_review') {
 		answerState = type;
-	} else if (isEmpty(answer) || subjectiveAnswer.toString('html') === '<p><br></p>') {
+	} else if (question_type === 'subjective' && subjectiveAnswer.toString('html') === '<p><br></p>') {
+		answerState = 'viewed';
+	} else if (isEmpty(answer)) {
 		answerState = 'viewed';
 	}
-	// change this for subjective
 	return answerState;
 };
 
@@ -57,7 +58,7 @@ function useUpdateAnswers({
 	const { id, question_type, sub_questions = [] } = data || {};
 
 	const handleUpdate = async ({ type }) => {
-		const answerState = getAnswerState({ type, answer, subjectiveAnswer });
+		const answerState = getAnswerState({ type, answer, subjectiveAnswer, question_type });
 
 		let answerArray = answer;
 
