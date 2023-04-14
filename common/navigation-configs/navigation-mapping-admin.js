@@ -1797,6 +1797,13 @@ const navigationMappingAdmin = {
 				possible_apis : apis.allocation_engine,
 			},
 			{
+				key           : 'allocations-kam_expertise',
+				title         : 'Kam Expertise',
+				href          : '/v2/allocation/kam-expertise',
+				as            : '/v2/allocation/kam-expertise',
+				possible_apis : apis.kam_expertise,
+			},
+			{
 				key           : 'allocations-crm_feedback_dashboard',
 				title         : 'CRM Feedback Dashboard',
 				href          : '/v2/allocation/crm-feedback-dashboard',
