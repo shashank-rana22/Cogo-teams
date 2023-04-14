@@ -1,10 +1,14 @@
+.settings_container{
+    padding: 8px;
+}
 .label{
     font-size: 18px;
     margin: 12px 0px 4px 0;
 }
 .section{
-   display: flex;
-   flex-wrap: wrap;
+   display: grid;
+   grid-template-columns: auto auto;
+   padding: 12px;
 }
 .section_label{
     margin: 8px 0px;
@@ -13,4 +17,11 @@
     width: 40px;
     border-radius: 50%;
     height: 40px,
+}
+.background_image{
+    display: flex;
+    align-items: center;
+}
+.icons{
+    cursor: pointer;
 }
