@@ -16,7 +16,9 @@ import styles from './styles.module.css';
 
 const EmptyFunction = () => {};
 
-function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessageData, activeMessageCard }) {
+function UserActivities({
+	activeTab, activeVoiceCard, customerId, formattedMessageData, activeMessageCard, showMore,
+}) {
 	const [activityTab, setActivityTab] = useState('transactional');
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [pagination, setPagination] = useState(1);
@@ -109,7 +111,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 
 	useEffect(() => {
 		setActivityTab('transactional');
-	}, [customerId]);
+	}, [customerId, setActivityTab]);
 
 	useEffect(() => {
 		setFilters(null);
@@ -171,6 +173,12 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 			</div>
 		);
 	}
+	useEffect(() => {
+		if (showMore) {
+			setActivityTab('communication');
+			setActiveSubTab('summary');
+		}
+	}, [showMore]);
 
 	return (
 		<div className={styles.container}>
@@ -199,7 +207,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 			{(activeTab === 'message' && activityTab === 'communication') && (
 				<div className={styles.communication_options}>
 					<Tabs
-						activeSubTab={activeSubTab}
+						activeTab={activeSubTab}
 						themeType="secondary"
 						onChange={setActiveSubTab}
 						fullWidth={false}

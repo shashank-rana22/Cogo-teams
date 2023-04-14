@@ -11,12 +11,19 @@ const useListUserChatSummary = ({
 	sender = '',
 	pagination = 1,
 	channel_type = '',
+	activeSelect = '',
 }) => {
 	const [dateFilters, setDateFilters] = useState(null);
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_user_chat_summary',
 		method : 'get',
 	}, { manual: true });
+
+	const todayDate = formatDate({
+		date       : new Date(),
+		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+		formatType : 'date',
+	});
 
 	const getUserChatSummary = useCallback(async () => {
 		try {
@@ -31,16 +38,14 @@ const useListUserChatSummary = ({
 						? formatDate({
 							date       : dateFilters?.startDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-							formatType : 'dateTime',
-							separator  : ' | ',
-						}) : undefined,
+							formatType : 'date',
+						}) : todayDate,
 					summary_date_less_than: dateFilters?.endDate
 						? formatDate({
 							date       : dateFilters?.endDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-							formatType : 'dateTime',
-							separator  : ' | ',
-						}) : undefined,
+							formatType : 'date',
+						}) : todayDate,
 				},
 				page       : pagination,
 				page_limit : 10,
@@ -59,13 +64,14 @@ const useListUserChatSummary = ({
 		dateFilters,
 		pagination,
 		trigger,
+		todayDate,
 	]);
 
 	useEffect(() => {
-		if (activeSubTab === 'summary') {
+		if (activeSubTab === 'summary' || activeSelect === 'profile') {
 			getUserChatSummary();
 		}
-	}, [activeSubTab, getUserChatSummary]);
+	}, [activeSubTab, getUserChatSummary, activeSelect]);
 
 	return {
 		chatData           : data || {},
