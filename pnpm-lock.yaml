@@ -203,7 +203,7 @@ importers:
       react: 18.2.0
       react-hook-form: ^7.43.3
     dependencies:
-      '@cogoport/components': 1.0.366_4o7yor53awafeuvdjrs2cbhz3i
+      '@cogoport/components': 1.0.395_4o7yor53awafeuvdjrs2cbhz3i
       '@cogoport/constants': link:../constants
       '@cogoport/globalization': link:../globalization
       '@cogoport/icons-react': 1.0.58_react@18.2.0
@@ -439,7 +439,7 @@ importers:
       '@cogoport/utils': ^1.2.6
       react: 18.2.0
     dependencies:
-      '@cogoport/charts': 1.0.2_react@18.2.0
+      '@cogoport/charts': 1.0.1_react@18.2.0
       '@cogoport/components': 1.0.395_n4iqapq6hltb5mr4rez3emws4q
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
@@ -2476,14 +2476,14 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/components/1.0.395_n4iqapq6hltb5mr4rez3emws4q:
+  /@cogoport/components/1.0.395_4o7yor53awafeuvdjrs2cbhz3i:
     resolution: {integrity: sha512-N23rOrezfXxpBD9YjdX04lw3GEUbV74pfmALNm6fzrKPx3yv7J4ZxhdyEX2dweyjC2H8y0Ipu/sUSPnUo5oZYw==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
       react-dom: ^18.2.0
     dependencies:
-      '@cogoport/icons-react': 1.0.66_react@18.2.0
+      '@cogoport/icons-react': 1.0.58_react@18.2.0
       '@tippyjs/react': 4.2.6_react@18.2.0
       '@types/quill': 2.0.10
       '@types/react-rte': 0.16.5
@@ -2527,7 +2527,7 @@ packages:
       fs: 0.0.1-security
       react: 18.2.0
       react-date-range: 1.4.0_r6j3756ioqf5pjc2u22wj25rla
-      react-hook-form: 7.43.7_react@18.2.0
+      react-hook-form: 7.43.5_react@18.2.0
       react-quill: 2.0.0_react@18.2.0
       react-rte: 0.16.5_react@18.2.0
       react-table: 7.8.0_react@18.2.0
