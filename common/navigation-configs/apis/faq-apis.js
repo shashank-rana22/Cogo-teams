@@ -296,7 +296,7 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
-			api          : 'create_non_case_test_question',
+			api          : 'create_non_case_study_test_question',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},

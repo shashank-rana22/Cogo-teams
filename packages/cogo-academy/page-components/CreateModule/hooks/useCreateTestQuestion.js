@@ -28,7 +28,7 @@ function useCreateTestQuestion({
 
 	const [{ loading: loadingNonCase }, triggerNonCase] = useRequest({
 		method : 'post',
-		url    : '/create_non_case_test_question',
+		url    : '/create_non_case_study_test_question',
 	}, { manual: true });
 
 	const TriggerMapping = {
