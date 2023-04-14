@@ -1,4 +1,4 @@
-import { Radio, Button } from '@cogoport/components';
+import { Checkbox, Button } from '@cogoport/components';
 import { SelectController, InputController, ChipsController } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 
@@ -132,33 +132,32 @@ function SingleQuestionComponent({
 						</div>
 					) : null
 				}
-				{
-					questionTypeWatch === 'subjective' ? (
-						<div className={styles.character_limit}>
-							<div style={{ width: '100%' }}>Set Character Limit</div>
-							<InputController
-								control={control}
-								name={`${name}.${index}.character_limit`}
-								placeholder="No Limit"
-								type="number"
-							/>
-						</div>
-					) : null
-				}
 
 			</div>
 
 			{
-	questionTypeWatch === 'subjective' && (
-		<div>
-			<Radio
-				name="upload"
-				label="Option of Upload Answer"
-				onChange={() => { setUploadable(!uploadable); }}
-			/>
-		</div>
-	)
-}
+					questionTypeWatch === 'subjective' && (
+						<div className={styles.uploadable}>
+							<div>
+								<Checkbox
+									name="upload"
+									label="Option of Upload Answer"
+									onChange={() => { setUploadable(!uploadable); }}
+								/>
+							</div>
+							<div className={styles.character_limit}>
+								<div className={styles.set_limit}>Set Character Limit</div>
+								<InputController
+									control={control}
+									name={`${name}.${index}.character_limit`}
+									placeholder="No Limit"
+									type="number"
+								/>
+							</div>
+						</div>
+
+					)
+				}
 
 			{			questionTypeWatch !== 'subjective' && (
 				<div className={styles.textarea_container}>

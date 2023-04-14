@@ -45,7 +45,6 @@ const useCreateQuestion = ({
 		explanation = [],
 		character_limit = '',
 	} = editDetails || {};
-	console.log(editDetails);
 
 	const {
 		watch,
@@ -90,6 +89,7 @@ const useCreateQuestion = ({
 	});
 
 	const onSubmit = (values) => {
+		console.log(values);
 		if (!isNewQuestion && question_type !== 'case_study') {
 			updateStandAloneTestQuestion({
 				values,
@@ -224,6 +224,7 @@ const useCreateQuestion = ({
 		setValue,
 		test_case_study_questions,
 		test_question_answers,
+		character_limit,
 	]);
 
 	return {

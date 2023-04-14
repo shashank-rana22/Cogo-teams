@@ -115,3 +115,22 @@
 	display: flex;
 	width: 40%;
 }
+
+.uploadable {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 24px;
+
+	:global {
+		.ui_checkbox_container {
+			padding: 0;
+		}
+	}
+}
+
+.set_limit {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
