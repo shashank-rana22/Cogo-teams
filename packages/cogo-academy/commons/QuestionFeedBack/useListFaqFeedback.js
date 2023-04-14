@@ -3,19 +3,21 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useMemo, useCallback, useEffect, useState } from 'react';
 
-const useListfaqFeedback = ({ id }) => {
+const useListfaqFeedback = ({ id, feedbackId }) => {
 	const [page, setPage] = useState(1);
 
 	const params = useMemo(() => ({
 		filters: {
-			faq_question_id : id,
-			status          : 'active',
+			faq_question_id      : id,
+			status               : 'active',
+			is_feedback_positive : false,
+			exclude_feedback_id  : feedbackId || undefined,
 		},
 		page,
 		feedback_remark_stats_required : true,
 		page_limit                     : 5,
 		author_data_required           : true,
-	}), [id, page]);
+	}), [feedbackId, id, page]);
 
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'GET',
@@ -55,6 +57,7 @@ const useListfaqFeedback = ({ id }) => {
 		answer_remark,
 		question_answer_remark,
 		question_remark,
+		fetchListFaqFeedback,
 	};
 };
 

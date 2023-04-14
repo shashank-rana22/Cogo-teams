@@ -26,7 +26,7 @@ function TestsList() {
 
 			{testCategory === 'active_test' && (data?.list?.length === 0) && (
 				<div>
-					<h4>Currently there are no active tests. Meanwhile you can learn from the faq section</h4>
+					<h4>Currently there are no active tests. Meanwhile, you can learn from the FAQ section</h4>
 					<span
 						role="presentation"
 						className={`${styles.faq_link} ${styles.arrow}`}

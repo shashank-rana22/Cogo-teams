@@ -25,6 +25,7 @@ const FUNCTION_SUB_FUNCTION_MAPPING = {
 		{ label: 'CP Sales', value: 'cp_sales' },
 		{ label: 'Acquisition', value: 'acquisition' },
 		{ label: 'CP Portfolio', value: 'cp_portfolio' },
+		{ label: 'Customer Operations', value: 'customer_operations' },
 	],
 	supply: [
 		{ label: 'Shipping Line', value: 'shipping_line' },

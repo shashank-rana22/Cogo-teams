@@ -1,0 +1,55 @@
+.whole {
+	flex: 1;
+	width: 100%;
+}
+
+.arrow {
+	align-items: center;
+	justify-content: center;
+	margin: 0 8px;
+	font-size: 20px;
+}
+
+.button_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 32px 0 0;
+}
+
+.score_container {
+	display: flex;
+}
+
+.text {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 20px;
+	font-weight: 400;
+	color: #221f20;
+}
+
+.list_item {
+	flex-basis: 24%;
+}
+
+.label_text {
+	width: 100%;
+	margin: 0 0 4px;
+	font-size: 16px;
+	color: rgb(51 51 51 / 70%);
+}
+
+.title_show {
+	font-size: 12px;
+	font-weight: 400;
+	color: rgb(34 31 32 / 60%);
+}
+
+.card_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}

@@ -7521,7 +7521,6 @@ const partner = {
 			access_type : 'private',
 			module      : 'myIncident',
 			feature     : 'myIncident',
-
 		},
 	],
 	vendor_payment: [
@@ -7876,7 +7875,7 @@ const partner = {
 			access_type : 'private',
 		},
 	],
-	cfo_dashboard: [
+	business_finance_dashboard: [
 		{
 			api         : 'get_payments_dashboard_finance_profitability_shipment',
 			access_type : 'private',
@@ -7928,7 +7927,6 @@ const partner = {
 			api         : 'post_translation_translate_bulk',
 			access_type : 'private',
 		},
-
 	],
 	reports: [
 		{
@@ -8973,6 +8971,11 @@ const partner = {
 			service_name : 'checkout',
 		},
 		{
+			api          : 'create_cogopoint_redemption_rule',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
+		{
 			api          : 'create_cogopoint_credit_rule',
 			access_type  : 'private',
 			service_name : 'cogopoint',
@@ -9237,11 +9240,9 @@ const partner = {
 			service_name : 'segmentation',
 		},
 		{
-
 			api          : 'create_duplicate_promotion',
 			access_type  : 'private',
 			service_name : 'promotion',
-
 		},
 		{
 			api          : 'get_promotion_shipment_stats',
@@ -10433,6 +10434,12 @@ const partner = {
 			service_name : 'fcl_freight_rate',
 			feature      : 'detention_demurrage',
 		},
+		{
+			api          : 'list_shipment_invoice_combinations',
+			access_type  : 'private',
+			service_name : 'shipment',
+			feature      : 'detention_demurrage',
+		},
 	],
 	my_profile: [
 		{
@@ -10459,6 +10466,26 @@ const partner = {
 			api          : 'list_event_mappings',
 			access_type  : 'private',
 			service_name : 'event',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_badge_name',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_profile',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_badge_description',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_kam_expertise_profile_mastery_badge',
+			access_type  : 'private',
+			service_name : 'allocation',
 		},
 	],
 	awb_inventory: [
@@ -10571,7 +10598,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
-
 	],
 	omni_channel: [
 		{
@@ -10624,7 +10650,7 @@ const partner = {
 		{
 			api          : 'get_cogoverse_dashboard',
 			access_type  : 'private',
-			service_name : 'unified_dashboard',
+			service_name : 'communication',
 		},
 		{
 			api          : 'get_cogoverse_globe_data',
@@ -10636,7 +10662,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'unified_dashboard',
 		},
-
 	],
 	constants: [
 		{
@@ -10992,7 +11017,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'inventory_management',
 		},
-
 	],
 	cogo_one: [
 		{
@@ -11061,7 +11085,6 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
-
 			api          : 'check_outgoing_call_status',
 			access_type  : 'private',
 			service_name : 'voice_call',

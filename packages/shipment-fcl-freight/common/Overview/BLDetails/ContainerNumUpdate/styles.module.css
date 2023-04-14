@@ -18,7 +18,6 @@
 .button_container {
 	display: flex;
 	justify-content: flex-end;
-	margin-top: 32px;
 }
 
 .button_container > button:first-child {
@@ -28,6 +27,7 @@
 .container_num {
 	display: flex;
 	align-items: center;
+	width: 150px;
 	margin-right: 32px;
 }
 

@@ -1,9 +1,8 @@
-import { Toast } from '@cogoport/components';
 import { useLensRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
 import APIS from '../constants/apis';
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 /**
  * @param {String} email_address Mail address to  get mails from
@@ -31,7 +30,7 @@ const useGetRpaMails = ({ payload }) => {
 			try {
 				await triggerGetMail();
 			} catch (err) {
-				Toast.error(getApiErrorString(err));
+				toastApiError(err);
 			}
 		})();
 	}, [triggerGetMail]);

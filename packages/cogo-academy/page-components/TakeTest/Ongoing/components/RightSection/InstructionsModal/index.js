@@ -1,6 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 
-// import handleEnterFullScreen from '../../../../utils/handleEnterFullScreen';
+import handleEnterFullScreen from '../../../../utils/handleEnterFullScreen';
 import Timer from '../../LeftSection/Header/Timer';
 
 import styles from './styles.module.css';
@@ -41,7 +41,7 @@ function InstructionsModal({
 	const time = new Date(start_time).getTime();
 
 	const handleCloseInstruction = () => {
-		// handleEnterFullScreen();
+		handleEnterFullScreen();
 		setShowInstructionsModal(false);
 	};
 
@@ -50,6 +50,7 @@ function InstructionsModal({
 			<Modal.Header title={(
 				<div className={styles.flex_container}>
 					<div>Test Instructions</div>
+
 					<Timer
 						test_start_time={time}
 						duration={test_duration}

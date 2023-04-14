@@ -21,8 +21,8 @@ function useListFaqTopics({ searchTopicsInput = '' }) {
 		try {
 			await trigger({
 				params: {
-					page                 : topicCurrentPage,
-					page_limit           : 5,
+					page                 : !query ? topicCurrentPage : 1,
+					page_limit           : 10,
 					is_admin_view        : true,
 					author_data_required : true,
 					filters              : { q: query, status: activeTopic },
