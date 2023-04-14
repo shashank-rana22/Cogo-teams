@@ -12,7 +12,7 @@ function Forms({
 	setOpenCreateForm = () => {},
 	openCreateForm = false,
 	setFormStage = () => {},
-	activationStatus = 'Add',
+	activationStatus = 'add',
 	setFormId = () => {},
 }) {
 	const openOldForm = (Id) => {
@@ -59,7 +59,7 @@ function Forms({
 						<Button
 							themeType="primary"
 							onClick={() => showForm()}
-							disabled={activationStatus === 'Edit'}
+							disabled={activationStatus === 'edit'}
 						>
 							Create New
 						</Button>
@@ -123,7 +123,7 @@ function Forms({
 									<Button
 										themeType="tertiary"
 										onClick={() => openOldForm(id)}
-										disabled={activationStatus === 'Edit'}
+										disabled={activationStatus === 'edit'}
 									>
 										Use
 									</Button>

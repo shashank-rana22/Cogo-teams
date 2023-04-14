@@ -14,7 +14,7 @@ function EmptyState({ setFormStage = () => {}, setOpenCreateForm = () => {}, act
 					setOpenCreateForm(true);
 				}}
 				style={{ marginTop: '8px' }}
-				disabled={activationStatus === 'Edit'}
+				disabled={activationStatus === 'edit'}
 			>
 				Create Form
 			</Button>
