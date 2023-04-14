@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import useAnswer from './useAnswer';
 
@@ -24,7 +24,7 @@ const useCreateFeedback = ({ question }) => {
 	const watchAnswerCheckbox = watch('answer_checkbox');
 	const watchRemark = watch('remark');
 
-	const { data: answerData, loading, fetch } = useAnswer({ question });
+	const { data: answerData, loading, fetch } = useAnswer({ question, setIsLiked, FEEDBACK_MAPPING_ISLIKED });
 
 	const { id, is_positive } = answerData?.answers?.[0]?.faq_feedbacks?.[0] || {};
 
@@ -34,8 +34,6 @@ const useCreateFeedback = ({ question }) => {
 		url    : apiName,
 		method : 'POST',
 	}, { manual: true });
-
-	useEffect(() => { setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive]); }, [feedbackLoading, is_positive]);
 
 	const onClickLikeButton = async ({ answerId }) => {
 		setload(false);

@@ -1,9 +1,9 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useEffect } from 'react';
 
-const useAnswer = ({ question }) => {
+const useAnswer = ({ question, setIsLiked, FEEDBACK_MAPPING_ISLIKED }) => {
 	const params = useMemo(
 		() => ({
 			id: question?.id,
@@ -16,17 +16,22 @@ const useAnswer = ({ question }) => {
 		url    : '/get_question',
 		method : 'get',
 		params,
-	}, { manual: false });
+	}, { manual: true });
 
 	const fetch = useCallback(async () => {
 		try {
-			await trigger({
+			const res = await trigger({
 				params,
 			});
+
+			const { is_positive } = res?.data?.answers?.[0]?.faq_feedbacks?.[0] || {};
+			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		} catch (error) {
 			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
 		}
-	}, [params, trigger]);
+	}, [FEEDBACK_MAPPING_ISLIKED, params, setIsLiked, trigger]);
+
+	useEffect(() => { fetch(); }, [fetch]);
 
 	return {
 		data,
