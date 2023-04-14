@@ -1,9 +1,8 @@
-.settings_container{
-    padding: 8px;
-}
 
-.ui_accordion_content {
-    margin-bottom: 12px;
+.label_container{
+    background-color: #f1f1f1;
+    padding: 0px 8px;
+    border-radius: 4px;
 }
 .label{
     font-size: 18px;

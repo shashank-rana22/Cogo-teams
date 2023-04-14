@@ -1,23 +1,54 @@
 import { Input } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useCallback } from 'react';
 
 import styles from './styles.module.css';
 
 function ColorInput(props) {
-	const { colorKey, component, setComponent } = props;
+	const { colorKey, component, setComponent, selectedItem } = props;
 
 	const [color, setColor] = useState(component.style?.[colorKey] || '#ffffff');
 
-	const handleChange = useCallback((key, value) => {
-		setColor(value);
-		setComponent((prev) => ({
-			...prev,
-			style: {
-				...component.style,
-				[key]: value,
-			},
-		}));
-	}, [setComponent, component.style]);
+	const isRootComponent = isEmpty(selectedItem);
+
+	const handleChange = useCallback(
+		(key, value) => {
+			if (isRootComponent) {
+				setComponent((prev) => ({
+					...prev,
+					style: {
+						...component.style,
+						[key]: value,
+					},
+				}));
+			} else {
+				const { id: selectedItemId } = selectedItem;
+
+				const selectedComponent = component.layouts.find((layout) => layout.id === selectedItemId);
+
+				const modifiedComponent = {
+					...selectedComponent,
+					style: {
+						...selectedComponent.style,
+						[key]: value,
+					},
+				};
+
+				setComponent((prev) => ({
+					...prev,
+					layouts: prev.layouts.map((layout) => {
+						if (layout.id === selectedItemId) {
+							return modifiedComponent;
+						}
+						return layout;
+					}),
+				}));
+			}
+
+			setColor(value);
+		},
+		[component.layouts, selectedItem, setComponent, component.style, isRootComponent],
+	);
 
 	const handleInputChange = useCallback(
 		(val, key) => {

@@ -1,24 +1,55 @@
 import { Input, Button } from '@cogoport/components';
 import { IcMMinus, IcMPlus } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useCallback } from 'react';
 
 import styles from './styles.module.css';
 
 function NumberInput(props) {
-	const { NumberKey, component, setComponent } = props;
+	const { NumberKey, component, setComponent, selectedItem } = props;
 
 	const [number, setNumber] = useState(component.style?.[NumberKey] || 0);
 
-	const handleChange = useCallback((value) => {
-		setNumber(value);
-		setComponent((prev) => ({
-			...prev,
-			style: {
-				...component.style,
-				[NumberKey]: value,
-			},
-		}));
-	}, [setComponent, NumberKey, component.style]);
+	const isRootComponent = isEmpty(selectedItem);
+
+	const handleChange = useCallback(
+		(key, value) => {
+			if (isRootComponent) {
+				setComponent((prev) => ({
+					...prev,
+					style: {
+						...component.style,
+						[key]: value,
+					},
+				}));
+			} else {
+				const { id: selectedItemId } = selectedItem;
+
+				const selectedComponent = component.layouts.find((layout) => layout.id === selectedItemId);
+
+				const modifiedComponent = {
+					...selectedComponent,
+					style: {
+						...selectedComponent.style,
+						[key]: value,
+					},
+				};
+
+				setComponent((prev) => ({
+					...prev,
+					layouts: prev.layouts.map((layout) => {
+						if (layout.id === selectedItemId) {
+							return modifiedComponent;
+						}
+						return layout;
+					}),
+				}));
+			}
+
+			setNumber(value);
+		},
+		[component.layouts, selectedItem, setComponent, component.style, isRootComponent],
+	);
 
 	const handleInputChange = useCallback(
 		(type) => {
@@ -57,7 +88,7 @@ function NumberInput(props) {
 					size="sm"
 					type="button"
 					themeType="tertiary"
-					onClick={(e) => handleInputChange('subtract')}
+					onClick={() => handleInputChange('subtract')}
 				>
 					<IcMMinus width={18} height={18} />
 				</Button>

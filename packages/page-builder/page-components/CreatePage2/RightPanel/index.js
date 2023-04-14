@@ -19,9 +19,8 @@ const ITEM_TYPES = {
 };
 
 function ComponentBuilder({ widget, components, setComponents, selectedItem, childId, setChildId }) {
-	const { type: componetType, children, properties, id: componentId } = widget || {};
+	const { type: componetType, children, style, id: componentId } = widget || {};
 	const { id: selectedItemId } = selectedItem || {};
-	const { styles: style } = properties || {};
 
 	if (componetType === 'rootElement') {
 		return (
@@ -40,8 +39,8 @@ function ComponentBuilder({ widget, components, setComponents, selectedItem, chi
 		<div style={style}>
 
 			{ (children || []).map((childComponent) => {
-				const { id } = childComponent || {};
-				const { content = '', styles: allStyles, attributes = {} } = childComponent.properties || {};
+				const { id, style: allStyles } = childComponent || {};
+				const { content = '', attributes = {} } = childComponent.properties || {};
 				const { icon, type } = content || {};
 				const isChildSelected = childId === id && componentId === selectedItemId && type;
 				const border = isChildSelected ? '1px solid red' : allStyles.border;

@@ -11,7 +11,8 @@ import styles from './styles.module.css';
 const CONTENT_MAPPING = {
 	text: {
 		properties : { content: 'start typing here...' },
-		layout     : {},
+		layouts    : [],
+		style      : {},
 		attributes : {
 			contenteditable: true,
 		},
@@ -19,11 +20,11 @@ const CONTENT_MAPPING = {
 
 	image: {
 		properties: {
-			content : 'https://www.cogoport.com/_next/image/?url=https%3A%2F%2Fcdn.cogoport.io%2Fcms-prod%2Fcogo_public%2Fvault%2Foriginal%2Fchannel-partner-header-2.png&w=1920&q=75',
-			style   : {},
+			content: 'https://www.cogoport.com/_next/image/?url=https%3A%2F%2Fcdn.cogoport.io%2Fcms-prod%2Fcogo_public%2Fvault%2Foriginal%2Fchannel-partner-header-2.png&w=1920&q=75',
 		},
 		alt        : 'add-img-url',
-		layout     : {},
+		layouts    : [],
+		style      : {},
 		attributes : {},
 	},
 
@@ -34,7 +35,8 @@ const CONTENT_MAPPING = {
 		redirectUrl : 'https://www.cogoport.com/en-IN/company/careers/',
 		themeType   : 'primary',
 		size        : 'md',
-		layout      : {},
+		layouts     : [],
+		style       : {},
 		type        : 'button',
 		attributes  : {
 			onClick: 'handleSubmitClick',
@@ -74,7 +76,7 @@ function DNDComponent() {
 				const objIndex = data.layouts.findIndex((item) => item.parentId === parentId);
 
 				data.layouts[objIndex].children[childId].properties.content = content;
-				data.layouts[objIndex].children[childId].properties.styles = { ...data.layouts[objIndex].children[childId].properties.styles, border: undefined };
+				data.layouts[objIndex].children[childId].style = { ...data.layouts[objIndex].children[childId].style, border: undefined };
 
 				setComponent(data);
 			} else {
@@ -127,6 +129,7 @@ function DNDComponent() {
 							addNewItem={handleAddNewItem}
 							onNewItemAdding={setNewItemAdding}
 							selectedItem={selectedItem}
+							setSelectedItem={setSelectedItem}
 							showContentModal={showContentModal}
 							setShowContentModal={setShowContentModal}
 							parentComponentId={parentComponentId}

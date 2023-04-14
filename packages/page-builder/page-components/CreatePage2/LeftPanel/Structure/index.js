@@ -38,11 +38,12 @@ function Structure(props) {
 		type       : 'container',
 		isRendered : false,
 		parentId   : uuid(),
-		properties : {
-			content : '',
-			styles  : {
-				display: 'flex',
-			},
+		layouts    : [],
+		style      : {
+			display: 'flex',
+		},
+		properties: {
+			content: '',
 		},
 	};
 
@@ -56,18 +57,18 @@ function Structure(props) {
 				width      : row,
 				parentId,
 				isRendered : false,
-				properties : {
-					content : { icon: <IcMPlusInCircle style={{ cursor: 'pointer', fill: '#222' }} width={20} height={20} /> },
-					styles  : {
-						width          : row,
-						border         : '1px dashed #9ab7fe',
-						height         : '120px',
-						margin         : '2px',
-						display        : 'flex',
-						justifyContent : 'center',
-						alignItems     : 'center',
-					},
-					attributes: {
+				style      : {
+					width          : row,
+					border         : '1px dashed #9ab7fe',
+					// maxHeight      : '400px',
+					margin         : '2px',
+					display        : 'flex',
+					justifyContent : 'center',
+					alignItems     : 'center',
+				},
+				properties: {
+					content    : { icon: <IcMPlusInCircle style={{ cursor: 'pointer', fill: '#222' }} width={20} height={20} /> },
+					attributes : {
 						onClick: () => handleSubmitClick({ index, parentId }),
 					},
 

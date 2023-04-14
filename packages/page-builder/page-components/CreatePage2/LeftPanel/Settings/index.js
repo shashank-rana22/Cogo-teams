@@ -22,7 +22,13 @@ function Settings(props) {
 
 			{['text', 'button', 'image'].includes(type)
 				? COMPONENT_MAPPING[type || 'default']
-				: <DivSettings component={component} setComponent={setComponent} />}
+				: (
+					<DivSettings
+						component={component}
+						selectedItem={selectedItem}
+						setComponent={setComponent}
+					/>
+				)}
 
 		</div>
 	);

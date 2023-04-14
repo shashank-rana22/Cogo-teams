@@ -145,7 +145,7 @@ function FileUploader(props) {
 					/>
 				</div>
 			)}
-			{true && !isEmpty(progress) && Object.keys(progress).map((key) => (
+			{loading && !isEmpty(progress) && Object.keys(progress).map((key) => (
 				<div className={styles.progress_container}>
 					<IcMDocument
 						style={{ height: '30', width: '30', color: '#2C3E50' }}

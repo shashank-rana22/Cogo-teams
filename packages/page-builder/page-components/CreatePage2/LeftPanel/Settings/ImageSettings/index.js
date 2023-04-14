@@ -1,18 +1,7 @@
 import { Input, Select } from '@cogoport/components';
 import React, { useCallback } from 'react';
 
-const settings = [
-	{ label: 'Width', key: 'width', type: 'number' },
-	{ label: 'Height', key: 'height', type: 'number' },
-	{
-		label   : 'Border',
-		key     : 'border',
-		type    : 'select',
-		options : ['none', 'solid', 'dashed', 'dotted'],
-	},
-	{ label: 'Border Width', key: 'borderWidth', type: 'number' },
-	{ label: 'Border Color', key: 'borderColor', type: 'color' },
-];
+import imageSettings from '../../../../../configurations/image-settings';
 
 function ImageSettings({ item }) {
 	const handleChange = useCallback((key, value) => {
@@ -36,7 +25,7 @@ function ImageSettings({ item }) {
 
 	return (
 		<div className="container">
-			{settings.map(({ label, key, type, options }) => (
+			{imageSettings.map(({ label, key, type, options }) => (
 				<div
 					key={key}
 					style={{
