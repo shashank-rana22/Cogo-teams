@@ -1,31 +1,31 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  margin-top: 100px;
+	display: flex;
+	flex-direction: column;
+	margin-top: 100px;
 }
 
 .question_count {
-  font-weight: 500;
-  font-size: 12px;
-  color: #4f4f4f;
+	font-size: 12px;
+	font-weight: 500;
+	color: #4f4f4f;
 }
 
 .question_type {
-  font-size: 12px;
-  color: #828282;
+	font-size: 12px;
+	color: #828282;
 }
 
 .question {
-  font-weight: 400;
-  font-size: 12px;
-  color: #828282;
+	font-size: 12px;
+	font-weight: 400;
+	color: #828282;
 }
 
 .question_01 {
-  padding-top: 42px;
+	padding-top: 42px;
 }
 
 .text {
-  font-weight: 600;
-  color: #221f20;
+	font-weight: 600;
+	color: #221f20;
 }
