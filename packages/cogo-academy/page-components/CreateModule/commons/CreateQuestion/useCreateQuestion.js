@@ -43,7 +43,9 @@ const useCreateQuestion = ({
 		test_case_study_questions = [],
 		test_question_answers = [],
 		explanation = [],
+		character_limit = '',
 	} = editDetails || {};
+	console.log(editDetails);
 
 	const {
 		watch,
@@ -183,8 +185,13 @@ const useCreateQuestion = ({
 			});
 		} else if (question_type === 'subjective') {
 			setValue('question_type', question_type);
-			setValue('question_text', question_text);
-			setValue('difficulty_level', difficulty_level);
+			setValue('subjective.0.question_text', question_text);
+			setValue('subjective.0.difficulty_level', difficulty_level);
+			setValue('subjective.0.character_limit', character_limit);
+
+			setSubjectiveEditorValue(isEmpty(explanation)
+				? RichTextEditor.createEmptyValue()
+				: RichTextEditor?.createValueFromString((explanation?.[0] || ''), 'html'));
 		} else {
 			const childKey = 'question.0';
 
