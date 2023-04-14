@@ -56,6 +56,7 @@ function TestResult() {
 				user_name={view === 'admin' ? userName : name}
 				test_id={test_id}
 				user_id={view === 'admin' ? id : user_id}
+				view={view}
 			/>
 		</div>
 	);

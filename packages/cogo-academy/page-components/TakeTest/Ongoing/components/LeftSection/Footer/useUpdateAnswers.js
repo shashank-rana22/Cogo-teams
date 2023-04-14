@@ -5,6 +5,13 @@ import { isEmpty } from '@cogoport/utils';
 
 import handleMinimizeTest from '../../../../utils/handleMinimizeTest';
 
+let RichTextEditor;
+
+if (typeof window !== 'undefined') {
+	// eslint-disable-next-line global-require
+	RichTextEditor = require('react-rte').default;
+}
+
 const getAnswerState = ({ type, answer }) => {
 	let answerState = 'answered';
 
@@ -13,7 +20,7 @@ const getAnswerState = ({ type, answer }) => {
 	} else if (isEmpty(answer)) {
 		answerState = 'viewed';
 	}
-
+	// change this for subjective
 	return answerState;
 };
 
@@ -29,6 +36,8 @@ function useUpdateAnswers({
 	user_appearance = [],
 	fetchQuestions,
 	total_question,
+	subjectiveAnswer,
+	setSubjectiveAnswer = () => {},
 }) {
 	const {
 		query: { test_id },
@@ -56,12 +65,18 @@ function useUpdateAnswers({
 
 		const payload = {
 			test_user_mapping_id,
-			test_question_id         : id,
-			test_question_answer_ids : answerArray || [],
-			answer_state             : answerState,
+			test_question_id : id,
+			// test_question_answer_ids : answerArray || [],
+			answer_state     : answerState,
 			question_type,
 			...(question_type === 'case_study'
 				? { test_case_study_question_id: sub_questions?.[subQuestion - 1]?.id } : null),
+
+			...(question_type === 'subjective'
+				? { answer_text: subjectiveAnswer.toString('html') } : null),
+
+			...(question_type !== 'subjective'
+				? { test_question_answer_ids: answerArray || [] } : null),
 
 		};
 
@@ -106,6 +121,7 @@ function useUpdateAnswers({
 			return pv;
 		});
 		setSubQuestion(1);
+		setSubjectiveAnswer(RichTextEditor.createEmptyValue());
 	};
 
 	const handleLeaveTest = () => {

@@ -5,6 +5,13 @@ import Footer from './Footer';
 import Header from './Header';
 import styles from './styles.module.css';
 
+let RichTextEditor;
+
+if (typeof window !== 'undefined') {
+	// eslint-disable-next-line global-require
+	RichTextEditor = require('react-rte').default;
+}
+
 function LeftSection({
 	data = {},
 	testData,
@@ -23,6 +30,7 @@ function LeftSection({
 	setSubQuestion,
 }) {
 	const [answer, setAnswer] = useState('');
+	const [subjectiveAnswer, setSubjectiveAnswer] = useState(RichTextEditor.createEmptyValue());
 
 	return (
 		<div className={styles.container}>
@@ -46,6 +54,8 @@ function LeftSection({
 				setAnswer={setAnswer}
 				subQuestion={subQuestion}
 				setSubQuestion={setSubQuestion}
+				subjectiveAnswer={subjectiveAnswer}
+				setSubjectiveAnswer={setSubjectiveAnswer}
 			/>
 
 			<Footer
@@ -61,6 +71,8 @@ function LeftSection({
 				test_user_mapping_id={test_user_mapping_id}
 				user_appearance={user_appearance}
 				loading={loading}
+				subjectiveAnswer={subjectiveAnswer}
+				setSubjectiveAnswer={setSubjectiveAnswer}
 			/>
 		</div>
 	);
