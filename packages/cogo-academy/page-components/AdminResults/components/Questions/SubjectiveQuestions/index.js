@@ -42,8 +42,8 @@ function AccordianTitleComponent({ data = {} }) {
 	);
 }
 
-function SubjectiveQuestions({ question_item = {}, index = 0 }) {
-	const { explanation = [], question_text = '' } = question_item;
+function SubjectiveQuestions({ question_item = {}, index = 0, test_id = '' }) {
+	const { id = '' } = question_item;
 
 	return (
 		<div className={styles.container}>
@@ -54,7 +54,7 @@ function SubjectiveQuestions({ question_item = {}, index = 0 }) {
 				style={{ width: '100%' }}
 			>
 				<div className={styles.content}>
-					<SubjectiveQuestionItem question={question_text} answer={explanation?.[0]} />
+					<SubjectiveQuestionItem test_id={test_id} question_id={id} index={index} />
 				</div>
 			</Accordion>
 		</div>

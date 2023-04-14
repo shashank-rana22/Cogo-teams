@@ -40,6 +40,7 @@ function RenderContent({ questionsList = [], test_id = '', activeTab = '' }) {
 					key={question_item.id}
 					question_item={question_item}
 					index={index}
+					test_id={test_id}
 				/>
 			))}
 		</>

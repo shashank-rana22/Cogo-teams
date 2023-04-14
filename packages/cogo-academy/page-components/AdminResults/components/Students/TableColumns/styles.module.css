@@ -10,6 +10,14 @@
 
 .section {
 	padding-left: 24px;
+
+	&.passed {
+		color: #849e4c;
+	}
+
+	&.failed {
+		color: #ee3425;
+	}
 }
 
 .delete {
@@ -19,4 +27,9 @@
 .see_more {
 	text-decoration-line: underline;
 	cursor: pointer;
+}
+
+.not_evaluated {
+	font-size: 14px;
+	color: #c26d1a;
 }
