@@ -3,7 +3,6 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import ModalComponent from './ModalComponent';
-import styles from './styles.module.css';
 
 function OptionsComponent({
 	item,
@@ -12,7 +11,7 @@ function OptionsComponent({
 	const [questionDetails, setQuestionDetails] = useState({});
 
 	return (
-		<div className={styles.container}>
+		<div>
 			<IcMEyeopen style={{ cursor: 'pointer' }} onClick={() => setQuestionDetails(item)} />
 
 			{!isEmpty(questionDetails) ? (
