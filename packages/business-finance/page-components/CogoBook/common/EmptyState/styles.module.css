@@ -2,9 +2,8 @@
 	display: flex;
 	gap: 36px;
 	align-items: center;
-	padding: 100px 200px;
-	margin-top: -16px;
-	margin-bottom: 16px;
+	justify-content: center;
+	margin: auto;
 	text-align: center;
 	background-color: #fff;
 }

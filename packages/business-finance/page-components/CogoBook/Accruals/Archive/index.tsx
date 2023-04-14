@@ -34,7 +34,7 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 
 	const { totalRecords, list } = apiData || {};
 
-	const { list:drillDataList, totalRecords:TotalRecords } = drillData || {};
+	const { list:drillDataList, totalRecords:drillTotalRecords } = drillData || {};
 
 	const { page } = globalFilters || {};
 
@@ -183,7 +183,7 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 							<div className={styles.table_container}>
 								<StyledTable
 									page={page}
-									total={particularMonth ? TotalRecords : totalRecords}
+									total={particularMonth ? drillTotalRecords : totalRecords}
 									pageSize={10}
 									data={particularMonth ? drillDataList : list}
 									columns={particularMonth ? ARCHIVE_MONTH_BOOKED : ARCHIVE_DECLARED(

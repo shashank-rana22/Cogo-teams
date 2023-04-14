@@ -95,7 +95,9 @@ function Card({
 		setFilters((prev) => ({ ...prev, page: 1 }));
 		setViewSelected(false);
 
-		if (filters.page === 1) refetch();
+		if (filters.page === 1) {
+			refetch();
+		}
 	};
 	const monthYear = [filters?.year, filters?.month];
 	const isDateRangeEnabled =	monthYear[0]?.length > 0 && typeof monthYear[1] === 'string';
