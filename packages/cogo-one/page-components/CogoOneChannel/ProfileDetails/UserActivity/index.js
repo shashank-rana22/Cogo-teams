@@ -111,7 +111,7 @@ function UserActivities({
 
 	useEffect(() => {
 		setActivityTab('transactional');
-	}, [customerId, setActivityTab]);
+	}, [customerId]);
 
 	useEffect(() => {
 		setFilters(null);

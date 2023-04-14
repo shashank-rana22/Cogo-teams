@@ -19,12 +19,6 @@ const useListUserChatSummary = ({
 		method : 'get',
 	}, { manual: true });
 
-	const todayDate = formatDate({
-		date       : new Date(),
-		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-		formatType : 'date',
-	});
-
 	const getUserChatSummary = useCallback(async () => {
 		try {
 			const payload = {
@@ -39,13 +33,13 @@ const useListUserChatSummary = ({
 							date       : dateFilters?.startDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 							formatType : 'date',
-						}) : todayDate,
+						}) : undefined,
 					summary_date_less_than: dateFilters?.endDate
 						? formatDate({
 							date       : dateFilters?.endDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 							formatType : 'date',
-						}) : todayDate,
+						}) : undefined,
 				},
 				page       : pagination,
 				page_limit : 10,
@@ -64,7 +58,6 @@ const useListUserChatSummary = ({
 		dateFilters,
 		pagination,
 		trigger,
-		todayDate,
 	]);
 
 	useEffect(() => {
