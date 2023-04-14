@@ -9,17 +9,6 @@
 	background-color: #fff;
 }
 
-.container_value {
-	display: flex;
-	gap: 36px;
-	align-items: center;
-	padding: 100px 200px 100px 300px;
-	margin-top: -16px;
-	margin-bottom: 16px;
-	text-align: center;
-	background-color: #fff;
-}
-
 .img_height {
 	height: 310px;
 }

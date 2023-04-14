@@ -1,12 +1,12 @@
 import styles from './styles.module.css';
 
 const NoDataImage = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no ressult found.svg';
-const Success = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Success.png';
+const Success = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/approval animation';
 function EmptyState({ showEmptyState }) {
 	const getEmptyState = () => {
 		if (showEmptyState === 'BOOKED') {
 			return (
-				<div className={styles.container_value}>
+				<div className={styles.container}>
 					<img
 						className={styles.img_height}
 						src={Success}
@@ -22,7 +22,7 @@ function EmptyState({ showEmptyState }) {
 			);
 		} if (showEmptyState === 'ACCRUED') {
 			return (
-				<div className={styles.container_value}>
+				<div className={styles.container}>
 					<img
 						className={styles.img_height}
 						src={Success}
