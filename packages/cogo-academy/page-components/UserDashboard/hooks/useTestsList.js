@@ -14,7 +14,7 @@ const useTestsList = () => {
 		user: profile.user,
 	}));
 
-	const [testCategory, setTestCategory] = useState('');
+	const [testCategory, setTestCategory] = useState('active_test');
 	const [page, setPage] = useState(1);
 
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
