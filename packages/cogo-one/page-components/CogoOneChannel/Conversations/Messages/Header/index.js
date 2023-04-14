@@ -150,6 +150,7 @@ function Header({
 					themeType="secondary"
 					size="md"
 					className={styles.styled_button}
+					disabled={!hasPermissionToEdit}
 					onClick={openAssignModal}
 				>
 					Assign
@@ -186,6 +187,7 @@ function Header({
 					loading={assignLoading}
 				>
 					Assign to
+					{' '}
 					{agent_name}
 				</Button>
 			);
