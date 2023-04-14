@@ -187,7 +187,9 @@ function AnswerPage() {
 					<span className={styles.sidetext}>
 						{answerData?.answers[0]?.upvote_count}
 						{' '}
-						people found it useful.
+						{answerData?.answers[0]?.upvote_count > 1 ? 'people' : 'person'}
+						{' '}
+						found it useful.
 					</span>
 				) : null}
 				{'    '}

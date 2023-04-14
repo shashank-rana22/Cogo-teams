@@ -23,7 +23,7 @@ function topicListColumns({
 			Header   : 'TOPIC NAME',
 			accessor : (items) => (
 				<div className={styles.name}>
-					{startCase(items?.name) || '--'}
+					{startCase(items?.display_name) || '--'}
 				</div>
 			),
 		},

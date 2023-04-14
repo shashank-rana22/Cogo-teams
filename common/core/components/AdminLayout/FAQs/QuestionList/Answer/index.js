@@ -84,7 +84,9 @@ function Answer({ topic = {}, question, setQuestion }) {
 							<div className={styles.no_of_people_like_it} style={{ marginTop: 24 }}>
 								{ upvote_count}
 								{' '}
-								people liked this answer
+								{upvote_count > 1 ? 'people' : 'person'}
+								{' '}
+								liked this answer
 							</div>
 						) : null}
 					</>
