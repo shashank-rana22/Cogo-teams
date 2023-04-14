@@ -1,3 +1,4 @@
+import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
@@ -6,6 +7,14 @@ import toFixed from '../../../../CreateModule/utils/toFixed';
 import SortComponent from '../../../commons/SortComponent';
 
 import styles from './styles.module.css';
+
+function NotEvaluated() {
+	return (
+		<Tooltip content="Assign Marks to view details" placement="bottom">
+			<div className={styles.not_evaluated}>Pending</div>
+		</Tooltip>
+	);
+}
 
 const handleRedirectToDashboard = ({ router, user, test_id }) => {
 	const { id, name } = user || {};
@@ -30,8 +39,10 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router }) => [
 	{
 		Header   : <div className={styles.container}>PASSED/FAILED</div>,
 		id       : 'passed_failed',
-		accessor : ({ result_status = '' }) => (
-			<section className={styles.section}>{startCase(result_status) || '-'}</section>
+		accessor : ({ result_status = '', is_evaluated = false }) => (
+			<section className={`${styles.section} ${styles[result_status]}`}>
+				{is_evaluated ? (startCase(result_status) || '-') : <NotEvaluated />}
+			</section>
 		),
 	},
 	{
@@ -47,12 +58,9 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router }) => [
 			</div>
 		),
 		id       : 'score_achieved',
-		accessor : ({ final_score = '', test = {} }) => (
+		accessor : ({ final_score = '', test = {}, is_evaluated = false }) => (
 			<section className={styles.section}>
-				{toFixed(final_score, 2)}
-				/
-				{toFixed(test.total_marks, 2)}
-
+				{is_evaluated ? `${toFixed(final_score, 2)}/${toFixed(test.total_marks, 2)}` : <NotEvaluated />}
 			</section>
 		),
 	},
@@ -69,8 +77,10 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router }) => [
 			</div>
 		),
 		id       : 'percentile',
-		accessor : ({ percentile = '' }) => (
-			<div className={styles.section}>{percentile !== null ? toFixed(percentile, 2) : '-'}</div>
+		accessor : ({ percentile = '', is_evaluated = false }) => (
+			<div className={styles.section}>
+				{is_evaluated ? (toFixed(percentile || 0, 2) || '-') : <NotEvaluated />}
+			</div>
 		),
 	},
 	{

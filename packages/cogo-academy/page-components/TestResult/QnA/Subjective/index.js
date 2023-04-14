@@ -6,7 +6,7 @@ function Subjective({ questions, user_id = '', test_id = '', count_till_now, vie
 		<div className={styles.container}>
 
 			{(questions || []).map((question, index) => (
-				<div key={question.question_data.id} className={styles.question_card}>
+				<div key={question.question_data?.id} className={styles.question_card}>
 					<SubjectiveItem
 						data={question}
 						index={count_till_now + index + 1}
