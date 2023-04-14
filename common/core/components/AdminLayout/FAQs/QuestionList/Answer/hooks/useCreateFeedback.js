@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useAnswer from './useAnswer';
 
@@ -13,23 +13,20 @@ const FEEDBACK_MAPPING_ISLIKED = {
 };
 
 const useCreateFeedback = ({ question }) => {
-	const {
-		profile: { partner = '' },
-	} = useSelector((state) => state);
+	const { partner = '' }	 = useSelector((state) => state?.profile || {});
+	const [show, setShow] = useState(false);
+	const [load, setload] = useState(true);
+	const [isLiked, setIsLiked] = useState();
 
 	const { handleSubmit, control, watch, formState: { errors } } = useForm();
 
 	const watchQuestionCheckbox = watch('question_checkbox');
 	const watchAnswerCheckbox = watch('answer_checkbox');
 	const watchRemark = watch('remark');
-	const [show, setShow] = useState(false);
-	const [load, setload] = useState(true);
 
 	const { data: answerData, loading, fetch } = useAnswer({ question });
 
 	const { id, is_positive } = answerData?.answers?.[0]?.faq_feedbacks?.[0] || {};
-
-	const [isLiked, setIsLiked] = useState(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 
 	const apiName = id ? '/update_faq_feedback' : '/create_faq_feedback';
 
@@ -37,6 +34,8 @@ const useCreateFeedback = ({ question }) => {
 		url    : apiName,
 		method : 'POST',
 	}, { manual: true });
+
+	useEffect(() => { setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive]); }, [feedbackLoading, is_positive]);
 
 	const onClickLikeButton = async ({ answerId }) => {
 		setload(false);
@@ -131,13 +130,8 @@ const useCreateFeedback = ({ question }) => {
 		};
 		if (is_positive) {
 			payload = {
+				...payload,
 				id,
-				faq_answer_id               : answerData?.answers[0]?.id,
-				is_positive                 : false,
-				remark,
-				status                      : 'active',
-				suggested_question_abstract : watchQuestionCheckbox ? values?.question : undefined,
-				suggested_answer            : watchAnswerCheckbox ? values?.answer : undefined,
 			};
 		}
 
