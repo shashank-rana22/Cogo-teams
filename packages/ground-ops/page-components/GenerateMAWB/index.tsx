@@ -148,6 +148,7 @@ function GenerateMAWB({
 		}
 		if (hawbSuccess) {
 			setTaskItem({
+				...taskItem,
 				...hawbData.data,
 				...hawbData.data?.data,
 				originAirportId   : item.originAirportId,
@@ -363,6 +364,7 @@ function GenerateMAWB({
 								setActiveKey={setActiveKey}
 								activeHawb={activeHawb}
 								pendingTaskId={pendingTaskId}
+								category={category}
 							/>
 						</Modal.Body>
 

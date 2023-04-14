@@ -56,7 +56,7 @@ const useCreateShipmentDocument = ({
 	const { hawbData, getHawb, hawbSuccess, setHawbSuccess } = useGetHawb();
 
 	useEffect(() => {
-		if (hawbSuccess) {
+		if (hawbSuccess && !edit) {
 			const updatedDetails = (hawbDetails || []).map((item:any) => {
 				if (item.id === activeHawb.id) {
 					return {

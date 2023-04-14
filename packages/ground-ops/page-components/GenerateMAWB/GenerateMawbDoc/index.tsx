@@ -38,6 +38,7 @@ interface Props {
 	setActiveHawb?: Function;
 	setActiveKey?: Function;
 	pendingTaskId?: string;
+	category?: string;
 }
 
 const downloadButton = {
@@ -63,6 +64,7 @@ function GenerateMawb({
 	setActiveHawb,
 	setActiveKey,
 	pendingTaskId = '',
+	category = 'mawb',
 }:Props) {
 	const filteredData = { ...formData };
 
@@ -102,6 +104,10 @@ function GenerateMawb({
 
 	const downloadScreenshot = () => takeImageScreenShot(document.getElementById('mawb'));
 
+	const documentId = category === 'mawb' ? taskItem?.documentId : taskItem?.id;
+	const mawbPendingTaskId = edit === 'edit' ? undefined : pendingTaskId;
+	const hawbPendingTaskId = taskItem.state === 'document_amendment_requested' ? pendingTaskId : undefined;
+
 	const handleSave = async () => {
 		const newImage = await downloadScreenshot();
 		const { file } = getFileObject(newImage, 'mawb.pdf');
@@ -111,11 +117,12 @@ function GenerateMawb({
 			uploaded_by_org_id  : taskItem?.serviceProviderId,
 			performed_by_org_id : taskItem?.serviceProviderId,
 			document_type       : activeCategory === 'mawb' ? 'draft_airway_bill' : 'draft_house_airway_bill',
-			id                  : activeCategory === 'mawb' ? taskItem?.documentId : pendingTaskId,
+			id                  : documentId,
 			service_id          : taskItem?.serviceId,
 			service_type        : 'air_freight_service',
-			pending_task_id     : edit === 'edit' || activeHawb.isNew === false ? undefined : pendingTaskId,
-			data                : {
+			pending_task_id     : category === 'mawb' || activeCategory === 'mawb'
+				? mawbPendingTaskId : hawbPendingTaskId,
+			data: {
 				...filteredData,
 				status          : 'generated',
 				document_number : taskItem?.awbNumber,
@@ -266,6 +273,7 @@ function GenerateMawb({
 						activeCategory={activeCategory}
 						edit={edit}
 						viewDoc={viewDoc}
+						activeHawb={activeHawb}
 					/>
 					<ShipmentDetails
 						formData={filteredData}
@@ -286,6 +294,7 @@ function GenerateMawb({
 						activeCategory={activeCategory}
 						edit={edit}
 						viewDoc={viewDoc}
+						activeHawb={activeHawb}
 					/>
 				</div>
 			</div>
