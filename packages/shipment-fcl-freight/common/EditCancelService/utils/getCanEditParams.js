@@ -22,6 +22,10 @@ function getShowCondition(shipment_data, conditions) {
 }
 
 export default function getCanEditParams({ shipment_data, user_data, serviceData, activeStakeholder }) {
+	if (`${shipment_data?.shipment_type}_service` !== serviceData?.service_type) {
+		return false;
+	}
+
 	if (user_data?.email === 'ajeet@cogoport.com') {
 		return true;
 	}
