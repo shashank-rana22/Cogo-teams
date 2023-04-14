@@ -269,7 +269,7 @@ const partner = {
 		{
 			api          : 'get_business',
 			access_type  : 'private',
-			service_name : 'shipment',
+			service_name : 'business',
 		},
 		{
 			api          : 'update_user_password',
@@ -447,7 +447,7 @@ const partner = {
 		{
 			api          : 'get_business',
 			access_type  : 'private',
-			service_name : 'shipment',
+			service_name : 'business',
 		},
 		{
 			api          : 'get_profile_completion_sectional_progress',
@@ -1180,7 +1180,7 @@ const partner = {
 			api          : 'get_business',
 			access_type  : 'private',
 			feature      : 'demand_crm',
-			service_name : 'shipment',
+			service_name : 'business',
 		},
 		{
 			api          : 'get_cogoscore_tax_numbers',
@@ -1862,7 +1862,7 @@ const partner = {
 			feature      : 'supply_crm',
 			api          : 'get_business',
 			access_type  : 'private',
-			service_name : 'shipment',
+			service_name : 'business',
 		},
 		{
 			api          : 'get_cogoscore_tax_numbers',
@@ -2214,7 +2214,7 @@ const partner = {
 		{
 			api          : 'get_business',
 			access_type  : 'private',
-			service_name : 'shipment',
+			service_name : 'business',
 		},
 		{
 			api          : 'validate_channel_partner_registration_number',
@@ -4772,7 +4772,7 @@ const partner = {
 		{
 			api          : 'get_business',
 			access_type  : 'private',
-			service_name : 'shipment',
+			service_name : 'business',
 		},
 		{
 			api          : 'list_partner_users',
@@ -11124,8 +11124,7 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
-			api: 'create_communication',
-
+			api          : 'create_communication',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

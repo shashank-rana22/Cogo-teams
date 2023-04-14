@@ -1362,7 +1362,7 @@ const apis = [
 	{
 		api          : 'get_business',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'business',
 	},
 	{
 		api          : 'create_upsell',
