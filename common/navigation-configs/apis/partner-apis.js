@@ -10467,6 +10467,26 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'event',
 		},
+		{
+			api          : 'get_allocation_kam_expertise_badge_name',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_profile',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_badge_description',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_kam_expertise_profile_mastery_badge',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
 	],
 	awb_inventory: [
 		{

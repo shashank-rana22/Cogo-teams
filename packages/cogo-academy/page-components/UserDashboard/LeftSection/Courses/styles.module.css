@@ -1,32 +1,74 @@
 .container {
-	padding: 24px;
 	background: rgb(255 255 255 / 40%);
-	border-radius: 4px;
+	border-radius: 6px;
 }
 
-.heading {
-	font-size: 14px;
+.upperhalf {
+	display: flex;
+	align-items: center;
+	padding: 16px;
+	background: #fede00;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+}
+
+.card_heading {
+	width: 20%;
+	font-size: 18px;
 	font-weight: 600;
 	color: #221f20;
 }
 
-.content {
+.lowerhalf {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	width: 45%;
-	padding: 54px 0;
-	margin: 0 auto;
+	justify-content: space-between;
+	padding: 36px;
 }
 
-.coming_soon_heading {
+.details_container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.title {
+	margin-bottom: 14px;
 	font-size: 18px;
 	font-weight: 600;
 	color: #221f20;
 }
 
 .description {
+	width: 70%;
+	margin-bottom: 24px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #221f20;
+}
+
+.tag_and_link_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.tag_container {
+	display: flex;
+	align-items: center;
+	padding: 2px 4px;
+	background: #fffce6;
+	border-radius: 6px;
+}
+
+.tag_count_text {
+	margin-left: 10px;
 	font-size: 14px;
-	color: #4f4f4f;
-	text-align: center;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.button_text {
+	font-size: 16px;
 }

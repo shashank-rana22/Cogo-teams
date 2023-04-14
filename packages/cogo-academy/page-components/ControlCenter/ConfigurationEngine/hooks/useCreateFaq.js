@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -65,7 +66,7 @@ function useCreateFaq() {
 				router.back();
 			}
 		} catch (e) {
-			Toast.error(e?.response?.data?.base);
+			if (e.response?.data) { Toast.error(getApiErrorString(e.response?.data)); }
 		}
 	};
 	return {
