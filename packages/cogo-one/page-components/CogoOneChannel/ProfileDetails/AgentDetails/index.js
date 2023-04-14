@@ -21,6 +21,8 @@ function AgentDetails({
 	customerId = '',
 	updateLeaduser = () => {},
 	setModalType = () => {},
+	setActiveMessage = () => {},
+	activeRoomLoading,
 }) {
 	const { user_details = null, user_type, id = '' } = activeMessageCard || {};
 	const {
@@ -106,7 +108,7 @@ function AgentDetails({
 		Toast.success('Copied!!!');
 	};
 
-	return (isEmpty(userId) && isEmpty(leadUserId) && isEmpty(mobile_no)) ? (
+	return (isEmpty(userId) && isEmpty(leadUserId) && isEmpty(mobile_no) && activeRoomLoading) ? (
 		<>
 			<div className={styles.title}>Profile</div>
 			<EmptyState
@@ -201,7 +203,7 @@ function AgentDetails({
 			)}
 			{loading ? (
 				<Placeholder
-					height="13px"
+					height="50px"
 					width="220px"
 					margin="0px 0px 0px 0px"
 				/>
@@ -224,6 +226,10 @@ function AgentDetails({
 						noData={!leadUserId && !userId}
 						loading={loading}
 						activeCardData={DATA_MAPPING[activeTab] || {}}
+						activeMessageCard={activeMessageCard}
+						setActiveMessage={setActiveMessage}
+						leadLoading={leadLoading}
+						activeRoomLoading={activeRoomLoading}
 					/>
 				</>
 			)}

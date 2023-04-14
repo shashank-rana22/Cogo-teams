@@ -1,0 +1,13 @@
+.download_csv {
+	position: absolute;
+	top: 0;
+	right: 0;
+
+	svg {
+		margin-right: 8px;
+	}
+}
+
+.filters {
+	margin-top: 16px;
+}

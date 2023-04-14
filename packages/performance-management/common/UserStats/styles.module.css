@@ -30,8 +30,13 @@
 }
 
 .performance_chart {
+	display: flex;
 	flex: 6;
 	margin-top: 16px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .user_profile {
@@ -56,6 +61,7 @@
 .filter_container {
 	display: flex;
 	align-items: center;
+	margin-top: 16px;
 }
 
 .month_container {

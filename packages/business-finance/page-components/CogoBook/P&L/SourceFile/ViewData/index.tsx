@@ -1,7 +1,6 @@
 import { Breadcrumb, Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { Link, useRouter } from '@cogoport/next';
-import { format } from '@cogoport/utils';
 import { useEffect, useMemo, useState } from 'react';
 
 import useDeleteView from '../../../hooks/useDeleteView';
@@ -37,9 +36,19 @@ function ViewData() {
 	});
 
 	const { entity, month, id, name, date } = query || {};
-	const formatMonth = format(month, 'MMM yyyy');
-	const monthPayload = format(month, 'yyyy-MM-01');
-	const formatDate = format(date, 'dd MMM yyyy');
+	const today = new Date(Number(month));
+
+	const formatMonth = today.toLocaleString('en-IN', { month: 'long', year: 'numeric' });
+
+	const monthVal = today.getMonth() + 1;
+	const yearVal = today.getFullYear();
+
+	const monthPayload = `${yearVal}-0${monthVal}-01`;
+
+	const dateValue = new Date(Number(date));
+
+	const formatDate = dateValue.toLocaleString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+
 	const { fetchRatioApi, ratiosData } = useReport({ monthPayload });
 	const {
 		air = '', airCustoms = '',

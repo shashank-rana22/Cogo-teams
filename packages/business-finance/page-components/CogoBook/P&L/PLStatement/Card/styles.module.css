@@ -127,7 +127,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 22px;
+	padding: 22px 34px 22px 22px;
 	margin-bottom: 12px;
 	font-size: 12px;
 	background: #fff;
@@ -164,4 +164,8 @@
 	margin-bottom: 8px;
 	font-size: 12px;
 	font-weight: 600;
+}
+
+.tool {
+	font-size: 13px;
 }
