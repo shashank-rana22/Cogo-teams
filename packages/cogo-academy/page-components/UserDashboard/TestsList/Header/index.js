@@ -30,7 +30,7 @@ const testCategoryOptions = [
 		value : 'expired',
 	},
 	{
-		label : 'Published',
+		label : 'Results Published',
 		value : 'published',
 	},
 ];

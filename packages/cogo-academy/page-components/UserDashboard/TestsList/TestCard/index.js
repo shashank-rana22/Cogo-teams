@@ -27,7 +27,7 @@ const CURRENT_STATUS_MAPPING = {
 		background : '#FDEBE9',
 	},
 	published: {
-		label      : 'Published',
+		label      : 'Results Published',
 		background : '#FFFCE6',
 	},
 };
