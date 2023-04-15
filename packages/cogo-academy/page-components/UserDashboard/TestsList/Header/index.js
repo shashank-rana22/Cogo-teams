@@ -6,6 +6,10 @@ import styles from './styles.module.css';
 
 const testCategoryOptions = [
 	{
+		label : 'All Tests',
+		value : 'all',
+	},
+	{
 		label : 'Active',
 		value : 'active_test',
 	},
@@ -53,7 +57,6 @@ function Header({ debounceQuery, testCategory, setTestCategory }) {
 					<Select
 						size="sm"
 						value={testCategory}
-						placeholder="Select Test"
 						options={testCategoryOptions}
 						onChange={setTestCategory}
 					/>
