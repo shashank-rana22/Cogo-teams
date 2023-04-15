@@ -10,6 +10,10 @@ const testCategoryOptions = [
 		value : 'active_test',
 	},
 	{
+		label : 'Ongoing',
+		value : 'ongoing',
+	},
+	{
 		label : 'Upcoming',
 		value : 'upcoming',
 	},
