@@ -4,10 +4,12 @@ import { Image, useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { useMemo } from 'react';
 
+import handleEnterFullScreen from '../utils/handleEnterFullScreen';
+
 import styles from './styles.module.css';
 import useCreateTestUserMapping from './useCreateTestUserMapping';
 
-function Introduction({ setActiveState, testData = {} }) {
+function Introduction({ setActiveState, testData = {}, setIsFullScreenAvailable }) {
 	const {
 		query: { test_id },
 		user: { id: user_id },
@@ -41,21 +43,14 @@ function Introduction({ setActiveState, testData = {} }) {
 		await passStartTime();
 
 		setActiveState('ongoing');
+
 		localStorage.setItem('visibilityChangeCount', 1);
 		localStorage.setItem(
 			`current_question_${test_id}_${user_id}`,
 			1,
 		);
 
-		// const elem = document.getElementById('maincontainer');
-
-		// if (elem?.requestFullscreen) {
-		// 	elem?.requestFullscreen();
-		// } else if (elem?.webkitRequestFullscreen) { /* Safari */
-		// 	elem?.webkitRequestFullscreen();
-		// } else if (elem?.msRequestFullscreen) { /* IE11 */
-		// 	elem?.msRequestFullscreen();
-		// }
+		handleEnterFullScreen({ setIsFullScreenAvailable });
 	};
 
 	const items = [

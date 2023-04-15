@@ -15,7 +15,14 @@ import InstructionsModal from './components/RightSection/InstructionsModal';
 import useGetUserTestQuestion from './hooks/useGetUserTestQuestion';
 import styles from './styles.module.css';
 
-function Ongoing({ testData, setActiveState, currentQuestionId, test_user_mapping_state, page }) {
+function Ongoing({
+	testData,
+	setActiveState,
+	currentQuestionId,
+	test_user_mapping_state,
+	page,
+	isFullScreenAvailable,
+}) {
 	const { guidelines = [] } = testData || {};
 
 	const [currentQuestion, setCurrentQuestion] = useState(1);
@@ -156,11 +163,11 @@ function Ongoing({ testData, setActiveState, currentQuestionId, test_user_mappin
 		);
 	}
 
-	// if (!isFullscreen) {
-	// 	return (
-	// 		<WarningModal loading={loading || endTestLoading} />
-	// 	);
-	// }
+	if (!isFullscreen && isFullScreenAvailable) {
+		return (
+			<WarningModal loading={loading || endTestLoading} />
+		);
+	}
 
 	return (
 		<div className={styles.main_container}>
