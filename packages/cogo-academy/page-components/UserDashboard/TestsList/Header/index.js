@@ -41,15 +41,21 @@ function Header({ debounceQuery, testCategory, setTestCategory }) {
 			<div className={styles.header}>Tests</div>
 
 			<div className={styles.input_container}>
-				<Input
-					size="sm"
-					placeholder="Search Name/Topic"
-					value={searchInput}
-					suffix={<div className={styles.icon_container}><IcMSearchlight /></div>}
-					onChange={handleSearchQuery}
-				/>
+				<div>
+					<div className={styles.label}>Quick Search</div>
+
+					<Input
+						size="sm"
+						placeholder="Search Name/Topic"
+						value={searchInput}
+						suffix={<div className={styles.icon_container}><IcMSearchlight /></div>}
+						onChange={handleSearchQuery}
+					/>
+				</div>
 
 				<div className={styles.select_container}>
+					<div className={styles.label}>Select Status</div>
+
 					<Select
 						size="sm"
 						value={testCategory}
@@ -58,6 +64,13 @@ function Header({ debounceQuery, testCategory, setTestCategory }) {
 						onChange={setTestCategory}
 					/>
 				</div>
+			</div>
+
+			<div className={styles.sub_heading}>
+				<i>
+					{`If you're having trouble locating a specific test, select
+					"Ongoing" or "Completed" status from the test status list.`}
+				</i>
 			</div>
 		</div>
 	);

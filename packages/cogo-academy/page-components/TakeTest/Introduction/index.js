@@ -150,6 +150,10 @@ function Introduction({ setActiveState, testData = {} }) {
 				</div>
 
 				<div className={styles.warning}>
+					We recommend using Chrome browser for giving the assessments for a better experience.
+				</div>
+
+				<div className={styles.warning}>
 					In case of any issues with taking the test or submitting answers,
 					use the shortcut Command + Shift + R
 					for Mac OS or Ctrl+F5 for Windows.
