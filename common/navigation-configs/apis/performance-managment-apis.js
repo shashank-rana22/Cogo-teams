@@ -263,6 +263,11 @@ const performance_management = {
 			service_name : 'iris',
 		},
 		{
+			api          : 'get_iris_get_department_mappings',
+			access_type  : 'private',
+			service_name : 'iris',
+		},
+		{
 			api          : 'get_iris_list_reportees',
 			access_type  : 'private',
 			service_name : 'iris',
