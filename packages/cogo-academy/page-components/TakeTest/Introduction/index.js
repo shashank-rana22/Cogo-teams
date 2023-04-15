@@ -150,7 +150,7 @@ function Introduction({ setActiveState, testData = {} }) {
 				</div>
 
 				<div className={styles.warning}>
-					We recommend using Chrome browser for giving the assessments for a better experience.
+					We recommend using Chrome browser for giving this assessment for a better experience.
 				</div>
 
 				<div className={styles.warning}>
