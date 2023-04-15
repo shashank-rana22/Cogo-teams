@@ -16,7 +16,7 @@ const handleRedirectToDashboard = ({ router, user, test_id }) => {
 	);
 };
 
-const getAppearedColumns = ({ sortFilter, setSortFilter, router }) => [
+const getAppearedColumns = ({ sortFilter, setSortFilter, router, setShowReAttemptModal }) => [
 	{
 		Header: (
 			<div className={styles.container}>
@@ -134,10 +134,22 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router }) => [
 			</div>
 		),
 	},
+	{
+		Header   : '',
+		id       : 're-attempt',
+		accessor : ({ user = {} }) => (
+			<div
+				role="presentation"
+				onClick={() => setShowReAttemptModal(user)}
+				className={styles.see_more}
+			>
+				Allow Re-Attempt
+			</div>
+		),
+	},
 ];
 
-const getOngoingColumns = () => [
-
+const getOngoingColumns = ({ setShowReAttemptModal }) => [
 	{
 		Header   : 'NAME',
 		id       : 'name',
@@ -150,6 +162,19 @@ const getOngoingColumns = () => [
 		id       : 'email',
 		accessor : ({ user = {} }) => (
 			<section>{user.email}</section>
+		),
+	},
+	{
+		Header   : '',
+		id       : 're-attempt',
+		accessor : ({ user = {} }) => (
+			<div
+				role="presentation"
+				onClick={() => setShowReAttemptModal(user)}
+				className={styles.see_more}
+			>
+				Allow Re-Attempt
+			</div>
 		),
 	},
 ];
@@ -198,15 +223,16 @@ const getTableColumns = ({
 	sortFilter, setSortFilter,
 	activeTab,
 	setShowModal,
+	setShowReAttemptModal,
 	setUserId = () => {},
 	router,
 }) => {
 	const getcolumnsFun = TABLE_MAPPING?.[activeTab] || getAppearedColumns;
 
 	const getcolumnsArg = {
-		appeared     : { sortFilter, setSortFilter, router },
+		appeared     : { sortFilter, setSortFilter, router, setShowReAttemptModal },
 		not_appeared : { setShowModal, setUserId },
-		ongoing      : { },
+		ongoing      : { setShowReAttemptModal },
 	};
 
 	return getcolumnsFun(getcolumnsArg[activeTab] || {});

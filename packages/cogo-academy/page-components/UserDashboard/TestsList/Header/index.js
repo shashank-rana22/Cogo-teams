@@ -10,6 +10,10 @@ const testCategoryOptions = [
 		value : 'active_test',
 	},
 	{
+		label : 'Ongoing',
+		value : 'ongoing',
+	},
+	{
 		label : 'Upcoming',
 		value : 'upcoming',
 	},
@@ -49,7 +53,7 @@ function Header({ debounceQuery, testCategory, setTestCategory }) {
 					<Select
 						size="sm"
 						value={testCategory}
-						placeholder="Select Day"
+						placeholder="Select Test"
 						options={testCategoryOptions}
 						onChange={setTestCategory}
 					/>
