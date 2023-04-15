@@ -26,6 +26,10 @@ const CURRENT_STATUS_MAPPING = {
 		label      : 'Expired',
 		background : '#FDEBE9',
 	},
+	published: {
+		label      : 'Published',
+		background : '#FFFCE6',
+	},
 };
 
 const handleRedirect = ({ test_id, redirect_to, push }) => {

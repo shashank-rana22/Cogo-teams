@@ -29,6 +29,10 @@ const testCategoryOptions = [
 		label : 'Expired',
 		value : 'expired',
 	},
+	{
+		label : 'Published',
+		value : 'published',
+	},
 ];
 
 function Header({ debounceQuery, testCategory, setTestCategory }) {
@@ -59,6 +63,7 @@ function Header({ debounceQuery, testCategory, setTestCategory }) {
 						value={testCategory}
 						options={testCategoryOptions}
 						onChange={setTestCategory}
+						placeholder="Select Test"
 					/>
 				</div>
 			</div>
