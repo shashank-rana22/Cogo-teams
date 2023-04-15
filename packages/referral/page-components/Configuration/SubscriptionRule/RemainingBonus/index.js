@@ -20,7 +20,7 @@ function RemainingBonus({ control, formValues, errors, trigger, isEdit }) {
 		const totalPercentage = remaining_bonus.reduce((acc, curr) => acc + Number(curr.percentage), 0);
 
 		if (isValid && totalPercentage < 100) {
-			append({ level_bonus_type: 'fixed' });
+			append({ type: 'fixed' });
 		}
 	};
 
@@ -34,13 +34,13 @@ function RemainingBonus({ control, formValues, errors, trigger, isEdit }) {
 								<SelectController
 									control={control}
 									disabled={isEdit}
-									name={`remaining_bonus.${index}.level_bonus_type`}
+									name={`remaining_bonus.${index}.type`}
 									className={styles.select_box}
 									size="sm"
 									rules={{ required: true }}
 									options={bonusType}
 								/>
-								{errors?.remaining_bonus?.[index]?.level_bonus_type && (
+								{errors?.remaining_bonus?.[index]?.type && (
 									<span className={styles.error}>Required</span>
 								)}
 							</div>
@@ -72,7 +72,7 @@ function RemainingBonus({ control, formValues, errors, trigger, isEdit }) {
 									<span className={styles.error}>Required</span>
 								)}
 							</div>
-							{remaining_bonus?.[index]?.level_bonus_type === 'slab' && (
+							{remaining_bonus?.[index]?.type === 'slab' && (
 								<>
 									<div className={styles.text}>
 										to
@@ -111,7 +111,9 @@ function RemainingBonus({ control, formValues, errors, trigger, isEdit }) {
 							<div className={styles.text}>
 								% of remaining network bonus
 							</div>
-							<div className={styles.input_controller}>
+							{remaining_bonus?.[index]?.type === 'slab' && ( 
+								<>
+								<div className={styles.input_controller}>
 								<InputController
 									control={control}
 									name={`remaining_bonus.${index}.max_percentage_allowed`}
@@ -128,7 +130,7 @@ function RemainingBonus({ control, formValues, errors, trigger, isEdit }) {
 							</div>
 							<div className={styles.text}>
 								max % for each node
-							</div>
+							</div> </>)}
 						</div>
 						{fields.length !== 1 && (
 							<ButtonIcon

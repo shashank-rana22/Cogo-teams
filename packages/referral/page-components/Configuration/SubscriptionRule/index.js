@@ -23,12 +23,12 @@ function SubscriptionRule() {
 		setValue,
 	} = useForm({
 		defaultValues: {
-			remaining_bonus: [{ level_bonus_type: 'fixed' }],
+			remaining_bonus: [{ type: 'fixed' }],
 		},
 	});
 
 	const [apiState, setApiState] = useState('Created');
-	const { createRule, loading } = useCreateRule(apiState);
+	const { createRule, loading } = useCreateRule(apiState,setApiState, setIsEdit);
 	const { data, loading : dataLoading, isEdit, setIsEdit } = useGetRules('subscription');
 
 	useEffect(() => {
@@ -45,9 +45,7 @@ function SubscriptionRule() {
 			Toast.error('Total Percentage should not exceed 100');
 		} else {
 			const payload = payloadFormat('subscription', values);
-			await createRule(payload);
-			setIsEdit(true);
-			setApiState('Updated');
+			createRule(payload);
 		}
 	};
 

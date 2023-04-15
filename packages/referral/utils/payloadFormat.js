@@ -1,11 +1,23 @@
+const isLastLevel = (type, start, end) => {
+	if(type === 'fixed'){
+		return Number(start);
+	}
+
+	if(end === 'master_node'){
+		return undefined;
+	}
+
+	return Number(end);
+}
+
 const getFormattedPayload = (val) => {
 	const remainingBonus = val.map((bonus) => {
-		const { start_level, level_bonus_type, end_level, max_percentage_allowed, percentage } = bonus;
+		const { start_level, type, end_level, max_percentage_allowed, percentage } = bonus;
 		return {
-			level_bonus_type,
+			type : type,
 			start_level            : Number(start_level),
-			end_level              : level_bonus_type === 'fixed' ? Number(start_level) : Number(end_level),
-			max_percentage_allowed : Number(max_percentage_allowed),
+			end_level              : isLastLevel(type, start_level, end_level),
+			max_percentage_allowed : type === 'slab' ? Number(max_percentage_allowed) : undefined,
 			percentage             : Number(percentage),
 			is_last_level          : end_level === 'master_node',
 		};
@@ -35,10 +47,10 @@ export const payloadFormat = (event, values) => {
 			total_incentive: referral_bonus_total_incentive_type === 'none'
 				? 0 : Number(referral_bonus_total_incentive_value),
 			referral_bonus_min_incentive_type,
-			minimum_incentive: referral_bonus_min_incentive_type === 'none'
+			minimum_incentive_cogopoint: referral_bonus_min_incentive_type === 'none'
 				? 0 : Number(referral_bonus_min_incentive_value),
 			referral_bonus_max_incentive_type,
-			maximum_incentive: referral_bonus_max_incentive_type === 'none'
+			maximum_incentive_cogopoint: referral_bonus_max_incentive_type === 'none'
 				? 0 : Number(referral_bonus_max_incentive_value),
 		},
 		network_bonus: {
@@ -57,6 +69,15 @@ export const payloadFormat = (event, values) => {
 	return payload;
 };
 
+const remainingBonusFieldArray = (val) => {
+	const fieldArray = val.map((val) => ({
+		...val,
+		end_level : val?.is_last_level === true ? 'master_node' : val?.end_level
+	}))
+
+	return fieldArray;
+}
+
 export const setFormValues = (values, setValue) => {
 	const { data } = values || {};
 
@@ -65,13 +86,13 @@ export const setFormValues = (values, setValue) => {
 	} = data || {};
 
 	const {
-		maximum_incentive, minimum_incentive,
-		total_incentive, referral_bonus_max_incentive_type, referral_bonus_min_incentive_type,
+		total_incentive,
 		referral_bonus_total_incentive_type,
+		minimum_incentive_cogopoint, maximum_incentive_cogopoint,
 	} = referral_bonus || {};
 
 	const {
-		maximum_incentive : network_max, minimum_incentive : network_min,
+		maximum_incentive_cogopoint : network_max, minimum_incentive_cogopoint : network_min,
 		network_bonus_max_incentive_type, network_bonus_min_incentive_type,
 		network_bonus_total_incentive_type, total_incentive : network_incentive,
 		level_bonus_criterias,
@@ -89,18 +110,16 @@ export const setFormValues = (values, setValue) => {
 		event_types,
 		event_threshold_limit,
 		referral_bonus_total_incentive_type,
-		referral_bonus_max_incentive_type,
-		referral_bonus_min_incentive_type,
 		referral_bonus_total_incentive_value : total_incentive,
-		referral_bonus_min_incentive_value   : minimum_incentive,
-		referral_bonus_max_incentive_value   : maximum_incentive,
+		referral_bonus_min_incentive_value   : minimum_incentive_cogopoint,
+		referral_bonus_max_incentive_value   : maximum_incentive_cogopoint,
 		network_bonus_total_incentive_type,
 		network_bonus_min_incentive_type,
 		network_bonus_max_incentive_type,
 		exceed_allowed                       : network_incentive,
 		network_bonus_min_incentive_value    : network_min,
 		network_bonus_max_incentive_value    : network_max,
-		remaining_bonus                      : level_bonus_criterias,
+		remaining_bonus                      : remainingBonusFieldArray(level_bonus_criterias),
 		exceed_limit                         : network_incentive > 8,
 	});
 };

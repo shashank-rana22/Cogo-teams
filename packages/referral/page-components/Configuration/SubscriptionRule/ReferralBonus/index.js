@@ -24,7 +24,7 @@ function ReferralBonus({ control, errors, formValues, isEdit }) {
 						name="referral_bonus_total_incentive_type"
 						className={styles.select_box}
 						size="sm"
-						disabled={isEdit}
+						disabled
 						value="percentage"
 						placeholder="Enter value"
 						rules={{ required: true }}
@@ -62,7 +62,7 @@ function ReferralBonus({ control, errors, formValues, isEdit }) {
 						name="referral_bonus_min_incentive_type"
 						className={styles.select_box}
 						size="sm"
-						disabled={isEdit}
+						disabled
 						value="fixed"
 						rules={{ required: true }}
 						options={incentiveOptions}
@@ -98,7 +98,7 @@ function ReferralBonus({ control, errors, formValues, isEdit }) {
 						name="referral_bonus_max_incentive_type"
 						className={styles.select_box}
 						size="sm"
-						disabled={isEdit}
+						disabled
 						value="fixed"
 						rules={{ required: true }}
 						options={incentiveOptions}

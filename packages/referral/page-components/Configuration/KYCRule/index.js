@@ -17,22 +17,20 @@ function KYCRule() {
 	} = useForm();
 
 	const [apiState, setApiState] = useState('Created');
-	const { data, loading : getDataLoading, isEdit, setIsEdit } = useGetRules('kyc_registration');
-	const { createRule, loading } = useCreateRule(apiState);
+	const { data, loading : getDataLoading, isEdit, setIsEdit } = useGetRules('kyc_verified');
+	const { createRule, loading } = useCreateRule(apiState, setApiState, setIsEdit);
 
 	useEffect(() => {
-		const { overall_limit } = data?.data || {};
-		if (overall_limit) {
-			setValue('overall_limit', overall_limit);
+		const { referral_bonus } = data?.data || {};
+		if (referral_bonus?.total_cogopoints) {
+			setValue('total_cogopoints', referral_bonus?.total_cogopoints);
 			setApiState('Updated');
 		}
 	}, [data, setValue]);
 
-	const handleSave = async (values, e) => {
+	const handleSave =  (values, e) => {
 		e.stopPropagation();
-		await createRule({ ...values, total_cogopoints: Number(values.total_cogopoints), event: 'kyc_registration' });
-		setIsEdit(true);
-		setApiState('Updated');
+		createRule({ ...values, referral_bonus : {total_cogopoints: Number(values.total_cogopoints)} , event: 'kyc_verified' });
 	};
 
 	const handleEdit = () => {

@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useCreateRule = (apiState) => {
+const useCreateRule = (apiState, setApiState, setIsEdit) => {
 	const { profile = {} } = useSelector((state) => state);
 
 	const { user = {} } = profile;
@@ -24,6 +24,8 @@ const useCreateRule = (apiState) => {
 					status            : 'active',
 				},
 			});
+			setApiState('Updated');
+			setIsEdit(true);
 			Toast.success(`Rule ${apiState} successfully`);
 		} catch (error) {
 			console.log('error', error);

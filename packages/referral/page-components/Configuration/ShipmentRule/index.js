@@ -24,13 +24,13 @@ function ShipmentRule() {
 		setError,
 	} = useForm({
 		defaultValues: {
-			remaining_bonus: [{ level_bonus_type: 'fixed' }],
+			remaining_bonus: [{ type: 'fixed' }],
 		},
 	});
 
 	const [apiState, setApiState] = useState('Created');
 	const { data, loading : dataLoading, isEdit, setIsEdit } = useGetRules('shipment');
-	const { createRule, loading } = useCreateRule(apiState);
+	const { createRule, loading } = useCreateRule(apiState,setApiState, setIsEdit);
 
 	useEffect(() => {
 		if (data && data?.data !== null) {
@@ -39,16 +39,14 @@ function ShipmentRule() {
 		}
 	}, [data, setValue]);
 
-	const handleSave = async (values) => {
+	const handleSave = (values) => {
 		const { remaining_bonus } = values;
 		const totalPercentage = remaining_bonus.reduce((acc, curr) => acc + Number(curr.percentage), 0);
 		if (totalPercentage > 100) {
 			Toast.error('Total Percentage should not exceed 100');
 		} else {
 			const payload = payloadFormat('shipment', values);
-			await createRule(payload);
-			setIsEdit(true);
-			setApiState('Updated');
+			createRule(payload);
 		}
 	};
 
