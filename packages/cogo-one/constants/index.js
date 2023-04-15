@@ -269,6 +269,3 @@ export const INDIA_COUNTRY_ID = '541d1232-58ce-4d64-83d6-556a42209eb7';
 export const GENERAL_ICON = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/General.svg';
 
 export const ECLAMATION_SVG = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg';
-
-// eslint-disable-next-line max-len
-export const OMNICHANNEL_URL = 'https://admin.cogoport.com/v2/6fd98605-9d5d-479d-9fac-cf905d292b88/cogo-one/omni-channel';

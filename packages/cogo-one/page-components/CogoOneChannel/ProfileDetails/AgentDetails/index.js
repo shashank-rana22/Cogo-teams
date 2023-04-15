@@ -4,7 +4,6 @@ import { isEmpty, snakeCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
-import { OMNICHANNEL_URL } from '../../../../constants';
 import useCreateLeadProfile from '../../../../hooks/useCreateLeadProfile';
 import useGetUser from '../../../../hooks/useGetUser';
 import hideDetails from '../../../../utils/hideDetails';
@@ -104,6 +103,7 @@ function AgentDetails({
 	};
 
 	const handleClick = () => {
+		const OMNICHANNEL_URL = window?.location?.href?.split('?')?.[0];
 		navigator.clipboard.writeText(`${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`);
 		Toast.success('Copied!!!');
 	};
