@@ -1,9 +1,31 @@
+import { Popover } from '@cogoport/components';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
 import 'react-quill/dist/quill.bubble.css';
 
 const ReactQuill = dynamic(import('react-quill'), { ssr: false });
+
+const modules = {
+	toolbar: [
+		['bold', 'italic', 'underline', 'strike'],
+		['blockquote', 'code-block'],
+		[{ header: 1 }, { header: 2 }],
+		[{ list: 'ordered' }, { list: 'bullet' }],
+		[{ script: 'sub' }, { script: 'super' }],
+		[{ indent: '-1' }, { indent: '+1' }],
+		[{ direction: 'rtl' }],
+
+		[{ size: ['small', false, 'large', 'huge'] }],
+		[{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+		[{ color: [] }, { background: [] }],
+		[{ font: [] }],
+		[{ align: [] }],
+
+		['clean'],
+	],
+};
 
 function TextComponent(props) {
 	const { text, components, setComponents, childId, selectedRow } = props;
@@ -26,36 +48,29 @@ function TextComponent(props) {
 		setComponents((prev) => ({ ...prev, layouts: data.layouts }));
 	};
 
-	const modules = {
-		toolbar: [
-			['bold', 'italic', 'underline', 'strike'],
-			['blockquote', 'code-block'],
-			[{ header: 1 }, { header: 2 }],
-			[{ list: 'ordered' }, { list: 'bullet' }],
-			[{ script: 'sub' }, { script: 'super' }],
-			[{ indent: '-1' }, { indent: '+1' }],
-			[{ direction: 'rtl' }],
-
-			[{ size: ['small', false, 'large', 'huge'] }],
-			[{ header: [1, 2, 3, 4, 5, 6, false] }],
-
-			[{ color: [] }, { background: [] }],
-			[{ font: [] }],
-			[{ align: [] }],
-
-			['clean'],
-		],
-	};
+	function Editor() {
+		return (
+			<ReactQuill
+				theme="snow"
+				placeholder={text}
+				value={editorValue}
+				modules={modules}
+				onChange={handleEditorChange}
+			/>
+		);
+	}
 
 	return (
 
-		<ReactQuill
-			theme="bubble"
-			placeholder="Start Typing..."
-			value={editorValue}
-			modules={modules}
-			onChange={handleEditorChange}
-		/>
+		<Popover
+			interactive
+			placement="bottom"
+			theme="light"
+			trigger="click"
+			content={Editor()}
+		>
+			<div dangerouslySetInnerHTML={{ __html: text }} />
+		</Popover>
 
 	);
 }

@@ -33,7 +33,7 @@ function SettingsCard(props) {
 
 	const isBackgroundImagePresent = Object.keys(selectedComponent.style).includes(
 		'background-image',
-	);
+	) && selectedComponent.style['background-image'] !== '';
 
 	const handleSelectChange = useCallback(
 		(value, key) => {

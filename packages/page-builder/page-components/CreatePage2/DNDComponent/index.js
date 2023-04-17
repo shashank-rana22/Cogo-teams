@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 const CONTENT_MAPPING = {
 	text: {
-		properties : { content: 'start typing here...' },
+		content    : 'Start Typing...',
 		layouts    : [],
 		style      : {},
 		attributes : {
@@ -19,9 +19,7 @@ const CONTENT_MAPPING = {
 	},
 
 	image: {
-		properties: {
-			content: 'https://www.cogoport.com/_next/image/?url=https%3A%2F%2Fcdn.cogoport.io%2Fcms-prod%2Fcogo_public%2Fvault%2Foriginal%2Fchannel-partner-header-2.png&w=1920&q=75',
-		},
+		content    : 'https://www.cogoport.com/_next/image/?url=https%3A%2F%2Fcdn.cogoport.io%2Fcms-prod%2Fcogo_public%2Fvault%2Foriginal%2Fchannel-partner-header-2.png&w=1920&q=75',
 		alt        : 'add-img-url',
 		layouts    : [],
 		style      : {},
@@ -29,9 +27,7 @@ const CONTENT_MAPPING = {
 	},
 
 	button: {
-		properties: {
-			content: 'Click Me!',
-		},
+		content     : 'Click Me!',
 		redirectUrl : 'https://www.cogoport.com/en-IN/company/careers/',
 		themeType   : 'primary',
 		size        : 'md',
@@ -48,8 +44,11 @@ const CONTENT_MAPPING = {
 function DNDComponent() {
 	const [activeTab, setActiveTab] = useState('content');
 	const [component, setComponent] = useState({
+		id      : 0,
 		layouts : [],
-		style   : {},
+		style   : {
+			backgroundSize: 'cover',
+		},
 
 	});
 
@@ -75,7 +74,7 @@ function DNDComponent() {
 
 				const objIndex = data.layouts.findIndex((item) => item.parentId === parentId);
 
-				data.layouts[objIndex].children[childId].properties.content = content;
+				data.layouts[objIndex].children[childId].content = content;
 				data.layouts[objIndex].children[childId].style = { ...data.layouts[objIndex].children[childId].style, border: undefined };
 
 				setComponent(data);
