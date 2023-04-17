@@ -186,7 +186,6 @@ export const testSetColumns = ({
 					Standalone
 				</div>
 				<div>
-					{' '}
 					{case_study_questions || 0}
 					{' '}
 					Cases
