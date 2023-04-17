@@ -28,9 +28,7 @@ function AudianceTable({
 		setConfigurationPage('audience');
 	};
 
-	if (audianceLoading) {
-		return <LoadingState />;
-	}
+	if (audianceLoading) return <LoadingState />;
 
 	const renderTable = () => {
 		if (isEmpty(data?.list)) {

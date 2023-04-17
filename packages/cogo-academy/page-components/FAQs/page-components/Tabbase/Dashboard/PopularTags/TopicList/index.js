@@ -22,16 +22,15 @@ function TopicList({ searchState = '', tagId = [] }) {
 
 	if (loading) {
 		return (
-			<div style={{ display: 'flex', justifyContent: 'center', marginTop: '32px' }}>
-				<div className={styles.spinner}>
-					<Spinner
-						height={60}
-						width={60}
-						borderWidth="7px"
-						outerBorderColor="#FBD69F"
-						spinBorderColor="red"
-					/>
-				</div>
+			<div className={styles.spinner}>
+				<Spinner
+					height={60}
+					width={60}
+					borderWidth="7px"
+					outerBorderColor="#FBD69F"
+					spinBorderColor="red"
+				/>
+
 			</div>
 		);
 	}

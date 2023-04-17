@@ -58,7 +58,7 @@ function CreateAudienceForm(props) {
 
 			if (showElements[name]) {
 				return (
-					<div>
+					<div key={name}>
 						<div className={styles.label}>
 							{label}
 						</div>
