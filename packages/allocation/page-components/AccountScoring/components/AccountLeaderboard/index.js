@@ -39,46 +39,47 @@ function AccountLeaderboard({ loading = false }) {
 	];
 
 	// const columns = [
-	// 		{
-	// 			Header   : 'Position',
-	// 			key      : 'position',
-	// 			id       : 'position',
-	// 			accessor : 'position',
-	// 			Cell     : ({ value }) => (
-	// 				<div>
-	// 					{value || ''}
-	// 				</div>
-	// 			),
-	// 		},
-	// 		{
-	// 			Header   : 'Positions Trend',
-	// 			accessor : 'positions_trend',
-	// 			Cell     : ({ value }) => {
-	// 				const {arrow, point , graph_data} = value;
-	// 				return (
-	// 					<span>
-	// 						<Pill className={styles.pill} color={colors}>{value || ''}</Pill>
-	// 					</span>
-	// 				);
-	// 			},
-
-	// 		},
-	// 		{
-	// 			Header   : 'LAST UPDATED',
-	// 			accessor : 'audit_data',
-	// 			Cell     : ({ value }) => (
-	// 				<section>
-	// 					{value?.updated_at ? formatDate({
-	// 						date       : value.updated_at,
-	// 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MM-yyyy'],
-	// 						formatType : 'date',
-	// 					}) : ''}
-
-	// 				</section>
-	// 			),
+	// 	{
+	// 		Header   : 'Position',
+	// 		key      : 'position',
+	// 		id       : 'position',
+	// 		accessor : 'position',
+	// 		Cell     : ({ value }) => (
+	// 			<div>
+	// 				{value || ''}
+	// 			</div>
+	// 		),
+	// 	},
+	// 	{
+	// 		Header   : 'Positions Trend',
+	// 		accessor : 'positions_trend',
+	// 		Cell     : ({ value }) => {
+	// 			const { arrow, point, graph_data } = value;
+	// 			return (
+	// 				<span>
+	// 					<Pill className={styles.pill} color={colors}>{value || ''}</Pill>
+	// 				</span>
+	// 			);
 	// 		},
 
-	// 	];
+	// 	},
+	// 	{
+	// 		Header   : 'LAST UPDATED',
+	// 		accessor : 'audit_data',
+	// 		Cell     : ({ value }) => (
+	// 			<section>
+	// 				{value?.updated_at ? formatDate({
+	// 					date       : value.updated_at,
+	// 					dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MM-yyyy'],
+	// 					formatType : 'date',
+	// 				}) : ''}
+
+	// 			</section>
+	// 		),
+	// 	},
+
+	// ];
+
 	return (
 		<section className={styles.container} id="core_engine_container">
 			<div className={styles.header_text}>Account Score Distribution</div>
@@ -142,8 +143,8 @@ function AccountLeaderboard({ loading = false }) {
 			<div style={{ margin: '16px 0px' }}>
 				<Table
 					className={styles.table}
-					// columns={columns}
-					// data={list || []}
+					columns={[]}
+					data={[]}
 					loading={loading}
 				/>
 			</div>

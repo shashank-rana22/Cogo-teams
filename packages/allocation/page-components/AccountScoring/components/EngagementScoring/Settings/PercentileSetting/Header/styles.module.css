@@ -21,6 +21,7 @@
 }
 
 .word_break {
+	min-width: 300px;
 	word-break: break-word;
 }
 

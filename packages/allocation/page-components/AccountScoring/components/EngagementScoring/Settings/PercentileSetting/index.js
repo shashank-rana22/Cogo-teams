@@ -1,4 +1,4 @@
-import { Card, Table } from '@cogoport/components';
+import { Table } from '@cogoport/components';
 import { useState } from 'react';
 
 import getPercentileControl from '../../../../configurations/get-add-percentile-controls';
@@ -51,13 +51,14 @@ function PercentileSetting() {
 	const [editing, setEditing] = useState(false);
 
 	return (
-		<Card className={styles.card}>
-			<Card.Title title={<Header editing={editing} setEditing={setEditing} />} />
+		<div className={styles.card}>
+			<Header editing={editing} setEditing={setEditing} />
 
 			{editing
 				? <EditSetting ITEM_ARRAY={WARMTH_ARRAY} useGetControls={getPercentileControl} />
+
 				: <Table columns={columns} data={data} />}
-		</Card>
+		</div>
 	);
 }
 
