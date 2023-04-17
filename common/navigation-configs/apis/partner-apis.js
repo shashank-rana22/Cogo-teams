@@ -640,7 +640,7 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
-			api          : 'list_campaign_email_configuration',
+			api          : 'list_campaign_configuration',
 			access_type  : 'private',
 			service_name : 'campaign',
 		},
@@ -1747,7 +1747,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'list_campaign_email_configuration',
+			api          : 'list_campaign_configuration',
 			access_type  : 'private',
 			service_name : 'campaign',
 		},
@@ -2480,7 +2480,7 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
-			api          : 'list_campaign_email_configuration',
+			api          : 'list_campaign_configuration',
 			access_type  : 'private',
 			service_name : 'campaign',
 		},
