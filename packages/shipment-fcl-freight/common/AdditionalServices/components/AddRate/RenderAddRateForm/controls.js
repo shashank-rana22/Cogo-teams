@@ -11,7 +11,7 @@ const currencyOptions = [
 	value : currency,
 }));
 
-const controls = ({ serviceData }) => {
+const controls = ({ serviceData, source }) => {
 	const unitOptions = [];
 	if (serviceData?.units) {
 		serviceData?.units?.forEach((unit) => { unitOptions.push({ label: startCase(unit), value: unit }); });
@@ -25,6 +25,7 @@ const controls = ({ serviceData }) => {
 			options : currencyOptions,
 			rules   : { required: 'Currency is required' },
 			size    : 'sm',
+
 		},
 		{
 			name        : 'buy_price',
@@ -34,14 +35,16 @@ const controls = ({ serviceData }) => {
 			placeholder : 'Enter Buy Price',
 			rules       : { required: 'Buy Price is required' },
 			size        : 'sm',
+			disabled    : source === 'add_sell_price',
 		},
 		{
-			name    : 'unit',
-			label   : 'Unit',
-			type    : 'select',
-			options : unitOptions,
-			rules   : { required: 'Unit is required' },
-			size    : 'sm',
+			name     : 'unit',
+			label    : 'Unit',
+			type     : 'select',
+			options  : unitOptions,
+			rules    : { required: 'Unit is required' },
+			size     : 'sm',
+			disabled : source === 'add_sell_price',
 		},
 		{
 			name        : 'quantity',
@@ -67,25 +70,6 @@ const controls = ({ serviceData }) => {
 			type        : 'text',
 			placeholder : 'Enter Alias (Only if required)',
 			size        : 'sm',
-		},
-		{
-			name        : 'service_provider_id',
-			label       : 'Service provider',
-			type        : 'asyncSelect',
-			placeholder : 'Select Service Provider',
-			asyncKey    : 'organizations',
-			rules       : { required: 'Service Provider is required' },
-			params      : {
-				filters: {
-					account_type : 'service_provider',
-					kyc_status   : 'verified',
-					service:
-						serviceData?.service_type === 'rail_domestic_freight_service'
-							? serviceData?.service_type?.split('_', 3)?.join('_')
-							: serviceData?.service_type?.split('_', 2)?.join('_'),
-				},
-			},
-			size: 'sm',
 		},
 	];
 
