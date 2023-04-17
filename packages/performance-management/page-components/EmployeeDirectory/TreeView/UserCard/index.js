@@ -102,7 +102,7 @@ function UserCard({
 						</div>
 					</div>
 				</div>
-				{user.team_count !== 0 && <div className={styles.team_count}>{user.team_count || 0}</div>}
+				{!!user.team_count && <div className={styles.team_count}>{user.team_count}</div>}
 			</div>
 		);
 	}
