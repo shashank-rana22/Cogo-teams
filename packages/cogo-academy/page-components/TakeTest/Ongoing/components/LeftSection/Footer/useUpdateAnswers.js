@@ -19,7 +19,7 @@ const getAnswerState = ({ type, answer, subjectiveAnswer, question_type }) => {
 		answerState = type;
 	} else if (question_type === 'subjective' && subjectiveAnswer.toString('html') === '<p><br></p>') {
 		answerState = 'viewed';
-	} else if (isEmpty(answer)) {
+	} else if (question_type !== 'subjective' && isEmpty(answer)) {
 		answerState = 'viewed';
 	}
 	return answerState;

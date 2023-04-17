@@ -18,16 +18,24 @@ const TYPE_MAPPING = {
 
 };
 
+const PAYLOAD_TYPE_MAPPING = {
+	single_correct : 'stand_alone',
+	multi_correct  : 'stand_alone',
+	subjective     : 'subjective',
+};
+
 function useUpdateStandAloneTestQuestion({
 	questionSetId,
 	getTestQuestionTest,
 	setEditDetails,
 	setAllKeysSaved,
 	reset = () => {},
+	subjectiveEditorValue = {},
 	setQuestionToDelete = () => {},
 	listSetQuestions,
 	editDetails,
 	editorValue = {},
+	uploadable,
 }) {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
@@ -43,12 +51,15 @@ function useUpdateStandAloneTestQuestion({
 		try {
 			const { hasError, ...payload } = getPayload({
 				values,
-				type: 'stand_alone',
+				type: PAYLOAD_TYPE_MAPPING[question_type],
+				// type: 'stand_alone',
 				questionSetId,
 				action,
+				subjectiveEditorValue,
 				testQuestionId,
 				editDetails,
 				editorValue,
+				uploadable,
 			});
 
 			if (!isEmpty(hasError)) {

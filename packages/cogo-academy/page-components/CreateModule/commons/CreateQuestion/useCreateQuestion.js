@@ -44,6 +44,7 @@ const useCreateQuestion = ({
 		test_question_answers = [],
 		explanation = [],
 		character_limit = '',
+		allow_file_upload,
 	} = editDetails || {};
 
 	const {
@@ -71,9 +72,11 @@ const useCreateQuestion = ({
 		setEditDetails,
 		setAllKeysSaved,
 		reset,
+		subjectiveEditorValue,
 		listSetQuestions,
 		editDetails,
 		editorValue,
+		uploadable,
 	});
 
 	const {
@@ -94,6 +97,7 @@ const useCreateQuestion = ({
 				values,
 				action         : 'update',
 				testQuestionId : editDetailsId,
+				question_type,
 			});
 		} else {
 			createTestQuestion({ values, editDetails });
@@ -122,6 +126,7 @@ const useCreateQuestion = ({
 			action         : 'delete',
 			reset,
 			testQuestionId : editDetailsId,
+			question_type,
 		});
 	};
 
@@ -187,6 +192,7 @@ const useCreateQuestion = ({
 			setValue('subjective.0.question_text', question_text);
 			setValue('subjective.0.difficulty_level', difficulty_level);
 			setValue('subjective.0.character_limit', character_limit);
+			setValue('subjective.0.allow_file_upload', allow_file_upload);
 
 			setSubjectiveEditorValue(isEmpty(explanation)
 				? RichTextEditor.createEmptyValue()
@@ -224,6 +230,7 @@ const useCreateQuestion = ({
 		test_case_study_questions,
 		test_question_answers,
 		character_limit,
+		allow_file_upload,
 	]);
 
 	return {

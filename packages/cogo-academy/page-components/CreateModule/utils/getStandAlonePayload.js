@@ -19,8 +19,6 @@ const getStandAlonePayload = ({
 		options = [],
 	} = question?.[0] || {};
 
-	console.log('question', values);
-
 	if (action === 'delete') {
 		return { id: testQuestionId, status: 'inactive' };
 	}

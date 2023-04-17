@@ -60,6 +60,7 @@ function Subjective({
 						type="string"
 						multiline
 						variant="filled"
+						placeholder="Start Typing Here..."
 						rootStyle={{
 							zIndex    : 0,
 							position  : 'relative',

@@ -48,7 +48,6 @@ function SingleQuestionComponent({
 		setEditorValue,
 		...restProps,
 	});
-
 	return (
 		<div className={styles.container}>
 			<div
@@ -105,6 +104,7 @@ function SingleQuestionComponent({
 							type="string"
 							multiline
 							variant="filled"
+							placeholder="Start Typing Here..."
 							rootStyle={{
 								zIndex    : 0,
 								position  : 'relative',
@@ -155,8 +155,8 @@ function SingleQuestionComponent({
 								/>
 							</div>
 						</div>
-
 					)
+
 				}
 
 			{			questionTypeWatch !== 'subjective' && (
@@ -174,6 +174,7 @@ function SingleQuestionComponent({
 						type="string"
 						multiline
 						variant="filled"
+						placeholder="Start Typing Here..."
 						rootStyle={{
 							zIndex    : 0,
 							position  : 'relative',
