@@ -61,11 +61,18 @@ const useGetTableColumns = ({
 			Header   : 'ANSWER TYPE',
 			id       : 'answer_type',
 			accessor : (item) => (
-				<section>
-					{item?.question_type !== 'case_study'
-						? startCase(item?.question_type)
-						: <CaseAnswerType item={item} caseToShow={caseToShow} />}
-				</section>
+				<div>
+					{
+					item?.question_type !== 'subjective' && (
+						<section>
+							{item?.question_type === 'case_study'
+								? startCase(item?.question_type)
+								: <CaseAnswerType item={item} caseToShow={caseToShow} />}
+						</section>
+					)
+				}
+				</div>
+
 			),
 		},
 		{

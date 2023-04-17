@@ -38,6 +38,8 @@ function QuestionForm({
 	setEditorValue,
 	subjectiveEditorValue,
 	setSubjectiveEditorValue = () => {},
+	uploadable,
+	setUploadable,
 }) {
 	const NAME_CONTROL_MAPPING = useMemo(() => {
 		const hash = {};
@@ -111,6 +113,8 @@ function QuestionForm({
 							setEditorValue={setEditorValue}
 							subjectiveEditorValue={subjectiveEditorValue}
 							setSubjectiveEditorValue={setSubjectiveEditorValue}
+							uploadable={uploadable}
+							setUploadable={setUploadable}
 							name={NAME_ARRAY_MAPPING[questionTypeWatch]}
 							errors={questionTypeWatch === 'stand_alone'
 								? errors.question?.[index] : errors?.case_questions?.[index]}

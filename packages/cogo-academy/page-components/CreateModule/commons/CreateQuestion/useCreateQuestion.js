@@ -24,6 +24,7 @@ const useCreateQuestion = ({
 	listSetQuestions,
 }) => {
 	const [questionTypeWatch, setQuestionTypeWatch] = useState('stand_alone');
+	const [uploadable, setUploadable] = useState('false');
 	const [editorValue, setEditorValue] = useState(
 		questionTypeWatch === 'stand_alone'
 			? { question_0_explanation: RichTextEditor.createEmptyValue() }
@@ -42,6 +43,8 @@ const useCreateQuestion = ({
 		test_case_study_questions = [],
 		test_question_answers = [],
 		explanation = [],
+		character_limit = '',
+		allow_file_upload,
 	} = editDetails || {};
 
 	const {
@@ -59,6 +62,8 @@ const useCreateQuestion = ({
 		editorValue,
 		subjectiveEditorValue,
 		setSubjectiveEditorValue,
+		uploadable,
+		setUploadable,
 	});
 
 	const { updateStandAloneTestQuestion, loading: updateStandAloneLoading } = useUpdateStandAloneTestQuestion({
@@ -67,9 +72,11 @@ const useCreateQuestion = ({
 		setEditDetails,
 		setAllKeysSaved,
 		reset,
+		subjectiveEditorValue,
 		listSetQuestions,
 		editDetails,
 		editorValue,
+		uploadable,
 	});
 
 	const {
@@ -85,12 +92,12 @@ const useCreateQuestion = ({
 	});
 
 	const onSubmit = (values) => {
-		console.log('values', values);
 		if (!isNewQuestion && question_type !== 'case_study') {
 			updateStandAloneTestQuestion({
 				values,
 				action         : 'update',
 				testQuestionId : editDetailsId,
+				question_type,
 			});
 		} else {
 			createTestQuestion({ values, editDetails });
@@ -119,6 +126,7 @@ const useCreateQuestion = ({
 			action         : 'delete',
 			reset,
 			testQuestionId : editDetailsId,
+			question_type,
 		});
 	};
 
@@ -179,6 +187,16 @@ const useCreateQuestion = ({
 					setValue(`${subChildKey}.is_correct`, is_correct ? 'true' : 'false');
 				});
 			});
+		} else if (question_type === 'subjective') {
+			setValue('question_type', question_type);
+			setValue('subjective.0.question_text', question_text);
+			setValue('subjective.0.difficulty_level', difficulty_level);
+			setValue('subjective.0.character_limit', character_limit);
+			setValue('subjective.0.allow_file_upload', allow_file_upload);
+
+			setSubjectiveEditorValue(isEmpty(explanation)
+				? RichTextEditor.createEmptyValue()
+				: RichTextEditor?.createValueFromString((explanation?.[0] || ''), 'html'));
 		} else {
 			const childKey = 'question.0';
 
@@ -211,6 +229,8 @@ const useCreateQuestion = ({
 		setValue,
 		test_case_study_questions,
 		test_question_answers,
+		character_limit,
+		allow_file_upload,
 	]);
 
 	return {
@@ -228,6 +248,8 @@ const useCreateQuestion = ({
 		updateStandAloneLoading,
 		subjectiveEditorValue,
 		setSubjectiveEditorValue,
+		uploadable,
+		setUploadable,
 		...restFormProps,
 	};
 };

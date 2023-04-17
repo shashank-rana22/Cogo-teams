@@ -31,6 +31,7 @@ function LeftSection({
 }) {
 	const [answer, setAnswer] = useState('');
 	const [subjectiveAnswer, setSubjectiveAnswer] = useState(RichTextEditor.createEmptyValue());
+	const [uploadValue, setUploadValue] = useState();
 
 	return (
 		<div className={styles.container}>
@@ -56,6 +57,8 @@ function LeftSection({
 				setSubQuestion={setSubQuestion}
 				subjectiveAnswer={subjectiveAnswer}
 				setSubjectiveAnswer={setSubjectiveAnswer}
+				uploadValue={uploadValue}
+				setUploadValue={setUploadValue}
 			/>
 
 			<Footer
@@ -73,6 +76,8 @@ function LeftSection({
 				loading={loading}
 				subjectiveAnswer={subjectiveAnswer}
 				setSubjectiveAnswer={setSubjectiveAnswer}
+				uploadValue={uploadValue}
+				setUploadValue={setUploadValue}
 			/>
 		</div>
 	);

@@ -18,6 +18,8 @@ function useCreateTestQuestion({
 	listSetQuestions,
 	editorValue = {},
 	subjectiveEditorValue = '',
+	setUploadable,
+	uploadable,
 }) {
 	const [{ loading: loadingCaseStudy }, triggerCaseStudy] = useRequest({
 		method : 'post',
@@ -26,7 +28,7 @@ function useCreateTestQuestion({
 
 	const [{ loading: loadingNonCase }, triggerNonCase] = useRequest({
 		method : 'post',
-		url    : '/create_non_case_test_question',
+		url    : '/create_non_case_study_test_question',
 	}, { manual: true });
 
 	const TriggerMapping = {
@@ -44,9 +46,9 @@ function useCreateTestQuestion({
 			type: question_type,
 			editorValue,
 			subjectiveEditorValue,
+			uploadable,
+			setUploadable,
 		});
-
-		console.log('payload', payload);
 
 		if (!isEmpty(hasError)) {
 			hasError.forEach((item) => {
@@ -57,7 +59,6 @@ function useCreateTestQuestion({
 		const triggerToUse = TriggerMapping?.[question_type] || triggerNonCase;
 
 		try {
-			console.log('payload', payload);
 			await triggerToUse({
 				data: payload,
 			});

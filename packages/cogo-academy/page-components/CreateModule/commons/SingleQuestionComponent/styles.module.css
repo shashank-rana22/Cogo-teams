@@ -1,111 +1,136 @@
 .container {
-  padding: 20px;
-  padding-bottom: 32px;
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
+	padding: 20px;
+	padding-bottom: 32px;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
 }
 
 .question_type {
-  margin-left: 20px;
+	margin-left: 20px;
 
-  @media (max-width: 768px) {
-    margin-left: unset;
-  }
+	@media (max-width: 768px) {
+		margin-left: unset;
+	}
 }
 
 .first_row {
-  display: flex;
+	display: flex;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: center;
+	@media (max-width: 768px) {
+		flex-direction: column;
+		align-items: center;
 
-    .input_container {
-      margin-bottom: 12px;
-    }
-  }
+		.input_container {
+			margin-bottom: 12px;
+		}
+	}
 
-  .question_text_err {
-    border: 1px solid #ee3425;
-  }
+	.question_text_err {
+		border: 1px solid #ee3425;
+	}
 
-  .question_type_err {
-    :global {
-      .ui_select_display_container {
-        border: 1px solid #ee3425;
-      }
-    }
-  }
+	.question_type_err {
+		:global {
+			.ui_select_display_container {
+				border: 1px solid #ee3425;
+			}
+		}
+	}
 
-  .question_type {
-    width: 246px;
-  }
+	.question_type {
+		width: 246px;
+	}
 }
 
 .textarea_container {
-  position: relative;
-  justify-content: space-between;
-  margin-top: 24px;
-  margin-bottom: 12px;
-  background: rgb(255 255 255 / 70%);
-  border-radius: 6px;
+	position: relative;
+	justify-content: space-between;
+	margin-top: 24px;
+	margin-bottom: 12px;
+	background: rgb(255 255 255 / 70%);
+	border-radius: 6px;
 }
 
 .difficulty_level {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 32px;
 
-  :global {
-    .ui_chip_container {
-      height: 28px !important;
-    }
-  }
+	:global {
+		.ui_chip_container {
+			height: 28px !important;
+		}
+	}
 
-  @media (max-width: 768px) {
-    flex-direction: column;
+	@media (max-width: 768px) {
+		flex-direction: column;
 
-    :global {
-      .ui_chip_container {
-        min-width: 80px;
-      }
-    }
-  }
+		:global {
+			.ui_chip_container {
+				min-width: 80px;
+			}
+		}
+	}
 }
 
 .label {
-  margin-right: 20px;
+	margin-right: 20px;
 }
 
 .control {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-  @media (max-width: 768px) {
-    margin-top: 4px;
-  }
+	@media (max-width: 768px) {
+		margin-top: 4px;
+	}
 }
 
 .error_msg {
-  margin: 0;
-  font-size: 12px;
-  font-weight: 500;
-  color: #cb6464;
+	margin: 0;
+	font-size: 12px;
+	font-weight: 500;
+	color: #cb6464;
 }
 
 .button_container {
-  display: flex;
-  float: right;
+	display: flex;
+	float: right;
 }
 
 .editor {
-  margin-top: 12px;
+	margin-top: 12px;
 }
 
 .subjective_editor {
-  margin-top: 12px;
+	margin-top: 12px;
 }
+
 .diff_level {
-  display: flex;
+	display: flex;
+}
+
+.character_limit {
+	display: flex;
+	width: 40%;
+}
+
+.uploadable {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 24px;
+
+	:global {
+		.ui_checkbox_container {
+			padding: 0;
+		}
+	}
+}
+
+.set_limit {
+	display: flex;
+	align-items: center;
+	width: 100%;
 }

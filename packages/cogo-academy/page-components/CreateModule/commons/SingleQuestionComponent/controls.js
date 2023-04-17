@@ -16,9 +16,8 @@ const getControls = ({ mode }) => [
 		options     : [
 			{ label: 'Single Correct', value: 'single_correct' },
 			{ label: 'Multi Correct', value: 'multi_correct' },
-			{ label: 'Subjective Answer', value: 'subjective_answer' },
 		],
-		// rules: { required: 'This is required' },
+		rules: { required: 'This is required' },
 	},
 	{
 		name        : 'options',
@@ -72,6 +71,11 @@ const getControls = ({ mode }) => [
 		disabled    : mode === 'view',
 		placeholder : 'Type Explanation...',
 		rows        : 4,
+	},
+	{
+		name  : 'upload_answer',
+		type  : 'checkbox',
+		label : 'Option to Upload Answer',
 	},
 ];
 

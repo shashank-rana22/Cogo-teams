@@ -14,7 +14,6 @@ function BodyTextEditor({
 		setEditorValue(value);
 		setEditorError(false);
 	};
-	console.log(editorValue.toString('html'));
 	return (
 		<RichTextEditor
 			value={editorValue}

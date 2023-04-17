@@ -1,4 +1,4 @@
-import { Radio, Button } from '@cogoport/components';
+import { Checkbox, Button } from '@cogoport/components';
 import { SelectController, InputController, ChipsController } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 
@@ -27,6 +27,8 @@ function SingleQuestionComponent({
 	editorValue,
 	setEditorValue,
 	subjectiveEditorValue,
+	setUploadable = () => {},
+	uploadable,
 	setSubjectiveEditorValue = () => {},
 	...restProps
 }) {
@@ -46,8 +48,6 @@ function SingleQuestionComponent({
 		setEditorValue,
 		...restProps,
 	});
-	// console.log(subjectiveEditorValue.toString('html'));
-	// console.log(questionTypeWatch);
 	return (
 		<div className={styles.container}>
 			<div
@@ -104,6 +104,7 @@ function SingleQuestionComponent({
 							type="string"
 							multiline
 							variant="filled"
+							placeholder="Start Typing Here..."
 							rootStyle={{
 								zIndex    : 0,
 								position  : 'relative',
@@ -131,29 +132,32 @@ function SingleQuestionComponent({
 						</div>
 					) : null
 				}
-				{
-					questionTypeWatch === 'subjective' ? (
-						<div style={{ marginTop: '12px' }}>
-							Set Character Limit
-							<InputController
-								control={control}
-								name={`${name}.${index}.character_limit`}
-								placeholder="No Limit"
-								type="number"
-							/>
-						</div>
-					) : null
-				}
 
 			</div>
 
 			{
-	questionTypeWatch === 'subjective' && (
-		<div>
-			<Radio name="upload" label="Option of Upload Answer" />
-		</div>
-	)
-}
+					questionTypeWatch === 'subjective' && (
+						<div className={styles.uploadable}>
+							<div>
+								<Checkbox
+									name="upload"
+									label="Option of Upload Answer"
+									onChange={() => { setUploadable(!uploadable); }}
+								/>
+							</div>
+							<div className={styles.character_limit}>
+								<div className={styles.set_limit}>Set Character Limit</div>
+								<InputController
+									control={control}
+									name={`${name}.${index}.character_limit`}
+									placeholder="No Limit"
+									type="number"
+								/>
+							</div>
+						</div>
+					)
+
+				}
 
 			{			questionTypeWatch !== 'subjective' && (
 				<div className={styles.textarea_container}>
@@ -170,6 +174,7 @@ function SingleQuestionComponent({
 						type="string"
 						multiline
 						variant="filled"
+						placeholder="Start Typing Here..."
 						rootStyle={{
 							zIndex    : 0,
 							position  : 'relative',

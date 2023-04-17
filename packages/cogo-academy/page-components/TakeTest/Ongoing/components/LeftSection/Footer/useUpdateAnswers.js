@@ -12,15 +12,16 @@ if (typeof window !== 'undefined') {
 	RichTextEditor = require('react-rte').default;
 }
 
-const getAnswerState = ({ type, answer }) => {
+const getAnswerState = ({ type, answer, subjectiveAnswer, question_type }) => {
 	let answerState = 'answered';
 
 	if (type === 'marked_for_review') {
 		answerState = type;
-	} else if (isEmpty(answer)) {
+	} else if (question_type === 'subjective' && subjectiveAnswer.toString('html') === '<p><br></p>') {
+		answerState = 'viewed';
+	} else if (question_type !== 'subjective' && isEmpty(answer)) {
 		answerState = 'viewed';
 	}
-	// change this for subjective
 	return answerState;
 };
 
@@ -37,6 +38,8 @@ function useUpdateAnswers({
 	fetchQuestions,
 	total_question,
 	subjectiveAnswer,
+	uploadValue,
+	setUploadValue,
 	setSubjectiveAnswer = () => {},
 }) {
 	const {
@@ -55,7 +58,7 @@ function useUpdateAnswers({
 	const { id, question_type, sub_questions = [] } = data || {};
 
 	const handleUpdate = async ({ type }) => {
-		const answerState = getAnswerState({ type, answer });
+		const answerState = getAnswerState({ type, answer, subjectiveAnswer, question_type });
 
 		let answerArray = answer;
 
@@ -73,7 +76,10 @@ function useUpdateAnswers({
 				? { test_case_study_question_id: sub_questions?.[subQuestion - 1]?.id } : null),
 
 			...(question_type === 'subjective'
-				? { answer_text: subjectiveAnswer.toString('html') } : null),
+				? { subjective_answer_text: subjectiveAnswer.toString('html') } : null),
+
+			...(question_type === 'subjective'
+				? { subjective_file_url: uploadValue } : null),
 
 			...(question_type !== 'subjective'
 				? { test_question_answer_ids: answerArray || [] } : null),
@@ -122,6 +128,7 @@ function useUpdateAnswers({
 		});
 		setSubQuestion(1);
 		setSubjectiveAnswer(RichTextEditor.createEmptyValue());
+		setUploadValue('');
 	};
 
 	const handleLeaveTest = () => {

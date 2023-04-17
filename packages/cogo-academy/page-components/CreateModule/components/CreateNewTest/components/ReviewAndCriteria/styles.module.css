@@ -133,3 +133,32 @@
 	font-size: 14px;
 	color: #4f4f4f;
 }
+
+.list_div {
+	display: flex;
+	align-items: center;
+	margin-left: 14px;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.list_user_container {
+	display: flex;
+	font-size: 14px;
+	font-weight: 400;
+	color: #4f4f4f;
+}
+
+.list_text {
+	width: 100px;
+	margin-left: 4px;
+	overflow: hidden;
+	font-size: 12px;
+	text-decoration: underline;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.list_user_tooltip {
+	align-self: center;
+}
