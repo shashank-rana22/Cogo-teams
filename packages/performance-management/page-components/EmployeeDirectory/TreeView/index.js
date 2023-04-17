@@ -116,7 +116,7 @@ function TreeView({ viewType = false }) {
 						<div className={styles.line} />
 
 						<div className={styles.reportee_level}>
-							{!isEmpty(users.selectedReportee) && (
+							{!isEmpty(users.selectedReportee) ? (
 								<div className={styles.user_level} ref={reporteeLevelRef}>
 									<UserCard
 										loading={loading}
@@ -126,21 +126,22 @@ function TreeView({ viewType = false }) {
 										key={users.selectedReportee?.id}
 									/>
 								</div>
+							) : (
+								<div className={styles.all_reportees}>
+									{(users.reporteeLevel || []).map((user) => (
+										<UserCard
+											loading={loading}
+											user={user}
+											clickable
+											params={params}
+											setParams={setParams}
+											key={user.id}
+											isLastLevel={user.is_last_level}
+										/>
+									))}
+								</div>
 							)}
 
-							<div className={styles.all_reportees}>
-								{(users.reporteeLevel || []).map((user) => (
-									<UserCard
-										loading={loading}
-										user={user}
-										clickable
-										params={params}
-										setParams={setParams}
-										key={user.id}
-										isLastLevel={user.is_last_level}
-									/>
-								))}
-							</div>
 						</div>
 					</>
 				)}
