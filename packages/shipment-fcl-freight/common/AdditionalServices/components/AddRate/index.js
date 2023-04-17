@@ -1,12 +1,16 @@
 import { useForm } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useCreateShipmentAdditionalService from '../../../../hooks/useCreateShipmentAdditionalService';
+import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
 
 import ActionsToShow from './ActionToShow';
 import BillToCustomer from './BillToCustomer';
+import getPayload from './getPayload';
+import getWhoIsAddingRate from './getWhoIsAddingRate';
 import RenderAddRateForm from './RenderAddRateForm';
+import STAKE_HOLDER_SPECIFIC_PROPS from './stakeHolderCongifs';
 import styles from './styles.module.css';
 
 const showRemarksStatus = [
@@ -27,13 +31,24 @@ function AddRate({
 	filters,
 	updateResponse = () => {},
 	setShowChargeCodes = () => {},
+	source = '',
+	isSeller = false,
 }) {
 	const [billToCustomer, setBillToCustomer] = useState(false);
+
+	const whoIsAddingRate = getWhoIsAddingRate({
+		isSeller,
+		item,
+		status,
+	});
+
+	const preProps = STAKE_HOLDER_SPECIFIC_PROPS[whoIsAddingRate];
 
 	const {
 		handleSubmit,
 		control,
 		formState: { errors },
+		setValue,
 	} = useForm();
 
 	const afterAddRate = () => {
@@ -44,43 +59,31 @@ function AddRate({
 		refetch();
 	};
 
+	useEffect(() => {
+		setValue('price', item?.price);
+		setValue('buy_price', item?.buy_price);
+		setValue('quantity', item?.quantity);
+		setValue('unit', item?.unit);
+		setValue('currency', item?.currency);
+	}, [setValue, item]);
+
 	const {
-		loading, apiTrigger,
+		loading, apiTrigger: apiTriggerCreate,
 	} = useCreateShipmentAdditionalService({
 		refetch        : afterAddRate,
 		successMessage : 'Successfully Added Additional Service',
 	});
 
+	const { handleAddSellPrice: apiTriggerUpdate } = useUpdateShipmentAdditionalService({ refetch: afterAddRate });
+
 	const onAddRate = (data) => {
-		const addedService = (item.services || []).find((service) => {
-			if (filters?.service_type?.includes('?')) {
-				return service.id === filters?.service_type?.split('?')?.[1];
-			}
-			return service.service_type === item?.service_type;
-		});
+		const payload = getPayload(data, item, preProps, filters, billToCustomer);
 
-		const { name, code, shipment_id, service_type, pending_task_id } = item;
-		const { quantity, buy_price, currency, unit, service_provider_id, alias, price } = data;
-
-		const payload = {
-			name,
-			code,
-			shipment_id,
-			service_type,
-			service_id            : addedService?.id,
-			is_rate_available     : true,
-			quantity              : Number(quantity) || undefined,
-			buy_price             : Number(buy_price) || undefined,
-			currency,
-			unit,
-			price                 : Number(price) || undefined,
-			service_provider_id   : service_provider_id || undefined,
-			pending_task_id       : pending_task_id || undefined,
-			add_to_sell_quotation : true,
-			alias                 : alias || undefined,
-		};
-
-		apiTrigger(payload);
+		if (preProps.api === '/create_shipment_additional_service') {
+			apiTriggerCreate(payload);
+		} else {
+			apiTriggerUpdate(payload);
+		}
 	};
 
 	if (
@@ -118,6 +121,7 @@ function AddRate({
 				control={control}
 				errors={errors}
 				serviceData={item}
+				source={source}
 			/>
 
 			<ActionsToShow

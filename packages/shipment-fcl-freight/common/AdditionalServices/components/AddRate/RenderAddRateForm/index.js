@@ -9,14 +9,14 @@ function RenderAddRateForm({
 	control,
 	errors,
 	serviceData = {},
+	source = '',
 }) {
-	const { formControl } = controls({ serviceData });
+	const { formControl } = controls({ serviceData, source });
 
 	const controlTypeMapping = {
-		select      : SelectController,
-		text        : InputController,
-		number      : InputController,
-		asyncSelect : AsyncSelectController,
+		select : SelectController,
+		text   : InputController,
+		number : InputController,
 	};
 
 	function FormElement({ name, label, type, ...rest }) {

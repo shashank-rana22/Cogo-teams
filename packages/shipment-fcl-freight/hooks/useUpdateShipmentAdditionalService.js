@@ -165,6 +165,14 @@ const useUpdateShipmentAdditionalService = ({
 		}
 	};
 
+	const handleAddSellPrice = async (payload) => {
+		try {
+			await handleSubmit(payload);
+		} catch (err) {
+			toastApiError(err);
+		}
+	};
+
 	return {
 		handleShipperConfirm,
 		handleShipperRevision,
@@ -176,6 +184,7 @@ const useUpdateShipmentAdditionalService = ({
 		handleInvoicingParty,
 		updateBillingInfo,
 		cancelAdditionalService,
+		handleAddSellPrice,
 		remarks,
 		setRemarks,
 		loading,

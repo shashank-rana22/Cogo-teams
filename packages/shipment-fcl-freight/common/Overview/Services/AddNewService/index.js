@@ -17,7 +17,9 @@ function AddNewService({
 	&& upsellableService.service_type === 'fcl_freight_local_service'
 	&& primary_service?.bl_category === 'hbl';
 
-	const [upsellModal, setUpsellModal] = useState(haveToUpsell);
+	// const [upsellModal, setUpsellModal] = useState(haveToUpsell);
+
+	const [upsellModal, setUpsellModal] = useState(false);
 
 	/* These services cant be upselled */
 
