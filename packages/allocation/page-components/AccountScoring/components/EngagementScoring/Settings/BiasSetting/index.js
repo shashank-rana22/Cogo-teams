@@ -43,17 +43,15 @@ function BiasSetting() {
 		<Card className={styles.card}>
 			<Card.Title title={<Header editing={editing} setEditing={setEditing} />} />
 
-			{
-                editing
-                	? (
-	<EditSetting
-		ITEM_ARRAY={BIAS_ARRAY}
-		useGetControls={getBiasControl}
-		inputStyle="bias_input"
-	/>
-                	)
-                	: <Table columns={columns} data={data} />
-            }
+			{ editing
+				? (
+					<EditSetting
+						ITEM_ARRAY={BIAS_ARRAY}
+						useGetControls={getBiasControl}
+						inputStyle="bias_input"
+					/>
+				)
+				: <Table columns={columns} data={data} />}
 
 		</Card>
 	);

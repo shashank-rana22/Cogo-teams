@@ -1,18 +1,41 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.warmth_container {
+	flex-basis: 20%;
+	margin-right: 20px;
+}
+
+.headers {
+	padding: 8px;
+	font-size: 12px;
+}
+
 .label {
-    font-size: 12px;
-    font-weight: 600;
-    color: #4f4f4f;
-    margin: 8px;
+	margin: 8px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.input_row {
+	display: flex;
+	flex-basis: 100%;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .input {
-    width: 240px;
+	flex-basis: 22%;
 }
 
 .bias_input {
-    width: 300px;
+	flex-basis: 30%;
 }
 
 .distribution_input {
-    width: 300px;
+	flex-basis: 44%;
 }

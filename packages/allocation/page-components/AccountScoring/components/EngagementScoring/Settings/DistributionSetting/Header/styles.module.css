@@ -1,21 +1,30 @@
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .heading {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .label {
-    font-size: 16px;
-    font-weight: 600;
-    color: #4f4f4f;
+	font-size: 16px;
+	font-weight: 600;
+	color: #4f4f4f;
 }
 
 .btn {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
+}
+
+.word_break {
+	word-break: break-word;
+}
+
+.info_icon {
+	display: flex;
+	margin-left: 8px;
 }
