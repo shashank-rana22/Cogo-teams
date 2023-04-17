@@ -89,10 +89,10 @@ function QnA({ user_name = '', test_id, user_id, view, is_evaluated = false }) {
 				<div className={styles.arrow_container}>
 					<IcMArrowDown
 						className={styles.animated_arrow}
-						width={80}
-						height={80}
+						width={60}
+						height={60}
 					/>
-					<IcMArrowDown width={80} height={80} />
+					<IcMArrowDown width={60} height={60} />
 				</div>
 			)}
 		</div>

@@ -50,8 +50,7 @@
 
 .download_file_container {
 	display: flex;
-	align-items: first baseline;
-	justify-content: space-between;
+	flex-direction: column;
 
 	:global {
 		.ui_button_container {
@@ -60,6 +59,11 @@
 			background-color: #fff;
 		}
 	}
+}
+
+.download_button {
+	width: fit-content;
+	margin-bottom: 12px;
 }
 
 .answer_text {

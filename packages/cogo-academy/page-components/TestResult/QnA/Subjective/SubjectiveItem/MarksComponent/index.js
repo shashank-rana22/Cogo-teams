@@ -53,7 +53,7 @@ function MarksComponent({
 					) : null}
 				</div>
 			) : (
-				<div className={styles.marks_container}>
+				<div className={styles.marks_obtained_container}>
 					<div className={styles.text}>Marks Obtained</div>
 					<Pill size="lg" color="green"><strong>{`${assign_marks || 0}/10`}</strong></Pill>
 				</div>
