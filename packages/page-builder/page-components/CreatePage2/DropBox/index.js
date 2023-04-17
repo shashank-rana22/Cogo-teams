@@ -8,18 +8,10 @@ import React, {
 } from 'react';
 import { useDrop } from 'react-dnd';
 
+import VALID_ITEM_TYPES from '../../../configurations/accept-items';
 import RightPanel from '../RightPanel';
 
 import styles from './styles.module.css';
-
-const ITEM_TYPES = {
-	text        : 'text',
-	button      : 'button',
-	image       : 'image',
-	container   : 'container',
-	rootElement : 'rootElement',
-
-};
 
 function Stage({
 	component,
@@ -104,6 +96,7 @@ function Stage({
 					selectedItem={selectedItem}
 					setShowContentModal={setShowContentModal}
 					setParentComponentId={setParentComponentId}
+					setSelectedItem={setSelectedItem}
 				/>
 			</div>
 		);
@@ -117,7 +110,7 @@ function Stage({
 
 	//! Portal :: useDrop for stage process
 	const [{ canDrop, isOver, draggingItemType }, dropRef] = useDrop({
-		accept : Object.keys(ITEM_TYPES),
+		accept : Object.keys(VALID_ITEM_TYPES),
 		drop   : (droppedItem) => {
 			const { id } = droppedItem;
 			if (!id) {

@@ -1,4 +1,4 @@
-import { IcMFolder, IcMImage, IcMEdit } from '@cogoport/icons-react';
+import { IcMFolder, IcMImage, IcMEdit, IcMVideoCall } from '@cogoport/icons-react';
 
 const contents = [
 	{
@@ -17,9 +17,19 @@ const contents = [
 		type : 'button',
 		icon : <IcMFolder />,
 		name : 'button',
+	},
+	{
+		type : 'video',
+		icon : <IcMVideoCall />,
+		name : 'video',
 
 	},
+	{
+		type : 'html',
+		icon : <img alt="" src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/html.svg" height="20px" />,
+		name : 'html',
 
+	},
 ];
 
 export default contents;
