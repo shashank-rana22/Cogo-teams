@@ -201,13 +201,13 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 							)}
 						</div>
 						<div className={styles.border_left} />
-						<div style={{ marginRight: '24px' }}>
+						<div>
 							{receivablesLoading ? (
 								<div style={{ alignItems: 'center' }}>
 									<Placeholder height="30px" width="250px" margin="16px 20px 50px 0px" />
 								</div>
 							) : (
-								<div style={{ marginRight: '30px', marginTop: '20px' }}>
+								<div style={{ marginTop: '20px' }}>
 									<div style={{ display: 'flex' }}>
 										<span>
 											{showInTooltop(
@@ -230,7 +230,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 
 												</div>
 												<div>
-													{onAccountChangeFromYesterday}
+													{onAccountChangeFromYesterday.toFixed(4)}
 												</div>
 											</div>
 
@@ -249,7 +249,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 									<Placeholder height="30px" width="250px" margin="10px 20px 50px 0px" />
 								</div>
 							) : (
-								<div style={{ marginRight: '30px', marginTop: '20px' }}>
+								<div style={{ marginTop: '20px', marginRight: '20px' }}>
 									<div style={{ display: 'flex' }}>
 										<span>
 											{showInTooltop(
@@ -261,7 +261,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 									</div>
 
 									<div className={styles.accounts_text_style}>
-										<div style={{ marginRight: '2px' }}>
+										<div>
 
 											<div className={styles.account_change_text_style}>
 												<div className={styles.color_box_outstanding} />
@@ -272,7 +272,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 
 												</div>
 												<div>
-													{outstandingChangeFromYesterday}
+													{outstandingChangeFromYesterday.toFixed(4)}
 												</div>
 											</div>
 
@@ -394,7 +394,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 									<Placeholder height="30px" width="250px" margin="16px 20px 50px 0px" />
 								</div>
 							) : (
-								<div style={{ marginRight: '30px', marginTop: '20px' }}>
+								<div style={{ marginTop: '20px' }}>
 									<div style={{ display: 'flex' }}>
 										<span>
 											{showInTooltop(
@@ -417,7 +417,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 
 												</div>
 												<div>
-													{AccountChangeFromYesterday}
+													{AccountChangeFromYesterday.toFixed(4)}
 												</div>
 											</div>
 
@@ -436,7 +436,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 									<Placeholder height="30px" width="250px" margin="16px 20px 50px 0px" />
 								</div>
 							) : (
-								<div style={{ marginRight: '30px', marginTop: '20px' }}>
+								<div style={{ marginTop: '20px' }}>
 									<div style={{ display: 'flex' }}>
 										<span>
 											{showInTooltop(
@@ -459,7 +459,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 
 												</div>
 												<div>
-													{outstandingChangeYesterday}
+													{outstandingChangeYesterday.toFixed(4)}
 												</div>
 											</div>
 
