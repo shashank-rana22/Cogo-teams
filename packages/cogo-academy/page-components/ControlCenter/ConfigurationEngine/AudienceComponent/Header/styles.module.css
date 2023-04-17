@@ -1,11 +1,9 @@
-.container {
-	margin-top: 12px;
-}
 
 .header_container {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	margin-top: 12px;
 }
 
 .tabs_container {

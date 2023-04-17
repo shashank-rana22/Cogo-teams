@@ -20,17 +20,19 @@ function AudianceTable({
 	const { list:listTagsData = [], total_count } = data || {};
 	const router = useRouter();
 
+	const onClick = () => {
+		router.push(
+			'/learning/faq/create/configuration?create=audience',
+			'/learning/faq/create/configuration?create=audience',
+		);
+		setConfigurationPage('audience');
+	};
+
 	if (audianceLoading) {
 		return <LoadingState />;
 	}
+
 	const renderTable = () => {
-		const onClick = () => {
-			router.push(
-				'/learning/faq/create/configuration?create=audience',
-				'/learning/faq/create/configuration?create=audience',
-			);
-			setConfigurationPage('audience');
-		};
 		if (isEmpty(data?.list)) {
 			return (
 				activeAudience === 'active' ? (
@@ -50,12 +52,10 @@ function AudianceTable({
 
 		return (
 			<div>
-				<div>
-					<div className={styles.table}>
-						<StyledTable columns={columns} data={listTagsData} />
-					</div>
-
+				<div className={styles.table}>
+					<StyledTable columns={columns} data={listTagsData} />
 				</div>
+
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="table"
@@ -69,12 +69,7 @@ function AudianceTable({
 		);
 	};
 
-	return (
-		<>
-			{renderTable()}
-		</>
-
-	);
+	return renderTable();
 }
 
 export default AudianceTable;
