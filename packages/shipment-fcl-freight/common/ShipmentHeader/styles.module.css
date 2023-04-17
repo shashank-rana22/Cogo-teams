@@ -55,7 +55,7 @@
 }
 
 .button {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	color: var(--color-primary-error-red-2);
 	text-decoration: underline;
 	cursor: pointer;
@@ -66,8 +66,8 @@
 }
 
 .cancel_button {
-	fill: var(--color-primary-error-red-2);
 	position: relative;
 	right: -10px;
 	cursor: pointer;
+	fill: var(--color-primary-error-red-2);
 }

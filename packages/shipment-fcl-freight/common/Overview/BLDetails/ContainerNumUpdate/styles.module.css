@@ -35,3 +35,11 @@
 	justify-content: center;
 	padding-bottom: 20px;
 }
+
+.custom_modal {
+	:global {
+		.ui_button_container:not(:first-of-type) {
+			margin-left: 10px;
+		}
+	}
+}

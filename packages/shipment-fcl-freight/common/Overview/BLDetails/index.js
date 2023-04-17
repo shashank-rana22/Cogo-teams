@@ -50,26 +50,19 @@ function BLDetails() {
 			{!isEmpty(list)
 				? (
 					<Button
-						onClick={(e) => {
-							setShowModal('container_mapping');
-							e.stopPropagation();
-						}}
+						onClick={() => setShowModal('container_mapping')}
 						size="md"
 						style={{ marginLeft: '6px' }}
 					>
 						BL Container Mapping
 					</Button>
 				)
-
 				: null}
 
 			{!isEmpty(containerDetailsArray)
 				? (
 					<Button
-						onClick={(e) => {
-							setShowModal('container_num_update');
-							e.stopPropagation();
-						}}
+						onClick={() => setShowModal('container_num_update')}
 						size="md"
 					>
 						Update Container Number

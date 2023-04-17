@@ -17,7 +17,7 @@ import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
 
 function List({ isSeller = false }) {
-	const { servicesList, refetchServices, shipment_data } = useContext(
+	const { servicesList, refetchServices, shipment_data, activeStakeholder } = useContext(
 		ShipmentDetailContext,
 	);
 
@@ -65,6 +65,7 @@ function List({ isSeller = false }) {
 									setShowModal,
 									setItem,
 									shipment_data,
+									activeStakeholder,
 								})}
 								refetch={handleRefetch}
 								services={servicesList}
@@ -135,6 +136,7 @@ function List({ isSeller = false }) {
 								status={item?.status}
 								setAddSellPrice={setShowModal}
 								updateResponse={updateResponse}
+								source="add_sell_price"
 							/>
 						</Modal.Body>
 					</Modal>

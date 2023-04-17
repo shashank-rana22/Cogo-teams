@@ -17,7 +17,7 @@ function ShipmentDetails() {
 
 	const { shipment_data } = get;
 
-	const { data = {} } = useGetBuyers({ shipment_id: shipment_data?.id });
+	const { data } = useGetBuyers({ shipment_id: shipment_data?.id });
 
 	const orgIds = Object.keys(data);
 	const { activeStakeholder } = useStakeholderCheck();

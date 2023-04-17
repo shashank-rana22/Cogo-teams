@@ -1,7 +1,11 @@
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
-import toastApiError from '../utils/toastApiError';
+const activeStakeholderMapping = {
+	consignee_shipper_booking_agent : 'consignee_shipper_id',
+	booking_agent                   : 'importer_exporter_id',
+};
 
 function useGetServices({ shipment_data = {}, additional_methods = [], activeStakeholder = '' }) {
 	const [{ loading : servicesLoading }, trigger] = useRequest({
@@ -11,7 +15,7 @@ function useGetServices({ shipment_data = {}, additional_methods = [], activeSta
 
 	const [servicesData, setServicesData] = useState([]);
 
-	const { id = '', importer_exporter_id = '', consignee_shipper_id = '' } = shipment_data;
+	const { id = '' } = shipment_data;
 
 	const listServices = useCallback(
 		async () => {
@@ -23,42 +27,20 @@ function useGetServices({ shipment_data = {}, additional_methods = [], activeSta
 					},
 				});
 
-				if (res.status === 200) {
+				if (activeStakeholder in activeStakeholderMapping) {
+					const servicesToShow = (res?.data?.summary || [])
+						.filter((service) => service?.importer_exporter?.id
+							=== shipment_data?.[activeStakeholderMapping[activeStakeholder]]);
+
+					setServicesData(servicesToShow);
+				} else {
 					setServicesData(res?.data?.summary);
-					if (activeStakeholder === 'booking_agent') {
-						const servicesToShow = [];
-
-						(res?.data?.summary || []).forEach((service) => {
-							const { importer_exporter = {} } = service;
-							if (importer_exporter?.id === importer_exporter_id) {
-								servicesToShow.push(service);
-							}
-						});
-						setServicesData(servicesToShow);
-					}
-
-					if (activeStakeholder === 'consignee_shipper_booking_agent') {
-						const servicesToShow = [];
-
-						(res?.data?.summary || []).forEach((service) => {
-							const { importer_exporter = {} } = service;
-							if (importer_exporter?.id === consignee_shipper_id) {
-								servicesToShow.push(service);
-							}
-						});
-						setServicesData(servicesToShow);
-					}
 				}
 			} catch (err) {
 				toastApiError(err);
 			}
 		},
-		[trigger,
-			id,
-			additional_methods,
-			activeStakeholder,
-			consignee_shipper_id,
-			importer_exporter_id],
+		[trigger, id, additional_methods, activeStakeholder, shipment_data],
 	);
 
 	useEffect(() => {

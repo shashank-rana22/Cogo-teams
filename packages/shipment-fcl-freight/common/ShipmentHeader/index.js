@@ -64,7 +64,7 @@ function ShipmentHeader() {
 						tabIndex={0}
 						onClick={() => setShowModal('add_po_number')}
 					>
-						Add Po Number
+						Add PO Number
 					</div>
 				)}
 			</div>

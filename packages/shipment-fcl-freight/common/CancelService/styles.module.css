@@ -1,43 +1,50 @@
 .form_element {
-    .label {
-        font-weight: 600;
-        margin-bottom: 10px;
-    }
+	.label {
+		margin-bottom: 10px;
+		font-weight: 600;
+	}
 
-    .error_msg {
-        color: var(--color-primary-error-red-2);
-        font-size: var(--font-size-md);
-        position: relative;
-        top: -6px;
-    }
+	.error_msg {
+		position: relative;
+		top: -6px;
+		font-size: var(--font-size-md);
+		color: var(--color-primary-error-red-2);
+	}
 
-    :global {
-        .ui_radiogroup_container {
-            padding: 0;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        .ui_radio_container {
-            padding: 0 10px 10px 0;
-            width: 48%;
-        }
-        .ui_chip_container {
-            max-width: none;
-        }
-        .ui_input_container {
-            width: 48%;
-        }
-    }
+	:global {
+		.ui_radiogroup_container {
+			flex-wrap: wrap;
+			justify-content: space-between;
+			padding: 0;
+		}
 
-    &:not(:first-of-type){
-        margin-top: 26px;
-    }
+		.ui_radio_container {
+			width: 48%;
+			padding: 0 10px 10px 0;
+		}
+
+		.ui_chip_container {
+			max-width: none;
+		}
+
+		.ui_input_container {
+			width: 48%;
+		}
+	}
+
+	&:not(:first-of-type) {
+		margin-top: 26px;
+	}
 }
 
 .my_modal {
-    :global {
-        .ui_modal_body_container {
-            min-height: 40vh;
-        }
-    }
+	:global {
+		.ui_modal_body_container {
+			min-height: 40vh;
+		}
+
+		.ui_button_container:not(:first-of-type) {
+			margin-left: 10px;
+		}
+	}
 }

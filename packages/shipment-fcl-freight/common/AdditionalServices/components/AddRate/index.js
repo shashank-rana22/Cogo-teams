@@ -7,8 +7,11 @@ import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipm
 
 import ActionsToShow from './ActionToShow';
 import BillToCustomer from './BillToCustomer';
+import getPayload from './getPayload';
+import getWhoIsAddingRate from './getWhoIsAddingRate';
 import RenderAddRateForm from './RenderAddRateForm';
 import SecondStep from './SecondStep';
+import STAKE_HOLDER_SPECIFIC_PROPS from './stakeHolderCongifs';
 import styles from './styles.module.css';
 
 const showRemarksStatus = [
@@ -28,8 +31,8 @@ function AddRate({
 	onCancel = () => {},
 	filters,
 	setShowChargeCodes = () => {},
-	source = 'overview',
-	task = {},
+	source = '',
+	isSeller = false,
 }) {
 	const [billToCustomer, setBillToCustomer] = useState(false);
 	const [showSecondStep, setSecondStep] = useState(false);
@@ -44,6 +47,14 @@ function AddRate({
 		task,
 		refetch: refetchForUpdateSubService,
 	});
+
+	const whoIsAddingRate = getWhoIsAddingRate({
+		isSeller,
+		item,
+		status,
+	});
+
+	const preProps = STAKE_HOLDER_SPECIFIC_PROPS[whoIsAddingRate];
 
 	const {
 		handleSubmit,
@@ -68,43 +79,31 @@ function AddRate({
 		refetch();
 	};
 
+	useEffect(() => {
+		setValue('price', item?.price);
+		setValue('buy_price', item?.buy_price);
+		setValue('quantity', item?.quantity);
+		setValue('unit', item?.unit);
+		setValue('currency', item?.currency);
+	}, [setValue, item]);
+
 	const {
-		loading, apiTrigger,
+		loading, apiTrigger: apiTriggerCreate,
 	} = useCreateShipmentAdditionalService({
 		refetch        : afterAddRate,
 		successMessage : 'Successfully Added Additional Service',
 	});
 
+	const { handleAddSellPrice: apiTriggerUpdate } = useUpdateShipmentAdditionalService({ refetch: afterAddRate });
+
 	const onAddRate = (data) => {
-		const addedService = (item.services || []).find((service) => {
-			if (filters?.service_type?.includes('?')) {
-				return service.id === filters?.service_type?.split('?')?.[1];
-			}
-			return service.service_type === item?.service_type;
-		});
-		const { name, code, shipmentId, service_type, pending_task_id } = item;
-		const { quantity, buy_price, currency, unit, service_provider_id, alias, price } = data;
+		const payload = getPayload(data, item, preProps, filters, billToCustomer);
 
-		const payload = {
-			name,
-			code,
-			shipment_id           : shipmentId,
-			service_type,
-			service_id            : addedService?.id,
-			is_rate_available     : true,
-			quantity              : Number(quantity) || undefined,
-			buy_price             : Number(buy_price) || undefined,
-			currency,
-			unit,
-			price                 : Number(price) || undefined,
-			service_provider_id   : service_provider_id || undefined,
-			pending_task_id       : pending_task_id || undefined,
-			add_to_sell_quotation : true,
-			alias                 : alias || undefined,
-			state                 : 'requested_for_importer_exporter',
-		};
-
-		apiTrigger(payload);
+		if (preProps.api === '/create_shipment_additional_service') {
+			apiTriggerCreate(payload);
+		} else {
+			apiTriggerUpdate(payload);
+		}
 	};
 
 	if (showSecondStep) {

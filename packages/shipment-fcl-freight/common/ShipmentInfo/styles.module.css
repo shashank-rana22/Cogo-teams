@@ -25,3 +25,7 @@
 		}
 	}
 }
+
+.pill {
+	white-space: nowrap;
+}

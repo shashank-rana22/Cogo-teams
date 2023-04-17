@@ -28,7 +28,7 @@ function ShipmentInfo() {
 				/>
 			</Breadcrumb>
 
-			{shipment_data?.source ? <Pill size="sm" color="blue">{sourceText}</Pill> : null}
+			{shipment_data?.source ? <Pill size="sm" color="blue" className={styles.pill}>{sourceText}</Pill> : null}
 
 			{shipment_data?.is_cogo_assured ? (
 				<img

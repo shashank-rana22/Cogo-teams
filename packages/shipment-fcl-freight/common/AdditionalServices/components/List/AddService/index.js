@@ -15,7 +15,6 @@ function AddService({
 	services,
 	isSeller,
 	refetch = () => {},
-	show = false,
 	setShowChargeCodes = () => {},
 }) {
 	const [showAddRate, setAddRate] = useState(null);
@@ -27,15 +26,14 @@ function AddService({
 
 	const { list, loading } = useListServiceChargeCodes({
 		shipmentId,
-		show,
 	});
 
 	let finalList = (list || []).map((item) => ({
 		...item,
-		shipmentId,
+		shipment_id : shipmentId,
 		services,
 		isSeller,
-		name: `${item.code} ${startCase(item.name)}`,
+		name        : `${item.code} ${startCase(item.name)}`,
 	}));
 
 	if (filters.name) {

@@ -1,7 +1,6 @@
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
-
-import toastApiError from '../utils/toastApiError';
 
 const useListOrganizationInvoicingParties = ({ params }) => {
 	const [{ data, loading }, trigger] = useRequest({

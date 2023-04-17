@@ -15,7 +15,7 @@ function Form({
 	servicesList,
 	shipmentData,
 	primary_service,
-	setUpsellModal,
+	closeModal,
 	haveToUpsell,
 }) {
 	const [truckTypeToggle, setTruckTypeToggle] = useState(false);
@@ -35,17 +35,14 @@ function Form({
 	return (
 		<Modal
 			show
-			onClose={() => setUpsellModal(false)}
-			showCloseIcon={false}
+			onClose={closeModal}
+			showCloseIcon={!haveToUpsell}
 			closeOnOuterClick={false}
-			disabled={haveToUpsell}
 			className={styles.custom_modal}
-			closeOnOuterClick={false}
 		>
 			<Modal.Header title={(
 				<div className={styles.header}>
-
-					{ haveToUpsell ? (
+					{haveToUpsell ? (
 						<div
 							role="button"
 							tabIndex={0}
@@ -53,7 +50,6 @@ function Form({
 							onClick={handleShipmentsClick}
 						>
 							<IcMArrowBack />
-
 						</div>
 					) : null}
 
@@ -70,7 +66,7 @@ function Form({
 			</Modal.Body>
 			<Modal.Footer>
 				<Footer
-					onClose={() => setUpsellModal(false)}
+					onClose={closeModal}
 					formProps={formProps}
 					service={upsellableService}
 					shipmentData={shipmentData}

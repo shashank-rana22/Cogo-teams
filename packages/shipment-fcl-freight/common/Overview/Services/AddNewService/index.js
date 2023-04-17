@@ -1,5 +1,5 @@
 import { IcMPlus } from '@cogoport/icons-react';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import Form from './Form';
 import styles from './styles.module.css';
@@ -13,12 +13,20 @@ function AddNewService({
 	cancelUpsellDestinationFor = '',
 	activeStakeholder = '',
 }) {
-	const [upsellModal, setUpsellModal] = useState(false);
+	const haveToUpsell = servicesList?.length === 0
+	&& upsellableService.service_type === 'fcl_freight_local_service'
+	&& primary_service?.bl_category === 'hbl';
+
+	const [upsellModal, setUpsellModal] = useState(haveToUpsell);
+
+	/* These services cant be upselled */
 
 	const cancelUpsell = (!upsellableService?.service_type
 	|| upsellableService?.service_type === cancelUpsellDestinationFor
 		|| upsellableService?.service_type === cancelUpsellOriginFor)
 		|| upsellableService.service_type === 'fcl_freight_service';
+
+	/* Hualage is upsellable only for icd shipments */
 
 	let isUpsellable = true;
 
@@ -26,6 +34,8 @@ function AddNewService({
 		isUpsellable = (primary_service?.origin_port?.is_icd
 			|| primary_service?.destination_port?.is_icd);
 	}
+
+	/* user can only upsell services for the location to which its org is tagged */
 
 	let canUpsellForTradeType = true;
 
@@ -36,15 +46,9 @@ function AddNewService({
 		canUpsellForTradeType = false;
 	}
 
-	const haveToUpsell = servicesList?.length === 0
-	&& upsellableService.service_type === 'fcl_freight_local_service'
-	&& primary_service?.bl_category === 'hbl';
-
-	useEffect(() => {
-		if (haveToUpsell) {
-			setUpsellModal(true);
-		}
-	}, [haveToUpsell, setUpsellModal]);
+	const closeModal = () => {
+		setUpsellModal(!upsellModal);
+	};
 
 	return (
 		<>
@@ -52,7 +56,7 @@ function AddNewService({
 				? (
 					<div
 						className={styles.container}
-						onClick={() => setUpsellModal(true)}
+						onClick={closeModal}
 						role="button"
 						tabIndex={0}
 					>
@@ -63,7 +67,7 @@ function AddNewService({
 
 			{upsellModal ? (
 				<Form
-					setUpsellModal={setUpsellModal}
+					closeModal={closeModal}
 					servicesList={servicesList}
 					shipmentData={shipmentData}
 					upsellableService={upsellableService}

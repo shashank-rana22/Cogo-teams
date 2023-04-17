@@ -32,12 +32,14 @@ function SupplierReallocation({
 	isAdditional = false,
 }) {
 	const { shipment_data, refetch, refetchServices } = useContext(ShipmentDetailContext);
-	const { documents } = shipment_data || {};
+	const { documents, shipment_type } = shipment_data || {};
 
 	const serviceObj = serviceData?.[0] || {};
 	const { service_type, importer_exporter } = serviceObj;
 
-	const { defaultValues, controls } = getControls({ serviceObj, documents, isAdditional });
+	const { defaultValues, controls, showAllControls } = getControls({
+		serviceObj, shipment_type, documents, isAdditional,
+	});
 
 	const { handleSubmit, control, formState: { errors } } = useForm({ defaultValues });
 
@@ -69,13 +71,15 @@ function SupplierReallocation({
 		<Modal
 			show
 			onClose={closeModal}
-			className={styles.styled_modal_container}
+			className={styles.custom_modal}
+			closeOnOuterClick={false}
 			showCloseIcon={!loading}
 		>
 			<Modal.Body>
 				<Modal.Header title={(
 					<div className={styles.header}>
-						{isAdditional ? 'Supplier Reallocation' : 'Edit Parameters'}
+						Supplier Reallocation
+						{showAllControls ? ' & BL Details' : null}
 					</div>
 				)}
 				/>
@@ -89,7 +93,6 @@ function SupplierReallocation({
 					themeType="secondary"
 					onClick={closeModal}
 					disabled={loading}
-					style={{ marginRight: '12px' }}
 				>
 					Cancel
 				</Button>
