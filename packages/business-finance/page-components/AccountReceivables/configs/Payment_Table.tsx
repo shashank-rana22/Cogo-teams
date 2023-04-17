@@ -39,7 +39,6 @@ const PaymentList = ({ paymentFilters, setPaymentFilters, setOrderBy, sortStyleD
 		Header   : 'Sage Reference Number ',
 		id       : 'sageRefNumber',
 		accessor : (row) => (
-
 			<div style={{ marginLeft: '30px' }}>
 				{row?.sageRefNumber}
 			</div>
