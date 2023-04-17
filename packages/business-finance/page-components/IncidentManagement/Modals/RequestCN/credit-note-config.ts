@@ -1,3 +1,5 @@
+import { startCase } from '@cogoport/utils';
+
 export const CATEGORY_OPTIONS = [
 	{ label: 'Revenue Impacting', value: 'REVENUE_IMPACTING' },
 	{ label: 'Non-Revenue Impacting', value: 'NON_REVENUE_IMPACTING' },
@@ -34,4 +36,51 @@ export const NON_REVENUE_DATA = [
 	'Invoice Date Change',
 	'GST Change',
 	'Billing Party Name Change',
+];
+
+export const requestCreditNoteColumns = () => [
+	{
+		Header   : 'Name',
+		accessor : 'name',
+		id       : 'name',
+	},
+	{
+		Header   : 'Unit',
+		accessor : 'unit',
+		id       : 'unit',
+		Cell     : ({ row: { original } }) => {
+			const formattedUnit = startCase(original.unit);
+			return formattedUnit;
+		},
+	},
+	{
+		Header   : 'Currency',
+		accessor : 'currency',
+		id       : 'currency',
+	},
+	{
+		Header   : 'Ex. Rate',
+		accessor : 'exchangeRate',
+		id       : 'exchangeRate',
+	},
+	{
+		Header   : 'Price',
+		accessor : 'rate',
+		id       : 'rate',
+	},
+	{
+		Header   : 'Quantity',
+		accessor : 'quantity',
+		id       : 'quantity',
+	},
+	{
+		Header   : 'Sub Total',
+		accessor : 'subTotal',
+		id       : 'subTotal',
+	},
+	{
+		Header   : 'Grand Total',
+		accessor : 'grandTotal',
+		id       : 'grandTotal',
+	},
 ];

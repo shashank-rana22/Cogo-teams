@@ -6,9 +6,13 @@ import { useEffect, useState } from 'react';
 import useGetTdsData from '../../apisModal/useGetTdsData';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
+import StyledTable from '../../StyledTable';
 import { toTitleCase } from '../../utils/titleCase';
 
-import { CATEGORY_OPTIONS, NON_REVENUE_DATA, NON_REVENUE_OPTIONS, REVENUE_OPTIONS } from './credit-note-config';
+import {
+	CATEGORY_OPTIONS, NON_REVENUE_DATA, NON_REVENUE_OPTIONS,
+	requestCreditNoteColumns, REVENUE_OPTIONS,
+} from './credit-note-config';
 import styles from './style.module.css';
 
 function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
@@ -30,6 +34,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		subTotal,
 		taxAmount,
 		grandTotal,
+		lineItems,
 		creditNoteNumber,
 		invoiceId,
 		remark,
@@ -180,7 +185,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 					<Modal.Header title={`Request Credit Note - ${creditNoteNumber} - ${toTitleCase(businessName)}`} />
 					<Modal.Body>
 						{!isEditable && <ApproveAndReject row={row} />}
-						<div className={styles.button_container}>
+						<div className={styles.button_container_data}>
 							<Popover
 								placement="bottom"
 								visible={shoPopover}
@@ -293,6 +298,15 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 							)))}
 
 						</div>
+						{lineItems?.length > 0 && (
+							<div className={styles.list_container}>
+								<StyledTable
+									columns={requestCreditNoteColumns()}
+									showPagination={false}
+									data={lineItems}
+								/>
+							</div>
+						)}
 						{isEditable && (
 							<>
 								<div className={styles.remarks}>Remarks*</div>
@@ -316,6 +330,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									themeType="secondary"
 									style={{ marginRight: '8px' }}
 									disabled={!(remarks.length) || loading}
+									loading={loading}
 									onClick={() => {
 										OnAction('REJECTED');
 									}}
@@ -327,6 +342,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									size="md"
 									style={{ marginRight: '8px' }}
 									disabled={!(remarks.length) || loading}
+									loading={loading}
 									onClick={() => {
 										OnAction('APPROVED');
 									}}
