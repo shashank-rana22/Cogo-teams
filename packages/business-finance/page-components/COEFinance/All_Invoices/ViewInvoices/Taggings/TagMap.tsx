@@ -72,7 +72,7 @@ function TagMap({
 				) : <Placeholder width="100%" height="200px" />}
 			</div>
 
-			{!isEmpty(mappingsData) && status === ('LOCKED' || 'ON_HOLD') && (
+			{!isEmpty(mappingsData) && (status === 'LOCKED' || status === 'ON_HOLD') && (
 				<div>
 					{value?.approve === 'approve' || value?.reject === 'reject' ? (
 						<div

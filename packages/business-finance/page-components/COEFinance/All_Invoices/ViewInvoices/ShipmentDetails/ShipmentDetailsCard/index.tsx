@@ -143,6 +143,7 @@ function ShipmentDetailsCard({
 		setShowLineItem(true);
 		setItemCheck(true);
 	};
+	const isDisable = status === 'LOCKED' || status === 'ON_HOLD';
 
 	return (
 		<div>
@@ -433,7 +434,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
-																disabled={status !== ('LOCKED' || 'ON_HOLD')}
+																disabled={!isDisable}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -443,7 +444,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
-																disabled={status !== ('LOCKED' || 'ON_HOLD')}
+																disabled={!isDisable}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}
@@ -539,7 +540,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
-																disabled={status !== ('LOCKED' || 'ON_HOLD')}
+																disabled={!isDisable}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -549,7 +550,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
-																disabled={status !== ('LOCKED' || 'ON_HOLD')}
+																disabled={!isDisable}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}
@@ -637,7 +638,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
-																disabled={status !== ('LOCKED' || 'ON_HOLD')}
+																disabled={!isDisable}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -647,7 +648,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
-																disabled={status !== ('LOCKED' || 'ON_HOLD')}
+																disabled={!isDisable}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}
