@@ -174,8 +174,10 @@
 }
 
 .border_left {
+	position: relative;
+	right: 60px;
 	height: 100px;
-	margin: 20px 0 10px -100px;
+	margin: 20px;
 	border-left: 2px solid #cfcfcf;
 }
 

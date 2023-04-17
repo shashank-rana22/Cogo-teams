@@ -2,11 +2,11 @@ import { Legend, ProgressBar, cl, Popover, Placeholder, Tooltip } from '@cogopor
 import { IcMInfo, IcMArrowRotateDown, IcMArrowNext } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
-import SegmentedControl from '../../../commons/SegmentedControl/index';
+// import SegmentedControl from '../../../commons/SegmentedControl/index';
 import getFormattedPrice from '../../../commons/utils/getFormattedPrice';
 import totalPayablesKeyMappings from '../../constants/total-payables-key-mapping';
 import totalReceivablesKeyMappings from '../../constants/total-receivables-key-mapping';
-import totalRecievablesStats from '../../constants/total-recievales';
+// import totalRecievablesStats from '../../constants/total-recievales';
 import useGetPayablesList from '../../hooks/getPayablesData';
 import useGetReceivablesList from '../../hooks/getReceivablesData';
 import showInTooltop from '../../utils/getOverFlowData';
@@ -18,11 +18,10 @@ import ResponsivePieChart from './ResponsivePieChart';
 function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 	const {
 		receivablesData,
-		recievablesTab,
-		setRecievablesTab,
+		// recievablesTab,
+		// setRecievablesTab,
 		receivablesLoading,
 	} = useGetReceivablesList({ globalFilters, entityTabFilters });
-	console.log(receivablesData, 'receivablesData');
 
 	const { payablesData, payablesLoading } = useGetPayablesList({ globalFilters, entityTabFilters });
 	const {
@@ -36,6 +35,31 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 		onAccountChangeFromYesterday:AccountChangeFromYesterday = 0,
 		outstandingChangeFromYesterday:outstandingChangeYesterday = 0,
 	} = payablesData || {};
+
+	let onAccountPayable;
+	let onAccountReceivable = 0;
+	let outstandingPayable;
+	let outstandingReceivable = 0;
+	(AccountAndOutStandingData || []).forEach((item:any) => {
+		if (item?.id === 'onAccount') {
+			onAccountPayable = item?.value;
+			return onAccountPayable;
+		} if (item?.id === 'outstanding') {
+			outstandingPayable = item?.value;
+			return outstandingPayable;
+		}
+		return null;
+	});
+	(onAccountAndOutStandingData || []).forEach((item:any) => {
+		if (item?.id === 'onAccount') {
+			onAccountReceivable = item?.value;
+			return onAccountReceivable;
+		} if (item?.id === 'outstanding') {
+			outstandingReceivable = item?.value;
+			return outstandingReceivable;
+		}
+		return null;
+	});
 
 	const progressDataReceivables = overdueAmount + nonOverdueAmount;
 	const progressPayableData = payOverdueAmount + payNonOverdueAmount;
@@ -92,7 +116,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 
 							</div>
 						</div>
-						<div className={styles.segment_filters}>
+						{/* <div className={styles.segment_filters}>
 							<SegmentedControl
 								options={totalRecievablesStats()}
 								activeTab={recievablesTab}
@@ -100,7 +124,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 								color="#ED3726"
 								background="#FFFAEB"
 							/>
-						</div>
+						</div> */}
 					</div>
 					{receivablesLoading ? (
 						<div style={{ alignItems: 'center' }}>
@@ -168,13 +192,13 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 									<ResponsivePieChart pieData={onAccountAndOutStandingData} />
 								</div>
 								<div className={styles.border_left} />
-								<div style={{ marginRight: '60px' }}>
+								<div style={{ marginRight: '24px' }}>
 									<div style={{ marginRight: '30px', marginTop: '20px' }}>
 										<div style={{ display: 'flex' }}>
 											<span>
 												{showInTooltop(
-													getFormattedPrice(onAccountAndOutStandingData?.[1]?.value, 'INR'),
-													getAmountInLakhCrK(onAccountAndOutStandingData?.[1]?.value, 'INR'),
+													getFormattedPrice(onAccountReceivable, 'INR'),
+													getAmountInLakhCrK(onAccountReceivable, 'INR'),
 												)}
 											</span>
 											<div className={styles.on_account}>On Account Payment</div>
@@ -209,8 +233,8 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 										<div style={{ display: 'flex' }}>
 											<span>
 												{showInTooltop(
-													getFormattedPrice(onAccountAndOutStandingData?.[0]?.value, 'INR'),
-													getAmountInLakhCrK(onAccountAndOutStandingData?.[0]?.value, 'INR'),
+													getFormattedPrice(outstandingReceivable, 'INR'),
+													getAmountInLakhCrK(outstandingReceivable, 'INR'),
 												)}
 											</span>
 											<div className={styles.on_account}>Outstanding</div>
@@ -338,13 +362,13 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 									<ResponsivePieChart pieData={AccountAndOutStandingData} />
 								</div>
 								<div className={styles.border_left} />
-								<div style={{ marginRight: '60px' }}>
+								<div style={{ marginRight: '24px' }}>
 									<div style={{ marginRight: '30px', marginTop: '20px' }}>
 										<div style={{ display: 'flex' }}>
 											<span>
 												{showInTooltop(
-													getFormattedPrice(AccountAndOutStandingData?.[1]?.value, 'INR'),
-													getAmountInLakhCrK(AccountAndOutStandingData?.[1]?.value, 'INR'),
+													getFormattedPrice(onAccountPayable, 'INR'),
+													getAmountInLakhCrK(onAccountPayable, 'INR'),
 												)}
 											</span>
 											<div className={styles.on_account}>On Account Payment</div>
@@ -379,8 +403,8 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 										<div style={{ display: 'flex' }}>
 											<span>
 												{showInTooltop(
-													getFormattedPrice(AccountAndOutStandingData?.[0]?.value, 'INR'),
-													getAmountInLakhCrK(AccountAndOutStandingData?.[0]?.value, 'INR'),
+													getFormattedPrice(outstandingPayable, 'INR'),
+													getAmountInLakhCrK(outstandingPayable, 'INR'),
 												)}
 											</span>
 											<div className={styles.on_account}>Outstanding</div>
