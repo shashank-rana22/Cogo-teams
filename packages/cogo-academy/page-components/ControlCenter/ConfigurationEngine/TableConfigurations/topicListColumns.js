@@ -31,7 +31,7 @@ function topicListColumns({
 			Header   : 'TOPIC DESCRIPTION',
 			accessor : (items) => (
 				<div className={styles.description}>
-					{startCase(items?.description) || '--'}
+					{startCase(items?.description || ' ') || '--'}
 				</div>
 			),
 		},
@@ -41,7 +41,7 @@ function topicListColumns({
 				const { author = {} } = items || {};
 				return (
 					<div className={styles.tags}>
-						{startCase(author?.name) || '--'}
+						{startCase(author?.name || '') || '--'}
 					</div>
 				);
 			},
