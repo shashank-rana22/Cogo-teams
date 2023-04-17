@@ -56,6 +56,8 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 	const NonRevenueImpacting =	CNCategoryValues?.CNType === 'NON_REVENUE_IMPACTING'
 	|| creditNoteType === 'NON_REVENUE_IMPACTING';
 
+	const { referenceId = '' } = row || {};
+
 	const content = () => (
 		<div className={styles.container}>
 			<div>
@@ -160,6 +162,8 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		});
 	}, [CNCategoryValues?.CNValues, CNCategoryValues?.CNType]);
 
+	const rest = { onClickOutside: () => { setShowPopover(false); } };
+
 	return (
 		<div>
 			<div>
@@ -176,6 +180,26 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 					<Modal.Header title={`Request Credit Note - ${creditNoteNumber} - ${toTitleCase(businessName)}`} />
 					<Modal.Body>
 						{!isEditable && <ApproveAndReject row={row} />}
+						<div className={styles.button_container}>
+							<Popover
+								placement="bottom"
+								visible={shoPopover}
+								render={content()}
+								{...rest}
+							>
+								<Button
+									themeType="secondary"
+									onClick={() => setShowPopover(!shoPopover)}
+								>
+									<div className={styles.flex}>
+										CN Category
+										<div className={styles.icon_container}>
+											{shoPopover ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
+										</div>
+									</div>
+								</Button>
+							</Popover>
+						</div>
 						<div className={styles.flex}>
 
 							<div className={styles.value_data}>
@@ -185,6 +209,14 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 								<div className={styles.date_value}>
 									#
 									{jobNumber || '-'}
+								</div>
+							</div>
+							<div className={styles.value_data}>
+								<div className={styles.label_value}>
+									Incident ID
+								</div>
+								<div className={styles.date_value}>
+									{referenceId || '-'}
 								</div>
 							</div>
 
@@ -206,19 +238,19 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 
 							<div className={styles.value_data}>
 								<div className={styles.label_value}>
-									TaxAmount
+									SubTotal
 								</div>
 								<div className={styles.date_value}>
-									{getFormattedPrice(taxAmount, currency) || '-'}
+									{getFormattedPrice(subTotal, currency) || '-'}
 								</div>
 							</div>
 
 							<div className={styles.value_data}>
 								<div className={styles.label_value}>
-									SubTotal
+									TaxAmount
 								</div>
 								<div className={styles.date_value}>
-									{getFormattedPrice(subTotal, currency) || '-'}
+									{getFormattedPrice(taxAmount, currency) || '-'}
 								</div>
 							</div>
 
@@ -230,23 +262,6 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									{getFormattedPrice(grandTotal, currency) || '-'}
 								</div>
 							</div>
-							<Popover
-								placement="bottom"
-								visible={shoPopover}
-								render={content()}
-							>
-								<Button
-									themeType="secondary"
-									onClick={() => setShowPopover(!shoPopover)}
-								>
-									<div className={styles.flex}>
-										CN Category
-										<div className={styles.icon_container}>
-											{shoPopover ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
-										</div>
-									</div>
-								</Button>
-							</Popover>
 
 						</div>
 
