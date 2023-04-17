@@ -78,8 +78,9 @@ function DNDComponent() {
 				data.layouts[objIndex].children[childId] = { ...data.layouts[objIndex].children[childId], ...CONTENT_MAPPING[content.type] };
 				data.layouts[objIndex].children[childId].style = { ...data.layouts[objIndex].children[childId].style, border: undefined };
 
-				console.log('sdjskdks', data);
 				setComponent(data);
+
+				setSelectedRow({ ...data.layouts[objIndex] });
 			} else {
 				setComponent((prev) => ({
 					...prev,
@@ -94,13 +95,13 @@ function DNDComponent() {
 						...component.layouts.slice(startIndex),
 					],
 				}));
-			}
 
-			setSelectedRow({
-				...content,
-				id    : component.layouts.length + 1,
-				index : startIndex,
-			});
+				setSelectedRow({
+					...CONTENT_MAPPING[content.type],
+					...content,
+					id: component.layouts.length + 1,
+				});
+			}
 
 			setShowContentModal(false);
 			setParentComponentId(null);

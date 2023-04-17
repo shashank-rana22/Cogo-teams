@@ -28,18 +28,18 @@ const modules = {
 };
 
 function TextComponent(props) {
-	const { text, components, setComponents, childId, elementId, selectedRow } = props;
+	const { text, components, setComponents, childId, selectedRow } = props;
 
 	const [editorValue, setEditorValue] = useState(text);
 
 	const handleEditorChange = (value) => {
-		const { parentId } = selectedRow || {};
+		const { parentId, id } = selectedRow || {};
 
 		const data = components;
 
 		// console.log('data ::', data);
 		// console.log('element id ::', elementId);
-		const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === elementId));
+		const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === id));
 
 		if (parentId) {
 			data.layouts[selectedComponentIndex].children[childId].content = value;
