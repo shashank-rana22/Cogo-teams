@@ -35,6 +35,7 @@ function RenderContent({ questionsList = [], test_id = '', activeTab = '' }) {
 	return (
 		<>
 			<ListHeader type={activeTab} />
+
 			{(questionsList || []).map((question_item, index) => (
 				<SubjectiveQuestions
 					key={question_item.id}

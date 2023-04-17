@@ -1,52 +1,52 @@
 .container {
-	display: flex;
-	width: 100%;
-	margin-bottom: 2px;
+  display: flex;
+  width: 100%;
+  margin-bottom: 2px;
 
-	:global {
-		.ui_accordion_container {
-			box-shadow: none;
-		}
+  :global {
+    .ui_accordion_container {
+      box-shadow: none;
+    }
 
-		.ui_accordion_header {
-			padding: 16px 10px;
-			border-radius: 0;
-		}
+    .ui_accordion_header {
+      padding: 16px 10px;
+      border-radius: 0;
+    }
 
-		.ui_accordion_title {
-			width: 100%;
-		}
-	}
+    .ui_accordion_title {
+      width: 100%;
+    }
+  }
 }
 
 .small_section {
-	width: 15%;
-	text-align: center;
+  width: 15%;
+  text-align: center;
 }
 
 .section {
-	width: 55%;
+  width: 55%;
 }
 
 .topic {
-	display: flex;
-	width: 12%;
+  display: flex;
+  width: 12%;
 }
 
 .topic_text {
-	width: 80px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .question_text {
-	width: 80%;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+  width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .content {
-	position: relative;
+  position: relative;
 }
