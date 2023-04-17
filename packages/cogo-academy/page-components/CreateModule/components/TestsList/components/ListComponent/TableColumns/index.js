@@ -176,17 +176,26 @@ export const testSetColumns = ({
 		),
 	},
 	{
-		Header   : 'TOTAL QUESTIONS/CASES',
+		Header   : 'TOTAL QUESTIONS',
 		id       : 'total_questions',
 		accessor : ({ case_study_questions = 0, stand_alone_questions = 0, subjective_questions = 0 }) => (
-			<section>
-				{stand_alone_questions + subjective_questions || 0}
-				{' '}
-				Q +
-				{' '}
-				{case_study_questions || 0}
-				{' '}
-				Cases
+			<section className={styles.questions_count}>
+				<div>
+					{stand_alone_questions || 0}
+					{' '}
+					Standalone
+				</div>
+				<div>
+					{' '}
+					{case_study_questions || 0}
+					{' '}
+					Cases
+				</div>
+				<div>
+					{subjective_questions || 0}
+					{' '}
+					Subjective
+				</div>
 			</section>
 		),
 	},
