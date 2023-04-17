@@ -24,7 +24,7 @@ const useCreateQuestion = ({
 	listSetQuestions,
 }) => {
 	const [questionTypeWatch, setQuestionTypeWatch] = useState('stand_alone');
-	const [uploadable, setUploadable] = useState('false');
+	const [uploadable, setUploadable] = useState(false);
 	const [editorValue, setEditorValue] = useState(
 		questionTypeWatch === 'stand_alone'
 			? { question_0_explanation: RichTextEditor.createEmptyValue() }
@@ -46,6 +46,7 @@ const useCreateQuestion = ({
 		character_limit = '',
 		allow_file_upload,
 	} = editDetails || {};
+	console.log(editDetails);
 
 	const {
 		watch,
@@ -192,7 +193,7 @@ const useCreateQuestion = ({
 			setValue('subjective.0.question_text', question_text);
 			setValue('subjective.0.difficulty_level', difficulty_level);
 			setValue('subjective.0.character_limit', character_limit);
-			setValue('subjective.0.allow_file_upload', allow_file_upload);
+			setUploadable(allow_file_upload);
 
 			setSubjectiveEditorValue(isEmpty(explanation)
 				? RichTextEditor.createEmptyValue()

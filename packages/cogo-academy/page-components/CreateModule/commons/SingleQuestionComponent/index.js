@@ -142,6 +142,7 @@ function SingleQuestionComponent({
 								<Checkbox
 									name="upload"
 									label="Option of Upload Answer"
+									checked={uploadable}
 									onChange={() => { setUploadable(!uploadable); }}
 								/>
 							</div>

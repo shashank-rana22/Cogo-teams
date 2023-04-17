@@ -52,7 +52,6 @@ function useUpdateStandAloneTestQuestion({
 			const { hasError, ...payload } = getPayload({
 				values,
 				type: PAYLOAD_TYPE_MAPPING[question_type],
-				// type: 'stand_alone',
 				questionSetId,
 				action,
 				subjectiveEditorValue,
