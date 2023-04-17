@@ -81,7 +81,13 @@ function Structure(props) {
 
 	const LeftPanelItems = useMemo(
 		() => (widths || []).map((row) => (
-			<Item row={row} handleClick={() => addNewItem({ ...parentComponent, children: getChildrenComponents(row) }, selectedItem?.index, true, parentComponent.id, null)} onNewItemAdding={onNewItemAdding} parentComponent={parentComponent} childrenComponents={getChildrenComponents(row)} />
+			<Item
+				row={row}
+				handleClick={() => addNewItem({ ...parentComponent, children: getChildrenComponents(row) }, selectedItem?.index, true, parentComponent.id, null)}
+				onNewItemAdding={onNewItemAdding}
+				parentComponent={parentComponent}
+				childrenComponents={getChildrenComponents(row)}
+			/>
 		)),
 		[addNewItem, onNewItemAdding, selectedItem],
 	);

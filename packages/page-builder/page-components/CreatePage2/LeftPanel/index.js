@@ -36,6 +36,8 @@ function LeftPanel(props) {
 					setParentComponentId={setParentComponentId}
 					setShowContentModal={setShowContentModal}
 					componentType="parent"
+					component={component}
+					setComponent={setComponent}
 				/>
 			</TabPanel>
 

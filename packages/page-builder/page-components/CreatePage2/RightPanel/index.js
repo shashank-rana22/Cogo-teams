@@ -7,16 +7,10 @@ import { v1 as uuid } from 'uuid';
 
 // import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css';
+import VALID_ITEM_TYPES from '../../../configurations/accept-items';
+
 import RenderComponents from './RenderComponent';
 import styles from './styles.module.css';
-
-const ITEM_TYPES = {
-	text        : 'text',
-	button      : 'button',
-	image       : 'image',
-	container   : 'container',
-	rootElement : 'rootElement',
-};
 
 function ComponentBuilder({ widget, components, setComponents, selectedItem, childId, setChildId }) {
 	const { type: componetType, children, style, id: componentId } = widget || {};
@@ -101,7 +95,7 @@ function RightPanel(props) {
 	const itemRef = useRef(null);
 
 	const [{ handlerId }, drop] = useDrop({
-		accept: Object.keys(ITEM_TYPES),
+		accept: Object.keys(VALID_ITEM_TYPES),
 		collect(monitor) {
 			return {
 				handlerId: monitor.getHandlerId(),

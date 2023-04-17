@@ -12,6 +12,8 @@ function Content(props) {
 		selectedItem,
 		componentType,
 		parentComponentId,
+		component,
+		setComponent,
 	} = props;
 	const [secondaryTab, setSecondaryTab] = useState('basic');
 
@@ -32,6 +34,8 @@ function Content(props) {
 						selectedItem={selectedItem}
 						parentComponentId={parentComponentId}
 						componentType={componentType}
+						component={component}
+						setComponent={setComponent}
 					/>
 				</TabPanel>
 

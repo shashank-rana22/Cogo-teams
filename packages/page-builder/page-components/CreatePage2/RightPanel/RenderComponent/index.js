@@ -1,6 +1,8 @@
 import ButtonComponent from '../../../../commons/widgets/ButtonComponent';
+import HtmlComponent from '../../../../commons/widgets/HtmlComponent';
 import ImageComponent from '../../../../commons/widgets/ImageComponent';
 import TextComponent from '../../../../commons/widgets/TextComponent';
+import VideoComponent from '../../../../commons/widgets/VideoComponent';
 
 function RenderComponents({ componentType, widget, components, setComponents, elementId, childId, selectedItem }) {
 	const COMPONENT_MAPPING = {
@@ -36,6 +38,23 @@ function RenderComponents({ componentType, widget, components, setComponents, el
 				components={components}
 				setComponents={setComponents}
 				elementId={elementId}
+			/>
+		),
+
+		video: (
+			<VideoComponent
+				key={elementId}
+				src={widget.content}
+				components={components}
+				setComponents={setComponents}
+				childId={childId}
+				selectedItem={selectedItem}
+			/>
+		),
+		html: (
+			<HtmlComponent
+				key={elementId}
+				html={widget.content}
 			/>
 		),
 	};
