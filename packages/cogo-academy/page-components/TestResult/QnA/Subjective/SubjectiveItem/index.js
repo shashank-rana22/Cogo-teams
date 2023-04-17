@@ -10,7 +10,7 @@ import MarksComponent from './MarksComponent';
 import styles from './styles.module.css';
 import useAssignMarks from './useAssignMarks';
 
-function SubjectiveItem({ data, index, view, user_id, test_id }) {
+function SubjectiveItem({ data, index, view, user_id, test_id, status }) {
 	const { question_data = {}, answers: { answer_text = '' }, assign_marks = 0, user_answers = {} } = data;
 
 	const [value, setValue] = useState(assign_marks);
@@ -81,6 +81,7 @@ function SubjectiveItem({ data, index, view, user_id, test_id }) {
 						assign_marks={assign_marks}
 						error={error}
 						setError={setError}
+						status={status}
 					/>
 				</div>
 

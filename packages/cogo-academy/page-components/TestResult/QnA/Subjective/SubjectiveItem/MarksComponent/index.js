@@ -12,10 +12,13 @@ function MarksComponent({
 	assign_marks,
 	error,
 	setError,
+	status,
 }) {
+	const isAllowedToAssignMarks = view === 'admin' && status !== 'published';
+
 	return (
 		<div className={styles.container}>
-			{view === 'admin' ? (
+			{isAllowedToAssignMarks ? (
 				<div className={styles.marks_container}>
 					<div className={styles.wrapper}>
 

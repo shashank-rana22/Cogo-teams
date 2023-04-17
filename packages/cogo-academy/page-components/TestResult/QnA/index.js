@@ -10,7 +10,7 @@ import StandAlone from './StandAlone';
 import styles from './styles.module.css';
 import Subjective from './Subjective';
 
-function QnA({ user_name = '', test_id, user_id, view, is_evaluated = false }) {
+function QnA({ user_name = '', test_id, user_id, view, is_evaluated = false, status }) {
 	const ref = useRef();
 
 	const [animation, setAnimation] = useState(false);
@@ -80,6 +80,7 @@ function QnA({ user_name = '', test_id, user_id, view, is_evaluated = false }) {
 							test_id={test_id}
 							count_till_now={stand_alone_questions.length + case_study_questions.length}
 							view={view}
+							status={status}
 						/>
 					</div>
 				) : null}

@@ -16,16 +16,18 @@ function NotEvaluated() {
 	);
 }
 
-const handleRedirectToDashboard = ({ router, user, test_id, is_evaluated }) => {
+const handleRedirectToDashboard = ({ router, user, test_id, is_evaluated, status }) => {
 	const { id, name } = user || {};
 
 	router.push(
-		`/learning/tests/dashboard/[test_id]?view=admin&id=${id}&name=${name}&is_evaluated=${is_evaluated}`,
-		`/learning/tests/dashboard/${test_id}?view=admin&id=${id}&name=${name}&is_evaluated=${is_evaluated}`,
+		`/learning/tests/dashboard/[test_id]?view=admin&id=${id}&name=${name}
+		&is_evaluated=${is_evaluated}&status=${status}`,
+		`/learning/tests/dashboard/${test_id}?view=admin&id=${id}&name=${name}
+		&is_evaluated=${is_evaluated}&status=${status}`,
 	);
 };
 
-const getAppearedColumns = ({ sortFilter, setSortFilter, router }) => [
+const getAppearedColumns = ({ sortFilter, setSortFilter, router, status }) => [
 	{
 		Header: (
 			<div className={styles.container}>
@@ -137,7 +139,7 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router }) => [
 		accessor : ({ user = {}, test_id = '', is_evaluated = false }) => (
 			<div
 				role="presentation"
-				onClick={() => handleRedirectToDashboard({ router, user, test_id, is_evaluated })}
+				onClick={() => handleRedirectToDashboard({ router, user, test_id, is_evaluated, status })}
 				className={styles.see_more}
 			>
 				See More
@@ -210,11 +212,12 @@ const getTableColumns = ({
 	setShowModal,
 	setUserId = () => {},
 	router,
+	status,
 }) => {
 	const getcolumnsFun = TABLE_MAPPING?.[activeTab] || getAppearedColumns;
 
 	const getcolumnsArg = {
-		appeared     : { sortFilter, setSortFilter, router },
+		appeared     : { sortFilter, setSortFilter, router, status },
 		not_appeared : { setShowModal, setUserId },
 		ongoing      : { },
 	};

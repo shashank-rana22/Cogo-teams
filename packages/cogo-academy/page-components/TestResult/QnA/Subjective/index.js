@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 import SubjectiveItem from './SubjectiveItem';
 
-function Subjective({ questions, user_id = '', test_id = '', count_till_now, view = '' }) {
+function Subjective({ questions, user_id = '', test_id = '', count_till_now, view = '', status }) {
 	return (
 		<div className={styles.container}>
 
@@ -13,6 +13,7 @@ function Subjective({ questions, user_id = '', test_id = '', count_till_now, vie
 						view={view}
 						user_id={user_id}
 						test_id={test_id}
+						status={status}
 					/>
 				</div>
 			))}
