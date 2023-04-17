@@ -82,7 +82,8 @@ function CreateAudienceForm(props) {
 				);
 			}
 			return null;
-	})}
+	}
+	)}
 
 	return (
 		<div className={styles.container}>
