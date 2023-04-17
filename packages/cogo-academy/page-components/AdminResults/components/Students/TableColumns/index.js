@@ -16,12 +16,12 @@ function NotEvaluated() {
 	);
 }
 
-const handleRedirectToDashboard = ({ router, user, test_id }) => {
+const handleRedirectToDashboard = ({ router, user, test_id, is_evaluated }) => {
 	const { id, name } = user || {};
 
 	router.push(
-		`/learning/tests/dashboard/[test_id]?view=admin&id=${id}&name=${name}`,
-		`/learning/tests/dashboard/${test_id}?view=admin&id=${id}&name=${name}`,
+		`/learning/tests/dashboard/[test_id]?view=admin&id=${id}&name=${name}&is_evaluated=${is_evaluated}`,
+		`/learning/tests/dashboard/${test_id}?view=admin&id=${id}&name=${name}&is_evaluated=${is_evaluated}`,
 	);
 };
 
@@ -134,10 +134,10 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router }) => [
 	{
 		Header   : '',
 		id       : 'see_more',
-		accessor : ({ user = {}, test_id = '' }) => (
+		accessor : ({ user = {}, test_id = '', is_evaluated = false }) => (
 			<div
 				role="presentation"
-				onClick={() => handleRedirectToDashboard({ router, user, test_id })}
+				onClick={() => handleRedirectToDashboard({ router, user, test_id, is_evaluated })}
 				className={styles.see_more}
 			>
 				See More

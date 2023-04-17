@@ -1,7 +1,8 @@
 import { Placeholder } from '@cogoport/components';
+import { IcMArrowDown } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import Banner from './Banner';
 import CaseStudy from './CaseStudy';
@@ -9,11 +10,16 @@ import StandAlone from './StandAlone';
 import styles from './styles.module.css';
 import Subjective from './Subjective';
 
-function QnA({ user_name = '', test_id, user_id, view }) {
+function QnA({ user_name = '', test_id, user_id, view, is_evaluated = false }) {
 	const ref = useRef();
+
+	const [animation, setAnimation] = useState(false);
 
 	const scrollToSubjective = () => {
 		ref.current.scrollIntoView({ behavior: 'smooth' });
+		setTimeout(() => {
+			setAnimation(false);
+		}, 800);
 	};
 
 	const [{ data, loading }] = useRequest({
@@ -38,7 +44,7 @@ function QnA({ user_name = '', test_id, user_id, view }) {
 		);
 	}
 
-	const showBanner = view === 'admin' && !isEmpty(subjective_questions);
+	const showBanner = view === 'admin' && !isEmpty(subjective_questions) && !is_evaluated;
 
 	return (
 		<div className={styles.container}>
@@ -47,7 +53,7 @@ function QnA({ user_name = '', test_id, user_id, view }) {
 			</div>
 
 			{showBanner ? (
-				<Banner scrollToSubjective={scrollToSubjective} />
+				<Banner scrollToSubjective={scrollToSubjective} setAnimation={setAnimation} />
 			) : null}
 
 			<div className={styles.question_cards_container}>
@@ -78,6 +84,17 @@ function QnA({ user_name = '', test_id, user_id, view }) {
 					</div>
 				) : null}
 			</div>
+
+			{animation && (
+				<div className={styles.arrow_container}>
+					<IcMArrowDown
+						className={styles.animated_arrow}
+						width={80}
+						height={80}
+					/>
+					<IcMArrowDown width={80} height={80} />
+				</div>
+			)}
 		</div>
 	);
 }
