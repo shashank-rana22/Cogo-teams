@@ -46,9 +46,9 @@ const getNodeOptions = () => {
 export const nodeOptions = [...getNodeOptions(), { label: 'Master Node', value: 'master_node' }];
 
 export const networkBonusCriteria = [
-	{ label: 'None', value: 'none' },
-	{ label: '1 Transacting User', value: '1_transacting_user' },
-	{ label: '2 Transacting User', value: '2_transacting_user' },
-	{ label: '3 Transacting User', value: '3_transacting_user' },
-	{ label: '4 Transacting User', value: '4_transacting_user' },
+	{ label: 'None', value: 0 },
+	{ label: '1 Transacting User', value: 1 },
+	{ label: '2 Transacting User', value: 2 },
+	{ label: '3 Transacting User', value: 3 },
+	{ label: '4 Transacting User', value: 4 },
 ];

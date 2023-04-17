@@ -28,9 +28,14 @@ function KYCRule() {
 		}
 	}, [data, setValue]);
 
-	const handleSave =  (values, e) => {
+	const handleSave = (values, e) => {
 		e.stopPropagation();
-		createRule({ ...values, referral_bonus : {total_cogopoints: Number(values.total_cogopoints)} , event: 'kyc_verified' });
+		createRule({
+			...values,
+			referral_bonus:
+			{ total_cogopoints: Number(values.total_cogopoints) },
+			event: 'kyc_verified',
+		});
 	};
 
 	const handleEdit = () => {

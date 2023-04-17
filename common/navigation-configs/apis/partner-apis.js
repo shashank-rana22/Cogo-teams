@@ -11422,6 +11422,13 @@ const partner = {
 			service_name : 'tickets',
 		},
 	],
+	referral_config: [
+		{
+			api          : 'list_promotions',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+	],
 };
 
 export default partner;

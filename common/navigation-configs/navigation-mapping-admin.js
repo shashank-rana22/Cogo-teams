@@ -2217,7 +2217,7 @@ const navigationMappingAdmin = {
 				as            : '/referral/configuration',
 				type          : 'link',
 				main_apis     : [],
-				possible_apis : [],
+				possible_apis : apis.referral_config,
 			},
 			{
 				key           : 'referral-affiliate_management',
