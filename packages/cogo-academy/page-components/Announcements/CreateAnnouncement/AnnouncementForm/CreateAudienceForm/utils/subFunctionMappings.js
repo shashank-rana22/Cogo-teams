@@ -25,6 +25,10 @@ const SUB_FUNCTION_MAPPING = {
 			value : 'cp_portfolio',
 		},
 		{
+			label : 'Customer Operations',
+			value : 'customer_operations',
+		},
+		{
 			label : 'All',
 			value : 'all',
 		},
@@ -102,6 +106,13 @@ const SUB_FUNCTION_MAPPING = {
 		{
 			label : 'All',
 			value : 'all',
+		},
+	],
+
+	external: [
+		{
+			label : 'Enrichment',
+			value : 'enrichment',
 		},
 	],
 

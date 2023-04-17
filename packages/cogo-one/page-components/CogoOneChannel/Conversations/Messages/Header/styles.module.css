@@ -109,3 +109,34 @@
 	color: #4f4f4f;
 	text-align: left;
 }
+
+.icon_div {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 27px;
+	margin-left: 6px;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+}
+
+.profile_icon {
+	width: 15px;
+	height: 15px;
+	fill: #221f20;
+}
+
+.update_icon {
+	position: absolute;
+	top: 3px;
+	right: 6px;
+	z-index: 10;
+	width: 7px;
+	height: 7px;
+}
+
+.disable_icon {
+	cursor: not-allowed !important;
+}

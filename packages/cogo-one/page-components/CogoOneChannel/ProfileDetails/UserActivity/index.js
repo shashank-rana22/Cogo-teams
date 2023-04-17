@@ -7,6 +7,7 @@ import EmptyState from '../../../../common/EmptyState';
 import { USER_ACTIVITY_MAPPING } from '../../../../constants';
 import useGetOmnichannelActivityLogs from '../../../../hooks/useGetOmnichannelActivityLogs';
 import useListCogooneTimeline from '../../../../hooks/useListCogooneTimeline';
+import useListUserChatSummary from '../../../../hooks/useListUserChatSummary';
 import getUserActivityComponent from '../../../../utils/getUserActivityComponent';
 
 import Filters from './Filters';
@@ -15,13 +16,19 @@ import styles from './styles.module.css';
 
 const EmptyFunction = () => {};
 
-function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessageData }) {
+function UserActivities({
+	activeTab, activeVoiceCard, customerId, formattedMessageData, activeMessageCard, showMore,
+}) {
 	const [activityTab, setActivityTab] = useState('transactional');
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [pagination, setPagination] = useState(1);
 	const [activeSubTab, setActiveSubTab] = useState('channels');
 
-	const { user_id:messageUserId, lead_user_id:messageLeadUserId = null, id = '' } = formattedMessageData || {};
+	const { mobile_no, channel_type = '' } = activeMessageCard;
+	const {
+		user_id:messageUserId,
+		lead_user_id:messageLeadUserId = null, id = '', sender = '',
+	} = formattedMessageData || {};
 
 	const { user_id:voiceCallUserId = '' } = activeVoiceCard || {};
 
@@ -62,18 +69,44 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 
 	});
 
+	const {
+		chatData = {},
+		dateFilters,
+		setDateFilters = EmptyFunction,
+		getUserChatSummary = EmptyFunction,
+	} = useListUserChatSummary({
+		mobile_no,
+		activeSubTab,
+		sender,
+		user_id,
+		lead_user_id,
+		pagination,
+		setPagination,
+		channel_type,
+	});
+
 	const { communication = {}, platform = {}, transactional = {} } = data || {};
 
 	const { list: timeLineList = [], total_count: agent_total_count } = timeLineData || {};
+	const { list: chatDataList = [], total_count: summary_total_count } = chatData || {};
 
 	let list = [];
 	let channel_total_count;
+
 	if (activityTab === 'communication' || activityTab === 'transactional') {
 		list = data?.[activityTab]?.list || [];
 		channel_total_count = data?.[activityTab]?.total_count || '0';
 	} else {
 		list = data?.[activityTab]?.spot_searches?.list || [];
 		channel_total_count = data?.[activityTab]?.spot_searches?.total_count || '0';
+	}
+	let subtab_count;
+	if (activeSubTab === 'agent') {
+		subtab_count = agent_total_count;
+	} else if (activeSubTab === 'summary') {
+		subtab_count = summary_total_count;
+	} else {
+		subtab_count = channel_total_count;
 	}
 
 	useEffect(() => {
@@ -82,27 +115,42 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 
 	useEffect(() => {
 		setFilters(null);
-		setActiveSubTab('channels');
+		setDateFilters(null);
 		setPagination(1);
-	}, [activityTab, setFilters]);
+		if (activityTab !== 'communication') {
+			setActiveSubTab('channels');
+		}
+	}, [activityTab, activeSubTab, setFilters, setDateFilters]);
 
 	const handleFilters = (val) => {
+		if (activeSubTab === 'summary') {
+			setDateFilters(val);
+		} else {
+			setFilters(val);
+		}
 		setPagination(1);
-		setFilters(val);
+		setFilterVisible(false);
 	};
 
 	const handleReset = () => {
 		setFilters(null);
-		fetchActivityLogs();
+		setDateFilters(null);
+		if (activeSubTab === 'summary') {
+			getUserChatSummary();
+		} else {
+			fetchActivityLogs();
+		}
+		setFilterVisible(false);
 	};
 
-	useEffect(() => {
-		setPagination(1);
-		setFilters(null);
-	}, [activeSubTab, setFilters]);
-
-	const emptyCheck = activeSubTab !== 'channels'
-		? isEmpty(timeLineList) : (!user_id && !lead_user_id) || isEmpty(list);
+	let emptyCheck = false;
+	if (activeSubTab === 'channels') {
+		emptyCheck = (!user_id && !lead_user_id) || isEmpty(list);
+	} else if (activeSubTab === 'summary') {
+		emptyCheck = isEmpty(chatDataList);
+	} else {
+		emptyCheck = isEmpty(timeLineList);
+	}
 
 	function ShowData() {
 		return emptyCheck ? (
@@ -119,11 +167,18 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 						platform={platform}
 						transactional={transactional}
 						timeLineList={timeLineList}
+						chatDataList={chatDataList}
 					/>
 				)}
 			</div>
 		);
 	}
+	useEffect(() => {
+		if (showMore) {
+			setActivityTab('communication');
+			setActiveSubTab('summary');
+		}
+	}, [showMore]);
 
 	return (
 		<div className={styles.container}>
@@ -138,21 +193,28 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 						name="transactional"
 						title={<IcMFdollar width={20} height={20} />}
 					/>
-					<TabPanel name="platform" title={<IcMPlatformDemo width={20} height={20} />} />
-					<TabPanel name="communication" title={<IcMCampaignTool width={20} height={20} />} />
+					<TabPanel
+						name="platform"
+						title={<IcMPlatformDemo width={20} height={20} />}
+					/>
+					<TabPanel
+						name="communication"
+						title={<IcMCampaignTool width={20} height={20} />}
+					/>
 				</Tabs>
 			</div>
 
 			{(activeTab === 'message' && activityTab === 'communication') && (
 				<div className={styles.communication_options}>
 					<Tabs
-						activeSubTab={activeSubTab}
+						activeTab={activeSubTab}
 						themeType="secondary"
 						onChange={setActiveSubTab}
 						fullWidth={false}
 					>
 						<TabPanel name="channels" title="Channels" />
 						<TabPanel name="agent" title="Agents" />
+						<TabPanel name="summary" title="Summary" />
 					</Tabs>
 				</div>
 			)}
@@ -160,7 +222,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 			{activeSubTab !== 'agent' && (
 				<div className={styles.filters_container}>
 					<div className={styles.title}>
-						{USER_ACTIVITY_MAPPING[activityTab]}
+						{USER_ACTIVITY_MAPPING[activeSubTab === 'summary' ? activeSubTab : activityTab]}
 					</div>
 
 					{activityTab !== 'platform' && (
@@ -173,9 +235,12 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 										activityTab={activityTab}
 										filters={filters}
 										setFilters={setFilters}
+										dateFilters={dateFilters}
+										setDateFilters={setDateFilters}
 										handleFilters={handleFilters}
 										handleReset={handleReset}
 										loading={loading}
+										activeSubTab={activeSubTab}
 									/>
 								)}
 								visible={filterVisible}
@@ -205,7 +270,7 @@ function UserActivities({ activeTab, activeVoiceCard, customerId, formattedMessa
 					<Pagination
 						type="page"
 						currentPage={pagination}
-						totalItems={activeSubTab === 'agent' ? agent_total_count : channel_total_count}
+						totalItems={subtab_count}
 						pageSize={10}
 						onPageChange={(val) => setPagination(val)}
 					/>

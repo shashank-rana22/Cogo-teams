@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import COMPONENT_MAPPING from '../../../constants/COMPONENT_MAPPING';
+import useCheckChannelPartner from '../../../hooks/useCheckChannelPartner';
 import useListOmnichannelDocuments from '../../../hooks/useListOmnichannelDocuments';
-import useListOrganizations from '../../../hooks/useListOrganizations';
 import getActiveCardDetails from '../../../utils/getActiveCardDetails';
 
 import RightSideNav from './RightSideNav';
@@ -15,10 +15,13 @@ function ProfileDetails({
 	updateLeaduser,
 	activeCardId,
 	setModalType = () => {},
+	setActiveMessage = () => {},
+	activeRoomLoading,
 }) {
 	const customerId = activeTab === 'message' ? activeMessageCard?.id : activeVoiceCard?.id;
 
 	const [activeSelect, setActiveSelect] = useState('profile');
+	const [showMore, setShowMore] = useState(false);
 	const ActiveComp = COMPONENT_MAPPING[activeSelect] || null;
 	const formattedMessageData = getActiveCardDetails(activeMessageCard) || {};
 	const orgId = activeTab === 'message'
@@ -29,8 +32,8 @@ function ProfileDetails({
 		openNewTab,
 		loading,
 		ORG_PAGE_URL = '',
-		disableQuickActions,
-	} = useListOrganizations({ orgId, activeCardId, activeTab });
+		disableQuickActions, hideCpButton, getOrgDetails,
+	} = useCheckChannelPartner({ orgId, activeCardId, activeTab });
 
 	const {
 		documents_count = 0,
@@ -42,6 +45,10 @@ function ProfileDetails({
 		activeSelect,
 		type: 'count',
 	});
+
+	useEffect(() => {
+		setShowMore(false);
+	}, [activeSelect]);
 
 	return (
 		<div className={styles.profile_div}>
@@ -62,6 +69,13 @@ function ProfileDetails({
 						disableQuickActions={disableQuickActions}
 						documents_count={documents_count}
 						setModalType={setModalType}
+						hideCpButton={hideCpButton}
+						getOrgDetails={getOrgDetails}
+						setActiveMessage={setActiveMessage}
+						activeRoomLoading={activeRoomLoading}
+						setActiveSelect={setActiveSelect}
+						showMore={showMore}
+						setShowMore={setShowMore}
 					/>
 				)}
 			</div>

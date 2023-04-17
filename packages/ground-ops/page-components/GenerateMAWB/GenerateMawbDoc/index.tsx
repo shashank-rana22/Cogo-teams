@@ -4,9 +4,11 @@ import html2canvas from 'html2canvas';
 import { jsPDF as JsPDF } from 'jspdf';
 import React, { createRef, useState, ReactFragment } from 'react';
 
+import { backPage, footerImages } from '../Helpers/configurations/12CopiesImages';
+import { footerValues } from '../Helpers/configurations/footerValues';
+
 import ChargeDetails from './ChargeDetails';
 import ContainerDetails from './ContainerDetails';
-import { footerValues } from './footerValues';
 import getFileObject from './getFileObject';
 import ShipmentDetails from './ShipmentDetails';
 import ShipperConsigneeDetails from './ShipperConsigneeDetails';
@@ -29,6 +31,13 @@ interface Props {
 	viewDoc?: boolean;
 	chargeableWeight?:number;
 	setGenerate?:Function;
+	activeCategory?: string;
+	hawbDetails?: Array<string>;
+	activeHawb?: NestedObj;
+	setHawbDetails?:Function;
+	setActiveHawb?: Function;
+	setActiveKey?: Function;
+	pendingTaskId?: string;
 }
 
 const downloadButton = {
@@ -36,23 +45,6 @@ const downloadButton = {
 	document_uploaded            : 'Download',
 	document_amendment_requested : 'Download',
 };
-
-const footerImages = [
-	'https://cogoport-production.sgp1.digitaloceanspaces.com/1fcd0257b396ea304a7aebfeaceaee76/original_3.png',
-	'https://cogoport-production.sgp1.digitaloceanspaces.com/34f4ab91d2f08e432f5e99cec869e07b/original_2.png',
-	'https://cogoport-production.sgp1.digitaloceanspaces.com/30186a4d8094f78fffba0aeac1847cd0/original_1.png',
-	'https://cogoport-production.sgp1.digitaloceanspaces.com/5b6c3ea3e1a28d1c3060f835ad206e99/copy_9.png',
-	'https://cogoport-production.sgp1.digitaloceanspaces.com/1c5be0fc713882e9b85303b62d3f1ac8/copy_4.png',
-	'https://cogoport-production.sgp1.digitaloceanspaces.com/3a65756e817610ddf75769c89145eb84/copy_5.png',
-	'https://cogoport-production.sgp1.digitaloceanspaces.com/84eaddd1db3e444b25d1ce0066f19581/copy_6.png',
-	'https://cogoport-production.sgp1.digitaloceanspaces.com/ca3a74c08dd2aabcba392de64cd04ed6/copy_7.png',
-	'https://cogoport-production.sgp1.digitaloceanspaces.com/c56cba1039292819dd6d700d5d8f5d07/copy_8.png',
-	'https://cogoport-production.sgp1.digitaloceanspaces.com/94fec99404e921d7a1de47c30a4e5afa/copy_10.png',
-	'https://cogoport-production.sgp1.digitaloceanspaces.com/daabebf1b3ade5afb890dbc79ce3b9eb/copy_11.png',
-	'https://cogoport-production.sgp1.digitaloceanspaces.com/7c2328f811865365b3c50d0fc23849fc/copy_12.png',
-];
-
-const backPage = 'https://cogoport-production.sgp1.digitaloceanspaces.com/8b7f9de6c16ef64db501a7e71dc7aa96/back.jpg';
 
 function GenerateMawb({
 	taskItem = {},
@@ -64,17 +56,19 @@ function GenerateMawb({
 	viewDoc = false,
 	chargeableWeight,
 	setGenerate = () => {},
+	activeCategory = '',
+	hawbDetails = [],
+	setHawbDetails = () => {},
+	activeHawb = {},
+	setActiveHawb,
+	setActiveKey,
+	pendingTaskId = '',
 }:Props) {
 	const filteredData = { ...formData };
 
 	const serialId = taskItem?.serialId || '';
 
 	const { handleUpload } = useGetMediaUrl();
-	const { upload, loading } = useCreateShipmentDocument({
-		edit,
-		setGenerate,
-		setEdit,
-	});
 
 	const ref = createRef(null);
 
@@ -88,6 +82,19 @@ function GenerateMawb({
 		}
 	};
 
+	const { upload, loading } = useCreateShipmentDocument({
+		edit,
+		setGenerate,
+		setEdit,
+		activeCategory,
+		hawbDetails,
+		setHawbDetails,
+		setActiveHawb,
+		setActiveKey,
+		handleClick,
+		activeHawb,
+	});
+
 	const takeImageScreenShot = async (node) => {
 		const dataURI = await htmlToImage.toJpeg(node);
 		return dataURI;
@@ -100,14 +107,14 @@ function GenerateMawb({
 		const { file } = getFileObject(newImage, 'mawb.pdf');
 		const res = await handleUpload('mawb.pdf', file);
 		const payload = {
-			shipment_id         : taskItem?.shipmentId,
+			shipment_id         : taskItem?.shipmentId || taskItem?.shipment_id,
 			uploaded_by_org_id  : taskItem?.serviceProviderId,
 			performed_by_org_id : taskItem?.serviceProviderId,
-			document_type       : 'draft_airway_bill',
-			id                  : taskItem?.documentId,
+			document_type       : activeCategory === 'mawb' ? 'draft_airway_bill' : 'draft_house_airway_bill',
+			id                  : activeCategory === 'mawb' ? taskItem?.documentId : pendingTaskId,
 			service_id          : taskItem?.serviceId,
 			service_type        : 'air_freight_service',
-			pending_task_id     : edit === 'edit' ? undefined : taskItem?.id,
+			pending_task_id     : edit === 'edit' || activeHawb.isNew === false ? undefined : pendingTaskId,
 			data                : {
 				...filteredData,
 				status          : 'generated',
@@ -131,6 +138,7 @@ function GenerateMawb({
 						service_type    : 'air_freight_service',
 						...filteredData,
 						status          : 'generated',
+						bl_detail_id    : taskItem?.blDetailId,
 					},
 				},
 			],
@@ -197,7 +205,6 @@ function GenerateMawb({
 
 	return (
 		<div className={styles.flex_col}>
-
 			{viewDoc
 			&& (
 				<div
@@ -250,17 +257,20 @@ function GenerateMawb({
 					background : '#fff',
 				}}
 			>
-				{taskItem?.documentState !== 'document_accepted'
-				&& <Watermark text="draft" rotateAngle="315deg" />}
+				{taskItem?.documentState !== 'document_accepted' && <Watermark text="draft" rotateAngle="315deg" />}
 				<div style={{ position: 'relative' }}>
 					<ShipperConsigneeDetails
 						formData={filteredData}
 						taskItem={taskItem}
 						whiteout={whiteout}
+						activeCategory={activeCategory}
+						edit={edit}
+						viewDoc={viewDoc}
 					/>
 					<ShipmentDetails
 						formData={filteredData}
 						whiteout={whiteout}
+						activeCategory={activeCategory}
 					/>
 					<ContainerDetails
 						formData={filteredData}
@@ -273,6 +283,9 @@ function GenerateMawb({
 						formData={filteredData}
 						data={data}
 						whiteout={whiteout}
+						activeCategory={activeCategory}
+						edit={edit}
+						viewDoc={viewDoc}
 					/>
 				</div>
 			</div>
@@ -310,7 +323,6 @@ function GenerateMawb({
 				</div>
 			)}
 		</div>
-
 	);
 }
 

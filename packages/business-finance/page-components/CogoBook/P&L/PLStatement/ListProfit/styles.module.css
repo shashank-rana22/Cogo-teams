@@ -1,0 +1,138 @@
+.container {
+	margin-top: 16px;
+	background: #fff;
+	border: 1px solid #acdadf;
+	border-radius: 8px;
+}
+
+.data_sub {
+	display: flex;
+	border-bottom: 1px solid #acdadf;
+}
+
+.data_sub:last-child {
+	border-bottom: none;
+}
+
+.header_particular {
+	width: 41%;
+	padding: 18px 24px;
+	font-weight: 600;
+	color: #f68b21;
+	border-right: 1px solid #acdadf;
+}
+
+.header_ocean {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	padding: 18px;
+	font-weight: 600;
+	color: #f68b21;
+	border-right: 1px solid #acdadf;
+}
+
+.header_air {
+	width: 10%;
+	padding: 18px 24px;
+	font-weight: 600;
+	color: #f68b21;
+	border-right: 1px solid #acdadf;
+}
+
+.header_surface {
+	width: 10%;
+	padding: 18px 24px;
+	font-weight: 600;
+	color: #f68b21;
+	border-right: 1px solid #acdadf;
+}
+
+.header_rail {
+	width: 10%;
+	padding: 18px 24px;
+	font-weight: 600;
+	color: #f68b21;
+	border-right: 1px solid #acdadf;
+}
+
+.header_total {
+	width: 10%;
+	padding: 18px 24px;
+	font-weight: 600;
+	color: #f68b21;
+}
+
+.first_particular {
+	display: flex;
+	flex-direction: column;
+	width: 41%;
+	padding: 18px;
+	border-right: 1px solid #acdadf;
+}
+
+.row_vis_data {
+	margin-left: 8px;
+	color: #000000ad;
+}
+
+.first_ocean {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	width: 10%;
+	padding: 18px;
+	border-right: 1px solid #acdadf;
+}
+
+.first_air {
+	width: 10%;
+	padding: 18px 24px;
+	border-right: 1px solid #acdadf;
+}
+
+.first_surface {
+	width: 10%;
+	padding: 18px 24px;
+	border-right: 1px solid #acdadf;
+}
+
+.first_rail {
+	width: 10%;
+	padding: 18px 24px;
+	border-right: 1px solid #acdadf;
+}
+
+.first_total {
+	width: 10%;
+	padding: 18px 24px;
+}
+
+.particular_data {
+	margin: 8px 0;
+	margin-top: 12px;
+	font-weight: 600;
+}
+
+.particular_data_review {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	margin: 8px 0;
+	font-weight: 600;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.icon_data {
+	margin-top: 10px;
+}
+
+.depreciation {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	margin: 8px 0;
+	font-weight: 600;
+	cursor: pointer;
+}

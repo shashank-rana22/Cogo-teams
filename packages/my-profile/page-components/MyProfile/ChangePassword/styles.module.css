@@ -13,7 +13,7 @@
 }
 
 .password_validator {
-	margin-top: 32px;
+	margin-top: 12px;
 
 	:global {
 		.icon {

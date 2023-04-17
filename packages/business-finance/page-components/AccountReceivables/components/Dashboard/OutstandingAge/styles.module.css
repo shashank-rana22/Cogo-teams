@@ -1,0 +1,70 @@
+.container {
+	display: flex;
+	height: 220px;
+	margin: 0 12px 12px 0;
+	background-color: white;
+	border-radius: 12px;
+}
+
+.styled_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 36%;
+	margin: 24px 0;
+	border-right: 2px solid #ed3726;
+}
+
+.vertical_bar_graph {
+	width: 480px;
+	height: 200px;
+	overflow: hidden;
+}
+
+.no_data_found_icon {
+	width: 60%;
+	height: 60%;
+}
+
+.outstanding {
+	display: flex;
+	flex-direction: column;
+}
+
+.styled_text {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.styled_text_age {
+	margin-right: 4px;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.dashboard {
+	width: 60%;
+	margin-top: 20px;
+}
+
+.bar_chart {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.styled_flex_age {
+	display: flex;
+	align-items: center;
+}
+
+.icon {
+	height: 18px;
+	margin-left: 2px;
+}
+
+.border {
+	width: 50%;
+	margin-top: 4px;
+	border: 1.5px solid #ed3726;
+}

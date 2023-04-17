@@ -1,9 +1,9 @@
-import { Select, Input, Popover } from '@cogoport/components';
+import { Input, Popover } from '@cogoport/components';
 import { IcMArrowRotateUp, IcMArrowRotateDown, IcMCross, IcMSearchdark } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import { GenericObject } from '../../../commons/Interfaces';
-import { ENTITY_TYPE, SEARCH_OPTIONS, SORTBY_OPTION } from '../../../constants/index';
+import { SEARCH_OPTIONS, SORTBY_OPTION } from '../../../constants/index';
 
 import FilterpopOver from './FilterpopOver';
 import styles from './styles.module.css';
@@ -49,10 +49,6 @@ function Filters({
 
 	const sortStyleDesc = orderBy.order === 'Desc' ? '#303B67' : '#BDBDBD';
 
-	const onChange = (val:string, name:string) => {
-		setParams((p) => ({ ...p, [name]: val }));
-	};
-
 	let placeholder;
 	if (queryKey === 'q') {
 		placeholder = 'Search By Business Name/Pan Number';
@@ -67,17 +63,6 @@ function Filters({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.entity_code}>
-				<Select
-					value={params.entityCode}
-					onChange={(val:string) => onChange(val, 'entityCode')}
-					placeholder="Select Entity Type"
-					options={ENTITY_TYPE}
-					size="sm"
-				/>
-				{' '}
-
-			</div>
 			<div className={styles.filter_container}>
 				<div className={styles.sort_container}>
 
@@ -174,7 +159,6 @@ function Filters({
 					</div>
 					<div className={styles.flex_wrap}>
 						<Input
-							className="primary md"
 							placeholder={placeholder}
 							value={search}
 							onChange={(e) => handleChange(e)}
@@ -182,12 +166,13 @@ function Filters({
 								<IcMCross
 									onClick={handleInputReset}
 									cursor="pointer"
+									className={styles.icon_style}
 								/>
 							)}
 							prefix={(
 								<IcMSearchdark />
 							)}
-							style={{ width: 300 }}
+							className={styles.styled_input}
 						/>
 					</div>
 					<FilterpopOver

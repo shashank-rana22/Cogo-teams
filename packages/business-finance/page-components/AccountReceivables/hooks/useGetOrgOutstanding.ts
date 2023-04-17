@@ -9,7 +9,6 @@ interface Outstanding {
 	page?:number,
 	pageLimit?:number,
 	search?:string,
-	entityCode:string,
 	organizationSerialId?:string
 	q?:string
 	sageId?:string
@@ -18,13 +17,13 @@ interface Outstanding {
 
 interface GetOrgOutstanding {
 	formFilters?: GenericObject
+	entityCode?: string
 }
 
-const useGetOrgOutstanding = ({ formFilters }: GetOrgOutstanding) => {
+const useGetOrgOutstanding = ({ formFilters, entityCode }: GetOrgOutstanding) => {
 	const [outStandingFilters, setoutStandingFilters] = useState<Outstanding>({
-		page       : 1,
-		pageLimit  : 10,
-		entityCode : '301',
+		page      : 1,
+		pageLimit : 10,
 	});
 
 	const [queryKey, setQueryKey] = useState('q');
@@ -34,10 +33,10 @@ const useGetOrgOutstanding = ({ formFilters }: GetOrgOutstanding) => {
 		label : 'Total Outstanding Amount',
 	});
 	const {
-		search, entityCode, organizationSerialId, pageLimit, page, q, sageId, tradePartySerialId,
+		search, organizationSerialId, pageLimit, page, q, sageId, tradePartySerialId,
 	} = outStandingFilters || {};
 
-	const { salesAgentId, creditControllerId, companyType } = formFilters;
+	const { kamId, salesAgentId, creditControllerId, companyType } = formFilters;
 
 	const { order, key } = orderBy || {};
 
@@ -69,6 +68,7 @@ const useGetOrgOutstanding = ({ formFilters }: GetOrgOutstanding) => {
 						pageLimit,
 						salesAgentId         : salesAgentId || undefined,
 						creditControllerId   : creditControllerId || undefined,
+						kamId                : kamId || undefined,
 						companyType          : companyType || undefined,
 						entityCode           : entityCode || undefined,
 						organizationSerialId : organizationSerialId || undefined,
@@ -83,7 +83,7 @@ const useGetOrgOutstanding = ({ formFilters }: GetOrgOutstanding) => {
 		};
 		refetch();
 	}, [entityCode, companyType, creditControllerId, orderBy, salesAgentId, trigger,
-		organizationSerialId, page, pageLimit, sageId, tradePartySerialId, q, key, order]);
+		organizationSerialId, page, pageLimit, sageId, tradePartySerialId, q, key, order, kamId]);
 
 	useEffect(() => {
 		const resetQuery = {

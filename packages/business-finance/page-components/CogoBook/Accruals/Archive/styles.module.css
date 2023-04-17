@@ -1,0 +1,93 @@
+.toggle_container {
+	position: absolute;
+	top: 57px;
+	right: 1px;
+}
+
+.flex_container {
+	display: block;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.header_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-left: 8px;
+}
+
+.filter_container {
+	display: flex;
+	align-items: center;
+	width: 44%;
+}
+
+.div_select {
+	margin-top: 12px;
+	margin-right: 5px;
+}
+
+.search_container {
+	width: 400px;
+	margin-top: 10px;
+	margin-right: 14px;
+}
+
+.table_container {
+	margin-bottom: 80px;
+}
+
+.job_number {
+	display: flex;
+	flex-direction: column;
+	cursor: pointer;
+}
+
+.job_number_data {
+	font-weight: 600;
+	text-decoration: underline;
+}
+
+.header_checkbox {
+	padding-left: 4px;
+}
+
+.button {
+	width: 80px;
+}
+
+.button_container {
+	display: flex;
+}
+
+.selected {
+	display: flex;
+	justify-content: center;
+	width: 10%;
+	padding: 12px;
+	margin: 0 12px 0 0;
+	color: #ed3726;
+	cursor: pointer;
+	background: #fdebe9;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.button_tab {
+	display: flex;
+	justify-content: center;
+	width: 10%;
+	padding: 12px;
+	margin: 0 12px 0 0;
+	cursor: pointer;
+	background: white;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.backlist {
+	margin-top: 16px;
+	background: white;
+}

@@ -53,6 +53,20 @@ function asyncFieldsOrganization() {
 	};
 }
 
+function asyncFieldsLeadOrganization() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'id',
+		endpoint    : 'list_lead_organizations',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
 function asyncFieldsOrganizationUsers() {
 	return {
 		labelKey    : 'name',
@@ -166,13 +180,13 @@ function asyncFieldsListAgents() {
 		endpoint    : 'list_chat_agents',
 		initialCall : true,
 		params      : {
-			filters    : { status: 'active' },
 			page_limit : 20,
 			sort_by    : 'active_assigned_chats',
 			sort_type  : 'asc',
 		},
 	};
 }
+
 function asyncFieldListRateChargeCodes() {
 	return {
 		labelKey    : 'name',
@@ -203,6 +217,74 @@ function asyncAllotBanks() {
 	};
 }
 
+function asyncFieldsExpertiseConfigurations() {
+	return {
+		labelKey     : 'condition_name',
+		valueKey     : 'id',
+		endpoint     : '/kam_expertise_event_configuration_name',
+		authkey      : 'get_allocation_kam_expertise_event_configuration_name',
+		microService : 'allocation',
+		initialCall  : false,
+	};
+}
+
+function asyncFieldsExpertiseBadgeName() {
+	return {
+		labelKey     : 'badge_name',
+		valueKey     : 'id',
+		endpoint     : '/kam_expertise_badge_name',
+		authkey      : 'get_allocation_kam_expertise_badge_name',
+		microService : 'allocation',
+		initialCall  : false,
+	};
+}
+
+function asyncKamExpertiseRuleOptions() {
+	return {
+		labelKey     : 'option',
+		valueKey     : 'option',
+		endpoint     : '/kam_expertise_rule_options',
+		authkey      : 'get_allocation_kam_expertise_rule_options',
+		microService : 'allocation',
+		initialCall  : false,
+	};
+}
+
+function asyncKamExpertiseGroupOptions() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'group_name',
+		endpoint     : '/kam_expertise_event_group_name',
+		authkey      : 'get_allocation_kam_expertise_event_group_name',
+		microService : 'allocation',
+		initialCall  : true,
+	};
+}
+
+function listVendors() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'q',
+		endpoint    : 'list_vendors',
+		initialCall : false,
+	};
+}
+
+function asyncListCogoEntity() {
+	return {
+		labelKey    : 'business_name',
+		valueKey    : 'entity_code',
+		endpoint    : 'list_cogo_entities',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 100,
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -210,6 +292,7 @@ export {
 	asyncFieldsPartnerRoles,
 	asyncFieldsPartnerUsers,
 	asyncFieldsOrganizations,
+	asyncFieldsLeadOrganization,
 	asyncFieldsOrganizationUser,
 	asyncFieldsCampaignSegments,
 	asyncFieldsOrganization,
@@ -219,4 +302,10 @@ export {
 	asyncFieldsListAgents,
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
+	asyncFieldsExpertiseConfigurations,
+	asyncFieldsExpertiseBadgeName,
+	asyncKamExpertiseRuleOptions,
+	asyncKamExpertiseGroupOptions,
+	listVendors,
+	asyncListCogoEntity,
 };

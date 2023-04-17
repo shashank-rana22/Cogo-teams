@@ -1,11 +1,11 @@
-import { Tooltip, Pill } from '@cogoport/components';
+import { Pill } from '@cogoport/components';
 import getPrice from '@cogoport/forms/utils/get-formatted-price';
 import { format, getByKey, startCase } from '@cogoport/utils';
 
 import InvoiceDetails from '../commons/invoiceDetails';
 import Remarks from '../commons/Remarks';
 import RenderIRNGenerated from '../commons/RenderIRNGenerated';
-import { getDocumentNumber } from '../Utils/getDocumentNumber';
+import { getDocumentNumber, getDocumentUrl } from '../Utils/getDocumentNumber';
 
 import styles from './styles.module.css';
 
@@ -34,40 +34,14 @@ const invoiceStatus = {
 };
 
 const completedColumn = (refetch: Function) => [
-	{
-		Header   : 'Name',
-		id       : 'name',
-		accessor : (row) => (
 
-			(getByKey(row, 'organizationName') as string).length > 10 ? (
-				<Tooltip
-					placement="top"
-					content={getByKey(row, 'organizationName') as string}
-				>
-					<text>
-						{`${(getByKey(row, 'organizationName') as string).substring(
-							0,
-							20,
-						)}...`}
-					</text>
-				</Tooltip>
-			)
-
-				: (
-					<div>
-						{getByKey(row, 'organizationName') as string}
-					</div>
-				)
-		),
-
-	},
 	{
 		Header   : 'Invoice Number',
 		accessor : (row) => (
 			<div className={styles.fieldPair}>
 				<div
 					className={styles.link}
-					onClick={() => window.open(getByKey(row, 'invoiceNumber') as string, '_blank')}
+					onClick={() => window.open(getDocumentUrl({ itemData: row }) as string, '_blank')}
 					role="presentation"
 				>
 					{getDocumentNumber({ itemData: row })}

@@ -1,0 +1,19 @@
+.go_back {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	margin-bottom: 12px;
+	cursor: pointer;
+}
+
+.go_back_text {
+	margin: 0 0 0 8px;
+	font-size: 20px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.test_user_name {
+	font-size: 20px;
+	color: #221f20;
+}

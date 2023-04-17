@@ -1,14 +1,21 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
-function useListTemplate({ activeTab }) {
+import { hasPermission } from '../constants/IDS_CONSTANTS';
+
+function useListTemplate() {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/list_communication_templates',
 		method : 'get',
 	}, { manual: true });
 
+	const { userRoleIds, userId } = useSelector(({ profile }) => ({
+		userRoleIds : profile.partner?.user_role_ids || [],
+		userId      : profile?.user?.id,
+	}));
+	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
 	const [qfilter, setQfilter] = useState('');
 	const [pagination, setPagination] = useState(1);
 	const [infiniteList, setInfiniteList] = useState({
@@ -16,16 +23,17 @@ function useListTemplate({ activeTab }) {
 		total : 0,
 	});
 
-	const fetchListTemplate = async () => {
+	const fetchListTemplate = useCallback(async () => {
 		try {
 			const res = await trigger({
 				params: {
 					page                     : pagination,
 					pagination_data_required : true,
 					filters                  : {
-						q    : !isEmpty(qfilter?.trim()) ? qfilter?.trim() : undefined,
-						type : 'whatsapp',
-						tags : ['quick_reply'],
+						q                : !isEmpty(qfilter?.trim()) ? qfilter?.trim() : undefined,
+						type             : 'whatsapp',
+						tags             : ['quick_reply'],
+						performed_by_ids : !isomniChannelAdmin ? [userId] : undefined,
 					},
 				},
 			});
@@ -36,25 +44,30 @@ function useListTemplate({ activeTab }) {
 		} catch (error) {
 			// console.log(error);
 		}
-	};
-	const refetch = () => {
-		setPagination(1);
-		setInfiniteList((p) => ({ ...p, list: [] }));
-		fetchListTemplate();
-	};
+	}, [pagination, qfilter, trigger, userId, isomniChannelAdmin]);
+
 	useEffect(() => {
-		refetch();
-	}, [qfilter, activeTab]);
+		setInfiniteList((p) => ({ ...p, list: [] }));
+		setPagination(1);
+	}, [qfilter]);
 
 	useEffect(() => {
 		fetchListTemplate();
-	}, [pagination, activeTab]);
+	}, [fetchListTemplate]);
 
 	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
-		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= 0;
+		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= 50;
 		const hasMoreData = pagination < infiniteList?.total;
 		if (reachBottom && hasMoreData && !loading) {
 			setPagination((p) => p + 1);
+		}
+	};
+	const refetch = () => {
+		setInfiniteList((p) => ({ ...p, list: [] }));
+		if (pagination === 1) {
+			fetchListTemplate();
+		} else {
+			setPagination(1);
 		}
 	};
 
