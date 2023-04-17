@@ -136,7 +136,6 @@ function TreeView({ viewType = false }) {
 											params={params}
 											setParams={setParams}
 											key={user.id}
-											isLastLevel={user.is_last_level}
 										/>
 									))}
 								</div>
