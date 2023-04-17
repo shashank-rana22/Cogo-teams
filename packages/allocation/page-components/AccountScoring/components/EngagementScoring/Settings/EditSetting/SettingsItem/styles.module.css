@@ -1,0 +1,18 @@
+.label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #4f4f4f;
+    margin: 8px;
+}
+
+.input {
+    width: 240px;
+}
+
+.bias_input {
+    width: 300px;
+}
+
+.distribution_input {
+    width: 300px;
+}

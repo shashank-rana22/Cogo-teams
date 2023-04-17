@@ -1,8 +1,18 @@
-import React from 'react';
+import BiasSetting from './BiasSetting';
+import DistributionSetting from './DistributionSetting';
+import PercentileSetting from './PercentileSetting';
+import styles from './styles.module.css';
 
 function Settings() {
 	return (
-		<div>Settings</div>
+		<div className={styles.container}>
+			<PercentileSetting />
+
+			<BiasSetting />
+
+			<DistributionSetting />
+		</div>
+
 	);
 }
 
