@@ -97,7 +97,6 @@ function Stage({
 					setSelectedRow={setSelectedRow}
 					setShowContentModal={setShowContentModal}
 					setParentComponentId={setParentComponentId}
-					setSelectedRow={setSelectedRow}
 				/>
 			</div>
 		);
