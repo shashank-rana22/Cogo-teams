@@ -12,7 +12,9 @@ const useFilterPopover = ({ setFilters }) => {
 			page_limit               : 100000,
 			pagination_data_required : false,
 			is_admin_view            : true,
-			status                   : 'active',
+			filters                  : {
+				status: 'active',
+			},
 		},
 	}, { manual: false });
 
@@ -22,7 +24,9 @@ const useFilterPopover = ({ setFilters }) => {
 		params : {
 			page_limit               : 100000,
 			pagination_data_required : false,
-			status                   : 'active',
+			filters                  : {
+				status: 'active',
+			},
 		},
 	}, { manual: false });
 
@@ -32,7 +36,9 @@ const useFilterPopover = ({ setFilters }) => {
 		params : {
 			page_limit               : 100000,
 			pagination_data_required : false,
-			status                   : 'active',
+			filters                  : {
+				status: 'active',
+			},
 		},
 	}, { manual: false });
 
