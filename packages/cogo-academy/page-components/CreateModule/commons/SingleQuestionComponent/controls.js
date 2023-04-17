@@ -72,11 +72,6 @@ const getControls = ({ mode }) => [
 		placeholder : 'Type Explanation...',
 		rows        : 4,
 	},
-	{
-		name  : 'upload_answer',
-		type  : 'checkbox',
-		label : 'Option to Upload Answer',
-	},
 ];
 
 export default getControls;

@@ -20,7 +20,7 @@ const getSubjectivePayload = ({
 	if (action === 'delete') {
 		return { id: testQuestionId, status: 'inactive' };
 	}
-	
+
 	return {
 		id                   : testQuestionId,
 		test_question_set_id : questionSetId,

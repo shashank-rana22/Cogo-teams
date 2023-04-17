@@ -23,7 +23,7 @@ function useUpdateTest() {
 				const { test_duration, cut_off_percentage, maximum_attempts, name, test_validity, guidelines } = values;
 
 				const testDetailsObj = {
-					test_duration,
+					test_duration  : test_duration.toString(),
 					cut_off_percentage,
 					maximum_attempts,
 					name,

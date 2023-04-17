@@ -101,14 +101,24 @@ function TestDetailsModal(props) {
 								Ques/Case
 							</h5>
 							<p>
-								{questionsCount + subjectiveCount}
-								Q
-								{' '}
-								+
-								{' '}
-								{casesCount}
-								{' '}
-								Case
+								<div>
+									{questionsCount}
+									{' '}
+									Standalone
+								</div>
+
+								<div>
+									{casesCount}
+									{' '}
+									Cases
+								</div>
+
+								<div>
+									{subjectiveCount}
+									{' '}
+									Subjective
+								</div>
+
 							</p>
 						</div>
 						<div className={styles.attempts_pass}>
