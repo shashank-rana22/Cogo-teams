@@ -28,15 +28,18 @@ const modules = {
 };
 
 function TextComponent(props) {
-	const { text, components, setComponents, childId, selectedRow } = props;
+	const { text, components, setComponents, childId, elementId, selectedRow } = props;
 
 	const [editorValue, setEditorValue] = useState(text);
 
 	const handleEditorChange = (value) => {
-		const { parentId, id } = selectedRow || {};
+		const { parentId } = selectedRow || {};
 
 		const data = components;
-		const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === id));
+
+		// console.log('data ::', data);
+		// console.log('element id ::', elementId);
+		const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === elementId));
 
 		if (parentId) {
 			data.layouts[selectedComponentIndex].children[childId].content = value;
@@ -52,7 +55,7 @@ function TextComponent(props) {
 		return (
 			<ReactQuill
 				theme="snow"
-				placeholder={text}
+				placeholder={text || 'start typing'}
 				value={editorValue}
 				modules={modules}
 				onChange={handleEditorChange}
@@ -69,6 +72,7 @@ function TextComponent(props) {
 			trigger="click"
 			content={Editor()}
 		>
+
 			<div dangerouslySetInnerHTML={{ __html: text }} />
 		</Popover>
 

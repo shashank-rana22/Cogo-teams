@@ -42,17 +42,15 @@ function Structure(props) {
 		style      : {
 			display: 'flex',
 		},
-		properties: {
-			content: '',
-		},
+		content: '',
+
 	};
 
 	const getChildrenComponents = (rows) => {
 		const childrenComponents = rows.map((row, index) => {
-			const { parentId } =	parentComponent || {};
+			const { parentId } = parentComponent || {};
 
 			return ({
-				type       : 'container',
 				id         : index,
 				width      : row,
 				parentId,
@@ -66,12 +64,9 @@ function Structure(props) {
 					justifyContent : 'center',
 					alignItems     : 'center',
 				},
-				properties: {
-					content    : { icon: <IcMPlusInCircle style={{ cursor: 'pointer', fill: '#222' }} width={20} height={20} /> },
-					attributes : {
-						onClick: () => handleSubmitClick({ index, parentId }),
-					},
-
+				icon       : <IcMPlusInCircle style={{ cursor: 'pointer', fill: '#222' }} width={20} height={20} />,
+				attributes : {
+					onClick: () => handleSubmitClick({ index, parentId }),
 				},
 			});
 		});

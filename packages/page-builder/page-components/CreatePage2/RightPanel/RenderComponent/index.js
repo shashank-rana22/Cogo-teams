@@ -4,64 +4,65 @@ import ImageComponent from '../../../../commons/widgets/ImageComponent';
 import TextComponent from '../../../../commons/widgets/TextComponent';
 import VideoComponent from '../../../../commons/widgets/VideoComponent';
 
+const componentMapping = {
+	text   : TextComponent,
+	button : ButtonComponent,
+	image  : ImageComponent,
+	video  : VideoComponent,
+	html   : HtmlComponent,
+};
+
 function RenderComponents({ componentType, widget, components, setComponents, elementId, childId, selectedRow }) {
-	const COMPONENT_MAPPING = {
-		text: (
-			<TextComponent
-				key={elementId}
-				text={widget.content}
-				components={components}
-				setComponents={setComponents}
-				childId={childId}
-				selectedRow={selectedRow}
-			/>
-		),
+	const componentPropsMapping = {
+		text: {
+			key  : elementId,
+			text : widget.content,
+			components,
+			setComponents,
+			childId,
+			selectedRow,
+			elementId,
+		},
 
-		image: (
-			<ImageComponent
-				key={elementId}
-				src={widget.content}
-				components={components}
-				setComponents={setComponents}
-				childId={childId}
-				selectedRow={selectedRow}
-			/>
-		),
+		image: {
+			key : elementId,
+			src : widget.content,
+			components,
+			setComponents,
+			childId,
+			selectedRow,
+		},
 
-		button: (
-			<ButtonComponent
-				key={elementId}
-				label={widget.content}
-				themeType={widget.themeType}
-				size={widget.size}
-				type={widget.type}
-				components={components}
-				setComponents={setComponents}
-				elementId={elementId}
-			/>
-		),
+		button: {
+			key       : elementId,
+			label     : widget.content,
+			themeType : widget.themeType,
+			size      : widget.size,
+			type      : widget.type,
+			components,
+			setComponents,
+			elementId,
+		},
 
-		video: (
-			<VideoComponent
-				key={elementId}
-				src={widget.content}
-				components={components}
-				setComponents={setComponents}
-				childId={childId}
-				selectedRow={selectedRow}
-			/>
-		),
-		html: (
-			<HtmlComponent
-				key={elementId}
-				html={widget.content}
-			/>
-		),
+		video: {
+			key : elementId,
+			src : widget.content,
+			components,
+			setComponents,
+			childId,
+			selectedRow,
+		},
+		html: {
+			key  : elementId,
+			html : widget.content,
+		},
 	};
+
+	const Component = componentMapping[componentType];
 
 	return (
 		<div style={{ width: '100%', height: '100%', color: '#222' }}>
-			{COMPONENT_MAPPING[componentType]}
+			<Component key={componentType} {...(componentPropsMapping[componentType] || {})} />
 		</div>
 	);
 }

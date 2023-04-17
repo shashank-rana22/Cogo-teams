@@ -13,17 +13,8 @@ import RenderComponents from './RenderComponent';
 import styles from './styles.module.css';
 
 function ComponentBuilder({ widget, components, setComponents, selectedRow, childId, setChildId }) {
-	const { type: componetType, children, style, id: componentId } = widget || {};
+	const { children, style, id: componentId } = widget || {};
 	const { id: selectedRowId } = selectedRow || {};
-
-	if (componetType === 'rootElement') {
-		return (
-			<div style={style}>
-
-				<h1>Welcome to cogoport</h1>
-			</div>
-		);
-	}
 
 	if (isEmpty(children)) {
 		return <div style={{ height: '150px' }}> Blocks loading...</div>;
@@ -33,9 +24,8 @@ function ComponentBuilder({ widget, components, setComponents, selectedRow, chil
 		<div style={style}>
 
 			{ (children || []).map((childComponent) => {
-				const { id, style: allStyles } = childComponent || {};
-				const { content = '', attributes = {} } = childComponent.properties || {};
-				const { icon, type } = content || {};
+				const { id, style: allStyles, icon, attributes, type } = childComponent || {};
+
 				const isChildSelected = childId === id && componentId === selectedRowId && type;
 				const border = isChildSelected ? '1px solid red' : allStyles.border;
 

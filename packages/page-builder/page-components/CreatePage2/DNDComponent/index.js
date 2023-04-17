@@ -12,6 +12,7 @@ const CONTENT_MAPPING = {
 	text: {
 		content    : 'Start Typing...',
 		layouts    : [],
+		type       : 'text',
 		style      : {},
 		attributes : {
 			contenteditable: true,
@@ -24,6 +25,7 @@ const CONTENT_MAPPING = {
 		layouts    : [],
 		style      : {},
 		attributes : {},
+		type       : 'image',
 	},
 
 	button: {
@@ -49,7 +51,6 @@ function DNDComponent() {
 		style   : {
 			backgroundSize: 'cover',
 		},
-
 	});
 
 	const [showContentModal, setShowContentModal] = useState(false);
@@ -74,9 +75,10 @@ function DNDComponent() {
 
 				const objIndex = data.layouts.findIndex((item) => item.parentId === parentId);
 
-				data.layouts[objIndex].children[childId].content = content;
+				data.layouts[objIndex].children[childId] = { ...data.layouts[objIndex].children[childId], ...CONTENT_MAPPING[content.type] };
 				data.layouts[objIndex].children[childId].style = { ...data.layouts[objIndex].children[childId].style, border: undefined };
 
+				console.log('sdjskdks', data);
 				setComponent(data);
 			} else {
 				setComponent((prev) => ({
