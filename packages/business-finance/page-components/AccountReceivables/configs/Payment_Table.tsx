@@ -22,13 +22,26 @@ interface PaymentTable {
 }
 
 const PaymentList = ({ paymentFilters, setPaymentFilters, setOrderBy, sortStyleDesc, sortStyleAsc }: PaymentTable) => [
+
 	{
 		Header   : 'Payment Number',
 		id       : 'name',
 		accessor : (row) => (
 
-			<div>
+			<div style={{ marginLeft: '20px' }}>
 				{getByKey(row, 'paymentNumber') as string}
+			</div>
+
+		),
+
+	},
+	{
+		Header   : 'Sage Reference Number ',
+		id       : 'sageRefNumber',
+		accessor : (row) => (
+
+			<div style={{ marginLeft: '30px' }}>
+				{row?.sageRefNumber}
 			</div>
 
 		),
