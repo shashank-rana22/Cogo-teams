@@ -9,7 +9,6 @@ const useCreateFaqQuestionAlias = ({
 	fetchListFaqFeedback,
 	feedbackId,
 	fetchQuestion,
-	faqAudiences,
 }) => {
 	const [showAliasInput, setShowAliasInput] = useState(false);
 	const [inputAlias, setInputAlias] = useState(suggested_question_abstract);
@@ -19,8 +18,6 @@ const useCreateFaqQuestionAlias = ({
 	}, [suggested_question_abstract]);
 
 	const general = useSelector((state) => state.general || {});
-
-	const audience_ids = (faqAudiences || []).map((audience) => (audience?.id));
 
 	const { id = '' } = general?.query || {};
 
@@ -34,7 +31,7 @@ const useCreateFaqQuestionAlias = ({
 			parent_question_id      : id,
 			alias_question_abstract : inputAlias,
 			faq_feedback_id         : feedbackId,
-			audience_ids,
+
 		};
 
 		try {
