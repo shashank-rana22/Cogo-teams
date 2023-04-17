@@ -46,7 +46,6 @@ const useCreateQuestion = ({
 		character_limit = '',
 		allow_file_upload,
 	} = editDetails || {};
-	console.log(editDetails);
 
 	const {
 		watch,
