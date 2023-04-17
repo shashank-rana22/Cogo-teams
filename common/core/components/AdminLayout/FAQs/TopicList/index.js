@@ -17,7 +17,6 @@ function TopicList({
 	setShow = () => {},
 	announcementProps = {},
 	selectedAnnouncement = '',
-
 }) {
 	const [activeTab, setActiveTab] = useState('faq');
 
@@ -61,9 +60,11 @@ function TopicList({
 
 	useEffect(() => {
 		if (from === 'test_module') return;
+
 		setAnnouncementModalData({});
 		setSearch('');
 		setSearchAnnouncement('');
+
 		if (activeTab === 'faq') {
 			setParams({
 				page    : 1,
@@ -91,6 +92,7 @@ function TopicList({
 				page,
 				setPage,
 				list,
+				from,
 				faqNotificationData,
 				topic,
 				setTopic,
