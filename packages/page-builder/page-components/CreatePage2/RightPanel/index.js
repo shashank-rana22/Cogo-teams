@@ -81,6 +81,7 @@ function RightPanel(props) {
 		isNewItemAdding,
 		onNewAddingItemProps,
 		onClick,
+		setSelectedItem,
 		isSelected,
 		selectedItem,
 		setShowContentModal,
@@ -159,12 +160,17 @@ function RightPanel(props) {
 
 	drag(drop(itemRef));
 
-	const handleDelete = (itemList) => {
+	const handleDelete = (e, itemList) => {
+		e.stopPropagation();
+
 		const { id: sId } = itemList || {};
 		const data = components;
-		const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === sId));
+		const selectedComponentIndex = (data.layouts || []).findIndex((stageItem) => (stageItem.id === sId));
 		data.layouts.splice(selectedComponentIndex, 1);
-		setComponents(data);
+
+		setComponents(() => ({ ...data }));
+
+		setSelectedItem({});
 	};
 
 	const handleSubmitClick = ({ childrenId, parentId }) => {
@@ -173,7 +179,9 @@ function RightPanel(props) {
 		setShowContentModal(true);
 	};
 
-	const handleCopy = (itemList) => {
+	const handleCopy = (e, itemList) => {
+		e.stopPropagation();
+
 		const { id: sId, parentId, children } = itemList || {};
 		const newId = uuid();
 		const data = components;
@@ -244,8 +252,8 @@ function RightPanel(props) {
 			</div>
 
 			<div role="presentation" className={styles.change}>
-				<IcMCrossInCircle height="24px" width="24px" cursor="pointer" onClick={() => handleDelete(widget)} />
-				<IcMDuplicate height="24px" width="24px" cursor="pointer" onClick={() => handleCopy(widget)} />
+				<IcMCrossInCircle height="24px" width="24px" cursor="pointer" onClick={(e) => handleDelete(e, widget)} />
+				<IcMDuplicate height="24px" width="24px" cursor="pointer" onClick={(e) => handleCopy(e, widget)} />
 			</div>
 		</div>
 	// </ResizableBox>

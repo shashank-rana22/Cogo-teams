@@ -102,6 +102,7 @@ function Stage({
 					onClick={() => setSelectedItem({ ...item, id, index })}
 					isSelected={!!id && id === selectedItem?.id}
 					selectedItem={selectedItem}
+					setSelectedItem={setSelectedItem}
 					setShowContentModal={setShowContentModal}
 					setParentComponentId={setParentComponentId}
 				/>
