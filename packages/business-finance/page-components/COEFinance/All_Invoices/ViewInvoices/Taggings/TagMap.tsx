@@ -3,6 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useGetTaggingBills from '../../../hook/useGetMappings';
+import isDisabled from '../../../utils/isDisabled';
 
 import styles from './styles.module.css';
 import { TagCard } from './TagCard';
@@ -72,7 +73,7 @@ function TagMap({
 				) : <Placeholder width="100%" height="200px" />}
 			</div>
 
-			{!isEmpty(mappingsData) && (status === 'LOCKED' || status === 'ON_HOLD') && (
+			{!isEmpty(mappingsData) && isDisabled(status) && (
 				<div>
 					{value?.approve === 'approve' || value?.reject === 'reject' ? (
 						<div
