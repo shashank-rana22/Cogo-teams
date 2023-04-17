@@ -14,7 +14,6 @@ const useAnswer = ({ question, setIsLiked, FEEDBACK_MAPPING_ISLIKED }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/get_question',
 		method : 'get',
-		params,
 	}, { manual: true });
 
 	const fetch = useCallback(async () => {
