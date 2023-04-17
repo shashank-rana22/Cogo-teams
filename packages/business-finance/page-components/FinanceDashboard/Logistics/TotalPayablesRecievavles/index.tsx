@@ -230,7 +230,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 
 												</div>
 												<div>
-													{onAccountChangeFromYesterday.toFixed(4)}
+													{onAccountChangeFromYesterday.toFixed(2)}
 												</div>
 											</div>
 
@@ -272,7 +272,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 
 												</div>
 												<div>
-													{outstandingChangeFromYesterday.toFixed(4)}
+													{outstandingChangeFromYesterday.toFixed(2)}
 												</div>
 											</div>
 
@@ -417,7 +417,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 
 												</div>
 												<div>
-													{AccountChangeFromYesterday.toFixed(4)}
+													{AccountChangeFromYesterday.toFixed(2)}
 												</div>
 											</div>
 
@@ -459,7 +459,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 
 												</div>
 												<div>
-													{outstandingChangeYesterday.toFixed(4)}
+													{outstandingChangeYesterday.toFixed(2)}
 												</div>
 											</div>
 

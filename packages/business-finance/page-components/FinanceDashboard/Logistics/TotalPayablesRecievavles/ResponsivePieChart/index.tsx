@@ -1,5 +1,9 @@
 import { ResponsivePie } from '@cogoport/charts/pie/index';
 
+import getFormattedPrice from '../../../../commons/utils/getFormattedPrice';
+
+import styles from './styles.module.css';
+
 function ResponsivePieChart({ pieData }) {
 	return (
 		<ResponsivePie
@@ -22,6 +26,19 @@ function ResponsivePieChart({ pieData }) {
 				precision : 0.01,
 				velocity  : 0,
 			}}
+			tooltip={({ datum: { label, value } }) => (
+
+				<div className={styles.toolTip_div}>
+					<div className={styles.toolTip_title}>
+						<div className={label === 'onAccount' ? styles.color_dot_outstanding : styles.color_dot}> </div>
+						{label}
+						:
+						<div className={styles.toolTip_amount}>
+							{getFormattedPrice(value, 'INR')}
+						</div>
+					</div>
+				</div>
+			)}
 			transitionMode="middleAngle"
 
 		/>
