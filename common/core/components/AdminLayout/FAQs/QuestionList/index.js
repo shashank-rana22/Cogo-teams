@@ -69,7 +69,7 @@ function QuestionList({
 	};
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.containers}>
 			{list?.length > 0 ? (
 				<>
 					<div className={styles.topic_heading}>
