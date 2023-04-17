@@ -51,7 +51,7 @@ function BarChart({ chart_data = [], yAxis = '' }) {
 				axisBottom={{
 					tickSize       : 5,
 					tickPadding    : 5,
-					tickRotation   : 0,
+					tickRotation   : 45,
 					legendPosition : 'middle',
 					legendOffset   : 32,
 				}}

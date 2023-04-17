@@ -131,6 +131,12 @@ function FormContainer({
 						style={{ marginLeft: 'auto', height: '4%' }}
 					/>
 				)}
+				{edit && item?.remarks && (
+					<p className={styles.remark}>
+						<span>Remark for Amendment:</span>
+						{item?.remarks?.toString()}
+					</p>
+				)}
 			</div>
 			{value === 'manual' && activeCategory === 'hawb' && (
 				<Stepper

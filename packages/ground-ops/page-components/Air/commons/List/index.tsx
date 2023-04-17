@@ -3,7 +3,6 @@ import { IcMArrowDown } from '@cogoport/icons-react';
 import React, { useState, ReactFragment } from 'react';
 
 import EmptyState from './EmptyState';
-import GetFinalList from './GetFinalList';
 import { FunctionObjects, FieldType, ListDataType } from './Interfaces';
 import ListHeader from './ListHeader';
 import ListItem from './ListItem';
@@ -35,7 +34,7 @@ function List({
 	setItem = () => {},
 } :Props) {
 	const { data = {} } = listData;
-	const { finalData = [], resourceLoading } = GetFinalList({ data, listData, loading });
+	const { shipmentPendingTasks = [] } = data;
 	const [isOpen, setIsOpen] = useState(null);
 
 	const handleProgramDetail = (itm) => {
@@ -44,16 +43,17 @@ function List({
 	};
 
 	const render = () => {
-		const showlist = finalData.length ? finalData : Array(6).fill(1);
+		type TypeObject = string | number | Date | null | React.FC ;
+		const showlist:TypeObject = shipmentPendingTasks.length ? shipmentPendingTasks : Array(6).fill(1);
 
-		if (resourceLoading || finalData.length) {
+		if (loading || shipmentPendingTasks.length) {
 			return (showlist).map((singleitem) => (
 				<div className="card-list-data">
 					<ListItem
 						singleitem={singleitem}
 						fields={fields}
 						functions={functions}
-						loading={resourceLoading}
+						loading={loading}
 						isOpen={isOpen}
 						Child={Child}
 						setViewDoc={setViewDoc}
@@ -92,7 +92,7 @@ function List({
 			<ListHeader fields={fields} />
 			<div className={styles.scroll}>
 				{render()}
-				{!loading && finalData.length > 0 ? (
+				{!loading && shipmentPendingTasks.length > 0 ? (
 					<div className={styles.pagination}>
 						<Pagination
 							currentPage={page}

@@ -54,7 +54,7 @@ function ResponseView() {
 						) : (
 							<div>
 								{type === 'expense' && nonRecurringResponse?.id && (
-									<div>
+									<div className={styles.body_container}>
 										<h1>
 											Expense is
 											{' '}
@@ -67,16 +67,18 @@ function ResponseView() {
 											{status === 'Approved' ? (
 												<div>
 													<img
-														src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/success_icon_2.svg"
-														alt="success"
+														src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/reject-animation.gif"
+														alt="approved"
+														className={styles.gif_icons}
 													/>
 
 												</div>
 											) : (
 												<div>
 													<img
-														src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/warning.svg"
-														alt="success"
+														src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Rejected.gif"
+														alt="rejected"
+														className={styles.gif_icons}
 													/>
 
 												</div>
@@ -85,12 +87,21 @@ function ResponseView() {
 									</div>
 								)}
 								{type === 'expense' && !nonRecurringResponse?.id && (
-									<h1 className={styles.failed}>
-										The Expense could not be updated !
-									</h1>
+									<div className={styles.body_container}>
+										<h1 className={styles.failed}>
+											The Expense could not be updated !
+										</h1>
+										<div>
+											<img
+												src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Rejected.gif"
+												alt="failed"
+												className={styles.gif_icons}
+											/>
+										</div>
+									</div>
 								)}
 								{type === 'configuration' && recurringResponse?.data && (
-									<div>
+									<div className={styles.body_container}>
 										<h1>
 											Recurring record is
 											{' '}
@@ -103,16 +114,18 @@ function ResponseView() {
 											{status === 'Approved' ? (
 												<div>
 													<img
-														src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/success_icon_2.svg"
-														alt="success"
+														src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/reject-animation.gif"
+														alt="approved"
+														className={styles.gif_icons}
 													/>
 
 												</div>
 											) : (
 												<div>
 													<img
-														src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/warning.svg"
-														alt="success"
+														src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Rejected.gif"
+														alt="rejected"
+														className={styles.gif_icons}
 													/>
 
 												</div>
@@ -122,9 +135,18 @@ function ResponseView() {
 
 								)}
 								{type === 'configuration' && !recurringResponse?.data && (
-									<h1 className={styles.failed}>
-										The Record could not be updated !
-									</h1>
+									<div className={styles.body_container}>
+										<h1 className={styles.failed}>
+											The Record could not be updated !
+										</h1>
+										<div>
+											<img
+												src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Rejected.gif"
+												alt="failed"
+												className={styles.gif_icons}
+											/>
+										</div>
+									</div>
 								)}
 							</div>
 						)}

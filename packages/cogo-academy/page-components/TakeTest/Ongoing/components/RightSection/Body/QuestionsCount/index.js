@@ -1,4 +1,7 @@
 import { useSelector } from '@cogoport/store';
+import { useContext } from 'react';
+
+import { QuestionStatsContext } from '../../../QuestionStatsContext';
 
 import styles from './styles.module.css';
 
@@ -9,15 +12,7 @@ const STATS_MAPPING = {
 	not_viewed        : '#FDFBF6',
 };
 
-function QuestionsCount({
-	data = {},
-	setCurrentQuestion,
-	fetchQuestions,
-	total_question_count,
-	user_appearance = [],
-	setSubQuestion,
-	currentQuestion,
-}) {
+function QuestionsCount() {
 	const {
 		query: { test_id },
 		user: { id: user_id },
@@ -25,6 +20,16 @@ function QuestionsCount({
 		query : general.query,
 		user  : profile.user,
 	}));
+
+	const {
+		total_question_count,
+		user_appearance = [],
+		setSubQuestion,
+		data = {},
+		setCurrentQuestion,
+		currentQuestion,
+		fetchQuestions,
+	} = useContext(QuestionStatsContext);
 
 	const handleChangeQuestion = ({ index }) => {
 		if (index === 0 || data?.data?.[index - 1].answer_state !== 'not_viewed') {

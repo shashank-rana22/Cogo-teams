@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
@@ -43,7 +44,9 @@ const useTopicList = () => {
 				},
 			});
 		} catch (error) {
-			Toast.error(error?.message);
+			if (error?.response) {
+				Toast.error(getApiErrorString(error?.response?.data));
+			}
 		}
 	}, [country_id, id, page, role_functions, role_sub_functions, scope, trigger]);
 
