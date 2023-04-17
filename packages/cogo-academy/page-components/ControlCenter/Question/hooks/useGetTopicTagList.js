@@ -74,7 +74,7 @@ const useGetTopicTagList = () => {
 	}, [triggerAudiences]);
 
 	const { list: topicList = [] } = topicsData || {};
-	const { list : tagList = [] } = tagsData || {};
+	const { list: tagList = [] } = tagsData || {};
 	const { list: audienceList = [] } = audienceData || {};
 
 	const topicOptions = [];
