@@ -1,4 +1,4 @@
-import { Card, Table } from '@cogoport/components';
+import { Table } from '@cogoport/components';
 import { useState } from 'react';
 
 import getDistributionControl from '../../../../configurations/get-add-distribution-controls';
@@ -44,21 +44,25 @@ const data = [
 function DistributionSetting() {
 	const [editing, setEditing] = useState(false);
 
+	if (editing) {
+		return (
+			<EditSetting
+				ITEM_ARRAY={WARMTH_ARRAY}
+				useGetControls={getDistributionControl}
+				setEditing={setEditing}
+				inputStyle="distribution_input"
+				heading="Distribution Settings"
+				tooltipData="Multiplier to calculate warmness of the KAM based on the region they lie in"
+			/>
+		);
+	}
+
 	return (
-		<Card className={styles.card}>
-			<Card.Title title={<Header editing={editing} setEditing={setEditing} />} />
+		<div className={styles.card}>
+			<Header editing={editing} setEditing={setEditing} />
 
-			{editing
-				? (
-					<EditSetting
-						ITEM_ARRAY={WARMTH_ARRAY}
-						useGetControls={getDistributionControl}
-						inputStyle="distribution_input"
-					/>
-				)
-				: <Table columns={columns} data={data} />}
-
-		</Card>
+			<Table columns={columns} data={data} />
+		</div>
 	);
 }
 

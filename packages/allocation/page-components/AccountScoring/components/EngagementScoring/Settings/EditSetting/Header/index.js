@@ -3,28 +3,41 @@ import { IcMInfo } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function Header({ editing = false, setEditing = () => {} }) {
+function Header({ heading = '', tooltipData = '', setEditing = () => {} }) {
+	const onClose = () => {
+		setEditing((pv) => !pv);
+	};
+
 	return (
 		<div className={styles.header}>
 			<div className={styles.heading}>
-				<div className={styles.label}>Account Distribution</div>
+				<div className={styles.label}>{heading}</div>
 
 				<Tooltip
 					className={styles.word_break}
-					content="Multiplier to calculate warmness of the KAM based on the region they lie in"
+					content={tooltipData}
 					placement="top"
 				>
 					<IcMInfo height={16} className={styles.info_icon} />
 				</Tooltip>
 			</div>
 
-			<div>
+			<div className={styles.btn}>
 				<Button
 					themeType="secondary"
-					onClick={() => setEditing(!editing)}
+					onClick={onClose}
 				>
-					{' '}
-					Edit
+					Cancel
+
+				</Button>
+
+				<Button
+					themeType="primary"
+					onClick={onClose}
+					style={{ marginLeft: '8px' }}
+				>
+					Save
+
 				</Button>
 			</div>
 		</div>

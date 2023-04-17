@@ -3,7 +3,7 @@ import { IcMInfo } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function Header({ editing = false, setEditing = () => {} }) {
+function Header({ setEditing = () => {} }) {
 	return (
 		<div className={styles.header}>
 			<div className={styles.heading}>
@@ -21,36 +21,14 @@ function Header({ editing = false, setEditing = () => {} }) {
 			</div>
 
 			<div>
-				{editing
-					? (
-						<div className={styles.btn}>
-							<Button
-								themeType="secondary"
-								onClick={() => setEditing(!editing)}
-							>
-								Cancel
 
-							</Button>
-
-							<Button
-								themeType="primary"
-								onClick={() => setEditing(!editing)}
-								style={{ marginLeft: '8px' }}
-							>
-								Save
-
-							</Button>
-						</div>
-					) : (
-						<Button
-							themeType="secondary"
-							onClick={() => setEditing(!editing)}
-						>
-							{' '}
-							Edit
-						</Button>
-					)}
-
+				<Button
+					themeType="secondary"
+					onClick={() => setEditing((pv) => !pv)}
+				>
+					{' '}
+					Edit
+				</Button>
 			</div>
 
 		</div>

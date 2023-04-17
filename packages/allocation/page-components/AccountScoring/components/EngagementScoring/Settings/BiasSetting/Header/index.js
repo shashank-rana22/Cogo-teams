@@ -19,35 +19,14 @@ function Header({ editing = false, setEditing = () => {} }) {
 			</div>
 
 			<div>
-				{editing
-					? (
-						<div className={styles.btn}>
-							<Button
-								themeType="secondary"
-								onClick={() => setEditing(!editing)}
-							>
-								Cancel
 
-							</Button>
-
-							<Button
-								themeType="primary"
-								onClick={() => setEditing(!editing)}
-								style={{ marginLeft: '8px' }}
-							>
-								Save
-
-							</Button>
-						</div>
-					) : (
-						<Button
-							themeType="secondary"
-							onClick={() => setEditing(!editing)}
-						>
-							{' '}
-							Edit
-						</Button>
-					)}
+				<Button
+					themeType="secondary"
+					onClick={() => setEditing(!editing)}
+				>
+					{' '}
+					Edit
+				</Button>
 			</div>
 		</div>
 	);

@@ -1,4 +1,4 @@
-import { Card, Table } from '@cogoport/components';
+import { Table } from '@cogoport/components';
 import { useState } from 'react';
 
 import getBiasControl from '../../../../configurations/get-add-bias-controls';
@@ -39,21 +39,25 @@ const data = [
 function BiasSetting() {
 	const [editing, setEditing] = useState(false);
 
+	if (editing) {
+		return (
+			<EditSetting
+				ITEM_ARRAY={BIAS_ARRAY}
+				useGetControls={getBiasControl}
+				setEditing={setEditing}
+				inputStyle="bias_input"
+				heading="Bias Settings"
+				tooltipData="Bias is used to calculate the warmness of the KAM"
+			/>
+		);
+	}
+
 	return (
-		<Card className={styles.card}>
-			<Card.Title title={<Header editing={editing} setEditing={setEditing} />} />
+		<div className={styles.card}>
+			<Header editing={editing} setEditing={setEditing} />
 
-			{ editing
-				? (
-					<EditSetting
-						ITEM_ARRAY={BIAS_ARRAY}
-						useGetControls={getBiasControl}
-						inputStyle="bias_input"
-					/>
-				)
-				: <Table columns={columns} data={data} />}
-
-		</Card>
+			<Table columns={columns} data={data} />
+		</div>
 	);
 }
 

@@ -50,14 +50,25 @@ const data = [
 function PercentileSetting() {
 	const [editing, setEditing] = useState(false);
 
+	if (editing) {
+		return (
+			<EditSetting
+				ITEM_ARRAY={WARMTH_ARRAY}
+				useGetControls={getPercentileControl}
+				setEditing={setEditing}
+				heading="Percentile Setting"
+				tooltipData="When the account lies in the respective percentile it would be assigned
+				a score at that time based on the table given below to show the region in which
+				the account lies whether (COLD , ICE COLD , WARM , HOT , FLAMING HOT)"
+			/>
+		);
+	}
+
 	return (
 		<div className={styles.card}>
-			<Header editing={editing} setEditing={setEditing} />
+			<Header setEditing={setEditing} />
 
-			{editing
-				? <EditSetting ITEM_ARRAY={WARMTH_ARRAY} useGetControls={getPercentileControl} />
-
-				: <Table columns={columns} data={data} />}
+			<Table columns={columns} data={data} />
 		</div>
 	);
 }

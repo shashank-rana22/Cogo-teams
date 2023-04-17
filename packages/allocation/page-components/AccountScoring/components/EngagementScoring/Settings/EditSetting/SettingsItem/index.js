@@ -43,7 +43,7 @@ function TableItem({ item = '', useGetControls = () => {}, index = 0, inputStyle
 					const Element = getFieldController(el.type);
 
 					return (
-						<div className={styles?.[inputStyle]}>
+						<div className={styles?.[inputStyle] || styles.input}>
 							{
 								index === 0 && (
 									<div className={styles.label}>
