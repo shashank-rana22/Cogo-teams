@@ -48,17 +48,15 @@ function DistributionSetting() {
 		<Card className={styles.card}>
 			<Card.Title title={<Header editing={editing} setEditing={setEditing} />} />
 
-			{
-                editing
-                	? (
-	<EditSetting
-		ITEM_ARRAY={WARMTH_ARRAY}
-		useGetControls={getDistributionControl}
-		inputStyle="distribution_input"
-	/>
-                	)
-                	: <Table columns={columns} data={data} />
-            }
+			{editing
+				? (
+					<EditSetting
+						ITEM_ARRAY={WARMTH_ARRAY}
+						useGetControls={getDistributionControl}
+						inputStyle="distribution_input"
+					/>
+				)
+				: <Table columns={columns} data={data} />}
 
 		</Card>
 	);

@@ -9,12 +9,13 @@ function Header({ editing = false, setEditing = () => {} }) {
 			<div className={styles.heading}>
 				<div className={styles.label}>Bias Settings</div>
 
-				{/* <Tooltip
-					content="In nisi consequat cupidatat pariatur mollit anim mollit nulla velit sint qui nulla."
+				<Tooltip
+					className={styles.word_break}
+					content="Bias is used to calculate the warmness of the KAM"
 					placement="top"
-				> */}
-				<IcMInfo height={16} style={{ marginLeft: '8px' }} />
-				{/* </Tooltip> */}
+				>
+					<IcMInfo height={16} className={styles.info_icon} />
+				</Tooltip>
 			</div>
 
 			<div>

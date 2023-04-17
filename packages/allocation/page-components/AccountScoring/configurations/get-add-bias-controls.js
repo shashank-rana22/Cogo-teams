@@ -4,7 +4,7 @@ const controls = (item) => {
 	return ([
 		{
 			name        : `${key_val}_age_from`,
-			label       : 'AGE FROM',
+			label       : 'AGE FROM (DAYS)',
 			placeholder : '0',
 			type        : 'text',
 			rules       : {
@@ -14,7 +14,7 @@ const controls = (item) => {
 		},
 		{
 			name        : `${key_val}_age_to`,
-			label       : 'AGE TO',
+			label       : 'AGE TO (DAYS)',
 			placeholder : '0',
 			type        : 'text',
 			rules       : {
