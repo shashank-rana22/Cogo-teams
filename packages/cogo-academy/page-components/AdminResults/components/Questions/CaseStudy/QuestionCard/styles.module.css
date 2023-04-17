@@ -106,3 +106,18 @@
 	background-color: #fff;
 	border-radius: 4px;
 }
+
+.main_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.explanation {
+	width: 40%;
+	max-height: 200px;
+	padding: 12px;
+	overflow: auto;
+	background: #fff;
+	border-radius: 6px;
+}

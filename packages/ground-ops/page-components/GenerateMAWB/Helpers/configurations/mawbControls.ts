@@ -11,7 +11,6 @@ const mawbControls = (disableClass) => ({
 			placeholder  : "Enter Shipper's name",
 			span         : 5,
 			value        : '',
-			maxLength    : 50,
 			rules        : {
 				required: 'Shippers Name is Required',
 			},
@@ -22,7 +21,7 @@ const mawbControls = (disableClass) => ({
 			label       : "Shipper's Address",
 			type        : 'textarea',
 			span        : 7,
-			maxLength   : 150,
+			maxLength   : 200,
 			row         : 4,
 			placeholder : 'Enter Address',
 			rules       : {
@@ -38,7 +37,6 @@ const mawbControls = (disableClass) => ({
 			value        : '',
 			span         : 5,
 			placeholder  : "Enter Consignee's name",
-			maxLength    : 50,
 			rules        : {
 				required: 'Consignees Name is Required',
 			},
@@ -49,7 +47,7 @@ const mawbControls = (disableClass) => ({
 			label       : "Consignee's Address",
 			type        : 'textarea',
 			span        : 7,
-			maxLength   : 150,
+			maxLength   : 200,
 			row         : 4,
 			placeholder : 'Enter Address',
 			rules       : {
@@ -63,9 +61,6 @@ const mawbControls = (disableClass) => ({
 			label       : 'Origin',
 			placeholder : 'Enter Origin Airport',
 			span        : 5,
-			rules       : {
-				required: 'Origin Airport is Required',
-			},
 		},
 		{
 			name        : 'destination',
@@ -74,9 +69,6 @@ const mawbControls = (disableClass) => ({
 			label       : 'Destination',
 			placeholder : 'Enter Destination Airport',
 			span        : 5,
-			rules       : {
-				required: 'Destination Airport is Required',
-			},
 		},
 		{
 			name        : 'originPortCode',
@@ -355,7 +347,7 @@ const mawbControls = (disableClass) => ({
 			label       : 'Remarks',
 			type        : 'textarea',
 			span        : 7,
-			maxLength   : 150,
+			maxLength   : 500,
 			placeholder : 'Remarks',
 			rows        : 3,
 		},
@@ -489,7 +481,7 @@ const mawbControls = (disableClass) => ({
 			showOptional : false,
 			span         : 5,
 			placeholder  : 'Handling Information...*',
-			maxLength    : 100,
+			maxLength    : 300,
 		},
 		{
 			name        : 'commodity',

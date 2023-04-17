@@ -1,4 +1,3 @@
-/* eslint-disable valid-typeof */
 import { getCookie } from '@cogoport/utils';
 
 import GLOBAL_CONSTANTS from '../globals.json';

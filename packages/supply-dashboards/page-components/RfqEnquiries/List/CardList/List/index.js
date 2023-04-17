@@ -1,4 +1,4 @@
-import { Placeholder, Modal, Button, Checkbox } from '@cogoport/components';
+import { Placeholder, Modal, Button, Checkbox, Textarea } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
@@ -12,6 +12,7 @@ function List({
 	const { push } = useRouter();
 
 	const [show, setShow] = useState(false);
+	const [othertext, setOthertext] = useState(null);
 	const [reason, setReason] = useState(null);
 	const handleOnClick = () => {
 		if (headerRequired) {
@@ -22,7 +23,13 @@ function List({
 		}
 	};
 
-	const { createRfqSupplyAgentPreference } = useCreateRfqSupplyAgentPreference({ item, reason, setShow, refetch });
+	const { createRfqSupplyAgentPreference } = useCreateRfqSupplyAgentPreference({
+		item,
+		reason,
+		setShow,
+		refetch,
+		othertext,
+	});
 
 	const handleCloseModal = () => {
 		createRfqSupplyAgentPreference();
@@ -77,6 +84,40 @@ function List({
 						onChange={() => handleOnChange('no_space_with_service_provider')}
 						checked={reason === 'no_space_with_service_provider'}
 					/>
+					<Checkbox
+						label="Requirment missing or Incomplete"
+						value="requirment_missing_or_incomplete"
+						onChange={() => handleOnChange('requirment_missing_or_incomplete')}
+						checked={reason === 'requirment_missing_or_incomplete'}
+					/>
+					{reason === 'requirment_missing_or_incomplete' && (
+						<div className={styles.text_area}>
+							<Textarea
+								name="a4"
+								size="sm"
+								placeholder="Let us know the missing requirements"
+								value={othertext}
+								onChange={(val) => setOthertext(val)}
+							/>
+						</div>
+					)}
+					<Checkbox
+						label="Other"
+						value="other"
+						onChange={() => handleOnChange('other')}
+						checked={reason === 'other'}
+					/>
+					{reason === 'other' && (
+						<div className={styles.text_area}>
+							<Textarea
+								name="a4"
+								size="sm"
+								placeholder="Other Reason"
+								value={othertext}
+								onChange={(val) => setOthertext(val)}
+							/>
+						</div>
+					)}
 				</Modal.Body>
 				<Modal.Footer>
 					<Button onClick={handleCloseModal} disabled={!reason}>Close</Button>
