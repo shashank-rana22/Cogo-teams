@@ -158,3 +158,8 @@
 		padding: 0;
 	}
 }
+
+.line_item_empty {
+	font-weight: 600;
+	color: #f68b21;
+}

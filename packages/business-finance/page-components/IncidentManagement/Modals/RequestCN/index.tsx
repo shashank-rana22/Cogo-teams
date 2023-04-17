@@ -23,7 +23,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		remarks  : null,
 	});
 
-	const [shoPopover, setShowPopover] = useState(false);
+	const [showPopover, setShowPopover] = useState(false);
 	const [remarks, setRemarks] = useState('');
 	const { data = {}, type } = row || {};
 	const isConsolidated = type === 'CONSOLIDATED_CREDIT_NOTE';
@@ -188,18 +188,18 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 						<div className={styles.button_container_data}>
 							<Popover
 								placement="bottom"
-								visible={shoPopover}
+								visible={showPopover}
 								render={content()}
 								{...rest}
 							>
 								<Button
 									themeType="secondary"
-									onClick={() => setShowPopover(!shoPopover)}
+									onClick={() => setShowPopover(!showPopover)}
 								>
 									<div className={styles.flex}>
 										CN Category
 										<div className={styles.icon_container}>
-											{shoPopover ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
+											{showPopover ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
 										</div>
 									</div>
 								</Button>
@@ -298,7 +298,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 							)))}
 
 						</div>
-						{lineItems?.length > 0 && (
+						{lineItems?.length > 0 ? (
 							<div className={styles.list_container}>
 								<StyledTable
 									columns={requestCreditNoteColumns()}
@@ -306,7 +306,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									data={lineItems}
 								/>
 							</div>
-						)}
+						) : <div className={styles.line_item_empty}> No LineItems Available </div>}
 						{isEditable && (
 							<>
 								<div className={styles.remarks}>Remarks*</div>

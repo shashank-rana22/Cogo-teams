@@ -49,7 +49,7 @@ export const requestCreditNoteColumns = () => [
 		accessor : 'unit',
 		id       : 'unit',
 		Cell     : ({ row: { original } }) => {
-			const formattedUnit = startCase(original.unit);
+			const formattedUnit = startCase(original?.unit);
 			return formattedUnit;
 		},
 	},
