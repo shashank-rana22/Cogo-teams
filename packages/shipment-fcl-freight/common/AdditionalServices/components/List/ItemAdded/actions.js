@@ -10,7 +10,6 @@ const actions = ({
 	setShowModal = () => {},
 	setItem = () => {},
 	activeStakeholder = '',
-	isShipper,
 }) => {
 	const isSameItem = serviceListItem.id === addRate?.item?.id;
 
@@ -42,18 +41,6 @@ const actions = ({
 					onClickSetItem();
 					setShowModal('add_sell_price');
 				}}
-			>
-				{addRate && isSameItem ? 'CLOSE' : 'REVIEW PRICE'}
-			</Button>
-		);
-	}
-
-	if (status.status === 'customer_confirmation_pending' && isShipper) {
-		return (
-			<Button
-				themeType="secondary"
-				style={{ marginLeft: 10, height: '24px' }}
-				onClick={onClickSetItem}
 			>
 				{addRate && isSameItem ? 'CLOSE' : 'REVIEW PRICE'}
 			</Button>

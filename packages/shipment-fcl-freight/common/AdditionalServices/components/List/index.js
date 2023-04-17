@@ -21,8 +21,6 @@ function List({ isSeller = false }) {
 		ShipmentDetailContext,
 	);
 
-	const isShipper = !['sales_agent', 'booking_agent', 'consignee_shipper_agent'].includes(activeStakeholder);
-
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
 	const [pageLimit, setPageLimit] = useState(8);
@@ -68,7 +66,6 @@ function List({ isSeller = false }) {
 									setItem,
 									shipment_data,
 									activeStakeholder,
-									isShipper,
 								})}
 								refetch={handleRefetch}
 								services={servicesList}
