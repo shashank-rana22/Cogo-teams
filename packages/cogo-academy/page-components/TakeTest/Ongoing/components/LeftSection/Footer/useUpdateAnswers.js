@@ -14,7 +14,6 @@ if (typeof window !== 'undefined') {
 
 const getAnswerState = ({ type, answer, subjectiveAnswer, question_type }) => {
 	let answerState = 'answered';
-
 	if (type === 'marked_for_review') {
 		answerState = type;
 	} else if (question_type === 'subjective' && subjectiveAnswer.toString('html') === '<p><br></p>') {
@@ -79,7 +78,7 @@ function useUpdateAnswers({
 				? { subjective_answer_text: subjectiveAnswer.toString('html') } : null),
 
 			...(question_type === 'subjective'
-				? { subjective_file_url: uploadValue } : null),
+				? { subjective_file_url: uploadValue?.finalUrl ? uploadValue?.finalUrl : uploadValue } : null),
 
 			...(question_type !== 'subjective'
 				? { test_question_answer_ids: answerArray || [] } : null),
