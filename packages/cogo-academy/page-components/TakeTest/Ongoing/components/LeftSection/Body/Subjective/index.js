@@ -1,5 +1,6 @@
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { startCase } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
@@ -18,7 +19,13 @@ function Subjective({
 	uploadValue,
 	setUploadValue,
 }) {
-	const { question_text, question_type } = question;
+	const { question_text, question_type, test_question_answers = [] } = question;
+	const { subjective_answer_text = '', subjective_file_url = null } = test_question_answers[0] || {};
+
+	useEffect(() => {
+		setSubjectiveAnswer(RichTextEditor?.createValueFromString((subjective_answer_text || ''), 'html') || '');
+		// setUploadValue(subjective_file_url || '');
+	}, [subjective_answer_text, setSubjectiveAnswer, setUploadValue]);
 
 	return (
 		<div className={styles.main_container}>
@@ -75,6 +82,7 @@ function Subjective({
 			name="upload"
 			key="upload_questions"
 			value={uploadValue}
+			defaultValues={subjective_file_url}
 			onChange={(e) => setUploadValue(e)}
 		/>
 	</div>
