@@ -1,9 +1,10 @@
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 
+import { UploadBookingNote } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
-function ExecuteTask({ task = {}, onCancel = () => {}, refetch = () => {} }) {
+function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {} }) {
 	const { taskConfigData, loading } = useGetTaskConfig({ task, onCancel });
 
 	const {
@@ -20,13 +21,25 @@ function ExecuteTask({ task = {}, onCancel = () => {}, refetch = () => {} }) {
 	if (loading) {
 		return <div>Loading...</div>;
 	}
+
+	if (task.task === 'upload_booking_note') {
+		return (
+			<UploadBookingNote
+				task={task}
+				onCancel={onCancel}
+				taskListRefetch={taskListRefetch}
+				taskConfigData={taskConfigData}
+			/>
+		);
+	}
+
 	return (
 	// <div>
 		<ExecuteStep
 			task={task}
 			stepConfig={stepConfigValue}
 			onCancel={onCancel}
-			refetch={refetch}
+			refetch={taskListRefetch}
 			primaryService={primaryService}
 			isLastStep={currentStep === steps.length - 1}
 			currentStep={currentStep}

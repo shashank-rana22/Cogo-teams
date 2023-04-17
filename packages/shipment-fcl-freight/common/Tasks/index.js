@@ -10,7 +10,7 @@ import useListTasksHelper from './useListTasksHelper';
 
 function List() {
 	const {
-		count, completedTaskCount, tasksList, loading, refetch,
+		count, completedTaskCount, tasksList, loading, taskListRefetch,
 		hideCompletedTasks, setHideCompletedTasks, handleClick, selectedTaskId,
 		setSelectedTaskId, shipment_data, showMyTasks, setShowMyTasks,
 	} = useListTasksHelper();
@@ -69,7 +69,7 @@ function List() {
 						task={tasksList.find((task) => task.id === selectedTaskId)}
 						onCancel={() => setSelectedTaskId(null)}
 						shipment_data={shipment_data}
-						refetch={refetch}
+						taskListRefetch={taskListRefetch}
 					/>
 				</>
 			) : null }

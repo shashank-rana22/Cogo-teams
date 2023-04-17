@@ -21,7 +21,7 @@ function useListTasks({
 
 	}, { manual: true });
 
-	const listDocuments = useCallback(() => {
+	const apiTrigger = useCallback(() => {
 		(async () => {
 			try {
 				await trigger();
@@ -32,12 +32,12 @@ function useListTasks({
 	}, [trigger]);
 
 	useEffect(() => {
-		listDocuments();
-	}, [listDocuments, filters]);
+		apiTrigger();
+	}, [apiTrigger, filters]);
 
 	return {
 		loading,
-		refetch : listDocuments,
+		refetch : apiTrigger,
 		list    : data,
 	};
 }

@@ -5,7 +5,6 @@ import toastApiError from '../utils/toastApiError';
 function useUpdateShipmentDocuments({
 	refetch = () => {},
 }) {
-	console.log('refetch', refetch);
 	const [{ loading }, trigger] = useRequest({
 		url    : 'update_shipment_document',
 		method : 'POST',

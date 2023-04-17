@@ -12,7 +12,7 @@ function useListTasksHelper() {
 	const { shipment_data, isGettingShipment } = useContext(ShipmentDetailContext);
 	const { id: shipment_id } = shipment_data || '';
 
-	const { list, refetch, loading } = useListTasks({
+	const { list, refetch:taskListRefetch, loading } = useListTasks({
 		defaultParams  : { page_limit: 100, sort_type: 'asc' },
 		defaultFilters : { shipment_id },
 		filters,
@@ -48,7 +48,7 @@ function useListTasksHelper() {
 		selectedTaskId,
 		showMyTasks,
 		setShowMyTasks,
-		refetch,
+		taskListRefetch,
 	};
 }
 export default useListTasksHelper;

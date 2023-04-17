@@ -2,7 +2,7 @@ import AdditionsServicesTasks from './AdditionalServicesTasks';
 import ExecuteTask from './ExecuteTask';
 import ReviewDoc from './ReviewDoc';
 
-function TaskExecution({ task = {}, onCancel = () => {}, refetch = () => {} }) {
+function TaskExecution({ task = {}, onCancel = () => {}, taskListRefetch = () => {} }) {
 	// split the task on the basis of view here i.e, categorize the task into various categories
 	// and make a view that hadles all the use cases
 
@@ -11,7 +11,7 @@ function TaskExecution({ task = {}, onCancel = () => {}, refetch = () => {} }) {
 			<ReviewDoc
 				task={task}
 				onClose={onCancel}
-				refetch={refetch}
+				refetch={taskListRefetch}
 			/>
 		);
 	}
@@ -27,12 +27,12 @@ function TaskExecution({ task = {}, onCancel = () => {}, refetch = () => {} }) {
 			<AdditionsServicesTasks
 				onCancel={onCancel}
 				task={task}
-				refetch={refetch}
+				refetch={taskListRefetch}
 			/>
 		);
 	}
 	return (
-		<ExecuteTask task={task} onCancel={onCancel} refetch={refetch} />
+		<ExecuteTask task={task} onCancel={onCancel} taskListRefetch={taskListRefetch} />
 	);
 }
 
