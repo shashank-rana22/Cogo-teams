@@ -82,7 +82,7 @@ function TopicList({ searchState = '', tagId = [] }) {
 									<div>
 										<div className={styles.title}>
 
-											{truncate(startCase(singleOption?.name))}
+											{truncate(startCase(singleOption?.display_name))}
 											{' '}
 											<Badge
 												color="#FA9E96"
