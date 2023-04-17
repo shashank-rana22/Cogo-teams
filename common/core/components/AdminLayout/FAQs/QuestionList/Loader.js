@@ -13,35 +13,18 @@ function Loader({ topic = {} }) {
 				{startCase(topic.display_name) || 'Search Result'}
 			</div>
 
-			<div className={styles.list}>
-				{[...Array(6)].map(() => (
-					<div>
-						<div
-							className={styles.question}
-							style={{ cursor: 'not-allowed' }}
-						>
-							<div className={styles.skeleton_container}>
-								<Placeholder
-									width="90%"
-									height="20px"
-									style={{ borderRadius: 4 }}
-								/>
-							</div>
-
-							<div className={styles.skeleton_wrapper}>
-								{[...Array(3)].map(() => (
-									<Placeholder
-										width="60px"
-										height="16px"
-										margin="4px 12px 0 0"
-										style={{ borderRadius: 6 }}
-									/>
-								))}
-							</div>
-						</div>
-					</div>
-				))}
+			<div className={styles.loopWrapper}>
+				<div className={styles.mountain} />
+				<div className={styles.hill} />
+				<div className={styles.tree} />
+				<div className={styles.rock} />
+				<div className={styles.truck} />
 			</div>
+			<p className={styles.line}>
+				A fact about Logistics industry:
+				<br />
+				3 of the top 5 ports in the world are in China
+			</p>
 		</div>
 	);
 }

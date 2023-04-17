@@ -1,63 +1,32 @@
-.container {
-	min-height: 57vh;
+
+.line {
+	position: relative;
+    top: 90%;  
+    width: 100%;
+    margin: 0 auto;
+	padding-top: 50px;
+	font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+	opacity: 0.4;
+    white-space: nowrap;
+    overflow: hidden;
+	animation: typewriter 0.2s steps(44) 0.1s 1 normal both,
+             blinkTextCursor 5000ms steps(44) infinite normal;
 }
 
-.question {
-	padding-bottom: 12px;
-	font-size: 13px;
-	cursor: pointer;
-
-	&:hover {
-		align-items: center;
-		padding-right: -10px;
-		padding-left: -10px;
-		color: #f26054;
-		background: #fdebe8;
-		transition: 0.3s;
+@keyframes typewriter {
+  from {
+		width: 0;
+	}
+  to {
+		width: 24em;
 	}
 }
 
-.pagination_container {
-	display: flex;
-	justify-content: flex-end;
-	padding-right: 20px;
-	padding-bottom: 12px;
-	font-size: 13px;
-	cursor: pointer;
-}
-
-.pill {
-	display: flex;
-	flex-wrap: wrap;
-	padding: 5px 10px !important;
-	margin: 0 8px;
-	font-size: 8px !important;
-	background: white;
-	border: 1px solid #ffe4af;
-	border-radius: 16px;
-	opacity: 0.8;
-}
-
-.module_text {
-	margin: 16px 0 8px;
-	font-size: 11px;
-	font-weight: 400;
-	color: #221f20;
-	opacity: 0.6;
-}
-
-.skeleton_container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding-top: 15px;
-	margin-right: 15px;
-	margin-left: 20px;
-}
-
-.skeleton_wrapper {
-	display: flex;
-	margin: 8px 15px 3px 20px;
+@keyframes blinkTextCursor {
+  from{border-right-color: rgba(255,255,255,.75);}
+  to{border-right-color: transparent;}
 }
 
 .topic_heading {
@@ -67,21 +36,152 @@
 	font-weight: 600;
 }
 
-.question_container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding-top: 15px;
-	margin-right: 15px;
-	margin-left: 20px;
-}
+.container { 
+	background: none;
+	overflow: hidden;
+  }
+  .loopWrapper {
+	margin: 0 auto;
+	position: relative;
+	display: block;
+	width: 400px;
+	height: 250px;
+	overflow: hidden;
+	border-bottom: 3px solid #ea3a27;
+	color: #fff;
+  }
+  .mountain {
+	position: absolute;
+	right: -900px;
+	bottom: -20px;
+	width: 2px;
+	height: 2px;
+	box-shadow: 
+	  0 0 0 50px #fdebe8,
+	  60px 50px 0 70px #fdebe8,
+	  90px 90px 0 50px #fdebe8,
+	  250px 250px 0 50px #fdebe8,
+	  290px 320px 0 50px #fdebe8,
+	  320px 400px 0 50px #fdebe8
+	  ;
+	transform: rotate(130deg);
+	animation: mtn 5s linear infinite;
+  }
+  .hill {
+	position: absolute;
+	right: -900px;
+	bottom: -50px;
+	width: 400px;
+	border-radius: 50%;
+	height: 20px;
+	box-shadow: 
+	  0 0 0 50px #f37065,
+	  -20px 0 0 20px #f37065,
+	  -90px 0 0 50px #f37065,
+	  250px 0 0 50px #f37065,
+	  290px 0 0 50px #f37065,
+	  620px 0 0 50px #f37065;
+	animation: hill 4s 2s linear infinite;
+  }
+  .tree{
+	position: absolute;
+  height: 50px; 
+  width: 350px;
+  bottom: 0;
+  background: url(https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-icon-red.svg) no-repeat;
+  }
+  .rock {
+	margin-top: -17%;
+	height: 2%; 
+	width: 2%;
+	bottom: -2px;
+	border-radius: 20px;
+	position: absolute;
+	background: #0c0c0c;
+  }
+  .truck{transition: all ease;
+	position: absolute;
+	width: 85px;
+	margin-right: -60px;
+	bottom: 0px;
+	right: 50%;
+	
+	background: #fff9ce;}
+  
+  .wheels {
+	transition: all ease;
+	width: 85px;
+	margin-right: -60px;
+	bottom: 0px;
+	right: 50%;
+	position: absolute;
+	color: #050505;
+  }
+  .truck {
+	background:  url(https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/truck.png) no-repeat;
+	background-size: contain;
+	height: 80px;
+	margin-bottom: -18px;
+  }
+  .truck:before {
+	content: " ";
+	position: absolute;
+	width: 25px;
+	box-shadow:
+	  -30px 28px 0 1.5px #2f2a2a,
+	   -35px 18px 0 1.5px #161515;
+  }
 
-.pill_container {
-	display: flex;
-	margin: 8px 15px 3px;
-}
-
-.list_container {
-	margin-right: 4px;
-	margin-left: 4px;
-}
+  
+  .tree  { animation: tree 4s 0.000s linear infinite; }
+  .rock  { animation: rock 2s   -0.530s linear infinite; }
+  .truck  { animation: truck 4s   0.080s ease infinite; }
+  .truck:before { animation: wind 1.5s   0.000s ease infinite; }
+  
+  
+  @keyframes tree {
+	0%   { transform: translate(1350px); }
+	50% {}
+	100% { transform: translate(-50px); }
+  }
+  @keyframes tree2 {
+	0%   { transform: translate(650px); }
+	50% {}
+	100% { transform: translate(-50px); }
+  }
+  @keyframes tree3 {
+	0%   { transform: translate(2750px); }
+	50% {}
+	100% { transform: translate(-50px); }
+  }
+  
+  @keyframes rock {
+	0%   { right: -200px; }
+	100% { right: 2000px; }
+  }
+  @keyframes truck {
+	0%   { }
+	6%   { transform: translateY(0px); }
+	7%   { transform: translateY(-6px); }
+	9%   { transform: translateY(0px); }
+	10%   { transform: translateY(-1px); }
+	11%   { transform: translateY(0px); }
+	100%   { }
+  }
+  @keyframes wind {
+	0%   {  }
+	50%   { transform: translateY(3px) }
+	100%   { }
+  }
+  @keyframes mtn {
+	100% {
+	  transform: translateX(-2000px) rotate(130deg);
+	}
+  }
+  @keyframes hill {
+	100% {
+	  transform: translateX(-2000px);
+	}
+  }
+  
+  
