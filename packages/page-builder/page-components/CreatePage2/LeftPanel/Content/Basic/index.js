@@ -13,7 +13,7 @@ function Basic(props) {
 	const {
 		addNewItem,
 		onNewItemAdding,
-		selectedItem,
+		selectedRow,
 		parentComponentId,
 		componentType,
 		component,
@@ -21,18 +21,18 @@ function Basic(props) {
 		selectedChildId,
 	} = props;
 
-	const { type } = selectedItem || {};
+	const { type } = selectedRow || {};
 
 	const LeftPanelItems = useMemo(
 		() => (contents || []).map((content) => (
 			<Item
 				itemType={content.type}
 				content={content}
-				onClick={() => addNewItem(content, selectedItem?.index, true, parentComponentId, componentType)}
+				onClick={() => addNewItem(content, selectedRow?.index, true, parentComponentId, componentType)}
 				onNewItemAdding={onNewItemAdding}
 			/>
 		)),
-		[addNewItem, onNewItemAdding, selectedItem],
+		[addNewItem, onNewItemAdding, selectedRow],
 	);
 
 	if (type === 'html') {
@@ -41,7 +41,7 @@ function Basic(props) {
 				<HTMLEditor
 					component={component}
 					setComponent={setComponent}
-					selectedItem={selectedItem}
+					selectedRow={selectedRow}
 					selectedChildId={selectedChildId}
 				/>
 			</div>

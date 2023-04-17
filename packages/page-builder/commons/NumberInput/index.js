@@ -6,11 +6,11 @@ import React, { useState, useCallback } from 'react';
 import styles from './styles.module.css';
 
 function NumberInput(props) {
-	const { NumberKey, component, setComponent, selectedItem } = props;
+	const { NumberKey, component, setComponent, selectedRow } = props;
 
 	const [number, setNumber] = useState(component.style?.[NumberKey] || 0);
 
-	const isRootComponent = isEmpty(selectedItem);
+	const isRootComponent = isEmpty(selectedRow);
 
 	const handleChange = useCallback(
 		(key, value) => {
@@ -23,9 +23,9 @@ function NumberInput(props) {
 					},
 				}));
 			} else {
-				const { id: selectedItemId } = selectedItem;
+				const { id: selectedRowId } = selectedRow;
 
-				const selectedComponent = component.layouts.find((layout) => layout.id === selectedItemId);
+				const selectedComponent = component.layouts.find((layout) => layout.id === selectedRowId);
 
 				const modifiedComponent = {
 					...selectedComponent,
@@ -38,7 +38,7 @@ function NumberInput(props) {
 				setComponent((prev) => ({
 					...prev,
 					layouts: prev.layouts.map((layout) => {
-						if (layout.id === selectedItemId) {
+						if (layout.id === selectedRowId) {
 							return modifiedComponent;
 						}
 						return layout;
@@ -48,7 +48,7 @@ function NumberInput(props) {
 
 			setNumber(value);
 		},
-		[component.layouts, selectedItem, setComponent, component.style, isRootComponent],
+		[component.layouts, selectedRow, setComponent, component.style, isRootComponent],
 	);
 
 	const handleInputChange = useCallback(

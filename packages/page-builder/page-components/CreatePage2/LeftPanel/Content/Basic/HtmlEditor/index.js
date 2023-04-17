@@ -5,12 +5,12 @@ import 'ace-builds/src-noconflict/theme-github';
 import 'ace-builds/src-noconflict/ext-language_tools';
 
 function HtmlEditor(props) {
-	const { component, setComponent, selectedItem } = props;
+	const { component, setComponent, selectedRow } = props;
 
 	const [htmlValue, setHtmlValue] = useState('');
 
 	const handleEditorChange = (value) => {
-		const { parentId, id } = selectedItem || {};
+		const { parentId, id } = selectedRow || {};
 		const data = component;
 		const selectedComponentIndex = (data.layouts || []).findIndex((item) => (item.id === id));
 

@@ -5,11 +5,11 @@ import React, { useState, useCallback } from 'react';
 import styles from './styles.module.css';
 
 function ColorInput(props) {
-	const { colorKey, component, setComponent, selectedItem } = props;
+	const { colorKey, component, setComponent, selectedRow } = props;
 
 	const [color, setColor] = useState(component.style?.[colorKey] || '#ffffff');
 
-	const isRootComponent = isEmpty(selectedItem);
+	const isRootComponent = isEmpty(selectedRow);
 
 	const handleChange = useCallback(
 		(key, value) => {
@@ -22,9 +22,9 @@ function ColorInput(props) {
 					},
 				}));
 			} else {
-				const { id: selectedItemId } = selectedItem;
+				const { id: selectedRowId } = selectedRow;
 
-				const selectedComponent = component.layouts.find((layout) => layout.id === selectedItemId);
+				const selectedComponent = component.layouts.find((layout) => layout.id === selectedRowId);
 
 				const modifiedComponent = {
 					...selectedComponent,
@@ -37,7 +37,7 @@ function ColorInput(props) {
 				setComponent((prev) => ({
 					...prev,
 					layouts: prev.layouts.map((layout) => {
-						if (layout.id === selectedItemId) {
+						if (layout.id === selectedRowId) {
 							return modifiedComponent;
 						}
 						return layout;
@@ -47,7 +47,7 @@ function ColorInput(props) {
 
 			setColor(value);
 		},
-		[component.layouts, selectedItem, setComponent, component.style, isRootComponent],
+		[component.layouts, selectedRow, setComponent, component.style, isRootComponent],
 	);
 
 	const handleInputChange = useCallback(

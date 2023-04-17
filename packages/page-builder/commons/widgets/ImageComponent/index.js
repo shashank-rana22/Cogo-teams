@@ -3,14 +3,14 @@ import { useState } from 'react';
 import FileUploader from '../FileUploader';
 
 function ImageComponent(props) {
-	const { src, components, setComponents, childId, selectedItem } = props;
+	const { src, components, setComponents, childId, selectedRow } = props;
 
 	const [fileValue, setFileValue] = useState();
 	const [isFocused, setIsFocused] = useState(false);
 
 	const handleFileChange = (val) => {
 		if (val) {
-			const { parentId, id } = selectedItem || {};
+			const { parentId, id } = selectedRow || {};
 			const data = components;
 			const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === id));
 

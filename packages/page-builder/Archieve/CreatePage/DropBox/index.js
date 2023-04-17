@@ -22,8 +22,8 @@ function Stage({
 	setComponents,
 	addNewItem,
 	isNewItemAdding,
-	setSelectedItem,
-	selectedItem,
+	setSelectedRow,
+	selectedRow,
 }) {
 	const [stageItems, setStageItems] = useState(components);
 
@@ -86,15 +86,15 @@ function Stage({
 					moveItem={moveItem}
 					isNewItemAdding={isNewItemAdding}
 					onNewAddingItemProps={handleNewAddingItemPropsChange}
-					onClick={() => setSelectedItem({ ...item, id, index })}
-					isSelected={!!id && id === selectedItem?.id}
+					onClick={() => setSelectedRow({ ...item, id, index })}
+					isSelected={!!id && id === selectedRow?.id}
 				/>
 			</div>
 		);
 	  }), [
 	  stageItems,
 	  moveItem,
-	  selectedItem,
+	  selectedRow,
 	  isNewItemAdding,
 	  handleNewAddingItemPropsChange,
 	]);

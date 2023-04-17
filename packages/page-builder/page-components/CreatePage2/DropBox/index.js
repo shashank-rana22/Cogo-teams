@@ -18,8 +18,8 @@ function Stage({
 	setComponent,
 	addNewItem,
 	isNewItemAdding,
-	setSelectedItem,
-	selectedItem,
+	setSelectedRow,
+	selectedRow,
 	parentComponentId,
 	setShowContentModal,
 	setParentComponentId,
@@ -91,20 +91,20 @@ function Stage({
 					moveItem={moveItem}
 					isNewItemAdding={isNewItemAdding}
 					onNewAddingItemProps={handleNewAddingItemPropsChange}
-					onClick={() => setSelectedItem({ ...item, id, index })}
-					isSelected={!!id && id === selectedItem?.id}
-					selectedItem={selectedItem}
-					setSelectedItem={setSelectedItem}
+					onClick={() => setSelectedRow({ ...item, id, index })}
+					isSelected={!!id && id === selectedRow?.id}
+					selectedRow={selectedRow}
+					setSelectedRow={setSelectedRow}
 					setShowContentModal={setShowContentModal}
 					setParentComponentId={setParentComponentId}
-					setSelectedItem={setSelectedItem}
+					setSelectedRow={setSelectedRow}
 				/>
 			</div>
 		);
 	}), [
 		stageItems,
 		moveItem,
-		selectedItem,
+		selectedRow,
 		isNewItemAdding,
 		handleNewAddingItemPropsChange,
 	]);

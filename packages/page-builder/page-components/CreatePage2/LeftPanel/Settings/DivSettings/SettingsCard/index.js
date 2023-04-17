@@ -22,14 +22,14 @@ function SettingsCard(props) {
 	const {
 		setComponent,
 		component,
-		selectedItem,
+		selectedRow,
 		handleChange,
 		setShowUploadModal,
 		setting,
 		isRootComponent,
 	} = props;
 
-	const selectedComponent = isRootComponent ? component : selectedItem;
+	const selectedComponent = isRootComponent ? component : selectedRow;
 
 	const isBackgroundImagePresent = Object.keys(selectedComponent.style).includes(
 		'background-image',
@@ -76,7 +76,7 @@ function SettingsCard(props) {
 							colorKey={key}
 							setComponent={setComponent}
 							component={component}
-							selectedItem={selectedItem}
+							selectedRow={selectedRow}
 						/>
 					),
 					upload: (

@@ -7,7 +7,7 @@ import Item from './Item';
 import styles from './styles.module.css';
 
 function Basic(props) {
-	const { components, setComponents, addNewItem, onNewItemAdding, selectedItem } = props;
+	const { components, setComponents, addNewItem, onNewItemAdding, selectedRow } = props;
 
 	const LeftPanelItems = useMemo(
 		() => (contents || []).map((content) => (
@@ -16,11 +16,11 @@ function Basic(props) {
 				content={content}
 				components={components}
 				setComponents={setComponents}
-				onClick={() => addNewItem(content, selectedItem?.index, true)}
+				onClick={() => addNewItem(content, selectedRow?.index, true)}
 				onNewItemAdding={onNewItemAdding}
 			/>
 		)),
-		[addNewItem, onNewItemAdding, selectedItem],
+		[addNewItem, onNewItemAdding, selectedRow],
 	);
 	return 	<div className={styles.container}>{LeftPanelItems}</div>;
 }

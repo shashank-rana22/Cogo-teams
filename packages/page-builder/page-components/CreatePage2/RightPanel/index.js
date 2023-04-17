@@ -12,9 +12,9 @@ import VALID_ITEM_TYPES from '../../../configurations/accept-items';
 import RenderComponents from './RenderComponent';
 import styles from './styles.module.css';
 
-function ComponentBuilder({ widget, components, setComponents, selectedItem, childId, setChildId }) {
+function ComponentBuilder({ widget, components, setComponents, selectedRow, childId, setChildId }) {
 	const { type: componetType, children, style, id: componentId } = widget || {};
-	const { id: selectedItemId } = selectedItem || {};
+	const { id: selectedRowId } = selectedRow || {};
 
 	if (componetType === 'rootElement') {
 		return (
@@ -36,7 +36,7 @@ function ComponentBuilder({ widget, components, setComponents, selectedItem, chi
 				const { id, style: allStyles } = childComponent || {};
 				const { content = '', attributes = {} } = childComponent.properties || {};
 				const { icon, type } = content || {};
-				const isChildSelected = childId === id && componentId === selectedItemId && type;
+				const isChildSelected = childId === id && componentId === selectedRowId && type;
 				const border = isChildSelected ? '1px solid red' : allStyles.border;
 
 				return (
@@ -55,7 +55,7 @@ function ComponentBuilder({ widget, components, setComponents, selectedItem, chi
 							>
 								{icon}
 							</div>
-						) : <RenderComponents componentType={type} widget={childComponent} components={components} setComponents={setComponents} elementId={id} childId={childId} selectedItem={selectedItem} /> }
+						) : <RenderComponents componentType={type} widget={childComponent} components={components} setComponents={setComponents} elementId={id} childId={childId} selectedRow={selectedRow} /> }
 
 					</div>
 				);
@@ -75,9 +75,9 @@ function RightPanel(props) {
 		isNewItemAdding,
 		onNewAddingItemProps,
 		onClick,
-		setSelectedItem,
+		setSelectedRow,
 		isSelected,
-		selectedItem,
+		selectedRow,
 		setShowContentModal,
 		setParentComponentId,
 	} = props;
@@ -164,7 +164,7 @@ function RightPanel(props) {
 
 		setComponents(() => ({ ...data }));
 
-		setSelectedItem({});
+		setSelectedRow({});
 	};
 
 	const handleSubmitClick = ({ childrenId, parentId }) => {
@@ -241,8 +241,8 @@ function RightPanel(props) {
 
 			<div>
 				{type === 'container'
-					? <ComponentBuilder widget={widget} components={components} setComponents={setComponents} selectedItem={selectedItem} childId={childId} setChildId={setChildId} />
-					: <RenderComponents componentType={type} widget={widget} components={components} setComponents={setComponents} elementId={elementId} childId={childId} selectedItem={selectedItem} />}
+					? <ComponentBuilder widget={widget} components={components} setComponents={setComponents} selectedRow={selectedRow} childId={childId} setChildId={setChildId} />
+					: <RenderComponents componentType={type} widget={widget} components={components} setComponents={setComponents} elementId={elementId} childId={childId} selectedRow={selectedRow} />}
 			</div>
 
 			<div role="presentation" className={styles.change}>

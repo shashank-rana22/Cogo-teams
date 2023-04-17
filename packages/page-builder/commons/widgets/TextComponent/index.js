@@ -6,12 +6,12 @@ import 'react-quill/dist/quill.bubble.css';
 const ReactQuill = dynamic(import('react-quill'), { ssr: false });
 
 function TextComponent(props) {
-	const { text, components, setComponents, childId, selectedItem } = props;
+	const { text, components, setComponents, childId, selectedRow } = props;
 
 	const [editorValue, setEditorValue] = useState(text);
 
 	const handleEditorChange = (value) => {
-		const { parentId, id } = selectedItem || {};
+		const { parentId, id } = selectedRow || {};
 
 		const data = components;
 		const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === id));

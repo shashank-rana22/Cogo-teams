@@ -4,7 +4,7 @@ import ImageComponent from '../../../../commons/widgets/ImageComponent';
 import TextComponent from '../../../../commons/widgets/TextComponent';
 import VideoComponent from '../../../../commons/widgets/VideoComponent';
 
-function RenderComponents({ componentType, widget, components, setComponents, elementId, childId, selectedItem }) {
+function RenderComponents({ componentType, widget, components, setComponents, elementId, childId, selectedRow }) {
 	const COMPONENT_MAPPING = {
 		text: (
 			<TextComponent
@@ -13,7 +13,7 @@ function RenderComponents({ componentType, widget, components, setComponents, el
 				components={components}
 				setComponents={setComponents}
 				childId={childId}
-				selectedItem={selectedItem}
+				selectedRow={selectedRow}
 			/>
 		),
 
@@ -24,7 +24,7 @@ function RenderComponents({ componentType, widget, components, setComponents, el
 				components={components}
 				setComponents={setComponents}
 				childId={childId}
-				selectedItem={selectedItem}
+				selectedRow={selectedRow}
 			/>
 		),
 
@@ -48,7 +48,7 @@ function RenderComponents({ componentType, widget, components, setComponents, el
 				components={components}
 				setComponents={setComponents}
 				childId={childId}
-				selectedItem={selectedItem}
+				selectedRow={selectedRow}
 			/>
 		),
 		html: (

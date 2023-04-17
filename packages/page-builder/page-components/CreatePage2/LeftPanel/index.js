@@ -10,7 +10,7 @@ function LeftPanel(props) {
 		setActiveTab,
 		component,
 		setComponent,
-		selectedItem,
+		selectedRow,
 		onNewItemAdding,
 		addNewItem,
 		showContentModal,
@@ -31,7 +31,7 @@ function LeftPanel(props) {
 				<Content
 					addNewItem={addNewItem}
 					onNewItemAdding={onNewItemAdding}
-					selectedItem={selectedItem}
+					selectedRow={selectedRow}
 					parentComponentId={parentComponentId}
 					setParentComponentId={setParentComponentId}
 					setShowContentModal={setShowContentModal}
@@ -43,7 +43,7 @@ function LeftPanel(props) {
 
 			<TabPanel name="structure" title="Structure">
 				<Structure
-					selectedItem={selectedItem}
+					selectedRow={selectedRow}
 					setShowContentModal={setShowContentModal}
 					setParentComponentId={setParentComponentId}
 					addNewItem={addNewItem}
@@ -54,7 +54,7 @@ function LeftPanel(props) {
 			<TabPanel name="settings" title="Settings">
 				<Settings
 					component={component}
-					selectedItem={selectedItem}
+					selectedRow={selectedRow}
 					setComponent={setComponent}
 					showContentModal={showContentModal}
 					setShowContentModal={setShowContentModal}

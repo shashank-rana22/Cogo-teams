@@ -9,7 +9,7 @@ function Content(props) {
 	const {
 		addNewItem,
 		onNewItemAdding,
-		selectedItem,
+		selectedRow,
 		componentType,
 		parentComponentId,
 		component,
@@ -31,7 +31,7 @@ function Content(props) {
 					<Basic
 						addNewItem={addNewItem}
 						onNewItemAdding={onNewItemAdding}
-						selectedItem={selectedItem}
+						selectedRow={selectedRow}
 						parentComponentId={parentComponentId}
 						componentType={componentType}
 						component={component}

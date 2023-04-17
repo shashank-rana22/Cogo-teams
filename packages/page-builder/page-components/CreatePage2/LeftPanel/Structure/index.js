@@ -25,7 +25,7 @@ function Structure(props) {
 		setParentComponentId,
 		onNewItemAdding,
 		addNewItem,
-		selectedItem,
+		selectedRow,
 	} = props;
 
 	const handleSubmitClick = ({ index, parentId }) => {
@@ -83,13 +83,13 @@ function Structure(props) {
 		() => (widths || []).map((row) => (
 			<Item
 				row={row}
-				handleClick={() => addNewItem({ ...parentComponent, children: getChildrenComponents(row) }, selectedItem?.index, true, parentComponent.id, null)}
+				handleClick={() => addNewItem({ ...parentComponent, children: getChildrenComponents(row) }, selectedRow?.index, true, parentComponent.id, null)}
 				onNewItemAdding={onNewItemAdding}
 				parentComponent={parentComponent}
 				childrenComponents={getChildrenComponents(row)}
 			/>
 		)),
-		[addNewItem, onNewItemAdding, selectedItem],
+		[addNewItem, onNewItemAdding, selectedRow],
 	);
 
 	return (

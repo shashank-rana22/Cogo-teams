@@ -13,7 +13,7 @@ function DNDComponent() {
 
 	const [isNewItemAdding, setNewItemAdding] = useState(false);
 
-	const [selectedItem, setSelectedItem] = useState({});
+	const [selectedRow, setSelectedRow] = useState({});
 
 	const handleAddNewItem = useCallback(
 		(content, hoveredIndex = components.length, shouldAddBelow = true) => {
@@ -26,7 +26,7 @@ function DNDComponent() {
 				...components.slice(startIndex),
 		  ]));
 
-		  setSelectedItem({
+		  setSelectedRow({
 				...content,
 				id    : components.length + 1,
 				index : startIndex,
@@ -44,11 +44,11 @@ function DNDComponent() {
 				setComponents={setComponents}
 				addNewItem={handleAddNewItem}
 				onNewItemAdding={setNewItemAdding}
-				selectedItem={selectedItem}
+				selectedRow={selectedRow}
 			/>
 		),
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[handleAddNewItem, selectedItem],
+		[handleAddNewItem, selectedRow],
 
 	  );
 	  const MemoRightPanel = useCallback(
@@ -58,13 +58,13 @@ function DNDComponent() {
 				setComponents={setComponents}
 				addNewItem={handleAddNewItem}
 				onNewItemAdding={setNewItemAdding}
-				selectedItem={selectedItem}
-				setSelectedItem={setSelectedItem}
+				selectedRow={selectedRow}
+				setSelectedRow={setSelectedRow}
 				isNewItemAdding={isNewItemAdding}
 			/>
 		),
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[handleAddNewItem, selectedItem, isNewItemAdding],
+		[handleAddNewItem, selectedRow, isNewItemAdding],
 
 	  );
 

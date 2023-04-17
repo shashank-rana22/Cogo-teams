@@ -9,11 +9,11 @@ import SettingsCard from './SettingsCard';
 import styles from './styles.module.css';
 
 function DivSettings(props) {
-	const { component, setComponent, selectedItem } = props;
+	const { component, setComponent, selectedRow } = props;
 
 	const [showUploadModal, setShowUploadModal] = useState(false);
 
-	const isRootComponent = isEmpty(selectedItem);
+	const isRootComponent = isEmpty(selectedRow);
 
 	const handleChange = useCallback(
 		(key, value) => {
@@ -26,9 +26,9 @@ function DivSettings(props) {
 					},
 				}));
 			} else {
-				const { id: selectedItemId } = selectedItem;
+				const { id: selectedRowId } = selectedRow;
 
-				const selectedComponent = component.layouts.find((layout) => layout.id === selectedItemId);
+				const selectedComponent = component.layouts.find((layout) => layout.id === selectedRowId);
 
 				const modifiedComponent = {
 					...selectedComponent,
@@ -41,7 +41,7 @@ function DivSettings(props) {
 				setComponent((prev) => ({
 					...prev,
 					layouts: prev.layouts.map((layout) => {
-						if (layout.id === selectedItemId) {
+						if (layout.id === selectedRowId) {
 							return modifiedComponent;
 						}
 						return layout;
@@ -49,7 +49,7 @@ function DivSettings(props) {
 				}));
 			}
 		},
-		[component.layouts, selectedItem, setComponent, component.style, isRootComponent],
+		[component.layouts, selectedRow, setComponent, component.style, isRootComponent],
 	);
 
 	const handleUploadChange = useCallback(
@@ -74,7 +74,7 @@ function DivSettings(props) {
 						<SettingsCard
 							setComponent={setComponent}
 							component={component}
-							selectedItem={selectedItem}
+							selectedRow={selectedRow}
 							handleChange={handleChange}
 							setShowUploadModal={setShowUploadModal}
 							setting={setting}

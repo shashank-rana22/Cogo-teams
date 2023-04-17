@@ -6,7 +6,7 @@ import Basic from './Basic';
 import styles from './styles.module.css';
 
 function Content(props) {
-	const { components, setComponents, addNewItem, onNewItemAdding, selectedItem } = props;
+	const { components, setComponents, addNewItem, onNewItemAdding, selectedRow } = props;
 	const [secondaryTab, setSecondaryTab] = useState('basic');
 
 	return (
@@ -20,7 +20,7 @@ function Content(props) {
 			>
 
 				<TabPanel name="basic" title="Basic">
-					<Basic components={components} setComponents={setComponents} addNewItem={addNewItem} onNewItemAdding={onNewItemAdding} selectedItem={selectedItem} />
+					<Basic components={components} setComponents={setComponents} addNewItem={addNewItem} onNewItemAdding={onNewItemAdding} selectedRow={selectedRow} />
 				</TabPanel>
 
 				<TabPanel name="premade" title="Premade">

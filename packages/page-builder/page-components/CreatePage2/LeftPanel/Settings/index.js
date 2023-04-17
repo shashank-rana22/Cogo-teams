@@ -6,14 +6,14 @@ import styles from './styles.module.css';
 import TextSettings from './TextSettings';
 
 function Settings(props) {
-	const { selectedItem, component, setComponent, onChange } = props;
+	const { selectedRow, component, setComponent, onChange } = props;
 
-	const { type = '' } = selectedItem;
+	const { type = '' } = selectedRow;
 
 	const COMPONENT_MAPPING = {
-		text    : <TextSettings item={selectedItem} onChange={onChange} />,
-		button  : <ButtonSettings item={selectedItem} onChange={onChange} />,
-		image   : <ImageSettings item={selectedItem} onChange={onChange} />,
+		text    : <TextSettings item={selectedRow} onChange={onChange} />,
+		button  : <ButtonSettings item={selectedRow} onChange={onChange} />,
+		image   : <ImageSettings item={selectedRow} onChange={onChange} />,
 		default : <div>Select an element to edit its style</div>,
 	};
 
@@ -25,7 +25,7 @@ function Settings(props) {
 				: (
 					<DivSettings
 						component={component}
-						selectedItem={selectedItem}
+						selectedRow={selectedRow}
 						setComponent={setComponent}
 					/>
 				)}

@@ -63,7 +63,7 @@ function DNDComponent() {
 
 	const [isNewItemAdding, setNewItemAdding] = useState(false);
 
-	const [selectedItem, setSelectedItem] = useState({});
+	const [selectedRow, setSelectedRow] = useState({});
 
 	const handleAddNewItem = useCallback(
 		(content, hoveredIndex = component.layouts.length, shouldAddBelow = true, parentDetails = {}, componentType = '') => {
@@ -95,7 +95,7 @@ function DNDComponent() {
 				}));
 			}
 
-			setSelectedItem({
+			setSelectedRow({
 				...content,
 				id    : component.layouts.length + 1,
 				index : startIndex,
@@ -128,8 +128,8 @@ function DNDComponent() {
 							setComponent={setComponent}
 							addNewItem={handleAddNewItem}
 							onNewItemAdding={setNewItemAdding}
-							selectedItem={selectedItem}
-							setSelectedItem={setSelectedItem}
+							selectedRow={selectedRow}
+							setSelectedRow={setSelectedRow}
 							showContentModal={showContentModal}
 							setShowContentModal={setShowContentModal}
 							parentComponentId={parentComponentId}
@@ -145,7 +145,7 @@ function DNDComponent() {
 							<Button
 								onClick={() => {
 									setMode({ modeType: modeType === 'edit' ? 'preview' : 'edit' });
-									setSelectedItem({});
+									setSelectedRow({});
 								}}
 								type="button"
 								size="md"
@@ -176,8 +176,8 @@ function DNDComponent() {
 							setComponent={setComponent}
 							addNewItem={handleAddNewItem}
 							onNewItemAdding={setNewItemAdding}
-							selectedItem={selectedItem}
-							setSelectedItem={setSelectedItem}
+							selectedRow={selectedRow}
+							setSelectedRow={setSelectedRow}
 							isNewItemAdding={isNewItemAdding}
 							parentComponentId={parentComponentId}
 							setShowContentModal={setShowContentModal}
@@ -202,7 +202,7 @@ function DNDComponent() {
 						parentComponentId={parentComponentId}
 						addNewItem={handleAddNewItem}
 						onNewItemAdding={setNewItemAdding}
-						selectedItem={selectedItem}
+						selectedRow={selectedRow}
 						componentType="child"
 					/>
 
