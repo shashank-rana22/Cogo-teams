@@ -66,21 +66,21 @@ const mutateFields = (fields, primaryService, formValues) => {
 };
 
 // This was used in older code for injection form and form mutating
-const injectForm = (config, formProps, task, primaryService, formValues) => {
-	const showElements = getShowTaskFields(formValues, config.controls);
+const injectForm = ({ stepConfig, formProps, task, primaryService, formValues }) => {
+	const showElements = getShowTaskFields(formValues, stepConfig.controls);
 
-	const newFields = mutateFields(
-		formProps.fields,
-		primaryService,
-		formValues,
-	);
+	// const newFields = mutateFields(
+	// 	formProps.fields,
+	// 	primaryService,
+	// 	formValues,
+	// );
 
 	return {
-		finalConfig: {
-			...config,
-			formProps: { ...formProps, fields: newFields },
-		},
-		controls: config.controls,
+		// finalConfig: {
+		// 	...config,
+		// 	formProps: { ...formProps, fields: newFields },
+		// },
+		// controls: config.controls,
 		showElements,
 	};
 };
@@ -112,6 +112,13 @@ function useStepExecution({
 	const showElements = {};
 
 	// Here some more manipulation is done
+	// const { finalConfig, showElements } = injectForm({
+	// 	stepConfig,
+	// 	formProps,
+	// 	task,
+	// 	shipment_data,
+	// 	formValues,
+	// });
 
 	return {
 		fields: valueInjectedControls,

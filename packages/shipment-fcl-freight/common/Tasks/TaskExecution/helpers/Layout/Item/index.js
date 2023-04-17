@@ -31,7 +31,7 @@ function Item(props) {
 	if (isAsyncSelect) {
 		const asyncKey = props?.optionsListKey;
 
-		const asyncFields = getAsyncFields(asyncKey);
+		const asyncFields = getAsyncFields(asyncKey) || {};
 		const finalParams = props?.params || asyncFields?.defaultParams;
 
 		if (Object.keys(asyncFields).includes('defaultParams')) {

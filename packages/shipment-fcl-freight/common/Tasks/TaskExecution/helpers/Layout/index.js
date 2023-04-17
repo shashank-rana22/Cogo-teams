@@ -32,7 +32,6 @@ function Layout({
 	if (rowWiseFields.length) {
 		totalFields.push(rowWiseFields);
 	}
-
 	return (
 		<div className={styles.layout}>
 			{totalFields.map((rowFields) => (

@@ -22,28 +22,27 @@ function Child({
 	let rowWiseFields = [];
 	const totalFields = [];
 	let span = 0;
-	(controls || []).forEach((ctrl) => {
-		const { [ctrl.name]: showItem = true } = showElements;
-		if (showItem) {
-			span += ctrl.span || 11;
-			if (span === 11) {
-				span = 0;
-				rowWiseFields.push(ctrl);
-				totalFields.push(rowWiseFields);
-				rowWiseFields = [];
-			} else if (span > 11) {
-				span = 0;
-				totalFields.push(rowWiseFields);
-				rowWiseFields = [];
-				rowWiseFields.push(ctrl);
-			} else {
-				rowWiseFields.push(ctrl);
-			}
+	controls.forEach((fields) => {
+		span += fields.span || 12;
+		if (span === 12) {
+			rowWiseFields.push(fields);
+			totalFields.push(rowWiseFields);
+			rowWiseFields = [];
+			span = 0;
+		} else if (span < 12) {
+			rowWiseFields.push(fields);
+		} else {
+			totalFields.push(rowWiseFields);
+			rowWiseFields = [];
+			rowWiseFields.push(fields);
+			span = fields.span;
 		}
 	});
 	if (rowWiseFields.length) {
 		totalFields.push(rowWiseFields);
 	}
+
+	console.log('total fields array', totalFields, showElements);
 
 	return (
 		<div className={styles.fieldarray} key={field.id}>
@@ -63,9 +62,10 @@ function Child({
 						}
 						const disable = index < noDeleteButtonTill && controlItem.name === 'code';
 						const flex = ((controlItem?.span || 12) / 12) * 100;
+						console.log('span count', controlItem?.name, span, controlItem);
 						if (!Element) return null;
 						return (
-							<div className={styles.element} style={{ width: `${flex}%` }}>
+							<div className={styles.element} style={{ width: `${flex}%`, overflow: 'scroll' }}>
 								<h4 style={{
 									height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
 								}}
