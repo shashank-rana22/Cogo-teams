@@ -9600,6 +9600,12 @@ const partner = {
 			feature     : 'purchase_invoice',
 		},
 		{
+			api         : 'put_purchase_bills_status_for_manual_bill',
+			access_type : 'private',
+			module      : 'purchase_invoice',
+			feature     : 'purchase_invoice',
+		},
+		{
 			api         : 'get_sales_invoice',
 			access_type : 'private',
 			module      : 'sales_invoice',
