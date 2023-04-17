@@ -23,7 +23,7 @@ function QuestionsAndDistribution(props) {
 				setValue(`${test_question_set_id}c`, (!(distribution_count || distribution_count === 0))
 					? ''
 					: distribution_count || '0');
-			} else {
+			} else if (question_type === 'stand_alone') {
 				setValue(`${test_question_set_id}q`, (!(distribution_count || distribution_count === 0))
 					? ''
 					: distribution_count || '0');
