@@ -42,8 +42,7 @@ function Form({
 		>
 			<Modal.Header title={(
 				<div className={styles.header}>
-
-					{ haveToUpsell ? (
+					{haveToUpsell ? (
 						<div
 							role="button"
 							tabIndex={0}
@@ -51,7 +50,6 @@ function Form({
 							onClick={handleShipmentsClick}
 						>
 							<IcMArrowBack />
-
 						</div>
 					) : null}
 

@@ -1,7 +1,7 @@
 import { Loader, Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { InputController, RadioGroupController, useForm } from '@cogoport/forms';
-import { useCallback, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 
 import useListShipmentCancellationReasons from '../../hooks/useListShipmentCancellationReasons';
 import useUpdateShipment from '../../hooks/useUpdateShipment';
@@ -29,7 +29,8 @@ export default function CancelShipment({ setShow }) {
 	useEffect(() => {
 		getReasons({
 			filters: {
-				stakeholder_type: activeStakeholder in stakeholderMapping
+				shipment_type    : 'fcl_freight',
+				stakeholder_type : activeStakeholder in stakeholderMapping
 					? stakeholderMapping[activeStakeholder]
 					: activeStakeholder,
 			},
@@ -40,42 +41,40 @@ export default function CancelShipment({ setShow }) {
 
 	const { control, formState: { errors }, handleSubmit } = useForm();
 
-	const onSubmit = useCallback((data) => {
-		updateShipment({
-			...getCancelShipmentPayload(data, id),
-		});
-	}, [updateShipment, id]);
+	const onSubmit = (data) => {
+		updateShipment(getCancelShipmentPayload(data, id));
+	};
 
 	let modalContent = null;
 	if (reasonsLoading) {
 		modalContent = <Loader />;
 	} else if (!reasonsLoading && reasons.length === 0) {
-		modalContent = <div>No Cancellation Reason found</div>;
+		modalContent = <div className={styles.no_reasons_found}>No cancellation reasons found...</div>;
 	} else {
 		modalContent = (
 			<>
 				<Modal.Body>
 					<strong>Please select a reason for cancelling the shipment</strong>
-					{errors?.cancellation_reason
-						? <div className={styles.error_message}>{errors.cancellation_reason.message}</div>
-						: null}
 					<RadioGroupController
 						name="cancellation_reason"
 						control={control}
 						options={reasons}
 						rules={{ required: 'Cancellation reason is required' }}
 					/>
+					{errors?.cancellation_reason
+						? <div className={styles.error_message}>{errors.cancellation_reason.message}</div>
+						: null}
 
 					<div className={styles.label}>Remarks</div>
-					{errors?.remarks
-						? <div className={styles.error_message}>{errors.remarks.message}</div>
-						: null}
 					<InputController
 						name="remarks"
 						control={control}
 						rules={{ required: 'Remarks is required' }}
 						size="sm"
 					/>
+					{errors?.remarks
+						? <div className={styles.error_message}>{errors.remarks.message}</div>
+						: null}
 				</Modal.Body>
 
 				<Modal.Footer>

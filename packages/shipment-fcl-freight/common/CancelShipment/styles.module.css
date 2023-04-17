@@ -26,3 +26,8 @@
 	margin: 30px 0 10px;
 	font-weight: 600;
 }
+
+.no_reasons_found {
+	font-size: var(--font-size-xl);
+	padding: 16px;
+}
