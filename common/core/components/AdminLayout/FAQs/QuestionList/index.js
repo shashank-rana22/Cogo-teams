@@ -30,7 +30,7 @@ function QuestionList({
 		);
 	}
 
-	if (true) return <Loader topic={topic} />;
+	if (loading) return <Loader topic={topic} />;
 	if (response_type === 'GPT') return <GPTAnswers answer={gpt_answer} showMore={show_more} search={search} />;
 	const allpills = (item) => (
 		<div>
