@@ -1,0 +1,24 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 4px 16px 4px 0;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 10%);
+
+	:global {
+		.ui_checkbox_container {
+			margin-right: 20px;
+		}
+
+		.ui_select_container {
+			width: 250px;
+		}
+	}
+}
+
+.checkbox_field {
+	display: flex;
+	align-items: center;
+}
