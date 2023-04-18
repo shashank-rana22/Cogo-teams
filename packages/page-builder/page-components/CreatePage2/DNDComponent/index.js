@@ -75,8 +75,8 @@ function DNDComponent() {
 
 				const objIndex = data.layouts.findIndex((item) => item.parentId === parentId);
 
-				data.layouts[objIndex].children[childId] = { ...data.layouts[objIndex].children[childId], ...CONTENT_MAPPING[content.type] };
-				data.layouts[objIndex].children[childId].style = { ...data.layouts[objIndex].children[childId].style, border: undefined };
+				data.layouts[objIndex].children[childId] = { ...CONTENT_MAPPING[content.type], ...data.layouts[objIndex].children[childId] };
+				data.layouts[objIndex].children[childId].style = { ...data.layouts[objIndex].children[childId].style };
 
 				setComponent(data);
 
