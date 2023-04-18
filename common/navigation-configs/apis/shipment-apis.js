@@ -1394,26 +1394,21 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-<<<<<<< HEAD
-		api          : 'update_saas_ftl_freight_service_tracking',
+		api          : 'update_saas_ftl_tracking_detail',
 		access_type  : 'private',
 		service_name : 'saas_traceability',
 	},
 	{
-		api          : 'get_saas_ftl_freight_service_tracking_consent',
+		api          : 'get_saas_ftl_tracking_consent',
 		access_type  : 'private',
 		service_name : 'saas_traceability',
 	},
 	{
-		api          : 'get_saas_ftl_freight_service_tracker',
+		api          : 'get_saas_ftl_tracking_detail',
 		access_type  : 'private',
 		service_name : 'saas_traceability',
 	},
 	{
-		api          : 'get_saas_ftl_tracking_status',
-		access_type  : 'private',
-		service_name : 'saas_traceability',
-=======
 		api          : 'send_whatsapp_booking_note_delayed',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -1429,7 +1424,6 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 		feature      : 'revenue_desk',
->>>>>>> 4327f4db8fedd1f533da2f6ec5837ef45ece6a51
 	},
 ];
 
