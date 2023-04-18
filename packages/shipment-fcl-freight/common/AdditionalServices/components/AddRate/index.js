@@ -33,6 +33,7 @@ function AddRate({
 	setShowChargeCodes = () => {},
 	source = '',
 	isSeller = false,
+	task = {},
 }) {
 	const [billToCustomer, setBillToCustomer] = useState(false);
 	const [showSecondStep, setSecondStep] = useState(false);

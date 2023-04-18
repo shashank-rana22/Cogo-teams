@@ -5,7 +5,7 @@ import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
 function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {} }) {
-	const { taskConfigData, loading } = useGetTaskConfig({ task, onCancel });
+	const { taskConfigData, loading } = useGetTaskConfig({ task });
 
 	const {
 		steps,
