@@ -74,7 +74,6 @@ const useCreateForm = (props) => {
 
 				{errors[name] && (
 					<div className={styles.errors}>
-						{' '}
 						{errors[name]?.message}
 					</div>
 				)}
@@ -82,6 +81,7 @@ const useCreateForm = (props) => {
 			</div>
 		);
 	});
+
 	return {
 		onClickBackIcon,
 		renderFields,
