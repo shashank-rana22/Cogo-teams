@@ -50,7 +50,7 @@ function CreateAudienceForm(props) {
 			source
 		})
 
-	const renderFields = ()=>{
+	const renderFields = () => {
 		return (Object.keys(controls) || []).map((controlItem) => {
 			const { name = '', label = '' } = controls[controlItem] || {};
 
@@ -73,11 +73,9 @@ function CreateAudienceForm(props) {
 						{errors[name]
 						&& (
 							<div className={styles.error_message}>
-								{' '}
 								{errors[name]?.message}
 							</div>
 						)}
-
 					</div>
 				);
 			}
@@ -97,16 +95,12 @@ function CreateAudienceForm(props) {
 			}
 
 			{source !== 'create' ? (
-				<div className={styles.header}>
-				 Add Audience
-				</div>
+				<div className={styles.header}>Add Audience</div>
 			) : null}
 
-			
 			{renderFields()}
 
 			<div className={styles.button_container} style={customStyle?.buttonContainerStyle || {}}>
-
 				<Button
 					themeType="tertiary"
 					className={styles.cancel_button}
@@ -125,9 +119,7 @@ function CreateAudienceForm(props) {
 					SAVE
 				</Button>
 			</div>
-
 		</div>
-
 	);
 }
 
