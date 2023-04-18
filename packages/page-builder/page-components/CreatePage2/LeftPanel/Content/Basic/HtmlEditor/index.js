@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import React, { useState } from 'react';
 import AceEditor from 'react-ace';
 import 'ace-builds/src-noconflict/mode-html';
@@ -27,6 +28,16 @@ function HtmlEditor(props) {
 
 	return (
 		<div style={{ width: '100%' }}>
+
+			<div style={{ marginBottom: '12px' }}>
+
+				<Button
+					themeType="secondary"
+					type="button"
+				>
+					Back
+				</Button>
+			</div>
 			<AceEditor
 				value={htmlValue}
 				mode="html"

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import FileUploader from '../FileUploader';
 
 function ImageComponent(props) {
-	const { src, components, setComponents, childId, selectedRow } = props;
+	const { components, setComponents, childId, selectedRow } = props;
 
 	const [fileValue, setFileValue] = useState();
 	const [isFocused, setIsFocused] = useState(false);
@@ -33,15 +33,17 @@ function ImageComponent(props) {
 					role="presentation"
 					onClick={() => setIsFocused(!isFocused)}
 				>
-					<img width="100%" src={src} alt="upload-img" />
+					<img width="100%" src={fileValue} alt="upload-img" />
 				</div>
 			) : (
+
 				<FileUploader
-					value={src}
+					value={fileValue}
 					onChange={(val) => handleFileChange(val)}
 					accept="png"
 					uploadDesc="Upload"
 				/>
+
 			) }
 		</div>
 	);
