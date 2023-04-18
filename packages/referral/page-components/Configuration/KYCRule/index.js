@@ -32,12 +32,14 @@ function KYCRule({ kycData, dataLoading }) {
 
 	const handleSave = (values, e) => {
 		e.stopPropagation();
+		const { promotion_id } = values || {};
+		const referee_reward = promotion_id ? { promotion_id } : {};
 		createRule({
 			...values,
 			referral_bonus:
 			{ total_cogopoints: Number(values.total_cogopoints) },
-			referee_reward : { promotion_id: values?.promotion_id },
-			event          : 'kyc_verified',
+			referee_reward,
+			event: 'kyc_verified',
 		});
 	};
 

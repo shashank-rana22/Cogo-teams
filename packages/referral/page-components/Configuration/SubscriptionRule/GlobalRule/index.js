@@ -50,23 +50,6 @@ function GlobalRule({ control, errors, formValues, isEdit }) {
 					</div>
 				)}
 				<div className={styles.text}>
-					shipment type
-				</div>
-				<div className={styles.input_controller}>
-					<MultiselectController
-						control={control}
-						name="event_types"
-						disabled={isEdit}
-						className={styles.input_box}
-						size="sm"
-						rules={{ required: true }}
-						options={shipmentType}
-					/>
-					{errors.event_types && (
-						<span className={styles.error}>Required</span>
-					)}
-				</div>
-				<div className={styles.text}>
 					minimum subscription value
 				</div>
 				<div className={styles.input_controller}>

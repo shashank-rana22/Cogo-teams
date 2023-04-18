@@ -38,7 +38,7 @@ export const payloadFormat = (event, values) => {
 
 	const payload = {
 		event,
-		event_types,
+		event_types           : event === 'subscription' ? undefined : event_types,
 		overall_limit_type,
 		overall_limit         : overall_limit_type === 'none' ? 0 : Number(overall_limit),
 		event_threshold_limit : Number(event_threshold_limit),
