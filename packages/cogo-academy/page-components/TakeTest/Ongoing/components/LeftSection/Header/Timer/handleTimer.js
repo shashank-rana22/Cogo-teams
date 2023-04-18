@@ -1,4 +1,4 @@
-import handleMinimizeTest from '../../../../../utils/handleMinimizeTest';
+// import handleMinimizeTest from '../../../../../utils/handleMinimizeTest';
 
 const handleTimer = (test_start_time, duration, setShowTimeOverModal) => {
 	const timeNow = new Date().getTime();
@@ -11,7 +11,7 @@ const handleTimer = (test_start_time, duration, setShowTimeOverModal) => {
 
 	const check = difference < 1000 || difference > duration * 60000;
 	if (check) 	{
-		handleMinimizeTest();
+		// handleMinimizeTest();
 		setShowTimeOverModal(true);
 	}
 
