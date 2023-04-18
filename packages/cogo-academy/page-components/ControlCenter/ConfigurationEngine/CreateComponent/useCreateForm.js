@@ -48,7 +48,7 @@ const useCreateForm = (props) => {
 		if (update && id) {
 			fetchFaq();
 		}
-	}, [fetchFaq, general.query.id, id, update]);
+	}, [fetchFaq, id, update]);
 
 	useEffect(() => {
 		setValue('name', display_name);
