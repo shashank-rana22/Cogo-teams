@@ -26,6 +26,7 @@ export interface TableProps {
 	onRowSelect?: (row: object) => void;
 	onRowClick?: (row: object) => void;
 	getRowId?: (row: object) => string;
+	showPagination?:boolean
 }
 interface StatsInterface {
 	REQUESTED?:number
