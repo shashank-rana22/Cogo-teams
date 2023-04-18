@@ -1772,6 +1772,14 @@ const saas = {
 	],
 	app_saas_premium_services: [
 		{
+			api         : 'list_organization_billing_addresses',
+			access_type : 'private',
+		},
+		{
+			api         : 'list_organization_addresses',
+			access_type : 'private',
+		},
+		{
 			api         : 'get_sailing_schedules',
 			access_type : 'private',
 			module      : 'dutiesTaxes',
@@ -1926,6 +1934,14 @@ const saas = {
 			access_type : 'private',
 		},
 		{
+			api         : 'list_organization_billing_addresses',
+			access_type : 'private',
+		},
+		{
+			api         : 'list_organization_addresses',
+			access_type : 'private',
+		},
+		{
 			api         : 'get_saas_bill_status',
 			access_type : 'private',
 			module      : 'trader-eligibility-check',
@@ -1988,6 +2004,14 @@ const saas = {
 		},
 	],
 	app_saas_import_export_doc: [
+		{
+			api         : 'list_organization_billing_addresses',
+			access_type : 'private',
+		},
+		{
+			api         : 'list_organization_addresses',
+			access_type : 'private',
+		},
 		{
 			api          : 'saas_get_user_quota_usage',
 			access_type  : 'private',
