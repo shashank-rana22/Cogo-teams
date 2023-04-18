@@ -4,16 +4,16 @@ import { IcCFtick, IcMEdit } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
 import useCreateRule from '../../../hooks/useCreateRule';
-import useGetRules from '../../../hooks/useGetRules';
 import { payloadFormat, setFormValues } from '../../../utils/payloadFormat';
 
 import GlobalRule from './GlobalRule';
 import NetworkBonus from './NetworkBonus';
+import NetworkBonusCriteria from './NetworkBonusCriteria';
 import ReferralBonus from './ReferralBonus';
 import RemainingBonus from './RemainingBonus';
 import styles from './styles.module.css';
 
-function ShipmentRule() {
+function ShipmentRule({ shipmentData, dataLoading }) {
 	const {
 		control,
 		formState: { errors },
@@ -29,15 +29,16 @@ function ShipmentRule() {
 	});
 
 	const [apiState, setApiState] = useState('Created');
-	const { data, loading : dataLoading, isEdit, setIsEdit } = useGetRules('shipment');
-	const { createRule, loading } = useCreateRule(apiState,setApiState, setIsEdit);
+	const [isEdit, setIsEdit] = useState(false);
+	const { createRule, loading } = useCreateRule(apiState, setApiState, setIsEdit);
 
 	useEffect(() => {
-		if (data && data?.data !== null) {
-			setFormValues(data, setValue);
+		if (shipmentData !== null) {
+			setIsEdit(true);
+			setFormValues(shipmentData, setValue);
 			setApiState('Updated');
 		}
-	}, [data, setValue]);
+	}, [shipmentData, setValue]);
 
 	const handleSave = (values) => {
 		const { remaining_bonus } = values;
@@ -100,6 +101,17 @@ function ShipmentRule() {
 						formValues={formValues}
 						errors={errors}
 						trigger={trigger}
+					/>
+				</div>
+				<div className={styles.network_bonus}>
+					<div className={styles.subheading}>Network Bonus Criteria</div>
+					<NetworkBonusCriteria
+						isEdit={isEdit}
+						control={control}
+						formValues={formValues}
+						errors={errors}
+						trigger={trigger}
+						setValue={setValue}
 					/>
 				</div>
 				{!isEdit && (

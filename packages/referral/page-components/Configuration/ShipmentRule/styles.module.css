@@ -18,6 +18,15 @@
     margin-right: 8px;
 }
 
+.network_bonus{
+    padding: 12px 0 12px 0;
+    :global{
+        .ui_select_container{
+            width: 200px;
+        }
+    }
+}
+
 .flex{
     /* display: flex;
     align-items: center;
@@ -85,6 +94,7 @@
 
 .remaining_bonus{
     padding: 12px 0 24px 0;
+    border-bottom : 1px solid #E0E0E0;
 }
 
 .subheading{

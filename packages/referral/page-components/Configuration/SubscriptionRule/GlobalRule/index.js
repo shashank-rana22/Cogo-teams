@@ -78,7 +78,6 @@ function GlobalRule({ control, errors, formValues, isEdit }) {
 						disabled={isEdit}
 						type="number"
 						placeholder="Enter value"
-						rules={{ required: true }}
 					/>
 					{errors.event_threshold_limit && (
 						<span className={styles.error}>Required</span>

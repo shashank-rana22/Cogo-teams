@@ -21,7 +21,7 @@
 
 .flex{
     display: flex;
-    align-items: end;
+    align-items: center;
     justify-content: space-between;
     padding: 4px 16px;
 }
@@ -54,18 +54,11 @@
     flex-direction: column;
     justify-content: center;
     position: relative;
-    margin-top: 4px;
-}
-
-.referree_reward{
-    margin-top: 12px;
 }
 
 .edit_icon{
     margin-right: 8px;
 }
-
-
 
 @media (max-width: 768px) {
     .flex{
@@ -91,13 +84,4 @@
         width: 100%;
         margin-top: 16px;
     }
-
-    .bonus_criteria{
-        width: 100%;
-    }
-
-    .referree_reward{
-        width: 100%;
-    }
 }
-

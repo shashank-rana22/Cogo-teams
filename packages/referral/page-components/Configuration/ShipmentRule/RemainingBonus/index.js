@@ -111,24 +111,29 @@ function RemainingBonus({ control, formValues, errors, trigger, isEdit }) {
 							<div className={styles.text}>
 								% of remaining network bonus
 							</div>
-							{remaining_bonus?.[index]?.type === 'slab' && (<> <div className={styles.input_controller}>
-								<InputController
-									control={control}
-									name={`remaining_bonus.${index}.max_percentage_allowed`}
-									className={styles.input_box}
-									size="sm"
-									type="number"
-									disabled={isEdit}
-									placeholder="Enter value"
-									rules={{ required: true }}
-								/>
-								{errors?.remaining_bonus?.[index]?.max_percentage_allowed && (
-									<span className={styles.error}>Required</span>
-								)}
-							</div>
-							<div className={styles.text}>
-								max % for each node
-							</div> </>)}
+							{remaining_bonus?.[index]?.type === 'slab' && (
+								<>
+									{' '}
+									<div className={styles.input_controller}>
+										<InputController
+											control={control}
+											name={`remaining_bonus.${index}.max_percentage_allowed`}
+											className={styles.input_box}
+											size="sm"
+											type="number"
+											disabled={isEdit}
+											placeholder="Enter value"
+											rules={{ required: true }}
+										/>
+										{errors?.remaining_bonus?.[index]?.max_percentage_allowed && (
+											<span className={styles.error}>Required</span>
+										)}
+									</div>
+									<div className={styles.text}>
+										max % for each node
+									</div>
+								</>
+							)}
 						</div>
 						{fields.length !== 1 && (
 							<ButtonIcon
