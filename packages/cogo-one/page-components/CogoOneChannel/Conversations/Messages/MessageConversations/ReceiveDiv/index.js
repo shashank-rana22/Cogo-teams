@@ -17,13 +17,13 @@ function ReceiveDiv({
 		response = {},
 	} = eachMessage;
 
-	const date = format(new Date(created_at), 'dd MMM YYYY, HH:mm');
+	const date = created_at && format(new Date(created_at), 'dd MMM YYYY, HH:mm');
 
 	return (
 		<div className={styles.container}>
 			<div>
 				<div className={styles.time_stamp}>
-					{date}
+					{date && date}
 				</div>
 
 				<div className={cl`${message_type === 'contacts' ? '' : styles.receive_message_container}`}>

@@ -13,9 +13,9 @@
 }
 
 .container {
-	width: 100%;
 	height: fit-content;
-	margin: 10px 0;
+	margin: 10px 20px;
+	
 }
 
 .receive_message_container {

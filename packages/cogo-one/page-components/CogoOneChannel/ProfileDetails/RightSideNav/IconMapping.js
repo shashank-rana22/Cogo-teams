@@ -55,6 +55,14 @@ const IconMapping = [
 		/>,
 	},
 	{
+		name    : 'tickets',
+		content : 'Tickets',
+		icon    : <img
+			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/actions.svg"
+			alt="actions"
+		/>,
+	},
+	{
 		name    : 'spot_search',
 		content : 'Spot Search',
 		icon    : <IcMSearchdark width={16} height={16} />,
