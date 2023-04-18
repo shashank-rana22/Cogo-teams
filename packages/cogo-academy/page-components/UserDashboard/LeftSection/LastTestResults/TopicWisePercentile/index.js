@@ -4,7 +4,7 @@ import toFixed from '../../../../CreateModule/utils/toFixed';
 
 import styles from './styles.module.css';
 
-const renderTooltip = ({ topic_wise_percentile }) => (
+const renderTooltip = ({ topic_wise_percentile = 0 }) => (
 	Object.entries(topic_wise_percentile || {}).map(([key, value], index) => {
 		if (index >= 2) {
 			return (
@@ -51,7 +51,7 @@ function TopicWisePercentile({ topic_wise_percentile }) {
 				)}
 				{
 					number_of_topics > 2 && (
-						<Tooltip content={renderTooltip()} placement="bottom">
+						<Tooltip content={renderTooltip({ topic_wise_percentile })} placement="bottom">
 							<div className={styles.percentile_01}>
 								<div className={styles.topic}>
 									+
