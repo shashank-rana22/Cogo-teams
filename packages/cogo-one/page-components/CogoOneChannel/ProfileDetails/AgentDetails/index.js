@@ -37,6 +37,7 @@ function AgentDetails({
 		mobile_no,
 		organization_id,
 		sender,
+		channel_type,
 	} = formattedMessageData || {};
 
 	const [showAddNumber, setShowAddNumber] = useState(false);
