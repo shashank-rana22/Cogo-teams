@@ -200,7 +200,7 @@ function GenerateMAWB({
 	}, [formValues.chargeableWeight, formValues.ratePerKg, formValues.class]);
 
 	useEffect(() => {
-		if (operatorList.length > 0) {
+		if (operatorList.length > 0 && !edit) {
 			setTaskItem((prev) => ({
 				...prev,
 				airline         : operatorList[0]?.business_name,
@@ -212,7 +212,7 @@ function GenerateMAWB({
 	}, [operatorList]);
 
 	useEffect(() => {
-		if (organizationList.length > 0) {
+		if (organizationList.length > 0 && !edit) {
 			setTaskItem((prev) => ({
 				...prev,
 				customer_name: organizationList[0]?.business_name,
@@ -223,7 +223,7 @@ function GenerateMAWB({
 	}, [organizationList]);
 
 	useEffect(() => {
-		if (airportList.length > 0) {
+		if (airportList.length > 0 && !edit) {
 			(airportList || []).forEach((airItem) => {
 				if (airItem.id === item.originAirportId) {
 					setTaskItem((prev) => ({
@@ -268,7 +268,7 @@ function GenerateMAWB({
 			setValue('carrierOtherCharges', edit ? taskItem.carrierOtherCharges
 				: carrierOtherChargesCode);
 			setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
-			setValue('shipperSignature', taskItem.customer_name);
+			setValue('shipperSignature', taskItem?.shipperSignature || taskItem.customer_name);
 			setValue('amountOfInsurance', 'NIL');
 			setValue('accountingInformation', 'FREIGHT PREPAID');
 		}
