@@ -8,7 +8,13 @@ import SortComponent from '../../../commons/SortComponent';
 
 import styles from './styles.module.css';
 
-function NotEvaluated() {
+function NotEvaluated({ is_evaluated = false }) {
+	if (is_evaluated) {
+		return (
+			<div className={styles.not_evaluated}>Pending</div>
+		);
+	}
+
 	return (
 		<Tooltip content="Assign Marks to view details" placement="bottom">
 			<div className={styles.not_evaluated}>Pending</div>
@@ -43,7 +49,8 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router, status }) => [
 		id       : 'passed_failed',
 		accessor : ({ result_status = '', is_evaluated = false }) => (
 			<section className={`${styles.section} ${styles[result_status]}`}>
-				{is_evaluated ? (startCase(result_status) || '-') : <NotEvaluated />}
+				{(!is_evaluated || status !== 'published')
+					? <NotEvaluated is_evaluated={is_evaluated} /> : (startCase(result_status) || '-')}
 			</section>
 		),
 	},
@@ -62,7 +69,8 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router, status }) => [
 		id       : 'score_achieved',
 		accessor : ({ final_score = '', test = {}, is_evaluated = false }) => (
 			<section className={styles.section}>
-				{is_evaluated ? `${toFixed(final_score, 2)}/${toFixed(test.total_marks, 2)}` : <NotEvaluated />}
+				{(!is_evaluated || status !== 'published') ? <NotEvaluated is_evaluated={is_evaluated} />
+					: `${toFixed(final_score, 2)}/${toFixed(test.total_marks, 2)}`}
 			</section>
 		),
 	},
@@ -81,7 +89,8 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router, status }) => [
 		id       : 'percentile',
 		accessor : ({ percentile = '', is_evaluated = false }) => (
 			<div className={styles.section}>
-				{is_evaluated ? (toFixed(percentile || 0, 2) || '-') : <NotEvaluated />}
+				{(!is_evaluated || status !== 'published')
+					? <NotEvaluated is_evaluated={is_evaluated} /> : (toFixed(percentile || 0, 2) || '-')}
 			</div>
 		),
 	},

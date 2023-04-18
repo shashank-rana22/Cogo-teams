@@ -1,0 +1,31 @@
+.container {
+	display: flex;
+	width: 100%;
+}
+
+.small_section {
+	width: 15%;
+	text-align: center;
+}
+
+.section {
+	width: 55%;
+}
+
+.topic {
+	width: 12%;
+}
+
+.topic_text {
+	width: 80px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.question_text {
+	width: 80%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
