@@ -1,4 +1,4 @@
-import AgentDetails from '../page-components/CogoOneChannel/ProfileDetails/AgentDetails';
+// import AgentDetails from '../page-components/CogoOneChannel/ProfileDetails/AgentDetails';
 import AgentNotes from '../page-components/CogoOneChannel/ProfileDetails/AgentNotes';
 import AgentReminder from '../page-components/CogoOneChannel/ProfileDetails/AgentReminder';
 import CustomerInsight from '../page-components/CogoOneChannel/ProfileDetails/CustomerInsight';
@@ -9,7 +9,7 @@ import QuickActions from '../page-components/CogoOneChannel/ProfileDetails/Quick
 import UserActivities from '../page-components/CogoOneChannel/ProfileDetails/UserActivity';
 
 const COMPONENT_MAPPING = {
-	profile           : AgentDetails,
+	// profile           : AgentDetails,
 	organization      : OrganizationDetails,
 	user_activity     : UserActivities,
 	reminder          : AgentReminder,
