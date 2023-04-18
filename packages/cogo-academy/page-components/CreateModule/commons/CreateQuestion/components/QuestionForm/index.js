@@ -20,6 +20,7 @@ const NAME_ARRAY_MAPPING = {
 	case_study  : 'case_questions',
 	subjective  : 'subjective',
 };
+
 function QuestionForm({
 	control,
 	register,

@@ -3876,19 +3876,22 @@ const partner = {
 			feature      : 'rate_density',
 		},
 		{
-			api         : 'list_shipment_flash_booking_rates',
-			access_type : 'private',
-			feature     : 'live_booking',
+			api          : 'list_shipment_flash_booking_rates',
+			access_type  : 'private',
+			feature      : 'live_booking',
+			service_name : 'shipment',
 		},
 		{
-			api         : 'create_shipment_flash_booking_rate',
-			access_type : 'private',
-			feature     : 'live_booking',
+			api          : 'create_shipment_flash_booking_rate',
+			access_type  : 'private',
+			feature      : 'live_booking',
+			service_name : 'shipment',
 		},
 		{
-			api         : 'update_shipment_flash_booking_rate',
-			access_type : 'private',
-			feature     : 'live_booking',
+			api          : 'update_shipment_flash_booking_rate',
+			access_type  : 'private',
+			feature      : 'live_booking',
+			service_name : 'shipment',
 		},
 		{
 			api         : 'get_shipment_services_quotation',
@@ -7002,8 +7005,9 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'list_organization_documents',
-			access_type : 'private',
+			api          : 'list_organization_documents',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 		{
 			api          : 'list_cogo_entities',
@@ -9600,6 +9604,12 @@ const partner = {
 			feature     : 'purchase_invoice',
 		},
 		{
+			api         : 'put_purchase_bills_status_for_manual_bill',
+			access_type : 'private',
+			module      : 'purchase_invoice',
+			feature     : 'purchase_invoice',
+		},
+		{
 			api         : 'get_sales_invoice',
 			access_type : 'private',
 			module      : 'sales_invoice',
@@ -10434,6 +10444,12 @@ const partner = {
 			service_name : 'fcl_freight_rate',
 			feature      : 'detention_demurrage',
 		},
+		{
+			api          : 'list_shipment_invoice_combinations',
+			access_type  : 'private',
+			service_name : 'shipment',
+			feature      : 'detention_demurrage',
+		},
 	],
 	my_profile: [
 		{
@@ -10460,6 +10476,26 @@ const partner = {
 			api          : 'list_event_mappings',
 			access_type  : 'private',
 			service_name : 'event',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_badge_name',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_profile',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_badge_description',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_kam_expertise_profile_mastery_badge',
+			access_type  : 'private',
+			service_name : 'allocation',
 		},
 	],
 	awb_inventory: [
@@ -10624,7 +10660,7 @@ const partner = {
 		{
 			api          : 'get_cogoverse_dashboard',
 			access_type  : 'private',
-			service_name : 'unified_dashboard',
+			service_name : 'communication',
 		},
 		{
 			api          : 'get_cogoverse_globe_data',
@@ -11094,8 +11130,7 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
-			api: 'create_communication',
-
+			api          : 'create_communication',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

@@ -40,8 +40,9 @@ function ExtendValidityModal({
 			size="sm"
 			show={showExtendValidityModal}
 			onClose={() => setShowExtendValidityModal(false)}
-			placement="center"
+			placement="top"
 			showCloseIcon={false}
+			className={styles.modal_container}
 		>
 			<Modal.Header title="Extend Validity" />
 

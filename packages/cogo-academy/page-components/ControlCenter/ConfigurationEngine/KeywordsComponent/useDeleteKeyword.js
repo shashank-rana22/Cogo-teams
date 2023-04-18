@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
@@ -25,7 +26,7 @@ function useDeleteKeyword({ fetchFaqKeyword }) {
 				fetchFaqKeyword();
 			}
 		} catch (err) {
-			Toast.error(err?.message);
+			if (err.response?.data) { Toast.error(getApiErrorString(err.response?.data)); }
 		}
 	};
 
@@ -43,7 +44,7 @@ function useDeleteKeyword({ fetchFaqKeyword }) {
 			fetchFaqKeyword();
 			Toast.success('Keyword restored sucessfully!');
 		} catch (error) {
-			Toast.error(error?.message);
+			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
 		}
 	};
 

@@ -76,7 +76,6 @@ function useUpdateTest() {
 						id                    : test_id,
 						status                : 'inactive',
 						set_wise_distribution : [],
-
 					},
 				});
 

@@ -129,7 +129,7 @@ const getColumns = ({ errors, control }) => {
 
 						<div className={styles.input_container}>
 							<InputController control={control} {...controlItem3} className={styles.input} />
-							{errors[`${id}c`] && <div className={styles.error_msg}>{errors[`${id}c`]?.message}</div>}
+							{errors[`${id}s`] && <div className={styles.error_msg}>{errors[`${id}s`]?.message}</div>}
 						</div>
 
 					</section>
