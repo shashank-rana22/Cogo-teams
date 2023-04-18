@@ -1,4 +1,5 @@
 import getShowTaskFields from './get-show-task-fields';
+import mutateFields from './mutate-fields';
 
 // This was used in older code for injection form and form mutating
 const injectForm = ({ stepConfig, formProps, task, primaryService, formValues }) => {

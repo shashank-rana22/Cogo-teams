@@ -13,7 +13,7 @@ function useListTasksHelper() {
 	const { id: shipment_id } = shipment_data || '';
 
 	const { list, refetch:taskListRefetch, loading } = useListTasks({
-		defaultParams  : { page_limit: 100, sort_type: 'asc' },
+		defaultParams  : { page_limit: 100, sort_by: 'asc' },
 		defaultFilters : { shipment_id },
 		filters,
 	});
