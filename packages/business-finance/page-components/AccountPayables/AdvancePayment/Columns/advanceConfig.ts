@@ -20,7 +20,7 @@ export const ADVANCE_CONFIG = {
 	fields: [
 		{
 			label : 'Incident Number',
-			key   : 'incidentNumber',
+			key   : 'incidentRefNumber',
 			func  : 'renderIncidentNumber',
 			// topKey : {
 			// 	key     : 'incidentNumber',
@@ -40,11 +40,16 @@ export const ADVANCE_CONFIG = {
 			// 	transform  : 'translateX(-2px)',
 			// 	zIndex     : 1,
 			// },
-			span  : 0.8,
+			span  : 0.9,
+		},
+		{
+			label : 'Adv. Doc. No.',
+			key   : 'advanceRefNo',
+			span  : 0.9,
 		},
 		{
 			label : 'SID',
-			key   : 'sidNumber',
+			key   : 'jobNumber',
 			// topKey : {
 			// 	key         : 'jobNumber',
 			// 	type        : 'href',
@@ -59,12 +64,12 @@ export const ADVANCE_CONFIG = {
 		},
 		{
 			label : 'Entity',
-			key   : 'entity',
+			key   : 'entityCode',
 			span  : 0.5,
 
 		},
 		{
-			key   : 'businessName',
+			key   : 'organizationName',
 			label : 'Organisation',
 			func  : 'renderOrganization',
 			span  : 1.4,
@@ -77,7 +82,7 @@ export const ADVANCE_CONFIG = {
 			span    : 1.5,
 		},
 		{
-			key     : 'reuestedByName',
+			key     : 'requestedBy',
 			label   : 'Requested by & on',
 			sorting : { name: 'requestedDateSortType' },
 			span    : 1.5,
@@ -85,7 +90,7 @@ export const ADVANCE_CONFIG = {
 		},
 		{
 			label   : 'Approved by & on',
-			key     : 'approvedByName',
+			key     : 'approvedBy',
 			sorting : { name: 'approvedDateSortType' },
 			span    : 1.5,
 			func    : 'renderApprovedBy',

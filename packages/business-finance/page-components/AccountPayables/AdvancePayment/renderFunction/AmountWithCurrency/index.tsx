@@ -2,9 +2,10 @@ import getPrice from '@cogoport/forms/utils/get-formatted-price';
 import React from 'react';
 
 function AmountWithCurrency({ itemData }) {
+	const { advanceAmount, currency } = itemData || {};
 	return (
 		<div>
-			{getPrice(itemData?.advancedAmount, 'INR')}
+			{getPrice(advanceAmount, currency)}
 		</div>
 	);
 }

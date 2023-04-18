@@ -7,6 +7,7 @@ import List from '../../commons/List';
 
 import { ADVANCE_CONFIG } from './Columns/advanceConfig';
 // import advancedColumn from './Columns/advancedColumn';
+import useGetAdvancePaymentList from './hooks/useGetAdvancePaymentList';
 import AmountWithCurrency from './renderFunction/AmountWithCurrency';
 import ApprovedBy from './renderFunction/ApprovedBy';
 import IncidentNumber from './renderFunction/IncidentNumber';
@@ -143,10 +144,13 @@ const list = {
 	],
 };
 function AdvancePayment({ activeEntity }:ItemProps) {
-	const [filters, setFilters] = useState({
-		service: undefined,
-	});
+	// const [filters, setFilters] = useState({
+	// 	service: undefined,
+	// });
 
+	console.log(activeEntity, 'entiyt');
+	const { filters, setFilters, data } = useGetAdvancePaymentList({ activeEntity });
+	console.log(data, 'data');
 	const functions = {
 		// renderBankDetails: (itemData) => (
 		// 	<BankDetails
@@ -248,7 +252,7 @@ function AdvancePayment({ activeEntity }:ItemProps) {
 					})}
 				/> */}
 				<List
-					itemData={list}
+					itemData={data}
 					config={ADVANCE_CONFIG}
 					functions={functions}
 					sort={sort}

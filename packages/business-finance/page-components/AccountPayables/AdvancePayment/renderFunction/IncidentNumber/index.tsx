@@ -3,10 +3,11 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function IncidentNumber({ itemData }) {
+	const { incidentRefNumber } = itemData || {};
 	return (
 		<div className={styles.text}>
 			#
-			{itemData?.incidentNumber}
+			{incidentRefNumber}
 		</div>
 	);
 }

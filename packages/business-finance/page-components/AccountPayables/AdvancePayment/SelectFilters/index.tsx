@@ -9,14 +9,19 @@ import { filterControls } from './filterControls';
 import styles from './styles.module.css';
 
 interface FilterProps {
-	filters:object,
+	search?:string | number,
+}
+
+interface Props {
+	filters:FilterProps,
 	setFilters: (p:object) => void,
 	activeEntity?:string;
 	createButton?:string;
 }
 
-function SelectFilters({ filters, setFilters, activeEntity, createButton }:FilterProps) {
+function SelectFilters({ filters, setFilters, activeEntity, createButton }:Props) {
 	const [showPayRunModal, setshowPayRunModal] = useState(false);
+	const { search } = filters || {};
 	return (
 		<div className={styles.container}>
 			<div>
@@ -29,6 +34,11 @@ function SelectFilters({ filters, setFilters, activeEntity, createButton }:Filte
 			<div className={styles.search_filter}>
 				<div>
 					<Input
+						value={search || ''}
+						onChange={(value) => setFilters({
+							...filters,
+							search: value || undefined,
+						})}
 						placeholder="Search by Shipment ID/Incident No."
 						size="sm"
 						style={{ width: '340px' }}

@@ -4,25 +4,25 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function OrganizationName({ itemData }) {
-	const { businessName } = itemData || {};
+	const { organizationName } = itemData || {};
 	return (
 		<div className={styles.container}>
-			{businessName?.length > 30
+			{organizationName?.length > 22
 				? (
 					<Tooltip
 						placement="top"
-						content={businessName}
+						content={organizationName}
 					>
 						<text>
 
-							{`${businessName.substring(
+							{`${organizationName.substring(
 								0,
-								30,
+								22,
 							)}...`}
 
 						</text>
 					</Tooltip>
-				) : businessName}
+				) : organizationName}
 		</div>
 
 	);
