@@ -1,5 +1,5 @@
 import { cl, Tooltip, Checkbox } from '@cogoport/components';
-import { IcCPin, IcMPin } from '@cogoport/icons-react';
+import { IcCPin, IcMPin, IcMShip } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import UserAvatar from '../../../../../common/UserAvatar';
@@ -33,6 +33,7 @@ function MessageCardData({
 		last_message = '',
 		last_message_document = null,
 		new_message_count = 0,
+		is_likely_to_book_shipment = false,
 	} = getActiveCardDetails(item) || {};
 
 	const lastMessageVar = last_message_document || last_message;
@@ -122,13 +123,20 @@ function MessageCardData({
 
 					<div className={styles.content_div}>
 						{formatLastMessage(lastMessageVar)}
-						{new_message_count > 0 && (
-							<div className={styles.new_message_count}>
-								{new_message_count > 100 ? '99+' : (
-									new_message_count
-								)}
-							</div>
-						)}
+						<div className={styles.flex_div}>
+							{new_message_count > 0 && (
+								<div className={styles.new_message_count}>
+									{new_message_count > 100 ? '99+' : (
+										new_message_count
+									)}
+								</div>
+							)}
+							{is_likely_to_book_shipment && (
+								<div className={styles.likely_to_book_shipment}>
+									<IcMShip className={styles.ship_icon_container} />
+								</div>
+							)}
+						</div>
 					</div>
 				</div>
 				{isImportant && (
@@ -152,6 +160,7 @@ function MessageCardData({
 							/>
 						)}
 				</div>
+
 			</div>
 		</div>
 

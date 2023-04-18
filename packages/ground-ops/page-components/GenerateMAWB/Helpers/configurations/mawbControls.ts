@@ -21,7 +21,7 @@ const mawbControls = (disableClass) => ({
 			label       : "Shipper's Address",
 			type        : 'textarea',
 			span        : 7,
-			maxLength   : 150,
+			maxLength   : 200,
 			row         : 4,
 			placeholder : 'Enter Address',
 			rules       : {
@@ -47,7 +47,7 @@ const mawbControls = (disableClass) => ({
 			label       : "Consignee's Address",
 			type        : 'textarea',
 			span        : 7,
-			maxLength   : 150,
+			maxLength   : 200,
 			row         : 4,
 			placeholder : 'Enter Address',
 			rules       : {
@@ -61,9 +61,6 @@ const mawbControls = (disableClass) => ({
 			label       : 'Origin',
 			placeholder : 'Enter Origin Airport',
 			span        : 5,
-			rules       : {
-				required: 'Origin Airport is Required',
-			},
 		},
 		{
 			name        : 'destination',
@@ -72,9 +69,6 @@ const mawbControls = (disableClass) => ({
 			label       : 'Destination',
 			placeholder : 'Enter Destination Airport',
 			span        : 5,
-			rules       : {
-				required: 'Destination Airport is Required',
-			},
 		},
 		{
 			name        : 'originPortCode',
@@ -353,7 +347,7 @@ const mawbControls = (disableClass) => ({
 			label       : 'Remarks',
 			type        : 'textarea',
 			span        : 7,
-			maxLength   : 150,
+			maxLength   : 500,
 			placeholder : 'Remarks',
 			rows        : 3,
 		},

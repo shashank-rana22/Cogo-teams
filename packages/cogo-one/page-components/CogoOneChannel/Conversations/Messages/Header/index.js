@@ -38,6 +38,7 @@ function Header({
 	updateUserRoom = () => {},
 }) {
 	const [isVisible, setIsVisible] = useState(false);
+	const [openPopover, setOpenPopover] = useState(false);
 	const { chat_tags = [] } = activeMessageCard || {};
 
 	const {
@@ -59,25 +60,30 @@ function Header({
 	};
 	const disableAssignButton = showBotMessages && !isomniChannelAdmin;
 
+	const openAssignModal = () => {
+		setOpenModal({
+			type : 'assign',
+			data : {
+				closeModal,
+				assignLoading,
+				assignChat,
+				support_agent_id,
+			},
+		});
+	};
+
 	const assignButtonAction = (type) => {
-		if (showBotMessages && isomniChannelAdmin) {
-			const payload = {
-				agent_id        : type === 'stop_and_assign' ? userId : undefined,
-				allowed_to_chat : true,
-			};
-			setDisableButton(type);
-			assignChat(payload);
-		} else if (!showBotMessages) {
-			setOpenModal({
-				type : 'assign',
-				data : {
-					closeModal,
-					assignLoading,
-					assignChat,
-					support_agent_id,
-				},
-			});
+		setDisableButton(type);
+		if (type === 'assign') {
+			setOpenPopover(false);
+			openAssignModal();
+			return;
 		}
+		const payload = {
+			agent_id           : type === 'stop_and_assign' ? userId : undefined,
+			is_allowed_to_chat : true,
+		};
+		assignChat(payload);
 	};
 
 	const renderButtonOption = () => (
@@ -85,34 +91,32 @@ function Header({
 			<Button
 				themeType="secondary"
 				size="md"
-				disabled={
-                    disableAssignButton || disableButton === 'auto_assign'
-                }
+				disabled={disableButton}
 				className={styles.styled_buttons}
 				onClick={() => assignButtonAction('stop_and_assign')}
-				loading={
-                    showBotMessages
-                    && assignLoading
-                    && disableButton === 'stop_and_assign'
-                }
+				loading={assignLoading && disableButton === 'stop_and_assign'}
 			>
 				Assign to me
 			</Button>
 			<Button
 				themeType="secondary"
 				size="md"
-				disabled={
-                    disableAssignButton || disableButton === 'stop_and_assign'
-                }
+				disabled={disableButton}
 				className={styles.styled_buttons}
 				onClick={() => assignButtonAction('auto_assign')}
-				loading={
-                    showBotMessages
-                    && assignLoading
-                    && disableButton === 'auto_assign'
-                }
+				loading={assignLoading && disableButton === 'auto_assign'}
 			>
 				Auto Assign
+			</Button>
+			<Button
+				themeType="secondary"
+				size="md"
+				disabled={disableButton}
+				className={styles.styled_button}
+				onClick={() => assignButtonAction('assign')}
+				loading={assignLoading && disableButton === 'assign'}
+			>
+				Assign
 			</Button>
 		</div>
 	);
@@ -124,11 +128,15 @@ function Header({
 					placement="bottom"
 					trigger="click"
 					render={renderButtonOption()}
+					visible={openPopover}
+					onClickOutside={() => setOpenPopover(false)}
 				>
 					<Button
 						themeType="secondary"
 						size="md"
 						className={styles.styled_button}
+						onClick={() => setOpenPopover(true)}
+
 					>
 						Assign To
 					</Button>
@@ -139,7 +147,7 @@ function Header({
 					size="md"
 					disabled={disableAssignButton}
 					className={styles.styled_button}
-					onClick={() => assignButtonAction('assign')}
+					onClick={openAssignModal}
 					loading={showBotMessages && assignLoading}
 				>
 					Assign
@@ -200,7 +208,10 @@ function Header({
 							className={cl`${styles.icon_div} ${updateRoomLoading ? styles.disable_icon : ''}`}
 							onClick={handleUpdateUser}
 						>
-							<IcMProfile width={15} height={15} fill="#221f20" />
+							<IcMProfile
+								className={cl`${styles.profile_icon} 
+								${updateRoomLoading ? styles.disable_icon : ''}`}
+							/>
 							<IcMRefresh className={cl`${styles.update_icon} 
 								${updateRoomLoading ? styles.disable_icon : ''}`}
 							/>
