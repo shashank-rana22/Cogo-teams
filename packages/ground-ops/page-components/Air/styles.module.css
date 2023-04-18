@@ -49,6 +49,7 @@
 
 .input_search {
 	height: 32px !important;
+	width: 280px;
 
 	:global(.ui_input_control) {
 		font-size: 12px !important;

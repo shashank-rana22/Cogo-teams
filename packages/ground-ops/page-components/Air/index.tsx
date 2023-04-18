@@ -70,8 +70,8 @@ function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 
 	useEffect(() => {
 		if (searchValue) {
-			const statsObj = data?.data?.stats;
-			const statsObjValues:Array<number> = Object.values(statsObj);
+			const statsObj = data?.data?.stats || {};
+			const statsObjValues:Array<number> = Object.values(statsObj) || [];
 			const maxStats = Math.max(...statsObjValues);
 			const maxStatsKey = Object.keys(statsObj).find((key) => statsObj[key] === maxStats);
 			setActiveTab(tabsStatsMapping[maxStatsKey]);
@@ -110,7 +110,6 @@ function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 					value={searchValue}
 					suffix={<IcMSearchlight className="search_icon" />}
 					className={styles.input_search}
-					style={{ width: '280px', height: '26px' }}
 					placeholder="Search by SID or AWB Number"
 					type="text"
 					onChange={(val) => {
