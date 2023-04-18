@@ -17,7 +17,10 @@ function LeftPanel(props) {
 		setShowContentModal,
 		parentComponentId,
 		setParentComponentId,
+		selectedItem,
 	} = props;
+
+	console.log('sdksl', selectedItem);
 
 	return (
 		<Tabs
@@ -38,6 +41,7 @@ function LeftPanel(props) {
 					componentType="parent"
 					component={component}
 					setComponent={setComponent}
+					selectedItem={selectedItem}
 				/>
 			</TabPanel>
 

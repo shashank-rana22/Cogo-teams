@@ -23,7 +23,7 @@ function Stage({
 	parentComponentId,
 	setShowContentModal,
 	setParentComponentId,
-
+	setSelectedItem,
 }) {
 	const [stageItems, setStageItems] = useState(component);
 
@@ -100,6 +100,7 @@ function Stage({
 					setSelectedRow={setSelectedRow}
 					setShowContentModal={setShowContentModal}
 					setParentComponentId={setParentComponentId}
+					setSelectedItem={setSelectedItem}
 				/>
 			</div>
 		);

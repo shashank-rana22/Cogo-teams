@@ -18,31 +18,31 @@ function Basic(props) {
 		componentType,
 		component,
 		setComponent,
-		selectedChildId,
+		selectedItem,
 	} = props;
 
-	const { type } = selectedRow || {};
+	const { type } = selectedItem || {};
 
 	const LeftPanelItems = useMemo(
-		() => (contents || []).map((content) => (
+		() => (contents || []).map((item) => (
 			<Item
-				itemType={content.type}
-				content={content}
-				onClick={() => addNewItem(content, selectedRow?.index, true, parentComponentId, componentType)}
+				itemType={item.type}
+				content={item}
+				onClick={() => addNewItem(item, selectedRow?.index, true, parentComponentId, componentType)}
 				onNewItemAdding={onNewItemAdding}
 			/>
 		)),
 		[addNewItem, onNewItemAdding, selectedRow],
 	);
 
-	if (type === 'html') {
+	if (type === 'html' && componentType !== 'child') {
 		return (
 			<div className={styles.container}>
 				<HTMLEditor
 					component={component}
 					setComponent={setComponent}
 					selectedRow={selectedRow}
-					selectedChildId={selectedChildId}
+					selectedItem={selectedItem}
 				/>
 			</div>
 		);
