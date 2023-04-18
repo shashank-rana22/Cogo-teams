@@ -1,5 +1,6 @@
 .container {
 	width: 25%;
+	height: 100%;
 	background: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 10%);
@@ -39,6 +40,7 @@
 		}
 
 		.ui_checkbox_group_container {
+			flex-wrap: wrap;
 			padding: unset;
 
 			.ui_checkbox_container {
