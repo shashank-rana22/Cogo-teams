@@ -49,6 +49,7 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 			StartDate      : date_range?.startDate || undefined,
 			EndDate        : date_range?.endDate || undefined,
 			CsvType        : CsvType || undefined,
+			Page           : 1,
 		}));
 	}, [query, setParams, Month, Department, Designation, Year, ManagerID, CsvType, FeedbackStatus,
 		date_range?.startDate, date_range?.endDate]);
@@ -67,14 +68,17 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 					const value = startCase(cntrl.name);
 
 					return (
-						<Element
-							{...cntrl}
-							control={control}
-							key={cntrl.name}
-							id={`${cntrl}_id`}
-							value={params[value]}
-							style={{ marginRight: '8px' }}
-						/>
+						<div className={styles.flex_container}>
+							<div>{cntrl.label}</div>
+							<Element
+								{...cntrl}
+								control={control}
+								key={cntrl.name}
+								id={`${cntrl}_id`}
+								value={params[value]}
+								style={{ marginRight: '8px' }}
+							/>
+						</div>
 					);
 				})}
 			</div>
@@ -87,14 +91,17 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 					const value = startCase(cntrl.name);
 
 					return (
-						<Element
-							{...cntrl}
-							control={control}
-							key={cntrl.name}
-							id={`${cntrl}_id`}
-							value={params[value]}
-							style={{ marginLeft: '8px' }}
-						/>
+						<div className={styles.flex_container}>
+							<div style={{ marginLeft: '8px' }}>{cntrl.label}</div>
+							<Element
+								{...cntrl}
+								control={control}
+								key={cntrl.name}
+								id={`${cntrl}_id`}
+								value={params[value]}
+								style={{ marginLeft: '8px' }}
+							/>
+						</div>
 					);
 				})}
 			</div>

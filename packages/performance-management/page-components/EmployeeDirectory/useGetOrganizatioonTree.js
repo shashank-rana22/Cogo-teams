@@ -3,9 +3,10 @@ import { useState } from 'react';
 
 const useGetOrganizationTree = ({ viewType = false }) => {
 	const [params, setParams] = useState({
-		Ceos      : viewType || undefined,
-		Page      : !viewType ? 1 : undefined,
-		PageLimit : !viewType ? 50 : undefined,
+		Ceos          : viewType || undefined,
+		Page          : !viewType ? 1 : undefined,
+		PageLimit     : !viewType ? 50 : undefined,
+		IncludingCeos : !viewType ? true : undefined,
 	});
 
 	const [{ data: treeData = {}, loading = false }, trigger] = useIrisRequest({
