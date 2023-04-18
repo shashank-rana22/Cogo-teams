@@ -1,6 +1,6 @@
 import { Tooltip, Button, Pill } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { IcMDownload, IcMInfo } from '@cogoport/icons-react';
+import { IcMDownload } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import { startCase, format } from '@cogoport/utils';
 import { useState } from 'react';
