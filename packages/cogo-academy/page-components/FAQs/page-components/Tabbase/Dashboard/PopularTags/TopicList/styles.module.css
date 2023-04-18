@@ -57,10 +57,10 @@
 	}
 }
 
-.spinner{
+.spinner {
 	display: flex;
-	justify-content: center;
-	margin-top: 32px;
 	align-items: center;
-	height: 50vh
+	justify-content: center;
+	height: 50vh;
+	margin-top: 32px;
 }

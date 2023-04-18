@@ -1,5 +1,6 @@
 .container {
-	width:80%;
+	width: 80%;
+
 	@media (max-width: 768px) {
 		margin-top: 80px;
 	}

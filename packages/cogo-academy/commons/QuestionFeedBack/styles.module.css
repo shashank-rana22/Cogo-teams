@@ -38,9 +38,9 @@
 	padding-bottom: 14px;
 }
 
-.spinner{
-	display:flex;
-	justify-content: center;
+.spinner {
+	display: flex;
 	align-items: center;
-	height:80vh
+	justify-content: center;
+	height: 80vh;
 }
