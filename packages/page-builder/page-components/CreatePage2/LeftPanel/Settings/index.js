@@ -1,36 +1,121 @@
-import ButtonSettings from './ButtonSettings';
-import DivSettings from './DivSettings';
-// import DivSettings from './DivSettings';
-import ImageSettings from './ImageSettings';
+import { Accordion, Modal } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
+import { useState, useCallback } from 'react';
+
+import UploadImageModal from '../../../../commons/UploadImageModal';
+import buttonSettings from '../../../../configurations/button-settings';
+import containerSettings from '../../../../configurations/container-settings';
+import imageSettings from '../../../../configurations/image-settings';
+import textSettings from '../../../../configurations/text-settings';
+
+import Card from './Card';
 import styles from './styles.module.css';
-import TextSettings from './TextSettings';
+
+const settingsMapping = {
+	text   : textSettings,
+	image  : imageSettings,
+	button : buttonSettings,
+};
 
 function Settings(props) {
-	const { selectedRow, component, setComponent, onChange } = props;
+	const { component, setComponent, selectedRow } = props;
+
+	const [showUploadModal, setShowUploadModal] = useState(false);
+
+	const isRootComponent = isEmpty(selectedRow);
 
 	const { type = '' } = selectedRow;
 
-	const COMPONENT_MAPPING = {
-		text    : <TextSettings item={selectedRow} onChange={onChange} />,
-		button  : <ButtonSettings item={selectedRow} onChange={onChange} />,
-		image   : <ImageSettings item={selectedRow} onChange={onChange} />,
-		default : <div>Select an element to edit its style</div>,
-	};
+	const settings = settingsMapping[type] || containerSettings;
+
+	const handleChange = useCallback(
+		(key, value) => {
+			if (isRootComponent) {
+				setComponent((prev) => ({
+					...prev,
+					style: {
+						...component.style,
+						[key]: value,
+					},
+				}));
+			} else {
+				const { id: selectedRowId } = selectedRow;
+
+				const selectedComponent = component.layouts.find((layout) => layout.id === selectedRowId);
+
+				const modifiedComponent = {
+					...selectedComponent,
+					style: {
+						...selectedComponent.style,
+						[key]: value,
+					},
+				};
+
+				setComponent((prev) => ({
+					...prev,
+					layouts: prev.layouts.map((layout) => {
+						if (layout.id === selectedRowId) {
+							return modifiedComponent;
+						}
+						return layout;
+					}),
+				}));
+			}
+		},
+		[component.layouts, selectedRow, setComponent, component.style, isRootComponent],
+	);
+
+	const handleUploadChange = useCallback(
+		(value, key) => {
+			handleChange(key, value);
+		},
+		[handleChange],
+	);
 
 	return (
-		<div className={styles.container}>
+		<section className={styles.container}>
+			<div>
+				{settings.map((setting) => (
 
-			{['text', 'button', 'image'].includes(type)
-				? COMPONENT_MAPPING[type || 'default']
-				: (
-					<DivSettings
+					<Accordion
+						key={setting.type}
+						className={styles.ui_accordion_content}
+						type="text"
+						title={setting.type}
+					>
+
+						<Card
+							setComponent={setComponent}
+							component={component}
+							selectedRow={selectedRow}
+							handleChange={handleChange}
+							setShowUploadModal={setShowUploadModal}
+							setting={setting}
+							isRootComponent={isRootComponent}
+						/>
+
+					</Accordion>
+
+				))}
+			</div>
+
+			{showUploadModal && (
+				<Modal
+					size="md"
+					placement="top"
+					show={showUploadModal}
+					onClose={() => setShowUploadModal(false)}
+				>
+					<UploadImageModal
+						setShowUploadModal={setShowUploadModal}
+						showUploadModal={showUploadModal}
 						component={component}
-						selectedRow={selectedRow}
 						setComponent={setComponent}
+						handleUploadChange={handleUploadChange}
 					/>
-				)}
-
-		</div>
+				</Modal>
+			)}
+		</section>
 	);
 }
 

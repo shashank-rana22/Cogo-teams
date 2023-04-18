@@ -79,6 +79,9 @@ function Stage({
 			<div
 				style={{ position: 'relative' }}
 				key={item.id}
+				role="presentation"
+				onClick={(e) => e.stopPropagation()}
+
 			>
 				<RightPanel
 					widget={item}
@@ -163,6 +166,8 @@ function Stage({
 		<div
 			ref={dropRef}
 			className={styles.container}
+			role="presentation"
+			onClick={() => setSelectedRow({})}
 			style={{
 				...component.style,
 				backgroundColor,

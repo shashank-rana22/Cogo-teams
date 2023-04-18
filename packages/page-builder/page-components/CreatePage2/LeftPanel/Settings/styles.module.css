@@ -1,9 +1,11 @@
 .container {
-    background-color: #fff;
-    height: 100vh;
-    margin-top: 20px;
-    padding: 8px;
-    overflow: scroll;
-    
-  }
-  
+  background-color: #fff;
+  height: 100vh;
+  margin-top: 20px;
+  padding: 16px;
+  overflow: scroll;
+}
+
+.ui_accordion_content {
+  margin-bottom: 12px;
+}
