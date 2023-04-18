@@ -1,10 +1,10 @@
 import Filter from './Filter';
 import styles from './styles.module.css';
 
-function List() {
+function List(props) {
 	return (
 		<div className={styles.container}>
-			<Filter />
+			<Filter {...props} />
 		</div>
 	);
 }

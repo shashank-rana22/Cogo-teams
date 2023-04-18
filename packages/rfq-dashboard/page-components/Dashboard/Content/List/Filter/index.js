@@ -2,17 +2,19 @@ import { Checkbox, Button, Select } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function Filter() {
+function Filter({ filterStore, setFilterStore }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.checkbox_field}>
-				<Checkbox label="checkbox1" value="a1" />
+				<Checkbox label="Select All" value="a1" />
 				<Button>Approve Selected</Button>
 			</div>
 			<Select
-				prefix="Sort By : "
-				options={[{ label: 'Newest Arrival', value: 'newest' }]}
 				size="sm"
+				prefix="Sort By : "
+				options={[{ label: 'Newest Arrival', value: 'newest' }, { label: 'old Arrival', value: 'old' }]}
+				value={filterStore.sortBy}
+				onChange={(val) => setFilterStore((prev) => ({ ...prev, sortBy: val }))}
 			/>
 		</div>
 	);
