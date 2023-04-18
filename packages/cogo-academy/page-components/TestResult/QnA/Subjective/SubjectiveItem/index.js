@@ -42,7 +42,7 @@ function SubjectiveItem({ data, index, view, user_id, test_id, status }) {
 			<div className={styles.wrapper}>
 				<div className={styles.answer_outer_container}>
 
-					{isEmpty(user_answers) || user_answer === '<p><br></p>' ? (
+					{isEmpty(user_answers) || (user_answer === '<p><br></p>' && file_url === null) ? (
 						<div className={styles.not_attempted}>
 							{view === 'admin' ? 'User' : 'You'}
 							{' '}

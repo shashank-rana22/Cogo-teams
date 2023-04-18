@@ -50,11 +50,21 @@ function Summary({ summaryData = {} }) {
 					</div>
 
 					<div className={styles.radial_chart_item}>
-						<QuestionWiseStats
-							height="250px"
-							width="250px"
-							question_stats={question_stats}
-						/>
+
+						<div className={styles.chart_item}>
+							<QuestionWiseStats
+								height="250px"
+								width="250px"
+								question_stats={question_stats}
+							/>
+
+							<div className={styles.question_count}>
+								<span>Questions: </span>
+								<span>{question_stats?.total_questions || 0}</span>
+							</div>
+
+						</div>
+
 					</div>
 				</div>
 
