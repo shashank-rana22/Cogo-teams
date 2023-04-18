@@ -1,10 +1,15 @@
+import { ShipmentDetailContext } from '@cogoport/context';
+import React, { useContext } from 'react';
+
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 
-import { UploadBookingNote } from './CustomTasks';
+import { UploadBookingNote, UploadContainerArrival } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
 function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {} }) {
+	const { primary_service, shipment_data } = useContext(ShipmentDetailContext);
+
 	const { taskConfigData, loading } = useGetTaskConfig({ task, onCancel });
 
 	const {
@@ -29,6 +34,20 @@ function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {
 				onCancel={onCancel}
 				taskListRefetch={taskListRefetch}
 				taskConfigData={taskConfigData}
+			/>
+		);
+	}
+
+	if (task.task === 'upload_container_arrival_notice') {
+		return (
+			<UploadContainerArrival
+				pendingTask={task}
+				summary={{
+					...(primary_service || {}),
+					importer_exporter_id: shipment_data?.importer_exporter?.id,
+				}}
+				refetch={taskListRefetch}
+				clearTask={onCancel}
 			/>
 		);
 	}

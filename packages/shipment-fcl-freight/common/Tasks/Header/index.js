@@ -8,7 +8,6 @@ function Header({
 	showMyTasks = true,
 	setShowMyTasks = () => {},
 }) {
-	console.log('task', showMyTasks);
 	return (
 		<div className={styles.container}>
 			<div className={styles.top_panel}>
