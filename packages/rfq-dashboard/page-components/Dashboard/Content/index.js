@@ -6,6 +6,11 @@ import styles from './styles.module.css';
 function Content(props) {
 	const { activeTab, setActiveTab } = props;
 
+	const TAB_MAPPING = [
+		{ name: 'approval', title: 'Approval' },
+		{ name: 'all', title: 'All RFQ' },
+	];
+
 	return (
 		<div className={styles.container}>
 			<Tabs
@@ -13,13 +18,11 @@ function Content(props) {
 				themeType="primary"
 				onChange={setActiveTab}
 			>
-				<TabPanel name="local_rates" title="Local Rates">
-					<List {...props} />
-				</TabPanel>
-
-				<TabPanel name="freight_bookings" title="Freight Bookings">
-					<div>bookings</div>
-				</TabPanel>
+				{TAB_MAPPING.map(({ name, title }) => (
+					<TabPanel name={name} title={title}>
+						<List {...props} />
+					</TabPanel>
+				))}
 			</Tabs>
 
 		</div>
