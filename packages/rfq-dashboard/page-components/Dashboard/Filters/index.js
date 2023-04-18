@@ -1,12 +1,9 @@
-import { useForm } from '@cogoport/forms';
-
 import controls from '../../../configurations/filter-controls';
 import { getFieldController } from '../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 
-function Filters() {
-	const formProps = useForm();
+function Filters({ formProps }) {
 	const { control } = formProps;
 
 	return (
