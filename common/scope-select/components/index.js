@@ -45,6 +45,7 @@ export default function ScopeSelect({
 				themeType={themeType}
 			>
 				<div className={styles.ellipsis_text}>{startCase(scope) || 'My View'}</div>
+
 				{viewType ? (
 					<div className={styles.view_type}>
 						(

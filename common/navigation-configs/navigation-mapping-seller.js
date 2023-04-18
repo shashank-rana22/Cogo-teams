@@ -55,6 +55,17 @@ const navigationMappingSeller = {
 				possible_apis : app_apis.saas_trade_partner,
 				module_type   : 'dashboards',
 			},
+			{
+				key           : 'saas_premium_services-import_export_docs',
+				title         : 'Import/Export Documents',
+				type          : 'link',
+				icon          : 'nav-trade-payment',
+				href          : '/saas/premium-services/import-export-doc',
+				as            : '/saas/premium-services/import-export-doc',
+				main_apis     : [],
+				possible_apis : app_apis.saas_import_export_doc,
+				module_type   : 'dashboards',
+			},
 		],
 	},
 	saas_premium_services: {
@@ -79,15 +90,6 @@ const navigationMappingSeller = {
 				possible_apis : app_apis.saas_premium_services,
 			},
 			{
-				key           : 'saas_premium_services-order_history',
-				title         : 'Order History',
-				href          : '/saas/premium-services/order-history',
-				as            : '/saas/premium-services/order-history',
-				icon          : 'nav-transaction-history',
-				main_apis     : [],
-				possible_apis : app_apis.saas_order_history,
-			},
-			{
 				key           : 'saas_premium_services-trader_eligibility_check',
 				title         : 'Trader Eligibility Check',
 				href          : '/saas/premium-services/trader-eligibility-check',
@@ -95,6 +97,25 @@ const navigationMappingSeller = {
 				icon          : 'nav-trade-partner',
 				main_apis     : [],
 				possible_apis : app_apis.saas_trader_eligibility_check,
+			},
+			{
+				key           : 'saas_premium_services-import_export_docs',
+				title         : 'Import/Export Documents',
+				type          : 'link',
+				icon          : 'nav-trade-payment',
+				href          : '/saas/premium-services/import-export-doc',
+				as            : '/saas/premium-services/import-export-doc',
+				main_apis     : [],
+				possible_apis : app_apis.saas_import_export_doc,
+			},
+			{
+				key           : 'saas_premium_services-order_history',
+				title         : 'Order History',
+				href          : '/saas/premium-services/order-history',
+				as            : '/saas/premium-services/order-history',
+				icon          : 'nav-transaction-history',
+				main_apis     : [],
+				possible_apis : app_apis.saas_order_history,
 			},
 		],
 	},
@@ -453,7 +474,7 @@ const navigationMappingSeller = {
 
 	saas_cogo_subscription: {
 		key         : 'saas_cogo_subscription',
-		title       : 'Subscriptions',
+		title       : 'Membership Plans',
 		type        : 'link',
 		icon        : 'nav-subscriptions',
 		isSubNavs   : true,
@@ -463,7 +484,7 @@ const navigationMappingSeller = {
 		options     : [
 			{
 				key           : 'saas_cogo_subscription-manage',
-				title         : 'Manage Subscription',
+				title         : 'Manage Your Plan',
 				type          : 'link',
 				icon          : 'nav-documents',
 				href          : '/saas/cogo-subscription/manage-subscription',
@@ -590,6 +611,19 @@ const navigationMappingSeller = {
 		icon          : 'nav-payments',
 		main_apis     : [],
 		possible_apis : app_apis.saas_cogostore,
+	},
+
+	saas_cogopoint: {
+		key           : 'saas_cogopoint',
+		title         : 'Cogopoints',
+		href          : '/saas/cogopoint',
+		as            : '/saas/cogopoint',
+		// type          : 'link',
+		line          : true,
+		showInNav     : false,
+		icon          : 'nav-payments',
+		main_apis     : [],
+		possible_apis : app_apis.saas_cogopoint,
 		module_type   : 'dashboards',
 	},
 };
