@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -65,7 +66,7 @@ const useQuestionList = ({
 					},
 				});
 			} catch (error) {
-				Toast.error(error?.message);
+				if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
 			}
 		},
 		[country_id, id, page, query, query_name, roleFunction, roleSubFunction, scope, topic?.id, trigger],

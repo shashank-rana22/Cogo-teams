@@ -1,0 +1,93 @@
+.row_level {
+	display: flex;
+	align-items: center;
+	margin: 12px 0 12px 8px;
+	font-size: 18px;
+	font-weight: 700;
+	color: #4f4f4f;
+}
+
+.card_item {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: auto;
+	padding: 16px;
+	margin-bottom: 24px;
+	border: 1px solid rgb(44 62 80 / 20%);
+	border-radius: 10px;
+}
+
+.parent_parameter_name {
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 28px;
+}
+
+.parameter_name {
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 28px;
+}
+
+.name_container {
+	display: flex;
+	align-items: flex-end;
+	width: 100%;
+}
+
+.icon_container {
+	margin-left: 8px;
+}
+
+.controls_container {
+	display: flex;
+	width: 100%;
+	margin-top: 8px;
+	margin-left: 16px;
+}
+
+.field_container {
+	flex-basis: 30%;
+	margin: 0 16px 8px 0;
+}
+
+.label {
+	margin-bottom: 12px;
+	font-size: 12px;
+}
+
+.child_name_container {
+	display: flex;
+	flex-direction: column;
+	margin-left: 8px;
+}
+
+.horizontal_line {
+	width: 100%;
+	margin-top: 8px;
+	margin-bottom: 10px;
+	border: 0.75px solid #bdbdbd;
+	opacity: 0.4;
+}
+
+.current_value {
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.view_label {
+	font-size: 14px;
+	color: #828282;
+}
+
+.lower_current_value {
+	margin-top: 4px;
+	font-size: 10px;
+	color: #828282;
+}
+
+.error_message {
+	font-size: 10px;
+	color: #cb6464;
+}

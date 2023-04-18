@@ -9,6 +9,7 @@ import useGetUser from '../../../../hooks/useGetUser';
 import hideDetails from '../../../../utils/hideDetails';
 
 import ConversationContainer from './ConversationContainer';
+import ExecutiveSummary from './ExecutiveSummary';
 import styles from './styles.module.css';
 import VoiceCallComponent from './VoiceCallComponent';
 
@@ -22,6 +23,9 @@ function AgentDetails({
 	setModalType = () => {},
 	setActiveMessage = () => {},
 	activeRoomLoading,
+	activeSelect,
+	setActiveSelect = () => {},
+	setShowMore = () => {},
 }) {
 	const {
 		user_details = null,
@@ -37,6 +41,7 @@ function AgentDetails({
 		mobile_no,
 		organization_id,
 		sender,
+		channel_type,
 	} = formattedMessageData || {};
 
 	const [showAddNumber, setShowAddNumber] = useState(false);
@@ -111,6 +116,11 @@ function AgentDetails({
 		const OMNICHANNEL_URL = window?.location?.href?.split('?')?.[0];
 		navigator.clipboard.writeText(`${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`);
 		Toast.success('Copied!!!');
+	};
+
+	const handleSummary = () => {
+		setShowMore(true);
+		setActiveSelect('user_activity');
 	};
 
 	return (isEmpty(userId) && isEmpty(leadUserId) && isEmpty(mobile_no) && activeRoomLoading) ? (
@@ -238,6 +248,16 @@ function AgentDetails({
 					/>
 				</>
 			)}
+
+			<ExecutiveSummary
+				handleSummary={handleSummary}
+				mobile_no={mobile_no}
+				sender={sender}
+				user_id={user_id}
+				lead_user_id={lead_user_id}
+				channel_type={channel_type}
+				activeSelect={activeSelect}
+			/>
 		</>
 	);
 }
