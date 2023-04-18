@@ -196,6 +196,7 @@ function ConcorModal({ concorData, id, refetch }:Props) {
 								size="md"
 								style={{ marginRight: '8px' }}
 								disabled={isDisabled}
+								loading={loading}
 								onClick={() => {
 									OnAction(inputValues);
 								}}

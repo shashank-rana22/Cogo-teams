@@ -19,7 +19,7 @@ function TestResult() {
 		user  : profile.user,
 	}));
 
-	const { push } = useRouter();
+	const { back } = useRouter();
 
 	const [{ data, loading }] = useRequest({
 		method : 'GET',
@@ -30,10 +30,10 @@ function TestResult() {
 		},
 	}, { manual: false });
 
-	const { data: summaryData } = data || {};
+	const { data: summaryData = {} } = data || {};
 
 	const handleGoBack = () => {
-		push('/learning/tests/dashboard');
+		back();
 	};
 
 	if (loading) {
@@ -45,10 +45,20 @@ function TestResult() {
 			<div role="presentation" onClick={handleGoBack} className={styles.go_back}>
 				<IcMArrowBack />
 
-				<p className={styles.go_back_text}>Dashboard</p>
+				<p className={styles.go_back_text}>{view === 'admin' ? 'Test Results' : 'Dashboard'}</p>
 			</div>
 
-			{view !== 'admin' ? <TestResultMessage stats_data={summaryData} /> : null}
+			{view !== 'admin'
+				? <TestResultMessage stats_data={summaryData} />
+				: (
+					<div className={styles.test_user_name}>
+						{summaryData.test_name}
+						{' '}
+						:
+						{' '}
+						<span><b>{userName}</b></span>
+					</div>
+				)}
 
 			<Summary summaryData={summaryData} />
 
