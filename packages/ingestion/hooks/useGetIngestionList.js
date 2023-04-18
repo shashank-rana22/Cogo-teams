@@ -18,25 +18,25 @@ function useGetIngestionList() {
 		request_file_data_required : true,
 	});
 
-	const validParams = {};
-	Object.entries(params.filters || {}).forEach(([filterKey, value]) => {
-		if (value) {
-			validParams.filters = {};
-			validParams.filters[filterKey] = params.filters[filterKey];
-		}
-	});
+	// const validParams = {};
+	// Object.entries(params.filters || {}).forEach(([filterKey, value]) => {
+	// 	if (value) {
+	// 		validParams.filters = {};
+	// 		validParams.filters[filterKey] = params.filters[filterKey];
+	// 	}
+	// });
 
-	Object.keys(params)
-		.forEach((key) => {
-			if (params[key] && key !== 'filters') {
-				validParams[key] = params[key];
-			}
-		});
+	// Object.keys(params)
+	// 	.forEach((key) => {
+	// 		if (params[key] && key !== 'filters') {
+	// 			validParams[key] = params[key];
+	// 		}
+	// 	});
 
 	const [{ data, loading }, refetch] = useRequest({
 		method : 'get',
 		url    : 'list_ingestion_requests',
-		params : { ...validParams },
+		params,
 	}, { manual: false });
 
 	const downloadErrorCsv = (link) => {
