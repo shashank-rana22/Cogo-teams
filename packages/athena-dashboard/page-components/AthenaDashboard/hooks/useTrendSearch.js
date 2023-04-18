@@ -33,8 +33,8 @@ const useTrendSearch = (item = {}) => {
 	const getReport = (formValues) => {
 		if (formValues.trade_direction && hscodeArr) {
 			router.push(
-				`/athena-dashboard/report?shipment_type=${formValues.trade_direction}&hscodes=${hscodeArr}`,
-				`/athena-dashboard/report?shipment_type=${formValues.trade_direction}&hscodes=${hscodeArr}`,
+				`/ihls/athena-dashboard/report?shipment_type=${formValues.trade_direction}&hscodes=${hscodeArr}`,
+				`/ihls/athena-dashboard/report?shipment_type=${formValues.trade_direction}&hscodes=${hscodeArr}`,
 			);
 		}
 	};
@@ -44,7 +44,7 @@ const useTrendSearch = (item = {}) => {
 
 		if (e.target.checked) {
 			arr = [...hscodeArr, newItem.hs_code];
-		} else if (arr.includes(newItem)) {
+		} else {
 			const index = arr.indexOf(newItem.hs_code);
 
 			arr.splice(index, 1);

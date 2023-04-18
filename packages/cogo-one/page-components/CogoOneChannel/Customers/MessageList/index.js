@@ -68,7 +68,7 @@ function MessageList(messageProps) {
 
 	useEffect(() => {
 		handleAutoAssignBack();
-	}, [showBotMessages]);
+	}, [showBotMessages, appliedFilters]);
 
 	const ActiveIcon = openPinnedChats ? IcMArrowRotateDown : IcMArrowRotateRight;
 	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;

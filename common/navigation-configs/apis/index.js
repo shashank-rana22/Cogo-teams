@@ -128,7 +128,7 @@ const apis = {
 	login_apis,
 	enrichment,
 	...faq,
-	performance_management,
+	...performance_management,
 	ingestion,
 	booking_desk,
 	poc,
