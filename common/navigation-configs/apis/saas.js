@@ -2029,6 +2029,36 @@ const saas = {
 			module      : 'cogo-store',
 			feature     : 'cogo-store',
 		},
+		{
+			api         : 'list_cogostore_orders',
+			access_type : 'private',
+			module      : 'cogo-store',
+			feature     : 'cogo-store',
+		},
+		{
+			api         : 'get_cogostore_order',
+			access_type : 'private',
+			module      : 'cogo-store',
+			feature     : 'cogo-store',
+		},
+		{
+			api         : 'list_cogostore_banners',
+			access_type : 'private',
+			module      : 'cogo-store',
+			feature     : 'cogo-store',
+		},
+		{
+			api         : 'send_cogostore_communication',
+			access_type : 'private',
+			module      : 'cogo-store',
+			feature     : 'cogo-store',
+		},
+		{
+			api         : 'get_cogostore_filters',
+			access_type : 'private',
+			module      : 'cogo-store',
+			feature     : 'cogo-store',
+		},
 	],
 
 };
