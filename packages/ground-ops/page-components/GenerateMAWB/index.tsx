@@ -112,13 +112,13 @@ function GenerateMAWB({
 	const { data:hawbDataList = {}, loading:hawbListLoading, getHawbList } = useGetHawbList(item.shipmentId);
 
 	useEffect(() => {
-		if (edit && activeCategory === 'hawb') {
+		if (activeCategory === 'hawb') {
 			getHawbList();
 		}
 	}, [activeCategory]);
 
 	useEffect(() => {
-		if (edit && activeCategory === 'hawb') {
+		if (activeCategory === 'hawb') {
 			const dataList = [];
 			(hawbDataList?.data?.shipmentPendingTasks || []).forEach((hawbItem) => {
 				const pushData = {

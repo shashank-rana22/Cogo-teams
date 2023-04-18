@@ -34,6 +34,13 @@ const tabs = [
 	},
 ];
 
+const tabsStatsMapping = {
+	newAwbCount          : 'new_awb',
+	approvalPendingCount : 'approval_pending',
+	approvedAwbCount     : 'approved_awb',
+	finalAwbCount        : 'final_awb',
+};
+
 const tabsComponentMapping = {
 	new_awb          : NewAWB,
 	approval_pending : ApprovalPending,
@@ -60,6 +67,17 @@ function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 	useEffect(() => {
 		listAPI();
 	}, [activeTab, listAPI]);
+
+	useEffect(() => {
+		if (searchValue) {
+			const statsObj = data?.data?.stats;
+			const statsObjValues:Array<number> = Object.values(statsObj);
+			const maxStats = Math.max(...statsObjValues);
+			const maxStatsKey = Object.keys(statsObj).find((key) => statsObj[key] === maxStats);
+			setActiveTab(tabsStatsMapping[maxStatsKey]);
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [searchValue]);
 
 	return (
 		<div>
@@ -88,19 +106,19 @@ function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 						</div>
 					))}
 				</div>
-			</div>
-			<div className={styles.filters_container}>
 				<Input
 					value={searchValue}
 					suffix={<IcMSearchlight className="search_icon" />}
 					className={styles.input_search}
-					style={{ width: '260px', height: '26px' }}
+					style={{ width: '280px', height: '26px' }}
 					placeholder="Search by SID or AWB Number"
 					type="text"
 					onChange={(val) => {
 						setSearchValue(val);
 					}}
 				/>
+			</div>
+			<div className={styles.filters_container}>
 				<div className={styles.flex}>
 					<Toggle
 						name="stakeholder_id"
