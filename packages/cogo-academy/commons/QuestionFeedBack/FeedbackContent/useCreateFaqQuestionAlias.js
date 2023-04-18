@@ -10,14 +10,10 @@ const useCreateFaqQuestionAlias = ({
 	feedbackId,
 	fetchQuestion,
 }) => {
+	const general = useSelector((state) => state.general || {});
+
 	const [showAliasInput, setShowAliasInput] = useState(false);
 	const [inputAlias, setInputAlias] = useState(suggested_question_abstract);
-
-	useEffect(() => {
-		setInputAlias(suggested_question_abstract);
-	}, [suggested_question_abstract]);
-
-	const general = useSelector((state) => state.general || {});
 
 	const { id = '' } = general?.query || {};
 
@@ -47,6 +43,10 @@ const useCreateFaqQuestionAlias = ({
 			Toast.error(getApiErrorString(err?.response?.data));
 		}
 	};
+
+	useEffect(() => {
+		setInputAlias(suggested_question_abstract);
+	}, [suggested_question_abstract]);
 
 	return {
 		onClickAddAlias,
