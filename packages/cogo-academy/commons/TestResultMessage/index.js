@@ -1,4 +1,3 @@
-import { get } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { Image } from '@cogoport/next';
 import { format } from '@cogoport/utils';
