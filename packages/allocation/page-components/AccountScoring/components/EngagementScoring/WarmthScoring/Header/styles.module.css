@@ -1,0 +1,24 @@
+.heading {
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 36px;
+	color: #4f4f4f;
+}
+
+.sub_container {
+	display: flex;
+
+	:global {
+		.ui_input_container {
+			width: 30%;
+		}
+	}
+}
+
+.button_container {
+	display: flex;
+}
+
+.engagement_button {
+	min-width: 180px;
+}
