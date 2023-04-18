@@ -31,7 +31,7 @@ function LeftSection({
 }) {
 	const [answer, setAnswer] = useState('');
 	const [subjectiveAnswer, setSubjectiveAnswer] = useState(RichTextEditor.createEmptyValue());
-	const [uploadValue, setUploadValue] = useState();
+	const [uploadValue, setUploadValue] = useState('');
 
 	return (
 		<div className={styles.container}>
