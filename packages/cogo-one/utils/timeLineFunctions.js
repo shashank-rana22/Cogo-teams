@@ -42,7 +42,7 @@ function timeLineFunctions() {
 			case 'auto_assign':
 				return `This chat is auto assigned to ${present}`;
 			case 'requested_to_chat':
-				return `${previous} requested to assign chat to ${present}`;
+				return `${previous} requested ${present} to assign this chat`;
 			default:
 				return null;
 		}
