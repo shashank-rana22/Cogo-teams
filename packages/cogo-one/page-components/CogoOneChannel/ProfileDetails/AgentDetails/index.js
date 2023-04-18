@@ -23,7 +23,12 @@ function AgentDetails({
 	setActiveMessage = () => {},
 	activeRoomLoading,
 }) {
-	const { user_details = null, user_type, id = '', channel_type = '' } = activeMessageCard || {};
+	const {
+		user_details = null,
+		user_type, id = '',
+		channel_type = '',
+	} = activeMessageCard || {};
+
 	const {
 		user_id,
 		lead_user_id,
