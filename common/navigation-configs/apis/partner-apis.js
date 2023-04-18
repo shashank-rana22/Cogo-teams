@@ -11240,6 +11240,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'get_tickets_default_types',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
 	],
 	analytics_dashboard: [
 		{
@@ -11304,6 +11309,12 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},
+		{
+			api          : 'post_tickets_ticket',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+
 	],
 	ticket_management: [
 		{

@@ -1,5 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
-import { ChipsController, TextAreaController, InputController, useForm } from '@cogoport/forms';
+import { TextAreaController, InputController, useForm, SelectController } from '@cogoport/forms';
 
 import raiseTicketControls from '../../../../configurations/raise-ticket-controls';
 import HeaderName from '../HeaderName';
@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 const CONTROLLER_MAPPING = {
 	input    : InputController,
-	chips    : ChipsController,
+	select   : SelectController,
 	textarea : TextAreaController,
 };
 function RaiseTicket({ setOpenTicketModal = () => {}, formattedData = {}, openTicketModal = {} }) {
@@ -46,7 +46,7 @@ function RaiseTicket({ setOpenTicketModal = () => {}, formattedData = {}, openTi
 					<ReceiveDiv canRaiseTicket={false} eachMessage={data} />
 				</div>
 				<div className={styles.styled_form}>
-					{raiseTicketControls.map((eachControl = {}) => {
+					{raiseTicketControls().map((eachControl = {}) => {
 						const { label = '', type = '', name = '' } = eachControl || {};
 						const Element = CONTROLLER_MAPPING[type] || null;
 						return (Element && (
