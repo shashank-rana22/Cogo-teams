@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import { useDebounceQuery } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -22,8 +21,6 @@ const useQuestionList = ({
 	const { scope = '' } = general || {};
 	const { country_id = '', id = '' } = partner;
 
-	const { query = '', debounceQuery } = useDebounceQuery();
-
 	const [page, setPage] = useState(1);
 
 	const { role_functions = [], role_sub_functions = [] } = auth_role_data || {};
@@ -34,14 +31,10 @@ const useQuestionList = ({
 		? role_sub_functions
 		: undefined;
 
-	const [{ data, loading }, trigger] = useRequest({
+	const [{ data, loading = false }, trigger] = useRequest({
 		url    : '/list_faq_questions',
 		method : 'get',
 	}, { manual: true });
-
-	useEffect(() => {
-		debounceQuery(search);
-	}, [debounceQuery, search]);
 
 	const fetch = useCallback(
 		async () => {

@@ -1,10 +1,12 @@
 import { startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 import quotes from './utils/quotes';
 
 function Loader({ topic = {} }) {
+	const [extract] = useState(quotes[Math.floor(Math.random() * 10)]);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.topic_heading}>
@@ -13,7 +15,7 @@ function Loader({ topic = {} }) {
 				{startCase(topic.display_name) || 'Search Result'}
 			</div>
 
-			<div className={styles.loopWrapper}>
+			<div className={styles.loop_wrapper}>
 				<div className={styles.mountain} />
 				<div className={styles.hill} />
 				<div className={styles.tree} />
@@ -21,7 +23,7 @@ function Loader({ topic = {} }) {
 				<div className={styles.truck} />
 			</div>
 			<p className={styles.line}>
-				{quotes[Math.floor(Math.random() * 10)]}
+				{extract}
 			</p>
 		</div>
 	);

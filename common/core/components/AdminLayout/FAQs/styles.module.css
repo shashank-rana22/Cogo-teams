@@ -35,10 +35,10 @@
 		display: none;
 	}
 }
+
 .topiclist_container::-webkit-scrollbar {
-			display: none;
-	
-	}
+	display: none;
+}
 
 .faq_icon {
 	position: fixed;
