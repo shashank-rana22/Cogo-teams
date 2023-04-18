@@ -39,6 +39,7 @@ function AnswerPage() {
 		setIsLiked,
 		watchQuestionCheckbox,
 		watchAnswerCheckbox,
+		watchRemark,
 		is_positive,
 		FEEDBACK_MAPPING_ISLIKED,
 	} = useCreateFeedback({ refetchQuestions, answerData, loading });
@@ -173,6 +174,7 @@ function AnswerPage() {
 							themeType="primary"
 							onClick={handleSubmit(onSubmit)}
 							loading={feedbackLoading}
+							disabled={!(watchAnswerCheckbox || watchQuestionCheckbox || watchRemark)}
 						>
 							Submit
 						</Button>

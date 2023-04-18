@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
@@ -26,6 +27,7 @@ const useCreateFeedback = ({ refetchQuestions, answerData, loading }) => {
 
 	const watchQuestionCheckbox = watch('question_checkbox');
 	const watchAnswerCheckbox = watch('answer_checkbox');
+	const watchRemark = watch('remark');
 
 	const apiName = id
 		? '/update_faq_feedback'
@@ -70,7 +72,8 @@ const useCreateFeedback = ({ refetchQuestions, answerData, loading }) => {
 
 			refetchQuestions();
 		} catch (error) {
-			Toast.error(error?.message);
+			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
+
 			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
 	};
@@ -89,6 +92,8 @@ const useCreateFeedback = ({ refetchQuestions, answerData, loading }) => {
 
 			refetchQuestions();
 		} catch (error) {
+			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
+
 			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
 	};
@@ -97,7 +102,7 @@ const useCreateFeedback = ({ refetchQuestions, answerData, loading }) => {
 		setload(false);
 		setIsLiked('disliked');
 
-		let remark = values?.remark;
+		let remark = values?.remark ? values.remark : '';
 
 		if (values?.answer_checkbox) {
 			remark = `Answer not satisfactory. ${remark}`;
@@ -134,6 +139,8 @@ const useCreateFeedback = ({ refetchQuestions, answerData, loading }) => {
 			setShow(false);
 			refetchQuestions();
 		} catch (error) {
+			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
+
 			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
 	};
@@ -155,6 +162,7 @@ const useCreateFeedback = ({ refetchQuestions, answerData, loading }) => {
 		setIsLiked,
 		watchQuestionCheckbox,
 		watchAnswerCheckbox,
+		watchRemark,
 		is_positive,
 		FEEDBACK_MAPPING_ISLIKED,
 

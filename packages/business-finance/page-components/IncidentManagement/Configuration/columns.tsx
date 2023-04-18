@@ -158,6 +158,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 		id       : 'remark',
 		Cell     : ({ row: { original } }) => {
 			const { remark = '' } = original || {};
+
 			return (
 				<Tooltip
 					content={<div className={styles.tooltip}>{remark}</div>}
