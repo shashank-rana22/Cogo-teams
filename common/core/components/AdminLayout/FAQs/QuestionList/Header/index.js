@@ -2,7 +2,7 @@ import { Toast, Input, Button } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { IcMSearchlight, IcMCross, IcMArrowLeft } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React from 'react';
 
 import styles from './styles.module.css';
 
@@ -21,9 +21,9 @@ function Header({
 	showNotificationContent,
 	refetch,
 	from,
+	setInput,
+	input,
 }) {
-	const [input, setInput] = useState('');
-
 	const {
 		searchAnnouncement = '',
 		setSearchAnnouncement = () => {},

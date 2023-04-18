@@ -1,4 +1,4 @@
-const quotes = () => [
+const quotes = [
 	'Did you know that when you use Pay Later to book a shipment, you have up to 90 days to make the payment',
 
 	`Have you considered the potential surcharges that could unexpectedly increase your 

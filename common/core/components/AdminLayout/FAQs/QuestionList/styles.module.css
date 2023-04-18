@@ -206,7 +206,7 @@
 	animation: truck 4s   0.080s ease infinite; 
 }
   
-  /* .wheels {
+  .wheels {
 	transition: all ease;
 	width: 85px;
 	margin-right: -60px;
@@ -214,7 +214,7 @@
 	right: 50%;
 	position: absolute;
 	color: #050505;
-  } */
+  }
  
   .truck:before {
 	content: " ";
@@ -231,7 +231,7 @@
 	50% {}
 	100% { transform: translate(-50px); }
   }
-  /* @keyframes tree2 {
+  @keyframes tree2 {
 	0%   { transform: translate(650px); }
 	50% {}
 	100% { transform: translate(-50px); }
@@ -240,7 +240,7 @@
 	0%   { transform: translate(2750px); }
 	50% {}
 	100% { transform: translate(-50px); }
-  } */
+  }
   
   @keyframes rock {
 	0%   { right: -200px; }
