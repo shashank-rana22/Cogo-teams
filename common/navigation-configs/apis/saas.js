@@ -1308,6 +1308,10 @@ const saas = {
 	],
 	app_saas_cogo_subscription: [
 		{
+			api         : 'capture_checkout_payment',
+			access_type : 'private',
+		},
+		{
 			api          : 'saas_get_user_active_plan',
 			access_type  : 'public',
 			service_name : 'saas_subscriptions_v2',
@@ -1772,6 +1776,10 @@ const saas = {
 	],
 	app_saas_premium_services: [
 		{
+			api         : 'capture_checkout_payment',
+			access_type : 'private',
+		},
+		{
 			api         : 'list_organization_billing_addresses',
 			access_type : 'private',
 		},
@@ -1929,6 +1937,10 @@ const saas = {
 		},
 	],
 	app_saas_trader_eligibilty_check: [
+		{
+			api         : 'capture_checkout_payment',
+			access_type : 'private',
+		},
 		{
 			api         : 'saas_get_user_quota_usage',
 			access_type : 'private',
@@ -2117,6 +2129,10 @@ const saas = {
 			access_type : 'private',
 			module      : 'product-catalogue',
 			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'capture_checkout_payment',
+			access_type : 'private',
 		},
 	],
 
