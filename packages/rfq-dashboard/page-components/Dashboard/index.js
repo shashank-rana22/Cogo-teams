@@ -1,5 +1,5 @@
 import { useForm } from '@cogoport/forms';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Content from './Content';
 import Filters from './Filters';
@@ -7,16 +7,28 @@ import styles from './styles.module.css';
 
 function Dashboard() {
 	const [activeTab, setActiveTab] = useState('local_rates');
-
 	const formProps = useForm();
 
 	const { watch } = formProps;
+	const { end_date, organization_size, status, search, service_type, start_date } = watch();
 
-	const watchFilters = watch();
+	const [filterStore, setFilterStore] = useState({
+		activeTab,
+		sortBy: '',
+	});
 
-	const [filterData, setFilterData] = useState({});
-
-	console.log('filterData: ', filterData);
+	useEffect(() => {
+		setFilterStore((prev) => ({
+			...prev,
+			activeTab,
+			search,
+			status,
+			organizationSize : organization_size,
+			serviceType      : service_type,
+			endDate          : end_date,
+			startDate        : start_date,
+		}));
+	}, [search, organization_size, status, service_type, start_date, end_date, activeTab, filterStore.sortBy]);
 
 	return (
 		<div>
@@ -24,7 +36,13 @@ function Dashboard() {
 
 			<div className={styles.container}>
 				<Filters formProps={formProps} />
-				<Content activeTab={activeTab} setActiveTab={setActiveTab} />
+
+				<Content
+					filterStore={filterStore}
+					setFilterStore={setFilterStore}
+					activeTab={activeTab}
+					setActiveTab={setActiveTab}
+				/>
 			</div>
 		</div>
 	);

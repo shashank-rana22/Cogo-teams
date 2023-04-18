@@ -3,7 +3,9 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import List from './List';
 import styles from './styles.module.css';
 
-function Content({ activeTab, setActiveTab }) {
+function Content(props) {
+	const { activeTab, setActiveTab } = props;
+
 	return (
 		<div className={styles.container}>
 			<Tabs
@@ -12,7 +14,7 @@ function Content({ activeTab, setActiveTab }) {
 				onChange={setActiveTab}
 			>
 				<TabPanel name="local_rates" title="Local Rates">
-					<List />
+					<List {...props} />
 				</TabPanel>
 
 				<TabPanel name="freight_bookings" title="Freight Bookings">
