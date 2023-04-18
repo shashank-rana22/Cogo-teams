@@ -188,7 +188,7 @@ function AnswerPage() {
 					<span className={styles.sidetext}>
 						{answerData?.answers[0]?.upvote_count}
 						{' '}
-						{answerData?.answers[0]?.upvote_count > 1 ? 'people' : 'person'}
+						{answerData?.answers[0]?.upvote_count === 1 ? 'person' : 'people'}
 						{' '}
 						found it useful.
 					</span>
