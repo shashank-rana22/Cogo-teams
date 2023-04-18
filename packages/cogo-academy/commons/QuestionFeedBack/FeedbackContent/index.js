@@ -42,7 +42,6 @@ function FeedBackContent({
 		fetchListFaqFeedback,
 		feedbackId,
 		fetchQuestion,
-
 	});
 
 	const { name = '', picture = '' } = author?.[0] || {};
