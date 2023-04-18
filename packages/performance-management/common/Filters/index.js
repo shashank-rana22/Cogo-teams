@@ -69,7 +69,7 @@ function Filters({ params = {}, setParams = () => {}, source = '' }) {
 
 					return (
 						<div className={styles.flex_container}>
-							<div>{cntrl.label}</div>
+							{cntrl.label}
 							<Element
 								{...cntrl}
 								control={control}
