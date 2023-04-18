@@ -1,8 +1,10 @@
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import taskDisplayNames from '../../../../../configurations/display-name-mappings';
-import incoTermMapping from '../../../../../configurations/inco-term-mapping.json';
+import taskDisplayNames from '../../../../../../configurations/display-name-mappings';
+import incoTermMapping from '../../../../../../configurations/inco-term-mapping.json';
+
+import styles from './styles.module.css';
 
 function TaskContainer({
 	children = null,
@@ -17,12 +19,14 @@ function TaskContainer({
 		|| startCase(pendingTask?.task || '');
 
 	return (
-		<div>
-			<div>
-				<div>{taskName}</div>
+		<div className={styles.container}>
+			<div className={styles.header}>
+				<div className={styles.text}>{taskName}</div>
+
 				{loading ? null : <div>{actions}</div>}
 			</div>
-			{/* {loading ? <Text align="center">Loading ...</Text> : children} */}
+
+			{loading ? <div className={styles.text}>Loading ...</div> : children}
 		</div>
 	);
 }

@@ -4,6 +4,9 @@ import React from 'react';
 import useContainerArrival from '../../../../../hooks/useContainerArrival';
 import TaskContainer from '../common/TaskContainer';
 
+import UploadCargoArrivalDocument from './UploadCargoArrivalDocument';
+import UploadCargoArrivalForm from './UploadCargoArrivalForm';
+
 function UploadContainerArrival({ pendingTask, summary, refetch, clearTask }) {
 	const {
 		savedData,
@@ -20,6 +23,9 @@ function UploadContainerArrival({ pendingTask, summary, refetch, clearTask }) {
 		pendingTask,
 	});
 
+	console.log(toggleTab, 'toggleTab');
+	console.log(showDocument, 'showDocument');
+
 	return (
 		<TaskContainer
 			loading={false}
@@ -34,7 +40,7 @@ function UploadContainerArrival({ pendingTask, summary, refetch, clearTask }) {
 					) : null
 			)}
 		>
-			{/* {toggleTab && !savedData ? (
+			{toggleTab && !savedData ? (
 				<UploadCargoArrivalDocument
 					pendingTask={pendingTask}
 					refetch={refetch}
@@ -44,8 +50,9 @@ function UploadContainerArrival({ pendingTask, summary, refetch, clearTask }) {
 					showDocument={showDocument}
 					clearTask={clearTask}
 				/>
-			) : null} */}
-			{/* {!toggleTab ? (
+			) : null}
+
+			{!toggleTab ? (
 				<UploadCargoArrivalForm
 					savedData={savedData}
 					summary={summary}
@@ -58,7 +65,7 @@ function UploadContainerArrival({ pendingTask, summary, refetch, clearTask }) {
 					shipmentDoc={shipmentDoc}
 					setShipmentDoc={setShipmentDoc}
 				/>
-			) : null} */}
+			) : null}
 		</TaskContainer>
 	);
 }
