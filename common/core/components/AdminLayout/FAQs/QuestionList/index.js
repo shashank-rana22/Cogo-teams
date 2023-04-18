@@ -31,7 +31,17 @@ function QuestionList({
 	}
 
 	if (loading) return <Loader topic={topic} />;
-	if (response_type === 'GPT') return <GPTAnswers answer={gpt_answer} showMore={show_more} search={search} />;
+
+	if (response_type === 'GPT') {
+		return (
+			<GPTAnswers
+				answer={gpt_answer}
+				showMore={show_more}
+				search={search}
+			/>
+		);
+	}
+
 	const allpills = (item) => (
 		<div>
 			{item?.faq_tags?.map((faqtag, i) => (i >= 3 ? (
@@ -41,6 +51,7 @@ function QuestionList({
 			) : null))}
 		</div>
 	);
+
 	const extendedPills = (item) => {
 		const REMAINING = item.faq_tags.length - 3;
 		return (

@@ -129,7 +129,8 @@
 	background: none;
 	overflow: hidden;
   }
-  .loopWrapper {
+
+.loopWrapper {
 	margin: 0 auto;
 	position: relative;
 	display: block;
@@ -138,7 +139,7 @@
 	overflow: hidden;
 	border-bottom: 3px solid #ea3a27;
 	color: #fff;
-  }
+}
   .mountain {
 	position: absolute;
 	right: -900px;
@@ -178,6 +179,7 @@
   width: 350px;
   bottom: 0;
   background: url(https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-icon-red.svg) no-repeat;
+  animation: tree 4s 0.000s linear infinite; 
   }
   .rock {
 	margin-top: -17%;
@@ -187,17 +189,24 @@
 	border-radius: 20px;
 	position: absolute;
 	background: #0c0c0c;
+	animation: rock 2s   -0.530s linear infinite;
   }
-  .truck{transition: all ease;
+  .truck{
+	transition: all ease;
 	position: absolute;
 	width: 85px;
 	margin-right: -60px;
 	bottom: 0px;
 	right: 50%;
-	
-	background: #fff9ce;}
+	background: #fff9ce;
+	background:  url(https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/truck.png) no-repeat;
+	background-size: contain;
+	height: 80px;
+	margin-bottom: -18px;
+	animation: truck 4s   0.080s ease infinite; 
+}
   
-  .wheels {
+  /* .wheels {
 	transition: all ease;
 	width: 85px;
 	margin-right: -60px;
@@ -205,35 +214,24 @@
 	right: 50%;
 	position: absolute;
 	color: #050505;
-  }
-  .truck {
-	background:  url(https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/truck.png) no-repeat;
-	background-size: contain;
-	height: 80px;
-	margin-bottom: -18px;
-  }
+  } */
+ 
   .truck:before {
 	content: " ";
 	position: absolute;
 	width: 25px;
+	animation: wind 1.5s   0.000s ease infinite; 
 	box-shadow:
 	  -30px 28px 0 1.5px #2f2a2a,
 	   -35px 18px 0 1.5px #161515;
-  }
-
-  
-  .tree  { animation: tree 4s 0.000s linear infinite; }
-  .rock  { animation: rock 2s   -0.530s linear infinite; }
-  .truck  { animation: truck 4s   0.080s ease infinite; }
-  .truck:before { animation: wind 1.5s   0.000s ease infinite; }
-  
+  }  
   
   @keyframes tree {
 	0%   { transform: translate(1350px); }
 	50% {}
 	100% { transform: translate(-50px); }
   }
-  @keyframes tree2 {
+  /* @keyframes tree2 {
 	0%   { transform: translate(650px); }
 	50% {}
 	100% { transform: translate(-50px); }
@@ -242,7 +240,7 @@
 	0%   { transform: translate(2750px); }
 	50% {}
 	100% { transform: translate(-50px); }
-  }
+  } */
   
   @keyframes rock {
 	0%   { right: -200px; }
