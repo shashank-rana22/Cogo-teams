@@ -5,7 +5,7 @@ import { useSelector } from '@cogoport/store';
 import { useMemo } from 'react';
 
 import styles from './styles.module.css';
-import useCreateTestUserMapping from './useCreateTestUserMapping';
+import useUpdateTestUserMapping from './useUpdateTestUserMapping';
 
 function Introduction({ setActiveState, testData = {} }) {
 	const {
@@ -27,7 +27,7 @@ function Introduction({ setActiveState, testData = {} }) {
 		guidelines = [],
 	} = testData || {};
 
-	const { passStartTime } = useCreateTestUserMapping();
+	const { passStartTime } = useUpdateTestUserMapping();
 
 	const formatArrayValues = useMemo(
 		() => {
