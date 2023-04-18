@@ -1,3 +1,4 @@
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
 const useCargoArrivalDocument = ({
@@ -38,10 +39,10 @@ const useCargoArrivalDocument = ({
 					clearTask();
 				}
 				if (res?.hasError) {
-					console.log(res?.message);
+					toastApiError(res);
 				}
 			} catch (err) {
-				console.log(err);
+				toastApiError(err);
 			}
 		}
 	};

@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
@@ -211,7 +212,7 @@ const useUploadCargoArrivalForm = ({
 				Toast.error(res?.message);
 			}
 		} catch (err) {
-			console.log(err);
+			toastApiError(err);
 		}
 	};
 

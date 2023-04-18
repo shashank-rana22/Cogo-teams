@@ -23,9 +23,6 @@ function UploadContainerArrival({ pendingTask, summary, refetch, clearTask }) {
 		pendingTask,
 	});
 
-	console.log(toggleTab, 'toggleTab');
-	console.log(showDocument, 'showDocument');
-
 	return (
 		<TaskContainer
 			loading={false}
