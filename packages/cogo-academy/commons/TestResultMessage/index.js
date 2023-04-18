@@ -7,15 +7,18 @@ import styles from './styles.module.css';
 const RESULT_MAPPING = {
 	passed: {
 		image_url : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/confetti.svg',
-		message   : 'Congratulations',
+		message   : 'Congratulations!',
 		alt       : 'confetti',
-		color     : '#849e4c',
 	},
 	failed: {
 		image_url : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sad-face.svg',
-		message   : 'Unfortunately, you have not been able to clear the test',
+		message   : 'Well Done!',
 		alt       : 'sad-face',
-		color     : '#BF291E',
+	},
+	intermediate: {
+		image_url : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sad-face.svg',
+		message   : 'You could do Better!',
+		alt       : 'sad-face',
 	},
 };
 
