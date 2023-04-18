@@ -21,7 +21,7 @@ function Reward({ isEdit, control, errors }) {
 							className={styles.select_box}
 							size="sm"
 							disabled={isEdit}
-							rules={{ required: true }}
+							isClearable
 							{...promotions}
 						/>
 						{errors.promotion_id && (
