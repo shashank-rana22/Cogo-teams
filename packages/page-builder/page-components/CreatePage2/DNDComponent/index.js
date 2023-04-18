@@ -41,6 +41,20 @@ const CONTENT_MAPPING = {
 		},
 
 	},
+
+	html: {
+		content     : 'Enter Html',
+		redirectUrl : '',
+		themeType   : 'primary',
+		size        : 'md',
+		layouts     : [],
+		style       : {},
+		type        : 'html',
+		attributes  : {
+			onClick: 'handleSubmitClick',
+		},
+
+	},
 };
 
 function DNDComponent() {
@@ -65,6 +79,8 @@ function DNDComponent() {
 
 	const [selectedRow, setSelectedRow] = useState({});
 
+	const [selectedItem, setSelectedItem] = useState({});
+
 	const handleAddNewItem = useCallback(
 		(content, hoveredIndex = component.layouts.length, shouldAddBelow = true, parentDetails = {}, componentType = '') => {
 			const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
@@ -81,6 +97,8 @@ function DNDComponent() {
 				setComponent(data);
 
 				setSelectedRow({ ...data.layouts[objIndex] });
+
+				setSelectedItem({ ...data.layouts[objIndex].children[childId] });
 			} else {
 				setComponent((prev) => ({
 					...prev,
@@ -97,6 +115,12 @@ function DNDComponent() {
 				}));
 
 				setSelectedRow({
+					...CONTENT_MAPPING[content.type],
+					...content,
+					id: component.layouts.length + 1,
+				});
+
+				setSelectedItem({
 					...CONTENT_MAPPING[content.type],
 					...content,
 					id: component.layouts.length + 1,
@@ -136,6 +160,7 @@ function DNDComponent() {
 							setShowContentModal={setShowContentModal}
 							parentComponentId={parentComponentId}
 							setParentComponentId={setParentComponentId}
+							selectedItem={selectedItem}
 						/>
 					</div>
 				)}
@@ -184,6 +209,8 @@ function DNDComponent() {
 							parentComponentId={parentComponentId}
 							setShowContentModal={setShowContentModal}
 							setParentComponentId={setParentComponentId}
+							setSelectedItem={setSelectedItem}
+
 						/>
 					</div>
 
@@ -206,6 +233,7 @@ function DNDComponent() {
 						onNewItemAdding={setNewItemAdding}
 						selectedRow={selectedRow}
 						componentType="child"
+						selectedItem={selectedItem}
 					/>
 
 				</Modal>

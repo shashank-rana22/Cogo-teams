@@ -12,7 +12,9 @@ const componentMapping = {
 	html   : HtmlComponent,
 };
 
-function RenderComponents({ componentType, widget, components, setComponents, elementId, childId, selectedRow }) {
+function RenderComponents({
+	componentType, widget, components, setComponents, elementId, childId, selectedRow, setSelectedItem, index,
+}) {
 	const componentPropsMapping = {
 		text: {
 			key  : elementId,
@@ -61,7 +63,11 @@ function RenderComponents({ componentType, widget, components, setComponents, el
 	const Component = componentMapping[componentType];
 
 	return (
-		<div style={{ width: '100%', height: '100%', color: '#222' }}>
+		<div
+			role="presentation"
+			onClick={() => setSelectedItem({ ...widget, index })}
+			style={{ width: '100%', height: '100%', color: '#222' }}
+		>
 			<Component key={componentType} {...(componentPropsMapping[componentType] || {})} />
 		</div>
 	);

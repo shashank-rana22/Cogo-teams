@@ -12,7 +12,7 @@ import VALID_ITEM_TYPES from '../../../configurations/accept-items';
 import RenderComponents from './RenderComponent';
 import styles from './styles.module.css';
 
-function ComponentBuilder({ widget, components, setComponents, selectedRow, childId, setChildId }) {
+function ComponentBuilder({ widget, components, setComponents, selectedRow, childId, setChildId, setSelectedItem }) {
 	const { children, style, id: componentId } = widget || {};
 	const { id: selectedRowId } = selectedRow || {};
 
@@ -23,7 +23,7 @@ function ComponentBuilder({ widget, components, setComponents, selectedRow, chil
 	return (
 		<div style={style}>
 
-			{ (children || []).map((childComponent) => {
+			{ (children || []).map((childComponent, idx) => {
 				const { id, style: allStyles, icon, attributes, type } = childComponent || {};
 
 				const isChildSelected = childId === id && componentId === selectedRowId && type;
@@ -45,7 +45,7 @@ function ComponentBuilder({ widget, components, setComponents, selectedRow, chil
 							>
 								{icon}
 							</div>
-						) : <RenderComponents componentType={type} widget={childComponent} components={components} setComponents={setComponents} elementId={id} childId={childId} selectedRow={selectedRow} /> }
+						) : <RenderComponents componentType={type} widget={childComponent} components={components} setComponents={setComponents} elementId={id} childId={childId} selectedRow={selectedRow} setSelectedItem={setSelectedItem} index={idx} /> }
 
 					</div>
 				);
@@ -70,6 +70,7 @@ function RightPanel(props) {
 		selectedRow,
 		setShowContentModal,
 		setParentComponentId,
+		setSelectedItem,
 	} = props;
 	const [childId, setChildId] = useState('');
 
@@ -231,8 +232,8 @@ function RightPanel(props) {
 
 			<div>
 				{type === 'container'
-					? <ComponentBuilder widget={widget} components={components} setComponents={setComponents} selectedRow={selectedRow} childId={childId} setChildId={setChildId} />
-					: <RenderComponents componentType={type} widget={widget} components={components} setComponents={setComponents} elementId={elementId} childId={childId} selectedRow={selectedRow} />}
+					? <ComponentBuilder widget={widget} components={components} setComponents={setComponents} selectedRow={selectedRow} childId={childId} setChildId={setChildId} setSelectedItem={setSelectedItem} />
+					: <RenderComponents componentType={type} widget={widget} components={components} setComponents={setComponents} elementId={elementId} childId={childId} selectedRow={selectedRow} setSelectedItem={setSelectedItem} index={index} />}
 			</div>
 
 			<div role="presentation" className={styles.change}>
