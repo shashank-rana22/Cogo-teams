@@ -4,6 +4,7 @@ pipeline {
     environment {
         AWS_DEFAULT_REGION = 'ap-south-1'
         JENKINS_PRIVATE_KEY = credentials('jenkins-dev-private-key')
+        SSH_PORT = credentials('dev-instance-ssh-port')
     }
 
     stages {
@@ -25,7 +26,7 @@ pipeline {
                 }
 
                 // ssh into server ip and run deploy commands
-                sh """ssh -o StrictHostKeyChecking=no -i ${env.JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p 2710 \" cd cogo-admin && \
+                sh """ssh -o StrictHostKeyChecking=no -i ${env.JENKINS_PRIVATE_KEY} ${SERVER_NAME}@${SERVER_IP} -p ${SSH_PORT} \" cd cogo-admin && \
                 git fetch && \
                 git checkout ${GIT_COMMIT} && \
                 source /home/${SERVER_NAME}/.nvm/nvm.sh && \
