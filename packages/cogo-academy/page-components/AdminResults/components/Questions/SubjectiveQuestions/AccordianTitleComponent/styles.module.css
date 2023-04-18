@@ -24,7 +24,7 @@
 }
 
 .question_text {
-	width: 80%;
+	max-width: 90%;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
