@@ -9742,12 +9742,12 @@ const partner = {
 			service_name : 'saas_traceability',
 		},
 		{
-			api          : 'get_saas_ftl_freight_service_tracker',
+			api          : 'get_saas_ftl_tracking_detail',
 			access_type  : 'private',
 			service_name : 'saas_traceability',
 		},
 		{
-			api          : 'list_saas_ftl_freight_service_trackers',
+			api          : 'list_saas_surface_shipment_details',
 			access_type  : 'private',
 			service_name : 'saas_traceability',
 		},
