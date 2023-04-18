@@ -49,6 +49,7 @@ function MarksComponent({
 							</div>
 						</div>
 
+						<div className={styles.passing_marks}>Passing marks is 4</div>
 					</div>
 
 					{error ? (
