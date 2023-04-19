@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 const RESULT_MAPPING = {
 	passed: {
 		image_url        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/smile1.png',
-		message          : 'Congratulations!',
+		message_heading  : 'Congratulations!',
 		alt              : 'confetti',
 		message_text     : 'You have performed really well in the',
 		message_sub_text : `. Your hard work has paid off, and we encourage you to continue
@@ -18,7 +18,7 @@ const RESULT_MAPPING = {
 	},
 	intermediate: {
 		image_url        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/smile2.png',
-		message          : 'Well Done!',
+		message_heading  : 'Well Done!',
 		alt              : 'smile',
 		message_text     : 'Your performance on the',
 		message_sub_text : `showed Potential for Improvement. Keep working hard and striving for
@@ -26,7 +26,7 @@ const RESULT_MAPPING = {
 	},
 	failed: {
 		image_url        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/smile3.png',
-		message          : 'You could do Better!',
+		message_heading  : 'You could do Better!',
 		alt              : 'sad-face',
 		message_text     : 'While your performance on the',
 		message_sub_text : `was not as strong as we had hoped, don't get discouraged!
@@ -41,7 +41,7 @@ function TestResultMessage({ stats_data }) {
 
 	const status = getResultStatus({ cut_of_percentage, user_percentage });
 
-	const { image_url, message, alt, message_text, message_sub_text } = RESULT_MAPPING[status] || {};
+	const { image_url, message_heading, alt, message_text, message_sub_text } = RESULT_MAPPING[status] || {};
 
 	return (
 		<div className={styles.message_container}>
@@ -55,7 +55,7 @@ function TestResultMessage({ stats_data }) {
 
 			<div className={styles.column}>
 				<div className={styles.message_content}>
-					{message}
+					{message_heading}
 				</div>
 
 				<div className={styles.sub_text}>

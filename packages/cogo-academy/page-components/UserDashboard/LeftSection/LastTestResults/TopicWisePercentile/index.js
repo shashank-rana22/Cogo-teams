@@ -54,7 +54,7 @@ function TopicWisePercentile({ topic_wise_percentile }) {
 				)}
 
 				{number_of_topics > 2 && (
-					<Tooltip content={renderTooltip({ topic_wise_percentile })} placement="bottom">
+					<Tooltip content={renderTooltip({ topic_wise_percentile })} placement="top">
 						<div className={styles.percentile_01}>
 							<div className={styles.topic}>
 								+
