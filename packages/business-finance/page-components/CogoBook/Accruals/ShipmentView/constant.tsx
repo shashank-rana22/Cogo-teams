@@ -4,7 +4,6 @@ import { format, startCase } from '@cogoport/utils';
 
 import SortIcon from '../../common/SortIcon';
 
-import EditIcon from './Card/EditIcon';
 import styles from './styles.module.css';
 
 const currentYear = new Date().getFullYear();
@@ -237,7 +236,11 @@ export const accrualColumn = (
 			const {
 				expenseBooked = '',
 				expenseCurrency = '',
+				buyQuotation = '',
+				buyQuotationCurrency = '',
 			} = original || {};
+			const quotationDiff = buyQuotation - expenseBooked || 0;
+			const quotationDiffProfit = ((quotationDiff / buyQuotation) * 100) || 0;
 			return (
 				<div className={styles.quotation_styles}>
 					<div>
@@ -246,17 +249,25 @@ export const accrualColumn = (
 						</span>
 					</div>
 
+					<div className={styles.quotation_value}>
+						Quotation :
+						{' '}
+						{getFormattedPrice(buyQuotation, buyQuotationCurrency) || 'INR 0.00'}
+					</div>
+					<div className={styles.line_value}>
+						<div className={quotationDiffProfit >= 0 ? styles.margin_div_color : styles.margin_dif_color}>
+							{(quotationDiffProfit).toFixed(2) || '0'}
+							%
+						</div>
+						<div className={quotationDiffProfit >= 0 ? styles.hr_small : styles.hr_small_conditions} />
+						{' '}
+						<div className={quotationDiff >= 0 ? styles.margin_div_color : styles.margin_dif_color}>
+							{getFormattedPrice(quotationDiff, expenseCurrency) || 'INR 0.00'}
+						</div>
+					</div>
+
 				</div>
 			);
-		},
-	},
-	{
-		Header   : 'Adjusted Expense',
-		accessor : 'adjusted_expense',
-		id       : 'adjusted_expense',
-		Cell     : ({ row: { original } }) => {
-			const { expenseAccrued = {} } = original || {};
-			return <span>{ expenseAccrued || '----' }</span>;
 		},
 	},
 	{
@@ -273,21 +284,56 @@ export const accrualColumn = (
 		accessor : 'sales_invoice_amount',
 		id       : 'sales_invoice_amount',
 		Cell     : ({ row: { original } }) => {
-			const { actualIncome = '', incomeCurrency = '' } = original || {};
+			const {
+				actualIncome = '', incomeCurrency = '',
+				sellQuotation = '', sellQuotationCurrency = '',
+			} = original || {};
+			const quotationDiff = sellQuotation - actualIncome || 0;
+			const quotationDiffProfit = ((quotationDiff / sellQuotation) * 100) || 0;
+
 			return (
 				<div className={styles.quotation_styles}>
-					<span>{getFormattedPrice(actualIncome, incomeCurrency) || '-' }</span>
+					<span>{getFormattedPrice(actualIncome, incomeCurrency)}</span>
+
+					<div className={styles.quotation_value}>
+						Quotation :
+						{' '}
+						{getFormattedPrice(sellQuotation, sellQuotationCurrency) || 'INR 0.00'}
+					</div>
+					<div className={styles.line_value}>
+						<div className={quotationDiffProfit >= 0 ? styles.margin_div_color : styles.margin_dif_color}>
+							{(quotationDiffProfit).toFixed(2) || '0'}
+							%
+						</div>
+						<div className={quotationDiffProfit >= 0 ? styles.hr_small : styles.hr_small_conditions} />
+						{' '}
+						<div className={quotationDiff >= 0 ? styles.margin_div_color : styles.margin_dif_color}>
+							{getFormattedPrice(quotationDiff, sellQuotationCurrency) || 'INR 0.00'}
+						</div>
+					</div>
 				</div>
 			);
 		},
 	},
 	{
-		Header   : 'Adjusted Income ',
+		Header   : 'Quotation Margin',
 		accessor : 'adjusted_income',
 		id       : 'adjusted_income',
 		Cell     : ({ row: { original } }) => {
-			const { incomeAccrued = {} } = original || {};
-			return <span>{ incomeAccrued || '----' }</span>;
+			const { quotationProfit = '', quotationMargin = '', sellQuotationCurrency } = original || {};
+			return (
+				<div>
+					{' '}
+					<div className={quotationMargin >= '0' ? styles.margin_div_color : styles.margin_dif_color}>
+						{quotationMargin || '0'}
+						%
+					</div>
+					{' '}
+					<div className={quotationMargin >= '0' ? styles.margin_div_color : styles.margin_dif_color}>
+						{getFormattedPrice(quotationProfit, sellQuotationCurrency) || 'INR 0.00'}
+					</div>
+				</div>
+			);
 		},
 	},
 	{
@@ -326,17 +372,6 @@ export const accrualColumn = (
 			return (
 				<div>
 					<div>
-						<div>
-							<EditIcon
-								profit={profitData}
-								itemData={original}
-								profitValue={profitValue}
-								onEditProfit={editProfitHandler}
-								changeProfitHandler={changeProfitHandler}
-								onCrossProfit={crossProfitHandler}
-								onTickProfit={tickProfitHandler}
-							/>
-						</div>
 						<span className={renderClassName()}>
 							{getFormattedPrice(profit, expenseCurrency) || '-' }
 						</span>

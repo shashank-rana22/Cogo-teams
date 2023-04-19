@@ -108,7 +108,7 @@ function Card({
 		<div className={styles.container}>
 			<div>
 				<div className={styles.period}>
-					Choose Period
+					Period
 					<Tooltip
 						content={<div className={styles.font_size_tooltip}>Please select the accounting month</div>}
 						placement="top"
@@ -142,9 +142,15 @@ function Card({
 			</div>
 			<div>
 				<div className={styles.period}>
-					Choose Transaction Date
+					Transaction Date
 					<Tooltip
-						content={<div className={styles.font_tooltip}> Select Shipment range to be accounted</div>}
+						content={(
+							<div>
+								Select Shipment range to
+								<br />
+								be accounted
+							</div>
+						)}
 						placement="top"
 					>
 						<div className={styles.info_icon_container}>
@@ -171,7 +177,7 @@ function Card({
 
 			<div>
 				<div className={styles.period}>
-					Choose Filters
+					Filters
 					<Tooltip
 						content={<div className={styles.fon_tooltip}> Please select filters accordingly</div>}
 						placement="top"

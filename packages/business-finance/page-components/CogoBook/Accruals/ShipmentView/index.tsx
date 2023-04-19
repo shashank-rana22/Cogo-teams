@@ -1,6 +1,5 @@
 import { Input } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
-import { IcMOverview, IcMSearchlight } from '@cogoport/icons-react';
+import { IcMSearchlight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -16,7 +15,6 @@ function ShipmentView() {
 	const [checkedRows, setCheckedRows] = useState({});
 	const [showBtn, setShowBtn] = useState(false);
 	const [bulkSection, setBulkSection] = useState({ value: false, bulkAction: '' });
-	const [showSub, setShowSub] = useState(false);
 	const [filters, setFilters] = useState({
 		year               : '',
 		month              : '',
@@ -71,48 +69,6 @@ function ShipmentView() {
 	const { page, year, month } = filters || {};
 
 	const isApplyEnable = year?.length > 0 && month?.length > 0;
-	const subComponent = (itemData) => {
-		const {
-			sellQuotation = '', buyQuotation = '', quotationProfit = '',
-			quotationMargin = '', bookingType = '', buyQuotationCurrency = '',
-			sellQuotationCurrency = '',
-		} = itemData || {};
-
-		return (
-			<div className={styles.sub_comp}>
-				<div className={styles.quo}>
-					Quotation
-					<div className={styles.quo_border} />
-				</div>
-
-				<div>
-					Purchase :
-					{' '}
-					{getFormattedPrice(buyQuotation, buyQuotationCurrency) || '-'}
-				</div>
-				<div>
-					Sales :
-					{' '}
-					{getFormattedPrice(sellQuotation, sellQuotationCurrency) || '-' }
-				</div>
-				<div>
-					Margin :
-					{' '}
-					{quotationProfit || '0'}
-					{' '}
-					(
-					{quotationMargin || '0'}
-					%)
-				</div>
-				<div>
-					Shipment Type :
-					{' '}
-					{' '}
-					<span className={styles.span_val}>{bookingType || '-'}</span>
-				</div>
-			</div>
-		);
-	};
 
 	return (
 		<div>
@@ -163,16 +119,6 @@ function ShipmentView() {
 
 			<div className={styles.table_data}>
 				<div className={styles.input_data_container}>
-					<div className={styles.icon_container}>
-						<div
-							onClick={() => { setShowSub(!showSub); }}
-							className={styles.hide_data}
-							role="presentation"
-						>
-							{showSub ? 'Hide All Quotations' : 'View All Quotations'}
-						</div>
-						<div className={styles.icon}><IcMOverview height="20px" width="20px" /></div>
-					</div>
 
 					<div className={styles.input_container}>
 						<Input
@@ -189,7 +135,6 @@ function ShipmentView() {
 					total={totalRecords}
 					pageSize={10}
 					data={list}
-					renderRowSubComponent={subComponent}
 					columns={accrualColumn(
 						getTableBodyCheckbox,
 						getTableHeaderCheckbox,
@@ -202,11 +147,9 @@ function ShipmentView() {
 						filters,
 						setFilters,
 					)}
-					selectType="multiple"
 					loading={shipmentLoading}
 					setFilters={setFilters}
 					filters={filters}
-					showAllNestedOptions={showSub}
 				/>
 			</div>
 			<div>

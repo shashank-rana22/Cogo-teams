@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 import StyledTable from '../../common/StyledTable';
 import useViewSelect from '../../hooks/useViewSelect';
-import { column, monthData } from '../constant';
+import { bookedColumn, column, monthData } from '../constant';
 import Footer from '../ShipmentView/Footer';
 
 import styles from './styles.module.css';
@@ -247,14 +247,16 @@ function ViewSelectedInvoice() {
 
 					</div>
 				</div>
-				<div
-					onClick={() => { setShowSub(!showSub); }}
-					className={styles.hide_data}
-					role="presentation"
-				>
-					{showSub ? 'Hide All Quotations' : 'View All Quotations'}
+				{!isBookedActive && (
+					<div
+						onClick={() => { setShowSub(!showSub); }}
+						className={styles.hide_data}
+						role="presentation"
+					>
+						{showSub ? 'Hide All Quotations' : 'View All Quotations'}
 
-				</div>
+					</div>
+				)}
 
 			</div>
 
@@ -265,10 +267,20 @@ function ViewSelectedInvoice() {
 					pageSize={pageSize}
 					data={list}
 					showEmptyState={isBookedActive ? 'BOOKED' : 'ACCRUED'}
-					renderRowSubComponent={subComponent}
+					renderRowSubComponent={!isBookedActive && subComponent}
 					selectType="multiple"
-					showAllNestedOptions={showSub}
-					columns={column(
+					showAllNestedOptions={!isBookedActive && showSub}
+					columns={isBookedActive ? bookedColumn(
+						{
+							getTableBodyCheckbox,
+							getTableHeaderCheckbox,
+							deleteSelected,
+							openDeleteModal,
+							setOpenDeleteModal,
+							filters,
+							setFilters,
+						},
+					) : column(
 						{
 							getTableBodyCheckbox,
 							getTableHeaderCheckbox,
