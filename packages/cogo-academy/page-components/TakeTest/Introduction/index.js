@@ -1,12 +1,21 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { Image, useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { useMemo } from 'react';
 
 import styles from './styles.module.css';
 import useCreateTestUserMapping from './useCreateTestUserMapping';
 
 function Introduction({ setActiveState, testData = {} }) {
+	const {
+		query: { test_id },
+		user: { id: user_id },
+	} = useSelector(({ general, profile }) => ({
+		query : general.query,
+		user  : profile.user,
+	}));
+
 	const router = useRouter();
 
 	const {
@@ -33,6 +42,10 @@ function Introduction({ setActiveState, testData = {} }) {
 
 		setActiveState('ongoing');
 		localStorage.setItem('visibilityChangeCount', 1);
+		localStorage.setItem(
+			`current_question_${test_id}_${user_id}`,
+			1,
+		);
 
 		// const elem = document.getElementById('maincontainer');
 
@@ -130,9 +143,20 @@ function Introduction({ setActiveState, testData = {} }) {
 
 			<div className={styles.instructions_container}>
 				<div className={styles.title}>Test Instructions</div>
+
 				<div>
 					Please read all the instructions carefully before clicking on Begin Test.
 					The timer will start once you click on Begin test
+				</div>
+
+				<div className={styles.warning}>
+					We recommend using Chrome browser for giving this assessment for a better experience.
+				</div>
+
+				<div className={styles.warning}>
+					In case of any issues with taking the test or submitting answers,
+					use the shortcut Command + Shift + R
+					for Mac OS or Ctrl+F5 for Windows.
 				</div>
 
 				<ol className={styles.list}>

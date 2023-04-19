@@ -9,7 +9,10 @@ const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMe
 		ADMIN : showBotMessages ? ['observer', 'chat_tags'] : ['observer'],
 		KAM   : ['assigned_to', 'assigned_agent'],
 	};
-
+	const extraStatusOptions = (showBotMessages && isomniChannelAdmin) ? 	[{
+		label : 'Seen By User',
+		value : 'seen_by_user',
+	}] : [];
 	const controls = [
 		{
 			label     : '',
@@ -26,6 +29,7 @@ const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMe
 					label : 'All',
 					value : 'all',
 				},
+				...extraStatusOptions,
 			],
 		},
 		{
@@ -38,6 +42,7 @@ const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMe
 			options   : [
 				{ label: 'Whatsapp', value: 'whatsapp' },
 				{ label: 'Platform Chat', value: 'platform_chat' },
+				{ label: 'Telegram', value: 'telegram' },
 			],
 		},
 		{
@@ -123,6 +128,15 @@ const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMe
 				required: !isomniChannelAdmin ? 'This is Requied' : false,
 			},
 			options: tagOptions,
+		},
+		{
+			label     : 'Shipments',
+			name      : 'shipment_filters',
+			type      : 'checkboxgroup',
+			className : 'channels_field_controller',
+			options   : [
+				{ label: 'Is likely To Book Shipment', value: 'likely_to_book_shipment' },
+			],
 		},
 	];
 

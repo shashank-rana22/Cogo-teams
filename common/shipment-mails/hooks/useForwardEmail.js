@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useLensRequest } from '@cogoport/request';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 const useForwardEmail = ({ refetch = () => {} }) => {
 	const [forwardMailApi, triggerForwardMail] = useLensRequest({
@@ -19,7 +19,7 @@ const useForwardEmail = ({ refetch = () => {} }) => {
 			Toast.success('Email Sent');
 			refetch();
 		} catch (err) {
-			Toast.error(getApiErrorString(err));
+			toastApiError(err);
 		}
 	};
 

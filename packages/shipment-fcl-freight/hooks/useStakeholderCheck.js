@@ -23,7 +23,7 @@ export const useStakeholderCheck = () => {
 
 	const activeStakeholder = matchingStakeholders.length > 0
 		? matchingStakeholders[0].stakeholder
-		: 'Superadmin';
+		: '';
 
 	return {
 		activeStakeholder,

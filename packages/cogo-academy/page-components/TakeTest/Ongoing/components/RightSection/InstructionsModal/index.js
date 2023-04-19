@@ -50,6 +50,7 @@ function InstructionsModal({
 			<Modal.Header title={(
 				<div className={styles.flex_container}>
 					<div>Test Instructions</div>
+
 					<Timer
 						test_start_time={time}
 						duration={test_duration}

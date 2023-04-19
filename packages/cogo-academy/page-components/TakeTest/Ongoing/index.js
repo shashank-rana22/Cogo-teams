@@ -1,5 +1,5 @@
 // import { Toast } from '@cogoport/components';
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 // import handleMinimizeTest from '../utils/handleMinimizeTest';
 
@@ -7,6 +7,7 @@ import LeftSection from './components/LeftSection';
 import LeaveTest from './components/LeftSection/Footer/LeaveTest';
 import EndTimer from './components/LeftSection/Header/Timer/EndTimer';
 // import WarningModal from './components/LeftSection/WarningModal';
+import { QuestionStatsContext } from './components/QuestionStatsContext';
 import RightSection from './components/RightSection';
 import SubmitTest from './components/RightSection/Footer/SubmitTest';
 import InstructionsModal from './components/RightSection/InstructionsModal';
@@ -14,10 +15,10 @@ import InstructionsModal from './components/RightSection/InstructionsModal';
 import useGetUserTestQuestion from './hooks/useGetUserTestQuestion';
 import styles from './styles.module.css';
 
-function Ongoing({ testData, page, setActiveState, currentQuestionId, test_user_mapping_state }) {
+function Ongoing({ testData, setActiveState, currentQuestionId, test_user_mapping_state, page }) {
 	const { guidelines = [] } = testData || {};
 
-	const [currentQuestion, setCurrentQuestion] = useState(page || 1);
+	const [currentQuestion, setCurrentQuestion] = useState(1);
 	const [subQuestion, setSubQuestion] = useState(1);
 	// const [isFullscreen, setIsFullscreen] = useState(false);
 	const [showLeaveTestModal, setShowLeaveTestModal] = useState(false);
@@ -29,11 +30,11 @@ function Ongoing({ testData, page, setActiveState, currentQuestionId, test_user_
 		getUserTestQuestion,
 		loading,
 		start_time,
-		question_data,
+		question_data = {},
 		test_user_mapping_id,
 		total_question_count,
-		user_appearance,
-	} = useGetUserTestQuestion({ currentQuestionId, test_user_mapping_state });
+		user_appearance = [],
+	} = useGetUserTestQuestion({ currentQuestionId, test_user_mapping_state, page });
 
 	// const { endTest, endTestLoading } = useEndTest({
 	// 	setActiveState,
@@ -41,7 +42,7 @@ function Ongoing({ testData, page, setActiveState, currentQuestionId, test_user_
 	// 	test_user_mapping_id,
 	// });
 
-	// // Watch for fullscreenchange
+	// Watch for fullscreenchange
 	// useEffect(() => {
 	// 	function onFullscreenChange() {
 	// 		setIsFullscreen(Boolean(document.fullscreenElement));
@@ -52,7 +53,7 @@ function Ongoing({ testData, page, setActiveState, currentQuestionId, test_user_
 	// 	return () => document.removeEventListener('fullscreenchange', onFullscreenChange);
 	// }, []);
 
-	// // Watch for visibilitychange
+	// Watch for visibilitychange
 	// useEffect(() => {
 	// 	function onVisibilityChange() {
 	// 		const visibilityChangeCount = localStorage.getItem('visibilityChangeCount');
@@ -66,18 +67,36 @@ function Ongoing({ testData, page, setActiveState, currentQuestionId, test_user_
 	// 		}
 
 	// 		if (visibilityChangeCount > 5) {
-	// 			endTest();
+	// 			// endTest();
 	// 			localStorage.setItem('visibilityChangeCount', 1);
-	// 			return;
 	// 		}
 
-	// 		handleMinimizeTest();
+	// 		// handleMinimizeTest();
 	// 	}
 
 	// 	document.addEventListener('visibilitychange', onVisibilityChange);
 
 	// 	return () => document.removeEventListener('visibilitychange', onVisibilityChange);
 	// }, [endTest]);
+
+	useEffect(() => {
+		if ((!(page && page !== 'undefined')
+		|| (!(currentQuestionId && currentQuestionId !== 'undefined') && page && page !== 'undefined' && page > 1))) {
+			setCurrentQuestion(1);
+		} else {
+			setCurrentQuestion(Number(page));
+		}
+	}, [currentQuestionId, page]);
+
+	const questionProps = useMemo(() => ({
+		total_question_count,
+		user_appearance,
+		setSubQuestion,
+		data           : question_data,
+		setCurrentQuestion,
+		currentQuestion,
+		fetchQuestions : getUserTestQuestion,
+	}), [currentQuestion, getUserTestQuestion, question_data, total_question_count, user_appearance]);
 
 	if (showTimeOverModal) {
 		return (
@@ -166,21 +185,15 @@ function Ongoing({ testData, page, setActiveState, currentQuestionId, test_user_
 				/>
 			</div>
 
-			<div className={styles.right_container}>
-				<RightSection
-					data={question_data}
-					loading={loading}
-					currentQuestion={currentQuestion}
-					fetchQuestions={getUserTestQuestion}
-					setCurrentQuestion={setCurrentQuestion}
-					setShowSubmitTestModal={setShowSubmitTestModal}
-					setShowInstructionsModal={setShowInstructionsModal}
-					setActiveState={setActiveState}
-					total_question_count={total_question_count}
-					user_appearance={user_appearance}
-					setSubQuestion={setSubQuestion}
-				/>
-			</div>
+			<QuestionStatsContext.Provider value={questionProps}>
+				<div className={styles.right_container}>
+					<RightSection
+						setShowSubmitTestModal={setShowSubmitTestModal}
+						setShowInstructionsModal={setShowInstructionsModal}
+						setActiveState={setActiveState}
+					/>
+				</div>
+			</QuestionStatsContext.Provider>
 		</div>
 	);
 }

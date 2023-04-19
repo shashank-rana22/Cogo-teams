@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -24,7 +25,7 @@ const useUpdateFaqSearchHistory = ({ setShowHistory }) => {
 			setShowHistory(false);
 			Toast.success('History deleted successfully!');
 		} catch (err) {
-			Toast.error(err?.message);
+			if (err.response?.data) { Toast.error(getApiErrorString(err.response?.data)); }
 		}
 	};
 

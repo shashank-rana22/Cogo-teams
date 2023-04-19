@@ -1,0 +1,21 @@
+.modal_container {
+	font-size: 16px;
+}
+
+.container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.update_dates {
+	margin: 0 16px 8px 0;
+}
+
+.sub_heading {
+	font-weight: 500;
+	color: #828282;
+}
+
+.label {
+	margin: 16px 32px 8px 0;
+}
