@@ -30,7 +30,7 @@ function Header({
 	} = announcementHeaderProps;
 
 	const suffix = !search && !searchAnnouncement ? (
-		<IcMSearchlight />
+		null
 	) : (
 		<IcMCross
 			onClick={() => { setInput(''); setSearch(''); setQuestion(null); setSearchAnnouncement(''); }}
