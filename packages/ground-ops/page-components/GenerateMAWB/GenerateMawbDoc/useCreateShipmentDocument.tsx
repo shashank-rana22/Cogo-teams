@@ -21,6 +21,8 @@ interface Props {
 	handleClick?: Function;
 	getHawb?: Function;
 	activeHawb?: NestedObj;
+	category?: String;
+	setTriggerManifest?: Function;
 }
 
 const useCreateShipmentDocument = ({
@@ -34,6 +36,8 @@ const useCreateShipmentDocument = ({
 	setActiveKey = () => {},
 	handleClick = () => {},
 	activeHawb = {},
+	category = 'mawb',
+	setTriggerManifest,
 }:Props) => {
 	let api = 'create_shipment_document';
 	if (edit && activeCategory === 'hawb') {
@@ -92,8 +96,12 @@ const useCreateShipmentDocument = ({
 			});
 			Toast.success('Document saved successfully');
 			if (activeCategory === 'mawb') {
-				setGenerate(false);
-				setEdit(false);
+				if (category === 'mawb') {
+					setGenerate(false);
+					setEdit(false);
+				} else {
+					setTriggerManifest(true);
+				}
 			} else {
 				if (!edit) { setHawbDetails([...hawbDetails, { id: uuid(), documentNo: null, isNew: true }]); }
 				getHawb(res?.data?.ids[0]);

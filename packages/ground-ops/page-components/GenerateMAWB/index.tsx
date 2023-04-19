@@ -8,7 +8,6 @@ import useGetHawbList from '../Air/hooks/useGetHawbList';
 
 import FormContainer from './FormContainer';
 import GenerateHeader from './GenerateHeader';
-import GenerateManifestDoc from './GenerateManifestDoc';
 import GenerateMawbDoc from './GenerateMawbDoc';
 import { iataCodeMapping } from './Helpers/configurations/iataCodeMapping';
 import mawbControls from './Helpers/configurations/mawbControls';
@@ -74,8 +73,6 @@ function GenerateMAWB({
 
 	const [activeHawb, setActiveHawb] = useState(hawbDetails[0]);
 	const [activeKey, setActiveKey] = useState('basic');
-
-	const [triggerManifest, setTriggerManifest] = useState(false);
 
 	const fields = mawbControls(disableClass);
 
@@ -302,7 +299,6 @@ function GenerateMAWB({
 
 	return (
 		<div className={styles.container}>
-			<button onClick={() => setTriggerManifest(true)}>manifest</button>
 			{loading && <Loader themeType="primary" className={styles.loader} />}
 			{!viewDoc && (
 				<>
@@ -367,30 +363,12 @@ function GenerateMAWB({
 								setActiveKey={setActiveKey}
 								activeHawb={activeHawb}
 								pendingTaskId={pendingTaskId}
+								category={category}
 							/>
 						</Modal.Body>
-
 					</Modal>
 				)}
 			</div>
-
-			{triggerManifest && (
-				<Modal
-					show={triggerManifest}
-					onClose={() => { setTriggerManifest(false); }}
-					size="lg"
-					className={styles.modal_container}
-				>
-					<Modal.Body>
-						<GenerateManifestDoc
-							taskItem={taskItem}
-							formData={formData}
-							setTriggerManifest={setTriggerManifest}
-						/>
-					</Modal.Body>
-
-				</Modal>
-			)}
 		</div>
 	);
 }

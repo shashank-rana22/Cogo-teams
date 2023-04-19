@@ -1,9 +1,10 @@
-import { Button, Checkbox } from '@cogoport/components';
+import { Button, Checkbox, Modal } from '@cogoport/components';
 import * as htmlToImage from 'html-to-image';
 import html2canvas from 'html2canvas';
 import { jsPDF as JsPDF } from 'jspdf';
 import React, { createRef, useState, ReactFragment } from 'react';
 
+import GenerateManifestDoc from '../GenerateManifestDoc';
 import { backPage, footerImages } from '../Helpers/configurations/12CopiesImages';
 import { footerValues } from '../Helpers/configurations/footerValues';
 
@@ -38,6 +39,7 @@ interface Props {
 	setActiveHawb?: Function;
 	setActiveKey?: Function;
 	pendingTaskId?: string;
+	category?: string;
 }
 
 const downloadButton = {
@@ -63,6 +65,7 @@ function GenerateMawb({
 	setActiveHawb,
 	setActiveKey,
 	pendingTaskId = '',
+	category = 'mawb',
 }:Props) {
 	const filteredData = { ...formData };
 
@@ -73,6 +76,8 @@ function GenerateMawb({
 	const ref = createRef(null);
 
 	const [saveDocument, setSaveDocument] = useState(false);
+
+	const [triggerManifest, setTriggerManifest] = useState(false);
 
 	const [whiteout, setWhiteout] = useState(false);
 
@@ -93,6 +98,8 @@ function GenerateMawb({
 		setActiveKey,
 		handleClick,
 		activeHawb,
+		category,
+		setTriggerManifest,
 	});
 
 	const takeImageScreenShot = async (node) => {
@@ -321,6 +328,24 @@ function GenerateMawb({
 						</Button>
 					</div>
 				</div>
+			)}
+
+			{triggerManifest && (
+				<Modal
+					show={triggerManifest}
+					onClose={() => { setTriggerManifest(false); }}
+					size="lg"
+					className={styles.modal_container}
+				>
+					<Modal.Body>
+						<GenerateManifestDoc
+							taskItem={taskItem}
+							formData={formData}
+							setTriggerManifest={setTriggerManifest}
+						/>
+					</Modal.Body>
+
+				</Modal>
 			)}
 		</div>
 	);
