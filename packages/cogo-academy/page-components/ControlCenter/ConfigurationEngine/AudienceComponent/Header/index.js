@@ -26,45 +26,42 @@ function Header(
 	};
 
 	return (
-		<div className={styles.container}>
 
-			<div className={styles.header_container}>
+		<div className={styles.header_container}>
 
-				<div className={styles.flex_items}>
-					<div className={styles.tabs_container}>
-						<Tabs
-							activeTab={activeAudience}
-							themeType="tertiary"
-							onChange={setActiveAudience}
-						>
-							{['active', 'inactive'].map((tab) => (
-								<TabPanel
-									key={tab}
-									name={tab}
-									title={startCase(tab)}
-								/>
-							))}
+			<div className={styles.flex_items}>
+				<div className={styles.tabs_container}>
+					<Tabs
+						activeTab={activeAudience}
+						themeType="tertiary"
+						onChange={setActiveAudience}
+					>
+						{['active', 'inactive'].map((tab) => (
+							<TabPanel
+								key={tab}
+								name={tab}
+								title={startCase(tab)}
+							/>
+						))}
 
-						</Tabs>
-					</div>
-
-					<div className={styles.search}>
-						<SearchInput
-							value={searchAudienceInput}
-							onChange={setSearchAudienceInput}
-							size="md"
-							placeholder="Search for Audience"
-						/>
-					</div>
-
+					</Tabs>
 				</div>
 
-				<div>
-					<Button onClick={onClickAddAudience}>Add New Audience Group</Button>
+				<div className={styles.search}>
+					<SearchInput
+						value={searchAudienceInput}
+						onChange={setSearchAudienceInput}
+						size="md"
+						placeholder="Search for Audience"
+					/>
 				</div>
+
 			</div>
 
+			<Button onClick={onClickAddAudience}>Add New Audience Group</Button>
+
 		</div>
+
 	);
 }
 

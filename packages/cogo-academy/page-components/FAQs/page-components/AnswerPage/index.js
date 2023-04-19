@@ -45,7 +45,8 @@ function AnswerPage() {
 	} = useCreateFeedback({ refetchQuestions, answerData, loading });
 
 	const onClickBackIcon = () => {
-		const href = `/learning/faq${topicId ? `?topicId=${topicId}` : ''}`;
+		const showTopicId = topicId ? `?topicId=${topicId}` : '';
+		const href = `/learning/faq${showTopicId}`;
 		router.push(href, href);
 	};
 
@@ -187,7 +188,9 @@ function AnswerPage() {
 					<span className={styles.sidetext}>
 						{answerData?.answers[0]?.upvote_count}
 						{' '}
-						people found it useful.
+						{answerData?.answers[0]?.upvote_count === 1 ? 'person' : 'people'}
+						{' '}
+						found it useful.
 					</span>
 				) : null}
 				{'    '}
