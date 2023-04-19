@@ -4,7 +4,7 @@ import { IcCError } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
-import { optionsRadio } from '../../constant';
+import { optionsRadio, optionsRadioData } from '../../constant';
 import { FilterInterface } from '../../interface';
 
 import styles from './styles.module.css';
@@ -216,23 +216,23 @@ function Footer({
 				<Modal show={openModal} onClose={() => setOpenModal(false)}>
 					<Modal.Body>
 						<div className={styles.flex_modal}>
-							<div className={!value ? styles.margin : styles.margin_not}>
-								{!value ? 'Are you sure you want to select this?' : 'Please Choose The Selection Mode' }
+							<div className={styles.margin_not}>
+								Please Choose The Selection Mode
 							</div>
-							{value && (
-								<div>
-									<RadioGroup
-										options={optionsRadio}
-										value={bulkAction}
-										onChange={(val) => {
-											setBulkSection((prev) => ({
-												...prev,
-												bulkAction: val,
-											}));
-										}}
-									/>
-								</div>
-							)}
+
+							<div>
+								<RadioGroup
+									options={optionsRadioData}
+									value={bulkAction}
+									onChange={(val) => {
+										setBulkSection((prev) => ({
+											...prev,
+											bulkAction: val,
+										}));
+									}}
+								/>
+							</div>
+
 							<div className={styles.flex}>
 								<Button
 									id="cancel-modal-btn"

@@ -130,8 +130,8 @@ function ListProfit({
 						)}
 						{dropDown?.revenue && (
 							<div className={styles.row_vis_data}>
-								{isRowVisible && <div>Booked Revenue</div>}
-								{isRowVisible && <div>Accrued Revenue</div>}
+								{isRowVisible && <div>Billed Revenue</div>}
+								{isRowVisible && <div>UnBilled Revenue</div>}
 							</div>
 						) }
 
@@ -151,8 +151,8 @@ function ListProfit({
 						)}
 						{dropDown?.operating && (
 							<div className={styles.row_vis_data}>
-								{isRowVisible &&	<div>Booked Expenses</div>}
-								{isRowVisible &&	<div>Accrued Expenses</div>}
+								{isRowVisible &&	<div>Billed Expenses</div>}
+								{isRowVisible &&	<div>UnBilled Expenses</div>}
 							</div>
 						)}
 					</div>

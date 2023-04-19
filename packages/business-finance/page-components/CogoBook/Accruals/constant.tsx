@@ -669,3 +669,8 @@ export const optionsRadio = [
 	{ name: 'r1', value: 'BULK', label: 'All Shipments' },
 	{ name: 'r2', value: 'PAGE', label: 'Currently Selected Shipments' },
 ];
+
+export const optionsRadioData = [
+	{ name: 'r1', value: 'BOOK', label: 'Book' },
+	{ name: 'r2', value: 'ACCRUE', label: 'Accrue' },
+];
