@@ -5,41 +5,6 @@ import EachTicket from './EachTicket';
 import styles from './styles.module.css';
 
 function Tickets({ zippedTicketsData = {} }) {
-	// const {
-	// 	user_id = '',
-	// 	lead_user_id = '',
-	// } = formattedMessageData || {};
-
-	// const {
-	// 	user_data = {},
-	// } = activeVoiceCard || {};
-
-	// const DATA_MAPPING = {
-	// 	voice: {
-	// 		userId     : user_data?.id,
-	// 		leadUserId : null,
-	// 	},
-	// 	message: {
-	// 		userId     : user_id,
-	// 		leadUserId : lead_user_id,
-	// 	},
-	// };
-	// const { userId, leadUserId } = DATA_MAPPING[activeTab];
-
-	// const {
-	// 	ticketData:{ items = [] } = {},
-	// 	loading,
-	// } = useListTickets({ UserID: userId || leadUserId });
-
-	// const { data = {}, ticketsLoading = false } = useGetTicketStats({ UserID: userId || leadUserId });
-
-	// const { HighPriority = 0, Unresolved = 0, Closed = 0 } = data || {};
-
-	// const createTicket = () => {
-	// 	setRaiseTicketModal({
-	// 		state: true, data: { formattedData: { user_id: userId, lead_user_id: leadUserId }, source: 'tickets' },
-	// 	});
-	// };
 	const {
 		statsLoading,
 		ticketData,
