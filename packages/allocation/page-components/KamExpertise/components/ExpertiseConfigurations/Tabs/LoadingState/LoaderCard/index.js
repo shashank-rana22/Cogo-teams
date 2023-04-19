@@ -14,7 +14,6 @@ function LoaderCard({ columnsToLoad }) {
 
 				{[...Array(columnsToLoad)].map(() => (
 					<div style={{ flexBasis: '24%' }}>
-
 						<div style={{ marginBottom: '8px' }}>
 							<Placeholder width="200px" height="18px" />
 						</div>
