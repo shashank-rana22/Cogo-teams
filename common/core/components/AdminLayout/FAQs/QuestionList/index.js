@@ -13,17 +13,20 @@ import useQuestionList from './useQuestionList';
 function QuestionList({
 	search = '',
 	topic = {},
+	from,
 	question = '',
 	setQuestion = () => {},
 }) {
 	const {
 		loading, list, page, setPage, pageData, response_type, gpt_answer, show_more,
 	} = useQuestionList({
+		from,
 		topic,
 		search,
 		question,
 		setQuestion,
 	});
+
 	if (question) {
 		return (
 			<Answer topic={topic} question={question} setQuestion={setQuestion} />
@@ -54,6 +57,7 @@ function QuestionList({
 
 	const extendedPills = (item) => {
 		const REMAINING = item.faq_tags.length - 3;
+
 		return (
 			<div style={{ display: 'flex' }}>
 				{item?.faq_tags?.slice(0, 3).map((faqtag) => (
@@ -61,6 +65,7 @@ function QuestionList({
 						{(faqtag.display_name).toUpperCase()}
 					</Pill>
 				))}
+
 				<Tooltip
 					content={allpills(item)}
 					placement="right"
@@ -74,7 +79,6 @@ function QuestionList({
 						more..
 					</div>
 				</Tooltip>
-
 			</div>
 		);
 	};
@@ -88,9 +92,10 @@ function QuestionList({
 						{' '}
 						{startCase(topic.display_name) || 'Search Result'}
 					</div>
+
 					<div className={styles.list}>
 						{(list || []).map((item) => (
-							<div className={styles.list_container}>
+							<div className={styles.list_container} key={item?.question_abstract}>
 								<div
 									role="presentation"
 									className={styles.question}
@@ -100,6 +105,7 @@ function QuestionList({
 										<div style={{ marginRight: 4 }}>
 											{item?.question_abstract}
 										</div>
+
 										<div>
 											<IcMArrowRight
 												height="16px"
@@ -108,8 +114,8 @@ function QuestionList({
 											/>
 										</div>
 									</div>
-									<div className={styles.pill_container}>
 
+									<div className={styles.pill_container}>
 										{item?.faq_tags.length <= 3
 											? item?.faq_tags?.map((faqtag) => (
 												<Pill size="md" className={styles.pill}>
@@ -121,7 +127,8 @@ function QuestionList({
 								</div>
 							</div>
 						))}
-						{ search && <EmptySearchState search={search} source="list" />}
+
+						{search && <EmptySearchState search={search} source="list" />}
 					</div>
 
 					{(pageData?.total_count || 0) > 10 ? (
