@@ -216,7 +216,7 @@ export const testSetColumns = ({
 						<section className={styles.status}>
 							<Pill
 								size="md"
-								color={current_status === 'upcoming' ? '#00c8ff' : '#C4DC91'}
+								color={current_status === 'upcoming' ? '#CFEAEC' : '#C4DC91'}
 								className={styles.status_pill}
 							>
 								{startCase(current_status)}
