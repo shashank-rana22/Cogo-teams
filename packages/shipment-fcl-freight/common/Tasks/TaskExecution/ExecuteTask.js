@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 
-import { UploadBookingNote, UploadCargoArrival } from './CustomTasks';
+import { UploadBookingNote, UploadCargoArrival, UploadContainerDetails } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
@@ -34,6 +34,16 @@ function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {
 				onCancel={onCancel}
 				taskListRefetch={taskListRefetch}
 				taskConfigData={taskConfigData}
+			/>
+		);
+	}
+
+	if (
+		task.task === 'update_container_details') {
+		return (
+			<UploadContainerDetails
+				pendingTask={task}
+				onCancel={onCancel}
 			/>
 		);
 	}

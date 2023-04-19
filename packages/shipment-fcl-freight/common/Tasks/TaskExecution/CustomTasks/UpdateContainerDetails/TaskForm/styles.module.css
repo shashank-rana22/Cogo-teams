@@ -1,0 +1,47 @@
+.control_container {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+
+	.core-ui-button-root {
+		margin-left: 10px;
+		text-transform: capitalize;
+		width: 100px;
+	}
+}
+
+.input {
+	width: 500px;
+	margin-right: 8px;
+}
+
+.button_wrap {
+	margin: 20px 0px;
+	display: flex;
+	justify-content: flex-end;
+
+	.core-ui-button-root {
+		margin-left: 10px;
+		text-transform: capitalize;
+		width: 100px;
+	}
+}
+
+.custom_format {
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	margin-left: 6px;
+	font-size: 12px;
+}
+
+.info {
+	font-size: 10px;
+	opacity: 0.58;
+
+	&.other-dates {
+		flex-basis: 100%;
+		margin-top: 6px;
+		opacity: 1;
+	}
+}
