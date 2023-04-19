@@ -1,4 +1,5 @@
-import { IcMArrowDown } from '@cogoport/icons-react';
+import { Tooltip } from '@cogoport/components';
+import { IcMArrowDown, IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import { mappingData } from '../constant';
@@ -130,8 +131,42 @@ function ListProfit({
 						)}
 						{dropDown?.revenue && (
 							<div className={styles.row_vis_data}>
-								{isRowVisible && <div>Billed Revenue</div>}
-								{isRowVisible && <div>UnBilled Revenue</div>}
+								{isRowVisible && (
+									<div>
+										Billed Revenue
+										<Tooltip
+											content={(
+												<div className={styles.font_size_tooltip}>
+													Invoiced revenue w.r.t current month SIDs +
+													<br />
+													Invoiced revenue w.r.t prev months SIDs in freeze state
+												</div>
+											)}
+											placement="top"
+										>
+											<div className={styles.info_icon_container}>
+												<IcMInfo />
+											</div>
+										</Tooltip>
+									</div>
+								)}
+								{isRowVisible && (
+									<div>
+										Unbilled Revenue
+										<Tooltip
+											content={(
+												<div className={styles.font_size_tooltip}>
+													Accrued Revenue w.r.t current month SIDs
+												</div>
+											)}
+											placement="top"
+										>
+											<div className={styles.info_icon_container}>
+												<IcMInfo />
+											</div>
+										</Tooltip>
+									</div>
+								)}
 							</div>
 						) }
 
@@ -151,8 +186,8 @@ function ListProfit({
 						)}
 						{dropDown?.operating && (
 							<div className={styles.row_vis_data}>
-								{isRowVisible &&	<div>Billed Expenses</div>}
-								{isRowVisible &&	<div>UnBilled Expenses</div>}
+								{isRowVisible &&	<div>Billed Expense</div>}
+								{isRowVisible &&	<div>Accrued Expense</div>}
 							</div>
 						)}
 					</div>

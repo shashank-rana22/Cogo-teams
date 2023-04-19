@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Popover } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import { IcMArrowBack, IcMUnlock, IcMLock } from '@cogoport/icons-react';
 
@@ -36,6 +36,17 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 		actualIncome,
 		isLocked,
 	} = data || {};
+
+	const renderContent = () => (
+		<div>
+			<div>Expense Variation</div>
+			<div>Amount : INR 2,00,00</div>
+			<div>Invoices : 12</div>
+			<div>Income Variation</div>
+			<div>Amount : INR 3,00,00 </div>
+			<div>Invoices : 12</div>
+		</div>
+	);
 	return (
 		<div>
 
@@ -106,13 +117,20 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 							<ValuePercentage data={data} keys="actualProfit" flag />
 						</div>
 					</div>
-
-					<div>
-						<div className={styles.para_data}>Variance</div>
-						<div className={styles.para}>
-							<ValuePercentage data={data} keys="variance" flag />
+					<Popover
+						interactive
+						placement="bottom"
+						theme="light"
+						content={renderContent()}
+					>
+						<div>
+							<div className={styles.para_data}>Variance</div>
+							<div className={styles.para}>
+								<ValuePercentage data={data} keys="variance" flag />
+							</div>
 						</div>
-					</div>
+					</Popover>
+
 				</div>
 
 			</div>
