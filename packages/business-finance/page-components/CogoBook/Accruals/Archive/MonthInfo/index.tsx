@@ -38,13 +38,26 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 	} = data || {};
 
 	const renderContent = () => (
-		<div>
-			<div>Expense Variation</div>
-			<div>Amount : INR 2,00,00</div>
-			<div>Invoices : 12</div>
-			<div>Income Variation</div>
-			<div>Amount : INR 3,00,00 </div>
-			<div>Invoices : 12</div>
+		<div className={styles.variance_styles}>
+			<div>
+				<div className={styles.expense}>Expense Variation</div>
+				<div>
+					Amount :
+					{' '}
+					<span className={styles.amount}>INR 2,00,00</span>
+				</div>
+				<div>Invoices : 12</div>
+			</div>
+			<div className={styles.income}>
+				<div>Income Variation</div>
+				<div>
+					Amount :
+					{' '}
+					<span className={styles.amount}>INR 2,00,00</span>
+				</div>
+				<div>Invoices : 12</div>
+			</div>
+
 		</div>
 	);
 	return (
