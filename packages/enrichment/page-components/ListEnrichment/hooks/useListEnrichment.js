@@ -82,7 +82,7 @@ const useListEnrichment = () => {
 
 			filters: {
 				...prev.filters,
-				status: activeTab === 'requests_sent' ? 'responded' : 'requested',
+				status: activeTab === 'requests_sent' ? 'responded' : 'active',
 			},
 		}));
 	}, [activeTab]);
