@@ -1,9 +1,54 @@
 .container {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
-	padding: 4px 16px 4px 0;
+	padding: 10px;
+	margin-bottom: 4px;
 	background: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 10%);
+}
+
+.checkbox {
+	flex: 0.1;
+	padding: unset;
+}
+
+.basic_details {
+	display: flex;
+	flex: 6;
+	flex-direction: column;
+	border: 0.1px solid;
+}
+
+.revenue_details {
+	flex: 4;
+}
+
+.org_name {
+	hyphens: auto;
+}
+
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	margin-block: 4px;
+}
+
+.rest_tags {
+	display: flex;
+	flex-wrap: wrap;
+	margin-block: 4px;
+}
+
+.primary_tag {
+	padding: 2px;
+	margin-right: 4px;
+	background: #f9f9f9;
+	border-radius: 6px;
+}
+
+.secondary_tag {
+	padding: 2px;
+	margin-right: 4px;
+	border-radius: 6px;
 }
