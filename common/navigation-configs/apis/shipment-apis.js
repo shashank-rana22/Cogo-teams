@@ -1400,7 +1400,7 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'update_saas_ftl_tracking_detail',
+		api          : 'create_saas_surface_shipment_detail',
 		access_type  : 'private',
 		service_name : 'saas_traceability',
 	},
