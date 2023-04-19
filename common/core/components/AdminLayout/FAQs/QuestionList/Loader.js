@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 import quotes from './utils/quotes';
 
 function Loader({ topic = {} }) {
-	const [extract] = useState(quotes[Math.floor(Math.random() * 10)]);
+	const [extract] = useState(quotes[Math.floor(Math.random() * quotes.length)]);
 
 	return (
 		<div className={styles.container}>

@@ -36,7 +36,7 @@ function AudianceTable({
 				activeAudience === 'active' ? (
 					<EmptyState
 						text="There are no audience groups right now. Start by adding an audience group."
-						btn_text="Add Audience Aroup"
+						btn_text="Add Audience Group"
 						onClick={onClick}
 					/>
 				) : (
@@ -50,10 +50,7 @@ function AudianceTable({
 
 		return (
 			<div>
-				<div className={styles.table}>
-					<StyledTable columns={columns} data={listTagsData} />
-				</div>
-
+				<StyledTable columns={columns} data={listTagsData} />
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="table"
