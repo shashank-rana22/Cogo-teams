@@ -21,15 +21,34 @@ function Card({ item, checkedItems, handleCheck }) {
 				</div>
 				<div className={styles.rest_tags}>
 					<div className={styles.secondary_tag}>
-						<IcMProfile />
+						<IcMProfile className={styles.avatar} />
 						Kam Name
 					</div>
 					<div className={styles.secondary_tag}>Requested on : 20 Mar 2023</div>
 					<div className={styles.secondary_tag}>RFQ ID : 1124</div>
 				</div>
-
 			</div>
-			<div className={styles.revenue_details}>s</div>
+
+			<div className={styles.revenue_details}>
+				<div className={styles.figures}>
+					<div className={styles.field}>
+						<div className={styles.label}>Promised Con Revenue</div>
+						<div className={styles.value}>$1,40,000</div>
+
+					</div>
+					<div className={styles.field}>
+						<div className={styles.label}>Promised Con Profitability</div>
+						<div className={styles.value}>2.6 %</div>
+
+					</div>
+					<div className={styles.field}>
+						<div className={styles.label}>Avg Contract Utilization</div>
+						<div className={styles.value}>11.2 %</div>
+
+					</div>
+				</div>
+				<div className={styles.services}>services</div>
+			</div>
 		</div>
 	);
 }

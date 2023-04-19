@@ -1,6 +1,5 @@
 .container {
 	display: flex;
-	align-items: center;
 	padding: 10px;
 	margin-bottom: 4px;
 	background: #fff;
@@ -17,21 +16,26 @@
 	display: flex;
 	flex: 6;
 	flex-direction: column;
-	border: 0.1px solid;
+	margin-right: 4px;
 }
 
 .revenue_details {
-	flex: 4;
+	display: flex;
+	flex: 3.5;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .org_name {
-	hyphens: auto;
+	font-size: 16px;
+	font-weight: 500;
+	color: #4f4f4f;
 }
 
 .tags {
 	display: flex;
 	flex-wrap: wrap;
-	margin-block: 4px;
+	margin-block: 8px;
 }
 
 .rest_tags {
@@ -41,14 +45,47 @@
 }
 
 .primary_tag {
+	display: flex;
+	align-items: center;
 	padding: 2px;
 	margin-right: 4px;
-	background: #f9f9f9;
+	font-size: 12px;
+	color: #4f4f4f;
+	background: #f2f4f7;
 	border-radius: 6px;
 }
 
 .secondary_tag {
+	display: flex;
+	align-items: center;
 	padding: 2px;
 	margin-right: 4px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #828282;
 	border-radius: 6px;
+}
+
+.avatar {
+	margin-right: 4px;
+}
+
+.figures {
+	display: flex;
+}
+
+.field {
+	flex: 1;
+}
+
+.label {
+	font-size: 10px;
+	font-weight: 400;
+	color: #4f4f4f;
+}
+
+.value {
+	font-size: 18px;
+	font-weight: 600;
+	color: #221f20;
 }
