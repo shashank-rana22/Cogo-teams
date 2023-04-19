@@ -121,7 +121,7 @@ function Footer({
 					<div className={styles.button_container}>
 						<Button
 							type="submit"
-							themeType="secondary"
+							themeType="primary"
 							className={styles.add_to_select}
 							disabled={shipmentLoading || payload.length === 0}
 							onClick={() => {
@@ -132,7 +132,7 @@ function Footer({
 						</Button>
 						<Button
 							type="submit"
-							themeType="primary"
+							themeType="secondary"
 							disabled={shipmentLoading || viewSelected}
 							onClick={() => {
 								onSubmit();

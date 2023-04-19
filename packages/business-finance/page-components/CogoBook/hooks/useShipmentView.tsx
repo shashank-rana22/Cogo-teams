@@ -271,6 +271,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 					shipmentList   : newPayload,
 					performedBy    : userId,
 					archivedStatus : bulkAction || 'BOOK',
+					selectionMode  : 'SINGLE',
 					jobListRequest : {
 						query                : query || undefined,
 						year                 : year || undefined,

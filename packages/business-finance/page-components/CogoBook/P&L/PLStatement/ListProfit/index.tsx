@@ -132,12 +132,14 @@ function ListProfit({
 						{dropDown?.revenue && (
 							<div className={styles.row_vis_data}>
 								{isRowVisible && (
-									<div>
+									<div style={{ display: 'flex' }}>
 										Billed Revenue
 										<Tooltip
 											content={(
 												<div className={styles.font_size_tooltip}>
-													Invoiced revenue w.r.t current month SIDs +
+													Invoiced revenue w.r.t
+													<br />
+													current month SIDs +
 													<br />
 													Invoiced revenue w.r.t prev months SIDs in freeze state
 												</div>
@@ -151,12 +153,16 @@ function ListProfit({
 									</div>
 								)}
 								{isRowVisible && (
-									<div>
+									<div style={{ display: 'flex' }}>
 										Unbilled Revenue
 										<Tooltip
 											content={(
 												<div className={styles.font_size_tooltip}>
-													Accrued Revenue w.r.t current month SIDs
+													Accrued Revenue w.r.t
+													{' '}
+													<br />
+													{' '}
+													current month SIDs
 												</div>
 											)}
 											placement="top"

@@ -1,6 +1,6 @@
 import { Button, Popover } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
-import { IcMArrowBack, IcMUnlock, IcMLock } from '@cogoport/icons-react';
+import { IcMArrowBack, IcMUnlock, IcMLock, IcMArrowRotateDown } from '@cogoport/icons-react';
 
 import ValuePercentage from '../ValuePercentage';
 
@@ -44,18 +44,18 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 				<div>
 					Amount :
 					{' '}
-					<span className={styles.amount}>INR 2,00,00</span>
+					<span className={styles.amount}>XXXX</span>
 				</div>
-				<div>Invoices : 12</div>
+				<div>Invoices : XXXX</div>
 			</div>
-			<div className={styles.income}>
-				<div>Income Variation</div>
+			<div>
+				<div className={styles.income}>Income Variation</div>
 				<div>
 					Amount :
 					{' '}
-					<span className={styles.amount}>INR 2,00,00</span>
+					<span className={styles.amount}>XXXX</span>
 				</div>
-				<div>Invoices : 12</div>
+				<div>Invoices : XXXX</div>
 			</div>
 
 		</div>
@@ -130,19 +130,25 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 							<ValuePercentage data={data} keys="actualProfit" flag />
 						</div>
 					</div>
-					<Popover
-						interactive
-						placement="bottom"
-						theme="light"
-						content={renderContent()}
-					>
-						<div>
-							<div className={styles.para_data}>Variance</div>
-							<div className={styles.para}>
-								<ValuePercentage data={data} keys="variance" flag />
+					<div style={{ display: 'flex', flexDirection: 'column' }}>
+						<Popover
+							interactive
+							placement="bottom"
+							theme="light"
+							content={renderContent()}
+						>
+							<div>
+								<div className={styles.variance_data}>
+									Variance
+									<IcMArrowRotateDown />
+								</div>
+
 							</div>
+						</Popover>
+						<div className={styles.para}>
+							<ValuePercentage data={data} keys="variance" flag />
 						</div>
-					</Popover>
+					</div>
 
 				</div>
 
