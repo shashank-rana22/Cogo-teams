@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { Image } from '@cogoport/next';
-import { format, startCase } from '@cogoport/utils';
+import { format } from '@cogoport/utils';
 
 import getResultStatus from '../../utils/getResultStatus';
 
@@ -61,7 +61,7 @@ function TestResultMessage({ stats_data }) {
 				<div className={styles.sub_text}>
 					{message_text}
 					{' '}
-					<b>{startCase(test_name)}</b>
+					<b>{test_name}</b>
 					{' '}
 					taken on
 					{' '}

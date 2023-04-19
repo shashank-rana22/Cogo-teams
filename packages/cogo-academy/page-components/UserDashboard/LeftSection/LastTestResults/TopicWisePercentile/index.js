@@ -41,6 +41,7 @@ function TopicWisePercentile({ topic_wise_percentile }) {
 							return (
 								<div key={key} className={styles.percentile}>
 									<div className={styles.topic}>{key}</div>
+
 									<div className={styles.percentage}>
 										{toFixed(value, 2)}
 										{' '}
@@ -49,7 +50,8 @@ function TopicWisePercentile({ topic_wise_percentile }) {
 								</div>
 							);
 						}
-						return (null);
+
+						return null;
 					},
 				)}
 
