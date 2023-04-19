@@ -34,6 +34,8 @@ const useGetTicketsData = ({
 		ticketData = {},
 		listLoading,
 		fetchTickets = () => {},
+		setFilter = () => {},
+		filter = '',
 	} = useListTickets({ UserID: userId || leadUserId, activeTab });
 
 	const {
@@ -58,6 +60,8 @@ const useGetTicketsData = ({
 		listLoading,
 		statsData,
 		createTicket,
+		setFilter,
+		filter,
 	};
 
 	return {

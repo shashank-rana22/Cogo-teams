@@ -1,7 +1,11 @@
 import { useTicketsRequest } from '@cogoport/request';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState } from 'react';
+
+import { FILTER_KEYS_MAPPING } from '../constants';
 
 const useListTickets = ({ UserID = '', activeTab = '' }) => {
+	const [filter, setFilter] = useState('priority');
+
 	const [{ loading, data }, trigger] = useTicketsRequest({
 		url     : '/list',
 		method  : 'get',
@@ -13,13 +17,13 @@ const useListTickets = ({ UserID = '', activeTab = '' }) => {
 			await trigger({
 				params: {
 					UserID,
+					...(FILTER_KEYS_MAPPING[filter] || {}),
 				},
 			});
 		} catch (error) {
 			// console.log("error:", error)
-
 		}
-	}, [trigger, UserID]);
+	}, [trigger, UserID, filter]);
 
 	useEffect(() => {
 		if (activeTab !== 'email' && UserID) {
@@ -31,6 +35,8 @@ const useListTickets = ({ UserID = '', activeTab = '' }) => {
 		ticketData  : data,
 		listLoading : loading,
 		fetchTickets,
+		setFilter,
+		filter,
 	};
 };
 export default useListTickets;
