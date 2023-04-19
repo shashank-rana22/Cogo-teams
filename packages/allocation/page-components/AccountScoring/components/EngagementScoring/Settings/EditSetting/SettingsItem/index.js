@@ -1,5 +1,3 @@
-import { useForm } from '@cogoport/forms';
-
 import { getFieldController } from '../../../../../../../common/Form/getFieldController';
 
 import styles from './styles.module.css';
@@ -12,15 +10,17 @@ const WARMTH_MAPPING = {
 	icy_cold  : 'Icy Cold',
 };
 
-function TableItem({ item = '', useGetControls = () => {}, index = 0, inputStyle = 'input' }) {
-	const controls = useGetControls(item);
+function TableItem(props) {
+	const {
+		item = '', useGetControls = () => {},
+		index = 0, inputStyle, control, errors,
+	} = props;
 
-	const formProps = useForm();
-	const { control } = formProps;
+	const controls = useGetControls(item);
 
 	return (
 		<div className={styles.container}>
-			{ inputStyle === 'distribution_input'
+			{inputStyle === 'distribution_input'
 			&& (
 				<div className={styles.warmth_container}>
 					{
@@ -37,30 +37,29 @@ function TableItem({ item = '', useGetControls = () => {}, index = 0, inputStyle
 				</div>
 			)}
 			<div className={styles.input_row}>
-				{
-				controls.map((element) => {
-					const el = { ...element };
-					const Element = getFieldController(el.type);
+				{controls.map((element) => {
+					const Element = getFieldController(element.type);
 
 					return (
 						<div className={styles?.[inputStyle] || styles.input}>
-							{
-								index === 0 && (
-									<div className={styles.label}>
-										{el.label}
-									</div>
-								)
-							}
+							{index === 0 && (
+								<div className={styles.label}>
+									{element.label}
+								</div>
+							)}
 
 							<Element
-								{...el}
-								key={`${item + el.name}`}
+								{...element}
+								key={`${item + element.name}`}
 								control={control}
 							/>
+
+							<div className={styles.error_message}>
+								{errors?.[element.name]?.message}
+							</div>
 						</div>
 					);
-				})
-					}
+				})}
 			</div>
 
 		</div>

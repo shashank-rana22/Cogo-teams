@@ -7,30 +7,30 @@ const controls = (item) => {
 			label       : 'AGE FROM (DAYS)',
 			placeholder : '0',
 			type        : 'text',
-			rules       : {
-				required: 'Required',
-			},
-			isClearable: true,
+			// rules       : {
+			// 	required: 'Required',
+			// },
+			isClearable : true,
 		},
 		{
 			name        : `${key_val}_age_to`,
 			label       : 'AGE TO (DAYS)',
 			placeholder : '0',
 			type        : 'text',
-			rules       : {
-				required: 'Required',
-			},
-			isClearable: true,
+			// rules       : {
+			// 	required: 'Required',
+			// },
+			isClearable : true,
 		},
 		{
 			name        : `${key_val}_multiplier`,
 			label       : 'MULTIPLIER',
 			placeholder : '0',
 			type        : 'text',
-			rules       : {
-				required: 'Required',
-			},
-			isClearable: true,
+			// rules       : {
+			// 	required: 'Required',
+			// },
+			isClearable : true,
 		},
 	]);
 };
