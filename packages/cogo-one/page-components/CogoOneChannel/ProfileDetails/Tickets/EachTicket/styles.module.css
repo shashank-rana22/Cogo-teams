@@ -18,9 +18,38 @@
 	justify-content: space-between;
 	color: #828282;
 	text-transform: uppercase;
+	font-size: 12px;
 }
 
 .overflow_div {
 	max-height: 100px;
 	overflow-y: hidden;
+}
+
+.number_div {
+	font-size: 12px;
+	font-weight: bold;
+	padding: 0 0 0 5px;
+}
+
+.detail_div{
+	display: flex;
+	background-color: #FFFCE6;
+	width: fit-content;
+	padding: 10px;
+	font-size: 12px;
+	border-radius: 8px;
+}
+
+.ticket_banner{
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-between;
+}
+
+.tick_cross{
+	display: flex;
+	padding: 7px;
+	margin-top: 2px;
+	cursor: pointer;
 }

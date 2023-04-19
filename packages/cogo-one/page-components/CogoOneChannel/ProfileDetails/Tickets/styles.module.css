@@ -8,7 +8,7 @@
 }
 
 .title {
-	font-size: 14px;
+	font-size: 15px;
 	font-weight: 600;
 	color: #4f4f4f;
 }
@@ -16,7 +16,6 @@
 .stats_div {
 	display: flex;
 	justify-content: space-between;
-	min-height: 10%;
 	margin: 10px 5px;
 }
 
@@ -28,6 +27,7 @@
 	background: #fff;
 	border-radius: 6px;
 	box-shadow: 0 0 4px 0 #627fac33;
+	cursor: pointer;
 }
 
 .ticket_count {
@@ -98,4 +98,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+}
+
+.selected_tab{
+	border: 1px solid #d58e8e;
 }

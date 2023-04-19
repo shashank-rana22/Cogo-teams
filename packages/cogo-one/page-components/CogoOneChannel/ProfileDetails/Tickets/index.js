@@ -12,18 +12,19 @@ function Tickets({ zippedTicketsData = {} }) {
 		statsData,
 		createTicket,
 		setFilter,
+		filter = '',
 	} = zippedTicketsData || {};
 
 	const { HighPriority = 0, Unresolved = 0, Closed = 0 } = statsData || {};
 
 	const { items = [] } = ticketData || {};
 	const STATS_MAPPING = [
-		{ title: 'High Priority', value: HighPriority, key: 'high' },
+		{ title: 'High Priority', value: HighPriority, key: 'priority' },
 		{ title: 'Unresolved', value: Unresolved, key: 'unresolved' },
 		{ title: 'Closed', value: Closed, key: 'closed' },
 	];
-
-	const ticketsList = listLoading ? [...Array(3).fill({})] : items;
+	console.log(filter);
+	const ticketsList = listLoading ? [...Array(2).fill({})] : items;
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -34,7 +35,11 @@ function Tickets({ zippedTicketsData = {} }) {
 			<div className={styles.stats_div}>
 				{STATS_MAPPING.map((eachStat, index) => (
 					<div
-						className={cl`${styles.individual_stats} ${index !== 0 ? styles.margin_left : ''}`}
+						className={
+							cl`${styles.individual_stats} 
+							${index !== 0 ? styles.margin_left : ''} 
+							${eachStat?.key === filter ? styles.selected_tab : ''}`
+						}
 						key={eachStat?.key}
 					>
 						{!statsLoading ? (
