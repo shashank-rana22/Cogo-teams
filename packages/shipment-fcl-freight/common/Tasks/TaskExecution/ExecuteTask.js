@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 
-import { UploadBookingNote, UploadContainerArrival } from './CustomTasks';
+import { UploadBookingNote, UploadCargoArrival } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
@@ -40,7 +40,7 @@ function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {
 
 	if (task.task === 'upload_container_arrival_notice') {
 		return (
-			<UploadContainerArrival
+			<UploadCargoArrival
 				pendingTask={task}
 				summary={{
 					...(primary_service || {}),

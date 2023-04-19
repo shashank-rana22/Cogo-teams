@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useContainerArrival = () => {
+const useCargoArrival = () => {
 	const [shipmentDoc, setShipmentDoc] = useState([]);
 
 	const [toggleTab, setToggleTab] = useState(1);
@@ -28,4 +28,4 @@ const useContainerArrival = () => {
 	};
 };
 
-export default useContainerArrival;
+export default useCargoArrival;

@@ -1,13 +1,13 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
 
-import useContainerArrival from '../../../../../hooks/useContainerArrival';
+import useContainerArrival from '../../../../../hooks/useCargoArrival';
 import TaskContainer from '../common/TaskContainer';
 
 import UploadCargoArrivalDocument from './UploadCargoArrivalDocument';
 import UploadCargoArrivalForm from './UploadCargoArrivalForm';
 
-function UploadContainerArrival({ pendingTask, summary, refetch, clearTask }) {
+function UploadCargoArrival({ pendingTask, summary, refetch, clearTask }) {
 	const {
 		savedData,
 		switchToUpload,
@@ -67,4 +67,4 @@ function UploadContainerArrival({ pendingTask, summary, refetch, clearTask }) {
 	);
 }
 
-export default UploadContainerArrival;
+export default UploadCargoArrival;
