@@ -152,9 +152,7 @@ export const testSetColumns = ({
 		accessor : ({ topics = [] }) => (
 			<section className={styles.topics}>
 
-				{topics.length === 0 && '-'}
-
-				{topics.length > 0 && (
+				{topics.length > 0 ? (
 					<Tooltip maxWidth={400} content={startCase(topics[0])} placement="top" key={topics[0]}>
 						<Pill
 							className={styles.topic_pill}
@@ -164,29 +162,19 @@ export const testSetColumns = ({
 							{startCase(topics[0])}
 						</Pill>
 					</Tooltip>
-				)}
+				) : '-'}
 
 				{topics.length > 1 && (
-
 					<Tooltip
 						maxWidth={400}
 						content={(topics.map((topic, index) => ((index >= 1) ? (
-							<Tooltip
-								className={styles.inner_tooltip}
-								maxWidth={800}
-								content={startCase(topic)}
-								placement="top"
-								key={topic}
-
+							<Pill
+								className={styles.topic_pill_sub}
+								size="lg"
+								color="#F3FAFA"
 							>
-								<Pill
-									className={styles.topic_pill}
-									size="lg"
-									color="#F3FAFA"
-								>
-									{startCase(topic)}
-								</Pill>
-							</Tooltip>
+								{startCase(topic)}
+							</Pill>
 						) : null)))}
 						placement="top"
 						interactive
