@@ -2186,6 +2186,12 @@ const saas = {
 			module      : 'cogo-store',
 			feature     : 'cogo-store',
 		},
+		{
+			api         : 'list_cogostore_brands',
+			access_type : 'private',
+			module      : 'cogo-store',
+			feature     : 'cogo-store',
+		},	
 	],
 
 };
