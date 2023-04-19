@@ -7,15 +7,14 @@ const actions = ({
 	status,
 	serviceListItem,
 	addRate,
-	setShowIp = () => {},
+	setShowModal = () => {},
 	setItem = () => {},
-	setAddSellPrice = () => {},
+	activeStakeholder = '',
 }) => {
 	const isSameItem = serviceListItem.id === addRate?.item?.id;
 
-	const onClick = () => {
-		setItem({ serviceListItem, status });
-	};
+	const onClickSetItem = () => setItem({ serviceListItem, status });
+
 	if (
 		status.status === 'quoted_by_service_provider'
 		|| status.status === 'price_recieved'
@@ -24,7 +23,7 @@ const actions = ({
 			<Button
 				themeType="secondary"
 				style={{ marginLeft: 10, height: '24px' }}
-				onClick={() => setAddSellPrice(true)}
+				onClick={() => setShowModal('add_sell_price')}
 			>
 				{addRate && isSameItem ? 'CLOSE' : 'ADD SELL PRICE'}
 			</Button>
@@ -39,36 +38,23 @@ const actions = ({
 				themeType="secondary"
 				style={{ marginLeft: 10, height: '24px' }}
 				onClick={() => {
-					onClick();
-					setAddSellPrice(true);
+					onClickSetItem();
+					setShowModal('add_sell_price');
 				}}
 			>
 				{addRate && isSameItem ? 'CLOSE' : 'REVIEW PRICE'}
 			</Button>
 		);
 	}
-	// FOR SHIPPER
-
-	// if (status.status === 'customer_confirmation_pending' && isShipper) {
-	// 	return (
-	// 		<Button
-	// 			themeType="secondary"
-	// 			style={{ marginLeft: 10, height: '24px' }}
-	// 			onClick={onClick}
-	// 		>
-	// 			{addRate && isSameItem ? 'CLOSE' : 'REVIEW PRICE'}
-	// 		</Button>
-	// 	);
-	// }
 
 	if (
-		status.status === 'cancelled_by_supplier'
+		status.status === 'cancelled_by_supplier' && activeStakeholder === 'service_ops_1'
 	) {
 		return (
 			<Button
 				themeType="secondary"
 				style={{ marginLeft: 10, height: '24px' }}
-				onClick={() => setItem({ serviceListItem, status })}
+				onClick={onClickSetItem}
 			>
 				REALLOCATE
 			</Button>
@@ -76,13 +62,16 @@ const actions = ({
 	}
 
 	if (
-		status.status === 'amendment_requested_by_importer_exporter'
+		status.status === 'amendment_requested_by_importer_exporter' && activeStakeholder === 'booking_agent'
 	) {
 		return (
 			<Button
 				themeType="secondary"
 				style={{ marginLeft: 10, height: '24px' }}
-				onClick={() => setItem({ serviceListItem, status })}
+				onClick={() => {
+					onClickSetItem();
+					setShowModal('add_sell_price');
+				}}
 			>
 				REVIEW COMMENTS
 			</Button>
@@ -98,8 +87,8 @@ const actions = ({
 				themeType="secondary"
 				style={{ marginLeft: 10, height: '24px' }}
 				onClick={() => {
-					onClick();
-					setShowIp(true);
+					onClickSetItem();
+					setShowModal('ip');
 				}}
 			>
 				{ isSameItem ? 'CLOSE' : 'ADD IP'}

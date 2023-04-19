@@ -16,12 +16,13 @@ function Services() {
 		primary_service,
 		isGettingShipment,
 		servicesList,
-		refetchServices,
 		servicesLoading,
 		activeStakeholder,
 	} = useContext(ShipmentDetailContext);
 
 	const { serviceObj, upsellServices } =	helperFuncs(servicesList, possibleServices);
+
+	const serviceCategories = Object.keys(serviceObj);
 
 	const { cancelUpsellDestinationFor, cancelUpsellOriginFor } = upsellTransportation(serviceObj);
 
@@ -29,51 +30,16 @@ function Services() {
 		? (
 			<div className={styles.container}>
 				<div className={styles.services_container}>
-					<div className={styles.trade_services}>
-						{(Object.keys(serviceObj.originServices) || []).map((service) => (
-							<ServiceDetails
-								className={styles.service_details}
-								serviceName={service}
-								servicesData={serviceObj?.originServices[service]}
-								servicesList={servicesList}
-								shipmentData={shipment_data}
-								refetchServices={refetchServices}
-							/>
-						))}
-					</div>
-
-					<div className={styles.trade_services}>
-						{(Object.keys(serviceObj?.mainServices) || []).map((service) => (
-							<ServiceDetails
-								className={styles.service_details}
-								serviceName={service}
-								servicesData={serviceObj?.mainServices[service]}
-								servicesList={servicesList}
-								shipmentData={shipment_data}
-								refetchServices={refetchServices}
-							/>
-
-						))}
-					</div>
-
-					<div className={styles.trade_services}>
-						{(Object.keys(serviceObj?.destinationServices) || []).map((service) => (
-							<ServiceDetails
-								className={styles.service_details}
-								serviceName={service}
-								servicesData={serviceObj?.destinationServices[service]}
-								servicesList={servicesList}
-								shipmentData={shipment_data}
-								refetchServices={refetchServices}
-							/>
-
-						))}
-
-					</div>
+					{serviceCategories.map((serviceCategory) => (
+						<div className={styles.trade_services}>
+							{(Object.keys(serviceObj[serviceCategory])).map((service) => (
+								<ServiceDetails servicesData={serviceObj[serviceCategory][service]} />
+							))}
+						</div>
+					))}
 				</div>
 
-				{
-				activeStakeholder === 'Kam' ? (
+				{['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder) ? (
 					<div className={styles.upselling}>
 						{Object.keys(upsellServices).map((tradeType) => (upsellServices[tradeType]).map((service) => (
 							<AddNewService
@@ -83,11 +49,11 @@ function Services() {
 								primary_service={primary_service}
 								cancelUpsellDestinationFor={cancelUpsellDestinationFor}
 								cancelUpsellOriginFor={cancelUpsellOriginFor}
+								activeStakeholder={activeStakeholder}
 							/>
 						)))}
 					</div>
-				) : null
-			}
+				) : null}
 
 			</div>
 		)

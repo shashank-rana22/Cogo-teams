@@ -1,4 +1,6 @@
 import { Button, Checkbox } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import useGetBusiness from '../../../../../../hooks/useGetBusiness';
 import AsyncGstListController from '../CreateNewBillingAddress/AsyncGstListController';
@@ -16,6 +18,7 @@ function AddressForm({
 	setValue = () => {},
 	companyDetails = {},
 	setCurrentStep = () => {},
+	showComponent = '',
 	onSubmit = () => {},
 	gstNumber,
 	setGstNumber = () => {},
@@ -25,7 +28,19 @@ function AddressForm({
 	source = '',
 	refetch,
 }) {
-	useGetBusiness({ gstNumber, setValue });
+	const data = useGetBusiness({ gstNumber });
+
+	const {
+		addresses = [],
+		trade_name = '',
+		business_name = '',
+	} = data || {};
+
+	useEffect(() => {
+		setValue('name', trade_name || business_name || '');
+		setValue('pincode', (!isEmpty(addresses) && (addresses[0] || {}).pincode) || '');
+		setValue('address', (!isEmpty(addresses) && (addresses[0] || {}).address) || '');
+	}, [setValue, addresses, business_name, trade_name]);
 
 	const handleCancel = () => {
 		if (source === 'create_trade_party') { setCurrentStep('company_details'); }
@@ -51,16 +66,19 @@ function AddressForm({
 			)}
 
 			{isAddressRegisteredUnderGst ? (
-				<Form
-					control={control}
-					useFieldArray={useFieldArray}
-					register={register}
-					handleSubmit={handleSubmit}
-					errors={errors}
-				/>
+				<section className={styles.section}>
+					<Form
+						control={control}
+						useFieldArray={useFieldArray}
+						register={register}
+						handleSubmit={handleSubmit}
+						errors={errors}
+						showComponent={showComponent}
+					/>
+				</section>
 			)
 				: (
-					<>
+					<section className={styles.section}>
 						<h3>Billing Address</h3>
 
 						<AsyncGstListController
@@ -76,10 +94,11 @@ function AddressForm({
 								register={register}
 								handleSubmit={handleSubmit}
 								errors={errors}
+								showComponent={showComponent}
 							/>
 						) : null}
 
-					</>
+					</section>
 				)}
 
 			<div className={styles.button_container}>

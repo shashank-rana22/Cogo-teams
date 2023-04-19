@@ -17,8 +17,9 @@ function Form({
 	useFieldArray,
 	register = () => {},
 	errors,
+	showComponent,
 }) {
-	const formControls = controls();
+	const formControls = controls({ showComponent });
 
 	const { fields, append, remove } = useFieldArray({
 		control,
@@ -29,90 +30,108 @@ function Form({
 		switch (field.type) {
 			case 'async-select':
 				return (
-					<div className={styles.input_container}>
-						<label>{field.label}</label>
-						<AsyncSelectController
-							name={field.name}
-							asyncKey={field.asyncKey}
-							valueKey={field.valueKey}
-							initialCall={false}
-							control={control}
-							size="sm"
-							placeholder={field.placeholder}
-							params={field.params}
-							rules={field.rules}
-						/>
-						{errors[field.name] && <span>{errors[field.name].message}</span>}
-					</div>
+					field.show
+						? (
+							<div className={styles.input_container}>
+								<label>{field.label}</label>
+								<AsyncSelectController
+									name={field.name}
+									asyncKey={field.asyncKey}
+									valueKey={field.valueKey}
+									initialCall={false}
+									control={control}
+									size="sm"
+									placeholder={field.placeholder}
+									params={field.params}
+									rules={field.rules}
+								/>
+								{errors[field.name] && <span>{errors[field.name].message}</span>}
+							</div>
+						) : null
 				);
 			case 'input':
 				return (
-					<div className={styles.input_container}>
-						<label htmlFor={field.name}>{field.label}</label>
-						<InputController
-							name={field.name}
-							control={control}
-							size="sm"
-							placeholder={field.placeholder}
-							rules={field.rules}
-						/>
-						{errors[field.name] && <span>{errors[field.name].message}</span>}
-					</div>
+					field.show
+						? (
+							<div className={styles.input_container}>
+								<label htmlFor={field.name}>{field.label}</label>
+								<InputController
+									name={field.name}
+									control={control}
+									size="sm"
+									placeholder={field.placeholder}
+									rules={field.rules}
+								/>
+								{errors[field.name] && <span>{errors[field.name].message}</span>}
+							</div>
+						) : null
 				);
 			case 'select':
 				return (
-					<div className={styles.input_container}>
-						<label>{field.label}</label>
-						<SelectController
-							name={field.name}
-							control={control}
-							size="sm"
-							options={field.options}
-							placeholder={field.placeholder}
-							rules={field.rules}
-						/>
-						{errors[field.name] && <span>{errors[field.name].message}</span>}
-					</div>
+					field.show
+						? (
+							<div className={styles.input_container}>
+								<label>{field.label}</label>
+								<SelectController
+									name={field.name}
+									control={control}
+									size="sm"
+									options={field.options}
+									placeholder={field.placeholder}
+									rules={field.rules}
+								/>
+								{errors[field.name] && <span>{errors[field.name].message}</span>}
+							</div>
+						) : null
 				);
 			case 'file':
 				return (
-					<div className={styles.input_container}>
-						<label>{field.label}</label>
-						<UploadController
-							name={field.name}
-							control={control}
-							size="sm"
-							rules={field.rules}
-						/>
-						{errors[field.name] && <span>{errors[field.name].message}</span>}
-					</div>
+					field.show
+						? (
+							<div className={styles.input_container}>
+								<label>{field.label}</label>
+								<UploadController
+									name={field.name}
+									control={control}
+									size="sm"
+									rules={field.rules}
+								/>
+								{errors[field.name] && <span>{errors[field.name].message}</span>}
+							</div>
+						) : null
 				);
 			case 'checkbox':
 				return (
-					<div className={styles.sez_container}>
-						<CheckboxController
-							name={field.name}
-							control={control}
-						/>
-						<label>{field.label}</label>
-					</div>
+					field.show
+						? (
+							<div className={` ${styles.input_container} ${styles.is_sez}`}>
+								<CheckboxController
+									name={field.name}
+									control={control}
+								/>
+								<label>{field.label}</label>
+							</div>
+						) : null
 				);
 			case 'text-area':
 				return (
-					<div className={styles.input_container}>
-						<label>{field.label}</label>
-						<TextAreaController
-							name={field.name}
-							control={control}
-							rules={{
-								required: {
-									value: true, message: 'Address is required',
-								},
-							}}
-							rows={4}
-						/>
-						{errors[field.name] && <span>{errors[field.name].message}</span>}
-					</div>
+					field.show
+						? (
+							<div className={styles.input_container}>
+								<label>{field.label}</label>
+								<TextAreaController
+									name={field.name}
+									control={control}
+									rules={{
+										required: {
+											value: true, message: 'Address is required',
+										},
+									}}
+									rows={4}
+								/>
+								{errors[field.name] && <span>{errors[field.name].message}</span>}
+							</div>
+						) : null
 				);
 			default:
 				return null;

@@ -1,8 +1,7 @@
 import { useRouter } from '@cogoport/next';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
-
-import toastApiError from '../utils/toastApiError';
 
 function useGetShipment({ additional_methods }) {
 	const router = useRouter();

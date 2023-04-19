@@ -2,7 +2,7 @@ import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { Documents, Tracking } from '@cogoport/ocean-modules';
-// import { ShipmentChat } from '@cogoport/shipment-chat';
+import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect } from 'react';
@@ -13,28 +13,22 @@ import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Timeline from '../../../common/TimeLine';
 import useGetServices from '../../../hooks/useGetServices';
-import useGetShipment from '../../../hooks/useGetShipment';
 import useGetTimeLine from '../../../hooks/useGetTimeline';
 
 import styles from './styles.module.css';
 
-const shipment_additional_methods = ['main_service',
-	'documents'];
+const services_additional_methods = ['stakeholder', 'service_objects'];
 
-const services_additional_methods = [
-	'stakeholder',
-	'service_objects'];
-
-function Superadmin() {
+function Superadmin({ get, activeStakeholder = '' }) {
 	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('overview');
 
-	const { get } = useGetShipment({ additional_methods: shipment_additional_methods });
 	const { shipment_data, isGettingShipment } = get;
 
 	const { servicesGet } = useGetServices({
-		shipment_id        : shipment_data?.id,
-		additional_methods : services_additional_methods,
+		shipment_data,
+		additional_methods: services_additional_methods,
+		activeStakeholder,
 	});
 
 	const { getTimeline } = useGetTimeLine({ shipment_data });
@@ -43,8 +37,8 @@ function Superadmin() {
 		...get,
 		...servicesGet,
 		...getTimeline,
-		activeStakeholder: 'Superadmin',
-	}), [get, servicesGet, getTimeline]);
+		activeStakeholder,
+	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
 	const handleClick = () => {
 		router.reload();
@@ -87,7 +81,7 @@ function Superadmin() {
 			<div>
 				<div className={styles.top_header}>
 					<ShipmentInfo />
-					{/* <ShipmentChat /> */}
+					<ShipmentChat />
 				</div>
 
 				<div className={styles.header}>

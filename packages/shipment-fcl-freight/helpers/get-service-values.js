@@ -21,8 +21,8 @@ const findValue = (name, trade_type, detail) => {
 };
 
 const getServiceValues = (service, controls, detail) => {
-	let trade_type = service?.isOrigin ? 'export' : 'import';
-	if (service?.isMain) {
+	let trade_type = service?.trade_type;
+	if (service?.is_main) {
 		trade_type = null;
 	}
 	const prefilledValues = {};

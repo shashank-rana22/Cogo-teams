@@ -1,9 +1,8 @@
 import { Toast } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
-
-import toastApiError from '../utils/toastApiError';
 
 const geo = getGeoConstants();
 
@@ -166,6 +165,14 @@ const useUpdateShipmentAdditionalService = ({
 		}
 	};
 
+	const handleAddSellPrice = async (payload) => {
+		try {
+			await handleSubmit(payload);
+		} catch (err) {
+			toastApiError(err);
+		}
+	};
+
 	return {
 		handleShipperConfirm,
 		handleShipperRevision,
@@ -177,6 +184,7 @@ const useUpdateShipmentAdditionalService = ({
 		handleInvoicingParty,
 		updateBillingInfo,
 		cancelAdditionalService,
+		handleAddSellPrice,
 		remarks,
 		setRemarks,
 		loading,
