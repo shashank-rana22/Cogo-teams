@@ -1,6 +1,6 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 
-import List from './List';
+import RfqDetails from './RfqDetails';
 import styles from './styles.module.css';
 
 function Content(props) {
@@ -20,7 +20,7 @@ function Content(props) {
 			>
 				{TAB_MAPPING.map(({ name, title }) => (
 					<TabPanel name={name} title={title}>
-						<List {...props} />
+						<RfqDetails {...props} />
 					</TabPanel>
 				))}
 			</Tabs>
