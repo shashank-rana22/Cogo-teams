@@ -15,14 +15,10 @@ const useGetAudienceOptions = ({
 
 	const { control, handleSubmit, formState: { errors }, setValue, reset, watch } = useForm();
 
-	const entity_options = entity_data.map((entityData) => {
-		const { business_name = '', id = '' } = entityData || {};
-
-		return {
-			label : business_name,
-			value : id,
-		};
-	});
+	const entity_options = entity_data.map(({ business_name = '', id = '' }) => ({
+		label : business_name,
+		value : id,
+	}));
 
 	const watchFunctions = watch('auth_function');
 	const watchPlatform = watch('platform');
