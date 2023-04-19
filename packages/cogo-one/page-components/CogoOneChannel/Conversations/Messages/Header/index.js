@@ -4,7 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import AssigneeAvatar from '../../../../../common/AssigneeAvatar';
-import HeaderName from '../../HeaderName';
+import HeaderName from '../../../../../common/HeaderName';
 
 import Assignes from './Assignes';
 import TagsPopOver from './HeaderFuncs';

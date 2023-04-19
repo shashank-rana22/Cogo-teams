@@ -6,7 +6,7 @@ import Documents from '../page-components/CogoOneChannel/ProfileDetails/Document
 import HelpDesk from '../page-components/CogoOneChannel/ProfileDetails/HelpDesk';
 import OrganizationDetails from '../page-components/CogoOneChannel/ProfileDetails/OrganizationDetails';
 import QuickActions from '../page-components/CogoOneChannel/ProfileDetails/QuickActions';
-import Tickets from '../page-components/CogoOneChannel/ProfileDetails/Tickets/index.js';
+import Tickets from '../page-components/CogoOneChannel/ProfileDetails/Tickets';
 import UserActivities from '../page-components/CogoOneChannel/ProfileDetails/UserActivity';
 
 const COMPONENT_MAPPING = {

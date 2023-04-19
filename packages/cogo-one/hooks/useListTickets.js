@@ -1,7 +1,7 @@
 import { useTicketsRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useListTickets = ({ UserID = '' }) => {
+const useListTickets = ({ UserID = '', activeTab = '' }) => {
 	const [{ loading, data }, trigger] = useTicketsRequest({
 		url     : '/list',
 		method  : 'get',
@@ -22,12 +22,15 @@ const useListTickets = ({ UserID = '' }) => {
 	}, [trigger, UserID]);
 
 	useEffect(() => {
-		fetchTickets();
-	}, [fetchTickets, UserID]);
+		if (activeTab !== 'email' && UserID) {
+			fetchTickets();
+		}
+	}, [fetchTickets, UserID, activeTab]);
 
 	return {
-		ticketData: data,
-		loading,
+		ticketData  : data,
+		listLoading : loading,
+		fetchTickets,
 	};
 };
 export default useListTickets;

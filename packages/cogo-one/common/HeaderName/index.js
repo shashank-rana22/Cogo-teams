@@ -1,8 +1,8 @@
 import { startCase } from '@cogoport/utils';
 
-import UserAvatar from '../../../../common/UserAvatar';
-import { PLATFORM_MAPPING } from '../../../../constants';
-import hideDetails from '../../../../utils/hideDetails';
+import { PLATFORM_MAPPING } from '../../constants';
+import hideDetails from '../../utils/hideDetails';
+import UserAvatar from '../UserAvatar';
 
 import styles from './styles.module.css';
 

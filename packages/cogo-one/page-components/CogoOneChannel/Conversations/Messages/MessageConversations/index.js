@@ -7,16 +7,15 @@ import {
 	IcMRefresh,
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 
 import CustomFileUploader from '../../../../../common/CustomFileUploader';
+import ReceiveDiv from '../../../../../common/ReceiveDiv';
+import SentDiv from '../../../../../common/SentDiv';
 import useGetEmojiList from '../../../../../hooks/useGetEmojis';
 import getFileAttributes from '../../../../../utils/getFileAttributes';
-import RaiseTicket from '../../RaiseTicket';
 
 import EmojisBody from './EmojisBody';
-import ReceiveDiv from './ReceiveDiv';
-import SentDiv from './SentDiv';
 import styles from './styles.module.css';
 import TimeLine from './TimeLine';
 
@@ -53,8 +52,8 @@ function MessageConversations({
 	lastPage = false,
 	messageLoading = false,
 	formattedData = {},
+	setRaiseTicketModal = () => {},
 }) {
-	const [openTicketModal, setOpenTicketModal] = useState({ state: false, data: {} });
 	const messageRef = useRef();
 	const { id = '', channel_type = '', new_user_message_count = 0 } = activeMessageCard;
 
@@ -103,11 +102,11 @@ function MessageConversations({
 
 	const ticketPopoverContent = (data) => {
 		const triggerModal = () => {
-			setOpenTicketModal((p) => {
+			setRaiseTicketModal((p) => {
 				if (p?.state) {
-					return { state: false, data: {} };
+					return { state: false, data: {}, source: null };
 				}
-				return { state: true, data };
+				return { state: true, data: { messageData: data, formattedData }, source: 'message' };
 			});
 		};
 		return (
@@ -281,7 +280,8 @@ function MessageConversations({
 											}
 										}}
 										style={{
-											cursor: (!hasPermissionToEdit || messageLoading) ? 'not-allowed' : 'pointer',
+											cursor:
+											(!hasPermissionToEdit || messageLoading) ? 'not-allowed' : 'pointer',
 										}}
 									>
 										{eachSuggestion}
@@ -409,13 +409,13 @@ function MessageConversations({
 					</div>
 				</div>
 			</div>
-			{openTicketModal?.state && (
+			{/* {openTicketModal?.state && (
 				<RaiseTicket
 					openTicketModal={openTicketModal}
 					setOpenTicketModal={setOpenTicketModal}
 					formattedData={formattedData}
 				/>
-			)}
+			)} */}
 		</>
 	);
 }

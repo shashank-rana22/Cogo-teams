@@ -6,10 +6,10 @@ const useRaiseTicketControls = () => {
 	const loadOptions = useGetAsyncTicketOptions({ ...asyncFieldsTicketTypes() });
 	const controls = [
 		{
-			label : 'Reason for raising a ticket',
-			name  : 'ticket_type',
-			type  : 'select',
-			rules : {
+			label       : 'Reason for raising a ticket',
+			name        : 'ticket_type',
+			controlType : 'select',
+			rules       : {
 				required: 'This is Required',
 			},
 			...(loadOptions || {}),
@@ -17,14 +17,18 @@ const useRaiseTicketControls = () => {
 		{
 			label       : 'Add Invoice ID',
 			name        : 'invoice_id',
-			type        : 'input',
+			controlType : 'input',
 			placeholder : 'Type here...',
 			size        : 'md',
+			type        : 'number',
+			rules       : {
+				validate: (value) => (value < 0 ? 'Cannot be Negative' : true),
+			},
 		},
 		{
 			label       : 'Describe ticket issue',
 			name        : 'description',
-			type        : 'textarea',
+			controlType : 'textarea',
 			placeholder : 'Type here...',
 			rows        : 5,
 		},

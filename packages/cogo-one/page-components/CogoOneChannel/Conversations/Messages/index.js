@@ -25,6 +25,7 @@ function Messages({
 	userId = '',
 	isomniChannelAdmin = false,
 	setActiveMessage = () => {},
+	setRaiseTicketModal = () => {},
 }) {
 	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
@@ -173,6 +174,7 @@ function Messages({
 						closeModal={closeModal}
 						messageLoading={messageLoading}
 						setActiveMessage={setActiveMessage}
+						setRaiseTicketModal={setRaiseTicketModal}
 					/>
 				</div>
 			</div>

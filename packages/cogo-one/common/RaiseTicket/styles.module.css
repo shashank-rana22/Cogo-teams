@@ -22,12 +22,6 @@
 
 .styled_element {
 	padding: 10px 10px 0;
-
-	:global {
-		.ui_chips_container {
-			flex-wrap: wrap;
-		}
-	}
 }
 
 .label {

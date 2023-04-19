@@ -1,105 +1,90 @@
-import { cl } from '@cogoport/components';
+import { cl, Placeholder } from '@cogoport/components';
+import { IcMPlusInCircle } from '@cogoport/icons-react';
 
-import useGetTicketStats from '../../../../hooks/useGetTicketStats';
-import useListTickets from '../../../../hooks/useListTickets';
-import ReceiveDiv from '../../Conversations/Messages/MessageConversations/ReceiveDiv';
-
+import EachTicket from './EachTicket';
 import styles from './styles.module.css';
 
-function Tickets({ formattedMessageData = {}, activeVoiceCard = {}, activeTab = '' }) {
+function Tickets({ zippedTicketsData = {} }) {
+	// const {
+	// 	user_id = '',
+	// 	lead_user_id = '',
+	// } = formattedMessageData || {};
+
+	// const {
+	// 	user_data = {},
+	// } = activeVoiceCard || {};
+
+	// const DATA_MAPPING = {
+	// 	voice: {
+	// 		userId     : user_data?.id,
+	// 		leadUserId : null,
+	// 	},
+	// 	message: {
+	// 		userId     : user_id,
+	// 		leadUserId : lead_user_id,
+	// 	},
+	// };
+	// const { userId, leadUserId } = DATA_MAPPING[activeTab];
+
+	// const {
+	// 	ticketData:{ items = [] } = {},
+	// 	loading,
+	// } = useListTickets({ UserID: userId || leadUserId });
+
+	// const { data = {}, ticketsLoading = false } = useGetTicketStats({ UserID: userId || leadUserId });
+
+	// const { HighPriority = 0, Unresolved = 0, Closed = 0 } = data || {};
+
+	// const createTicket = () => {
+	// 	setRaiseTicketModal({
+	// 		state: true, data: { formattedData: { user_id: userId, lead_user_id: leadUserId }, source: 'tickets' },
+	// 	});
+	// };
 	const {
-		user_id = '',
-		lead_user_id = '',
-	} = formattedMessageData || {};
+		statsLoading,
+		ticketData,
+		listLoading,
+		statsData,
+		createTicket,
+	} = zippedTicketsData || {};
 
-	const {
-		user_data = {},
-	} = activeVoiceCard || {};
+	const { HighPriority = 0, Unresolved = 0, Closed = 0 } = statsData || {};
 
-	const DATA_MAPPING = {
-		voice: {
-			userId     : user_data?.id,
-			leadUserId : null,
-		},
-		message: {
-			userId     : user_id,
-			leadUserId : lead_user_id,
-		},
-	};
-	const { userId, leadUserId } = DATA_MAPPING[activeTab];
-
-	const { data } = useGetTicketStats({ UserID: userId || leadUserId });
-	const {
-		ticketData:{ items = [] } = {},
-		loading,
-	} = useListTickets({ UserID: userId || leadUserId });
-
-	const { HighPriority = 0, Unresolved = 0, Closed = 0 } = data || {};
-
+	const { items = [] } = ticketData || {};
 	const STATS_MAPPING = [
-		{ title: 'High Priority Tickets', value: HighPriority },
-		{ title: 'Unresolved Tickets', value: Unresolved },
-		{ title: 'Closed Tickets', value: Closed },
+		{ title: 'High Priority', value: HighPriority },
+		{ title: 'Unresolved', value: Unresolved },
+		{ title: 'Closed', value: Closed },
 	];
+
+	const ticketsList = listLoading ? [...Array(3).fill({})] : items;
 	return (
 		<div className={styles.container}>
-			<div>
+			<div className={styles.header}>
 				<div className={styles.title}>Tickets Raised</div>
-				<div className={styles.ticket_count}>
-					{STATS_MAPPING.map((eachStat, index) => (
-						<div
-							className={cl`${styles.ticket_count_data} ${index !== 0 ? styles.margin_left : ''}`}
-						>
-							<div className={styles.ticket_count_content}>
-								{eachStat?.value || 0}
-							</div>
-							<div className={styles.ticket_count_content}>
-								{eachStat?.title}
-							</div>
-						</div>
-					))}
-				</div>
-				{items.map((eachTicket) => {
-					const {
-						Data: { InvoiceID = '', Message = '' } = {},
-						CreatedAt = '',
-						Type = '',
-						Description = '',
-						Priority = '',
-						IsUrgent = false,
-						Status = '',
-					} = eachTicket || {};
-					const eachMessage = {
-						message_type : 'text',
-						created_at   : Date.now(CreatedAt),
-						response     : {
-							message: Message,
-						},
-					};
-					return (
-						<div className={styles.ticket_container}>
-							<div className={styles.message_content}>
-								<ReceiveDiv eachMessage={eachMessage} canRaiseTicket={false} />
-								<div className={styles.ticket_details}>
-									<div className={styles.ticket_status}>
-										{/* {startCase(Status)}
-										{startCase(Priority)} */}
-										<div className={styles.ticket_priority}>
-											{Status}
-										</div>
+				<IcMPlusInCircle className={styles.styled_plus} onClick={createTicket} />
+			</div>
 
-										<div className={styles.ticket_priority}>
-											{Priority}
-										</div>
-									</div>
-									<div className={styles.ticket_description}>
-										{Description}
-									</div>
+			<div className={styles.stats_div}>
+				{STATS_MAPPING.map((eachStat, index) => (
+					<div
+						className={cl`${styles.individual_stats} ${index !== 0 ? styles.margin_left : ''}`}
+					>
+						{!statsLoading ? (
+							<>
+								<div className={styles.ticket_count}>
+									{eachStat.value || 0}
 								</div>
-							</div>
-						</div>
-					);
-				})}
+								<div className={styles.lower_title}>
+									{eachStat.title || '-'}
+								</div>
+							</>
+						) : <Placeholder height="50px" width="100%" />}
+					</div>
+				))}
+			</div>
+			<div className={styles.list_container}>
+				{ticketsList?.map((eachTicket) => <EachTicket eachTicket={eachTicket} loading={listLoading} />)}
 			</div>
 		</div>
 	);

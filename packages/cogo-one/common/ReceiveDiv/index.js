@@ -2,7 +2,7 @@ import { cl, Tooltip } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 
-import MessageBody from '../../../../../../common/MessageBody';
+import MessageBody from '../MessageBody';
 
 import styles from './styles.module.css';
 
