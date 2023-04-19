@@ -16,20 +16,18 @@
 }
 
 .lower_background {
-    display: flex;
-    flex-basis: 55%;
-    justify-content: space-between;
-    width: 100%;
-    padding: 20px;
-    margin-top: -20px;
-    background: rgba(249, 249, 249, 0.9);
-    border-radius: 10px;
+	display: flex;
+	flex-basis: 55%;
+	justify-content: space-between;
+	width: 100%;
+	padding: 20px;
+	background: rgb(249 249 249 / 90%);
+	border-radius: 10px;
 
 	@media (max-width: 576px) {
 		flex-direction: column;
 		margin-top: 10px;
 	}
->>>>>>> be1a369b8dcda68b4770796af1609c3c740f9796
 }
 
 .text_area_container {
@@ -103,6 +101,8 @@
 }
 
 .form_container {
+	margin-top: 20px;
+
 	@media (max-width: 576px) {
 		padding-bottom: 20px;
 	}

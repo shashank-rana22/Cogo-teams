@@ -1,7 +1,0 @@
-.sentence_case {
-	text-transform: lowercase;
-}
-
-.sentence_case::first-letter {
-	text-transform: uppercase;
-}

@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const useClearFaqNotifications = ({
@@ -25,7 +26,7 @@ const useClearFaqNotifications = ({
 			setShowNotificationContent(false);
 			Toast.success('Notifications cleared successfully!');
 		} catch (err) {
-			Toast.error(err?.message);
+			if (err.response?.data) { Toast.error(getApiErrorString(err.response?.data)); }
 		}
 	};
 

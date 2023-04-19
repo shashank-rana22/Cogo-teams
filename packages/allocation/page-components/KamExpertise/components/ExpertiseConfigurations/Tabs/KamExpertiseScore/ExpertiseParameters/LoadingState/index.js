@@ -8,15 +8,13 @@ const LoadingState = () => (
 	[1, 2, 3].map(() => (
 		<div className={styles.card_item}>
 
-			<div className={styles.condition_name}>
-				<Placeholder width="200px" height="20px" />
-			</div>
+			<Placeholder width="200px" height="20px" />
 
 			<div className={styles.lower_container}>
 
 				{[1, 2, 3, 4].map((item) => (
 					<div key={item} className={styles.single_control}>
-						<Placeholder width="240px" height="20px" style={{ marginBottom: '8px' }} />
+						<Placeholder width="240px" height="20px" margin="0px 0px 8px 0px" />
 
 						<Placeholder width="80px" height="20px" />
 					</div>

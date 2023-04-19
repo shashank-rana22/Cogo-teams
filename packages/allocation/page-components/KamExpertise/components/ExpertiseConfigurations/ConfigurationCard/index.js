@@ -1,5 +1,7 @@
 import { Pill } from '@cogoport/components';
-import { format, startCase } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 
 import CardItem from './CardItem';
 import styles from './styles.module.css';
@@ -35,7 +37,7 @@ const HEADING_MAPPING = {
 };
 
 function ConfigurationCard(props) {
-	const { version_number, status = '', expertise_details = [], audit_data = {}, total_levels } = props;
+	const { version_number = '', status = '', expertise_details = [], audit_data = {}, total_levels } = props;
 
 	return (
 		<div className={styles.card_container}>
@@ -79,7 +81,11 @@ function ConfigurationCard(props) {
 							{' '}
 							<strong>
 								{audit_data?.updated_at
-									? format(audit_data.updated_at, 'dd-MM-yyyy') : ''}
+									? formatDate({
+										date       : audit_data.updated_at,
+										dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MM-yyyy'],
+										formatType : 'date',
+									}) : ''}
 
 							</strong>
 						</div>

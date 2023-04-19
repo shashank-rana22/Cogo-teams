@@ -4,6 +4,7 @@ const ICON_MAPPING = {
 	customer_expertise      : <IcMAgentManagement />,
 	trade_expertise         : <IcMTradeparties />,
 	commodity_expertise     : <IcMBreakBulkCargoType />,
+	miscellaneous           : <IcMMiscellaneous />,
 	miscellaneous_expertise : <IcMMiscellaneous />,
 };
 

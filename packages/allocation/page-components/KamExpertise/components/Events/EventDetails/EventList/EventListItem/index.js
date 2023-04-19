@@ -23,6 +23,7 @@ function EventListItem({ data, index, setEventListData }) {
 			<div className={styles.top_div}>
 				#
 				{index + 1}
+
 				<IcMEdit
 					style={{ cursor: 'pointer' }}
 					onClick={() => setEventListData({ data, toggleEvent: 'updateEvent' })}
@@ -39,7 +40,7 @@ function EventListItem({ data, index, setEventListData }) {
 				<p className={styles.info_tag}>
 					Event Name :
 					{' '}
-					<b className={styles.margin_left}>{startCase(conditionName || '')}</b>
+					<b className={styles.margin_left}>{conditionName || ''}</b>
 				</p>
 
 				<p className={styles.info_tag}>
@@ -80,7 +81,7 @@ function EventListItem({ data, index, setEventListData }) {
 								size="lg"
 								color="#FEF3E9"
 							>
-								{COMPLETION_MAPPING[data.event_state_on || '']}
+								{COMPLETION_MAPPING[data.event_state_on] || 'Event'}
 							</Pill>
 						</span>
 

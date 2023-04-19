@@ -29,8 +29,7 @@ function ListItem({ item, params: pageParams = {} }) {
 
 	const managerListItemColumns = useGetColumns({ source: 'hr_dashboard', columnsToShow });
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => debounceQuery(searchValue), [searchValue]);
+	useEffect(() => debounceQuery(searchValue), [debounceQuery, searchValue]);
 	return (
 		<div className={styles.overall_baselist}>
 			<div className={styles.list_header}>

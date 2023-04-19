@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 
 import ConfigurationCard from '../ConfigurationCard';
@@ -13,6 +12,7 @@ function CurrentConfigurations(props) {
 		refetch,
 		expertiseRefetch,
 		cardRefetch,
+		scrollDraftRef,
 	} = props;
 
 	const router = useRouter();
@@ -34,6 +34,8 @@ function CurrentConfigurations(props) {
 				refetch={refetch}
 				expertiseRefetch={expertiseRefetch}
 				cardRefetch={cardRefetch}
+				onClickViewAllConfig={onClickViewAllConfig}
+				scrollDraftRef={scrollDraftRef}
 			/>
 
 			{liveAndDraftVersions?.map((item) => (
@@ -42,12 +44,6 @@ function CurrentConfigurations(props) {
 				/>
 			))}
 
-			<Button
-				onClick={onClickViewAllConfig}
-				themeType="secondary"
-			>
-				View All Configurations
-			</Button>
 		</div>
 	);
 }

@@ -1,7 +1,7 @@
 import { CreatableSelect } from '@cogoport/components';
 import { Controller } from 'react-hook-form';
 
-function CreatableSingleSelectController(props) {
+function CreatableSelectController(props) {
 	const {
 		name, control, rules, ...rest
 	} = props;
@@ -24,4 +24,4 @@ function CreatableSingleSelectController(props) {
 	);
 }
 
-export default CreatableSingleSelectController;
+export default CreatableSelectController;

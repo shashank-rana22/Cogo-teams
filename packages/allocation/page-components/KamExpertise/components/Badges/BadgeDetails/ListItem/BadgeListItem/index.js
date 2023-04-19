@@ -1,5 +1,7 @@
-import { Button } from '@cogoport/components';
-import { format, startCase } from '@cogoport/utils';
+import { Button, Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 
 import BadgeCard from './BadgeCard';
 import styles from './styles.module.css';
@@ -10,6 +12,7 @@ function BadgeListItem(props) {
 	const {
 		bronze_details = {}, silver_details = {},
 		gold_details = {}, badge_name = '', description = '', audits = [], created_by = {},
+		badge_condition_name = [],
 	} = data;
 
 	const handleEdit = () => {
@@ -65,13 +68,29 @@ function BadgeListItem(props) {
 								{description}
 							</p>
 						</div>
+
+						<div className={styles.events}>
+							Events :
+							{' '}
+							{
+								badge_condition_name.map((item) => (
+									<Pill color="#cfeaed" key={item?.id}>
+										{item?.condition_name || ''}
+									</Pill>
+								))
+							}
+						</div>
 					</div>
 
 					<div className={styles.modified}>
 						<div style={{ paddingRight: '4px' }}>
 							Last Modified :
 							{' '}
-							{updated_at ? format(updated_at, 'dd MMMM yyyy') : '_'}
+							{updated_at ? formatDate({
+								date       : updated_at,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+								formatType : 'date',
+							}) : '_'}
 						</div>
 
 						<div>

@@ -34,6 +34,10 @@
 	width: 180px;
 	margin-right: 8px;
 
+	:global(.ui_multiselectt_options_container) {
+		height: 120px;
+	}
+
 	@media (max-width: 576px) {
 		flex-basis: 50%;
 	}

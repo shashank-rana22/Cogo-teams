@@ -68,6 +68,7 @@
 
 .input_group {
 	width: 250px;
+	margin: 0 16px 16px 0;
 }
 
 .rule_form_container {
@@ -98,10 +99,6 @@
 	flex-direction: column;
 }
 
-.margin_bottom {
-	margin: 0 16px 16px 0;
-}
-
 .rule_and_attribute {
 	display: flex;
 	margin-bottom: 16px;
@@ -114,4 +111,18 @@
 .btn_container {
 	display: flex;
 	justify-content: flex-end;
+}
+
+.tooltip_text {
+	word-break: break-word;
+}
+
+.location_options_type {
+	font-size: 8px;
+	color: #4f4f4f;
+}
+
+.modified_options {
+	display: flex;
+	flex-direction: column;
 }

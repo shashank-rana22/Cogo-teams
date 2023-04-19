@@ -26,12 +26,7 @@ function AttributePage(props) {
 				<section className={styles.row_container}>
 					{[1, 2, 3, 4, 5, 6].map((item) => (
 						<div key={item} className={styles.attribute_form_group}>
-							<div
-								className={`${styles.input_group}
-													${styles.margin_bottom}`}
-							>
-								<Placeholder height="40px" margin="8px 0 16px 0" />
-							</div>
+							<Placeholder height="40px" width="250px" margin="8px 16px 32px 0" />
 						</div>
 					))}
 
@@ -83,7 +78,14 @@ function AttributePage(props) {
 							<span className={styles.label}>
 								{el.label}
 								{' '}
-								<Tooltip content={description} placement="top">
+								<Tooltip
+									content={(
+										<div className={styles.tooltip_text}>
+											{description}
+										</div>
+									)}
+									placement="top"
+								>
 									<IcMInfo
 										width={14}
 										height={14}
@@ -94,7 +96,7 @@ function AttributePage(props) {
 							</span>
 
 							<div
-								className={`${styles.input_group} ${styles.margin_bottom}`}
+								className={styles.input_group}
 							>
 								<Element
 									{...el}

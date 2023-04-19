@@ -1,5 +1,7 @@
 import { Button } from '@cogoport/components';
-import { isEmpty, format } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { isEmpty } from '@cogoport/utils';
 
 import { getFieldController } from '../../../../../common/Form/getFieldController';
 import useCreateMasterConfiguration from '../../../hooks/useCreateMasterConfiguration';
@@ -48,7 +50,11 @@ function CreateMastery(props) {
 							>
 								Last Modified :
 								{' '}
-								{updated_at ? format(updated_at, 'dd MMMM yyyy') : '_'}
+								{updated_at ? formatDate({
+									date       : updated_at,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+									formatType : 'date',
+								}) : '_'}
 							</p>
 
 							<p className={styles.text_styles}>
@@ -98,7 +104,7 @@ function CreateMastery(props) {
 					})}
 
 					<div className={styles.lower_background}>
-						<div style={{ flexBasis: '29%' }}>
+						<div style={{ width: '29%' }}>
 							<p style={{ color: '#4f4f4f' }}>Badge PNG</p>
 
 							<div className={styles.uploader}>
@@ -121,7 +127,7 @@ function CreateMastery(props) {
 							<div>
 								{watch_image_input ? (
 									<div className={styles.preview}>
-										<img src={watch_image_input} alt="preview_image" />
+										<img src={watch_image_input.finalUrl} alt="preview_image" />
 									</div>
 								) : null}
 

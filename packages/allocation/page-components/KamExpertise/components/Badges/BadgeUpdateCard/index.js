@@ -28,7 +28,7 @@ function BadgeUpdateCard(props) {
 		Gold   : gold_details,
 	};
 
-	const watch_image_value = watch(`${medalType}_img_value`);
+	const watch_image_value = watch(`${medalType}_img_value`)?.finalUrl;
 
 	return (
 		<div className={`${styles.card_container} ${isLastItem ? styles.last_item : ''}`}>
@@ -89,24 +89,21 @@ function BadgeUpdateCard(props) {
 
 				<div>
 					{watch_image_value
-						? (
+						&& (
 							<div className={styles.preview}>
 								<img src={watch_image_value} alt="preview_image" />
 							</div>
-						)
-						: null}
+						)}
 
 					{!isEmpty(badgeItemData) && !watch_image_value
-						? (
+						&& (
 							<div className={styles.preview}>
 								<img
 									src={MEDAL_IMAGE_MAPPING[medalType]?.image_url}
-									alt="badge img preview"
+									alt="badge-img-preview"
 								/>
 							</div>
-						)
-						: null}
-
+						)}
 				</div>
 			</div>
 

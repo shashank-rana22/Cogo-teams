@@ -82,8 +82,8 @@ function CreateEvent(props) {
 												key={el.name}
 												control={control}
 												id={`${el.name}_input`}
-												disabled={!createEventMode || el.disabled}
 												{...el}
+												disabled={!createEventMode || el.disabled}
 
 											/>
 										</div>

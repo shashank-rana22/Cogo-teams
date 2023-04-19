@@ -22,7 +22,7 @@ function Header(props) {
 		<div className={styles.header_container}>
 			<div className={styles.filter_container}>
 				<AsyncSelect
-					placeholder="Condition"
+					placeholder="Event"
 					size="sm"
 					value={expertise}
 					onChange={(value) => setExpertise(value)}
@@ -62,6 +62,7 @@ function Header(props) {
 					themeType="primary"
 					size="md"
 					className={styles.button_badge}
+					disabled={loading}
 					onClick={() => {
 						setBadgeItemData({});
 						setToggleScreen('create_badge');

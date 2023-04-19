@@ -1,6 +1,6 @@
 .container {
 	display: flex;
-	margin-top: 20px;
+	margin-top: 8px;
 }
 
 .search {
@@ -21,4 +21,10 @@
 .tab_group {
 	width: fit-content;
 	margin-top: 12px;
+
+	:global {
+		.ui_tab_list_container {
+			align-items: inherit;
+		}
+	}
 }

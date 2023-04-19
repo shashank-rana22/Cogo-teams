@@ -93,11 +93,16 @@ function KamData(props) {
 
 			{kamLevel && (
 				<>
-					<KamOverview
-						kamLevel={kamLevel}
-						overviewList={overviewList}
-						overviewLoading={overviewLoading}
-					/>
+					<div className={styles.container}>
+						<div className={styles.header}>
+							{`KAM ${kamLevel} Overview`}
+						</div>
+
+						<KamOverview
+							overviewList={overviewList}
+							overviewLoading={overviewLoading}
+						/>
+					</div>
 
 					<div className={styles.leaderboard_container}>
 						<BadgeFilterHeader

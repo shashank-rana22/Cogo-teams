@@ -1,10 +1,6 @@
 .list {
 	padding: 8px 12px;
 	margin: 8px 12px;
-
-	&.list_3 {
-		color: red !important;
-	}
 }
 
 .modal_container {
@@ -18,4 +14,9 @@
 .modal_body {
 	padding: 0 24px;
 	margin-top: 24px;
+}
+
+.flex_container {
+	display: flex;
+	justify-content: space-between;
 }

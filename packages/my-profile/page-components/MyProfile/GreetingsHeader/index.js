@@ -46,7 +46,7 @@ function Greetings({
 
 	const { badge_configuration = [] } = groupedBadgesGot || {};
 
-	const mastery_element = badge_configuration.filter((item) => item.status === 'profile')?.[0];
+	const mastery_element = badge_configuration.filter((item) => item.status === 'profile')?.[0] || {};
 
 	const { name: locationName = '' } = lowest_geo_location || {};
 
@@ -103,7 +103,7 @@ function Greetings({
 				&& (
 					<div className={styles.preview_badge}>
 						<img
-							src={mastery_element?.image_url}
+							src={mastery_element.image_url}
 							alt="current badge"
 							height="40px"
 						/>

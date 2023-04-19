@@ -5,15 +5,15 @@ import { useState } from 'react';
 import EmptyState from '../../../../../../common/EmptyState';
 import FieldArray from '../../../../../../common/Form/FieldArray';
 import { getFieldController } from '../../../../../../common/Form/getFieldController';
-import CONTROL_MAPPING from '../../../../configurations/add-condition-controls-mapping';
 import getControls from '../../../../configurations/get-add-conditions-controls';
+import CONTROL_MAPPING from '../../../../constants/add-condition-controls-mapping';
 import EXPERTISE_CARDS_COLUMNS_MAPPING from '../../../../constants/expertise-cards-columns-mapping';
 import ICON_MAPPING from '../../../../constants/icon-mapping';
 import useCreateAllocationKamExpertiseEventScoring from '../../../../hooks/useCreateAllocationKamExpertiseEventScoring';
+import Header from '../Header';
 import LoadingState from '../LoadingState';
 
 import ExpertiseParameters from './ExpertiseParameters';
-import Header from './Header';
 import styles from './styles.module.css';
 
 const titleSection = (expertiseItem = {}) => (
@@ -179,11 +179,9 @@ function KamExpertiseScoreConfig({
 									})}
 								</section>
 							</div>
-
 						</Modal.Body>
 
 						<Modal.Footer>
-
 							<Button
 								size="md"
 								type="submit"

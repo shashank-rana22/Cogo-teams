@@ -1,6 +1,7 @@
-import { Button } from '@cogoport/components';
+import { Button, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRouter } from '@cogoport/next';
-import { format } from '@cogoport/utils';
 
 import useGetKamExpertiseCurrentConfig from '../../../hooks/useGetKamExpertiseCurrentConfig';
 
@@ -9,7 +10,7 @@ import styles from './styles.module.css';
 function Header() {
 	const router = useRouter();
 
-	const { list = [] } = useGetKamExpertiseCurrentConfig({ type: 'live' });
+	const { list = [], configCardLoading : loading = false } = useGetKamExpertiseCurrentConfig({ type: 'live' });
 
 	const liveVersionList = list?.[0] || {};
 
@@ -21,23 +22,42 @@ function Header() {
 			<div className={styles.left_container}>
 				<div className={styles.config}>
 					Current Configuration :
-					{' '}
-					<b>{version_number ? `Version ${version_number}` : ''}</b>
+					{loading
+						? <Placeholder height="20px" width="100px" margin="0 0 0 8px" />
+						: (
+							<div className={styles.label}>
+								Version
+								{' '}
+								{version_number || ''}
+							</div>
+						)}
 				</div>
 
 				<div className={styles.audits_data}>
-					<div style={{ marginRight: '16px' }}>
+					<div className={styles.published_data}>
 						Published on :
-						{' '}
-						<b>
-							{updated_at ? format(updated_at, 'dd MMM yyyy') : ''}
-						</b>
+						{loading
+							? <Placeholder height="20px" width="80px" margin="0 0 0 8px" />
+							: (
+								<div className={styles.label}>
+									{(updated_at && formatDate({
+										date       : updated_at,
+										dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+										formatType : 'date',
+									})) || ''}
+								</div>
+							)}
 					</div>
 
-					<div>
+					<div className={styles.name_data}>
 						Published by :
-						{' '}
-						<b>{name}</b>
+						{loading
+							? <Placeholder height="20px" width="200px" margin="0 0 0 8px" />
+							: (
+								<div className={styles.label}>
+									{name || ''}
+								</div>
+							)}
 					</div>
 				</div>
 			</div>

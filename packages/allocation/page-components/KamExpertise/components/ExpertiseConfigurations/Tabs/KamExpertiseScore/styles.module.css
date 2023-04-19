@@ -2,10 +2,6 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-
-	@media (max-width: 576px) {
-		padding-top: 50px;
-	}
 }
 
 .icon_container {
@@ -46,6 +42,10 @@
 
 		.ui_collapse_icon {
 			margin-top: 38px;
+		}
+
+		.ui_collapse_main > div {
+			margin-bottom: 10px;
 		}
 	}
 }

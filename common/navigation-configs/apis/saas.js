@@ -1171,6 +1171,16 @@ const saas = {
 			service_name : 'cogopoint',
 		},
 		{
+			api          : 'list_cogopoint_milestones',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'get_cogopoint_user_profile',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
 			api          : 'get_cogopoint_history_detail',
 			access_type  : 'private',
 			service_name : 'cogopoint',
@@ -1182,6 +1192,16 @@ const saas = {
 		},
 		{
 			api          : 'list_user_cogopoint_histories',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogopoint_earnables',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogopoint_ledgers',
 			access_type  : 'private',
 			service_name : 'cogopoint',
 		},
@@ -1952,7 +1972,6 @@ const saas = {
 			module      : 'trader-eligibility-check',
 			feature     : 'trader-eligibility-check',
 		},
-
 	],
 	app_saas_order_history: [
 		{
@@ -1966,6 +1985,206 @@ const saas = {
 			access_type : 'private',
 			module      : 'order-history',
 			feature     : 'order-history',
+		},
+	],
+	app_saas_import_export_doc: [
+		{
+			api          : 'saas_get_user_quota_usage',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'get_saas_bill_status',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api         : 'post_saas_trade_engine_documents_draft',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
+			api         : 'get_saas_bill_product_codes',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
+			api         : 'get_saas_trade_engine_service_rates',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
+			api         : 'post_saas_payment',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
+			api         : 'get_saas_trade_engine',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
+			api         : 'post_saas_trade_engine',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
+			api         : 'get_saas_trade_engine_verify_six_digit',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
+			api         : 'post_saas_trade_engine_hs_engine',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
+			api         : 'get_saas_trade_engine_pdf',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
+			api         : 'get_saas_product_category_list',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_product_list',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_hs_code_section',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_hs_code_heading',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_hs_code',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_hs_code_search',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_hs_code_countries',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+	],
+
+	app_saas_cogostore: [
+		{
+			api         : 'list_cogostore_voucher_brands',
+			access_type : 'private',
+			module      : 'cogo-store',
+			feature     : 'cogo-store',
+			// service_name : 'cogopoint',
+		},
+		{
+			api         : 'create_cogostore_cart_item',
+			access_type : 'private',
+			module      : 'cogo-store',
+			feature     : 'cogo-store',
+			// service_name : 'cogopoint',
+		},
+		{
+			api         : 'list_cogostore_products',
+			access_type : 'private',
+			module      : 'cogo-store',
+			feature     : 'cogo-store',
+			// service_name : 'cogopoint',
+		},
+		{
+			api         : 'get_cogostore_product',
+			access_type : 'private',
+			module      : 'cogo-store',
+			feature     : 'cogo-store',
+			// service_name : 'cogopoint',
+		},
+		{
+			api         : 'list_cogostore_product_categories',
+			access_type : 'private',
+			module      : 'cogo-store',
+			feature     : 'cogo-store',
+			// service_name : 'cogopoint',
+		},
+		{
+			api         : 'get_cogostore_cart',
+			access_type : 'private',
+			module      : 'cogo-store',
+			feature     : 'cogo-store',
+		},
+		{
+			api         : 'update_cogostore_cart_items',
+			access_type : 'private',
+			module      : 'cogo-store',
+			feature     : 'cogo-store',
+		},
+		{
+			api         : 'update_cogostore_cart_item',
+			access_type : 'private',
+			module      : 'cogo-store',
+			feature     : 'cogo-store',
+		},
+		{
+			api         : 'book_cogostore_cart',
+			access_type : 'private',
+			module      : 'cogo-store',
+			feature     : 'cogo-store',
+		},
+		{
+			api         : 'list_cogostore_orders',
+			access_type : 'private',
+			module      : 'cogo-store',
+			feature     : 'cogo-store',
+		},
+		{
+			api         : 'get_cogostore_order',
+			access_type : 'private',
+			module      : 'cogo-store',
+			feature     : 'cogo-store',
+		},
+		{
+			api         : 'list_cogostore_banners',
+			access_type : 'private',
+			module      : 'cogo-store',
+			feature     : 'cogo-store',
+		},
+		{
+			api         : 'send_cogostore_communication',
+			access_type : 'private',
+			module      : 'cogo-store',
+			feature     : 'cogo-store',
+		},
+		{
+			api         : 'get_cogostore_filters',
+			access_type : 'private',
+			module      : 'cogo-store',
+			feature     : 'cogo-store',
 		},
 	],
 

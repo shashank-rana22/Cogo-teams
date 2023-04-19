@@ -3,20 +3,7 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
-const expertiseTypes = {
-	minimum_transacting_accounts: {
-		expertise_type       : 'transacting_accounts',
-		threshold_score_type : 'minimum_transacting_accounts',
-	},
-	retained_account_count: {
-		expertise_type       : 'transacting_accounts',
-		threshold_score_type : 'retained_account_count',
-	},
-	retained_account_min_duration: {
-		expertise_type       : 'transacting_accounts',
-		threshold_score_type : 'retained_account_min_duration',
-	},
-};
+import Transacting_Accounts_Threshold_Type from '../constants/transacting-accounts-threshold-type';
 
 function useCreateKamLevel(props) {
 	const { dataLength = '', setCreateKam, refetch, cardRefetch } = props;
@@ -39,9 +26,9 @@ function useCreateKamLevel(props) {
 			const threshold_score = Number(formValues[key]);
 			let threshold_score_type = 'score';
 
-			if (expertiseTypes[key]) {
-				expertise_type = expertiseTypes[key].expertise_type;
-				threshold_score_type = expertiseTypes[key].threshold_score_type;
+			if (Transacting_Accounts_Threshold_Type[key]) {
+				expertise_type = 'transacting_accounts';
+				threshold_score_type = Transacting_Accounts_Threshold_Type[key].threshold_score_type;
 			}
 
 			configDetails.push({

@@ -1,5 +1,6 @@
 import { Pagination, Pill, Button, Placeholder } from '@cogoport/components';
-import { format, isEmpty, startCase } from '@cogoport/utils';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import useListForms from '../../../../hooks/useListForms';
 
@@ -11,6 +12,7 @@ function Forms({
 	setOpenCreateForm = () => {},
 	openCreateForm = false,
 	setFormStage = () => {},
+	activationStatus = 'add',
 	setFormId = () => {},
 }) {
 	const openOldForm = (Id) => {
@@ -39,12 +41,28 @@ function Forms({
 	};
 
 	return (isEmpty(formList) && !loading
-		? <EmptyState setFormStage={setFormStage} setOpenCreateForm={setOpenCreateForm} /> : (
+		? (
+			<EmptyState
+				setFormStage={setFormStage}
+				setOpenCreateForm={setOpenCreateForm}
+				activationStatus={activationStatus}
+			/>
+		) : (
 			<div className={styles.container}>
 				<div className={styles.form_header}>
-					<div className={styles.form_cat}>{`${startCase(department)}: ${startCase(designation)}`}</div>
+					<div className={styles.form_cat}>
+						{`${startCase(department || '---')}: 
+					${startCase(designation || '---')}`}
+
+					</div>
 					{!openCreateForm && !!designation && (
-						<Button themeType="primary" onClick={() => showForm()}>Create New</Button>
+						<Button
+							themeType="primary"
+							onClick={() => showForm()}
+							disabled={activationStatus === 'edit'}
+						>
+							Create New
+						</Button>
 					)}
 				</div>
 
@@ -70,11 +88,19 @@ function Forms({
 								<div className={styles.published}>
 									<p className={styles.label}>Published On</p>
 									<div className={styles.value}>
-										{format(created_at, 'dd MMM yyyy')}
+										{formatDate({
+											date       : created_at,
+											formatType : 'date',
+											dateFormat : 'dd MMM yyyy',
+										})}
 										{' '}
 										<span>
 											{' '}
-											{format(created_at, 'hh:mm a')}
+											{formatDate({
+												date       : created_at,
+												formatType : 'time',
+												timeFormat : 'HH:mm aaa',
+											})}
 										</span>
 									</div>
 								</div>
@@ -88,13 +114,19 @@ function Forms({
 									<p className={styles.label}>Status</p>
 									<div className={styles.value}>
 										<Pill color={status === 'active' ? 'green' : 'red'}>
-											{startCase(status)}
+											{startCase(status || '---')}
 										</Pill>
 									</div>
 								</div>
 
 								<div className={styles.action}>
-									<Button themeType="tertiary" onClick={() => openOldForm(id)}>Use</Button>
+									<Button
+										themeType="tertiary"
+										onClick={() => openOldForm(id)}
+										disabled={activationStatus === 'edit'}
+									>
+										Use
+									</Button>
 								</div>
 							</div>
 						);

@@ -31,3 +31,13 @@
 	font-size: 16px;
 	text-align: center;
 }
+
+.container {
+	padding-top: 20px;
+	border-top: 1px solid #bdbdbd;
+}
+
+.header {
+	font-size: 20px;
+	font-weight: 700;
+}

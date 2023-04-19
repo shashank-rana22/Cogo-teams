@@ -1,7 +1,6 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	margin-left: 12px;
 }
 
 .question_heading {
@@ -14,14 +13,12 @@
 
 .answer_item {
 	margin-bottom: 20px;
-	margin-left: 8px;
 }
 
 .answer_header {
 	display: flex;
 	align-items: center;
 	width: 50%;
-	margin-left: 32px;
 }
 
 .question_number {
@@ -36,7 +33,7 @@
 .percentage_bar {
 	height: 8px;
 	margin-right: 12px;
-	background: #f68b21;
+	background: #bdbdbd;
 	border-radius: 8px;
 	transition: width 0.2s ease-in;
 }
@@ -66,7 +63,6 @@
 }
 
 .answer_text {
-	margin-left: 30px;
 	font-size: 14px;
 	color: #221f20;
 }
@@ -109,4 +105,19 @@
 	margin-bottom: 8px;
 	background-color: #fff;
 	border-radius: 4px;
+}
+
+.main_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.explanation {
+	width: 40%;
+	max-height: 200px;
+	padding: 12px;
+	overflow: auto;
+	background: #fff;
+	border-radius: 6px;
 }

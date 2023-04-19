@@ -38,6 +38,8 @@ function MyProfile() {
 		errors,
 		handleSubmit = () => {},
 		getValues,
+		hideOrganizationHierarchy,
+		patternError,
 	} = useChangePassword({
 		refetch,
 		personDetails : detailsData,
@@ -108,12 +110,17 @@ function MyProfile() {
 
 				</div>
 
-				<div>
-					<div className={styles.organization_container}>
-						<div className={styles.organization}>ORGANIZATION HIERARCHY</div>
-						<Organization personDetails={detailsData} detailsLoading={loading} />
-					</div>
-				</div>
+				{!hideOrganizationHierarchy
+					? (
+						<div>
+							<div className={styles.organization_container}>
+								<div className={styles.organization}>ORGANIZATION HIERARCHY</div>
+
+								<Organization personDetails={detailsData} detailsLoading={loading} />
+							</div>
+						</div>
+					)
+					: null}
 			</div>
 			<Modal
 				show={changePasswordModal}
@@ -126,6 +133,7 @@ function MyProfile() {
 					control={control}
 					errors={errors}
 					password={password}
+					patternError={patternError}
 
 				/>
 				<Modal.Footer>

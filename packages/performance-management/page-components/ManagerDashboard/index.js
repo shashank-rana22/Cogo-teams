@@ -1,71 +1,27 @@
-import { Toast, Select, Button } from '@cogoport/components';
+import { TabPanel, Tabs, Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import { startCase } from '@cogoport/utils';
+import { useState } from 'react';
 
-import EmptyState from '../../common/EmptyState';
-import PerformanceChart from '../../common/PerformanceChart';
-import useGetMonthStats from '../../hooks/useGetMonthStats';
-import getMonthControls from '../../utils/monthControls';
+import tabPanelComponentMapping from '../../constants/tab-panel-component-mapping';
 
 import styles from './styles.module.css';
-import TeamMembersList from './TeamMembersList';
 
 function ManagerDashboard() {
-	const { data = {}, loading = false, params, setParams, setPage } = useGetMonthStats();
-
-	const { list = [], pagination_data = {}, is_manager = true } = data;
-	const { total_count = '' } = pagination_data;
-
-	const monthControls = getMonthControls(params?.Year, params?.Month);
-
 	const router = useRouter();
-
-	const setFilter = (val, type) => {
-		setParams({ ...params, [type]: val || undefined, Page: 1 });
-	};
+	const [activeTab, setActiveTab] = useState('past_stats');
+	const [modal, setModal] = useState(''); // for update,logs,create,upload modals
 
 	const handleClick = () => {
 		router.push('/performance-management/manager-dashboard/feedback-management');
 	};
 
-	if (!is_manager) {
-		Toast.error('No Account Found In Your Team, Kindly Visit User Dashboard for Info Relevant to your accounts');
-		return (
-			<div className={styles.no_manager}>
-				<EmptyState
-					height="60%"
-					width="50%"
-					emptyText="No Account Found In Your Team"
-				/>
-			</div>
-		);
-	}
+	const tabPanels = tabPanelComponentMapping.manager_dashboard;
 
 	return (
-		<div>
-			<p className={styles.header_text}>
-				Manager Dashboard
-			</p>
-
-			<div className={styles.page_actions}>
-				<div className={styles.filters}>
-					{monthControls.map((cntrl) => {
-						const value = startCase(cntrl.name);
-						if (['year', 'month'].includes(cntrl.name)) {
-							return (
-								<Select
-									{...cntrl}
-									value={params[value]}
-									onChange={(val) => setFilter(val, value)}
-									placeholder={`Select ${value}`}
-									style={{ marginRight: '8px' }}
-									options={cntrl.options}
-								/>
-							);
-						}
-						return null;
-					})}
-
+		<>
+			<div className={styles.header}>
+				<div className={styles.header_text}>
+					Manager Dashboard
 				</div>
 
 				<Button
@@ -79,29 +35,30 @@ function ManagerDashboard() {
 				</Button>
 			</div>
 
-			<div className={styles.stats_section}>
-				<PerformanceChart params={params} />
+			<div className={styles.tabs}>
+				<Tabs
+					activeTab={activeTab}
+					themeType="primary"
+					onChange={setActiveTab}
+					fullWidth
+				>
+					{tabPanels.map((panel) => {
+						const { Component } = panel;
+						return (
+							<TabPanel name={panel.name} title={panel.title}>
+								<Component
+									key={panel.key}
+									modal={modal}
+									setModal={setModal}
+									logType={activeTab}
+									source="manager_dashboard"
+								/>
+							</TabPanel>
+						);
+					})}
+				</Tabs>
 			</div>
-
-			<div className={styles.list_section}>
-				<div className={styles.list_header}>
-					<p className={styles.list_title}>
-						Team Members Feedback List
-					</p>
-				</div>
-
-				<div className={styles.table_section}>
-					<TeamMembersList
-						list={list}
-						loading={loading}
-						page_limit={params.page_limit}
-						total_count={total_count}
-						pagination={params.page}
-						setPagination={setPage}
-					/>
-				</div>
-			</div>
-		</div>
+		</>
 	);
 }
 

@@ -41,8 +41,8 @@ function useCreateNewEvent(props) {
 			try {
 				const payload = {
 					expertise_type : snakeCase(expertise_type || '') || undefined,
-					group_name     : snakeCase(group_name || '') || undefined,
-					condition_name : snakeCase(condition_name || '') || undefined,
+					group_name     : group_name || undefined,
+					condition_name : condition_name || undefined,
 					event_state_on,
 					attributes     : payloadAttribute,
 					description,

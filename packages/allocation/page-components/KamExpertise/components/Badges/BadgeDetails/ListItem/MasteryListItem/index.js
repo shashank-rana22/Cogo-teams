@@ -1,9 +1,10 @@
 import { Pill, Button } from '@cogoport/components';
-import { format } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import styles from './styles.module.css';
 
-function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData }) {
+function MasteryListItem({ data = {}, index, setToggleScreen = () => {}, setMasteryItemData = () => {} }) {
 	const {
 		badge_name = '_', description = '_',
 		audits = [], created_by = {},
@@ -52,7 +53,11 @@ function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData
 						<div>
 							Last Modified :
 							{' '}
-							{updated_at ? format(updated_at, 'dd MMMM yy') : '_'}
+							{updated_at ? formatDate({
+								date       : updated_at,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+								formatType : 'date',
+							}) : '_'}
 						</div>
 
 						<div>
@@ -69,9 +74,9 @@ function MasteryListItem({ data = {}, index, setToggleScreen, setMasteryItemData
 
 						<span>Mastery in</span>
 
-						{mastery_badges_detail?.map((item) => (
-							<div className={styles.pill}>
-								<Pill color="#edd7a9">{item?.badge_name}</Pill>
+						{(mastery_badges_detail || []).map((item) => (
+							<div key={item?.id} className={styles.pill}>
+								<Pill color="#ced1ed">{item?.badge_name}</Pill>
 							</div>
 						))}
 					</div>

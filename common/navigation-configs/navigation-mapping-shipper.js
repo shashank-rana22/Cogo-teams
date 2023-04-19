@@ -91,15 +91,6 @@ const navigationMappingShipper = {
 				possible_apis : app_apis.saas_premium_services,
 			},
 			{
-				key           : 'saas_premium_services-order_history',
-				title         : 'Order History',
-				href          : '/saas/premium-services/order-history',
-				as            : '/saas/premium-services/order-history',
-				icon          : 'nav-transaction-history',
-				main_apis     : [],
-				possible_apis : app_apis.saas_order_history,
-			},
-			{
 				key           : 'saas_premium_services-trader_eligibility_check',
 				title         : 'Trader Eligibility Check',
 				href          : '/saas/premium-services/trader-eligibility-check',
@@ -107,6 +98,25 @@ const navigationMappingShipper = {
 				icon          : 'nav-trade-partner',
 				main_apis     : [],
 				possible_apis : app_apis.saas_trader_eligibility_check,
+			},
+			{
+				key           : 'saas_premium_services-import_export_docs',
+				title         : 'Import/Export Documents',
+				type          : 'link',
+				icon          : 'nav-trade-payment',
+				href          : '/saas/premium-services/import-export-doc',
+				as            : '/saas/premium-services/import-export-doc',
+				main_apis     : [],
+				possible_apis : app_apis.saas_import_export_doc,
+			},
+			{
+				key           : 'saas_premium_services-order_history',
+				title         : 'Order History',
+				href          : '/saas/premium-services/order-history',
+				as            : '/saas/premium-services/order-history',
+				icon          : 'nav-transaction-history',
+				main_apis     : [],
+				possible_apis : app_apis.saas_order_history,
 			},
 		],
 	},
@@ -362,7 +372,7 @@ const navigationMappingShipper = {
 
 	saas_cogo_subscription: {
 		key         : 'saas_cogo_subscription',
-		title       : 'Subscriptions',
+		title       : 'Membership Plans',
 		type        : 'link',
 		icon        : 'nav-subscriptions',
 		isSubNavs   : true,
@@ -372,7 +382,7 @@ const navigationMappingShipper = {
 		options     : [
 			{
 				key           : 'saas_cogo_subscription-manage',
-				title         : 'Manage Subscription',
+				title         : 'Manage Your Plan',
 				type          : 'link',
 				icon          : 'nav-documents',
 				href          : '/saas/cogo-subscriptions/manage-subscription',
@@ -475,19 +485,34 @@ const navigationMappingShipper = {
 		possible_apis : app_apis.app_pricing,
 		module_type   : 'dashboards',
 	},
-	// saas_cogopoint: {
-	// 	key           : 'saas_cogopoint',
-	// 	title         : 'Cogopoints',
-	// 	href          : '/saas/cogopoint',
-	// 	as            : '/saas/cogopoint',
-	// 	type          : 'link',
-	// 	line          : true,
-	// 	icon          : 'nav-payments',
-	// 	main_apis     : [],
-	// 	possible_apis : app_apis.saas_cogopoint,
-	// 	module_type   : 'dashboards',
-	// 	onlyMobile    : 'true',
-	// },
+	saas_cogopoint: {
+		key           : 'saas_cogopoint',
+		title         : 'Cogopoints',
+		href          : '/saas/cogopoint',
+		as            : '/saas/cogopoint',
+		type          : 'link',
+		line          : true,
+		icon          : 'nav-payments',
+		main_apis     : [],
+		possible_apis : app_apis.saas_cogopoint,
+		module_type   : 'dashboards',
+		showInNav     : false,
+
+	},
+
+	saas_cogostore: {
+		key           : 'saas_cogostore',
+		title         : 'cogo store',
+		href          : '/saas/cogo-store',
+		as            : '/saas/cogo-store',
+		type          : 'link',
+		line          : true,
+		showInNav: true,
+		icon          : 'nav-payments',
+		main_apis     : [],
+		possible_apis : app_apis.saas_cogostore,
+		module_type   : 'dashboards',
+	},
 
 };
 export default navigationMappingShipper;

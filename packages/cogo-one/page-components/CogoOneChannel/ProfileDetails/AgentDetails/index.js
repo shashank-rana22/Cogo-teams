@@ -10,6 +10,7 @@ import useGetUser from '../../../../hooks/useGetUser';
 import hideDetails from '../../../../utils/hideDetails';
 
 import ConversationContainer from './ConversationContainer';
+import ExecutiveSummary from './ExecutiveSummary';
 import styles from './styles.module.css';
 import VoiceCallComponent from './VoiceCallComponent';
 
@@ -21,6 +22,11 @@ function AgentDetails({
 	customerId = '',
 	updateLeaduser = () => {},
 	setModalType = () => {},
+	setActiveMessage = () => {},
+	activeRoomLoading,
+	activeSelect,
+	setActiveSelect = () => {},
+	setShowMore = () => {},
 }) {
 	const { user_details = null, user_type, id = '' } = activeMessageCard || {};
 	const {
@@ -31,6 +37,7 @@ function AgentDetails({
 		mobile_no,
 		organization_id,
 		sender,
+		channel_type,
 	} = formattedMessageData || {};
 
 	const [showAddNumber, setShowAddNumber] = useState(false);
@@ -106,7 +113,12 @@ function AgentDetails({
 		Toast.success('Copied!!!');
 	};
 
-	return (isEmpty(userId) && isEmpty(leadUserId) && isEmpty(mobile_no)) ? (
+	const handleSummary = () => {
+		setShowMore(true);
+		setActiveSelect('user_activity');
+	};
+
+	return (isEmpty(userId) && isEmpty(leadUserId) && isEmpty(mobile_no) && activeRoomLoading) ? (
 		<>
 			<div className={styles.title}>Profile</div>
 			<EmptyState
@@ -201,7 +213,7 @@ function AgentDetails({
 			)}
 			{loading ? (
 				<Placeholder
-					height="13px"
+					height="50px"
 					width="220px"
 					margin="0px 0px 0px 0px"
 				/>
@@ -224,9 +236,23 @@ function AgentDetails({
 						noData={!leadUserId && !userId}
 						loading={loading}
 						activeCardData={DATA_MAPPING[activeTab] || {}}
+						activeMessageCard={activeMessageCard}
+						setActiveMessage={setActiveMessage}
+						leadLoading={leadLoading}
+						activeRoomLoading={activeRoomLoading}
 					/>
 				</>
 			)}
+
+			<ExecutiveSummary
+				handleSummary={handleSummary}
+				mobile_no={mobile_no}
+				sender={sender}
+				user_id={user_id}
+				lead_user_id={lead_user_id}
+				channel_type={channel_type}
+				activeSelect={activeSelect}
+			/>
 		</>
 	);
 }

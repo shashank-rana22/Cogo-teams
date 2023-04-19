@@ -1,4 +1,4 @@
-import { Toast, Placeholder, Modal, Button, Tooltip } from '@cogoport/components';
+import { Placeholder, Modal, Button, Tooltip } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import { IcMStarfull } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
@@ -36,15 +36,9 @@ function Badges(props) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.header}>
-					<p className={styles.heading}>Badges</p>
+					<Placeholder width={100} height={24} style={{ borderRadius: '4px' }} />
 
-					<Button
-						size="md"
-						themeType="secondary"
-						onClick={() => 	setShowModal(true)}
-					>
-						<b>Select Badges To Preview</b>
-					</Button>
+					<Placeholder width={200} height={24} style={{ borderRadius: '4px' }} />
 				</div>
 
 				<div className={styles.content}>
@@ -63,15 +57,24 @@ function Badges(props) {
 					<Button
 						size="md"
 						themeType="secondary"
-						onClick={() => Toast.default("You don't have any mastery!")}
+						disabled
+						style={{ border: '0' }}
 					>
 						<b>Select Badges To Preview</b>
 					</Button>
 				</div>
 
-				<div style={{ marginTop: '40px', color: '#4f4f4f' }}>
-					No badges created yet!
-				</div>
+				<Tooltip
+					content="No Badges Have Been Created Yet!"
+					placement="top"
+					className={styles.tooltip}
+				>
+					<div className={styles.empty}>
+						{[1, 2, 3, 4, 5].map((item) => (
+							<div key={item} className={styles.empty_boxes} />
+						))}
+					</div>
+				</Tooltip>
 			</div>
 		);
 	}

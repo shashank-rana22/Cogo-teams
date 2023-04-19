@@ -1,5 +1,6 @@
 import { Pill } from '@cogoport/components';
-import { format } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import styles from
 	'../components/ExpertiseConfigurations/CurrentConfigurations/Header/ModalComponents/Published/styles.module.css';
@@ -35,7 +36,14 @@ const CONFIGURATION_FILTER_TABLE_COLUMNS = [
 		Header   : 'LAST UPDATED',
 		accessor : 'audit_data',
 		Cell     : ({ value }) => (
-			<section>{value?.updated_at ? format(value?.updated_at, 'dd-MM-YYYY') : ''}</section>
+			<section>
+				{value?.updated_at ? formatDate({
+					date       : value.updated_at,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MM-yyyy'],
+					formatType : 'date',
+				}) : ''}
+
+			</section>
 		),
 	},
 

@@ -1,173 +1,173 @@
 .container {
-    max-width: 652px;
-    padding: 20px;
-    margin: 20px;
-    background-color: #fff;
-    border-radius: 8px;
+	max-width: 652px;
+	padding: 20px;
+	margin: 20px;
+	background-color: #fff;
+	border-radius: 8px;
 }
 
 .heading {
-    font-size: 16px;
-    font-weight: bold;
-    color: #6fa5ab;
+	font-size: 16px;
+	font-weight: bold;
+	color: #6fa5ab;
 }
 
 .display_flex {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 8px 8px 0;
+	display: flex;
+	justify-content: space-between;
+	padding: 8px 8px 8px 0;
 }
 
 .main_badge {
-    width: 100%;
-    height: auto;
-    margin-top: 16px;
-    border-radius: 8px;
+	width: 100%;
+	height: auto;
+	margin-top: 16px;
+	border-radius: 8px;
 }
 
 .star {
-    display: flex;
-    width: 40px;
+	display: flex;
+	width: 40px;
 }
 
 .badge_container {
-    display: flex;
-    flex-basis: 30%;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-basis: 30%;
+	flex-direction: column;
+	align-items: center;
 }
 
 .stars {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 16px;
+	display: flex;
+	justify-content: space-around;
+	margin-top: 16px;
 }
 
 .details {
-    display: flex;
-    flex-basis: 64%;
-    flex-direction: column;
-    justify-content: space-between;
+	display: flex;
+	flex-basis: 64%;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .details_header {
-    display: flex;
-    justify-content: space-between;
-    margin: 8px 8px 0 0;
+	display: flex;
+	justify-content: space-between;
+	margin: 8px 8px 0 0;
 }
 
 .label_value {
-    margin: 8px 8px 0 0;
+	margin: 8px 8px 0 0;
 }
 
 .small_badge {
-    width: 40px;
-    margin-right: 8px;
+	width: 40px;
+	margin-right: 8px;
 }
 
 .next_badge {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .next_unlock {
-    margin: 8px 20px 0 0;
+	margin: 8px 20px 0 0;
 }
 
 .label {
-    font-size: 12px;
-    font-weight: 400;
-    color: #4f4f4f;
+	font-size: 12px;
+	font-weight: 400;
+	color: #4f4f4f;
 }
 
 .value {
-    font-size: 12px;
-    font-weight: bold;
-    color: #221f20;
+	font-size: 12px;
+	font-weight: bold;
+	color: #221f20;
 }
 
 .description_container {
-    margin-top: 12px;
+	margin-top: 12px;
 }
 
 .mastery_unlock {
-    margin: 16px 0;
+	margin: 16px 0;
 }
 
 .flex_container {
-    display: flex;
-    justify-content: space-between;
-    width: 50%;
-    margin-top: 16px;
+	display: flex;
+	justify-content: space-between;
+	width: 50%;
+	margin-top: 16px;
 }
 
 .mastery_badge_container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .smallstar {
-    width: 20px;
-    margin-top: 4px;
+	width: 20px;
+	margin-top: 4px;
 }
 
 .button {
-    display: flex;
-    justify-content: flex-end;
+	display: flex;
+	justify-content: flex-end;
 }
 
 .progressbar_container {
-    display: flex;
-    flex-direction: row;
-    margin-top: 12px;
+	display: flex;
+	flex-direction: row;
+	margin-top: 12px;
 
-    :global(.ui_progressbar_container) {
-        width: 100%;
-    }
+	:global(.ui_progressbar_container) {
+		width: 100%;
+	}
 
-    :global(.ui_progressbar_filename) {
-        font-weight: 400;
-    }
+	:global(.ui_progressbar_filename) {
+		font-weight: 400;
+	}
 
-    :global(.ui_progressbar_bar) {
-        width: 100%;
-        max-width: 192px;
-    }
+	:global(.ui_progressbar_bar) {
+		width: 100%;
+		max-width: 192px;
+	}
 }
 
 .badges {
-    margin-top: 24px;
+	margin-top: 24px;
 }
 
 .unlocked_badges {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 
-    &::after {
-        flex: auto;
-        content: "";
-    }
+	&::after {
+		flex: auto;
+		content: "";
+	}
 }
 
 .badge_image {
-    width: 100px;
-    height: 100px;
+	width: 100px;
+	height: 100px;
 
-    img {
-        width: 100%;
-        height: 100%;
-        border-radius: 8px;
-    }
+	img {
+		width: 100%;
+		height: 100%;
+		border-radius: 8px;
+	}
 }
 
 .stars_container {
-    display: flex;
-    justify-content: center;
-    margin-top: 8px;
+	display: flex;
+	justify-content: center;
+	margin-top: 8px;
 }
 
 .unlocked_item {
-    margin: 16px 8px 0;
+	margin: 16px 8px 0;
 }

@@ -21,7 +21,7 @@ function useCreateAllocationKamExpertiseEventScoring(props) {
 		},
 	});
 
-	const { reset, clearErrors } = formProps;
+	const { reset } = formProps;
 
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : '/kam_expertise_event_scoring',
@@ -33,7 +33,7 @@ function useCreateAllocationKamExpertiseEventScoring(props) {
 		e.preventDefault();
 
 		const {
-			event_configuration_rule_mapping_id,
+			event_configuration_detail_id,
 			impact,
 			scoring_type,
 			milestones,
@@ -53,14 +53,14 @@ function useCreateAllocationKamExpertiseEventScoring(props) {
 
 		try {
 			const payload = {
-				event_configuration_rule_mapping_id,
+				event_configuration_detail_id,
 				impact,
 				scoring_type,
 				scoring_criteria: SCORING_TYPE[scoring_type] || [],
 			};
 
-			await Promise.all([trigger({ data: payload }), reset()]);
-			clearErrors();
+			await trigger({ data: payload });
+			reset();
 
 			onClose();
 

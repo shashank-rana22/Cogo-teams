@@ -38,3 +38,11 @@
 	display: flex;
 	margin-left: auto;
 }
+
+.button_container {
+	display: flex;
+}
+
+.config_button {
+	margin-right: 20px;
+}

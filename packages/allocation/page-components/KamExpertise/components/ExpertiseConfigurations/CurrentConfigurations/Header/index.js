@@ -1,20 +1,16 @@
-import { Button, Modal, Toast } from '@cogoport/components';
-import { format } from '@cogoport/utils';
+import { Button, Modal } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import VERSION_KEYS from '../../../../constants/version-keys-mapping';
 import useSetVersionFilter from '../../../../hooks/useSetVersionFilter';
 
+import Draft from './ModalComponents/Draft';
 import InitialMode from './ModalComponents/InitialMode';
 import NewVersion from './ModalComponents/NewVersion';
 import Published from './ModalComponents/Published';
 import ModalFooter from './ModalFooter';
 import styles from './styles.module.css';
-
-function Draft({ setMode = () => {}, setShowModal = () => {} }) {
-	setShowModal(false);
-	setMode('initial-mode');
-	Toast.success('New Draft Loaded');
-}
 
 const { PUBLISHED_VERSION, SAVED_DRAFT, NEW_VERSION, INITIAL_MODE } = VERSION_KEYS;
 
@@ -31,6 +27,8 @@ function Header(props) {
 		refetch,
 		expertiseRefetch,
 		cardRefetch,
+		onClickViewAllConfig,
+		scrollDraftRef,
 	} = props;
 
 	const {
@@ -52,6 +50,7 @@ function Header(props) {
 		[SAVED_DRAFT]: {
 			setMode,
 			setShowModal,
+			scrollDraftRef,
 		},
 		[NEW_VERSION]: {
 			setMode,
@@ -99,8 +98,12 @@ function Header(props) {
 						:
 						{' '}
 						<strong>
-							{ audit_data.updated_at
-								? format(audit_data.updated_at, 'dd MMM yyyy') : ''}
+							{ audit_data?.updated_at
+								? formatDate({
+									date       : audit_data.updated_at,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+									formatType : 'date',
+								}) : ''}
 						</strong>
 					</div>
 
@@ -114,46 +117,53 @@ function Header(props) {
 				</div>
 			</div>
 
-			<div>
+			<div className={styles.button_container}>
+				<Button
+					onClick={onClickViewAllConfig}
+					themeType="secondary"
+					className={styles.config_button}
+				>
+					View All Configurations
+				</Button>
+
 				<Button onClick={() => setShowModal(true)}>
 					Create
 				</Button>
-
-				{showModal && (
-					<Modal
-						size="md"
-						show={showModal}
-						onClose={onClose}
-						placement="top"
-					>
-						<Modal.Header title="Create" />
-
-						<Modal.Body>
-							{Component && (
-								<Component
-									key={mode}
-									{...(componentProps[mode] || {})}
-								/>
-							)}
-						</Modal.Body>
-
-						{mode === PUBLISHED_VERSION ? (
-							<Modal.Footer className={styles.test}>
-								<ModalFooter
-									setMode={setMode}
-									setSelectedVersion={setSelectedVersion}
-									setShowModal={setShowModal}
-									selectedVersion={selectedVersion}
-									mode={mode}
-									onCreate={onCreate}
-									createModalLoading={createModalLoading}
-									versionName={versionName}
-								/>
-							</Modal.Footer>
-						) : null}
-					</Modal>
-				)}
 			</div>
+			{showModal && (
+				<Modal
+					size="md"
+					show={showModal}
+					onClose={onClose}
+					placement="top"
+				>
+					<Modal.Header title="Create" />
+
+					<Modal.Body>
+						{Component && (
+							<Component
+								key={mode}
+								{...(componentProps[mode] || {})}
+							/>
+						)}
+					</Modal.Body>
+
+					{mode === PUBLISHED_VERSION ? (
+						<Modal.Footer className={styles.test}>
+							<ModalFooter
+								setMode={setMode}
+								setSelectedVersion={setSelectedVersion}
+								setShowModal={setShowModal}
+								selectedVersion={selectedVersion}
+								mode={mode}
+								onCreate={onCreate}
+								createModalLoading={createModalLoading}
+								versionName={versionName}
+							/>
+						</Modal.Footer>
+					) : null}
+				</Modal>
+			)}
 		</div>
 	);
 }

@@ -95,12 +95,12 @@
 .list {
 	padding: 8px 12px;
 	margin: 8px 12px;
-
-	&.list_2 {
-		color: #f00 !important;
-	}
 }
 
 .image {
 	margin-right: 12px;
+}
+
+.warning {
+	color: #f00 !important;
 }

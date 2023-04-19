@@ -34,7 +34,8 @@ const useGetControls = ({ expertiseTypeWatch }) => {
 			label : 'Condition Name',
 			type  : 'text',
 			rules : {
-				required: 'Specify Condition',
+				required : 'Specify Condition',
+				validate : (value) => (value.includes("'") ? 'Apostrophe is not allowed' : undefined),
 			},
 		},
 		{
@@ -59,9 +60,10 @@ const useGetControls = ({ expertiseTypeWatch }) => {
 			isClearable: true,
 		},
 		{
-			name  : 'description',
-			label : 'Description',
-			type  : 'textarea',
+			name        : 'description',
+			label       : 'Description',
+			type        : 'textarea',
+			placeholder : 'Type here...',
 		},
 	];
 };
