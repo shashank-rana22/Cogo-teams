@@ -4,8 +4,8 @@ const getCreateDocumentParams = ({ shipmentData, formValues, activeStakeholder, 
 	const org_id = orgId || shipmentData?.importer_exporter_id;
 
 	switch (activeStakeholder) {
-		case 'Superadmin':
-		case 'Admin':
+		case 'superadmin':
+		case 'admin':
 			params = {
 				shipment_id         : shipmentData?.id,
 				document_type       : formValues?.document_type,
@@ -22,19 +22,17 @@ const getCreateDocumentParams = ({ shipmentData, formValues, activeStakeholder, 
 				document_type       : formValues?.document_type,
 				uploaded_by_user_id : shipmentData?.agent_id || shipmentData?.booking_agent_id || undefined,
 				uploaded_by_org_id  : shipmentData?.importer_exporter_id || undefined,
-				org_account_type    : 'importer_exporter',
 				service_type        : 'fcl_freight_service',
 			};
 			break;
 
-		case 'BookingDesk':
-		case 'DocumentDesk':
+		case 'booking_desk':
+		case 'document_desk':
 			params = {
 				shipment_id         : shipmentData?.id,
 				document_type       : formValues?.document_type,
 				uploaded_by_user_id : shipmentData?.agent_id || shipmentData?.booking_agent_id || undefined,
 				uploaded_by_org_id  : filters?.uploaded_by_org_id || undefined,
-				org_account_type    : 'service_provider',
 				service_type        : 'fcl_freight_service',
 			};
 			break;

@@ -16,7 +16,7 @@ function PossibleDocument({
 	shipment_data,
 	activeStakeholder,
 }) {
-	const [selectedFile, setSelectedFile] = useState([]);
+	// const [selectedFile, setSelectedFile] = useState([]);
 	const [orgId, setOrgId] = useState();
 
 	const { control, watch } = useForm();
@@ -37,9 +37,8 @@ function PossibleDocument({
 	const { apiTrigger, docLoading } = useCreateShipmentDocument({
 		documents: [
 			{
-				document_url : selectedFile,
-				file_name    : formValues?.document_type,
-				// data: data || undefined,
+				document_url : formValues?.upload_document?.finalUrl,
+				file_name    : formValues?.upload_document?.fileName,
 			},
 		],
 		refetch: afterCreateRefetch,
@@ -73,7 +72,7 @@ function PossibleDocument({
 				<Modal.Header title="Upload Document" />
 
 				<Modal.Body className={styles.modal_container}>
-					{['BookingDesk', 'DocumentDesk'].includes(activeStakeholder) ? (
+					{['booking_desk', 'document_desk'].includes(activeStakeholder) ? (
 						<Select
 							size="sm"
 							placeholder="Select Source"
@@ -91,8 +90,9 @@ function PossibleDocument({
 						control={control}
 						activeStakeholder={activeStakeholder}
 						uploaded_by_org_id={filters?.uploaded_by_org_id}
-						selectedFile={selectedFile}
-						setSelectedFile={setSelectedFile}
+						formValues={formValues}
+						// selectedFile={selectedFile}
+						// setSelectedFile={setSelectedFile}
 						orgId={orgId}
 						setOrgId={setOrgId}
 					/>

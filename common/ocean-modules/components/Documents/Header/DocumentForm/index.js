@@ -6,16 +6,17 @@ function DocumentForm({
 	apiData,
 	activeStakeholder,
 	uploaded_by_org_id,
-	selectedFile,
-	setSelectedFile,
+	formValues,
+	// selectedFile,
+	// setSelectedFile,
 	control,
 	orgId,
 	setOrgId,
 }) {
 	let params = {};
 	switch (activeStakeholder) {
-		case 'Superadmin':
-		case 'Admin':
+		case 'superadmin':
+		case 'admin':
 			params = {
 				shipment_id       : shipment_data?.id,
 				organization_ids  : apiData?.list?.map((org) => org.id) || [],
@@ -33,8 +34,8 @@ function DocumentForm({
 			};
 			break;
 
-		case 'BookingDesk':
-		case 'DocumentDesk':
+		case 'booking_desk':
+		case 'document_desk':
 			params = {
 				shipment_id       : shipment_data?.id,
 				organization_ids  : [uploaded_by_org_id],
@@ -57,15 +58,16 @@ function DocumentForm({
 
 	return (
 		<div>
-			{!['BookingDesk', 'DocumentDesk'].includes(activeStakeholder) || uploaded_by_org_id ? (
+			{!['booking_desk', 'document_desk'].includes(activeStakeholder) || uploaded_by_org_id ? (
 				<UploadDocument
 					document_data={data}
 					loading={loading}
 					control={control}
 					shipment_data={shipment_data}
 					activeStakeholder={activeStakeholder}
-					selectedFile={selectedFile}
-					setSelectedFile={setSelectedFile}
+					formValues={formValues}
+					// selectedFile={selectedFile}
+					// setSelectedFile={setSelectedFile}
 					orgId={orgId}
 					setOrgId={setOrgId}
 				/>

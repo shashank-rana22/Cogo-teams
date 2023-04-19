@@ -1,6 +1,5 @@
 import { RadioGroup } from '@cogoport/components';
-import { SelectController } from '@cogoport/forms';
-import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
+import { SelectController, UploadController } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -24,13 +23,14 @@ function UploadDocument({
 	loading,
 	shipment_data,
 	activeStakeholder,
-	selectedFile,
-	setSelectedFile,
+	formValues,
+	// selectedFile,
+	// setSelectedFile,
 	control,
 	orgId,
 	setOrgId,
 }) {
-	const Documents = document_data?.list?.map((e) => (
+	const documents = document_data?.list?.map((e) => (
 		{ label: startCase(e?.document_type), value: e?.document_type })) || [];
 
 	return (
@@ -43,21 +43,19 @@ function UploadDocument({
 							control={control}
 							placeholder="Select Document..."
 							name="document_type"
-							options={Documents}
+							options={documents}
 							rules={{ required: { value: true, message: 'Document is Required' } }}
 						/>
 					</div>
 					<div>
-						<FileUploader
-							value={selectedFile}
-							onChange={setSelectedFile}
-							showProgress
-							draggable
-							multiple
+						<UploadController
+							control={control}
+							name="upload_document"
+							rules={{ required: 'File is required.' }}
 						/>
 					</div>
-					{['Superadmin', 'Admin'].includes(activeStakeholder) && shipment_data?.consignee_shipper_id
-					&& selectedFile.length ? (
+					{['superadmin', 'admin'].includes(activeStakeholder) && shipment_data?.consignee_shipper_id
+					&& formValues.upload_document ? (
 						<div style={{ marginTop: '16px' }}>
 							<span style={{ fontWeight: '700' }}>choose organization </span>
 							<RadioGroup
