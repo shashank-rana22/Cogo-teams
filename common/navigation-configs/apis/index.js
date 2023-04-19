@@ -130,6 +130,7 @@ const apis = {
 	...faq,
 	performance_management,
 	cargo_insurance,
+	...performance_management,
 	booking_desk,
 	poc,
 	...athena_dashboard,

@@ -14,7 +14,7 @@ const useCreateOrganizationPoc = ({
 
 	const apiTrigger = async (val) => {
 		try {
-			const res = await trigger({ params: { shipment_id, organization_id, ...val } });
+			const res = await trigger({ data: { shipment_id, organization_id, ...val } });
 			if (!res.hasError) {
 				Toast.success(successMessage);
 				refetch();
