@@ -28,7 +28,7 @@
 	justify-content: space-between;
 }
 
-.input {
+.percentile_input {
 	flex-basis: 22%;
 }
 
@@ -38,4 +38,10 @@
 
 .distribution_input {
 	flex-basis: 44%;
+}
+
+.error_message {
+	margin-left: 4px;
+	font-size: 8px;
+	color: red;
 }

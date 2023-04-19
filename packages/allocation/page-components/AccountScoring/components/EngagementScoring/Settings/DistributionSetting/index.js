@@ -8,11 +8,6 @@ import EditSetting from '../EditSetting/index';
 import Header from './Header';
 import styles from './styles.module.css';
 
-const columns = [
-	{ Header: 'WARMTH ', accessor: 'warmth' },
-	{ Header: 'RANGE', accessor: 'range' },
-];
-
 const data = [
 	{
 		warmth : 'Flaming Hot',
@@ -41,6 +36,25 @@ const data = [
 	},
 ];
 
+const columns = [
+	{
+		Header   : 'WARMTH',
+		accessor : ({ warmth = '' }) => (
+			<section className={styles.data_container}>
+				{warmth}
+			</section>
+		),
+	},
+	{
+		Header   : 'RANGE',
+		accessor : ({ range = '' }) => (
+			<section className={styles.data_container}>
+				{range}
+			</section>
+		),
+	},
+];
+
 function DistributionSetting() {
 	const [editing, setEditing] = useState(false);
 
@@ -61,7 +75,10 @@ function DistributionSetting() {
 		<div className={styles.card}>
 			<Header editing={editing} setEditing={setEditing} />
 
-			<Table columns={columns} data={data} />
+			<Table
+				columns={columns}
+				data={data || []}
+			/>
 		</div>
 	);
 }

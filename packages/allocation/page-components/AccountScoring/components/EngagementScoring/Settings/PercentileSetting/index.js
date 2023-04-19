@@ -8,12 +8,6 @@ import EditSetting from '../EditSetting/index';
 import Header from './Header';
 import styles from './styles.module.css';
 
-const columns = [
-	{ Header: 'PERCENTILE RANGE', accessor: 'percentileRange' },
-	{ Header: 'BIAS SCORE', accessor: 'biasScore' },
-	{ Header: 'CURRENT NUMBER OF ACCOUNTS', accessor: 'numberOfAccounts' },
-];
-
 const data = [
 	{
 		percentileRange  : '81-100',
@@ -47,6 +41,33 @@ const data = [
 	},
 ];
 
+const columns = [
+	{
+		Header   : 'PERCENTILE RANGE',
+		accessor : ({ percentileRange = 0 }) => (
+			<section className={styles.data_container}>
+				{percentileRange}
+			</section>
+		),
+	},
+	{
+		Header   : 'BIAS SCORE',
+		accessor : ({ biasScore = 0 }) => (
+			<section className={styles.data_container}>
+				{biasScore}
+			</section>
+		),
+	},
+	{
+		Header   : 'CURRENT NUMBER OF ACCOUNTS',
+		accessor : ({ numberOfAccounts = 0 }) => (
+			<section className={styles.data_container}>
+				{numberOfAccounts}
+			</section>
+		),
+	},
+];
+
 function PercentileSetting() {
 	const [editing, setEditing] = useState(false);
 
@@ -56,6 +77,7 @@ function PercentileSetting() {
 				ITEM_ARRAY={WARMTH_ARRAY}
 				useGetControls={getPercentileControl}
 				setEditing={setEditing}
+				inputStyle="percentile_input"
 				heading="Percentile Setting"
 				tooltipData="When the account lies in the respective percentile it would be assigned
 				a score at that time based on the table given below to show the region in which
@@ -68,7 +90,11 @@ function PercentileSetting() {
 		<div className={styles.card}>
 			<Header setEditing={setEditing} />
 
-			<Table columns={columns} data={data} />
+			<Table
+				layoutType="table"
+				columns={columns}
+				data={data || []}
+			/>
 		</div>
 	);
 }

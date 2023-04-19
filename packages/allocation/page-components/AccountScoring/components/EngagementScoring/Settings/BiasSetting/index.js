@@ -8,11 +8,6 @@ import EditSetting from '../EditSetting/index';
 import Header from './Header';
 import styles from './styles.module.css';
 
-const columns = [
-	{ Header: 'AGE', accessor: 'age' },
-	{ Header: 'MULTIPLIER', accessor: 'multiplier' },
-];
-
 const data = [
 	{
 		age        : '0-15',
@@ -36,6 +31,25 @@ const data = [
 	},
 ];
 
+const columns = [
+	{
+		Header   : 'AGE',
+		accessor : ({ age = '' }) => (
+			<section className={styles.data_container}>
+				{age}
+			</section>
+		),
+	},
+	{
+		Header   : 'MULTIPLIER',
+		accessor : ({ multiplier = 0 }) => (
+			<section className={styles.data_container}>
+				{multiplier}
+			</section>
+		),
+	},
+];
+
 function BiasSetting() {
 	const [editing, setEditing] = useState(false);
 
@@ -56,7 +70,10 @@ function BiasSetting() {
 		<div className={styles.card}>
 			<Header editing={editing} setEditing={setEditing} />
 
-			<Table columns={columns} data={data} />
+			<Table
+				columns={columns}
+				data={data || []}
+			/>
 		</div>
 	);
 }
