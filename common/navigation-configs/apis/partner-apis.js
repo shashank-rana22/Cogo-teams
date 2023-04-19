@@ -9180,6 +9180,11 @@ const partner = {
 			service_name : 'cogopoint',
 		},
 		{
+			api          : 'update_cogostore_product_category',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
 			api          : 'update_cogostore_product',
 			access_type  : 'private',
 			service_name : 'cogopoint',
