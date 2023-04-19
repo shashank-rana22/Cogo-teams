@@ -36,3 +36,13 @@
 	font-weight: 600;
 	color: #849e4c;
 }
+
+.tooltip_row {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 8px;
+}
+
+.tooltip_percentage {
+	margin-left: 12px;
+}

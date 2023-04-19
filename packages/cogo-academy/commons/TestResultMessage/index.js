@@ -2,19 +2,9 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { Image } from '@cogoport/next';
 import { format, startCase } from '@cogoport/utils';
 
+import getResultStatus from '../../utils/getResultStatus';
+
 import styles from './styles.module.css';
-
-const getUserStatus = ({ cut_of_percentage, user_percentage }) => {
-	if (user_percentage < cut_of_percentage) {
-		return 'failed';
-	}
-
-	if (user_percentage > (100 - ((100 - cut_of_percentage) / 2))) {
-		return 'passed';
-	}
-
-	return 'intermediate';
-};
 
 const RESULT_MAPPING = {
 	passed: {
@@ -39,7 +29,7 @@ const RESULT_MAPPING = {
 		message          : 'You could do Better!',
 		alt              : 'sad-face',
 		message_text     : 'While your performance on the',
-		message_sub_text : `was Not as Strong as we had Hoped, don't get discouraged!
+		message_sub_text : `was not as strong as we had hoped, don't get discouraged!
 		Remember that learning takes time and practice. We recommend dedicating
 		more time to studying and look forward to seeing your progress on the
 		next test. Keep up the effort!`,
@@ -49,7 +39,7 @@ const RESULT_MAPPING = {
 function TestResultMessage({ stats_data }) {
 	const { date, test_name, cut_of_percentage, user_percentage } = stats_data || {};
 
-	const status = getUserStatus({ cut_of_percentage, user_percentage });
+	const status = getResultStatus({ cut_of_percentage, user_percentage });
 
 	const { image_url, message, alt, message_text, message_sub_text } = RESULT_MAPPING[status] || {};
 
