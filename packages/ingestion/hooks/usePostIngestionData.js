@@ -11,7 +11,6 @@ function usePostIngestionData({ refetch = () => {} }) {
 		open   : false,
 		screen : '',
 	});
-
 	const onClose = () => {
 		setShow((pv) => ({
 			...pv,
@@ -50,14 +49,14 @@ function usePostIngestionData({ refetch = () => {} }) {
 			await trigger({
 				data: payload,
 			});
-
-			setShow('');
+			onClose();
 
 			Toast.success('Data Uploaded');
 
 			refetch();
-		} catch (error) {
-			Toast.error(error?.message);
+		} catch (e) {
+			console.log('error',e?.response?.data?.file)
+			Toast.error(e?.response?.data?.file);
 		}
 	};
 	const { ingestion_country_id = '', ingestion_partner_id = '' } = watch();

@@ -18,21 +18,6 @@ function useGetIngestionList() {
 		request_file_data_required : true,
 	});
 
-	// const validParams = {};
-	// Object.entries(params.filters || {}).forEach(([filterKey, value]) => {
-	// 	if (value) {
-	// 		validParams.filters = {};
-	// 		validParams.filters[filterKey] = params.filters[filterKey];
-	// 	}
-	// });
-
-	// Object.keys(params)
-	// 	.forEach((key) => {
-	// 		if (params[key] && key !== 'filters') {
-	// 			validParams[key] = params[key];
-	// 		}
-	// 	});
-
 	const [{ data, loading }, refetch] = useRequest({
 		method : 'get',
 		url    : 'list_ingestion_requests',
@@ -65,7 +50,7 @@ function useGetIngestionList() {
 		},
 		{
 			key      : 'num_org',
-			Header   : 'NUMBER OF ORGS',
+			Header   : 'NUMBER OF RECORDS',
 			accessor : ({ request_files = {} }) => (
 				<div className={styles.number_of_org}>{request_files?.total_records_count || '___'}</div>
 
@@ -77,7 +62,7 @@ function useGetIngestionList() {
 			accessor : ({ description = '' }) => (
 				<div className={styles.pop_container}>
 					<Tooltip className={styles.popover} content={description || '___'} placement="left">
-						<div className={styles.description}>{description || '___'}</div>
+						<div className={styles.description}>{startCase(description) || '___'}</div>
 					</Tooltip>
 				</div>
 

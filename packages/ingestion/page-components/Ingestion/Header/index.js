@@ -82,16 +82,16 @@ function Header({ refetch = () => {} }) {
 				</Button>
 			</div>
 			{show?.open && (
-				<Modal size="md" show={show?.open} onClose={() => onClose()} closeOnOuterClick={false}>
-					<Modal.Header title={(
-						<div style={{ display: 'flex', alignItems: 'center' }}>
-							<IcMUpload style={{ margin: '0 4px 0 0' }} />
-							Upload CSV
-						</div>
-					)}
-					/>
-					<Modal.Body>
-						{
+			<Modal size="md" show={show?.open} onClose={() => onClose()} closeOnOuterClick={false}>
+				<Modal.Header title={(
+					<div style={{ display: 'flex', alignItems: 'center' }}>
+						<IcMUpload style={{ margin: '0 4px 0 0' }} />
+						Upload CSV
+					</div>
+				)}
+				/>
+				<Modal.Body>
+					{
 				Component && (
 					<Component
 						show={show}
@@ -105,22 +105,22 @@ function Header({ refetch = () => {} }) {
 					/>
 				)
 }
-					</Modal.Body>
+				</Modal.Body>
 
-					<Modal.Footer>
-						<Footer
-							show={show}
-							setShow={setShow}
-							setUploadData={setUploadData}
-							uploadData={uploadData}
-							formProps={formProps}
-							modalControls={modalControls}
-							onSubmit={onSubmit}
-							loading={loading}
-						/>
-					</Modal.Footer>
+				<Modal.Footer>
+					<Footer
+						show={show}
+						setShow={setShow}
+						setUploadData={setUploadData}
+						uploadData={uploadData}
+						formProps={formProps}
+						modalControls={modalControls}
+						onSubmit={onSubmit}
+						loading={loading}
+					/>
+				</Modal.Footer>
 
-				</Modal>
+			</Modal>
 			)}
 
 			<TemplateModal getTemplateCsv={getTemplateCsv} template={template} setTemplate={setTemplate} />
