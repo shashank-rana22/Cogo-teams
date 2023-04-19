@@ -41,6 +41,8 @@ function timeLineFunctions() {
 				return `${previous} assigned this chat to himself`;
 			case 'auto_assign':
 				return `This chat is auto assigned to ${present}`;
+			case 'requested_to_chat':
+				return `${previous} requested ${present} to assign this chat`;
 			default:
 				return null;
 		}

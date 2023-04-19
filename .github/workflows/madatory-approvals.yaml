@@ -6,7 +6,7 @@ on:
 
 jobs:
   approved:
-    if: github.event.review.state == 'approved' && github.event.pull_request.base.ref == 'main'
+    if: github.event.review.state == 'approved' && (github.event.pull_request.base.ref == 'main' || github.event.pull_request.base.ref == 'pre-release')
     runs-on: ubuntu-22.04
 
     steps:
