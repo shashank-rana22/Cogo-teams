@@ -57,9 +57,7 @@ function Header(
 				</div>
 
 			</div>
-
 			<Button onClick={onClickAddAudience}>Add New Audience Group</Button>
-
 		</div>
 
 	);
