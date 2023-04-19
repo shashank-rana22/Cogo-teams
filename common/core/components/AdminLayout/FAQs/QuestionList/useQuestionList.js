@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import { useDebounceQuery } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -22,8 +21,6 @@ const useQuestionList = ({
 	const { scope = '' } = general || {};
 	const { country_id = '', id = '' } = partner;
 
-	const { query = '', debounceQuery } = useDebounceQuery();
-
 	const [page, setPage] = useState(1);
 
 	const { role_functions = [], role_sub_functions = [] } = auth_role_data || {};
@@ -34,14 +31,10 @@ const useQuestionList = ({
 		? role_sub_functions
 		: undefined;
 
-	const [{ data, loading }, trigger] = useRequest({
+	const [{ data, loading = false }, trigger] = useRequest({
 		url    : '/list_faq_questions',
 		method : 'get',
 	}, { manual: true });
-
-	useEffect(() => {
-		debounceQuery(search);
-	}, [debounceQuery, search]);
 
 	const fetch = useCallback(
 		async () => {
@@ -57,7 +50,7 @@ const useQuestionList = ({
 							country_id,
 							cogo_entity_id    : id,
 							persona           : scope === 'partner' ? 'admin_user' : 'importer_exporter',
-							q                 : query || query_name || undefined,
+							q                 : search || query_name || undefined,
 						},
 						sort_by                  : 'view_count',
 						page,
@@ -69,7 +62,7 @@ const useQuestionList = ({
 				if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
 			}
 		},
-		[country_id, id, page, query, query_name, roleFunction, roleSubFunction, scope, topic?.id, trigger],
+		[country_id, id, page, query_name, roleFunction, roleSubFunction, scope, search, topic?.id, trigger],
 	);
 
 	useEffect(() => {
@@ -77,10 +70,9 @@ const useQuestionList = ({
 			return;
 		}
 		fetch();
-	}, [fetch, page, query, query_name, question]);
+	}, [fetch, page, query_name, question]);
 
-	const { list = [], ...pageData } = data || {};
-
+	const { list = [], response_type, gpt_answer = '', show_more = '', ...pageData } = data || {};
 	return {
 		page,
 		setPage,
@@ -89,6 +81,10 @@ const useQuestionList = ({
 		list,
 		question,
 		setQuestion,
+		response_type,
+		gpt_answer,
+		show_more,
+
 	};
 };
 

@@ -1,7 +1,8 @@
-import { Toast, Input } from '@cogoport/components';
+import { Toast, Input, Button } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { IcMSearchlight, IcMCross, IcMArrowLeft } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import React from 'react';
 
 import styles from './styles.module.css';
 
@@ -20,6 +21,8 @@ function Header({
 	showNotificationContent,
 	refetch,
 	from,
+	setInput,
+	input,
 }) {
 	const {
 		searchAnnouncement = '',
@@ -30,7 +33,7 @@ function Header({
 		<IcMSearchlight />
 	) : (
 		<IcMCross
-			onClick={() => { setSearch(''); setQuestion(null); setSearchAnnouncement(''); }}
+			onClick={() => { setInput(''); setSearch(''); setQuestion(null); setSearchAnnouncement(''); }}
 			style={{ cursor: 'pointer', color: '#000000' }}
 		/>
 	);
@@ -91,20 +94,35 @@ function Header({
 					</div>
 				) : null}
 
-				<div className={`${styles.input_container} ${styles[from]}`}>
+				<form
+					onSubmit={(e) => {
+						e.preventDefault();
+						const searchFn = TABS_CONTENT_MAPPING[activeTab].input_onchange;
+						searchFn(input);
+						setQuestion(null);
+					}}
+					className={`${styles.input_container} ${styles[from]}`}
+				>
 					<Input
 						className="primary lg"
 						placeholder={TABS_CONTENT_MAPPING[activeTab].placeholder}
-						value={TABS_CONTENT_MAPPING[activeTab].input_value}
+						value={input}
 						onChange={(e) => {
-							const searchFn = TABS_CONTENT_MAPPING[activeTab].input_onchange;
-							searchFn(e);
+							setInput(e);
+							if (!e) setSearch('');
 							setQuestion(null);
 						}}
 						suffix={suffix}
-						style={{ padding: '0 10px' }}
+						style={{ padding: '0 10px', marginRight: 8 }}
 					/>
-				</div>
+					<Button
+						type="submit"
+						size="lg"
+						themeType="primary"
+					>
+						<IcMSearchlight />
+					</Button>
+				</form>
 			</div>
 		</div>
 	);

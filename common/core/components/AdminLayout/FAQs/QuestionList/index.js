@@ -5,6 +5,7 @@ import React from 'react';
 
 import Answer from './Answer';
 import EmptySearchState from './EmptySearchState';
+import GPTAnswers from './GPTAnswers';
 import Loader from './Loader';
 import styles from './styles.module.css';
 import useQuestionList from './useQuestionList';
@@ -15,7 +16,9 @@ function QuestionList({
 	question = '',
 	setQuestion = () => {},
 }) {
-	const { loading, list, page, setPage, pageData } = useQuestionList({
+	const {
+		loading, list, page, setPage, pageData, response_type, gpt_answer, show_more,
+	} = useQuestionList({
 		topic,
 		search,
 		question,
@@ -29,6 +32,16 @@ function QuestionList({
 
 	if (loading) return <Loader topic={topic} />;
 
+	if (response_type === 'GPT') {
+		return (
+			<GPTAnswers
+				answer={gpt_answer}
+				showMore={show_more}
+				search={search}
+			/>
+		);
+	}
+
 	const allpills = (item) => (
 		<div>
 			{item?.faq_tags?.map((faqtag, i) => (i >= 3 ? (
@@ -38,6 +51,7 @@ function QuestionList({
 			) : null))}
 		</div>
 	);
+
 	const extendedPills = (item) => {
 		const REMAINING = item.faq_tags.length - 3;
 		return (
@@ -66,7 +80,7 @@ function QuestionList({
 	};
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.containers}>
 			{list?.length > 0 ? (
 				<>
 					<div className={styles.topic_heading}>
