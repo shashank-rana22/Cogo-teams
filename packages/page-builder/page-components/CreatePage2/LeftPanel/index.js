@@ -20,8 +20,6 @@ function LeftPanel(props) {
 		selectedItem,
 	} = props;
 
-	console.log('sdksl', selectedItem);
-
 	return (
 		<Tabs
 			fullWidth
@@ -59,6 +57,7 @@ function LeftPanel(props) {
 				<Settings
 					component={component}
 					selectedRow={selectedRow}
+					selectedItem={selectedItem}
 					setComponent={setComponent}
 					showContentModal={showContentModal}
 					setShowContentModal={setShowContentModal}

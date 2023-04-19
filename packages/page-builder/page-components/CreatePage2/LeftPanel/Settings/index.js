@@ -18,7 +18,10 @@ const settingsMapping = {
 };
 
 function Settings(props) {
-	const { component, setComponent, selectedRow } = props;
+	const { component, setComponent, selectedRow, selectedItem } = props;
+
+	console.log('selected item ::', selectedItem);
+	console.log('selected row ::', selectedRow);
 
 	const [showUploadModal, setShowUploadModal] = useState(false);
 

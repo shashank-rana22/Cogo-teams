@@ -65,7 +65,9 @@ function RenderComponents({
 	return (
 		<div
 			role="presentation"
-			onClick={() => setSelectedItem({ ...widget, index })}
+			onClick={() => {
+				setSelectedItem({ ...widget, index });
+			}}
 			style={{ width: '100%', height: '100%', color: '#222' }}
 		>
 			<Component key={componentType} {...(componentPropsMapping[componentType] || {})} />

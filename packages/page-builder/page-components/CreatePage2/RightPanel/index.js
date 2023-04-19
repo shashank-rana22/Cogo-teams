@@ -27,15 +27,20 @@ function ComponentBuilder({ widget, components, setComponents, selectedRow, chil
 				const { id, style: allStyles, icon, attributes, type } = childComponent || {};
 
 				const isChildSelected = childId === id && componentId === selectedRowId && type;
-				const border = isChildSelected ? '1px solid red' : allStyles.border;
 
+				const border = isChildSelected ? '2px solid red' : allStyles.border;
+
+				const handleClick = (e) => {
+					e.stopPropagation();
+					setChildId(id);
+				};
 				return (
 
 					<div
 						role="presentation"
 						className={styles.content_container}
-						style={{ ...allStyles, border }}
-						onClick={() => setChildId(id)}
+						style={{ ...allStyles, border, background: 'lightYellow' }}
+						onClick={(e) => handleClick(e)}
 					>
 
 						{!type ? (
@@ -64,13 +69,13 @@ function RightPanel(props) {
 		moveItem,
 		isNewItemAdding,
 		onNewAddingItemProps,
-		onClick,
 		setSelectedRow,
 		isSelected,
 		selectedRow,
 		setShowContentModal,
 		setParentComponentId,
 		setSelectedItem,
+		selectedItem,
 	} = props;
 	const [childId, setChildId] = useState('');
 
@@ -206,6 +211,14 @@ function RightPanel(props) {
 
 	const border = isSelected && '1px solid #88cad1';
 
+	const handleClick = (e) => {
+		e.stopPropagation();
+		setSelectedRow({ ...widget, id, index });
+
+		setChildId('');
+		setSelectedItem({});
+	};
+
 	return (
 
 	// <ResizableBox
@@ -217,15 +230,17 @@ function RightPanel(props) {
 	// 	width={width}
 	// 	onResize={onResize}
 	// >
+
 		<div
 			role="presentation"
 			ref={itemRef}
 			data-handler-id={handlerId}
-			onClick={onClick}
+			onClick={(e) => handleClick(e)}
 			key={elementId}
 			style={{
 				opacity,
 				border,
+				backgroundColor: 'lavender',
 			}}
 			className={styles.element_Container}
 		>

@@ -120,11 +120,11 @@ function DNDComponent() {
 					id: component.layouts.length + 1,
 				});
 
-				setSelectedItem({
-					...CONTENT_MAPPING[content.type],
-					...content,
-					id: component.layouts.length + 1,
-				});
+				// setSelectedItem({
+				// 	...CONTENT_MAPPING[content.type],
+				// 	...content,
+				// 	id: component.layouts.length + 1,
+				// });
 			}
 
 			setShowContentModal(false);
@@ -204,6 +204,7 @@ function DNDComponent() {
 							addNewItem={handleAddNewItem}
 							onNewItemAdding={setNewItemAdding}
 							selectedRow={selectedRow}
+							selectedItem={selectedItem}
 							setSelectedRow={setSelectedRow}
 							isNewItemAdding={isNewItemAdding}
 							parentComponentId={parentComponentId}
@@ -234,6 +235,10 @@ function DNDComponent() {
 						selectedRow={selectedRow}
 						componentType="child"
 						selectedItem={selectedItem}
+						setParentComponentId={setParentComponentId}
+						setShowContentModal={setShowContentModal}
+						component={component}
+						setComponent={setComponent}
 					/>
 
 				</Modal>

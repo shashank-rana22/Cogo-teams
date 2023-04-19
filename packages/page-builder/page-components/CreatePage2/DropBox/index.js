@@ -24,6 +24,7 @@ function Stage({
 	setShowContentModal,
 	setParentComponentId,
 	setSelectedItem,
+	selectedItem,
 }) {
 	const [stageItems, setStageItems] = useState(component);
 
@@ -80,7 +81,6 @@ function Stage({
 				style={{ position: 'relative' }}
 				key={item.id}
 				role="presentation"
-				onClick={(e) => e.stopPropagation()}
 
 			>
 				<RightPanel
@@ -94,13 +94,13 @@ function Stage({
 					moveItem={moveItem}
 					isNewItemAdding={isNewItemAdding}
 					onNewAddingItemProps={handleNewAddingItemPropsChange}
-					onClick={() => setSelectedRow({ ...item, id, index })}
 					isSelected={!!id && id === selectedRow?.id}
 					selectedRow={selectedRow}
 					setSelectedRow={setSelectedRow}
 					setShowContentModal={setShowContentModal}
 					setParentComponentId={setParentComponentId}
 					setSelectedItem={setSelectedItem}
+					selectedItem={selectedItem}
 				/>
 			</div>
 		);
@@ -109,6 +109,7 @@ function Stage({
 		moveItem,
 		selectedRow,
 		isNewItemAdding,
+		selectedItem,
 		handleNewAddingItemPropsChange,
 	]);
 
@@ -168,7 +169,7 @@ function Stage({
 			ref={dropRef}
 			className={styles.container}
 			role="presentation"
-			onClick={() => setSelectedRow({})}
+			onClick={() => { setSelectedRow({}); setSelectedItem({}); }}
 			style={{
 				...component.style,
 				backgroundColor,
