@@ -216,6 +216,7 @@ function InvoicingParties({
 				<CreateNewTradeParty
 					orgResponse={organization}
 					setShowComponent={setShowComponent}
+					showComponent={showComponent}
 					tradePartyType={tradePartyType}
 					fetchOrganizationTradeParties={refetch}
 				/>
