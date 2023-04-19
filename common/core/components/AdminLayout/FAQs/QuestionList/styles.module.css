@@ -1,263 +1,275 @@
 .containers {
-  min-height: 57vh;
+	min-height: 57vh;
 }
 
 .question {
-  padding-bottom: 12px;
-  font-size: 13px;
-  cursor: pointer;
+	padding-bottom: 12px;
+	font-size: 13px;
+	cursor: pointer;
 
-  &:hover {
-    align-items: center;
-    padding-right: -10px;
-    padding-left: -10px;
-    color: #f26054;
-    background: #fdebe8;
-    transition: 0.3s;
-  }
+	&:hover {
+		align-items: center;
+		padding-right: -10px;
+		padding-left: -10px;
+		color: #f26054;
+		background: #fdebe8;
+		transition: 0.3s;
+	}
 }
 
 .pagination_container {
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 20px;
-  padding-bottom: 12px;
-  font-size: 13px;
-  cursor: pointer;
+	display: flex;
+	justify-content: flex-end;
+	padding-right: 20px;
+	padding-bottom: 12px;
+	font-size: 13px;
+	cursor: pointer;
 }
 
 .pill {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 5px 10px !important;
-  margin: 0 8px;
-  font-size: 8px !important;
-  background: white;
-  border: 1px solid #ffe4af;
-  border-radius: 16px;
-  opacity: 0.8;
+	display: flex;
+	flex-wrap: wrap;
+	padding: 5px 10px !important;
+	margin: 0 8px;
+	font-size: 8px !important;
+	background: white;
+	border: 1px solid #ffe4af;
+	border-radius: 16px;
+	opacity: 0.8;
 }
 
 .module_text {
-  margin: 16px 0 8px;
-  font-size: 11px;
-  font-weight: 400;
-  color: #221f20;
-  opacity: 0.6;
+	margin: 16px 0 8px;
+	font-size: 11px;
+	font-weight: 400;
+	color: #221f20;
+	opacity: 0.6;
 }
 
 .skeleton_container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 15px;
-  margin-right: 15px;
-  margin-left: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 15px;
+	margin-right: 15px;
+	margin-left: 20px;
 }
 
 .skeleton_wrapper {
-  display: flex;
-  margin: 8px 15px 3px 20px;
+	display: flex;
+	margin: 8px 15px 3px 20px;
 }
 
 .question_container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 15px;
-  margin-right: 15px;
-  margin-left: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 15px;
+	margin-right: 15px;
+	margin-left: 20px;
 }
 
 .pill_container {
-  display: flex;
-  margin: 8px 15px 3px;
+	display: flex;
+	margin: 8px 15px 3px;
 }
 
 .list_container {
-  margin-right: 4px;
-  margin-left: 4px;
+	margin-right: 4px;
+	margin-left: 4px;
 }
 
 .line {
-  position: relative;
-  top: 90%;
-  width: 100%;
-  padding-top: 50px;
-  margin: 0 auto;
-  overflow: hidden;
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
-  white-space: wrap;
-  opacity: 0.4;
-  animation: typewriter 0.2s steps(44) 0.1s 1 normal both,
-    blink-text-cursor 5000ms steps(44) infinite normal;
+	position: relative;
+	top: 90%;
+	width: 100%;
+	padding-top: 50px;
+	margin: 0 auto;
+	overflow: hidden;
+	font-size: 14px;
+	font-weight: 600;
+	text-align: center;
+	white-space: wrap;
+	opacity: 0.4;
+	animation:
+		typewriter 0.2s steps(44) 0.1s 1 normal both,
+		blink-text-cursor 5000ms steps(44) infinite normal;
 }
 
 @keyframes typewriter {
-  from {
-    width: 0;
-  }
+	from {
+		width: 0;
+	}
 
-  to {
-    width: 24em;
-  }
+	to {
+		width: 24em;
+	}
 }
 @keyframes blink-text-cursor {
-  from {
-    border-right-color: rgb(255 255 255 / 75%);
-  }
+	from {
+		border-right-color: rgb(255 255 255 / 75%);
+	}
 
-  to {
-    border-right-color: transparent;
-  }
+	to {
+		border-right-color: transparent;
+	}
 }
 
 .topic_heading {
-  margin-top: 18px;
-  margin-bottom: 16px;
-  margin-left: 24px;
-  font-weight: 600;
+	margin-top: 18px;
+	margin-bottom: 16px;
+	margin-left: 24px;
+	font-weight: 600;
 }
 
 .container {
-  overflow: hidden;
-  background: none;
+	overflow: hidden;
+	background: none;
 }
 
 .loop_wrapper {
-  position: relative;
-  display: block;
-  width: 400px;
-  height: 250px;
-  margin: 0 auto;
-  overflow: hidden;
-  color: #fff;
-  border-bottom: 3px solid #ea3a27;
+	position: relative;
+	display: block;
+	width: 400px;
+	height: 250px;
+	margin: 0 auto;
+	overflow: hidden;
+	color: #fff;
+	border-bottom: 3px solid #ea3a27;
 }
 
 .mountain {
-  position: absolute;
-  right: -900px;
-  bottom: -20px;
-  width: 2px;
-  height: 2px;
-  box-shadow: 0 0 0 50px #fdebe8, 60px 50px 0 70px #fdebe8,
-    90px 90px 0 50px #fdebe8, 250px 250px 0 50px #fdebe8,
-    290px 320px 0 50px #fdebe8, 320px 400px 0 50px #fdebe8;
-  transform: rotate(130deg);
-  animation: mtn 5s linear infinite;
+	position: absolute;
+	right: -900px;
+	bottom: -20px;
+	width: 2px;
+	height: 2px;
+	box-shadow:
+		0 0 0 50px #fdebe8,
+		60px 50px 0 70px #fdebe8,
+		90px 90px 0 50px #fdebe8,
+		250px 250px 0 50px #fdebe8,
+		290px 320px 0 50px #fdebe8,
+		320px 400px 0 50px #fdebe8;
+	transform: rotate(130deg);
+	animation: mtn 5s linear infinite;
 }
 
 .hill {
-  position: absolute;
-  right: -900px;
-  bottom: -50px;
-  width: 400px;
-  height: 20px;
-  border-radius: 50%;
-  box-shadow: 0 0 0 50px #f37065, -20px 0 0 20px #f37065, -90px 0 0 50px #f37065,
-    250px 0 0 50px #f37065, 290px 0 0 50px #f37065, 620px 0 0 50px #f37065;
-  animation: hill 4s 2s linear infinite;
+	position: absolute;
+	right: -900px;
+	bottom: -50px;
+	width: 400px;
+	height: 20px;
+	border-radius: 50%;
+	box-shadow:
+		0 0 0 50px #f37065,
+		-20px 0 0 20px #f37065,
+		-90px 0 0 50px #f37065,
+		250px 0 0 50px #f37065,
+		290px 0 0 50px #f37065,
+		620px 0 0 50px #f37065;
+	animation: hill 4s 2s linear infinite;
 }
 
 .tree {
-  position: absolute;
-  bottom: 0;
-  width: 350px;
-  height: 50px;
-  background: url("https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-icon-red.svg")
-    no-repeat;
-  animation: tree 4s 0s linear infinite;
+	position: absolute;
+	bottom: 0;
+	width: 350px;
+	height: 50px;
+	background:
+		url("https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-icon-red.svg")
+		no-repeat;
+	animation: tree 4s 0s linear infinite;
 }
 
 .rock {
-  position: absolute;
-  bottom: -2px;
-  width: 2%;
-  height: 2%;
-  margin-top: -17%;
-  background: #0c0c0c;
-  border-radius: 20px;
-  animation: rock 2s -0.53s linear infinite;
+	position: absolute;
+	bottom: -2px;
+	width: 2%;
+	height: 2%;
+	margin-top: -17%;
+	background: #0c0c0c;
+	border-radius: 20px;
+	animation: rock 2s -0.53s linear infinite;
 }
 
 .truck {
-  position: absolute;
-  right: 50%;
-  bottom: 0;
-  width: 85px;
-  height: 80px;
-  margin-right: -60px;
-  margin-bottom: -18px;
-  background: #fff9ce;
-  background: url("https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/truck.png")
-    no-repeat;
-  background-size: contain;
-  transition: all ease;
-  animation: truck 4s 0.08s ease infinite;
+	position: absolute;
+	right: 50%;
+	bottom: 0;
+	width: 85px;
+	height: 80px;
+	margin-right: -60px;
+	margin-bottom: -18px;
+	background: #fff9ce;
+	background:
+		url("https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/truck.png")
+		no-repeat;
+	background-size: contain;
+	transition: all ease;
+	animation: truck 4s 0.08s ease infinite;
 }
 
 .truck::before {
-  position: absolute;
-  width: 25px;
-  content: " ";
-  box-shadow: -30px 28px 0 1.5px #2f2a2a, -35px 18px 0 1.5px #161515;
-  animation: wind 1.5s 0s ease infinite;
+	position: absolute;
+	width: 25px;
+	content: " ";
+	box-shadow: -30px 28px 0 1.5px #2f2a2a, -35px 18px 0 1.5px #161515;
+	animation: wind 1.5s 0s ease infinite;
 }
 
 @keyframes tree {
-  0% {
-    transform: translate(1350px);
-  }
+	0% {
+		transform: translate(1350px);
+	}
 
-  100% {
-    transform: translate(-50px);
-  }
+	100% {
+		transform: translate(-50px);
+	}
 }
 @keyframes rock {
-  0% {
-    right: -200px;
-  }
+	0% {
+		right: -200px;
+	}
 
-  100% {
-    right: 2000px;
-  }
+	100% {
+		right: 2000px;
+	}
 }
 @keyframes truck {
-  6% {
-    transform: translateY(0);
-  }
+	6% {
+		transform: translateY(0);
+	}
 
-  7% {
-    transform: translateY(-6px);
-  }
+	7% {
+		transform: translateY(-6px);
+	}
 
-  9% {
-    transform: translateY(0);
-  }
+	9% {
+		transform: translateY(0);
+	}
 
-  10% {
-    transform: translateY(-1px);
-  }
+	10% {
+		transform: translateY(-1px);
+	}
 
-  11% {
-    transform: translateY(0);
-  }
+	11% {
+		transform: translateY(0);
+	}
 }
 @keyframes wind {
-  50% {
-    transform: translateY(3px);
-  }
+	50% {
+		transform: translateY(3px);
+	}
 }
 @keyframes mtn {
-  100% {
-    transform: translateX(-2000px) rotate(130deg);
-  }
+	100% {
+		transform: translateX(-2000px) rotate(130deg);
+	}
 }
 @keyframes hill {
-  100% {
-    transform: translateX(-2000px);
-  }
+	100% {
+		transform: translateX(-2000px);
+	}
 }
