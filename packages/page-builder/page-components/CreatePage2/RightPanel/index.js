@@ -28,7 +28,7 @@ function ComponentBuilder({ widget, components, setComponents, selectedRow, chil
 
 				const isChildSelected = childId === id && componentId === selectedRowId && type;
 
-				const border = isChildSelected ? '2px solid red' : allStyles.border;
+				const border = isChildSelected ? '1px solid red' : allStyles.border;
 
 				const handleClick = (e) => {
 					e.stopPropagation();
@@ -75,7 +75,6 @@ function RightPanel(props) {
 		setShowContentModal,
 		setParentComponentId,
 		setSelectedItem,
-		selectedItem,
 	} = props;
 	const [childId, setChildId] = useState('');
 
@@ -161,6 +160,7 @@ function RightPanel(props) {
 		setComponents(() => ({ ...data }));
 
 		setSelectedRow({});
+		setSelectedItem({});
 	};
 
 	const handleSubmitClick = ({ childrenId, parentId }) => {
@@ -214,9 +214,9 @@ function RightPanel(props) {
 	const handleClick = (e) => {
 		e.stopPropagation();
 		setSelectedRow({ ...widget, id, index });
+		setSelectedItem({ ...widget, id, index });
 
 		setChildId('');
-		setSelectedItem({});
 	};
 
 	return (

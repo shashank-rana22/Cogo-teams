@@ -120,11 +120,11 @@ function DNDComponent() {
 					id: component.layouts.length + 1,
 				});
 
-				// setSelectedItem({
-				// 	...CONTENT_MAPPING[content.type],
-				// 	...content,
-				// 	id: component.layouts.length + 1,
-				// });
+				setSelectedItem({
+					...CONTENT_MAPPING[content.type],
+					...content,
+					id: component.layouts.length + 1,
+				});
 			}
 
 			setShowContentModal(false);
