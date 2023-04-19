@@ -3,16 +3,11 @@ import { IcMInfo } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function Header({ heading = '', tooltipData = '', setEditing = () => {} }) {
-	const onClose = () => {
-		setEditing((pv) => !pv);
-	};
-
+function Header({ heading = '', tooltipData = '', onClose = () => {} }) {
 	return (
 		<div className={styles.header}>
 			<div className={styles.heading}>
 				<div className={styles.label}>{heading}</div>
-
 				<Tooltip
 					className={styles.word_break}
 					content={tooltipData}
@@ -32,12 +27,11 @@ function Header({ heading = '', tooltipData = '', setEditing = () => {} }) {
 				</Button>
 
 				<Button
+					type="submit"
 					themeType="primary"
-					onClick={onClose}
 					style={{ marginLeft: '8px' }}
 				>
 					Save
-
 				</Button>
 			</div>
 		</div>
