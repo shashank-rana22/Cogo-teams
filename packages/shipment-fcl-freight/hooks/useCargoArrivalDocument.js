@@ -23,10 +23,10 @@ const useCargoArrivalDocument = ({
 				pending_task_id    : pendingTask?.id,
 				documents          : [
 					{
-						file_name    : values?.url?.name,
-						document_url : values?.url?.url,
+						file_name    : values?.cargo_arrival_notice?.fileName,
+						document_url : values?.cargo_arrival_notice?.finalUrl,
 						data         : {
-							description: values?.description,
+							description: values?.document_description,
 						},
 					},
 				],
