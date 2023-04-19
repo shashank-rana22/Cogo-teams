@@ -16,7 +16,8 @@ const getAnswerState = ({ type, answer, subjectiveAnswer, question_type }) => {
 	let answerState = 'answered';
 	if (type === 'marked_for_review') {
 		answerState = type;
-	} else if (question_type === 'subjective' && subjectiveAnswer.toString('html') === '<p><br></p>') {
+	} else if (question_type === 'subjective' && (subjectiveAnswer.toString('html') === '<p><br></p>'
+	|| subjectiveAnswer.toString('html') === '')) {
 		answerState = 'viewed';
 	} else if (question_type !== 'subjective' && isEmpty(answer)) {
 		answerState = 'viewed';

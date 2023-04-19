@@ -11,6 +11,13 @@ import SortComponent from '../SortComponent';
 
 import styles from './styles.module.css';
 
+const QUESTION_TYPE_MAPPING = {
+	single_correct : 'Stand Alone',
+	multi_correct  : 'Stand Alone',
+	case_study     : 'Case Study',
+	subjective     : 'Subjective',
+};
+
 const useGetTableColumns = ({
 	setAllKeysSaved,
 	getTestQuestionTest,
@@ -31,7 +38,7 @@ const useGetTableColumns = ({
 			id       : 'question_type',
 			accessor : ({ question_type = '' }) => (
 				<section>
-					{startCase(question_type) || ''}
+					{QUESTION_TYPE_MAPPING[question_type] || ''}
 				</section>
 			),
 		},
@@ -65,7 +72,7 @@ const useGetTableColumns = ({
 					{
 					item?.question_type !== 'subjective' && (
 						<section>
-							{item?.question_type === 'case_study'
+							{item?.question_type !== 'case_study'
 								? startCase(item?.question_type)
 								: <CaseAnswerType item={item} caseToShow={caseToShow} />}
 						</section>

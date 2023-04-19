@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import getPayload from '../utils/getPayload';
 
@@ -69,7 +69,7 @@ function useCreateTestQuestion({
 			listSetQuestions({ questionSetId });
 			getTestQuestionTest({ questionSetId });
 		} catch (err) {
-			Toast.error(getApiErrorString(err.response?.data) || 'something went wrong');
+			Toast.error(startCase(getApiErrorString(err.response?.data)) || 'Something Went Wrong');
 		}
 	};
 
