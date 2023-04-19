@@ -435,8 +435,11 @@ export const column = ({
 				jobNumber = '', serviceType = '', purchaseInvoicesCount,
 				salesInvoicesCount,
 			} = original || {}; return (
-				<Tooltip content={content(purchaseInvoicesCount, salesInvoicesCount)} placement="top" interactive>
-					{' '}
+				<Tooltip
+					content={content(purchaseInvoicesCount, salesInvoicesCount)}
+					placement="top"
+					interactive
+				>
 					<div className={styles.job_number}>
 						{' '}
 						<div className={styles.job_number_data}>{ jobNumber || '-' }</div>
@@ -444,7 +447,6 @@ export const column = ({
 						<div>{startCase(serviceType || '-')}</div>
 						{' '}
 					</div>
-					{' '}
 				</Tooltip>
 			);
 		},
@@ -576,10 +578,8 @@ export const column = ({
 				<span>
 					{' '}
 					{shipmentMilestone?.length > 10 ? (
-						<Tooltip content={startCase(shipmentMilestone) || '-'} placement="top">
-							{' '}
+						<Tooltip content={startCase(shipmentMilestone || '') || '-'} placement="top">
 							<div className={styles.wrapper}>{startCase(shipmentMilestone) || '-' }</div>
-							{' '}
 						</Tooltip>
 					) : startCase(shipmentMilestone) || '-' }
 					{' '}
