@@ -1,54 +1,84 @@
 const buttonSettings = [
-	{ label: 'Text', key: 'text' },
-	{ label: 'Background Color', key: 'backgroundColor', type: 'color' },
-	{ label: 'Text Color', key: 'color', type: 'color' },
 	{
-		label   : 'Border Style',
-		key     : 'borderStyle',
-		type    : 'select',
-		options : ['none', 'solid', 'dashed', 'dotted'],
+		type    : 'Background',
+		options : [
+			{
+				label : 'Background Image',
+				key   : 'backgroundImage',
+				type  : 'file',
+			},
+		],
 	},
 	{
-		label : 'Border Width',
-		key   : 'borderWidth',
-		type  : 'number',
+		type    : 'Text',
+		options : [
+			{ label: 'Font Size', key: 'fontSize', type: 'number' },
+			{
+				label   : 'Font Style',
+				key     : 'fontStyle',
+				type    : 'select',
+				options : ['normal', 'italic', 'oblique'],
+			},
+			{ label: 'Color', key: 'color', type: 'color' },
+			{
+				label   : 'Font Weight',
+				key     : 'fontWeight',
+				type    : 'select',
+				options : ['normal', 'bold'],
+			},
+			{
+				label   : 'Text Transform',
+				key     : 'textTransform',
+				type    : 'select',
+				options : ['none', 'capitalize', 'uppercase', 'lowercase'],
+			},
+			{
+				label   : 'Text Decoration',
+				key     : 'textDecoration',
+				type    : 'select',
+				options : ['none', 'underline', 'overline', 'line-through'],
+			},
+		],
 	},
 	{
-		label : 'Border Color',
-		key   : 'borderColor',
-		type  : 'color',
+		type    : 'Align',
+		options : [
+			{
+				label   : 'Text Align',
+				key     : 'textAlign',
+				type    : 'select',
+				options : ['left', 'center', 'right', 'justify'],
+			},
+			{
+				label   : 'Vertical Align',
+				key     : 'verticalAlign',
+				type    : 'select',
+				options : ['baseline', 'top', 'middle', 'bottom'],
+			},
+		],
 	},
+
 	{
-		label : 'Border Radius',
-		key   : 'borderRadius',
-		type  : 'number',
-	},
-	{
-		label   : 'Font Weight',
-		key     : 'fontWeight',
-		type    : 'select',
-		options : ['normal', 'bold'],
-	},
-	{
-		label : 'Font Size',
-		key   : 'fontSize',
-		type  : 'number',
-	},
-	{
-		label   : 'Text Align',
-		key     : 'textAlign',
-		type    : 'select',
-		options : ['left', 'center', 'right', 'justify'],
-	},
-	{
-		label : 'Padding',
-		key   : 'padding',
-		type  : 'number',
-	},
-	{
-		label : 'Margin',
-		key   : 'margin',
-		type  : 'number',
+		type    : 'Spacing',
+		options : [
+			{ label: 'Letter Spacing', key: 'letterSpacing', type: 'number' },
+			{ label: 'Line Height', key: 'lineHeight', type: 'number' },
+
+			{
+				label   : 'Word Wrap',
+				key     : 'wordWrap',
+				type    : 'select',
+				options : ['normal', 'break-word'],
+			},
+			{
+				label   : 'White Space',
+				key     : 'whiteSpace',
+				type    : 'select',
+				options : ['normal', 'nowrap', 'pre-wrap'],
+			},
+			{ label: 'Word Spacing', key: 'wordSpacing', type: 'number' },
+			{ label: 'Text Indent', key: 'textIndent', type: 'number' },
+		],
 	},
 ];
 

@@ -13,13 +13,13 @@ function NumberInput(props) {
 	const isRootComponent = isEmpty(selectedRow);
 
 	const handleChange = useCallback(
-		(key, value) => {
+		(value) => {
 			if (isRootComponent) {
 				setComponent((prev) => ({
 					...prev,
 					style: {
 						...component.style,
-						[key]: value,
+						[NumberKey]: value,
 					},
 				}));
 			} else {
@@ -31,7 +31,7 @@ function NumberInput(props) {
 					...selectedComponent,
 					style: {
 						...selectedComponent.style,
-						[key]: value,
+						[NumberKey]: value,
 					},
 				};
 
@@ -48,7 +48,7 @@ function NumberInput(props) {
 
 			setNumber(value);
 		},
-		[component.layouts, selectedRow, setComponent, component.style, isRootComponent],
+		[component.layouts, selectedRow, setComponent, NumberKey, component.style, isRootComponent],
 	);
 
 	const handleInputChange = useCallback(

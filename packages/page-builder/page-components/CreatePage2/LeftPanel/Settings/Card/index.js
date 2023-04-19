@@ -2,8 +2,8 @@ import { Select, Button } from '@cogoport/components';
 import { IcMDelete, IcMUpload } from '@cogoport/icons-react';
 import React, { useCallback } from 'react';
 
-import ColorInput from '../../../../../../commons/ColorInput';
-import NumberInput from '../../../../../../commons/NumberInput';
+import ColorInput from '../../../../../commons/ColorInput';
+import NumberInput from '../../../../../commons/NumberInput';
 
 import styles from './styles.module.css';
 
@@ -18,7 +18,7 @@ function extractUrlString(urlString = '') {
 	return urlString;
 }
 
-function SettingsCard(props) {
+function Card(props) {
 	const {
 		setComponent,
 		component,
@@ -136,6 +136,7 @@ function SettingsCard(props) {
 							NumberKey={key}
 							setComponent={setComponent}
 							component={component}
+							selectedRow={selectedRow}
 						/>
 					),
 				};
@@ -152,4 +153,4 @@ function SettingsCard(props) {
 	);
 }
 
-export default SettingsCard;
+export default Card;

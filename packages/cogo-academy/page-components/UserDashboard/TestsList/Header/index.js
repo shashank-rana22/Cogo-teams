@@ -40,8 +40,8 @@ function Header({ debounceQuery, testCategory, setTestCategory }) {
 		<div className={styles.container}>
 			<div className={styles.header}>Tests</div>
 
-			<div className={styles.input_container}>
-				<div>
+			<div className={styles.filters}>
+				<div className={styles.input_container}>
 					<div className={styles.label}>Quick Search</div>
 
 					<Input

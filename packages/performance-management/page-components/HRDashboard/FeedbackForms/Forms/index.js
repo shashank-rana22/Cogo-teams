@@ -41,7 +41,13 @@ function Forms({
 	};
 
 	return (isEmpty(formList) && !loading
-		? <EmptyState setFormStage={setFormStage} setOpenCreateForm={setOpenCreateForm} /> : (
+		? (
+			<EmptyState
+				setFormStage={setFormStage}
+				setOpenCreateForm={setOpenCreateForm}
+				activationStatus={activationStatus}
+			/>
+		) : (
 			<div className={styles.container}>
 				<div className={styles.form_header}>
 					<div className={styles.form_cat}>
@@ -53,7 +59,7 @@ function Forms({
 						<Button
 							themeType="primary"
 							onClick={() => showForm()}
-							disabled={activationStatus === 'Edit'}
+							disabled={activationStatus === 'edit'}
 						>
 							Create New
 						</Button>
@@ -117,7 +123,7 @@ function Forms({
 									<Button
 										themeType="tertiary"
 										onClick={() => openOldForm(id)}
-										disabled={activationStatus === 'Edit'}
+										disabled={activationStatus === 'edit'}
 									>
 										Use
 									</Button>

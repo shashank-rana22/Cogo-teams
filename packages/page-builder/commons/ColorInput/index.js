@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 function ColorInput(props) {
 	const { colorKey, component, setComponent, selectedRow } = props;
 
-	const [color, setColor] = useState(component.style?.[colorKey] || '#ffffff');
+	const [color, setColor] = useState(selectedRow.style?.[colorKey] || component.style?.[colorKey] || '#ffffff');
 
 	const isRootComponent = isEmpty(selectedRow);
 
