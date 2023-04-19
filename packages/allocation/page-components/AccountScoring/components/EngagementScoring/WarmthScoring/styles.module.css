@@ -1,0 +1,30 @@
+.collapse_container {
+	margin-top: 16px;
+
+	:global {
+		.ui_collapse_header {
+			align-items: center;
+			width: 100%;
+		}
+
+		.ui_collapse_title {
+			width: 100%;
+		}
+	}
+}
+
+.engagement_type {
+	font-size: 16px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.title_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.title_buttons {
+	display: flex;
+}
