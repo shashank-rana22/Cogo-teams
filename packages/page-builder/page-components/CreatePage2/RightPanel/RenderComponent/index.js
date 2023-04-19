@@ -1,4 +1,5 @@
 import ButtonComponent from '../../../../commons/widgets/ButtonComponent';
+import FormComponent from '../../../../commons/widgets/FormComponent';
 import HtmlComponent from '../../../../commons/widgets/HtmlComponent';
 import ImageComponent from '../../../../commons/widgets/ImageComponent';
 import TextComponent from '../../../../commons/widgets/TextComponent';
@@ -10,6 +11,7 @@ const componentMapping = {
 	image  : ImageComponent,
 	video  : VideoComponent,
 	html   : HtmlComponent,
+	form   : FormComponent,
 };
 
 function RenderComponents({
@@ -54,9 +56,19 @@ function RenderComponents({
 			childId,
 			selectedRow,
 		},
+
 		html: {
 			key  : elementId,
 			html : widget.content,
+		},
+
+		form: {
+			key: elementId,
+			components,
+			setComponents,
+			selectedRow,
+			childId,
+			widget,
 		},
 	};
 
@@ -64,6 +76,7 @@ function RenderComponents({
 
 	return (
 		<div
+			key={elementId}
 			role="presentation"
 			onClick={() => setSelectedItem({ ...widget, index })}
 			style={{ width: '100%', height: '100%', color: '#222' }}

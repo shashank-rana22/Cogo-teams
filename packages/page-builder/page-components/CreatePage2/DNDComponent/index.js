@@ -53,7 +53,20 @@ const CONTENT_MAPPING = {
 		attributes  : {
 			onClick: 'handleSubmitClick',
 		},
+	},
 
+	form: {
+		content     : '',
+		redirectUrl : '',
+		themeType   : 'primary',
+		size        : 'md',
+		layouts     : [],
+		style       : {},
+		type        : 'html',
+		formData    : {},
+		attributes  : {
+			onClick: 'handleSubmitClick',
+		},
 	},
 };
 

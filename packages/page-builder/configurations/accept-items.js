@@ -6,6 +6,7 @@ const VALID_ITEM_TYPES = {
 	rootElement : 'rootElement',
 	video       : 'video',
 	html        : 'html',
+	form        : 'form',
 
 };
 

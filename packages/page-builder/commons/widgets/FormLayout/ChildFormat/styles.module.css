@@ -1,0 +1,66 @@
+.container {
+	width: 100%;
+	padding: 0px 8px;
+}
+
+.button_wrap {
+	display: flex;
+	margin-top: 20px;
+
+	.core-ui-button-root {
+		background: #FFFFFF;
+		border: 1px solid #000000;
+		color: #000000;
+		border-radius: 4px;
+		font-size: 12px;
+		padding: 14px 32px 14px 14px;
+		height: 44px;
+		display: flex;
+		align-items: center;
+	}
+}
+
+.add_icon {
+	width: 30px;
+    height: 30px;
+    background: #000000;
+    color: #ffffff;
+    border-radius: 100%;
+    font-size: 28px;
+    padding-left: 1px;
+    margin-right: 10px;
+    font-weight: 300;
+}
+
+.label {
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 16px;
+	letter-spacing: 0.04em;
+	margin-top: 32px;
+	color: #333333;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+
+.container_wrapper{
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 14px;
+}
+
+.content {
+	display: flex;
+	margin: 10px 20px;
+	flex-wrap: wrap;
+}
+
+
+.align_remove{
+	padding: 8px;
+	flex-basis: 5%;
+	display: flex;
+	align-items: center;
+}

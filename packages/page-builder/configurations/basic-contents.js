@@ -1,4 +1,4 @@
-import { IcMFolder, IcMImage, IcMEdit, IcMVideoCall } from '@cogoport/icons-react';
+import { IcMFolder, IcMImage, IcMEdit, IcMVideoCall, IcMFdangerousCargoType } from '@cogoport/icons-react';
 
 const contents = [
 	{
@@ -28,6 +28,11 @@ const contents = [
 		type : 'html',
 		icon : <img alt="" src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/html.svg" height="20px" />,
 		name : 'html',
+	},
+	{
+		type : 'form',
+		icon : <IcMFdangerousCargoType />,
+		name : 'form',
 
 	},
 ];
