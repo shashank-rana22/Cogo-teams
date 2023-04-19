@@ -22,9 +22,13 @@ function GPTAnswer({ answer, showMore, search }) {
 			<div className={styles.ans}>
 				{answer}
 			</div>
-			<div style={{ marginTop: '16px' }}>
-				{showMore ? <Button size="md" themeType="primary" onClick={handleClick}>Show More</Button> : null}
-			</div>
+
+			{showMore ? (
+				<Button style={{ marginTop: '16px' }} size="md" themeType="primary" onClick={handleClick}>
+					Show More
+				</Button>
+			) : null}
+
 		</div>
 	);
 }
