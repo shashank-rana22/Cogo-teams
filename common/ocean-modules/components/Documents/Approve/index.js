@@ -4,11 +4,11 @@ import styles from './styles.module.css';
 
 function Approve({
 	showApproved,
-	setAddToWallet,
+	setAddToWallet = () => {},
 	addToWallet,
-	handleApprove,
-	setShowApproved,
-	setShowDoc,
+	handleApprove = () => {},
+	setShowApproved = () => {},
+	setShowDoc = () => {},
 }) {
 	const handleManualUpload = () => {
 		setShowDoc({ ...showApproved, type: 'task' });

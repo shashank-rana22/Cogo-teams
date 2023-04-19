@@ -83,6 +83,7 @@
 
 .dots {
 	margin-left: auto;
+
 	&:hover {
 		cursor: pointer;
 	}

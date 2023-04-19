@@ -22,7 +22,7 @@ function Documents() {
 	const [addToWallet, setAddToWallet] = useState(true);
 
 	const { updateDocument } = useUpdateDocument();
-	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
+	const { shipment_data, primary_service, activeStakeholder } = useContext(ShipmentDetailContext);
 
 	const {
 		loading,
@@ -70,6 +70,7 @@ function Documents() {
 					setFilters={setFilters}
 					activeWallet={activeWallet}
 					setActiveWallet={setActiveWallet}
+					activeStakeholder={activeStakeholder}
 				/>
 
 				{!activeToggle ? (

@@ -1,7 +1,9 @@
-import { Toggle, Input, Select, Tabs, TabPanel } from '@cogoport/components';
+import { Button, Toggle, Input, Select, Tabs, TabPanel } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useState } from 'react';
 
+import PossibleDocument from './PossibleDocument';
 import styles from './styles.module.css';
 
 function Header({
@@ -13,12 +15,18 @@ function Header({
 	setFilters = () => {},
 	activeWallet = '',
 	setActiveWallet = () => {},
+	activeStakeholder,
 }) {
+	const [showModal, setShowModal] = useState(false);
 	const SourceOptions = Array.isArray(data)
 		? (data || [])?.map((e) => ({ label: e?.business_name, value: e?.id }))
 		: [];
 
 	const serviceOptions = shipment_data?.services?.map((service) => ({ label: startCase(service), value: service }));
+
+	const handleDocumentChange = () => {
+		setShowModal(true);
+	};
 
 	return (
 		<div className={styles.heading}>
@@ -72,15 +80,36 @@ function Header({
 				) : null}
 			</div>
 
-			<Toggle
-				name="myTransilates"
-				size="md"
-				offLabel="Check List"
-				onLabel="Wallet"
-				value={activeToggle}
-				className={styles.custom_toggle}
-				onChange={() => setActiveToggle((p) => !p)}
-			/>
+			<div className={styles.sub_heading}>
+				<Button
+					size="md"
+					themeType="primary"
+					onClick={() => handleDocumentChange()}
+				>
+					Genric Upload
+				</Button>
+
+				<Toggle
+					name="myTransilates"
+					size="md"
+					offLabel="Check List"
+					onLabel="Wallet"
+					value={activeToggle}
+					className={styles.custom_toggle}
+					onChange={() => setActiveToggle((p) => !p)}
+				/>
+			</div>
+
+			{showModal ? (
+				<PossibleDocument
+					showModal={showModal}
+					setShowModal={setShowModal}
+					data={data}
+					shipment_data={shipment_data}
+					activeStakeholder={activeStakeholder}
+				/>
+			) : null }
+
 		</div>
 	);
 }

@@ -112,11 +112,11 @@
 	margin-bottom: 16px;
 	border: 1px solid #ececec;
 	border-radius: 4px;
-} 
+}
 
-.message_text{
-	font-weight: 400;
-	font-size: 10px;
+.message_text {
 	gap: 4px;
+	font-size: 10px;
+	font-weight: 400;
 	color: #cb6464;
 }

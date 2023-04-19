@@ -38,7 +38,7 @@ function Content({
 					themeType="link"
 					className="primary md text"
 					onClick={() => (
-						!receivedViaEmail
+						receivedViaEmail
 							? setShowApproved({
 								...item,
 								document_type   : docType,
@@ -52,7 +52,7 @@ function Content({
 								document_type: docType,
 							}))}
 				>
-					{!receivedViaEmail ? 'Approve Document' : showUploadText}
+					{receivedViaEmail ? 'Approve Document' : showUploadText}
 				</Button>
 			);
 		}

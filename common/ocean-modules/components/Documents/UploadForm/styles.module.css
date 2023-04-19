@@ -5,31 +5,34 @@
 	line-height: 14px;
 	color: #4f4f4f;
 } */
-.buttons_container{
-    display: flex;
+.buttons_container {
+	display: flex;
+	gap: 1rem;
 	justify-content: flex-end;
 	padding: 1rem;
-	gap: 1rem;
 }
-.Choose_from_wallet{
-    display: flex;
-	align-items: center;
+
+.Choose_from_wallet {
+	display: flex;
 	gap: 1rem;
+	align-items: center;
 	padding: 10px 45px;
-	border: 1px dashed #e0e0e0;
 	color: #393f70;
+	border: 1px dashed #e0e0e0;
 	border-radius: 8px;
 
 	&:hover {
 		cursor: pointer;
 	}
 }
-.upload_wrapper{
-    padding: 0px 16px 0px 16px;
-    .core-ui-uploaded-file {
-		border: 1px dashed #e0e0e0;
-		padding: 4px 16px;
-		border-radius: 4px;
+
+.upload_wrapper {
+	padding: 0 16px;
+
+	.core-ui-uploaded-file {
 		width: max-content;
+		padding: 4px 16px;
+		border: 1px dashed #e0e0e0;
+		border-radius: 4px;
 	}
 }
