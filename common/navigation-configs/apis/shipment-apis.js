@@ -1416,6 +1416,11 @@ const apis = [
 		service_name : 'shipment',
 		feature      : 'revenue_desk',
 	},
+	{
+		api          : 'list_saas_rail_domestic_freight_container_details',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
 ];
 
 export default apis;
