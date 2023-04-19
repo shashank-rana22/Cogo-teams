@@ -6,7 +6,7 @@ import Filters from './Filters';
 import styles from './styles.module.css';
 
 function Dashboard() {
-	const [activeTab, setActiveTab] = useState('local_rates');
+	const [activeTab, setActiveTab] = useState('approval');
 	const formProps = useForm();
 
 	const { watch } = formProps;
