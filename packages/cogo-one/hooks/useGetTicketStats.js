@@ -1,3 +1,4 @@
+import Toast from '@cogoport/components';
 import { useTicketsRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
@@ -16,7 +17,7 @@ const useGetTicketStats = ({ UserID = '', activeTab = '' }) => {
 				},
 			});
 		} catch (e) {
-			// console.log('e:', e);
+			Toast.error(e?.error || 'something went wrong');
 		}
 	}, [trigger, UserID]);
 
@@ -29,6 +30,7 @@ const useGetTicketStats = ({ UserID = '', activeTab = '' }) => {
 	return {
 		statsData    : data,
 		statsLoading : loading,
+		fetchTicketsStats,
 	};
 };
 export default useGetTicketStats;

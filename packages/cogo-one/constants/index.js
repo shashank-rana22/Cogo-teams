@@ -271,7 +271,7 @@ export const GENERAL_ICON = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/o
 export const ECLAMATION_SVG = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg';
 
 export const FILTER_KEYS_MAPPING = {
-	priority   : { Priority: 'high', Statuses: 'unresolved,overdue' },
+	priority   : { Priority: 'high' },
 	unresolved : { Status: 'unresolved' },
 	closed     : { Status: 'closed' },
 };

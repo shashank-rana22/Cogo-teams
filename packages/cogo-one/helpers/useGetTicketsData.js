@@ -36,6 +36,7 @@ const useGetTicketsData = ({
 		fetchTickets = () => {},
 		setFilter = () => {},
 		filter = '',
+		setPagination = () => {},
 	} = useListTickets({ UserID: userId || leadUserId, activeTab });
 
 	const {
@@ -62,6 +63,8 @@ const useGetTicketsData = ({
 		createTicket,
 		setFilter,
 		filter,
+		refetchTickets,
+		setPagination,
 	};
 
 	return {

@@ -53,3 +53,27 @@
 	margin-top: 2px;
 	cursor: pointer;
 }
+
+.message_content_close {
+	height: fit-content;
+	margin: 10px 3px;
+	overflow: hidden;
+	background: #F2F2F2;
+	border-radius: 6px;
+	box-shadow: 0 0 4px 0 #627fac33;
+}
+
+.ticket_details_close {
+	width: 100%;
+	padding: 10px 15px;
+	background: #E0E0E0;
+}
+
+.detail_div_close{
+	display: flex;
+	background-color: #F9F9F9;
+	width: fit-content;
+	padding: 10px;
+	font-size: 12px;
+	border-radius: 8px;
+}
