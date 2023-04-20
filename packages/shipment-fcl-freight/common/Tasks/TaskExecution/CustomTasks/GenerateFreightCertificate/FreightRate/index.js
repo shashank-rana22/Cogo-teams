@@ -2,8 +2,6 @@ import { Button } from '@cogoport/components';
 import { AsyncSelectController, InputController, useFieldArray, useForm } from '@cogoport/forms';
 import React from 'react';
 
-import useGenerateFreightCertificate from '../../../../../../hooks/useGenerateFreightCertificate';
-import useUpdateShipmentPendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
 import useGenerateAndSubmitCertificate from '../helpers/useGenerateAndSubmitCertificate';
 
 import styles from './styles.module.css';
@@ -15,6 +13,9 @@ function FreightRate({
 	shipmentData = {},
 	refetch = () => {},
 	onCancel = () => {},
+	generateCertificate = () => {},
+	updateTask = () => {},
+	loading = false,
 }) {
 	const { register, handleSubmit, control, formState: { errors }, setValue, watch } = useForm({
 		defaultValues: {
@@ -34,10 +35,6 @@ function FreightRate({
 	});
 
 	const formValues = watch();
-
-	const { apiTrigger: updateTask } = useUpdateShipmentPendingTask({ });
-
-	const { apiTrigger: generateCertificate, loading } = useGenerateFreightCertificate({});
 
 	const { onSubmit } = useGenerateAndSubmitCertificate({
 		task,
@@ -137,11 +134,13 @@ function FreightRate({
 				<Button
 					themeType="secondary"
 					style={{ marginRight: 10 }}
-					disabled={loading}
 				>
 					Cancel
 				</Button>
-				<Button onClick={handleSubmit(onSubmit)}>
+				<Button
+					onClick={handleSubmit(onSubmit)}
+					disabled={loading}
+				>
 					Update
 				</Button>
 			</div>

@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 
 const useGenerateFreightCertificate = ({
 	refetch = () => {},
-	successMessage = 'Successfully Created',
+	successMessage = 'Successfully Generated Freight Certificate',
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : 'generate_freight_certificate',

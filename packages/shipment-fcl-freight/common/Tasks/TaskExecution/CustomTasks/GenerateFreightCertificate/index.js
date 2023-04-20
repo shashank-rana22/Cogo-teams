@@ -1,9 +1,11 @@
-import { Table } from '@cogoport/components';
+import { Loader, Table } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
 import React, { useContext } from 'react';
 
+import useGenerateFreightCertificate from '../../../../../hooks/useGenerateFreightCertificate';
 import useListBillOfLadings from '../../../../../hooks/useListBillOfLadings';
+import useUpdateShipmentPendingTask from '../../../../../hooks/useUpdateShipmentPendingTask';
 
 import FreightRate from './FreightRate';
 import formatDataForTable from './helpers/formatDataForTable';
@@ -40,8 +42,20 @@ function GenerateFreightCertificate({
 	// 	});
 	// }, [JSON.stringify(containersArray || [])]);
 
+	const { apiTrigger: updateTask } = useUpdateShipmentPendingTask({ });
+
+	const { apiTrigger: generateCertificate, loading: generateLoading } = useGenerateFreightCertificate({});
+
 	return (
 		<div className={styles.container}>
+			{ generateLoading
+				? (
+					<div className={styles.loaderr}>
+						<Loader />
+						Generating Certificate...
+					</div>
+				) : null}
+
 			<div className={styles.title}>Container Details</div>
 			<Table
 				data={containersData || []}
@@ -59,6 +73,9 @@ function GenerateFreightCertificate({
 					shipmentData={shipment_data}
 					refetch={refetch}
 					onCancel={onCancel}
+					updateTask={updateTask}
+					generateCertificate={generateCertificate}
+					loading={generateLoading}
 				/>
 			</div>
 		</div>

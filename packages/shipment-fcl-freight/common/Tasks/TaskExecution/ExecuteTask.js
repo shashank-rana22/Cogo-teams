@@ -1,6 +1,12 @@
+import { ShipmentDetailContext } from '@cogoport/context';
+import { useContext } from 'react';
+
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 
-import { UploadBookingNote, MarkConfirmServices } from './CustomTasks';
+import {
+	UploadBookingNote,
+	MarkConfirmServices, NominationTask, GenerateFreightCertificate, ChooseServiceProvider,
+} from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
@@ -8,10 +14,11 @@ const excludeServices = [
 	'fcl_freight_service',
 	'haulage_freight_service',
 ];
-const includeServices = ['air_freight_service', 'lcl_freight_service'];
 
 function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {} }) {
 	const { taskConfigData, loading } = useGetTaskConfig({ task });
+
+	const { servicesList, shipment_data, primary_service } = useContext(ShipmentDetailContext);
 
 	const {
 		steps,
@@ -66,8 +73,44 @@ function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {
 		return <div>Amend draft bl flow</div>;
 	}
 
+	if (task.task === 'choose_service_provider') {
+		return (
+			<div>
+				<ChooseServiceProvider
+					task={task}
+					onCancel={onCancel}
+					refetch={taskListRefetch}
+					services={servicesList}
+				/>
+			</div>
+		);
+	}
+
+	if (
+		task.task === 'update_nomination_details'
+	) {
+		return (
+			<NominationTask
+				primaryService={primary_service}
+				shipmentData={shipment_data}
+				task={task}
+				onCancel={onCancel}
+				refetch={taskListRefetch}
+			/>
+		);
+	}
+
+	if (task.task === 'generate_freight_certificate') {
+		return (
+			<GenerateFreightCertificate
+				task={task}
+				refetch={taskListRefetch}
+				onCancel={onCancel}
+			/>
+		);
+	}
+
 	return (
-	// <div>
 		<ExecuteStep
 			task={task}
 			stepConfig={stepConfigValue}
@@ -80,7 +123,6 @@ function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {
 			getApisData={taskConfigData?.apis_data}
 			uiConfig={taskConfigData?.task_config?.ui_config[currentStep]}
 		/>
-	// </div>
 	);
 }
 
