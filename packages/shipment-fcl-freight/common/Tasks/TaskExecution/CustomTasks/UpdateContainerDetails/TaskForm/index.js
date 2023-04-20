@@ -12,7 +12,7 @@ function TaskForm({
 	pendingTask,
 	onCancel,
 	services,
-	refetch,
+	taskListRefetch,
 	timeLineRefetch,
 }) {
 	const [details, setDetails] = useState('');
@@ -23,7 +23,7 @@ function TaskForm({
 		onCancel,
 		pendingTask,
 		services,
-		refetch,
+		taskListRefetch,
 		timeLineRefetch,
 		customDateFormat,
 	}) || {};
@@ -36,8 +36,6 @@ function TaskForm({
 		onSubmit,
 		handleSubmit,
 	} = formProps || {};
-
-	console.log(errors, 'errors');
 
 	const validDateFormats = '03/21/2000, 2000/03/21, 3/21/2000-09:05:00, 3-21-2000-09:05:00';
 

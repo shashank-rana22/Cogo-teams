@@ -72,7 +72,7 @@ const getControls = ({ apis_data }) => {
 		picked_up_from_yard_at : '',
 	};
 
-	const modifiedControls = controls(apis_data?.list_shipment_documents || []);
+	const modifiedControls = controls();
 	const showElements = {};
 
 	(modifiedControls || []).forEach((control, index) => {
@@ -80,6 +80,7 @@ const getControls = ({ apis_data }) => {
 			modifiedControls[index].value = (
 				apis_data?.list_shipment_container_details || []
 			).map((container) => ({ ...emptyValues, id: container?.id || '' }));
+
 			control.controls.forEach((controlObj, ind) => {
 				if (controlObj.name === 'bl_number') {
 					modifiedControls[index].controls[ind].options = (
@@ -89,7 +90,10 @@ const getControls = ({ apis_data }) => {
 						value : obj.bl_number,
 					}));
 				}
-				if (controlObj?.show === false) { showElements[controlObj.name] = controlObj?.show; }
+
+				if (controlObj?.show === false) {
+					showElements[controlObj.name] = controlObj?.show;
+				}
 			});
 		}
 	});

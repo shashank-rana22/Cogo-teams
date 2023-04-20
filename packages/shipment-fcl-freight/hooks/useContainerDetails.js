@@ -79,7 +79,7 @@ const useContainerDetails = ({
 	onCancel,
 	pendingTask,
 	services,
-	refetch,
+	taskListRefetch,
 	timeLineRefetch,
 	customDateFormat,
 }) => {
@@ -90,7 +90,7 @@ const useContainerDetails = ({
 
 	const { modifiedControls, showElements } = getControls({ apis_data });
 
-	const { control, watch, setValues, formState:{ errors = {} }, handleSubmit, setError } = useForm();
+	const { control, watch, setValue, formState:{ errors = {} }, handleSubmit, setError } = useForm();
 
 	const formValues = watch();
 
@@ -129,7 +129,8 @@ const useContainerDetails = ({
 			},
 		);
 
-		setValues({ container: containerDetails });
+		setValue('container', containerDetails);
+
 		if (containerError.length > 0) {
 			setError('container', containerError);
 		}
@@ -151,7 +152,7 @@ const useContainerDetails = ({
 			if (!res.hasError) {
 				Toast.success('Task updated successfully');
 				onCancel();
-				refetch();
+				taskListRefetch();
 				timeLineRefetch();
 			} else {
 				Toast.error('Something went wrong');

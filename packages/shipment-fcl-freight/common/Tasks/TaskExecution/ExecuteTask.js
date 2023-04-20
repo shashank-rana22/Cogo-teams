@@ -12,7 +12,7 @@ const excludeServices = [
 	'haulage_freight_service',
 ];
 
-function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {} }) {
+function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {}, services = [] }) {
 	const { primary_service, shipment_data } = useContext(ShipmentDetailContext);
 
 	const { taskConfigData, loading } = useGetTaskConfig({ task });
@@ -72,6 +72,8 @@ function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {
 			<UploadContainerDetails
 				pendingTask={task}
 				onCancel={onCancel}
+				services={services}
+				taskListRefetch={taskListRefetch}
 			/>
 		);
 	}

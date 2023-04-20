@@ -9,14 +9,14 @@ function UpdateContainerDetails({
 	onCancel,
 	Loader,
 	services,
-	refetch,
+	taskListRefetch,
 	timeLineRefetch,
 }) {
-	const { getTaskConfigApi, loading } = useGetTask({
+	const { taskConfigData, loading } = useGetTask({
 		task: pendingTask,
 		onCancel,
 	});
-	const apis_data = getTaskConfigApi?.data?.apis_data;
+	const apis_data = taskConfigData?.apis_data;
 
 	return loading ? (
 		Loader
@@ -26,7 +26,7 @@ function UpdateContainerDetails({
 			pendingTask={pendingTask}
 			onCancel={onCancel}
 			services={services}
-			refetch={refetch}
+			taskListRefetch={taskListRefetch}
 			timeLineRefetch={timeLineRefetch}
 		/>
 	);

@@ -79,7 +79,12 @@ function TaskExecution({ task = {}, onCancel = () => {}, taskListRefetch = () =>
 	}
 
 	return (
-		<ExecuteTask task={task} onCancel={onCancel} taskListRefetch={taskListRefetch} />
+		<ExecuteTask
+			task={task}
+			onCancel={onCancel}
+			taskListRefetch={taskListRefetch}
+			services={servicesList}
+		/>
 	);
 }
 
