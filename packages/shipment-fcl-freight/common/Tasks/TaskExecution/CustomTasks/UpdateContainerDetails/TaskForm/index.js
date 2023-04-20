@@ -58,19 +58,17 @@ function TaskForm({
 					Fill Details
 				</Button>
 
-				<Checkbox
-					checked={customDateFormat}
-					onChange={() => setCustomDateFormat(!customDateFormat)}
-					style={{
-						alignSelf  : 'center',
-						marginLeft : 8,
-					}}
-				/>
-				<div className={styles.custom_format}>
-					Is your date of this (dd/mm/yyyy) format?
-					{customDateFormat && (
-						<div className={styles.info}>Please make sure all dates are in this format only</div>
-					)}
+				<div className={styles.check_box}>
+					<Checkbox
+						checked={customDateFormat}
+						onChange={() => setCustomDateFormat(!customDateFormat)}
+					/>
+					<div className={styles.custom_format}>
+						Is your date of this (dd/mm/yyyy) format?
+						{customDateFormat && (
+							<div className={styles.info}>Please make sure all dates are in this format only</div>
+						)}
+					</div>
 				</div>
 
 				<div className={styles.info}>
@@ -80,12 +78,14 @@ function TaskForm({
 				</div>
 			</div>
 
-			<Layout
-				fields={modifiedControls[0]?.controls}
-				control={control}
-				errors={errors}
-				showElements={showElements}
-			/>
+			<div className={styles.layout}>
+				<Layout
+					fields={modifiedControls[0]?.controls}
+					control={control}
+					errors={errors}
+					showElements={showElements}
+				/>
+			</div>
 
 			<div className={styles.button_wrap}>
 				<Button className="secondary md" onClick={() => onCancel()}>
