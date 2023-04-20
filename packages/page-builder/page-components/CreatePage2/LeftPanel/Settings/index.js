@@ -20,6 +20,8 @@ const settingsMapping = {
 function Settings(props) {
 	const { component, setComponent, selectedItem, setSelectedItem } = props;
 
+	console.log('component ::', component);
+
 	const [showUploadModal, setShowUploadModal] = useState(false);
 
 	const [defaultStyles, setDefaultStyles] = useState([]);
@@ -46,6 +48,8 @@ function Settings(props) {
 				const selectedElement = component.layouts.find(
 					(layout) => layout.id === selectedItemId,
 				);
+
+				console.log('selected element ::', selectedElement);
 
 				const modifiedComponent = {
 					...selectedElement,

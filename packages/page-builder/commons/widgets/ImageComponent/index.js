@@ -3,7 +3,9 @@ import { useState } from 'react';
 import FileUploader from '../FileUploader';
 
 function ImageComponent(props) {
-	const { components, setComponents, childId, selectedRow } = props;
+	const { components, setComponents, childId, selectedRow, style } = props;
+
+	console.log('modified style ::', style);
 
 	const [fileValue, setFileValue] = useState();
 	const [isFocused, setIsFocused] = useState(false);
@@ -27,7 +29,7 @@ function ImageComponent(props) {
 	};
 
 	return (
-		<div>
+		<div style={style}>
 			{fileValue ? (
 				<div
 					role="presentation"

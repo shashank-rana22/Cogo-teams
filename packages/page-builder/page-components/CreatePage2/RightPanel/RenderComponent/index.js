@@ -28,8 +28,9 @@ function RenderComponents({
 		},
 
 		image: {
-			key : elementId,
-			src : widget.content,
+			key   : elementId,
+			src   : widget.content,
+			style : widget.style,
 			components,
 			setComponents,
 			childId,
@@ -39,6 +40,7 @@ function RenderComponents({
 		button: {
 			key       : elementId,
 			label     : widget.content,
+			style     : widget.style,
 			themeType : widget.themeType,
 			size      : widget.size,
 			type      : widget.type,
@@ -48,16 +50,18 @@ function RenderComponents({
 		},
 
 		video: {
-			key : elementId,
-			src : widget.content,
+			key   : elementId,
+			src   : widget.content,
+			style : widget.style,
 			components,
 			setComponents,
 			childId,
 			selectedRow,
 		},
 		html: {
-			key  : elementId,
-			html : widget.content,
+			key   : elementId,
+			style : widget.style,
+			html  : widget.content,
 		},
 	};
 

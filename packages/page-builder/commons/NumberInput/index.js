@@ -13,11 +13,7 @@ function NumberInput(props) {
 		handleChange,
 	} = props;
 
-	// console.log('selected Item ::', selectedItem.style);
-
 	const numberValue = isRootComponent ? component.style?.[NumberKey] : selectedItem.style?.[NumberKey];
-
-	// console.log('number value ::', numberValue);
 
 	const handleInputChange = useCallback(
 		(type) => {
@@ -28,8 +24,6 @@ function NumberInput(props) {
 			} else if (modifiedValue !== 0) {
 				modifiedValue -= 1;
 			}
-
-			// console.log('modifiedValue ::', modifiedValue);
 
 			handleChange(NumberKey, modifiedValue);
 		},

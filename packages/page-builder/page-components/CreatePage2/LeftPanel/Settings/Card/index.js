@@ -3,6 +3,7 @@ import { IcMDelete, IcMUpload } from '@cogoport/icons-react';
 
 import ColorInput from '../../../../../commons/ColorInput';
 import NumberInput from '../../../../../commons/NumberInput';
+import ProgressBar from '../../../../../commons/ProgressBar';
 
 import styles from './styles.module.css';
 
@@ -74,6 +75,17 @@ function Card(props) {
 							setSelectedItem={setSelectedItem}
 							handleChange={handleChange}
 						/>
+					),
+					range: (
+
+						<ProgressBar
+							imageKey={key}
+							handleChange={handleChange}
+							component={component}
+							selectedItem={selectedItem}
+							isRootComponent={isRootComponent}
+						/>
+
 					),
 					upload: (
 						<div className={styles.background_image}>
