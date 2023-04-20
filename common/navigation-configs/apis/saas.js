@@ -2095,7 +2095,6 @@ const saas = {
 			feature     : 'product-catalogue',
 		},
 	],
-
 	app_saas_cogostore: [
 		{
 			api         : 'list_cogostore_voucher_brands',
