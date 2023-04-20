@@ -19,15 +19,18 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 	const asyncManagerOptions = useGetCustomAsyncOptions({
 		endpoint    : 'get_iris_list_reportees',
 		initialCall : false,
-		params      : { IncludingCeos: true },
-		valueKey    : 'user_id',
-		labelKey    : 'name',
-		filterKey   : 'Q',
+		params      : {
+			IncludingCeos : true,
+			OnlyManagers  : true,
+			Department    : Department || undefined,
+		},
+		valueKey  : 'user_id',
+		labelKey  : 'name',
+		filterKey : 'Q',
 	});
 
 	const control = [
 		{
-			label       : 'Manager Name',
 			name        : 'Q',
 			placeholder : 'Search User...',
 			type        : 'text',
@@ -35,7 +38,6 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 		},
 		{
 			name        : 'Rating',
-			label       : 'rating',
 			type        : 'select',
 			isClearable : true,
 			placeholder : 'Rating...',
@@ -56,7 +58,6 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 		},
 		{
 			name        : 'Year',
-			label       : 'Select Year',
 			type        : 'select',
 			isClearable : !selectedMonth,
 			placeholder : 'Year',
@@ -68,7 +69,6 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 		},
 		{
 			name        : 'Month',
-			label       : 'Select Month',
 			type        : 'select',
 			isClearable : true,
 			disabled    : !selectedYear,
@@ -78,7 +78,6 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 		},
 		{
 			name        : 'CsvType',
-			label       : 'CSV Type',
 			placeholder : 'Type',
 			type        : 'select',
 			isClearable : true,
@@ -92,7 +91,6 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 		},
 		{
 			name        : 'FeedbackStatus',
-			label       : 'Status',
 			placeholder : 'Status...',
 			type        : 'select',
 			isClearable : true,
@@ -104,13 +102,11 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 		},
 		{
 			name                  : 'date_range',
-			label                 : 'Select Date',
 			type                  : 'dateRangePicker',
 			isPreviousDaysAllowed : true,
 		}, {
 			name        : 'Department',
 			placeholder : 'Department...',
-			label       : 'Department',
 			type        : 'select',
 			span        : 5,
 			isClearable : !Designation,
@@ -129,7 +125,6 @@ const useGetControls = ({ leftFilters = [], rightFilters = [], filterProps = {} 
 			...designationOptions,
 			name        : 'Designation',
 			placeholder : 'Designation...',
-			label       : 'Designation',
 			type        : 'select',
 			span        : 5,
 			disabled    : !Department,

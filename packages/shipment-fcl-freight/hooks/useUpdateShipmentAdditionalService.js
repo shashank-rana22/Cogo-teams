@@ -10,6 +10,7 @@ const useUpdateShipmentAdditionalService = ({
 	item = {},
 	refetch = () => {},
 	showIp = false,
+	task = {},
 }) => {
 	const [remarks, setRemarks] = useState(null);
 
@@ -23,7 +24,7 @@ const useUpdateShipmentAdditionalService = ({
 			await trigger({
 				data: {
 					...data,
-					pending_task_id: showIp ? undefined : item?.pending_task_id,
+					pending_task_id: showIp ? undefined : task?.id,
 				},
 			});
 
@@ -37,7 +38,7 @@ const useUpdateShipmentAdditionalService = ({
 
 	const handleShipperConfirm = () => {
 		const payload = {
-			id    : item.serviceListItem.id,
+			id    : item?.id,
 			state : 'accepted_by_importer_exporter',
 		};
 		handleSubmit(payload);
@@ -49,7 +50,7 @@ const useUpdateShipmentAdditionalService = ({
 			return;
 		}
 		const payload = {
-			id      : item.serviceListItem.id,
+			id      : item.id,
 			state   : 'amendment_requested_by_importer_exporter',
 			remarks : [remarks],
 		};
@@ -58,7 +59,7 @@ const useUpdateShipmentAdditionalService = ({
 
 	const handleBuyPriceReRequest = () => {
 		const payload = {
-			id    : item.serviceListItem.id,
+			id    : item.id,
 			state : 'requested_for_service_provider',
 		};
 		handleSubmit(payload);
@@ -69,7 +70,7 @@ const useUpdateShipmentAdditionalService = ({
 			Toast.error('Please provide cancellation remarks');
 		}
 		const payload = {
-			id      : item.serviceListItem.id,
+			id      : item.id,
 			state   : 'cancelled',
 			remarks : [remarks],
 		};
@@ -81,7 +82,7 @@ const useUpdateShipmentAdditionalService = ({
 			Toast.error('Please provide cancellation remarks');
 		}
 		const payload = {
-			id      : item.serviceListItem.id,
+			id      : item.id,
 			state   : 'cancelled_by_supplier',
 			remarks : [remarks],
 		};

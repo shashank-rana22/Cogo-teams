@@ -1,4 +1,4 @@
-import { SelectController, InputController, AsyncSelectController } from '@cogoport/forms';
+import { SelectController, InputController } from '@cogoport/forms';
 
 import controls from './controls';
 import styles from './styles.module.css';

@@ -27,25 +27,6 @@ export const ApprovedAWBFields = {
 			),
 		},
 		{
-			key   : 'origin',
-			label : 'Origin',
-			span  : 2.5,
-			func  : 'startCase',
-
-		},
-		{
-			key   : 'destination',
-			label : 'Destination',
-			span  : 2.5,
-			func  : 'startCase',
-		},
-		{
-			key   : 'airline',
-			label : 'Carrier',
-			span  : 1.5,
-			func  : 'startCase',
-		},
-		{
 			key   : 'download',
 			label : '',
 			span  : 0.5,

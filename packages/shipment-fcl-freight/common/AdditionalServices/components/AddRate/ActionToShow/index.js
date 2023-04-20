@@ -11,7 +11,7 @@ function ActionsToShow({
 	handleSubmit,
 	setSecondStep,
 	setAddSellPrice = () => {},
-	updateResponse,
+	updateResponse = {},
 	loading,
 	onCancel = () => {},
 }) {
@@ -19,9 +19,9 @@ function ActionsToShow({
 
 	const {
 		handleShipperConfirm,
-		handleShipperSideCancel,
-		handleBuyPriceReRequest,
 		requestRateFromTechops,
+		handleBuyPriceReRequest,
+		handleShipperSideCancel,
 	} = updateResponse;
 
 	if (status?.status === 'customer_confirmation_pending') {
@@ -35,7 +35,7 @@ function ActionsToShow({
 					Request Changes
 				</Button>
 
-				<Button disabled={loading} onClick={handleSubmit(handleShipperConfirm)}>
+				<Button disabled={loading} onClick={handleShipperConfirm}>
 					Accept Service
 				</Button>
 			</div>

@@ -10,6 +10,7 @@ import BillToCustomer from './BillToCustomer';
 import getPayload from './getPayload';
 import getWhoIsAddingRate from './getWhoIsAddingRate';
 import RenderAddRateForm from './RenderAddRateForm';
+import SecondStep from './SecondStep';
 import STAKE_HOLDER_SPECIFIC_PROPS from './stakeHolderCongifs';
 import styles from './styles.module.css';
 
@@ -29,12 +30,24 @@ function AddRate({
 	refetch,
 	onCancel = () => {},
 	filters,
-	updateResponse = () => {},
 	setShowChargeCodes = () => {},
 	source = '',
 	isSeller = false,
+	task = {},
 }) {
 	const [billToCustomer, setBillToCustomer] = useState(false);
+	const [showSecondStep, setSecondStep] = useState(false);
+
+	const refetchForUpdateSubService = () => {
+		refetch();
+		onCancel();
+	};
+
+	const updateResponse = useUpdateShipmentAdditionalService({
+		item,
+		task,
+		refetch: refetchForUpdateSubService,
+	});
 
 	const whoIsAddingRate = getWhoIsAddingRate({
 		isSeller,
@@ -50,6 +63,14 @@ function AddRate({
 		formState: { errors },
 		setValue,
 	} = useForm();
+
+	useEffect(() => {
+		setValue('currency', item?.currency);
+		setValue('quantity', item?.quantity);
+		setValue('unit', item?.unit);
+		setValue('price', item?.price);
+		setValue('alias', item?.alias);
+	}, [item, setValue]);
 
 	const afterAddRate = () => {
 		setAddRate(false);
@@ -86,6 +107,17 @@ function AddRate({
 		}
 	};
 
+	if (showSecondStep) {
+		return (
+			<SecondStep
+				item={item}
+				setSecondStep={setSecondStep}
+				updateResponse={updateResponse}
+				onCancel={onCancel}
+			/>
+		);
+	}
+
 	if (
 		status?.status === 'charges_incurred'
 		&& !billToCustomer
@@ -109,9 +141,10 @@ function AddRate({
 				)
 			</div>
 			{showRemarksStatus.includes(status?.status) ? (
-				<p>
-					Comments:
-					{item.remarks[0]}
+				<p style={{ marginTop: '8px' }}>
+					<strong> Comment:</strong>
+					&nbsp;
+					{item?.remarks[0]}
 				</p>
 			) : null}
 
@@ -133,6 +166,7 @@ function AddRate({
 				loading={loading || updateResponse.loading}
 				onCancel={() => onCancel()}
 				setAddSellPrice={setAddSellPrice}
+				setSecondStep={setSecondStep}
 			/>
 		</div>
 	);

@@ -87,7 +87,7 @@
 
 .camera_icon {
 	position: absolute;
-	top: 15%;
+	top: 5%;
 	left: 70%;
 	cursor: pointer;
 
@@ -100,12 +100,23 @@
 	}
 }
 
+.preview_badge {
+	position: absolute;
+	top: 65%;
+	left: 70%;
+	cursor: pointer;
+
+	img {
+		border-radius: 8px;
+	}
+}
+
 .avatar_container {
 	display: flex;
 	align-items: center;
 	width: 140px;
 	height: 140px;
-	border-radius: 30%;
+	border-radius: 50%;
 	object-fit: cover;
 
 	&:hover {
@@ -129,6 +140,7 @@
 
 .main_container {
 	position: relative;
+	padding: 48px 0 14px;
 	margin-right: 12px;
 	background: #fff;
 	border-radius: 12px;
@@ -203,4 +215,11 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+.badges {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 28px 0 8px;
 }
