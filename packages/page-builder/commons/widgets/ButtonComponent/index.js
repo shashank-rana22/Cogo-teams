@@ -5,7 +5,7 @@ function ButtonComponent(props) {
 		widget,
 	} = props;
 
-	const { content, themeType, size, type, attributes } = widget || {};
+	const { content = 'Click Here', themeType, size, type, attributes } = widget || {};
 
 	const { onClick = () => {} } = attributes || {};
 

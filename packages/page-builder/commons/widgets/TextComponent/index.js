@@ -34,24 +34,24 @@ function TextComponent(props) {
 
 	const [editorValue, setEditorValue] = useState(content);
 
-	// const handleEditorChange = (value) => {
-	// 	const { parentId, id } = selectedRow || {};
+	const handleEditorChange = (value) => {
+		const { parentId, id } = selectedRow || {};
 
-	// 	const data = components;
+		const data = components;
 
-	// 	// console.log('data ::', data);
-	// 	// console.log('element id ::', elementId);
-	// 	const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === id));
+		// console.log('data ::', data);
+		// console.log('element id ::', elementId);
+		const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === id));
 
-	// 	if (parentId) {
-	// 		data.layouts[selectedComponentIndex].children[childId].content = value;
-	// 	} else {
-	// 		data.layouts[selectedComponentIndex].content = value;
-	// 	}
+		if (parentId) {
+			data.layouts[selectedComponentIndex].children[childId].content = value;
+		} else {
+			data.layouts[selectedComponentIndex].content = value;
+		}
 
-	// 	setEditorValue(value);
-	// 	setComponents((prev) => ({ ...prev, layouts: data.layouts }));
-	// };
+		setEditorValue(value);
+		setComponents((prev) => ({ ...prev, layouts: data.layouts }));
+	};
 
 	function Editor() {
 		return (
@@ -60,7 +60,7 @@ function TextComponent(props) {
 				placeholder={content || 'start typing'}
 				value={editorValue}
 				modules={modules}
-				// onChange={handleEditorChange}
+				onChange={handleEditorChange}
 			/>
 		);
 	}
