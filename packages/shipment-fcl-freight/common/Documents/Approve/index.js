@@ -17,7 +17,7 @@ function Approve({
 	return (
 		<Modal
 			width="auto"
-			// size="lg"
+			size="lg"
 			show={showApproved}
 			styles={{ dialog: { width: '700px' } }}
 			// closable={false}

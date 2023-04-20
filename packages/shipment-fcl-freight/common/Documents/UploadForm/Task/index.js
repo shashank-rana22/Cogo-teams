@@ -7,7 +7,7 @@ function Task({ showDoc, setShowDoc, refetch }) {
 	const [pendingTask, setPendingTask] = useState({});
 	const { pendingItem = {} } = showDoc;
 
-	const { shipment_data, primary_Service } = useContext(ShipmentDetailContext);
+	// const { shipment_data, primary_Service } = useContext(ShipmentDetailContext);
 
 	const handleClick = () => {
 		setShowDoc(null);
