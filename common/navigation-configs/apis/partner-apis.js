@@ -8209,6 +8209,12 @@ const partner = {
 			feature     : 'JournalVoucher',
 		},
 		{
+			api         : 'put_payments_parent_jv',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
 			api         : 'get_payments_journal_voucher_jv_line_items_list',
 			access_type : 'private',
 			module      : 'JournalVoucher',
