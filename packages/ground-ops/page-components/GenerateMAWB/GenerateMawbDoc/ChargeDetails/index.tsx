@@ -54,6 +54,7 @@ function ChargeDetails({
 					whiteout={whiteout}
 					awbType={awbType}
 					activeHawb={activeHawb}
+					viewDoc={viewDoc}
 				/>
 			</div>
 
