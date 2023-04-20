@@ -826,11 +826,11 @@ function ListProfit({
 								Extraordinary Items
 							</div>
 						)}
-						{isRowVisible && (
+						{/* {isRowVisible && (
 							<div className={styles.depreciation}>
 								Prior Period Item
 							</div>
-						)}
+						)} */}
 
 					</div>
 
@@ -850,11 +850,11 @@ function ListProfit({
 												{(totalExtraordinaryItems).toLocaleString('en-IN', options)}
 											</div>
 										)}
-										{isRowVisible && (
-											<div className={styles.particular_data}>
+										{/* {isRowVisible && (
+											<div className={styles.particular_data} style={{ border: '2px solid red' }}>
 												{(totalPriorPeriodItem).toLocaleString('en-IN', options)}
 											</div>
-										)}
+										)} */}
 
 									</div>
 								);
@@ -871,11 +871,11 @@ function ListProfit({
 											{(totalExtraordinaryItems * ratio).toLocaleString('en-IN', options)}
 										</div>
 									)}
-									{isRowVisible && (
-										<div className={styles.particular_data}>
+									{/* {isRowVisible && (
+										<div className={styles.particular_data} style={{ border: '2px solid red' }}>
 											{(totalPriorPeriodItem * ratio).toLocaleString('en-IN', options)}
 										</div>
-									)}
+									)} */}
 
 								</div>
 							);

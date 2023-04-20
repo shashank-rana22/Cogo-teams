@@ -200,6 +200,7 @@ function Footer({
 										id="approve-modal-btn"
 										themeType="primary"
 										loading={actionConfirmedLoading}
+										disabled={!bulkAction}
 										onClick={() => {
 											actionConfirm({ isBookedActive, setShow });
 										}}
@@ -246,6 +247,7 @@ function Footer({
 									id="approve-modal-btn"
 									themeType="primary"
 									loading={selectedDataLoading}
+									disabled={!bulkAction}
 									onClick={() => {
 										addSelect(setOpenModal);
 										setCheckedRows({});

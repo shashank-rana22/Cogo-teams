@@ -671,8 +671,8 @@ export const optionsRadio = [
 ];
 
 export const optionsRadioData = [
-	{ name: 'r1', value: 'BOOK', label: 'Book' },
-	{ name: 'r2', value: 'ACCRUE', label: 'Accrue' },
+	{ name: 'r1', value: 'BOOKED', label: 'Book' },
+	{ name: 'r2', value: 'ACCRUED', label: 'Accrue' },
 ];
 
 export const MILESTONE_OPTIONS = [

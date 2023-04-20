@@ -10,14 +10,14 @@ interface MonthInterface {
 	data?:{
 		periodName?:string
 		expenseCurrency?:string
-		expenseBooked?:string
+		expenseBooked?:number
 		isLocked?:boolean
 		expenseAccrued?:string
 		incomeCurrency?:string
-		incomeBooked?:string
+		incomeBooked?:number
 		incomeAccrued?:string
-		actualExpense?:string
-		actualIncome?:string
+		actualExpense?:number
+		actualIncome?:number
 	}
 	handleClick?: () => void
 	loading?:boolean
@@ -44,22 +44,20 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 				<div>
 					Amount :
 					{' '}
-					<span className={styles.amount}>XXXX</span>
+					<span className={styles.amount}>{expenseBooked - actualExpense}</span>
 				</div>
-				<div>Invoices : XXXX</div>
 			</div>
 			<div>
 				<div className={styles.income}>Income Variation</div>
 				<div>
 					Amount :
 					{' '}
-					<span className={styles.amount}>XXXX</span>
+					<span className={styles.amount}>{incomeBooked - actualIncome}</span>
 				</div>
-				<div>Invoices : XXXX</div>
 			</div>
-
 		</div>
 	);
+
 	return (
 		<div>
 
