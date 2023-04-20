@@ -8,62 +8,20 @@ function NumberInput(props) {
 	const {
 		NumberKey,
 		component,
-		setComponent,
 		selectedItem,
 		isRootComponent,
-		setSelectedItem,
+		handleChange,
 	} = props;
+
+	// console.log('selected Item ::', selectedItem.style);
 
 	const numberValue = isRootComponent ? component.style?.[NumberKey] : selectedItem.style?.[NumberKey];
 
-	const handleChange = useCallback(
-		(value) => {
-			if (isRootComponent) {
-				setComponent((prev) => ({
-					...prev,
-					style: {
-						...prev.style,
-						[NumberKey]: value,
-					},
-				}));
-			} else {
-				const { id: selectedItemId } = selectedItem;
-
-				const selectedElement = component.layouts.find((layout) => layout.id === selectedItemId);
-
-				const modifiedComponent = {
-					...selectedElement,
-					style: {
-						...selectedElement?.style,
-						[NumberKey]: value,
-					},
-				};
-
-				setComponent((prev) => ({
-					...prev,
-					layouts: prev.layouts.map((layout) => {
-						if (layout.id === selectedItemId) {
-							return modifiedComponent;
-						}
-						return layout;
-					}),
-				}));
-
-				setSelectedItem((prev) => ({
-					...prev,
-					style: {
-						...prev.style,
-						[NumberKey]: value,
-					},
-				}));
-			}
-		},
-		[component.layouts, selectedItem, setSelectedItem, setComponent, NumberKey, isRootComponent],
-	);
+	// console.log('number value ::', numberValue);
 
 	const handleInputChange = useCallback(
 		(type) => {
-			let modifiedValue = numberValue;
+			let modifiedValue = numberValue ? Number(numberValue) : 0;
 
 			if (type === 'add') {
 				modifiedValue += 1;
@@ -71,9 +29,11 @@ function NumberInput(props) {
 				modifiedValue -= 1;
 			}
 
-			handleChange(modifiedValue);
+			// console.log('modifiedValue ::', modifiedValue);
+
+			handleChange(NumberKey, modifiedValue);
 		},
-		[handleChange, numberValue],
+		[handleChange, NumberKey, numberValue],
 	);
 
 	return (
@@ -81,7 +41,7 @@ function NumberInput(props) {
 			size="sm"
 			placeholder="0"
 			value={numberValue}
-			onChange={(val) => handleChange(Number(val))}
+			onChange={(val) => handleChange(NumberKey, Number(val))}
 			className={styles.ui_input_container}
 			prefix={(
 				<Button
@@ -104,7 +64,6 @@ function NumberInput(props) {
 				</Button>
 			)}
 		/>
-
 	);
 }
 

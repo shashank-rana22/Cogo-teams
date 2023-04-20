@@ -1,6 +1,5 @@
 import { Select, Button } from '@cogoport/components';
 import { IcMDelete, IcMUpload } from '@cogoport/icons-react';
-import React, { useCallback } from 'react';
 
 import ColorInput from '../../../../../commons/ColorInput';
 import NumberInput from '../../../../../commons/NumberInput';
@@ -27,7 +26,6 @@ function Card(props) {
 		setShowUploadModal,
 		setting,
 		isRootComponent,
-		setDefaultStyles,
 		setSelectedItem,
 	} = props;
 
@@ -37,22 +35,10 @@ function Card(props) {
 		'background-image',
 	) && selectedComponent.style['background-image'] !== '';
 
-	const handleSelectChange = useCallback(
-		(value, key) => {
-			handleChange(key, value);
-		},
-		[handleChange],
-	);
-
-	console.log('selected item styles ::', selectedItem.style);
-
-	const handleImageClick = (key, type, defaultOptions) => {
+	const handleImageClick = (key, type) => {
 		if (isBackgroundImagePresent && type === 'remove') {
 			handleChange(key, '');
 		} else {
-			if (defaultOptions) {
-				setDefaultStyles(defaultOptions);
-			}
 			setShowUploadModal(true);
 		}
 	};
@@ -65,13 +51,13 @@ function Card(props) {
 
 		<div className={styles.section}>
 			{setting.options.map((option) => {
-				const { type, key, label, options, defaultOptions } = option;
+				const { type, key, label, options } = option;
 
 				const MAPPING = {
 					select: (
 						<Select
 							value={selectedComponent.style[key]}
-							onChange={(value) => handleSelectChange(value, key)}
+							onChange={(value) => handleChange(key, value)}
 							style={{ width: '120px' }}
 							options={options}
 							placeholder="Select"
@@ -86,6 +72,7 @@ function Card(props) {
 							selectedItem={selectedItem}
 							isRootComponent={isRootComponent}
 							setSelectedItem={setSelectedItem}
+							handleChange={handleChange}
 						/>
 					),
 					upload: (
@@ -126,7 +113,7 @@ function Card(props) {
 									type="button"
 									themeType="secondary"
 									style={{ width: '120px' }}
-									onClick={() => handleImageClick(key, 'upload', defaultOptions)}
+									onClick={() => handleImageClick(key, 'upload')}
 								>
 									Upload
 									<IcMUpload
@@ -148,6 +135,7 @@ function Card(props) {
 							selectedItem={selectedItem}
 							isRootComponent={isRootComponent}
 							setSelectedItem={setSelectedItem}
+							handleChange={handleChange}
 						/>
 					),
 				};
