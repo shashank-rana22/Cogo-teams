@@ -28,9 +28,8 @@ function UploadModal({
 					const Element = getElementController(el.type);
 					if (!Element) return null;
 					return (
-						<div style={el.style} className={styles.control_container}>
+						<div key={el.name} style={el.style} className={styles.control_container}>
 							<span className={styles.control_label}>{el.label}</span>
-
 							<Element
 								{...el}
 								size="md"

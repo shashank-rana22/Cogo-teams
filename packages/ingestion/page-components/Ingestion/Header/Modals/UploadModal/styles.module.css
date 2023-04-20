@@ -28,3 +28,7 @@
 	justify-content: flex-end;
 	margin: 48px 16px 12px;
 }
+
+.ui_modal_body_container {
+	max-height: 800px
+}

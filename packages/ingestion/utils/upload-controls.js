@@ -23,7 +23,6 @@ const uploadControls = [
 		uploadType : 'aws',
 		accept     : '.csv',
 		style      : { height: '152px', padding: '0px' },
-
 	},
 
 ];

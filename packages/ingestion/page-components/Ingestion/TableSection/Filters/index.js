@@ -1,6 +1,6 @@
-import { Input } from '@cogoport/components';
+import { Input, Button } from '@cogoport/components';
 import { useForm, useDebounceQuery } from '@cogoport/forms';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { IcMSearchlight, IcMRefresh } from '@cogoport/icons-react';
 import ScopeSelect from '@cogoport/scope-select';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
@@ -54,7 +54,7 @@ function Filters({ setParams = () => {}, refetch = () => {} }) {
 						if (!Element) return null;
 
 						return (
-							<div className={styles.form_group}>
+							<div key={el.name} className={styles.form_group}>
 								<Element
 									{...el}
 									key={el.name}
@@ -73,6 +73,22 @@ function Filters({ setParams = () => {}, refetch = () => {} }) {
 						showChooseAgent={false}
 						className={styles.field_controller_scope}
 					/>
+					<Button
+						size="md"
+						themeType="secondary"
+						className={styles.refresh}
+						style={{
+							height : '40px',
+							width  : '100px',
+						}} // height not getting add with className so inline used
+						onClick={() => {
+							refetch();
+						}}
+					>
+						<IcMRefresh style={{ margin: '0 4px 0 0' }} />
+						Refresh
+
+					</Button>
 				</div>
 
 			</div>

@@ -51,12 +51,10 @@ function usePostIngestionData({ refetch = () => {} }) {
 			});
 			onClose();
 
-			Toast.success('Data Uploaded');
-
+			Toast.info('Data Ingested! Please check after some time');
 			refetch();
-		} catch (e) {
-			console.log('error',e?.response?.data?.file)
-			Toast.error(e?.response?.data?.file);
+		} catch (err) {
+			Toast.error(err?.response?.data?.file);
 		}
 	};
 	const { ingestion_country_id = '', ingestion_partner_id = '' } = watch();
