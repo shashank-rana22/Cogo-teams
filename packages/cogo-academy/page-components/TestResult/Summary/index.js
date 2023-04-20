@@ -73,7 +73,7 @@ function Summary({ summaryData = {} }) {
 						<div className={styles.bar_chart_heading}>Topic Wise Percentile</div>
 
 						<div className={styles.bar_chart}>
-							<BarChart chart_data={getTopicWiseData()} />
+							<BarChart chart_data={getTopicWiseData()} yAxis="Percentile" />
 						</div>
 					</div>
 
@@ -81,7 +81,7 @@ function Summary({ summaryData = {} }) {
 						<div className={styles.bar_chart_heading}>Level of Difficulty</div>
 
 						<div className={styles.bar_chart}>
-							<BarChart chart_data={getDifficultyData()} />
+							<BarChart chart_data={getDifficultyData()} yAxis="Percentile" />
 						</div>
 					</div>
 
