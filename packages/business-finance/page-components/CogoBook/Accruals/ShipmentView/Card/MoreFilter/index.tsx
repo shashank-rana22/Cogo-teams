@@ -14,17 +14,19 @@ interface MoreFilterInterface {
 }
 
 function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMoreFilter }:MoreFilterInterface) {
+	const { profitType = '', range = '' } = filters || {};
+
 	const getPlaceHolder = () => {
-		if (filters?.profitType === 'percentage' && filters?.range === '<=x=<') {
+		if (profitType === 'percentage' && range === '<=x=<') {
 			return 'To Percentage';
 		}
-		if (filters?.profitType === 'amount' && filters?.range === '<=x=<') {
+		if (profitType === 'amount' && range === '<=x=<') {
 			return 'To Amount';
 		}
-		if (filters?.profitType === 'amount') {
+		if (profitType === 'amount') {
 			return 'Amount';
 		}
-		if (filters?.profitType === 'percentage') {
+		if (profitType === 'percentage') {
 			return 'Percentage';
 		}
 
@@ -35,7 +37,7 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 			<div className={styles.radio}>
 				<RadioGroup
 					options={optionsRadio}
-					value={filters?.profitType}
+					value={profitType}
 					onChange={(item:string) => {
 						setFilters((prev) => ({ ...prev, profitType: item }));
 						setProfitNumber('');
@@ -45,7 +47,7 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 
 			<div>
 				<Select
-					value={filters?.range}
+					value={range}
 					onChange={(val:string) => { setFilters((prev) => ({ ...prev, range: val })); }}
 					placeholder="All"
 					options={optionsData}
@@ -54,14 +56,14 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 				/>
 			</div>
 
-			{filters?.range === '<=x=<' &&			(
+			{range === '<=x=<' &&			(
 				<div className={styles.input_container}>
 					<Input
 						className="primary md"
-						placeholder={filters?.profitType === 'amount' ? 'From Amount' : 'From Percentage'}
+						placeholder={profitType === 'amount' ? 'From Amount' : 'From Percentage'}
 						value={filters?.profitAmountUpper || filters?.profitPercentUpper || ''}
 						onChange={(e:string) => {
-							if (filters?.profitType === 'amount') {
+							if (profitType === 'amount') {
 								setFilters((prev) => ({
 									...prev,
 									profitAmountUpper  : e,
@@ -75,8 +77,8 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 								}));
 							}
 						}}
-						suffix={filters?.profitType === 'percentage' && '%'}
-						prefix={filters?.profitType === 'amount' && 'INR'}
+						suffix={profitType === 'percentage' && '%'}
+						prefix={profitType === 'amount' && 'INR'}
 					/>
 				</div>
 			)}
@@ -88,7 +90,7 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 					value={profitNumber || ''}
 					onChange={(e:string) => {
 						setProfitNumber(e);
-						if (filters?.profitType === 'amount') {
+						if (profitType === 'amount') {
 							setFilters((prev) => ({
 								...prev,
 								profitAmount  : e,
@@ -102,8 +104,8 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 							}));
 						}
 					}}
-					suffix={filters?.profitType === 'percentage' && '%'}
-					prefix={filters?.profitType === 'amount' && 'INR'}
+					suffix={profitType === 'percentage' && '%'}
+					prefix={profitType === 'amount' && 'INR'}
 				/>
 			</div>
 
