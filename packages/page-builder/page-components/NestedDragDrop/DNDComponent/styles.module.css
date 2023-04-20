@@ -2,11 +2,11 @@
 .body {
   display: flex;
   flex-direction: row;
+  width: 100%;
 }
 
 .sideBar {
-  flex: 0 0 1;
-  width: 200px;
+  width: 30%;
   padding: 10px;
   border-right: 1px solid #111;
   height: 100vh;
@@ -23,10 +23,9 @@
 }
 
 .page {
-  flex: 1 1 auto;
-  padding: 0 20px;
-  margin: 20px;
-  border: 1px solid green;
+  background-color: #fff;
+  min-height: 100vh;
+  border: 1px solid green; 
 }
 
 .dropZone {
@@ -105,4 +104,5 @@
   flex: 1;
   flex-direction: column;
   margin-bottom: 100px;
+  width: 70%;
 }

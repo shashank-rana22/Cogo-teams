@@ -9,8 +9,10 @@ import DropZone from '../DropZone';
 import styles from './styles.module.css';
 
 const style = {};
-function Row({ data, components, handleDrop, path }) {
+function Row({ data, handleDrop, path }) {
 	const ref = useRef(null);
+
+	console.log('sdjskjd', data);
 
 	const [{ isDragging }, drag] = useDrag({
 		type : 'row',
@@ -32,7 +34,7 @@ function Row({ data, components, handleDrop, path }) {
 		<Column
 			key={column.id}
 			data={column}
-			components={components}
+			// components={components}
 			handleDrop={handleDrop}
 			path={currentPath}
 		/>
@@ -48,23 +50,23 @@ function Row({ data, components, handleDrop, path }) {
     ${styles.row} 
   `}
 		>
-			{data.id}
+			{/* {data.id} */}
 			<div className={styles.columns}>
 				{data.children.map((column, index) => {
         	const currentPath = `${path}-${index}`;
 
         	return (
-	<React.Fragment key={column.id}>
+	<div style={{ width: '100%' }} key={column.id}>
 		<DropZone
 			data={{
-                	path          : currentPath,
-                	childrenCount : data.children.length,
+				path          : currentPath,
+				childrenCount : data.children.length,
 			}}
 			onDrop={handleDrop}
 			className={styles.horizontalDrag}
 		/>
 		{renderColumn(column, currentPath)}
-	</React.Fragment>
+	</div>
         	);
 				})}
 				<DropZone

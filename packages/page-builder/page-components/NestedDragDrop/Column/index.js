@@ -9,8 +9,10 @@ import DropZone from '../DropZone';
 import styles from './styles.module.css';
 
 const style = {};
-function Column({ data, components, handleDrop, path }) {
+function Column({ data, handleDrop, path }) {
 	const ref = useRef(null);
+
+	console.log('sdisodkjo', data);
 
 	const [{ isDragging }, drag] = useDrag({
 		type : 'column',
@@ -32,7 +34,7 @@ function Column({ data, components, handleDrop, path }) {
 		<Component
 			key={component.id}
 			data={component}
-			components={components}
+			// components={components}
 			path={currentPath}
 		/>
 	);
@@ -48,12 +50,12 @@ function Column({ data, components, handleDrop, path }) {
     `}
 
 		>
-			{data.id}
+			{/* {data.id} */}
 			{data.children.map((component, index) => {
       	const currentPath = `${path}-${index}`;
 
       	return (
-	<React.Fragment key={component.id}>
+	<div style={{ width: '100%' }} key={component.id}>
 		<DropZone
 			data={{
               	path          : currentPath,
@@ -62,7 +64,7 @@ function Column({ data, components, handleDrop, path }) {
 			onDrop={handleDrop}
 		/>
 		{renderComponent(component, currentPath)}
-	</React.Fragment>
+	</div>
       	);
 			})}
 			<DropZone

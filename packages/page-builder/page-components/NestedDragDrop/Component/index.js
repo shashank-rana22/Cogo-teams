@@ -4,6 +4,8 @@ import { useDrag } from 'react-dnd';
 
 import { COMPONENT } from '../constants';
 
+import ComponentBuilder from './ComponentBuilder';
+import RenderComponents from './RenderComponent';
 import styles from './styles.module.css';
 
 const style = {
@@ -12,7 +14,7 @@ const style = {
 	backgroundColor : 'white',
 	cursor          : 'move',
 };
-function Component({ data, components, path }) {
+function Component({ data, path }) {
 	const ref = useRef(null);
 
 	const [{ isDragging }, drag] = useDrag({
@@ -26,7 +28,9 @@ function Component({ data, components, path }) {
 	const opacity = isDragging ? 0 : 1;
 	drag(ref);
 
-	const component = components[data.id];
+	const { component } = data || {};
+
+	const { type } = component	|| {};
 
 	return (
 		<div
@@ -38,8 +42,9 @@ function Component({ data, components, path }) {
       ${styles.column} 
     `}
 		>
-			<div>{data.id}</div>
-			<div>{component.content}</div>
+			{type === 'container'
+				? <ComponentBuilder componentType={type} widget={component} />
+				: <RenderComponents componentType={type} widget={component} />}
 		</div>
 	);
 }
