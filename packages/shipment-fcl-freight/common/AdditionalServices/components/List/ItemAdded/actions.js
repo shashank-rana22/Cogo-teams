@@ -46,19 +46,6 @@ const actions = ({
 			</Button>
 		);
 	}
-	// FOR SHIPPER
-
-	// if (status.status === 'customer_confirmation_pending' && isShipper) {
-	// 	return (
-	// 		<Button
-	// 			themeType="secondary"
-	// 			style={{ marginLeft: 10, height: '24px' }}
-	// 			onClick={onClick}
-	// 		>
-	// 			{addRate && isSameItem ? 'CLOSE' : 'REVIEW PRICE'}
-	// 		</Button>
-	// 	);
-	// }
 
 	if (
 		status.status === 'cancelled_by_supplier' && activeStakeholder === 'service_ops_1'

@@ -13,11 +13,9 @@ const useCreateShipmentAdditionalService = ({
 
 	const apiTrigger = async (val) => {
 		try {
-			const res = await trigger({ data: { ...val } });
-			if (!res.hasError) {
-				Toast.success(successMessage);
-				refetch();
-			}
+			await trigger({ data: { ...val } });
+			Toast.success(successMessage);
+			refetch();
 		} catch (err) {
 			toastApiError(err);
 		}

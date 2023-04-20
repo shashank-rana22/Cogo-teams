@@ -135,6 +135,7 @@ function List({ isSeller = false }) {
 								status={item?.status}
 								setAddSellPrice={setShowModal}
 								updateResponse={updateResponse}
+								source="add_sell_price"
 							/>
 						</Modal.Body>
 					</Modal>
