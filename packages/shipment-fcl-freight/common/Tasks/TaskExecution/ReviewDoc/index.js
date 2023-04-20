@@ -50,7 +50,7 @@ function ReviewDoc({
 			state: 'document_accepted',
 		};
 
-		updateDocument(params);
+		await updateDocument(params);
 	};
 
 	const handleAmmend = () => {
@@ -67,13 +67,13 @@ function ReviewDoc({
 				state   : 'document_amendment_requested',
 				remarks : [remarkValue],
 			};
-			updateDocument(params);
+			await updateDocument(params);
 		} else {
 			params = {
 				...params,
 				state: 'document_accepted',
 			};
-			updateDocument(params);
+			await updateDocument(params);
 		}
 	};
 

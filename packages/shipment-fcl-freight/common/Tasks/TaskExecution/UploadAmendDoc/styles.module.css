@@ -1,0 +1,42 @@
+.container{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+};
+
+.button_wrap{
+	display: flex;
+	justify-content: flex-end;
+};
+
+.remarks{
+	margin-left: 5px;
+	color: #393f70;
+};
+
+.custom_div{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+};
+
+.custom_skeleton{
+	margin-bottom: 5px;
+	width: 100%;
+};
+
+.remark_head{
+	color: #393f70;
+	font-size: 16px;
+	font-weight: 500;
+};
+
+.remark_value{
+	margin-left: 6px;
+	margin-top: 2px;
+};
+
+.remark{
+	display: flex;
+	margin-left: 5px;
+};

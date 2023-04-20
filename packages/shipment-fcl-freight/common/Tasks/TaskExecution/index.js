@@ -2,19 +2,30 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
 
 import AdditionsServicesTasks from './AdditionalServicesTasks';
-import { ChooseServiceProvider } from './CustomTasks';
+import { ChooseServiceProvider, NominationTask } from './CustomTasks';
 import ExecuteTask from './ExecuteTask';
 import ReviewDoc from './ReviewDoc';
+import UploadAmendDoc from './UploadAmendDoc';
 
 function TaskExecution({ task = {}, onCancel = () => {}, taskListRefetch = () => {} }) {
 	// split the task on the basis of view here i.e, categorize the task into various categories
 	// and make a view that hadles all the use cases
 
-	const { servicesList } = useContext(ShipmentDetailContext);
+	const { servicesList, shipment_data, primary_service } = useContext(ShipmentDetailContext);
 
 	if (task.task_type === 'approve_document') {
 		return (
 			<ReviewDoc
+				task={task}
+				onClose={onCancel}
+				refetch={taskListRefetch}
+			/>
+		);
+	}
+
+	if (task.task_type === 'amend_document' && task.task !== 'amend_draft_house_bill_of_lading') {
+		return (
+			<UploadAmendDoc
 				task={task}
 				onClose={onCancel}
 				refetch={taskListRefetch}
@@ -49,6 +60,21 @@ function TaskExecution({ task = {}, onCancel = () => {}, taskListRefetch = () =>
 					services={servicesList}
 				/>
 			</div>
+		);
+	}
+
+	if (
+		task.task === 'update_nomination_details'
+	) {
+		return (
+			<NominationTask
+				primary_service={primary_service}
+				shipment_data={shipment_data}
+				task={task}
+				// stepConfig={stepConfigValue}
+				onCancel={onCancel}
+				refetch={taskListRefetch}
+			/>
 		);
 	}
 
