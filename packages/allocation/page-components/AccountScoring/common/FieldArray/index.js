@@ -18,7 +18,7 @@ function FieldArray(props) {
 	const childValues = {};
 
 	Object.values(controls).forEach((value) => {
-		childValues[value.name] = item[value.name];
+		childValues[value.name] = item[value.name] || '';
 	});
 
 	if (isEmpty(fields)) {

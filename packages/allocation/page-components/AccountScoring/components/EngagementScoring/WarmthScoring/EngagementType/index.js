@@ -1,5 +1,4 @@
 import { useForm } from '@cogoport/forms';
-import React from 'react';
 
 import FieldArray from '../../../../common/FieldArray';
 
@@ -13,13 +12,11 @@ const columns = ['LIFECYCLE ITEM',
 function EngagementType(props) {
 	const { value } = props;
 
-	const formProps = useForm();
+	const { sub_list } = value;
+
+	const formProps = useForm({ defaultValues: { single_item: sub_list } });
 
 	const { control } = formProps;
-
-	// const formValues = watch();
-
-	const { sub_list } = value;
 
 	return (
 		<div className={styles.collapse_inner_container}>
@@ -35,16 +32,10 @@ function EngagementType(props) {
 
 			<hr color="#F8F2E7" />
 
-			{sub_list.map((item) => (
-				<div className={styles.sublist_item}>
-					{/* {item.lifecycle_item} */}
-					<FieldArray item={item} control={control} name="single_item" />
-
-				</div>
-			))}
-
+			<div className={styles.sublist_item}>
+				<FieldArray control={control} name="single_item" />
+			</div>
 		</div>
-
 	);
 }
 

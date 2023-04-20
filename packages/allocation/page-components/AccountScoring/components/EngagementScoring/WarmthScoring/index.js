@@ -75,7 +75,6 @@ function WarmthScoring(props) {
 
 			<div className={styles.collapse_container}>
 				<Collapse panels={options} activeKey={activeCollapse} setActive={setActiveCollapse} type="text" />
-
 			</div>
 		</div>
 
