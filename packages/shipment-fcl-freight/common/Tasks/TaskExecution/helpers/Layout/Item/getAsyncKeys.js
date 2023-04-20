@@ -217,7 +217,7 @@ const getAsyncFields = (key) => {
 		'verified-service-providers': {
 			valueKey       : 'id',
 			lableKey       : 'business_name',
-			asyncKey       : 'list_organizations',
+			asyncKey       : 'organizations',
 			defaultOptions : true,
 			defaultParams  : {
 				filters: {
@@ -230,7 +230,7 @@ const getAsyncFields = (key) => {
 		'verified-importer-exporters': {
 			valueKey       : 'id',
 			lableKey       : 'business_name',
-			asyncKey       : 'list_organizations',
+			asyncKey       : 'organizations',
 			defaultOptions : true,
 			defaultParams  : {
 				filters: {
@@ -243,7 +243,7 @@ const getAsyncFields = (key) => {
 		organizations: {
 			valueKey       : 'id',
 			lableKey       : 'business_name',
-			asyncKey       : 'list_organizations',
+			asyncKey       : 'organizations',
 			defaultOptions : true,
 			defaultParams  : {
 				filters: {
@@ -408,135 +408,136 @@ const getAsyncFields = (key) => {
 					isSearchable   : true,
 				},
 			},
-			'communication-templates': {
-				valueKey      : 'id',
-				lableKey      : 'label',
-				asyncKey      : 'list_communication_templates',
-				defaultParams : {
-					defaultOptions : true,
-					isSearchable   : true,
-				},
-			},
-			'event-data': {
-				valueKey      : 'name',
-				lableKey      : 'name',
-				asyncKey      : 'get_unique_event_data',
-				defaultParams : {
-					defaultOptions : true,
-					isSearchable   : true,
-				},
-			},
-			'campaign-tags': {
-				valueKey      : 'name',
-				lableKey      : 'name',
-				asyncKey      : 'get_campaign_tags',
-				defaultParams : {
-					defaultOptions : true,
-					isSearchable   : true,
-				},
-			},
-			'template-tags': {
-				valueKey      : 'name',
-				lableKey      : 'name',
-				asyncKey      : 'get_template_tags',
-				defaultParams : {
-					defaultOptions : true,
-					isSearchable   : true,
-				},
-			},
-			'event-mappings': {
-				valueKey      : 'name',
-				lableKey      : 'name',
-				asyncKey      : 'list_event_mappings',
-				defaultParams : {
-					defaultOptions : true,
-					isSearchable   : true,
-				},
-			},
-			'promotion-tags': {
-				valueKey      : 'name',
-				lableKey      : 'name',
-				asyncKey      : 'list_promotion_tags',
-				defaultParams : {
-					defaultOptions : true,
-					isSearchable   : true,
-				},
-			},
-			trade_parties: {
-				asyncKey      : 'list_organization_trade_parties',
-				valueKey      : 'id',
-				lableKey      : 'business_name',
-				defaultParams : {
-					defaultOptions : true,
-					isSearchable   : true,
-				},
-			},
-			'item-taxes': {
-				valueKey       : 'id',
-				lableKey       : 'code',
-				authkey        : 'get_common_item',
-				asyncKey       : 'common/item',
+		},
+		'communication-templates': {
+			valueKey      : 'id',
+			lableKey      : 'label',
+			asyncKey      : 'list_communication_templates',
+			defaultParams : {
 				defaultOptions : true,
-				defaultParams  : {
-					pageSize: 50,
-				},
-			},
-			'item-tax-rule': {
-				valueKey       : 'id',
-				lableKey       : 'name',
-				authkey        : 'get_common_tax_rule',
-				asyncKey       : 'common/tax-rule',
-				defaultOptions : true,
-				defaultParams  : {
-					pageSize: 50,
-				},
-			},
-			'item-tax-level': {
-				valueKey       : 'id',
-				lableKey       : 'name',
-				authkey        : 'get_common_tax_level',
-				asyncKey       : 'common/tax-level',
-				defaultOptions : true,
-				defaultParams  : {
-					pageSize: 50,
-				},
-			},
-			'campaign-sender-email': {
-				valueKey       : 'email',
-				lableKey       : 'email',
-				asyncKey       : 'list_campaign_email_configuration',
-				defaultOptions : true,
-				defaultParams  : {
-					status     : 'active',
-					sort_by    : 'updated_at',
-					page_limit : 50,
-				},
-			},
-			'charge-codes': {
-				valueKey       : 'code',
-				lableKey       : 'label',
-				asyncKey       : 'list_air_freight_charge_codes',
-				defaultOptions : true,
-				defaultParams  : {
-					service_type: 'air_freight',
-				},
-			},
-			'charge-codes-domestic': {
-				valueKey       : 'code',
-				lableKey       : 'label',
-				asyncKey       : 'list_domestic_air_freight_charge_codes',
-				defaultOptions : true,
-				defaultParams  : {
-					service_type: 'domestic_air_freight',
-				},
-			},
-			utm_data: {
-				valueKey       : 'value',
-				lableKey       : 'label',
-				asyncKey       : 'get_utm_campaign_audience_data',
-				defaultOptions : true,
+				isSearchable   : true,
 			},
 		},
+		'event-data': {
+			valueKey      : 'name',
+			lableKey      : 'name',
+			asyncKey      : 'get_unique_event_data',
+			defaultParams : {
+				defaultOptions : true,
+				isSearchable   : true,
+			},
+		},
+		'campaign-tags': {
+			valueKey      : 'name',
+			lableKey      : 'name',
+			asyncKey      : 'get_campaign_tags',
+			defaultParams : {
+				defaultOptions : true,
+				isSearchable   : true,
+			},
+		},
+		'template-tags': {
+			valueKey      : 'name',
+			lableKey      : 'name',
+			asyncKey      : 'get_template_tags',
+			defaultParams : {
+				defaultOptions : true,
+				isSearchable   : true,
+			},
+		},
+		'event-mappings': {
+			valueKey      : 'name',
+			lableKey      : 'name',
+			asyncKey      : 'list_event_mappings',
+			defaultParams : {
+				defaultOptions : true,
+				isSearchable   : true,
+			},
+		},
+		'promotion-tags': {
+			valueKey      : 'name',
+			lableKey      : 'name',
+			asyncKey      : 'list_promotion_tags',
+			defaultParams : {
+				defaultOptions : true,
+				isSearchable   : true,
+			},
+		},
+		trade_parties: {
+			asyncKey      : 'list_organization_trade_parties',
+			valueKey      : 'id',
+			lableKey      : 'business_name',
+			defaultParams : {
+				defaultOptions : true,
+				isSearchable   : true,
+			},
+		},
+		'item-taxes': {
+			valueKey       : 'id',
+			lableKey       : 'code',
+			authkey        : 'get_common_item',
+			asyncKey       : 'common/item',
+			defaultOptions : true,
+			defaultParams  : {
+				pageSize: 50,
+			},
+		},
+		'item-tax-rule': {
+			valueKey       : 'id',
+			lableKey       : 'name',
+			authkey        : 'get_common_tax_rule',
+			asyncKey       : 'common/tax-rule',
+			defaultOptions : true,
+			defaultParams  : {
+				pageSize: 50,
+			},
+		},
+		'item-tax-level': {
+			valueKey       : 'id',
+			lableKey       : 'name',
+			authkey        : 'get_common_tax_level',
+			asyncKey       : 'common/tax-level',
+			defaultOptions : true,
+			defaultParams  : {
+				pageSize: 50,
+			},
+		},
+		'campaign-sender-email': {
+			valueKey       : 'email',
+			lableKey       : 'email',
+			asyncKey       : 'list_campaign_email_configuration',
+			defaultOptions : true,
+			defaultParams  : {
+				status     : 'active',
+				sort_by    : 'updated_at',
+				page_limit : 50,
+			},
+		},
+		'charge-codes': {
+			valueKey       : 'code',
+			lableKey       : 'label',
+			asyncKey       : 'list_air_freight_charge_codes',
+			defaultOptions : true,
+			defaultParams  : {
+				service_type: 'air_freight',
+			},
+		},
+		'charge-codes-domestic': {
+			valueKey       : 'code',
+			lableKey       : 'label',
+			asyncKey       : 'list_domestic_air_freight_charge_codes',
+			defaultOptions : true,
+			defaultParams  : {
+				service_type: 'domestic_air_freight',
+			},
+		},
+		utm_data: {
+			valueKey       : 'value',
+			lableKey       : 'label',
+			asyncKey       : 'get_utm_campaign_audience_data',
+			defaultOptions : true,
+		},
+
 		fcl_freight_contracts: {
 			valueKey      : 'value',
 			lableKey      : 'label',

@@ -1,45 +1,34 @@
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
-const useListShipmentBookingConfirmationPreferences = ({ defaultFilters, shipment_id }) => {
+const useGetShipmentServicesQuotation = ({ defaultParams }) => {
 	const [apiData, setApiData] = useState({});
-	const [filters, setFilters] = useState({});
-
 	const [{ loading }, trigger] = useRequest({
-		url    : 'list_shipment_booking_confirmation_preferences',
+		url    : '/get_shipment_services_quotation',
 		method : 'GET',
-		params : {
-			filters: {
-				shipment_id,
-				...defaultFilters,
-				...filters,
-			},
-		},
-	}, { manual: true });
+		params : defaultParams,
+	});
 
 	const apiTrigger = useCallback(async () => {
 		try {
 			const res = await trigger();
-
 			setApiData(res.data || {});
 		} catch (err) {
 			setApiData({});
-
 			toastApiError(err);
 		}
 	}, [trigger]);
 
 	useEffect(() => {
 		apiTrigger();
-	}, [shipment_id, apiTrigger]);
+	}, [apiTrigger]);
 
 	return {
-		loading,
 		apiTrigger,
 		data: apiData,
-		filters,
-		setFilters,
+		loading,
 	};
 };
-export default useListShipmentBookingConfirmationPreferences;
+
+export default useGetShipmentServicesQuotation;

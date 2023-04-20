@@ -42,8 +42,6 @@ function Child({
 		totalFields.push(rowWiseFields);
 	}
 
-	console.log('total fields array', totalFields, showElements);
-
 	return (
 		<div className={styles.fieldarray} key={field.id}>
 			{totalFields.map((rowFields) => (
@@ -62,7 +60,6 @@ function Child({
 						}
 						const disable = index < noDeleteButtonTill && controlItem.name === 'code';
 						const flex = ((controlItem?.span || 12) / 12) * 100;
-						console.log('span count', controlItem?.name, span, controlItem);
 						if (!Element) return null;
 						return (
 							<div className={styles.element} style={{ width: `${flex}%`, overflow: 'scroll' }}>

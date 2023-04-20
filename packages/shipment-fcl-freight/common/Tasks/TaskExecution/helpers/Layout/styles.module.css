@@ -10,6 +10,10 @@
 	padding: 8px;
 }
 
+.width_100{
+	width: 100%;
+}
+
 .heading {
 	height: 22px;
 	font-size: 13px;

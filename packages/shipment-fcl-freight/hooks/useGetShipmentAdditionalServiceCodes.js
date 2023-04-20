@@ -1,20 +1,16 @@
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 
-const useListShipmentBookingConfirmationPreferences = ({ defaultFilters, shipment_id }) => {
+const useGetShipmentAdditionalServiceCodes = ({ shipment_id, defaultFilters }) => {
 	const [apiData, setApiData] = useState({});
 	const [filters, setFilters] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'list_shipment_booking_confirmation_preferences',
+		url    : 'get_shipment_additional_service_codes',
 		method : 'GET',
 		params : {
-			filters: {
-				shipment_id,
-				...defaultFilters,
-				...filters,
-			},
+			filters: { shipment_id, ...defaultFilters, ...filters },
 		},
 	}, { manual: true });
 
@@ -22,7 +18,7 @@ const useListShipmentBookingConfirmationPreferences = ({ defaultFilters, shipmen
 		try {
 			const res = await trigger();
 
-			setApiData(res.data || {});
+			setApiData(res?.data || {});
 		} catch (err) {
 			setApiData({});
 
@@ -30,16 +26,13 @@ const useListShipmentBookingConfirmationPreferences = ({ defaultFilters, shipmen
 		}
 	}, [trigger]);
 
-	useEffect(() => {
-		apiTrigger();
-	}, [shipment_id, apiTrigger]);
-
 	return {
 		loading,
-		apiTrigger,
 		data: apiData,
-		filters,
+		apiTrigger,
 		setFilters,
+		filters,
 	};
 };
-export default useListShipmentBookingConfirmationPreferences;
+
+export default useGetShipmentAdditionalServiceCodes;
