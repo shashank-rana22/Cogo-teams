@@ -1,16 +1,13 @@
 import { Button } from '@cogoport/components';
-import { useState } from 'react';
-import 'react-quill/dist/quill.bubble.css';
 
 function ButtonComponent(props) {
 	const {
-		label = 'submit',
-		themeType = 'primary',
-		size = 'md',
-		type = 'button',
+		widget,
 	} = props;
 
-	const [isFocused, setIsFocused] = useState(false);
+	const { content, themeType, size, type, attributes } = widget || {};
+
+	const { onClick = () => {} } = attributes || {};
 
 	return (
 		<div style={{ height: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -18,11 +15,10 @@ function ButtonComponent(props) {
 				type={type}
 				themeType={themeType}
 				size={size}
-				onClick={() => setIsFocused(!isFocused)}
+				onClick={onClick}
 			>
-				{label}
+				{content}
 			</Button>
-
 		</div>
 	);
 }

@@ -4,7 +4,9 @@ import { IcMPlusInCircle } from '@cogoport/icons-react';
 import { snakeCase, isEmpty } from '@cogoport/utils';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
+import { v1 as uuid } from 'uuid';
 
+import CONTENT_MAPPING from '../../../configurations/default-content-mapping';
 import FormLayout from '../FormLayout';
 
 import controls from './controls';
@@ -17,19 +19,29 @@ function FormComponent({
 	components,
 	setComponents,
 	selectedRow,
-	childId,
 	widget,
+	childId,
 }) {
 	const [show, setShow] = useState(false);
 
 	const { formData } = widget || {};
+
+	const formProps = useForm();
 
 	const {
 		control,
 		watch,
 		formState:{ errors = {} },
 		handleSubmit,
-	} = useForm();
+	} = formProps || {};
+
+	const dynamicFormProps = useForm();
+
+	const {
+		control: dynamicControl,
+		formState:{ errors: dynamicControlErrors },
+		handleSubmit: dynamicHandleSubmit,
+	} = dynamicFormProps || {};
 
 	const formValues = watch();
 
@@ -49,7 +61,7 @@ function FormComponent({
 
 				if (values.controls) {
 					values?.controls?.forEach((item, i) => {
-						if (item.type === 'select') {
+						if (item.type === 'asyncSelect') {
 							showElements.controls[i].dynamic_data_endpoint = false;
 							showElements.controls[i].manual_options = false;
 							showElements.controls[i].options_type = true;
@@ -83,14 +95,40 @@ function FormComponent({
 		setShow(false);
 	};
 
+	const onDynamicFormSubmit = (values) => {
+		console.log('sjdjisdijo', values);
+	};
+
 	const onSubmit = (value) => {
-		const { controls: defaultControls } = value || {};
+		const { controls: defaultControls, buttonText, heading } = value || {};
 
 		const { parentId, id } = selectedRow || {};
 
 		const data = components;
 
-		const newControls = (defaultControls || []).map((item) => ({ ...item, name: snakeCase(item?.label) }));
+		const newControls = (defaultControls || []).map((item) => {
+			const { type, options_type, manual_options, is_mandetory } = item || {};
+			const isOptionsTrue = ['asyncSelect', 'select'].includes(type);
+			let options = [];
+
+			if (options_type === 'manual_data') {
+				try {
+					options = JSON.parse(manual_options)?.options;
+				} catch (err) {
+					console.log('sdjsjdk', err);
+				}
+			}
+
+			return ({
+				...item,
+				name    : snakeCase(item?.label),
+				style   : { flexBasis: item?.width || 'none' },
+				options : isOptionsTrue ? options : undefined,
+				rules   : {
+					required: is_mandetory === 'yes' ? true : undefined,
+				},
+			});
+		});
 
 		const newValue = { ...value, controls: newControls };
 
@@ -98,22 +136,64 @@ function FormComponent({
 
 		const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === id));
 
+		const defaultParentId = uuid();
+
+		const textWigdet = 		{
+			...CONTENT_MAPPING.text,
+			id       : 0,
+			content  : heading,
+			parentId : defaultParentId,
+		};
+
+		const formWidget = {
+			...CONTENT_MAPPING.form,
+			id       : 1,
+			formData : newValue,
+			parentId : defaultParentId,
+		};
+
+		const buttonWigdet = {
+			...CONTENT_MAPPING.button,
+			id         : 2,
+			content    : buttonText,
+			parentId   : defaultParentId,
+			attributes : {
+				onClick: dynamicHandleSubmit(onDynamicFormSubmit),
+			},
+		};
+
+		const childrenData = [textWigdet, formWidget, buttonWigdet];
+
 		if (parentId) {
-			data.layouts[selectedComponentIndex].children[childId].formData = newValue;
+			data.layouts[selectedComponentIndex].children[childId] = {
+				...data.layouts[selectedComponentIndex].children[childId],
+				type     : 'container',
+				parentId : defaultParentId,
+			};
+
+			data.layouts[selectedComponentIndex].children[childId].children = childrenData;
 		} else {
-			data.layouts[selectedComponentIndex].formData = newValue;
+			data.layouts[selectedComponentIndex] = {
+				...data.layouts[selectedComponentIndex],
+				type     : 'container',
+				parentId : defaultParentId,
+			};
+
+			data.layouts[selectedComponentIndex].children = childrenData;
 		}
 
 		setComponents((prev) => ({ ...prev, layouts: data.layouts }));
 	};
 
-	const onDynamicFormSubmit = (values) => {
-		console.log('sjdjisdijo', values);
-	};
-
 	if (!isEmpty(dynamicControls)) {
 		return (
-			<DynamicFormComponent formData={formData} onDynamicFormSubmit={onDynamicFormSubmit} />
+			<DynamicFormComponent
+				errors={dynamicControlErrors || {}}
+				formData={formData}
+				control={dynamicControl}
+				// handleSubmit={dynamicHandleSubmit}
+				// onDynamicFormSubmit={onDynamicFormSubmit}
+			/>
 		);
 	}
 

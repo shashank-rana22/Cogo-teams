@@ -21,11 +21,16 @@ function ControlledAceEditor(props) {
 					value={value}
 					mode={mode}
 					theme="github"
-					name="editor"
+					name={name}
 					showGutter
 					width={width || '100%'}
 					height={height || '400px'}
 					editorProps={{ $blockScrolling: true }}
+					setOptions={{
+						enableBasicAutocompletion : true,
+						enableLiveAutocompletion  : true,
+						enableSnippets            : true,
+					}}
 				/>
 			)}
 		/>

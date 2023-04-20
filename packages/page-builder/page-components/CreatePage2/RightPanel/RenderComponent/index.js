@@ -15,12 +15,20 @@ const componentMapping = {
 };
 
 function RenderComponents({
-	componentType, widget, components, setComponents, elementId, childId, selectedRow, setSelectedItem, index,
+	componentType,
+	widget,
+	components,
+	setComponents,
+	elementId,
+	childId,
+	selectedRow,
+	setSelectedItem,
+	index,
 }) {
 	const componentPropsMapping = {
 		text: {
-			key  : elementId,
-			text : widget.content,
+			key: elementId,
+			widget,
 			components,
 			setComponents,
 			childId,
@@ -38,11 +46,8 @@ function RenderComponents({
 		},
 
 		button: {
-			key       : elementId,
-			label     : widget.content,
-			themeType : widget.themeType,
-			size      : widget.size,
-			type      : widget.type,
+			key: elementId,
+			widget,
 			components,
 			setComponents,
 			elementId,

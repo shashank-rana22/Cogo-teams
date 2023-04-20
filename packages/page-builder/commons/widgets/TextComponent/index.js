@@ -28,9 +28,11 @@ const modules = {
 };
 
 function TextComponent(props) {
-	const { text, components, setComponents, childId, selectedRow } = props;
+	const { widget, components, setComponents, childId, selectedRow } = props;
 
-	const [editorValue, setEditorValue] = useState(text);
+	const { content } = widget || {};
+
+	const [editorValue, setEditorValue] = useState(content);
 
 	const handleEditorChange = (value) => {
 		const { parentId, id } = selectedRow || {};
@@ -55,7 +57,7 @@ function TextComponent(props) {
 		return (
 			<ReactQuill
 				theme="snow"
-				placeholder={text || 'start typing'}
+				placeholder={content || 'start typing'}
 				value={editorValue}
 				modules={modules}
 				onChange={handleEditorChange}
@@ -73,7 +75,7 @@ function TextComponent(props) {
 			content={Editor()}
 		>
 
-			<div dangerouslySetInnerHTML={{ __html: text }} />
+			<div dangerouslySetInnerHTML={{ __html: content }} />
 		</Popover>
 
 	);
