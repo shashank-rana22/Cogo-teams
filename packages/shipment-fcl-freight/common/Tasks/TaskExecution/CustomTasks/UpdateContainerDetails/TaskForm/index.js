@@ -1,8 +1,9 @@
 import { Button, Checkbox, Input } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import useContainerDetails from '../../../../../../hooks/useContainerDetails';
+import Layout from '../../../helpers/Layout';
 import TaskContainer from '../../common/TaskContainer';
-// import useContainerPickup from '../hooks/useContainerPickup';
 
 import styles from './styles.module.css';
 
@@ -17,26 +18,28 @@ function TaskForm({
 	const [details, setDetails] = useState('');
 	const [customDateFormat, setCustomDateFormat] = useState(false);
 
-	// const { formProps, handleFillData, loading } =	useContainerPickup({
-	// 	apis_data,
-	// 	onCancel,
-	// 	pendingTask,
-	// 	services,
-	// 	refetch,
-	// 	timeLineRefetch,
-	// 	customDateFormat,
-	// }) || {};
+	const { formProps, handleFillData, loading } =	useContainerDetails({
+		apis_data,
+		onCancel,
+		pendingTask,
+		services,
+		refetch,
+		timeLineRefetch,
+		customDateFormat,
+	}) || {};
 
-	// const {
-	// 	fields,
-	// 	modifiedControls,
-	// 	showElements,
-	// 	errors,
-	// 	onSubmit,
-	// 	handleSubmit,
-	// } = formProps || {};
+	const {
+		control,
+		modifiedControls,
+		showElements,
+		errors,
+		onSubmit,
+		handleSubmit,
+	} = formProps || {};
 
-	const validDateFormats =		'03/21/2000, 2000/03/21, 3/21/2000-09:05:00, 3-21-2000-09:05:00';
+	console.log(errors, 'errors');
+
+	const validDateFormats = '03/21/2000, 2000/03/21, 3/21/2000-09:05:00, 3-21-2000-09:05:00';
 
 	return (
 		<TaskContainer pendingTask={pendingTask}>
@@ -52,7 +55,7 @@ function TaskForm({
 
 				<Button
 					className="secondary sm"
-					// onClick={() => handleFillData(details)}
+					onClick={() => handleFillData(details)}
 				>
 					Fill Details
 				</Button>
@@ -79,21 +82,21 @@ function TaskForm({
 				</div>
 			</div>
 
-			{/* <FormLayout
-				controls={modifiedControls || []}
-				fields={fields}
+			<Layout
+				fields={modifiedControls[0]?.controls}
+				control={control}
 				errors={errors}
 				showElements={showElements}
-			/> */}
+			/>
 
 			<div className={styles.button_wrap}>
 				<Button className="secondary md" onClick={() => onCancel()}>
 					cancel
 				</Button>
 
-				{/* <Button disabled={loading} onClick={handleSubmit(onSubmit)}>
+				<Button disabled={loading} onClick={handleSubmit(onSubmit)}>
 					Submit
-				</Button> */}
+				</Button>
 			</div>
 		</TaskContainer>
 	);

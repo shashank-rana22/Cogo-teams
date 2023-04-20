@@ -1,11 +1,11 @@
 import { Toast } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import globals from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 
-import getControls from '../TaskForm/controls';
+import getControls from '../common/Tasks/TaskExecution/CustomTasks/UpdateContainerDetails/TaskForm/controls';
 
 const getError = ({ index = 0, dateError = '' }) => {
 	const errObj = {
@@ -83,24 +83,14 @@ const useContainerDetails = ({
 	timeLineRefetch,
 	customDateFormat,
 }) => {
-	const { scope } = useSelector(({ general }) => general);
-
-	const updatePendingTask = useRequest(
-		'post',
-		false,
-		scope,
-	)('update_shipment_pending_task');
+	const [{ loading }, trigger] = useRequest({
+		url    : '/update_shipment_pending_task',
+		method : 'POST',
+	});
 
 	const { modifiedControls, showElements } = getControls({ apis_data });
 
-	const {
-		fields,
-		formState: { errors },
-		handleSubmit,
-		watch,
-		setValues,
-		setError,
-	} = useFormCogo(modifiedControls);
+	const { control, watch, setValues, formState:{ errors = {} }, handleSubmit, setError } = useForm();
 
 	const formValues = watch();
 
@@ -154,7 +144,7 @@ const useContainerDetails = ({
 		);
 
 		try {
-			const res = await updatePendingTask.trigger({
+			const res = await trigger({
 				data: formattedData,
 			});
 
@@ -173,7 +163,7 @@ const useContainerDetails = ({
 
 	return {
 		formProps: {
-			fields,
+			control,
 			errors,
 			modifiedControls,
 			showElements,
@@ -181,7 +171,7 @@ const useContainerDetails = ({
 			onSubmit,
 		},
 		handleFillData,
-		loading: updatePendingTask.loading,
+		loading,
 	};
 };
 

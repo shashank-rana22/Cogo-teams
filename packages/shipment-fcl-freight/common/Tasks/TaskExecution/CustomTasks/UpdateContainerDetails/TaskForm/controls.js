@@ -1,4 +1,4 @@
-import { startCase } from '@cogoport/front/utils';
+import { startCase } from '@cogoport/utils';
 
 const controls = () => [
 	{
@@ -15,6 +15,7 @@ const controls = () => [
 				name  : 'container_number',
 				span  : 3,
 				type  : 'text',
+				size  : 'sm',
 				label : 'Container Number',
 				rules : {
 					required: {
@@ -27,6 +28,7 @@ const controls = () => [
 				name    : 'bl_number',
 				span    : 3,
 				type    : 'select',
+				size    : 'sm',
 				label   : 'BL Number',
 				options : [],
 			},
