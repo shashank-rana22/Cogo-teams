@@ -10,10 +10,6 @@ const CURRENT_STATUS_MAPPING = {
 		label      : 'Active Test',
 		background : '#C4DC91',
 	},
-	ongoing: {
-		label      : 'Ongoing',
-		background : '#C4DC91',
-	},
 	upcoming: {
 		label      : 'Upcoming',
 		background : '#FFFCE6',
@@ -25,10 +21,6 @@ const CURRENT_STATUS_MAPPING = {
 	expired: {
 		label      : 'Expired',
 		background : '#FDEBE9',
-	},
-	published: {
-		label      : 'Results Published',
-		background : '#FFFCE6',
 	},
 };
 
@@ -104,8 +96,7 @@ function TestCard({ test_card }) {
 				)}
 			</div>
 
-			{['active', 'ongoing'].includes(current_status)
-			|| (current_status === 'completed' && attempts_count < maximum_attempts)
+			{current_status === 'active' || (current_status === 'completed' && attempts_count < maximum_attempts)
 				? (
 					<div
 						role="presentation"
