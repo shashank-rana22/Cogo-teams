@@ -1,26 +1,26 @@
-import { useForm } from '@cogoport/forms';
-
 import { getFieldController } from '../../../../../../../common/Form/getFieldController';
 
 import styles from './styles.module.css';
 
-const WARMTH_MAPPING = {
-	flame_hot : 'Flaming Hot',
-	hot       : 'Hot',
-	warm      : 'Warm',
-	cold      : 'Cold',
-	icy_cold  : 'Icy Cold',
+const accounts = { // temporary data
+	flame_hot : '200',
+	hot       : '800',
+	warm      : '900',
+	cold      : '-',
+	icy_cold  : '-',
 };
 
-function TableItem({ item = '', useGetControls = () => {}, index = 0, inputStyle = 'input' }) {
-	const controls = useGetControls(item);
+function SettingsItem(props) {
+	const {
+		item = '', useGetControls = () => {},
+		index = 0, inputStyle, control, errors,
+	} = props;
 
-	const formProps = useForm();
-	const { control } = formProps;
+	const controls = useGetControls(item);
 
 	return (
 		<div className={styles.container}>
-			{ inputStyle === 'distribution_input'
+			{inputStyle === 'distribution_input'
 			&& (
 				<div className={styles.warmth_container}>
 					{
@@ -32,39 +32,54 @@ function TableItem({ item = '', useGetControls = () => {}, index = 0, inputStyle
 							}
 
 					<div className={styles.headers}>
-						{WARMTH_MAPPING?.[item]}
+						{item.warmth || ''}
 					</div>
 				</div>
 			)}
 			<div className={styles.input_row}>
-				{
-				controls.map((element) => {
-					const el = { ...element };
-					const Element = getFieldController(el.type);
+				{controls.map((element) => {
+					const Element = getFieldController(element.type);
 
 					return (
 						<div className={styles?.[inputStyle] || styles.input}>
-							{
+							{index === 0 && (
+								<div className={styles.label}>
+									{element.label}
+								</div>
+							)}
+
+							<Element
+								{...element}
+								key={element.name}
+								control={control}
+							/>
+
+							<div className={styles.error_message}>
+								{errors?.[element.name]?.message}
+							</div>
+						</div>
+					);
+				})}
+			</div>
+			{inputStyle === 'distribution_input'
+			&& (
+				<div className={styles.accounts_container}>
+					{
 								index === 0 && (
 									<div className={styles.label}>
-										{el.label}
+										NUMBER OF ACCOUNTS
 									</div>
 								)
 							}
 
-							<Element
-								{...el}
-								key={`${item + el.name}`}
-								control={control}
-							/>
-						</div>
-					);
-				})
-					}
-			</div>
+					<div className={styles.headers}>
+						{accounts?.[item]}
+					</div>
+				</div>
+			)}
 
 		</div>
 	);
 }
 
-export default TableItem;
+export default SettingsItem;

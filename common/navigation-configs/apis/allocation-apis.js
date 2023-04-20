@@ -376,10 +376,24 @@ const allocation = {
 			api          : 'post_allocation_feedback_request_bulk_create',
 			access_type  : 'private',
 			service_name : 'allocation',
-
 		},
 	],
 	account_scoring: [
+		{
+			api          : 'post_allocation_engagement_scoring_settings_attributes',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_engagement_scoring_settings',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_engagement_distribution_settings',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
 	],
 };
 

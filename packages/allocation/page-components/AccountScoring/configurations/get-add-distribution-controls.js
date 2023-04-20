@@ -13,7 +13,7 @@ const controls = (item) => {
 			isClearable: true,
 		},
 		{
-			name        : `${key_val}_rangee_to`,
+			name        : `${key_val}_range_to`,
 			label       : 'RANGE TO',
 			placeholder : '0',
 			type        : 'text',
