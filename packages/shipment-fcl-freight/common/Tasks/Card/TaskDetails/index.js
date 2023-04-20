@@ -25,6 +25,8 @@ function TaskDetails({
 	});
 	const taskName = startCase(task.task || task.label);
 
+	console.log('task', task);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.task_details}>
@@ -62,6 +64,7 @@ function TaskDetails({
 							date       : task?.updated_at,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 							formatType : 'date',
+							separator  : ' - ',
 						})} )`}
 					</div>
 				) : null}

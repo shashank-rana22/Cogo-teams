@@ -1,21 +1,7 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useState, useContext } from 'react';
 
-import prepareSteps from '../utils/prepareSteps';
-
-function injectUiConfigs(rawTaskUiResponse, task, primaryService) {
-	const config = rawTaskUiResponse.task_config || {};
-
-	const modifiedConfig = {
-		label      : config.label,
-		task_type  : config.task_type,
-		created_at : config.created_at,
-		task       : config.task,
-		steps      : prepareSteps(config.ui_config, task, primaryService),
-	};
-
-	return modifiedConfig;
-}
+import injectUiConfigs from '../utils/inject-ui-configs';
 
 function useTaskExecution({ task = {}, taskConfigData = {} }) {
 	const { primary_service: primaryService } = useContext(ShipmentDetailContext);
