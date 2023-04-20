@@ -1,5 +1,9 @@
+import { Button, Modal } from '@cogoport/components';
+import { useState } from 'react';
+
 import PublishNow from '../PublishNow';
 
+import Retest from './Retest';
 import styles from './styles.module.css';
 import TEXT_MAPPING from './text-mapping';
 
@@ -7,6 +11,8 @@ function InfoBanner({ test_status = '', test_id, validity_end, refetchTest, load
 	const isUnderValidity = new Date() < new Date(validity_end);
 
 	const content = TEXT_MAPPING[test_status];
+
+	const [showRetestModal, setShowRetestModal] = useState(false);
 
 	const { key, backgroundColor, text, subText, iconColor, Icon, borderColor } = content || {};
 
@@ -22,12 +28,62 @@ function InfoBanner({ test_status = '', test_id, validity_end, refetchTest, load
 				<b className={styles.margin_right}>{text}</b>
 
 				<span>{subText}</span>
+
+				{test_status === 'published'
+					? (
+						<Button
+							type="button"
+							themeType="accent"
+							size="md"
+							onClick={() => setShowRetestModal(true)}
+						>
+							Create Retest
+						</Button>
+					) : null}
 			</div>
 
 			<div>
 				{!['published', 'publishing'].includes(key) && !isUnderValidity
 					? <PublishNow test_id={test_id} refetchTest={refetchTest} /> : null}
 			</div>
+
+			{showRetestModal
+				? (
+					<Modal
+						show={showRetestModal}
+						size="lg"
+						onClose={() => setShowRetestModal(false)}
+						className={styles.modal_container}
+					>
+						<Modal.Header title="Set Retest Criteria" />
+						<Modal.Body>
+							<Retest />
+						</Modal.Body>
+						<Modal.Footer>
+							<div>
+								<div>
+									<Button
+										themeType="secondary"
+										onClick={() => setShowRetestModal(false)}
+									>
+										Cancel
+									</Button>
+
+								</div>
+								<div>
+									{/* <Button
+										themeType="accent"
+										onClick={handleSubmit(onSubmit)}
+										disabled={loading}
+									>
+										Submit
+									</Button> */}
+								</div>
+							</div>
+						</Modal.Footer>
+					</Modal>
+
+				) : null}
 		</div>
 	);
 }
