@@ -8013,6 +8013,22 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_payments_parent_jv_gl_code_master',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_parent_jv_acc_mode',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_parent_jv_jv_category',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_parent_jv_journal_code',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_organization_trade_parties',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -8181,7 +8197,19 @@ const partner = {
 			feature     : 'onAccount',
 		},
 		{
-			api         : 'get_payments_journal_voucher_list',
+			api         : 'get_payments_parent_jv_list',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
+			api         : 'post_payments_parent_jv',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
+			api         : 'get_payments_journal_voucher_jv_line_items_list',
 			access_type : 'private',
 			module      : 'JournalVoucher',
 			feature     : 'JournalVoucher',
