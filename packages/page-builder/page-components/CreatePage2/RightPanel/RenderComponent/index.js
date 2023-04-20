@@ -17,8 +17,9 @@ function RenderComponents({
 }) {
 	const componentPropsMapping = {
 		text: {
-			key  : elementId,
-			text : widget.content,
+			key   : elementId,
+			text  : widget.content,
+			style : widget.style,
 			components,
 			setComponents,
 			childId,

@@ -1,16 +1,20 @@
 import { Input, Button } from '@cogoport/components';
 import { IcMMinus, IcMPlus } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 import styles from './styles.module.css';
 
 function NumberInput(props) {
-	const { NumberKey, component, setComponent, selectedRow } = props;
+	const {
+		NumberKey,
+		component,
+		setComponent,
+		selectedItem,
+		isRootComponent,
+		setSelectedItem,
+	} = props;
 
-	const [number, setNumber] = useState(component.style?.[NumberKey] || 0);
-
-	const isRootComponent = isEmpty(selectedRow);
+	const numberValue = isRootComponent ? component.style?.[NumberKey] : selectedItem.style?.[NumberKey];
 
 	const handleChange = useCallback(
 		(value) => {
@@ -18,19 +22,19 @@ function NumberInput(props) {
 				setComponent((prev) => ({
 					...prev,
 					style: {
-						...component.style,
+						...prev.style,
 						[NumberKey]: value,
 					},
 				}));
 			} else {
-				const { id: selectedRowId } = selectedRow;
+				const { id: selectedItemId } = selectedItem;
 
-				const selectedComponent = component.layouts.find((layout) => layout.id === selectedRowId);
+				const selectedElement = component.layouts.find((layout) => layout.id === selectedItemId);
 
 				const modifiedComponent = {
-					...selectedComponent,
+					...selectedElement,
 					style: {
-						...selectedComponent.style,
+						...selectedElement?.style,
 						[NumberKey]: value,
 					},
 				};
@@ -38,22 +42,28 @@ function NumberInput(props) {
 				setComponent((prev) => ({
 					...prev,
 					layouts: prev.layouts.map((layout) => {
-						if (layout.id === selectedRowId) {
+						if (layout.id === selectedItemId) {
 							return modifiedComponent;
 						}
 						return layout;
 					}),
 				}));
-			}
 
-			setNumber(value);
+				setSelectedItem((prev) => ({
+					...prev,
+					style: {
+						...prev.style,
+						[NumberKey]: value,
+					},
+				}));
+			}
 		},
-		[component.layouts, selectedRow, setComponent, NumberKey, component.style, isRootComponent],
+		[component.layouts, selectedItem, setSelectedItem, setComponent, NumberKey, isRootComponent],
 	);
 
 	const handleInputChange = useCallback(
 		(type) => {
-			let modifiedValue = number;
+			let modifiedValue = numberValue;
 
 			if (type === 'add') {
 				modifiedValue += 1;
@@ -63,14 +73,14 @@ function NumberInput(props) {
 
 			handleChange(modifiedValue);
 		},
-		[handleChange, number],
+		[handleChange, numberValue],
 	);
 
 	return (
 		<Input
 			size="sm"
 			placeholder="0"
-			value={number}
+			value={numberValue}
 			onChange={(val) => handleChange(Number(val))}
 			className={styles.ui_input_container}
 			prefix={(

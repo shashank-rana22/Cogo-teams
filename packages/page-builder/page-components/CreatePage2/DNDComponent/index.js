@@ -57,6 +57,15 @@ const CONTENT_MAPPING = {
 	},
 };
 
+const rootComponent = {
+	type    : 'container',
+	id      : 0,
+	layouts : [],
+	style   : {
+		backgroundSize: 'cover',
+	},
+};
+
 function DNDComponent() {
 	const [activeTab, setActiveTab] = useState('content');
 	const [component, setComponent] = useState({
@@ -161,6 +170,7 @@ function DNDComponent() {
 							parentComponentId={parentComponentId}
 							setParentComponentId={setParentComponentId}
 							selectedItem={selectedItem}
+							setSelectedItem={setSelectedItem}
 						/>
 					</div>
 				)}
@@ -211,6 +221,7 @@ function DNDComponent() {
 							setShowContentModal={setShowContentModal}
 							setParentComponentId={setParentComponentId}
 							setSelectedItem={setSelectedItem}
+							rootComponent={rootComponent}
 
 						/>
 					</div>

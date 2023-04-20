@@ -39,7 +39,7 @@ function ComponentBuilder({ widget, components, setComponents, selectedRow, chil
 					<div
 						role="presentation"
 						className={styles.content_container}
-						style={{ ...allStyles, border, background: 'lightYellow' }}
+						style={{ ...allStyles, border }}
 						onClick={(e) => handleClick(e)}
 					>
 
@@ -240,7 +240,6 @@ function RightPanel(props) {
 			style={{
 				opacity,
 				border,
-				backgroundColor: 'lavender',
 			}}
 			className={styles.element_Container}
 		>

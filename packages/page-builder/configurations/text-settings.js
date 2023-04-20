@@ -3,40 +3,92 @@ const textSettings = [
 		type    : 'Background',
 		options : [
 			{
-				label : 'Background Image',
-				key   : 'backgroundImage',
-				type  : 'file',
+				label : 'Color',
+				key   : 'background-color',
+				type  : 'color',
+			},
+			{
+				label          : 'Image',
+				key            : 'background-image',
+				defaultOptions : [{ key: 'width', value: '100%' }, { key: 'height', value: '400px' }],
+				type           : 'upload',
 			},
 		],
 	},
 	{
 		type    : 'Text',
 		options : [
-			{ label: 'Font Size', key: 'fontSize', type: 'number' },
+			{ label: 'Font Size', key: 'font-size', type: 'number' },
 			{
 				label   : 'Font Style',
-				key     : 'fontStyle',
+				key     : 'font-style',
 				type    : 'select',
-				options : ['normal', 'italic', 'oblique'],
+				options : [
+					{
+						label: 'normal', value: 'normal',
+					},
+					{
+						label: 'italic', value: 'italic',
+					},
+					{
+						label: 'oblique', value: 'oblique',
+					},
+				],
 			},
 			{ label: 'Color', key: 'color', type: 'color' },
 			{
 				label   : 'Font Weight',
-				key     : 'fontWeight',
+				key     : 'font-weight',
 				type    : 'select',
-				options : ['normal', 'bold'],
+				options : [
+					{
+						label: 'normal', value: 'normal',
+					},
+					{
+						label: 'bold', value: 'bold',
+					},
+
+				],
 			},
 			{
 				label   : 'Text Transform',
-				key     : 'textTransform',
+				key     : 'text-transform',
 				type    : 'select',
-				options : ['none', 'capitalize', 'uppercase', 'lowercase'],
+				options : [
+					{
+						label: 'none', value: 'none',
+					},
+					{
+						label: 'capitalize', value: 'capitalize',
+					},
+					{
+						label: 'uppercase', value: 'uppercase',
+					},
+					{
+						label: 'lowercase', value: 'lowercase',
+					},
+
+				],
 			},
 			{
 				label   : 'Text Decoration',
-				key     : 'textDecoration',
+				key     : 'text-decoration',
 				type    : 'select',
-				options : ['none', 'underline', 'overline', 'line-through'],
+				options : [
+					{
+						label: 'none', value: 'none',
+					},
+					{
+						label: 'underline', value: 'underline',
+					},
+					{
+						label: 'overline', value: 'overline',
+					},
+					{
+						label: 'line-through', value: 'line-through',
+					},
+
+				],
 			},
 		],
 	},
@@ -45,39 +97,44 @@ const textSettings = [
 		options : [
 			{
 				label   : 'Text Align',
-				key     : 'textAlign',
+				key     : 'text-align',
 				type    : 'select',
-				options : ['left', 'center', 'right', 'justify'],
+				options : [
+					{
+						label: 'left', value: 'left',
+					},
+					{
+						label: 'center', value: 'center',
+					},
+					{
+						label: 'right', value: 'right',
+					},
+					{
+						label: 'justify', value: 'justify',
+					},
+
+				],
 			},
 			{
 				label   : 'Vertical Align',
-				key     : 'verticalAlign',
+				key     : 'vertical-align',
 				type    : 'select',
-				options : ['baseline', 'top', 'middle', 'bottom'],
-			},
-		],
-	},
+				options : [
+					{
+						label: 'baseline', value: 'baseline',
+					},
+					{
+						label: 'top', value: 'top',
+					},
+					{
+						label: 'middle', value: 'middle',
+					},
+					{
+						label: 'bottom', value: 'bottom',
+					},
 
-	{
-		type    : 'Spacing',
-		options : [
-			{ label: 'Letter Spacing', key: 'letterSpacing', type: 'number' },
-			{ label: 'Line Height', key: 'lineHeight', type: 'number' },
-
-			{
-				label   : 'Word Wrap',
-				key     : 'wordWrap',
-				type    : 'select',
-				options : ['normal', 'break-word'],
+				],
 			},
-			{
-				label   : 'White Space',
-				key     : 'whiteSpace',
-				type    : 'select',
-				options : ['normal', 'nowrap', 'pre-wrap'],
-			},
-			{ label: 'Word Spacing', key: 'wordSpacing', type: 'number' },
-			{ label: 'Text Indent', key: 'textIndent', type: 'number' },
 		],
 	},
 ];

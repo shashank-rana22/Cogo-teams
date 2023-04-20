@@ -1,15 +1,19 @@
 import { Input } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 import styles from './styles.module.css';
 
 function ColorInput(props) {
-	const { colorKey, component, setComponent, selectedRow } = props;
+	const {
+		colorKey,
+		component,
+		setComponent,
+		selectedItem,
+		isRootComponent,
+		setSelectedItem,
+	} = props;
 
-	const [color, setColor] = useState(selectedRow.style?.[colorKey] || component.style?.[colorKey] || '#ffffff');
-
-	const isRootComponent = isEmpty(selectedRow);
+	const color = isRootComponent ? component.style?.[colorKey] : selectedItem.style?.[colorKey];
 
 	const handleChange = useCallback(
 		(key, value) => {
@@ -17,19 +21,21 @@ function ColorInput(props) {
 				setComponent((prev) => ({
 					...prev,
 					style: {
-						...component.style,
+						...prev.style,
 						[key]: value,
 					},
 				}));
 			} else {
-				const { id: selectedRowId } = selectedRow;
+				const { id: selectedItemId } = selectedItem;
 
-				const selectedComponent = component.layouts.find((layout) => layout.id === selectedRowId);
+				const selectedElement = component.layouts.find(
+					(layout) => layout.id === selectedItemId,
+				);
 
 				const modifiedComponent = {
-					...selectedComponent,
+					...selectedElement,
 					style: {
-						...selectedComponent.style,
+						...selectedElement?.style,
 						[key]: value,
 					},
 				};
@@ -37,24 +43,23 @@ function ColorInput(props) {
 				setComponent((prev) => ({
 					...prev,
 					layouts: prev.layouts.map((layout) => {
-						if (layout.id === selectedRowId) {
+						if (layout.id === selectedItemId) {
 							return modifiedComponent;
 						}
 						return layout;
 					}),
 				}));
+
+				setSelectedItem((prev) => ({
+					...prev,
+					style: {
+						...prev.style,
+						[key]: value,
+					},
+				}));
 			}
-
-			setColor(value);
 		},
-		[component.layouts, selectedRow, setComponent, component.style, isRootComponent],
-	);
-
-	const handleInputChange = useCallback(
-		(val, key) => {
-			handleChange(key, val);
-		},
-		[handleChange],
+		[component.layouts, selectedItem, setComponent, setSelectedItem, isRootComponent],
 	);
 
 	return (
@@ -65,7 +70,7 @@ function ColorInput(props) {
 					size="sm"
 					type="color"
 					value={color}
-					onChange={(value) => handleInputChange(value, colorKey)}
+					onChange={(value) => handleChange(colorKey, value)}
 				/>
 			</div>
 			<div>
@@ -75,7 +80,7 @@ function ColorInput(props) {
 					type="text"
 					value={color}
 					placeholder="Small"
-					onChange={(value) => handleInputChange(value, colorKey)}
+					onChange={(value) => handleChange(colorKey, value)}
 				/>
 			</div>
 		</div>

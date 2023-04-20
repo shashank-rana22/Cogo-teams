@@ -1,6 +1,6 @@
 import { Accordion, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import UploadImageModal from '../../../../commons/UploadImageModal';
 import buttonSettings from '../../../../configurations/button-settings';
@@ -18,15 +18,15 @@ const settingsMapping = {
 };
 
 function Settings(props) {
-	const { component, setComponent, selectedRow, selectedItem } = props;
-
-	console.log('selected item ::', selectedItem);
+	const { component, setComponent, selectedItem, setSelectedItem } = props;
 
 	const [showUploadModal, setShowUploadModal] = useState(false);
 
-	const isRootComponent = isEmpty(selectedRow);
+	const [defaultStyles, setDefaultStyles] = useState([]);
 
-	const { type = '' } = selectedRow;
+	const isRootComponent = isEmpty(selectedItem);
+
+	const { type = '' } = selectedItem;
 
 	const settings = settingsMapping[type] || containerSettings;
 
@@ -41,14 +41,16 @@ function Settings(props) {
 					},
 				}));
 			} else {
-				const { id: selectedRowId } = selectedRow;
+				const { id: selectedItemId } = selectedItem;
 
-				const selectedComponent = component.layouts.find((layout) => layout.id === selectedRowId);
+				const selectedElement = component.layouts.find(
+					(layout) => layout.id === selectedItemId,
+				);
 
 				const modifiedComponent = {
-					...selectedComponent,
+					...selectedElement,
 					style: {
-						...selectedComponent.style,
+						...selectedElement?.style,
 						[key]: value,
 					},
 				};
@@ -56,48 +58,56 @@ function Settings(props) {
 				setComponent((prev) => ({
 					...prev,
 					layouts: prev.layouts.map((layout) => {
-						if (layout.id === selectedRowId) {
+						if (layout.id === selectedItemId) {
 							return modifiedComponent;
 						}
 						return layout;
 					}),
 				}));
+
+				setSelectedItem((prev) => ({
+					...prev,
+					style: {
+						...prev.style,
+						[key]: value,
+					},
+				}));
 			}
 		},
-		[component.layouts, selectedRow, setComponent, component.style, isRootComponent],
-	);
-
-	const handleUploadChange = useCallback(
-		(value, key) => {
-			handleChange(key, value);
-		},
-		[handleChange],
+		[
+			setSelectedItem,
+			component.layouts,
+			selectedItem,
+			setComponent,
+			component.style,
+			isRootComponent,
+		],
 	);
 
 	return (
 		<section className={styles.container}>
 			<div>
-				{settings.map((setting) => (
-
+				{(settings || []).map((setting) => (
 					<Accordion
 						key={setting.type}
 						className={styles.ui_accordion_content}
 						type="text"
 						title={setting.type}
 					>
-
 						<Card
 							setComponent={setComponent}
 							component={component}
-							selectedRow={selectedRow}
+							selectedItem={selectedItem}
 							handleChange={handleChange}
 							setShowUploadModal={setShowUploadModal}
 							setting={setting}
 							isRootComponent={isRootComponent}
+							defaultStyles={defaultStyles}
+							setDefaultStyles={setDefaultStyles}
+							setSelectedItem={setSelectedItem}
 						/>
 
 					</Accordion>
-
 				))}
 			</div>
 
@@ -113,7 +123,9 @@ function Settings(props) {
 						showUploadModal={showUploadModal}
 						component={component}
 						setComponent={setComponent}
-						handleUploadChange={handleUploadChange}
+						handleChange={handleChange}
+						defaultStyles={defaultStyles}
+						setDefaultStyles={setDefaultStyles}
 					/>
 				</Modal>
 			)}

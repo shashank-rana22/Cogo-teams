@@ -8,9 +8,10 @@ const containerSettings = [
 				type  : 'color',
 			},
 			{
-				label : 'Image',
-				key   : 'background-image',
-				type  : 'upload',
+				label          : 'Image',
+				key            : 'background-image',
+				defaultOptions : [{ key: 'width', value: '100%' }, { key: 'height', value: '400px' }],
+				type           : 'upload',
 			},
 		],
 	},

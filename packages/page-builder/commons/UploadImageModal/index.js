@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 function UploadImageModal(props) {
 	const {
 		setShowUploadModal,
-		handleUploadChange,
+		handleChange,
 	} = props;
 
 	const { handleSubmit } = useForm();
@@ -21,7 +21,7 @@ function UploadImageModal(props) {
 	const uploadImage = () => {
 		const value = `url(${uploadProof})`;
 
-		handleUploadChange(value, 'background-image');
+		handleChange('background-image', value);
 
 		setShowUploadModal(false);
 	};

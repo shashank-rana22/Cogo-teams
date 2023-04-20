@@ -22,14 +22,16 @@ function Card(props) {
 	const {
 		setComponent,
 		component,
-		selectedRow,
+		selectedItem,
 		handleChange,
 		setShowUploadModal,
 		setting,
 		isRootComponent,
+		setDefaultStyles,
+		setSelectedItem,
 	} = props;
 
-	const selectedComponent = isRootComponent ? component : selectedRow;
+	const selectedComponent = isRootComponent ? component : selectedItem;
 
 	const isBackgroundImagePresent = Object.keys(selectedComponent.style).includes(
 		'background-image',
@@ -42,28 +44,33 @@ function Card(props) {
 		[handleChange],
 	);
 
-	const handleImageClick = (key, type) => {
+	console.log('selected item styles ::', selectedItem.style);
+
+	const handleImageClick = (key, type, defaultOptions) => {
 		if (isBackgroundImagePresent && type === 'remove') {
 			handleChange(key, '');
 		} else {
+			if (defaultOptions) {
+				setDefaultStyles(defaultOptions);
+			}
 			setShowUploadModal(true);
 		}
 	};
 
 	const modifiedImageUrl = extractUrlString(
-		selectedComponent.style?.['background-image'],
+		selectedItem.style?.['background-image'],
 	);
 
 	return (
 
 		<div className={styles.section}>
 			{setting.options.map((option) => {
-				const { type, key, label, options } = option;
+				const { type, key, label, options, defaultOptions } = option;
 
 				const MAPPING = {
 					select: (
 						<Select
-							value={component.style[key]}
+							value={selectedComponent.style[key]}
 							onChange={(value) => handleSelectChange(value, key)}
 							style={{ width: '120px' }}
 							options={options}
@@ -76,7 +83,9 @@ function Card(props) {
 							colorKey={key}
 							setComponent={setComponent}
 							component={component}
-							selectedRow={selectedRow}
+							selectedItem={selectedItem}
+							isRootComponent={isRootComponent}
+							setSelectedItem={setSelectedItem}
 						/>
 					),
 					upload: (
@@ -117,7 +126,7 @@ function Card(props) {
 									type="button"
 									themeType="secondary"
 									style={{ width: '120px' }}
-									onClick={() => handleImageClick(key, 'upload')}
+									onClick={() => handleImageClick(key, 'upload', defaultOptions)}
 								>
 									Upload
 									<IcMUpload
@@ -136,7 +145,9 @@ function Card(props) {
 							NumberKey={key}
 							setComponent={setComponent}
 							component={component}
-							selectedRow={selectedRow}
+							selectedItem={selectedItem}
+							isRootComponent={isRootComponent}
+							setSelectedItem={setSelectedItem}
 						/>
 					),
 				};
