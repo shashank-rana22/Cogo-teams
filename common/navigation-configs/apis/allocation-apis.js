@@ -380,7 +380,17 @@ const allocation = {
 	],
 	account_scoring: [
 		{
-			api          : 'post_engagement_scoring_settings_attributes',
+			api          : 'post_allocation_engagement_scoring_settings_attributes',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_engagement_scoring_settings',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_engagement_distribution_settings',
 			access_type  : 'private',
 			service_name : 'allocation',
 		},

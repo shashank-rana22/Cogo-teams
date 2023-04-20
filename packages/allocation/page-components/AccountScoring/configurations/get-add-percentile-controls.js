@@ -1,42 +1,35 @@
 const controls = (item) => {
-	const key_val = item || '';
+	const { id = '', lower_limit = 0, upper_limit = 0, score = 0 } = item || {};
 
 	return ([
 		{
-			name        : `${key_val}_percentile_from`,
+			name        : `${id}_percentile_from`,
 			label       : 'PERCENTILE FROM',
 			placeholder : '0',
 			type        : 'text',
+			value       : lower_limit,
 			rules       : {
 				required: 'Required',
 			},
 			isClearable: true,
 		},
 		{
-			name        : `${key_val}_percentile_to`,
+			name        : `${id}_percentile_to`,
 			label       : 'PERCENTILE TO',
 			placeholder : '0',
 			type        : 'text',
+			value       : upper_limit,
 			rules       : {
 				required: 'Required',
 			},
 			isClearable: true,
 		},
 		{
-			name        : `${key_val}_bias_score`,
+			name        : `${id}_bias_score`,
 			label       : 'BIAS SCORE',
 			placeholder : '0',
 			type        : 'text',
-			rules       : {
-				required: 'Required',
-			},
-			isClearable: true,
-		},
-		{
-			name        : `${key_val}_number_of_accounts`,
-			label       : 'NUMBER OF ACCOUNTS',
-			placeholder : '0',
-			type        : 'text',
+			value       : score,
 			rules       : {
 				required: 'Required',
 			},

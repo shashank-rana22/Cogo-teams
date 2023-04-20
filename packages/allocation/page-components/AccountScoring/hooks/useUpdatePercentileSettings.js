@@ -1,61 +1,67 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 
 function useUpdatePercentileSettings() {
-	const [trigger] = useAllocationRequest({
-		url    : 'post_engagement_scoring_settings_attributes',
-		method : 'POST',
-		athkey : 'post_engagement_scoring_settings_attributes',
-		// params : {
-		// 	setting_type: 'percentile',
-		// },
+	const [{ loading }, trigger] = useAllocationRequest({
+		url     : 'engagement_scoring_settings_attributes',
+		method  : 'POST',
+		authkey : 'post_allocation_engagement_scoring_settings_attributes',
 	}, { manual: true });
 
-	const onClickSave = async (formValues) => {
-		const {
-			flame_hot_percentile_from, flame_hot_percentile_to,
-			flame_hot_bias_score, flame_hot_number_of_accounts,
-			hot_percentile_from, hot_percentile_to, hot_bias_score, hot_number_of_accounts,
-			warm_percentile_from, warm_percentile_to, warm_bias_score, warm_number_of_accounts,
-			cold_percentile_from, cold_percentile_to, cold_bias_score, cold_number_of_accounts,
-			icy_cold_percentile_from, icy_cold_percentile_to, icy_cold_bias_score,
-			icy_cold_number_of_accounts,
-		} = formValues;
+	const onClickSave = async (formValues, onClose, refetch, preFilledList, performed_by_id) => {
+		const valuesForPrefilling = [];
+
+		preFilledList.forEach((element) => {
+			const { id = '' } = element;
+
+			const scores = { id };
+			const scoring_criteria = {};
+
+			Object.keys(formValues).forEach((item) => {
+				const first_index = item.indexOf('_');
+				if (id === item.substring(0, first_index)) {
+					const attributeName = item.substring(first_index + 1);
+
+					scoring_criteria[attributeName] = formValues[item];
+				}
+			});
+
+			scores.scoring_criteria = scoring_criteria;
+
+			if (!isEmpty(scores)) {
+				valuesForPrefilling.push(scores);
+			}
+		});
+
+		const setting_details = [];
+
+		valuesForPrefilling.forEach((element) => {
+			const obj = {};
+			obj.setting_id = element.id || undefined;
+			obj.lower_limit = element.scoring_criteria.percentile_from || undefined;
+			obj.upper_limit = element.scoring_criteria.percentile_to || undefined;
+			obj.score = element.scoring_criteria.bias_score || undefined;
+
+			setting_details.push(obj);
+		});
 
 		try {
-			console.log('flame_hot_percentile_from : ', flame_hot_percentile_from);
-			console.log('flame_hot_percentile_to : ', flame_hot_percentile_to);
-			console.log('flame_hot_bias_score : ', flame_hot_bias_score);
-			console.log('flame_hot_number_of_accounts : ', flame_hot_number_of_accounts);
-
-			console.log('hot_percentile_from : ', hot_percentile_from);
-			console.log('hot_percentile_to : ', hot_percentile_to);
-			console.log('hot_bias_score : ', hot_bias_score);
-			console.log('hot_number_of_accounts : ', hot_number_of_accounts);
-
-			console.log('warm_percentile_from : ', warm_percentile_from);
-			console.log('warm_percentile_to : ', warm_percentile_to);
-			console.log('warm_bias_score : ', warm_bias_score);
-			console.log('warm_number_of_accounts : ', warm_number_of_accounts);
-
-			console.log('cold_percentile_from : ', cold_percentile_from);
-			console.log('cold_percentile_to : ', cold_percentile_to);
-			console.log('cold_bias_score : ', cold_bias_score);
-			console.log('cold_number_of_accounts : ', cold_number_of_accounts);
-
-			console.log('icy_cold_percentile_from : ', icy_cold_percentile_from);
-			console.log('icy_cold_percentile_to : ', icy_cold_percentile_to);
-			console.log('icy_cold_bias_score : ', icy_cold_bias_score);
-			console.log('icy_cold_number_of_accounts : ', icy_cold_number_of_accounts);
-
 			const payload = {
-
+				performed_by_id,
+				performed_by_type : 'agent',
+				setting_type      : 'percentile',
+				setting_details,
 			};
 
 			await trigger({
 				data: payload,
 			});
+
+			refetch();
+
+			onClose();
 
 			Toast.success('Settings updated succesfully!!');
 		} catch (e) {
@@ -65,6 +71,7 @@ function useUpdatePercentileSettings() {
 
 	return {
 		updatePercentile: onClickSave,
+		loading,
 	};
 }
 

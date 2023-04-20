@@ -3,66 +3,28 @@ import { useState } from 'react';
 
 import getPercentileControl from '../../../../configurations/get-add-percentile-controls';
 import WARMTH_ARRAY from '../../../../constants/get-warmth-mapping';
+import useGetEngagementScoringSettings from '../../../../hooks/useGetEngagementScoringSettings';
 import EditSetting from '../EditSetting/index';
 
 import Header from './Header';
 import styles from './styles.module.css';
 
-const data = [
-	{
-		percentileRange  : '81-100',
-		biasScore        : 10,
-		numberOfAccounts : 200,
-
-	},
-	{
-		percentileRange  : '61-80',
-		biasScore        : 10,
-		numberOfAccounts : 200,
-
-	},
-	{
-		percentileRange  : '41-60',
-		biasScore        : 10,
-		numberOfAccounts : 200,
-
-	},
-	{
-		percentileRange  : '21-40',
-		biasScore        : 10,
-		numberOfAccounts : 200,
-
-	},
-	{
-		percentileRange  : '0-20',
-		biasScore        : 10,
-		numberOfAccounts : 200,
-
-	},
-];
-
 const columns = [
 	{
 		Header   : 'PERCENTILE RANGE',
-		accessor : ({ percentileRange = 0 }) => (
+		accessor : ({ lower_limit = 0, upper_limit = 0 }) => (
 			<section className={styles.data_container}>
-				{percentileRange}
+				{lower_limit}
+				-
+				{upper_limit}
 			</section>
 		),
 	},
 	{
 		Header   : 'BIAS SCORE',
-		accessor : ({ biasScore = 0 }) => (
+		accessor : ({ score = 0 }) => (
 			<section className={styles.data_container}>
-				{biasScore}
-			</section>
-		),
-	},
-	{
-		Header   : 'CURRENT NUMBER OF ACCOUNTS',
-		accessor : ({ numberOfAccounts = 0 }) => (
-			<section className={styles.data_container}>
-				{numberOfAccounts}
+				{score}
 			</section>
 		),
 	},
@@ -70,6 +32,11 @@ const columns = [
 
 function PercentileSetting() {
 	const [editing, setEditing] = useState(false);
+
+	const {
+		settingsLoading = false, settingsRefetch = () => {},
+		percentileList = [],
+	} = useGetEngagementScoringSettings();
 
 	if (editing) {
 		return (
@@ -82,6 +49,8 @@ function PercentileSetting() {
 				tooltipData="When the account lies in the respective percentile it would be assigned
 				a score at that time based on the table given below to show the region in which
 				the account lies whether (COLD , ICE COLD , WARM , HOT , FLAMING HOT)"
+				refetch={settingsRefetch}
+				preFilledList={percentileList}
 			/>
 		);
 	}
@@ -93,7 +62,8 @@ function PercentileSetting() {
 			<Table
 				layoutType="table"
 				columns={columns}
-				data={data || []}
+				data={percentileList || []}
+				loading={settingsLoading}
 			/>
 		</div>
 	);

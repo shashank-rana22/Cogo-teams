@@ -1,6 +1,8 @@
 import { useForm } from '@cogoport/forms';
+import { useSelector } from '@cogoport/store';
 
 import useUpdateBiasSettings from '../../../../hooks/useUpdateBiasSettings';
+import useUpdateDistributionSettings from '../../../../hooks/useUpdateDistributionSettings';
 import useUpdatePercentileSettings from '../../../../hooks/useUpdatePercentileSettings';
 
 import Header from './Header';
@@ -11,7 +13,13 @@ function EditSetting(props) {
 	const {
 		ITEM_ARRAY = [], useGetControls, inputStyle = 'input',
 		setEditing = () => {}, heading = '', tooltipData = '',
+		refetch = () => {},
+		preFilledList = [],
 	} = props;
+
+	const profile = useSelector((state) => state.profile);
+	const { user = {} } = profile;
+	const { id : performed_by_id = ' ' } = user;
 
 	const {
 		updatePercentile = () => {},
@@ -21,8 +29,12 @@ function EditSetting(props) {
 		updateBias = () => {},
 	} = useUpdateBiasSettings();
 
+	const {
+		updateDistribution = () => {},
+	} = useUpdateDistributionSettings();
+
 	const formProps = useForm();
-	const { control, handleSubmit, formState: { errors }, watch } = formProps;
+	const { control, handleSubmit, formState: { errors } } = formProps;
 
 	const onClose = () => {
 		setEditing((pv) => !pv);
@@ -32,27 +44,12 @@ function EditSetting(props) {
 		e.preventDefault();
 
 		if (inputStyle === 'percentile_input') {
-			updatePercentile(formValues); // percentile ...
+			updatePercentile(formValues, onClose, refetch, preFilledList, performed_by_id);
 		} else if (inputStyle === 'bias_input') {
-			updateBias(formValues);
+			updateBias(formValues, onClose, refetch, preFilledList, performed_by_id);
 		} else if (inputStyle === 'distribution_input') {
-			console.log('flame_hot_range_from : ', watch('flame_hot_range_from'));
-			console.log('flame_hot_range_to : ', watch('flame_hot_range_to'));
-
-			console.log('hot_range_from : ', watch('hot_range_from'));
-			console.log('hot_range_to : ', watch('hot_range_to'));
-
-			console.log('warm_range_from : ', watch('warm_range_from'));
-			console.log('warm_range_to : ', watch('warm_range_to'));
-
-			console.log('cold_range_from : ', watch('cold_range_from'));
-			console.log('cold_range_to : ', watch('cold_range_to'));
-
-			console.log('icy_cold_range_from : ', watch('icy_cold_range_from'));
-			console.log('icy_cold_range_to : ', watch('icy_cold_range_to'));
+			updateDistribution(formValues, onClose, refetch, preFilledList, performed_by_id);
 		}
-
-		// onClose();
 	};
 
 	return (
@@ -64,7 +61,7 @@ function EditSetting(props) {
 					onClose={onClose}
 				/>
 
-				{ITEM_ARRAY.map((item, index) => (
+				{/* {ITEM_ARRAY.map((item, index) => (
 					<div key={item} className={styles.item}>
 						<SettingsItem
 							item={item}
@@ -73,6 +70,20 @@ function EditSetting(props) {
 							inputStyle={inputStyle}
 							control={control}
 							errors={errors}
+							preFilledList={preFilledList}
+						/>
+					</div>
+				))} */}
+				{preFilledList.map((item, index) => (
+					<div key={item} className={styles.item}>
+						<SettingsItem
+							item={item}
+							useGetControls={useGetControls}
+							index={index}
+							inputStyle={inputStyle}
+							control={control}
+							errors={errors}
+							preFilledList={preFilledList}
 						/>
 					</div>
 				))}

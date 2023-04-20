@@ -1,108 +1,67 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 
 function useUpdateBiasSettings() {
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : 'engagement_scoring_settings_attributes',
 		method  : 'POST',
-		authkey : 'post_engagement_scoring_settings_attributes',
+		authkey : 'post_allocation_engagement_scoring_settings_attributes',
 	}, { manual: true });
 
-	const onClickSave = async (formValues) => {
-		const {
-			first_half_age_from, first_half_age_to, first_half_multiplier,
-			second_half_age_from, second_half_age_to, second_half_multiplier,
-			third_half_age_from, third_half_age_to, third_half_multiplier,
-			fourth_half_age_from, fourth_half_age_to, fourth_half_multiplier,
-		} = formValues;
+	const onClickSave = async (formValues, onClose, refetch, preFilledList, performed_by_id) => {
+		const valuesForPrefilling = [];
+
+		preFilledList.forEach((element) => {
+			const { id = '' } = element;
+
+			const scores = { id };
+			const scoring_criteria = {};
+
+			Object.keys(formValues).forEach((item) => {
+				const first_index = item.indexOf('_');
+				if (id === item.substring(0, first_index)) {
+					const attributeName = item.substring(first_index + 1);
+
+					scoring_criteria[attributeName] = formValues[item];
+				}
+			});
+
+			scores.scoring_criteria = scoring_criteria;
+
+			if (!isEmpty(scores)) {
+				valuesForPrefilling.push(scores);
+			}
+		});
+
+		const setting_details = [];
+
+		valuesForPrefilling.forEach((element) => {
+			const obj = {};
+			obj.setting_id = element.id || undefined;
+			obj.lower_limit = element.scoring_criteria.age_from || undefined;
+			obj.upper_limit = element.scoring_criteria.age_to || undefined;
+			obj.score = element.scoring_criteria.multiplier || undefined;
+
+			setting_details.push(obj);
+		});
+
 		try {
-			// console.log('first_half_age_from : ', first_half_age_from);
-			// console.log('first_half_age_to : ', first_half_age_to);
-			// console.log('first_half_multiplier : ', first_half_multiplier);
-
-			// console.log('second_half_age_from : ', second_half_age_from);
-			// console.log('second_half_age_to : ', second_half_age_to);
-			// console.log('second_half_multiplier : ', second_half_multiplier);
-
-			// console.log('third_half_age_from : ', third_half_age_from);
-			// console.log('third_half_age_to : ', third_half_age_to);
-			// console.log('third_half_multiplier : ', third_half_multiplier);
-
-			// console.log('fourth_half_age_from : ', fourth_half_age_from);
-			// console.log('fourth_half_age_to : ', fourth_half_age_to);
-			// console.log('fourth_half_multiplier : ', fourth_half_multiplier);
-
-			console.log('initiation');
-
 			const payload = {
-				// performed_by_id   : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
-				// performed_by_type : 'agent',
-				// setting_type      : 'bias',
-				// setting_details   : [
-				// 	{
-				// 		setting_id  : '5481fbd4-9ecb-4eed-9598-1ef9f42bf9fb',
-				// 		lower_limit : first_half_age_from || undefined,
-				// 		upper_limit : first_half_age_to || undefined,
-				// 		score       : first_half_multiplier || undefined,
-				// 	},
-				// 	{
-				// 		setting_id  : 'd6865582-11a2-43ea-866f-ed9a4307528c',
-				// 		lower_limit : second_half_age_from || undefined,
-				// 		upper_limit : second_half_age_to || undefined,
-				// 		score       : second_half_multiplier || undefined,
-				// 	},
-				// 	{
-				// 		setting_id  : '6e181d76-cd87-49e8-a075-b7f1d1c5c19f',
-				// 		lower_limit : third_half_age_from || undefined,
-				// 		upper_limit : third_half_age_to || undefined,
-				// 		score       : third_half_multiplier || undefined,
-				// 	},
-				// 	{
-				// 		setting_id  : '7736b653-290c-4123-87f0-2c4804fcf747',
-				// 		lower_limit : fourth_half_age_from || undefined,
-				// 		upper_limit : fourth_half_age_to || undefined,
-				// 		score       : fourth_half_multiplier || undefined,
-				// 	},
-				// ],
-				performed_by_id   : '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44',
+				performed_by_id,
 				performed_by_type : 'agent',
 				setting_type      : 'bias',
-				setting_details   : [
-					{
-						setting_id  : '5481fbd4-9ecb-4eed-9598-1ef9f42bf9fb',
-						lower_limit : 0,
-						upper_limit : 15,
-						score       : 0.1,
-					},
-					{
-						setting_id  : 'd6865582-11a2-43ea-866f-ed9a4307528c',
-						lower_limit : 15,
-						upper_limit : 30,
-						score       : 0.7,
-					},
-					{
-						setting_id  : '6e181d76-cd87-49e8-a075-b7f1d1c5c19f',
-						lower_limit : 15,
-						upper_limit : 30,
-						score       : 0.7,
-					},
-					{
-						setting_id  : '7736b653-290c-4123-87f0-2c4804fcf747',
-						lower_limit : 0,
-						upper_limit : 15,
-						score       : 0.1,
-					},
-				],
+				setting_details,
 			};
-
-			console.log('processing');
 
 			await trigger({
 				data: payload,
 			});
 
-			console.log('updated!');
+			refetch();
+
+			onClose();
 
 			Toast.success('Settings updated succesfully!!');
 		} catch (e) {

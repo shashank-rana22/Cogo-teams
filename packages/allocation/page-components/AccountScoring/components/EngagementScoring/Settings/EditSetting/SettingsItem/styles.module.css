@@ -5,8 +5,13 @@
 }
 
 .warmth_container {
-	flex-basis: 20%;
+	flex-basis: 30%;
 	margin-right: 20px;
+}
+
+.accounts_container {
+	flex-basis: 50%;
+	margin-left: 48px;
 }
 
 .headers {
@@ -29,7 +34,7 @@
 }
 
 .percentile_input {
-	flex-basis: 22%;
+	flex-basis: 30%;
 }
 
 .bias_input {

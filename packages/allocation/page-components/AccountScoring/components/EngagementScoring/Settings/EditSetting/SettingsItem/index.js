@@ -2,15 +2,15 @@ import { getFieldController } from '../../../../../../../common/Form/getFieldCon
 
 import styles from './styles.module.css';
 
-const WARMTH_MAPPING = {
-	flame_hot : 'Flaming Hot',
-	hot       : 'Hot',
-	warm      : 'Warm',
-	cold      : 'Cold',
-	icy_cold  : 'Icy Cold',
+const accounts = { // temporary data
+	flame_hot : '200',
+	hot       : '800',
+	warm      : '900',
+	cold      : '-',
+	icy_cold  : '-',
 };
 
-function TableItem(props) {
+function SettingsItem(props) {
 	const {
 		item = '', useGetControls = () => {},
 		index = 0, inputStyle, control, errors,
@@ -32,7 +32,7 @@ function TableItem(props) {
 							}
 
 					<div className={styles.headers}>
-						{WARMTH_MAPPING?.[item]}
+						{item.warmth || ''}
 					</div>
 				</div>
 			)}
@@ -50,7 +50,7 @@ function TableItem(props) {
 
 							<Element
 								{...element}
-								key={`${item + element.name}`}
+								key={element.name}
 								control={control}
 							/>
 
@@ -61,9 +61,25 @@ function TableItem(props) {
 					);
 				})}
 			</div>
+			{inputStyle === 'distribution_input'
+			&& (
+				<div className={styles.accounts_container}>
+					{
+								index === 0 && (
+									<div className={styles.label}>
+										NUMBER OF ACCOUNTS
+									</div>
+								)
+							}
+
+					<div className={styles.headers}>
+						{accounts?.[item]}
+					</div>
+				</div>
+			)}
 
 		</div>
 	);
 }
 
-export default TableItem;
+export default SettingsItem;

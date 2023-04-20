@@ -3,48 +3,28 @@ import { useState } from 'react';
 
 import getBiasControl from '../../../../configurations/get-add-bias-controls';
 import BIAS_ARRAY from '../../../../constants/get-bias-setting-mapping';
+import useGetEngagementScoringSettings from '../../../../hooks/useGetEngagementScoringSettings';
 import EditSetting from '../EditSetting/index';
 
 import Header from './Header';
 import styles from './styles.module.css';
 
-const data = [
-	{
-		age        : '0-15',
-		multiplier : 0.5,
-
-	},
-	{
-		age        : '30-60',
-		multiplier : 0.25,
-
-	},
-	{
-		age        : '60-90',
-		multiplier : 0.15,
-
-	},
-	{
-		age        : '90-',
-		multiplier : 0.1,
-
-	},
-];
-
 const columns = [
 	{
 		Header   : 'AGE',
-		accessor : ({ age = '' }) => (
+		accessor : ({ lower_limit = '', upper_limit = '' }) => (
 			<section className={styles.data_container}>
-				{age}
+				{lower_limit}
+				-
+				{upper_limit}
 			</section>
 		),
 	},
 	{
 		Header   : 'MULTIPLIER',
-		accessor : ({ multiplier = 0 }) => (
+		accessor : ({ score = 0 }) => (
 			<section className={styles.data_container}>
-				{multiplier}
+				{score}
 			</section>
 		),
 	},
@@ -53,12 +33,19 @@ const columns = [
 function BiasSetting() {
 	const [editing, setEditing] = useState(false);
 
+	const {
+		settingsLoading = false, settingsRefetch = () => {},
+		biasList = [],
+	} = useGetEngagementScoringSettings();
+
 	if (editing) {
 		return (
 			<EditSetting
 				ITEM_ARRAY={BIAS_ARRAY}
 				useGetControls={getBiasControl}
 				setEditing={setEditing}
+				refetch={settingsRefetch}
+				preFilledList={biasList}
 				inputStyle="bias_input"
 				heading="Bias Settings"
 				tooltipData="Bias is used to calculate the warmness of the KAM"
@@ -72,7 +59,8 @@ function BiasSetting() {
 
 			<Table
 				columns={columns}
-				data={data || []}
+				data={biasList || []}
+				loading={settingsLoading}
 			/>
 		</div>
 	);
