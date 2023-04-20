@@ -1,9 +1,11 @@
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 
-function useGetTaskConfig({ task = {}, onCancel = () => {} }) {
-	const [{ loading, data }, trigger] = useRequest({
+function useGetTaskConfig({ task = {} }) {
+	const [apiData, setApiData] = useState({});
+
+	const [{ loading }, trigger] = useRequest({
 		url    : 'get_task_config',
 		method : 'GET',
 	}, { manual: true });
@@ -14,14 +16,12 @@ function useGetTaskConfig({ task = {}, onCancel = () => {} }) {
 				const res = await trigger({
 					params: { pending_task_id: task.id },
 				});
-				if (res.hasError) {
-					onCancel();
-				}
+				setApiData(res?.data);
 			} catch (err) {
 				toastApiError(err);
 			}
 		})();
-	}, [trigger, task.id, onCancel]);
+	}, [trigger, task.id]);
 
 	useEffect(() => {
 		getTaskConfigTrigger();
@@ -29,7 +29,7 @@ function useGetTaskConfig({ task = {}, onCancel = () => {} }) {
 
 	return {
 		loading,
-		taskConfigData: data,
+		taskConfigData: apiData,
 	};
 }
 

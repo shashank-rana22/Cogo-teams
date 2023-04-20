@@ -2,18 +2,21 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-const useUpdateShipmentService = ({
+const useUpdateShipmentPendingTask = ({
 	refetch = () => {},
-	successMessage = 'Successfully Updated',
+	successMessage = 'Updated Successfully!',
 }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_shipment_service',
+		url    : '/update_shipment_pending_task',
 		method : 'POST',
 	});
 
-	const apiTrigger = async (payload) => {
+	const apiTrigger = async (val) => {
 		try {
-			await trigger({ data: payload });
+			await trigger({
+				data: val,
+			});
+
 			Toast.success(successMessage);
 			refetch();
 		} catch (err) {
@@ -22,8 +25,9 @@ const useUpdateShipmentService = ({
 	};
 
 	return {
-		apiTrigger, loading,
+		loading,
+		apiTrigger,
 	};
 };
 
-export default useUpdateShipmentService;
+export default useUpdateShipmentPendingTask;

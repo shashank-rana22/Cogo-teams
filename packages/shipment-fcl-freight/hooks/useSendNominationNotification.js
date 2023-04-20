@@ -2,12 +2,12 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-const useUpdateShipmentService = ({
+const useSendNominationNotification = ({
 	refetch = () => {},
 	successMessage = 'Successfully Updated',
 }) => {
-	const [{ loading }, trigger] = useRequest({
-		url    : '/update_shipment_service',
+	const [{ loading, data }, trigger] = useRequest({
+		url    : '/send_nomination_notification',
 		method : 'POST',
 	});
 
@@ -22,8 +22,10 @@ const useUpdateShipmentService = ({
 	};
 
 	return {
-		apiTrigger, loading,
+		apiTrigger,
+		loading,
+		data,
 	};
 };
 
-export default useUpdateShipmentService;
+export default useSendNominationNotification;
