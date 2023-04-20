@@ -104,13 +104,7 @@ const helperFuncs = (servicesList, possibleServices) => {
 	};
 
 	possibleServices.forEach((service) => {
-		if ('mainServices' in service) {
-			(service.mainServices).forEach((singleService) => {
-				classifyTradeTypeBasedService(singleService);
-			});
-		} else {
-			classifyTradeTypeBasedService(service);
-		}
+		classifyTradeTypeBasedService(service);
 	});
 
 	return {

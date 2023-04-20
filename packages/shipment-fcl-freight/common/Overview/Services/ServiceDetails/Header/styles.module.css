@@ -1,52 +1,108 @@
-.container {
-	padding: 12px 16px 10px 20px;
-	background: #fef6df;
-	border-radius: 4px;
-
-	&.cancelled {
-		background: #f2f2f2;
-	}
-
-	&.completed {
-		background: #f6f5fe;
-	}
-
-	&.confirmed_by_service_provider {
-		background: #f6f5fe;
-	}
-
-	&.confirmed_by_importer_exporter {
-		background: #f6f5fe;
-	}
+.main_container{
+	border: 1px solid #F68B21;
+	background-color: #FEF3E9;
+	border-radius: 4px; 
+	align-items: center;  
+	margin-bottom: 12px;
 }
 
-.header_wrap {
-	align-items: center;
-	justify-content: space-between;
+.container{ 
+	display: flex; 
+	padding: 12px 24px; 
 
-	[data-tippy-root] {
-		z-index: 999 !important;
-	}
+}  
+
+.cancelled.main_container{ 
+	border: 1px solid #b0b0b0;
+	background-color: #eeeeee;
 }
 
-.sub_heading {
+.completed.main_container{ 
+	border: 1px solid #ABCD62;
+	background-color: #F7FAEF;
+}
+
+ .confirmed_by_service_provider.main_container{  
+	border: 1px solid #ABCD62;
+	background-color: #F7FAEF;
+}
+
+ .confirmed_by_importer_exporter.main_container{ 
+	border: 1px solid #ABCD62;
+	background-color: #F7FAEF;
+} 
+
+.service_details { 
+	border-right: 2px solid #F68B21;
+	width: 25%;	
+} 
+
+.cancelled.service_details{ 
+	border-right: 2px solid #828282;
+}  
+
+.completed.service_details{ 
+	border-right: 2px solid #ABCD62;
+} 
+
+ .confirmed_by_service_provider.service_details{ 
+	border-right: 2px solid #ABCD62;
+} 
+
+ .confirmed_by_importer_exporter.service_details{ 
+	border-right: 2px solid #ABCD62;
+} 
+
+.service_name{
+	font-family: 'Poppins';
+	font-weight: 600;
+	font-size: 12px;
+	color: #4F4F4F;
+} 
+
+.service_provider{
+font-family: 'Poppins';
+font-weight: 500;
+font-size: 10px;
+color: #4F4F4F;
+} 
+
+.payment_term {
+
+} 
+
+.state{
+	background-color: #CDF7D4;
+	border-radius: 4px; 
+	padding: 2px 4px; 
 	font-size: 10px;
-	font-weight: 400;
-	line-height: 20px;
-	color: #363e6e;
+} 
 
-	&.cancelled {
-		color: #bdbdbd;
-	}
-}
+.edit_cancel{
 
-.heading_wrap {
-	display: flex;
-	justify-content: space-between;
-}
+} 
 
-.heading_content {
-	display: flex;
+.secondary_details{
+	display: flex; 
+	justify-content: space-between; 
+	width: 75%; 
+	padding-left: 30px; 
 	align-items: center;
-	justify-content: space-between;
+} 
+
+.details_cta{ 
+	font-family: 'Poppins'; 
+	font-size: 12px;
+	border: 1px solid #E0E0E0; 
+	padding : 6px 12px; 
+	background-color: #FFFFFF; 
+	border-radius: 6px; 
+	cursor: pointer;  
+	margin-right: 24px;
+
+} 
+
+.extra_details {
+	display: flex; 
+	align-items: center; 
 }

@@ -5,9 +5,8 @@
 }
 
 .services_container {
-	display: flex;
-	width: 80%;
-	padding: 0 22px 29px;
+	padding: 0 22px 30px;
+	width: 100%;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
@@ -29,7 +28,35 @@
 
 .upselling {
 	display: flex;
-	flex-direction: column;
-	gap: 12px;
-	width: 30%;
+	flex-wrap: wrap;
+
+	& > div{
+		flex: 0 0 23.5%;
+		margin: 0px 8px 4px 0px;
+	}
+} 
+
+
+.header{
+	width: fit-content; 
+	height: fit-content; 
+	white-space: nowrap; 
+	position: relative; 
+	display: flex;  
+	font-family: 'Poppins';
+	font-weight: 600;
+	font-size: 14px; 
+	margin: 24px 0px 16px 0px;
+
+	&::after{ 
+		content: '';  
+		display: inline-block; 
+		position: absolute;
+		width: 30%;
+		background-color: #EE3425; 
+		height: 2px;  
+		top: 22px;
+		
+
+	}
 }

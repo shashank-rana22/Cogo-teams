@@ -4,19 +4,20 @@ import { renderValue } from '../../../../../CargoDetails/RenderCargoPills/render
 
 import styles from './styles.module.css';
 
-function Item({ state, label, detail }) {
+function Item({ label, detail }) {
+	console.log({ label, detail });
 	const valueFormatted = renderValue(label?.key, detail);
-	return (
-		<div className={styles.container}>
-			<div className={styles.key}>
-				{label?.label}
-				:
+	return valueFormatted
+		? (
+			<div className={styles.container}>
+				<div className={styles.key}>
+					{label?.label}
+				</div>
+				<Tooltip content={valueFormatted} placement="bottom">
+					<div className={cl`${styles.value}`}>{valueFormatted}</div>
+				</Tooltip>
 			</div>
-			<Tooltip content={valueFormatted} placement="bottom">
-				<div className={cl`${styles.value} ${state}`}>{valueFormatted}</div>
-			</Tooltip>
-		</div>
-	);
+		) : null;
 }
 
 export default Item;

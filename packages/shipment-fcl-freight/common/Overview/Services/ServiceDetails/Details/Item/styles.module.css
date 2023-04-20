@@ -1,13 +1,4 @@
 .container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	justify-content: space-between;
-	border-bottom: 1px solid #f2f2f2;
-}
-
-.container:last-child {
-	border: none;
 }
 
 .key {
@@ -24,14 +15,10 @@
 	margin: 8px 24px 4px;
 	overflow: hidden;
 	font-size: 12px;
-	font-weight: 500;
+	font-weight: 600;
 	line-height: 20px;
 	color: #333;
 	text-overflow: ellipsis;
 	text-transform: capitalize;
 	white-space: nowrap;
-}
-
-.cancelled {
-	color: #bdbdbd;
 }
