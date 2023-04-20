@@ -200,7 +200,7 @@ function Footer({
 										id="approve-modal-btn"
 										themeType="primary"
 										loading={actionConfirmedLoading}
-										disabled={!bulkAction}
+										disabled={!bulkAction && value}
 										onClick={() => {
 											actionConfirm({ isBookedActive, setShow });
 										}}
