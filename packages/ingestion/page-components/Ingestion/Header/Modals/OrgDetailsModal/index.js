@@ -1,7 +1,7 @@
 import { CONSTANT_KEYS } from '../../../../../constants/org-details-mapping';
 import { getElementController } from '../../../../../utils/get-element-controls';
 
-import { CpDiv, IeDiv, LeadDiv } from './NextHeading';
+import { LeadDiv } from './NextHeading';
 import styles from './styles.module.css';
 
 function OrgDetailsModal({
@@ -10,13 +10,11 @@ function OrgDetailsModal({
 	const { control, formState: { errors } } = formProps;
 
 	const {
-		LEAD, CHANNEL_PARTNER, IMPORTER_EXPORTER,
+		LEAD,
 	} = CONSTANT_KEYS;
 
 	const INGESTION_COMPONENTS_MAPPING = {
-		[LEAD]              : LeadDiv,
-		[CHANNEL_PARTNER]   : CpDiv,
-		[IMPORTER_EXPORTER] : IeDiv,
+		[LEAD]: LeadDiv,
 	};
 
 	const TopDiv = INGESTION_COMPONENTS_MAPPING[uploadData?.ingestion_type] || null;

@@ -10,6 +10,16 @@
 	padding: 0 16px;
 	margin: 12px 0;
 	margin-bottom: 36px;
+	
+
+	:global {
+		.ui_modal_body_container {
+			height: 800px;
+			padding: 0;
+			border-top: none !important;
+			border-bottom: none !important;
+		}
+	}
 }
 
 .control_container {
@@ -17,6 +27,8 @@
 	flex-basis: 30%;
 	flex-direction: column;
 	margin: 4px 0;
+
+	
 }
 
 .control_label {
@@ -29,6 +41,7 @@
 	margin: 48px 16px 12px;
 }
 
-.ui_modal_body_container {
+/* .ui_modal_body_container {
 	max-height: 600px
-}
+} */
+

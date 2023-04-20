@@ -4,15 +4,11 @@ import styles from './styles.module.css';
 
 function ChooseModal({ setShow = () => {}, setUploadData = () => {}, uploadData = {} }) {
 	const NEXT_PAGE_MAPPING = {
-		organization : 'orgDetails',
-		partner      : 'providerSelect',
-		lead         : 'providerSelect',
+		lead: 'providerSelect',
 	};
 
 	const IS_CP_MAPPING = {
-		organization : false,
-		partner      : true,
-		lead         : null,
+		lead: null,
 	};
 
 	const onChoose = (type) => {
@@ -41,21 +37,7 @@ function ChooseModal({ setShow = () => {}, setUploadData = () => {}, uploadData 
 					Lead
 
 				</Button>
-				<Button
-					themeType="secondary"
-					onClick={() => onChoose('partner')}
-					style={{ height: '60px', width: '50%' }}
-				>
-					Channel Partner
 
-				</Button>
-				<Button
-					themeType="secondary"
-					onClick={() => onChoose('organization')}
-					style={{ height: '60px', width: '50%' }}
-				>
-					Importer Exporter
-				</Button>
 			</div>
 
 		</div>

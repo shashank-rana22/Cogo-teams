@@ -1,7 +1,6 @@
 import { Button } from '@cogoport/components';
 
 import {
-	ProviderCpOptions,
 	ProviderLeadOptions,
 	IS_CHANNEL_PARTNER_MAPPING,
 } from '../../../../../constants/org-details-mapping';
@@ -12,8 +11,7 @@ function ProviderSelectModal({ setShow = () => {}, setUploadData = () => {}, upl
 	const { reset } = formProps;
 
 	const PROVIDER_BUTTON_MAPPING = {
-		lead    : ProviderLeadOptions,
-		partner : ProviderCpOptions,
+		lead: ProviderLeadOptions,
 	};
 
 	const ProviderButtonOptions = PROVIDER_BUTTON_MAPPING[uploadData?.ingestion_type] || '';

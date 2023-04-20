@@ -10,9 +10,6 @@ export const UPLOAD_STATUS_MAPPING = {
 };
 
 export const IS_CHANNEL_PARTNER_MAPPING = {
-	IE           : false,
-	SP           : true,
-	CPSell       : true,
-	CPBuy        : true,
-	CPBuyAndSell : true,
+	IE : false,
+	SP : true,
 };

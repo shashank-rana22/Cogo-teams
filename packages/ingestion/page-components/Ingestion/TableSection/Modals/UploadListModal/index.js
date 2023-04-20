@@ -49,7 +49,7 @@ function UploadListModal({ tableModal = '', setTableModal = () => {}, row = {} }
 		<Modal
 			className={styles.page_container}
 			key={tableModal}
-			size="lg"
+			size="xl"
 			show={tableModal}
 			onClose={onClose}
 			placement="center"

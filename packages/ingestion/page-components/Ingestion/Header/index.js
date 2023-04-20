@@ -87,6 +87,7 @@ function Header({ refetch = () => {} }) {
 					show={show?.open}
 					onClose={() => onClose()}
 					closeOnOuterClick={false}
+					scroll={false}
 				>
 					<Modal.Header title={(
 						<div style={{ display: 'flex', alignItems: 'center' }}>

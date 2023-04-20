@@ -18,9 +18,7 @@ export function ChooseFooter(props) {
 }
 
 const BACK_PAGE_MAPPING = {
-	organization : 'chooseModal',
-	partner      : 'providerSelect',
-	lead         : 'providerSelect',
+	lead: 'providerSelect',
 };
 
 export function OrgDetailsFooter(props) {

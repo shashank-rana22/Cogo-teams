@@ -18,7 +18,15 @@ function ReUploadModal({ tableModal = '', setTableModal = () => {}, row = {} }) 
 	const { control, formState: { errors }, handleSubmit } = formProps;
 
 	return (
-		<Modal key={tableModal} size="md" show={tableModal === 'reUpload'} onClose={onClose} placement="center">
+		<Modal
+			className={styles.re_upload}
+			key={tableModal}
+			size="md"
+			show={tableModal === 'reUpload'}
+			onClose={onClose}
+			placement="center"
+			scroll={false}
+		>
 			<Modal.Header title={(
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<IcMUpload style={{ margin: '0 4px 0 0' }} />
@@ -43,7 +51,7 @@ function ReUploadModal({ tableModal = '', setTableModal = () => {}, row = {} }) 
 									control={control}
 									id={`${el.name}_input`}
 									className={styles.field_controller}
-									/>
+								/>
 
 								<div className={styles.error_message}>
 									{errors?.[el.name]?.message}
