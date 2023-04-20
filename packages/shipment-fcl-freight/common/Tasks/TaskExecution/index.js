@@ -2,7 +2,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
 
 import AdditionsServicesTasks from './AdditionalServicesTasks';
-import { ChooseServiceProvider, NominationTask } from './CustomTasks';
+import { ChooseServiceProvider, NominationTask, GenerateFreightCertificate } from './CustomTasks';
 import ExecuteTask from './ExecuteTask';
 import ReviewDoc from './ReviewDoc';
 import UploadAmendDoc from './UploadAmendDoc';
@@ -52,11 +52,9 @@ function TaskExecution({ task = {}, onCancel = () => {}, taskListRefetch = () =>
 		return (
 			<div>
 				<ChooseServiceProvider
-					only_select_rate
 					task={task}
 					onCancel={onCancel}
 					refetch={taskListRefetch}
-					// timeLineRefetch={timeLineRefetch}
 					services={servicesList}
 				/>
 			</div>
@@ -68,12 +66,21 @@ function TaskExecution({ task = {}, onCancel = () => {}, taskListRefetch = () =>
 	) {
 		return (
 			<NominationTask
-				primary_service={primary_service}
-				shipment_data={shipment_data}
+				primaryService={primary_service}
+				shipmentData={shipment_data}
 				task={task}
-				// stepConfig={stepConfigValue}
 				onCancel={onCancel}
 				refetch={taskListRefetch}
+			/>
+		);
+	}
+
+	if (task.task === 'generate_freight_certificate') {
+		return (
+			<GenerateFreightCertificate
+				task={task}
+				refetch={taskListRefetch}
+				onCancel={onCancel}
 			/>
 		);
 	}

@@ -12,9 +12,9 @@ import styles from './styles.module.css';
 function NominationTask({
 	task = {},
 	onCancel = () => {},
-	primary_service,
+	primaryService,
 	refetch = () => {},
-	shipment_data = {},
+	shipmentData = {},
 }) {
 	const [show, setShow] = useState(false);
 
@@ -25,12 +25,12 @@ function NominationTask({
 	const controls = getControls({
 		task,
 		taskData: taskConfigData,
-		primary_service,
-		shipment_data,
+		primaryService,
+		shipmentData,
 	});
 
-	const subject = `Nomination//SID:${shipment_data.serial_id}//${primary_service?.origin_port?.display_name}-
-					${primary_service?.destination_port?.display_name}//${primary_service?.cargo_weight_per_container}`;
+	const subject = `Nomination//SID:${shipmentData.serial_id}//${primaryService?.origin_port?.display_name}-
+					${primaryService?.destination_port?.display_name}//${primaryService?.cargo_weight_per_container}`;
 
 	const { apiTrigger, loading, data } = useSendNominationNotification({ });
 
