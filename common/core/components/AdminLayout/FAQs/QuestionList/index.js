@@ -36,13 +36,16 @@ function QuestionList({
 	if (loading) return <Loader topic={topic} />;
 
 	if (response_type === 'GPT') {
-		return (
-			<GPTAnswers
-				answer={gpt_answer}
-				showMore={show_more}
-				search={search}
-			/>
-		);
+		if (gpt_answer) {
+			return (
+				<GPTAnswers
+					answer={gpt_answer}
+					showMore={show_more}
+					search={search}
+				/>
+			);
+		}
+		return <EmptySearchState search={search} />;
 	}
 
 	const allpills = (item) => (

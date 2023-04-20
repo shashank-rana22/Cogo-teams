@@ -36,7 +36,20 @@ function QuestionsList({ tabTitle = '', searchState = '', topicId = '', tagId = 
 		);
 	}
 	if (response_type === 'GPT' && tagId.length === 0) {
-		return <GPTAnswers answer={gpt_answer} showMore={show_more} search={searchState} />;
+		if (gpt_answer) {
+			return (
+				<GPTAnswers
+					answer={gpt_answer}
+					showMore={show_more}
+					search={searchState}
+				/>
+			);
+		}
+		return (
+			<EmptyQuestionListState
+				searchState={searchState}
+			/>
+		);
 	}
 
 	if (isEmpty(data?.list)) {
