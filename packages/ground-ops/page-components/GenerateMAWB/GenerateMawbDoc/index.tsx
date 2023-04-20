@@ -125,7 +125,7 @@ function GenerateMawb({
 			data: {
 				...filteredData,
 				status          : 'generated',
-				document_number : taskItem?.awbNumber,
+				document_number : activeCategory === 'hawb' ? activeHawb?.documentNo : taskItem?.awbNumber,
 				service_id      : taskItem?.serviceId,
 				service_type    : 'air_freight_service',
 			},
@@ -140,7 +140,7 @@ function GenerateMawb({
 						|| undefined,
 					document_url : res || undefined,
 					data         : {
-						document_number : taskItem?.awbNumber,
+						document_number : activeCategory === 'hawb' ? activeHawb?.documentNo : taskItem?.awbNumber,
 						service_id      : taskItem?.serviceId,
 						service_type    : 'air_freight_service',
 						...filteredData,
