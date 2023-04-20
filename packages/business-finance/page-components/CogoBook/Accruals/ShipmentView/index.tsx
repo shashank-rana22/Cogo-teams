@@ -1,10 +1,11 @@
-import { Input } from '@cogoport/components';
+import { Input, Select } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import StyledTable from '../../common/StyledTable';
 import useShipmentView from '../../hooks/useShipmentView';
+import { MILESTONE_OPTIONS } from '../constant';
 
 import Card from './Card';
 import { accrualColumn } from './constant';
@@ -35,6 +36,7 @@ function ShipmentView() {
 		sortType           : 'ASC',
 		page               : 1,
 		pageLimit          : 10,
+		milestone          : null,
 	});
 
 	const { bulkAction } = bulkSection;
@@ -119,6 +121,14 @@ function ShipmentView() {
 
 			<div className={styles.table_data}>
 				<div className={styles.input_data_container}>
+					<Select
+						value={filters?.milestone}
+						onChange={(val) => setFilters({ ...filters, milestone: val })}
+						options={MILESTONE_OPTIONS}
+						isClearable
+						placeholder="Select Milestone..."
+						className={styles.milestone}
+					/>
 
 					<div className={styles.input_container}>
 						<Input

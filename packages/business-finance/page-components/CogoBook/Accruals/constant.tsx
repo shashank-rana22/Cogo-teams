@@ -674,3 +674,12 @@ export const optionsRadioData = [
 	{ name: 'r1', value: 'BOOK', label: 'Book' },
 	{ name: 'r2', value: 'ACCRUE', label: 'Accrue' },
 ];
+
+export const MILESTONE_OPTIONS = [
+	{ label: 'Aborted', value: 'aborted' },
+	{ label: 'Cancelled', value: 'cancelled' },
+	{ label: 'Completed', value: 'completed' },
+	{ label: 'Confirmed by importer exporter', value: 'confirmed_by_importer_exporter' },
+	{ label: 'In progress', value: 'in_progress' },
+	{ label: 'Shipment received', value: 'shipment_received' },
+];

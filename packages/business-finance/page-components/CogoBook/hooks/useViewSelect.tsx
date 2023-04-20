@@ -59,9 +59,9 @@ const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 			const resp = await viewSelectedSidTrigger({
 				params: {
 					year           : year || undefined,
+					archivedStatus : archivedStatus || 'BOOKED' || undefined,
 					tradeType      : tradeType || undefined,
 					month          : month || undefined,
-					archivedStatus : archivedStatus || 'BOOKED' || undefined,
 					serviceType    : service !== '' ? service : undefined,
 					shipment       : shipmentType !== '' ? shipmentType : undefined,
 					search         : search || undefined,

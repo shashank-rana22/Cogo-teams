@@ -141,7 +141,11 @@ function ListProfit({
 													<br />
 													current month SIDs +
 													<br />
-													Invoiced revenue w.r.t prev months SIDs in freeze state
+													Invoiced revenue w.r.t
+													<br />
+													previous months SIDs
+													<br />
+													in freeze state
 												</div>
 											)}
 											placement="top"

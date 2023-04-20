@@ -34,7 +34,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		year = '', month = '', shipmentType = '',
 		profitAmount = '', profitType = '', tradeType = '', service = '', range,
 		jobState = '', query = '', page, date, profitPercent = '', profitPercentUpper = '', profitAmountUpper = '',
-		sortType = '', sortBy = '', entity = '',
+		sortType = '', sortBy = '', entity = '', milestone,
 	} = filters || {};
 	const { calAccruePurchase, calAccrueSale } = calculateAccrue();
 
@@ -75,6 +75,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 			const resp = await shipmentTrigger({
 				params: {
 					query                : query || undefined,
+					shipmentMilestone    : milestone || undefined,
 					year                 : year || undefined,
 					month                : month || undefined,
 					serviceType          : service || undefined,
@@ -131,6 +132,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		tradeType,
 		year,
 		entity,
+		milestone,
 	]);
 
 	useEffect(() => {

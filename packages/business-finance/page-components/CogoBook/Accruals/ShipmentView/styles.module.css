@@ -163,9 +163,14 @@
 .input_data_container {
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
+	justify-content: space-between;
 	padding: 16px 16px 0 0;
 	margin-top: 16px;
+}
+
+.milestone{
+	margin-left: 40px;
+	width: 200px;
 }
 
 .icon_container {
