@@ -41,7 +41,7 @@ function UploadDocument({
 						<SelectController
 							size="sm"
 							control={control}
-							placeholder="Select Document..."
+							placeholder="Select Document Type"
 							name="document_type"
 							options={documents}
 							rules={{ required: { value: true, message: 'Document is Required' } }}

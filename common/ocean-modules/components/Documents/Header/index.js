@@ -16,6 +16,7 @@ function Header({
 	activeWallet = '',
 	setActiveWallet = () => {},
 	activeStakeholder,
+	refetch = () => {},
 }) {
 	const [showModal, setShowModal] = useState(false);
 	const SourceOptions = Array.isArray(data)
@@ -107,6 +108,7 @@ function Header({
 					data={data}
 					shipment_data={shipment_data}
 					activeStakeholder={activeStakeholder}
+					refetch={refetch}
 				/>
 			) : null }
 

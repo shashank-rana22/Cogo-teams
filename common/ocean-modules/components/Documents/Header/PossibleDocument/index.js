@@ -15,6 +15,7 @@ function PossibleDocument({
 	data,
 	shipment_data,
 	activeStakeholder,
+	refetch = () => {},
 }) {
 	// const [selectedFile, setSelectedFile] = useState([]);
 	const [orgId, setOrgId] = useState();
@@ -32,6 +33,7 @@ function PossibleDocument({
 
 	const afterCreateRefetch = () => {
 		setShowModal(false);
+		refetch();
 	};
 
 	const { apiTrigger, docLoading } = useCreateShipmentDocument({

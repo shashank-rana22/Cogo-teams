@@ -71,6 +71,7 @@ function Documents() {
 					activeWallet={activeWallet}
 					setActiveWallet={setActiveWallet}
 					activeStakeholder={activeStakeholder}
+					refetch={refetch}
 				/>
 
 				{!activeToggle ? (
@@ -84,11 +85,12 @@ function Documents() {
 				) : <Wallet activeWallet={activeWallet} />}
 
 				<Modal
+					className={styles.modal_container}
 					show={showDoc}
 					size="lg"
 					onClose={() => setShowDoc(null)}
 					placement="top"
-					// closeOnOuterClick={false}
+					closeOnOuterClick={false}
 				>
 					<UploadForm
 						showDoc={showDoc}

@@ -24,6 +24,7 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 	const {
 		loading : documentsLoading,
 		list : uploadedShipmentDocuments,
+		refetch,
 	} = useGetListDocuments({
 		filters,
 		defaultFilters : { shipment_id: id },
@@ -130,6 +131,7 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 		completedDocs : uploadedShipmentDocuments,
 		docTypes,
 		loading       : tasksLoading || documentsLoading || taskConfigLoading,
+		refetch,
 	};
 };
 
