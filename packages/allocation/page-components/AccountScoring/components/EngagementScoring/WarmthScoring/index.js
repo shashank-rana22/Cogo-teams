@@ -66,7 +66,7 @@ function WarmthScoring(props) {
 	const options = list.map((value) => ({
 		key      : value.engagement_type,
 		title    : titleComponent(value),
-		children : <EngagementType />,
+		children : <EngagementType value={value} />,
 	}));
 
 	return (
