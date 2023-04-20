@@ -78,7 +78,7 @@ function Documents() {
 					<CheckList
 						taskList={taskList}
 						emailDocs={emailList}
-						completedDocs={completedDocs}
+						completedDocs={completedDocs?.list}
 						setShowDoc={setShowDoc}
 						setShowApproved={setShowApproved}
 					/>
