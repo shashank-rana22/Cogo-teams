@@ -39,8 +39,6 @@ function Documents() {
 		entity_type      : docTypes,
 	};
 
-	console.log('completedDocs', completedDocs?.list);
-
 	const { emailList } = useGetShipmentMails({
 		payload: emailPayload,
 	});
