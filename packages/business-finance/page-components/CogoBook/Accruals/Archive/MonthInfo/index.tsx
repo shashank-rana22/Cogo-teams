@@ -132,10 +132,8 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 					</div>
 					<div style={{ display: 'flex', flexDirection: 'column' }}>
 						<Popover
-							interactive
 							placement="bottom"
-							theme="light"
-							content={renderContent()}
+							render={renderContent()}
 						>
 							<div>
 								<div className={styles.variance_data}>
