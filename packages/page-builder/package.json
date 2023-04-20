@@ -28,6 +28,13 @@
       "react-resizable": "^3.0.5",
       "react-ace": "^10.1.0",
       "ace-builds": "^1.4.14",
-      "react-hook-form": "^7.43.3"
+      "react-hook-form": "^7.43.3",
+      "classnames": "2.2.6",
+      "immutability-helper": "^3.0.0",
+      "lodash": "4.17.15",
+      "react-dom": "16.8.4",
+      "react-frame-component": "^4.1.0",
+      "react-scripts": "2.1.8",
+      "shortid": "2.2.15"
     }
   }

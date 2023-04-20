@@ -1,2 +1,2 @@
 // eslint-disable-next-line import/no-unresolved
-export { default } from '@cogoport/page-builder/page-components/CreatePage2';
+export { default } from '@cogoport/page-builder/page-components/NestedDragDrop';

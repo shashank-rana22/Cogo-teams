@@ -1,18 +1,23 @@
 import React from 'react';
 import { useDrop } from 'react-dnd';
 
-import { COMPONENT, SIDEBAR_ITEM, ROW, COLUMN } from './constants';
+import { COMPONENT, SIDEBAR_ITEM, ROW, COLUMN } from '../constants';
 // import styles from './styles.module.css';
 
 const ACCEPTS = [SIDEBAR_ITEM, COMPONENT, ROW, COLUMN];
 
-function DropZone({ data, onDrop, isLast, className }) {
+function DropZone({
+	data,
+	onDrop,
+	// isLast,
+	// className,
+}) {
 	const [{ isOver, canDrop }, drop] = useDrop({
 		accept : ACCEPTS,
-		drop   : (item, monitor) => {
+		drop   : (item) => {
 			onDrop(data, item);
 		},
-		canDrop: (item, monitor) => {
+		canDrop: (item) => {
 			const dropZonePath = data.path;
 			const splitDropZonePath = dropZonePath.split('-');
 			const itemPath = item.path;

@@ -1,21 +1,22 @@
 import React, { useState, useCallback } from 'react';
 import shortid from 'shortid';
 
-import { SIDEBAR_ITEMS, SIDEBAR_ITEM, COMPONENT, COLUMN } from './constants';
-import DropZone from './DropZone';
+import { SIDEBAR_ITEMS, SIDEBAR_ITEM, COMPONENT, COLUMN } from '../constants';
+import DropZone from '../DropZone';
 import {
 	handleMoveWithinParent,
 	handleMoveToDifferentParent,
 	handleMoveSidebarComponentIntoParent,
 	handleRemoveItemFromLayout,
-} from './helpers';
-import initialData from './initial-data';
-import Row from './Row';
-import SideBarItem from './SideBarItem';
-import styles from './styles.module.css';
-import TrashDropZone from './TrashDropZone';
+} from '../helpers';
+import initialData from '../initial-data';
+import Row from '../Row';
+import SideBarItem from '../SideBarItem';
+import TrashDropZone from '../TrashDropZone';
 
-function Container() {
+import styles from './styles.module.css';
+
+function DNDComponent() {
 	const initialLayout = initialData.layout;
 	const initialComponents = initialData.components;
 	const [layout, setLayout] = useState(initialLayout);
@@ -162,4 +163,4 @@ function Container() {
 		</div>
 	);
 }
-export default Container;
+export default DNDComponent;
