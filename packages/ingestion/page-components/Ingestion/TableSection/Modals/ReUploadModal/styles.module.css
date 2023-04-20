@@ -24,3 +24,7 @@
 .control_label {
 	margin-bottom: 4px;
 }
+
+.ui_modal_body_container {
+	max-height: 600px;
+}

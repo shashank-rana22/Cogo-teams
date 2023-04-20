@@ -45,7 +45,9 @@ function useGetIngestionList() {
 			key      : 'name',
 			Header   : 'FILE NAME',
 			accessor : ({ request_files = {} }) => (
-				<div className={styles.name}>{startCase(request_files?.sheet_name || '___')}</div>
+				<Tooltip className={styles.popover} content={request_files?.sheet_name || '___'} placement="top">
+					<div className={styles.name}>{startCase(request_files?.sheet_name || '___')}</div>
+				</Tooltip>
 			),
 		},
 		{

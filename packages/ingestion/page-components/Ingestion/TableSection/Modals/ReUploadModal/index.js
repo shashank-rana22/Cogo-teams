@@ -42,7 +42,8 @@ function ReUploadModal({ tableModal = '', setTableModal = () => {}, row = {} }) 
 									key={el.name}
 									control={control}
 									id={`${el.name}_input`}
-								/>
+									className={styles.field_controller}
+									/>
 
 								<div className={styles.error_message}>
 									{errors?.[el.name]?.message}

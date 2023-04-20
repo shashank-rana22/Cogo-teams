@@ -44,5 +44,6 @@
 .page_container {
 	:global(.ui_modal_body_container) {
 		padding: 0;
+		height: auto;
 	}
 }

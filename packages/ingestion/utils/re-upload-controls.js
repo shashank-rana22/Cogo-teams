@@ -1,6 +1,13 @@
 const reUploadControls = [
 
 	{
+		name        : 're_file_name',
+		label       : 'File Name',
+		type        : 'text',
+		placeholder : 'File Name',
+		rules       : { required: 'Name is Required' },
+	},
+	{
 		name        : 're_upload',
 		label       : 'Re-Upload your files',
 		type        : 'file',

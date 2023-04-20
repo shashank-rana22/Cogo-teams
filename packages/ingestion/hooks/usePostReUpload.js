@@ -31,7 +31,8 @@ function usePostReUpload({ row = {}, setTableModal = () => {} }) {
 	const onSubmit = async (e) => {
 		const {
 			partner_id = '', country_id = '', ingestion_type = '',
-			partner_user_id = '', description = '', agent_id = '', id = '', request_files = {},
+			partner_user_id = '', description = '', agent_id = '', id = '',
+			// request_files = {},
 		} = row;
 
 		try {
@@ -44,11 +45,10 @@ function usePostReUpload({ row = {}, setTableModal = () => {} }) {
 				description,
 				agent_id,
 				ingestion_request_id : id,
-				file_name            : request_files?.sheet_name,
 				user_id,
 			};
 
-			const payload = Object.entries({ ...pay, file_url: e?.re_upload?.finalUrl })
+			const payload = Object.entries({ ...pay, file_url: e?.re_upload?.finalUrl, file_name: e?.re_file_name })
 				.filter(([, value]) => value !== null && value !== '')
 				.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 
