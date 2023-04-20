@@ -1,47 +1,39 @@
 import { Button, Popover } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMPdf, IcMImage, IcMOverflowDot } from '@cogoport/icons-react';
+import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { format, startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
-import EmptyState from '../../../../common/EmptyState';
-import useListOrganizationDocuments from '../../../../hooks/useListOrganizationDocuments';
+import useListTradeDocuments from '../../../../hooks/useListTradeDocuments';
 import useUpdateOrganizationDocument from '../../../../hooks/useUpdateOrganizationDocument';
 import Loader from '../Loader';
 
 import styles from './styles.module.css';
 
-function OrganizationDocuments({
+function TradeDocuments({
 	forModal = false,
 	handleSave = () => {},
 	handleView = () => {},
 	searchTasksVal,
 	showWalletDocs,
-	handleDocClick = () => {},
+	handleDocClick,
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const { importer_exporter_id = '' } = shipment_data;
-
-	const {
-		data,
-		getList,
-		loading,
-	} =	useListOrganizationDocuments({
+	const { data, getList, loading } = useListTradeDocuments({
 		defaultFilters: {
-			status          : 'active',
-			organization_id : importer_exporter_id,
 			q               : searchTasksVal || undefined,
-		},
-		defaultParams: {
-			page_limit: 1000,
+			status          : 'accepted',
+			organization_id : importer_exporter_id,
 		},
 	});
 
 	const { deleteDocument } = useUpdateOrganizationDocument({
 		refetch       : getList,
 		defaultParams : {
-			status: 'inactive',
+			status: 'pending',
 		},
 	});
 
@@ -67,6 +59,7 @@ function OrganizationDocuments({
 		if (!loading && data?.list?.length === 0) {
 			return <EmptyState />;
 		}
+
 		return (
 			<>
 				{(data?.list || []).map((doc) => (
@@ -87,6 +80,7 @@ function OrganizationDocuments({
 								</Popover>
 							</div>
 						)}
+
 						{doc.type === 'pdf' ? (
 							<IcMPdf fontSize="32px" />
 						) : (
@@ -127,4 +121,4 @@ function OrganizationDocuments({
 	);
 }
 
-export default OrganizationDocuments;
+export default TradeDocuments;

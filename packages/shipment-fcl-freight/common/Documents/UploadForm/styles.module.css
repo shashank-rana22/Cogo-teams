@@ -1,10 +1,4 @@
-/* .label {
-	margin-bottom: 8px;
-	font-size: 12px;
-	font-weight: 600;
-	line-height: 14px;
-	color: #4f4f4f;
-} */
+
 .buttons_container {
 	display: flex;
 	gap: 1rem;
@@ -35,4 +29,17 @@
 		border: 1px dashed #e0e0e0;
 		border-radius: 4px;
 	}
+}
+.separator{
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 14px;
+	letter-spacing: 0.02em;
+	width: max-content;
+	margin: 16px auto;
+	color: #393f70;
+}
+.styled_button{
+	display: flex;
+	justify-content: center;
 }

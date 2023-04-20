@@ -1,7 +1,6 @@
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useLensRequest } from '@cogoport/request';
 import { useEffect, useCallback, useRef } from 'react';
-
-import toastApiError from '../utils/toastApiError';
 
 const keyMappings = {
 	shipping_instruction: 'si',

@@ -1,7 +1,6 @@
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
-
-import toastApiError from '../utils/toastApiError';
 
 const useListShipmentOrganizations = ({ shipment_data }) => {
 	const [apiData, setApiData] = useState({});

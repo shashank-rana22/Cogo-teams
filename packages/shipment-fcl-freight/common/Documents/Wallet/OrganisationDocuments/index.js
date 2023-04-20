@@ -1,39 +1,47 @@
 import { Button, Popover } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMPdf, IcMImage, IcMOverflowDot } from '@cogoport/icons-react';
+import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { format, startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
-import EmptyState from '../../../../common/EmptyState';
-import useListTradeDocuments from '../../../../hooks/useListTradeDocuments';
+import useListOrganizationDocuments from '../../../../hooks/useListOrganizationDocuments';
 import useUpdateOrganizationDocument from '../../../../hooks/useUpdateOrganizationDocument';
 import Loader from '../Loader';
 
 import styles from './styles.module.css';
 
-function TradeDocuments({
+function OrganizationDocuments({
 	forModal = false,
 	handleSave = () => {},
 	handleView = () => {},
 	searchTasksVal,
 	showWalletDocs,
-	handleDocClick,
+	handleDocClick = () => {},
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const { importer_exporter_id = '' } = shipment_data;
-	const { data, getList, loading } = useListTradeDocuments({
+
+	const {
+		data,
+		getList,
+		loading,
+	} =	useListOrganizationDocuments({
 		defaultFilters: {
-			q               : searchTasksVal || undefined,
-			status          : 'accepted',
+			status          : 'active',
 			organization_id : importer_exporter_id,
+			q               : searchTasksVal || undefined,
+		},
+		defaultParams: {
+			page_limit: 1000,
 		},
 	});
 
 	const { deleteDocument } = useUpdateOrganizationDocument({
 		refetch       : getList,
 		defaultParams : {
-			status: 'pending',
+			status: 'inactive',
 		},
 	});
 
@@ -59,7 +67,6 @@ function TradeDocuments({
 		if (!loading && data?.list?.length === 0) {
 			return <EmptyState />;
 		}
-
 		return (
 			<>
 				{(data?.list || []).map((doc) => (
@@ -80,7 +87,6 @@ function TradeDocuments({
 								</Popover>
 							</div>
 						)}
-
 						{doc.type === 'pdf' ? (
 							<IcMPdf fontSize="32px" />
 						) : (
@@ -121,4 +127,4 @@ function TradeDocuments({
 	);
 }
 
-export default TradeDocuments;
+export default OrganizationDocuments;

@@ -3,6 +3,7 @@ import { IcMPdf } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
+import Task from './Task';
 import WalletForm from './WalletForm';
 
 function UploadForm({
@@ -10,7 +11,7 @@ function UploadForm({
 	setShowDoc,
 	activeWallet,
 	setActiveWallet,
-	// refetch,
+	refetch,
 }) {
 	const handleDocClick = (doc) => {
 		setShowDoc({
@@ -23,7 +24,7 @@ function UploadForm({
 	let content;
 	switch (showDoc?.type) {
 		case 'task':
-			// content = <Task show={show} setShowDoc={setShowDoc} refetch={refetch} />;
+			content = <Task showDoc={showDoc} setShowDoc={setShowDoc} refetch={refetch} />;
 			break;
 		case 'wallet':
 			content = (
@@ -55,8 +56,8 @@ function UploadForm({
 							Choose a document from the wallet
 						</div>
 					</div>
-					{/* <Separator>OR</Separator>
-					<StyledButton>
+					<div className={styles.separator}>OR</div>
+					<div className={styles.styled_button}>
 						<Button
 							onClick={() => {
 								setShowDoc({ ...showDoc, type: 'task' });
@@ -64,7 +65,7 @@ function UploadForm({
 						>
 							Manual Upload
 						</Button>
-					</StyledButton> */}
+					</div>
 					<div className={styles.buttons_container}>
 						<Button
 							className="secondary md"

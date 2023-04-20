@@ -39,6 +39,8 @@ function Documents() {
 		entity_type      : docTypes,
 	};
 
+	console.log('completedDocs', completedDocs?.list);
+
 	const { emailList } = useGetShipmentMails({
 		payload: emailPayload,
 	});
@@ -78,7 +80,7 @@ function Documents() {
 					<CheckList
 						taskList={taskList}
 						emailDocs={emailList}
-						completedDocs={completedDocs?.list}
+						completedDocs={completedDocs}
 						setShowDoc={setShowDoc}
 						setShowApproved={setShowApproved}
 					/>

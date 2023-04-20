@@ -1,7 +1,6 @@
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
-
-import toastApiError from '../utils/toastApiError';
 
 const useListTradeDocuments = ({ defaultFilters = {} }) => {
 	const [{ loading, data }, trigger] = useRequest({
