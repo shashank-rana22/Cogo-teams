@@ -29,9 +29,11 @@
 }
 
 .field_controller {
+	margin: 4px 0 0;
+
 	:global {
 		.ui_select_input_placeholder {
-			color: #cacaca;
+			color: #828282;
 		}
 	}
 }

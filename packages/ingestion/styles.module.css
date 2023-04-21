@@ -23,9 +23,9 @@
 }
 
 .number_of_org {
-	min-width: 180px;
 	display: flex;
 	justify-content: center;
+	min-width: 180px;
 }
 
 .re_upload {

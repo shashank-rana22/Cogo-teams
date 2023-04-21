@@ -66,10 +66,9 @@
 	}
 }
 
-
 .refresh {
 	width: 100px;
-	margin: 0 4px 0 4px;
+	margin: 0 4px;
 
 	/* @media (max-width: 768px) {
 		width: 44px;
