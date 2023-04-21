@@ -64,23 +64,11 @@ const controls = () => [
 ];
 
 const getControls = ({ apis_data }) => {
-	const emptyValues = {
-		id                     : '',
-		bl_id                  : '',
-		bl_number              : '',
-		container_number       : '',
-		picked_up_from_yard_at : '',
-	};
-
 	const modifiedControls = controls();
 	const showElements = {};
 
 	(modifiedControls || []).forEach((control, index) => {
 		if (control.type === 'fieldArray') {
-			modifiedControls[index].value = (
-				apis_data?.list_shipment_container_details || []
-			).map((container) => ({ ...emptyValues, id: container?.id || '' }));
-
 			control.controls.forEach((controlObj, ind) => {
 				if (controlObj.name === 'bl_number') {
 					modifiedControls[index].controls[ind].options = (

@@ -90,18 +90,22 @@ const useContainerDetails = ({
 
 	const { modifiedControls, showElements } = getControls({ apis_data });
 
+	const defaultValues = {
+		container: [],
+	};
+
+	apis_data?.list_shipment_container_details?.forEach((container) => {
+		defaultValues.container.push({
+			id                     : container?.id,
+			bl_id                  : '',
+			bl_number              : '',
+			container_number       : '',
+			picked_up_from_yard_at : '',
+		});
+	});
+
 	const { control, watch, setValue, formState:{ errors = {} }, handleSubmit, setError } = useForm({
-		defaultValues: {
-			container: [
-				{
-					id                     : '',
-					bl_id                  : '',
-					bl_number              : '',
-					container_number       : '',
-					picked_up_from_yard_at : '',
-				},
-			],
-		},
+		defaultValues,
 	});
 
 	const formValues = watch();
@@ -149,6 +153,7 @@ const useContainerDetails = ({
 	};
 
 	const onSubmit = async (data) => {
+		console.log({ data });
 		const formattedData = formatData(
 			data.container,
 			apis_data,
