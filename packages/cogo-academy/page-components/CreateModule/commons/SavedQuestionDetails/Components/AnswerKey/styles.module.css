@@ -1,6 +1,6 @@
 .flex_column {
 	display: flex;
-	flex-direction: column;	
+	flex-direction: column;
 }
 
 .answer_key {

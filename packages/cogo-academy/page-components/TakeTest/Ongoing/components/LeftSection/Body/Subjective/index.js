@@ -53,7 +53,6 @@ function Subjective({
 
 			<div className={styles.subjective_part}>
 				<div className={styles.question_01}>
-					<p>Q</p>
 					<div className={styles.text}>{question_text}</div>
 				</div>
 				<div>

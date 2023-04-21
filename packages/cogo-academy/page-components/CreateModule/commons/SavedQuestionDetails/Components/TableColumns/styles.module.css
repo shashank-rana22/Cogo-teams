@@ -1,25 +1,25 @@
 .question_div {
-  max-width: 360px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+	max-width: 360px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .updated_at {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .updated_at_text {
-  margin-right: 6px;
+	margin-right: 6px;
 }
 
 .q_text {
-  max-height: 300px;
-  overflow-y: scroll;
-  word-break: keep-all;
+	max-height: 300px;
+	overflow-y: scroll;
+	word-break: keep-all;
 }
 
 .tooltip {
-  min-width: 600px;
+	min-width: 600px;
 }

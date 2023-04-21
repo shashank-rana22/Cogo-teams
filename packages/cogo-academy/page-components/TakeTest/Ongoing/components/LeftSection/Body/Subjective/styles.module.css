@@ -1,54 +1,49 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  /* margin-top: 100px; */
+	display: flex;
+	flex-direction: column;
 }
 
 .question_count {
-  font-size: 12px;
-  font-weight: 500;
-  color: #4f4f4f;
+	font-size: 12px;
+	font-weight: 500;
+	color: #4f4f4f;
 }
 
 .question_type {
-  font-size: 12px;
-  color: #828282;
+	font-size: 12px;
+	color: #828282;
 }
 
 .question {
-  font-size: 12px;
-  font-weight: 400;
-  color: #828282;
+	font-size: 12px;
+	font-weight: 400;
+	color: #828282;
 }
 
 .question_01 {
-  display: flex;
-  padding-top: 42px;
+	display: flex;
+	padding-top: 42px;
 }
 
 .text {
-  font-weight: 600;
-  color: #221f20;
-  max-height: 300px;
+	max-height: 300px;
 	overflow-y: scroll;
-  padding-bottom: 10px;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 10px;
-  word-break: keep-all;
+	font-weight: 600;
+	color: #221f20;
+	word-break: keep-all;
 }
 
 .subjective_editor {
-  margin-top: 10px;
+	margin-top: 10px;
 }
 
 .uploader {
-  margin-top: 24px;
+	margin-top: 24px;
 
-  :global {
-    .ui_upload_droparea_container {
-      height: 80px;
-      background: #fff;
-    }
-  }
+	:global {
+		.ui_upload_droparea_container {
+			height: 80px;
+			background: #fff;
+		}
+	}
 }
