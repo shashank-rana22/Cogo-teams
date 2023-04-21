@@ -6,7 +6,7 @@ import { useSelector } from '@cogoport/store';
 import { startCase, format } from '@cogoport/utils';
 import { useState } from 'react';
 
-import { REDIRECT_LINK_MAPPING } from '../constants/header-mapping';
+import { REDIRECT_LINK_MAPPING, REDIRECT_MAPPING } from '../constants/header-mapping';
 import { UPLOAD_STATUS_MAPPING } from '../constants/table-modal-mapping';
 import styles from '../styles.module.css';
 
@@ -121,17 +121,25 @@ function useGetIngestionList() {
 			id       : 'type',
 			accessor : (item = {}) => (
 				<div className={styles.type}>
-					<Button
-						className={styles.type_name}
-						themeType="tertiary"
-					>
-						<a
-							href={`/${partner_id}${REDIRECT_LINK_MAPPING[item?.is_channel_partner]}?source_id=${item?.id}`}
-						>
-							{startCase(item?.ingestion_type || '___')}
-						</a>
 
-					</Button>
+					<Tooltip
+						className={styles.popover}
+						content={`Redirecting to ${REDIRECT_MAPPING[item?.is_channel_partner || 'na']}`}
+						placement="top"
+					>
+						<Button
+							className={styles.type_name}
+							themeType="tertiary"
+						>
+							<a
+								href={`/${partner_id}${REDIRECT_LINK_MAPPING[item?.is_channel_partner]}?source_id=${item?.id}`}
+							>
+								{startCase(item?.ingestion_type || '___')}
+							</a>
+
+						</Button>
+					</Tooltip>
+
 				</div>
 
 			),

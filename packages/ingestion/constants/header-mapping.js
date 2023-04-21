@@ -9,3 +9,9 @@ export const REDIRECT_LINK_MAPPING = {
 	true  : '/crm/supply',
 	false : '/lead-management',
 };
+
+export const REDIRECT_MAPPING = {
+	true  : 'Supply CRM',
+	false : 'Sales CRM',
+	na    : 'Error',
+};
