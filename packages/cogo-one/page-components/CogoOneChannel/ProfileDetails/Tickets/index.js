@@ -74,7 +74,10 @@ function Tickets({ zippedTicketsData = {} }) {
 				))}
 				{isEmpty(ticketsList) && (
 					<div className={styles.empty_div}>
-						<img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/notes-empty.svg" alt="" />
+						<img
+							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/docs_empty_state.png"
+							alt=""
+						/>
 						<div className={styles.no_tickets}>No Tickets Found</div>
 					</div>
 				)}

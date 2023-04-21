@@ -14,7 +14,10 @@ const useListTickets = ({ UserID = '', activeTab = '' }) => {
 
 	const [pagination, setPagination] = useState(1);
 
-	console.log(pagination, 'bejcne');
+	useEffect(() => {
+		setPagination(1);
+	}, [filter]);
+
 	const fetchTickets = useCallback(async () => {
 		try {
 			await trigger({
