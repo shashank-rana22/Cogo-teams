@@ -34,7 +34,7 @@ const controlItem = [{
 			placeholder : 'score',
 			style       : {
 				width      : '74px',
-				marginLeft : '78px',
+				marginLeft : '44px',
 			},
 		},
 		{
@@ -51,7 +51,7 @@ const controlItem = [{
 			placeholder : 'score',
 			style       : {
 				width      : '74px',
-				marginLeft : '78px',
+				marginLeft : '92px',
 			},
 		},
 		{
@@ -68,7 +68,7 @@ const controlItem = [{
 			placeholder : 'score',
 			style       : {
 				width      : '74px',
-				marginLeft : '78px',
+				marginLeft : '92px',
 			},
 		},
 		{
@@ -85,7 +85,7 @@ const controlItem = [{
 			placeholder : 'score',
 			style       : {
 				width      : '74px',
-				marginLeft : '78px',
+				marginLeft : '92px',
 			},
 		},
 		{

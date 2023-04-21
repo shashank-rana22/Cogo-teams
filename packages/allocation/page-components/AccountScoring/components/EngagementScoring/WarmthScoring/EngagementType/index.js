@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 const columns = ['LIFECYCLE ITEM',
 	'DIY SCORE & WARMTH DURATION',
 	'ASSISTED SCORE & WARMTH DURATION',
-	'SYSTEM SCORE & WARMTH DURATION', 'COGOVERSE SCORE & WARMTH DURATION', ' '];
+	'SYSTEM SCORE & WARMTH DURATION', 'COGOVERSE SCORE & WARMTH DURATION'];
 
 function EngagementType(props) {
 	const { value } = props;

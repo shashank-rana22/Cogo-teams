@@ -1,6 +1,5 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
-import { isEmpty } from '@cogoport/utils';
 
 import controlItem from '../../components/EngagementScoring/WarmthScoring/EngagementType/controlItem';
 
@@ -11,15 +10,15 @@ function FieldArray(props) {
 		name, control,
 	} = props;
 
-	const { fields, append } = useFieldArray({ control, name });
+	const { fields, append, remove } = useFieldArray({ control, name });
 
 	const { controls } = controlItem[0];
 
 	const childValues = {};
 
-	if (isEmpty(fields)) {
-		append(childValues);
-	}
+	controls.forEach((item) => {
+		childValues[item.name] = '';
+	});
 
 	return (
 		<>
@@ -30,13 +29,14 @@ function FieldArray(props) {
 						fields={field}
 						index={index}
 						name={name}
+						remove={remove}
 						control={control}
 						controls={controls}
 					/>
 				))}
 			</div>
 
-			<Button themeType="accent" onClick={() => append(childValues)}> Add +</Button>
+			<Button themeType="accent" onClick={() => append(childValues)} style={{ marginTop: '8px' }}> Add +</Button>
 		</>
 
 	);
