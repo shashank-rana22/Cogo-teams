@@ -87,7 +87,7 @@ function Header({
 					themeType="primary"
 					onClick={() => handleDocumentChange()}
 				>
-					Genric Upload
+					Generic Upload
 				</Button>
 
 				<Toggle
