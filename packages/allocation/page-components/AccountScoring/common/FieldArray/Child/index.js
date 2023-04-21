@@ -25,6 +25,7 @@ function Child(props) {
 							id={`create_form_${singleControl.name}_field`}
 							{...singleControl}
 							name={`${name}.${index}.${singleControl.name}`}
+							style={{ ...singleControl.style }}
 						/>
 					</div>
 

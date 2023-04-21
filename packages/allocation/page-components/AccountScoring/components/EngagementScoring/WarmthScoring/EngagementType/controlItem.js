@@ -24,46 +24,78 @@ const controlItem = [{
 					value : 'forgot_password',
 				},
 			],
+			style: {
+				width: '200px',
+			},
 		},
 		{
 			name        : 'diy_score',
 			type        : 'number',
 			placeholder : 'score',
+			style       : {
+				width      : '74px',
+				marginLeft : '78px',
+			},
 		},
 		{
 			name        : 'diy_warmth_duration',
 			type        : 'number',
 			placeholder : 'days',
+			style       : {
+				width: '74px',
+			},
 		},
 		{
 			name        : 'assisted_score',
 			type        : 'number',
 			placeholder : 'score',
+			style       : {
+				width      : '74px',
+				marginLeft : '78px',
+			},
 		},
 		{
 			name        : 'assisted_warmth_duration',
 			type        : 'number',
 			placeholder : 'days',
+			style       : {
+				width: '74px',
+			},
 		},
 		{
 			name        : 'system_score',
 			type        : 'number',
 			placeholder : 'score',
+			style       : {
+				width      : '74px',
+				marginLeft : '78px',
+			},
 		},
 		{
 			name        : 'system_warmth_duration',
 			type        : 'number',
 			placeholder : 'days',
+			style       : {
+				width: '74px',
+			},
 		},
 		{
 			name        : 'cogoverse_score',
 			type        : 'number',
 			placeholder : 'score',
+			style       : {
+				width      : '74px',
+				marginLeft : '78px',
+			},
 		},
 		{
 			name        : 'cogoverse_warmth_duration',
 			type        : 'number',
 			placeholder : 'days',
+			style       : {
+				width       : '74px',
+				marginRight : '30px',
+			},
 		},
 	],
 }];
