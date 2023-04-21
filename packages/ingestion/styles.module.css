@@ -7,7 +7,7 @@
 
 .created_date {
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 	font-size: 12px;
 }
 
@@ -24,6 +24,8 @@
 
 .number_of_org {
 	min-width: 180px;
+	display: flex;
+	justify-content: center;
 }
 
 .re_upload {
@@ -41,7 +43,7 @@
 }
 
 .successfully_migrated_count {
-	min-width: 160px;
+	min-width: 140px;
 	text-align: center;
 }
 

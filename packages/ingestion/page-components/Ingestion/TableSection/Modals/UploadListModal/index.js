@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function UploadListModal({ tableModal = '', setTableModal = () => {}, row = {} }) {
 	const { id = '', request_files = {} } = row;
 	const { columns, onPageChange, data, loading } = useGetUploadList(id);
-	const { list = [], page = 0, page_limit, total_count } = data || {};
+	const { list = [], page = 1, page_limit, total_count } = data || {};
 	const onClose = () => {
 		setTableModal('');
 	};
@@ -78,7 +78,7 @@ function UploadListModal({ tableModal = '', setTableModal = () => {}, row = {} }
 							<Pagination
 								type="table"
 								currentPage={page}
-								totalItems={total_count || 10}
+								totalItems={total_count || 0}
 								pageSize={page_limit || 5}
 								onPageChange={onPageChange}
 							/>

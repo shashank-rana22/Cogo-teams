@@ -11,7 +11,7 @@ function TemplateModal({ getTemplateCsv = () => {}, template = '', setTemplate =
 	};
 
 	return (
-		<Modal size="md" show={template === 'template'} onClose={onClose} placement="center">
+		<Modal scroll={false} size="md" show={template === 'template'} onClose={onClose} placement="center">
 			<Modal.Header title={(
 				<div className={styles.header}>
 					<IcMDownload style={{ margin: '0 4px 0 0' }} />
@@ -20,7 +20,7 @@ function TemplateModal({ getTemplateCsv = () => {}, template = '', setTemplate =
 			)}
 			/>
 			<Modal.Body>
-				<div className={styles.heading}>Download Templates among the following</div>
+				<div className={styles.heading}>Download Template for leads</div>
 				<div className={styles.container}>
 
 					{

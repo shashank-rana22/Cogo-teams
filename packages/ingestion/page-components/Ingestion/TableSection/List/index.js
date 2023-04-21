@@ -39,7 +39,7 @@ function List({
 					<Pagination
 						type="table"
 						currentPage={page || 1}
-						totalItems={total_count || 10}
+						totalItems={total_count || 0}
 						pageSize={page_limit || 10}
 						onPageChange={onPageChange}
 					/>

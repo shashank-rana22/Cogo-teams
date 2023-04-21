@@ -32,7 +32,6 @@ function usePostReUpload({ row = {}, setTableModal = () => {} }) {
 		const {
 			partner_id = '', country_id = '', ingestion_type = '',
 			partner_user_id = '', description = '', agent_id = '', id = '',
-			// request_files = {},
 		} = row;
 
 		try {
@@ -58,8 +57,8 @@ function usePostReUpload({ row = {}, setTableModal = () => {} }) {
 			Toast.success('Re-upload Complete');
 
 			setTableModal('');
-		} catch (error) {
-			Toast.error(error?.message);
+		} catch (err) {
+			Toast.error(err?.response?.data?.file);
 		}
 	};
 
