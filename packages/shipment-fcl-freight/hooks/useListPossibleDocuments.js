@@ -30,7 +30,6 @@ const useListPossibelDocuments = ({ defaultParams = {} }) => {
 	}, [getList]);
 
 	return {
-		// getList,
 		loading,
 		data: apiData,
 	};

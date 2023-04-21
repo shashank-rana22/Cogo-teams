@@ -3,7 +3,7 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import PossibleDocument from './PossibleDocument';
+import GenericUpload from './GenericUpload';
 import styles from './styles.module.css';
 
 function Header({
@@ -102,7 +102,7 @@ function Header({
 			</div>
 
 			{showModal ? (
-				<PossibleDocument
+				<GenericUpload
 					showModal={showModal}
 					setShowModal={setShowModal}
 					data={data}

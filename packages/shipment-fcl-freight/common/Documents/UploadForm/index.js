@@ -42,7 +42,6 @@ function UploadForm({
 			content = (
 				<>
 					<Modal.Header title="Document Wallet" />
-					{/* <div className={styles.label}>Document Wallet</div> */}
 					<div
 						role="button"
 						tabIndex={0}

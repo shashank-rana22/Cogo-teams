@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
 const useListShipmentOrganizations = ({ shipment_data }) => {
-	const [apiData, setApiData] = useState({});
+	const [orgList, setOrgList] = useState({});
 	const [filters, setFilters] = useState({ q: '' });
 	const [{ loading }, trigger] = useRequest({
 		url    : '/list_shipment_organizations',
@@ -19,9 +19,9 @@ const useListShipmentOrganizations = ({ shipment_data }) => {
 		try {
 			const res = await trigger();
 
-			setApiData(res.data || {});
+			setOrgList(res.data || {});
 		} catch (err) {
-			setApiData({});
+			setOrgList({});
 
 			toastApiError(err);
 		}
@@ -32,9 +32,8 @@ const useListShipmentOrganizations = ({ shipment_data }) => {
 	}, [getList]);
 
 	return {
-		// getList,
 		loading,
-		apiData,
+		orgList,
 		filters,
 		setFilters,
 	};

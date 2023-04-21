@@ -15,7 +15,7 @@ function TradeDocuments({
 	forModal = false,
 	handleSave = () => {},
 	handleView = () => {},
-	searchTasksVal,
+	searchDocsVal,
 	showWalletDocs,
 	handleDocClick,
 }) {
@@ -24,7 +24,7 @@ function TradeDocuments({
 	const { importer_exporter_id = '' } = shipment_data;
 	const { data, getList, loading } = useListTradeDocuments({
 		defaultFilters: {
-			q               : searchTasksVal || undefined,
+			q               : searchDocsVal || undefined,
 			status          : 'accepted',
 			organization_id : importer_exporter_id,
 		},

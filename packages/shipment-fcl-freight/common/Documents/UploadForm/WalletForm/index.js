@@ -13,7 +13,7 @@ function WalletForm({
 	showDoc,
 	handleDocClick,
 }) {
-	const [searchTask, setSearchTask] = useState('');
+	const [searchDocs, setSearchDocs] = useState('');
 
 	return (
 		<div>
@@ -24,11 +24,11 @@ function WalletForm({
 					<div className={styles.search_container}>
 						<Input
 							className="primary md"
-							value={searchTask}
+							value={searchDocs}
 							placeholder="Search..."
 							suffix={<IcMSearchlight style={{ fontSize: '1rem' }} />}
 							onChange={(e) => {
-								setSearchTask(e);
+								setSearchDocs(e);
 							}}
 						/>
 					</div>
@@ -46,7 +46,7 @@ function WalletForm({
 				</Tabs>
 				<Wallet
 					showWalletDocs={showWalletDocs}
-					searchTasksVal={searchTask}
+					searchDocsVal={searchDocs}
 					showDoc={showDoc}
 					handleDocClick={handleDocClick}
 					activeWallet={activeWallet}

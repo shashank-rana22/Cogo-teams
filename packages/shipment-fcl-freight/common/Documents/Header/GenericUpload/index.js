@@ -9,7 +9,7 @@ import DocumentForm from '../DocumentForm';
 import getCreateDocumentParams from './getCreateDocumentParams';
 import styles from './styles.module.css';
 
-function PossibleDocument({
+function GenericUpload({
 	showModal,
 	setShowModal,
 	data,
@@ -17,15 +17,13 @@ function PossibleDocument({
 	activeStakeholder,
 	refetch = () => {},
 }) {
-	// const [selectedFile, setSelectedFile] = useState([]);
 	const [orgId, setOrgId] = useState();
 
 	const { control, watch } = useForm();
 	const formValues = watch();
 
 	const {
-		// getList,
-		apiData,
+		orgList,
 		loading,
 		filters,
 		setFilters,
@@ -88,13 +86,11 @@ function PossibleDocument({
 
 					<DocumentForm
 						shipment_data={shipment_data}
-						apiData={apiData}
+						orgList={orgList}
 						control={control}
 						activeStakeholder={activeStakeholder}
 						uploaded_by_org_id={filters?.uploaded_by_org_id}
 						formValues={formValues}
-						// selectedFile={selectedFile}
-						// setSelectedFile={setSelectedFile}
 						orgId={orgId}
 						setOrgId={setOrgId}
 					/>
@@ -123,4 +119,4 @@ function PossibleDocument({
 		</div>
 	);
 }
-export default PossibleDocument;
+export default GenericUpload;

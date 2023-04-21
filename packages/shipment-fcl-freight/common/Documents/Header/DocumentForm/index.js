@@ -3,12 +3,10 @@ import UploadDocument from '../UploadDocument';
 
 function DocumentForm({
 	shipment_data,
-	apiData,
+	orgList,
 	activeStakeholder,
 	uploaded_by_org_id,
 	formValues,
-	// selectedFile,
-	// setSelectedFile,
 	control,
 	orgId,
 	setOrgId,
@@ -19,7 +17,7 @@ function DocumentForm({
 		case 'admin':
 			params = {
 				shipment_id       : shipment_data?.id,
-				organization_ids  : apiData?.list?.map((org) => org.id) || [],
+				organization_ids  : orgList?.list?.map((org) => org.id) || [],
 				org_account_types : ['service_provider', 'importer_exporter'],
 				action_name       : 'create',
 			};
@@ -49,7 +47,6 @@ function DocumentForm({
 	}
 
 	const {
-		// getList,
 		data,
 		loading,
 	} = useListPossibelDocuments({
@@ -66,8 +63,6 @@ function DocumentForm({
 					shipment_data={shipment_data}
 					activeStakeholder={activeStakeholder}
 					formValues={formValues}
-					// selectedFile={selectedFile}
-					// setSelectedFile={setSelectedFile}
 					orgId={orgId}
 					setOrgId={setOrgId}
 				/>

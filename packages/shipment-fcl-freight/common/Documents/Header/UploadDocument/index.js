@@ -24,8 +24,6 @@ function UploadDocument({
 	shipment_data,
 	activeStakeholder,
 	formValues,
-	// selectedFile,
-	// setSelectedFile,
 	control,
 	orgId,
 	setOrgId,

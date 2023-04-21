@@ -9,7 +9,7 @@ function Wallet({
 	showWalletDocs,
 	forModal = false,
 	activeWallet = '',
-	searchTasksVal,
+	searchDocsVal,
 	handleDocClick,
 }) {
 	const handleView = (e, image_url) => {
@@ -34,7 +34,7 @@ function Wallet({
 						handleView={handleView}
 						handleSave={handleSave}
 						showWalletDocs={showWalletDocs}
-						searchTasksVal={searchTasksVal}
+						searchDocsVal={searchDocsVal}
 						handleDocClick={handleDocClick}
 
 					/>
@@ -46,7 +46,7 @@ function Wallet({
 						handleView={handleView}
 						handleSave={handleSave}
 						showWalletDocs={showWalletDocs}
-						searchTasksVal={searchTasksVal}
+						searchDocsVal={searchDocsVal}
 						handleDocClick={handleDocClick}
 					/>
 				)

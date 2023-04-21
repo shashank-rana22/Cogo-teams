@@ -20,9 +20,8 @@ function Approve({
 			size="lg"
 			show={showApproved}
 			styles={{ dialog: { width: '700px' } }}
-			// closable={false}
+			closable={false}
 		>
-			{/* className="modal-container" */}
 			<Modal.Body>
 				<div className={styles.main_container}>
 					<iframe

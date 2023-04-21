@@ -15,7 +15,7 @@ function OrganizationDocuments({
 	forModal = false,
 	handleSave = () => {},
 	handleView = () => {},
-	searchTasksVal,
+	searchDocsVal,
 	showWalletDocs,
 	handleDocClick = () => {},
 }) {
@@ -31,7 +31,7 @@ function OrganizationDocuments({
 		defaultFilters: {
 			status          : 'active',
 			organization_id : importer_exporter_id,
-			q               : searchTasksVal || undefined,
+			q               : searchDocsVal || undefined,
 		},
 		defaultParams: {
 			page_limit: 1000,
