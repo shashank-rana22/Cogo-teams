@@ -1,10 +1,12 @@
 import { Tooltip, Button, Pill } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMDownload } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { startCase, format } from '@cogoport/utils';
 import { useState } from 'react';
 
+import { REDIRECT_LINK_MAPPING } from '../constants/header-mapping';
 import { UPLOAD_STATUS_MAPPING } from '../constants/table-modal-mapping';
 import styles from '../styles.module.css';
 
@@ -27,6 +29,7 @@ function useGetIngestionList() {
 	const downloadErrorCsv = (link) => {
 		window.open(link, '_blank');
 	};
+	const router = useRouter();
 
 	const formProps = useForm();
 
@@ -109,9 +112,19 @@ function useGetIngestionList() {
 		},
 		{
 			key      : 'type',
-			Header   : 'TYPE',
-			accessor : ({ ingestion_type }) => (
-				<div className={styles.type}>{startCase(ingestion_type || '___')}</div>
+			Header   : <div className={styles.type}>TYPE</div>,
+			id       : 'type',
+			accessor : (item = {}) => (
+				<div className={styles.type}>
+					<Button
+						className={styles.type_name}
+						onClick={() => { router.push(REDIRECT_LINK_MAPPING[item?.is_channel_partner] || '/'); }}
+						themeType="tertiary"
+					>
+						<div>{startCase(item?.ingestion_type || '___')}</div>
+					</Button>
+				</div>
+
 			),
 		},
 		{

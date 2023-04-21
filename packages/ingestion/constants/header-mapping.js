@@ -4,3 +4,8 @@ export const CONSTANT_KEYS = {
 	PROVIDER_SELECT : 'providerSelect',
 	UPLOAD          : 'uploadModal',
 };
+
+export const REDIRECT_LINK_MAPPING = {
+	true  : '/quotation-approval',
+	false : '/',
+};
