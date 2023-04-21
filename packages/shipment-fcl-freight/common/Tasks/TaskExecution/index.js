@@ -48,7 +48,6 @@ function TaskExecution({ task = {}, onCancel = () => {}, taskListRefetch = () =>
 			task={task}
 			onCancel={onCancel}
 			taskListRefetch={taskListRefetch}
-			services={servicesList}
 		/>
 	);
 }
