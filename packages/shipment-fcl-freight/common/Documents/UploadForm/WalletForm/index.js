@@ -31,25 +31,25 @@ function WalletForm({
 							}}
 						/>
 					</div>
-					<div className={styles.line} />
 				</div>
 				<Tabs
 					activeTab={activeWallet}
 					onChange={setActiveWallet}
-					className={styles.tabs}
 					themeType="primary"
 				>
 					<TabPanel name="trade_documents" title="Trade Documents" />
 
 					<TabPanel name="organization_documents" title="Organization Documents" />
 				</Tabs>
-				<Wallet
-					showWalletDocs={showWalletDocs}
-					searchDocsVal={searchDocs}
-					showDoc={showDoc}
-					handleDocClick={handleDocClick}
-					activeWallet={activeWallet}
-				/>
+				<Modal.Body>
+					<Wallet
+						showWalletDocs={showWalletDocs}
+						searchDocsVal={searchDocs}
+						showDoc={showDoc}
+						handleDocClick={handleDocClick}
+						activeWallet={activeWallet}
+					/>
+				</Modal.Body>
 			</div>
 		</div>
 	);

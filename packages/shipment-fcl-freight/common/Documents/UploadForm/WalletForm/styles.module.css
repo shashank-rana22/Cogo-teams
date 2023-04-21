@@ -17,29 +17,11 @@
 	}
 }
 
-.line {
-	width: 50%;
-	border: 1px solid #cbcff5;
-	border-radius: 10px;
-}
-
-/* .heading{
-    font-weight: 500;
-	font-size: 1rem;
-	line-height: 19px;
-	color: #393f70;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-} */
 .main_container {
 	display: flex;
 	flex-direction: column;
 	gap: 0.75rem;
 	width: 100%;
-
-	/* border: 1px solid #cbcff5; */
-	padding: 1rem;
 	border-radius: 4px;
 
 	.core-ui-toggle-root p {
