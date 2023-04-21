@@ -4,7 +4,6 @@ import styles from './styles.module.css';
 
 function SelectNormal({
 	setStep,
-	airFreightNormalBookingCondition = false,
 }) {
 	return (
 		<div className={styles.mode_wrapper}>
@@ -15,11 +14,8 @@ function SelectNormal({
 					onClick={() => {
 						setStep(2);
 					}}
-					disabled={airFreightNormalBookingCondition}
 				>
-					{airFreightNormalBookingCondition
-						? 'Please revert rate first'
-						: 'Proceed With Normal Booking'}
+					Proceed With Normal Booking
 				</Button>
 			</div>
 		</div>

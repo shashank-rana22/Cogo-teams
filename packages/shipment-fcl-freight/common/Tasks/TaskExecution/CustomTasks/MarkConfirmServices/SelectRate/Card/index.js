@@ -3,6 +3,9 @@ import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
+import useUpdateShipmentBookingConfirmationPreferences
+	from '../../../../../../../hooks/useUpdateShipmentBookingConfirmationPreferences';
+
 import styles from './styles.module.css';
 
 const getBuyPrice = (dataObj, source) => {
@@ -29,12 +32,12 @@ function Card({
 	priority,
 	setStep,
 	setSelectedCard,
-	updateConfirmation,
 }) {
 	const dataArr = Array.isArray(item?.data) ? item?.data : [item?.data];
 
+	const { apiTrigger, loading } = useUpdateShipmentBookingConfirmationPreferences();
 	const handleProceed = async () => {
-		// await updateConfirmation(item);
+		await apiTrigger(item);
 		setSelectedCard(item);
 		setStep(2);
 	};
@@ -50,7 +53,7 @@ function Card({
 						Priority)
 						{' '}
 					</div>
-					<div className={styles.priority_text} className="purple">
+					<div className={styles.priority_text}>
 						{`${startCase(item.source)} Booking Note`}
 					</div>
 				</div>
@@ -98,6 +101,7 @@ function Card({
 						onClick={() => {
 							handleProceed();
 						}}
+						disabled={loading}
 					>
 						Proceed
 					</Button>
