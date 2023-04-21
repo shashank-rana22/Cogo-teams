@@ -23,6 +23,7 @@
 }
 
 .hawb_container {
+	margin: 0 8px;
 	position: relative;
 	padding: 20px;
 	text-align: center;
