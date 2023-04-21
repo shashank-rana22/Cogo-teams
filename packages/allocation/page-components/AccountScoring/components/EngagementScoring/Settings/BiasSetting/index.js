@@ -1,51 +1,59 @@
 import { Table } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import EmptyState from '../../../../../../common/EmptyState';
 import getBiasControl from '../../../../configurations/get-add-bias-controls';
-import BIAS_ARRAY from '../../../../constants/get-bias-setting-mapping';
-import useGetEngagementScoringSettings from '../../../../hooks/useGetEngagementScoringSettings';
+import biasColumns from '../../../../constants/get-bias-columns';
 import EditSetting from '../EditSetting/index';
 
 import Header from './Header';
 import styles from './styles.module.css';
 
-const columns = [
-	{
-		Header   : 'AGE',
-		accessor : ({ lower_limit = '', upper_limit = '' }) => (
-			<section className={styles.data_container}>
-				{lower_limit}
-				-
-				{upper_limit}
-			</section>
-		),
-	},
-	{
-		Header   : 'MULTIPLIER',
-		accessor : ({ score = 0 }) => (
-			<section className={styles.data_container}>
-				{score}
-			</section>
-		),
-	},
-];
+function BiasSetting(props) {
+	const {
+		settingsLoading, settingsRefetch, biasList,
+		control, handleSubmit, errors,
+	} = props;
 
-function BiasSetting() {
 	const [editing, setEditing] = useState(false);
 
-	const {
-		settingsLoading = false, settingsRefetch = () => {},
-		biasList = [],
-	} = useGetEngagementScoringSettings();
+	if (settingsLoading) {
+		<div className={styles.card}>
+			<Header setEditing={setEditing} loading={settingsLoading} />
+
+			<Table
+				columns={biasColumns || []}
+				data={[]}
+				loading={settingsLoading}
+			/>
+		</div>;
+	}
+
+	if (isEmpty(biasList)) {
+		return (
+			<div className={styles.empty_container}>
+				<EmptyState
+					height={220}
+					width={380}
+					flexDirection="row"
+					emptyText="Bias Data not found"
+					textSize={20}
+				/>
+			</div>
+		);
+	}
 
 	if (editing) {
 		return (
 			<EditSetting
-				ITEM_ARRAY={BIAS_ARRAY}
 				useGetControls={getBiasControl}
 				setEditing={setEditing}
 				refetch={settingsRefetch}
 				preFilledList={biasList}
+				control={control}
+				handleSubmit={handleSubmit}
+				errors={errors}
 				inputStyle="bias_input"
 				heading="Bias Settings"
 				tooltipData="Bias is used to calculate the warmness of the KAM"
@@ -58,7 +66,7 @@ function BiasSetting() {
 			<Header editing={editing} setEditing={setEditing} />
 
 			<Table
-				columns={columns}
+				columns={biasColumns || []}
 				data={biasList || []}
 				loading={settingsLoading}
 			/>

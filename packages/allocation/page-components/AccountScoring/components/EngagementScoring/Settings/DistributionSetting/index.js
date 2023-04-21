@@ -1,59 +1,61 @@
 import { Table } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import EmptyState from '../../../../../../common/EmptyState';
 import getDistributionControl from '../../../../configurations/get-add-distribution-controls';
-import WARMTH_ARRAY from '../../../../constants/get-warmth-mapping';
-import useGetDistributionScoringSettings from '../../../../hooks/useGetDistributionScoringSettings ';
+import distributionColumns from '../../../../constants/get-distribution-columns';
 import EditSetting from '../EditSetting/index';
 
 import Header from './Header';
 import styles from './styles.module.css';
 
-const columns = [
-	{
-		Header   : 'WARMTH',
-		accessor : ({ warmth = '' }) => (
-			<section className={styles.data_container}>
-				{startCase(warmth)}
-			</section>
-		),
-	},
-	{
-		Header   : 'RANGE',
-		accessor : ({ lower_limit = 0, upper_limit = 0 }) => (
-			<section className={styles.data_container}>
-				{lower_limit}
-				-
-				{upper_limit}
-			</section>
-		),
-	},
-	{
-		Header   : 'CURRENT NUMBER OF ACCOUNTS',
-		accessor : ({ numberOfAccounts = 0 }) => (
-			<section className={styles.data_container}>
-				{numberOfAccounts}
-			</section>
-		),
-	},
-];
+function DistributionSetting(props) {
+	const {
+		settingsLoading, settingsRefetch, distributionList,
+		control, handleSubmit, errors,
+	} = props;
 
-function DistributionSetting() {
 	const [editing, setEditing] = useState(false);
 
-	const {
-		settingsLoading = false, settingsRefetch = () => {}, distributionList = [],
-	} = useGetDistributionScoringSettings();
+	if (settingsLoading) {
+		return (
+			<div className={styles.card}>
+				<Header setEditing={setEditing} loading={settingsLoading} />
+
+				<Table
+					columns={distributionColumns || []}
+					data={[]}
+					loading={settingsLoading}
+				/>
+			</div>
+		);
+	}
+
+	if (isEmpty(distributionList)) {
+		return (
+			<div className={styles.empty_container}>
+				<EmptyState
+					height={220}
+					width={380}
+					flexDirection="row"
+					emptyText="Distribution Data not found"
+					textSize={20}
+				/>
+			</div>
+		);
+	}
 
 	if (editing) {
 		return (
 			<EditSetting
-				ITEM_ARRAY={WARMTH_ARRAY}
 				useGetControls={getDistributionControl}
 				setEditing={setEditing}
 				refetch={settingsRefetch}
 				preFilledList={distributionList}
+				control={control}
+				handleSubmit={handleSubmit}
+				errors={errors}
 				inputStyle="distribution_input"
 				heading="Distribution Settings"
 				tooltipData="Multiplier to calculate warmness of the KAM based on the region they lie in"
@@ -66,7 +68,7 @@ function DistributionSetting() {
 			<Header editing={editing} setEditing={setEditing} />
 
 			<Table
-				columns={columns}
+				columns={distributionColumns || []}
 				data={distributionList || []}
 				loading={settingsLoading}
 			/>

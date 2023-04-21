@@ -1,4 +1,4 @@
-import { useForm } from '@cogoport/forms';
+// import { useForm } from '@cogoport/forms';
 import { useSelector } from '@cogoport/store';
 
 import useUpdateBiasSettings from '../../../../hooks/useUpdateBiasSettings';
@@ -11,10 +11,13 @@ import styles from './styles.module.css';
 
 function EditSetting(props) {
 	const {
-		ITEM_ARRAY = [], useGetControls, inputStyle = 'input',
+		useGetControls, inputStyle = 'input',
 		setEditing = () => {}, heading = '', tooltipData = '',
 		refetch = () => {},
 		preFilledList = [],
+		control,
+		handleSubmit,
+		errors,
 	} = props;
 
 	const profile = useSelector((state) => state.profile);
@@ -33,8 +36,8 @@ function EditSetting(props) {
 		updateDistribution = () => {},
 	} = useUpdateDistributionSettings();
 
-	const formProps = useForm();
-	const { control, handleSubmit, formState: { errors } } = formProps;
+	// const formProps = useForm();
+	// const { control, handleSubmit, formState: { errors } } = formProps;
 
 	const onClose = () => {
 		setEditing((pv) => !pv);
@@ -61,19 +64,6 @@ function EditSetting(props) {
 					onClose={onClose}
 				/>
 
-				{/* {ITEM_ARRAY.map((item, index) => (
-					<div key={item} className={styles.item}>
-						<SettingsItem
-							item={item}
-							useGetControls={useGetControls}
-							index={index}
-							inputStyle={inputStyle}
-							control={control}
-							errors={errors}
-							preFilledList={preFilledList}
-						/>
-					</div>
-				))} */}
 				{preFilledList.map((item, index) => (
 					<div key={item} className={styles.item}>
 						<SettingsItem

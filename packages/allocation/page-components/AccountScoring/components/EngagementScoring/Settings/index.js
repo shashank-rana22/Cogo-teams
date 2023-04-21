@@ -1,4 +1,8 @@
+import { useForm } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
+
+import useGetDistributionScoringSettings from '../../../hooks/useGetDistributionScoringSettings ';
+import useGetEngagementScoringSettings from '../../../hooks/useGetEngagementScoringSettings';
 
 import BiasSetting from './BiasSetting';
 import DistributionSetting from './DistributionSetting';
@@ -7,6 +11,21 @@ import styles from './styles.module.css';
 
 function Settings(props) {
 	const { setToggleComponent = () => {} } = props;
+
+	const {
+		settingsLoading = false,
+		percentileList = [],
+		biasList = [],
+		settingsRefetch = () => {},
+	} = useGetEngagementScoringSettings();
+
+	const {
+		distributionLoading = false, distributionRefetch = () => {}, distributionList = [],
+	} = useGetDistributionScoringSettings();
+
+	const formProps = useForm();
+	const { control, handleSubmit, formState: { errors } } = formProps;
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.back_container}>
@@ -20,11 +39,33 @@ function Settings(props) {
 
 				</div>
 			</div>
-			<PercentileSetting />
 
-			<BiasSetting />
+			<PercentileSetting
+				settingsLoading={settingsLoading}
+				percentileList={percentileList}
+				settingsRefetch={settingsRefetch}
+				control={control}
+				handleSubmit={handleSubmit}
+				errors={errors}
+			/>
 
-			<DistributionSetting />
+			<BiasSetting
+				settingsLoading={settingsLoading}
+				biasList={biasList}
+				settingsRefetch={settingsRefetch}
+				control={control}
+				handleSubmit={handleSubmit}
+				errors={errors}
+			/>
+
+			<DistributionSetting
+				settingsLoading={distributionLoading}
+				settingsRefetch={distributionRefetch}
+				distributionList={distributionList}
+				control={control}
+				handleSubmit={handleSubmit}
+				errors={errors}
+			/>
 		</div>
 
 	);
