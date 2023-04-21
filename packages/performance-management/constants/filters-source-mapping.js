@@ -76,5 +76,13 @@ const filtersSourceMapping = {
 			{ name: 'Month' },
 		],
 	},
+	manual_feedback: {
+		left: [
+			{ name: 'Q', label: 'Search by Name/COGO-ID...' },
+		],
+		right: [
+			{ name: 'ManagerID', label: 'Search by Manager...' },
+		],
+	},
 };
 export default filtersSourceMapping;
