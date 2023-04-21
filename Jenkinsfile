@@ -51,17 +51,29 @@ pipeline {
                 pnpm run deploy
                 \""""
             }
+            post {
+                success {
+                    office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Deployed commit *${COMMIT_ID}* of branch **${BRANCH_NAME}** on server **${SERVER_NAME}** successfully", color:  '#66ff66'
+                }
+                
+                failure {
+                    office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Deployment failed for commit *${COMMIT_ID}* of branch **${BRANCH_NAME}**", color: '#3366ff'
+                }
+            }
 
         }
     }
 
-    post {
-        failure {
-            office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Starting build for commit *${COMMIT_ID}* of branch **${BRANCH_NAME}**", color: '#3366ff'
-        }
+    // post {
+    //     failure {
+    //         when {
 
-        success {
-            office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Deployed commit *${COMMIT_ID}* of branch **${BRANCH_NAME}** on server **${SERVER_NAME}** successfully", color:  '#66ff66'
-        }
-    }
+    //         }
+    //         office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Deployment failed for commit *${COMMIT_ID}* of branch **${BRANCH_NAME}**", color: '#3366ff'
+    //     }
+
+    //     success {
+    //         office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Deployed commit *${COMMIT_ID}* of branch **${BRANCH_NAME}** on server **${SERVER_NAME}** successfully", color:  '#66ff66'
+    //     }
+    // }
 }
