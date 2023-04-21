@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 function Step3({ data, setStep }) {
 	const { finalControls, formProps, customValues = {}, onSubmit = () => {} } = data || {};
-	const { control, handleSubmit } = formProps || {};
+	const { control, handleSubmit, formState:{ errors = {} } = {} } = formProps || {};
 
 	return (
 		<div>
@@ -14,7 +14,7 @@ function Step3({ data, setStep }) {
 				<Layout
 					control={control}
 					fields={finalControls}
-					errors={{}}
+					errors={errors}
 					customValues={customValues}
 				/>
 			</div>

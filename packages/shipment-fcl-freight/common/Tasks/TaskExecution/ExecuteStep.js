@@ -52,16 +52,16 @@ function ExecuteStep({
 				/>
 			</div>
 
-			<div className={styles.button_wrap}>
+			<div className={styles.button_container}>
 				<Button
-					className="secondary md"
+					themeType="secondary"
 					onClick={() => onCancel()}
 					disabled={isLoading}
 				>
 					CANCEL
 				</Button>
 
-				<Button disabled={isLoading} onClick={handleSubmit(onSubmit)}>
+				<Button themeType="primary" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
 					{isLastStep ? 'SUBMIT' : 'NEXT'}
 				</Button>
 			</div>

@@ -28,7 +28,7 @@ function Item(props) {
 	let newProps = { ...props };
 
 	const isAsyncSelect = ['select', 'creatable-select'].includes(type)
-												&& Object.keys(props).includes('optionsListKey');
+		&& Object.keys(props).includes('optionsListKey');
 
 	if (isAsyncSelect) {
 		const asyncKey = props?.optionsListKey;
@@ -36,9 +36,7 @@ function Item(props) {
 		const asyncFields = getAsyncFields(asyncKey) || {};
 		const finalParams = props?.params || asyncFields?.defaultParams;
 
-		if (Object.keys(asyncFields).includes('defaultParams')) {
-			delete asyncFields.defaultParams;
-		}
+		if (Object.keys(asyncFields).includes('defaultParams')) { delete asyncFields.defaultParams; }
 
 		newProps = {
 			...newProps,
@@ -53,42 +51,18 @@ function Item(props) {
 	const flex = ((span || 12) / 12) * 100 - 1;
 
 	return (
-		<div className={cl`${styles.element} ${className}`} style={{ width: `${flex}%`, padding: '4px' }}>
-			{heading ? (
-				<div style={{
-					height: '16px', marginBottom: '6px', fontWeight: '600', fontSize: '13px',
-				}}
-				>
-					{heading}
-				</div>
-			) : null}
+		<div className={cl`${styles.element} ${className}`} style={{ width: `${flex}%` }}>
+			{heading ? (<div className={styles.heading}>{heading}</div>) : null}
 
-			{label ?	(
-				<h4 style={{
-					height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
-				}}
-				>
-					{label}
-				</h4>
-			) : null}
+			{label ? (<h4 className={styles.label}>{label}</h4>) : null}
 
 			<Element
+				size={type === 'pills' ? 'md' : 'sm'} // need to put in config
 				{...newProps}
 				control={control}
-			/>
-			<p style={{
-				fontStyle     : 'normal',
-				fontSize      : '12px',
-				lineHeight    : '16px',
-				letterSpacing : '0.02em',
-				paddingLeft   : '4px',
-				margin        : '0px',
-				color         : '#cb6464',
-			}}
-			>
-				{errorOriginal}
 
-			</p>
+			/>
+			<p className={styles.errors}>{errorOriginal}</p>
 		</div>
 	);
 }

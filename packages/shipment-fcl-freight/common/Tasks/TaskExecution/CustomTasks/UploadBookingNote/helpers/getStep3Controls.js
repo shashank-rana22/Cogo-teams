@@ -26,6 +26,7 @@ const getStep3Controls = ({ service_charge, shipment_data }) => {
 				name  : 'code',
 				span  : 3,
 				size  : 'sm',
+				rules : { required: true },
 			},
 			{
 				label          : 'Currency',
