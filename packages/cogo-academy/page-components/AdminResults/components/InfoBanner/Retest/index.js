@@ -1,49 +1,41 @@
-import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
 
 import controls from './controls';
 import Item from './Item';
 // import styles from './styles.module.css';
 
-function Retest() {
-	console.log('controls', controls);
-	const {
-		control, formState: { errors }, watch,
-	} = useForm();
+function Retest({ watch, control, setValue, errors }) {
+	const watchUsersList = watch('users_list');
 
-	const x = watch('users_list');
+	let newControls = [];
 
-	const newControls = [];
+	if (watchUsersList === 'custom') {
+		setValue('channels', '');
+		controls.forEach((item) => {
+			if (item.name === 'channels') {
+				const newitem = { ...item, show: true };
+				newControls.push(newitem);
+			} else {
+				newControls.push(item);
+			}
+		});
+	} else newControls = controls;
 
-	useEffect(() => {
-		if (x === 'custom') {
-			controls.map((item) => {
-				if (item.name === 'channels') {
-					const newitem = { ...item, show: true };
-					newControls.push(newitem);
-				} else {
-					newControls.push(item);
-				}
-
-				return null;
-			});
-		}
-	}, [x, newControls]);
-
-	console.log('x', newControls);
 	return (
 		<>
 
-			{(controls || []).map((controlItem) => {
-				const { label, show } = controlItem;
+			{(newControls || []).map((controlItem) => {
+				const { show } = controlItem;
+				if (!isEmpty(show) && !show) {
+					return null;
+				}
 				return (
-                    
+
 					<Item
 						{...controlItem}
 						control={control}
 						error={errors[controlItem?.name]}
-					/>}
+					/>
 				);
 			})}
 		</>

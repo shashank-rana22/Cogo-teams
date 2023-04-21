@@ -1,6 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { useState } from 'react';
 
+import useAllowReTest from '../../hooks/useAllowReTest';
 import PublishNow from '../PublishNow';
 
 import Retest from './Retest';
@@ -8,6 +9,15 @@ import styles from './styles.module.css';
 import TEXT_MAPPING from './text-mapping';
 
 function InfoBanner({ test_status = '', test_id, validity_end, refetchTest, loading }) {
+	const {
+		watch,
+		control,
+		setValue,
+		onSubmit,
+		errors,
+		handleSubmit,
+	} = useAllowReTest();
+
 	const isUnderValidity = new Date() < new Date(validity_end);
 
 	const content = TEXT_MAPPING[test_status];
@@ -51,13 +61,18 @@ function InfoBanner({ test_status = '', test_id, validity_end, refetchTest, load
 				? (
 					<Modal
 						show={showRetestModal}
-						size="lg"
+						size="md"
 						onClose={() => setShowRetestModal(false)}
 						className={styles.modal_container}
 					>
 						<Modal.Header title="Set Retest Criteria" />
 						<Modal.Body>
-							<Retest />
+							<Retest
+								watch={watch}
+								control={control}
+								setValue={setValue}
+								errors={errors}
+							/>
 						</Modal.Body>
 						<Modal.Footer>
 							<div>
@@ -71,13 +86,13 @@ function InfoBanner({ test_status = '', test_id, validity_end, refetchTest, load
 
 								</div>
 								<div>
-									{/* <Button
+									<Button
 										themeType="accent"
 										onClick={handleSubmit(onSubmit)}
 										disabled={loading}
 									>
 										Submit
-									</Button> */}
+									</Button>
 								</div>
 							</div>
 						</Modal.Footer>
