@@ -1,14 +1,16 @@
-.collapse_inner_container{
-
-padding: 18px;
-}
-.table_headers{
-    display: flex;
-    font-weight: 700;
-    flex-grow: 0.5;
-    color: #4f4f4f;
+.collapse_inner_container {
+	padding: 18px;
 }
 
-.table_header_container{
-    display: flex;
+.table_headers {
+	display: flex;
+	flex-basis: 100%;
+	font-size: 12px;
+	font-weight: 700;
+	color: #4f4f4f;
+
+}
+
+.table_header_container {
+	display: flex;
 }

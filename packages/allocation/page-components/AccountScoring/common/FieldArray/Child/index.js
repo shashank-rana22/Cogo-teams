@@ -6,9 +6,10 @@ import { getFieldController } from '../../../../../common/Form/getFieldControlle
 import styles from './styles.module.css';
 
 function Child(props) {
-	const { controls, control, name, index } = props;
+	const { controls, control, name, index, remove = () => {} } = props;
 
 	return (
+
 		<div className={styles.list}>
 			{controls.map((singleControl) => {
 				const el = { ...singleControl };
@@ -32,7 +33,11 @@ function Child(props) {
 				);
 			})}
 
-			<IcMDelete />
+			<IcMDelete
+				className={`form-fieldArray-${name}-remove`}
+				onClick={() => remove(index, 1)}
+				style={{ cursor: 'pointer' }}
+			/>
 
 		</div>
 
