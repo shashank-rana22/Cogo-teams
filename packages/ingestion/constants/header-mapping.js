@@ -6,6 +6,6 @@ export const CONSTANT_KEYS = {
 };
 
 export const REDIRECT_LINK_MAPPING = {
-	true  : '/lead-management',
+	true  : '/crm/supply',
 	false : '/lead-management',
 };

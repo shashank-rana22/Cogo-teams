@@ -4,7 +4,6 @@ import { IcMDownload } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { startCase, format } from '@cogoport/utils';
-import Link from 'next/link';
 import { useState } from 'react';
 
 import { REDIRECT_LINK_MAPPING } from '../constants/header-mapping';
@@ -127,7 +126,7 @@ function useGetIngestionList() {
 						themeType="tertiary"
 					>
 						<a
-							href={`/${partner_id}${REDIRECT_LINK_MAPPING[item?.is_channel_partner]}?sales_agent_id==${item?.id}`}
+							href={`/${partner_id}${REDIRECT_LINK_MAPPING[item?.is_channel_partner]}?source_id=${item?.id}`}
 						>
 							{startCase(item?.ingestion_type || '___')}
 						</a>
