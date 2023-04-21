@@ -1,9 +1,10 @@
 import { Tooltip, Button, Pill } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMDownload } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { startCase, format } from '@cogoport/utils';
+import Link from 'next/link';
 import { useState } from 'react';
 
 import { REDIRECT_LINK_MAPPING } from '../constants/header-mapping';
@@ -26,10 +27,15 @@ function useGetIngestionList() {
 		params,
 	}, { manual: false });
 
+	const {
+		general: { query = {} },
+	} = useSelector((reduxState) => reduxState);
+
+	const { partner_id = '' } = query;
+
 	const downloadErrorCsv = (link) => {
 		window.open(link, '_blank');
 	};
-	const router = useRouter();
 
 	const formProps = useForm();
 
@@ -118,10 +124,14 @@ function useGetIngestionList() {
 				<div className={styles.type}>
 					<Button
 						className={styles.type_name}
-						onClick={() => { router.push(REDIRECT_LINK_MAPPING[item?.is_channel_partner] || '/'); }}
 						themeType="tertiary"
 					>
-						<div>{startCase(item?.ingestion_type || '___')}</div>
+						<a
+							href={`/${partner_id}${REDIRECT_LINK_MAPPING[item?.is_channel_partner]}?sales_agent_id==${item?.id}`}
+						>
+							{startCase(item?.ingestion_type || '___')}
+						</a>
+
 					</Button>
 				</div>
 
