@@ -9,7 +9,7 @@ function DocumentForm({
 	formValues,
 	control,
 	orgId,
-	setOrgId,
+	setOrgId = () => {},
 }) {
 	let params = {};
 	switch (activeStakeholder) {
@@ -46,12 +46,7 @@ function DocumentForm({
 			break;
 	}
 
-	const {
-		data,
-		loading,
-	} = useListPossibelDocuments({
-		defaultParams: params,
-	});
+	const { data, loading } = useListPossibelDocuments({ defaultParams: params });
 
 	return (
 		<div>

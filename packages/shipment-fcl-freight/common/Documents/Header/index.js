@@ -25,7 +25,7 @@ function Header({
 
 	const serviceOptions = shipment_data?.services?.map((service) => ({ label: startCase(service), value: service }));
 
-	const handleDocumentChange = () => {
+	const handleGenericUpload = () => {
 		setShowModal(true);
 	};
 
@@ -85,7 +85,7 @@ function Header({
 				<Button
 					size="md"
 					themeType="primary"
-					onClick={() => handleDocumentChange()}
+					onClick={() => handleGenericUpload()}
 				>
 					Generic Upload
 				</Button>

@@ -26,7 +26,7 @@ function UploadDocument({
 	formValues,
 	control,
 	orgId,
-	setOrgId,
+	setOrgId = () => {},
 }) {
 	const documents = document_data?.list?.map((e) => (
 		{ label: startCase(e?.document_type), value: e?.document_type })) || [];

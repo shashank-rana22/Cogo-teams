@@ -6,11 +6,11 @@ import styles from './styles.module.css';
 import TradeDocuments from './TradeDocuments';
 
 function Wallet({
-	showWalletDocs,
+	showWalletDocs = () => {},
 	forModal = false,
 	activeWallet = '',
 	searchDocsVal,
-	handleDocClick,
+	handleDocClick = () => {},
 }) {
 	const handleView = (e, image_url) => {
 		e.stopPropagation();
@@ -33,7 +33,6 @@ function Wallet({
 						forModal={forModal}
 						handleView={handleView}
 						handleSave={handleSave}
-						showWalletDocs={showWalletDocs}
 						searchDocsVal={searchDocsVal}
 						handleDocClick={handleDocClick}
 

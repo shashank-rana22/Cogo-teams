@@ -29,7 +29,6 @@ const useListTradeDocuments = ({ defaultFilters = {} }) => {
 	return {
 		data,
 		loading,
-		getList,
 	};
 };
 

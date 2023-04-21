@@ -1,12 +1,11 @@
-import { Button, Popover } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { IcMPdf, IcMImage, IcMOverflowDot } from '@cogoport/icons-react';
+import { IcMPdf, IcMImage } from '@cogoport/icons-react';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { format, startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
 import useListTradeDocuments from '../../../../hooks/useListTradeDocuments';
-import useUpdateOrganizationDocument from '../../../../hooks/useUpdateOrganizationDocument';
 import Loader from '../Loader';
 
 import styles from './styles.module.css';
@@ -16,39 +15,18 @@ function TradeDocuments({
 	handleSave = () => {},
 	handleView = () => {},
 	searchDocsVal,
-	showWalletDocs,
-	handleDocClick,
+	handleDocClick = () => {},
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const { importer_exporter_id = '' } = shipment_data;
-	const { data, getList, loading } = useListTradeDocuments({
+	const { data, loading } = useListTradeDocuments({
 		defaultFilters: {
 			q               : searchDocsVal || undefined,
 			status          : 'accepted',
 			organization_id : importer_exporter_id,
 		},
 	});
-
-	const { deleteDocument } = useUpdateOrganizationDocument({
-		refetch       : getList,
-		defaultParams : {
-			status: 'pending',
-		},
-	});
-
-	const content = (doc) => (
-		<div
-			role="button"
-			tabIndex="0"
-			className={styles.action}
-			onClick={() => {
-				deleteDocument({ id: doc?.id });
-			}}
-		>
-			Delete Document
-		</div>
-	);
 
 	const contentToShow = () => {
 		if (loading) {
@@ -69,22 +47,11 @@ function TradeDocuments({
 						className={styles.single_doc}
 						onClick={() => handleDocClick(doc)}
 					>
-						{!showWalletDocs && (
-							<div className={styles.dots}>
-								<Popover
-									interactive
-									placement="bottom-end"
-									content={content(doc)}
-								>
-									<IcMOverflowDot />
-								</Popover>
-							</div>
-						)}
 
 						{doc.type === 'pdf' ? (
-							<IcMPdf fontSize="32px" />
+							<IcMPdf style={{ fontSize: '32px', color: '#221F20' }} />
 						) : (
-							<IcMImage fontSize="32px" />
+							<IcMImage style={{ fontSize: '32px', color: '#221F20' }} />
 						)}
 						<div className={styles.main}>
 							<div className={styles.heading} style={{ fontSize: '14px' }}>
@@ -99,12 +66,15 @@ function TradeDocuments({
 						</div>
 						<div className={styles.button_wrapper}>
 							<Button
-								className={styles.initial}
+								style={{ color: '#F68B21' }}
+								themeType="link"
 								onClick={(e) => handleView(e, doc?.image_url)}
 							>
 								View
 							</Button>
 							<Button
+								style={{ color: '#F68B21' }}
+								themeType="link"
 								onClick={(e) => handleSave(e, doc?.image_url)}
 							>
 								Download

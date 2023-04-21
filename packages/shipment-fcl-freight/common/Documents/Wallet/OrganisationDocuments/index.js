@@ -88,9 +88,9 @@ function OrganizationDocuments({
 							</div>
 						)}
 						{doc.type === 'pdf' ? (
-							<IcMPdf fontSize="32px" />
+							<IcMPdf style={{ fontSize: '32px', color: '#221F20' }} />
 						) : (
-							<IcMImage fontSize="32px" />
+							<IcMImage style={{ fontSize: '32px', color: '#221F20' }} />
 						)}
 						<div className={styles.main}>
 							<div className={styles.heading} style={{ fontSize: '14px' }}>
@@ -105,12 +105,15 @@ function OrganizationDocuments({
 						</div>
 						<div className={styles.button_wrapper}>
 							<Button
-								className={styles.initial}
+								style={{ color: '#F68B21' }}
+								themeType="link"
 								onClick={(e) => handleView(e, doc?.image_url)}
 							>
 								View
 							</Button>
 							<Button
+								style={{ color: '#F68B21' }}
+								themeType="link"
 								onClick={(e) => handleSave(e, doc?.image_url)}
 							>
 								Download

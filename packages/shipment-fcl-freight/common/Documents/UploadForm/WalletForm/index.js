@@ -9,9 +9,9 @@ import styles from './styles.module.css';
 function WalletForm({
 	showWalletDocs,
 	activeWallet,
-	setActiveWallet,
+	setActiveWallet = () => {},
 	showDoc,
-	handleDocClick,
+	handleDocClick = () => {},
 }) {
 	const [searchDocs, setSearchDocs] = useState('');
 
@@ -20,7 +20,6 @@ function WalletForm({
 			<Modal.Header title="Document Wallet" />
 			<div className={styles.main_container}>
 				<div className={styles.header}>
-					{/* <div className={styles.heading}>Document Wallet</div> */}
 					<div className={styles.search_container}>
 						<Input
 							className="primary md"

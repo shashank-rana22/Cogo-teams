@@ -83,17 +83,18 @@ function GenericUpload({
 							isClearable
 						/>
 					) : null }
-
-					<DocumentForm
-						shipment_data={shipment_data}
-						orgList={orgList}
-						control={control}
-						activeStakeholder={activeStakeholder}
-						uploaded_by_org_id={filters?.uploaded_by_org_id}
-						formValues={formValues}
-						orgId={orgId}
-						setOrgId={setOrgId}
-					/>
+					{!loading ? (
+						<DocumentForm
+							shipment_data={shipment_data}
+							orgList={orgList}
+							control={control}
+							activeStakeholder={activeStakeholder}
+							uploaded_by_org_id={filters?.uploaded_by_org_id}
+							formValues={formValues}
+							orgId={orgId}
+							setOrgId={setOrgId}
+						/>
+					) : null}
 
 				</Modal.Body>
 

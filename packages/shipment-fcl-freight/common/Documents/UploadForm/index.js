@@ -8,9 +8,9 @@ import WalletForm from './WalletForm';
 
 function UploadForm({
 	showDoc,
-	setShowDoc,
+	setShowDoc = () => {},
 	activeWallet,
-	setActiveWallet,
+	setActiveWallet = () => {},
 	refetch,
 }) {
 	const handleDocClick = (doc) => {
