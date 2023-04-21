@@ -1,36 +1,42 @@
 import { isEmpty } from '@cogoport/utils';
+import { useEffect } from 'react';
 
-import controls from './controls';
+import getControls from './controls';
 import Item from './Item';
 // import styles from './styles.module.css';
 
 function Retest({ watch, control, setValue, errors }) {
-	const watchUsersList = watch('users_list');
+	const formvalues = watch();
 
-	let newControls = [];
+	const controls = getControls({ control, formvalues });
 
-	if (watchUsersList === 'custom') {
-		setValue('channels', '');
-		controls.forEach((item) => {
-			if (item.name === 'channels') {
-				const newitem = { ...item, show: true };
-				newControls.push(newitem);
-			} else {
-				newControls.push(item);
-			}
-		});
-	} else newControls = controls;
+	useEffect(() => {
+		setValue('filtered_users', '');
+		setValue('percentage', '');
+		setValue('percentile', '');
+	}, [setValue, formvalues.users_list]);
+
+	useEffect(() => {
+		if (isEmpty(formvalues?.filtered_users)) {
+			setValue('percentage', '');
+			setValue('percentile', '');
+		} else if (formvalues?.filtered_users?.includes('percentile_checked')) {
+			setValue('percentage', '');
+		} else if (formvalues?.filtered_users?.includes('percentage_checked')) {
+			setValue('percentile', '');
+		}
+	}, [setValue, formvalues?.filtered_users]);
 
 	return (
 		<>
 
-			{(newControls || []).map((controlItem) => {
+			{(controls || []).map((controlItem) => {
 				const { show } = controlItem;
 				if (!isEmpty(show) && !show) {
 					return null;
 				}
-				return (
 
+				return (
 					<Item
 						{...controlItem}
 						control={control}
@@ -38,6 +44,7 @@ function Retest({ watch, control, setValue, errors }) {
 					/>
 				);
 			})}
+
 		</>
 	);
 }
