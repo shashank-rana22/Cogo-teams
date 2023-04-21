@@ -30,7 +30,7 @@ const modules = {
 function TextComponent(props) {
 	const { widget, components, setComponents, childId, selectedRow } = props;
 
-	const { content = 'Start Typing...' } = widget || {};
+	const { content } = widget || {};
 
 	const [editorValue, setEditorValue] = useState(content);
 
