@@ -7,5 +7,5 @@ export const CONSTANT_KEYS = {
 
 export const REDIRECT_LINK_MAPPING = {
 	true  : '/quotation-approval',
-	false : '/',
+	false : '/locations',
 };
