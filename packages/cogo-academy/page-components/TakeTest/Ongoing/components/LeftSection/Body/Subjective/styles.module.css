@@ -29,10 +29,6 @@
 
 .text {
 	max-height: 300px;
-	padding-top: 10px;
-	padding-right: 8px;
-	padding-bottom: 10px;
-	padding-left: 8px;
 	overflow-y: scroll;
 	font-weight: 600;
 	color: #221f20;
