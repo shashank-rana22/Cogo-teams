@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-function usePostReUpload({ row = {}, setTableModal = () => {} }) {
+function usePostReUpload({ row = {}, setTableModal = () => {}, refetch = () => {} }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : 'create_ingestion_request',
 		method : 'POST',
@@ -57,6 +57,8 @@ function usePostReUpload({ row = {}, setTableModal = () => {} }) {
 			Toast.success('Re-upload Complete');
 
 			setTableModal('');
+
+			refetch();
 		} catch (err) {
 			Toast.error(err?.response?.data?.file);
 		}

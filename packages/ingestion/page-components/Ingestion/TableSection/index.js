@@ -49,6 +49,7 @@ function TableSection(props) {
 					tableModal={tableModal}
 					row={row}
 					loading={loading}
+					refetch={refetch}
 				/>
 			)}
 		</>

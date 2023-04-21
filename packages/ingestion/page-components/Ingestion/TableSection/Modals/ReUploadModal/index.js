@@ -7,13 +7,13 @@ import reUploadControls from '../../../../../utils/re-upload-controls';
 
 import styles from './styles.module.css';
 
-function ReUploadModal({ tableModal = '', setTableModal = () => {}, row = {} }) {
+function ReUploadModal({ tableModal = '', setTableModal = () => {}, row = {}, refetch = () => {} }) {
 	const {
 		formProps = {},
 		onSubmit = () => {},
 		loading = false,
 		onClose = () => {},
-	} =	 usePostReUpload({ row, setTableModal });
+	} =	 usePostReUpload({ row, setTableModal, refetch });
 
 	const { control, formState: { errors }, handleSubmit } = formProps;
 
