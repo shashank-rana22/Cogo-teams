@@ -57,7 +57,7 @@ pipeline {
                 }
                 
                 failure {
-                    office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Deployment failed for commit *${COMMIT_ID}* of branch **${BRANCH_NAME}** on ${SERVER_NAME}", color: '#3366ff'
+                    office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Deployment failed for commit *${COMMIT_ID}* of branch **${BRANCH_NAME}** on ${SERVER_NAME}", color: '#ff0000'
                 }
             }
 
