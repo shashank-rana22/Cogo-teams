@@ -78,7 +78,7 @@ function Layout({
 						return (
 							<Item
 								control={control}
-								error="aasda"
+								error={errors[field.name]}
 								{...field}
 							/>
 						);

@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 function TaskDetails({
 	task = {},
 	services = [],
+	isTaskOpen,
 }) {
 	const { primary_service } = useContext(ShipmentDetailContext);
 
@@ -36,7 +37,7 @@ function TaskDetails({
 			<div className={styles.task_details}>
 				<div className={styles.task_and_icon}>
 					<div className={styles.icon}>
-						{task.status === 'completed' ? (
+						{task?.status === 'completed' ? (
 							<IcMTaskCompleted fill="##F68B21" width="1.5em" height="1.5em" />
 						) : (
 							<IcMTaskNotCompleted
@@ -50,7 +51,7 @@ function TaskDetails({
 					<div className={styles.task_name}>{taskName}</div>
 				</div>
 
-				{task.deadline ? (
+				{task?.deadline ? (
 					<div className={styles.deadline}>
 						{`( Deadline: ${formatDate({
 							date       : task?.deadline,
@@ -62,7 +63,7 @@ function TaskDetails({
 					</div>
 				) : null}
 
-				{task.status === 'completed' ? (
+				{task?.status === 'completed' ? (
 					<div className={styles.completed}>
 						{`( Completed On: ${formatDate({
 							date       : task?.updated_at,
@@ -73,7 +74,7 @@ function TaskDetails({
 					</div>
 				) : null}
 
-				{task.due_in ? (
+				{task?.due_in ? (
 					<div className={styles.completed}>
 						<img
 							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-due-in.svg"
@@ -83,7 +84,7 @@ function TaskDetails({
 					</div>
 				) : null}
 
-				{task.over_due ? (
+				{task?.over_due ? (
 					<div className={styles.completed}>
 						<img
 							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-over-due.svg"
@@ -94,9 +95,11 @@ function TaskDetails({
 				) : null}
 			</div>
 
-			<div className={styles.cargo_details}>
-				<CargoDetails primary_service={primary_service} />
-			</div>
+			{!isTaskOpen ? (
+				<div className={styles.cargo_details}>
+					<CargoDetails primary_service={primary_service} />
+				</div>
+			) : null}
 		</div>
 	);
 }
