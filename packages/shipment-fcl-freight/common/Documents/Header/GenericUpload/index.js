@@ -7,7 +7,6 @@ import useListShipmentOrganizations from '../../../../hooks/useListShipmentOrgan
 import DocumentForm from '../DocumentForm';
 
 import getCreateDocumentParams from './getCreateDocumentParams';
-import styles from './styles.module.css';
 
 function GenericUpload({
 	showModal,
@@ -71,12 +70,12 @@ function GenericUpload({
 			>
 				<Modal.Header title="Upload Document" />
 
-				<Modal.Body className={styles.modal_container}>
+				<Modal.Body style={{ minHeight: '200px' }}>
 					{['booking_desk', 'document_desk'].includes(activeStakeholder) ? (
 						<Select
 							size="sm"
 							placeholder="Select Source"
-							style={{ padding: '6px', marginRight: '6px', width: '200px' }}
+							style={{ padding: '6px 0px', width: '50%' }}
 							value={filters?.uploaded_by_org_id}
 							options={SourceOptions || []}
 							onChange={(e) => setFilters({ ...filters, uploaded_by_org_id: e })}
@@ -100,7 +99,7 @@ function GenericUpload({
 
 				<Modal.Footer>
 					<Button
-						className={styles.footer}
+						style={{ marginRight: '16px' }}
 						themeType="secondary"
 						onClick={() => setShowModal(false)}
 					>

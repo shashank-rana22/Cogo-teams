@@ -2,8 +2,6 @@ import { RadioGroup } from '@cogoport/components';
 import { SelectController, UploadController } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
 
-import styles from './styles.module.css';
-
 const getConsigneeShipperId = (shipment_data) => {
 	const options = [
 		{
@@ -34,12 +32,13 @@ function UploadDocument({
 	return (
 		<div>
 			{!loading ? (
-				<div className={styles.conatiner}>
-					<div className={styles.select_container}>
+				<div>
+					<div>
 						<SelectController
 							size="sm"
 							control={control}
 							placeholder="Select Document Type"
+							style={{ padding: '32px 0px' }}
 							name="document_type"
 							options={documents}
 							rules={{ required: { value: true, message: 'Document is Required' } }}
