@@ -147,9 +147,10 @@ function AdvancePayment({ activeEntity }:ItemProps) {
 	// const [filters, setFilters] = useState({
 	// 	service: undefined,
 	// });
-
+	const [sort, setSort] = useState({});
 	console.log(activeEntity, 'entiyt');
-	const { filters, setFilters, data } = useGetAdvancePaymentList({ activeEntity });
+	const { filters, setFilters, data, loading } = useGetAdvancePaymentList({ activeEntity, sort });
+	const { pageIndex } = data || {};
 	console.log(data, 'data');
 	const functions = {
 		// renderBankDetails: (itemData) => (
@@ -231,7 +232,7 @@ function AdvancePayment({ activeEntity }:ItemProps) {
 		),
 	};
 	// const [isSortActive, setIsSortActive] = useState(null);
-	const [sort, setSort] = useState({});
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.sub_container}>
@@ -255,8 +256,15 @@ function AdvancePayment({ activeEntity }:ItemProps) {
 					itemData={data}
 					config={ADVANCE_CONFIG}
 					functions={functions}
+					loading={loading}
 					sort={sort}
 					setSort={setSort}
+					page={pageIndex}
+					pageSize={10}
+					handlePageChange={(val: number) => setFilters({
+						...filters,
+						pageIndex: val,
+					})}
 					showPagination
 				/>
 			</div>

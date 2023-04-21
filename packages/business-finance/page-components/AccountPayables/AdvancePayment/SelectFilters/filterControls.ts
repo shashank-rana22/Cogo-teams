@@ -22,6 +22,7 @@ export const filterControls = [
 			{ value: 'lcl_customs', label: 'LCL Customs' },
 			{ value: 'air_customs', label: 'AIR Customs' },
 			{ value: 'fcl_freight_local', label: 'FCL Freight Local' },
+			{ value: 'rail_domestic_freight', label: 'Rail Domestic Freight' },
 		],
 
 	},

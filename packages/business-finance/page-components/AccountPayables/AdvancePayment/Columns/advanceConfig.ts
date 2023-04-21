@@ -2,13 +2,9 @@ export const ADVANCE_CONFIG = {
 	showHeader   : true,
 	pageLimit    : 20,
 	headerStyles : {
-		// marginBottom : '16px',
 		borderRadius : '8px',
 		background   : 'none',
 		color        : 'black',
-		// borderBottom : '1.5px solid #F68B21',
-		// marginTop    : '20px',
-		// paddingLeft  : '14px',
 		marginLeft   : '8px',
 	},
 	bodyStyles: {
@@ -19,48 +15,31 @@ export const ADVANCE_CONFIG = {
 	},
 	fields: [
 		{
-			label : 'Incident Number',
-			key   : 'incidentRefNumber',
-			func  : 'renderIncidentNumber',
-			// topKey : {
-			// 	key     : 'incidentNumber',
-			// 	type    : 'pdfView',
-			// 	linkKey : 'documentUrl',
-			// },
-			// lowerKey: {
-			// 	key       : 'invoiceType',
-			// 	type      : 'tag',
-			// 	className : 'warning-tag',
-			// },
-			// func  : 'renderFieldPair',
-			// style : {
-			// 	position   : 'sticky',
-			// 	left       : '285px',
-			// 	background : 'white',
-			// 	transform  : 'translateX(-2px)',
-			// 	zIndex     : 1,
-			// },
-			span  : 0.9,
-		},
-		{
 			label : 'Adv. Doc. No.',
-			key   : 'advanceRefNo',
+			key   : 'advanceDocumentNo',
 			span  : 0.9,
 		},
 		{
-			label : 'SID',
-			key   : 'jobNumber',
-			// topKey : {
-			// 	key         : 'jobNumber',
-			// 	type        : 'href',
-			// 	redirectKey : 'shipmentId',
-			// },
-			// lowerKey: {
-			// 	key  : 'serviceType',
-			// 	type : 'serviceType',
-			// },
-			func  : 'renderSIDnumber',
-			span  : 0.7,
+			label : 'Incident Number',
+			key   : 'incidentRefNo',
+			func  : 'renderIncidentNumber',
+			span  : 0.9,
+		},
+
+		{
+			label  : 'SID',
+			key    : 'jobNumber',
+			topKey : {
+				key         : 'jobNumber',
+				type        : 'href',
+				redirectKey : 'shipmentId',
+			},
+			lowerKey: {
+				key  : 'serviceType',
+				type : 'serviceType',
+			},
+			func : 'renderSIDnumber',
+			span : 0.7,
 		},
 		{
 			label : 'Entity',
@@ -76,7 +55,7 @@ export const ADVANCE_CONFIG = {
 		},
 		{
 			label   : 'Advance Amount',
-			key     : 'advancedAmount',
+			key     : 'payableAmount',
 			func    : 'renderAmountWithCurrency',
 			sorting : { name: 'amountSortType' },
 			span    : 1.5,
@@ -84,21 +63,16 @@ export const ADVANCE_CONFIG = {
 		{
 			key     : 'requestedBy',
 			label   : 'Requested by & on',
-			sorting : { name: 'requestedDateSortType' },
+			sorting : { name: 'requestedAtSortType' },
 			span    : 1.5,
 			func    : 'renderRequestedBy',
 		},
 		{
 			label   : 'Approved by & on',
 			key     : 'approvedBy',
-			sorting : { name: 'approvedDateSortType' },
+			sorting : { name: 'approvedAtSortType' },
 			span    : 1.5,
 			func    : 'renderApprovedBy',
-		},
-		{
-			label : 'Document',
-			func  : 'renderDocument',
-			span  : 0.8,
 		},
 	],
 };

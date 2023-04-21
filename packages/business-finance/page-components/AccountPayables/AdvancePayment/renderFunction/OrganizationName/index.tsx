@@ -4,10 +4,11 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function OrganizationName({ itemData }) {
-	const { organizationName } = itemData || {};
+	const { advanceDocumentSellerAddress } = itemData || {};
+	const { organizationName } = advanceDocumentSellerAddress || {};
 	return (
 		<div className={styles.container}>
-			{organizationName?.length > 22
+			{organizationName?.length > 20
 				? (
 					<Tooltip
 						placement="top"
@@ -17,7 +18,7 @@ function OrganizationName({ itemData }) {
 
 							{`${organizationName.substring(
 								0,
-								22,
+								20,
 							)}...`}
 
 						</text>

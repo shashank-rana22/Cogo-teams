@@ -3,12 +3,20 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-const useGetAdvancePaymentList = ({ activeEntity }) => {
+interface NestedObj {
+	[key: string]: string;
+}
+interface FilterProps {
+	activeEntity: string;
+	sort: NestedObj;
+}
+const useGetAdvancePaymentList = ({ activeEntity, sort }:FilterProps) => {
 	const [filters, setFilters] = useState({
-		search  : undefined,
-		service : undefined,
+		search    : undefined,
+		service   : undefined,
+		pageIndex : 1,
 	});
-	const { search, service } = filters || {};
+	const { search, service, pageIndex } = filters || {};
 	const { query = '', debounceQuery } = useDebounceQuery();
 	useEffect(() => {
 		debounceQuery(search);
@@ -30,18 +38,20 @@ const useGetAdvancePaymentList = ({ activeEntity }) => {
 			try {
 				await trigger({
 					params: {
-						pageIndex  : 1,
-						pageSize   : 20,
-						q          : query !== '' ? query : undefined,
-						entityCode : activeEntity,
-						service,
+						pageIndex,
+						pageSize    : 10,
+						hasPayrun   : false,
+						q           : query !== '' ? query : undefined,
+						entityCode  : activeEntity,
+						serviceType : service || undefined,
+						...sort,
 					},
 				});
 			} catch (err) {
 				Toast.error(err.meessage);
 			}
 		})();
-	}, [query, trigger, activeEntity, service]);
+	}, [query, trigger, activeEntity, service, pageIndex, sort]);
 	useEffect(() => {
 		getAdvancedPayment();
 	}, [getAdvancedPayment]);
