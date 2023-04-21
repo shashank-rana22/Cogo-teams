@@ -8,7 +8,7 @@ import Child from './Child';
 
 function FieldArray(props) {
 	const {
-		name, control, item,
+		name, control,
 	} = props;
 
 	const { fields, append } = useFieldArray({ control, name });
@@ -16,10 +16,6 @@ function FieldArray(props) {
 	const { controls } = controlItem[0];
 
 	const childValues = {};
-
-	Object.values(controls).forEach((value) => {
-		childValues[value.name] = item[value.name] || '';
-	});
 
 	if (isEmpty(fields)) {
 		append(childValues);

@@ -1,8 +1,8 @@
-.list{
-    display: flex;
-    align-items: center;
+.list {
+	display: flex;
+	align-items: center;
 }
 
-.control{
-    margin: 4px;
+.control {
+	margin: 4px;
 }
