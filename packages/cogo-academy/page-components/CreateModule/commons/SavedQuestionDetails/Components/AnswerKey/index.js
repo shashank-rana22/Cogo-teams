@@ -25,8 +25,10 @@ function AnswerKey({ item, caseToShow }) {
 
 	return (
 		<Tooltip
+			className={styles.tooltip}
+			interactive
 			content={(
-				<div>
+				<div className={styles.whole_subjective}>
 					{
 					item?.question_type === 'subjective' ? (
 						<div dangerouslySetInnerHTML={{ __html: test_question_answers[0].answer_text }} />

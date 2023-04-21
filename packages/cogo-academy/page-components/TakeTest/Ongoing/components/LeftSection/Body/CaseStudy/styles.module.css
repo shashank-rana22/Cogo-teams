@@ -1,5 +1,6 @@
 .container {
 	display: flex;
+	max-height: 520px;
 }
 
 .pagination_container {

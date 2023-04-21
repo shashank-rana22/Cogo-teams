@@ -1,6 +1,6 @@
 .flex_column {
 	display: flex;
-	flex-direction: column;
+	flex-direction: column;	
 }
 
 .answer_key {
@@ -10,6 +10,16 @@
 	white-space: nowrap;
 }
 
+.whole_subjective {
+	max-height: 300px;
+	overflow-y: scroll;
+	word-break: keep-all;
+}
+
 .answer {
-	max-width: fit-content;
+	word-break: keep-all;
+}
+
+.tooltip {
+	min-width: 600px;
 }

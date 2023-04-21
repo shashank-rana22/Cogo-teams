@@ -73,6 +73,7 @@ function SingleQuestion({
 				onChange={setAnswer}
 				value={answer || []}
 				style={{ marginLeft: 'auto' }}
+				className={styles.options}
 			/>
 		</div>
 	);

@@ -48,8 +48,9 @@ const useGetTableColumns = ({
 			accessor : (item) => (
 				<Tooltip
 					interactive
+					className={styles.tooltip}
 					content={item?.question_type !== 'case_study'
-						? item?.question_text
+						? <div className={styles.q_text}>{item?.question_text}</div>
 						: <CaseQuestion item={item} from="tooltip" caseToShow={caseToShow} />}
 				>
 					<div

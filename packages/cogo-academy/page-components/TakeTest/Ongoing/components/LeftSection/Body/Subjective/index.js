@@ -49,32 +49,33 @@ function Subjective({
 		Either Type or Upload your answer. Do not try to do both. It may lead to miscalculation of your marks.
 	</div>
                 )
-            }
+			}
 
-			<div className={styles.question_01}>
-				<p>Q</p>
-				<div className={styles.text}>{question_text}</div>
-			</div>
-			<div>
-				<div className={styles.subjective_editor}>
-					<RichTextEditor
-						value={subjectiveAnswer}
-						onChange={((val) => { setSubjectiveAnswer(val); })}
-						required
-						id="body-text"
-						name="bodyText"
-						type="string"
-						multiline
-						variant="filled"
-						placeholder="Start Typing Here..."
-						rootStyle={{
-							zIndex    : 0,
-							position  : 'relative',
-							minHeight : '200px',
-						}}
-					/>
+			<div className={styles.subjective_part}>
+				<div className={styles.question_01}>
+					<p>Q</p>
+					<div className={styles.text}>{question_text}</div>
 				</div>
-				{
+				<div>
+					<div className={styles.subjective_editor}>
+						<RichTextEditor
+							value={subjectiveAnswer}
+							onChange={((val) => { setSubjectiveAnswer(val); })}
+							required
+							id="body-text"
+							name="bodyText"
+							type="string"
+							multiline
+							variant="filled"
+							placeholder="Start Typing Here..."
+							rootStyle={{
+								zIndex    : 0,
+								position  : 'relative',
+								minHeight : '200px',
+							}}
+						/>
+					</div>
+					{
                     allow_file_upload === true && (
 	<div className={styles.uploader}>
 		<FileUploader
@@ -88,6 +89,7 @@ function Subjective({
                     )
                 }
 
+				</div>
 			</div>
 		</div>
 	);
