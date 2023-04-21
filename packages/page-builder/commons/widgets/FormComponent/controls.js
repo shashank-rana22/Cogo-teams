@@ -60,47 +60,47 @@ const controls = [
 				},
 				options: [
 					{
-						label : 'text',
+						label : 'Text',
 						value : 'text',
 					},
 					{
-						label : 'number',
+						label : 'Number',
 						value : 'number',
 					},
 					{
-						label : 'select',
+						label : 'Select',
 						value : 'select',
 					},
 					{
-						label : 'multiSelect',
+						label : 'Multi-Select',
 						value : 'multiSelect',
 					},
 					{
-						label : 'asyncSelect',
+						label : 'Async-Select',
 						value : 'asyncSelect',
 					},
 					{
-						label : 'datePicker',
+						label : 'DatePicker',
 						value : 'datePicker',
 					},
 					{
-						label : 'mobileNumber',
+						label : 'Mobile Number',
 						value : 'mobileNumber',
 					},
 					{
-						label : 'chips',
+						label : 'Chips',
 						value : 'chips',
 					},
 					{
-						label : 'radioGroup',
+						label : 'RadioGroup',
 						value : 'radioGroup',
 					},
 					{
-						label : 'textarea',
+						label : 'Textarea',
 						value : 'textarea',
 					},
 					{
-						label : 'editor',
+						label : 'Editor',
 						value : 'editor',
 					},
 				],

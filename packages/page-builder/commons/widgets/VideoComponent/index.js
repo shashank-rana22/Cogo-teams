@@ -1,15 +1,13 @@
 import { IcMVideoCall } from '@cogoport/icons-react';
-import { useState } from 'react';
 
 import FileUploader from '../FileUploader';
 
 import styles from './styles.module.css';
 
 function VideoComponent(props) {
-	const { src, components, setComponents, childId, selectedRow } = props;
+	const { components, setComponents, childId, selectedRow, widget } = props;
 
-	const [fileValue, setFileValue] = useState();
-	const [isFocused, setIsFocused] = useState(false);
+	const { content = '' } = widget || {};
 
 	const handleFileChange = (val) => {
 		if (val) {
@@ -23,31 +21,28 @@ function VideoComponent(props) {
 				data.layouts[selectedComponentIndex].content = val;
 			}
 
-			setFileValue(val);
-
 			setComponents((prev) => ({ ...prev, layouts: data.layouts }));
 		}
 	};
 
 	return (
 		<div>
-			{fileValue ? (
+			{content ? (
 				<div
 					role="presentation"
-					onClick={() => setIsFocused(!isFocused)}
 				>
 					<iframe
 						className={styles.video_frame}
 						scrolling="no"
 						frameBorder="0"
 						title="Preview"
-						src={src}
+						src={content}
 						alt="upload-img"
 					/>
 				</div>
 			) : (
 				<FileUploader
-					value={src}
+					value={content}
 					onChange={(val) => handleFileChange(val)}
 					uploadDesc="Upload"
 					uploadIcon={<IcMVideoCall width="60px" height="60px" />}

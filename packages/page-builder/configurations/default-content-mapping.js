@@ -8,23 +8,15 @@ const CONTENT_MAPPING = {
 		attributes : {
 			contenteditable: true,
 		},
-		x : 4,
-		y : 6,
-		w : 12,
-		h : 2,
 	},
 
 	image: {
-		content    : 'https://www.cogoport.com/_next/image/?url=https%3A%2F%2Fcdn.cogoport.io%2Fcms-prod%2Fcogo_public%2Fvault%2Foriginal%2Fchannel-partner-header-2.png&w=1920&q=75',
+		content    : '',
 		alt        : 'add-img-url',
 		layouts    : [],
 		style      : {},
 		attributes : {},
 		type       : 'image',
-		x          : 4,
-		y          : 6,
-		w          : 12,
-		h          : 4,
 	},
 
 	button: {
@@ -38,11 +30,6 @@ const CONTENT_MAPPING = {
 		attributes  : {
 			onClick: 'handleSubmitClick',
 		},
-		x : 4,
-		y : 6,
-		w : 12,
-		h : 2,
-
 	},
 
 	html: {
@@ -56,10 +43,6 @@ const CONTENT_MAPPING = {
 		attributes  : {
 			onClick: 'handleSubmitClick',
 		},
-		x : 4,
-		y : 6,
-		w : 12,
-		h : 2,
 	},
 
 	form: {
@@ -74,11 +57,17 @@ const CONTENT_MAPPING = {
 		attributes  : {
 			onClick: 'handleSubmitClick',
 		},
-		x : 4,
-		y : 6,
-		w : 12,
-		h : 3,
 	},
+
+	video: {
+		content    : '',
+		alt        : 'add-img-url',
+		layouts    : [],
+		style      : {},
+		attributes : {},
+		type       : 'video',
+	},
+
 	container: {
 		content     : '',
 		redirectUrl : '',
@@ -91,10 +80,6 @@ const CONTENT_MAPPING = {
 		attributes  : {
 			onClick: 'handleSubmitClick',
 		},
-		x : 4,
-		y : 6,
-		w : 12,
-		h : 5,
 	},
 
 };

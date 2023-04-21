@@ -14,8 +14,10 @@
    border: 2px solid blue;
 }
 
-.container {
-    .ui_modal_body_container { 
-        max-height: 444px;
-    }
+.modal_styles {
+	:global {
+		.ui_modal_body_container {
+            max-height: 644px;
+		}
+	}
 }

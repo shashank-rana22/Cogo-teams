@@ -3,13 +3,3 @@
         max-height: 444px;
     }
 }
-
-.button_wrapper {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
-}
-
-.heading {
-    font-size: 20px;
-}

@@ -1,12 +1,3 @@
-.btn_grp {
-	display: flex;
-	justify-content: flex-end;
-}
-
-.flex_div {
-	display: flex;
-	flex-direction: column;
-}
 
 .flex_container {
 	display: flex;
@@ -18,16 +9,14 @@
 	padding: 8px;
 }
 
-.text {
-	font-weight: 500;
-	color: #2c3e50;
+.label {
+	margin-bottom: 4px;
+	text-align: left;
 }
 
 .error_message {
 	color: #e42525;
 }
 
-.label {
-	margin-bottom: 4px;
-	text-align: left;
-}
+
+

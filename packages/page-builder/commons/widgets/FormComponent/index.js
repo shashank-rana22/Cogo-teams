@@ -91,14 +91,6 @@ function FormComponent({
 
 	const showElements = showElementsFunc(controls, formValues);
 
-	const onClose = () => {
-		setShow(false);
-	};
-
-	const onDynamicFormSubmit = (values) => {
-		console.log('sjdjisdijo', values);
-	};
-
 	const onSubmit = (value) => {
 		const { controls: defaultControls, buttonText, heading } = value || {};
 
@@ -115,7 +107,7 @@ function FormComponent({
 				try {
 					options = JSON.parse(manual_options)?.options;
 				} catch (err) {
-					console.log('sdjsjdk', err);
+					console.log(err);
 				}
 			}
 
@@ -185,26 +177,32 @@ function FormComponent({
 		setComponents((prev) => ({ ...prev, layouts: data.layouts }));
 	};
 
+	const onClose = () => {
+		setShow(false);
+	};
+
+	const onDynamicFormSubmit = (values) => {
+		console.log('sjdjisdijo', values);
+	};
+
 	if (!isEmpty(dynamicControls)) {
 		return (
 			<DynamicFormComponent
 				errors={dynamicControlErrors || {}}
 				formData={formData}
 				control={dynamicControl}
-				// handleSubmit={dynamicHandleSubmit}
-				// onDynamicFormSubmit={onDynamicFormSubmit}
 			/>
 		);
 	}
 
 	return (
-		<div className={styles.container}>
+		<div>
 			<IcMPlusInCircle height="22px" width="22px" cursor="pointer" onClick={() => setShow(true)} />
 			<div>Click here to start Customizing your form</div>
 
-			<Modal size="xl" show={show} onClose={onClose} placement="center">
+			<Modal className={styles.modal_styles} size="xl" show={show} onClose={onClose} placement="center">
 				<Modal.Header title="Customize Form" />
-				<Modal.Body style={{ maxHeight: '600px' }}>
+				<Modal.Body>
 					<div className={styles.flex_item}>
 						<div className={styles.left_panel}>
 							<DynamicFormEditor formData={formValues} />

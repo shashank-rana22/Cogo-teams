@@ -1,12 +1,9 @@
-import { useState } from 'react';
-
 import FileUploader from '../FileUploader';
 
 function ImageComponent(props) {
-	const { components, setComponents, childId, selectedRow } = props;
+	const { components, setComponents, childId, selectedRow, widget } = props;
 
-	const [fileValue, setFileValue] = useState();
-	const [isFocused, setIsFocused] = useState(false);
+	const { content } = widget || {};
 
 	const handleFileChange = (val) => {
 		if (val) {
@@ -20,25 +17,21 @@ function ImageComponent(props) {
 				data.layouts[selectedComponentIndex].content = val;
 			}
 
-			setFileValue(val);
-
 			setComponents((prev) => ({ ...prev, layouts: data.layouts }));
 		}
 	};
 
 	return (
 		<div>
-			{fileValue ? (
+			{content ? (
 				<div
 					role="presentation"
-					onClick={() => setIsFocused(!isFocused)}
 				>
-					<img width="100%" src={fileValue} alt="upload-img" />
+					<img width="100%" src={content} alt="upload-img" />
 				</div>
 			) : (
-
 				<FileUploader
-					value={fileValue}
+					value={content}
 					onChange={(val) => handleFileChange(val)}
 					accept="png"
 					uploadDesc="Upload"

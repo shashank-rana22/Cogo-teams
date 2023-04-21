@@ -37,8 +37,8 @@ function RenderComponents({
 		},
 
 		image: {
-			key : elementId,
-			src : widget.content,
+			key: elementId,
+			widget,
 			components,
 			setComponents,
 			childId,
@@ -54,8 +54,8 @@ function RenderComponents({
 		},
 
 		video: {
-			key : elementId,
-			src : widget.content,
+			key: elementId,
+			widget,
 			components,
 			setComponents,
 			childId,

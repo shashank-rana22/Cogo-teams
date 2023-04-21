@@ -1,5 +1,7 @@
 import { Button } from '@cogoport/components';
 
+import styles from './styles.module.css';
+
 function ButtonComponent(props) {
 	const {
 		widget,
@@ -10,7 +12,7 @@ function ButtonComponent(props) {
 	const { onClick = () => {} } = attributes || {};
 
 	return (
-		<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+		<div className={styles.button_wrapper}>
 			<Button
 				type={type}
 				themeType={themeType}

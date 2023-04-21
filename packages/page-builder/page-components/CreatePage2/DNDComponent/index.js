@@ -19,8 +19,6 @@ function DNDComponent() {
 		},
 	});
 
-	console.log('sdkjisodk', component);
-
 	const [showContentModal, setShowContentModal] = useState(false);
 	const [parentComponentId, setParentComponentId] = useState(null);
 	const [mode, setMode] = useState({

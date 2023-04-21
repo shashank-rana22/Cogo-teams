@@ -119,7 +119,6 @@ function Child({
 						className={styles.align_remove}
 					>
 						<IcMDelete
-							className={`form-fieldArray-${name}-remove`}
 							onClick={() => remove(index, 1)}
 							width="20px"
 							height="20px"

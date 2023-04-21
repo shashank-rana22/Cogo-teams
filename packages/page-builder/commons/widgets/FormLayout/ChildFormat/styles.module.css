@@ -6,30 +6,6 @@
 .button_wrap {
 	display: flex;
 	margin-top: 20px;
-
-	.core-ui-button-root {
-		background: #FFFFFF;
-		border: 1px solid #000000;
-		color: #000000;
-		border-radius: 4px;
-		font-size: 12px;
-		padding: 14px 32px 14px 14px;
-		height: 44px;
-		display: flex;
-		align-items: center;
-	}
-}
-
-.add_icon {
-	width: 30px;
-    height: 30px;
-    background: #000000;
-    color: #ffffff;
-    border-radius: 100%;
-    font-size: 28px;
-    padding-left: 1px;
-    margin-right: 10px;
-    font-weight: 300;
 }
 
 .label {
@@ -45,7 +21,7 @@
 }
 
 
-.container_wrapper{
+.container_wrapper {
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 14px;
@@ -58,9 +34,13 @@
 }
 
 
-.align_remove{
+.align_remove {
 	padding: 8px;
 	flex-basis: 5%;
 	display: flex;
 	align-items: center;
+}
+
+.error_message {
+	color: #e42525;
 }
