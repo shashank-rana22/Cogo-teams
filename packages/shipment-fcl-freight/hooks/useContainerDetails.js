@@ -90,7 +90,19 @@ const useContainerDetails = ({
 
 	const { modifiedControls, showElements } = getControls({ apis_data });
 
-	const { control, watch, setValue, formState:{ errors = {} }, handleSubmit, setError } = useForm();
+	const { control, watch, setValue, formState:{ errors = {} }, handleSubmit, setError } = useForm({
+		defaultValues: {
+			container: [
+				{
+					id                     : '',
+					bl_id                  : '',
+					bl_number              : '',
+					container_number       : '',
+					picked_up_from_yard_at : '',
+				},
+			],
+		},
+	});
 
 	const formValues = watch();
 

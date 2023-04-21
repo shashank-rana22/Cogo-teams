@@ -80,7 +80,7 @@ function TaskForm({
 
 			<div className={styles.layout}>
 				<Layout
-					fields={modifiedControls[0]?.controls}
+					fields={modifiedControls}
 					control={control}
 					errors={errors}
 					showElements={showElements}
