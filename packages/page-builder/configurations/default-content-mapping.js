@@ -8,6 +8,10 @@ const CONTENT_MAPPING = {
 		attributes : {
 			contenteditable: true,
 		},
+		x : 4,
+		y : 6,
+		w : 12,
+		h : 2,
 	},
 
 	image: {
@@ -17,6 +21,10 @@ const CONTENT_MAPPING = {
 		style      : {},
 		attributes : {},
 		type       : 'image',
+		x          : 4,
+		y          : 6,
+		w          : 12,
+		h          : 4,
 	},
 
 	button: {
@@ -30,6 +38,10 @@ const CONTENT_MAPPING = {
 		attributes  : {
 			onClick: 'handleSubmitClick',
 		},
+		x : 4,
+		y : 6,
+		w : 12,
+		h : 2,
 
 	},
 
@@ -44,6 +56,10 @@ const CONTENT_MAPPING = {
 		attributes  : {
 			onClick: 'handleSubmitClick',
 		},
+		x : 4,
+		y : 6,
+		w : 12,
+		h : 2,
 	},
 
 	form: {
@@ -58,7 +74,29 @@ const CONTENT_MAPPING = {
 		attributes  : {
 			onClick: 'handleSubmitClick',
 		},
+		x : 4,
+		y : 6,
+		w : 12,
+		h : 3,
 	},
+	container: {
+		content     : '',
+		redirectUrl : '',
+		themeType   : 'primary',
+		size        : 'md',
+		layouts     : [],
+		style       : {},
+		type        : 'container',
+		formData    : {},
+		attributes  : {
+			onClick: 'handleSubmitClick',
+		},
+		x : 4,
+		y : 6,
+		w : 12,
+		h : 5,
+	},
+
 };
 
 export default CONTENT_MAPPING;

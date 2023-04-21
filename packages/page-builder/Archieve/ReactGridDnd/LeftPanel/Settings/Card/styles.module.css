@@ -1,0 +1,25 @@
+
+.label_container{
+    background-color: #f1f1f1;
+    padding: 0px 8px;
+    border-radius: 4px;
+}
+.label{
+    font-size: 18px;
+    margin: 12px 0px 4px 0;
+}
+.section{
+   display: grid;
+   grid-template-columns: auto auto;
+}
+.section_label{
+    margin: 8px 0px;
+}
+
+.background_image{
+    display: flex;
+    align-items: center;
+}
+.icons{
+    cursor: pointer;
+}

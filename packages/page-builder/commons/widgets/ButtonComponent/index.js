@@ -10,7 +10,7 @@ function ButtonComponent(props) {
 	const { onClick = () => {} } = attributes || {};
 
 	return (
-		<div style={{ height: '60px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+		<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 			<Button
 				type={type}
 				themeType={themeType}
