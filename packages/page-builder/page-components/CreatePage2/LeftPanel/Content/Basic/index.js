@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import dynamic from 'next/dynamic';
 import React, { useMemo } from 'react';
 
@@ -37,7 +36,7 @@ function Basic(props) {
 
 	if (type === 'html' && componentType !== 'child') {
 		return (
-			<div className={styles.container}>
+			<div className={styles.editor_container}>
 				<HTMLEditor
 					component={component}
 					setComponent={setComponent}

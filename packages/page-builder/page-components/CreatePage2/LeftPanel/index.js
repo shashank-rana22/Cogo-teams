@@ -20,8 +20,6 @@ function LeftPanel(props) {
 		selectedItem,
 	} = props;
 
-	console.log('sdksl', selectedItem);
-
 	return (
 		<Tabs
 			fullWidth

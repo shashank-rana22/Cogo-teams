@@ -30,7 +30,7 @@ const modules = {
 function TextComponent(props) {
 	const { widget, components, setComponents, childId, selectedRow } = props;
 
-	const { content } = widget || {};
+	const { content = 'Start Typing...' } = widget || {};
 
 	const [editorValue, setEditorValue] = useState(content);
 
@@ -57,7 +57,7 @@ function TextComponent(props) {
 		return (
 			<ReactQuill
 				theme="snow"
-				placeholder={content || 'start typing'}
+				placeholder="start typing"
 				value={editorValue}
 				modules={modules}
 				onChange={handleEditorChange}

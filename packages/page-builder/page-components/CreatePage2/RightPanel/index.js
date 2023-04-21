@@ -1,10 +1,8 @@
-/* eslint-disable max-len */
 import { IcMCrossInCircle, IcMDuplicate } from '@cogoport/icons-react';
 import React, { useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { v1 as uuid } from 'uuid';
 
-// import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css';
 import VALID_ITEM_TYPES from '../../../configurations/accept-items';
 
@@ -33,13 +31,6 @@ function RightPanel(props) {
 	const [childId, setChildId] = useState('');
 
 	const { type, id: elementId } = widget || {};
-
-	// const [state, setState] = useState({
-	// 	width  : 800,
-	// 	height : 170,
-	// });
-
-	// const { width, height } = state || {};
 
 	const itemRef = useRef(null);
 
@@ -135,7 +126,9 @@ function RightPanel(props) {
 			const { content, attributes } = properties || {};
 			const { type: childType } = content || {};
 
-			const newAttributes = !childType ? { onClick: () => handleSubmitClick({ childrenId: item.id, parentId: newId }) } : attributes;
+			const newAttributes = !childType ? {
+				onClick: () => handleSubmitClick({ childrenId: item.id, parentId: newId }),
+			} : attributes;
 
 			return ({ ...item, parentId: newId, properties: { ...properties, attributes: newAttributes } });
 		});
@@ -165,16 +158,6 @@ function RightPanel(props) {
 	const border = isSelected && '1px solid #88cad1';
 
 	return (
-
-	// <ResizableBox
-	// 	className="box"
-	// 	axis={type === 'container' ? 'none' : 'both'}
-	// 	minConstraints={[200, 200]}
-	// 	maxConstraints={[800, 400]}
-	// 	height={height}
-	// 	width={width}
-	// 	onResize={onResize}
-	// >
 		<div
 			role="presentation"
 			ref={itemRef}
@@ -185,21 +168,47 @@ function RightPanel(props) {
 				opacity,
 				border,
 			}}
-			className={styles.element_Container}
+			className={styles.element_container}
 		>
 
 			<div>
 				{type === 'container'
-					? <ComponentBuilder widget={widget} components={components} setComponents={setComponents} selectedRow={selectedRow} childId={childId} setChildId={setChildId} setSelectedItem={setSelectedItem} />
-					: <RenderComponents componentType={type} widget={widget} components={components} setComponents={setComponents} elementId={elementId} childId={childId} selectedRow={selectedRow} setSelectedItem={setSelectedItem} index={index} />}
+					? (
+						<ComponentBuilder
+							widget={widget}
+							components={components}
+							setComponents={setComponents}
+							selectedRow={selectedRow}
+							childId={childId}
+							setChildId={setChildId}
+							setSelectedItem={setSelectedItem}
+						/>
+					)
+					: (
+						<RenderComponents
+							componentType={type}
+							widget={widget}
+							components={components}
+							setComponents={setComponents}
+							elementId={elementId}
+							childId={childId}
+							selectedRow={selectedRow}
+							setSelectedItem={setSelectedItem}
+							index={index}
+						/>
+					)}
 			</div>
 
 			<div role="presentation" className={styles.change}>
-				<IcMCrossInCircle height="24px" width="24px" cursor="pointer" onClick={(e) => handleDelete(e, widget)} />
+				<IcMCrossInCircle
+					height="24px"
+					width="24px"
+					cursor="pointer"
+					onClick={(e) => handleDelete(e, widget)}
+				/>
 				<IcMDuplicate height="24px" width="24px" cursor="pointer" onClick={(e) => handleCopy(e, widget)} />
 			</div>
 		</div>
-	// </ResizableBox>
 	);
 }
 

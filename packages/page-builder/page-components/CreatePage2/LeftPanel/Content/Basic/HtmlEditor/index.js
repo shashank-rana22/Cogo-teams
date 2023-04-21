@@ -1,9 +1,11 @@
 import { Button } from '@cogoport/components';
 import React, { useState, useEffect } from 'react';
 import AceEditor from 'react-ace';
+
 import 'ace-builds/src-noconflict/mode-html';
 import 'ace-builds/src-noconflict/theme-github';
 import 'ace-builds/src-noconflict/ext-language_tools';
+import styles from './styles.module.css';
 
 function HtmlEditor(props) {
 	const { component, setComponent, selectedRow, selectedItem } = props;
@@ -34,10 +36,8 @@ function HtmlEditor(props) {
 	};
 
 	return (
-		<div style={{ width: '100%' }}>
-
-			<div style={{ marginBottom: '12px' }}>
-
+		<div>
+			<div className={styles.sidebar_wrapper}>
 				<Button
 					themeType="secondary"
 					type="button"
@@ -51,7 +51,7 @@ function HtmlEditor(props) {
 				theme="github"
 				onChange={handleEditorChange}
 				name="editor"
-				width="350px"
+				width="100%"
 				height="600px"
 				editorProps={{ $blockScrolling: true }}
 			/>

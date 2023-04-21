@@ -13,10 +13,10 @@ function ListPages() {
 	};
 
 	const { width, height } = state || {};
+
 	return (
 		<div>
 			<Resizable
-				className="box"
 				axis="both"
 				minConstraints={[200, 200]}
 				height={height}
@@ -24,14 +24,13 @@ function ListPages() {
 				onResize={onResize}
 			>
 				<div
-					className="box"
 					style={{
 						width           : `${width}px`,
 						height          : `${height}px`,
 						backgroundColor : 'lightblue',
 					}}
 				>
-					<span className="text">Welcome to Cogo Page Builder 😛🍻</span>
+					<span>Welcome to Cogo Page Builder 😛🍻</span>
 				</div>
 			</Resizable>
 		</div>

@@ -3,7 +3,7 @@
 	display: none;
 }	
 
-.element_Container {
+.element_container {
 	padding: 16px;
 	&:hover {
 		border: 1px solid #88cad1;
@@ -15,7 +15,6 @@
 			right: 0;
 			z-index: 2;	
 			top: 0;
-			/* transform: translateY(50%); */
 		}
 	}
 }
