@@ -2207,7 +2207,7 @@ const saas = {
 			module       : 'cogo-store',
 			feature      : 'cogo-store',
 			service_name : 'cogopoint',
-		},	
+		},
 	],
 
 };
