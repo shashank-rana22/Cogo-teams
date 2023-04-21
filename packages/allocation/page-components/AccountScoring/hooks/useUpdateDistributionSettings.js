@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 
 function useUpdateDistributionSettings() {
 	const [{ loading }, trigger] = useAllocationRequest({
@@ -10,45 +11,49 @@ function useUpdateDistributionSettings() {
 	}, { manual: true });
 
 	const onClickSave = async (formValues, onClose, refetch, preFilledList, performed_by_id) => {
-		const {
-			flame_hot_range_from, flame_hot_range_to,
-			hot_range_from, hot_range_to,
-			warm_range_from, warm_range_to,
-			cold_range_from, cold_range_to,
-			icy_cold_range_from, icy_cold_range_to,
-		} = formValues;
+		const valuesForPrefilling = [];
+
+		preFilledList.forEach((element) => {
+			const { id = '' } = element;
+
+			const scores = { id };
+			const scoring_criteria = {};
+
+			Object.keys(formValues).forEach((item) => {
+				const first_index = item.indexOf('_');
+
+				if (id === item.substring(0, first_index)) {
+					const attribute = item.substring(first_index + 1);
+
+					scoring_criteria[attribute] = formValues[item];
+				}
+			});
+
+			scores.scoring_criteria = scoring_criteria;
+
+			if (!isEmpty(scores.scoring_criteria)) {
+				valuesForPrefilling.push(scores);
+			}
+		});
+
+		const setting_details = [];
+
+		valuesForPrefilling.forEach((element) => {
+			const obj = {};
+			obj.setting_id = element.id || undefined;
+			obj.lower_limit = element.scoring_criteria.range_from || undefined;
+			obj.upper_limit = element.scoring_criteria.range_to || undefined;
+
+			setting_details.push(obj);
+		});
+
+		console.log(setting_details);
 
 		try {
 			const payload = {
 				performed_by_id,
-				performed_by_type : 'agent',
-				setting_details   : [
-					{
-						setting_id  : preFilledList[0]?.id,
-						lower_limit : flame_hot_range_from || undefined,
-						upper_limit : flame_hot_range_to || undefined,
-					},
-					{
-						setting_id  : preFilledList[1]?.id,
-						lower_limit : hot_range_from || undefined,
-						upper_limit : hot_range_to || undefined,
-					},
-					{
-						setting_id  : preFilledList[2]?.id,
-						lower_limit : warm_range_from || undefined,
-						upper_limit : warm_range_to || undefined,
-					},
-					{
-						setting_id  : preFilledList[3]?.id,
-						lower_limit : cold_range_from || undefined,
-						upper_limit : cold_range_to || undefined,
-					},
-					{
-						setting_id  : preFilledList[4]?.id,
-						lower_limit : icy_cold_range_from || undefined,
-						upper_limit : icy_cold_range_to || undefined,
-					},
-				],
+				performed_by_type: 'agent',
+				setting_details,
 			};
 
 			await trigger({

@@ -1,3 +1,5 @@
+import { startCase } from '@cogoport/utils';
+
 import { getFieldController } from '../../../../../../../common/Form/getFieldController';
 
 import styles from './styles.module.css';
@@ -32,7 +34,7 @@ function SettingsItem(props) {
 							}
 
 					<div className={styles.headers}>
-						{item.warmth || ''}
+						{startCase(item.warmth) || ''}
 					</div>
 				</div>
 			)}
