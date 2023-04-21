@@ -17,6 +17,7 @@ import {
 	listVendors,
 	asyncListCogoEntity,
 	asyncListHsCodes,
+	asyncListCurrency,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -39,19 +40,20 @@ import {
  */
 
 const keyAsyncFieldsParamsMapping = {
-	list_vendors           : listVendors,
-	organizations          : asyncFieldsOrganizations,
-	organization_users     : asyncFieldsOrganizationUser,
-	partners               : asyncFieldsPartner,
-	partner_users          : asyncFieldsPartnerUsers,
-	partner_roles          : asyncFieldsPartnerRoles,
-	segments               : asyncFieldsCampaignSegments,
-	list_locations         : asyncFieldsLocations,
-	list_operators         : asyncFieldsListOperators,
-	list_rate_charge_codes : asyncFieldListRateChargeCodes,
-	allot_bank             : asyncAllotBanks,
-	list_cogo_entity       : asyncListCogoEntity,
-	list_hs_codes        	 : asyncListHsCodes,
+	list_vendors                  : listVendors,
+	organizations                 : asyncFieldsOrganizations,
+	organization_users            : asyncFieldsOrganizationUser,
+	partners                      : asyncFieldsPartner,
+	partner_users                 : asyncFieldsPartnerUsers,
+	partner_roles                 : asyncFieldsPartnerRoles,
+	segments                      : asyncFieldsCampaignSegments,
+	list_locations                : asyncFieldsLocations,
+	list_operators                : asyncFieldsListOperators,
+	list_rate_charge_codes        : asyncFieldListRateChargeCodes,
+	allot_bank                    : asyncAllotBanks,
+	list_cogo_entity              : asyncListCogoEntity,
+	list_hs_codes               	 : asyncListHsCodes,
+	list_exchange_rate_currencies : asyncListCurrency,
 };
 
 function AsyncSelect(props) {

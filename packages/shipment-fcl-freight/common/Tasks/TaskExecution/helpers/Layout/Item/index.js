@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import React from 'react';
 
 import getElementController from '../getController';
@@ -15,6 +16,7 @@ function Item(props) {
 		error,
 		heading,
 		rules,
+		className,
 	} = props || {};
 
 	const errorOriginal = getErrorMessage({
@@ -51,19 +53,25 @@ function Item(props) {
 	const flex = ((span || 12) / 12) * 100 - 1;
 
 	return (
-		<div className={styles.element} style={{ width: `${flex}%`, padding: '4px' }}>
-			<div style={{
-				height: '16px', marginBottom: '6px', fontWeight: '600', fontSize: '13px',
-			}}
-			>
-				{heading}
-			</div>
-			<h4 style={{
-				height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
-			}}
-			>
-				{label}
-			</h4>
+		<div className={cl`${styles.element} ${className}`} style={{ width: `${flex}%`, padding: '4px' }}>
+			{heading ? (
+				<div style={{
+					height: '16px', marginBottom: '6px', fontWeight: '600', fontSize: '13px',
+				}}
+				>
+					{heading}
+				</div>
+			) : null}
+
+			{label ?	(
+				<h4 style={{
+					height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
+				}}
+				>
+					{label}
+				</h4>
+			) : null}
+
 			<Element
 				{...newProps}
 				control={control}

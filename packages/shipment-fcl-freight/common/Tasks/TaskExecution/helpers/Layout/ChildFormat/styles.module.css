@@ -1,12 +1,14 @@
 .row {
 	display: flex;
 	width: 100%;
+	flex-wrap: wrap;
 }
 
 .fieldarray {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	flex-wrap: wrap;
 	margin: 4px;
 }
 

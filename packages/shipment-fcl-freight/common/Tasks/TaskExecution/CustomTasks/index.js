@@ -5,3 +5,4 @@ export { default as ChooseServiceProvider } from './ChooseServiceProvider';
 export { default as UploadCargoArrival } from './UploadCargoArrival';
 export { default as UploadContainerDetails } from './UpdateContainerDetails';
 export { default as NominationTask } from './NominationTask';
+export { default as GenerateFreightCertificate } from './GenerateFreightCertificate';

@@ -252,6 +252,20 @@ function asyncListHsCodes() {
 	};
 }
 
+function asyncListCurrency() {
+	return {
+		labelKey    : 'iso_code',
+		valueKey    : 'id',
+		endpoint    : 'list_exchange_rate_currencies',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -272,4 +286,5 @@ export {
 	listVendors,
 	asyncListCogoEntity,
 	asyncListHsCodes,
+	asyncListCurrency,
 };

@@ -1,9 +1,12 @@
 import { ShipmentDetailContext } from '@cogoport/context';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 
-import { UploadBookingNote, UploadCargoArrival, UploadContainerDetails, MarkConfirmServices } from './CustomTasks';
+import {
+	UploadBookingNote, UploadCargoArrival, UploadContainerDetails,
+	MarkConfirmServices, NominationTask, GenerateFreightCertificate, ChooseServiceProvider,
+} from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
@@ -13,9 +16,9 @@ const excludeServices = [
 ];
 
 function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {}, services = [] }) {
-	const { primary_service, shipment_data } = useContext(ShipmentDetailContext);
-
 	const { taskConfigData, loading } = useGetTaskConfig({ task });
+
+	const { servicesList, shipment_data, primary_service } = useContext(ShipmentDetailContext);
 
 	const {
 		steps,
@@ -96,8 +99,44 @@ function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {
 		return <div>Amend draft bl flow</div>;
 	}
 
+	if (task.task === 'choose_service_provider') {
+		return (
+			<div>
+				<ChooseServiceProvider
+					task={task}
+					onCancel={onCancel}
+					refetch={taskListRefetch}
+					services={servicesList}
+				/>
+			</div>
+		);
+	}
+
+	if (
+		task.task === 'update_nomination_details'
+	) {
+		return (
+			<NominationTask
+				primaryService={primary_service}
+				shipmentData={shipment_data}
+				task={task}
+				onCancel={onCancel}
+				refetch={taskListRefetch}
+			/>
+		);
+	}
+
+	if (task.task === 'generate_freight_certificate') {
+		return (
+			<GenerateFreightCertificate
+				task={task}
+				refetch={taskListRefetch}
+				onCancel={onCancel}
+			/>
+		);
+	}
+
 	return (
-	// <div>
 		<ExecuteStep
 			task={task}
 			stepConfig={stepConfigValue}
@@ -110,7 +149,6 @@ function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {
 			getApisData={taskConfigData?.apis_data}
 			uiConfig={taskConfigData?.task_config?.ui_config[currentStep]}
 		/>
-	// </div>
 	);
 }
 

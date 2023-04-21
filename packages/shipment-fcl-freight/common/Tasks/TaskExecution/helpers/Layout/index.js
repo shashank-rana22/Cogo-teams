@@ -1,15 +1,18 @@
+import { cl } from '@cogoport/components';
 import React from 'react';
 
 import FieldArray from './ChildFormat';
+import EditServiceCharges from './EditServiceCharges';
 import Item from './Item';
 import styles from './styles.module.css';
 
 function Layout({
-	control, fields, showElements = {}, errors,
+	control, fields, showElements = {}, errors, customValues = {},
 }) {
 	let rowWiseFields = [];
 	const totalFields = [];
 	let span = 0;
+
 	(fields || []).forEach((field) => {
 		const { [field.name]: showItem = true } = showElements;
 		if (showItem) {
@@ -29,23 +32,25 @@ function Layout({
 			}
 		}
 	});
+
 	if (rowWiseFields.length) {
 		totalFields.push(rowWiseFields);
 	}
-	console.log(totalFields, 'firrr');
 	return (
 		<div className={styles.layout}>
 			{totalFields.map((rowFields) => (
-				<div className={styles.row}>
+				<div className={cl`${styles.row} form_layout_row`}>
 					{rowFields.map((field) => {
 						const { type, heading = '' } = field;
 
 						if (type === 'fieldArray') {
 							return (
-								<div style={{ width: '100%' }}>
-									<div className={styles.heading}>
-										{heading}
-									</div>
+								<div className={styles.width_100}>
+									{heading ? (
+										<div className={styles.heading}>
+											{heading}
+										</div>
+									) : null}
 
 									<FieldArray
 										{...field}
@@ -56,6 +61,19 @@ function Layout({
 								</div>
 							);
 						}
+
+						if (type === 'edit_service_charges') {
+							return (
+								<div className={styles.width_100}>
+									<EditServiceCharges
+										control={control}
+										customValues={customValues[field.name]}
+										{...field}
+									/>
+								</div>
+							);
+						}
+
 						return (
 							<Item
 								control={control}

@@ -1,8 +1,8 @@
 const getControls = ({
 	taskData,
 	task,
-	primary_service = {},
-	shipment_data = {},
+	primaryService = {},
+	shipmentData = {},
 }) => {
 	const options = [];
 
@@ -47,7 +47,7 @@ const getControls = ({
 			name        : 'email_body',
 			type        : 'textarea',
 			// eslint-disable-next-line max-len
-			value       : `We have received nomination from below customer for ${primary_service?.origin_port?.display_name} to ${primary_service?.destination_port?.display_name}`,
+			value       : `We have received nomination from below customer for ${primaryService?.origin_port?.display_name} to ${primaryService?.destination_port?.display_name}`,
 			span        : 12,
 			label       : 'Email Body',
 			placeholder : 'Add Email Body Here',
@@ -60,7 +60,7 @@ const getControls = ({
 			label : 'Shipper Details',
 			rules : { required: 'Shipper Details is required' },
 			span  : 4,
-			value : shipment_data?.importer_exporter?.business_name || '',
+			value : shipmentData?.importer_exporter?.business_name || '',
 			size  : 'sm',
 		},
 		{
@@ -69,7 +69,7 @@ const getControls = ({
 			label : 'Consignee Details',
 			rules : { required: 'Consignee Details is required' },
 			span  : 4,
-			value : shipment_data?.importer_exporter?.business_name || '',
+			value : shipmentData?.importer_exporter?.business_name || '',
 			size  : 'sm',
 		},
 		{
@@ -78,7 +78,7 @@ const getControls = ({
 			rules : { required: 'Commodity is required' },
 			label : 'Commodity',
 			span  : 4,
-			value : primary_service?.commodity_description || '',
+			value : primaryService?.commodity_description || '',
 			size  : 'sm',
 		},
 		{
@@ -87,7 +87,7 @@ const getControls = ({
 			rules : { required: 'HS Code is required' },
 			label : 'HS Code',
 			span  : 4,
-			value : primary_service?.hs_code?.hs_code_name || '',
+			value : primaryService?.hs_code?.hs_code_name || '',
 			size  : 'sm',
 		},
 		{
@@ -96,7 +96,7 @@ const getControls = ({
 			rules : { required: 'Cargo Wt. is required' },
 			label : 'Cargo Weight (Per Container)',
 			span  : 4,
-			value : primary_service?.cargo_weight_per_container || '',
+			value : primaryService?.cargo_weight_per_container || '',
 			size  : 'sm',
 		},
 		{
@@ -105,7 +105,7 @@ const getControls = ({
 			rules : { required: 'Detention days is required' },
 			label : 'Free Detention Days',
 			span  : 4,
-			value : primary_service?.free_days_detention_destination || '',
+			value : primaryService?.free_days_detention_destination || '',
 			size  : 'sm',
 		},
 	];
