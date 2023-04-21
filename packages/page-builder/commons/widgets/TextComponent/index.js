@@ -28,7 +28,7 @@ const modules = {
 };
 
 function TextComponent(props) {
-	const { text, components, setComponents, childId, selectedRow, style } = props;
+	const { text, components, setComponents, childId, selectedRow } = props;
 
 	const [editorValue, setEditorValue] = useState(text);
 
@@ -73,7 +73,7 @@ function TextComponent(props) {
 			content={Editor()}
 		>
 
-			<div style={style} dangerouslySetInnerHTML={{ __html: text }} />
+			<div dangerouslySetInnerHTML={{ __html: text }} />
 		</Popover>
 
 	);

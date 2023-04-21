@@ -5,8 +5,6 @@ import FileUploader from '../FileUploader';
 function ImageComponent(props) {
 	const { components, setComponents, childId, selectedRow, style } = props;
 
-	console.log('modified style ::', style);
-
 	const [fileValue, setFileValue] = useState();
 	const [isFocused, setIsFocused] = useState(false);
 
@@ -38,7 +36,6 @@ function ImageComponent(props) {
 					<img width="100%" src={fileValue} alt="upload-img" />
 				</div>
 			) : (
-
 				<FileUploader
 					value={fileValue}
 					onChange={(val) => handleFileChange(val)}

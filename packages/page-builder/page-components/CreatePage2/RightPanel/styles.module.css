@@ -4,9 +4,9 @@
 }	
 
 .element_Container {
-	padding: 16px;
+	padding: 4px;
 	&:hover {
-		border: 1px solid #88cad1;
+		border: 1px solid red;
 		.change {
 			display: flex;
 			flex-direction: column;

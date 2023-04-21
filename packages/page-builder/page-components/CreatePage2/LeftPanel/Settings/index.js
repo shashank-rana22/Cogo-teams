@@ -17,10 +17,41 @@ const settingsMapping = {
 	button : buttonSettings,
 };
 
-function Settings(props) {
-	const { component, setComponent, selectedItem, setSelectedItem } = props;
+function updateSelectedElement(key, value, children, selectedRowId, selectedItemId) {
+	return children.map((child) => {
+		if (['text', 'button', 'image'].includes(child.type) && child.id === selectedItemId) {
+			return {
+				...child,
+				style: {
+					...child.style,
+					[key]: value,
+				},
+			};
+		}
 
-	console.log('component ::', component);
+		if (child.type === 'container' && child.id === selectedRowId) {
+			if (child.id === selectedItemId) {
+				return {
+					...child,
+					style: {
+						...child.style,
+						[key]: value,
+					},
+				};
+			}
+
+			return {
+				...child,
+				children: updateSelectedElement(key, value, child.children, selectedRowId, selectedItemId),
+			};
+		}
+
+		return child;
+	});
+}
+
+function Settings(props) {
+	const { component, setComponent, selectedItem, selectedRow, setSelectedItem } = props;
 
 	const [showUploadModal, setShowUploadModal] = useState(false);
 
@@ -44,29 +75,19 @@ function Settings(props) {
 				}));
 			} else {
 				const { id: selectedItemId } = selectedItem;
+				const { id : selectedRowId } = selectedRow;
 
-				const selectedElement = component.layouts.find(
-					(layout) => layout.id === selectedItemId,
+				const modifiedLayouts = updateSelectedElement(
+					key,
+					value,
+					component.layouts,
+					selectedRowId,
+					selectedItemId,
 				);
-
-				console.log('selected element ::', selectedElement);
-
-				const modifiedComponent = {
-					...selectedElement,
-					style: {
-						...selectedElement?.style,
-						[key]: value,
-					},
-				};
 
 				setComponent((prev) => ({
 					...prev,
-					layouts: prev.layouts.map((layout) => {
-						if (layout.id === selectedItemId) {
-							return modifiedComponent;
-						}
-						return layout;
-					}),
+					layouts: modifiedLayouts,
 				}));
 
 				setSelectedItem((prev) => ({
@@ -79,6 +100,7 @@ function Settings(props) {
 			}
 		},
 		[
+			selectedRow,
 			setSelectedItem,
 			component.layouts,
 			selectedItem,

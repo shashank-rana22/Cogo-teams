@@ -209,7 +209,7 @@ function RightPanel(props) {
 
 	const opacity = isNewItemAdding && !id ? '0.3' : '1';
 
-	const border = isSelected && '1px solid #88cad1';
+	const border = isSelected && '1px solid red';
 
 	const handleClick = (e) => {
 		e.stopPropagation();
@@ -246,8 +246,32 @@ function RightPanel(props) {
 
 			<div>
 				{type === 'container'
-					? <ComponentBuilder widget={widget} components={components} setComponents={setComponents} selectedRow={selectedRow} childId={childId} setChildId={setChildId} setSelectedItem={setSelectedItem} />
-					: <RenderComponents componentType={type} widget={widget} components={components} setComponents={setComponents} elementId={elementId} childId={childId} selectedRow={selectedRow} setSelectedItem={setSelectedItem} index={index} />}
+					? (
+						<ComponentBuilder
+							widget={widget}
+							components={components}
+							setComponents={setComponents}
+							selectedRow={selectedRow}
+							childId={childId}
+							setChildId={setChildId}
+							setSelectedItem={setSelectedItem}
+						/>
+					)
+					: (
+						<div style={widget.style}>
+							<RenderComponents
+								componentType={type}
+								widget={widget}
+								components={components}
+								setComponents={setComponents}
+								elementId={elementId}
+								childId={childId}
+								selectedRow={selectedRow}
+								setSelectedItem={setSelectedItem}
+								index={index}
+							/>
+						</div>
+					)}
 			</div>
 
 			<div role="presentation" className={styles.change}>
