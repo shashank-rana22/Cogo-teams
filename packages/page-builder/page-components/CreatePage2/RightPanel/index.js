@@ -10,60 +10,6 @@ import ComponentBuilder from './ComponentBuilder';
 import RenderComponents from './RenderComponent';
 import styles from './styles.module.css';
 
-// function ComponentBuilder({ widget, components, setComponents, selectedRow, childId, setChildId, setSelectedItem }) {
-// 	const { children, style, id: componentId } = widget || {};
-// 	const { id: selectedRowId } = selectedRow || {};
-
-// 	if (isEmpty(children)) {
-// 		return <div style={{ height: '150px' }}> Blocks loading...</div>;
-// 	}
-
-// 	return (
-// 		<div style={style}>
-
-// 			{ (children || []).map((childComponent, idx) => {
-// 				const { id, style: allStyles, icon, attributes, type } = childComponent || {};
-
-// 				const isChildSelected = childId === id && componentId === selectedRowId && type;
-
-// 				const border = isChildSelected ? '1px solid red' : allStyles.border;
-
-// 				const handleClick = (e) => {
-// 					e.stopPropagation();
-// 					setChildId(id);
-// 				};
-// 				return (
-
-// 					<div
-// 						role="presentation"
-// 						className={styles.content_container}
-// 						style={{ ...allStyles, border }}
-// 						onClick={(e) => handleClick(e)}
-// 					>
-
-// 						{!type ? (
-// 							<div
-// 								role="presentation"
-// 								onClick={attributes.onClick}
-// 							>
-// 								{icon}
-// 							</div>
-// 						) : <RenderComponents componentType={type}
-// 						 widget={childComponent}
-// 						 components={components}
-// 						  setComponents={setComponents}
-// 						  elementId={id} childId={childId}
-// 						   selectedRow={selectedRow}
-// 						    setSelectedItem={setSelectedItem}
-// 							index={idx} /> }
-
-// 					</div>
-// 				);
-// 			})}
-// 		</div>
-// 	);
-// }
-
 function RightPanel(props) {
 	const {
 		widget,

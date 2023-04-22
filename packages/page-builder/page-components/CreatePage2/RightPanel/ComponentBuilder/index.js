@@ -70,7 +70,10 @@ function ComponentBuilder({ widget, components, setComponents, selectedRow, chil
 						role="presentation"
 						className={styles.content_container}
 						style={{ ...allStyles, border }}
-						onClick={() => setChildId(id)}
+						onClick={(e) => {
+							e.stopPropagation();
+							setChildId(id);
+						}}
 					>
 
 						{!type ? (
