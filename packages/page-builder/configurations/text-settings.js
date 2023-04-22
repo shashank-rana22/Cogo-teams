@@ -16,123 +16,77 @@ const textSettings = [
 		],
 	},
 	{
-		type    : 'Text',
+		type    : 'Margin',
 		options : [
-			{ label: 'Font Size', key: 'font-size', type: 'number' },
 			{
-				label   : 'Font Style',
-				key     : 'font-style',
-				type    : 'select',
-				options : [
-					{
-						label: 'normal', value: 'normal',
-					},
-					{
-						label: 'italic', value: 'italic',
-					},
-					{
-						label: 'oblique', value: 'oblique',
-					},
-				],
-			},
-			{ label: 'Color', key: 'color', type: 'color' },
-			{
-				label   : 'Font Weight',
-				key     : 'font-weight',
-				type    : 'select',
-				options : [
-					{
-						label: 'normal', value: 'normal',
-					},
-					{
-						label: 'bold', value: 'bold',
-					},
-
-				],
+				label : 'Top',
+				key   : 'margin-top',
+				type  : 'number',
 			},
 			{
-				label   : 'Text Transform',
-				key     : 'text-transform',
-				type    : 'select',
-				options : [
-					{
-						label: 'none', value: 'none',
-					},
-					{
-						label: 'capitalize', value: 'capitalize',
-					},
-					{
-						label: 'uppercase', value: 'uppercase',
-					},
-					{
-						label: 'lowercase', value: 'lowercase',
-					},
-
-				],
+				label : 'Left',
+				key   : 'margin-left',
+				type  : 'number',
 			},
 			{
-				label   : 'Text Decoration',
-				key     : 'text-decoration',
-				type    : 'select',
-				options : [
-					{
-						label: 'none', value: 'none',
-					},
-					{
-						label: 'underline', value: 'underline',
-					},
-					{
-						label: 'overline', value: 'overline',
-					},
-					{
-						label: 'line-through', value: 'line-through',
-					},
-
-				],
+				label : 'Bottom',
+				key   : 'margin-bottom',
+				type  : 'number',
+			},
+			{
+				label : 'Right',
+				key   : 'margin-right',
+				type  : 'number',
 			},
 		],
 	},
 	{
-		type    : 'Align',
+		type    : 'Padding',
 		options : [
 			{
-				label   : 'Text Align',
-				key     : 'text-align',
-				type    : 'select',
-				options : [
-					{
-						label: 'left', value: 'left',
-					},
-					{
-						label: 'center', value: 'center',
-					},
-					{
-						label: 'right', value: 'right',
-					},
-					{
-						label: 'justify', value: 'justify',
-					},
-
-				],
+				label : 'Top',
+				key   : 'padding-top',
+				type  : 'number',
 			},
 			{
-				label   : 'Vertical Align',
-				key     : 'vertical-align',
+				label : 'Left',
+				key   : 'padding-left',
+				type  : 'number',
+			},
+			{
+				label : 'Bottom',
+				key   : 'padding-bottom',
+				type  : 'number',
+			},
+			{
+				label : 'Right',
+				key   : 'padding-right',
+				type  : 'number',
+			},
+		],
+	},
+	{
+		type    : 'Border',
+		options : [
+			{
+				label : 'Color',
+				key   : 'border-color',
+				type  : 'color',
+			},
+			{
+				label : 'Width',
+				key   : 'border-width',
+				type  : 'number',
+			},
+			{
+				label   : 'Style',
+				key     : 'border-style',
 				type    : 'select',
 				options : [
-					{
-						label: 'baseline', value: 'baseline',
-					},
-					{
-						label: 'top', value: 'top',
-					},
-					{
-						label: 'middle', value: 'middle',
-					},
-					{
-						label: 'bottom', value: 'bottom',
-					},
-
+					{ label: 'None', value: 'none' },
+					{ label: 'Solid', value: 'solid' },
+					{ label: 'Dotted', value: 'dotted' },
+					{ label: 'Dashed', value: 'dashed' },
 				],
 			},
 		],

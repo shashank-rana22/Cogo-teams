@@ -2,6 +2,7 @@ import { Accordion, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useCallback } from 'react';
 
+import BoxModal from '../../../../commons/BoxModal';
 import UploadImageModal from '../../../../commons/UploadImageModal';
 import buttonSettings from '../../../../configurations/button-settings';
 import containerSettings from '../../../../configurations/container-settings';
@@ -135,6 +136,19 @@ function Settings(props) {
 
 					</Accordion>
 				))}
+			</div>
+
+			<div>
+				<Accordion type="text" title="Margin & Padding">
+					<BoxModal
+						setComponent={setComponent}
+						component={component}
+						selectedItem={selectedItem}
+						isRootComponent={isRootComponent}
+						setSelectedItem={setSelectedItem}
+						handleChange={handleChange}
+					/>
+				</Accordion>
 			</div>
 
 			{showUploadModal && (

@@ -57,9 +57,10 @@ function Card(props) {
 				const MAPPING = {
 					select: (
 						<Select
+							size="sm"
 							value={selectedComponent.style[key]}
 							onChange={(value) => handleChange(key, value)}
-							style={{ width: '120px' }}
+							style={{ width: '140px' }}
 							options={options}
 							placeholder="Select"
 						/>

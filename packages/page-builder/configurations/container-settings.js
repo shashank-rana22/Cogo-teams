@@ -14,56 +14,56 @@ const containerSettings = [
 			},
 		],
 	},
-	{
-		type    : 'Margin',
-		options : [
-			{
-				label : 'Top',
-				key   : 'margin-top',
-				type  : 'number',
-			},
-			{
-				label : 'Left',
-				key   : 'margin-left',
-				type  : 'number',
-			},
-			{
-				label : 'Bottom',
-				key   : 'margin-bottom',
-				type  : 'number',
-			},
-			{
-				label : 'Right',
-				key   : 'margin-right',
-				type  : 'number',
-			},
-		],
-	},
-	{
-		type    : 'Padding',
-		options : [
-			{
-				label : 'Top',
-				key   : 'padding-top',
-				type  : 'number',
-			},
-			{
-				label : 'Left',
-				key   : 'padding-left',
-				type  : 'number',
-			},
-			{
-				label : 'Bottom',
-				key   : 'padding-bottom',
-				type  : 'number',
-			},
-			{
-				label : 'Right',
-				key   : 'padding-right',
-				type  : 'number',
-			},
-		],
-	},
+	// {
+	// 	type    : 'Margin',
+	// 	options : [
+	// 		{
+	// 			label : 'Top',
+	// 			key   : 'margin-top',
+	// 			type  : 'number',
+	// 		},
+	// 		{
+	// 			label : 'Left',
+	// 			key   : 'margin-left',
+	// 			type  : 'number',
+	// 		},
+	// 		{
+	// 			label : 'Bottom',
+	// 			key   : 'margin-bottom',
+	// 			type  : 'number',
+	// 		},
+	// 		{
+	// 			label : 'Right',
+	// 			key   : 'margin-right',
+	// 			type  : 'number',
+	// 		},
+	// 	],
+	// },
+	// {
+	// 	type    : 'Padding',
+	// 	options : [
+	// 		{
+	// 			label : 'Top',
+	// 			key   : 'padding-top',
+	// 			type  : 'number',
+	// 		},
+	// 		{
+	// 			label : 'Left',
+	// 			key   : 'padding-left',
+	// 			type  : 'number',
+	// 		},
+	// 		{
+	// 			label : 'Bottom',
+	// 			key   : 'padding-bottom',
+	// 			type  : 'number',
+	// 		},
+	// 		{
+	// 			label : 'Right',
+	// 			key   : 'padding-right',
+	// 			type  : 'number',
+	// 		},
+	// 	],
+	// },
 	{
 		type    : 'Border',
 		options : [
@@ -71,11 +71,6 @@ const containerSettings = [
 				label : 'Color',
 				key   : 'border-color',
 				type  : 'color',
-			},
-			{
-				label : 'Width',
-				key   : 'border-width',
-				type  : 'number',
 			},
 			{
 				label   : 'Style',
@@ -88,24 +83,19 @@ const containerSettings = [
 					{ label: 'Dashed', value: 'dashed' },
 				],
 			},
+			{
+				label : 'Width',
+				key   : 'border-width',
+				type  : 'number',
+			},
+			{
+				label : 'Radius',
+				key   : 'border-radius',
+				type  : 'number',
+			},
+
 		],
 	},
-	// {
-	// 	type    : 'Dimensions',
-	// 	options : [
-	// 		{
-	// 			label : 'Height',
-	// 			key   : 'height',
-	// 			type  : 'number',
-	// 		},
-	// 		{
-	// 			label : 'Width',
-	// 			key   : 'width',
-	// 			type  : 'number',
-	// 		},
-
-	// 	],
-	// },
 
 ];
 
