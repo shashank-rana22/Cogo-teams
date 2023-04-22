@@ -1,63 +1,68 @@
-/* eslint-disable max-len */
 import { IcMCrossInCircle, IcMDuplicate } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 import React, { useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { v1 as uuid } from 'uuid';
 
-// import { ResizableBox } from 'react-resizable';
 import 'react-resizable/css/styles.css';
 import VALID_ITEM_TYPES from '../../../configurations/accept-items';
 
+import ComponentBuilder from './ComponentBuilder';
 import RenderComponents from './RenderComponent';
 import styles from './styles.module.css';
 
-function ComponentBuilder({ widget, components, setComponents, selectedRow, childId, setChildId, setSelectedItem }) {
-	const { children, style, id: componentId } = widget || {};
-	const { id: selectedRowId } = selectedRow || {};
+// function ComponentBuilder({ widget, components, setComponents, selectedRow, childId, setChildId, setSelectedItem }) {
+// 	const { children, style, id: componentId } = widget || {};
+// 	const { id: selectedRowId } = selectedRow || {};
 
-	if (isEmpty(children)) {
-		return <div style={{ height: '150px' }}> Blocks loading...</div>;
-	}
+// 	if (isEmpty(children)) {
+// 		return <div style={{ height: '150px' }}> Blocks loading...</div>;
+// 	}
 
-	return (
-		<div style={style}>
+// 	return (
+// 		<div style={style}>
 
-			{ (children || []).map((childComponent, idx) => {
-				const { id, style: allStyles, icon, attributes, type } = childComponent || {};
+// 			{ (children || []).map((childComponent, idx) => {
+// 				const { id, style: allStyles, icon, attributes, type } = childComponent || {};
 
-				const isChildSelected = childId === id && componentId === selectedRowId && type;
+// 				const isChildSelected = childId === id && componentId === selectedRowId && type;
 
-				const border = isChildSelected ? '1px solid red' : allStyles.border;
+// 				const border = isChildSelected ? '1px solid red' : allStyles.border;
 
-				const handleClick = (e) => {
-					e.stopPropagation();
-					setChildId(id);
-				};
-				return (
+// 				const handleClick = (e) => {
+// 					e.stopPropagation();
+// 					setChildId(id);
+// 				};
+// 				return (
 
-					<div
-						role="presentation"
-						className={styles.content_container}
-						style={{ ...allStyles, border }}
-						onClick={(e) => handleClick(e)}
-					>
+// 					<div
+// 						role="presentation"
+// 						className={styles.content_container}
+// 						style={{ ...allStyles, border }}
+// 						onClick={(e) => handleClick(e)}
+// 					>
 
-						{!type ? (
-							<div
-								role="presentation"
-								onClick={attributes.onClick}
-							>
-								{icon}
-							</div>
-						) : <RenderComponents componentType={type} widget={childComponent} components={components} setComponents={setComponents} elementId={id} childId={childId} selectedRow={selectedRow} setSelectedItem={setSelectedItem} index={idx} /> }
+// 						{!type ? (
+// 							<div
+// 								role="presentation"
+// 								onClick={attributes.onClick}
+// 							>
+// 								{icon}
+// 							</div>
+// 						) : <RenderComponents componentType={type}
+// 						 widget={childComponent}
+// 						 components={components}
+// 						  setComponents={setComponents}
+// 						  elementId={id} childId={childId}
+// 						   selectedRow={selectedRow}
+// 						    setSelectedItem={setSelectedItem}
+// 							index={idx} /> }
 
-					</div>
-				);
-			})}
-		</div>
-	);
-}
+// 					</div>
+// 				);
+// 			})}
+// 		</div>
+// 	);
+// }
 
 function RightPanel(props) {
 	const {
@@ -79,13 +84,6 @@ function RightPanel(props) {
 	const [childId, setChildId] = useState('');
 
 	const { type, id: elementId } = widget || {};
-
-	// const [state, setState] = useState({
-	// 	width  : 800,
-	// 	height : 170,
-	// });
-
-	// const { width, height } = state || {};
 
 	const itemRef = useRef(null);
 
@@ -182,7 +180,9 @@ function RightPanel(props) {
 			const { content, attributes } = properties || {};
 			const { type: childType } = content || {};
 
-			const newAttributes = !childType ? { onClick: () => handleSubmitClick({ childrenId: item.id, parentId: newId }) } : attributes;
+			const newAttributes = !childType ? {
+				onClick: () => handleSubmitClick({ childrenId: item.id, parentId: newId }),
+			} : attributes;
 
 			return ({ ...item, parentId: newId, properties: { ...properties, attributes: newAttributes } });
 		});
@@ -220,17 +220,6 @@ function RightPanel(props) {
 	};
 
 	return (
-
-	// <ResizableBox
-	// 	className="box"
-	// 	axis={type === 'container' ? 'none' : 'both'}
-	// 	minConstraints={[200, 200]}
-	// 	maxConstraints={[800, 400]}
-	// 	height={height}
-	// 	width={width}
-	// 	onResize={onResize}
-	// >
-
 		<div
 			role="presentation"
 			ref={itemRef}
@@ -241,7 +230,7 @@ function RightPanel(props) {
 				opacity,
 				border,
 			}}
-			className={styles.element_Container}
+			className={styles.element_container}
 		>
 
 			<div>
@@ -275,11 +264,15 @@ function RightPanel(props) {
 			</div>
 
 			<div role="presentation" className={styles.change}>
-				<IcMCrossInCircle height="24px" width="24px" cursor="pointer" onClick={(e) => handleDelete(e, widget)} />
+				<IcMCrossInCircle
+					height="24px"
+					width="24px"
+					cursor="pointer"
+					onClick={(e) => handleDelete(e, widget)}
+				/>
 				<IcMDuplicate height="24px" width="24px" cursor="pointer" onClick={(e) => handleCopy(e, widget)} />
 			</div>
 		</div>
-	// </ResizableBox>
 	);
 }
 

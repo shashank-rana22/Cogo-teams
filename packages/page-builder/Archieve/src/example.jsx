@@ -31,9 +31,6 @@ function Container() {
 
 	const handleDrop = useCallback(
 		(dropZone, item) => {
-			console.log('dropZone', dropZone);
-			console.log('item', item);
-
 			const splitDropZonePath = dropZone.path.split('-');
 			const pathToDropZone = splitDropZonePath.slice(0, -1).join('-');
 

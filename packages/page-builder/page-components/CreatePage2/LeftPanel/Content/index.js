@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { TabPanel, Tabs } from '@cogoport/components';
 import { useState } from 'react';
 

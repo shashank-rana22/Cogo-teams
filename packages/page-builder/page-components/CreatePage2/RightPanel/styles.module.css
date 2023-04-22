@@ -15,13 +15,7 @@
 			right: 0;
 			z-index: 2;	
 			top: 0;
-			/* transform: translateY(50%); */
 		}
 	}
 }
 
-.content_container {
-	&:hover {
-		border: 1px solid #88cad1;
-	}
-}

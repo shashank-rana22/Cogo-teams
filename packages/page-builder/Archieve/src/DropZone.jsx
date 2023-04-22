@@ -1,9 +1,8 @@
-import classNames from 'classnames';
 import React from 'react';
 import { useDrop } from 'react-dnd';
 
 import { COMPONENT, SIDEBAR_ITEM, ROW, COLUMN } from './constants';
-import styles from './styles.module.css';
+// import styles from './styles.module.css';
 
 const ACCEPTS = [SIDEBAR_ITEM, COMPONENT, ROW, COLUMN];
 
@@ -72,11 +71,12 @@ function DropZone({ data, onDrop, isLast, className }) {
 	const isActive = isOver && canDrop;
 	return (
 		<div
-			className={classNames(
-      	styles.dropZone,
-      	{ active: isActive, isLast },
-      	className,
-			)}
+			style={{
+				background : isActive ? '#00a2ff' : 'none',
+				transition : '100ms all',
+				flex       : '0 0 auto',
+				height     : '40px',
+			}}
 			ref={drop}
 		/>
 	);

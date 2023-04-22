@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { IcMPlusInCircle } from '@cogoport/icons-react';
 import React, { useMemo } from 'react';
@@ -58,7 +57,6 @@ function Structure(props) {
 				style      : {
 					width          : row,
 					border         : '1px dashed #9ab7fe',
-					// maxHeight      : '400px',
 					margin         : '2px',
 					display        : 'flex',
 					justifyContent : 'center',
@@ -78,7 +76,10 @@ function Structure(props) {
 		() => (widths || []).map((row) => (
 			<Item
 				row={row}
-				handleClick={() => addNewItem({ ...parentComponent, children: getChildrenComponents(row) }, selectedRow?.index, true, parentComponent.id, null)}
+				handleClick={() => addNewItem({
+					...parentComponent,
+					children: getChildrenComponents(row),
+				}, selectedRow?.index, true, parentComponent.id, null)}
 				onNewItemAdding={onNewItemAdding}
 				parentComponent={parentComponent}
 				childrenComponents={getChildrenComponents(row)}

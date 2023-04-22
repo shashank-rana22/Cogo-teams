@@ -40,12 +40,9 @@
    width: 75%
 }
 
-
 .container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* border: 1px dashed #9ab7fe; */
-	/* border-radius: 4px; */
 }
 

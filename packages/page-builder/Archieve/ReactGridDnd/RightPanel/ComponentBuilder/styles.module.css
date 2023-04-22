@@ -1,0 +1,5 @@
+.content_container {
+	&:hover {
+		border: 1px solid #88cad1;
+	}
+}

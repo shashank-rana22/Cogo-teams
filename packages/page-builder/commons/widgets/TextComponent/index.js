@@ -14,14 +14,17 @@ const iconsMapping = {
 };
 
 function TextComponent(props) {
-	const { text, components, setComponents, childId, selectedRow } = props;
+	const { widget, components, setComponents, childId, selectedRow } = props;
+
 	const [editorModal, setEditorModal] = useState({
 		show      : false,
 		placement : 'bottom-right',
 		size      : 'sm',
 	});
 
-	const [editorValue, setEditorValue] = useState(text);
+	const { content } = widget || {};
+
+	const [editorValue, setEditorValue] = useState(content);
 
 	const handleEditorChange = (value) => {
 		const { parentId, id } = selectedRow || {};
@@ -32,7 +35,7 @@ function TextComponent(props) {
 			(component) => component.id === id,
 		);
 
-		if (parentId) {
+		if (parentId && childId) {
 			data.layouts[selectedComponentIndex].children[childId].content = value;
 		} else {
 			data.layouts[selectedComponentIndex].content = value;
@@ -53,7 +56,7 @@ function TextComponent(props) {
 					...prev,
 					show: true,
 				}))}
-				dangerouslySetInnerHTML={{ __html: text }}
+				dangerouslySetInnerHTML={{ __html: content }}
 			/>
 
 			<Modal
@@ -89,7 +92,7 @@ function TextComponent(props) {
 				<Modal.Body>
 					<ReactQuill
 						theme="snow"
-						placeholder={text || 'start typing'}
+						placeholder={content || 'start typing'}
 						value={editorValue}
 						modules={textEditorModules}
 						onChange={handleEditorChange}

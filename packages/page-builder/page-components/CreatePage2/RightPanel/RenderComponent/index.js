@@ -1,4 +1,5 @@
 import ButtonComponent from '../../../../commons/widgets/ButtonComponent';
+import FormComponent from '../../../../commons/widgets/FormComponent';
 import HtmlComponent from '../../../../commons/widgets/HtmlComponent';
 import ImageComponent from '../../../../commons/widgets/ImageComponent';
 import TextComponent from '../../../../commons/widgets/TextComponent';
@@ -10,16 +11,24 @@ const componentMapping = {
 	image  : ImageComponent,
 	video  : VideoComponent,
 	html   : HtmlComponent,
+	form   : FormComponent,
 };
 
 function RenderComponents({
-	componentType, widget, components, setComponents, elementId, childId, selectedRow, setSelectedItem, index,
+	componentType,
+	widget,
+	components,
+	setComponents,
+	elementId,
+	childId,
+	selectedRow,
+	setSelectedItem,
+	index,
 }) {
 	const componentPropsMapping = {
 		text: {
-			key   : elementId,
-			text  : widget.content,
-			style : widget.style,
+			key: elementId,
+			widget,
 			components,
 			setComponents,
 			childId,
@@ -28,9 +37,8 @@ function RenderComponents({
 		},
 
 		image: {
-			key   : elementId,
-			src   : widget.content,
-			style : widget.style,
+			key: elementId,
+			widget,
 			components,
 			setComponents,
 			childId,
@@ -38,30 +46,35 @@ function RenderComponents({
 		},
 
 		button: {
-			key       : elementId,
-			label     : widget.content,
-			style     : widget.style,
-			themeType : widget.themeType,
-			size      : widget.size,
-			type      : widget.type,
+			key: elementId,
+			widget,
 			components,
 			setComponents,
 			elementId,
 		},
 
 		video: {
-			key   : elementId,
-			src   : widget.content,
-			style : widget.style,
+			key: elementId,
+			widget,
 			components,
 			setComponents,
 			childId,
 			selectedRow,
 		},
+
 		html: {
 			key   : elementId,
 			style : widget.style,
 			html  : widget.content,
+		},
+
+		form: {
+			key: elementId,
+			components,
+			setComponents,
+			selectedRow,
+			childId,
+			widget,
 		},
 	};
 
@@ -69,6 +82,7 @@ function RenderComponents({
 
 	return (
 		<div
+			key={elementId}
 			role="presentation"
 			onClick={() => {
 				setSelectedItem({ ...widget, index });
