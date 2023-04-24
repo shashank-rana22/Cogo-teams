@@ -3,6 +3,14 @@
 	display: flex;
 	flex-direction: row;
 	background-color: #f6f5fe;
+
+	:global {
+		.ui_accordion_content{
+			background-color: #ffffff !important;
+			border-top: 1px solid #E0E0E0 !important;
+    		border-radius: initial;
+		}
+	}
 }
 
 .bl_overview_card {
@@ -10,10 +18,10 @@
 	padding-left: 15px;
 	font-size: 16px;
 	font-weight: 600;
-	color: #393f70;
 	background: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 10 rgb(0 0 0 / 20%);
+	color: #4F4F4F;
 }
 
 .button_container {
@@ -33,7 +41,7 @@
 	font-size: 16px;
 	font-weight: 600;
 	line-height: 19px;
-	color: #393f70;
+	color: #4F4F4F;
 	white-space: nowrap;
 
 	.bl-count {
@@ -52,12 +60,21 @@
 }
 
 .manage_services_div {
-	padding: 28px 32px 8px;
+	padding: 20px 5px 10px;
+
+	:global {
+		.ui_accordion_container{
+			background: #F3FAFA !important;
+		}
+
+		.ui_accordion_header{
+			background: #F3FAFA !important;
+		}
+	}
 }
 
 .service_card {
 	margin-bottom: 16px;
-	border: 1px solid #ded7fc;
 	border-radius: 4px;
 
 	:global {
