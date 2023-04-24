@@ -351,7 +351,7 @@ export const accrualColumn = (
 		accessor : 'profit',
 		id       : 'profit',
 		Cell     : ({ row: { original } }) => {
-			const { profit = '', expenseCurrency = '' } = original || {};
+			const { profit = '', expenseCurrency = '', profitPercentage = 0 } = original || {};
 			function checkNumber(number) {
 				if (number > 0) {
 					return 'positive';
@@ -374,7 +374,11 @@ export const accrualColumn = (
 				<div>
 					<div>
 						<span className={renderClassName()}>
-							{getFormattedPrice(profit, expenseCurrency) || '-' }
+							<div>{getFormattedPrice(profit, expenseCurrency) || '-' }</div>
+							<div>
+								{profitPercentage?.toFixed(2)}
+								%
+							</div>
 						</span>
 					</div>
 				</div>
