@@ -62,7 +62,6 @@ function EachTicket({
 						iconStyles = {},
 					}) => (
 						Icon && (
-
 							<Tooltip placement="bottom" content={tooltipContent}>
 								<Icon
 									{...iconStyles}
