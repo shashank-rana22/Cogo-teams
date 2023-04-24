@@ -1,0 +1,15 @@
+{
+    "booking_desk":{
+        "trade_parties":["collection_party"]
+    },
+    "superadmin":{
+        "trade_parties":["self",
+        "shipper",
+        "consignee",
+        "collection_party",
+        "origin_transporter",
+        "destination_transporter",
+        "origin_cha",
+        "destination_cha"]
+    }
+}
