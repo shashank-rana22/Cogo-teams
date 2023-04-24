@@ -1,14 +1,20 @@
 import { Tooltip, Button, Pill } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDownload } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { startCase, format } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { REDIRECT_LINK_MAPPING, REDIRECT_MAPPING } from '../constants/header-mapping';
 import { UPLOAD_STATUS_MAPPING } from '../constants/table-modal-mapping';
 import styles from '../styles.module.css';
+
+const downloadErrorCsv = (link) => {
+	window.open(link, '_blank');
+};
 
 function useGetIngestionList() {
 	const [row, setRow] = useState({});
@@ -32,19 +38,15 @@ function useGetIngestionList() {
 
 	const { partner_id = '' } = query;
 
-	const downloadErrorCsv = (link) => {
-		window.open(link, '_blank');
-	};
-
 	const formProps = useForm();
 
-	const tableListModal = (_id) => {
-		setRow(_id);
+	const tableListModal = (id) => {
+		setRow(id);
 		setTableModal('uploadList');
 	};
 
-	const reUploadFiles = (_row) => {
-		setRow(_row);
+	const reUploadFiles = (rowData) => {
+		setRow(rowData);
 		setTableModal('reUpload');
 	};
 
@@ -62,7 +64,13 @@ function useGetIngestionList() {
 			key      : 'num_org',
 			Header   : 'NUMBER OF RECORDS',
 			accessor : ({ request_files = {} }) => (
-				<div className={styles.number_of_org}>{request_files?.total_records_count || '___'}</div>
+				<div className={styles.number_of_org}>
+					{request_files?.successfully_migrated_count || '___'}
+					{' '}
+					/
+					{' '}
+					{request_files?.total_records_count || '___'}
+				</div>
 
 			),
 		},
@@ -72,7 +80,7 @@ function useGetIngestionList() {
 			accessor : ({ description = '' }) => (
 				<div className={styles.pop_container}>
 					<Tooltip className={styles.popover} content={description || '___'} placement="left">
-						<div className={styles.description}>{startCase(description) || '___'}</div>
+						<div className={styles.description}>{startCase(description || '___')}</div>
 					</Tooltip>
 				</div>
 
@@ -90,15 +98,23 @@ function useGetIngestionList() {
 			Header   : 'UPLOAD DATE',
 			accessor : ({ updated_at }) => (
 				<div className={styles.updated_at}>
-					{updated_at	 ? (
+					{/* {updated_at	 ? (
 						<div className={styles.created_date}>
-							{format(updated_at, 'dd MMM yyyy') || '___'}
+							{formatDate(updated_at, 'dd MMM yyyy') || '___'}
 
 							<div className={styles.created_time}>
-								{format(updated_at, 'hh:mm aaa') || '___'}
+								{formatDate(updated_at, 'hh:mm aaa') || '___'}
 							</div>
 						</div>
-					) : '___'}
+					) : '___'} */}
+
+					{formatDate({
+						date       : updated_at,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+						formatType : 'dateTime',
+						separator  : ' | ',
+					})}
 				</div>
 
 			),
@@ -109,7 +125,7 @@ function useGetIngestionList() {
 			accessor : ({ request_files = {} }) => (
 				<div className={styles.status}>
 					<Pill size="sm" color={UPLOAD_STATUS_MAPPING[request_files?.stage]}>
-						{request_files?.stage ? startCase(request_files?.stage) : '___'}
+						{request_files?.stage ? startCase(request_files?.stage || '') : '___'}
 					</Pill>
 				</div>
 
@@ -124,7 +140,7 @@ function useGetIngestionList() {
 
 					<Tooltip
 						className={styles.popover}
-						content={`Redirecting to ${REDIRECT_MAPPING[item?.is_channel_partner]}`}
+						content={`Redirecting to ${REDIRECT_MAPPING[item?.is_channel_partner] || '---'}`}
 						placement="top"
 					>
 						<Button
@@ -142,7 +158,6 @@ function useGetIngestionList() {
 					</Tooltip>
 
 				</div>
-
 			),
 		},
 		{
@@ -152,7 +167,7 @@ function useGetIngestionList() {
 				<div className={styles.error}>
 					{request_files?.errored_data_url ? (
 						<Button
-							onClick={() => { downloadErrorCsv(request_files?.errored_data_url); }}
+							onClick={() => downloadErrorCsv(request_files?.errored_data_url)}
 							size="md"
 							themeType="tertiary"
 						>

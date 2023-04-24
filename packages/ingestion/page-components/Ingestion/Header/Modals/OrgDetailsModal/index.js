@@ -1,7 +1,6 @@
 import { CONSTANT_KEYS } from '../../../../../constants/org-details-mapping';
 import { getElementController } from '../../../../../utils/get-element-controls';
 
-import { LeadDiv } from './NextHeading';
 import styles from './styles.module.css';
 
 function OrgDetailsModal({
@@ -10,22 +9,22 @@ function OrgDetailsModal({
 	const { control, formState: { errors } } = formProps;
 
 	const {
-		LEAD,
+		lead,
 	} = CONSTANT_KEYS;
 
 	const INGESTION_COMPONENTS_MAPPING = {
-		[LEAD]: LeadDiv,
+		[lead]: 'Lead',
 	};
-
-	const TopDiv = INGESTION_COMPONENTS_MAPPING[uploadData?.ingestion_type] || null;
 
 	return (
 
 		<div>
 			<div className={styles.modal_container}>
-				{
-						TopDiv && <TopDiv />
-					}
+				<div className={styles.heading}>
+					Please provide more details about
+					{' '}
+					{INGESTION_COMPONENTS_MAPPING[uploadData?.ingestion_type] || null}
+				</div>
 				{
 						modalControls.map((controlItem) => {
 							const el = { ...controlItem };

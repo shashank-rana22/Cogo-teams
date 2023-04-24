@@ -24,6 +24,13 @@ const INGESTION_COMPONENTS_MAPPING = {
 	[UPLOAD]          : UploadModal,
 };
 
+const INGESTION_FOOTERS_MAPPING = {
+	[CHOOSE]          : ChooseFooter,
+	[ORG_DETAILS]     : OrgDetailsFooter,
+	[PROVIDER_SELECT] : ProviderSelectFooter,
+	[UPLOAD]          : UploadModalFooter,
+};
+
 function Header({ refetch = () => {} }) {
 	const {
 		setUploadData = () => {},
@@ -38,13 +45,6 @@ function Header({ refetch = () => {} }) {
 	} = usePostIngestionData({ refetch });
 
 	const { getTemplateCsv = () => {}, template = '', setTemplate = () => {} } = useGetTemplate();
-
-	const INGESTION_FOOTERS_MAPPING = {
-		[CHOOSE]          : ChooseFooter,
-		[ORG_DETAILS]     : OrgDetailsFooter,
-		[PROVIDER_SELECT] : ProviderSelectFooter,
-		[UPLOAD]          : UploadModalFooter,
-	};
 
 	const Footer = INGESTION_FOOTERS_MAPPING[show?.screen] || null;
 	const Component = INGESTION_COMPONENTS_MAPPING[show?.screen] || null;

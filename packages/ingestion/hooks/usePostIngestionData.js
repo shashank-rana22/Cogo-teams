@@ -19,8 +19,8 @@ function usePostIngestionData({ refetch = () => {} }) {
 	};
 
 	const { profile: { partner, user } } = useSelector((state) => state);
-	const { partner_user_id = '' } = partner || {};
-	const { id: user_id = '' } = user || {};
+	const { partner_user_id = '' } = partner;
+	const { id: user_id = '' } = user;
 
 	const formProps = useForm();
 
@@ -42,9 +42,10 @@ function usePostIngestionData({ refetch = () => {} }) {
 
 	const onSubmit = async (e) => {
 		const payload = Object.entries({ ...e, ...uploadData, file_url: e?.file_url?.finalUrl })
-			.filter(([key, value]) => key !== 'finalModalHeading' && value !== null && value !== '')
+			.filter(([key, value]) => key !== 'finalModalHeading' && value !== '' && value !== null)
 			.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 
+		console.log('payload', payload);
 		try {
 			await trigger({
 				data: payload,
@@ -57,7 +58,7 @@ function usePostIngestionData({ refetch = () => {} }) {
 			Toast.error(err?.response?.data?.file);
 		}
 	};
-	const { ingestion_country_id = '', ingestion_partner_id = '' } = watch();
+	const { ingestion_country_id, ingestion_partner_id } = watch();
 
 	const mutatedControls = controls.map((control) => {
 		let newControl = { ...control };

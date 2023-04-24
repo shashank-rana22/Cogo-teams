@@ -1,5 +1,5 @@
 export const CONSTANT_KEYS = {
-	LEAD: 'lead',
+	lead: 'lead',
 };
 
 export const ProviderLeadOptions = [

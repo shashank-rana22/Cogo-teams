@@ -8,12 +8,13 @@ function UploadModal({
 
 }) {
 	const { control, formState: { errors } } = formProps;
+	const { finalModalHeading } = uploadData;
 
 	const FINAL_HEADING = {
-		organization : 'Upload Importer/Exporter CSV',
-		partner      : uploadData?.finalModalHeading,
-		lead         : uploadData?.finalModalHeading,
+		lead: finalModalHeading,
 	};
+
+	console.log('upload', uploadData);
 
 	return (
 

@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 
 function Filters({ setParams = () => {}, refetch = () => {} }) {
 	const { profile = {} } = useSelector((state) => state);
-	const [scopeFilters] = useState({});
+	const scopeFilters = {};
 	const [search, setSearch] = useState('');
 
 	const formProps = useForm();
@@ -80,7 +80,7 @@ function Filters({ setParams = () => {}, refetch = () => {} }) {
 						style={{
 							height : '40px',
 							width  : '100px',
-						}} // height not getting add with className so inline used
+						}}
 						onClick={() => {
 							refetch();
 						}}

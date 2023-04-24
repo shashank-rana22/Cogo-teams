@@ -15,8 +15,6 @@
 		.ui_modal_body_container {
 			height: 800px;
 			padding: 0;
-			border-top: none !important;
-			border-bottom: none !important;
 		}
 	}
 }
@@ -37,7 +35,3 @@
 	justify-content: flex-end;
 	margin: 48px 16px 12px;
 }
-
-/* .ui_modal_body_container {
-	max-height: 600px
-} */

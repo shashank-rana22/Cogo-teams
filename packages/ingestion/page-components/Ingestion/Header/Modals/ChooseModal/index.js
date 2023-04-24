@@ -7,9 +7,9 @@ function ChooseModal({ setShow = () => {}, setUploadData = () => {}, uploadData 
 		lead: 'providerSelect',
 	};
 
-	const IS_CP_MAPPING = {
-		lead: null,
-	};
+	// const IS_CP_MAPPING = {
+	// 	lead: null,
+	// };
 
 	const onChoose = (type) => {
 		setShow((pv) => ({
@@ -19,8 +19,8 @@ function ChooseModal({ setShow = () => {}, setUploadData = () => {}, uploadData 
 
 		setUploadData({
 			...uploadData,
-			ingestion_type     : type,
-			is_channel_partner : IS_CP_MAPPING[type],
+			ingestion_type: type,
+			// is_channel_partner : IS_CP_MAPPING[type],
 		});
 	};
 

@@ -721,6 +721,7 @@ importers:
       '@cogoport/components': ^1.0.389
       '@cogoport/constants': workspace:^0.1.0
       '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/icons-react': ^1.0.61
       '@cogoport/next': workspace:^0.1.0
       '@cogoport/request': workspace:^0.1.0
@@ -732,6 +733,7 @@ importers:
       '@cogoport/components': 1.0.395_n4iqapq6hltb5mr4rez3emws4q
       '@cogoport/constants': link:../../common/constants
       '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
       '@cogoport/icons-react': 1.0.66_react@18.2.0
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request

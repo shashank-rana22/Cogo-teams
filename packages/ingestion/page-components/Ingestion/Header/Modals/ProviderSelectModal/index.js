@@ -14,7 +14,9 @@ function ProviderSelectModal({ setShow = () => {}, setUploadData = () => {}, upl
 		lead: ProviderLeadOptions,
 	};
 
-	const ProviderButtonOptions = PROVIDER_BUTTON_MAPPING[uploadData?.ingestion_type] || '';
+	console.log('uploadData', uploadData);
+
+	const ProviderButtonOptions = PROVIDER_BUTTON_MAPPING[uploadData?.ingestion_type] || [];
 
 	const onChoose = (input) => {
 		setUploadData({
@@ -39,6 +41,7 @@ function ProviderSelectModal({ setShow = () => {}, setUploadData = () => {}, upl
 					<Button
 						themeType="secondary"
 						onClick={() => {
+							console.log('re', response);
 							onChoose(response);
 						}}
 						key={response?.key}

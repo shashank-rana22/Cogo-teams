@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
@@ -17,7 +18,7 @@ function useGetTemplate() {
 			window.open(response?.data?.template_file_url, '_blank');
 			setTemplate('');
 		} catch (error) {
-			Toast.error(error?.message);
+			Toast.error(getApiErrorString(error?.data));
 		}
 	};
 
