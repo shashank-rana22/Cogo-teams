@@ -6,11 +6,13 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    width: 32%;
 }
 
 .stakeholder_info{
 	display: flex;
+	width: 120px;
+	justify-content: center;
+	color: #000000;
 }
 
 .task_action{
@@ -21,7 +23,7 @@
 	text-align: center;
 
 	&:hover {
-		color: #393f70;
+		color: var(--color-primary-error-red-2);
 	}
 }
 
