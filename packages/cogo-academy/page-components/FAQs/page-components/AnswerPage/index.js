@@ -82,6 +82,14 @@ function AnswerPage() {
 				{answerData?.question_abstract}
 			</div>
 
+			<div className={styles.view_count}>
+				{' '}
+				{answerData?.view_count}
+				{' '}
+				people viewed this question
+
+			</div>
+
 			<div className={styles.answer}>Answer:</div>
 
 			<div className={styles.heading_container}>
