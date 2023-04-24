@@ -5,8 +5,8 @@
 }
 
 .services_container {
-	padding: 0 22px 30px;
 	width: 100%;
+	padding: 0 22px 30px;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
@@ -30,33 +30,28 @@
 	display: flex;
 	flex-wrap: wrap;
 
-	& > div{
+	& > div {
 		flex: 0 0 23.5%;
-		margin: 0px 8px 4px 0px;
+		margin: 0 8px 4px 0;
 	}
-} 
+}
 
-
-.header{
-	width: fit-content; 
-	height: fit-content; 
-	white-space: nowrap; 
-	position: relative; 
-	display: flex;  
-	font-family: 'Poppins';
+.header {
+	position: relative;
+	display: flex;
+	width: fit-content;
+	height: fit-content;
+	margin: 24px 0 16px;
 	font-weight: 600;
-	font-size: 14px; 
-	margin: 24px 0px 16px 0px;
+	white-space: nowrap;
 
-	&::after{ 
-		content: '';  
-		display: inline-block; 
+	&::after {
 		position: absolute;
-		width: 30%;
-		background-color: #EE3425; 
-		height: 2px;  
 		top: 22px;
-		
-
+		display: inline-block;
+		width: 30%;
+		height: 2px;
+		content: "";
+		background-color: #ee3425;
 	}
 }

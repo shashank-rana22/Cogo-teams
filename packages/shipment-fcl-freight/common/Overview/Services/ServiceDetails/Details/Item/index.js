@@ -5,8 +5,8 @@ import { renderValue } from '../../../../../CargoDetails/RenderCargoPills/render
 import styles from './styles.module.css';
 
 function Item({ label, detail }) {
-	console.log({ label, detail });
 	const valueFormatted = renderValue(label?.key, detail);
+
 	return valueFormatted
 		? (
 			<div className={styles.container}>

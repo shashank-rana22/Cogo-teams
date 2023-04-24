@@ -4,11 +4,11 @@
 	justify-content: center;
 	width: 100%;
 	padding: 12px 4px;
+	white-space: nowrap;
 	cursor: pointer;
 	background: #fff;
 	border: 1px dashed #bdbdbd;
-	border-radius: 4px; 
-	white-space: nowrap;
+	border-radius: 4px;
 
 	@media (max-width: 768px) {
 		width: 100%;
