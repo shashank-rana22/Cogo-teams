@@ -79,7 +79,7 @@ function GenerateMawb({
 
 	const [whiteout, setWhiteout] = useState(false);
 
-	const [value, onChange] = useState<undefined | string[]>([]);
+	const [copiesValue, copiesOnChange] = useState<string[]>([]);
 
 	const handleClick = () => {
 		if (back) {
@@ -165,7 +165,7 @@ function GenerateMawb({
 				const pdf = new JsPDF();
 				const pdfWidth = pdf.internal.pageSize.getWidth();
 				const pdfHeight = pdf.internal.pageSize.getHeight();
-				(value || []).forEach((item, i) => {
+				(copiesValue || []).forEach((item, i) => {
 					pdf.addImage(imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
 					if (!whiteout) {
 						pdf.addImage(footerImages[item], 'jpeg', 0, pdfHeight - 14, pdfWidth, 4.5);
@@ -181,7 +181,7 @@ function GenerateMawb({
 							pdf.addPage();
 						}
 					}
-					if (i < value.length - 1) {
+					if (i < copiesValue.length - 1) {
 						pdf.addPage();
 					}
 				});
@@ -236,8 +236,8 @@ function GenerateMawb({
 									trigger="click"
 									render={(
 										<SelectDocumentCopies
-											value={value}
-											onChange={onChange}
+											copiesValue={copiesValue}
+											copiesOnChange={copiesOnChange}
 											setSaveDocument={setSaveDocument}
 											handleView={handleView}
 											download24
@@ -260,8 +260,8 @@ function GenerateMawb({
 									trigger="click"
 									render={(
 										<SelectDocumentCopies
-											value={value}
-											onChange={onChange}
+											copiesValue={copiesValue}
+											copiesOnChange={copiesOnChange}
 											setSaveDocument={setSaveDocument}
 											handleView={handleView}
 											download24={false}

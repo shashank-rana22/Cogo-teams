@@ -19,9 +19,9 @@ const options = [
 
 ];
 
-function SelectDocumentCopies({ value, onChange, setSaveDocument, handleView, download24 }) {
+function SelectDocumentCopies({ copiesValue, copiesOnChange, setSaveDocument, handleView, download24 }) {
 	const onChangeTableHeaderCheckbox = (event) => {
-		onChange(event.currentTarget.checked ? [
+		copiesOnChange(event.currentTarget.checked ? [
 			'original_3',
 			'original_2',
 			'original_1',
@@ -37,7 +37,7 @@ function SelectDocumentCopies({ value, onChange, setSaveDocument, handleView, do
 	};
 
 	const getSelectAllCheckbox = () => {
-		const isAllRowsChecked = (value || []).length === 12;
+		const isAllRowsChecked = (copiesValue || []).length === 12;
 
 		return (
 			<Checkbox
@@ -55,10 +55,9 @@ function SelectDocumentCopies({ value, onChange, setSaveDocument, handleView, do
 			<div style={{ display: 'flex', flexDirection: 'column' }}>
 				{getSelectAllCheckbox()}
 				<CheckboxGroup
-					style={{ flexDirection: 'column', width: '100%' }}
 					options={options}
-					onChange={onChange}
-					value={value}
+					onChange={copiesOnChange}
+					value={copiesValue}
 				/>
 			</div>
 			<div>

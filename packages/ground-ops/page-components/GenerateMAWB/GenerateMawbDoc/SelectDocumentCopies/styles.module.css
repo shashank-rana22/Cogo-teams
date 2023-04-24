@@ -1,6 +1,8 @@
 .select_copies_container {
 	:global(.ui_checkbox_group_container) {
 		padding-top: 0;
+		flex-direction: column;
+		width: 100%;
 	}
 
 	:global(.ui_checkbox_container) {
@@ -17,8 +19,7 @@
 }
 
 .select_checkbox {
-	margin: 8px;
-	margin-bottom: 0;
+	margin: 8px 8px 0;
 	font-weight: 600;
 	color: #f68b21 !important;
 	background: #fffaee;
