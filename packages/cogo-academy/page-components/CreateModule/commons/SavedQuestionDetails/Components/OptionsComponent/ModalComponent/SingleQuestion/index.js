@@ -18,7 +18,7 @@ const DIFFICULTY_MAPPING = {
 	high   : 'High Difficulty',
 };
 
-function SingleQuestion({ data, primary_question_type }) {
+function SingleQuestion({ data, primary_question_type, case_index, length }) {
 	const { test_question_answers = [], question_type, difficulty_level, question_text, explanation = [] } = data || {};
 
 	return (
@@ -50,7 +50,10 @@ function SingleQuestion({ data, primary_question_type }) {
 				</div>
 			) : null}
 
-			{primary_question_type === 'case_study' ? <div className={styles.border} /> : null}
+			{primary_question_type === 'case_study'
+							&& case_index !== length - 1 ? (
+								<div className={styles.border} />
+				) : null}
 		</div>
 	);
 }

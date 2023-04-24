@@ -44,11 +44,6 @@ function OptionsComponent({ control, controls, register, name, errors, mode, isN
 		<>
 			{fields.map((field, index) => (
 				<div
-					onFocus={() => {
-						if (index === fields.length - 1 && index < 3) {
-							handleAppendChild();
-						}
-					}}
 					key={field.id}
 					className={styles.option_container}
 				>

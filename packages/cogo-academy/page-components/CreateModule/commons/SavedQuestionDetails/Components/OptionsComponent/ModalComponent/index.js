@@ -39,7 +39,7 @@ function ModalComponent({
 		setQuestionDetails,
 	});
 
-	const { created_at, question_type = '', test_case_study_questions = [] } = item || {};
+	const { created_at, question_type = '', test_case_study_questions = [], question_text = '' } = item || {};
 
 	return (
 		<div>
@@ -49,7 +49,7 @@ function ModalComponent({
 				placement="center"
 				showCloseIcon={false}
 				className={styles.modal_container}
-				size="md"
+				size={question_type === 'case_study' ? 'xl' : 'md'}
 			>
 				<Modal.Body>
 					<div className={styles.container}>
@@ -61,11 +61,19 @@ function ModalComponent({
 						/>
 
 						{question_type === 'case_study' ? (
-							test_case_study_questions.map((question) => (
+							<div className={styles.case_study_question}>
+								{question_text}
+							</div>
+						) : null}
+
+						{question_type === 'case_study' ? (
+							test_case_study_questions.map((question, index) => (
 								<SingleQuestion
 									id={question?.id}
 									data={question}
 									primary_question_type={question_type}
+									case_index={index}
+									length={test_case_study_questions.length}
 								/>
 							))
 						) : (

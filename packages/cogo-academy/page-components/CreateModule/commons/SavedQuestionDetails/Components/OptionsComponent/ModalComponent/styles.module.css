@@ -25,6 +25,7 @@
 .container {
 	position: relative;
 	margin-bottom: 60px;
+	padding: 10px;
 }
 
 .close_icon {
@@ -37,7 +38,11 @@
 .modal_container {
 	:global {
 		.ui_modal_body_container {
-			max-height: 500px !important;
+			max-height: 800px !important;
 		}
 	}
+}
+
+.case_study_question {
+	margin-bottom: 20px;
 }

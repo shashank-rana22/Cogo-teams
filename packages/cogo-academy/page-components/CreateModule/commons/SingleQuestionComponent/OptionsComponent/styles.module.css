@@ -42,7 +42,7 @@
 }
 
 .left_button_container {
-	width: 154px;
+	width: 192px;
 	margin-left: 16px;
 
 	:global {
@@ -53,6 +53,10 @@
 			@media (max-width: 768px) {
 				min-width: 50px;
 			}
+		}
+
+		.ui_chips_container {
+			justify-content: center;
 		}
 	}
 }
