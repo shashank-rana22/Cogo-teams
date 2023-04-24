@@ -2,7 +2,7 @@
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-	background: #F3FAFA;
+	background: #f3fafa;
 	border-radius: 4px;
 }
 
@@ -26,7 +26,7 @@
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 16px;
-	color: #EE3425;
+	color: #ee3425;
 }
 
 .bl_number {
