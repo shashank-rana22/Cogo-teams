@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 
 const useUpdateShipmentPendingTask = ({
 	successMessage = 'Task Updated Successfully!',
-	refetchAfterApi = () => {},
+	refetch = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_pending_task',
@@ -18,7 +18,7 @@ const useUpdateShipmentPendingTask = ({
 			});
 
 			Toast.success(successMessage);
-			refetchAfterApi();
+			refetch();
 		} catch (err) {
 			toastApiError(err);
 		}

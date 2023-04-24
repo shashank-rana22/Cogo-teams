@@ -82,13 +82,14 @@ function Header({
 			</div>
 
 			<div className={styles.sub_heading}>
-				<Button
-					size="md"
-					themeType="primary"
+				<div
+					className={styles.upload}
+					role="button"
+					tabIndex={0}
 					onClick={() => handleGenericUpload()}
 				>
 					Generic Upload
-				</Button>
+				</div>
 
 				<Toggle
 					name="myTransilates"
