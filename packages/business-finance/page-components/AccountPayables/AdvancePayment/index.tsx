@@ -148,10 +148,8 @@ function AdvancePayment({ activeEntity }:ItemProps) {
 	// 	service: undefined,
 	// });
 	const [sort, setSort] = useState({});
-	console.log(activeEntity, 'entiyt');
 	const { filters, setFilters, data, loading } = useGetAdvancePaymentList({ activeEntity, sort });
 	const { pageIndex } = data || {};
-	console.log(data, 'data');
 	const functions = {
 		// renderBankDetails: (itemData) => (
 		// 	<BankDetails

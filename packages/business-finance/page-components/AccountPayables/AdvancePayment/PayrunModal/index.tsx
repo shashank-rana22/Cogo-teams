@@ -9,6 +9,8 @@ import {
 } from '@cogoport/icons-react';
 import React, { ComponentType, useState } from 'react';
 
+import useGetCreatePayRunType from '../hooks/useGetCreatePayRunType';
+
 import PayRunTypeModal from './PayRunTypeModal';
 import styles from './styles.module.css';
 
@@ -49,10 +51,24 @@ const CURRENCY_DATA = Object.keys(CURRENCY_DATA_MAPPING).map(
 		text : currency,
 	}),
 );
+interface Props {
+	activeEntity:string,
+	show:boolean,
+	setShow:Function,
+}
 
-function PayRunModal({ show, setShow, activeEntity }) {
+function PayRunModal({ show, setShow, activeEntity }:Props) {
 	const [currencyValue, setCurrencyValue] = useState(CURRENCY_DATA[0]);
+	const currency = currencyValue?.text;
 	const [payRunType, setPayRunType] = useState(false);
+	const {
+		data, getAdvancedPayment,
+		loading,
+		filters,
+		setFilters,
+	} = useGetCreatePayRunType({ activeEntity, currency });
+	// const { totalRecords } = data || {};
+
 	const ENTITY_MAPPING = [
 		{
 			entityCode : '101',
@@ -132,6 +148,7 @@ function PayRunModal({ show, setShow, activeEntity }) {
 					<div className={styles.button}>
 						<Button onClick={() => {
 							setPayRunType(true);
+							getAdvancedPayment();
 						}}
 						>
 							Create
@@ -141,7 +158,18 @@ function PayRunModal({ show, setShow, activeEntity }) {
 				</Modal.Footer>
 			</Modal>
 
-			{payRunType && <PayRunTypeModal payRunType={payRunType} setPayRunType={setPayRunType} />}
+			{payRunType && (
+				<PayRunTypeModal
+					payRunType={payRunType}
+					setPayRunType={setPayRunType}
+					data={data}
+					loading={loading}
+					filters={filters}
+					setFilters={setFilters}
+					activeEntity={activeEntity}
+					currency={currency}
+				/>
+			)}
 		</div>
 	);
 }

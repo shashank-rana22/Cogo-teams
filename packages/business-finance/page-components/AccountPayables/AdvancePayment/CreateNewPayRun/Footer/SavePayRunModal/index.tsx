@@ -1,5 +1,6 @@
 import { Modal, Button } from '@cogoport/components';
 import { IcCError } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -11,6 +12,14 @@ function SavePayRunModal({
 	const handleCloseModal = () => {
 		setSavePayrunModal(false);
 	};
+	const { push } = useRouter();
+	const handleClick = () => {
+		push(
+			'/business-finance/account-payables/[active_tab]',
+			'/business-finance/account-payables/advance-payment',
+		);
+	};
+
 	return (
 		<div>
 			<Modal show={savePayrunModal} onClose={handleCloseModal} size="sm">
@@ -30,7 +39,7 @@ function SavePayRunModal({
 					>
 						Cancel
 					</Button>
-					<Button>
+					<Button onClick={handleClick}>
 						Yes
 					</Button>
 				</Modal.Footer>

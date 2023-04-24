@@ -2,6 +2,7 @@ import getPrice from '@cogoport/forms/utils/get-formatted-price';
 import React from 'react';
 
 function AmountWithCurrency({ itemData }) {
+	const { currency, totalValue } = itemData || {};
 	return (
 		<div>
 			<div>
@@ -9,7 +10,7 @@ function AmountWithCurrency({ itemData }) {
 				Total value :
 				{' '}
 				{' '}
-				{getPrice(itemData?.amount, 'INR')}
+				{getPrice(totalValue, currency)}
 				{/* ₹19,888,723.46 */}
 			</div>
 		</div>

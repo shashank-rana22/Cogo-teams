@@ -1,13 +1,14 @@
 import React from 'react';
 
 function InvoiceCount({ itemData }) {
+	const { invoiceCount } = itemData || {};
 	return (
 		<div>
 			No. of invoices :
 			{' '}
 			{' '}
 			{' '}
-			{itemData?.count}
+			{invoiceCount}
 		</div>
 	);
 }

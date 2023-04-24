@@ -4,8 +4,21 @@ import React, { useState } from 'react';
 import SavePayRunModal from './SavePayRunModal';
 import styles from './styles.module.css';
 
-function Footer({ viewSelectedInvoice, setViewSelectedInvoice }) {
+function Footer({
+	apiData, viewSelectedInvoice,
+	setViewSelectedInvoice,
+	submitSelectedInvoices,
+	getViewSelectedInvoices,
+}) {
+	const {
+		list = [],
+	} = apiData || {};
+
 	const [savePayrunModal, setSavePayrunModal] = useState(false);
+
+	const isChecked = (list || []).filter((item) => item.checked);
+	const totalInvoiceAmount = isChecked.reduce((acc, obj) => +acc + +obj.payableAmount, 0);
+	console.log(totalInvoiceAmount, 'payableAmount');
 	return (
 		<div>
 			<div className={styles.container}>
@@ -18,7 +31,7 @@ function Footer({ viewSelectedInvoice, setViewSelectedInvoice }) {
 							INR
 						</div>
 						<div className={styles.amount}>
-							1,00,000,00
+							{totalInvoiceAmount}
 						</div>
 					</div>
 					<div className={styles.sid_count}>
@@ -26,8 +39,8 @@ function Footer({ viewSelectedInvoice, setViewSelectedInvoice }) {
 							SID -
 						</div>
 						<div>
-
-							33
+							{isChecked.length}
+							{/* 33 */}
 						</div>
 					</div>
 				</div>
@@ -40,9 +53,24 @@ function Footer({ viewSelectedInvoice, setViewSelectedInvoice }) {
 						)
 						: (
 							<div className={styles.button_container}>
-								<div><Button themeType="secondary">+ Add to selected</Button></div>
+								<div>
+									<Button
+										themeType="secondary"
+										onClick={submitSelectedInvoices}
+									>
+										+ Add to selected
+									</Button>
+
+								</div>
 								<div className={styles.view_button}>
-									<Button onClick={() => { setViewSelectedInvoice(true); }}>View Selected SID</Button>
+									<Button onClick={() => {
+										setViewSelectedInvoice(true);
+										getViewSelectedInvoices();
+									}}
+									>
+										View Selected SID
+
+									</Button>
 								</div>
 							</div>
 						)}

@@ -11,24 +11,51 @@ import InvoiceCount from './renderFunction/InvoiceCount';
 import Ribbon from './renderFunction/Ribbon';
 import styles from './styles.module.css';
 
-const list = {
-	list: [
-		{
-			payrunName : 'PayRun_301_0222_15:34_4',
-			amount     : '765575',
-			count      : 22,
-			date       : ' 14:30:19 01-04-2022',
-		},
-		{
-			payrunName : 'PayRun_301_0222_14:19_9',
-			amount     : '4235345575',
-			count      : 282,
-			date       : ' 04:00:19 01-04-2023',
-		},
-	],
-};
+// const list1 = {
+// 	list: [
+// 		{
+// 			payrunName : 'PayRun_301_0222_15:34_4',
+// 			amount     : '765575',
+// 			count      : 22,
+// 			date       : ' 14:30:19 01-04-2022',
+// 		},
+// 		{
+// 			payrunName : 'PayRun_301_0222_14:19_9',
+// 			amount     : '4235345575',
+// 			count      : 282,
+// 			date       : ' 04:00:19 01-04-2023',
+// 		},
+// 	],
+// };
+interface DataTypes {
+	list: object[];
+	pageIndex?: number;
+	totalPage?: number;
+	totalRecords?: number;
 
-function ExitingPayRun({ exitPayRun, setExitPayRun }) {
+}
+
+interface FiltterProps {
+	pageIndex?:number,
+}
+interface Props {
+	exitPayRun:boolean,
+	setExitPayRun:Function,
+	data:DataTypes,
+	loading:boolean,
+	filters:FiltterProps,
+	setFilters:Function,
+}
+
+function ExitingPayRun({
+	exitPayRun,
+	setExitPayRun,
+	data,
+	loading,
+	filters,
+	setFilters,
+}:Props) {
+	const { pageIndex } = data || {};
 	const { push } = useRouter();
 	const handleClick = () => (
 		push('/business-finance/account-payables/advance-payment/add-into-existing-payrun')
@@ -61,8 +88,8 @@ function ExitingPayRun({ exitPayRun, setExitPayRun }) {
 				</div>
 			);
 		},
-		renderRibbon: () => (
-			<Ribbon />
+		renderRibbon: (itemData) => (
+			<Ribbon itemData={itemData} />
 		),
 		renderAmountWithCurrency: (itemData) => (
 			<AmountWithCurrency itemData={itemData} />
@@ -82,7 +109,19 @@ function ExitingPayRun({ exitPayRun, setExitPayRun }) {
 					<div className={styles.header}>
 						Select a pay run you want to add to.
 					</div>
-					<List config={PaymentReadyConfig} itemData={list} functions={functions} rowStyle="border" />
+					<List
+						config={PaymentReadyConfig}
+						itemData={data}
+						loading={loading}
+						functions={functions}
+						page={pageIndex}
+						pageSize={10}
+						handlePageChange={(val: number) => setFilters({
+							...filters,
+							pageIndex: val,
+						})}
+						rowStyle="border"
+					/>
 				</Modal.Body>
 				<Modal.Footer>
 					<Button themeType="secondary" onClick={() => { setExitPayRun(false); }}>Cancel</Button>

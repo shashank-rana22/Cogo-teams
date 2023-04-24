@@ -14,21 +14,21 @@ export const PaymentReadyConfig = {
 			func : 'renderRadio',
 		},
 		{
-			key  : 'payrunName',
+			key  : 'name',
 			span : 3.5,
 		},
 		{
-			key  : 'amount',
+			key  : 'totalValue',
 			span : 4,
 			func : 'renderAmountWithCurrency',
 		},
 		{
-			key  : 'count',
+			key  : 'invoiceCount',
 			span : 3,
 			func : 'renderInvoiceCount',
 		},
 		{
-			key  : 'date',
+			key  : 'createdAt',
 			span : 3,
 			func : 'renderDateWithTime',
 		},

@@ -2,14 +2,56 @@ import { Modal, Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
+import useGetCreateNewPayRun from '../../hooks/useGetCreateNewPayRun';
+
 import ExitingPayRun from './ExistingPayRun';
 import styles from './styles.module.css';
 
-function PayRunTypeModal({ payRunType, setPayRunType }) {
+interface CreateNewPayRunResponse {
+	data?: {
+		id: string;
+	};
+}
+
+interface DataTypes {
+	list: object[];
+	pageIndex?: number;
+	totalPage?: number;
+	totalRecords?: number;
+
+}
+interface FiltersProps {
+	pageIndex:number,
+}
+interface Props {
+	payRunType:boolean,
+	setPayRunType:Function,
+	data:DataTypes,
+	loading:boolean,
+	filters:FiltersProps,
+	setFilters:Function,
+	activeEntity:string,
+	currency:string,
+}
+
+function PayRunTypeModal({
+	payRunType,
+	setPayRunType,
+	data,
+	loading,
+	filters,
+	setFilters,
+	activeEntity,
+	currency,
+}:Props) {
+	const { totalRecords } = data || {};
 	const { push } = useRouter();
-	const handleClick = () => (
-		push('/business-finance/account-payables/advance-payment/create-new-payrun')
-	);
+	const { getCreateNewPayRun } = useGetCreateNewPayRun({ activeEntity, currency });
+	const handleClick = async () => {
+		const resp: CreateNewPayRunResponse = await getCreateNewPayRun();
+		push(`/business-finance/account-payables/advance-payment/create-new-payrun?payrun=${resp?.data?.id}
+		&currency=${currency}&entity=${activeEntity}`);
+	};
 	const [exitPayRun, setExitPayRun] = useState(false);
 	return (
 		<div className={styles.container}>
@@ -17,7 +59,9 @@ function PayRunTypeModal({ payRunType, setPayRunType }) {
 				{/* <Modal.Header title="Are you sure?" /> */}
 				<Modal.Body>
 					<div className={styles.sub_container}>
-						2  Pay Runs Available with same entity & currency.
+						{totalRecords}
+						{' '}
+						Pay Runs Available with same entity & currency.
 						You can either create a new payrun or add more invoices into existing one.
 					</div>
 				</Modal.Body>
@@ -30,7 +74,16 @@ function PayRunTypeModal({ payRunType, setPayRunType }) {
 					</div>
 				</Modal.Footer>
 			</Modal>
-			{exitPayRun && <ExitingPayRun exitPayRun={exitPayRun} setExitPayRun={setExitPayRun} />}
+			{exitPayRun && (
+				<ExitingPayRun
+					exitPayRun={exitPayRun}
+					setExitPayRun={setExitPayRun}
+					data={data}
+					loading={loading}
+					filters={filters}
+					setFilters={setFilters}
+				/>
+			)}
 		</div>
 	);
 }
