@@ -132,7 +132,8 @@ function useGetIngestionList() {
 							themeType="tertiary"
 						>
 							<a
-								href={`/${partner_id}${REDIRECT_LINK_MAPPING[item?.is_channel_partner]}?source_id=${item?.id}`}
+								href={`/${partner_id}${REDIRECT_LINK_MAPPING[item?.is_channel_partner]}
+								?source_id=${item?.id}`}
 							>
 								{startCase(item?.ingestion_type || '___')}
 							</a>
