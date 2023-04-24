@@ -1,6 +1,6 @@
 import { Flex, Text } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { forwardRef, useImperativeHandle, useEffect } from 'react';
+import { forwardRef, useImperativeHandle } from 'react';
 
 // import ControlledTextArea from '../../commons/ControlledTextArea';
 
@@ -11,19 +11,18 @@ import { leftDataControls } from './leftDataControl';
 import styles from './styles.module.css';
 import { tableDetailControls } from './TableDetailControls';
 
-function Frontside({ noFormat, initialValues, mode }, ref) {
+function Frontside({ noFormat, initialValues }, ref) {
 	const formatValues = formmatedValues(initialValues);
 
 	const service_type = formatValues?.service_type;
 
-	const { control, handleSubmit, setValue } = useForm({ formatValues });
-	const isReadonly = mode === 'read';
+	const { handleSubmit } = useForm({ formatValues });
 
-	useEffect(() => {
-		Object.keys(formatValues || {}).forEach((key) => {
-			setValue(key, formatValues[key]);
-		});
-	}, []);
+	// useEffect(() => {
+	// 	Object.keys(formatValues || {}).forEach((key) => {
+	// 		setValue(key, formatValues[key]);
+	// 	});
+	// }, []);
 
 	useImperativeHandle(ref, () => ({
 		handleSubmit,
@@ -78,7 +77,7 @@ function Frontside({ noFormat, initialValues, mode }, ref) {
 							/> */}
 						</div>
 					</div>
-					<div className={styles.block} className="borderless-no-format" style={{ width: '50%' }}>
+					<div className={styles.block} style={{ width: '50%' }}>
 						<Text
 							className="hidden-no-format"
 							size={14}

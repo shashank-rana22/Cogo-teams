@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function SecondStep({ item, setSecondStep, updateResponse, onCancel = () => {} }) {
+function SecondStep({ item, setSecondStep, updateResponse }) {
 	const {
 		handleShipperRevision,
 		remarks,

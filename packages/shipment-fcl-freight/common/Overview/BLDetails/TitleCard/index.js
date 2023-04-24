@@ -31,8 +31,10 @@ function TitleCard({
 
 						{item?.containers_rolled_over ? (
 							<div className={styles.roll_over}>
-								,{' '}
-								{startCase(item?.containers_rolled_over)}{' '}
+								,
+								{' '}
+								{startCase(item?.containers_rolled_over)}
+								{' '}
 								rolled over
 							</div>
 						) : null}

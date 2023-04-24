@@ -1,5 +1,4 @@
-import { ShipmentDetailContext } from '@cogoport/context';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 
 import TaskCard from '../../../Tasks/TaskExecution';
 
