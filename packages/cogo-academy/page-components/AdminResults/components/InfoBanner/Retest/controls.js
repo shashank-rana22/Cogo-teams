@@ -35,7 +35,6 @@ const getControls = ({ control, formvalues }) => {
 			size="sm"
 			type="number"
 			disabled={!formvalues.filtered_users?.includes('percentile_checked')}
-			rules={{ required: { value: true, message: 'percentile is required' } }}
 		/>
 		<Tooltip
 			theme="light"
@@ -63,7 +62,6 @@ const getControls = ({ control, formvalues }) => {
 			size="sm"
 			type="number"
 			disabled={!formvalues.filtered_users?.includes('percentage_checked')}
-			rules={{ required: { value: true, message: 'percentage is required' } }}
 		/>
 		<Tooltip
 			theme="light"
