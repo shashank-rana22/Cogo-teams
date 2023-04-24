@@ -6,22 +6,22 @@ import UpdateButton from './UpdateButton';
 function Card({ task = {}, handleClick = () => {}, selectedTaskId = '', isTaskOpen = false }) {
 	return (
 		<div className={styles.container}>
-			<div className={styles.row}>
-				<TaskDetails task={task} isTaskOpen={isTaskOpen} />
 
+			<TaskDetails task={task} isTaskOpen={isTaskOpen} />
+
+			<div className={styles.action}>
 				{isTaskOpen ? (
 					null
 				) : (
 					<UpdateButton
 						task={task}
 						handleClick={handleClick}
-						hideButton={task.status === 'completed' || selectedTaskId.lenght}
+						hideButton={task.status === 'completed' || selectedTaskId.length}
 					/>
 				)}
 
 				<UpdateAction task={task} />
 			</div>
-
 		</div>
 	);
 }
