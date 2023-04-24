@@ -1,6 +1,6 @@
 .container {
 	width: 100%;
-	margin-top: 32px;
+	margin-top: 12px;
 }
 
 .question {
@@ -91,6 +91,14 @@
 	font-weight: 600;
 	background: #fff;
 	border: "1px";
+	border: 1px solid #ffe4af;
+	border-radius: 16px;
+}
+
+.question_type {
+	width: 66px;
+	color: #fff;
+	text-align: center;
 	border: 1px solid #ffe4af;
 	border-radius: 16px;
 }

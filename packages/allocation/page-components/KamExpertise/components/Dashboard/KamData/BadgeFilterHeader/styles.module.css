@@ -1,0 +1,49 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 100%;
+
+	@media (max-width: 576px) {
+		justify-content: flex-start;
+		padding: 8px 0;
+	}
+}
+
+.leaderboard_header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 20px 0 12px;
+
+	@media (max-width: 576px) {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
+
+.search {
+	width: 180px;
+
+	@media (max-width: 576px) {
+		flex-basis: 50%;
+	}
+}
+
+.select_container {
+	width: 180px;
+	margin-right: 8px;
+
+	:global(.ui_multiselectt_options_container) {
+		height: 120px;
+	}
+
+	@media (max-width: 576px) {
+		flex-basis: 50%;
+	}
+}
+
+.overview_header {
+	font-size: 20px;
+	font-weight: bold;
+}

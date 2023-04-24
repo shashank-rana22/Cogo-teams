@@ -14,6 +14,9 @@ import {
 	asyncFieldsListOperators,
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
+	asyncFieldsExpertiseConfigurations,
+	asyncFieldsExpertiseBadgeName,
+	asyncKamExpertiseRuleOptions,
 	listVendors,
 	asyncListCogoEntity,
 } from '../../../utils/getAsyncFields';
@@ -38,18 +41,21 @@ import {
  */
 
 const keyAsyncFieldsParamsMapping = {
-	list_vendors           : listVendors,
-	organizations          : asyncFieldsOrganizations,
-	organization_users     : asyncFieldsOrganizationUser,
-	partners               : asyncFieldsPartner,
-	partner_users          : asyncFieldsPartnerUsers,
-	partner_roles          : asyncFieldsPartnerRoles,
-	segments               : asyncFieldsCampaignSegments,
-	list_locations         : asyncFieldsLocations,
-	list_operators         : asyncFieldsListOperators,
-	list_rate_charge_codes : asyncFieldListRateChargeCodes,
-	allot_bank             : asyncAllotBanks,
-	list_cogo_entity       : asyncListCogoEntity,
+	list_vendors            : listVendors,
+	organizations           : asyncFieldsOrganizations,
+	organization_users      : asyncFieldsOrganizationUser,
+	partners                : asyncFieldsPartner,
+	partner_users           : asyncFieldsPartnerUsers,
+	partner_roles           : asyncFieldsPartnerRoles,
+	segments                : asyncFieldsCampaignSegments,
+	list_locations          : asyncFieldsLocations,
+	list_operators          : asyncFieldsListOperators,
+	list_rate_charge_codes  : asyncFieldListRateChargeCodes,
+	allot_bank              : asyncAllotBanks,
+	list_cogo_entity        : asyncListCogoEntity,
+	expertise_configuration : asyncFieldsExpertiseConfigurations,
+	badge_name              : asyncFieldsExpertiseBadgeName,
+	rule_options            : asyncKamExpertiseRuleOptions,
 };
 
 function AsyncSelect(props) {
