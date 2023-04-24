@@ -5,18 +5,17 @@ import { useEffect, useRef, useState } from 'react';
 import TaskContainer from '../TaskContainer';
 
 import HBLCreate from './HBLCreate';
-import useDraftBLApis from './hooks/useDraftBLApis';
+import useDraftBLHelper from './hooks/useDraftBLHelper';
 import MBLDetails from './MBLDetails';
 import styles from './styles.module.css';
 import UploadHbl from './UploadHbl';
 
 function UploadDraftBL({
-	summary = {},
-	pendingTask = {},
-	refetch = () => {},
-	clearTask = () => {},
-	services = [],
-	selectedMail = {},
+	task = {},
+	shipmentData = {},
+	primaryService = {},
+	onCancel = () => {},
+	taskListRefetch = () => {},
 }) {
 	const [hblData, setHblData] = useState([]);
 	const [hblLoading, setHblLoading] = useState(false);
@@ -26,21 +25,13 @@ function UploadDraftBL({
 	const [canUseSwitch, setcanUseSwitch] = useState(true);
 	const mblRef = useRef();
 
-	const fcl_or_lcl_service =		(services || []).find(
-		(service) => service?.service_type === 'fcl_freight_service'
-				|| service?.service_type === 'lcl_freight_service',
-	) || {};
+	const isHBL =		(primaryService.bl_category || '').toLowerCase() === 'hbl';
 
-	const isHBL =		(fcl_or_lcl_service?.bl_category || '').toLowerCase() === 'hbl'
-		|| (summary?.bl_category || '').toLowerCase() === 'hbl';
-
-	const initial_step =		(fcl_or_lcl_service?.bl_category || '').toLowerCase()
-		|| (summary?.bl_category || '').toLowerCase();
+	const initial_step = primaryService.bl_category;
 
 	const [step, setStep] = useState(initial_step || '');
 
-	const blCount = fcl_or_lcl_service?.bls_count || summary?.bls_count || 0;
-	const isShipmentId =		pendingTask?.shipment_id || summary?.shipment_id || summary?.id;
+	const blCount = primaryService.bls_count;
 
 	const {
 		listDocsAPI,
@@ -48,14 +39,13 @@ function UploadDraftBL({
 		createShipmentDocAPI,
 		createHBL,
 		submitMBL,
-	} = useDraftBLApis({
-		isShipmentId,
+	} = useDraftBLHelper({
 		isHBL,
-		pendingTask,
-		fcl_or_lcl_service,
-		clearTask,
-		refetch,
-		summary,
+		task,
+		primaryService,
+		onCancel,
+		taskListRefetch,
+		shipmentData,
 	});
 
 	const shipmentDocsLength = shipmentListDocsAPI?.data?.list?.length;
@@ -68,11 +58,7 @@ function UploadDraftBL({
 		const condition =			tradeDocsLength >= blCount || shipmentDocsLength >= blCount;
 
 		setIsAllHblUploaded(condition);
-		if (fcl_or_lcl_service.service_type === 'lcl_freight_service') {
-			refetch();
-			clearTask();
-			return;
-		}
+
 		if (condition) {
 			setStep('mbl');
 		}
@@ -113,7 +99,7 @@ function UploadDraftBL({
 		await createHBL({
 			setHblLoading,
 			hblData,
-			summary,
+			shipmentData,
 		});
 		await listDocsAPI.trigger();
 		setcanUseSwitch(false);
@@ -131,7 +117,7 @@ function UploadDraftBL({
 	return (
 		<TaskContainer
 			loading={listDocsAPI?.loading || shipmentListDocsAPI?.loading}
-			pendingTask={pendingTask}
+			task={task}
 			actions={(
 				<>
 					{canUseSwitch && isHBL ? (
@@ -146,17 +132,16 @@ function UploadDraftBL({
 						</Button>
 					) : null}
 
-					{fcl_or_lcl_service?.service_type === 'fcl_freight_service' ? (
-						<Button
-							disabled={isNextDisabled}
-							onClick={handleClickOnNext}
-							size="sm"
-							id="bm_pt_bl_upload_submit"
-						>
-							{step === 'hbl' && isHBL ? 'Next: MBL Details' : null}
-							{step === 'mbl' || !isHBL ? 'Submit' : null}
-						</Button>
-					) : null}
+					<Button
+						disabled={isNextDisabled}
+						onClick={handleClickOnNext}
+						size="sm"
+						id="bm_pt_bl_upload_submit"
+					>
+						{step === 'hbl' && isHBL ? 'Next: MBL Details' : null}
+						{step === 'mbl' || !isHBL ? 'Submit' : null}
+					</Button>
+
 				</>
 			)}
 		>
@@ -177,8 +162,8 @@ function UploadDraftBL({
 											completed={listDocsAPI?.data?.list?.[i]}
 											hblData={hblData[i] || listDocsAPI?.data?.list?.[i]?.data}
 											onSave={(v) => handleSaveHBL(i, v)}
-											summary={summary}
-											services={services}
+											shipmentData={shipmentData}
+											primaryService={primaryService}
 										/>
 									</div>
 								))}
@@ -190,9 +175,7 @@ function UploadDraftBL({
 										size="sm"
 										id="bm_pt_bl_upload_save_all_hbls"
 									>
-										{fcl_or_lcl_service?.service_type === 'fcl_freight_service'
-											? 'Save All HBLs'
-											: 'Submit'}
+										Save All HBLs
 									</Button>
 								</div>
 							) : null}
@@ -200,10 +183,10 @@ function UploadDraftBL({
 					) : (
 						<UploadHbl
 							refetchDocs={refetchDocs}
-							data={pendingTask}
+							task={task}
 							bls_count={blCount}
 							docs={uploadedDocs}
-							summary={summary}
+							shipmentData={shipmentData}
 						/>
 					)}
 				</div>
@@ -212,9 +195,10 @@ function UploadDraftBL({
 			{(step === 'mbl' || !isHBL) && (
 				<MBLDetails
 					ref={mblRef}
-					pendingTask={pendingTask}
-					selectedMail={selectedMail}
-					summary={summary}
+					task={task}
+					// selectedMail={selectedMail}
+					shipmentData={shipmentData}
+					primaryService={primaryService}
 				/>
 			)}
 		</TaskContainer>

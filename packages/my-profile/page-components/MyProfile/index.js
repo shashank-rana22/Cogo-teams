@@ -2,6 +2,8 @@ import { Button, Modal, Loader } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
+import useGetAllocationKamExpertiseProfile from '../../hooks/useGetAllocationKamExpertiseProfile';
+
 import ChangePassword from './ChangePassword';
 import useChangePassword from './ChangePassword/useChangePassword';
 import Details from './Details';
@@ -37,11 +39,18 @@ function MyProfile() {
 		handleSubmit = () => {},
 		getValues,
 		hideOrganizationHierarchy,
+		patternError,
 	} = useChangePassword({
 		refetch,
 		personDetails : detailsData,
 		setShowModal  : setChangepasswordModal,
 	});
+
+	const {
+		badgeListLoading = false,
+		userBadges,
+		profileBadgeRefetch,
+	} = useGetAllocationKamExpertiseProfile(partner_user_id);
 
 	const { name = '' } = detailsData || {};
 
@@ -79,6 +88,8 @@ function MyProfile() {
 				<div className={styles.container}>
 					<div className={styles.header}>
 						<Header
+							badgeListLoading={badgeListLoading}
+							userBadges={userBadges}
 							detailsData={detailsData}
 							setRefetch={refetch}
 							partner_user_id={partner_user_id}
@@ -90,6 +101,9 @@ function MyProfile() {
 					<div className={styles.details}>
 						<Details
 							detailsData={detailsData}
+							badgeListLoading={badgeListLoading}
+							userBadges={userBadges}
+							profileBadgeRefetch={profileBadgeRefetch}
 						/>
 
 					</div>
@@ -119,6 +133,7 @@ function MyProfile() {
 					control={control}
 					errors={errors}
 					password={password}
+					patternError={patternError}
 
 				/>
 				<Modal.Footer>

@@ -38,3 +38,18 @@
 	color: #393f70;
 	margin-left: 22px;
 }
+
+.booking_req_heading{
+	display: flex;
+	align-items: center;
+
+	:global{
+		.ui_button_container{
+			margin-left: 10px;
+		}
+	}
+}
+
+.booking_req_button_text{
+	font-size: 12px;
+}

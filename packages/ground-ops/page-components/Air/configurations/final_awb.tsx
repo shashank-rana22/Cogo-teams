@@ -42,25 +42,6 @@ export const FinalAwbFields = {
 			),
 		},
 		{
-			key   : 'origin',
-			label : 'Origin',
-			span  : 3,
-			func  : 'startCase',
-
-		},
-		{
-			key   : 'destination',
-			label : 'Destination',
-			span  : 3,
-			func  : 'startCase',
-		},
-		{
-			key   : 'airline',
-			label : 'Carrier',
-			span  : 1,
-			func  : 'startCase',
-		},
-		{
 			key    : 'deadline',
 			label  : 'Due On',
 			span   : 1,

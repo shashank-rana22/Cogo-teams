@@ -85,10 +85,10 @@ function VoiceCallComponent({
 								+
 								{code}
 								{' '}
-								{hideDetails({
+								{code === '91' ? hideDetails({
 									data : number,
 									type : 'number',
-								})}
+								}) : number}
 							</div>
 						</div>
 					</div>

@@ -5,7 +5,7 @@ import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 
 import {
 	UploadBookingNote, UploadCargoArrival, UploadContainerDetails,
-	MarkConfirmServices, NominationTask, GenerateFreightCertificate, ChooseServiceProvider,
+	MarkConfirmServices, NominationTask, GenerateFreightCertificate, ChooseServiceProvider, UploadDraftBL,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
@@ -24,7 +24,6 @@ function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {
 		steps,
 		currentStep,
 		setCurrentStep,
-		primaryService,
 	} = useTaskExecution({ task, taskConfigData });
 
 	const stepConfigValue = steps.length
@@ -45,16 +44,24 @@ function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {
 				task={task}
 				onCancel={onCancel}
 				taskListRefetch={taskListRefetch}
-				primaryService={primaryService}
+				primaryService={primary_service}
+				shipment_data={shipment_data}
+				servicesList={servicesList}
 			/>
 		);
 	}
 
 	if (
-		task.task === 'upload_draft_bill_of_lading' && primaryService?.trade_type === 'export'
+		task.task === 'upload_draft_bill_of_lading' && primary_service?.trade_type === 'export'
 	) {
 		return (
-			<div>Draft bl flow for export</div>
+			<UploadDraftBL
+				task={task}
+				shipmentData={shipment_data}
+				primaryService={primary_service}
+				onCancel={onCancel}
+				taskListRefetch={taskListRefetch}
+			/>
 		);
 	}
 
@@ -142,7 +149,7 @@ function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {
 			stepConfig={stepConfigValue}
 			onCancel={onCancel}
 			refetch={taskListRefetch}
-			primaryService={primaryService}
+			primaryService={primary_service}
 			isLastStep={currentStep === steps.length - 1}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}

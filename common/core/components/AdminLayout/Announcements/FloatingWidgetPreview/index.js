@@ -1,4 +1,5 @@
 import { Button, Loader } from '@cogoport/components';
+import { IcMCross } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
@@ -46,6 +47,10 @@ function FloatingWidgetPreview(props) {
 
 	return (
 		<div className={styles.container}>
+
+			<div className={styles.cross_icon}>
+				<IcMCross width={20} height={20} onClick={() => setModalData({})} />
+			</div>
 
 			<div className={styles.content_container}>
 

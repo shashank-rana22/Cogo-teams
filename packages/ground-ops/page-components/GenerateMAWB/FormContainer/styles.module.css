@@ -106,3 +106,14 @@
 	margin-right: 40px;
 	margin-left: auto;
 }
+
+.remark {
+	margin: 20px;
+
+	span {
+		margin-right: 20px;
+		font-size: 14px;
+		line-height: 150%;
+		color: #828282;
+	}
+}
