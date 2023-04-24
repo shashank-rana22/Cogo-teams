@@ -11,6 +11,7 @@ interface DeleteInterface {
 	handleModal?:Function
 	setBulkModal?: React.Dispatch<React.SetStateAction<boolean>>
 	handleDelete?: Function
+	selectedBulkData?:string[]
 }
 
 const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
@@ -137,11 +138,12 @@ const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 	const deleteSelected = async ({
 		id, bulkData, setBulkModal,
 		handleDelete,
+		selectedBulkData = [],
 	}:DeleteInterface) => {
 		try {
 			await deleteSelectedInvoiceTrigger({
 				data: {
-					archiveShipmentIds : [id],
+					archiveShipmentIds : selectedBulkData.length > 0 ? selectedBulkData : [id],
 					performedBy        : userId,
 					actionStatus       : 'DELETE',
 					selectionMode      : bulkData || 'SINGLE',

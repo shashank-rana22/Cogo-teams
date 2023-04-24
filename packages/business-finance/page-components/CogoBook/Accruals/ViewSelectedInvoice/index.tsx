@@ -203,7 +203,14 @@ function ViewSelectedInvoice() {
 								<Button
 									id="approve-modal-btn"
 									themeType="primary"
-									onClick={() => { deleteSelected({ bulkData: 'BULK', setBulkModal }); }}
+									onClick={() => {
+										const selectedIds = checkedData?.map((item) => item?.id);
+										deleteSelected({
+											selectedBulkData : selectedIds,
+											bulkData         : selectedIds?.length > 0 ? 'SINGLE' : 'BULK',
+											setBulkModal,
+										});
+									}}
 								>
 									Yes
 								</Button>
