@@ -14,3 +14,17 @@
 .table_header_container {
 	display: flex;
 }
+
+.table_container{
+	
+
+	tr{
+		height: 40px;
+	}
+
+	:global{
+		.ui_table_body_cell{
+			font-size: 14px;
+		}
+	}
+}
