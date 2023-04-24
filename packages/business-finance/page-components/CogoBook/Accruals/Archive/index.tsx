@@ -162,6 +162,14 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 								style={{ width: '150px' }}
 							/>
 						</div>
+						{particularMonth && (
+							<div className={styles.total_count}>
+								<div>
+									Total Shipments -
+									<span className={styles.total_count_num}>{drillTotalRecords || 0}</span>
+								</div>
+							</div>
+						)}
 					</div>
 					{particularMonth ? (
 						<div className={styles.search_container}>

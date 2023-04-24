@@ -22,7 +22,7 @@
 .filter_container {
 	display: flex;
 	align-items: center;
-	width: 44%;
+	width: 55%;
 
 	:global {
 		.ui_select_display_container {
@@ -145,4 +145,16 @@
 .quo {
 	display: flex;
 	align-items: center;
+}
+
+.total_count{
+	padding: 10px;
+    margin-top: 10px;
+    background: #FDEBE9;
+    border-radius: 6px;
+}
+
+.total_count_num{
+	color: #EE3425;
+	font-weight: 600;
 }
