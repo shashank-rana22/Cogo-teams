@@ -1,8 +1,8 @@
 .control_container {
-	width: 100%;
 	display: flex;
-	align-items: center;
 	flex-wrap: wrap;
+	align-items: center;
+	width: 100%;
 	margin-bottom: 20px;
 }
 
@@ -18,22 +18,21 @@
 }
 
 .check_box {
-	margin-left: 20px;
 	display: flex;
 	align-items: center;
+	margin-left: 20px;
 
 	:global {
 		.ui_checkbox_container {
-			padding: 10px 0 10px;
+			padding: 10px 0;
 		}
 	}
-
 }
 
 .button_wrap {
-	margin: 20px 0px;
 	display: flex;
 	justify-content: flex-end;
+	margin: 20px 0;
 
 	:global {
 		.ui_button_container.ui_ps_themeType_primary {

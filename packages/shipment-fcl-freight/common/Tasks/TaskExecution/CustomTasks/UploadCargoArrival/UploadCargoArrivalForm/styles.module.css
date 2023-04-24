@@ -1,8 +1,8 @@
 .trade_document {
-	padding: 16px;
-	overflow: 'auto';
-	background-color: #E0E0E0;
 	display: flex;
 	justify-content: center;
+	padding: 16px;
+	overflow: "auto";
 	overflow: auto;
+	background-color: #e0e0e0;
 }

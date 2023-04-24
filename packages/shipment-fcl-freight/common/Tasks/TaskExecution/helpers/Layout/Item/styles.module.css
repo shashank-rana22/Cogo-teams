@@ -7,19 +7,19 @@
 	height: 100%;
 }
 
-.label{
-	margin-bottom:6px;
-	font-weight: 600;
+.label {
+	margin-bottom: 6px;
 	font-size: var(--font-size-md);
+	font-weight: 600;
 }
 
-.heading{
-	margin-bottom:6px;
-	font-weight: 700;
+.heading {
+	margin-bottom: 6px;
 	font-size: var(--font-size-lg);
+	font-weight: 700;
 }
 
-.errors{
+.errors {
 	font-size: var(--font-size-md);
 	color: var(--color-primary-error-red-2);
 }

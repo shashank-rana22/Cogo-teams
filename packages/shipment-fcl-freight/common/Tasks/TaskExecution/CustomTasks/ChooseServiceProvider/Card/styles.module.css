@@ -1,8 +1,8 @@
 .container {
+	padding: 22px;
+	margin-bottom: 20px;
 	border: 1px solid #ded7fc;
 	border-radius: 4px;
-	margin-bottom: 20px;
-	padding: 22px;
 }
 
 .row {
@@ -12,35 +12,35 @@
 }
 
 .priority_text {
-	margin: 0px;
-	font-weight: 600;
+	margin: 0;
 	font-size: 12px;
+	font-weight: 600;
 	line-height: 14px;
 	color: #5e3def;
 }
 
 .purple {
-	color: #393f70;
 	margin-left: 10px;
+	color: #393f70;
 }
 
 .heading {
-	margin: 0px;
-	font-weight: 500;
-	font-size: 14px;
-	line-height: 16px;
-	color: #333333;
+	margin: 0;
 	margin-bottom: 4px;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 16px;
+	color: #333;
 }
 
 .sub_heading {
-	margin: 0px;
-	font-weight: 400;
-	font-size: 12px;
-	line-height: 14px;
 	display: flex;
 	align-items: center;
-	color: #333333;
+	margin: 0;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 14px;
+	color: #333;
 }
 
 .space_between {
@@ -51,8 +51,8 @@
 
 .text {
 	margin-top: 20px;
-	font-weight: 500;
 	margin-bottom: 4px;
+	font-weight: 500;
 }
 
 .button_wrap {

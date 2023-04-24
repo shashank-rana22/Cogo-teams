@@ -1,42 +1,42 @@
-.container{
+.container {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-};
+}
 
-.button_wrap{
+.button_wrap {
 	display: flex;
 	justify-content: flex-end;
-};
+}
 
-.remarks{
+.remarks {
 	margin-left: 5px;
 	color: #393f70;
-};
+}
 
-.custom_div{
+.custom_div {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-};
+}
 
-.custom_skeleton{
-	margin-bottom: 5px;
+.custom_skeleton {
 	width: 100%;
-};
+	margin-bottom: 5px;
+}
 
-.remark_head{
-	color: #393f70;
+.remark_head {
 	font-size: 16px;
 	font-weight: 500;
-};
+	color: #393f70;
+}
 
-.remark_value{
-	margin-left: 6px;
+.remark_value {
 	margin-top: 2px;
-};
+	margin-left: 6px;
+}
 
-.remark{
+.remark {
 	display: flex;
 	margin-left: 5px;
-};
+}
