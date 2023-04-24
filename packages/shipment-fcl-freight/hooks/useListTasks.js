@@ -1,12 +1,21 @@
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
 function useListTasks({
 	filters = {},
 	defaultFilters = {},
 	defaultParams = {},
+	showMyTasks = true,
+	activeStakeholder,
 }) {
+	const { profile } = useSelector((state) => state);
+
+	const user_id = profile?.user?.id;
+
+	const showTaskFilters = { [`${activeStakeholder}_id`]: user_id };
+
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'fcl_freight/list_tasks',
 		method : 'GET',
@@ -15,6 +24,7 @@ function useListTasks({
 			filters: {
 				...defaultFilters,
 				...filters,
+				...(showMyTasks ? showTaskFilters : {}),
 			},
 		},
 
@@ -32,7 +42,7 @@ function useListTasks({
 
 	useEffect(() => {
 		apiTrigger();
-	}, [apiTrigger, filters]);
+	}, [apiTrigger, filters, showMyTasks]);
 
 	return {
 		loading,

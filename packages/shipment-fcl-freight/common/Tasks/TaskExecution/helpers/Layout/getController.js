@@ -6,6 +6,7 @@ import {
 	DatepickerController,
 	TextAreaController,
 	CheckboxController,
+	CountrySelectController,
 } from '@cogoport/forms';
 import UploadController from '@cogoport/forms/page-components/Controlled/UploadController';
 
@@ -43,6 +44,9 @@ const getElementController = (type = 'text') => {
 
 		case 'checkbox':
 			return CheckboxController;
+
+		case 'country_select':
+			return CountrySelectController;
 
 		default:
 			return InputController;

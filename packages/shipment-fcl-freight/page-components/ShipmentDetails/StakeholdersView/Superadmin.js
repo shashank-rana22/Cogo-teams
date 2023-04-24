@@ -18,13 +18,13 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 
 import styles from './styles.module.css';
 
-const services_additional_methods = ['stakeholder', 'service_objects'];
+const services_additional_methods = ['stakeholder', 'service_objects', 'booking_requirement'];
 
 function Superadmin({ get, activeStakeholder = '' }) {
 	const router = useRouter();
-	const [activeTab, setActiveTab] = useState('overview');
+	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
 
-	const { shipment_data, isGettingShipment } = get;
+	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get;
 
 	const { servicesGet } = useGetServices({
 		shipment_data,
@@ -58,7 +58,7 @@ function Superadmin({ get, activeStakeholder = '' }) {
 		);
 	}
 
-	if (!shipment_data) {
+	if (!shipment_data && getShipmentStatusCode !== 403) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.section}>
@@ -72,6 +72,17 @@ function Superadmin({ get, activeStakeholder = '' }) {
 						&nbsp;
 						Refresh
 					</Button>
+				</div>
+			</div>
+		);
+	}
+
+	if (getShipmentStatusCode === 403) {
+		return (
+			<div className={styles.shipment_not_found}>
+				<div className={styles.page}>
+					You don&apos;t have permission to visit this page.
+					Please contact at +91 7208083747
 				</div>
 			</div>
 		);

@@ -1,0 +1,7 @@
+.flex_container{
+  display: block;
+  border:1px solid #EDEDED;
+  padding: 16;
+  border-radius: 8;
+  margin-bottom: 8;
+} 

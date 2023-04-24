@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 
 const useUpdateShipmentService = ({
 	refetch = () => {},
-	successMessage = 'Successfully Created',
+	successMessage = 'Successfully Updated',
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_service',

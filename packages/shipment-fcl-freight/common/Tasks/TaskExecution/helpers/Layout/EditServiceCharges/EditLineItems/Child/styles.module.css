@@ -1,0 +1,14 @@
+.container{
+    padding-left: 4px;
+    width: 100%;
+}
+
+.item_container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.delete_button_container{
+    width: 5%;
+}

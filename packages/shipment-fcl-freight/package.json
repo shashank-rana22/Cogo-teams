@@ -10,6 +10,7 @@
     "@cogoport/forms": "workspace:^0.1.0",
     "@cogoport/globalization": "workspace:^0.0.1",
     "@cogoport/icons-react": "^1.0.60",
+    "@cogoport/scope-select": "workspace:^0.1.0",
     "@cogoport/maps": "^1.0.2",
     "@cogoport/navigation-configs": "workspace:^0.1.0",
     "@cogoport/next": "workspace:^0.1.0",

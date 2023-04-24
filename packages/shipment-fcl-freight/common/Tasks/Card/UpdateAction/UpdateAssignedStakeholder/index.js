@@ -1,7 +1,10 @@
-import { Toast, Button, Modal } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { RadioGroupController, useForm } from '@cogoport/forms';
-import { startCase } from '@cogoport/utils';
 import React from 'react';
+
+import useUpdateShipmentPendingTask from '../../../../../hooks/useUpdateShipmentPendingTask';
+
+import styles from './styles.module.css';
 
 function UpdateAssignedStakeholder({
 	setShowAdmin = () => {},
@@ -11,10 +14,15 @@ function UpdateAssignedStakeholder({
 }) {
 	const { control, handleSubmit } = useForm();
 
-	const loading = false;
+	const { apiTrigger, loading } = useUpdateShipmentPendingTask({ refetch });
 
 	const onCreate = ({ assigned_stakeholder }) => {
-		Toast(startCase(assigned_stakeholder));
+		const payload = {
+			id     : task?.id,
+			status : 'pending',
+			assigned_stakeholder,
+		};
+		apiTrigger(payload);
 	};
 
 	return (
@@ -25,23 +33,29 @@ function UpdateAssignedStakeholder({
 			<Modal.Header title="Update Assigned Stakeholder" />
 
 			<Modal.Body>
-				<RadioGroupController
-					options={[
-						{ label: 'OKAM', value: 'booking_agent' },
-						{ label: 'SO1', value: 'service_ops1' },
-						{ label: 'SO2', value: 'service_ops2' },
-					]}
-					control={control}
-					name="assigned_stakeholder"
-					rules={{ required: { value: true, message: 'This is required' } }}
-				/>
+				<div className={styles.container}>
+					<RadioGroupController
+						options={[
+							{ label: 'OKAM', value: 'booking_agent' },
+							{ label: 'Service Ops 1', value: 'service_ops1' },
+							{ label: 'Service Ops 2', value: 'service_ops2' },
+							{ label: 'Costbooking Ops', value: 'costbooking_ops' },
+							{ label: 'Collection desk', value: 'collection_desk' },
+							{ label: 'Release desk', value: 'release_desk' },
+							{ label: 'Lastmile Ops', value: 'lastmile_ops' },
+						]}
+						control={control}
+						name="assigned_stakeholder"
+						rules={{ required: { value: true, message: 'This is required' } }}
+					/>
+				</div>
 			</Modal.Body>
 			<Modal.Footer>
 				<Button
-					className="secondary md"
 					style={{ marginRight: '12px' }}
 					onClick={() => setShowAdmin(false)}
 					disabled={loading}
+					themeType="secondary"
 				>
 					Cancel
 				</Button>

@@ -1,0 +1,52 @@
+.container{
+    border: 1px solid #f9da7f;
+	border-radius: 4px;
+	margin-bottom: 20px;
+}
+
+.sub_container{
+    padding: 12px 22px;
+    display: flex;
+}
+
+.divider{
+    border-top: 1px solid #f9da7f;
+}
+
+
+.heading_text{
+    font-weight: 600;
+	font-size: 12px;
+}
+
+.priority{
+    color: var(--color-primary-error-red-3);
+}
+
+.source{
+    margin-left: 10px;
+}
+
+
+.label{
+    font-weight: 600;
+	font-size: 14px;
+}
+
+.value{
+    font-weight: 400;
+	font-size: 12px;
+}
+
+.supplier_proceed_wrapper{
+    display: flex;
+    padding: 12px 22px;
+}
+
+.justify_space_between{
+    justify-content: space-between;
+}
+
+.justify_flex_end{
+    justify-content: flex-end;
+}

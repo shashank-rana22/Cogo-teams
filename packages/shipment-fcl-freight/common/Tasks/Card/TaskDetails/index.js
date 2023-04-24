@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 function TaskDetails({
 	task = {},
 	services = [],
+	isTaskOpen,
 }) {
 	const { primary_service } = useContext(ShipmentDetailContext);
 
@@ -23,14 +24,20 @@ function TaskDetails({
 			}
 		});
 	});
-	const taskName = startCase(task.task || task.label);
+	const taskName = task?.service_type === 'subsidiary_service'
+		? `Mark ${
+			task?.subsidiary_service_name.split(' ')[0]
+		} (${task?.subsidiary_service_name.split(' ').slice(1).join(' ')}) ${
+			task?.task === 'mark_completed' ? 'Completed' : 'Confirm'
+		}` || startCase(task?.task)
+		: startCase(task?.label || task?.task);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.task_details}>
 				<div className={styles.task_and_icon}>
 					<div className={styles.icon}>
-						{task.status === 'completed' ? (
+						{task?.status === 'completed' ? (
 							<IcMTaskCompleted fill="##F68B21" width="1.5em" height="1.5em" />
 						) : (
 							<IcMTaskNotCompleted
@@ -44,7 +51,7 @@ function TaskDetails({
 					<div className={styles.task_name}>{taskName}</div>
 				</div>
 
-				{task.deadline ? (
+				{task?.deadline ? (
 					<div className={styles.deadline}>
 						{`( Deadline: ${formatDate({
 							date       : task?.deadline,
@@ -56,17 +63,18 @@ function TaskDetails({
 					</div>
 				) : null}
 
-				{task.status === 'completed' ? (
+				{task?.status === 'completed' ? (
 					<div className={styles.completed}>
 						{`( Completed On: ${formatDate({
 							date       : task?.updated_at,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 							formatType : 'date',
+							separator  : ' - ',
 						})} )`}
 					</div>
 				) : null}
 
-				{task.due_in ? (
+				{task?.due_in ? (
 					<div className={styles.completed}>
 						<img
 							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-due-in.svg"
@@ -76,7 +84,7 @@ function TaskDetails({
 					</div>
 				) : null}
 
-				{task.over_due ? (
+				{task?.over_due ? (
 					<div className={styles.completed}>
 						<img
 							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-over-due.svg"
@@ -87,9 +95,11 @@ function TaskDetails({
 				) : null}
 			</div>
 
-			<div className={styles.cargo_details}>
-				<CargoDetails primary_service={primary_service} />
-			</div>
+			{!isTaskOpen ? (
+				<div className={styles.cargo_details}>
+					<CargoDetails primary_service={primary_service} />
+				</div>
+			) : null}
 		</div>
 	);
 }
