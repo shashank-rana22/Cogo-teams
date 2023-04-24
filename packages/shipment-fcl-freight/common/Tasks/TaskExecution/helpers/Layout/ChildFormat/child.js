@@ -18,6 +18,7 @@ function Child({
 	field,
 	disabled,
 	error,
+
 }) {
 	let rowWiseFields = [];
 	const totalFields = [];
@@ -54,15 +55,18 @@ function Child({
 							rules : controlItem?.rules,
 							label : controlItem?.label,
 						});
+
+						const show = 'show' in controlItem ? controlItem.show : true;
+
 						const extraProps = {};
 						if (controlItem.customProps?.options) {
 							extraProps.options = controlItem.customProps.options[index];
 						}
 						const disable = index < noDeleteButtonTill && controlItem.name === 'code';
 						const flex = ((controlItem?.span || 12) / 12) * 100;
-						if (!Element) return null;
+						if (!Element || !show) return null;
 						return (
-							<div className={styles.element} style={{ width: `${flex}%`, overflow: 'scroll' }}>
+							<div className={styles.element} style={{ width: `${flex}%`, overflow: 'auto' }}>
 								<h4 style={{
 									height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
 								}}

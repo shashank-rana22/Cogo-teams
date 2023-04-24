@@ -14,6 +14,9 @@ import {
 	asyncFieldsListOperators,
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
+	asyncFieldsExpertiseConfigurations,
+	asyncFieldsExpertiseBadgeName,
+	asyncKamExpertiseRuleOptions,
 	listVendors,
 	asyncListCogoEntity,
 	asyncListHsCodes,
@@ -52,7 +55,10 @@ const keyAsyncFieldsParamsMapping = {
 	list_rate_charge_codes        : asyncFieldListRateChargeCodes,
 	allot_bank                    : asyncAllotBanks,
 	list_cogo_entity              : asyncListCogoEntity,
-	list_hs_codes               	 : asyncListHsCodes,
+	expertise_configuration       : asyncFieldsExpertiseConfigurations,
+	badge_name                    : asyncFieldsExpertiseBadgeName,
+	rule_options                  : asyncKamExpertiseRuleOptions,
+	list_hs_codes                 : asyncListHsCodes,
 	list_exchange_rate_currencies : asyncListCurrency,
 };
 

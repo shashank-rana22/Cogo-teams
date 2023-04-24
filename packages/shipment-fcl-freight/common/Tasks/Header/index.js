@@ -17,7 +17,6 @@ function Header({
 
 	const contextValues = useContext(ShipmentDetailContext);
 	const { activeStakeholder, shipment_data } = contextValues || {};
-	console.log({ contextValues });
 
 	const showBookingRequirementsCondition = ['superadmin', 'booking_desk'].includes(activeStakeholder)
 											&& shipment_data?.state !== 'shipment_received';

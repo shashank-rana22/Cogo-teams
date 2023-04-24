@@ -1,4 +1,4 @@
-import { Input, Toggle } from '@cogoport/components';
+import { Input, Toggle, Placeholder } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
@@ -15,20 +15,31 @@ const tabs = [
 	{
 		key   : 'new_awb',
 		label : 'New AWB',
+		count : 'newAwbCount',
 	},
 	{
 		key   : 'approval_pending',
 		label : 'Approval Pending',
+		count : 'approvalPendingCount',
 	},
 	{
 		key   : 'approved_awb',
 		label : 'Approved AWB',
+		count : 'approvedAwbCount',
 	},
 	{
 		key   : 'final_awb',
 		label : 'Final AWB',
+		count : 'finalAwbCount',
 	},
 ];
+
+const tabsStatsMapping = {
+	newAwbCount          : 'new_awb',
+	approvalPendingCount : 'approval_pending',
+	approvedAwbCount     : 'approved_awb',
+	finalAwbCount        : 'final_awb',
+};
 
 const tabsComponentMapping = {
 	new_awb          : NewAWB,
@@ -56,6 +67,18 @@ function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 	useEffect(() => {
 		listAPI();
 	}, [activeTab, listAPI]);
+
+	useEffect(() => {
+		if (searchValue) {
+			const statsObj = data?.data?.stats || {};
+			const statsObjValues:Array<number> = Object.values(statsObj) || [];
+			const maxStats = Math.max(...statsObjValues);
+			const maxStatsKey = Object.keys(statsObj).find((key) => statsObj[key] === maxStats);
+			setActiveTab(tabsStatsMapping[maxStatsKey]);
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [searchValue]);
+
 	return (
 		<div>
 			<div className={styles.container}>
@@ -75,25 +98,26 @@ function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
 								${tab.key === activeTab ? styles.sub_container_click : styles.sub_container}`}
 							>
 								{tab.label}
+								{loading ? <Placeholder width="20px" margin="0px 0px 0px 10px" />
+									: <div className={styles.stats}>{data?.data?.stats?.[tab.count] || 0}</div>}
 
 							</div>
 
 						</div>
 					))}
 				</div>
-			</div>
-			<div className={styles.filters_container}>
 				<Input
 					value={searchValue}
 					suffix={<IcMSearchlight className="search_icon" />}
 					className={styles.input_search}
-					style={{ width: '260px', height: '26px' }}
 					placeholder="Search by SID or AWB Number"
 					type="text"
 					onChange={(val) => {
 						setSearchValue(val);
 					}}
 				/>
+			</div>
+			<div className={styles.filters_container}>
 				<div className={styles.flex}>
 					<Toggle
 						name="stakeholder_id"

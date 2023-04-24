@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 
 import {
-	UploadBookingNote,
+	UploadBookingNote, UploadCargoArrival, UploadContainerDetails,
 	MarkConfirmServices, NominationTask, GenerateFreightCertificate, ChooseServiceProvider, UploadDraftBL,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
@@ -72,6 +72,32 @@ function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {
 				onCancel={onCancel}
 				taskListRefetch={taskListRefetch}
 				taskConfigData={taskConfigData}
+			/>
+		);
+	}
+
+	if (
+		task.task === 'update_container_details') {
+		return (
+			<UploadContainerDetails
+				pendingTask={task}
+				onCancel={onCancel}
+				services={servicesList}
+				taskListRefetch={taskListRefetch}
+			/>
+		);
+	}
+
+	if (task.task === 'upload_container_arrival_notice') {
+		return (
+			<UploadCargoArrival
+				pendingTask={task}
+				summary={{
+					...(primary_service || {}),
+					importer_exporter_id: shipment_data?.importer_exporter?.id,
+				}}
+				refetch={taskListRefetch}
+				clearTask={onCancel}
 			/>
 		);
 	}
