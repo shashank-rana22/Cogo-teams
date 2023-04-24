@@ -75,9 +75,11 @@ export default function Filters({ stateProps }) {
 						onClick={() => setShowPopover(!showPopover)}
 						className={styles.filter_text}
 					>
-						<IcMFilter />
-						{' '}
-						Filters
+						<div className={styles.button_content}>
+							<IcMFilter />
+							{' '}
+						&ensp;Filters
+						</div>
 					</Button>
 				</Popover>
 			</div>

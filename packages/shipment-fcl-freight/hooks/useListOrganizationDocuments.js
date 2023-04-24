@@ -2,15 +2,15 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-const useListTradeDocuments = ({ defaultFilters = {} }) => {
+const useListOrganizationDocuments = ({ defaultFilters = {}, defaultParams = {} }) => {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : '/list_trade_documents',
+		url    : '/list_organization_documents',
 		method : 'GET',
 		params : {
-			page_limit : 100,
-			filters    : {
+			filters: {
 				...defaultFilters,
 			},
+			...defaultParams,
 		},
 	}, { manual: true });
 
@@ -29,7 +29,8 @@ const useListTradeDocuments = ({ defaultFilters = {} }) => {
 	return {
 		data,
 		loading,
+		getList,
 	};
 };
 
-export default useListTradeDocuments;
+export default useListOrganizationDocuments;

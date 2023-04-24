@@ -2,24 +2,25 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-function useListDocuments({
+function useGetPendingTasks({
 	filters = {},
 	defaultFilters = {},
 	defaultParams = {},
+	shipment_type = '',
 }) {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'fcl_freight/list_documents',
+		url    : `${shipment_type}/list_tasks`,
 		method : 'GET',
 		params : {
 			filters: {
-				...filters,
 				...defaultFilters,
+				...filters,
 			},
 			...defaultParams,
 		},
 	}, { manual: true });
 
-	const listDocuments = useCallback(() => {
+	const getTasks = useCallback(() => {
 		(async () => {
 			try {
 				await trigger();
@@ -30,14 +31,14 @@ function useListDocuments({
 	}, [trigger]);
 
 	useEffect(() => {
-		listDocuments();
-	}, [listDocuments]);
+		getTasks();
+	}, [getTasks]);
 
 	return {
 		loading,
-		refetch : listDocuments,
-		list    : data || [],
+		refetch : getTasks,
+		data    : data?.list,
 	};
 }
 
-export default useListDocuments;
+export default useGetPendingTasks;
