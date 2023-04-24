@@ -35,7 +35,7 @@ function QuestionsList({ tabTitle = '', searchState = '', topicId = '', tagId = 
 			</div>
 		);
 	}
-	if (response_type === 'GPT' && tagId.length === 0) {
+	if (response_type === 'falcon_gpt' && tagId.length === 0) {
 		if (gpt_answer) {
 			return (
 				<GPTAnswers

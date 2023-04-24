@@ -35,7 +35,7 @@ function QuestionList({
 
 	if (loading) return <Loader topic={topic} />;
 
-	if (response_type === 'GPT') {
+	if (response_type === 'falcon_gpt') {
 		if (gpt_answer) {
 			return (
 				<GPTAnswers
