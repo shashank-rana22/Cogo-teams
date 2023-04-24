@@ -29,6 +29,7 @@ interface Props {
 	whiteout?:boolean;
 	awbType?: String;
 	activeHawb?: NestedObj;
+	viewDoc?:boolean;
 }
 
 function OtherChargeDetails({
@@ -37,10 +38,11 @@ function OtherChargeDetails({
 	whiteout = false,
 	awbType = '',
 	activeHawb = {},
+	viewDoc = false,
 }:Props) {
 	const { agentOtherCharges = [], carrierOtherCharges = [] } = formData;
 	const { awbNumber = '', document_number:documentNo = '' } = taskItem;
-	const hawbNumber = activeHawb.isNew ? '' : documentNo;
+	const hawbNumber = activeHawb.isNew && !viewDoc ? '' : documentNo;
 
 	let tempColor = '#333';
 	if (whiteout) {
