@@ -391,14 +391,16 @@ const mawbControls = (disableClass) => ({
 			name               : 'carrierOtherCharges',
 			label              : 'Due Carrier Charges',
 			className          : 'primary lg',
-			span               : 5,
+			span               : 7,
 			type               : 'fieldArray',
 			showButtons        : true,
 			noDeleteButtonTill : 1,
 			value              : [
 				{
-					code  : '',
-					price : '',
+					code        : '',
+					charge_type : '',
+					charge_unit : '',
+					price       : '',
 				},
 			],
 			controls: [
@@ -406,17 +408,42 @@ const mawbControls = (disableClass) => ({
 					name        : 'code',
 					type        : 'text',
 					className   : 'primary lg',
-					span        : 5,
+					span        : 2,
 					placeholder : 'Enter Code',
 					rules       : {
 						required: 'Code is Required',
 					},
 				},
 				{
+					name        : 'charge_type',
+					type        : 'select',
+					className   : 'primary lg',
+					span        : 3,
+					placeholder : 'Enter Charge Type',
+					options     : [
+						{ value: 'chargeable_wt', label: 'Chargeable Weight' },
+						{ value: 'gross_wt', label: 'Gross Weight' },
+						{ value: 'rate_per_kg', label: 'Rate per Kg' },
+					],
+					rules: {
+						required: 'Charge Type is Required',
+					},
+				},
+				{
+					name        : 'charge_unit',
+					type        : 'text',
+					className   : 'primary lg',
+					span        : 2,
+					placeholder : 'Enter Charge Unit',
+					rules       : {
+						required: 'Charge Unit is Required',
+					},
+				},
+				{
 					name        : 'price',
 					placeholder : 'Enter Price',
 					type        : 'text',
-					span        : 5,
+					span        : 2,
 					className   : 'primary lg',
 					rules       : {
 						required: 'Price is Required',

@@ -322,6 +322,7 @@ function GenerateMAWB({
 						fields={fields}
 						control={control}
 						errors={errors}
+						setValue={setValue}
 						item={item}
 						setGenerate={setGenerate}
 						handleSubmit={handleSubmit}
@@ -333,6 +334,7 @@ function GenerateMAWB({
 						activeKey={activeKey}
 						setActiveKey={setActiveKey}
 						taskItem={taskItem}
+						formValues={formValues}
 					/>
 				</>
 			)}
