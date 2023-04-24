@@ -1,0 +1,55 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	padding-left: 12px;
+	margin-bottom: 32px;
+}
+
+.top_panel {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 32px;
+	overflow-x: auto;
+	color: red;
+}
+
+.left_content {
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 21px;
+
+	@media (max-width: 768px) {
+		font-size: 12px;
+	}
+}
+
+.right_content {
+	display: flex;
+	justify-content: space-between;
+}
+
+.toggle_container{
+	display: flex;
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 16px;
+	text-align: center;
+	color: #393f70;
+	margin-left: 22px;
+}
+
+.booking_req_heading{
+	display: flex;
+	align-items: center;
+
+	:global{
+		.ui_button_container{
+			margin-left: 10px;
+		}
+	}
+}
+
+.booking_req_button_text{
+	font-size: 12px;
+}

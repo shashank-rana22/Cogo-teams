@@ -1,0 +1,25 @@
+.head {
+	color: red;
+	font-size: 16px;
+	font-weight: 600;
+	margin-bottom: 30px;
+}
+
+.description {
+	margin-bottom: 40px;
+}
+
+.label {
+	font-weight: 600;
+	margin-bottom:4px;
+}
+
+.errors {
+	font-size: 12px;
+	color: red;
+}
+
+.footer {
+	display: flex;
+	justify-content: flex-end;
+}

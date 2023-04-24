@@ -1,0 +1,61 @@
+.control_container {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	margin-bottom: 20px;
+}
+
+.input {
+	width: 500px;
+	margin-right: 20px;
+
+	:global {
+		.ui_input_container.ui_ps_size_sm .ui_input_control {
+			font-size: 12px;
+		}
+	}
+}
+
+.check_box {
+	margin-left: 20px;
+	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_checkbox_container {
+			padding: 10px 0 10px;
+		}
+	}
+
+}
+
+.button_wrap {
+	margin: 20px 0px;
+	display: flex;
+	justify-content: flex-end;
+
+	:global {
+		.ui_button_container.ui_ps_themeType_primary {
+			margin-right: 12px;
+		}
+	}
+}
+
+.custom_format {
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	font-size: 12px;
+}
+
+.info {
+	font-size: 10px;
+	opacity: 0.58;
+
+	&.other-dates {
+		flex-basis: 100%;
+		margin-top: 6px;
+		opacity: 1;
+	}
+}

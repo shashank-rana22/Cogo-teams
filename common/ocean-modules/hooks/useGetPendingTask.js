@@ -14,8 +14,8 @@ function useGetPendingTasks({
 		method : 'GET',
 		params : {
 			filters: {
-				...filters,
 				...defaultFilters,
+				...filters,
 			},
 			...defaultParams,
 		},

@@ -18,6 +18,12 @@
 			cursor: initial;
 		}
 	}
+
+	:global {
+		.ui_pill_text {
+			white-space: nowrap;
+		}
+	}
 }
 
 .pill {
