@@ -1,0 +1,10 @@
+.button_container{
+    display: flex;
+    justify-content: flex-end;
+
+    :global{
+        .ui_button_container:first-child{
+            margin-right: 8px;
+        }
+    }
+}

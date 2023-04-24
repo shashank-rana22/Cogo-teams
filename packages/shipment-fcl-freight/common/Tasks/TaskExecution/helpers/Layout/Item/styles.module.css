@@ -7,10 +7,27 @@
 	height: 100%;
 }
 
+.label{
+	margin-bottom:6px;
+	font-weight: 600;
+	font-size: var(--font-size-md);
+}
+
+.heading{
+	margin-bottom:6px;
+	font-weight: 700;
+	font-size: var(--font-size-lg);
+}
+
+.errors{
+	font-size: var(--font-size-md);
+	color: var(--color-primary-error-red-2);
+}
+
 .element {
-	/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+	padding: 4px;
+
 	:global {
-		/* stylelint-disable-next-line selector-class-pattern */
 		.react-datepicker__input-container {
 			width: 100%;
 

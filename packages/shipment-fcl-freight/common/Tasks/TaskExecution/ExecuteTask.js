@@ -1,6 +1,12 @@
+import { ShipmentDetailContext } from '@cogoport/context';
+import { useContext } from 'react';
+
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 
-import { UploadBookingNote, MarkConfirmServices } from './CustomTasks';
+import {
+	UploadBookingNote,
+	MarkConfirmServices, NominationTask, GenerateFreightCertificate, ChooseServiceProvider, UploadDraftBL,
+} from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
@@ -8,16 +14,16 @@ const excludeServices = [
 	'fcl_freight_service',
 	'haulage_freight_service',
 ];
-const includeServices = ['air_freight_service', 'lcl_freight_service'];
 
 function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {} }) {
 	const { taskConfigData, loading } = useGetTaskConfig({ task });
+
+	const { servicesList, shipment_data, primary_service } = useContext(ShipmentDetailContext);
 
 	const {
 		steps,
 		currentStep,
 		setCurrentStep,
-		primaryService,
 	} = useTaskExecution({ task, taskConfigData });
 
 	const stepConfigValue = steps.length
@@ -38,16 +44,24 @@ function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {
 				task={task}
 				onCancel={onCancel}
 				taskListRefetch={taskListRefetch}
-				primaryService={primaryService}
+				primaryService={primary_service}
+				shipment_data={shipment_data}
+				servicesList={servicesList}
 			/>
 		);
 	}
 
 	if (
-		task.task === 'upload_draft_bill_of_lading' && primaryService?.trade_type === 'export'
+		task.task === 'upload_draft_bill_of_lading' && primary_service?.trade_type === 'export'
 	) {
 		return (
-			<div>Draft bl flow for export</div>
+			<UploadDraftBL
+				task={task}
+				shipmentData={shipment_data}
+				primaryService={primary_service}
+				onCancel={onCancel}
+				taskListRefetch={taskListRefetch}
+			/>
 		);
 	}
 
@@ -66,21 +80,56 @@ function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {
 		return <div>Amend draft bl flow</div>;
 	}
 
+	if (task.task === 'choose_service_provider') {
+		return (
+			<div>
+				<ChooseServiceProvider
+					task={task}
+					onCancel={onCancel}
+					refetch={taskListRefetch}
+					services={servicesList}
+				/>
+			</div>
+		);
+	}
+
+	if (
+		task.task === 'update_nomination_details'
+	) {
+		return (
+			<NominationTask
+				primaryService={primary_service}
+				shipmentData={shipment_data}
+				task={task}
+				onCancel={onCancel}
+				refetch={taskListRefetch}
+			/>
+		);
+	}
+
+	if (task.task === 'generate_freight_certificate') {
+		return (
+			<GenerateFreightCertificate
+				task={task}
+				refetch={taskListRefetch}
+				onCancel={onCancel}
+			/>
+		);
+	}
+
 	return (
-	// <div>
 		<ExecuteStep
 			task={task}
 			stepConfig={stepConfigValue}
 			onCancel={onCancel}
 			refetch={taskListRefetch}
-			primaryService={primaryService}
+			primaryService={primary_service}
 			isLastStep={currentStep === steps.length - 1}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}
 			uiConfig={taskConfigData?.task_config?.ui_config[currentStep]}
 		/>
-	// </div>
 	);
 }
 

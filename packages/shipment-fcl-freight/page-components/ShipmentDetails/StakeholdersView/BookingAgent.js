@@ -12,7 +12,7 @@ import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
-import TaskDetails from '../../../common/Tasks';
+import Tasks from '../../../common/Tasks';
 import Timeline from '../../../common/TimeLine';
 import useGetServices from '../../../hooks/useGetServices';
 import useGetTimeLine from '../../../hooks/useGetTimeline';
@@ -103,7 +103,7 @@ function BookingAgent({ get, activeStakeholder }) {
 							<Overview shipmentData={shipment_data} />
 						</TabPanel>
 						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
-							<TaskDetails />
+							<Tasks />
 						</TabPanel>
 						<TabPanel name="documents" title="Documents">
 							<Documents />

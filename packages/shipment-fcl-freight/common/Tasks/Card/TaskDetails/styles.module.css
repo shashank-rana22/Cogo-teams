@@ -41,21 +41,22 @@
 	margin-right: 10px;
 	font-size: 16px;
 	font-weight: 600;
-	color: red;
+	color: var(--color-primary-error-red-2);
 	white-space: break-spaces;
 }
 
 .deadline {
 	margin-right: 10px;
 	font-size: 14px;
-	font-weight: 500;
-	color: #393f70;
+	font-weight: 600;
+	color: var(--color-primary-error-red-3);
 }
 
 .completed {
 	margin-right: 10px;
 	font-size: 14px;
-	color: #f68b21;
+	color: var(--color-accent-orange-2);
+	font-weight: 600;
 
 	/* &.after_due_date {
 		color: #cb6464;

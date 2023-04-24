@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 
 const useUpdateShipmentPendingTask = ({
 	refetch = () => {},
-	successMessage = 'Updated Successfully!',
+	successMessage = 'Task Updated Successfully!',
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_pending_task',

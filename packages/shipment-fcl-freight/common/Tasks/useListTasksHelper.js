@@ -9,13 +9,17 @@ function useListTasksHelper() {
 	const [showMyTasks, setShowMyTasks] = useState(true);
 	const [filters] = useState({});
 
-	const { shipment_data, isGettingShipment } = useContext(ShipmentDetailContext);
+	const { shipment_data, isGettingShipment, activeStakeholder } = useContext(ShipmentDetailContext);
+
 	const { id: shipment_id } = shipment_data || '';
 
 	const { list, refetch:taskListRefetch, loading } = useListTasks({
-		defaultParams  : { page_limit: 100, sort_by: 'asc' },
+		defaultParams  : { page_limit: 100, sort_by: 'created_at', sort_type: 'asc' },
 		defaultFilters : { shipment_id },
 		filters,
+		showMyTasks,
+		shipment_data,
+		activeStakeholder,
 	});
 
 	let completedTaskCount = 0;

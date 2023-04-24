@@ -1,0 +1,26 @@
+
+.container{
+	display: flex;
+	flex-direction: column;
+};
+
+.service_provider{
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 10px;
+};
+
+.heading{
+	font-weight: 500;
+	font-size: 16px;
+};
+
+.skeleton_wrapper{
+	display: flex;
+	flex-direction: column;
+};
+
+.custom_skeleton {
+	width: 100%;
+	margin-bottom: 5px;
+};

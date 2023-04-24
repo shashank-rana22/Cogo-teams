@@ -7,7 +7,7 @@ function Card({ task = {}, handleClick = () => {}, selectedTaskId = '', isTaskOp
 	return (
 		<div className={styles.container}>
 			<div className={styles.row}>
-				<TaskDetails task={task} />
+				<TaskDetails task={task} isTaskOpen={isTaskOpen} />
 
 				{isTaskOpen ? (
 					null
