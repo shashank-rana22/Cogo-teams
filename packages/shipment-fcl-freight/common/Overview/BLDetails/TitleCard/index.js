@@ -21,8 +21,8 @@ function TitleCard({
 						{containerDetails?.length !== 0
 							? (
 								<div className={styles.ontrack}>
-									{`${startCase(containerDetails?.length || 0)} ${
-										containerDetails?.length === 1 ? 'Container' : 'Containers'
+									{`${startCase(containerDetails?.length)} ${
+										containerDetails?.length === 1 ? 'container' : 'containers'
 									} on track`}
 								</div>
 							)
@@ -31,8 +31,8 @@ function TitleCard({
 
 						{item?.containers_rolled_over ? (
 							<div className={styles.roll_over}>
-								,
-								{startCase(item?.containers_rolled_over)}
+								,{' '}
+								{startCase(item?.containers_rolled_over)}{' '}
 								rolled over
 							</div>
 						) : null}

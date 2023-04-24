@@ -1,11 +1,13 @@
+import { cl } from '@cogoport/components';
 import React from 'react';
 
 import Header from './Header';
+import styles from './styles.module.css';
 
 function ServiceDetails({ servicesData = [] }) {
 	const addedServiceComponent = (
-		<div>
-			<Header serviceData={servicesData?.[0]} />
+		<div className={cl`${styles.container}`}>
+			<Header serviceData={servicesData} />
 		</div>
 	);
 

@@ -3,8 +3,8 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateShipmentPendingTask = ({
-	refetch = () => {},
 	successMessage = 'Task Updated Successfully!',
+	refetchAfterApi = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_pending_task',
@@ -18,7 +18,7 @@ const useUpdateShipmentPendingTask = ({
 			});
 
 			Toast.success(successMessage);
-			refetch();
+			refetchAfterApi();
 		} catch (err) {
 			toastApiError(err);
 		}

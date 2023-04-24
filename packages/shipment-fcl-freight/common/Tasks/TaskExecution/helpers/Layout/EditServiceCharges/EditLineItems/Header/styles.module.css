@@ -1,13 +1,13 @@
-.container{
-    display: flex;
+.container {
+	display: flex;
 }
 
-.label{
-    margin: 0px;
-	font-weight: 600;
-	font-size: 14px;
-	line-height: 16px;
-	color: #333333;
+.label {
 	display: flex;
 	align-items: center;
+	margin: 0;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 16px;
+	color: #333;
 }

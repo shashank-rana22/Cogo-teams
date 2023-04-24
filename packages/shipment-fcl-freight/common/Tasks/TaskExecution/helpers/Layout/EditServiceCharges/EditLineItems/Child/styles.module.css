@@ -1,18 +1,18 @@
-.container{
-    padding-left: 4px;
-    width: 100%;
+.container {
+	width: 100%;
+	padding-left: 4px;
 }
 
-.item_container{
-    display: flex;
-    align-items: center;
-    width: 100%;
+.item_container {
+	display: flex;
+	align-items: center;
+	width: 100%;
 }
 
-.delete_button_container{
-    width: 5%;
+.delete_button_container {
+	width: 5%;
 }
 
-.static_container{
-    padding: 4px;
+.static_container {
+	padding: 4px;
 }
