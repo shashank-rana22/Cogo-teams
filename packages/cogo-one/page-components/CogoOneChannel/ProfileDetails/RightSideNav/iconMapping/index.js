@@ -81,7 +81,7 @@ const IconMapping = [
 		(
 			<div className={styles.tag_container}>
 				<div className={styles.repair_div}>{repair}</div>
-				<IcMTag width={25} height={25} />
+				<IcMTag width={26} height={26} />
 			</div>
 		),
 
