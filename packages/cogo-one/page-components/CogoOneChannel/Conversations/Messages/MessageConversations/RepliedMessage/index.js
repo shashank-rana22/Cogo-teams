@@ -1,3 +1,5 @@
+import { startCase } from '@cogoport/utils';
+
 import MessageBody from '../../../../../../common/MessageBody';
 
 import styles from './styles.module.css';
@@ -29,7 +31,7 @@ function RepliedMessage({ reply_metadata = {}, user_name = '' }) {
 			className={styles.container}
 			style={{ '--background-color': backgroundColor }}
 		>
-			<div className={styles.name}>{repliedTo}</div>
+			<div className={styles.name}>{startCase(repliedTo?.toLowerCase() || '')}</div>
 			<MessageBody
 				response={{
 					message: displayMessage,
