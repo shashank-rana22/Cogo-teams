@@ -6,7 +6,6 @@ const formatDeadlineDate = (deadline) => {
 		const diffInMin = Math.abs(Math.round(diffInMs / 1000 / 60));
 		const diffInHrs = Math.floor(diffInMin / 60);
 		const diffInDays = Math.floor(diffInHrs / 24);
-		const diffInMonths = Math.floor(diffInDays / 30);
 
 		if (diffInMin < 60) {
 			return (
@@ -25,15 +24,6 @@ const formatDeadlineDate = (deadline) => {
 				</span>
 			);
 		}
-		if (diffInMonths < 30) {
-			return (
-				<span>
-					{diffInMonths}
-					&nbsp;
-					months ago
-				</span>
-			);
-		}
 		return (
 			<span>
 				{diffInDays}
@@ -45,7 +35,6 @@ const formatDeadlineDate = (deadline) => {
 	const diffInMin = Math.abs(Math.round(diffInMs / 1000 / 60));
 	const diffInHrs = Math.floor(diffInMin / 60);
 	const diffInDays = Math.floor(diffInHrs / 24);
-	const diffInMonths = Math.floor(diffInDays / 30);
 
 	if (diffInMin < 60) {
 		return (
@@ -61,15 +50,6 @@ const formatDeadlineDate = (deadline) => {
 				{diffInHrs}
 				&nbsp;
 				hours remaining
-			</span>
-		);
-	}
-	if (diffInMonths < 30) {
-		return (
-			<span>
-				{diffInMonths}
-				&nbsp;
-				months ago
 			</span>
 		);
 	}

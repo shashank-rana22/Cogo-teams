@@ -1,8 +1,9 @@
+import { Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMTaskCompleted, IcMTaskNotCompleted, IcMFtick, IcMTimer } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { startCase, format } from '@cogoport/utils';
 import { useContext } from 'react';
 
 import CargoDetails from '../../../CargoDetails';
@@ -53,18 +54,37 @@ function TaskDetails({
 			<div>
 				<div className={styles.task_name}>{taskName}</div>
 				<div className={styles.task_date_details}>
+
 					{task?.deadline ? (
-						<div className={styles.deadline}>
-							<IcMTimer />
-							&nbsp;
-							{formatDeadlineDate(new Date(task?.deadline))}
-						</div>
+						<Tooltip
+							interactive
+							theme="light"
+							content={(
+								<div style={{ fontSize: '10px' }}>
+									{format(
+										task?.deadline,
+										`${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']} 
+										${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`,
+										null,
+										true,
+									)}
+								</div>
+							)}
+						>
+							<div>
+								<div className={styles.deadline}>
+									<IcMTimer />
+							&nbsp;Deadline: &nbsp;
+									{formatDeadlineDate(new Date(task?.deadline))}
+								</div>
+							</div>
+						</Tooltip>
 					) : null}
 
 					{task?.status === 'completed' ? (
 						<div className={styles.completed}>
 							<IcMFtick />
-							{` ${formatDate({
+							{`Completed On: ${formatDate({
 								date       : task?.updated_at,
 								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 								formatType : 'date',
