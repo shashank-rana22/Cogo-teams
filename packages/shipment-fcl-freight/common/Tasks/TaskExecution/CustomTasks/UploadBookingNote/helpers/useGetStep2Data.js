@@ -66,8 +66,8 @@ const useGetStep2Data = ({ primary_service, task, step0_data, fileUrl, formatted
 			document_type : 'booking_note',
 			documents     : (fileUrl || []).map((obj) => ({
 				data         : { document_number: values?.document_number },
-				document_url : obj?.finalUrl,
-				file_name    : obj?.fileName,
+				document_url : obj?.finalUrl || obj,
+				file_name    : obj?.fileName || '',
 			})),
 			service_id         : task?.service_id,
 			service_type       : task?.service_type,
