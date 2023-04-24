@@ -14,7 +14,12 @@ function UpdateAssignedStakeholder({
 }) {
 	const { control, handleSubmit } = useForm();
 
-	const { apiTrigger, loading } = useUpdateShipmentPendingTask({ refetch });
+	const refetchAfterApi = () => {
+		refetch();
+		setShowAdmin(false);
+	}
+
+	const { apiTrigger, loading } = useUpdateShipmentPendingTask({ refetchAfterApi });
 
 	const onCreate = ({ assigned_stakeholder }) => {
 		const payload = {
