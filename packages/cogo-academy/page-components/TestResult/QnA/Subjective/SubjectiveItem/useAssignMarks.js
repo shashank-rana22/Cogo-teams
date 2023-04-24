@@ -1,7 +1,8 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { isNumber } from '@cogoport/utils';
+
+const regexPattern = /^[+-]?\d*\.?\d+$/;
 
 function useAssignMarks({ setError = () => {} }) {
 	const [{ loading }, trigger] = useRequest({
@@ -10,15 +11,14 @@ function useAssignMarks({ setError = () => {} }) {
 	}, { manual: true });
 
 	const handleAssignMarks = async ({ test_id, user_id, test_question_id, marks }) => {
-		const marksInt = parseInt(marks, 10);
-
-		if (!isNumber(marksInt)) {
+		const validMarks = regexPattern.test(marks);
+		if (validMarks) {
+			if (parseFloat(marks) > 10.0) {
+				setError('Marks should be less than or equal to 10');
+				return;
+			}
+		} else {
 			setError('Marks is not a valid Integer');
-			return;
-		}
-
-		if (marksInt > 10) {
-			setError('Marks should be less than or equal to 10');
 			return;
 		}
 
@@ -28,7 +28,7 @@ function useAssignMarks({ setError = () => {} }) {
 					test_id,
 					user_id,
 					test_question_id,
-					marks         : marksInt,
+					marks         : parseFloat(marks),
 					question_type : 'subjective',
 				},
 			});
