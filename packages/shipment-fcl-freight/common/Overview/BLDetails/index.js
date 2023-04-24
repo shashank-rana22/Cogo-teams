@@ -50,6 +50,7 @@ function BLDetails() {
 				onClick={() => setShowModal('container_mapping')}
 				size="md"
 				style={{ marginLeft: '6px' }}
+				themeType="linkUi"
 			>
 				BL Container Mapping
 			</Button>
@@ -57,6 +58,7 @@ function BLDetails() {
 			<Button
 				onClick={() => setShowModal('container_num_update')}
 				size="md"
+				themeType="linkUi"
 			>
 				Update Container Number
 			</Button>
