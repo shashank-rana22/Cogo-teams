@@ -577,7 +577,7 @@ importers:
       '@cogoport/constants': workspace:^0.1.0
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/globalization': workspace:^0.0.1
-      '@cogoport/icons-react': ^1.0.66
+      '@cogoport/icons-react': ^1.0.67
       '@cogoport/next': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
@@ -588,11 +588,11 @@ importers:
       uuid: ^9.0.0
     dependencies:
       '@cogoport/charts': 1.0.2_react@18.2.0
-      '@cogoport/components': 1.0.385_n4iqapq6hltb5mr4rez3emws4q
+      '@cogoport/components': 1.0.385_muiy5zi4nnmxca6ekdqhgugjwu
       '@cogoport/constants': link:../../common/constants
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.66_react@18.2.0
+      '@cogoport/icons-react': 1.0.67_react@18.2.0
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
@@ -2281,14 +2281,14 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/components/1.0.385_n4iqapq6hltb5mr4rez3emws4q:
+  /@cogoport/components/1.0.385_muiy5zi4nnmxca6ekdqhgugjwu:
     resolution: {integrity: sha512-K1D0vSZuC5D8yIdSK11AL2+2+2RDWykl/nF52kDRhNBr6S/TD8vPdtoP8d5RCTT8DTXYbDPioY1U6gOVUytzfQ==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
       react-dom: ^18.2.0
     dependencies:
-      '@cogoport/icons-react': 1.0.66_react@18.2.0
+      '@cogoport/icons-react': 1.0.67_react@18.2.0
       '@tippyjs/react': 4.2.6_react@18.2.0
       '@types/quill': 2.0.10
       '@types/react-rte': 0.16.5
@@ -2665,6 +2665,16 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@cogoport/icons-react/1.0.67_react@18.2.0:
+    resolution: {integrity: sha512-TguIXfBQp7ES3RZ7YYq04+PjTqeqs4D8QZUqB1lP57ffJQNXGuXUl/ZFQctNgkG6HjK/e8o33figtJKEJlrgdg==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+    dependencies:
+      '@cogoport/icons': 1.0.67
+      react: 18.2.0
+    dev: false
+
   /@cogoport/icons/1.0.60:
     resolution: {integrity: sha512-NIqS22UssbCvX9oYx37TCDW8ezfOZmp6x1ZRXApcherj6A/C+tlxx9/FZL9AArMNTGjcqLQJH0189xWMWfLAHg==}
     dev: false
@@ -2679,6 +2689,10 @@ packages:
 
   /@cogoport/icons/1.0.66:
     resolution: {integrity: sha512-B7CAIoIrcz8oF/OAx2K9+Pj1ulO6eY0bjmGs89Eh22sJ7HIniDavrgV6TGp0oPaalOGWTj4mB4RoH859IFMOqQ==}
+    dev: false
+
+  /@cogoport/icons/1.0.67:
+    resolution: {integrity: sha512-vBRxSTliAqJG/QXzb7iPRYsRssDNdsk3c/Gfz6pxQ57lbXsplLeBHz+fh94EzH16vZY3Zcbe2z2LrBG21ansYg==}
     dev: false
 
   /@cogoport/maps/1.0.3_aydyy3gkshtlrnyh7fafj36que:

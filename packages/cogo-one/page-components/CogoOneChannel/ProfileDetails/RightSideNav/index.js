@@ -60,38 +60,40 @@ function RightSideNav({
 	return (
 		<div className={styles.right_container}>
 			{IconMapping.map((item) => {
-				const { icon, name, content } = item;
+				const { icon, name, content, hide = false } = item;
 
 				const showDocumentCount = activeSelect !== 'documents' && name === 'documents'
 				&& documents_count > 0 && !checkConditions;
 
 				return (
-					<div
-						key={snakeCase(name)}
-						className={cl`${styles.icon_div} ${
-							activeSelect === name ? styles.active : ''
-						}
+					!hide && (
+						<div
+							key={snakeCase(name)}
+							className={cl`${styles.icon_div} ${
+								activeSelect === name ? styles.active : ''
+							}
 						 ${
 							disabledSpotSearch && item.name === 'spot_search'
 								? styles.icon_div_load
 								: ''
-						}`}
-						role="presentation"
-						onClick={() => handleClick(name)}
-					>
-						<Tooltip content={content} placement="left">
-							{showDocumentCount && (
-								<div className={styles.count}>
-									{documents_count > 100 ? '99+' : (
-										documents_count
-									)}
+							}`}
+							role="presentation"
+							onClick={() => handleClick(name)}
+						>
+							<Tooltip content={content} placement="left">
+								{showDocumentCount && (
+									<div className={styles.count}>
+										{documents_count > 100 ? '99+' : (
+											documents_count
+										)}
+									</div>
+								)}
+								<div>
+									{icon}
 								</div>
-							)}
-							<div>
-								{icon}
-							</div>
-						</Tooltip>
-					</div>
+							</Tooltip>
+						</div>
+					)
 				);
 			})}
 		</div>

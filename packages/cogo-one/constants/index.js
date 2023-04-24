@@ -5,6 +5,7 @@ import {
 	IcCAir,
 	IcMFftl,
 	IcMFltl, IcCTelegram,
+	IcMTick, IcMCross, IcMLineredo,
 } from '@cogoport/icons-react';
 
 export const SOURCE_ICON_MAPPING = {
@@ -274,4 +275,47 @@ export const FILTER_KEYS_MAPPING = {
 	priority   : { Priority: 'high' },
 	unresolved : { Status: 'unresolved' },
 	closed     : { Status: 'closed' },
+};
+
+export const TICKET_ACTIVITY_MAPPING = {
+	closed: [
+		{
+			tooltipContent  : 'Reopen',
+			activityPayload : {
+				type   : 'reopened',
+				status : 'reopened',
+			},
+			iconStyles: {
+				height : '20px',
+				width  : '20px',
+			},
+			icon: IcMLineredo,
+		},
+	],
+	open: [
+		{
+			tooltipContent  : 'Resolve',
+			activityPayload : {
+				type   : 'mark_as_resolved',
+				status : 'resolved',
+			},
+			iconStyles: {
+				height : '15px',
+				width  : '20px',
+			},
+			icon: IcMTick,
+		},
+		{
+			tooltipContent  : 'Reject',
+			activityPayload : {
+				type   : 'rejected',
+				status : 'rejected',
+			},
+			iconStyles: {
+				height : '15px',
+				width  : '15px',
+			},
+			icon: IcMCross,
+		},
+	],
 };

@@ -7,6 +7,10 @@
 	box-shadow: 0 0 4px 0 #627fac33;
 }
 
+.closed_message_content {
+	background: #f2f2f2;
+}
+
 .ticket_details {
 	width: 100%;
 	padding: 10px 15px;
@@ -16,9 +20,9 @@
 .ticket_status {
 	display: flex;
 	justify-content: space-between;
+	font-size: 12px;
 	color: #828282;
 	text-transform: uppercase;
-	font-size: 12px;
 }
 
 .overflow_div {
@@ -26,54 +30,49 @@
 	overflow-y: hidden;
 }
 
-.number_div {
-	font-size: 12px;
-	font-weight: bold;
-	padding: 0 0 0 5px;
-}
-
-.detail_div{
-	display: flex;
-	background-color: #FFFCE6;
-	width: fit-content;
-	padding: 10px;
-	font-size: 12px;
-	border-radius: 8px;
-}
-
-.ticket_banner{
-	display: flex;
-	flex-direction: row-reverse;
-	justify-content: space-between;
-}
-
-.tick_cross{
-	display: flex;
-	padding: 7px;
-	margin-top: 2px;
-	cursor: pointer;
-}
-
-.message_content_close {
-	height: fit-content;
-	margin: 10px 3px;
-	overflow: hidden;
-	background: #F2F2F2;
-	border-radius: 6px;
-	box-shadow: 0 0 4px 0 #627fac33;
-}
-
 .ticket_details_close {
 	width: 100%;
 	padding: 10px 15px;
-	background: #E0E0E0;
+	background: #e0e0e0;
 }
 
-.detail_div_close{
-	display: flex;
-	background-color: #F9F9F9;
+.details_div {
 	width: fit-content;
-	padding: 10px;
+	padding: 5px 8px;
 	font-size: 12px;
+	color: #221f20;
+	background-color: #fffce6;
 	border-radius: 8px;
+
+	>span {
+		margin-left: 5px;
+		font-weight: 600;
+	}
+}
+
+.closed_details {
+	color: #828282;
+	background-color: #f9f9f9;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.activity {
+	display: flex;
+}
+
+.icon_styles {
+	margin: 5px;
+	cursor: pointer;
+	fill: #828282;
+}
+
+.ticket_priority {
+	font-size: 10px;
+	font-weight: 600;
+	color: #828282;
 }

@@ -53,6 +53,7 @@ const IconMapping = [
 			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/actions.svg"
 			alt="actions"
 		/>,
+		hide: true,
 	},
 	{
 		name    : 'tickets',
@@ -61,6 +62,7 @@ const IconMapping = [
 			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/actions.svg"
 			alt="actions"
 		/>,
+
 	},
 	{
 		name    : 'spot_search',

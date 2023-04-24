@@ -259,15 +259,13 @@ function CogoOne() {
 					setAgentDetails={setAgentDetails}
 				/>
 			)}
-			{
-				raiseTicketModal?.state && (
-					<RaiseTicket
-						setRaiseTicketModal={setRaiseTicketModal}
-						raiseTicketModal={raiseTicketModal}
-						refetchTickets={refetchTickets}
-					/>
-				)
-			}
+			{raiseTicketModal?.state && (
+				<RaiseTicket
+					setRaiseTicketModal={setRaiseTicketModal}
+					raiseTicketModal={raiseTicketModal}
+					refetchTickets={refetchTickets}
+				/>
+			)}
 		</>
 	);
 }

@@ -1,4 +1,3 @@
-import Toast from '@cogoport/components';
 import { useTicketsRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
@@ -30,7 +29,7 @@ const useListTickets = ({ UserID = '', activeTab = '' }) => {
 
 			});
 		} catch (error) {
-			Toast.error(error?.error || 'something went wrong');
+			console.log('error:', error);
 		}
 	}, [trigger, UserID, filter, pagination]);
 
