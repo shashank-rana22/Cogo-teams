@@ -1,10 +1,15 @@
 // import { FormLayout } from '@cogo/app-common';
 // import { useForm } from '@cogo/deprecated_legacy/forms';
 import { Text } from '@cogoport/components';
-import React, { useImperativeHandle, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
+// useImperativeHandle
 
-function Form(props, ref) {
-	const { id, bl_type = '', controls = [] } = props || {};
+function Form(props) {
+	// ref
+	const {
+		id, bl_type = '',
+	// controls = []
+	} = props || {};
 	// const { fields, getValues } = useForm(controls);
 	// const { scope } = useScope();
 

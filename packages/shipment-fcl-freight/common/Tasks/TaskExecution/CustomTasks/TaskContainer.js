@@ -6,7 +6,7 @@ import incoTermMapping from './inco-term-mapping.json';
 import styles from './styles.module.css';
 
 function TaskContainer({
-	children,
+	// children,
 	loading = false,
 	task,
 	actions,
@@ -14,19 +14,18 @@ function TaskContainer({
 }) {
 	const trade_type = incoTermMapping[shipment_data?.inco_term] || '';
 
-	const taskName =		taskDisplayNames(trade_type)[task?.task]?.display_name
-		|| startCase(task?.task || '');
+	const taskName = taskDisplayNames(trade_type)[task?.task]?.display_name || startCase(task?.task || '');
 
 	return (
 		<div className={styles.task_container}>
 			j
-			{/* <div className={styles.task_sub_container}>
+			<div className={styles.task_sub_container}>
 				<Text size={16} bold>
 					{taskName}
 				</Text>
 				{loading ? null : <div className={styles.flex}>{actions}</div>}
 			</div>
-			{loading ? <Text align="center">Loading ...</Text> : children} */}
+			{/* {loading ? <Text align="center">Loading ...</Text> : children} */}
 		</div>
 	);
 }

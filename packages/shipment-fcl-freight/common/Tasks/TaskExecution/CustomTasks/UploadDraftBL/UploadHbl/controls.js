@@ -48,7 +48,8 @@ const controls = [
 		document_type : 'draft_house_bill_of_lading',
 		label         : '',
 		accept:
-			'image/*,.pdf,.doc,.docx,.xlsx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+			'image/*,.pdf,.doc,.docx,.xlsx,application/msword,'
+			+ 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 		uploadType  : 'aws',
 		validations : [
 			{

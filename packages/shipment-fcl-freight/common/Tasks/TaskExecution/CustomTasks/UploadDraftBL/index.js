@@ -1,13 +1,13 @@
 // import { Flex, Text } from '@cogo/commons/components';
-import { Button, Text } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { useEffect, useRef, useState } from 'react';
 
 import TaskContainer from '../TaskContainer';
 
 // import HBLCreate from './HBLCreate';
-// import useDraftBLHelper from './hooks/useDraftBLHelper';
+import useDraftBLHelper from './hooks/useDraftBLHelper';
 // import MBLDetails from './MBLDetails';
-import styles from './styles.module.css';
+// import styles from './styles.module.css';
 // import UploadHbl from './UploadHbl';
 
 function UploadDraftBL({
@@ -17,11 +17,11 @@ function UploadDraftBL({
 	onCancel = () => {},
 	taskListRefetch = () => {},
 }) {
-	const [hblData, setHblData] = useState([]);
+	// const [hblData, setHblData] = useState([]);
 	const [hblLoading, setHblLoading] = useState(false);
 	const [isAllHBLUploaded, setIsAllHblUploaded] = useState(false);
 	const [showSwitchGenerate, setShowSwitchGenerate] = useState(true);
-	const [uploadedDocs, setuploadedDocs] = useState([]);
+	// const [uploadedDocs, setuploadedDocs] = useState([]);
 	const [canUseSwitch, setcanUseSwitch] = useState(true);
 	const mblRef = useRef();
 
@@ -31,13 +31,14 @@ function UploadDraftBL({
 
 	const [step, setStep] = useState(initial_step || '');
 
-	const blCount = primaryService.bls_count;
+	// const blCount = primaryService.bls_count;
 
+	console.log('hbl loading', setHblLoading, setcanUseSwitch, setIsAllHblUploaded);
 	const {
 		listDocsAPI,
 		shipmentListDocsAPI,
 		createShipmentDocAPI,
-		createHBL,
+		// createHBL,
 		submitMBL,
 	} = useDraftBLHelper({
 		isHBL,
@@ -52,37 +53,37 @@ function UploadDraftBL({
 	const tradeDocsLength = listDocsAPI?.data?.list?.length;
 	const showUploadView = shipmentDocsLength > 0 && tradeDocsLength === 0;
 
-	const refetchDocs = async () => {
-		await shipmentListDocsAPI.trigger();
-		setcanUseSwitch(false);
-		const condition =			tradeDocsLength >= blCount || shipmentDocsLength >= blCount;
+	// const refetchDocs = async () => {
+	// 	await shipmentListDocsAPI.trigger();
+	// 	setcanUseSwitch(false);
+	// 	const condition =			tradeDocsLength >= blCount || shipmentDocsLength >= blCount;
 
-		setIsAllHblUploaded(condition);
+	// 	setIsAllHblUploaded(condition);
 
-		if (condition) {
-			setStep('mbl');
-		}
-	};
+	// 	if (condition) {
+	// 		setStep('mbl');
+	// 	}
+	// };
 
-	useEffect(() => {
-		setcanUseSwitch(
-			(shipmentDocsLength || 0) <= 0 && (tradeDocsLength || 0) <= 0,
-		);
-		setuploadedDocs(shipmentListDocsAPI?.data?.list);
-		setIsAllHblUploaded(
-			tradeDocsLength >= blCount || shipmentDocsLength >= blCount,
-		);
-	}, [shipmentListDocsAPI?.data?.list, listDocsAPI?.data?.list]);
+	// useEffect(() => {
+	// 	setcanUseSwitch(
+	// 		(shipmentDocsLength || 0) <= 0 && (tradeDocsLength || 0) <= 0,
+	// 	);
+	// 	setuploadedDocs(shipmentListDocsAPI?.data?.list);
+	// 	setIsAllHblUploaded(
+	// 		tradeDocsLength >= blCount || shipmentDocsLength >= blCount,
+	// 	);
+	// }, [shipmentListDocsAPI?.data?.list, listDocsAPI?.data?.list]);
 
-	const handleSaveHBL = (index, values) => {
-		if (values) {
-			setHblData((old) => {
-				const newValues = [...old];
-				newValues[index] = values;
-				return newValues;
-			});
-		}
-	};
+	// const handleSaveHBL = (index, values) => {
+	// 	if (values) {
+	// 		setHblData((old) => {
+	// 			const newValues = [...old];
+	// 			newValues[index] = values;
+	// 			return newValues;
+	// 		});
+	// 	}
+	// };
 
 	const handleClickOnNext = async () => {
 		if (step === 'hbl') {
@@ -95,16 +96,16 @@ function UploadDraftBL({
 	const isNextDisabled =		(isHBL && !isAllHBLUploaded)
 		|| ((!isHBL || isAllHBLUploaded) && createShipmentDocAPI.loading);
 
-	const saveAllBls = async () => {
-		await createHBL({
-			setHblLoading,
-			hblData,
-			shipmentData,
-		});
-		await listDocsAPI.trigger();
-		setcanUseSwitch(false);
-		setIsAllHblUploaded(tradeDocsLength >= blCount);
-	};
+	// const saveAllBls = async () => {
+	// 	await createHBL({
+	// 		setHblLoading,
+	// 		hblData,
+	// 		shipmentData,
+	// 	});
+	// 	await listDocsAPI.trigger();
+	// 	setcanUseSwitch(false);
+	// 	setIsAllHblUploaded(tradeDocsLength >= blCount);
+	// };
 
 	const handleClickSwitch = () => {
 		setShowSwitchGenerate(!showSwitchGenerate);

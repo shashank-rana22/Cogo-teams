@@ -4,9 +4,7 @@ import React from 'react';
 
 function UnableToDoTask({
 	setShowUnableTo = () => {},
-	refetch = () => {},
 	showUnableTo = false,
-	task = {},
 }) {
 	const { control, handleSubmit } = useForm();
 
