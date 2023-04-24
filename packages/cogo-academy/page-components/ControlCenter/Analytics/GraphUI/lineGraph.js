@@ -44,7 +44,7 @@ function LineGraph({ graphData }) {
 				legendOffset   : -40,
 				legendPosition : 'middle',
 			}}
-			pointSize={8}
+			pointSize={6}
 			pointColor="white"
 			pointBorderWidth={2}
 			pointBorderColor={{ from: 'serieColor' }}
@@ -55,7 +55,7 @@ function LineGraph({ graphData }) {
 					anchor            : 'upper-left',
 					direction         : 'row',
 					justify           : false,
-					translateX        : 100,
+					translateX        : 40,
 					translateY        : 0,
 					itemsSpacing      : 120,
 					itemDirection     : 'left-to-right',
