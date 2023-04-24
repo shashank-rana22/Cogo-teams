@@ -1,7 +1,6 @@
 import { cl } from '@cogoport/components';
-import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
-import { getByKey, startCase, omit } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { getByKey, omit } from '@cogoport/utils';
+import React from 'react';
 
 import getConfigs from '../../configurations/get-configs';
 
@@ -9,8 +8,6 @@ import Item from './Item';
 import styles from './styles.module.css';
 
 function Details({ serviceData = {} }) {
-	const [show, setShow] = useState(true);
-
 	const { service_type, state } = serviceData;
 
 	const service_items_key = getConfigs(service_type).details || {};
@@ -48,11 +45,6 @@ function Details({ serviceData = {} }) {
 					<Item state={state} label={element} detail={remainingServiceData} />
 				) : null))}
 			</div>
-			{/* <div className={styles.free_days}>
-				{(freeDays || {}).map((element) => (getByKey(serviceData, element.key) ? (
-					<Item state={state} label={element} detail={serviceData} />
-				) : null))}
-			</div> */}
 		</div>
 	);
 }
