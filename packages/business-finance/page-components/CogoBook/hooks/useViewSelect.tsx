@@ -26,6 +26,7 @@ const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 		archivedStatus,
 		sortType,
 		sortBy,
+		page,
 	} = filters || {};
 
 	const { service = '', shipmentType = '', year = '', month = '', tradeType = '' } = query || {};
@@ -68,6 +69,7 @@ const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 					search         : search || undefined,
 					sortType       : sortType || undefined,
 					sortBy         : sortBy || undefined,
+					page,
 				},
 			});
 			if (resp.data) localStorage.setItem('viewKey', resp.data);
@@ -76,7 +78,7 @@ const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 		} catch (error) {
 			setViewData({ pageNo: 0, totalPages: 0, total: 0, totalRecords: 0, list: [] });
 		}
-	}, [archivedStatus, month, search, service,
+	}, [archivedStatus, month, search, service, page,
 		shipmentType, sortBy, sortType, tradeType, viewSelectedSidTrigger, year]);
 
 	useEffect(() => {

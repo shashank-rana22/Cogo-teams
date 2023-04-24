@@ -165,7 +165,7 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 						{particularMonth && (
 							<div className={styles.total_count}>
 								<div>
-									Total Shipments -
+									Total Shipments:&nbsp;
 									<span className={styles.total_count_num}>{drillTotalRecords || 0}</span>
 								</div>
 							</div>

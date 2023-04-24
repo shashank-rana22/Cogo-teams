@@ -228,7 +228,8 @@ function ViewSelectedInvoice() {
 						onClick={() => {
 							setFilters((p) => ({
 								...p,
-								archivedStatus: 'BOOKED',
+								archivedStatus : 'BOOKED',
+								page           : 1,
 							}));
 							viewSelected();
 							setIsBookActive(true);
@@ -243,7 +244,8 @@ function ViewSelectedInvoice() {
 						onClick={() => {
 							setFilters((p) => ({
 								...p,
-								archivedStatus: 'ACCRUED',
+								archivedStatus : 'ACCRUED',
+								page           : 1,
 							}));
 							viewSelected();
 							setIsBookActive(false);

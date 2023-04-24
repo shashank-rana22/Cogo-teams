@@ -119,19 +119,12 @@ export const bookedColumn = (
 			accessor : 'sid',
 			id       : 'sid',
 			Cell     : ({ row: { original } }) => {
-				const { jobNumber = '', serviceType = '', purchaseInvoicesCount, salesInvoicesCount	} = original || {};
+				const { jobNumber = '', serviceType = ''	} = original || {};
 				return (
-					<Tooltip
-						content={content(purchaseInvoicesCount, salesInvoicesCount)}
-						placement="top"
-						interactive
-					>
-						<div className={styles.job_number}>
-							<div className={styles.job_number_data}>{ jobNumber || '-' }</div>
-							<div>{startCase(serviceType || '-')}</div>
-						</div>
-					</Tooltip>
-
+					<div className={styles.job_number}>
+						<div className={styles.job_number_data}>{ jobNumber || '-' }</div>
+						<div>{startCase(serviceType || '-')}</div>
+					</div>
 				);
 			},
 		},
