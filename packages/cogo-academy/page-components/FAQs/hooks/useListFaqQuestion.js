@@ -29,7 +29,6 @@ function useListFaqQuestions({
 	}, { manual: true });
 
 	const { query, debounceQuery } = useDebounceQuery();
-
 	const roleFunction = !isEmpty(role_functions) ? role_functions : undefined;
 	const roleSubFunction = !isEmpty(role_sub_functions) ? role_sub_functions : undefined;
 

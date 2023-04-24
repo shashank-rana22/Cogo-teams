@@ -120,6 +120,12 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
+			api          : 'create_faq_question_alias',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+
 	],
 	faq: [
 		{
@@ -410,10 +416,14 @@ const faq = {
 			api          : 'list_test_case_study_questions',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
-
 		},
 		{
 			api        	 : 'get_test_result_question',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_test_mapping_responses',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},

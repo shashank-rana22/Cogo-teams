@@ -8,9 +8,9 @@ import styles from '../styles.module.css';
 
 import { controls } from './controls';
 
-function UploadMAWB({ item, setGenerate }) {
+function UploadMAWB({ item, setGenerate, activeCategory }) {
 	const { control, handleSubmit, formState: { errors } } = useForm();
-	const { upload, loading } = useCreateShipmentDocument({ setGenerate });
+	const { upload, loading } = useCreateShipmentDocument({ setGenerate, activeCategory });
 	const onSubmit = (formValues) => {
 		const { fileName, finalUrl } = formValues?.document || {};
 		const payload = {
