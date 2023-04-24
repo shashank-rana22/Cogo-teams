@@ -4,7 +4,9 @@ import styles from './styles.module.css';
 
 function UpdateButton({ task = {}, handleClick = () => {}, hideButton = false }) {
 	if (hideButton) {
-		return null;
+		return (
+			<div />
+		);
 	}
 
 	let buttonText = 'Update';

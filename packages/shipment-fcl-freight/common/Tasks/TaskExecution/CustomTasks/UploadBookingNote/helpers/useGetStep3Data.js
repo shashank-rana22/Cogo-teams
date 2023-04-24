@@ -14,7 +14,7 @@ const TRADE_MAPPING = {
 	undefined : '',
 };
 
-const useGetStep3Data = ({ servicesList = [], shipment_data, onCancel, task }) => {
+const useGetStep3Data = ({ servicesList = [], shipment_data, onCancel, task, taskListRefetch = () => {} }) => {
 	const service_ids = [];
 	let notMainService = false;
 
@@ -53,7 +53,12 @@ const useGetStep3Data = ({ servicesList = [], shipment_data, onCancel, task }) =
 	});
 	const { apiTrigger:updateBuyQuotationTrigger } = useUpdateShipmentBuyQuotations({});
 
-	const { apiTrigger:updateTask } = useUpdateShipmentPendingTask({ refetch: () => { onCancel(); } });
+	const { apiTrigger:updateTask } = useUpdateShipmentPendingTask({
+		refetch: () => {
+			onCancel();
+			taskListRefetch();
+		},
+	});
 
 	const service_charges = servicesQuotation?.service_charges || [];
 

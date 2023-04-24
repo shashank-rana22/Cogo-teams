@@ -53,12 +53,23 @@ function UpdateAction({ task = {} }) {
 								cursor     : 'pointer',
 								width      : '18px',
 								height     : '18px',
-								color      : '#393F70',
+								color      : '#000000',
 							}}
 						/>
 					</div>
 				</Tooltip>
-			) : null}
+			) : (
+				<div
+					style={{
+						marginLeft : '20px',
+						cursor     : 'pointer',
+						width      : '18px',
+						height     : '18px',
+						color      : '#000000',
+					}}
+				/>
+			)}
+
 			<Popover
 				show={showAction}
 				visible={showAction}
@@ -120,10 +131,10 @@ function UpdateAction({ task = {} }) {
 					{!isMainServiceCancelled ? (
 						<IcMOverflowDot
 							style={{
-								marginLeft : '20px',
+								marginLeft : '12px',
 								width      : '20px',
 								height     : '20px',
-								color      : '#393F70',
+								color      : '#000000',
 							}}
 						/>
 					) : (
