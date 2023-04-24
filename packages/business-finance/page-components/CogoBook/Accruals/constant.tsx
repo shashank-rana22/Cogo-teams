@@ -302,17 +302,14 @@ export const bookedColumn = (
 				}
 
 				return (
-					<>
-						<span className={renderClassName()}>
-							{getFormattedPrice(profit, expenseCurrency) || '-' }
-
-						</span>
+					<span className={renderClassName()}>
+						{getFormattedPrice(profit, expenseCurrency) || '-' }
 						<div>
 							{profitPercentage
 								? `${profitPercentage?.toFixed(2)}%`
 								: '---'}
 						</div>
-					</>
+					</span>
 				);
 			},
 		},

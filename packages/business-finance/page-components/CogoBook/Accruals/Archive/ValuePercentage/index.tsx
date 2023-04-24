@@ -70,7 +70,7 @@ function ValuePercentage({ data, keys, flag = false }) {
 	return (
 		<div>
 			{keys === 'variance'
-				? renderValue(absVariance, 5)
+				? renderValue(absVariance, 10)
 				: renderValue(formatted, 13)}
 		</div>
 	);

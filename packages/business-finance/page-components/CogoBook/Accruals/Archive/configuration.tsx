@@ -1,6 +1,6 @@
-import { Button } from '@cogoport/components';
+import { Button, Tooltip } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
-import { IcMUnlock, IcMLock } from '@cogoport/icons-react';
+import { IcMUnlock, IcMLock, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -84,7 +84,41 @@ export const ARCHIVE_MONTH_BOOKED = [
 		Header   : 'Variance',
 		accessor : 'variance',
 		id       : 'variance',
-		Cell     : ({ row: { original } }) => <ValuePercentage data={original} keys="variance" />,
+		Cell     : ({ row: { original } }) => {
+			const { expenseBooked, actualExpense, incomeBooked, actualIncome } = original || {};
+			const renderContent = () => (
+				<div className={styles.variance_styles}>
+					<div>
+						<div className={styles.expense}>Expense Variation</div>
+						<div>
+							Amount :
+							{' '}
+							<span className={styles.amount}>{expenseBooked - actualExpense}</span>
+						</div>
+					</div>
+					<div>
+						<div className={styles.income}>Income Variation</div>
+						<div>
+							Amount :
+							{' '}
+							<span className={styles.amount}>{incomeBooked - actualIncome}</span>
+						</div>
+					</div>
+				</div>
+			);
+
+			return (
+				<Tooltip
+					placement="bottom"
+					content={renderContent()}
+				>
+					<div style={{ display: 'flex', cursor: 'pointer' }}>
+						<ValuePercentage data={original} keys="variance" />
+						<div><IcMArrowRotateDown /></div>
+					</div>
+				</Tooltip>
+			);
+		},
 	},
 ];
 

@@ -158,3 +158,23 @@
 	color: #EE3425;
 	font-weight: 600;
 }
+
+.expense {
+	color: #ee3425;
+	text-decoration: underline;
+}
+
+.variance_styles {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.income {
+	color: #849e4c;
+	text-decoration: underline;
+}
+
+.amount {
+	font-weight: 600;
+}
