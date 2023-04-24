@@ -1,9 +1,7 @@
 .container {
 	width: fit-content;
-	max-height: 100px;
 	padding: 7px 7px 7px 10px;
 	margin-bottom: 5px;
-	overflow-y: hidden;
 	text-align: left;
 	word-break: break-word;
 	background: var(--background-color);

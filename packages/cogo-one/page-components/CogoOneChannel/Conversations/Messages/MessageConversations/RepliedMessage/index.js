@@ -24,7 +24,8 @@ function RepliedMessage({ reply_metadata = {}, user_name = '' }) {
 			repliedTo = send_by;
 		}
 	}
-
+	console.log('media_url:', media_url, message);
+	console.log('message_type:', message_type);
 	return (
 		<div
 			className={styles.container}
@@ -36,7 +37,7 @@ function RepliedMessage({ reply_metadata = {}, user_name = '' }) {
 					message: displayMessage,
 					media_url,
 				}}
-				message_type={message_type === 'list' ? 'text' : 'text'}
+				message_type={message_type === 'list' ? 'text' : message_type}
 			/>
 		</div>
 	);
