@@ -3,6 +3,7 @@ import { Button } from '@cogoport/components';
 import {
 	ProviderLeadOptions,
 	IS_CHANNEL_PARTNER_MAPPING,
+	ACCOUNT_TYPE_MAPPING,
 } from '../../../../../constants/org-details-mapping';
 
 import styles from './styles.module.css';
@@ -23,6 +24,7 @@ function ProviderSelectModal({ setShow = () => {}, setUploadData = () => {}, upl
 			...uploadData,
 			finalModalHeading  : input?.key,
 			is_channel_partner : IS_CHANNEL_PARTNER_MAPPING[input?.type],
+			account_type       : ACCOUNT_TYPE_MAPPING[input?.type],
 		});
 		reset();
 		setShow((pv) => ({

@@ -33,6 +33,7 @@ function usePostIngestionData({ refetch = () => {} }) {
 		ingestion_type     : '',
 		is_channel_partner : false,
 		user_id,
+		account_type       : '',
 	});
 
 	const [{ loading }, trigger] = useRequest({

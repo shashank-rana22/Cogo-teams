@@ -12,7 +12,8 @@ import styles from './styles.module.css';
 
 function Filters({ setParams = () => {}, refetch = () => {} }) {
 	const { profile = {} } = useSelector((state) => state);
-	const scopeFilters = {};
+	// const scopeFilters = {};
+	const [scopeFilters] = useState({});
 	const [search, setSearch] = useState('');
 
 	const formProps = useForm();

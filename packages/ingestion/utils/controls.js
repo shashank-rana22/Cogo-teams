@@ -18,7 +18,7 @@ const controls = [
 		asyncKey    : 'list_locations',
 		placeholder : 'Select Country',
 		isClearable : true,
-		rules       : { required: 'Country is Required' },
+		// rules       : { required: 'Country is Required' },
 
 	},
 	{
