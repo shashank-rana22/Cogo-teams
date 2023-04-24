@@ -676,10 +676,14 @@ export const optionsRadioData = [
 ];
 
 export const MILESTONE_OPTIONS = [
-	{ label: 'Aborted', value: 'aborted' },
+	{ label: 'Initiated', value: 'init' },
 	{ label: 'Cancelled', value: 'cancelled' },
 	{ label: 'Completed', value: 'completed' },
-	{ label: 'Confirmed by importer exporter', value: 'confirmed_by_importer_exporter' },
-	{ label: 'In progress', value: 'in_progress' },
-	{ label: 'Shipment received', value: 'shipment_received' },
+	{ label: 'Vessel Departed', value: 'vessel_departed' },
+	{ label: 'Vessel Arrived', value: 'vessel_arrived' },
+	{ label: 'Cargo Picked Up', value: 'cargo_picked_up' },
+	{ label: 'Flight Arrived', value: 'flight_arrived' },
+	{ label: 'Cargo Handed Over At Origin', value: 'cargo_handed_over_at_origin' },
+	{ label: 'Cargo Dropped', value: 'cargo_dropped' },
+	{ label: 'Flight Departed', value: 'flight_departed' },
 ];
