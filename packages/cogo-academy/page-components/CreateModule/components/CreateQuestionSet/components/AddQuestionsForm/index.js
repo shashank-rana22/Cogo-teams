@@ -95,21 +95,23 @@ function AddQuestionsForm({
 				)
 			)}
 
-			{!allKeysSaved && !loading ? (
-				<ManualAddition
-					questionSetId={questionSetId}
-					test_questions={listData}
-					setSavedQuestionDetails={setSavedQuestionDetails}
-					setAllKeysSaved={setAllKeysSaved}
-					editDetails={editDetails}
-					setEditDetails={setEditDetails}
-					topic={topic}
-					savedQuestionDetails={savedQuestionDetails}
-					listSetQuestions={listSetQuestions}
-					mode={mode}
-					getTestQuestionTest={getTestQuestionTest}
-				/>
-			) : null}
+			<div id="question_form">
+				{!allKeysSaved && !loading ? (
+					<ManualAddition
+						questionSetId={questionSetId}
+						test_questions={listData}
+						setSavedQuestionDetails={setSavedQuestionDetails}
+						setAllKeysSaved={setAllKeysSaved}
+						editDetails={editDetails}
+						setEditDetails={setEditDetails}
+						topic={topic}
+						savedQuestionDetails={savedQuestionDetails}
+						listSetQuestions={listSetQuestions}
+						mode={mode}
+						getTestQuestionTest={getTestQuestionTest}
+					/>
+				) : null}
+			</div>
 
 			{showBulkUpload && !loading && mode !== 'view' ? (
 				<BulkUpload

@@ -42,6 +42,14 @@ const useSavedQuestionDetails = ({
 		setAllKeysSaved(false);
 		setEditDetails(item);
 		setQuestionDetails({});
+
+		const element = document.getElementById('question_form');
+
+		element.scrollIntoView({
+			behavior : 'smooth',
+			inline   : 'center',
+			block    : 'center',
+		});
 	};
 
 	const handleDeleteQuestion = ({ item }) => {
