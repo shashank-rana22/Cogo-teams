@@ -1,24 +1,55 @@
 import { cl } from '@cogoport/components';
-import React from 'react';
+import { startCase } from '@cogoport/utils';
+import React, { useState } from 'react';
 
 import EditCancelService from '../../../../EditCancelService';
+import Details from '../Details';
 
 import styles from './styles.module.css';
 
 function Header({ serviceData }) {
-	const { state, display_label, service_provider } = serviceData || {};
+	const { state, display_label, service_provider, payment_term } = serviceData || {};
+
+	const [showDetails, setShowDetails] = useState({ });
+
+	let statusText = startCase(state);
+	if (state === 'init') {
+		statusText = 'Not Allocated';
+	}
 
 	return (
-		<div className={cl`${state} ${styles.container}`}>
-			<div className={styles.heading_content}>
-				<div className={cl`${styles.heading} ${state}`}>{display_label}</div>
+		<div className={cl`${styles[state]} ${styles.main_container}`}>
+			<div className={cl` ${styles.container}`}>
+				<div className={cl`${styles[state]} ${styles.service_details}`}>
+					<div className={styles.service_name}>{display_label}</div>
+					<div className={styles.service_provider}>{service_provider?.business_name}</div>
+				</div>
 
-				<EditCancelService serviceData={serviceData} />
-			</div>
-			<div className={cl`${styles.sub_heading} ${state}`}>
-				{service_provider?.business_name}
-			</div>
+				<div className={styles.secondary_details}>
+					<div>
+						{ payment_term ? <div className={styles.payment_term}>{payment_term}</div> : null }
+						<div className={styles.state}>{ statusText}</div>
+					</div>
 
+					<div className={styles.extra_details}>
+						<div
+							role="button"
+							tabIndex={0}
+							onClick={() => setShowDetails({
+								...showDetails,
+								[serviceData?.id]: !showDetails[serviceData?.id],
+							})}
+							className={styles.details_cta}
+						>
+							View Details
+						</div>
+						<div className={styles.edit_cancel}>
+							<EditCancelService serviceData={serviceData} />
+						</div>
+					</div>
+				</div>
+			</div>
+			{showDetails[serviceData?.id] ? <Details serviceData={serviceData} /> : null}
 		</div>
 
 	);

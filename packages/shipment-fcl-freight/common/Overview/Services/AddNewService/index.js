@@ -14,6 +14,7 @@ function AddNewService({
 	activeStakeholder = '',
 }) {
 	const haveToUpsell = servicesList?.length === 0
+
 	&& upsellableService.service_type === 'fcl_freight_local_service'
 	&& primary_service?.bl_category === 'hbl';
 

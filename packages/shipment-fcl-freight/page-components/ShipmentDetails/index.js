@@ -9,6 +9,7 @@ import { useStakeholderCheck } from '../../hooks/useStakeholderCheck';
 const Superadmin = dynamic(() => import('./StakeholdersView/Superadmin'), { ssr: false });
 const DKam = dynamic(() => import('./StakeholdersView/ConsigneeShipperBookingAgent'), { ssr: false });
 const Kam = dynamic(() => import('./StakeholdersView/BookingAgent'), { ssr: false });
+const BookingDesk = dynamic(() => import('./StakeholdersView/BookingDesk'), { ssr: false });
 
 const shipment_additional_methods = ['main_service', 'documents'];
 
@@ -30,9 +31,12 @@ function ShipmentDetails() {
 				return <Kam get={get} activeStakeholder="booking_agent" />;
 			}
 			return <DKam get={get} activeStakeholder="consignee_shipper_booking_agent" />;
-		case 'superadmin':
-		case 'admin':
+
 		case 'booking_desk':
+			return <BookingDesk get={get} activeStakeholder="booking_desk" />;
+
+		case 'admin':
+		case 'superadmin':
 			return <Superadmin get={get} activeStakeholder="superadmin" />;
 		default:
 			return (

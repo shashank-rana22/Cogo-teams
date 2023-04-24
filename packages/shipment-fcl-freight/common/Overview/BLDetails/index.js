@@ -1,7 +1,6 @@
 import { Button, Accordion } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
-import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
 import useListBillOfLadings from '../../../hooks/useListBillOfLadings';
@@ -35,7 +34,7 @@ function BLDetails() {
 			BL and Container Details
 			<div className="bl-count">
 				(
-				{list?.length || primary_service?.bls_count || 0}
+				{primary_service?.bls_count || 0}
 				&nbsp;BL & &nbsp;
 				{containerDetailsArray?.length || containersCount || 0}
 				&nbsp;
@@ -47,27 +46,20 @@ function BLDetails() {
 
 	const renderButtons = () => (
 		<div className={styles.button_container}>
-			{!isEmpty(list)
-				? (
-					<Button
-						onClick={() => setShowModal('container_mapping')}
-						size="md"
-						style={{ marginLeft: '6px' }}
-					>
-						BL Container Mapping
-					</Button>
-				)
-				: null}
+			<Button
+				onClick={() => setShowModal('container_mapping')}
+				size="md"
+				style={{ marginLeft: '6px' }}
+			>
+				BL Container Mapping
+			</Button>
 
-			{!isEmpty(containerDetailsArray)
-				? (
-					<Button
-						onClick={() => setShowModal('container_num_update')}
-						size="md"
-					>
-						Update Container Number
-					</Button>
-				) : null}
+			<Button
+				onClick={() => setShowModal('container_num_update')}
+				size="md"
+			>
+				Update Container Number
+			</Button>
 		</div>
 	);
 
@@ -78,7 +70,9 @@ function BLDetails() {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.button_div}>{renderButtons()}</div>
+
+			{containerDetailsArray?.[0]?.container_number
+				? <div className={styles.button_div}>{renderButtons()}</div> : null}
 
 			<Accordion title={renderBlCount} style={{ width: '100%' }}>
 				{!list?.length ? (
