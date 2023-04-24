@@ -36,24 +36,22 @@ function useUpdateDistributionSettings() {
 			}
 		});
 
-		const setting_details = [];
+		const distribution_setting_details = [];
 
 		valuesForPrefilling.forEach((element) => {
 			const obj = {};
-			obj.setting_id = element.id || undefined;
+			obj.distribution_setting_id = element.id || undefined;
 			obj.lower_limit = element.scoring_criteria.range_from || undefined;
 			obj.upper_limit = element.scoring_criteria.range_to || undefined;
 
-			setting_details.push(obj);
+			distribution_setting_details.push(obj);
 		});
-
-		console.log(setting_details);
 
 		try {
 			const payload = {
 				performed_by_id,
 				performed_by_type: 'agent',
-				setting_details,
+				distribution_setting_details,
 			};
 
 			await trigger({

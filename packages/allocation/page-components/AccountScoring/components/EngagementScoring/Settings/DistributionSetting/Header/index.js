@@ -3,7 +3,7 @@ import { IcMInfo } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function Header({ editing = false, setEditing = () => {} }) {
+function Header({ setEditing = () => {}, loading }) {
 	return (
 		<div className={styles.header}>
 			<div className={styles.heading}>
@@ -21,7 +21,8 @@ function Header({ editing = false, setEditing = () => {} }) {
 			<div>
 				<Button
 					themeType="secondary"
-					onClick={() => setEditing(!editing)}
+					onClick={() => setEditing((pv) => !pv)}
+					disabled={loading}
 				>
 					{' '}
 					Edit

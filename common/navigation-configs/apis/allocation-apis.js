@@ -394,6 +394,22 @@ const allocation = {
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
+		{
+			api          : 'post_allocation_engagement_distribution_settings_attributes',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_engagement_scoring_leaderboard',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_engagement_scoring_account_distribution_graph',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+
 	],
 };
 
