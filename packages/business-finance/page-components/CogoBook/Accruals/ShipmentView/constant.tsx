@@ -240,7 +240,7 @@ export const accrualColumn = (
 				buyQuotationCurrency = '',
 			} = original || {};
 			const quotationDiff = buyQuotation - expenseBooked || 0;
-			const quotationDiffProfit = ((quotationDiff / buyQuotation) * 100) || 0;
+			const quotationDiffProfit = buyQuotation !== 0 ? (((quotationDiff / buyQuotation) * 100) || 0) : 0;
 			return (
 				<div className={styles.quotation_styles}>
 					<div>
