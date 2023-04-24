@@ -11,7 +11,7 @@ import useGetStep1Data from './helpers/useGetStep1Data';
 import useGetStep2Data from './helpers/useGetStep2Data';
 import useGetStep3Data from './helpers/useGetStep3Data';
 
-function UploadBookingNote({ task, onCancel }) {
+function UploadBookingNote({ task, onCancel, taskListRefetch }) {
 	const { primary_service, shipment_data, servicesList } = useContext(ShipmentDetailContext);
 
 	let initialStep = 0;
@@ -46,7 +46,14 @@ function UploadBookingNote({ task, onCancel }) {
 		setStep,
 	});
 
-	const step3_data = useGetStep3Data({ primary_service, servicesList, shipment_data, onCancel, task });
+	const step3_data = useGetStep3Data({
+		primary_service,
+		servicesList,
+		shipment_data,
+		onCancel,
+		task,
+		taskListRefetch,
+	});
 	const { serviceQuotationLoading } = step3_data || {};
 
 	return (
