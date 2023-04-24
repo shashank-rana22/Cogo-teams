@@ -37,7 +37,7 @@ const getSubjectivePayload = ({
 			file_url                : '',
 			status                  : 'active',
 		}],
-		explanation       : [subjectiveEditorValue.toString('html')],
+		explanation       : [''],
 		allow_file_upload : uploadable,
 
 	};

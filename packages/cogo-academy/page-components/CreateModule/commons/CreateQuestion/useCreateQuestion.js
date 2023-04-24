@@ -194,9 +194,9 @@ const useCreateQuestion = ({
 			setValue('subjective.0.character_limit', character_limit);
 			setUploadable(allow_file_upload);
 
-			setSubjectiveEditorValue(isEmpty(explanation)
+			setSubjectiveEditorValue(isEmpty(test_question_answers)
 				? RichTextEditor.createEmptyValue()
-				: RichTextEditor?.createValueFromString((explanation?.[0] || ''), 'html'));
+				: RichTextEditor?.createValueFromString((test_question_answers?.[0]?.answer_text || ''), 'html'));
 		} else {
 			const childKey = 'question.0';
 
