@@ -196,6 +196,7 @@ const formatDataForService = (
 	rawValues,
 	taskData,
 	serviceIdMapping,
+	primaryService,
 ) => {
 	const payloadObj = {};
 
@@ -207,6 +208,9 @@ const formatDataForService = (
 			payloadObj[sendKeyObj.key] = taskData.service_type
 				? serviceIdMapping[`${taskData.service_type}.id`]
 				: serviceIdMapping[`${taskData.shipment_type}_service.id`];
+			if (taskData.service_type === null) {
+				payloadObj[sendKeyObj.key] = [primaryService?.id];
+			}
 		}
 		if (sendKeyObj.source === 'formData') {
 			if (numberKeys.includes(sendKeyObj.key)) {
@@ -285,6 +289,7 @@ const formatForPayload = (
 	dataToSend,
 	serviceIdMapping,
 	// shipment_data = {},
+	primaryService = {},
 ) => {
 	const finalPayload = {};
 
@@ -295,6 +300,7 @@ const formatForPayload = (
 				rawValues,
 				taskData,
 				serviceIdMapping,
+				primaryService,
 			);
 		}
 		if (key === 'documents') {
@@ -331,6 +337,7 @@ function useHandleSubmit({
 
 	const {
 		shipment_data,
+		primary_service,
 		// isGettingShipment,
 		// servicesList,
 		getShipment,
@@ -376,7 +383,8 @@ function useHandleSubmit({
 			task,
 			dataToSend,
 			serviceIdMapping,
-			shipment_data,
+			// shipment_data,
+			primary_service,
 		);
 
 		let finalPayload = { id: task.id, data: payload };
