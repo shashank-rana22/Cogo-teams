@@ -10,7 +10,6 @@ interface Props {
 const useGetTreasuryStats = (tabs:string) => {
 	const [treasuryFilters, setTreasuryFilters] = useState<Props>({
 	});
-
 	const { startDate, endDate } = treasuryFilters?.date || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
