@@ -1,5 +1,6 @@
 import { dynamic } from '@cogoport/next';
-import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useState, useEffect, useCallback } from 'react';
 
 import getValidatedStoredValues from '../utils/getValidatedStoredValues';
 
@@ -16,7 +17,15 @@ export default function BookingDesk() {
 	const [activeTab, setActiveTab] = useState(null);
 	const [scopeFilters, setScopeFilters] = useState(null);
 
-	const stateProps = { activeTab, setActiveTab, filters, setFilters, scopeFilters };
+	const router = useRouter();
+
+	const handleVersionChange = useCallback(() => {
+		const newPathname = `${router.asPath}`;
+		window.location.replace(newPathname);
+		localStorage.setItem('booking_desk_version', 'v1');
+	}, [router.asPath]);
+
+	const stateProps = { activeTab, setActiveTab, filters, setFilters, scopeFilters, handleVersionChange };
 
 	useEffect(() => {
 		const defaultValues = getValidatedStoredValues();
@@ -24,7 +33,9 @@ export default function BookingDesk() {
 		setFilters(defaultValues.filters);
 		setActiveTab(defaultValues.activeTab);
 		setScopeFilters(defaultValues.scopeFilters);
-	}, []);
+
+		if (defaultValues.bookingDeskVersion === 'v1') handleVersionChange();
+	}, [handleVersionChange]);
 
 	const RenderDesk = filters?.shipment_type in ResolveBookingDesk ? ResolveBookingDesk[filters.shipment_type] : null;
 

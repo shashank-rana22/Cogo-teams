@@ -1,3 +1,4 @@
+import { Toggle } from '@cogoport/components';
 import ScopeSelect from '@cogoport/scope-select';
 
 import Filters from '../../commons/Filters';
@@ -14,15 +15,25 @@ const { fcl_freight_local: tabs } = allTabs;
 
 export default function FCLLocalDesk({ stateProps = {} }) {
 	const { loading, data } = useListBookingDeskShipments({ stateProps, prefix: 'fcl_local' });
-
+	const { handleVersionChange = () => {} } = stateProps || {};
 	const couldBeCardsCritical = !!tabs.find((tab) => tab.name === stateProps.activeTab).isCriticalVisible;
 
 	return (
 		<>
 			<div className={styles.header}>
 				<h1>Booking Desk</h1>
+				<div className={styles.top_header_container}>
+					<div className={styles.version}>
+						<Toggle
+							onLabel="v1"
+							offLabel="v2"
+							onChange={handleVersionChange}
+						/>
 
-				<ScopeSelect size="md" defaultValues={stateProps.scopeFilters} />
+					</div>
+
+					<ScopeSelect size="md" defaultValues={stateProps.scopeFilters} />
+				</div>
 			</div>
 
 			<Filters stateProps={stateProps} />
