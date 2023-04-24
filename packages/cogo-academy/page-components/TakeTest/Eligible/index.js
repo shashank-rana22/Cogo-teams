@@ -6,7 +6,6 @@ import Completion from '../Completion';
 import useGetTest from '../hooks/useGetTest';
 import Introduction from '../Introduction';
 import Ongoing from '../Ongoing';
-import handleEnterFullScreen from '../utils/handleEnterFullScreen';
 
 import styles from './styles.module.css';
 
@@ -35,7 +34,6 @@ function Eligible({ currentQuestionId }) {
 	}));
 
 	const [activeState, setActiveState] = useState('');
-	const [isFullScreenAvailable, setIsFullScreenAvailable] = useState(true);
 
 	const page = localStorage.getItem(`current_question_${test_id}_${user_id}`);
 
@@ -54,7 +52,15 @@ function Eligible({ currentQuestionId }) {
 		if (page || (currentQuestionId && currentQuestionId !== 'undefined')) {
 			setActiveState('ongoing');
 
-			handleEnterFullScreen({ setIsFullScreenAvailable });
+			// const elem = document.getElementById('maincontainer');
+
+			// if (elem?.requestFullscreen) {
+			// 	elem?.requestFullscreen();
+			// } else if (elem?.webkitRequestFullscreen) { /* Safari */
+			// 	elem?.webkitRequestFullscreen();
+			// } else if (elem?.msRequestFullscreen) { /* IE11 */
+			// 	elem?.msRequestFullscreen();
+			// }
 		}
 
 		localStorage.setItem('visibilityChangeCount', 1);
@@ -85,8 +91,6 @@ function Eligible({ currentQuestionId }) {
 				testData={data}
 				page={Number(page)}
 				test_user_mapping_state={test_user_mapping_state}
-				isFullScreenAvailable={isFullScreenAvailable}
-				setIsFullScreenAvailable={setIsFullScreenAvailable}
 			/>
 		</div>
 	);
