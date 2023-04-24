@@ -62,9 +62,9 @@
 	display: flex;
 	align-items: center;
 	margin-right: 10px;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: 600;
-	color: var(--color-tertiary-success-green-1);
+	color: var(--color-accent-orange-2);
 
 	& > svg {
 		width: 16px;
