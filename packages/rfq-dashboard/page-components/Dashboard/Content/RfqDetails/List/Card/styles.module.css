@@ -1,7 +1,7 @@
 .container {
 	display: flex;
 	padding: 10px;
-	margin-bottom: 4px;
+	margin-bottom: 8px;
 	background: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 10%);
@@ -88,4 +88,17 @@
 	font-size: 18px;
 	font-weight: 600;
 	color: #221f20;
+}
+
+.services {
+	display: flex;
+	align-items: center;
+	margin-right: 16px;
+}
+
+.service_name {
+	margin-left: 4px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #4f4f4f;
 }

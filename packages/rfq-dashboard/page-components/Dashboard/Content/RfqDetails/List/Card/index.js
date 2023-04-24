@@ -1,6 +1,8 @@
 import { Checkbox } from '@cogoport/components';
 import { IcMProfile } from '@cogoport/icons-react';
 
+import { SERVICE_MAPPING } from '../../../../../../constants';
+
 import styles from './styles.module.css';
 
 function Card({ item, checkedItems, handleCheck }) {
@@ -47,7 +49,16 @@ function Card({ item, checkedItems, handleCheck }) {
 
 					</div>
 				</div>
-				<div className={styles.services}>services</div>
+				{item?.services ? (
+					<div className={styles.services}>
+						{(item?.services || []).map((val) => (
+							<div className={styles.services}>
+								{SERVICE_MAPPING[val].icon}
+								<div className={styles.service_name}>{SERVICE_MAPPING[val].label}</div>
+							</div>
+						))}
+					</div>
+				) : null}
 			</div>
 		</div>
 	);

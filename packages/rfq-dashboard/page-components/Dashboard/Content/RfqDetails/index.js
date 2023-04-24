@@ -9,10 +9,10 @@ function RfqDetails(props) {
 	const [selectAll, setSelectAll] = useState(false);
 
 	const data = [
-		{ id: '1', name: 'apple' },
-		{ id: '2', name: 'ball' },
-		{ id: '3', name: 'cat' },
-		{ id: '4', name: 'dog' },
+		{ id: '1', name: 'apple', services: ['fcl_freight', 'lcl_freight'] },
+		{ id: '2', name: 'ball', services: ['fcl_freight', 'lcl_freight', 'air_freight'] },
+		{ id: '3', name: 'cat', services: ['lcl_freight'] },
+		{ id: '4', name: 'dog', services: ['fcl_freight', 'air_freight'] },
 	];
 
 	useEffect(() => {
