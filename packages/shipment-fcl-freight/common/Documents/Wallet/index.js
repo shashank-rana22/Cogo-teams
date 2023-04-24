@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 import TradeDocuments from './TradeDocuments';
 
 function Wallet({
-	showWalletDocs = () => {},
+	showWalletDocs,
 	forModal = false,
 	activeWallet = '',
 	searchDocsVal,
