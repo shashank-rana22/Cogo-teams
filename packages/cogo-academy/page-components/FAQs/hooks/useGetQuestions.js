@@ -36,7 +36,7 @@ function useGetQuestions({ id }) {
 		} catch (error) {
 			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
 		}
-	}, [country_id, id, partner?.id, roleFunction, roleSubFunction, scope, trigger]);
+	}, [country_id, id, partner?.id, platform, roleFunction, roleSubFunction, scope, trigger]);
 
 	useEffect(() => {
 		if (id) {

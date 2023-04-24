@@ -8,7 +8,7 @@ function useGetQuestion() {
 	const { query = {} } = general;
 	const { id = '' } = query || {};
 	const { mode = '' } = query || {};
-	const { auth_role_data = [], partner = {} } = profile;
+	const { auth_role_data = [], partner = {}, platform = '' } = profile;
 	const { role_functions = {}, role_sub_functions = {} } = auth_role_data || {};
 
 	const { scope = '' } = general;
@@ -31,6 +31,7 @@ function useGetQuestion() {
 						auth_function     : scope === 'partner' ? roleFunction : undefined,
 						auth_sub_function : scope === 'partner' ? roleSubFunction : undefined,
 						country_id,
+						platform,
 						cogo_entity_id    : partner?.id || undefined,
 						persona           : scope === 'partner' ? 'admin_user' : 'importer_exporter',
 						id,
@@ -41,7 +42,7 @@ function useGetQuestion() {
 				console.log(err);
 			}
 		},
-		[country_id, id, partner?.id, roleFunction, roleSubFunction, scope, trigger],
+		[country_id, id, partner?.id, platform, roleFunction, roleSubFunction, scope, trigger],
 	);
 
 	return { fetchQuestion, query, data, loading, mode };
