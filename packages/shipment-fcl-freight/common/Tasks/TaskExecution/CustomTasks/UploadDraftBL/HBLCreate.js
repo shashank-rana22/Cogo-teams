@@ -6,8 +6,8 @@ function HBLCreate({
 	onSave = () => {},
 	hblData,
 	completed = false,
-	summary = {},
-	services = [],
+	shipmentData = {},
+	primaryService = {},
 }) {
 	const [show, setShow] = useState(false);
 	const [mode, setMode] = useState('write');
@@ -15,23 +15,18 @@ function HBLCreate({
 
 	// id change
 
-	const fcl_or_lcl_service =		services.find(
-		(service) => service?.service_type === 'fcl_freight_service'
-				|| service?.service_type === 'lcl_freight_service',
-	) || {};
-
-	const movement_details =		fcl_or_lcl_service?.movement_details
-		|| fcl_or_lcl_service?.movement_detail
-		|| summary?.movement_details
-		|| summary?.movement_detail;
+	const movement_details =		primaryService?.movement_details
+		|| primaryService?.movement_detail
+		|| shipmentData?.movement_details
+		|| shipmentData?.movement_detail;
 
 	const templateInitialValues = {
-		port_of_loading   : summary?.origin_port?.display_name,
-		port_of_discharge : summary?.destination_port?.display_name,
-		consigner         : summary?.importer_exporter?.business_name,
+		port_of_loading   : shipmentData?.origin_port?.display_name,
+		port_of_discharge : shipmentData?.destination_port?.display_name,
+		consigner         : shipmentData?.importer_exporter?.business_name,
 		consignee:
-			summary?.consignee_details?.company_name
-			|| summary?.consignee_detail?.company_name,
+			shipmentData?.consignee_details?.company_name
+			|| shipmentData?.consignee_detail?.company_name,
 		vessel_number: (movement_details || [])
 			.map((movment) => `${movment?.vessel}, ${movment?.voyage}`)
 			.join(','),

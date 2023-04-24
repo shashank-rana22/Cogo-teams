@@ -17,7 +17,8 @@ const updateShipmentTriggerFunc = async (payload, trigger) => trigger({ data: pa
 
 function EditRate({
 	task = {},
-	services = [],
+	serviceList = [],
+	primaryService = {},
 	onCancel = () => {},
 	shipment_data = {},
 	timeLineRefetch = () => {},

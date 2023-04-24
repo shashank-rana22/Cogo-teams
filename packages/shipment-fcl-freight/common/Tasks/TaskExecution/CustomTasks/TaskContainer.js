@@ -8,14 +8,14 @@ import styles from './styles.module.css';
 function TaskContainer({
 	children = null,
 	loading = false,
-	pendingTask,
+	task,
 	actions,
 	shipment_data = {},
 }) {
 	const trade_type = incoTermMapping[shipment_data?.inco_term] || '';
 
-	const taskName =		taskDisplayNames(trade_type)[pendingTask?.task]?.display_name
-		|| startCase(pendingTask?.task || '');
+	const taskName =		taskDisplayNames(trade_type)[task?.task]?.display_name
+		|| startCase(task?.task || '');
 
 	return (
 		<div className={styles.task_container}>

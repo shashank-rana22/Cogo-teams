@@ -1,37 +1,40 @@
 // import useCreateShipmentMapping from '@cogo/business-modules/rpa/hooks/useCreateShipmentMapping';
 import { useContext } from '@cogoport/context';
 import { useRequest } from '@cogoport/request';
-import useScope from '@cogoport/scope-select';
 import { useSelector } from '@cogoport/store';
+
+import useListDocuments from '../../../../../../hooks/useListDocuments';
+// import useScope from '@cogoport/scope-select';
 
 // import { ShipmentDetailContext } from '../../../../../../commons/Context';
 
-const useDraftBLApis = ({
+const useDraftBLHelper = ({
 	isShipmentId,
 	isHBL,
-	pendingTask,
+	task,
 	fcl_or_lcl_service,
-	refetch,
-	clearTask,
-	summary,
+	taskListRefetch = () => {},
+	shipmentData = {},
+	primaryService,
+	onCancel = () => {},
 }) => {
-	const { scope } = useScope();
+	// const { scope } = useScope();
 	const { user_id } = useSelector((s) => ({ user_id: s?.profile?.id }));
 
 	// const [{ refetch: getShipmentRefetch }] = useContext(ShipmentDetailContext);
 
 	// const { submitShipmentMapping } = useCreateShipmentMapping();
 
-	const docsParams = {
+	const tradeDocParams = {
 		filters: {
-			shipment_id   : isShipmentId,
+			shipment_id   : task.shipment_id,
 			document_type : 'bluetide_hbl',
 		},
 		page_limit: 1000,
 	};
 
 	const shipmentDocsParams = {
-		performed_by_org_id : pendingTask?.organization_id,
+		performed_by_org_id : task?.organization_id,
 		service_type        : fcl_or_lcl_service?.service_type,
 		filters             : {
 			shipment_id   : isShipmentId,
@@ -42,19 +45,19 @@ const useDraftBLApis = ({
 	const listDocsAPI = useRequest(
 		'get',
 		isHBL && isShipmentId !== undefined,
-		scope,
-	)('/list_shipment_trade_documents', { params: docsParams });
+		// scope,
+	)('/list_shipment_trade_documents', { params: tradeDocParams });
 
 	const shipmentListDocsAPI = useRequest(
 		'get',
-		isShipmentId !== undefined && pendingTask?.organization_id,
-		scope,
+		isShipmentId !== undefined && task?.organization_id,
+		// scope,
 	)('/list_shipment_documents', { params: shipmentDocsParams });
 
 	const createShipmentDocAPI = useRequest(
 		'post',
 		false,
-		scope,
+		// scope,
 	)('/create_shipment_document');
 
 	const createHBL = async ({ setHblLoading, hblData }) => {
@@ -64,23 +67,23 @@ const useDraftBLApis = ({
 				const body = {
 					name          : 'House BL',
 					document_type : 'bluetide_hbl',
-					shipment_id   : pendingTask?.shipment_id,
-					service_id    : pendingTask?.service_id,
-					service_type  : pendingTask?.service_type,
+					shipment_id   : task?.shipment_id,
+					service_id    : task?.service_id,
+					service_type  : task?.service_type,
 					organization_id:
-						summary?.importer_exporter_id
+						shipmentData?.importer_exporter_id
 						|| fcl_or_lcl_service?.importer_exporter_id,
 					pending_task_id:
 						fcl_or_lcl_service?.service_type === 'lcl_freight_service'
-							? pendingTask?.id
+							? task?.id
 							: undefined,
 					data: {
 						...data,
-						service_id   : pendingTask?.service_id,
-						service_type : pendingTask?.service_type,
+						service_id   : task?.service_id,
+						service_type : task?.service_type,
 					},
 					performed_by_id    : user_id,
-					uploaded_by_org_id : pendingTask?.organization_id,
+					uploaded_by_org_id : task?.organization_id,
 				};
 
 				// const promise = request({
@@ -98,9 +101,9 @@ const useDraftBLApis = ({
 		try {
 			await Promise.all(promises);
 			setHblLoading(false);
-			refetch();
+			taskListRefetch();
 			if (fcl_or_lcl_service?.service_type === 'lcl_freight_service') {
-				clearTask();
+				onclose();
 			}
 		} catch {
 			setHblLoading(false);
@@ -111,12 +114,12 @@ const useDraftBLApis = ({
 		const values = mblRef.current.submit();
 		if (values?.length) {
 			const body = {
-				shipment_id        : pendingTask?.shipment_id,
-				uploaded_by_org_id : pendingTask?.organization_id,
+				shipment_id        : task?.shipment_id,
+				uploaded_by_org_id : task?.organization_id,
 				document_type      : 'draft_bill_of_lading',
-				service_id         : pendingTask?.service_id,
-				service_type       : pendingTask.service_type,
-				pending_task_id    : pendingTask?.id,
+				service_id         : task?.service_id,
+				service_type       : task.service_type,
+				pending_task_id    : task?.id,
 				documents          : values.map((value) => ({
 					file_name    : value?.url?.name,
 					document_url : value?.url?.url,
@@ -124,8 +127,8 @@ const useDraftBLApis = ({
 						description      : value?.description,
 						document_number  : value?.document_number,
 						containers_count : value?.containers_count,
-						service_id       : summary?.service_id,
-						service_type     : summary?.service_type,
+						service_id       : primaryService.id,
+						service_type     : primaryService.service_type,
 					},
 				})),
 			};
@@ -134,7 +137,7 @@ const useDraftBLApis = ({
 			// feedbacks to cogolens starts
 			try {
 				const rpaMappings = {
-					cogo_shipment_id        : pendingTask.shipment_id,
+					cogo_shipment_id        : task.shipment_id,
 					cogo_shipment_serial_no : fcl_or_lcl_service?.shipment_serial_id,
 					bill_of_lading          : values?.document_number,
 				};
@@ -143,9 +146,9 @@ const useDraftBLApis = ({
 				console.log(err);
 			}
 			// feedbacks to cogolens ends
-			refetch();
+			taskListRefetch();
 			// getShipmentRefetch();
-			clearTask();
+			onCancel();
 		}
 	};
 
@@ -158,4 +161,4 @@ const useDraftBLApis = ({
 	};
 };
 
-export default useDraftBLApis;
+export default useDraftBLHelper;

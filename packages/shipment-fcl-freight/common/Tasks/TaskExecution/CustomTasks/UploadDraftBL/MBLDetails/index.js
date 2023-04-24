@@ -5,20 +5,20 @@ import Form from '../UploadHbl/form';
 
 import getControls from './controls';
 
-function MBLDetails(props, ref) {
-	const { selectedMail, summary } = props || {};
-	let newSummary = summary;
+function MBLDetails({ task = {}, primaryService = {}, ref = () => {}, selectedMail = {} }) {
+	let newSummary = '';
 	if (selectedMail?.formatted?.length) {
 		newSummary = selectedMail?.formatted[0];
 	}
 	const formRefs = useRef([]);
 	const controls = getControls({ data: newSummary });
 
-	let bls_count = summary?.bls_count;
-	if (summary?.bl_category === 'hbl') {
+	let bls_count = primaryService?.bls_count;
+	if (primaryService?.bl_category === 'hbl') {
 		bls_count = 1;
 	}
 
+	// eslint-disable-next-line no-use-before-define
 	useImperativeHandle(ref, () => ({ submit: handleSubmit }));
 
 	const handleSubmit = () => {

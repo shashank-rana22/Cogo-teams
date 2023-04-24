@@ -13,8 +13,9 @@ const revenueDeskServices = [
 
 function MarkServiceConfirmed({
 	task = {},
-	services = [],
+	serviceList = [],
 	onCancel = () => {},
+	primaryService = {},
 	shipment_data = {},
 	timeLineRefetch = () => {},
 	refetch = () => {},
@@ -33,15 +34,19 @@ function MarkServiceConfirmed({
 			/>
 		);
 	}
+
 	const formattedRate = formatRate(
 		selectedCard,
 		shipment_data,
 		task.service_type,
+		primaryService,
+		serviceList,
 	);
+
 	return (
 		<EditRate
 			task={task}
-			services={services}
+			serviceList={serviceList}
 			onCancel={onCancel}
 			shipment_data={shipment_data}
 			timeLineRefetch={timeLineRefetch}

@@ -23,7 +23,6 @@ function useTaskExecution({ task = {}, taskConfigData = {} }) {
 		steps: dataConfig.steps || [],
 		currentStep,
 		setCurrentStep,
-		primaryService,
 	};
 }
 export default useTaskExecution;
