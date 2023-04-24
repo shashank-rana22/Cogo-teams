@@ -110,7 +110,13 @@ function Card({
 				<div className={styles.period}>
 					Period
 					<Tooltip
-						content={<div className={styles.font_size_tooltip}>Please select the accounting month</div>}
+						content={(
+							<div className={styles.font_size_tooltip}>
+								Please select the
+								<br />
+								accounting month
+							</div>
+						)}
 						placement="top"
 					>
 						<div className={styles.info_icon_container}>
@@ -145,7 +151,7 @@ function Card({
 					Transaction Date
 					<Tooltip
 						content={(
-							<div>
+							<div style={{ fontSize: '12px' }}>
 								Select Shipment range to
 								<br />
 								be accounted
@@ -225,7 +231,7 @@ function Card({
 						placeholder="Shipment Type"
 						options={optionsShipment}
 						isClearable
-						style={{ width: '172px' }}
+						style={{ width: '176px' }}
 					/>
 
 				</div>
