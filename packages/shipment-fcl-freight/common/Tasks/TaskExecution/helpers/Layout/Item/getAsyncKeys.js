@@ -208,6 +208,16 @@ const getAsyncFields = (key) => {
 			},
 			defaultOptions: true,
 		},
+		currencies: {
+			valueKey      : 'id',
+			lableKey      : 'label',
+			asyncKey      : 'list_exchange_rate_currencies',
+			defaultParams : {
+				filters: {
+					status: 'active',
+				},
+			},
+		},
 		'fcl-freight-rate-line-items': {
 			valueKey       : 'code',
 			lableKey       : 'name',
@@ -784,6 +794,7 @@ const getAsyncFields = (key) => {
 		},
 	};
 
+	console.log('optiosn', OPTIONS[key]);
 	return OPTIONS[key];
 };
 

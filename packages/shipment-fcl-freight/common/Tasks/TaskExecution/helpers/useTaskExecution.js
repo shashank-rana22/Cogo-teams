@@ -16,6 +16,8 @@ function useTaskExecution({ task = {}, taskConfigData = {} }) {
 			initialStep = (dataConfig.steps || []).length - 1;
 		}
 	}
+	console.log('data config', dataConfig);
+	console.log('steps', initialStep);
 
 	const [currentStep, setCurrentStep] = useState(initialStep);
 

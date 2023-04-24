@@ -13,7 +13,6 @@ function Header({
 	showMyTasks = true,
 	setShowMyTasks = () => {},
 }) {
-<<<<<<< Updated upstream
 	const [showBookingReq, setShowBookingReq] = useState(false);
 
 	const contextValues = useContext(ShipmentDetailContext);
@@ -23,8 +22,6 @@ function Header({
 	const showBookingRequirementsCondition = ['superadmin', 'booking_desk'].includes(activeStakeholder)
 											&& shipment_data?.state !== 'shipment_received';
 
-=======
->>>>>>> Stashed changes
 	return (
 		<div className={styles.container}>
 			<div className={styles.top_panel}>

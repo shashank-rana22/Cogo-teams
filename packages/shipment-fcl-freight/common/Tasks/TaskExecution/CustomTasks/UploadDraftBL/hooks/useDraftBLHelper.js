@@ -4,6 +4,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 import useListDocuments from '../../../../../../hooks/useListDocuments';
+import useListTradeDocuments from '../../../../../../hooks/useListTradeDocuments';
 // import useScope from '@cogoport/scope-select';
 
 // import { ShipmentDetailContext } from '../../../../../../commons/Context';
@@ -15,7 +16,7 @@ const useDraftBLHelper = ({
 	fcl_or_lcl_service,
 	taskListRefetch = () => {},
 	shipmentData = {},
-	primaryService,
+	primaryService = {},
 	onCancel = () => {},
 }) => {
 	// const { scope } = useScope();
@@ -26,43 +27,56 @@ const useDraftBLHelper = ({
 	// const { submitShipmentMapping } = useCreateShipmentMapping();
 
 	const tradeDocParams = {
-		filters: {
+		defaultFilters: {
 			shipment_id   : task.shipment_id,
 			document_type : 'bluetide_hbl',
 		},
-		page_limit: 1000,
+		defaultParams: {
+			page_limit: 1000,
+		},
 	};
 
 	const shipmentDocsParams = {
-		performed_by_org_id : task?.organization_id,
-		service_type        : fcl_or_lcl_service?.service_type,
-		filters             : {
+		defaultParams: {
+			performed_by_org_id : task?.organization_id,
+			service_type        : primaryService.service_type,
+			page_limit          : 10,
+		},
+		defaultFilters: {
 			shipment_id   : isShipmentId,
 			document_type : 'draft_house_bill_of_lading',
 		},
 	};
 
-	const listDocsAPI = useRequest(
-		'get',
-		isHBL && isShipmentId !== undefined,
-		// scope,
-	)('/list_shipment_trade_documents', { params: tradeDocParams });
+	// const listDocsAPI = useRequest(
+	// 	'get',
+	// 	isHBL && isShipmentId !== undefined,
+	// 	// scope,
+	// )('/list_shipment_trade_documents', { params: tradeDocParams });
+	const { data, loading: tradeDocLoading } = useListTradeDocuments({});
 
-	const shipmentListDocsAPI = useRequest(
-		'get',
-		isShipmentId !== undefined && task?.organization_id,
-		// scope,
-	)('/list_shipment_documents', { params: shipmentDocsParams });
+	// if isHbl is true use list_shipment_documents
 
-	const createShipmentDocAPI = useRequest(
-		'post',
-		false,
-		// scope,
-	)('/create_shipment_document');
+	// const shipmentListDocsAPI = useRequest(
+	// 	'get',
+	// 	isShipmentId !== undefined && task?.organization_id,
+	// 	// scope,
+	// )('/list_shipment_documents', { params: shipmentDocsParams });
+	const { list, loading: shipmentDocLoading } = useListDocuments({ ...shipmentDocsParams });
+
+	// if task.organization_id is present then use list_shipment_documents
+
+	console.log('data list', data, list);
+
+	// const createShipmentDocAPI = useRequest(
+	// 	'post',
+	// 	false,
+	// 	// scope,
+	// )('/create_shipment_document');
 
 	const createHBL = async ({ setHblLoading, hblData }) => {
 		setHblLoading(true);
-		const promises = hblData.reduce((acc, data) => {
+		const promises = hblData.reduce((acc) => {
 			if (data) {
 				const body = {
 					name          : 'House BL',
@@ -153,9 +167,9 @@ const useDraftBLHelper = ({
 	};
 
 	return {
-		listDocsAPI,
-		shipmentListDocsAPI,
-		createShipmentDocAPI,
+		// listDocsAPI,
+		// shipmentListDocsAPI,
+		// createShipmentDocAPI,
 		createHBL,
 		submitMBL,
 	};
