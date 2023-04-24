@@ -20,6 +20,10 @@ const controlItem = [{
 					value : 'login',
 				},
 				{
+					label : 'call',
+					value : 'call',
+				},
+				{
 					label : 'forgot password',
 					value : 'forgot_password',
 				},

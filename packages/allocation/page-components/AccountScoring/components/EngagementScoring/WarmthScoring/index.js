@@ -3,9 +3,10 @@ import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
+import useGetEngagementScoringConfiguration from '../../../hooks/useGetEngagementScoringConfiguration';
+
 import EngagementType from './EngagementType';
 import Header from './Header';
-import list from './list';
 import styles from './styles.module.css';
 
 function WarmthScoring(props) {
@@ -14,6 +15,15 @@ function WarmthScoring(props) {
 	const [activeCollapse, setActiveCollapse] = useState('');
 
 	const [editMode, setEditMode] = useState('');
+
+	const {
+		data,
+		debounceQuery,
+		searchValue,
+		setSearchValue,
+	} = useGetEngagementScoringConfiguration({ activeCollapse });
+
+	const { list = [] } = data || {};
 
 	const titleComponent = (value) => (
 		<div className={styles.title_container}>
@@ -79,7 +89,12 @@ function WarmthScoring(props) {
 
 	return (
 		<div>
-			<Header setToggleComponent={setToggleComponent} />
+			<Header
+				setToggleComponent={setToggleComponent}
+				setSearchValue={setSearchValue}
+				debounceQuery={debounceQuery}
+				searchValue={searchValue}
+			/>
 
 			<div className={styles.collapse_container}>
 				<Collapse
