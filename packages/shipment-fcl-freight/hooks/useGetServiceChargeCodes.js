@@ -32,7 +32,6 @@ const useGetServiceChargeCodes = ({ service_name, shipment_id, defaultFilters })
 		loading:rateChargeCodesLoading,
 		apiTrigger:rateChargeCodesTrigger,
 		setFilters:rateChargeCodesSetFilters,
-		// filters:rateChargeCodesFilters,
 	} = useListRateChargeCodes({
 		defaultParams: {
 			service_names: [...(serviceName || []), 'platform_charges'],
@@ -45,7 +44,6 @@ const useGetServiceChargeCodes = ({ service_name, shipment_id, defaultFilters })
 		loading:additionalServiceCodesLoading,
 		apiTrigger:additionalServiceCodesTrigger,
 		setFilters:additionalServiceCodesSetFilters,
-		// filters:additionalServiceCodesFilters,
 	} = useGetShipmentAdditionalServiceCodes({ shipment_id, defaultFilters });
 
 	const getCodesList = useCallback(async () => {

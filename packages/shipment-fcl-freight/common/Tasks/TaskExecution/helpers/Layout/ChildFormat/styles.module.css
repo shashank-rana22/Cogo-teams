@@ -16,6 +16,21 @@
 	width: 100%;
 }
 
+.add_button_container{
+	display: flex;
+	justify-content: flex-end;
+}
+
+.label{
+	margin-bottom:6px;
+	font-weight: 600;
+	font-size: var(--font-size-md);
+}
+
+.add_button_text{
+	font-size: var(--font-size-md);
+}
+
 .element {
 	padding: 4px;
 

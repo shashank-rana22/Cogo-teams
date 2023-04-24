@@ -32,8 +32,10 @@ function UploadBookingNote({ task, onCancel }) {
 	const step2_data = useGetStep2Data({ primary_service, shipment_data });
 
 	const step3_data = useGetStep3Data({ primary_service, servicesList, shipment_data });
+	const { serviceQuotationLoading } = step3_data || {};
 
 	return (
+
 		<div>
 			{step === 0 ? (
 				<Step0
@@ -62,7 +64,7 @@ function UploadBookingNote({ task, onCancel }) {
 			}
 
 			{
-				step === 3 ? (
+				step === 3 && !serviceQuotationLoading ? (
 					<Step3
 						data={step3_data}
 						setStep={setStep}

@@ -1,12 +1,42 @@
 import { Button } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 
 import Layout from '../../../../helpers/Layout';
 
 import styles from './styles.module.css';
 
 function Step3({ data, setStep }) {
-	const { finalControls, formProps, customValues = {}, onSubmit = () => {} } = data || {};
-	const { control, handleSubmit, formState:{ errors = {} } = {} } = formProps || {};
+	const { finalControls, defaultValues, onSubmit = () => {} } = data || {};
+
+	const formProps = useForm({ defaultValues });
+	const { control, handleSubmit, formState:{ errors = {} } = {}, watch } = formProps || {};
+
+	const customValues = {};
+	const formValues = watch();
+
+	const prepareFormValues = () => {
+		const allFormValues = { ...formValues };
+		(Object.keys(formValues) || []).forEach((key) => {
+			if (key && formValues[key]) {
+				allFormValues[key] = (allFormValues[key] || []).map((value) => ({
+					...value,
+					total    : (value.price || 0) * (value.quantity || 0),
+					currency : 'INR',
+				}));
+			}
+		});
+
+		return allFormValues;
+	};
+
+	const newFormValues = prepareFormValues();
+
+	Object.keys(formValues).forEach((key) => {
+		customValues[key] = {
+			formValues : newFormValues[key],
+			id         : key,
+		};
+	});
 
 	return (
 		<div>

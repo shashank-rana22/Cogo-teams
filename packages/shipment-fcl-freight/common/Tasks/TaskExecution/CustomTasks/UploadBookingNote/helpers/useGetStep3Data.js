@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 
 import useGetShipmentServicesQuotation from '../../../../../../hooks/useGetShipmentServicesQuotation';
@@ -17,7 +16,7 @@ const TRADE_MAPPING = {
 const useGetStep3Data = ({ servicesList = [], shipment_data }) => {
 	const service_ids = servicesList.map((service) => service?.id);
 
-	const { data:servicesQuotation } = useGetShipmentServicesQuotation({
+	const { data:servicesQuotation, loading:serviceQuotationLoading } = useGetShipmentServicesQuotation({
 		defaultParams: {
 			shipment_id             : shipment_data?.id,
 			service_ids,
@@ -28,11 +27,9 @@ const useGetStep3Data = ({ servicesList = [], shipment_data }) => {
 
 	const service_charges = servicesQuotation?.service_charges || [];
 
-	const service_charges_ids = [];
-
 	const service_charges_with_trade = (service_charges || []).map((charge) => {
 		let chargeDetails = charge;
-		service_charges_ids.push(charge?.id);
+
 		(servicesList || []).forEach((serviceObj) => {
 			if (charge?.service_id === serviceObj?.id) {
 				chargeDetails = {
@@ -48,49 +45,17 @@ const useGetStep3Data = ({ servicesList = [], shipment_data }) => {
 		service_charge,
 		shipment_data,
 	}));
-
 	const defaultValues = {};
-	service_charges_ids.forEach((id) => {
-		defaultValues[id] = [
-			{
-				code     : '',
-				currency : '',
-				price    : '',
-				quantity : '',
-				unit     : '',
-				total    : '',
-			},
-		];
-	});
 
-	const formProps = useForm({ defaultValues });
-	const { watch } = formProps;
-	const formValues = watch();
-
-	const customValues = {};
-
-	const prepareFormValues = () => {
-		const allFormValues = { ...formValues };
-		(Object.keys(formValues) || []).forEach((key) => {
-			if (key && formValues[key]) {
-				allFormValues[key] = (allFormValues[key] || []).map((value) => ({
-					...value,
-					total    : (value.price || 0) * (value.quantity || 0),
-					currency : 'INR',
-				}));
-			}
-		});
-
-		return allFormValues;
-	};
-
-	const newFormValues = prepareFormValues();
-
-	Object.keys(formValues).forEach((key) => {
-		customValues[key] = {
-			formValues : newFormValues[key],
-			id         : key,
-		};
+	service_charges.forEach((service_charge) => {
+		defaultValues[service_charge?.id] = service_charge?.line_items?.map((line_item) => ({
+			code     : line_item?.code,
+			currency : line_item?.currency,
+			price    : line_item?.price,
+			quantity : line_item?.quantity,
+			unit     : line_item?.unit,
+			total    : line_item?.total,
+		}));
 	});
 
 	const onSubmit = async (values) => {
@@ -135,9 +100,9 @@ const useGetStep3Data = ({ servicesList = [], shipment_data }) => {
 		service_charges_with_trade,
 		updateBuyQuotationTrigger,
 		finalControls,
-		formProps,
-		customValues,
 		onSubmit,
+		serviceQuotationLoading,
+		defaultValues,
 	};
 };
 
