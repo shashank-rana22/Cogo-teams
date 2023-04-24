@@ -428,7 +428,12 @@ const allocation = {
 			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
+		},		{
+			api          : 'get_allocation_engagement_scoring_event_configurations',
+			access_type  : 'private',
+			service_name : 'allocation',
 		},
+
 	],
 };
 

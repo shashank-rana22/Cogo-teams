@@ -36,7 +36,15 @@ function FieldArray(props) {
 				))}
 			</div>
 
-			<Button themeType="accent" onClick={() => append(childValues)} style={{ marginTop: '8px' }}> Add +</Button>
+			<Button
+				themeType="accent"
+				onClick={() => append(childValues)}
+				style={{ marginTop: '8px' }}
+			>
+				{' '}
+				+ Add Lifecycle Item
+			</Button>
+
 		</>
 
 	);
