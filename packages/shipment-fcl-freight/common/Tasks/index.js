@@ -24,14 +24,6 @@ function List() {
 		);
 	}
 
-	if ((tasksList || []).length === 0) {
-		return (
-			<div>
-				<EmptyState />
-			</div>
-		);
-	}
-
 	return (
 		<div className={styles.container}>
 			<Header
@@ -43,36 +35,51 @@ function List() {
 				setShowMyTasks={setShowMyTasks}
 			/>
 
-			{selectedTaskId ? (
-				<Button
-					className={styles.see_all_tasks}
-					onClick={() => setSelectedTaskId(null)}
-					themeType="link"
-					size="md"
-				>
-					<IcMArrowBack width={50} />
-					<div style={{ width: 200 }}>See All Tasks</div>
-				</Button>
-			) : null}
+			{tasksList?.length === 0 ? <EmptyState />
+				: (
+					<>
 
-			{!selectedTaskId ? (tasksList || []).map((task) => <Card task={task} handleClick={handleClick} />) : null}
+						{selectedTaskId ? (
+							<Button
+								className={styles.see_all_tasks}
+								onClick={() => setSelectedTaskId(null)}
+								themeType="link"
+								size="md"
+							>
+								<IcMArrowBack width={50} />
+								<div style={{ width: 200 }}>See All Tasks</div>
+							</Button>
+						) : null}
 
-			{selectedTaskId ? (
-				<>
-					<Card
-						task={tasksList.find((task) => task.id === selectedTaskId)}
-						handleClick={handleClick}
-						isTaskOpen
-					/>
+						{!selectedTaskId ? (tasksList || []).map((task) => (
+							<Card
+								task={task}
+								handleClick={handleClick}
+								tasksList={tasksList}
+								loading={loading}
+							/>
+						)) : null}
 
-					<TaskExecution
-						task={tasksList.find((task) => task.id === selectedTaskId)}
-						onCancel={() => setSelectedTaskId(null)}
-						shipment_data={shipment_data}
-						taskListRefetch={taskListRefetch}
-					/>
-				</>
-			) : null }
+						{selectedTaskId ? (
+							<>
+								<Card
+									task={tasksList.find((task) => task.id === selectedTaskId)}
+									handleClick={handleClick}
+									isTaskOpen
+									tasksList={tasksList}
+									loading={loading}
+								/>
+
+								<TaskExecution
+									task={tasksList.find((task) => task.id === selectedTaskId)}
+									onCancel={() => setSelectedTaskId(null)}
+									shipment_data={shipment_data}
+									taskListRefetch={taskListRefetch}
+								/>
+							</>
+						) : null }
+					</>
+				) }
 		</div>
 	);
 }
