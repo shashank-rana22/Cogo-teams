@@ -186,6 +186,7 @@ function asyncFieldsListAgents() {
 		},
 	};
 }
+
 function asyncFieldListRateChargeCodes() {
 	return {
 		labelKey    : 'name',
@@ -213,6 +214,50 @@ function asyncAllotBanks() {
 			entityCode : 301,
 			currency   : 'INR',
 		},
+	};
+}
+
+function asyncFieldsExpertiseConfigurations() {
+	return {
+		labelKey     : 'condition_name',
+		valueKey     : 'id',
+		endpoint     : '/kam_expertise_event_configuration_name',
+		authkey      : 'get_allocation_kam_expertise_event_configuration_name',
+		microService : 'allocation',
+		initialCall  : false,
+	};
+}
+
+function asyncFieldsExpertiseBadgeName() {
+	return {
+		labelKey     : 'badge_name',
+		valueKey     : 'id',
+		endpoint     : '/kam_expertise_badge_name',
+		authkey      : 'get_allocation_kam_expertise_badge_name',
+		microService : 'allocation',
+		initialCall  : false,
+	};
+}
+
+function asyncKamExpertiseRuleOptions() {
+	return {
+		labelKey     : 'option',
+		valueKey     : 'option',
+		endpoint     : '/kam_expertise_rule_options',
+		authkey      : 'get_allocation_kam_expertise_rule_options',
+		microService : 'allocation',
+		initialCall  : false,
+	};
+}
+
+function asyncKamExpertiseGroupOptions() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'group_name',
+		endpoint     : '/kam_expertise_event_group_name',
+		authkey      : 'get_allocation_kam_expertise_event_group_name',
+		microService : 'allocation',
+		initialCall  : true,
 	};
 }
 
@@ -269,6 +314,10 @@ export {
 	asyncFieldsListAgents,
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
+	asyncFieldsExpertiseConfigurations,
+	asyncFieldsExpertiseBadgeName,
+	asyncKamExpertiseRuleOptions,
+	asyncKamExpertiseGroupOptions,
 	listVendors,
 	asyncListCogoEntity,
 	asyncListHsCodes,

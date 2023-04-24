@@ -1,18 +1,8 @@
-import { Button } from '@cogoport/components';
-
 import styles from './styles.module.css';
 
-function Header({ setSwitchDashboard = () => {} }) {
+function Header() {
 	return (
-		<div className={styles.container}>
-			<div className={styles.header}>FAQs Analytics Dashboard</div>
-
-			<div className={styles.button_container}>
-				<Button type="button" themeType="primary" onClick={() => setSwitchDashboard(true)}>
-					Control Center
-				</Button>
-			</div>
-		</div>
+		<div className={styles.container}>FAQs Analytics Dashboard</div>
 	);
 }
 

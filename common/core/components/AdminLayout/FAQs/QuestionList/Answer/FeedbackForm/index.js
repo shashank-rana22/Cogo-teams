@@ -70,7 +70,6 @@ function FeedbackForm({
 					name="remark"
 					type="text"
 					placeholder="Enter remark here"
-					rules={{ required: 'Remark is required' }}
 				/>
 
 				{errors.remark && (

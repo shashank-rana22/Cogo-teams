@@ -57,6 +57,7 @@ const useListfaqFeedback = ({ id, feedbackId }) => {
 		answer_remark,
 		question_answer_remark,
 		question_remark,
+		fetchListFaqFeedback,
 	};
 };
 
