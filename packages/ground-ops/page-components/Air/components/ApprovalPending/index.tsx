@@ -40,7 +40,11 @@ function ApprovalPending({
 
 	const handleOnEdit = (singleItem) => {
 		if (singleItem?.documentState === 'document_amendment_requested') {
-			handleEditMAWB(singleItem, '');
+			if (singleItem?.documentData?.status === 'uploaded') {
+				setShowUpload(singleItem); setEdit(true);
+			} else if (singleItem?.documentData?.status === 'generated') {
+				handleEditMAWB(singleItem, '');
+			}
 		} else if (singleItem?.documentData?.status === 'uploaded') {
 			setShowUpload(singleItem); setEdit('edit');
 		} else if (singleItem?.documentData?.status === 'generated') {
@@ -102,7 +106,13 @@ function ApprovalPending({
 								themeType="secondary"
 								style={{ border: '1px solid #ED3726', color: '#ED3726' }}
 								disabled={updateLoading}
-								onClick={() => { handleEditMAWB(singleItem, ''); }}
+								onClick={() => {
+									if (singleItem?.documentData?.status === 'uploaded') {
+										setShowUpload(singleItem); setEdit(true);
+									} else if (singleItem?.documentData?.status === 'generated') {
+										handleEditMAWB(singleItem, '');
+									}
+								}}
 							>
 								Amend
 							</Button>
