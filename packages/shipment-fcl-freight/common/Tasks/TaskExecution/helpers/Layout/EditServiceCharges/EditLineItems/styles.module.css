@@ -1,9 +1,9 @@
-.container{
-    border: 1px solid #f9da7f;
-    border-radius: 4px;
-    padding: 4px 10px 8px;
+.container {
+	padding: 4px 10px 8px;
+	border: 1px solid #f9da7f;
+	border-radius: 4px;
 }
 
-.child_container{
-    margin-top: 10px;
+.child_container {
+	margin-top: 10px;
 }

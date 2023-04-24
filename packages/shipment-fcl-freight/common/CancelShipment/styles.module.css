@@ -28,6 +28,6 @@
 }
 
 .no_reasons_found {
-	font-size: var(--font-size-xl);
 	padding: 16px;
+	font-size: var(--font-size-xl);
 }

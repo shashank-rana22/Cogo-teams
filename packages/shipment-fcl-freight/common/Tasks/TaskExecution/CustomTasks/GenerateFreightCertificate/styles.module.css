@@ -1,6 +1,7 @@
 .container {
 	position: relative;
-	:global{
+
+	:global {
 		.ui_table_body_cell {
 			overflow: unset;
 
@@ -12,10 +13,10 @@
 }
 
 .title {
-	font-weight: 500;
-	font-size: 12px;
 	width: 100%;
-	margin: 10px 0px 0px 0px;
+	margin: 10px 0 0;
+	font-size: 12px;
+	font-weight: 500;
 }
 
 .rate_container {
@@ -28,14 +29,14 @@
 }
 
 .loaderr {
-	background-color: #fff;
 	position: absolute;
 	z-index: 1;
-	opacity: 0.7;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	width: 100%;
 	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center ;
-	flex-direction: column;
+	background-color: #fff;
+	opacity: 0.7;
 }

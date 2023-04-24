@@ -55,8 +55,8 @@
 .completed {
 	margin-right: 10px;
 	font-size: 14px;
-	color: var(--color-accent-orange-2);
 	font-weight: 600;
+	color: var(--color-accent-orange-2);
 
 	/* &.after_due_date {
 		color: #cb6464;
