@@ -3,6 +3,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 
 import useGetShipmentServicesQuotation from '../../../../../../hooks/useGetShipmentServicesQuotation';
 import useUpdateShipmentBuyQuotations from '../../../../../../hooks/useUpdateShipmentBuyQuotations';
+import useUpdateShipmentPendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
 
 import checkLineItemsSum from './checkLineItemSum';
 import getStep3Controls from './getStep3Controls';
@@ -13,8 +14,35 @@ const TRADE_MAPPING = {
 	undefined : '',
 };
 
-const useGetStep3Data = ({ servicesList = [], shipment_data }) => {
-	const service_ids = servicesList.map((service) => service?.id);
+const useGetStep3Data = ({ servicesList = [], shipment_data, onCancel, task }) => {
+	const service_ids = [];
+	let notMainService = false;
+
+	(servicesList || []).forEach((serviceObj) => {
+		if (
+			[
+				'fcl_freight_service',
+				'fcl_freight_local_service',
+				'fcl_cfs_service',
+			].includes(serviceObj.service_type)
+			&& shipment_data?.shipment_type === 'fcl_freight'
+		) {
+			notMainService = true;
+			service_ids.push(serviceObj.id);
+		} else if (
+			serviceObj.service_type === `${shipment_data?.shipment_type}_service`
+			|| serviceObj.service_type === `${shipment_data?.shipment_type}_local_service`
+		) {
+			notMainService = true;
+			service_ids.push(serviceObj.id);
+		}
+	});
+
+	(servicesList || []).forEach((serviceObj) => {
+		if (!notMainService) {
+			service_ids.push(serviceObj.id);
+		}
+	});
 
 	const { data:servicesQuotation, loading:serviceQuotationLoading } = useGetShipmentServicesQuotation({
 		defaultParams: {
@@ -24,6 +52,8 @@ const useGetStep3Data = ({ servicesList = [], shipment_data }) => {
 		},
 	});
 	const { apiTrigger:updateBuyQuotationTrigger } = useUpdateShipmentBuyQuotations({});
+
+	const { apiTrigger:updateTask } = useUpdateShipmentPendingTask({ refetch: () => { onCancel(); } });
 
 	const service_charges = servicesQuotation?.service_charges || [];
 
@@ -41,9 +71,19 @@ const useGetStep3Data = ({ servicesList = [], shipment_data }) => {
 		return chargeDetails;
 	});
 
+	let chargeCodes = {};
+
+	const handleChange = (vals) => {
+		if (!chargeCodes?.vals?.code) {
+			chargeCodes = { ...chargeCodes, [vals?.code]: vals?.name };
+		}
+	};
+
 	const finalControls = service_charges_with_trade.map((service_charge) => getStep3Controls({
 		service_charge,
 		shipment_data,
+		handleChange,
+
 	}));
 	const defaultValues = {};
 
@@ -60,6 +100,7 @@ const useGetStep3Data = ({ servicesList = [], shipment_data }) => {
 
 	const onSubmit = async (values) => {
 		const quotations = [];
+
 		Object.keys(values).forEach((key) => {
 			const items = values[key];
 
@@ -70,6 +111,7 @@ const useGetStep3Data = ({ servicesList = [], shipment_data }) => {
 				line_items: items.map((line_item) => ({
 					code     : line_item.code,
 					currency : line_item.currency,
+					name     : chargeCodes[line_item?.code],
 					price    : Number(line_item.price),
 					quantity : Number(line_item.quantity),
 					unit     : line_item.unit,
@@ -85,11 +127,11 @@ const useGetStep3Data = ({ servicesList = [], shipment_data }) => {
 			Toast.error(checkSum.message.join(','));
 		} else {
 			try {
-				await updateBuyQuotationTrigger({ quotations });
+				const res = await updateBuyQuotationTrigger({ quotations });
 
-			// if(!res?.hasError){
-			// 	const resUpdateTask =
-			// }
+				if (!res?.hasError) {
+					await updateTask({ id: task?.id });
+				}
 			} catch (err) {
 				toastApiError(err);
 			}

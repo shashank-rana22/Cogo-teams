@@ -9,15 +9,11 @@ import styles from './styles.module.css';
 function Step2({ data, setStep, step1_data }) {
 	const [currentBookingNote, setCurrentBookingNote] = useState('0');
 
-	const { formProps } = data || {};
+	const { formProps, handleFinalSubmit } = data || {};
 	const { formProps:{ watch:step1Watch = () => {} } = {} } = step1_data || {};
 	const { control, formState:{ errors = {} } = {}, handleSubmit } = formProps || {};
 
 	const step1Files = step1Watch('url');
-
-	const onNext = () => {
-		setStep(3);
-	};
 
 	return (
 		<div>
@@ -73,7 +69,7 @@ function Step2({ data, setStep, step1_data }) {
 			</div>
 			<div className={styles.button_container}>
 				<Button themeType="secondary" onClick={() => setStep(1)}>Back</Button>
-				<Button themeType="primary" onClick={handleSubmit(onNext)}>Next</Button>
+				<Button themeType="primary" onClick={handleSubmit(handleFinalSubmit)}>Next</Button>
 			</div>
 
 		</div>

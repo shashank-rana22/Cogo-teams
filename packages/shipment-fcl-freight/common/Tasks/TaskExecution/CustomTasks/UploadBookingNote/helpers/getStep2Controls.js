@@ -155,13 +155,12 @@ export const mainControls = [
 		size: 'sm',
 	},
 	{
-		label       : 'Detention days at origin',
-		name        : 'free_days_detention_origin',
-		type        : 'number',
-		span        : 12,
-		optionLabel : 'Day',
-		rules       : {
-			required: { value: true, message: 'Detention at origin is required', max: 100, min: 0 },
+		label : 'Detention days at origin',
+		name  : 'free_days_detention_origin',
+		type  : 'number',
+		span  : 12,
+		rules : {
+			required: { value: true, message: 'Detention at origin is required' },
 		},
 		size: 'sm',
 	},
@@ -173,8 +172,6 @@ export const mainControls = [
 		rules : {
 			required: {
 				value   : true,
-				min     : 0,
-				max     : 100,
 				message : 'Detention at destination is required',
 			},
 		},

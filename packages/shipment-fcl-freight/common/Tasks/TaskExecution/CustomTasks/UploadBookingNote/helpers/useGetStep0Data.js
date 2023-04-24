@@ -36,11 +36,12 @@ const useGetStep0Data = ({ shipment_data = {}, task = {}, servicesList = [], set
 	const fcl_shipping_line_id = servicesList
 		?.find((s) => s?.service_type === 'fcl_freight_service')?.shipping_line?.id;
 
-	const defaultValues = { shipping_line_id_fcl_local: fcl_shipping_line_id };
+	const defaultValues = { shipping_line_id_fcl_local: fcl_shipping_line_id || '' };
 	const formProps = useForm({ defaultValues });
 
 	const { watch, setValue } = formProps;
 	const watchFclShippingLine = watch('shipping_line_id_fcl_main');
+	const formValues = watch();
 
 	useEffect(() => {
 		setValue('shipping_line_id_fcl_local', watchFclShippingLine);
@@ -55,6 +56,7 @@ const useGetStep0Data = ({ shipment_data = {}, task = {}, servicesList = [], set
 		setSelectedServiceProvider,
 		selectedServiceProvider,
 		shipment_data,
+		formValues,
 	};
 };
 
