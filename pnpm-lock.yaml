@@ -47,6 +47,7 @@ importers:
       '@cogoport/allocation': workspace:0.1.0
       '@cogoport/athena-dashboard': workspace:0.1.0
       '@cogoport/authentication': workspace:0.1.0
+      '@cogoport/authority-desk': workspace:0.1.0
       '@cogoport/booking-desk': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
       '@cogoport/cogo-academy': workspace:0.1.0
@@ -91,6 +92,7 @@ importers:
       '@cogoport/allocation': link:../packages/allocation
       '@cogoport/athena-dashboard': link:../packages/athena-dashboard
       '@cogoport/authentication': link:../packages/authentication
+      '@cogoport/authority-desk': link:../packages/authority-desk
       '@cogoport/booking-desk': link:../packages/booking-desk
       '@cogoport/business-finance': link:../packages/business-finance
       '@cogoport/cogo-academy': link:../packages/cogo-academy
@@ -481,6 +483,12 @@ importers:
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.6
       cookies-next: 2.1.1
+      react: 18.2.0
+
+  packages/authority-desk:
+    specifiers:
+      react: 18.2.0
+    dependencies:
       react: 18.2.0
 
   packages/booking-desk:
