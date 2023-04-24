@@ -65,7 +65,7 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 				<div>
 					Margin :
 					{' '}
-					{quotationProfit || '0'}
+					{getFormattedPrice(quotationProfit, sellQuotationCurrency) || '-' }
 					{' '}
 					(
 					{quotationMargin || '0'}
