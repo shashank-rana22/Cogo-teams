@@ -180,7 +180,6 @@ function Card({
 						disable={!isDateRangeEnabled}
 						onChange={(val:any) => { setFilters((prev) => ({ ...prev, date: val })); }}
 						value={filters?.date}
-						size="sm"
 						style={{ width: '184px' }}
 					/>
 				</div>
