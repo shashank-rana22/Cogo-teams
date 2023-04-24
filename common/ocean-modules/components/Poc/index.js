@@ -16,7 +16,7 @@ import TradeParties from './components/TradeParties';
 import getServiceProviderData from './helpers/getServiceProviderData';
 import styles from './styles.module.css';
 
-function Poc({ shipment_data = {}, servicesList = [] }) {
+function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) {
 	const { id:shipment_id, importer_exporter_id, services } = shipment_data || {};
 
 	const [addCompany, setAddCompany] = useState(null);
@@ -52,6 +52,7 @@ function Poc({ shipment_data = {}, servicesList = [] }) {
 							tradePartnersData={data}
 							setAddCompany={setAddCompany}
 							serviceProviders={serviceProviders}
+							activeStakeholder={activeStakeholder}
 						/>
 
 						<Pocs

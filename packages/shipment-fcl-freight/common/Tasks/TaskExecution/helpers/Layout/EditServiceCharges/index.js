@@ -14,7 +14,7 @@ function EditServiceCharges(props) {
 
 	const [q, setQ] = useState('');
 
-	const { data } = useGetServiceChargeCodes({
+	const { data, loading } = useGetServiceChargeCodes({
 		service_name,
 		shipment_id: shipment_data?.id,
 
@@ -69,12 +69,13 @@ function EditServiceCharges(props) {
 
 	return (
 		<div>
-			<EditLineItems
-				{...props}
-				primary_service={primary_service}
-				controls={finalControls}
-
-			/>
+			{!loading ? (
+				<EditLineItems
+					{...props}
+					primary_service={primary_service}
+					controls={finalControls}
+				/>
+			) : null}
 		</div>
 	);
 }

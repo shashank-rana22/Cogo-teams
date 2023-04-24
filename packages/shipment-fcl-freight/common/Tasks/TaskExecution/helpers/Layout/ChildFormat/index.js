@@ -36,16 +36,17 @@ function FieldArray({
 					error={error?.[index]}
 				/>
 			))}
-			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+			<div className={styles.add_button_container}>
 				{showButtons && !disabled ? (
 					<Button
-						style={{ margin: '4px' }}
 						size="sm"
-						themeType="link"
+						themeType="tertiary"
 						onClick={() => append()}
 					>
-						+&nbsp;
-						{buttonText}
+						<div className={styles.add_button_text}>
+							+&nbsp;
+							{buttonText || 'Add'}
+						</div>
 					</Button>
 				) : null}
 			</div>

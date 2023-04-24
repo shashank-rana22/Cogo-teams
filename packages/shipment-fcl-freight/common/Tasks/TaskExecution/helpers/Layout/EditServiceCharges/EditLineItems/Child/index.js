@@ -18,11 +18,12 @@ function Child({
 			<div className={styles.item_container}>
 				{controls.map((control_item) => {
 					const { render, span } = control_item || {};
+
 					const flex = ((span || 12) / 12) * 100 - 1;
 
 					if (control_item?.type === 'static') {
 						return (
-							<div style={{ width: `${flex}%`, padding: '4px' }}>
+							<div style={{ width: `${flex}%` }} className={styles.static_container}>
 								{render ? render(customValues) : customValues?.[control_item?.name]}
 							</div>
 						);

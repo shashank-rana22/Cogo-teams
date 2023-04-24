@@ -7,9 +7,9 @@ const useGetStep1Data = ({ setFileUrl = () => {} }) => {
 	const watchUrl = watch('url');
 
 	useEffect(() => {
-		// if (formValues?.url) {
-		// 	setFileUrl(formValues.url);
-		// }
+		if (watchUrl) {
+			setFileUrl(watchUrl);
+		}
 	}, [watchUrl, setFileUrl]);
 
 	return {

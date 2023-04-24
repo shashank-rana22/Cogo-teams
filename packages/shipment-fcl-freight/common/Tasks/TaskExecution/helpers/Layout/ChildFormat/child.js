@@ -66,11 +66,8 @@ function Child({
 						const flex = ((controlItem?.span || 12) / 12) * 100;
 						if (!Element || !show) return null;
 						return (
-							<div className={styles.element} style={{ width: `${flex}%`, overflow: 'auto' }}>
-								<h4 style={{
-									height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
-								}}
-								>
+							<div className={styles.element} style={{ width: `${flex}%` }}>
+								<h4 className={styles.label}>
 									{controlItem?.label}
 								</h4>
 								<Element
@@ -103,8 +100,8 @@ function Child({
 
 				</div>
 			))}
-			<div style={{ width: '2em', marginTop: '24px' }}>
-				{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
+			{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
+				<div>
 					<IcMDelete
 						className={`form-fieldArray-${name}-remove`}
 						onClick={() => remove(index, 1)}
@@ -112,8 +109,8 @@ function Child({
 							width: '2em', height: '2em', marginTop: '8px', cursor: 'pointer',
 						}}
 					/>
-				) : null}
-			</div>
+				</div>
+			) : null}
 		</div>
 	);
 }

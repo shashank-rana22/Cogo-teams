@@ -2,7 +2,7 @@ import FCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 import { startCase } from '@cogoport/utils';
 
-const getStep3Controls = ({ service_charge, shipment_data }) => {
+const getStep3Controls = ({ service_charge, shipment_data, handleChange }) => {
 	const { id, service_type, service_detail, trade_type } = service_charge || {};
 	return {
 		type         : 'edit_service_charges',
@@ -21,18 +21,22 @@ const getStep3Controls = ({ service_charge, shipment_data }) => {
 		}],
 		controls: [
 			{
-				label : startCase(`${trade_type || ''} - ${service_type || ''}`),
-				type  : 'select',
-				name  : 'code',
-				span  : 3,
-				size  : 'sm',
-				rules : { required: true },
+				label       : startCase(`${trade_type || ''} - ${service_type || ''}`),
+				type        : 'select',
+				name        : 'code',
+				span        : 3,
+				size        : 'sm',
+				rules       : { required: true },
+				renderLabel : (item) => {
+					handleChange(item);
+					return `${item.code} - ${item.name}`;
+				},
 			},
 			{
 				label          : 'Currency',
 				name           : 'currency',
-				type           : 'async-select',
-				optionsListKey : 'currencies',
+				type           : 'select',
+				optionsListKey : 'exchange-rate-currencies',
 				size           : 'sm',
 				span           : 1,
 			},

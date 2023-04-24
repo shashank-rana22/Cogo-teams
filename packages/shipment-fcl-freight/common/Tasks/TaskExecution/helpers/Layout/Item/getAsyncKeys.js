@@ -208,6 +208,16 @@ const getAsyncFields = (key) => {
 			},
 			defaultOptions: true,
 		},
+		currencies: {
+			valueKey      : 'id',
+			lableKey      : 'label',
+			asyncKey      : 'list_exchange_rate_currencies',
+			defaultParams : {
+				filters: {
+					status: 'active',
+				},
+			},
+		},
 		'fcl-freight-rate-line-items': {
 			valueKey       : 'code',
 			lableKey       : 'name',
@@ -663,127 +673,131 @@ const getAsyncFields = (key) => {
 					isSearchable   : true,
 				},
 			},
-			'analytics-dashboard': {
-				valueKey       : 'id',
-				lableKey       : 'name',
-				asyncKey       : 'list_analytics_dashboards',
-				defaultOptions : true,
-				defaultParams  : {
-					isSearchable: true,
-				},
+		},
+		'analytics-dashboard': {
+			valueKey       : 'id',
+			lableKey       : 'name',
+			asyncKey       : 'list_analytics_dashboards',
+			defaultOptions : true,
+			defaultParams  : {
+				isSearchable: true,
 			},
-			'list-ltl-warehouses': {
-				valueKey      : 'id',
-				lableKey      : 'name',
-				asyncKey      : 'list_ltl_freight_warehouses',
-				defaultParams : {
-					page_limit : 100,
-					filters    : {
-						status: 'active',
-					},
+		},
+		'list-ltl-warehouses': {
+			valueKey      : 'id',
+			lableKey      : 'name',
+			asyncKey      : 'list_ltl_freight_warehouses',
+			defaultParams : {
+				page_limit : 100,
+				filters    : {
+					status: 'active',
+				},
+				defaultOptions : true,
+				isSearchable   : true,
+			},
+		},
+		'list-pickup-requests': {
+			valueKey      : 'pickup_request_number',
+			lableKey      : 'pickup_request_number',
+			asyncKey      : 'list_ltl_booking_requests',
+			defaultParams : {
+				page_limit : 100,
+				filters    : {
+					request_type   : 'pickup_request',
 					defaultOptions : true,
 					isSearchable   : true,
 				},
 			},
-			'list-pickup-requests': {
-				valueKey      : 'pickup_request_number',
-				lableKey      : 'pickup_request_number',
-				asyncKey      : 'list_ltl_booking_requests',
-				defaultParams : {
-					page_limit : 100,
-					filters    : {
-						request_type   : 'pickup_request',
-						defaultOptions : true,
-						isSearchable   : true,
-					},
-				},
-				'list-overseas-trade-parties': {
-					valueKey      : 'organizationId',
-					lableKey      : 'description',
-					asyncKey      : 'purchase/bills/list-overseas-trade-parties',
-					defaultParams : {
-						defaultOptions : true,
-						isSearchable   : true,
-						authkey        : 'get_purchase_bills_list_overseas_trade_parties',
-					},
-				},
-				'unloading-dockets': {
-					valueKey      : 'lr_number',
-					lableKey      : 'lr_number',
-					asyncKey      : 'list_ltl_booking_requests',
-					defaultParams : {
-						page_limit     : 100,
-						searchKey      : 'docket',
-						defaultOptions : true,
-						isSearchable   : true,
-					},
-				},
-				'invoice-filter': {
-					valueKey      : 'id',
-					lableKey      : 'invoice_number',
-					asyncKey      : 'list_shipment_consolidated_sell_invoices',
-					defaultParams : {
-						page_limit : 100,
-						filters    : {
-							status: 'active',
-						},
-						searchKey      : 'query',
-						defaultOptions : true,
-						isSearchable   : true,
-					},
-				},
-				operators: {
-					valueKey       : 'id',
-					lableKey       : 'short_name',
-					asyncKey       : 'list_operators',
-					defaultOptions : true,
-					defaultParams  : {
-						filters: {
-							status: 'active',
-						},
-						page_limit : 100,
-						sort_by    : 'short_name',
-						sort_type  : 'asc',
-					},
-				},
-				'partner-users-id': {
-					valueKey       : 'user_id',
-					lableKey       : 'name',
-					asyncKey       : 'list_partner_users',
-					defaultOptions : true,
-					defaultParams  : {
-						filters: {
-							status: 'active',
-						},
-						page_limit: 10,
-					},
-				},
-				'exchange-rate-currencies': {
-					valueKey      : 'id',
-					lableKey      : 'label',
-					asyncKey      : 'list_exchange_rate_currencies',
-					defaultParams : {
-						filters: {
-							status: 'active',
-						},
-					},
-				},
-				'cogo-entities-name': {
-					valueKey      : 'id',
-					lableKey      : 'business_name',
-					asyncKey      : 'list_cogo_entities',
-					defaultParams : {
-						filters: {
-							status: 'active',
-						},
-						page_limit : 100,
-						page       : 1,
-					},
-				},
+		},
+		'list-overseas-trade-parties': {
+			valueKey      : 'organizationId',
+			lableKey      : 'description',
+			asyncKey      : 'purchase/bills/list-overseas-trade-parties',
+			defaultParams : {
+				defaultOptions : true,
+				isSearchable   : true,
+				authkey        : 'get_purchase_bills_list_overseas_trade_parties',
 			},
 		},
+		'unloading-dockets': {
+			valueKey      : 'lr_number',
+			lableKey      : 'lr_number',
+			asyncKey      : 'list_ltl_booking_requests',
+			defaultParams : {
+				page_limit     : 100,
+				searchKey      : 'docket',
+				defaultOptions : true,
+				isSearchable   : true,
+			},
+		},
+		'invoice-filter': {
+			valueKey      : 'id',
+			lableKey      : 'invoice_number',
+			asyncKey      : 'list_shipment_consolidated_sell_invoices',
+			defaultParams : {
+				page_limit : 100,
+				filters    : {
+					status: 'active',
+				},
+				searchKey      : 'query',
+				defaultOptions : true,
+				isSearchable   : true,
+			},
+		},
+		operators: {
+			valueKey       : 'id',
+			lableKey       : 'short_name',
+			asyncKey       : 'list_operators',
+			defaultOptions : true,
+			defaultParams  : {
+				filters: {
+					status: 'active',
+				},
+				page_limit : 100,
+				sort_by    : 'short_name',
+				sort_type  : 'asc',
+			},
+		},
+		'partner-users-id': {
+			valueKey       : 'user_id',
+			lableKey       : 'name',
+			asyncKey       : 'list_partner_users',
+			defaultOptions : true,
+			defaultParams  : {
+				filters: {
+					status: 'active',
+				},
+				page_limit: 10,
+			},
+		},
+		'exchange-rate-currencies': {
+			valueKey      : 'iso_code',
+			lableKey      : 'iso_code',
+			asyncKey      : 'list_exchange_rate_currencies',
+			initialCall   : true,
+			defaultParams : {
+				filters: {
+					status: 'active',
+				},
+				page_limit: 10,
+			},
+		},
+		'cogo-entities-name': {
+			valueKey      : 'id',
+			lableKey      : 'business_name',
+			asyncKey      : 'list_cogo_entities',
+			defaultParams : {
+				filters: {
+					status: 'active',
+				},
+				page_limit : 100,
+				page       : 1,
+			},
+		},
+
 	};
 
+	console.log('optiosn', OPTIONS[key]);
 	return OPTIONS[key];
 };
 
