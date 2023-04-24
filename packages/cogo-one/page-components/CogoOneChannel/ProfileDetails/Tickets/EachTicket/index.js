@@ -36,7 +36,10 @@ function EachTicket({
 	const activityMapping = TICKET_ACTIVITY_MAPPING[Status === 'closed' ? 'closed' : 'open'] || [];
 	return (
 		<div
-			className={cl`${styles.message_content} ${Status === 'closed' ? styles.closed_message_content : ''}`}
+			className={cl`${styles.message_content}
+			${Status === 'closed' ? styles.closed_message_content : ''}
+			${!Message?.trim() ? styles.no_message : ''}
+			`}
 			key={ID}
 		>
 			<div className={styles.header}>
