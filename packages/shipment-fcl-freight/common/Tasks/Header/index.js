@@ -13,6 +13,7 @@ function Header({
 	showMyTasks = true,
 	setShowMyTasks = () => {},
 }) {
+<<<<<<< Updated upstream
 	const [showBookingReq, setShowBookingReq] = useState(false);
 
 	const contextValues = useContext(ShipmentDetailContext);
@@ -22,6 +23,8 @@ function Header({
 	const showBookingRequirementsCondition = ['superadmin', 'booking_desk'].includes(activeStakeholder)
 											&& shipment_data?.state !== 'shipment_received';
 
+=======
+>>>>>>> Stashed changes
 	return (
 		<div className={styles.container}>
 			<div className={styles.top_panel}>
@@ -40,7 +43,12 @@ function Header({
 					<div className={styles.toggle_container}>
 						<div style={{ marginTop: '12px' }}>Show only my tasks</div>
 
-						<Toggle checked={showMyTasks} onChange={() => setShowMyTasks((preVal) => !preVal)} />
+						<Toggle
+							checked={showMyTasks}
+							onChange={() => {
+								setShowMyTasks(!showMyTasks);
+							}}
+						/>
 					</div>
 				</div>
 			</div>
