@@ -36,7 +36,7 @@ function useListDocuments({
 	return {
 		loading,
 		refetch : listDocuments,
-		list    : data?.list || [],
+		list    : data || [],
 	};
 }
 
