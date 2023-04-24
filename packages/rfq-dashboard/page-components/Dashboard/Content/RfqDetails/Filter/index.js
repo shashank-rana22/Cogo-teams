@@ -1,6 +1,6 @@
 import { Checkbox, Button, Select } from '@cogoport/components';
 
-import SortOptions from '../../../../../constants';
+import { SORT_OPTIONS } from '../../../../../constants';
 
 import styles from './styles.module.css';
 
@@ -27,7 +27,7 @@ function Filter({ data, filterStore, setFilterStore, checkedItems, selectAll, se
 			<Select
 				size="sm"
 				prefix="Sort By : "
-				options={SortOptions}
+				options={SORT_OPTIONS}
 				value={filterStore.sortBy}
 				onChange={(val) => setFilterStore((prev) => ({ ...prev, sortBy: val }))}
 			/>

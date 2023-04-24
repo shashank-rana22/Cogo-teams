@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { emptyPortsSection } from '../../../../constants';
+import { EMPTY_PORT } from '../../../../constants';
 
 import styles from './styles.module.css';
 
@@ -8,8 +8,8 @@ function EmptyPortsSection() {
 	return (
 		<div className={styles.container}>
 			<img
-				src={emptyPortsSection}
-				alt="-"
+				src={EMPTY_PORT}
+				alt="empty port"
 				className={styles.empty_chat_image}
 			/>
 		</div>
