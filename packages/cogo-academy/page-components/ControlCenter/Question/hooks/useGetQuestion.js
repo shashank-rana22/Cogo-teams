@@ -12,6 +12,7 @@ function useGetQuestion() {
 		method : 'get',
 		url    : '/get_question',
 	}, { manual: true });
+
 	const fetchQuestion = useCallback(
 		async () => {
 			if (!id) return;
