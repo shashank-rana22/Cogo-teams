@@ -5,7 +5,7 @@ import { isEmpty, snakeCase } from '@cogoport/utils';
 
 import FormatData from '../../../../utils/formatData';
 
-import IconMapping from './IconMapping';
+import iconMapping from './iconMapping';
 import styles from './styles.module.css';
 
 function RightSideNav({
@@ -59,12 +59,10 @@ function RightSideNav({
 
 	return (
 		<div className={styles.right_container}>
-			{IconMapping.map((item) => {
+			{iconMapping.map((item) => {
 				const { icon, name, content, hide = false } = item;
-
 				const showDocumentCount = activeSelect !== 'documents' && name === 'documents'
 				&& documents_count > 0 && !checkConditions;
-
 				return (
 					!hide && (
 						<div
@@ -89,7 +87,7 @@ function RightSideNav({
 									</div>
 								)}
 								<div>
-									{icon}
+									{icon && icon}
 								</div>
 							</Tooltip>
 						</div>

@@ -20,8 +20,8 @@
 }
 
 .individual_stats {
-	min-width: 25%;
-	padding: 10px;
+	min-width: 30%;
+	padding: 0 7px 7px;
 	cursor: pointer;
 	background: #fff;
 	border-radius: 6px;
@@ -81,7 +81,7 @@
 }
 
 .list_container {
-	height: 80%;
+	height: 75%;
 	overflow-y: auto;
 }
 
@@ -130,4 +130,18 @@
 .loader_styles {
 	width: 30px;
 	height: 30px;
+}
+
+.tag_container {
+	width: 15px;
+	height: 15px;
+	margin-top: 5px;
+	transform: rotate(13deg);
+}
+
+.stats_container_styles {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
 }

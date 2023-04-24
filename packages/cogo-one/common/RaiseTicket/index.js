@@ -1,7 +1,8 @@
 import { Modal, Button } from '@cogoport/components';
 import { TextAreaController, InputController, useForm, SelectController } from '@cogoport/forms';
+import { useEffect } from 'react';
 
-import raiseTicketControls from '../../configurations/raise-ticket-controls';
+import useRaiseTicketControls from '../../configurations/raise-ticket-controls';
 import useCreateTicket from '../../hooks/useCreateTicket';
 import HeaderName from '../HeaderName';
 import ReceiveDiv from '../ReceiveDiv';
@@ -26,26 +27,37 @@ function RaiseTicket({ setRaiseTicketModal = () => {}, raiseTicketModal = {}, re
 	const {
 		control,
 		handleSubmit,
+		watch,
 		formState:{ errors = {} },
+		setValue,
 	} = useForm();
+	const { ticket_type:watchTicketType = '' } = watch();
+
+	const { controls = [], ticketDataKey = '' } = useRaiseTicketControls({
+		watchTicketType,
+		source,
+	});
 
 	const onCreateTicket = (val) => {
 		const { response:{ message = '' } = {} } = messageData;
 		const { user_id = null, lead_user_id = null } = formattedData || {};
-		const { invoice_id = null, ticket_type = null, description = null } = val || {};
+		const { ticket_data = null, ticket_type = null, description = null } = val || {};
 		const payload = {
 			UserID      : user_id || lead_user_id,
 			Source      : 'client',
 			Type        : ticket_type,
 			Description : description,
 			Data        : {
-				Message       : message,
-				InvoiceNumber : Number(invoice_id) || undefined,
-
+				Message                             : message,
+				[ticketDataKey || 'AdditionalData'] : ticket_data || undefined,
 			},
 		};
 		createTicket(payload);
 	};
+
+	useEffect(() => {
+		setValue('ticket_data', '');
+	}, [watchTicketType, setValue]);
 
 	return (
 		<Modal
@@ -70,7 +82,7 @@ function RaiseTicket({ setRaiseTicketModal = () => {}, raiseTicketModal = {}, re
 					</>
 				)}
 				<div className={styles.styled_form}>
-					{raiseTicketControls().map((eachControl = {}) => {
+					{controls.map((eachControl = {}) => {
 						const { label = '', controlType = '', name = '' } = eachControl || {};
 						const Element = CONTROLLER_MAPPING[controlType] || null;
 						return (Element && (

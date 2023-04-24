@@ -1,0 +1,12 @@
+.tag_container {
+	position: relative;
+}
+
+.repair_div {
+	position: absolute;
+	top: 2px;
+	left: 8px;
+	width: fit-content;
+	height: fit-content;
+	transform: rotate(338deg);
+}

@@ -1,5 +1,5 @@
 import { cl, Placeholder, Pagination } from '@cogoport/components';
-import { IcMPlusInCircle } from '@cogoport/icons-react';
+import { IcMPlusInCircle, IcMTag } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
 import useCreateTicketActivity from '../../../../hooks/useCreateTicketActivity';
@@ -30,13 +30,13 @@ function Tickets({ zippedTicketsData = {} }) {
 	const { items = [], page = 0, size = 0, total = 0	} = ticketData || {};
 
 	const STATS_MAPPING = [
-		{ title: 'High Priority', value: HighPriority, key: 'priority' },
-		{ title: 'Unresolved', value: Unresolved, key: 'unresolved' },
-		{ title: 'Closed', value: Closed, key: 'closed' },
+		{ title: 'High Priority', value: HighPriority, key: 'priority', iconColor: '#F8AEA8' },
+		{ title: 'Tickets to Follow up', value: Unresolved, key: 'unresolved', iconColor: '#FEF199' },
+		{ title: 'Tickets Closed', value: Closed, key: 'closed', iconColor: '#E0E0E0' },
 	];
 
 	const renderTickets = () => {
-		if (loading) {
+		if (listLoading) {
 			return (
 				<div className={styles.loader}>
 					<img
@@ -86,7 +86,13 @@ function Tickets({ zippedTicketsData = {} }) {
 						key={eachStat?.key}
 					>
 						{!statsLoading ? (
-							<div tabIndex={0} role="button" onClick={() => setFilter(eachStat?.key)}>
+							<div
+								tabIndex={0}
+								role="button"
+								onClick={() => setFilter(eachStat?.key)}
+								className={styles.stats_container_styles}
+							>
+								<IcMTag className={styles.tag_container} fill={eachStat?.iconColor} />
 								<div className={styles.ticket_count}>
 									{eachStat.value || 0}
 								</div>
@@ -94,7 +100,7 @@ function Tickets({ zippedTicketsData = {} }) {
 									{eachStat.title || '-'}
 								</div>
 							</div>
-						) : <Placeholder height="50px" width="100%" />}
+						) : <Placeholder height="90px" width="100%" />}
 					</div>
 				))}
 			</div>
