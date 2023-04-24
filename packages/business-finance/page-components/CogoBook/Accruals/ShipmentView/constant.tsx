@@ -288,8 +288,11 @@ export const accrualColumn = (
 				actualIncome = '', incomeCurrency = '',
 				sellQuotation = '', sellQuotationCurrency = '',
 			} = original || {};
+
 			const quotationDiff = sellQuotation - actualIncome || 0;
-			const quotationDiffProfit = ((quotationDiff / sellQuotation) * 100) || 0;
+
+			// Setting quotationDiffProfit = 0 if sellQuotation is zero(to prevent calculation to give infinity)
+			const quotationDiffProfit = sellQuotation !== 0 ? (((quotationDiff / sellQuotation) * 100) || 0) : 0;
 
 			return (
 				<div className={styles.quotation_styles}>
