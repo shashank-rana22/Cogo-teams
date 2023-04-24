@@ -1,11 +1,11 @@
 .container {
 	display: flex;
 	align-items: center;
-	width: 100%;
-	border-radius: 4px;
-	padding: 16px;
-	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
 	justify-content: space-between;
+	width: 100%;
+	padding: 16px;
+	border-radius: 4px;
+	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
 
 	@media (max-width: 768px) {
 		flex-direction: column;
@@ -14,7 +14,7 @@
 	}
 }
 
-.action{
+.action {
 	display: flex;
 	justify-content: space-between;
 }

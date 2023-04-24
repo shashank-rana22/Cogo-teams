@@ -1,14 +1,14 @@
 .row {
 	display: flex;
-	width: 100%;
 	flex-wrap: wrap;
+	width: 100%;
 }
 
 .fieldarray {
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-between;
-	flex-wrap: wrap;
 	margin: 4px;
 }
 
@@ -16,18 +16,18 @@
 	width: 100%;
 }
 
-.add_button_container{
+.add_button_container {
 	display: flex;
 	justify-content: flex-end;
 }
 
-.label{
-	margin-bottom:6px;
-	font-weight: 600;
+.label {
+	margin-bottom: 6px;
 	font-size: var(--font-size-md);
+	font-weight: 600;
 }
 
-.add_button_text{
+.add_button_text {
 	font-size: var(--font-size-md);
 }
 
