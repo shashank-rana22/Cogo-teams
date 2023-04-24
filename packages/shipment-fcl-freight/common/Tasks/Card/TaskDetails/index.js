@@ -26,13 +26,7 @@ function TaskDetails({
 			}
 		});
 	});
-	const taskName = task?.service_type === 'subsidiary_service'
-		? `Mark ${
-			task?.subsidiary_service_name.split(' ')[0]
-		} (${task?.subsidiary_service_name.split(' ').slice(1).join(' ')}) ${
-			task?.task === 'mark_completed' ? 'Completed' : 'Confirm'
-		}` || startCase(task?.task)
-		: startCase(task?.label || task?.task);
+	const taskName = startCase(task?.label || task?.task);
 
 	return (
 		<div className={styles.container}>
