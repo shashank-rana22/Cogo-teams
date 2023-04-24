@@ -124,7 +124,7 @@ function useGetIngestionList() {
 
 					<Tooltip
 						className={styles.popover}
-						content={`Redirecting to ${REDIRECT_MAPPING[item?.is_channel_partner || 'na']}`}
+						content={`Redirecting to ${REDIRECT_MAPPING[item?.is_channel_partner]}`}
 						placement="top"
 					>
 						<Button

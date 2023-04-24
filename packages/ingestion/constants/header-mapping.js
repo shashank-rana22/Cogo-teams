@@ -13,5 +13,4 @@ export const REDIRECT_LINK_MAPPING = {
 export const REDIRECT_MAPPING = {
 	true  : 'Supply CRM',
 	false : 'Sales CRM',
-	na    : 'Error',
 };
