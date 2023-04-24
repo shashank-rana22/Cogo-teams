@@ -1,5 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
+import BlockLoader from '../../../../assets/block-loader.svg';
 import RenderComponents from '../RenderComponent';
 
 import styles from './styles.module.css';
@@ -9,7 +10,14 @@ function ComponentBuilder({ widget, components, setComponents, selectedRow, chil
 	const { id: selectedRowId } = selectedRow || {};
 
 	if (isEmpty(children)) {
-		return <div style={{ height: '150px' }}> Blocks loading...</div>;
+		return (
+			<div className={styles.block_wrapper}>
+				<BlockLoader />
+				<div className={styles.loader_text}>
+					Drop here to add blocks
+				</div>
+			</div>
+		);
 	}
 
 	return (

@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { v1 as uuid } from 'uuid';
 
 import CONTENT_MAPPING from '../../../configurations/default-content-mapping';
+import useSubmitFormDetails from '../../../hooks/useSubmitFormDetails';
 import FormLayout from '../FormLayout';
 
 import controls from './controls';
@@ -41,9 +42,12 @@ function FormComponent({
 		control: dynamicControl,
 		formState:{ errors: dynamicControlErrors },
 		handleSubmit: dynamicHandleSubmit,
+		getValues,
 	} = dynamicFormProps || {};
 
 	const formValues = watch();
+
+	const { onSubmitDetails } = useSubmitFormDetails({ formData });
 
 	const { controls: dynamicControls } = formData || {};
 
@@ -91,7 +95,14 @@ function FormComponent({
 
 	const showElements = showElementsFunc(controls, formValues);
 
-	const onSubmit = (value) => {
+	const onDynamicFormSubmit = (val) => {
+		onSubmitDetails(val);
+		console.log('rrrr', getValues());
+	};
+
+	console.log('sdsok');
+
+	const onSubmit = async (value) => {
 		const { controls: defaultControls, buttonText, heading } = value || {};
 
 		const { parentId, id } = selectedRow || {};
@@ -110,6 +121,8 @@ function FormComponent({
 					console.log(err);
 				}
 			}
+
+			console.log('sjkdksoptions');
 
 			return ({
 				...item,
@@ -144,17 +157,17 @@ function FormComponent({
 			parentId : defaultParentId,
 		};
 
-		const buttonWigdet = {
-			...CONTENT_MAPPING.button,
-			id         : 2,
-			content    : buttonText,
-			parentId   : defaultParentId,
-			attributes : {
-				onClick: dynamicHandleSubmit(onDynamicFormSubmit),
-			},
-		};
+		// const buttonWigdet = {
+		// 	...CONTENT_MAPPING.button,
+		// 	id         : 2,
+		// 	content    : buttonText,
+		// 	parentId   : defaultParentId,
+		// 	attributes : {
+		// 		// onClick: dynamicHandleSubmit(onDynamicFormSubmit),
+		// 	},
+		// };
 
-		const childrenData = [textWigdet, formWidget, buttonWigdet];
+		const childrenData = [textWigdet, formWidget];
 
 		if (parentId) {
 			data.layouts[selectedComponentIndex].children[childId] = {
@@ -181,16 +194,14 @@ function FormComponent({
 		setShow(false);
 	};
 
-	const onDynamicFormSubmit = (values) => {
-		console.log('sjdjisdijo', values);
-	};
-
 	if (!isEmpty(dynamicControls)) {
 		return (
 			<DynamicFormComponent
 				errors={dynamicControlErrors || {}}
 				formData={formData}
 				control={dynamicControl}
+				dynamicHandleSubmit={dynamicHandleSubmit}
+				onDynamicFormSubmit={onDynamicFormSubmit}
 			/>
 		);
 	}
