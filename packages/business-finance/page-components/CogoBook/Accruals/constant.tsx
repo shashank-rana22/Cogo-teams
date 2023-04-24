@@ -261,14 +261,12 @@ export const bookedColumn = (
 				const { quotationProfit = '', quotationMargin = '', sellQuotationCurrency } = original || {};
 				return (
 					<div>
-						{' '}
-						<div className={quotationMargin >= '0' ? styles.margin_div_color : styles.margin_dif_color}>
-							{quotationMargin || '0'}
-							%
-						</div>
-						{' '}
 						<div className={quotationMargin >= '0' ? styles.margin_div_color : styles.margin_dif_color}>
 							{getFormattedPrice(quotationProfit, sellQuotationCurrency) || 'INR 0.00'}
+						</div>
+						<div className={quotationMargin >= '0' ? styles.margin_div_color : styles.margin_dif_color}>
+							{quotationMargin?.toFixed(2) || '0'}
+							%
 						</div>
 					</div>
 				);
@@ -312,16 +310,15 @@ export const bookedColumn = (
 
 				return (
 					<>
+						<span className={renderClassName()}>
+							{getFormattedPrice(profit, expenseCurrency) || '-' }
+
+						</span>
 						<div>
 							{profitPercentage
 								? `${profitPercentage?.toFixed(2)}%`
 								: '---'}
 						</div>
-
-						<span className={renderClassName()}>
-							{getFormattedPrice(profit, expenseCurrency) || '-' }
-
-						</span>
 					</>
 				);
 			},
