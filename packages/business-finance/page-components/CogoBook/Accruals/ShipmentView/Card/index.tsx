@@ -33,6 +33,8 @@ function Card({
 	const [moreFilter, setMoreFilter] = useState(false);
 	const [profitNumber, setProfitNumber] = useState('');
 
+	const { jobState, profitType, range, profitPercent } = filters || {};
+
 	const handleSelectChange = (val:string) => {
 		setFilters((prev) => ({ ...prev, service: val }));
 		setSelectFilter(false);
@@ -106,7 +108,7 @@ function Card({
 
 	return (
 		<div className={styles.container}>
-			<div>
+			<div style={{ marginRight: '20px' }}>
 				<div className={styles.period}>
 					Period
 					<Tooltip
@@ -134,7 +136,8 @@ function Card({
 						placeholder="Year"
 						options={optionsYear()}
 						isClearable
-						style={{ width: '120px' }}
+						style={{ width: '110px' }}
+						size="sm"
 					/>
 					<Select
 						value={filters?.month}
@@ -143,10 +146,11 @@ function Card({
 						options={optionsMonth}
 						isClearable
 						style={{ width: '150px' }}
+						size="sm"
 					/>
 				</div>
 			</div>
-			<div>
+			<div style={{ marginRight: '20px' }}>
 				<div className={styles.period}>
 					Transaction Date
 					<Tooltip
@@ -176,6 +180,8 @@ function Card({
 						disable={!isDateRangeEnabled}
 						onChange={(val:any) => { setFilters((prev) => ({ ...prev, date: val })); }}
 						value={filters?.date}
+						size="sm"
+						style={{ width: '184px' }}
 					/>
 				</div>
 
@@ -202,6 +208,7 @@ function Card({
 						options={optionsEntity}
 						isClearable
 						style={{ width: '100px' }}
+						size="sm"
 					/>
 
 					<Popover
@@ -232,6 +239,7 @@ function Card({
 						options={optionsShipment}
 						isClearable
 						style={{ width: '176px' }}
+						size="sm"
 					/>
 
 				</div>
@@ -245,15 +253,15 @@ function Card({
 				>
 					<Button
 						onClick={() => { setMoreFilter(!moreFilter); }}
-						size="lg"
+						size="md"
 						themeType="secondary"
 					>
 						+ More Filters
-
+						{ jobState || profitType || range || profitPercent ? <div className={styles.dot} /> : null}
 					</Button>
 				</Popover>
 				<Button
-					size="lg"
+					size="md"
 					onClick={() => { onSubmit(); }}
 					disabled={!isApplyEnable}
 					loading={shipmentLoading}

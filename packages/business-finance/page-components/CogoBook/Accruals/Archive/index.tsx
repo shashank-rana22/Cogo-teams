@@ -133,12 +133,14 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 								placeholder="Service Type"
 								options={serviceTypeOptions}
 								isClearable
-								style={{ width: '200px' }}
+								style={{ width: '144px' }}
+								size="sm"
 							/>
 						</div>
 						<div className={styles.div_select}>
 							<Select
 								value={globalFilters?.archivedStatus}
+								size="sm"
 								onChange={(val:string) => {
 									setGlobalFilters((prev) => ({ ...prev, archivedStatus: val }));
 								}}
@@ -147,19 +149,20 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 									{ label: 'Booked', value: 'BOOKED' },
 									{ label: 'Accrued', value: 'ACCRUED' }]}
 								isClearable
-								style={{ width: '180px' }}
+								style={{ width: '164px' }}
 							/>
 						</div>
 						<div className={styles.div_select}>
 							<Select
 								value={globalFilters?.entity}
+								size="sm"
 								onChange={(val:string) => {
 									setGlobalFilters((prev) => ({ ...prev, entity: val }));
 								}}
 								placeholder="Entity"
 								options={optionsEntity}
 								isClearable
-								style={{ width: '150px' }}
+								style={{ width: '100px' }}
 							/>
 						</div>
 						{particularMonth && (
@@ -174,10 +177,11 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 					{particularMonth ? (
 						<div className={styles.search_container}>
 							<Input
+								size="sm"
 								value={globalFilters?.search}
 								onChange={(val) => { setGlobalFilters((prev) => ({ ...prev, search: val })); }}
 								placeholder="Search by SID"
-								suffix={<IcMSearchlight height="20px" width="20px" style={{ marginRight: '8px' }} />}
+								suffix={<IcMSearchlight height="15px" width="15px" style={{ marginRight: '8px' }} />}
 							/>
 						</div>
 					) : (

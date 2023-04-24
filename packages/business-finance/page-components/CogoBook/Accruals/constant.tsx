@@ -214,7 +214,7 @@ export const bookedColumn = (
 			id       : 'sales_invoice_amount',
 			Cell     : ({ row: { original } }) => {
 				const {
-					actualIncome = '', incomeCurrency = '',
+					incomeBooked = '', actualIncome = '', incomeCurrency = '',
 					sellQuotation = '', sellQuotationCurrency = '',
 				} = original || {};
 				const quotationDiff = sellQuotation - actualIncome || 0;
@@ -222,7 +222,7 @@ export const bookedColumn = (
 
 				return (
 					<div className={styles.quotation_styles}>
-						<span>{getFormattedPrice(actualIncome, incomeCurrency)}</span>
+						<span>{getFormattedPrice(incomeBooked, incomeCurrency)}</span>
 
 						<div className={styles.quotation_value}>
 							Quotation :

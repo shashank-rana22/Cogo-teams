@@ -53,6 +53,7 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 					options={optionsData}
 					isClearable
 					style={{ width: '300px' }}
+					size="sm"
 				/>
 			</div>
 
@@ -85,6 +86,7 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 
 			<div className={styles.input_container}>
 				<Input
+					size="sm"
 					className="primary md"
 					placeholder={getPlaceHolder()}
 					value={profitNumber || ''}
@@ -116,6 +118,7 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 		<div>
 			<div className={styles.select_container}>
 				<Select
+					size="sm"
 					value={filters?.jobState}
 					onChange={(val:string) => { setFilters((prev) => ({ ...prev, jobState: val })); }}
 					placeholder="Job Type"
@@ -136,7 +139,7 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 
 			<div className={styles.button_container}>
 				<Button
-					size="sm"
+					size="md"
 					themeType="secondary"
 					onClick={() => {
 						setFilters((prev) => ({
@@ -153,7 +156,7 @@ function MoreFilter({ setFilters, filters, setProfitNumber, profitNumber, setMor
 					Reset
 
 				</Button>
-				<Button size="sm" onClick={() => { setMoreFilter(false); }}>Apply</Button>
+				<Button size="md" onClick={() => { setMoreFilter(false); }}>Apply</Button>
 			</div>
 		</div>
 	);

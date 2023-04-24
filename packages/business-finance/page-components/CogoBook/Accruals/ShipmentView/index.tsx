@@ -126,17 +126,20 @@ function ShipmentView() {
 						onChange={(val) => setFilters({ ...filters, milestone: val })}
 						options={MILESTONE_OPTIONS}
 						isClearable
-						placeholder="Select Milestone..."
+						placeholder="Select Milestone"
 						className={styles.milestone}
+						size="sm"
 					/>
 
 					<div className={styles.input_container}>
 						<Input
+							size="sm"
 							value={filters?.query}
 							onChange={(val) => { setFilters((prev) => ({ ...prev, query: val })); }}
 							placeholder="Search by SID"
 							disabled={!isApplyEnable}
-							suffix={<IcMSearchlight height="20px" width="20px" style={{ marginRight: '8px' }} />}
+							suffix={<IcMSearchlight height="15px" width="15px" style={{ marginRight: '8px' }} />}
+							style={{ padding: '4px' }}
 						/>
 					</div>
 				</div>

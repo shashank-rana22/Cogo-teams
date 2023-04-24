@@ -57,12 +57,15 @@
 
 	:global {
 		.react-datepicker__input-container {
+			input{
+				height: 32px;
+			}
 			.react-datepicker__close-icon::after {
 				background: none !important;
 			}
 
 			.react-datepicker__close-icon {
-				right: -9px;
+				right: -4px;
 				border: none;
 			}
 		}
@@ -89,7 +92,7 @@
 
 .more_filter {
 	display: flex;
-	gap: 30px;
+	gap: 10px;
 	align-items: center;
 	margin-top: 40px;
 }
@@ -143,6 +146,9 @@
 
 	:global {
 		.react-datepicker__input-container {
+			input{
+				height: 32px;
+			}
 			.react-datepicker__close-icon::after {
 				background: none !important;
 			}
@@ -173,4 +179,13 @@
 
 .fon_tooltip {
 	font-size: 12px;
+}
+
+.dot{
+    height: 6px;
+    width: 6px;
+    background-color: #EE3425;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0px 0px 8px 2px;
 }
