@@ -36,6 +36,9 @@ function Services() {
 						&& Object.keys(serviceObj[serviceCategory]).length
 								? <div className={styles.header}>{ startCase(serviceCategory)}</div> : null}
 
+							{ ['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder)
+								? <div className={styles.header}>{ startCase(serviceCategory)}</div> : null}
+
 							<div className={styles.trade_services}>
 								{(Object.keys(serviceObj[serviceCategory])).map((service) => (
 									<ServiceDetails servicesData={serviceObj[serviceCategory][service]} />
