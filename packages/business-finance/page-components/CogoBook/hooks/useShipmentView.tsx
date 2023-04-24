@@ -36,6 +36,9 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		jobState = '', query = '', page, date, profitPercent = '', profitPercentUpper = '', profitAmountUpper = '',
 		sortType = '', sortBy = '', entity = '', milestone,
 	} = filters || {};
+
+	const { startDate, endDate } = date || {};
+
 	const { calAccruePurchase, calAccrueSale } = calculateAccrue();
 
 	const [
@@ -90,8 +93,8 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 					sortType             : sortType || undefined,
 					sortBy               : sortBy || undefined,
 					upperProfitMargin    : profitAmountUpper || profitPercentUpper || undefined,
-					startDate            : date ? format(date?.startDate, 'yyy-MM-dd') : undefined,
-					endDate              : date ? format(date?.endDate, 'yyy-MM-dd') : undefined,
+					startDate            : (startDate && endDate) ? format(startDate, 'yyy-MM-dd') : undefined,
+					endDate              : (startDate && endDate) ? format(endDate, 'yyy-MM-dd') : undefined,
 					page                 : page || undefined,
 					pageLimit            : 10,
 				},
@@ -113,7 +116,8 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 			setApiData({ pageNo: 0, totalPages: 0, total: 0, totalRecords: 0, list: [] });
 		}
 	}, [
-		date,
+		startDate,
+		endDate,
 		jobState,
 		month,
 		page,
@@ -286,8 +290,8 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 						lowerProfitMargin    : profitAmount || profitPercent || undefined,
 						upperProfitMargin    : profitAmountUpper || profitPercentUpper || undefined,
 						profitType           : profitType || undefined,
-						startDate            : date ? format(date?.startDate, 'yyy-MM-dd') : undefined,
-						endDate              : date ? format(date?.endDate, 'yyy-MM-dd') : undefined,
+						startDate            : startDate ? format(startDate, 'yyy-MM-dd') : undefined,
+						endDate              : endDate ? format(endDate, 'yyy-MM-dd') : undefined,
 						pageLimit            : apiData?.totalRecords,
 						page                 : 1,
 					},
