@@ -13,12 +13,12 @@ function AccountLeaderboard() {
 	const formProps = useForm();
 
 	const {
-		control, formState: { errors },
+		control, formState: { errors }, watch,
 	} = formProps;
 
-	const { graphData = [], graphLoading = false } = useGetAccountDistributionGraph();
+	const { graphData = [], graphLoading = false } = useGetAccountDistributionGraph(watch);
 
-	const { leaderboardLoading = false, leaderboardList = [] } = useGetEngagementScoringLeaderboard();
+	const { leaderboardLoading = false, leaderboardList = [] } = useGetEngagementScoringLeaderboard(watch);
 
 	return (
 		<section className={styles.container} id="core_engine_container">
@@ -27,6 +27,7 @@ function AccountLeaderboard() {
 			<HeaderFilters
 				control={control}
 				errors={errors}
+				watch={watch}
 			/>
 
 			<ScoreDistributionGraph

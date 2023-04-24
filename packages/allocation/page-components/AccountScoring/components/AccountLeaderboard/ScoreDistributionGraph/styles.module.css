@@ -2,3 +2,9 @@
     height: 500px;
     margin: 16px 0px;
 }
+
+.loading {
+    display: flex;
+    justify-content: center;
+    margin: 16px;
+}

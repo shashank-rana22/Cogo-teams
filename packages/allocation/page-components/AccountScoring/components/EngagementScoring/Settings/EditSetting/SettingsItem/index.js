@@ -1,16 +1,6 @@
-import { startCase } from '@cogoport/utils';
-
 import { getFieldController } from '../../../../../../../common/Form/getFieldController';
 
 import styles from './styles.module.css';
-
-const accounts = { // temporary data
-	flame_hot : '200',
-	hot       : '800',
-	warm      : '900',
-	cold      : '-',
-	icy_cold  : '-',
-};
 
 function SettingsItem(props) {
 	const {
@@ -22,22 +12,6 @@ function SettingsItem(props) {
 
 	return (
 		<div className={styles.container}>
-			{inputStyle === 'distribution_input'
-			&& (
-				<div className={styles.warmth_container}>
-					{
-								index === 0 && (
-									<div className={styles.label}>
-										WARMTH
-									</div>
-								)
-							}
-
-					<div className={styles.headers}>
-						{startCase(item.warmth) || ''}
-					</div>
-				</div>
-			)}
 			<div className={styles.input_row}>
 				{controls.map((element) => {
 					const Element = getFieldController(element.type);
@@ -63,23 +37,6 @@ function SettingsItem(props) {
 					);
 				})}
 			</div>
-			{inputStyle === 'distribution_input'
-			&& (
-				<div className={styles.accounts_container}>
-					{
-								index === 0 && (
-									<div className={styles.label}>
-										NUMBER OF ACCOUNTS
-									</div>
-								)
-							}
-
-					<div className={styles.headers}>
-						{accounts?.[item]}
-					</div>
-				</div>
-			)}
-
 		</div>
 	);
 }

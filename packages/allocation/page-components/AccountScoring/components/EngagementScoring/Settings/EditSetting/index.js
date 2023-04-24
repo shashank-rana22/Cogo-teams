@@ -5,6 +5,7 @@ import useUpdateBiasSettings from '../../../../hooks/useUpdateBiasSettings';
 import useUpdateDistributionSettings from '../../../../hooks/useUpdateDistributionSettings';
 import useUpdatePercentileSettings from '../../../../hooks/useUpdatePercentileSettings';
 
+import DistributionSettingsItem from './DistributionSettingsItem';
 import Header from './Header';
 import SettingsItem from './SettingsItem';
 import styles from './styles.module.css';
@@ -18,6 +19,7 @@ function EditSetting(props) {
 		control,
 		handleSubmit,
 		errors,
+		watch,
 	} = props;
 
 	const profile = useSelector((state) => state.profile);
@@ -66,15 +68,33 @@ function EditSetting(props) {
 
 				{preFilledList.map((item, index) => (
 					<div key={item} className={styles.item}>
-						<SettingsItem
-							item={item}
-							useGetControls={useGetControls}
-							index={index}
-							inputStyle={inputStyle}
-							control={control}
-							errors={errors}
-							preFilledList={preFilledList}
-						/>
+						{
+							inputStyle === 'distribution_input'
+								? (
+									<DistributionSettingsItem
+										item={item}
+										useGetControls={useGetControls}
+										index={index}
+										inputStyle={inputStyle}
+										control={control}
+										errors={errors}
+										watch={watch}
+										distributionList={preFilledList}
+									/>
+								)
+								: (
+									<SettingsItem
+										item={item}
+										useGetControls={useGetControls}
+										index={index}
+										inputStyle={inputStyle}
+										control={control}
+										errors={errors}
+										watch={watch}
+									/>
+								)
+
+						}
 					</div>
 				))}
 			</div>

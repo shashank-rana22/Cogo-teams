@@ -61,7 +61,7 @@ function PercentileSetting(props) {
 				heading="Percentile Setting"
 				tooltipData="When the account lies in the respective percentile it would be assigned
 				a score at that time based on the table given below to show the region in which
-				the account lies whether (COLD , ICE COLD , WARM , HOT , FLAMING HOT)"
+				the account lies whether (COLD , ICE COLD , WARM , HOT , FLAMING HOT)."
 			/>
 		);
 	}

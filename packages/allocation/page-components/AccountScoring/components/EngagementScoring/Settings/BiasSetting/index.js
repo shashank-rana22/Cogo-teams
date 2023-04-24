@@ -56,7 +56,7 @@ function BiasSetting(props) {
 				errors={errors}
 				inputStyle="bias_input"
 				heading="Bias Settings"
-				tooltipData="Bias is used to calculate the warmness of the KAM"
+				tooltipData="Bias is used to calculate the warmness of the KAM."
 			/>
 		);
 	}

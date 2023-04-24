@@ -410,6 +410,25 @@ const allocation = {
 			service_name : 'allocation',
 		},
 		{
+			api          : 'get_allocation_engagement_scoring_account_stats',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'list_segments',
+			access_type  : 'private',
+			service_name : 'segmentation',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},		{
 			api          : 'get_allocation_engagement_scoring_event_configurations',
 			access_type  : 'private',
 			service_name : 'allocation',

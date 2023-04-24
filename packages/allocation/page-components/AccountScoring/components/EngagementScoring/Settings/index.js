@@ -1,5 +1,7 @@
 import { useForm } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import useGetDistributionScoringSettings from '../../../hooks/useGetDistributionScoringSettings ';
 import useGetEngagementScoringSettings from '../../../hooks/useGetEngagementScoringSettings';
@@ -12,6 +14,9 @@ import styles from './styles.module.css';
 function Settings(props) {
 	const { setToggleComponent = () => {} } = props;
 
+	const formProps = useForm();
+	const { control, handleSubmit, formState: { errors }, watch } = formProps;
+
 	const {
 		settingsLoading = false,
 		percentileList = [],
@@ -20,11 +25,9 @@ function Settings(props) {
 	} = useGetEngagementScoringSettings();
 
 	const {
-		distributionLoading = false, distributionRefetch = () => {}, distributionList = [],
+		distributionLoading = false, distributionRefetch = () => {},
+		distributionList = [],
 	} = useGetDistributionScoringSettings();
-
-	const formProps = useForm();
-	const { control, handleSubmit, formState: { errors } } = formProps;
 
 	return (
 		<div className={styles.container}>
@@ -65,6 +68,7 @@ function Settings(props) {
 				control={control}
 				handleSubmit={handleSubmit}
 				errors={errors}
+				watch={watch}
 			/>
 		</div>
 

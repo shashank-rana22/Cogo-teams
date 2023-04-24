@@ -8,6 +8,22 @@ import styles from './styles.module.css';
 function index(props) {
 	const { columns = [], leaderboardList, leaderboardLoading } = props;
 
+	if (leaderboardLoading) {
+		return (
+			<>
+				<div className={styles.header_text}>Leaderboard List</div>
+				<div style={{ margin: '16px 0px' }}>
+					<Table
+						className={styles.table}
+						columns={columns || []}
+						data={[]}
+						loading={leaderboardLoading}
+					/>
+				</div>
+			</>
+		);
+	}
+
 	if (isEmpty(leaderboardList)) {
 		return (
 			<div className={styles.empty_container}>
@@ -27,7 +43,7 @@ function index(props) {
 			<div style={{ margin: '16px 0px' }}>
 				<Table
 					className={styles.table}
-					columns={columns}
+					columns={columns || []}
 					data={leaderboardList}
 					loading={leaderboardLoading}
 				/>
