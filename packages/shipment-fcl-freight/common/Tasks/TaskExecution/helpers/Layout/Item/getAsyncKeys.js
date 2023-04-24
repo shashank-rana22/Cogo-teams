@@ -797,7 +797,6 @@ const getAsyncFields = (key) => {
 
 	};
 
-	console.log('optiosn', OPTIONS[key]);
 	return OPTIONS[key];
 };
 

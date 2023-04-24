@@ -4,6 +4,14 @@
 	& > div {
 		margin-bottom: 22px;
 	}
+
+	:global {
+		.ui_accordion_content{
+			background-color: #ffffff !important;
+			border-top: 1px solid #E0E0E0 !important;
+    		border-radius: initial;
+		}
+	}
 }
 
 .extra_details {

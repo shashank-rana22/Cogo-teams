@@ -6,7 +6,7 @@
 
 .services_container {
 	width: 100%;
-	padding: 0 22px 30px;
+	padding: 0 5px 20px;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
@@ -23,7 +23,7 @@
 	font-size: 16px;
 	font-weight: 600;
 	line-height: 19px;
-	color: #393f70;
+	color: #4F4F4F;
 }
 
 .upselling {
