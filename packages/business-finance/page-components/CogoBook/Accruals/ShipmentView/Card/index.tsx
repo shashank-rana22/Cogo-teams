@@ -225,7 +225,7 @@ function Card({
 						placeholder="Shipment Type"
 						options={optionsShipment}
 						isClearable
-						style={{ width: '150px' }}
+						style={{ width: '172px' }}
 					/>
 
 				</div>
