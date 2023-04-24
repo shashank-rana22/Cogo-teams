@@ -38,9 +38,8 @@ const helperFuncs = (servicesList, possibleServices) => {
 					if (canPushService) {
 						if (Object.keys(serviceObj.originServices).includes(service?.service_type)) {
 							(serviceObj.originServices[service?.service_type]).push({
-								...(serviceObj.originServices[service?.service_type]),
-								display_label : serviceToIterate.display_label,
-								trade_type    : serviceToIterate.trade_type,
+								...service,
+								display_label: serviceToIterate.display_label,
 							});
 						} else {
 							(serviceObj.originServices)[service?.service_type] = [{
@@ -55,7 +54,7 @@ const helperFuncs = (servicesList, possibleServices) => {
 					if (canPushService) {
 						if (Object.keys(serviceObj.destinationServices).includes(service?.service_type)) {
 							(serviceObj.destinationServices[service?.service_type]).push({
-								...(serviceObj.destinationServices[service?.service_type]),
+								...service,
 								display_label: serviceToIterate.display_label,
 							});
 						} else {
