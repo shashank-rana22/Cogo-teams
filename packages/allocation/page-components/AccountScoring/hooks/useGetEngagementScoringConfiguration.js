@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 function useGetEngagementScoringConfiguration(props) {
 	const { activeCollapse } = props;
 
-	console.log('activeCollapse', activeCollapse);
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
 	const [searchValue, setSearchValue] = useState('');

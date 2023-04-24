@@ -414,6 +414,11 @@ const allocation = {
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
+		{
+			api          : 'post_allocation_engagement_scoring_event_configurations',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
 
 	],
 };

@@ -1,8 +1,10 @@
 import { Button, Collapse } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
+import useEditEngagementScoringConfiguration from '../../../hooks/useEditEngagementScoringConfiguration';
 import useGetEngagementScoringConfiguration from '../../../hooks/useGetEngagementScoringConfiguration';
 
 import EngagementType from './EngagementType';
@@ -16,12 +18,18 @@ function WarmthScoring(props) {
 
 	const [editMode, setEditMode] = useState('');
 
+	const formProps = useForm();
+
+	const { handleSubmit } = formProps;
+
 	const {
 		data,
 		debounceQuery,
 		searchValue,
 		setSearchValue,
 	} = useGetEngagementScoringConfiguration({ activeCollapse });
+
+	const { onSave } = useEditEngagementScoringConfiguration();
 
 	const { list = [] } = data || {};
 
@@ -55,6 +63,7 @@ function WarmthScoring(props) {
 									size="md"
 									themeType="primary"
 									style={{ marginLeft: '16px', marginRight: '16px' }}
+									onClick={handleSubmit(onSave)}
 								>
 									Save
 								</Button>
@@ -84,7 +93,7 @@ function WarmthScoring(props) {
 	const options = list.map((value) => ({
 		key      : value.engagement_type,
 		title    : titleComponent(value),
-		children : <EngagementType value={value} editMode={editMode} />,
+		children : <EngagementType value={value} editMode={editMode} formProps={formProps} />,
 	}));
 
 	return (

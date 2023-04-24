@@ -1,6 +1,6 @@
 import { Table } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import FieldArray from '../../../../common/FieldArray';
 
@@ -57,13 +57,15 @@ const tableColumns = [
 ];
 
 function EngagementType(props) {
-	const { value, editMode } = props;
+	const { value, editMode, formProps } = props;
 
 	const { engagement_type_details } = value;
 
-	const formProps = useForm({ defaultValues: { single_item: engagement_type_details } });
+	const { control, setValue } = formProps;
 
-	const { control } = formProps;
+	useEffect(() => {
+		setValue('single_item', engagement_type_details);
+	}, [engagement_type_details, setValue]);
 
 	return (
 		<div className={styles.collapse_inner_container}>
