@@ -1,4 +1,4 @@
-import { Button, Checkbox } from '@cogoport/components';
+import { Button, Checkbox, Popover } from '@cogoport/components';
 import * as htmlToImage from 'html-to-image';
 import html2canvas from 'html2canvas';
 import { jsPDF as JsPDF } from 'jspdf';
@@ -10,6 +10,7 @@ import { footerValues } from '../Helpers/configurations/footerValues';
 import ChargeDetails from './ChargeDetails';
 import ContainerDetails from './ContainerDetails';
 import getFileObject from './getFileObject';
+import SelectDocumentCopies from './SelectDocumentCopies';
 import ShipmentDetails from './ShipmentDetails';
 import ShipperConsigneeDetails from './ShipperConsigneeDetails';
 import styles from './styles.module.css';
@@ -77,6 +78,8 @@ function GenerateMawb({
 	const [saveDocument, setSaveDocument] = useState(false);
 
 	const [whiteout, setWhiteout] = useState(false);
+
+	const [value, onChange] = useState<undefined | string[]>([]);
 
 	const handleClick = () => {
 		if (back) {
@@ -162,20 +165,23 @@ function GenerateMawb({
 				const pdf = new JsPDF();
 				const pdfWidth = pdf.internal.pageSize.getWidth();
 				const pdfHeight = pdf.internal.pageSize.getHeight();
-				footerImages.forEach((item, i) => {
+				(value || []).forEach((item, i) => {
 					pdf.addImage(imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
 					if (!whiteout) {
-						pdf.addImage(item, 'jpeg', 0, pdfHeight - 14, pdfWidth, 4.5);
+						pdf.addImage(footerImages[item], 'jpeg', 0, pdfHeight - 14, pdfWidth, 4.5);
 					}
+
+					const includeTnC = ['original_3', 'original_2', 'original_1'];
+
 					if (download24) {
-						if (i < 3) {
+						if (includeTnC.includes(item)) {
 							pdf.addPage();
 							pdf.addImage(backPage, 'jpeg', 0, 0, pdfWidth, pdfHeight);
 						} else {
 							pdf.addPage();
 						}
 					}
-					if (i < 11) {
+					if (i < value.length - 1) {
 						pdf.addPage();
 					}
 				});
@@ -203,11 +209,11 @@ function GenerateMawb({
 		carrierCharge += Number(item.price);
 	});
 	const data = {
-		totalCharge: chargeableWeight * formData.ratePerKg,
+		totalCharge: Number(formData.amount),
 		agentCharge,
 		carrierCharge,
 		finalCharge:
-		chargeableWeight * formData.ratePerKg + agentCharge + carrierCharge,
+		Number(formData.amount) + agentCharge + carrierCharge,
 	};
 
 	return (
@@ -225,28 +231,64 @@ function GenerateMawb({
 									value={whiteout}
 									onChange={() => setWhiteout((p) => !p)}
 								/>
+								<Popover
+									placement="bottom"
+									trigger="click"
+									render={(
+										<SelectDocumentCopies
+											value={value}
+											onChange={onChange}
+											setSaveDocument={setSaveDocument}
+											handleView={handleView}
+											download24
+										/>
+									)}
+								>
+									<Button
+										className="primary md"
+										disabled={saveDocument || whiteout}
+									>
+										Download 12 Copies with T&C
+									</Button>
+								</Popover>
+							</div>
+						)}
+						{taskItem.documentState === 'document_accepted'
+							? (
+								<Popover
+									placement="bottom"
+									trigger="click"
+									render={(
+										<SelectDocumentCopies
+											value={value}
+											onChange={onChange}
+											setSaveDocument={setSaveDocument}
+											handleView={handleView}
+											download24={false}
+										/>
+									)}
+								>
+									<Button
+										className="primary md"
+										disabled={saveDocument}
+									>
+										Download 12 Copies
+									</Button>
+								</Popover>
+							)
+
+							: (
 								<Button
 									className="primary md"
 									onClick={() => {
 										setSaveDocument(true);
-										handleView(true);
+										handleView(false);
 									}}
-									disabled={saveDocument || whiteout}
+									disabled={saveDocument}
 								>
-									Download 12 Copies with T&C
+									{saveDocument ? 'Downloading...' : downloadButton[taskItem.documentState]}
 								</Button>
-							</div>
-						)}
-						<Button
-							className="primary md"
-							onClick={() => {
-								setSaveDocument(true);
-								handleView(false);
-							}}
-							disabled={saveDocument}
-						>
-							{saveDocument ? 'Downloading...' : downloadButton[taskItem.documentState]}
-						</Button>
+							)}
 					</div>
 				</div>
 			)}
