@@ -1,4 +1,3 @@
-import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
@@ -6,21 +5,8 @@ import { startCase, format } from '@cogoport/utils';
 import toFixed from '../../../../CreateModule/utils/toFixed';
 import SortComponent from '../../../commons/SortComponent';
 
+import IsEvaluated from './isEvaluated';
 import styles from './styles.module.css';
-
-function NotEvaluated({ is_evaluated = false }) {
-	if (is_evaluated) {
-		return (
-			<div className={styles.not_evaluated}>Pending</div>
-		);
-	}
-
-	return (
-		<Tooltip content="Assign Marks to view details" placement="bottom">
-			<div className={styles.not_evaluated}>Pending</div>
-		</Tooltip>
-	);
-}
 
 const handleRedirectToDashboard = ({ router, user, test_id, is_evaluated, status }) => {
 	const { id, name } = user || {};
@@ -51,7 +37,7 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router, setShowReAttemp
 		accessor : ({ result_status = '', is_evaluated = false }) => (
 			<section className={`${styles.section} ${styles[result_status]}`}>
 				{(!is_evaluated || status !== 'published')
-					? <NotEvaluated is_evaluated={is_evaluated} /> : (startCase(result_status) || '-')}
+					? <IsEvaluated is_evaluated={is_evaluated} /> : (startCase(result_status) || '-')}
 			</section>
 		),
 	},
@@ -70,7 +56,7 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router, setShowReAttemp
 		id       : 'score_achieved',
 		accessor : ({ final_score = '', test = {}, is_evaluated = false }) => (
 			<section className={styles.section}>
-				{(!is_evaluated || status !== 'published') ? <NotEvaluated is_evaluated={is_evaluated} />
+				{(!is_evaluated || status !== 'published') ? <IsEvaluated is_evaluated={is_evaluated} />
 					: `${toFixed(final_score, 2)}/${toFixed(test.total_marks, 2)}`}
 			</section>
 		),
@@ -91,7 +77,7 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router, setShowReAttemp
 		accessor : ({ percentile = '', is_evaluated = false }) => (
 			<div className={styles.section}>
 				{(!is_evaluated || status !== 'published')
-					? <NotEvaluated is_evaluated={is_evaluated} /> : (toFixed(percentile || 0, 2) || '-')}
+					? <IsEvaluated is_evaluated={is_evaluated} /> : (toFixed(percentile || 0, 2) || '-')}
 			</div>
 		),
 	},
