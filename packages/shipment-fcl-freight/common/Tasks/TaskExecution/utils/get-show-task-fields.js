@@ -8,8 +8,6 @@ const getFunction = {
 const getShowElement = (field, formValues) => {
 	let flag = true;
 
-	console.log('getShowElement', field, formValues);
-
 	if (field.type === 'fieldArray') {
 		const showElements = [];
 		for (let i = 0; i < formValues[field.name]?.length; i += 1) {

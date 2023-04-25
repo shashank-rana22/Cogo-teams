@@ -37,8 +37,6 @@ function useListTasksHelper() {
 		}
 	};
 
-	// console.log('setFilters', setFilters);
-
 	return {
 		loading : loading || isGettingShipment,
 		count   : list?.list?.length,

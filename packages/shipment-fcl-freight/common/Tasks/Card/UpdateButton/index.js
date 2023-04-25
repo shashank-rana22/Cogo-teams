@@ -23,9 +23,16 @@ function UpdateButton({ task = {}, handleClick = () => {}, hideButton = false })
 		buttonText = 'Review';
 	}
 
+	const temporaryDisableCondition = ['update_collection_details', 'mark_do_released', 'knockoff_invoices'];
+	// remove this after authority desk integration
+
 	return (
 		<div className={styles.container}>
-			<Button className={styles.upload_button} onClick={() => handleClick(task)}>
+			<Button
+				className={styles.upload_button}
+				onClick={() => handleClick(task)}
+				disabled={temporaryDisableCondition.includes(task?.task)}
+			>
 				{buttonText}
 			</Button>
 		</div>

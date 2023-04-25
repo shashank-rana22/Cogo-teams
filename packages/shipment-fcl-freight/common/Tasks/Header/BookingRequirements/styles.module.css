@@ -22,3 +22,11 @@
 	margin-top: 4px;
 	font-size: 12px;
 }
+
+.modal_content {
+	:global {
+		.ui_modal_body_container {
+			min-height: 460px;
+		}
+	}
+}

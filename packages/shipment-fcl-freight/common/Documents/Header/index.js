@@ -1,5 +1,5 @@
 import { Toggle, Input, Select, Tabs, TabPanel } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { IcMSearchlight, IcMUpload } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -82,13 +82,16 @@ function Header({
 			</div>
 
 			<div className={styles.sub_heading}>
-				<div
-					className={styles.upload}
-					role="button"
-					tabIndex={0}
-					onClick={() => handleGenericUpload()}
-				>
-					Generic Upload
+				<div className={styles.generic_upload}>
+					<IcMUpload />
+					<div
+						className={styles.upload}
+						role="button"
+						tabIndex={0}
+						onClick={() => handleGenericUpload()}
+					>
+						Upload
+					</div>
 				</div>
 
 				<Toggle

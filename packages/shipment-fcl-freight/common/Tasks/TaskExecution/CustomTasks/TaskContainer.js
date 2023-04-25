@@ -1,5 +1,4 @@
-import { Text } from '@cogoport/components';
-import startCase from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 
 import taskDisplayNames from '../../../../configurations/display-name-mappings';
 
@@ -21,12 +20,12 @@ function TaskContainer({
 		<div className={styles.task_container}>
 			j
 			<div className={styles.task_sub_container}>
-				<Text size={16} bold>
+				<div size={16}>
 					{taskName}
-				</Text>
+				</div>
 				{loading ? null : <div className={styles.flex}>{actions}</div>}
 			</div>
-			{/* {loading ? <Text align="center">Loading ...</Text> : children} */}
+			{/* {loading ? <div align="center">Loading ...</div> : children} */}
 		</div>
 	);
 }

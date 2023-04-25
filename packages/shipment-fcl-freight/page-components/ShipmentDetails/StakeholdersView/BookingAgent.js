@@ -25,7 +25,7 @@ function BookingAgent({ get, activeStakeholder }) {
 	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('overview');
 
-	const { shipment_data, isGettingShipment } = get;
+	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get;
 
 	const { servicesGet } = useGetServices({
 		shipment_data,
@@ -55,6 +55,36 @@ function BookingAgent({ get, activeStakeholder }) {
 			<div className={styles.loader}>
 				Loading Shipment Data....
 				<Loader themeType="primary" className={styles.loader_icon} />
+			</div>
+		);
+	}
+
+	if (!shipment_data && getShipmentStatusCode !== 403) {
+		return (
+			<div className={styles.shipment_not_found}>
+				<div className={styles.section}>
+					<h1 className={styles.error}>404</h1>
+					<div className={styles.page}>Ooops!!! The page you are looking for is not found</div>
+					<Button
+						onClick={handleClick}
+						className={styles.refresh}
+					>
+						<IcMRefresh />
+						&nbsp;
+						Refresh
+					</Button>
+				</div>
+			</div>
+		);
+	}
+
+	if (getShipmentStatusCode === 403) {
+		return (
+			<div className={styles.shipment_not_found}>
+				<div className={styles.page}>
+					You don&apos;t have permission to visit this page.
+					Please contact at +91 7208083747
+				</div>
 			</div>
 		);
 	}

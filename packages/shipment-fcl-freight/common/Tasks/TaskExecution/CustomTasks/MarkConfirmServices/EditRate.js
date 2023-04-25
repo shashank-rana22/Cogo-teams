@@ -20,12 +20,12 @@ import styles from './styles.module.css';
 function EditRate({
 	task = {},
 	servicesList = [],
-	primaryService = {},
+	// primaryService = {},
 	onCancel = () => {},
 	shipment_data = {},
-	timeLineRefetch = () => {},
+	// timeLineRefetch = () => {},
 	refetch = () => {},
-	localService = '',
+	// localService = '',
 	formattedRate = {},
 }) {
 	const editQuote = useGetStep3Data({
@@ -35,8 +35,6 @@ function EditRate({
 		task,
 		taskListRefetch : refetch,
 	});
-
-	console.log('hook data', editQuote);
 
 	const subsidiaryService = (servicesList || []).find(
 		(service) => service.service_type === 'subsidiary_service'
@@ -49,19 +47,18 @@ function EditRate({
 		subsidiaryService,
 	});
 
-	let serviceProviderName;
-	let localServiceProviderName;
+	// let serviceProviderName;
+	// let localServiceProviderName;
 
 	const formattedRateVal = formattedRate?.[formattedRate?.primary_service?.id];
-	console.log('format val', formattedRateVal);
 
 	if (!isEmpty(formattedRateVal)) {
-		serviceProviderName = formattedRateVal?.service_provider_id;
-		localServiceProviderName = formattedRateVal?.service_provider_id;
+		// serviceProviderName = formattedRateVal?.service_provider_id;
+		// localServiceProviderName = formattedRateVal?.service_provider_id;
 	} else if (!isEmpty(servicesList)) {
 		(servicesList || []).forEach((service) => {
 			if (service?.service_type === 'subsidiary_service') {
-				serviceProviderName = service?.service_provider?.id;
+				// serviceProviderName = service?.service_provider?.id;
 			}
 		});
 	}
@@ -72,15 +69,12 @@ function EditRate({
 				formattedRate?.[formattedRate?.primary_service?.id]?.[ctrl.name]
 				|| ctrl.value,
 	}));
-	console.log('serv provider', serviceProviderName, localServiceProviderName, requiredControls);
 
 	const defaultValues = getDefaultValues(requiredControls);
 
 	const formProps = useForm({ defaultValues });
 
-	const { control, formState: { errors }, handleSubmit } = formProps || {};
-
-	console.log('defasfsf', defaultValues, formProps);
+	const { control, formState: { errors } } = formProps || {};
 
 	// const localRawControls = getLocalControls(
 	// 	task?.service_type,

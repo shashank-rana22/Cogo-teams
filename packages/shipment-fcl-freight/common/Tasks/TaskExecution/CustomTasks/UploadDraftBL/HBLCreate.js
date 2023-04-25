@@ -1,5 +1,5 @@
 // import { TradeDocTemplate } from '@cogo/business-modules/components/trade-documents';
-import { Button, Flex, FullscreenModal, Text } from '@cogoport/components';
+import { Button, FullscreenModal } from '@cogoport/components';
 import { forwardRef, useRef, useState } from 'react';
 
 function HBLCreate({
@@ -46,10 +46,10 @@ function HBLCreate({
 	return (
 		<div>
 			{!completed ? (
-				<Flex display="block">
-					<Text marginBottom={8}>
+				<div>
+					<div>
 						Click the following button to create a new draft HBL
-					</Text>
+					</div>
 					<Button
 						ghost={!!hblData}
 						onClick={() => setShow(true)}
@@ -58,12 +58,12 @@ function HBLCreate({
 					>
 						{hblData ? 'Edit the draft HBL' : 'Create a new draft HBL'}
 					</Button>
-				</Flex>
+				</div>
 			) : (
-				<Flex display="block">
-					<Text marginBottom={8}>
+				<div>
+					<div>
 						Draft HBL is already uploaded, you can preview it here
-					</Text>
+					</div>
 					<Button
 						ghost={!!hblData}
 						onClick={() => {
@@ -75,7 +75,7 @@ function HBLCreate({
 					>
 						View HBL
 					</Button>
-				</Flex>
+				</div>
 			)}
 			<FullscreenModal
 				heading="Create House BL"
@@ -94,12 +94,7 @@ function HBLCreate({
 				show={show}
 				setShow={setShow}
 			>
-				<Flex
-					style={{ overflow: 'auto' }}
-					bgColor="#E0E0E0"
-					padding={16}
-					justifyContent="center"
-				>
+				<div>
 					{/* <TradeDocTemplate
 						ref={ref}
 						mode={mode}
@@ -110,7 +105,7 @@ function HBLCreate({
 						watermark="draft"
 					/> */}
 					THis is trade doc
-				</Flex>
+				</div>
 			</FullscreenModal>
 		</div>
 	);

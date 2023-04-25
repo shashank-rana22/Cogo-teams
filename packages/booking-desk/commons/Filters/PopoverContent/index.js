@@ -1,22 +1,17 @@
-import { Toggle, Button, Select } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import CONTROLS from '../../../config/CONTROLS_CONFIG.json';
-import TABS_CONFIG from '../../../config/TABS_CONFIG.json';
 import applyPopoverFilters from '../../../helpers/applyPopoverFilters';
 
 import styles from './styles.module.css';
 
 export default function PopoverContent({ stateProps, setShowPopover }) {
-	const { filters, setFilters, activeTab } = stateProps;
+	const { filters, setFilters } = stateProps;
 	const { q, page, ...defaultFilters } = filters;
 
 	const [formValues, setFormValues] = useState(defaultFilters);
-
-	const tabs = TABS_CONFIG[formValues.shipment_type];
-
-	const { isCriticalVisible } = tabs.find((tab) => tab.name === activeTab) || tabs[0];
 
 	const isFiltersApplied = Object.entries(defaultFilters)
 		.some(([key, val]) => ((key === 'isCriticalOn')
@@ -64,13 +59,6 @@ export default function PopoverContent({ stateProps, setShowPopover }) {
 				))}
 			</div>
 
-			<Select
-				size="sm"
-				onChange={(val) => setValue('shipment_type', val)}
-				options={CONTROLS.shipment_types}
-				value={formValues.shipment_type}
-			/>
-
 			<div className={styles.trade_type_container}>
 				{CONTROLS.trade_types.map(({ label, value }) => (
 					<Button
@@ -83,14 +71,6 @@ export default function PopoverContent({ stateProps, setShowPopover }) {
 				))}
 			</div>
 
-			{isCriticalVisible ? (
-				<Toggle
-					size="md"
-					offLabel="Critical SIDs"
-					checked={formValues.isCriticalOn}
-					onChange={() => setValue('isCriticalOn', !formValues.isCriticalOn)}
-				/>
-			) : null}
 		</div>
 	);
 }

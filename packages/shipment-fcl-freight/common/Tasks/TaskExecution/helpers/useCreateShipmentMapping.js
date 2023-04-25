@@ -1,3 +1,4 @@
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
 const useCreateShipmentMapping = () => {
@@ -34,7 +35,7 @@ const useCreateShipmentMapping = () => {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			toastApiError(err);
 		}
 	};
 

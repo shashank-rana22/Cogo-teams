@@ -26,7 +26,13 @@ function TaskDetails({
 			}
 		});
 	});
-	const taskName = startCase(task?.label || task?.task);
+	const taskName = task?.service_type === 'subsidiary_service'
+		? `Mark ${
+			task?.subsidiary_service_name?.split(' ')[0]
+		} (${task?.subsidiary_service_name?.split(' ').slice(1).join(' ')}) ${
+			task?.task === 'mark_completed' ? 'Completed' : 'Confirm'
+		}` || startCase(task?.task)
+		: startCase(task?.label || task?.task);
 
 	return (
 		<div className={styles.container}>
@@ -46,66 +52,68 @@ function TaskDetails({
 
 			</div>
 			<div>
-				<div className={styles.task_name}>{taskName}</div>
-				<div className={styles.task_date_details}>
+				<div className={styles.details}>
+					<div className={styles.task_name}>{taskName}</div>
+					<div className={styles.task_date_details}>
 
-					{task?.deadline ? (
-						<Tooltip
-							interactive
-							theme="light"
-							content={(
-								<div style={{ fontSize: '10px' }}>
-									{format(
-										task?.deadline,
-										`${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']} 
+						{task?.deadline ? (
+							<Tooltip
+								interactive
+								theme="light"
+								content={(
+									<div style={{ fontSize: '10px' }}>
+										{format(
+											task?.deadline,
+											`${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']} 
 										${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`,
-										null,
-										true,
-									)}
-								</div>
-							)}
-						>
-							<div>
-								<div className={styles.deadline}>
-									<IcMTimer />
+											null,
+											true,
+										)}
+									</div>
+								)}
+							>
+								<div>
+									<div className={styles.deadline}>
+										<IcMTimer />
 							&nbsp;Deadline: &nbsp;
-									{formatDeadlineDate(new Date(task?.deadline))}
+										{formatDeadlineDate(new Date(task?.deadline))}
+									</div>
 								</div>
+							</Tooltip>
+						) : null}
+
+						{task?.status === 'completed' ? (
+							<div className={styles.completed}>
+								<IcMFtick />
+								{`Completed On: ${formatDate({
+									date       : task?.updated_at,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+									formatType : 'date',
+									separator  : ' - ',
+								})}`}
 							</div>
-						</Tooltip>
-					) : null}
+						) : null}
 
-					{task?.status === 'completed' ? (
-						<div className={styles.completed}>
-							<IcMFtick />
-							{`Completed On: ${formatDate({
-								date       : task?.updated_at,
-								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-								formatType : 'date',
-								separator  : ' - ',
-							})}`}
-						</div>
-					) : null}
+						{task?.due_in ? (
+							<div className={styles.completed}>
+								<img
+									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-due-in.svg"
+									alt="due-in"
+								/>
+								{`( Due In: ${task.due_in} )`}
+							</div>
+						) : null}
 
-					{task?.due_in ? (
-						<div className={styles.completed}>
-							<img
-								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-due-in.svg"
-								alt="due-in"
-							/>
-							{`( Due In: ${task.due_in} )`}
-						</div>
-					) : null}
-
-					{task?.over_due ? (
-						<div className={styles.completed}>
-							<img
-								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-over-due.svg"
-								alt="over-due"
-							/>
-							{`( Due In: ${task.over_due} )`}
-						</div>
-					) : null}
+						{task?.over_due ? (
+							<div className={styles.completed}>
+								<img
+									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-over-due.svg"
+									alt="over-due"
+								/>
+								{`( Due In: ${task.over_due} )`}
+							</div>
+						) : null}
+					</div>
 				</div>
 
 				{!isTaskOpen && task?.service_type ? (

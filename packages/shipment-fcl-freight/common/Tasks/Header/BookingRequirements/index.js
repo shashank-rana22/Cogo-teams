@@ -36,6 +36,7 @@ function BookingRequirements({ showBookingReq = false, setShowBookingReq = () =>
 				onClose={() => setShowBookingReq(false)}
 				placement="top"
 				size="lg"
+				className={styles.modal_content}
 			>
 				<Modal.Header title="Booking Requirements" />
 				<Modal.Body>

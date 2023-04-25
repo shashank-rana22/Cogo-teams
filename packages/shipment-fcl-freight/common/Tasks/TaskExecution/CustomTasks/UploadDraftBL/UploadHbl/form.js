@@ -1,6 +1,5 @@
 // import { FormLayout } from '@cogo/app-common';
 // import { useForm } from '@cogo/deprecated_legacy/forms';
-import { Text } from '@cogoport/components';
 import React, { forwardRef } from 'react';
 // useImperativeHandle
 
@@ -51,11 +50,11 @@ function Form(props) {
 
 	return (
 		<div style={{ marginBottom: 10 }}>
-			<Text size={12} marginBottom={8} bold>
+			<div>
 				{bl_type}
 				{' '}
 				{id + 1}
-			</Text>
+			</div>
 			{/* <FormLayout
 				controls={controls}
 				fields={fields}

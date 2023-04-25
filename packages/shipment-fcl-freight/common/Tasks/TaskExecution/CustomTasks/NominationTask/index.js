@@ -1,5 +1,6 @@
 import { Button, Loader } from '@cogoport/components';
 import { InputController, SelectController, TextAreaController, useForm } from '@cogoport/forms';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import React, { useState } from 'react';
 
 import useGetTaskConfig from '../../../../../hooks/useGetTaskConfig';
@@ -77,7 +78,7 @@ function NominationTask({
 				}
 			})
 			.catch((err) => {
-				console.log(err);
+				toastApiError(err);
 			});
 	};
 
@@ -113,7 +114,7 @@ function NominationTask({
 				{controls.map((item) => <FormElement control={control} errors={errors} {...item} />)}
 			</div>
 
-			<div style={{ display: 'flex', gap: '20px' }}>
+			<div className={styles.button_container}>
 				<Button themeType="secondary" onClick={onCancel}>
 					Cancel
 				</Button>

@@ -28,6 +28,7 @@ function Header({
 					{`${completedTaskCount} / ${count} Tasks Completed`}
 					{' '}
 				</div>
+
 				<div className={styles.right_content}>
 					<div className={styles.toggle_container}>
 						<div style={{ marginTop: '12px' }}>Hide completed tasks</div>
@@ -36,6 +37,7 @@ function Header({
 							onChange={() => setHideCompletedTasks((prevVal) => !prevVal)}
 						/>
 					</div>
+
 					<div className={styles.toggle_container}>
 						<div style={{ marginTop: '12px' }}>Show only my tasks</div>
 
@@ -72,9 +74,6 @@ function Header({
 					/>
 				)
 				: null}
-
-			{/* Booking Requirements to be integrated in bottom panel */}
-			{/* <div className={styles.bottom_panel}> Bottom</div> */}
 		</div>
 	);
 }
