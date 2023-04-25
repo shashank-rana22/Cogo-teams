@@ -1,3 +1,4 @@
+import { Loader } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 
 import useListShipmentBookingConfirmationPreferences
@@ -6,6 +7,7 @@ import useUpdateShipmentPendingTask from '../../../../../hooks/useUpdateShipment
 import useUpdateShipmentService from '../../../../../hooks/useUpdateShipmentService';
 
 import Card from './Card';
+import styles from './styles.module.css';
 
 function ChooseServiceProvider({
 	task = {},
@@ -13,6 +15,23 @@ function ChooseServiceProvider({
 	onCancel = () => {},
 	services = [],
 }) {
+	const service_ids = [];
+
+	(services || []).map((serviceObj) => {
+		if (serviceObj.service_type === 'fcl_freight_service') {
+			service_ids.push(serviceObj?.id);
+		}
+		return service_ids;
+	});
+
+	const { apiData, loading } = useListShipmentBookingConfirmationPreferences({
+		defaultFilters: {
+			service_id   : service_ids,
+			service_type : task.service_type,
+		},
+		shipment_id: services[0]?.shipment_id,
+	});
+
 	const { apiTrigger: updateTask } = useUpdateShipmentPendingTask({ });
 
 	const { apiTrigger: updateService } = useUpdateShipmentService({ });
@@ -68,26 +87,17 @@ function ChooseServiceProvider({
 		}
 	};
 
-	const service_ids = [];
-
-	(services || []).map((serviceObj) => {
-		if (serviceObj.service_type === 'fcl_freight_service') {
-			service_ids.push(serviceObj?.id);
-		}
-		return service_ids;
-	});
-
-	const { apiData: data } = useListShipmentBookingConfirmationPreferences({
-		defaultFilters: {
-			service_id   : service_ids,
-			service_type : task.service_type,
-		},
-		shipment_id: services[0]?.shipment_id,
-	});
+	if (loading) {
+		return (
+			<div className={styles.loader_container}>
+				<Loader themeType="primary" />
+			</div>
+		);
+	}
 
 	return (
 		<div>
-			{(data?.list || []).map((item) => (
+			{(apiData?.list || []).map((item) => (
 				<Card
 					item={item}
 					priority={item.priority}

@@ -16,3 +16,14 @@
 		padding: 4px;
 	}
 }
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin-top: 12px;
+
+	& > button:first-child {
+		margin-right: 12px;
+	}
+}
