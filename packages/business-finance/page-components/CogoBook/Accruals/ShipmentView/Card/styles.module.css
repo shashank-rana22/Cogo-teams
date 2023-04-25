@@ -144,27 +144,6 @@
 .date_range_not {
 	width: fit-content;
 	margin-top: 16px;
-
-	:global {
-		.react-datepicker__input-container {
-			input {
-				height: 32px;
-			}
-
-			.react-datepicker__close-icon::after {
-				background: none !important;
-			}
-
-			input {
-				cursor: not-allowed !important;
-			}
-
-			.react-datepicker__close-icon {
-				right: -9px;
-				border: none;
-			}
-		}
-	}
 }
 
 .profit_data {

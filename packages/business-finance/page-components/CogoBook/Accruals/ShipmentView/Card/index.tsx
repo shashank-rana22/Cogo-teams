@@ -169,7 +169,7 @@ function Card({
 					</Tooltip>
 				</div>
 				<div className={styles.hr} />
-				<div className={isDateRangeEnabled ? styles.date_range : styles.date_range_not}>
+				<div className={styles.date_range }>
 					<SingleDateRange
 						placeholder="Date"
 						maxDate={maxDate}
