@@ -13,7 +13,7 @@ const revenueDeskServices = [
 
 function MarkServiceConfirmed({
 	task = {},
-	serviceList = [],
+	servicesList = [],
 	onCancel = () => {},
 	primaryService = {},
 	shipment_data = {},
@@ -40,13 +40,14 @@ function MarkServiceConfirmed({
 		shipment_data,
 		task.service_type,
 		primaryService,
-		serviceList,
+		servicesList,
 	);
 
 	return (
 		<EditRate
 			task={task}
-			serviceList={serviceList}
+			servicesList={servicesList}
+			primaryService={primaryService}
 			onCancel={onCancel}
 			shipment_data={shipment_data}
 			timeLineRefetch={timeLineRefetch}
