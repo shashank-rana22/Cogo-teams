@@ -1,5 +1,5 @@
 import { usePublicRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const GetDashBoardTabs = () => {
 	const [{ data, loading }, trigger] = usePublicRequest({
@@ -10,19 +10,22 @@ const GetDashBoardTabs = () => {
 		},
 	});
 
-	useEffect(() => {
-		const getFileContent = async () => {
+	const getFileContent = useCallback(
+		async () => {
 			try {
 				await trigger();
 			} catch (error) {
 				console.log(error, 'error');
 			}
-		};
+		},
+		[trigger],
+	);
 
+	useEffect(() => {
 		if (process.env.NODE_ENV === 'production') {
 			getFileContent();
 		}
-	}, [trigger]);
+	}, [getFileContent, trigger]);
 
 	return {
 		loading,

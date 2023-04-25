@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import { getDefaultFilters } from '../utils/startDateOfMonth';
 
@@ -18,8 +18,8 @@ const useListSalesOverallData = (salesCompInViewport) => {
 		scope,
 	}, { manual: true });
 
-	useEffect(() => {
-		const fetchSalesOverallData = async () => {
+	const fetchSalesOverallData = useCallback(
+		async () => {
 			try {
 				await trigger({
 					params: filters,
@@ -27,12 +27,15 @@ const useListSalesOverallData = (salesCompInViewport) => {
 			} catch (err) {
 				console.log(err, 'err');
 			}
-		};
+		},
+		[filters, trigger],
+	);
 
+	useEffect(() => {
 		if (Object.keys(filters)?.length > 0 && salesCompInViewport) {
 			fetchSalesOverallData();
 		}
-	}, [filters, salesCompInViewport, trigger]);
+	}, [fetchSalesOverallData, filters, salesCompInViewport]);
 
 	return {
 		loading,

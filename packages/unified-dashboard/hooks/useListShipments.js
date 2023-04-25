@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import { getDefaultFilters } from '../utils/startDateOfMonth';
 
@@ -16,8 +16,8 @@ const useListShipments = () => {
 		scope,
 	}, { manual: true });
 
-	useEffect(() => {
-		const fetchShipments = async () => {
+	const fetchShipments = useCallback(
+		async () => {
 			try {
 				const { agent_id, start_date, end_date } = filters;
 				await trigger({
@@ -32,9 +32,13 @@ const useListShipments = () => {
 			} catch (err) {
 				console.log(err, 'err');
 			}
-		};
+		},
+		[filters, trigger],
+	);
+
+	useEffect(() => {
 		if (Object.keys(filters).length > 2) fetchShipments();
-	}, [filters, trigger]);
+	}, [fetchShipments, filters]);
 
 	return {
 		loading,

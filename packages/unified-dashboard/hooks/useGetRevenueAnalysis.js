@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 const INITIAL_ARRAY = [];
 
@@ -16,8 +16,8 @@ const useGetRevenueAnalysis = (headerFilters) => {
 		scope,
 	}, { manual: true });
 
-	useEffect(() => {
-		const fetchRevenueAnalysisData = async () => {
+	const fetchRevenueAnalysisData = useCallback(
+		async () => {
 			try {
 				await trigger({
 					params: {
@@ -28,9 +28,13 @@ const useGetRevenueAnalysis = (headerFilters) => {
 			} catch (err) {
 				console.log(err, 'err');
 			}
-		};
+		},
+		[entity_code, params, trigger],
+	);
+
+	useEffect(() => {
 		if (params) fetchRevenueAnalysisData();
-	}, [params, entity_code, trigger]);
+	}, [fetchRevenueAnalysisData, params]);
 
 	return {
 		revenueAnalysisLoading : loading,

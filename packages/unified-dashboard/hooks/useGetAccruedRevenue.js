@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 const INITIAL_ARRAY = [];
 
@@ -15,8 +15,8 @@ const useGetAccruedRevenue = (headerFilters) => {
 		scope,
 	}, { manual: true });
 
-	useEffect(() => {
-		const fetchRevenueData = async () => {
+	const fetchRevenueData = useCallback(
+		async () => {
 			try {
 				await trigger({
 					params: {
@@ -27,10 +27,13 @@ const useGetAccruedRevenue = (headerFilters) => {
 			} catch (err) {
 				console.log(err, 'err');
 			}
-		};
+		},
+		[entity_code, params, trigger],
+	);
 
+	useEffect(() => {
 		if (params) fetchRevenueData();
-	}, [params, entity_code, trigger]);
+	}, [fetchRevenueData, params]);
 
 	return {
 		loading,

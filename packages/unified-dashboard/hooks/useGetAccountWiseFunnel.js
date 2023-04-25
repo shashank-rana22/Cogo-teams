@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const INITIAL_ARRAY = [];
 
@@ -15,8 +15,8 @@ const useGetAccountWiseFunnel = (revenueFilter, headerFilters) => {
 		scope,
 	}, { manual: true });
 
-	useEffect(() => {
-		const getAccountWiseFunnel = async () => {
+	const getAccountWiseFunnel = useCallback(
+		async () => {
 			try {
 				await trigger({
 					params: {
@@ -27,9 +27,13 @@ const useGetAccountWiseFunnel = (revenueFilter, headerFilters) => {
 			} catch (err) {
 				console.log(err, 'error');
 			}
-		};
+		},
+		[entity_code, revenueFilter, trigger],
+	);
+
+	useEffect(() => {
 		getAccountWiseFunnel();
-	}, [revenueFilter, entity_code, trigger]);
+	}, [getAccountWiseFunnel]);
 
 	return {
 		loading,
