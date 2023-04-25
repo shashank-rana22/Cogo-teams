@@ -18,7 +18,6 @@ function TaskContainer({
 
 	return (
 		<div className={styles.task_container}>
-			j
 			<div className={styles.task_sub_container}>
 				<div size={16}>
 					{taskName}

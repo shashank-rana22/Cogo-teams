@@ -59,7 +59,7 @@ function Superadmin({ get, activeStakeholder = '' }) {
 		);
 	}
 
-	if (!shipment_data && getShipmentStatusCode !== 403) {
+	if (!shipment_data && getShipmentStatusCode !== 403 && !isGettingShipment) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.section}>
@@ -78,7 +78,7 @@ function Superadmin({ get, activeStakeholder = '' }) {
 		);
 	}
 
-	if (getShipmentStatusCode === 403) {
+	if (getShipmentStatusCode === 403 && !isGettingShipment) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.page}>
