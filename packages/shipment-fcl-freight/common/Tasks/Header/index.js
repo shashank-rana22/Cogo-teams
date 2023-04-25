@@ -28,6 +28,7 @@ function Header({
 					{`${completedTaskCount} / ${count} Tasks Completed`}
 					{' '}
 				</div>
+
 				<div className={styles.right_content}>
 					<div className={styles.toggle_container}>
 						<div style={{ marginTop: '12px' }}>Hide completed tasks</div>

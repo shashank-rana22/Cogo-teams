@@ -15,9 +15,9 @@
 }
 
 .left_content {
-	font-size: 18px;
+	color: black;
+	font-size: 16px;
 	font-weight: 600;
-	line-height: 21px;
 
 	@media (max-width: 768px) {
 		font-size: 12px;
@@ -42,14 +42,27 @@
 .booking_req_heading {
 	display: flex;
 	align-items: center;
+	background-color: #fef3e9;
+	color: #f97d01;
+	font-size: 12px;
+	font-weight: 600;
+	padding: 4px 12px;
+	border-radius: 4px;
+	box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 10px;
 
 	:global {
 		.ui_button_container {
 			margin-left: 10px;
+		}
+
+		.ui_button_container.ui_ps_themeType_linkUi {
+			text-decoration: none;
 		}
 	}
 }
 
 .booking_req_button_text {
 	font-size: 12px;
+	color: red;
+	text-decoration: underline
 }
