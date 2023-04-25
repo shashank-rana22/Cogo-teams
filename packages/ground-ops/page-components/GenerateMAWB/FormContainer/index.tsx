@@ -131,6 +131,12 @@ function FormContainer({
 						style={{ marginLeft: 'auto', height: '4%' }}
 					/>
 				)}
+				{edit && item?.remarks && (
+					<p className={styles.remark}>
+						<span>Remark for Amendment:</span>
+						{item?.remarks?.toString()}
+					</p>
+				)}
 			</div>
 			{value === 'manual' && activeCategory === 'hawb' && (
 				<Stepper
@@ -158,7 +164,7 @@ function FormContainer({
 					Refer Shipping Instruction
 				</Button>
 			</div>
-			{value === 'upload' ? <UploadMAWB item={item} setGenerate={setGenerate} />
+			{value === 'upload' ? <UploadMAWB item={item} setGenerate={setGenerate} activeCategory={activeCategory} />
 				: (
 					<>
 						{activeKey === 'basic' && (

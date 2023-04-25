@@ -74,6 +74,7 @@ function SingleQuestionComponent({
 			</div>
 
 			<OptionsComponent
+				key={JSON.stringify(editorValue)}
 				control={control}
 				{...NAME_CONTROL_MAPPING.options}
 				register={register}
@@ -140,7 +141,7 @@ function SingleQuestionComponent({
 						size="sm"
 						type="button"
 					>
-						{field?.isNew ? 'Save' : 'Edit'}
+						{field?.isNew ? 'Save' : 'Update'}
 					</Button>
 					{/* ) : null} */}
 				</div>

@@ -1,3 +1,7 @@
+import { useContext } from 'react';
+
+import { QuestionStatsContext } from '../../../QuestionStatsContext';
+
 import styles from './styles.module.css';
 
 const STATS_MAPPING = {
@@ -23,7 +27,12 @@ const STATS_MAPPING = {
 	},
 };
 
-function QuestionStats({ total_question_count, user_appearance = [] }) {
+function QuestionStats() {
+	const {
+		total_question_count,
+		user_appearance,
+	} = useContext(QuestionStatsContext);
+
 	let total_count = 0;
 
 	return (
@@ -40,7 +49,7 @@ function QuestionStats({ total_question_count, user_appearance = [] }) {
 				return (
 					<div key={key} className={styles.stats_container}>
 						<div style={{ backgroundColor: color }} className={styles.stats_count}>
-							{count}
+							{count || 0}
 						</div>
 
 						<p className={styles.label}>{label}</p>
