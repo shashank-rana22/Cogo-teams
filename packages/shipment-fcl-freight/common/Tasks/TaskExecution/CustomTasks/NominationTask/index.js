@@ -114,7 +114,7 @@ function NominationTask({
 				{controls.map((item) => <FormElement control={control} errors={errors} {...item} />)}
 			</div>
 
-			<div style={{ display: 'flex', gap: '20px' }}>
+			<div className={styles.button_container}>
 				<Button themeType="secondary" onClick={onCancel}>
 					Cancel
 				</Button>
