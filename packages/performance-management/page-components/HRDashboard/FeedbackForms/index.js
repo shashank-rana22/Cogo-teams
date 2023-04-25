@@ -17,8 +17,8 @@ import useGetFormsPage from './useGetFormsPage';
 const loadArr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const activationStatusTextMapping = {
-	Edit     : 'Edit Deadline',
-	Add      : 'Add Deadline',
+	edit     : 'Edit Deadline',
+	add      : 'Add Deadline',
 	disabled : 'Edit Deadline',
 };
 
@@ -57,11 +57,11 @@ function FeedbackForms() {
 	let activationStatus = '';
 
 	if (localizedFormDeadline > currentDate) {
-		activationStatus = 'Edit';
+		activationStatus = 'edit';
 	} else if (localizedFormDeadline < currentDate && currentDate < nextFeedbackCycle) {
 		activationStatus = 'disabled';
 	} else {
-		activationStatus = 'Add';
+		activationStatus = 'add';
 	}
 
 	const buttonText = activationStatusTextMapping[activationStatus];
@@ -97,29 +97,21 @@ function FeedbackForms() {
 					</div>
 				</div>
 
-				{activationStatus === 'disabled' ? (
-					<Tooltip
-						content={<div style={{ wordBreak: 'break-word' }}>Forms disabled for this Month.</div>}
-						placement="left"
-					>
-						<Button
-							size="lg"
-							onClick={() => setOpenActivateModal(true)}
-							disabled={activationStatus === 'disabled'}
-							loading={deadlineDataLoading}
-						>
-							{buttonText}
-						</Button>
-					</Tooltip>
-				) : (
+				<Tooltip
+					content={<div style={{ wordBreak: 'break-word' }}>Forms disabled for this Month.</div>}
+					placement="left"
+					disabled={activationStatus !== 'disabled'}
+				>
 					<Button
 						size="lg"
 						onClick={() => setOpenActivateModal(true)}
+						disabled={activationStatus === 'disabled'}
 						loading={deadlineDataLoading}
 					>
 						{buttonText}
 					</Button>
-				)}
+				</Tooltip>
+
 			</div>
 
 			<div className={styles.form_container}>
