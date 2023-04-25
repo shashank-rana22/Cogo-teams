@@ -2,7 +2,7 @@
 import { Button, Modal } from '@cogoport/components';
 import React, { useCallback, useState } from 'react';
 
-import CONTENT_MAPPING from '../../../configurations/default-content-mapping';
+import getContentMapping from '../../../configurations/default-content-mapping';
 import DropBox from '../DropBox';
 import LeftPanel from '../LeftPanel';
 import Content from '../LeftPanel/Content';
@@ -36,6 +36,8 @@ function DNDComponent() {
 	const handleAddNewItem = useCallback(
 		(content, hoveredIndex = component.layouts.length, shouldAddBelow = true, parentDetails = {}, componentType = '') => {
 			const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
+
+			const CONTENT_MAPPING = getContentMapping({ setParentComponentId, setShowContentModal });
 
 			if (componentType === 'child') {
 				const { childId, parentId } = parentDetails || {};

@@ -1,4 +1,4 @@
-import { IcMFolder, IcMImage, IcMEdit, IcMVideoCall, IcMFdangerousCargoType } from '@cogoport/icons-react';
+import { IcMFolder, IcMImage, IcMEdit, IcMVideoCall, IcMFdangerousCargoType, IcMCard } from '@cogoport/icons-react';
 
 const contents = [
 	{
@@ -35,6 +35,12 @@ const contents = [
 		name : 'form',
 
 	},
+	{
+		type : 'carousel',
+		icon : <IcMCard />,
+		name : 'carousel',
+	},
+
 ];
 
 export default contents;

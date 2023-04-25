@@ -54,11 +54,11 @@ function Stage({
 			const dragItem = stageItems.layouts[dragIndex];
 			const hoverItem = stageItems.layouts[hoverIndex];
 
-			setStageItems((pets) => {
-				const updatedPets = pets;
-				updatedPets.layouts[dragIndex] = hoverItem;
-				updatedPets.layouts[hoverIndex] = dragItem;
-				return updatedPets;
+			setStageItems((prevStageItems) => {
+				const updatedStageItems = prevStageItems;
+				updatedStageItems.layouts[dragIndex] = hoverItem;
+				updatedStageItems.layouts[hoverIndex] = dragItem;
+				return updatedStageItems;
 			});
 		},
 		[stageItems, setStageItems],

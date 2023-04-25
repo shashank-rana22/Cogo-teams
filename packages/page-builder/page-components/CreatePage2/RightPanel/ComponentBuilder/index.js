@@ -63,6 +63,7 @@ function ComponentBuilder({ widget, components, setComponents, selectedRow, chil
 											selectedRow={selectedRow}
 											setSelectedItem={setSelectedItem}
 											index={childrenIndex}
+											setChildId={setChildId}
 										/>
 									</div>
 								);
@@ -99,6 +100,7 @@ function ComponentBuilder({ widget, components, setComponents, selectedRow, chil
 								selectedRow={selectedRow}
 								setSelectedItem={setSelectedItem}
 								index={idx}
+								setChildId={setChildId}
 							/>
 						) }
 

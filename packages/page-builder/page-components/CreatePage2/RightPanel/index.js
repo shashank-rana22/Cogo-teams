@@ -195,6 +195,7 @@ function RightPanel(props) {
 							selectedRow={selectedRow}
 							setSelectedItem={setSelectedItem}
 							index={index}
+							setChildId={setChildId}
 						/>
 					)}
 			</div>

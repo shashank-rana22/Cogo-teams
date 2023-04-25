@@ -7,6 +7,7 @@ const VALID_ITEM_TYPES = {
 	video       : 'video',
 	html        : 'html',
 	form        : 'form',
+	carousel    : 'carousel',
 
 };
 
