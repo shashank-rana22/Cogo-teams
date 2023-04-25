@@ -13,18 +13,30 @@ if (typeof window !== 'undefined') {
 
 function Subjective({
 	question = {},
-	currentQuestion, total_question,
-	subjectiveAnswer, setSubjectiveAnswer,
+	currentQuestion,
+	total_question,
+	subjectiveAnswer,
+	setSubjectiveAnswer,
 	uploadValue,
 	setUploadValue,
 }) {
-	const { question_text, question_type, test_question_answers = [], allow_file_upload } = question;
+	const {
+		question_text,
+		question_type,
+		test_question_answers = [],
+		allow_file_upload,
+	} = question;
+
 	const { subjective_answer_text = '', subjective_file_url = null } = test_question_answers[0] || {};
 
 	useEffect(() => {
-		setSubjectiveAnswer(RichTextEditor?.createValueFromString((subjective_answer_text || ''), 'html') || '');
-		// setUploadValue(subjective_file_url || '');
-	}, [subjective_answer_text, setSubjectiveAnswer, setUploadValue]);
+		setSubjectiveAnswer(
+			RichTextEditor?.createValueFromString(
+				subjective_answer_text || '',
+				'html',
+			) || '',
+		);
+	}, [subjective_answer_text, setSubjectiveAnswer]);
 
 	return (
 		<div className={styles.main_container}>
@@ -43,23 +55,26 @@ function Subjective({
 					{startCase(question_type)}
 				</p>
 			</div>
-			{
-                allow_file_upload && (
-	<div className={styles.question}>
-		Either Type or Upload your answer. Do not try to do both. It may lead to miscalculation of your marks.
-	</div>
-                )
-			}
+
+			{allow_file_upload && (
+				<div className={styles.question}>
+					Either Type or Upload your answer. Do not try to do both. It may lead
+					to miscalculation of your marks.
+				</div>
+			)}
 
 			<div className={styles.subjective_part}>
 				<div className={styles.question_01}>
 					<div className={styles.text}>{question_text}</div>
 				</div>
+
 				<div>
 					<div className={styles.subjective_editor}>
 						<RichTextEditor
 							value={subjectiveAnswer}
-							onChange={((val) => { setSubjectiveAnswer(val); })}
+							onChange={(val) => {
+								setSubjectiveAnswer(val);
+							}}
 							required
 							id="body-text"
 							name="bodyText"
@@ -74,20 +89,18 @@ function Subjective({
 							}}
 						/>
 					</div>
-					{
-                    allow_file_upload === true && (
-	<div className={styles.uploader}>
-		<FileUploader
-			name="upload"
-			key="upload_questions"
-			value={uploadValue}
-			defaultValues={subjective_file_url}
-			onChange={(e) => setUploadValue(e)}
-		/>
-	</div>
-                    )
-                }
 
+					{allow_file_upload && (
+						<div className={styles.uploader}>
+							<FileUploader
+								name="upload"
+								key="upload_questions"
+								value={uploadValue}
+								defaultValues={subjective_file_url}
+								onChange={(value) => setUploadValue(value)}
+							/>
+						</div>
+					)}
 				</div>
 			</div>
 		</div>
