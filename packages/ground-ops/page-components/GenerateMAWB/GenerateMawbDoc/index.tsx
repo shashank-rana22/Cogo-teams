@@ -4,8 +4,8 @@ import html2canvas from 'html2canvas';
 import { jsPDF as JsPDF } from 'jspdf';
 import React, { createRef, useState, ReactFragment } from 'react';
 
-import { backPage, footerImages } from '../Helpers/configurations/12CopiesImages';
 import { footerValues } from '../Helpers/configurations/footerValues';
+import { backPage, footerImages } from '../Helpers/configurations/imageCopies';
 
 import ChargeDetails from './ChargeDetails';
 import ContainerDetails from './ContainerDetails';
@@ -47,6 +47,8 @@ const downloadButton = {
 	document_uploaded            : 'Download',
 	document_amendment_requested : 'Download',
 };
+
+const includeTnC = ['original_3', 'original_2', 'original_1'];
 
 function GenerateMawb({
 	taskItem = {},
@@ -170,8 +172,6 @@ function GenerateMawb({
 					if (!whiteout) {
 						pdf.addImage(footerImages[item], 'jpeg', 0, pdfHeight - 14, pdfWidth, 4.5);
 					}
-
-					const includeTnC = ['original_3', 'original_2', 'original_1'];
 
 					if (download24) {
 						if (includeTnC.includes(item)) {
