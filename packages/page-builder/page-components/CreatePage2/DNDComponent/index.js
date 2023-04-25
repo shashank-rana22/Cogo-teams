@@ -91,12 +91,10 @@ function DNDComponent() {
 		setShowContentModal(false);
 	};
 
-	console.log('sdfsdfsdfsdf ::', selectedItem);
-
 	return (
 		<div>
 			<section className={styles.heading_container}>
-				Customise Landing Pages V1
+				Cogo Page Builder
 			</section>
 
 			<section className={styles.body}>

@@ -28,8 +28,9 @@ function RenderComponents({
 	setSelectedItem,
 	index,
 	setChildId,
+	setParentComponentId,
+	setShowContentModal,
 }) {
-	console.log('skdoks', widget);
 	const componentPropsMapping = {
 		text: {
 			key: elementId,
@@ -90,6 +91,8 @@ function RenderComponents({
 			setChildId,
 			setSelectedItem,
 			childId,
+			setParentComponentId,
+			setShowContentModal,
 		},
 	};
 
@@ -100,10 +103,9 @@ function RenderComponents({
 			key={elementId}
 			role="presentation"
 			onClick={() => {
-				console.log('widgetsssssssss ::', widget);
 				setSelectedItem({ ...widget, index });
 			}}
-			style={{ width: '100%', height: '100%', color: '#222' }}
+			style={{ width: '100%', height: '100%' }}
 		>
 			<Component key={componentType} {...(componentPropsMapping[componentType] || {})} />
 		</div>

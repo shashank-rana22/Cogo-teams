@@ -11,7 +11,7 @@ function ImageComponent(props) {
 			const data = components;
 			const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === id));
 
-			if (parentId) {
+			if (parentId && childId) {
 				data.layouts[selectedComponentIndex].children[childId].content = val;
 			} else {
 				data.layouts[selectedComponentIndex].content = val;
