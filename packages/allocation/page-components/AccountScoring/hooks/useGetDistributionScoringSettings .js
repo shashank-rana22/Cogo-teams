@@ -2,9 +2,9 @@ import { useAllocationRequest } from '@cogoport/request';
 
 function useGetDistributionScoringSettings() {
 	const [{ loading, data }, refetch] = useAllocationRequest({
-		url     : 'engagement_distribution_settings',
+		url     : 'engagement_scoring_account_stats',
 		method  : 'GET',
-		authkey : 'get_allocation_engagement_distribution_settings',
+		authkey : 'get_allocation_engagement_scoring_account_stats',
 	}, { manual: false });
 
 	const { list = [] } = data || {};

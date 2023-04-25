@@ -1,31 +1,27 @@
 import { useAllocationRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useState } from 'react';
 
-function useGetEngagementScoringLeaderboard(watch) {
-	const [{ loading, data }, refetch] = useAllocationRequest({
+function useGetEngagementScoringLeaderboard() {
+	const [params, setParams] = useState({
+		filters: {
+			created_at : undefined,
+			service_id : undefined,
+		},
+	});
+
+	const [{ loading, data }] = useAllocationRequest({
 		url     : 'engagement_scoring_leaderboard',
 		method  : 'GET',
 		authkey : 'get_allocation_engagement_scoring_leaderboard',
+		params,
 	}, { manual: false });
-
-	const organization = watch('organization');
-	const kam = watch('kam');
-	const date = watch('date');
-	const segment = watch('segment_id');
-
-	useEffect(() => {
-		refetch();
-		console.log('organization', organization);
-		console.log('date', date);
-		console.log('kam', kam);
-		console.log('segment', segment);
-	}, [organization, refetch, kam, date, segment]);
 
 	const { list = [] } = data || {};
 
 	return {
-		leaderboardLoading : loading,
-		leaderboardList    : list,
+		leaderboardLoading   : loading,
+		leaderboardList      : list,
+		setLeaderboardParams : setParams,
 	};
 }
 

@@ -1,9 +1,11 @@
 const controls = [
 	{
-		name       : 'date',
-		label      : 'Select Date',
-		type       : 'datePicker',
-		dateFormat : 'dd-MMMM-yyyy',
+		name                  : 'date',
+		label                 : 'Select Date',
+		type                  : 'datePicker',
+		dateFormat            : 'dd-MMMM-yyyy',
+		isPreviousDaysAllowed : true,
+		isClearable           : true,
 	},
 	{
 		name        : 'segment_id',
@@ -17,6 +19,7 @@ const controls = [
 			status               : 'active',
 			is_lead_user_segment : false,
 		},
+		isClearable: true,
 	},
 	{
 		name        : 'kam',
@@ -25,6 +28,7 @@ const controls = [
 		type        : 'asyncSelect',
 		asyncKey    : 'partner_users',
 		initialCall : true,
+		isClearable : true,
 	},
 	{
 		name        : 'organization',
@@ -43,6 +47,7 @@ const controls = [
 				account_type       : 'importer_exporter',
 			},
 		},
+		isClearable: true,
 	},
 ];
 export default controls;

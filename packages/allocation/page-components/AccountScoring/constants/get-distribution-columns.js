@@ -21,9 +21,9 @@ const distributionColumns = [
 	},
 	{
 		Header   : 'CURRENT NUMBER OF ACCOUNTS',
-		accessor : ({ numberOfAccounts = 0 }) => (
+		accessor : ({ warmth_count = 0 }) => (
 			<section>
-				{numberOfAccounts}
+				{warmth_count}
 			</section>
 		),
 	},

@@ -390,11 +390,6 @@ const allocation = {
 			service_name : 'allocation',
 		},
 		{
-			api          : 'get_allocation_engagement_distribution_settings',
-			access_type  : 'private',
-			service_name : 'allocation',
-		},
-		{
 			api          : 'post_allocation_engagement_distribution_settings_attributes',
 			access_type  : 'private',
 			service_name : 'allocation',
