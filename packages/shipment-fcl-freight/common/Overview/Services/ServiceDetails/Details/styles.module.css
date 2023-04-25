@@ -51,7 +51,8 @@
 .mainservice_tabs.active.confirmed_by_service_provider {
 	color: #768d44;
 	background-color: #f5faeb;
-} 
+}
+
 .mainservice_tabs.active.completed {
 	color: #768d44;
 	background-color: #f5faeb;
