@@ -4,15 +4,9 @@ import QuestionItem from '../QuestionItem';
 import SubjectiveQuestions from '../SubjectiveQuestions';
 
 const COMPONENT_MAPPING = {
-	stand_alone_questions: {
-		component: QuestionItem,
-	},
-	case_study_based: {
-		component: CaseStudy,
-	},
-	subjective: {
-		component: SubjectiveQuestions,
-	},
+	stand_alone_questions : QuestionItem,
+	case_study_based      : CaseStudy,
+	subjective            : SubjectiveQuestions,
 };
 
 function RenderContent({ questionsList = [], test_id = '', activeTab = '' }) {
@@ -21,7 +15,8 @@ function RenderContent({ questionsList = [], test_id = '', activeTab = '' }) {
 			{activeTab !== 'case_study_based' ? <ListHeader type={activeTab} /> : null}
 
 			{(questionsList || []).map((question_item, index) => {
-				const { component: ActiveComponent = null } = COMPONENT_MAPPING[activeTab];
+				const ActiveComponent = COMPONENT_MAPPING?.[activeTab];
+
 				return (
 					<ActiveComponent
 						key={question_item.id}
