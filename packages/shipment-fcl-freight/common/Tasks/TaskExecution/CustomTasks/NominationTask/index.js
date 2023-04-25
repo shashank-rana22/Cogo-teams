@@ -1,5 +1,6 @@
 import { Button, Loader } from '@cogoport/components';
 import { InputController, SelectController, TextAreaController, useForm } from '@cogoport/forms';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import React, { useState } from 'react';
 
 import useGetTaskConfig from '../../../../../hooks/useGetTaskConfig';
@@ -77,7 +78,7 @@ function NominationTask({
 				}
 			})
 			.catch((err) => {
-				console.log(err);
+				toastApiError(err);
 			});
 	};
 

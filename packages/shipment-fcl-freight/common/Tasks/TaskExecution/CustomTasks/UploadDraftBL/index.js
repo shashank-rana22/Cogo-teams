@@ -18,11 +18,11 @@ function UploadDraftBL({
 	taskListRefetch = () => {},
 }) {
 	// const [hblData, setHblData] = useState([]);
-	const [hblLoading, setHblLoading] = useState(false);
-	const [isAllHBLUploaded, setIsAllHblUploaded] = useState(false);
-	const [showSwitchGenerate, setShowSwitchGenerate] = useState(true);
+	// const [hblLoading, setHblLoading] = useState(false);
+	// const [isAllHBLUploaded, setIsAllHblUploaded] = useState(false);
+	// const [showSwitchGenerate, setShowSwitchGenerate] = useState(true);
 	// const [uploadedDocs, setuploadedDocs] = useState([]);
-	const [canUseSwitch, setcanUseSwitch] = useState(true);
+	// const [canUseSwitch, setcanUseSwitch] = useState(true);
 	const mblRef = useRef();
 
 	const isHBL =		(primaryService.bl_category || '').toLowerCase() === 'hbl';
@@ -33,11 +33,10 @@ function UploadDraftBL({
 
 	// const blCount = primaryService.bls_count;
 
-	console.log('hbl loading', setHblLoading, setcanUseSwitch, setIsAllHblUploaded);
 	const {
 		listDocsAPI,
 		shipmentListDocsAPI,
-		createShipmentDocAPI,
+		// createShipmentDocAPI,
 		// createHBL,
 		submitMBL,
 	} = useDraftBLHelper({
@@ -93,8 +92,8 @@ function UploadDraftBL({
 		}
 	};
 
-	const isNextDisabled =		(isHBL && !isAllHBLUploaded)
-		|| ((!isHBL || isAllHBLUploaded) && createShipmentDocAPI.loading);
+	// const isNextDisabled =		(isHBL && !isAllHBLUploaded)
+	// 	|| ((!isHBL || isAllHBLUploaded) && createShipmentDocAPI.loading);
 
 	// const saveAllBls = async () => {
 	// 	await createHBL({
@@ -107,12 +106,12 @@ function UploadDraftBL({
 	// 	setIsAllHblUploaded(tradeDocsLength >= blCount);
 	// };
 
-	const handleClickSwitch = () => {
-		setShowSwitchGenerate(!showSwitchGenerate);
-	};
+	// const handleClickSwitch = () => {
+	// 	setShowSwitchGenerate(!showSwitchGenerate);
+	// };
 
 	useEffect(() => {
-		setShowSwitchGenerate(!showUploadView);
+		// setShowSwitchGenerate(!showUploadView);
 	}, [showUploadView]);
 
 	return (
@@ -121,7 +120,7 @@ function UploadDraftBL({
 			task={task}
 			actions={(
 				<>
-					{canUseSwitch && isHBL ? (
+					{/* {canUseSwitch && isHBL ? (
 						<Button
 							disabled={listDocsAPI?.loading || hblLoading}
 							onClick={handleClickSwitch}
@@ -131,10 +130,10 @@ function UploadDraftBL({
 						>
 							{showSwitchGenerate ? 'Switch to upload' : 'Switch to create'}
 						</Button>
-					) : null}
+					) : null} */}
 
 					<Button
-						disabled={isNextDisabled}
+						// disabled={isNextDisabled}
 						onClick={handleClickOnNext}
 						size="sm"
 						id="bm_pt_bl_upload_submit"

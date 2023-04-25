@@ -27,7 +27,7 @@ function ExecuteStep({
 		getApisData,
 		// selectedMail,
 	});
-	const { control, formState: { errors }, handleSubmit } = formProps;
+	const { control, formState: { errors }, handleSubmit, watch } = formProps;
 
 	const { loading: isLoading, onSubmit } = useHandleSubmit({
 		finalConfig: stepConfig,
@@ -49,6 +49,7 @@ function ExecuteStep({
 					control={control}
 					errors={errors}
 					showElements={showElements}
+					formValues={watch()}
 				/>
 			</div>
 

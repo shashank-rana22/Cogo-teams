@@ -1,7 +1,8 @@
 import { Text } from '@cogoport/components';
 import startCase from '@cogoport/utils';
 
-import taskDisplayNames from './display-name-Mapping';
+import taskDisplayNames from '../../../../configurations/display-name-mappings';
+
 import incoTermMapping from './inco-term-mapping.json';
 import styles from './styles.module.css';
 

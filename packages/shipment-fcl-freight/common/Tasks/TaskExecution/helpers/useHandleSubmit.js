@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 import { useContext, useState } from 'react';
@@ -437,7 +438,7 @@ function useHandleSubmit({
 						await submitShipmentMapping(rpaMappings);
 					}
 				} catch (err) {
-					console.log(err);
+					toastApiError(err);
 				}
 				// feedbacks to cogolens ends
 				refetch();

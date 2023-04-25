@@ -1,5 +1,6 @@
 // import useCreateShipmentMapping from '@cogo/business-modules/rpa/hooks/useCreateShipmentMapping';
 import { Toast, Button } from '@cogoport/components';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useScope } from '@cogoport/scope-select';
 import { useState, useEffect, useRef } from 'react';
@@ -56,7 +57,7 @@ function UploadHbl(props) {
 			// };
 			// await submitShipmentMapping(rpaMappings);
 		} catch (err) {
-			console.log(err);
+			toastApiError(err);
 		}
 		// feedbacks to cogolens ends
 		refetchDocs();

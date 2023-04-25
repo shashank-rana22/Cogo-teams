@@ -15,17 +15,7 @@ import styles from './styles.module.css';
 
 // const updateShipmentTriggerFunc = async (payload, trigger) => trigger({ data: payload });
 
-function EditRate({
-	// task = {},
-	// serviceList = [],
-	// primaryService = {},
-	// onCancel = () => {},
-	// shipment_data = {},
-	// timeLineRefetch = () => {},
-	// refetch = () => {},
-	// localService = '',
-	formattedRate = {},
-}) {
+function EditRate() {
 	// const editQuote = useEditQuote({
 	// 	shipmentData: shipment_data,
 	// 	task,
@@ -50,9 +40,6 @@ function EditRate({
 
 	// let serviceProviderName;
 	// let localServiceProviderName;
-
-	const formattedRateVal = formattedRate?.[formattedRate?.primary_service?.id];
-	console.log('format val', formattedRateVal);
 
 	// if (!isEmpty(formattedRateVal)) {
 	// 	serviceProviderName = formattedRateVal?.service_provider_id;
