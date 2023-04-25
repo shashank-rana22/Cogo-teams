@@ -210,13 +210,19 @@ function RightPanel(props) {
 			</div>
 
 			<div role="presentation" className={styles.change}>
+
 				<IcMCrossInCircle
 					height="24px"
 					width="24px"
 					cursor="pointer"
 					onClick={(e) => handleDelete(e, widget)}
 				/>
-				<IcMDuplicate height="24px" width="24px" cursor="pointer" onClick={(e) => handleCopy(e, widget)} />
+				<IcMDuplicate
+					height="24px"
+					width="24px"
+					cursor="pointer"
+					onClick={(e) => handleCopy(e, widget)}
+				/>
 			</div>
 		</div>
 	);

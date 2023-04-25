@@ -3,10 +3,9 @@
 	display: none;
 }	
 
-.element_Container {
-	padding: 16px;
+.element_container {
 	&:hover {
-		border: 1px solid red;
+		border: 1px solid #88cad1;
 		.change {
 			display: flex;
 			flex-direction: column;
@@ -18,4 +17,3 @@
 		}
 	}
 }
-
