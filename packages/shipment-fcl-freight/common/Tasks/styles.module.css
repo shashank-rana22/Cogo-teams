@@ -1,6 +1,6 @@
 .container {
-	padding: 16px 12px 14px;
 	min-height: 62vh;
+	padding: 16px 12px 14px;
 
 	& > div:not(:last-child) {
 		margin-bottom: 22px;

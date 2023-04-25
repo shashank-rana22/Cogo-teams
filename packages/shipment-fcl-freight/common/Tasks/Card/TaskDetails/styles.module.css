@@ -38,21 +38,21 @@
 
 .task_name {
 	margin-right: 20px;
+	margin-left: 4px;
 	font-weight: 600;
 	color: #313030;
 	white-space: break-spaces;
-	margin-left: 4px;
 }
 
 .deadline {
 	display: flex;
 	align-items: center;
+	padding: 2px 8px;
 	margin-right: 10px;
 	font-size: 12px;
 	font-weight: 600;
 	color: var(--color-primary-error-red-2);
-	background: #FFF1F3;
-	padding: 2px 8px;
+	background: #fff1f3;
 	border-radius: 16px;
 
 	& > svg {
@@ -64,11 +64,11 @@
 .completed {
 	display: flex;
 	align-items: center;
+	padding: 2px 8px;
 	font-size: 12px;
 	font-weight: 600;
-	padding: 2px 8px;
-	color: #027A48;
-	background: #ECFDF3;
+	color: #027a48;
+	background: #ecfdf3;
 	border-radius: 16px;
 
 	& > svg {
