@@ -1,39 +1,89 @@
-import { useState } from 'react';
-import { Resizable } from 'react-resizable';
-import 'react-resizable/css/styles.css';
+import React, { useRef } from 'react';
 
-function ListPages() {
-	const [state, setState] = useState({
-		width  : 500,
-		height : 200,
-	});
+import Resizer from './Resizer';
+import { Direction } from './Resizer/constants';
+import styles from './styles.module.css';
 
-	const onResize = (_, { size }) => {
-		setState({ width: size.width, height: size.height });
+function Panel({ children }) {
+	const panelRef = useRef(null);
+
+	const handleResize = (direction, movementX, movementY) => {
+		const panel = panelRef.current;
+		if (!panel) return;
+
+		const { width, height, x, y } = panel.getBoundingClientRect();
+
+		const resizeTop = () => {
+			panel.style.height = `${height - movementY}px`;
+			panel.style.top = `${y + movementY}px`;
+		};
+
+		const resizeRight = () => {
+			panel.style.width = `${width + movementX}px`;
+		};
+
+		const resizeBottom = () => {
+			panel.style.height = `${height + movementY}px`;
+		};
+
+		const resizeLeft = () => {
+			panel.style.width = `${width - movementX}px`;
+			panel.style.left = `${x + movementX}px`;
+		};
+
+		switch (direction) {
+			case Direction.TopLeft:
+				resizeTop();
+				resizeLeft();
+				break;
+
+			case Direction.Top:
+				resizeTop();
+				break;
+
+			case Direction.TopRight:
+				resizeTop();
+				resizeRight();
+				break;
+
+			case Direction.Right:
+				resizeRight();
+				break;
+
+			case Direction.BottomRight:
+				resizeBottom();
+				resizeRight();
+				break;
+
+			case Direction.Bottom:
+				resizeBottom();
+				break;
+
+			case Direction.BottomLeft:
+				resizeBottom();
+				resizeLeft();
+				break;
+
+			case Direction.Left:
+				resizeLeft();
+				break;
+
+			default:
+				break;
+		}
 	};
 
-	const { width, height } = state || {};
-
 	return (
-		<div>
-			<Resizable
-				axis="both"
-				minConstraints={[200, 200]}
-				height={height}
-				width={width}
-				onResize={onResize}
-			>
-				<div
-					style={{
-						width           : `${width}px`,
-						height          : `${height}px`,
-						backgroundColor : 'lightblue',
-					}}
-				>
-					<span>Welcome to Cogo Page Builder 😛🍻</span>
+		<div className={styles.panel} ref={panelRef}>
+			<div className={styles.panel__container}>
+				<Resizer onResize={handleResize} />
+
+				<div className={styles.panel__content}>
+					{children}
 				</div>
-			</Resizable>
+			</div>
 		</div>
 	);
 }
-export default ListPages;
+
+export default Panel;

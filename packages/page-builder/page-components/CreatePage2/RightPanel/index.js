@@ -162,7 +162,7 @@ function RightPanel(props) {
 		setSelectedRow({ ...widget, id, index });
 		setSelectedItem({ ...widget, id, index });
 
-		setChildId('');
+		// setChildId('');
 	};
 
 	return (
@@ -190,6 +190,8 @@ function RightPanel(props) {
 							childId={childId}
 							setChildId={setChildId}
 							setSelectedItem={setSelectedItem}
+							setParentComponentId={setParentComponentId}
+							setShowContentModal={setShowContentModal}
 						/>
 					)
 					: (
@@ -204,13 +206,15 @@ function RightPanel(props) {
 								selectedRow={selectedRow}
 								setSelectedItem={setSelectedItem}
 								index={index}
+								setChildId={setChildId}
+								setParentComponentId={setParentComponentId}
+								setShowContentModal={setShowContentModal}
 							/>
 						</div>
 					)}
 			</div>
 
 			<div role="presentation" className={styles.change}>
-
 				<IcMCrossInCircle
 					height="24px"
 					width="24px"

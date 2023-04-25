@@ -1,0 +1,63 @@
+.container {
+	padding: 0px 0 20px 0;
+	position: relative;
+	
+	 &:hover{
+		.change {
+			display: flex;
+			flex-direction: column;
+			color: #222;
+			position: absolute;
+			right: 0;
+			z-index: 2;	
+			top: 0;
+		}
+	 }
+	 
+	:global {
+		.slick-dots {
+			bottom: -28px;
+			display: flex !important;
+			align-items: center;
+			justify-content: center;
+
+			.slick-active {
+				width: 32px;
+				height: 10px;
+				background: #ee3425;
+				border-radius: 100px;
+				transition: width 0.3s ease-in-out;
+			}
+
+			li {
+				margin: 0;
+
+				&.slick-active button::before {
+					display: none;
+				}
+
+				button {
+					::before {
+						font-size: 10px;
+						color: #5936f0;
+						opacity: 0.3;
+					}
+				}
+
+				&.slick-active {
+					button {
+						::before {
+							opacity: 1;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+.change {
+	display: none;
+}	
+

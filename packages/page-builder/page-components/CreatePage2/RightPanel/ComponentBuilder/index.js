@@ -5,7 +5,17 @@ import RenderComponents from '../RenderComponent';
 
 import styles from './styles.module.css';
 
-function ComponentBuilder({ widget, components, setComponents, selectedRow, childId, setChildId, setSelectedItem }) {
+function ComponentBuilder({
+	widget,
+	components,
+	setComponents,
+	selectedRow,
+	childId,
+	setChildId,
+	setSelectedItem,
+	setParentComponentId,
+	setShowContentModal,
+}) {
 	const { children, style, id: componentId } = widget || {};
 	const { id: selectedRowId } = selectedRow || {};
 
@@ -14,7 +24,6 @@ function ComponentBuilder({ widget, components, setComponents, selectedRow, chil
 	if (isEmpty(children)) {
 		return (
 			<div className={styles.block_wrapper}>
-				{/* <BlockLoader /> */}
 				<div className={styles.loader_text}>
 					Drop here to add blocks
 				</div>
@@ -65,6 +74,9 @@ function ComponentBuilder({ widget, components, setComponents, selectedRow, chil
 											selectedRow={selectedRow}
 											setSelectedItem={setSelectedItem}
 											index={childrenIndex}
+											setChildId={setChildId}
+											setParentComponentId={setParentComponentId}
+											setShowContentModal={setShowContentModal}
 										/>
 									</div>
 								);
@@ -104,6 +116,9 @@ function ComponentBuilder({ widget, components, setComponents, selectedRow, chil
 								selectedRow={selectedRow}
 								setSelectedItem={setSelectedItem}
 								index={idx}
+								setChildId={setChildId}
+								setParentComponentId={setParentComponentId}
+								setShowContentModal={setShowContentModal}
 							/>
 						) }
 

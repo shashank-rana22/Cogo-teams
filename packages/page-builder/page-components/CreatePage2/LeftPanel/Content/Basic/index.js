@@ -22,8 +22,14 @@ function Basic(props) {
 
 	const { type } = selectedItem || {};
 
+	let leftPanelContent = contents;
+
+	if (componentType === 'child') {
+		leftPanelContent = (contents || []).filter((item) => item.type !== 'carousel');
+	}
+
 	const LeftPanelItems = useMemo(
-		() => (contents || []).map((item) => (
+		() => (leftPanelContent || []).map((item) => (
 			<Item
 				itemType={item.type}
 				content={item}
@@ -31,6 +37,7 @@ function Basic(props) {
 				onNewItemAdding={onNewItemAdding}
 			/>
 		)),
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[addNewItem, onNewItemAdding, selectedRow, parentComponentId],
 	);
 

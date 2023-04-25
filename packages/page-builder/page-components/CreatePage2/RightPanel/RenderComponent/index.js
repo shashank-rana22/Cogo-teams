@@ -1,4 +1,6 @@
+/* eslint-disable import/no-cycle */
 import ButtonComponent from '../../../../commons/widgets/ButtonComponent';
+import CarouselComponent from '../../../../commons/widgets/CarouselComponent';
 import FormComponent from '../../../../commons/widgets/FormComponent';
 import HtmlComponent from '../../../../commons/widgets/HtmlComponent';
 import ImageComponent from '../../../../commons/widgets/ImageComponent';
@@ -6,12 +8,13 @@ import TextComponent from '../../../../commons/widgets/TextComponent';
 import VideoComponent from '../../../../commons/widgets/VideoComponent';
 
 const componentMapping = {
-	text   : TextComponent,
-	button : ButtonComponent,
-	image  : ImageComponent,
-	video  : VideoComponent,
-	html   : HtmlComponent,
-	form   : FormComponent,
+	text     : TextComponent,
+	button   : ButtonComponent,
+	image    : ImageComponent,
+	video    : VideoComponent,
+	html     : HtmlComponent,
+	form     : FormComponent,
+	carousel : CarouselComponent,
 };
 
 function RenderComponents({
@@ -24,6 +27,9 @@ function RenderComponents({
 	selectedRow,
 	setSelectedItem,
 	index,
+	setChildId,
+	setParentComponentId,
+	setShowContentModal,
 }) {
 	const componentPropsMapping = {
 		text: {
@@ -76,6 +82,18 @@ function RenderComponents({
 			childId,
 			widget,
 		},
+
+		carousel: {
+			widget,
+			selectedRow,
+			components,
+			setComponents,
+			setChildId,
+			setSelectedItem,
+			childId,
+			setParentComponentId,
+			setShowContentModal,
+		},
 	};
 
 	const Component = componentMapping[componentType];
@@ -85,10 +103,9 @@ function RenderComponents({
 			key={elementId}
 			role="presentation"
 			onClick={() => {
-				console.log('widgetsssssssss ::', widget);
 				setSelectedItem({ ...widget, index });
 			}}
-			style={{ width: '100%', height: '100%', color: '#222' }}
+			style={{ width: '100%', height: '100%' }}
 		>
 			<Component key={componentType} {...(componentPropsMapping[componentType] || {})} />
 		</div>
