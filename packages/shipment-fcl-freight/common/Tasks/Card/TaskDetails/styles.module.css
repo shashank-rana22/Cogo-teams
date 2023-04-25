@@ -23,7 +23,7 @@
 
 .icon {
 	margin-top: 2px;
-	margin-right: 16px;
+	margin-right: 8px;
 }
 
 .task_and_icon {
@@ -37,11 +37,11 @@
 }
 
 .task_name {
-	margin-right: 10px;
-	font-size: 16px;
+	margin-right: 20px;
 	font-weight: 600;
-	color: #000;
+	color: #313030;
 	white-space: break-spaces;
+	margin-left: 4px;
 }
 
 .deadline {
@@ -51,6 +51,9 @@
 	font-size: 12px;
 	font-weight: 600;
 	color: var(--color-primary-error-red-2);
+	background: #FFF1F3;
+	padding: 2px 8px;
+	border-radius: 16px;
 
 	& > svg {
 		width: 16px;
@@ -63,10 +66,20 @@
 	align-items: center;
 	font-size: 12px;
 	font-weight: 600;
-	color: var(--color-accent-orange-2);
+	padding: 2px 8px;
+	color: #027A48;
+	background: #ECFDF3;
+	border-radius: 16px;
 
 	& > svg {
 		width: 16px;
 		height: 16px;
 	}
+}
+
+.details {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	margin-bottom: 4px;
 }

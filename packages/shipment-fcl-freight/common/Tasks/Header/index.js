@@ -37,6 +37,7 @@ function Header({
 							onChange={() => setHideCompletedTasks((prevVal) => !prevVal)}
 						/>
 					</div>
+
 					<div className={styles.toggle_container}>
 						<div style={{ marginTop: '12px' }}>Show only my tasks</div>
 
