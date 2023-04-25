@@ -31,7 +31,7 @@ function Basic(props) {
 				onNewItemAdding={onNewItemAdding}
 			/>
 		)),
-		[addNewItem, onNewItemAdding, selectedRow],
+		[addNewItem, onNewItemAdding, selectedRow, parentComponentId],
 	);
 
 	if (type === 'html' && componentType !== 'child') {

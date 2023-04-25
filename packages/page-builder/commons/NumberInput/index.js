@@ -1,59 +1,23 @@
 import { Input, Button } from '@cogoport/components';
 import { IcMMinus, IcMPlus } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 import styles from './styles.module.css';
 
 function NumberInput(props) {
-	const { NumberKey, component, setComponent, selectedRow } = props;
+	const {
+		NumberKey,
+		component,
+		selectedItem,
+		isRootComponent,
+		handleChange,
+	} = props;
 
-	const [number, setNumber] = useState(component.style?.[NumberKey] || 0);
-
-	const isRootComponent = isEmpty(selectedRow);
-
-	const handleChange = useCallback(
-		(value) => {
-			if (isRootComponent) {
-				setComponent((prev) => ({
-					...prev,
-					style: {
-						...component.style,
-						[NumberKey]: value,
-					},
-				}));
-			} else {
-				const { id: selectedRowId } = selectedRow;
-
-				const selectedComponent = component.layouts.find((layout) => layout.id === selectedRowId);
-
-				const modifiedComponent = {
-					...selectedComponent,
-					style: {
-						...selectedComponent.style,
-						[NumberKey]: value,
-					},
-				};
-
-				setComponent((prev) => ({
-					...prev,
-					layouts: prev.layouts.map((layout) => {
-						if (layout.id === selectedRowId) {
-							return modifiedComponent;
-						}
-						return layout;
-					}),
-				}));
-			}
-
-			setNumber(value);
-		},
-		[component.layouts, selectedRow, setComponent, NumberKey, component.style, isRootComponent],
-	);
+	const numberValue = isRootComponent ? component.style?.[NumberKey] : selectedItem.style?.[NumberKey];
 
 	const handleInputChange = useCallback(
 		(type) => {
-			let modifiedValue = number;
+			let modifiedValue = numberValue ? Number(numberValue) : 0;
 
 			if (type === 'add') {
 				modifiedValue += 1;
@@ -61,17 +25,17 @@ function NumberInput(props) {
 				modifiedValue -= 1;
 			}
 
-			handleChange(modifiedValue);
+			handleChange(NumberKey, modifiedValue);
 		},
-		[handleChange, number],
+		[handleChange, NumberKey, numberValue],
 	);
 
 	return (
 		<Input
 			size="sm"
 			placeholder="0"
-			value={number}
-			onChange={(val) => handleChange(Number(val))}
+			value={numberValue}
+			onChange={(val) => handleChange(NumberKey, Number(val))}
 			className={styles.ui_input_container}
 			prefix={(
 				<Button
@@ -94,7 +58,6 @@ function NumberInput(props) {
 				</Button>
 			)}
 		/>
-
 	);
 }
 

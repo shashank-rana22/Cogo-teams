@@ -20,7 +20,6 @@ function RightPanel(props) {
 		moveItem,
 		isNewItemAdding,
 		onNewAddingItemProps,
-		onClick,
 		setSelectedRow,
 		isSelected,
 		selectedRow,
@@ -105,6 +104,7 @@ function RightPanel(props) {
 		setComponents(() => ({ ...data }));
 
 		setSelectedRow({});
+		setSelectedItem({});
 	};
 
 	const handleSubmitClick = ({ childrenId, parentId }) => {
@@ -155,14 +155,22 @@ function RightPanel(props) {
 
 	const opacity = isNewItemAdding && !id ? '0.3' : '1';
 
-	const border = isSelected && '1px solid #88cad1';
+	const border = isSelected && '1px solid red';
+
+	const handleClick = (e) => {
+		e.stopPropagation();
+		setSelectedRow({ ...widget, id, index });
+		setSelectedItem({ ...widget, id, index });
+
+		setChildId('');
+	};
 
 	return (
 		<div
 			role="presentation"
 			ref={itemRef}
 			data-handler-id={handlerId}
-			onClick={onClick}
+			onClick={(e) => handleClick(e)}
 			key={elementId}
 			style={{
 				opacity,
@@ -185,29 +193,37 @@ function RightPanel(props) {
 						/>
 					)
 					: (
-						<RenderComponents
-							componentType={type}
-							widget={widget}
-							components={components}
-							setComponents={setComponents}
-							elementId={elementId}
-							childId={childId}
-							selectedRow={selectedRow}
-							setSelectedItem={setSelectedItem}
-							index={index}
-							setChildId={setChildId}
-						/>
+						<div style={widget.style}>
+							<RenderComponents
+								componentType={type}
+								widget={widget}
+								components={components}
+								setComponents={setComponents}
+								elementId={elementId}
+								childId={childId}
+								selectedRow={selectedRow}
+								setSelectedItem={setSelectedItem}
+								index={index}
+								setChildId={setChildId}
+							/>
+						</div>
 					)}
 			</div>
 
 			<div role="presentation" className={styles.change}>
+
 				<IcMCrossInCircle
 					height="24px"
 					width="24px"
 					cursor="pointer"
 					onClick={(e) => handleDelete(e, widget)}
 				/>
-				<IcMDuplicate height="24px" width="24px" cursor="pointer" onClick={(e) => handleCopy(e, widget)} />
+				<IcMDuplicate
+					height="24px"
+					width="24px"
+					cursor="pointer"
+					onClick={(e) => handleCopy(e, widget)}
+				/>
 			</div>
 		</div>
 	);

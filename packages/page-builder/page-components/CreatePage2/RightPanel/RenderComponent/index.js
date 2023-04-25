@@ -68,8 +68,9 @@ function RenderComponents({
 		},
 
 		html: {
-			key  : elementId,
-			html : widget.content,
+			key   : elementId,
+			style : widget.style,
+			html  : widget.content,
 		},
 
 		form: {
@@ -98,7 +99,10 @@ function RenderComponents({
 		<div
 			key={elementId}
 			role="presentation"
-			onClick={() => setSelectedItem({ ...widget, index })}
+			onClick={() => {
+				console.log('widgetsssssssss ::', widget);
+				setSelectedItem({ ...widget, index });
+			}}
 			style={{ width: '100%', height: '100%', color: '#222' }}
 		>
 			<Component key={componentType} {...(componentPropsMapping[componentType] || {})} />

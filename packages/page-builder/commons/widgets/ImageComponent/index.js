@@ -24,9 +24,7 @@ function ImageComponent(props) {
 	return (
 		<div>
 			{content ? (
-				<div
-					role="presentation"
-				>
+				<div>
 					<img width="100%" src={content} alt="upload-img" />
 				</div>
 			) : (

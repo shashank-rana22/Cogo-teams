@@ -91,6 +91,8 @@ function DNDComponent() {
 		setShowContentModal(false);
 	};
 
+	console.log('sdfsdfsdfsdf ::', selectedItem);
+
 	return (
 		<div>
 			<section className={styles.heading_container}>
@@ -115,6 +117,7 @@ function DNDComponent() {
 							parentComponentId={parentComponentId}
 							setParentComponentId={setParentComponentId}
 							selectedItem={selectedItem}
+							setSelectedItem={setSelectedItem}
 						/>
 					</div>
 				)}
@@ -158,13 +161,13 @@ function DNDComponent() {
 							addNewItem={handleAddNewItem}
 							onNewItemAdding={setNewItemAdding}
 							selectedRow={selectedRow}
+							selectedItem={selectedItem}
 							setSelectedRow={setSelectedRow}
 							isNewItemAdding={isNewItemAdding}
 							parentComponentId={parentComponentId}
 							setShowContentModal={setShowContentModal}
 							setParentComponentId={setParentComponentId}
 							setSelectedItem={setSelectedItem}
-
 						/>
 					</div>
 
@@ -188,6 +191,10 @@ function DNDComponent() {
 						selectedRow={selectedRow}
 						componentType="child"
 						selectedItem={selectedItem}
+						setParentComponentId={setParentComponentId}
+						setShowContentModal={setShowContentModal}
+						component={component}
+						setComponent={setComponent}
 					/>
 
 				</Modal>

@@ -1,61 +1,17 @@
 import { Input } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
-import React, { useState, useCallback } from 'react';
 
 import styles from './styles.module.css';
 
 function ColorInput(props) {
-	const { colorKey, component, setComponent, selectedRow } = props;
+	const {
+		colorKey,
+		component,
+		selectedItem,
+		isRootComponent,
+		handleChange,
+	} = props;
 
-	const [color, setColor] = useState(selectedRow.style?.[colorKey] || component.style?.[colorKey] || '#ffffff');
-
-	const isRootComponent = isEmpty(selectedRow);
-
-	const handleChange = useCallback(
-		(key, value) => {
-			if (isRootComponent) {
-				setComponent((prev) => ({
-					...prev,
-					style: {
-						...component.style,
-						[key]: value,
-					},
-				}));
-			} else {
-				const { id: selectedRowId } = selectedRow;
-
-				const selectedComponent = component.layouts.find((layout) => layout.id === selectedRowId);
-
-				const modifiedComponent = {
-					...selectedComponent,
-					style: {
-						...selectedComponent.style,
-						[key]: value,
-					},
-				};
-
-				setComponent((prev) => ({
-					...prev,
-					layouts: prev.layouts.map((layout) => {
-						if (layout.id === selectedRowId) {
-							return modifiedComponent;
-						}
-						return layout;
-					}),
-				}));
-			}
-
-			setColor(value);
-		},
-		[component.layouts, selectedRow, setComponent, component.style, isRootComponent],
-	);
-
-	const handleInputChange = useCallback(
-		(val, key) => {
-			handleChange(key, val);
-		},
-		[handleChange],
-	);
+	const color = isRootComponent ? component.style?.[colorKey] : selectedItem.style?.[colorKey];
 
 	return (
 		<div className={styles.color_input}>
@@ -64,8 +20,8 @@ function ColorInput(props) {
 					className={`${styles.color_input} ${styles.ui_input_container}`}
 					size="sm"
 					type="color"
-					value={color}
-					onChange={(value) => handleInputChange(value, colorKey)}
+					value={color || '#ffffff'}
+					onChange={(value) => handleChange(colorKey, value)}
 				/>
 			</div>
 			<div>
@@ -73,9 +29,9 @@ function ColorInput(props) {
 					className={styles.hex_input}
 					size="sm"
 					type="text"
-					value={color}
+					value={color || '#ffffff'}
 					placeholder="Small"
-					onChange={(value) => handleInputChange(value, colorKey)}
+					onChange={(value) => handleChange(colorKey, value)}
 				/>
 			</div>
 		</div>

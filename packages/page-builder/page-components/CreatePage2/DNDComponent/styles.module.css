@@ -19,19 +19,18 @@
   .left_panel {
     width: 30%;
     padding: 12px;
+    background-color: #ffffff;
   }
   
   .right_panel {
-    background-color: #fff;
+    background-color: #f9f9f9;
     min-height: 100vh;
   }
   
   .header {
       display: flex;
       justify-content: space-between;
-      padding: 12px;
-      border-bottom: 1px solid #ee3425;
-      
+      padding: 12px; 
   }
   
   .button_container {

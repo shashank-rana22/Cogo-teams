@@ -18,6 +18,7 @@ function LeftPanel(props) {
 		parentComponentId,
 		setParentComponentId,
 		selectedItem,
+		setSelectedItem,
 	} = props;
 
 	return (
@@ -57,6 +58,7 @@ function LeftPanel(props) {
 				<Settings
 					component={component}
 					selectedRow={selectedRow}
+					selectedItem={selectedItem}
 					setComponent={setComponent}
 					showContentModal={showContentModal}
 					setShowContentModal={setShowContentModal}
@@ -64,6 +66,7 @@ function LeftPanel(props) {
 					setParentComponentId={setParentComponentId}
 					addNewItem={addNewItem}
 					onNewItemAdding={onNewItemAdding}
+					setSelectedItem={setSelectedItem}
 				/>
 			</TabPanel>
 		</Tabs>

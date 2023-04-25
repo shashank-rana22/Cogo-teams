@@ -1,7 +1,8 @@
 import { Accordion, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 
+import BoxModal from '../../../../commons/BoxModal';
 import UploadImageModal from '../../../../commons/UploadImageModal';
 import buttonSettings from '../../../../configurations/button-settings';
 import containerSettings from '../../../../configurations/container-settings';
@@ -17,14 +18,52 @@ const settingsMapping = {
 	button : buttonSettings,
 };
 
+function updateSelectedElement(key, value, children, selectedRowId, selectedItemId) {
+	return children.map((child) => {
+		if (['text', 'button', 'image', 'form'].includes(child.type) && child.id === selectedItemId) {
+			return {
+				...child,
+				style: {
+					...child.style,
+					[key]: value,
+				},
+			};
+		}
+
+		if (child.type === 'container' && child.id === selectedRowId) {
+			if (child.id === selectedItemId) {
+				return {
+					...child,
+					style: {
+						...child.style,
+						[key]: value,
+					},
+				};
+			}
+
+			return {
+				...child,
+				children: updateSelectedElement(key, value, child.children, selectedRowId, selectedItemId),
+			};
+		}
+
+		return child;
+	});
+}
+
 function Settings(props) {
-	const { component, setComponent, selectedRow } = props;
+	const { component, setComponent, selectedItem, selectedRow, setSelectedItem } = props;
 
 	const [showUploadModal, setShowUploadModal] = useState(false);
 
-	const isRootComponent = isEmpty(selectedRow);
+	console.log('selectedItemsss ::', selectedItem);
+	console.log('selectedRowssss ::', selectedRow);
 
-	const { type = '' } = selectedRow;
+	const [defaultStyles, setDefaultStyles] = useState([]);
+
+	const isRootComponent = isEmpty(selectedItem);
+
+	const { type = '' } = selectedItem;
 
 	const settings = settingsMapping[type] || containerSettings;
 
@@ -39,64 +78,80 @@ function Settings(props) {
 					},
 				}));
 			} else {
-				const { id: selectedRowId } = selectedRow;
+				const { id: selectedItemId } = selectedItem;
+				const { id : selectedRowId } = selectedRow;
 
-				const selectedComponent = component.layouts.find((layout) => layout.id === selectedRowId);
-
-				const modifiedComponent = {
-					...selectedComponent,
-					style: {
-						...selectedComponent.style,
-						[key]: value,
-					},
-				};
+				const modifiedLayouts = updateSelectedElement(
+					key,
+					value,
+					component.layouts,
+					selectedRowId,
+					selectedItemId,
+				);
 
 				setComponent((prev) => ({
 					...prev,
-					layouts: prev.layouts.map((layout) => {
-						if (layout.id === selectedRowId) {
-							return modifiedComponent;
-						}
-						return layout;
-					}),
+					layouts: modifiedLayouts,
+				}));
+
+				setSelectedItem((prev) => ({
+					...prev,
+					style: {
+						...prev.style,
+						[key]: value,
+					},
 				}));
 			}
 		},
-		[component.layouts, selectedRow, setComponent, component.style, isRootComponent],
-	);
-
-	const handleUploadChange = useCallback(
-		(value, key) => {
-			handleChange(key, value);
-		},
-		[handleChange],
+		[
+			selectedRow,
+			setSelectedItem,
+			component.layouts,
+			selectedItem,
+			setComponent,
+			component.style,
+			isRootComponent,
+		],
 	);
 
 	return (
 		<section className={styles.container}>
 			<div>
-				{settings.map((setting) => (
-
+				{(settings || []).map((setting) => (
 					<Accordion
 						key={setting.type}
 						className={styles.ui_accordion_content}
 						type="text"
 						title={setting.type}
 					>
-
 						<Card
 							setComponent={setComponent}
 							component={component}
-							selectedRow={selectedRow}
+							selectedItem={selectedItem}
 							handleChange={handleChange}
 							setShowUploadModal={setShowUploadModal}
 							setting={setting}
 							isRootComponent={isRootComponent}
+							defaultStyles={defaultStyles}
+							setDefaultStyles={setDefaultStyles}
+							setSelectedItem={setSelectedItem}
 						/>
 
 					</Accordion>
-
 				))}
+			</div>
+
+			<div>
+				<Accordion type="text" title="Margin & Padding">
+					<BoxModal
+						setComponent={setComponent}
+						component={component}
+						selectedItem={selectedItem}
+						isRootComponent={isRootComponent}
+						setSelectedItem={setSelectedItem}
+						handleChange={handleChange}
+					/>
+				</Accordion>
 			</div>
 
 			{showUploadModal && (
@@ -111,7 +166,9 @@ function Settings(props) {
 						showUploadModal={showUploadModal}
 						component={component}
 						setComponent={setComponent}
-						handleUploadChange={handleUploadChange}
+						handleChange={handleChange}
+						defaultStyles={defaultStyles}
+						setDefaultStyles={setDefaultStyles}
 					/>
 				</Modal>
 			)}

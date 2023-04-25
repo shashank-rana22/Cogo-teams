@@ -1,9 +1,9 @@
 import { Select, Button } from '@cogoport/components';
 import { IcMDelete, IcMUpload } from '@cogoport/icons-react';
-import React, { useCallback } from 'react';
 
 import ColorInput from '../../../../../commons/ColorInput';
 import NumberInput from '../../../../../commons/NumberInput';
+import ProgressBar from '../../../../../commons/ProgressBar';
 
 import styles from './styles.module.css';
 
@@ -22,25 +22,19 @@ function Card(props) {
 	const {
 		setComponent,
 		component,
-		selectedRow,
+		selectedItem,
 		handleChange,
 		setShowUploadModal,
 		setting,
 		isRootComponent,
+		setSelectedItem,
 	} = props;
 
-	const selectedComponent = isRootComponent ? component : selectedRow;
+	const selectedComponent = isRootComponent ? component : selectedItem;
 
 	const isBackgroundImagePresent = Object.keys(selectedComponent.style).includes(
 		'background-image',
 	) && selectedComponent.style['background-image'] !== '';
-
-	const handleSelectChange = useCallback(
-		(value, key) => {
-			handleChange(key, value);
-		},
-		[handleChange],
-	);
 
 	const handleImageClick = (key, type) => {
 		if (isBackgroundImagePresent && type === 'remove') {
@@ -51,7 +45,7 @@ function Card(props) {
 	};
 
 	const modifiedImageUrl = extractUrlString(
-		selectedComponent.style?.['background-image'],
+		selectedItem.style?.['background-image'],
 	);
 
 	return (
@@ -63,9 +57,10 @@ function Card(props) {
 				const MAPPING = {
 					select: (
 						<Select
-							value={component.style[key]}
-							onChange={(value) => handleSelectChange(value, key)}
-							style={{ width: '120px' }}
+							size="sm"
+							value={selectedComponent.style[key]}
+							onChange={(value) => handleChange(key, value)}
+							style={{ width: '140px' }}
 							options={options}
 							placeholder="Select"
 						/>
@@ -76,8 +71,22 @@ function Card(props) {
 							colorKey={key}
 							setComponent={setComponent}
 							component={component}
-							selectedRow={selectedRow}
+							selectedItem={selectedItem}
+							isRootComponent={isRootComponent}
+							setSelectedItem={setSelectedItem}
+							handleChange={handleChange}
 						/>
+					),
+					range: (
+
+						<ProgressBar
+							imageKey={key}
+							handleChange={handleChange}
+							component={component}
+							selectedItem={selectedItem}
+							isRootComponent={isRootComponent}
+						/>
+
 					),
 					upload: (
 						<div className={styles.background_image}>
@@ -136,7 +145,10 @@ function Card(props) {
 							NumberKey={key}
 							setComponent={setComponent}
 							component={component}
-							selectedRow={selectedRow}
+							selectedItem={selectedItem}
+							isRootComponent={isRootComponent}
+							setSelectedItem={setSelectedItem}
+							handleChange={handleChange}
 						/>
 					),
 				};
