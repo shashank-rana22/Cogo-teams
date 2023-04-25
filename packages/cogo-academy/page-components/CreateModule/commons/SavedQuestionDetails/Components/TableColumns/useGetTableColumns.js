@@ -70,15 +70,13 @@ const useGetTableColumns = ({
 			id       : 'answer_type',
 			accessor : (item) => (
 				<div>
-					{
-					item?.question_type !== 'subjective' && (
+					{item?.question_type !== 'subjective' && (
 						<section>
 							{item?.question_type !== 'case_study'
 								? startCase(item?.question_type)
 								: <CaseAnswerType item={item} caseToShow={caseToShow} />}
 						</section>
-					)
-				}
+					)}
 				</div>
 
 			),
