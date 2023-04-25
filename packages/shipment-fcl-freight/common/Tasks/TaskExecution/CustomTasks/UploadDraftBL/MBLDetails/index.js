@@ -5,7 +5,7 @@ import Form from '../UploadHbl/form';
 
 import getControls from './controls';
 
-function MBLDetails({ task = {}, primaryService = {}, ref = () => {}, selectedMail = {} }) {
+function MBLDetails({ primaryService = {}, ref = () => {}, selectedMail = {} }) {
 	let newSummary = '';
 	if (selectedMail?.formatted?.length) {
 		newSummary = selectedMail?.formatted[0];

@@ -12,7 +12,7 @@ function Child({
 	index,
 	name,
 	remove,
-	showElements = {},
+	// showElements = {},
 	showDeleteButton = true,
 	noDeleteButtonTill = 0,
 	field,

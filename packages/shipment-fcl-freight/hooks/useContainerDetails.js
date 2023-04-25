@@ -153,7 +153,6 @@ const useContainerDetails = ({
 	};
 
 	const onSubmit = async (data) => {
-		console.log({ data });
 		const formattedData = formatData(
 			data.container,
 			apis_data,

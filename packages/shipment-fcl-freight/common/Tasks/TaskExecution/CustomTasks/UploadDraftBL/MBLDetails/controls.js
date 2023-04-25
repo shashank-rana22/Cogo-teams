@@ -38,9 +38,10 @@ const controls = ({ data = {} }) => {
 			uploadIcon    : 'ic-upload',
 			document_type : 'draft_bill_of_ladiing',
 			label         : 'Document URl',
-			accept        : 'image/*,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-			uploadType    : 'aws',
-			validations   : [
+			accept        : 'image/*,.pdf,.doc,.docx,application/msword,'
+			+ 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+			uploadType  : 'aws',
+			validations : [
 				{
 					type    : 'required',
 					message : 'document is required',

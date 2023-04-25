@@ -1,6 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
 import { RadioGroupController, useForm } from '@cogoport/forms';
-import React from 'react';
 
 import useUpdateShipmentPendingTask from '../../../../../hooks/useUpdateShipmentPendingTask';
 

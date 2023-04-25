@@ -48,12 +48,12 @@ function UploadHbl(props) {
 		await createShipmentDocAPI.trigger({ data: body });
 		// feedbacks to cogolens starts
 		try {
-			const rpaMappings = {
-				cogo_shipment_id: data?.shipment_id,
-				cogo_shipment_serial_no:
-					summary?.shipment_serial_id || summary.serial_id,
-				bill_of_lading: values?.document_number,
-			};
+			// const rpaMappings = {
+			// 	cogo_shipment_id: data?.shipment_id,
+			// 	cogo_shipment_serial_no:
+			// 		summary?.shipment_serial_id || summary.serial_id,
+			// 	bill_of_lading: values?.document_number,
+			// };
 			// await submitShipmentMapping(rpaMappings);
 		} catch (err) {
 			console.log(err);
@@ -89,7 +89,7 @@ function UploadHbl(props) {
 			newUrls[i] = `${item?.document_url}`;
 		});
 		setUrls(newUrls);
-	}, [docs]);
+	}, [docs, urls]);
 
 	return (
 		<div>

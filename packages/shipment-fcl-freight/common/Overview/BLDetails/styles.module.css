@@ -5,10 +5,10 @@
 	background-color: #f6f5fe;
 
 	:global {
-		.ui_accordion_content{
-			background-color: #ffffff !important;
-			border-top: 1px solid #E0E0E0 !important;
-    		border-radius: initial;
+		.ui_accordion_content {
+			background-color: #fff !important;
+			border-top: 1px solid #e0e0e0 !important;
+			border-radius: initial;
 		}
 	}
 }
@@ -18,10 +18,10 @@
 	padding-left: 15px;
 	font-size: 16px;
 	font-weight: 600;
+	color: #4f4f4f;
 	background: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 10 rgb(0 0 0 / 20%);
-	color: #4F4F4F;
 }
 
 .button_container {
@@ -41,7 +41,7 @@
 	font-size: 16px;
 	font-weight: 600;
 	line-height: 19px;
-	color: #4F4F4F;
+	color: #4f4f4f;
 	white-space: nowrap;
 
 	.bl-count {
@@ -63,12 +63,12 @@
 	padding: 20px 5px 10px;
 
 	:global {
-		.ui_accordion_container{
-			background: #F3FAFA !important;
+		.ui_accordion_container {
+			background: #f3fafa !important;
 		}
 
-		.ui_accordion_header{
-			background: #F3FAFA !important;
+		.ui_accordion_header {
+			background: #f3fafa !important;
 		}
 	}
 }

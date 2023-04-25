@@ -26,3 +26,12 @@
 .loading {
 	padding-top: 14px;
 }
+
+.top_header_container {
+	display: flex;
+	align-items: center;
+}
+
+.version {
+	margin-right: 10px;
+}

@@ -1,8 +1,8 @@
-import { Toast } from '@cogoport/components';
+// import { Toast } from '@cogoport/components';
 // import { useFormCogo } from '@cogoport/front/hooks';
-import { useRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+// import { useRequest } from '@cogoport/request';
+// import { isEmpty } from '@cogoport/utils';
+// import { useState } from 'react';
 
 // import FormLayout from '../../../../../commons/Layout';
 // import UpdateQuotation from '../BookingNote/UpdateQuotation/index.js';
@@ -13,17 +13,17 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-const updateShipmentTriggerFunc = async (payload, trigger) => trigger({ data: payload });
+// const updateShipmentTriggerFunc = async (payload, trigger) => trigger({ data: payload });
 
 function EditRate({
-	task = {},
-	serviceList = [],
-	primaryService = {},
-	onCancel = () => {},
-	shipment_data = {},
-	timeLineRefetch = () => {},
-	refetch = () => {},
-	localService = '',
+	// task = {},
+	// serviceList = [],
+	// primaryService = {},
+	// onCancel = () => {},
+	// shipment_data = {},
+	// timeLineRefetch = () => {},
+	// refetch = () => {},
+	// localService = '',
 	formattedRate = {},
 }) {
 	// const editQuote = useEditQuote({
@@ -48,10 +48,11 @@ function EditRate({
 	// 	subsidiaryService,
 	// });
 
-	let serviceProviderName;
-	let localServiceProviderName;
+	// let serviceProviderName;
+	// let localServiceProviderName;
 
 	const formattedRateVal = formattedRate?.[formattedRate?.primary_service?.id];
+	console.log('format val', formattedRateVal);
 
 	// if (!isEmpty(formattedRateVal)) {
 	// 	serviceProviderName = formattedRateVal?.service_provider_id;

@@ -49,7 +49,8 @@ const controls = (data) => [
 				uploadIcon    : 'ic-upload',
 				document_type : data.document_type,
 				accept:
-					'image/*,.pdf,.doc,.docx,.xlsx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+					'image/*,.pdf,.doc,.docx,.xlsx,application/msword,'
+					+ 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 				uploadType : 'aws',
 				rules      : { required: { value: true, message: 'Document is required' } },
 			},

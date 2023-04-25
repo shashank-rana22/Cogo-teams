@@ -14,7 +14,9 @@ function useListTasks({
 
 	const user_id = profile?.user?.id;
 
-	const showTaskFilters = { [`${activeStakeholder}_id`]: user_id };
+	const stakeholder = activeStakeholder === 'booking_desk' ? 'service_ops' : activeStakeholder;
+
+	const showTaskFilters = { [`${stakeholder}_id`]: user_id };
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'fcl_freight/list_tasks',
