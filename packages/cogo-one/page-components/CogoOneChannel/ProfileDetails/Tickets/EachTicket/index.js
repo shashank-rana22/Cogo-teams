@@ -10,7 +10,7 @@ function EachTicket({
 	createTicketActivity = () => {},
 }) {
 	const {
-		Data: { InvoiceNumber = 0, Message = '' } = {},
+		Data: { InvoiceNumber = 0, Message = '', ShipmentId = 0 } = {},
 		CreatedAt = '',
 		TicketActivityDescription = '',
 		Priority = '',
@@ -51,6 +51,15 @@ function EachTicket({
 						>
 							Invoice ID:
 							<span>{InvoiceNumber}</span>
+						</div>
+					) : null}
+					{ShipmentId ? (
+						<div
+							className={cl`${styles.details_div} 
+							${Status === 'closed' ? styles.closed_details : ''}`}
+						>
+							Shipment ID:
+							<span>{ShipmentId}</span>
 						</div>
 					) : null}
 				</div>
