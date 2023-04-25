@@ -9,7 +9,6 @@ const injectValues = (
 	stepConfig,
 ) => {
 	const controls = populatedControls || [];
-	console.log('controls', controls);
 	if (task.task === 'upload_si') {
 		// controls[0].value = [
 		// 	{
@@ -46,7 +45,6 @@ const injectValues = (
 		task.task === 'upload_draft_bill_of_lading'
 		&& stepConfig?.name === shipment_data.bl_category
 	) {
-		console.log('controls', controls);
 		// (controls || []).forEach((control, index) => {
 		// 	if (control.type === 'fieldArray') {
 		// 		controls[index].value = Array(shipment_data.bls_count || 1)

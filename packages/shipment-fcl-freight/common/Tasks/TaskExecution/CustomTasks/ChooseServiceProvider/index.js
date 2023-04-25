@@ -1,3 +1,5 @@
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
+
 import useListShipmentBookingConfirmationPreferences
 	from '../../../../../hooks/useListShipmentBookingConfirmationPreferences';
 import useUpdateShipmentPendingTask from '../../../../../hooks/useUpdateShipmentPendingTask';
@@ -62,7 +64,7 @@ function ChooseServiceProvider({
 			onCancel();
 			refetch();
 		} catch (err) {
-			console.log(err);
+			toastApiError(err);
 		}
 	};
 

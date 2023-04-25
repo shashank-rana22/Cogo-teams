@@ -2,9 +2,6 @@
 
 const populateControls = (
 	controls,
-) => {
-	console.log('controls', controls);
-	return controls;
-};
+) => controls;
 
 export default populateControls;
