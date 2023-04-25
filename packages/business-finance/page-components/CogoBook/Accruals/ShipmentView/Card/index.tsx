@@ -33,7 +33,7 @@ function Card({
 	const [moreFilter, setMoreFilter] = useState(false);
 	const [profitNumber, setProfitNumber] = useState('');
 
-	const { jobState, profitType, range, profitPercent } = filters || {};
+	const { jobState, range, profitPercent } = filters || {};
 
 	const handleSelectChange = (val:string) => {
 		setFilters((prev) => ({ ...prev, service: val }));
@@ -256,7 +256,7 @@ function Card({
 						themeType="secondary"
 					>
 						+ More Filters
-						{ jobState || profitType || range || profitPercent ? <div className={styles.dot} /> : null}
+						{ jobState  || range || profitPercent ? <div className={styles.dot} /> : null}
 					</Button>
 				</Popover>
 				<Button

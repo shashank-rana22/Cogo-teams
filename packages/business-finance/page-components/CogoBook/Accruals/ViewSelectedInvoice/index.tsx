@@ -60,7 +60,7 @@ function ViewSelectedInvoice() {
 		const {
 			sellQuotation = '', buyQuotation = '', quotationProfit = '',
 			quotationMargin = '', bookingType = '', buyQuotationCurrency = '',
-			sellQuotationCurrency = '',
+			sellQuotationCurrency = '',incomeCurrency='',
 		} = itemData || {};
 
 		return (
@@ -83,10 +83,10 @@ function ViewSelectedInvoice() {
 				<div>
 					Margin :
 					{' '}
-					{quotationProfit || '0'}
+					{getFormattedPrice(quotationProfit, incomeCurrency) || '-' }
 					{' '}
 					(
-					{quotationMargin || '0'}
+					{Number(quotationMargin || 0)?.toFixed(2) || '0'}
 					%)
 				</div>
 				<div>

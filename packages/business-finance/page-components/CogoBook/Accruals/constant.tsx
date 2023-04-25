@@ -466,15 +466,11 @@ export const column = ({
 		accessor : 'purchase_invoice_amount',
 		id       : 'purchase_invoice_amount',
 		Cell     : ({ row: { original } }) => {
-			const {
-				expenseBooked = '', expenseCurrency = '',
-			} = original || {}; return (
+			const {expenseBooked = '', expenseCurrency = ''} = original || {}; 
+			return (
 				<>
-					{' '}
 					<span>
-						{' '}
 						{ getFormattedPrice(expenseBooked, expenseCurrency)}
-						{' '}
 					</span>
 				</>
 			);
@@ -484,8 +480,8 @@ export const column = ({
 		accessor : 'adjusted_expense',
 		id       : 'adjusted_expense',
 		Cell     : ({ row: { original } }) => {
-			const { expenseAccrued = {} } = original || {};
-			return <span>{ expenseAccrued || '----' }</span>;
+			const { expenseAccrued = {},expenseCurrency } = original || {};
+			return <span>{ getFormattedPrice(expenseAccrued, expenseCurrency) || '-' }</span>;
 		},
 
 	}, {
@@ -509,8 +505,8 @@ export const column = ({
 		accessor : 'adjusted_income',
 		id       : 'adjusted_income',
 		Cell     : ({ row: { original } }) => {
-			const { incomeAccrued = {} } = original || {};
-			return <span>{ incomeAccrued || '----' }</span>;
+			const { incomeAccrued = {},incomeCurrency } = original || {};
+			return <span>{ getFormattedPrice(incomeAccrued, incomeCurrency) || '-' }</span>;
 		},
 	}, {
 		Header: () => (
@@ -539,19 +535,12 @@ export const column = ({
 				} if (checkNumber(profit) === 'negative') { return styles.profit_color; } return null;
 			} return (
 				<>
-					{' '}
-					<div>
-						{' '}
-						{profitPercentage ? `${profitPercentage?.toFixed(2)}%` : '---'}
-						{' '}
-					</div>
-					{' '}
 					<span className={renderClassName()}>
-						{' '}
 						{getFormattedPrice(profit, expenseCurrency) || '-' }
-						{' '}
 					</span>
-					{' '}
+					<div>
+						{profitPercentage ? `${profitPercentage?.toFixed(2)}%` : '---'}
+					</div>
 				</>
 			);
 		},
