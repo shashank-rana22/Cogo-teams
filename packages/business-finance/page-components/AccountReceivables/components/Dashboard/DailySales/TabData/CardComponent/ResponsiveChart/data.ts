@@ -1,6 +1,6 @@
 import { format } from '@cogoport/utils';
 
-const BarData = (subActiveTab: string, data?: object) => (data[subActiveTab] || [])?.map((item) => (
+const BarData = (subActiveTab: string, data?: object) => (data ? data[subActiveTab] : [])?.map((item) => (
 	{
 		date: format(
 			item?.duration,
