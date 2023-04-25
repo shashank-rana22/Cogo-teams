@@ -1,6 +1,6 @@
 import { ResponsiveBar } from '@cogoport/charts/bar';
 import { Placeholder } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -9,7 +9,7 @@ function index(props) {
 
 	const data = [
 		{
-			warmth: 'icy_cold', count: 0,
+			warmth: 'ice_cold', count: 0,
 		},
 		{
 			warmth: 'cold', count: 0,
@@ -72,6 +72,10 @@ function index(props) {
 				</Placeholder>
 			</div>
 		);
+	}
+
+	if (isEmpty(graphData)) {
+		return null;
 	}
 
 	return (

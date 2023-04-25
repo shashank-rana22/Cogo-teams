@@ -1,24 +1,24 @@
 .header_text {
-    font-size: 16px;
-    font-weight: 600;
-    color: #4f4f4f;
+	font-size: 16px;
+	font-weight: 600;
+	color: #4f4f4f;
 }
 
 .table {
-    background-color: #fff;
+	background-color: #fff;
 
-    tr {
-        height: 60px;
-    }
+	tr {
+		height: 60px;
+	}
 
-    :global(.ui_table_head_cell) {
-        font-size: 14px;
-    }
+	:global(.ui_table_head_cell) {
+		font-size: 14px;
+	}
 }
 
 .empty_container {
-    margin-top: 16px;
-    border-radius: 8px;
-    padding: 8px;
-    background: #fff;
+	padding: 8px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
 }

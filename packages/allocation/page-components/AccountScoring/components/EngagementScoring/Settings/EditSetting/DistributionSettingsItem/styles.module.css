@@ -50,3 +50,18 @@
 	font-size: 8px;
 	color: red;
 }
+
+.accounts {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: -20px;
+}
+
+.account_headers {
+	display: flex;
+	align-items: center;
+	padding-left: 8px;
+	margin-top: 8px;
+	font-size: 12px;
+}

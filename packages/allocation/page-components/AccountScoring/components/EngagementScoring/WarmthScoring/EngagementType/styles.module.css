@@ -8,22 +8,19 @@
 	font-size: 12px;
 	font-weight: 700;
 	color: #4f4f4f;
-
 }
 
 .table_header_container {
 	display: flex;
 }
 
-.table_container{
-	
-
-	tr{
+.table_container {
+	tr {
 		height: 40px;
 	}
 
-	:global{
-		.ui_table_body_cell{
+	:global {
+		.ui_table_body_cell {
 			font-size: 14px;
 		}
 	}
