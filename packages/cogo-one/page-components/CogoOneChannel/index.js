@@ -53,7 +53,6 @@ function CogoOne() {
 	const [agentDetails, setAgentDetails] = useState(false);
 
 	const [modalType, setModalType] = useState({ type: null, data: {} });
-	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
 	const { userRoleIds, userId, token, emailAddress } = useSelector(({ profile, general }) => ({
 		userRoleIds  : profile.partner?.user_role_ids || [],
@@ -62,14 +61,23 @@ function CogoOne() {
 		emailAddress : profile?.user?.email,
 	}));
 
-	const firestore = getFirestore(app);
-
 	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
 
 	const {
 		loading:statusLoading,
 		updateUserStatus = () => {},
 	} = useCreateUserInactiveStatus({ fetchworkPrefernce, setOpenModal });
+
+	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+
+	useEffect(() => {
+		const auth = getAuth();
+		signInWithCustomToken(auth, token).catch((error) => {
+			console.log(error.message);
+		});
+	}, [token]);
+
+	const firestore = getFirestore(app);
 
 	const { tagOptions = [] } = useListAssignedChatTags();
 	const mailProps = {
@@ -163,13 +171,6 @@ function CogoOne() {
 	useEffect(() => {
 		setToggleStatus(status === 'active');
 	}, [status]);
-
-	useEffect(() => {
-		const auth = getAuth();
-		signInWithCustomToken(auth, token).catch((error) => {
-			console.log(error.message);
-		});
-	}, [token]);
 
 	return (
 		<>
