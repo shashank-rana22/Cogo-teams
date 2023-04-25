@@ -20,8 +20,8 @@ const PAGE_MAPPING = {
 	},
 };
 
-const SAMPLE_DOCUMENT_URL = 'https://cogoport-production.sgp1.digitaloceanspaces.com'
-								+ '/5905c74c7bbf7e71b9e8e00a2af45fbc/sample_faq_upload_sheet.csv';
+const SAMPLE_DOCUMENT_URL = `https://cogoport-production.sgp1.digitaloceanspaces.com/
+									6982d9471657028736bf9fe91ea8578d/bulk_upload_faq_sample.csv`;
 
 const useBulkCreateQuestionAnswerSet = () => {
 	const { general:{ query : { type } } } = useSelector((state) => (state));
