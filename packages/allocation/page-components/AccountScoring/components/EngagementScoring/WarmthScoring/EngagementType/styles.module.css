@@ -1,27 +1,42 @@
 .collapse_inner_container {
-	padding: 18px;
+    padding: 18px;
+}
+
+.edit_container {
+    border: 1px solid #f8f2e7;
+    padding: 4px 16px;
+    border-radius: 6px;
 }
 
 .table_headers {
-	display: flex;
-	flex-basis: 100%;
-	font-size: 12px;
-	font-weight: 700;
-	color: #4f4f4f;
+    display: flex;
+    flex-basis: 100%;
+    line-height: 24px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #4f4f4f;
 }
 
 .table_header_container {
-	display: flex;
+    display: flex;
 }
 
 .table_container {
-	tr {
-		height: 40px;
-	}
+    tr {
+        height: 40px;
+    }
 
-	:global {
-		.ui_table_body_cell {
-			font-size: 14px;
-		}
-	}
+    :global {
+        .ui_table_body_cell {
+            font-size: 14px;
+        }
+
+        .ui_table_head_cell {
+            font-size: 12px;
+        }
+    }
+}
+
+.table_lifecycle_item {
+    min-width: 200px;
 }

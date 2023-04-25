@@ -27,6 +27,7 @@ function Child(props) {
 							{...singleControl}
 							name={`${name}.${index}.${singleControl.name}`}
 							style={{ ...singleControl.style }}
+							size="sm"
 						/>
 					</div>
 
