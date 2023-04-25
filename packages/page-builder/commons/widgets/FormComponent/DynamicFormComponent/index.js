@@ -1,7 +1,14 @@
+import { Button } from '@cogoport/components';
+
 import FormLayout from '../../FormLayout';
 
-function DynamicFormComponent({ formData, control, errors }) {
-	const { controls } = formData || {};
+import styles from './styles.module.css';
+
+function DynamicFormComponent({
+	formData, control, errors,	dynamicHandleSubmit,
+	onDynamicFormSubmit,
+}) {
+	const { controls, buttonText } = formData || {};
 
 	return (
 		<div>
@@ -11,6 +18,11 @@ function DynamicFormComponent({ formData, control, errors }) {
 				errors={errors}
 				showElements={{}}
 			/>
+			<div className={styles.button_wrapper}>
+				<Button onClick={dynamicHandleSubmit(onDynamicFormSubmit)}>
+					{buttonText || 'Submit'}
+				</Button>
+			</div>
 		</div>
 	);
 }

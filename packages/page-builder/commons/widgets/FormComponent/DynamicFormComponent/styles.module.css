@@ -1,5 +1,5 @@
-.container {
-    .ui_modal_body_container{
-        max-height: 444px;
-    }
+.button_wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0 8px 0;
 }

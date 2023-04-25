@@ -28,7 +28,7 @@ function SelectMobileNumber({
 	};
 
 	return (
-		<div className={styles.row_container} style={width ? { width: '104%' } : {}}>
+		<div className={styles.row_container} style={width ? { width: '100%' } : {}}>
 			<div className={styles.country_code} style={{ paddingRight: 0 }}>
 				<SelectCountryCode
 					{...rest}
