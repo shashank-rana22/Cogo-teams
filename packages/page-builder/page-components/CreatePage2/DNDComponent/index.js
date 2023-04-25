@@ -89,7 +89,7 @@ function DNDComponent() {
 		setShowContentModal(false);
 	};
 
-	console.log('my selected item ::', selectedItem);
+	console.log('sdfsdfsdfsdf ::', selectedItem);
 
 	return (
 		<div>

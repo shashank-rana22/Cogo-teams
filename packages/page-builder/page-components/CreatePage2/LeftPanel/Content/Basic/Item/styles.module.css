@@ -10,7 +10,6 @@
 	text-align: center;
 	background-color: rgb(255 255 255 / 80%);
 	border: 1px solid #CBCFF5;
-	box-shadow: 0 0 40px rgb(98 127 172 / 10%);
 	border-radius: 4px;
 
 	&:hover {

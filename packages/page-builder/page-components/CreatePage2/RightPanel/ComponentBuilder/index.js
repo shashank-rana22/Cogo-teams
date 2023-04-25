@@ -9,6 +9,8 @@ function ComponentBuilder({ widget, components, setComponents, selectedRow, chil
 	const { children, style, id: componentId } = widget || {};
 	const { id: selectedRowId } = selectedRow || {};
 
+	console.log('widgetwidget ::', widget);
+
 	if (isEmpty(children)) {
 		return (
 			<div className={styles.block_wrapper}>
