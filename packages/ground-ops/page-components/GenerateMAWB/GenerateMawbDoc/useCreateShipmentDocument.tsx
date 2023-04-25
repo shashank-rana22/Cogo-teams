@@ -104,7 +104,7 @@ const useCreateShipmentDocument = ({
 				}
 			} else {
 				if (!edit) { setHawbDetails([...hawbDetails, { id: uuid(), documentNo: null, isNew: true }]); }
-				getHawb(res?.data?.ids[0]);
+				getHawb(edit ? res?.data?.id : res?.data?.ids[0]);
 			}
 		} catch (error) {
 			Toast.error(error?.response?.data?.message || error?.message || 'Failed to save Document');

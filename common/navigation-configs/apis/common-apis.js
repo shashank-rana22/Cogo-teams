@@ -564,6 +564,11 @@ const common_apis = {
 			access_type  : 'private',
 			service_name : 'credit',
 		},
+		{
+			api          : 'update_credit_status',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
 	],
 };
 export default common_apis;
