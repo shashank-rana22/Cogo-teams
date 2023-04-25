@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
@@ -27,8 +28,7 @@ function usePostIngestionData({ refetch = () => {} }) {
 	const { watch } = formProps;
 
 	const [uploadData, setUploadData] = useState({
-		performed_by_type  : 'agent',
-		finalModalHeading  : '',
+		final_modal_header : '',
 		partner_user_id,
 		ingestion_type     : '',
 		is_channel_partner : false,
@@ -43,10 +43,8 @@ function usePostIngestionData({ refetch = () => {} }) {
 
 	const onSubmit = async (e) => {
 		const payload = Object.entries({ ...e, ...uploadData, file_url: e?.file_url?.finalUrl })
-			.filter(([key, value]) => key !== 'finalModalHeading' && value !== '' && value !== null)
+			.filter(([key, value]) => key !== 'final_modal_header' && value !== '' && value !== null)
 			.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
-
-		console.log('payload', payload);
 		try {
 			await trigger({
 				data: payload,
@@ -56,7 +54,7 @@ function usePostIngestionData({ refetch = () => {} }) {
 			Toast.info('Data Ingested! Please check after some time');
 			refetch();
 		} catch (err) {
-			Toast.error(err?.response?.data?.file);
+			Toast.error(getApiErrorString(err?.message));
 		}
 	};
 	const { ingestion_country_id, ingestion_partner_id } = watch();

@@ -38,12 +38,11 @@ function usePostReUpload({ row = {}, setTableModal = () => {}, refetch = () => {
 			const pay = {
 				partner_id,
 				country_id,
-				performed_by_type    : 'agent',
 				ingestion_type,
 				partner_user_id,
 				description,
 				agent_id,
-				ingestion_request_id : id,
+				ingestion_request_id: id,
 				user_id,
 			};
 

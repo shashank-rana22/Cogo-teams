@@ -17,7 +17,7 @@ const downloadErrorCsv = (link) => {
 };
 
 function useGetIngestionList() {
-	const [row, setRow] = useState({});
+	const [rowData, setRowData] = useState({});
 
 	const [tableModal, setTableModal] = useState('');
 
@@ -41,13 +41,13 @@ function useGetIngestionList() {
 	const formProps = useForm();
 
 	const tableListModal = (id) => {
-		setRow(id);
-		setTableModal('uploadList');
+		setRowData(id);
+		setTableModal('upload_list');
 	};
 
-	const reUploadFiles = (rowData) => {
-		setRow(rowData);
-		setTableModal('reUpload');
+	const reUploadFiles = (row) => {
+		setRowData(row);
+		setTableModal('re_upload');
 	};
 
 	const columns = [
@@ -55,21 +55,26 @@ function useGetIngestionList() {
 			key      : 'name',
 			Header   : 'FILE NAME',
 			accessor : ({ request_files = {} }) => (
-				<Tooltip className={styles.popover} content={request_files?.sheet_name || '___'} placement="top">
+				<Tooltip
+					className={styles.popover}
+					visible={request_files?.sheet_name}
+					content={request_files?.sheet_name || '___'}
+					placement="top"
+				>
 					<div className={styles.name}>{startCase(request_files?.sheet_name || '___')}</div>
 				</Tooltip>
 			),
 		},
 		{
 			key      : 'num_org',
-			Header   : 'NUMBER OF RECORDS',
+			Header   : 'PROCESSED RECORDS',
 			accessor : ({ request_files = {} }) => (
 				<div className={styles.number_of_org}>
-					{request_files?.successfully_migrated_count || '___'}
+					{request_files?.successfully_migrated_count || '-'}
 					{' '}
 					/
 					{' '}
-					{request_files?.total_records_count || '___'}
+					{request_files?.total_records_count || '-'}
 				</div>
 
 			),
@@ -79,7 +84,12 @@ function useGetIngestionList() {
 			Header   : 'DESCRIPTION',
 			accessor : ({ description = '' }) => (
 				<div className={styles.pop_container}>
-					<Tooltip className={styles.popover} content={description || '___'} placement="left">
+					<Tooltip
+						className={styles.popover}
+						visible={description}
+						content={description || '___'}
+						placement="left"
+					>
 						<div className={styles.description}>{startCase(description || '___')}</div>
 					</Tooltip>
 				</div>
@@ -98,15 +108,6 @@ function useGetIngestionList() {
 			Header   : 'UPLOAD DATE',
 			accessor : ({ updated_at }) => (
 				<div className={styles.updated_at}>
-					{/* {updated_at	 ? (
-						<div className={styles.created_date}>
-							{formatDate(updated_at, 'dd MMM yyyy') || '___'}
-
-							<div className={styles.created_time}>
-								{formatDate(updated_at, 'hh:mm aaa') || '___'}
-							</div>
-						</div>
-					) : '___'} */}
 
 					{formatDate({
 						date       : updated_at,
@@ -135,30 +136,37 @@ function useGetIngestionList() {
 			key      : 'type',
 			Header   : <div className={styles.type}>TYPE</div>,
 			id       : 'type',
-			accessor : (item = {}) => (
-				<div className={styles.type}>
+			accessor : (item = {}) => {
+				// console.log('jebvhb', `${item?.is_channel_partner}_${item?.account_type}`)
+				(
+					<div className={styles.type}>
 
-					<Tooltip
-						className={styles.popover}
-						content={`Redirecting to ${REDIRECT_MAPPING[item?.is_channel_partner] || '---'}`}
-						placement="top"
-					>
-						<Button
-							className={styles.type_name}
-							themeType="tertiary"
+						<Tooltip
+							className={styles.popover}
+							content={`Redirecting to
+							${REDIRECT_MAPPING[`${item?.is_channel_partner}_${item?.account_type}`]
+							|| '---'}`}
+							placement="top"
 						>
-							<a
-								href={`/${partner_id}${REDIRECT_LINK_MAPPING[item?.is_channel_partner]}
-								?source_id=${item?.id}`}
+							<Button
+								className={styles.type_name}
+								themeType="tertiary"
 							>
-								{startCase(item?.ingestion_type || '___')}
-							</a>
+								<a
+									href={`/${partner_id}
+								${REDIRECT_LINK_MAPPING[`${item?.is_channel_partner}_${item?.account_type}`]}
+								?source_id=${item?.id}`}
+								>
+									{startCase(item?.ingestion_type || '___')}
+								</a>
 
-						</Button>
-					</Tooltip>
+							</Button>
+						</Tooltip>
 
-				</div>
-			),
+					</div>
+				);
+			},
+
 		},
 		{
 			key      : 'error',
@@ -226,7 +234,7 @@ function useGetIngestionList() {
 		tableModal,
 		setTableModal,
 		data,
-		row,
+		row: rowData,
 		formProps,
 		params,
 		setParams,

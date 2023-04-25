@@ -6,7 +6,10 @@ import useGetTemplate from '../../../hooks/useGetTemplate';
 import usePostIngestionData from '../../../hooks/usePostIngestionData';
 
 import ChooseModal from './Modals/ChooseModal/index';
-import { ChooseFooter, OrgDetailsFooter, ProviderSelectFooter, UploadModalFooter } from './Modals/Footers';
+import { ChooseFooter } from './Modals/Footers/ChooseFooter';
+import { OrgDetailsFooter } from './Modals/Footers/OrgDetailsFooter';
+import { ProviderSelectFooter } from './Modals/Footers/ProviderSelectFooter';
+import { UploadModalFooter } from './Modals/Footers/UploadModalFooter';
 import OrgDetailsModal from './Modals/OrgDetailsModal/index';
 import ProviderSelectModal from './Modals/ProviderSelectModal';
 import TemplateModal from './Modals/TemplateModal';

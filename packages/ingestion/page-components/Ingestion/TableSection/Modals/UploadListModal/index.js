@@ -16,12 +16,12 @@ function UploadListModal({ tableModal = '', setTableModal = () => {}, row = {} }
 	};
 
 	const onSubmit = () => {
-		setTableModal('reUpload');
+		setTableModal('re_upload');
 	};
 
 	if (isEmpty(list) && !loading) {
 		return (
-			<Modal size="xl" show={tableModal === 'uploadList'} onClose={onClose} placement="center">
+			<Modal size="xl" show={tableModal === 'upload_list'} onClose={onClose} placement="center">
 				<Modal.Header title={(
 					<div className={styles.header}>
 						<IcMUpload style={{ margin: '0 4px 0 0' }} />

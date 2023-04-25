@@ -22,7 +22,7 @@ function ReUploadModal({ tableModal = '', setTableModal = () => {}, row = {}, re
 			className={styles.re_upload}
 			key={tableModal}
 			size="md"
-			show={tableModal === 'reUpload'}
+			show={tableModal === 're_upload'}
 			onClose={onClose}
 			placement="center"
 			scroll={false}

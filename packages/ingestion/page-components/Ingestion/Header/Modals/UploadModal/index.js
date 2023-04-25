@@ -8,19 +8,13 @@ function UploadModal({
 
 }) {
 	const { control, formState: { errors } } = formProps;
-	const { finalModalHeading } = uploadData;
-
-	const FINAL_HEADING = {
-		lead: finalModalHeading,
-	};
-
-	console.log('upload', uploadData);
+	const { final_modal_header:finalModalHeading } = uploadData;
 
 	return (
 
 		<div>
 			<div style={{ margin: '0 0 4px 16px' }}>
-				{FINAL_HEADING[uploadData?.ingestion_type] || '___'}
+				{finalModalHeading || '___'}
 			</div>
 
 			<div className={styles.modal_container}>

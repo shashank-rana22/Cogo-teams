@@ -3,24 +3,15 @@ import { Button } from '@cogoport/components';
 import styles from './styles.module.css';
 
 function ChooseModal({ setShow = () => {}, setUploadData = () => {}, uploadData = {} }) {
-	const NEXT_PAGE_MAPPING = {
-		lead: 'providerSelect',
-	};
-
-	// const IS_CP_MAPPING = {
-	// 	lead: null,
-	// };
-
 	const onChoose = (type) => {
 		setShow((pv) => ({
 			...pv,
-			screen: NEXT_PAGE_MAPPING[type],
+			screen: 'providerSelect',
 		}));
 
 		setUploadData({
 			...uploadData,
 			ingestion_type: type,
-			// is_channel_partner : IS_CP_MAPPING[type],
 		});
 	};
 

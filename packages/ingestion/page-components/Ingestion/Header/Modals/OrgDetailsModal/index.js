@@ -1,29 +1,19 @@
-import { CONSTANT_KEYS } from '../../../../../constants/org-details-mapping';
 import { getElementController } from '../../../../../utils/get-element-controls';
 
 import styles from './styles.module.css';
 
 function OrgDetailsModal({
-	uploadData, formProps = {}, modalControls = [],
+	formProps = {}, modalControls = [],
 }) {
 	const { control, formState: { errors } } = formProps;
-
-	const {
-		lead,
-	} = CONSTANT_KEYS;
-
-	const INGESTION_COMPONENTS_MAPPING = {
-		[lead]: 'Lead',
-	};
 
 	return (
 
 		<div>
 			<div className={styles.modal_container}>
 				<div className={styles.heading}>
-					Please provide more details about
-					{' '}
-					{INGESTION_COMPONENTS_MAPPING[uploadData?.ingestion_type] || null}
+					Please provide more details about Leads
+
 				</div>
 				{
 						modalControls.map((controlItem) => {
