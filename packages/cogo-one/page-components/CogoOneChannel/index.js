@@ -62,13 +62,6 @@ function CogoOne() {
 		emailAddress : profile?.user?.email,
 	}));
 
-	useEffect(() => {
-		const auth = getAuth();
-		signInWithCustomToken(auth, token).catch((error) => {
-			console.log(error.message);
-		});
-	}, [token]);
-
 	const firestore = getFirestore(app);
 
 	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
@@ -170,6 +163,13 @@ function CogoOne() {
 	useEffect(() => {
 		setToggleStatus(status === 'active');
 	}, [status]);
+
+	useEffect(() => {
+		const auth = getAuth();
+		signInWithCustomToken(auth, token).catch((error) => {
+			console.log(error.message);
+		});
+	}, [token]);
 
 	return (
 		<>
