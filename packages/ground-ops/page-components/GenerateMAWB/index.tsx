@@ -367,6 +367,7 @@ function GenerateMAWB({
 								category={category}
 							/>
 						</Modal.Body>
+
 					</Modal>
 				)}
 			</div>

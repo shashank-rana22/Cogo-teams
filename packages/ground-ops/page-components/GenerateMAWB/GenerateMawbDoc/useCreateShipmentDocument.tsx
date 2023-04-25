@@ -21,7 +21,6 @@ interface Props {
 	handleClick?: Function;
 	getHawb?: Function;
 	activeHawb?: NestedObj;
-	category?: String;
 }
 
 const useCreateShipmentDocument = ({
@@ -35,7 +34,6 @@ const useCreateShipmentDocument = ({
 	setActiveKey = () => {},
 	handleClick = () => {},
 	activeHawb = {},
-	category = 'mawb',
 }:Props) => {
 	let api = 'create_shipment_document';
 	if (edit && activeCategory === 'hawb') {
