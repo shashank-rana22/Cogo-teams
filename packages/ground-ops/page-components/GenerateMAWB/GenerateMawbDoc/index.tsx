@@ -95,7 +95,6 @@ function GenerateMawb({
 		setActiveKey,
 		handleClick,
 		activeHawb,
-		category,
 	});
 
 	const takeImageScreenShot = async (node) => {
