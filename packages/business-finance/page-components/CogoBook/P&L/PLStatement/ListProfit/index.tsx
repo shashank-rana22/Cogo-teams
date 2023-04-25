@@ -196,11 +196,12 @@ function ListProfit({
 						)}
 						{dropDown?.operating && (
 							<div className={styles.row_vis_data}>
-								{isRowVisible && <>
-								  <div>Billed Expense</div>
-								  <div>Accrued Expense</div>
-								  </>
-								  }
+								{isRowVisible && (
+									<>
+										<div>Billed Expense</div>
+										<div>Accrued Expense</div>
+									</>
+								)}
 							</div>
 						)}
 					</div>
