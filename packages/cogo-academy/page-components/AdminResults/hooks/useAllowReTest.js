@@ -1,31 +1,58 @@
+import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-function useAllowReTest() {
+function useAllowReTest({ setShowRetestModal = () => {}, test_id, refetchTest = () => {} }) {
 	const {
-		control, formState: { errors }, watch, setValue, handleSubmit,
+		control, formState: { errors }, watch, setValue, handleSubmit, reset,
 	} = useForm();
 
-	const [{ loading = false, data = {} }, trigger] = useRequest({
+	const [{ loading = false }, trigger] = useRequest({
 		method : 'post',
 		url    : 'allow_re_test',
 	}, { manual: true });
 
 	const onSubmit = async (values) => {
-		console.log('val', values);
-		// try {
-		// 	await trigger({
-		// 		data: {
-		// 			test_id,
-		// 		},
-		// 	});
+		if (values?.users_list === 'custom') {
+			try {
+				await trigger({
+					data: {
+						users_list: 'custom',
+						percentile:
+						values?.filtered_users.includes('percentile_checked') ? Number(values?.percentile) : undefined,
+						percentage:
+						values?.filtered_users.includes('percentage_checked') ? Number(values?.percentage) : undefined,
+						validity_start         : values?.test_validity?.startDate,
+						validity_end           : values?.test_validity?.endDate,
+						is_percentile_editable : values?.is_percentile_editable === 'true',
 
-		// 	setShowPublishModal(false);
+					},
 
-		// 	refetchTest({ test_id });
-		// } catch (err) {
-		// 	Toast.error(getApiErrorString(err.response?.data));
-		// }
+				});
+			} catch (err) {
+				Toast.error(getApiErrorString(err.response?.data));
+			}
+			refetchTest({ test_id });
+			setShowRetestModal(false);
+			reset();
+		} else {
+			try {
+				await trigger({
+					data: {
+						users_list             : 'all',
+						validity_start         : values?.test_validity?.startDate,
+						validity_end           : values?.test_validity?.endDate,
+						is_percentile_editable : values?.is_percentile_editable === 'true',
+					},
+				});
+			} catch (err) {
+				Toast.error(getApiErrorString(err.response?.data));
+			}
+			refetchTest({ test_id });
+			setShowRetestModal(false);
+			reset();
+		}
 	};
 
 	return {
@@ -35,6 +62,7 @@ function useAllowReTest() {
 		onSubmit,
 		errors,
 		handleSubmit,
+		loading,
 	};
 }
 

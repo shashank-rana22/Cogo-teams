@@ -1,6 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { useState } from 'react';
 
+import Spinner from '../../../../commons/Spinner';
 import useAllowReTest from '../../hooks/useAllowReTest';
 import PublishNow from '../PublishNow';
 
@@ -8,7 +9,9 @@ import Retest from './Retest';
 import styles from './styles.module.css';
 import TEXT_MAPPING from './text-mapping';
 
-function InfoBanner({ test_status = '', test_id, validity_end, refetchTest, loading }) {
+function InfoBanner({ test_status = '', test_id, validity_end, refetchTest = () => {}, loading }) {
+	const [showRetestModal, setShowRetestModal] = useState(false);
+
 	const {
 		watch,
 		control,
@@ -16,19 +19,20 @@ function InfoBanner({ test_status = '', test_id, validity_end, refetchTest, load
 		onSubmit,
 		errors,
 		handleSubmit,
-	} = useAllowReTest();
+		loading: retestLoading,
+	} = useAllowReTest({ setShowRetestModal, test_id, refetchTest });
 
 	const isUnderValidity = new Date() < new Date(validity_end);
 
 	const content = TEXT_MAPPING[test_status];
-
-	const [showRetestModal, setShowRetestModal] = useState(false);
 
 	const { key, backgroundColor, text, subText, iconColor, Icon, borderColor } = content || {};
 
 	if (!['published', 'active'].includes(test_status) && loading) {
 		return null;
 	}
+
+	if (retestLoading) return <Spinner />;
 
 	return (
 		<div className={styles.container} style={{ border: `1px solid ${borderColor}`, background: backgroundColor }}>
@@ -39,23 +43,19 @@ function InfoBanner({ test_status = '', test_id, validity_end, refetchTest, load
 
 				<span>{subText}</span>
 
-				{test_status === 'published'
-					? (
-						<Button
-							type="button"
-							themeType="accent"
-							size="md"
-							onClick={() => setShowRetestModal(true)}
-						>
-							Create Retest
-						</Button>
-					) : null}
 			</div>
 
-			<div>
-				{!['published', 'publishing'].includes(key) && !isUnderValidity
-					? <PublishNow test_id={test_id} refetchTest={refetchTest} /> : null}
-			</div>
+			{!['published', 'publishing'].includes(key) && !isUnderValidity
+				? <PublishNow test_id={test_id} refetchTest={refetchTest} /> : (
+					<Button
+						type="button"
+						themeType="accent"
+						size="md"
+						onClick={() => setShowRetestModal(true)}
+					>
+						Create Retest
+					</Button>
+				)}
 
 			{showRetestModal
 				? (
