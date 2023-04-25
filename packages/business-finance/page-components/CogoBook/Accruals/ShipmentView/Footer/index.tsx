@@ -4,7 +4,7 @@ import { IcCError } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
-import { optionsRadio } from '../../constant';
+import { optionsRadio, optionsRadioData } from '../../constant';
 import { FilterInterface } from '../../interface';
 
 import styles from './styles.module.css';
@@ -121,7 +121,7 @@ function Footer({
 					<div className={styles.button_container}>
 						<Button
 							type="submit"
-							themeType="secondary"
+							themeType="primary"
 							className={styles.add_to_select}
 							disabled={shipmentLoading || payload.length === 0}
 							onClick={() => {
@@ -132,7 +132,7 @@ function Footer({
 						</Button>
 						<Button
 							type="submit"
-							themeType="primary"
+							themeType="secondary"
 							disabled={shipmentLoading || viewSelected}
 							onClick={() => {
 								onSubmit();
@@ -200,6 +200,7 @@ function Footer({
 										id="approve-modal-btn"
 										themeType="primary"
 										loading={actionConfirmedLoading}
+										disabled={!bulkAction && value}
 										onClick={() => {
 											actionConfirm({ isBookedActive, setShow });
 										}}
@@ -213,26 +214,26 @@ function Footer({
 				)}
 			</div>
 			{openModal && (
-				<Modal show={openModal} onClose={() => setOpenModal(false)} size="sm">
+				<Modal show={openModal} onClose={() => setOpenModal(false)}>
 					<Modal.Body>
 						<div className={styles.flex_modal}>
-							<div className={!value ? styles.margin : styles.margin_not}>
-								{!value ? 'Are you sure you want to select this?' : 'Please Choose The Selection Mode' }
+							<div className={styles.margin_not}>
+								Please Choose The Selection Mode
 							</div>
-							{value && (
-								<div>
-									<RadioGroup
-										options={optionsRadio}
-										value={bulkAction}
-										onChange={(val) => {
-											setBulkSection((prev) => ({
-												...prev,
-												bulkAction: val,
-											}));
-										}}
-									/>
-								</div>
-							)}
+
+							<div>
+								<RadioGroup
+									options={optionsRadioData}
+									value={bulkAction}
+									onChange={(val) => {
+										setBulkSection((prev) => ({
+											...prev,
+											bulkAction: val,
+										}));
+									}}
+								/>
+							</div>
+
 							<div className={styles.flex}>
 								<Button
 									id="cancel-modal-btn"
@@ -246,6 +247,7 @@ function Footer({
 									id="approve-modal-btn"
 									themeType="primary"
 									loading={selectedDataLoading}
+									disabled={!bulkAction}
 									onClick={() => {
 										addSelect(setOpenModal);
 										setCheckedRows({});
