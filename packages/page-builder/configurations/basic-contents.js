@@ -1,26 +1,26 @@
-import { IcMFolder, IcMImage, IcMText, IcMVideoCall, IcAFormsAndCertificates } from '@cogoport/icons-react';
+import { IcMFolder, IcMImage, IcMText, IcMVideoCall, IcMMarginApprovals } from '@cogoport/icons-react';
 
 const contents = [
 	{
 		type : 'text',
-		icon : <IcMText width={28} height={28} fill="#FEDE00" />,
+		icon : <IcMText width={28} height={28} />,
 		name : 'text',
 
 	},
 	{
 		type : 'image',
-		icon : <IcMImage width={28} height={28} fill="#FEDE00" />,
+		icon : <IcMImage width={28} height={28} />,
 		name : 'image',
 
 	},
 	{
 		type : 'button',
-		icon : <IcMFolder width={28} height={28} fill="#FEDE00" />,
+		icon : <IcMFolder width={28} height={28} />,
 		name : 'button',
 	},
 	{
 		type : 'video',
-		icon : <IcMVideoCall width={28} height={28} fill="#FEDE00" />,
+		icon : <IcMVideoCall width={28} height={28} />,
 		name : 'video',
 
 	},
@@ -33,12 +33,12 @@ const contents = [
 			height="28px"
 			style={{ fill: '#FEDE00' }}
 		/>,
-		// icon : <IcMText width={28} height={28} fill="#FEDE00" />,
+		// icon : <IcMText width={28} height={28}  />,
 		name: 'html',
 	},
 	{
 		type : 'form',
-		icon : <IcAFormsAndCertificates width={28} height={28} fill="#FEDE00" />,
+		icon : <IcMMarginApprovals width={28} height={28} />,
 		name : 'form',
 
 	},
