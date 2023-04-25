@@ -57,7 +57,7 @@ function useGetIngestionList() {
 			accessor : ({ request_files = {} }) => (
 				<Tooltip
 					className={styles.popover}
-					visible={request_files?.sheet_name}
+					// visible={request_files?.sheet_name}
 					content={request_files?.sheet_name || '___'}
 					placement="top"
 				>
@@ -86,7 +86,7 @@ function useGetIngestionList() {
 				<div className={styles.pop_container}>
 					<Tooltip
 						className={styles.popover}
-						visible={description}
+						// visible={description}
 						content={description || '___'}
 						placement="left"
 					>
@@ -136,36 +136,34 @@ function useGetIngestionList() {
 			key      : 'type',
 			Header   : <div className={styles.type}>TYPE</div>,
 			id       : 'type',
-			accessor : (item = {}) => {
-				// console.log('jebvhb', `${item?.is_channel_partner}_${item?.account_type}`)
-				(
-					<div className={styles.type}>
+			accessor : (item = {}) => (
+				<div className={styles.type}>
 
-						<Tooltip
-							className={styles.popover}
-							content={`Redirecting to
+					<Tooltip
+						className={styles.popover}
+						content={`Redirecting to
 							${REDIRECT_MAPPING[`${item?.is_channel_partner}_${item?.account_type}`]
 							|| '---'}`}
-							placement="top"
+						placement="top"
+					>
+						<Button
+							className={styles.type_name}
+							themeType="tertiary"
 						>
-							<Button
-								className={styles.type_name}
-								themeType="tertiary"
-							>
-								<a
-									href={`/${partner_id}
+							<a
+								href={`/${partner_id}
 								${REDIRECT_LINK_MAPPING[`${item?.is_channel_partner}_${item?.account_type}`]}
 								?source_id=${item?.id}`}
-								>
-									{startCase(item?.ingestion_type || '___')}
-								</a>
+							>
+								{startCase(item?.ingestion_type || '___')}
 
-							</Button>
-						</Tooltip>
+							</a>
 
-					</div>
-				);
-			},
+						</Button>
+					</Tooltip>
+
+				</div>
+			),
 
 		},
 		{
