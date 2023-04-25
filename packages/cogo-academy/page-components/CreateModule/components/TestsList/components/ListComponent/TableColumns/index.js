@@ -9,6 +9,7 @@ import copyToClipboard from '../helpers/copyToClipboard';
 
 import { QuestionSetButtons, TestSetButtons } from './ButtonComponent';
 import styles from './styles.module.css';
+import ValidityDisplay from './ValidityDisplay';
 
 export const questionSetColumns = ({ loading, router, setShowModal, setQuestionSetId, sortFilter, setSortFilter }) => [
 	{
@@ -113,13 +114,18 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 ];
 
 export const testSetColumns = ({
-	loading, router, setShowModal, setTestId, sortFilter,
+	loading,
+	router,
+	setShowModal,
+	setTestId,
+	sortFilter,
 	setSortFilter,
+	fetchList,
 }) => ([
 	{
 		Header   : 'NAME',
 		id       : 'name',
-		accessor : ({ name = '', test_duration = '', current_status = '' }) => (
+		accessor : ({ name = '', test_duration = '' }) => (
 			<div>
 				<section>
 					{' '}
@@ -130,7 +136,7 @@ export const testSetColumns = ({
 					</Tooltip>
 				</section>
 
-				{current_status === 'active' ? (
+				{test_duration ? (
 					<section className={styles.duration}>
 						{test_duration}
 						{' '}
@@ -145,18 +151,46 @@ export const testSetColumns = ({
 		id       : 'topics',
 		accessor : ({ topics = [] }) => (
 			<section className={styles.topics}>
-				{topics.map((topic) => (
-					<Tooltip maxWidth={400} content={startCase(topic)} placement="top" key={topic}>
+
+				{topics.length > 0 ? (
+					<Tooltip maxWidth={400} content={startCase(topics[0])} placement="top" key={topics[0]}>
 						<Pill
 							className={styles.topic_pill}
 							size="lg"
 							color="#F3FAFA"
 						>
-							{startCase(topic)}
+							{startCase(topics[0])}
 						</Pill>
 					</Tooltip>
-				))}
-				{topics.length === 0 && '-'}
+				) : '-'}
+
+				{topics.length > 1 && (
+					<Tooltip
+						maxWidth={400}
+						content={(topics.map((topic, index) => ((index >= 1) ? (
+							<Pill
+								className={styles.topic_pill_sub}
+								size="lg"
+								color="#F3FAFA"
+							>
+								{startCase(topic)}
+							</Pill>
+						) : null)))}
+						placement="top"
+						interactive
+					>
+						<Pill
+							className={styles.topic_pill}
+							size="lg"
+							color="#F3FAFA"
+						>
+							+
+							{topics.length - 1}
+							{' '}
+							More
+						</Pill>
+					</Tooltip>
+				)}
 			</section>
 		),
 	},
@@ -204,13 +238,16 @@ export const testSetColumns = ({
 		Header   : 'STATUS',
 		id       : 'status',
 		accessor : ({ current_status = '', id = '', validity_start = '', validity_end = '' }) => {
-			if (current_status === 'active') {
+			if (['active', 'upcoming'].includes(current_status)) {
 				return (
 					<section className={styles.details}>
 						<section className={styles.status}>
-							<Pill size="md" color="green" className={styles.status_pill}>
+							<Pill
+								size="md"
+								color={current_status === 'upcoming' ? '#CFEAEC' : '#C4DC91'}
+								className={styles.status_pill}
+							>
 								{startCase(current_status)}
-
 							</Pill>
 
 							<div role="presentation" onClick={() => copyToClipboard(id)}>
@@ -227,13 +264,12 @@ export const testSetColumns = ({
 							</div>
 						</section>
 
-						<section>
-							{format(validity_start, 'dd/MM/yyyy - ')}
-							{format(validity_end, 'dd/MM/yyyy')}
-						</section>
+						<ValidityDisplay validity_end={validity_end} validity_start={validity_start} />
 					</section>
 				);
-			} if (current_status === 'published') {
+			}
+
+			if (current_status === 'published') {
 				return (
 					<section>
 						<Pill
@@ -246,28 +282,8 @@ export const testSetColumns = ({
 							{' '}
 							{startCase(current_status)}
 						</Pill>
-					</section>
-				);
-			}
 
-			if (current_status === 'upcoming') {
-				return (
-					<section>
-						<section>
-							<Pill
-								key={current_status}
-								size="md"
-								color="blue"
-								className={styles.status_pill}
-							>
-								{startCase(current_status)}
-							</Pill>
-						</section>
-
-						<section>
-							{format(validity_start, 'dd/MM/yyyy - ')}
-							{format(validity_end, 'dd/MM/yyyy')}
-						</section>
+						<ValidityDisplay validity_end={validity_end} validity_start={validity_start} />
 					</section>
 				);
 			}
@@ -283,7 +299,10 @@ export const testSetColumns = ({
 						>
 							{startCase(current_status)}
 						</Pill>
+
+						<ValidityDisplay validity_end={validity_end} validity_start={validity_start} />
 					</section>
+
 				);
 			}
 
@@ -298,6 +317,7 @@ export const testSetColumns = ({
 						{startCase(current_status)}
 					</Pill>
 				</section>
+
 			);
 		},
 	},
@@ -341,7 +361,7 @@ export const testSetColumns = ({
 	{
 		Header   : '',
 		id       : 'options',
-		accessor : ({ id = '', validity_start = '', current_status = '' }) => (
+		accessor : ({ id = '', validity_start = '', current_status = '', validity_end = '' }) => (
 			<TestSetButtons
 				id={id}
 				validity_start={validity_start}
@@ -350,6 +370,8 @@ export const testSetColumns = ({
 				setShowModal={setShowModal}
 				setTestId={setTestId}
 				router={router}
+				validity_end={validity_end}
+				fetchList={fetchList}
 			/>
 		),
 	},

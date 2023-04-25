@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import { IcMDelete } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 
 import toFixed from '../../../../CreateModule/utils/toFixed';
@@ -6,8 +7,16 @@ import SortComponent from '../../../commons/SortComponent';
 
 import styles from './styles.module.css';
 
-const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
+const handleRedirectToDashboard = ({ router, user, test_id }) => {
+	const { id, name } = user || {};
 
+	router.push(
+		`/learning/tests/dashboard/[test_id]?view=admin&id=${id}&name=${name}`,
+		`/learning/tests/dashboard/${test_id}?view=admin&id=${id}&name=${name}`,
+	);
+};
+
+const getAppearedColumns = ({ sortFilter, setSortFilter, router, setShowReAttemptModal }) => [
 	{
 		Header: (
 			<div className={styles.container}>
@@ -90,7 +99,6 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 			);
 		},
 	},
-
 	{
 		Header: (
 			<div className={styles.container}>
@@ -104,18 +112,44 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 			</div>
 		),
 		id       : 'attempted_on',
-		accessor : ({ created_at = '' }) => (
+		accessor : ({ start_time = '' }) => (
 			<section className={styles.section}>
 				{format(
-					created_at,
+					start_time,
 					`${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']} ${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`,
 				)}
 			</section>
 		),
 	},
+	{
+		Header   : '',
+		id       : 'see_more',
+		accessor : ({ user = {}, test_id = '' }) => (
+			<div
+				role="presentation"
+				onClick={() => handleRedirectToDashboard({ router, user, test_id })}
+				className={styles.see_more}
+			>
+				See More
+			</div>
+		),
+	},
+	{
+		Header   : '',
+		id       : 're-attempt',
+		accessor : ({ user = {} }) => (
+			<div
+				role="presentation"
+				onClick={() => setShowReAttemptModal(user)}
+				className={styles.see_more}
+			>
+				Allow Re-Attempt
+			</div>
+		),
+	},
 ];
 
-const getNotAppeardColumns = () => [
+const getOngoingColumns = ({ setShowReAttemptModal }) => [
 	{
 		Header   : 'NAME',
 		id       : 'name',
@@ -130,14 +164,78 @@ const getNotAppeardColumns = () => [
 			<section>{user.email}</section>
 		),
 	},
+	{
+		Header   : '',
+		id       : 're-attempt',
+		accessor : ({ user = {} }) => (
+			<div
+				role="presentation"
+				onClick={() => setShowReAttemptModal(user)}
+				className={styles.see_more}
+			>
+				Allow Re-Attempt
+			</div>
+		),
+	},
 ];
 
-const getTableColumns = ({ sortFilter, setSortFilter, activeTab }) => {
-	if (activeTab === 'appeared') {
-		return getAppearedColumns({ sortFilter, setSortFilter });
-	}
+const getNotAppeardColumns = ({ setShowModal, setUserId }) => [
 
-	return getNotAppeardColumns();
+	{
+		Header   : 'NAME',
+		id       : 'name',
+		accessor : ({ user = {} }) => (
+			<section>{startCase(user.name)}</section>
+		),
+	},
+	{
+		Header   : 'EMAIL',
+		id       : 'email',
+		accessor : ({ user = {} }) => (
+			<section>{user.email}</section>
+		),
+	},
+	{
+		id       : 'delete',
+		accessor : ({ user_id = '' }) => (
+			<IcMDelete
+				className={styles.delete}
+				width={16}
+				height={16}
+				onClick={() => {
+					setUserId(user_id);
+					setShowModal(true);
+				}}
+			>
+				Delete
+			</IcMDelete>
+		),
+	},
+];
+
+const TABLE_MAPPING = {
+	appeared     : getAppearedColumns,
+	not_appeared : getNotAppeardColumns,
+	ongoing      : getOngoingColumns,
+};
+
+const getTableColumns = ({
+	sortFilter, setSortFilter,
+	activeTab,
+	setShowModal,
+	setShowReAttemptModal,
+	setUserId = () => {},
+	router,
+}) => {
+	const getcolumnsFun = TABLE_MAPPING?.[activeTab] || getAppearedColumns;
+
+	const getcolumnsArg = {
+		appeared     : { sortFilter, setSortFilter, router, setShowReAttemptModal },
+		not_appeared : { setShowModal, setUserId },
+		ongoing      : { setShowReAttemptModal },
+	};
+
+	return getcolumnsFun(getcolumnsArg[activeTab] || {});
 };
 
 export default getTableColumns;

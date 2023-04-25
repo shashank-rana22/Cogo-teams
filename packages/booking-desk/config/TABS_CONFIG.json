@@ -11,6 +11,11 @@
             "isCriticalVisible": true
         },
         {
+            "name": "amend_bn",
+            "title" : "Amend BN",
+            "isCriticalVisible": true
+        },
+        {
             "name": "container_pick_up",
             "title" : "Container Pick Up",
             "isCriticalVisible": true

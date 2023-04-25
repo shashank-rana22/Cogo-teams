@@ -4,8 +4,7 @@ function EditIcon({ index, setValue, valueData, value }) {
 	return (
 		<div>
 			<Input
-				type="number"
-				value={value[index] || valueData}
+				value={value[index]?.length >= 0 ? value[index] : valueData.split(' ')[0]}
 				onChange={(val) => {
 					setValue((prev) => ({
 						...prev,

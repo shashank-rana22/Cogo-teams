@@ -44,10 +44,9 @@ function Footer({
 
 				<Button
 					loading={loading || getLoading}
-					disabled={currentQuestion > total_question}
 					onClick={() => handleUpdate({ type: 'save_and_next' })}
 				>
-					{currentQuestion === total_question ? <>Save</> : <>Save & Next</>}
+					{Number(currentQuestion) === total_question ? <>Save</> : <>Save & Next</>}
 				</Button>
 			</div>
 		</div>

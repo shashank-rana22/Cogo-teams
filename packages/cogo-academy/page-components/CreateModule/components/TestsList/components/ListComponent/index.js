@@ -15,8 +15,20 @@ const MODAL_TEXT_MAPPING = {
 	question_set : 'Question Set',
 };
 
+const columnsMapping = {
+	tests        : testSetColumns,
+	question_set : questionSetColumns,
+};
+
 function ListComponent({
-	data, loading, setParams, activeTab, params, fetchList, sortFilter, setSortFilter,
+	data,
+	loading,
+	setParams,
+	activeTab,
+	params,
+	fetchList,
+	sortFilter,
+	setSortFilter,
 }) {
 	const router = useRouter();
 
@@ -25,11 +37,6 @@ function ListComponent({
 	const [showModal, setShowModal] = useState(false);
 
 	const { page_limit: pageLimit = 0, total_count = 0, list } = data || {};
-
-	const columnsMapping = {
-		tests        : testSetColumns,
-		question_set : questionSetColumns,
-	};
 
 	const {
 		loading: updateLoading,
@@ -46,8 +53,16 @@ function ListComponent({
 			setTestId,
 			sortFilter,
 			setSortFilter,
+			fetchList,
 		},
-		question_set: { loading: updateLoading, router, setShowModal, setQuestionSetId, sortFilter, setSortFilter },
+		question_set: {
+			loading: updateLoading,
+			router,
+			setShowModal,
+			setQuestionSetId,
+			sortFilter,
+			setSortFilter,
+		},
 	};
 
 	const columns = columnsMapping[activeTab]({ ...propsMapping[activeTab] });

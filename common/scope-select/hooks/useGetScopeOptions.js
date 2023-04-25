@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 
 import getNavData from '../utils/getNavData';
 
-export default function useGetScopeOptions({ defaultValues = {} } = {}) {
+export default function useGetScopeOptions({ defaultValues = {}, apisToConsider = [] } = {}) {
 	const { profile, general } = useSelector((store) => store);
 	const { pathname } = general || {};
 	const { permissions_navigations } = profile || {};
@@ -12,8 +12,10 @@ export default function useGetScopeOptions({ defaultValues = {} } = {}) {
 
 	const scopeValues = useMemo(() => {
 		const navData = getNavData(navigation) || {};
-		const { main_apis } = navData;
+		let { main_apis } = navData;
 		const allNavApis = (permissions_navigations || {})[navigation] || {};
+
+		main_apis = apisToConsider?.length > 0 ? apisToConsider : main_apis;
 
 		let scopes = [];
 		const viewTypes = {};
@@ -42,7 +44,7 @@ export default function useGetScopeOptions({ defaultValues = {} } = {}) {
 		scopes = Array.from(new Set(scopes));
 
 		return { scopes, viewTypes, defaultScope, defaultView, defaultAgentId };
-	}, [navigation, permissions_navigations, defaultValues]);
+	}, [navigation, permissions_navigations, defaultValues, apisToConsider]);
 
 	return {
 		scopeData: scopeValues,
