@@ -20,7 +20,7 @@ const settingsMapping = {
 
 function updateSelectedElement(key, value, children, selectedRowId, selectedItemId) {
 	return children.map((child) => {
-		if (['text', 'button', 'image'].includes(child.type) && child.id === selectedItemId) {
+		if (['text', 'button', 'image', 'form'].includes(child.type) && child.id === selectedItemId) {
 			return {
 				...child,
 				style: {
@@ -55,6 +55,9 @@ function Settings(props) {
 	const { component, setComponent, selectedItem, selectedRow, setSelectedItem } = props;
 
 	const [showUploadModal, setShowUploadModal] = useState(false);
+
+	console.log('selectedItemsss ::', selectedItem);
+	console.log('selectedRowssss ::', selectedRow);
 
 	const [defaultStyles, setDefaultStyles] = useState([]);
 

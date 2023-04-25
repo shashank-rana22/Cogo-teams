@@ -89,6 +89,8 @@ function DNDComponent() {
 		setShowContentModal(false);
 	};
 
+	console.log('my selected item ::', selectedItem);
+
 	return (
 		<div>
 			<section className={styles.heading_container}>

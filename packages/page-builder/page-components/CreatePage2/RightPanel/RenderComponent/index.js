@@ -85,6 +85,7 @@ function RenderComponents({
 			key={elementId}
 			role="presentation"
 			onClick={() => {
+				console.log('widgetsssssssss ::', widget);
 				setSelectedItem({ ...widget, index });
 			}}
 			style={{ width: '100%', height: '100%', color: '#222' }}
