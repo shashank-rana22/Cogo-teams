@@ -30,8 +30,8 @@
 	display: flex;
 	justify-content: flex-end;
 
-	.core-ui-button-root {
-		margin-right: 8px;
+	& > button:first-child {
+		margin-right: 12px;
 	}
 }
 
