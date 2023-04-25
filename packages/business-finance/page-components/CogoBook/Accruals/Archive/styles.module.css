@@ -147,16 +147,16 @@
 	align-items: center;
 }
 
-.total_count{
-	padding: 6px 8px 6px 8px;
-    margin-top: 10px;
-    background: #FDEBE9;
-    border-radius: 6px;
+.total_count {
+	padding: 6px 8px;
+	margin-top: 10px;
+	background: #fdebe9;
+	border-radius: 6px;
 }
 
-.total_count_num{
-	color: #EE3425;
+.total_count_num {
 	font-weight: 600;
+	color: #ee3425;
 }
 
 .expense {

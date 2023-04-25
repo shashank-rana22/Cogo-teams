@@ -57,9 +57,10 @@
 
 	:global {
 		.react-datepicker__input-container {
-			input{
+			input {
 				height: 32px;
 			}
+
 			.react-datepicker__close-icon::after {
 				background: none !important;
 			}
@@ -146,9 +147,10 @@
 
 	:global {
 		.react-datepicker__input-container {
-			input{
+			input {
 				height: 32px;
 			}
+
 			.react-datepicker__close-icon::after {
 				background: none !important;
 			}
@@ -181,11 +183,11 @@
 	font-size: 12px;
 }
 
-.dot{
-    height: 6px;
-    width: 6px;
-    background-color: #EE3425;
-    border-radius: 50%;
-    display: inline-block;
-    margin: 0px 0px 8px 2px;
+.dot {
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+	margin: 0 0 8px 2px;
+	background-color: #ee3425;
+	border-radius: 50%;
 }
