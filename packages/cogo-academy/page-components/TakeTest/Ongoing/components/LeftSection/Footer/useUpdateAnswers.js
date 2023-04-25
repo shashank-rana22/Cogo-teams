@@ -69,21 +69,17 @@ function useUpdateAnswers({
 		const payload = {
 			test_user_mapping_id,
 			test_question_id : id,
-			// test_question_answer_ids : answerArray || [],
 			answer_state     : answerState,
 			question_type,
 			...(question_type === 'case_study'
 				? { test_case_study_question_id: sub_questions?.[subQuestion - 1]?.id } : null),
 
 			...(question_type === 'subjective'
-				? { subjective_answer_text: subjectiveAnswer.toString('html') } : null),
-
-			...(question_type === 'subjective'
-				? { subjective_file_url: uploadValue?.finalUrl ? uploadValue?.finalUrl : uploadValue } : null),
-
-			...(question_type !== 'subjective'
-				? { test_question_answer_ids: answerArray || [] } : null),
-
+				? {
+					subjective_answer_text : subjectiveAnswer.toString('html'),
+					subjective_file_url    : uploadValue?.finalUrl
+						? uploadValue?.finalUrl : uploadValue,
+				} : { test_question_answer_ids: answerArray || [] }),
 		};
 
 		const res = await trigger({
