@@ -113,7 +113,13 @@ function ExitingPayRun({
 				<Modal.Footer>
 					<Button themeType="secondary" onClick={() => { setExitPayRun(false); }}>Cancel</Button>
 					<div className={styles.button}>
-						<Button onClick={handleClick}>Confirm</Button>
+						<Button
+							onClick={handleClick}
+							disabled={value === ''}
+						>
+							Confirm
+
+						</Button>
 					</div>
 				</Modal.Footer>
 			</Modal>
