@@ -3,7 +3,7 @@ import FileUploader from '../FileUploader';
 function ImageComponent(props) {
 	const { components, setComponents, childId, selectedRow, widget } = props;
 
-	const { content, style } = widget || {};
+	const { content } = widget || {};
 
 	const handleFileChange = (val) => {
 		if (val) {
@@ -22,7 +22,7 @@ function ImageComponent(props) {
 	};
 
 	return (
-		<div style={style}>
+		<div>
 			{content ? (
 				<div>
 					<img width="100%" src={content} alt="upload-img" />
