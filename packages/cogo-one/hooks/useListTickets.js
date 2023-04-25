@@ -4,7 +4,7 @@ import { useEffect, useCallback, useState } from 'react';
 import { FILTER_KEYS_MAPPING } from '../constants';
 
 const useListTickets = ({ UserID = '', activeTab = '' }) => {
-	const [filter, setFilter] = useState('priority');
+	const [filter, setFilter] = useState('requested');
 	const [{ loading, data }, trigger] = useTicketsRequest({
 		url     : '/list',
 		method  : 'get',

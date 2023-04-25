@@ -20,7 +20,7 @@ function Tickets({ zippedTicketsData = {} }) {
 		setPagination = () => {},
 	} = zippedTicketsData || {};
 
-	const { HighPriority = 0, Unresolved = 0, Closed = 0 } = statsData || {};
+	const { Requested = 0, Unresolved = 0, Closed = 0 } = statsData || {};
 
 	const {
 		createTicketActivity,
@@ -30,9 +30,24 @@ function Tickets({ zippedTicketsData = {} }) {
 	const { items = [], page = 0, size = 0, total = 0	} = ticketData || {};
 
 	const STATS_MAPPING = [
-		{ title: 'High Priority', value: HighPriority, key: 'priority', iconColor: '#F8AEA8' },
-		{ title: 'Tickets to Follow up', value: Unresolved, key: 'unresolved', iconColor: '#FEF199' },
-		{ title: 'Tickets Closed', value: Closed, key: 'closed', iconColor: '#E0E0E0' },
+		{
+			title     : 'Tickets Requested',
+			value     : Requested,
+			key       : 'requested',
+			iconColor : '#F8AEA8',
+		},
+		{
+			title     : 'Tickets to Follow up',
+			value     : Unresolved,
+			key       : 'unresolved',
+			iconColor : '#FEF199',
+		},
+		{
+			title     : 'Tickets Closed',
+			value     : Closed,
+			key       : 'closed',
+			iconColor : '#E0E0E0',
+		},
 	];
 
 	const renderTickets = () => {

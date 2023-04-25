@@ -272,12 +272,36 @@ export const GENERAL_ICON = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/o
 export const ECLAMATION_SVG = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg';
 
 export const FILTER_KEYS_MAPPING = {
-	priority   : { Priority: 'high' },
+	requested  : { Statuses: 'reject_requested,resolve_requested' },
 	unresolved : { Status: 'unresolved' },
 	closed     : { Status: 'closed' },
 };
 
 export const TICKET_ACTIVITY_MAPPING = {
+	requested: [
+		{
+			tooltipContent  : 'Approve',
+			activityPayload : {
+				type   : 'mark_as_resolved',
+				status : 'resolved',
+			},
+			iconStyles: {
+				height : '15px',
+				width  : '20px',
+			},
+			icon: IcMTick,
+		}, {
+			tooltipContent  : 'Deny',
+			activityPayload : {
+				type   : 'rejected',
+				status : 'rejected',
+			},
+			iconStyles: {
+				height : '15px',
+				width  : '20px',
+			},
+			icon: IcMCross,
+		}],
 	closed: [
 		{
 			tooltipContent  : 'Reopen',
@@ -294,10 +318,10 @@ export const TICKET_ACTIVITY_MAPPING = {
 	],
 	open: [
 		{
-			tooltipContent  : 'Resolve',
+			tooltipContent  : 'Resolve request',
 			activityPayload : {
-				type   : 'mark_as_resolved',
-				status : 'resolved',
+				type   : 'resolve_requested',
+				status : 'resolve_requested',
 			},
 			iconStyles: {
 				height : '15px',
@@ -306,10 +330,10 @@ export const TICKET_ACTIVITY_MAPPING = {
 			icon: IcMTick,
 		},
 		{
-			tooltipContent  : 'Reject',
+			tooltipContent  : 'Reject request',
 			activityPayload : {
-				type   : 'rejected',
-				status : 'rejected',
+				type   : 'reject_requested',
+				status : 'reject_requested',
 			},
 			iconStyles: {
 				height : '15px',
