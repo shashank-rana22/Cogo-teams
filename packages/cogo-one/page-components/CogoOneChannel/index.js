@@ -112,6 +112,7 @@ function CogoOne() {
 		activeVoiceCard,
 		activeTab,
 		setRaiseTicketModal,
+		agentId: userId,
 	});
 	const renderComponent = () => {
 		if ((activeTab === 'message' && !isEmpty(activeMessageCard))

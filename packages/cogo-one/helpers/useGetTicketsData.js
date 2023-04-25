@@ -7,6 +7,7 @@ const useGetTicketsData = ({
 	activeVoiceCard = {},
 	activeTab = '',
 	setRaiseTicketModal = () => {},
+	agentId = '',
 }) => {
 	const formattedMessageData = getActiveCardDetails(activeMessageCard) || {};
 	const {
@@ -65,6 +66,7 @@ const useGetTicketsData = ({
 		filter,
 		refetchTickets,
 		setPagination,
+		agentId,
 	};
 
 	return {

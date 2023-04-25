@@ -277,69 +277,8 @@ export const FILTER_KEYS_MAPPING = {
 	closed     : { Status: 'closed' },
 };
 
-export const TICKET_ACTIVITY_MAPPING = {
-	requested: [
-		{
-			tooltipContent  : 'Approve',
-			activityPayload : {
-				type   : 'mark_as_resolved',
-				status : 'resolved',
-			},
-			iconStyles: {
-				height : '15px',
-				width  : '20px',
-			},
-			icon: IcMTick,
-		}, {
-			tooltipContent  : 'Deny',
-			activityPayload : {
-				type   : 'rejected',
-				status : 'rejected',
-			},
-			iconStyles: {
-				height : '15px',
-				width  : '20px',
-			},
-			icon: IcMCross,
-		}],
-	closed: [
-		{
-			tooltipContent  : 'Reopen',
-			activityPayload : {
-				type   : 'reopened',
-				status : 'reopened',
-			},
-			iconStyles: {
-				height : '20px',
-				width  : '20px',
-			},
-			icon: IcMLineredo,
-		},
-	],
-	open: [
-		{
-			tooltipContent  : 'Resolve request',
-			activityPayload : {
-				type   : 'resolve_requested',
-				status : 'resolve_requested',
-			},
-			iconStyles: {
-				height : '15px',
-				width  : '20px',
-			},
-			icon: IcMTick,
-		},
-		{
-			tooltipContent  : 'Reject request',
-			activityPayload : {
-				type   : 'reject_requested',
-				status : 'reject_requested',
-			},
-			iconStyles: {
-				height : '15px',
-				width  : '15px',
-			},
-			icon: IcMCross,
-		},
-	],
+export const PRIORITY_MAPPING = {
+	medium : '#F68B21',
+	high   : '#EE3425',
+	low    : '#FCDC00',
 };

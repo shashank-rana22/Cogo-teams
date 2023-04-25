@@ -1,13 +1,15 @@
 import { Tooltip, cl } from '@cogoport/components';
 
 import ReceiveDiv from '../../../../../common/ReceiveDiv';
-import { TICKET_ACTIVITY_MAPPING } from '../../../../../constants';
+import { PRIORITY_MAPPING } from '../../../../../constants';
+import getTicketActivityMapping from '../../../../../utils/getTicketActivityMapping';
 
 import styles from './styles.module.css';
 
 function EachTicket({
 	eachTicket = {},
 	createTicketActivity = () => {},
+	agentId = '',
 }) {
 	const {
 		Data: { InvoiceNumber = 0, Message = '', ShipmentId = 0 } = {},
@@ -16,6 +18,9 @@ function EachTicket({
 		Priority = '',
 		Status = '',
 		ID = '',
+		Type = '',
+		Description = '',
+		TicketReviewerID = '',
 	} = eachTicket || {};
 
 	const eachMessage = {
@@ -33,7 +38,16 @@ function EachTicket({
 		};
 		createTicketActivity(payload);
 	};
-	const activityMapping = TICKET_ACTIVITY_MAPPING[Status === 'closed' ? 'closed' : 'open'] || [];
+	const headerValue = InvoiceNumber || ShipmentId;
+
+	const headerTitle = InvoiceNumber ? 'Invoice ID' : 'Shipment ID';
+
+	const { actions = [], requestedText = '', canPerformActions = '', iconUrl = '' } = getTicketActivityMapping({
+
+		status                  : Status,
+		canPerformRequestAction : agentId === TicketReviewerID,
+	}) || [];
+
 	return (
 		<div
 			className={cl`${styles.message_content}
@@ -44,27 +58,19 @@ function EachTicket({
 		>
 			<div className={styles.header}>
 				<div>
-					{InvoiceNumber ? (
+					{headerValue ? (
 						<div
 							className={cl`${styles.details_div} 
 							${Status === 'closed' ? styles.closed_details : ''}`}
 						>
-							Invoice ID:
-							<span>{InvoiceNumber}</span>
-						</div>
-					) : null}
-					{ShipmentId ? (
-						<div
-							className={cl`${styles.details_div} 
-							${Status === 'closed' ? styles.closed_details : ''}`}
-						>
-							Shipment ID:
-							<span>{ShipmentId}</span>
+							{headerTitle}
+							:
+							<span>{headerValue}</span>
 						</div>
 					) : null}
 				</div>
 				<div className={styles.activity}>
-					{activityMapping.map(({
+					{canPerformActions ? actions.map(({
 						tooltipContent = '',
 						activityPayload = {},
 						icon:Icon,
@@ -79,24 +85,35 @@ function EachTicket({
 								/>
 							</Tooltip>
 						)
-					))}
+					)) : <div className={styles.not_authorized_styles}>NOT AUTHORIZED</div>}
 				</div>
 			</div>
-			{Message && (
-				<div className={styles.overflow_div}>
-					<ReceiveDiv eachMessage={eachMessage} canRaiseTicket={false} />
-				</div>
-			)}
+			{Message ? (
+				<ReceiveDiv eachMessage={eachMessage} canRaiseTicket={false} />
+			) : <div className={styles.description}>{Description}</div>}
 			<div
-				className={Status === 'closed' ? styles.ticket_details_close : styles.ticket_details}
+				className={cl`${styles.ticket_details} ${Status === 'closed' ? styles.ticket_details_close : ''}`}
 			>
+				<div className={styles.type_styles}>
+					{Type}
+				</div>
 				<div className={styles.ticket_status}>
-					<div className={styles.ticket_priority}>{Status}</div>
-					<div className={styles.ticket_priority}>{Priority}</div>
+					<div className={styles.ticket_priority}>
+						{iconUrl && <img src={iconUrl} alt={requestedText} className={styles.img_styles} />}
+						<div>{requestedText}</div>
+					</div>
+					<div
+						className={styles.priority_dot}
+						style={{ '--background-color': PRIORITY_MAPPING[Priority] || '#F68B21' }}
+					>
+						{Priority?.toUpperCase()}
+					</div>
 				</div>
-				<div className={styles.ticket_description}>
-					{TicketActivityDescription}
-				</div>
+				{TicketActivityDescription && (
+					<div className={styles.description}>
+						{TicketActivityDescription}
+					</div>
+				)}
 			</div>
 		</div>
 	);

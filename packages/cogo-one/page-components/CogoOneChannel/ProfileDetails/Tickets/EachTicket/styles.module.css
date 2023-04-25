@@ -13,7 +13,7 @@
 
 .ticket_details {
 	width: 100%;
-	padding: 10px 15px;
+	padding: 10px;
 	background: #fff;
 }
 
@@ -22,17 +22,9 @@
 	justify-content: space-between;
 	font-size: 12px;
 	color: #828282;
-	text-transform: uppercase;
-}
-
-.overflow_div {
-	max-height: 100px;
-	overflow-y: hidden;
 }
 
 .ticket_details_close {
-	width: 100%;
-	padding: 10px 15px;
 	background: #e0e0e0;
 }
 
@@ -64,6 +56,13 @@
 	display: flex;
 }
 
+.not_authorized_styles {
+	padding: 3px 8px 0 0;
+	font-size: 12px;
+	font-weight: 600;
+	color: #828282;
+}
+
 .icon_styles {
 	margin: 5px;
 	cursor: pointer;
@@ -71,11 +70,40 @@
 }
 
 .ticket_priority {
-	font-size: 10px;
+	display: flex;
+	align-items: center;
+	font-size: 12px;
 	font-weight: 600;
 	color: #828282;
 }
 
 .no_message {
 	background-color: #fff;
+}
+
+.type_styles {
+	width: 100%;
+	padding: 5px 0;
+	font-size: 13px;
+	font-weight: 600;
+	color: #4f4f4f;
+	text-align: left;
+}
+
+.priority_dot {
+	font-size: 10px;
+	font-weight: 600;
+	color: var(--background-color);
+}
+
+.description {
+	padding: 5px 7px;
+	font-size: 12px;
+	color: #828282;
+	word-break: break-word;
+}
+
+.img_styles {
+	height: 15px;
+	margin-right: 4px;
 }

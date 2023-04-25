@@ -18,6 +18,7 @@ function Tickets({ zippedTicketsData = {} }) {
 		filter = '',
 		refetchTickets,
 		setPagination = () => {},
+		agentId = '',
 	} = zippedTicketsData || {};
 
 	const { Requested = 0, Unresolved = 0, Closed = 0 } = statsData || {};
@@ -81,6 +82,7 @@ function Tickets({ zippedTicketsData = {} }) {
 				loading={listLoading}
 				createTicketActivity={createTicketActivity}
 				activityLoading={loading}
+				agentId={agentId}
 			/>
 		));
 	};
