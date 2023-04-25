@@ -7713,6 +7713,12 @@ const partner = {
 			feature     : 'invoices',
 		},
 		{
+			api         : 'post_sales_invoice_einvoice',
+			access_type : 'private',
+			module      : 'invoices',
+			feature     : 'invoices',
+		},
+		{
 			api         : 'post_sales_outstanding_ledger_summary',
 			access_type : 'private',
 			module      : 'invoices',
