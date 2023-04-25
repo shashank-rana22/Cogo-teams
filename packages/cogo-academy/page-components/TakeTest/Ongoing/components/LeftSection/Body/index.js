@@ -33,6 +33,7 @@ function Body({
 						loading={loading}
 					/>
 				)}
+
 			{question_type === 'case_study' && (
 				<CaseStudy
 					question={data}
@@ -46,19 +47,18 @@ function Body({
 					setSubQuestion={setSubQuestion}
 				/>
 			)}
-			{
-				question_type === 'subjective' && (
-					<Subjective
-						currentQuestion={currentQuestion}
-						total_question={total_question}
-						question={data}
-						subjectiveAnswer={subjectiveAnswer}
-						setSubjectiveAnswer={setSubjectiveAnswer}
-						uploadValue={uploadValue}
-						setUploadValue={setUploadValue}
-					/>
-				)
-			}
+
+			{question_type === 'subjective' && (
+				<Subjective
+					currentQuestion={currentQuestion}
+					total_question={total_question}
+					question={data}
+					subjectiveAnswer={subjectiveAnswer}
+					setSubjectiveAnswer={setSubjectiveAnswer}
+					uploadValue={uploadValue}
+					setUploadValue={setUploadValue}
+				/>
+			)}
 		</div>
 	);
 }

@@ -15,7 +15,6 @@ const TYPE_MAPPING = {
 	single_correct : 'StandAlone',
 	multi_correct  : 'StandAlone',
 	subjective     : 'Subjective',
-
 };
 
 const PAYLOAD_TYPE_MAPPING = {
