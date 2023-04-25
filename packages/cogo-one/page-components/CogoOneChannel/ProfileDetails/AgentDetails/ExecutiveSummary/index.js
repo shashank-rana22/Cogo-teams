@@ -47,13 +47,8 @@ function ExecutiveSummary({
 				<div className={styles.title}>Executive Summary</div>
 				<div className={styles.content}>
 					<div className={styles.summary}>{summary}</div>
-					<div
-						role="button"
-						tabIndex={0}
-						onClick={handleSummary}
-						className={styles.show_button}
-					>
-						<Button size="md" themeType="linkUi">Show More</Button>
+					<div className={styles.show_button}>
+						<Button size="md" themeType="linkUi" onClick={handleSummary}>Show More</Button>
 					</div>
 				</div>
 			</div>
