@@ -3876,19 +3876,22 @@ const partner = {
 			feature      : 'rate_density',
 		},
 		{
-			api         : 'list_shipment_flash_booking_rates',
-			access_type : 'private',
-			feature     : 'live_booking',
+			api          : 'list_shipment_flash_booking_rates',
+			access_type  : 'private',
+			feature      : 'live_booking',
+			service_name : 'shipment',
 		},
 		{
-			api         : 'create_shipment_flash_booking_rate',
-			access_type : 'private',
-			feature     : 'live_booking',
+			api          : 'create_shipment_flash_booking_rate',
+			access_type  : 'private',
+			feature      : 'live_booking',
+			service_name : 'shipment',
 		},
 		{
-			api         : 'update_shipment_flash_booking_rate',
-			access_type : 'private',
-			feature     : 'live_booking',
+			api          : 'update_shipment_flash_booking_rate',
+			access_type  : 'private',
+			feature      : 'live_booking',
+			service_name : 'shipment',
 		},
 		{
 			api         : 'get_shipment_services_quotation',
@@ -7002,8 +7005,9 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'list_organization_documents',
-			access_type : 'private',
+			api          : 'list_organization_documents',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 		{
 			api          : 'list_cogo_entities',
@@ -7704,6 +7708,12 @@ const partner = {
 		},
 		{
 			api         : 'get_sales_invoice_generate_pdf',
+			access_type : 'private',
+			module      : 'invoices',
+			feature     : 'invoices',
+		},
+		{
+			api         : 'post_sales_invoice_einvoice',
 			access_type : 'private',
 			module      : 'invoices',
 			feature     : 'invoices',
@@ -8511,6 +8521,11 @@ const partner = {
 	],
 	campaign_dashboard: [
 		{
+			api          : 'list_platform_config_constants',
+			access_type  : 'private',
+			service_name : 'platform_config',
+		},
+		{
 			api          : 'create_campaign_segment',
 			access_type  : 'private',
 			service_name : 'campaign',
@@ -8713,7 +8728,7 @@ const partner = {
 			service_name : 'campaign',
 		},
 		{
-			api          : 'list_campaign_email_configuration',
+			api          : 'list_campaign_configuration',
 			access_type  : 'private',
 			service_name : 'campaign',
 		},
@@ -8752,6 +8767,12 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'campaign',
 		},
+		{
+			api          : 'update_campaign_channel_availability',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+
 		{
 			api          : 'verify_segment',
 			access_type  : 'private',
@@ -9595,6 +9616,12 @@ const partner = {
 		},
 		{
 			api         : 'put_purchase_bills_status',
+			access_type : 'private',
+			module      : 'purchase_invoice',
+			feature     : 'purchase_invoice',
+		},
+		{
+			api         : 'put_purchase_bills_status_for_manual_bill',
 			access_type : 'private',
 			module      : 'purchase_invoice',
 			feature     : 'purchase_invoice',
@@ -11120,8 +11147,7 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
-			api: 'create_communication',
-
+			api          : 'create_communication',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

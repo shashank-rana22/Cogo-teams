@@ -151,18 +151,46 @@ export const testSetColumns = ({
 		id       : 'topics',
 		accessor : ({ topics = [] }) => (
 			<section className={styles.topics}>
-				{topics.map((topic) => (
-					<Tooltip maxWidth={400} content={startCase(topic)} placement="top" key={topic}>
+
+				{topics.length > 0 ? (
+					<Tooltip maxWidth={400} content={startCase(topics[0])} placement="top" key={topics[0]}>
 						<Pill
 							className={styles.topic_pill}
 							size="lg"
 							color="#F3FAFA"
 						>
-							{startCase(topic)}
+							{startCase(topics[0])}
 						</Pill>
 					</Tooltip>
-				))}
-				{topics.length === 0 && '-'}
+				) : '-'}
+
+				{topics.length > 1 && (
+					<Tooltip
+						maxWidth={400}
+						content={(topics.map((topic, index) => ((index >= 1) ? (
+							<Pill
+								className={styles.topic_pill_sub}
+								size="lg"
+								color="#F3FAFA"
+							>
+								{startCase(topic)}
+							</Pill>
+						) : null)))}
+						placement="top"
+						interactive
+					>
+						<Pill
+							className={styles.topic_pill}
+							size="lg"
+							color="#F3FAFA"
+						>
+							+
+							{topics.length - 1}
+							{' '}
+							More
+						</Pill>
+					</Tooltip>
+				)}
 			</section>
 		),
 	},
@@ -216,7 +244,7 @@ export const testSetColumns = ({
 						<section className={styles.status}>
 							<Pill
 								size="md"
-								color={current_status === 'upcoming' ? '#00c8ff' : '#C4DC91'}
+								color={current_status === 'upcoming' ? '#CFEAEC' : '#C4DC91'}
 								className={styles.status_pill}
 							>
 								{startCase(current_status)}
