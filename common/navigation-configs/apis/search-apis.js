@@ -426,10 +426,5 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'user',
 	},
-	{
-		api          : 'get_spot_search_indicative_prices',
-		access_type  : 'private',
-		service_name : 'spot_search',
-	},
 ];
 export default apis;
