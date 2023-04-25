@@ -139,7 +139,7 @@ function ReviewDoc({
 				<div className={styles.action_buttons}>
 					<Button
 						onClick={handleAmmend}
-						className="secondary md"
+						themeType="secondary"
 						disabled={loading}
 					>
 						Amend
