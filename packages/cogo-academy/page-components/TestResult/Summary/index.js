@@ -45,12 +45,10 @@ function Summary({ summaryData = {} }) {
 								{user_percentile.toFixed(2)}
 								%
 							</div>
-
 						</div>
 					</div>
 
 					<div className={styles.radial_chart_item}>
-
 						<div className={styles.chart_item}>
 							<QuestionWiseStats
 								height="250px"
@@ -62,9 +60,7 @@ function Summary({ summaryData = {} }) {
 								<span>Questions: </span>
 								<span>{question_stats?.total_questions || 0}</span>
 							</div>
-
 						</div>
-
 					</div>
 				</div>
 
@@ -83,7 +79,6 @@ function Summary({ summaryData = {} }) {
 							<BarChart chart_data={getDifficultyData()} yAxis="Percentile" />
 						</div>
 					</div>
-
 				</div>
 			</div>
 

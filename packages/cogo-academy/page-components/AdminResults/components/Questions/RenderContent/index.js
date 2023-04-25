@@ -7,14 +7,12 @@ const COMPONENT_MAPPING = {
 	stand_alone_questions: {
 		component: QuestionItem,
 	},
-
 	case_study_based: {
 		component: CaseStudy,
 	},
 	subjective: {
 		component: SubjectiveQuestions,
 	},
-
 };
 
 function RenderContent({ questionsList = [], test_id = '', activeTab = '' }) {
