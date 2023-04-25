@@ -1,0 +1,101 @@
+.name {
+	max-width: 80px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.created_date {
+	display: flex;
+	justify-content: flex-start;
+	font-size: 12px;
+}
+
+.created_time {
+	align-self: center;
+	margin-left: 4px;
+	font-size: 10px;
+	color: #828282;
+}
+
+.number_of_org {
+	display: flex;
+	justify-content: center;
+	min-width: 180px;
+}
+
+.re_upload {
+	min-width: 80px;
+}
+
+.uploaded {
+	min-width: 80px;
+	text-decoration-line: underline;
+}
+
+.total_count {
+	min-width: 100px;
+	text-align: center;
+}
+
+.successfully_migrated_count {
+	min-width: 140px;
+	text-align: center;
+}
+
+.error_type {
+	text-align: center;
+}
+
+.updated_at {
+	display: flex;
+	min-width: 160px;
+}
+
+.error {
+	min-width: 120px;
+}
+
+.stage {
+	display: flex;
+	justify-content: start;
+	min-width: 60px;
+}
+
+.remark {
+	min-width: 120px;
+}
+
+.description {
+	min-width: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.uploaded_by {
+	min-width: 120px;
+}
+
+.popover {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.pop_container {
+	width: 120px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.type {
+	display: flex;
+	justify-content: center;
+	min-width: 80px;
+}
+
+.inner_type {
+	display: flex;
+	justify-content: center;
+}

@@ -9,8 +9,8 @@ import controls from '../utils/controls';
 
 function usePostIngestionData({ refetch = () => {} }) {
 	const [show, setShow] = useState({
-		open   : false,
-		screen : '',
+		open       : false,
+		activeMode : '',
 	});
 	const onClose = () => {
 		setShow((pv) => ({
@@ -43,7 +43,7 @@ function usePostIngestionData({ refetch = () => {} }) {
 
 	const onSubmit = async (e) => {
 		const payload = Object.entries({ ...e, ...uploadData, file_url: e?.file_url?.finalUrl })
-			.filter(([key, value]) => key !== 'final_modal_header' && value !== '' && value !== null)
+			.filter(([key, value]) => Boolean(value) && key !== 'final_modal_header')
 			.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 		try {
 			await trigger({
@@ -54,7 +54,7 @@ function usePostIngestionData({ refetch = () => {} }) {
 			Toast.info('Data Ingested! Please check after some time');
 			refetch();
 		} catch (err) {
-			Toast.error(getApiErrorString(err?.message));
+			Toast.error(getApiErrorString(err.response?.data) || 'Something went wrong');
 		}
 	};
 	const { ingestion_country_id, ingestion_partner_id } = watch();

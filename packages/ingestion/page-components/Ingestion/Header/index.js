@@ -49,8 +49,8 @@ function Header({ refetch = () => {} }) {
 
 	const { getTemplateCsv = () => {}, template = '', setTemplate = () => {} } = useGetTemplate();
 
-	const Footer = INGESTION_FOOTERS_MAPPING[show?.screen] || null;
-	const Component = INGESTION_COMPONENTS_MAPPING[show?.screen] || null;
+	const Footer = INGESTION_FOOTERS_MAPPING[show?.activeMode] || null;
+	const Component = INGESTION_COMPONENTS_MAPPING[show?.activeMode] || null;
 
 	return (
 		<>
@@ -74,8 +74,8 @@ function Header({ refetch = () => {} }) {
 					themeType="primary"
 					onClick={() => {
 						setShow({
-							open   : true,
-							screen : 'chooseModal',
+							open       : true,
+							activeMode : 'chooseModal',
 						});
 					}}
 				>

@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -35,7 +36,7 @@ function usePostReUpload({ row = {}, setTableModal = () => {}, refetch = () => {
 		} = row;
 
 		try {
-			const pay = {
+			const payloadData = {
 				partner_id,
 				country_id,
 				ingestion_type,
@@ -46,8 +47,12 @@ function usePostReUpload({ row = {}, setTableModal = () => {}, refetch = () => {
 				user_id,
 			};
 
-			const payload = Object.entries({ ...pay, file_url: e?.re_upload?.finalUrl, file_name: e?.re_file_name })
-				.filter(([, value]) => value !== '' && value !== null)
+			const payload = Object.entries({
+				...payloadData,
+				file_url  : e?.re_upload?.finalUrl,
+				file_name : e?.re_file_name,
+			})
+				.filter(Boolean)
 				.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 
 			await trigger({
@@ -59,7 +64,7 @@ function usePostReUpload({ row = {}, setTableModal = () => {}, refetch = () => {
 
 			refetch();
 		} catch (err) {
-			Toast.error(err?.response?.data?.file);
+			Toast.error(getApiErrorString(err.response?.data) || 'Something went wrong');
 		}
 	};
 

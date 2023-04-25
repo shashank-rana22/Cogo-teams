@@ -10,7 +10,8 @@ import { useState } from 'react';
 
 import { REDIRECT_LINK_MAPPING, REDIRECT_MAPPING } from '../constants/header-mapping';
 import { UPLOAD_STATUS_MAPPING } from '../constants/table-modal-mapping';
-import styles from '../styles.module.css';
+
+import styles from './styles.module.css';
 
 const downloadErrorCsv = (link) => {
 	window.open(link, '_blank');
@@ -56,9 +57,9 @@ function useGetIngestionList() {
 			Header   : 'FILE NAME',
 			accessor : ({ request_files = {} }) => (
 				<Tooltip
+					disabled={!request_files?.sheet_name}
 					className={styles.popover}
-					// visible={request_files?.sheet_name}
-					content={request_files?.sheet_name || '___'}
+					content={startCase(request_files?.sheet_name || '___')}
 					placement="top"
 				>
 					<div className={styles.name}>{startCase(request_files?.sheet_name || '___')}</div>
@@ -85,9 +86,9 @@ function useGetIngestionList() {
 			accessor : ({ description = '' }) => (
 				<div className={styles.pop_container}>
 					<Tooltip
+						disabled={!description}
 						className={styles.popover}
-						// visible={description}
-						content={description || '___'}
+						content={startCase(description || '___')}
 						placement="left"
 					>
 						<div className={styles.description}>{startCase(description || '___')}</div>
@@ -143,7 +144,7 @@ function useGetIngestionList() {
 						className={styles.popover}
 						content={`Redirecting to
 							${REDIRECT_MAPPING[`${item?.is_channel_partner}_${item?.account_type}`]
-							|| '---'}`}
+							|| '___'}`}
 						placement="top"
 					>
 						<Button
@@ -191,7 +192,7 @@ function useGetIngestionList() {
 			accessor : (item) => (
 				<div className={styles.re_upload}>
 
-					{item?.request_files?.errored_data_url ? (
+					{item.request_files?.errored_data_url ? (
 						<Button onClick={() => { reUploadFiles(item); }} size="md" themeType="secondary">
 							Re-Upload
 						</Button>

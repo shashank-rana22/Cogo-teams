@@ -6,7 +6,7 @@ export function OrgDetailsFooter(props) {
 	const onOrgSubmit = () => {
 		setShow((pv) => ({
 			...pv,
-			screen: 'uploadModal',
+			activeMode: 'uploadModal',
 		}));
 	};
 	return (
@@ -17,7 +17,7 @@ export function OrgDetailsFooter(props) {
 				onClick={() => {
 					setShow((pv) => ({
 						...pv,
-						screen: 'providerSelect',
+						activeMode: 'providerSelect',
 					}));
 				}}
 			>

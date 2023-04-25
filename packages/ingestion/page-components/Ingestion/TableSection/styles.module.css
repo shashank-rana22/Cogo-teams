@@ -19,8 +19,8 @@
 }
 
 .empty {
-	height: 520px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	height: 520px;
 }

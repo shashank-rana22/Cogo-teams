@@ -18,7 +18,7 @@ function useGetTemplate() {
 			window.open(response?.data?.template_file_url, '_blank');
 			setTemplate('');
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.data));
+			Toast.error(getApiErrorString(error.response?.data) || 'Something went wrong');
 		}
 	};
 

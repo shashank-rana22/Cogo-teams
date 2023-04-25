@@ -12,7 +12,7 @@ export function UploadModalFooter(props) {
 				onClick={() => {
 					setShow((pv) => ({
 						...pv,
-						screen: 'orgDetails',
+						activeMode: 'orgDetails',
 					}));
 				}}
 			>

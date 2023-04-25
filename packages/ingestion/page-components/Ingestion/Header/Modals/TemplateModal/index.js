@@ -20,10 +20,11 @@ function TemplateModal({ getTemplateCsv = () => {}, template = '', setTemplate =
 			)}
 			/>
 			<Modal.Body>
-				<div className={styles.heading}>Download Template for leads</div>
-				<div className={styles.container}>
+				<div className={styles.template_container}>
+					<div className={styles.heading}>Download Template for leads</div>
+					<div className={styles.container}>
 
-					{
+						{
 						BUTTON_MAPPING.map((item) => (
 							<Button
 								themeType="secondary"
@@ -36,7 +37,10 @@ function TemplateModal({ getTemplateCsv = () => {}, template = '', setTemplate =
 						))
 					}
 
+					</div>
+
 				</div>
+
 			</Modal.Body>
 			<Modal.Footer>
 				<Button themeType="secondary" onClick={onClose}>Close</Button>

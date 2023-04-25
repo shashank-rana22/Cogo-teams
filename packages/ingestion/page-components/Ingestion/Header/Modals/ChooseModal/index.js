@@ -6,7 +6,7 @@ function ChooseModal({ setShow = () => {}, setUploadData = () => {}, uploadData 
 	const onChoose = (type) => {
 		setShow((pv) => ({
 			...pv,
-			screen: 'providerSelect',
+			activeMode: 'providerSelect',
 		}));
 
 		setUploadData({
@@ -17,7 +17,7 @@ function ChooseModal({ setShow = () => {}, setUploadData = () => {}, uploadData 
 
 	return (
 
-		<div>
+		<div className={styles.container}>
 			<div className={styles.choose_heading}>What do you wish to upload CSV for?</div>
 			<div className={styles.choose_container}>
 				<Button

@@ -21,7 +21,7 @@ function ProviderSelectModal({ setShow = () => {}, setUploadData = () => {}, upl
 		reset();
 		setShow((pv) => ({
 			...pv,
-			screen: 'orgDetails',
+			activeMode: 'orgDetails',
 		}));
 	};
 

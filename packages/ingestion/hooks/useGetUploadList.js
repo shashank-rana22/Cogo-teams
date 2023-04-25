@@ -5,7 +5,8 @@ import { startCase, format } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { UPLOAD_STATUS_MAPPING } from '../constants/table-modal-mapping';
-import styles from '../styles.module.css';
+
+import styles from './styles.module.css';
 
 function useGetUploadList(id) {
 	const [params, setParams] = useState({

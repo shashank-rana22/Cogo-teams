@@ -8,7 +8,7 @@ export function ProviderSelectFooter(props) {
 			themeType="secondary"
 			onClick={() => setShow((pv) => ({
 				...pv,
-				screen: 'chooseModal',
+				activeMode: 'chooseModal',
 			}))}
 		>
 			Back
