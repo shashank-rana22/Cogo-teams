@@ -10,17 +10,17 @@
 		}
 
 		.manifest_heading {
-			border: 0.5px solid #333;
-			margin-left: auto;
-			margin-right: auto;
 			padding: 2px 8px;
+			margin-right: auto;
+			margin-left: auto;
+			border: 0.5px solid #333;
 		}
 
 		.shipper {
-			flex:0.5;
-			font-weight: 600;
-			font-size: 13px;
+			flex: 0.5;
 			margin-top: 40px;
+			font-size: 13px;
+			font-weight: 600;
 			line-height: 1.6;
 		}
 
@@ -29,13 +29,13 @@
 		}
 
 		.consignee {
-			flex:0.5;
+			flex: 0.5;
 			margin-top: 40px;
 		}
 
 		.font_style {
-			font-weight: 600;
 			font-size: 12px;
+			font-weight: 600;
 			line-height: 1.6;
 		}
 
@@ -48,22 +48,19 @@
 		}
 
 		table {
-			border-collapse: collapse;
-			margin-top: 40px;
 			width: 100%;
+			margin-top: 40px;
+			border-collapse: collapse;
 		}
 
 		td {
-			border:1px solid #333;
 			padding: 4px 12px;
+			border: 1px solid #333;
 		}
 
 		th {
-			border:1px solid #333;
 			padding: 4px 12px;
+			border: 1px solid #333;
 		}
 	}
 }
-
-
-
