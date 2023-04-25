@@ -180,7 +180,7 @@ function ListProfit({
 							</div>
 						) }
 
-						{isRowVisible &&	(
+						{isRowVisible && (
 							<div className={styles.particular_data_review}>
 								(-) Operating Expenses
 								<div
@@ -196,8 +196,11 @@ function ListProfit({
 						)}
 						{dropDown?.operating && (
 							<div className={styles.row_vis_data}>
-								{isRowVisible &&	<div>Billed Expense</div>}
-								{isRowVisible &&	<div>Accrued Expense</div>}
+								{isRowVisible && <>
+								  <div>Billed Expense</div>
+								  <div>Accrued Expense</div>
+								  </>
+								  }
 							</div>
 						)}
 					</div>
@@ -826,11 +829,6 @@ function ListProfit({
 								Extraordinary Items
 							</div>
 						)}
-						{/* {isRowVisible && (
-							<div className={styles.depreciation}>
-								Prior Period Item
-							</div>
-						)} */}
 
 					</div>
 
@@ -850,12 +848,6 @@ function ListProfit({
 												{(totalExtraordinaryItems).toLocaleString('en-IN', options)}
 											</div>
 										)}
-										{/* {isRowVisible && (
-											<div className={styles.particular_data} style={{ border: '2px solid red' }}>
-												{(totalPriorPeriodItem).toLocaleString('en-IN', options)}
-											</div>
-										)} */}
-
 									</div>
 								);
 							}
@@ -871,11 +863,6 @@ function ListProfit({
 											{(totalExtraordinaryItems * ratio).toLocaleString('en-IN', options)}
 										</div>
 									)}
-									{/* {isRowVisible && (
-										<div className={styles.particular_data} style={{ border: '2px solid red' }}>
-											{(totalPriorPeriodItem * ratio).toLocaleString('en-IN', options)}
-										</div>
-									)} */}
 
 								</div>
 							);

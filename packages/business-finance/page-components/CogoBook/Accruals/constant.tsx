@@ -185,7 +185,7 @@ export const bookedColumn = (
 							<div className={quotationDiffProfit >= 0
 								? styles.margin_div_color : styles.margin_dif_color}
 							>
-								{(quotationDiffProfit).toFixed(2) || '0'}
+								{(quotationDiffProfit || 0.00).toFixed(2) || '0'}
 								%
 							</div>
 							<div className={quotationDiffProfit >= 0 ? styles.hr_small : styles.hr_small_conditions} />
@@ -233,7 +233,7 @@ export const bookedColumn = (
 							<div className={quotationDiffProfit >= 0
 								? styles.margin_div_color : styles.margin_dif_color}
 							>
-								{(quotationDiffProfit).toFixed(2) || '0'}
+								{(quotationDiffProfit || 0.00).toFixed(2) || '0'}
 								%
 							</div>
 							<div className={quotationDiffProfit >= 0 ? styles.hr_small : styles.hr_small_conditions} />
@@ -258,7 +258,7 @@ export const bookedColumn = (
 							{getFormattedPrice(quotationProfit, sellQuotationCurrency) || 'INR 0.00'}
 						</div>
 						<div className={quotationMargin >= '0' ? styles.margin_div_color : styles.margin_dif_color}>
-							{quotationMargin?.toFixed(2) || '0'}
+							{(quotationMargin || 0.00).toFixed(2) || '0'}
 							%
 						</div>
 					</div>
@@ -306,7 +306,7 @@ export const bookedColumn = (
 						{getFormattedPrice(profit, expenseCurrency) || '-' }
 						<div>
 							{profitPercentage
-								? `${profitPercentage?.toFixed(2)}%`
+								? `${(profitPercentage || 0.00).toFixed(2)}%`
 								: '---'}
 						</div>
 					</span>
@@ -537,7 +537,7 @@ export const column = ({
 						{getFormattedPrice(profit, expenseCurrency) || '-' }
 					</span>
 					<div>
-						{profitPercentage ? `${profitPercentage?.toFixed(2)}%` : '---'}
+						{profitPercentage ? `${(profitPercentage || 0.00).toFixed(2)}%` : '---'}
 					</div>
 				</>
 			);

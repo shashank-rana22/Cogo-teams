@@ -86,7 +86,7 @@ function ViewSelectedInvoice() {
 					{getFormattedPrice(quotationProfit, incomeCurrency) || '-' }
 					{' '}
 					(
-					{Number(quotationMargin || 0)?.toFixed(2) || '0'}
+					{Number(quotationMargin || 0.00)?.toFixed(2) || '0'}
 					%)
 				</div>
 				<div>

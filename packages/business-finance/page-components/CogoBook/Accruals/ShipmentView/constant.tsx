@@ -256,7 +256,7 @@ export const accrualColumn = (
 					</div>
 					<div className={styles.line_value}>
 						<div className={quotationDiffProfit >= 0 ? styles.margin_div_color : styles.margin_dif_color}>
-							{(quotationDiffProfit).toFixed(2) || '0'}
+							{(quotationDiffProfit || 0.00).toFixed(2) || '0'}
 							%
 						</div>
 						<div className={quotationDiffProfit >= 0 ? styles.hr_small : styles.hr_small_conditions} />
@@ -305,7 +305,7 @@ export const accrualColumn = (
 					</div>
 					<div className={styles.line_value}>
 						<div className={quotationDiffProfit >= 0 ? styles.margin_div_color : styles.margin_dif_color}>
-							{(quotationDiffProfit).toFixed(2) || '0'}
+							{(quotationDiffProfit || 0.00).toFixed(2) || '0'}
 							%
 						</div>
 						<div className={quotationDiffProfit >= 0 ? styles.hr_small : styles.hr_small_conditions} />
@@ -330,7 +330,7 @@ export const accrualColumn = (
 						{getFormattedPrice(quotationProfit, sellQuotationCurrency) || 'INR 0.00'}
 					</div>
 					<div className={quotationMargin >= '0' ? styles.margin_div_color : styles.margin_dif_color}>
-						{quotationMargin?.toFixed(2) || '0'}
+						{(quotationMargin || 0.00)?.toFixed(2) || '0'}
 						%
 					</div>
 				</div>
@@ -376,7 +376,7 @@ export const accrualColumn = (
 						<span className={renderClassName()}>
 							<div>{getFormattedPrice(profit, expenseCurrency) || '-' }</div>
 							<div>
-								{profitPercentage?.toFixed(2)}
+								{(profitPercentage || 0.00).toFixed(2)}
 								%
 							</div>
 						</span>
