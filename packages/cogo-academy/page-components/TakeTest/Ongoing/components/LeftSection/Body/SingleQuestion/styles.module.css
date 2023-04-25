@@ -52,10 +52,7 @@
 }
 
 .question {
-	padding-top: 10px;
-	padding-right: 8px;
-	padding-bottom: 10px;
-	padding-left: 8px;
+	padding: 10px 8px;
 	font-size: 14px;
 	font-weight: 600;
 	color: #221f20;
