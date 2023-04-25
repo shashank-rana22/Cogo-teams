@@ -1,4 +1,4 @@
-import { Button, Stepper, RadioGroup, Toast } from '@cogoport/components';
+import { Button, Stepper, RadioGroup, Toast, Modal } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 import { v4 as uuid } from 'uuid';
@@ -26,6 +26,7 @@ function FormContainer({
 	setHawbDetails, activeHawb, setActiveHawb, activeKey, setActiveKey, taskItem,
 }) {
 	const [value, onChange] = useState('manual');
+	const [confirmDelete, setConfirmDelete] = useState(false);
 
 	const handleDocumentList = (type) => {
 		(packingData?.list || []).forEach((itm) => {
@@ -35,7 +36,7 @@ function FormContainer({
 		});
 	};
 
-	const { upload } = useCreateShipmentDocument({
+	const { upload, loading } = useCreateShipmentDocument({
 		edit,
 		setGenerate,
 		setEdit,
@@ -51,25 +52,28 @@ function FormContainer({
 		setBack(true);
 	};
 
-	function RemoveHawb() {
+	const deleteHAWB = () => {
 		const payload = {
 			state               : 'document_rejected',
 			id                  : taskItem?.id,
 			performed_by_org_id : taskItem?.serviceProviderId,
 		};
+		if (edit) {
+			if (activeHawb.isNew === false) {
+				upload({ payload });
+			}
+			setHawbDetails((prev) => prev.filter((itm) => itm.id !== activeHawb.id));
+			setActiveHawb(hawbDetails.find((ele) => ele.id !== activeHawb.id));
+		} else {
+			Toast.error('Cannot be deleted in create mode');
+		}
+		setConfirmDelete(false);
+	};
+
+	function RemoveHawb() {
 		return (
 			<Button
-				onClick={() => {
-					if (edit) {
-						if (activeHawb.isNew === false) {
-							upload({ payload });
-						}
-						setHawbDetails((prev) => prev.filter((itm) => itm.id !== activeHawb.id));
-						setActiveHawb(hawbDetails.find((ele) => ele.id !== activeHawb.id));
-					} else {
-						Toast.error('Cannot be deleted in create mode');
-					}
-				}}
+				onClick={() => { setConfirmDelete(true); }}
 				themeType="secondary"
 				style={{ border: '1px solid #333', marginLeft: '8%' }}
 				disabled={hawbDetails.length === 1}
@@ -164,97 +168,140 @@ function FormContainer({
 					Refer Shipping Instruction
 				</Button>
 			</div>
-			{value === 'upload' ? <UploadMAWB item={item} setGenerate={setGenerate} activeCategory={activeCategory} />
-				: (
-					<>
-						{activeKey === 'basic' && (
-							<>
-								<Layout fields={fields?.basic} control={control} errors={errors} />
-								<div className={styles.button_container}>
-									{activeCategory === 'hawb' && (
-										<RemoveHawb />
-									)}
-									{!back ? (
-										<div className={styles.button_div}>
-											<Button
-												onClick={() => {
-													setGenerate(false);
-													setEdit(false);
-												}}
-												themeType="secondary"
-												style={{ border: '1px solid #333' }}
-											>
-												CANCEL
-											</Button>
-											<Button
-												onClick={handleSubmit(() => setActiveKey('package'))}
-												themeType="accent"
-											>
-												NEXT
-											</Button>
-										</div>
-									) : null}
-								</div>
-							</>
-						)}
+			{value === 'upload' ? (
+				<UploadMAWB
+					item={item}
+					setGenerate={setGenerate}
+					activeCategory={activeCategory}
+				/>
+			) : (
+				<>
+					{activeKey === 'basic' && (
+						<>
+							<Layout fields={fields?.basic} control={control} errors={errors} />
+							<div className={styles.button_container}>
+								{activeCategory === 'hawb' && (
+									<RemoveHawb />
+								)}
+								{!back ? (
+									<div className={styles.button_div}>
+										<Button
+											onClick={() => {
+												setGenerate(false);
+												setEdit(false);
+											}}
+											themeType="secondary"
+											style={{ border: '1px solid #333' }}
+										>
+											CANCEL
+										</Button>
+										<Button
+											onClick={handleSubmit(() => setActiveKey('package'))}
+											themeType="accent"
+										>
+											NEXT
+										</Button>
+									</div>
+								) : null}
+							</div>
+						</>
+					)}
 
-						{activeKey === 'package' && (
-							<>
-								<Layout fields={fields?.package} control={control} errors={errors} />
-								<div className={styles.button_container}>
-									{activeCategory === 'hawb' && (
-										<RemoveHawb />
-									)}
-									{!back ? (
-										<div className={styles.button_div}>
-											<Button
-												onClick={() => setActiveKey('basic')}
-												themeType="secondary"
-												style={{ border: '1px solid #333' }}
-											>
-												BACK
-											</Button>
-											<Button
-												onClick={handleSubmit(() => setActiveKey('handling'))}
-												themeType="accent"
-											>
-												Next
-											</Button>
-										</div>
-									) : null}
-								</div>
-							</>
-						)}
+					{activeKey === 'package' && (
+						<>
+							<Layout fields={fields?.package} control={control} errors={errors} />
+							<div className={styles.button_container}>
+								{activeCategory === 'hawb' && (
+									<RemoveHawb />
+								)}
+								{!back ? (
+									<div className={styles.button_div}>
+										<Button
+											onClick={() => setActiveKey('basic')}
+											themeType="secondary"
+											style={{ border: '1px solid #333' }}
+										>
+											BACK
+										</Button>
+										<Button
+											onClick={handleSubmit(() => setActiveKey('handling'))}
+											themeType="accent"
+										>
+											Next
+										</Button>
+									</div>
+								) : null}
+							</div>
+						</>
+					)}
 
-						{activeKey === 'handling' && (
-							<>
-								<Layout fields={fields?.handling} control={control} errors={errors} />
-								<div className={styles.button_container}>
-									{activeCategory === 'hawb' && (
-										<RemoveHawb />
-									)}
-									{!back ? (
-										<div className={styles.button_div}>
-											<Button
-												onClick={() => setActiveKey('package')}
-												themeType="secondary"
-												style={{ border: '1px solid #333' }}
-											>
-												BACK
-											</Button>
-											<Button
-												onClick={handleSubmit(onSubmit)}
-												themeType="accent"
-											>
-												Generate Master Airway Bill
-											</Button>
-										</div>
-									) : null}
-								</div>
-							</>
-						)}
-					</>
-				)}
+					{activeKey === 'handling' && (
+						<>
+							<Layout fields={fields?.handling} control={control} errors={errors} />
+							<div className={styles.button_container}>
+								{activeCategory === 'hawb' && (
+									<RemoveHawb />
+								)}
+								{!back ? (
+									<div className={styles.button_div}>
+										<Button
+											onClick={() => setActiveKey('package')}
+											themeType="secondary"
+											style={{ border: '1px solid #333' }}
+										>
+											BACK
+										</Button>
+										<Button
+											onClick={handleSubmit(onSubmit)}
+											themeType="accent"
+										>
+											Generate Master Airway Bill
+										</Button>
+									</div>
+								) : null}
+							</div>
+						</>
+					)}
+				</>
+			)}
+			{confirmDelete && (
+				<Modal
+					size="md"
+					show={confirmDelete}
+					onClose={() => setConfirmDelete(false)}
+					scroll={false}
+				>
+					<Modal.Header title={(<h4 style={{ textAlign: 'center' }}>Confirm Delete</h4>)} />
+					<Modal.Body>
+						<div className={styles.sure_approve}>
+							Are you sure you want to delete
+							{' '}
+							<span>{activeHawb?.documentNo || 'this'}</span>
+							{' '}
+							HAWB
+						</div>
+					</Modal.Body>
+					<Modal.Footer>
+						<Button
+							style={{ marginRight: '10px', border: '1px solid #333' }}
+							size="md"
+							disabled={loading}
+							onClick={() => setConfirmDelete(false)}
+							themeType="secondary"
+						>
+							Cancel
+						</Button>
+						<Button
+							size="md"
+							themeType="accent"
+							disabled={loading}
+							onClick={() => { deleteHAWB(); }}
+						>
+							Confirm
+						</Button>
+					</Modal.Footer>
+				</Modal>
+			)}
 		</div>
 	);
 }
