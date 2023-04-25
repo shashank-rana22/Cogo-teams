@@ -4,7 +4,6 @@ import SubjectiveItem from './SubjectiveItem';
 function Subjective({ questions, user_id = '', test_id = '', count_till_now, view = '', status }) {
 	return (
 		<div className={styles.container}>
-
 			{(questions || []).map((question, index) => (
 				<div key={question.question_data?.id} className={styles.question_card}>
 					<SubjectiveItem

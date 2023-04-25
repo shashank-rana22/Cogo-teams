@@ -79,7 +79,6 @@ function Summary({ summaryData = {} }) {
 
 					<div className={styles.bar_chart_item}>
 						<div className={styles.bar_chart_heading}>Level of Difficulty</div>
-
 						<div className={styles.bar_chart}>
 							<BarChart chart_data={getDifficultyData()} yAxis="Percentile" />
 						</div>

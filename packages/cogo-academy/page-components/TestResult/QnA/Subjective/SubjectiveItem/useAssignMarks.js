@@ -23,7 +23,7 @@ function useAssignMarks({ setError = () => {} }) {
 		}
 
 		try {
-			const res = await trigger({
+			await trigger({
 				data: {
 					test_id,
 					user_id,
@@ -33,9 +33,7 @@ function useAssignMarks({ setError = () => {} }) {
 				},
 			});
 
-			if (res) {
-				Toast.success('Marks Assigned Successfully');
-			}
+			Toast.success('Marks Assigned Successfully');
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data));
 		}

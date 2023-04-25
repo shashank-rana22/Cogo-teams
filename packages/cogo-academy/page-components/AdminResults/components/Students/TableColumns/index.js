@@ -5,7 +5,7 @@ import { startCase, format } from '@cogoport/utils';
 import toFixed from '../../../../CreateModule/utils/toFixed';
 import SortComponent from '../../../commons/SortComponent';
 
-import IsEvaluated from './isEvaluated';
+import IsEvaluated from './IsEvaluated';
 import styles from './styles.module.css';
 
 const handleRedirectToDashboard = ({ router, user, test_id, is_evaluated, status }) => {
