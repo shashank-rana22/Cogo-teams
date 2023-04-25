@@ -27,15 +27,14 @@
 			background-color: #fff;
 
 			.ui_table_body_row {
-				border-radius: 8px;
 				cursor: pointer;
+				border-radius: 8px;
 
 				.ui_table_body_cell {
 					padding: 12px;
 					font-size: 14px;
 					color: #221f20;
 				}
-
 
 				& .ui_table_body_cell:nth-child(1) {
 					padding: 12px 28px;

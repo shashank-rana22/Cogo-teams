@@ -1,5 +1,6 @@
 import { Breadcrumb } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useEffect, useRef } from 'react';
 
 import CreateQuestion from '../../../../../commons/CreateQuestion';
 
@@ -18,6 +19,18 @@ function ManualAddition({
 	mode,
 	getTestQuestionTest,
 }) {
+	const ref = useRef({});
+
+	useEffect(() => {
+		if (!isEmpty(editDetails)) {
+			ref?.current?.scrollIntoView({
+				behavior : 'smooth',
+				block    : 'end',
+				inline   : 'nearest',
+			});
+		}
+	}, [editDetails, ref]);
+
 	return (
 		<div>
 			<Breadcrumb className={styles.breadcrumb_container}>
@@ -49,6 +62,7 @@ function ManualAddition({
 							topic={topic}
 							mode={mode}
 							getTestQuestionTest={getTestQuestionTest}
+							ref={ref}
 						/>
 					);
 				}
@@ -71,6 +85,7 @@ function ManualAddition({
 					topic={topic}
 					mode={mode}
 					getTestQuestionTest={getTestQuestionTest}
+					ref={ref}
 				/>
 			) : null}
 		</div>

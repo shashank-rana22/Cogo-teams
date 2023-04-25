@@ -95,7 +95,7 @@ function AddQuestionsForm({
 				)
 			)}
 
-			<div id="question_form">
+			<div>
 				{!allKeysSaved && !loading ? (
 					<ManualAddition
 						questionSetId={questionSetId}

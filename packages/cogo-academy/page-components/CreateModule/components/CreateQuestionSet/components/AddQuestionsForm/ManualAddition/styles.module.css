@@ -5,9 +5,9 @@
 }
 
 .breadcrumb_inner_item {
-	color: #221F20; 
-	font-weight: 400; 
 	font-size: 16px;
+	font-weight: 400;
+	color: #221f20;
 }
 
 .breadcrumb_container {
