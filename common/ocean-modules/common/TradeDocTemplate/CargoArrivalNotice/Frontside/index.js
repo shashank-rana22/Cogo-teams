@@ -35,13 +35,10 @@ function Frontside({ noFormat, initialValues }, ref) {
 		if (obj.fullWidth) {
 			leftSideFields.push(
 				<div className={styles.block}>
-					{/* <Text
-						className="hidden-no-format"
-						size={14}
-						style={{ width: '150px' }}
-					>
+					<div className={styles.text}>
 						{obj.label}
-					</Text> */}
+					</div>
+
 					<div style={{ width: '100%', height: 'fit-content' }}>
 						{/* <ControlledTextArea
 							control={control}
@@ -59,13 +56,10 @@ function Frontside({ noFormat, initialValues }, ref) {
 			leftSideFields.push(
 				<div style={{ display: 'flex' }}>
 					<div className={styles.block} style={{ width: '50%' }}>
-						{/* <Text
-							className="hidden-no-format"
-							size={14}
-							style={{ width: '150px' }}
-						>
+						<div className={styles.text}>
 							{obj.label}
-						</Text> */}
+						</div>
+
 						<div style={{ height: 'fit-content' }}>
 							{/* <ControlledTextArea
 								control={control}
@@ -78,13 +72,10 @@ function Frontside({ noFormat, initialValues }, ref) {
 						</div>
 					</div>
 					<div className={styles.block} style={{ width: '50%' }}>
-						{/* <Text
-							className="hidden-no-format"
-							size={14}
-							style={{ width: '150px' }}
-						>
+						<div className={styles.text}>
 							{leftDataControls[service_type][i + 1].label}
-						</Text> */}
+						</div>
+
 						<div style={{ height: 'fit-content' }}>
 							{/* <ControlledTextArea
 								control={control}
@@ -102,13 +93,10 @@ function Frontside({ noFormat, initialValues }, ref) {
 		} else {
 			leftSideFields.push(
 				<div className={styles.block}>
-					{/* <Text
-						className="hidden-no-format"
-						size={14}
-						style={{ width: '150px' }}
-					>
+					<div className={styles.text}>
 						{obj.label}
-					</Text> */}
+					</div>
+
 					<div style={{ width: '100%', height: 'fit-content' }}>
 						{/* <ControlledTextArea
 							control={control}
@@ -130,9 +118,10 @@ function Frontside({ noFormat, initialValues }, ref) {
 	for (let i = 0; i < tableDetailControls[service_type].length; i += 1) {
 		tableDetails.push(
 			<div className={styles.block} direction="column">
-				{/* <Text className="hidden-no-format" size={10}>
+				<div className={styles.text}>
 					{tableDetailControls[service_type][i].label}
-				</Text> */}
+				</div>
+
 				<div style={{ height: 'fit-content' }}>
 					{/* <ControlledTextArea
 						control={control}
@@ -154,13 +143,10 @@ function Frontside({ noFormat, initialValues }, ref) {
 				<div style={{ display: 'flex' }}>
 					<div style={{ width: '35%' }}>
 						<div className={styles.block}>
-							{/* <Text
-								className="hidden-no-format"
-								size={14}
-								style={{ width: '150px' }}
-							>
+							<div className={styles.text}>
 								Notify Party (Broker):
-							</Text> */}
+							</div>
+
 							<div style={{ width: '100%', height: 'fit-content' }}>
 								{/* <ControlledTextArea
 									control={control}
@@ -173,13 +159,10 @@ function Frontside({ noFormat, initialValues }, ref) {
 							</div>
 						</div>
 						<div className={styles.block}>
-							{/* <Text
-								className="hidden-no-format"
-								size={14}
-								style={{ width: '150px' }}
-							>
+							<div className={styles.text}>
 								Consignee :
-							</Text> */}
+							</div>
+
 							<div style={{ width: '100%', height: 'fit-content' }}>
 								{/* <ControlledTextArea
 									control={control}
@@ -192,13 +175,10 @@ function Frontside({ noFormat, initialValues }, ref) {
 							</div>
 						</div>
 						<div className={styles.block}>
-							{/* <Text
-								className="hidden-no-format"
-								size={14}
-								style={{ width: '150px' }}
-							>
+							<div className={styles.text}>
 								Shipper:
-							</Text> */}
+							</div>
+
 							<div style={{ width: '100%', height: 'fit-content' }}>
 								{/* <ControlledTextArea
 									control={control}
@@ -213,13 +193,10 @@ function Frontside({ noFormat, initialValues }, ref) {
 					</div>
 					<div style={{ width: '65%' }}>
 						<div className={styles.block}>
-							{/* <Text
-								className="hidden-no-format"
-								size={14}
-								style={{ width: '150px' }}
-							>
+							<div className={styles.text}>
 								Job Reference number:
-							</Text> */}
+							</div>
+
 							<div style={{ width: '100%', height: 'fit-content' }}>
 								{/* <ControlledTextArea
 									control={control}
@@ -232,13 +209,10 @@ function Frontside({ noFormat, initialValues }, ref) {
 							</div>
 						</div>
 						<div className={styles.block}>
-							{/* <Text
-								className="hidden-no-format"
-								size={14}
-								style={{ width: '150px' }}
-							>
+							<div className={styles.text}>
 								Invoice reference number :
-							</Text> */}
+							</div>
+
 							<div style={{ width: '100%', height: 'fit-content' }}>
 								{/* <ControlledTextArea
 									control={control}
@@ -251,13 +225,10 @@ function Frontside({ noFormat, initialValues }, ref) {
 							</div>
 						</div>
 						<div className={styles.block}>
-							{/* <Text
-								className="hidden-no-format"
-								size={14}
-								style={{ width: '150px' }}
-							>
+							<div className={styles.text}>
 								IGM dt :
-							</Text> */}
+							</div>
+
 							<div style={{ width: '100%', height: 'fit-content' }}>
 								{/* <ControlledTextArea
 									control={control}
@@ -270,13 +241,10 @@ function Frontside({ noFormat, initialValues }, ref) {
 							</div>
 						</div>
 						<div className={styles.block}>
-							{/* <Text
-								className="hidden-no-format"
-								size={14}
-								style={{ width: '150px' }}
-							>
+							<div className={styles.text}>
 								From :
-							</Text> */}
+							</div>
+
 							<div style={{ width: '100%', height: 'fit-content' }}>
 								{/* <ControlledTextArea
 									control={control}
@@ -314,9 +282,10 @@ function Frontside({ noFormat, initialValues }, ref) {
 			</div>
 			<div style={{ width: '40%', display: 'flex', marginTop: '10px' }}>
 				<div className={styles.block}>
-					{/* <Text size={14} style={{ width: '150px' }}>
+					<div className={styles.text}>
 						Tan No :
-					</Text> */}
+					</div>
+
 					<div style={{ width: '100%', height: 'fit-content' }}>
 						{/* <ControlledTextArea
 							control={control}
@@ -329,9 +298,10 @@ function Frontside({ noFormat, initialValues }, ref) {
 					</div>
 				</div>
 				<div className={styles.block}>
-					{/* <Text size={14} style={{ width: '150px' }}>
+					<div className={styles.text}>
 						Pan No :
-					</Text> */}
+					</div>
+
 					<div style={{ width: '100%', height: 'fit-content' }}>
 						{/* <ControlledTextArea
 							control={control}
