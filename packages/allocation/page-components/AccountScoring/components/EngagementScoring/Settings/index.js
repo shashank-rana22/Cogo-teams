@@ -1,7 +1,5 @@
 import { useForm } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
-import { useEffect } from 'react';
 
 import useGetDistributionScoringSettings from '../../../hooks/useGetDistributionScoringSettings ';
 import useGetEngagementScoringSettings from '../../../hooks/useGetEngagementScoringSettings';

@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 function SettingsItem(props) {
 	const {
-		item = '', useGetControls = () => {},
+		item = {}, useGetControls = () => {},
 		index = 0, inputStyle, control, errors,
 	} = props;
 

@@ -30,8 +30,8 @@ function index(props) {
 				<EmptyState
 					height={220}
 					width={380}
-					flexDirection="row"
-					emptyText="Bias Data not found"
+					flexDirection="column"
+					emptyText="Data not found"
 					textSize={20}
 				/>
 			</div>

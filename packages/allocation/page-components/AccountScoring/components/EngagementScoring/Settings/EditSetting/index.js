@@ -1,6 +1,7 @@
-// import { useForm } from '@cogoport/forms';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 
+import useGetEngagementScoringAccountStats from '../../../../hooks/useGetEngagementScoringAccountStats';
 import useUpdateBiasSettings from '../../../../hooks/useUpdateBiasSettings';
 import useUpdateDistributionSettings from '../../../../hooks/useUpdateDistributionSettings';
 import useUpdatePercentileSettings from '../../../../hooks/useUpdatePercentileSettings';
@@ -38,9 +39,6 @@ function EditSetting(props) {
 		updateDistribution = () => {},
 	} = useUpdateDistributionSettings();
 
-	// const formProps = useForm();
-	// const { control, handleSubmit, formState: { errors } } = formProps;
-
 	const onClose = () => {
 		setEditing((pv) => !pv);
 	};
@@ -55,6 +53,51 @@ function EditSetting(props) {
 		} else if (inputStyle === 'distribution_input') {
 			updateDistribution(formValues, onClose, refetch, preFilledList, performed_by_id);
 		}
+	};
+
+	const {
+		statsLoading, statsList = [],
+		onUpdateStats = () => {},
+	} = useGetEngagementScoringAccountStats();
+
+	const handleClick = () => {
+		const watchFields = watch();
+
+		const valuesForPrefilling = [];
+
+		(preFilledList || []).forEach((element) => {
+			const { id = '' } = element;
+
+			const scores = {};
+
+			Object.keys(watchFields).forEach((ele) => {
+				const idx = ele.indexOf('_');
+
+				if (ele.substring(0, idx) === id) {
+					const attribute = ele.substring(idx + 1);
+
+					scores[attribute] = watchFields[ele];
+					scores.warmth = element.warmth;
+				}
+			});
+
+			if (!isEmpty(scores)) {
+				valuesForPrefilling.push(scores);
+			}
+		});
+
+		const limit = [];
+
+		valuesForPrefilling.forEach((element) => {
+			const obj = {};
+			obj.warmth = element.warmth || undefined;
+			obj.lower_limit = element.range_from || undefined;
+			obj.upper_limit = element.range_to || undefined;
+
+			limit.push(obj);
+		});
+
+		onUpdateStats(limit);
 	};
 
 	return (
@@ -78,8 +121,9 @@ function EditSetting(props) {
 										inputStyle={inputStyle}
 										control={control}
 										errors={errors}
-										watch={watch}
-										distributionList={preFilledList}
+										handleClick={handleClick}
+										statsList={statsList}
+										statsLoading={statsLoading}
 									/>
 								)
 								: (
@@ -90,10 +134,8 @@ function EditSetting(props) {
 										inputStyle={inputStyle}
 										control={control}
 										errors={errors}
-										watch={watch}
 									/>
 								)
-
 						}
 					</div>
 				))}
