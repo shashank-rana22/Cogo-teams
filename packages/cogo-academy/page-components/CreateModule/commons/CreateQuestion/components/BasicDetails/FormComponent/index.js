@@ -109,6 +109,7 @@ function FormComponent({
 							themeType="primary"
 							size="sm"
 							loading={loading}
+							type="submit"
 							onClick={() => handleUpdateCaseStudy()}
 						>
 							save
