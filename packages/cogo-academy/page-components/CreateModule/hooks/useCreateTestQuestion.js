@@ -31,7 +31,7 @@ function useCreateTestQuestion({
 		url    : '/create_non_case_study_test_question',
 	}, { manual: true });
 
-	const TriggerMapping = {
+	const TRIGGER_MAPPING = {
 		stand_alone : triggerNonCase,
 		case_study  : triggerCaseStudy,
 		subjective 	: triggerNonCase,
@@ -56,7 +56,7 @@ function useCreateTestQuestion({
 			});
 			return;
 		}
-		const triggerToUse = TriggerMapping?.[question_type] || triggerNonCase;
+		const triggerToUse = TRIGGER_MAPPING?.[question_type] || triggerNonCase;
 
 		try {
 			await triggerToUse({
