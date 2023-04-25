@@ -1,4 +1,4 @@
-import startCase from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 
 import taskDisplayNames from '../../../../configurations/display-name-mappings';
 
