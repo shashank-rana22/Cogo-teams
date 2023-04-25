@@ -1,9 +1,11 @@
 .main_container {
-	width: 45%;
 	margin-right: 48px;
+	position: sticky;
+	top:0;
 }
 
 .container {
+	width: 20vw;
 	height: 50vh;
 	padding: 24px;
 	overflow: scroll;

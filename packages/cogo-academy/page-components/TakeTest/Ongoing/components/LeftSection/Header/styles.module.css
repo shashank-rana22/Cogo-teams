@@ -1,7 +1,8 @@
 .main_container {
 	display: flex;
 	align-items: center;
-	margin-bottom: 20px;
+	max-height: 20vh;
+	position: sticky;
 }
 
 .heading {

@@ -1,6 +1,4 @@
 .main_container {
-	max-height: 600px;
-	overflow-y: scroll;
 
 	:global {
 		.ui_radio_container {
@@ -37,13 +35,14 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	padding-bottom: 36px;
+	padding-bottom: 10px;
 }
 
 .question_count {
 	font-size: 12px;
 	font-weight: 600;
 	color: #4f4f4f;
+	position: sticky;
 }
 
 .question_type {
@@ -58,6 +57,10 @@
 	color: #221f20;
 	word-break: keep-all;
 	border-radius: 4px;
+}
+
+.question_content {
+   max-height: 68vh;
 }
 
 .options {
