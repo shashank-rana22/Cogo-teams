@@ -21,7 +21,7 @@ const PAGE_MAPPING = {
 };
 
 const SAMPLE_DOCUMENT_URL = `https://cogoport-production.sgp1.digitaloceanspaces.com/
-									6982d9471657028736bf9fe91ea8578d/bulk_upload_faq_sample.csv`;
+									69f22ad557310d6d2488d4ac332fafd3/bulk_upload_faq_sample.csv`;
 
 const useBulkCreateQuestionAnswerSet = () => {
 	const { general:{ query : { type } } } = useSelector((state) => (state));
