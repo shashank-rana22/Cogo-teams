@@ -15,6 +15,7 @@ function FieldArray({
 	disabled = false,
 	value,
 	error,
+	formValues,
 	...rest
 }) {
 	const { fields, append, remove } = useFieldArray({ control, name });
@@ -34,6 +35,7 @@ function FieldArray({
 					showElements={showElements?.[index]}
 					disabled={disabled}
 					error={error?.[index]}
+					formValues={formValues}
 				/>
 			))}
 			<div className={styles.add_button_container}>

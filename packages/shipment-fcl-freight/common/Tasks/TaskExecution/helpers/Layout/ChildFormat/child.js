@@ -12,13 +12,12 @@ function Child({
 	index,
 	name,
 	remove,
-	// showElements = {},
 	showDeleteButton = true,
 	noDeleteButtonTill = 0,
 	field,
 	disabled,
 	error,
-
+	formValues,
 }) {
 	let rowWiseFields = [];
 	const totalFields = [];
@@ -41,6 +40,11 @@ function Child({
 	});
 	if (rowWiseFields.length) {
 		totalFields.push(rowWiseFields);
+	}
+
+	if (formValues?.documents[0]?.url?.fileName === '') {
+		const x = document.querySelector('.ui_upload_filesuccess_container');
+		x.style.display = 'none';
 	}
 
 	return (
@@ -79,7 +83,6 @@ function Child({
 									index={index}
 									control={control}
 									disabled={disabled || disable}
-
 								/>
 								<p style={{
 									fontStyle     : 'normal',
