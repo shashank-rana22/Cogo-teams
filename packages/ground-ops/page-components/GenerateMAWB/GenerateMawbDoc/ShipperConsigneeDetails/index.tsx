@@ -27,7 +27,7 @@ function ShipperConsigneeDetails({
 
 	const { awbNumber = '', document_number:documentNo = '', documentType = '' } = taskItem;
 
-	const hawbNumber = activeHawb.isNew ? '' : documentNo;
+	const hawbNumber = activeHawb.isNew && !viewDoc ? '' : documentNo;
 
 	const docType = documentType === 'draft_airway_bill' ? 'mawb' : 'hawb';
 	const awbType = edit || viewDoc ? docType : activeCategory;
