@@ -4,7 +4,12 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function DeleteModal() {
+function DeleteModal({
+	itemData, deleteSelecteInvoiceLoading,
+	deleteInvoices,
+}) {
+	const { id } = itemData || {};
+
 	const [openDeleteModal, setopenDeleteModal] = useState(false);
 	const handleCloseModal = () => {
 		setopenDeleteModal(false);
@@ -26,7 +31,7 @@ function DeleteModal() {
 							<IcCError style={{ width: 28, height: 28 }} />
 						</div>
 						<div className={styles.icon}>
-							Are you sure You want to delete this payrun
+							Are you sure You want to delete this PayRun Bill
 						</div>
 					</div>
 					<Modal.Footer>
@@ -37,7 +42,10 @@ function DeleteModal() {
 						>
 							Cancel
 						</Button>
-						<Button>
+						<Button
+							onClick={() => deleteInvoices(id)}
+							disabled={deleteSelecteInvoiceLoading}
+						>
 							Yes
 						</Button>
 					</Modal.Footer>

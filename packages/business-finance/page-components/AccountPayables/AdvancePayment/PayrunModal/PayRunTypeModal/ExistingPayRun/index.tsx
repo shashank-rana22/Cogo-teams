@@ -1,6 +1,6 @@
 import { Radio, Modal, Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import React from 'react';
+import React, { useState } from 'react';
 
 import List from '../../../../../commons/List';
 
@@ -11,22 +11,6 @@ import InvoiceCount from './renderFunction/InvoiceCount';
 import Ribbon from './renderFunction/Ribbon';
 import styles from './styles.module.css';
 
-// const list1 = {
-// 	list: [
-// 		{
-// 			payrunName : 'PayRun_301_0222_15:34_4',
-// 			amount     : '765575',
-// 			count      : 22,
-// 			date       : ' 14:30:19 01-04-2022',
-// 		},
-// 		{
-// 			payrunName : 'PayRun_301_0222_14:19_9',
-// 			amount     : '4235345575',
-// 			count      : 282,
-// 			date       : ' 04:00:19 01-04-2023',
-// 		},
-// 	],
-// };
 interface DataTypes {
 	list: object[];
 	pageIndex?: number;
@@ -45,6 +29,8 @@ interface Props {
 	loading:boolean,
 	filters:FiltterProps,
 	setFilters:Function,
+	currency:string,
+	activeEntity:string,
 }
 
 function ExitingPayRun({
@@ -54,35 +40,36 @@ function ExitingPayRun({
 	loading,
 	filters,
 	setFilters,
+	currency,
+	activeEntity,
 }:Props) {
 	const { pageIndex } = data || {};
 	const { push } = useRouter();
+	const [value, setValue] = useState('');
+
+	// const handleClick = () => (
+	// 	push('/business-finance/account-payables/advance-payment/add-into-existing-payrun')
+	// );
 	const handleClick = () => (
-		push('/business-finance/account-payables/advance-payment/add-into-existing-payrun')
+		push(`/business-finance/account-payables/advance-payment/create-new-payrun?selectedPayRunId=${value}
+		&currency=${currency}&entity=${activeEntity}`)
 	);
+
 	const functions = {
 		renderRadio: (itemData) => {
+			const { id } = itemData || {};
 			const handleRadioChange = () => {
-				if (itemData?.selectedRadio) {
-					// setRadio({});
+				if (value) {
+					setValue('');
+					setValue(id);
 				} else {
-					// setRadio(itemData);
+					setValue(id);
 				}
 			};
-
 			return (
-				<div
-					style={{
-						height         : 35,
-						justifyContent : 'center',
-						alignItems     : 'center',
-					}}
-
-				>
+				<div>
 					<Radio
-						name="payrun"
-						className="primary lg"
-						checked={itemData.selectedRadio}
+						checked={value === id}
 						onChange={handleRadioChange}
 					/>
 				</div>

@@ -5,9 +5,10 @@ import styles from './styles.module.css';
 
 function RequestedBy({ itemData }) {
 	const { requestedAt, requestedBy } = itemData || {};
+	const { name } = requestedBy || {};
 	return (
 		<div className={styles.count}>
-			{requestedBy}
+			{name}
 			<div className={styles.date}>
 				On
 				{' '}

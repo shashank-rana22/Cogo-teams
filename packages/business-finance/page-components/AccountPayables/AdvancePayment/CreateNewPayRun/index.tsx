@@ -1,14 +1,17 @@
-/* eslint-disable max-len */
-import { Breadcrumb, Button } from '@cogoport/components';
-import { IcMArrowBack } from '@cogoport/icons-react';
+import { Breadcrumb, Button, Placeholder } from '@cogoport/components';
+import { getFormattedPrice } from '@cogoport/forms';
+import { IcMArrowBack, IcMInfo } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import List from '../../../commons/List';
 import { CREATE_NEW_PAYRUN_CONFIG } from '../Columns/createNewPayRunConfig';
 import { VIEW_SELECTED_CONFIG } from '../Columns/viewSelectedConfig';
-// import useGetAdvancePaymentList from '../hooks/useGetAdvancePaymentList';
+import EmptyState from '../common/EmptyState';
 import useGetAdvancePaymentList from '../hooks/useGetAdvancePaymentList';
+import useGetCreatePayRunType from '../hooks/useGetCreatePayRunType';
+import ApprovedBy from '../renderFunction/ApprovedBy';
+import RequestedBy from '../renderFunction/RequestedBy';
 import SelectFilters from '../SelectFilters';
 
 import Footer from './Footer';
@@ -21,191 +24,45 @@ import OrganizationName from './renderFunction/OrganizationName';
 import SIDnumber from './renderFunction/SIDnumber';
 import styles from './styles.module.css';
 
-// const list1 = {
-// 	list: [
-// 		{
-// 			incidentNumber : '5425365',
-// 			sidNumber      : '529875',
-// 			businessName   : 'Cogoport private Limited',
-// 			advancedAmount : '20000000000',
-// 			bankDetails    : {
-// 				accountNo         : '914020036759730',
-// 				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
-// 				bankName          : 'AXIS BANK LTD',
-// 				branchCode        : 'Dharavi',
-// 				branchName        : null,
-// 				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
-// 				ifscCode          : 'UTIB0001701',
-// 			},
-// 			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-// 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-// 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-// 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-// 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-
-// 			],
-// 		},
-// 		{
-// 			incidentNumber : '5425365',
-// 			sidNumber      : '529875',
-// 			businessName   : 'Cogoport private Limited',
-// 			advancedAmount : '20000000000',
-// 			bankDetails    : {
-// 				accountNo         : '914020036759730',
-// 				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
-// 				bankName          : 'AXIS BANK LTD',
-// 				branchCode        : 'Dharavi',
-// 				branchName        : null,
-// 				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
-// 				ifscCode          : 'UTIB0001701',
-// 			},
-// 			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-// 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-// 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-
-// 			],
-// 		},
-// 		{
-// 			incidentNumber : '5425365',
-// 			sidNumber      : '529875',
-// 			businessName   : 'Cogoport private Limited',
-// 			advancedAmount : '20000000000',
-// 			bankDetails    : {
-// 				accountNo         : '914020036759730',
-// 				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
-// 				bankName          : 'AXIS BANK LTD',
-// 				branchCode        : 'Dharavi',
-// 				branchName        : null,
-// 				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
-// 				ifscCode          : 'UTIB0001701',
-// 			},
-// 			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-// 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-
-// 			],
-// 		},
-// 		{
-// 			incidentNumber : '5425365',
-// 			sidNumber      : '529875',
-// 			businessName   : 'Cogoport private Limited',
-// 			advancedAmount : '20000000000',
-// 			bankDetails    : {
-// 				accountNo         : '914020036759730',
-// 				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
-// 				bankName          : 'AXIS BANK LTD',
-// 				branchCode        : 'Dharavi',
-// 				branchName        : null,
-// 				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
-// 				ifscCode          : 'UTIB0001701',
-// 			},
-// 			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-// 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-// 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-
-// 			],
-// 		},
-// 		{
-// 			incidentNumber : '5425365',
-// 			sidNumber      : '529875',
-// 			businessName   : 'Cogoport private Limited',
-// 			advancedAmount : '20000000000',
-// 			bankDetails    : {
-// 				accountNo         : '914020036759730',
-// 				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
-// 				bankName          : 'AXIS BANK LTD',
-// 				branchCode        : 'Dharavi',
-// 				branchName        : null,
-// 				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
-// 				ifscCode          : 'UTIB0001701',
-// 			},
-// 			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-// 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-// 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-
-// 			],
-// 		},
-// 		{
-// 			incidentNumber : '5425365',
-// 			sidNumber      : '529875',
-// 			businessName   : 'Cogoport private Limited',
-// 			advancedAmount : '20000000000',
-// 			bankDetails    : {
-// 				accountNo         : '914020036759730',
-// 				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
-// 				bankName          : 'AXIS BANK LTD',
-// 				branchCode        : 'Dharavi',
-// 				branchName        : null,
-// 				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
-// 				ifscCode          : 'UTIB0001701',
-// 			},
-// 			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-// 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-// 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-// 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-
-// 			],
-// 		},
-// 		{
-// 			incidentNumber : '5425365',
-// 			sidNumber      : '529875',
-// 			businessName   : 'Cogoport private Limited',
-// 			advancedAmount : '20000000000',
-// 			bankDetails    : {
-// 				accountNo         : '914020036759730',
-// 				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
-// 				bankName          : 'AXIS BANK LTD',
-// 				branchCode        : 'Dharavi',
-// 				branchName        : null,
-// 				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
-// 				ifscCode          : 'UTIB0001701',
-// 			},
-// 			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-// 				'https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-
-// 			],
-// 		},
-// 		{
-// 			incidentNumber : '5425365',
-// 			sidNumber      : '529875',
-// 			businessName   : 'Cogoport private Limited',
-// 			advancedAmount : '20000000000',
-// 			bankDetails    : {
-// 				accountNo         : '914020036759730',
-// 				bankId            : '39c6e339-3ac7-4fb1-bce2-812ecaf1eef0',
-// 				bankName          : 'AXIS BANK LTD',
-// 				branchCode        : 'Dharavi',
-// 				branchName        : null,
-// 				collectionPartyId : 'ef38eefd-e141-404f-aa1e-e9298693304f',
-// 				ifscCode          : 'UTIB0001701',
-// 			},
-// 			document: ['https://cogoport-testing.sgp1.digitaloceanspaces.com/c58289cbdbc51cdcf53723f40681ed96/documents_60eed33822a8cf49f5001a11_Attendance.pdf',
-
-// 			],
-// 		},
-// 	],
-// };
-
 function CreateNewPayRun() {
 	const [sort, setSort] = useState({});
 	const {
 		filters, setFilters, data, loading, entity,
 		apiData,
-		submitSelectedInvoices, getTableBodyCheckbox,
+		submitSelectedInvoices,
+		getTableBodyCheckbox,
 		getTableHeaderCheckbox,
 		viewSelectedData,
 		viewSelectedDataLoading,
 		getViewSelectedInvoices,
-	} = useGetAdvancePaymentList({ sort });
-	const { pageIndex } = data || {};
+		selectedPayRunId,
+		deleteSelecteInvoiceLoading,
+		deleteInvoices,
 
-	console.log(viewSelectedData, 'viewSelectedData');
+	} = useGetAdvancePaymentList({ sort });
+	const {
+		data:existpayRunData, loading:existingPayRunLoading,
+		getAdvancedPayment,
+	} = useGetCreatePayRunType({ selectedPayRunId });
+	useEffect(() => {
+		if (selectedPayRunId) {
+			getAdvancedPayment();
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+	const { list } = existpayRunData || {};
+	const { pageIndex } = data || {};
 	const [viewSelectedInvoice, setViewSelectedInvoice] = useState(false);
 
 	const functions = {
 		renderCheckbox    : (itemData) => getTableBodyCheckbox(itemData),
 		renderBankDetails : (itemData) => <BankDetails itemData={itemData} />,
-		renderIcDelete    : () => (
-			<DeleteModal />
+		renderIcDelete    : (itemData) => (
+			<DeleteModal
+				itemData={itemData}
+				deleteSelecteInvoiceLoading={deleteSelecteInvoiceLoading}
+				deleteInvoices={deleteInvoices}
+			/>
 		),
 		renderInvoiceDetails: () => (
 			<InvoiceDetails />
@@ -221,6 +78,12 @@ function CreateNewPayRun() {
 		),
 		renderOrganization: (itemData) => (
 			<OrganizationName itemData={itemData} />
+		),
+		renderRequestedBy: (itemData) => (
+			<RequestedBy itemData={itemData} />
+		),
+		renderApprovedBy: (itemData) => (
+			<ApprovedBy itemData={itemData} />
 		),
 	};
 	return (
@@ -252,37 +115,87 @@ function CreateNewPayRun() {
 					</div>
 				</div>
 			)}
-			<div className={styles.select_card}>
-				{/* <div className={styles.card}>
-					Month - January 2022
-				</div> */}
-				<div className={styles.card}>
-					Entity -
-					{' '}
-					{entity}
-				</div>
-			</div>
+			{ !selectedPayRunId
+				? (
+					<div className={styles.select_card}>
+						{/* <div className={styles.card}>
+							Month - January 2022
+						</div> */}
+						<div className={styles.card}>
+							Entity -
+							{' '}
+							{entity}
+						</div>
+					</div>
+				)
+				: (
+					<div>
+						<div className={styles.sub_container}>
+							<div className={styles.text}>
+								{existingPayRunLoading ? <Placeholder className={styles.loader} /> : list?.[0]?.name}
+							</div>
+							<div className={styles.text}>
+								Total value :
+								{' '}
+								{' '}
+								{existingPayRunLoading
+									? <Placeholder className={styles.amount_loader} />
+									: getFormattedPrice(list?.[0]?.totalValue, list?.[0]?.currency)}
+							</div>
+							<div className={styles.text}>
+								No. of invoices :
+								{' '}
+								{' '}
+								{' '}
+								{existingPayRunLoading
+									? <Placeholder className={styles.amount_loader} />
+									: list?.[0]?.invoiceCount}
+							</div>
+							<div className={styles.text}>
+								{existingPayRunLoading
+									? <Placeholder className={styles.loader} />
+									: list?.[0]?.createdAt}
+							</div>
+							<div className={styles.ribbons}>
+								<div className={styles.ribbon}>Adv. Payment</div>
+							</div>
+						</div>
+						<div className={styles.info_container}>
+
+							<div className={styles.info}>
+								<IcMInfo color="#ED3726" />
+							</div>
+							<div className={styles.info_text}>
+								You are adding these advance payments to an existent Payment ready pay run.
+							</div>
+						</div>
+					</div>
+				)}
 			<div className={styles.container}>
 				<div className={styles.filter}>
 					<SelectFilters filters={filters} setFilters={setFilters} />
 				</div>
 				<div>
-					<List
-						itemData={viewSelectedInvoice ? viewSelectedData : data}
-						loading={viewSelectedInvoice ? viewSelectedDataLoading : loading}
-						config={viewSelectedInvoice ? VIEW_SELECTED_CONFIG : CREATE_NEW_PAYRUN_CONFIG}
-						functions={functions}
-						renderHeaderCheckbox={getTableHeaderCheckbox}
-						sort={sort}
-						setSort={setSort}
-						page={pageIndex}
-						pageSize={10}
-						handlePageChange={(val: number) => setFilters({
-							...filters,
-							pageIndex: val,
-						})}
-						showPagination
-					/>
+					{data?.list?.length > 0 ? (
+						<List
+							itemData={viewSelectedInvoice ? viewSelectedData : data}
+							loading={viewSelectedInvoice ? viewSelectedDataLoading : loading}
+							config={viewSelectedInvoice ? VIEW_SELECTED_CONFIG : CREATE_NEW_PAYRUN_CONFIG}
+							functions={functions}
+							renderHeaderCheckbox={getTableHeaderCheckbox}
+							sort={sort}
+							setSort={setSort}
+							page={pageIndex}
+							pageSize={10}
+							handlePageChange={(val: number) => setFilters({
+								...filters,
+								pageIndex: val,
+							})}
+							showPagination
+						/>
+					)
+
+						:					<EmptyState />}
 				</div>
 				<Footer
 					apiData={apiData}

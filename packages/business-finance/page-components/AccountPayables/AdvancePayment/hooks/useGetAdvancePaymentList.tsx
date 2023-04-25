@@ -46,7 +46,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort }:FilterProps) => {
 		entity = '',
 		currency,
 		payrun = '',
-		// payrun_type = '',
+		selectedPayRunId = '',
 	} = urlQuery || {};
 
 	useEffect(() => {
@@ -88,6 +88,18 @@ const useGetAdvancePaymentList = ({ activeEntity, sort }:FilterProps) => {
 		{ manual: true, autoCancel: false },
 	);
 
+	const [
+		{ data:deleteSelectedInvoice, loading:deleteSelecteInvoiceLoading },
+		deleteSelectedInvoiceTrigger,
+	] = useRequestBf(
+		{
+			url     : '/purchase/payrun-bill',
+			method  : 'delete',
+			authKey : 'delete_purchase_payrun_bill',
+		},
+		{ manual: true, autoCancel: false },
+	);
+
 	useEffect(() => {
 		const newData = { ...data };
 		if (newData.list) {
@@ -121,6 +133,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort }:FilterProps) => {
 			}
 		})();
 	}, [query, trigger, activeEntity, service, pageIndex, sort, entity]);
+
 	useEffect(() => {
 		getAdvancedPayment();
 	}, [getAdvancedPayment]);
@@ -174,10 +187,10 @@ const useGetAdvancePaymentList = ({ activeEntity, sort }:FilterProps) => {
 			}
 		}
 		try {
-			const res = await addToSelectedTrigger({
+			await addToSelectedTrigger({
 				data: {
 					list            : [...selectedInvoices],
-					id              : payrun,
+					id              : payrun || selectedPayRunId,
 					entityCode      : entity,
 					currencyCode    : currency,
 					performedBy     : userId,
@@ -185,13 +198,8 @@ const useGetAdvancePaymentList = ({ activeEntity, sort }:FilterProps) => {
 					performedByName : name,
 				},
 			});
-
-			if (res?.data?.message) {
-				Toast.error(res.data.message);
-			} else {
-				Toast.success('Invoice added to Payrun Successfully');
-				getAdvancedPayment();
-			}
+			Toast.success('Invoice added to Payrun Successfully');
+			getAdvancedPayment();
 		} catch (e) {
 			Toast.error(e?.data?.message);
 		}
@@ -203,7 +211,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort }:FilterProps) => {
 				params: {
 					pageIndex,
 					pageSize   : 10,
-					payrunId   : payrun,
+					payrunId   : payrun || selectedPayRunId,
 					// hasPayrun   : false,
 					q          : query !== '' ? query : undefined,
 					entityCode : activeEntity || entity,
@@ -213,6 +221,21 @@ const useGetAdvancePaymentList = ({ activeEntity, sort }:FilterProps) => {
 			});
 		} catch (err) {
 			Toast.error(err.meessage);
+		}
+	};
+
+	const deleteInvoices = async (id) => {
+		try {
+			await deleteSelectedInvoiceTrigger({
+				data: {
+					id,
+					objectType: 'ADVANCE_DOCUMENT',
+				},
+			});
+			Toast.success('Invoice deleted successfully');
+			getViewSelectedInvoices();
+		} catch (e) {
+			Toast.error(e?.data?.message);
 		}
 	};
 
@@ -291,6 +314,10 @@ const useGetAdvancePaymentList = ({ activeEntity, sort }:FilterProps) => {
 		viewSelectedData,
 		viewSelectedDataLoading,
 		getViewSelectedInvoices,
+		selectedPayRunId,
+		deleteSelectedInvoice,
+		deleteSelecteInvoiceLoading,
+		deleteInvoices,
 	};
 };
 export default useGetAdvancePaymentList;

@@ -5,9 +5,10 @@ import styles from './styles.module.css';
 
 function ApprovedBy({ itemData }) {
 	const { approvedAt, approvedBy } = itemData || {};
+	const { name } = approvedBy || {};
 	return (
 		<div className={styles.count}>
-			{approvedBy}
+			{name}
 			<div className={styles.date}>
 				On
 				{' '}

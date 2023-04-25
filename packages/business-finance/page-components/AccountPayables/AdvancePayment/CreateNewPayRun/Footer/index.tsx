@@ -16,9 +16,9 @@ function Footer({
 
 	const [savePayrunModal, setSavePayrunModal] = useState(false);
 
-	const isChecked = (list || []).filter((item) => item.checked);
-	const totalInvoiceAmount = isChecked.reduce((acc, obj) => +acc + +obj.payableAmount, 0);
-	console.log(totalInvoiceAmount, 'payableAmount');
+	const isChecked = (list || [])?.filter((item) => item.checked);
+	const totalInvoiceAmount = isChecked?.reduce((acc, obj) => +acc + +obj.payableAmount, 0);
+	const showAddToSelected = isChecked?.length === 0;
 	return (
 		<div>
 			<div className={styles.container}>
@@ -36,11 +36,10 @@ function Footer({
 					</div>
 					<div className={styles.sid_count}>
 						<div>
-							SID -
+							SID :
 						</div>
 						<div>
 							{isChecked.length}
-							{/* 33 */}
 						</div>
 					</div>
 				</div>
@@ -57,6 +56,7 @@ function Footer({
 									<Button
 										themeType="secondary"
 										onClick={submitSelectedInvoices}
+										disabled={showAddToSelected}
 									>
 										+ Add to selected
 									</Button>

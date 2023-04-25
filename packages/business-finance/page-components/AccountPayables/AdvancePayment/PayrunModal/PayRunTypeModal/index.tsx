@@ -56,7 +56,7 @@ function PayRunTypeModal({
 	return (
 		<div className={styles.container}>
 			<Modal size="md" show={payRunType} onClose={() => setPayRunType(false)} placement="top">
-				{/* <Modal.Header title="Are you sure?" /> */}
+
 				<Modal.Body>
 					<div className={styles.sub_container}>
 						{totalRecords}
@@ -82,6 +82,8 @@ function PayRunTypeModal({
 					loading={loading}
 					filters={filters}
 					setFilters={setFilters}
+					currency={currency}
+					activeEntity={activeEntity}
 				/>
 			)}
 		</div>

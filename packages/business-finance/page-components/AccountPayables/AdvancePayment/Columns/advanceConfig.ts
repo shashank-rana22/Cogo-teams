@@ -39,11 +39,12 @@ export const ADVANCE_CONFIG = {
 				type : 'serviceType',
 			},
 			func : 'renderSIDnumber',
-			span : 0.7,
+			span : 0.9,
 		},
 		{
 			label : 'Entity',
 			key   : 'entityCode',
+			func  : 'renderEntityCode',
 			span  : 0.5,
 
 		},

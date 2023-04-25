@@ -3,10 +3,11 @@ import { useRequestBf } from '@cogoport/request';
 import { useState } from 'react';
 
 interface FilterProps {
-	activeEntity: string;
-	currency:string;
+	activeEntity?: string;
+	currency?:string;
+	selectedPayRunId?:string;
 }
-const useGetCreatePayRunType = ({ activeEntity, currency }:FilterProps) => {
+const useGetCreatePayRunType = ({ activeEntity, currency, selectedPayRunId }:FilterProps) => {
 	const [filters, setFilters] = useState({
 		pageIndex: 1,
 	});
@@ -33,6 +34,7 @@ const useGetCreatePayRunType = ({ activeEntity, currency }:FilterProps) => {
 					currency,
 					state      : 'AUDITED',
 					entityCode : activeEntity,
+					id         : selectedPayRunId !== undefined ? selectedPayRunId : undefined,
 				},
 			});
 		} catch (err) {

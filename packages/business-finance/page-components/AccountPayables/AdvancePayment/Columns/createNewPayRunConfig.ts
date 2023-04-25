@@ -3,12 +3,9 @@ export const CREATE_NEW_PAYRUN_CONFIG = {
 	showHeaderCheckbox : true,
 	pageLimit          : 20,
 	headerStyles       : {
-		// marginBottom : '16px',
 		borderRadius : '8px',
 		background   : 'none',
 		color        : '#333',
-		// borderBottom : '1.5px solid #F68B21',
-		// marginTop    : '20px',
 		marginLeft   : '-56px',
 	},
 	bodyStyles: {
@@ -48,26 +45,40 @@ export const CREATE_NEW_PAYRUN_CONFIG = {
 				type : 'serviceType',
 			},
 			func : 'renderSIDnumber',
-			span : 1,
+			span : 1.1,
 		},
 		{
 			key   : 'organizationName',
 			label : 'Organisation',
 			func  : 'renderOrganization',
-			span  : 2,
+			span  : 1.5,
 		},
 		{
 			label   : 'Advance Amount',
 			key     : 'payableAmount',
 			func    : 'renderAmountWithCurrency',
 			sorting : { name: 'amountSortType' },
-			span    : 1.5,
+			span    : 1.4,
 		},
 		{
 			key   : 'bankName',
 			label : 'Bank Account Details',
 			func  : 'renderBankDetails',
-			span  : 2.5,
+			span  : 2,
+		},
+		{
+			key     : 'requestedBy',
+			label   : 'Requested by & on',
+			sorting : { name: 'requestedAtSortType' },
+			span    : 1.5,
+			func    : 'renderRequestedBy',
+		},
+		{
+			label   : 'Approved by & on',
+			key     : 'approvedBy',
+			sorting : { name: 'approvedAtSortType' },
+			span    : 1.5,
+			func    : 'renderApprovedBy',
 		},
 
 		// {
@@ -75,10 +86,10 @@ export const CREATE_NEW_PAYRUN_CONFIG = {
 		// 	func  : 'renderDocument',
 		// 	span  : 1,
 		// },
-		{
-			key  : 'invoiceDetails',
-			func : 'renderInvoiceDetails',
-			span : 0.2,
-		},
+		// {
+		// 	key  : 'invoiceDetails',
+		// 	func : 'renderInvoiceDetails',
+		// 	span : 0.2,
+		// },
 	],
 };
