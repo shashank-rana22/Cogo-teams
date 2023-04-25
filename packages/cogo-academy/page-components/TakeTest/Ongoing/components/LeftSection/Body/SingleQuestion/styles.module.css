@@ -1,5 +1,4 @@
 .main_container {
-
 	:global {
 		.ui_radio_container {
 			display: block !important;
@@ -39,10 +38,10 @@
 }
 
 .question_count {
+	position: sticky;
 	font-size: 12px;
 	font-weight: 600;
 	color: #4f4f4f;
-	position: sticky;
 }
 
 .question_type {
@@ -60,7 +59,7 @@
 }
 
 .question_content {
-   max-height: 68vh;
+	max-height: 68vh;
 }
 
 .options {

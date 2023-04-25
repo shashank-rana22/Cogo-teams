@@ -1,7 +1,7 @@
 .main_container {
-	margin-right: 48px;
 	position: sticky;
-	top:0;
+	top: 0;
+	margin-right: 48px;
 }
 
 .container {
@@ -16,8 +16,8 @@
 }
 
 .header {
+	width: 20vw;
 	margin-bottom: 16px;
 	font-size: 12px;
-	width: 20vw;
 	color: #4f4f4f;
 }

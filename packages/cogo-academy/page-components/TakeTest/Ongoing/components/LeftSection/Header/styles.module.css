@@ -1,8 +1,8 @@
 .main_container {
+	position: sticky;
 	display: flex;
 	align-items: center;
 	max-height: 20vh;
-	position: sticky;
 }
 
 .heading {
