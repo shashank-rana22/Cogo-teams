@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
@@ -16,7 +17,7 @@ function useGetQuestions({ id }) {
 				},
 			});
 		} catch (error) {
-			Toast.error(error?.message);
+			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
 		}
 	}, [id, trigger]);
 

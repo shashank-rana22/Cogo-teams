@@ -17,7 +17,7 @@ const useCreateShipmentOperatingInstruction = ({
 
 	const apiTrigger = async (val) => {
 		try {
-			const res = await trigger({ params: { procedure_id, shipment_id, organization_id, ...val } });
+			const res = await trigger({ data: { procedure_id, shipment_id, organization_id, ...val } });
 			if (!res.hasError) {
 				Toast.success(successMessage);
 				refetch();

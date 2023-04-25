@@ -3896,19 +3896,22 @@ const partner = {
 			feature      : 'rate_density',
 		},
 		{
-			api         : 'list_shipment_flash_booking_rates',
-			access_type : 'private',
-			feature     : 'live_booking',
+			api          : 'list_shipment_flash_booking_rates',
+			access_type  : 'private',
+			feature      : 'live_booking',
+			service_name : 'shipment',
 		},
 		{
-			api         : 'create_shipment_flash_booking_rate',
-			access_type : 'private',
-			feature     : 'live_booking',
+			api          : 'create_shipment_flash_booking_rate',
+			access_type  : 'private',
+			feature      : 'live_booking',
+			service_name : 'shipment',
 		},
 		{
-			api         : 'update_shipment_flash_booking_rate',
-			access_type : 'private',
-			feature     : 'live_booking',
+			api          : 'update_shipment_flash_booking_rate',
+			access_type  : 'private',
+			feature      : 'live_booking',
+			service_name : 'shipment',
 		},
 		{
 			api         : 'get_shipment_services_quotation',
@@ -7022,8 +7025,9 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'list_organization_documents',
-			access_type : 'private',
+			api          : 'list_organization_documents',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 		{
 			api          : 'list_cogo_entities',
@@ -7541,7 +7545,6 @@ const partner = {
 			access_type : 'private',
 			module      : 'myIncident',
 			feature     : 'myIncident',
-
 		},
 	],
 	vendor_payment: [
@@ -7725,6 +7728,12 @@ const partner = {
 		},
 		{
 			api         : 'get_sales_invoice_generate_pdf',
+			access_type : 'private',
+			module      : 'invoices',
+			feature     : 'invoices',
+		},
+		{
+			api         : 'post_sales_invoice_einvoice',
 			access_type : 'private',
 			module      : 'invoices',
 			feature     : 'invoices',
@@ -7948,7 +7957,6 @@ const partner = {
 			api         : 'post_translation_translate_bulk',
 			access_type : 'private',
 		},
-
 	],
 	reports: [
 		{
@@ -8533,6 +8541,11 @@ const partner = {
 	],
 	campaign_dashboard: [
 		{
+			api          : 'list_platform_config_constants',
+			access_type  : 'private',
+			service_name : 'platform_config',
+		},
+		{
 			api          : 'create_campaign_segment',
 			access_type  : 'private',
 			service_name : 'campaign',
@@ -8735,7 +8748,7 @@ const partner = {
 			service_name : 'campaign',
 		},
 		{
-			api          : 'list_campaign_email_configuration',
+			api          : 'list_campaign_configuration',
 			access_type  : 'private',
 			service_name : 'campaign',
 		},
@@ -8774,6 +8787,12 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'campaign',
 		},
+		{
+			api          : 'update_campaign_channel_availability',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+
 		{
 			api          : 'verify_segment',
 			access_type  : 'private',
@@ -8990,6 +9009,11 @@ const partner = {
 			api          : 'list_checkout_applicable_promocodes',
 			access_type  : 'private',
 			feature      : 'search',
+			service_name : 'checkout',
+		},
+		{
+			api          : 'create_cogopoint_redemption_rule',
+			access_type  : 'private',
 			service_name : 'checkout',
 		},
 		{
@@ -9257,11 +9281,9 @@ const partner = {
 			service_name : 'segmentation',
 		},
 		{
-
 			api          : 'create_duplicate_promotion',
 			access_type  : 'private',
 			service_name : 'promotion',
-
 		},
 		{
 			api          : 'get_promotion_shipment_stats',
@@ -9614,6 +9636,12 @@ const partner = {
 		},
 		{
 			api         : 'put_purchase_bills_status',
+			access_type : 'private',
+			module      : 'purchase_invoice',
+			feature     : 'purchase_invoice',
+		},
+		{
+			api         : 'put_purchase_bills_status_for_manual_bill',
 			access_type : 'private',
 			module      : 'purchase_invoice',
 			feature     : 'purchase_invoice',
@@ -10453,6 +10481,12 @@ const partner = {
 			service_name : 'fcl_freight_rate',
 			feature      : 'detention_demurrage',
 		},
+		{
+			api          : 'list_shipment_invoice_combinations',
+			access_type  : 'private',
+			service_name : 'shipment',
+			feature      : 'detention_demurrage',
+		},
 	],
 	my_profile: [
 		{
@@ -10479,6 +10513,26 @@ const partner = {
 			api          : 'list_event_mappings',
 			access_type  : 'private',
 			service_name : 'event',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_badge_name',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_profile',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_badge_description',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_kam_expertise_profile_mastery_badge',
+			access_type  : 'private',
+			service_name : 'allocation',
 		},
 	],
 	awb_inventory: [
@@ -10591,7 +10645,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
-
 	],
 	omni_channel: [
 		{
@@ -10644,7 +10697,7 @@ const partner = {
 		{
 			api          : 'get_cogoverse_dashboard',
 			access_type  : 'private',
-			service_name : 'unified_dashboard',
+			service_name : 'communication',
 		},
 		{
 			api          : 'get_cogoverse_globe_data',
@@ -10656,7 +10709,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'unified_dashboard',
 		},
-
 	],
 	constants: [
 		{
@@ -11012,7 +11064,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'inventory_management',
 		},
-
 	],
 	cogo_one: [
 		{
@@ -11081,7 +11132,6 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
-
 			api          : 'check_outgoing_call_status',
 			access_type  : 'private',
 			service_name : 'voice_call',
@@ -11117,8 +11167,7 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
-			api: 'create_communication',
-
+			api          : 'create_communication',
 			access_type  : 'private',
 			service_name : 'communication',
 		},
@@ -11234,6 +11283,11 @@ const partner = {
 		},
 		{
 			api          : 'list_user_chat_summary',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'request_assign_chat',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

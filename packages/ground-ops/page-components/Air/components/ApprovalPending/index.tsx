@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Tooltip } from '@cogoport/components';
 import { IcMEyeopen, IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -40,7 +40,11 @@ function ApprovalPending({
 
 	const handleOnEdit = (singleItem) => {
 		if (singleItem?.documentState === 'document_amendment_requested') {
-			handleEditMAWB(singleItem, '');
+			if (singleItem?.documentData?.status === 'uploaded') {
+				setShowUpload(singleItem); setEdit(true);
+			} else if (singleItem?.documentData?.status === 'generated') {
+				handleEditMAWB(singleItem, '');
+			}
 		} else if (singleItem?.documentData?.status === 'uploaded') {
 			setShowUpload(singleItem); setEdit('edit');
 		} else if (singleItem?.documentData?.status === 'generated') {
@@ -93,14 +97,27 @@ function ApprovalPending({
 		handleStatus: (singleItem) => (
 			singleItem.documentState === 'document_amendment_requested'
 				? (
-					<Button
-						themeType="secondary"
-						style={{ border: '1px solid #ED3726', color: '#ED3726' }}
-						disabled={updateLoading}
-						onClick={() => { handleEditMAWB(singleItem, ''); }}
+					<Tooltip
+						content={singleItem?.remarks?.toString()}
+						placement="top"
 					>
-						Amend
-					</Button>
+						<div className={styles.tooltip}>
+							<Button
+								themeType="secondary"
+								style={{ border: '1px solid #ED3726', color: '#ED3726' }}
+								disabled={updateLoading}
+								onClick={() => {
+									if (singleItem?.documentData?.status === 'uploaded') {
+										setShowUpload(singleItem); setEdit(true);
+									} else if (singleItem?.documentData?.status === 'generated') {
+										handleEditMAWB(singleItem, '');
+									}
+								}}
+							>
+								Amend
+							</Button>
+						</div>
+					</Tooltip>
 				) : (
 					<Button
 						themeType="secondary"

@@ -49,9 +49,11 @@ const sendUserMessage = async ({
 
 	let messageMetadata;
 
+	const modifiedFileType = (fileType === 'image' && channel_type === 'telegram') ? 'photo' : fileType;
+
 	if (finalUrl) {
 		messageMetadata = {
-			message_type : fileType,
+			message_type : modifiedFileType,
 			text         : newMessage,
 			media_url    : finalUrl,
 			filename     : fileName,
