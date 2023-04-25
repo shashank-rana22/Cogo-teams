@@ -12,19 +12,3 @@
 		}
 	}
 }
-
-.engagement_type {
-	font-size: 16px;
-	font-weight: 600;
-	color: #4f4f4f;
-}
-
-.title_container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
-.title_buttons {
-	display: flex;
-}

@@ -1,7 +1,7 @@
 .list {
 	display: flex;
 	align-items: center;
-	border-bottom: 1px solid #F8F2E7;
+	border-bottom: 1px solid #f8f2e7;
 }
 
 .control {
