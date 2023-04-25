@@ -9460,6 +9460,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'cogo_assured_rate',
 		},
+		{
+			api          : 'delete_cogo_assured_rate_feedback',
+			access_type  : 'private',
+			service_name : 'cogo_assured_rate',
+		},
 	],
 	product_code_mapping: [
 		{
