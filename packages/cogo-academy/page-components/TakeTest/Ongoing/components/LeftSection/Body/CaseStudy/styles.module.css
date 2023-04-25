@@ -1,6 +1,6 @@
 .container {
 	display: flex;
-	max-height: 68vh;
+	height: 68vh;
 	overflow-y: scroll;
 }
 

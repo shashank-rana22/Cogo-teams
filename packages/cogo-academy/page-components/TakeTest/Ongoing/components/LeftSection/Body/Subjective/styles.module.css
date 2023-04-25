@@ -33,7 +33,7 @@
 }
 
 .subjective_part {
-	max-height: 68vh;
+	height: 74vh;
 	overflow-y: scroll;
 }
 

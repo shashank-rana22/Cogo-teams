@@ -1,10 +1,7 @@
 .container {
-	position: sticky;
-	bottom: 0;
 	display: flex;
 	justify-content: space-between;
-	width: 95%;
-	max-height: 12vh;
+	height: 8vh;
 	padding: 16px 0;
 }
 
