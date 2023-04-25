@@ -19,8 +19,8 @@
 
 .button_container {
 	display: flex;
-	justify-content: flex-end;
 	align-items: center;
+	justify-content: flex-end;
 	margin-top: 12px;
 
 	& > button:first-child {

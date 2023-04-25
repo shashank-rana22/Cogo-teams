@@ -1,6 +1,6 @@
 .container {
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-end;
 	margin-bottom: 6px;
 
 	* {
@@ -21,6 +21,7 @@
 
 .applied_filters {
 	display: flex;
+	margin-right: 8px;
 
 	.applied_filter {
 		padding: 4px 6px;

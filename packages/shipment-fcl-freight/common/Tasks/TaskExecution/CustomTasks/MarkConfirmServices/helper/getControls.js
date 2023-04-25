@@ -12,19 +12,20 @@ const service_provider = {
 	name           : 'service_provider_id',
 	type           : 'select',
 	label          : 'Service Provider',
+	span           : 5,
 	optionsListKey : 'verified-service-providers',
 	placeholder    : 'Select Service Provider',
 	rules          : { required: 'Service Provider is Required' },
 };
 
 const getControls = ({
-	service_type,
-	shipment_data,
+	service_type = '',
+	servicesList = [],
 	subsidiaryService = {},
 }) => {
 	const iscarrierHaulage = () => {
 		let iscarrier = false;
-		(shipment_data?.all_services || []).forEach((service) => {
+		(servicesList || []).forEach((service) => {
 			if (
 				service?.service_type === 'haulage_freight_service'
 				&& service?.haulage_type === 'carrier'
@@ -42,7 +43,7 @@ const getControls = ({
 			haulage_shiping_line_id : '',
 		};
 
-		(shipment_data?.all_services || []).forEach((service) => {
+		(servicesList || []).forEach((service) => {
 			if (
 				service?.service_type === 'haulage_freight_service'
 				&& service?.haulage_type === 'carrier'
@@ -56,7 +57,7 @@ const getControls = ({
 		return ids;
 	};
 
-	const service_rendered = (shipment_data?.all_services || []).filter(
+	const service_rendered = (servicesList || []).filter(
 		(service) => service?.service_type === service_type,
 	);
 
@@ -68,7 +69,7 @@ const getControls = ({
 		);
 	}
 
-	service_provider.value =		subsidiary_service_rendered?.service_provider_id
+	service_provider.value =		subsidiary_service_rendered?.service_provider?.id
 		|| service_rendered?.[0]?.service_provider_id
 		|| '';
 
