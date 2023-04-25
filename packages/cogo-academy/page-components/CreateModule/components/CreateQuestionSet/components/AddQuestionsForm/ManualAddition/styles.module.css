@@ -4,6 +4,12 @@
 	color: #221f20;
 }
 
+.breadcrumb_inner_item {
+	color: #221F20; 
+	font-weight: 400; 
+	font-size: 16px;
+}
+
 .breadcrumb_container {
 	margin-top: 32px;
 	margin-bottom: 12px;
