@@ -35,7 +35,7 @@ function TextComponent(props) {
 			(component) => component.id === id,
 		);
 
-		if (parentId && childId) {
+		if (parentId) {
 			data.layouts[selectedComponentIndex].children[childId].content = value;
 		} else {
 			data.layouts[selectedComponentIndex].content = value;

@@ -144,7 +144,7 @@ function Stage({
 	}, [isOver, draggingItemType, isNewItemAdding, shouldAddBelow, hoveredIndex]);
 	const isActive = canDrop && isOver;
 
-	let backgroundColor = component.style['background-color'] || '';
+	let backgroundColor = component.style['background-color'] || '#f9f9f9';
 
 	if (isActive) {
 		backgroundColor = 'grey';

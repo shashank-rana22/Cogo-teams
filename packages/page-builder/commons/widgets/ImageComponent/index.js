@@ -11,13 +11,13 @@ function ImageComponent(props) {
 			const data = components;
 			const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === id));
 
-			if (parentId && childId) {
+			if (parentId) {
 				data.layouts[selectedComponentIndex].children[childId].content = val;
 			} else {
 				data.layouts[selectedComponentIndex].content = val;
 			}
 
-			setComponents((prev) => ({ ...prev, layouts: data.layouts }));
+			setComponents({ ...data });
 		}
 	};
 

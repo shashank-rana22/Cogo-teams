@@ -2,17 +2,6 @@
 	padding: 0px 0 20px 0;
 	position: relative;
 	
-	 &:hover{
-		.change {
-			display: flex;
-			flex-direction: column;
-			color: #222;
-			position: absolute;
-			right: 0;
-			z-index: 2;	
-			top: 0;
-		}
-	 }
 	 
 	:global {
 		.slick-dots {
@@ -57,7 +46,27 @@
 }
 
 
-.change {
+
+
+
+.block_wrapper {
+	display: block !important;
+	position: relative;
+
+	&:hover{
+		.show_wrapper {
+			display: flex;
+			flex-direction: column;
+			color: #222;
+			position: absolute;
+			right: 10px;
+			z-index: 4;	
+			top: 0;
+		}
+	 }
+}
+
+
+.show_wrapper {
 	display: none;
 }	
-

@@ -1,6 +1,6 @@
 /* eslint-disable import/no-cycle */
 import { Tooltip } from '@cogoport/components';
-import { IcMPlusInCircle, IcMDelete } from '@cogoport/icons-react';
+import { IcMDelete } from '@cogoport/icons-react';
 import Carousel from 'react-slick';
 
 import 'slick-carousel/slick/slick.css';
@@ -33,51 +33,15 @@ function CarouselComponent({
 	setShowContentModal,
 }) {
 	const { children } = widget || {};
-	// const { selectedRowId } = selectedRow || {};
-
-	console.log('ashjahis', childId);
 
 	const handleSubmitClick = ({ index, parentId }) => {
 		setParentComponentId({ childId: index, parentId });
 		setShowContentModal(true);
 	};
 
-	const handleAddSlides = () => {
-		const { parentId, id } = selectedRow || {};
-
-		const data = components;
-
-		const selectedComponentIndex = (data.layouts || []).findIndex(
-			(component) => component.id === id,
-		);
-
-		const index = (data.layouts[selectedComponentIndex].children || []).length;
-
-		data.layouts[selectedComponentIndex].children = [...data.layouts[selectedComponentIndex].children, {
-			id         : index,
-			width      : '100%',
-			parentId,
-			isRendered : false,
-			style      : {
-				width          : '100%',
-				border         : '1px dashed #9ab7fe',
-				margin         : '2px',
-				display        : 'flex',
-				justifyContent : 'center',
-				alignItems     : 'center',
-			},
-			icon       : <IcMPlusInCircle style={{ cursor: 'pointer', fill: '#222' }} width={20} height={20} />,
-			attributes : {
-				onClick: () => handleSubmitClick({ index, parentId }),
-			},
-		},
-		];
-
-		setComponents((prev) => ({ ...prev, layouts: data.layouts }));
-	};
-
-	const handleRemovelides = (idx) => {
-		const { id } = selectedRow || {};
+	const handleRemovelides = (e, idx, itemList) => {
+		e.stopPropagation();
+		const { id } = itemList || {};
 
 		const data = components;
 
@@ -94,23 +58,24 @@ function CarouselComponent({
 		<div className={styles.container}>
 			<Carousel {...CAROUSEL_SETTINGS}>
 				{(children || []).map((childComponent, idx) => {
-					const { id, style: allStyles, icon, attributes, type } = childComponent || {};
+					const { id, style, icon, type, parentId } = childComponent || {};
 
 					// const isChildSelected = childId === id && componentId === selectedRowId && type;
 					// const border = isChildSelected ? '1px solid red' : allStyles.border;
 
 					return (
-
 						<div
+							key={id}
 							role="presentation"
-							style={{ ...allStyles, position: 'relative', background: 'red' }}
-							onClick={() => setChildId(id)}
+							style={style}
+							className={styles.block_wrapper}
+							onClick={() => setChildId(idx)}
 						>
 
 							{!type ? (
 								<div
 									role="presentation"
-									onClick={attributes.onClick}
+									onClick={() => handleSubmitClick({ index: idx, parentId })}
 								>
 									{icon}
 								</div>
@@ -127,30 +92,20 @@ function CarouselComponent({
 									index={idx}
 								/>
 							) }
-
-							<Tooltip content="Click here to remove current slides" placement="bottom">
-								<IcMDelete
-									height="24px"
-									width="24px"
-									cursor="pointer"
-									onClick={() => handleRemovelides(idx)}
-								/>
-							</Tooltip>
+							<div role="presentation" className={styles.show_wrapper}>
+								<Tooltip content="Click here to remove current slides" placement="bottom">
+									<IcMDelete
+										height="24px"
+										width="24px"
+										cursor="pointer"
+										onClick={(e) => handleRemovelides(e, idx, widget)}
+									/>
+								</Tooltip>
+							</div>
 						</div>
-
 					);
 				})}
 			</Carousel>
-			<div role="presentation" className={styles.change}>
-				<Tooltip content="Click here to add more slides" placement="bottom">
-					<IcMPlusInCircle
-						height="24px"
-						width="24px"
-						cursor="pointer"
-						onClick={handleAddSlides}
-					/>
-				</Tooltip>
-			</div>
 		</div>
 	);
 }

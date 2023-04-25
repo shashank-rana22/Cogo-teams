@@ -1,4 +1,5 @@
-import { IcMCrossInCircle, IcMDuplicate } from '@cogoport/icons-react';
+import { Tooltip } from '@cogoport/components';
+import { IcMCrossInCircle, IcMDuplicate, IcMPlusInCircle } from '@cogoport/icons-react';
 import React, { useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { v1 as uuid } from 'uuid';
@@ -153,6 +154,46 @@ function RightPanel(props) {
 		}));
 	};
 
+	const handleAddItem = ({ childrenId, parentId }) => {
+		setParentComponentId({ childId: childrenId, parentId });
+		setShowContentModal(true);
+	};
+
+	const handleAddSlides = (e, itemList) => {
+		e.stopPropagation();
+		const { parentId, id: sId } = itemList || {};
+
+		const data = components;
+
+		const selectedComponentIndex = (data.layouts || []).findIndex(
+			(component) => component.id === sId,
+		);
+
+		const childrenId = (data.layouts[selectedComponentIndex].children || []).length;
+
+		data.layouts[selectedComponentIndex].children = [...data.layouts[selectedComponentIndex].children, {
+			id         : childrenId,
+			width      : '100%',
+			parentId,
+			isRendered : false,
+			style      : {
+				width          : '100%',
+				border         : '1px dashed #9ab7fe',
+				margin         : '2px',
+				display        : 'flex',
+				justifyContent : 'center',
+				alignItems     : 'center',
+			},
+			icon       : <IcMPlusInCircle style={{ cursor: 'pointer', fill: '#222' }} width={20} height={20} />,
+			attributes : {
+				onClick: () => handleAddItem({ childrenId, parentId }),
+			},
+		},
+		];
+
+		setComponents((prev) => ({ ...prev, layouts: data.layouts }));
+	};
+
 	const opacity = isNewItemAdding && !id ? '0.3' : '1';
 
 	const border = isSelected && '1px solid red';
@@ -227,6 +268,18 @@ function RightPanel(props) {
 					cursor="pointer"
 					onClick={(e) => handleCopy(e, widget)}
 				/>
+
+				{type === 'carousel' && (
+					<Tooltip content="Click here to add more slides" placement="bottom">
+						<IcMPlusInCircle
+							height="24px"
+							width="24px"
+							cursor="pointer"
+							onClick={(e) => handleAddSlides(e, widget)}
+						/>
+					</Tooltip>
+				)}
+
 			</div>
 		</div>
 	);
