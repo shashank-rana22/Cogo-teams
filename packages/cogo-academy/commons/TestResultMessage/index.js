@@ -34,7 +34,6 @@ const RESULT_MAPPING = {
 		more time to studying and look forward to seeing your progress on the
 		next test. Keep up the effort!`,
 	},
-
 };
 
 function TestResultMessage({ stats_data }) {
