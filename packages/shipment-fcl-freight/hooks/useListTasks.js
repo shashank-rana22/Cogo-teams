@@ -26,7 +26,8 @@ function useListTasks({
 			filters: {
 				...defaultFilters,
 				...filters,
-				...(showMyTasks ? showTaskFilters : {}),
+				...showTaskFilters,
+				...(showMyTasks ? { show_my_tasks: true } : null),
 			},
 		},
 
