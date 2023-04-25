@@ -32,7 +32,9 @@ function CarouselComponent({
 	setParentComponentId,
 	setShowContentModal,
 }) {
-	const { children } = widget || {};
+	const { children, id: componentId } = widget || {};
+
+	const { id: selectedRowId } = selectedRow || {};
 
 	const handleSubmitClick = ({ index, parentId }) => {
 		setParentComponentId({ childId: index, parentId });
@@ -60,47 +62,49 @@ function CarouselComponent({
 				{(children || []).map((childComponent, idx) => {
 					const { id, style, icon, type, parentId } = childComponent || {};
 
-					// const isChildSelected = childId === id && componentId === selectedRowId && type;
-					// const border = isChildSelected ? '1px solid red' : allStyles.border;
+					const isChildSelected = childId === id && componentId === selectedRowId && type;
+					const border = isChildSelected ? '1px solid red' : style.border;
 
 					return (
-						<div
-							key={id}
-							role="presentation"
-							style={style}
-							className={styles.block_wrapper}
-							onClick={() => setChildId(idx)}
-						>
+						<div>
+							<div
+								key={id}
+								role="presentation"
+								style={{ ...style, border }}
+								className={styles.block_wrapper}
+								onClick={() => setChildId(idx)}
+							>
 
-							{!type ? (
-								<div
-									role="presentation"
-									onClick={() => handleSubmitClick({ index: idx, parentId })}
-								>
-									{icon}
-								</div>
-							) : (
-								<RenderComponents
-									componentType={type}
-									widget={childComponent}
-									components={components}
-									setComponents={setComponents}
-									elementId={id}
-									childId={childId}
-									selectedRow={selectedRow}
-									setSelectedItem={setSelectedItem}
-									index={idx}
-								/>
-							) }
-							<div role="presentation" className={styles.show_wrapper}>
-								<Tooltip content="Click here to remove current slides" placement="bottom">
-									<IcMDelete
-										height="24px"
-										width="24px"
-										cursor="pointer"
-										onClick={(e) => handleRemovelides(e, idx, widget)}
+								{!type ? (
+									<div
+										role="presentation"
+										onClick={() => handleSubmitClick({ index: idx, parentId })}
+									>
+										{icon}
+									</div>
+								) : (
+									<RenderComponents
+										componentType={type}
+										widget={childComponent}
+										components={components}
+										setComponents={setComponents}
+										elementId={id}
+										childId={childId}
+										selectedRow={selectedRow}
+										setSelectedItem={setSelectedItem}
+										index={idx}
 									/>
-								</Tooltip>
+								) }
+								<div role="presentation" className={styles.show_wrapper}>
+									<Tooltip content="Click here to remove current slides" placement="bottom">
+										<IcMDelete
+											height="24px"
+											width="24px"
+											cursor="pointer"
+											onClick={(e) => handleRemovelides(e, idx, widget)}
+										/>
+									</Tooltip>
+								</div>
 							</div>
 						</div>
 					);

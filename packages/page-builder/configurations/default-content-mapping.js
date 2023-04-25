@@ -95,9 +95,7 @@ const getContentMapping = () => {
 				parentId,
 				isRendered : false,
 				style      : {
-					width          : '100%',
 					border         : '1px dashed #9ab7fe',
-					margin         : '2px',
 					display        : 'flex',
 					justifyContent : 'center',
 					alignItems     : 'center',
@@ -113,9 +111,7 @@ const getContentMapping = () => {
 				parentId,
 				isRendered : false,
 				style      : {
-					width          : '100%',
 					border         : '1px dashed #9ab7fe',
-					margin         : '2px',
 					display        : 'flex',
 					justifyContent : 'center',
 					alignItems     : 'center',
