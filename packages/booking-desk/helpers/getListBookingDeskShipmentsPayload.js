@@ -26,6 +26,22 @@ export default function getListBookingDeskShipmentsPayload({ filters, activeTab,
 
 	const tabSpecificPayload = shipmentSpecificPayload[shipment_type][activeTab];
 
+	const combinedTradeTypeSpecific = { task_attributes: [] };
+
+	let payloadKey = ['common'];
+	if (filters.trade_type) {
+		payloadKey.push(filters.trade_type);
+	} else {
+		payloadKey = ['common', 'import'];
+	}
+
+	payloadKey.forEach((key) => {
+		if (key in tabSpecificPayload) {
+			combinedTradeTypeSpecific.task_attributes = [...combinedTradeTypeSpecific.task_attributes,
+				...(tabSpecificPayload[key]?.task_attributes || {})];
+		}
+	});
+
 	const tabs = TABS_CONFIG[shipment_type];
 
 	const isCriticalVisible = tabs.find((tab) => tab.name === activeTab).isCriticalVisible ?? false;
@@ -37,7 +53,7 @@ export default function getListBookingDeskShipmentsPayload({ filters, activeTab,
 	const payload = {
 		filters: {
 			state: shipmentStates[activeTab] || shipmentStates.in_progress,
-			...(tabSpecificPayload[filters.trade_type] || tabSpecificPayload),
+			...(combinedTradeTypeSpecific || {}),
 			...(selected_agent_id && { selected_agent_id }),
 			...(isCriticalVisible && isCriticalOn
 				&& { schedule_departure_less_than: threeDaysLater }),
