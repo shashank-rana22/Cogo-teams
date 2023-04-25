@@ -466,13 +466,11 @@ export const column = ({
 		accessor : 'purchase_invoice_amount',
 		id       : 'purchase_invoice_amount',
 		Cell     : ({ row: { original } }) => {
-			const {expenseBooked = '', expenseCurrency = ''} = original || {}; 
+			const { expenseBooked = '', expenseCurrency = '' } = original || {};
 			return (
-				<>
-					<span>
-						{ getFormattedPrice(expenseBooked, expenseCurrency)}
-					</span>
-				</>
+				<span>
+					{ getFormattedPrice(expenseBooked, expenseCurrency)}
+				</span>
 			);
 		},
 	}, {
@@ -480,7 +478,7 @@ export const column = ({
 		accessor : 'adjusted_expense',
 		id       : 'adjusted_expense',
 		Cell     : ({ row: { original } }) => {
-			const { expenseAccrued = {},expenseCurrency } = original || {};
+			const { expenseAccrued = {}, expenseCurrency } = original || {};
 			return <span>{ getFormattedPrice(expenseAccrued, expenseCurrency) || '-' }</span>;
 		},
 
@@ -505,7 +503,7 @@ export const column = ({
 		accessor : 'adjusted_income',
 		id       : 'adjusted_income',
 		Cell     : ({ row: { original } }) => {
-			const { incomeAccrued = {},incomeCurrency } = original || {};
+			const { incomeAccrued = {}, incomeCurrency } = original || {};
 			return <span>{ getFormattedPrice(incomeAccrued, incomeCurrency) || '-' }</span>;
 		},
 	}, {

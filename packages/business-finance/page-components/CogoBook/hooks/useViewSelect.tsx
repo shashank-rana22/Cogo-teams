@@ -211,11 +211,11 @@ const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 	const onChangeTableHeaderCheckbox = (event) => {
 		event.stopPropagation();
 
-		const { page = 0 } = paginationData;
+		const { page:checkPage = 0 } = paginationData;
 
 		setCheckedRows({
 			...checkedRows,
-			[`page-${page}`]: event?.target?.checked
+			[`page-${checkPage}`]: event?.target?.checked
 				? (groupListData || [])?.map(({ id }) => `${id || ''}`)
 				: [],
 		});
@@ -240,29 +240,29 @@ const useViewSelect = (filters, query, setBulkSection, bulkAction) => {
 	const onChangeTableBodyCheckbox = (event, item) => {
 		event.stopPropagation();
 		const { pageNo = 0 } = item;
-		const { page = 0 } = paginationData;
+		const { page:rowPage = 0 } = paginationData;
 		if (event.target.checked) {
 			setCheckedRows({
 				...checkedRows,
-				[`page-${page}`]: [
-					...(checkedRows?.[`page-${page}`] || []),
+				[`page-${rowPage}`]: [
+					...(checkedRows?.[`page-${rowPage}`] || []),
 					`${item?.id || ''}`,
 				],
 			});
 		} else {
 			setCheckedRows({
 				...checkedRows,
-				[`page-${pageNo || page}`]: (
-					checkedRows?.[`page-${pageNo || page}`] || []
+				[`page-${pageNo || rowPage}`]: (
+					checkedRows?.[`page-${pageNo || rowPage}`] || []
 				).filter((serialId) => serialId !== `${item?.id || ''}`),
 			});
 		}
 	};
 
 	const getTableBodyCheckbox = (item) => {
-		const { page = 0 } = paginationData;
+		const { page:checkedPage = 0 } = paginationData;
 
-		const isChecked = (checkedRows?.[`page-${page}`] || []).includes(
+		const isChecked = (checkedRows?.[`page-${checkedPage}`] || []).includes(
 			`${item?.id || ''}`,
 		);
 

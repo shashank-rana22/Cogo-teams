@@ -256,7 +256,7 @@ function Card({
 						themeType="secondary"
 					>
 						+ More Filters
-						{ jobState  || range || profitPercent ? <div className={styles.dot} /> : null}
+						{ jobState || range || profitPercent ? <div className={styles.dot} /> : null}
 					</Button>
 				</Popover>
 				<Button

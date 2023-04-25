@@ -60,7 +60,7 @@ function ViewSelectedInvoice() {
 		const {
 			sellQuotation = '', buyQuotation = '', quotationProfit = '',
 			quotationMargin = '', bookingType = '', buyQuotationCurrency = '',
-			sellQuotationCurrency = '',incomeCurrency='',
+			sellQuotationCurrency = '', incomeCurrency = '',
 		} = itemData || {};
 
 		return (
