@@ -35,7 +35,7 @@ function List() {
 				setShowMyTasks={setShowMyTasks}
 			/>
 
-			{tasksList?.length === 0 ? <EmptyState />
+			{tasksList?.length === 0 ? <EmptyState width={350} height={300} />
 				: (
 					<>
 

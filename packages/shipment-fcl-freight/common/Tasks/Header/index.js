@@ -72,9 +72,6 @@ function Header({
 					/>
 				)
 				: null}
-
-			{/* Booking Requirements to be integrated in bottom panel */}
-			{/* <div className={styles.bottom_panel}> Bottom</div> */}
 		</div>
 	);
 }
