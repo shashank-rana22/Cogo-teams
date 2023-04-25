@@ -37,7 +37,7 @@ function FieldArray(props) {
 			</div>
 
 			<Button
-				themeType="accent"
+				themeType="secondary"
 				onClick={() => append(childValues)}
 				style={{ marginTop: '8px' }}
 			>

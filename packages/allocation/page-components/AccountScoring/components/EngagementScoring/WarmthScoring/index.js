@@ -33,62 +33,70 @@ function WarmthScoring(props) {
 
 	const { list = [] } = data || {};
 
-	const titleComponent = (value) => (
-		<div className={styles.title_container}>
-			<div className={styles.engagement_type}>{startCase(value.engagement_type)}</div>
-			{activeCollapse === value.engagement_type
-				? (
-					<div>
-						{editMode === value.engagement_type ? (
-							<div className={styles.title_buttons}>
-								<Button size="md" themeType="tertiary" style={{ marginLeft: '16px' }}>
-									<IcMDelete style={{ marginRight: '8px' }} />
-									Delete
-								</Button>
+	const titleComponent = (value) => {
+		const { engagement_type } = value;
 
+		const handleSave = (formValues) => {
+			onSave(formValues, engagement_type);
+		};
+
+		return (
+			<div className={styles.title_container}>
+				<div className={styles.engagement_type}>{startCase(engagement_type)}</div>
+				{activeCollapse === engagement_type
+					? (
+						<div>
+							{editMode === engagement_type ? (
+								<div className={styles.title_buttons}>
+									<Button size="md" themeType="tertiary" style={{ marginLeft: '16px' }}>
+										<IcMDelete style={{ marginRight: '8px' }} />
+										Delete
+									</Button>
+
+									<Button
+										size="md"
+										themeType="secondary"
+										style={{ marginLeft: '16px' }}
+										onClick={(e) => {
+											e.stopPropagation();
+											setEditMode('');
+										}}
+									>
+										Cancel
+
+									</Button>
+
+									<Button
+										size="md"
+										themeType="primary"
+										style={{ marginLeft: '16px', marginRight: '16px' }}
+										onClick={handleSubmit(handleSave)}
+									>
+										Save
+									</Button>
+
+								</div>
+							) : (
 								<Button
 									size="md"
 									themeType="secondary"
-									style={{ marginLeft: '16px' }}
 									onClick={(e) => {
 										e.stopPropagation();
-										setEditMode('');
+										setEditMode(engagement_type);
 									}}
-								>
-									Cancel
-
-								</Button>
-
-								<Button
-									size="md"
-									themeType="primary"
 									style={{ marginLeft: '16px', marginRight: '16px' }}
-									onClick={handleSubmit(onSave)}
 								>
-									Save
+									<IcMEdit style={{ marginRight: '8px' }} />
+
+									Edit
 								</Button>
+							)}
+						</div>
+					) : null }
 
-							</div>
-						) : (
-							<Button
-								size="md"
-								themeType="secondary"
-								onClick={(e) => {
-									e.stopPropagation();
-									setEditMode(value.engagement_type);
-								}}
-								style={{ marginLeft: '16px', marginRight: '16px' }}
-							>
-								<IcMEdit style={{ marginRight: '8px' }} />
-
-								Edit
-							</Button>
-						)}
-					</div>
-				) : null }
-
-		</div>
-	);
+			</div>
+		);
+	};
 
 	const options = list.map((value) => ({
 		key      : value.engagement_type,

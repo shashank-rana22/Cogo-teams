@@ -2,9 +2,16 @@
 	padding: 18px;
 }
 
+.edit_container{
+	border: 1px solid #f8f2e7;
+	padding: 4px 16px;
+	border-radius: 6px;
+}
+
 .table_headers {
 	display: flex;
 	flex-basis: 100%;
+	line-height: 24px;
 	font-size: 12px;
 	font-weight: 700;
 	color: #4f4f4f;
@@ -26,5 +33,13 @@
 		.ui_table_body_cell{
 			font-size: 14px;
 		}
+
+		.ui_table_head_cell{
+			font-size: 12px;
+		}
 	}
+}
+
+.table_lifecycle_item{
+	min-width: 200px;
 }

@@ -15,7 +15,7 @@ const tableColumns = [
 	{
 		Header   : 'LIFECYCLE ITEM',
 		accessor : ({ lifecycle_item = '' }) => (
-			<div>{startCase(lifecycle_item)}</div>
+			<div className={styles.table_lifecycle_item}>{startCase(lifecycle_item)}</div>
 		),
 	},
 	{
@@ -70,7 +70,7 @@ function EngagementType(props) {
 	return (
 		<div className={styles.collapse_inner_container}>
 			{editMode ? (
-				<>
+				<div className={styles.edit_container}>
 					<div className={styles.table_header_container}>
 						{columns.map((item) => (
 							<div key={item} className={styles.table_headers}>
@@ -86,7 +86,7 @@ function EngagementType(props) {
 					<div className={styles.sublist_item}>
 						<FieldArray control={control} name="single_item" />
 					</div>
-				</>
+				</div>
 			) : <Table className={styles.table_container} columns={tableColumns} data={engagement_type_details} />}
 
 		</div>

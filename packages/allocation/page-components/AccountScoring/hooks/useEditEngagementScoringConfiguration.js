@@ -9,10 +9,13 @@ function useEditEngagementScoringConfiguration() {
 		authkey : 'post_allocation_engagement_scoring_event_configurations',
 	}, { manual: true });
 
-	const onSave = async (formValues) => {
+	const onSave = async (formValues, engagement_type) => {
 		try {
+			const { single_item = [] } = formValues || {};
+
 			const payload = {
-				...formValues,
+				event_type         : engagement_type,
+				event_type_details : single_item,
 			};
 
 			await trigger({ data: payload });
