@@ -12,6 +12,18 @@
 	}
 }
 
+.critical_container{
+	:global{
+		.ui_toggle_container {
+			align-items: center;
+		}
+
+		.ui_toggle_container .ui_toggle_offlabel {
+			color: var(--color-secondary-greyscale-2);
+		}
+	}
+}
+
 .header {
 	display: flex;
 	align-items: flex-end;
@@ -22,6 +34,11 @@
 		margin-bottom: 0;
 	}
 }
+
+.stepper_container{
+	margin-left: 16px;
+}
+
 
 .loading {
 	padding-top: 14px;
@@ -34,4 +51,9 @@
 
 .version {
 	margin-right: 10px;
+}
+
+.render_filter_container{
+	display: flex;
+	margin-bottom: 8px;
 }

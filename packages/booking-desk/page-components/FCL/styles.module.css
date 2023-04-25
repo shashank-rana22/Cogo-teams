@@ -16,11 +16,15 @@
 	display: flex;
 	align-items: flex-end;
 	justify-content: space-between;
-	margin-bottom: 10px;
+	margin-bottom: 22px;
 
 	> h1 {
 		margin-bottom: 0;
 	}
+}
+
+.stepper_container{
+	margin-left: 16px;
 }
 
 .loading {
@@ -34,4 +38,23 @@
 
 .version {
 	margin-right: 10px;
+	display: flex;
+	align-items: center;
+}
+
+.render_filter_container{
+	display: flex;
+	margin-bottom: 8px;
+}
+
+.critical_container{
+	:global{
+		.ui_toggle_container {
+			align-items: center;
+		}
+
+		.ui_toggle_container .ui_toggle_offlabel {
+			color: var(--color-secondary-greyscale-2);
+		}
+	}
 }
