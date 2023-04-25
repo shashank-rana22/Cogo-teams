@@ -2,11 +2,11 @@ import { useState } from 'react';
 
 import TaskCard from '../../../Tasks/TaskExecution';
 
+import styles from './styles.module.css';
+
 function Task({ showDoc, setShowDoc, refetch }) {
 	const [pendingTask, setPendingTask] = useState({});
 	const { pendingItem = {} } = showDoc;
-
-	// const { shipment_data, primary_Service } = useContext(ShipmentDetailContext);
 
 	const handleClick = () => {
 		setShowDoc(null);
@@ -17,13 +17,14 @@ function Task({ showDoc, setShowDoc, refetch }) {
 	};
 
 	return (
-
-		<TaskCard
-			task={pendingItem}
-			onCancel={() => handleClick(pendingItem)}
-			refetch={refetch}
-			type="modal"
-		/>
+		<div className={styles.container}>
+			<TaskCard
+				task={pendingItem}
+				onCancel={() => handleClick(pendingItem)}
+				refetch={refetch}
+				type="modal"
+			/>
+		</div>
 
 	);
 }
