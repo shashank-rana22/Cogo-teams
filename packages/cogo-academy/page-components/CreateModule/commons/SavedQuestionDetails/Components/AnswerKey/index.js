@@ -29,8 +29,7 @@ function AnswerKey({ item, caseToShow }) {
 			interactive
 			content={(
 				<div className={styles.whole_subjective}>
-					{
-					item?.question_type === 'subjective' ? (
+					{item?.question_type === 'subjective' ? (
 						<div dangerouslySetInnerHTML={{ __html: test_question_answers[0].answer_text }} />
 					) : (
 						<div className={styles.flex_column}>
@@ -38,10 +37,8 @@ function AnswerKey({ item, caseToShow }) {
 								<div key={correctAnswer} className={styles.answer}>{correctAnswer}</div>
 							))}
 						</div>
-					)
-				}
+					)}
 				</div>
-
 			)}
 		>
 			<div className={styles.answer_key}>

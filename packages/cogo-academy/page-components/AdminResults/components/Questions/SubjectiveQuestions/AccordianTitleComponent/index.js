@@ -17,7 +17,6 @@ function AccordianTitleComponent({ data = {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.topic}>
-
 				<Tooltip content={startCase(topic)} placement="top">
 					<Pill size="md" color="#F3FAFA">
 						<div className={styles.topic_text}>{startCase(topic)}</div>
