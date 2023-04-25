@@ -1,4 +1,3 @@
-// import { Flex, Text } from '@cogo/commons/components';
 import { Button } from '@cogoport/components';
 import { useEffect, useRef, useState } from 'react';
 
@@ -154,11 +153,11 @@ function UploadDraftBL({
 									.fill(null)
 									.map((n, i) => (
 										<div className={styles.flex_container}>
-											<Text size={12} marginBottom={8} bold>
+											<div size={12} marginBottom={8} bold>
 												HBL
 												{' '}
 												{i + 1}
-											</Text>
+											</div>
 											<HBLCreate
 												completed={listDocsAPI?.data?.list?.[i]}
 												hblData={hblData[i] || listDocsAPI?.data?.list?.[i]?.data}
