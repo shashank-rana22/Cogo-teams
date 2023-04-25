@@ -12,9 +12,9 @@ function SubjectiveQuestionItem({ test_id = '', question_id = '' }) {
 
 	const { question_data = {}, answers = {} } = data;
 
-	const { question = '' } = question_data;
+	const { question = '' } = question_data || {};
 
-	const { answer_text = '' } = answers;
+	const { answer_text = '' } = answers || {};
 
 	if (loading) {
 		return (
