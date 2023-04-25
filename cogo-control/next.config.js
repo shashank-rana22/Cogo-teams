@@ -43,8 +43,23 @@ module.exports = withBundleAnalyzer({
 			},
 		],
 	},
-	webpack: (config) => {
+	webpack: (config, { isServer }) => {
 		const newConfig = { ...config };
+
+		newConfig.resolve.fallback = {
+			...newConfig.resolve.fallback,
+			request  : false,
+			encoding : false,
+			...(isServer
+				? {}
+				: {
+					fs            : false,
+					child_process : false,
+					net           : false,
+					tls           : false,
+				}),
+		};
+
 		newConfig.module.rules.push({
 			test : /\.svg$/i,
 			use  : [{ loader: '@svgr/webpack' }],

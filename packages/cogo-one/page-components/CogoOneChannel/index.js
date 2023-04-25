@@ -2,6 +2,7 @@ import { IcMDownload, IcMSettings } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
+import { getAuth, signInWithCustomToken } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
@@ -52,13 +53,11 @@ function CogoOne() {
 	const [agentDetails, setAgentDetails] = useState(false);
 
 	const [modalType, setModalType] = useState({ type: null, data: {} });
-	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
-	const firestore = getFirestore(app);
-
-	const { userRoleIds, userId, emailAddress } = useSelector(({ profile }) => ({
+	const { userRoleIds, userId, token, emailAddress } = useSelector(({ profile, general }) => ({
 		userRoleIds  : profile.partner?.user_role_ids || [],
 		userId       : profile?.user?.id,
+		token        : general.firestoreToken,
 		emailAddress : profile?.user?.email,
 	}));
 
@@ -68,6 +67,17 @@ function CogoOne() {
 		loading:statusLoading,
 		updateUserStatus = () => {},
 	} = useCreateUserInactiveStatus({ fetchworkPrefernce, setOpenModal });
+
+	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+
+	useEffect(() => {
+		const auth = getAuth();
+		signInWithCustomToken(auth, token).catch((error) => {
+			console.log(error.message);
+		});
+	}, [token]);
+
+	const firestore = getFirestore(app);
 
 	const { tagOptions = [] } = useListAssignedChatTags();
 	const mailProps = {
