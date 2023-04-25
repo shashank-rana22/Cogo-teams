@@ -136,7 +136,7 @@
 
 .mountain {
 	position: absolute;
-	right: -900px;
+	right: -60px;
 	bottom: -20px;
 	width: 2px;
 	height: 2px;
@@ -148,12 +148,12 @@
 		290px 320px 0 50px #fdebe8,
 		320px 400px 0 50px #fdebe8;
 	transform: rotate(130deg);
-	animation: mtn 5s linear infinite;
+	animation: mtn 3s  linear infinite;
 }
 
 .hill {
 	position: absolute;
-	right: -900px;
+	right: -90px;
 	bottom: -50px;
 	width: 400px;
 	height: 20px;
@@ -165,7 +165,7 @@
 		250px 0 0 50px #f37065,
 		290px 0 0 50px #f37065,
 		620px 0 0 50px #f37065;
-	animation: hill 4s 2s linear infinite;
+	animation: hill 3s 2s linear infinite;
 }
 
 .tree {

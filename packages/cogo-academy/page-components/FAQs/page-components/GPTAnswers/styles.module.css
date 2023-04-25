@@ -1,7 +1,6 @@
 .module_text {
 	margin: 16px 0 8px;
 	font-size: 11px;
-	font-weight: 400;
 	color: #221f20;
 	opacity: 0.6;
 }
@@ -36,8 +35,6 @@
 
 .ans {
 	margin-top: 8px;
-	font-size: 14px;
-	font-weight: 400;
 	line-height: 180%;
 	color: #0009;
 	white-space: pre-line;
@@ -60,8 +57,6 @@
 .help_text {
 	display: flex;
 	align-items: center;
-	font-size: 14px;
-	font-weight: 400;
 	cursor: pointer;
 	opacity: 0.5;
 }
@@ -72,8 +67,6 @@
 	justify-content: center;
 	margin-top: 20px;
 	margin-bottom: 20px;
-	font-size: 14px;
-	font-weight: 400;
 	cursor: pointer;
 	opacity: 0.5;
 
@@ -88,7 +81,6 @@
 .no_of_people_like_it {
 	margin: 8px 0;
 	font-size: 11px;
-	font-weight: 400;
 	color: #221f20;
 	opacity: 0.6;
 }
@@ -127,7 +119,6 @@
 
 .show_buttons {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	justify-content: center;
 }
