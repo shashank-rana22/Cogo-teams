@@ -9,11 +9,12 @@
 
 .container.confirmed_by_importer_exporter {
 	border-top: 1px solid #abcd62;
-}
-
-.container.cancelled {
+} 
+.container.completed{
 	border-top: 1px solid #abcd62;
 }
+
+
 
 .remaining_keys {
 	display: flex;
