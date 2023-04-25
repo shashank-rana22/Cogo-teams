@@ -12,8 +12,8 @@
 	}
 }
 
-.critical_container{
-	:global{
+.critical_container {
+	:global {
 		.ui_toggle_container {
 			align-items: center;
 		}
@@ -35,10 +35,9 @@
 	}
 }
 
-.stepper_container{
+.stepper_container {
 	margin-left: 16px;
 }
-
 
 .loading {
 	padding-top: 14px;
@@ -53,7 +52,7 @@
 	margin-right: 10px;
 }
 
-.render_filter_container{
+.render_filter_container {
 	display: flex;
 	margin-bottom: 8px;
 }
