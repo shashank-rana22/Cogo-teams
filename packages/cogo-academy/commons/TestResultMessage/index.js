@@ -2,33 +2,37 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { Image } from '@cogoport/next';
 import { format } from '@cogoport/utils';
 
-import ResultText from './ResultText';
-import styles from './styles.module.css';
+import getResultStatus from '../../utils/getResultStatus';
 
-const getUserStatus = ({ cut_of_percentage, user_percentage }) => {
-	if (user_percentage < cut_of_percentage) {
-		return 'failed';
-	} if (user_percentage > (100 - ((100 - cut_of_percentage) / 2))) {
-		return 'passed';
-	}
-	return 'intermediate';
-};
+import styles from './styles.module.css';
 
 const RESULT_MAPPING = {
 	passed: {
-		image_url : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/smile1.png',
-		message   : 'Congratulations!',
-		alt       : 'confetti',
+		image_url        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/smile1.png',
+		message_heading  : 'Congratulations!',
+		alt              : 'confetti',
+		message_text     : 'You have performed really well in the',
+		message_sub_text : `. Your hard work has paid off, and we encourage you to continue
+		learning and applying your newfound knowledge to future transactions.
+		Keep up the excellent work!`,
 	},
 	intermediate: {
-		image_url : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/smile2.png',
-		message   : 'Well Done!',
-		alt       : 'smile',
+		image_url        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/smile2.png',
+		message_heading  : 'Well Done!',
+		alt              : 'smile',
+		message_text     : 'Your performance on the',
+		message_sub_text : `showed Potential for Improvement. Keep working hard and striving for
+		better results in future tests - we believe in your ability to succeed!`,
 	},
 	failed: {
-		image_url : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/smile3.png',
-		message   : 'You could do Better!',
-		alt       : 'sad-face',
+		image_url        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/smile3.png',
+		message_heading  : 'You could do Better!',
+		alt              : 'sad-face',
+		message_text     : 'While your performance on the',
+		message_sub_text : `was not as strong as we had hoped, don't get discouraged!
+		Remember that learning takes time and practice. We recommend dedicating
+		more time to studying and look forward to seeing your progress on the
+		next test. Keep up the effort!`,
 	},
 
 };
@@ -36,9 +40,9 @@ const RESULT_MAPPING = {
 function TestResultMessage({ stats_data }) {
 	const { date, test_name, cut_of_percentage, user_percentage } = stats_data || {};
 
-	const status = getUserStatus({ cut_of_percentage, user_percentage });
+	const status = getResultStatus({ cut_of_percentage, user_percentage });
 
-	const { image_url, message, alt, color } = RESULT_MAPPING[status] || {};
+	const { image_url, message_heading, alt, message_text, message_sub_text } = RESULT_MAPPING[status] || {};
 
 	return (
 		<div className={styles.message_container}>
@@ -51,17 +55,20 @@ function TestResultMessage({ stats_data }) {
 			/>
 
 			<div className={styles.column}>
-				<div className={styles.message_content} style={{ color }}>
-					{message}
+				<div className={styles.message_content}>
+					{message_heading}
 				</div>
 
 				<div className={styles.sub_text}>
-					<ResultText
-						type={status}
-						date={format(date, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}
-						testName={test_name}
-					/>
-
+					{message_text}
+					{' '}
+					<b>{test_name}</b>
+					{' '}
+					taken on
+					{' '}
+					{format(date, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}
+					{' '}
+					{message_sub_text}
 				</div>
 			</div>
 		</div>

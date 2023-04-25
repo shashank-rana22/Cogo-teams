@@ -134,10 +134,10 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router, setShowReAttemp
 			</div>
 		),
 		id       : 'attempted_on',
-		accessor : ({ created_at = '' }) => (
+		accessor : ({ start_time = '' }) => (
 			<section className={styles.section}>
 				{format(
-					created_at,
+					start_time,
 					`${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']} ${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`,
 				)}
 			</section>

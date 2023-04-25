@@ -8,9 +8,10 @@ const renderTooltip = ({ topic_wise_percentile = 0 }) => (
 	Object.entries(topic_wise_percentile || {}).map(([key, value], index) => {
 		if (index >= 2) {
 			return (
-				<div className={styles.Tooltip_row}>
+				<div className={styles.tooltip_row}>
 					<div>{key}</div>
-					<div className={styles.Tooltip_percentage}>
+
+					<div className={styles.tooltip_percentage}>
 						<strong>
 							{' '}
 							{toFixed(value, 2)}
@@ -26,7 +27,8 @@ const renderTooltip = ({ topic_wise_percentile = 0 }) => (
 );
 
 function TopicWisePercentile({ topic_wise_percentile }) {
-	const number_of_topics = Object.keys(topic_wise_percentile).length;
+	const number_of_topics = Object.keys(topic_wise_percentile)?.length;
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Topic wise percentile:</div>
@@ -38,6 +40,7 @@ function TopicWisePercentile({ topic_wise_percentile }) {
 							return (
 								<div key={key} className={styles.percentile}>
 									<div className={styles.topic}>{key}</div>
+
 									<div className={styles.percentage}>
 										{toFixed(value, 2)}
 										{' '}
@@ -46,23 +49,22 @@ function TopicWisePercentile({ topic_wise_percentile }) {
 								</div>
 							);
 						}
-						return (null);
+
+						return null;
 					},
 				)}
-				{
-					number_of_topics > 2 && (
-						<Tooltip content={renderTooltip({ topic_wise_percentile })} placement="bottom">
-							<div className={styles.percentile_01}>
-								<div className={styles.topic}>
-									+
-									{' '}
-									{number_of_topics - 2}
-								</div>
-							</div>
-						</Tooltip>
 
-					)
-				}
+				{number_of_topics > 2 && (
+					<Tooltip content={renderTooltip({ topic_wise_percentile })} placement="top">
+						<div className={styles.percentile_01}>
+							<div className={styles.topic}>
+								+
+								{' '}
+								{number_of_topics - 2}
+							</div>
+						</div>
+					</Tooltip>
+				)}
 			</div>
 		</div>
 	);

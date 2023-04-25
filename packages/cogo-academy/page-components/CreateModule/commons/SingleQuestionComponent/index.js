@@ -205,7 +205,7 @@ function SingleQuestionComponent({
 						size="sm"
 						type="button"
 					>
-						{field?.isNew ? 'Save' : 'Edit'}
+						{field?.isNew ? 'Save' : 'Update'}
 					</Button>
 					{/* ) : null} */}
 				</div>
