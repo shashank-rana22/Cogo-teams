@@ -58,17 +58,20 @@ export default function PopoverContent({ stateProps, setShowPopover }) {
 					</Button>
 				))}
 			</div>
+			<div>
+				<h2>Trade Type</h2>
+				<div className={styles.trade_type_container}>
 
-			<div className={styles.trade_type_container}>
-				{CONTROLS.trade_types.map(({ label, value }) => (
-					<Button
-						size="md"
-						className={formValues.trade_type === value ? '' : styles.inactive}
-						onClick={() => setValue('trade_type', value)}
-					>
-						{label}
-					</Button>
-				))}
+					{CONTROLS.trade_types.map(({ label, value }) => (
+						<Button
+							size="md"
+							className={formValues.trade_type === value ? '' : styles.inactive}
+							onClick={() => setValue('trade_type', value)}
+						>
+							{label}
+						</Button>
+					))}
+				</div>
 			</div>
 
 		</div>
