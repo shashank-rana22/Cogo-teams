@@ -20,7 +20,7 @@ const COMPONENT_MAPPING = {
 function RenderContent({ questionsList = [], test_id = '', activeTab = '' }) {
 	return (
 		<>
-			{activeTab !== 'case_study_based' ? (<ListHeader type={activeTab} />) : (null)}
+			{activeTab !== 'case_study_based' ? (<ListHeader type={activeTab} />) : null}
 
 			{(questionsList || []).map((question_item, index) => {
 				const { component: ActiveComponent = null } = COMPONENT_MAPPING[activeTab];

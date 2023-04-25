@@ -21,7 +21,7 @@ function Body({
 
 	return (
 		<div key={`${loading}_${subQuestion}`}>
-			{(question_type === 'single_correct' || question_type === 'multi_correct')
+			{(['single_correct', 'multi_correct'].includes(question_type))
 				&& (
 					<SingleQuestion
 						question={data}
