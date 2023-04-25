@@ -1,6 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 
-import styles from '../styles.module.css';
+import styles from './styles.module.css';
 
 function IsEvaluated({ is_evaluated = false }) {
 	return (
