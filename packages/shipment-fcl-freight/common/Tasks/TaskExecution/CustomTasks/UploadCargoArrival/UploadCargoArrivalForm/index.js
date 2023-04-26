@@ -107,7 +107,6 @@ function UploadCargoArrivalForm({
 								ref={(r) => {
 									ref.current.submit = r;
 								}}
-								mode="write"
 								documentType="container_arrival_notice"
 								initialValues={savedData || templateInitialValues}
 								summary={summary}

@@ -4,10 +4,8 @@ import CargoArrivalNotice from './CargoArrivalNotice';
 
 function TradeDocTemplate(
 	{
-		mode = 'read',
 		documentType = 'bluetide_hbl',
 		initialValues = null,
-		noFormat = false,
 	},
 	ref,
 ) {
@@ -16,9 +14,7 @@ function TradeDocTemplate(
 			return (
 				<CargoArrivalNotice
 					ref={ref}
-					noFormat={noFormat}
 					initialValues={initialValues}
-					mode={mode}
 				/>
 			);
 

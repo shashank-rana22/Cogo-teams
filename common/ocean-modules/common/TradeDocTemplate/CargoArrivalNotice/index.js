@@ -3,7 +3,7 @@ import { forwardRef, useRef, useImperativeHandle } from 'react';
 import DetailsForm from './DetailsForm';
 
 function CargoArrivalNotice(
-	{ noFormat, initialValues, mode, service_type },
+	{ initialValues, service_type },
 	ref,
 ) {
 	const refFront = useRef({});
@@ -15,12 +15,10 @@ function CargoArrivalNotice(
 	return (
 		<div>
 			<DetailsForm
-				noFormat={noFormat}
 				ref={(r) => {
 					refFront.current.submit = r;
 				}}
 				initialValues={initialValues}
-				mode={mode}
 				service_type={service_type}
 			/>
 		</div>
