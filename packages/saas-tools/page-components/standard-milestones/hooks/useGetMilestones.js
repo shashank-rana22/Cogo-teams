@@ -48,7 +48,6 @@ const useGetMilestones = ({ sideBar }) => {
 					reverted     : 0,
 				}));
 			});
-		// eslint-disable-next-line
 	}, [filters,sideBar]);
 
 	const hookSetters = {

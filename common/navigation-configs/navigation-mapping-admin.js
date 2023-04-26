@@ -1272,12 +1272,8 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				module_type   : 'dashboards',
-<<<<<<< HEAD
-				possible_apis : apis.bl_do,
-=======
 				possible_apis : [...apis.bl_do, ...apis.sop, ...apis.poc],
 
->>>>>>> 01a9c755035e2baed9fb759ea6324728f59caf7b
 			},
 			{
 				key           : 'coe-cost_booking_desk',
@@ -1555,6 +1551,16 @@ const navigationMappingAdmin = {
 				title         : 'Rate Sheets',
 				href          : '/cogo-assured/rate_sheets',
 				as            : '/cogo-assured/rate_sheets',
+				type          : 'link',
+				possible_apis : apis.cogo_assured,
+
+				main_apis: [],
+			},
+			{
+				key           : 'cogo_assured-feedbacks',
+				title         : 'Feedbacks',
+				href          : '/cogo-assured/feedbacks',
+				as            : '/cogo-assured/feedbacks',
 				type          : 'link',
 				possible_apis : apis.cogo_assured,
 
