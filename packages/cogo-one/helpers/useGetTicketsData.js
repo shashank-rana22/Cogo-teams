@@ -32,19 +32,19 @@ const useGetTicketsData = ({
 	const { userId, leadUserId } = DATA_MAPPING[activeTab] || {};
 
 	const {
+		statsData = {},
+		statsLoading = false,
+		fetchTicketsStats = () => {},
+	} = useGetTicketStats({ UserID: userId || leadUserId, activeTab });
+
+	const {
 		ticketData = {},
 		listLoading,
 		fetchTickets = () => {},
 		setFilter = () => {},
 		filter = '',
 		setPagination = () => {},
-	} = useListTickets({ UserID: userId || leadUserId, activeTab });
-
-	const {
-		statsData = {},
-		statsLoading = false,
-		fetchTicketsStats = () => {},
-	} = useGetTicketStats({ UserID: userId || leadUserId, activeTab });
+	} = useListTickets({ UserID: userId || leadUserId, activeTab, fetchTicketsStats });
 
 	const refetchTickets = () => {
 		fetchTicketsStats();

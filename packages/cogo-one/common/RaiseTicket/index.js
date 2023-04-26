@@ -39,7 +39,8 @@ function RaiseTicket({ setRaiseTicketModal = () => {}, raiseTicketModal = {}, re
 	});
 
 	const onCreateTicket = (val) => {
-		const { response:{ message = '' } = {} } = messageData;
+		const { response:{ message = '', media_url = '' } = {} } = messageData;
+
 		const { user_id = null, lead_user_id = null } = formattedData || {};
 		const { ticket_data = null, ticket_type = null, description = null } = val || {};
 		const payload = {
@@ -49,6 +50,7 @@ function RaiseTicket({ setRaiseTicketModal = () => {}, raiseTicketModal = {}, re
 			Description : description,
 			Data        : {
 				Message                             : message,
+				MessageMediaUrl                     : media_url,
 				[ticketDataKey || 'AdditionalData'] : ticket_data || undefined,
 			},
 		};

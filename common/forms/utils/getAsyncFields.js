@@ -288,7 +288,7 @@ function asyncFieldsTicketTypes() {
 	return {
 		labelKey     : 'TicketType',
 		valueKey     : 'TicketType',
-		endpoint     : '/default_types',
+		endpoint     : 'default_types',
 		authkey      : 'get_tickets_default_types',
 		microService : 'tickets',
 		initialCall  : true,

@@ -3,6 +3,7 @@ import { IcMSpecificUsers } from '@cogoport/icons-react';
 
 import ReceiveDiv from '../../../../../common/ReceiveDiv';
 import { PRIORITY_MAPPING } from '../../../../../constants';
+import getFileAttributes from '../../../../../utils/getFileAttributes';
 import getTicketActivityMapping from '../../../../../utils/getTicketActivityMapping';
 
 import styles from './styles.module.css';
@@ -14,7 +15,7 @@ function EachTicket({
 	handleCardClick,
 }) {
 	const {
-		Data: { InvoiceNumber = 0, Message = '', ShipmentId = 0, AdditionalData = '' } = {},
+		Data: { InvoiceNumber = 0, Message = '', ShipmentId = 0, AdditionalData = '', MessageMediaUrl = '' } = {},
 		CreatedAt = '',
 		TicketActivityDescription = '',
 		Priority = '',
@@ -26,13 +27,19 @@ function EachTicket({
 		ReviewerName = '',
 	} = eachTicket || {};
 
+	const urlArray = decodeURI(MessageMediaUrl)?.split('/');
+	const fileName = urlArray[(urlArray?.length || 0) - 1] || '';
+	const { fileType = '' } = getFileAttributes({ fileName });
+
 	const eachMessage = {
-		message_type : 'text',
+		message_type : MessageMediaUrl ? fileType : 'text',
 		created_at   : CreatedAt,
 		response     : {
-			message: Message,
+			message   : Message,
+			media_url : MessageMediaUrl,
 		},
 	};
+
 	const handleTicketActivity = ({ type = '', status = '' }) => {
 		const payload = {
 			TicketID : [Number(ID)],
@@ -49,7 +56,6 @@ function EachTicket({
 	];
 
 	const { actions = [], requestedText = '', canPerformActions = '', iconUrl = '' } = getTicketActivityMapping({
-
 		status                  : Status,
 		canPerformRequestAction : agentId === TicketReviewerID,
 	}) || [];
@@ -70,7 +76,7 @@ function EachTicket({
 					className={cl`${styles.details_div} 
 							${Status === 'closed' ? styles.closed_details : ''}`}
 				>
-					{`Ticket ID: ${ID}`}
+					{`#${ID}`}
 				</div>
 				<div className={styles.activity}>
 					{canPerformActions ? actions.map(({

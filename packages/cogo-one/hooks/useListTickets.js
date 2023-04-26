@@ -3,7 +3,7 @@ import { useEffect, useCallback, useState } from 'react';
 
 import { FILTER_KEYS_MAPPING } from '../constants';
 
-const useListTickets = ({ UserID = '', activeTab = '' }) => {
+const useListTickets = ({ UserID = '', activeTab = '', fetchTicketsStats }) => {
 	const [filter, setFilter] = useState('requested');
 	const [{ loading, data }, trigger] = useTicketsRequest({
 		url     : '/list',
@@ -15,7 +15,8 @@ const useListTickets = ({ UserID = '', activeTab = '' }) => {
 
 	useEffect(() => {
 		setPagination(1);
-	}, [filter]);
+		fetchTicketsStats();
+	}, [filter, fetchTicketsStats]);
 
 	const fetchTickets = useCallback(async () => {
 		try {
