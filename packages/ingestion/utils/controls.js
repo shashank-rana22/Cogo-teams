@@ -10,22 +10,10 @@ const PARTNER_OPTIONS = [
 const controls = [
 
 	{
-		name        : 'ingestion_country_id',
-		label       : 'Country',
-		type        : 'asyncSelect',
-		params      : { filters: { type: ['country'] } },
-		initialCall : false,
-		asyncKey    : 'list_locations',
-		placeholder : 'Select Country',
-		isClearable : true,
-		rules       : { required: 'Country is Required' },
-
-	},
-	{
 		name        : 'ingestion_partner_id',
 		label       : 'Cogo Entity',
 		type        : 'select',
-		placeholder : 'Cogo Entity',
+		placeholder : 'Select Cogo Entity',
 		options     : PARTNER_OPTIONS,
 		isClearable : true,
 		rules       : { required: 'Partner is Required' },

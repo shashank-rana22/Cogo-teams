@@ -31,20 +31,20 @@ function usePostReUpload({ row = {}, setTableModal = () => {}, refetch = () => {
 
 	const onSubmit = async (e) => {
 		const {
-			partner_id = '', country_id = '', ingestion_type = '',
-			partner_user_id = '', description = '', agent_id = '', id = '',
+			partner_id = '', ingestion_type = '',
+			partner_user_id = '', description = '', agent_id = '', id = '', account_type = '',
 		} = row;
 
 		try {
 			const payloadData = {
 				partner_id,
-				country_id,
 				ingestion_type,
 				partner_user_id,
 				description,
 				agent_id,
 				ingestion_request_id: id,
 				user_id,
+				account_type,
 			};
 
 			const payload = Object.entries({
@@ -52,7 +52,7 @@ function usePostReUpload({ row = {}, setTableModal = () => {}, refetch = () => {
 				file_url  : e?.re_upload?.finalUrl,
 				file_name : e?.re_file_name,
 			})
-				.filter(Boolean)
+				.filter(([, value]) => !!value)
 				.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 
 			await trigger({

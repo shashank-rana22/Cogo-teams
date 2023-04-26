@@ -144,7 +144,7 @@ function useGetIngestionList() {
 						className={styles.popover}
 						content={`Redirecting to
 							${REDIRECT_MAPPING[`${item?.is_channel_partner}_${item?.account_type}`]
-							|| '___'}`}
+							|| '---'}`}
 						placement="top"
 					>
 						<Button
@@ -154,7 +154,7 @@ function useGetIngestionList() {
 							<a
 								href={`/${partner_id}
 								${REDIRECT_LINK_MAPPING[`${item?.is_channel_partner}_${item?.account_type}`]}
-								?source_id=${item?.id}`}
+								?source_id=${item?.id}` || `/${partner_id}/things-to-do`}
 							>
 								{startCase(item?.ingestion_type || '___')}
 
@@ -192,7 +192,7 @@ function useGetIngestionList() {
 			accessor : (item) => (
 				<div className={styles.re_upload}>
 
-					{item.request_files?.errored_data_url ? (
+					{item?.request_files?.errored_data_url ? (
 						<Button onClick={() => { reUploadFiles(item); }} size="md" themeType="secondary">
 							Re-Upload
 						</Button>
@@ -207,7 +207,7 @@ function useGetIngestionList() {
 			accessor : (item) => (
 				<div className={styles.uploaded}>
 
-					{item.request_files?.errored_data_url ? (
+					{item?.request_files?.errored_data_url ? (
 						<Button onClick={() => { tableListModal(item); }} size="md" themeType="tertiary">
 							View All
 						</Button>

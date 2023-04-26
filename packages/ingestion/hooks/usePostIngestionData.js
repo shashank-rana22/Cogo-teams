@@ -43,7 +43,7 @@ function usePostIngestionData({ refetch = () => {} }) {
 
 	const onSubmit = async (e) => {
 		const payload = Object.entries({ ...e, ...uploadData, file_url: e?.file_url?.finalUrl })
-			.filter(([key, value]) => Boolean(value) && key !== 'final_modal_header')
+			.filter(([key, value]) => !!value && key !== 'final_modal_header')
 			.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 		try {
 			await trigger({
@@ -57,20 +57,19 @@ function usePostIngestionData({ refetch = () => {} }) {
 			Toast.error(getApiErrorString(err.response?.data) || 'Something went wrong');
 		}
 	};
-	const { ingestion_country_id, ingestion_partner_id } = watch();
+	const { ingestion_partner_id } = watch();
 
 	const mutatedControls = controls.map((control) => {
 		let newControl = { ...control };
 
 		if (newControl.name === 'agent') {
-			if (ingestion_country_id || ingestion_partner_id) {
+			if (ingestion_partner_id) {
 				newControl = {
 					...newControl,
 					params: {
 						filters: {
 							...newControl?.params?.filters,
-							ingestion_country_id : ingestion_country_id || undefined,
-							ingestion_partner_id : ingestion_partner_id || undefined,
+							ingestion_partner_id: ingestion_partner_id || undefined,
 						},
 					},
 				};
