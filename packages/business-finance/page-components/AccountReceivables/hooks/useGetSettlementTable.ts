@@ -3,7 +3,7 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-function useGetSettlementTable(organizationId:string) {
+function useGetSettlementTable(organizationId:string, entityCode?: string) {
 	const [settlementFilters, setSettlementFilters] = useState({
 		page        : 1,
 		pageLimit   : 10,
@@ -43,6 +43,7 @@ function useGetSettlementTable(organizationId:string) {
 							orgId       : orgId || undefined,
 							accountType : accountType || undefined,
 							query       : query || undefined,
+							entityCode  : entityCode || undefined,
 						},
 					});
 				} catch (e) {
@@ -51,7 +52,7 @@ function useGetSettlementTable(organizationId:string) {
 			};
 			refetch();
 		},
-		[accountType, orgId, page, pageLimit, query, trigger],
+		[accountType, orgId, page, pageLimit, query, trigger, entityCode],
 	);
 
 	return {

@@ -1,0 +1,21 @@
+.card_item {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: auto;
+	padding: 16px;
+	margin-bottom: 24px;
+	border-radius: 10px;
+	box-shadow: 0 0 16px rgb(44 62 80 / 20%);
+}
+
+.single_control {
+	display: flex;
+	flex-direction: column;
+}
+
+.lower_container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 16px;
+}

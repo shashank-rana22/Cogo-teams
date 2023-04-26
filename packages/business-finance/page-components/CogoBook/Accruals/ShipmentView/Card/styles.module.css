@@ -1,0 +1,172 @@
+/* stylelint-disable selector-class-pattern */
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 32px 36px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.period {
+	display: flex;
+	width: fit-content;
+	margin-right: 5px;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 20px;
+}
+
+.hr_period {
+	width: 15%;
+	border: 1px solid #ee3425;
+}
+
+.hr {
+	width: 36%;
+	border: 1px solid #ee3425;
+}
+
+.info_icon_container {
+	padding: 2px 0 0 4px;
+}
+
+.select_container {
+	display: flex;
+	gap: 8px;
+	width: fit-content;
+	margin-top: 16px;
+}
+
+.chips {
+	:global {
+		.ui_chip_container {
+			min-width: 0 !important;
+		}
+	}
+
+	padding-bottom: 8px;
+	border-bottom: 1px solid #f8d468;
+}
+
+.date_range {
+	width: fit-content;
+	margin-top: 16px;
+
+	:global {
+		.react-datepicker__input-container {
+			input {
+				height: 32px;
+			}
+
+			.react-datepicker__close-icon::after {
+				background: none !important;
+			}
+
+			.react-datepicker__close-icon {
+				right: -4px;
+				border: none;
+			}
+		}
+	}
+}
+
+.hr_filter {
+	width: 8%;
+	border: 1px solid #ee3425;
+}
+
+.select_popover {
+	:global {
+		.ui_select_options_container {
+			display: none !important;
+		}
+	}
+}
+
+.content_container {
+	max-height: 250px;
+	overflow-y: scroll;
+}
+
+.more_filter {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	margin-top: 40px;
+}
+
+.job_number {
+	display: flex;
+	flex-direction: column;
+	cursor: pointer;
+}
+
+.job_number_data {
+	font-weight: 600;
+	text-decoration: underline;
+}
+
+.flex_jobs {
+	display: flex;
+	gap: 8px;
+}
+
+.purchase {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.header_checkbox {
+	padding-left: 4px;
+}
+
+.status {
+	padding: 4px 8px;
+	background: #fef1df;
+	border-radius: 4px;
+}
+
+.status_fin {
+	padding: 4px 8px;
+	background: #ddebc0;
+	border-radius: 4px;
+}
+
+.status_op {
+	padding: 4px 8px;
+	background: #ddebc0;
+	border-radius: 4px;
+}
+
+.date_range_not {
+	width: fit-content;
+	margin-top: 16px;
+}
+
+.profit_data {
+	color: #67c676;
+}
+
+.profit_color {
+	color: #ee3425;
+}
+
+.font_size_tooltip {
+	font-size: 12px;
+}
+
+.fon_tooltip {
+	font-size: 12px;
+}
+
+.dot {
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+	margin: 0 0 8px 2px;
+	background-color: #ee3425;
+	border-radius: 50%;
+}

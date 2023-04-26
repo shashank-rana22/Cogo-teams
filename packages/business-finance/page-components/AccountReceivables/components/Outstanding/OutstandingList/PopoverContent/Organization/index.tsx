@@ -6,6 +6,7 @@ import PopoverLoader from '../PopoverLoading';
 import Reportees from './Reportees';
 import Reporting from './Reporting';
 import styles from './styles.module.css';
+import UserCard from './UserCard';
 
 interface Data {
 	reporting_managers?:object[],
@@ -33,11 +34,16 @@ function Organization({ data = {}, loading }:Props) {
 		<div className={styles.container}>
 			{((reportingManagers || []).length > 0
 			|| Object.keys(user || {}).length > 0) && (
-				<Reporting user={user} reportingManagers={reportingManagers} />
+				<Reporting reportingManagers={reportingManagers} />
 			)}
+
+			<div className={styles.container}>
+				<UserCard userData={user} type="active" />
+			</div>
 
 			{(reportees || []).length > 0 && <Reportees reportees={reportees} />}
 		</div>
+
 	);
 }
 

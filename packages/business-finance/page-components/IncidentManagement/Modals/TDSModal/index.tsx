@@ -133,6 +133,7 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 									themeType="secondary"
 									style={{ marginRight: '8px' }}
 									disabled={!(remark.length) || loading}
+									loading={loading}
 									onClick={() => {
 										OnAction('REJECTED');
 									}}
@@ -144,6 +145,7 @@ function TDSModal({ tdsData, id, refetch, row, isEditable = true }) {
 									size="md"
 									style={{ marginRight: '8px' }}
 									disabled={!(remark.length) || loading}
+									loading={loading}
 									onClick={() => {
 										OnAction('APPROVED');
 									}}

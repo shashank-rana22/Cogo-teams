@@ -1,9 +1,24 @@
+.settings {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.settings_icon {
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+	fill: #4f4f4f;
+}
+
 .layout_container {
 	position: relative;
 	display: flex;
 	width: calc(100% - 14px);
-	height: 92vh;
-	margin-top: 10px;
+	height: 90vh;
+	margin-top: 8px;
 }
 
 .chat_details_continer {
@@ -54,4 +69,5 @@
 .download_icon {
 	height: 15px;
 	margin-right: 5px;
+	fill: "#EE3425";
 }

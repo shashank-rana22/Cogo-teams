@@ -1,0 +1,14 @@
+.main {
+	padding: 20px;
+	background-color: #fff;
+	border-radius: 6px;
+}
+
+.padd {
+	margin-left: 30px;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+}

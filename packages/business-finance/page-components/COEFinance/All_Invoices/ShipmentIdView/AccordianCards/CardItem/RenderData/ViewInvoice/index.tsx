@@ -8,24 +8,33 @@ interface ItemTypes {
 	billId?:string;
 	billNumber?:string;
 	organizationId?:string;
-	jobNumber?:string;
+	jobNumber?: string;
+	status?: string;
+	invoicePdfUrl?: string;
+	proformaPdfUrl?: string;
 
 }
 
 interface PropsType {
 	item: ItemTypes;
+	field: { isIncome?:boolean }
 
 }
 
-function ViewInvoice({ item }: PropsType) {
+function ViewInvoice({ item, field }: PropsType) {
+	const { isIncome } = field || {};
 	const router = useRouter();
 	const handleChange = (itemData:ItemTypes) => {
-		const { billId, billNumber, organizationId, jobNumber } = itemData || {};
-		router.push(
-			`/business-finance/coe-finance/${router.query.active_tab}
+		const { billId, billNumber, organizationId, jobNumber, status, invoicePdfUrl, proformaPdfUrl } = itemData || {};
+		if (isIncome) {
+			window.open(invoicePdfUrl || proformaPdfUrl, '_blank');
+		} else {
+			router.push(
+				`/business-finance/coe-finance/${router.query.active_tab}
 			/view-invoices?billId=${billId}&billNumber=${billNumber}
-			&orgId=${organizationId}&jobNumber=${jobNumber}&isShipment=${true}`,
-		);
+			&orgId=${organizationId}&jobNumber=${jobNumber}&isShipment=${true}&status=${status}`,
+			);
+		}
 	};
 	return (
 		<div className={styles.button}>

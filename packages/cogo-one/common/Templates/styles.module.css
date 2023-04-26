@@ -24,9 +24,11 @@
 }
 
 .title {
+	max-width: 70%;
 	font-size: 14px;
 	font-weight: 500;
 	color: #221f20;
+	word-break: break-word;
 }
 
 .message {

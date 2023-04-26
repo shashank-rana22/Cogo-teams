@@ -170,7 +170,7 @@ const apis = [
 	{
 		api          : 'get_shipment',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'bookings',
 	},
 	{
 		api          : 'get_shipment_timeline',
@@ -625,7 +625,7 @@ const apis = [
 	{
 		api          : 'list_organization_documents',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'organization',
 	},
 	{
 		api          : 'create_shipment_service',
@@ -693,16 +693,19 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api         : 'list_shipment_operating_procedures',
-		access_type : 'private',
+		api          : 'list_shipment_operating_procedures',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 	{
-		api         : 'list_shipment_flash_booking_rates',
-		access_type : 'private',
+		api          : 'list_shipment_flash_booking_rates',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 	{
-		api         : 'get_shipment_elligible_booking_document',
-		access_type : 'private',
+		api          : 'get_shipment_elligible_booking_document',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 	{
 		api          : 'create_shipment_operating_procedure',
@@ -738,7 +741,7 @@ const apis = [
 	{
 		api          : 'list_organization_documents',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'organization',
 	},
 	{
 		api          : 'create_shipment_service',
@@ -934,9 +937,10 @@ const apis = [
 		feature      : 'revenue_desk',
 	},
 	{
-		api         : 'update_shipment_flash_booking_rate',
-		access_type : 'private',
-		feature     : 'revenue_desk',
+		api          : 'update_shipment_flash_booking_rate',
+		access_type  : 'private',
+		feature      : 'revenue_desk',
+		service_name : 'shipment',
 	},
 	{
 		api         : 'get_shipment_quotation',
@@ -944,12 +948,14 @@ const apis = [
 		feature     : 'revenue_desk',
 	},
 	{
-		api         : 'create_shipment_booking_confirmation_preference',
-		access_type : 'private',
+		api          : 'create_shipment_booking_confirmation_preference',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 	{
-		api         : 'create_shipment_flash_booking_rate',
-		access_type : 'private',
+		api          : 'create_shipment_flash_booking_rate',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 	{
 		api          : 'list_shipment_trade_partners',
@@ -962,20 +968,23 @@ const apis = [
 		service_name : 'spot_search',
 	},
 	{
-		api         : 'create_chat_message',
-		access_type : 'private',
+		api          : 'create_chat_message',
+		access_type  : 'private',
+		service_name : 'chat',
 	},
 	{
-		api         : 'list_chat_channels',
-		access_type : 'private',
+		api          : 'list_chat_channels',
+		access_type  : 'private',
+		service_name : 'chat',
 	},
 	{
 		api         : 'delete_chat_message',
 		access_type : 'private',
 	},
 	{
-		api         : 'update_chat_message',
-		access_type : 'private',
+		api          : 'update_chat_message',
+		access_type  : 'private',
+		service_name : 'chat',
 	},
 	{
 		api         : 'get_chat_channel',
@@ -986,8 +995,10 @@ const apis = [
 		access_type : 'private',
 	},
 	{
-		api         : 'update_chat_channel_seen',
-		access_type : 'private',
+		api          : 'update_chat_channel_seen',
+		access_type  : 'private',
+		service_name : 'chat',
+
 	},
 	{
 		api          : 'get_all_exchange_rates',
@@ -1203,6 +1214,22 @@ const apis = [
 		access_type : 'private',
 	},
 	{
+		api         : 'get_purchase_bills_exchange_rate_deviation_by_id',
+		access_type : 'private',
+	},
+	{
+		api         : 'post_purchase_bills',
+		access_type : 'private',
+	},
+	{
+		api         : 'put_purchase_bills',
+		access_type : 'private',
+	},
+	{
+		api         : 'get_purchase_bills_tagging_map',
+		access_type : 'private',
+	},
+	{
 		api          : 'list_trade_documents',
 		access_type  : 'private',
 		service_name : 'trade',
@@ -1278,9 +1305,39 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'send_rail_domestic_indent_email',
+		api          : 'get_services',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'list_documents',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'list_additional_services',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'list_bill_of_ladings',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'get_process',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'list_tasks',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'get_timeline',
+		access_type  : 'private',
+		service_name : 'bookings',
 	},
 	{
 		api          : 'get_shipment_transaction_insights',
@@ -1293,9 +1350,71 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'get_cogoscore_tax_numbers',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_stakeholders',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'get_business',
+		access_type  : 'private',
+		service_name : 'business',
+	},
+	{
+		api          : 'create_upsell',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
 		api          : 'update_shipment_rail_domestic_freight_invoice_type',
 		access_type  : 'private',
 		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_cancellation_reasons',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'send_liners_invoice_email',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_checkout_applicable_promocodes',
+		access_type  : 'private',
+		service_name : 'checkout',
+	},
+	{
+		api          : 'bulk_create_shipment_ftl_freight_additional_services',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_ftl_freight_additional_service',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'send_whatsapp_booking_note_delayed',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'send_whatsapp_counter_price',
+		access_type  : 'private',
+		service_name : 'communication',
+		feature      : 'revenue_desk',
+	},
+	{
+		api          : 'update_revenue_desk_shipment_sell_quotations',
+		access_type  : 'private',
+		service_name : 'shipment',
+		feature      : 'revenue_desk',
 	},
 ];
 

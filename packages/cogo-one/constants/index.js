@@ -4,13 +4,14 @@ import {
 	IcCFcl,
 	IcCAir,
 	IcMFftl,
-	IcMFltl,
+	IcMFltl, IcCTelegram,
 } from '@cogoport/icons-react';
 
 export const SOURCE_ICON_MAPPING = {
 	whatsapp  : <IcCWhatsapp width={25} height={25} />,
 	facebook  : <IcCFacebook width={25} height={25} />,
 	instagram : <IcCInstagram width={25} height={25} />,
+	telegram  : <IcCTelegram width={25} height={25} />,
 	email     : <img
 		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/email.svg"
 		alt=""
@@ -51,6 +52,7 @@ export const USER_ACTIVITY_MAPPING = {
 	platform      : 'Platform Activity',
 	communication : 'Communication Activity',
 	transactional : 'Transactional Activity',
+	summary       : 'Summary',
 };
 
 export const emptyChat = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg';
@@ -137,14 +139,14 @@ export const DEFAULT_PILLS_ITEMS = [
 export const statusMapping = {
 	approved : 'Approved',
 	rejected : 'Rejected',
-	null     : 'Pending',
+	pending  : 'Pending',
 
 };
 
 export const statusColorMapping = {
 	approved : 'green',
 	rejected : 'red',
-	null     : 'orange',
+	pending  : 'orange',
 
 };
 
@@ -235,7 +237,35 @@ export const DOCUMENT_FILTERS_MAPPING = [
 
 export const ANDRIOD_APK = 'https://cogo-one-prod.s3.ap-south-1.amazonaws.com/cogoOne_prod.apk';
 
+export const MAIL_REPLY_TYPE = [
+	{
+		label : 'Reply',
+		value : 'reply',
+		icon  : <img
+			src="https://cdn-icons-png.flaticon.com/512/1933/1933011.png"
+			alt="reply icon"
+		/>,
+	},
+	{
+		label : 'Reply All',
+		value : 'reply_all',
+		icon  : <img
+			src="https://cdn-icons-png.flaticon.com/512/747/747334.png"
+			alt="reply all icon"
+		/>,
+	},
+	{
+		label : 'Forward',
+		value : 'forward',
+		icon  : <img
+			src="https://cdn-icons-png.flaticon.com/512/60/60546.png"
+			alt="forward icon"
+		/>,
+	},
+];
 export const PAGE_LIMIT = 50;
 export const INDIA_COUNTRY_ID = '541d1232-58ce-4d64-83d6-556a42209eb7';
 
 export const GENERAL_ICON = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/General.svg';
+
+export const ECLAMATION_SVG = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg';
