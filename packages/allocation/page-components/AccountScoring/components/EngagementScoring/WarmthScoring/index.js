@@ -13,8 +13,10 @@ function WarmthScoring(props) {
 	const { setToggleComponent = () => {} } = props;
 
 	const [activeCollapse, setActiveCollapse] = useState('');
+	console.log('activeCollapse', activeCollapse);
 
 	const [editMode, setEditMode] = useState('');
+	console.log('editMode', editMode);
 
 	const formProps = useForm();
 
@@ -25,6 +27,7 @@ function WarmthScoring(props) {
 		debounceQuery,
 		searchValue,
 		setSearchValue,
+		refetch,
 	} = useGetEngagementScoringConfiguration({ activeCollapse });
 
 	const { list = [] } = data || {};
@@ -37,6 +40,7 @@ function WarmthScoring(props) {
 			editMode={editMode}
 			setEditMode={setEditMode}
 			activeCollapse={activeCollapse}
+			refetch={refetch}
 		/>,
 		children: <EngagementType value={value} editMode={editMode} formProps={formProps} />,
 	}));
