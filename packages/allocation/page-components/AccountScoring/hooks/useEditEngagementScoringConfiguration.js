@@ -4,15 +4,14 @@ import { useAllocationRequest } from '@cogoport/request';
 
 function useEditEngagementScoringConfiguration() {
 	const [{ loading }, trigger] = useAllocationRequest({
-		url     : 'engagement_scoring_event_configurations',
+		url     : 'engagement_scoring_event_configurations_attributes',
 		method  : 'POST',
-		authkey : 'post_allocation_engagement_scoring_event_configurations',
+		authkey : 'post_allocation_engagement_scoring_event_configurations_attributes',
 	}, { manual: true });
 
 	const onSave = async (formValues, engagement_type) => {
 		try {
 			const { single_item = [] } = formValues || {};
-
 			const payload = {
 				event_type         : engagement_type,
 				event_type_details : single_item,

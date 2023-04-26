@@ -1,18 +1,21 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 
-import controlItem from '../../components/EngagementScoring/WarmthScoring/EngagementType/controlItem';
+import getControls from '../../components/EngagementScoring/WarmthScoring/EngagementType/controlItem';
 
 import Child from './Child';
 
 function FieldArray(props) {
 	const {
-		name, control,
+		name, control, watch,
 	} = props;
 
 	const { fields, append, remove } = useFieldArray({ control, name });
 
-	const { controls } = controlItem[0];
+	const watchLifecycleStage = watch('single_item');
+	const eventsToExclude = watchLifecycleStage.map((obj) => obj.event_name);
+
+	const { controls } = getControls(eventsToExclude);
 
 	const childValues = {};
 

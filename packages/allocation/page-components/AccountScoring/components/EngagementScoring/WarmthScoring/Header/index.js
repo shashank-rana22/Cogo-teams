@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 
 function Header(props) {
 	const { setToggleComponent = () => {}, setSearchValue, debounceQuery, searchValue } = props;
+
 	return (
 		<div className={styles.header_container}>
 			<div className={styles.heading}>Warmth Score Configuration</div>
@@ -27,12 +28,11 @@ function Header(props) {
 						onClick={() => setToggleComponent('settings')}
 						style={{ marginRight: '16px' }}
 					>
-						<IcMSettings margin="0px 8px 0px 0px" />
+						<IcMSettings style={{ marginRight: '4px' }} />
 						Settings
 
 					</Button>
 
-					<Button className={styles.engagement_button} size="md">+ Engagement Type</Button>
 				</div>
 
 			</div>

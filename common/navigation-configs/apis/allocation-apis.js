@@ -434,7 +434,12 @@ const allocation = {
 			service_name : 'allocation',
 		},
 		{
-			api          : 'post_allocation_engagement_scoring_event_configurations',
+			api          : 'post_allocation_engagement_scoring_event_configurations_attributes',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_engagement_scoring_event_names',
 			access_type  : 'private',
 			service_name : 'allocation',
 		},

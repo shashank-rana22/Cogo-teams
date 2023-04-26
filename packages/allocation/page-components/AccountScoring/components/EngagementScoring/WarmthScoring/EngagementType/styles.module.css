@@ -38,5 +38,10 @@
 }
 
 .table_lifecycle_item {
-	min-width: 200px;
+	display: block;
+	max-width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-break: initial;
+	white-space: nowrap;
 }
