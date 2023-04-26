@@ -11,12 +11,20 @@ import { QuestionSetButtons, TestSetButtons } from './ButtonComponent';
 import styles from './styles.module.css';
 import ValidityDisplay from './ValidityDisplay';
 
+const propsFunction = ({ router, id }) => ({
+	role    : 'presentation',
+	style   : { cursor: 'pointer' },
+	onClick : () => {
+		router.push(`/learning/test-module/question?mode=view&id=${id}`);
+	},
+});
+
 export const questionSetColumns = ({ loading, router, setShowModal, setQuestionSetId, sortFilter, setSortFilter }) => [
 	{
 		Header   : 'QUESTION SET NAME',
 		id       : 'name',
-		accessor : ({ name = '' }) => (
-			<div>
+		accessor : ({ name = '', id = '' }) => (
+			<div {...propsFunction({ router, id })}>
 				<Tooltip maxWidth={500} content={startCase(name)} placement="top">
 					<div className={styles.content}>
 						{name}
@@ -28,8 +36,8 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 	{
 		Header   : 'TOPIC',
 		id       : 'topic',
-		accessor : ({ topic = [] }) => (
-			<section className={styles.content}>
+		accessor : ({ topic = [], id = '' }) => (
+			<section {...propsFunction({ router, id })} className={styles.content}>
 				<Tooltip maxWidth={500} content={startCase(topic)} placement="top">
 					<Pill
 						className={styles.topic_pill}
@@ -45,15 +53,15 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 	{
 		Header   : 'COGO ENTITY',
 		id       : 'cogo_entity_name',
-		accessor : ({ cogo_entity_name = '' }) => (
-			<section>{cogo_entity_name}</section>
+		accessor : ({ cogo_entity_name = '', id = '' }) => (
+			<section {...propsFunction({ router, id })}>{cogo_entity_name}</section>
 		),
 	},
 	{
 		Header   : 'NO. OF QUESTIONS',
 		id       : 'questions',
-		accessor : ({ non_case_study_question_count = 0 }) => (
-			<section>
+		accessor : ({ non_case_study_question_count = 0, id = '' }) => (
+			<section {...propsFunction({ router, id })}>
 				{non_case_study_question_count || 0}
 			</section>
 		),
@@ -61,8 +69,8 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 	{
 		Header   : 'NO. OF CASES',
 		id       : 'case_study_questions',
-		accessor : ({ case_study_question_count = 0 }) => (
-			<section>
+		accessor : ({ case_study_question_count = 0, id = '' }) => (
+			<section {...propsFunction({ router, id })}>
 				{case_study_question_count || 0}
 			</section>
 		),
@@ -70,8 +78,8 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 	{
 		Header   : 'NO. OF TESTS USING THE SET',
 		id       : 'number_of_tests',
-		accessor : ({ set_count = 0 }) => (
-			<section>
+		accessor : ({ set_count = 0, id = '' }) => (
+			<section {...propsFunction({ router, id })}>
 				{set_count}
 			</section>
 		),
@@ -89,8 +97,8 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 			</div>
 		),
 		id       : 'updated_at',
-		accessor : ({ updated_at = '' }) => (
-			<span className={styles.time}>
+		accessor : ({ updated_at = '', id = '' }) => (
+			<span className={styles.time} {...propsFunction({ router, id })}>
 				{`${format(updated_at, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}`}
 				{' '}
 				{format(updated_at, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}
