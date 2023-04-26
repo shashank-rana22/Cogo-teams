@@ -19,12 +19,13 @@ function TradeDocuments({
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const { importer_exporter_id = '' } = shipment_data;
+	const { importer_exporter_id = '', id = '' } = shipment_data;
 	const { data, loading } = useListTradeDocuments({
 		defaultFilters: {
 			q               : searchDocsVal || undefined,
 			status          : 'accepted',
 			organization_id : importer_exporter_id,
+			shipment_id     : id,
 		},
 	});
 
