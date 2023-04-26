@@ -14,6 +14,7 @@ function Filter({ hookSetters = () => {}, filters }) {
 	useEffect(() => {
 		debounceQuery(inputValue);
 	}, [inputValue]);
+	
 	useMemo(() => {
 		setValue('search_term', query);
 	}, [query]);
