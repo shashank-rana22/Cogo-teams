@@ -142,7 +142,7 @@ function SingleQuestionComponent({
 						/>
 					</div>
 
-					<div className={styles.character_limit}>
+					{/* <div className={styles.character_limit}>
 						<div className={styles.set_limit}>Set Character Limit</div>
 
 						<InputController
@@ -151,7 +151,7 @@ function SingleQuestionComponent({
 							placeholder="No Limit"
 							type="number"
 						/>
-					</div>
+					</div> */}
 				</div>
 			)}
 
