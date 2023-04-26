@@ -78,13 +78,7 @@ function UploadCargoArrivalForm({
 			)}
 
 			{savedData ? (
-				<div
-					style={{
-						display        : 'flex',
-						marginTop      : '10px',
-						justifyContent : 'flex-end',
-					}}
-				>
+				<div className={styles.submit_button}>
 					<Button
 						onClick={() => {
 							handleSubmitDocument();
@@ -104,6 +98,7 @@ function UploadCargoArrivalForm({
 					placement="fullscreen"
 					className={styles.custom_modal}
 					onClose={() => setShow(false)}
+					showCloseIcon={false}
 				>
 					<Modal.Header title={header} />
 					<Modal.Body>
