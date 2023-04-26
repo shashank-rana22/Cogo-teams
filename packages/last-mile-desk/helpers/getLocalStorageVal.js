@@ -2,6 +2,7 @@ import TRADE_TYPE from '../configs/TRADE_TYPES';
 
 const getLocalStorageVal = () => {
 	const storedValues = JSON.parse(localStorage?.getItem('last_mile_desk_values'));
+	const lastMileDeskVersion = localStorage.getItem('last_mile_desk_version');
 
 	const filters = storedValues?.filters || {};
 	const scopeFilters = storedValues?.scopeFilters || {};
@@ -13,7 +14,7 @@ const getLocalStorageVal = () => {
 
 	if (typeof page !== 'number') filters.page = 1;
 
-	return { filters, activeTab, scopeFilters };
+	return { filters, activeTab, scopeFilters, lastMileDeskVersion };
 };
 
 export default getLocalStorageVal;

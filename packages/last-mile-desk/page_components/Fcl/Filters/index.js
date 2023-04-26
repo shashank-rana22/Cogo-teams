@@ -10,7 +10,10 @@ import FilterBy from './FilterBy';
 import styles from './styles.module.css';
 
 function Filters() {
-	const { activeTab, filters = {}, setFilters, scopeFilters } = useContext(LastMileDeskContext);
+	const {
+		activeTab, filters = {}, setFilters,
+		scopeFilters, handleVersionChange = () => {},
+	} = useContext(LastMileDeskContext);
 
 	const { criticalOn, q = '' } = filters || {};
 
@@ -68,7 +71,15 @@ function Filters() {
 					</Button>
 				</Popover>
 			</div>
+			<div className={styles.version}>
+				<Toggle
+					size="md"
+					onLabel="Old"
+					offLabel="New"
+					onChange={handleVersionChange}
+				/>
 
+			</div>
 			<div>
 				<ScopeSelect size="md" defaultValues={scopeFilters} />
 			</div>
