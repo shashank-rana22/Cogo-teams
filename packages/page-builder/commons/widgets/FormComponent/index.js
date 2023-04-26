@@ -41,6 +41,8 @@ function FormComponent({
 
 	const formProps = useForm();
 
+	const [showForm, setShowForm] = useState(true);
+
 	const {
 		control,
 		watch,
@@ -77,7 +79,7 @@ function FormComponent({
 
 				if (values.controls) {
 					values?.controls?.forEach((item, i) => {
-						if (item.type === 'asyncSelect') {
+						if (item.type === 'select') {
 							showElements.controls[i].dynamic_data_endpoint = false;
 							showElements.controls[i].manual_options = false;
 							showElements.controls[i].options_type = true;
@@ -218,6 +220,11 @@ function FormComponent({
 
 	const handleEditForm = (values) => {
 		const { api_url, buttonText, heading, controls: controlsPrefill } = values || {};
+		setShowForm(false);
+
+		setTimeout(() => {
+			setShowForm(true);
+		}, 100);
 
 		setShow(true);
 		setValue('api_url', api_url);
@@ -266,12 +273,14 @@ function FormComponent({
 							<DynamicFormEditor formData={formValues} />
 						</div>
 						<div className={styles.right_panel}>
-							<FormLayout
-								controls={controls}
-								control={control}
-								errors={errors}
-								showElements={showElements}
-							/>
+							{showForm && (
+								<FormLayout
+									controls={controls}
+									control={control}
+									errors={errors}
+									showElements={showElements}
+								/>
+							)}
 						</div>
 
 					</div>

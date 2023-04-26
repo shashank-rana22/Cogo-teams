@@ -175,24 +175,6 @@ const controls = [
 				rules  : { required: true },
 			},
 			{
-				name  : 'is_mandetory',
-				type  : 'radioGroup',
-				label : 'Is Mandetory',
-				style : {
-					flexBasis: '50%',
-				},
-				options: [
-					{
-						label : 'Yes',
-						value : 'yes',
-					},
-					{
-						label : 'No',
-						value : 'no',
-					},
-				],
-			},
-			{
 				name  : 'manual_options',
 				type  : 'editor',
 				label : 'Enter Options',
@@ -211,6 +193,24 @@ const controls = [
 					flexBasis: '25%',
 				},
 				rules: { required: true },
+			},
+			{
+				name  : 'is_mandetory',
+				type  : 'radioGroup',
+				label : 'Is Mandetory',
+				style : {
+					flexBasis: '50%',
+				},
+				options: [
+					{
+						label : 'Yes',
+						value : 'yes',
+					},
+					{
+						label : 'No',
+						value : 'no',
+					},
+				],
 			},
 		],
 	}];
