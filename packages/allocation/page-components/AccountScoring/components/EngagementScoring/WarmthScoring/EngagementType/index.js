@@ -57,9 +57,9 @@ const tableColumns = [
 ];
 
 function EngagementType(props) {
-	const { value, editMode, formProps } = props;
+	const { value, editMode, formProps, refetch } = props;
 
-	const { engagement_type_details } = value;
+	const { engagement_type_details, engagement_type } = value;
 
 	const { control, setValue, watch } = formProps;
 
@@ -84,7 +84,13 @@ function EngagementType(props) {
 					<hr color="#F8F2E7" />
 
 					<div className={styles.sublist_item}>
-						<FieldArray control={control} name="single_item" watch={watch} />
+						<FieldArray
+							control={control}
+							name="single_item"
+							watch={watch}
+							engagementType={engagement_type}
+							refetch={refetch}
+						/>
 					</div>
 				</div>
 			) : <Table className={styles.table_container} columns={tableColumns} data={engagement_type_details} />}

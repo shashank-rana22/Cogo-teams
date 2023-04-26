@@ -42,7 +42,7 @@ function WarmthScoring(props) {
 			activeCollapse={activeCollapse}
 			refetch={refetch}
 		/>,
-		children: <EngagementType value={value} editMode={editMode} formProps={formProps} />,
+		children: <EngagementType value={value} editMode={editMode} formProps={formProps} refetch={refetch} />,
 	}));
 
 	return (

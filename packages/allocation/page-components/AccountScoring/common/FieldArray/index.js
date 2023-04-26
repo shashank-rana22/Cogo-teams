@@ -7,7 +7,7 @@ import Child from './Child';
 
 function FieldArray(props) {
 	const {
-		name, control, watch,
+		name, control, watch, engagementType, refetch,
 	} = props;
 
 	const { fields, append, remove } = useFieldArray({ control, name });
@@ -35,6 +35,9 @@ function FieldArray(props) {
 						remove={remove}
 						control={control}
 						controls={controls}
+						eventName={field.event_name}
+						engagementType={engagementType}
+						refetch={refetch}
 					/>
 				))}
 			</div>

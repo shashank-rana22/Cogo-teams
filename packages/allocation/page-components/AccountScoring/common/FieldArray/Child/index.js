@@ -2,11 +2,20 @@ import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
 
 import { getFieldController } from '../../../../../common/Form/getFieldController';
+import useSingleDeleteEvent from '../../../hooks/useSingleDeleteEvent';
 
 import styles from './styles.module.css';
 
 function Child(props) {
-	const { controls, control, name, index, remove = () => {} } = props;
+	const {
+		controls, control, name, index, remove = () => {}, eventName, engagementType,
+	} = props;
+
+	const { onSingleDelete } = useSingleDeleteEvent(index, remove);
+
+	const handleDeleteObject = () => {
+		onSingleDelete(engagementType, eventName);
+	};
 
 	return (
 
@@ -36,7 +45,7 @@ function Child(props) {
 
 			<IcMDelete
 				className={`form-fieldArray-${name}-remove`}
-				onClick={() => remove(index, 1)}
+				onClick={() => handleDeleteObject()}
 				style={{ cursor: 'pointer' }}
 			/>
 
