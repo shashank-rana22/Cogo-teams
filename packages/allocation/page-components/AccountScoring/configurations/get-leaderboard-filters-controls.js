@@ -10,7 +10,7 @@ const controls = [
 	{
 		name        : 'segment_id',
 		label       : 'Segment Type',
-		placeholder : 'Type segment here...',
+		placeholder : 'Select Segment Type',
 		type        : 'asyncSelect',
 		asyncKey    : 'segments',
 		initialCall : false,
@@ -24,7 +24,7 @@ const controls = [
 	{
 		name        : 'kam',
 		label       : 'KAM',
-		placeholder : 'Type here',
+		placeholder : 'Select KAM Agent',
 		type        : 'asyncSelect',
 		asyncKey    : 'partner_users',
 		initialCall : true,
@@ -33,7 +33,7 @@ const controls = [
 	{
 		name        : 'organization',
 		label       : 'Account/Serial ID',
-		placeholder : 'Type here',
+		placeholder : 'Select Account/Serial ID',
 		type        : 'asyncSelect',
 		asyncKey    : 'organizations',
 		params      : {

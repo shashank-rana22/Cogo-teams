@@ -11,11 +11,7 @@ import ScoreDistributionGraph from './ScoreDistributionGraph/index';
 import styles from './styles.module.css';
 
 function AccountLeaderboard() {
-	const formProps = useForm();
-
-	const {
-		control, formState: { errors }, watch,
-	} = formProps;
+	const { control, formState: { errors }, watch } = useForm();
 
 	const {
 		graphData = [], graphLoading = false,
@@ -27,10 +23,7 @@ function AccountLeaderboard() {
 		setLeaderboardParams = () => {},
 	} = useGetEngagementScoringLeaderboard();
 
-	const organization = watch('organization');
-	const kam = watch('kam');
-	const date = watch('date');
-	const segment = watch('segment_id');
+	const { organization, kam, date, segment } = watch();
 
 	useEffect(() => {
 		setGraphParams((pv) => ({
@@ -51,9 +44,8 @@ function AccountLeaderboard() {
 	}, [organization, kam, date, segment, setGraphParams, setLeaderboardParams]);
 
 	return (
-		<section className={styles.container} id="core_engine_container">
+		<section className={styles.container}>
 			<div className={styles.header_text}>Account Score Distribution</div>
-
 			<HeaderFilters
 				control={control}
 				errors={errors}
@@ -69,7 +61,6 @@ function AccountLeaderboard() {
 				leaderboardList={leaderboardList}
 				leaderboardLoading={leaderboardLoading}
 			/>
-
 		</section>
 	);
 }
