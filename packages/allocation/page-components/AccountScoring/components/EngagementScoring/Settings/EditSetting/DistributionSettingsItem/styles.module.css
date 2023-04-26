@@ -55,13 +55,19 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin-top: -20px;
 }
 
 .account_headers {
 	display: flex;
 	align-items: center;
 	padding-left: 8px;
-	margin-top: 8px;
+	margin: 16px 0;
 	font-size: 12px;
+}
+
+.accounts_label {
+	margin: 8px 8px 0 0;
+	font-size: 12px;
+	font-weight: 600;
+	color: #4f4f4f;
 }

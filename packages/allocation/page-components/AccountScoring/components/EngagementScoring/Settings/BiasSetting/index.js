@@ -18,19 +18,7 @@ function BiasSetting(props) {
 
 	const [editing, setEditing] = useState(false);
 
-	if (settingsLoading) {
-		<div className={styles.card}>
-			<Header setEditing={setEditing} loading={settingsLoading} />
-
-			<Table
-				columns={biasColumns || []}
-				data={[]}
-				loading={settingsLoading}
-			/>
-		</div>;
-	}
-
-	if (isEmpty(biasList)) {
+	if (isEmpty(biasList) && !settingsLoading) {
 		return (
 			<div className={styles.empty_container}>
 				<EmptyState
@@ -44,7 +32,7 @@ function BiasSetting(props) {
 		);
 	}
 
-	if (editing) {
+	if (editing && !settingsLoading) {
 		return (
 			<EditSetting
 				useGetControls={getBiasControl}
@@ -63,7 +51,7 @@ function BiasSetting(props) {
 
 	return (
 		<div className={styles.card}>
-			<Header editing={editing} setEditing={setEditing} />
+			<Header setEditing={setEditing} />
 
 			<Table
 				columns={biasColumns || []}

@@ -18,22 +18,7 @@ function PercentileSetting(props) {
 
 	const [editing, setEditing] = useState(false);
 
-	if (settingsLoading) {
-		return (
-			<div className={styles.card}>
-				<Header setEditing={setEditing} loading={settingsLoading} />
-
-				<Table
-					layoutType="table"
-					columns={percentileColumns || []}
-					data={[]}
-					loading={settingsLoading}
-				/>
-			</div>
-		);
-	}
-
-	if (isEmpty(percentileList)) {
+	if (isEmpty(percentileList) && !settingsLoading) {
 		return (
 			<div className={styles.empty_container}>
 				<EmptyState
@@ -47,7 +32,7 @@ function PercentileSetting(props) {
 		);
 	}
 
-	if (editing) {
+	if (editing && !settingsLoading) {
 		return (
 			<EditSetting
 				useGetControls={getPercentileControl}
@@ -74,6 +59,7 @@ function PercentileSetting(props) {
 				layoutType="table"
 				columns={percentileColumns || []}
 				data={percentileList || []}
+				loading={settingsLoading}
 			/>
 		</div>
 	);

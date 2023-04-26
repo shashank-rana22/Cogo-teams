@@ -60,21 +60,21 @@ function DistributionSettingsItem(props) {
 					index === 0 ? (
 						<>
 							<div className={styles.accounts}>
-								<div className={styles.label}>
+								<div className={styles.accounts_label}>
 									NUMBER OF ACCOUNTS
 								</div>
 
 								<Button size="sm" onClick={handleClick}>Update</Button>
 							</div>
 							<div className={styles.account_headers}>
-								{ statsLoading ? <Placeholder height={20} width={200} />
+								{ statsLoading ? <Placeholder height={20} width="78%" />
 									: (statsList?.[index]?.warmth_count || 0)}
 							</div>
 						</>
 					)
 						: (
 							<div className={styles.headers}>
-								{ statsLoading ? <Placeholder height={20} width={200} />
+								{ statsLoading ? <Placeholder height={20} width="80%" />
 									: (statsList?.[index]?.warmth_count || 0)}
 							</div>
 						)
