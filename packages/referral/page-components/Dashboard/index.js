@@ -8,7 +8,7 @@ function Dashboard() {
 			{' '}
 			<div className={styles.heading}>Referral Dashboard</div>
 			<div className={styles.flex}>
-				cndson
+				Dashboard
 			</div>
 		</div>
 	);
