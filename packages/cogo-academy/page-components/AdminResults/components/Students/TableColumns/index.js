@@ -103,7 +103,7 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router, setShowReAttemp
 						{' '}
 						{timeTaken > 1 ? 'mins' : 'min'}
 					</div>
-				) : ('-')
+				) : (<div className={styles.section}> - </div>)
 			);
 		},
 	},
@@ -146,13 +146,15 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router, setShowReAttemp
 		Header   : '',
 		id       : 're-attempt',
 		accessor : ({ user = {} }) => (
-			<div
-				role="presentation"
-				onClick={() => setShowReAttemptModal(user)}
-				className={styles.see_more}
-			>
-				Allow Re-Attempt
-			</div>
+			(status !== 'published') && (
+				<div
+					role="presentation"
+					onClick={() => setShowReAttemptModal(user)}
+					className={styles.see_more}
+				>
+					Allow Re-Attempt
+				</div>
+			)
 		),
 	},
 ];
