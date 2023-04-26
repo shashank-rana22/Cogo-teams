@@ -34,13 +34,13 @@ export function ExtraHardCodeData() {
 			</div>
 
 			<div style={{ fontSize: '12px', marginTop: '4px' }}>
-				A/C Name: COGO FREIGHT PRIVATE LIMITED
+				A/C Name : COGO FREIGHT PRIVATE LIMITED
 			</div>
 			<div style={{ fontSize: '12px' }}>
-				Bank Name: RBL BANK A/C No: 409000876343
+				Bank Name : RBL BANK A/C No: 409000876343
 			</div>
 			<div style={{ fontSize: '12px' }}>
-				Address: ONE INDIA BULLS CENTRE,3RD FLOOR, MUMBAI -400013
+				Address : ONE INDIA BULLS CENTRE, 3RD FLOOR, MUMBAI -400013
 			</div>
 			<div style={{ fontSize: '12px' }}>IFSC Code – RATN0000088</div>
 			<div style={{ fontSize: '12px', marginTop: '30px' }}>

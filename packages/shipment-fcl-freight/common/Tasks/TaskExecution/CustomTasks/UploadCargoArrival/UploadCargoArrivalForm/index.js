@@ -34,18 +34,22 @@ function UploadCargoArrivalForm({
 	});
 
 	const header = (
-		<div className={styles.btn_wrapper}>
-			<Button
-				onClick={() => setShow(false)}
-			>
-				cancel
-			</Button>
-			<Button
-				style={{ marginLeft: 8 }}
-				onClick={handleSave}
-			>
-				Save
-			</Button>
+		<div className={styles.head_content}>
+			<div className={styles.heading}>Create Cargo Arrival Notice</div>
+
+			<div className={styles.btn_wrapper}>
+				<Button
+					onClick={() => setShow(false)}
+				>
+					cancel
+				</Button>
+				<Button
+					style={{ marginLeft: 8 }}
+					onClick={handleSave}
+				>
+					Save
+				</Button>
+			</div>
 		</div>
 	);
 

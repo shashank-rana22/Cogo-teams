@@ -11,10 +11,6 @@
 		.ui_modal_body_container {
 			max-height: 780px;
 		}
-
-		.ui_modal_close_button.ui_buttonicon_container {
-			display: none;
-		}
 	}
 }
 
@@ -22,4 +18,14 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+}
+
+.heading {
+	font-weight: 700;
+}
+
+.head_content {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
