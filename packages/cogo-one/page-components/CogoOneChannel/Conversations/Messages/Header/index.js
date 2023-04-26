@@ -36,6 +36,8 @@ function Header({
 	disableButton = '',
 	updateRoomLoading = false,
 	updateUserRoom = () => {},
+	requestForAssignChat = () => {},
+	requestAssignLoading = false,
 }) {
 	const [isVisible, setIsVisible] = useState(false);
 	const [openPopover, setOpenPopover] = useState(false);
@@ -48,8 +50,14 @@ function Header({
 		channel_type,
 		user_type,
 		search_user_name = '',
+		has_requested_by = {},
+		lead_user_id = '',
+		user_id = '',
+		sender = '',
+		id = '',
 	} = formattedData || {};
 
+	const { agent_id = '', agent_name = '' } = has_requested_by || {};
 	const getLowerLabel = () => {
 		if (user_name?.includes('anonymous')) {
 			return PLATFORM_MAPPING[user_type] || '';
@@ -58,7 +66,6 @@ function Header({
 			? `+${hideDetails({ data: mobile_no, type: 'number' })}`
 			: business_name;
 	};
-	const disableAssignButton = showBotMessages && !isomniChannelAdmin;
 
 	const openAssignModal = () => {
 		setOpenModal({
@@ -79,14 +86,28 @@ function Header({
 			openAssignModal();
 			return;
 		}
-		const payload = {
-			agent_id           : type === 'stop_and_assign' ? userId : undefined,
-			is_allowed_to_chat : true,
-		};
-		assignChat(payload);
+		let agentIdPayload = {};
+
+		if (type === 'approve_request') {
+			agentIdPayload = { agent_id };
+		} else if (type === 'stop_and_assign') {
+			agentIdPayload = { agent_id: userId };
+		}
+
+		assignChat({ ...agentIdPayload, is_allowed_to_chat: true });
 	};
 
-	const renderButtonOption = () => (
+	const requestAssignPaylod = () => {
+		const payload = {
+			lead_user_id    : lead_user_id || undefined,
+			user_id         : user_id || undefined,
+			sender          : sender || undefined,
+			channel         : channel_type,
+			channel_chat_id : id,
+		};
+		requestForAssignChat(payload);
+	};
+	const renderPopoverOption = () => (
 		<div className={styles.button_container}>
 			<Button
 				themeType="secondary"
@@ -121,13 +142,27 @@ function Header({
 		</div>
 	);
 
-	const renderRightButton = () => (
-		<div>
-			{showBotMessages && isomniChannelAdmin ? (
+	const renderRightButton = () => {
+		const hasAnyRequests = !!agent_id;
+		if (!showBotMessages) {
+			return (
+				<Button
+					themeType="secondary"
+					size="md"
+					className={styles.styled_button}
+					disabled={!hasPermissionToEdit}
+					onClick={openAssignModal}
+				>
+					Assign
+				</Button>
+			);
+		}
+		if (isomniChannelAdmin && !hasAnyRequests) {
+			return (
 				<Popover
 					placement="bottom"
 					trigger="click"
-					render={renderButtonOption()}
+					render={renderPopoverOption()}
 					visible={openPopover}
 					onClickOutside={() => setOpenPopover(false)}
 				>
@@ -136,25 +171,43 @@ function Header({
 						size="md"
 						className={styles.styled_button}
 						onClick={() => setOpenPopover(true)}
-
 					>
 						Assign To
 					</Button>
 				</Popover>
-			) : (
+			);
+		}
+		if (isomniChannelAdmin && hasAnyRequests) {
+			return (
 				<Button
 					themeType="secondary"
 					size="md"
-					disabled={disableAssignButton}
 					className={styles.styled_button}
-					onClick={openAssignModal}
-					loading={showBotMessages && assignLoading}
+					onClick={() => assignButtonAction('approve_request')}
+					loading={assignLoading}
 				>
-					Assign
+					Assign to
+					{' '}
+					{agent_name}
 				</Button>
-			)}
-		</div>
-	);
+			);
+		}
+		if (!isomniChannelAdmin) {
+			return (
+				<Button
+					themeType="secondary"
+					size="md"
+					disabled={hasAnyRequests}
+					className={styles.styled_button}
+					onClick={requestAssignPaylod}
+					loading={requestAssignLoading}
+				>
+					{hasAnyRequests ? 'Requested' : 'Request for Assign'}
+				</Button>
+			);
+		}
+		return null;
+	};
 
 	const handleUpdateUser = () => {
 		if (!updateRoomLoading) {
@@ -184,9 +237,7 @@ function Header({
 					/>
 				</div>
 				<div
-					className={cl`${styles.flex} ${
-						disableAssignButton ? styles.disabled_button : ''
-					}`}
+					className={styles.flex}
 				>
 					{!isEmpty(filteredSpectators) && (
 						<Assignes filteredSpectators={filteredSpectators} />
@@ -200,7 +251,7 @@ function Header({
 							/>
 						</div>
 					)}
-					{renderRightButton()}
+					<div>{renderRightButton()}</div>
 					{isomniChannelAdmin && channel_type === 'whatsapp' && (
 						<div
 							role="button"

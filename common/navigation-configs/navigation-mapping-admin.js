@@ -2181,8 +2181,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'ihls-data_pipeline',
 				title         : 'File Processing Dashboard',
-				href          : 'ihls/data-pipeline',
-				as            : 'ihls/data-pipeline',
+				href          : '/ihls/data-pipeline',
+				as            : '/ihls/data-pipeline',
 				type          : 'link',
 				icon          : IcMDataPipeline,
 				possible_apis : [],
@@ -2190,8 +2190,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'ihls-lead_data_pipeline',
 				title         : 'Lead Dashboard',
-				href          : 'ihls/lead-data-pipeline',
-				as            : 'ihls/lead-data-pipeline',
+				href          : '/ihls/lead-data-pipeline',
+				as            : '/ihls/lead-data-pipeline',
 				type          : 'link',
 				possible_apis : [],
 				icon          : IcMDataPipeline,

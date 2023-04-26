@@ -1,25 +1,10 @@
-import { useEffect } from 'react';
-
 import { getFieldController } from '../../../../../common/Form/getFieldController';
 import controls from '../../../configurations/get-leaderboard-filters-controls';
 
 import styles from './styles.module.css';
 
 function HeaderFilters(props) {
-	const { control, errors, watch } = props;
-
-	// console.log('formValues : ', typeof formValues);
-
-	// console.log('kam : ', watch('kam'));
-	// console.log('organization : ', watch('organization'));
-	// console.log('abhi_date : ', watch('date'));
-
-	const organization = watch('organization');
-
-	useEffect(() => {
-		console.log('organization : ', organization);
-		// graphRefetch();
-	}, [organization]);
+	const { control, errors } = props;
 
 	return (
 		<div className={styles.form_container}>

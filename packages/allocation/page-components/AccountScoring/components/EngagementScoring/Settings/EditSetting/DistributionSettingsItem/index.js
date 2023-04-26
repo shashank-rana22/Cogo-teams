@@ -68,14 +68,14 @@ function DistributionSettingsItem(props) {
 							</div>
 							<div className={styles.account_headers}>
 								{ statsLoading ? <Placeholder height={20} width={200} />
-									: statsList?.[index]?.warmth_count}
+									: (statsList?.[index]?.warmth_count || 0)}
 							</div>
 						</>
 					)
 						: (
 							<div className={styles.headers}>
 								{ statsLoading ? <Placeholder height={20} width={200} />
-									: statsList?.[index]?.warmth_count}
+									: (statsList?.[index]?.warmth_count || 0)}
 							</div>
 						)
 				}

@@ -1,4 +1,5 @@
 import { useForm } from '@cogoport/forms';
+import { useEffect } from 'react';
 
 import leaderboardColumns from '../../constants/get-leaderboard-columns';
 import useGetAccountDistributionGraph from '../../hooks/useGetAccountDistributionGraph';
@@ -16,9 +17,38 @@ function AccountLeaderboard() {
 		control, formState: { errors }, watch,
 	} = formProps;
 
-	const { graphData = [], graphLoading = false } = useGetAccountDistributionGraph(watch);
+	const {
+		graphData = [], graphLoading = false,
+		setGraphParams = () => {},
+	} = useGetAccountDistributionGraph();
 
-	const { leaderboardLoading = false, leaderboardList = [] } = useGetEngagementScoringLeaderboard(watch);
+	const {
+		leaderboardLoading = false, leaderboardList = [],
+		setLeaderboardParams = () => {},
+	} = useGetEngagementScoringLeaderboard();
+
+	const organization = watch('organization');
+	const kam = watch('kam');
+	const date = watch('date');
+	const segment = watch('segment_id');
+
+	useEffect(() => {
+		setGraphParams((pv) => ({
+			...pv,
+			filters: {
+				created_at : date || undefined,
+				service_id : organization || undefined,
+			},
+		}));
+
+		setLeaderboardParams((pv) => ({
+			...pv,
+			filters: {
+				created_at : date || undefined,
+				service_id : organization || undefined,
+			},
+		}));
+	}, [organization, kam, date, segment, setGraphParams, setLeaderboardParams]);
 
 	return (
 		<section className={styles.container} id="core_engine_container">
@@ -27,7 +57,6 @@ function AccountLeaderboard() {
 			<HeaderFilters
 				control={control}
 				errors={errors}
-				watch={watch}
 			/>
 
 			<ScoreDistributionGraph

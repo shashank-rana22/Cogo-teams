@@ -31,12 +31,13 @@ function index(props) {
 					height={220}
 					width={380}
 					flexDirection="column"
-					emptyText="Data not found"
+					emptyText="Leaderboard Data not found"
 					textSize={20}
 				/>
 			</div>
 		);
 	}
+
 	return (
 		<>
 			<div className={styles.header_text}>Leaderboard List</div>
