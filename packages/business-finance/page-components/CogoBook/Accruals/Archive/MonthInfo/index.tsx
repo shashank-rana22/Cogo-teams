@@ -1,6 +1,6 @@
-import { Button } from '@cogoport/components';
+import { Button, Popover } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
-import { IcMArrowBack, IcMUnlock, IcMLock } from '@cogoport/icons-react';
+import { IcMArrowBack, IcMUnlock, IcMLock, IcMArrowRotateDown } from '@cogoport/icons-react';
 
 import ValuePercentage from '../ValuePercentage';
 
@@ -10,14 +10,14 @@ interface MonthInterface {
 	data?:{
 		periodName?:string
 		expenseCurrency?:string
-		expenseBooked?:string
+		expenseBooked?:number
 		isLocked?:boolean
 		expenseAccrued?:string
 		incomeCurrency?:string
-		incomeBooked?:string
+		incomeBooked?:number
 		incomeAccrued?:string
-		actualExpense?:string
-		actualIncome?:string
+		actualExpense?:number
+		actualIncome?:number
 	}
 	handleClick?: () => void
 	loading?:boolean
@@ -36,6 +36,28 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 		actualIncome,
 		isLocked,
 	} = data || {};
+
+	const renderContent = () => (
+		<div className={styles.variance_styles}>
+			<div>
+				<div className={styles.expense}>Expense Variation</div>
+				<div>
+					Amount :
+					{' '}
+					<span className={styles.amount}>{expenseBooked - actualExpense}</span>
+				</div>
+			</div>
+			<div>
+				<div className={styles.income}>Income Variation</div>
+				<div>
+					Amount :
+					{' '}
+					<span className={styles.amount}>{incomeBooked - actualIncome}</span>
+				</div>
+			</div>
+		</div>
+	);
+
 	return (
 		<div>
 
@@ -106,13 +128,24 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 							<ValuePercentage data={data} keys="actualProfit" flag />
 						</div>
 					</div>
+					<div style={{ display: 'flex', flexDirection: 'column' }}>
+						<Popover
+							placement="bottom"
+							render={renderContent()}
+						>
+							<div>
+								<div className={styles.variance_data}>
+									Variance
+									<IcMArrowRotateDown />
+								</div>
 
-					<div>
-						<div className={styles.para_data}>Variance</div>
+							</div>
+						</Popover>
 						<div className={styles.para}>
 							<ValuePercentage data={data} keys="variance" flag />
 						</div>
 					</div>
+
 				</div>
 
 			</div>
