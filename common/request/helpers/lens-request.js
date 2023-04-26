@@ -24,7 +24,7 @@ lensRequest.interceptors.request.use((oldConfig) => {
 
 	const token = getCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME);
 
-	const authorizationparameters = getAuthorizationParams(store, newConfig.url);
+	let authorizationparameters = getAuthorizationParams(store, newConfig.url);
 
 	const apiPath = newConfig.url.split('/').pop();
 
@@ -37,6 +37,9 @@ lensRequest.interceptors.request.use((oldConfig) => {
 
 	if (serviceName) {
 		newConfig.url = `/${serviceName}/${originalApiPath}`;
+	}
+	if (serviceName === 'cogolens') {
+		authorizationparameters = 'lens:allowed';
 	}
 
 	return {
