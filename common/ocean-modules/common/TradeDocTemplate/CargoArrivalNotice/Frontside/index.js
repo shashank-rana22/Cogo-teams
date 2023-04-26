@@ -13,7 +13,7 @@ function Frontside({ initialValues }, ref) {
 
 	const service_type = formatValues?.service_type;
 
-	const { control, handleSubmit, setValue } = useForm({ formatValues });
+	const { control, handleSubmit, setValue } = useForm({ defaultValues: formatValues });
 
 	useEffect(() => {
 		Object.keys(formatValues || {}).forEach((key) => {

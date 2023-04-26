@@ -1,4 +1,4 @@
-import React from 'react';
+import { forwardRef } from 'react';
 
 import CargoArrivalNotice from './CargoArrivalNotice';
 
@@ -27,4 +27,4 @@ function TradeDocTemplate(
 	}
 }
 
-export default TradeDocTemplate;
+export default forwardRef(TradeDocTemplate);
