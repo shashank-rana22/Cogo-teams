@@ -69,6 +69,7 @@ function ExitingPayRun({
 			return (
 				<div>
 					<Radio
+						name="select"
 						checked={value === id}
 						onChange={handleRadioChange}
 					/>

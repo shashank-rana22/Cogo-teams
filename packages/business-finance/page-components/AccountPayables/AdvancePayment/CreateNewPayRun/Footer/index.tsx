@@ -1,20 +1,25 @@
 import { Button } from '@cogoport/components';
+import { getFormattedPrice } from '@cogoport/forms';
 import React, { useState } from 'react';
 
 import SavePayRunModal from './SavePayRunModal';
 import styles from './styles.module.css';
 
 function Footer({
-	apiData, viewSelectedInvoice,
+	apiData,
+	viewSelectedInvoice,
 	setViewSelectedInvoice,
 	submitSelectedInvoices,
 	getViewSelectedInvoices,
+	getAdvancedPayment,
+	viewSelectedData,
 }) {
 	const {
 		list = [],
 	} = apiData || {};
 
 	const [savePayrunModal, setSavePayrunModal] = useState(false);
+	const { totalValue, currency, invoiceCount } = viewSelectedData || {};
 
 	const isChecked = (list || [])?.filter((item) => item.checked);
 	const totalInvoiceAmount = isChecked?.reduce((acc, obj) => +acc + +obj.payableAmount, 0);
@@ -31,7 +36,8 @@ function Footer({
 							INR
 						</div>
 						<div className={styles.amount}>
-							{totalInvoiceAmount}
+							{viewSelectedInvoice === true ? getFormattedPrice(totalValue, currency || 'INR')
+								: getFormattedPrice(totalInvoiceAmount, 'INR')}
 						</div>
 					</div>
 					<div className={styles.sid_count}>
@@ -39,7 +45,7 @@ function Footer({
 							SID :
 						</div>
 						<div>
-							{isChecked.length}
+							{viewSelectedInvoice === true ? invoiceCount : isChecked.length}
 						</div>
 					</div>
 				</div>
@@ -66,6 +72,7 @@ function Footer({
 									<Button onClick={() => {
 										setViewSelectedInvoice(true);
 										getViewSelectedInvoices();
+										getAdvancedPayment();
 									}}
 									>
 										View Selected SID

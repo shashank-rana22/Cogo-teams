@@ -50,6 +50,7 @@
 	margin-right: -24px;
 	margin-left: 60px;
 }
+
 .sub_container {
 	position: relative;
 	box-sizing: border-box;
@@ -93,6 +94,7 @@
 	align-items: center;
 	padding-left: 16px;
 }
+
 .ribbons {
 	align-items: center;
 	font-size: 10px;
@@ -121,12 +123,14 @@
 		box-shadow: 0 calc(-1 * var(--f)) 0 inset #0005;
 	}
 }
+
 .loader {
 	width: 160px;
 	height: 20px;
 	border-radius: 2px;
 }
-.amount_loader{
+
+.amount_loader {
 	width: 100px;
 	height: 20px;
 	margin-left: 8px;

@@ -53,6 +53,7 @@ function CreateNewPayRun() {
 	const { list } = existpayRunData || {};
 	const { pageIndex } = data || {};
 	const [viewSelectedInvoice, setViewSelectedInvoice] = useState(false);
+	// const { invoiceCount, totalValue, createdAt, currency, name } = viewSelectedData || {};
 
 	const functions = {
 		renderCheckbox    : (itemData) => getTableBodyCheckbox(itemData),
@@ -132,29 +133,38 @@ function CreateNewPayRun() {
 					<div>
 						<div className={styles.sub_container}>
 							<div className={styles.text}>
-								{existingPayRunLoading ? <Placeholder className={styles.loader} /> : list?.[0]?.name}
+								<div>
+									{existingPayRunLoading ? <Placeholder className={styles.loader} />
+										: list?.[0]?.name}
+								</div>
 							</div>
 							<div className={styles.text}>
 								Total value :
 								{' '}
 								{' '}
-								{existingPayRunLoading
-									? <Placeholder className={styles.amount_loader} />
-									: getFormattedPrice(list?.[0]?.totalValue, list?.[0]?.currency)}
+								<div>
+									{existingPayRunLoading
+										? <Placeholder className={styles.amount_loader} />
+										: getFormattedPrice(list?.[0]?.totalValue, list?.[0]?.currency)}
+								</div>
 							</div>
 							<div className={styles.text}>
 								No. of invoices :
 								{' '}
 								{' '}
 								{' '}
-								{existingPayRunLoading
-									? <Placeholder className={styles.amount_loader} />
-									: list?.[0]?.invoiceCount}
+								<div>
+									{existingPayRunLoading
+										? <Placeholder className={styles.amount_loader} />
+										: list?.[0]?.invoiceCount}
+								</div>
 							</div>
 							<div className={styles.text}>
-								{existingPayRunLoading
-									? <Placeholder className={styles.loader} />
-									: list?.[0]?.createdAt}
+								<div>
+									{existingPayRunLoading
+										? <Placeholder className={styles.loader} />
+										: list?.[0]?.createdAt}
+								</div>
 							</div>
 							<div className={styles.ribbons}>
 								<div className={styles.ribbon}>Adv. Payment</div>
@@ -203,6 +213,8 @@ function CreateNewPayRun() {
 					setViewSelectedInvoice={setViewSelectedInvoice}
 					submitSelectedInvoices={submitSelectedInvoices}
 					getViewSelectedInvoices={getViewSelectedInvoices}
+					getAdvancedPayment={getAdvancedPayment}
+					viewSelectedData={viewSelectedData}
 				/>
 			</div>
 

@@ -9,7 +9,7 @@ import { filterControls } from './filterControls';
 import styles from './styles.module.css';
 
 interface FilterProps {
-	search?:string | number,
+	search?:string,
 }
 
 interface Props {
