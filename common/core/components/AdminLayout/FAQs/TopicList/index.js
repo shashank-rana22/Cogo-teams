@@ -17,9 +17,9 @@ function TopicList({
 	setShow = () => {},
 	announcementProps = {},
 	selectedAnnouncement = '',
-
 }) {
 	const [activeTab, setActiveTab] = useState('faq');
+	const [input, setInput] = useState('');
 
 	const {
 		search,
@@ -61,9 +61,12 @@ function TopicList({
 
 	useEffect(() => {
 		if (from === 'test_module') return;
+
 		setAnnouncementModalData({});
 		setSearch('');
 		setSearchAnnouncement('');
+		setInput('');
+
 		if (activeTab === 'faq') {
 			setParams({
 				page    : 1,
@@ -91,6 +94,7 @@ function TopicList({
 				page,
 				setPage,
 				list,
+				from,
 				faqNotificationData,
 				topic,
 				setTopic,
@@ -131,6 +135,8 @@ function TopicList({
 				fetchFaqNotification={fetchFaqNotification}
 				refetch={refetch}
 				from={from}
+				setInput={setInput}
+				input={input}
 			/>
 
 			<Tabs

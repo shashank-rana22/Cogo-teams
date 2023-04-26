@@ -20,23 +20,23 @@ function AudianceTable({
 	const { list:listTagsData = [], total_count } = data || {};
 	const router = useRouter();
 
-	if (audianceLoading) {
-		return <LoadingState />;
-	}
+	const onClick = () => {
+		router.push(
+			'/learning/faq/create/configuration?create=audience',
+			'/learning/faq/create/configuration?create=audience',
+		);
+		setConfigurationPage('audience');
+	};
+
+	if (audianceLoading) return <LoadingState />;
+
 	const renderTable = () => {
-		const onClick = () => {
-			router.push(
-				'/learning/faq/create/configuration?create=audience',
-				'/learning/faq/create/configuration?create=audience',
-			);
-			setConfigurationPage('audience');
-		};
 		if (isEmpty(data?.list)) {
 			return (
 				activeAudience === 'active' ? (
 					<EmptyState
 						text="There are no audience groups right now. Start by adding an audience group."
-						btn_text="Add Audience Aroup"
+						btn_text="Add Audience Group"
 						onClick={onClick}
 					/>
 				) : (
@@ -50,12 +50,7 @@ function AudianceTable({
 
 		return (
 			<div>
-				<div>
-					<div className={styles.table}>
-						<StyledTable columns={columns} data={listTagsData} />
-					</div>
-
-				</div>
+				<StyledTable columns={columns} data={listTagsData} />
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="table"
@@ -69,12 +64,7 @@ function AudianceTable({
 		);
 	};
 
-	return (
-		<>
-			{renderTable()}
-		</>
-
-	);
+	return renderTable();
 }
 
 export default AudianceTable;
