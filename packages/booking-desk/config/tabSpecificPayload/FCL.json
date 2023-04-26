@@ -119,10 +119,6 @@
                 {
                     "task": ["upload_booking_note"],
                     "status": "completed"
-                },
-                {
-                    "task": ["amend_booking_note"],
-                    "status": "completed"
                 }
             ]
         }
