@@ -50,6 +50,15 @@ function Superadmin({ get, activeStakeholder = '' }) {
 		router.prefetch(router.asPath);
 	}, [router]);
 
+	console.log(
+		'getShipmentStatusCode',
+		getShipmentStatusCode,
+		'isGettingShipment',
+		isGettingShipment,
+		'data',
+		shipment_data,
+	);
+
 	if (isGettingShipment) {
 		return (
 			<div className={styles.loader}>
@@ -59,7 +68,7 @@ function Superadmin({ get, activeStakeholder = '' }) {
 		);
 	}
 
-	if (!shipment_data && getShipmentStatusCode !== 403 && !isGettingShipment) {
+	if (!shipment_data && getShipmentStatusCode !== 403) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.section}>
@@ -78,7 +87,7 @@ function Superadmin({ get, activeStakeholder = '' }) {
 		);
 	}
 
-	if (getShipmentStatusCode === 403 && !isGettingShipment) {
+	if (getShipmentStatusCode === 403) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.page}>
