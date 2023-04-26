@@ -14,14 +14,14 @@ const columns = ['LIFECYCLE ITEM',
 const tableColumns = [
 	{
 		Header   : 'LIFECYCLE ITEM',
-		accessor : ({ lifecycle_item = '' }) => (
-			<div className={styles.table_lifecycle_item}>{startCase(lifecycle_item)}</div>
+		accessor : ({ event_name = '' }) => (
+			<div className={styles.table_lifecycle_item}>{startCase(event_name)}</div>
 		),
 	},
 	{
 		Header   : 'DIY SCORE & WARMTH DURATION',
 		accessor : ({ diy_score = '', diy_warmth_duration = '' }) => (
-			<div>{(diy_score && diy_warmth_duration) ? `${diy_score} & ${diy_warmth_duration} days` : ''}</div>
+			<div>{(diy_score && diy_warmth_duration) ? `${diy_score} & ${diy_warmth_duration} days` : '-'}</div>
 		),
 	},
 	{
@@ -29,7 +29,7 @@ const tableColumns = [
 		accessor : ({ assisted_score = '', assisted_warmth_duration = '' }) => (
 			<div>
 				{(assisted_score && assisted_warmth_duration)
-					? `${assisted_score} & ${assisted_warmth_duration} days` : ''}
+					? `${assisted_score} & ${assisted_warmth_duration} days` : '-'}
 
 			</div>
 		),
@@ -39,7 +39,7 @@ const tableColumns = [
 		accessor : ({ system_score = '', system_warmth_duration = '' }) => (
 			<div>
 				{(system_score && system_warmth_duration)
-					? `${system_score} & ${system_warmth_duration} days` : ''}
+					? `${system_score} & ${system_warmth_duration} days` : '-'}
 
 			</div>
 		),
@@ -49,7 +49,7 @@ const tableColumns = [
 		accessor : ({ cogoverse_score = '', cogoverse_warmth_duration = '' }) => (
 			<div>
 				{(cogoverse_score && cogoverse_warmth_duration)
-					? `${cogoverse_score} & ${cogoverse_warmth_duration} days` : ''}
+					? `${cogoverse_score} & ${cogoverse_warmth_duration} days` : '-'}
 
 			</div>
 		),
@@ -61,7 +61,7 @@ function EngagementType(props) {
 
 	const { engagement_type_details } = value;
 
-	const { control, setValue } = formProps;
+	const { control, setValue, watch } = formProps;
 
 	useEffect(() => {
 		setValue('single_item', engagement_type_details);
@@ -84,7 +84,7 @@ function EngagementType(props) {
 					<hr color="#F8F2E7" />
 
 					<div className={styles.sublist_item}>
-						<FieldArray control={control} name="single_item" />
+						<FieldArray control={control} name="single_item" watch={watch} />
 					</div>
 				</div>
 			) : <Table className={styles.table_container} columns={tableColumns} data={engagement_type_details} />}
