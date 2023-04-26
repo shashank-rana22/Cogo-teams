@@ -38,6 +38,11 @@ export const stylesTHC = `
     line-height: 1.6;
 }
 
+.data_font_style {
+    font-size: 11px;
+    white-space: pre-wrap;
+}
+
 .consignee_head {
     text-decoration: underline;
 }

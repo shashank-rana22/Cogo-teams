@@ -160,7 +160,7 @@ function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 								} = item.documentData;
 
 								return (
-									<tr style={{ fontSize: '11px' }}>
+									<tr className="data_font_style">
 										<td>{documentNumber}</td>
 										<td>{totalPackagesCount}</td>
 										<td>{weight}</td>

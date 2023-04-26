@@ -4,9 +4,9 @@ import { useCallback } from 'react';
 const useGetManifest = () => {
 	const [{ data = {}, loading }, trigger] = useRequestAir(
 		{
-			url    : '/air-coe/documents/list-manifest',
-			method : 'get',
-			// authKey : 'get_air_coe_documents',
+			url     : '/air-coe/documents/list-manifest',
+			method  : 'get',
+			authKey : 'get_air_coe_documents_list_manifest',
 		},
 		{ manual: true },
 	);
