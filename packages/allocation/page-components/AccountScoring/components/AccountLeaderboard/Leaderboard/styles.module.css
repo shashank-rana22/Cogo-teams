@@ -17,8 +17,9 @@
 }
 
 .empty_container {
-	padding: 8px;
+	padding: 16px;
 	margin-top: 20px;
 	background: #fff;
+	border: 1px solid #d6d4d46e;
 	border-radius: 8px;
 }

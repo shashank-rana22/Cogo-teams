@@ -18,21 +18,7 @@ function DistributionSetting(props) {
 
 	const [editing, setEditing] = useState(false);
 
-	if (settingsLoading) {
-		return (
-			<div className={styles.card}>
-				<Header setEditing={setEditing} loading={settingsLoading} />
-
-				<Table
-					columns={distributionColumns || []}
-					data={[]}
-					loading={settingsLoading}
-				/>
-			</div>
-		);
-	}
-
-	if (isEmpty(distributionList)) {
+	if (isEmpty(distributionList) && !settingsLoading) {
 		return (
 			<div className={styles.empty_container}>
 				<EmptyState
@@ -46,7 +32,7 @@ function DistributionSetting(props) {
 		);
 	}
 
-	if (editing) {
+	if (editing && !settingsLoading) {
 		return (
 			<EditSetting
 				useGetControls={getDistributionControl}
@@ -66,7 +52,7 @@ function DistributionSetting(props) {
 
 	return (
 		<div className={styles.card}>
-			<Header editing={editing} setEditing={setEditing} />
+			<Header setEditing={setEditing} />
 
 			<Table
 				columns={distributionColumns || []}

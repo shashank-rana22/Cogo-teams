@@ -25,6 +25,8 @@ function AccountLeaderboard() {
 
 	const { organization, kam, date, segment } = watch();
 
+	// Todo :  kam, segment filters need to be added as soon as the filter key is provided by the backend
+
 	useEffect(() => {
 		setGraphParams((pv) => ({
 			...pv,
