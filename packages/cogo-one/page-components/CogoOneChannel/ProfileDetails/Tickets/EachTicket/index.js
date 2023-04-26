@@ -1,4 +1,5 @@
 import { Tooltip, cl } from '@cogoport/components';
+import { IcMSpecificUsers } from '@cogoport/icons-react';
 
 import ReceiveDiv from '../../../../../common/ReceiveDiv';
 import { PRIORITY_MAPPING } from '../../../../../constants';
@@ -10,9 +11,10 @@ function EachTicket({
 	eachTicket = {},
 	createTicketActivity = () => {},
 	agentId = '',
+	handleCardClick,
 }) {
 	const {
-		Data: { InvoiceNumber = 0, Message = '', ShipmentId = 0 } = {},
+		Data: { InvoiceNumber = 0, Message = '', ShipmentId = 0, AdditionalData = '' } = {},
 		CreatedAt = '',
 		TicketActivityDescription = '',
 		Priority = '',
@@ -21,6 +23,7 @@ function EachTicket({
 		Type = '',
 		Description = '',
 		TicketReviewerID = '',
+		ReviewerName = '',
 	} = eachTicket || {};
 
 	const eachMessage = {
@@ -38,9 +41,12 @@ function EachTicket({
 		};
 		createTicketActivity(payload);
 	};
-	const headerValue = InvoiceNumber || ShipmentId;
 
-	const headerTitle = InvoiceNumber ? 'Invoice ID' : 'Shipment ID';
+	const DATA_MAPPING = [
+		{ title: 'INVOICE NUMBER', value: InvoiceNumber },
+		{ title: 'SHIPMENT ID', value: ShipmentId },
+		{ title: 'ADDITIONAL DATA', value: AdditionalData },
+	];
 
 	const { actions = [], requestedText = '', canPerformActions = '', iconUrl = '' } = getTicketActivityMapping({
 
@@ -57,17 +63,14 @@ function EachTicket({
 			key={ID}
 		>
 			<div className={styles.header}>
-				<div>
-					{headerValue ? (
-						<div
-							className={cl`${styles.details_div} 
+				<div
+					role="button"
+					tabIndex={0}
+					onClick={() => handleCardClick(ID)}
+					className={cl`${styles.details_div} 
 							${Status === 'closed' ? styles.closed_details : ''}`}
-						>
-							{headerTitle}
-							:
-							<span>{headerValue}</span>
-						</div>
-					) : null}
+				>
+					{`Ticket ID: ${ID}`}
 				</div>
 				<div className={styles.activity}>
 					{canPerformActions ? actions.map(({
@@ -85,7 +88,7 @@ function EachTicket({
 								/>
 							</Tooltip>
 						)
-					)) : <div className={styles.not_authorized_styles}>NOT AUTHORIZED</div>}
+					)) : <div className={styles.not_authorized_styles}>REQUESTED</div>}
 				</div>
 			</div>
 			{Message ? (
@@ -108,6 +111,21 @@ function EachTicket({
 					>
 						{Priority?.toUpperCase()}
 					</div>
+				</div>
+				<div className={styles.closure_authoriser}>
+					<IcMSpecificUsers className={styles.specific_user_icon} />
+					<div className={styles.reviewer_name}>{ReviewerName}</div>
+				</div>
+				<div>
+					{DATA_MAPPING.map(({ title = '', value = '' }) => (
+						value ? (
+							<div className={styles.header_value}>
+								{title}
+								:
+								<span>{value}</span>
+							</div>
+						) : null
+					))}
 				</div>
 				{TicketActivityDescription && (
 					<div className={styles.description}>

@@ -23,7 +23,7 @@ const useCreateTicketActivity = ({ refetchTickets = () => {} }) => {
 			Toast.success(res?.data);
 			refetchTickets();
 		} catch (e) {
-			Toast.error(e?.error || 'something went wrong');
+			Toast.error(e.response.data || 'something went wrong');
 		}
 	};
 

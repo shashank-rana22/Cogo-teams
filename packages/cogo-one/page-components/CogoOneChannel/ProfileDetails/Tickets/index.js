@@ -1,5 +1,6 @@
 import { cl, Placeholder, Pagination } from '@cogoport/components';
 import { IcMPlusInCircle, IcMTag } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
 import useCreateTicketActivity from '../../../../hooks/useCreateTicketActivity';
@@ -50,6 +51,12 @@ function Tickets({ zippedTicketsData = {} }) {
 			iconColor : '#E0E0E0',
 		},
 	];
+	const router = useRouter();
+
+	const handleCardClick = (id) => {
+		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/ticket-management/dashboard/${id}`;
+		window.location.href = newUrl;
+	};
 
 	const renderTickets = () => {
 		if (listLoading) {
@@ -83,6 +90,7 @@ function Tickets({ zippedTicketsData = {} }) {
 				createTicketActivity={createTicketActivity}
 				activityLoading={loading}
 				agentId={agentId}
+				handleCardClick={handleCardClick}
 			/>
 		));
 	};
@@ -124,7 +132,7 @@ function Tickets({ zippedTicketsData = {} }) {
 			<div className={styles.list_container}>{renderTickets()}</div>
 			<Pagination
 				className={styles.pagination_container}
-				type="compact"
+				type="page"
 				currentPage={page + 1}
 				totalItems={total}
 				pageSize={size}
