@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
@@ -7,7 +8,6 @@ function useGetQuestions({ id }) {
 		method : 'get',
 		url    : '/get_question',
 	}, { manual: true });
-
 	const fetchQuestions = useCallback(async () => {
 		try {
 			await trigger({
@@ -16,7 +16,7 @@ function useGetQuestions({ id }) {
 				},
 			});
 		} catch (error) {
-			Toast.error(error?.message);
+			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
 		}
 	}, [id, trigger]);
 
@@ -25,12 +25,10 @@ function useGetQuestions({ id }) {
 			fetchQuestions();
 		}
 	}, [fetchQuestions, id]);
-
 	return {
 		refetchQuestions: fetchQuestions,
 		data,
 		loading,
 	};
 }
-
 export default useGetQuestions;

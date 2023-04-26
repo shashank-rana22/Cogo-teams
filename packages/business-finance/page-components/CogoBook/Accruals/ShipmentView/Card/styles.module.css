@@ -20,7 +20,7 @@
 }
 
 .hr_period {
-	width: 25%;
+	width: 15%;
 	border: 1px solid #ee3425;
 }
 
@@ -57,12 +57,16 @@
 
 	:global {
 		.react-datepicker__input-container {
+			input {
+				height: 32px;
+			}
+
 			.react-datepicker__close-icon::after {
 				background: none !important;
 			}
 
 			.react-datepicker__close-icon {
-				right: -9px;
+				right: -4px;
 				border: none;
 			}
 		}
@@ -70,7 +74,7 @@
 }
 
 .hr_filter {
-	width: 15%;
+	width: 8%;
 	border: 1px solid #ee3425;
 }
 
@@ -89,7 +93,7 @@
 
 .more_filter {
 	display: flex;
-	gap: 30px;
+	gap: 10px;
 	align-items: center;
 	margin-top: 40px;
 }
@@ -140,23 +144,6 @@
 .date_range_not {
 	width: fit-content;
 	margin-top: 16px;
-
-	:global {
-		.react-datepicker__input-container {
-			.react-datepicker__close-icon::after {
-				background: none !important;
-			}
-
-			input {
-				cursor: not-allowed !important;
-			}
-
-			.react-datepicker__close-icon {
-				right: -9px;
-				border: none;
-			}
-		}
-	}
 }
 
 .profit_data {
@@ -165,4 +152,21 @@
 
 .profit_color {
 	color: #ee3425;
+}
+
+.font_size_tooltip {
+	font-size: 12px;
+}
+
+.fon_tooltip {
+	font-size: 12px;
+}
+
+.dot {
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+	margin: 0 0 8px 2px;
+	background-color: #ee3425;
+	border-radius: 50%;
 }

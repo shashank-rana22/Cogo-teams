@@ -25,4 +25,6 @@ packages/cogo-verse-analytics @SDineshKumarCogoport
 packages/enrichment @cogoparth @mohit-cogo @Harshitcogo
 packages/performance-management @cogoparth @Harshitcogo @shridharDB @gurramgadda-sai-nithin
 packages/ground-ops @vinodtalapa @ankitcogoport
-packages/cogo-academy @shivam-cogo @prachidewangan26
+packages/cogo-academy @shivanshi-cogoport
+packages/cogo-academy/page-components/ControlCenter @shivam-cogo @prachidewangan26
+packages/cogo-academy/page-components/FAQs @shivam-cogo @prachidewangan26

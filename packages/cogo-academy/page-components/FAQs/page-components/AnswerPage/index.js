@@ -39,12 +39,14 @@ function AnswerPage() {
 		setIsLiked,
 		watchQuestionCheckbox,
 		watchAnswerCheckbox,
+		watchRemark,
 		is_positive,
 		FEEDBACK_MAPPING_ISLIKED,
 	} = useCreateFeedback({ refetchQuestions, answerData, loading });
 
 	const onClickBackIcon = () => {
-		const href = `/learning/faq${topicId ? `?topicId=${topicId}` : ''}`;
+		const showTopicId = topicId ? `?topicId=${topicId}` : '';
+		const href = `/learning/faq${showTopicId}`;
 		router.push(href, href);
 	};
 
@@ -78,6 +80,14 @@ function AnswerPage() {
 
 			<div className={styles.questionabstract}>
 				{answerData?.question_abstract}
+			</div>
+
+			<div className={styles.view_count}>
+				{' '}
+				{answerData?.view_count}
+				{' '}
+				people viewed this question
+
 			</div>
 
 			<div className={styles.answer}>Answer:</div>
@@ -173,6 +183,7 @@ function AnswerPage() {
 							themeType="primary"
 							onClick={handleSubmit(onSubmit)}
 							loading={feedbackLoading}
+							disabled={!(watchAnswerCheckbox || watchQuestionCheckbox || watchRemark)}
 						>
 							Submit
 						</Button>
@@ -185,7 +196,9 @@ function AnswerPage() {
 					<span className={styles.sidetext}>
 						{answerData?.answers[0]?.upvote_count}
 						{' '}
-						people found it useful.
+						{answerData?.answers[0]?.upvote_count === 1 ? 'person' : 'people'}
+						{' '}
+						found it useful.
 					</span>
 				) : null}
 				{'    '}

@@ -237,6 +237,7 @@ function BankDetails({
 									themeType="secondary"
 									style={{ marginRight: '8px' }}
 									disabled={!(value?.text.length) || loading}
+									loading={loading}
 									onClick={() => {
 										OnAction('REJECTED');
 									}}
@@ -249,6 +250,7 @@ function BankDetails({
 									style={{ marginRight: '8px' }}
 									disabled={Object.values(value).includes('false')
 									|| !(value?.text.length) || loading}
+									loading={loading}
 									onClick={() => {
 										OnAction('APPROVED');
 									}}
