@@ -3,3 +3,26 @@
     justify-content: center;
     margin: 16px 0 8px 0;
 }
+
+
+
+.block_wrapper {
+	position: relative;
+
+	&:hover{
+		.show_wrapper {
+			display: flex;
+			flex-direction: column;
+			color: #222;
+			position: absolute;
+			right: 10px;
+			z-index: 2;	
+			top: 0;
+		}
+	 }
+}
+
+
+.show_wrapper {
+	display: none;
+}	

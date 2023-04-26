@@ -26,7 +26,7 @@ function Child({
 			key={field.id}
 		>
 			<div className={styles.content}>
-				{controls.map((controlItem) => {
+				{(controls || []).map((controlItem) => {
 					const { watch, style, name: controlName, type } = controlItem;
 					const show = !(controlItem.name in showElements) || showElements[controlItem.name];
 
@@ -106,9 +106,15 @@ function Child({
 									name={`${name}[${index}].${controlItem.name}`}
 								/>
 
-								<div className={styles.error_message}>
-									{error?.[controlName]?.message || error?.[controlName]?.type}
-								</div>
+								{(error?.[controlName]?.message || error?.[controlName]?.type) && (
+									<div className={styles.error_message}>
+										{controlItem.label}
+										{' '}
+										is
+										{' '}
+										{error?.[controlName]?.message || error?.[controlName]?.type}
+									</div>
+								)}
 							</div>
 						</div>
 					) : null;

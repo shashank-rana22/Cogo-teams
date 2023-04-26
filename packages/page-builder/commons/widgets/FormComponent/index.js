@@ -16,6 +16,18 @@ import styles from './styles.module.css';
 
 const DynamicFormEditor = dynamic(() => import('./FormEditor'), { ssr: false });
 
+const prefillControls = [
+	'label',
+	'type',
+	'placeholder',
+	'width',
+	'options_type',
+	'is_mandetory',
+	'manual_options',
+	'dynamic_data_endpoint',
+	'options',
+];
+
 function FormComponent({
 	components,
 	setComponents,
@@ -34,6 +46,7 @@ function FormComponent({
 		watch,
 		formState:{ errors = {} },
 		handleSubmit,
+		setValue,
 	} = formProps || {};
 
 	const dynamicFormProps = useForm();
@@ -42,7 +55,6 @@ function FormComponent({
 		control: dynamicControl,
 		formState:{ errors: dynamicControlErrors },
 		handleSubmit: dynamicHandleSubmit,
-		getValues,
 	} = dynamicFormProps || {};
 
 	const formValues = watch();
@@ -69,20 +81,30 @@ function FormComponent({
 							showElements.controls[i].dynamic_data_endpoint = false;
 							showElements.controls[i].manual_options = false;
 							showElements.controls[i].options_type = true;
+							showElements.controls[i].options = false;
 							if (item.options_type === 'dynamic_data') {
 								showElements.controls[i].dynamic_data_endpoint = true;
 								showElements.controls[i].manual_options = false;
+								showElements.controls[i].options = false;
 							} else if (item.options_type === 'manual_data') {
 								showElements.controls[i].manual_options = true;
 								showElements.controls[i].dynamic_data_endpoint = false;
+								showElements.controls[i].options = false;
 							} else {
 								showElements.controls[i].manual_options = false;
 								showElements.controls[i].dynamic_data_endpoint = false;
+								showElements.controls[i].options = false;
 							}
+						} else if (['radioGroup', 'chips'].includes(item.type)) {
+							showElements.controls[i].dynamic_data_endpoint = false;
+							showElements.controls[i].manual_options = false;
+							showElements.controls[i].options_type = false;
+							showElements.controls[i].options = true;
 						} else {
 							showElements.controls[i].dynamic_data_endpoint = false;
 							showElements.controls[i].manual_options = false;
 							showElements.controls[i].options_type = false;
+							showElements.controls[i].options = false;
 						}
 					});
 				}
@@ -97,13 +119,10 @@ function FormComponent({
 
 	const onDynamicFormSubmit = (val) => {
 		onSubmitDetails(val);
-		console.log('rrrr', getValues());
 	};
 
-	console.log('sdsok');
-
 	const onSubmit = async (value) => {
-		const { controls: defaultControls, buttonText, heading } = value || {};
+		const { controls: defaultControls, heading } = value || {};
 
 		const { parentId, id } = selectedRow || {};
 
@@ -112,8 +131,9 @@ function FormComponent({
 		const data = components;
 
 		const newControls = (defaultControls || []).map((item) => {
-			const { type, options_type, manual_options, is_mandetory } = item || {};
-			const isOptionsTrue = ['asyncSelect', 'select'].includes(type);
+			const { type, options_type, manual_options, is_mandetory, options: groupOptions } = item || {};
+			const isOptionsTrue = ['asyncSelect', 'select', 'radioGroup', 'chips'].includes(type);
+
 			let options = [];
 
 			if (options_type === 'manual_data') {
@@ -122,9 +142,13 @@ function FormComponent({
 				} catch (err) {
 					console.log(err);
 				}
+			} else if (['radioGroup', 'chips'].includes(type)) {
+				try {
+					options = JSON.parse(groupOptions)?.options;
+				} catch (err) {
+					console.log(err);
+				}
 			}
-
-			console.log('sjkdksoptions');
 
 			return ({
 				...item,
@@ -192,27 +216,48 @@ function FormComponent({
 		setComponents((prev) => ({ ...prev, layouts: data.layouts }));
 	};
 
+	const handleEditForm = (values) => {
+		const { api_url, buttonText, heading, controls: controlsPrefill } = values || {};
+
+		setShow(true);
+		setValue('api_url', api_url);
+		setValue('buttonText', buttonText);
+		setValue('heading', heading);
+		(controlsPrefill || []).map((itemList, idx) => (prefillControls || []).map((item) => (
+			setValue(`controls[${idx}][${item}]`, itemList[item])
+		)));
+	};
+
 	const onClose = () => {
 		setShow(false);
 	};
 
-	if (!isEmpty(dynamicControls)) {
+	const handleRenderComponents = () => {
+		if (!isEmpty(dynamicControls)) {
+			return (
+				<DynamicFormComponent
+					errors={dynamicControlErrors || {}}
+					formData={formData}
+					control={dynamicControl}
+					dynamicHandleSubmit={dynamicHandleSubmit}
+					onDynamicFormSubmit={onDynamicFormSubmit}
+					handleEditForm={handleEditForm}
+
+				/>
+			);
+		}
+
 		return (
-			<DynamicFormComponent
-				errors={dynamicControlErrors || {}}
-				formData={formData}
-				control={dynamicControl}
-				dynamicHandleSubmit={dynamicHandleSubmit}
-				onDynamicFormSubmit={onDynamicFormSubmit}
-			/>
+			<div>
+				<IcMPlusInCircle height="22px" width="22px" cursor="pointer" onClick={() => setShow(true)} />
+				<div>Click here to start Customizing your form</div>
+			</div>
 		);
-	}
+	};
 
 	return (
 		<div>
-			<IcMPlusInCircle height="22px" width="22px" cursor="pointer" onClick={() => setShow(true)} />
-			<div>Click here to start Customizing your form</div>
-
+			{handleRenderComponents()}
 			<Modal className={styles.modal_styles} size="xl" show={show} onClose={onClose} placement="center">
 				<Modal.Header title="Customize Form" />
 				<Modal.Body>

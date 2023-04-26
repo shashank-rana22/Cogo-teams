@@ -1,17 +1,22 @@
 import { Button } from '@cogoport/components';
+import { IcMFacebook } from '@cogoport/icons-react';
 
 import FormLayout from '../../FormLayout';
 
 import styles from './styles.module.css';
 
 function DynamicFormComponent({
-	formData, control, errors,	dynamicHandleSubmit,
+	formData,
+	control,
+	errors,
+	dynamicHandleSubmit,
 	onDynamicFormSubmit,
+	handleEditForm = () => {},
 }) {
 	const { controls, buttonText } = formData || {};
 
 	return (
-		<div>
+		<div className={styles.block_wrapper}>
 			<FormLayout
 				controls={controls}
 				control={control}
@@ -22,6 +27,14 @@ function DynamicFormComponent({
 				<Button onClick={dynamicHandleSubmit(onDynamicFormSubmit)}>
 					{buttonText || 'Submit'}
 				</Button>
+			</div>
+			<div className={styles.show_wrapper}>
+				<IcMFacebook
+					height="24px"
+					width="24px"
+					cursor="pointer"
+					onClick={() => handleEditForm(formData)}
+				/>
 			</div>
 		</div>
 	);

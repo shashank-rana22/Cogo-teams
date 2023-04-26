@@ -1,29 +1,28 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
-import React, { useImperativeHandle, forwardRef } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import React from 'react';
 
 import Child from './child';
 import styles from './styles.module.css';
 
-function ChildFormat(
-	{
-		name,
-		control,
-		register,
-		controls,
-		error,
-		showElements,
-		buttonText,
-		label,
-		showButtons = true,
-		showLabelOnce = false,
-		disabled = false,
-		customLabels = [],
-		actionOnAdd,
-		...rest
-	},
-	ref,
-) {
+function ChildFormat({
+	name,
+	control,
+	controls,
+	error,
+	register,
+	label,
+	showElements,
+	buttonText = 'add more',
+	showButtons = true,
+	showLabelOnce = false,
+	disabled = false,
+	actionOnAdd = {},
+	customLabels,
+	showZerothIndexControl = true,
+	...rest
+}) {
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name,
@@ -47,18 +46,19 @@ function ChildFormat(
 		append(childEmptyValues);
 	};
 
-	useImperativeHandle(ref, () => ({ handleAppendChild, remove }));
+	if (isEmpty(fields) && showZerothIndexControl) {
+		fields.push(childEmptyValues);
+	}
 
 	return (
 		<div className={styles.container}>
 			{label ? (
 				<div className={styles.label}>{label}</div>
 			) : null}
-
 			{fields.map((field, index) => (
 				<Child
 					{...rest}
-					key={field.id}
+					key={`${field.id}_${name}`}
 					field={field}
 					index={index}
 					register={register}
@@ -89,4 +89,4 @@ function ChildFormat(
 	);
 }
 
-export default forwardRef(ChildFormat);
+export default ChildFormat;

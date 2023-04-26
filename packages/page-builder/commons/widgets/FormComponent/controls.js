@@ -16,6 +16,7 @@ const controls = [
 		style       : {
 			flexBasis: '25%',
 		},
+		rules: { required: true },
 	},
 	{
 		name        : 'buttonText',
@@ -27,11 +28,11 @@ const controls = [
 		},
 	},
 	{
-
-		name  : 'controls',
-		label : 'Add Controls',
-		type  : 'fieldArray',
-		value : [
+		name               : 'controls',
+		label              : 'Add Controls',
+		type               : 'fieldArray',
+		noDeleteButtonTill : 1,
+		value              : [
 			{
 				name        : '',
 				type        : '',
@@ -49,6 +50,7 @@ const controls = [
 				style       : {
 					flexBasis: '25%',
 				},
+				rules: { required: true },
 			},
 			{
 				name        : 'type',
@@ -104,6 +106,7 @@ const controls = [
 						value : 'editor',
 					},
 				],
+				rules: { required: true },
 			},
 			{
 				name  : 'placeholder',
@@ -158,6 +161,18 @@ const controls = [
 						value : 'manual_data',
 					},
 				],
+				rules: { required: true },
+			},
+			{
+				name  : 'options',
+				type  : 'editor',
+				label : 'Enter Options',
+				style : {
+					flexBasis: '50%',
+				},
+				height : '150px',
+				mode   : 'json',
+				rules  : { required: true },
 			},
 			{
 				name  : 'is_mandetory',
@@ -186,6 +201,7 @@ const controls = [
 				},
 				height : '150px',
 				mode   : 'json',
+				rules  : { required: true },
 			},
 			{
 				name  : 'dynamic_data_endpoint',
@@ -194,6 +210,7 @@ const controls = [
 				style : {
 					flexBasis: '25%',
 				},
+				rules: { required: true },
 			},
 		],
 	}];

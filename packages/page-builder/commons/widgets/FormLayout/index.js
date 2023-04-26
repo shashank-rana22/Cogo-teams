@@ -58,10 +58,15 @@ function FormLayout({ controls, control, errors, showElements = {} }) {
 									control={control}
 									id={`${name}`}
 								/>
-
-								<div className={styles.error_message}>
-									{errors?.[name]?.message || errors?.[name]?.type}
-								</div>
+								{(errors?.[name]?.message || errors?.[name]?.type) && (
+									<div className={styles.error_message}>
+										{label}
+										{' '}
+										is
+										{' '}
+										{errors?.[name]?.message || errors?.[name]?.type}
+									</div>
+								)}
 							</div>
 						</div>
 					</div>
