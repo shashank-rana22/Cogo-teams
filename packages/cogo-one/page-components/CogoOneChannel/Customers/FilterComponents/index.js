@@ -96,9 +96,7 @@ function FilterComponents({
 				<div className={styles.title}>
 					Filters
 					{checkFiltersCount ? ` (${checkFiltersCount})` : ''}
-
 				</div>
-
 				<div className={styles.styled_icon}>
 					{checkFiltersCount
 						? (
@@ -112,12 +110,13 @@ function FilterComponents({
 						) : null}
 				</div>
 			</div>
-			{filterControls.map((field) => (
-				<div className={styles.filter_container} key={field.name}>
-					{renderComp(field)}
-				</div>
-			))}
-
+			<div className={styles.filters_container}>
+				{filterControls.map((field) => (
+					<div className={styles.filter_container} key={field.name}>
+						{renderComp(field)}
+					</div>
+				))}
+			</div>
 			<div className={styles.actions}>
 				<Button size="md" themeType="tertiary" onClick={() => setFilterVisible(false)}>Cancel</Button>
 				<Button size="md" themeType="accent" type="submit">Apply</Button>

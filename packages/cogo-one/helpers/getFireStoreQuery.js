@@ -80,6 +80,11 @@ function getFireStoreQuery({
 				...queryFilters,
 				where('is_likely_to_book_shipment', '==', true),
 			];
+		} else if (item === 'mobile_no') {
+			queryFilters = [
+				...queryFilters,
+				where('mobile_no', '==', appliedFilters?.mobile_no),
+			];
 		}
 	});
 
