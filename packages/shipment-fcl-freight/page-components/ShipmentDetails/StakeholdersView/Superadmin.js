@@ -50,15 +50,6 @@ function Superadmin({ get, activeStakeholder = '' }) {
 		router.prefetch(router.asPath);
 	}, [router]);
 
-	console.log(
-		'getShipmentStatusCode',
-		getShipmentStatusCode,
-		'isGettingShipment',
-		isGettingShipment,
-		'data',
-		shipment_data,
-	);
-
 	if (isGettingShipment || getShipmentStatusCode === undefined) {
 		return (
 			<div className={styles.loader}>
@@ -101,7 +92,6 @@ function Superadmin({ get, activeStakeholder = '' }) {
 	return (
 		<ShipmentDetailContext.Provider value={contextValues}>
 			<div>
-				Testing...
 				<div className={styles.top_header}>
 					<ShipmentInfo />
 					<ShipmentChat />
