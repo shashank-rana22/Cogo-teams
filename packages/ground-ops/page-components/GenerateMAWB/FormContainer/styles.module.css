@@ -119,11 +119,12 @@
 }
 
 .calcuate_button {
+	display: flex;
 	justify-content: flex-end;
-    display: flex;
-    margin-right: 20%;
-    :global(.ui_button_container) {
+	margin-right: 20%;
+
+	:global(.ui_button_container) {
+		position: relative;
 		bottom: 42px;
-    	position: relative;
 	}
 }
