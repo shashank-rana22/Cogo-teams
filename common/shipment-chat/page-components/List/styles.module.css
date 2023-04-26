@@ -12,7 +12,7 @@
 	background: #fff;
 
 	.colored {
-		background: #CFEAED;
+		background: #cfeaed;
 	}
 }
 
@@ -52,14 +52,14 @@
 	display: flex;
 	align-items: center;
 	font-weight: 600;
-	color: #333333;
+	color: #333;
 }
 
 .updated_at {
 	font-size: 10px;
 	font-weight: 500;
 	line-height: 16px;
-	color: #4F4F4F;
+	color: #4f4f4f;
 }
 
 .circle {
