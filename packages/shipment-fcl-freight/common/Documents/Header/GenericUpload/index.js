@@ -3,7 +3,6 @@ import { useForm } from '@cogoport/forms';
 import { useState } from 'react';
 
 import useCreateShipmentDocument from '../../../../hooks/useCreateShipmentDocument';
-import useListShipmentOrganizations from '../../../../hooks/useListShipmentOrganizations';
 import DocumentForm from '../DocumentForm';
 
 import getCreateDocumentParams from './getCreateDocumentParams';
@@ -21,11 +20,6 @@ function GenericUpload({
 
 	const { control, watch, formState : { errors }, handleSubmit } = useForm();
 	const formValues = watch();
-
-	const {
-		orgList,
-		loading,
-	} = useListShipmentOrganizations({ shipment_data });
 
 	const afterCreateRefetch = () => {
 		setShowModal(false);
@@ -81,10 +75,10 @@ function GenericUpload({
 							isClearable
 						/>
 					) : null }
-					{!loading && (!['booking_desk', 'document_desk'].includes(activeStakeholder) || selectSource) ? (
+					{!['booking_desk', 'document_desk'].includes(activeStakeholder) || selectSource ? (
 						<DocumentForm
 							shipment_data={shipment_data}
-							orgList={orgList}
+							orgList={data}
 							control={control}
 							activeStakeholder={activeStakeholder}
 							uploaded_by_org_id={selectSource}
@@ -107,7 +101,7 @@ function GenericUpload({
 					</Button>
 					<Button
 						onClick={handleSubmit(onSubmit)}
-						disabled={loading || docLoading}
+						disabled={docLoading}
 					>
 						Upload
 					</Button>

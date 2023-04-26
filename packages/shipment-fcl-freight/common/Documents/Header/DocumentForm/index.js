@@ -18,7 +18,7 @@ function DocumentForm({
 		case 'admin':
 			params = {
 				shipment_id       : shipment_data?.id,
-				organization_ids  : orgList?.list?.map((org) => org.id) || [],
+				organization_ids  : orgList?.map((org) => org.id) || [],
 				org_account_types : ['service_provider', 'importer_exporter'],
 				action_name       : 'create',
 			};
