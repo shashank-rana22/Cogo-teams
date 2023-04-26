@@ -1,6 +1,7 @@
 /* eslint-disable import/no-cycle */
 import { Tooltip } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import Carousel from 'react-slick';
 
 import 'slick-carousel/slick/slick.css';
@@ -60,10 +61,55 @@ function CarouselComponent({
 		<div className={styles.container}>
 			<Carousel {...CAROUSEL_SETTINGS}>
 				{(children || []).map((childComponent, idx) => {
-					const { id, style, icon, type, parentId } = childComponent || {};
+					const { id, style, icon, type, parentId, children: childChildren } = childComponent || {};
 
 					const isChildSelected = childId === id && componentId === selectedRowId && type;
 					const border = isChildSelected ? '1px solid red' : style.border;
+
+					if (!isEmpty(childChildren)) {
+						return 	(
+							<div
+								className={styles.content_container}
+								style={{ ...style, display: 'block' }}
+							>
+								{ (childChildren || []).map((childrenComponent, childrenIndex) => {
+									const {
+										id: childrenId,
+										style: childrenStyles,
+										type: childrenType,
+									} = childrenComponent || {};
+
+									// const isChildSelected = childId === id && componentId === selectedRowId && type;
+									// const border = isChildSelected ? '1px solid red' : allStyles.border;
+
+									return (
+
+										<div
+											role="presentation"
+											className={styles.content_container}
+											style={{ ...childrenStyles }}
+											onClick={() => setChildId(id)}
+										>
+											<RenderComponents
+												componentType={childrenType}
+												widget={childrenComponent}
+												components={components}
+												setComponents={setComponents}
+												elementId={childrenId}
+												childId={childId}
+												selectedRow={selectedRow}
+												setSelectedItem={setSelectedItem}
+												index={childrenIndex}
+												setChildId={setChildId}
+												setParentComponentId={setParentComponentId}
+												setShowContentModal={setShowContentModal}
+											/>
+										</div>
+									);
+								})}
+							</div>
+						);
+					}
 
 					return (
 						<div>
@@ -93,6 +139,9 @@ function CarouselComponent({
 										selectedRow={selectedRow}
 										setSelectedItem={setSelectedItem}
 										index={idx}
+										setChildId={setChildId}
+										setParentComponentId={setParentComponentId}
+										setShowContentModal={setShowContentModal}
 									/>
 								) }
 								<div role="presentation" className={styles.show_wrapper}>

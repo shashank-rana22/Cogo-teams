@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { v1 as uuid } from 'uuid';
 
-import CONTENT_MAPPING from '../../../configurations/default-content-mapping';
+import getContentMapping from '../../../configurations/default-content-mapping';
 import useSubmitFormDetails from '../../../hooks/useSubmitFormDetails';
 import FormLayout from '../FormLayout';
 
@@ -106,6 +106,8 @@ function FormComponent({
 		const { controls: defaultControls, buttonText, heading } = value || {};
 
 		const { parentId, id } = selectedRow || {};
+
+		const CONTENT_MAPPING = getContentMapping();
 
 		const data = components;
 
