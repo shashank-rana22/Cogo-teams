@@ -52,18 +52,17 @@
 
 .tooltip_content {
 	align-items: center;
-	margin: 6px 0;
 	max-height: 300px;
+	margin: 6px 0;
 	overflow: scroll;
 }
 
 .styled_button {
-	border-radius: 8px;
-	font-size: 10px;
-	color: #000000;
-	background-color: #dce1ff;
 	padding: 2px 8px;
 	margin-top: 8px;
+	font-size: 10px;
+	color: #000;
 	cursor: pointer;
+	background-color: #dce1ff;
+	border-radius: 8px;
 }
-

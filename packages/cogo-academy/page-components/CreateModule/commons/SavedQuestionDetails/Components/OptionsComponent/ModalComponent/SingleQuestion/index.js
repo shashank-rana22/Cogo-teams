@@ -1,10 +1,7 @@
 import { Pill } from '@cogoport/components';
 
-import getAlphabets from '../../../../../../utils/getAlphabets';
-
+import OptionsComponent from './OptionsComponent';
 import styles from './styles.module.css';
-
-const alphabets = getAlphabets('A', 'Z');
 
 const TYPE_MAPPING = {
 	single_correct : 'Single answer Choice',
@@ -30,17 +27,10 @@ function SingleQuestion({ data, primary_question_type, case_index, length }) {
 				<Pill size="md" color="#F3FAFA">{DIFFICULTY_MAPPING[difficulty_level]}</Pill>
 			</div>
 
-			{test_question_answers.map((answer, index) => (
-				<div
-					key={answer?.id}
-					className={`${styles.answer_text} ${answer.is_correct ? styles.correct : null}`}
-				>
-					<span>
-						{`${alphabets[index]}) `}
-					</span>
-					<span>{answer?.answer_text}</span>
-				</div>
-			))}
+			<OptionsComponent
+				primary_question_type={primary_question_type}
+				test_question_answers={test_question_answers}
+			/>
 
 			{explanation?.[0] && explanation?.[0] !== '<p><br></p>' ? (
 				<div className={styles.explanation}>

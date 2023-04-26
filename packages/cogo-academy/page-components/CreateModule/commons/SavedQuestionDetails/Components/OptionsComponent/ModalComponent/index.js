@@ -49,7 +49,7 @@ function ModalComponent({
 				placement="center"
 				showCloseIcon={false}
 				className={styles.modal_container}
-				size={question_type === 'case_study' ? 'xl' : 'md'}
+				size={['case_study', 'subjective'].includes(question_type) ? 'xl' : 'md'}
 			>
 				<Modal.Body>
 					<div className={styles.container}>

@@ -23,6 +23,10 @@ function AnswerKey({ item, caseToShow }) {
 		return <CaseAnswerKey item={item} caseToShow={caseToShow} />;
 	}
 
+	if (item?.question_type === 'subjective') {
+		return '--';
+	}
+
 	return (
 		<Tooltip
 			content={(
