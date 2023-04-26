@@ -2,7 +2,12 @@
 	display: flex;
 	justify-content: center;
 	padding: 16px;
-	overflow: "auto";
 	overflow: auto;
 	background-color: #e0e0e0;
+}
+
+.custom_modal {
+	:global(.ui_modal_body_container) {
+			max-height: 1000px;
+	}
 }

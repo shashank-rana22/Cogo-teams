@@ -3,8 +3,8 @@
 	flex-shrink: 0;
 	width: 794px;
 	max-width: 794px;
-	min-height: 1350px;
-	max-height: 1850px;
+	/* min-height: 1350px; */
+	/* max-height: 1850px; */
 	padding: 48px;
 	margin-bottom: 16px;
 	background-color: #fff;
@@ -17,5 +17,5 @@
 }
 
 .text {
-	
+
 }

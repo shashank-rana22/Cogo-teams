@@ -1,9 +1,10 @@
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
+import { TradeDocTemplate } from '@cogoport/ocean-modules';
 import { forwardRef } from 'react';
 
 import useUploadCargoArrivalForm from '../../../../../../hooks/useUploadCargoArrivalForm';
 
-// import styles from './styles.module.css';
+import styles from './styles.module.css';
 
 function UploadCargoArrivalForm({
 	summary,
@@ -17,9 +18,9 @@ function UploadCargoArrivalForm({
 }) {
 	const {
 		handleSubmitDocument,
-		// handleSave,
-		// ref,
-		// templateInitialValues,
+		handleSave,
+		ref,
+		templateInitialValues,
 		loading,
 	} = useUploadCargoArrivalForm({
 		summary,
@@ -104,6 +105,31 @@ function UploadCargoArrivalForm({
 						/>
 					</div>
 				</FullscreenModal> */}
+
+				<Modal
+					show={show}
+					size="fullscreen"
+					placement="fullscreen"
+					className={styles.custom_modal}
+					onClose={() => setShow(false)}
+				>
+					<Modal.Header />
+					<Modal.Body>
+						<div className={styles.trade_document}>
+							<TradeDocTemplate
+								ref={(r) => {
+									ref.current.submit = r;
+								}}
+								mode="write"
+								documentType="container_arrival_notice"
+								initialValues={savedData || templateInitialValues}
+								summary={summary}
+							/>
+						</div>
+					</Modal.Body>
+
+				</Modal>
+
 			</div>
 		</>
 	);

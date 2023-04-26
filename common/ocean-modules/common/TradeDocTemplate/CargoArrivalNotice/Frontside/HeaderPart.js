@@ -1,7 +1,7 @@
 export function HeaderPart() {
 	return (
 		<>
-			<div className="company-details">
+			<div>
 				COGO FREIGHT PRIVATE LIMITED (COGOPORT)
 			</div>
 			<div style={{ textAlign: 'center', marginTop: '2px' }}>
