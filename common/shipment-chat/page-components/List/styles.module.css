@@ -51,16 +51,15 @@
 .serial_id {
 	display: flex;
 	align-items: center;
-	font-size: 14px;
 	font-weight: 600;
-	color: #403f3f;
+	color: #333333;
 }
 
 .updated_at {
 	font-size: 10px;
 	font-weight: 500;
 	line-height: 16px;
-	color: #918c8c;
+	color: #4F4F4F;
 }
 
 .circle {
