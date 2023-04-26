@@ -8,6 +8,7 @@ function QuestionListComponent({
 	setQuestion,
 	loading,
 	search,
+	from,
 	faqNotificationApiLoading,
 	paginationData,
 	page,
@@ -26,6 +27,7 @@ function QuestionListComponent({
 	if (search) {
 		return (
 			<QuestionList
+				from={from}
 				search={search}
 				question={question}
 				setQuestion={setQuestion}
