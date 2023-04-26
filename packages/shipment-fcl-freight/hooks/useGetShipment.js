@@ -16,15 +16,16 @@ function useGetShipment({ additional_methods }) {
 	const getShipment = useCallback(() => {
 		(async () => {
 			try {
-				await trigger({
+				const res = await trigger({
 					params: {
 						id: shipment_id,
 						additional_methods,
 					},
 				});
+				setGetShipmentStatusCode(res?.status);
 			} catch (err) {
 				toastApiError(err);
-				setGetShipmentStatusCode(err?.response?.data?.status_code);
+				setGetShipmentStatusCode(err?.response?.data?.status_code || err?.response?.status);
 			}
 		})();
 	}, [trigger, shipment_id, additional_methods]);

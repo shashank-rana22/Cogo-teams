@@ -82,16 +82,14 @@ function Header({
 			</div>
 
 			<div className={styles.sub_heading}>
-				<div className={styles.generic_upload}>
+				<div
+					className={styles.generic_upload}
+					role="button"
+					tabIndex={0}
+					onClick={() => handleGenericUpload()}
+				>
 					<IcMUpload />
-					<div
-						className={styles.upload}
-						role="button"
-						tabIndex={0}
-						onClick={() => handleGenericUpload()}
-					>
-						Upload
-					</div>
+					<div className={styles.upload}>Upload</div>
 				</div>
 
 				<Toggle

@@ -45,12 +45,14 @@ const useGetStep2Data = ({ primary_service, task, step0_data, fileUrl, formatted
 		defaultValues: {
 			movement_details: [
 				{
-					from_port_id       : primary_service?.origin_port?.id,
-					to_port_id         : primary_service?.destination_port?.id,
-					schedule_arrival   : new Date(primary_service?.schedule_arrival),
-					schedule_departure : new Date(primary_service?.schedule_departure),
-					vessel             : '',
-					voyage             : '',
+					from_port_id     : primary_service?.origin_port?.id,
+					to_port_id       : primary_service?.destination_port?.id,
+					schedule_arrival : primary_service?.schedule_arrival
+						? new Date(primary_service?.schedule_arrival) : '',
+					schedule_departure: primary_service?.schedule_departure
+						? new Date(primary_service?.schedule_departure) : '',
+					vessel : '',
+					voyage : '',
 
 				},
 			],

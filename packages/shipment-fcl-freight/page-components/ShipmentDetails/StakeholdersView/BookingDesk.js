@@ -49,7 +49,7 @@ function BookingDesk({ get, activeStakeholder }) {
 		router.prefetch(router.asPath);
 	}, [router]);
 
-	if (isGettingShipment) {
+	if (isGettingShipment || getShipmentStatusCode === undefined) {
 		return (
 			<div className={styles.loader}>
 				Loading Shipment Data....
@@ -58,7 +58,7 @@ function BookingDesk({ get, activeStakeholder }) {
 		);
 	}
 
-	if (!shipment_data && getShipmentStatusCode !== 403) {
+	if (!shipment_data && getShipmentStatusCode !== 403 && getShipmentStatusCode !== undefined) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.section}>
@@ -77,7 +77,7 @@ function BookingDesk({ get, activeStakeholder }) {
 		);
 	}
 
-	if (getShipmentStatusCode === 403) {
+	if (getShipmentStatusCode === 403 && getShipmentStatusCode !== undefined) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.page}>

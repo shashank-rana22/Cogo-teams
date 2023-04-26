@@ -50,7 +50,7 @@ function Superadmin({ get, activeStakeholder = '' }) {
 		router.prefetch(router.asPath);
 	}, [router]);
 
-	if (isGettingShipment) {
+	if (isGettingShipment || getShipmentStatusCode === undefined) {
 		return (
 			<div className={styles.loader}>
 				Loading Shipment Data....
@@ -59,7 +59,7 @@ function Superadmin({ get, activeStakeholder = '' }) {
 		);
 	}
 
-	if (!shipment_data && getShipmentStatusCode !== 403 && !isGettingShipment) {
+	if (!shipment_data && getShipmentStatusCode !== 403 && getShipmentStatusCode !== undefined) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.section}>
@@ -78,7 +78,7 @@ function Superadmin({ get, activeStakeholder = '' }) {
 		);
 	}
 
-	if (getShipmentStatusCode === 403 && !isGettingShipment) {
+	if (getShipmentStatusCode === 403 && getShipmentStatusCode !== undefined) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.page}>

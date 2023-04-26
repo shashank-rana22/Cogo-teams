@@ -25,7 +25,7 @@ export default function getListBookingDeskShipmentsPayload({ filters, activeTab,
 	const { isCriticalOn, page, q, shipment_type, ...restFilters } = filters;
 
 	const tabSpecificPayload = shipmentSpecificPayload[shipment_type][activeTab];
-
+	const otherFilters = tabSpecificPayload.other || {};
 	const combinedTradeTypeSpecific = { task_attributes: [] };
 
 	let payloadKey = ['common'];
@@ -54,6 +54,7 @@ export default function getListBookingDeskShipmentsPayload({ filters, activeTab,
 		filters: {
 			state: shipmentStates[activeTab] || shipmentStates.in_progress,
 			...(combinedTradeTypeSpecific || {}),
+			...(otherFilters || {}),
 			...(selected_agent_id && { selected_agent_id }),
 			...(isCriticalVisible && isCriticalOn
 				&& { schedule_departure_less_than: threeDaysLater }),

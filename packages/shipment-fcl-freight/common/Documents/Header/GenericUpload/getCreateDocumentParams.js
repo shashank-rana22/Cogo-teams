@@ -1,4 +1,4 @@
-const getCreateDocumentParams = ({ shipmentData, formValues, activeStakeholder, filters, orgId }) => {
+const getCreateDocumentParams = ({ shipmentData, formValues, activeStakeholder, selectSource, orgId }) => {
 	let params = {};
 
 	const org_id = orgId || shipmentData?.importer_exporter_id;
@@ -32,7 +32,7 @@ const getCreateDocumentParams = ({ shipmentData, formValues, activeStakeholder, 
 				shipment_id         : shipmentData?.id,
 				document_type       : formValues?.document_type,
 				uploaded_by_user_id : shipmentData?.agent_id || shipmentData?.booking_agent_id || undefined,
-				uploaded_by_org_id  : filters?.uploaded_by_org_id || undefined,
+				uploaded_by_org_id  : selectSource || undefined,
 				service_type        : 'fcl_freight_service',
 			};
 			break;

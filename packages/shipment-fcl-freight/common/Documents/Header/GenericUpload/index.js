@@ -3,7 +3,6 @@ import { useForm } from '@cogoport/forms';
 import { useState } from 'react';
 
 import useCreateShipmentDocument from '../../../../hooks/useCreateShipmentDocument';
-import useListShipmentOrganizations from '../../../../hooks/useListShipmentOrganizations';
 import DocumentForm from '../DocumentForm';
 
 import getCreateDocumentParams from './getCreateDocumentParams';
@@ -17,16 +16,10 @@ function GenericUpload({
 	refetch = () => {},
 }) {
 	const [orgId, setOrgId] = useState();
+	const [selectSource, setSelectSource] = useState('');
 
-	const { control, watch } = useForm();
+	const { control, watch, formState : { errors }, handleSubmit } = useForm();
 	const formValues = watch();
-
-	const {
-		orgList,
-		loading,
-		filters,
-		setFilters,
-	} = useListShipmentOrganizations({ shipment_data });
 
 	const afterCreateRefetch = () => {
 		setShowModal(false);
@@ -48,7 +41,7 @@ function GenericUpload({
 			shipmentData: shipment_data,
 			formValues,
 			activeStakeholder,
-			filters,
+			selectSource,
 			orgId,
 		});
 
@@ -76,21 +69,22 @@ function GenericUpload({
 							size="sm"
 							placeholder="Select Source"
 							style={{ padding: '6px 0px', width: '50%' }}
-							value={filters?.uploaded_by_org_id}
+							value={selectSource}
 							options={SourceOptions || []}
-							onChange={(e) => setFilters({ ...filters, uploaded_by_org_id: e })}
+							onChange={(e) => setSelectSource(e)}
 							isClearable
 						/>
 					) : null }
-					{!loading ? (
+					{!['booking_desk', 'document_desk'].includes(activeStakeholder) || selectSource ? (
 						<DocumentForm
 							shipment_data={shipment_data}
-							orgList={orgList}
+							orgList={data}
 							control={control}
 							activeStakeholder={activeStakeholder}
-							uploaded_by_org_id={filters?.uploaded_by_org_id}
+							uploaded_by_org_id={selectSource}
 							formValues={formValues}
 							orgId={orgId}
+							errors={errors}
 							setOrgId={setOrgId}
 						/>
 					) : null}
@@ -106,8 +100,8 @@ function GenericUpload({
 						cancel
 					</Button>
 					<Button
-						onClick={() => onSubmit()}
-						disabled={loading || docLoading}
+						onClick={handleSubmit(onSubmit)}
+						disabled={docLoading}
 					>
 						Upload
 					</Button>
