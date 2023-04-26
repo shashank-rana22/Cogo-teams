@@ -24,6 +24,8 @@
 .text {
 	width: fit-content;
 	margin-right: 6px;
+	font-weight: 600;
+	font-size: 12px;
 }
 
 .details_text {

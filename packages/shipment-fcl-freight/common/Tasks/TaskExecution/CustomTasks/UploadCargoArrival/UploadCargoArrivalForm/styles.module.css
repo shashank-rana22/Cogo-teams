@@ -9,7 +9,7 @@
 .custom_modal {
 	:global {
 		.ui_modal_body_container {
-			max-height: 1000px;
+			max-height: 780px;
 		}
 
 		.ui_modal_close_button.ui_buttonicon_container {
