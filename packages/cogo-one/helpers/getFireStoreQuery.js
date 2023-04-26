@@ -66,10 +66,10 @@ function getFireStoreQuery({
 			];
 		} else if (
 			(
-				(item === 'observer' && appliedFilters[item] === 'chat_tags')
+				(item === 'observer' && !showBotMessages && appliedFilters[item] === 'chat_tags')
 				|| 	(isomniChannelAdmin && item === 'chat_tags')
 			)
-			&& 	!showBotMessages
+
 		) {
 			queryFilters = [
 				...queryFilters,
