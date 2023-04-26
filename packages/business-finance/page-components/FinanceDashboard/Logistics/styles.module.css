@@ -236,3 +236,26 @@
 	background: #88cad1;
 	border-radius: 8px;
 }
+
+.current_overdue_style {
+	display: flex;
+	justify-content: space-between;
+	width: 76%;
+}
+
+.current_amount_style {
+	margin-left: 60px;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.icon_style {
+	display: flex;
+	align-items: center;
+	padding-right: 12%;
+}
+
+.legend_style {
+	display: flex;
+	justify-content: flex-start;
+}
