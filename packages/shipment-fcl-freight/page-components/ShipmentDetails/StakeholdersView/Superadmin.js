@@ -59,7 +59,7 @@ function Superadmin({ get, activeStakeholder = '' }) {
 		shipment_data,
 	);
 
-	if (isGettingShipment) {
+	if (isGettingShipment && getShipmentStatusCode === undefined) {
 		return (
 			<div className={styles.loader}>
 				Loading Shipment Data....
