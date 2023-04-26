@@ -23,6 +23,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_organization_swift_code_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'check_organization_access_request_eligibility',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -916,6 +921,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_organization_swift_code_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'check_organization_access_request_eligibility',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -1730,6 +1740,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_organization_swift_code_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'onboard_channel_partner_user',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -2415,6 +2430,11 @@ const partner = {
 	onboarding_crm: [
 		{
 			api          : 'get_bank_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'get_organization_swift_code_details',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
