@@ -8,6 +8,7 @@ function DocumentForm({
 	uploaded_by_org_id,
 	formValues,
 	control,
+	errors,
 	orgId,
 	setOrgId = () => {},
 }) {
@@ -50,18 +51,17 @@ function DocumentForm({
 
 	return (
 		<div>
-			{!['booking_desk', 'document_desk'].includes(activeStakeholder) || uploaded_by_org_id ? (
-				<UploadDocument
-					document_data={data}
-					loading={loading}
-					control={control}
-					shipment_data={shipment_data}
-					activeStakeholder={activeStakeholder}
-					formValues={formValues}
-					orgId={orgId}
-					setOrgId={setOrgId}
-				/>
-			) : null}
+			<UploadDocument
+				document_data={data}
+				loading={loading}
+				control={control}
+				shipment_data={shipment_data}
+				activeStakeholder={activeStakeholder}
+				formValues={formValues}
+				orgId={orgId}
+				errors={errors}
+				setOrgId={setOrgId}
+			/>
 		</div>
 
 	);

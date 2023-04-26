@@ -4,12 +4,10 @@ import { useState, useEffect, useCallback } from 'react';
 
 const useListShipmentOrganizations = ({ shipment_data }) => {
 	const [orgList, setOrgList] = useState({});
-	const [filters, setFilters] = useState({ q: '' });
 	const [{ loading }, trigger] = useRequest({
 		url    : '/list_shipment_organizations',
 		method : 'GET',
 		params : {
-			filters,
 			shipment_id: shipment_data?.id,
 		},
 
@@ -34,8 +32,6 @@ const useListShipmentOrganizations = ({ shipment_data }) => {
 	return {
 		loading,
 		orgList,
-		filters,
-		setFilters,
 	};
 };
 export default useListShipmentOrganizations;

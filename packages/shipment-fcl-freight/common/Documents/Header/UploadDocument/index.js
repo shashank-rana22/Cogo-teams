@@ -1,5 +1,5 @@
 import { RadioGroup } from '@cogoport/components';
-import { SelectController, UploadController } from '@cogoport/forms';
+import { handleError, SelectController, UploadController } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
 
 const getConsigneeShipperId = (shipment_data) => {
@@ -23,6 +23,7 @@ function UploadDocument({
 	activeStakeholder,
 	formValues,
 	control,
+	errors,
 	orgId,
 	setOrgId = () => {},
 }) {
@@ -41,15 +42,41 @@ function UploadDocument({
 							style={{ padding: '32px 0px' }}
 							name="document_type"
 							options={documents}
-							rules={{ required: { value: true, message: 'Document is Required' } }}
+							rules={{
+								required:
+								{
+									value   : true,
+									message : 'Document is Required',
+								},
+							}}
 						/>
+						{errors?.document_type ? (
+							<div style={{ fontSize: '12px', color: '#cb6464' }}>
+
+								{handleError({ error: errors?.document_type })}
+
+							</div>
+						) : null}
 					</div>
 					<div>
 						<UploadController
 							control={control}
 							name="upload_document"
-							rules={{ required: 'File is required.' }}
+							rules={{
+								required:
+								{
+									value   : true,
+									message : 'File is required',
+								},
+							}}
 						/>
+						{errors?.upload_document ? (
+							<div style={{ fontSize: '12px', color: '#cb6464' }}>
+
+								{handleError({ error: errors?.upload_document })}
+
+							</div>
+						) : null}
 					</div>
 					{['superadmin', 'admin'].includes(activeStakeholder) && shipment_data?.consignee_shipper_id
 					&& formValues.upload_document ? (
@@ -58,9 +85,24 @@ function UploadDocument({
 							<RadioGroup
 								options={getConsigneeShipperId(shipment_data)}
 								control={control}
+								name="shipper_consignee"
 								onChange={(val) => setOrgId(val)}
 								value={orgId}
+								rules={{
+									required:
+									{
+										value   : true,
+										message : 'organization is required',
+									},
+								}}
 							/>
+							{errors?.shipper_consignee ? (
+								<div style={{ fontSize: '12px', color: '#cb6464' }}>
+
+									{handleError({ error: errors?.shipper_consignee })}
+
+								</div>
+							) : null}
 						</div>
 						) : null}
 
