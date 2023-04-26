@@ -1,5 +1,4 @@
-import { RadioGroup } from '@cogoport/components';
-import { handleError, SelectController, UploadController } from '@cogoport/forms';
+import { handleError, RadioGroupController, SelectController, UploadController } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
 
 const getConsigneeShipperId = (shipment_data) => {
@@ -42,6 +41,7 @@ function UploadDocument({
 							style={{ padding: '32px 0px' }}
 							name="document_type"
 							options={documents}
+							isClearable
 							rules={{
 								required:
 								{
@@ -82,10 +82,10 @@ function UploadDocument({
 					&& formValues.upload_document ? (
 						<div style={{ marginTop: '16px' }}>
 							<span style={{ fontWeight: '700' }}>choose organization </span>
-							<RadioGroup
+							<RadioGroupController
 								options={getConsigneeShipperId(shipment_data)}
 								control={control}
-								name="shipper_consignee"
+								name="organizations"
 								onChange={(val) => setOrgId(val)}
 								value={orgId}
 								rules={{
@@ -96,10 +96,10 @@ function UploadDocument({
 									},
 								}}
 							/>
-							{errors?.shipper_consignee ? (
+							{errors?.organizations ? (
 								<div style={{ fontSize: '12px', color: '#cb6464' }}>
 
-									{handleError({ error: errors?.shipper_consignee })}
+									{handleError({ error: errors?.organizations })}
 
 								</div>
 							) : null}

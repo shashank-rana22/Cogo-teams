@@ -20,7 +20,7 @@ function DocumentForm({
 				shipment_id       : shipment_data?.id,
 				organization_ids  : orgList?.map((org) => org.id) || [],
 				org_account_types : ['service_provider', 'importer_exporter'],
-				action_name       : 'create',
+				actions           : ['create'],
 			};
 			break;
 
@@ -29,7 +29,7 @@ function DocumentForm({
 			params = {
 				shipment_id       : shipment_data?.id,
 				org_account_types : ['importer_exporter'],
-				action_name       : 'create',
+				actions           : ['create'],
 			};
 			break;
 
@@ -39,7 +39,7 @@ function DocumentForm({
 				shipment_id       : shipment_data?.id,
 				organization_ids  : [uploaded_by_org_id],
 				org_account_types : ['service_provider'],
-				action_name       : 'create',
+				actions           : ['create'],
 			};
 			break;
 		default:
