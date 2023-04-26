@@ -1,7 +1,7 @@
 import { Input, Select } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo ,useCallback} from 'react';
 
 import styles from './styles.module.css';
 
@@ -11,9 +11,10 @@ function Filter({ hookSetters = () => {}, filters }) {
 	};
 	const [inputValue, setInputValue] = useState('');
 	const { query, debounceQuery } = useDebounceQuery();
+	const debouncedQuery = useCallback(debounceQuery, [debounceQuery]);
 	useEffect(() => {
-		debounceQuery(inputValue);
-	}, [inputValue]);
+	  debouncedQuery(inputValue);
+	}, [inputValue, debouncedQuery]);
 	
 	useMemo(() => {
 		setValue('search_term', query);
