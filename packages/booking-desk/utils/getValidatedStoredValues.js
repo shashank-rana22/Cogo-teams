@@ -3,6 +3,7 @@ import TABS_CONFIG from '../config/TABS_CONFIG.json';
 
 export default function getValidatedStoredValues() {
 	const storedValues = JSON.parse(localStorage.getItem('booking_desk_stored_values'));
+	const bookingDeskVersion = localStorage.getItem('booking_desk_version');
 
 	let { shipment_type, trade_type, page } = storedValues?.filters || {};
 	const { isCriticalOn, q } = storedValues?.filters || {};
@@ -32,5 +33,6 @@ export default function getValidatedStoredValues() {
 		},
 		activeTab,
 		scopeFilters: storedValues?.scopeFilters || {},
+		bookingDeskVersion,
 	};
 }

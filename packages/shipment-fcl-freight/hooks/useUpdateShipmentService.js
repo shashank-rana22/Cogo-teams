@@ -1,11 +1,10 @@
 import { Toast } from '@cogoport/components';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-
-import toastApiError from '../utils/toastApiError';
 
 const useUpdateShipmentService = ({
 	refetch = () => {},
-	successMessage = 'Successfully Created',
+	successMessage = 'Successfully Updated',
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_service',

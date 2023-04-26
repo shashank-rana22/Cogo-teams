@@ -27,13 +27,21 @@ function FormItem({ finalControl = {}, control, errors }) {
 	);
 }
 
-export default function EditSchedule({ show = false, setShow = () => {}, timelineData = [] }) {
+export default function EditSchedule({ setShow = () => {}, timelineData = [] }) {
 	const {
 		loading, updateData, finalControls, formSubmit, errors, control,
 	} = useEditServiceSchedule({ setShow, timelineData });
 
+	const closeModal = () => setShow(false);
 	return (
-		<Modal size="md" show={show} onClose={() => setShow(false)} placement="top" closeOnOuterClick={false}>
+		<Modal
+			size="md"
+			show
+			onClose={closeModal}
+			showCloseIcon={!loading}
+			closeOnOuterClick={false}
+			className={styles.custom_modal}
+		>
 			<Modal.Header title="Edit Timeline" />
 			<Modal.Body>
 				<form className={styles.form_container}>
@@ -46,7 +54,16 @@ export default function EditSchedule({ show = false, setShow = () => {}, timelin
 					))}
 				</form>
 			</Modal.Body>
-			<Modal.Footer><Button disabled={loading} onClick={formSubmit(updateData)}>Save</Button></Modal.Footer>
+			<Modal.Footer>
+				<Button
+					disabled={loading}
+					onClick={closeModal}
+					themeType="secondary"
+				>
+					Cancel
+				</Button>
+				<Button disabled={loading} onClick={formSubmit(updateData)}>Save</Button>
+			</Modal.Footer>
 		</Modal>
 	);
 }

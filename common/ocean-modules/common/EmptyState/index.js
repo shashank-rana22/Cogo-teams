@@ -6,6 +6,7 @@ function EmptyState({
 	height = 125,
 	width = 225,
 	emptyText = 'Data not found',
+	subEmptyText = '',
 	flexDirection = 'row',
 	textSize = '16px',
 }) {
@@ -19,7 +20,10 @@ function EmptyState({
 				style={{ margin: '10px' }}
 			/>
 
-			<div className={styles.text} style={{ fontSize: textSize }}>{emptyText}</div>
+			<div>
+				<div className={styles.text} style={{ fontSize: textSize }}>{emptyText}</div>
+				{subEmptyText && <p className={styles.text} style={{ fontSize: '16px' }}>{subEmptyText}</p> }
+			</div>
 		</div>
 
 	);

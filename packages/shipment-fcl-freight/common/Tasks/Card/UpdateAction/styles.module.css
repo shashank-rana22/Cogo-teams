@@ -1,0 +1,33 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 14px;
+	color: #393f70;
+}
+
+.stakeholder_info {
+	display: flex;
+	justify-content: center;
+	width: 120px;
+	color: #000;
+	text-align: center;
+}
+
+.task_action {
+	font-size: 10px;
+	line-height: 16px;
+	color: #828282;
+	text-align: center;
+	cursor: pointer;
+
+	&:hover {
+		color: var(--color-primary-error-red-2);
+	}
+}
+
+.action {
+	cursor: pointer;
+}

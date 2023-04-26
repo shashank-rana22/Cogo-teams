@@ -1,0 +1,24 @@
+.task_container {
+	margin-left: 8px;
+
+	.core-ui-select__menu {
+		width: 100% !important;
+		min-width: 100% !important;
+	}
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+
+	:global {
+		.ui_button_container:first-child {
+			margin-right: 8px;
+		}
+	}
+}
+
+.form {
+	max-height: calc(100vh - 39.5vh);
+	overflow-y: auto;
+}

@@ -1310,6 +1310,11 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
+		api          : 'get_buyers',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
 		api          : 'list_documents',
 		access_type  : 'private',
 		service_name : 'bookings',
@@ -1366,6 +1371,11 @@ const apis = [
 	},
 	{
 		api          : 'create_upsell',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'get_possible_documents',
 		access_type  : 'private',
 		service_name : 'bookings',
 	},

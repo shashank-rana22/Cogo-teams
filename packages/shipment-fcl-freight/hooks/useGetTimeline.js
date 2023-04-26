@@ -1,7 +1,6 @@
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useState, useCallback } from 'react';
-
-import toastApiError from '../utils/toastApiError';
 
 function useGetTimeLine({ shipment_data = {} }) {
 	const [data, setData] = useState([]);
