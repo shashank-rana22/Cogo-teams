@@ -2,12 +2,7 @@
 import { IcMPlusInCircle } from '@cogoport/icons-react';
 import { v1 as uuid } from 'uuid';
 
-const getContentMapping = ({ setParentComponentId, setShowContentModal }) => {
-	const handleSubmitClick = ({ index, parentId }) => {
-		setParentComponentId({ childId: index, parentId });
-		setShowContentModal(true);
-	};
-
+const getContentMapping = () => {
 	const parentId = uuid();
 
 	return {
@@ -100,16 +95,14 @@ const getContentMapping = ({ setParentComponentId, setShowContentModal }) => {
 				parentId,
 				isRendered : false,
 				style      : {
-					width          : '100%',
 					border         : '1px dashed #9ab7fe',
-					margin         : '2px',
 					display        : 'flex',
 					justifyContent : 'center',
 					alignItems     : 'center',
 				},
 				icon       : <IcMPlusInCircle style={{ cursor: 'pointer', fill: '#222' }} width={20} height={20} />,
 				attributes : {
-					onClick: () => handleSubmitClick({ index: '0', parentId }),
+					onClick: 'handleSubmitClick',
 				},
 			},
 			{
@@ -118,16 +111,14 @@ const getContentMapping = ({ setParentComponentId, setShowContentModal }) => {
 				parentId,
 				isRendered : false,
 				style      : {
-					width          : '100%',
 					border         : '1px dashed #9ab7fe',
-					margin         : '2px',
 					display        : 'flex',
 					justifyContent : 'center',
 					alignItems     : 'center',
 				},
 				icon       : <IcMPlusInCircle style={{ cursor: 'pointer', fill: '#222' }} width={20} height={20} />,
 				attributes : {
-					onClick: () => handleSubmitClick({ index: '1', parentId }),
+					onClick: 'handleSubmitClick',
 				},
 			},
 			],

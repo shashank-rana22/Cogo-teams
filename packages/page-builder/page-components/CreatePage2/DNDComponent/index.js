@@ -37,7 +37,7 @@ function DNDComponent() {
 		(content, hoveredIndex = component.layouts.length, shouldAddBelow = true, parentDetails = {}, componentType = '') => {
 			const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
 
-			const CONTENT_MAPPING = getContentMapping({ setParentComponentId, setShowContentModal });
+			const CONTENT_MAPPING = getContentMapping();
 
 			if (componentType === 'child') {
 				const { childId, parentId } = parentDetails || {};
