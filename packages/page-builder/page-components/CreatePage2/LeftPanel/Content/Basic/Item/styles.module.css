@@ -9,11 +9,11 @@
 	padding: 12px;
 	text-align: center;
 	background-color: rgb(255 255 255 / 80%);
-	border: 1px solid #CBCFF5;
+	border: 1px solid #FCDC00;
 	border-radius: 4px;
 
 	&:hover {
 		cursor: pointer;
-		border: 1.5px solid #CBCFF5;
+		border: 1.5px solid #FCDC00;
 	}
 }

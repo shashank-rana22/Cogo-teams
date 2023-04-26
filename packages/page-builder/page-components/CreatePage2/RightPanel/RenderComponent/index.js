@@ -1,6 +1,7 @@
 /* eslint-disable import/no-cycle */
 import ButtonComponent from '../../../../commons/widgets/ButtonComponent';
 import CarouselComponent from '../../../../commons/widgets/CarouselComponent';
+import DividerComponent from '../../../../commons/widgets/DividerComponent';
 import FormComponent from '../../../../commons/widgets/FormComponent';
 import HtmlComponent from '../../../../commons/widgets/HtmlComponent';
 import ImageComponent from '../../../../commons/widgets/ImageComponent';
@@ -15,6 +16,7 @@ const componentMapping = {
 	html     : HtmlComponent,
 	form     : FormComponent,
 	carousel : CarouselComponent,
+	divider  : DividerComponent,
 };
 
 function RenderComponents({
@@ -94,6 +96,17 @@ function RenderComponents({
 			setParentComponentId,
 			setShowContentModal,
 		},
+
+		divider: {
+			key: elementId,
+			widget,
+			components,
+			setComponents,
+			childId,
+			selectedRow,
+			elementId,
+
+		},
 	};
 
 	const Component = componentMapping[componentType];
@@ -103,6 +116,7 @@ function RenderComponents({
 			key={elementId}
 			role="presentation"
 			onClick={() => {
+				console.log('widgetssss ::', widget);
 				setSelectedItem({ ...widget, index });
 			}}
 			style={{ width: '100%', height: '100%' }}

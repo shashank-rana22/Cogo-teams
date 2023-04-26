@@ -8,6 +8,7 @@ const VALID_ITEM_TYPES = {
 	html        : 'html',
 	form        : 'form',
 	carousel    : 'carousel',
+	divider     : 'divider',
 
 };
 

@@ -6,6 +6,7 @@ import BoxModal from '../../../../commons/BoxModal';
 import UploadImageModal from '../../../../commons/UploadImageModal';
 import buttonSettings from '../../../../configurations/button-settings';
 import containerSettings from '../../../../configurations/container-settings';
+import dividerSettings from '../../../../configurations/divider-settings';
 import imageSettings from '../../../../configurations/image-settings';
 import textSettings from '../../../../configurations/text-settings';
 
@@ -13,14 +14,15 @@ import Card from './Card';
 import styles from './styles.module.css';
 
 const settingsMapping = {
-	text   : textSettings,
-	image  : imageSettings,
-	button : buttonSettings,
+	text    : textSettings,
+	image   : imageSettings,
+	button  : buttonSettings,
+	divider : dividerSettings,
 };
 
 function updateSelectedElement(key, value, children, selectedRowId, selectedItemId) {
 	return children.map((child) => {
-		if (['text', 'button', 'image', 'form'].includes(child.type) && child.id === selectedItemId) {
+		if (['text', 'button', 'image', 'form', 'divider'].includes(child.type) && child.id === selectedItemId) {
 			return {
 				...child,
 				style: {
@@ -56,6 +58,7 @@ function Settings(props) {
 
 	const [showUploadModal, setShowUploadModal] = useState(false);
 
+	console.log('componentssss ::', component);
 	console.log('selectedItemsss ::', selectedItem);
 	console.log('selectedRowssss ::', selectedRow);
 

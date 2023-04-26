@@ -144,6 +144,23 @@ const getContentMapping = ({ setParentComponentId, setShowContentModal }) => {
 				onClick: 'handleSubmitClick',
 			},
 		},
+		divider: {
+			content     : '',
+			redirectUrl : '',
+			themeType   : 'primary',
+			size        : 'md',
+			layouts     : [],
+			style       : {
+				'border-top-color' : '#000000',
+				'border-top-width' : '1px',
+				'border-top-style' : 'solid',
+			},
+			type       : 'divider',
+			formData   : {},
+			attributes : {
+				onClick: 'handleSubmitClick',
+			},
+		},
 
 	};
 };

@@ -165,6 +165,8 @@ function RightPanel(props) {
 		// setChildId('');
 	};
 
+	console.log('sdk ::', widget);
+
 	return (
 		<div
 			role="presentation"
@@ -195,7 +197,12 @@ function RightPanel(props) {
 						/>
 					)
 					: (
-						<div style={widget.style}>
+						<div
+							style={{
+								...(type === 'divider'
+									? {} : widget.style),
+							}}
+						>
 							<RenderComponents
 								componentType={type}
 								widget={widget}

@@ -91,7 +91,7 @@ function ComponentBuilder({
 					<div
 						role="presentation"
 						className={styles.content_container}
-						style={{ ...allStyles, border }}
+						style={{ ...(type === 'divider' ? {} : allStyles), border }}
 						onClick={(e) => {
 							e.stopPropagation();
 							setChildId(id);
