@@ -30,25 +30,25 @@ const useGetMilestones = ({ sideBar }) => {
 
 	useEffect(() => {
 		refetch()
-			.then((res) => {
-				const { data = { list: [], total_pages: 0 } } = res;
-				setList(() => ({
-					data         : data?.list || [],
-					total        : data?.total_count,
-					total_page   : data?.total_pages,
-					fullResponse : res.data,
-				}));
-			})
-			.catch(() => {
-				setList(() => ({
-					data         : [],
-					total        : 0,
-					total_page   : 0,
-					fullResponse : {},
-					reverted     : 0,
-				}));
-			});
-	}, [filters,sideBar]);
+		  .then((res) => {
+			const { data = { list: [], total_pages: 0 } } = res;
+			setList(() => ({
+			  data         : data?.list || [],
+			  total        : data?.total_count,
+			  total_page   : data?.total_pages,
+			  fullResponse : res.data,
+			}));
+		  })
+		  .catch(() => {
+			setList(() => ({
+			  data         : [],
+			  total        : 0,
+			  total_page   : 0,
+			  fullResponse : {},
+			  reverted     : 0,
+			}));
+		  });
+	  }, [filters, sideBar, refetch]);
 
 	const hookSetters = {
 		setFilters,
