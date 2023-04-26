@@ -2,7 +2,9 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
-function useEditEngagementScoringConfiguration() {
+function useEditEngagementScoringConfiguration(props) {
+	const { refetch = () => {}, setEditMode = () => {} } = props;
+
 	const [{ loading }, trigger] = useAllocationRequest({
 		url     : 'engagement_scoring_event_configurations_attributes',
 		method  : 'POST',
@@ -18,12 +20,18 @@ function useEditEngagementScoringConfiguration() {
 			};
 
 			await trigger({ data: payload });
+
+			Toast.success('Changes made successfully');
+
+			setEditMode('');
+
+			refetch();
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
 
-	return { onSave, loading };
+	return { onSave, editLoading: loading };
 }
 
 export default useEditEngagementScoringConfiguration;

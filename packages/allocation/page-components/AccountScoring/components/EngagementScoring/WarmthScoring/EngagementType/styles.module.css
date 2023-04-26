@@ -8,6 +8,12 @@
 	border-radius: 6px;
 }
 
+.buttons_container{
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 16px;
+}
+
 .table_headers {
 	display: flex;
 	flex-basis: 100%;

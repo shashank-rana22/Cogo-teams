@@ -1,25 +1,17 @@
 import { Button } from '@cogoport/components';
-import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
+import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import useEditEngagementScoringConfiguration from '../../../../hooks/useEditEngagementScoringConfiguration';
 import useRemoveEngagementScoringConfiguration from '../../../../hooks/useRemoveEngagementScoringConfiguration';
 
 import styles from './styles.module.css';
 
 function TitleComponent({
-	value,
-	handleSubmit = () => {}, setEditMode = () => {}, editMode = '', activeCollapse = '', refetch,
+	value, editMode = '', activeCollapse = '', refetch,
 }) {
 	const { engagement_type } = value;
 
-	const { onSave } = useEditEngagementScoringConfiguration();
-
 	const { onDelete } = useRemoveEngagementScoringConfiguration({ refetch });
-
-	const handleSave = (formValues) => {
-		onSave(formValues, engagement_type);
-	};
 
 	return (
 		<div className={styles.title_container}>
@@ -32,7 +24,7 @@ function TitleComponent({
 								<Button
 									size="md"
 									themeType="tertiary"
-									style={{ marginLeft: '16px' }}
+									style={{ marginRight: '20px' }}
 									onClick={(e) => {
 										e.stopPropagation();
 										onDelete(engagement_type);
@@ -42,7 +34,7 @@ function TitleComponent({
 									Delete
 								</Button>
 
-								<Button
+								{/* <Button
 									size="md"
 									themeType="secondary"
 									style={{ marginLeft: '16px' }}
@@ -62,23 +54,24 @@ function TitleComponent({
 									onClick={handleSubmit(handleSave)}
 								>
 									Save
-								</Button>
+								</Button> */}
 
 							</div>
 						) : (
-							<Button
-								size="md"
-								themeType="secondary"
-								onClick={(e) => {
-									e.stopPropagation();
-									setEditMode(engagement_type);
-								}}
-								style={{ marginLeft: '16px', marginRight: '28px' }}
-							>
-								<IcMEdit style={{ marginRight: '8px' }} />
+							null
+							// <Button
+							// 	size="md"
+							// 	themeType="secondary"
+							// 	onClick={(e) => {
+							// 		e.stopPropagation();
+							// 		setEditMode(engagement_type);
+							// 	}}
+							// 	style={{ marginLeft: '16px', marginRight: '28px' }}
+							// >
+							// 	<IcMEdit style={{ marginRight: '8px' }} />
 
-								Edit
-							</Button>
+						// 	Edit
+						// </Button>
 						)}
 					</div>
 				) : null }

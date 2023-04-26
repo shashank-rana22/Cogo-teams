@@ -7,7 +7,7 @@ import Child from './Child';
 
 function FieldArray(props) {
 	const {
-		name, control, watch, engagementType, refetch,
+		name, control, watch, engagementType, refetch, editLoading,
 	} = props;
 
 	const { fields, append, remove } = useFieldArray({ control, name });
@@ -15,7 +15,7 @@ function FieldArray(props) {
 	const watchLifecycleStage = watch('single_item');
 	const eventsToExclude = watchLifecycleStage.map((obj) => obj.event_name);
 
-	const { controls } = getControls(eventsToExclude);
+	const { controls = [] } = getControls(eventsToExclude);
 
 	const childValues = {};
 
@@ -25,22 +25,21 @@ function FieldArray(props) {
 
 	return (
 		<>
-			<div>
-				{fields.map((field, index) => (
-					<Child
-						key={field.id}
-						fields={field}
-						index={index}
-						name={name}
-						remove={remove}
-						control={control}
-						controls={controls}
-						eventName={field.event_name}
-						engagementType={engagementType}
-						refetch={refetch}
-					/>
-				))}
-			</div>
+			{fields.map((field, index) => (
+				<Child
+					key={field.id}
+					fields={field}
+					index={index}
+					name={name}
+					remove={remove}
+					control={control}
+					controls={controls}
+					eventName={field.event_name}
+					engagementType={engagementType}
+					refetch={refetch}
+					editLoading={editLoading}
+				/>
+			))}
 
 			<Button
 				themeType="secondary"

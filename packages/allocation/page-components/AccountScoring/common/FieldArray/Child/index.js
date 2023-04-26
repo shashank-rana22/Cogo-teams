@@ -8,13 +8,17 @@ import styles from './styles.module.css';
 
 function Child(props) {
 	const {
-		controls, control, name, index, remove = () => {}, eventName, engagementType,
+		controls, control, name, index, remove = () => {}, eventName, engagementType, editLoading = false,
 	} = props;
 
 	const { onSingleDelete } = useSingleDeleteEvent(index, remove);
 
 	const handleDeleteObject = () => {
-		onSingleDelete(engagementType, eventName);
+		if (eventName) {
+			onSingleDelete(engagementType, eventName);
+		} else {
+			remove(index, 1);
+		}
 	};
 
 	return (
@@ -37,6 +41,7 @@ function Child(props) {
 							name={`${name}.${index}.${singleControl.name}`}
 							style={{ ...singleControl.style }}
 							size="sm"
+							disabled={editLoading}
 						/>
 					</div>
 
