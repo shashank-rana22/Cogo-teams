@@ -17,6 +17,10 @@ const downloadErrorCsv = (link) => {
 	window.open(link, '_blank');
 };
 
+const redirectPath = (link) => {
+	window.open(link);
+};
+
 function useGetIngestionList() {
 	const [rowData, setRowData] = useState({});
 
@@ -144,21 +148,23 @@ function useGetIngestionList() {
 						className={styles.popover}
 						content={`Redirecting to
 							${REDIRECT_MAPPING[`${item?.is_channel_partner}_${item?.account_type}`]
-							|| '---'}`}
+						}`}
 						placement="top"
+						disabled={!(REDIRECT_LINK_MAPPING[`${item?.is_channel_partner}_${item?.account_type}`])}
+
 					>
 						<Button
 							className={styles.type_name}
 							themeType="tertiary"
+							disabled={!(REDIRECT_LINK_MAPPING[`${item?.is_channel_partner}_${item?.account_type}`])}
+							onClick={() => redirectPath(`/${partner_id}
+							${REDIRECT_LINK_MAPPING[`${item?.is_channel_partner}_${item?.account_type}`]}
+							?source_id=${item?.id}`)}
 						>
-							<a
-								href={`/${partner_id}
-								${REDIRECT_LINK_MAPPING[`${item?.is_channel_partner}_${item?.account_type}`]}
-								?source_id=${item?.id}` || `/${partner_id}/things-to-do`}
-							>
-								{startCase(item?.ingestion_type || '___')}
 
-							</a>
+							{startCase(item?.ingestion_type || '___')}
+
+							{/* </a> */}
 
 						</Button>
 					</Tooltip>

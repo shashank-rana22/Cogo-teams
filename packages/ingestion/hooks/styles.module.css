@@ -1,5 +1,5 @@
 .name {
-	max-width: 80px;
+	width: 100px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -21,25 +21,25 @@
 .number_of_org {
 	display: flex;
 	justify-content: center;
-	min-width: 180px;
+	width: 152px;
 }
 
 .re_upload {
-	min-width: 80px;
+	width: 94px;
 }
 
 .uploaded {
-	min-width: 80px;
+	width: 80px;
 	text-decoration-line: underline;
 }
 
 .total_count {
-	min-width: 100px;
+	width: 100px;
 	text-align: center;
 }
 
 .successfully_migrated_count {
-	min-width: 140px;
+	width: 140px;
 	text-align: center;
 }
 
@@ -49,21 +49,21 @@
 
 .updated_at {
 	display: flex;
-	min-width: 160px;
+	width: 160px;
 }
 
 .error {
-	min-width: 120px;
+	width: 120px;
 }
 
 .stage {
 	display: flex;
 	justify-content: start;
-	min-width: 60px;
+	width: 120px;
 }
 
 .remark {
-	min-width: 120px;
+	width: 120px;
 }
 
 .description {
@@ -74,7 +74,7 @@
 }
 
 .uploaded_by {
-	min-width: 120px;
+	width: 120px;
 }
 
 .popover {
@@ -92,7 +92,7 @@
 .type {
 	display: flex;
 	justify-content: center;
-	min-width: 80px;
+	width: 80px;
 }
 
 .inner_type {

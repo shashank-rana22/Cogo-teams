@@ -1,7 +1,9 @@
 import { Button, Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDownload } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
-import { startCase, format } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { UPLOAD_STATUS_MAPPING } from '../constants/table-modal-mapping';
@@ -43,13 +45,16 @@ function useGetUploadList(id) {
 				<div>
 					{created_at	 ? (
 						<div className={styles.created_date}>
-							{format(created_at, 'dd MMM yyyy') || '___'}
-
-							<div className={styles.created_time}>
-								{format(created_at, 'hh:mm aaa') || '___'}
-							</div>
+							{formatDate({
+								date       : created_at,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+								formatType : 'dateTime',
+								separator  : ' | ',
+							})}
 						</div>
 					) : '___'}
+
 				</div>
 
 			),

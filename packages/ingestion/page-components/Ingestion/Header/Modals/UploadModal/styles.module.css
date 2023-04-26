@@ -23,15 +23,36 @@
 	display: flex;
 	flex-basis: 30%;
 	flex-direction: column;
+	
 	margin: 4px 0;
+
+	
+	
 }
 
 .control_label {
 	margin-bottom: 4px;
+	display: flex;
+	justify-content: space-between;
 }
 
 .close_button {
 	display: flex;
 	justify-content: flex-end;
 	margin: 48px 16px 12px;
+}
+
+
+.optional {
+	font-size: 12px;
+	color: #cb6464; 
+}
+
+.upload {
+	:global(.ui_upload_filesuccess_container){
+		white-space: nowrap;
+  		overflow: hidden;
+  		text-overflow: ellipsis;
+
+	}
 }

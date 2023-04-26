@@ -43,7 +43,7 @@ function usePostIngestionData({ refetch = () => {} }) {
 
 	const onSubmit = async (e) => {
 		const payload = Object.entries({ ...e, ...uploadData, file_url: e?.file_url?.finalUrl })
-			.filter(([key, value]) => !!value && key !== 'final_modal_header')
+			.filter(([key, value]) => (!!value && key !== 'final_modal_header') || value === false)
 			.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 		try {
 			await trigger({

@@ -52,7 +52,7 @@ function usePostReUpload({ row = {}, setTableModal = () => {}, refetch = () => {
 				file_url  : e?.re_upload?.finalUrl,
 				file_name : e?.re_file_name,
 			})
-				.filter(([, value]) => !!value)
+				.filter(([, value]) => (!!value || value === false))
 				.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 
 			await trigger({

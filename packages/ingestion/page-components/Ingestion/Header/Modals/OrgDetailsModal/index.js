@@ -25,7 +25,12 @@ function OrgDetailsModal({
 
 							return (
 								<div style={el.style} className={styles.control_container}>
-									<span className={styles.control_label}>{el.label}</span>
+									<span className={styles.control_label}>
+										{el.label}
+										{!el?.rules?.required
+
+											? (<div className={styles.optional}>optional</div>) : null}
+									</span>
 
 									<Element
 										{...el}

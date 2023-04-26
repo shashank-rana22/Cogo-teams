@@ -24,12 +24,19 @@ function UploadModal({
 					if (!Element) return null;
 					return (
 						<div key={el.name} style={el.style} className={styles.control_container}>
-							<span className={styles.control_label}>{el.label}</span>
+							<span className={styles.control_label}>
+								{el.label}
+								{!el?.rules?.required
+
+									? (<div className={styles.optional}>optional</div>) : null}
+
+							</span>
 							<Element
 								{...el}
 								size="md"
 								key={el.name}
 								control={control}
+								className={styles.upload}
 							/>
 
 							<div className={styles.error_message}>
