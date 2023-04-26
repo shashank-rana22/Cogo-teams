@@ -285,18 +285,18 @@ export const accrualColumn = (
 		id       : 'sales_invoice_amount',
 		Cell     : ({ row: { original } }) => {
 			const {
-				actualIncome = '', incomeCurrency = '',
+				incomeBooked = '', incomeCurrency = '',
 				sellQuotation = '', sellQuotationCurrency = '',
 			} = original || {};
 
-			const quotationDiff = sellQuotation - actualIncome || 0;
+			const quotationDiff = sellQuotation - incomeBooked || 0;
 
 			// Setting quotationDiffProfit = 0 if sellQuotation is zero(to prevent calculation to give infinity)
 			const quotationDiffProfit = sellQuotation !== 0 ? (((quotationDiff / sellQuotation) * 100) || 0) : 0;
 
 			return (
 				<div className={styles.quotation_styles}>
-					<span>{getFormattedPrice(actualIncome, incomeCurrency)}</span>
+					<span>{getFormattedPrice(incomeBooked, incomeCurrency)}</span>
 
 					<div className={styles.quotation_value}>
 						Quotation :
