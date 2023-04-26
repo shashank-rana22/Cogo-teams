@@ -1,7 +1,7 @@
 export function HeaderPart() {
 	return (
 		<>
-			<div>
+			<div style={{ textAlign: 'center', fontSize: '18px', fontWeight: 'bold' }}>
 				COGO FREIGHT PRIVATE LIMITED (COGOPORT)
 			</div>
 			<div style={{ textAlign: 'center', marginTop: '2px' }}>
@@ -16,7 +16,7 @@ export function HeaderPart() {
 			<div style={{ textAlign: 'center', marginTop: '2px' }}>
 				CIN No: U60222MH2016PTC28059
 			</div>
-			<div style={{ textAlign: 'center', marginTop: '25px', fontSize: '16px' }}>
+			<div style={{ textAlign: 'center', margin: '24px 0px 4px 0px', fontSize: '16px', fontWeight: '600' }}>
 				CARGO ARRIVAL NOTICE
 			</div>
 		</>

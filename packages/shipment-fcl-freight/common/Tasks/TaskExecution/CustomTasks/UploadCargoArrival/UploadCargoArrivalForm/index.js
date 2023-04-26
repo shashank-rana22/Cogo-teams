@@ -33,6 +33,22 @@ function UploadCargoArrivalForm({
 		clearTask,
 	});
 
+	const header = (
+		<div className={styles.btn_wrapper}>
+			<Button
+				onClick={() => setShow(false)}
+			>
+				cancel
+			</Button>
+			<Button
+				style={{ marginLeft: 8 }}
+				onClick={handleSave}
+			>
+				Save
+			</Button>
+		</div>
+	);
+
 	return (
 		<>
 			{!savedData ? (
@@ -78,34 +94,6 @@ function UploadCargoArrivalForm({
 			) : null}
 
 			<div>
-				{/* <FullscreenModal
-					heading="Create Cargo Arrival Notice"
-					headerActions={(
-						<Button
-							style={{ marginLeft: 8 }}
-							onClick={handleSave}
-							size="sm"
-							id="cargo_arrival_notice_btn"
-						>
-							Save
-						</Button>
-					)}
-					show={show}
-					setShow={setShow}
-				>
-					<div className={styles.trade_document}>
-						<TradeDocTemplate
-							ref={(r) => {
-								ref.current.submit = r;
-							}}
-							mode="write"
-							documentType="container_arrival_notice"
-							initialValues={savedData || templateInitialValues}
-							summary={summary}
-						/>
-					</div>
-				</FullscreenModal> */}
-
 				<Modal
 					show={show}
 					size="fullscreen"
@@ -113,7 +101,7 @@ function UploadCargoArrivalForm({
 					className={styles.custom_modal}
 					onClose={() => setShow(false)}
 				>
-					<Modal.Header />
+					<Modal.Header title={header} />
 					<Modal.Body>
 						<div className={styles.trade_document}>
 							<TradeDocTemplate
@@ -127,9 +115,7 @@ function UploadCargoArrivalForm({
 							/>
 						</div>
 					</Modal.Body>
-
 				</Modal>
-
 			</div>
 		</>
 	);

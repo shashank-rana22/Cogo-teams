@@ -1,8 +1,5 @@
-// import { Flex, Text } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
-import { forwardRef, useImperativeHandle } from 'react';
-
-// import ControlledTextArea from '../../commons/ControlledTextArea';
+import { TextAreaController, useForm } from '@cogoport/forms';
+import { forwardRef, useImperativeHandle, useEffect } from 'react';
 
 import { ExtraHardCodeData } from './ExtraHardCodeData';
 import { formmatedValues } from './formmatedValues';
@@ -11,22 +8,22 @@ import { leftDataControls } from './leftDataControl';
 import styles from './styles.module.css';
 import { tableDetailControls } from './TableDetailControls';
 
-function Frontside({ noFormat, initialValues }, ref) {
+function Frontside({ initialValues }, ref) {
 	const formatValues = formmatedValues(initialValues);
 
 	const service_type = formatValues?.service_type;
 
-	// const { handleSubmit } = useForm({ formatValues });
+	const { control, handleSubmit, setValue } = useForm({ formatValues });
 
-	// useEffect(() => {
-	// 	Object.keys(formatValues || {}).forEach((key) => {
-	// 		setValue(key, formatValues[key]);
-	// 	});
-	// }, []);
+	useEffect(() => {
+		Object.keys(formatValues || {}).forEach((key) => {
+			setValue(key, formatValues[key]);
+		});
+	}, [formatValues, setValue]);
 
-	// useImperativeHandle(ref, () => ({
-	// 	handleSubmit,
-	// }));
+	useImperativeHandle(ref, () => ({
+		handleSubmit,
+	}));
 
 	const leftSideFields = [];
 
@@ -40,14 +37,12 @@ function Frontside({ noFormat, initialValues }, ref) {
 					</div>
 
 					<div style={{ width: '100%', height: 'fit-content' }}>
-						{/* <ControlledTextArea
+						<TextAreaController
 							control={control}
 							name={`${obj.name}`}
 							setValue={setValue}
 							rows={3}
-							isReadonly={isReadonly}
-							id={`${obj.name}_cargo_arrival`}
-						/> */}
+						/>
 					</div>
 				</div>,
 			);
@@ -61,14 +56,12 @@ function Frontside({ noFormat, initialValues }, ref) {
 						</div>
 
 						<div style={{ height: 'fit-content' }}>
-							{/* <ControlledTextArea
+							<TextAreaController
 								control={control}
 								name={`${obj.name}`}
 								setValue={setValue}
 								rows={3}
-								isReadonly={isReadonly}
-								id={`${obj.name}_cargo_arrival`}
-							/> */}
+							/>
 						</div>
 					</div>
 					<div className={styles.block} style={{ width: '50%' }}>
@@ -77,14 +70,12 @@ function Frontside({ noFormat, initialValues }, ref) {
 						</div>
 
 						<div style={{ height: 'fit-content' }}>
-							{/* <ControlledTextArea
+							<TextAreaController
 								control={control}
 								name={`${leftDataControls[service_type][i + 1].name}`}
 								setValue={setValue}
 								rows={3}
-								isReadonly={isReadonly}
-								id={`${leftDataControls[service_type][i + 1]}_cargo_arrival`}
-							/> */}
+							/>
 						</div>
 					</div>
 				</div>,
@@ -98,14 +89,12 @@ function Frontside({ noFormat, initialValues }, ref) {
 					</div>
 
 					<div style={{ width: '100%', height: 'fit-content' }}>
-						{/* <ControlledTextArea
+						<TextAreaController
 							control={control}
 							name={`${obj.name}`}
 							setValue={setValue}
 							rows={3}
-							isReadonly={isReadonly}
-							id={`${obj.name}_cargo_arrival`}
-						/> */}
+						/>
 					</div>
 				</div>,
 			);
@@ -117,20 +106,18 @@ function Frontside({ noFormat, initialValues }, ref) {
 
 	for (let i = 0; i < tableDetailControls[service_type].length; i += 1) {
 		tableDetails.push(
-			<div className={styles.block} direction="column">
-				<div className={styles.text}>
+			<div className={styles.last_block}>
+				<div className={styles.last_block_text}>
 					{tableDetailControls[service_type][i].label}
 				</div>
 
 				<div style={{ height: 'fit-content' }}>
-					{/* <ControlledTextArea
+					<TextAreaController
 						control={control}
 						name={`${tableDetailControls[service_type][i].name}`}
 						setValue={setValue}
 						rows={3}
-						isReadonly={isReadonly}
-						id={`${tableDetailControls[service_type][i].name}_cargo_arrival`}
-					/> */}
+					/>
 				</div>
 			</div>,
 		);
@@ -138,8 +125,9 @@ function Frontside({ noFormat, initialValues }, ref) {
 
 	return (
 		<div className={styles.page}>
-			<div className={`trade-doc-inner-page ${noFormat ? 'no-format' : ''}`}>
+			<div className={styles.content}>
 				<HeaderPart />
+
 				<div style={{ display: 'flex' }}>
 					<div style={{ width: '35%' }}>
 						<div className={styles.block}>
@@ -148,14 +136,12 @@ function Frontside({ noFormat, initialValues }, ref) {
 							</div>
 
 							<div style={{ width: '100%', height: 'fit-content' }}>
-								{/* <ControlledTextArea
+								<TextAreaController
 									control={control}
 									name="notify_party"
 									setValue={setValue}
 									rows={5}
-									isReadonly={isReadonly}
-									id="notify_party_cargo_arrival"
-								/> */}
+								/>
 							</div>
 						</div>
 						<div className={styles.block}>
@@ -164,14 +150,12 @@ function Frontside({ noFormat, initialValues }, ref) {
 							</div>
 
 							<div style={{ width: '100%', height: 'fit-content' }}>
-								{/* <ControlledTextArea
+								<TextAreaController
 									control={control}
 									name="consignee"
 									setValue={setValue}
-									rows={5}
-									isReadonly={isReadonly}
-									id="consignee_cargo_arrival"
-								/> */}
+									rows={4}
+								/>
 							</div>
 						</div>
 						<div className={styles.block}>
@@ -180,17 +164,16 @@ function Frontside({ noFormat, initialValues }, ref) {
 							</div>
 
 							<div style={{ width: '100%', height: 'fit-content' }}>
-								{/* <ControlledTextArea
+								<TextAreaController
 									control={control}
 									name="shipper"
 									setValue={setValue}
 									rows={4}
-									isReadonly={isReadonly}
-									id="shipper_cargo_arrival"
-								/> */}
+								/>
 							</div>
 						</div>
 					</div>
+
 					<div style={{ width: '65%' }}>
 						<div className={styles.block}>
 							<div className={styles.text}>
@@ -198,122 +181,107 @@ function Frontside({ noFormat, initialValues }, ref) {
 							</div>
 
 							<div style={{ width: '100%', height: 'fit-content' }}>
-								{/* <ControlledTextArea
+								<TextAreaController
 									control={control}
 									name="job_ref_no"
 									setValue={setValue}
 									rows={3}
-									isReadonly={isReadonly}
-									id="job_ref_no_cargo_arrival"
-								/> */}
+								/>
 							</div>
 						</div>
+
 						<div className={styles.block}>
 							<div className={styles.text}>
 								Invoice reference number :
 							</div>
 
 							<div style={{ width: '100%', height: 'fit-content' }}>
-								{/* <ControlledTextArea
+								<TextAreaController
 									control={control}
 									name="inv_ref_no"
 									setValue={setValue}
 									rows={3}
-									isReadonly={isReadonly}
-									id="inv_ref_no_cargo_arrival"
-								/> */}
+								/>
 							</div>
 						</div>
+
 						<div className={styles.block}>
 							<div className={styles.text}>
 								IGM dt :
 							</div>
 
-							<div style={{ width: '100%', height: 'fit-content' }}>
-								{/* <ControlledTextArea
+							<div style={{ width: '87%', height: 'fit-content' }}>
+								<TextAreaController
 									control={control}
 									name="igm_dt"
 									setValue={setValue}
 									rows={3}
-									isReadonly={isReadonly}
-									id="igm_dt_cargo_arrival"
-								/> */}
+								/>
 							</div>
 						</div>
+
 						<div className={styles.block}>
 							<div className={styles.text}>
 								From :
 							</div>
 
-							<div style={{ width: '100%', height: 'fit-content' }}>
-								{/* <ControlledTextArea
+							<div style={{ width: '88%', height: 'fit-content' }}>
+								<TextAreaController
 									control={control}
 									name="port_of_loading"
 									setValue={setValue}
 									rows={3}
-									isReadonly={isReadonly}
-									id="port_of_loading_cargo_arrival"
-								/> */}
+								/>
 							</div>
 						</div>
 					</div>
 				</div>
-				{/* <Flex>
-					<Flex direction="column" height={50}>
-						<Text
-							size={16}
-							style={{
-								width      : '150px',
-								marginTop  : '10px',
-								marginLeft : '10px',
-							}}
-						>
-							Shipment details :
-						</Text>
-					</Flex>
-				</Flex> */}
+
+				<div className={styles.details_text}>
+					Shipment details :
+				</div>
+
 				<div style={{ width: '100%' }}>
 					{leftSideFields.map((element) => element)}
 				</div>
 
-				{/* <Flex height={100}>
+				<div style={{ display: 'flex' }}>
 					{tableDetails.map((obj) => obj)}
-				</Flex> */}
+				</div>
 			</div>
-			<div style={{ width: '40%', display: 'flex', marginTop: '10px' }}>
+
+			<div style={{ width: '100%', display: 'flex', marginTop: '10px' }}>
 				<div className={styles.block}>
 					<div className={styles.text}>
 						Tan No :
 					</div>
 
 					<div style={{ width: '100%', height: 'fit-content' }}>
-						{/* <ControlledTextArea
+						<TextAreaController
 							control={control}
 							name="tan"
 							setValue={setValue}
-							rows={1}
-							isReadonly={isReadonly}
-							id="tan_cargo_arrival"
-						/> */}
+							rows={2}
+						/>
 					</div>
 				</div>
+
 				<div className={styles.block}>
 					<div className={styles.text}>
 						Pan No :
 					</div>
 
 					<div style={{ width: '100%', height: 'fit-content' }}>
-						{/* <ControlledTextArea
+						<TextAreaController
 							control={control}
 							name="pan"
 							setValue={setValue}
-							rows={1}
-							isReadonly={isReadonly}
-							id="pan_cargo_arrival"
-						/> */}
+							rows={2}
+						/>
 					</div>
 				</div>
 			</div>
+
 			<ExtraHardCodeData />
 		</div>
 	);
