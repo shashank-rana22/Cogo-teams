@@ -38,7 +38,7 @@ function Frontside({ initialValues }, ref) {
 						:
 					</div>
 
-					<div style={{ width: '100%', height: 'fit-content' }}>
+					<div style={{ width: '74%', height: 'fit-content' }}>
 						<TextAreaController
 							control={control}
 							name={`${obj.name}`}
@@ -59,7 +59,7 @@ function Frontside({ initialValues }, ref) {
 							:
 						</div>
 
-						<div style={{ width: '70%' }}>
+						<div style={{ width: '74%' }}>
 							<TextAreaController
 								control={control}
 								name={`${obj.name}`}
@@ -75,7 +75,7 @@ function Frontside({ initialValues }, ref) {
 							:
 						</div>
 
-						<div style={{ width: '70%', height: 'fit-content' }}>
+						<div style={{ width: '74%', height: 'fit-content' }}>
 							<TextAreaController
 								control={control}
 								name={`${leftDataControls[service_type][i + 1].name}`}
@@ -96,7 +96,7 @@ function Frontside({ initialValues }, ref) {
 						:
 					</div>
 
-					<div style={{ width: '70%', height: 'fit-content' }}>
+					<div style={{ width: '74%', height: 'fit-content' }}>
 						<TextAreaController
 							control={control}
 							name={`${obj.name}`}
