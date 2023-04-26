@@ -397,10 +397,10 @@ const mawbControls = (disableClass) => ({
 			noDeleteButtonTill : 1,
 			value              : [
 				{
-					code        : '',
-					charge_type : '',
-					charge_unit : '',
-					price       : '',
+					code       : '',
+					chargeType : '',
+					chargeUnit : '',
+					price      : '',
 				},
 			],
 			controls: [
@@ -415,7 +415,7 @@ const mawbControls = (disableClass) => ({
 					},
 				},
 				{
-					name        : 'charge_type',
+					name        : 'chargeType',
 					type        : 'select',
 					className   : 'primary lg',
 					span        : 3,
@@ -423,21 +423,14 @@ const mawbControls = (disableClass) => ({
 					options     : [
 						{ value: 'chargeable_wt', label: 'Chargeable Weight' },
 						{ value: 'gross_wt', label: 'Gross Weight' },
-						{ value: 'rate_per_kg', label: 'Rate per Kg' },
 					],
-					rules: {
-						required: 'Charge Type is Required',
-					},
 				},
 				{
-					name        : 'charge_unit',
+					name        : 'chargeUnit',
 					type        : 'text',
 					className   : 'primary lg',
 					span        : 2,
 					placeholder : 'Enter Charge Unit',
-					rules       : {
-						required: 'Charge Unit is Required',
-					},
 				},
 				{
 					name        : 'price',

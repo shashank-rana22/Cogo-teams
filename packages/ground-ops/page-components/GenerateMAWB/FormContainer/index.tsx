@@ -82,12 +82,12 @@ function FormContainer({
 	const calculateCharges = () => {
 		const updatedCharges = (formValues.carrierOtherCharges || []).map((charge) => {
 			let price = 0;
-			if (charge.charge_type === 'chargeable_wt') {
-				price = formValues.chargeableWeight * charge.charge_unit;
-			} else if (charge.charge_type === 'gross_wt') {
-				price = formValues.weight * charge.charge_unit;
-			} else if (charge.charge_type === 'rate_per_kg') {
-				price = formValues.ratePerKg * charge.charge_unit;
+			if (charge.chargeType === 'chargeable_wt') {
+				price = formValues.chargeableWeight * charge.chargeUnit;
+			} else if (charge.chargeType === 'gross_wt') {
+				price = formValues.weight * charge.chargeUnit;
+			} else if (charge.chargeType === 'rate_per_kg') {
+				price = formValues.ratePerKg * charge.chargeUnit;
 			}
 			return { ...charge, price };
 		});
