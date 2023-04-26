@@ -11482,12 +11482,12 @@ const partner = {
 		{
 			api          : 'create_referral_configuration',
 			access_type  : 'private',
-			service_name : 'promotion',
+			service_name : 'referral',
 		},
 		{
 			api          : 'get_referral_configuration',
 			access_type  : 'private',
-			service_name : 'promotion',
+			service_name : 'referral',
 		},
 	],
 };

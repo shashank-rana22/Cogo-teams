@@ -12,14 +12,13 @@ const isLastLevel = (type, start, end) => {
 
 const getFormattedPayload = (val) => {
 	const remainingBonus = val.map((bonus) => {
-		const { start_level, type, end_level, max_percentage_allowed, percentage } = bonus;
+		const { start_level, type, end_level, percentage } = bonus;
 		return {
 			type,
-			start_level            : Number(start_level),
-			end_level              : isLastLevel(type, start_level, end_level),
-			max_percentage_allowed : type === 'slab' ? Number(max_percentage_allowed) : undefined,
-			percentage             : Number(percentage),
-			is_last_level          : end_level === 'master_node',
+			start_level   : Number(start_level),
+			end_level     : isLastLevel(type, start_level, end_level),
+			percentage    : Number(percentage),
+			is_last_level : end_level === 'master_node',
 		};
 	});
 
@@ -71,9 +70,9 @@ export const payloadFormat = (event, values) => {
 };
 
 const remainingBonusFieldArray = (val) => {
-	const fieldArray = val?.map((val) => ({
-		...val,
-		end_level: val?.is_last_level === true ? 'master_node' : val?.end_level,
+	const fieldArray = val?.map((item) => ({
+		...item,
+		end_level: item?.is_last_level === true ? 'master_node' : item?.end_level,
 	}));
 
 	return fieldArray;
