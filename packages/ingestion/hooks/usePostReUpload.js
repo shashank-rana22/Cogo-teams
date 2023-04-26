@@ -37,12 +37,12 @@ function usePostReUpload({ row = {}, setTableModal = () => {}, refetch = () => {
 
 		try {
 			const payloadData = {
-				partner_id,
+				ingestion_partner_id : partner_id,
 				ingestion_type,
 				partner_user_id,
 				description,
 				agent_id,
-				ingestion_request_id: id,
+				ingestion_request_id : id,
 				user_id,
 				account_type,
 			};

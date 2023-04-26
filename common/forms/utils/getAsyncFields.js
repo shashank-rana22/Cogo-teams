@@ -285,21 +285,6 @@ function asyncListCogoEntity() {
 	};
 }
 
-// function asyncIngestionListPartners() {
-// 	return {
-// 		labelKey    : 'partners_name',
-// 		valueKey    : 'ingestion_partner_id',
-// 		endpoint    : 'list_partners',
-// 		initialCall : true,
-// 		params      : {
-// 			filters: {
-// 				status: 'active',
-// 			},
-// 			page_limit: 100,
-// 		},
-// 	};
-// }
-
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,

@@ -4,11 +4,6 @@ const ingestion = [
 		access_type  : 'private',
 		service_name : 'partner',
 	},
-	// {
-	// 	api          : 'list_partners',
-	// 	access_type  : 'private',
-	// 	service_name : 'partner',
-	// },
 	{
 		api          : 'create_ingestion_request',
 		access_type  : 'private',
