@@ -1,8 +1,8 @@
-import HEADER from "../../constants/header";
-import Details from "../Details";
+import HEADER from '../../constants/header';
+import Details from '../Details';
 
-import CreateUpdateForm from "./CreateUpdate";
-import styles from "./styles.module.css";
+import CreateUpdateForm from './CreateUpdate';
+import styles from './styles.module.css';
 
 function SideBarComponent({
   sideBar = "",
