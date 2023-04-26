@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 
-import getControls from '../../components/EngagementScoring/WarmthScoring/EngagementType/controlItem';
+import getControls from '../../configurations/controlItem';
 
 import Child from './Child';
 
