@@ -19,8 +19,8 @@ import usePackingList from './Helpers/hooks/usePackingList';
 import styles from './styles.module.css';
 
 const agentOtherChargesCode = [{ code: 'AWB', price: '150' }, { code: 'PCA', price: '250' }];
-const carrierOtherChargesCode = [{ code: 'AMS', price: '' }, { code: 'AWC', price: '' },
-	{ code: 'XRAY', price: '' }, { code: 'CGC', price: '' }];
+const carrierOtherChargesCode = [{ code: 'FSC', price: '' }, { code: 'SSC', price: '' }, { code: 'XRAY', price: '' },
+	{ code: 'AWC', price: '' }, { code: 'AMS', price: '' }];
 const unsavedFields = ['consigneeAddress',
 	'shipperName',
 	'shipperAddress',
