@@ -1,19 +1,21 @@
 import { Button } from '@cogoport/components';
 import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
 
 import useEditEngagementScoringConfiguration from '../../../../hooks/useEditEngagementScoringConfiguration';
+import useRemoveEngagementScoringConfiguration from '../../../../hooks/useRemoveEngagementScoringConfiguration';
 
 import styles from './styles.module.css';
 
 function TitleComponent({
 	value,
-	handleSubmit = () => {}, setEditMode = () => {}, editMode = '', activeCollapse = '',
+	handleSubmit = () => {}, setEditMode = () => {}, editMode = '', activeCollapse = '', refetch,
 }) {
 	const { engagement_type } = value;
 
 	const { onSave } = useEditEngagementScoringConfiguration();
+
+	const { onDelete } = useRemoveEngagementScoringConfiguration({ refetch });
 
 	const handleSave = (formValues) => {
 		onSave(formValues, engagement_type);
@@ -27,7 +29,15 @@ function TitleComponent({
 					<div>
 						{editMode === engagement_type ? (
 							<div className={styles.title_buttons}>
-								<Button size="md" themeType="tertiary" style={{ marginLeft: '16px' }}>
+								<Button
+									size="md"
+									themeType="tertiary"
+									style={{ marginLeft: '16px' }}
+									onClick={(e) => {
+										e.stopPropagation();
+										onDelete(engagement_type);
+									}}
+								>
 									<IcMDelete style={{ marginRight: '8px' }} />
 									Delete
 								</Button>
