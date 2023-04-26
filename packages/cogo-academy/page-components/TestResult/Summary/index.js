@@ -42,7 +42,7 @@ function Summary({ summaryData = {} }) {
 							<div className={styles.percentile_heading}>Percentile</div>
 
 							<div className={styles.percentile_data}>
-								{user_percentile.toFixed(2)}
+								{toFixed(user_percentile, 2)}
 								%
 							</div>
 						</div>
