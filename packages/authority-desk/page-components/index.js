@@ -1,5 +1,9 @@
 import React from 'react';
 
-export default function AuthorityDesk() {
-	return <div>absbfsd</div>;
+import Ocean from './Ocean';
+
+function AuthorityDesk() {
+	return <div><Ocean /></div>;
 }
+
+export default AuthorityDesk;

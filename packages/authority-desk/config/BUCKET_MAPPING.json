@@ -1,0 +1,18 @@
+{
+  "buckets" :  [
+    { "name": "eligible", "title": "Eligible", "count": "eligible" },
+    {
+       "name": "requested",
+        "title": "Requested",
+        "count": "requested"
+    },
+    {
+       "name": "ineligible",
+      "title": "Not Eligible",
+      "count": "ineligible"
+    },
+    { "name": "approved", "title": "Approved", "count": "postApproved" },
+    { "name": "released", "title": "Released", "count": "released" },
+    { "name": "hold", "title": "Hold", "count": "hold" }
+]
+}

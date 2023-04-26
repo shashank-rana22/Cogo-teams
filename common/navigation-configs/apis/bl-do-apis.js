@@ -234,6 +234,12 @@ const apis = [
 		access_type  : 'public',
 		service_name : 'saas_traceability',
 	},
+	{
+		api          : 'list_authority_desk_bl_documents',
+		access_type  : 'private',
+		service_name : 'bookings',
+		feature      : 'bl_do',
+	},
 ];
 
 export default apis;
