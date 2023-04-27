@@ -1,5 +1,6 @@
-import { Collapse } from '@cogoport/components';
+import { Collapse, Placeholder } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import useGetEngagementScoringConfiguration from '../../../hooks/useGetEngagementScoringConfiguration';
@@ -26,6 +27,7 @@ function WarmthScoring(props) {
 		searchValue,
 		setSearchValue,
 		refetch,
+		loading,
 	} = useGetEngagementScoringConfiguration({ activeCollapse });
 
 	const { list = [] } = data || {};
@@ -58,19 +60,31 @@ function WarmthScoring(props) {
 				searchValue={searchValue}
 			/>
 
-			<div className={styles.collapse_container}>
-				<Collapse
-					panels={options}
-					activeKey={activeCollapse}
-					setActive={(v) => {
-						setActiveCollapse(v);
-						if (activeCollapse) {
-							setEditMode('');
-						}
-					}}
-					type="text"
-				/>
-			</div>
+			{loading ? (
+				<div className={styles.collapse_container}>
+					{Array(3).fill('').map(() => (
+						<div className={styles.dummy_collapse}>
+							<Placeholder width="100px" height="32px" />
+							<IcMArrowRotateDown />
+						</div>
+					))}
+				</div>
+			) : (
+				<div className={styles.collapse_container}>
+					<Collapse
+						panels={options}
+						activeKey={activeCollapse}
+						setActive={(v) => {
+							setActiveCollapse(v);
+							if (activeCollapse) {
+								setEditMode('');
+							}
+						}}
+						type="text"
+					/>
+				</div>
+			) }
+
 		</div>
 
 	);
