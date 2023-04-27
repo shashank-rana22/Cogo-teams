@@ -101,6 +101,7 @@ function MessageList(messageProps) {
 								/>
 							)
 						)}
+						className={styles.styled_popover}
 						visible={filterVisible}
 						onClickOutside={() => setFilterVisible(false)}
 					>

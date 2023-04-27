@@ -170,6 +170,30 @@ function useOnBoardVendor({
 			}
 		}
 
+		if (field.name === 'company_type' && country_id === COUNTRY_IDS.VN) {
+			newField = {
+				...newField,
+				options: [
+					{
+						label : 'Limited Liability Company',
+						value : 'limited_liability_company',
+					},
+					{
+						label : 'Joint Stock Company',
+						value : 'joint_stock_company',
+					},
+					{
+						label : 'Representative Office',
+						value : 'representative_office',
+					},
+					{
+						label : 'Branch',
+						value : 'branch',
+					},
+				],
+			};
+		}
+
 		newFields.push(newField);
 	});
 
