@@ -4,7 +4,7 @@
 
 .service_provider {
 	margin-top: 4px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 }
 
@@ -14,7 +14,7 @@
 
 .shipping_line {
 	margin-top: 2px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 }
 
 .tooltip_container {
@@ -22,7 +22,7 @@
 		.tippy-box {
 			min-height: 30px;
 			padding: 4px 6px;
-			font-size: 12px;
+			font-size: var(--font-size-md);
 			word-break: normal;
 		}
 
@@ -41,7 +41,7 @@
 
 .last_mile {
 	margin-top: 2px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 	color: var(--color-secondary-greyscale-3);
 }

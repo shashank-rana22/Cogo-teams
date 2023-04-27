@@ -21,7 +21,7 @@
 }
 
 .icon_text {
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	font-weight: 600;
 	color: var(--color-primary-error-red-2);
 }

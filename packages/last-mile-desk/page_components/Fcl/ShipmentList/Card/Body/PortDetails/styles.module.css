@@ -17,7 +17,7 @@
 }
 
 .port_code {
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	color: var(--color-accent-orange-2);
 }
 
@@ -28,7 +28,7 @@
 		.tippy-box {
 			min-height: 30px;
 			padding: 4px 6px;
-			font-size: 12px;
+			font-size: var(--font-size-md);
 		}
 	}
 }
@@ -37,12 +37,12 @@
 	width: max-content;
 	max-width: 170px;
 	overflow: hidden;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 
 .est_time {
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 }

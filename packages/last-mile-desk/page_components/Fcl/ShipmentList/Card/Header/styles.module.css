@@ -9,7 +9,7 @@
 		}
 
 		.ui_pill_text {
-			font-size: 10px;
+			font-size: var(--font-size-sm);
 		}
 	}
 }

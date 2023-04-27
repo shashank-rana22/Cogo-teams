@@ -12,6 +12,6 @@
 
 .doc_label {
 	margin-left: 4px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	font-weight: 600;
 }

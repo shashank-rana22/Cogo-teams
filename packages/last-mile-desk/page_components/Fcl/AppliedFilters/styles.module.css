@@ -4,7 +4,7 @@
 	:global {
 		.ui_pill_container {
 			padding: 0;
-			font-size: 12px;
+			font-size: var(--font-size-md);
 			background-color: var(--color-tertiary-blue-5);
 			border-radius: 6px;
 		}

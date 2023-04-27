@@ -2,7 +2,7 @@ import { Placeholder } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-const card = (
+const Card = (
 	<div className={styles.card}>
 		<div className={styles.shipment_info}>
 			<Placeholder className={styles.loader} />
@@ -26,5 +26,5 @@ const card = (
 );
 
 export default function Loader() {
-	return Array(4).fill(null).map(() => card);
+	return Array(4).fill(null).map(() => Card);
 }
