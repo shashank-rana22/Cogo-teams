@@ -587,7 +587,7 @@ const navigationMappingSeller = {
 		possible_apis : app_apis.app_pricing,
 		module_type   : 'dashboards',
 	},
-	
+
 	saas_cogostore: {
 		key           : 'saas_cogostore',
 		title         : 'cogo store',
