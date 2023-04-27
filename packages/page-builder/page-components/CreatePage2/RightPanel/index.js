@@ -30,6 +30,8 @@ function RightPanel(props) {
 	} = props;
 	const [childId, setChildId] = useState('');
 
+	console.log('sdisk', components);
+
 	const { type, id: elementId } = widget || {};
 
 	const itemRef = useRef(null);
@@ -221,7 +223,7 @@ function RightPanel(props) {
 		>
 
 			<div>
-				{type === 'container'
+				{['container', 'card', 'formSample'].includes(type)
 					? (
 						<ComponentBuilder
 							widget={widget}

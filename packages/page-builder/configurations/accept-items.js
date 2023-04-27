@@ -9,6 +9,8 @@ const VALID_ITEM_TYPES = {
 	form        : 'form',
 	carousel    : 'carousel',
 	divider     : 'divider',
+	card        : 'card',
+	formSample  : 'formSample',
 
 };
 

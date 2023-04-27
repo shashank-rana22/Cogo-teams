@@ -135,6 +135,7 @@ const getContentMapping = () => {
 				onClick: 'handleSubmitClick',
 			},
 		},
+
 		divider: {
 			content     : '',
 			redirectUrl : '',
@@ -153,6 +154,108 @@ const getContentMapping = () => {
 			},
 		},
 
+		card: {
+			type     : 'card',
+			parentId,
+			style    : { boxShadow: '0 0 8px rgba(98,127,172,.2)' },
+			children : [
+				{
+					id         : 0,
+					content    : 'https://picsum.photos/250/150',
+					alt        : 'add-img-url',
+					style      : { },
+					attributes : {},
+					type       : 'image',
+					parentId,
+				},
+				{
+					id         : 1,
+					content    : '<h3>Card Title</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec accumsan, nisl eget ultricies tincidunt, nunc elit aliquam erat, a ultricies nisl nunc eget nunc. Nullam eget nisl auctor, aliquam ligula eget, aliquam nisl. Nulla facilisi. Nulla facilisi.</p>',
+					type       : 'text',
+					style      : {},
+					parentId,
+					attributes : {
+						contenteditable: true,
+					},
+				},
+			],
+		},
+
+		formSample: {
+			content  : '',
+			style    : {},
+			type     : 'formSample',
+			name     : 'formSample',
+			parentId,
+			children : [
+				{
+					content : 'Form Heading',
+					type    : 'text',
+					style   : {},
+					id      : 0,
+					parentId,
+				},
+				{
+					content  : '',
+					style    : {},
+					type     : 'form',
+					formData : {
+						heading    : 'Form Heading',
+						api_url    : 'dummy_url',
+						buttonText : 'Button Name',
+						controls   : [
+							{
+								label        : 'Name',
+								type         : 'text',
+								placeholder  : 'Enter Name',
+								width        : '100%',
+								is_mandetory : 'no',
+								name         : 'name',
+								style        : {
+									flexBasis: '100%',
+								},
+								rules: {},
+							},
+							{
+								label                 : 'Email',
+								type                  : 'text',
+								placeholder           : 'Enter Email',
+								width                 : '100%',
+								options_type          : '',
+								manual_options        : '',
+								dynamic_data_endpoint : '',
+								is_mandetory          : 'no',
+								name                  : 'email',
+								style                 : {
+									flexBasis: '100%',
+								},
+								rules: {},
+							},
+							{
+								label                 : 'Mobile Number',
+								type                  : 'mobileNumber',
+								placeholder           : 'Enter Mobile Number',
+								width                 : '100%',
+								options_type          : '',
+								manual_options        : '',
+								dynamic_data_endpoint : '',
+								is_mandetory          : 'no',
+								name                  : 'mobile_number',
+								style                 : {
+									flexBasis: '100%',
+								},
+								rules: {},
+							},
+						],
+					},
+					attributes: {
+						onClick: 'handleSubmitClick',
+					},
+					id: 1,
+					parentId,
+				},
+			],
+		},
 	};
 };
 export default getContentMapping;

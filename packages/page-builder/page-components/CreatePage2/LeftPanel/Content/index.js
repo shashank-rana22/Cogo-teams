@@ -2,6 +2,7 @@ import { TabPanel, Tabs } from '@cogoport/components';
 import { useState } from 'react';
 
 import Basic from './Basic';
+import Premade from './Premade';
 import styles from './styles.module.css';
 
 function Content(props) {
@@ -41,7 +42,16 @@ function Content(props) {
 				</TabPanel>
 
 				<TabPanel name="premade" title="Premade">
-					Premade
+					<Premade
+						addNewItem={addNewItem}
+						onNewItemAdding={onNewItemAdding}
+						selectedRow={selectedRow}
+						parentComponentId={parentComponentId}
+						componentType={componentType}
+						component={component}
+						setComponent={setComponent}
+						selectedItem={selectedItem}
+					/>
 				</TabPanel>
 			</Tabs>
 

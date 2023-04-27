@@ -40,7 +40,7 @@ function ComponentBuilder({
 				const isChildSelected = childId === id && componentId === selectedRowId && type;
 				const border = isChildSelected ? '1px solid red' : allStyles.border;
 
-				if (!isEmpty(childChildren) && type === 'container') {
+				if (!isEmpty(childChildren) && ['container', 'card', 'formSample'].includes(type)) {
 					return (
 						<div
 							className={styles.content_container}
