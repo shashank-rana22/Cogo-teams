@@ -60,7 +60,8 @@ function MyApp({ Component, pageProps, firestoreCustomToken = '' }) {
 }
 
 MyApp.getInitialProps = async () => {
-	if (process.env.FIREBASE_PRIVATE_KEY_ID) { // eslint-disable-next-line global-require
+	if (process.env.NODE_ENV === 'production' && process.env.FIREBASE_PRIVATE_KEY_ID) {
+		// eslint-disable-next-line global-require
 		const admin = require('firebase-admin');
 
 		const serviceAccount = {

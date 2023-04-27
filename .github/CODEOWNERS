@@ -14,12 +14,12 @@ packages/booking-desk @ajeets585
 packages/access-management @prashantp01
 packages/authentication @prashantp01
 packages/locations @prashantp01
-packages/business-finance @aniljaiswal
+packages/business-finance @bhanunadar
 packages/allocation @cogoparth @Harshitcogo @mohit-cogo @MahakCogoport
 packages/contracts @ssngurjar
 packages/my-profile @prachidewangan26
 packages/vendor-rm @MrutyunjayaB @harshcogo1304 @shivanshi-cogoport
-packages/my-incident @aniljaiswal
+packages/my-incident @bhanunadar
 packages/cogo-one @danampallyrahul-cogo @sandeepn1709
 packages/cogo-verse-analytics @SDineshKumarCogoport
 packages/enrichment @cogoparth @mohit-cogo @Harshitcogo
