@@ -1,4 +1,4 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, Placeholder } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
@@ -58,19 +58,35 @@ function PayRunTypeModal({
 			<Modal size="md" show={payRunType} onClose={() => setPayRunType(false)} placement="top">
 
 				<Modal.Body>
-					<div className={styles.sub_container}>
-						{totalRecords}
-						{' '}
-						Pay Runs Available with same entity & currency.
-						You can either create a new payrun or add more invoices into existing one.
-					</div>
+					{ loading ? <Placeholder className={styles.loader} />
+						: (
+							<div className={styles.sub_container}>
+								{totalRecords}
+								{' '}
+								{totalRecords > 0
+									? (`Pay Runs Available with same entity & currency. 
+							You can either create a new payrun or add more invoices into existing one`)
+									: 'Pay Run Available, Please Create a new Payrun'}
+							</div>
+						)}
 				</Modal.Body>
 				<Modal.Footer>
-					<Button onClick={() => setExitPayRun(true)} themeType="secondary">
+					<Button
+						disabled={loading || totalRecords < 1}
+						onClick={() => setExitPayRun(true)}
+						themeType="secondary"
+					>
 						Add Into Existing Pay Run
 					</Button>
 					<div className={styles.button}>
-						<Button themeType="secondary" onClick={handleClick}>Create New Pay Run</Button>
+						<Button
+							disabled={loading}
+							themeType="secondary"
+							onClick={handleClick}
+						>
+							Create New Pay Run
+
+						</Button>
 					</div>
 				</Modal.Footer>
 			</Modal>

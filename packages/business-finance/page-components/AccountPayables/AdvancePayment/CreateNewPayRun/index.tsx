@@ -53,7 +53,6 @@ function CreateNewPayRun() {
 	const { list } = existpayRunData || {};
 	const { pageIndex } = data || {};
 	const [viewSelectedInvoice, setViewSelectedInvoice] = useState(false);
-	// const { invoiceCount, totalValue, createdAt, currency, name } = viewSelectedData || {};
 
 	const functions = {
 		renderCheckbox    : (itemData) => getTableBodyCheckbox(itemData),
@@ -185,8 +184,8 @@ function CreateNewPayRun() {
 				<div className={styles.filter}>
 					<SelectFilters filters={filters} setFilters={setFilters} />
 				</div>
-				<div>
-					{data?.list?.length > 0 ? (
+				<div className={styles.list_container}>
+					{data?.list?.length || viewSelectedData?.list?.length > 0 ? (
 						<List
 							itemData={viewSelectedInvoice ? viewSelectedData : data}
 							loading={viewSelectedInvoice ? viewSelectedDataLoading : loading}

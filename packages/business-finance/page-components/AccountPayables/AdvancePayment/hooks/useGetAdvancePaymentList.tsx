@@ -199,7 +199,9 @@ const useGetAdvancePaymentList = ({ activeEntity, sort }:FilterProps) => {
 				},
 			});
 			Toast.success('Invoice added to Payrun Successfully');
-			await getAdvancedPayment();
+			setTimeout(() => {
+				getAdvancedPayment();
+			}, 100);
 		} catch (e) {
 			Toast.error(e?.response?.data?.message);
 		}
@@ -254,11 +256,9 @@ const useGetAdvancePaymentList = ({ activeEntity, sort }:FilterProps) => {
 			(value) => value?.checked,
 		)?.length;
 		const isAllRowsChecked = isCheckedLength === data?.list?.length;
-		// const isSemiRowsChecked = isCheckedLength > 0;
 		return (
 			<div className={styles.checkbox_style}>
 				<Checkbox
-					// indeterminate={!!isSemiRowsChecked && loading}
 					checked={isAllRowsChecked && !loading}
 					onChange={onChangeTableHeaderCheckbox}
 				/>

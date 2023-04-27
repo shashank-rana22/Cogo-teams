@@ -34,7 +34,8 @@ const useGetCreatePayRunType = ({ activeEntity, currency, selectedPayRunId }:Fil
 					currency,
 					state      : 'AUDITED',
 					entityCode : activeEntity,
-					id         : selectedPayRunId !== undefined ? selectedPayRunId : undefined,
+					id         : (selectedPayRunId === undefined || selectedPayRunId === '')
+						? undefined : selectedPayRunId,
 				},
 			});
 		} catch (err) {

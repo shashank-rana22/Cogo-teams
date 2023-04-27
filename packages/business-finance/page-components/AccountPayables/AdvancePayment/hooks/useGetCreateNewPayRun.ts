@@ -1,17 +1,12 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-// import { useState } from 'react';
 
 interface FilterProps {
 	activeEntity: string;
 	currency:string;
 }
 const useGetCreateNewPayRun = ({ activeEntity, currency }:FilterProps) => {
-	// const [filters, setFilters] = useState({
-	// 	pageIndex: 1,
-	// });
-	// const { pageIndex } = filters || {};
 	const {
 		user_data:UserData,
 	} = useSelector(({ profile }) => ({
@@ -54,8 +49,6 @@ const useGetCreateNewPayRun = ({ activeEntity, currency }:FilterProps) => {
 	return {
 		createNewPayRunData: data,
 		loading,
-		// filters,
-		// setFilters,
 		getCreateNewPayRun,
 	};
 };
