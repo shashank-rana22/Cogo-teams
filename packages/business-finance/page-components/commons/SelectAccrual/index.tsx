@@ -3,7 +3,9 @@ import { IcMArrowRotateDown, IcMDelete } from '@cogoport/icons-react';
 
 function SelectAccrual({ value, placeholder, setFilters }) {
 	return (
-		<div>
+		<div
+			style={{ width: '160px' }}
+		>
 			<Input
 				suffix={(
 					value ? (
@@ -33,7 +35,7 @@ function SelectAccrual({ value, placeholder, setFilters }) {
 						/>
 					)
 				)}
-				size="md"
+				size="sm"
 				placeholder={placeholder}
 				value={value || ''}
 			/>

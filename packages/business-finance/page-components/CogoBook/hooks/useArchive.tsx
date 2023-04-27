@@ -112,7 +112,7 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 					period         : month.period || undefined,
 					startDate      : date ? format(date?.startDate, 'yyyy-MM-dd') : undefined,
 					endDate        : date ? format(date?.endDate, 'yyyy-MM-dd') : undefined,
-					archivedStatus : archivedStatus || 'BOOKED' || undefined,
+					archivedStatus : archivedStatus || undefined,
 					serviceType    : serviceType || undefined,
 					query,
 					Amount         : Amount === '' ? undefined : Amount,

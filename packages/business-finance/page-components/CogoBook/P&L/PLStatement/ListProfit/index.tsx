@@ -1,4 +1,5 @@
-import { IcMArrowDown } from '@cogoport/icons-react';
+import { Tooltip } from '@cogoport/components';
+import { IcMArrowDown, IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import { mappingData } from '../constant';
@@ -130,12 +131,56 @@ function ListProfit({
 						)}
 						{dropDown?.revenue && (
 							<div className={styles.row_vis_data}>
-								{isRowVisible && <div>Booked Revenue</div>}
-								{isRowVisible && <div>Accrued Revenue</div>}
+								{isRowVisible && (
+									<div style={{ display: 'flex' }}>
+										Billed Revenue
+										<Tooltip
+											content={(
+												<div className={styles.font_size_tooltip}>
+													Invoiced revenue w.r.t
+													<br />
+													current month SIDs +
+													<br />
+													Invoiced revenue w.r.t
+													<br />
+													previous months SIDs
+													<br />
+													in freeze state
+												</div>
+											)}
+											placement="top"
+										>
+											<div className={styles.info_icon_container}>
+												<IcMInfo />
+											</div>
+										</Tooltip>
+									</div>
+								)}
+								{isRowVisible && (
+									<div style={{ display: 'flex' }}>
+										Unbilled Revenue
+										<Tooltip
+											content={(
+												<div className={styles.font_size_tooltip}>
+													Accrued Revenue w.r.t
+													{' '}
+													<br />
+													{' '}
+													current month SIDs
+												</div>
+											)}
+											placement="top"
+										>
+											<div className={styles.info_icon_container}>
+												<IcMInfo />
+											</div>
+										</Tooltip>
+									</div>
+								)}
 							</div>
 						) }
 
-						{isRowVisible &&	(
+						{isRowVisible && (
 							<div className={styles.particular_data_review}>
 								(-) Operating Expenses
 								<div
@@ -151,8 +196,12 @@ function ListProfit({
 						)}
 						{dropDown?.operating && (
 							<div className={styles.row_vis_data}>
-								{isRowVisible &&	<div>Booked Expenses</div>}
-								{isRowVisible &&	<div>Accrued Expenses</div>}
+								{isRowVisible && (
+									<>
+										<div>Billed Expense</div>
+										<div>Accrued Expense</div>
+									</>
+								)}
 							</div>
 						)}
 					</div>
@@ -781,11 +830,6 @@ function ListProfit({
 								Extraordinary Items
 							</div>
 						)}
-						{isRowVisible && (
-							<div className={styles.depreciation}>
-								Prior Period Item
-							</div>
-						)}
 
 					</div>
 
@@ -805,12 +849,6 @@ function ListProfit({
 												{(totalExtraordinaryItems).toLocaleString('en-IN', options)}
 											</div>
 										)}
-										{isRowVisible && (
-											<div className={styles.particular_data}>
-												{(totalPriorPeriodItem).toLocaleString('en-IN', options)}
-											</div>
-										)}
-
 									</div>
 								);
 							}
@@ -824,11 +862,6 @@ function ListProfit({
 									{isRowVisible && (
 										<div className={styles.particular_data}>
 											{(totalExtraordinaryItems * ratio).toLocaleString('en-IN', options)}
-										</div>
-									)}
-									{isRowVisible && (
-										<div className={styles.particular_data}>
-											{(totalPriorPeriodItem * ratio).toLocaleString('en-IN', options)}
 										</div>
 									)}
 
