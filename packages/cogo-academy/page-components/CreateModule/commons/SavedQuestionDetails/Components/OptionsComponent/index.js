@@ -1,14 +1,21 @@
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import ModalComponent from './ModalComponent';
 
 function OptionsComponent({
 	item,
+	questionToShow,
 	...restProps
 }) {
 	const [questionDetails, setQuestionDetails] = useState({});
+
+	useEffect(() => {
+		if (item.id === questionToShow) {
+			setQuestionDetails(item);
+		}
+	}, [item, questionToShow]);
 
 	return (
 		<div>

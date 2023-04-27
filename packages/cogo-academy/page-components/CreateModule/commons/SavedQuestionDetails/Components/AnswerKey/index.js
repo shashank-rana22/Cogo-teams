@@ -7,7 +7,7 @@ import CaseAnswerKey from '../CaseAnswerKey';
 
 import styles from './styles.module.css';
 
-function AnswerKey({ item, caseToShow }) {
+function AnswerKey({ item, caseToShow, setQuestionToShow = () => {} }) {
 	const { test_question_answers = [] } = item || {};
 
 	const filterCorrectOptions = useMemo(() => (test_question_answers || []).filter(
@@ -20,7 +20,13 @@ function AnswerKey({ item, caseToShow }) {
 	);
 
 	if (item?.question_type === 'case_study') {
-		return <CaseAnswerKey item={item} caseToShow={caseToShow} />;
+		return (
+			<CaseAnswerKey
+				item={item}
+				setQuestionToShow={setQuestionToShow}
+				caseToShow={caseToShow}
+			/>
+		);
 	}
 
 	if (item?.question_type === 'subjective') {
@@ -37,7 +43,11 @@ function AnswerKey({ item, caseToShow }) {
 				</div>
 			)}
 		>
-			<div className={styles.answer_key}>
+			<div
+				role="presentation"
+				onClick={() => setQuestionToShow(item?.id)}
+				className={styles.answer_key}
+			>
 				{getCorrectAnswers({ answers: test_question_answers })}
 			</div>
 		</Tooltip>

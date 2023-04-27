@@ -21,6 +21,7 @@ function ModalComponent({
 	questionDetails,
 	setQuestionDetails,
 	allKeysSaved,
+	setQuestionToShow,
 }) {
 	const {
 		handleEditQuestion,
@@ -45,7 +46,10 @@ function ModalComponent({
 		<div>
 			<Modal
 				show={!isEmpty(questionDetails)}
-				onClose={() => setQuestionDetails({})}
+				onClose={() => {
+					setQuestionDetails({});
+					setQuestionToShow('');
+				}}
 				placement="center"
 				showCloseIcon={false}
 				className={styles.modal_container}
@@ -56,7 +60,10 @@ function ModalComponent({
 						<IcMCross
 							width={18}
 							height={18}
-							onClick={() => setQuestionDetails({})}
+							onClick={() => {
+								setQuestionDetails({});
+								setQuestionToShow('');
+							}}
 							className={styles.close_icon}
 						/>
 

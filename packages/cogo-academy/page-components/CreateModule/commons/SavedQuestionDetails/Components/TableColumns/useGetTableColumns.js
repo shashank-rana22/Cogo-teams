@@ -24,13 +24,17 @@ const useGetTableColumns = ({
 	editDetails,
 }) => {
 	const [caseToShow, setCaseToShow] = useState('');
+	const [questionToShow, setQuestionToShow] = useState('');
 
 	return [
 		{
 			Header   : 'QUESTION TYPE',
 			id       : 'question_type',
-			accessor : ({ question_type }) => (
-				<section>
+			accessor : ({ question_type, id = '' }) => (
+				<section
+					role="presentation"
+					onClick={() => setQuestionToShow(id)}
+				>
 					{question_type === 'case_study' ? 'Case Study' : 'Stand Alone'}
 				</section>
 			),
@@ -48,11 +52,23 @@ const useGetTableColumns = ({
 					<div
 						role="presentation"
 						className={styles.question_div}
-						onClick={() => setCaseToShow(item.id === caseToShow ? '' : item.id)}
+						onClick={() => {
+							if (item?.question_type !== 'case_study') {
+								setQuestionToShow(item?.id);
+							}
+						}}
 					>
 						{item?.question_type !== 'case_study'
 							? item?.question_text
-							: <CaseQuestion item={item} from="normal" caseToShow={caseToShow} />}
+							: (
+								<CaseQuestion
+									item={item}
+									from="normal"
+									caseToShow={caseToShow}
+									setQuestionToShow={setQuestionToShow}
+									setCaseToShow={setCaseToShow}
+								/>
+							)}
 					</div>
 				</Tooltip>
 			),
@@ -61,7 +77,10 @@ const useGetTableColumns = ({
 			Header   : 'ANSWER TYPE',
 			id       : 'answer_type',
 			accessor : (item) => (
-				<section>
+				<section
+					role="presentation"
+					onClick={() => setQuestionToShow(item?.id)}
+				>
 					{item?.question_type !== 'case_study'
 						? startCase(item?.question_type)
 						: <CaseAnswerType item={item} caseToShow={caseToShow} />}
@@ -72,14 +91,21 @@ const useGetTableColumns = ({
 			Header   : 'ANSWER KEY',
 			id       : 'answer_key',
 			accessor : (item) => (
-				<AnswerKey item={item} caseToShow={caseToShow} />
+				<AnswerKey
+					item={item}
+					caseToShow={caseToShow}
+					setQuestionToShow={setQuestionToShow}
+				/>
 			),
 		},
 		{
 			Header   : 'DIFFICULTY LEVEL',
 			id       : 'difficulty_level',
-			accessor : ({ difficulty_level }) => (
-				<section>
+			accessor : ({ difficulty_level, id = '' }) => (
+				<section
+					role="presentation"
+					onClick={() => setQuestionToShow(id)}
+				>
 					{startCase(difficulty_level)}
 				</section>
 			),
@@ -97,8 +123,11 @@ const useGetTableColumns = ({
 				</div>
 			),
 			id       : 'updated_at',
-			accessor : ({ updated_at }) => (
-				<div>
+			accessor : ({ updated_at, id = '' }) => (
+				<div
+					role="presentation"
+					onClick={() => setQuestionToShow(id)}
+				>
 					{format(updated_at, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}
 				</div>
 			),
@@ -117,6 +146,8 @@ const useGetTableColumns = ({
 					allKeysSaved={allKeysSaved}
 					mode={mode}
 					editDetails={editDetails}
+					questionToShow={questionToShow}
+					setQuestionToShow={setQuestionToShow}
 				/>
 			),
 		},
