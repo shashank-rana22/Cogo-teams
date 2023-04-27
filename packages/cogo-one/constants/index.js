@@ -5,7 +5,6 @@ import {
 	IcCAir,
 	IcMFftl,
 	IcMFltl, IcCTelegram,
-	IcMTick, IcMCross, IcMLineredo,
 } from '@cogoport/icons-react';
 
 export const SOURCE_ICON_MAPPING = {
