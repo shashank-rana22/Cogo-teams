@@ -1,6 +1,7 @@
 .flex {
 	display: flex;
 	align-items: center;
+	width: 60%;
 
 	svg {
 		cursor: pointer;
@@ -8,7 +9,7 @@
 }
 
 .name {
-	max-width: 410px;
+	width: 100%;
 	overflow: hidden;
 	font-size: 16px;
 	line-height: 24px;
@@ -29,4 +30,8 @@
 	font-size: 12px;
 	color: #828282;
 	text-align: left;
+}
+
+.parent {
+	width: 75%;
 }

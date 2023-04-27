@@ -28,7 +28,7 @@ function HeaderName({ formattedData = {} }) {
 	return (
 		<div className={styles.flex}>
 			<UserAvatar type={channel_type} />
-			<div>
+			<div className={styles.parent}>
 				<div className={styles.name}>
 					{startCase(user_name) || 'User'}
 					{channel_type === 'whatsapp' && (
