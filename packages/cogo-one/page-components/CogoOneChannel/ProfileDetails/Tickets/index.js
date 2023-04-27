@@ -8,7 +8,7 @@ import useCreateTicketActivity from '../../../../hooks/useCreateTicketActivity';
 import EachTicket from './EachTicket';
 import styles from './styles.module.css';
 
-function Tickets({ zippedTicketsData = {} }) {
+function Tickets({ zippedTicketsData = {}, setActiveSelect = () => {} }) {
 	const router = useRouter();
 	const {
 		statsLoading,
@@ -59,14 +59,17 @@ function Tickets({ zippedTicketsData = {} }) {
 		window.open(URL, '_blank');
 	};
 	const refetchLoading = statsLoading || listLoading;
-	const renderTickets = () => {
-		if (!isUserOnboarded) {
-			return (
-				<div className={styles.loader}>
-					<div className={styles.no_tickets}>Please Onboard this User to Create tickets</div>
+	if (!isUserOnboarded) {
+		return (
+			<div className={styles.loader}>
+				<div className={styles.anonymous_user}>
+					Please Onboard this User
+					<span tabIndex={0} role="button" onClick={() => setActiveSelect('profile')}>here</span>
 				</div>
-			);
-		}
+			</div>
+		);
+	}
+	const renderTickets = () => {
 		if (listLoading) {
 			return (
 				<div className={styles.loader}>

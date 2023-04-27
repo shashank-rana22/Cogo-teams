@@ -161,3 +161,15 @@
 	cursor: pointer;
 	fill: #4f4f4f;
 }
+
+.anonymous_user {
+	font-size: 16px;
+	font-weight: 600;
+	color: #4f4f4f;
+
+	>span {
+		margin-left: 5px;
+		text-decoration: underline;
+		cursor: pointer;
+	}
+}

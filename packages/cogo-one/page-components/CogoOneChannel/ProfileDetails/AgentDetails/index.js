@@ -121,24 +121,26 @@ function AgentDetails({
 		setShowMore(true);
 		setActiveSelect('user_activity');
 	};
-
-	return (isEmpty(userId) && isEmpty(leadUserId) && isEmpty(mobile_no) && activeRoomLoading) ? (
-		<>
-			<div className={styles.title}>Profile</div>
-			<EmptyState
-				type="profile"
-				user_type={user_type}
-				leadLoading={leadLoading}
-				handleSubmit={handleSubmit}
-				showAddNumber={showAddNumber}
-				setProfilevalue={setProfilevalue}
-				setShowAddNumber={setShowAddNumber}
-				profileValue={profileValue}
-				showError={showError}
-				setShowError={setShowError}
-			/>
-		</>
-	) : (
+	if (!userId && !leadUserId && !mobile_no) {
+		return (
+			<>
+				<div className={styles.title}>Profile</div>
+				<EmptyState
+					type="profile"
+					user_type={user_type}
+					leadLoading={leadLoading}
+					handleSubmit={handleSubmit}
+					showAddNumber={showAddNumber}
+					setProfilevalue={setProfilevalue}
+					setShowAddNumber={setShowAddNumber}
+					profileValue={profileValue}
+					showError={showError}
+					setShowError={setShowError}
+				/>
+			</>
+		);
+	}
+	return (
 		<>
 			<div className={styles.top_div}>
 				<div className={styles.title}>Profile</div>
