@@ -150,12 +150,6 @@ const cogoLens = [
 		service_name : 'cogolens',
 	},
 	{
-		api          : 'create_draft_email',
-		access_type  : 'private',
-		feature      : 'cogolens',
-		service_name : 'cogolens',
-	},
-	{
 		api          : 'update_rpa_mail',
 		access_type  : 'private',
 		feature      : 'cogolens',
@@ -203,6 +197,19 @@ const cogoLens = [
 		feature      : 'cogolens',
 		service_name : 'cogolens',
 	},
+	{
+		api          : 'draft_mail',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
+	{
+		api          : 'classify_docs',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
+
 ];
 
 export default cogoLens;
