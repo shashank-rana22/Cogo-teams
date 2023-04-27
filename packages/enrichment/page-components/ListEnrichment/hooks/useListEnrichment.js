@@ -97,17 +97,11 @@ const useListEnrichment = () => {
 		{
 			id       : 'id',
 			Header   : 'SERIAL ID',
-			accessor : ({ organization, lead_organization, lead_organization_id }) => (
+			accessor : ({ organization, lead_organization }) => (
 				<section>
 					<Pill>
 						#
-						{
-							lead_organization_id ? (
-								(lead_organization || {}).serial_id || '-'
-							) : (
-								(organization || {}).serial_id || '-'
-							)
-						}
+						{lead_organization?.serial_id || organization?.serial_id}
 					</Pill>
 				</section>
 			),
