@@ -60,10 +60,11 @@ const useResubmitKyc = ({
 		}
 
 		if (object.value === 'company_type') {
-			const options = getConstantsByCountryCode({ country_id: formValueCountryId || vendorCountryId })
-				.options.registration_types;
+			const options = getConstantsByCountryCode({ country_id: formValueCountryId || vendorCountryId });
 
-			return { ...newcontrol, options };
+			const { options: { registration_types } } = options;
+
+			return { ...newcontrol, options: registration_types };
 		}
 
 		return newcontrol;

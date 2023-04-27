@@ -172,11 +172,13 @@ function useOnBoardVendor({
 		}
 
 		if (field.name === 'company_type') {
-			const options = getConstantsByCountryCode({ country_id }).options.registration_types;
+			const companyTypeOptions = getConstantsByCountryCode({ country_id });
+
+			const { options: { registration_types } } = companyTypeOptions || {};
 
 			newField = {
 				...newField,
-				options,
+				options: registration_types,
 			};
 		}
 
