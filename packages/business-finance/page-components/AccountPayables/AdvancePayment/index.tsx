@@ -58,7 +58,7 @@ function AdvancePayment({ activeEntity }:ItemProps) {
 				/>
 			</div>
 			<div className={styles.list}>
-				{list?.length > 0
+				{loading || list?.length > 0
 					? (
 						<List
 							itemData={data}

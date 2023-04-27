@@ -41,7 +41,7 @@ const useGetCreateNewPayRun = ({ activeEntity, currency }:FilterProps) => {
 				},
 			});
 		} catch (err) {
-			Toast.error(err.meessage);
+			Toast.error(err?.response?.data?.message);
 		}
 		return resp;
 	};

@@ -12,8 +12,9 @@ interface NestedObj {
 interface FilterProps {
 	activeEntity?: string;
 	sort: NestedObj;
+	viewSelectedInvoice?:boolean;
 }
-const useGetAdvancePaymentList = ({ activeEntity, sort }:FilterProps) => {
+const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:FilterProps) => {
 	const {
 		user_data:UserData,
 	} = useSelector(({ profile }) => ({
@@ -32,14 +33,8 @@ const useGetAdvancePaymentList = ({ activeEntity, sort }:FilterProps) => {
 	const { query = '', debounceQuery } = useDebounceQuery();
 	const {
 		query: urlQuery,
-		// performedBy,
-		// performedByType,
-		// performedByName,
-	} = useSelector(({ general, profile }) => ({
-		query           : general.query,
-		performedBy     : profile.id,
-		performedByType : profile.session_type,
-		performedByName : profile.name,
+	} = useSelector(({ general }) => ({
+		query: general.query,
 	}));
 
 	const {
@@ -129,14 +124,16 @@ const useGetAdvancePaymentList = ({ activeEntity, sort }:FilterProps) => {
 					},
 				});
 			} catch (err) {
-				Toast.error(err.meessage);
+				console.log(err?.response?.data?.message);
 			}
 		})();
 	}, [query, trigger, activeEntity, service, pageIndex, sort, entity]);
 
 	useEffect(() => {
-		getAdvancedPayment();
-	}, [getAdvancedPayment]);
+		if (viewSelectedInvoice === false || viewSelectedInvoice === undefined) {
+			getAdvancedPayment();
+		}
+	}, [getAdvancedPayment, activeEntity, service, entity, query, sort, pageIndex, viewSelectedInvoice]);
 
 	const submitSelectedInvoices = async () => {
 		const { list = [] } = apiData ?? {};
@@ -199,32 +196,41 @@ const useGetAdvancePaymentList = ({ activeEntity, sort }:FilterProps) => {
 				},
 			});
 			Toast.success('Invoice added to Payrun Successfully');
-			setTimeout(() => {
+			setTimeout(async () => {
 				getAdvancedPayment();
-			}, 100);
+			}, 1000);
 		} catch (e) {
-			Toast.error(e?.response?.data?.message);
+			if (e?.response?.data?.message) {
+				Toast.error(e?.response?.data?.message);
+			}
 		}
 		return null;
 	};
-	const getViewSelectedInvoices = async () => {
-		try {
-			await viewSelectedTrigger({
-				params: {
-					pageIndex,
-					pageSize   : 10,
-					payrunId   : payrun || selectedPayRunId,
-					// hasPayrun   : false,
-					q          : query !== '' ? query : undefined,
-					entityCode : activeEntity || entity,
-					// serviceType : service || undefined,
-					// ...sort,
-				},
-			});
-		} catch (err) {
-			Toast.error(err.meessage);
+	const getViewSelectedInvoices = useCallback(() => {
+		(async () => {
+			try {
+				await viewSelectedTrigger({
+					params: {
+						pageIndex,
+						pageSize    : 10,
+						payrunId    : payrun || selectedPayRunId,
+						q           : query !== '' ? query : undefined,
+						entityCode  : activeEntity || entity,
+						serviceType : service || undefined,
+						...sort,
+					},
+				});
+			} catch (error) {
+				console.log(error?.response?.data?.message);
+			}
+		})();
+	}, [viewSelectedTrigger, pageIndex, payrun, selectedPayRunId, query, activeEntity, entity, service, sort]);
+
+	useEffect(() => {
+		if (viewSelectedInvoice === true) {
+			getViewSelectedInvoices();
 		}
-	};
+	}, [getViewSelectedInvoices, service, query, sort, pageIndex, viewSelectedInvoice]);
 
 	const deleteInvoices = async (id) => {
 		try {
@@ -237,7 +243,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort }:FilterProps) => {
 			Toast.success('Invoice deleted successfully');
 			getViewSelectedInvoices();
 		} catch (e) {
-			Toast.error(e?.data?.message);
+			Toast.error(e?.response?.data?.message);
 		}
 	};
 

@@ -26,6 +26,7 @@ import styles from './styles.module.css';
 
 function CreateNewPayRun() {
 	const [sort, setSort] = useState({});
+	const [viewSelectedInvoice, setViewSelectedInvoice] = useState(false);
 	const {
 		filters, setFilters, data, loading, entity,
 		apiData,
@@ -38,8 +39,7 @@ function CreateNewPayRun() {
 		selectedPayRunId,
 		deleteSelecteInvoiceLoading,
 		deleteInvoices,
-
-	} = useGetAdvancePaymentList({ sort });
+	} = useGetAdvancePaymentList({ sort, viewSelectedInvoice });
 	const {
 		data:existpayRunData, loading:existingPayRunLoading,
 		getAdvancedPayment,
@@ -52,8 +52,8 @@ function CreateNewPayRun() {
 	}, []);
 	const { list } = existpayRunData || {};
 	const { pageIndex } = data || {};
-	const [viewSelectedInvoice, setViewSelectedInvoice] = useState(false);
 
+	const listLength = viewSelectedInvoice ? viewSelectedData?.list?.length : data?.list?.length;
 	const functions = {
 		renderCheckbox    : (itemData) => getTableBodyCheckbox(itemData),
 		renderBankDetails : (itemData) => <BankDetails itemData={itemData} />,
@@ -185,7 +185,7 @@ function CreateNewPayRun() {
 					<SelectFilters filters={filters} setFilters={setFilters} />
 				</div>
 				<div className={styles.list_container}>
-					{data?.list?.length || viewSelectedData?.list?.length > 0 ? (
+					{(loading || viewSelectedDataLoading || listLength > 0) ? (
 						<List
 							itemData={viewSelectedInvoice ? viewSelectedData : data}
 							loading={viewSelectedInvoice ? viewSelectedDataLoading : loading}
@@ -214,6 +214,7 @@ function CreateNewPayRun() {
 					getViewSelectedInvoices={getViewSelectedInvoices}
 					getAdvancedPayment={getAdvancedPayment}
 					viewSelectedData={viewSelectedData}
+					selectedPayRunId={selectedPayRunId}
 				/>
 			</div>
 

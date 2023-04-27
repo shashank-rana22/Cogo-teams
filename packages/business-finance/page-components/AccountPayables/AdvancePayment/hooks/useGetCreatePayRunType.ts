@@ -39,7 +39,7 @@ const useGetCreatePayRunType = ({ activeEntity, currency, selectedPayRunId }:Fil
 				},
 			});
 		} catch (err) {
-			Toast.error(err.meessage);
+			Toast.error(err?.response?.data?.message);
 		}
 	};
 

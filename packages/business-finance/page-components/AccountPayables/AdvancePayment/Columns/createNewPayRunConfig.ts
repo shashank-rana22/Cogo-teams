@@ -45,13 +45,13 @@ export const CREATE_NEW_PAYRUN_CONFIG = {
 				type : 'serviceType',
 			},
 			func : 'renderSIDnumber',
-			span : 1.1,
+			span : 1,
 		},
 		{
 			key   : 'organizationName',
 			label : 'Organisation',
 			func  : 'renderOrganization',
-			span  : 1.5,
+			span  : 2,
 		},
 		{
 			label   : 'Advance Amount',
@@ -64,7 +64,7 @@ export const CREATE_NEW_PAYRUN_CONFIG = {
 			key   : 'bankName',
 			label : 'Bank Account Details',
 			func  : 'renderBankDetails',
-			span  : 2,
+			span  : 1.6,
 		},
 		{
 			key     : 'requestedBy',

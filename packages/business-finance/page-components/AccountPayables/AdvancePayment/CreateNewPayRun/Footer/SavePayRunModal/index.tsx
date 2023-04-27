@@ -8,12 +8,14 @@ import styles from './styles.module.css';
 function SavePayRunModal({
 	savePayrunModal,
 	setSavePayrunModal,
+	setViewSelectedInvoice,
 }) {
 	const handleCloseModal = () => {
 		setSavePayrunModal(false);
 	};
 	const { push } = useRouter();
 	const handleClick = () => {
+		setViewSelectedInvoice(false);
 		push(
 			'/business-finance/account-payables/[active_tab]',
 			'/business-finance/account-payables/advance-payment',

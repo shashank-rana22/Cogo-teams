@@ -47,9 +47,6 @@ function ExitingPayRun({
 	const { push } = useRouter();
 	const [value, setValue] = useState('');
 
-	// const handleClick = () => (
-	// 	push('/business-finance/account-payables/advance-payment/add-into-existing-payrun')
-	// );
 	const handleClick = () => (
 		push(`/business-finance/account-payables/advance-payment/create-new-payrun?selectedPayRunId=${value}
 		&currency=${currency}&entity=${activeEntity}`)
@@ -112,11 +109,18 @@ function ExitingPayRun({
 					/>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button themeType="secondary" onClick={() => { setExitPayRun(false); }}>Cancel</Button>
+					<Button
+						themeType="secondary"
+						disabled={loading}
+						onClick={() => { setExitPayRun(false); }}
+					>
+						Cancel
+
+					</Button>
 					<div className={styles.button}>
 						<Button
 							onClick={handleClick}
-							disabled={value === ''}
+							disabled={value === '' || loading}
 						>
 							Confirm
 

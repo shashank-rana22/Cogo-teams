@@ -17,13 +17,13 @@ export const VIEW_SELECTED_CONFIG = {
 		{
 			label : 'Adv. Doc. No.',
 			key   : 'advanceDocumentNo',
-			span  : 1,
+			span  : 1.3,
 		},
 		{
 			label : 'Incident Number',
 			key   : 'incidentRefNo',
 			func  : 'renderIncidentNumber',
-			span  : 1.1,
+			span  : 1.2,
 		},
 		{
 			label  : 'SID',
@@ -38,13 +38,13 @@ export const VIEW_SELECTED_CONFIG = {
 				type : 'serviceType',
 			},
 			func : 'renderSIDnumber',
-			span : 1.2,
+			span : 1,
 		},
 		{
 			key   : 'organizationName',
 			label : 'Organisation',
 			func  : 'renderOrganization',
-			span  : 1.5,
+			span  : 2,
 		},
 		{
 			label   : 'Advance Amount',
@@ -69,14 +69,14 @@ export const VIEW_SELECTED_CONFIG = {
 			key     : 'requestedBy',
 			label   : 'Requested by & on',
 			sorting : { name: 'requestedAtSortType' },
-			span    : 1.7,
+			span    : 1.9,
 			func    : 'renderRequestedBy',
 		},
 		{
 			label   : 'Approved by & on',
 			key     : 'approvedBy',
 			sorting : { name: 'approvedAtSortType' },
-			span    : 1.7,
+			span    : 1.9,
 			func    : 'renderApprovedBy',
 		},
 		{

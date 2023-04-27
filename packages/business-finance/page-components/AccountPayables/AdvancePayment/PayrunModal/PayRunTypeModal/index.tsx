@@ -51,25 +51,47 @@ function PayRunTypeModal({
 		const resp: CreateNewPayRunResponse = await getCreateNewPayRun();
 		push(`/business-finance/account-payables/advance-payment/create-new-payrun?payrun=${resp?.data?.id}
 		&currency=${currency}&entity=${activeEntity}`);
+
+		setPayRunType(false);
 	};
 	const [exitPayRun, setExitPayRun] = useState(false);
 	return (
 		<div className={styles.container}>
 			<Modal size="md" show={payRunType} onClose={() => setPayRunType(false)} placement="top">
 
-				<Modal.Body>
+				<div className={styles.body}>
 					{ loading ? <Placeholder className={styles.loader} />
 						: (
 							<div className={styles.sub_container}>
-								{totalRecords}
-								{' '}
+
 								{totalRecords > 0
-									? (`Pay Runs Available with same entity & currency. 
-							You can either create a new payrun or add more invoices into existing one`)
-									: 'Pay Run Available, Please Create a new Payrun'}
+									?									(
+										<div>
+											<div className={styles.header}>
+												{totalRecords}
+												{' '}
+												{' '}
+												Pay Runs Available with same entity & currency
+											</div>
+											<div className={styles.sub_header}>
+												You can either create a new payrun
+												or add more invoices into existing one
+											</div>
+										</div>
+									)
+									:									(
+										<div>
+											{totalRecords}
+											{' '}
+											{' '}
+											Pay Run Available, Please Create a new Payrun
+										</div>
+									)}
+
 							</div>
 						)}
-				</Modal.Body>
+				</div>
+
 				<Modal.Footer>
 					<Button
 						disabled={loading || totalRecords < 1}

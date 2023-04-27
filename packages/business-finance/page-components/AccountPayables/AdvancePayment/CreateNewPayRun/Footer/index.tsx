@@ -13,6 +13,7 @@ function Footer({
 	getViewSelectedInvoices,
 	getAdvancedPayment,
 	viewSelectedData,
+	selectedPayRunId,
 }) {
 	const {
 		list = [],
@@ -53,7 +54,13 @@ function Footer({
 					{viewSelectedInvoice
 						? (
 							<div className={styles.view_button}>
-								<Button onClick={() => { setSavePayrunModal(true); }}>Save PayRun</Button>
+								<Button
+									disabled={viewSelectedData?.list?.length <= 0}
+									onClick={() => { setSavePayrunModal(true); }}
+								>
+									Save PayRun
+
+								</Button>
 							</div>
 						)
 						: (
@@ -72,7 +79,9 @@ function Footer({
 									<Button onClick={() => {
 										setViewSelectedInvoice(true);
 										getViewSelectedInvoices();
-										getAdvancedPayment();
+										if (selectedPayRunId) {
+											getAdvancedPayment();
+										}
 									}}
 									>
 										View Selected SID
@@ -87,6 +96,7 @@ function Footer({
 				<SavePayRunModal
 					savePayrunModal={savePayrunModal}
 					setSavePayrunModal={setSavePayrunModal}
+					setViewSelectedInvoice={setViewSelectedInvoice}
 				/>
 			)}
 		</div>
