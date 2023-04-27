@@ -14,7 +14,10 @@ export default function Card({ item = {}, couldBeCardsCritical = false }) {
 	const router = useRouter();
 
 	const clickCard = () => {
-		router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}`);
+		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}`;
+
+		window.sessionStorage.setItem('prev_nav', newUrl);
+		window.location.href = newUrl;
 	};
 
 	return (
