@@ -10,8 +10,7 @@ export const stylesTHC = `
 
 .manifest_heading {
     border: 0.5px solid #333;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
     padding: 2px 8px;
 }
 

@@ -1,4 +1,4 @@
-import { Button, Loader } from '@cogoport/components';
+import { Button, Loader, Toast } from '@cogoport/components';
 import { usePublicRequest } from '@cogoport/request';
 import { saveAs } from 'file-saver';
 import { useEffect } from 'react';
@@ -12,6 +12,8 @@ import { stylesTHC } from './stylesTHC';
 interface NestedObj {
 	[key: string]: string;
 }
+
+const generateFromHtmlUrl = 'https://vmoiuzda31.execute-api.ap-south-1.amazonaws.com/production/generate_from_html';
 
 function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 	const { data, getManifest, loading:manifestLoading } = useGetManifest();
@@ -46,7 +48,7 @@ function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 	};
 
 	const [{ loading }, trigger] = usePublicRequest({
-		url    : 'https://vmoiuzda31.execute-api.ap-south-1.amazonaws.com/production/generate_from_html',
+		url    : generateFromHtmlUrl,
 		method : 'POST',
 	});
 
@@ -70,7 +72,7 @@ function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 				handleSave(url);
 			});
 		} catch (err) {
-			console.log(err);
+			Toast.error(err?.message || 'Failed to Download');
 		}
 	};
 
@@ -94,14 +96,6 @@ function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 				<div
 					className={styles.container}
 					id="manifest"
-					style={{
-						flex       : '1',
-						width      : '100%',
-						height     : '100%',
-						padding    : '12px 12px',
-						opacity    : 1,
-						background : '#fff',
-					}}
 				>
 					<div className="flex_column">
 						<div className="manifest_heading">CARGO MANIFEST</div>
@@ -156,7 +150,12 @@ function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 								const {
 									document_number:documentNumber,
 									totalPackagesCount,
-									weight, commodity, shipperName, shipperAddress, consigneeName, consigneeAddress,
+									weight,
+									commodity,
+									shipperName,
+									shipperAddress,
+									consigneeName,
+									consigneeAddress,
 								} = item.documentData;
 
 								return (

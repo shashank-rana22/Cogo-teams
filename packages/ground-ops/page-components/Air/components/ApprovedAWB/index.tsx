@@ -50,7 +50,7 @@ function ApprovedAWB({
 		handleDownloadManifest: (singleItem) => (
 			singleItem.blCategory === 'hawb' && (
 				<Button
-					themeType="link"
+					themeType="linkUi"
 					style={{ fontSize: 12 }}
 					onClick={() => { setTriggerManifest(singleItem.shipmentId); }}
 					className={styles.manifest_download_button}
