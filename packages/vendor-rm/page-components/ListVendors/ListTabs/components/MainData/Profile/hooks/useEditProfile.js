@@ -60,11 +60,9 @@ function useEditProfile({
 		if (newFieldItem.name === 'company_type') {
 			const companyTypeOptions = getConstantsByCountryCode({ country_id });
 
-			const { options: { registration_types } } = companyTypeOptions;
-
 			newFieldItem = {
 				...newFieldItem,
-				options: registration_types,
+				options: companyTypeOptions.options.registration_types,
 			};
 		}
 
