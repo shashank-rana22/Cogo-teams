@@ -21,8 +21,7 @@ function TaskContainer({
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<div className={styles.text}>{taskName}</div>
-
+				<div className={styles.text}>{startCase(taskName)}</div>
 				{loading ? null : <div>{actions}</div>}
 			</div>
 

@@ -47,5 +47,10 @@
 			font-weight: 400;
 			color: #bdbdbd;
 		}
+
+		.ui_upload_droparea_subheading{
+			text-align: center;
+			opacity: 0.3;
+		}
 	}
 }

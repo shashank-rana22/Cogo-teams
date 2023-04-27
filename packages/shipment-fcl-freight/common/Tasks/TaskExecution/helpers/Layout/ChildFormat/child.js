@@ -42,9 +42,13 @@ function Child({
 		totalFields.push(rowWiseFields);
 	}
 
-	if (formValues?.documents[0]?.url?.fileName === '') {
-		const x = document.querySelector('.ui_upload_filesuccess_container');
-		x.style.display = 'none';
+	if (formValues?.documents?.[0]?.url?.fileName === ''
+	|| formValues?.documents_commercial_invoice?.[0]?.url?.fileName === ''
+	|| formValues?.documents_packing_list?.[0]?.url?.fileName === '') {
+		const elements = document.querySelectorAll('.ui_upload_filesuccess_container');
+		for (let i = 0; i < elements.length; i += 1) {
+			elements[i].style.display = 'none';
+		}
 	}
 
 	return (
