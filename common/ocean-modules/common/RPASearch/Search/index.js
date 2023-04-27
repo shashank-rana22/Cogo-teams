@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { IcMHelp } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -76,35 +77,40 @@ function RPASearch({
 
 	const content = (
 		<div className={styles.container}>
+
 			<div className={styles.header}>
 				<div className={styles.row}>
 					<div className={styles.heading}>{heading}</div>
-					<Button
-						className="primary sm text"
-						style={{ marginLeft: 10 }}
+
+					<div
+						className={styles.custom_button}
+						role="button"
+						tabIndex={0}
 						onClick={() => {
 							setTask('how_it_works');
 						}}
 					>
 						How it Works
-					</Button>
-					{/* <Question style={{ marginLeft: '2px' }} /> */}
+					</div>
+
+					<IcMHelp style={{ marginLeft: '4px' }} />
 				</div>
 
 				<div className={styles.styled_feedback}>
-					<Button
-						className="primary sm text"
-						style={{ marginLeft: 10 }}
+					<div
+						className={styles.custom_button}
+						role="button"
+						tabIndex={0}
 						onClick={() => setTask('feed_back')}
 					>
 						Give FeedBack
-					</Button>
+					</div>
 				</div>
 			</div>
 
 			<div className={styles.important_note}>
 				Do not miss out on automations
-				{' '}
+                &nbsp;
 				<div
 					className={styles.how_it_works}
 					role="button"
@@ -115,7 +121,7 @@ function RPASearch({
 				>
 					check how it works
 				</div>
-				{' '}
+				&nbsp;
 				and see important note
 			</div>
 
