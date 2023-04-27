@@ -68,6 +68,7 @@ function List() {
 									isTaskOpen
 									tasksList={tasksList}
 									loading={loading}
+									shipment_data={shipment_data}
 								/>
 
 								<TaskExecution

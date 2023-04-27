@@ -3,7 +3,13 @@ import TaskDetails from './TaskDetails';
 import UpdateAction from './UpdateAction';
 import UpdateButton from './UpdateButton';
 
-function Card({ task = {}, handleClick = () => {}, selectedTaskId = '', isTaskOpen = false }) {
+function Card({
+	task = {},
+	handleClick = () => {},
+	selectedTaskId = '',
+	isTaskOpen = false,
+	shipment_data = {},
+}) {
 	return (
 		<div className={styles.container}>
 
@@ -17,6 +23,7 @@ function Card({ task = {}, handleClick = () => {}, selectedTaskId = '', isTaskOp
 						task={task}
 						handleClick={handleClick}
 						hideButton={task.status === 'completed' || selectedTaskId.length}
+						shipment_type={shipment_data?.shipment_type}
 					/>
 				)}
 
