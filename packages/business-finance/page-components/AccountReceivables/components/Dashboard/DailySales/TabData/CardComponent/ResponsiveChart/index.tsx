@@ -55,7 +55,7 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 		},
 	];
 
-	if (!data) {
+	if (!data.length && !loadingData) {
 		return <EmptyState />;
 	}
 	return (
