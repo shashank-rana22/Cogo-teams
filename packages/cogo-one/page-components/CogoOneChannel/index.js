@@ -71,10 +71,12 @@ function CogoOne() {
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
 	useEffect(() => {
-		const auth = getAuth();
-		signInWithCustomToken(auth, token).catch((error) => {
-			console.log(error.message);
-		});
+		if (process.env.NODE_ENV === 'production') {
+			const auth = getAuth();
+			signInWithCustomToken(auth, token).catch((error) => {
+				console.log(error.message);
+			});
+		}
 	}, [token]);
 
 	const firestore = getFirestore(app);
