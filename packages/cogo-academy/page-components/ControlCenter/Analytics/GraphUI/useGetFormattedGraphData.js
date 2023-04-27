@@ -2,7 +2,7 @@ import { format } from '@cogoport/utils';
 
 const MAPPING = {
 	view_data_points: {
-		color: '#2a9df4', title: 'Views',
+		color: '#2a9df4', title: 'View count',
 	},
 	answers_not_available_data_points: {
 		color: '#a3a3a3', title: 'Answer not available',
@@ -11,7 +11,7 @@ const MAPPING = {
 		color: '#ABCD62', title: 'Answer available',
 	},
 	search_data_points: {
-		color: '#EE3425', title: 'Searches',
+		color: '#EE3425', title: 'Total searches',
 	},
 };
 

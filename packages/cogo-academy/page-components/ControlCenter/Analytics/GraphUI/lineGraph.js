@@ -7,7 +7,7 @@ function LineGraph({ graphData }) {
 			data={graphData}
 			margin={{
 				right  : 10,
-				top    : 110,
+				top    : 50,
 				bottom : 50,
 				left   : 60,
 			}}
@@ -52,15 +52,15 @@ function LineGraph({ graphData }) {
 			useMesh
 			legends={[
 				{
-					anchor            : 'bottom-right',
-					direction         : 'column',
+					anchor            : 'upper-left',
+					direction         : 'row',
 					justify           : false,
-					translateX        : -700,
-					translateY        : -264,
-					itemsSpacing      : 14,
+					translateX        : -6,
+					translateY        : 0,
+					itemsSpacing      : 50,
 					itemDirection     : 'left-to-right',
 					itemWidth         : 90,
-					itemHeight        : 0,
+					itemHeight        : -40,
 					itemOpacity       : 0.75,
 					symbolSize        : 10,
 					symbolShape       : 'circle',
