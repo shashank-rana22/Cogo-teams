@@ -12,7 +12,7 @@ function RenderAppliedFilters({ appliedFilters, setFilters }) {
 	};
 
 	return appliedFilters.map(([key, val]) => {
-		if (key === 'shipment_type') return null;
+		if (key === 'shipment_type' || key === 'isCriticalOn') return null;
 
 		return (
 			<div className={styles.applied_filters}>
@@ -20,7 +20,7 @@ function RenderAppliedFilters({ appliedFilters, setFilters }) {
 					key={key}
 					className={`${styles.applied_filter} ${styles.clearable}`}
 				>
-					{key === 'isCriticalOn' ? 'Critical SIDs' : startCase(val)}
+					{startCase(val)}
 				</span>
 
 				<button onClick={() => handleClearOneFilter(key)} className={styles.clear_filter_icon}>

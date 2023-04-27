@@ -38,17 +38,6 @@ export default function FCLDesk({ stateProps = {} }) {
 					/>
 				</div>
 				<div className={styles.top_header_container}>
-					{couldBeCardsCritical ? (
-						<div className={styles.critical_container}>
-							<Toggle
-								size="md"
-								offLabel="Critical SIDs"
-								checked={filters.isCriticalOn}
-								onChange={() => { setFilters({ ...filters, isCriticalOn: !filters.isCriticalOn }); }}
-							/>
-						</div>
-					) : null}
-
 					<Filters stateProps={stateProps} />
 
 					<div className={styles.version}>

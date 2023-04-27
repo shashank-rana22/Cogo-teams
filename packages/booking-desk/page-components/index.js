@@ -4,8 +4,6 @@ import { useState, useEffect, useCallback } from 'react';
 
 import getValidatedStoredValues from '../utils/getValidatedStoredValues';
 
-import styles from './styles.module.css';
-
 const ResolveBookingDesk = {
 	fcl_freight       : dynamic(() => import('./FCL'), { ssr: false }),
 	fcl_freight_local : dynamic(() => import('./FCL-Local'), { ssr: false }),
@@ -43,9 +41,9 @@ export default function BookingDesk() {
 		return (
 			<div
 				key={filters.shipment_type}
-				className={styles.component_enter_active}
+
 			>
-				<RenderDesk stateProps={stateProps} className={styles.component_exit_active} />
+				<RenderDesk stateProps={stateProps} />
 			</div>
 		);
 	}
