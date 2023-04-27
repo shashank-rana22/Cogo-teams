@@ -38,7 +38,7 @@ function UploadCargoArrivalDocument({
 					<div className={styles.description}>
 						<div className={styles.label}>Document description (Optional)</div>
 						<InputController
-							size="md"
+							size="sm"
 							control={control}
 							name="document_description"
 						/>

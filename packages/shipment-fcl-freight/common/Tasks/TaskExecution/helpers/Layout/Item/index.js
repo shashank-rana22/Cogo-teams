@@ -17,6 +17,7 @@ function Item(props) {
 		heading,
 		rules,
 		className,
+		formValues,
 	} = props || {};
 
 	const errorOriginal = getErrorMessage({
@@ -50,6 +51,11 @@ function Item(props) {
 	const Element = getElementController(newProps.type);
 
 	const flex = ((span || 12) / 12) * 100 - 1;
+
+	if (formValues?.booking_reference_proof?.fileName === '') {
+		const element = document.querySelector('.ui_upload_filesuccess_container');
+		element.style.display = 'none';
+	}
 
 	return (
 		<div className={cl`${styles.element} ${className}`} style={{ width: `${flex}%` }}>
