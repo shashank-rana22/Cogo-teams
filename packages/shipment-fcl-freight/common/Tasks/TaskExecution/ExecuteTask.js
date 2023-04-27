@@ -4,8 +4,14 @@ import { useContext } from 'react';
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 
 import {
-	UploadBookingNote, UploadCargoArrival, UploadContainerDetails,
-	MarkConfirmServices, NominationTask, GenerateFreightCertificate, ChooseServiceProvider, UploadDraftBL,
+	UploadBookingNote,
+	UploadCargoArrival,
+	UploadContainerDetails,
+	MarkConfirmServices,
+	NominationTask,
+	GenerateFreightCertificate,
+	ChooseServiceProvider,
+	UploadDraftBL,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
@@ -149,7 +155,6 @@ function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {
 			stepConfig={stepConfigValue}
 			onCancel={onCancel}
 			refetch={taskListRefetch}
-			primaryService={primary_service}
 			isLastStep={currentStep === steps.length - 1}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}

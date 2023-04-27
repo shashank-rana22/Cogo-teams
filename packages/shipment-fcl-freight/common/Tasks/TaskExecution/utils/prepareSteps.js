@@ -95,9 +95,9 @@ const evaluateExpression = (operator, lhs, rhs) => {
 	if (operator === 'in') {
 		return lhs in rhs;
 	}
-	// if (operator === 'includes') {
-	// 	return lhs.includes(rhs);
-	// }
+	if (operator === 'includes') {
+		return (lhs || '').includes(rhs);
+	}
 	return true;
 };
 

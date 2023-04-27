@@ -1,26 +1,25 @@
 import getShowTaskFields from './get-show-task-fields';
-// import mutateFields from './mutate-fields';
+import mutateControls from './mutate-controls';
 
-// This was used in older code for injection form and form mutating
 const injectForm = ({
 	stepConfig,
-	// formProps, task, primaryService,
+	formProps,
+	task,
+	shipment_data,
 	formValues,
 }) => {
 	const showElements = getShowTaskFields(formValues, stepConfig.controls);
 
-	// const newFields = mutateFields(
-	// 	formProps.fields,
-	// 	primaryService,
-	// 	formValues,
-	// );
+	const finalControls = mutateControls(
+		stepConfig.controls,
+		formProps.setValue,
+		task,
+		shipment_data,
+		formValues,
+	);
 
 	return {
-		// finalConfig: {
-		// 	...config,
-		// 	formProps: { ...formProps, fields: newFields },
-		// },
-		// controls: config.controls,
+		controls: finalControls,
 		showElements,
 	};
 };

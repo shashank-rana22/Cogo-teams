@@ -12,7 +12,6 @@ function ExecuteStep({
 	refetch = () => {},
 	currentStep = 0,
 	isLastStep = false,
-	primaryService = {},
 	getApisData = {},
 	// uiConfig = {},
 }) {
@@ -23,7 +22,6 @@ function ExecuteStep({
 	} = useStepExecution({
 		task,
 		stepConfig,
-		primaryService,
 		getApisData,
 		// selectedMail,
 	});
