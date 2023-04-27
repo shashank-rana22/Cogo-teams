@@ -1,70 +1,18 @@
-import { Table, Button, Popover } from '@cogoport/components';
+import { Table, Button } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import FieldArray from '../../../../common/FieldArray';
+import tableColumns from '../../../../constants/get-configuration-columns';
+import editHeaders from '../../../../constants/get-edit-headers';
 import useEditEngagementScoringConfiguration from '../../../../hooks/useEditEngagementScoringConfiguration';
+import FieldArray from '../FieldArray';
 
 import styles from './styles.module.css';
-
-const columns = ['LIFECYCLE ITEM',
-	'DIY SCORE & WARMTH DURATION',
-	'ASSISTED SCORE & WARMTH DURATION',
-	'SYSTEM SCORE & WARMTH DURATION', 'COGOVERSE SCORE & WARMTH DURATION'];
-
-const tableColumns = [
-	{
-		Header   : 'LIFECYCLE ITEM',
-		accessor : ({ event_name = '' }) => (
-			<Popover placement="right" trigger="mouseenter" render={startCase(event_name)}>
-				<div className={styles.table_lifecycle_item}>{startCase(event_name)}</div>
-			</Popover>
-
-		),
-	},
-	{
-		Header   : 'DIY SCORE & WARMTH DURATION',
-		accessor : ({ diy_score = '', diy_warmth_duration = '' }) => (
-			<div>{(diy_score && diy_warmth_duration) ? `${diy_score} & ${diy_warmth_duration} days` : '-'}</div>
-		),
-	},
-	{
-		Header   : 'ASSISTED SCORE & WARMTH DURATION',
-		accessor : ({ assisted_score = '', assisted_warmth_duration = '' }) => (
-			<div>
-				{(assisted_score && assisted_warmth_duration)
-					? `${assisted_score} & ${assisted_warmth_duration} days` : '-'}
-
-			</div>
-		),
-	},
-	{
-		Header   : 'SYSTEM SCORE & WARMTH DURATION',
-		accessor : ({ system_score = '', system_warmth_duration = '' }) => (
-			<div>
-				{(system_score && system_warmth_duration)
-					? `${system_score} & ${system_warmth_duration} days` : '-'}
-
-			</div>
-		),
-	},
-	{
-		Header   : 'COGOVERSE SCORE & WARMTH DURATION',
-		accessor : ({ cogoverse_score = '', cogoverse_warmth_duration = '' }) => (
-			<div>
-				{(cogoverse_score && cogoverse_warmth_duration)
-					? `${cogoverse_score} & ${cogoverse_warmth_duration} days` : '-'}
-
-			</div>
-		),
-	},
-];
 
 function EngagementType(props) {
 	const { value, editMode, setEditMode = () => {}, formProps, refetch } = props;
 
-	const { engagement_type_details, engagement_type } = value;
+	const { engagement_type_details = [], engagement_type = '' } = value;
 
 	const { control, setValue, watch, handleSubmit } = formProps;
 
@@ -96,6 +44,7 @@ function EngagementType(props) {
 
 						<Button
 							size="md"
+							type="submit"
 							themeType="primary"
 							style={{ marginLeft: '16px' }}
 							onClick={handleSubmit(handleSave)}
@@ -123,7 +72,7 @@ function EngagementType(props) {
 				<div>
 					<div className={styles.edit_container}>
 						<div className={styles.table_header_container}>
-							{columns.map((item) => (
+							{editHeaders.map((item) => (
 								<div key={item} className={styles.table_headers}>
 									{' '}
 									{item}

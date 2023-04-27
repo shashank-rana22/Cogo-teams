@@ -1,8 +1,8 @@
 import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
 
-import { getFieldController } from '../../../../../common/Form/getFieldController';
-import useSingleDeleteEvent from '../../../hooks/useSingleDeleteEvent';
+import { getFieldController } from '../../../../../../../common/Form/getFieldController';
+import useSingleDeleteEvent from '../../../../../hooks/useSingleDeleteEvent';
 
 import styles from './styles.module.css';
 

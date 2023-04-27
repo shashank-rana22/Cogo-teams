@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 
-import getControls from '../../configurations/get-configuration-controls';
+import getControls from '../../../../configurations/get-configuration-controls';
 
 import Child from './Child';
 
