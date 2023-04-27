@@ -1,11 +1,14 @@
+import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 function useListFaqTags({ searchTagsInput = '' }) {
 	const [tagCurrentPage, setTagCurrentPage] = useState(1);
 	const [activeTag, setActiveTag] = useState('active');
 	const { query, debounceQuery } = useDebounceQuery();
+
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_faq_tags',
@@ -13,12 +16,11 @@ function useListFaqTags({ searchTagsInput = '' }) {
 
 	useEffect(() => {
 		debounceQuery(searchTagsInput);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchTagsInput]);
+	}, [debounceQuery, searchTagsInput]);
 
-	const fetchFaqTag = async () => {
+	const fetchFaqTag = useCallback(() => {
 		try {
-			await trigger({
+			trigger({
 				params: {
 					page                 : !query ? tagCurrentPage : '1',
 					page_limit           : 10,
@@ -27,12 +29,13 @@ function useListFaqTags({ searchTagsInput = '' }) {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			Toast.error(getApiErrorString(err?.response?.data));
 		}
-	};
+	}, [activeTag, query, tagCurrentPage, trigger]);
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => { fetchFaqTag(); }, [activeTag, tagCurrentPage, query]);
+	useEffect(() => {
+		fetchFaqTag();
+	}, [activeTag, tagCurrentPage, query, fetchFaqTag]);
 
 	return {
 		fetchFaqTag,
