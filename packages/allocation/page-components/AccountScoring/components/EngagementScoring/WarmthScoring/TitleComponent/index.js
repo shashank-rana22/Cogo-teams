@@ -7,9 +7,9 @@ import useRemoveEngagementScoringConfiguration from '../../../../hooks/useRemove
 import styles from './styles.module.css';
 
 function TitleComponent({
-	value, editMode = '', activeCollapse = '', refetch,
+	item, editMode = '', activeCollapse = '', refetch,
 }) {
-	const { engagement_type } = value;
+	const { engagement_type } = item;
 
 	const { onDelete } = useRemoveEngagementScoringConfiguration({ refetch });
 

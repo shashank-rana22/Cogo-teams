@@ -1,7 +1,6 @@
 import { Collapse, Placeholder } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
-import { useState } from 'react';
 
 import useGetEngagementScoringConfiguration from '../../../hooks/useGetEngagementScoringConfiguration';
 
@@ -12,10 +11,6 @@ import TitleComponent from './TitleComponent';
 
 function WarmthScoring(props) {
 	const { setToggleComponent = () => {} } = props;
-
-	const [activeCollapse, setActiveCollapse] = useState('');
-
-	const [editMode, setEditMode] = useState('');
 
 	const formProps = useForm();
 
@@ -28,14 +23,18 @@ function WarmthScoring(props) {
 		setSearchValue,
 		refetch,
 		loading,
-	} = useGetEngagementScoringConfiguration({ activeCollapse });
+		activeCollapse,
+		setActiveCollapse,
+		editMode,
+		setEditMode,
+	} = useGetEngagementScoringConfiguration();
 
 	const { list = [] } = data || {};
 
-	const options = list.map((value) => ({
-		key   : value.engagement_type,
+	const options = list.map((item) => ({
+		key   : item.engagement_type,
 		title : <TitleComponent
-			value={value}
+			item={item}
 			handleSubmit={handleSubmit}
 			editMode={editMode}
 			setEditMode={setEditMode}
@@ -43,7 +42,7 @@ function WarmthScoring(props) {
 			refetch={refetch}
 		/>,
 		children: <EngagementType
-			value={value}
+			item={item}
 			editMode={editMode}
 			setEditMode={setEditMode}
 			formProps={formProps}
@@ -60,7 +59,7 @@ function WarmthScoring(props) {
 				searchValue={searchValue}
 			/>
 
-			{loading ? (
+			{loading && !activeCollapse ? (
 				<div className={styles.collapse_container}>
 					{Array(3).fill('').map(() => (
 						<div className={styles.dummy_collapse}>

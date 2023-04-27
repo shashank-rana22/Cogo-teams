@@ -10,9 +10,9 @@ import FieldArray from '../FieldArray';
 import styles from './styles.module.css';
 
 function EngagementType(props) {
-	const { value, editMode, setEditMode = () => {}, formProps, refetch } = props;
+	const { item, editMode, setEditMode = () => {}, formProps, refetch } = props;
 
-	const { engagement_type_details = [], engagement_type = '' } = value;
+	const { engagement_type_details = [], engagement_type = '' } = item;
 
 	const { control, setValue, watch, handleSubmit } = formProps;
 
@@ -72,10 +72,10 @@ function EngagementType(props) {
 				<div>
 					<div className={styles.edit_container}>
 						<div className={styles.table_header_container}>
-							{editHeaders.map((item) => (
-								<div key={item} className={styles.table_headers}>
+							{editHeaders.map((header) => (
+								<div key={header} className={styles.table_headers}>
 									{' '}
-									{item}
+									{header}
 								</div>
 
 							))}
