@@ -3160,9 +3160,9 @@ const partner = {
 			service_name : 'spot_search',
 		},
 		{
-			api          : 'update_organization_search_history',
+			api          : 'create_planet_search_history',
 			access_type  : 'private',
-			service_name : 'organization',
+			service_name : 'location',
 		},
 		{
 			api          : 'get_organization_search_history',
@@ -4965,6 +4965,11 @@ const partner = {
 		},
 		{
 			api          : 'update_location_cluster',
+			access_type  : 'private',
+			service_name : 'location',
+		},
+		{
+			api          : 'create_planet_search_history',
 			access_type  : 'private',
 			service_name : 'location',
 		},
@@ -9142,7 +9147,7 @@ const partner = {
 			service_name : 'cogopoint',
 		},
 		{
-			api          : 'get_cogostore_brand_details',
+			api          : 'get_cogostore_product',
 			access_type  : 'private',
 			service_name : 'cogopoint',
 		},
@@ -9198,6 +9203,81 @@ const partner = {
 		},
 		{
 			api          : 'update_cogostore_brand_status',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogostore_products',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'create_cogostore_product_code',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'create_cogostore_product',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'create_cogostore_vendor',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'create_cogostore_brand',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'create_cogostore_banner',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'create_cogostore_product_category',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'update_cogostore_product_category',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'update_cogostore_product',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogostore_banners',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogostore_vendors',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'get_cogostore_product_stats',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogostore_brands',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogostore_product_categories',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogostore_product_codes',
 			access_type  : 'private',
 			service_name : 'cogopoint',
 		},
