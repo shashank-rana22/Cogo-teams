@@ -67,6 +67,7 @@ const useGetTicketsData = ({
 		refetchTickets,
 		setPagination,
 		agentId,
+		isUserOnboarded: !!(userId || leadUserId),
 	};
 
 	return {

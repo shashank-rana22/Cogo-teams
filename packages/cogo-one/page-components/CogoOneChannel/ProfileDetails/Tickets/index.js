@@ -21,6 +21,7 @@ function Tickets({ zippedTicketsData = {} }) {
 		refetchTickets,
 		setPagination = () => {},
 		agentId = '',
+		isUserOnboarded = false,
 	} = zippedTicketsData || {};
 
 	const { Requested = 0, Unresolved = 0, Closed = 0 } = statsData || {};
@@ -59,6 +60,13 @@ function Tickets({ zippedTicketsData = {} }) {
 	};
 	const refetchLoading = statsLoading || listLoading;
 	const renderTickets = () => {
+		if (!isUserOnboarded) {
+			return (
+				<div className={styles.loader}>
+					<div className={styles.no_tickets}>Please Onboard this User to Create tickets</div>
+				</div>
+			);
+		}
 		if (listLoading) {
 			return (
 				<div className={styles.loader}>
