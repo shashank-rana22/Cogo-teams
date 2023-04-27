@@ -39,7 +39,7 @@ function useEditProfile({
 	const country_id = watch('country_id');
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'update_vendor',
+		url    : '/update_vendor',
 		method : 'post',
 	}, { manual: true });
 
