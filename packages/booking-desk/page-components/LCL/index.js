@@ -8,7 +8,7 @@ import List from '../../commons/List';
 import Loader from '../../commons/Loader';
 import Stepper from '../../commons/Stepper';
 import Tabs from '../../commons/Tabs';
-import { shipment_types } from '../../config/CONTROLS_CONFIG.json';
+import CONFIGS from '../../config/CONTROLS_CONFIG.json';
 import allTabs from '../../config/TABS_CONFIG.json';
 import applyShipmentChangeFilter from '../../helpers/applyShipmentChangeFilter';
 import useListBookingDeskShipments from '../../hooks/useListBookingDeskShipments';
@@ -31,7 +31,7 @@ export default function FCLDesk({ stateProps = {} }) {
 			<div className={styles.header}>
 				<div className={styles.stepper_container}>
 					<Stepper
-						options={shipment_types}
+						options={CONFIGS.shipment_types}
 						value={filters?.shipment_type}
 						onChange={(v) => { applyShipmentChangeFilter({ shipment_type: v, stateProps }); }}
 					/>
