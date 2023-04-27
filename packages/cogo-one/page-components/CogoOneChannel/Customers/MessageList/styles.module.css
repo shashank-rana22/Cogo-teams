@@ -213,3 +213,19 @@
 	color: #828282;
 	user-select: none;
 }
+
+.styled_popover {
+	padding: 0;
+
+	:global {
+		.tippy-content {
+			width: 260px;
+			height: 500px;
+			padding: 0;
+
+			>div {
+				height: 100%;
+			}
+		}
+	}
+}
