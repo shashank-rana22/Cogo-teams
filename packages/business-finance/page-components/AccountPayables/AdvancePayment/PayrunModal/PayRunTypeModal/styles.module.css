@@ -5,9 +5,10 @@
 .sub_container {
 	padding: 16px;
 }
-.loader{
-	height: 30px;
+
+.loader {
 	width: 98%;
-	margin-left: 12px;
+	height: 30px;
 	margin-right: 20px;
+	margin-left: 12px;
 }
