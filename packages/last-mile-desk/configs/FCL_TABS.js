@@ -13,24 +13,46 @@ const FCL_TABS = [
 export const TABWISE_FILTERS = {
 	vessel_departed: {
 		service_state : 'vessel_departed',
-		state         : 'in_progress',
+		state         : [
+			'in_progress',
+			'confirmed_by_importer_exporter',
+			'shipment_received',
+		],
 	},
 	vessel_arrived: {
 		service_state : 'vessel_arrived',
-		state         : 'in_progress',
+		state         : [
+			'in_progress',
+			'confirmed_by_importer_exporter',
+			'shipment_received',
+		],
 	},
 	container_gated_out: {
 		service_state : 'containers_gated_out',
-		state         : 'in_progress',
+		state         : [
+			'in_progress',
+			'confirmed_by_importer_exporter',
+			'shipment_received',
+		],
 	},
 	awaiting_container_return: {
 		task_attributes: [
+			{
+				task   : ['mark_destination_customs_cleared_at', 'mark_completed'],
+				status : 'completed',
+				state  : 'containers_gated_out',
+			},
 			{
 				task   : 'update_empty_container_returned_at',
 				status : 'pending',
 			},
 		],
-		state: 'in_progress',
+		service_state : 'containers_gated_out',
+		state         : [
+			'in_progress',
+			'confirmed_by_importer_exporter',
+			'shipment_received',
+		],
 	},
 	container_returned: {
 		task_attributes: [
@@ -39,7 +61,11 @@ export const TABWISE_FILTERS = {
 				status : 'completed',
 			},
 		],
-		state: 'in_progress',
+		state: [
+			'in_progress',
+			'confirmed_by_importer_exporter',
+			'shipment_received',
+		],
 	},
 	completed: {
 		state: 'completed',
