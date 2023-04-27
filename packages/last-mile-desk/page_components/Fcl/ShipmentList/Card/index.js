@@ -16,7 +16,9 @@ function Card({ item = {} }) {
 	const router = useRouter();
 
 	const handleCardClick = () => {
-		router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}`);
+		const { partner_id } = router.query;
+		const newPathname = `${window.location.origin}/${partner_id}/shipments/${item.id}`;
+		window.location.href = newPathname;
 	};
 
 	return (
