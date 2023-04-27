@@ -40,6 +40,7 @@ function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 			uploadedByOrgId : mawbData?.uploadedByOrgId,
 			serviceId       : mawbData?.serviceId,
 			documentUrl     : url || undefined,
+			documentType    : 'manifest_copy',
 			fileName:
 			`Manifest_${new Date().getTime()}`
 				|| undefined,
