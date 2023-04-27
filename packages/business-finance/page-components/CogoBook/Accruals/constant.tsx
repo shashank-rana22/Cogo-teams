@@ -214,10 +214,10 @@ export const bookedColumn = (
 			id       : 'sales_invoice_amount',
 			Cell     : ({ row: { original } }) => {
 				const {
-					incomeBooked = '', actualIncome = '', incomeCurrency = '',
+					incomeBooked = '', incomeCurrency = '',
 					sellQuotation = '', sellQuotationCurrency = '',
 				} = original || {};
-				const quotationDiff = sellQuotation - actualIncome || 0;
+				const quotationDiff = sellQuotation - incomeBooked || 0;
 				const quotationDiffProfit = ((quotationDiff / sellQuotation) * 100) || 0;
 
 				return (

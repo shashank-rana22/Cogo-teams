@@ -23,7 +23,7 @@ function useCreateFaq() {
 
 	const { control, handleSubmit, formState: { errors }, setValue, reset } = useForm();
 
-	const { general } = useSelector((state) => state);
+	const general = useSelector((state) => state?.general);
 	const { create = '', update = '', id } = general.query || {};
 
 	const queryName = create ? 'create' : 'update';
@@ -46,7 +46,7 @@ function useCreateFaq() {
 	const createFaqComponent = async (values) => {
 		const { name, description } = values || {};
 		let payload = {
-			display_name : startCase(name),
+			display_name : startCase(name || ''),
 			description,
 			status       : 'active',
 		};

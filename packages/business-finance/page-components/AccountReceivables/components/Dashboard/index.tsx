@@ -48,9 +48,17 @@ function Dashboard({ entityCode }) {
 
 	return (
 		<div>
-			<DateAndAccount outstandingData={outstandingData} outstandingLoading={outstandingLoading} />
+			<DateAndAccount
+				outstandingData={outstandingData}
+				outstandingLoading={outstandingLoading}
+				entityCode={entityCode}
+			/>
 			<DailySales filterValue={filterValue} entityCode={entityCode} />
-			<ServiceCard outstandingData={outstandingData} outstandingLoading={outstandingLoading} />
+			<ServiceCard
+				outstandingData={outstandingData}
+				outstandingLoading={outstandingLoading}
+				entityCode={entityCode}
+			/>
 			<div className={styles.filter_container}>
 				<div style={{ display: 'flex' }}>
 					<div className={styles.input}>

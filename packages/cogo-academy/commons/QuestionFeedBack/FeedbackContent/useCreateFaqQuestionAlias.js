@@ -2,21 +2,18 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const useCreateFaqQuestionAlias = ({
 	suggested_question_abstract,
 	fetchListFaqFeedback,
 	feedbackId,
 	fetchQuestion,
-	faqAudiences,
 }) => {
-	const [showAliasInput, setShowAliasInput] = useState(false);
-	const [inputAlias, setInputAlias] = useState(suggested_question_abstract);
-
 	const general = useSelector((state) => state.general || {});
 
-	const audience_ids = (faqAudiences || []).map((audience) => (audience?.id));
+	const [showAliasInput, setShowAliasInput] = useState(false);
+	const [inputAlias, setInputAlias] = useState(suggested_question_abstract);
 
 	const { id = '' } = general?.query || {};
 
@@ -30,7 +27,7 @@ const useCreateFaqQuestionAlias = ({
 			parent_question_id      : id,
 			alias_question_abstract : inputAlias,
 			faq_feedback_id         : feedbackId,
-			audience_ids,
+
 		};
 
 		try {
@@ -46,6 +43,10 @@ const useCreateFaqQuestionAlias = ({
 			Toast.error(getApiErrorString(err?.response?.data));
 		}
 	};
+
+	useEffect(() => {
+		setInputAlias(suggested_question_abstract);
+	}, [suggested_question_abstract]);
 
 	return {
 		onClickAddAlias,
