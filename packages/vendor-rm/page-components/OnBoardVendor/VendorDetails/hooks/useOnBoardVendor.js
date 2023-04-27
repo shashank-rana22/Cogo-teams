@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { getConstantsByCountryCode } from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
@@ -170,27 +171,12 @@ function useOnBoardVendor({
 			}
 		}
 
-		if (field.name === 'company_type' && country_id === COUNTRY_IDS.VN) {
+		if (field.name === 'company_type') {
+			const options = getConstantsByCountryCode({ country_id }).options.registration_types;
+
 			newField = {
 				...newField,
-				options: [
-					{
-						label : 'Limited Liability Company',
-						value : 'limited_liability_company',
-					},
-					{
-						label : 'Joint Stock Company',
-						value : 'joint_stock_company',
-					},
-					{
-						label : 'Representative Office',
-						value : 'representative_office',
-					},
-					{
-						label : 'Branch',
-						value : 'branch',
-					},
-				],
+				options,
 			};
 		}
 
