@@ -22,8 +22,8 @@ const useListTickets = ({ UserID = '', activeTab = '', fetchTicketsStats }) => {
 		try {
 			await trigger({
 				params: {
-					UserID,
 					...(FILTER_KEYS_MAPPING[filter] || {}),
+					UserID,
 					size : 10,
 					page : pagination - 1,
 				},

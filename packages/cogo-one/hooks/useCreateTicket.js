@@ -17,7 +17,7 @@ const useCreateTicket = ({ closeModal = () => {}, refetchTickets = () => {} }) =
 			Toast.success('Ticket Created Sucessfully');
 			refetchTickets();
 		} catch (e) {
-			Toast.error(e.response.data || 'something went wrong');
+			Toast.error(e?.response?.data || 'something went wrong');
 		}
 	};
 	return {

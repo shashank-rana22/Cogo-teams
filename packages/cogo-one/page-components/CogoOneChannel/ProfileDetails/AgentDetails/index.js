@@ -140,6 +140,7 @@ function AgentDetails({
 			</>
 		);
 	}
+
 	return (
 		<>
 			<div className={styles.top_div}>

@@ -61,10 +61,7 @@ function useGetAsyncTicketOptions({
 			}
 			unorderedHydratedValue = unorderedHydratedValue.concat(res?.data?.items || []);
 
-			const hydratedValue = value.map((v) => {
-				const singleHydratedValue = unorderedHydratedValue.find((uv) => uv?.[valueKey] === v);
-				return singleHydratedValue;
-			});
+			const hydratedValue = value.map((v) => unorderedHydratedValue.find((uv) => uv?.[valueKey] === v));
 
 			return hydratedValue;
 		}

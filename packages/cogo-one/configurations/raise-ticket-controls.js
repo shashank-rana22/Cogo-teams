@@ -32,7 +32,7 @@ const useRaiseTicketControls = ({ watchTicketType = '', source = '' }) => {
 			size        : 'md',
 			type        : validation === 'number' ? 'number' : 'text',
 			rules       : {
-				validate: (value) => ((value < 0 && validation === 'number') ? 'Cannot be Negative' : true),
+				validate: (value) => ((validation === 'number' && value < 0) ? 'Cannot be Negative' : true),
 			},
 		},
 		{

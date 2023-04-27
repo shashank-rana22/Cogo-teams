@@ -123,11 +123,10 @@ function Tickets({ zippedTicketsData = {}, setActiveSelect = () => {} }) {
 				</div>
 			</div>
 			<div className={styles.stats_div}>
-				{STATS_MAPPING.map((eachStat, index) => (
+				{STATS_MAPPING.map((eachStat) => (
 					<div
 						className={
 							cl`${styles.individual_stats} 
-							${index !== 0 ? styles.margin_left : ''} 
 							${eachStat?.key === filter ? styles.selected_tab : ''}`
 						}
 						key={eachStat?.key}

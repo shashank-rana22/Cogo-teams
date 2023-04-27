@@ -53,7 +53,15 @@ const useGetTicketsData = ({
 
 	const createTicket = () => {
 		setRaiseTicketModal({
-			state: true, data: { formattedData: { user_id: userId, lead_user_id: leadUserId }, source: 'tickets' },
+			state : true,
+			data  : {
+				formattedData:
+				{
+					user_id      : userId,
+					lead_user_id : leadUserId,
+				},
+				source: 'tickets',
+			},
 		});
 	};
 	const zippedTicketsData = {

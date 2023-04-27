@@ -75,7 +75,8 @@ function RightSideNav({
 								? styles.icon_div_load
 								: ''
 							}`}
-							role="presentation"
+							role="button"
+							tabIndex={0}
 							onClick={() => handleClick(name)}
 						>
 							<Tooltip content={content} placement="left">

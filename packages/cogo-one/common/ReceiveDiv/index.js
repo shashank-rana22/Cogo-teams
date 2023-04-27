@@ -22,6 +22,7 @@ function ReceiveDiv({
 
 	const date = created_at && format(new Date(created_at), 'dd MMM YYYY, HH:mm');
 	const hasRepliedMessage = !isEmpty(reply_metadata);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.time_stamp}>

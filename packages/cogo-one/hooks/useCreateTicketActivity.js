@@ -20,10 +20,10 @@ const useCreateTicketActivity = ({ refetchTickets = () => {} }) => {
 					PerformedByID : user_id,
 				},
 			});
-			Toast.success(res?.data);
+			Toast.success(res?.data || 'Ticket Activity Created Successfully!');
 			refetchTickets();
 		} catch (e) {
-			Toast.error(e.response.data || 'something went wrong');
+			Toast.error(e?.response?.data || 'something went wrong');
 		}
 	};
 

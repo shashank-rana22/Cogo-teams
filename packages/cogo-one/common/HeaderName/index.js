@@ -26,7 +26,7 @@ function HeaderName({ formattedData = {} }) {
 	};
 
 	return (
-		<div className={styles.flex}>
+		<div className={styles.align_channel_type}>
 			<UserAvatar type={channel_type} />
 			<div className={styles.parent}>
 				<div className={styles.name}>

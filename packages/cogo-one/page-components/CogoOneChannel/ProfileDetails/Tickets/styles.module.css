@@ -27,6 +27,15 @@
 	background: #fff;
 	border-radius: 6px;
 	box-shadow: 0 0 4px 0 #627fac33;
+
+	
+	&:nth-child(2) { 
+		margin-left: 10px;
+	}
+
+	&:nth-child(3) { 
+		margin-left: 10px;
+	}
 }
 
 .ticket_count {
@@ -37,9 +46,9 @@
 	text-align: center;
 }
 
-.margin_left {
+/* .margin_left {
 	margin-left: 10px;
-}
+} */
 
 .ticket_logo {
 	display: flex;

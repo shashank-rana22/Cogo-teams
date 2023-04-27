@@ -1,4 +1,4 @@
-.flex {
+.align_channel_type {
 	display: flex;
 	align-items: center;
 	width: 60%;
@@ -12,7 +12,6 @@
 	width: 100%;
 	overflow: hidden;
 	font-size: 16px;
-	line-height: 24px;
 	color: #4f4f4f;
 	text-align: left;
 	text-overflow: ellipsis;

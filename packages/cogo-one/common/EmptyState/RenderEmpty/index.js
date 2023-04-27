@@ -138,18 +138,6 @@ function RenderEmpty({
 					</div>
 				</div>
 			);
-		case 'tickets':
-			return (
-				<div className={styles.content}>
-					<img
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/actions.svg"
-						alt=""
-						width="100px"
-						height="100px"
-					/>
-					<div className={styles.title}>No Tickets found</div>
-				</div>
-			);
 		case 'insights':
 			return (
 				<div className={styles.content}>
