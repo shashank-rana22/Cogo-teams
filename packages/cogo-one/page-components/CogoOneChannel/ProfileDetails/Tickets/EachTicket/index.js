@@ -1,9 +1,9 @@
 import { Tooltip, cl } from '@cogoport/components';
 import { IcMSpecificUsers } from '@cogoport/icons-react';
+import { format } from '@cogoport/utils';
 
 import ReceiveDiv from '../../../../../common/ReceiveDiv';
 import { PRIORITY_MAPPING } from '../../../../../constants';
-import getFileAttributes from '../../../../../utils/getFileAttributes';
 import getTicketActivityMapping from '../../../../../utils/getTicketActivityMapping';
 
 import styles from './styles.module.css';
@@ -15,9 +15,19 @@ function EachTicket({
 	handleCardClick,
 }) {
 	const {
-		Data: { InvoiceNumber = 0, Message = '', ShipmentId = 0, AdditionalData = '', MessageMediaUrl = '' } = {},
+		Data: {
+			InvoiceNumber = 0,
+			MessageData: {
+				Message = '',
+				MediaUrl = '',
+				MessageType = '',
+				CreatedAt: messageCreatedAt = '',
+			} = {},
+			ShipmentId = 0,
+			AdditionalData = '',
+		} = {},
 		CreatedAt = '',
-		TicketActivityDescription = '',
+		TicketActivity:{ Description:ticketActivityDescription = '' } = {},
 		Priority = '',
 		Status = '',
 		ID = '',
@@ -27,18 +37,7 @@ function EachTicket({
 		ReviewerName = '',
 	} = eachTicket || {};
 
-	const urlArray = decodeURI(MessageMediaUrl)?.split('/');
-	const fileName = urlArray[(urlArray?.length || 0) - 1] || '';
-	const { fileType = '' } = getFileAttributes({ fileName });
-
-	const eachMessage = {
-		message_type : MessageMediaUrl ? fileType : 'text',
-		created_at   : CreatedAt,
-		response     : {
-			message   : Message,
-			media_url : MessageMediaUrl,
-		},
-	};
+	const date = CreatedAt && format(new Date(CreatedAt), 'dd MMM YYYY');
 
 	const handleTicketActivity = ({ type = '', status = '' }) => {
 		const payload = {
@@ -50,12 +49,18 @@ function EachTicket({
 	};
 
 	const DATA_MAPPING = [
-		{ title: 'INVOICE NUMBER', value: InvoiceNumber },
+		{ title: 'RAISED ON', value: date },
+		{ title: 'INVOICE NO', value: InvoiceNumber },
 		{ title: 'SHIPMENT ID', value: ShipmentId },
 		{ title: 'ADDITIONAL DATA', value: AdditionalData },
 	];
 
-	const { actions = [], requestedText = '', canPerformActions = '', iconUrl = '' } = getTicketActivityMapping({
+	const {
+		actions = [],
+		requestedText = '',
+		canPerformActions = '',
+		iconUrl = '',
+	} = getTicketActivityMapping({
 		status                  : Status,
 		canPerformRequestAction : agentId === TicketReviewerID,
 	}) || [];
@@ -79,41 +84,70 @@ function EachTicket({
 					{`#${ID}`}
 				</div>
 				<div className={styles.activity}>
-					{canPerformActions ? actions.map(({
-						tooltipContent = '',
-						activityPayload = {},
-						icon:Icon,
-						iconStyles = {},
-					}) => (
-						Icon && (
-							<Tooltip placement="bottom" content={tooltipContent}>
+					{canPerformActions
+						? (actions.map(({
+							tooltipContent = '',
+							activityPayload = {}, icon: Icon, iconStyles = {},
+						}) => Icon && (
+							<Tooltip
+								placement="bottom"
+								content={tooltipContent}
+							>
 								<Icon
 									{...iconStyles}
 									className={styles.icon_styles}
 									onClick={() => handleTicketActivity(activityPayload)}
 								/>
 							</Tooltip>
-						)
-					)) : <div className={styles.not_authorized_styles}>REQUESTED</div>}
+						))
+						) : (
+							<div className={styles.not_authorized_styles}>
+								REQUESTED
+							</div>
+						)}
 				</div>
 			</div>
 			{Message ? (
-				<ReceiveDiv eachMessage={eachMessage} canRaiseTicket={false} />
-			) : <div className={styles.description}>{Description}</div>}
+				<div className={styles.message_container}>
+					<ReceiveDiv
+						eachMessage={{
+							message_type : MessageType,
+							created_at   : messageCreatedAt,
+							response     : {
+								message   : Message,
+								media_url : MediaUrl,
+							},
+						}}
+						canRaiseTicket={false}
+					/>
+				</div>
+			) : (
+				<div className={styles.desc_container}>
+					<div className={styles.desc_title}>Description</div>
+					<div className={styles.description}>{Description}</div>
+				</div>
+			)}
 			<div
 				className={cl`${styles.ticket_details} ${Status === 'closed' ? styles.ticket_details_close : ''}`}
 			>
-				<div className={styles.type_styles}>
-					{Type}
-				</div>
+				<div className={styles.type_styles}>{Type}</div>
 				<div className={styles.ticket_status}>
 					<div className={styles.ticket_priority}>
-						{iconUrl && <img src={iconUrl} alt={requestedText} className={styles.img_styles} />}
+						{iconUrl && (
+							<img
+								src={iconUrl}
+								alt={requestedText}
+								className={styles.img_styles}
+							/>
+						)}
 						<div>{requestedText}</div>
 					</div>
 					<div
 						className={styles.priority_dot}
-						style={{ '--background-color': PRIORITY_MAPPING[Priority] || '#F68B21' }}
+						style={{
+							'--background-color':
+                                PRIORITY_MAPPING[Priority] || '#F68B21',
+						}}
 					>
 						{Priority?.toUpperCase()}
 					</div>
@@ -123,19 +157,17 @@ function EachTicket({
 					<div className={styles.reviewer_name}>{ReviewerName}</div>
 				</div>
 				<div>
-					{DATA_MAPPING.map(({ title = '', value = '' }) => (
-						value ? (
-							<div className={styles.header_value}>
-								{title}
-								:
-								<span>{value}</span>
-							</div>
-						) : null
-					))}
+					{DATA_MAPPING.map(({ title = '', value = '' }) => (value ? (
+						<div className={styles.header_value}>
+							{title}
+							:
+							<span>{value}</span>
+						</div>
+					) : null))}
 				</div>
-				{TicketActivityDescription && (
+				{ticketActivityDescription && (
 					<div className={styles.description}>
-						{TicketActivityDescription}
+						{ticketActivityDescription}
 					</div>
 				)}
 			</div>

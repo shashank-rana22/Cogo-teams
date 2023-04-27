@@ -1,5 +1,5 @@
 import { cl, Placeholder, Pagination } from '@cogoport/components';
-import { IcMPlusInCircle, IcMTag } from '@cogoport/icons-react';
+import { IcMPlusInCircle, IcMTag, IcMRefresh } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
@@ -9,6 +9,7 @@ import EachTicket from './EachTicket';
 import styles from './styles.module.css';
 
 function Tickets({ zippedTicketsData = {} }) {
+	const router = useRouter();
 	const {
 		statsLoading,
 		ticketData,
@@ -23,13 +24,6 @@ function Tickets({ zippedTicketsData = {} }) {
 	} = zippedTicketsData || {};
 
 	const { Requested = 0, Unresolved = 0, Closed = 0 } = statsData || {};
-
-	const {
-		createTicketActivity,
-		loading = false,
-	} = useCreateTicketActivity({ refetchTickets });
-
-	const { items = [], page = 0, size = 0, total = 0	} = ticketData || {};
 
 	const STATS_MAPPING = [
 		{
@@ -51,13 +45,19 @@ function Tickets({ zippedTicketsData = {} }) {
 			iconColor : '#E0E0E0',
 		},
 	];
-	const router = useRouter();
+
+	const {
+		createTicketActivity,
+		loading = false,
+	} = useCreateTicketActivity({ refetchTickets });
+
+	const { items = [], page = 0, size = 0, total = 0	} = ticketData || {};
 
 	const handleCardClick = (id) => {
-		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/ticket-management/dashboard/${id}`;
-		window.location.href = newUrl;
+		const URL = `${window.location.origin}/${router?.query?.partner_id}/ticket-management/dashboard/${id}`;
+		window.open(URL, '_blank');
 	};
-
+	const refetchLoading = statsLoading || listLoading;
 	const renderTickets = () => {
 		if (listLoading) {
 			return (
@@ -98,7 +98,18 @@ function Tickets({ zippedTicketsData = {} }) {
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.title}>Tickets Raised</div>
-				<IcMPlusInCircle className={styles.styled_plus} onClick={createTicket} />
+				<div className={styles.icon_container}>
+					<IcMRefresh
+						className={styles.refresh_container}
+						onClick={() => {
+							if (!refetchLoading) {
+								refetchTickets();
+							}
+						}}
+						style={{ cursor: refetchLoading ? 'not-allowed' : 'pointer' }}
+					/>
+					<IcMPlusInCircle className={styles.styled_plus} onClick={createTicket} />
+				</div>
 			</div>
 			<div className={styles.stats_div}>
 				{STATS_MAPPING.map((eachStat, index) => (

@@ -31,6 +31,7 @@ function RaiseTicket({ setRaiseTicketModal = () => {}, raiseTicketModal = {}, re
 		formState:{ errors = {} },
 		setValue,
 	} = useForm();
+
 	const { ticket_type:watchTicketType = '' } = watch();
 
 	const { controls = [], ticketDataKey = '' } = useRaiseTicketControls({
@@ -39,7 +40,10 @@ function RaiseTicket({ setRaiseTicketModal = () => {}, raiseTicketModal = {}, re
 	});
 
 	const onCreateTicket = (val) => {
-		const { response:{ message = '', media_url = '' } = {} } = messageData;
+		const {
+			response:{ message = '', media_url = '' } = {}, message_type = 'text',
+			created_at = '',
+		} = messageData;
 
 		const { user_id = null, lead_user_id = null } = formattedData || {};
 		const { ticket_data = null, ticket_type = null, description = null } = val || {};
@@ -49,9 +53,13 @@ function RaiseTicket({ setRaiseTicketModal = () => {}, raiseTicketModal = {}, re
 			Type        : ticket_type,
 			Description : description,
 			Data        : {
-				Message                             : message,
-				MessageMediaUrl                     : media_url,
-				[ticketDataKey || 'AdditionalData'] : ticket_data || undefined,
+				MessageData: {
+					Message     : message,
+					MediaUrl    : media_url,
+					MessageType : message_type,
+					CreatedAt   : created_at,
+				},
+				[ticketDataKey || 'AdditionalData']: ticket_data || undefined,
 			},
 		};
 		createTicket(payload);

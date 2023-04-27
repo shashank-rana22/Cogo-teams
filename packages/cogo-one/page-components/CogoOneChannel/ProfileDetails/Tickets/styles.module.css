@@ -16,12 +16,13 @@
 .stats_div {
 	display: flex;
 	justify-content: space-between;
+	height: 15%;
 	margin: 10px 5px;
 }
 
 .individual_stats {
 	min-width: 30%;
-	padding: 0 7px 7px;
+	padding: 0 2px 7px;
 	cursor: pointer;
 	background: #fff;
 	border-radius: 6px;
@@ -34,7 +35,6 @@
 	font-weight: 600;
 	color: #4f4f4f;
 	text-align: center;
-	letter-spacing: 0;
 }
 
 .margin_left {
@@ -66,9 +66,10 @@
 }
 
 .lower_title {
-	font-size: 14px;
+	font-size: 13px;
 	color: #828282;
 	text-align: center;
+	word-break: break-word;
 }
 
 .container {
@@ -81,7 +82,7 @@
 }
 
 .list_container {
-	height: 75%;
+	height: 70%;
 	overflow-y: auto;
 }
 
@@ -96,6 +97,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	height: 5%;
 }
 
 .selected_tab {
@@ -111,6 +113,7 @@
 .pagination_container {
 	display: flex;
 	justify-content: flex-start;
+	height: 10%;
 	padding: 10px 0;
 }
 
@@ -144,4 +147,17 @@
 	flex-direction: column;
 	justify-content: space-between;
 	height: 100%;
+}
+
+.icon_container {
+	display: flex;
+	align-items: center;
+}
+
+.refresh_container {
+	width: 15px;
+	height: 15px;
+	margin-right: 10px;
+	cursor: pointer;
+	fill: #4f4f4f;
 }

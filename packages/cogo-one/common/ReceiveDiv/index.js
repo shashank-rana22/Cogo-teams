@@ -21,25 +21,22 @@ function ReceiveDiv({
 
 	return (
 		<div className={styles.container}>
-			<div>
-				<div className={styles.time_stamp}>
-					{date && date}
-				</div>
-
-				<div className={cl`${message_type === 'contacts' ? '' : styles.receive_message_container}`}>
-					{canRaiseTicket && (
-						<Tooltip placement="right" content={ticketPopoverContent(eachMessage)} interactive>
-							<div className={styles.flex_div}>
-								<IcMOverflowDot className={styles.hamburger_styles} />
-							</div>
-						</Tooltip>
-					)}
-					<div className={styles.message_div}>
-						<MessageBody
-							response={response}
-							message_type={message_type}
-						/>
-					</div>
+			<div className={styles.time_stamp}>
+				{date && date}
+			</div>
+			<div className={cl`${message_type === 'contacts' ? '' : styles.receive_message_container}`}>
+				{canRaiseTicket && (
+					<Tooltip placement="right" content={ticketPopoverContent(eachMessage)} interactive>
+						<div className={styles.flex_div}>
+							<IcMOverflowDot className={styles.hamburger_styles} />
+						</div>
+					</Tooltip>
+				)}
+				<div className={styles.message_div}>
+					<MessageBody
+						response={response}
+						message_type={message_type}
+					/>
 				</div>
 			</div>
 		</div>
