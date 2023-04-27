@@ -171,8 +171,14 @@ function FormContainer({
 			{value === 'upload' ? (
 				<UploadMAWB
 					item={item}
+					edit={edit}
+					setEdit={setEdit}
 					setGenerate={setGenerate}
 					activeCategory={activeCategory}
+					activeHawb={activeHawb}
+					hawbDetails={hawbDetails}
+					setHawbDetails={setHawbDetails}
+					setActiveHawb={setActiveHawb}
 				/>
 			) : (
 				<>

@@ -8,9 +8,20 @@ import styles from '../styles.module.css';
 
 import { controls } from './controls';
 
-function UploadMAWB({ item, setGenerate, activeCategory }) {
+function UploadMAWB({
+	item, edit, setEdit, setGenerate, activeCategory, activeHawb, hawbDetails, setHawbDetails, setActiveHawb,
+}) {
 	const { control, handleSubmit, formState: { errors } } = useForm();
-	const { upload, loading } = useCreateShipmentDocument({ setGenerate, activeCategory });
+	const { upload, loading } = useCreateShipmentDocument({
+		edit,
+		setEdit,
+		setGenerate,
+		activeCategory,
+		activeHawb,
+		hawbDetails,
+		setHawbDetails,
+		setActiveHawb,
+	});
 	const onSubmit = (formValues) => {
 		const { fileName, finalUrl } = formValues?.document || {};
 		const payload = {

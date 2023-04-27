@@ -171,6 +171,7 @@ function GenerateMAWB({
 		setValue('place', taskItem?.place || 'NEW DELHI');
 		setValue('class', taskItem?.class || 'q');
 		setValue('currency', 'INR');
+		setValue('ratePerKg', edit ? taskItem.ratePerKg : taskItem?.tariffRate);
 		setValue('commodity', taskItem.commodity
 			|| `${'SAID TO CONTAIN\n'}${taskItem.commodity || ''}`);
 		setValue('agentOtherCharges', taskItem.agentOtherCharges || agentOtherChargesCode);
@@ -261,6 +262,7 @@ function GenerateMAWB({
 			setValue('place', taskItem?.place || 'NEW DELHI');
 			setValue('class', taskItem?.class || 'q');
 			setValue('currency', 'INR');
+			setValue('ratePerKg', edit ? taskItem.ratePerKg : taskItem?.tariffRate);
 			setValue('commodity', edit ? `${taskItem.commodity || ''}`
 				: `${'SAID TO CONTAIN\n'}${taskItem.commodity || ''}`);
 			setValue('agentOtherCharges', edit ? taskItem.agentOtherCharges
