@@ -46,7 +46,7 @@ function UpdateButton({ task = {}, handleClick = () => {}, hideButton = false, s
 				entity_type={task?.task}
 				// onUpload={handleChange}
 			>
-				<Button>
+				<Button className={styles.upload_button}>
 					{!show ? buttonText : 'Close'}
 				</Button>
 			</RPASearch>
