@@ -38,6 +38,7 @@ function FieldArray(props) {
 					engagementType={engagementType}
 					refetch={refetch}
 					editLoading={editLoading}
+					watch={watch}
 				/>
 			))}
 

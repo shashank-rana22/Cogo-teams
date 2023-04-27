@@ -27,6 +27,9 @@ function Child(props) {
 			{controls.map((singleControl) => {
 				const el = { ...singleControl };
 
+				const isEventNamePrefilled = el.name === 'event_name' && eventName;
+				const isDisabled = isEventNamePrefilled || editLoading;
+
 				const Element = getFieldController(el.type);
 
 				if (!Element) return null;
@@ -41,7 +44,7 @@ function Child(props) {
 							name={`${name}.${index}.${singleControl.name}`}
 							style={{ ...singleControl.style }}
 							size="sm"
-							disabled={editLoading}
+							disabled={isDisabled}
 						/>
 					</div>
 
