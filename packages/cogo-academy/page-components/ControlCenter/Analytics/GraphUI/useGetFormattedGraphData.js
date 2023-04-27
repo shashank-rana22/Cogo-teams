@@ -1,26 +1,26 @@
-import { startCase, format } from '@cogoport/utils';
+import { format } from '@cogoport/utils';
 
-const COLOR_MAPPING = {
-	search_data_points                : '#EE3425',
-	answers_available_data_points     : '#ABCD62',
-	answers_not_available_data_points : '#a3a3a3',
-	view_data_points                  : '#2a9df4',
-
+const MAPPING = {
+	view_data_points: {
+		color: '#2a9df4', title: 'Views',
+	},
+	answers_not_available_data_points: {
+		color: '#a3a3a3', title: 'Answer not available',
+	},
+	answers_available_data_points: {
+		color: '#ABCD62', title: 'Answer available',
+	},
+	search_data_points: {
+		color: '#EE3425', title: 'Searches',
+	},
 };
-
-const MAPPING = [
-	'view_data_points',
-	'answers_not_available_data_points',
-	'answers_available_data_points',
-	'search_data_points',
-];
 
 const useGetFormattedGraphData = ({ graph_data = {} }) => {
 	const { abscissa, ...restData } = graph_data || {};
 
 	const graphData = [];
 
-	MAPPING.forEach((key) => {
+	Object.keys(MAPPING || {}).forEach((key) => {
 		const array = [];
 
 		Object.keys(restData[key] || {}).forEach((timeKey) => {
@@ -31,9 +31,9 @@ const useGetFormattedGraphData = ({ graph_data = {} }) => {
 		array.sort((a, b) => new Date(a.x) - new Date(b.x));
 
 		graphData.push({
-			id    : startCase(key),
+			id    : MAPPING[key].title,
 			key,
-			color : COLOR_MAPPING[key],
+			color : MAPPING[key].color,
 			data  : array,
 		});
 	});
