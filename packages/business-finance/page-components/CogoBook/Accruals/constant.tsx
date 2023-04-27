@@ -380,15 +380,14 @@ export const bookedColumn = (
 		{
 			Header   : '',
 			id       : 'ribbon',
-			accessor : (row) => (
-
-				<div>
-					<div className={styles.ribbon}>
-						{row?.shipmentType || '-'}
-					</div>
+			accessor : (row:{shipmentType?:string}) => {
+				const {shipmentType} = row || {};
+				return <div>
+							{shipmentType && <div className={styles.ribbon}>
+								{shipmentType}
+							</div>}
 				</div>
-
-			),
+			},
 		},
 
 	];
@@ -606,16 +605,16 @@ export const column = ({
 	{
 		Header   : '',
 		id       : 'ribbon',
-		accessor : (row) => (
-
-			<div>
-				<div className={styles.ribbon}>
-					{row?.shipmentType || '-'}
-				</div>
+		accessor : (row:{shipmentType?:string}) => {
+			const {shipmentType} = row || {};
+			return <div>
+						{shipmentType && <div className={styles.ribbon}>
+							{shipmentType}
+						</div>}
 			</div>
-
-		),
-	}];
+		},
+	},
+];
 };
 
 export const serviceTypeOptions = [
