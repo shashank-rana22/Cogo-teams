@@ -34,6 +34,7 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router, setShowReAttemp
 			<section className={styles.section}>{startCase(result_status) || '-'}</section>
 		),
 	},
+
 	{
 		Header: (
 			<div className={styles.container}>

@@ -96,7 +96,7 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 	useEffect(() => {
 		getIncidentData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(rest), category, date, query, page, urgency]);
+	}, [JSON.stringify(rest), category, date, query, page, urgency, activeTab]);
 
 	useEffect(() => {
 		setFilters((prev) => ({
