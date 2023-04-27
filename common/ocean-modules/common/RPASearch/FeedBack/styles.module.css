@@ -1,0 +1,80 @@
+.container{
+	padding: 22px;
+	min-width: 900px;
+	max-width: 900px;
+	min-height: 432px;
+}
+
+.heading {
+    font-style: normal;
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 15px;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: #393f70;
+	margin-bottom: 32px;
+}
+
+.styled_button {
+    display: flex;
+	justify-content: flex-end;
+	margin-top: 8px;
+}
+
+.cancel_button {
+    display: flex;
+	margin-right: 10px;
+}
+
+.styled_checkbox {
+    display: flex;
+	justify-content: start;
+}
+
+.text_feedback {
+    font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	margin-left: 12px;
+	letter-spacing: 0.04em;
+	color: #393f70;
+}
+
+.styled_back_button {
+    cursor: pointer;
+	margin-right: 12px;
+}
+
+.header {
+    display: flex;
+	justify-content: start;
+}
+
+.remarks_textarea {
+    font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+
+	color: #393f70;
+	margin-bottom: 12px;
+}
+
+.styled_textarea {
+    margin-top: 24px;
+	margin-bottom: 138px;
+	.ui-textarea {
+		padding: 8px;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 14px;
+		letter-spacing: 0.02em;
+		::placeholder {
+			font-weight: 400;
+			font-size: 14px;
+			line-height: 14px;
+			letter-spacing: 0.02em;
+			color: #cbcff5;
+		}
+	}
+}

@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 // import formatters from '../../helpers';
 // import useGetMails from '../../hooks/useGetMails';
 // import FeedBack from '../FeedBack';
-// import HowItWorks from '../HowItWorks';
+import HowItWorks from '../HowItWorks';
 
 // import Filters from './Filters';
 // import Item from './Item';
@@ -75,7 +75,7 @@ function RPASearch({
 	// 	show,
 	// });
 
-	const content = (
+	let content = (
 		<div className={styles.container}>
 
 			<div className={styles.header}>
@@ -175,7 +175,7 @@ function RPASearch({
 	if (task === 'feed_back') {
 		// content = <FeedBack setTask={setTask} />;
 	} else if (task === 'how_it_works') {
-		// content = <HowItWorks setTask={setTask} />;
+		content = <HowItWorks setTask={setTask} />;
 	}
 
 	return <div className={styles.content}>{content}</div>;

@@ -1,94 +1,104 @@
-import Button from '@cogoport/front/components/admin/Button';
+import { Button } from '@cogoport/components';
+import { IcMArrowNext, IcMArrowBack } from '@cogoport/icons-react';
 
-import {
-	Container,
-	Header,
-	StyledBackButton,
-	Heading,
-	StyledButton,
-	CancelButton,
-	Text,
-	Box,
-	Boxes,
-	StyledArrow,
-	FeebBackClick,
-} from './styles';
+import styles from './styles.module.css';
 
 function HowItWorks({ setTask }) {
 	return (
-		<Container>
-			<Header>
-				<StyledBackButton
+		<div className={styles.container}>
+			<div className={styles.header}>
+				<div
+					className={styles.back_button}
+					role="button"
+					tabIndex={0}
 					onClick={() => {
 						setTask('search_box');
 					}}
-				/>
-				<Heading>HOW IT WORKS</Heading>
-			</Header>
-			<Text>
+				>
+					<IcMArrowBack style={{ width: '1.5em', height: '1.5em' }} />
+				</div>
+				<div className={styles.heading}>HOW IT WORKS</div>
+			</div>
+
+			<div className={styles.text}>
 				We are constantly improving our systems to give you a seamless
 				experience via Machine Learning and AI. RPA is reading all the documents
 				which are coming at operations@cogoport.com or zoho and showing them
 				here. You can search your mails by subject, name, document number or
 				document name and upload them directly.
-			</Text>
-			<Text>
+			</div>
+
+			<div className={styles.text}>
 				The working of RPA (Robotic Process Automation) depends on all the mails
 				that you receive at operations@cogoport.com or zoho (for maersk), Once
 				mail arrives at operations the flow goes this way.
-			</Text>
-			<Boxes>
-				<Box>RPA Read Mails (operations@cogoport.com)</Box>
-				<StyledArrow />
-				<Box>Classifies Mails</Box>
-				<StyledArrow />
-				<Box>Pass it to Cogo Lens</Box>
-				<StyledArrow />
-				<Box>Format mails</Box>
-				<StyledArrow />
-				<Box>Notify corresponding stakeholder</Box>
-				<StyledArrow />
-				<Box>Get visible on this Search Box</Box>
-			</Boxes>
+			</div>
 
-			<Text>
-				<span style={{ color: 'red' }}>Important Note </span>
+			<div className={styles.boxes}>
+				<div className={styles.box}>RPA Read Mails (operations@cogoport.com)</div>
+				<div className={styles.arrow}><IcMArrowNext style={{ width: '1.5em', height: '1.5em' }} /></div>
+
+				<div className={styles.box}>Classifies Mails</div>
+				<div className={styles.arrow}><IcMArrowNext style={{ width: '1.5em', height: '1.5em' }} /></div>
+
+				<div className={styles.box}>Pass it to Cogo Lens</div>
+				<div className={styles.arrow}><IcMArrowNext style={{ width: '1.5em', height: '1.5em' }} /></div>
+
+				<div className={styles.box}>Format mails</div>
+				<div className={styles.arrow}><IcMArrowNext style={{ width: '1.5em', height: '1.5em' }} /></div>
+
+				<div className={styles.box}>Notify corresponding stakeholder</div>
+				<div className={styles.arrow}><IcMArrowNext style={{ width: '1.5em', height: '1.5em' }} /></div>
+
+				<div className={styles.box}>Get visible on this Search Box</div>
+			</div>
+
+			<div className={styles.text}>
+				<span style={{ color: 'red', fontWeight: 'bold' }}>Important Note </span>
 				-&gt; Don&apos;t
 				miss out on automations and waste your time checking emails for docs and
 				other stuff to update them on the platform, you might be having other
 				email ids upon which you are getting shipment updates other than
 				operations@cogoport.com. Please let us know in
-				{' '}
-				<FeebBackClick onClick={() => setTask('feed_back')}>
+				&nbsp;
+				<div
+					className={styles.feedback_click}
+					role="button"
+					tabIndex={0}
+					onClick={() => setTask('feed_back')}
+				>
 					feedback
-				</FeebBackClick>
-				{' '}
+				</div>
+				&nbsp;
 				section and leave the rest to us in automating tasks, invoices, shipment
 				updates for all the shipments going on at the Cogoport platform. None of
 				your personal mails will be exposed only the ones you will provide
 				access to will be read. In
-				{' '}
-				<FeebBackClick onClick={() => setTask('feed_back')}>
+				&nbsp;
+				<div
+					className={styles.feedback_click}
+					role="button"
+					tabIndex={0}
+					onClick={() => setTask('feed_back')}
+				>
 					feedback
-				</FeebBackClick>
-				{' '}
+				</div>
+				&nbsp;
 				section just provide your email and we will automate all your shipment
-				journey. You just sit back and relax
-			</Text>
+				journey. You just sit back and relax.
+			</div>
 
-			<StyledButton>
-				<CancelButton>
-					<Button
-						className="secondary md"
-						onClick={() => {
-							setTask('search_box');
-						}}
-					>
-						Cancel
-					</Button>
-				</CancelButton>
-			</StyledButton>
-		</Container>
+			<div className={styles.cancel_button}>
+				<Button
+					onClick={() => {
+						setTask('search_box');
+					}}
+				>
+					Cancel
+				</Button>
+			</div>
+
+		</div>
 	);
 }
 

@@ -17,6 +17,7 @@ import {
 	StyledButton,
 	CancelButton,
 } from './styles';
+import styles from './styles.module.css';
 
 function FeedBack({ setTask }) {
 	const [feedback, setFeedback] = useState('');
