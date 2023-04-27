@@ -29,7 +29,7 @@ function EditRate({
 	formattedRate = {},
 }) {
 	const editQuote = useGetStep3Data({
-		servicesList    : servicesList.filter((item) => item.service_type === task.service_type),
+		servicesList    : servicesList.filter((item) => item.id === task.service_id),
 		shipment_data,
 		onCancel,
 		task,
