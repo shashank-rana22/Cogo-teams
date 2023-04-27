@@ -4,7 +4,7 @@ import { useState, useContext } from 'react';
 import injectUiConfigs from '../utils/inject-ui-configs';
 
 function useTaskExecution({ task = {}, taskConfigData = {} }) {
-	const { primary_service: primaryService } = useContext(ShipmentDetailContext);
+	const { primary_service: primaryService, servicesList } = useContext(ShipmentDetailContext);
 
 	const dataConfig = injectUiConfigs(taskConfigData, task, primaryService);
 
@@ -17,12 +17,26 @@ function useTaskExecution({ task = {}, taskConfigData = {} }) {
 		}
 	}
 
+	const serviceIdMapping = {};
+
+	const idCheck = {};
+	(servicesList || []).forEach((obj) => {
+		if (!Array.isArray(serviceIdMapping[`${obj.service_type}.id`])) {
+			serviceIdMapping[`${obj.service_type}.id`] = [];
+		}
+		if (!idCheck[obj.id]) {
+			idCheck[obj.id] = true;
+			serviceIdMapping[`${obj.service_type}.id`].push(obj.id);
+		}
+	});
+
 	const [currentStep, setCurrentStep] = useState(initialStep);
 
 	return {
 		steps: dataConfig.steps || [],
 		currentStep,
 		setCurrentStep,
+		serviceIdMapping,
 	};
 }
 export default useTaskExecution;

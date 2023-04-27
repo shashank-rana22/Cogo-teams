@@ -13,6 +13,7 @@ function ExecuteStep({
 	currentStep = 0,
 	isLastStep = false,
 	getApisData = {},
+	serviceIdMapping = [],
 	// uiConfig = {},
 }) {
 	const {
@@ -32,7 +33,7 @@ function ExecuteStep({
 		task,
 		onCancel,
 		refetch,
-		// serviceIdMapping,
+		serviceIdMapping,
 		currentStep,
 		isLastStep,
 		getApisData,

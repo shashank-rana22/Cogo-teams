@@ -30,6 +30,7 @@ function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {
 		steps,
 		currentStep,
 		setCurrentStep,
+		serviceIdMapping,
 	} = useTaskExecution({ task, taskConfigData });
 
 	const stepConfigValue = steps.length
@@ -160,6 +161,7 @@ function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}
 			uiConfig={taskConfigData?.task_config?.ui_config[currentStep]}
+			serviceIdMapping={serviceIdMapping}
 		/>
 	);
 }
