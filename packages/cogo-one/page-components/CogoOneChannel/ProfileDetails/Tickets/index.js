@@ -62,9 +62,14 @@ function Tickets({ zippedTicketsData = {}, setActiveSelect = () => {} }) {
 	if (!isUserOnboarded) {
 		return (
 			<div className={styles.loader}>
+				<img
+					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/sad_face.png"
+					size="180px"
+					alt="anonymous"
+				/>
 				<div className={styles.anonymous_user}>
-					Please Onboard this User
-					<span tabIndex={0} role="button" onClick={() => setActiveSelect('profile')}>here</span>
+					Ticket cannot be created as this user is not onboarded
+					<span tabIndex={0} role="button" onClick={() => setActiveSelect('profile')}>Click here</span>
 				</div>
 			</div>
 		);
