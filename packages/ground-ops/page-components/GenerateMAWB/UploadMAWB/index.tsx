@@ -6,12 +6,13 @@ import Layout from '../../Air/commons/Layout';
 import useCreateShipmentDocument from '../GenerateMawbDoc/useCreateShipmentDocument';
 import styles from '../styles.module.css';
 
-import { controls } from './controls';
+import uploadControls from './controls';
 
 function UploadMAWB({
 	item, edit, setEdit, setGenerate, activeCategory, activeHawb, hawbDetails, setHawbDetails, setActiveHawb,
 }) {
 	const { control, handleSubmit, formState: { errors } } = useForm();
+	const fields = uploadControls();
 	const { upload, loading } = useCreateShipmentDocument({
 		edit,
 		setEdit,
@@ -38,7 +39,7 @@ function UploadMAWB({
 			data                : {
 
 				status          : 'uploaded',
-				document_number : item?.awbNumber,
+				document_number : activeCategory === 'mawb' ? item?.awbNumber : formValues?.document_number,
 				service_id      : item?.serviceId,
 				service_type    : 'air_freight_service',
 				document_url    : finalUrl,
@@ -48,7 +49,7 @@ function UploadMAWB({
 					data: {
 
 						status          : 'uploaded',
-						document_number : item?.awbNumber,
+						document_number : activeCategory === 'mawb' ? item?.awbNumber : formValues?.document_number,
 						service_id      : item?.serviceId,
 						service_type    : 'air_freight_service',
 						document_url    : finalUrl,
@@ -63,8 +64,8 @@ function UploadMAWB({
 	};
 	return (
 		<div>
-
-			<Layout fields={controls} errors={errors} control={control} />
+			{activeCategory === 'hawb' &&	<Layout fields={fields.hawb_controls} errors={errors} control={control} />}
+			<Layout fields={fields.all_controls} errors={errors} control={control} />
 			<div className={styles.button_container}>
 				<div className={styles.button_div}>
 					<Button
