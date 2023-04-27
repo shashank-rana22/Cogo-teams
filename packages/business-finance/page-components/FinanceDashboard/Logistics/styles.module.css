@@ -1,6 +1,7 @@
 .service_stats {
-	min-width: 49%;
-	height: 221px;
+	min-width: 49.3%;
+
+	/* height: 221px; */
 	background: #fff;
 	border-radius: 8px;
 }
@@ -159,4 +160,102 @@
 			}
 		}
 	}
+}
+
+.account_payment_box {
+	box-sizing: border-box;
+	display: flex;
+	justify-content: space-between;
+	height: 150px;
+	margin: 30px;
+	background: #fff;
+	border: 1px solid #cfcfcf;
+	border-radius: 8px;
+}
+
+.border_left {
+	position: relative;
+	right: 60px;
+	height: 100px;
+	margin: 20px;
+	border-left: 2px solid #cfcfcf;
+}
+
+.responsive_pie_chart {
+	min-width: 44%;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.color_box {
+	width: 30px;
+	height: 12px;
+	margin: 4px 0 0;
+	background: #cfeaed;
+	border-radius: 8px;
+}
+
+.icon_plus_styles {
+	margin-right: 12px;
+	color: #34c759;
+	transform: translate(10px, 2px) rotate(-45deg);
+}
+
+.icon_minus_styles {
+	margin-right: 12px;
+	color: #f8aea8;
+	transform: translate(10px, 2px) rotate(+45deg);
+}
+
+.account_change_text_style {
+	display: flex;
+}
+
+.yesterday_text_style {
+	margin-left: 10px;
+}
+
+.accounts_text_style {
+	display: flex;
+	font-size: 12px;
+	font-weight: 500;
+	color: #828282;
+}
+
+.on_account {
+	margin-left: 10px;
+	font-size: 12px;
+	font-weight: 500;
+	letter-spacing: 0.02em;
+}
+
+.color_box_outstanding {
+	width: 30px;
+	height: 12px;
+	margin: 4px 0 0;
+	background: #88cad1;
+	border-radius: 8px;
+}
+
+.current_overdue_style {
+	display: flex;
+	justify-content: space-between;
+	width: 76%;
+}
+
+.current_amount_style {
+	margin-left: 60px;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.icon_style {
+	display: flex;
+	align-items: center;
+	padding-right: 12%;
+}
+
+.legend_style {
+	display: flex;
+	justify-content: flex-start;
 }
