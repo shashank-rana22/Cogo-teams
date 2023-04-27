@@ -13,20 +13,25 @@ import styles from './styles.module.css';
 
 function TaskDetails({
 	task = {},
-	services = [],
 	isTaskOpen,
 }) {
-	const { primary_service } = useContext(ShipmentDetailContext);
+	const { servicesList } = useContext(ShipmentDetailContext);
 
 	const requiredServiceArr = [];
 	(task.task_field_ids || []).forEach((id) => {
-		(services || []).forEach((serviceObj) => {
+		(servicesList || []).forEach((serviceObj) => {
 			if (serviceObj.id === id) {
 				requiredServiceArr.push(serviceObj);
 			}
 		});
 	});
-	const taskName = startCase(task?.label || task?.task);
+	let taskName = startCase(task?.label || task?.task);
+
+	if (task?.service_type === 'subsidiary_service') {
+		taskName = `Mark ( ${requiredServiceArr?.[0]?.service_name} ) ${
+			task?.task === 'mark_completed' ? 'Completed' : 'Confirm'
+		}` || 	startCase(task?.label) || startCase(task?.task);
+	}
 
 	return (
 		<div className={styles.container}>
@@ -112,7 +117,7 @@ function TaskDetails({
 
 				{!isTaskOpen && task?.service_type ? (
 					<div className={styles.cargo_details}>
-						<CargoDetails primary_service={primary_service} />
+						<CargoDetails primary_service={requiredServiceArr?.[0] || {}} />
 					</div>
 				) : null}
 			</div>

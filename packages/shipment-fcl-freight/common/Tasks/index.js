@@ -12,7 +12,7 @@ function List() {
 	const {
 		count, completedTaskCount, tasksList, loading, taskListRefetch,
 		hideCompletedTasks, setHideCompletedTasks, handleClick, selectedTaskId,
-		setSelectedTaskId, shipment_data, showMyTasks, setShowMyTasks,
+		setSelectedTaskId, showMyTasks, setShowMyTasks,
 	} = useListTasksHelper();
 
 	if (loading) {
@@ -55,7 +55,6 @@ function List() {
 							<Card
 								task={task}
 								handleClick={handleClick}
-								tasksList={tasksList}
 								loading={loading}
 							/>
 						)) : null}
@@ -66,14 +65,12 @@ function List() {
 									task={tasksList.find((task) => task.id === selectedTaskId)}
 									handleClick={handleClick}
 									isTaskOpen
-									tasksList={tasksList}
 									loading={loading}
 								/>
 
 								<TaskExecution
 									task={tasksList.find((task) => task.id === selectedTaskId)}
 									onCancel={() => setSelectedTaskId(null)}
-									shipment_data={shipment_data}
 									taskListRefetch={taskListRefetch}
 								/>
 							</>
