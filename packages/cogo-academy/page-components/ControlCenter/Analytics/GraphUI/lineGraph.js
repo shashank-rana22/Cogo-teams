@@ -2,9 +2,17 @@ import { ResponsiveLine } from '@cogoport/charts/line';
 import { format } from '@cogoport/utils';
 
 function LineGraph({ graphData }) {
+	const theme = {
+		legends: {
+			text: {
+				fontSize: 13,
+			},
+		},
+	};
 	return (
 		<ResponsiveLine
 			data={graphData}
+			theme={theme}
 			margin={{
 				right  : 10,
 				top    : 50,
@@ -57,15 +65,16 @@ function LineGraph({ graphData }) {
 					justify           : false,
 					translateX        : -6,
 					translateY        : 0,
-					itemsSpacing      : 50,
+					itemsSpacing      : 40,
 					itemDirection     : 'left-to-right',
-					itemWidth         : 90,
+					itemWidth         : 120,
 					itemHeight        : -40,
 					itemOpacity       : 0.75,
-					symbolSize        : 10,
+					symbolSize        : 12,
 					symbolShape       : 'circle',
 					symbolBorderColor : 'rgba(0, 0, 0, .5)',
-					effects           : [
+
+					effects: [
 						{
 							on    : 'hover',
 							style : {
