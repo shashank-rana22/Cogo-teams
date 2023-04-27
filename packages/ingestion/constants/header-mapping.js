@@ -6,13 +6,18 @@ export const CONSTANT_KEYS = {
 };
 
 export const REDIRECT_LINK_MAPPING = {
-	true_service_provider   : '/crm/supply',
-	false_importer_exporter : '/lead-management',
-	true_importer_exporter  : '/channel-partner-management',
+	true_service_provider   : '/crm/supply?lifecycleStage=enriched',
+	false_importer_exporter : '/lead-management?lifecycleStage=enriched',
+	true_importer_exporter  : '/channel-partner-management?lifecycleStage=enriched',
 };
 
 export const REDIRECT_MAPPING = {
 	true_service_provider   : 'Supply CRM',
 	false_importer_exporter : 'Sales CRM',
 	true_importer_exporter  : 'PRM',
+};
+
+export const TERMS_MAPPING = {
+	TERM     : 'terms',
+	TEMPLATE : 'template',
 };

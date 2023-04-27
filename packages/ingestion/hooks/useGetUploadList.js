@@ -90,7 +90,7 @@ function useGetUploadList(id) {
 			key      : 'totals_count',
 			Header   : 'TOTAL COUNT',
 			accessor : ({ total_records_count }) => (
-				<div className={styles.total_count}>{total_records_count || '___'}</div>
+				<div className={styles.total_count}>{total_records_count ?? '___'}</div>
 
 			),
 		},
@@ -98,7 +98,7 @@ function useGetUploadList(id) {
 			key      : 'successfully_migrated',
 			Header   : 'SUCCESSFULLY MIGRATED',
 			accessor : ({ successfully_migrated_count }) => (
-				<div className={styles.successfully_migrated_count}>{successfully_migrated_count || '___'}</div>
+				<div className={styles.successfully_migrated_count}>{successfully_migrated_count ?? '___'}</div>
 
 			),
 		},

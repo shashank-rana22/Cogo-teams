@@ -75,11 +75,11 @@ function useGetIngestionList() {
 			Header   : 'PROCESSED RECORDS',
 			accessor : ({ request_files = {} }) => (
 				<div className={styles.number_of_org}>
-					{request_files?.successfully_migrated_count || '-'}
+					{request_files?.successfully_migrated_count ?? '-'}
 					{' '}
 					/
 					{' '}
-					{request_files?.total_records_count || '-'}
+					{request_files?.total_records_count ?? '-'}
 				</div>
 
 			),
@@ -164,8 +164,6 @@ function useGetIngestionList() {
 
 							{startCase(item?.ingestion_type || '___')}
 
-							{/* </a> */}
-
 						</Button>
 					</Tooltip>
 
@@ -213,11 +211,9 @@ function useGetIngestionList() {
 			accessor : (item) => (
 				<div className={styles.uploaded}>
 
-					{item?.request_files?.errored_data_url ? (
-						<Button onClick={() => { tableListModal(item); }} size="md" themeType="tertiary">
-							View All
-						</Button>
-					) : null}
+					<Button onClick={() => { tableListModal(item); }} size="md" themeType="tertiary">
+						View All
+					</Button>
 
 				</div>
 			),

@@ -13,6 +13,7 @@ import { UploadModalFooter } from './Modals/Footers/UploadModalFooter';
 import OrgDetailsModal from './Modals/OrgDetailsModal/index';
 import ProviderSelectModal from './Modals/ProviderSelectModal';
 import TemplateModal from './Modals/TemplateModal';
+import TermsModal from './Modals/TermsModal';
 import UploadModal from './Modals/UploadModal';
 import styles from './styles.module.css';
 
@@ -73,10 +74,7 @@ function Header({ refetch = () => {} }) {
 					size="lg"
 					themeType="primary"
 					onClick={() => {
-						setShow({
-							open       : true,
-							activeMode : 'chooseModal',
-						});
+						setTemplate('terms');
 					}}
 				>
 					<IcMUpload style={{ marginRight: '4px' }} />
@@ -133,6 +131,7 @@ function Header({ refetch = () => {} }) {
 			)}
 
 			<TemplateModal getTemplateCsv={getTemplateCsv} template={template} setTemplate={setTemplate} />
+			<TermsModal setShow={setShow} template={template} setTemplate={setTemplate} />
 		</>
 
 	);
