@@ -55,7 +55,7 @@ function MessageConversations({
 	setRaiseTicketModal = () => {},
 }) {
 	const messageRef = useRef();
-	const { id = '', channel_type = '', new_user_message_count = 0 } = activeMessageCard;
+	const { id = '', channel_type = '', new_user_message_count = 0, user_name = '' } = activeMessageCard;
 
 	const {
 		emojisList = {},
@@ -199,6 +199,7 @@ function MessageConversations({
 					activeMessageCard={activeMessageCard}
 					messageStatus={channel_type === 'platform_chat' && !(index >= unreadIndex)}
 					ticketPopoverContent={ticketPopoverContent}
+					user_name={user_name}
 				/>
 			))}
 

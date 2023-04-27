@@ -20,7 +20,7 @@
 .receive_message_container {
 	width: fit-content;
 	max-width: 320px;
-	padding: 0 0 12px 12px;
+	padding: 0 0 12px 8px;
 	margin-top: 10px;
 	font-size: 14px;
 	line-height: 21px;
@@ -50,4 +50,8 @@
 
 .message_div {
 	padding: 5px 15px 0 0;
+}
+
+.replied_messages {
+	padding-top: 12px;
 }
