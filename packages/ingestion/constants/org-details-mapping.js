@@ -1,4 +1,4 @@
-export const ProviderLeadOptions = [
+export const PROVIDER_LEAD_OPTIONS = [
 	{ label: 'a. Importer/ Exporter', type: 'IE' },
 	{ label: 'b. Service Provider', type: 'SP' },
 	{ label: 'c. Channel Partner', type: 'CP' },

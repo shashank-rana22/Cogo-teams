@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 
 import {
-	ProviderLeadOptions,
+	PROVIDER_LEAD_OPTIONS,
 	IS_CHANNEL_PARTNER_MAPPING,
 	ACCOUNT_TYPE_MAPPING,
 } from '../../../../../constants/org-details-mapping';
@@ -31,7 +31,7 @@ function ProviderSelectModal({ setShow = () => {}, setUploadData = () => {}, upl
 			<div className={styles.heading}>What do you wish to upload CSV for?</div>
 
 			<div className={styles.provider_container}>
-				{(ProviderLeadOptions || []).map((response) => (
+				{(PROVIDER_LEAD_OPTIONS || []).map((response) => (
 					<Button
 						themeType="secondary"
 						onClick={() => {
