@@ -105,9 +105,9 @@ function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 								<div className="shipper">
 									<p className="shipper_head">SHIPPER:</p>
 									<p className="shipper_info">
-										{mawbData.shipperName}
+										{mawbData.shipperName || '-'}
 										<br />
-										{mawbData.shipperAddress}
+										{mawbData.shipperAddress || '-'}
 									</p>
 								</div>
 								<div className="extra_space" />
@@ -116,9 +116,9 @@ function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 								<div className="consignee font_style">
 									<p className="consignee_head">CONSIGNEE:</p>
 									<p className="consignee_info">
-										{mawbData.consigneeName}
+										{mawbData.consigneeName || '-'}
 										<br />
-										{mawbData.consigneeAddress}
+										{mawbData.consigneeAddress || '-'}
 									</p>
 								</div>
 								<div className="extra_space" />
@@ -128,12 +128,12 @@ function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 									<td className="font_style">
 										MAWB:
 										{' '}
-										{mawbData.document_number}
+										{mawbData.document_number || '-'}
 									</td>
 									<td className="font_style">
 										DESTINATION:
 										{' '}
-										{mawbData.destinationPortCode}
+										{mawbData.destinationPortCode || '-'}
 									</td>
 								</tr>
 							</table>
@@ -157,23 +157,23 @@ function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 									shipperAddress,
 									consigneeName,
 									consigneeAddress,
-								} = item.documentData;
+								} = item.documentData || {};
 
 								return (
 									<tr className="data_font_style">
-										<td>{documentNumber}</td>
-										<td>{totalPackagesCount}</td>
-										<td>{weight}</td>
-										<td>{commodity}</td>
+										<td>{documentNumber || '-'}</td>
+										<td>{totalPackagesCount || '-'}</td>
+										<td>{weight || '-'}</td>
+										<td>{commodity || '-'}</td>
 										<td>
-											{shipperName}
+											{shipperName || '-'}
 											<br />
-											{shipperAddress}
+											{shipperAddress || '-'}
 										</td>
 										<td>
-											{consigneeName}
+											{consigneeName || '-'}
 											<br />
-											{consigneeAddress}
+											{consigneeAddress || '-'}
 										</td>
 									</tr>
 								);
