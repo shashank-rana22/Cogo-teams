@@ -97,7 +97,25 @@ const useListEnrichment = () => {
 		{
 			id       : 'id',
 			Header   : 'SERIAL ID',
-			accessor : ({ serial_id = '' }) => (
+			accessor : ({ organization, lead_organization, lead_organization_id }) => (
+				<section>
+					<Pill>
+						#
+						{
+							lead_organization_id ? (
+								(lead_organization || {}).serial_id || '-'
+							) : (
+								(organization || {}).serial_id || '-'
+							)
+						}
+					</Pill>
+				</section>
+			),
+		},
+		{
+			id       : 'file_id',
+			Header   : 'SERIAL ID',
+			accessor : ({ serial_id }) => (
 				<section>
 					<Pill>
 						#
