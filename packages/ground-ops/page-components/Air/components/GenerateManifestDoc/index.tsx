@@ -42,8 +42,7 @@ function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 			documentUrl     : url || undefined,
 			documentType    : 'manifest_copy',
 			fileName:
-			`Manifest_${new Date().getTime()}`
-				|| undefined,
+			`Manifest_${new Date().getTime()}`,
 		};
 		createManifest(payload, setTriggerManifest);
 	};
