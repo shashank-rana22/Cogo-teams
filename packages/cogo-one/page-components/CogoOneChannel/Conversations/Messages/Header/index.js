@@ -1,4 +1,5 @@
 import { Button, cl, Popover } from '@cogoport/components';
+import { IcMProfile, IcMRefresh } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -35,8 +36,11 @@ function Header({
 	disableButton = '',
 	updateRoomLoading = false,
 	updateUserRoom = () => {},
+	requestForAssignChat = () => {},
+	requestAssignLoading = false,
 }) {
 	const [isVisible, setIsVisible] = useState(false);
+	const [openPopover, setOpenPopover] = useState(false);
 	const { chat_tags = [] } = activeMessageCard || {};
 
 	const {
@@ -45,14 +49,15 @@ function Header({
 		mobile_no = '',
 		channel_type,
 		user_type,
-		user_id = null,
-		lead_user_id = null,
-		sender = null,
 		search_user_name = '',
+		has_requested_by = {},
+		lead_user_id = '',
+		user_id = '',
+		sender = '',
+		id = '',
 	} = formattedData || {};
 
-	const userDetailsMissing = !(user_id || lead_user_id || sender);
-
+	const { agent_id = '', agent_name = '' } = has_requested_by || {};
 	const getLowerLabel = () => {
 		if (user_name?.includes('anonymous')) {
 			return PLATFORM_MAPPING[user_type] || '';
@@ -61,110 +66,155 @@ function Header({
 			? `+${hideDetails({ data: mobile_no, type: 'number' })}`
 			: business_name;
 	};
-	const disableAssignButton = showBotMessages && !isomniChannelAdmin;
 
-	const assignButtonAction = (type) => {
-		if (showBotMessages && isomniChannelAdmin) {
-			const payload = {
-				agent_id        : type === 'stop_and_assign' ? userId : undefined,
-				allowed_to_chat : true,
-			};
-			setDisableButton(type);
-			assignChat(payload);
-		} else if (!showBotMessages) {
-			setOpenModal({
-				type : 'assign',
-				data : {
-					closeModal,
-					assignLoading,
-					assignChat,
-					support_agent_id,
-				},
-			});
-		}
+	const openAssignModal = () => {
+		setOpenModal({
+			type : 'assign',
+			data : {
+				closeModal,
+				assignLoading,
+				assignChat,
+				support_agent_id,
+			},
+		});
 	};
 
-	const renderButtonOption = () => (
+	const assignButtonAction = (type) => {
+		setDisableButton(type);
+		if (type === 'assign') {
+			setOpenPopover(false);
+			openAssignModal();
+			return;
+		}
+		let agentIdPayload = {};
+
+		if (type === 'approve_request') {
+			agentIdPayload = { agent_id };
+		} else if (type === 'stop_and_assign') {
+			agentIdPayload = { agent_id: userId };
+		}
+
+		assignChat({ ...agentIdPayload, is_allowed_to_chat: true });
+	};
+
+	const requestAssignPaylod = () => {
+		const payload = {
+			lead_user_id    : lead_user_id || undefined,
+			user_id         : user_id || undefined,
+			sender          : sender || undefined,
+			channel         : channel_type,
+			channel_chat_id : id,
+		};
+		requestForAssignChat(payload);
+	};
+	const renderPopoverOption = () => (
 		<div className={styles.button_container}>
 			<Button
 				themeType="secondary"
 				size="md"
-				disabled={
-                    disableAssignButton || disableButton === 'auto_assign'
-                }
+				disabled={disableButton}
 				className={styles.styled_buttons}
 				onClick={() => assignButtonAction('stop_and_assign')}
-				loading={
-                    showBotMessages
-                    && assignLoading
-                    && disableButton === 'stop_and_assign'
-                }
+				loading={assignLoading && disableButton === 'stop_and_assign'}
 			>
 				Assign to me
 			</Button>
 			<Button
 				themeType="secondary"
 				size="md"
-				disabled={
-                    disableAssignButton || disableButton === 'stop_and_assign'
-                }
+				disabled={disableButton}
 				className={styles.styled_buttons}
 				onClick={() => assignButtonAction('auto_assign')}
-				loading={
-                    showBotMessages
-                    && assignLoading
-                    && disableButton === 'auto_assign'
-                }
+				loading={assignLoading && disableButton === 'auto_assign'}
 			>
 				Auto Assign
 			</Button>
+			<Button
+				themeType="secondary"
+				size="md"
+				disabled={disableButton}
+				className={styles.styled_button}
+				onClick={() => assignButtonAction('assign')}
+				loading={assignLoading && disableButton === 'assign'}
+			>
+				Assign
+			</Button>
 		</div>
 	);
+
 	const renderRightButton = () => {
-		if (userDetailsMissing) {
+		const hasAnyRequests = !!agent_id;
+		if (!showBotMessages) {
 			return (
 				<Button
 					themeType="secondary"
 					size="md"
 					className={styles.styled_button}
-					onClick={() => updateUserRoom(mobile_no)}
-					loading={updateRoomLoading}
+					disabled={!hasPermissionToEdit}
+					onClick={openAssignModal}
 				>
-					Update User
+					Assign
 				</Button>
 			);
 		}
-		return (
-			<div>
-				{showBotMessages && isomniChannelAdmin ? (
-					<Popover
-						placement="bottom"
-						trigger="click"
-						render={renderButtonOption()}
-					>
-						<Button
-							themeType="secondary"
-							size="md"
-							className={styles.styled_button}
-						>
-							Assign To
-						</Button>
-					</Popover>
-				) : (
+		if (isomniChannelAdmin && !hasAnyRequests) {
+			return (
+				<Popover
+					placement="bottom"
+					trigger="click"
+					render={renderPopoverOption()}
+					visible={openPopover}
+					onClickOutside={() => setOpenPopover(false)}
+				>
 					<Button
 						themeType="secondary"
 						size="md"
-						disabled={disableAssignButton}
 						className={styles.styled_button}
-						onClick={() => assignButtonAction('assign')}
-						loading={showBotMessages && assignLoading}
+						onClick={() => setOpenPopover(true)}
 					>
-						Assign
+						Assign To
 					</Button>
-				)}
-			</div>
-		);
+				</Popover>
+			);
+		}
+		if (isomniChannelAdmin && hasAnyRequests) {
+			return (
+				<Button
+					themeType="secondary"
+					size="md"
+					className={styles.styled_button}
+					onClick={() => assignButtonAction('approve_request')}
+					loading={assignLoading}
+				>
+					Assign to
+					{' '}
+					{agent_name}
+				</Button>
+			);
+		}
+		if (!isomniChannelAdmin) {
+			return (
+				<Button
+					themeType="secondary"
+					size="md"
+					disabled={hasAnyRequests}
+					className={styles.styled_button}
+					onClick={requestAssignPaylod}
+					loading={requestAssignLoading}
+				>
+					{hasAnyRequests ? 'Requested' : 'Request for Assign'}
+				</Button>
+			);
+		}
+		return null;
 	};
+
+	const handleUpdateUser = () => {
+		if (!updateRoomLoading) {
+			updateUserRoom(mobile_no);
+		}
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex_space_between}>
@@ -187,9 +237,7 @@ function Header({
 					/>
 				</div>
 				<div
-					className={cl`${styles.flex} ${
-						disableAssignButton ? styles.disabled_button : ''
-					}`}
+					className={styles.flex}
 				>
 					{!isEmpty(filteredSpectators) && (
 						<Assignes filteredSpectators={filteredSpectators} />
@@ -203,7 +251,23 @@ function Header({
 							/>
 						</div>
 					)}
-					{renderRightButton()}
+					<div>{renderRightButton()}</div>
+					{isomniChannelAdmin && channel_type === 'whatsapp' && (
+						<div
+							role="button"
+							tabIndex="0"
+							className={cl`${styles.icon_div} ${updateRoomLoading ? styles.disable_icon : ''}`}
+							onClick={handleUpdateUser}
+						>
+							<IcMProfile
+								className={cl`${styles.profile_icon} 
+								${updateRoomLoading ? styles.disable_icon : ''}`}
+							/>
+							<IcMRefresh className={cl`${styles.update_icon} 
+								${updateRoomLoading ? styles.disable_icon : ''}`}
+							/>
+						</div>
+					)}
 				</div>
 			</div>
 			<div className={styles.flex_space_between}>

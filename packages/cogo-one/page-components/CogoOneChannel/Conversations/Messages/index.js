@@ -7,6 +7,7 @@ import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPI
 import useAssignChat from '../../../../hooks/useAssignChat';
 import useGetMessages from '../../../../hooks/useGetMessages';
 import useListAssignedChatTags from '../../../../hooks/useListAssignedChatTags';
+import useRequestAssignChat from '../../../../hooks/useRequestAssignChat';
 import useSendChat from '../../../../hooks/useSendChat';
 import useSendCommunicationTemplate from '../../../../hooks/useSendCommunicationTemplate';
 import useUpdateAssignedChat from '../../../../hooks/useUpdateAssignedChat';
@@ -23,32 +24,35 @@ function Messages({
 	suggestions = [],
 	userId = '',
 	isomniChannelAdmin = false,
-	showBotMessages = false,
+	setActiveMessage = () => {},
 }) {
 	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 	const [uploading, setUploading] = useState({});
+	const [disableButton, setDisableButton] = useState('');
 	const { tagOptions = [] } = useListAssignedChatTags();
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
-	const closeModal = () => setOpenModal({ type: null, data: {} });
-
+	const closeModal = () => {
+		setOpenModal({ type: null, data: {} });
+		setDisableButton('');
+	};
 	let activeChatCollection;
-
-	const [disableButton, setDisableButton] = useState('');
-
 	const {
 		id = '',
 		channel_type = '',
 		support_agent_id = '',
 		spectators_data = [],
+		session_type = '',
 	} = activeMessageCard || {};
 
 	const {
 		sendCommunicationTemplate,
 		loading: communicationLoading,
 	} = useSendCommunicationTemplate({ formattedData, callbackfunc: closeModal, isOtherChannels: false });
+
+	const showBotMessages = session_type === 'bot';
 
 	const hasPermissionToEdit = !showBotMessages && (userId === support_agent_id || isomniChannelAdmin);
 
@@ -105,7 +109,10 @@ function Messages({
 		updateRoomLoading,
 		updateUserRoom,
 	} = useUpdateUserRoom();
-
+	const {
+		requestForAssignChat,
+		requestAssignLoading,
+	} = useRequestAssignChat();
 	const {
 		comp: ActiveModalComp = null,
 		title: { img = null, name = null } = {},
@@ -138,6 +145,8 @@ function Messages({
 					disableButton={disableButton}
 					updateRoomLoading={updateRoomLoading}
 					updateUserRoom={updateUserRoom}
+					requestForAssignChat={requestForAssignChat}
+					requestAssignLoading={requestAssignLoading}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
@@ -162,6 +171,7 @@ function Messages({
 						communicationLoading={communicationLoading}
 						closeModal={closeModal}
 						messageLoading={messageLoading}
+						setActiveMessage={setActiveMessage}
 					/>
 				</div>
 			</div>

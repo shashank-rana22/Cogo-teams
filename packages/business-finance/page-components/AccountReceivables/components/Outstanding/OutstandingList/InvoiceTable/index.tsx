@@ -13,9 +13,10 @@ import styles from './styles.module.css';
 
 interface Props {
 	organizationId: string,
+	entityCode?: string
 }
 
-function InvoiceTable({ organizationId }: Props) {
+function InvoiceTable({ organizationId, entityCode }: Props) {
 	const {
 		listData,
 		clearInvoiceFilters,
@@ -24,7 +25,7 @@ function InvoiceTable({ organizationId }: Props) {
 		setinvoiceFilters,
 		getOrganizationInvoices,
 		sendReport,
-	} = useGetOutstandingCard(organizationId);
+	} = useGetOutstandingCard(organizationId, entityCode);
 
 	const { list : invoiceList = [], page: pageInvoiceList, totalRecords: recordInvoiceList } = listData || {};
 
@@ -52,7 +53,7 @@ function InvoiceTable({ organizationId }: Props) {
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<div style={{ display: 'flex', marginRight: '20px', alignItems: 'center' }}>
 						<Button
-							size="sm"
+							size="md"
 							style={{ marginRight: '8px' }}
 							onClick={() => { sendReport(); }}
 						>
@@ -68,7 +69,7 @@ function InvoiceTable({ organizationId }: Props) {
 							search: value || undefined,
 						})}
 						size="md"
-						placeholder="Search by Customer Name /Invoice number /SID"
+						placeholder="Search by /Invoice number /SID"
 					/>
 				</div>
 			</div>

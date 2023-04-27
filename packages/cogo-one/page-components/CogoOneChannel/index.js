@@ -1,7 +1,8 @@
-import { IcMDownload } from '@cogoport/icons-react';
+import { IcMDownload, IcMSettings } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
+import { getAuth, signInWithCustomToken } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
@@ -10,9 +11,11 @@ import { ANDRIOD_APK } from '../../constants';
 import { hasPermission } from '../../constants/IDS_CONSTANTS';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus';
+import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChats from '../../hooks/useListChats';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 
+import AgentModal from './AgentModal';
 import Conversations from './Conversations';
 import Customers from './Customers';
 import DialCallModal from './DialCallModal';
@@ -37,14 +40,25 @@ function CogoOne() {
 	const [openModal, setOpenModal] = useState(false);
 	const { suggestions = [] } = useListChatSuggestions();
 	const [showDialModal, setShowDialModal] = useState(false);
+
+	const [activeMail, setActiveMail] = useState({});
+	const [recipientArray, setRecipientArray] = useState([]);
+	const [bccArray, setBccArray] = useState([]);
+	const [buttonType, setButtonType] = useState('');
+	const [emailState, setEmailState] = useState({
+		subject : '',
+		body    : '',
+	});
+
+	const [agentDetails, setAgentDetails] = useState(false);
+
 	const [modalType, setModalType] = useState({ type: null, data: {} });
-	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
-	const firestore = getFirestore(app);
-
-	const { userRoleIds, userId } = useSelector(({ profile }) => ({
-		userRoleIds : profile.partner?.user_role_ids || [],
-		userId      : profile?.user?.id,
+	const { userRoleIds, userId, token, emailAddress } = useSelector(({ profile, general }) => ({
+		userRoleIds  : profile.partner?.user_role_ids || [],
+		userId       : profile?.user?.id,
+		token        : general.firestoreToken,
+		emailAddress : profile?.user?.email,
 	}));
 
 	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
@@ -54,18 +68,45 @@ function CogoOne() {
 		updateUserStatus = () => {},
 	} = useCreateUserInactiveStatus({ fetchworkPrefernce, setOpenModal });
 
+	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+
+	useEffect(() => {
+		const auth = getAuth();
+		signInWithCustomToken(auth, token).catch((error) => {
+			console.log(error.message);
+		});
+	}, [token]);
+
+	const firestore = getFirestore(app);
+
+	const { tagOptions = [] } = useListAssignedChatTags();
+	const mailProps = {
+		activeMail,
+		setActiveMail,
+		recipientArray,
+		setRecipientArray,
+		bccArray,
+		setBccArray,
+		buttonType,
+		setButtonType,
+		emailState,
+		setEmailState,
+		emailAddress,
+	};
+
 	const {
-		listData = {},
+		chatsData = {},
 		setActiveMessage = () => {},
 		activeMessageCard = {},
 		setAppliedFilters = () => {},
 		appliedFilters,
 		loading,
-		setActiveCardId,
+		setActiveCard,
 		activeCardId,
-		firstLoading,
+		setFirstMount,
 		updateLeaduser,
 		handleScroll,
+		activeRoomLoading,
 	} = useListChats({
 		firestore,
 		userId,
@@ -73,24 +114,11 @@ function CogoOne() {
 		showBotMessages,
 		searchValue,
 	});
-	const { messagesList = [], unReadChatsCount } = listData;
-
-	useEffect(() => {
-		if (!firstLoading) {
-			setActiveVoiceCard({});
-			setActiveCardId('');
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [activeTab, showBotMessages]);
-
-	useEffect(() => {
-		setToggleStatus(status === 'active');
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(agentStatus)]);
 
 	const renderComponent = () => {
 		if ((activeTab === 'message' && !isEmpty(activeMessageCard))
-			|| (activeTab === 'voice' && !isEmpty(activeVoiceCard))) {
+			|| (activeTab === 'voice' && !isEmpty(activeVoiceCard))
+			|| (activeTab === 'mail' && !isEmpty(activeMail))) {
 			return (
 				<>
 					<Conversations
@@ -101,17 +129,21 @@ function CogoOne() {
 						suggestions={suggestions}
 						userId={userId}
 						isomniChannelAdmin={isomniChannelAdmin}
-						showBotMessages={showBotMessages}
+						mailProps={mailProps}
+						setActiveMessage={setActiveMessage}
 					/>
-					<ProfileDetails
-						activeMessageCard={activeMessageCard}
-						activeTab={activeTab}
-						activeVoiceCard={activeVoiceCard}
-						firestore={firestore}
-						updateLeaduser={updateLeaduser}
-						activeCardId={activeCardId}
-						setModalType={setModalType}
-					/>
+					{activeTab !== 'mail' && (
+						<ProfileDetails
+							activeMessageCard={activeMessageCard}
+							activeTab={activeTab}
+							activeVoiceCard={activeVoiceCard}
+							updateLeaduser={updateLeaduser}
+							activeCardId={activeCardId}
+							setActiveMessage={setActiveMessage}
+							setModalType={setModalType}
+							activeRoomLoading={activeRoomLoading}
+						/>
+					)}
 				</>
 			);
 		}
@@ -122,78 +154,111 @@ function CogoOne() {
 		);
 	};
 
-	return (
-		<div className={styles.layout_container}>
-			<Customers
-				setActiveCardId={setActiveCardId}
-				isomniChannelAdmin={isomniChannelAdmin}
-				setActiveMessage={setActiveMessage}
-				activeMessageCard={activeMessageCard}
-				setActiveVoiceCard={setActiveVoiceCard}
-				activeVoiceCard={activeVoiceCard}
-				setSearchValue={setSearchValue}
-				searchValue={searchValue}
-				setFilterVisible={setFilterVisible}
-				filterVisible={filterVisible}
-				activeTab={activeTab}
-				setActiveTab={setActiveTab}
-				setToggleStatus={setToggleStatus}
-				toggleStatus={toggleStatus}
-				messagesList={messagesList}
-				unReadChatsCount={unReadChatsCount}
-				appliedFilters={appliedFilters}
-				setAppliedFilters={setAppliedFilters}
-				fetchworkPrefernce={fetchworkPrefernce}
-				messagesLoading={loading}
-				setOpenModal={setOpenModal}
-				openModal={openModal}
-				updateUserStatus={updateUserStatus}
-				statusLoading={statusLoading}
-				activeCardId={activeCardId}
-				setShowBotMessages={setShowBotMessages}
-				showBotMessages={showBotMessages}
-				setShowDialModal={setShowDialModal}
-				handleScroll={handleScroll}
-				setModalType={setModalType}
-				modalType={modalType}
-			/>
+	useEffect(() => {
+		setActiveVoiceCard({});
+		setActiveCard({});
+		setActiveMail({});
+		setFirstMount(true);
+		if (isomniChannelAdmin) {
+			setAppliedFilters({});
+		}
+	}, [activeTab, setActiveCard, showBotMessages, setFirstMount, setAppliedFilters, isomniChannelAdmin]);
 
-			<div className={styles.chat_details_continer}>
-				{renderComponent()}
-			</div>
-			<div
-				className={styles.download_apk}
-			>
-				<div
-					role="presentation"
-					className={styles.download_div}
-					// eslint-disable-next-line no-undef
-					onClick={() => window.open(ANDRIOD_APK, '_blank')}
-				>
-					<img
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-logo-without-bg"
-						alt="bot"
-						className={styles.bot_icon_styles}
+	useEffect(() => {
+		setToggleStatus(status === 'active');
+	}, [status]);
+
+	return (
+		<>
+			{isomniChannelAdmin && (
+				<div className={styles.settings}>
+					<IcMSettings
+						className={styles.settings_icon}
+						onClick={() => setAgentDetails(true)}
 					/>
-					<div className={styles.text_styles}>
-						<div className={styles.flex}>
-							<IcMDownload
-								fill="#EE3425"
-								className={styles.download_icon}
-							/>
-							<div>Get the</div>
+				</div>
+			)}
+			<div className={styles.layout_container}>
+				<Customers
+					isomniChannelAdmin={isomniChannelAdmin}
+					setActiveMessage={setActiveMessage}
+					activeMessageCard={activeMessageCard}
+					setActiveVoiceCard={setActiveVoiceCard}
+					activeVoiceCard={activeVoiceCard}
+					setSearchValue={setSearchValue}
+					searchValue={searchValue}
+					setFilterVisible={setFilterVisible}
+					filterVisible={filterVisible}
+					activeTab={activeTab}
+					setActiveTab={setActiveTab}
+					setToggleStatus={setToggleStatus}
+					toggleStatus={toggleStatus}
+					chatsData={chatsData}
+					appliedFilters={appliedFilters}
+					setAppliedFilters={setAppliedFilters}
+					fetchworkPrefernce={fetchworkPrefernce}
+					messagesLoading={loading}
+					setOpenModal={setOpenModal}
+					openModal={openModal}
+					updateUserStatus={updateUserStatus}
+					statusLoading={statusLoading}
+					activeCardId={activeCardId}
+					setShowBotMessages={setShowBotMessages}
+					showBotMessages={showBotMessages}
+					setShowDialModal={setShowDialModal}
+					activeMail={activeMail}
+					setActiveMail={setActiveMail}
+					userId={userId}
+					handleScroll={handleScroll}
+					setModalType={setModalType}
+					modalType={modalType}
+					tagOptions={tagOptions}
+					mailProps={mailProps}
+					firestore={firestore}
+				/>
+
+				<div className={styles.chat_details_continer}>
+					{renderComponent()}
+				</div>
+				<div
+					className={styles.download_apk}
+				>
+					<div
+						role="button"
+						tabIndex={0}
+						className={styles.download_div}
+						onClick={() => window.open(ANDRIOD_APK, '_blank')}
+					>
+						<img
+							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-logo-without-bg"
+							alt="bot"
+							className={styles.bot_icon_styles}
+						/>
+						<div className={styles.text_styles}>
+							<div className={styles.flex}>
+								<IcMDownload
+									className={styles.download_icon}
+								/>
+								<div>Get the</div>
+							</div>
+							app now
 						</div>
-						app now
 					</div>
 				</div>
+				{showDialModal && (
+					<DialCallModal
+						setShowDialModal={setShowDialModal}
+						showDialModal={showDialModal}
+					/>
+				)}
 			</div>
-			{showDialModal && (
-				<DialCallModal
-					setShowDialModal={setShowDialModal}
-					showDialModal={showDialModal}
+			{agentDetails && (
+				<AgentModal
+					agentDetails={agentDetails}
+					setAgentDetails={setAgentDetails}
 				/>
 			)}
-		</div>
+		</>
 	);
 }
 

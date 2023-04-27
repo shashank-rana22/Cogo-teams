@@ -10,15 +10,28 @@ interface Props {
 	formData?: NestedObj;
 	taskItem?: NestedObj;
 	whiteout?:boolean;
+	activeCategory?: string;
+	edit?: boolean | string;
+	viewDoc?: boolean;
+	activeHawb?: NestedObj;
 }
 
-function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = false }:Props) {
+function ShipperConsigneeDetails({
+	formData = {}, taskItem = {}, whiteout = false,
+	activeCategory = '', edit, viewDoc = false, activeHawb = {},
+}:Props) {
 	let tempColor = '#333';
 	if (whiteout) {
 		tempColor = 'transparent';
 	}
 
-	const { awbNumber = '' } = taskItem;
+	const { awbNumber = '', document_number:documentNo = '', documentType = '' } = taskItem;
+
+	const hawbNumber = activeHawb.isNew && !viewDoc ? '' : documentNo;
+
+	const docType = documentType === 'draft_airway_bill' ? 'mawb' : 'hawb';
+	const awbType = edit || viewDoc ? docType : activeCategory;
+
 	return (
 		<div className={styles.container} style={{ pointerEvents: 'none' }}>
 			<div className={cl`
@@ -39,7 +52,9 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 					`}
 						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
-						<p style={{ fontSize: 18 }}>{awbNumber.substring(0, 3)}</p>
+						<p style={{ fontSize: 18 }}>
+							{awbNumber.substring(0, 3)}
+						</p>
 					</div>
 					<div
 						className={cl`
@@ -57,7 +72,9 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 						${styles.mawb_number_subdivision_second} 
 					`}
 					>
-						<p style={{ fontSize: 18 }}>{awbNumber.substring(4, 13)}</p>
+						<p style={{ fontSize: 18 }}>
+							{awbNumber.substring(4, 13)}
+						</p>
 					</div>
 				</div>
 				<div className={cl`
@@ -66,7 +83,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 					${styles.mawb_bill_number} 
 				`}
 				>
-					<p style={{ fontSize: 18 }}>{awbNumber}</p>
+					<p style={{ fontSize: 18 }}>{awbType === 'mawb' ? awbNumber : hawbNumber}</p>
 				</div>
 			</div>
 			<div className={styles.flex} style={{ minHeight: 140 }}>
@@ -103,10 +120,12 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 							${styles.flex_font_bold} 
 						`}
 						>
-							<div className={cl`
+							<div
+								className={cl`
 							${styles.styled_text_area} 
 							${styles.font_style} 
 						`}
+								style={{ whiteSpace: 'pre-wrap' }}
 							>
 
 								{formData.shipperName}
@@ -165,8 +184,7 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 								textTransform : 'uppercase',
 							}}
 						>
-							{formData?.airline}
-
+							{awbType === 'mawb' ? formData?.airline : 'HOUSE AIRWAY BILL'}
 						</p>
 					</div>
 					<div className={cl`
@@ -216,10 +234,12 @@ function ShipperConsigneeDetails({ formData = {}, taskItem = {}, whiteout = fals
 							${styles.flex_font_bold} 
 						`}
 						>
-							<div className={cl`
+							<div
+								className={cl`
 							${styles.styled_text_area} 
 							${styles.font_style} 
 						`}
+								style={{ whiteSpace: 'pre-wrap' }}
 							>
 								{formData.consigneeName}
 								<br />

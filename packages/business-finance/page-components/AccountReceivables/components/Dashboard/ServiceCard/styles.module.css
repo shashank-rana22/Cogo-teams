@@ -1,0 +1,216 @@
+.service_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 60px;
+	margin-top: 20px;
+	cursor: pointer;
+	background-color: white;
+	border-radius: 12px;
+}
+
+.header {
+	display: flex;
+	justify-content: flex-end;
+	width: 20%;
+	margin-right: 32px;
+}
+
+.account_receivables_open_line {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	height: 40px;
+	font-weight: 600;
+	color: #ed3726;
+}
+
+.account_receivables_amount {
+	align-items: center;
+	height: 20px;
+}
+
+.wrapper {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.ocean_card {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 32%;
+	height: 80px;
+	cursor: pointer;
+	background-color: white;
+	border-radius: 12px;
+	box-shadow: 0 0 8px 0 #2c3e5033;
+}
+
+.on_click_ocean_card {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 32%;
+	height: 80px;
+	cursor: pointer;
+	background-color: #fffaeb;
+	border-radius: 12px;
+	box-shadow: 0 0 8px 0 #2c3e5033;
+}
+
+.container {
+	margin: 12px 0;
+	background: white;
+	border-radius: 12px;
+	box-shadow: 0 0 4px 0 #00000040;
+}
+
+.text_label {
+	margin-left: 4px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #ed3726;
+}
+
+.icon {
+	color: #ed3726;
+}
+
+.sub_service_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24%;
+	height: 36px;
+	font-size: 14px;
+	font-weight: 500;
+	border-right: 2px solid red;
+}
+
+.styled_text {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.ocean_container {
+	display: flex;
+	justify-content: space-between;
+	width: 50%;
+}
+
+.sub_ocean_container {
+	display: flex;
+	align-items: center;
+	margin-left: 12px;
+}
+
+.air_container {
+	display: flex;
+	align-items: center;
+	width: 29%;
+}
+
+.accordian_card {
+	margin: 0 20px;
+	border-top: 1px solid #ed3726;
+}
+
+.sub_ocean_card {
+	display: flex;
+	align-items: center;
+	height: 48px;
+	padding: 12px;
+	padding-right: 50px;
+	cursor: pointer;
+	border-right: 1.5px solid black;
+}
+
+.styled_ocean_text {
+	margin-left: 4px;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.ship_icon {
+	width: 24px;
+	height: 24px;
+	margin-right: 8px;
+}
+
+.account_receivables_card {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 48px;
+	padding: 12px;
+	border-right: 1px solid black;
+}
+
+.balance_amount {
+	font-size: 14px;
+	font-weight: 500;
+	color: #ed3726;
+}
+
+.view_less {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 30px;
+	cursor: pointer;
+	background: #fffaeb;
+	border-radius: 0 0 12px 12px;
+}
+
+.sub_view_less {
+	font-size: 12px;
+	font-weight: 400;
+	color: #ed3726;
+	text-decoration: underline;
+}
+
+.card {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 200px;
+	padding: 15px;
+}
+
+.placeholder_container {
+	width: 200px;
+	height: 30px;
+}
+
+.icon_container {
+	width: 24px;
+	height: 24px;
+}
+
+.ocean_text {
+	margin-left: 12px;
+}
+
+.amount_currency {
+	margin-left: 16px;
+}
+
+.accordian_sub_card {
+	display: flex;
+	justify-content: space-between;
+	padding: 16px 20px;
+}
+
+.label_flex {
+	display: flex;
+	align-items: center;
+}

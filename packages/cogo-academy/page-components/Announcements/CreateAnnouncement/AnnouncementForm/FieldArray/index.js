@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
@@ -44,6 +44,8 @@ function FieldArray({
 		});
 		if (fieldIsNotEmpty) {
 			append(childEmptyValues);
+		} else {
+			Toast.error('Input field is empty!');
 		}
 	};
 
@@ -77,7 +79,7 @@ function FieldArray({
 			</div>
 			{showButtons && !disabled ? (
 				<Button
-					type="add-child"
+					type="button"
 					themeType="secondary"
 					className={styles.add_button}
 					onClick={() => handleAppendChild()}

@@ -1,0 +1,18 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 32px;
+}
+
+.question_card {
+	width: 50%;
+	margin-right: 8%;
+}
+
+.explanation {
+	width: 40%;
+	padding: 12px;
+	background: #fff;
+	border-radius: 6px;
+}

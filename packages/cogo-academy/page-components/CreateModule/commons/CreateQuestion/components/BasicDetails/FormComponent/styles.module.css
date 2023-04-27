@@ -1,0 +1,116 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 24px;
+}
+
+.cancel_button {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	cursor: pointer;
+}
+
+.control_container {
+	align-items: center;
+
+	:global {
+		.ui_input_container,
+		.ui_select_container,
+		.ui_multiselect_container {
+			width: 250px;
+		}
+
+		.ui_multiselect_input_control {
+			font-size: 14px !important;
+			font-weight: 400;
+			color: #221f20;
+		}
+	}
+}
+
+.difficulty_level {
+	display: flex;
+	margin-bottom: 32px;
+
+	:global {
+		.ui_chip_container {
+			height: 28px !important;
+		}
+	}
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+
+		:global {
+			.ui_chip_container {
+				min-width: 80px;
+			}
+		}
+	}
+}
+
+.upper_form {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	margin-bottom: 32px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		align-items: flex-start;
+		margin-top: 12px;
+	}
+}
+
+.error_msg {
+	margin: 0;
+	font-size: 12px;
+	font-weight: 500;
+	color: #cb6464;
+}
+
+.question_type {
+	margin-left: 60px;
+
+	@media (max-width: 768px) {
+		margin-top: 20px;
+	}
+
+	.control {
+		margin-top: 4px;
+
+		:global {
+			.ui_chip_container {
+				height: 28px;
+			}
+		}
+	}
+}
+
+.flex_row {
+	position: relative;
+	justify-content: space-between;
+	padding: 12px;
+	background: rgb(255 255 255 / 70%);
+	border-radius: 6px;
+}
+
+.difficulty_level_label {
+	margin-right: 16px;
+
+	@media (max-width: 768px) {
+		margin-left: 4px;
+	}
+}
+
+.label {
+	font-size: 12px;
+}
+
+.edit_button {
+	position: absolute;
+	right: 12px;
+	bottom: 12px;
+	width: fit-content;
+}

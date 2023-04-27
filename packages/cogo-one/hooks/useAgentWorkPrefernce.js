@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 function useAgentWorkPrefernce() {
 	const [{ loading, data: agentStatus }, trigger] = useRequest({
@@ -8,17 +7,17 @@ function useAgentWorkPrefernce() {
 		method : 'get',
 	}, { manual: true });
 
-	const fetchworkPrefernce = async () => {
+	const fetchworkPrefernce = useCallback(async () => {
 		try {
 			await trigger();
 		} catch (error) {
 			// console.log(error);
 		}
-	};
+	}, [trigger]);
 
 	useEffect(() => {
 		fetchworkPrefernce();
-	}, []);
+	}, [fetchworkPrefernce]);
 
 	return {
 		loading,

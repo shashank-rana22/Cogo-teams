@@ -3,7 +3,8 @@ import { isEmpty, format } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import Spinner from '../../../../commons/Spinner';
-import BodyTextEditor from '../../../CreateFAQ/Question/BodyTextEditor';
+import BodyTextEditor from '../../../ControlCenter/Question/BodyTextEditor';
+import ANNOUNCEMENT_TYPE_MAPPING from '../../constants/ANNOUNCEMENT_TYPE_MAPPING.json';
 import useCreateAnnouncements from '../useCreateAnnouncement';
 
 import CreateAudienceForm from './CreateAudienceForm';
@@ -13,19 +14,13 @@ import Preview from './Preview';
 import styles from './styles.module.css';
 import useListAudiences from './useListAudiences';
 
-const ANNOUNCEMENT_TYPE_MAPPING = {
-	general        : 'General',
-	product_update : 'Product Release / Update',
-	announcement   : 'Announcement',
-	tasks          : 'Tasks',
-};
-
 function AnnouncementForm({
 	defaultValues = {},
 	disabled = false,
 	announcement_id = '',
 	actionType,
 	loadingForm = false,
+	isMobile = false,
 }) {
 	const [showCreateAudience, setShowCreateAudience] = useState(false);
 	const [showSubmitModal, setShowSubmitModal] = useState(false);
@@ -50,7 +45,7 @@ function AnnouncementForm({
 	const renderAddButton = () => (
 		<div>
 			<Button
-				type="add"
+				type="button"
 				themeType="secondary"
 				size="sm"
 				className={styles.add_audience_button}
@@ -161,7 +156,7 @@ function AnnouncementForm({
 				<div>
 					{actionType === 'create' ? (
 						<Button
-							type="preview"
+							type="button"
 							themeType="tertiary"
 							size="md"
 							onClick={() => setShowPreview(true)}
@@ -197,6 +192,7 @@ function AnnouncementForm({
 						<Preview
 							formValues={formValues}
 							editorValue={editorValue.toString('html')}
+							isMobile={isMobile}
 						/>
 					</Modal.Body>
 				</Modal>
@@ -240,7 +236,7 @@ function AnnouncementForm({
 					<Modal.Footer>
 						<div className={styles.submit_buttons}>
 							<Button
-								type="cancel-submit"
+								type="button"
 								themeType="secondary"
 								size="md"
 								disabled={loading}

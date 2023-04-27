@@ -1,9 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Input, Select } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
-import { useEffect, useState, useMemo } from 'react';
-
+import { useEffect, useState, useMemo, useCallback } from 'react';
 import styles from './styles.module.css';
 
 function Filter({ hookSetters = () => {}, filters }) {
@@ -12,10 +10,18 @@ function Filter({ hookSetters = () => {}, filters }) {
 	};
 	const [inputValue, setInputValue] = useState('');
 	const { query, debounceQuery } = useDebounceQuery();
+	const debouncedQuery = useCallback(debounceQuery, [debounceQuery]);
 	useEffect(() => {
-		debounceQuery(inputValue);
-	}, [inputValue]);
-	useMemo(() => { setValue('search_term', query); }, [query]);
+	  debouncedQuery(inputValue);
+	}, [inputValue, debouncedQuery]);
+
+	const setTerm = useCallback((value) => {
+		setValue('search_term', value);
+	  }, [setValue]);
+	  
+	  useMemo(() => {
+		setTerm(query);
+	  }, [query, setTerm]);
 	return (
 		<div className={styles.container}>
 			<AsyncSelect
@@ -37,15 +43,14 @@ function Filter({ hookSetters = () => {}, filters }) {
 				label="Source"
 				placeholder="Select Source"
 				options={[
-					{ label: 'Tracking Job', value: 'tracking_job' },
-					{ label: 'Default', value: 'default' },
-					{ label: 'LDB', value: 'ldb' },
+                	{ label: 'Tracking Job', value: 'tracking_job' },
+                	{ label: 'Default', value: 'default' },
+                	{ label: 'LDB', value: 'ldb' },
 				]}
 				style={{ width: '200px' }}
 				onChange={(e) => setValue('source', e)}
 				value={filters.source}
 				isClearable
-
 			/>
 			<Select
 				name="status"
@@ -54,9 +59,9 @@ function Filter({ hookSetters = () => {}, filters }) {
 				onChange={(e) => setValue('status', e)}
 				value={filters.status}
 				options={[
-					{ label: 'Active', value: 'active' },
-					{ label: 'Inactive', value: 'inactive' },
-					{ label: 'Unmapped', value: 'unmapped' },
+                	{ label: 'Active', value: 'active' },
+                	{ label: 'Inactive', value: 'inactive' },
+                	{ label: 'Unmapped', value: 'unmapped' },
 				]}
 				isClearable
 			/>
@@ -68,7 +73,6 @@ function Filter({ hookSetters = () => {}, filters }) {
 				value={inputValue}
 				isClearable
 			/>
-
 		</div>
 	);
 }

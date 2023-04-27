@@ -3,6 +3,7 @@ import { request } from '@cogoport/request';
 import { useDispatch, useSelector } from '@cogoport/store';
 import { setGeneralState } from '@cogoport/store/reducers/general';
 import { setProfileState } from '@cogoport/store/reducers/profile';
+import { setCookie } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import redirections from '../utils/redirections';
@@ -17,7 +18,7 @@ const UNAUTHENTICATED_PATHS = [
 	'/verify-auto-sign-up-email/[id]',
 ];
 
-const useGetAuthorizationChecked = () => {
+const useGetAuthorizationChecked = ({ firestoreToken }) => {
 	const [sessionInitialized, setSessionInitialized] = useState(false);
 	const dispatch = useDispatch();
 
@@ -30,13 +31,16 @@ const useGetAuthorizationChecked = () => {
 	const isUnauthenticatedPath = UNAUTHENTICATED_PATHS.includes(route);
 	const isProfilePresent = Object.keys(profile).length !== 0;
 
-	dispatch(setGeneralState({ pathname, query, locale, locales }));
+	dispatch(setGeneralState({ pathname, query, locale, locales, firestoreToken }));
 
 	useEffect(() => {
 		(async () => {
 			if (!_initialized) {
 				try {
 					const res = await request.get('get_user_session');
+
+					const { partner = {} } = res.data || {};
+					setCookie('parent_entity_id', partner.id);
 					dispatch(setProfileState({ _initialized: true, ...res.data }));
 				} catch (err) {
 					console.log(err);

@@ -1,22 +1,15 @@
-import { Popover, Accordion, Button, Modal, Pill } from '@cogoport/components';
+import { Tooltip, Popover, Accordion, Button, Modal, Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { IcMOverflowDot, IcMAnnouncement, IcMEyeopen, IcMEdit, IcMDelete } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { startCase, format } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import ANNOUNCEMENT_TYPE_MAPPING from '../../../constants/ANNOUNCEMENT_TYPE_MAPPING.json';
 import Preview from '../../../CreateAnnouncement/AnnouncementForm/Preview';
 
 import DisplayAttachments from './DisplayAttachments';
+import getSingleCardOptions from './getSingleCardOptions';
 import styles from './styles.module.css';
-
-const ADMIN_IDS = ['7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44'];
-
-const ANNOUNCEMENT_TYPE_MAPPING = {
-	general        : 'General',
-	product_update : 'Product Release / Update',
-	announcement   : 'Announcement',
-	tasks          : 'Tasks',
-};
 
 const STATUS_MAPPING = {
 	draft: {
@@ -26,6 +19,10 @@ const STATUS_MAPPING = {
 	active: {
 		label : 'Live',
 		color : 'green',
+	},
+	inactive: {
+		label : 'Inactive',
+		color : 'red',
 	},
 };
 
@@ -52,14 +49,11 @@ function DisplayCard({
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [showGoLiveModal, setShowGoLiveModal] = useState(false);
 
-	const options = [
-		{ label: 'Title', value: startCase(data?.title) },
-		{ label: 'Validity Start', value: format(data?.validity_start, 'dd MMM yyyy hh:mm a') },
-		{ label: 'Validity End', value: format(data?.validity_end, 'dd MMM yyyy hh:mm a') },
-		{ label: 'Type', value: ANNOUNCEMENT_TYPE_MAPPING[data?.announcement_type] },
-		{ label: 'Status', value: data?.status },
-		{ label: 'Actions', value: 1 },
-	];
+	const options = getSingleCardOptions({ data });
+
+	const isCogoAcademyAdmin = (user_id === GLOBAL_CONSTANTS.uuid.cogoacademy_admin_id);
+
+	const isAllowedToEdit = isCogoAcademyAdmin || data.status === 'draft';
 
 	const handleView = (i) => {
 		handleAnnouncementDetails(i);
@@ -75,43 +69,49 @@ function DisplayCard({
 
 	const renderPopover = () => (
 		<div className={styles.buttons_container}>
-			{data.status === 'draft' && ADMIN_IDS.includes(user_id) ? (
+			{data.status === 'draft' && isCogoAcademyAdmin ? (
 				<Button
-					type="view"
+					type="button"
 					themeType="primary"
 					size="md"
+					style={{ width: '100%', marginBottom: '8px' }}
 					onClick={() => setShowGoLiveModal(true)}
 				>
 					<IcMAnnouncement height={20} width={20} className={styles.button_icon} />
-					Go Live
+					Publish
 				</Button>
 			) : null}
+
 			<Button
-				type="view"
+				type="button"
 				themeType="secondary"
 				size="md"
+				style={{ width: '100%', marginBottom: '8px' }}
 				onClick={() => handleView(index)}
 			>
 				<IcMEyeopen className={styles.button_icon} />
 				View
 			</Button>
-			{activeTab === 'active' && data?.status === 'draft' && (
+
+			{activeTab === 'active' && isAllowedToEdit && (
 				<Button
-					type="edit"
+					type="button"
 					themeType="secondary"
 					size="md"
+					style={{ width: '100%', marginBottom: '8px' }}
 					onClick={() => editDetails()}
 				>
 					<IcMEdit className={styles.button_icon} />
 					Edit
 				</Button>
 			)}
-			{activeTab === 'active' && data?.status === 'draft' && (
 
+			{activeTab === 'active' && isAllowedToEdit && (
 				<Button
-					type="edit"
+					type="button"
 					themeType="secondary"
 					size="md"
+					style={{ width: '100%' }}
 					onClick={() => setShowDeleteModal(true)}
 				>
 					<IcMDelete className={styles.button_icon} />
@@ -137,6 +137,7 @@ function DisplayCard({
 								size="md"
 								disabled={loadingEditAndGoLive}
 								onClick={() => setShowGoLiveModal(false)}
+								style={{ marginRight: '20px' }}
 							>
 								Cancel
 							</Button>
@@ -165,7 +166,29 @@ function DisplayCard({
 			return <Pill color={STATUS_MAPPING[value].color}>{STATUS_MAPPING[value].label}</Pill>;
 		}
 
-		return <div className={styles.value}>{value}</div>;
+		return (
+			<div className={styles.tooltip}>
+				<Tooltip
+					content={label === 'Validity' ? (
+						<div className={styles.tooltip_hover_value}>
+							<span style={{ marginBottom: '4px' }}>
+								<strong>From - </strong>
+								{value.split('-')[0] || '-'}
+							</span>
+							<span>
+								<strong>To - </strong>
+								{value.split('-')[1] || '-'}
+							</span>
+						</div>
+					) : value}
+					style={{ width: 'fit-content' }}
+					placement="top"
+				>
+					<div className={styles.value}>{value}</div>
+				</Tooltip>
+			</div>
+
+		);
 	};
 
 	const getPreviewModalHeader = () => (
@@ -181,7 +204,10 @@ function DisplayCard({
 			<div className={styles.upperrow}>
 				<div className={styles.slabs} style={{ width: '100%' }}>
 					{options.map((i) => (
-						<div className={i.label !== 'Actions' ? styles.slab : styles.popover} key={i.label}>
+						<div
+							className={['Actions', 'Status'].includes(i.label) ? styles.popover : styles.slab}
+							key={i.label}
+						>
 							<div className={styles.label}>{i.label}</div>
 							{ i.label === 'Actions'
 								? (
@@ -206,11 +232,13 @@ function DisplayCard({
 			</div>
 			{activeTab === 'active' && (
 				<div
+					key={`announcement_accordian_${index}`}
 					role="button"
 					tabIndex={0}
 					onClick={() => handleAnnouncementDetails(index)}
 				>
 					<Accordion
+						key={`announcement_accordian_${index}`}
 						type="card"
 						title="Details"
 						className={styles.accordian}
@@ -218,6 +246,7 @@ function DisplayCard({
 						<div className={styles.titles}>Embedded Media :</div>
 						<div className={styles.document_container}>
 							<DisplayAttachments
+								isAllowedToEdit={isAllowedToEdit}
 								data={accordianData}
 								index={index}
 								refetch={refetch}
@@ -259,16 +288,17 @@ function DisplayCard({
 					<Modal.Footer>
 						<div className={styles.delete_buttons}>
 							<Button
-								type="cancel"
+								type="button"
 								themeType="secondary"
 								size="md"
 								disabled={loadingUpdate}
 								onClick={() => setShowDeleteModal(false)}
+								style={{ marginRight: '20px' }}
 							>
 								Cancel
 							</Button>
 							<Button
-								type="delete"
+								type="button"
 								themeType="primary"
 								size="md"
 								loading={loadingUpdate}

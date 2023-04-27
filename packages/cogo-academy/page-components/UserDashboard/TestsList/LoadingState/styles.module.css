@@ -1,0 +1,8 @@
+.main_container {
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	margin-bottom: 32px;
+	border-radius: 6px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+}
