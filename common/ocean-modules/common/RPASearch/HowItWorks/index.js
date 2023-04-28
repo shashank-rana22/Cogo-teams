@@ -61,28 +61,28 @@ function HowItWorks({ setTask }) {
 				email ids upon which you are getting shipment updates other than
 				operations@cogoport.com. Please let us know in
 				&nbsp;
-				<div
+				<span
 					className={styles.feedback_click}
 					role="button"
 					tabIndex={0}
 					onClick={() => setTask('feed_back')}
 				>
 					feedback
-				</div>
+				</span>
 				&nbsp;
 				section and leave the rest to us in automating tasks, invoices, shipment
 				updates for all the shipments going on at the Cogoport platform. None of
 				your personal mails will be exposed only the ones you will provide
 				access to will be read. In
 				&nbsp;
-				<div
+				<span
 					className={styles.feedback_click}
 					role="button"
 					tabIndex={0}
 					onClick={() => setTask('feed_back')}
 				>
 					feedback
-				</div>
+				</span>
 				&nbsp;
 				section just provide your email and we will automate all your shipment
 				journey. You just sit back and relax.
