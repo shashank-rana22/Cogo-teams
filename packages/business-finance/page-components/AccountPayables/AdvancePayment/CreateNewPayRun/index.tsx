@@ -10,17 +10,17 @@ import { VIEW_SELECTED_CONFIG } from '../Columns/viewSelectedConfig';
 import EmptyState from '../common/EmptyState';
 import useGetAdvancePaymentList from '../hooks/useGetAdvancePaymentList';
 import useGetCreatePayRunType from '../hooks/useGetCreatePayRunType';
+import AmountWithCurrency from '../renderFunction/AmountWithCurrency';
 import ApprovedBy from '../renderFunction/ApprovedBy';
+import IncidentNumber from '../renderFunction/IncidentNumber';
+import OrganizationName from '../renderFunction/OrganizationName';
 import RequestedBy from '../renderFunction/RequestedBy';
 import SelectFilters from '../SelectFilters';
 
 import Footer from './Footer';
-import AmountWithCurrency from './renderFunction/AmountWithCurrency';
 import BankDetails from './renderFunction/BankDetails';
 import DeleteModal from './renderFunction/DeleteModal/index';
-import IncidentNumber from './renderFunction/IncidentNumber';
 import ModifiedName from './renderFunction/ModifiedName';
-import OrganizationName from './renderFunction/OrganizationName';
 import SIDnumber from './renderFunction/SIDnumber';
 import styles from './styles.module.css';
 
@@ -119,9 +119,6 @@ function CreateNewPayRun() {
 			{ !selectedPayRunId
 				? (
 					<div className={styles.select_card}>
-						{/* <div className={styles.card}>
-							Month - January 2022
-						</div> */}
 						<div className={styles.card}>
 							Entity -
 							{' '}

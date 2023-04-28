@@ -11,6 +11,7 @@ function OrganizationName({ itemData }) {
 			{organizationName?.length > 20
 				? (
 					<Tooltip
+						interactive
 						placement="top"
 						content={organizationName}
 					>
