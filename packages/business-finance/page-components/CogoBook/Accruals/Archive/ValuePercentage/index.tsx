@@ -11,10 +11,9 @@ function ValuePercentage({ data, keys, flag = false }) {
 		data.incomeCurrency,
 
 	);
-	
+
 	const variance = data[keys] < 0 && data[keys];
-	const absVariance =  Math.abs(data[keys] || 0)?.toLocaleString('hi',{maximumFractionDigits:2});
-	
+	const absVariance = Math.abs(data[keys] || 0)?.toLocaleString('hi', { maximumFractionDigits: 2 });
 
 	const renderValue = (amt, n) => {
 		const check = keys === 'variance' ? variance : '';

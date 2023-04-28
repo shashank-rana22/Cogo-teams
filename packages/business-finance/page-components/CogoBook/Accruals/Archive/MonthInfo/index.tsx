@@ -27,13 +27,13 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 	const {
 		periodName,
 		expenseCurrency,
-		expenseBooked=0,
+		expenseBooked = 0,
 		expenseAccrued,
 		incomeCurrency,
-		incomeBooked=0,
+		incomeBooked = 0,
 		incomeAccrued,
-		actualExpense=0,
-		actualIncome=0,
+		actualExpense = 0,
+		actualIncome = 0,
 		isLocked,
 	} = data || {};
 
@@ -43,8 +43,9 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 				<div className={styles.expense}>Expense Variation</div>
 				<div>
 					Amount :
-					{' '}
-					<span className={styles.amount}>{(expenseBooked - actualExpense).toLocaleString('hi',{maximumFractionDigits:2})}</span>
+					<span className={styles.amount}>
+						{(expenseBooked - actualExpense).toLocaleString('hi', { maximumFractionDigits: 2 })}
+					</span>
 				</div>
 			</div>
 			<div>
@@ -52,7 +53,9 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 				<div>
 					Amount :
 					{' '}
-					<span className={styles.amount}>{(incomeBooked - actualIncome).toLocaleString('hi',{maximumFractionDigits:2})}</span>
+					<span className={styles.amount}>
+						{(incomeBooked - actualIncome).toLocaleString('hi', { maximumFractionDigits: 2 })}
+					</span>
 				</div>
 			</div>
 		</div>
