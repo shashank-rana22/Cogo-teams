@@ -23,6 +23,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_organization_swift_code_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'check_organization_access_request_eligibility',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -916,6 +921,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_organization_swift_code_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'check_organization_access_request_eligibility',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -1730,6 +1740,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_organization_swift_code_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'onboard_channel_partner_user',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -2344,6 +2359,26 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'user',
 		},
+		{
+			api          : 'get_organization_asset_verification_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_assets',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_asset',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization_asset',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	support_crm: [
 		{
@@ -2395,6 +2430,11 @@ const partner = {
 	onboarding_crm: [
 		{
 			api          : 'get_bank_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'get_organization_swift_code_details',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -7713,6 +7753,12 @@ const partner = {
 			feature     : 'invoices',
 		},
 		{
+			api         : 'post_sales_invoice_einvoice',
+			access_type : 'private',
+			module      : 'invoices',
+			feature     : 'invoices',
+		},
+		{
 			api         : 'post_sales_outstanding_ledger_summary',
 			access_type : 'private',
 			module      : 'invoices',
@@ -8515,6 +8561,11 @@ const partner = {
 	],
 	campaign_dashboard: [
 		{
+			api          : 'list_platform_config_constants',
+			access_type  : 'private',
+			service_name : 'platform_config',
+		},
+		{
 			api          : 'create_campaign_segment',
 			access_type  : 'private',
 			service_name : 'campaign',
@@ -8717,7 +8768,7 @@ const partner = {
 			service_name : 'campaign',
 		},
 		{
-			api          : 'list_campaign_email_configuration',
+			api          : 'list_campaign_configuration',
 			access_type  : 'private',
 			service_name : 'campaign',
 		},
@@ -8756,6 +8807,12 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'campaign',
 		},
+		{
+			api          : 'update_campaign_channel_availability',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+
 		{
 			api          : 'verify_segment',
 			access_type  : 'private',
@@ -9457,6 +9514,16 @@ const partner = {
 		},
 		{
 			api          : 'process_cogo_assured_rate_sheet',
+			access_type  : 'private',
+			service_name : 'cogo_assured_rate',
+		},
+		{
+			api          : 'list_cogo_assured_rate_feedbacks',
+			access_type  : 'private',
+			service_name : 'cogo_assured_rate',
+		},
+		{
+			api          : 'delete_cogo_assured_rate_feedback',
 			access_type  : 'private',
 			service_name : 'cogo_assured_rate',
 		},
@@ -11246,6 +11313,11 @@ const partner = {
 		},
 		{
 			api          : 'list_user_chat_summary',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'request_assign_chat',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

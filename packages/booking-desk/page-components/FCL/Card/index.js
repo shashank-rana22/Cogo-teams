@@ -14,7 +14,10 @@ export default function Card({ item = {}, couldBeCardsCritical = false }) {
 	const router = useRouter();
 
 	const clickCard = () => {
-		router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}`);
+		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}`;
+
+		window.sessionStorage.setItem('prev_nav', newUrl);
+		window.location.href = newUrl;
 	};
 
 	return (
@@ -22,7 +25,9 @@ export default function Card({ item = {}, couldBeCardsCritical = false }) {
 			role="button"
 			tabIndex={0}
 			onClick={clickCard}
-			className={`${card} ${couldBeCardsCritical && isCardCritical({ item }) ? critical_card : ''}`}
+			className={`${card} ${
+				couldBeCardsCritical && isCardCritical({ item }) ? critical_card : ''
+			}`}
 		>
 			<CardHeader item={item} />
 
