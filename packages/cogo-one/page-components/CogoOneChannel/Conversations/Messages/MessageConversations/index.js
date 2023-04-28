@@ -53,7 +53,7 @@ function MessageConversations({
 	messageLoading = false,
 }) {
 	const messageRef = useRef();
-	const { id = '', channel_type = '', new_user_message_count = 0 } = activeMessageCard;
+	const { id = '', channel_type = '', new_user_message_count = 0, user_name = '' } = activeMessageCard;
 
 	const {
 		emojisList = {},
@@ -181,6 +181,7 @@ function MessageConversations({
 					eachMessage={eachMessage}
 					activeMessageCard={activeMessageCard}
 					messageStatus={channel_type === 'platform_chat' && !(index >= unreadIndex)}
+					user_name={user_name}
 				/>
 			))}
 

@@ -16,6 +16,10 @@
 		.ui_select_options_container {
 			width: 150%;
 		}
+
+		.heading {
+			display: none;
+		}
 	}
 }
 
@@ -55,6 +59,6 @@
 
 .filter_dot {
 	position: absolute;
-	top: 188px;
+	top: 154px;
 	right: 42px;
 }

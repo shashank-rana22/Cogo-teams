@@ -54,32 +54,6 @@ export const getControls = ({ country_id = '' }) => [
 		placeholder : 'Select an Organization Type',
 		style       : { flexBasis: '30%' },
 		rules       : { required: 'Company Type is required' },
-		options     : [
-			{
-				label : 'Private Limited',
-				value : 'private_limited',
-			},
-			{
-				label : 'Public Limited',
-				value : 'public_limited',
-			},
-			{
-				label : 'Limited Liability Partnership',
-				value : 'limited_liability_partnership',
-			},
-			{
-				label : 'Partnership',
-				value : 'partnership',
-			},
-			{
-				label : 'Proprietorship',
-				value : 'proprietorship',
-			},
-			{
-				label : 'Other',
-				value : 'other',
-			},
-		],
 	},
 	{
 		name        : 'city_id',
