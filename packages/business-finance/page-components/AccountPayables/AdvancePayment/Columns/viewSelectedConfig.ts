@@ -43,7 +43,7 @@ export const VIEW_SELECTED_CONFIG = {
 		{
 			key   : 'organizationName',
 			label : 'Organisation',
-			func  : 'renderOrganization',
+			func  : 'renderModifiedName',
 			span  : 2,
 		},
 		{

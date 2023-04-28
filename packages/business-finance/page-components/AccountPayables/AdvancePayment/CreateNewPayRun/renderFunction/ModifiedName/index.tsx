@@ -3,9 +3,8 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function OrganizationName({ itemData }) {
-	const { advanceDocumentSellerAddress } = itemData || {};
-	const { organizationName } = advanceDocumentSellerAddress || {};
+function ModifiedName({ itemData }) {
+	const { organizationName } = itemData || {};
 	return (
 		<div className={styles.container}>
 			{ organizationName?.length > 20
@@ -30,4 +29,4 @@ function OrganizationName({ itemData }) {
 	);
 }
 
-export default OrganizationName;
+export default ModifiedName;

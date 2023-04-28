@@ -19,7 +19,7 @@ import AmountWithCurrency from './renderFunction/AmountWithCurrency';
 import BankDetails from './renderFunction/BankDetails';
 import DeleteModal from './renderFunction/DeleteModal/index';
 import IncidentNumber from './renderFunction/IncidentNumber';
-import InvoiceDetails from './renderFunction/InvoiceDetails';
+import ModifiedName from './renderFunction/ModifiedName';
 import OrganizationName from './renderFunction/OrganizationName';
 import SIDnumber from './renderFunction/SIDnumber';
 import styles from './styles.module.css';
@@ -64,9 +64,6 @@ function CreateNewPayRun() {
 				deleteInvoices={deleteInvoices}
 			/>
 		),
-		renderInvoiceDetails: () => (
-			<InvoiceDetails />
-		),
 		renderAmountWithCurrency: (itemData) => (
 			<AmountWithCurrency itemData={itemData} />
 		),
@@ -84,6 +81,9 @@ function CreateNewPayRun() {
 		),
 		renderApprovedBy: (itemData) => (
 			<ApprovedBy itemData={itemData} />
+		),
+		renderModifiedName: (itemData) => (
+			<ModifiedName itemData={itemData} />
 		),
 	};
 	return (
