@@ -3,13 +3,12 @@ import { IcMHelp } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-// import Question from '../../assets/question.svg';
 // import formatters from '../../helpers';
-// import useGetMails from '../../hooks/useGetMails';
+import useGetMails from '../../../hooks/useGetMails';
 import FeedBack from '../FeedBack';
 import HowItWorks from '../HowItWorks';
 
-// import Filters from './Filters';
+import Filters from './Filters';
 // import Item from './Item';
 import styles from './styles.module.css';
 
@@ -66,14 +65,14 @@ function RPASearch({
 		// onUpload({ formatted: formattedData, _meta: selectedMails });
 	};
 
-	// const { setQuery, data, query, handleChange, loading } = useGetMails({
-	// 	multiple,
-	// 	onChange: onMailSelect,
-	// 	values,
-	// 	taskApi,
-	// 	entity_name,
-	// 	show,
-	// });
+	const { setQuery, data, query, handleChange, loading } = useGetMails({
+		multiple,
+		onChange: onMailSelect,
+		values,
+		taskApi,
+		entity_name,
+		show,
+	});
 
 	let content = (
 		<div className={styles.container}>
@@ -126,7 +125,8 @@ function RPASearch({
 			</div>
 
 			<div className={styles.search_box}>
-				{/* <Filters onChange={(e) => setQuery(e.target.value)} value={query} /> */}
+				<Filters onChange={(e) => setQuery(e)} value={query} />
+
 				<div className={styles.text}>OR</div>
 
 				<div className={styles.styled_button}>
