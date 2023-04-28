@@ -22,7 +22,7 @@ export const DEFAULT_PILLS_ITEMS = [
 ];
 
 export const CALL_END_STATUS = {
-	not_answered : "Agent didn't answer the call",
-	missed       : 'Customer missed the call',
-	answered     : 'Call completed',
+	not_connected : "Agent didn't answer the call",
+	missed        : 'Customer missed the call',
+	answered      : 'Call completed',
 };

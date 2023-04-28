@@ -8,7 +8,7 @@ import { CALL_END_STATUS } from '../constant';
 
 function useOutgoingStatusCall({ callId }) {
 	const { call_record_id = '' } = callId || {};
-	const [{ data, loading }, trigger] = useRequest({
+	const [{ loading }, trigger] = useRequest({
 		url    : '/check_outgoing_call_status',
 		method : 'post',
 	}, { manual: true });
@@ -51,7 +51,6 @@ function useOutgoingStatusCall({ callId }) {
 	};
 	return {
 		statusLoading: loading,
-		data,
 		status,
 		callStatusApi,
 		setStatus,
