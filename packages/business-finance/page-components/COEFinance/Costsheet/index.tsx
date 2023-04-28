@@ -275,7 +275,7 @@ function CostSheet() {
 							Quotation Total :
 							<div className={styles.value_text}>
 								{sellData?.totalQuotational
-									? getFormattedPrice(sellData?.totalQuotational, 'INR')
+									? getFormattedPrice(sellData?.totalQuotational, sellData?.currencyQuotational)
 									: '  --'}
 							</div>
 						</div>
@@ -308,7 +308,7 @@ function CostSheet() {
 							Quotation Total :
 							<div className={styles.value_text}>
 								{buyData?.totalQuotational
-									? getFormattedPrice(buyData?.totalQuotational, 'INR')
+									? getFormattedPrice(buyData?.totalQuotational, buyData?.currencyQuotational)
 									: '  --'}
 							</div>
 						</div>
