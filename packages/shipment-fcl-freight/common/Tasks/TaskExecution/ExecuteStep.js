@@ -13,6 +13,7 @@ function ExecuteStep({
 	currentStep = 0,
 	isLastStep = false,
 	getApisData = {},
+	selectedMail = [],
 	serviceIdMapping = [],
 	// uiConfig = {},
 }) {
@@ -24,7 +25,7 @@ function ExecuteStep({
 		task,
 		stepConfig,
 		getApisData,
-		// selectedMail,
+		selectedMail,
 	});
 	const { control, formState: { errors }, handleSubmit, watch } = formProps;
 

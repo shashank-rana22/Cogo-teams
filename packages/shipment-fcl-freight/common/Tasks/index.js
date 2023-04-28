@@ -12,7 +12,8 @@ function List() {
 	const {
 		count, completedTaskCount, tasksList, loading, taskListRefetch,
 		hideCompletedTasks, setHideCompletedTasks, handleClick, selectedTaskId,
-		setSelectedTaskId, showMyTasks, setShowMyTasks,
+		setSelectedTaskId, shipment_data, showMyTasks, setShowMyTasks,
+		selectedMail, setSelectedMail,
 	} = useListTasksHelper();
 
 	if (loading) {
@@ -66,12 +67,15 @@ function List() {
 									handleClick={handleClick}
 									isTaskOpen
 									loading={loading}
+									shipment_data={shipment_data}
 								/>
 
 								<TaskExecution
 									task={tasksList.find((task) => task.id === selectedTaskId)}
 									onCancel={() => setSelectedTaskId(null)}
 									taskListRefetch={taskListRefetch}
+									selectedMail={selectedMail}
+									setSelectedMail={setSelectedMail}
 								/>
 							</>
 						) : null }
