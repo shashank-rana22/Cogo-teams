@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import { TextAreaController, ChipsController } from '@cogoport/forms';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
 
@@ -26,6 +27,8 @@ function FormComponent({
 	const {
 		controls,
 		closeForm,
+		handleUpdateCaseStudy,
+		loading,
 	} = useHandleBasicDetails({
 		setEditDetails,
 		setAllKeysSaved,
@@ -94,12 +97,25 @@ function FormComponent({
 					</div>
 
 					<div style={{ marginBottom: '16px' }}>
+
 						<TextAreaController
 							control={control}
 							{...((controls || []).find((item) => item.name === 'question_text'))}
 						/>
 						{errors?.question_text ? <div className={styles.error_msg}>This is required</div> : null}
+
+						<Button
+							className={styles.save_btn}
+							themeType="primary"
+							size="sm"
+							loading={loading}
+							type="submit"
+							onClick={() => handleUpdateCaseStudy()}
+						>
+							save
+						</Button>
 					</div>
+
 				</>
 			) : null}
 

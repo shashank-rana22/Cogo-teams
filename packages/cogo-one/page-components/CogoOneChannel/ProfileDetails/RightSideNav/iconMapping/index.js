@@ -1,7 +1,9 @@
 import {
 	IcMSearchdark,
-	IcMDocument,
+	IcMDocument, IcMTag,
 } from '@cogoport/icons-react';
+
+import styles from './styles.module.css';
 
 const IconMapping = [
 	{
@@ -53,6 +55,23 @@ const IconMapping = [
 			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/actions.svg"
 			alt="actions"
 		/>,
+		hide: true,
+	},
+	{
+		name    : 'tickets',
+		content : 'Tickets',
+		icon:
+		(
+			<div className={styles.tag_container}>
+				<img
+					className={styles.repair_div}
+					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/settings_wrench.png"
+					alt="tickets"
+				/>
+				<IcMTag width={26} height={26} />
+			</div>
+		),
+
 	},
 	{
 		name    : 'spot_search',

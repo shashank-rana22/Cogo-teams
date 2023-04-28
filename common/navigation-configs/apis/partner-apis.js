@@ -7643,6 +7643,12 @@ const partner = {
 			feature     : 'Dashboard',
 		},
 		{
+			api         : 'post_sales_invoice_post_from_sage',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
 			api         : 'get_sales_dashboard_outstanding_by_age',
 			access_type : 'private',
 			module      : 'Dashboard',
@@ -8064,6 +8070,22 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_payments_parent_jv_gl_code_master',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_parent_jv_acc_mode',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_parent_jv_jv_category',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_parent_jv_journal_code',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_organization_trade_parties',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -8154,6 +8176,18 @@ const partner = {
 			feature     : 'history',
 		},
 		{
+			api         : 'post_payments_settlement_settlement_matching',
+			access_type : 'private',
+			module      : 'history',
+			feature     : 'history',
+		},
+		{
+			api         : 'post_payments_settlement_matching_on_sage',
+			access_type : 'private',
+			module      : 'history',
+			feature     : 'history',
+		},
+		{
 			api         : 'delete_payments_settlement',
 			access_type : 'private',
 			module      : 'history',
@@ -8202,6 +8236,12 @@ const partner = {
 			feature     : 'onAccount',
 		},
 		{
+			api         : 'post_payments_accounts_post_from_sage',
+			access_type : 'private',
+			module      : 'onAccount',
+			feature     : 'onAccount',
+		},
+		{
 			api         : 'delete_sales_accounts',
 			access_type : 'private',
 			module      : 'onAccount',
@@ -8232,7 +8272,37 @@ const partner = {
 			feature     : 'onAccount',
 		},
 		{
-			api         : 'get_payments_journal_voucher_list',
+			api         : 'get_payments_parent_jv_list',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
+			api         : 'delete_payments_parent_jv',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
+			api         : 'post_payments_parent_jv_post_to_sage',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
+			api         : 'post_payments_parent_jv',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
+			api         : 'put_payments_parent_jv',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
+			api         : 'get_payments_journal_voucher_jv_line_items_list',
 			access_type : 'private',
 			module      : 'JournalVoucher',
 			feature     : 'JournalVoucher',
@@ -11400,6 +11470,16 @@ const partner = {
 			api          : 'request_assign_chat',
 			access_type  : 'private',
 			service_name : 'communication',
+		},
+		{
+			api          : 'get_tickets_default_types',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'post_tickets_actvity',
+			access_type  : 'private',
+			service_name : 'tickets',
 		},
 	],
 	analytics_dashboard: [
