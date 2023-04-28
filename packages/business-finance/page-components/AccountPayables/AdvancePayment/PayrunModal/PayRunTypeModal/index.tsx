@@ -1,4 +1,4 @@
-import { Modal, Button, Placeholder } from '@cogoport/components';
+import { Modal, Button, Toast, Placeholder } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
@@ -32,6 +32,7 @@ interface Props {
 	setFilters:Function,
 	activeEntity:string,
 	currency:string,
+	setShow:Function,
 }
 
 function PayRunTypeModal({
@@ -43,6 +44,7 @@ function PayRunTypeModal({
 	setFilters,
 	activeEntity,
 	currency,
+	setShow,
 }:Props) {
 	const { totalRecords } = data || {};
 	const { push } = useRouter();
@@ -53,6 +55,8 @@ function PayRunTypeModal({
 		&currency=${currency}&entity=${activeEntity}`);
 
 		setPayRunType(false);
+		setShow(false);
+		Toast.success('PayRun Initialised, Please wait...');
 	};
 	const [exitPayRun, setExitPayRun] = useState(false);
 	return (
@@ -122,6 +126,7 @@ function PayRunTypeModal({
 					setFilters={setFilters}
 					currency={currency}
 					activeEntity={activeEntity}
+					setShow={setShow}
 				/>
 			)}
 		</div>

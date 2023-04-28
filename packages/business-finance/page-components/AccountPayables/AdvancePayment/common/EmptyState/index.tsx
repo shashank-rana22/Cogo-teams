@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const NoDataImage = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/noShipmentLeft.svg';
+const NoDataImage = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no_invoice_found.png';
 
 function EmptyState() {
 	return (

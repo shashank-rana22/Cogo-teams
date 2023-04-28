@@ -1,4 +1,4 @@
-import { Radio, Modal, Button } from '@cogoport/components';
+import { Radio, Modal, Toast, Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
@@ -31,6 +31,7 @@ interface Props {
 	setFilters:Function,
 	currency:string,
 	activeEntity:string,
+	setShow:Function,
 }
 
 function ExitingPayRun({
@@ -42,15 +43,19 @@ function ExitingPayRun({
 	setFilters,
 	currency,
 	activeEntity,
+	setShow,
 }:Props) {
 	const { pageIndex } = data || {};
 	const { push } = useRouter();
 	const [value, setValue] = useState('');
 
-	const handleClick = () => (
+	const handleClick = () => {
 		push(`/business-finance/account-payables/advance-payment/create-new-payrun?selectedPayRunId=${value}
-		&currency=${currency}&entity=${activeEntity}`)
-	);
+		&currency=${currency}&entity=${activeEntity}`);
+
+		setShow(false);
+		Toast.success('PayRun Initialised, Please wait...');
+	};
 
 	const functions = {
 		renderRadio: (itemData) => {

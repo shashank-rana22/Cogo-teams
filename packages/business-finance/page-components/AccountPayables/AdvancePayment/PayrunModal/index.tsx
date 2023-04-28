@@ -168,6 +168,7 @@ function PayRunModal({ show, setShow, activeEntity }:Props) {
 					setFilters={setFilters}
 					activeEntity={activeEntity}
 					currency={currency}
+					setShow={setShow}
 				/>
 			)}
 		</div>
