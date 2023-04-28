@@ -1,7 +1,7 @@
-.container{
-    :global {
-        .ui_popover_container {
-            min-width: 900px;
-        }
-    }
+.container {
+	:global {
+		.ui_popover_container {
+			min-width: 900px;
+		}
+	}
 }

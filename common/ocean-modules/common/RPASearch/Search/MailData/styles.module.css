@@ -1,53 +1,52 @@
 .container {
-	background: #ffffff;
-	box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
-	border-radius: 4px;
-	padding: 18px 16px;
 	display: flex;
 	align-items: center;
-	margin: 4px 4px 16px 4px;
-	margin-right: 0px;
+	padding: 18px 16px;
+	margin: 4px 4px 16px;
+	margin-right: 0;
+	background: #fff;
 	border-right: 1px solid #ded7fc;
+	border-radius: 4px;
+	box-shadow: 0 0 4px rgb(0 0 0 / 15%);
 }
 
 .row {
-	width: 25%;
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+	width: 25%;
 }
 
 .subject {
-	width: 50%;
 	display: flex;
 	align-items: center;
-	border-right: 1px solid #ded7fc;
+	width: 50%;
 	padding: 12px 0;
+	border-right: 1px solid #ded7fc;
 }
 
 .details {
-	width: 25%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	border-right: 1px solid #ded7fc;
+	width: 25%;
 	padding: 8px;
+	border-right: 1px solid #ded7fc;
 }
 
 .label {
-	margin: 0px;
-	letter-spacing: 0.02em;
+	margin: 0;
 	color: #585858;
+	letter-spacing: 0.02em;
 }
 
 .value {
-	margin: 0px;
+	display: block;
+	margin: 0;
 	margin-left: 10px;
 	font-weight: 600;
+	color: #333;
 	letter-spacing: 0.02em;
-	display: block;
-
-	color: #333333;
 
 	&.small {
 		font-size: 12px;
@@ -56,17 +55,17 @@
 }
 
 .view_button {
-	font-size: 12px;
-	color: red;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	text-decoration: underline;
 	padding-right: 16px;
+	font-size: 12px;
+	color: red;
+	text-decoration: underline;
 	cursor: pointer;
 }
 
 .styled_radio {
-	border-left: 1px solid #ded7fc;
 	padding-left: 16px;
+	border-left: 1px solid #ded7fc;
 }
