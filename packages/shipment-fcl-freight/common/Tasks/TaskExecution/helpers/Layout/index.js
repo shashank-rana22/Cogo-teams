@@ -79,6 +79,7 @@ function Layout({
 							<Item
 								control={control}
 								error={errors[field.name]}
+								formValues={formValues}
 								{...field}
 							/>
 						);

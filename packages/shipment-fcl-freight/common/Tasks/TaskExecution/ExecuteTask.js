@@ -36,6 +36,7 @@ function ExecuteTask({
 		steps,
 		currentStep,
 		setCurrentStep,
+		serviceIdMapping,
 	} = useTaskExecution({ task, taskConfigData });
 
 	const stepConfigValue = steps.length
@@ -171,6 +172,7 @@ function ExecuteTask({
 			getApisData={taskConfigData?.apis_data}
 			uiConfig={taskConfigData?.task_config?.ui_config[currentStep]}
 			selectedMail={selectedMail}
+			serviceIdMapping={serviceIdMapping}
 		/>
 	);
 }

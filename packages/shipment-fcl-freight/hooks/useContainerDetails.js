@@ -80,7 +80,6 @@ const useContainerDetails = ({
 	pendingTask,
 	services,
 	taskListRefetch,
-	timeLineRefetch,
 	customDateFormat,
 }) => {
 	const [{ loading }, trigger] = useRequest({
@@ -169,7 +168,6 @@ const useContainerDetails = ({
 				Toast.success('Task updated successfully');
 				onCancel();
 				taskListRefetch();
-				timeLineRefetch();
 			} else {
 				Toast.error('Something went wrong');
 			}

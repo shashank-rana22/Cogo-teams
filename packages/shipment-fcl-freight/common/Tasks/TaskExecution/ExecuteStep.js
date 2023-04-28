@@ -14,6 +14,7 @@ function ExecuteStep({
 	isLastStep = false,
 	getApisData = {},
 	selectedMail = [],
+	serviceIdMapping = [],
 	// uiConfig = {},
 }) {
 	const {
@@ -33,7 +34,7 @@ function ExecuteStep({
 		task,
 		onCancel,
 		refetch,
-		// serviceIdMapping,
+		serviceIdMapping,
 		currentStep,
 		isLastStep,
 		getApisData,

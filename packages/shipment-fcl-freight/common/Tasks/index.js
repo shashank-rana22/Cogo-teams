@@ -56,7 +56,6 @@ function List() {
 							<Card
 								task={task}
 								handleClick={handleClick}
-								tasksList={tasksList}
 								loading={loading}
 							/>
 						)) : null}
@@ -67,7 +66,6 @@ function List() {
 									task={tasksList.find((task) => task.id === selectedTaskId)}
 									handleClick={handleClick}
 									isTaskOpen
-									tasksList={tasksList}
 									loading={loading}
 									shipment_data={shipment_data}
 								/>
@@ -75,7 +73,6 @@ function List() {
 								<TaskExecution
 									task={tasksList.find((task) => task.id === selectedTaskId)}
 									onCancel={() => setSelectedTaskId(null)}
-									shipment_data={shipment_data}
 									taskListRefetch={taskListRefetch}
 									selectedMail={selectedMail}
 									setSelectedMail={setSelectedMail}
