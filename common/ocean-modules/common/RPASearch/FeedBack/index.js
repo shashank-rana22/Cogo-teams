@@ -27,6 +27,7 @@ function FeedBack({ setTask }) {
 				>
 					<IcMArrowBack style={{ width: '1.5em', height: '1.5em' }} />
 				</div>
+
 				<div className={styles.heading}>GIVE FEEDBACK</div>
 			</div>
 
@@ -37,6 +38,7 @@ function FeedBack({ setTask }) {
 						setIsChecked(!isChecked);
 					}}
 				/>
+
 				<div className={styles.text_feedback}>
 					Do you want all your Cogoport Emails to be integrated ?
 				</div>
@@ -44,6 +46,7 @@ function FeedBack({ setTask }) {
 
 			<div className={styles.styled_textarea}>
 				<div className={styles.remarks_textarea}>Remarks</div>
+
 				<Textarea
 					value={feedback}
 					onChange={(e) => setFeedback(e)}
@@ -64,6 +67,7 @@ function FeedBack({ setTask }) {
 						Cancel
 					</Button>
 				</div>
+
 				<Button
 					onClick={() => submitRPAFeeback(feedback, isChecked)}
 					disabled={feedBackApi.loading}

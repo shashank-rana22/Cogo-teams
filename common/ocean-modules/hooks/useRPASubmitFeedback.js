@@ -6,6 +6,7 @@ import toastApiError from '../utils/toastApiError';
 
 const useSubmitRPAFeedback = ({ onSubmit }) => {
 	const user_profile = useSelector(({ profile }) => profile);
+
 	const [feedBackApi, triggerFeedback] = useLensRequest({
 		url    : 'submit_user_feedback',
 		method : 'POST',
@@ -15,11 +16,11 @@ const useSubmitRPAFeedback = ({ onSubmit }) => {
 		try {
 			await triggerFeedback({
 				data: {
-					email                     : user_profile.email,
-					name                      : user_profile.name,
-					country_code              : user_profile.mobile_country_code,
+					email                     : user_profile.user.email,
+					name                      : user_profile.user.name,
+					country_code              : user_profile.user.mobile_country_code,
 					remark,
-					mobile_number             : user_profile.mobile_number,
+					mobile_number             : user_profile.user.mobile_number,
 					require_email_integration : isChecked,
 				},
 			});
