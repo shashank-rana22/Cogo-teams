@@ -1,3 +1,4 @@
+import { Loader } from '@cogoport/components';
 import React from 'react';
 
 import useGetTask from '../../../../../hooks/useGetTaskConfig';
@@ -7,10 +8,8 @@ import TaskForm from './TaskForm';
 function UpdateContainerDetails({
 	pendingTask,
 	onCancel,
-	Loader,
 	services,
 	taskListRefetch,
-	timeLineRefetch,
 }) {
 	const { taskConfigData, loading } = useGetTask({
 		task: pendingTask,
@@ -19,7 +18,7 @@ function UpdateContainerDetails({
 	const apis_data = taskConfigData?.apis_data;
 
 	return loading ? (
-		Loader
+		<Loader />
 	) : (
 		<TaskForm
 			apis_data={apis_data}
@@ -27,7 +26,6 @@ function UpdateContainerDetails({
 			onCancel={onCancel}
 			services={services}
 			taskListRefetch={taskListRefetch}
-			timeLineRefetch={timeLineRefetch}
 		/>
 	);
 }

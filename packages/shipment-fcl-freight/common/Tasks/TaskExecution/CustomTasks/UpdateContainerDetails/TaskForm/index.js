@@ -13,7 +13,6 @@ function TaskForm({
 	onCancel,
 	services,
 	taskListRefetch,
-	timeLineRefetch,
 }) {
 	const [details, setDetails] = useState('');
 	const [customDateFormat, setCustomDateFormat] = useState(false);
@@ -24,7 +23,6 @@ function TaskForm({
 		pendingTask,
 		services,
 		taskListRefetch,
-		timeLineRefetch,
 		customDateFormat,
 	}) || {};
 
