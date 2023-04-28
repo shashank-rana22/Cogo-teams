@@ -165,9 +165,12 @@ function RPASearch({
 					</div>
 				) : null}
 
-				<Button disabled={isEmpty(selectedMail)} onClick={handelFinalUpload}>
-					Upload
-				</Button>
+				{!isEmpty(data?.body)
+				&& (
+					<Button disabled={isEmpty(selectedMail)} onClick={handelFinalUpload}>
+						Upload
+					</Button>
+				)}
 			</div>
 		</div>
 	);
