@@ -1,0 +1,63 @@
+{
+    "fcl_freight":[
+        {
+            "value":"import",
+            "label":"Import"
+        },
+        {
+            "value":"export",
+            "label":"Export"
+        },
+        {
+            "value":"fcl_customs",
+            "label":"Customs"
+        },
+        {
+            "value":"fcl_local",
+            "label":"Local"
+        }
+    ],
+    "lcl_freight":[
+        {
+            "value":"import",
+            "label":"Import"
+        },
+        {
+            "value":"export",
+            "label":"Export"
+        },
+        {
+            "value":"lcl_customs",
+            "label":"Customs"
+        }
+    ],
+    "air_freight":[
+        {
+          "label": "International",
+          "value": "air_freight"
+        },
+        {
+          "label": "Domestic",
+          "value": "domestic_air_freight"
+        },
+        {
+          "label": "Customs",
+          "value": "air_customs"
+        },
+        {
+          "label": "Local",
+          "value": "air_freight_local"
+        }
+    ],
+    "surface":[
+        {
+          "label": "FTL Freight",
+          "value": "ftl_freight"
+        },
+        {
+          "label": "LTL Freight",
+          "value": "ltl_freight"
+        }
+    ],
+    "all":[]
+}

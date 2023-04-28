@@ -1,0 +1,28 @@
+.container{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.sub_container{
+    display: flex;
+}
+
+.channel_partner{
+    margin-left: 8px;
+    margin-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.export {
+	background-color: var(--color-primary-yellow-4);
+}
+
+.import {
+	background-color: var(--color-tertiary-blue-4);
+}
+
+.source {
+	background-color: var(--color-secondary-3);
+}

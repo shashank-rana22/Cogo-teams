@@ -1,0 +1,15 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon_container{
+    height: 28px;
+}
+
+.icon_text{
+    font-size: var(--font-size-md);
+	font-weight: 700;
+}

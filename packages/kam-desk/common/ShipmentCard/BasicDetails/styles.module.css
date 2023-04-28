@@ -1,0 +1,9 @@
+.serial_id{
+    font-weight: 600;
+}
+
+.importer_exporter{
+    margin-top: 4px;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}
