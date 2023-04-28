@@ -21,7 +21,11 @@ const shipmentSpecificPayload = {
 
 const timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
 
-export default function getListBookingDeskShipmentsPayload({ filters, activeTab, selected_agent_id }) {
+export default function getListBookingDeskShipmentsPayload({
+	filters = {},
+	activeTab = '',
+	selected_agent_id = '',
+}) {
 	const { isCriticalOn, page, q, shipment_type, ...restFilters } = filters;
 
 	const tabSpecificPayload = shipmentSpecificPayload[shipment_type][activeTab];
@@ -30,22 +34,23 @@ export default function getListBookingDeskShipmentsPayload({ filters, activeTab,
 
 	let payloadKey = [];
 	if (filters.trade_type) {
-		payloadKey.push(filters.trade_type);
-		payloadKey.push('common');
+		payloadKey.push(filters.trade_type, 'common');
 	} else {
 		payloadKey = ['import', 'common'];
 	}
 
 	payloadKey.forEach((key) => {
 		if (key in tabSpecificPayload) {
-			combinedTradeTypeSpecific.task_attributes = [...combinedTradeTypeSpecific.task_attributes,
-				...(tabSpecificPayload[key]?.task_attributes || {})];
+			combinedTradeTypeSpecific.task_attributes = [
+				...combinedTradeTypeSpecific.task_attributes,
+				...(tabSpecificPayload[key]?.task_attributes || {}),
+			];
 		}
 	});
 
 	const tabs = TABS_CONFIG[shipment_type];
 
-	const isCriticalVisible = tabs.find((tab) => tab.name === activeTab).isCriticalVisible ?? false;
+	const isCriticalVisible = tabs.find((tab) => tab.name === activeTab).isCriticalVisible || false;
 
 	const threeDaysLater = new Date();
 	threeDaysLater.setDate(threeDaysLater.getDate() + 3);
@@ -57,8 +62,8 @@ export default function getListBookingDeskShipmentsPayload({ filters, activeTab,
 			...(combinedTradeTypeSpecific || {}),
 			...(otherFilters || {}),
 			...(selected_agent_id && { selected_agent_id }),
-			...(isCriticalVisible && isCriticalOn
-				&& { schedule_departure_less_than: threeDaysLater }),
+			...(isCriticalVisible
+				&& isCriticalOn && { schedule_departure_less_than: threeDaysLater }),
 			...(q && { q }),
 			...restFilters,
 		},
@@ -66,7 +71,6 @@ export default function getListBookingDeskShipmentsPayload({ filters, activeTab,
 		additional_methods : ['pagination'],
 		sort_by            : 'created_at',
 		sort_type          : 'desc',
-
 	};
 
 	return payload;
