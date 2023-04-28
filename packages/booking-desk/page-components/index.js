@@ -23,7 +23,14 @@ export default function BookingDesk() {
 		localStorage.setItem('booking_desk_version', 'v1');
 	}, [router.asPath]);
 
-	const stateProps = { activeTab, setActiveTab, filters, setFilters, scopeFilters, handleVersionChange };
+	const stateProps = {
+		activeTab,
+		setActiveTab,
+		filters,
+		setFilters,
+		scopeFilters,
+		handleVersionChange,
+	};
 
 	useEffect(() => {
 		const defaultValues = getValidatedStoredValues();
@@ -35,14 +42,13 @@ export default function BookingDesk() {
 		if (defaultValues.bookingDeskVersion === 'v1') handleVersionChange();
 	}, [handleVersionChange]);
 
-	const RenderDesk = filters?.shipment_type in ResolveBookingDesk ? ResolveBookingDesk[filters.shipment_type] : null;
+	const RenderDesk = filters?.shipment_type in ResolveBookingDesk
+		? ResolveBookingDesk[filters.shipment_type]
+		: null;
 
 	if (RenderDesk) {
 		return (
-			<div
-				key={filters.shipment_type}
-
-			>
+			<div key={filters.shipment_type}>
 				<RenderDesk stateProps={stateProps} />
 			</div>
 		);
