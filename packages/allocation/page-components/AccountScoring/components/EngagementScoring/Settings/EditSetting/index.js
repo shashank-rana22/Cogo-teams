@@ -1,4 +1,3 @@
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 import useGetEngagementScoringAccountStats from '../../../../hooks/useGetEngagementScoringAccountStats';
@@ -21,11 +20,8 @@ function EditSetting(props) {
 		handleSubmit,
 		errors,
 		watch,
+		setValue = () => {},
 	} = props;
-
-	const profile = useSelector((state) => state.profile);
-	const { user = {} } = profile;
-	const { id : performed_by_id = ' ' } = user;
 
 	const {
 		updatePercentile = () => {},
@@ -47,11 +43,11 @@ function EditSetting(props) {
 		e.preventDefault();
 
 		if (inputStyle === 'percentile_input') {
-			updatePercentile(formValues, onClose, refetch, preFilledList, performed_by_id);
+			updatePercentile(formValues, onClose, refetch, preFilledList);
 		} else if (inputStyle === 'bias_input') {
-			updateBias(formValues, onClose, refetch, preFilledList, performed_by_id);
+			updateBias(formValues, onClose, refetch, preFilledList);
 		} else if (inputStyle === 'distribution_input') {
-			updateDistribution(formValues, onClose, refetch, preFilledList, performed_by_id);
+			updateDistribution(formValues, onClose, refetch, preFilledList);
 		}
 	};
 
@@ -134,6 +130,7 @@ function EditSetting(props) {
 										inputStyle={inputStyle}
 										control={control}
 										errors={errors}
+										setValue={setValue}
 									/>
 								)
 						}

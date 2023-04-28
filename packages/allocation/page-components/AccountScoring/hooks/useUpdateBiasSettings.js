@@ -10,7 +10,7 @@ function useUpdateBiasSettings() {
 		authkey : 'post_allocation_engagement_scoring_settings_attributes',
 	}, { manual: true });
 
-	const onClickSave = async (formValues, onClose, refetch, preFilledList, performed_by_id) => {
+	const onClickSave = async (formValues, onClose, refetch, preFilledList) => {
 		const valuesForPrefilling = [];
 
 		preFilledList.forEach((element) => {
@@ -40,7 +40,7 @@ function useUpdateBiasSettings() {
 		valuesForPrefilling.forEach((element) => {
 			const obj = {};
 			obj.setting_id = element.id || undefined;
-			obj.lower_limit = element.scoring_criteria.age_from || undefined;
+			obj.lower_limit = element.scoring_criteria.age_from || 0;
 			obj.upper_limit = element.scoring_criteria.age_to || undefined;
 			obj.score = element.scoring_criteria.multiplier || undefined;
 
@@ -49,9 +49,7 @@ function useUpdateBiasSettings() {
 
 		try {
 			const payload = {
-				performed_by_id,
-				performed_by_type : 'agent',
-				setting_type      : 'bias',
+				setting_type: 'bias',
 				setting_details,
 			};
 

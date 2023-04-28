@@ -10,7 +10,7 @@ function useUpdateDistributionSettings() {
 		authkey : 'post_allocation_engagement_distribution_settings_attributes',
 	}, { manual: true });
 
-	const onClickSave = async (formValues, onClose, refetch, preFilledList, performed_by_id) => {
+	const onClickSave = async (formValues, onClose, refetch, preFilledList) => {
 		const valuesForPrefilling = [];
 
 		preFilledList.forEach((element) => {
@@ -41,7 +41,7 @@ function useUpdateDistributionSettings() {
 		valuesForPrefilling.forEach((element) => {
 			const obj = {};
 			obj.distribution_setting_id = element.id || undefined;
-			obj.lower_limit = element.scoring_criteria.range_from || undefined;
+			obj.lower_limit = element.scoring_criteria.range_from || 0;
 			obj.upper_limit = element.scoring_criteria.range_to || undefined;
 
 			distribution_setting_details.push(obj);
@@ -49,8 +49,6 @@ function useUpdateDistributionSettings() {
 
 		try {
 			const payload = {
-				performed_by_id,
-				performed_by_type: 'agent',
 				distribution_setting_details,
 			};
 
