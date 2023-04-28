@@ -1,6 +1,6 @@
-import { Button, CheckBox, Radio } from '@cogoport/components';
-// import { formatDistanceToNow } from '@cogoport/front/date';
+import { Button, CheckBox, Radio, cl } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
+import { formatDistanceToNow } from 'date-fns';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -17,10 +17,10 @@ function Item({ item, onClick, values, multiple }) {
 			</div>
 
 			<div className={styles.row} style={{ width: '15%', flexDirection: 'column' }}>
-				<div className={styles.value} className="small">
-					{/* {formatDistanceToNow(item.email_received_at || new Date(), {
+				<div className={cl`${styles.value} ${styles.small}`}>
+					{formatDistanceToNow(item.email_received_at || new Date(), {
 						addSuffix: true,
-					})} */}
+					})}
 				</div>
 
 				<div className={styles.label} style={{ fontSize: 10 }}>{startCase(item?.entity_name)}</div>
@@ -36,7 +36,7 @@ function Item({ item, onClick, values, multiple }) {
 			>
 				{item.file_url ? (
 					<Button
-						className="primary sm text"
+						className="primary sm"
 						style={{ marginLeft: 10 }}
 						onClick={() => window.open(item.file_url, '_blank')}
 					>
