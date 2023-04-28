@@ -21,24 +21,30 @@ const defaultKeyMappings = {
 	free_days_demurrage_destination : 'free_days_demurrage_destination',
 	document_number                 : 'document_number',
 };
-const formatBookingNote = ({ mailData }) => {
+
+const formatBookingNote = ({ mailData = [] }) => {
 	const formattedData = [];
 	const fileUrls = [];
+
 	mailData.forEach((booking_note) => {
 		const rpaData = booking_note.ocr_data || {};
+
 		const formatted_bn = mapKeyValues({
 			keyMappings: defaultKeyMappings,
 			rpaData,
 		});
+
 		formattedData.push(formatted_bn);
 
 		const file_url_ar = booking_note?.file_url?.split('/');
+
 		fileUrls.push({
 			name    : file_url_ar[file_url_ar.length - 1],
 			url     : booking_note.file_url,
 			success : true,
 		});
 	});
+
 	return { formattedData, fileUrls };
 };
 

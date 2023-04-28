@@ -6,11 +6,12 @@ const defaultKeyMappings = {
 	email_received_at   : 'email_received_at',
 };
 
-const formatShippingInstructions = ({ mailData }) => {
+const formatShippingInstructions = ({ mailData = [] }) => {
 	const formattedData = [];
 
 	mailData.forEach((shipping_instructions) => {
 		const rpaData = shipping_instructions || {};
+
 		const formatted_si = mapKeyValues({
 			keyMappings: defaultKeyMappings,
 			rpaData,
@@ -25,6 +26,7 @@ const formatShippingInstructions = ({ mailData }) => {
 
 		formattedData.push(newFormatted);
 	});
+
 	return formattedData;
 };
 
