@@ -156,10 +156,11 @@ function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 									shipperAddress,
 									consigneeName,
 									consigneeAddress,
+									destinationPortCode,
 								} = item.documentData || {};
 
 								return (
-									<tr className="data_font_style">
+									<tr key={`${documentNumber}-${destinationPortCode}`} className="data_font_style">
 										<td>{documentNumber || '-'}</td>
 										<td>{totalPackagesCount || '-'}</td>
 										<td>{weight || '-'}</td>
