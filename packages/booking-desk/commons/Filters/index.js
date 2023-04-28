@@ -5,7 +5,7 @@ import { useState } from 'react';
 import PopoverContent from './PopoverContent';
 import styles from './styles.module.css';
 
-export default function Filters({ stateProps }) {
+export default function Filters({ stateProps = {} }) {
 	const [showPopover, setShowPopover] = useState(false);
 	const { filters, setFilters } = stateProps;
 
