@@ -43,8 +43,9 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 				<div className={styles.expense}>Expense Variation</div>
 				<div>
 					Amount :
+					{' '}
 					<span className={styles.amount}>
-						{(expenseBooked - actualExpense).toLocaleString('hi', { maximumFractionDigits: 2 })}
+						{getFormattedPrice((expenseBooked - actualExpense), expenseCurrency)}
 					</span>
 				</div>
 			</div>
@@ -54,7 +55,7 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 					Amount :
 					{' '}
 					<span className={styles.amount}>
-						{(incomeBooked - actualIncome).toLocaleString('hi', { maximumFractionDigits: 2 })}
+						{getFormattedPrice((incomeBooked - actualIncome), expenseCurrency)}
 					</span>
 				</div>
 			</div>

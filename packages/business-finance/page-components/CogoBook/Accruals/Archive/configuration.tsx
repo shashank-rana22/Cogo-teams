@@ -92,6 +92,7 @@ export const ARCHIVE_MONTH_BOOKED = [
 				actualIncome = 0,
 				expenseAccrued = 0,
 				incomeAccrued = 0,
+				expenseCurrency,
 			} = original || {};
 
 			const renderContent = () => (
@@ -102,8 +103,8 @@ export const ARCHIVE_MONTH_BOOKED = [
 							Amount :
 							{' '}
 							<span className={styles.amount}>
-								{(actualExpense
-								- (expenseBooked + expenseAccrued))?.toLocaleString('hi', { maximumFractionDigits: 2 })}
+								{getFormattedPrice((actualExpense
+								- (expenseBooked + expenseAccrued)), expenseCurrency)}
 
 							</span>
 						</div>
@@ -114,8 +115,8 @@ export const ARCHIVE_MONTH_BOOKED = [
 							Amount :
 							{' '}
 							<span className={styles.amount}>
-								{(actualIncome - (
-									incomeBooked + incomeAccrued))?.toLocaleString('hi', { maximumFractionDigits: 2 })}
+								{getFormattedPrice((actualIncome - (
+									incomeBooked + incomeAccrued)), expenseCurrency)}
 
 							</span>
 						</div>
