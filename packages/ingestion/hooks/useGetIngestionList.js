@@ -159,7 +159,7 @@ function useGetIngestionList() {
 							disabled={!(REDIRECT_LINK_MAPPING[`${item?.is_channel_partner}_${item?.account_type}`])}
 							onClick={() => redirectPath(`/${partner_id}
 							${REDIRECT_LINK_MAPPING[`${item?.is_channel_partner}_${item?.account_type}`]}
-							?source_id=${item?.id}`)}
+							&source_id=${item?.id}`)}
 						>
 
 							{startCase(item?.ingestion_type || '___')}

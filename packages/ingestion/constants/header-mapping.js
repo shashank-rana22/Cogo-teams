@@ -8,7 +8,7 @@ export const CONSTANT_KEYS = {
 export const REDIRECT_LINK_MAPPING = {
 	true_service_provider   : '/crm/supply?lifecycleStage=enriched',
 	false_importer_exporter : '/lead-management?lifecycleStage=enriched',
-	true_importer_exporter  : '/channel-partner-management?lifecycleStage=enriched',
+	true_importer_exporter  : '/channel-partner-management?selectedLifecycleStage=enriched',
 };
 
 export const REDIRECT_MAPPING = {
