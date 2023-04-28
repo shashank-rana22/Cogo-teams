@@ -23,7 +23,10 @@ function RenderAppliedFilters({ appliedFilters = [], setFilters = () => {} }) {
 					{startCase(val)}
 				</span>
 
-				<button onClick={() => handleClearOneFilter(key)} className={styles.clear_filter_icon}>
+				<button
+					onClick={() => handleClearOneFilter(key)}
+					className={styles.clear_filter_icon}
+				>
 					<IcMCross />
 				</button>
 			</div>
