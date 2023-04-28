@@ -8176,13 +8176,13 @@ const partner = {
 			feature     : 'history',
 		},
 		{
-			api         : 'payments_settlement_settlement_matching',
+			api         : 'post_payments_settlement_settlement_matching',
 			access_type : 'private',
 			module      : 'history',
 			feature     : 'history',
 		},
 		{
-			api         : 'payments_settlement_matching_on_sage',
+			api         : 'post_payments_settlement_matching_on_sage',
 			access_type : 'private',
 			module      : 'history',
 			feature     : 'history',
