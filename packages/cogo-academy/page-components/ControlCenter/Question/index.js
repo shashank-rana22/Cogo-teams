@@ -19,8 +19,9 @@ import styles from './styles.module.css';
 import useCreateQuestions from './useCreateQuestions';
 
 const style = {
-	width   : '100%',
-	padding : 12,
+	width     : '100%',
+	padding   : '0 12px 12px 12px',
+	marginTop : '8px',
 };
 
 const userFormStyle = {
@@ -478,7 +479,6 @@ function CreateFAQ() {
 					id={id}
 					source="create"
 					fetchQuestion={fetchQuestion}
-					faqAudiences={faq_audiences}
 				/>
 			</div>
 

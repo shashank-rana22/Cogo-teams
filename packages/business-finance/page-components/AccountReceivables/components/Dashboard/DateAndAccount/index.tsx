@@ -1,7 +1,8 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import React from 'react';
+
+import { keyValue } from '../../../constants';
 
 import styles from './styles.module.css';
 
@@ -23,10 +24,11 @@ interface OutsatndingProps {
 
 interface DateAndAccountProps {
 	outstandingData?: OutsatndingProps,
-	outstandingLoading?: boolean
+	outstandingLoading?: boolean,
+	entityCode?: string,
 }
 
-function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountProps) {
+function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: DateAndAccountProps) {
 	const {
 		overallStats = {},
 	} = outstandingData || {};
@@ -42,14 +44,14 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 							<>
 								<div className={styles.account_receivables_line}>
 									<div className={styles.dashboard_currency}>
-										{overallStats?.dashboardCurrency || GLOBAL_CONSTANTS.currency_code.INR}
+										{overallStats?.dashboardCurrency || keyValue[entityCode]}
 									</div>
 									<div className={styles.account_receivables_amount}>
 										<Tooltip content={(
 											<div>
 												{getFormattedPrice(
 													overallStats?.openInvoicesAmount || 0,
-													overallStats?.dashboardCurrency,
+													overallStats?.dashboardCurrency || keyValue[entityCode],
 
 												)}
 											</div>
@@ -58,7 +60,7 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 											<div className={styles.wrapper}>
 												{getFormattedPrice(
 													overallStats?.openInvoicesAmount || 0,
-													overallStats?.dashboardCurrency,
+													overallStats?.dashboardCurrency || keyValue[entityCode],
 													{
 														notation              : 'compact',
 														compactDisplay        : 'short',
@@ -99,7 +101,7 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 							<>
 								<div className={styles.account_receivables_open_line}>
 									<div className={styles.dashboard_currency}>
-										{overallStats?.dashboardCurrency || GLOBAL_CONSTANTS.currency_code.INR}
+										{overallStats?.dashboardCurrency || keyValue[entityCode]}
 									</div>
 
 									<div
@@ -109,7 +111,7 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 											<div>
 												{getFormattedPrice(
 													overallStats?.onAccountAmount || 0,
-													overallStats?.dashboardCurrency,
+													overallStats?.dashboardCurrency || keyValue[entityCode],
 												)}
 											</div>
 										)}
@@ -117,7 +119,7 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 											<div className={styles.wrapper}>
 												{getFormattedPrice(
 													overallStats?.onAccountAmount || 0,
-													overallStats?.dashboardCurrency,
+													overallStats?.dashboardCurrency || keyValue[entityCode],
 													{
 														notation              : 'compact',
 														compactDisplay        : 'short',
@@ -147,7 +149,7 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 							<>
 								<div className={styles.account_receivables_open_line}>
 									<div className={styles.dashboard_currency}>
-										{overallStats?.dashboardCurrency || GLOBAL_CONSTANTS.currency_code.INR}
+										{overallStats?.dashboardCurrency || keyValue[entityCode]}
 									</div>
 
 									<div
@@ -157,7 +159,7 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 											<div>
 												{getFormattedPrice(
 													overallStats?.totalOutstandingAmount || 0,
-													overallStats?.dashboardCurrency,
+													overallStats?.dashboardCurrency || keyValue[entityCode],
 												)}
 											</div>
 										)}
@@ -165,7 +167,7 @@ function DateAndAccount({ outstandingData, outstandingLoading }: DateAndAccountP
 											<div className={styles.wrapper}>
 												{getFormattedPrice(
 													overallStats?.totalOutstandingAmount || 0,
-													overallStats?.dashboardCurrency,
+													overallStats?.dashboardCurrency || keyValue[entityCode],
 													{
 														notation              : 'compact',
 														compactDisplay        : 'short',

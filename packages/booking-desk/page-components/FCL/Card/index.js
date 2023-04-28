@@ -22,7 +22,9 @@ export default function Card({ item = {}, couldBeCardsCritical = false }) {
 			role="button"
 			tabIndex={0}
 			onClick={clickCard}
-			className={`${card} ${couldBeCardsCritical && isCardCritical({ item }) ? critical_card : ''}`}
+			className={`${card} ${
+				couldBeCardsCritical && isCardCritical({ item }) ? critical_card : ''
+			}`}
 		>
 			<CardHeader item={item} />
 

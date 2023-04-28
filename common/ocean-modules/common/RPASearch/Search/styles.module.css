@@ -1,0 +1,95 @@
+.container {
+	width: 100%;
+	min-width: 850px;
+	min-height: 432px;
+	padding: 8px 0;
+}
+
+.heading {
+	margin-right: 12px;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 600;
+	color: #000;
+	text-transform: uppercase;
+}
+
+.search_results {
+	margin-top: 20px;
+	margin-bottom: 16px;
+	font-size: 16px;
+	font-style: normal;
+	color: #939191;
+	letter-spacing: 0.02em;
+}
+
+.search_items {
+	min-height: 100px;
+	max-height: 200px;
+	overflow-y: auto;
+}
+
+.styled_button {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.submit_button {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 12px;
+}
+
+.cancel_button {
+	display: flex;
+	margin-right: 10px;
+}
+
+.search_box {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.text {
+	font-size: 16px;
+	color: #bdbdbd;
+	letter-spacing: 0.02em;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 16px;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+}
+
+.important_note {
+	display: flex;
+	margin: 0;
+	margin-bottom: 16px;
+	color: #000;
+}
+
+.how_it_works {
+	font-weight: 500;
+	color: red;
+	cursor: pointer;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+.custom_button {
+	font-size: 12px;
+	font-weight: 600;
+	color: red;
+	text-decoration: underline;
+	cursor: pointer;
+}
