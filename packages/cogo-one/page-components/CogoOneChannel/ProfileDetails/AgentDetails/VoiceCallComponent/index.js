@@ -72,11 +72,10 @@ function VoiceCallComponent({
 			{userMobile ? (
 				<>
 					<div className={styles.flex_div}>
-						<div className={styles.dialer_icon_div}>
+						<div className={styles.dialer_icon_div} onClick={handleCall} role="presentation">
 							<IcMCall
 								className={cl`${
 									(isEmpty(userMobile)) ? styles.disable : styles.call_icon}`}
-								onClick={handleCall}
 							/>
 						</div>
 						<div className={styles.call_on_div}>

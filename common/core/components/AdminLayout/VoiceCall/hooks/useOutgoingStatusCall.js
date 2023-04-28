@@ -4,16 +4,18 @@ import { useDispatch, useSelector } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { useState } from 'react';
 
+import { CALL_END_STATUS } from '../constant';
+
 function useOutgoingStatusCall({ callId }) {
 	const { call_record_id = '' } = callId || {};
-	const [{ loading }, trigger] = useRequest({
+	const [{ data, loading }, trigger] = useRequest({
 		url    : '/check_outgoing_call_status',
 		method : 'post',
 	}, { manual: true });
 
 	const dispatch = useDispatch();
 	const profileData = useSelector(({ profile }) => profile);
-	const [status, setStatus] = useState('');
+	const [status, setStatus] = useState(null);
 
 	const callStatusApi = async () => {
 		try {
@@ -22,8 +24,9 @@ function useOutgoingStatusCall({ callId }) {
 					call_record_id,
 				},
 			});
-			setStatus(res.data);
-			if (res.data === 'completed') {
+			const { call_status = '', live_call_status = '' } = res.data;
+			setStatus(live_call_status);
+			if (live_call_status === 'completed') {
 				dispatch(
 					setProfileState({
 						...profileData,
@@ -39,12 +42,16 @@ function useOutgoingStatusCall({ callId }) {
 					}),
 				);
 			}
+			if (call_status) {
+				Toast.default(CALL_END_STATUS?.[call_status]);
+			}
 		} catch (error) {
 			Toast.error(error);
 		}
 	};
 	return {
 		statusLoading: loading,
+		data,
 		status,
 		callStatusApi,
 		setStatus,
