@@ -80,16 +80,5 @@ export const CREATE_NEW_PAYRUN_CONFIG = {
 			span    : 1.5,
 			func    : 'renderApprovedBy',
 		},
-
-		// {
-		// 	label : 'Document',
-		// 	func  : 'renderDocument',
-		// 	span  : 1,
-		// },
-		// {
-		// 	key  : 'invoiceDetails',
-		// 	func : 'renderInvoiceDetails',
-		// 	span : 0.2,
-		// },
 	],
 };

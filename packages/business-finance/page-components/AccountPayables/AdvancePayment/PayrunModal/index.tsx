@@ -67,7 +67,6 @@ function PayRunModal({ show, setShow, activeEntity }:Props) {
 		filters,
 		setFilters,
 	} = useGetCreatePayRunType({ activeEntity, currency });
-	// const { totalRecords } = data || {};
 
 	const ENTITY_MAPPING = [
 		{

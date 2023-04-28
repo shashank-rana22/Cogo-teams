@@ -59,11 +59,6 @@ export const VIEW_SELECTED_CONFIG = {
 			func  : 'renderBankDetails',
 			span  : 2,
 		},
-		// {
-		// 	key   : 'dueDate',
-		// 	label : 'Due Date',
-		// 	span  : 0.9,
-		// },
 
 		{
 			key     : 'requestedBy',
@@ -84,10 +79,6 @@ export const VIEW_SELECTED_CONFIG = {
 			span : 0.3,
 			func : 'renderIcDelete',
 		},
-		// {
-		// 	key  : 'invoiceDetails',
-		// 	func : 'renderInvoiceDetails',
-		// 	span : 0.2,
-		// },
+
 	],
 };

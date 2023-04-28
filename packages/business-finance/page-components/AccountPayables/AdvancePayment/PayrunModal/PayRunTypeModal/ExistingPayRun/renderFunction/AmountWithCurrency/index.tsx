@@ -5,14 +5,10 @@ function AmountWithCurrency({ itemData }) {
 	const { currency, totalValue } = itemData || {};
 	return (
 		<div>
-			<div>
-
-				Total value :
-				{' '}
-				{' '}
-				{getPrice(totalValue, currency)}
-				{/* ₹19,888,723.46 */}
-			</div>
+			Total value :
+			{' '}
+			{' '}
+			{getPrice(totalValue, currency)}
 		</div>
 	);
 }
