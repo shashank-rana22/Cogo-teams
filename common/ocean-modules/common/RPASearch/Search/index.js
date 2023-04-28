@@ -3,9 +3,9 @@ import { IcMHelp } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-// import formatters from '../../helpers';
 import useGetMails from '../../../hooks/useGetMails';
 import FeedBack from '../FeedBack';
+import formatters from '../helpers';
 import HowItWorks from '../HowItWorks';
 
 import Filters from './Filters';
@@ -60,9 +60,9 @@ function RPASearch({
 	};
 
 	const handelFinalUpload = () => {
-		// const formatterFunction = formatters[taskFormatter];
-		// const formattedData = formatterFunction(selectedMails);
-		// onUpload({ formatted: formattedData, _meta: selectedMails });
+		const formatterFunction = formatters[taskFormatter];
+		const formattedData = formatterFunction(selectedMails);
+		onUpload({ formatted: formattedData, _meta: selectedMails });
 	};
 
 	const { setQuery, data, query, handleChange, loading } = useGetMails({
