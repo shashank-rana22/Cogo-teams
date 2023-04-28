@@ -90,3 +90,19 @@
 .feedback_container {
 	flex: 1;
 }
+
+.question_alias {
+	display: flex;
+}
+
+.alias {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-left: 18px;
+	font-size: 15px;
+	font-weight: 600;
+	color: #034afd;
+	text-decoration: underline;
+	cursor: pointer;
+}

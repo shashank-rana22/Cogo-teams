@@ -15,8 +15,8 @@ function ValuePercentage({ data, keys, flag = false }) {
 	const variance = data[keys] < 0 && data[keys];
 
 	const absVariance = variance
-		? Math.abs(variance).toString()
-		: data[keys].toString();
+		? Math.abs(variance)?.toFixed(2)?.toString()
+		: data[keys]?.toFixed(2)?.toString();
 
 	const renderValue = (amt, n) => {
 		const check = keys === 'variance' ? variance : '';
@@ -70,7 +70,7 @@ function ValuePercentage({ data, keys, flag = false }) {
 	return (
 		<div>
 			{keys === 'variance'
-				? renderValue(absVariance, 5)
+				? renderValue(absVariance, 10)
 				: renderValue(formatted, 13)}
 		</div>
 	);

@@ -1,10 +1,9 @@
 .container {
 	display: flex;
+	gap: 36px;
 	align-items: center;
-	justify-content: space-between;
-	padding: 100px 200px;
-	margin-top: -16px;
-	margin-bottom: 16px;
+	justify-content: center;
+	margin: auto;
 	text-align: center;
 	background-color: #fff;
 }
@@ -31,6 +30,16 @@
 	border: 1px solid #ee3425;
 }
 
+.border_value {
+	width: 40%;
+	border: 1px solid #849e4c;
+}
+
 .msg {
+	margin-top: 8px;
+}
+
+.msg_value {
+	display: flex;
 	margin-top: 8px;
 }

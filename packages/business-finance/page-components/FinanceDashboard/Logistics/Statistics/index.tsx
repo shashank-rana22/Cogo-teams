@@ -15,8 +15,8 @@ function Statistics({ globalFilters, entityTabFilters }) {
 		todayPurchaseStats, todaySalesStats,
 		totalCashFlow = 0, cashFlowDiffFromYesterday = 0, yesterdayCashFlow = 0,
 	} = todayStatsData || {};
-	const { totalBills = 0, totalExpense = 0, totalPurchaseOrgs = 0 } = todayPurchaseStats || {};
-	const { totalInvoices = 0, totalRevenue = 0, totalSalesOrgs = 0 } = todaySalesStats || {};
+	const { totalBills = 0, totalExpense = 0, totalPurchaseCreditNotes = 0 } = todayPurchaseStats || {};
+	const { totalInvoices = 0, totalRevenue = 0, totalSalesCreditNotes = 0 } = todaySalesStats || {};
 
 	return (
 		<div>
@@ -72,9 +72,9 @@ function Statistics({ globalFilters, entityTabFilters }) {
 									{' '}
 									Invoices |
 									{' '}
-									{totalPurchaseOrgs}
+									{totalPurchaseCreditNotes}
 									{' '}
-									Organisations
+									Credit Notes
 								</div>
 							</>
 						)}
@@ -99,9 +99,9 @@ function Statistics({ globalFilters, entityTabFilters }) {
 									{' '}
 									Invoices |
 									{' '}
-									{totalSalesOrgs}
+									{totalSalesCreditNotes}
 									{' '}
-									Organisations
+									Credit Notes
 								</div>
 							</>
 						)}

@@ -2,7 +2,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin-top: 30px;
 	margin-bottom: 20px;
 }
 
@@ -10,14 +9,11 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: 100%;
 }
 
 .div_left {
 	display: flex;
 	align-items: center;
-	width: 100%;
-	margin-top: 15px;
 
 	:global {
 		.ui_button_container {
@@ -49,10 +45,11 @@
 }
 
 .filter {
+	display: flex;
+	gap: 16px;
+	align-items: center;
 	width: 500px;
-	margin-top: 15px;
-	margin-right: -15px;
-	margin-left: 0;
+	margin: 15px -15px 15px 0;
 
 	:global {
 		.ui_input_container {
@@ -67,6 +64,9 @@
 
 .button_container {
 	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 20px;
 }
 
 .selected {
@@ -101,8 +101,7 @@
 .booked_flex {
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
-	margin-top: 20px;
+	width: 140px;
 }
 
 .flex_modal {
@@ -114,4 +113,59 @@
 
 .flex {
 	display: flex;
+}
+
+.sub_comp {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 14px 36px;
+	margin: 0 0 40px;
+	background: #f8f2e7;
+	border: 1px solid #f2e3c3;
+}
+
+.span_val {
+	padding: 2px 16px;
+	background: #ddebc0;
+	border-radius: 4px;
+}
+
+.hide_data {
+	width: 160px;
+	color: #f68b21;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.quo_border {
+	height: 30px;
+	margin-left: 50px;
+	border: 1px solid #f2e3c3;
+}
+
+.quo {
+	display: flex;
+	align-items: center;
+}
+
+.button_value {
+	display: flex;
+	width: 100%;
+}
+
+.steps {
+	font-weight: 600;
+	color: #ee3425;
+}
+
+.card_small {
+	padding: 8px 20px;
+	background-color: #fff;
+	border-radius: 8px;
+}
+
+.job_number_data {
+	font-weight: 600;
+	text-decoration: underline;
 }
