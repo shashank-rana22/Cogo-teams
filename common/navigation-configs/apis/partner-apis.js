@@ -7643,6 +7643,12 @@ const partner = {
 			feature     : 'Dashboard',
 		},
 		{
+			api         : 'post_sales_invoice_post_from_sage',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
 			api         : 'get_sales_dashboard_outstanding_by_age',
 			access_type : 'private',
 			module      : 'Dashboard',
@@ -8170,6 +8176,18 @@ const partner = {
 			feature     : 'history',
 		},
 		{
+			api         : 'payments_settlement_settlement_matching',
+			access_type : 'private',
+			module      : 'history',
+			feature     : 'history',
+		},
+		{
+			api         : 'payments_settlement_matching_on_sage',
+			access_type : 'private',
+			module      : 'history',
+			feature     : 'history',
+		},
+		{
 			api         : 'delete_payments_settlement',
 			access_type : 'private',
 			module      : 'history',
@@ -8218,6 +8236,12 @@ const partner = {
 			feature     : 'onAccount',
 		},
 		{
+			api         : 'post_payments_accounts_post_from_sage',
+			access_type : 'private',
+			module      : 'onAccount',
+			feature     : 'onAccount',
+		},
+		{
 			api         : 'delete_sales_accounts',
 			access_type : 'private',
 			module      : 'onAccount',
@@ -8249,6 +8273,18 @@ const partner = {
 		},
 		{
 			api         : 'get_payments_parent_jv_list',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
+			api         : 'delete_payments_parent_jv',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
+			api         : 'post_payments_parent_jv_post_to_sage',
 			access_type : 'private',
 			module      : 'JournalVoucher',
 			feature     : 'JournalVoucher',
