@@ -19,31 +19,6 @@ function UploadListModal({ tableModal = '', setTableModal = () => {}, row = {} }
 		setTableModal('re_upload');
 	};
 
-	if (isEmpty(list) && !loading) {
-		return (
-			<Modal size="xl" show={tableModal === 'upload_list'} onClose={onClose} placement="center">
-				<Modal.Header title={(
-					<div className={styles.header}>
-						<IcMUpload style={{ margin: '0 4px 0 0' }} />
-						Upload List
-					</div>
-				)}
-				/>
-				<Modal.Body>
-					<EmptyState height="200px" width="720px" />
-				</Modal.Body>
-
-				<Modal.Footer>
-
-					<div className={styles.close_button}>
-						<Button themeType="secondary" onClick={onClose}>Close</Button>
-					</div>
-				</Modal.Footer>
-			</Modal>
-
-		);
-	}
-
 	return (
 
 		<Modal
@@ -63,28 +38,33 @@ function UploadListModal({ tableModal = '', setTableModal = () => {}, row = {} }
 			/>
 
 			<Modal.Body>
-				<div>
-					<div className={styles.container}>
-						<Table
-							className={styles.table}
-							columns={columns}
-							data={list || []}
-							loading={loading}
-						/>
 
-					</div>
-					{total_count > page_limit && (
-						<div className={styles.pagination_container}>
-							<Pagination
-								type="table"
-								currentPage={page}
-								totalItems={total_count || 0}
-								pageSize={page_limit || 5}
-								onPageChange={onPageChange}
-							/>
+				{(isEmpty(list) && !loading) ? <EmptyState height="200px" width="720px" />
+					: 	(
+						<div>
+							<div className={styles.container}>
+								<Table
+									className={styles.table}
+									columns={columns}
+									data={list || []}
+									loading={loading}
+								/>
+
+							</div>
+							{total_count > page_limit && (
+								<div className={styles.pagination_container}>
+									<Pagination
+										type="table"
+										currentPage={page}
+										totalItems={total_count || 0}
+										pageSize={page_limit || 5}
+										onPageChange={onPageChange}
+									/>
+								</div>
+							)}
 						</div>
 					)}
-				</div>
+
 			</Modal.Body>
 
 			<Modal.Footer>

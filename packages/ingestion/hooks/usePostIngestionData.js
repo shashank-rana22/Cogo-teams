@@ -62,18 +62,16 @@ function usePostIngestionData({ refetch = () => {} }) {
 	const mutatedControls = controls.map((control) => {
 		let newControl = { ...control };
 
-		if (newControl.name === 'agent') {
-			if (ingestion_partner_id) {
-				newControl = {
-					...newControl,
-					params: {
-						filters: {
-							...newControl?.params?.filters,
-							ingestion_partner_id: ingestion_partner_id || undefined,
-						},
+		if (newControl.name === 'agent' && ingestion_partner_id) {
+			newControl = {
+				...newControl,
+				params: {
+					filters: {
+						...newControl?.params?.filters,
+						ingestion_partner_id: ingestion_partner_id || undefined,
 					},
-				};
-			}
+				},
+			};
 		}
 
 		return newControl;

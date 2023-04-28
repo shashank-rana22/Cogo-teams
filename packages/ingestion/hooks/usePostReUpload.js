@@ -13,7 +13,7 @@ function usePostReUpload({ row = {}, setTableModal = () => {}, refetch = () => {
 	const {
 		user_data,
 	} = useSelector(({ profile }) => ({
-		user_data: profile || {},
+		user_data: profile,
 	}));
 
 	const {

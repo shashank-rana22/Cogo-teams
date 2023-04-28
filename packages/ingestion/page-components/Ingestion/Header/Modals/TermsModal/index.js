@@ -37,7 +37,7 @@ function TermsModal({ template = '', setTemplate = () => {}, setShow = () => {} 
 						}
 							</b>
 							<ul>
-								{TERMS_MAPPING.points.map((item) => <li>{item}</li>)}
+								{TERMS_MAPPING.points.map((item) => <li key={item}>{item}</li>)}
 							</ul>
 						</div>
 

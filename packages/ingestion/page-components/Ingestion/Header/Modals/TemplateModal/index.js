@@ -27,6 +27,7 @@ function TemplateModal({ getTemplateCsv = () => {}, template = '', setTemplate =
 						{
 						BUTTON_MAPPING.map((item) => (
 							<Button
+								key={item.name}
 								themeType="secondary"
 								onClick={() => getTemplateCsv(item?.name)}
 								style={{ width: '50%', height: '60px' }}
