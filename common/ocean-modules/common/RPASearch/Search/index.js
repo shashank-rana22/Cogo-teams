@@ -9,7 +9,7 @@ import formatters from '../helpers';
 import HowItWorks from '../HowItWorks';
 
 import Filters from './Filters';
-// import Item from './Item';
+import MailData from './MailData';
 import styles from './styles.module.css';
 
 function RPASearch({
@@ -142,19 +142,19 @@ function RPASearch({
 				</span>
 			</div>
 
-			{/* <div className={styles.search_items}>
+			<div className={styles.search_items}>
 				{loading ? (
 					<h2>Loading emails from operations@cogoport.com..</h2>
 				) : null}
 				{(data?.body || []).map((item) => (
-					<Item
+					<MailData
 						item={item}
 						onClick={handleChange}
 						values={selectedMail}
 						multiple={multiple}
 					/>
 				))}
-			</div> */}
+			</div>
 
 			<div className={styles.styled_button}>
 				{entity_type === 'purchase_invoice' ? (
