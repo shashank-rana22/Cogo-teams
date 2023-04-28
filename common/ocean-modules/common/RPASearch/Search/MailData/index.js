@@ -1,4 +1,4 @@
-import { Button, CheckBox, Radio, cl } from '@cogoport/components';
+import { Checkbox, Radio, cl } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { formatDistanceToNow } from 'date-fns';
 import React from 'react';
@@ -6,17 +6,17 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function Item({ item, onClick, values, multiple }) {
-	const Element = multiple ? CheckBox : Radio;
+	const Element = multiple ? Checkbox : Radio;
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.row} style={{ width: '55%' }}>
+			<div className={styles.subject}>
 				<div className={styles.label}>Subject: </div>
 
 				<div className={styles.value}>{item?.subject}</div>
 			</div>
 
-			<div className={styles.row} style={{ width: '15%', flexDirection: 'column' }}>
+			<div className={styles.details}>
 				<div className={cl`${styles.value} ${styles.small}`}>
 					{formatDistanceToNow(item.email_received_at || new Date(), {
 						addSuffix: true,
@@ -26,27 +26,20 @@ function Item({ item, onClick, values, multiple }) {
 				<div className={styles.label} style={{ fontSize: 10 }}>{startCase(item?.entity_name)}</div>
 			</div>
 
-			<div
-				className={styles.row}
-				style={{
-					width          : '30%',
-					borderRight    : 'none',
-					justifyContent : 'flex-end',
-				}}
-			>
+			<div className={styles.row}>
 				{item.file_url ? (
-					<Button
-						className="primary sm"
-						style={{ marginLeft: 10 }}
+					<div
+						className={styles.view_button}
+						role="button"
+						tabIndex={0}
 						onClick={() => window.open(item.file_url, '_blank')}
 					>
 						View Document
-					</Button>
+					</div>
 				) : null}
 
 				<div className={styles.styled_radio}>
 					<Element
-						className="primary lg"
 						checked={values.includes(item.id)}
 						onChange={() => {
 							onClick(item.id, item);

@@ -16,18 +16,15 @@
 
 .search_results {
     font-style: normal;
-	font-weight: 400;
 	font-size: 16px;
-	line-height: 20px;
 	letter-spacing: 0.02em;
 	margin-bottom: 16px;
-
-	color: #bdbdbd;
+	color: #939191;
 	margin-top: 20px;  
 }
 
 .search_items {
-    overflow-y: scroll;
+    overflow-y: auto;
 	max-height: 200px;
 	min-height: 100px;
 }
@@ -35,7 +32,12 @@
 .styled_button {
     display: flex;
 	justify-content: flex-end;
-	margin-top: 8px;
+}
+
+.submit_button {
+    display: flex;
+	justify-content: flex-end;
+    margin-top: 12px;
 }
 
 .cancel_button {
@@ -46,16 +48,13 @@
 .search_box {
     display: flex;
 	justify-content: space-evenly;
-	align-items: flex-start;
+	align-items: center;
 }
 
 .text {
-    font-weight: 400;
 	font-size: 16px;
-	line-height: 20px;
 	letter-spacing: 0.02em;
 	color: #bdbdbd;
-	padding-top: 15px;
 }
 
 .header {

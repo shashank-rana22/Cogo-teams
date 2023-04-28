@@ -137,7 +137,7 @@ function RPASearch({
 			<div className={styles.search_results}>
 				Search Results
 				{' '}
-				<span style={{ fontSize: 12, fontWeight: 'normal', marginLeft: 10 }}>
+				<span style={{ fontSize: 12 }}>
 					(mails from operations@cogoport.com and zoho)
 				</span>
 			</div>
@@ -156,7 +156,7 @@ function RPASearch({
 				))}
 			</div>
 
-			<div className={styles.styled_button}>
+			<div className={styles.submit_button}>
 				{entity_type === 'purchase_invoice' ? (
 					<div className={styles.cancel_button}>
 						<Button className="secondary md" onClick={handleCancel}>

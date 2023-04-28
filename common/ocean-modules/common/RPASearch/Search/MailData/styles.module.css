@@ -11,32 +11,39 @@
 }
 
 .row {
+	width: 25%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.subject {
+	width: 50%;
 	display: flex;
 	align-items: center;
 	border-right: 1px solid #ded7fc;
-	.core-ui-tooltip-root {
-		width: 88%;
-	}
+	padding: 12px 0;
+}
+
+.details {
+	width: 25%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-right: 1px solid #ded7fc;
+	padding: 8px;
 }
 
 .label {
 	margin: 0px;
-	font-style: normal;
-	font-weight: 400;
-	font-size: 14px;
-	line-height: 14px;
 	letter-spacing: 0.02em;
-
-	color: #828282;
+	color: #585858;
 }
 
 .value {
 	margin: 0px;
 	margin-left: 10px;
-	font-style: normal;
-	font-weight: 500;
-	font-size: 14px;
-	line-height: 18px;
+	font-weight: 600;
 	letter-spacing: 0.02em;
 	display: block;
 
@@ -48,9 +55,18 @@
 	}
 }
 
+.view_button {
+	font-size: 12px;
+	color: red;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: underline;
+	padding-right: 16px;
+	cursor: pointer;
+}
+
 .styled_radio {
 	border-left: 1px solid #ded7fc;
-	margin-left: 12px;
-	padding-left: 24px;
-	padding-right: 12px;
+	padding-left: 16px;
 }
