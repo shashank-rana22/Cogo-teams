@@ -2,6 +2,8 @@ import { Button } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
+const disabledStakeholders = ['release_desk', 'collection_desk'];
+
 function UpdateButton({ task = {}, handleClick = () => {}, hideButton = false }) {
 	if (hideButton) {
 		return (
@@ -23,15 +25,14 @@ function UpdateButton({ task = {}, handleClick = () => {}, hideButton = false })
 		buttonText = 'Review';
 	}
 
-	const temporaryDisableCondition = ['update_collection_details', 'mark_do_released', 'knockoff_invoices'];
-	// remove this after authority desk integration
+	const disableTask = disabledStakeholders.includes(task?.assigned_stakeholder);
 
 	return (
 		<div className={styles.container}>
 			<Button
 				className={styles.upload_button}
 				onClick={() => handleClick(task)}
-				disabled={temporaryDisableCondition.includes(task?.task)}
+				disabled={disableTask}
 			>
 				{buttonText}
 			</Button>
