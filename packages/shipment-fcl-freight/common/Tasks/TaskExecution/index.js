@@ -3,7 +3,11 @@ import ExecuteTask from './ExecuteTask';
 import ReviewDoc from './ReviewDoc';
 import UploadAmendDoc from './UploadAmendDoc';
 
-function TaskExecution({ task = {}, onCancel = () => {}, taskListRefetch = () => {} }) {
+function TaskExecution({
+	task = {}, onCancel = () => {}, taskListRefetch = () => {},
+	selectedMail = [],
+	setSelectedMail = () => {},
+}) {
 	// split the task on the basis of view here i.e, categorize the task into various categories
 	// and make a view that hadles all the use cases
 
@@ -48,6 +52,8 @@ function TaskExecution({ task = {}, onCancel = () => {}, taskListRefetch = () =>
 			task={task}
 			onCancel={onCancel}
 			taskListRefetch={taskListRefetch}
+			selectedMail={selectedMail}
+			setSelectedMail={setSelectedMail}
 		/>
 	);
 }

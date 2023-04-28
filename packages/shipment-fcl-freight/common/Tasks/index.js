@@ -13,6 +13,7 @@ function List() {
 		count, completedTaskCount, tasksList, loading, taskListRefetch,
 		hideCompletedTasks, setHideCompletedTasks, handleClick, selectedTaskId,
 		setSelectedTaskId, shipment_data, showMyTasks, setShowMyTasks,
+		selectedMail, setSelectedMail,
 	} = useListTasksHelper();
 
 	if (loading) {
@@ -76,6 +77,8 @@ function List() {
 									onCancel={() => setSelectedTaskId(null)}
 									shipment_data={shipment_data}
 									taskListRefetch={taskListRefetch}
+									selectedMail={selectedMail}
+									setSelectedMail={setSelectedMail}
 								/>
 							</>
 						) : null }

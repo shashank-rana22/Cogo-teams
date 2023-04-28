@@ -136,7 +136,7 @@ function RPASearch({
 
 			<div className={styles.search_results}>
 				Search Results
-				{' '}
+				&nbsp;
 				<span style={{ fontSize: 12 }}>
 					(mails from operations@cogoport.com and zoho)
 				</span>

@@ -11,7 +11,14 @@ const rpaSupportedTasks = [
 	'upload_si',
 ];
 
-function UpdateButton({ task = {}, handleClick = () => {}, hideButton = false, shipment_type, show = false }) {
+function UpdateButton({
+	task = {},
+	handleClick = () => {},
+	handleChange = () => {},
+	hideButton = false,
+	shipment_type,
+	show = false,
+}) {
 	if (hideButton) {
 		return (
 			<div />
@@ -40,16 +47,18 @@ function UpdateButton({ task = {}, handleClick = () => {}, hideButton = false, s
 		&& (task.task !== 'upload_si' || shipment_type === 'fcl_freight')
 	) {
 		return (
-			<RPASearch
-				onManualUpload={() => handleClick(task)}
-				multiple
-				entity_type={task?.task}
-				// onUpload={handleChange}
-			>
-				<Button className={styles.upload_button}>
-					{!show ? buttonText : 'Close'}
-				</Button>
-			</RPASearch>
+			<div className={styles.container}>
+				<RPASearch
+					onManualUpload={() => handleClick(task)}
+					multiple
+					entity_type={task?.task}
+					onUpload={handleChange}
+				>
+					<Button className={styles.upload_button}>
+						{!show ? buttonText : 'Close'}
+					</Button>
+				</RPASearch>
+			</div>
 		);
 	}
 

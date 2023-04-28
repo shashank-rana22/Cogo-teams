@@ -10,6 +10,10 @@ function Card({
 	isTaskOpen = false,
 	shipment_data = {},
 }) {
+	const handleChange = (newMails) => {
+		handleClick(task, newMails);
+	};
+
 	return (
 		<div className={styles.container}>
 
@@ -22,6 +26,7 @@ function Card({
 					<UpdateButton
 						task={task}
 						handleClick={handleClick}
+						handleChange={handleChange}
 						hideButton={task.status === 'completed' || selectedTaskId.length}
 						shipment_type={shipment_data?.shipment_type}
 					/>
