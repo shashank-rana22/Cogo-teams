@@ -300,7 +300,7 @@ function asyncListHsCodes() {
 function asyncListCurrency() {
 	return {
 		labelKey    : 'iso_code',
-		valueKey    : 'id',
+		valueKey    : 'iso_code',
 		endpoint    : 'list_exchange_rate_currencies',
 		initialCall : true,
 		params      : {
