@@ -1,4 +1,4 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, Toast } from '@cogoport/components';
 import { IcCError } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
@@ -20,6 +20,8 @@ function SavePayRunModal({
 			'/business-finance/account-payables/[active_tab]',
 			'/business-finance/account-payables/advance-payment',
 		);
+		setSavePayrunModal(false);
+		Toast.success('Please wait while PayRun Saves...');
 	};
 
 	return (

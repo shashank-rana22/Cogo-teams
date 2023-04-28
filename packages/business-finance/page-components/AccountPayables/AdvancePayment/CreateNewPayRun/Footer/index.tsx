@@ -14,6 +14,9 @@ function Footer({
 	getAdvancedPayment,
 	viewSelectedData,
 	selectedPayRunId,
+	selectedDataLoading,
+	loading,
+	viewSelectedDataLoading,
 }) {
 	const {
 		list = [],
@@ -69,20 +72,22 @@ function Footer({
 									<Button
 										themeType="secondary"
 										onClick={submitSelectedInvoices}
-										disabled={showAddToSelected}
+										disabled={showAddToSelected || selectedDataLoading || loading}
 									>
 										+ Add to selected
 									</Button>
 
 								</div>
 								<div className={styles.view_button}>
-									<Button onClick={() => {
-										setViewSelectedInvoice(true);
-										getViewSelectedInvoices();
-										if (selectedPayRunId) {
-											getAdvancedPayment();
-										}
-									}}
+									<Button
+										disabled={viewSelectedDataLoading}
+										onClick={() => {
+											setViewSelectedInvoice(true);
+											getViewSelectedInvoices();
+											if (selectedPayRunId) {
+												getAdvancedPayment();
+											}
+										}}
 									>
 										View Selected SID
 

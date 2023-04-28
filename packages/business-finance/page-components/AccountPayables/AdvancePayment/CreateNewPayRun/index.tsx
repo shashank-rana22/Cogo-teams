@@ -39,6 +39,7 @@ function CreateNewPayRun() {
 		selectedPayRunId,
 		deleteSelecteInvoiceLoading,
 		deleteInvoices,
+		selectedDataLoading,
 	} = useGetAdvancePaymentList({ sort, viewSelectedInvoice });
 	const {
 		data:existpayRunData, loading:existingPayRunLoading,
@@ -215,6 +216,9 @@ function CreateNewPayRun() {
 					getAdvancedPayment={getAdvancedPayment}
 					viewSelectedData={viewSelectedData}
 					selectedPayRunId={selectedPayRunId}
+					selectedDataLoading={selectedDataLoading}
+					loading={loading}
+					viewSelectedDataLoading={viewSelectedDataLoading}
 				/>
 			</div>
 
