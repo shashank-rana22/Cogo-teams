@@ -104,6 +104,7 @@ function TopicList({
 				showNotificationContent,
 				setShowNotificationContent,
 				setShowHistory,
+				setInput,
 			},
 		},
 		{

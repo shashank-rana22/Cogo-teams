@@ -47,11 +47,13 @@ function useListFaqQuestions({
 						persona           : scope === 'partner' ? 'admin_user' : 'importer_exporter',
 
 					},
-					sort_by                : sort,
+					sort_by                    : sort,
 					page,
-					page_limit             : limit || undefined,
-					faq_tags_data_required : !query_name,
-					answers_data_required  : !query_name,
+					page_limit                 : limit || undefined,
+					faq_tags_data_required     : !query_name,
+					answers_data_required      : !query_name,
+					related_questions_required : !!query_name,
+
 				},
 			});
 		} catch (error) {
