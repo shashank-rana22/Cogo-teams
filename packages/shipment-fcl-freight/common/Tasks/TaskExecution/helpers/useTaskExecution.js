@@ -1,5 +1,5 @@
 import { ShipmentDetailContext } from '@cogoport/context';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 
 import injectUiConfigs from '../utils/inject-ui-configs';
 
@@ -35,6 +35,10 @@ function useTaskExecution({ task = {}, taskConfigData = {} }) {
 	});
 
 	const [currentStep, setCurrentStep] = useState(initialStep);
+
+	useEffect(() => {
+		setCurrentStep(initialStep);
+	}, [initialStep]);
 
 	return {
 		steps: dataConfig.steps || [],
