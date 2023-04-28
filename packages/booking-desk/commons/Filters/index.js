@@ -11,7 +11,6 @@ export default function Filters({ stateProps }) {
 
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.open_filters}>
 				<Input
 					placeholder="Search SID"
@@ -43,8 +42,7 @@ export default function Filters({ stateProps }) {
 						>
 							<div className={styles.button_content}>
 								<IcMFilter />
-								{' '}
-							&ensp;Filters
+								&ensp; Filters
 							</div>
 						</Button>
 					</Popover>

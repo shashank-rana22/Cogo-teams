@@ -2,18 +2,24 @@ import { TabPanel, Tabs as TabContainer, Toggle } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-export default function Tabs({ stateProps, tabs }) {
+export default function Tabs({ stateProps = {}, tabs = [] }) {
 	const { activeTab, setActiveTab, filters, setFilters } = stateProps;
 	const { isCriticalOn, ...rest } = filters;
 
-	const couldBeCardsCritical = !!tabs.find((tab) => tab.name === stateProps.activeTab)?.isCriticalVisible;
+	const couldBeCardsCritical = !!tabs.find(
+		(tab) => tab.name === stateProps.activeTab,
+	)?.isCriticalVisible;
 
 	const handleActiveTabChange = (val) => {
-		const is_critical_visible = !!tabs
-			.find((tab) => tab.name === val).isCriticalVisible;
+		const is_critical_visible = !!tabs.find((tab) => tab.name === val)
+			.isCriticalVisible;
 
 		setActiveTab(val);
-		setFilters({ ...rest, ...(is_critical_visible && { isCriticalOn }), page: 1 });
+		setFilters({
+			...rest,
+			...(is_critical_visible && { isCriticalOn }),
+			page: 1,
+		});
 	};
 
 	return (
@@ -23,7 +29,9 @@ export default function Tabs({ stateProps, tabs }) {
 				activeTab={activeTab}
 				onChange={handleActiveTabChange}
 			>
-				{tabs.map((tab) => <TabPanel key={tab.name} {...tab} />)}
+				{tabs.map((tab) => (
+					<TabPanel key={tab.name} {...tab} />
+				))}
 			</TabContainer>
 
 			{couldBeCardsCritical ? (
@@ -32,11 +40,12 @@ export default function Tabs({ stateProps, tabs }) {
 						size="md"
 						offLabel="Critical SIDs"
 						checked={filters.isCriticalOn}
-						onChange={() => { setFilters({ ...filters, isCriticalOn: !filters.isCriticalOn }); }}
+						onChange={() => {
+							setFilters({ ...filters, isCriticalOn: !filters.isCriticalOn });
+						}}
 					/>
 				</div>
 			) : null}
-
 		</div>
 	);
 }

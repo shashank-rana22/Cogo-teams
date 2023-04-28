@@ -3,7 +3,7 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function RenderAppliedFilters({ appliedFilters, setFilters }) {
+function RenderAppliedFilters({ appliedFilters = [], setFilters = () => {} }) {
 	const handleClearOneFilter = (filterKey) => {
 		setFilters((prevFilters) => {
 			const { [filterKey]: filterToRemove, ...restFilters } = prevFilters;
@@ -12,7 +12,7 @@ function RenderAppliedFilters({ appliedFilters, setFilters }) {
 	};
 
 	return appliedFilters.map(([key, val]) => {
-		if (key === 'shipment_type' || key === 'isCriticalOn') return null;
+		if (['shipment_type', 'isCriticalOn'].includes(key)) return null;
 
 		return (
 			<div className={styles.applied_filters}>
@@ -26,7 +26,6 @@ function RenderAppliedFilters({ appliedFilters, setFilters }) {
 				<button onClick={() => handleClearOneFilter(key)} className={styles.clear_filter_icon}>
 					<IcMCross />
 				</button>
-
 			</div>
 		);
 	});
