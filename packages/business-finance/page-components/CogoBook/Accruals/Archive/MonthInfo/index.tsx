@@ -27,13 +27,13 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 	const {
 		periodName,
 		expenseCurrency,
-		expenseBooked,
+		expenseBooked=0,
 		expenseAccrued,
 		incomeCurrency,
-		incomeBooked,
+		incomeBooked=0,
 		incomeAccrued,
-		actualExpense,
-		actualIncome,
+		actualExpense=0,
+		actualIncome=0,
 		isLocked,
 	} = data || {};
 
@@ -44,7 +44,7 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 				<div>
 					Amount :
 					{' '}
-					<span className={styles.amount}>{expenseBooked - actualExpense}</span>
+					<span className={styles.amount}>{(expenseBooked - actualExpense).toLocaleString('hi',{maximumFractionDigits:2})}</span>
 				</div>
 			</div>
 			<div>
@@ -52,7 +52,7 @@ function MonthInfo({ data, handleClick, loading }:MonthInterface) {
 				<div>
 					Amount :
 					{' '}
-					<span className={styles.amount}>{incomeBooked - actualIncome}</span>
+					<span className={styles.amount}>{(incomeBooked - actualIncome).toLocaleString('hi',{maximumFractionDigits:2})}</span>
 				</div>
 			</div>
 		</div>

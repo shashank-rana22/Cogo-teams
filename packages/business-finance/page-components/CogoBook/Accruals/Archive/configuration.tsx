@@ -86,8 +86,12 @@ export const ARCHIVE_MONTH_BOOKED = [
 		id       : 'variance',
 		Cell     : ({ row: { original } }) => {
 			const {
-				expenseBooked, actualExpense, incomeBooked, actualIncome,
-				expenseAccrued, incomeAccrued,
+				expenseBooked=0, 
+				actualExpense=0, 
+				incomeBooked=0, 
+				actualIncome=0,
+				expenseAccrued=0, 
+				incomeAccrued=0,
 			} = original || {};
 
 			const renderContent = () => (
@@ -99,7 +103,7 @@ export const ARCHIVE_MONTH_BOOKED = [
 							{' '}
 							<span className={styles.amount}>
 								{(actualExpense
-								- (expenseBooked + expenseAccrued))?.toFixed(2)}
+								- (expenseBooked + expenseAccrued))?.toLocaleString('hi',{maximumFractionDigits:2})}
 
 							</span>
 						</div>
@@ -111,7 +115,7 @@ export const ARCHIVE_MONTH_BOOKED = [
 							{' '}
 							<span className={styles.amount}>
 								{(actualIncome - (
-									incomeBooked + incomeAccrued))?.toFixed(2)}
+									incomeBooked + incomeAccrued))?.toLocaleString('hi',{maximumFractionDigits:2})}
 
 							</span>
 						</div>
