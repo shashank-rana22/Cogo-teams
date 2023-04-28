@@ -15,7 +15,7 @@ function useOutgoingStatusCall({ callId }) {
 
 	const dispatch = useDispatch();
 	const profileData = useSelector(({ profile }) => profile);
-	const [status, setStatus] = useState(null);
+	const [status, setStatus] = useState('');
 
 	const callStatusApi = async () => {
 		try {
