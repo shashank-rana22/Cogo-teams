@@ -9,6 +9,7 @@ import contracts from './config/contracts';
 import enrichment from './config/enrichment';
 import groundOps from './config/ground-ops';
 import inventory_management from './config/inventory_management';
+import kamDesk from './config/kam-desk';
 import kamMonitoring from './config/kam-monitoring';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
@@ -41,6 +42,7 @@ const routeConfig = {
 	...bookingDesk,
 	...welcome,
 	...athenaDashboard,
+	...kamDesk,
 };
 
 export default routeConfig;
