@@ -17,6 +17,10 @@ function useTaskExecution({ task = {}, taskConfigData = {} }) {
 		}
 	}
 
+	if (primaryService?.nomination_type === 'agent' && primaryService?.bl_category === 'mbl') {
+		(dataConfig.steps || []).shift();
+	}
+
 	const serviceIdMapping = {};
 
 	const idCheck = {};
