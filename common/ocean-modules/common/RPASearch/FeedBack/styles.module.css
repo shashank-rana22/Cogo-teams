@@ -1,19 +1,16 @@
 .container{
-	padding: 22px;
-	min-width: 900px;
-	max-width: 900px;
+    padding: 8px 0;
+	min-width: 860px;
+	max-width: 860px;
 	min-height: 432px;
 }
 
 .heading {
-    font-style: normal;
-	font-weight: 500;
+	font-weight: 600;
 	font-size: 18px;
-	line-height: 15px;
-	letter-spacing: 0.04em;
 	text-transform: uppercase;
-	color: #393f70;
-	margin-bottom: 32px;
+	color: #000;
+    margin-left: 12px;
 }
 
 .styled_button {
@@ -30,15 +27,12 @@
 .styled_checkbox {
     display: flex;
 	justify-content: start;
+    align-items: center;
 }
 
 .text_feedback {
-    font-weight: 500;
-	font-size: 14px;
-	line-height: 16px;
-	margin-left: 12px;
-	letter-spacing: 0.04em;
-	color: #393f70;
+	letter-spacing: 0.02em;
+	color: #000;
 }
 
 .styled_back_button {

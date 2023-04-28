@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 // import Question from '../../assets/question.svg';
 // import formatters from '../../helpers';
 // import useGetMails from '../../hooks/useGetMails';
-// import FeedBack from '../FeedBack';
+import FeedBack from '../FeedBack';
 import HowItWorks from '../HowItWorks';
 
 // import Filters from './Filters';
@@ -173,7 +173,7 @@ function RPASearch({
 	);
 
 	if (task === 'feed_back') {
-		// content = <FeedBack setTask={setTask} />;
+		content = <FeedBack setTask={setTask} />;
 	} else if (task === 'how_it_works') {
 		content = <HowItWorks setTask={setTask} />;
 	}
