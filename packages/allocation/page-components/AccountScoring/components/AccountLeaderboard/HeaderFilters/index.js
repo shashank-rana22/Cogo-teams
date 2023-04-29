@@ -4,7 +4,7 @@ import controls from '../../../configurations/get-leaderboard-filters-controls';
 import styles from './styles.module.css';
 
 function HeaderFilters(props) {
-	const { control, errors } = props;
+	const { control } = props;
 
 	return (
 		<div className={styles.form_container}>
@@ -23,9 +23,6 @@ function HeaderFilters(props) {
 							/>
 						</div>
 
-						<div className={styles.error_message}>
-							{errors?.[filterItem.name]?.message}
-						</div>
 					</div>
 				);
 			})}

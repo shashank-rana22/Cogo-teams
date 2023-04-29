@@ -1,4 +1,5 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
+import { Tooltip } from '@cogoport/components';
 import { IcMUp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -104,11 +105,31 @@ const leaderboardColumns = [
 	},
 	{
 		Header   : 'ALLOCATED KAM',
-		accessor : ({ stakeholder_name }) => (
-			<div>
-				{stakeholder_name || '-'}
-			</div>
-		),
+		accessor : ({ stakeholder_name = [] }) => {
+			const totalStakeholders = stakeholder_name.length;
+			if (totalStakeholders === 0) {
+				return '-';
+			}
+
+			const renderToolTip = stakeholder_name.map((stakeholder) => `${startCase(stakeholder)}, `);
+
+			return (
+				<Tooltip content={renderToolTip} placement="bottom">
+					<div>
+						{stakeholder_name[0] || '-'}
+					</div>
+					{totalStakeholders > 1 && (
+						<strong>
+							(+
+							{' '}
+							{totalStakeholders - 1}
+							)
+						</strong>
+					)}
+				</Tooltip>
+			);
+		},
+
 	},
 
 ];

@@ -9,9 +9,7 @@ import DistributionSetting from './DistributionSetting';
 import PercentileSetting from './PercentileSetting';
 import styles from './styles.module.css';
 
-function Settings(props) {
-	const { setToggleComponent = () => {} } = props;
-
+function Settings({ setToggleComponent = () => {} }) {
 	const formProps = useForm();
 	const { control, handleSubmit, formState: { errors }, watch } = formProps;
 

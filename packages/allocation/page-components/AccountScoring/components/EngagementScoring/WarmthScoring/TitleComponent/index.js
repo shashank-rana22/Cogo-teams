@@ -33,45 +33,9 @@ function TitleComponent({
 									<IcMDelete style={{ marginRight: '8px' }} />
 									Delete
 								</Button>
-
-								{/* <Button
-									size="md"
-									themeType="secondary"
-									style={{ marginLeft: '16px' }}
-									onClick={(e) => {
-										e.stopPropagation();
-										setEditMode('');
-									}}
-								>
-									Cancel
-
-								</Button>
-
-								<Button
-									size="md"
-									themeType="primary"
-									style={{ marginLeft: '16px', marginRight: '28px' }}
-									onClick={handleSubmit(handleSave)}
-								>
-									Save
-								</Button> */}
-
 							</div>
 						) : (
 							null
-							// <Button
-							// 	size="md"
-							// 	themeType="secondary"
-							// 	onClick={(e) => {
-							// 		e.stopPropagation();
-							// 		setEditMode(engagement_type);
-							// 	}}
-							// 	style={{ marginLeft: '16px', marginRight: '28px' }}
-							// >
-							// 	<IcMEdit style={{ marginRight: '8px' }} />
-
-						// 	Edit
-						// </Button>
 						)}
 					</div>
 				) : null }

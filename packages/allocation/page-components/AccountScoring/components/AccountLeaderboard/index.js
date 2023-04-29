@@ -11,7 +11,11 @@ import ScoreDistributionGraph from './ScoreDistributionGraph/index';
 import styles from './styles.module.css';
 
 function AccountLeaderboard() {
-	const { control, formState: { errors }, watch } = useForm();
+	const { control, watch } = useForm({
+		defaultValues: {
+			date: new Date(),
+		},
+	});
 
 	const {
 		graphData = [], graphLoading = false,
@@ -23,9 +27,7 @@ function AccountLeaderboard() {
 		setLeaderboardParams = () => {},
 	} = useGetEngagementScoringLeaderboard();
 
-	const { organization, kam, date, segment } = watch();
-
-	// Todo :  kam, segment filters need to be added as soon as the filter key is provided by the backend
+	const { organization, user_id, date } = watch();
 
 	useEffect(() => {
 		setGraphParams((pv) => ({
@@ -33,6 +35,7 @@ function AccountLeaderboard() {
 			filters: {
 				created_at : date || undefined,
 				service_id : organization || undefined,
+				user_id    : user_id || undefined,
 			},
 		}));
 
@@ -41,16 +44,17 @@ function AccountLeaderboard() {
 			filters: {
 				created_at : date || undefined,
 				service_id : organization || undefined,
+				user_id    : user_id || undefined,
+
 			},
 		}));
-	}, [organization, kam, date, segment, setGraphParams, setLeaderboardParams]);
+	}, [organization, user_id, date, setGraphParams, setLeaderboardParams]);
 
 	return (
 		<section className={styles.container}>
 			<div className={styles.header_text}>Account Score Distribution</div>
 			<HeaderFilters
 				control={control}
-				errors={errors}
 			/>
 
 			<ScoreDistributionGraph

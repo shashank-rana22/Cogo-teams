@@ -2,12 +2,7 @@ import { useAllocationRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 function useGetEngagementScoringLeaderboard() {
-	const [params, setParams] = useState({
-		filters: {
-			created_at : undefined,
-			service_id : undefined,
-		},
-	});
+	const [params, setParams] = useState({});
 
 	const [{ loading, data }] = useAllocationRequest({
 		url     : 'engagement_scoring_leaderboard',

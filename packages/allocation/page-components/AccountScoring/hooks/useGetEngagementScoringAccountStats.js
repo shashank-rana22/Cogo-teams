@@ -3,13 +3,10 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
 function useGetEngagementScoringAccountStats() {
-	const params = {};
-
 	const [{ loading, data }, trigger] = useAllocationRequest({
 		url     : 'engagement_scoring_account_stats',
 		method  : 'GET',
 		authkey : 'get_allocation_engagement_scoring_account_stats',
-		params,
 	}, { manual: true });
 
 	const onUpdateStats = async (limits) => {
