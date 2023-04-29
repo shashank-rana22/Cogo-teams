@@ -37,7 +37,6 @@ function Settings({ setToggleComponent = () => {} }) {
 					className={styles.back_text}
 				>
 					Account Scoring
-
 				</div>
 			</div>
 

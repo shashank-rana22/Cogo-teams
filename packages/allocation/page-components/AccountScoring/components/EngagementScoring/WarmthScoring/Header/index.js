@@ -11,6 +11,7 @@ function Header(props) {
 	return (
 		<div className={styles.header_container}>
 			<div className={styles.heading}>Warmth Score Configuration</div>
+
 			<div className={styles.sub_container}>
 
 				<SearchInput
