@@ -65,11 +65,9 @@ function AddRate({
 	} = useForm();
 
 	useEffect(() => {
-		setValue('currency', item?.currency);
-		setValue('quantity', item?.quantity);
-		setValue('unit', item?.unit);
-		setValue('price', item?.price);
-		setValue('alias', item?.alias);
+		['currency', 'quantity', 'unit', 'price', 'alias', 'buy_price'].forEach((key) => {
+			setValue(key, item?.[key]);
+		});
 	}, [item, setValue]);
 
 	const afterAddRate = () => {
@@ -79,14 +77,6 @@ function AddRate({
 		onCancel();
 		refetch();
 	};
-
-	useEffect(() => {
-		setValue('price', item?.price);
-		setValue('buy_price', item?.buy_price);
-		setValue('quantity', item?.quantity);
-		setValue('unit', item?.unit);
-		setValue('currency', item?.currency);
-	}, [setValue, item]);
 
 	const {
 		loading, apiTrigger: apiTriggerCreate,
