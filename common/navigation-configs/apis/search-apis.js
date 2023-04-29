@@ -426,27 +426,6 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'user',
 	},
-	{
-		api          : 'get_spot_search_cargo_insurance_rate',
-		access_type  : 'private',
-		service_name : 'spot_search',
-	},
-	{
-		api          : 'get_checkout_cargo_insurance_rate',
-		access_type  : 'private',
-		service_name : 'checkout',
-	},
-	{
-		api         : 'saas_insurance_list_commodities',
-		access_type : 'private',
-		model       : 'insurance',
-		feature     : 'insurance',
-	},
-	{
-		api         : 'saas_insurance_list_countries',
-		access_type : 'private',
-		model       : 'insurance',
-		feature     : 'insurance',
-	},
+
 ];
 export default apis;

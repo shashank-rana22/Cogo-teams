@@ -279,7 +279,6 @@ const navigationMappingAdmin = {
 			...apis.contract_rates,
 			...apis.feedback,
 			...apis.checkout_promotions,
-			...apis.cargo_insurance,
 		],
 		main_apis: [
 			'list_organizations',
@@ -1126,7 +1125,6 @@ const navigationMappingAdmin = {
 					...apis.shipment,
 					...apis.search,
 					...apis.feedback,
-					...apis.cargo_insurance,
 				],
 			},
 			{
@@ -1347,7 +1345,6 @@ const navigationMappingAdmin = {
 					...apis.kam_desk,
 					...apis.search,
 					...apis.cogolens,
-					...apis.cargo_insurance,
 				],
 			},
 			{
