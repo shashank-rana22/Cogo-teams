@@ -15,7 +15,7 @@ function FeedBackContent({
 	source = '',
 	fetchListFaqFeedback = () => {},
 	fetchQuestion,
-	faqAudiences,
+
 }) {
 	const general = useSelector((state) => state.general || {});
 	const { feedbackId: id = '' } = general.query || {};
@@ -42,7 +42,6 @@ function FeedBackContent({
 		fetchListFaqFeedback,
 		feedbackId,
 		fetchQuestion,
-		faqAudiences,
 	});
 
 	const { name = '', picture = '' } = author?.[0] || {};

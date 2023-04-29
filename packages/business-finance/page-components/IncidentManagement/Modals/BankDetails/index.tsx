@@ -28,6 +28,7 @@ function BankDetails({
 		branchName,
 		documentUrls,
 		ifscCode,
+		swiftCode,
 		isAccountNumberValid,
 		isBankNameValid,
 		isBranchNameValid,
@@ -162,11 +163,14 @@ function BankDetails({
 								</div>
 							</div>
 
-							<div className={styles.simple_name}>IFSC Code</div>
+							<div className={styles.simple_name}>
+								{ifscCode
+									? 'IFSC Code' : 'Swift Code'}
+							</div>
 
 							<div className={styles.flex}>
 								<div className={styles.font_name}>
-									{ifscCode || '-'}
+									{ifscCode ? ifscCode || '-' : swiftCode || ''}
 								</div>
 								<div>
 									<RadioGroup
