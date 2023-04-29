@@ -52,9 +52,6 @@ function Content(props) {
 						selectedRow={selectedRow}
 						parentComponentId={parentComponentId}
 						dropSource={dropSource}
-						pageConfiguration={pageConfiguration}
-						setPageConfiguration={setPageConfiguration}
-						selectedItem={selectedItem}
 					/>
 				</TabPanel>
 			</Tabs>

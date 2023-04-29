@@ -4,7 +4,7 @@ import { v1 as uuid } from 'uuid';
 
 import styles from './styles.module.css';
 
-function Item({ onNewItemAdding, row, handleClick, parentComponent, childrenComponents }) {
+function StructureItem({ onNewItemAdding, row, handleClick, parentComponent, childrenComponents }) {
 	const [{ isDragging }, dragRef] = useDrag({
 		type : 'container',
 		item : {
@@ -13,7 +13,6 @@ function Item({ onNewItemAdding, row, handleClick, parentComponent, childrenComp
 				...parentComponent.component,
 				children: childrenComponents,
 			},
-			// isNested: true,
 		},
 		collect: (monitor) => ({
 			isDragging: monitor.isDragging(),
@@ -43,4 +42,4 @@ function Item({ onNewItemAdding, row, handleClick, parentComponent, childrenComp
 	);
 }
 
-export default Item;
+export default StructureItem;

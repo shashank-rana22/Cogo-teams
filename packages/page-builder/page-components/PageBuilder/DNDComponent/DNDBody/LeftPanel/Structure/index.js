@@ -3,7 +3,7 @@ import { IcMPlusInCircle } from '@cogoport/icons-react';
 import React, { useMemo } from 'react';
 import { v1 as uuid } from 'uuid';
 
-import Item from './Item';
+import StructureItem from './StructureItem';
 import styles from './styles.module.css';
 
 const widths = [['100%'],
@@ -75,9 +75,9 @@ function Structure(props) {
 		return childrenComponents;
 	};
 
-	const LeftPanelItems = useMemo(
+	const StructurePanelItems = useMemo(
 		() => (widths || []).map((row) => (
-			<Item
+			<StructureItem
 				row={row}
 				handleClick={() => addNewItem({
 					...parentComponent,
@@ -85,7 +85,6 @@ function Structure(props) {
 						...parentComponent.component,
 						children: getChildrenComponents(row),
 					},
-					// isNested: true,
 				}, selectedRow?.index, true, parentComponent.id, null)}
 				onNewItemAdding={onNewItemAdding}
 				parentComponent={parentComponent}
@@ -98,7 +97,7 @@ function Structure(props) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.grid_container}>
-				{LeftPanelItems}
+				{StructurePanelItems}
 			</div>
 		</div>
 

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import PREMADE_MAPPING from '../../../../../../../configurations/premade-mapping';
 
-import Item from './Item';
+import PremadeItem from './PremadeItem';
 import styles from './styles.module.css';
 
 function Premade(props) {
@@ -12,14 +12,11 @@ function Premade(props) {
 		selectedRow,
 		parentComponentId,
 		dropSource,
-		// pageConfiguration,
-		// setPageConfiguration,
-		// selectedItem,
 	} = props;
 
-	const LeftPanelItems = useMemo(
+	const PremadePanel = useMemo(
 		() => (PREMADE_MAPPING || []).map((item) => (
-			<Item
+			<PremadeItem
 				itemType={item.type}
 				content={item}
 				onClick={() => addNewItem(item, selectedRow?.index, true, parentComponentId, dropSource)}
@@ -32,7 +29,7 @@ function Premade(props) {
 
 	return 	(
 		<div className={styles.container}>
-			{LeftPanelItems}
+			{PremadePanel}
 		</div>
 	);
 }

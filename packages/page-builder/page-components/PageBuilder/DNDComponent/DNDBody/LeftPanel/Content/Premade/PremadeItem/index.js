@@ -4,7 +4,7 @@ import { useDrag } from 'react-dnd';
 
 import styles from './styles.module.css';
 
-function Item({ itemType, onClick, onNewItemAdding, content }) {
+function PremadeItem({ itemType, onClick, onNewItemAdding, content }) {
 	const [{ isDragging }, dragRef] = useDrag({
 		type    : itemType,
 		item    : content,
@@ -34,4 +34,4 @@ function Item({ itemType, onClick, onNewItemAdding, content }) {
 	);
 }
 
-export default Item;
+export default PremadeItem;

@@ -6,6 +6,8 @@ import AceEditor from 'react-ace';
 import 'ace-builds/src-noconflict/mode-html';
 import 'ace-builds/src-noconflict/theme-github';
 import 'ace-builds/src-noconflict/ext-language_tools';
+import useUpdateHtmlContent from '../../../../../../../../helpers/useUpdateHtmlContent';
+
 import styles from './styles.module.css';
 
 function HtmlEditor(props) {
@@ -16,49 +18,25 @@ function HtmlEditor(props) {
 		selectedItem,
 		selectedColumn,
 		selectedNestedColumn,
-		// columnData,
-		// nestedColumData,
 	} = props;
 
 	const [htmlValue, setHtmlValue] = useState('');
 
 	const { content } = selectedItem || {};
 
+	const { handleEditorChange } = useUpdateHtmlContent({
+		selectedColumn,
+		selectedRow,
+		selectedItem,
+		pageConfiguration,
+		selectedNestedColumn,
+		setHtmlValue,
+		setPageConfiguration,
+	});
+
 	useEffect(() => {
 		setHtmlValue(content);
 	}, [content]);
-
-	const handleEditorChange = (value) => {
-		const { id: selectedRowId } = selectedRow || {};
-
-		// const { id : columnId } = columnData || {};
-
-		// const { id : nestedColumnId } = nestedColumData || {};
-
-		const { id: selectedColumnId } = selectedColumn || {};
-
-		const { id: selectedChildId } = selectedItem || {};
-
-		const { id: selectedNestedColumnId } = selectedItem || {};
-
-		const data = pageConfiguration;
-
-		const selectedComponentIndex = (data.layouts || []).findIndex((item) => (item.id === selectedRowId));
-
-		if (selectedItem) {
-			if (Object.keys(selectedNestedColumn).length > 0) {
-				data.layouts[selectedComponentIndex].component.children[selectedColumnId].component.children[selectedNestedColumnId].component.content = value;
-			} else if (Object.keys(selectedColumn).length > 0) {
-				data.layouts[selectedComponentIndex].component.children[selectedChildId].component.content = value;
-			} else if (Object.keys(selectedColumn).length === 0 && Object.keys(selectedNestedColumn).length === 0) {
-				data.layouts[selectedComponentIndex].component.content = value;
-			}
-		}
-
-		setHtmlValue(value);
-
-		setPageConfiguration((prev) => ({ ...prev, layouts: data.layouts }));
-	};
 
 	return (
 		<div>
@@ -70,6 +48,7 @@ function HtmlEditor(props) {
 					Back
 				</Button>
 			</div>
+
 			<AceEditor
 				value={htmlValue}
 				mode="html"
