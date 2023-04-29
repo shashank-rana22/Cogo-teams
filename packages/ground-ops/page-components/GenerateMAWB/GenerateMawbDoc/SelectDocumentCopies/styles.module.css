@@ -1,0 +1,27 @@
+.select_copies_container {
+	:global(.ui_checkbox_group_container) {
+		flex-direction: column;
+		width: 100%;
+		padding-top: 0;
+	}
+
+	:global(.ui_checkbox_container) {
+		padding: 4px;
+		font-size: 10px;
+		line-height: 18px;
+		color: #333;
+	}
+
+	:global(.ui_checkbox_container:nth-child(even)) {
+		background: #fffaee;
+		border: 1px solid #ffead4;
+	}
+}
+
+.select_checkbox {
+	margin: 8px 8px 0;
+	font-weight: 600;
+	color: #f68b21 !important;
+	background: #fffaee;
+	border: 1px solid #ffead5;
+}

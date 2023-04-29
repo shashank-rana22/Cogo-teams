@@ -111,9 +111,9 @@ const apis = [
 		service_name : 'spot_search',
 	},
 	{
-		api          : 'update_organization_search_history',
+		api          : 'create_planet_search_history',
 		access_type  : 'private',
-		service_name : 'organization',
+		service_name : 'location',
 	},
 	{
 		api          : 'get_organization_search_history',

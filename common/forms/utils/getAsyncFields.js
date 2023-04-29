@@ -293,6 +293,18 @@ function asyncListCogoEntity() {
 		},
 	};
 }
+function asyncFieldsTicketTypes() {
+	return {
+		labelKey     : 'TicketType',
+		valueKey     : 'TicketType',
+		endpoint     : 'default_types',
+		authkey      : 'get_tickets_default_types',
+		microService : 'tickets',
+		initialCall  : true,
+		qFilterKey   : 'QFilter',
+		listKey      : 'items',
+	};
+}
 
 export {
 	asyncFieldsLocations,
@@ -318,4 +330,5 @@ export {
 	asyncKamExpertiseGroupOptions,
 	listVendors,
 	asyncListCogoEntity,
+	asyncFieldsTicketTypes,
 };
