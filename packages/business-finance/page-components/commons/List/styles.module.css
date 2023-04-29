@@ -1,0 +1,95 @@
+.header {
+	display: flex;
+	align-items: center;
+	height: 40px;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 500;
+	color: #fff;
+	background-color: #393f70;
+}
+
+.paginations {
+	display: flex;
+	justify-content: flex-end;
+	padding: 16px;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	min-height: 40px;
+	padding-left: 10px;
+	background-color: #fff;
+	border-top: 1px solid #e0e0e0;
+}
+
+@media screen and (max-width: 768px) {
+	.row.is_mobile {
+		flex-flow: row wrap;
+	}
+
+	.col.is_mobile {
+		flex: 0 0 50%;
+		flex-direction: column;
+	}
+}
+
+.clickable:hover {
+	cursor: pointer;
+	opacity: 0.8;
+}
+
+.col {
+	display: flex;
+	flex: var(--span);
+	padding: 10px;
+}
+
+.asc {
+	color: #f68b21;
+
+	/* transform: rotate(180deg); */
+
+	/* transition: transform 0.3s ease-in-out; */
+	cursor: pointer;
+}
+
+.desc {
+	color: #f68b21;
+
+	/* transform: rotate(0deg); */
+
+	/* transition: transform 0.3s ease-in-out; */
+	cursor: pointer;
+}
+
+.center {
+	align-items: center;
+	width: 0;
+	margin-left: 8px;
+}
+
+.centers {
+	align-items: center;
+	margin-top: 10px;
+	margin-bottom: -10px;
+}
+
+.tablelabel {
+	display: flex;
+	font-size: 12px;
+	font-weight: 600;
+	color: #303b67;
+}
+
+.flex {
+	display: flex;
+}
+
+.pagination_container {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	margin-top: 10px;
+}

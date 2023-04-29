@@ -1,0 +1,42 @@
+.main {
+	display: flex;
+	justify-content: space-between;
+}
+
+.segment {
+	display: flex;
+}
+
+.filter_data {
+	margin-top: 20px;
+	margin-right: 10px;
+}
+
+.filter_data_urgent {
+	margin-top: 20px;
+}
+
+.search {
+	:global {
+		width: 336px;
+		margin-right: 20px;
+
+		.ui_input_container {
+			height: 38px;
+		}
+	}
+
+	::placeholder {
+		font-size: 11px;
+		color: #cacaca;
+	}
+}
+
+.search_filter {
+	display: flex;
+	margin-top: 20px;
+}
+
+.urgency {
+	margin-top: 12px;
+}

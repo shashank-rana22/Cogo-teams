@@ -1,0 +1,65 @@
+.tabs_container {
+	button {
+		border-right: 1px solid #e0e0e0;
+	}
+}
+
+.spacebetween {
+	display: flex;
+	justify-content: space-between;
+
+	@media (max-width: 1120px) {
+		flex-direction: column;
+	}
+}
+
+.flex {
+	display: flex;
+	justify-content: space-between;
+}
+
+.heading {
+	width: max-content;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 27px;
+	color: #333;
+	border-bottom: 2px solid black;
+}
+
+.stat {
+	font-size: 36px;
+	font-weight: 500;
+	line-height: 54px;
+	color: #ed3726;
+}
+
+.month {
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 24px;
+	color: #333;
+}
+
+.totalstats {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 80px 80px 0 60px;
+}
+
+.tab_style {
+	font-size: 16px;
+	font-weight: 500;
+	background: white;
+}
+
+.header_style {
+	flex-direction: column;
+	font-size: 28px;
+	font-weight: 600;
+}
+
+.header {
+	padding-bottom: 16px;
+}

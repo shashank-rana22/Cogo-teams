@@ -1,0 +1,245 @@
+.main_container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+	background: #f9f5ec;
+}
+
+.date_range_container {
+	width: fit-content;
+	padding: 5px 16px 2px;
+
+	input {
+		height: 38px !important;
+		border: solid 1px #e0e0e0 !important;
+	}
+}
+
+.top_content {
+	display: flex;
+	justify-content: flex-end;
+	background: #f9f5ec;
+
+	:global {
+		.ui_select_display_container {
+			height: 37px !important;
+			border-radius: 6px;
+		}
+
+		.ui_select_options_container {
+			z-index: 1000;
+		}
+
+		/* stylelint-disable-next-line selector-class-pattern */
+		.react-datepicker-popper {
+			z-index: 1000;
+		}
+
+		/* stylelint-disable-next-line selector-class-pattern */
+		.react-datepicker__input-container {
+			input {
+				font-family: Poppins, sans-serif;
+			}
+		}
+
+		.ui_select_input_placeholder {
+			color: #828282;
+		}
+	}
+}
+
+.select_container {
+	width: 225px;
+	padding: 5px 0 2px 16px;
+}
+
+.vertical_line {
+	height: 18px;
+	margin: 0 8px;
+	border-right: 1px solid #e0e0e0;
+}
+
+.date_container {
+	display: flex;
+	align-items: center;
+}
+
+.date_filter_wrap {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 6px 8px;
+	margin-right: 12px;
+	font-size: 10px;
+	cursor: pointer;
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+
+	svg {
+		width: 14px;
+		height: 14px;
+		margin-left: 4px;
+	}
+
+	&:hover {
+		box-shadow: 2px 2px 4px rgb(56 59 68 / 10%);
+	}
+}
+
+.footer_stats {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-top: 8px;
+	background: #f9f5ec;
+}
+
+.avg_response_time {
+	display: flex;
+	flex-basis: 29%;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 150px;
+	padding: 20px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 1px 3px rgb(16 24 40 / 10%), 0 1px 2px rgb(16 24 40 / 6%);
+}
+
+.response_time_title {
+	font-size: 14px;
+}
+
+.response_time {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.time {
+	font-size: 18px;
+
+	span {
+		position: relative;
+		display: inline-block;
+		font-size: 28px;
+		font-weight: 600;
+
+		&::after {
+			position: absolute;
+			top: 35px;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 1px;
+			content: "";
+			background-color: #000;
+			transition: transform 0.25s ease-out;
+			transform: scaleX(0);
+			transform-origin: bottom right;
+		}
+
+		&:hover {
+			color: #242424;
+		}
+
+		&:hover::after {
+			transform: scaleX(1);
+			transform-origin: bottom left;
+		}
+	}
+}
+
+.arrow_img {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.communication_stats {
+	display: flex;
+	flex-basis: 68%;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	padding: 20px 15px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 1px 3px rgb(16 24 40 / 10%), 0 1px 2px rgb(16 24 40 / 6%);
+}
+
+.left_stats {
+	display: flex;
+	flex-basis: 70%;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+}
+
+.the_stat {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.stat_circle {
+	width: 18px;
+	height: 18px;
+	margin-right: 10px;
+	border-radius: 500px;
+}
+
+.stat_description {
+	font-size: 12px;
+	color: #828282;
+}
+
+.com_stat_value {
+	position: relative;
+	display: inline-block;
+	margin-right: 10px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #242424;
+
+	&::after {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 1px;
+		content: "";
+		background-color: #000;
+		transition: transform 0.25s ease-out;
+		transform: scaleX(0);
+		transform-origin: bottom right;
+	}
+
+	&:hover::after {
+		transform: scaleX(1);
+		transform-origin: bottom left;
+	}
+}
+
+.pie_chart {
+	flex-basis: 30%;
+	height: 110px;
+}
+
+.loading_pie_chart {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+
+.no_data_found {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}

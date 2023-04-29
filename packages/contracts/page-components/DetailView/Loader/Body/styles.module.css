@@ -1,0 +1,12 @@
+.body {
+	display: flex;
+	width: 100%;
+}
+
+.big_line {
+	min-height: 928px;
+	margin-top: 60px;
+	background-color: #000;
+	border: 0.5px solid #000;
+	opacity: 0.06;
+}

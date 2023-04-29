@@ -1,0 +1,88 @@
+.container {
+	min-height: 400px;
+	padding: 0 30px;
+}
+
+.heading {
+	font-size: 16px;
+	font-weight: 600;
+	color: #000;
+}
+
+.controller_div {
+	padding-bottom: 10px;
+
+	:global {
+		.ui_radio_container {
+			display: block !important;
+			padding: 0 !important;
+		}
+
+		.ui_radiogroup_container {
+			padding: 0 !important;
+		}
+	}
+}
+
+.styled_controller {
+	max-width: 400px;
+	padding: 0 20px 10px;
+}
+
+.label {
+	padding: 10px;
+	margin-top: 30px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+	border-top: 1px solid #e0e0e0;
+}
+
+.button_container {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin: 0 30px 20px 0;
+}
+
+.allowed_div {
+	min-height: 100px;
+}
+
+.error_text {
+	min-height: 12px;
+	font-size: 11px;
+	font-weight: 600;
+	color: #d22b2b;
+}
+
+.error_class {
+	:global {
+		.ui_select_display_container {
+			border: 1px solid  #d22b2b;
+		}
+
+		.ui_select_display_container:hover {
+			border: 1px solid  #d22b2b !important;
+		}
+
+		.ui_select_display_container:focus-within {
+			box-shadow: 1px solid  #d22b2b !important;
+		}
+
+		.ui_input_container {
+			border: 1px solid  #d22b2b;
+		}
+
+		.ui_input_container:hover {
+			border: 1px solid  #d22b2b !important;
+		}
+
+		.ui_input_container:focus-within {
+			box-shadow: 1px solid  #d22b2b !important;
+		}
+	}
+}

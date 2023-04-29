@@ -1,0 +1,14 @@
+.service {
+	display: flex;
+	align-items: center;
+	font-size: 13px;
+	font-weight: 500;
+	text-transform: uppercase;
+}
+
+.heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px;
+}

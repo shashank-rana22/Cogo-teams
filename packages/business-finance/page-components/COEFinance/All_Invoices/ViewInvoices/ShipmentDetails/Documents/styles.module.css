@@ -1,0 +1,22 @@
+.download {
+	cursor: pointer;
+}
+
+.list {
+	section {
+		header + div {
+			max-height: 600px;
+			overflow: scroll;
+		}
+	}
+}
+
+.loader {
+	height: 100px;
+}
+
+.loader_main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

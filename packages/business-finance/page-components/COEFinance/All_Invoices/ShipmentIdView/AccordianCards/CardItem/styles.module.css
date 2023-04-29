@@ -1,0 +1,47 @@
+.no_data {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-self: center;
+	justify-content: center;
+	width: 100%;
+	height: 100px;
+	font-size: 18px;
+	font-weight: bold;
+	background: #dfe1ef;
+	border-radius: 4px;
+}
+
+.hr {
+	margin: 0 14px;
+	margin-bottom: 24px;
+	border: 0.5px solid #f68b21;
+}
+
+.card_list {
+	margin: -2px 24px 23px;
+	border: 1px solid #333;
+	border-radius: 4px;
+}
+
+.header {
+	margin: -2px 24px 23px;
+}
+
+.footer {
+	width: 100%;
+	height: 25px;
+	cursor: pointer;
+	background: #fffaeb;
+	border-radius: 0 0 4px 4px;
+	box-shadow: 0 2px 2px rgb(0 0 0 / 25%);
+}
+
+.footer_text {
+	padding: 4px;
+	font-size: 10px;
+	font-weight: 500px;
+	color: #ed3726;
+	text-align: center;
+	text-decoration-line: underline;
+}

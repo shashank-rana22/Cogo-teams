@@ -1,0 +1,180 @@
+.toggle_container {
+	position: absolute;
+	top: 57px;
+	right: 1px;
+}
+
+.flex_container {
+	display: block;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.header_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding-top: 16px;
+	margin-left: 24px;
+}
+
+.filter_container {
+	display: flex;
+	align-items: center;
+	width: 55%;
+
+	:global {
+		.ui_select_display_container {
+			.ui_select_input_control {
+				font-size: 14px;
+			}
+		}
+
+		.ui_select_input_placeholder {
+			font-size: 14px;
+		}
+	}
+}
+
+.div_select {
+	margin-top: 12px;
+	margin-right: 12px;
+}
+
+.search_container {
+	width: 400px;
+	margin-top: 10px;
+	margin-right: 48px;
+}
+
+.table_container {
+	margin-bottom: 80px;
+}
+
+.job_number {
+	display: flex;
+	flex-direction: column;
+	cursor: pointer;
+}
+
+.job_number_data {
+	font-weight: 600;
+	text-decoration: underline;
+}
+
+.header_checkbox {
+	padding-left: 4px;
+}
+
+.button {
+	width: 80px;
+}
+
+.button_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-top: 20px;
+}
+
+.selected {
+	display: flex;
+	justify-content: center;
+	width: 10%;
+	padding: 12px;
+	margin: 0 12px 0 0;
+	color: #ed3726;
+	cursor: pointer;
+	background: #fdebe9;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.button_tab {
+	display: flex;
+	justify-content: center;
+	width: 10%;
+	padding: 12px;
+	margin: 0 12px 0 0;
+	cursor: pointer;
+	background: white;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.backlist {
+	margin-top: 16px;
+	background: white;
+}
+
+.button_value {
+	display: flex;
+	width: 100%;
+}
+
+.hide_data {
+	width: 150px;
+	color: #f68b21;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.sub_comp {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 14px 36px;
+	margin: 0 0 40px;
+	background: #f8f2e7;
+	border: 1px solid #f2e3c3;
+}
+
+.span_val {
+	padding: 2px 16px;
+	background: #ddebc0;
+	border-radius: 4px;
+}
+
+.quo_border {
+	height: 30px;
+	margin-left: 50px;
+	border: 1px solid #f2e3c3;
+}
+
+.quo {
+	display: flex;
+	align-items: center;
+}
+
+.total_count {
+	padding: 6px 8px;
+	margin-top: 10px;
+	background: #fdebe9;
+	border-radius: 6px;
+}
+
+.total_count_num {
+	font-weight: 600;
+	color: #ee3425;
+}
+
+.expense {
+	color: #ee3425;
+	text-decoration: underline;
+}
+
+.variance_styles {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.income {
+	color: #849e4c;
+	text-decoration: underline;
+}
+
+.amount {
+	font-weight: 600;
+}

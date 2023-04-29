@@ -1,0 +1,28 @@
+.lower_keys {
+	width: max-content;
+	padding: 2px 4px;
+	margin-top: 4px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+	background: #d9eafd;
+	border-radius: 4px;
+}
+
+.billnumbers {
+	color: #ed3726;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.bills {
+	color: #ed3726;
+}
+
+.sid {
+	margin-bottom: 10px;
+}
+
+.service_type {
+	margin-top: 4px;
+}

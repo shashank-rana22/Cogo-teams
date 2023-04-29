@@ -1,0 +1,55 @@
+.pagination_comp {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.input {
+	display: flex;
+	width: 30px;
+	height: 18px;
+	color: #f68b21;
+	text-align: center;
+	background-color: transparent;
+	border: none;
+	border-radius: 6px;
+	outline: none;
+	transform: rotate(-90deg) scale(125%);
+}
+
+.number {
+	min-width: 14px;
+	height: 18px;
+	margin: 0 6px 0 0;
+	background: none;
+	border: 0;
+	outline: none;
+}
+
+.line {
+	height: 20px;
+	margin: 0 8px;
+	color: #f68b21;
+}
+
+.active {
+	cursor: pointer;
+}
+
+.inactive {
+	color: grey;
+	cursor: not-allowed;
+}
+
+.arrowbutton {
+	display: flex;
+	align-items: center;
+	padding: 0;
+	background-color: transparent;
+	border: none;
+
+	svg {
+		width: 16px;
+		height: 16px;
+	}
+}

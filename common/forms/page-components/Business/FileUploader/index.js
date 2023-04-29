@@ -1,5 +1,5 @@
 import { Upload, Toast } from '@cogoport/components';
-import { IcMDocument, IcMUpload } from '@cogoport/icons-react';
+import { IcMDocument, IcMCloudUpload } from '@cogoport/icons-react';
 import { publicRequest, request } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
@@ -9,17 +9,37 @@ import styles from './styles.module.css';
 function FileUploader(props) {
 	const {
 		onChange,
-		showProgress,
+		defaultValues,
 		multiple,
 		docName,
-		accept,
+		uploadIcon = null,
+		uploadDesc = '',
 		...rest
 	} = props;
-
 	const [fileName, setFileName] = useState(null); // remove
 	const [loading, setLoading] = useState(true); // remove
 	const [urlStore, setUrlStore] = useState([]);
 	const [progress, setProgress] = useState({});
+
+	useEffect(() => {
+		setLoading(true);
+		if (typeof (defaultValues) === 'string' && !multiple && defaultValues !== undefined) {
+			setFileName([{ name: defaultValues.split('/').slice(-1).join('') }]);
+			setUrlStore([{
+				fileName : defaultValues.split('/').slice(-1).join(''),
+				finalUrl : defaultValues,
+			}]);
+		}
+		if (multiple && typeof (defaultValues) !== 'string' && defaultValues !== undefined) {
+			const names = defaultValues.map((url) => ({ name: url.split('/').slice(-1).join('') }));
+			const urls = defaultValues.map((url) => ({ fileName: url.split('/').slice(-1).join(''), finalUrl: url }));
+
+			setFileName(names);
+			setUrlStore(urls);
+		}
+		setLoading(false);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [defaultValues?.length > 0]);
 
 	useEffect(() => {
 		if (multiple) {
@@ -65,10 +85,7 @@ function FileUploader(props) {
 
 		const finalUrl = url.split('?')[0];
 
-		return {
-			fileName: file.name,
-			finalUrl,
-		};
+		return finalUrl;
 	};
 
 	const handleChange = async (values) => {
@@ -82,14 +99,32 @@ function FileUploader(props) {
 
 				const allUrls = await Promise.all(promises);
 
-				setUrlStore(allUrls);
-				setFileName(values);
+				if (multiple) {
+					setUrlStore((prev) => {
+						if (prev === null) { return allUrls; }
+						return [...prev, ...allUrls];
+					});
+					setFileName((prev) => {
+						if (prev === null) return values;
+						return [...prev, ...values];
+					});
+				} else {
+					setUrlStore(allUrls);
+					setFileName(values);
+				}
 			}
 		} catch (error) {
 			Toast.error('File Upload failed.......');
 		} finally {
 			setLoading(false);
 		}
+	};
+
+	const handleDelete = (values) => {
+		setFileName(values);
+		const files = values.map((item) => item.name);
+		const newUrls = urlStore.filter((item) => files.includes(item.fileName));
+		setUrlStore(newUrls);
 	};
 
 	return (
@@ -99,9 +134,10 @@ function FileUploader(props) {
 				value={fileName}
 				multiple={multiple}
 				onChange={handleChange}
+				onClick={handleDelete}
 				loading={loading}
-				multipleUploadDesc="Upload files"
-				uploadIcon={<IcMUpload height={40} width={40} />}
+				uploadDesc={uploadDesc || 'Upload files'}
+				uploadIcon={uploadIcon || <IcMCloudUpload color="#ACDADF" height={40} width={40} />}
 				fileData={urlStore}
 			/>
 

@@ -1,0 +1,103 @@
+.finance_accepted {
+	padding: 2px 4px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+	background: #cdf7d4;
+	border-radius: 4px;
+}
+
+.initaited {
+	padding: 2px 4px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+	background: #fcedbf;
+	border-radius: 4px;
+}
+
+.on_hold {
+	padding: 2px 4px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+	background: #fcedbf;
+	border-radius: 4px;
+}
+
+.accepted {
+	padding: 2px 4px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+	background: #cdf7d4;
+	border-radius: 4px;
+}
+
+.finance_rejected {
+	padding: 2px 4px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+	background: #f68b21;
+	border-radius: 4px;
+}
+
+.void {
+	padding: 2px 4px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+	background: #fcedbf;
+	border-radius: 4px;
+}
+
+.posted {
+	padding: 2px 4px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+	background: #cdf7d4;
+	border-radius: 4px;
+}
+
+.coe_rejected {
+	padding: 2px 4px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+	background: #f68b21;
+	border-radius: 4px;
+}
+
+.container {
+	position: relative;
+	display: flex;
+}
+
+.ribbons {
+	font-size: 10px;
+
+	.ribbon {
+		--f: 12.5px; /* control the folded part */
+		--r: 8px; /* control the ribbon shape */
+		--t: -21px; /* the top offset */
+
+		position: absolute;
+		inset: var(--t) calc(-33 * var(--f)) auto auto;
+		padding: 0 10px var(--f) calc(10px + var(--r));
+		margin-left: 20%;
+		clip-path:
+			polygon(
+				0 0,
+				100% 0,
+				100% calc(100% - var(--f)),
+				calc(100% - var(--f)) 100%,
+				calc(100% - var(--f)) calc(100% - var(--f)),
+				0 calc(100% - var(--f)),
+				var(--r) calc(50% - var(--f) / 2)
+			);
+		background: #ed3726;
+		box-shadow: 0 calc(-1 * var(--f)) 0 inset #0005;
+	}
+}

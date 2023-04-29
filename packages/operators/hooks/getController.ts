@@ -1,7 +1,8 @@
 import {
 	InputController, PillsController, SelectController,
-	DatepickerController, FileSelectController,
+	DatepickerController,
 } from '@cogoport/forms';
+import UploadController from '@cogoport/forms/page-components/Controlled/UploadController';
 
 const getElementController = (type = 'text') => {
 	switch (type) {
@@ -15,7 +16,7 @@ const getElementController = (type = 'text') => {
 			return SelectController;
 
 		case 'file':
-			return FileSelectController;
+			return UploadController;
 
 		case 'pills':
 			return PillsController;

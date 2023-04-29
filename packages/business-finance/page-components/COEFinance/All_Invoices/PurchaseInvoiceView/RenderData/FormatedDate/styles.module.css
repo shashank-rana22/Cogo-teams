@@ -1,0 +1,37 @@
+.bill_currency {
+	margin-right: 4px;
+}
+
+.invoice_amount {
+	display: flex;
+}
+
+.ic_min_icon {
+	margin-left: 8px;
+	color: #f68b21;
+}
+
+.pre_tax {
+	color: #ed3726;
+}
+
+.pre_tax_amount {
+	margin-bottom: 5px;
+	margin-left: 10px;
+	color: rgb(51 51 51);
+	background: #fffaeb;
+}
+
+.post_tax {
+	color: #00a300;
+}
+
+.post_tax_amount {
+	margin-left: 10px;
+	color: rgb(51 51 51);
+	background: #fffaeb;
+}
+
+.show_amount {
+	width: 90px;
+}

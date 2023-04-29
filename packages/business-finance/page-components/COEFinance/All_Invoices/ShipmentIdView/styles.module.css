@@ -1,0 +1,15 @@
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.no_data {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 4px;
+	font-size: 18px;
+	font-weight: bold;
+	background: #dfe1ef;
+	border-radius: 4px;
+}

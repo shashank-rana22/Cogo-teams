@@ -1,0 +1,29 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	overflow-y: scroll;
+}
+
+.organisation_container {
+	width: 100%;
+	height: 100%;
+	overflow-y: scroll;
+}
+
+.organisation_container::-webkit-scrollbar {
+	display: none;
+}
+
+.wrap {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+
+	:global {
+		.ui_select_display_container {
+			width: 120px !important;
+			height: 30px !important;
+		}
+	}
+}

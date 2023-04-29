@@ -1,0 +1,111 @@
+.flex_space_between {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 15px;
+}
+
+.container {
+	padding: 0 15px 5px;
+	box-shadow: 0 4px 16px 0 #627fac33;
+}
+
+.down_arrow {
+	margin-left: 5px;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+
+	svg {
+		cursor: pointer;
+	}
+}
+
+.tags {
+	padding: 5px;
+	margin: 0 5px;
+	font-size: 10px;
+	line-height: 15px;
+	color: #221f20;
+	background: #f3fafa;
+	border-radius: 6px;
+}
+
+.margin {
+	margin: 5px;
+}
+
+.more_tags {
+	margin: 0 5px;
+}
+
+.styled_button {
+	height: 27px !important;
+}
+
+.active_agent {
+	position: relative;
+	z-index: 3;
+	margin-right: 10px;
+}
+
+.spectator_div {
+	position: absolute;
+	left: 20px;
+	z-index: -1;
+	margin-top: -30px;
+}
+
+.margin_right {
+	margin-right: 30px;
+}
+
+.button_container {
+	display: flex;
+	flex-direction: column;
+}
+
+.styled_buttons {
+	height: 27px !important;
+	margin-bottom: 6px;
+}
+
+.span_whatsapp_name {
+	margin-left: 5px;
+	font-size: 12px;
+	color: #4f4f4f;
+	text-align: left;
+}
+
+.icon_div {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 27px;
+	margin-left: 6px;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+}
+
+.profile_icon {
+	width: 15px;
+	height: 15px;
+	fill: #221f20;
+}
+
+.update_icon {
+	position: absolute;
+	top: 3px;
+	right: 6px;
+	z-index: 10;
+	width: 7px;
+	height: 7px;
+}
+
+.disable_icon {
+	cursor: not-allowed !important;
+}

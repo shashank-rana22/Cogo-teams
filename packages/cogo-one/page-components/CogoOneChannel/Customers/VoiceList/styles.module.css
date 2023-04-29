@@ -1,0 +1,119 @@
+.card_container {
+	padding: 10px 5px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.active_card {
+	background: #fdfbf6;
+}
+
+.card {
+	padding: 8px;
+	cursor: pointer;
+}
+
+.user_information {
+	display: flex;
+	justify-content: space-between;
+}
+
+.activity_duration {
+	margin-top: 2px;
+	font-size: 10px;
+	font-weight: 500;
+	color: #4f4f4f;
+}
+
+.user_details {
+	display: flex;
+	flex-direction: column;
+	margin-left: 15px;
+}
+
+.empty_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.empty_state {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 35vh;
+	font-size: 16px;
+	color: #828282;
+}
+
+.call_icon {
+	margin: 6px 9px 0 0;
+}
+
+.user_name {
+	max-width: 140px;
+	overflow: hidden;
+	font-size: 14px;
+	font-weight: 600;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	@media (max-width: 1280px) {
+		max-width: 100px;
+	}
+}
+
+.organisation {
+	max-width: 140px;
+	margin-top: 2px;
+	overflow: hidden;
+	font-size: 10px;
+	color: #828282;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	@media (max-width: 1280px) {
+		max-width: 100px;
+	}
+}
+
+.avatar_container {
+	display: flex;
+}
+
+.avatar {
+	width: 15px;
+	height: 15px;
+	margin-top: 10px;
+}
+
+.list_container {
+	height: 85%;
+	overflow-y: auto;
+
+	@media (max-width: 1280px) {
+		height: calc(100% - 95px);
+	}
+}
+
+.list_container::-webkit-scrollbar {
+	display: none;
+}
+
+.user_activity {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+.new_call {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 8px;
+}
+
+.status_icons {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 38px;
+}

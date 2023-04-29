@@ -1,0 +1,39 @@
+.item_container {
+	display: flex;
+	align-items: center;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.item_container:not(:last-child) {
+	margin-bottom: 8px;
+}
+
+.column_map {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 70%;
+	margin-right: 24px;
+}
+
+.user_info {
+	width: 30%;
+}
+
+.label {
+	flex: 1;
+	margin-bottom: 2px;
+	font-size: 12px;
+	color: #4f4f4f;
+	opacity: 0.7;
+}
+
+.value {
+	flex: 1;
+	color: #221f20;
+
+	:global(.ui_legend_item) {
+		margin: 0;
+	}
+}

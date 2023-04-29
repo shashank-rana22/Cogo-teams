@@ -43,6 +43,16 @@ const common_apis = {
 	],
 	app_dashboard: [
 		{
+			api          : 'assign_chat',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'create_communication_platform_chat',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'list_store_quota',
 			access_type  : 'private',
 			service_name : 'store',
@@ -68,9 +78,9 @@ const common_apis = {
 			service_name : 'spot_search',
 		},
 		{
-			api          : 'update_organization_search_history',
+			api          : 'create_planet_search_history',
 			access_type  : 'private',
-			service_name : 'organization',
+			service_name : 'location',
 		},
 		{
 			api          : 'update_shipment_sell_quotations',
@@ -153,6 +163,16 @@ const common_apis = {
 			access_type  : 'private',
 			service_name : 'credit',
 		},
+		{
+			api          : 'list_coupons',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'update_credit_request_promotion',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
 	],
 	forecast: [
 		{
@@ -204,6 +224,11 @@ const common_apis = {
 			service_name : 'rate_sheet',
 		},
 		{
+			api          : 'create_fcl_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
 			api          : 'update_organization',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -244,7 +269,7 @@ const common_apis = {
 		{
 			api          : 'list_terms_and_conditions',
 			access_type  : 'private',
-			service_name : 'organization',
+			service_name : 'terms_and_condition',
 		},
 		{
 			api          : 'accept_credit_terms_and_condition',
@@ -303,11 +328,7 @@ const common_apis = {
 			access_type  : 'private',
 			service_name : 'credit',
 		},
-		{
-			api          : 'get_credit_application_fee',
-			access_type  : 'private',
-			service_name : 'credit',
-		},
+
 		{
 			api          : 'check_organization_credit_eligibility',
 			access_type  : 'private',
@@ -373,6 +394,26 @@ const common_apis = {
 			access_type  : 'private',
 			service_name : 'credit',
 		},
+		{
+			api          : 'list_coupons',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'update_credit_request_promotion',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'get_tax_numbers_data',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'update_organization_credit_request_status',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
 	],
 	trade_parties: [
 		{
@@ -404,6 +445,129 @@ const common_apis = {
 			api          : 'update_sage_organization_id_mapping',
 			access_type  : 'private',
 			service_name : 'sage',
+		},
+	],
+	export_factoring: [
+		{
+			api          : 'get_credit',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'create_credit',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'update_credit',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'get_credit_application_fee',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'apply_credit_coupon_code',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'get_credit_tax_number_validity',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'get_tax_numbers_data',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'list_communications',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'get_credit_company_finance_data',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'update_credit_poc_details',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+
+		{
+			api          : 'create_export_factoring_buyer_details',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'update_credit_application',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'submit_credit_for_agreement_flow',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'submit_credit_for_documentation_flow',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'resubmit_credit_for_review',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'create_credit_application',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'get_credit_comments',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'list_organization_users',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_credit_requirement_details',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'list_coupons',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'update_credit_promotion',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'add_buyer_poc',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'create_credit_comment',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'update_credit_status',
+			access_type  : 'private',
+			service_name : 'credit',
 		},
 	],
 };

@@ -1,0 +1,47 @@
+.toggle_button {
+	--toggle-width: 70px;
+	--toggle-height: 35px;
+	--toggle-padding: 4px;
+	--color-bg-toggle: white;
+
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: var(--toggle-width);
+	height: var(--toggle-height);
+	padding: var(--toggle-padding);
+	font-size: 1.5rem;
+	line-height: 1;
+	cursor: pointer;
+	background: var(--color-bg-toggle);
+	border: 0;
+	border-radius: calc(var(--toggle-width) / 2);
+	box-shadow: 0 0 5px 2px var(--color-bg-toggle);
+	transition: background 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+}
+
+.toggle_button:global(.ui_button_container) {
+	padding: unset !important;
+}
+
+.toggle_button:focus {
+	outline-offset: 5px;
+}
+
+.toggle_button:focus:not(:focus-visible) {
+	outline: none;
+}
+
+.toggle_thumb {
+	position: absolute;
+	left: var(--toggle-padding);
+	width: calc(var(--toggle-height) - (var(--toggle-padding) * 2));
+	height: calc(var(--toggle-height) - (var(--toggle-padding) * 2));
+	border-radius: 50%;
+	transition: transform 0.25s ease-in-out;
+}
+
+.icons {
+	font-size: 1rem;
+}

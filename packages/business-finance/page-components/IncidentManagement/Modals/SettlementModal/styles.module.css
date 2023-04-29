@@ -1,0 +1,10 @@
+.flex {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+}
+
+.drag {
+	font-size: 12px;
+	font-weight: 400;
+}

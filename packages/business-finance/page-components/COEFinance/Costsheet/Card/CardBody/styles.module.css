@@ -1,0 +1,162 @@
+.layout {
+	display: flex;
+	padding: 15px 25px 0;
+	margin: 15px 0;
+	background: #fff;
+
+	@media (max-width: 768px) {
+		padding: 5px 0 5px 25px;
+	}
+}
+
+.values {
+	display: flex;
+	align-items: center;
+	padding: 20px 25px 0;
+	margin: 15px 0;
+	background: #fff;
+	border-top: 1px solid #d9d9d9;
+
+	@media (max-width: 768px) {
+		padding: 20px 25px 5px;
+	}
+}
+
+.flex {
+	display: flex;
+	flex: var(--span);
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		padding-right: 5px;
+	}
+}
+
+.heading {
+	display: flex;
+	flex: var(--span);
+	justify-content: flex-start;
+	font-size: 20px;
+	font-weight: 550;
+	line-height: 20px;
+}
+
+.card {
+	position: relative;
+	padding: 0 20px;
+	margin: 20px 0;
+	background: #fff;
+	border: 1px solid var(--bordercolor);
+	border-radius: 4px;
+
+	@media (max-width: 768px) {
+		padding: 0;
+	}
+}
+
+.total {
+	display: flex;
+	padding: 15px 25px;
+	margin: 15px 0;
+	background: #fff;
+	border-top: 1px solid #d9d9d9;
+}
+
+.totalamount {
+	font-size: 15px;
+	font-weight: 700;
+	color: #333;
+}
+
+.coloredlabel {
+	display: flex;
+	flex: var(--span);
+	justify-content: flex-start;
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.profiticon {
+	color: #34c759;
+	transform: translate(10px, 2px) rotate(-45deg);
+}
+
+.negative_icon {
+	color: #ed3726;
+	transform: translateX(10px) rotate(45deg);
+}
+
+.neutral_icon {
+	display: none;
+}
+
+.positive {
+	color: #67c676;
+}
+
+.negative {
+	color: #ed3726;
+}
+
+.neutral {
+	color: #333;
+}
+
+.custompadding {
+	position: relative;
+	min-height: 240px;
+	padding: 10px 20px;
+	margin: 20px 0;
+	background: #fff;
+	border: 1px solid var(--bordercolor);
+	border-radius: 4px;
+
+	@media (max-width: 768px) {
+		padding: 0;
+	}
+}
+
+.viewmore {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	font-size: small;
+	color: rgb(57 63 112);
+	cursor: pointer;
+	background-color: rgb(242 246 255);
+	border-radius: 0 0 8px 8px;
+}
+
+.arrowicon {
+	transform: translate(5px, -2px) rotate(180deg);
+}
+
+.bottomicon {
+	transform: translate(3px, 3px);
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+.padding {
+	position: relative;
+	min-height: 240px;
+	padding: 18px 20px;
+	margin: 20px 0;
+	background: #fff;
+	border: 1px solid var(--bordercolor);
+	border-radius: 4px;
+
+	@media (max-width: 768px) {
+		padding: 0;
+	}
+}
+
+.tooltip {
+	padding-top: 2px;
+	padding-left: 4px;
+}

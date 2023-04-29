@@ -1,0 +1,52 @@
+/* stylelint-disable selector-class-pattern */
+.flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.flex_settle {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-left: 14px;
+}
+
+.date_range {
+	margin-left: 8px;
+
+	:global {
+		.react-datepicker__input-container {
+			input {
+				width: 120px;
+				height: 30px;
+				font-size: 12px;
+			}
+
+			.react-datepicker-ignore-onclickoutside {
+				width: 120px;
+				height: 30px;
+			}
+
+			.react-datepicker__close-icon {
+				right: -18px;
+				padding: 0;
+			}
+		}
+	}
+}
+
+.remarks {
+	margin: 24px 0 10px 10px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.textarea {
+	margin-left: 10px;
+}
+
+.button {
+	display: flex;
+	justify-content: flex-end;
+}

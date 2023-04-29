@@ -1,0 +1,52 @@
+.heading {
+	display: flex;
+	align-items: center;
+	margin: 16px 0;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 23px;
+	color: #221f20;
+
+	&:hover {
+		font-style: normal;
+		font-weight: 700;
+		cursor: pointer;
+
+		svg {
+			color: #ed3726;
+		}
+	}
+}
+
+.subheading {
+	padding: 12px;
+	margin: 8px 0;
+	font-size: 12px;
+	font-weight: 400;
+	background: #fff;
+}
+
+.cardlist {
+	margin-top: 16px;
+	background: #fff;
+}
+
+.enquiries {
+	display: flex;
+}
+
+.form {
+	flex: 1;
+	margin: 16px 6px 0;
+	background: #fff;
+}
+
+.enquirypage {
+	max-height: 749px;
+}
+
+.header {
+	display: flex;
+	justify-content: flex-start;
+}

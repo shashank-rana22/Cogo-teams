@@ -1,3 +1,14 @@
-declare module '@cogoport/request';
-declare module '@cogoport/store';
-declare module '@cogoport/layout';
+declare module '@cogoport/*';
+declare module 'file-saver'
+declare module 'number-to-words'
+declare module '*.module.css' {
+	const classes: { [key: string]: string };
+	export default classes;
+}
+
+declare module '*.css';
+
+declare module '*.svg' {
+	const content: any;
+	export default content;
+}

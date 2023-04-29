@@ -1,0 +1,159 @@
+.container {
+	display: flex;
+	flex-direction: column;
+
+	:global {
+		.ui_pill_container {
+			margin: 0 !important;
+		}
+	}
+}
+
+.title {
+	margin-bottom: 18px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.content {
+	display: flex;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.organization_details {
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	text-overflow: ellipsis;
+	word-break: break-all;
+}
+
+.name {
+	font-size: 14px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.location {
+	font-size: 14px;
+	font-weight: 600;
+	color: #828282;
+}
+
+.agent_title {
+	margin-top: 20px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.points {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 8px 30px 8px 35px;
+	margin-top: 12px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+}
+
+.cogopoints {
+	font-size: 14px;
+	font-weight: 600;
+	color: #ff7a71;
+}
+
+.value {
+	padding-left: 8px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #ff7a71;
+}
+
+.promotion_cards {
+	position: relative;
+	width: 100%;
+	margin-top: 10px;
+	overflow-x: hidden;
+	box-shadow: 0 0 1px rgb(100 100 111 / 20%) inset;
+}
+
+.promotion_cards::-webkit-scrollbar {
+	display: none;
+}
+
+.promotion_cards_empty_state {
+	display: flex;
+	justify-content: center;
+	margin-top: 25px;
+}
+
+.cogo_icon {
+	margin: 6px 10px 0 0;
+}
+
+.status {
+	display: flex;
+	justify-content: flex-end;
+	width: 29%;
+	max-height: 19px;
+
+	@media (max-width: 1280px) {
+		width: 32%;
+	}
+}
+
+.loader_div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 32px;
+}
+
+.cogocoins_icon {
+	width: 20px;
+	height: 20px;
+}
+
+.empty_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding-top: 40vh;
+	font-size: 16px;
+	color: #828282;
+}
+
+.agent_loading_state {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 9px 0 9px 22px;
+	margin-top: 12px;
+	border-radius: 12px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+}
+
+.wrapper {
+	position: absolute;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	color: #000;
+	background: #e0e0e099;
+	border-radius: 2px;
+	backdrop-filter: blur(3px);
+}
+
+.convert_to_cp {
+	display: flex;
+	justify-content: space-between;
+}

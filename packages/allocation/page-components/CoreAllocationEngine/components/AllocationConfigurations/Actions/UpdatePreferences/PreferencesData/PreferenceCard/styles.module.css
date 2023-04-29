@@ -1,0 +1,23 @@
+.preference_card {
+	margin: 8px 0;
+}
+
+.heading {
+	display: flex;
+	align-items: center;
+}
+
+.business_name {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.user_name {
+	margin-left: 12px;
+	font-weight: 500;
+	color: #828282;
+}
+
+.content_container {
+	display: flex;
+}

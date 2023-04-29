@@ -1,0 +1,51 @@
+.card_container {
+	display: flex;
+	flex-wrap: wrap;
+	margin: auto;
+	margin: 12px 0;
+}
+
+.card_details {
+	flex: 1;
+	padding: 8px;
+	margin: 6px;
+	background-color: #fff;
+	border-radius: 12px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin: 6px 0;
+	}
+}
+
+.detail_container {
+	display: flex;
+	flex-direction: row;
+}
+
+.tagged_card_details {
+	flex: 1;
+	padding: 8px;
+	margin: 6px;
+	background-color: #fff;
+	border-radius: 12px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin-left: 6px;
+	}
+}
+
+.badge_details {
+	flex: 1;
+	width: 48.5%;
+	padding: 8px;
+	margin: 6px;
+	background-color: #fff;
+	border-radius: 12px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin: 6px 0;
+	}
+}

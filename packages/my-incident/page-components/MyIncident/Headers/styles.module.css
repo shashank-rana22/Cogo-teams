@@ -1,0 +1,8 @@
+.container {
+	padding-top: 15px;
+
+	button {
+		background: white;
+		border-right: 1px solid #e0e0e0;
+	}
+}

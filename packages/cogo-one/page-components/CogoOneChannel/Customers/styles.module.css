@@ -1,0 +1,169 @@
+.container {
+	position: relative;
+	width: 24%;
+	height: 100%;
+	padding: 10px;
+	margin-right: 10px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.title {
+	margin-left: 5px;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.logo {
+	display: flex;
+	align-items: center;
+}
+
+.filters_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 15px;
+}
+
+.tabs {
+	margin: 0 -10px 15px;
+}
+
+.styled_toggle {
+	:global {
+		.ui_toggle_container.ui_ps_size_md .ui_switch {
+			right: 51px;
+		}
+
+		.ui_toggle_container.ui_toggle_inside .ui_inner::before {
+			display: flex;
+			align-items: center;
+			padding-left: 8px;
+			font-size: 12px;
+			content: "Online";
+			background-color: #ee3425;
+		}
+
+		.ui_toggle_container.ui_toggle_inside .ui_inner::after {
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			float: right;
+			padding-right: 10px;
+			font-size: 12px;
+			color: #fff;
+			content: "Offline";
+			background-color: #f8aea8;
+		}
+
+		.ui_toggle_container.ui_ps_size_md .ui_toggle_switch {
+			width: 75px;
+		}
+
+		input[type="checkbox"]:checked + .ui_label_radius .ui_switch {
+			right: 0;
+		}
+	}
+}
+
+.bot_messages {
+	display: flex;
+	align-items: center;
+	font-size: 10px;
+	color: #000;
+}
+
+.plus_circle {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 45px;
+	height: 45px;
+	cursor: pointer;
+	background-color: #000;
+	border-radius: 100%;
+	box-shadow: 3px 7px 16px #8a795d99;
+}
+
+.plus_circle svg {
+	transition: 0.5s;
+}
+
+.wheel {
+	position: absolute;
+	bottom: 26px;
+	height: 128px;
+	transition: all 0.3s ease;
+	transform: scale(0);
+	transform-origin: bottom right;
+}
+
+.wheel_box {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.action {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	opacity: 1;
+	transition: all 1s ease;
+}
+
+.wrapper {
+	position: absolute;
+	right: 65px;
+	bottom: 100px;
+	z-index: 99;
+	cursor: pointer;
+
+	& .checkbox {
+		display: none;
+
+		&:checked ~ .plus_circle .wheel_box .wheel {
+			transform: scale(1);
+		}
+
+		&:checked ~ .plus_circle .wheel_box .wheel .action {
+			opacity: 1;
+		}
+
+		&:checked ~ .plus_circle svg {
+			transition: 0.5s;
+			transform: rotate(45deg);
+		}
+	}
+}
+
+.action img {
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+	box-shadow: 3px 7px 16px #8a795d61;
+}
+
+.call_icon {
+	top: 38px;
+	right: 11px;
+	user-select: none;
+}
+
+.whatsapp_icon {
+	top: 101px;
+	right: 40px;
+	user-select: none;
+}
+
+.mail_icon {
+	top: 33px;
+	background: #ffff;
+	border-radius: 50%;
+}

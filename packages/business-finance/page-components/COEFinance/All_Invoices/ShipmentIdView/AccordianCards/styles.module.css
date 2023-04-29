@@ -1,0 +1,296 @@
+.container {
+	position: relative;
+	margin: 12px 1px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 4px rgb(0 0 0 / 25%);
+}
+
+.sub_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 14px 24px;
+
+	@media (max-width: 1068px) {
+		flex-direction: column;
+	}
+}
+
+.sid {
+	flex-direction: column;
+	width: 50%;
+}
+
+.pending_text {
+	font-size: 10px;
+	font-weight: 500;
+	color: #ed3726;
+}
+
+.sid_container {
+	display: flex;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+}
+
+.sid_label_text {
+	display: flex;
+	align-items: center;
+	font-size: 18px;
+	font-weight: 500;
+	color: #333;
+}
+
+.sid_value_text {
+	display: flex;
+	align-items: center;
+	font-size: 18px;
+	font-weight: 500;
+	color: #333;
+}
+
+.vr {
+	width: 2px;
+	height: 56px;
+	background: #f68b21;
+	border-radius: 4px;
+
+	@media (max-width: 1068px) {
+		width: 100%;
+		height: 2px;
+		margin-top: 8px;
+		margin-bottom: 8px;
+	}
+}
+
+.expense_amount {
+	flex-direction: column;
+	width: 100%;
+	margin-right: 20px;
+}
+
+.expense_label_text {
+	display: flex;
+	width: 45%;
+	padding-right: 5px;
+	margin-right: 5px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+}
+
+.expense_value_text {
+	font-size: 12px;
+	font-weight: 400;
+	color: #333;
+}
+
+.expense {
+	display: flex;
+	width: 100%;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		padding: 8px;
+	}
+}
+
+.urgent {
+	display: flex;
+	width: 100%;
+}
+
+.urgent_label_text {
+	width: 45%;
+	padding-right: 5px;
+	margin-right: 5px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #ed3726;
+}
+
+.urgent_value_text {
+	font-size: 12px;
+	font-weight: 400;
+	color: #ed3726;
+}
+
+.profitibility {
+	display: flex;
+	align-items: center;
+	width: 60%;
+	padding-right: 5px;
+	margin-right: 5px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #67c676;
+}
+
+.profitibility_value {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	font-weight: 400;
+	color: #67c676;
+}
+
+.ribbon {
+	--f: 9px;
+	--r: 8px;
+	--t: 2px;
+
+	position: absolute;
+	inset: var(--t) calc(-1 * var(--f)) auto auto;
+	padding: 0 10px var(--f) calc(10px + var(--r));
+	clip-path:
+		polygon(
+			0 0,
+			100% 0,
+			100% calc(100% - var(--f)),
+			calc(100% - var(--f)) 100%,
+			calc(100% - var(--f)) calc(100% - var(--f)),
+			0 calc(100% - var(--f)),
+			var(--r) calc(50% - var(--f) / 2)
+		);
+	font-size: 10px;
+	background: #fef1df;
+	box-shadow: 0 calc(-1 * var(--f)) 0 inset #0005;
+}
+
+.ribbon_closed {
+	--f: 9px;
+	--r: 8px;
+	--t: 2px;
+
+	position: absolute;
+	inset: var(--t) calc(-1 * var(--f)) auto auto;
+	padding: 0 10px var(--f) calc(10px + var(--r));
+	clip-path:
+		polygon(
+			0 0,
+			100% 0,
+			100% calc(100% - var(--f)),
+			calc(100% - var(--f)) 100%,
+			calc(100% - var(--f)) calc(100% - var(--f)),
+			0 calc(100% - var(--f)),
+			var(--r) calc(50% - var(--f) / 2)
+		);
+	font-size: 10px;
+	background: #cdf7d4;
+	box-shadow: 0 calc(-1 * var(--f)) 0 inset #0005;
+}
+
+.freight {
+	align-items: center;
+	width: fit-content;
+	padding: 4px;
+	padding: 2px 8px;
+	font-size: 12px;
+	color: #000;
+	background: #fef1df;
+	border-radius: 4px;
+}
+
+.hr {
+	margin: 0 14px;
+	margin-bottom: 24px;
+	border: 0.5px solid #f68b21;
+}
+
+.card_list {
+	margin: -2px 24px 23px;
+	border: 1px solid #333;
+	border-radius: 4px;
+}
+
+.header {
+	margin: -2px 24px 23px;
+}
+
+.footer {
+	width: 100%;
+	height: 25px;
+	cursor: pointer;
+	background: #fffaeb;
+	border-radius: 0 0 4px 4px;
+	box-shadow: 0 2px 2px rgb(0 0 0 / 25%);
+}
+
+.footer_text {
+	padding: 4px;
+	font-size: 10px;
+	font-weight: 500px;
+	color: #ed3726;
+	text-align: center;
+	text-decoration-line: underline;
+}
+
+.column1 {
+	display: flex;
+	width: 26%;
+
+	@media (max-width: 1068px) {
+		width: 100%;
+	}
+}
+
+.column2 {
+	display: flex;
+	width: 42%;
+
+	@media (max-width: 1068px) {
+		width: 100%;
+	}
+}
+
+.column3 {
+	display: flex;
+	width: 36%;
+
+	@media (max-width: 1068px) {
+		width: 100%;
+	}
+}
+
+.right_border {
+	width: 3%;
+
+	@media (max-width: 1068px) {
+		width: 100%;
+	}
+}
+
+.button_style {
+	width: 70%;
+	height: 25px;
+}
+
+.small_right_border {
+	width: 2%;
+	padding-right: 20px;
+}
+
+.small_vr {
+	width: 1px;
+	height: 16px;
+	background: #333;
+	border-radius: 4px;
+}
+
+.urgent_vr {
+	width: 1px;
+	height: 16px;
+	background: #ed3726;
+	border-radius: 4px;
+}
+
+.profitibility_border {
+	width: 1px;
+	height: 16px;
+	background: #67c676;
+	border-radius: 4px;
+}

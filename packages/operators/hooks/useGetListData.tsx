@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import { OPERATORS } from '../configurations/operators';
 
@@ -12,28 +12,30 @@ const useGetListData = () => {
 
 	const config = OPERATORS;
 
-	const getLocationData = async () => {
-		if (searchValue) {
-			setPage(1);
-		}
-		try {
-			await trigger({
-				params: {
-					filters: {
-						q: (searchValue || '').trim() || undefined,
+	const getLocationData = useCallback(() => {
+		(async () => {
+			if (searchValue) {
+				setPage(1);
+			}
+			try {
+				await trigger({
+					params: {
+						filters: {
+							q: (searchValue || '').trim() || undefined,
+						},
+						page,
+						sort_type: 'desc',
 					},
-					page,
-					sort_type: 'desc',
-				},
-			});
-		} catch (err) {
-			console.log(err);
-		}
-	};
+				});
+			} catch (err) {
+				console.log(err);
+			}
+		})();
+	}, [page, searchValue, trigger]);
+
 	useEffect(() => {
 		getLocationData();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page]);
+	}, [getLocationData, page]);
 
 	useEffect(() => {
 		setFinalList([]);

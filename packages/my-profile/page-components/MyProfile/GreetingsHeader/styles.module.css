@@ -1,0 +1,225 @@
+.greeting_text {
+	position: relative;
+	display: flex;
+	align-items: baseline;
+	justify-content: center;
+	padding-top: 12px;
+	font-size: 20px;
+	font-weight: 700;
+	text-align: center;
+}
+
+.image_upload_container {
+	position: relative;
+	width: 250px;
+	margin: auto;
+	cursor: pointer;
+}
+
+.picture_container {
+	display: flex;
+	justify-content: space-between;
+
+	.img {
+		width: 150px;
+		height: 150px;
+		margin-right: 20px;
+		border: 4px solid #8089cc;
+		border-radius: 50%;
+	}
+}
+
+.image_container {
+	display: flex;
+	justify-content: center;
+	width: 200px;
+	margin: auto;
+
+	.img {
+		width: 200px;
+		cursor: pointer;
+		border: 4px solid #8089cc;
+		border-radius: 50%;
+
+		&:hover {
+			box-shadow: 0 4px 20px rgb(0 0 0 / 35%);
+		}
+	}
+}
+
+.button_container {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	width: 100%;
+
+	:global {
+		.ui_button_container {
+			margin-left: 8px;
+		}
+	}
+}
+
+.file_upload_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.upload_picture_text {
+	padding-bottom: 8px;
+	font-size: 16px;
+	font-weight: 500;
+	cursor: pointer;
+}
+
+.delete_icon {
+	margin-top: 4px;
+	cursor: pointer;
+}
+
+.change_picture_text {
+	margin-bottom: 8px;
+	font-size: 20px;
+	font-weight: 500;
+	text-align: center;
+}
+
+.camera_icon {
+	position: absolute;
+	top: 5%;
+	left: 70%;
+	cursor: pointer;
+
+	.icon {
+		position: absolute;
+		right: 36px;
+		bottom: 4px;
+		cursor: pointer;
+		background: transparent;
+	}
+}
+
+.preview_badge {
+	position: absolute;
+	top: 65%;
+	left: 70%;
+	cursor: pointer;
+
+	img {
+		border-radius: 8px;
+	}
+}
+
+.avatar_container {
+	display: flex;
+	align-items: center;
+	width: 140px;
+	height: 140px;
+	border-radius: 50%;
+	object-fit: cover;
+
+	&:hover {
+		box-shadow: 0 4px 20px rgb(0 0 0 / 35%);
+		transition: 0.5s;
+		transform: scale(1.2);
+	}
+
+	:global {
+		.ui_avatar_container {
+			padding: 0 !important;
+		}
+
+		.ui_avatar_text {
+			color: #6fa5ab;
+			background: #cfeaee !important;
+			border: 4px solid #addadf;
+		}
+	}
+}
+
+.main_container {
+	position: relative;
+	padding: 48px 0 14px;
+	margin-right: 12px;
+	background: #fff;
+	border-radius: 12px;
+
+	@media (max-width: 768px) {
+		margin-right: 0;
+	}
+}
+
+.empty_background {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 35%;
+	background: #f3fafa;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
+
+.location_name {
+	margin-left: 4px;
+	font-size: 12px;
+	color: #221f20;
+}
+
+.modal_container {
+	padding: 0 32px 16px;
+	margin-bottom: 16px;
+}
+
+.upload_picture_container {
+	width: 300px;
+	height: 70%;
+
+	:global {
+		.ui_upload_droparea_container {
+			border-radius: 8px;
+		}
+	}
+}
+
+.head {
+	margin-left: 8px;
+}
+
+.footer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.remove_picture_text {
+	width: 120px;
+	cursor: pointer;
+}
+
+.pills_container {
+	display: flex;
+	align-items: center;
+	height: 20px;
+	padding: 0 6px;
+	margin-left: 8px;
+	font-size: 10px;
+	color: #221f20;
+	background: #ddebc0;
+	border-radius: 4px;
+}
+
+.name_wrapper {
+	max-width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.badges {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 28px 0 8px;
+}

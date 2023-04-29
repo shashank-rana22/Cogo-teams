@@ -1,0 +1,24 @@
+{
+  "name": "@cogoport/cogo-verse-analytics",
+  "version": "0.1.0",
+  "description": "Package for Cogo Verse",
+  "private": true,
+  "main": "./index.js",
+  "dependencies": {
+    "@cogoport/charts": "^1.0.1",
+    "@cogoport/components": "^1.0.359",
+    "@cogoport/forms": "workspace:0.1.0",
+    "@cogoport/icons-react": "^1.0.58",
+    "@cogoport/next": "workspace:0.1.0",
+    "@cogoport/request": "workspace:0.1.0",
+    "@cogoport/store": "workspace:0.1.0",
+    "@cogoport/utils": "^1.2.6",
+    "firebase": "^9.17.2",
+    "globe.gl": "^2.27.1",
+    "prop-types": "^15.8.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-globe.gl": "^2.23.3",
+    "react-kapsule": "^2.4.0"
+  }
+}

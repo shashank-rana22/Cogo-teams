@@ -1,0 +1,39 @@
+.header {
+	font-size: 28px;
+	font-weight: 600;
+}
+
+.question_button_container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	margin: 8px 0;
+}
+
+.tabs {
+	margin-top: 16px;
+}
+
+.filters {
+	display: flex;
+	align-items: center;
+}
+
+.top_most_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 4px 0;
+
+	@media (max-width: 768px) {
+		display: block;
+	}
+}
+
+.upload_modal {
+	:global {
+		.ui_modal_body_container {
+			max-height: fit-content;
+		}
+	}
+}

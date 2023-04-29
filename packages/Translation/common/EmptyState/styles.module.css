@@ -1,0 +1,22 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: max-content;
+	padding-bottom: 20px;
+	background: #fff;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.column {
+	flex-direction: column;
+}
+
+.text {
+	font-size: 16px;
+	color: #bdbdbd;
+}

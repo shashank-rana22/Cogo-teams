@@ -1,0 +1,35 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 9px 0 9px 22px;
+	margin-top: 12px;
+	background: #fff;
+	border-radius: 12px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+}
+
+.content {
+	display: flex;
+	width: 100%;
+	margin-top: 5px;
+}
+
+.agent_type {
+	font-size: 12px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.name {
+	padding-left: 4px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.type {
+	font-size: 12px;
+	font-weight: 500;
+	color: #221f20;
+}

@@ -28,7 +28,7 @@ const pushPermValues = (
 	const { possible_apis = [], ...rest } = apiGroup || {};
 	possible_apis.forEach((api) => {
 		const scopes =			type === 'none'
-			? [{ type: 'none', through_criteria: [], is_default: true }]
+			? [{ type: 'none', through_criteria: [], is_default_params_required: true }]
 			: getScopes(navigation, api);
 		groupedPermissions.push({
 			resource_name              : api.value,
@@ -160,14 +160,15 @@ const useTogglePermissions = (props) => {
 		const initilaFormValues = setInitialFormValues(apiGroup);
 		setNavigationRefs(initilaFormValues);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [newApiPermissions]);
+	}, [show, JSON.stringify(apiGroup), JSON.stringify(newApiPermissions)]);
 
 	useEffect(() => {
 		const initilaFormValues = setInitialFormValues(apiGroup);
 		const isAnyApiSelected = isAnyApiSelectedFunc(initilaFormValues);
 		setValue(isAnyApiSelected ? 'yes' : 'no');
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [show]);
+
 	return {
 		handleApiStatus,
 		newApiPermissions,

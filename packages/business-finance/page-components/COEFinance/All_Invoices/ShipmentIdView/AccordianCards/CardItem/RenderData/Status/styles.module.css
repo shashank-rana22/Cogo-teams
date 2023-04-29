@@ -1,0 +1,71 @@
+.finance_accepted {
+	padding: 2px 8px;
+	font-size: 10px;
+	font-weight: 400;
+	color: #333;
+	background: #cdf7d4;
+	border-radius: 4px;
+}
+
+.initiated {
+	padding: 2px 8px;
+	font-size: 10px;
+	font-weight: 400;
+	color: #333;
+	background: #fcedbf;
+	border-radius: 4px;
+}
+
+.accepted {
+	padding: 2px 8px;
+	font-size: 10px;
+	font-weight: 400;
+	color: #333;
+	background: #cdf7d4;
+	border-radius: 4px;
+}
+
+.finance_rejected {
+	padding: 2px 8px;
+	font-size: 10px;
+	font-weight: 400;
+	color: #333;
+	background: #f68b21;
+	border-radius: 4px;
+}
+
+.void {
+	padding: 2px 8px;
+	font-size: 10px;
+	font-weight: 400;
+	color: #333;
+	background: #fcedbf;
+	border-radius: 4px;
+}
+
+.posted {
+	padding: 2px 8px;
+	font-size: 10px;
+	font-weight: 400;
+	color: #333;
+	background: #cdf7d4;
+	border-radius: 4px;
+}
+
+.coe_rejected {
+	padding: 2px 8px;
+	font-size: 10px;
+	font-weight: 400;
+	color: #333;
+	background: #f68b21;
+	border-radius: 4px;
+}
+
+.draft {
+	padding: 2px 8px;
+	font-size: 10px;
+	font-weight: 400;
+	color: #333;
+	background: #fcedbf;
+	border-radius: 4px;
+}

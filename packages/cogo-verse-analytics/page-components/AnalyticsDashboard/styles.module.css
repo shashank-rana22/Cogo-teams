@@ -1,0 +1,18 @@
+.main_container {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	height: fit-content;
+	background: #f9f5ec;
+}
+
+.stats_view_container {
+	flex-basis: 50%;
+	background: #f9f5ec;
+}
+
+.map_view_container {
+	flex-basis: 50%;
+	height: 100%;
+	background: #f9f5ec;
+}

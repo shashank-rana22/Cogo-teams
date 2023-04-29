@@ -1,0 +1,108 @@
+.container {
+	width: 100%;
+	max-height: 218px;
+	padding: 16px;
+	background: #fff;
+	border-radius: 4px;
+}
+
+.header {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin: 4px;
+}
+
+.heading {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	justify-content: space-between;
+	margin-left: 8px;
+}
+
+.contract_details {
+	display: flex;
+	align-items: center;
+}
+
+.contract_id {
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 24px;
+	color: #393f70;
+}
+
+.business_name {
+	display: flex;
+	margin: 2px 0;
+}
+
+.org_name {
+	margin-left: 4px;
+	font-weight: 600;
+}
+
+.trade {
+	padding: 4px 11px;
+	background: #cfeaed;
+	border-radius: 4px;
+}
+
+.details {
+	display: flex;
+	gap: 40px;
+	margin-bottom: 10px;
+	margin-left: 12px;
+}
+
+.service_details {
+	display: flex;
+	gap: 12px;
+}
+
+.information {
+	display: flex;
+	gap: 102px;
+	margin-left: 16px;
+}
+
+.main_container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.button_container {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin-right: 32px;
+}
+
+.pair {
+	display: flex;
+	align-items: center;
+}
+
+.value {
+	margin-left: 2px;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 18px;
+}
+
+.pending {
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 150%;
+	color: #7b7f8e;
+	text-align: center;
+}
+
+.name {
+	margin-left: 8px;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 22px;
+	color: #393f70;
+}

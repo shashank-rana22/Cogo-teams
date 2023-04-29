@@ -1,0 +1,38 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	cursor: pointer;
+
+	.selected {
+		background: #e0e0e0;
+	}
+}
+
+.charge_item {
+	padding: 6px;
+	margin-bottom: 16px;
+	border: 1px solid #e0e0e0;
+	border-radius: 4px;
+}
+
+.service_provider {
+	max-width: 70%;
+	overflow: hidden;
+	font-size: 12px;
+	font-weight: 400;
+	color: grey;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.space_between {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.locals {
+	max-height: 300px;
+	overflow: scroll;
+}

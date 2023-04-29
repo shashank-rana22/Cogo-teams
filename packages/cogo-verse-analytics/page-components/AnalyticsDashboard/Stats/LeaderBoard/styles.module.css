@@ -1,0 +1,153 @@
+.user_leaderboard {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	height: 210px;
+	margin-top: 10px;
+	background: #f9f5ec;
+}
+
+.leaderboard_stats {
+	flex-basis: 71%;
+	padding: 5px 10px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 1px 3px rgb(16 24 40 / 10%), 0 1px 2px rgb(16 24 40 / 6%);
+}
+
+.leaderboard_header {
+	padding: 10px 0 0 15px;
+	margin-bottom: 10px;
+	font-size: 15px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.leaderboard_content {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	height: 145px;
+	padding: 0 25px 0 15px;
+	overflow-y: scroll;
+	border-radius: 6px;
+}
+
+.inner_shadow {
+	box-shadow: inset 0 -11px 8px -10px #f8f2e7;
+}
+
+.leaderboard_values {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	padding: 12px 0;
+	font-size: 16px;
+	font-weight: 400;
+	color: #828282;
+	border-bottom: solid 0.1px #e0e0e0;
+
+	&:hover {
+		color: #221f20;
+	}
+}
+
+.leaderboard_description_number {
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 150%;
+}
+
+.leaderboard_numbers {
+	display: flex;
+
+	span {
+		margin: 0 10px;
+	}
+}
+
+.user_status {
+	display: flex;
+	flex-basis: 26%;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.user_status_content {
+	display: flex;
+	padding: 10px 3px;
+	overflow: hidden;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 1px 3px rgb(16 24 40 / 10%), 0 1px 2px rgb(16 24 40 / 6%);
+
+	&::before {
+		position: relative;
+		top: -95px;
+		width: 10px;
+		height: 350%;
+		content: "";
+		background: #ffffe1;
+		box-shadow: 0 0 10px #fff;
+		opacity: 0.8px;
+		transition-duration: 0s;
+		transform: rotate(35deg) translateX(-15px);
+	}
+
+	&:hover::before {
+		transition: 0.6s;
+		transform: rotate(35deg) translate(200px, 8px);
+	}
+}
+
+.user_status_icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+}
+
+.user_status_right {
+	display: flex;
+	flex-direction: column;
+	margin-left: 10px;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 150%;
+	color: #828282;
+}
+
+.user_status_num {
+	position: relative;
+	display: inline-block;
+	width: fit-content;
+	margin-bottom: 1px;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 150%;
+	color: #221f20;
+
+	&::after {
+		position: absolute;
+		bottom: 2.5px;
+		left: 0;
+		width: 100%;
+		height: 1px;
+		content: "";
+		background-color: #000;
+		transition: transform 0.25s ease-out;
+		transform: scaleX(0);
+		transform-origin: bottom right;
+	}
+
+	&:hover::after {
+		font-weight: 800;
+		transform: scaleX(1);
+		transform-origin: bottom left;
+	}
+}
+
+.placeholder_element {
+	border-radius: 4px;
+}

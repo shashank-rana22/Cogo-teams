@@ -30,8 +30,7 @@ function CardList({
 	setFinalList,
 	functions,
 } :Props) {
-	// eslint-disable-next-line @typescript-eslint/naming-convention
-	const { list = [], total_count = 0 } = data;
+	const { list = [], total_count:totalCount = 0 } = data;
 
 	const loadMore = useCallback(() => {
 		setTimeout(() => {
@@ -50,10 +49,12 @@ function CardList({
 	));
 
 	useEffect(() => {
-		if (page === 1) {
-			setFinalList([...list]);
-		} else {
-			setFinalList(finalList.concat(list));
+		if (!isEmpty(list)) {
+			if (page === 1) {
+				setFinalList([...list]);
+			} else {
+				setFinalList(finalList.concat(list));
+			}
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [list]);
@@ -66,7 +67,7 @@ function CardList({
 					pageStart={1}
 					initialLoad={false}
 					loadMore={loadMore}
-					hasMore={page < Math.ceil(total_count / 10)}
+					hasMore={page < Math.ceil(totalCount / 10)}
 					loader={
                         !loading ? (
 	<div className={styles.loading_style}>
@@ -85,7 +86,7 @@ function CardList({
 						<Loader />
 					</div>
 				)}
-				{finalList.length === total_count && finalList.length > 0 ? (
+				{finalList.length === totalCount && finalList.length > 0 ? (
 					<div className={styles.end_message}>No more data to show</div>
 				) : null}
 			</div>

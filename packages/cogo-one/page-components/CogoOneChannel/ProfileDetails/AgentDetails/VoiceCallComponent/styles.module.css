@@ -1,0 +1,67 @@
+.number_div {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 5px 10px;
+	margin-top: 16px;
+	background: #fff;
+	border: 0.5px solid #c4dc91;
+	border-radius: 6px;
+}
+
+.dialer_icon_div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 5px 8px;
+	cursor: pointer;
+	background: #abcd62;
+	border-radius: 6px;
+}
+
+.call_icon {
+	width: 20px;
+	height: 20px;
+	fill: #fff;
+}
+
+.call_on_div {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	padding: 2px 5px;
+	margin-left: 10px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.call_on {
+	font-size: 11px;
+	font-weight: 400;
+	color: #828282;
+}
+
+.disable {
+	width: 17px;
+	height: 17px;
+	margin-right: 22px;
+	cursor: not-allowed;
+	fill: #abcd62;
+}
+
+.whatsapp_icon {
+	width: 36px;
+	height: 36px;
+	cursor: pointer;
+}
+
+.show_number {
+	color: #4f4f4f;
+}
+
+.flex_div {
+	display: flex;
+}

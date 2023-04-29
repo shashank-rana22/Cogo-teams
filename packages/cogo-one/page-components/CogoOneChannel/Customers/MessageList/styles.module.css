@@ -1,0 +1,231 @@
+.container {
+	width: 24%;
+	padding: 10px;
+	margin-right: 10px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.title {
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.filters_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 10px;
+
+	:global {
+		.ui_toggle_container.ui_ps_size_md .ui_switch {
+			right: 51px;
+		}
+
+		.ui_toggle_container.ui_toggle_inside .ui_inner::before {
+			display: flex;
+			align-items: center;
+			font-size: 12px;
+			content: "Active";
+			background-color: #ee3425;
+		}
+
+		.ui_toggle_container.ui_toggle_inside .ui_inner::after {
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			float: right;
+			font-size: 12px;
+			color: #fff;
+			content: "Inactive";
+			background-color: #f8aea8;
+		}
+
+		.ui_toggle_container.ui_ps_size_md .ui_toggle_switch {
+			width: 75px;
+		}
+
+		input[type="checkbox"]:checked + .ui_label_radius .ui_switch {
+			right: 0;
+		}
+	}
+}
+
+.filter_dot {
+	position: absolute;
+	top: 2px;
+	right: 20px;
+	width: 8px;
+	height: 8px;
+	background: rgb(3 74 253);
+	border: 1px solid #fff;
+	border-radius: 100%;
+}
+
+.source_types {
+	display: flex;
+	align-items: center;
+	width: calc(100% - 44px);
+}
+
+.empty_state {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 35vh;
+	font-size: 16px;
+	color: #828282;
+}
+
+.auto_assign_button {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 12px;
+
+	svg {
+		width: 20px;
+		margin-right: 6px;
+	}
+
+	:global {
+		.ui_button_container {
+			width: 110px;
+		}
+	}
+}
+
+.list_container {
+	height: calc(100% - 150px);
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.bot_list_container {
+	height: calc(100% - 200px);
+}
+
+.list_container::-webkit-scrollbar {
+	display: none;
+}
+
+.tabs {
+	margin: 0 -10px 15px;
+}
+
+.user_activity {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+.pills_card {
+	padding: 1px 5px;
+	font-size: 10px;
+	background: #f8aea8;
+	border-radius: 6px;
+}
+
+.tags_conatiner {
+	height: 20px;
+}
+
+.filter_icon {
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+}
+
+.filters_applied {
+	position: relative;
+	top: -33px;
+	left: 18px;
+	width: 10px;
+	height: 10px;
+	background: #f68b21;
+	border-radius: 5px;
+}
+
+.tags {
+	padding: 2px 6px;
+	font-size: 10px;
+	border-radius: 6px;
+}
+
+.escalated {
+	background: #f8aea8;
+}
+
+.warning {
+	background: #fef199;
+}
+
+.important_styles {
+	position: relative;
+}
+
+.important_icon {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 22px;
+	background: #ee3425;
+	border-radius: 0 4px;
+}
+
+.name_container {
+	display: flex;
+	align-items: center;
+}
+
+.pinned_chats_div {
+	margin-bottom: 10px;
+	border-bottom: 0.5px solid #b0b0b0;
+}
+
+.icon {
+	width: 10px;
+	height: 10px;
+	fill: #828282;
+}
+
+.pinned_chat_flex {
+	display: flex;
+	align-items: center;
+	padding: 0 3px 10px 0;
+	cursor: pointer;
+	user-select: none;
+}
+
+.pin_text {
+	margin-left: 5px;
+	font-size: 10px;
+	font-weight: 600;
+	color: #828282;
+}
+
+.recent_text {
+	font-size: 10px;
+	font-weight: 600;
+	color: #828282;
+	user-select: none;
+}
+
+.styled_popover {
+	padding: 0;
+
+	:global {
+		.tippy-content {
+			width: 260px;
+			height: 500px;
+			padding: 0;
+
+			>div {
+				height: 100%;
+			}
+		}
+	}
+}

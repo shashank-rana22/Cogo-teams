@@ -1,0 +1,19 @@
+.invoice {
+	font-size: 12px;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.color {
+	width: fit-content;
+	padding: 2px 6px;
+	font-size: 10px;
+	color: #393f70;
+	white-space: nowrap;
+	background-color: #fef1df;
+	border-radius: 4px;
+}
+
+.text {
+	margin-left: -10px;
+}

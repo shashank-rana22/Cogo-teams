@@ -1,0 +1,91 @@
+.container {
+	height: 100%;
+	padding: 36px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 16px;
+}
+
+.heading_text {
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	font-weight: 500;
+	color: #333;
+}
+
+.info_icon {
+	margin-top: 6px;
+	margin-left: 8px;
+}
+
+.text {
+	display: flex;
+	flex-direction: column;
+}
+
+.hr {
+	width: 50%;
+	height: 2px;
+	margin-left: 2px;
+	background: #ed3726;
+	border-radius: 40px;
+}
+
+.toggle {
+	display: flex;
+}
+
+.month_box {
+	padding: 16px;
+}
+
+.month_container {
+	min-width: 30%;
+	padding: 16px;
+}
+
+.label {
+	font-size: 16px;
+	font-weight: 500;
+	color: #333;
+}
+
+.value {
+	font-size: 36px;
+	font-weight: 500;
+	color: #f68b21;
+}
+
+.sub_container {
+	display: flex;
+}
+
+.quarter_text {
+	margin-right: 2px;
+	font-size: 16px;
+	font-weight: 500;
+	color: #ed3726;
+}
+
+.dash {
+	display: flex;
+	align-items: center;
+	min-width: 30%;
+	padding: 16px;
+	font-size: 36px;
+	font-weight: 500;
+	color: #f68b21;
+}
+
+.loader {
+	width: 100px;
+	height: 20px;
+	margin: 8px 12px 0 0;
+}

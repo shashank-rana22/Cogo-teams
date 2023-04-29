@@ -1,0 +1,18 @@
+.text_content {
+	&.title {
+		width: 240px;
+		height: 20px;
+		overflow: hidden;
+		text-align: left;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+}
+
+.feedback {
+	width: 100%;
+	font-weight: 300;
+	color: #4f4f4f;
+	text-align: justify;
+	word-wrap: break-word;
+}

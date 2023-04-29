@@ -1,0 +1,44 @@
+.title {
+	margin-bottom: 20px;
+	font-size: 28px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.address {
+	display: flex;
+}
+
+.address_label {
+	max-width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.link_text {
+	margin-left: 20px;
+	text-decoration: underline;
+}
+
+.svg_container {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.content_container {
+	display: flex;
+	justify-content: center;
+}
+
+.action_header {
+	text-align: center;
+}
+
+.secondary_tabs {
+	margin-top: 20px;
+}
+
+.edit_cta {
+	margin-right: 12px;
+}

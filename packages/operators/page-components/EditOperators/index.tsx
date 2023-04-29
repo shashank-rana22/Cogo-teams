@@ -45,7 +45,8 @@ function EditOperators({
 		});
 		setValue('is_nvocc', String(item.is_nvocc));
 		setValue('logo_url', String(item.logo_url));
-	}, [setValue, item, fields]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [item, fields]);
 
 	return (
 		<div className={styles.container}>

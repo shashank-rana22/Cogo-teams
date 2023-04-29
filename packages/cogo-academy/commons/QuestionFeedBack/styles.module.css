@@ -1,0 +1,46 @@
+.container {
+	padding-right: 20px;
+	margin-bottom: 12px;
+}
+
+.pill {
+	margin-right: 8px;
+	margin-left: 0;
+	font-weight: 800;
+	background-color: #fff9cf;
+}
+
+.pill_count {
+	padding-left: 4px;
+}
+
+.header {
+	padding-bottom: 12px;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.scrollable_container {
+	height: 80vh;
+	overflow-y: scroll;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+	padding-top: 16px;
+	padding-right: 12px;
+	font-size: 13px;
+	cursor: pointer;
+}
+
+.pills_container {
+	padding-bottom: 14px;
+}
+
+.spinner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 80vh;
+}

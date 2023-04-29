@@ -1,0 +1,55 @@
+.role_container {
+	display: flex;
+	align-items: center;
+
+	:global(.ui_radiogroup_container) {
+		padding: 0;
+	}
+
+	:global(.ui_select_display_container) {
+		width: 250px;
+		margin-left: 16px;
+	}
+}
+
+.form_container {
+	margin-top: 16px;
+}
+
+.form_columns {
+	display: flex;
+}
+
+.col_item {
+	flex: 1;
+}
+
+.row_item {
+	display: flex;
+	flex: 1;
+	align-items: center;
+	height: 48px;
+	margin-right: 4px;
+}
+
+.row_labels {
+	width: 100%;
+}
+
+.row_container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.control_container {
+	display: flex;
+	flex-basis: 18%;
+	align-items: center;
+	margin: 0 4px;
+}
+
+.error_message {
+	font-size: 10px;
+	font-weight: 400;
+	color: #cb6464;
+}

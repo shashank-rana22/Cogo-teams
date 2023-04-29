@@ -3,11 +3,8 @@
 	"version": "0.1.0",
 	"description": "Package for Operators",
 	"private": true,
-	"main": "dist/cjs/index.js",
-	"module": "dist/es/index.js",
-	"types": "dist/types/index.d.ts",
 	"dependencies": {
-	  "@cogoport/components": "^1.0.274",
+	  "@cogoport/components": "^1.0.322",
 	  "@cogoport/forms": "workspace:0.1.0",
 	  "@cogoport/icons-react": "^1.0.51",
 	  "@cogoport/request": "workspace:0.1.0",

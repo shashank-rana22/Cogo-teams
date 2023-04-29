@@ -1,0 +1,23 @@
+{
+	"name": "@cogoport/cogo-academy",
+	"description": "Cogo Academy module",
+	"version": "0.1.0",
+	"main": "index.js",
+	"sideEffects": false,
+	"dependencies": {
+		"@cogoport/charts": "^1.0.2",
+		"@cogoport/components": "^1.0.359",
+		"@cogoport/core": "workspace:*",
+		"@cogoport/forms": "workspace:*",
+		"@cogoport/globalization": "workspace:*",
+		"@cogoport/icons-react": "^1.0.58",
+		"@cogoport/next": "workspace:0.1.0",
+		"@cogoport/request": "workspace:^0.1.0",
+		"@cogoport/store": "workspace:^0.1.0",
+		"@cogoport/utils": "^1.2.6",
+		"axios": "^1.3.4",
+		"axios-hooks": "^4.0.0",
+		"react": "18.2.0",
+		"react-rte": "^0.16.5"
+	}
+}

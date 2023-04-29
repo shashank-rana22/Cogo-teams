@@ -1,0 +1,14 @@
+.container {
+	display: flex;
+}
+
+.header {
+	padding: 20px;
+	margin-bottom: 2px;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 21px;
+	color: #333;
+	background-color: #fff;
+	box-shadow: 4px 4px 4px 0 rgb(0 0 0 / 10%);
+}

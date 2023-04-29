@@ -1,0 +1,64 @@
+/* stylelint-disable selector-class-pattern */
+.url_container {
+	color: #3471ae;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.text_div {
+	color: #3471ae;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.flex {
+	display: flex;
+
+	:global {
+		.ui_tag_container {
+			padding: 4px 18px;
+			background-color: transparent;
+		}
+	}
+}
+
+.active {
+	padding: 3px 10px;
+	color: #ed3726 !important;
+	cursor: pointer;
+	background-color: #fffaeb !important;
+	border: 1px solid #ed3726 !important;
+	border-radius: 8px;
+}
+
+.select_container {
+	width: var(--width);
+	padding-left: 5px;
+
+	:global {
+		.ui_multiselect_input_control {
+			font-size: 14px !important;
+		}
+	}
+}
+
+.normal {
+	padding: 3px 10px;
+	cursor: pointer;
+	background: #fff !important;
+	border: 1px solid #333 !important;
+	border-radius: 8px;
+}
+
+.single_date {
+	:global {
+		.react-datepicker__input-container input {
+			height: 40px;
+		}
+
+		.react-datepicker__close-icon {
+			background: none !important;
+			border-right: none;
+		}
+	}
+}

@@ -1,0 +1,185 @@
+.flexresponsive {
+	display: flex;
+	justify-content: space-between;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+}
+
+.flex {
+	display: flex;
+	justify-content: space-between;
+}
+
+.flexwidth {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	min-width: 450px;
+}
+
+.link {
+	font-size: 14px;
+	font-weight: 700;
+	color: #ed3726;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.tag {
+	padding: 5px !important;
+	background-color: #cdf7d4 !important;
+	border-radius: 8px;
+}
+
+.line {
+	margin-top: 25px;
+	border: 1px solid #333;
+}
+
+.heading {
+	margin-top: 20px;
+	font-size: 18px;
+	font-weight: 800;
+	line-height: 22px;
+	color: #333;
+}
+
+.statscontainer {
+	display: flex;
+	margin-top: 25px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+}
+
+.shipmentag {
+	padding: 4px !important;
+	margin-left: 20px;
+	font-size: 12px;
+	font-weight: 500;
+	background-color: #fcedbf !important;
+	border-radius: 4px;
+}
+
+.details {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.displayflex {
+	display: flex;
+	align-items: center;
+	text-align: center;
+}
+
+.responsive {
+	@media (max-width: 768px) {
+		margin-top: 20px;
+	}
+}
+
+.warning {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 20px 10px 10px;
+	margin-top: 15px;
+	margin-left: 20px;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 16px;
+	color: #ed3726;
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: rgb(0 0 0 / 12%) 0 1px 3px, rgb(0 0 0 / 24%) 0 1px 2px;
+}
+
+.icon {
+	margin: 5px 10px;
+	color: #ed3726;
+}
+
+.amountselect {
+	margin-right: 10px;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.kam_data {
+	display: flex;
+	font-weight: 700;
+}
+
+.width {
+	width: 49%;
+}
+
+.profiticon {
+	color: #34c759;
+	transform: translateX(10px) rotate(-45deg);
+}
+
+.discount_data {
+	display: flex;
+	gap: 10px;
+}
+
+.tags_container {
+	display: flex;
+	gap: 24px;
+}
+
+.lossicon {
+	color: #ed3726;
+	transform: rotate(45deg);
+}
+
+.legends {
+	margin-left: -15px;
+}
+
+.quotation_amount {
+	display: flex;
+	justify-content: space-between;
+	padding: 4px;
+	padding-right: 20px;
+	margin-top: 10px;
+	background: #f3fafa;
+	border: 1px solid #88cad1;
+	border-radius: 4px;
+}
+
+.credit {
+	display: flex;
+}
+
+.value_text {
+	padding: 1px;
+	padding-left: 4px;
+}
+
+.content {
+	padding: 15px;
+}
+
+.label {
+	font-size: 12;
+	font-weight: 500;
+}
+
+.sid {
+	display: flex;
+	gap: 4px;
+	font-size: 18px;
+}
+
+.job {
+	font-weight: 600;
+	color: #ed3726;
+}

@@ -55,7 +55,7 @@ const useCreateOperators = ({
 				setPage(1);
 			}
 		} catch (error) {
-			Toast.error(error.data);
+			Toast.error(error?.data);
 		}
 	};
 	const onError = (errs = {}) => {

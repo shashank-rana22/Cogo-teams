@@ -26,6 +26,8 @@ const app_apis = {
 	app_pricing                     : apis.product_pricing,
 	app_enquiries                   : apis.enquiry_supply,
 	app_contract_rates              : apis.contract_rates,
+	app_manage_rfq                  : apis.app_manage_rfq,
+	app_contract_management         : apis.app_contract_management,
 	saas_tracking                   : [...apis.app_saas_tracking, ...apis.app_saas_dsr],
 	saas_air_tracking               : apis.app_saas_air_tracking,
 	saas_map_tracking               : apis.app_saas_map_tracking,
@@ -59,5 +61,11 @@ const app_apis = {
 	saas_transaction_history        : apis.app_saas_transaction_history,
 	saas_trade_partner              : apis.app_saas_trade_partner,
 	saas_product_inventory          : apis.app_saas_product_inventory,
+	saas_premium_services           : apis.app_saas_premium_services,
+	saas_trader_eligibility_check   : apis.app_saas_trader_eligibilty_check,
+	saas_order_history              : apis.app_saas_order_history,
+	export_factoting                : apis.export_factoring,
+	saas_cogostore                  : apis.app_saas_cogostore,
+	saas_import_export_doc          : apis.app_saas_import_export_doc,
 };
 export default app_apis;
