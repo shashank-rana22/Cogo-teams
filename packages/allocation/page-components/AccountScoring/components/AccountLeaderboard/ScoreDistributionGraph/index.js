@@ -45,8 +45,9 @@ function ScoreDistributionGraph(props) {
 					legend         : 'Accounts',
 					legendPosition : 'middle',
 					legendOffset   : -80,
+					tickValues     : 1,
 				}}
-				enableGridY
+				enableGridX={false}
 				enableLabel={false}
 			/>
 		</div>
