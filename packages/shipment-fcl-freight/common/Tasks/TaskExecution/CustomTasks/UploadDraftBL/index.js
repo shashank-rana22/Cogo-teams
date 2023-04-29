@@ -1,13 +1,14 @@
 import { Button } from '@cogoport/components';
 import { useEffect, useRef, useState } from 'react';
 
-import TaskContainer from '../TaskContainer';
+import useListDocuments from '../../../../../hooks/useListDocuments';
+import TaskContainer from '../common/TaskContainer';
 
 // import HBLCreate from './HBLCreate';
 import useDraftBLHelper from './hooks/useDraftBLHelper';
 import MBLDetails from './MBLDetails';
 // import styles from './styles.module.css';
-// import UploadHbl from './UploadHbl';
+import UploadHbl from './UploadHbl';
 
 function UploadDraftBL({
 	task = {},
@@ -15,13 +16,14 @@ function UploadDraftBL({
 	primaryService = {},
 	onCancel = () => {},
 	taskListRefetch = () => {},
+	servicesList = [],
 }) {
 	// const [hblData, setHblData] = useState([]);
 	// const [hblLoading, setHblLoading] = useState(false);
 	// const [isAllHBLUploaded, setIsAllHblUploaded] = useState(false);
-	// const [showSwitchGenerate, setShowSwitchGenerate] = useState(true);
+	const [showSwitchGenerate, setShowSwitchGenerate] = useState(true);
 	// const [uploadedDocs, setuploadedDocs] = useState([]);
-	// const [canUseSwitch, setcanUseSwitch] = useState(true);
+	const [canUseSwitch, setcanUseSwitch] = useState(true);
 	const mblRef = useRef();
 
 	const isHBL =		(primaryService.bl_category || '').toLowerCase() === 'hbl';
@@ -31,6 +33,22 @@ function UploadDraftBL({
 	const [step, setStep] = useState(initial_step || '');
 
 	const blCount = primaryService.bls_count;
+
+	const fcl_or_lcl_service =		(servicesList || []).find(
+		(service) => service?.service_type === 'fcl_freight_service'
+				|| service?.service_type === 'lcl_freight_service',
+	) || {};
+
+	const shipmentDocsParams = {
+		performed_by_org_id : task?.organization_id,
+		service_type        : fcl_or_lcl_service?.service_type,
+		filters             : {
+			shipment_id   : task?.shipment_id,
+			document_type : 'draft_house_bill_of_lading',
+		},
+	};
+
+	const { list: uploadedDocs, loading, refetch: refetchDocs } = useListDocuments({ defaultParams: shipmentDocsParams });
 
 	const {
 		listDocsAPI,
@@ -105,9 +123,9 @@ function UploadDraftBL({
 	// 	setIsAllHblUploaded(tradeDocsLength >= blCount);
 	// };
 
-	// const handleClickSwitch = () => {
-	// 	setShowSwitchGenerate(!showSwitchGenerate);
-	// };
+	const handleClickSwitch = () => {
+		setShowSwitchGenerate(!showSwitchGenerate);
+	};
 
 	useEffect(() => {
 		// setShowSwitchGenerate(!showUploadView);
@@ -115,13 +133,13 @@ function UploadDraftBL({
 
 	return (
 		<TaskContainer
-			loading={listDocsAPI?.loading || shipmentListDocsAPI?.loading}
-			task={task}
+			loading={listDocsAPI?.loading || loading}
+			pendingTask={task}
 			actions={(
 				<>
-					{/* {canUseSwitch && isHBL ? (
+					{canUseSwitch && !isHBL ? (
 						<Button
-							disabled={listDocsAPI?.loading || hblLoading}
+							disabled={listDocsAPI?.loading}
 							onClick={handleClickSwitch}
 							size="sm"
 							id="bm_pt_switch_bl_upload"
@@ -129,7 +147,7 @@ function UploadDraftBL({
 						>
 							{showSwitchGenerate ? 'Switch to upload' : 'Switch to create'}
 						</Button>
-					) : null} */}
+					) : null}
 
 					<Button
 						// disabled={isNextDisabled}
@@ -145,15 +163,15 @@ function UploadDraftBL({
 			)}
 		>
 			<div>
-				{/* {isHBL && step === 'hbl' ? (
+				{isHBL && step === 'hbl' ? (
 					<div>
-						{showSwitchGenerate ? (
+						{/* {showSwitchGenerate ? (
 							<div>
 								{Array(blCount)
 									.fill(null)
 									.map((n, i) => (
 										<div className={styles.flex_container}>
-											<div size={12} marginBottom={8} bold>
+											<div size={12}>
 												HBL
 												{' '}
 												{i + 1}
@@ -180,19 +198,19 @@ function UploadDraftBL({
 									</div>
 								) : null}
 							</div>
-						) : (
-							<UploadHbl
-								refetchDocs={refetchDocs}
-								task={task}
-								bls_count={blCount}
-								docs={uploadedDocs}
-								shipmentData={shipmentData}
-							/>
-						)}
+						) : ( */}
+						<UploadHbl
+							refetchDocs={refetchDocs}
+							task={task}
+							bls_count={blCount}
+							docs={uploadedDocs?.list}
+							shipmentData={shipmentData}
+						/>
+						{/* )} */}
 					</div>
-				) : null} */}
+				) : null}
 
-				{(step !== 'mbl' || !isHBL) && (
+				{(step === 'mbl' || !isHBL) && (
 					<MBLDetails
 						ref={mblRef}
 						task={task}
