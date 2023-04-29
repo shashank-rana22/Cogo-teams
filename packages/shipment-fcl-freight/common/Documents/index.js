@@ -47,14 +47,13 @@ function Documents() {
 		setShowDoc(showApproved);
 		setShowApproved(null);
 		if (addToWallet) {
-			await updateDocument({
-				values: {
-					name            : showApproved?.file_name || showApproved?.document_url,
-					document_type   : showApproved?.document_type,
-					image_url       : showApproved?.document_url,
-					organization_id : showApproved?.organization_id,
-				},
-			});
+			const values = {
+				name            : showApproved?.file_name || showApproved?.document_url,
+				document_type   : showApproved?.document_type,
+				image_url       : showApproved?.document_url,
+				organization_id : showApproved?.organization_id,
+			};
+			await updateDocument(values);
 		}
 	};
 
