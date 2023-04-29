@@ -5,11 +5,9 @@ import DNDComponent from './DNDComponent';
 
 function PageBuilder() {
 	return (
-		<div>
-			<DndProvider backend={HTML5Backend}>
-				<DNDComponent />
-			</DndProvider>
-		</div>
+		<DndProvider backend={HTML5Backend}>
+			<DNDComponent />
+		</DndProvider>
 	);
 }
 

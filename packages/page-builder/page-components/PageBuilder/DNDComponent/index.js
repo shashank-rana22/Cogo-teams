@@ -1,15 +1,13 @@
 /* eslint-disable max-len */
-import { Modal } from '@cogoport/components';
 import React, { useCallback, useState } from 'react';
 
 import getContentMapping from '../../../configurations/default-content-mapping';
 
 import DNDBody from './DNDBody';
-import Content from './DNDBody/LeftPanel/Content';
+import SelectComponentModal from './SelectComponentModal';
 import styles from './styles.module.css';
 
 function DNDComponent() {
-	const [activeTab, setActiveTab] = useState('content');
 	const [pageConfiguration, setPageConfiguration] = useState({
 		id      : 0,
 		layouts : [],
@@ -98,10 +96,6 @@ function DNDComponent() {
 		[pageConfiguration],
 	);
 
-	const onClose = () => {
-		setShowContentModal(false);
-	};
-
 	return (
 		<div>
 			<section className={styles.heading_container}>
@@ -109,8 +103,6 @@ function DNDComponent() {
 			</section>
 
 			<DNDBody
-				activeTab={activeTab}
-				setActiveTab={setActiveTab}
 				pageConfiguration={pageConfiguration}
 				setPageConfiguration={setPageConfiguration}
 				addNewItem={handleAddNewItem}
@@ -132,31 +124,20 @@ function DNDComponent() {
 				setMode={setMode}
 			/>
 
-			<section>
-				<Modal
-					size="md"
-					show={showContentModal}
-					onClose={onClose}
-					placement="top"
-					scroll={false}
-				>
-					<Modal.Header title="choose content" />
-					<Content
-						parentComponentId={parentComponentId}
-						addNewItem={handleAddNewItem}
-						onNewItemAdding={setNewItemAdding}
-						selectedRow={selectedRow}
-						dropSource="selectBox"
-						selectedItem={selectedItem}
-						setParentComponentId={setParentComponentId}
-						setShowContentModal={setShowContentModal}
-						pageConfiguration={pageConfiguration}
-						setPageConfiguration={setPageConfiguration}
-						selectedColumn={selectedColumn}
-						selectedNestedColumn={selectedNestedColumn}
-					/>
-				</Modal>
-			</section>
+			<SelectComponentModal
+				parentComponentId={parentComponentId}
+				addNewItem={handleAddNewItem}
+				onNewItemAdding={setNewItemAdding}
+				selectedRow={selectedRow}
+				selectedItem={selectedItem}
+				setParentComponentId={setParentComponentId}
+				setShowContentModal={setShowContentModal}
+				pageConfiguration={pageConfiguration}
+				setPageConfiguration={setPageConfiguration}
+				selectedColumn={selectedColumn}
+				selectedNestedColumn={selectedNestedColumn}
+				showContentModal={showContentModal}
+			/>
 		</div>
 	);
 }

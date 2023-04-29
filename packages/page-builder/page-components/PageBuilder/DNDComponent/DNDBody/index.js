@@ -1,10 +1,10 @@
+import { useState } from 'react';
+
 import LeftPanel from './LeftPanel';
 import RightPanel from './RightPanel';
 import styles from './styles.module.css';
 
 function DNDBody({
-	activeTab,
-	setActiveTab,
 	pageConfiguration,
 	setPageConfiguration,
 	addNewItem,
@@ -25,6 +25,8 @@ function DNDBody({
 	modeType,
 	setMode,
 }) {
+	const [activeTab, setActiveTab] = useState('content');
+
 	return (
 		<section className={styles.body}>
 			{modeType === 'edit' && (
