@@ -17,7 +17,7 @@ function EmptyState({
 				width={width}
 				height={height}
 				alt="Empty-state"
-				style={{ margin: '10px' }}
+				className={styles.image}
 			/>
 
 			<div>

@@ -45,7 +45,11 @@ function Form({
 									params={field.params}
 									rules={field.rules}
 								/>
-								{errors[field.name] && <span>{errors[field.name].message}</span>}
+								{errors[field.name] && (
+									<span className={styles.errors}>
+										{errors[field.name].message}
+									</span>
+								)}
 							</div>
 						) : null
 				);
@@ -62,7 +66,11 @@ function Form({
 									placeholder={field.placeholder}
 									rules={field.rules}
 								/>
-								{errors[field.name] && <span>{errors[field.name].message}</span>}
+								{errors[field.name] && (
+									<span className={styles.errors}>
+										{errors[field.name].message}
+									</span>
+								)}
 							</div>
 						) : null
 				);
@@ -80,7 +88,11 @@ function Form({
 									placeholder={field.placeholder}
 									rules={field.rules}
 								/>
-								{errors[field.name] && <span>{errors[field.name].message}</span>}
+								{errors[field.name] && (
+									<span className={styles.errors}>
+										{errors[field.name].message}
+									</span>
+								)}
 							</div>
 						) : null
 				);
@@ -96,7 +108,11 @@ function Form({
 									size="sm"
 									rules={field.rules}
 								/>
-								{errors[field.name] && <span>{errors[field.name].message}</span>}
+								{errors[field.name] && (
+									<span className={styles.errors}>
+										{errors[field.name].message}
+									</span>
+								)}
 							</div>
 						) : null
 				);
@@ -129,7 +145,11 @@ function Form({
 									}}
 									rows={4}
 								/>
-								{errors[field.name] && <span>{errors[field.name].message}</span>}
+								{errors[field.name] && (
+									<span className={styles.errors}>
+										{errors[field.name].message}
+									</span>
+								)}
 							</div>
 						) : null
 				);
@@ -156,7 +176,7 @@ function Form({
 								rules={{ required: { value: true, message: 'Name is required' } }}
 							/>
 							{errors.poc_details && (
-								<span>
+								<span className={styles.errors}>
 									{errors.poc_details[index]?.name?.message}
 								</span>
 							)}
@@ -171,7 +191,7 @@ function Form({
 								rules={{ required: { value: true, message: 'Email is required' } }}
 							/>
 							{errors.poc_details && (
-								<span>
+								<span className={styles.errors}>
 									{errors.poc_details[index]?.email?.message}
 								</span>
 							)}
@@ -187,7 +207,7 @@ function Form({
 								rules={{ required: { value: true, message: 'Country Code is required' } }}
 							/>
 							{errors.poc_details && (
-								<span>
+								<span className={styles.errors}>
 									{errors.poc_details[index]?.mobile_country_code?.message}
 								</span>
 							)}
@@ -202,7 +222,7 @@ function Form({
 								rules={{ required: { value: true, message: 'Mobile Number is required' } }}
 							/>
 							{errors.poc_details && (
-								<span>
+								<span className={styles.errors}>
 									{errors.poc_details[index]?.mobile_number?.message}
 								</span>
 							)}

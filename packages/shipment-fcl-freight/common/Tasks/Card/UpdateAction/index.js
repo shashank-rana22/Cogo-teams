@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 import UnableToDoTask from './UnableToDoTask';
 import UpdateAssignedStakeholder from './UpdateAssignedStakeholder';
 
-function UpdateAction({ task = {} }) {
+function UpdateAction({ task = {}, hideThreeDots }) {
 	const [showAction, setShowAction] = useState(false);
 	const [showUnableTo, setShowUnableTo] = useState(false);
 	const [showAdmin, setShowAdmin] = useState(false);
@@ -102,23 +102,7 @@ function UpdateAction({ task = {} }) {
 						>
 							Change Owner
 						</div>
-						{/* {shipmentTags.includes('cogoverse')
-							&& task?.task === 'upload_booking_note' && (
-								<>
-									<Line />
 
-									<div
-										className={styles.task_action}
-										onClick={() => {
-											if (!bookingNoteDelayedLoading) sendBookingNoteDelayed(task?.shipment_id);
-										}}
-									>
-										{bookingNoteDelayedLoading
-											? 'Notifying'
-											: 'Notify Customer About Delay'}
-									</div>
-								</>
-						)} */}
 					</>
 				)}
 			>
@@ -128,7 +112,7 @@ function UpdateAction({ task = {} }) {
 					}
 					className={styles.action}
 				>
-					{!isMainServiceCancelled ? (
+					{!isMainServiceCancelled && !hideThreeDots ? (
 						<IcMOverflowDot
 							style={{
 								marginLeft : '12px',
@@ -146,14 +130,12 @@ function UpdateAction({ task = {} }) {
 			<UnableToDoTask
 				setShowUnableTo={setShowUnableTo}
 				showUnableTo={showUnableTo}
-				// refetch={refetch}
 				task={task}
 			/>
 
 			<UpdateAssignedStakeholder
 				setShowAdmin={setShowAdmin}
 				showAdmin={showAdmin}
-				// refetch={refetch}
 				task={task}
 			/>
 		</div>

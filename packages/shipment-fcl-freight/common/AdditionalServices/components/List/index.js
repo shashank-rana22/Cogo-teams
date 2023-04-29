@@ -48,7 +48,9 @@ function List({ isSeller = false }) {
 
 	return (
 		<div className={styles.container}>
-			{loading && <Loader />}
+
+			{loading ? <Loader /> : null}
+
 			{!isEmpty(additionalServiceList) && !loading ? (
 				<div className={styles.added_services}>
 					{additionalServiceList?.map((serviceListItem) => {

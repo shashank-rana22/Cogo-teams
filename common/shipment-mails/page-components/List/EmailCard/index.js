@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 function EmailCard({ activeMail, data = {}, onClick = () => {} }) {
 	const yesterday = subtractDays(new Date(), 1);
-	const displayDate =	new Date(data.receivedDateTime) > yesterday
+	const displayDate = new Date(data.receivedDateTime) > yesterday
 		? formatDistanceToNow(data?.receivedDateTime)
 		: formatDate({
 			date       : data?.receivedDateTime,
