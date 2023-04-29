@@ -1,89 +1,72 @@
-import React, { useRef } from 'react';
+import { Modal } from '@cogoport/components';
 
-import Resizer from './Resizer';
-import { Direction } from './Resizer/constants';
+import useListPages from '../hooks/useListPages';
+
+import CreateDndPage from './CreateDndPage';
+import Header from './Header';
+import ListTable from './ListTable';
 import styles from './styles.module.css';
 
-function Panel({ children }) {
-	const panelRef = useRef(null);
-
-	const handleResize = (direction, movementX, movementY) => {
-		const panel = panelRef.current;
-		if (!panel) return;
-
-		const { width, height, x, y } = panel.getBoundingClientRect();
-
-		const resizeTop = () => {
-			panel.style.height = `${height - movementY}px`;
-			panel.style.top = `${y + movementY}px`;
-		};
-
-		const resizeRight = () => {
-			panel.style.width = `${width + movementX}px`;
-		};
-
-		const resizeBottom = () => {
-			panel.style.height = `${height + movementY}px`;
-		};
-
-		const resizeLeft = () => {
-			panel.style.width = `${width - movementX}px`;
-			panel.style.left = `${x + movementX}px`;
-		};
-
-		switch (direction) {
-			case Direction.TopLeft:
-				resizeTop();
-				resizeLeft();
-				break;
-
-			case Direction.Top:
-				resizeTop();
-				break;
-
-			case Direction.TopRight:
-				resizeTop();
-				resizeRight();
-				break;
-
-			case Direction.Right:
-				resizeRight();
-				break;
-
-			case Direction.BottomRight:
-				resizeBottom();
-				resizeRight();
-				break;
-
-			case Direction.Bottom:
-				resizeBottom();
-				break;
-
-			case Direction.BottomLeft:
-				resizeBottom();
-				resizeLeft();
-				break;
-
-			case Direction.Left:
-				resizeLeft();
-				break;
-
-			default:
-				break;
-		}
-	};
+function ListPages() {
+	const {
+		showCreatePage,
+		setShowCreatePage,
+		columns,
+		list,
+		loading,
+		paginationData,
+		getNextPage,
+		refetch,
+		params,
+		setParams,
+		disabled,
+		setSearchValue,
+		searchValue,
+		debounceQuery,
+	} = useListPages();
 
 	return (
-		<div className={styles.panel} ref={panelRef}>
-			<div className={styles.panel__container}>
-				<Resizer onResize={handleResize} />
 
-				<div className={styles.panel__content}>
-					{children}
-				</div>
+		<div>
+
+			<div className={styles.title}>Cogoport Page Builder</div>
+
+			<div>
+				<Header
+					params={params}
+					setParams={setParams}
+					disabled={disabled}
+					setSearchValue={setSearchValue}
+					debounceQuery={debounceQuery}
+					searchValue={searchValue}
+					setShowCreatePage={setShowCreatePage}
+				/>
 			</div>
+
+			<div>
+				<ListTable
+					columns={columns}
+					list={list}
+					loading={loading}
+					paginationData={paginationData}
+					getNextPage={getNextPage}
+				/>
+			</div>
+
+			<Modal
+				size="md"
+				show={showCreatePage}
+				placement="center"
+				onClose={() => setShowCreatePage(false)}
+			>
+				<CreateDndPage
+					setShowCreatePage={setShowCreatePage}
+					showCreatePage={showCreatePage}
+					refetch={refetch}
+				/>
+			</Modal>
 		</div>
+
 	);
 }
-
-export default Panel;
+export default ListPages;

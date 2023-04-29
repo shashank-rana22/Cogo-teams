@@ -1,23 +1,7 @@
-.panel {
-  position: fixed;
-  top: 16px;
-  left: 16px;
-  width: 200px;
-  height: 200px;
-  border: 1px solid black;
-  box-sizing: border-box;
+.title {
+	margin-bottom: 20px;
+	font-size: 28px;
+	font-weight: 600;
+	color: #221f20;
 }
 
-.panel__container {
-  height: 100%;
-  position: relative;
-}
-
-.panel__header {
-  padding: 4px;
-  background-color: #e2e0e0;
-}
-
-.panel__content {
-  padding: 4px;
-}

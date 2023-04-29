@@ -1,0 +1,33 @@
+.header_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-bottom: 20px;
+
+	:global(.ui_legend_container) {
+		margin: 0;
+	}
+}
+
+.right_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.right_container > button:last-child {
+	margin-left: 8px;
+}
+
+.legends {
+	flex-wrap: wrap;
+}
+
+.search_container {
+	display: flex;
+	margin-right: 8px;
+
+	:global(.ui_input_container) {
+		width: 270px;
+	}
+}
