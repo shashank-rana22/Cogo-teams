@@ -27,11 +27,12 @@ function AccountLeaderboard() {
 		setLeaderboardParams = () => {},
 	} = useGetEngagementScoringLeaderboard();
 
-	const { organization, user_id, date } = watch();
+	const { organization, user_id, date, service } = watch();
 
 	useEffect(() => {
 		setGraphParams((pv) => ({
 			...pv,
+			service,
 			filters: {
 				created_at : date || undefined,
 				service_id : organization || undefined,
@@ -41,6 +42,7 @@ function AccountLeaderboard() {
 
 		setLeaderboardParams((pv) => ({
 			...pv,
+			service,
 			filters: {
 				created_at : date || undefined,
 				service_id : organization || undefined,
@@ -48,7 +50,7 @@ function AccountLeaderboard() {
 
 			},
 		}));
-	}, [organization, user_id, date, setGraphParams, setLeaderboardParams]);
+	}, [organization, user_id, date, service, setGraphParams, setLeaderboardParams]);
 
 	return (
 		<section className={styles.container}>
@@ -56,6 +58,7 @@ function AccountLeaderboard() {
 
 			<HeaderFilters
 				control={control}
+				service={service}
 			/>
 
 			<ScoreDistributionGraph

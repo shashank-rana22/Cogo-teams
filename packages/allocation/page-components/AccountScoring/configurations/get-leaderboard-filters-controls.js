@@ -9,6 +9,17 @@ const controls = [
 		isClearable           : true,
 	},
 	{
+		name        : 'service',
+		label       : 'Service',
+		type        : 'select',
+		placeholder : 'Select service',
+		options     : [
+			{ value: 'organization', label: 'Organization' },
+			{ value: 'lead_organization', label: 'Lead Organization' },
+		],
+		isClearable: true,
+	},
+	{
 		name        : 'user_id',
 		label       : 'KAM',
 		placeholder : 'Select KAM Agent',
@@ -16,6 +27,7 @@ const controls = [
 		asyncKey    : 'partner_users',
 		initialCall : true,
 		isClearable : true,
+		disabled    : true,
 	},
 	{
 		name        : 'organization',
