@@ -25,7 +25,7 @@ function HeaderFilters(props) {
 				const Element = getFieldController(filterItem.type);
 
 				return (
-					<div className={styles.form_group}>
+					<div className={styles.form_group} key={filterItem.name}>
 						<span className={styles.label}>{filterItem.label}</span>
 
 						<div className={styles.input_group}>
