@@ -49,7 +49,6 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) 
 						<Loader />
 					</div>
 				)
-
 				: (
 					<div className={styles.container}>
 						<TradeParties
@@ -131,4 +130,5 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) 
 		</div>
 	);
 }
+
 export default Poc;
