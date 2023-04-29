@@ -11,7 +11,7 @@ import ScoreDistributionGraph from './ScoreDistributionGraph/index';
 import styles from './styles.module.css';
 
 function AccountLeaderboard() {
-	const { control, watch } = useForm({
+	const { control, watch, resetField } = useForm({
 		defaultValues: {
 			date: new Date(Date.now()),
 		},
@@ -32,8 +32,8 @@ function AccountLeaderboard() {
 	useEffect(() => {
 		setGraphParams((pv) => ({
 			...pv,
-			service,
-			filters: {
+			service : service || undefined,
+			filters : {
 				created_at : date || undefined,
 				service_id : organization || undefined,
 				user_id    : user_id || undefined,
@@ -42,8 +42,8 @@ function AccountLeaderboard() {
 
 		setLeaderboardParams((pv) => ({
 			...pv,
-			service,
-			filters: {
+			service : service || undefined,
+			filters : {
 				created_at : date || undefined,
 				service_id : organization || undefined,
 				user_id    : user_id || undefined,
@@ -51,6 +51,10 @@ function AccountLeaderboard() {
 			},
 		}));
 	}, [organization, user_id, date, service, setGraphParams, setLeaderboardParams]);
+
+	useEffect(() => {
+		resetField('user_id');
+	}, [service, resetField]);
 
 	return (
 		<section className={styles.container}>
