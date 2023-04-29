@@ -5,9 +5,9 @@ import toastApiError from '../utils/toastApiError';
 
 const useGetMails = ({
 	multiple,
-	onChange,
-	values,
-	taskApi,
+	onChange = () => {},
+	values = [],
+	taskApi = '',
 	entity_name,
 	show,
 }) => {

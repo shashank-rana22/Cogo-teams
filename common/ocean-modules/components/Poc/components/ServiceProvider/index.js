@@ -27,29 +27,26 @@ function ServiceProvider({
 					<div className={styles.service_provider_name}>{serviceProviders[sp_key]}</div>
 					<div className={styles.row}>
 
-						<div>
-							<Button
-								themeType="linkUi"
-								onClick={() => { setShow({ ...show, [sp_key]: !show[sp_key] }); }}
-							>
-								{show[sp_key] ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
-							</Button>
-						</div>
+						<Button
+							themeType="linkUi"
+							onClick={() => { setShow({ ...show, [sp_key]: !show[sp_key] }); }}
+						>
+							{show[sp_key] ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
+						</Button>
+
 						{addPocPermission ?	(
-							<div>
-								<Button
-									size="sm"
-									onClick={() => setAddPoc({
-										poc_type            : 'tradeParty',
-										business_name       : serviceProviders[sp_key],
-										trade_party_type    : 'service_provider',
-										service_provider_id : sp_key,
-									})}
-									themeType="accent"
-								>
-									+ ADD POC
-								</Button>
-							</div>
+							<Button
+								size="sm"
+								onClick={() => setAddPoc({
+									poc_type            : 'tradeParty',
+									business_name       : serviceProviders[sp_key],
+									trade_party_type    : 'service_provider',
+									service_provider_id : sp_key,
+								})}
+								themeType="accent"
+							>
+								+ ADD POC
+							</Button>
 						) : null}
 
 					</div>
