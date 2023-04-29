@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import { isEmpty } from '@cogoport/utils';
 
-import RenderComponent from '../RenderComponent';
+import RenderElement from '../RenderElement';
 
 import styles from './styles.module.css';
 
@@ -108,7 +108,7 @@ function ColumnComponents({
 										style={{ ...childrenStyles, border: nestedBorder }}
 										onClick={(e) => handleNestedClick(e, childComponent, nestedChildren)}
 									>
-										<RenderComponent
+										<RenderElement
 											componentType={childrenType}
 											widget={nestedChildren}
 											pageConfiguration={pageConfiguration}
@@ -157,7 +157,7 @@ function ColumnComponents({
 								{icon}
 							</div>
 						) : (
-							<RenderComponent
+							<RenderElement
 								componentType={type}
 								widget={childComponent}
 								pageConfiguration={pageConfiguration}
