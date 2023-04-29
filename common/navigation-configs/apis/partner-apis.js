@@ -11481,6 +11481,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'tickets',
 		},
+		{
+			api          : 'post_tickets_ticket',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_stats',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'list_tickets',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
 	],
 	analytics_dashboard: [
 		{

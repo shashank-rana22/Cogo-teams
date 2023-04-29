@@ -1,5 +1,5 @@
 import { cl, Placeholder, Pagination } from '@cogoport/components';
-import { IcMPlusInCircle, IcMTag, IcMRefresh } from '@cogoport/icons-react';
+import { IcMPlusInCircle, IcMDefault, IcMRefresh } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
@@ -143,7 +143,7 @@ function Tickets({ zippedTicketsData = {}, setActiveSelect = () => {} }) {
 								onClick={() => setFilter(eachStat?.key)}
 								className={styles.stats_container_styles}
 							>
-								<IcMTag className={styles.tag_container} fill={eachStat?.iconColor} />
+								<IcMDefault className={styles.tag_container} fill={eachStat?.iconColor} />
 								<div className={styles.ticket_count}>
 									{eachStat.value || 0}
 								</div>
