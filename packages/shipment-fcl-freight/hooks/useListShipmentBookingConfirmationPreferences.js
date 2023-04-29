@@ -2,7 +2,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
-const useListShipmentBookingConfirmationPreferences = ({ defaultFilters, shipment_id }) => {
+const useListShipmentBookingConfirmationPreferences = ({ defaultFilters = {}, shipment_id = '' }) => {
 	const [apiData, setApiData] = useState({});
 	const [filters, setFilters] = useState({});
 

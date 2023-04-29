@@ -12,8 +12,10 @@ const useUpdateDocument = ({ refetch = () => {} }) => {
 	const updateDocument = async ({ values }) => {
 		try {
 			const res = await trigger({ data: values });
+
 			if (!res.hasError) {
 				refetch();
+
 				Toast.success('Document Added To Organization Wallet');
 			}
 		} catch (err) {

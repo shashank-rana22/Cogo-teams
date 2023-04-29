@@ -24,6 +24,7 @@ function useListTasksHelper() {
 	});
 
 	let completedTaskCount = 0;
+
 	(list?.list || []).forEach((task) => {
 		completedTaskCount += task?.status === 'completed';
 	});
@@ -38,6 +39,7 @@ function useListTasksHelper() {
 		} else {
 			setSelectedMail([]);
 		}
+
 		if ('id' in task) {
 			setSelectedTaskId(task.id);
 		}

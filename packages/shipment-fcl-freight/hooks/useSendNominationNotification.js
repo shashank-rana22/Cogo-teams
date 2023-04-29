@@ -8,6 +8,7 @@ const useSendNominationNotification = ({
 	successMessage = 'Successfully Updated',
 }) => {
 	const [response, setResponse] = useState();
+
 	const [{ loading }, trigger] = useRequest({
 		url    : '/send_nomination_notification',
 		method : 'POST',
@@ -16,8 +17,11 @@ const useSendNominationNotification = ({
 	const apiTrigger = async (payload) => {
 		try {
 			const res = await trigger({ data: payload });
+
 			Toast.success(successMessage);
+
 			refetch();
+
 			setResponse(res?.data);
 		} catch (err) {
 			toastApiError(err);

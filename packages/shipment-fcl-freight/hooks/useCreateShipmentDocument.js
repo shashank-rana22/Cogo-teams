@@ -11,8 +11,10 @@ const useCreateShipmentDocument = ({ refetch = () => {} }) => {
 	const apiTrigger = async (val) => {
 		try {
 			const res = await trigger({ data: val });
+
 			if (!res.hasError) {
 				Toast.success('Document Created Successfully!!');
+
 				refetch();
 			}
 		} catch (err) {

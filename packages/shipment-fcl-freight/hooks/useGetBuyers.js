@@ -2,7 +2,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-function useGetBuyers({ shipment_id }) {
+function useGetBuyers({ shipment_id = '' }) {
 	const [{ data }, trigger] = useRequest({
 		url    : 'fcl_freight/get_buyers',
 		method : 'GET',
@@ -28,7 +28,6 @@ function useGetBuyers({ shipment_id }) {
 
 	return {
 		data: data?.summary || {},
-
 	};
 }
 

@@ -12,7 +12,7 @@ export default function useEditServiceSchedule({
 	setShow = () => {},
 	timelineData = [],
 }) {
-	const { servicesList, primary_service, refetch: shipmentRefetch } = useContext(ShipmentDetailContext);
+	const { servicesList, primary_service, refetch: shipmentRefetch = () => {} } = useContext(ShipmentDetailContext);
 
 	const [departureDate, setDepartureDate] = useState(getPrefillValue(primary_service?.schedule_departure));
 
@@ -34,30 +34,31 @@ export default function useEditServiceSchedule({
 			setDepartureDate(schedule_departure);
 
 			const newDefaultValues = {};
+
 			finalControls.forEach(({ name }) => {
 				newDefaultValues[name] = (name === 'schedule_arrival'
-					? formValues[name] < schedule_departure
-					: formValues[name] > schedule_departure)
-					? null : formValues[name];
+					? formValues?.[name] < schedule_departure
+					: formValues?.[name] > schedule_departure)
+					? null : formValues?.[name];
 			});
+
 			reset(newDefaultValues);
 		}
 	}, [formValues, departureDate, reset, finalControls]);
 
 	const updateData = async (values) => {
 		const timezonedValues = {};
+
 		(Object.entries(values).forEach(([key, val]) => { timezonedValues[key] = getDateForPayload(val); }));
 
 		const mainServiceIds = (servicesList || [])
-			.filter((item) => item?.service_type === primary_service?.service_type)
-			.map((service) => service?.id);
+			?.filter((item) => item?.service_type === primary_service?.service_type)
+			?.map((service) => service?.id);
 
 		const payloadForUpdateShipment = {
 			ids                 : mainServiceIds,
 			performed_by_org_id : primary_service?.service_provider_id,
-			data                : ['vessel_arrived'].includes(
-				primary_service?.state,
-			)
+			data                : ['vessel_arrived'].includes(primary_service?.state)
 				? { schedule_arrival: timezonedValues?.schedule_arrival }
 				: { ...timezonedValues },
 			service_type: primary_service?.service_type,
@@ -65,8 +66,11 @@ export default function useEditServiceSchedule({
 
 		try {
 			await updateShipmentService({ data: payloadForUpdateShipment });
+
 			Toast.success('Booking Note Updated Successfully !');
+
 			setShow(false);
+
 			shipmentRefetch();
 		} catch (err) {
 			toastApiError(err);

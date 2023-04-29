@@ -18,8 +18,11 @@ export default function useUpdateShipment({
 	const updateShipment = async (payload) => {
 		try {
 			await trigger({ data: payload });
+
 			refetch();
+
 			shipmentRefetch();
+
 			Toast.success(successMessage);
 		} catch (err) {
 			toastApiError(err);

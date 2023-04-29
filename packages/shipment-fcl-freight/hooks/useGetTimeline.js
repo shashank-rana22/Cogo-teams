@@ -4,7 +4,7 @@ import { useState, useCallback } from 'react';
 
 function useGetTimeLine({ shipment_data = {} }) {
 	const [data, setData] = useState([]);
-	const { id: shipment_id } = shipment_data;
+	const { id: shipment_id } = shipment_data || {};
 
 	const [{ loading }, trigger] = useRequest({
 		url    : 'fcl_freight/get_timeline',
@@ -16,9 +16,11 @@ function useGetTimeLine({ shipment_data = {} }) {
 			const res = await trigger({
 				params: { shipment_id },
 			});
+
 			setData(res.data);
 		} catch (e) {
 			setData([]);
+
 			toastApiError(e);
 		}
 	}), [shipment_id, trigger]);

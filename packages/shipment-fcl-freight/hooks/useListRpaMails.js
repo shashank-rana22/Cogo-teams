@@ -7,7 +7,7 @@ const keyMappings = {
 };
 
 const useShipmentEmails = ({ payload = {} }) => {
-	const { page_no, entity_type, ...restPayload } = payload;
+	const { page_no, entity_type, ...restPayload } = payload || {};
 
 	const entityType = useRef(entity_type);
 
@@ -34,12 +34,12 @@ const useShipmentEmails = ({ payload = {} }) => {
 	}, [triggerRecentClassifiedShipment]);
 
 	const newEmailData = [];
-	if ((recentClassifiedShipmentApi?.data?.body || []).length) {
-		(recentClassifiedShipmentApi?.data?.body || []).forEach((child) => {
-			if (Object.keys(keyMappings).includes(child.entity_type)) {
+	if ((recentClassifiedShipmentApi?.data?.body || [])?.length) {
+		(recentClassifiedShipmentApi?.data?.body || [])?.forEach((child) => {
+			if (Object.keys(keyMappings).includes(child?.entity_type)) {
 				newEmailData.push({
 					...child,
-					entity_type: keyMappings[child.entity_type],
+					entity_type: keyMappings?.[child?.entity_type],
 				});
 			} else {
 				newEmailData.push(child);
