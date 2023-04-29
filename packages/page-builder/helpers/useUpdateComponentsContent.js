@@ -1,0 +1,57 @@
+/* eslint-disable max-len */
+const useUpdateComponentsContent = ({
+	pageConfiguration,
+	setPageConfiguration,
+	selectedRow,
+	selectedColumn,
+	selectedNestedColumn,
+	selectedItem,
+	columnData,
+	nestedColumData,
+	setEditorValue,
+	type,
+}) => {
+	const handleUpdateContent = (value, rowDetails) => {
+		if (value) {
+			const { id } = rowDetails || {};
+
+			const { id: selectedRowId } = selectedRow || {};
+
+			const { id : columnId } = columnData || {};
+
+			const { id : nestedColumnId } = nestedColumData || {};
+
+			const { id: selectedColumnId } = selectedColumn || {};
+
+			const { id: selectedChildId } = selectedItem || {};
+
+			const { id: selectedNestedColumnId } = selectedItem || {};
+
+			const data = pageConfiguration;
+
+			const selectedComponentIndex = (data.layouts || []).findIndex(
+				(selectedComponent) => selectedComponent.id === id,
+			);
+
+			if (id === selectedRowId && selectedItem) {
+				if (Object.keys(selectedNestedColumn).length > 0 && nestedColumnId === selectedNestedColumnId) {
+					data.layouts[selectedComponentIndex].component.children[selectedColumnId].component.children[selectedNestedColumnId].component.content = value;
+				} else if (Object.keys(selectedColumn).length > 0 && columnId === selectedColumnId) {
+					data.layouts[selectedComponentIndex].component.children[selectedChildId].component.content = value;
+				} else if (Object.keys(selectedColumn).length === 0 && Object.keys(selectedNestedColumn).length === 0) {
+					data.layouts[selectedComponentIndex].component.content = value;
+				}
+			}
+
+			if (type === 'text') {
+				setEditorValue(value);
+			}
+
+			setPageConfiguration((prev) => ({ ...prev, layouts: data.layouts }));
+		}
+	};
+
+	return { handleUpdateContent };
+};
+
+export default useUpdateComponentsContent;
