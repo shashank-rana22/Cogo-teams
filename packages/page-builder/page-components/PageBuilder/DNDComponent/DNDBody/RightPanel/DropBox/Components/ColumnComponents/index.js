@@ -3,6 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import RenderElement from '../RenderElement';
 
+import NestedColumnComponent from './NestedColumnComponents';
 import styles from './styles.module.css';
 
 function ColumnComponents({
@@ -29,8 +30,6 @@ function ColumnComponents({
 
 	const { id: selectedRowId } = selectedRow || {};
 
-	const { id: nestedColumnId } = selectedNestedColumn || {};
-
 	if (isEmpty(children)) {
 		return (
 			<div className={styles.block_wrapper}>
@@ -46,14 +45,6 @@ function ColumnComponents({
 		setSelectedRow({ ...rowData });
 		setSelectedColumn({ ...columnData });
 		setSelectedNestedColumn({});
-		setSelectedItem({});
-	};
-
-	const handleNestedClick = (e, columnData, nestedData) => {
-		e.stopPropagation();
-		setSelectedRow({ ...rowData });
-		setSelectedColumn({ ...columnData });
-		setSelectedNestedColumn({ ...nestedData });
 		setSelectedItem({});
 	};
 
@@ -79,64 +70,27 @@ function ColumnComponents({
 
 				if (!isEmpty(childChildren) && ['container', 'card', 'formSample'].includes(type)) {
 					return (
-						<div
-							role="presentation"
-							className={styles.content_container}
-							onClick={(e) => handleClick(e, childComponent)}
-							style={{ ...allStyles, display: 'block', border, padding: '16px' }}
-						>
-							{ (childChildren || []).map((nestedChildren, childrenIndex) => {
-								const {
-									id: childrenId,
-									component: nestedChildrenComponent,
-								} = nestedChildren || {};
-
-								const {
-									style: childrenStyles,
-									type: childrenType,
-								} = nestedChildrenComponent || {};
-
-								const isNestedChildSelected = columnChildId === id && componentId === selectedRowId && childrenId === nestedColumnId;
-
-								const nestedBorder = isNestedChildSelected ? '5px solid yellow' : allStyles.border;
-
-								return (
-
-									<div
-										role="presentation"
-										className={styles.content_container}
-										style={{ ...childrenStyles, border: nestedBorder }}
-										onClick={(e) => handleNestedClick(e, childComponent, nestedChildren)}
-									>
-										<RenderElement
-											componentType={childrenType}
-											widget={nestedChildren}
-											pageConfiguration={pageConfiguration}
-											setPageConfiguration={setPageConfiguration}
-											elementId={childrenId}
-											childId={childrenId}
-											// selectedRow={selectedRow}
-											setSelectedItem={setSelectedItem}
-											index={childrenIndex}
-											// setChildId={setChildId}
-											setParentComponentId={setParentComponentId}
-											setShowContentModal={setShowContentModal}
-											rowData={rowData}
-											columnData={childComponent}
-											setSelectedRow={setSelectedRow}
-											setSelectedColumn={setSelectedColumn}
-											setSelectedNestedColumn={setSelectedNestedColumn}
-											nestedColumData={nestedChildren}
-											selectedItem={selectedItem}
-											selectedRow={selectedRow}
-											selectedColumn={selectedColumn}
-											selectedNestedColumn={selectedNestedColumn}
-										/>
-									</div>
-								);
-							})}
-						</div>
-
+						<NestedColumnComponent
+							pageConfiguration={pageConfiguration}
+							setPageConfiguration={setPageConfiguration}
+							childrenComponent={childrenComponent}
+							border={border}
+							childComponent={childComponent}
+							rowData={rowData}
+							selectedColumn={selectedColumn}
+							setSelectedColumn={setSelectedColumn}
+							selectedRow={selectedRow}
+							setSelectedRow={setSelectedRow}
+							selectedNestedColumn={selectedNestedColumn}
+							setSelectedNestedColumn={setSelectedNestedColumn}
+							selectedItem={selectedItem}
+							setSelectedItem={setSelectedItem}
+							setParentComponentId={setParentComponentId}
+							setShowContentModal={setShowContentModal}
+							handleClick={handleClick}
+							componentId={componentId}
+							id={id}
+						/>
 					);
 				}
 
@@ -164,22 +118,20 @@ function ColumnComponents({
 								setPageConfiguration={setPageConfiguration}
 								elementId={id}
 								childId={id}
-								// selectedRow={selectedRow}
-								setSelectedItem={setSelectedItem}
 								index={idx}
-								// setChildId={setChildId}
 								setParentComponentId={setParentComponentId}
 								setShowContentModal={setShowContentModal}
 								rowData={rowData}
 								columnData={childComponent}
-								setSelectedRow={setSelectedRow}
-								setSelectedColumn={setSelectedColumn}
-								setSelectedNestedColumn={setSelectedNestedColumn}
 								nestedColumData={{}}
 								selectedItem={selectedItem}
+								setSelectedItem={setSelectedItem}
 								selectedRow={selectedRow}
+								setSelectedRow={setSelectedRow}
 								selectedColumn={selectedColumn}
+								setSelectedColumn={setSelectedColumn}
 								selectedNestedColumn={selectedNestedColumn}
+								setSelectedNestedColumn={setSelectedNestedColumn}
 							/>
 						) }
 					</div>
