@@ -4,7 +4,7 @@ import TaskCard from '../../../Tasks/TaskExecution';
 
 import styles from './styles.module.css';
 
-function Task({ showDoc, setShowDoc, refetch }) {
+function Task({ showDoc = {}, setShowDoc = () => {}, refetch = () => {} }) {
 	const [pendingTask, setPendingTask] = useState({});
 	const { pendingItem = {} } = showDoc;
 
@@ -28,4 +28,5 @@ function Task({ showDoc, setShowDoc, refetch }) {
 
 	);
 }
+
 export default Task;
