@@ -1778,6 +1778,14 @@ const saas = {
 		{
 			api         : 'capture_checkout_payment',
 			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+		{
+			api         : 'post_saas_payment_cancel_order',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
 		},
 		{
 			api         : 'list_organization_billing_addresses',
@@ -1948,6 +1956,14 @@ const saas = {
 		{
 			api         : 'capture_checkout_payment',
 			access_type : 'private',
+			module      : 'trader-eligibility-check',
+			feature     : 'trader-eligibility-check',
+		},
+		{
+			api         : 'post_saas_payment_cancel_order',
+			access_type : 'private',
+			module      : 'trader-eligibility-check',
+			feature     : 'trader-eligibility-check',
 		},
 		{
 			api         : 'saas_get_user_quota_usage',
@@ -2037,6 +2053,12 @@ const saas = {
 			access_type : 'private',
 		},
 		{
+			api         : 'post_saas_payment_cancel_order',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
 			api         : 'list_organization_addresses',
 			access_type : 'private',
 		},
@@ -2047,6 +2069,12 @@ const saas = {
 		{
 			api         : 'create_organization_billing_address',
 			access_type : 'private',
+		},
+		{
+			api         : 'capture_checkout_payment',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
 		},
 		{
 			api          : 'saas_get_user_quota_usage',
