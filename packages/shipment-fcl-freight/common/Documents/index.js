@@ -21,7 +21,7 @@ function Documents() {
 	const [activeWallet, setActiveWallet] = useState('trade_documents');
 	const [addToWallet, setAddToWallet] = useState(true);
 
-	const { updateDocument } = useUpdateDocument();
+	const { updateDocument } = useUpdateDocument({});
 	const { shipment_data, primary_service, activeStakeholder } = useContext(ShipmentDetailContext);
 
 	const {
