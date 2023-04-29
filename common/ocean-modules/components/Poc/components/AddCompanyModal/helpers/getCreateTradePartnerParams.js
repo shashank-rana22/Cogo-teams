@@ -5,7 +5,6 @@ const ORG_ID_REQUIRED = ['create_new_company'];
 const getCreateTradePartnerParams = (values) => {
 	const {
 		address = '',
-		pincode,
 		alternate_mobile_number,
 		mobile_number,
 		importer_exporter_id,

@@ -27,3 +27,8 @@
 		margin-right: 12px;
 	}
 }
+
+.errors {
+	font-size: 12px;
+	color: red;
+}
