@@ -34,8 +34,8 @@ export default {
 		GST           : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}[Z]{1}[0-9A-Z]{1})+$/g,
 		MOBILE_NUMBER : /^[+][0-9]{1,3}[0-9]{10}$/,
 		EMAIL         : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
-		password_pattern:
-			/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
+		// password_pattern:
+		// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
 	},
 	uuid: {
 		super_admin_id              : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
@@ -191,6 +191,10 @@ export default {
 			{
 				label : 'Limited Liability Partnership',
 				value : 'limited_liability_partnership',
+			},
+			{
+				label : 'Other',
+				value : 'other',
 			},
 		],
 		country_truck_type : 'open_body_pickup_1ton',

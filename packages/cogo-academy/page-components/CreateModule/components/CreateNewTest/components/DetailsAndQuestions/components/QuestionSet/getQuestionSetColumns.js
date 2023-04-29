@@ -81,20 +81,24 @@ const getQuestionSetColumns = ({ idArray, setIdArray }) => ([
 		),
 	},
 	{
-		Header   : 'NO. OF QUESTIONS',
+		Header   : 'NO. OF STANDALONE QUESTIONS',
 		id       : 'no_of_questions',
-		accessor : ({ non_case_study_question_count = 0 }) => (
-			<section>{non_case_study_question_count}</section>
+		accessor : ({ stand_alone_question_count = 0 }) => (
+			<section>{stand_alone_question_count}</section>
 		),
 	},
 	{
 		Header   : 'NO. OF CASES',
 		id       : 'no_of_cases',
-		accessor : ({
-			case_study_question_count
-			= 0,
-		}) => (
+		accessor : ({ case_study_question_count	= 0 }) => (
 			<section>{case_study_question_count}</section>
+		),
+	},
+	{
+		Header   : 'NO. OF SUBJECTIVE QUESTIONS',
+		id       : 'no_of_subjective_questions',
+		accessor : ({ subjective_question_count = 0 }) => (
+			<section>{subjective_question_count}</section>
 		),
 	},
 	{

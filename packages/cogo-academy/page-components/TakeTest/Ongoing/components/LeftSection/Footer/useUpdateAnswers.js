@@ -3,17 +3,25 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
-import handleMinimizeTest from '../../../../utils/handleMinimizeTest';
+// import handleMinimizeTest from '../../../../utils/handleMinimizeTest';
 
-const getAnswerState = ({ type, answer }) => {
+let RichTextEditor;
+
+if (typeof window !== 'undefined') {
+	// eslint-disable-next-line global-require
+	RichTextEditor = require('react-rte').default;
+}
+
+const getAnswerState = ({ type, answer, subjectiveAnswer, question_type }) => {
 	let answerState = 'answered';
-
 	if (type === 'marked_for_review') {
 		answerState = type;
-	} else if (isEmpty(answer)) {
+	} else if (question_type === 'subjective' && (subjectiveAnswer.toString('html') === '<p><br></p>'
+	|| subjectiveAnswer.toString('html') === '')) {
+		answerState = 'viewed';
+	} else if (question_type !== 'subjective' && isEmpty(answer)) {
 		answerState = 'viewed';
 	}
-
 	return answerState;
 };
 
@@ -29,6 +37,10 @@ function useUpdateAnswers({
 	user_appearance = [],
 	fetchQuestions,
 	total_question,
+	subjectiveAnswer,
+	uploadValue,
+	setUploadValue,
+	setSubjectiveAnswer = () => {},
 }) {
 	const {
 		query: { test_id },
@@ -46,7 +58,7 @@ function useUpdateAnswers({
 	const { id, question_type, sub_questions = [] } = data || {};
 
 	const handleUpdate = async ({ type }) => {
-		const answerState = getAnswerState({ type, answer });
+		const answerState = getAnswerState({ type, answer, subjectiveAnswer, question_type });
 
 		let answerArray = answer;
 
@@ -56,13 +68,18 @@ function useUpdateAnswers({
 
 		const payload = {
 			test_user_mapping_id,
-			test_question_id         : id,
-			test_question_answer_ids : answerArray || [],
-			answer_state             : answerState,
+			test_question_id : id,
+			answer_state     : answerState,
 			question_type,
 			...(question_type === 'case_study'
 				? { test_case_study_question_id: sub_questions?.[subQuestion - 1]?.id } : null),
 
+			...(question_type === 'subjective'
+				? {
+					subjective_answer_text : subjectiveAnswer.toString('html'),
+					subjective_file_url    : uploadValue?.finalUrl
+						? uploadValue?.finalUrl : uploadValue,
+				} : { test_question_answer_ids: answerArray || [] }),
 		};
 
 		const res = await trigger({
@@ -70,18 +87,18 @@ function useUpdateAnswers({
 		});
 
 		if (res?.status !== 200) {
-			handleMinimizeTest();
+			// handleMinimizeTest();
 			Toast.error('Something is wrong');
-			return;
-		}
-
-		if (total_question === currentQuestion) {
-			fetchQuestions({ question_id: data?.id });
 			return;
 		}
 
 		if (question_type === 'case_study' && sub_questions.length > subQuestion) {
 			setSubQuestion((prev) => prev + 1);
+			fetchQuestions({ question_id: data?.id });
+			return;
+		}
+
+		if (total_question === currentQuestion) {
 			fetchQuestions({ question_id: data?.id });
 			return;
 		}
@@ -106,10 +123,12 @@ function useUpdateAnswers({
 			return pv;
 		});
 		setSubQuestion(1);
+		setSubjectiveAnswer(RichTextEditor.createEmptyValue());
+		setUploadValue('');
 	};
 
 	const handleLeaveTest = () => {
-		handleMinimizeTest();
+		// handleMinimizeTest();
 		setShowLeaveTestModal(true);
 	};
 
