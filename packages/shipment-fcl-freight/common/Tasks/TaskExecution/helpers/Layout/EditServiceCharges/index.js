@@ -8,29 +8,17 @@ import EditLineItems from './EditLineItems';
 import styles from './styles.module.css';
 
 function EditServiceCharges(props) {
-	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
+	const { shipment_data = {}, primary_service = {} } = useContext(ShipmentDetailContext);
 
-	const { controls, service_name } = props;
+	const { controls, service_name = '' } = props;
 
 	const [q, setQ] = useState('');
 
-	const { data, loading } = useGetServiceChargeCodes({
+	const { data = {}, loading } = useGetServiceChargeCodes({
 		service_name,
 		shipment_id: shipment_data?.id,
 
 	});
-
-	// const chargeCodes = (data?.list || []).map((item) => item.code);
-
-	// const miscCharges = value
-	// 	.filter((charge) => !chargeCodes.includes(charge.code))
-	// 	.map((charge) => ({
-	// 		...charge,
-	// 		value : charge.code,
-	// 		label : `${charge.code} ${charge.name || ''}`,
-	// 		name  : charge.name || '',
-	// 	}
-	// 	));
 
 	const options = (data?.list || [])
 		.filter((item) => item?.code?.includes(q) || item?.name?.includes(q) || (item?.code)?.includes(upperCase(q)))
@@ -45,8 +33,9 @@ function EditServiceCharges(props) {
 						{' '}
 						-
 						{' '}
-						{item.name || ''}
+						{item?.name || ''}
 					</div>
+
 					<div>
 						{item?.sac_code}
 					</div>
@@ -56,14 +45,14 @@ function EditServiceCharges(props) {
 		}));
 
 	const finalControls = (controls || []).map((item) => {
-		if (item.name === 'code') {
+		if (item?.name === 'code') {
 			return {
 				...item,
 				options,
 				onSearch: (val) => setQ(val),
-
 			};
 		}
+
 		return item;
 	});
 

@@ -4,14 +4,13 @@ import ReviewDoc from './ReviewDoc';
 import UploadAmendDoc from './UploadAmendDoc';
 
 function TaskExecution({
-	task = {}, onCancel = () => {}, taskListRefetch = () => {},
+	task = {},
+	onCancel = () => {},
+	taskListRefetch = () => {},
 	selectedMail = [],
 	setSelectedMail = () => {},
 }) {
-	// split the task on the basis of view here i.e, categorize the task into various categories
-	// and make a view that hadles all the use cases
-
-	if (task.task_type === 'approve_document') {
+	if (task?.task_type === 'approve_document') {
 		return (
 			<ReviewDoc
 				task={task}
@@ -21,7 +20,7 @@ function TaskExecution({
 		);
 	}
 
-	if (task.task_type === 'amend_document' && task.task !== 'amend_draft_house_bill_of_lading') {
+	if (task?.task_type === 'amend_document' && task?.task !== 'amend_draft_house_bill_of_lading') {
 		return (
 			<UploadAmendDoc
 				task={task}
