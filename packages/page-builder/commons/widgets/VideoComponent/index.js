@@ -47,7 +47,7 @@ function VideoComponent(props) {
 						src={content}
 						frameBorder="0"
 						scrolling="no"
-						allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allow="autoplay; gyroscope; picture-in-picture"
 						allowFullScreen
 						title="Preview"
 					/>
