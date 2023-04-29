@@ -1,25 +1,9 @@
 import { ResponsiveBar } from '@cogoport/charts/bar';
 import { isEmpty } from '@cogoport/utils';
 
-import styles from './styles.module.css';
+import data from '../../../constants/get-default-graph-data';
 
-const data = [
-	{
-		warmth: 'ice_cold', count: 0, label: 'Ice Cold',
-	},
-	{
-		warmth: 'cold', count: 0, label: 'Cold',
-	},
-	{
-		warmth: 'warm', count: 0, label: 'Warm',
-	},
-	{
-		warmth: 'hot', count: 0, label: 'Hot',
-	},
-	{
-		warmth: 'flaming_hot', count: 0, label: 'Flaming Hot',
-	},
-];
+import styles from './styles.module.css';
 
 function ScoreDistributionGraph(props) {
 	const { graphData } = props;

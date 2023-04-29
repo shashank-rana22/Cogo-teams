@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 function AccountLeaderboard() {
 	const { control, watch, resetField } = useForm({
 		defaultValues: {
-			date: new Date(Date.now()),
+			date: new Date(),
 		},
 	});
 
