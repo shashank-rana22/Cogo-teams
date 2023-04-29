@@ -1,6 +1,8 @@
 // import { TradeDocTemplate } from '@cogo/business-modules/components/trade-documents';
-import { Button, FullscreenModal } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { forwardRef, useRef, useState } from 'react';
+
+import styles from './styles.module.css';
 
 function HBLCreate({
 	onSave = () => {},
@@ -44,14 +46,13 @@ function HBLCreate({
 		setShow(false);
 	};
 	return (
-		<div>
+		<div className={styles.container}>
 			{!completed ? (
-				<div>
+				<div className={styles.container_child}>
 					<div>
 						Click the following button to create a new draft HBL
 					</div>
 					<Button
-						ghost={!!hblData}
 						onClick={() => setShow(true)}
 						size="sm"
 						id="bm_pt_draf_hbl_create_btn"
@@ -60,12 +61,11 @@ function HBLCreate({
 					</Button>
 				</div>
 			) : (
-				<div>
+				<div className={styles.container_child}>
 					<div>
 						Draft HBL is already uploaded, you can preview it here
 					</div>
 					<Button
-						ghost={!!hblData}
 						onClick={() => {
 							setShow(true);
 							// setMode('read');
@@ -77,24 +77,13 @@ function HBLCreate({
 					</Button>
 				</div>
 			)}
-			<FullscreenModal
-				heading="Create House BL"
-				headerActions={
-					!completed ? (
-						<Button
-							style={{ marginLeft: 8 }}
-							onClick={handleSave}
-							size="sm"
-							id="bm_pt_draf_hbl_save_btn"
-						>
-							Save
-						</Button>
-					) : null
-				}
+			<Modal
+				size="md"
 				show={show}
-				setShow={setShow}
+				onClose={() => setShow(false)}
 			>
-				<div>
+				<Modal.Header title="Trade Document Template" />
+				<Modal.Body>
 					{/* <TradeDocTemplate
 						ref={ref}
 						mode={mode}
@@ -104,9 +93,9 @@ function HBLCreate({
 						service={fcl_or_lcl_service}
 						watermark="draft"
 					/> */}
-					THis is trade doc
-				</div>
-			</FullscreenModal>
+					Trade Document Coming Soon....
+				</Modal.Body>
+			</Modal>
 		</div>
 	);
 }

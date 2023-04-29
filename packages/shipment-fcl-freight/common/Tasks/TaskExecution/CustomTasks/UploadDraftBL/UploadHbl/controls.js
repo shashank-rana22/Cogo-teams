@@ -1,11 +1,5 @@
 const controls = [
-	{
-		label : 'Document Description (optional)',
-		name  : 'description',
-		type  : 'textarea',
-		span  : 12,
-		size  : 'sm',
-	},
+
 	{
 		label : 'Bill of lading Number',
 		name  : 'document_number',
@@ -39,10 +33,10 @@ const controls = [
 		],
 	},
 	{
-		name      : 'url',
-		showLabel : false,
-		span      : 12,
-		size      : 'sm',
+		name : 'url',
+		type : 'file',
+		span : 12,
+		size : 'sm',
 		accept:
 			'image/*,.pdf,.doc,.docx,.xlsx,application/msword,'
 			+ 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
@@ -52,6 +46,13 @@ const controls = [
 				message : 'document is required',
 			},
 		],
+	},
+	{
+		label : 'Document Description (optional)',
+		name  : 'description',
+		type  : 'textarea',
+		span  : 12,
+		size  : 'sm',
 	},
 ];
 

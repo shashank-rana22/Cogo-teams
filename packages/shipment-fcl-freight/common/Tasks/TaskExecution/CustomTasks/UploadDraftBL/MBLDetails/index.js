@@ -42,7 +42,7 @@ function MBLDetails({ primaryService = {}, ref = () => {}, selectedMail = {} }) 
 	};
 
 	return (
-		<div>
+		<>
 			{Array(bls_count)
 				.fill(null)
 				.map((n, i) => (
@@ -55,7 +55,7 @@ function MBLDetails({ primaryService = {}, ref = () => {}, selectedMail = {} }) 
 						controls={controls}
 					/>
 				))}
-		</div>
+		</>
 	);
 }
 

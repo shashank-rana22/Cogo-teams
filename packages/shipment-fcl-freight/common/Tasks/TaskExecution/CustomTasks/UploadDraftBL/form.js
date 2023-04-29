@@ -53,15 +53,16 @@ function Form(props) {
 	// };
 
 	return (
-		<div style={{ marginBottom: 10 }}>
-			<div>
+		<main className={styles.container}>
+			<div className={styles.text}>
 				{bl_type}
+				&nbsp;
 				{id + 1}
 			</div>
 			<form className={styles.form_container}>
 				{controls.map((item) => <FormElement control={control} errors={errors} {...item} />)}
 			</form>
-		</div>
+		</main>
 	);
 }
 

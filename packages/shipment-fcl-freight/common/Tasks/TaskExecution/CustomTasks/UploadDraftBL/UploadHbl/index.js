@@ -21,11 +21,11 @@ function UploadHbl(props) {
 	}, [docs]);
 
 	return (
-		<div>
+		<main>
 			{Array(bls_count)
 				.fill(null)
 				.map((n, i) => (
-					<div className={styles.flex_container}>
+					<form className={styles.view_and_form}>
 						{urls?.[i]?.length > 0 ? (
 							<Button
 								onClick={() => {
@@ -50,19 +50,21 @@ function UploadHbl(props) {
 								{...props}
 							/>
 						)}
-					</div>
+					</form>
 				))}
-			{bls_count > urls?.length && (
-				<Button
+
+			<form className={styles.button_wrapper}>
+				{bls_count > urls?.length && (
+					<Button
 					// disabled={createShipmentDocAPI?.loading}
 					// onClick={handleSubmit}
-					size="sm"
-					id="bm_pt_bl_upload_hbl_submit"
-				>
-					Submit
-				</Button>
-			)}
-		</div>
+						id="bm_pt_bl_upload_hbl_submit"
+					>
+						Submit
+					</Button>
+				)}
+			</form>
+		</main>
 	);
 }
 export default UploadHbl;

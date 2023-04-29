@@ -1,6 +1,13 @@
-.flex_container {
-	display: block;
-	padding: 16;
-	margin-bottom: 8;
-	border-radius: 8;
+.view_and_form {
+	padding: 16px;
+	margin-bottom: 16px;
+	border: 1px solid var(--color-accent-orange-5);
+	border-radius: 8px;
+	box-shadow: rgb(0 0 0 / 5%) 0 6px 24px 0, rgb(0 0 0 / 8%) 0 0 0 1px;
+}
+
+.button_wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
 }
