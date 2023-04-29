@@ -11492,7 +11492,7 @@ const partner = {
 			service_name : 'tickets',
 		},
 		{
-			api          : 'list_tickets',
+			api          : 'get_tickets_list',
 			access_type  : 'private',
 			service_name : 'tickets',
 		},
