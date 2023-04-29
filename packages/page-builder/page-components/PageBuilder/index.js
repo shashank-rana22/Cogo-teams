@@ -7,6 +7,7 @@ import DNDComponent from './DNDComponent';
 
 function PageBuilder() {
 	const { metaData } = useGetDndComponent();
+
 	return (
 		<DndProvider backend={HTML5Backend}>
 			<DNDComponent metaData={metaData} />

@@ -26,14 +26,14 @@ function Basic(props) {
 
 	const { type } = component || {};
 
-	let leftPanelContent = contents;
+	let leftPanelBasicContent = contents;
 
 	if (dropSource === 'selectBox') {
-		leftPanelContent = (contents || []).filter((item) => item.type !== 'carousel');
+		leftPanelBasicContent = (contents || []).filter((item) => item.type !== 'carousel');
 	}
 
 	const BasicPanel = useMemo(
-		() => (leftPanelContent || []).map((item) => (
+		() => (leftPanelBasicContent || []).map((item) => (
 			<BasicItem
 				itemType={item.type}
 				content={item}
