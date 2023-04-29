@@ -56,6 +56,14 @@ export default function getListBookingDeskShipmentsPayload({
 	threeDaysLater.setDate(threeDaysLater.getDate() + 3);
 	threeDaysLater.setTime(threeDaysLater.getTime() - timezoneOffset);
 
+	const oneDayLater = new Date();
+	oneDayLater.setDate(oneDayLater.getDate() + 1);
+	oneDayLater.setHours(23, 59, 59, 999);
+
+	const criticalPayload = activeTab === 'container_pick_up'
+		? { bn_expiry_less_than: oneDayLater }
+		: { schedule_departure_less_than: threeDaysLater };
+
 	const payload = {
 		filters: {
 			state: shipmentStates[activeTab] || shipmentStates.in_progress,
@@ -63,7 +71,8 @@ export default function getListBookingDeskShipmentsPayload({
 			...(otherFilters || {}),
 			...(selected_agent_id && { stakeholder_id: selected_agent_id }),
 			...(isCriticalVisible
-				&& isCriticalOn && { schedule_departure_less_than: threeDaysLater }),
+				&& isCriticalOn
+				? criticalPayload : {}),
 			...(q && { q }),
 			...restFilters,
 		},
