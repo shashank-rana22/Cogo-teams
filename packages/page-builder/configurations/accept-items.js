@@ -12,6 +12,7 @@ const VALID_ITEM_TYPES = {
 	card           : 'card',
 	formSample     : 'formSample',
 	carouselSample : 'carouselSample',
+	videoSample    : 'videoSample',
 
 };
 

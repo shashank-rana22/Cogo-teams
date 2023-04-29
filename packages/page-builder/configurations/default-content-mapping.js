@@ -354,6 +354,16 @@ const getContentMapping = () => {
 			},
 			type: 'carousel',
 		},
+
+		videoSample: {
+			component: {
+				content    : 'https://partners.cogoport.com',
+				alt        : 'add-img-url',
+				style      : {},
+				attributes : {},
+				type       : 'video',
+			},
+		},
 	};
 };
 export default getContentMapping;

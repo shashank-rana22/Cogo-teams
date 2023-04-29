@@ -18,6 +18,7 @@ const COMPONENT_MAPPING = {
 	carousel       : CarouselComponent,
 	divider        : DividerComponent,
 	carouselSample : CarouselComponent,
+	videoSample    : VideoComponent,
 };
 
 export default COMPONENT_MAPPING;

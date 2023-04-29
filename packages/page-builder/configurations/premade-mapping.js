@@ -16,6 +16,11 @@ const PremadeMappings = [
 		icon : <ProductCard />,
 		type : 'carouselSample',
 	},
+	{
+		name : 'videoSample',
+		icon : <ProductCard />,
+		type : 'videoSample',
+	},
 ];
 
 export default PremadeMappings;
