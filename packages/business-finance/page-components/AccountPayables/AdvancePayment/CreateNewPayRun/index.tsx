@@ -18,6 +18,7 @@ import RequestedBy from '../renderFunction/RequestedBy';
 import SelectFilters from '../SelectFilters';
 
 import Footer from './Footer';
+import BankData from './renderFunction/BankData';
 import BankDetails from './renderFunction/BankDetails';
 import DeleteModal from './renderFunction/DeleteModal/index';
 import ModifiedName from './renderFunction/ModifiedName';
@@ -85,6 +86,9 @@ function CreateNewPayRun() {
 		),
 		renderModifiedName: (itemData) => (
 			<ModifiedName itemData={itemData} />
+		),
+		renderBankData: (itemData) => (
+			<BankData itemData={itemData} />
 		),
 	};
 	return (
