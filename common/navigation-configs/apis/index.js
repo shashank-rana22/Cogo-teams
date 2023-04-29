@@ -26,6 +26,7 @@ import login_apis from './login_apis';
 import ltl_operations from './ltl-operations-apis';
 import manage_rfq from './manage-rfq-apis';
 import okam_task_apis from './okam-task-dashboard';
+import page_builder from './page-builder-apis';
 import partner from './partner-apis';
 import payments from './payments-apis';
 import performance_management from './performance-managment-apis';
@@ -131,6 +132,7 @@ const apis = {
 	booking_desk,
 	poc,
 	...athena_dashboard,
+	page_builder,
 };
 
 export default apis;

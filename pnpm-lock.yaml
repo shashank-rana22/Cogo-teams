@@ -782,6 +782,7 @@ importers:
       '@cogoport/charts': ^1.0.1
       '@cogoport/components': ^1.0.319
       '@cogoport/forms': workspace:0.1.0
+      '@cogoport/globalization': ^0.0.1
       '@cogoport/icons-react': ^1.0.51
       '@cogoport/navigation-configs': workspace:0.1.0
       '@cogoport/next': workspace:0.1.0
@@ -805,6 +806,7 @@ importers:
       '@cogoport/charts': 1.0.2_react@18.2.0
       '@cogoport/components': 1.0.395_n4iqapq6hltb5mr4rez3emws4q
       '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
       '@cogoport/icons-react': 1.0.66_react@18.2.0
       '@cogoport/navigation-configs': link:../../common/navigation-configs
       '@cogoport/next': link:../../common/next

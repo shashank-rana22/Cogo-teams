@@ -34,6 +34,7 @@ function RightPanel({
 			<Header
 				modeType={modeType}
 				setMode={setMode}
+				pageConfiguration={pageConfiguration}
 				handleUnselectItem={handleUnselectItem}
 			/>
 			<div>
