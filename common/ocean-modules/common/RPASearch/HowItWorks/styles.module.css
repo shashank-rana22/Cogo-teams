@@ -29,7 +29,7 @@
 
 .styled_checkbox {
 	display: flex;
-	justify-content: start;
+	justify-content: flex-start;
 }
 
 .text_feedback {
@@ -50,7 +50,7 @@
 
 .header {
 	display: flex;
-	justify-content: start;
+	justify-content: flex-start;
 }
 
 .remarks_textarea {
