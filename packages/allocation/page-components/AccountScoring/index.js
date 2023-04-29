@@ -6,20 +6,21 @@ import EngagementScoring from './components/EngagementScoring';
 import styles from './styles.module.css';
 
 const TAB_PANEL_MAPPING = {
-	engagement_scoring: {
-		name      : 'engagement_scoring',
-		title     : 'Engagement Scoring',
-		Component : EngagementScoring,
-	},
 	account_leaderboard: {
 		name      : 'account_leaderboard',
 		title     : 'Account Leaderboard',
 		Component : AccountLeaderboard,
 	},
+
+	engagement_scoring: {
+		name      : 'engagement_scoring',
+		title     : 'Engagement Scoring',
+		Component : EngagementScoring,
+	},
 };
 
 function AccountScoring() {
-	const [primaryTab, setPrimaryTab] = useState('engagement_scoring');
+	const [primaryTab, setPrimaryTab] = useState('account_leaderboard');
 	return (
 		<section className={styles.container}>
 			<div className={styles.heading_container}>Account Engagement Scoring</div>
