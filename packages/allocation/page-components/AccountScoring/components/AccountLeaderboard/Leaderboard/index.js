@@ -1,4 +1,4 @@
-import { Table } from '@cogoport/components';
+import { Table, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../../common/EmptyState';
@@ -6,7 +6,10 @@ import EmptyState from '../../../../../common/EmptyState';
 import styles from './styles.module.css';
 
 function Leaderboard(props) {
-	const { columns = [], leaderboardList, leaderboardLoading } = props;
+	const {
+		columns = [],
+		leaderboardList, leaderboardLoading, page = 0, page_limit = 0, total_count = 0, getNextPage = () => {},
+	} = props;
 
 	if (isEmpty(leaderboardList) && !leaderboardLoading) {
 		return (
@@ -31,6 +34,16 @@ function Leaderboard(props) {
 					columns={columns}
 					data={leaderboardList}
 					loading={leaderboardLoading}
+				/>
+			</div>
+
+			<div className={styles.pagination_container}>
+				<Pagination
+					type="table"
+					currentPage={page}
+					totalItems={total_count}
+					pageSize={page_limit}
+					onPageChange={getNextPage}
 				/>
 			</div>
 		</>

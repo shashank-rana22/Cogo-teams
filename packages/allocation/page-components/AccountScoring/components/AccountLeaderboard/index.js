@@ -24,7 +24,7 @@ function AccountLeaderboard() {
 
 	const {
 		leaderboardLoading = false, leaderboardList = [],
-		setLeaderboardParams = () => {},
+		setLeaderboardParams = () => {}, page = 0, page_limit = 0, total_count = 0, getNextPage,
 	} = useGetEngagementScoringLeaderboard();
 
 	const { organization, user_id, date, service } = watch();
@@ -74,6 +74,10 @@ function AccountLeaderboard() {
 				columns={leaderboardColumns}
 				leaderboardList={leaderboardList}
 				leaderboardLoading={leaderboardLoading}
+				page={page}
+				page_limit={page_limit}
+				total_count={total_count}
+				getNextPage={getNextPage}
 			/>
 		</section>
 	);

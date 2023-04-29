@@ -11,12 +11,28 @@ function useGetEngagementScoringLeaderboard() {
 		params,
 	}, { manual: false });
 
-	const { list = [] } = data || {};
+	const { list = [], page = 1, page_limit = 0, total_count = 0 } = data || {};
+
+	const getNextPage = (newPage) => {
+		setParams((previousParams) => {
+			let newParams = {};
+			newParams = {
+				...previousParams,
+				page: newPage,
+			};
+
+			return newParams;
+		});
+	};
 
 	return {
 		leaderboardLoading   : loading,
 		leaderboardList      : list,
 		setLeaderboardParams : setParams,
+		page,
+		page_limit,
+		total_count,
+		getNextPage,
 	};
 }
 

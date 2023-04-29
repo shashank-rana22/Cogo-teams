@@ -5,6 +5,7 @@ import { useState } from 'react';
 import EmptyState from '../../../../../../common/EmptyState';
 import getDistributionControl from '../../../../configurations/get-add-distribution-controls';
 import distributionColumns from '../../../../constants/get-distribution-columns';
+import useGetDistributionScoringSettings from '../../../../hooks/useGetDistributionScoringSettings ';
 import EditSetting from '../EditSetting/index';
 
 import Header from './Header';
@@ -12,9 +13,13 @@ import styles from './styles.module.css';
 
 function DistributionSetting(props) {
 	const {
-		settingsLoading, settingsRefetch, distributionList,
 		control, handleSubmit, errors, watch,
 	} = props;
+
+	const {
+		distributionLoading: settingsLoading = false, distributionRefetch: settingsRefetch = () => {},
+		distributionList = [],
+	} = useGetDistributionScoringSettings();
 
 	const [editing, setEditing] = useState(false);
 

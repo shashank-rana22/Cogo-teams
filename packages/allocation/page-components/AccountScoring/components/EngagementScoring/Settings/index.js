@@ -1,7 +1,6 @@
 import { useForm } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 
-import useGetDistributionScoringSettings from '../../../hooks/useGetDistributionScoringSettings ';
 import useGetEngagementScoringSettings from '../../../hooks/useGetEngagementScoringSettings';
 
 import BiasSetting from './BiasSetting';
@@ -19,11 +18,6 @@ function Settings({ setToggleComponent = () => {} }) {
 		biasList = [],
 		settingsRefetch = () => {},
 	} = useGetEngagementScoringSettings();
-
-	const {
-		distributionLoading = false, distributionRefetch = () => {},
-		distributionList = [],
-	} = useGetDistributionScoringSettings();
 
 	return (
 		<div className={styles.container}>
@@ -59,9 +53,6 @@ function Settings({ setToggleComponent = () => {} }) {
 			/>
 
 			<DistributionSetting
-				settingsLoading={distributionLoading}
-				settingsRefetch={distributionRefetch}
-				distributionList={distributionList}
 				control={control}
 				handleSubmit={handleSubmit}
 				errors={errors}
