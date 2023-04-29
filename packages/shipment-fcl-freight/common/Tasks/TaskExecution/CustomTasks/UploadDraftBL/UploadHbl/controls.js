@@ -4,14 +4,15 @@ const controls = [
 		name  : 'description',
 		type  : 'textarea',
 		span  : 12,
-		rows  : 2,
+		size  : 'sm',
 	},
 	{
-		label       : 'Bill of lading Number',
-		name        : 'document_number',
-		type        : 'text',
-		span        : 6,
-		validations : [
+		label : 'Bill of lading Number',
+		name  : 'document_number',
+		type  : 'text',
+		span  : 6,
+		size  : 'sm',
+		rules : [
 			{
 				type    : 'required',
 				message : 'BL Number is required',
@@ -19,12 +20,13 @@ const controls = [
 		],
 	},
 	{
-		label       : 'Container Quantity',
-		name        : 'containers_count',
-		type        : 'number',
-		span        : 6,
-		min         : 1,
-		validations : [
+		label : 'Container Quantity',
+		name  : 'containers_count',
+		type  : 'number',
+		span  : 6,
+		size  : 'sm',
+		min   : 1,
+		rules : [
 			{
 				type    : 'required',
 				message : 'Container Quantity is required',
@@ -37,21 +39,14 @@ const controls = [
 		],
 	},
 	{
-		name          : 'url',
-		showLabel     : false,
-		span          : 12,
-		type          : 'file',
-		themeType     : 'secondary',
-		drag          : true,
-		isShipment    : true,
-		uploadIcon    : 'ic-upload',
-		document_type : 'draft_house_bill_of_lading',
-		label         : '',
+		name      : 'url',
+		showLabel : false,
+		span      : 12,
+		size      : 'sm',
 		accept:
 			'image/*,.pdf,.doc,.docx,.xlsx,application/msword,'
 			+ 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-		uploadType  : 'aws',
-		validations : [
+		rules: [
 			{
 				type    : 'required',
 				message : 'document is required',

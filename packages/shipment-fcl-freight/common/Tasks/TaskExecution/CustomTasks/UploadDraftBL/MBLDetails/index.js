@@ -1,12 +1,12 @@
 import Toast from '@cogoport/components';
 import { useRef, forwardRef, useImperativeHandle } from 'react';
 
-import Form from '../UploadHbl/form';
+import Form from '../form';
 
 import getControls from './controls';
 
 function MBLDetails({ primaryService = {}, ref = () => {}, selectedMail = {} }) {
-	let newSummary = '';
+	let newSummary = primaryService;
 	if (selectedMail?.formatted?.length) {
 		newSummary = selectedMail?.formatted[0];
 	}

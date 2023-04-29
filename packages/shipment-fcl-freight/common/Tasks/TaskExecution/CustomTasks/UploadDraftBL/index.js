@@ -5,7 +5,7 @@ import TaskContainer from '../TaskContainer';
 
 // import HBLCreate from './HBLCreate';
 import useDraftBLHelper from './hooks/useDraftBLHelper';
-// import MBLDetails from './MBLDetails';
+import MBLDetails from './MBLDetails';
 // import styles from './styles.module.css';
 // import UploadHbl from './UploadHbl';
 
@@ -30,7 +30,7 @@ function UploadDraftBL({
 
 	const [step, setStep] = useState(initial_step || '');
 
-	// const blCount = primaryService.bls_count;
+	const blCount = primaryService.bls_count;
 
 	const {
 		listDocsAPI,
@@ -192,8 +192,7 @@ function UploadDraftBL({
 					</div>
 				) : null} */}
 
-				Child Comp
-				{/* {(step === 'mbl' || !isHBL) && (
+				{(step !== 'mbl' || !isHBL) && (
 					<MBLDetails
 						ref={mblRef}
 						task={task}
@@ -201,7 +200,7 @@ function UploadDraftBL({
 						shipmentData={shipmentData}
 						primaryService={primaryService}
 					/>
-				)} */}
+				)}
 			</div>
 		</TaskContainer>
 	);
