@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { snakeCase } from '@cogoport/utils';
 import { v1 as uuid } from 'uuid';
 
@@ -69,6 +70,9 @@ const useGetHandleFormSubmit = ({
 			id       : 0,
 			parentId : parentId || defaultParentId,
 			type     : 'COLUMN',
+			style    : {
+				border: '1px solid red',
+			},
 		};
 
 		const formWidget = {
@@ -79,6 +83,9 @@ const useGetHandleFormSubmit = ({
 			id       : 1,
 			parentId : parentId || defaultParentId,
 			type     : 'COLUMN',
+			style    : {
+				border: '1px solid red',
+			},
 		};
 
 		// const buttonWigdet = {
@@ -103,7 +110,7 @@ const useGetHandleFormSubmit = ({
 
 		const { id: selectedColumnId } = selectedColumn || {};
 
-		const { id: selectedChildId } = selectedItem || {};
+		// const { id: selectedChildId } = selectedItem || {};
 
 		const { id: selectedNestedColumnId } = selectedItem || {};
 
@@ -111,22 +118,30 @@ const useGetHandleFormSubmit = ({
 
 		if (id === selectedRowId && selectedItem) {
 			if (Object.keys(selectedNestedColumn).length > 0 && nestedColumnId === selectedNestedColumnId) {
-				// console.log('dkfodjfjosjx');
+				console.log('dkfodjfjosjx', data.layouts[selectedComponentIndex]);
 			} else if (Object.keys(selectedColumn).length > 0 && columnId === selectedColumnId) {
-				// if (data.layouts[selectedComponentIndex].component.children.length === 2) {
-				// 	data.layouts[selectedComponentIndex].component.children = childrenData;
-				// } else if (data.layouts[selectedComponentIndex].component.children.length === 1) {
-				// 	console.log('sdkjskdk', selectedColumn, selectedChildId);
-				// 	// data.layouts[selectedComponentIndex].component.children[selectedColumnId].component = {
-				// 	// 	...data.layouts[selectedComponentIndex].component.children.component,
-				// 	// 	children : childrenData,
-				// 	// 	type     : 'container',
-				// 	// };
-				// }
+				console.log('sdmksjdkjdskl', data.layouts[selectedComponentIndex].type);
+
+				if (data.layouts[selectedComponentIndex].type === 'carousel') {
+					data.layouts[selectedComponentIndex].component.children[selectedColumnId].component = {
+						...data.layouts[selectedComponentIndex].component.children[selectedColumnId].component,
+						children : childrenData,
+						type     : 'container',
+					};
+				} else if (!data.layouts[selectedComponentIndex].isNested || data.layouts[selectedComponentIndex].type === 'formSample') {
+					data.layouts[selectedComponentIndex].component.children = childrenData;
+				} else {
+					data.layouts[selectedComponentIndex].component.children[selectedColumnId].component = {
+						...data.layouts[selectedComponentIndex].component.children[selectedColumnId].component,
+						children : childrenData,
+						type     : 'container',
+					};
+				}
 			} else if (Object.keys(selectedColumn).length === 0 && Object.keys(selectedNestedColumn).length === 0) {
 				data.layouts[selectedComponentIndex] = {
 					...data.layouts[selectedComponentIndex],
-					parentId: defaultParentId,
+					parentId : defaultParentId,
+					isNested : false,
 				};
 				data.layouts[selectedComponentIndex].component = {
 					...data.layouts[selectedComponentIndex].component,
