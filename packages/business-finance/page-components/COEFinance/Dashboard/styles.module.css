@@ -1,219 +1,223 @@
 /* stylelint-disable selector-class-pattern */
 .stat {
-  font-size: 36px;
-  font-weight: 500;
-  line-height: 54px;
-  color: #ed3726;
+	font-size: 36px;
+	font-weight: 500;
+	line-height: 54px;
+	color: #ed3726;
 }
 
 .month {
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  color: #333;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 24px;
+	color: #333;
 }
 
 .totalstats {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 80px 80px 0 60px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 80px 80px 0 60px;
 }
 
 .space_between {
-  display: flex;
-  gap: 16px;
-  margin-top: 30px;
+	display: flex;
+	gap: 16px;
+	margin-top: 30px;
 
-  @media (max-width: 1120px) {
-    flex-direction: column;
-  }
+	@media (max-width: 1120px) {
+		flex-direction: column;
+	}
 }
 
 .flex {
-  display: flex;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .heading {
-  width: max-content;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 27px;
-  color: #333;
-  border-bottom: 2px solid black;
+	width: max-content;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 27px;
+	color: #333;
+	border-bottom: 2px solid black;
 }
 
 .card_flex {
-  display: flex;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-  margin-top: 16px;
-  background: #fff;
-  border-radius: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
 }
 
 .border {
-  height: 50px;
-  border-left: 1.5px solid #ed3726;
+	height: 50px;
+	border-left: 1.5px solid #ed3726;
 }
 
 .card_label {
-  padding-right: 60px;
-  padding-left: 36px;
-  font-size: 14px;
-  font-weight: 500;
+	padding-right: 60px;
+	padding-left: 36px;
+	font-size: 14px;
+	font-weight: 500;
 }
 
 .card_value {
-  padding-left: 28px;
-  font-size: 30px;
-  font-weight: 600;
-  padding-right: 14px;
+	padding-right: 14px;
+	padding-left: 28px;
+	font-size: 30px;
+	font-weight: 600;
 }
 
 .filter_flex {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 16px;
 
-  :global {
-    .react-datepicker__input-container {
-      width: 200px;
-      .react-datepicker-ignore-onclickoutside {
-        height: 40px;
-      }
-      button {
-        background: none !important;
-      }
-    }
-  }
+	:global {
+		.react-datepicker__input-container {
+			width: 200px;
+
+			.react-datepicker-ignore-onclickoutside {
+				height: 40px;
+			}
+
+			button {
+				background: none !important;
+			}
+		}
+	}
 }
 
 .filter {
-  :global {
-    .react-datepicker__input-container {
-      width: 200px;
+	:global {
+		.react-datepicker__input-container {
+			width: 200px;
 
-      .react-datepicker-ignore-onclickoutside {
-        height: 40px;
-      }
+			.react-datepicker-ignore-onclickoutside {
+				height: 40px;
+			}
 
-      button {
-        background: none !important;
-      }
-    }
-  }
+			button {
+				background: none !important;
+			}
+		}
+	}
 }
 
 .report {
-  color: #f68b21;
-  text-decoration: underline;
-  cursor: pointer;
+	color: #f68b21;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 .header_report {
-  font-size: 16px;
-  font-weight: 600;
+	font-size: 16px;
+	font-weight: 600;
 }
 
 .button_flex {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
 }
 
 .responsive {
-  min-width: 35%;
-  height: 420px;
-  margin-top: 16px;
-  background: #fff;
-  border-radius: 8px;
+	min-width: 35%;
+	height: 420px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
 }
 
 .responsive_pie {
-  min-width: 49%;
-  height: 420px;
-  background: #fff;
-  border-radius: 8px;
+	min-width: 49%;
+	height: 420px;
+	background: #fff;
+	border-radius: 8px;
 }
 
 .service_stats {
-  min-width: 49%;
-  height: 420px;
-  background: #fff;
-  border-radius: 8px;
+	min-width: 49%;
+	height: 420px;
+	background: #fff;
+	border-radius: 8px;
 }
 
 .invoice {
-  display: flex;
-  gap: 4px;
-  align-items: center;
-  padding: 20px 0 0 36px;
-  font-size: 16px;
-  font-weight: 600;
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	padding: 20px 0 0 36px;
+	font-size: 16px;
+	font-weight: 600;
 }
 
 .jobs {
-  display: flex;
-  gap: 4px;
-  align-items: center;
-  padding: 20px 0 0;
-  font-size: 16px;
-  font-weight: 600;
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	padding: 20px 0 0;
+	font-size: 16px;
+	font-weight: 600;
 }
 
 .job_border {
-  width: 96px;
-  height: 2px;
-  margin: 4px 0 0;
-  background: #ed3726;
-  border-radius: 4px;
+	width: 96px;
+	height: 2px;
+	margin: 4px 0 0;
+	background: #ed3726;
+	border-radius: 4px;
 }
 
 .border_main {
-  width: 96px;
-  height: 2px;
-  margin: 4px 0 0 36px;
-  background: #ed3726;
-  border-radius: 4px;
+	width: 96px;
+	height: 2px;
+	margin: 4px 0 0 36px;
+	background: #ed3726;
+	border-radius: 4px;
 }
 
 .icon {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
 }
 
 .stats {
-  width: 100%;
-  padding: 36px;
-  margin-top: 16px;
-  background: #fff;
-  border-radius: 8px;
+	width: 100%;
+	padding: 36px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
 }
 
 .table_data {
-  height: 45vh;
-  overflow: scroll;
-  :global {
-    .ui_table_head_container {
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      background: #ffff;
-      .ui_table_head_row {
-        .ui_table_head_cell:first-child {
-          padding-left: 12px;
-        }
-      }
-    }
-  }
+	height: 45vh;
+	overflow: scroll;
+
+	:global {
+		.ui_table_head_container {
+			position: sticky;
+			top: 0;
+			z-index: 1;
+			background: #ffff;
+
+			.ui_table_head_row {
+				.ui_table_head_cell:first-child {
+					padding-left: 12px;
+				}
+			}
+		}
+	}
 }

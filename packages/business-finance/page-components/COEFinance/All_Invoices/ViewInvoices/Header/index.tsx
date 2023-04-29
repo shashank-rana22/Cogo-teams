@@ -57,8 +57,8 @@ function Header({
 		setApprove(true);
 	};
 
-	const handleApproveAndReject = () => {
-		rejectApproveApi();
+	const handleApproveAndReject = (getRoute) => {
+		rejectApproveApi(getRoute);
 	};
 
 	const isApproveDisabled = Object.keys(lineItemsRemarks)?.length > 0
@@ -162,7 +162,7 @@ function Header({
 								size="md"
 								style={{ marginRight: '8px' }}
 								disabled={!(overAllRemark?.length > 0)}
-								onClick={() => handleApproveAndReject()}
+								onClick={() => handleApproveAndReject(getRoute)}
 							>
 								Yes
 							</Button>

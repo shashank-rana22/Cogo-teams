@@ -1,58 +1,58 @@
 .flex {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 16px;
-  gap: 16px;
-  width: 100%;
+	display: flex;
+	gap: 16px;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 16px;
 }
 
 .item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px;
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 4px;
 }
 
 .border {
-  height: 50px;
-  border-left: 1.5px solid #e0e0e0;
+	height: 50px;
+	border-left: 1.5px solid #e0e0e0;
 }
 
 .label {
-  display: flex;
-  gap: 4px;
-  font-size: 16px;
-  font-weight: 600;
+	display: flex;
+	gap: 4px;
+	font-size: 16px;
+	font-weight: 600;
 }
 
 .value {
-  padding-left: 14px;
-  font-size: 20px;
-  font-weight: 600;
-  color: #f68b21;
+	padding-left: 14px;
+	font-size: 20px;
+	font-weight: 600;
+	color: #f68b21;
 }
 
 .price {
-  font-weight: 600;
+	font-weight: 600;
 }
 
 .sub_flex {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 0 40px 0 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	padding: 0 40px 0 20px;
 }
 
 .ship_id {
-  text-decoration: underline;
-  cursor: pointer;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 .content {
-  display: flex;
-  flex-direction: column;
-  font-size: 12px;
+	display: flex;
+	flex-direction: column;
+	font-size: 12px;
 }
