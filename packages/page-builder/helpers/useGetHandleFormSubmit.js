@@ -100,8 +100,6 @@ const useGetHandleFormSubmit = ({
 
 		const childrenData = [textWigdet, formWidget];
 
-		// console.log('dfjijdi', parentId, childId);
-
 		const { id: selectedRowId } = selectedRow || {};
 
 		const { id : columnId } = columnData || {};
@@ -110,18 +108,16 @@ const useGetHandleFormSubmit = ({
 
 		const { id: selectedColumnId } = selectedColumn || {};
 
-		// const { id: selectedChildId } = selectedItem || {};
-
 		const { id: selectedNestedColumnId } = selectedItem || {};
-
-		console.log('sdjskdjk', selectedColumn, selectedNestedColumn, selectedItem);
 
 		if (id === selectedRowId && selectedItem) {
 			if (Object.keys(selectedNestedColumn).length > 0 && nestedColumnId === selectedNestedColumnId) {
-				console.log('dkfodjfjosjx', data.layouts[selectedComponentIndex]);
+				data.layouts[selectedComponentIndex].component.children[selectedColumnId].component = {
+					...data.layouts[selectedComponentIndex].component.children[selectedColumnId].component,
+					children : childrenData,
+					type     : 'container',
+				};
 			} else if (Object.keys(selectedColumn).length > 0 && columnId === selectedColumnId) {
-				console.log('sdmksjdkjdskl', data.layouts[selectedComponentIndex].type);
-
 				if (data.layouts[selectedComponentIndex].type === 'carousel') {
 					data.layouts[selectedComponentIndex].component.children[selectedColumnId].component = {
 						...data.layouts[selectedComponentIndex].component.children[selectedColumnId].component,
