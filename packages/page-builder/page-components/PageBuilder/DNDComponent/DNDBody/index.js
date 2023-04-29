@@ -29,28 +29,26 @@ function DNDBody({
 
 	return (
 		<section className={styles.body}>
-			{modeType === 'edit' && (
 
-				<LeftPanel
-					activeTab={activeTab}
-					setActiveTab={setActiveTab}
-					pageConfiguration={pageConfiguration}
-					setPageConfiguration={setPageConfiguration}
-					addNewItem={addNewItem}
-					onNewItemAdding={onNewItemAdding}
-					selectedRow={selectedRow}
-					setSelectedRow={setSelectedRow}
-					showContentModal={showContentModal}
-					setShowContentModal={setShowContentModal}
-					parentComponentId={parentComponentId}
-					setParentComponentId={setParentComponentId}
-					selectedItem={selectedItem}
-					setSelectedItem={setSelectedItem}
-					selectedColumn={selectedColumn}
-					selectedNestedColumn={selectedNestedColumn}
-				/>
-
-			)}
+			<LeftPanel
+				activeTab={activeTab}
+				setActiveTab={setActiveTab}
+				pageConfiguration={pageConfiguration}
+				setPageConfiguration={setPageConfiguration}
+				addNewItem={addNewItem}
+				onNewItemAdding={onNewItemAdding}
+				selectedRow={selectedRow}
+				setSelectedRow={setSelectedRow}
+				showContentModal={showContentModal}
+				setShowContentModal={setShowContentModal}
+				parentComponentId={parentComponentId}
+				setParentComponentId={setParentComponentId}
+				selectedItem={selectedItem}
+				setSelectedItem={setSelectedItem}
+				selectedColumn={selectedColumn}
+				selectedNestedColumn={selectedNestedColumn}
+				modeType={modeType}
+			/>
 
 			<RightPanel
 				pageConfiguration={pageConfiguration}

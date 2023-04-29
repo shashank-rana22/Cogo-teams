@@ -22,7 +22,12 @@ function LeftPanel(props) {
 		setPageConfiguration,
 		selectedColumn,
 		selectedNestedColumn,
+		modeType,
 	} = props;
+
+	if (modeType !== 'edit') {
+		return null;
+	}
 
 	return (
 		<div className={styles.left_panel}>
