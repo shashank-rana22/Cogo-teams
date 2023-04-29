@@ -1,28 +1,29 @@
 import { Input, Select } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
-import { useEffect, useState, useMemo, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 
 import styles from './styles.module.css';
 
 function Filter({ hookSetters = () => {}, filters }) {
+	const setValueRef = useRef();
+	setValueRef.current = (name, e) => {
+		hookSetters.setFilters((prev) => ({ ...prev, [name]: e }));
+	};
 	const setValue = useCallback((name, e) => {
 		hookSetters.setFilters((prev) => ({ ...prev, [name]: e }));
 	}, [hookSetters]);
+
 	const [inputValue, setInputValue] = useState('');
 	const { query, debounceQuery } = useDebounceQuery();
 	const debouncedQuery = useCallback(debounceQuery, [debounceQuery]);
+
 	useEffect(() => {
 		debouncedQuery(inputValue);
-	}, [inputValue, debouncedQuery]);
-
-	const setTerm = useCallback((value) => {
-		setValue('search_term', value);
-	}, [setValue]);
-
-	useMemo(() => {
-		setTerm(query);
-	}, [query, setTerm]);
+	}, [inputValue, debouncedQuery, setValue]);
+	useEffect(() => {
+		setValueRef.current('search_term', query);
+	}, [query]);
 	return (
 		<div className={styles.container}>
 			<AsyncSelect

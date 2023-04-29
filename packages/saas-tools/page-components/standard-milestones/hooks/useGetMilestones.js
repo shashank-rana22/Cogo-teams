@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
 const useGetMilestones = ({ sideBar }) => {
 	const [filters, setFilters] = useState({
@@ -26,29 +26,31 @@ const useGetMilestones = ({ sideBar }) => {
 				source: source || undefined,
 			},
 		},
-	});
+	}, { manual: true });
+	const getRefetch = useCallback(async () => {
+		try {
+			const res = await refetch({});
+			const { data = { list: [], total_pages: 0 } } = res;
+			setList(() => ({
+				data         : data?.list || [],
+				total        : data?.total_count,
+				total_page   : data?.total_pages,
+				fullResponse : res.data,
+			}));
+		} catch {
+			setList(() => ({
+				data         : [],
+				total        : 0,
+				total_page   : 0,
+				fullResponse : {},
+				reverted     : 0,
+			}));
+		}
+	}, [refetch]);
 
 	useEffect(() => {
-		refetch()
-			.then((res) => {
-				const { data = { list: [], total_pages: 0 } } = res;
-				setList(() => ({
-					data         : data?.list || [],
-					total        : data?.total_count,
-					total_page   : data?.total_pages,
-					fullResponse : res.data,
-				}));
-			})
-			.catch(() => {
-				setList(() => ({
-					data         : [],
-					total        : 0,
-					total_page   : 0,
-					fullResponse : {},
-					reverted     : 0,
-				}));
-			});
-	}, [filters, sideBar, refetch]);
+		getRefetch();
+	}, [getRefetch, sideBar]);
 
 	const hookSetters = {
 		setFilters,
@@ -62,6 +64,7 @@ const useGetMilestones = ({ sideBar }) => {
 		error,
 		hookSetters,
 		refetch,
+		getRefetch,
 	};
 };
 
