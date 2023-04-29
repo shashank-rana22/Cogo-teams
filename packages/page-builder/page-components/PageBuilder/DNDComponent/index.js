@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 
-import getContentMapping from '../../../configurations/default-content-mapping';
+import useGetAddNewComponent from '../../../helpers/useGetAddNewComponent';
 
 import DNDBody from './DNDBody';
 import SelectComponentModal from './SelectComponentModal';
@@ -36,65 +36,14 @@ function DNDComponent() {
 
 	const [selectedNestedColumn, setSelectedNestedColumn] = useState({});
 
-	const handleAddNewItem = useCallback(
-		(content, hoveredIndex = pageConfiguration.layouts.length, shouldAddBelow = true, parentDetails = {}, dropSource = '') => {
-			const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
-
-			const { type } = content || {};
-
-			const CONTENT_MAPPING = getContentMapping();
-
-			if (dropSource === 'selectBox') {
-				const { childId, parentId } = parentDetails || {};
-
-				const data = pageConfiguration;
-
-				const objIndex = data.layouts.findIndex((item) => item.parentId === parentId);
-
-				data.layouts[objIndex].component.children[childId] = {
-					...CONTENT_MAPPING[type],
-					...data.layouts[objIndex].component.children[childId],
-					component: { ...CONTENT_MAPPING[type].component, style: data.layouts[objIndex].component.children[childId].component.style },
-				};
-
-				setPageConfiguration({ ...data });
-
-				setSelectedRow({ ...data.layouts[objIndex] });
-
-				setSelectedItem({ ...data.layouts[objIndex].component.children[childId] });
-			} else {
-				setPageConfiguration((prev) => ({
-					...prev,
-					layouts: [
-						...pageConfiguration.layouts.slice(0, startIndex),
-						{
-							...CONTENT_MAPPING[type],
-							...content,
-							id: pageConfiguration.layouts.length + 1,
-						},
-						...pageConfiguration.layouts.slice(startIndex),
-					],
-				}));
-
-				setSelectedRow({
-					...CONTENT_MAPPING[type],
-					...content,
-					id: pageConfiguration.layouts.length + 1,
-				});
-
-				setSelectedItem({
-					...CONTENT_MAPPING[type],
-					...content,
-					id: pageConfiguration.layouts.length + 1,
-				});
-			}
-
-			setShowContentModal(false);
-			setParentComponentId(null);
-		},
-
-		[pageConfiguration],
-	);
+	const { handleAddNewItem } = useGetAddNewComponent({
+		pageConfiguration,
+		setPageConfiguration,
+		setSelectedRow,
+		setSelectedItem,
+		setShowContentModal,
+		setParentComponentId,
+	});
 
 	return (
 		<div>
