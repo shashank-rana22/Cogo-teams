@@ -20,9 +20,9 @@ function TopicTable({
 }) {
 	const { list:listTopicData = [], total_count } = data || {};
 	const router = useRouter();
-	if (topicsLoading) {
-		return <LoadingState />;
-	}
+
+	if (topicsLoading) return <LoadingState />;
+
 	const renderTable = () => {
 		const onClick = () => {
 			router.push(
@@ -32,6 +32,7 @@ function TopicTable({
 			setConfigurationPage('topic');
 			reset();
 		};
+
 		if (isEmpty(data?.list)) {
 			return (
 				activeTopic === 'active' ? (
@@ -68,12 +69,7 @@ function TopicTable({
 		);
 	};
 
-	return (
-		<div>
-			{renderTable()}
-		</div>
-
-	);
+	return renderTable();
 }
 
 export default TopicTable;

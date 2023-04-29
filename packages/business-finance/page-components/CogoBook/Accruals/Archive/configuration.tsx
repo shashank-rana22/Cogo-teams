@@ -85,7 +85,11 @@ export const ARCHIVE_MONTH_BOOKED = [
 		accessor : 'variance',
 		id       : 'variance',
 		Cell     : ({ row: { original } }) => {
-			const { expenseBooked, actualExpense, incomeBooked, actualIncome } = original || {};
+			const {
+				expenseBooked, actualExpense, incomeBooked, actualIncome,
+				expenseAccrued, incomeAccrued,
+			} = original || {};
+
 			const renderContent = () => (
 				<div className={styles.variance_styles}>
 					<div>
@@ -93,7 +97,11 @@ export const ARCHIVE_MONTH_BOOKED = [
 						<div>
 							Amount :
 							{' '}
-							<span className={styles.amount}>{expenseBooked - actualExpense}</span>
+							<span className={styles.amount}>
+								{(actualExpense
+								- (expenseBooked + expenseAccrued))?.toFixed(2)}
+
+							</span>
 						</div>
 					</div>
 					<div>
@@ -101,7 +109,11 @@ export const ARCHIVE_MONTH_BOOKED = [
 						<div>
 							Amount :
 							{' '}
-							<span className={styles.amount}>{incomeBooked - actualIncome}</span>
+							<span className={styles.amount}>
+								{(actualIncome - (
+									incomeBooked + incomeAccrued))?.toFixed(2)}
+
+							</span>
 						</div>
 					</div>
 				</div>
