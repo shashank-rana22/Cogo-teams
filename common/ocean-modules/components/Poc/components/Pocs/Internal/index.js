@@ -17,18 +17,15 @@ function Internal({ data = [], setAddPoc = () => { }, loading = false, rolesPerm
 					<div className={styles.header}>
 						<div className={styles.heading}>Internal : Cogoport</div>
 						{canAddPoc ? (
-							<div>
-								<Button
-									size="sm"
-									onClick={() => {
-										setAddPoc({ poc_type: 'internal' });
-									}}
-									themeType="accent"
-								>
-									+ ADD POC
-								</Button>
-
-							</div>
+							<Button
+								size="sm"
+								onClick={() => {
+									setAddPoc({ poc_type: 'internal' });
+								}}
+								themeType="accent"
+							>
+								+ ADD POC
+							</Button>
 						) : null}
 					</div>
 

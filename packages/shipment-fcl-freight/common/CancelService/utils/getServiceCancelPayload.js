@@ -1,7 +1,7 @@
 const completeOrCancel = ['complete', 'cancelled'];
 
 export default function getServiceCancelPayload({
-	controls, servicesList, service_type, trade_type, formData, shipment_data,
+	controls = {}, servicesList = [], service_type = '', trade_type = '', formData = {}, shipment_data = {},
 }) {
 	let cancellation_services = [];
 

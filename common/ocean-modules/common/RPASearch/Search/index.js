@@ -28,10 +28,7 @@ function RPASearch({
 	});
 	const [task, setTask] = useState('search_box');
 
-	let selectedMail = selectedMails.mail_ids;
-	if (!selectedMail) {
-		selectedMail = [];
-	}
+	const selectedMail = selectedMails?.mail_ids?.length ? selectedMails.mail_ids : [];
 
 	let taskFormatter = 'shipping_instruction';
 	let taskApi = 'shipping_instruction';
@@ -39,10 +36,7 @@ function RPASearch({
 	if (entity_type === 'upload_booking_note') {
 		taskFormatter = 'booking_note';
 		taskApi = 'booking_note';
-	} else if (
-		entity_type === 'upload_draft_bill_of_lading'
-		|| entity_type === 'upload_bill_of_lading'
-	) {
+	} else if (['upload_draft_bill_of_lading', 'upload_bill_of_lading'].includes(entity_type)) {
 		taskFormatter = 'bill_of_lading';
 		taskApi = 'bill_of_lading';
 	} else if (entity_type === 'update_container_details') {
@@ -144,8 +138,9 @@ function RPASearch({
 
 			<div className={styles.search_items}>
 				{loading ? (
-					<h2>Loading emails from operations@cogoport.com..</h2>
+					<h2>Loading emails from operations@cogoport.com...</h2>
 				) : null}
+
 				{(data?.body || []).map((item) => (
 					<MailData
 						item={item}
