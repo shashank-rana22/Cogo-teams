@@ -1,9 +1,9 @@
 import { Select, Button } from '@cogoport/components';
 import { IcMDelete, IcMUpload } from '@cogoport/icons-react';
 
-import ColorInput from '../../../../../commons/ColorInput';
-import NumberInput from '../../../../../commons/NumberInput';
-import ProgressBar from '../../../../../commons/ProgressBar';
+import ColorInput from '../../../../../../../commons/ColorInput';
+import NumberInput from '../../../../../../../commons/NumberInput';
+import ProgressBar from '../../../../../../../commons/ProgressBar';
 
 import styles from './styles.module.css';
 

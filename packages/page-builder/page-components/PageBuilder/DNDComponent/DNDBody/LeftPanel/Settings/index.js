@@ -2,13 +2,13 @@ import { Accordion, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useCallback } from 'react';
 
-import BoxModal from '../../../../commons/BoxModal';
-import UploadImageModal from '../../../../commons/UploadImageModal';
-import buttonSettings from '../../../../configurations/button-settings';
-import containerSettings from '../../../../configurations/container-settings';
-import dividerSettings from '../../../../configurations/divider-settings';
-import imageSettings from '../../../../configurations/image-settings';
-import textSettings from '../../../../configurations/text-settings';
+import BoxModal from '../../../../../../commons/BoxModal';
+import UploadImageModal from '../../../../../../commons/UploadImageModal';
+import buttonSettings from '../../../../../../configurations/button-settings';
+import containerSettings from '../../../../../../configurations/container-settings';
+import dividerSettings from '../../../../../../configurations/divider-settings';
+import imageSettings from '../../../../../../configurations/image-settings';
+import textSettings from '../../../../../../configurations/text-settings';
 
 import Card from './Card';
 import styles from './styles.module.css';

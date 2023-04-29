@@ -3,10 +3,9 @@ import { Modal } from '@cogoport/components';
 import React, { useCallback, useState } from 'react';
 
 import getContentMapping from '../../../configurations/default-content-mapping';
-import LeftPanel from '../LeftPanel';
-import Content from '../LeftPanel/Content';
-import RightPanel from '../RightPanel';
 
+import DNDBody from './DNDBody';
+import Content from './DNDBody/LeftPanel/Content';
 import styles from './styles.module.css';
 
 function DNDComponent() {
@@ -109,53 +108,30 @@ function DNDComponent() {
 				Cogo Page Builder
 			</section>
 
-			<section className={styles.body}>
+			<DNDBody
+				activeTab={activeTab}
+				setActiveTab={setActiveTab}
+				pageConfiguration={pageConfiguration}
+				setPageConfiguration={setPageConfiguration}
+				addNewItem={handleAddNewItem}
+				onNewItemAdding={setNewItemAdding}
+				selectedRow={selectedRow}
+				setSelectedRow={setSelectedRow}
+				showContentModal={showContentModal}
+				setShowContentModal={setShowContentModal}
+				parentComponentId={parentComponentId}
+				setParentComponentId={setParentComponentId}
+				selectedItem={selectedItem}
+				setSelectedItem={setSelectedItem}
+				selectedColumn={selectedColumn}
+				selectedNestedColumn={selectedNestedColumn}
+				isNewItemAdding={isNewItemAdding}
+				setSelectedColumn={setSelectedColumn}
+				setSelectedNestedColumn={setSelectedNestedColumn}
+				modeType={modeType}
+				setMode={setMode}
+			/>
 
-				{modeType === 'edit' && (
-					<div className={styles.left_panel}>
-						<LeftPanel
-							activeTab={activeTab}
-							setActiveTab={setActiveTab}
-							pageConfiguration={pageConfiguration}
-							setPageConfiguration={setPageConfiguration}
-							addNewItem={handleAddNewItem}
-							onNewItemAdding={setNewItemAdding}
-							selectedRow={selectedRow}
-							setSelectedRow={setSelectedRow}
-							showContentModal={showContentModal}
-							setShowContentModal={setShowContentModal}
-							parentComponentId={parentComponentId}
-							setParentComponentId={setParentComponentId}
-							selectedItem={selectedItem}
-							setSelectedItem={setSelectedItem}
-							selectedColumn={selectedColumn}
-							selectedNestedColumn={selectedNestedColumn}
-						/>
-					</div>
-				)}
-
-				<RightPanel
-					pageConfiguration={pageConfiguration}
-					setPageConfiguration={setPageConfiguration}
-					addNewItem={handleAddNewItem}
-					onNewItemAdding={setNewItemAdding}
-					isNewItemAdding={isNewItemAdding}
-					parentComponentId={parentComponentId}
-					setShowContentModal={setShowContentModal}
-					setParentComponentId={setParentComponentId}
-					selectedRow={selectedRow}
-					setSelectedRow={setSelectedRow}
-					selectedItem={selectedItem}
-					setSelectedItem={setSelectedItem}
-					selectedColumn={selectedColumn}
-					setSelectedColumn={setSelectedColumn}
-					selectedNestedColumn={selectedNestedColumn}
-					setSelectedNestedColumn={setSelectedNestedColumn}
-					modeType={modeType}
-					setMode={setMode}
-				/>
-
-			</section>
 			<section>
 				<Modal
 					size="md"

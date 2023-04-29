@@ -5,7 +5,7 @@ import { useDrag, useDrop } from 'react-dnd';
 import { v1 as uuid } from 'uuid';
 
 import 'react-resizable/css/styles.css';
-import VALID_ITEM_TYPES from '../../../../../configurations/accept-items';
+import VALID_ITEM_TYPES from '../../../../../../../configurations/accept-items';
 
 import ComponentBuilder from './ComponentBuilder';
 import RenderComponents from './RenderComponent';

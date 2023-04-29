@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import PREMADE_MAPPING from '../../../../../configurations/premade-mapping';
+import PREMADE_MAPPING from '../../../../../../../configurations/premade-mapping';
 
 import Item from './Item';
 import styles from './styles.module.css';

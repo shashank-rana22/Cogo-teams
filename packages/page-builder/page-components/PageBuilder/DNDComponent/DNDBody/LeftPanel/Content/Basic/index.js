@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 import React, { useMemo } from 'react';
 
-import contents from '../../../../../configurations/basic-contents';
+import contents from '../../../../../../../configurations/basic-contents';
 
 import Item from './Item';
 import styles from './styles.module.css';

@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import { useDrop } from 'react-dnd';
 
-import VALID_ITEM_TYPES from '../../../../configurations/accept-items';
+import VALID_ITEM_TYPES from '../../../../../../configurations/accept-items';
 
 import Components from './Components';
 import styles from './styles.module.css';
