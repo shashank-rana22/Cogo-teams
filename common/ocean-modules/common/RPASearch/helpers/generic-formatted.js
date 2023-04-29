@@ -32,7 +32,7 @@ const mapKeyValues = ({ keyMappings = {}, rpaData = {} }) => {
 					const relatedCtrl = name[key];
 
 					if (date_controls.includes(key)) {
-						const val = (item[name[key]] || item[key] || '').replace(' ', '');
+						const val = (item[relatedCtrl] || item[key] || '').replace(' ', '');
 
 						if (val) {
 							itemValues[key] = formatDate({

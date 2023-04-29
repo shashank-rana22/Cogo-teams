@@ -5,7 +5,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Item({ item, onClick, values, multiple }) {
+function Item({ item = {}, onClick = () => {}, values = [], multiple }) {
 	const Element = multiple ? Checkbox : Radio;
 
 	return (
@@ -40,7 +40,7 @@ function Item({ item, onClick, values, multiple }) {
 
 				<div className={styles.styled_radio}>
 					<Element
-						checked={values.includes(item.id)}
+						checked={values?.includes(item.id)}
 						onChange={() => {
 							onClick(item.id, item);
 						}}
