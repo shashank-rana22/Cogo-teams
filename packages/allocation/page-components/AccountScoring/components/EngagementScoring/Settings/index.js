@@ -27,12 +27,14 @@ function Settings({ setToggleComponent = () => {} }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.back_container}>
+			<div
+				role="presentation"
+				className={styles.back_container}
+				onClick={() => setToggleComponent('warmth_scoring')}
+			>
 				<IcMArrowBack width={20} height={20} fill="#4f4f4f" />
 				<div
-					role="presentation"
 					className={styles.back_text}
-					onClick={() => setToggleComponent('warmth_scoring')}
 				>
 					Account Scoring
 

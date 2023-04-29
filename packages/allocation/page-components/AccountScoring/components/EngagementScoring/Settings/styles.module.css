@@ -2,6 +2,7 @@
 	display: flex;
 	align-items: center;
 	margin-bottom: 36px;
+	cursor: pointer;
 }
 
 .back_text {
@@ -9,7 +10,6 @@
 	font-size: 20px;
 	font-weight: 600;
 	color: #4f4f4f;
-	cursor: pointer;
 }
 
 .empty_container {
