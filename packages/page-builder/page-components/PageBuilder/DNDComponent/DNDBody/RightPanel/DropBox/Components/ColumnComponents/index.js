@@ -5,7 +5,7 @@ import RenderComponent from '../RenderComponent';
 
 import styles from './styles.module.css';
 
-function ComponentBuilder({
+function ColumnComponents({
 	widget,
 	pageConfiguration,
 	setPageConfiguration,
@@ -189,4 +189,4 @@ function ComponentBuilder({
 	);
 }
 
-export default ComponentBuilder;
+export default ColumnComponents;

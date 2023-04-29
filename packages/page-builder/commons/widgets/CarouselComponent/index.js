@@ -7,7 +7,7 @@ import Carousel from 'react-slick';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import RenderComponent from '../../../page-components/PageBuilder/DNDComponent/DNDBody/RightPanel/DropBox/Components/RenderComponent';
+import RenderComponent from '../../../page-components/PageBuilder/DNDComponent/DNDBody/RightPanel/DropBox/Components/RenderElement';
 
 import styles from './styles.module.css';
 
