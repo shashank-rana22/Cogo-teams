@@ -1,4 +1,4 @@
-const getWhoIsAddingRate = ({ isSeller, item, status }) => {
+const getWhoIsAddingRate = ({ isSeller = false, item = {}, status = {} }) => {
 	let whoIsAddingRate = '';
 	if (!isSeller && (!item?.buy_price || !item?.id)) {
 		whoIsAddingRate = 'okam_create';
