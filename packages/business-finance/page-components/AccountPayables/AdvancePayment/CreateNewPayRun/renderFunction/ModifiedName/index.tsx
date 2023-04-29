@@ -3,7 +3,15 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function ModifiedName({ itemData }) {
+interface ItemTypes {
+	organizationName:string,
+}
+
+interface PropsType {
+	itemData:ItemTypes,
+}
+
+function ModifiedName({ itemData }:PropsType) {
 	const { organizationName } = itemData || {};
 	return (
 		<div className={styles.container}>

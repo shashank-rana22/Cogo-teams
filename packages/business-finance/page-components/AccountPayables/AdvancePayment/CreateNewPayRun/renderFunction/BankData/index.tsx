@@ -3,7 +3,20 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function BankData({ itemData }) {
+interface BankType {
+	accountNumber:string,
+	bankName:string,
+	ifscCode:string,
+}
+
+interface PropsType {
+	advanceDocumentSellerBankDetail:BankType,
+}
+interface ItemProps {
+	itemData:PropsType,
+}
+
+function BankData({ itemData }:ItemProps) {
 	const { advanceDocumentSellerBankDetail } = itemData || {};
 	const { accountNumber, bankName, ifscCode } = advanceDocumentSellerBankDetail || {};
 	return (

@@ -15,8 +15,38 @@ import SIDnumber from './renderFunction/SIDnumber';
 import SelectFilters from './SelectFilters';
 import styles from './styles.module.css';
 
+interface EntityType {
+	entityCode:string
+}
 interface ItemProps {
 	activeEntity:string;
+}
+interface OrganizationTypes {
+	organizationName:string,
+}
+interface NameType {
+	name:string,
+}
+interface ByProps {
+	name:string
+}
+
+interface PropsType {
+	advanceDocumentBuyerAddress:EntityType,
+	advanceDocumentSellerAddress:OrganizationTypes,
+	advanceDocumentId?:string,
+	approvedAt:Date,
+	approvedBy:NameType,
+	organizationName:string,
+	id:string,
+	requestedAt:Date,
+	requestedBy:ByProps,
+	jobNumber:string,
+	sid:string,
+	serviceType:string,
+	payableAmount:number,
+	currency:string,
+	incidentRefNo:string,
 }
 
 function AdvancePayment({ activeEntity }:ItemProps) {
@@ -24,25 +54,25 @@ function AdvancePayment({ activeEntity }:ItemProps) {
 	const { filters, setFilters, data, loading } = useGetAdvancePaymentList({ activeEntity, sort });
 	const { pageIndex, list } = data || {};
 	const functions = {
-		renderAmountWithCurrency: (itemData) => (
+		renderAmountWithCurrency: (itemData:PropsType) => (
 			<AmountWithCurrency itemData={itemData} />
 		),
-		renderIncidentNumber: (itemData) => (
+		renderIncidentNumber: (itemData:PropsType) => (
 			<IncidentNumber itemData={itemData} />
 		),
-		renderSIDnumber: (itemData) => (
+		renderSIDnumber: (itemData:PropsType) => (
 			<SIDnumber itemData={itemData} />
 		),
-		renderOrganization: (itemData) => (
+		renderOrganization: (itemData:PropsType) => (
 			<OrganizationName itemData={itemData} />
 		),
-		renderRequestedBy: (itemData) => (
+		renderRequestedBy: (itemData:PropsType) => (
 			<RequestedBy itemData={itemData} />
 		),
-		renderApprovedBy: (itemData) => (
+		renderApprovedBy: (itemData:PropsType) => (
 			<ApprovedBy itemData={itemData} />
 		),
-		renderEntityCode: (itemData) => (
+		renderEntityCode: (itemData:PropsType) => (
 			<Entity itemData={itemData} />
 		),
 	};

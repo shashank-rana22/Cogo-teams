@@ -1,6 +1,16 @@
 import React from 'react';
 
-function Entity({ itemData }) {
+interface EntityType {
+	entityCode:string
+}
+interface ItemTypes {
+	advanceDocumentBuyerAddress:EntityType,
+}
+interface PropsType {
+	itemData :ItemTypes,
+}
+
+function Entity({ itemData }:PropsType) {
 	const { advanceDocumentBuyerAddress } = itemData || {};
 	const { entityCode } = advanceDocumentBuyerAddress || {};
 	return (

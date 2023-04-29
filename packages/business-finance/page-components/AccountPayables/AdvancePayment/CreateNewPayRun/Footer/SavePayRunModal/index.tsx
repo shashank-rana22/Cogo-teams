@@ -5,11 +5,17 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+interface PropsType {
+	savePayrunModal:boolean,
+	setSavePayrunModal:Function,
+	setViewSelectedInvoice:Function,
+}
+
 function SavePayRunModal({
 	savePayrunModal,
 	setSavePayrunModal,
 	setViewSelectedInvoice,
-}) {
+}:PropsType) {
 	const handleCloseModal = () => {
 		setSavePayrunModal(false);
 	};

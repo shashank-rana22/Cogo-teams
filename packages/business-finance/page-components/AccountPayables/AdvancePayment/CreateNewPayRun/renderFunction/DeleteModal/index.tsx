@@ -4,10 +4,18 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
+interface ItemProps {
+	id:string;
+}
+interface PropsType {
+	itemData:ItemProps,
+	deleteSelecteInvoiceLoading:boolean,
+	deleteInvoices:Function;
+}
 function DeleteModal({
 	itemData, deleteSelecteInvoiceLoading,
 	deleteInvoices,
-}) {
+}:PropsType) {
 	const { id } = itemData || {};
 
 	const [openDeleteModal, setopenDeleteModal] = useState(false);

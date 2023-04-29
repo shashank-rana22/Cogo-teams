@@ -3,9 +3,20 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function BankDetails({ itemData }) {
+interface BankDetailsProps {
+	account_number:string,
+	beneficiary_name:string,
+	ifsc_code:string,
+}
+interface ItemProps {
+	bankDetail?:Array<BankDetailsProps>
+}
+interface Props {
+	itemData:ItemProps,
+}
+function BankDetails({ itemData }:Props) {
 	const { bankDetail } = itemData || {};
-	const { account_number:accountNo, beneficiary_name:beneficiaryName, ifsc_code:ifsc } = bankDetail?.[0] || [];
+	const { account_number:accountNo, beneficiary_name:beneficiaryName, ifsc_code:ifsc } = bankDetail[0];
 	return (
 		<div>
 			<div className={styles.text}>

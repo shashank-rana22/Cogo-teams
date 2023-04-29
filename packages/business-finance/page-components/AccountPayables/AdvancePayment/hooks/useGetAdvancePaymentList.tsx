@@ -6,6 +6,9 @@ import { useCallback, useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
+interface ItemProps {
+	advanceDocumentId?:string,
+}
 interface NestedObj {
 	[key: string]: string;
 }
@@ -291,7 +294,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 			return prevData;
 		});
 	};
-	const getTableBodyCheckbox = (itemData) => {
+	const getTableBodyCheckbox = (itemData:ItemProps) => {
 		const isChecked = apiData?.list?.find(
 			(item) => item?.advanceDocumentId === itemData?.advanceDocumentId,
 		)?.checked;

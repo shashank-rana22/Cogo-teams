@@ -3,7 +3,19 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function OrganizationName({ itemData }) {
+interface OrganizationTypes {
+	organizationName:string,
+}
+
+interface PropsType {
+	advanceDocumentSellerAddress:OrganizationTypes,
+}
+
+interface ItemPropsType {
+	itemData:PropsType
+}
+
+function OrganizationName({ itemData }:ItemPropsType) {
 	const { advanceDocumentSellerAddress } = itemData || {};
 	const { organizationName } = advanceDocumentSellerAddress || {};
 	return (
