@@ -5,11 +5,10 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils/';
 import { useState, useEffect } from 'react';
 
-import Actions from '../ListPages/Actions';
+import Actions from '../DNDPages/components/Actions';
 
 export const STATUS_MAPPING = {
 	active: {
@@ -29,18 +28,11 @@ export const STATUS_MAPPING = {
 	},
 };
 
-const useListPages = () => {
-	// const { profile, general } = useSelector((state) => state || {});
-
-	// const { partner: { id: partner_id }, user: { id: user_id } } = profile;
-
-	// const { query: { tab = '' }, locale = '' } = general;
-
+const useDNDPages = () => {
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
 	const [searchValue, setSearchValue] = useState('');
 	const [showCreatePage, setShowCreatePage] = useState(false);
-	// const [showActions, setShowActions] = useState(null);
 
 	const [params, setParams] = useState({
 		sort_by    : 'created_at',
@@ -51,13 +43,6 @@ const useListPages = () => {
 			q: searchQuery || undefined,
 		},
 	});
-
-	// const [globalFilters, setGlobalFilters] = useState({
-	// 	status   : undefined,
-	// 	tags     : undefined,
-	// 	category : undefined,
-
-	// });
 
 	const [{ loading, data }, refetch] = useRequest({
 		url    : 'list_page_builder_dynamic_pages',
@@ -214,4 +199,4 @@ const useListPages = () => {
 	};
 };
 
-export default useListPages;
+export default useDNDPages;

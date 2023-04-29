@@ -1,7 +1,7 @@
 import { Badge, Button } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
 
-import Filters from '../../../../commons/Filters';
+import Filters from '../../../../../commons/Filters';
 
 import useFilterContent from './useFilterContent';
 

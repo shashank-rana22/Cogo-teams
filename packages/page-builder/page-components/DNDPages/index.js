@@ -1,13 +1,13 @@
 import { Modal } from '@cogoport/components';
 
-import useListPages from '../hooks/useListPages';
+import useDNDPages from '../hooks/useDNDPages';
 
-import CreateDndPage from './CreateDndPage';
-import Header from './Header';
-import ListTable from './ListTable';
+import CreateDndPage from './components/CreateDndPage';
+import Header from './components/Header';
+import List from './components/List';
 import styles from './styles.module.css';
 
-function ListPages() {
+function DNDPages() {
 	const {
 		showCreatePage,
 		setShowCreatePage,
@@ -23,7 +23,7 @@ function ListPages() {
 		setSearchValue,
 		searchValue,
 		debounceQuery,
-	} = useListPages();
+	} = useDNDPages();
 
 	return (
 
@@ -44,7 +44,7 @@ function ListPages() {
 			</div>
 
 			<div>
-				<ListTable
+				<List
 					columns={columns}
 					list={list}
 					loading={loading}
@@ -69,4 +69,4 @@ function ListPages() {
 
 	);
 }
-export default ListPages;
+export default DNDPages;

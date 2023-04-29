@@ -1,11 +1,11 @@
 import { Table, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import EmptyState from '../../../commons/EmptyState';
+import EmptyState from '../../../../commons/EmptyState';
 
 import styles from './styles.module.css';
 
-function ListTable(props) {
+function List(props) {
 	const { columns, list, loading, paginationData, getNextPage } = props;
 
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
@@ -49,4 +49,4 @@ function ListTable(props) {
 	);
 }
 
-export default ListTable;
+export default List;

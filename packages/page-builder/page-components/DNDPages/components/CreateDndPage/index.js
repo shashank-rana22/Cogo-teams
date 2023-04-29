@@ -1,7 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 
-import Form from '../../../commons/Form';
-import useCreateDndPage from '../../hooks/useCreateDndPage';
+import Form from '../../../../commons/Form';
+import useCreateDndPage from '../../../hooks/useCreateDndPage';
 
 function CreateDndPage(props) {
 	const { setShowCreatePage, refetch } = props;

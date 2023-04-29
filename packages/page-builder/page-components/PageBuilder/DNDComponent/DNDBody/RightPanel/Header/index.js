@@ -1,8 +1,19 @@
 import { Button } from '@cogoport/components';
 
+import useUpdateDndPage from '../../../../../hooks/useUpdateDndPage';
+
 import styles from './styles.module.css';
 
-function Header({ modeType, setMode, handleUnselectItem }) {
+function Header(props) {
+	const {
+		modeType,
+		setMode,
+		handleUnselectItem,
+		pageConfiguration,
+	} = props;
+
+	const { handleSave } = useUpdateDndPage();
+
 	return (
 		<section className={styles.header}>
 			<div>
@@ -23,6 +34,7 @@ function Header({ modeType, setMode, handleUnselectItem }) {
 			<div className={styles.button_container}>
 				<Button
 					style={{ marginRight: '8px' }}
+					onClick={() => handleSave(pageConfiguration, 'save')}
 					type="button"
 					size="md"
 					themeType="secondary"
@@ -30,7 +42,14 @@ function Header({ modeType, setMode, handleUnselectItem }) {
 					Save
 
 				</Button>
-				<Button type="button" size="md">Save & Close</Button>
+				<Button
+					type="button"
+					onClick={() => handleSave(pageConfiguration, 'close')}
+					size="md"
+				>
+					Save & Close
+
+				</Button>
 			</div>
 		</section>
 	);

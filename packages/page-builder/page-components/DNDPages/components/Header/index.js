@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 
-import SearchInput from '../../../commons/SearchInput';
+import SearchInput from '../../../../commons/SearchInput';
 
 import ConfigFilters from './ConfigFilters';
 import styles from './styles.module.css';

@@ -1,20 +1,20 @@
 import { IcMTick, IcMCross } from '@cogoport/icons-react';
 
-import useUpdateDndPage from '../../hooks/useUpdateDndPage';
+import useUpdateDndPage from '../../../hooks/useUpdateDndPage';
 
 import styles from './styles.module.css';
 
 function ActionContent(props) {
 	const { refetch, item } = props;
 
-	const { onSubmit } = useUpdateDndPage({ refetch, item });
+	const { onSubmit } = useUpdateDndPage();
 
 	return (
 		<div className={styles.action_container}>
 			{item.status !== 'active' && (
 				<div
 					className={styles.workflow_cta}
-					onClick={() => onSubmit('active')}
+					onClick={() => onSubmit('active', refetch, item)}
 					role="presentation"
 				>
 					<div className={styles.cta_text}>
@@ -26,7 +26,7 @@ function ActionContent(props) {
 			{item.status !== 'inactive' && (
 				<div
 					className={styles.workflow_cta}
-					onClick={() => onSubmit('inactive')}
+					onClick={() => onSubmit('inactive', refetch, item)}
 					role="presentation"
 				>
 					<div className={styles.cta_text}>
