@@ -304,7 +304,7 @@ function asyncListHsCodes() {
 		endpoint    : 'list_hs_codes',
 		initialCall : false,
 		params      : {
-			page_limit: 20,
+			page_limit: 10,
 		},
 	};
 }
