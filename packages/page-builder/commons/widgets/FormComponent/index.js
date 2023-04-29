@@ -29,17 +29,27 @@ const prefillControls = [
 ];
 
 function FormComponent({
-	components,
-	setComponents,
-	selectedRow,
+	pageConfiguration,
+	setPageConfiguration,
+	rowData,
 	widget,
 	childId,
+	selectedRow,
+	selectedColumn,
+	selectedNestedColumn,
+	selectedItem,
+	columnData,
+	nestedColumData,
 }) {
 	const [show, setShow] = useState(false);
 
-	const { formData } = widget || {};
+	const { component } = widget || {};
+
+	const { formData } = component || {};
 
 	const formProps = useForm();
+
+	console.log('Dfkjidjifj', rowData);
 
 	const [showForm, setShowForm] = useState(true);
 
@@ -126,11 +136,11 @@ function FormComponent({
 	const onSubmit = async (value) => {
 		const { controls: defaultControls, heading } = value || {};
 
-		const { parentId, id } = selectedRow || {};
+		const { parentId, id } = rowData || {};
 
 		const CONTENT_MAPPING = getContentMapping();
 
-		const data = components;
+		const data = pageConfiguration;
 
 		const newControls = (defaultControls || []).map((item) => {
 			const { type, options_type, manual_options, is_mandetory, options: groupOptions } = item || {};
@@ -165,24 +175,28 @@ function FormComponent({
 
 		const newValue = { ...value, controls: newControls };
 
-		setShow(false);
-
-		const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === id));
+		const selectedComponentIndex = (data.layouts || []).findIndex((sComponentId) => (sComponentId.id === id));
 
 		const defaultParentId = uuid();
 
 		const textWigdet = 		{
-			...CONTENT_MAPPING.text,
+			component: {
+				...CONTENT_MAPPING.text.component,
+				content: heading,
+			},
 			id       : 0,
-			content  : heading,
-			parentId : defaultParentId,
+			parentId : parentId || defaultParentId,
+			type     : 'COLUMN',
 		};
 
 		const formWidget = {
-			...CONTENT_MAPPING.form,
+			component: {
+				...CONTENT_MAPPING.form.component,
+				formData: newValue,
+			},
 			id       : 1,
-			formData : newValue,
-			parentId : defaultParentId,
+			parentId : parentId || defaultParentId,
+			type     : 'COLUMN',
 		};
 
 		// const buttonWigdet = {
@@ -197,25 +211,52 @@ function FormComponent({
 
 		const childrenData = [textWigdet, formWidget];
 
-		if (parentId) {
-			data.layouts[selectedComponentIndex].children[childId] = {
-				...data.layouts[selectedComponentIndex].children[childId],
-				type     : 'container',
-				parentId : defaultParentId,
-			};
+		// console.log('dfjijdi', parentId, childId);
 
-			data.layouts[selectedComponentIndex].children[childId].children = childrenData;
-		} else {
-			data.layouts[selectedComponentIndex] = {
-				...data.layouts[selectedComponentIndex],
-				type     : 'container',
-				parentId : defaultParentId,
-			};
+		const { id: selectedRowId } = selectedRow || {};
 
-			data.layouts[selectedComponentIndex].children = childrenData;
+		const { id : columnId } = columnData || {};
+
+		const { id : nestedColumnId } = nestedColumData || {};
+
+		const { id: selectedColumnId } = selectedColumn || {};
+
+		const { id: selectedChildId } = selectedItem || {};
+
+		const { id: selectedNestedColumnId } = selectedItem || {};
+
+		console.log('sdjskdjk', selectedColumn, selectedNestedColumn, selectedItem);
+
+		if (id === selectedRowId && selectedItem) {
+			if (Object.keys(selectedNestedColumn).length > 0 && nestedColumnId === selectedNestedColumnId) {
+				// console.log('dkfodjfjosjx');
+			} else if (Object.keys(selectedColumn).length > 0 && columnId === selectedColumnId) {
+				// if (data.layouts[selectedComponentIndex].component.children.length === 2) {
+				// 	data.layouts[selectedComponentIndex].component.children = childrenData;
+				// } else if (data.layouts[selectedComponentIndex].component.children.length === 1) {
+				// 	console.log('sdkjskdk', selectedColumn, selectedChildId);
+				// 	// data.layouts[selectedComponentIndex].component.children[selectedColumnId].component = {
+				// 	// 	...data.layouts[selectedComponentIndex].component.children.component,
+				// 	// 	children : childrenData,
+				// 	// 	type     : 'container',
+				// 	// };
+				// }
+			} else if (Object.keys(selectedColumn).length === 0 && Object.keys(selectedNestedColumn).length === 0) {
+				data.layouts[selectedComponentIndex] = {
+					...data.layouts[selectedComponentIndex],
+					parentId: defaultParentId,
+				};
+				data.layouts[selectedComponentIndex].component = {
+					...data.layouts[selectedComponentIndex].component,
+					children : childrenData,
+					type     : 'container',
+				};
+			}
 		}
 
-		setComponents((prev) => ({ ...prev, layouts: data.layouts }));
+		setPageConfiguration((prev) => ({ ...prev, layouts: data.layouts }));
+
+		setShow(false);
 	};
 
 	const handleEditForm = (values) => {
@@ -286,7 +327,10 @@ function FormComponent({
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button onClick={handleSubmit(onSubmit)}>Add Form</Button>
+					<Button onClick={handleSubmit(onSubmit)}>
+						Add Form
+
+					</Button>
 				</Modal.Footer>
 			</Modal>
 		</div>

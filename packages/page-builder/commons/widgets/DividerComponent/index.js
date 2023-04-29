@@ -1,11 +1,11 @@
 function DividerComponent(props) {
 	const { widget } = props;
 
-	const { style = {} } = widget;
+	const { component } = widget;
+	const { style = {} } = component || {};
+
 	return (
-
 		<div style={style} />
-
 	);
 }
 

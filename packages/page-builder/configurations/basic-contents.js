@@ -7,25 +7,23 @@ const contents = [
 	{
 		type : 'text',
 		icon : <IcMText width={24} height={24} />,
-		name : 'text',
-
+		// name : 'text',
 	},
 	{
 		type : 'image',
 		icon : <IcMImage width={24} height={24} />,
-		name : 'image',
+		// name : 'image',
 
 	},
 	{
 		type : 'button',
 		icon : <IcMFolder width={24} height={24} />,
-		name : 'button',
+		// name : 'button',
 	},
 	{
 		type : 'video',
 		icon : <IcMVideoCall width={24} height={24} />,
-		name : 'video',
-
+		// name : 'video',
 	},
 	{
 		type : 'html',
@@ -37,23 +35,23 @@ const contents = [
 			style={{ fill: '#FEDE00' }}
 		/>,
 		// icon : <IcMText width={24} height={24}  />,
-		name: 'html',
+		// name: 'html',
 	},
 	{
 		type : 'form',
 		icon : <IcMMarginApprovals width={24} height={24} />,
-		name : 'form',
+		// name : 'form',
 
 	},
 	{
 		type : 'carousel',
 		icon : <IcMCard width={24} height={24} />,
-		name : 'carousel',
+		// name : 'carousel',
 	},
 	{
 		type : 'divider',
 		icon : <IcMOverflowLine width={24} height={24}> </IcMOverflowLine>,
-		name : 'Divider',
+		// name : 'Divider',
 	},
 
 ];

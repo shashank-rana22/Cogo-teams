@@ -5,13 +5,13 @@ import styles from './styles.module.css';
 function ColorInput(props) {
 	const {
 		colorKey,
-		component,
+		pageConfiguration,
 		selectedItem,
 		isRootComponent,
 		handleChange,
 	} = props;
 
-	const color = isRootComponent ? component.style?.[colorKey] : selectedItem.style?.[colorKey];
+	const color = isRootComponent ? pageConfiguration.style?.[colorKey] : selectedItem.style?.[colorKey];
 
 	return (
 		<div className={styles.color_input}>

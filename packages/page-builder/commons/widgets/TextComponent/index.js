@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Modal, ButtonIcon } from '@cogoport/components';
 import { IcMExpand, IcMMinus } from '@cogoport/icons-react';
 import dynamic from 'next/dynamic';
@@ -14,7 +15,19 @@ const iconsMapping = {
 };
 
 function TextComponent(props) {
-	const { widget, components, setComponents, childId, selectedRow } = props;
+	const {
+		widget,
+		pageConfiguration,
+		setPageConfiguration,
+		childId,
+		rowData,
+		selectedRow,
+		selectedColumn,
+		selectedNestedColumn,
+		selectedItem,
+		columnData,
+		nestedColumData,
+	} = props;
 
 	const [editorModal, setEditorModal] = useState({
 		show      : false,
@@ -22,27 +35,45 @@ function TextComponent(props) {
 		size      : 'sm',
 	});
 
-	const { content } = widget || {};
+	const { component } = widget || {};
+
+	const { content } = component;
 
 	const [editorValue, setEditorValue] = useState(content);
 
-	const handleEditorChange = (value) => {
-		const { parentId, id } = selectedRow || {};
+	const handleEditorChange = (value, rowDetails) => {
+		const { id } = rowDetails || {};
+		const { id: selectedRowId } = selectedRow || {};
 
-		const data = components;
+		const { id : columnId } = columnData || {};
+
+		const { id : nestedColumnId } = nestedColumData || {};
+
+		const { id: selectedColumnId } = selectedColumn || {};
+
+		const { id: selectedChildId } = selectedItem || {};
+
+		const { id: selectedNestedColumnId } = selectedItem || {};
+
+		const data = pageConfiguration;
 
 		const selectedComponentIndex = (data.layouts || []).findIndex(
-			(component) => component.id === id,
+			(selectedComponent) => selectedComponent.id === id,
 		);
 
-		if (parentId) {
-			data.layouts[selectedComponentIndex].children[childId].content = value;
-		} else {
-			data.layouts[selectedComponentIndex].content = value;
+		if (id === selectedRowId && selectedItem) {
+			if (Object.keys(selectedNestedColumn).length > 0 && nestedColumnId === selectedNestedColumnId) {
+				data.layouts[selectedComponentIndex].component.children[selectedColumnId].component.children[selectedNestedColumnId].component.content = value;
+			} else if (Object.keys(selectedColumn).length > 0 && columnId === selectedColumnId) {
+				data.layouts[selectedComponentIndex].component.children[selectedChildId].component.content = value;
+			} else if (Object.keys(selectedColumn).length === 0 && Object.keys(selectedNestedColumn).length === 0) {
+				data.layouts[selectedComponentIndex].component.content = value;
+			}
 		}
 
 		setEditorValue(value);
-		setComponents((prev) => ({ ...prev, layouts: data.layouts }));
+
+		setPageConfiguration((prev) => ({ ...prev, layouts: data.layouts }));
 	};
 
 	const Icon = iconsMapping[editorModal.size];
@@ -95,7 +126,7 @@ function TextComponent(props) {
 						placeholder={content || 'start typing'}
 						value={editorValue}
 						modules={textEditorModules}
-						onChange={handleEditorChange}
+						onChange={(val) => handleEditorChange(val, rowData, childId)}
 					/>
 				</Modal.Body>
 

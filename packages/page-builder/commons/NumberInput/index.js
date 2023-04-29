@@ -7,13 +7,14 @@ import styles from './styles.module.css';
 function NumberInput(props) {
 	const {
 		NumberKey,
-		component,
+		pageConfiguration,
+		// setPageConfiguration,
 		selectedItem,
 		isRootComponent,
 		handleChange,
 	} = props;
 
-	const numberValue = isRootComponent ? component.style?.[NumberKey] : selectedItem.style?.[NumberKey];
+	const numberValue = isRootComponent ? pageConfiguration.style?.[NumberKey] : selectedItem.style?.[NumberKey];
 
 	const handleInputChange = useCallback(
 		(type) => {

@@ -5,11 +5,11 @@ function ProgressBar(props) {
 		handleChange,
 		imageKey,
 		isRootComponent,
-		component,
+		pageConfiguration,
 		selectedItem,
 	} = props;
 
-	const width = isRootComponent ? component.style?.[imageKey] : selectedItem.style?.[imageKey];
+	const width = isRootComponent ? pageConfiguration.style?.[imageKey] : selectedItem.style?.[imageKey];
 
 	const handleInputChange = (e) => {
 		const newValue = e.target.value;

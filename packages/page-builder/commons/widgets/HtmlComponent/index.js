@@ -1,9 +1,13 @@
 import React from 'react';
 
-function HtmlComponent({ html = '' }) {
+function HtmlComponent({ widget }) {
+	const { component } = widget || {};
+
+	const { content } = component || {};
+
 	return (
 		<div
-			dangerouslySetInnerHTML={{ __html: html }}
+			dangerouslySetInnerHTML={{ __html: content }}
 		/>
 	);
 }

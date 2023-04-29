@@ -1,23 +1,56 @@
 import FileUploader from '../FileUploader';
 
 function ImageComponent(props) {
-	const { components, setComponents, childId, selectedRow, widget } = props;
+	const {
+		pageConfiguration,
+		setPageConfiguration,
+		childId,
+		widget,
+		rowData,
+		selectedRow,
+		selectedColumn,
+		selectedNestedColumn,
+		selectedItem,
+		columnData,
+		nestedColumData,
+	} = props;
 
-	const { content } = widget || {};
+	const { component } = widget || {};
 
-	const handleFileChange = (val) => {
-		if (val) {
-			const { parentId, id } = selectedRow || {};
-			const data = components;
-			const selectedComponentIndex = (data.layouts || []).findIndex((component) => (component.id === id));
+	const { content } = component || {};
 
-			if (parentId) {
-				data.layouts[selectedComponentIndex].children[childId].content = val;
-			} else {
-				data.layouts[selectedComponentIndex].content = val;
+	const handleFileChange = (value, rowDetails) => {
+		if (value) {
+			const { id } = rowDetails || {};
+			const { id: selectedRowId } = selectedRow || {};
+
+			const { id : columnId } = columnData || {};
+
+			const { id : nestedColumnId } = nestedColumData || {};
+
+			const { id: selectedColumnId } = selectedColumn || {};
+
+			const { id: selectedChildId } = selectedItem || {};
+
+			const { id: selectedNestedColumnId } = selectedItem || {};
+
+			const data = pageConfiguration;
+
+			const selectedComponentIndex = (data.layouts || []).findIndex(
+				(selectedComponent) => selectedComponent.id === id,
+			);
+
+			if (id === selectedRowId && selectedItem) {
+				if (Object.keys(selectedNestedColumn).length > 0 && nestedColumnId === selectedNestedColumnId) {
+					data.layouts[selectedComponentIndex].component.children[selectedColumnId].component.children[selectedNestedColumnId].component.content = value;
+				} else if (Object.keys(selectedColumn).length > 0 && columnId === selectedColumnId) {
+					data.layouts[selectedComponentIndex].component.children[selectedChildId].component.content = value;
+				} else if (Object.keys(selectedColumn).length === 0 && Object.keys(selectedNestedColumn).length === 0) {
+					data.layouts[selectedComponentIndex].component.content = value;
+				}
 			}
 
-			setComponents({ ...data });
+			setPageConfiguration((prev) => ({ ...prev, layouts: data.layouts }));
 		}
 	};
 
@@ -30,7 +63,7 @@ function ImageComponent(props) {
 			) : (
 				<FileUploader
 					value={content}
-					onChange={(val) => handleFileChange(val)}
+					onChange={(val) => handleFileChange(val, rowData)}
 					accept="png"
 					uploadDesc="Upload"
 				/>

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable import/no-cycle */
 import { Tooltip } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
@@ -6,7 +7,7 @@ import Carousel from 'react-slick';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import RenderComponents from '../../../page-components/CreatePage2/RightPanel/RenderComponent';
+import RenderComponent from '../../../page-components/PageBuilder/RightPanel/DropBox/Components/RenderComponent';
 
 import styles from './styles.module.css';
 
@@ -24,18 +25,34 @@ const CAROUSEL_SETTINGS = {
 
 function CarouselComponent({
 	widget,
-	selectedRow,
-	components,
-	setComponents,
-	setChildId,
+	pageConfiguration,
+	setPageConfiguration,
 	setSelectedItem,
-	childId,
+	// childId,
 	setParentComponentId,
 	setShowContentModal,
+	rowData,
+	setSelectedRow,
+	setSelectedColumn,
+	// columnData,
+	setSelectedNestedColumn,
+	// nestedColumData,
+	selectedItem,
+	selectedRow,
+	selectedColumn,
+	selectedNestedColumn,
 }) {
-	const { children, id: componentId } = widget || {};
+	const { component, id: componentId } = widget || {};
+
+	const { children } = component || {};
+
+	// const { id: selectedRowId } = rowData || {};
+
+	const { id: columnChildId } = selectedColumn || {};
 
 	const { id: selectedRowId } = selectedRow || {};
+
+	const { id: nestedColumnId } = selectedNestedColumn || {};
 
 	const handleSubmitClick = ({ index, parentId }) => {
 		setParentComponentId({ childId: index, parentId });
@@ -46,63 +63,101 @@ function CarouselComponent({
 		e.stopPropagation();
 		const { id } = itemList || {};
 
-		const data = components;
+		const data = pageConfiguration;
 
 		const selectedComponentIndex = (data.layouts || []).findIndex(
-			(component) => component.id === id,
+			(selectedRowIndex) => selectedRowIndex.id === id,
 		);
 
-		data.layouts[selectedComponentIndex].children.splice(idx, 1);
+		data.layouts[selectedComponentIndex].component.children.splice(idx, 1);
 
-		setComponents({ ...data });
+		setPageConfiguration({ ...data });
+	};
+
+	const handleClick = (e, columnData) => {
+		e.stopPropagation();
+		setSelectedRow({ ...rowData });
+		setSelectedColumn({ ...columnData });
+		setSelectedNestedColumn({});
+		setSelectedItem({});
+	};
+
+	const handleNestedClick = (e, columnData, nestedData) => {
+		e.stopPropagation();
+		setSelectedRow({ ...rowData });
+		setSelectedColumn({ ...columnData });
+		setSelectedNestedColumn({ ...nestedData });
+		setSelectedItem({});
 	};
 
 	return (
 		<div className={styles.container}>
 			<Carousel {...CAROUSEL_SETTINGS}>
 				{(children || []).map((childComponent, idx) => {
-					const { id, style, icon, type, parentId, children: childChildren } = childComponent || {};
+					const {
+						id,
+						parentId,
+						component: childrenComponent,
+					} = childComponent || {};
 
-					const isChildSelected = childId === id && componentId === selectedRowId && type;
-					const border = isChildSelected ? '1px solid red' : style.border;
+					const { style, icon, type, children: childChildren } = childrenComponent || {};
+
+					const isChildSelected = columnChildId === id && componentId === selectedRowId;
+					const border = isChildSelected ? '5px solid pink' : style.border;
 
 					if (!isEmpty(childChildren)) {
 						return 	(
 							<div
+								role="presentation"
+								onClick={(e) => handleClick(e, childComponent)}
 								className={styles.content_container}
 								style={{ ...style, display: 'block' }}
 							>
-								{ (childChildren || []).map((childrenComponent, childrenIndex) => {
+								{ (childChildren || []).map((nestedChildComponent, childrenIndex) => {
 									const {
 										id: childrenId,
+										component: nestedComponent,
+									} = nestedChildComponent || {};
+
+									const {
 										style: childrenStyles,
 										type: childrenType,
-									} = childrenComponent || {};
+									} = nestedComponent || {};
 
-									// const isChildSelected = childId === id && componentId === selectedRowId && type;
-									// const border = isChildSelected ? '1px solid red' : allStyles.border;
+									const isNestedChildSelected = columnChildId === id && componentId === selectedRowId && childrenId === nestedColumnId;
+
+									const nestedBorder = isNestedChildSelected ? '5px solid grey' : childrenStyles.border;
 
 									return (
 
 										<div
 											role="presentation"
 											className={styles.content_container}
-											style={{ ...childrenStyles }}
-											onClick={() => setChildId(id)}
+											style={{ ...childrenStyles, nestedBorder }}
+											onClick={(e) => handleNestedClick(e, childComponent, nestedChildComponent)}
 										>
-											<RenderComponents
+											<RenderComponent
 												componentType={childrenType}
-												widget={childrenComponent}
-												components={components}
-												setComponents={setComponents}
+												widget={nestedChildComponent}
+												pageConfiguration={pageConfiguration}
+												setPageConfiguration={setPageConfiguration}
 												elementId={childrenId}
-												childId={childId}
-												selectedRow={selectedRow}
+												childId={childrenIndex}
 												setSelectedItem={setSelectedItem}
 												index={childrenIndex}
-												setChildId={setChildId}
 												setParentComponentId={setParentComponentId}
 												setShowContentModal={setShowContentModal}
+												rowData={rowData}
+												columnData={childComponent}
+												setSelectedRow={setSelectedRow}
+												setSelectedColumn={setSelectedColumn}
+												setSelectedNestedColumn={setSelectedNestedColumn}
+												nestedColumData={nestedChildComponent}
+												selectedItem={selectedItem}
+												selectedRow={selectedRow}
+												selectedColumn={selectedColumn}
+												selectedNestedColumn={selectedNestedColumn}
+
 											/>
 										</div>
 									);
@@ -118,7 +173,7 @@ function CarouselComponent({
 								role="presentation"
 								style={{ ...style, border }}
 								className={styles.block_wrapper}
-								onClick={() => setChildId(idx)}
+								onClick={(e) => handleClick(e, childComponent)}
 							>
 
 								{!type ? (
@@ -129,19 +184,27 @@ function CarouselComponent({
 										{icon}
 									</div>
 								) : (
-									<RenderComponents
+									<RenderComponent
 										componentType={type}
 										widget={childComponent}
-										components={components}
-										setComponents={setComponents}
+										pageConfiguration={pageConfiguration}
+										setPageConfiguration={setPageConfiguration}
 										elementId={id}
-										childId={childId}
-										selectedRow={selectedRow}
+										childId={idx}
 										setSelectedItem={setSelectedItem}
 										index={idx}
-										setChildId={setChildId}
 										setParentComponentId={setParentComponentId}
 										setShowContentModal={setShowContentModal}
+										rowData={rowData}
+										columnData={childComponent}
+										setSelectedRow={setSelectedRow}
+										setSelectedColumn={setSelectedColumn}
+										setSelectedNestedColumn={setSelectedNestedColumn}
+										nestedColumData={{}}
+										selectedItem={selectedItem}
+										selectedRow={selectedRow}
+										selectedColumn={selectedColumn}
+										selectedNestedColumn={selectedNestedColumn}
 									/>
 								) }
 								<div role="presentation" className={styles.show_wrapper}>
