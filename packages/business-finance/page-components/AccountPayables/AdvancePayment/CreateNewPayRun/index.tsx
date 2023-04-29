@@ -29,7 +29,7 @@ function CreateNewPayRun() {
 	const [sort, setSort] = useState({});
 	const [viewSelectedInvoice, setViewSelectedInvoice] = useState(false);
 	const {
-		filters, setFilters, data, loading, entity,
+		filters, setFilters, data, loading,
 		apiData,
 		submitSelectedInvoices,
 		getTableBodyCheckbox,
@@ -120,17 +120,8 @@ function CreateNewPayRun() {
 					</div>
 				</div>
 			)}
-			{ !selectedPayRunId
-				? (
-					<div className={styles.select_card}>
-						<div className={styles.card}>
-							Entity -
-							{' '}
-							{entity}
-						</div>
-					</div>
-				)
-				: (
+			{ selectedPayRunId
+				&& (
 					<div>
 						<div className={styles.sub_container}>
 							<div className={styles.text}>
@@ -183,9 +174,11 @@ function CreateNewPayRun() {
 					</div>
 				)}
 			<div className={styles.container}>
-				<div className={styles.filter}>
-					<SelectFilters filters={filters} setFilters={setFilters} />
-				</div>
+				{!viewSelectedInvoice && (
+					<div className={styles.filter}>
+						<SelectFilters filters={filters} setFilters={setFilters} />
+					</div>
+				)}
 				<div className={styles.list_container}>
 					{(loading || viewSelectedDataLoading || listLength > 0) ? (
 						<List
