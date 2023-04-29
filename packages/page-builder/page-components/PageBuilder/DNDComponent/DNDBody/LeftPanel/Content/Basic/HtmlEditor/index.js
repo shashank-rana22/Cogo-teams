@@ -31,10 +31,6 @@ function HtmlEditor(props) {
 	const handleEditorChange = (value) => {
 		const { id: selectedRowId } = selectedRow || {};
 
-		// const { id : columnId } = columnData || {};
-
-		// const { id : nestedColumnId } = nestedColumData || {};
-
 		const { id: selectedColumnId } = selectedColumn || {};
 
 		const { id: selectedChildId } = selectedItem || {};

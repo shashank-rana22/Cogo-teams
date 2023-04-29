@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 
 import contents from '../../../../../../../configurations/basic-contents';
 
-import Item from './Item';
+import BasicItem from './BasicItem';
 import styles from './styles.module.css';
 
 const HTMLEditor = dynamic(() => import('./HtmlEditor'), { ssr: false });
@@ -32,9 +32,9 @@ function Basic(props) {
 		leftPanelContent = (contents || []).filter((item) => item.type !== 'carousel');
 	}
 
-	const LeftPanelItems = useMemo(
+	const BasicPanel = useMemo(
 		() => (leftPanelContent || []).map((item) => (
-			<Item
+			<BasicItem
 				itemType={item.type}
 				content={item}
 				onClick={() => addNewItem(item, selectedRow?.index, true, parentComponentId, dropSource)}
@@ -62,7 +62,7 @@ function Basic(props) {
 
 	return 	(
 		<div className={styles.container}>
-			{LeftPanelItems}
+			{BasicPanel}
 		</div>
 	);
 }
