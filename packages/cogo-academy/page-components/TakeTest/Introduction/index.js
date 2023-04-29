@@ -22,6 +22,7 @@ function Introduction({ setActiveState, testData = {} }) {
 		set_data,
 		case_study_questions,
 		stand_alone_questions,
+		subjective_questions,
 		test_duration,
 		name,
 		guidelines = [],
@@ -116,7 +117,11 @@ function Introduction({ setActiveState, testData = {} }) {
 								{' '}
 								{stand_alone_questions}
 								{' '}
-								Standalone Questions
+								Standalone Questions,
+								{' '}
+								{subjective_questions}
+								{' '}
+								Subjective Questions
 							</div>
 						</div>
 						<div className={styles.content_container}>
