@@ -8,7 +8,7 @@ import { leftDataControls } from './leftDataControl';
 import styles from './styles.module.css';
 import { tableDetailControls } from './TableDetailControls';
 
-function Frontside({ initialValues }, ref) {
+function Frontside({ initialValues = {} }, ref) {
 	const formatValues = formmatedValues(initialValues);
 
 	const service_type = formatValues?.service_type;
@@ -29,6 +29,7 @@ function Frontside({ initialValues }, ref) {
 
 	for (let i = 0; i < leftDataControls[service_type].length;) {
 		const obj = leftDataControls[service_type][i];
+
 		if (obj.fullWidth) {
 			leftSideFields.push(
 				<div className={styles.block}>
@@ -68,6 +69,7 @@ function Frontside({ initialValues }, ref) {
 							/>
 						</div>
 					</div>
+
 					<div className={styles.block} style={{ width: '50%' }}>
 						<div className={styles.text}>
 							{leftDataControls[service_type][i + 1].label}
@@ -111,7 +113,6 @@ function Frontside({ initialValues }, ref) {
 	}
 
 	const tableDetails = [];
-
 	for (let i = 0; i < tableDetailControls[service_type].length; i += 1) {
 		tableDetails.push(
 			<div className={styles.last_block}>
@@ -154,6 +155,7 @@ function Frontside({ initialValues }, ref) {
 								/>
 							</div>
 						</div>
+
 						<div className={styles.block}>
 							<div className={styles.text}>
 								Consignee :
@@ -168,6 +170,7 @@ function Frontside({ initialValues }, ref) {
 								/>
 							</div>
 						</div>
+
 						<div className={styles.block}>
 							<div className={styles.text}>
 								Shipper :
