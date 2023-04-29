@@ -2,14 +2,14 @@ import { Button } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function Header({ modeType, setMode, setSelectedRow }) {
+function Header({ modeType, setMode, handleUnselectItem }) {
 	return (
 		<section className={styles.header}>
 			<div>
 				<Button
 					onClick={() => {
 						setMode({ modeType: modeType === 'edit' ? 'preview' : 'edit' });
-						setSelectedRow({});
+						handleUnselectItem();
 					}}
 					type="button"
 					size="md"

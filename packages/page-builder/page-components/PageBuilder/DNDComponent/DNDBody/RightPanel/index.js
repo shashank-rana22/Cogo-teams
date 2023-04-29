@@ -22,9 +22,20 @@ function RightPanel({
 	modeType,
 	setMode,
 }) {
+	const handleUnselectItem = () => {
+		setSelectedRow({});
+		setSelectedItem({});
+		setSelectedColumn({});
+		setSelectedNestedColumn({});
+	};
+
 	return (
 		<div className={styles.right_panel} style={{ width: modeType === 'edit' ? '70%' : '100%' }}>
-			<Header modeType={modeType} setMode={setMode} setSelectedRow={setSelectedRow} />
+			<Header
+				modeType={modeType}
+				setMode={setMode}
+				handleUnselectItem={handleUnselectItem}
+			/>
 			<div>
 				<DropBox
 					pageConfiguration={pageConfiguration}
@@ -43,6 +54,7 @@ function RightPanel({
 					setSelectedColumn={setSelectedColumn}
 					selectedNestedColumn={selectedNestedColumn}
 					setSelectedNestedColumn={setSelectedNestedColumn}
+					handleUnselectItem={handleUnselectItem}
 				/>
 			</div>
 		</div>

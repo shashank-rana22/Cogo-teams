@@ -29,7 +29,6 @@ function DNDBody({
 
 	return (
 		<section className={styles.body}>
-
 			<LeftPanel
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
@@ -70,7 +69,6 @@ function DNDBody({
 				modeType={modeType}
 				setMode={setMode}
 			/>
-
 		</section>
 	);
 }
