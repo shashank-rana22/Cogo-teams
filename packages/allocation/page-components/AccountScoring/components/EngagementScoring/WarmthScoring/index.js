@@ -1,7 +1,9 @@
 import { Collapse, Placeholder } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
+import EmptyState from '../../../../../common/EmptyState';
 import useGetEngagementScoringConfiguration from '../../../hooks/useGetEngagementScoringConfiguration';
 
 import EngagementType from './EngagementType';
@@ -49,6 +51,14 @@ function WarmthScoring(props) {
 			refetch={refetch}
 		/>,
 	}));
+
+	if (isEmpty(list) && !loading) {
+		return (
+			<div className={styles.empty_container}>
+				<EmptyState height={220} width={380} flexDirection="column" emptyText="No data found" textSize={20} />
+			</div>
+		);
+	}
 
 	return (
 		<div>

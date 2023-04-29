@@ -11,7 +11,7 @@ import ScoreDistributionGraph from './ScoreDistributionGraph/index';
 import styles from './styles.module.css';
 
 function AccountLeaderboard() {
-	const { control, watch } = useForm({
+	const { control, watch, resetField } = useForm({
 		defaultValues: {
 			date: new Date(Date.now()),
 		},
@@ -24,15 +24,16 @@ function AccountLeaderboard() {
 
 	const {
 		leaderboardLoading = false, leaderboardList = [],
-		setLeaderboardParams = () => {},
+		setLeaderboardParams = () => {}, page = 0, page_limit = 0, total_count = 0, getNextPage,
 	} = useGetEngagementScoringLeaderboard();
 
-	const { organization, user_id, date } = watch();
+	const { organization, user_id, date, service } = watch();
 
 	useEffect(() => {
 		setGraphParams((pv) => ({
 			...pv,
-			filters: {
+			service : service || undefined,
+			filters : {
 				created_at : date || undefined,
 				service_id : organization || undefined,
 				user_id    : user_id || undefined,
@@ -41,14 +42,19 @@ function AccountLeaderboard() {
 
 		setLeaderboardParams((pv) => ({
 			...pv,
-			filters: {
+			service : service || undefined,
+			filters : {
 				created_at : date || undefined,
 				service_id : organization || undefined,
 				user_id    : user_id || undefined,
 
 			},
 		}));
-	}, [organization, user_id, date, setGraphParams, setLeaderboardParams]);
+	}, [organization, user_id, date, service, setGraphParams, setLeaderboardParams]);
+
+	useEffect(() => {
+		resetField('user_id');
+	}, [service, resetField]);
 
 	return (
 		<section className={styles.container}>
@@ -56,6 +62,7 @@ function AccountLeaderboard() {
 
 			<HeaderFilters
 				control={control}
+				service={service}
 			/>
 
 			<ScoreDistributionGraph
@@ -67,6 +74,10 @@ function AccountLeaderboard() {
 				columns={leaderboardColumns}
 				leaderboardList={leaderboardList}
 				leaderboardLoading={leaderboardLoading}
+				page={page}
+				page_limit={page_limit}
+				total_count={total_count}
+				getNextPage={getNextPage}
 			/>
 		</section>
 	);
