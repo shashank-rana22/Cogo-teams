@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 function AccountLeaderboard() {
 	const { control, watch } = useForm({
 		defaultValues: {
-			date: new Date(),
+			date: new Date(Date.now()),
 		},
 	});
 
@@ -53,6 +53,7 @@ function AccountLeaderboard() {
 	return (
 		<section className={styles.container}>
 			<div className={styles.header_text}>Account Score Distribution</div>
+
 			<HeaderFilters
 				control={control}
 			/>

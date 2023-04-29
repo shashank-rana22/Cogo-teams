@@ -5,7 +5,7 @@ import EmptyState from '../../../../../common/EmptyState';
 
 import styles from './styles.module.css';
 
-function index(props) {
+function Leaderboard(props) {
 	const { columns = [], leaderboardList, leaderboardLoading } = props;
 
 	if (isEmpty(leaderboardList) && !leaderboardLoading) {
@@ -28,7 +28,7 @@ function index(props) {
 			<div style={{ margin: '16px 0px' }}>
 				<Table
 					className={styles.table}
-					columns={columns || []}
+					columns={columns}
 					data={leaderboardList}
 					loading={leaderboardLoading}
 				/>
@@ -37,4 +37,4 @@ function index(props) {
 	);
 }
 
-export default index;
+export default Leaderboard;

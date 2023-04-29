@@ -24,23 +24,20 @@ const data = [
 function ScoreDistributionGraph(props) {
 	const { graphData } = props;
 
-	graphData.forEach((element) => {
-		data.forEach((item) => {
-			if (element.warmth === item.warmth) {
-				const mutableItem = item;
-				mutableItem.count = element.count;
-			}
-		});
-	});
-
 	if (isEmpty(graphData)) {
 		return null;
 	}
 
+	const newData = data.map((element) => {
+		const datum = graphData.find((item) => element.warmth === item.warmth);
+
+		return { ...element, ...(datum && { count: datum.count }) };
+	});
+
 	return (
 		<div className={styles.container}>
 			<ResponsiveBar
-				data={data}
+				data={newData}
 				keys={['count']}
 				indexBy="label"
 				margin={{ top: 90, right: 60, bottom: 90, left: 150 }}
