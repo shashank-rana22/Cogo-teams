@@ -1,8 +1,17 @@
+import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 const useStudentWiseTestResult = ({ test_id = '' }) => {
+	const [{ loading: reAttemptLoading }, trigger] = useRequest({
+		method : 'post',
+		url    : '/update_test_mapping_responses',
+	}, { manual: true });
+
+	const [showReAttemptModal, setShowReAttemptModal] = useState(false);
+
 	const [activeTab, setActiveTab] = useState('appeared');
 
 	const [params, setParams] = useState({});
@@ -16,8 +25,7 @@ const useStudentWiseTestResult = ({ test_id = '' }) => {
 
 	const STUDENTS_MAPPING = {
 		appeared: {
-			index   : 0,
-			payload : {
+			payload: {
 				sort_by   : sortBy,
 				sort_type : sortType,
 				filters   : { test_id, q: query, result_status: filter, is_appeared: true, status: 'active' },
@@ -26,8 +34,7 @@ const useStudentWiseTestResult = ({ test_id = '' }) => {
 			title: 'Appeared',
 		},
 		ongoing: {
-			index   : 1,
-			payload : {
+			payload: {
 				sort_by   : sortBy,
 				sort_type : sortType,
 				filters   : { test_id, q: query, result_status: filter, state: 'ongoing' },
@@ -36,8 +43,7 @@ const useStudentWiseTestResult = ({ test_id = '' }) => {
 			title: 'Ongoing',
 		},
 		not_appeared: {
-			index   : 2,
-			payload : {
+			payload: {
 				filters: { test_id, q: query, is_appeared: false, status: 'active' },
 				...params,
 			},
@@ -53,16 +59,35 @@ const useStudentWiseTestResult = ({ test_id = '' }) => {
 		params : { ...payload },
 	}, { manual: false });
 
+	const handleReAttempt = async () => {
+		try {
+			await trigger({
+				data: {
+					user_id: showReAttemptModal?.id,
+					test_id,
+				},
+			});
+
+			refetch();
+		} catch (err) {
+			Toast.error(getApiErrorString(err?.response?.data));
+		}
+	};
+
 	return {
 		data,
 		loading,
 		refetch,
+		reAttemptLoading,
+		showReAttemptModal,
+		setShowReAttemptModal,
 		activeTab,
 		sortFilter,
 		setSortFilter,
 		debounceQuery,
 		setActiveTab,
 		filter,
+		handleReAttempt,
 		setFilter,
 		setSearchValue,
 		searchValue,

@@ -68,7 +68,7 @@ function MessageList(messageProps) {
 
 	useEffect(() => {
 		handleAutoAssignBack();
-	}, [showBotMessages]);
+	}, [showBotMessages, appliedFilters]);
 
 	const ActiveIcon = openPinnedChats ? IcMArrowRotateDown : IcMArrowRotateRight;
 	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;
@@ -101,6 +101,7 @@ function MessageList(messageProps) {
 								/>
 							)
 						)}
+						className={styles.styled_popover}
 						visible={filterVisible}
 						onClickOutside={() => setFilterVisible(false)}
 					>

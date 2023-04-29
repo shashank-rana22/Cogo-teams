@@ -22,6 +22,7 @@ export {
 export { default as TextAreaController } from './page-components/Controlled/TextAreaController';
 export { default as CheckboxController } from './page-components/Controlled/CheckboxController';
 export { default as CreatableSelectController } from './page-components/Controlled/CreatableSelectController';
+export { default as CreatableMultiSelectController } from './page-components/Controlled/CreatableMultiSelectController';
 export { default as CountrySelectController } from './page-components/Controlled/CountrySelectController';
 export { default as ToggleController } from './page-components/Controlled/ToggleController';
 

@@ -9,6 +9,18 @@ import SingleQuestionComponent from '../../../SingleQuestionComponent';
 import controls from './controls';
 import styles from './styles.module.css';
 
+let RichTextEditor;
+if (typeof window !== 'undefined') {
+	// eslint-disable-next-line global-require
+	RichTextEditor = require('react-rte').default;
+}
+
+const NAME_ARRAY_MAPPING = {
+	stand_alone : 'question',
+	case_study  : 'case_questions',
+	subjective  : 'subjective',
+};
+
 function QuestionForm({
 	control,
 	register,
@@ -23,6 +35,12 @@ function QuestionForm({
 	mode,
 	questionTypeWatch,
 	listSetQuestions,
+	editorValue,
+	setEditorValue,
+	subjectiveEditorValue,
+	setSubjectiveEditorValue = () => {},
+	uploadable,
+	setUploadable,
 }) {
 	const NAME_CONTROL_MAPPING = useMemo(() => {
 		const hash = {};
@@ -46,13 +64,29 @@ function QuestionForm({
 		childEmptyValues[controlItem.name] = controlItem.value || '';
 	});
 
-	const handleAppendChild = () => {
+	const handleAppendChild = (index) => {
 		append({ ...childEmptyValues, isNew: true });
+
+		setEditorValue((prev) => ({
+			...prev,
+			[`case_questions_${index + 1}_explanation`]: RichTextEditor.createEmptyValue(),
+		}));
 	};
 
 	if (isEmpty(fields) && editDetails.question_type !== 'case_study') {
 		append({ ...childEmptyValues, isNew: true });
+
+		setEditorValue((prev) => ({
+			...prev,
+			question_0_explanation: RichTextEditor.createEmptyValue(),
+		}));
 	}
+
+	const handleDeleteNewObject = (index) => {
+		remove(index, 1);
+
+		setEditorValue((prev) => ({ ...prev, [`case_questions_${index}_explanation`]: undefined }));
+	};
 
 	return (
 		<div key={questionTypeWatch} className={styles.container}>
@@ -76,7 +110,13 @@ function QuestionForm({
 							setAllKeysSaved={setAllKeysSaved}
 							mode={mode}
 							questionTypeWatch={questionTypeWatch}
-							name={questionTypeWatch === 'stand_alone' ? 'question' : 'case_questions'}
+							editorValue={editorValue}
+							setEditorValue={setEditorValue}
+							subjectiveEditorValue={subjectiveEditorValue}
+							setSubjectiveEditorValue={setSubjectiveEditorValue}
+							uploadable={uploadable}
+							setUploadable={setUploadable}
+							name={NAME_ARRAY_MAPPING[questionTypeWatch]}
 							errors={questionTypeWatch === 'stand_alone'
 								? errors.question?.[index] : errors?.case_questions?.[index]}
 						/>
@@ -86,7 +126,7 @@ function QuestionForm({
 								className={styles.delete_button}
 								width={16}
 								height={16}
-								onClick={() => remove(index, 1)}
+								onClick={() => handleDeleteNewObject(index)}
 							/>
 						) : null}
 					</div>
@@ -97,7 +137,7 @@ function QuestionForm({
 								type="button"
 								themeType="secondary"
 								className={styles.add_button}
-								onClick={() => handleAppendChild()}
+								onClick={() => handleAppendChild(index)}
 							>
 								+ Add Another Question
 							</Button>

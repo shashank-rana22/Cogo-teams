@@ -1,35 +1,54 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import getPayload from '../utils/getPayload';
 
 const actionNameMapping = {
 	stand_alone : 'Stand Alone',
 	case_study  : 'Case Study',
+	subjective 	: 'Subjective',
 };
 
-function useCreateTestQuestion({ reset, getTestQuestionTest, questionSetId, listSetQuestions }) {
+function useCreateTestQuestion({
+	reset,
+	getTestQuestionTest,
+	questionSetId,
+	listSetQuestions,
+	editorValue = {},
+	subjectiveEditorValue = '',
+	setUploadable,
+	uploadable,
+}) {
 	const [{ loading: loadingCaseStudy }, triggerCaseStudy] = useRequest({
 		method : 'post',
 		url    : '/create_case_study_test_question',
 	}, { manual: true });
 
-	const [{ loading: loadingStandAlone }, triggerStandAlone] = useRequest({
+	const [{ loading: loadingNonCase }, triggerNonCase] = useRequest({
 		method : 'post',
-		url    : '/create_stand_alone_test_question',
+		url    : '/create_non_case_study_test_question',
 	}, { manual: true });
 
-	const TriggerMapping = {
-		stand_alone : triggerStandAlone,
+	const TRIGGER_MAPPING = {
+		stand_alone : triggerNonCase,
 		case_study  : triggerCaseStudy,
+		subjective 	: triggerNonCase,
 	};
 
 	const createTestQuestion = async ({ values }) => {
 		const { question_type = '' } = values || {};
 
-		const { hasError, ...payload } = getPayload({ values, questionSetId, type: question_type });
+		const { hasError, ...payload } = getPayload({
+			values,
+			questionSetId,
+			type: question_type,
+			editorValue,
+			subjectiveEditorValue,
+			uploadable,
+			setUploadable,
+		});
 
 		if (!isEmpty(hasError)) {
 			hasError.forEach((item) => {
@@ -37,8 +56,7 @@ function useCreateTestQuestion({ reset, getTestQuestionTest, questionSetId, list
 			});
 			return;
 		}
-
-		const triggerToUse = TriggerMapping?.[question_type] || triggerStandAlone;
+		const triggerToUse = TRIGGER_MAPPING?.[question_type] || triggerNonCase;
 
 		try {
 			await triggerToUse({
@@ -51,12 +69,12 @@ function useCreateTestQuestion({ reset, getTestQuestionTest, questionSetId, list
 			listSetQuestions({ questionSetId });
 			getTestQuestionTest({ questionSetId });
 		} catch (err) {
-			Toast.error(getApiErrorString(err.response?.data) || 'something went wrong');
+			Toast.error(startCase(getApiErrorString(err.response?.data)) || 'Something Went Wrong');
 		}
 	};
 
 	return {
-		loading: loadingCaseStudy || loadingStandAlone,
+		loading: loadingCaseStudy || loadingNonCase,
 		createTestQuestion,
 	};
 }

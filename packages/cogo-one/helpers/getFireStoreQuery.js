@@ -66,14 +66,24 @@ function getFireStoreQuery({
 			];
 		} else if (
 			(
-				(item === 'observer' && appliedFilters[item] === 'chat_tags')
+				(item === 'observer' && !showBotMessages && appliedFilters[item] === 'chat_tags')
 				|| 	(isomniChannelAdmin && item === 'chat_tags')
 			)
-			&& 	!showBotMessages
+
 		) {
 			queryFilters = [
 				...queryFilters,
 				where('chat_tags', 'array-contains', appliedFilters?.chat_tags),
+			];
+		} else if (item === 'shipment_filters' && appliedFilters[item]?.includes('likely_to_book_shipment')) {
+			queryFilters = [
+				...queryFilters,
+				where('is_likely_to_book_shipment', '==', true),
+			];
+		} else if (item === 'mobile_no') {
+			queryFilters = [
+				...queryFilters,
+				where('mobile_no', '==', appliedFilters?.mobile_no),
 			];
 		}
 	});

@@ -7,6 +7,7 @@ import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPI
 import useAssignChat from '../../../../hooks/useAssignChat';
 import useGetMessages from '../../../../hooks/useGetMessages';
 import useListAssignedChatTags from '../../../../hooks/useListAssignedChatTags';
+import useRequestAssignChat from '../../../../hooks/useRequestAssignChat';
 import useSendChat from '../../../../hooks/useSendChat';
 import useSendCommunicationTemplate from '../../../../hooks/useSendCommunicationTemplate';
 import useUpdateAssignedChat from '../../../../hooks/useUpdateAssignedChat';
@@ -24,6 +25,7 @@ function Messages({
 	userId = '',
 	isomniChannelAdmin = false,
 	setActiveMessage = () => {},
+	setRaiseTicketModal = () => {},
 }) {
 	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
@@ -33,7 +35,10 @@ function Messages({
 	const [disableButton, setDisableButton] = useState('');
 	const { tagOptions = [] } = useListAssignedChatTags();
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
-	const closeModal = () => setOpenModal({ type: null, data: {} });
+	const closeModal = () => {
+		setOpenModal({ type: null, data: {} });
+		setDisableButton('');
+	};
 	let activeChatCollection;
 	const {
 		id = '',
@@ -105,7 +110,10 @@ function Messages({
 		updateRoomLoading,
 		updateUserRoom,
 	} = useUpdateUserRoom();
-
+	const {
+		requestForAssignChat,
+		requestAssignLoading,
+	} = useRequestAssignChat();
 	const {
 		comp: ActiveModalComp = null,
 		title: { img = null, name = null } = {},
@@ -138,9 +146,12 @@ function Messages({
 					disableButton={disableButton}
 					updateRoomLoading={updateRoomLoading}
 					updateUserRoom={updateUserRoom}
+					requestForAssignChat={requestForAssignChat}
+					requestAssignLoading={requestAssignLoading}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
+						formattedData={formattedData}
 						messagesData={messagesData}
 						uploading={uploading}
 						draftMessage={draftMessages?.[id]}
@@ -163,6 +174,7 @@ function Messages({
 						closeModal={closeModal}
 						messageLoading={messageLoading}
 						setActiveMessage={setActiveMessage}
+						setRaiseTicketModal={setRaiseTicketModal}
 					/>
 				</div>
 			</div>

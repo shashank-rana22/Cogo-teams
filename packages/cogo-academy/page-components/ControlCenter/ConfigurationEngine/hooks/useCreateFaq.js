@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -22,7 +23,7 @@ function useCreateFaq() {
 
 	const { control, handleSubmit, formState: { errors }, setValue, reset } = useForm();
 
-	const { general } = useSelector((state) => state);
+	const general = useSelector((state) => state?.general);
 	const { create = '', update = '', id } = general.query || {};
 
 	const queryName = create ? 'create' : 'update';
@@ -45,7 +46,7 @@ function useCreateFaq() {
 	const createFaqComponent = async (values) => {
 		const { name, description } = values || {};
 		let payload = {
-			display_name : startCase(name),
+			display_name : startCase(name || ''),
 			description,
 			status       : 'active',
 		};
@@ -65,7 +66,7 @@ function useCreateFaq() {
 				router.back();
 			}
 		} catch (e) {
-			Toast.error(e?.response?.data?.base);
+			if (e.response?.data) { Toast.error(getApiErrorString(e.response?.data)); }
 		}
 	};
 	return {
