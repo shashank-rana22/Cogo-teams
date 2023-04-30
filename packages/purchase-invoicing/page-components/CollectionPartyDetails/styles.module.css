@@ -1,0 +1,73 @@
+.container {
+	background-color: #fff;
+}
+
+.servicename {
+	display: flex;
+	font-size: 10px;
+	font-weight: 500;
+}
+
+.heading {
+	margin-bottom: 6px;
+}
+
+.container_title {
+	display: flex;
+	align-items: center;
+}
+
+.customer {
+	flex: 2.5;
+	margin-right: 26px;
+	border-right: 2px solid #f68b21;
+}
+
+.invoices {
+	display: flex;
+	flex: 3.5;
+}
+
+.lineitems {
+	display: flex;
+	flex: 3;
+}
+
+.value {
+	display: flex;
+	padding: 0 6px;
+	color: #f68b21;
+}
+
+.mode {
+	flex: 1.5;
+}
+
+.tag {
+	max-width: fit-content;
+	padding: 6px;
+	background-color: #f3fafa;
+	border-radius: 8px;
+}
+
+.headings {
+	padding-bottom: 6px;
+	font-size: 14px;
+	font-weight: 600;
+	border-bottom: 2px solid #ed3726;
+}
+
+.buttoncontailner {
+	display: flex;
+	margin: 24px 0 16px;
+}
+
+.spankey {
+	padding-right: 4px;
+}
+
+.loadercontainer {
+	width: 95%;
+	padding-bottom: 14px;
+	margin: 14px 26px;
+}

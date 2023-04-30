@@ -1,0 +1,53 @@
+.servicecontainer {
+	margin-bottom: 16px;
+	overflow-x: auto;
+	border: 1px solid #e0e0e0;
+	border-radius: 4px;
+}
+
+.flextable {
+	color: #000;
+}
+
+.fieldstyle {
+	padding: 16px;
+	font-size: 14px;
+	font-weight: 800;
+}
+
+.tableheader {
+	display: flex;
+	border-bottom: 2px solid #e0e0e0;
+}
+
+.tablebody {
+	display: flex;
+}
+
+.value {
+	display: flex;
+	padding: 16px;
+	margin-right: -8px;
+}
+
+.tablecolumn {
+	display: flex;
+}
+
+.totalamount {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 100%;
+	padding: 10px 30px 10px 0;
+	margin-right: 36px;
+	font-size: 16px;
+	font-weight: 800;
+	color: #4f4f4f;
+	background: #f9f9f9;
+	border-radius: 0 0 4px 4px;
+}
+
+.amount {
+	padding-left: 16px;
+}

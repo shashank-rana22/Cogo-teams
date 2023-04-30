@@ -3,6 +3,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { Documents, Tracking } from '@cogoport/ocean-modules';
 // import { ShipmentChat } from '@cogoport/shipment-chat';
+import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect } from 'react';
@@ -111,6 +112,9 @@ function Superadmin() {
 						</TabPanel>
 						<TabPanel name="sales_live_invoice" title="Sales Live Invoice">
 							{/* <SalesInvoice /> */}
+						</TabPanel>
+						<TabPanel name="purchase_live_invoice" title="Purchase Live Invoice">
+							<PurchaseInvoicing shipmentData={shipment_data} />
 						</TabPanel>
 						<TabPanel name="documents" title="Documents">
 							<Documents />

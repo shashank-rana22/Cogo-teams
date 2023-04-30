@@ -608,11 +608,6 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'list_organization_invoicing_parties',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
 		api          : 'list_organization_billing_addresses',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -719,12 +714,6 @@ const apis = [
 	},
 	{
 		api          : 'update_shipment_operating_instruction',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-
-	{
-		api          : 'list_organization_invoicing_parties',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},

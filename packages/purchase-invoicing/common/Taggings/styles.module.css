@@ -1,0 +1,161 @@
+.container {
+	margin-bottom: 16px;
+
+	:global {
+		.ui_accordion_content {
+			background-color: #fff;
+		}
+	}
+}
+
+.line {
+	border: 1px solid #333;
+}
+
+.proforma_tagcards_container {
+	display: flex;
+	align-items: center;
+	width: 260px;
+	padding: 10px;
+	border: 1px solid #88cad1;
+	border-radius: 8px;
+}
+
+.merge {
+	transform: scaleX(-1);
+}
+
+.line_block {
+	width: 40px;
+	height: 38px;
+	background-color: #fff;
+	border-bottom: 1px solid #88cad1;
+}
+
+.details_wrapper {
+	padding-left: 14px;
+}
+
+.flexdiv {
+	display: flex;
+}
+
+.proforma {
+	margin-right: 8px;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.updated_at {
+	padding-top: 2px;
+	font-size: 10px;
+	font-weight: 400;
+}
+
+.childs {
+	display: flex;
+	flex-direction: column;
+}
+
+.flex {
+	display: flex;
+	padding: 16px;
+	overflow-x: scroll;
+}
+
+.column {
+	flex-direction: column;
+	width: max-content;
+}
+
+.bordernone {
+	overflow-x: scroll;
+}
+
+.button_container {
+	display: flex;
+	gap: 16px;
+	justify-content: flex-end;
+	margin: 16px 10px 6px;
+}
+
+.wrapper {
+	width: 100%;
+	margin-top: 10px;
+}
+
+.flexend {
+	justify-content: flex-end;
+}
+
+.flexstart {
+	justify-content: flex-start;
+}
+
+.empty {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 200px;
+	margin-top: 16px;
+	color: #88cad1;
+	border: 1px solid #88cad1;
+}
+
+.tag {
+	position: absolute;
+	top: 70px;
+	right: -26px;
+	z-index: 1;
+	padding: 4px 6px;
+	color: #f68b21;
+	background-color: #fff;
+	border: 1px solid #88cad1;
+	border-radius: 4px;
+}
+
+.child_block {
+	width: 40px;
+	height: 38px;
+	margin-right: -2px;
+	background-color: #fff;
+	border-bottom: 1px solid #88cad1;
+}
+
+.business_name {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.color_reject {
+	padding-top: 6px;
+	color: red;
+}
+
+.button {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.heading {
+	display: flex;
+	justify-content: center;
+	margin: 20px;
+	font-weight: 600;
+}
+
+.heading_data {
+	font-weight: 600;
+}
+
+.border {
+	margin-top: 10px;
+	overflow-y: scroll;
+	border: 1px solid #88cad1;
+	border-radius: 8px;
+}
+
+.padding {
+	padding-left: 4px;
+}
