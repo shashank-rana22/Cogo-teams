@@ -115,7 +115,7 @@ function Components(props) {
 			role="presentation"
 			ref={itemRef}
 			data-handler-id={handlerId}
-			onClick={(e) => handleSelectRow(e, rowData)}
+			onClick={(e) => handleSelectRow(e, rowData, id, index)}
 			key={id}
 			style={{
 				opacity,

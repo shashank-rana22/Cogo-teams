@@ -41,13 +41,15 @@ function VideoComponent(props) {
 				<div
 					role="presentation"
 				>
+
 					<iframe
 						className={styles.video_frame}
-						scrolling="no"
-						frameBorder="0"
-						title="Preview"
 						src={content}
-						alt="upload-img"
+						frameBorder="0"
+						scrolling="no"
+						allow="autoplay; gyroscope; picture-in-picture"
+						allowFullScreen
+						title="Preview"
 					/>
 				</div>
 			) : (

@@ -279,6 +279,91 @@ const getContentMapping = () => {
 				],
 			},
 		},
+
+		carouselSample: {
+			parentId,
+			id        : 1,
+			component : {
+				style      : {},
+				type       : 'carousel',
+				attributes : {
+					onClick: 'handleSubmitClick',
+				},
+				children: [
+					{
+						component: {
+							content    : 'https://react-responsive-carousel.js.org/assets/1.jpeg',
+							alt        : 'add-img-url',
+							style      : {},
+							attributes : {},
+							type       : 'image',
+						},
+						id    : 0,
+						width : '100%',
+						parentId,
+					},
+					{
+						component: {
+							content    : 'https://react-responsive-carousel.js.org/assets/2.jpeg',
+							alt        : 'add-img-url',
+							style      : {},
+							attributes : {},
+							type       : 'image',
+						},
+						id    : 1,
+						width : '100%',
+						parentId,
+					},
+					{
+						component: {
+							content    : 'https://react-responsive-carousel.js.org/assets/3.jpeg',
+							alt        : 'add-img-url',
+							style      : {},
+							attributes : {},
+							type       : 'image',
+						},
+						id    : 2,
+						width : '100%',
+						parentId,
+					},
+					{
+						component: {
+							content    : 'https://react-responsive-carousel.js.org/assets/4.jpeg',
+							alt        : 'add-img-url',
+							style      : {},
+							attributes : {},
+							type       : 'image',
+						},
+						id    : 3,
+						width : '100%',
+						parentId,
+					},
+					{
+						component: {
+							content    : 'http://react-responsive-carousel.js.org/assets/5.jpeg',
+							alt        : 'add-img-url',
+							style      : {},
+							attributes : {},
+							type       : 'image',
+						},
+						id    : 4,
+						width : '100%',
+						parentId,
+					},
+				],
+			},
+			type: 'carousel',
+		},
+
+		videoSample: {
+			component: {
+				content    : 'https://partners.cogoport.com',
+				alt        : 'add-img-url',
+				style      : {},
+				attributes : {},
+				type       : 'video',
+			},
+		},
 	};
 };
 export default getContentMapping;

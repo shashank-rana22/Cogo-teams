@@ -9,14 +9,16 @@ import TextComponent from '../commons/widgets/TextComponent';
 import VideoComponent from '../commons/widgets/VideoComponent';
 
 const COMPONENT_MAPPING = {
-	text     : TextComponent,
-	button   : ButtonComponent,
-	image    : ImageComponent,
-	video    : VideoComponent,
-	html     : HtmlComponent,
-	form     : FormComponent,
-	carousel : CarouselComponent,
-	divider  : DividerComponent,
+	text           : TextComponent,
+	button         : ButtonComponent,
+	image          : ImageComponent,
+	video          : VideoComponent,
+	html           : HtmlComponent,
+	form           : FormComponent,
+	carousel       : CarouselComponent,
+	divider        : DividerComponent,
+	carouselSample : CarouselComponent,
+	videoSample    : VideoComponent,
 };
 
 export default COMPONENT_MAPPING;

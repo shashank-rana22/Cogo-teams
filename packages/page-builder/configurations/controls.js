@@ -136,7 +136,7 @@ const controls = [
 					},
 					{
 						label : '75%',
-						value : '25%',
+						value : '75%',
 					},
 					{
 						label : '100%',

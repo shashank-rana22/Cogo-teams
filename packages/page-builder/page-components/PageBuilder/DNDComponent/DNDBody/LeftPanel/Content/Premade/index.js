@@ -14,8 +14,14 @@ function Premade(props) {
 		dropSource,
 	} = props;
 
+	let leftPanelPremadeMapping = PREMADE_MAPPING;
+
+	if (dropSource === 'selectBox') {
+		leftPanelPremadeMapping = (PREMADE_MAPPING || []).filter((item) => item.type !== 'carouselSample');
+	}
+
 	const PremadePanel = useMemo(
-		() => (PREMADE_MAPPING || []).map((item) => (
+		() => (leftPanelPremadeMapping || []).map((item) => (
 			<PremadeItem
 				itemType={item.type}
 				content={item}

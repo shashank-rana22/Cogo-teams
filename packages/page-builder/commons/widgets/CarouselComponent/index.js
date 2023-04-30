@@ -15,10 +15,10 @@ const CAROUSEL_SETTINGS = {
 	dots           : true,
 	infinite       : false,
 	speed          : 1000,
-	autoplaySpeed  : 5000,
+	autoplaySpeed  : 3000,
 	slidesToShow   : 1,
 	slidesToScroll : 1,
-	autoplay       : false,
+	autoplay       : true,
 	arrows         : false,
 	pauseOnHover   : true,
 };

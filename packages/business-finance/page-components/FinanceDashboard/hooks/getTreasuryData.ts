@@ -10,7 +10,6 @@ interface Props {
 const useGetTreasuryStats = (tabs:string) => {
 	const [treasuryFilters, setTreasuryFilters] = useState<Props>({
 	});
-
 	const { startDate, endDate } = treasuryFilters?.date || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
@@ -27,8 +26,8 @@ const useGetTreasuryStats = (tabs:string) => {
 			try {
 				trigger({
 					params: {
-						entity   : tabs === '101' || tabs === '301' ? tabs : undefined,
-						fromDate : startDate ? format(startDate as Date, 'yyyy-MM-dd 00:00:00', {}, false)
+						entityCode : tabs === 'all' ? ['101', '301'] : tabs,
+						fromDate   : startDate ? format(startDate as Date, 'yyyy-MM-dd 00:00:00', {}, false)
 							: undefined,
 						toDate: endDate
 							? format(endDate as Date, 'yyyy-MM-dd 00:00:00', {}, false) : undefined,

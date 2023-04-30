@@ -17,6 +17,7 @@ function useGraphData() {
 		total_requested_questions = 0,
 		not_available_search_count = 0,
 		available_search_count = 0,
+		total_searches = 0,
 	} = pie_chart;
 	const LIKES_PERCENTAGE = (total_likes / total_view_count) * 100;
 	const DISLIKES_PERCENTAGE = (total_dislike / total_view_count) * 100;
@@ -76,7 +77,7 @@ function useGraphData() {
 		},
 	];
 
-	return { pie_data, pie_outer_data, graph_data, dateRange, setDateRange, view_count_data };
+	return { pie_data, pie_outer_data, graph_data, dateRange, setDateRange, view_count_data, total_searches };
 }
 
 export default useGraphData;

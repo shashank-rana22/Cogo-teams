@@ -37,7 +37,7 @@ const useGetMemoStagedItems = ({
 		return (
 			<div
 				style={{ position: 'relative' }}
-				key={item.id}
+				key={id}
 				role="presentation"
 			>
 				<Components
