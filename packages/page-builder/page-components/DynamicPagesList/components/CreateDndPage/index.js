@@ -1,7 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 
 import Form from '../../../../commons/Form';
-import useCreateDndPage from '../../../hooks/useCreateDndPage';
+import useCreateDynamicPage from '../../../../hooks/useCreateDynamicPage';
 
 function CreateDndPage(props) {
 	const { setShowCreatePage, refetch } = props;
@@ -12,7 +12,7 @@ function CreateDndPage(props) {
 		formProps,
 		onSubmit,
 		handleSubmit,
-	} = useCreateDndPage({ setShowCreatePage, refetch });
+	} = useCreateDynamicPage({ setShowCreatePage, refetch });
 
 	return (
 		<>

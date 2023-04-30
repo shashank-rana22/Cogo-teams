@@ -5,7 +5,7 @@ import { useRequest } from '@cogoport/request';
 
 import controls from '../utils/get-page-controls';
 
-function useCreateDndPage(props) {
+function useCreateDynamicPage(props) {
 	const { refetch, setShowCreatePage } = props;
 
 	const formProps = useForm();
@@ -50,4 +50,4 @@ function useCreateDndPage(props) {
 	};
 }
 
-export default useCreateDndPage;
+export default useCreateDynamicPage;

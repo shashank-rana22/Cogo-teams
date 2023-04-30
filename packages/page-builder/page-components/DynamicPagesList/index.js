@@ -1,13 +1,13 @@
 import { Modal } from '@cogoport/components';
 
-import useDNDPages from '../hooks/useDNDPages';
+import useDynamicPagesList from '../../hooks/useDynamicPagesList';
 
 import CreateDndPage from './components/CreateDndPage';
 import Header from './components/Header';
 import List from './components/List';
 import styles from './styles.module.css';
 
-function DNDPages() {
+function DynamicPagesList() {
 	const {
 		showCreatePage,
 		setShowCreatePage,
@@ -23,7 +23,7 @@ function DNDPages() {
 		setSearchValue,
 		searchValue,
 		debounceQuery,
-	} = useDNDPages();
+	} = useDynamicPagesList();
 
 	return (
 
@@ -69,4 +69,4 @@ function DNDPages() {
 
 	);
 }
-export default DNDPages;
+export default DynamicPagesList;

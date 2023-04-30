@@ -1,0 +1,51 @@
+.table_container {
+	margin-top: 16px;
+	overflow-x: scroll;
+	box-shadow: 0 0 16px rgb(44 62 80 / 5%);
+}
+
+.table {
+	margin-bottom: 0;
+	background-color: #fff;
+
+	tr {
+		height: 60px;
+	}
+
+	:global(.ui_table_head_cell) {
+		min-width: 100px;
+		font-size: 14px;
+	}
+}
+
+.pagination_container{
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 12px;
+}
+
+.description{
+	display: flex;
+	display: block;
+	flex-direction: column;
+	width: fit-content;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 200px;
+}
+
+.tags_container {
+	display: flex;
+	display: block;
+	flex-direction: column;
+	width: fit-content;
+	max-width: 150px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.overflow_flex {
+	display: flex;
+}

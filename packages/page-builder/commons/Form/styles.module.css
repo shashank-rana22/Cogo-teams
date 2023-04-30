@@ -14,18 +14,6 @@
 	}
 }
 
-.schedule {
-	display: flex;
-	flex-direction: row;
-	gap: 16px;
-	align-items: flex-start;
-	justify-content: space-between;
-
-	:global(.ui_radiogroup_container) {
-		padding: 0;
-	}
-}
-
 .form_group:not(:first-child) { margin: 16px 0; }
 
 .input_group {

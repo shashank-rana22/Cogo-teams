@@ -19,7 +19,7 @@ function Form(props) {
 				if (!Element) return null;
 
 				return (
-					<div className={el.type === 'selectDayFrequency' ? styles.schedule : styles.form_group}>
+					<div className={styles.form_group}>
 						<span className={styles.label}>{el.label}</span>
 
 						<div className={styles.input_group}>

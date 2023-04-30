@@ -1,4 +1,4 @@
-import { Pill, Popover } from '@cogoport/components';
+import { Pill, Popover, Tooltip } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
@@ -8,27 +8,13 @@ import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils/';
 import { useState, useEffect } from 'react';
 
-import Actions from '../DNDPages/components/Actions';
+import {
+	CONFIGURATIONS_STATUS_COLOR_MAPPING,
+} from '../configurations/status-configuration-mapping';
+import Actions from '../page-components/DynamicPagesList/components/Actions';
+import styles from '../page-components/DynamicPagesList/components/List/styles.module.css';
 
-export const STATUS_MAPPING = {
-	active: {
-		status      : 'Active',
-		color       : 'blue',
-		buttonLabel : 'Active',
-	},
-	inactive: {
-		status      : 'Inactive',
-		color       : 'green',
-		buttonLabel : 'Inactive',
-	},
-	draft: {
-		status      : 'Draft',
-		color       : 'red',
-		buttonLabel : 'Draft',
-	},
-};
-
-const useDNDPages = () => {
+const useDynamicPagesList = () => {
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
 	const [searchValue, setSearchValue] = useState('');
@@ -81,7 +67,14 @@ const useDNDPages = () => {
 			id       : 'page_name',
 			Header   : 'Name',
 			accessor : ({ page_name, id }) => (
-				<section style={{ cursor: 'pointer' }} role="presentation" onClick={() => handleOnClick(id)}>
+				<section
+					style={{
+						cursor         : 'pointer',
+						textDecoration : 'underline',
+					}}
+					role="presentation"
+					onClick={() => handleOnClick(id)}
+				>
 					{startCase(page_name) || '___'}
 				</section>
 
@@ -89,23 +82,26 @@ const useDNDPages = () => {
 		},
 		{
 			id       : 'page_url',
-			Header   : 'Page URL',
+			Header   : 'URL',
 			accessor : ({ page_url = '' }) => (
+
 				<section>
 					{page_url || '___'}
-
 				</section>
 
 			),
 		},
 		{
 			id       : 'page_description',
-			Header   : 'Page Description',
-			accessor : ({ page_description }) => (
-				<section>
-					{page_description || '__'}
-				</section>
-			),
+			Header   : 'Description',
+			accessor : ({ page_description }) => {
+				const renderDescription = startCase(page_description);
+				return (
+					<Tooltip content={renderDescription} placement="bottom">
+						<div className={styles.description}>{renderDescription || '___'}</div>
+					</Tooltip>
+				);
+			},
 		},
 		{
 			id       : 'category',
@@ -116,16 +112,41 @@ const useDNDPages = () => {
 				</section>
 			),
 		},
-		// {
-		// 	id       : 'tags',
-		// 	Header   : 'Tags',
-		// 	accessor : ({ tags }) => (
-		// 		<div className={styles.schedule_type}>
-		// 			<Badge color={CONFIGURATIONS_STATUS_COLOR_MAPPING[tags]} style={{ margin: '0px 8px' }} />
-		// 			{startCase(tags || '___') }
-		// 		</div>
-		// 	),
-		// },
+		{
+			id     : 'tags',
+			Header : 'Tags',
+
+			accessor: ({ tags = [] }) => {
+				const totalTags = tags.length;
+
+				if (totalTags === 0) {
+					return '___';
+				}
+
+				const renderToolTip = tags.map((tag) => (
+					<Pill size="md" color="orange">
+						{startCase(tag)}
+					</Pill>
+				));
+
+				return (
+					<Tooltip content={renderToolTip} placement="bottom">
+						<div className={styles.overflow_flex}>
+							<div className={styles.tags_container}>
+								{startCase(tags?.[0] || '___')}
+							</div>
+							{totalTags > 1 && (
+								<strong>
+									(+
+									{totalTags - 1}
+									)
+								</strong>
+							)}
+						</div>
+					</Tooltip>
+				);
+			},
+		},
 
 		{
 			id       : 'created_at',
@@ -151,9 +172,9 @@ const useDNDPages = () => {
 			}) => (
 				<Pill
 					size="md"
-					color={STATUS_MAPPING[status]?.color}
+					color={CONFIGURATIONS_STATUS_COLOR_MAPPING[status]?.color}
 				>
-					{STATUS_MAPPING[status]?.status || 'Nil'}
+					{CONFIGURATIONS_STATUS_COLOR_MAPPING[status]?.status || 'Nil'}
 				</Pill>
 			),
 		},
@@ -199,4 +220,4 @@ const useDNDPages = () => {
 	};
 };
 
-export default useDNDPages;
+export default useDynamicPagesList;

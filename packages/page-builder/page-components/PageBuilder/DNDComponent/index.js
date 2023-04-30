@@ -1,4 +1,7 @@
 /* eslint-disable max-len */
+import { Breadcrumb } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useGetAddNewComponent from '../../../helpers/useGetAddNewComponent';
@@ -7,14 +10,8 @@ import DNDBody from './DNDBody';
 import SelectComponentModal from './SelectComponentModal';
 import styles from './styles.module.css';
 
-function DNDComponent() {
-	const [pageConfiguration, setPageConfiguration] = useState({
-		id      : 0,
-		layouts : [],
-		style   : {
-			backgroundSize: 'cover',
-		},
-	});
+function DNDComponent({ initialPageData, metaData }) {
+	const [pageConfiguration, setPageConfiguration] = useState(metaData);
 
 	const [showContentModal, setShowContentModal] = useState(false);
 
@@ -45,10 +42,21 @@ function DNDComponent() {
 		setParentComponentId,
 	});
 
+	const router = useRouter();
+
 	return (
 		<div>
+
 			<section className={styles.heading_container}>
-				Cogo Page Builder
+				<Breadcrumb>
+					<Breadcrumb.Item
+						label="Page Builder"
+						onClick={() => router.push('/page-builder', '/page-builder')}
+						className={styles.breadcrumb_item}
+					/>
+					<Breadcrumb.Item label={startCase(initialPageData?.page_name) || '___'} />
+				</Breadcrumb>
+
 			</section>
 
 			<DNDBody

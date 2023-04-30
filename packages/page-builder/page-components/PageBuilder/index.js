@@ -1,15 +1,18 @@
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-import useGetDndComponent from '../hooks/useGetDndComponent';
+import useGetDynamicPage from '../../hooks/useGetDynamicPage';
 
 import DNDComponent from './DNDComponent';
 
 function PageBuilder() {
-	const { metaData } = useGetDndComponent();
+	const { initialPageData, metaData } = useGetDynamicPage();
 	return (
 		<DndProvider backend={HTML5Backend}>
-			<DNDComponent metaData={metaData} />
+			<DNDComponent
+				initialPageData={initialPageData}
+				metaData={metaData}
+			/>
 		</DndProvider>
 	);
 }

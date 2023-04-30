@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 
-import useUpdateDndPage from '../../../../../hooks/useUpdateDndPage';
+import useUpdateDynamicPage from '../../../../../../hooks/useUpdateDynamicPage';
 
 import styles from './styles.module.css';
 
@@ -12,7 +12,7 @@ function Header(props) {
 		pageConfiguration,
 	} = props;
 
-	const { handleSave } = useUpdateDndPage();
+	const { handleSave } = useUpdateDynamicPage();
 
 	return (
 		<section className={styles.header}>

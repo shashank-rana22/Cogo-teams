@@ -1,13 +1,13 @@
 import { IcMTick, IcMCross } from '@cogoport/icons-react';
 
-import useUpdateDndPage from '../../../hooks/useUpdateDndPage';
+import useUpdateDynamicPage from '../../../../hooks/useUpdateDynamicPage';
 
 import styles from './styles.module.css';
 
 function ActionContent(props) {
 	const { refetch, item } = props;
 
-	const { onSubmit } = useUpdateDndPage();
+	const { onSubmit } = useUpdateDynamicPage();
 
 	return (
 		<div className={styles.action_container}>

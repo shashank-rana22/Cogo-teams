@@ -1,3 +1,5 @@
+import CATEGORIES_OPTIONS from '../configurations/categories';
+
 const controls = [
 	{
 		name        : 'page_name',
@@ -35,15 +37,7 @@ const controls = [
 		placeholder : 'Select',
 		style       : { flexBasis: '50%' },
 		type        : 'creatableSelect',
-		options     : [
-			{ label: 'Harper Lee', value: 'To Kill a Mockingbird' },
-			{ label: 'Lev Tolstoy', value: 'War and Peace' },
-			{ label: 'Fyodor Dostoyevsy', value: 'The Idiot' },
-			{ label: 'Oscar Wilde', value: 'A Picture of Dorian Gray' },
-			{ label: 'George Orwell', value: '1984' },
-			{ label: 'Jane Austen', value: 'Pride and Prejudice' },
-			{ label: 'Marcus Aurelius', value: 'Meditations' },
-		],
+		options     : CATEGORIES_OPTIONS,
 		isClearable : true,
 		rules       : {
 			required: 'Category is required',
@@ -55,15 +49,7 @@ const controls = [
 		placeholder : 'Select',
 		type        : 'creatableMultiSelect',
 		style       : { flexBasis: '50%' },
-		options     : [
-			{ label: 'Harper Lee', value: 'To Kill a Mockingbird' },
-			{ label: 'Lev Tolstoy', value: 'War and Peace' },
-			{ label: 'Fyodor Dostoyevsy', value: 'The Idiot' },
-			{ label: 'Oscar Wilde', value: 'A Picture of Dorian Gray' },
-			{ label: 'George Orwell', value: '1984' },
-			{ label: 'Jane Austen', value: 'Pride and Prejudice' },
-			{ label: 'Marcus Aurelius', value: 'Meditations' },
-		],
+		options     : [],
 		isClearable : true,
 		rules       : {
 			required: 'tags are required',

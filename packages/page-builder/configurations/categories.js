@@ -1,0 +1,38 @@
+const CATEGORIES_OPTIONS = [
+	{ label: 'Onboarding & KYC', value: 'onboarding_&_kyc' },
+	{ label: 'Forgot Password', value: 'forgot_password' },
+	{ label: 'Company Introduction', value: 'company_introduction' },
+	{ label: 'Enquiry', value: 'enquiry' },
+	{ label: 'Order', value: 'order' },
+	{ label: 'Rates Updates', value: 'rates_updates' },
+	{ label: 'Shipment - Status Report', value: 'shipment_status_report' },
+	{ label: 'Shipment - Action Required', value: 'shipment_action_required' },
+	{ label: 'Payment', value: 'payment' },
+	{ label: 'OTP', value: 'otp' },
+	{ label: 'Paylater', value: 'paylater' },
+	{ label: 'Upsell/Cross Sell', value: 'upsell_cross_sell' },
+	{ label: 'Support', value: 'support' },
+	{ label: 'Subscription', value: 'subscription' },
+	{ label: 'Tracking', value: 'tracking' },
+	{ label: 'Reactivation', value: 'reactivation' },
+	{ label: 'General News', value: 'general_news' },
+	{ label: 'Rates Promo', value: 'rates_promo' },
+	{ label: 'Newsletter', value: 'newsletter' },
+	{ label: 'Offers/Discounts', value: 'offers_discounts' },
+	{ label: 'Milestone', value: 'milestone' },
+	{
+		label : 'New Product/Service Launches & Updates',
+		value : 'new_product_service_launches_&_updates',
+	},
+	{ label: 'Survey/Review', value: 'survey_review' },
+	{ label: 'Product/Service Explainers', value: 'product_service_explainers' },
+	{ label: 'Festivals', value: 'festivals' },
+	{
+		label : 'Weekly/Daily/Monthly Summary',
+		value : 'weekly_daily_monthly_summary',
+	},
+	{ label: 'Subscriber Special', value: 'subscriber_special' },
+	{ label: 'Sales Prospecting', value: 'sales_prospecting' },
+];
+
+export default CATEGORIES_OPTIONS;

@@ -7,7 +7,7 @@ const message_mapping = {
 	active   : 'Published',
 	inactive : 'Deleted',
 };
-function useUpdateDndPage() {
+function useUpdateDynamicPage() {
 	const router = useRouter();
 
 	const { query = {} } = router;
@@ -65,4 +65,4 @@ function useUpdateDndPage() {
 	};
 }
 
-export default useUpdateDndPage;
+export default useUpdateDynamicPage;
