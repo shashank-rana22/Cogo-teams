@@ -128,7 +128,6 @@ function VoiceCall() {
 			clearInterval(startcounter);
 			setCounter(0);
 		};
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [callLoading, status]);
 
 	return (
