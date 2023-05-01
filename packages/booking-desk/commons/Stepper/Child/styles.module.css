@@ -49,8 +49,8 @@
 }
 
 .remaining {
-	background: #f3d5d5;
 	cursor: pointer;
+	background: #f3d5d5;
 
 	&::before {
 		border-color: #f3d5d5;

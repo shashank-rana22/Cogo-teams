@@ -1,12 +1,12 @@
 .main {
 	display: flex;
 	gap: 12px;
+	width: 100%;
 	font-weight: 500;
 	color: #393f70;
-	width: 100%;
 }
 
-.sub_container{
+.sub_container {
 	margin-top: 20px;
 }
 
@@ -17,9 +17,8 @@
 	width: 100%;
 }
 
-.loader{
+.loader {
 	height: 40px;
-	
 }
 
 .heading {
