@@ -13,7 +13,15 @@ const numberKeys = [
 	'free_days_demurrage_destination',
 ];
 
-const useGetStep2Data = ({ primary_service, task, step0_data, fileUrl, formattedRate, servicesList, setStep }) => {
+const useGetStep2Data = ({
+	primary_service = {},
+	task = {},
+	step0_data = {},
+	fileUrl = {},
+	formattedRate = {},
+	servicesList = {},
+	setStep = () => {},
+}) => {
 	const [bookingNote, setBookingNote] = useState(0);
 
 	const [, updateServiceTrigger] = useRequest({

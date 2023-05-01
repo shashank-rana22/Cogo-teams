@@ -10,10 +10,20 @@ import useListTasksHelper from './useListTasksHelper';
 
 function List() {
 	const {
-		count, completedTaskCount, tasksList, loading, taskListRefetch,
-		hideCompletedTasks, setHideCompletedTasks, handleClick, selectedTaskId,
-		setSelectedTaskId, shipment_data, showMyTasks, setShowMyTasks,
-		selectedMail, setSelectedMail,
+		count = 0,
+		completedTaskCount = 0,
+		tasksList = [],
+		loading = true,
+		taskListRefetch = () => {},
+		hideCompletedTasks = false,
+		setHideCompletedTasks = () => {},
+		handleClick = () => {},
+		selectedTaskId,
+		setSelectedTaskId = () => {},
+		showMyTasks = true,
+		setShowMyTasks = () => {},
+		selectedMail = [],
+		setSelectedMail = () => {},
 	} = useListTasksHelper();
 
 	if (loading) {
@@ -67,7 +77,6 @@ function List() {
 									handleClick={handleClick}
 									isTaskOpen
 									loading={loading}
-									shipment_data={shipment_data}
 								/>
 
 								<TaskExecution

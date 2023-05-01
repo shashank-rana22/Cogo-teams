@@ -8,11 +8,11 @@ import TaskContainer from '../../common/TaskContainer';
 import styles from './styles.module.css';
 
 function TaskForm({
-	apis_data,
-	pendingTask,
-	onCancel,
-	services,
-	taskListRefetch,
+	apis_data = {},
+	pendingTask = {},
+	onCancel = () => {},
+	services = [],
+	taskListRefetch = () => {},
 }) {
 	const [details, setDetails] = useState('');
 	const [customDateFormat, setCustomDateFormat] = useState(false);
