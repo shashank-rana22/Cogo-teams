@@ -12,7 +12,7 @@ function Step({ item = {}, value = '', onChange = () => {} }) {
 			} `}
 			role="button"
 			tabIndex={0}
-			onClick={() => onChange(item?.value)}
+			onClick={isActive ? null : () => onChange(item?.value)}
 		>
 			<div className={cl`${styles.text} ${isActive ? styles.active_text : ''}`}>
 				{item?.label || ''}

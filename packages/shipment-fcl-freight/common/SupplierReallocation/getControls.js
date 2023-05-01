@@ -1,9 +1,22 @@
 import { isEmpty } from '@cogoport/utils';
 
-export default function getControls({ serviceObj, shipment_type, documents, isAdditional }) {
+export default function getControls({
+	serviceObj = {},
+	shipment_type,
+	documents,
+	isAdditional,
+	trade_type,
+	payment_term,
+}) {
 	const { service_provider, service_type, bls_count, bl_category } = serviceObj || {};
 
 	const showAllControls = isEmpty(documents) && !isAdditional && `${shipment_type}_service` === service_type;
+
+	const blCategoryOptions = trade_type === 'export' && payment_term === 'prepaid'
+		? [
+			{ label: 'Mbl', value: 'mbl' },
+			{ label: 'Hbl', value: 'hbl' },
+		] : [{ label: 'Hbl', value: 'hbl' }];
 
 	const controls = [
 		{
@@ -37,13 +50,10 @@ export default function getControls({ serviceObj, shipment_type, documents, isAd
 			},
 		},
 		{
-			name    : 'bl_category',
-			label   : 'BL Category',
-			type    : 'select',
-			options : [
-				{ label: 'Mbl', value: 'mbl' },
-				{ label: 'Hbl', value: 'hbl' },
-			],
+			name        : 'bl_category',
+			label       : 'BL Category',
+			type        : 'select',
+			options     : blCategoryOptions,
 			placeholder : 'Enter Bl Category',
 			size        : 'sm',
 			rules       : { required: 'BL Category is required' },

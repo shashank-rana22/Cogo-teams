@@ -4,7 +4,7 @@ import React from 'react';
 import IP_STATE_CONDITONS from '../../../constants/IP_STATE_CONDITIONS';
 
 const actions = ({
-	status,
+	status = {},
 	serviceListItem,
 	addRate,
 	setShowModal = () => {},
@@ -15,10 +15,7 @@ const actions = ({
 
 	const onClickSetItem = () => setItem({ serviceListItem, status });
 
-	if (
-		status.status === 'quoted_by_service_provider'
-		|| status.status === 'price_recieved'
-	) {
+	if (['quoted_by_service_provider', 'price_recieved'].includes(status.status)) {
 		return (
 			<Button
 				themeType="secondary"
@@ -47,9 +44,7 @@ const actions = ({
 		);
 	}
 
-	if (
-		status.status === 'cancelled_by_supplier' && activeStakeholder === 'service_ops_1'
-	) {
+	if (status.status === 'cancelled_by_supplier' && activeStakeholder === 'service_ops_1') {
 		return (
 			<Button
 				themeType="secondary"

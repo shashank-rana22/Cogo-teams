@@ -26,7 +26,7 @@ function AddressForm({
 	setShowComponent = () => {},
 	setIsAddressRegisteredUnderGst = () => {},
 	source = '',
-	refetch,
+	refetch = () => {},
 }) {
 	const data = useGetBusiness({ gstNumber });
 
