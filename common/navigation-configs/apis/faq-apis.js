@@ -427,6 +427,11 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
+			api          : 're_allow_test',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
 	],
 };
 

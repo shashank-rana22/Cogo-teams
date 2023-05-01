@@ -10,7 +10,7 @@ function useAllowReTest({ setShowRetestModal = () => {}, test_id, refetchTest = 
 
 	const [{ loading = false }, trigger] = useRequest({
 		method : 'post',
-		url    : 'allow_re_test',
+		url    : 're_allow_test',
 	}, { manual: true });
 
 	const onSubmit = async (values) => {
@@ -18,6 +18,7 @@ function useAllowReTest({ setShowRetestModal = () => {}, test_id, refetchTest = 
 			try {
 				await trigger({
 					data: {
+						test_id,
 						users_list: 'custom',
 						percentile:
 						values?.filtered_users.includes('percentile_checked') ? Number(values?.percentile) : undefined,
@@ -41,6 +42,7 @@ function useAllowReTest({ setShowRetestModal = () => {}, test_id, refetchTest = 
 			try {
 				await trigger({
 					data: {
+						test_id,
 						users_list             : 'all',
 						validity_start         : values?.test_validity?.startDate,
 						validity_end           : values?.test_validity?.endDate,
