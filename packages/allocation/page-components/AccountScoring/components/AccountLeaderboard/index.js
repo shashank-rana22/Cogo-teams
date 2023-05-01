@@ -32,9 +32,9 @@ function AccountLeaderboard() {
 	useEffect(() => {
 		setGraphParams((pv) => ({
 			...pv,
-			service : service || undefined,
-			filters : {
-				created_at : date || undefined,
+			created_at : date || undefined,
+			service    : service || undefined,
+			filters    : {
 				service_id : organization || undefined,
 				user_id    : user_id || undefined,
 			},
@@ -42,9 +42,9 @@ function AccountLeaderboard() {
 
 		setLeaderboardParams((pv) => ({
 			...pv,
-			service : service || undefined,
-			filters : {
-				created_at : date || undefined,
+			created_at : date || undefined,
+			service    : service || undefined,
+			filters    : {
 				service_id : organization || undefined,
 				user_id    : user_id || undefined,
 
