@@ -1,6 +1,6 @@
 import {
 	IcMSearchdark,
-	IcMDocument,
+	IcMDocument, IcMDefault,
 } from '@cogoport/icons-react';
 
 const IconMapping = [
@@ -53,6 +53,16 @@ const IconMapping = [
 			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/actions.svg"
 			alt="actions"
 		/>,
+		hide: true,
+	},
+	{
+		name    : 'tickets',
+		content : 'Tickets',
+		icon:
+		(
+			<IcMDefault width={26} height={26} />
+		),
+
 	},
 	{
 		name    : 'spot_search',

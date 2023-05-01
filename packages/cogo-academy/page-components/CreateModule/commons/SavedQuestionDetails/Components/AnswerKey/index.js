@@ -25,16 +25,24 @@ function AnswerKey({ item, caseToShow }) {
 
 	return (
 		<Tooltip
+			className={styles.tooltip}
+			interactive
 			content={(
-				<div className={styles.flex_column}>
-					{(correctAnswers || []).map((correctAnswer) => (
-						<div key={correctAnswer} className={styles.answer}>{correctAnswer}</div>
-					))}
+				<div className={styles.whole_subjective}>
+					{item?.question_type === 'subjective' ? (
+						<div dangerouslySetInnerHTML={{ __html: test_question_answers[0].answer_text }} />
+					) : (
+						<div className={styles.flex_column}>
+							{(correctAnswers || []).map((correctAnswer) => (
+								<div key={correctAnswer} className={styles.answer}>{correctAnswer}</div>
+							))}
+						</div>
+					)}
 				</div>
 			)}
 		>
 			<div className={styles.answer_key}>
-				{getCorrectAnswers({ answers: test_question_answers })}
+				{getCorrectAnswers({ answers: test_question_answers, question_type: item?.question_type })}
 			</div>
 		</Tooltip>
 	);

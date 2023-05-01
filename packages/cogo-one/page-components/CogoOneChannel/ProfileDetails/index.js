@@ -17,6 +17,8 @@ function ProfileDetails({
 	setModalType = () => {},
 	setActiveMessage = () => {},
 	activeRoomLoading,
+	setRaiseTicketModal = () => {},
+	zippedTicketsData = {},
 }) {
 	const customerId = activeTab === 'message' ? activeMessageCard?.id : activeVoiceCard?.id;
 
@@ -76,6 +78,8 @@ function ProfileDetails({
 						setActiveSelect={setActiveSelect}
 						showMore={showMore}
 						setShowMore={setShowMore}
+						setRaiseTicketModal={setRaiseTicketModal}
+						zippedTicketsData={zippedTicketsData}
 					/>
 				)}
 			</div>
