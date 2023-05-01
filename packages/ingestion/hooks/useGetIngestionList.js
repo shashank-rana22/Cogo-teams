@@ -10,12 +10,9 @@ import { useState } from 'react';
 
 import { REDIRECT_LINK_MAPPING, REDIRECT_MAPPING } from '../constants/header-mapping';
 import { UPLOAD_STATUS_MAPPING } from '../constants/table-modal-mapping';
+import { downloadErrorCsv } from '../utils/download-csv';
 
 import styles from './styles.module.css';
-
-const downloadErrorCsv = (link) => {
-	window.open(link, '_blank');
-};
 
 const redirectPath = (link) => {
 	window.open(link);

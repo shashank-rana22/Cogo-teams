@@ -7,6 +7,7 @@ import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { UPLOAD_STATUS_MAPPING } from '../constants/table-modal-mapping';
+import { downloadErrorCsv } from '../utils/download-csv';
 
 import styles from './styles.module.css';
 
@@ -17,10 +18,6 @@ function useGetUploadList(id) {
 			ingestion_request_id: id,
 		},
 	});
-
-	const downloadErrorCsv = (_link) => {
-		window.open(_link, '_blank');
-	};
 
 	const [{ data, loading }] = useRequest({
 		method : 'get',
