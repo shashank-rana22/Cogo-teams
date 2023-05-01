@@ -8,3 +8,21 @@
 .button_container {
     display: flex;
 }
+
+
+.button_wrapper {
+    display: flex;
+    align-items: center;
+}
+
+
+.button_group {
+    cursor: pointer;
+}
+
+
+.button_flex {
+    margin-right: 8px;
+}
+
+

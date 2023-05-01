@@ -21,6 +21,11 @@ function RightPanel({
 	setSelectedNestedColumn,
 	modeType,
 	setMode,
+	redoUndoIndex,
+	lastEventIndex,
+	setEveryEvents,
+	goBack,
+	goForward,
 }) {
 	const handleUnselectItem = () => {
 		setSelectedRow({});
@@ -36,6 +41,11 @@ function RightPanel({
 				setMode={setMode}
 				pageConfiguration={pageConfiguration}
 				handleUnselectItem={handleUnselectItem}
+				redoUndoIndex={redoUndoIndex}
+				lastEventIndex={lastEventIndex}
+				setEveryEvents={setEveryEvents}
+				goBack={goBack}
+				goForward={goForward}
 			/>
 			<div>
 				<DropBox

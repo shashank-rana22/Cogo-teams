@@ -5,6 +5,7 @@ import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useGetAddNewComponent from '../../../helpers/useGetAddNewComponent';
+import useGetRedoUndoState from '../../../helpers/useGetRedoUndoState';
 
 import DNDBody from './DNDBody';
 import SelectComponentModal from './SelectComponentModal';
@@ -33,6 +34,14 @@ function DNDComponent({ initialPageData, metaData }) {
 
 	const [selectedNestedColumn, setSelectedNestedColumn] = useState({});
 
+	const {
+		setEveryEvents,
+		redoUndoIndex,
+		lastEventIndex,
+		goBack,
+		goForward,
+	} = useGetRedoUndoState({ pageConfiguration, setPageConfiguration });
+
 	const { handleAddNewItem } = useGetAddNewComponent({
 		pageConfiguration,
 		setPageConfiguration,
@@ -40,6 +49,7 @@ function DNDComponent({ initialPageData, metaData }) {
 		setSelectedItem,
 		setShowContentModal,
 		setParentComponentId,
+		setEveryEvents,
 	});
 
 	const router = useRouter();
@@ -79,6 +89,11 @@ function DNDComponent({ initialPageData, metaData }) {
 				setSelectedNestedColumn={setSelectedNestedColumn}
 				modeType={modeType}
 				setMode={setMode}
+				redoUndoIndex={redoUndoIndex}
+				lastEventIndex={lastEventIndex}
+				setEveryEvents={setEveryEvents}
+				goBack={goBack}
+				goForward={goForward}
 			/>
 
 			<SelectComponentModal
