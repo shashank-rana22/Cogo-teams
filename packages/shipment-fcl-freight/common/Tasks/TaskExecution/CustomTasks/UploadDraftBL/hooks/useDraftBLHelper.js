@@ -2,11 +2,9 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { useRequest } from '@cogoport/request';
 import { useContext } from 'react';
 
-import useListTradeDocuments from '../../../../../../hooks/useListTradeDocuments';
-import useCreateShipmentMapping from '../../../helpers/useCreateShipmentMapping';
+import useUpdateShipmentCogoid from '../../../../../../hooks/useUpdateShipmentCogoid';
 
 const useDraftBLHelper = ({
-	isHBL = true,
 	pendingTask = {},
 	refetch = () => {},
 	closeTask = () => {},
@@ -17,27 +15,12 @@ const useDraftBLHelper = ({
 		primary_service,
 	} = useContext(ShipmentDetailContext);
 
-	const { submitShipmentMapping } = useCreateShipmentMapping();
+	const { submitShipmentMapping } = useUpdateShipmentCogoid();
 
-	const docsParams = {
-		filters: {
-			shipment_id   : shipment_data?.id,
-			document_type : 'bluetide_hbl',
-		},
-		page_limit: 1000,
-	};
-
-	// const listDocsAPI = useRequest(
-	// 	'get',
-	// 	isHBL && isShipmentId !== undefined,
-	// 	scope,
-	// )('/list_shipment_trade_documents', { params: docsParams });
-
-	// const createShipmentDocAPI = useRequest(
-	// 	'post',
-	// 	false,
-	// 	scope,
-	// )('/create_shipment_document');
+	const [{ loading }, trigger] = useRequest({
+		url    : '/create_shipment_document',
+		method : 'POST',
+	}, { manual: true });
 
 	const createHBL = async ({ setHblLoading, hblData }) => {
 		setHblLoading(true);
@@ -102,12 +85,12 @@ const useDraftBLHelper = ({
 				})),
 			};
 
-			// await createShipmentDocAPI.trigger({ data: body });
+			await trigger({ data: body });
 			// feedbacks to cogolens starts
 			try {
 				const rpaMappings = {
 					cogo_shipment_id        : pendingTask.shipment_id,
-					cogo_shipment_serial_no : shipment_data?.id,
+					cogo_shipment_serial_no : shipment_data?.serial_id,
 					bill_of_lading          : values?.document_number,
 				};
 				await submitShipmentMapping(rpaMappings);
@@ -122,12 +105,10 @@ const useDraftBLHelper = ({
 	};
 
 	return {
-		// listDocsAPI,
-		// createShipmentDocAPI,
 		createHBL,
 		submitMBL,
+		loading,
 	};
 };
-// const { scope } = useScope();
 
 export default useDraftBLHelper;

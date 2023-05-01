@@ -1,7 +1,7 @@
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-const useCreateShipmentMapping = () => {
+const useUpdateShipmentCogoid = () => {
 	const [{ loading }, trigger] = useRequest({
 		url    : `${process.env.COGO_LENS_URL}/update_shipment_cogoid`,
 		method : 'PUT',
@@ -42,4 +42,4 @@ const useCreateShipmentMapping = () => {
 	return { submitShipmentMapping, loading };
 };
 
-export default useCreateShipmentMapping;
+export default useUpdateShipmentCogoid;
