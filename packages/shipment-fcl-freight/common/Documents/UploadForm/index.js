@@ -11,7 +11,7 @@ function UploadForm({
 	setShowDoc = () => {},
 	activeWallet,
 	setActiveWallet = () => {},
-	refetch,
+	refetch = () => {},
 }) {
 	const handleDocClick = (doc) => {
 		setShowDoc({
