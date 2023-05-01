@@ -2,8 +2,7 @@ const fs = require('fs-extra');
 
 const excludePackages = ['authentication'];
 
-const getDirectories = (source) => fs
-	.readdirSync(source, { withFileTypes: true })
+const getDirectories = (source) => fs.readdirSync(source, { withFileTypes: true })
 	.filter((dirent) => dirent.isDirectory())
 	.map((dirent) => dirent.name);
 

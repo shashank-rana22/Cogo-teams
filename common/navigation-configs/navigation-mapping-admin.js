@@ -51,10 +51,8 @@ import {
 	IcMDunning,
 	IcMDashboard,
 	IcMCreditRequest,
-	IcCCogoassured,
-	IcMOverview,
+	IcCCogoassured, IcMOverview,
 	IcMFaq,
-	IcMExportfile,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -188,8 +186,6 @@ const navigationMappingAdmin = {
 			...apis.feedback,
 			...apis.checkout_promotions,
 			...apis.export_factoring,
-			...apis.app_saas_cogo_subscription,
-
 		],
 		main_apis: [
 			'list_organization_users',
@@ -279,7 +275,6 @@ const navigationMappingAdmin = {
 			...apis.contract_rates,
 			...apis.feedback,
 			...apis.checkout_promotions,
-			...apis.cargo_insurance,
 		],
 		main_apis: [
 			'list_organizations',
@@ -940,6 +935,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_incentive_plans'],
 				possible_apis : apis.incentives,
+
 			},
 			{
 				key           : 'incentives-kpi_plans',
@@ -1055,6 +1051,28 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		module_type   : 'dashboards',
 	},
+	data_pipeline: {
+		key           : 'data_pipeline',
+		title         : 'Export Import Data Pipeline',
+		href          : '/data-pipeline',
+		as            : '/data-pipeline',
+		type          : 'link',
+		main_apis     : [],
+		icon          : IcMDataPipeline,
+		possible_apis : [],
+		module_type   : 'crm',
+	},
+	lead_data_pipeline: {
+		key           : 'lead_data_pipeline',
+		title         : 'Lead Data Pipeline',
+		href          : '/lead-data-pipeline',
+		as            : '/lead-data-pipeline',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : [],
+		icon          : IcMDataPipeline,
+		module_type   : 'crm',
+	},
 	lens: {
 		key           : 'lens',
 		title         : 'Lens',
@@ -1113,6 +1131,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.booking_tasks,
+
 			},
 			{
 				key           : 'coe-shipments',
@@ -1122,12 +1141,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				statsKey      : 'shipments',
 				main_apis     : ['list_shipments'],
-				possible_apis : [
-					...apis.shipment,
-					...apis.search,
-					...apis.feedback,
-					...apis.cargo_insurance,
-				],
+				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback],
 			},
 			{
 				key           : 'coe-bn_salvage',
@@ -1146,6 +1160,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.okam_task_apis,
+
 			},
 			{
 				key           : 'coe-finance',
@@ -1155,6 +1170,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : [...apis.coe_finance, ...apis.shipment],
+
 			},
 			{
 				key           : 'coe-booking_note_desk',
@@ -1173,6 +1189,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
+
 			},
 			{
 				key           : 'coe-lcl_revenue_desk',
@@ -1182,6 +1199,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : [...apis.shipment, ...apis.air_revenue_desk],
+
 			},
 			{
 				key           : 'coe-air_revenue_desk',
@@ -1191,6 +1209,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : [...apis.shipment, ...apis.air_revenue_desk],
+
 			},
 			{
 				key           : 'coe-domestic_air_revenue_desk',
@@ -1200,6 +1219,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
+
 			},
 			{
 				key           : 'coe-ftl_revenue_desk',
@@ -1209,6 +1229,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
+
 			},
 			{
 				key           : 'coe-ltl_revenue_desk',
@@ -1218,6 +1239,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
+
 			},
 			{
 				key           : 'coe-air-customs_revenue_desk',
@@ -1254,6 +1276,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
+
 			},
 			{
 				key           : 'coe-lcl-customs_revenue_desk',
@@ -1263,6 +1286,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
+
 			},
 			{
 				key           : 'coe-bl_do',
@@ -1283,6 +1307,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_cost_booking_desk_shipments'],
 				possible_apis : [...apis.cost_booking_desk, ...apis.cogolens],
+
 			},
 			{
 				key           : 'coe-cancellation_policies',
@@ -1292,6 +1317,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipment_cancellation_charges'],
 				possible_apis : apis.shipment_cancellation_policies,
+
 			},
 			{
 				key   : 'coe-communication',
@@ -1308,6 +1334,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
+
 			},
 			{
 				key           : 'coe-kam-payments-dashboard',
@@ -1326,6 +1353,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : [...apis.shipment, ...apis.ltl_operations],
+
 			},
 			{
 				key           : 'coe-bl_do_collection_release',
@@ -1335,6 +1363,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipment_document_collections'],
 				possible_apis : [...apis.bl_do_collection_release, ...apis.shipment],
+
 			},
 			{
 				key           : 'coe-kam_desk',
@@ -1343,12 +1372,7 @@ const navigationMappingAdmin = {
 				as            : '/kam-desk',
 				type          : 'link',
 				main_apis     : ['list_kam_desk_shipments'],
-				possible_apis : [
-					...apis.kam_desk,
-					...apis.search,
-					...apis.cogolens,
-					...apis.cargo_insurance,
-				],
+				possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens],
 			},
 			{
 				key           : 'coe-document_desk',
@@ -1430,6 +1454,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.segmentation,
+
 			},
 			{
 				key           : 'marketing-marketing_campaign-dashboard',
@@ -1451,6 +1476,7 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				module_type   : 'crm',
 				possible_apis : apis.templates,
+
 			},
 			{
 				key           : 'marketing-marketing_cogo_points',
@@ -1556,16 +1582,6 @@ const navigationMappingAdmin = {
 
 				main_apis: [],
 			},
-			{
-				key           : 'cogo_assured-feedbacks',
-				title         : 'Feedbacks',
-				href          : '/cogo-assured/feedbacks',
-				as            : '/cogo-assured/feedbacks',
-				type          : 'link',
-				possible_apis : apis.cogo_assured,
-
-				main_apis: [],
-			},
 		],
 	},
 	tracking_job: {
@@ -1646,6 +1662,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.promotions,
+
 			},
 			{
 				key           : 'promotions-budget_allocation',
@@ -1655,6 +1672,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.promotions,
+
 			},
 		],
 		module_type: 'dashboards',
@@ -1667,6 +1685,7 @@ const navigationMappingAdmin = {
 		type          : 'link',
 		main_apis     : [],
 		possible_apis : apis.voice_call,
+
 	},
 	transaction_setting: {
 		key       : 'transaction_setting',
@@ -1681,6 +1700,7 @@ const navigationMappingAdmin = {
 				as            : '/pass-through-customers',
 				main_apis     : [],
 				possible_apis : apis.pass_through_customers,
+
 			},
 			{
 				key           : 'transaction_setting-convenience_rate',
@@ -1752,6 +1772,7 @@ const navigationMappingAdmin = {
 		module_type   : 'dashboards',
 		possible_apis : apis.my_profile,
 		showInNav     : false,
+
 	},
 	allocations: {
 		key         : 'allocations',
@@ -1774,13 +1795,6 @@ const navigationMappingAdmin = {
 				possible_apis : apis.allocation_engine,
 			},
 			{
-				key           : 'allocations-kam_expertise',
-				title         : 'Kam Expertise',
-				href          : '/v2/allocation/kam-expertise',
-				as            : '/v2/allocation/kam-expertise',
-				possible_apis : apis.kam_expertise,
-			},
-			{
 				key           : 'allocations-crm_feedback_dashboard',
 				title         : 'CRM Feedback Dashboard',
 				href          : '/v2/allocation/crm-feedback-dashboard',
@@ -1788,6 +1802,15 @@ const navigationMappingAdmin = {
 				possible_apis : apis.crm_feedback_dashboard,
 			},
 		],
+	},
+	athena_dashboard: {
+		key           : 'athena_dashboard',
+		title         : 'Athena Dashboard',
+		module_type   : 'dashboards',
+		icon          : IcMDashboard,
+		href          : '/v2/athena-dashboard',
+		as            : '/v2/athena-dashboard',
+		possible_apis : apis.athena,
 	},
 	kam_monitoring: {
 		key         : 'kam_monitoring',
@@ -2104,16 +2127,13 @@ const navigationMappingAdmin = {
 				possible_apis : apis.analytics_dashboard_management,
 			},
 			{
-				key       : 'analytics_dashboard-view',
-				title     : 'Dashboard',
-				href      : '/analytics-dashboard',
-				as        : '/analytics-dashboard',
-				type      : 'link',
-				main_apis : [
-					'list_analytics_dashboard_widgets',
-					'get_analytics_widget_data',
-				],
-				possible_apis: apis.analytics_dashboard,
+				key           : 'analytics_dashboard-view',
+				title         : 'Dashboard',
+				href          : '/analytics-dashboard',
+				as            : '/analytics-dashboard',
+				type          : 'link',
+				main_apis     : ['list_analytics_dashboard_widgets', 'get_analytics_widget_data'],
+				possible_apis : apis.analytics_dashboard,
 			},
 		],
 	},
@@ -2126,69 +2146,25 @@ const navigationMappingAdmin = {
 		icon        : IcMPartnersCogoport,
 		options     : [
 			{
-				key           : 'performance_management-employee_directory',
-				title         : 'Employee Directory',
-				href          : '/v2/performance-management/employee-directory',
-				as            : '/v2/performance-management/employee-directory',
-				possible_apis : apis.employee_directory,
-			},
-			{
 				key           : 'performance_management-user_dashboard',
 				title         : 'User Dashboard',
 				href          : '/v2/performance-management/user-dashboard',
 				as            : '/v2/performance-management/user-dashboard',
-				possible_apis : apis.user_dashboard,
+				possible_apis : apis.performance_management,
 			},
 			{
 				key           : 'performance_management-manager_dashboard',
 				title         : 'Manager Dashboard',
 				href          : '/v2/performance-management/manager-dashboard',
 				as            : '/v2/performance-management/manager-dashboard',
-				possible_apis : apis.manager_dashboard,
+				possible_apis : apis.performance_management,
 			},
 			{
 				key           : 'performance_management-hr_dashboard',
 				title         : 'HR Dashboard',
 				href          : '/v2/performance-management/hr-dashboard',
 				as            : '/v2/performance-management/hr-dashboard',
-				possible_apis : apis.hr_dashboard,
-			},
-		],
-	},
-	ihls: {
-		key         : 'ihls',
-		title       : 'IHLS',
-		isSubNavs   : true,
-		module_type : 'dashboards',
-		icon        : IcMExportfile,
-		main_apis   : [],
-		options     : [
-			{
-				key           : 'ihls-athena_dashboard',
-				title         : 'Market Intelligence',
-				icon          : IcMDashboard,
-				href          : '/v2/ihls/athena-dashboard',
-				as            : '/v2/ihls/athena-dashboard',
-				type          : 'link',
-				possible_apis : apis.athena,
-			},
-			{
-				key           : 'ihls-data_pipeline',
-				title         : 'File Processing Dashboard',
-				href          : '/ihls/data-pipeline',
-				as            : '/ihls/data-pipeline',
-				type          : 'link',
-				icon          : IcMDataPipeline,
-				possible_apis : [],
-			},
-			{
-				key           : 'ihls-lead_data_pipeline',
-				title         : 'Lead Dashboard',
-				href          : '/ihls/lead-data-pipeline',
-				as            : '/ihls/lead-data-pipeline',
-				type          : 'link',
-				possible_apis : [],
-				icon          : IcMDataPipeline,
+				possible_apis : apis.performance_management,
 			},
 		],
 	},
