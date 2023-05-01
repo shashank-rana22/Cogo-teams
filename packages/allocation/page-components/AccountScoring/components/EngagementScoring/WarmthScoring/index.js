@@ -52,14 +52,6 @@ function WarmthScoring(props) {
 		/>,
 	}));
 
-	if (isEmpty(list) && !loading) {
-		return (
-			<div className={styles.empty_container}>
-				<EmptyState height={220} width={380} flexDirection="column" emptyText="No data found" textSize={20} />
-			</div>
-		);
-	}
-
 	return (
 		<div>
 			<Header
@@ -68,6 +60,18 @@ function WarmthScoring(props) {
 				debounceQuery={debounceQuery}
 				searchValue={searchValue}
 			/>
+
+			{isEmpty(list) && !loading ? (
+				<div className={styles.empty_container}>
+					<EmptyState
+						height={220}
+						width={380}
+						flexDirection="column"
+						emptyText="No data found"
+						textSize={20}
+					/>
+				</div>
+			) : null}
 
 			{loading && !activeCollapse ? (
 				<div className={styles.collapse_container}>
