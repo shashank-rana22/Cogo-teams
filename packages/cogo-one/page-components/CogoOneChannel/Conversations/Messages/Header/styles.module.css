@@ -23,23 +23,6 @@
 	}
 }
 
-.name {
-	max-width: 410px;
-	overflow: hidden;
-	font-size: 16px;
-	line-height: 24px;
-	color: #4f4f4f;
-	text-align: left;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-.phone_number {
-	font-size: 12px;
-	color: #828282;
-	text-align: left;
-}
-
 .tags {
 	padding: 5px;
 	margin: 0 5px;
@@ -77,20 +60,6 @@
 
 .margin_right {
 	margin-right: 30px;
-}
-
-.disabled_button {
-	:global {
-		.ui_button_container {
-			&:hover {
-				border: none !important;
-			}
-
-			&:disabled {
-				border: none !important;
-			}
-		}
-	}
 }
 
 .button_container {

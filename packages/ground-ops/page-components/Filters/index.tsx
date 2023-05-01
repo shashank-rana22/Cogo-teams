@@ -1,7 +1,7 @@
 import { Button, Popover } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMFilter, IcCRedCircle } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, format } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import Layout from '../Air/commons/Layout';
@@ -23,6 +23,9 @@ function Filters({ setFilters = () => {}, filters = {} }:Props) {
 		Object.keys(formValues).forEach((key) => {
 			if (formValues[key] === '') {
 				finalValues[key] = undefined;
+			} else if (key === 'deadline' && formValues[key]) {
+				finalValues[key] = formValues[key] ? format(formValues[key] as Date, 'yyyy-MM-dd')
+					: undefined;
 			} else {
 				finalValues[key] = formValues[key];
 			}
