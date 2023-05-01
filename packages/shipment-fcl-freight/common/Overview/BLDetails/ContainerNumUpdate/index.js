@@ -9,7 +9,6 @@ function ContainerNmUpdate({
 	setEditContainerNum = () => { },
 	refetch = () => { },
 	containerDetails,
-	editContainerNum = false,
 }) {
 	const [containerValue, setContainerValue] = useState({});
 
@@ -41,12 +40,15 @@ function ContainerNmUpdate({
 		apiTrigger(payload);
 	};
 
+	const closeModal = () => setEditContainerNum(false);
+
 	return (
 		<Modal
-			show={editContainerNum}
-			onClose={() => {
-				setEditContainerNum(false);
-			}}
+			show
+			onClose={closeModal}
+			showCloseIcon={!loading}
+			closeOnOuterClick={false}
+			className={styles.custom_modal}
 		>
 			<Modal.Header title="Update Container Number" />
 			<Modal.Body>
@@ -71,23 +73,22 @@ function ContainerNmUpdate({
 					)}
 			</Modal.Body>
 			<Modal.Footer>
-				<div className={styles.button_container}>
-					<Button
-						size="md"
-						onClick={() => setEditContainerNum(false)}
-						disabled={loading}
-					>
-						Cancel
-					</Button>
+				<Button
+					size="md"
+					themeType="secondary"
+					onClick={closeModal}
+					disabled={loading}
+				>
+					Cancel
+				</Button>
 
-					<Button
-						size="md"
-						onClick={onSubmit}
-						disabled={loading}
-					>
-						Submit
-					</Button>
-				</div>
+				<Button
+					size="md"
+					onClick={onSubmit}
+					disabled={loading}
+				>
+					Submit
+				</Button>
 			</Modal.Footer>
 		</Modal>
 	);
