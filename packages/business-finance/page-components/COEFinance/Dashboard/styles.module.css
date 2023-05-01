@@ -65,13 +65,13 @@
 }
 
 .card_label {
-	padding-right: 60px;
-	padding-left: 36px;
+	padding: 0 60px 0 36px;
 	font-size: 14px;
 	font-weight: 500;
 }
 
 .card_value {
+	padding: 0 14px 0 28px;
 	padding-right: 14px;
 	padding-left: 28px;
 	font-size: 30px;
