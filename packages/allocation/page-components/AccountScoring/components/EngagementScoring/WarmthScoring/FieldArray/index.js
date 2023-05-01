@@ -15,7 +15,7 @@ function FieldArray(props) {
 	const watchLifecycleStage = watch('single_item');
 	const eventsToExclude = watchLifecycleStage.map((obj) => obj.event_name);
 
-	const { controls = [] } = getControls(eventsToExclude);
+	const { controls = [] } = getControls({ eventsToExclude, engagementType });
 
 	const childValues = {};
 

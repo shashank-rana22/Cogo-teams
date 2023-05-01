@@ -35,7 +35,7 @@ function EngagementType(props) {
 							size="md"
 							themeType="secondary"
 							style={{ marginLeft: '16px' }}
-							onClick={() => setEditMode('')}
+							onClick={() => { setEditMode(''); setValue('single_item', engagement_type_details); }}
 							disabled={editLoading}
 						>
 							Cancel

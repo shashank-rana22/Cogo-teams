@@ -1,4 +1,4 @@
-const getControls = (eventsToExclude) => {
+const getControls = ({ eventsToExclude, engagementType }) => {
 	const controlItem = {
 		name     : 'single_item',
 		type     : 'fieldArray',
@@ -11,7 +11,8 @@ const getControls = (eventsToExclude) => {
 				initialCall : false,
 				params      : {
 					filters: {
-						present_names: eventsToExclude,
+						present_names : eventsToExclude,
+						category      : engagementType,
 					},
 				},
 				style: {
