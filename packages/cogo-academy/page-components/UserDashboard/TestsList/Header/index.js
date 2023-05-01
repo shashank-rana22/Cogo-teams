@@ -25,6 +25,10 @@ const testCategoryOptions = [
 		label : 'Expired',
 		value : 'expired',
 	},
+	{
+		label : 'Re-test',
+		value : 'retest',
+	},
 ];
 
 function Header({ debounceQuery, testCategory, setTestCategory }) {

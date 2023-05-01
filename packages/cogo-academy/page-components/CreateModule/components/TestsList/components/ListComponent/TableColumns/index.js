@@ -11,6 +11,15 @@ import { QuestionSetButtons, TestSetButtons } from './ButtonComponent';
 import styles from './styles.module.css';
 import ValidityDisplay from './ValidityDisplay';
 
+const PILL_COLOR_MAPPING = {
+	active    : '#C4DC91',
+	upcoming  : '#CFEAEC',
+	published : '#FAD1A5',
+	expired   : '#F8AEA8',
+	draft     : '#FEF099',
+	retest    : '#E0E0E0',
+};
+
 export const questionSetColumns = ({ loading, router, setShowModal, setQuestionSetId, sortFilter, setSortFilter }) => [
 	{
 		Header   : 'QUESTION SET NAME',
@@ -227,13 +236,6 @@ export const testSetColumns = ({
 		),
 	},
 	{
-		Header   : 'ALLOWED ATTEMPTS',
-		id       : 'allowed_attempts',
-		accessor : ({ maximum_attempts = 0 }) => (
-			<section>{maximum_attempts || '-'}</section>
-		),
-	},
-	{
 		Header   : 'CUTOFF PASS %',
 		id       : 'cutoff_pass',
 		accessor : ({ cut_off_percentage = '' }) => (
@@ -255,13 +257,13 @@ export const testSetColumns = ({
 		Header   : 'STATUS',
 		id       : 'status',
 		accessor : ({ current_status = '', id = '', validity_start = '', validity_end = '' }) => {
-			if (['active', 'upcoming'].includes(current_status)) {
+			if (['active', 'upcoming', 'retest'].includes(current_status)) {
 				return (
 					<section className={styles.details}>
 						<section className={styles.status}>
 							<Pill
 								size="md"
-								color={current_status === 'upcoming' ? '#CFEAEC' : '#C4DC91'}
+								color={PILL_COLOR_MAPPING[current_status]}
 								className={styles.status_pill}
 							>
 								{startCase(current_status)}
@@ -272,9 +274,7 @@ export const testSetColumns = ({
 									key={current_status}
 									size="md"
 									prefix={<IcMShare />}
-									color="#FEF3E9"
-									className={styles.status_pill}
-									style={{ cursor: 'pointer' }}
+									className={`${styles.status_pill} ${styles.share_test}`}
 								>
 									Share Test Link
 								</Pill>
@@ -292,7 +292,7 @@ export const testSetColumns = ({
 						<Pill
 							key={current_status}
 							size="md"
-							color="orange"
+							color={PILL_COLOR_MAPPING[current_status]}
 							className={styles.status_pill}
 						>
 							Results
@@ -311,7 +311,7 @@ export const testSetColumns = ({
 						<Pill
 							key={current_status}
 							size="md"
-							color="red"
+							color={PILL_COLOR_MAPPING[current_status]}
 							className={styles.status_pill}
 						>
 							{startCase(current_status)}
@@ -328,7 +328,7 @@ export const testSetColumns = ({
 					<Pill
 						key={current_status}
 						size="md"
-						color="yellow"
+						color={PILL_COLOR_MAPPING[current_status]}
 						className={styles.status_pill}
 					>
 						{startCase(current_status)}

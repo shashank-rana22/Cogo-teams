@@ -42,20 +42,21 @@ function InfoBanner({ test_status = '', test_id, validity_end, refetchTest = () 
 				<b className={styles.margin_right}>{text}</b>
 
 				<span>{subText}</span>
-
 			</div>
 
+			{test_status === 'published' ? (
+				<Button
+					type="button"
+					themeType="accent"
+					size="md"
+					onClick={() => setShowRetestModal(true)}
+				>
+					Create Retest
+				</Button>
+			) : null}
+
 			{!['published', 'publishing'].includes(key) && !isUnderValidity
-				? <PublishNow test_id={test_id} refetchTest={refetchTest} /> : (
-					<Button
-						type="button"
-						themeType="accent"
-						size="md"
-						onClick={() => setShowRetestModal(true)}
-					>
-						Create Retest
-					</Button>
-				)}
+				? <PublishNow test_id={test_id} refetchTest={refetchTest} /> : null}
 
 			{showRetestModal
 				? (
@@ -66,6 +67,7 @@ function InfoBanner({ test_status = '', test_id, validity_end, refetchTest = () 
 						className={styles.modal_container}
 					>
 						<Modal.Header title="Set Retest Criteria" />
+
 						<Modal.Body>
 							<Retest
 								watch={watch}
@@ -74,26 +76,23 @@ function InfoBanner({ test_status = '', test_id, validity_end, refetchTest = () 
 								errors={errors}
 							/>
 						</Modal.Body>
-						<Modal.Footer>
-							<div>
-								<div>
-									<Button
-										themeType="secondary"
-										onClick={() => setShowRetestModal(false)}
-									>
-										Cancel
-									</Button>
 
-								</div>
-								<div>
-									<Button
-										themeType="accent"
-										onClick={handleSubmit(onSubmit)}
-										disabled={loading}
-									>
-										Submit
-									</Button>
-								</div>
+						<Modal.Footer>
+							<div className={styles.button_container}>
+								<Button
+									themeType="secondary"
+									onClick={() => setShowRetestModal(false)}
+								>
+									Cancel
+								</Button>
+
+								<Button
+									themeType="accent"
+									onClick={handleSubmit(onSubmit)}
+									disabled={loading}
+								>
+									Submit
+								</Button>
 							</div>
 						</Modal.Footer>
 					</Modal>
