@@ -1,6 +1,4 @@
-// import useCreateShipmentMapping from '@cogo/business-modules/rpa/hooks/useCreateShipmentMapping';
 import { Toast, Button } from '@cogoport/components';
-import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useScope } from '@cogoport/scope-select';
 import { useState, useEffect, useRef } from 'react';
@@ -12,7 +10,7 @@ import styles from './styles.module.css';
 function UploadHbl(props) {
 	const { docs, bls_count, summary, data, refetchDocs } = props || {};
 	const [urls, setUrls] = useState([]);
-	// const { submitShipmentMapping } = useCreateShipmentMapping();
+
 	const formRefs = useRef([]);
 	const { scope } = useScope();
 
@@ -47,19 +45,7 @@ function UploadHbl(props) {
 			documents,
 		};
 		await createShipmentDocAPI.trigger({ data: body });
-		// feedbacks to cogolens starts
-		try {
-			// const rpaMappings = {
-			// 	cogo_shipment_id: data?.shipment_id,
-			// 	cogo_shipment_serial_no:
-			// 		summary?.shipment_serial_id || summary.serial_id,
-			// 	bill_of_lading: values?.document_number,
-			// };
-			// await submitShipmentMapping(rpaMappings);
-		} catch (err) {
-			toastApiError(err);
-		}
-		// feedbacks to cogolens ends
+
 		refetchDocs();
 	};
 
@@ -81,7 +67,6 @@ function UploadHbl(props) {
 		} else {
 			Toast.error('Fill all forms');
 		}
-		// props.refetchDocs();
 	};
 
 	useEffect(() => {
