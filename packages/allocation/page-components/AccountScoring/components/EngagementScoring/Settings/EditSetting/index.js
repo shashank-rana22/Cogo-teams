@@ -108,7 +108,7 @@ function EditSetting(props) {
 				/>
 
 				{preFilledList.map((item, index) => (
-					<div key={item} className={styles.item}>
+					<div key={item.id} className={styles.item}>
 						{
 							inputStyle === 'distribution_input'
 								? (
