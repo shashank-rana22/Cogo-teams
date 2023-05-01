@@ -21,6 +21,7 @@ function EditSetting(props) {
 		errors,
 		watch,
 		setValue = () => {},
+		reset = () => {},
 	} = props;
 
 	const {
@@ -36,6 +37,7 @@ function EditSetting(props) {
 	} = useUpdateDistributionSettings();
 
 	const onClose = () => {
+		reset();
 		setEditing((pv) => !pv);
 	};
 

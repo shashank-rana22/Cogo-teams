@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 function PercentileSetting(props) {
 	const {
 		settingsLoading, settingsRefetch, percentileList,
-		control, handleSubmit, errors,
+		control, handleSubmit, errors, reset,
 	} = props;
 
 	const [editing, setEditing] = useState(false);
@@ -42,6 +42,7 @@ function PercentileSetting(props) {
 				control={control}
 				handleSubmit={handleSubmit}
 				errors={errors}
+				reset={reset}
 				inputStyle="percentile_input"
 				heading="Percentile Setting"
 				tooltipData="When the account lies in the respective percentile it would be assigned
