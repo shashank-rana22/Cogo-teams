@@ -34,13 +34,20 @@ function DNDComponent({ initialPageData, metaData }) {
 
 	const [selectedNestedColumn, setSelectedNestedColumn] = useState({});
 
+	const handleUnselectItem = () => {
+		setSelectedRow({});
+		setSelectedItem({});
+		setSelectedColumn({});
+		setSelectedNestedColumn({});
+	};
+
 	const {
 		setEveryEvents,
 		redoUndoIndex,
 		lastEventIndex,
 		goBack,
 		goForward,
-	} = useGetRedoUndoState({ pageConfiguration, setPageConfiguration });
+	} = useGetRedoUndoState({ pageConfiguration, setPageConfiguration, handleUnselectItem });
 
 	const { handleAddNewItem } = useGetAddNewComponent({
 		pageConfiguration,
@@ -94,6 +101,7 @@ function DNDComponent({ initialPageData, metaData }) {
 				setEveryEvents={setEveryEvents}
 				goBack={goBack}
 				goForward={goForward}
+				handleUnselectItem={handleUnselectItem}
 			/>
 
 			<SelectComponentModal

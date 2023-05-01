@@ -26,23 +26,25 @@ function Header(props) {
 	return (
 		<section className={styles.header}>
 			<div className={styles.button_wrapper}>
-				<div className={styles.button_flex}>
-					<button
-						className={styles.button_group}
-						onClick={goBack}
-						disabled={!canUndo}
-					>
-						<IcMUndo height="16px" width="16px" />
-					</button>
+				{modeType === 'edit' && (
+					<div className={styles.button_flex}>
+						<button
+							className={styles.button_group}
+							onClick={goBack}
+							disabled={!canUndo}
+						>
+							<IcMUndo height="16px" width="16px" />
+						</button>
 
-					<button
-						className={styles.button_group}
-						onClick={goForward}
-						disabled={!canRedo}
-					>
-						<IcMRedo height="16px" width="16px" />
-					</button>
-				</div>
+						<button
+							className={styles.button_group}
+							onClick={goForward}
+							disabled={!canRedo}
+						>
+							<IcMRedo height="16px" width="16px" />
+						</button>
+					</div>
+				)}
 
 				<Button
 					onClick={() => {

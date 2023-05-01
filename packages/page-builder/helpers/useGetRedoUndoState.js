@@ -1,7 +1,7 @@
 import isEqual from 'lodash.isequal';
 import { useMemo, useState } from 'react';
 
-function useGetRedoUndoState({ pageConfiguration, setPageConfiguration }) {
+function useGetRedoUndoState({ pageConfiguration, setPageConfiguration, handleUnselectItem }) {
 	const [states, setStates] = useState([pageConfiguration]);
 
 	const [redoUndoIndex, setRedoUndoIndex] = useState(0);
@@ -24,12 +24,14 @@ function useGetRedoUndoState({ pageConfiguration, setPageConfiguration }) {
 		const newIndex = Math.max(0, Number(redoUndoIndex) - (Number(steps) || 1));
 		setRedoUndoIndex(newIndex);
 		setPageConfiguration({ ...states[newIndex] });
+		handleUnselectItem();
 	};
 
 	const goForward = (steps = 1) => {
 		const goForwardIndex = Math.min(states.length - 1, Number(redoUndoIndex) + (Number(steps) || 1));
 		setRedoUndoIndex(goForwardIndex);
 		setPageConfiguration({ ...states[goForwardIndex] });
+		// handleUnselectItem();
 	};
 
 	return {

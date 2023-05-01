@@ -29,6 +29,7 @@ function DNDBody({
 	setEveryEvents,
 	goBack,
 	goForward,
+	handleUnselectItem,
 }) {
 	const [activeTab, setActiveTab] = useState('content');
 
@@ -78,6 +79,7 @@ function DNDBody({
 				redoUndoIndex={redoUndoIndex}
 				lastEventIndex={lastEventIndex}
 				setEveryEvents={setEveryEvents}
+				handleUnselectItem={handleUnselectItem}
 			/>
 		</section>
 	);
