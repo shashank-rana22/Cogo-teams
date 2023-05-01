@@ -15,16 +15,16 @@ const formatCargoArrivalData = (values) => {
 
 	Object.keys(values || {}).forEach((key) => {
 		if (containerKey.includes(key)) {
-			containerObj[key] = values[key] || '';
+			containerObj[key] = values?.[key] || '';
 		}
 
 		if (shipmentDetailsKey.includes(key)) {
-			shipmentDetailObj[key] = values[key] || '';
+			shipmentDetailObj[key] = values?.[key] || '';
 		} else if (
 			!shipmentDetailsKey.includes(key)
 			&& !containerKey.includes(key)
 		) {
-			formattedValues[key] = values[key] || '';
+			formattedValues[key] = values?.[key] || '';
 		}
 	});
 
