@@ -11,7 +11,7 @@ const getCreateTradePartnerParams = (values) => {
 		organization_id,
 		companyType,
 		...restValues
-	} = values;
+	} = values || {};
 
 	const [addressValue] = (address || '').split('::');
 

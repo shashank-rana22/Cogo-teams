@@ -2,11 +2,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetBusiness = (props) => {
-	const {
-		gstNumber = '',
-	} = props;
-
+const useGetBusiness = ({ gstNumber = '' }) => {
 	const [{ data }, trigger] = useRequest({
 		url    : '/get_business',
 		method : 'get',

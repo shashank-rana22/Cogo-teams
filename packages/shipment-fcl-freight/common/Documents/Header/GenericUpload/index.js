@@ -27,23 +27,23 @@ function GenericUpload({
 	};
 
 	const { apiTrigger, docLoading } = useCreateShipmentDocument({
-		documents: [
-			{
-				document_url : formValues?.upload_document?.finalUrl,
-				file_name    : formValues?.upload_document?.fileName,
-			},
-		],
 		refetch: afterCreateRefetch,
 	});
 
 	const onSubmit = () => {
-		const params = getCreateDocumentParams({
+		const documents = [
+			{
+				document_url : formValues?.upload_document?.finalUrl,
+				file_name    : formValues?.upload_document?.fileName,
+			},
+		];
+		const params = [...getCreateDocumentParams({
 			shipmentData: shipment_data,
 			formValues,
 			activeStakeholder,
 			selectSource,
 			orgId,
-		});
+		}), documents];
 
 		apiTrigger(params);
 	};

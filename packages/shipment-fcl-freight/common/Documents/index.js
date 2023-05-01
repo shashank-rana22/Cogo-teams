@@ -21,7 +21,7 @@ function Documents() {
 	const [activeWallet, setActiveWallet] = useState('trade_documents');
 	const [addToWallet, setAddToWallet] = useState(true);
 
-	const { updateDocument } = useUpdateDocument();
+	const { updateDocument } = useUpdateDocument({});
 	const { shipment_data, primary_service, activeStakeholder } = useContext(ShipmentDetailContext);
 
 	const {
@@ -47,14 +47,13 @@ function Documents() {
 		setShowDoc(showApproved);
 		setShowApproved(null);
 		if (addToWallet) {
-			await updateDocument({
-				values: {
-					name            : showApproved?.file_name || showApproved?.document_url,
-					document_type   : showApproved?.document_type,
-					image_url       : showApproved?.document_url,
-					organization_id : showApproved?.organization_id,
-				},
-			});
+			const values = {
+				name            : showApproved?.file_name || showApproved?.document_url,
+				document_type   : showApproved?.document_type,
+				image_url       : showApproved?.document_url,
+				organization_id : showApproved?.organization_id,
+			};
+			await updateDocument(values);
 		}
 	};
 

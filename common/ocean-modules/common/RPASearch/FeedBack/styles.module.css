@@ -27,7 +27,7 @@
 .styled_checkbox {
 	display: flex;
 	align-items: center;
-	justify-content: start;
+	justify-content: flex-start;
 }
 
 .text_feedback {
@@ -44,7 +44,7 @@
 .header {
 	display: flex;
 	align-items: center;
-	justify-content: start;
+	justify-content: flex-start;
 	margin-bottom: 12px;
 }
 

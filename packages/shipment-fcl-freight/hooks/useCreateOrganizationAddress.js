@@ -3,7 +3,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
 const useCreateOrganizationAddress = ({
-	refetch,
+	refetch = () => {},
 	successMessage = 'Successfully Created',
 }) => {
 	const [{ loading }, trigger] = useRequest({
@@ -14,7 +14,9 @@ const useCreateOrganizationAddress = ({
 	const apiTrigger = async (payload) => {
 		try {
 			await trigger({ data: payload });
+
 			Toast.success(successMessage);
+
 			refetch();
 		} catch (err) {
 			toastApiError(err);
@@ -22,7 +24,8 @@ const useCreateOrganizationAddress = ({
 	};
 
 	return {
-		apiTrigger, loading,
+		apiTrigger,
+		loading,
 	};
 };
 

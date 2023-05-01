@@ -13,9 +13,11 @@ export default function useListShipmentCancellationReasons() {
 	const getReasons = useCallback(async (payload) => {
 		try {
 			const res = await trigger({ params: payload });
+
 			setApiData(res?.data || {});
 		} catch (err) {
 			setApiData([]);
+
 			toastApiError(err);
 		}
 	}, [trigger]);

@@ -12,7 +12,7 @@ const formatForPayload = (
 	const finalPayload = {};
 
 	Object.keys(dataToSend || {}).forEach((key) => {
-		if (key.includes('service')) {
+		if (key?.includes('service')) {
 			finalPayload[key] = formatDataForService(
 				dataToSend[key],
 				rawValues,
@@ -21,12 +21,14 @@ const formatForPayload = (
 				primaryService,
 			);
 		}
+
 		if (key === 'documents') {
 			finalPayload[key] = formatDataForDocuments(
 				rawValues,
 				taskData,
 			);
 		}
+
 		if (key === 'shipment') {
 			finalPayload[key] = formatDataForShipment(
 				dataToSend[key],
@@ -34,10 +36,12 @@ const formatForPayload = (
 				taskData,
 			);
 		}
+
 		if (key === 'container_detail') {
 			finalPayload[key] = rawValues;
 		}
 	});
+
 	return finalPayload;
 };
 

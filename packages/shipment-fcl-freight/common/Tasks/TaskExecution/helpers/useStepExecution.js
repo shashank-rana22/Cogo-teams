@@ -29,7 +29,7 @@ function useStepExecution({
 
 	const formProps = useForm({ defaultValues });
 
-	const formValues = formProps.watch();
+	const formValues = formProps?.watch();
 
 	const { controls, showElements } = injectForm({
 		stepConfig,

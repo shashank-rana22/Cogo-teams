@@ -2,7 +2,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-function useGetShipmentProcess({ defaultParams, shipment_type }) {
+function useGetShipmentProcess({ defaultParams = {}, shipment_type = '' }) {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : `${shipment_type}/get_process`,
 		method : 'GET',

@@ -5,6 +5,7 @@ import DepartureDateSelect from './DepartureDateSelect';
 
 function DepartureDateSelectController(props) {
 	const { name, control, rules, ...rest } = props;
+
 	return (
 		<Controller
 			key={name}

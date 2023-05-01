@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 
 const useCreateOrganizationTradeParty = ({
 	successMessage = 'Successfully Created',
-	refetch,
+	refetch = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : 'create_organization_trade_party',
@@ -14,8 +14,10 @@ const useCreateOrganizationTradeParty = ({
 	const apiTrigger = async (payload) => {
 		try {
 			const res = await trigger({ data: payload });
+
 			if (!res.hasError) {
 				Toast.success(successMessage);
+
 				refetch();
 			}
 		} catch (err) {
@@ -24,7 +26,8 @@ const useCreateOrganizationTradeParty = ({
 	};
 
 	return {
-		apiTrigger, loading,
+		apiTrigger,
+		loading,
 	};
 };
 

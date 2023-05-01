@@ -73,14 +73,14 @@ function List() {
 						{selectedTaskId ? (
 							<>
 								<Card
-									task={tasksList.find((task) => task.id === selectedTaskId)}
+									task={tasksList?.find((task) => task.id === selectedTaskId)}
 									handleClick={handleClick}
 									isTaskOpen
 									loading={loading}
 								/>
 
 								<TaskExecution
-									task={tasksList.find((task) => task.id === selectedTaskId)}
+									task={tasksList?.find((task) => task.id === selectedTaskId)}
 									onCancel={() => setSelectedTaskId(null)}
 									taskListRefetch={taskListRefetch}
 									selectedMail={selectedMail}

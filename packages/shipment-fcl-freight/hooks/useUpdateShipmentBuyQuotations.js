@@ -14,8 +14,11 @@ const useUpdateShipmentBuyQuotations = ({
 	const apiTrigger = async (val) => {
 		try {
 			const res = await trigger({ data: val });
+
 			Toast.success(successMessage);
+
 			refetch();
+
 			return res;
 		} catch (err) {
 			toastApiError(err);

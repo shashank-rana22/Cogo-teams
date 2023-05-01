@@ -53,11 +53,12 @@ const useQuestionList = ({
 							persona           : scope === 'partner' ? 'admin_user' : 'importer_exporter',
 							q                 : search || query_name || undefined,
 						},
-						is_test_ongoing          : from === 'test_module' ? true : undefined,
-						sort_by                  : 'view_count',
+						is_test_ongoing            : from === 'test_module' ? true : undefined,
+						sort_by                    : 'view_count',
 						page,
-						faq_tags_data_required   : true,
-						faq_topics_data_required : true,
+						faq_tags_data_required     : true,
+						faq_topics_data_required   : true,
+						related_questions_required : !!query_name,
 					},
 				});
 			} catch (error) {

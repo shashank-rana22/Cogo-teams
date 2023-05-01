@@ -269,3 +269,15 @@ export const INDIA_COUNTRY_ID = '541d1232-58ce-4d64-83d6-556a42209eb7';
 export const GENERAL_ICON = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/General.svg';
 
 export const ECLAMATION_SVG = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg';
+
+export const FILTER_KEYS_MAPPING = {
+	requested  : { Statuses: 'reject_requested,resolve_requested' },
+	unresolved : { Status: 'unresolved' },
+	closed     : { Status: 'closed' },
+};
+
+export const PRIORITY_MAPPING = {
+	medium : '#F68B21',
+	high   : '#EE3425',
+	low    : '#FCDC00',
+};

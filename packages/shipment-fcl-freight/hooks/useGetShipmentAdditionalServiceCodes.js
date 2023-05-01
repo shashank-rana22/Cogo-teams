@@ -2,7 +2,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useState } from 'react';
 
-const useGetShipmentAdditionalServiceCodes = ({ shipment_id, defaultFilters }) => {
+const useGetShipmentAdditionalServiceCodes = ({ shipment_id = '', defaultFilters = {} }) => {
 	const [apiData, setApiData] = useState({});
 	const [filters, setFilters] = useState({});
 

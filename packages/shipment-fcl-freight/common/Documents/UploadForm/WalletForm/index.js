@@ -18,6 +18,7 @@ function WalletForm({
 	return (
 		<div>
 			<Modal.Header title="Document Wallet" />
+
 			<div className={styles.main_container}>
 				<div className={styles.header}>
 					<div className={styles.search_container}>
@@ -32,6 +33,7 @@ function WalletForm({
 						/>
 					</div>
 				</div>
+
 				<Tabs
 					activeTab={activeWallet}
 					onChange={setActiveWallet}
@@ -41,6 +43,7 @@ function WalletForm({
 
 					<TabPanel name="organization_documents" title="Organization Documents" />
 				</Tabs>
+
 				<Modal.Body>
 					<Wallet
 						showWalletDocs={showWalletDocs}
@@ -54,4 +57,5 @@ function WalletForm({
 		</div>
 	);
 }
+
 export default WalletForm;

@@ -8,7 +8,6 @@ export default function getCancelShipmentPayload(formValues, id) {
 		...(cancellation_reason === 'i_have_received_a_better_quotation/offer'
 			? {
 				cancellation_detail: { remarks },
-
 			} : {
 				cancellation_subreason: remarks,
 			}),

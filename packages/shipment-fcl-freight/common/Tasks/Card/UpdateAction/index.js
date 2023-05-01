@@ -102,23 +102,7 @@ function UpdateAction({ task = {}, hideThreeDots = false }) {
 						>
 							Change Owner
 						</div>
-						{/* {shipmentTags.includes('cogoverse')
-							&& task?.task === 'upload_booking_note' && (
-								<>
-									<Line />
 
-									<div
-										className={styles.task_action}
-										onClick={() => {
-											if (!bookingNoteDelayedLoading) sendBookingNoteDelayed(task?.shipment_id);
-										}}
-									>
-										{bookingNoteDelayedLoading
-											? 'Notifying'
-											: 'Notify Customer About Delay'}
-									</div>
-								</>
-						)} */}
 					</>
 				)}
 			>
@@ -128,7 +112,7 @@ function UpdateAction({ task = {}, hideThreeDots = false }) {
 					}
 					className={styles.action}
 				>
-					{!isMainServiceCancelled ? (
+					{!isMainServiceCancelled && !hideThreeDots ? (
 						<IcMOverflowDot
 							style={{
 								marginLeft : '12px',
@@ -146,14 +130,12 @@ function UpdateAction({ task = {}, hideThreeDots = false }) {
 			<UnableToDoTask
 				setShowUnableTo={setShowUnableTo}
 				showUnableTo={showUnableTo}
-				// refetch={refetch}
 				task={task}
 			/>
 
 			<UpdateAssignedStakeholder
 				setShowAdmin={setShowAdmin}
 				showAdmin={showAdmin}
-				// refetch={refetch}
 				task={task}
 			/>
 		</div>

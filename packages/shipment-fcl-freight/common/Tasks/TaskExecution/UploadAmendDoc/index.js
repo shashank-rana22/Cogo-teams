@@ -1,4 +1,4 @@
-import { Button, Toast } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
 import useListDocuments from '../../../../hooks/useListDocuments';
@@ -69,15 +69,7 @@ function UploadAmendDoc({
 			})),
 		};
 
-		const res = await updateDocument(finalPayload);
-
-		if (!res?.hasError) {
-			onClose();
-			refetch();
-			Toast.success('Task Completed Successfully');
-		} else {
-			Toast.error('Something went wrong !');
-		}
+		updateDocument(finalPayload);
 	};
 
 	return (

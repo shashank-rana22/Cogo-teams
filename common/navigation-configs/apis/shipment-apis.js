@@ -1426,6 +1426,11 @@ const apis = [
 		service_name : 'shipment',
 		feature      : 'revenue_desk',
 	},
+	{
+		api          : 'list_organization_assets',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
 ];
 
 export default apis;

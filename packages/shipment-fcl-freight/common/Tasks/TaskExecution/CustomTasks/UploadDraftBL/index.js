@@ -21,13 +21,13 @@ function UploadDraftBL({
 }) {
 	const [hblData, setHblData] = useState([]);
 	// const [hblLoading, setHblLoading] = useState(false);
-	// const [isAllHBLUploaded, setIsAllHblUploaded] = useState(false);
+	const [isAllHBLUploaded, setIsAllHblUploaded] = useState(false);
 	const [showSwitchGenerate, setShowSwitchGenerate] = useState(true);
 	// const [uploadedDocs, setuploadedDocs] = useState([]);
 	const [canUseSwitch, setcanUseSwitch] = useState(true);
 	const mblRef = useRef();
 
-	const isHBL =		(primaryService.bl_category || '').toLowerCase() === 'hbl';
+	const isHBL = (primaryService.bl_category || '').toLowerCase() === 'hbl';
 
 	const initial_step = primaryService.bl_category;
 
@@ -35,7 +35,7 @@ function UploadDraftBL({
 
 	const blCount = primaryService.bls_count;
 
-	const fcl_or_lcl_service =		(servicesList || []).find(
+	const fclOrLclService = (servicesList || []).find(
 		(service) => service?.service_type === 'fcl_freight_service'
 				|| service?.service_type === 'lcl_freight_service',
 	) || {};
@@ -47,7 +47,7 @@ function UploadDraftBL({
 	} = useListDocuments({
 		defaultParams: {
 			performed_by_org_id : task?.organization_id,
-			service_type        : fcl_or_lcl_service?.service_type,
+			service_type        : fclOrLclService?.service_type,
 			filters             : {
 				shipment_id   : task?.shipment_id,
 				document_type : 'draft_house_bill_of_lading',
@@ -65,6 +65,21 @@ function UploadDraftBL({
 			page_limit: 1000,
 		},
 	});
+
+	const customRefetchDocs = async () => {
+		setcanUseSwitch(false);
+		const condition = tradeDocList?.length >= blCount || uploadedDocs?.length >= blCount;
+
+		setIsAllHblUploaded(condition);
+		if (fclOrLclService.service_type === 'lcl_freight_service') {
+			refetchDocs();
+			onCancel();
+			return;
+		}
+		if (condition) {
+			setStep('mbl');
+		}
+	};
 
 	const {
 		listDocsAPI,
@@ -84,6 +99,8 @@ function UploadDraftBL({
 	const shipmentDocsLength = shipmentListDocsAPI?.data?.list?.length;
 	const tradeDocsLength = tradeDocList?.list?.length;
 	const showUploadView = shipmentDocsLength > 0 && tradeDocsLength === 0;
+
+	const isNextDisabled = (isHBL && !isAllHBLUploaded) || ((!isHBL || isAllHBLUploaded));
 
 	const handleClickOnNext = async () => {
 		if (step === 'hbl') {
@@ -119,7 +136,7 @@ function UploadDraftBL({
 					) : null}
 
 					<Button
-						// disabled={isNextDisabled}
+						disabled={isNextDisabled}
 						onClick={handleClickOnNext}
 						id="bm_pt_bl_upload_submit"
 					>
@@ -148,26 +165,24 @@ function UploadDraftBL({
 											hblData={hblData[i] || tradeDocList?.list?.[i]?.data}
 												// onSave={(v) => handleSaveHBL(i, v)}
 											shipmentData={shipmentData}
-											primaryService={primaryService}
+											primaryService={fclOrLclService}
 										/>
 									</div>
 								))}
-							{/* {!isAllHBLUploaded ? (
-									<div className={styles.flex_end}>
-										<Button
-											disabled={hblLoading || hblData?.length !== blCount}
-											onClick={saveAllBls}
-											size="sm"
-											id="bm_pt_bl_upload_save_all_hbls"
-										>
-											Save All HBLs
-										</Button>
-									</div>
-								) : null} */}
+							{!isAllHBLUploaded ? (
+								<div className={styles.flex_end}>
+									<Button
+										disabled={hblData?.length !== blCount}
+										// onClick={saveAllBls}
+									>
+										Save All HBLs
+									</Button>
+								</div>
+							) : null}
 						</>
 					) : (
 						<UploadHbl
-							refetchDocs={refetchDocs}
+							refetchDocs={customRefetchDocs}
 							task={task}
 							bls_count={blCount}
 							docs={uploadedDocs?.list}

@@ -284,6 +284,18 @@ function asyncListCogoEntity() {
 		},
 	};
 }
+function asyncFieldsTicketTypes() {
+	return {
+		labelKey     : 'TicketType',
+		valueKey     : 'TicketType',
+		endpoint     : 'default_types',
+		authkey      : 'get_tickets_default_types',
+		microService : 'tickets',
+		initialCall  : true,
+		qFilterKey   : 'QFilter',
+		listKey      : 'items',
+	};
+}
 
 function asyncListHsCodes() {
 	return {
@@ -292,7 +304,7 @@ function asyncListHsCodes() {
 		endpoint    : 'list_hs_codes',
 		initialCall : false,
 		params      : {
-			page_limit: 20,
+			page_limit: 10,
 		},
 	};
 }
@@ -336,4 +348,5 @@ export {
 	asyncListCogoEntity,
 	asyncListHsCodes,
 	asyncListCurrency,
+	asyncFieldsTicketTypes,
 };

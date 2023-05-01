@@ -57,6 +57,7 @@ function ShipmentDetailsCard({
 		bankName = '',
 		accountNumber = '',
 		ifscCode = '',
+		beneficiaryName = '',
 	} = sellerBankDetail || {};
 
 	const {
@@ -463,9 +464,15 @@ function ShipmentDetailsCard({
 
 										<div className={styles.billing_party_container}>
 											<div className={styles.margin_bottom}>
-												Name -
+												Collection Party Name -
 												{' '}
 												<span>{organizationName}</span>
+											</div>
+											<div className={styles.margin_bottom}>
+												{' '}
+												Beneficiary Name-
+												{' '}
+												<span>{beneficiaryName}</span>
 											</div>
 											<div className={styles.margin_bottom}>
 												{' '}
