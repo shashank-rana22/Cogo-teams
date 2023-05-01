@@ -27,11 +27,11 @@ function Price({
 		const addedService = (data.services || []).find(
 			(service) => service.service_type === data.service_type,
 		);
-		const { name, code, shipmentId, service_type } = data;
+		const { name, code, shipment_id, service_type } = data;
 		const payload = {
 			name,
 			code,
-			shipment_id           : shipmentId,
+			shipment_id,
 			service_type,
 			service_id            : addedService?.id,
 			is_rate_available     : false,
