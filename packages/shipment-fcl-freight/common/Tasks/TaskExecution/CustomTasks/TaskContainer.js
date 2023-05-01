@@ -6,7 +6,7 @@ import incoTermMapping from './inco-term-mapping.json';
 import styles from './styles.module.css';
 
 function TaskContainer({
-	// children,
+
 	loading = false,
 	task,
 	actions,
@@ -22,9 +22,9 @@ function TaskContainer({
 				<div size={16}>
 					{taskName}
 				</div>
+
 				{loading ? null : <div className={styles.flex}>{actions}</div>}
 			</div>
-			{/* {loading ? <div align="center">Loading ...</div> : children} */}
 		</div>
 	);
 }

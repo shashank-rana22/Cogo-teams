@@ -31,17 +31,6 @@ function GenerateFreightCertificate({
 
 	const formValue = watch();
 
-	// useEffect(() => {
-	// 	(containersData || [])?.forEach((ele, index) => {
-	// 		setValue(
-	// 			`is_hazardous-${index + 1}`,
-	// 			containersData?.[index]?.is_hazardous
-	// 				? `hazardous-${ele?.container_size}-${ele?.container_type}`
-	// 				: `non_hazardous-${ele?.container_size}-${ele?.container_type}`,
-	// 		);
-	// 	});
-	// }, [JSON.stringify(containersArray || [])]);
-
 	const { apiTrigger: updateTask } = useUpdateShipmentPendingTask({ });
 
 	const { apiTrigger: generateCertificate, loading: generateLoading } = useGenerateFreightCertificate({});
