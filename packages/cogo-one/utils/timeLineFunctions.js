@@ -26,32 +26,7 @@ function timeLineFunctions() {
 		return time;
 	};
 
-	const renderStatement = ({ type = '', present = '', previous = '', startAt = null, voiceCallStatus = '' }) => {
-		switch (type) {
-			case 'assigned':
-				if (startAt === null) {
-					return `${previous} assigned this chat as spectator to ${present}`;
-				}
-				return `${previous} assigned this chat to ${present}`;
-			case 'escalate':
-				return `This chat has been escalated to ${present}`;
-			case 'closed':
-				return `This chat has been closed by ${previous}`;
-			case 'assign_to_me':
-				return `${previous} assigned this chat to himself`;
-			case 'auto_assign':
-				return `This chat is auto assigned to ${present}`;
-			case 'requested_to_chat':
-				return `${previous} requested ${present} to assign this chat`;
-			case 'incoming':
-				return `${present} got incoming call from ${previous}. he/she ${voiceCallStatus}`;
-			case 'outgoing':
-				return `${present} called ${previous}. he/she ${voiceCallStatus}`;
-			default:
-				return null;
-		}
-	};
-	return { renderDuration, renderStatement, callStatus };
+	return { renderDuration, callStatus };
 }
 
 export default timeLineFunctions;

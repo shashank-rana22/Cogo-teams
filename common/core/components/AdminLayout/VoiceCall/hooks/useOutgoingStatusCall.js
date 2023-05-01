@@ -24,7 +24,7 @@ function useOutgoingStatusCall({ callId }) {
 					call_record_id,
 				},
 			});
-			const { call_status = '', live_call_status = '' } = res.data;
+			const { call_status = '', live_call_status = '' } = res.data || {};
 			setStatus(live_call_status);
 			if (live_call_status === 'completed') {
 				dispatch(
