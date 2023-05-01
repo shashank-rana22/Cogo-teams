@@ -14,8 +14,9 @@ function Overview({ time_taken, topics_covered }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.component_heading}>Overview</div>
+
 			<div className={styles.items_container}>
-				<div className={styles.single_item_container} style={{ marginBottom: '40px' }}>
+				<div className={styles.single_item_container} style={{ marginBottom: '20px' }}>
 					<div className={styles.svg}><IcMActivePlans /></div>
 					<div className={styles.text_container}>
 						<div className={styles.item_heading}>Topics Covered</div>

@@ -11,7 +11,7 @@ import useUpdateTestUserMapping from './hooks/useUpdateTestUserMapping';
 import styles from './styles.module.css';
 import getTableColumns from './TableColumns';
 
-function StudentsComponent({ test_id }) {
+function StudentsComponent({ test_id, status }) {
 	const router = useRouter();
 
 	const [showModal, setShowModal] = useState(false);
@@ -56,6 +56,7 @@ function StudentsComponent({ test_id }) {
 		handleDelete,
 		setUserId,
 		router,
+		status,
 	});
 
 	useEffect(() => {

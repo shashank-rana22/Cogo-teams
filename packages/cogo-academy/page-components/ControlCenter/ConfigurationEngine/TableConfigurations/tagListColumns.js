@@ -23,7 +23,7 @@ function tagListColumns({
 			Header   : 'TAG NAME',
 			accessor : (items) => (
 				<div className={styles.question}>
-					{startCase(items?.name) || '--'}
+					{startCase(items?.display_name || '') || '--'}
 				</div>
 			),
 		},
@@ -31,7 +31,7 @@ function tagListColumns({
 			Header   : 'TAG DESCRIPTION',
 			accessor : (items) => (
 				<div className={styles.topics}>
-					{startCase(items?.description) || '--'}
+					{startCase(items?.description || '') || '--'}
 				</div>
 			),
 		},
@@ -41,7 +41,7 @@ function tagListColumns({
 				const { author = {} } = items || {};
 				return (
 					<div className={styles.tags}>
-						{startCase(author?.name) || '--'}
+						{startCase(author?.name || '') || '--'}
 					</div>
 				);
 			},

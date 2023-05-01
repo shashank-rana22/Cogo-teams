@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
@@ -92,13 +92,11 @@ function FilterComponents({
 	};
 	return (
 		<form className={styles.container} onSubmit={handleSubmit(handleClick)}>
-			<div className={styles.header}>
+			<div className={cl`${styles.sticky_boxshadow_styles} ${styles.header}`}>
 				<div className={styles.title}>
 					Filters
 					{checkFiltersCount ? ` (${checkFiltersCount})` : ''}
-
 				</div>
-
 				<div className={styles.styled_icon}>
 					{checkFiltersCount
 						? (
@@ -112,13 +110,14 @@ function FilterComponents({
 						) : null}
 				</div>
 			</div>
-			{filterControls.map((field) => (
-				<div className={styles.filter_container} key={field.name}>
-					{renderComp(field)}
-				</div>
-			))}
-
-			<div className={styles.actions}>
+			<div className={styles.filters_container}>
+				{filterControls.map((field) => (
+					<div className={styles.filter_container} key={field.name}>
+						{renderComp(field)}
+					</div>
+				))}
+			</div>
+			<div className={cl`${styles.sticky_boxshadow_styles} ${styles.footer}`}>
 				<Button size="md" themeType="tertiary" onClick={() => setFilterVisible(false)}>Cancel</Button>
 				<Button size="md" themeType="accent" type="submit">Apply</Button>
 			</div>
