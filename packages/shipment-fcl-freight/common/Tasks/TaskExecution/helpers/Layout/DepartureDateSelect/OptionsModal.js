@@ -30,10 +30,9 @@ function ModalContent({
 				<div className={styles.heading}>Please tell us the departure dates</div>
 
 				<div className={styles.container}>
-					{allOptions.map((week, i) => {
-						const weekValues = week.filter((item) => (
-							(multiSelected || []).filter((element) => isSameDay(element, item.key))
-								.length > 0
+					{allOptions?.map((week, i) => {
+						const weekValues = week?.filter((item) => (
+							(multiSelected || []).filter((element) => isSameDay(element, item?.key))?.length > 0
 						));
 
 						return (

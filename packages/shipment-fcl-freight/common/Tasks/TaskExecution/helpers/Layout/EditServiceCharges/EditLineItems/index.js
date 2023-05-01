@@ -14,14 +14,9 @@ function EditLineItems({
 
 	return (
 		<div className={styles.container}>
+			<CargoDetails primary_service={cargoDetails} />
 
-			<div>
-				<CargoDetails primary_service={cargoDetails} />
-			</div>
-
-			<div>
-				<Header controls={controls} />
-			</div>
+			<Header controls={controls} />
 
 			<div className={styles.child_container}>
 				{fields?.map((field, index) => (
@@ -39,9 +34,7 @@ function EditLineItems({
 				))}
 			</div>
 
-			<div>
-				<Button onClick={() => append(emptyValue)}>Add</Button>
-			</div>
+			<Button onClick={() => append(emptyValue)}>Add</Button>
 		</div>
 	);
 }

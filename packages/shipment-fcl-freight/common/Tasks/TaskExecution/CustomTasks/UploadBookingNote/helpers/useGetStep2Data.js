@@ -21,6 +21,7 @@ const useGetStep2Data = ({
 	formattedRate = {},
 	servicesList,
 	setStep = () => {},
+	shipment_data = {},
 }) => {
 	const [bookingNote, setBookingNote] = useState(0);
 
@@ -114,11 +115,22 @@ const useGetStep2Data = ({
 			}
 		});
 
+		const importLocalService = shipment_data?.all_services?.filter(
+			(service) => service?.service_type === 'fcl_freight_local_service',
+		)?.[0];
+
 		if (formattedRate?.primary_service) {
 			formValuesForFcl.service_provider_id = formattedRate?.[primary_service.id]?.service_provider_id;
+
 			formValuesForFcl.shipping_line_id =	formattedRate?.[primary_service.id]?.shipping_line_id;
-			formValuesForLocal.service_provider_id = formattedRate?.[primary_service.id]?.service_provider_id;
-			formValuesForLocal.shipping_line_id = formattedRate?.[primary_service.id]?.shipping_line_id;
+
+			formValuesForLocal.service_provider_id = shipment_data?.main_service_trade_type === 'import'
+				? importLocalService?.service_provider_id
+				: formattedRate[primary_service.id]?.service_provider_id;
+
+			formValuesForLocal.shipping_line_id = shipment_data?.main_service_trade_type === 'import'
+				? importLocalService?.shipping_line_id
+				: formattedRate[primary_service.id]?.shipping_line_id;
 		}
 
 		const payloadForUpdateShipment = {
