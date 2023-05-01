@@ -30,7 +30,6 @@ function BookingRequirements({ showBookingReq = false, setShowBookingReq = () =>
 
 	return (
 		<div>
-
 			<Modal
 				show={showBookingReq}
 				onClose={() => setShowBookingReq(false)}
@@ -39,10 +38,11 @@ function BookingRequirements({ showBookingReq = false, setShowBookingReq = () =>
 				className={styles.modal_content}
 			>
 				<Modal.Header title="Booking Requirements" />
-				<Modal.Body>
 
+				<Modal.Body>
 					<div>
 						<div className={styles.heading}>Demand Side :</div>
+
 						<div>
 							<div className={styles.detail_container}>
 								{multiServiceDetails?.map((obj) => (
@@ -60,10 +60,11 @@ function BookingRequirements({ showBookingReq = false, setShowBookingReq = () =>
 										}) : null))}
 							</div>
 						</div>
+
 						<div>
 							<hr />
-
 							<div className={styles.heading}>Supply Side :</div>
+
 							<div className={styles.detail_container}>
 								{supplyDetails?.map((obj) => (
 									getByKey(main_service, obj.key)
@@ -73,7 +74,6 @@ function BookingRequirements({ showBookingReq = false, setShowBookingReq = () =>
 										}) : null))}
 							</div>
 						</div>
-
 					</div>
 				</Modal.Body>
 			</Modal>
