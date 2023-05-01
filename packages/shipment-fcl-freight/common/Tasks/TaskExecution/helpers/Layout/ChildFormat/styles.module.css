@@ -1,0 +1,56 @@
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+}
+
+.fieldarray {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	margin: 4px;
+}
+
+.child {
+	width: 100%;
+}
+
+.add_button_container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.label {
+	margin-bottom: 6px;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}
+
+.add_button_text {
+	font-size: var(--font-size-md);
+}
+
+.element {
+	padding: 4px;
+
+	/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+	:global {
+		.ui_select_input_placeholder {
+			font-size: 14px;
+			font-weight: 400;
+			color: #bdbdbd;
+		}
+
+		.ui_input_control::placeholder {
+			font-size: 14px;
+			font-weight: 400;
+			color: #bdbdbd;
+		}
+
+		.ui_upload_droparea_subheading {
+			text-align: center;
+			opacity: 0.3;
+		}
+	}
+}

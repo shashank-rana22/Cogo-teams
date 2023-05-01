@@ -1,7 +1,6 @@
 import { Toast } from '@cogoport/components';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-
-import toastApiError from '../utils/toastApiError';
 
 const useUpdateShipmentContainerDetails = ({
 	refetch = () => {},
@@ -16,7 +15,9 @@ const useUpdateShipmentContainerDetails = ({
 		if (update_data?.length !== 0) {
 			try {
 				await trigger({ data: { update_data } });
+
 				Toast.success(successMessage);
+
 				refetch();
 			} catch (err) {
 				toastApiError(err);
