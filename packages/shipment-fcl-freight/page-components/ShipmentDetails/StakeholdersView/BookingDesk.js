@@ -42,10 +42,6 @@ function BookingDesk({ get = {}, activeStakeholder = '' }) {
 		activeStakeholder,
 	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
-	const handleClick = () => {
-		router.reload();
-	};
-
 	useEffect(() => {
 		router.prefetch(router.asPath);
 	}, [router]);
@@ -59,16 +55,16 @@ function BookingDesk({ get = {}, activeStakeholder = '' }) {
 		);
 	}
 
-	if (!shipment_data && getShipmentStatusCode !== 403 && getShipmentStatusCode !== undefined) {
+	if (!shipment_data && ![403, undefined].includes(getShipmentStatusCode)) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.section}>
-					<h1 className={styles.error}>404</h1>
+					<h2 className={styles.error}>Something Went Wrong!</h2>
 
-					<div className={styles.page}>Ooops!!! The page you are looking for is not found</div>
+					<div className={styles.page}>We are looking into it.</div>
 
 					<Button
-						onClick={handleClick}
+						onClick={() => router.reload()}
 						className={styles.refresh}
 					>
 						<IcMRefresh />

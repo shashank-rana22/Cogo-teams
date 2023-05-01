@@ -41,33 +41,15 @@ function UpdateAction({ task = {}, hideThreeDots }) {
 					interactive
 					theme="light"
 					content={(
-						<div style={{ fontSize: '10px' }}>
+						<div className={styles.mobile_number}>
 							{`${task?.stakeholder?.mobile_country_code}-${task?.stakeholder?.mobile_number}`}
 						</div>
 					)}
 				>
-					<div>
-						<IcMCall
-							style={{
-								marginLeft : '20px',
-								cursor     : 'pointer',
-								width      : '18px',
-								height     : '18px',
-								color      : '#000000',
-							}}
-						/>
-					</div>
+					<IcMCall className={styles.call_icon} />
 				</Tooltip>
 			) : (
-				<div
-					style={{
-						marginLeft : '20px',
-						cursor     : 'pointer',
-						width      : '18px',
-						height     : '18px',
-						color      : '#000000',
-					}}
-				/>
+				<div className={styles.call_icon} />
 			)}
 
 			<Popover
@@ -113,16 +95,9 @@ function UpdateAction({ task = {}, hideThreeDots }) {
 					className={styles.action}
 				>
 					{!isMainServiceCancelled && !hideThreeDots ? (
-						<IcMOverflowDot
-							style={{
-								marginLeft : '12px',
-								width      : '20px',
-								height     : '20px',
-								color      : '#000000',
-							}}
-						/>
+						<IcMOverflowDot className={styles.overflow_icon} />
 					) : (
-						<div style={{ paddingRight: '40px' }} />
+						<div className={styles.overflow_div} />
 					)}
 				</div>
 			</Popover>

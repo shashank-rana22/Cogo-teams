@@ -22,21 +22,23 @@ function UpdateButton({
 	show = false,
 }) {
 	if (hideButton) {
-		return (
-			<div />
-		);
+		return null;
 	}
 
 	let buttonText = 'Update';
+
 	if (task?.task_type?.includes('approve_quote')) {
 		buttonText = 'Approve Quote';
 	}
+
 	if (task?.task_type?.includes('amend_quote')) {
 		buttonText = 'Amend Quote';
 	}
+
 	if (task?.task_type === 'upload_document') {
 		buttonText = 'Upload';
 	}
+
 	if (task?.task_type === 'approve_document') {
 		buttonText = 'Review';
 	}
@@ -44,8 +46,8 @@ function UpdateButton({
 	const disableTask = disabledStakeholders.includes(task?.assigned_stakeholder);
 
 	if (
-		rpaSupportedTasks.includes(task.task)
-		&& (task.task !== 'upload_si' || shipment_type === 'fcl_freight')
+		rpaSupportedTasks.includes(task?.task)
+		&& (task?.task !== 'upload_si' || shipment_type === 'fcl_freight')
 	) {
 		return (
 			<div className={styles.container}>

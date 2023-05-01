@@ -35,6 +35,7 @@ function BookingRequirements({ showBookingReq = false, setShowBookingReq = () =>
 				onClose={() => setShowBookingReq(false)}
 				placement="top"
 				size="lg"
+				closeOnOuterClick={false}
 				className={styles.modal_content}
 			>
 				<Modal.Header title="Booking Requirements" />
@@ -63,6 +64,7 @@ function BookingRequirements({ showBookingReq = false, setShowBookingReq = () =>
 
 						<div>
 							<hr />
+
 							<div className={styles.heading}>Supply Side :</div>
 
 							<div className={styles.detail_container}>
