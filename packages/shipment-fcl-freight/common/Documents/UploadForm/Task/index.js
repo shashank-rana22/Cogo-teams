@@ -21,7 +21,7 @@ function Task({ showDoc = {}, setShowDoc = () => {}, refetch = () => {} }) {
 			<TaskCard
 				task={pendingItem}
 				onCancel={() => handleClick(pendingItem)}
-				refetch={refetch}
+				taskListRefetch={refetch}
 				type="modal"
 			/>
 		</div>

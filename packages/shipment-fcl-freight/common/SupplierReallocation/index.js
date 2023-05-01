@@ -32,13 +32,18 @@ function SupplierReallocation({
 	isAdditional = false,
 }) {
 	const { shipment_data, refetch, refetchServices } = useContext(ShipmentDetailContext);
-	const { documents, shipment_type } = shipment_data || {};
+	const { documents, shipment_type, trade_type = '', payment_term = '' } = shipment_data || {};
 
 	const serviceObj = serviceData?.[0] || {};
 	const { service_type, importer_exporter } = serviceObj || {};
 
 	const { defaultValues, controls, showAllControls } = getControls({
-		serviceObj, shipment_type, documents, isAdditional,
+		serviceObj,
+		shipment_type,
+		documents,
+		isAdditional,
+		trade_type,
+		payment_term,
 	});
 
 	const { handleSubmit, control, formState: { errors } } = useForm({ defaultValues });
