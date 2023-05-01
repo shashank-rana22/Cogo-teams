@@ -7,12 +7,19 @@ interface Props {
 	inputValues?:{ remarks?:string },
 }
 
+interface PropsData {
+	refetch?:()=>void,
+	setShowModal?:(p:any)=>void,
+	id?: string | number,
+	sezRequest?:object,
+}
+
 const useSezApproveReject = ({
 	refetch,
 	setShowModal,
 	id,
 	sezRequest,
-}) => {
+}:PropsData) => {
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
 	}));
