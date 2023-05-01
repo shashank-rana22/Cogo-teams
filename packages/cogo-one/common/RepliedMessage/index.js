@@ -1,6 +1,6 @@
 import { startCase } from '@cogoport/utils';
 
-import MessageBody from '../../../../../../common/MessageBody';
+import MessageBody from '../MessageBody';
 
 import styles from './styles.module.css';
 

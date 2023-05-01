@@ -296,6 +296,19 @@ function asyncAccountEngagementScoringEvents() {
 	};
 }
 
+function asyncFieldsTicketTypes() {
+	return {
+		labelKey     : 'TicketType',
+		valueKey     : 'TicketType',
+		endpoint     : 'default_types',
+		authkey      : 'get_tickets_default_types',
+		microService : 'tickets',
+		initialCall  : true,
+		qFilterKey   : 'QFilter',
+		listKey      : 'items',
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -320,4 +333,5 @@ export {
 	listVendors,
 	asyncListCogoEntity,
 	asyncAccountEngagementScoringEvents,
+	asyncFieldsTicketTypes,
 };
