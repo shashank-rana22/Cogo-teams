@@ -26,7 +26,7 @@ function timeLineFunctions() {
 		return time;
 	};
 
-	const renderStatement = ({ type = '', present = '', previous = '', startAt = null }) => {
+	const renderStatement = ({ type = '', present = '', previous = '', startAt = null, voiceCallStatus = '' }) => {
 		switch (type) {
 			case 'assigned':
 				if (startAt === null) {
@@ -43,6 +43,10 @@ function timeLineFunctions() {
 				return `This chat is auto assigned to ${present}`;
 			case 'requested_to_chat':
 				return `${previous} requested ${present} to assign this chat`;
+			case 'incoming':
+				return `${present} got incoming call from ${previous}. he/she ${voiceCallStatus}`;
+			case 'outgoing':
+				return `${present} called ${previous}. he/she ${voiceCallStatus}`;
 			default:
 				return null;
 		}

@@ -26,6 +26,13 @@ const useListQuestions = ({ test_id }) => {
 			},
 			title: 'Case Study Based',
 		},
+		subjective: {
+			payload: {
+				filters: { question_type: 'subjective', q: query, test_id },
+				...params,
+			},
+			title: 'Subjective',
+		},
 	};
 
 	const { payload } = QUESTIONS_MAPPING[activeTab];

@@ -10,12 +10,12 @@ import { isEmpty } from '@cogoport/utils';
 import { useRef, useEffect } from 'react';
 
 import CustomFileUploader from '../../../../../common/CustomFileUploader';
+import ReceiveDiv from '../../../../../common/ReceiveDiv';
+import SentDiv from '../../../../../common/SentDiv';
 import useGetEmojiList from '../../../../../hooks/useGetEmojis';
 import getFileAttributes from '../../../../../utils/getFileAttributes';
 
 import EmojisBody from './EmojisBody';
-import ReceiveDiv from './ReceiveDiv';
-import SentDiv from './SentDiv';
 import styles from './styles.module.css';
 import TimeLine from './TimeLine';
 
@@ -51,6 +51,8 @@ function MessageConversations({
 	communicationLoading = false,
 	lastPage = false,
 	messageLoading = false,
+	formattedData = {},
+	setRaiseTicketModal = () => {},
 }) {
 	const messageRef = useRef();
 	const { id = '', channel_type = '', new_user_message_count = 0, user_name = '' } = activeMessageCard;
@@ -98,6 +100,21 @@ function MessageConversations({
 		}
 	};
 
+	const ticketPopoverContent = (data) => {
+		const triggerModal = () => {
+			setRaiseTicketModal((p) => {
+				if (p?.state) {
+					return { state: false, data: {}, source: null };
+				}
+				return { state: true, data: { messageData: data, formattedData }, source: 'message' };
+			});
+		};
+		return (
+			<div className={styles.raise_ticket} role="button" tabIndex={0} onClick={triggerModal}>
+				Raise a ticket
+			</div>
+		);
+	};
 	useEffect(() => {
 		if (id) {
 			emojiListFetch();
@@ -181,6 +198,7 @@ function MessageConversations({
 					eachMessage={eachMessage}
 					activeMessageCard={activeMessageCard}
 					messageStatus={channel_type === 'platform_chat' && !(index >= unreadIndex)}
+					ticketPopoverContent={ticketPopoverContent}
 					user_name={user_name}
 				/>
 			))}
@@ -252,7 +270,8 @@ function MessageConversations({
 							{(suggestions || []).map((eachSuggestion) => (
 								<div
 									className={styles.tag_div}
-									role="presentation"
+									role="button"
+									tabIndex={0}
 									onClick={() => {
 										if (hasPermissionToEdit && !messageLoading) {
 											sentQuickSuggestions(
@@ -262,7 +281,8 @@ function MessageConversations({
 										}
 									}}
 									style={{
-										cursor: (!hasPermissionToEdit || messageLoading) ? 'not-allowed' : 'pointer',
+										cursor:
+											(!hasPermissionToEdit || messageLoading) ? 'not-allowed' : 'pointer',
 									}}
 								>
 									{eachSuggestion}
