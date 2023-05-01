@@ -327,6 +327,7 @@ function GenerateMAWB({
 						item={item}
 						setGenerate={setGenerate}
 						handleSubmit={handleSubmit}
+						category={category}
 						activeCategory={activeCategory}
 						hawbDetails={hawbDetails}
 						setHawbDetails={setHawbDetails}

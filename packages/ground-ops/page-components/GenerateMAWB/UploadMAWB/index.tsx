@@ -9,7 +9,8 @@ import styles from '../styles.module.css';
 import uploadControls from './controls';
 
 function UploadMAWB({
-	item, edit, setEdit, setGenerate, activeCategory, activeHawb, hawbDetails, setHawbDetails, setActiveHawb, taskItem,
+	item, edit, setEdit, setGenerate, activeCategory, activeHawb,
+	hawbDetails, setHawbDetails, setActiveHawb, taskItem, category,
 }) {
 	const { control, handleSubmit, setValue, formState: { errors } } = useForm();
 	const fields = uploadControls();
@@ -30,7 +31,7 @@ function UploadMAWB({
 			uploaded_by_org_id  : item?.serviceProviderId,
 			performed_by_org_id : item?.serviceProviderId,
 			document_type       : activeCategory === 'mawb' ? 'draft_airway_bill' : 'draft_house_airway_bill',
-			id                  : item?.documentId,
+			id                  : category === 'mawb' ? taskItem?.documentId : taskItem?.id,
 			service_id          : item?.serviceId,
 			service_type        : 'air_freight_service',
 			pending_task_id     : item?.id,

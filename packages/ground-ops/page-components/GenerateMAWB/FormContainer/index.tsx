@@ -23,7 +23,7 @@ const options = [
 
 function FormContainer({
 	back, setBack, edit, setEdit, packingData, fields,
-	control, errors, item, setGenerate, handleSubmit, activeCategory, hawbDetails,
+	control, errors, item, setGenerate, handleSubmit, category, activeCategory, hawbDetails,
 	setHawbDetails, activeHawb, setActiveHawb, activeKey, setActiveKey, taskItem,
 }) {
 	const [value, onChange] = useState('manual');
@@ -189,6 +189,7 @@ function FormContainer({
 					hawbDetails={hawbDetails}
 					setHawbDetails={setHawbDetails}
 					setActiveHawb={setActiveHawb}
+					category={category}
 				/>
 			) : (
 				<>
