@@ -9,7 +9,7 @@ interface Props {
 
 interface PropsData {
 	refetch?:()=>void,
-	setShowModal?:(p:any)=>void,
+	setShowModal?:(p:boolean)=>void,
 	id?: string | number,
 	sezRequest?:object,
 }
