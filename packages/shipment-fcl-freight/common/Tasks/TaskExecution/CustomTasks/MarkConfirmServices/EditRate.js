@@ -1,6 +1,5 @@
 import { Loader } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { isEmpty } from '@cogoport/utils';
 
 import FormLayout from '../../helpers/Layout';
 import getDefaultValues from '../../utils/get-default-values';
@@ -36,14 +35,6 @@ function EditRate({
 		servicesList,
 		subsidiaryService,
 	});
-
-	if (!isEmpty(servicesList)) {
-		(servicesList || []).forEach((service) => {
-			if (service?.service_type === 'subsidiary_service') {
-				// serviceProviderName = service?.service_provider?.id;
-			}
-		});
-	}
 
 	const requiredControls = requiredRawControls.map((ctrl) => ({
 		...ctrl,
