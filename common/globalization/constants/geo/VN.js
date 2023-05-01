@@ -171,24 +171,20 @@ export default {
 	options: {
 		registration_types: [
 			{
-				label : 'Private Limited Company',
-				value : 'private_limited',
+				label : 'Limited Liability Company',
+				value : 'limited_liability_company',
 			},
 			{
-				label : 'Public Limited Company',
-				value : 'public_limited',
+				label : 'Joint Stock Company',
+				value : 'joint_stock_company',
 			},
 			{
-				label : 'Partnership',
-				value : 'partnership',
+				label : 'Representative Office',
+				value : 'representative_office',
 			},
 			{
-				label : 'Proprietorship',
-				value : 'proprietorship',
-			},
-			{
-				label : 'Limited Liability Partnership',
-				value : 'limited_liability_partnership',
+				label : 'Branch',
+				value : 'branch',
 			},
 		],
 		country_truck_type : 'Open_body_1_ton',

@@ -3,8 +3,8 @@ import { IcMCross, IcMListView, IcMTick, IcMDoubleTick } from '@cogoport/icons-r
 import { format, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import MessageBody from '../../../../../../common/MessageBody';
-import { LOGO_URL } from '../../../../../../constants';
+import { LOGO_URL } from '../../constants';
+import MessageBody from '../MessageBody';
 
 import styles from './styles.module.css';
 
