@@ -218,11 +218,11 @@ function asyncAllotBanks() {
 }
 function asyncShippingLines() {
 	return {
-		labelKey    : 'name',
-		valueKey    : 'id',
-		endpoint    : 'get_saas_container_shipping_lines',
-		initialCall : false,
-		// microService : 'business_finance',
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : 'get_saas_container_shipping_lines',
+		initialCall  : false,
+		microService : 'saas_traceability',
 	};
 }
 
@@ -293,6 +293,18 @@ function asyncListCogoEntity() {
 		},
 	};
 }
+function asyncFieldsTicketTypes() {
+	return {
+		labelKey     : 'TicketType',
+		valueKey     : 'TicketType',
+		endpoint     : 'default_types',
+		authkey      : 'get_tickets_default_types',
+		microService : 'tickets',
+		initialCall  : true,
+		qFilterKey   : 'QFilter',
+		listKey      : 'items',
+	};
+}
 
 export {
 	asyncFieldsLocations,
@@ -318,4 +330,5 @@ export {
 	asyncKamExpertiseGroupOptions,
 	listVendors,
 	asyncListCogoEntity,
+	asyncFieldsTicketTypes,
 };

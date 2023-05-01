@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import { useEffect } from 'react';
 
 import getFieldsByTab from '../../../constants/config';
 import useGetMilestones from '../hooks/useGetMilestones';
@@ -12,7 +13,7 @@ function PageView({
 	onClickCard = () => {},
 	sideBar,
 }) {
-	const { list, filters, loading, hookSetters } = useGetMilestones({ sideBar });
+	const { list, filters = {}, loading, hookSetters } = useGetMilestones({ sideBar });
 
 	const { data = [], fullResponse } = list || {};
 	const { shipping_lines = {} } = fullResponse || {};

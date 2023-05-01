@@ -32,11 +32,8 @@ function KeywordsTable({
 
 		return (
 			<div>
-				<div>
-					<div className={styles.table}>
-						<StyledTable columns={columns} data={listKeywordsData} loading={keywordsLoading} />
-					</div>
-
+				<div className={styles.table}>
+					<StyledTable columns={columns} data={listKeywordsData} loading={keywordsLoading} />
 				</div>
 
 				<div className={styles.pagination_container}>
@@ -53,11 +50,7 @@ function KeywordsTable({
 		);
 	};
 
-	return (
-		<>
-			{renderTable()}
-		</>
-	);
+	return renderTable();
 }
 
 export default KeywordsTable;
