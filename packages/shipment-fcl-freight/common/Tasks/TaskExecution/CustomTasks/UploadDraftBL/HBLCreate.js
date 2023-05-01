@@ -1,4 +1,3 @@
-// import { TradeDocTemplate } from '@cogo/business-modules/components/trade-documents';
 import { Button, Modal } from '@cogoport/components';
 import { forwardRef, useRef, useState } from 'react';
 
@@ -8,38 +7,36 @@ function HBLCreate({
 	onSave = () => {},
 	hblData,
 	completed = false,
-	// shipmentData = {},
-	// primaryService = {},
+	shipmentData = {},
+	primaryService = {},
 }) {
 	const [show, setShow] = useState(false);
 	// const [mode, setMode] = useState('write');
 	const ref = useRef();
 
-	// id change
+	const movement_details = primaryService?.movement_details
+		|| primaryService?.movement_detail
+		|| shipmentData?.movement_details
+		|| shipmentData?.movement_detail;
 
-	// const movement_details =		primaryService?.movement_details
-	// 	|| primaryService?.movement_detail
-	// 	|| shipmentData?.movement_details
-	// 	|| shipmentData?.movement_detail;
-
-	// const templateInitialValues = {
-	// 	port_of_loading   : shipmentData?.origin_port?.display_name,
-	// 	port_of_discharge : shipmentData?.destination_port?.display_name,
-	// 	consigner         : shipmentData?.importer_exporter?.business_name,
-	// 	consignee:
-	// 		shipmentData?.consignee_details?.company_name
-	// 		|| shipmentData?.consignee_detail?.company_name,
-	// 	vessel_number: (movement_details || [])
-	// 		.map((movment) => `${movment?.vessel}, ${movment?.voyage}`)
-	// 		.join(','),
-	// 	annexure_vessel_number: (movement_details || [])
-	// 		.map((movment) => `${movment?.voyage}`)
-	// 		.join(','),
-	// 	annexure_vessel: (movement_details || [])
-	// 		.map((movment) => `${movment?.vessel}`)
-	// 		.join(','),
-	// 	...hblData,
-	// };
+	const templateInitialValues = {
+		port_of_loading   : primaryService?.origin_port?.display_name,
+		port_of_discharge : primaryService?.destination_port?.display_name,
+		consigner         : shipmentData?.importer_exporter?.business_name,
+		consignee:
+			shipmentData?.consignee_details?.company_name
+			|| shipmentData?.consignee_detail?.company_name,
+		vessel_number: (movement_details || [])
+			.map((movment) => `${movment?.vessel}, ${movment?.voyage}`)
+			.join(','),
+		annexure_vessel_number: (movement_details || [])
+			.map((movment) => `${movment?.voyage}`)
+			.join(','),
+		annexure_vessel: (movement_details || [])
+			.map((movment) => `${movment?.vessel}`)
+			.join(','),
+		...hblData,
+	};
 
 	const handleSave = () => {
 		ref?.current?.submit().then(onSave);
