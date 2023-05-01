@@ -67,12 +67,8 @@ const useGetHandleFormSubmit = ({
 				...CONTENT_MAPPING.text.component,
 				content: heading,
 			},
-			id       : 0,
+			id       : uuid(),
 			parentId : parentId || defaultParentId,
-			type     : 'COLUMN',
-			style    : {
-				border: '1px solid red',
-			},
 		};
 
 		const formWidget = {
@@ -80,12 +76,8 @@ const useGetHandleFormSubmit = ({
 				...CONTENT_MAPPING.form.component,
 				formData: newValue,
 			},
-			id       : 1,
+			id       : uuid(),
 			parentId : parentId || defaultParentId,
-			type     : 'COLUMN',
-			style    : {
-				border: '1px solid red',
-			},
 		};
 
 		// const buttonWigdet = {
@@ -112,23 +104,29 @@ const useGetHandleFormSubmit = ({
 
 		if (id === selectedRowId && selectedItem) {
 			if (Object.keys(selectedNestedColumn).length > 0 && nestedColumnId === selectedNestedColumnId) {
-				data.layouts[selectedComponentIndex].component.children[selectedColumnId].component = {
-					...data.layouts[selectedComponentIndex].component.children[selectedColumnId].component,
+				const selectedChildrenId = data.layouts[selectedComponentIndex].component.children.findIndex((item) => item.id === selectedColumnId);
+
+				data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component = {
+					...data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component,
 					children : childrenData,
 					type     : 'container',
 				};
-			} else if (Object.keys(selectedColumn).length > 0 && columnId === selectedColumnId) {
+			} else if (Object.keys(selectedColumn).length > 0 && columnId === selectedColumnId && Object.keys(selectedNestedColumn).length === 0) {
 				if (data.layouts[selectedComponentIndex].type === 'carousel') {
-					data.layouts[selectedComponentIndex].component.children[selectedColumnId].component = {
-						...data.layouts[selectedComponentIndex].component.children[selectedColumnId].component,
+					const selectedChildrenId = data.layouts[selectedComponentIndex].component.children.findIndex((item) => item.id === selectedColumnId);
+
+					data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component = {
+						...data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component,
 						children : childrenData,
 						type     : 'container',
 					};
-				} else if (!data.layouts[selectedComponentIndex].isNested || data.layouts[selectedComponentIndex].type === 'formSample') {
+				} else if (data.layouts[selectedComponentIndex].isNested === 'false' || data.layouts[selectedComponentIndex].type === 'formSample') {
 					data.layouts[selectedComponentIndex].component.children = childrenData;
 				} else {
-					data.layouts[selectedComponentIndex].component.children[selectedColumnId].component = {
-						...data.layouts[selectedComponentIndex].component.children[selectedColumnId].component,
+					const selectedChildrenId = data.layouts[selectedComponentIndex].component.children.findIndex((item) => item.id === selectedColumnId);
+
+					data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component = {
+						...data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component,
 						children : childrenData,
 						type     : 'container',
 					};
@@ -137,7 +135,7 @@ const useGetHandleFormSubmit = ({
 				data.layouts[selectedComponentIndex] = {
 					...data.layouts[selectedComponentIndex],
 					parentId : defaultParentId,
-					isNested : false,
+					isNested : 'false',
 				};
 				data.layouts[selectedComponentIndex].component = {
 					...data.layouts[selectedComponentIndex].component,

@@ -89,6 +89,7 @@ function DropBox({
 		if (isNewItemAdding) {
 			if (isOver && isNewItemAdding) {
 				const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
+
 				setStageItems((prev) => ({
 					...prev,
 					layouts: [

@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback } from 'react';
+import { v1 as uuid } from 'uuid';
 
 import getContentMapping from '../configurations/default-content-mapping';
 
@@ -21,6 +22,8 @@ const useGetAddNewComponent = ({
 		) => {
 			const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
 
+			const id = uuid();
+
 			const { type } = content || {};
 
 			const CONTENT_MAPPING = getContentMapping();
@@ -32,12 +35,14 @@ const useGetAddNewComponent = ({
 
 				const objIndex = data.layouts.findIndex((item) => item.parentId === parentId);
 
-				data.layouts[objIndex].component.children[childId] = {
+				const selectedChildrenIndex = data.layouts[objIndex].component.children.findIndex((item) => item.id === childId);
+
+				data.layouts[objIndex].component.children[selectedChildrenIndex] = {
 					...CONTENT_MAPPING[type],
-					...data.layouts[objIndex].component.children[childId],
+					...data.layouts[objIndex].component.children[selectedChildrenIndex],
 					component: {
 						...CONTENT_MAPPING[type].component,
-						style: data.layouts[objIndex].component.children[childId].component.style,
+						style: data.layouts[objIndex].component.children[selectedChildrenIndex].component.style,
 					},
 				};
 
@@ -45,7 +50,7 @@ const useGetAddNewComponent = ({
 
 				setSelectedRow({ ...data.layouts[objIndex] });
 
-				setSelectedItem({ ...data.layouts[objIndex].component.children[childId] });
+				setSelectedItem({ ...data.layouts[objIndex].component.children[selectedChildrenIndex] });
 			} else {
 				setPageConfiguration((prev) => ({
 					...prev,
@@ -54,7 +59,7 @@ const useGetAddNewComponent = ({
 						{
 							...CONTENT_MAPPING[type],
 							...content,
-							id: pageConfiguration.layouts.length + 1,
+							id,
 						},
 						...pageConfiguration.layouts.slice(startIndex),
 					],
@@ -63,13 +68,13 @@ const useGetAddNewComponent = ({
 				setSelectedRow({
 					...CONTENT_MAPPING[type],
 					...content,
-					id: pageConfiguration.layouts.length + 1,
+					id,
 				});
 
 				setSelectedItem({
 					...CONTENT_MAPPING[type],
 					...content,
-					id: pageConfiguration.layouts.length + 1,
+					id,
 				});
 			}
 

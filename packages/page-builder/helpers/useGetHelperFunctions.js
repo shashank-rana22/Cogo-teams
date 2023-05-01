@@ -47,11 +47,18 @@ const useGetHelperFunctions = ({
 			const { component: parentComponent } = item || {};
 			const { attributes, type: childType } = parentComponent || {};
 
+			const newChildrenId = uuid();
+
 			const newAttributes = !childType ? {
-				onClick: () => handleSubmitClick({ childrenId: item.id, parentId: newId }),
+				onClick: () => handleSubmitClick({ childrenId: newChildrenId, parentId: newId }),
 			} : attributes;
 
-			return ({ ...item, parentId: newId, component: { ...item.component, attributes: newAttributes } });
+			return ({
+				...item,
+				id        : newChildrenId,
+				parentId  : newId,
+				component : { ...item.component, attributes: newAttributes },
+			});
 		});
 
 		const duplicateData = parentId ? {
@@ -60,12 +67,12 @@ const useGetHelperFunctions = ({
 				...itemList.component,
 				children: duplicateChildren,
 			},
-			id       : data.layouts.length + 1,
+			id       : uuid(),
 			parentId : newId,
 			type     : 'ROW',
 		} : {
 			...itemList,
-			id: data.layouts.length + 1,
+			id: uuid(),
 		};
 
 		setPageConfiguration((prev) => ({
@@ -93,7 +100,7 @@ const useGetHelperFunctions = ({
 			(sComponentId) => sComponentId.id === sId,
 		);
 
-		const childrenId = (data.layouts[selectedComponentIndex].component.children || []).length;
+		const childrenId = uuid();
 
 		data.layouts[selectedComponentIndex].component.children = [
 			...data.layouts[selectedComponentIndex].component.children,

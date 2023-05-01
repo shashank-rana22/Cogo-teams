@@ -25,8 +25,6 @@ const useUpdateComponentsContent = ({
 
 			const { id: selectedChildId } = selectedItem || {};
 
-			const { id: selectedNestedColumnId } = selectedItem || {};
-
 			const data = pageConfiguration;
 
 			const selectedComponentIndex = (data.layouts || []).findIndex(
@@ -34,10 +32,13 @@ const useUpdateComponentsContent = ({
 			);
 
 			if (id === selectedRowId && selectedItem) {
-				if (Object.keys(selectedNestedColumn).length > 0 && nestedColumnId === selectedNestedColumnId) {
-					data.layouts[selectedComponentIndex].component.children[selectedColumnId].component.children[selectedNestedColumnId].component.content = value;
-				} else if (Object.keys(selectedColumn).length > 0 && columnId === selectedColumnId) {
-					data.layouts[selectedComponentIndex].component.children[selectedChildId].component.content = value;
+				if (Object.keys(selectedNestedColumn).length > 0 && nestedColumnId === selectedChildId) {
+					const selectedChildrenId = data.layouts[selectedComponentIndex].component.children.findIndex((item) => item.id === selectedColumnId);
+					const nestedSelectedChildrenId = data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component.children.findIndex((item) => item.id === selectedChildId);
+					data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component.children[nestedSelectedChildrenId].component.content = value;
+				} else if (Object.keys(selectedColumn).length > 0 && columnId === selectedColumnId && Object.keys(selectedNestedColumn).length === 0) {
+					const selectedChildrenId = data.layouts[selectedComponentIndex].component.children.findIndex((item) => item.id === selectedChildId);
+					data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component.content = value;
 				} else if (Object.keys(selectedColumn).length === 0 && Object.keys(selectedNestedColumn).length === 0) {
 					data.layouts[selectedComponentIndex].component.content = value;
 				}

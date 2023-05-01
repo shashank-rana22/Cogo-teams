@@ -102,7 +102,7 @@ const getContentMapping = () => {
 				},
 				children: [
 					{
-						id        : 0,
+						id        : uuid(),
 						width     : '100%',
 						parentId,
 						// type      : 'COLUMN',
@@ -120,7 +120,7 @@ const getContentMapping = () => {
 						},
 					},
 					{
-						id        : 1,
+						id        : uuid(),
 						width     : '100%',
 						parentId,
 						// type      : 'COLUMN',
@@ -164,7 +164,7 @@ const getContentMapping = () => {
 				parentId,
 				children : [
 					{
-						id        : 0,
+						id        : uuid(),
 						width     : '100%',
 						parentId,
 						// type      : 'COLUMN',
@@ -177,7 +177,7 @@ const getContentMapping = () => {
 						},
 					},
 					{
-						id        : 1,
+						id        : uuid(),
 						width     : '100%',
 						parentId,
 						// type      : 'COLUMN',
@@ -210,12 +210,12 @@ const getContentMapping = () => {
 							type    : 'text',
 							style   : {},
 						},
-						id: 0,
+						id: uuid(),
 						parentId,
 						// type : 'COLUMN',
 					},
 					{
-						id        : 1,
+						id        : uuid(),
 						parentId,
 						// type      : 'COLUMN',
 						component : {
@@ -282,8 +282,7 @@ const getContentMapping = () => {
 
 		carouselSample: {
 			parentId,
-			id        : 1,
-			component : {
+			component: {
 				style      : {},
 				type       : 'carousel',
 				attributes : {
@@ -298,7 +297,7 @@ const getContentMapping = () => {
 							attributes : {},
 							type       : 'image',
 						},
-						id    : 0,
+						id    : uuid(),
 						width : '100%',
 						parentId,
 					},
@@ -310,7 +309,7 @@ const getContentMapping = () => {
 							attributes : {},
 							type       : 'image',
 						},
-						id    : 1,
+						id    : uuid(),
 						width : '100%',
 						parentId,
 					},
@@ -322,7 +321,7 @@ const getContentMapping = () => {
 							attributes : {},
 							type       : 'image',
 						},
-						id    : 2,
+						id    : uuid(),
 						width : '100%',
 						parentId,
 					},
@@ -334,7 +333,7 @@ const getContentMapping = () => {
 							attributes : {},
 							type       : 'image',
 						},
-						id    : 3,
+						id    : uuid(),
 						width : '100%',
 						parentId,
 					},
@@ -346,7 +345,7 @@ const getContentMapping = () => {
 							attributes : {},
 							type       : 'image',
 						},
-						id    : 4,
+						id    : uuid(),
 						width : '100%',
 						parentId,
 					},

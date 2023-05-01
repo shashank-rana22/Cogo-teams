@@ -27,8 +27,8 @@ function Structure(props) {
 		selectedRow,
 	} = props;
 
-	const handleSubmitClick = ({ index, parentId }) => {
-		setParentComponentId({ childId: index, parentId });
+	const handleSubmitClick = ({ id, parentId }) => {
+		setParentComponentId({ childId: id, parentId });
 
 		setShowContentModal(true);
 	};
@@ -47,11 +47,12 @@ function Structure(props) {
 	};
 
 	const getChildrenComponents = (rows) => {
-		const childrenComponents = rows.map((row, index) => {
+		const childrenComponents = rows.map((row) => {
 			const { parentId } = parentComponent || {};
+			const	id = uuid();
 
 			return ({
-				id        : index,
+				id,
 				width     : row,
 				parentId,
 				component : {
@@ -66,7 +67,7 @@ function Structure(props) {
 					},
 					icon       : <IcMPlusInCircle style={{ cursor: 'pointer', fill: '#222' }} width={20} height={20} />,
 					attributes : {
-						onClick: () => handleSubmitClick({ index, parentId }),
+						onClick: () => handleSubmitClick({ id, parentId }),
 					},
 				},
 			});

@@ -54,8 +54,8 @@ function CarouselComponent({
 
 	const { id: nestedColumnId } = selectedNestedColumn || {};
 
-	const handleSubmitClick = ({ index, parentId }) => {
-		setParentComponentId({ childId: index, parentId });
+	const handleSubmitClick = ({ id, parentId }) => {
+		setParentComponentId({ childId: id, parentId });
 		setShowContentModal(true);
 	};
 
@@ -179,7 +179,7 @@ function CarouselComponent({
 								{!type ? (
 									<div
 										role="presentation"
-										onClick={() => handleSubmitClick({ index: idx, parentId })}
+										onClick={() => handleSubmitClick({ id, parentId })}
 									>
 										{icon}
 									</div>
