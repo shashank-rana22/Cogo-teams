@@ -1,13 +1,13 @@
 const formatRates = (selectedRate, shipment_data, service_type_prop, primaryService, servicesList) => {
-	if (!selectedRate) {
-		return {};
-	}
-	const service_type =		service_type_prop || 'fcl_freight_service';
+	if (!selectedRate) return {};
+
+	const service_type = service_type_prop || 'fcl_freight_service';
 
 	const origin_local = (servicesList || []).find(
 		(service) => service.service_type === 'fcl_freight_local_service'
 			&& service.trade_type === 'export',
 	);
+
 	const destination_local = (servicesList || []).find(
 		(service) => service.service_type === 'fcl_freight_local_service'
 			&& service.trade_type === 'export',

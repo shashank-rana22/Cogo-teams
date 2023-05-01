@@ -67,7 +67,7 @@ function FreightRate({
 							/>
 
 							{errors.freight_declaration && (
-								<span>
+								<span className={styles.errors}>
 									{errors.freight_declaration[index]?.commodity?.message}
 								</span>
 							)}
@@ -88,7 +88,7 @@ function FreightRate({
 							/>
 
 							{errors.freight_declaration && (
-								<span>
+								<span className={styles.errors}>
 									{errors.freight_declaration[index]?.currency?.message}
 								</span>
 							)}
@@ -106,7 +106,7 @@ function FreightRate({
 							/>
 
 							{errors.freight_declaration && (
-								<span>
+								<span className={styles.errors}>
 									{errors.freight_declaration[index]?.freight_price?.message}
 								</span>
 							)}
@@ -124,7 +124,7 @@ function FreightRate({
 							/>
 
 							{errors.freight_declaration && (
-								<span>
+								<span className={styles.errors}>
 									{errors.freight_declaration[index]?.origin_price?.message}
 								</span>
 							)}
@@ -147,6 +147,7 @@ function FreightRate({
 				<Button
 					themeType="secondary"
 					style={{ marginRight: 10 }}
+					disabled={loading}
 				>
 					Cancel
 				</Button>
