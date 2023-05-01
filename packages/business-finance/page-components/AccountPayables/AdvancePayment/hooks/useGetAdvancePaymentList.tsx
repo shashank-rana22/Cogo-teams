@@ -57,7 +57,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 		{
 			url     : '/purchase/advance-document/list',
 			method  : 'get',
-			authKey : 'get_purchase_payrun_bill_list_advance_payments',
+			authKey : 'get_purchase_advance_document_list',
 		},
 		{ manual: true, autoCancel: false },
 	);
