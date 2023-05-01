@@ -64,10 +64,14 @@
 		box-shadow: 0 0 8px rgb(0 0 0 / 20%);
 	}
 }
+.three_dot_icon {
+	cursor: pointer;
+	width: 16px;
+	height: 16px;
+	fill: var(--color-primary-error-red-2);
+}
 
 .cancel_button {
-	position: relative;
-	right: -10px;
 	cursor: pointer;
-	fill: var(--color-primary-error-red-2);
+	font-size: var(--font-size-md);
 }
