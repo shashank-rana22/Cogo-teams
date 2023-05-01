@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { TextAreaController, useForm } from '@cogoport/forms';
 import { forwardRef, useImperativeHandle, useEffect } from 'react';
 
@@ -8,7 +9,7 @@ import { leftDataControls } from './leftDataControl';
 import styles from './styles.module.css';
 import { tableDetailControls } from './TableDetailControls';
 
-function Frontside({ initialValues }, ref) {
+function Frontside({ initialValues = {} }, ref) {
 	const formatValues = formmatedValues(initialValues);
 
 	const service_type = formatValues?.service_type;
@@ -29,6 +30,7 @@ function Frontside({ initialValues }, ref) {
 
 	for (let i = 0; i < leftDataControls[service_type].length;) {
 		const obj = leftDataControls[service_type][i];
+
 		if (obj.fullWidth) {
 			leftSideFields.push(
 				<div className={styles.block}>
@@ -38,7 +40,7 @@ function Frontside({ initialValues }, ref) {
 						:
 					</div>
 
-					<div style={{ width: '74%', height: 'fit-content' }}>
+					<div className={styles.text_area}>
 						<TextAreaController
 							control={control}
 							name={`${obj.name}`}
@@ -51,15 +53,15 @@ function Frontside({ initialValues }, ref) {
 			i += 1;
 		} else if (i + 1 < leftDataControls[service_type].length) {
 			leftSideFields.push(
-				<div style={{ display: 'flex' }}>
-					<div className={styles.block} style={{ width: '50%' }}>
+				<div className={styles.container_flex}>
+					<div className={cl`${styles.block} ${styles.width_50}`}>
 						<div className={styles.text}>
 							{obj.label}
 							{' '}
 							:
 						</div>
 
-						<div style={{ width: '74%' }}>
+						<div className={styles.width_74}>
 							<TextAreaController
 								control={control}
 								name={`${obj.name}`}
@@ -68,14 +70,15 @@ function Frontside({ initialValues }, ref) {
 							/>
 						</div>
 					</div>
-					<div className={styles.block} style={{ width: '50%' }}>
+
+					<div className={cl`${styles.block} ${styles.width_50}`}>
 						<div className={styles.text}>
 							{leftDataControls[service_type][i + 1].label}
 							{' '}
 							:
 						</div>
 
-						<div style={{ width: '74%', height: 'fit-content' }}>
+						<div className={styles.text_area}>
 							<TextAreaController
 								control={control}
 								name={`${leftDataControls[service_type][i + 1].name}`}
@@ -96,7 +99,7 @@ function Frontside({ initialValues }, ref) {
 						:
 					</div>
 
-					<div style={{ width: '74%', height: 'fit-content' }}>
+					<div className={styles.text_area}>
 						<TextAreaController
 							control={control}
 							name={`${obj.name}`}
@@ -111,7 +114,6 @@ function Frontside({ initialValues }, ref) {
 	}
 
 	const tableDetails = [];
-
 	for (let i = 0; i < tableDetailControls[service_type].length; i += 1) {
 		tableDetails.push(
 			<div className={styles.last_block}>
@@ -121,7 +123,7 @@ function Frontside({ initialValues }, ref) {
 					:
 				</div>
 
-				<div style={{ width: '100%', height: 'fit-content' }}>
+				<div className={styles.ref_text_area}>
 					<TextAreaController
 						control={control}
 						name={`${tableDetailControls[service_type][i].name}`}
@@ -138,14 +140,14 @@ function Frontside({ initialValues }, ref) {
 			<div className={styles.content}>
 				<HeaderPart />
 
-				<div style={{ display: 'flex' }}>
-					<div style={{ width: '35%' }}>
+				<div className={styles.container_flex}>
+					<div className={styles.width_35}>
 						<div className={styles.block}>
 							<div className={styles.text}>
 								Notify Party (Broker):
 							</div>
 
-							<div style={{ width: '100%', height: 'fit-content' }}>
+							<div className={styles.ref_text_area}>
 								<TextAreaController
 									control={control}
 									name="notify_party"
@@ -154,12 +156,13 @@ function Frontside({ initialValues }, ref) {
 								/>
 							</div>
 						</div>
+
 						<div className={styles.block}>
 							<div className={styles.text}>
 								Consignee :
 							</div>
 
-							<div style={{ width: '65%', height: 'fit-content' }}>
+							<div className={cl`${styles.width_65} ${styles.height_fit}`}>
 								<TextAreaController
 									control={control}
 									name="consignee"
@@ -168,12 +171,13 @@ function Frontside({ initialValues }, ref) {
 								/>
 							</div>
 						</div>
+
 						<div className={styles.block}>
 							<div className={styles.text}>
 								Shipper :
 							</div>
 
-							<div style={{ width: '75%', height: 'fit-content' }}>
+							<div className={cl`${styles.width_75} ${styles.height_fit}`}>
 								<TextAreaController
 									control={control}
 									name="shipper"
@@ -184,13 +188,13 @@ function Frontside({ initialValues }, ref) {
 						</div>
 					</div>
 
-					<div style={{ width: '65%' }}>
+					<div className={styles.width_65}>
 						<div className={styles.block}>
 							<div className={styles.text}>
 								Job Reference number:
 							</div>
 
-							<div style={{ width: '100%', height: 'fit-content' }}>
+							<div className={styles.ref_text_area}>
 								<TextAreaController
 									control={control}
 									name="job_ref_no"
@@ -205,7 +209,7 @@ function Frontside({ initialValues }, ref) {
 								Invoice reference number :
 							</div>
 
-							<div style={{ width: '100%', height: 'fit-content' }}>
+							<div className={styles.ref_text_area}>
 								<TextAreaController
 									control={control}
 									name="inv_ref_no"
@@ -220,7 +224,7 @@ function Frontside({ initialValues }, ref) {
 								IGM dt :
 							</div>
 
-							<div style={{ width: '86%', height: 'fit-content' }}>
+							<div className={cl`${styles.width_86} ${styles.height_fit}`}>
 								<TextAreaController
 									control={control}
 									name="igm_dt"
@@ -235,7 +239,7 @@ function Frontside({ initialValues }, ref) {
 								From :
 							</div>
 
-							<div style={{ width: '88%', height: 'fit-content' }}>
+							<div className={cl`${styles.width_88} ${styles.height_fit}`}>
 								<TextAreaController
 									control={control}
 									name="port_of_loading"
@@ -251,22 +255,22 @@ function Frontside({ initialValues }, ref) {
 					Shipment details :
 				</div>
 
-				<div style={{ width: '100%' }}>
+				<div className={styles.width_100}>
 					{leftSideFields.map((element) => element)}
 				</div>
 
-				<div style={{ display: 'flex' }}>
+				<div className={styles.container_flex}>
 					{tableDetails.map((obj) => obj)}
 				</div>
 			</div>
 
-			<div style={{ width: '100%', display: 'flex', marginTop: '10px' }}>
+			<div className={styles.tan_pan}>
 				<div className={styles.block}>
 					<div className={styles.text}>
 						Tan No :
 					</div>
 
-					<div style={{ width: '70%', height: 'fit-content' }}>
+					<div className={styles.tan_text_area}>
 						<TextAreaController
 							control={control}
 							name="tan"
@@ -281,7 +285,7 @@ function Frontside({ initialValues }, ref) {
 						Pan No :
 					</div>
 
-					<div style={{ width: '70%', height: 'fit-content' }}>
+					<div className={styles.tan_text_area}>
 						<TextAreaController
 							control={control}
 							name="pan"

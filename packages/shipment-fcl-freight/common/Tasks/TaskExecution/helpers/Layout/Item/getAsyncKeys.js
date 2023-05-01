@@ -97,7 +97,7 @@ const getAsyncFields = (key) => {
 			lableKey      : 'name',
 			asyncKey      : 'list_hs_codes',
 			defaultParams : {
-				page_limit: 20,
+				page_limit: 10,
 			},
 			defaultOptions: true,
 		},

@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-const useCreateShipmentDocument = ({ documents, refetch = () => {} }) => {
+const useCreateShipmentDocument = ({ refetch = () => {} }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_shipment_document',
 		method : 'POST',
@@ -10,9 +10,11 @@ const useCreateShipmentDocument = ({ documents, refetch = () => {} }) => {
 
 	const apiTrigger = async (val) => {
 		try {
-			const res = await trigger({ params: { documents, ...val } });
+			const res = await trigger({ data: val });
+
 			if (!res.hasError) {
-				Toast.success('Successfully Created');
+				Toast.success('Document Created Successfully!!');
+
 				refetch();
 			}
 		} catch (err) {

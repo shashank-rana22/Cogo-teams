@@ -13,11 +13,10 @@ const useUpdateShipmentBookingConfirmationPreferences = ({
 
 	const apiTrigger = async (val) => {
 		try {
-			await trigger({
-				data: val,
-			});
+			await trigger({ data: val });
 
 			Toast.success(successMessage);
+
 			refetch();
 		} catch (err) {
 			toastApiError(err);

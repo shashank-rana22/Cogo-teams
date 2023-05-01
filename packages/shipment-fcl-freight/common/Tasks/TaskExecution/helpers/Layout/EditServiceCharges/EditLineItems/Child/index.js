@@ -6,17 +6,17 @@ import styles from './styles.module.css';
 
 function Child({
 	control,
-	controls,
+	controls = [],
 	index,
-	name,
-	field,
-	remove,
-	customValues,
+	name = '',
+	field = {},
+	remove = () => {},
+	customValues = {},
 }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.item_container}>
-				{controls.map((control_item) => {
+				{controls?.map((control_item) => {
 					const { render, span } = control_item || {};
 
 					const flex = ((span || 12) / 12) * 100 - 1;
@@ -32,9 +32,9 @@ function Child({
 					return (
 						<Item
 							{...control_item}
-							key={`${name}.${index}.${control_item.name}`}
-							name={`${name}.${index}.${control_item.name}`}
-							value={field[control_item.name]}
+							key={`${name}.${index}.${control_item?.name}`}
+							name={`${name}.${index}.${control_item?.name}`}
+							value={field?.[control_item?.name]}
 							control={control}
 							label={null}
 						/>

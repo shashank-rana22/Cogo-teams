@@ -63,13 +63,13 @@ const cargoArrivalData = {
 };
 
 const useUploadCargoArrivalForm = ({
-	summary,
-	setShow,
+	summary = {},
+	setShow = () => {},
 	savedData,
-	setSavedData,
-	pendingTask,
-	refetch,
-	clearTask,
+	setSavedData = () => {},
+	pendingTask = {},
+	refetch = () => {},
+	clearTask = () => {},
 }) => {
 	const [{ loadng: createDocumentLoading }, createDocumentTrigger] = useRequest({
 		url    : '/create_shipment_trade_document',

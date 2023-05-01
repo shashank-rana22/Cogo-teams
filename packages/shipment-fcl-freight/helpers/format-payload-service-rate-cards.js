@@ -1,8 +1,8 @@
-export const formatPayloadForSubsidiaryServiceRateCards = ({ code, service_type, services }) => {
+export const formatPayloadForSubsidiaryServiceRateCards = ({ code, service_type = '', services = [] }) => {
 	const serviceType = (service_type || '').replace('_service', '');
 
 	const addedService = (services || []).find(
-		(service) => service.service_type === service_type,
+		(service) => service?.service_type === service_type,
 	);
 
 	const date = new Date();

@@ -26,7 +26,7 @@ function RenderAddRateForm({
 			<div>
 				<div className={styles.label}>{label}</div>
 				<Element name={name} type={type} {...rest} />
-				{errors[name] ? <div>{errors[name].message}</div> : null}
+				{errors[name] ? <div className={styles.errors}>{errors[name].message}</div> : null}
 			</div>
 		) : null;
 	}

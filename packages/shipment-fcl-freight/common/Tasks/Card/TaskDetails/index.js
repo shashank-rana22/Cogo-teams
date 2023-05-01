@@ -46,15 +46,14 @@ function TaskDetails({
 							height="1.5em"
 						/>
 					)}
-
 				</div>
-
 			</div>
+
 			<div>
 				<div className={styles.details}>
 					<div className={styles.task_name}>{taskName}</div>
-					<div className={styles.task_date_details}>
 
+					<div className={styles.task_date_details}>
 						{task?.deadline ? (
 							<Tooltip
 								interactive
@@ -63,8 +62,8 @@ function TaskDetails({
 									<div style={{ fontSize: '10px' }}>
 										{format(
 											task?.deadline,
-											`${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']} 
-										${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`,
+											`${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']}
+											${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`,
 											null,
 											true,
 										)}
@@ -74,7 +73,8 @@ function TaskDetails({
 								<div>
 									<div className={styles.deadline}>
 										<IcMTimer />
-							&nbsp;Deadline: &nbsp;
+
+										&nbsp;Deadline: &nbsp;
 										{formatDeadlineDate(new Date(task?.deadline))}
 									</div>
 								</div>
@@ -84,6 +84,7 @@ function TaskDetails({
 						{task?.status === 'completed' ? (
 							<div className={styles.completed}>
 								<IcMFtick />
+
 								{`Completed On: ${formatDate({
 									date       : task?.updated_at,
 									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],

@@ -1,4 +1,3 @@
-// update the controls if needed in any task
 const mutateControls = (
 	controls,
 	setValue,
@@ -7,9 +6,11 @@ const mutateControls = (
 	formValues,
 ) => {
 	let finalControls = [];
+
 	(controls || []).forEach((control) => {
 		const newControl = control;
-		if (control.name === 'shipper_contact_status') {
+
+		if (control?.name === 'shipper_contact_status') {
 			if (shipment_data?.shipper_contact_status === 'pending') {
 				newControl.options = [
 					{ label: 'Confirmed', value: 'confirmed' },
@@ -27,13 +28,14 @@ const mutateControls = (
 					{ label: 'Not Contacted', value: 'pending' },
 				];
 			}
-			newControl.value = newControl.value || shipment_data?.shipper_contact_status;
+
+			newControl.value = newControl?.value || shipment_data?.shipper_contact_status;
 		}
 
 		if (
 			task?.task === 'mark_confirmed'
 			&& formValues?.payment_term === 'collect'
-			&& control.name === 'bl_category'
+			&& control?.name === 'bl_category'
 		) {
 			newControl.options = [
 				{
@@ -42,14 +44,16 @@ const mutateControls = (
 					description : 'House Bill of Lading',
 				},
 			];
+
 			if (formValues.bl_category !== 'hbl') {
 				setValue('bl_category', 'hbl');
 			}
 		}
+
 		if (
 			task?.task === 'mark_confirmed'
 			&& formValues?.payment_term === 'prepaid'
-			&& control.name === 'bl_category'
+			&& control?.name === 'bl_category'
 		) {
 			newControl.options = [
 				{
@@ -65,7 +69,7 @@ const mutateControls = (
 			];
 		}
 
-		if (['booking_reference_proof', 'booking_reference_number'].includes(control.name)) {
+		if (['booking_reference_proof', 'booking_reference_number'].includes(control?.name)) {
 			newControl.rules = {
 				validate: () => (!formValues.booking_reference_proof
 						&& !formValues.booking_reference_number
@@ -73,6 +77,7 @@ const mutateControls = (
 					: undefined),
 			};
 		}
+
 		finalControls = [...finalControls, newControl];
 	});
 

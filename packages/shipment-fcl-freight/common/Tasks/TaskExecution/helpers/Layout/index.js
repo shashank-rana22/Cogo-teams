@@ -9,23 +9,28 @@ import styles from './styles.module.css';
 function Layout({
 	control, fields, showElements = {}, errors, customValues = {}, formValues,
 }) {
-	let rowWiseFields = [];
 	const totalFields = [];
+
+	let rowWiseFields = [];
 	let span = 0;
 
 	(fields || []).forEach((field) => {
-		const { [field.name]: showItem = true } = showElements;
+		const { [field?.name]: showItem = true } = showElements;
 		if (showItem) {
-			span += field.span || 12;
+			span += field?.span || 12;
 			if (span === 12) {
 				span = 0;
+
 				rowWiseFields.push(field);
 				totalFields.push(rowWiseFields);
+
 				rowWiseFields = [];
 			} else if (span > 12) {
 				span = 0;
+
 				totalFields.push(rowWiseFields);
 				rowWiseFields = [];
+
 				rowWiseFields.push(field);
 			} else {
 				rowWiseFields.push(field);
@@ -36,12 +41,13 @@ function Layout({
 	if (rowWiseFields.length) {
 		totalFields.push(rowWiseFields);
 	}
+
 	return (
 		<div className={styles.layout}>
 			{totalFields.map((rowFields) => (
 				<div className={cl`${styles.row} form_layout_row`}>
 					{rowFields.map((field) => {
-						const { type, heading = '' } = field;
+						const { type, heading = '' } = field || {};
 
 						if (type === 'fieldArray') {
 							return (
@@ -54,7 +60,7 @@ function Layout({
 
 									<FieldArray
 										{...field}
-										error={errors[field.name]}
+										error={errors?.[field?.name]}
 										control={control}
 										showElements={showElements}
 										formValues={formValues}
@@ -68,7 +74,7 @@ function Layout({
 								<div className={styles.width_100}>
 									<EditServiceCharges
 										control={control}
-										customValues={customValues[field.name]}
+										customValues={customValues?.[field?.name]}
 										{...field}
 									/>
 								</div>
@@ -78,7 +84,7 @@ function Layout({
 						return (
 							<Item
 								control={control}
-								error={errors[field.name]}
+								error={errors?.[field?.name]}
 								formValues={formValues}
 								{...field}
 							/>

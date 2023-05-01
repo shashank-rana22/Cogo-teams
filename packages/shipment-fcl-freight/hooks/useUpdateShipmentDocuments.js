@@ -11,9 +11,8 @@ function useUpdateShipmentDocuments({
 
 	const updateDocument = async (val) => {
 		try {
-			const res = await trigger({
-				data: val,
-			});
+			const res = await trigger({ data: val });
+
 			if (!res?.hasError) {
 				refetch();
 			}

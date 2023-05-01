@@ -14,7 +14,9 @@ const useUpdateShipmentService = ({
 	const apiTrigger = async (payload) => {
 		try {
 			await trigger({ data: payload });
+
 			Toast.success(successMessage);
+
 			refetch();
 		} catch (err) {
 			toastApiError(err);

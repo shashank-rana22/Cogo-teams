@@ -8,9 +8,9 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 function EditLineItems({
-	control, controls, name, cargoDetails, value:emptyValue, customValues,
+	control, controls, name, cargoDetails, value:emptyValue, customValues = {},
 }) {
-	const { fields, append, remove } = useFieldArray({ control, name });
+	const { fields = [], append, remove } = useFieldArray({ control, name });
 
 	return (
 		<div className={styles.container}>
@@ -38,6 +38,7 @@ function EditLineItems({
 					/>
 				))}
 			</div>
+
 			<div>
 				<Button onClick={() => append(emptyValue)}>Add</Button>
 			</div>

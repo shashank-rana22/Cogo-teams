@@ -7,7 +7,15 @@ import styles from './styles.module.css';
 import useGetFormattedGraphData from './useGetFormattedGraphData';
 
 function GraphUI() {
-	const { pie_data, pie_outer_data, graph_data, dateRange, setDateRange, view_count_data } = useGraphData();
+	const {
+		pie_data,
+		pie_outer_data,
+		graph_data,
+		dateRange,
+		setDateRange,
+		view_count_data,
+		total_searches,
+	} = useGraphData();
 
 	const { graphData = [] } = useGetFormattedGraphData({ graph_data });
 
@@ -26,6 +34,7 @@ function GraphUI() {
 						pie_data={pie_data}
 						pie_outer_data={pie_outer_data}
 						view_count_data={view_count_data}
+						total_searches={total_searches}
 					/>
 				</div>
 			</div>

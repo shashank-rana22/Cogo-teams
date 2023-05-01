@@ -34,8 +34,6 @@ function useHandleSubmit({
 	const {
 		shipment_data,
 		primary_service,
-		// isGettingShipment,
-		// servicesList,
 		getShipment,
 		getShipmentTimeline,
 	} = useContext(ShipmentDetailContext);
@@ -57,20 +55,20 @@ function useHandleSubmit({
 	const onSubmit = async (rawValues) => {
 		setIsLoading(true);
 
-		if (finalConfig.end_point) {
-			(finalConfig.data_from_api || []).forEach((obj) => {
-				if (!task[obj.key_from_api] && obj.alternative === 'undefined') {
-					dataFromApi = { ...dataFromApi, [obj.key_to_send]: undefined };
+		if (finalConfig?.end_point) {
+			(finalConfig?.data_from_api || []).forEach((obj) => {
+				if (!task?.[obj?.key_from_api] && obj?.alternative === 'undefined') {
+					dataFromApi = { ...dataFromApi, [obj?.key_to_send]: undefined };
 				} else {
 					dataFromApi = {
 						...dataFromApi,
-						[obj.key_to_send]: task[obj.key_from_api] || obj.key_from_api,
+						[obj?.key_to_send]: task[obj?.key_from_api] || obj?.key_from_api,
 					};
 				}
 			});
 		}
 
-		const dataToSend = finalConfig.data_to_send;
+		const dataToSend = finalConfig?.data_to_send;
 
 		const transformedRawValues = formatRawValues(rawValues, task, getApisData);
 
@@ -82,12 +80,12 @@ function useHandleSubmit({
 			primary_service,
 		);
 
-		let finalPayload = { id: task.id, data: payload };
+		let finalPayload = { id: task?.id, data: payload };
 
-		if (finalConfig.end_point) {
+		if (finalConfig?.end_point) {
 			finalPayload = extraApiPayload(
 				rawValues,
-				finalConfig.end_point,
+				finalConfig?.end_point,
 			);
 
 			finalPayload = {
@@ -108,9 +106,9 @@ function useHandleSubmit({
 				if (finalConfig.end_point && !skipUpdateTask) {
 					await triggerTask({
 						data: isLastStep
-							? { id: task.id }
+							? { id: task?.id }
 							: {
-								id     : task.id,
+								id     : task?.id,
 								status : 'pending',
 								tags   : [`${currentStep}`],
 							},
@@ -125,6 +123,7 @@ function useHandleSubmit({
 					}
 					onCancel();
 				}
+
 				// feedbacks to cogolens starts
 				try {
 					const rpaMappings = getRpaMappings(task, shipment_data, rawValues);
@@ -135,8 +134,11 @@ function useHandleSubmit({
 					toastApiError(err);
 				}
 				// feedbacks to cogolens ends
+
 				refetch();
+
 				getShipmentTimeline();
+
 				if (shipmentRefetchTasks.includes(task?.task)) {
 					getShipment();
 				}
@@ -148,7 +150,9 @@ function useHandleSubmit({
 				|| err?.error?.message
 				|| err?.data?.base
 				|| 'Something Went wrong';
+
 			const error = errorString.replace('Base', '');
+
 			Toast.error(startCase(error));
 		}
 

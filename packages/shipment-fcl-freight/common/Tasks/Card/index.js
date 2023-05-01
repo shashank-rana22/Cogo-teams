@@ -32,7 +32,10 @@ function Card({
 					/>
 				)}
 
-				<UpdateAction task={task} />
+				<UpdateAction
+					task={task}
+					hideThreeDots={task.status === 'completed'}
+				/>
 			</div>
 		</div>
 	);

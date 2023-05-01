@@ -259,3 +259,7 @@
 	top: 30%;
 	right: 3px;
 }
+
+.raise_ticket {
+	cursor: pointer;
+}

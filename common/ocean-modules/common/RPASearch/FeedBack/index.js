@@ -51,8 +51,8 @@ function FeedBack({ setTask }) {
 					value={feedback}
 					onChange={(e) => setFeedback(e)}
 					rows={6}
-					placeholder="Please input your feedback and we will try wor
-					king to make this feature better for you."
+					placeholder="Please input your feedback and we
+					will try working to make this feature better for you."
 				/>
 			</div>
 

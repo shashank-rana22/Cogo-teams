@@ -9,15 +9,15 @@ import styles from './styles.module.css';
 
 function Item(props) {
 	const {
-		type,
+		type = '',
 		control,
 		span,
-		label,
-		error,
-		heading,
-		rules,
-		className,
-		formValues,
+		label = '',
+		error = {},
+		heading = '',
+		rules = {},
+		className = '',
+		formValues = {},
 	} = props || {};
 
 	const errorOriginal = getErrorMessage({
@@ -38,7 +38,7 @@ function Item(props) {
 
 		const finalParams = props?.params || asyncFields?.defaultParams;
 
-		if (Object.keys(asyncFields).includes('defaultParams')) { delete asyncFields.defaultParams; }
+		if (Object.keys(asyncFields)?.includes('defaultParams')) { delete asyncFields?.defaultParams; }
 
 		newProps = {
 			...newProps,
@@ -67,8 +67,8 @@ function Item(props) {
 				size={type === 'pills' ? 'md' : 'sm'} // need to put in config
 				{...newProps}
 				control={control}
-
 			/>
+
 			<p className={styles.errors}>{errorOriginal}</p>
 		</div>
 	);

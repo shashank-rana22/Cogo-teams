@@ -3,7 +3,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useLensRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
-const useRpaMail = ({ mailId, entity_type, format_data = true }) => {
+const useRpaMail = ({ mailId = '', entity_type = '', format_data = true }) => {
 	const [mailLoading, setMailLoading] = useState(false);
 
 	const [mailDataRequest, trigger] = useLensRequest({
@@ -27,21 +27,24 @@ const useRpaMail = ({ mailId, entity_type, format_data = true }) => {
 	}, [trigger]);
 
 	const formatterFunction = formatters[entity_type];
-	const newMailData = [];
-	if (mailDataRequest?.data) {
-		newMailData.push(mailDataRequest?.data);
-	}
 
-	const newMailId = [];
-	newMailId.push(mailId);
+	const newMailData = [];
+
+	if (mailDataRequest?.data) newMailData.push(mailDataRequest?.data);
+
+	const newMailId = [mailId];
+
 	const newMailSelected = {
 		mail_ids : newMailId || [],
 		mailData : newMailData || [],
 	};
+
 	let formattedData = [];
-	if (newMailData.length && format_data) {
+
+	if (newMailData?.length && format_data) {
 		formattedData = formatterFunction(newMailSelected);
 	}
+
 	const data = { formatted: formattedData, _meta: newMailSelected };
 
 	useEffect(() => {

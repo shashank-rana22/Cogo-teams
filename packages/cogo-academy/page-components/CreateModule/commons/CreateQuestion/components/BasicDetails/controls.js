@@ -9,12 +9,13 @@ const getControls = ({ mode }) => [
 	},
 	{
 		name    : 'question_type',
-		type    : 'chips',
+		type    : 'select',
 		label   : 'Pick Question Type',
 		value   : 'stand_alone',
 		options : [
 			{ value: 'stand_alone', label: 'Stand Alone' },
 			{ value: 'case_study', label: 'Case Study' },
+			{ value: 'subjective', label: 'Subjective' },
 		],
 		multiple: false,
 	},

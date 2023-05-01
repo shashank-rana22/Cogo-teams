@@ -95,6 +95,7 @@ const useGetControls = ({ truckTypeToggle }) => {
 				rules : { required: 'Type of stuffing at origin is required' },
 			},
 		],
+
 		trailer_freight: [
 			{
 				label       : 'Pickup/Drop Pincode',
@@ -120,7 +121,6 @@ const useGetControls = ({ truckTypeToggle }) => {
 				span        : 12,
 				rules       : { required: 'This is required' },
 				...locationAsyncOptions,
-
 			},
 			{
 				name     : 'truck_body_type',
@@ -147,8 +147,10 @@ const useGetControls = ({ truckTypeToggle }) => {
 				min       : 1,
 			},
 		],
-		haulage_freight : [],
-		fcl_cfs         : [
+
+		haulage_freight: [],
+
+		fcl_cfs: [
 			{
 				name      : 'cargo_handling_type',
 				label     : 'Select type of stuffing',
