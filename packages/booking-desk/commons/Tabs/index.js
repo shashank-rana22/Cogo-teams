@@ -39,9 +39,9 @@ export default function Tabs({ stateProps = {}, tabs = [] }) {
 					<Toggle
 						size="md"
 						offLabel="Critical SIDs"
-						checked={filters.isCriticalOn}
+						checked={isCriticalOn}
 						onChange={() => {
-							setFilters({ ...filters, isCriticalOn: !filters.isCriticalOn });
+							setFilters({ ...filters, isCriticalOn: !isCriticalOn });
 						}}
 					/>
 				</div>
