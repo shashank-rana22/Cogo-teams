@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 const controlsMapping = { asyncSelect: AsyncSelectController, select: SelectController, number: InputController };
 
 function FormElement(props) {
-	const { name, type, label, errors } = props;
+	const { name, type, label, errors } = props || {};
 	const Element = controlsMapping[type];
 
 	if (type in controlsMapping) {
@@ -35,7 +35,7 @@ function SupplierReallocation({
 	const { documents, shipment_type } = shipment_data || {};
 
 	const serviceObj = serviceData?.[0] || {};
-	const { service_type, importer_exporter } = serviceObj;
+	const { service_type, importer_exporter } = serviceObj || {};
 
 	const { defaultValues, controls, showAllControls } = getControls({
 		serviceObj, shipment_type, documents, isAdditional,
@@ -48,11 +48,12 @@ function SupplierReallocation({
 		refetchServices();
 		setShow(false);
 	};
+
 	const {
 		apiTrigger, loading,
 	} = useUpdateShipmentService({
 		refetch        : afterUpdateRefetch,
-		successMessage : 'Service updated successfully',
+		successMessage : 'Service updated successfully!',
 	});
 
 	const onUpdate = (values) => {
@@ -83,11 +84,12 @@ function SupplierReallocation({
 					</div>
 				)}
 				/>
+
 				<div className={styles.form_wrapper}>
 					{controls.map((ctrl) => <FormElement {...ctrl} control={control} errors={errors} />)}
 				</div>
-
 			</Modal.Body>
+
 			<Modal.Footer>
 				<Button
 					themeType="secondary"
