@@ -1,12 +1,13 @@
-import { Button, Stepper, RadioGroup, Toast, Modal } from '@cogoport/components';
+import { Button, Stepper, RadioGroup, Toast } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import Layout from '../../Air/commons/Layout';
 import useCreateShipmentDocument from '../GenerateMawbDoc/useCreateShipmentDocument';
 import UploadMAWB from '../UploadMAWB';
 
+import ConfirmModal from './ConfirmModal';
 import styles from './styles.module.css';
 
 const items = [
@@ -69,6 +70,14 @@ function FormContainer({
 		}
 		setConfirmDelete(false);
 	};
+
+	useEffect(() => {
+		if (taskItem?.status === 'uploaded') {
+			onChange('upload');
+		} else {
+			onChange('manual');
+		}
+	}, [taskItem?.status]);
 
 	function RemoveHawb() {
 		return (
@@ -172,6 +181,7 @@ function FormContainer({
 				<UploadMAWB
 					item={item}
 					edit={edit}
+					taskItem={taskItem}
 					setEdit={setEdit}
 					setGenerate={setGenerate}
 					activeCategory={activeCategory}
@@ -271,42 +281,13 @@ function FormContainer({
 				</>
 			)}
 			{confirmDelete && (
-				<Modal
-					size="md"
-					show={confirmDelete}
-					onClose={() => setConfirmDelete(false)}
-					scroll={false}
-				>
-					<Modal.Header title={(<h4 style={{ textAlign: 'center' }}>Confirm Delete</h4>)} />
-					<Modal.Body>
-						<div className={styles.sure_approve}>
-							Are you sure you want to delete
-							{' '}
-							<span>{activeHawb?.documentNo || 'this'}</span>
-							{' '}
-							HAWB
-						</div>
-					</Modal.Body>
-					<Modal.Footer>
-						<Button
-							style={{ marginRight: '10px', border: '1px solid #333' }}
-							size="md"
-							disabled={loading}
-							onClick={() => setConfirmDelete(false)}
-							themeType="secondary"
-						>
-							Cancel
-						</Button>
-						<Button
-							size="md"
-							themeType="accent"
-							disabled={loading}
-							onClick={() => { deleteHAWB(); }}
-						>
-							Confirm
-						</Button>
-					</Modal.Footer>
-				</Modal>
+				<ConfirmModal
+					confirmDelete={confirmDelete}
+					setConfirmDelete={setConfirmDelete}
+					activeHawb={activeHawb}
+					loading={loading}
+					deleteHAWB={deleteHAWB}
+				/>
 			)}
 		</div>
 	);

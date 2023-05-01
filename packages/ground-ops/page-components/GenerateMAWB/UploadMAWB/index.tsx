@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Layout from '../../Air/commons/Layout';
 import useCreateShipmentDocument from '../GenerateMawbDoc/useCreateShipmentDocument';
@@ -9,9 +9,9 @@ import styles from '../styles.module.css';
 import uploadControls from './controls';
 
 function UploadMAWB({
-	item, edit, setEdit, setGenerate, activeCategory, activeHawb, hawbDetails, setHawbDetails, setActiveHawb,
+	item, edit, setEdit, setGenerate, activeCategory, activeHawb, hawbDetails, setHawbDetails, setActiveHawb, taskItem,
 }) {
-	const { control, handleSubmit, formState: { errors } } = useForm();
+	const { control, handleSubmit, setValue, formState: { errors } } = useForm();
 	const fields = uploadControls();
 	const { upload, loading } = useCreateShipmentDocument({
 		edit,
@@ -62,6 +62,12 @@ function UploadMAWB({
 		};
 		upload({ payload });
 	};
+
+	useEffect(() => {
+		setValue('document_number', taskItem?.document_number);
+		setValue('document', taskItem.documentUrl);
+	}, [setValue, taskItem]);
+
 	return (
 		<div>
 			{activeCategory === 'hawb' &&	<Layout fields={fields.hawb_controls} errors={errors} control={control} />}
