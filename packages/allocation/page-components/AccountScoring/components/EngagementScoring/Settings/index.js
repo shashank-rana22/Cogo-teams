@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 function Settings({ setToggleComponent = () => {} }) {
 	const formProps = useForm();
-	const { control, handleSubmit, formState: { errors }, watch } = formProps;
+	const { control, handleSubmit, formState: { errors }, watch, reset } = formProps;
 
 	const {
 		settingsLoading = false,
@@ -41,6 +41,7 @@ function Settings({ setToggleComponent = () => {} }) {
 				control={control}
 				handleSubmit={handleSubmit}
 				errors={errors}
+				reset={reset}
 			/>
 
 			<BiasSetting
@@ -50,6 +51,7 @@ function Settings({ setToggleComponent = () => {} }) {
 				control={control}
 				handleSubmit={handleSubmit}
 				errors={errors}
+				reset={reset}
 			/>
 
 			<DistributionSetting
@@ -57,6 +59,7 @@ function Settings({ setToggleComponent = () => {} }) {
 				handleSubmit={handleSubmit}
 				errors={errors}
 				watch={watch}
+				reset={reset}
 			/>
 		</div>
 

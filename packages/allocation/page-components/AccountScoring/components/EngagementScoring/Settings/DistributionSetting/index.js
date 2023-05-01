@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 function DistributionSetting(props) {
 	const {
-		control, handleSubmit, errors, watch,
+		control, handleSubmit, errors, watch, reset,
 	} = props;
 
 	const {
@@ -48,6 +48,7 @@ function DistributionSetting(props) {
 				handleSubmit={handleSubmit}
 				errors={errors}
 				watch={watch}
+				reset={reset}
 				inputStyle="distribution_input"
 				heading="Distribution Settings"
 				tooltipData="Multiplier to calculate warmness of the KAM based on the region they lie in."

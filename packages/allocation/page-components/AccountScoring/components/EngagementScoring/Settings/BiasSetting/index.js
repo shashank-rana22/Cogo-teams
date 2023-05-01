@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 function BiasSetting(props) {
 	const {
 		settingsLoading, settingsRefetch, biasList,
-		control, handleSubmit, errors,
+		control, handleSubmit, errors, reset,
 	} = props;
 
 	const [editing, setEditing] = useState(false);
@@ -42,6 +42,7 @@ function BiasSetting(props) {
 				control={control}
 				handleSubmit={handleSubmit}
 				errors={errors}
+				reset={reset}
 				inputStyle="bias_input"
 				heading="Bias Settings"
 				tooltipData="Bias is used to calculate the warmness of the KAM."
