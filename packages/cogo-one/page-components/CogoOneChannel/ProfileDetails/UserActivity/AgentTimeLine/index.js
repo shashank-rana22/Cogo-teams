@@ -16,6 +16,7 @@ function AgentTimeLine({ timeLineList = [] }) {
 					created_at,
 					conversation_started_at,
 					channel = '',
+					status = '',
 					user_data :{ name: voiceCallUserName = '' } = {},
 				} = item || {};
 				const { name : presentAgent } = agent_data || {};
@@ -36,10 +37,11 @@ function AgentTimeLine({ timeLineList = [] }) {
 							<div className={styles.card}>
 								<div className={styles.title}>
 									{getVoiceCallStatement({
-										type     : conversation_type,
-										present  : presentAgent,
-										previous : channel === 'voice_call' ? voiceCallUserName : previousAgent,
-										startAt  : conversation_started_at,
+										type            : conversation_type,
+										present         : presentAgent,
+										previous        : channel === 'voice_call' ? voiceCallUserName : previousAgent,
+										startAt         : conversation_started_at,
+										voiceCallStatus : status,
 									})}
 								</div>
 								<div className={styles.user_avatar}>
