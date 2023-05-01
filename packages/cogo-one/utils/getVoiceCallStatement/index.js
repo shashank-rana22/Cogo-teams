@@ -1,12 +1,9 @@
 import { startCase } from '@cogoport/utils';
 
+import { ICON_MAPPING } from '../../constants';
+
 import styles from './styles.module.css';
 
-const ICON_MAPPING = {
-	incoming : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incoming-call-green.png',
-	outgoing : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoing-call-orange.png',
-	missed   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png',
-};
 const getVoiceCallStatus = ({ type, status, present, previous }) => {
 	const statementMapping = {
 		incoming : `${startCase(present)} got incoming call from ${startCase(previous)}`,
