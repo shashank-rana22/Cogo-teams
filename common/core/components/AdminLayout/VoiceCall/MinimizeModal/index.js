@@ -51,7 +51,6 @@ function MinimizeModal({
 				<div className={styles.min_number}>{name || `${mobile_country_code} ${mobile_number}`}</div>
 				<div className={styles.status_container}>
 					<div className={styles.min_duration}>{startCase(status) || 'Connecting...'}</div>
-					{' '}
 					<div className={styles.min_duration}>
 						{durationTime()}
 					</div>
