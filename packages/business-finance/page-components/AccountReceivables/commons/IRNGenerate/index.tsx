@@ -9,10 +9,13 @@ import useGetIrnGeneration from '../../hooks/useGetIrnGeneration';
 import useGetRefresh from '../../hooks/useGetRefresh';
 import useUploadeInvoice from '../../hooks/useUploadInvoice';
 
+import InvoiceModal from './InvoiceModal';
 import styles from './styles.module.css';
 
 type Itemdata = {
 	id?: string
+	invoiceStatus?: string
+	entityCode?: number
 };
 interface IRNGeneration {
 	itemData?: Itemdata
@@ -25,30 +28,6 @@ const financeRejectCheck = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
 const { cogoport_entities } = GLOBAL_CONSTANTS || {};
 
 function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
-	// const { generateIrn, loading } = useGetIrnGeneration({
-	// 	id: itemData.id,
-	// 	refetch,
-	// });
-
-	// const content = () => (
-	// 	<div
-	// 		style={{
-	// 			display       : 'flex',
-	// 			flexDirection : 'column',
-	// 			width         : 'maxContent',
-	// 			margin        : '8px',
-	// 		}}
-	// 	>
-	// 		<Button
-	// 			className="secondary sm"
-	// 			disabled={loading}
-	// 			onClick={() => generateIrn()}
-	// 		>
-	// 			Generate IRN
-	// 		</Button>
-	// 	</div>
-	// );
-
 	const [uploadInvoice, setUploadInvoice] = useState(false);
 	const [openReject, setOpenReject] = useState(false);
 	const [show, setShow] = useState(false);
@@ -64,7 +43,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 		refetch,
 	});
 
-	const { generateIrn, loading, finalPostFromSage, finalPostLoading } =		useGetIrnGeneration({
+	const { generateIrn, loading, finalPostFromSage, finalPostLoading } = useGetIrnGeneration({
 		id: itemData?.id,
 		refetch,
 	});
@@ -80,8 +59,6 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 		partner,
 	});
 
-	// const invoiceControls = uploadInvoiceControls();
-
 	const { daysLeftForAutoIrnGeneration = '' } = itemData || {};
 
 	const financeRejected = () => {
@@ -90,7 +67,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	};
 
 	const onChange = (e) => {
-		setTextValue(e.target.value);
+		setTextValue(e);
 	};
 	const { labels } = cogoport_entities[itemData?.entityCode] || {};
 
@@ -109,15 +86,14 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 							Upload E-invoice
 						</Button>
 					</div>
-					{/* {uploadInvoice ? (
+					{uploadInvoice ? (
 						<InvoiceModal
 							uploadInvoice={uploadInvoice}
 							setUploadInvoice={setUploadInvoice}
-							controls={invoiceControls}
 							uploadEInvoice={uploadEInvoice}
 							loading={invoiceLoading}
 						/>
-					) : null} */}
+					) : null}
 				</div>
 			) : (
 				<div style={{ display: 'flex', flexDirection: 'column', margin: '8px', width: 'maxContent' }}>
@@ -131,6 +107,17 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 							{' '}
 							{irn_label}
 						</Button>
+					)}
+					{invoiceStatus === 'POSTED' && (
+						<div className={styles.button_container}>
+							<Button
+								className="secondary sm"
+								disabled={finalPostLoading}
+								onClick={() => finalPostFromSage()}
+							>
+								<div className={styles.button_style}>Final Post</div>
+							</Button>
+						</div>
 					)}
 					{financeRejectCheck.includes(itemData?.invoiceStatus) && (
 						<div className={styles.button_container}>
@@ -151,15 +138,19 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 								setOpenReject(false);
 							}}
 						>
-							<div>
-								<div>Remarks*</div>
-								<div>
-									<Textarea
-										themeType="large"
-										value={textValue}
-										onChange={onChange}
-									/>
-								</div>
+
+							<Modal.Header title="Remarks*" />
+							<Modal.Body>
+
+								<Textarea
+									size="md"
+									value={textValue}
+									onChange={onChange}
+									style={{ height: '100px' }}
+								/>
+
+							</Modal.Body>
+							<Modal.Footer>
 								<div className={styles.button_val}>
 									<Button
 										className="secondary sm"
@@ -179,7 +170,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 										Reject
 									</Button>
 								</div>
-							</div>
+							</Modal.Footer>
 						</Modal>
 					)}
 
@@ -194,17 +185,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 							</Button>
 						</div>
 					)}
-					{invoiceStatus === 'POSTED' && (
-						<div className={styles.button_container}>
-							<Button
-								className="secondary sm"
-								disabled={finalPostLoading}
-								onClick={() => finalPostFromSage()}
-							>
-								<div className={styles.button_style}>Final Post</div>
-							</Button>
-						</div>
-					)}
+
 				</div>
 			)}
 		</div>
@@ -213,6 +194,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	return (
 		<Popover
 			placement="left"
+			interactive
 			render={content()}
 		>
 

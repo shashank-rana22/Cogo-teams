@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+
 export const INVOICE_LIST_FILTERS = [
 	{
 		name        : 'migrated',
@@ -51,7 +53,6 @@ export const INVOICE_MORE_FILTERS = [
 		label       : 'Services',
 		name        : 'services',
 		type        : 'multiSelect',
-		size        : 'sm',
 		isClearable : true,
 		placeholder : 'Shipment Type',
 		options     : [
@@ -68,6 +69,8 @@ export const INVOICE_MORE_FILTERS = [
 			{ value: 'fcl_freight_local', label: 'FCL Freight Local' },
 			{ value: 'rail_domestic_freight', label: 'Rail Domestic' },
 		],
+		span: 6,
+
 	},
 	{
 		label                 : 'Invoice Date',
@@ -75,7 +78,7 @@ export const INVOICE_MORE_FILTERS = [
 		type                  : 'singleDateRange',
 		placeholder           : 'Invoice Date',
 		isPreviousDaysAllowed : true,
-		span                  : 3.5,
+		span                  : 4.5,
 	},
 	{
 
@@ -84,7 +87,26 @@ export const INVOICE_MORE_FILTERS = [
 		type                  : 'singleDateRange',
 		placeholder           : 'Due Date',
 		isPreviousDaysAllowed : true,
-		span                  : 3.5,
+		span                  : 6,
+	},
+	{
+		label       : 'Currency',
+		name        : 'currency',
+		type        : 'select',
+		placeholder : 'Currency',
+		options     : [
+			GLOBAL_CONSTANTS.currency_code.USD,
+			GLOBAL_CONSTANTS.currency_code.INR,
+			GLOBAL_CONSTANTS.currency_code.EUR,
+			GLOBAL_CONSTANTS.currency_code.GBP,
+			GLOBAL_CONSTANTS.currency_code.CAD,
+			GLOBAL_CONSTANTS.currency_code.SGD,
+			GLOBAL_CONSTANTS.currency_code.VND,
+		].map((currencyCode) => ({
+			label : currencyCode,
+			value : currencyCode,
+		})),
+
 	},
 
 ];

@@ -53,7 +53,7 @@ const useGetIrnGeneration = ({ id, refetch }: IrnGenerationProps) => {
 			const resp = await finalPostTrigger({
 				data: {
 					invoiceIds  : [id],
-					performedBy : profile?.id,
+					performedBy : profile?.user?.id,
 				},
 			});
 			refetch();

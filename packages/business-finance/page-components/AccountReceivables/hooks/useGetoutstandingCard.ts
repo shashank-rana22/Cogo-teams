@@ -32,6 +32,7 @@ interface InvoiceFilterProps {
 	status?: string,
 	invoiceStatus?: string,
 	services?: string[],
+	currency?: string
 }
 
 const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
@@ -68,9 +69,11 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 		{ manual: true },
 	);
 
+	console.log('invoiceFilters', invoiceFilters);
+
 	const {
 		page, pageLimit, migrated, status, invoiceStatus,
-		services, search, dueDate, invoiceDate, orgId,
+		services, search, dueDate, invoiceDate, orgId, currency,
 	} = invoiceFilters || {};
 
 	const dueDateStart = dueDate && format(dueDate?.startDate, 'yyyy-MM-dd', {}, false);
@@ -101,13 +104,16 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 					invoiceDateStart,
 					invoiceDateEnd,
 					cogoEntity    : entityCode || undefined,
+					currency      : currency || undefined,
 				},
 			});
 		} catch (e) {
 			if (e?.error?.message) { Toast.error(e?.error?.message || 'Failed'); }
 		}
-	}, [dueDateEnd, dueDateStart, invoiceDateEnd, invoiceDateStart,
-		invoiceStatus, listApi, migrated, orgId, page, pageLimit, query, services, status, userData.id, entityCode]);
+	}, [listApi, page, pageLimit, migrated,
+		status, invoiceStatus,
+		services, query, userData.id, orgId, dueDateStart, dueDateEnd,
+		invoiceDateStart, invoiceDateEnd, entityCode, currency]);
 
 	const sendReport = async () => {
 		try {

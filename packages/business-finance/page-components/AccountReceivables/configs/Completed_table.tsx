@@ -118,7 +118,7 @@ const completedColumn = (refetch: Function, showName: boolean) => [
 					<div>
 						{getPrice(
 							getByKey(row, 'invoiceAmount') as number,
-							getByKey(row, 'ledgerCurrency') as string,
+							getByKey(row, 'invoiceCurrency') as string,
 						)}
 
 					</div>
@@ -152,7 +152,7 @@ const completedColumn = (refetch: Function, showName: boolean) => [
 				<div>
 					{getPrice(
 						getByKey(row, 'balanceAmount') as number,
-						getByKey(row, 'ledgerCurrency') as string,
+						getByKey(row, 'invoiceCurrency') as string,
 					)}
 
 				</div>

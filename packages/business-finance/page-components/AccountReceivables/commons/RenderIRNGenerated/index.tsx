@@ -5,7 +5,7 @@ import IRNCancel from '../IRNCancel';
 import IRNGenerate from '../IRNGenerate';
 
 function RenderIRNGenerated({ itemData, refetch }) {
-	const isEligibleCheck = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
+	const isEligibleCheck = ['FINANCE_ACCEPTED', 'POSTED', 'IRN_FAILED'];
 	const isCancellableCheck = ['IRN_GENERATED', 'POSTED', 'FAILED'];
 	const render = () => {
 		if (isEligibleCheck.includes((getByKey(itemData, 'invoiceStatus') as string))) {

@@ -3,7 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useFinanceReject = ({ id, textValue, refetch }) => {
-	const { user_profile } = useSelector(({ profile }) => ({
+	const { user_profile: UserProfile } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
 
@@ -25,9 +25,9 @@ const useFinanceReject = ({ id, textValue, refetch }) => {
 				data: {
 					invoiceId       : id,
 					rejectionReason : textValue,
-					updatedBy       : user_profile?.id,
+					updatedBy       : UserProfile?.user?.id,
 					performedByUserType:
-						user_profile.session_type === 'partner' ? 'AGENT' : 'USER',
+                    UserProfile.session_type === 'partner' ? 'AGENT' : 'USER',
 				},
 			});
 			if (resp.status === 200) {
