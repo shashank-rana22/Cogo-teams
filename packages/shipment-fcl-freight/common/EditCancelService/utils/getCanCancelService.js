@@ -1,6 +1,6 @@
 const serviceCancellationStates = ['init', 'awaiting_service_provider_confirmation', 'confirmed_by_service_provider'];
 
-const showCancellationStakeholders = ['superadmin', 'booking_desk',
+const SHOW_CANCELLATION_STAKEHOLDERS = ['superadmin', 'booking_desk',
 	'document_desk', 'costbooking_ops', 'booking_desk_manager'];
 
 const serviceCompletedOrCancelled = ['completed', 'cancelled'];
@@ -13,7 +13,7 @@ export default function getCanCancelService({ shipment_data, user_data, state, a
 		return true;
 	}
 
-	const userCanCancel = showCancellationStakeholders.includes(activeStakeholder);
+	const userCanCancel = SHOW_CANCELLATION_STAKEHOLDERS.includes(activeStakeholder);
 	const serviceInCancellationState = serviceCancellationStates.includes(state);
 
 	return serviceInCancellationState && userCanCancel;

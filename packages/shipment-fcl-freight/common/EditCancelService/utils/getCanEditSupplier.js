@@ -1,6 +1,6 @@
 const editSupplierServiceStates = ['init', 'awaiting_service_provider_confirmation', 'confirmed_by_service_provider'];
 
-const showEditSupplierStakeholders = ['superadmin', 'booking_desk', 'document_desk',
+const SHOW_EDIT_SUPPLIER_STAKEHOLDERS = ['superadmin', 'booking_desk', 'document_desk',
 	'costbooking_ops', 'booking_desk_manager'];
 
 const serviceCompletedOrCancelled = ['completed', 'cancelled'];
@@ -10,7 +10,7 @@ export default function getCanEditSupplier({ shipment_data, user_data, state, ac
 		return true;
 	}
 
-	const userCanCancel = showEditSupplierStakeholders.includes(activeStakeholder);
+	const userCanCancel = SHOW_EDIT_SUPPLIER_STAKEHOLDERS.includes(activeStakeholder);
 
 	const serviceInEditSupplierState = editSupplierServiceStates?.includes(state);
 

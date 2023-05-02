@@ -9,7 +9,7 @@ import useUpdateShipment from '../../hooks/useUpdateShipment';
 import getCancelShipmentPayload from './getCancelShipmentPayload';
 import styles from './styles.module.css';
 
-const stakeholderMapping = {
+const STAKEHOLDER_MAPPING = {
 	booking_desk         : 'service_ops1',
 	booking_desk_manager : 'service_ops1',
 };
@@ -31,8 +31,8 @@ export default function CancelShipment({ setShow }) {
 		getReasons({
 			filters: {
 				shipment_type    : 'fcl_freight',
-				stakeholder_type : [activeStakeholder in stakeholderMapping
-					? stakeholderMapping[activeStakeholder]
+				stakeholder_type : [activeStakeholder in STAKEHOLDER_MAPPING
+					? STAKEHOLDER_MAPPING[activeStakeholder]
 					: activeStakeholder],
 			},
 			shipment_id          : id,
