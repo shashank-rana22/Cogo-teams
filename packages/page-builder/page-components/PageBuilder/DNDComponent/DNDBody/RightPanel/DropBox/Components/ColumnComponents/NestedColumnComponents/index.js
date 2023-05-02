@@ -64,7 +64,7 @@ function NestedColumnComponent({
                 && componentId === selectedRowId
                 && childrenId === nestedColumnId;
 
-				const nestedBorder = isNestedChildSelected ? '5px solid yellow' : allStyles.border;
+				const nestedBorder = isNestedChildSelected ? '1px solid yellow' : allStyles.border;
 
 				return (
 

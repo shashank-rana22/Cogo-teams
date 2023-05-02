@@ -28,6 +28,7 @@ function Components(props) {
 		setSelectedColumn,
 		selectedNestedColumn,
 		setSelectedNestedColumn,
+		handleUnselectItem,
 	} = props;
 
 	const itemRef = useRef(null);
@@ -44,6 +45,7 @@ function Components(props) {
 		setShowContentModal,
 		setSelectedColumn,
 		setSelectedNestedColumn,
+		handleUnselectItem,
 	});
 
 	const [{ handlerId }, drop] = useDrop({
@@ -106,7 +108,7 @@ function Components(props) {
 
 	const opacity = isNewItemAdding && !id ? '0.3' : '1';
 
-	const border = isSelected && '5px solid red';
+	const border = isSelected && '1px solid red';
 
 	drag(drop(itemRef));
 

@@ -8,13 +8,14 @@ function NumberInput(props) {
 	const {
 		NumberKey,
 		pageConfiguration,
-		// setPageConfiguration,
 		selectedItem,
 		isRootComponent,
 		handleChange,
+		settingType,
 	} = props;
 
-	const numberValue = isRootComponent ? pageConfiguration.style?.[NumberKey] : selectedItem.style?.[NumberKey];
+	const numberValue = isRootComponent ? pageConfiguration.style?.[NumberKey]
+		: selectedItem?.component?.style?.[NumberKey];
 
 	const handleInputChange = useCallback(
 		(type) => {
@@ -26,9 +27,9 @@ function NumberInput(props) {
 				modifiedValue -= 1;
 			}
 
-			handleChange(NumberKey, modifiedValue);
+			handleChange(NumberKey, modifiedValue, settingType);
 		},
-		[handleChange, NumberKey, numberValue],
+		[handleChange, NumberKey, numberValue, settingType],
 	);
 
 	return (
@@ -36,7 +37,7 @@ function NumberInput(props) {
 			size="sm"
 			placeholder="0"
 			value={numberValue}
-			onChange={(val) => handleChange(NumberKey, Number(val))}
+			onChange={(val) => handleChange(NumberKey, Number(val), settingType)}
 			className={styles.ui_input_container}
 			prefix={(
 				<Button

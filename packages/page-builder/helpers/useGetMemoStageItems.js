@@ -23,6 +23,7 @@ const useGetMemoStagedItems = ({
 	setStageItems,
 	setNewAddingItemProps,
 	newAddingItemProps,
+	handleUnselectItem,
 }) => {
 	const { moveItem } = useGetShiftComponent({ stageItems, setStageItems });
 
@@ -60,6 +61,7 @@ const useGetMemoStagedItems = ({
 					setSelectedColumn={setSelectedColumn}
 					selectedNestedColumn={selectedNestedColumn}
 					setSelectedNestedColumn={setSelectedNestedColumn}
+					handleUnselectItem={handleUnselectItem}
 				/>
 			</div>
 		);

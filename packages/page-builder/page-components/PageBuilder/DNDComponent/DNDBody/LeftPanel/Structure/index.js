@@ -59,8 +59,7 @@ function Structure(props) {
 					isRendered : false,
 					style      : {
 						width          : row,
-						border         : '1px dashed #9ab7fe',
-						margin         : '2px',
+						// border         : '1px dashed #9ab7fe',
 						display        : 'flex',
 						justifyContent : 'center',
 						alignItems     : 'center',

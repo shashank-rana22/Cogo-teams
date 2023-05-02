@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 function ButtonComponent(props) {
 	const {
 		widget,
+		rowData,
 	} = props;
 
 	const { content = 'Click Here', themeType, size, type, attributes } = widget || {};
@@ -18,9 +19,11 @@ function ButtonComponent(props) {
 				themeType={themeType}
 				size={size}
 				onClick={onClick}
+				contentEditable
 			>
 				{content}
 			</Button>
+
 		</div>
 	);
 }

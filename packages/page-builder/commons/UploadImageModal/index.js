@@ -2,9 +2,8 @@ import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcMUpload } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
-
-// import useUpdateStatus from '../../../hooks/useUpdateStatus';
 
 import styles from './styles.module.css';
 
@@ -12,6 +11,9 @@ function UploadImageModal(props) {
 	const {
 		setShowUploadModal,
 		handleChange,
+		rowData = {},
+		type = 'background',
+		accept,
 	} = props;
 
 	const { handleSubmit } = useForm();
@@ -21,7 +23,11 @@ function UploadImageModal(props) {
 	const uploadImage = () => {
 		const value = `url(${uploadProof})`;
 
-		handleChange('background-image', value);
+		if (type !== 'background') {
+			handleChange(uploadProof, rowData);
+		} else {
+			handleChange('background-image', value);
+		}
 
 		setShowUploadModal(false);
 	};
@@ -29,7 +35,7 @@ function UploadImageModal(props) {
 	return (
 
 		<>
-			<Modal.Header title="Upload Image" />
+			<Modal.Header title={`Upload ${startCase(type)}`} />
 
 			<form onSubmit={handleSubmit(uploadImage)}>
 				<Modal.Body>
@@ -39,9 +45,9 @@ function UploadImageModal(props) {
 							onChange={setUploadProof}
 							showProgress
 							draggable
-							uploadDesc="Upload Image"
+							uploadDesc={`Upload ${startCase(type)}`}
 							uploadIcon={<IcMUpload height={40} width={40} />}
-							accept=".png, .jpg, .webp, .webm, .jpeg, .svg, .gif, .mp4"
+							accept={accept}
 						/>
 					</div>
 				</Modal.Body>

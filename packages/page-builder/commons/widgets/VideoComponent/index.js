@@ -1,7 +1,9 @@
+import { Modal } from '@cogoport/components';
 import { IcMVideoCall } from '@cogoport/icons-react';
+import { useState } from 'react';
 
 import useUpdateComponentsContent from '../../../helpers/useUpdateComponentsContent';
-import FileUploader from '../FileUploader';
+import UploadImageModal from '../../UploadImageModal';
 
 import styles from './styles.module.css';
 
@@ -18,6 +20,8 @@ function VideoComponent(props) {
 		columnData,
 		nestedColumData,
 	} = props;
+
+	const [showUploadModal, setShowUploadModal] = useState(false);
 
 	const { component } = widget || {};
 
@@ -53,14 +57,34 @@ function VideoComponent(props) {
 					/>
 				</div>
 			) : (
-				<FileUploader
-					value={content}
-					onChange={(val) => handleUpdateContent(val, rowData)}
-					uploadDesc="Upload"
-					uploadIcon={<IcMVideoCall width="60px" height="60px" />}
-
-				/>
+				<div style={{ display: 'flex', justifyContent: 'center' }}>
+					<div
+						onClick={() => setShowUploadModal(true)}
+						role="presentation"
+						style={{ cursor: 'pointer' }}
+					>
+						<IcMVideoCall width={48} height={48} />
+						<div>Upload</div>
+					</div>
+				</div>
 			) }
+
+			{showUploadModal && (
+				<Modal
+					size="md"
+					placement="top"
+					show={showUploadModal}
+					onClose={() => setShowUploadModal(false)}
+				>
+					<UploadImageModal
+						setShowUploadModal={setShowUploadModal}
+						handleChange={handleUpdateContent}
+						rowData={rowData}
+						type="video"
+						accept=".mp4"
+					/>
+				</Modal>
+			)}
 		</div>
 	);
 }

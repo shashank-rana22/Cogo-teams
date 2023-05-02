@@ -53,6 +53,7 @@ function DropBox({
 		setStageItems,
 		setNewAddingItemProps,
 		newAddingItemProps,
+		handleUnselectItem,
 	});
 
 	const { hoveredIndex, shouldAddBelow } = newAddingItemProps || {};

@@ -66,7 +66,9 @@ function ColumnComponents({
 				} = childrenComponent || {};
 
 				const isChildSelected = columnChildId === id && componentId === selectedRowId;
-				const border = isChildSelected ? '5px solid green' : allStyles.border;
+				// const border = isChildSelected ? '1px solid green' : allStyles.border;
+
+				const { border } = allStyles;
 
 				if (!isEmpty(childChildren) && ['container', 'card', 'formSample'].includes(type)) {
 					return (

@@ -4,7 +4,6 @@
 }	
 
 .element_container {
-	padding: 16px;
 	&:hover {
 		border: 1px solid #88cad1;
 		.change {
