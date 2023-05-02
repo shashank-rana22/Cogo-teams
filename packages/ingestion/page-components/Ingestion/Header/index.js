@@ -5,12 +5,12 @@ import { CONSTANT_KEYS } from '../../../constants/header-mapping';
 import useGetTemplate from '../../../hooks/useGetTemplate';
 import usePostIngestionData from '../../../hooks/usePostIngestionData';
 
-import ChooseModal from './Modals/ChooseModal/index';
+import ChooseModal from './Modals/ChooseModal';
 import { ChooseFooter } from './Modals/Footers/ChooseFooter';
 import { OrgDetailsFooter } from './Modals/Footers/OrgDetailsFooter';
 import { ProviderSelectFooter } from './Modals/Footers/ProviderSelectFooter';
 import { UploadModalFooter } from './Modals/Footers/UploadModalFooter';
-import OrgDetailsModal from './Modals/OrgDetailsModal/index';
+import OrgDetailsModal from './Modals/OrgDetailsModal';
 import ProviderSelectModal from './Modals/ProviderSelectModal';
 import TemplateModal from './Modals/TemplateModal';
 import TermsModal from './Modals/TermsModal';
