@@ -60,6 +60,7 @@ function RightPanel({
 					selectedNestedColumn={selectedNestedColumn}
 					setSelectedNestedColumn={setSelectedNestedColumn}
 					handleUnselectItem={handleUnselectItem}
+					modeType={modeType}
 				/>
 			</div>
 		</div>

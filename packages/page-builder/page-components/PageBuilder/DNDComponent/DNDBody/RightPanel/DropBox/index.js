@@ -28,31 +28,13 @@ function DropBox({
 	selectedNestedColumn,
 	setSelectedNestedColumn,
 	handleUnselectItem,
+	modeType,
 }) {
 	const [stageItems, setStageItems] = useState(pageConfiguration);
 
 	const [newAddingItemProps, setNewAddingItemProps] = useState({
 		hoveredIndex   : 0,
 		shouldAddBelow : false,
-	});
-
-	const { memoItems } = useGetMemoStagedItems({
-		stageItems,
-		setPageConfiguration,
-		isNewItemAdding,
-		setShowContentModal,
-		setParentComponentId,
-		selectedRow,
-		setSelectedRow,
-		selectedItem,
-		setSelectedItem,
-		selectedColumn,
-		setSelectedColumn,
-		selectedNestedColumn,
-		setSelectedNestedColumn,
-		setStageItems,
-		setNewAddingItemProps,
-		newAddingItemProps,
 	});
 
 	const { hoveredIndex, shouldAddBelow } = newAddingItemProps || {};
@@ -74,6 +56,26 @@ function DropBox({
 		}),
 	});
 
+	const { memoItems } = useGetMemoStagedItems({
+		stageItems,
+		setPageConfiguration,
+		isNewItemAdding,
+		setShowContentModal,
+		setParentComponentId,
+		selectedRow,
+		setSelectedRow,
+		selectedItem,
+		setSelectedItem,
+		selectedColumn,
+		setSelectedColumn,
+		selectedNestedColumn,
+		setSelectedNestedColumn,
+		setStageItems,
+		setNewAddingItemProps,
+		newAddingItemProps,
+		modeType,
+	});
+
 	const isActive = canDrop && isOver;
 
 	const backgroundColor = useGetActiveBackgroundColor({ pageConfiguration, isActive, canDrop });
@@ -90,6 +92,12 @@ function DropBox({
 		if (isNewItemAdding) {
 			if (isOver && isNewItemAdding) {
 				const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
+
+				handleUnselectItem();
+
+				if (startIndex === hoveredIndex && hoveredIndex !== 0 && startIndex !== 0) {
+					return;
+				}
 
 				setStageItems((prev) => ({
 					...prev,
@@ -121,7 +129,11 @@ function DropBox({
 				backgroundColor,
 			}}
 		>
-			{isActive ? 'Release to drop' : 'Drag a box here'}
+			{modeType === 'edit' && (
+				<div>
+					{isActive ? 'Release to drop' : 'Drag a box here'}
+				</div>
+			)}
 			{memoItems}
 		</div>
 	);

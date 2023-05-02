@@ -28,6 +28,7 @@ function Components(props) {
 		setSelectedColumn,
 		selectedNestedColumn,
 		setSelectedNestedColumn,
+		modeType,
 	} = props;
 
 	const itemRef = useRef(null);
@@ -44,6 +45,7 @@ function Components(props) {
 		setShowContentModal,
 		setSelectedColumn,
 		setSelectedNestedColumn,
+		modeType,
 	});
 
 	const [{ handlerId }, drop] = useDrop({
@@ -142,19 +144,23 @@ function Components(props) {
 				index={index}
 				type={type}
 				isDraggingPreview={isDraggingPreview}
+				modeType={modeType}
 			/>
 
-			<div role="presentation" className={styles.change}>
-				<SideToolBar
-					rowData={rowData}
-					pageConfiguration={pageConfiguration}
-					handleAddSlides={handleAddSlides}
-					handleCopy={handleCopy}
-					handleDelete={handleDelete}
-					component={component}
-					type={type}
-				/>
-			</div>
+			{modeType === 'edit' && (
+				<div role="presentation" className={styles.change}>
+					<SideToolBar
+						rowData={rowData}
+						pageConfiguration={pageConfiguration}
+						handleAddSlides={handleAddSlides}
+						handleCopy={handleCopy}
+						handleDelete={handleDelete}
+						component={component}
+						type={type}
+					/>
+				</div>
+			)}
+
 		</div>
 	);
 }

@@ -9,6 +9,7 @@ const useGetHelperFunctions = ({
 	setShowContentModal,
 	setSelectedColumn,
 	setSelectedNestedColumn,
+	modeType,
 }) => {
 	const handleDelete = (e, itemList, pageConfiguration) => {
 		e.stopPropagation();
@@ -25,9 +26,11 @@ const useGetHelperFunctions = ({
 	};
 
 	const handleSubmitClick = ({ childrenId, parentId }) => {
-		setParentComponentId({ childId: childrenId, parentId });
+		if (modeType === 'edit') {
+			setParentComponentId({ childId: childrenId, parentId });
 
-		setShowContentModal(true);
+			setShowContentModal(true);
+		}
 	};
 
 	const handleCopy = (e, itemList, component, pageConfiguration) => {
@@ -86,8 +89,10 @@ const useGetHelperFunctions = ({
 	};
 
 	const handleAddItem = ({ childrenId, parentId }) => {
-		setParentComponentId({ childId: childrenId, parentId });
-		setShowContentModal(true);
+		if (modeType === 'edit') {
+			setParentComponentId({ childId: childrenId, parentId });
+			setShowContentModal(true);
+		}
 	};
 
 	const handleAddSlides = (e, itemList, pageConfiguration) => {
@@ -127,11 +132,13 @@ const useGetHelperFunctions = ({
 	};
 
 	const handleSelectRow = (e, itemList, id, index) => {
-		e.stopPropagation();
-		setSelectedRow({ ...itemList, id, index });
-		setSelectedColumn({});
-		setSelectedNestedColumn({});
-		setSelectedItem({});
+		if (modeType === 'edit') {
+			e.stopPropagation();
+			setSelectedRow({ ...itemList, id, index });
+			setSelectedColumn({});
+			setSelectedNestedColumn({});
+			setSelectedItem({});
+		}
 	};
 
 	return { handleDelete, handleCopy, handleSelectRow, handleAddSlides };

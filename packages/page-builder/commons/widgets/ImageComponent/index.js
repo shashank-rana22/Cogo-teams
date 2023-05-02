@@ -13,6 +13,7 @@ function ImageComponent(props) {
 		selectedItem,
 		columnData,
 		nestedColumData,
+		modeType,
 	} = props;
 
 	const { component } = widget || {};
@@ -29,6 +30,7 @@ function ImageComponent(props) {
 		columnData,
 		nestedColumData,
 		type: 'image',
+		modeType,
 	});
 
 	return (

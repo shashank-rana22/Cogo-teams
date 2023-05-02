@@ -10,9 +10,10 @@ const useUpdateComponentsContent = ({
 	nestedColumData,
 	setEditorValue,
 	type,
+	modeType,
 }) => {
 	const handleUpdateContent = (value, rowDetails) => {
-		if (value) {
+		if (value && modeType === 'edit') {
 			const { id } = rowDetails || {};
 
 			const { id: selectedRowId } = selectedRow || {};

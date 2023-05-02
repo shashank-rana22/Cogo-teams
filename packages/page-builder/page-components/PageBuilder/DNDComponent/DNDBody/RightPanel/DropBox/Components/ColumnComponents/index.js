@@ -21,6 +21,7 @@ function ColumnComponents({
 	selectedRow,
 	selectedColumn,
 	selectedNestedColumn,
+	modeType,
 }) {
 	const { id: componentId, component } = widget || {};
 
@@ -41,11 +42,13 @@ function ColumnComponents({
 	}
 
 	const handleClick = (e, columnData) => {
-		e.stopPropagation();
-		setSelectedRow({ ...rowData });
-		setSelectedColumn({ ...columnData });
-		setSelectedNestedColumn({});
-		setSelectedItem({});
+		if (modeType === 'edit') {
+			e.stopPropagation();
+			setSelectedRow({ ...rowData });
+			setSelectedColumn({ ...columnData });
+			setSelectedNestedColumn({});
+			setSelectedItem({});
+		}
 	};
 
 	return (
@@ -64,6 +67,8 @@ function ColumnComponents({
 					style: allStyles,
 					icon,
 				} = childrenComponent || {};
+
+				const { onClick } = attributes || {};
 
 				const isChildSelected = columnChildId === id && componentId === selectedRowId;
 				const border = isChildSelected ? '5px solid green' : allStyles.border;
@@ -90,6 +95,7 @@ function ColumnComponents({
 							handleClick={handleClick}
 							componentId={componentId}
 							id={id}
+							modeType={modeType}
 						/>
 					);
 				}
@@ -106,7 +112,7 @@ function ColumnComponents({
 						{!type ? (
 							<div
 								role="presentation"
-								onClick={attributes.onClick}
+								onClick={() => { if (modeType === 'edit') { onClick(); } }}
 							>
 								{icon}
 							</div>
@@ -132,6 +138,7 @@ function ColumnComponents({
 								setSelectedColumn={setSelectedColumn}
 								selectedNestedColumn={selectedNestedColumn}
 								setSelectedNestedColumn={setSelectedNestedColumn}
+								modeType={modeType}
 							/>
 						) }
 					</div>

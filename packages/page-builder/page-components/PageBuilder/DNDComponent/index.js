@@ -35,10 +35,12 @@ function DNDComponent({ initialPageData, metaData }) {
 	const [selectedNestedColumn, setSelectedNestedColumn] = useState({});
 
 	const handleUnselectItem = () => {
-		setSelectedRow({});
-		setSelectedItem({});
-		setSelectedColumn({});
-		setSelectedNestedColumn({});
+		if (modeType === 'edit') {
+			setSelectedRow({});
+			setSelectedItem({});
+			setSelectedColumn({});
+			setSelectedNestedColumn({});
+		}
 	};
 
 	const {

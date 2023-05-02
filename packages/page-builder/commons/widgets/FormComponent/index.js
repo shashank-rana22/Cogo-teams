@@ -21,6 +21,7 @@ function FormComponent({
 	selectedItem,
 	columnData,
 	nestedColumData,
+	modeType,
 }) {
 	const [show, setShow] = useState(false);
 
@@ -73,7 +74,7 @@ function FormComponent({
 		setShow,
 	});
 
-	const { handleEditForm } = useGetHandleEditForm({ setShowForm, setShow, setValue });
+	const { handleEditForm } = useGetHandleEditForm({ setShowForm, setShow, setValue, modeType });
 
 	return (
 		<div>
@@ -86,6 +87,7 @@ function FormComponent({
 				onDynamicFormSubmit={onDynamicFormSubmit}
 				handleEditForm={handleEditForm}
 				setShow={setShow}
+				modeType={modeType}
 			/>
 			<GenerateFormModal
 				setShow={setShow}

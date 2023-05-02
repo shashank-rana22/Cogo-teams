@@ -41,6 +41,7 @@ function CarouselComponent({
 	selectedRow,
 	selectedColumn,
 	selectedNestedColumn,
+	modeType,
 }) {
 	const { component, id: componentId } = widget || {};
 
@@ -55,8 +56,10 @@ function CarouselComponent({
 	const { id: nestedColumnId } = selectedNestedColumn || {};
 
 	const handleSubmitClick = ({ id, parentId }) => {
-		setParentComponentId({ childId: id, parentId });
-		setShowContentModal(true);
+		if (modeType === 'edit') {
+			setParentComponentId({ childId: id, parentId });
+			setShowContentModal(true);
+		}
 	};
 
 	const handleRemovelides = (e, idx, itemList) => {
@@ -75,19 +78,23 @@ function CarouselComponent({
 	};
 
 	const handleClick = (e, columnData) => {
-		e.stopPropagation();
-		setSelectedRow({ ...rowData });
-		setSelectedColumn({ ...columnData });
-		setSelectedNestedColumn({});
-		setSelectedItem({});
+		if (modeType === 'edit') {
+			e.stopPropagation();
+			setSelectedRow({ ...rowData });
+			setSelectedColumn({ ...columnData });
+			setSelectedNestedColumn({});
+			setSelectedItem({});
+		}
 	};
 
 	const handleNestedClick = (e, columnData, nestedData) => {
-		e.stopPropagation();
-		setSelectedRow({ ...rowData });
-		setSelectedColumn({ ...columnData });
-		setSelectedNestedColumn({ ...nestedData });
-		setSelectedItem({});
+		if (modeType === 'edit') {
+			e.stopPropagation();
+			setSelectedRow({ ...rowData });
+			setSelectedColumn({ ...columnData });
+			setSelectedNestedColumn({ ...nestedData });
+			setSelectedItem({});
+		}
 	};
 
 	return (
@@ -207,16 +214,19 @@ function CarouselComponent({
 										selectedNestedColumn={selectedNestedColumn}
 									/>
 								) }
-								<div role="presentation" className={styles.show_wrapper}>
-									<Tooltip content="Click here to remove current slides" placement="bottom">
-										<IcMDelete
-											height="24px"
-											width="24px"
-											cursor="pointer"
-											onClick={(e) => handleRemovelides(e, idx, widget)}
-										/>
-									</Tooltip>
-								</div>
+
+								{modeType === 'edit' && (
+									<div role="presentation" className={styles.show_wrapper}>
+										<Tooltip content="Click here to remove current slides" placement="bottom">
+											<IcMDelete
+												height="24px"
+												width="24px"
+												cursor="pointer"
+												onClick={(e) => handleRemovelides(e, idx, widget)}
+											/>
+										</Tooltip>
+									</div>
+								)}
 							</div>
 						</div>
 					);

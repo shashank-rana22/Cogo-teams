@@ -54,7 +54,6 @@ function DNDBody({
 				selectedNestedColumn={selectedNestedColumn}
 				modeType={modeType}
 			/>
-
 			<RightPanel
 				pageConfiguration={pageConfiguration}
 				setPageConfiguration={setPageConfiguration}

@@ -22,6 +22,7 @@ function NestedColumnComponent({
 	handleClick,
 	componentId,
 	id,
+	modeType,
 }) {
 	const {
 		children: childChildren,
@@ -35,11 +36,13 @@ function NestedColumnComponent({
 	const { id: nestedColumnId } = selectedNestedColumn || {};
 
 	const handleNesteColumnClick = (e, columnData, nestedData) => {
-		e.stopPropagation();
-		setSelectedRow({ ...rowData });
-		setSelectedColumn({ ...columnData });
-		setSelectedNestedColumn({ ...nestedData });
-		setSelectedItem({});
+		if (modeType === 'edit') {
+			e.stopPropagation();
+			setSelectedRow({ ...rowData });
+			setSelectedColumn({ ...columnData });
+			setSelectedNestedColumn({ ...nestedData });
+			setSelectedItem({});
+		}
 	};
 
 	return (

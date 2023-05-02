@@ -17,6 +17,7 @@ function VideoComponent(props) {
 		selectedItem,
 		columnData,
 		nestedColumData,
+		modeType,
 	} = props;
 
 	const { component } = widget || {};
@@ -33,6 +34,7 @@ function VideoComponent(props) {
 		columnData,
 		nestedColumData,
 		type: 'video',
+		modeType,
 	});
 
 	return (

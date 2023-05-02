@@ -21,6 +21,7 @@ function RenderComponent({
 	index,
 	type,
 	// isDraggingPreview,
+	modeType,
 }) {
 	// if (isDraggingPreview) {
 	// 	return <ComponentsDropPreview type={type} />;
@@ -45,6 +46,7 @@ function RenderComponent({
 						setSelectedColumn={setSelectedColumn}
 						selectedNestedColumn={selectedNestedColumn}
 						setSelectedNestedColumn={setSelectedNestedColumn}
+						modeType={modeType}
 					/>
 				)
 				: (
@@ -73,6 +75,7 @@ function RenderComponent({
 							setSelectedColumn={setSelectedColumn}
 							selectedNestedColumn={selectedNestedColumn}
 							setSelectedNestedColumn={setSelectedNestedColumn}
+							modeType={modeType}
 						/>
 					</div>
 				)}

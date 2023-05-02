@@ -21,6 +21,7 @@ function RenderElement({
 	selectedRow,
 	selectedColumn,
 	selectedNestedColumn,
+	modeType,
 }) {
 	const componentPropsMapping = {
 		text: {
@@ -35,6 +36,7 @@ function RenderElement({
 			selectedItem,
 			columnData,
 			nestedColumData,
+			modeType,
 		},
 
 		image: {
@@ -49,12 +51,14 @@ function RenderElement({
 			selectedItem,
 			columnData,
 			nestedColumData,
+			modeType,
 		},
 
 		button: {
 			widget,
 			pageConfiguration,
 			setPageConfiguration,
+			modeType,
 		},
 
 		video: {
@@ -69,6 +73,7 @@ function RenderElement({
 			selectedItem,
 			columnData,
 			nestedColumData,
+			modeType,
 		},
 
 		html: {
@@ -87,6 +92,7 @@ function RenderElement({
 			selectedItem,
 			columnData,
 			nestedColumData,
+			modeType,
 		},
 
 		carousel: {
@@ -107,6 +113,7 @@ function RenderElement({
 			selectedRow,
 			selectedColumn,
 			selectedNestedColumn,
+			modeType,
 		},
 
 		divider: {
@@ -116,6 +123,7 @@ function RenderElement({
 			setPageConfiguration,
 			childId,
 			elementId,
+			modeType,
 
 		},
 	};
@@ -123,11 +131,13 @@ function RenderElement({
 	const Component = COMPONENT_MAPPING[componentType];
 
 	const handleClick = (e) => {
-		e.stopPropagation();
-		setSelectedRow({ ...rowData });
-		setSelectedColumn({ ...columnData });
-		setSelectedNestedColumn({ ...nestedColumData });
-		setSelectedItem({ ...widget });
+		if (modeType === 'edit') {
+			e.stopPropagation();
+			setSelectedRow({ ...rowData });
+			setSelectedColumn({ ...columnData });
+			setSelectedNestedColumn({ ...nestedColumData });
+			setSelectedItem({ ...widget });
+		}
 	};
 
 	// const { id: columnChildId } = selectedColumn || {};
