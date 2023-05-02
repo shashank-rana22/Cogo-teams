@@ -8,7 +8,6 @@ function useGetQuestions({ id }) {
 		method : 'get',
 		url    : '/get_question',
 	}, { manual: true });
-
 	const fetchQuestions = useCallback(async () => {
 		try {
 			await trigger({
@@ -26,12 +25,10 @@ function useGetQuestions({ id }) {
 			fetchQuestions();
 		}
 	}, [fetchQuestions, id]);
-
 	return {
 		refetchQuestions: fetchQuestions,
 		data,
 		loading,
 	};
 }
-
 export default useGetQuestions;

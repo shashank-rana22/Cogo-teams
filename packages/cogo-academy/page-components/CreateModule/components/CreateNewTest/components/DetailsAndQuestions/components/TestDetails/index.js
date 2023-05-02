@@ -204,6 +204,7 @@ function CreateNewTest({
 							onChange={setUploadDocument}
 							accept=".csv"
 							disabled={!(test_sheet_data.test_sheet_data?.status === 'generated')}
+							defaultValues={data?.test_sheet?.file_url}
 						/>
 					)}
 

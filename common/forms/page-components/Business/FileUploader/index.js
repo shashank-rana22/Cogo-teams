@@ -31,8 +31,11 @@ function FileUploader(props) {
 			}]);
 		}
 		if (multiple && typeof (defaultValues) !== 'string' && defaultValues !== undefined) {
-			const names = defaultValues.map((url) => ({ name: url.split('/').slice(-1).join('') }));
-			const urls = defaultValues.map((url) => ({ fileName: url.split('/').slice(-1).join(''), finalUrl: url }));
+			const names = defaultValues.map((url) => ({ name: url?.split('/')?.slice(-1)?.join('') }));
+			const urls = defaultValues.map((url) => ({
+				fileName : url?.split('/')?.slice(-1)?.join(''),
+				finalUrl : url,
+			}));
 
 			setFileName(names);
 			setUrlStore(urls);

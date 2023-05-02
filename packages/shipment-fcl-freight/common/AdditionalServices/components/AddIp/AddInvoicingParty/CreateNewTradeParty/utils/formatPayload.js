@@ -7,6 +7,7 @@ const formatPayload = ({
 	orgResponse = {},
 	source = '',
 	setFilledDetails = () => {},
+	gstNumber,
 }) => {
 	let newFilledDetails = { ...filledDetails };
 
@@ -27,14 +28,13 @@ const formatPayload = ({
 	} = newFilledDetails;
 
 	const {
-		tax_number = '',
 		tax_number_document_url = '',
-		address_type = '',
 		is_sez,
-		sez_proof = '',
 		poc_details = [],
 		billing_party_name = '',
 		name = '',
+		address = '',
+		pincode = '',
 	} = billing_address || {};
 
 	if (poc_details.length === 0) {
@@ -46,7 +46,7 @@ const formatPayload = ({
 		{
 			name          : 'Trade Party Verification',
 			document_type : 'verification_document',
-			image_url     : verification_document,
+			image_url     : verification_document?.finalUrl,
 			data          : {},
 			source,
 		},
@@ -61,13 +61,13 @@ const formatPayload = ({
 		is_tax_applicable   : !isAddressRegisteredUnderGst,
 		poc_details,
 		address_detail      : {
-			is_sez,
-			sez_proof               : sez_proof || undefined,
-			tax_number              : tax_number.toUpperCase() || undefined,
-			tax_number_document_url : tax_number_document_url || undefined,
-			address_type            : address_type || undefined,
-			country_id              : country_id || undefined,
+			is_sez                  : is_sez || false,
+			tax_number              : gstNumber.toUpperCase() || undefined,
+			tax_number_document_url : tax_number_document_url?.finalUrl || undefined,
+			address,
 			name                    : billing_party_name || name,
+			pincode,
+			gst_list                : gstNumber.toUpperCase(),
 		},
 		organization_trade_party_documents : orgTradePartyDocs,
 		trade_party_type                   : 'paying_party',

@@ -1,7 +1,6 @@
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
-
-import toastApiError from '../../../../../../../utils/toastApiError';
 
 function useGetGstList({ registrationNumber }) {
 	const [{ data }, trigger] = useRequest({
