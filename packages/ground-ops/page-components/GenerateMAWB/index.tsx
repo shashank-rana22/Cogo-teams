@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Modal, Loader } from '@cogoport/components';
+import { Loader } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
+import Modal from '../Air/commons/Modal';
 import useGetHawbList from '../Air/hooks/useGetHawbList';
 
 import FormContainer from './FormContainer';
@@ -340,34 +341,28 @@ function GenerateMAWB({
 			<div className={styles.file_container}>
 				{(back || viewDoc) && (
 					<Modal
-						show={back || viewDoc}
 						onClose={() => { setBack(false); setViewDoc(false); }}
-						size="lg"
-						className={styles.modal_container}
 						style={{ width: '900px', height: '92vh' }}
 					>
-						<Modal.Body style={{ minHeight: '90vh' }}>
-							<GenerateMawbDoc
-								taskItem={taskItem}
-								formData={formData}
-								setBack={setBack}
-								back={back}
-								edit={edit}
-								setEdit={setEdit}
-								viewDoc={viewDoc}
-								chargeableWeight={chargeableWeight}
-								setGenerate={setGenerate}
-								activeCategory={activeCategory}
-								hawbDetails={hawbDetails}
-								setHawbDetails={setHawbDetails}
-								setActiveHawb={setActiveHawb}
-								setActiveKey={setActiveKey}
-								activeHawb={activeHawb}
-								pendingTaskId={pendingTaskId}
-								category={category}
-							/>
-						</Modal.Body>
-
+						<GenerateMawbDoc
+							taskItem={taskItem}
+							formData={formData}
+							setBack={setBack}
+							back={back}
+							edit={edit}
+							setEdit={setEdit}
+							viewDoc={viewDoc}
+							chargeableWeight={chargeableWeight}
+							setGenerate={setGenerate}
+							activeCategory={activeCategory}
+							hawbDetails={hawbDetails}
+							setHawbDetails={setHawbDetails}
+							setActiveHawb={setActiveHawb}
+							setActiveKey={setActiveKey}
+							activeHawb={activeHawb}
+							pendingTaskId={pendingTaskId}
+							category={category}
+						/>
 					</Modal>
 				)}
 			</div>

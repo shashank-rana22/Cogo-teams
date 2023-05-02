@@ -1366,9 +1366,9 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'coe-last_mile',
-				title         : 'Last Mile',
-				href          : '/last-mile',
-				as            : '/last-mile',
+				title         : 'Last Mile Desk',
+				href          : '/v2/last-mile',
+				as            : '/v2/last-mile',
 				type          : 'link',
 				main_apis     : ['list_lastmile_desk_shipments'],
 				possible_apis : [...apis.document_desk, ...apis.cogolens],
