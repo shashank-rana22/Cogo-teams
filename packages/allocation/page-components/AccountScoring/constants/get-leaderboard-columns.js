@@ -111,7 +111,8 @@ const leaderboardColumns = [
 				return '-';
 			}
 
-			const renderToolTip = stakeholder_name?.map((stakeholder) => `${startCase(stakeholder)}, `);
+			const renderToolTip = stakeholder_name?.map((stakeholder) => `${startCase(stakeholder)}
+			${totalStakeholders > 1 ? ', ' : ''}`);
 
 			return (
 				<Tooltip content={renderToolTip} placement="bottom">
