@@ -105,6 +105,7 @@ importers:
       '@cogoport/globalization': link:../common/globalization
       '@cogoport/ground-ops': link:../packages/ground-ops
       '@cogoport/icons-react': 1.0.68_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/last-mile-desk': link:../packages/last-mile-desk
       '@cogoport/locations': link:../packages/locations
       '@cogoport/my-incident': link:../packages/my-incident
       '@cogoport/my-profile': link:../packages/my-profile
@@ -732,7 +733,7 @@ importers:
       '@cogoport/utils': ^1.2.6
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.399_y3d6pejfqbkazdfzmaewia2nra
+      '@cogoport/components': 1.0.410_y3d6pejfqbkazdfzmaewia2nra
       '@cogoport/icons-react': 1.0.68_react@18.2.0
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
@@ -2484,8 +2485,6 @@ packages:
   /@csstools/css-tokenizer/2.1.1:
     resolution: {integrity: sha512-GbrTj2Z8MCTUv+52GE0RbFGM527xuXZ0Xa5g0Z+YN573uveS4G0qi6WNOMyz3yrFM/jaILTTwJ0+umx81EzqfA==}
     engines: {node: ^14 || ^16 || >=18}
-    peerDependencies:
-      '@csstools/css-tokenizer': ^2.1.1
     dependencies:
       '@csstools/css-tokenizer': 2.1.1
     dev: true

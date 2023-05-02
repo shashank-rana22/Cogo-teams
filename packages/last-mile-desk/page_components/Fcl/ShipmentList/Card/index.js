@@ -16,10 +16,11 @@ function Card({ item = {} }) {
 	const router = useRouter();
 
 	const handleCardClick = () => {
-		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/booking/fcl/${item?.id}`;
+		// const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}`;
 
-		window.sessionStorage.setItem('prev_nav', newUrl);
-		window.location.href = newUrl;
+		// window.sessionStorage.setItem('prev_nav', newUrl);
+		// window.location.href = newUrl;
+		router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}`);
 	};
 
 	return (
