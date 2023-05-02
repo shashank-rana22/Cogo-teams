@@ -81,9 +81,7 @@ function Filters() {
 				/>
 			</div>
 
-			<div>
-				<ScopeSelect size="md" defaultValues={scopeFilters} />
-			</div>
+			<ScopeSelect size="md" defaultValues={scopeFilters} />
 		</div>
 	);
 }

@@ -21,7 +21,7 @@ function AppliedFilters() {
 
 	return (
 		<div className={styles.container}>
-			{trade_type && (
+			{trade_type ? (
 				<Pill>
 					<div className={styles.pill_content}>
 						<div className={styles.pill_text}>
@@ -34,9 +34,9 @@ function AppliedFilters() {
 						</div>
 					</div>
 				</Pill>
-			)}
+			) : null}
 
-			{date_type && dateRange && startDate && (
+			{(date_type && dateRange && startDate) ? (
 				<Pill>
 					<div className={styles.pill_content}>
 						<div className={styles.pill_text}>
@@ -60,7 +60,7 @@ function AppliedFilters() {
 						</div>
 					</div>
 				</Pill>
-			)}
+			) : null}
 		</div>
 	);
 }

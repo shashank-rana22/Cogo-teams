@@ -9,21 +9,25 @@ import styles from './styles.module.css';
 function ShipmentList({ loading, data = {} }) {
 	const { list = [] } = data || {};
 
+	function Pagination() {
+		return (
+			<div className={styles.pagination_container}>
+				<ListPagination data={data} />
+			</div>
+		);
+	}
+
 	return (
 		<div>
 			{!loading && isEmpty(list)
 				? <EmptyState />
 				: (
 					<div>
-						<div className={styles.pagination_container}>
-							<ListPagination data={data} />
-						</div>
+						<Pagination />
 
 						{(list || [])?.map((item) => <Card item={item} />)}
 
-						<div className={styles.pagination_container}>
-							<ListPagination data={data} />
-						</div>
+						<Pagination />
 					</div>
 				)}
 		</div>

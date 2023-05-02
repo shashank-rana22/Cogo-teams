@@ -36,11 +36,13 @@ function FilterBy({
 		setShowPopover(false);
 	};
 
+	const trade_date_cond = trade_type || date_type;
+
 	return (
 		<div>
 			<div className={styles.action_buttons}>
 				<Button
-					disabled={!(trade_type || date_type)}
+					disabled={!trade_date_cond}
 					size="sm"
 					onClick={handleReset}
 					themeType="tertiary"
@@ -49,7 +51,7 @@ function FilterBy({
 				</Button>
 
 				<Button
-					disabled={!(trade_type || date_type)
+					disabled={!trade_date_cond
 							|| (dateRange
 							&& 	(!popoverFilter?.startDate
 							|| !popoverFilter?.endDate))}
