@@ -1,5 +1,5 @@
 import { Tabs, TabPanel, Input, cl } from '@cogoport/components';
-import { IcMPlusInCircle, IcMSearchlight, IcMUnread } from '@cogoport/icons-react';
+import { IcMSearchlight, IcMUnread } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -21,11 +21,6 @@ function ListHeader({
 						<TabPanel name="active" title="Active" />
 						<TabPanel name="inactive" title="Inactive" />
 					</Tabs>
-				</div>
-
-				<div className={styles.add_user}>
-					<IcMPlusInCircle />
-					<div style={{ marginLeft: '4px' }}>User</div>
 				</div>
 
 			</div>
