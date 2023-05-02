@@ -12,6 +12,7 @@ function RenderDynamicFormComponent({
 	onDynamicFormSubmit,
 	handleEditForm,
 	setShow,
+	modeType,
 }) {
 	if (!isEmpty(dynamicControls)) {
 		return (
@@ -22,13 +23,19 @@ function RenderDynamicFormComponent({
 				dynamicHandleSubmit={dynamicHandleSubmit}
 				onDynamicFormSubmit={onDynamicFormSubmit}
 				handleEditForm={handleEditForm}
+				modeType={modeType}
 			/>
 		);
 	}
 
 	return (
 		<div>
-			<IcMPlusInCircle height="22px" width="22px" cursor="pointer" onClick={() => setShow(true)} />
+			<IcMPlusInCircle
+				height="22px"
+				width="22px"
+				cursor="pointer"
+				onClick={() => { if (modeType === 'edit') { setShow(true); } }}
+			/>
 			<div>Click here to start Customizing your form</div>
 		</div>
 	);

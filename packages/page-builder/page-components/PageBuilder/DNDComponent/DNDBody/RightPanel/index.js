@@ -21,14 +21,13 @@ function RightPanel({
 	setSelectedNestedColumn,
 	modeType,
 	setMode,
+	redoUndoIndex,
+	lastEventIndex,
+	setEveryEvents,
+	goBack,
+	goForward,
+	handleUnselectItem,
 }) {
-	const handleUnselectItem = () => {
-		setSelectedRow({});
-		setSelectedItem({});
-		setSelectedColumn({});
-		setSelectedNestedColumn({});
-	};
-
 	return (
 		<div className={styles.right_panel} style={{ width: modeType === 'edit' ? '70%' : '100%' }}>
 			<Header
@@ -36,6 +35,11 @@ function RightPanel({
 				setMode={setMode}
 				pageConfiguration={pageConfiguration}
 				handleUnselectItem={handleUnselectItem}
+				redoUndoIndex={redoUndoIndex}
+				lastEventIndex={lastEventIndex}
+				setEveryEvents={setEveryEvents}
+				goBack={goBack}
+				goForward={goForward}
 			/>
 			<div>
 				<DropBox
@@ -56,6 +60,7 @@ function RightPanel({
 					selectedNestedColumn={selectedNestedColumn}
 					setSelectedNestedColumn={setSelectedNestedColumn}
 					handleUnselectItem={handleUnselectItem}
+					modeType={modeType}
 				/>
 			</div>
 		</div>

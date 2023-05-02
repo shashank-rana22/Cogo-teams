@@ -10,23 +10,25 @@ const prefillControls = [
 	'options',
 ];
 
-const useGetHandleEditForm = ({ setShowForm, setShow, setValue }) => {
+const useGetHandleEditForm = ({ setShowForm, setShow, setValue, modeType }) => {
 	const handleEditForm = (values) => {
-		const { api_url, buttonText, heading, controls: controlsPrefill } = values || {};
-		setShowForm(false);
+		if (modeType === 'edit') {
+			const { api_url, buttonText, heading, controls: controlsPrefill } = values || {};
+			setShowForm(false);
 
-		setTimeout(() => {
-			setShowForm(true);
-		}, 100);
+			setTimeout(() => {
+				setShowForm(true);
+			}, 100);
 
-		setShow(true);
-		setValue('api_url', api_url);
-		setValue('buttonText', buttonText);
-		setValue('heading', heading);
+			setShow(true);
+			setValue('api_url', api_url);
+			setValue('buttonText', buttonText);
+			setValue('heading', heading);
 
-		(controlsPrefill || []).map((itemList, idx) => (prefillControls || []).map((item) => (
-			setValue(`controls[${idx}][${item}]`, itemList[item])
-		)));
+			(controlsPrefill || []).map((itemList, idx) => (prefillControls || []).map((item) => (
+				setValue(`controls[${idx}][${item}]`, itemList[item])
+			)));
+		}
 	};
 	return {
 		handleEditForm,

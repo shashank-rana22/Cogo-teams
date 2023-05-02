@@ -16,6 +16,7 @@ function TextComponent(props) {
 		selectedItem,
 		columnData,
 		nestedColumData,
+		modeType,
 	} = props;
 
 	const [editorModal, setEditorModal] = useState({
@@ -41,6 +42,7 @@ function TextComponent(props) {
 		nestedColumData,
 		setEditorValue,
 		type: 'text',
+		modeType,
 	});
 
 	return (
@@ -48,10 +50,14 @@ function TextComponent(props) {
 			<div
 				style={{ cursor: 'pointer' }}
 				role="presentation"
-				onClick={() => setEditorModal((prev) => ({
-					...prev,
-					show: true,
-				}))}
+				onClick={() => {
+					if (modeType === 'edit') {
+						setEditorModal((prev) => ({
+							...prev,
+							show: true,
+						}));
+					}
+				}}
 				dangerouslySetInnerHTML={{ __html: content }}
 			/>
 

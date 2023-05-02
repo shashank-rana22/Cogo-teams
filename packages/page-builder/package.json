@@ -28,6 +28,7 @@
       "ace-builds": "^1.4.14",
       "react-hook-form": "^7.43.3",
       "react-slick": "^0.29.0",
-      "slick-carousel": "^1.8.1"
+      "slick-carousel": "^1.8.1",
+      "lodash.isequal": "4.5.0"
     }
   }

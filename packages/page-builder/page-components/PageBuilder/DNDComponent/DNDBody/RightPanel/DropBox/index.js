@@ -28,32 +28,13 @@ function DropBox({
 	selectedNestedColumn,
 	setSelectedNestedColumn,
 	handleUnselectItem,
+	modeType,
 }) {
 	const [stageItems, setStageItems] = useState(pageConfiguration);
 
 	const [newAddingItemProps, setNewAddingItemProps] = useState({
 		hoveredIndex   : 0,
 		shouldAddBelow : false,
-	});
-
-	const { memoItems } = useGetMemoStagedItems({
-		stageItems,
-		setPageConfiguration,
-		isNewItemAdding,
-		setShowContentModal,
-		setParentComponentId,
-		selectedRow,
-		setSelectedRow,
-		selectedItem,
-		setSelectedItem,
-		selectedColumn,
-		setSelectedColumn,
-		selectedNestedColumn,
-		setSelectedNestedColumn,
-		setStageItems,
-		setNewAddingItemProps,
-		newAddingItemProps,
-		handleUnselectItem,
 	});
 
 	const { hoveredIndex, shouldAddBelow } = newAddingItemProps || {};
@@ -75,6 +56,26 @@ function DropBox({
 		}),
 	});
 
+	const { memoItems } = useGetMemoStagedItems({
+		stageItems,
+		setPageConfiguration,
+		isNewItemAdding,
+		setShowContentModal,
+		setParentComponentId,
+		selectedRow,
+		setSelectedRow,
+		selectedItem,
+		setSelectedItem,
+		selectedColumn,
+		setSelectedColumn,
+		selectedNestedColumn,
+		setSelectedNestedColumn,
+		setStageItems,
+		setNewAddingItemProps,
+		newAddingItemProps,
+		modeType,
+	});
+
 	const isActive = canDrop && isOver;
 
 	const backgroundColor = useGetActiveBackgroundColor({ pageConfiguration, isActive, canDrop });
@@ -87,9 +88,16 @@ function DropBox({
 
 	useEffect(() => {
 		const stagedItems = (stageItems.layouts || []).filter(({ id }) => !!id);
+
 		if (isNewItemAdding) {
 			if (isOver && isNewItemAdding) {
 				const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
+
+				handleUnselectItem();
+
+				if (startIndex === hoveredIndex && hoveredIndex !== 0 && startIndex !== 0) {
+					return;
+				}
 
 				setStageItems((prev) => ({
 					...prev,
@@ -97,7 +105,8 @@ function DropBox({
 						...stagedItems.slice(0, startIndex),
 						{
 							component: {
-								type: draggingItemType,
+								type              : draggingItemType,
+								isDraggingPreview : true,
 							},
 						},
 						...stagedItems.slice(startIndex),
@@ -120,7 +129,11 @@ function DropBox({
 				backgroundColor,
 			}}
 		>
-			{isActive ? 'Release to drop' : 'Drag a box here'}
+			{modeType === 'edit' && (
+				<div>
+					{isActive ? 'Release to drop' : 'Drag a box here'}
+				</div>
+			)}
 			{memoItems}
 		</div>
 	);

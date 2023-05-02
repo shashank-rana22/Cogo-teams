@@ -24,6 +24,12 @@ function DNDBody({
 	setSelectedNestedColumn,
 	modeType,
 	setMode,
+	redoUndoIndex,
+	lastEventIndex,
+	setEveryEvents,
+	goBack,
+	goForward,
+	handleUnselectItem,
 }) {
 	const [activeTab, setActiveTab] = useState('content');
 
@@ -48,7 +54,6 @@ function DNDBody({
 				selectedNestedColumn={selectedNestedColumn}
 				modeType={modeType}
 			/>
-
 			<RightPanel
 				pageConfiguration={pageConfiguration}
 				setPageConfiguration={setPageConfiguration}
@@ -68,6 +73,12 @@ function DNDBody({
 				setSelectedNestedColumn={setSelectedNestedColumn}
 				modeType={modeType}
 				setMode={setMode}
+				goBack={goBack}
+				goForward={goForward}
+				redoUndoIndex={redoUndoIndex}
+				lastEventIndex={lastEventIndex}
+				setEveryEvents={setEveryEvents}
+				handleUnselectItem={handleUnselectItem}
 			/>
 		</section>
 	);

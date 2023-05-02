@@ -5,7 +5,6 @@
 
 .element_container {
 	&:hover {
-		border: 1px solid #88cad1;
 		.change {
 			display: flex;
 			flex-direction: column;
@@ -16,4 +15,11 @@
 			top: 0;
 		}
 	}
+}
+
+
+.element_hover {
+	&:hover {
+	border: 1px solid #88cad1;
+   }
 }

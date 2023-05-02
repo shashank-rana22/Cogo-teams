@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import React, { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
@@ -29,13 +30,14 @@ function Components(props) {
 		selectedNestedColumn,
 		setSelectedNestedColumn,
 		handleUnselectItem,
+		modeType,
 	} = props;
 
 	const itemRef = useRef(null);
 
 	const { id, component } = rowData || {};
 
-	const { type } = component || {};
+	const { type, isDraggingPreview } = component || {};
 
 	const { handleDelete, handleCopy, handleSelectRow, handleAddSlides } = useGetHelperFunctions({
 		setPageConfiguration,
@@ -46,6 +48,7 @@ function Components(props) {
 		setSelectedColumn,
 		setSelectedNestedColumn,
 		handleUnselectItem,
+		modeType,
 	});
 
 	const [{ handlerId }, drop] = useDrop({
@@ -123,7 +126,8 @@ function Components(props) {
 				opacity,
 				border,
 			}}
-			className={styles.element_container}
+			className={cl`${styles.element_container} ${modeType === 'edit' ? styles.element_hover : ''}`}
+
 		>
 
 			<RenderComponent
@@ -143,19 +147,24 @@ function Components(props) {
 				elementId={id}
 				index={index}
 				type={type}
+				isDraggingPreview={isDraggingPreview}
+				modeType={modeType}
 			/>
 
-			<div role="presentation" className={styles.change}>
-				<SideToolBar
-					rowData={rowData}
-					pageConfiguration={pageConfiguration}
-					handleAddSlides={handleAddSlides}
-					handleCopy={handleCopy}
-					handleDelete={handleDelete}
-					component={component}
-					type={type}
-				/>
-			</div>
+			{modeType === 'edit' && (
+				<div role="presentation" className={styles.change}>
+					<SideToolBar
+						rowData={rowData}
+						pageConfiguration={pageConfiguration}
+						handleAddSlides={handleAddSlides}
+						handleCopy={handleCopy}
+						handleDelete={handleDelete}
+						component={component}
+						type={type}
+					/>
+				</div>
+			)}
+
 		</div>
 	);
 }

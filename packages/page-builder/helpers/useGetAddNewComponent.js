@@ -11,6 +11,7 @@ const useGetAddNewComponent = ({
 	setSelectedItem,
 	setShowContentModal,
 	setParentComponentId,
+	setEveryEvents,
 }) => {
 	const handleAddNewItem = useCallback(
 		(
@@ -48,6 +49,8 @@ const useGetAddNewComponent = ({
 
 				setPageConfiguration({ ...data });
 
+				setEveryEvents({ ...data });
+
 				setSelectedRow({ ...data.layouts[objIndex] });
 
 				setSelectedItem({ ...data.layouts[objIndex].component.children[selectedChildrenIndex] });
@@ -64,6 +67,19 @@ const useGetAddNewComponent = ({
 						...pageConfiguration.layouts.slice(startIndex),
 					],
 				}));
+
+				setEveryEvents({
+					...pageConfiguration,
+					layouts: [
+						...pageConfiguration.layouts.slice(0, startIndex),
+						{
+							...CONTENT_MAPPING[type],
+							...content,
+							id,
+						},
+						...pageConfiguration.layouts.slice(startIndex),
+					],
+				});
 
 				setSelectedRow({
 					...CONTENT_MAPPING[type],

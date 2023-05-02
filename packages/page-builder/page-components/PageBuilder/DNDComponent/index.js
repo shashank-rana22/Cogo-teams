@@ -5,6 +5,7 @@ import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import useGetAddNewComponent from '../../../helpers/useGetAddNewComponent';
+import useGetRedoUndoState from '../../../helpers/useGetRedoUndoState';
 
 import DNDBody from './DNDBody';
 import SelectComponentModal from './SelectComponentModal';
@@ -33,6 +34,23 @@ function DNDComponent({ initialPageData, metaData }) {
 
 	const [selectedNestedColumn, setSelectedNestedColumn] = useState({});
 
+	const handleUnselectItem = () => {
+		if (modeType === 'edit') {
+			setSelectedRow({});
+			setSelectedItem({});
+			setSelectedColumn({});
+			setSelectedNestedColumn({});
+		}
+	};
+
+	const {
+		setEveryEvents,
+		redoUndoIndex,
+		lastEventIndex,
+		goBack,
+		goForward,
+	} = useGetRedoUndoState({ pageConfiguration, setPageConfiguration, handleUnselectItem });
+
 	const { handleAddNewItem } = useGetAddNewComponent({
 		pageConfiguration,
 		setPageConfiguration,
@@ -40,6 +58,7 @@ function DNDComponent({ initialPageData, metaData }) {
 		setSelectedItem,
 		setShowContentModal,
 		setParentComponentId,
+		setEveryEvents,
 	});
 
 	useEffect(() => {
@@ -83,6 +102,12 @@ function DNDComponent({ initialPageData, metaData }) {
 				setSelectedNestedColumn={setSelectedNestedColumn}
 				modeType={modeType}
 				setMode={setMode}
+				redoUndoIndex={redoUndoIndex}
+				lastEventIndex={lastEventIndex}
+				setEveryEvents={setEveryEvents}
+				goBack={goBack}
+				goForward={goForward}
+				handleUnselectItem={handleUnselectItem}
 			/>
 
 			<SelectComponentModal

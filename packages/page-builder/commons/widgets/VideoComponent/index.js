@@ -19,6 +19,7 @@ function VideoComponent(props) {
 		selectedItem,
 		columnData,
 		nestedColumData,
+		modeType,
 	} = props;
 
 	const [showUploadModal, setShowUploadModal] = useState(false);
@@ -37,6 +38,7 @@ function VideoComponent(props) {
 		columnData,
 		nestedColumData,
 		type: 'video',
+		modeType,
 	});
 
 	return (
