@@ -1,6 +1,7 @@
 const editSupplierServiceStates = ['init', 'awaiting_service_provider_confirmation', 'confirmed_by_service_provider'];
 
-const showEditSupplierStakeholders = ['superadmin', 'booking_desk', 'document_desk', 'costbooking_ops'];
+const showEditSupplierStakeholders = ['superadmin', 'booking_desk', 'document_desk',
+	'costbooking_ops', 'booking_desk_manager'];
 
 const serviceCompletedOrCancelled = ['completed', 'cancelled'];
 
