@@ -1,8 +1,8 @@
-export const formatPayloadForSubsidiaryServiceRateCards = ({ code, service_type, services }) => {
+export const formatPayloadForSubsidiaryServiceRateCards = ({ code, service_type = '', services = [] }) => {
 	const serviceType = (service_type || '').replace('_service', '');
 
 	const addedService = (services || []).find(
-		(service) => service.service_type === service_type,
+		(service) => service?.service_type === service_type,
 	);
 
 	const date = new Date();
@@ -13,7 +13,7 @@ export const formatPayloadForSubsidiaryServiceRateCards = ({ code, service_type,
 		validity_end         : addedService?.schedule_arrival,
 		validity_start       : date,
 		location_id          : addedService?.location?.id,
-		importer_exporter_id : addedService?.importer_exporter_id,
+		importer_exporter_id : addedService?.importer_exporter?.id,
 		origin_location_id   : addedService?.origin_port_id || addedService?.origin_port?.id
         || addedService?.origin_location?.id || addedService?.origin_airport?.id || undefined,
 

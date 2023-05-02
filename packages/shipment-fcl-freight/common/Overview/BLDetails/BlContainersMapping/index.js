@@ -12,7 +12,6 @@ function BlContainersMapping({
 	setMappingModal = () => { },
 	refetch = () => {},
 	containerDetails,
-	mappingModal = false,
 }) {
 	const {
 		errors, control, register,
@@ -37,12 +36,14 @@ function BlContainersMapping({
 		apiTrigger(payload);
 	};
 
+	const closeModal = () => setMappingModal(false);
+
 	return (
 		<Modal
-			show={mappingModal}
-			onClose={() => {
-				setMappingModal(false);
-			}}
+			show
+			onClose={closeModal}
+			showCloseIcon={!loading}
+			closeOnOuterClick={false}
 			className={styles.custom_modal}
 		>
 			<Modal.Header title="BL Container Mapping" />
@@ -58,6 +59,7 @@ function BlContainersMapping({
 										control={control}
 										{...register(`bl_mappings.${index}.bl_number`)}
 										size="sm"
+										disabled
 									/>
 								</div>
 								<div className={styles.input_container}>
@@ -82,11 +84,9 @@ function BlContainersMapping({
 			</Modal.Body>
 			<Modal.Footer>
 				<Button
-					onClick={() => {
-						setMappingModal(false);
-					}}
+					onClick={closeModal}
 					size="md"
-					style={{ marginRight: 10 }}
+					themeType="secondary"
 				>
 					Cancel
 				</Button>
