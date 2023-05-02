@@ -5,8 +5,12 @@ const controls = [
 		placeholder : 'Search RFQ ID / Customer Name',
 	},
 	{
-		name : 'Profitability',
-		type : 'rangeSlider',
+		name  : 'profitability',
+		label : 'Profitability',
+		type  : 'slider',
+		min   : 0,
+		max   : 100,
+		step  : 1,
 	},
 	{
 		name     : 'organization_size',
