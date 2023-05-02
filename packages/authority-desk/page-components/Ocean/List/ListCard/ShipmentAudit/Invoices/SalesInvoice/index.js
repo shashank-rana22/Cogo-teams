@@ -6,9 +6,7 @@ import useListInvoiceWrapper from '../../../../../../../hooks/useListInvoiceWrap
 import styles from './styles.module.css';
 
 function SalesInvoice() {
-	const { data, loading } = useListInvoiceWrapper();
-
-	console.log(data, loading, 'Data');
+	const { data, loading } = useListInvoiceWrapper({});
 
 	return (
 		<div className={styles.container}>

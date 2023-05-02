@@ -6,7 +6,7 @@ import InvoiceInfo from './InvoiceInfo';
 import styles from './styles.module.css';
 
 function ShipmentInvoices() {
-	const { data, loading } = useListInvoiceWrapper();
+	const { data, loading } = useListInvoiceWrapper({});
 
 	return (
 		<div className={styles.container}>

@@ -1,12 +1,13 @@
-import { Modal, cl } from '@cogoport/components';
+import { Modal, cl, Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import CargoDetails from '../../../../../commons/CargoDetails';
 import PortDetails from '../../../../../commons/PortDetails';
 import ShipmentBreif from '../../../../../commons/ShipmentBreif';
+import useUpdateShipmentBlDetails from '../../../../../hooks/useUpdateShipmentBlDetails';
+import OrgShipments from '../AdditionalShipmentInfo/OrgShipments';
 
 import BlDetails from './BlDetails';
-import CustodyShipments from './CustodyShipments';
 import Invoices from './Invoices';
 import Organizations from './Organizations';
 import styles from './styles.module.css';
@@ -19,6 +20,8 @@ function ShipmentAudit({ item = {}, showAudit = true, setShowAudit = () => {}, b
 		payments  : `Payments - Total Outstanding  ${item?.invoice_status?.outstanding_amount}`,
 		shipments : 'Shipments In Custody',
 	};
+
+	const { loading, apiTrigger } = useUpdateShipmentBlDetails({});
 
 	const [additionalTab, setAdditionalTab] = useState('invoices');
 
@@ -61,12 +64,17 @@ function ShipmentAudit({ item = {}, showAudit = true, setShowAudit = () => {}, b
 
 						{additionalTab === 'invoices' ? <Invoices /> : null}
 						{additionalTab === 'payments' ? <Organizations /> : null}
-						{additionalTab === 'shipments' ? <CustodyShipments /> : null}
+						{additionalTab === 'shipments' ? <OrgShipments /> : null}
 
 					</>
 				</Modal.Body>
 				<Modal.Footer>
-					erhiwio
+					<Button themeType="secondary">
+						Hold
+					</Button>
+					<Button themeType="primary">
+						Approve
+					</Button>
 				</Modal.Footer>
 			</Modal>
 

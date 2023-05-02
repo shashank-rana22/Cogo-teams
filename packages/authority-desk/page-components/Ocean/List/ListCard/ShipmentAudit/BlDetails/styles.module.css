@@ -13,22 +13,22 @@
                 padding: 4px;
                  
                 &:first-child{
-                    background-color: red;
+                    /* background-color: red; */
                 }
                 &:nth-child(2){
-                    background-color: yellow;
+                    /* background-color: yellow; */
                 }
                 &:nth-child(3){
-                    background-color: green;
+                    /* background-color: green; */
                 }
                 &:nth-child(4){
-                    background-color: pink;
+                    /* background-color: pink; */
                 }
                 &:nth-child(5){
-                    background-color: blue;
+                    /* background-color: blue; */
                 }
                 &:nth-child(6){
-                    background-color: orangered;
+                    /* background-color: orangered; */
                 }
 
             }

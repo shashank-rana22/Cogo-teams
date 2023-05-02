@@ -1,3 +1,15 @@
-.container{
+.container { 
     border-top: 1px solid #F68B21;
+
+    table {
+        width: 100%;
+    }
+    th, tr{
+        display: flex;
+        text-align: center;
+    }
+
+    td {
+        flex: 1;
+    } 
 }

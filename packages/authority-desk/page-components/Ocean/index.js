@@ -40,12 +40,12 @@ function Ocean() {
 			>
 				<TabPanel
 					name="export"
-					title="BLs"
+					title="Bill of ladings"
 				/>
 
 				<TabPanel
 					name="import"
-					title="DOs"
+					title="Delivery Orders"
 				/>
 
 			</Tabs>
