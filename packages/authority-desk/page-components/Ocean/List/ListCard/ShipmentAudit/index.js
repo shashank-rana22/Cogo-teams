@@ -34,9 +34,10 @@ function ShipmentAudit({ item = {}, showAudit = true, setShowAudit = () => {}, b
 				onClose={() => setShowAudit(false)}
 				className={styles.modal_container}
 			>
-				<Modal.Header title={`<- Go back to ${bucket}`} />
-				<Modal.Body>
+				<Modal.Header title={`Go back to ${bucket}`} />
+				<Modal.Body className={styles.modal_body_content}>
 					<>
+
 						<div className={styles.shipment_content_container}>
 							<div className={styles.shipment_details}>
 								<ShipmentBreif item={item} />

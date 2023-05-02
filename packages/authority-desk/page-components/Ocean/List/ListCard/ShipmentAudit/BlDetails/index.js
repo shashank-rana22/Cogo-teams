@@ -4,20 +4,20 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function BlDetails({ item = {} }) {
-	console.log(item?.bill_of_ladings);
 	return (
 		<div className={styles.container}>
 			<table>
 				<thead>
-					<tr>
-						<td>Category</td>
-						<td> Document Number</td>
-						<td>Collection Status</td>
-						<td>Type</td>
-						<td>Release Date</td>
-						<td>Delivery Mode</td>
+					<tr className={styles.row}>
+						<th>Category</th>
+						<th> Document Number</th>
+						<th>Collection Status</th>
+						<th>Type</th>
+						<th>Release Date</th>
+						<th>Delivery Mode</th>
 					</tr>
 				</thead>
+
 				<tbody>
 					{(item?.bill_of_ladings || []).map((val) => (
 						<tr key={val.id}>
@@ -29,6 +29,7 @@ function BlDetails({ item = {} }) {
 							<td>piuu</td>
 						</tr>
 					))}
+
 				</tbody>
 			</table>
 

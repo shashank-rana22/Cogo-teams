@@ -32,8 +32,7 @@ function ListCard({ item }) {
 
 	return (
 		<>
-			{' '}
-			``
+
 			<div className={styles.container}>
 				<div className={styles.status}>
 					&nbsp;

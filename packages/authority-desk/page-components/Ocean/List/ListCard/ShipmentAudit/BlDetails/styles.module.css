@@ -1,6 +1,7 @@
-.container {
+.container { 
     table {
-        width: 100%;
+        width: 100%; 
+       
     }
     th {
         font-weight: 700;
@@ -8,9 +9,11 @@
 
     tbody{
 
-        tr {
+        tr { 
+            
             td {
-                padding: 4px;
+                padding: 4px; 
+                text-align: center;
                  
                 &:first-child{
                     /* background-color: red; */
@@ -34,4 +37,8 @@
             }
         }
     }
+} 
+
+.row {
+    border-bottom: 1px solid black;
 }
