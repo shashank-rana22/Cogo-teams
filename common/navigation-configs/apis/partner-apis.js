@@ -7643,6 +7643,12 @@ const partner = {
 			feature     : 'Dashboard',
 		},
 		{
+			api         : 'put_sales_invoice_finance_reject_invoice',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
 			api         : 'post_sales_invoice_post_from_sage',
 			access_type : 'private',
 			module      : 'outstanding',
