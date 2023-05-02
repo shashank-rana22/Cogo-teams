@@ -61,7 +61,7 @@ function PayRunTypeModal({
 	const [exitPayRun, setExitPayRun] = useState(false);
 	return (
 		<div className={styles.container}>
-			<Modal size="md" show={payRunType} onClose={() => setPayRunType(false)} placement="center">
+			<Modal size="md" show={payRunType} onClose={() => setPayRunType(false)} placement="top">
 				<Modal.Header title="" />
 				<div className={styles.body}>
 					{ loading ? <Placeholder className={styles.loader} />
@@ -129,7 +129,6 @@ function PayRunTypeModal({
 				setFilters={setFilters}
 				currency={currency}
 				activeEntity={activeEntity}
-				setShow={setShow}
 			/>
 
 		</div>

@@ -32,7 +32,6 @@ interface Props {
 	setFilters:Function,
 	currency:string,
 	activeEntity:string,
-	setShow:Function,
 }
 interface ItemProps {
 	type:string;
@@ -51,7 +50,6 @@ function ExitingPayRun({
 	setFilters,
 	currency,
 	activeEntity,
-	setShow,
 }:Props) {
 	const { pageIndex } = data || {};
 	const { push } = useRouter();
@@ -61,7 +59,7 @@ function ExitingPayRun({
 		push(`/business-finance/account-payables/advance-payment/create-new-payrun?selectedPayRunId=${value}
 		&currency=${currency}&entity=${activeEntity}`);
 
-		setShow(false);
+		setExitPayRun(false);
 		Toast.success('PayRun Initialised, Please wait...');
 	};
 
