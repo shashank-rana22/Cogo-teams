@@ -50,31 +50,31 @@ const useUpdateComponentsStyles = ({
 				if (Object.keys(selectedNestedColumn).length > 0) {
 					const selectedChildrenId = data.layouts[selectedComponentIndex].component.children.findIndex((item) => item.id === selectedColumnId);
 					const nestedSelectedChildrenId = data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component.children.findIndex((item) => item.id === selectedChildId);
-					const prevStyle = data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component.children[nestedSelectedChildrenId].component.style;
+					const prevStyle = data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component.children[nestedSelectedChildrenId].component?.[styleKey];
 					const modifiedStyle = {
 						...prevStyle,
 						[key]: value,
 					};
 
-					data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component.children[nestedSelectedChildrenId].component.style = modifiedStyle;
+					data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component.children[nestedSelectedChildrenId].component[styleKey] = modifiedStyle;
 				} else if (Object.keys(selectedColumn).length > 0 && Object.keys(selectedNestedColumn).length === 0) {
 					const selectedChildrenId = data.layouts[selectedComponentIndex].component.children.findIndex((item) => item.id === selectedChildId);
-					const prevStyle = data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component.style;
+					const prevStyle = data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component?.[styleKey];
 
 					const modifiedStyle = {
 						...prevStyle,
 						[key]: value,
 					};
 
-					data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component.style = modifiedStyle;
+					data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component[styleKey] = modifiedStyle;
 				} else if (Object.keys(selectedColumn).length === 0 && Object.keys(selectedNestedColumn).length === 0) {
-					const prevStyle = data.layouts[selectedComponentIndex].component.style;
+					const prevStyle = data.layouts[selectedComponentIndex].component?.[styleKey];
 					const modifiedStyle = {
 						...prevStyle,
 						[key]: value,
 					};
 
-					data.layouts[selectedComponentIndex].component.style = modifiedStyle;
+					data.layouts[selectedComponentIndex].component[styleKey] = modifiedStyle;
 				}
 			}
 

@@ -15,6 +15,7 @@ function ButtonComponent(props) {
 	return (
 		<div className={styles.button_wrapper}>
 			<Button
+				style={rowData.component.buttonStyle}
 				type={type}
 				themeType={themeType}
 				size={size}
