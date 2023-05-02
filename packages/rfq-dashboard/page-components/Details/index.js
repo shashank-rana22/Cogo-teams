@@ -1,20 +1,20 @@
 import BasicDetails from './BasicDetails';
+import Graph from './Graph';
 import Header from './Header';
-import GraphDataCard from './PastMonthsDataGraphCard';
-import PreviewAndApproveLists from './PreviewApproveLists';
+import Services from './Services';
 import styles from './styles.module.css';
 
 function Details() {
 	const loading = false;
 	return (
-		<div className={styles.details_prime_container}>
+		<div className={styles.container}>
 			<Header loading={loading} />
-			<div className={styles.customer_cards_past_month}>
+			<div className={styles.basic_details}>
 				<BasicDetails loading={loading} />
-				<GraphDataCard loading={loading} />
+				<Graph loading={loading} />
 			</div>
-			<div className={styles.lists_approve_section}>
-				<PreviewAndApproveLists loading={loading} />
+			<div className={styles.rfq_list}>
+				<Services loading={loading} />
 			</div>
 		</div>
 	);

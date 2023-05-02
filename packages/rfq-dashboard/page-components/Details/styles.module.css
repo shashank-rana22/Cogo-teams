@@ -1,14 +1,14 @@
-.details_prime_container {
+.container {
 	display: flex;
 	flex-direction: column;
 }
 
-.customer_cards_past_month {
+.basic_details {
 	display: flex;
 	justify-content: space-between;
 	margin-top: 20px;
 }
 
-.lists_approve_section {
+.rfq_list {
 	margin-top: 20px;
 }

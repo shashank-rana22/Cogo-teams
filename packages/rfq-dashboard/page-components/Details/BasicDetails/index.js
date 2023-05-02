@@ -1,14 +1,18 @@
 import { IcMProfile } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
 import ServiceStats from '../../../common/ServiceStats';
 import { PortPairsEnterpriseShipmentSection } from '../../../configurations/customer-past-month-data-card';
 import { AvgPromisedConAndContract } from '../../../configurations/service-stats-data';
 
-import LoaderCustomerDataPastcard from './LoaderCustomerDataCard';
+import Empty from './Empty';
+import Loader from './Loader';
 import styles from './styles.module.css';
 
-function BasicDetails({ loading }) {
-	if (loading) return <LoaderCustomerDataPastcard />;
+function BasicDetails({ loading, data = {} }) {
+	if (loading) return <Loader />;
+
+	if (!isEmpty(data)) return <Empty />;
 
 	return (
 
