@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import React, { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
@@ -123,7 +124,8 @@ function Components(props) {
 				opacity,
 				border,
 			}}
-			className={styles.element_container}
+			className={cl`${styles.element_container} ${modeType === 'edit' ? styles.element_hover : ''}`}
+
 		>
 
 			<RenderComponent

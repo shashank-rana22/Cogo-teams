@@ -104,7 +104,7 @@ function ColumnComponents({
 
 					<div
 						role="presentation"
-						className={styles.content_container}
+						className={modeType === 'edit' && styles.content_container}
 						style={{ ...(type === 'divider' ? {} : allStyles), border }}
 						onClick={(e) => handleClick(e, childComponent)}
 					>
