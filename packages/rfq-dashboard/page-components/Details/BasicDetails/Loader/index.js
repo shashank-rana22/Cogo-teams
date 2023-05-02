@@ -2,7 +2,7 @@ import { Placeholder } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function LoaderCustomerDataPastcard() {
+function Loader() {
 	return (
 		<div className={styles.container}>
 			<Placeholder
@@ -51,4 +51,4 @@ function LoaderCustomerDataPastcard() {
 	);
 }
 
-export default LoaderCustomerDataPastcard;
+export default Loader;

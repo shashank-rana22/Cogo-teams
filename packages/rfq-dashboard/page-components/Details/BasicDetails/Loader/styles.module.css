@@ -1,10 +1,9 @@
 .container {
 	display: flex;
 	flex-direction: column;
-
-	/* width: 55%; */
-
-	/* height: 180px; */
+	padding: 8px;
+	background-color: #fff;
+	border-radius: 8px;
 }
 
 .rfqid_and_agent {
