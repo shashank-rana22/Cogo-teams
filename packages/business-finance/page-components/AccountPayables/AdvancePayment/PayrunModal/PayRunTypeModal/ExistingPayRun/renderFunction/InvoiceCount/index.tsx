@@ -1,6 +1,13 @@
 import React from 'react';
 
-function InvoiceCount({ itemData }) {
+interface ItemTypes {
+	invoiceCount:number,
+}
+interface PropsType {
+	itemData:ItemTypes,
+}
+
+function InvoiceCount({ itemData }:PropsType) {
 	const { invoiceCount } = itemData || {};
 	return (
 		<div>

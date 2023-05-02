@@ -2,7 +2,14 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Ribbon({ itemData }) {
+interface DataTypes {
+	type:string,
+}
+
+interface PropsType {
+	itemData:DataTypes;
+}
+function Ribbon({ itemData }:PropsType) {
 	const { type } = itemData || {};
 	return (
 		<div>

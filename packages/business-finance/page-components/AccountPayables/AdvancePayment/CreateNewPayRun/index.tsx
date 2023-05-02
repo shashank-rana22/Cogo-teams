@@ -87,8 +87,7 @@ function CreateNewPayRun() {
 		if (selectedPayRunId) {
 			getAdvancedPayment();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [getAdvancedPayment, selectedPayRunId]);
 	const { list } = existpayRunData || {};
 	const { pageIndex } = data || {};
 

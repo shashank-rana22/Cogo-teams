@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 interface FilterProps {
 	activeEntity?: string;
@@ -24,7 +24,7 @@ const useGetCreatePayRunType = ({ activeEntity, currency, selectedPayRunId }:Fil
 		{ manual: true, autoCancel: false },
 	);
 
-	const getAdvancedPayment = async () => {
+	const getAdvancedPayment = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -41,7 +41,7 @@ const useGetCreatePayRunType = ({ activeEntity, currency, selectedPayRunId }:Fil
 		} catch (err) {
 			Toast.error(err?.response?.data?.message);
 		}
-	};
+	}, [activeEntity, currency, pageIndex, selectedPayRunId, trigger]);
 
 	return {
 		data,

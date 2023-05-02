@@ -33,6 +33,13 @@ interface Props {
 	activeEntity:string,
 	setShow:Function,
 }
+interface ItemProps {
+	type:string;
+	currency:string;
+	totalValue:number;
+	invoiceCount:number;
+	createdAt:string,
+}
 
 function ExitingPayRun({
 	exitPayRun,
@@ -78,16 +85,16 @@ function ExitingPayRun({
 				</div>
 			);
 		},
-		renderRibbon: (itemData) => (
+		renderRibbon: (itemData:ItemProps) => (
 			<Ribbon itemData={itemData} />
 		),
-		renderAmountWithCurrency: (itemData) => (
+		renderAmountWithCurrency: (itemData:ItemProps) => (
 			<AmountWithCurrency itemData={itemData} />
 		),
-		renderInvoiceCount: (itemData) => (
+		renderInvoiceCount: (itemData:ItemProps) => (
 			<InvoiceCount itemData={itemData} />
 		),
-		renderDateWithTime: (itemData) => (
+		renderDateWithTime: (itemData:ItemProps) => (
 			<DateWithTime itemData={itemData} />
 		),
 	};

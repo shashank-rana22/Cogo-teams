@@ -1,11 +1,15 @@
-// import { format } from '@cogoport/utils';
 import React from 'react';
 
-function DateWithTime({ itemData }) {
+interface ItemTypes {
+	createdAt:string,
+}
+interface PropsType {
+	itemData:ItemTypes;
+}
+function DateWithTime({ itemData }:PropsType) {
 	const { createdAt } = itemData || {};
 	return (
 		<div>
-			{/* {format(createdAt, 'hh:mma dd-mm-yyyy', {}, false)} */}
 			{createdAt}
 		</div>
 	);
