@@ -6,10 +6,11 @@ interface ModalProps {
 	onClose?: () => void;
 	children?: ReactNode;
 	onOutsideClick?: boolean;
-
+	style?: React.CSSProperties;
 }
 
 function Modal({
+	style,
 	children = null,
 	onClose = () => {},
 	onOutsideClick = true,
@@ -27,8 +28,10 @@ function Modal({
 				onClick={handleBackdropClick}
 				className={styles.backdrop}
 			/>
-			<div className={styles.modal_content}>
-				<div>{children}</div>
+			<div className={styles.modal_content} style={style}>
+				<div className={styles.modal_body}>
+					<div>{children}</div>
+				</div>
 			</div>
 		</div>
 

@@ -342,6 +342,7 @@ function GenerateMAWB({
 				{(back || viewDoc) && (
 					<Modal
 						onClose={() => { setBack(false); setViewDoc(false); }}
+						style={{ width: '900px', height: '92vh' }}
 					>
 						<GenerateMawbDoc
 							taskItem={taskItem}

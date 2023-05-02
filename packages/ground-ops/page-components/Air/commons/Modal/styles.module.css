@@ -5,7 +5,6 @@
 	bottom: 0;
 	left: 0;
 	z-index: 9000;
-	background-color: transparent;
 }
 
 .backdrop {
@@ -14,20 +13,27 @@
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background-color: rgb(0 0 0 / 40%);
+	background-color: #0006;
 }
 
 .modal_content {
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	width: 900px;
-	height: 92vh;
-	margin-right: -50%;
-	overflow: scroll;
 	background-color: #fff;
 	border: 1px solid #dedede;
 	border-radius: 8px;
-	box-shadow: 0 0 60px rgb(98 127 172 / 20%);
+	box-shadow: 0 0 60px #627fac33;
 	transform: translate(-50%, -50%);
+
+	@media (max-width: 768px) {
+		max-height: 500px;
+		overflow: scroll;
+	}
+}
+
+.modal_body {
+	height: 90vh;
+	padding: 16px;
+	overflow-x: auto;
 }
