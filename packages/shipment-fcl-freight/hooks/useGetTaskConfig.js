@@ -14,8 +14,9 @@ function useGetTaskConfig({ task = {} }) {
 		(async () => {
 			try {
 				const res = await trigger({
-					params: { pending_task_id: task.id },
+					params: { pending_task_id: task?.id },
 				});
+
 				setApiData(res?.data);
 			} catch (err) {
 				toastApiError(err);

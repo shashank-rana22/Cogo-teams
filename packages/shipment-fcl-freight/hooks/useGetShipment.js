@@ -3,7 +3,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
-function useGetShipment({ additional_methods }) {
+function useGetShipment({ additional_methods = [] }) {
 	const [getShipmentStatusCode, setGetShipmentStatusCode] = useState();
 	const router = useRouter();
 	const { shipment_id } = router.query;
@@ -22,9 +22,11 @@ function useGetShipment({ additional_methods }) {
 						additional_methods,
 					},
 				});
+
 				setGetShipmentStatusCode(res?.status);
 			} catch (err) {
 				toastApiError(err);
+
 				setGetShipmentStatusCode(err?.response?.data?.status_code || err?.response?.status);
 			}
 		})();

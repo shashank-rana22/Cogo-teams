@@ -14,7 +14,7 @@ const getControls = (data) => {
 		},
 	];
 
-	const controls =	getExtraControls[data.document_type] || [];
+	const controls = getExtraControls[data.document_type] || [];
 	const bls = ['draft_bill_of_lading', 'draft_house_bill_of_lading'];
 
 	if (

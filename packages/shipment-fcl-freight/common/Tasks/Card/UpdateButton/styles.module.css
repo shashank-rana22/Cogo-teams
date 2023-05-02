@@ -9,24 +9,17 @@
 		display: flex;
 		justify-content: flex-start;
 	}
-	@media (max-width: 576px) {
-		display: flex;
-		justify-content: center;
-	}
 }
 
 .upload_button {
 	width: 140px;
 	padding: 6px 36px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 	color: #fff;
 	text-transform: capitalize;
 	border-radius: 4px;
 
-	@media (max-width: 768px) {
-		margin: 15px 20px 0 0;
-	}
 	@media (max-width: 768px) {
 		margin: 15px 20px 0 0;
 	}

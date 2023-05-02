@@ -1,7 +1,5 @@
-// import { subtractDays } from '@cogoport/front/date';
-
 const dataExtractionFunc = (obj, index, arr) => {
-	if (index === arr.length - 1) {
+	if (index === (arr || []).length - 1) {
 		if (obj === undefined) {
 			return undefined;
 		}
@@ -17,25 +15,26 @@ const dataExtractionFunc = (obj, index, arr) => {
 
 const evalAdhocConditions = (requiredCondition) => {
 	const comingKeyMap = {
-		// day_before: (comingKey) => subtractDays(new Date(), comingKey),
 		day_before: () => new Date(),
 	};
 
 	let key_to_eval = '';
-	Object.keys(requiredCondition || {}).forEach((key) => {
+
+	Object.keys(requiredCondition || {})?.forEach((key) => {
 		key_to_eval = key;
 	});
-	return comingKeyMap[key_to_eval](requiredCondition[key_to_eval]);
+
+	return comingKeyMap?.[key_to_eval](requiredCondition?.[key_to_eval]);
 };
 
 const splitAndGet = (value_to_insert, data) => {
-	const splitArr = value_to_insert.split('.').map((element, index) => {
-		if (index === 0) {
-			return data;
-		}
+	const splitArr = value_to_insert?.split('.')?.map((element, index) => {
+		if (index === 0) return data;
+
 		return element;
 	});
-	const finalVal = dataExtractionFunc(splitArr[0], 1, splitArr);
+
+	const finalVal = dataExtractionFunc(splitArr?.[0], 1, splitArr);
 
 	return finalVal;
 };
@@ -47,16 +46,19 @@ const evaluateVal = (value_to_insert, data) => {
 	) {
 		return splitAndGet(value_to_insert, data);
 	}
+
 	if (Array.isArray(value_to_insert)) {
 		const new_value_to_insert = [];
 
-		(value_to_insert || []).forEach((valObj) => {
+		(value_to_insert || [])?.forEach((valObj) => {
 			const newObj = {};
-			Object.keys(valObj || {}).forEach((key) => {
-				newObj[key] =					typeof valObj[key] === 'string' && valObj[key]?.includes('data')
+
+			Object.keys(valObj || {})?.forEach((key) => {
+				newObj[key] = typeof valObj[key] === 'string' && valObj[key]?.includes('data')
 					? splitAndGet(valObj[key], data)
 					: valObj[key];
 			});
+
 			new_value_to_insert.push(newObj);
 		});
 
@@ -68,6 +70,7 @@ const evaluateVal = (value_to_insert, data) => {
 
 const getConditionalParams = (condition, shipment_data, obj) => {
 	const leftHandSide = evaluateVal(condition?.leftValue, shipment_data);
+
 	const rightHandSide = evaluateVal(condition?.rightValue, shipment_data);
 
 	const value = evaluateVal(obj.value, shipment_data);
@@ -83,33 +86,28 @@ const getConditionalParams = (condition, shipment_data, obj) => {
 };
 
 const evaluateExpression = (operator, lhs, rhs) => {
-	if (operator === '!==') {
-		return lhs !== rhs;
-	}
-	if (operator === '===') {
-		return lhs === rhs;
-	}
-	if (operator === '>') {
-		return lhs > rhs;
-	}
-	if (operator === 'in') {
-		return lhs in rhs;
-	}
-	// if (operator === 'includes') {
-	// 	return lhs.includes(rhs);
-	// }
+	if (operator === '!==') return lhs !== rhs;
+
+	if (operator === '===') return lhs === rhs;
+
+	if (operator === '>') return lhs > rhs;
+
+	if (operator === 'in') return lhs in rhs;
+
+	if (operator === 'includes') return (lhs || '')?.includes(rhs);
+
 	return true;
 };
 
 const evaluateObject = (control, task, shipment_data) => {
 	const finalControl = control;
 
-	if (control.conditions) {
-		(control.conditions || []).forEach((obj) => {
-			const { condition, value: value_to_insert } = obj || {};
+	if (control?.conditions) {
+		(control?.conditions || []).forEach((obj) => {
+			const { condition = {}, value: value_to_insert } = obj || {};
 
 			if (!condition) {
-				finalControl[obj.key_to_add] = evaluateVal(
+				finalControl[obj?.key_to_add] = evaluateVal(
 					value_to_insert,
 					shipment_data,
 				);
@@ -129,6 +127,7 @@ const evaluateObject = (control, task, shipment_data) => {
 				} else if (elseValue !== 'undefined') {
 					finalControl[obj.key_to_add] = elseValue;
 				}
+
 				if (condition?.operator === 'date') {
 					if (obj.adhoc_conditions) {
 						finalControl[obj.key_to_add] = evalAdhocConditions(
@@ -141,25 +140,42 @@ const evaluateObject = (control, task, shipment_data) => {
 			}
 		});
 	}
+
 	if (control?.type === 'fieldArray') {
-		finalControl.controls = (control.controls || []).map((ctrl) => evaluateObject(ctrl, task, shipment_data));
+		finalControl.controls = (control?.controls || [])?.map((ctrl) => evaluateObject(ctrl, task, shipment_data));
 	}
 
 	return finalControl;
 };
 
-/**
- * Evaluates Each step and checks weather to add this step into ui or not
- */
-const evaluateCondition = () => {
-	const showStep = true;
+const evaluateCondition = (step, primaryService, task) => {
+	let showStep = true;
 
+	if (task?.task === 'upload_bill_of_lading') {
+		const bl_category = primaryService?.bl_category?.toLowerCase() || 'hbl';
+
+		if (
+			bl_category === 'mbl'
+			&& step?.name === 'house_bill_of_lading'
+			&& primaryService?.service_type !== 'lcl_freight_service'
+		) {
+			showStep = false;
+		}
+	}
+
+	if (task?.task === 'upload_draft_bill_of_lading') {
+		const bl_category = primaryService?.bl_category?.toLowerCase() || 'mbl';
+
+		if (bl_category === 'mbl' && step?.name === 'hbl') {
+			showStep = false;
+		}
+	}
 	return showStep;
 };
 
 const conditionalAddition = (step, shipment_data) => {
 	const keyFuncMapping = (requiredVal) => ({
-		data_from_api: (requiredVal || []).map((val) => {
+		data_from_api: (requiredVal || [])?.map((val) => {
 			if (val.key_from_api === 'custom:service_ids') {
 				return {
 					key_from_api: [
@@ -174,9 +190,10 @@ const conditionalAddition = (step, shipment_data) => {
 	});
 
 	let setObj = null;
+
 	Object.keys(step || {}).forEach((key) => {
 		if (key === 'data_from_api') {
-			setObj = { data_from_api: keyFuncMapping(step[key]).data_from_api };
+			setObj = { data_from_api: keyFuncMapping(step[key])?.data_from_api };
 		}
 	});
 
@@ -192,14 +209,6 @@ const conditionalAddition = (step, shipment_data) => {
 	return modifiedStep;
 };
 
-/**
- * Injects default data into controls
- * @param {*} step
- * @param {*} task
- * @param {*} shipment_data
- * @returns
- */
-
 const injectDataIntoValues = (step, task, shipment_data) => {
 	const newStep = {
 		...step,
@@ -210,14 +219,6 @@ const injectDataIntoValues = (step, task, shipment_data) => {
 
 	return newStep;
 };
-
-/**
- * Prepare final steps to be deployed in Ui
- * @param {*} steps
- * @param {*} task
- * @param {*} shipment_data
- * @returns steps
- */
 
 const prepareSteps = (steps, task, primary_service = {}) => {
 	const filteredSteps = steps

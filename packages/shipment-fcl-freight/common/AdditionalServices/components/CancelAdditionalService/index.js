@@ -24,17 +24,16 @@ function CancelAdditionalService({
 		cancelAdditionalService(payload);
 	};
 
-	const closeModal = () => setShowCancel(false);
-
 	return showCancel ? (
 		<Modal
 			show
-			onClose={closeModal}
+			onClose={() => setShowCancel(false)}
 			showCloseIcon={!loading}
 			closeOnOuterClick={false}
 			className={styles.custom_modal}
 		>
 			<Modal.Header title="Cancel Service" />
+
 			<Modal.Body>
 				<Textarea
 					value={remarkValues}
@@ -43,14 +42,16 @@ function CancelAdditionalService({
 				/>
 
 			</Modal.Body>
+
 			<Modal.Footer>
 				<Button
 					themeType="secondary"
-					onClick={closeModal}
+					onClick={() => setShowCancel(false)}
 					disabled={loading}
 				>
 					Cancel
 				</Button>
+
 				<Button onClick={onSubmit} disabled={loading} themeType="primary">
 					Submit
 				</Button>

@@ -10,9 +10,21 @@ import useListTasksHelper from './useListTasksHelper';
 
 function List() {
 	const {
-		count, completedTaskCount, tasksList, loading, taskListRefetch,
-		hideCompletedTasks, setHideCompletedTasks, handleClick, selectedTaskId,
-		setSelectedTaskId, shipment_data, showMyTasks, setShowMyTasks,
+		count,
+		completedTaskCount,
+		tasksList = [],
+		loading,
+		taskListRefetch = () => {},
+		hideCompletedTasks,
+		setHideCompletedTasks = () => {},
+		handleClick = () => {},
+		selectedTaskId,
+		setSelectedTaskId = () => {},
+		shipment_data = {},
+		showMyTasks,
+		setShowMyTasks = () => {},
+		selectedMail,
+		setSelectedMail = () => {},
 	} = useListTasksHelper();
 
 	if (loading) {
@@ -55,7 +67,6 @@ function List() {
 							<Card
 								task={task}
 								handleClick={handleClick}
-								tasksList={tasksList}
 								loading={loading}
 							/>
 						)) : null}
@@ -63,18 +74,19 @@ function List() {
 						{selectedTaskId ? (
 							<>
 								<Card
-									task={tasksList.find((task) => task.id === selectedTaskId)}
+									task={tasksList?.find((task) => task.id === selectedTaskId)}
 									handleClick={handleClick}
 									isTaskOpen
-									tasksList={tasksList}
 									loading={loading}
+									shipment_data={shipment_data}
 								/>
 
 								<TaskExecution
-									task={tasksList.find((task) => task.id === selectedTaskId)}
+									task={tasksList?.find((task) => task.id === selectedTaskId)}
 									onCancel={() => setSelectedTaskId(null)}
-									shipment_data={shipment_data}
 									taskListRefetch={taskListRefetch}
+									selectedMail={selectedMail}
+									setSelectedMail={setSelectedMail}
 								/>
 							</>
 						) : null }

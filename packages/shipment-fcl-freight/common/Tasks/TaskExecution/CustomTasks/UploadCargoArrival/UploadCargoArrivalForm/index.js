@@ -1,9 +1,10 @@
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
+import { TradeDocTemplate } from '@cogoport/ocean-modules';
 import { forwardRef } from 'react';
 
 import useUploadCargoArrivalForm from '../../../../../../hooks/useUploadCargoArrivalForm';
 
-// import styles from './styles.module.css';
+import styles from './styles.module.css';
 
 function UploadCargoArrivalForm({
 	summary,
@@ -17,9 +18,9 @@ function UploadCargoArrivalForm({
 }) {
 	const {
 		handleSubmitDocument,
-		// handleSave,
-		// ref,
-		// templateInitialValues,
+		handleSave,
+		ref,
+		templateInitialValues,
 		loading,
 	} = useUploadCargoArrivalForm({
 		summary,
@@ -31,6 +32,26 @@ function UploadCargoArrivalForm({
 		refetch,
 		clearTask,
 	});
+
+	const header = (
+		<div className={styles.head_content}>
+			<div className={styles.heading}>Create Cargo Arrival Notice</div>
+
+			<div className={styles.btn_wrapper}>
+				<Button
+					onClick={() => setShow(false)}
+				>
+					cancel
+				</Button>
+				<Button
+					style={{ marginLeft: 8 }}
+					onClick={handleSave}
+				>
+					Save
+				</Button>
+			</div>
+		</div>
+	);
 
 	return (
 		<>
@@ -57,13 +78,7 @@ function UploadCargoArrivalForm({
 			)}
 
 			{savedData ? (
-				<div
-					style={{
-						display        : 'flex',
-						marginTop      : '10px',
-						justifyContent : 'flex-end',
-					}}
-				>
+				<div className={styles.submit_button}>
 					<Button
 						onClick={() => {
 							handleSubmitDocument();
@@ -77,33 +92,28 @@ function UploadCargoArrivalForm({
 			) : null}
 
 			<div>
-				{/* <FullscreenModal
-					heading="Create Cargo Arrival Notice"
-					headerActions={(
-						<Button
-							style={{ marginLeft: 8 }}
-							onClick={handleSave}
-							size="sm"
-							id="cargo_arrival_notice_btn"
-						>
-							Save
-						</Button>
-					)}
+				<Modal
 					show={show}
-					setShow={setShow}
+					size="fullscreen"
+					placement="fullscreen"
+					className={styles.custom_modal}
+					onClose={() => setShow(false)}
+					showCloseIcon={false}
 				>
-					<div className={styles.trade_document}>
-						<TradeDocTemplate
-							ref={(r) => {
-								ref.current.submit = r;
-							}}
-							mode="write"
-							documentType="container_arrival_notice"
-							initialValues={savedData || templateInitialValues}
-							summary={summary}
-						/>
-					</div>
-				</FullscreenModal> */}
+					<Modal.Header title={header} />
+					<Modal.Body>
+						<div className={styles.trade_document}>
+							<TradeDocTemplate
+								ref={(r) => {
+									ref.current.submit = r;
+								}}
+								documentType="container_arrival_notice"
+								initialValues={savedData || templateInitialValues}
+								summary={summary}
+							/>
+						</div>
+					</Modal.Body>
+				</Modal>
 			</div>
 		</>
 	);

@@ -19,19 +19,12 @@ const useGetStep3Data = ({ servicesList = [], shipment_data, onCancel, task, tas
 	let notMainService = false;
 
 	(servicesList || []).forEach((serviceObj) => {
-		if (
-			[
-				'fcl_freight_service',
-				'fcl_freight_local_service',
-				'fcl_cfs_service',
-			].includes(serviceObj.service_type)
-			&& shipment_data?.shipment_type === 'fcl_freight'
+		if (serviceObj.service_type === 'fcl_freight_service'
 		) {
 			notMainService = true;
 			service_ids.push(serviceObj.id);
 		} else if (
 			serviceObj.service_type === `${shipment_data?.shipment_type}_service`
-			|| serviceObj.service_type === `${shipment_data?.shipment_type}_local_service`
 		) {
 			notMainService = true;
 			service_ids.push(serviceObj.id);

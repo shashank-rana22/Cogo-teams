@@ -8,10 +8,11 @@ import styles from './styles.module.css';
 
 function Step0({ data = {}, onCancel = () => {}, setStep }) {
 	const {
-		formProps = {}, listBookingPreferences = [],
-		bookingPreferenceLoading, shipment_data,
+		formProps = {}, listBookingPreferences = [], bookingPreferenceLoading, shipment_data,
 	} = data || {};
+
 	const { control, formState :{ errors = {} } = {}, handleSubmit } = formProps || {};
+
 	const { source = '' } = shipment_data || {};
 
 	const getSource = () => {
@@ -24,14 +25,9 @@ function Step0({ data = {}, onCancel = () => {}, setStep }) {
 		return 'NORMAL BOOKING';
 	};
 
-	const onNext = () => {
-		setStep(1);
-	};
-
 	return (
 		<div>
 			<div>
-
 				{bookingPreferenceLoading ? <div><Loader /></div> : listBookingPreferences?.map((item) => (
 					<BookingPreferenceCard item={item} step0_data={data} />
 				))}
@@ -40,6 +36,7 @@ function Step0({ data = {}, onCancel = () => {}, setStep }) {
 			<div className={styles.custom_service_provider_container}>
 				<div className={styles.sub_container}>
 					<div className={styles.label}>Mode of Booking</div>
+
 					<div className={styles.value}>{getSource()}</div>
 				</div>
 
@@ -51,9 +48,11 @@ function Step0({ data = {}, onCancel = () => {}, setStep }) {
 					/>
 				</div>
 			</div>
+
 			<div className={styles.button_container}>
 				<Button themeType="secondary" onClick={onCancel}>Cancel</Button>
-				<Button themeType="primary" onClick={handleSubmit(onNext)}>Next</Button>
+
+				<Button themeType="primary" onClick={handleSubmit(() => setStep(1))}>Next</Button>
 			</div>
 
 		</div>

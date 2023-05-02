@@ -1,6 +1,6 @@
-import { Tooltip } from '@cogoport/components';
+import { Popover, Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { IcMCancel } from '@cogoport/icons-react';
+import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useContext, useState } from 'react';
 
@@ -15,6 +15,7 @@ import getCanCancelShipment from './utils/getCanCancelShipment';
 
 function ShipmentHeader() {
 	const [showModal, setShowModal] = useState(false);
+	const [showPopover, setShowPopover] = useState(false);
 
 	const { shipment_data, primary_service, isGettingShipment, activeStakeholder } = useContext(ShipmentDetailContext);
 
@@ -76,7 +77,25 @@ function ShipmentHeader() {
 			<CargoDetails primary_service={primary_service} />
 
 			{showCancelShipmentIcon
-			&& <IcMCancel className={styles.cancel_button} onClick={() => setShowModal('cancel_shipment')} />}
+				? (
+					<Popover
+						visible={showPopover}
+						render={(
+							<div
+								role="button"
+								tabIndex={0}
+								className={styles.cancel_button}
+								onClick={() => { setShowModal('cancel_shipment'); setShowPopover(false); }}
+							>
+								Cancel Shipment
+							</div>
+						)}
+						onClickOutside={() => setShowPopover(false)}
+						placement="bottom"
+					>
+						<IcMOverflowDot className={styles.three_dot_icon} onClick={() => setShowPopover((p) => !p)} />
+					</Popover>
+				) : null}
 
 			{showModal === 'add_po_number' ? (
 				<AddPoNumber

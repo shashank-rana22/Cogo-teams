@@ -2,10 +2,17 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
 
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
+import useTaskRpa from '../../../hooks/useTaskRpa';
 
 import {
-	UploadBookingNote, UploadCargoArrival, UploadContainerDetails,
-	MarkConfirmServices, NominationTask, GenerateFreightCertificate, ChooseServiceProvider, UploadDraftBL,
+	UploadBookingNote,
+	UploadCargoArrival,
+	UploadContainerDetails,
+	MarkConfirmServices,
+	NominationTask,
+	GenerateFreightCertificate,
+	ChooseServiceProvider,
+	UploadDraftBL,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
@@ -15,8 +22,13 @@ const excludeServices = [
 	'haulage_freight_service',
 ];
 
-function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {} }) {
+function ExecuteTask({
+	task = {}, onCancel = () => {}, taskListRefetch = () => {},
+	selectedMail = [],
+	setSelectedMail = () => {},
+}) {
 	const { taskConfigData, loading } = useGetTaskConfig({ task });
+	const { mailLoading } = useTaskRpa({ setSelectedMail, task });
 
 	const { servicesList, shipment_data, primary_service } = useContext(ShipmentDetailContext);
 
@@ -24,6 +36,7 @@ function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {
 		steps,
 		currentStep,
 		setCurrentStep,
+		serviceIdMapping,
 	} = useTaskExecution({ task, taskConfigData });
 
 	const stepConfigValue = steps.length
@@ -66,6 +79,10 @@ function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {
 	}
 
 	if (task.task === 'upload_booking_note') {
+		if (mailLoading) {
+			return <div>Loading...</div>;
+		}
+
 		return (
 			<UploadBookingNote
 				task={task}
@@ -108,14 +125,13 @@ function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {
 
 	if (task.task === 'choose_service_provider') {
 		return (
-			<div>
-				<ChooseServiceProvider
-					task={task}
-					onCancel={onCancel}
-					refetch={taskListRefetch}
-					services={servicesList}
-				/>
-			</div>
+			<ChooseServiceProvider
+				task={task}
+				onCancel={onCancel}
+				refetch={taskListRefetch}
+				services={servicesList}
+			/>
+
 		);
 	}
 
@@ -149,12 +165,13 @@ function ExecuteTask({ task = {}, onCancel = () => {}, taskListRefetch = () => {
 			stepConfig={stepConfigValue}
 			onCancel={onCancel}
 			refetch={taskListRefetch}
-			primaryService={primary_service}
 			isLastStep={currentStep === steps.length - 1}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}
 			getApisData={taskConfigData?.apis_data}
 			uiConfig={taskConfigData?.task_config?.ui_config[currentStep]}
+			selectedMail={selectedMail}
+			serviceIdMapping={serviceIdMapping}
 		/>
 	);
 }

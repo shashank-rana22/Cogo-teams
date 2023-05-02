@@ -7,16 +7,16 @@ import Task from './Task';
 import WalletForm from './WalletForm';
 
 function UploadForm({
-	showDoc,
+	showDoc = {},
 	setShowDoc = () => {},
 	activeWallet,
 	setActiveWallet = () => {},
-	refetch,
+	refetch = () => {},
 }) {
 	const handleDocClick = (doc) => {
 		setShowDoc({
-			...showDoc,
-			url  : doc.image_url,
+			...(showDoc || {}),
+			url  : doc?.image_url,
 			type : 'task',
 		});
 	};
@@ -26,6 +26,7 @@ function UploadForm({
 		case 'task':
 			content = <Task showDoc={showDoc} setShowDoc={setShowDoc} refetch={refetch} />;
 			break;
+
 		case 'wallet':
 			content = (
 				<WalletForm
@@ -38,6 +39,7 @@ function UploadForm({
 			);
 
 			break;
+
 		default:
 			content = (
 				<>
@@ -48,14 +50,15 @@ function UploadForm({
 						className={styles.Choose_from_wallet}
 						onClick={() => setShowDoc({ ...showDoc, type: 'wallet' })}
 					>
-						<div>
-							<IcMPdf fontSize="2rem" />
-						</div>
-						<div className={styles.label} style={{ fontSize: '12px', fontWeight: '600' }}>
+						<IcMPdf height={30} width={30} />
+
+						<div className={styles.label}>
 							Choose a document from the wallet
 						</div>
 					</div>
+
 					<div className={styles.separator}>OR</div>
+
 					<div className={styles.styled_button}>
 						<Button
 							onClick={() => {
@@ -65,6 +68,7 @@ function UploadForm({
 							Manual Upload
 						</Button>
 					</div>
+
 					<div className={styles.buttons_container}>
 						<Button
 							className="secondary md"
@@ -79,6 +83,6 @@ function UploadForm({
 			);
 			break;
 	}
-	return <div className={styles.upload_wrapper}>{content}</div>;
+	return (<div className={styles.upload_wrapper}>{content}</div>);
 }
 export default UploadForm;

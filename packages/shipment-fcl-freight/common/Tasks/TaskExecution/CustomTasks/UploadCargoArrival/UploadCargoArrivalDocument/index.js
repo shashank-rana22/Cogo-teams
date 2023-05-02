@@ -1,33 +1,51 @@
 import { Button } from '@cogoport/components';
 import { InputController, UploadController, useForm } from '@cogoport/forms';
 
-import useCargoArrivalDocument from '../../../../../../hooks/useCargoArrivalDocument';
+import useCreateShipmentDocument from '../../../../../../hooks/useCreateShipmentDocument';
 
 import styles from './styles.module.css';
 
 function UploadCargoArrivalDocument({
-	pendingTask,
-	refetch,
-	setShowDocument,
-	showDocument,
-	clearTask,
+	pendingTask = {},
+	refetch = () => {},
+	setShowDocument = () => {},
+	showDocument = false,
+	clearTask = () => {},
 }) {
 	const { control, formState:{ errors = {} }, handleSubmit } = useForm();
 
 	function Error(key) {
 		return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 	}
-
-	const {
-		submitDocument,
-		loading,
-	} = useCargoArrivalDocument({
-		pendingTask,
-		refetch,
-		setShowDocument,
-		showDocument,
-		clearTask,
+	const cargoDocRefetch = () => {
+		setShowDocument(false);
+		refetch();
+		clearTask();
+	};
+	const { apiTrigger, docLoading } = useCreateShipmentDocument({
+		refetch: cargoDocRefetch,
 	});
+
+	const onSubmit = async (values) => {
+		const data = {
+			shipment_id        : pendingTask?.shipment_id,
+			uploaded_by_org_id : pendingTask?.organization_id,
+			document_type      : 'container_arrival_notice',
+			service_id         : pendingTask?.service_id,
+			service_type       : pendingTask?.service_type,
+			pending_task_id    : pendingTask?.id,
+			documents          : [
+				{
+					file_name    : values?.cargo_arrival_notice?.fileName,
+					document_url : values?.cargo_arrival_notice?.finalUrl,
+					data         : {
+						description: values?.document_description,
+					},
+				},
+			],
+		};
+		await apiTrigger(data);
+	};
 
 	return (
 		showDocument ? (
@@ -38,7 +56,7 @@ function UploadCargoArrivalDocument({
 					<div className={styles.description}>
 						<div className={styles.label}>Document description (Optional)</div>
 						<InputController
-							size="md"
+							size="sm"
 							control={control}
 							name="document_description"
 						/>
@@ -59,8 +77,8 @@ function UploadCargoArrivalDocument({
 
 				<div className={styles.footer}>
 					<Button
-						onClick={handleSubmit(submitDocument)}
-						disabled={loading}
+						onClick={handleSubmit(onSubmit)}
+						disabled={docLoading}
 					>
 						Submit
 					</Button>

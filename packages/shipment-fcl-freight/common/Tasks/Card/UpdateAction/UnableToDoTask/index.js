@@ -1,17 +1,32 @@
-import { Toast, Button, Modal } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { TextAreaController, useForm } from '@cogoport/forms';
 import React from 'react';
+
+import useUpdateShipmentPendingTask from '../../../../../hooks/useUpdateShipmentPendingTask';
 
 function UnableToDoTask({
 	setShowUnableTo = () => {},
 	showUnableTo = false,
+	task = {},
 }) {
-	const { control, handleSubmit } = useForm();
+	const { control, handleSubmit, reset } = useForm();
 
-	const loading = false;
+	const { apiTrigger, loading } = useUpdateShipmentPendingTask({
+		refetch: () => {
+			setShowUnableTo(false);
+			reset();
+		},
+		successMessage: 'Request Submitted Successfully',
+	});
 
 	const onCreate = ({ remark }) => {
-		Toast('Reason: ', remark);
+		const payload = {
+			id      : task?.id,
+			remarks : [remark],
+			status  : 'pending',
+		};
+
+		apiTrigger(payload);
 	};
 
 	return (
@@ -35,15 +50,17 @@ function UnableToDoTask({
 				<Button
 					className="secondary md"
 					style={{ marginRight: '12px' }}
-					onClick={() => setShowUnableTo(false)}
+					onClick={() => {
+						setShowUnableTo(false);
+						reset();
+					}}
 					disabled={loading}
 				>
 					Cancel
 				</Button>
 
 				<Button disabled={loading} onClick={handleSubmit(onCreate)}>
-					Submit
-					{/* {loading ? 'Submiting...' : 'Submit'}  */}
+					{loading ? 'Submiting...' : 'Submit'}
 				</Button>
 			</Modal.Footer>
 		</Modal>

@@ -1,13 +1,19 @@
 import { Toast } from '@cogoport/components';
 import { asyncFieldsLocations, useForm, useGetAsyncOptions } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { getConstantsByCountryCode } from '@cogoport/globalization/constants/geo';
 import { useRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import { getControls } from '../utils/getControls';
 
-function useEditProfile({ vendor_details = {}, refetchVendorInfo = () => {}, setShowEditProfileModal = () => {} }) {
+function useEditProfile({
+	vendor_details = {},
+	refetchVendorInfo = () => {},
+	setShowEditProfileModal = () => {},
+	showEditProfileModal,
+}) {
 	const countryOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params: { filters: { type: ['country'] } },
 	}));
@@ -21,6 +27,22 @@ function useEditProfile({ vendor_details = {}, refetchVendorInfo = () => {}, set
 		cityOptions,
 	});
 
+	const {
+		control,
+		watch,
+		formState: { errors },
+		handleSubmit,
+		getValues,
+		setValue,
+	} = useForm();
+
+	const country_id = watch('country_id');
+
+	const [{ loading }, trigger] = useRequest({
+		url    : '/update_vendor',
+		method : 'post',
+	}, { manual: true });
+
 	const newFields = [];
 
 	fields.forEach((field) => {
@@ -32,26 +54,20 @@ function useEditProfile({ vendor_details = {}, refetchVendorInfo = () => {}, set
 				style: {
 					flexBasis: '100%',
 				},
-
 			};
 		}
-		if (newFieldItem.name !== 'registration_number') {
-			newFields.push(newFieldItem);
+
+		if (newFieldItem.name === 'company_type') {
+			const companyTypeOptions = getConstantsByCountryCode({ country_id });
+
+			newFieldItem = {
+				...newFieldItem,
+				options: companyTypeOptions.options.registration_types,
+			};
 		}
+
+		newFields.push(newFieldItem);
 	});
-
-	const {
-		control,
-		formState: { errors },
-		handleSubmit,
-		getValues,
-		setValue,
-	} = useForm();
-
-	const [{ loading }, trigger] = useRequest({
-		url    : 'update_vendor',
-		method : 'post',
-	}, { manual: true });
 
 	const onSubmit = async () => {
 		const values = getValues();
@@ -82,7 +98,8 @@ function useEditProfile({ vendor_details = {}, refetchVendorInfo = () => {}, set
 		fields.forEach((field) => {
 			setValue(`${field.name}`, vendor_details?.[field.name]);
 		});
-	}, [fields, setValue, vendor_details]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [setValue, vendor_details, showEditProfileModal]);
 
 	return {
 		newFields,

@@ -12,7 +12,7 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 	const [taskList, setTaskList] = useState([]);
 	const [docTypes, setDocTypes] = useState([]);
 
-	const { id, shipment_type } = shipment_data;
+	const { id:shipment_id = '', shipment_type = '' } = shipment_data || {};
 
 	const { data: taskConfigs, loading : taskConfigLoading } = useGetProcess({
 		defaultParams: {
@@ -27,7 +27,7 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 		refetch,
 	} = useGetListDocuments({
 		filters,
-		defaultFilters : { shipment_id: id },
+		defaultFilters : { shipment_id },
 		defaultParams  : {
 			additional_methods : ['pagination', 'organizations'],
 			page               : 1,
@@ -40,24 +40,24 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 
 	const { data : pendingTasks, loading : tasksLoading } = useGetPendingTasks({
 		defaultFilters: {
-			task_type   : 'upload_document',
-			status      : 'pending',
-			shipment_id : id,
+			task_type : 'upload_document',
+			status    : 'pending',
+			shipment_id,
 		},
 		shipment_type,
 	});
 
-	const getDocType = useMemo(() => (task) => task.split('upload_').slice(-1)[0], []);
+	const getDocType = useMemo(() => (task) => task?.split('upload_')?.slice(-1)?.[0], []);
 
 	const taskConfigsForAllShipmentTasks = useMemo(() => (taskConfigs || [])
-		.map(({ states }) => states.map(({ configs }) => configs.filter(
+		.map(({ states }) => states?.map(({ configs }) => configs?.filter(
 			(task) => docTasks.includes(task?.task_type)
 				&& task?.trade_type === primary_service?.trade_type,
 		)))
 		.flat(2), [taskConfigs, primary_service?.trade_type]);
 
 	const listOfAllShipmentDocTypes = useMemo(
-		() => taskConfigsForAllShipmentTasks.map((t) => getDocType(t?.task)),
+		() => taskConfigsForAllShipmentTasks?.map((t) => getDocType(t?.task)),
 		[taskConfigsForAllShipmentTasks, getDocType],
 	);
 
@@ -71,10 +71,10 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 
 	useEffect(() => {
 		const pushInDocTypesArr = [];
-		if ((taskConfigs || []).length) {
+		if ((taskConfigs || [])?.length) {
 			let extraDocumentUploaded = (uploadedShipmentDocuments?.list || []).filter((doc) => {
 				if (
-					!listOfAllShipmentDocTypes.includes(doc?.document_type)
+					!listOfAllShipmentDocTypes?.includes(doc?.document_type)
 					&& !pushInDocTypesArr.includes(doc?.document_type)
 				) {
 					pushInDocTypesArr.push(doc?.document_type);
@@ -94,6 +94,7 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 			const restList = [];
 			const pendingList = [];
 			const uploadedList = [];
+
 			(taskConfigsForAllShipmentTasks || []).forEach((child) => {
 				const doc_type = getDocType(child?.task);
 				pushInDocTypesArr.push(doc_type);
@@ -109,7 +110,9 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 					restList.push(child);
 				}
 			});
+
 			setTaskList([...extraDocumentUploaded, ...uploadedList, ...pendingList, ...restList]);
+
 			setDocTypes([...pushInDocTypesArr]);
 		}
 	}, [

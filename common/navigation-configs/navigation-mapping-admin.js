@@ -1562,6 +1562,16 @@ const navigationMappingAdmin = {
 
 				main_apis: [],
 			},
+			{
+				key           : 'cogo_assured-feedbacks',
+				title         : 'Feedbacks',
+				href          : '/cogo-assured/feedbacks',
+				as            : '/cogo-assured/feedbacks',
+				type          : 'link',
+				possible_apis : apis.cogo_assured,
+
+				main_apis: [],
+			},
 		],
 	},
 	tracking_job: {
@@ -2181,7 +2191,7 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'ihls-lead_data_pipeline',
-				title         : 'Lead Dashboard',
+				title         : 'Lead Enrichment Dashboard',
 				href          : '/ihls/lead-data-pipeline',
 				as            : '/ihls/lead-data-pipeline',
 				type          : 'link',

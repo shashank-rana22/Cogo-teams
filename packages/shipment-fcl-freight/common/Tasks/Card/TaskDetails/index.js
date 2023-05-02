@@ -13,26 +13,25 @@ import styles from './styles.module.css';
 
 function TaskDetails({
 	task = {},
-	services = [],
 	isTaskOpen,
 }) {
-	const { primary_service } = useContext(ShipmentDetailContext);
+	const { servicesList } = useContext(ShipmentDetailContext);
 
 	const requiredServiceArr = [];
 	(task.task_field_ids || []).forEach((id) => {
-		(services || []).forEach((serviceObj) => {
+		(servicesList || []).forEach((serviceObj) => {
 			if (serviceObj.id === id) {
 				requiredServiceArr.push(serviceObj);
 			}
 		});
 	});
-	const taskName = task?.service_type === 'subsidiary_service'
-		? `Mark ${
-			task?.subsidiary_service_name?.split(' ')[0]
-		} (${task?.subsidiary_service_name?.split(' ').slice(1).join(' ')}) ${
+	let taskName = startCase(task?.label || task?.task);
+
+	if (task?.service_type === 'subsidiary_service') {
+		taskName = `Mark ( ${requiredServiceArr?.[0]?.service_name} ) ${
 			task?.task === 'mark_completed' ? 'Completed' : 'Confirm'
-		}` || startCase(task?.task)
-		: startCase(task?.label || task?.task);
+		}` || 	startCase(task?.label) || startCase(task?.task);
+	}
 
 	return (
 		<div className={styles.container}>
@@ -47,15 +46,14 @@ function TaskDetails({
 							height="1.5em"
 						/>
 					)}
-
 				</div>
-
 			</div>
+
 			<div>
 				<div className={styles.details}>
 					<div className={styles.task_name}>{taskName}</div>
-					<div className={styles.task_date_details}>
 
+					<div className={styles.task_date_details}>
 						{task?.deadline ? (
 							<Tooltip
 								interactive
@@ -64,8 +62,8 @@ function TaskDetails({
 									<div style={{ fontSize: '10px' }}>
 										{format(
 											task?.deadline,
-											`${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']} 
-										${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`,
+											`${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']}
+											${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`,
 											null,
 											true,
 										)}
@@ -75,7 +73,8 @@ function TaskDetails({
 								<div>
 									<div className={styles.deadline}>
 										<IcMTimer />
-							&nbsp;Deadline: &nbsp;
+
+										&nbsp;Deadline: &nbsp;
 										{formatDeadlineDate(new Date(task?.deadline))}
 									</div>
 								</div>
@@ -85,6 +84,7 @@ function TaskDetails({
 						{task?.status === 'completed' ? (
 							<div className={styles.completed}>
 								<IcMFtick />
+
 								{`Completed On: ${formatDate({
 									date       : task?.updated_at,
 									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
@@ -118,7 +118,7 @@ function TaskDetails({
 
 				{!isTaskOpen && task?.service_type ? (
 					<div className={styles.cargo_details}>
-						<CargoDetails primary_service={primary_service} />
+						<CargoDetails primary_service={requiredServiceArr?.[0] || {}} />
 					</div>
 				) : null}
 			</div>

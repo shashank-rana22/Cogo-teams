@@ -12,9 +12,9 @@ function ExecuteStep({
 	refetch = () => {},
 	currentStep = 0,
 	isLastStep = false,
-	primaryService = {},
 	getApisData = {},
-	// uiConfig = {},
+	selectedMail = [],
+	serviceIdMapping = [],
 }) {
 	const {
 		formProps,
@@ -23,9 +23,8 @@ function ExecuteStep({
 	} = useStepExecution({
 		task,
 		stepConfig,
-		primaryService,
 		getApisData,
-		// selectedMail,
+		selectedMail,
 	});
 	const { control, formState: { errors }, handleSubmit, watch } = formProps;
 
@@ -34,7 +33,7 @@ function ExecuteStep({
 		task,
 		onCancel,
 		refetch,
-		// serviceIdMapping,
+		serviceIdMapping,
 		currentStep,
 		isLastStep,
 		getApisData,

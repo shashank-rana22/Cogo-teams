@@ -3,7 +3,17 @@ import TaskDetails from './TaskDetails';
 import UpdateAction from './UpdateAction';
 import UpdateButton from './UpdateButton';
 
-function Card({ task = {}, handleClick = () => {}, selectedTaskId = '', isTaskOpen = false }) {
+function Card({
+	task = {},
+	handleClick = () => {},
+	selectedTaskId = '',
+	isTaskOpen = false,
+	shipment_data = {},
+}) {
+	const handleChange = (newMails) => {
+		handleClick(task, newMails);
+	};
+
 	return (
 		<div className={styles.container}>
 
@@ -16,11 +26,16 @@ function Card({ task = {}, handleClick = () => {}, selectedTaskId = '', isTaskOp
 					<UpdateButton
 						task={task}
 						handleClick={handleClick}
+						handleChange={handleChange}
 						hideButton={task.status === 'completed' || selectedTaskId.length}
+						shipment_type={shipment_data?.shipment_type}
 					/>
 				)}
 
-				<UpdateAction task={task} />
+				<UpdateAction
+					task={task}
+					hideThreeDots={task.status === 'completed'}
+				/>
 			</div>
 		</div>
 	);

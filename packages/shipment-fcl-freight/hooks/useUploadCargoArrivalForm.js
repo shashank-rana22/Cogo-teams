@@ -37,39 +37,35 @@ const cargoArrivalData = {
 		},
 	],
 	shipment_details: {
-		po_no         : '',
-		hbl_no        : '',
-		hawb_no       : '',
-		vessel        : '',
-		voyage        : '',
-		flight_number : '',
-		obl_number    : '',
-		obl_date      : '',
-		mawb_no       : '',
-		mawb_date     : '',
-		service_name  : '',
-		booking_no    : '',
-		carrier_name  : '',
-		origin        : '',
-		destination   : '',
-		eta           : '',
-		etd           : '',
-		warehouse     : '',
-		item_no       : '',
-		sub_item_no   : '',
-		all_prepaid   : '',
-		airline_name  : '',
+		po_no        : '',
+		hbl_no       : '',
+		vessel       : '',
+		voyage       : '',
+		obl_number   : '',
+		obl_date     : '',
+		service_name : '',
+		booking_no   : '',
+		carrier_name : '',
+		origin       : '',
+		destination  : '',
+		eta          : '',
+		etd          : '',
+		warehouse    : '',
+		item_no      : '',
+		sub_item_no  : '',
+		all_prepaid  : '',
+
 	},
 };
 
 const useUploadCargoArrivalForm = ({
-	summary,
-	setShow,
+	summary = {},
+	setShow = () => {},
 	savedData,
-	setSavedData,
-	pendingTask,
-	refetch,
-	clearTask,
+	setSavedData = () => {},
+	pendingTask = {},
+	refetch = () => {},
+	clearTask = () => {},
 }) => {
 	const [{ loadng: createDocumentLoading }, createDocumentTrigger] = useRequest({
 		url    : '/create_shipment_trade_document',
@@ -81,7 +77,7 @@ const useUploadCargoArrivalForm = ({
 		method : 'POST',
 	});
 
-	const movement_details =		summary?.movement_details || summary?.movement_detail || [];
+	const movement_details = summary?.movement_details || summary?.movement_detail || [];
 
 	const hbl_details = summary?.hbl_details || [];
 	const mbl_details = summary?.mbl_details || [];
@@ -94,43 +90,26 @@ const useUploadCargoArrivalForm = ({
 
 	const templateInitialValues = {
 		...cargoArrivalData,
-		port_of_loading:
-			summary?.origin_port?.display_name
-			|| summary?.origin_airport?.display_name
-			|| '',
-		port_of_discharge:
-			summary?.destination_port?.display_name
-			|| summary?.destination_airport?.display_name
-			|| '',
-		volume : summary?.volume ? String(summary?.volume) : '',
-		weight : summary?.weight ? String(summary?.weight) : '',
-		origin : ['fob', 'fca', 'fas'].includes(summary?.inco_term)
-			? summary?.origin_port?.display_name
-			|| summary?.origin_airport?.display_name
-			|| ''
-			: '',
+		port_of_loading   : summary?.origin_port?.display_name || '',
+		port_of_discharge : summary?.destination_port?.display_name || '',
+		volume            : summary?.volume ? String(summary?.volume) : '',
+		weight            : summary?.weight ? String(summary?.weight) : '',
+		origin            : ['fob', 'fca', 'fas'].includes(summary?.inco_term)
+			? summary?.origin_port?.display_name || '' : '',
 		pan            : summary?.registration_number || '',
-		packages_count : summary?.packages_count
-			? String(summary?.packages_count)
-			: '',
-		notify_party: notify_party_details?.[0]?.company_name,
-		consignee:
-			summary?.consignee_details?.company_name
-			|| summary?.consignee_detail?.company_name
-			|| '',
-		shipper:
-			summary?.consignee_details?.company_name
-			|| summary?.consignee_detail?.company_name
-			|| '',
-		containers: [
+		packages_count : summary?.packages_count ? String(summary?.packages_count) : '',
+		notify_party   : notify_party_details?.[0]?.company_name,
+		consignee      : summary?.consignee_details?.company_name || summary?.consignee_detail?.company_name || '',
+		shipper        : summary?.consignee_details?.company_name || summary?.consignee_detail?.company_name || '',
+		containers     : [
 			{
-				...cargoArrivalData?.containers?.[0],
+				...(cargoArrivalData?.containers?.[0] || {}),
 				marks_and_number : 'Nm',
 				container_no     : container_numbers.join(', ') || '',
 			},
 		],
 		shipment_details: {
-			...cargoArrivalData?.shipment_details,
+			...(cargoArrivalData?.shipment_details || {}),
 			vessel     : movement_details?.[0]?.vessel || '',
 			voyage     : movement_details?.[0]?.voyage || '',
 			obl_number : mbl_details?.[0]?.data?.document_number || '',
@@ -140,17 +119,9 @@ const useUploadCargoArrivalForm = ({
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',
 			}),
-			service_name: startCase(summary?.service_type) || '',
-			hawb_no:
-				summary?.service_type === 'air_freight_service'
-					? hbl_details?.[0]?.data?.document_number || ''
-					: '',
-			mawb_no:
-				summary?.service_type === 'air_freight_service'
-					? mbl_details?.[0]?.data?.document_number || ''
-					: '',
-			eta: formatDate({
-				date       : summary?.schedule_arrival,
+			service_name : startCase(summary?.service_type) || '',
+			eta          : formatDate({
+				date       : summary?.vessel_arrived_at || summary?.schedule_arrival,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',
 			}),
@@ -159,7 +130,6 @@ const useUploadCargoArrivalForm = ({
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',
 			}),
-			airline_name: summary?.airline?.business_name || '',
 		},
 		service_type : summary?.service_type,
 		service_id   : summary?.id,
