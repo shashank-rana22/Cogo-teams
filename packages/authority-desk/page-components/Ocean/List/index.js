@@ -1,6 +1,6 @@
 import { Pagination } from '@cogoport/components';
 
-// import EmptyState from '../../../commons/EmptyState';
+import EmptyState from '../../../commons/EmptyState';
 
 import ListCard from './ListCard';
 import styles from './styles.module.css';
@@ -12,25 +12,23 @@ export default function List({ data, stateProps }) {
 	const renderPagination = (
 		<Pagination
 			type="table"
-			// totalItems={total}s
+			// totalItems={total}
 			pageSize={10}
 			currentPage={filters.page}
 			onPageChange={(val) => setFilters({ ...filters, page: val })}
 		/>
 	);
 
-	console.log(data, 'daaaaa');
-
-	return (
-	// list.length === 0 ? <EmptyState /> : (
+	return data?.list?.length === 0 ? <EmptyState /> : (
 		<>
 			{renderPagination}
 
 			<div className={styles.list_container}>
-				{(data || []).map((item) => (
+				{(data?.list || []).map((item) => (
 					<ListCard
 						key={item?.id}
 						item={item}
+						bucket={stateProps?.bucket}
 					/>
 				))}
 
@@ -39,5 +37,4 @@ export default function List({ data, stateProps }) {
 			{renderPagination}
 		</>
 	);
-	// );
 }

@@ -6,10 +6,14 @@
   "dependencies": {
     "@cogoport/components": "^1.0.410",
     "@cogoport/forms": "workspace:^0.1.0",
+    "@cogoport/globalization": "workspace:^0.0.1",
     "@cogoport/icons-react": "^1.0.68",
+    "@cogoport/next": "workspace:^0.1.0",
     "@cogoport/request": "workspace:^0.1.0",
     "@cogoport/store": "workspace:^0.1.0",
     "@cogoport/utils": "^1.2.10",
+    "formatAmount": "link:@cogoport/globalization/utils/formatAmount",
+    "globals.json": "link:@cogoport/globalization/constants/globals.json",
     "react": "18.2.0"
   }
 }

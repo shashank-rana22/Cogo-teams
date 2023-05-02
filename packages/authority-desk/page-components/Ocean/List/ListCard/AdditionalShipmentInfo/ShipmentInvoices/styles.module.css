@@ -1,0 +1,17 @@
+.container{
+    background: #FDFBF6;
+   border: 1px solid #F2E3C3;
+   border-radius: 4px; 
+   font-size: 12px; 
+   padding: 2px;
+   } 
+
+.header{
+    border-bottom: 1px solid #F2E3C3;  
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 12px 32px;
+}
+
+

@@ -11,7 +11,7 @@
       "title": "Not Eligible",
       "count": "ineligible"
     },
-    { "name": "approved", "title": "Approved", "count": "postApproved" },
+    { "name": "approved", "title": "Approved", "count": "approved" },
     { "name": "released", "title": "Released", "count": "released" },
     { "name": "hold", "title": "Hold", "count": "hold" }
 ]

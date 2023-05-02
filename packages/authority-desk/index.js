@@ -1,1 +1,1 @@
-export { default as BookingDesk } from './page-components';
+export { default as AuthorityDesk } from './page-components';

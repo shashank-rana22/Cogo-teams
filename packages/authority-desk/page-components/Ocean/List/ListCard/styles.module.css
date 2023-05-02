@@ -1,4 +1,113 @@
 .container{
+background: #FFFFFF;
+box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+border-radius: 8px; 
+margin-bottom: 20px;
+} 
+
+.detail_container{ 
+    padding: 0 16px;
+
+} 
+
+.status{
+background: #FEF199;
+border-radius: 0px 6px; 
+white-space: nowrap; 
+width: fit-content; 
+display: flex; 
+justify-content: flex-end; 
+padding: 4px 6px; 
+font-size: 10px;
+} 
+
+.shipment_details {
+    padding-bottom: 12px; 
+    border-bottom: 1px solid #F2E3C3; 
+    width: 100%; 
+    display: flex; 
+    align-items: center;  
+    padding: 0px 16px;
+}  
+
+.shipment_extra_details{   
     display: flex; 
     align-items: center;
+    padding: 8px 16px; 
+    border-bottom: 1px solid #F2E3C3; 
+}  
+
+.detention_demurrage{
+font-size: 12px; 
+width: 30%; 
+border-right: 1px solid #F2E3C3;  
+} 
+
+.documents_and_invoices{ 
+padding-left: 24px;  
+border-right: 1px solid #F2E3C3;  
+width: 40%; 
+} 
+
+.documents {
+    font-size: 12px; 
+    color: #F68B21;  
+    border-bottom: 1px solid #F68B21; 
+    width: fit-content;
+} 
+
+.text{
+color:  #F68B21;  
+padding-left: 4px;
+} 
+
+.validation{
+    display: flex;
+} 
+
+.bl_details{
+    font-size: 12px; 
+    padding-left: 24px;
+} 
+
+.organization_details{
+display: flex; 
+justify-content: space-around; 
+font-size: 12px; 
+width: 90%;
+} 
+
+.business_name{
+    font-size: 12px; 
+    font-weight: 700px;
+} 
+
+.footer{
+    display: flex; 
+    justify-content: space-between; 
+    padding: 16px 16px 16px 16px;
+} 
+
+.less_more_details{  
+    display: flex; 
+    justify-content: center;
+    background: #F8F2E7;
+    border-radius: 0px 0px 8px 8px;  
+    cursor: pointer; 
+    font-size: 12px;  
+    padding: 4px 0px; 
+    cursor: pointer;
+
+     
+    &::after{
+        content:">";
+        margin-left: 4px;
+        transform: rotate(90deg);
+    }
+
+} 
+
+.additional_text{
+    border-bottom: 1px solid #000;
 }
+

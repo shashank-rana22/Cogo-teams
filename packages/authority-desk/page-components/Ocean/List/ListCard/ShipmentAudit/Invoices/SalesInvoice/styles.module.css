@@ -1,0 +1,13 @@
+.container {
+    table {
+        width: 100%;
+    }
+    th, tr{
+        display: flex;
+        text-align: center;
+    }
+
+    td {
+        flex: 1;
+    } 
+}

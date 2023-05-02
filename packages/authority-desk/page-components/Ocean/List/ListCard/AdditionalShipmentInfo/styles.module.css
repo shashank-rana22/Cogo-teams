@@ -1,0 +1,19 @@
+.container{
+    border-top : 1px solid #F2E3C3;  
+    padding: 24px;
+} 
+
+.header{
+    background: #F3FAFA; 
+    border: 1px solid #88CAD1; 
+    padding: 16px 32px; 
+    display: flex;
+justify-content: space-around; 
+} 
+
+.customer{
+    color: #000000; 
+    font-size: 12px; 
+    font-weight: 600; 
+    
+}

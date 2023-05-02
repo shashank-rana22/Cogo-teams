@@ -1,0 +1,15 @@
+.container{
+border-right: 1px solid #F2E3C3;  
+width: 18%;
+} 
+
+
+.serial_id {
+    color: #F68B21; 
+    font-weight: 600; 
+    font-size: 12px;
+} 
+
+.created_at{
+font-size: 12px;
+}
