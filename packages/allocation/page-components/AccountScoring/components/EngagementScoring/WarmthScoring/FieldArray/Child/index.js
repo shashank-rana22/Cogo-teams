@@ -35,7 +35,7 @@ function Child(props) {
 				if (!Element) return null;
 
 				return (
-					<div className={styles.control}>
+					<div className={styles.control} key={`${name}.${index}.${singleControl.name}`}>
 						<Element
 							key={`${name}.${index}.${singleControl.name}`}
 							control={control}
