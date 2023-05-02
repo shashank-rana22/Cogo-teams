@@ -1,0 +1,11 @@
+.container {
+	display: flex;
+	gap: 15px;
+	align-items: center;
+	padding-top: 10px;
+}
+
+.tag {
+	font-size: 12px;
+	color: #333;
+}
