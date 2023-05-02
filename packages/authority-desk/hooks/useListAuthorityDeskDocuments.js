@@ -4,7 +4,9 @@ import { useState, useCallback, useEffect } from 'react';
 
 const emptyData = { list: [], total: 0, total_page: 0, count_stats: {} };
 
-function useListAuthorityDeskDocuments({ activeTab, service, bucket }) {
+const shipmentStates = ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress', 'completed'];
+
+function useListAuthorityDeskDocuments({ activeTab, service, bucket, filters }) {
 	const [data, setData] = useState(emptyData);
 
 	const [{ loading }, trigger] = useRequest({
@@ -14,12 +16,14 @@ function useListAuthorityDeskDocuments({ activeTab, service, bucket }) {
 
 	const listShipments = useCallback(async () => {
 		try {
+			const { state, is_job_closed, ...restFilters } = filters;
 			const res = await trigger({
 				params: {
 					filters: {
-						state           : ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress', 'completed'],
-						is_job_closed   : false,
+						state           : state || shipmentStates,
+						is_job_closed   : is_job_closed === 'yes',
 						document_status : bucket,
+						...restFilters || {},
 					},
 					page               : 1,
 					page_limit         : 10,
@@ -46,7 +50,7 @@ function useListAuthorityDeskDocuments({ activeTab, service, bucket }) {
 
 	useEffect(() => {
 		listShipments();
-	}, [listShipments, bucket]);
+	}, [listShipments, bucket, filters]);
 
 	return {
 		data,
