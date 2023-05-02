@@ -14,17 +14,16 @@ function UploadDraftBL({
 }) {
 	const mblRef = useRef();
 
-	const isHBL =		(primaryService.bl_category || '').toLowerCase() === 'hbl';
+	const isHBL = (primaryService.bl_category || '').toLowerCase() === 'hbl';
 
 	const initial_step = primaryService.bl_category;
 
 	const [step, setStep] = useState(initial_step || '');
 
 	const {
-		listDocsAPI,
-		shipmentListDocsAPI,
-
-		submitMBL,
+		listDocsAPI = {},
+		shipmentListDocsAPI = {},
+		submitMBL = () => {},
 	} = useDraftBLHelper({
 		isHBL,
 		task,

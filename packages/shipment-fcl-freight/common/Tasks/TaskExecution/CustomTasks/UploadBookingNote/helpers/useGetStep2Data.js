@@ -13,7 +13,16 @@ const numberKeys = [
 	'free_days_demurrage_destination',
 ];
 
-const useGetStep2Data = ({ primary_service, task, step0_data, fileUrl, formattedRate, servicesList, setStep }) => {
+const useGetStep2Data = ({
+	primary_service = {},
+	task = {},
+	step0_data = {},
+	fileUrl = [],
+	formattedRate = {},
+	servicesList,
+	setStep = () => {},
+	shipment_data = {},
+}) => {
 	const [bookingNote, setBookingNote] = useState(0);
 
 	const [, updateServiceTrigger] = useRequest({
@@ -63,6 +72,11 @@ const useGetStep2Data = ({ primary_service, task, step0_data, fileUrl, formatted
 		},
 	});
 
+	const { watch } = formProps || {};
+
+	const movementDetails = watch('movement_details');
+	const departureDate = movementDetails?.[0]?.schedule_departure;
+
 	const handleFinalSubmit = async (values) => {
 		const payloadCreateShipmentDocument = {
 			document_type : 'booking_note',
@@ -78,7 +92,8 @@ const useGetStep2Data = ({ primary_service, task, step0_data, fileUrl, formatted
 		};
 
 		const dataObj = {};
-		(mainControls || []).forEach((obj) => {
+
+		(mainControls({ departureDate }) || []).forEach((obj) => {
 			if (numberKeys.includes(obj.name)) {
 				dataObj[obj.name] = Number(values[obj.name] || 0);
 			} else {
@@ -100,11 +115,22 @@ const useGetStep2Data = ({ primary_service, task, step0_data, fileUrl, formatted
 			}
 		});
 
+		const importLocalService = shipment_data?.all_services?.filter(
+			(service) => service?.service_type === 'fcl_freight_local_service',
+		)?.[0];
+
 		if (formattedRate?.primary_service) {
-			formValuesForFcl.service_provider_id = formattedRate[primary_service.id]?.service_provider_id;
-			formValuesForFcl.shipping_line_id =	formattedRate[primary_service.id]?.shipping_line_id;
-			formValuesForLocal.service_provider_id = formattedRate[primary_service.id]?.service_provider_id;
-			formValuesForLocal.shipping_line_id = formattedRate[primary_service.id]?.shipping_line_id;
+			formValuesForFcl.service_provider_id = formattedRate?.[primary_service.id]?.service_provider_id;
+
+			formValuesForFcl.shipping_line_id =	formattedRate?.[primary_service.id]?.shipping_line_id;
+
+			formValuesForLocal.service_provider_id = shipment_data?.main_service_trade_type === 'import'
+				? importLocalService?.service_provider_id
+				: formattedRate[primary_service.id]?.service_provider_id;
+
+			formValuesForLocal.shipping_line_id = shipment_data?.main_service_trade_type === 'import'
+				? importLocalService?.shipping_line_id
+				: formattedRate[primary_service.id]?.shipping_line_id;
 		}
 
 		const payloadForUpdateShipment = {
@@ -118,7 +144,7 @@ const useGetStep2Data = ({ primary_service, task, step0_data, fileUrl, formatted
 				schedule_departure : mv_details[0]?.schedule_departure,
 				schedule_arrival   : mv_details[mv_details.length - 1]?.schedule_arrival,
 			},
-			ids                 : task.task_field_ids,
+			ids                 : task?.task_field_ids,
 			service_type        : task?.service_type,
 			shipment_id         : task?.shipment_id,
 			performed_by_org_id : task?.organization_id,
@@ -128,7 +154,7 @@ const useGetStep2Data = ({ primary_service, task, step0_data, fileUrl, formatted
 				data: payloadForUpdateShipment,
 			});
 
-			const res2 =				localServiceIds.length > 0
+			const res2 = localServiceIds.length > 0
 				? await updateServiceTrigger({
 					data: {
 						data                : { ...formValuesForLocal },
@@ -168,6 +194,6 @@ const useGetStep2Data = ({ primary_service, task, step0_data, fileUrl, formatted
 		}
 	};
 
-	return { bookingNote, setBookingNote, formProps, handleFinalSubmit };
+	return { bookingNote, setBookingNote, formProps, handleFinalSubmit, departureDate };
 };
 export default useGetStep2Data;

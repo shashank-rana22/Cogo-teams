@@ -1,8 +1,8 @@
 import { startCase } from '@cogoport/utils';
 
 import taskDisplayNames from '../../../../configurations/display-name-mappings';
+import incoTermMapping from '../../../../configurations/inco-term-mapping.json';
 
-import incoTermMapping from './inco-term-mapping.json';
 import styles from './styles.module.css';
 
 function TaskContainer({

@@ -87,7 +87,7 @@ export const movementDetailsControls = [
 	},
 ];
 
-export const mainControls = [
+export const mainControls = ({ departureDate }) => [
 	{
 		label          : 'VGM Cut-off',
 		name           : 'vgm_cutoff',
@@ -97,18 +97,22 @@ export const mainControls = [
 		rules          : {
 			required: { value: true, message: 'VGM Cut-off is required' },
 		},
-		size: 'sm',
+		size                  : 'sm',
+		isPreviousDaysAllowed : true,
+		maxDate               : departureDate,
 	},
 	{
-		label          : 'S/I Cut-off',
+		label          : 'SI Cut-off',
 		name           : 'si_cutoff',
 		type           : 'datepicker',
 		showTimeSelect : true,
 		span           : 6,
 		rules          : {
-			required: { value: true, message: 'S/I Cut-off is required' },
+			required: { value: true, message: 'SI Cut-off is required' },
 		},
-		size: 'sm',
+		size                  : 'sm',
+		isPreviousDaysAllowed : true,
+		maxDate               : departureDate,
 	},
 	{
 		label          : 'Document Cut-off',
@@ -119,7 +123,9 @@ export const mainControls = [
 		rules          : {
 			required: { value: true, message: 'Document Cut-off is required' },
 		},
-		size: 'sm',
+		size                  : 'sm',
+		isPreviousDaysAllowed : true,
+		maxDate               : departureDate,
 	},
 	{
 		label          : 'Gate-in Cut-off',
@@ -130,7 +136,9 @@ export const mainControls = [
 		rules          : {
 			required: { value: true, message: 'Gate-in Cut-off is required' },
 		},
-		size: 'sm',
+		size                  : 'sm',
+		isPreviousDaysAllowed : true,
+		maxDate               : departureDate,
 	},
 	{
 		label          : 'Booking Note Expiry',
@@ -141,7 +149,9 @@ export const mainControls = [
 		rules          : {
 			required: { value: true, message: 'Booking Note Expiry is required' },
 		},
-		size: 'sm',
+		size                  : 'sm',
+		isPreviousDaysAllowed : true,
+		maxDate               : departureDate,
 	},
 	{
 		label          : 'TR Cut-off',
@@ -152,7 +162,9 @@ export const mainControls = [
 		rules          : {
 			required: { value: true, message: 'TR Cut-off is required' },
 		},
-		size: 'sm',
+		size                  : 'sm',
+		isPreviousDaysAllowed : true,
+		maxDate               : departureDate,
 	},
 	{
 		label : 'Detention days at origin',

@@ -21,7 +21,7 @@ const formatDataForTable = (services, data) => {
 	const getControls = () => {
 		if (containersData?.length) {
 			return containersData?.reduce((previousControls, currentItem) => {
-				const { serial_no, container_size, container_type } = currentItem;
+				const { serial_no, container_size, container_type } = currentItem || {};
 
 				const itemControl = {
 					name    : `is_hazardous-${serial_no}`,
@@ -40,9 +40,10 @@ const formatDataForTable = (services, data) => {
 					defaultOptions : true,
 				};
 
-				return [...previousControls, { ...itemControl }];
+				return [...(previousControls || {}), { ...itemControl }];
 			}, []);
 		}
+
 		return [];
 	};
 

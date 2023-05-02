@@ -13,13 +13,16 @@ const useUpdateShipmentPendingTask = ({
 
 	const apiTrigger = async (val) => {
 		try {
-			await trigger({ data: val });
+			const res = await trigger({ data: val });
 
 			Toast.success(successMessage);
 
 			refetch();
+
+			return res;
 		} catch (err) {
 			toastApiError(err);
+			return err;
 		}
 	};
 

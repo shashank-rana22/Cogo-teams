@@ -1,5 +1,5 @@
 const getErrorMessage = (props) => {
-	const { error = {}, rules = {}, label = ''	} = props;
+	const { error = {}, rules = {}, label = '' } = props;
 
 	if (error?.message) return error.message;
 

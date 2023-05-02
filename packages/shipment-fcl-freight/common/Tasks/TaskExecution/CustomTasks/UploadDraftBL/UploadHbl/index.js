@@ -19,9 +19,10 @@ function UploadHbl(props) {
 		false,
 		scope,
 	)('/create_shipment_document');
+
 	const uploadBills = async (values) => {
 		const documents = [];
-		values.forEach((item) => {
+		values?.forEach((item) => {
 			documents.push({
 				file_name    : item?.url?.name,
 				document_url : item?.url?.url,
@@ -34,6 +35,7 @@ function UploadHbl(props) {
 				},
 			});
 		});
+
 		const body = {
 			shipment_id        : data?.shipment_id,
 			uploaded_by_org_id : data?.organization_id,
@@ -44,6 +46,7 @@ function UploadHbl(props) {
 			document_type: 'draft_house_bill_of_lading',
 			documents,
 		};
+
 		await createShipmentDocAPI.trigger({ data: body });
 
 		refetchDocs();
@@ -62,6 +65,7 @@ function UploadHbl(props) {
 				invoice_details.push(item?.submitForm());
 			}
 		});
+
 		if (isAllFormsValid) {
 			uploadBills(invoice_details);
 		} else {
@@ -71,9 +75,11 @@ function UploadHbl(props) {
 
 	useEffect(() => {
 		const newUrls = [...urls];
+
 		docs?.forEach((item, i) => {
 			newUrls[i] = `${item?.document_url}`;
 		});
+
 		setUrls(newUrls);
 	}, [docs, urls]);
 
