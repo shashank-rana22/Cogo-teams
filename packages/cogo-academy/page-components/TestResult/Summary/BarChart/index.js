@@ -9,6 +9,7 @@ function BarChart({ chart_data = [], yAxis = '' }) {
 				data={chart_data}
 				keys={[
 					'percentile',
+					'percentage',
 				]}
 				indexBy="label"
 				margin={{ top: 20, right: 20, bottom: 40, left: 60 }}
@@ -62,7 +63,7 @@ function BarChart({ chart_data = [], yAxis = '' }) {
 					tickPadding    : 5,
 					tickRotation   : 0,
 					borderColor    : 'red',
-					legend         : `${yAxis || 'Percentile'}`,
+					legend         : `${yAxis}`,
 					legendPosition : 'middle',
 					legendOffset   : -40,
 				}}

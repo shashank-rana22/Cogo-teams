@@ -1,0 +1,37 @@
+.main {
+	display: flex;
+	gap: 12px;
+	width: 100%;
+	font-weight: 500;
+	color: #393f70;
+}
+
+.sub_container {
+	margin-top: 20px;
+}
+
+.gap {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	width: 100%;
+}
+
+.loader {
+	height: 40px;
+}
+
+.heading {
+	font-weight: 500;
+	line-height: 18px;
+	color: #393f70;
+}
+
+.single_item {
+	position: relative;
+	display: flex;
+	gap: 16px;
+	align-items: center;
+	padding: 4px 16px 6px;
+	margin: 16px 0 8px;
+}

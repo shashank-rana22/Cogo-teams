@@ -25,6 +25,9 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 			other_addresses_data_required   : true,
 			poc_data_required               : true,
 		},
+		defaultFilters: {
+			organization_status: true,
+		},
 	});
 
 	const [addressOptions, setAddressOptions] = useState([]);

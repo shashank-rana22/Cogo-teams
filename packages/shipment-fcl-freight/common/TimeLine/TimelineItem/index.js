@@ -1,5 +1,7 @@
 import { Tooltip } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMTick } from '@cogoport/icons-react';
+import { useContext } from 'react';
 
 import { getDate } from '../utils/formatters';
 
@@ -10,6 +12,22 @@ import {
 
 export default function TimelineItem({ item, isLast = false, consecutivelyCompleted = false }) {
 	const { milestone, is_sub, completed_on, actual_completed_on } = item || {};
+
+	const { primary_service } = useContext(ShipmentDetailContext) || {};
+	const {
+		schedule_departure,
+		schedule_arrival,
+		selected_schedule_departure,
+		selected_schedule_arrival,
+		cargo_arrived_at,
+	} = primary_service || {};
+
+	const milestoneToDisplayDate = {
+		'Vessel Departed From Origin (ETD)'   : schedule_departure || selected_schedule_departure,
+		'Vessel Arrived At Destination (ETA)' : cargo_arrived_at || schedule_arrival || selected_schedule_arrival,
+	};
+
+	const displayCompletedDate = completed_on || milestoneToDisplayDate[item?.milestone];
 
 	let isCompleted = !!completed_on && consecutivelyCompleted;
 	isCompleted = isLast ? !!completed_on : isCompleted;
@@ -22,10 +40,10 @@ export default function TimelineItem({ item, isLast = false, consecutivelyComple
 			<div className={label}>Milestone</div>
 			<div className={value}>{milestone}</div>
 
-			{completed_on ? (
+			{displayCompletedDate ? (
 				<>
 					<div className={label}>Completed On</div>
-					<div className={value}>{getDate(completed_on)}</div>
+					<div className={value}>{getDate(displayCompletedDate)}</div>
 				</>
 			) : null}
 
@@ -51,7 +69,7 @@ export default function TimelineItem({ item, isLast = false, consecutivelyComple
 			{!is_sub || isLast ? (
 				<div className={display_milestone}>
 					<div className={ellipsis}>{milestone}</div>
-					<div className={ellipsis}>{getDate(completed_on, 'dd MMM yyyy')}</div>
+					<div className={ellipsis}>{getDate(displayCompletedDate, 'dd MMM yyyy')}</div>
 				</div>
 			) : null}
 		</div>

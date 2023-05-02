@@ -5,7 +5,7 @@ import { useEffect, useCallback, useRef } from 'react';
 
 import useGetScopeOptions from './useGetScopeOptions';
 
-export default function useScope({ defaultValues, closePopover, apisToConsider }) {
+export default function useScope({ defaultValues = {}, closePopover = ()=>{}, apisToConsider = [] }) {
 	const { profile } = useSelector((store) => store);
 	const dispatch = useDispatch();
 

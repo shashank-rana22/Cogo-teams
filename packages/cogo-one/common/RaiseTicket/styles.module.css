@@ -1,0 +1,63 @@
+.header {
+	font-size: 18px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.message_content {
+	height: fit-content;
+	max-height: 100px;
+	padding: 10px 20px;
+	overflow: hidden;
+	background: #f2f2f2;
+}
+
+.body_styled {
+	padding: 10px 0 0 !important;
+}
+
+.name_div {
+	padding: 5px 12px;
+}
+
+.styled_element {
+	padding: 10px;
+}
+
+.label {
+	padding: 5px 0;
+	font-size: 14px;
+	font-weight: 500;
+	color: #4f4f4f;
+}
+
+.footer_buttons {
+	display: flex;
+	justify-content: flex-end;
+	padding: 10px 10px 10px 0;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.button_styles {
+	margin-left: 5px;
+}
+
+.error_text {
+	min-height: 10px;
+	font-size: 10px;
+	font-weight: 600;
+	color: #ee3425;
+}
+
+.styled_form {
+	max-height: 380px;
+	overflow: auto;
+}
+
+.styled_form::-webkit-scrollbar {
+	display: none;
+}
+
+.header_styles {
+	padding: 10px;
+}

@@ -5,7 +5,7 @@ import EmptyState from '../EmptyState';
 import styles from './styles.module.css';
 
 export default function List({ data, stateProps, Card, couldBeCardsCritical = false }) {
-	const { filters, setFilters } = stateProps;
+	const { filters, setFilters, activeTab } = stateProps;
 	const { list = [], total } = data;
 
 	const renderPagination = (
@@ -29,6 +29,7 @@ export default function List({ data, stateProps, Card, couldBeCardsCritical = fa
 							key={item?.id}
 							item={item}
 							couldBeCardsCritical={couldBeCardsCritical}
+							activeTab={activeTab}
 						/>
 					))}
 

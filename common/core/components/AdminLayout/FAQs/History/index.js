@@ -15,6 +15,7 @@ function History({
 	setQuestion = () => {},
 	setShowHistory = () => {},
 	setSearch = () => {},
+	setInput,
 }) {
 	const [activeTab, setActiveTab] = useState('requested_question');
 
@@ -95,6 +96,7 @@ function History({
 						searchHistoryListLoading={searchHistoryListLoading}
 						setSearch={setSearch}
 						fetchFaqSearchHistory={fetchFaqSearchHistory}
+						setInput={setInput}
 					/>
 
 				</TabPanel>
