@@ -22,7 +22,8 @@ const buttonSettings = [
 				key   : 'background-color',
 				type  : 'color',
 			},
-			{ label: 'Color', key: 'color', type: 'color' },
+			{ label: 'Text Color', key: 'color', type: 'color' },
+			{ label: 'Padding', key: 'padding', type: 'padding' },
 			{ label: 'Font Size', key: 'fontSize', type: 'number' },
 			{
 				label   : 'Font Weight',
@@ -63,6 +64,32 @@ const buttonSettings = [
 					{ label: 'Overline', value: 'overline' },
 					{ label: 'Line-Through', value: 'line-through' },
 				],
+			},
+			{
+				label : 'Border Color',
+				key   : 'borderColor',
+				type  : 'color',
+			},
+			{
+				label   : 'Border Style',
+				key     : 'borderStyle',
+				type    : 'select',
+				options : [
+					{ label: 'None', value: 'none' },
+					{ label: 'Solid', value: 'solid' },
+					{ label: 'Dotted', value: 'dotted' },
+					{ label: 'Dashed', value: 'dashed' },
+				],
+			},
+			{
+				label : 'Border Width',
+				key   : 'borderWidth',
+				type  : 'number',
+			},
+			{
+				label : 'Border Radius',
+				key   : 'borderRadius',
+				type  : 'number',
 			},
 
 		],

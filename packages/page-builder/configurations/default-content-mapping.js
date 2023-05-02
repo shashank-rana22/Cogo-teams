@@ -36,8 +36,20 @@ const getContentMapping = () => {
 				themeType   : 'primary',
 				size        : 'md',
 				style       : {},
-				type        : 'button',
-				attributes  : {
+				buttonStyle : {
+
+					'background-color' : '#ee3425',
+					color              : '#fff',
+					'min-width'        : '52px',
+					height             : '32px',
+					padding            : '7px 16px',
+					'font-size'        : '12px',
+					border             : '0',
+					'border-radius'    : '4px',
+
+				},
+				type       : 'button',
+				attributes : {
 					onClick: 'handleSubmitClick',
 				},
 			},

@@ -1,5 +1,3 @@
-import { Button } from '@cogoport/components';
-
 import styles from './styles.module.css';
 
 function ButtonComponent(props) {
@@ -8,13 +6,13 @@ function ButtonComponent(props) {
 		rowData,
 	} = props;
 
-	const { content = 'Click Here', themeType, size, type, attributes } = widget || {};
+	const { content = 'Click Here', type, attributes } = widget || {};
 
 	const { onClick = () => {} } = attributes || {};
 
 	return (
 		<div className={styles.button_wrapper}>
-			<Button
+			{/* <Button
 				style={rowData.component.buttonStyle}
 				type={type}
 				themeType={themeType}
@@ -23,7 +21,17 @@ function ButtonComponent(props) {
 				contentEditable
 			>
 				{content}
-			</Button>
+			</Button> */}
+
+			<button
+				onClick={onClick}
+				type={type}
+				style={rowData.component?.buttonStyle}
+				contentEditable
+			>
+				<span>{content}</span>
+
+			</button>
 
 		</div>
 	);
