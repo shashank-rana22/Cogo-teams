@@ -1,0 +1,19 @@
+.button_style {
+	width: 100px;
+}
+
+.button_val {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 8px;
+	margin-top: 8px;
+}
+
+.button_container {
+    margin-top: 8px;
+}
+
+.button_style {
+	width: 100px;
+}

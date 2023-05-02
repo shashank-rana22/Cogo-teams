@@ -1,22 +1,23 @@
 import { Pagination, Button } from '@cogoport/components';
 import React from 'react';
 
-import Filters from '../../../../../commons/Filters';
-import FilterModal from '../../../../commons/FilterModal';
-import SearchInput from '../../../../commons/searchInput';
-import StyledTable from '../../../../commons/styledTable';
-import completedColumn from '../../../../configs/Completed_table';
-import useGetOutstandingCard from '../../../../hooks/useGetoutstandingCard';
-import { INVOICE_LIST_FILTERS } from '../../../../Utils/invoicelistFilter';
+import Filters from '../../../commons/Filters';
+import completedColumn from '../../configs/Completed_table';
+import useGetOutstandingCard from '../../hooks/useGetoutstandingCard';
+import { INVOICE_LIST_FILTERS } from '../../Utils/invoicelistFilter';
+import FilterModal from '../FilterModal';
+import SearchInput from '../searchInput';
+import StyledTable from '../styledTable';
 
 import styles from './styles.module.css';
 
 interface Props {
 	organizationId: string,
-	entityCode?: string
+	entityCode?: string,
+	showName?: boolean
 }
 
-function InvoiceTable({ organizationId, entityCode }: Props) {
+function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 	const {
 		listData,
 		clearInvoiceFilters,
@@ -29,7 +30,7 @@ function InvoiceTable({ organizationId, entityCode }: Props) {
 
 	const { list : invoiceList = [], page: pageInvoiceList, totalRecords: recordInvoiceList } = listData || {};
 
-	const columns = completedColumn(getOrganizationInvoices);
+	const columns = completedColumn(getOrganizationInvoices, showName);
 	return (
 		<div>
 			{' '}

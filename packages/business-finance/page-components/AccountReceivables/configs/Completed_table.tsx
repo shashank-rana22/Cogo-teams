@@ -1,4 +1,4 @@
-import { Pill } from '@cogoport/components';
+import { Pill, Tooltip } from '@cogoport/components';
 import getPrice from '@cogoport/forms/utils/get-formatted-price';
 import { format, getByKey, startCase } from '@cogoport/utils';
 
@@ -33,27 +33,59 @@ const invoiceStatus = {
 	FINANCE_REJECTED : '#f9ac98',
 };
 
-const completedColumn = (refetch: Function) => [
+const completedColumn = (refetch: Function, showName: boolean) => [
 
+	{
+		Header   : showName && 'Name',
+		id       : 'name',
+		accessor : (row) => (
+			showName
+			&& (
+				(getByKey(row, 'organizationName') as string).length > 10 ? (
+					<Tooltip
+						interactive
+						placement="top"
+						content={getByKey(row, 'organizationName') as string}
+					>
+						<text className={styles.cursor}>
+							{`${(getByKey(row, 'organizationName') as string).substring(
+								0,
+								20,
+							)}...`}
+						</text>
+					</Tooltip>
+				)
+					: (
+						<div>
+							{getByKey(row, 'organizationName') as string}
+						</div>
+					)
+			)
+		),
+	},
 	{
 		Header   : 'Invoice Number',
 		accessor : (row) => (
-			<div className={styles.fieldPair}>
-				<div
-					className={styles.link}
-					onClick={() => window.open(getDocumentUrl({ itemData: row }) as string, '_blank')}
-					role="presentation"
-				>
-					{getDocumentNumber({ itemData: row })}
+			(
+				<div className={styles.fieldPair}>
+					<div
+						className={styles.link}
+						onClick={() => window.open(getDocumentUrl({ itemData: row }) as string, '_blank')}
+						role="presentation"
+					>
+						{getDocumentNumber({ itemData: row })}
 
+					</div>
+					<div>
+						<Pill size="md" color={invoiceType[(getByKey(row, 'invoiceType') as string)]}>
+							{startCase(getByKey(row, 'invoiceType') as string)}
+						</Pill>
+					</div>
 				</div>
-				<div>
-					<Pill size="md" color={invoiceType[(getByKey(row, 'invoiceType') as string)]}>
-						{startCase(getByKey(row, 'invoiceType') as string)}
-					</Pill>
-				</div>
-			</div>
+			)
 		),
+		id: 'invice_number',
+
 	},
 	{
 		Header   : 'SID',
@@ -65,7 +97,7 @@ const completedColumn = (refetch: Function) => [
 					{getByKey(row, 'sidNo') as string}
 
 				</div>
-				<div className={styles.service}>{startCase(getByKey(row, 'serviceType') as string)}</div>
+				<div>{startCase(getByKey(row, 'serviceType') as string)}</div>
 			</div>
 		),
 	},
@@ -82,7 +114,7 @@ const completedColumn = (refetch: Function) => [
 		accessor : (row) => (
 
 			<div className={styles.fieldPair}>
-				<div className={styles.amount}>
+				<div>
 					<div>
 						{getPrice(
 							getByKey(row, 'invoiceAmount') as number,
@@ -102,7 +134,7 @@ const completedColumn = (refetch: Function) => [
 	{
 		Header   : 'Ledger Amount',
 		accessor : (row) => (
-			<div className={styles.amount}>
+			<div>
 				<div>
 					{getPrice(
 						getByKey(row, 'ledgerAmount') as number,
@@ -116,7 +148,7 @@ const completedColumn = (refetch: Function) => [
 	{
 		Header   : 'Balance Amount',
 		accessor : (row) => (
-			<div className={styles.amount}>
+			<div>
 				<div>
 					{getPrice(
 						getByKey(row, 'balanceAmount') as number,
@@ -130,7 +162,7 @@ const completedColumn = (refetch: Function) => [
 	{
 		Header   : 'Invoice Date',
 		accessor : (row) => (
-			<div className={styles.amount}>
+			<div>
 				<div>{format(getByKey(row, 'invoiceDate') as Date, 'dd MMM yy', {}, false)}</div>
 			</div>
 		),
@@ -138,7 +170,7 @@ const completedColumn = (refetch: Function) => [
 	{
 		Header   : 'Due Date',
 		accessor : (row) => (
-			<div className={styles.amount}>
+			<div>
 				<div>{format(getByKey(row, 'dueDate') as Date, 'dd MMM yy', {}, false)}</div>
 			</div>
 		),

@@ -74,6 +74,7 @@ function OutstandingList({ item, entityCode }: OutstandingListProps) {
 		invoice_details: {
 			organizationId,
 			entityCode,
+			showName: false,
 		},
 		payments_list: {
 			organizationId,

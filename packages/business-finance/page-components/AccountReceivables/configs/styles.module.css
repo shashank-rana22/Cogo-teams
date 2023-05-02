@@ -20,14 +20,6 @@
 	color: #f68b21;
 }
 
-.amount {
-	font-weight: 800;
-}
-
-.service {
-	font-weight: 800;
-}
-
 .center {
 	display: flex;
 	justify-content: center;
@@ -59,4 +51,8 @@
 .styled_name {
 	font-size: 12px;
 	font-weight: 500;
+}
+
+.cursor {
+	cursor: pointer;
 }

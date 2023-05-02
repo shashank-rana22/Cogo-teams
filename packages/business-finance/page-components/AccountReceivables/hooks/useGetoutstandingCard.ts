@@ -95,7 +95,7 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 					services      : services || undefined,
 					query         : query !== '' ? query : undefined,
 					role          : userData.id,
-					orgId,
+					orgId         : orgId || undefined,
 					dueDateStart,
 					dueDateEnd,
 					invoiceDateStart,

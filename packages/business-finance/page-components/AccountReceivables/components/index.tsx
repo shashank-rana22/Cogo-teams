@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import useListCogoEntity from '../hooks/useListCogoEntity';
 
 import Dashboard from './Dashboard';
+import Invoice from './Invoice';
 import Outstanding from './Outstanding';
 import styles from './styles.module.css';
 
@@ -22,7 +23,7 @@ function AccountReceivables() {
 	const { id: partnerId } = partner || {};
 
 	const handleChange = (val:string) => {
-		if (['invoices', 'defaulters', 'manageBpr'].includes(val)) {
+		if (['defaulters', 'manageBpr'].includes(val)) {
 			window.location.href = `/${partnerId}/business-finance/account-receivables/${val}`;
 			return;
 		}
@@ -75,7 +76,7 @@ function AccountReceivables() {
 						<Dashboard entityCode={entityCode} />
 					</TabPanel>
 					<TabPanel name="invoices" title="Invoices">
-						--
+						<Invoice entityCode={entityCode} />
 					</TabPanel>
 					<TabPanel name="outstanding" title="Outstanding">
 						<Outstanding entityCode={entityCode} />
