@@ -5,13 +5,12 @@ import { useState } from 'react';
 import PopoverContent from './PopoverContent';
 import styles from './styles.module.css';
 
-export default function Filters({ stateProps }) {
+export default function Filters({ stateProps = {}, showPopoverFilters = true }) {
 	const [showPopover, setShowPopover] = useState(false);
 	const { filters, setFilters } = stateProps;
 
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.open_filters}>
 				<Input
 					placeholder="Search SID"
@@ -22,7 +21,7 @@ export default function Filters({ stateProps }) {
 					prefix={<IcMSearchlight />}
 				/>
 
-				{filters?.shipment_type !== 'fcl_freight_local' ? (
+				{showPopoverFilters ? (
 					<Popover
 						render={(
 							<PopoverContent
@@ -43,8 +42,7 @@ export default function Filters({ stateProps }) {
 						>
 							<div className={styles.button_content}>
 								<IcMFilter />
-								{' '}
-							&ensp;Filters
+								&ensp; Filters
 							</div>
 						</Button>
 					</Popover>

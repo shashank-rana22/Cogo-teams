@@ -1,19 +1,19 @@
-// import { ShipmentDetailContext } from '@cogoport/context';
+import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
-// import { useContext } from 'react';
+import { useContext } from 'react';
 
 import getDefaultValues from '../utils/get-default-values';
+import injectForm from '../utils/inject-form';
 import injectValues from '../utils/inject-Values';
 import populateControls from '../utils/populate-controls';
 
 function useStepExecution({
 	task = {},
 	stepConfig = {},
-	primaryService = {},
 	getApisData = {},
-	selectedMail,
+	selectedMail = {},
 }) {
-	// const { servicesList } = useContext(ShipmentDetailContext);
+	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const populatedControls = populateControls(stepConfig.controls);
 
@@ -22,7 +22,6 @@ function useStepExecution({
 		populatedControls,
 		task,
 		getApisData,
-		primaryService,
 		stepConfig,
 	);
 
@@ -30,22 +29,20 @@ function useStepExecution({
 
 	const formProps = useForm({ defaultValues });
 
-	const showElements = {};
+	const formValues = formProps?.watch();
 
-	// Here some more manipulation is done
-	// const { finalConfig, showElements } = injectForm({
-	// 	stepConfig,
-	// 	formProps,
-	// 	task,
-	// 	shipment_data,
-	// 	formValues,
-	// });
+	const { controls, showElements } = injectForm({
+		stepConfig,
+		formProps,
+		formValues,
+		task,
+		shipment_data,
+	});
 
 	return {
-		fields: valueInjectedControls,
+		fields: controls,
 		formProps,
 		showElements,
-		// servicesList,
 	};
 }
 export default useStepExecution;

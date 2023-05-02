@@ -1,12 +1,11 @@
 import TRADE_PARTY_MAPPING from '../../../../contants/TRADE_PARTY_MAPPING';
-import roleBasedView from '../../config/role_base_view.json';
 
 import styles from './styles.module.css';
 
 const exclude_trade_party = ['collection_party'];
 
-function TradeParties({	tradePartnersData, setAddCompany = () => {}, serviceProviders = {}, activeStakeholder }) {
-	const tradePartyView = (roleBasedView[activeStakeholder] || {})?.trade_parties;
+function TradeParties({	tradePartnersData, setAddCompany = () => {}, serviceProviders = {}, rolesPermission = {} }) {
+	const tradePartyView = rolesPermission?.trade_parties;
 
 	const { list = [] } = tradePartnersData;
 

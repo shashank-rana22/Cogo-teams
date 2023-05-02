@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 import UnableToDoTask from './UnableToDoTask';
 import UpdateAssignedStakeholder from './UpdateAssignedStakeholder';
 
-function UpdateAction({ task = {} }) {
+function UpdateAction({ task = {}, hideThreeDots }) {
 	const [showAction, setShowAction] = useState(false);
 	const [showUnableTo, setShowUnableTo] = useState(false);
 	const [showAdmin, setShowAdmin] = useState(false);
@@ -41,33 +41,15 @@ function UpdateAction({ task = {} }) {
 					interactive
 					theme="light"
 					content={(
-						<div style={{ fontSize: '10px' }}>
+						<div className={styles.mobile_number}>
 							{`${task?.stakeholder?.mobile_country_code}-${task?.stakeholder?.mobile_number}`}
 						</div>
 					)}
 				>
-					<div>
-						<IcMCall
-							style={{
-								marginLeft : '20px',
-								cursor     : 'pointer',
-								width      : '18px',
-								height     : '18px',
-								color      : '#000000',
-							}}
-						/>
-					</div>
+					<IcMCall className={styles.call_icon} />
 				</Tooltip>
 			) : (
-				<div
-					style={{
-						marginLeft : '20px',
-						cursor     : 'pointer',
-						width      : '18px',
-						height     : '18px',
-						color      : '#000000',
-					}}
-				/>
+				<div className={styles.call_icon} />
 			)}
 
 			<Popover
@@ -102,23 +84,7 @@ function UpdateAction({ task = {} }) {
 						>
 							Change Owner
 						</div>
-						{/* {shipmentTags.includes('cogoverse')
-							&& task?.task === 'upload_booking_note' && (
-								<>
-									<Line />
 
-									<div
-										className={styles.task_action}
-										onClick={() => {
-											if (!bookingNoteDelayedLoading) sendBookingNoteDelayed(task?.shipment_id);
-										}}
-									>
-										{bookingNoteDelayedLoading
-											? 'Notifying'
-											: 'Notify Customer About Delay'}
-									</div>
-								</>
-						)} */}
 					</>
 				)}
 			>
@@ -128,17 +94,10 @@ function UpdateAction({ task = {} }) {
 					}
 					className={styles.action}
 				>
-					{!isMainServiceCancelled ? (
-						<IcMOverflowDot
-							style={{
-								marginLeft : '12px',
-								width      : '20px',
-								height     : '20px',
-								color      : '#000000',
-							}}
-						/>
+					{!isMainServiceCancelled && !hideThreeDots ? (
+						<IcMOverflowDot className={styles.overflow_icon} />
 					) : (
-						<div style={{ paddingRight: '40px' }} />
+						<div className={styles.overflow_div} />
 					)}
 				</div>
 			</Popover>
@@ -146,14 +105,12 @@ function UpdateAction({ task = {} }) {
 			<UnableToDoTask
 				setShowUnableTo={setShowUnableTo}
 				showUnableTo={showUnableTo}
-				// refetch={refetch}
 				task={task}
 			/>
 
 			<UpdateAssignedStakeholder
 				setShowAdmin={setShowAdmin}
 				showAdmin={showAdmin}
-				// refetch={refetch}
 				task={task}
 			/>
 		</div>

@@ -50,13 +50,13 @@ function PaymentTable({ organizationId,	entityCode }: Props) {
 				/>
 				<Input
 					className="primary md"
-					placeholder="Search by Payment Number"
+					placeholder="Search by Payment Number / Sage Reference Number"
 					value={paymentFilters.query}
 					onChange={(val:string) => onChange(val, 'query')}
 					prefix={(
 						<IcMSearchdark />
 					)}
-					style={{ width: 300 }}
+					style={{ width: 400 }}
 				/>
 			</div>
 

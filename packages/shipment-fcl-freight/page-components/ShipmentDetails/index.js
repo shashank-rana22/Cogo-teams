@@ -6,6 +6,8 @@ import useGetBuyers from '../../hooks/useGetBuyers';
 import useGetShipment from '../../hooks/useGetShipment';
 import { useStakeholderCheck } from '../../hooks/useStakeholderCheck';
 
+import styles from './styles.module.css';
+
 const Superadmin = dynamic(() => import('./StakeholdersView/Superadmin'), { ssr: false });
 const DKam = dynamic(() => import('./StakeholdersView/ConsigneeShipperBookingAgent'), { ssr: false });
 const Kam = dynamic(() => import('./StakeholdersView/BookingAgent'), { ssr: false });
@@ -40,9 +42,7 @@ function ShipmentDetails() {
 			return <Superadmin get={get} activeStakeholder="superadmin" />;
 		default:
 			return (
-				<h1
-					style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-				>
+				<h1 className={styles.not_allowed}>
 					You are not allowed to visit this page!
 				</h1>
 			);

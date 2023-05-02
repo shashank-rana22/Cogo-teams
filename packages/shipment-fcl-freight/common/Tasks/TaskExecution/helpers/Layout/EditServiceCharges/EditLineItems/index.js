@@ -8,20 +8,15 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 function EditLineItems({
-	control, controls, name, cargoDetails, value:emptyValue, customValues,
+	control, controls, name, cargoDetails, value:emptyValue, customValues = {},
 }) {
-	const { fields, append, remove } = useFieldArray({ control, name });
+	const { fields = [], append, remove } = useFieldArray({ control, name });
 
 	return (
 		<div className={styles.container}>
+			<CargoDetails primary_service={cargoDetails} />
 
-			<div>
-				<CargoDetails primary_service={cargoDetails} />
-			</div>
-
-			<div>
-				<Header controls={controls} />
-			</div>
+			<Header controls={controls} />
 
 			<div className={styles.child_container}>
 				{fields?.map((field, index) => (
@@ -38,9 +33,8 @@ function EditLineItems({
 					/>
 				))}
 			</div>
-			<div>
-				<Button onClick={() => append(emptyValue)}>Add</Button>
-			</div>
+
+			<Button onClick={() => append(emptyValue)}>Add</Button>
 		</div>
 	);
 }

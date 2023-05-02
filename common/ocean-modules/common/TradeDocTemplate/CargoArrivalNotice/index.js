@@ -1,26 +1,24 @@
-import { forwardRef, useImperativeHandle, useRef } from 'react';
+import { forwardRef, useRef, useImperativeHandle } from 'react';
 
-import Frontside from './Frontside';
+import DetailsForm from './DetailsForm';
 
 function CargoArrivalNotice(
-	{ noFormat, initialValues, mode, service_type },
+	{ initialValues, service_type },
 	ref,
 ) {
 	const refFront = useRef({});
 
 	useImperativeHandle(ref, () => ({
-		handleSubmit: refFront.current.submit.handleSubmit,
+		handleSubmit: refFront?.current?.submit?.handleSubmit,
 	}));
 
 	return (
 		<div>
-			<Frontside
-				noFormat={noFormat}
+			<DetailsForm
 				ref={(r) => {
 					refFront.current.submit = r;
 				}}
 				initialValues={initialValues}
-				mode={mode}
 				service_type={service_type}
 			/>
 		</div>

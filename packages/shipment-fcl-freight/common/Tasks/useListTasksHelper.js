@@ -7,6 +7,7 @@ function useListTasksHelper() {
 	const [selectedTaskId, setSelectedTaskId] = useState(null);
 	const [hideCompletedTasks, setHideCompletedTasks] = useState(false);
 	const [showMyTasks, setShowMyTasks] = useState(true);
+	const [selectedMail, setSelectedMail] = useState([]);
 	const [filters] = useState({});
 
 	const { shipment_data, isGettingShipment, activeStakeholder } = useContext(ShipmentDetailContext);
@@ -23,6 +24,7 @@ function useListTasksHelper() {
 	});
 
 	let completedTaskCount = 0;
+
 	(list?.list || []).forEach((task) => {
 		completedTaskCount += task?.status === 'completed';
 	});
@@ -31,7 +33,13 @@ function useListTasksHelper() {
 		? (list?.list || []).filter((task) => task.status === 'pending')
 		: (list?.list || []);
 
-	const handleClick = (task) => {
+	const handleClick = (task, newMails) => {
+		if (newMails) {
+			setSelectedMail(newMails);
+		} else {
+			setSelectedMail([]);
+		}
+
 		if ('id' in task) {
 			setSelectedTaskId(task.id);
 		}
@@ -51,6 +59,8 @@ function useListTasksHelper() {
 		showMyTasks,
 		setShowMyTasks,
 		taskListRefetch,
+		selectedMail,
+		setSelectedMail,
 	};
 }
 export default useListTasksHelper;

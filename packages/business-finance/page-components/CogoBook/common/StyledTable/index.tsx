@@ -1,5 +1,5 @@
 import { Pagination, Table } from '@cogoport/components';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import { FilterInterface } from '../../Accruals/interface';
 import EmptyState from '../EmptyState';
@@ -23,24 +23,31 @@ interface TableProps {
 	onRowSelect?: (row: object) => void;
 	onRowClick?: (row: object) => void;
 	getRowId?: (row: object) => string;
+	renderRowSubComponent?:(itemData: object) => ReactNode
+	showAllNestedOptions?:boolean
+	showEmptyState?:string
 }
 
 function StyledTable({
-	id, className, columns, data, pageSize, page, total, setFilters, filters, loading, ...rest
+	id, className, columns, selectType, showAllNestedOptions, showEmptyState,
+	data, renderRowSubComponent, pageSize, page, total, setFilters, filters, loading, ...rest
 }: TableProps) {
 	return (
 		<div className={styles.table}>
+
 			<Table
 				columns={columns}
+				renderRowSubComponent={renderRowSubComponent}
 				data={data}
 				id={id}
 				className={className}
 				loading={loading}
+				selectType={selectType}
+				showAllNestedOptions={showAllNestedOptions}
 				{...rest}
 			/>
 
-			{data?.length === 0 && <EmptyState />}
-
+			{data?.length === 0 && !loading && <EmptyState showEmptyState={showEmptyState} />}
 			<div className={styles.pagination_container}>
 				<Pagination
 					type="table"

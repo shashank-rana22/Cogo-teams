@@ -9,10 +9,6 @@ function Step1({ data = {}, skipStep0, setStep }) {
 	const { formProps } = data || {};
 	const { control, formState:{ errors = {} } = {}, handleSubmit } = formProps || {};
 
-	const onNext = () => {
-		setStep(2);
-	};
-
 	return (
 		<div>
 			<div>
@@ -28,7 +24,8 @@ function Step1({ data = {}, skipStep0, setStep }) {
 			<div>
 				<div className={styles.button_container}>
 					{!skipStep0 && <Button themeType="secondary" onClick={() => setStep(0)}>Back</Button>}
-					<Button themeType="primary" onClick={handleSubmit(onNext)}>Next</Button>
+
+					<Button themeType="primary" onClick={handleSubmit(() => setStep(2))}>Next</Button>
 				</div>
 			</div>
 		</div>

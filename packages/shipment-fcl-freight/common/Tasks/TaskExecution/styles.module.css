@@ -19,6 +19,6 @@
 }
 
 .form {
-	max-height: calc(100vh - 39.5vh);
+	max-height: 60.5vh;
 	overflow-y: auto;
 }

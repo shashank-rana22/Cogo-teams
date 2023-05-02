@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-const useUpdateDocument = () => {
+const useUpdateDocument = ({ refetch = () => {} }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : 'create_organization_document',
 		method : 'POST',
@@ -11,15 +11,11 @@ const useUpdateDocument = () => {
 
 	const updateDocument = async ({ values }) => {
 		try {
-			const res = await trigger({
-				data: {
-					name            : values?.name,
-					document_type   : values?.document_type,
-					image_url       : values?.image_url,
-					organization_id : values?.organization_id,
-				},
-			});
+			const res = await trigger({ data: values });
+
 			if (!res.hasError) {
+				refetch();
+
 				Toast.success('Document Added To Organization Wallet');
 			}
 		} catch (err) {

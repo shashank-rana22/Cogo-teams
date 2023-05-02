@@ -52,7 +52,7 @@ function NominationTask({
 			<div style={{ width: `${widthVal}%` }}>
 				<div className={styles.label}>{label}</div>
 				<Element name={name} type={type} {...rest} />
-				{errors[name] ? <div>{errors[name].message}</div> : null}
+				{errors[name] ? <div className={styles.errors}>{errors[name].message}</div> : null}
 			</div>
 		) : null;
 	}
@@ -115,7 +115,7 @@ function NominationTask({
 			</div>
 
 			<div className={styles.button_container}>
-				<Button themeType="secondary" onClick={onCancel}>
+				<Button themeType="secondary" onClick={onCancel} disabled={loading}>
 					Cancel
 				</Button>
 

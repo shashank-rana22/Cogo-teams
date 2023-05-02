@@ -192,6 +192,10 @@ export default {
 				label : 'Limited Liability Partnership',
 				value : 'limited_liability_partnership',
 			},
+			{
+				label : 'Other',
+				value : 'other',
+			},
 		],
 		country_truck_type : 'open_body_pickup_1ton',
 		open_truck         : [

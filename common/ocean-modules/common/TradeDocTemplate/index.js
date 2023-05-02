@@ -1,13 +1,11 @@
-import React from 'react';
+import { forwardRef } from 'react';
 
 import CargoArrivalNotice from './CargoArrivalNotice';
 
 function TradeDocTemplate(
 	{
-		mode = 'read',
 		documentType = 'bluetide_hbl',
 		initialValues = null,
-		noFormat = false,
 	},
 	ref,
 ) {
@@ -16,9 +14,7 @@ function TradeDocTemplate(
 			return (
 				<CargoArrivalNotice
 					ref={ref}
-					noFormat={noFormat}
 					initialValues={initialValues}
-					mode={mode}
 				/>
 			);
 
@@ -27,4 +23,4 @@ function TradeDocTemplate(
 	}
 }
 
-export default TradeDocTemplate;
+export default forwardRef(TradeDocTemplate);

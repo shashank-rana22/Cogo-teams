@@ -21,43 +21,58 @@ const shipmentSpecificPayload = {
 
 const timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
 
-export default function getListBookingDeskShipmentsPayload({ filters, activeTab, selected_agent_id }) {
+export default function getListBookingDeskShipmentsPayload({
+	filters = {},
+	activeTab = '',
+	selected_agent_id = '',
+}) {
 	const { isCriticalOn, page, q, shipment_type, ...restFilters } = filters;
 
 	const tabSpecificPayload = shipmentSpecificPayload[shipment_type][activeTab];
 	const otherFilters = tabSpecificPayload.other || {};
 	const combinedTradeTypeSpecific = { task_attributes: [] };
 
-	let payloadKey = ['common'];
+	let payloadKey = [];
 	if (filters.trade_type) {
-		payloadKey.push(filters.trade_type);
+		payloadKey.push(filters.trade_type, 'common');
 	} else {
-		payloadKey = ['common', 'import'];
+		payloadKey = ['import', 'common'];
 	}
 
 	payloadKey.forEach((key) => {
 		if (key in tabSpecificPayload) {
-			combinedTradeTypeSpecific.task_attributes = [...combinedTradeTypeSpecific.task_attributes,
-				...(tabSpecificPayload[key]?.task_attributes || {})];
+			combinedTradeTypeSpecific.task_attributes = [
+				...combinedTradeTypeSpecific.task_attributes,
+				...(tabSpecificPayload[key]?.task_attributes || {}),
+			];
 		}
 	});
 
 	const tabs = TABS_CONFIG[shipment_type];
 
-	const isCriticalVisible = tabs.find((tab) => tab.name === activeTab).isCriticalVisible ?? false;
+	const isCriticalVisible = tabs.find((tab) => tab.name === activeTab).isCriticalVisible || false;
 
 	const threeDaysLater = new Date();
 	threeDaysLater.setDate(threeDaysLater.getDate() + 3);
 	threeDaysLater.setTime(threeDaysLater.getTime() - timezoneOffset);
+
+	const oneDayLater = new Date();
+	oneDayLater.setDate(oneDayLater.getDate() + 1);
+	oneDayLater.setHours(23, 59, 59, 999);
+
+	const criticalPayload = activeTab === 'container_pick_up'
+		? { bn_expiry_less_than: oneDayLater }
+		: { schedule_departure_less_than: threeDaysLater };
 
 	const payload = {
 		filters: {
 			state: shipmentStates[activeTab] || shipmentStates.in_progress,
 			...(combinedTradeTypeSpecific || {}),
 			...(otherFilters || {}),
-			...(selected_agent_id && { selected_agent_id }),
-			...(isCriticalVisible && isCriticalOn
-				&& { schedule_departure_less_than: threeDaysLater }),
+			...(selected_agent_id && { stakeholder_id: selected_agent_id }),
+			...(isCriticalVisible
+				&& isCriticalOn
+				? criticalPayload : {}),
 			...(q && { q }),
 			...restFilters,
 		},
@@ -65,7 +80,6 @@ export default function getListBookingDeskShipmentsPayload({ filters, activeTab,
 		additional_methods : ['pagination'],
 		sort_by            : 'created_at',
 		sort_type          : 'desc',
-
 	};
 
 	return payload;

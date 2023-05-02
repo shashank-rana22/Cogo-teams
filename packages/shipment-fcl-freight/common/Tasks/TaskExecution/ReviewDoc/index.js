@@ -1,4 +1,6 @@
-import { Button, Toast } from '@cogoport/components';
+import { Loader, Button, Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -28,15 +30,15 @@ function ReviewDoc({
 		},
 	});
 
-	let doc_data = {};
+	let docData = {};
 	let params = {};
 
-	if (!loading && list?.length) {
-		doc_data = list?.[0] || {};
+	if (!loading && list?.list?.length) {
+		docData = list.list[0] || {};
 		params = {
-			id                  : doc_data.id,
+			id                  : docData.id,
 			pending_task_id     : task.id,
-			document_type       : doc_data.document_type,
+			document_type       : docData.document_type,
 			performed_by_org_id : task.organization_id,
 		};
 	}
@@ -77,35 +79,43 @@ function ReviewDoc({
 		}
 	};
 
+	if (loading) {
+		return (
+			<div>
+				<Loader />
+				Loading Document...
+			</div>
+		);
+	}
 	return (
 		<div className={styles.container}>
 			<div className={styles.display_details}>
 				<div className={styles.sub_half_detail}>
 					<div className={styles.row}>
 						<div className={styles.sub_heading}>Document Type : </div>
-						<div className={styles.sub_detail}>{startCase(doc_data.document_type)}</div>
+						<div className={styles.sub_detail}>{startCase(docData.document_type)}</div>
 					</div>
 					<div className={styles.row}>
 						<div className={styles.sub_heading}>Document State : </div>
-						<div className={styles.sub_detail}>{startCase(doc_data.state)}</div>
+						<div className={styles.sub_detail}>{startCase(docData.state)}</div>
 					</div>
 				</div>
 				<div className={styles.sub_half_detail}>
 					<div className={styles.row}>
 						<div className={styles.sub_heading}>Uploaded At : </div>
 						<div className={styles.sub_detail}>
-							{/* {formatDate({
-								date       : doc_data.Uploaded_at,
+							{formatDate({
+								date       : docData.uploaded_at,
 								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 								formatType : 'date',
-							})} */}
-							Sub details date
+							})}
+
 						</div>
 					</div>
 					<div className={styles.row}>
 						<div className={styles.sub_heading}>Uploaded By :</div>
 						<div className={styles.sub_detail}>
-							{startCase(doc_data.uploaded_by_org?.business_name)}
+							{startCase(docData.uploaded_by_org?.business_name)}
 						</div>
 					</div>
 				</div>
@@ -115,10 +125,9 @@ function ReviewDoc({
 				<div className={styles.file_view}>
 					<object
 						title="review_file"
-						data={doc_data.document_url}
+						data={docData.document_url}
 						width="100%"
 						type="application/pdf"
-						// allowFullScreen
 					/>
 				</div>
 			) : null}

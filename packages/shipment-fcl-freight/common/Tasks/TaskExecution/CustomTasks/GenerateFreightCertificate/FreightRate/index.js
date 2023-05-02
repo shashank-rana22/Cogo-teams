@@ -57,6 +57,7 @@ function FreightRate({
 					<div className={styles.field_array}>
 						<div className={styles.input_container}>
 							<label htmlFor="commodity">Commodity</label>
+
 							<InputController
 								name="commodity"
 								control={control}
@@ -64,14 +65,17 @@ function FreightRate({
 								size="sm"
 								rules={{ required: { value: true, message: 'Commodity is required' } }}
 							/>
+
 							{errors.freight_declaration && (
-								<span>
+								<span className={styles.errors}>
 									{errors.freight_declaration[index]?.commodity?.message}
 								</span>
 							)}
 						</div>
+
 						<div className={styles.input_container}>
 							<label htmlFor="currency">Currency</label>
+
 							<AsyncSelectController
 								name="currency"
 								control={control}
@@ -82,14 +86,17 @@ function FreightRate({
 								asyncKey="list_exchange_rate_currencies"
 								rules={{ required: { value: true, message: 'Currency is required' } }}
 							/>
+
 							{errors.freight_declaration && (
-								<span>
+								<span className={styles.errors}>
 									{errors.freight_declaration[index]?.currency?.message}
 								</span>
 							)}
 						</div>
+
 						<div className={styles.input_container}>
 							<label htmlFor="freight_price">Rate per container</label>
+
 							<InputController
 								name="freight_price"
 								control={control}
@@ -97,14 +104,17 @@ function FreightRate({
 								{...register(`freight_declaration.${index}.freight_price`)}
 								rules={{ required: { value: true, message: 'Freight Price is required' } }}
 							/>
+
 							{errors.freight_declaration && (
-								<span>
+								<span className={styles.errors}>
 									{errors.freight_declaration[index]?.freight_price?.message}
 								</span>
 							)}
 						</div>
+
 						<div className={styles.input_container}>
 							<label htmlFor="origin_price">Exwork</label>
+
 							<InputController
 								name="origin_price"
 								control={control}
@@ -112,14 +122,17 @@ function FreightRate({
 								{...register(`freight_declaration.${index}.origin_price`)}
 								rules={{ required: { value: true, message: 'Origin Price is required' } }}
 							/>
+
 							{errors.freight_declaration && (
-								<span>
+								<span className={styles.errors}>
 									{errors.freight_declaration[index]?.origin_price?.message}
 								</span>
 							)}
 						</div>
+
 						<div className={styles.input_container}>
 							<label>Total</label>
+
 							<div>
 								{Number(formValues?.freight_declaration[index]?.freight_price || 0)
 								+ Number(formValues?.freight_declaration[index]?.origin_price || 0)}
@@ -134,9 +147,11 @@ function FreightRate({
 				<Button
 					themeType="secondary"
 					style={{ marginRight: 10 }}
+					disabled={loading}
 				>
 					Cancel
 				</Button>
+
 				<Button
 					onClick={handleSubmit(onSubmit)}
 					disabled={loading}

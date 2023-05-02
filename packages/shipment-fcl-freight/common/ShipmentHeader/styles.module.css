@@ -65,9 +65,14 @@
 	}
 }
 
-.cancel_button {
-	position: relative;
-	right: -10px;
+.three_dot_icon {
+	width: 16px;
+	height: 16px;
 	cursor: pointer;
 	fill: var(--color-primary-error-red-2);
+}
+
+.cancel_button {
+	font-size: var(--font-size-md);
+	cursor: pointer;
 }

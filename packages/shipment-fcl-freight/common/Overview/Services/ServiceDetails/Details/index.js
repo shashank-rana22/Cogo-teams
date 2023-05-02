@@ -8,7 +8,10 @@ import Item from './Item';
 import styles from './styles.module.css';
 
 function Details({ serviceData = [] }) {
-	const { service_type, state } = serviceData[0];
+	const {
+		service_type, state, free_days_demurrage_destination,
+		free_days_demurrage_origin, free_days_detention_destination, free_days_detention_origin,
+	} = serviceData[0];
 
 	const serviceInitialKeys = {};
 
@@ -28,10 +31,10 @@ function Details({ serviceData = [] }) {
 	const service_items_key = getConfigs(service_type).details || {};
 
 	const freeDays = {
-		free_days_demurrage_destination : serviceData?.[0]?.free_days_demurrage_destination,
-		free_days_demurrage_origin      : serviceData?.[0]?.free_days_demurrage_origin,
-		free_days_detention_destination : serviceData?.[0]?.free_days_detention_destination,
-		free_days_detention_origin      : serviceData?.[0]?.free_days_detention_origin,
+		free_days_demurrage_destination,
+		free_days_demurrage_origin,
+		free_days_detention_destination,
+		free_days_detention_origin,
 	};
 
 	const excludedKeys = [...Object.keys(serviceInitialKeys[(Object.keys(serviceInitialKeys)?.[0])]),
@@ -62,7 +65,7 @@ function Details({ serviceData = [] }) {
 			<div className={cl`${styles.multiservice} ${styles[state]}`}>
 				{(service_items_key || []).map((element) => (getByKey(
 					serviceInitialKeys[multiServiceType],
-					element.key,
+					element?.key,
 				) ? (
 					<Item state={state} label={element} detail={serviceInitialKeys[multiServiceType]} />
 					) : null))}

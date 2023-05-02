@@ -1,4 +1,4 @@
-import { Button, Toast } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
 import useListDocuments from '../../../../hooks/useListDocuments';
@@ -31,7 +31,7 @@ function UploadAmendDoc({
 	const { updateDocument } = useUpdateShipmentDocuments({ refetch: newRefetch });
 
 	const allControls = controls(task) || [];
-	const details = list?.[0] || {};
+	const details = list?.list?.[0] || {};
 
 	const payloadData = details?.data;
 	const requiredObj = {};
@@ -52,7 +52,7 @@ function UploadAmendDoc({
 			service_type        : task.service_type,
 			document_type       : task.document_type,
 			performed_by_org_id : task.organization_id,
-			id                  : list?.[0]?.id,
+			id                  : list?.list?.[0]?.id,
 			pending_task_id     : task.id,
 			data                : { ...documentPayloadData, status: 'uploaded' },
 			document_url:
@@ -69,15 +69,7 @@ function UploadAmendDoc({
 			})),
 		};
 
-		const res = await updateDocument(finalPayload);
-
-		if (!res?.hasError) {
-			onClose();
-			refetch();
-			Toast.success('Task Completed Successfully');
-		} else {
-			Toast.error('Something went wrong !');
-		}
+		updateDocument(finalPayload);
 	};
 
 	return (

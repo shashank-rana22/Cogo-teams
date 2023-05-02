@@ -34,7 +34,6 @@
 .element {
 	padding: 4px;
 
-	/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 	:global {
 		.ui_select_input_placeholder {
 			font-size: 14px;
@@ -46,6 +45,11 @@
 			font-size: 14px;
 			font-weight: 400;
 			color: #bdbdbd;
+		}
+
+		.ui_upload_droparea_subheading {
+			text-align: center;
+			opacity: 0.3;
 		}
 	}
 }

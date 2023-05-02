@@ -6,7 +6,8 @@ import STAKEHOLDER_MAPPING from '../../../../../../contants/STAKEHOLDER_MAPPING'
 
 import styles from './styles.module.css';
 
-function Stakeholders({ data = [], setAddPoc = () => {} }) {
+function Stakeholders({ data = [], setAddPoc = () => {}, rolesPermission = {} }) {
+	const editInternalPoc = rolesPermission?.edit_internal_poc || [];
 	return (
 		<div>
 			{data?.map((item) => {
@@ -33,20 +34,22 @@ function Stakeholders({ data = [], setAddPoc = () => {} }) {
 						</div>
 
 						<div className={styles.action_container}>
-							<Button
-								themeType="linkUi"
-								onClick={() => setAddPoc({
-									poc_type: 'editInternal',
-									stakeholder_type,
-									service_type,
-									service_id,
-									stakeholder_id,
-								})}
-								size="sm"
-							>
-								<IcMEdit height={15} width={15} />
+							{editInternalPoc?.includes(stakeholder_type) ? (
+								<Button
+									themeType="linkUi"
+									onClick={() => setAddPoc({
+										poc_type: 'editInternal',
+										stakeholder_type,
+										service_type,
+										service_id,
+										stakeholder_id,
+									})}
+									size="sm"
+								>
+									<IcMEdit height={15} width={15} />
 
-							</Button>
+								</Button>
+							) : null}
 
 							<div>
 								<Popover render={<div>{email}</div>} trigger="mouseenter" placement="bottom">

@@ -28,11 +28,11 @@ function ModalContent({
 		<Modal show={show} onClose={onClose} fullscreen={isMobile} width="60%" styles={{ marginLeft: '4px' }}>
 			<div style={{ padding: '10px' }}>
 				<div className={styles.heading}>Please tell us the departure dates</div>
+
 				<div className={styles.container}>
-					{allOptions.map((week, i) => {
-						const weekValues = week.filter((item) => (
-							(multiSelected || []).filter((element) => isSameDay(element, item.key))
-								.length > 0
+					{allOptions?.map((week, i) => {
+						const weekValues = week?.filter((item) => (
+							(multiSelected || []).filter((element) => isSameDay(element, item?.key))?.length > 0
 						));
 
 						return (
@@ -47,9 +47,12 @@ function ModalContent({
 						);
 					})}
 				</div>
+
 				<div className={styles.date}>
 					Select Dates
+
 					<div className={styles.divider} />
+
 					<div>
 						<Chips
 							id={currentWeek}
@@ -60,14 +63,14 @@ function ModalContent({
 							size="md"
 							style={{ flexWrap: 'wrap' }}
 						/>
-
 					</div>
-
 				</div>
+
 				<div className={styles.button}>
 					<div className={styles.info}>
-						{`${multiSelected.length} date selected from ${allOptions.length} weeks`}
+						{`${multiSelected?.length} date selected from ${allOptions?.length} weeks`}
 					</div>
+
 					<Button onClick={handleSave}>Save</Button>
 				</div>
 

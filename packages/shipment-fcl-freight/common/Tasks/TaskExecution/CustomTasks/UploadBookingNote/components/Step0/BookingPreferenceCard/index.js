@@ -26,9 +26,8 @@ function BookingPreferenceCard({ item, step0_data = {} }) {
 		{ label: 'Supplier Name', value: obj?.service_provider?.business_name },
 		{
 			label : 'Shipping Line',
-			value : obj?.reverted_shipping_line?.business_name
-		|| obj?.operator?.business_name
-		|| obj?.shipping_line.business_name,
+			value : obj?.reverted_shipping_line?.business_name || obj?.operator?.business_name
+				|| obj?.shipping_line.business_name,
 		},
 		{
 			label : 'Source of Rate',
@@ -66,6 +65,7 @@ function BookingPreferenceCard({ item, step0_data = {} }) {
 						{labelValueMapping(obj).map((eachObj) => (
 							<div>
 								<div className={styles.label}>{eachObj?.label}</div>
+
 								<div className={styles.value}>{eachObj?.value}</div>
 							</div>
 						))}

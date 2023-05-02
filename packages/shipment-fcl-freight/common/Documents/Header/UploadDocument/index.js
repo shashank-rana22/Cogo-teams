@@ -16,14 +16,14 @@ const getConsigneeShipperId = (shipment_data) => {
 };
 
 function UploadDocument({
-	document_data,
-	loading,
-	shipment_data,
-	activeStakeholder,
-	formValues,
+	document_data = {},
+	loading = false,
+	shipment_data = {},
+	activeStakeholder = '',
+	formValues = {},
 	control,
-	errors,
-	orgId,
+	errors = {},
+	orgId = '',
 	setOrgId = () => {},
 }) {
 	const documents = document_data?.list?.map((e) => (
@@ -50,14 +50,14 @@ function UploadDocument({
 								},
 							}}
 						/>
+
 						{errors?.document_type ? (
 							<div style={{ fontSize: '12px', color: '#cb6464' }}>
-
 								{handleError({ error: errors?.document_type })}
-
 							</div>
 						) : null}
 					</div>
+
 					<div>
 						<UploadController
 							control={control}
@@ -70,18 +70,20 @@ function UploadDocument({
 								},
 							}}
 						/>
+
 						{errors?.upload_document ? (
 							<div style={{ fontSize: '12px', color: '#cb6464' }}>
-
 								{handleError({ error: errors?.upload_document })}
-
 							</div>
 						) : null}
 					</div>
-					{['superadmin', 'admin'].includes(activeStakeholder) && shipment_data?.consignee_shipper_id
+
+					{['superadmin', 'admin'].includes(activeStakeholder)
+					&& shipment_data?.consignee_shipper_id
 					&& formValues.upload_document ? (
 						<div style={{ marginTop: '16px' }}>
-							<span style={{ fontWeight: '700' }}>choose organization </span>
+							<span style={{ fontWeight: '700' }}>Choose organization</span>
+
 							<RadioGroupController
 								options={getConsigneeShipperId(shipment_data)}
 								control={control}
@@ -96,19 +98,18 @@ function UploadDocument({
 									},
 								}}
 							/>
+
 							{errors?.organizations ? (
 								<div style={{ fontSize: '12px', color: '#cb6464' }}>
-
 									{handleError({ error: errors?.organizations })}
-
 								</div>
 							) : null}
 						</div>
 						) : null}
-
 				</div>
 			) : null}
 		</div>
 	);
 }
+
 export default UploadDocument;

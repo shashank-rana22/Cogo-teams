@@ -17,12 +17,12 @@ function EmptyState({
 				width={width}
 				height={height}
 				alt="Empty-state"
-				style={{ margin: '10px' }}
+				className={styles.image}
 			/>
 
 			<div>
 				<div className={styles.text} style={{ fontSize: textSize }}>{emptyText}</div>
-				{subEmptyText && <p className={styles.text} style={{ fontSize: '16px' }}>{subEmptyText}</p> }
+				{subEmptyText && <p className={styles.text}>{subEmptyText}</p> }
 			</div>
 		</div>
 

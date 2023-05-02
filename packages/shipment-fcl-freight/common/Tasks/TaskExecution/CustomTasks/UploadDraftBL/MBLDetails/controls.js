@@ -3,22 +3,22 @@ const controls = ({ data = {} }) => {
 	const file_name = file_nameArr[file_nameArr.length - 1];
 	const form_controls = [
 		{
-			label       : 'Master Bill of lading Number',
-			name        : 'document_number',
-			type        : 'text',
-			span        : 6,
-			value       : data?.document_number,
-			validations : [{ type: 'required', message: 'BL Number is required' }],
+			label : 'Master Bill of lading Number',
+			name  : 'document_number',
+			type  : 'text',
+			span  : 6,
+			value : data?.document_number,
+			rules : [{ type: 'required', message: 'BL Number is required' }],
 		},
 		{
-			label       : 'Container Quantity',
-			name        : 'containers_count',
-			type        : 'number',
-			span        : 6,
-			min         : 1,
-			disabled    : true,
-			value       : data?.containers_count,
-			validations : [
+			label    : 'Container Quantity',
+			name     : 'containers_count',
+			type     : 'number',
+			span     : 6,
+			min      : 1,
+			disabled : true,
+			value    : data?.containers_count,
+			rules    : [
 				{ type: 'required', message: 'Container Quantity is required' },
 				{
 					type    : 'min',
@@ -40,8 +40,8 @@ const controls = ({ data = {} }) => {
 			label         : 'Document URl',
 			accept        : 'image/*,.pdf,.doc,.docx,application/msword,'
 			+ 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-			uploadType  : 'aws',
-			validations : [
+			uploadType : 'aws',
+			rules      : [
 				{
 					type    : 'required',
 					message : 'document is required',

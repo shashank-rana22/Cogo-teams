@@ -4,7 +4,7 @@ const getControls = (value) => [
 		label         : 'Select dates',
 		selectedItems : value,
 		type          : 'select',
-		validations   : [
+		rules         : [
 			{
 				type    : 'required',
 				message : 'Departure Dates is required',

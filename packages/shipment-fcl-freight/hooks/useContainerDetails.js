@@ -12,6 +12,7 @@ const getError = ({ index = 0, dateError = '' }) => {
 		type : 'custom',
 		ref  : { name: `container.${index}.picked_up_from_yard_at` },
 	};
+
 	if (dateError === 'Invalid Date') {
 		errObj.message = dateError;
 	} else if (dateError === 'maxDate') {
@@ -21,6 +22,7 @@ const getError = ({ index = 0, dateError = '' }) => {
 			dateFormat : globals.formats.date['dd MMM yyyy'],
 		})}`;
 	}
+
 	return errObj;
 };
 
@@ -29,9 +31,11 @@ const getDate = (inputDate, customDateFormat) => {
 
 	if (inputDate && customDateFormat) {
 		let [date, month, ...rest] = (inputDate || '').split('/');
+
 		if (!month) {
 			[date, month, ...rest] = (inputDate || '').split('-');
 		}
+
 		returnDate = new Date([month, date, ...rest].join('/'));
 	} else {
 		returnDate = new Date(inputDate);
@@ -43,7 +47,7 @@ const getDate = (inputDate, customDateFormat) => {
 const formatData = (data, apis_data, pendingTask, services) => {
 	const bl_details = apis_data.list_shipment_bl_details;
 
-	const modifiedData = (data || []).map((item) => ({
+	const modifiedData = (data || [])?.map((item) => ({
 		id   : item?.id,
 		data : {
 			bl_id: (bl_details || [])?.find(
@@ -56,17 +60,18 @@ const formatData = (data, apis_data, pendingTask, services) => {
 	}));
 
 	const formattedData = {
-		id   : pendingTask.id,
+		id   : pendingTask?.id,
 		data : {
 			container_detail: {
 				update_data: modifiedData,
 			},
 		},
 	};
+
 	if (pendingTask?.service_type) {
-		formattedData.data[pendingTask.service_type] = {
+		formattedData.data[pendingTask?.service_type] = {
 			id: (services || []).find(
-				(service) => service.service_type === pendingTask.service_type,
+				(service) => service?.service_type === pendingTask?.service_type,
 			)?.id,
 		};
 	}
@@ -75,12 +80,11 @@ const formatData = (data, apis_data, pendingTask, services) => {
 };
 
 const useContainerDetails = ({
-	apis_data,
-	onCancel,
-	pendingTask,
-	services,
-	taskListRefetch,
-	timeLineRefetch,
+	apis_data = {},
+	onCancel = () => {},
+	pendingTask = {},
+	services = [],
+	taskListRefetch = () => {},
 	customDateFormat,
 }) => {
 	const [{ loading }, trigger] = useRequest({
@@ -111,15 +115,19 @@ const useContainerDetails = ({
 	const formValues = watch();
 
 	const handleFillData = (data) => {
-		const trimmedData = data.replace(/ +(?=\t)/g, '');
-		const valArray = (trimmedData.split(' ') || []).filter(Boolean);
+		const trimmedData = data?.replace(/ +(?=\t)/g, '');
+
+		const valArray = (trimmedData?.split(' ') || [])?.filter(Boolean);
 
 		const containerError = [];
+
 		const containerDetails = (formValues?.container || []).map(
 			(item, index) => {
 				const [num, date] = (valArray[index] || '').split('\t');
+
 				const pickup_date = getDate(date, customDateFormat);
-				const invalidDate = pickup_date.toDateString() === 'Invalid Date';
+
+				const invalidDate = pickup_date?.toDateString() === 'Invalid Date';
 
 				if (num) {
 					if (date && (invalidDate || pickup_date > new Date())) {
@@ -129,6 +137,7 @@ const useContainerDetails = ({
 								dateError: invalidDate ? 'Invalid Date' : 'maxDate',
 							}),
 						};
+
 						return {
 							...item,
 							container_number       : num,
@@ -154,7 +163,7 @@ const useContainerDetails = ({
 
 	const onSubmit = async (data) => {
 		const formattedData = formatData(
-			data.container,
+			data?.container,
 			apis_data,
 			pendingTask,
 			services,
@@ -167,9 +176,10 @@ const useContainerDetails = ({
 
 			if (!res.hasError) {
 				Toast.success('Task updated successfully');
+
 				onCancel();
+
 				taskListRefetch();
-				timeLineRefetch();
 			} else {
 				Toast.error('Something went wrong');
 			}

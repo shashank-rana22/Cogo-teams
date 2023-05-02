@@ -5,3 +5,4 @@ export { default as Assured } from './components/Assured';
 export { default as Sop } from './components/Sop';
 export { default as Poc } from './components/Poc';
 export { default as TradeDocTemplate } from './common/TradeDocTemplate';
+export { default as RPASearch } from './common/RPASearch';

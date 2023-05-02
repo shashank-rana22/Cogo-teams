@@ -64,16 +64,25 @@ function SingleQuestion({
 					{question_type === 'multi_correct' ? <>Multiple Answers Correct </> : <>Single Answer Correct</> }
 				</p>
 			</div>
-			<div className={styles.question}>
-				{question_text}
-			</div>
 
-			<Element
-				options={answerOptions}
-				onChange={setAnswer}
-				value={answer || []}
-				style={{ marginLeft: 'auto' }}
-			/>
+			<div
+				className={styles.question_content}
+				style={from === 'stand_alone' ? {
+					overflowY: 'scroll',
+				} : {}}
+			>
+				<div className={styles.question}>
+					{question_text}
+				</div>
+
+				<Element
+					options={answerOptions}
+					onChange={setAnswer}
+					value={answer || []}
+					style={{ marginLeft: 'auto' }}
+					className={styles.options}
+				/>
+			</div>
 		</div>
 	);
 }

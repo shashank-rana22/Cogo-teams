@@ -1427,6 +1427,11 @@ const apis = [
 		feature      : 'revenue_desk',
 	},
 	{
+		api          : 'list_organization_assets',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
 		api          : 'list_authority_desk_bl_documents',
 		access_type  : 'private',
 		service_name : 'bookings',

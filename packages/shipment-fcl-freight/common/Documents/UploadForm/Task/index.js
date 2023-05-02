@@ -4,7 +4,7 @@ import TaskCard from '../../../Tasks/TaskExecution';
 
 import styles from './styles.module.css';
 
-function Task({ showDoc, setShowDoc, refetch }) {
+function Task({ showDoc = {}, setShowDoc = () => {}, refetch = () => {} }) {
 	const [pendingTask, setPendingTask] = useState({});
 	const { pendingItem = {} } = showDoc;
 
@@ -21,11 +21,12 @@ function Task({ showDoc, setShowDoc, refetch }) {
 			<TaskCard
 				task={pendingItem}
 				onCancel={() => handleClick(pendingItem)}
-				refetch={refetch}
+				taskListRefetch={refetch}
 				type="modal"
 			/>
 		</div>
 
 	);
 }
+
 export default Task;
