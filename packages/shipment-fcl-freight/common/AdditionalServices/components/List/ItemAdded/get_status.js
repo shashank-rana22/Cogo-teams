@@ -1,6 +1,6 @@
 import STATUS_ITEMS from '../../../constants/STATUS_ITEMS';
 
-const getStaus = ({ serviceListItem }) => {
+const getStaus = ({ serviceListItem = {} }) => {
 	let status = STATUS_ITEMS.disputed;
 
 	if (!serviceListItem.is_rate_available) {

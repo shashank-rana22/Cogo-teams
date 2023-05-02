@@ -1,0 +1,54 @@
+.layout_container {
+	margin-top: 4px;
+
+	:global {
+		.react-datepicker__input-container input {
+			height: 32px;
+		}
+
+		.form_layout_row {
+			padding: 0;
+		}
+	}
+}
+
+.container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.tabs_container {
+	width: 55%;
+	padding: 8px;
+	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
+}
+
+.form_container {
+	width: 43%;
+	max-height: 80vh;
+	padding: 8px;
+	overflow-y: scroll;
+	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 10px;
+
+	:global {
+		.ui_button_container:first-child {
+			margin-right: 8px;
+		}
+	}
+}
+
+.heading {
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.sub_heading {
+	font-size: 12px;
+	font-weight: 600;
+}
