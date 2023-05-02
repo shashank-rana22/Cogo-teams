@@ -1,0 +1,90 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding-top: 10px;
+	overflow: hidden;
+	background-color: #f9f9f9;
+	border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 6px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+}
+
+.expand_div {
+	/* max-height: fit-content; */
+
+	max-height: 1000px;
+	transition: all 0.5s ease-in-out;
+}
+
+.collapse_div {
+	/* display: none; */
+	max-height: 0;
+	margin-top: -5px;
+	transition: all 0.2s ease-in-out;
+}
+
+/* .title_container {
+	box-shadow: none;
+} */
+
+.card_title {
+	display: flex;
+	padding: 10px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.column_labels {
+	display: flex;
+}
+
+.service_card_title {
+	width: 35%;
+}
+
+.base_price_card_title {
+	width: 12%;
+}
+
+.margin_type_card_title {
+	width: 16%;
+}
+
+.margin_value_card_title {
+	width: 24%;
+}
+
+.sell_price_card_title {
+	width: 11%;
+}
+
+/* .tags {
+	width: fit-content;
+	padding: 0 4px;
+	margin-left: 10px;
+	font-weight: 400;
+	background-color: #fff;
+} */
+
+/* .data_labels {
+	font-weight: 400;
+	color: #4f4f4f;
+} */
+
+/* .green_text {
+	font-weight: 400;
+	color: #849e4c;
+} */
+
+.card_item_singular {
+	margin: 0 15px;
+	border-bottom: 1px solid #f2e3c3;
+}
+
+.loader_box {
+	display: flex;
+	justify-content: center;
+	background: #f9f9f9;
+}
