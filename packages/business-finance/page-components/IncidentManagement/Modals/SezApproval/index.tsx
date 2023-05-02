@@ -56,8 +56,8 @@ function SezApproval({ sezRequest, organization, id, refetch = () => {}, isEdita
 			title : 'Documents',
 			value : (
 				<div>
-					{(documentUrls || []).map((item) => (
-						<div className={styles.doc}>
+					{(documentUrls || []).map((item,index) => (
+						<div key={`${item}-${index}`} className={styles.doc}>
 							<a
 								target="_blank"
 								href={item}
