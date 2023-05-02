@@ -1,0 +1,47 @@
+.serial_id {
+	font-weight: 600;
+}
+
+.service_provider {
+	margin-top: 4px;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}
+
+.line_heading {
+	font-weight: 600;
+}
+
+.shipping_line {
+	margin-top: 2px;
+	font-size: var(--font-size-md);
+}
+
+.tooltip_container {
+	:global {
+		.tippy-box {
+			min-height: 30px;
+			padding: 4px 6px;
+			font-size: var(--font-size-md);
+			word-break: normal;
+		}
+
+		.tippy-content {
+			padding: 2px 0;
+		}
+	}
+}
+
+.tooltip_text {
+	max-width: 220px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.last_mile {
+	margin-top: 2px;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	color: var(--color-secondary-greyscale-3);
+}

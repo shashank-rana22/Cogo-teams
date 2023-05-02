@@ -12,6 +12,7 @@ const Superadmin = dynamic(() => import('./StakeholdersView/Superadmin'), { ssr:
 const DKam = dynamic(() => import('./StakeholdersView/ConsigneeShipperBookingAgent'), { ssr: false });
 const Kam = dynamic(() => import('./StakeholdersView/BookingAgent'), { ssr: false });
 const BookingDesk = dynamic(() => import('./StakeholdersView/BookingDesk'), { ssr: false });
+const LastMileDesk = dynamic(() => import('./StakeholdersView/BookingDesk'), { ssr: false });
 
 const shipment_additional_methods = ['main_service', 'documents'];
 
@@ -36,7 +37,8 @@ function ShipmentDetails() {
 
 		case 'booking_desk':
 			return <BookingDesk get={get} activeStakeholder="booking_desk" />;
-
+        case 'lastmile_ops':
+			return <LastMileDesk get={get} activeStakeholder='lastmile_ops' />;
 		case 'admin':
 		case 'superadmin':
 			return <Superadmin get={get} activeStakeholder="superadmin" />;

@@ -60,6 +60,7 @@ importers:
       '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/ground-ops': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.58
+      '@cogoport/last-mile-desk': workspace:0.1.0
       '@cogoport/locations': workspace:0.1.0
       '@cogoport/my-incident': workspace:0.1.0
       '@cogoport/my-profile': workspace:0.1.0
@@ -271,7 +272,7 @@ importers:
       axios-hooks: 4.0.0_axios@1.4.0+react@18.2.0
       dotenv: 16.0.3
       dotenv-expand: 10.0.0
-      qs: 6.11.1
+      qs: 6.11.0
       react: 18.2.0
 
   common/scope-select:
@@ -719,6 +720,26 @@ importers:
       jspdf: 2.5.1
       react: 18.2.0
       uuid: 9.0.0
+
+  packages/last-mile-desk:
+    specifiers:
+      '@cogoport/components': ^1.0.390
+      '@cogoport/icons-react': ^1.0.61
+      '@cogoport/next': workspace:^0.1.0
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/scope-select': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.6
+      react: 18.2.0
+    dependencies:
+      '@cogoport/components': 1.0.399_y3d6pejfqbkazdfzmaewia2nra
+      '@cogoport/icons-react': 1.0.68_react@18.2.0
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/scope-select': link:../../common/scope-select
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
+      react: 18.2.0
 
   packages/locations:
     specifiers:
@@ -2463,6 +2484,10 @@ packages:
   /@csstools/css-tokenizer/2.1.1:
     resolution: {integrity: sha512-GbrTj2Z8MCTUv+52GE0RbFGM527xuXZ0Xa5g0Z+YN573uveS4G0qi6WNOMyz3yrFM/jaILTTwJ0+umx81EzqfA==}
     engines: {node: ^14 || ^16 || >=18}
+    peerDependencies:
+      '@csstools/css-tokenizer': ^2.1.1
+    dependencies:
+      '@csstools/css-tokenizer': 2.1.1
     dev: true
 
   /@csstools/media-query-list-parser/2.0.4_rffw2jz5u7v47thsjhdr4x67vi:
@@ -6228,7 +6253,7 @@ packages:
   /d3-time-format/3.0.0:
     resolution: {integrity: sha512-UXJh6EKsHBTjopVqZBhFysQcoXSv/5yLONZvkQ5Kk3qbwiUYkdX17Xa1PT6U1ZWXGGfB1ey5L8dKMlFq2DO0Ag==}
     dependencies:
-      d3-time: 1.1.0
+      d3-time: 2.1.1
     dev: false
 
   /d3-time-format/4.1.0:
@@ -9447,8 +9472,8 @@ packages:
     resolution: {integrity: sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==}
     engines: {node: '>=6'}
 
-  /qs/6.11.1:
-    resolution: {integrity: sha512-0wsrzgTz/kAVIeuxSjnpGC56rzYtr6JT/2BwEvMaPhFIoYa1aGO8LbzuU1R0uUYQkLpWBTOj0l/CLAJB64J6nQ==}
+  /qs/6.11.0:
+    resolution: {integrity: sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q==}
     engines: {node: '>=0.6'}
     dependencies:
       side-channel: 1.0.4
