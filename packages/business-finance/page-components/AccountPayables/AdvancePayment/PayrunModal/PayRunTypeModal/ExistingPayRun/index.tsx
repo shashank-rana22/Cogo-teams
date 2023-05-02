@@ -3,6 +3,7 @@ import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import List from '../../../../../commons/List';
+import EmptyState from '../../../common/EmptyState';
 
 import { PaymentReadyConfig } from './paymentReadyTable';
 import AmountWithCurrency from './renderFunction/AmountWithCurrency';
@@ -103,22 +104,27 @@ function ExitingPayRun({
 			<Modal size="xl" show={exitPayRun} onClose={() => { setExitPayRun(false); }} placement="top">
 				<Modal.Header title="Payment Ready PayRuns" />
 				<Modal.Body>
-					<div className={styles.header}>
-						Select a pay run you want to add to.
-					</div>
-					<List
-						config={PaymentReadyConfig}
-						itemData={data}
-						loading={loading}
-						functions={functions}
-						page={pageIndex}
-						pageSize={10}
-						handlePageChange={(val: number) => setFilters({
-							...filters,
-							pageIndex: val,
-						})}
-						rowStyle="border"
-					/>
+					{data?.list?.length > 0 ? (
+						<>
+							<div className={styles.header}>
+								Select a pay run you want to add to.
+							</div>
+							<List
+								config={PaymentReadyConfig}
+								itemData={data}
+								loading={loading}
+								functions={functions}
+								page={pageIndex}
+								pageSize={10}
+								handlePageChange={(val: number) => setFilters({
+									...filters,
+									pageIndex: val,
+								})}
+								rowStyle="border"
+							/>
+						</>
+					)
+						:					<EmptyState />}
 				</Modal.Body>
 				<Modal.Footer>
 					<Button
