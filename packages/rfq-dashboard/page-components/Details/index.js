@@ -1,4 +1,4 @@
-import CustomerPastMonthDataCard from './CustomerPastDataCard';
+import BasicDetails from './BasicDetails';
 import Header from './Header';
 import GraphDataCard from './PastMonthsDataGraphCard';
 import PreviewAndApproveLists from './PreviewApproveLists';
@@ -10,7 +10,7 @@ function Details() {
 		<div className={styles.details_prime_container}>
 			<Header loading={loading} />
 			<div className={styles.customer_cards_past_month}>
-				<CustomerPastMonthDataCard loading={loading} />
+				<BasicDetails loading={loading} />
 				<GraphDataCard loading={loading} />
 			</div>
 			<div className={styles.lists_approve_section}>
