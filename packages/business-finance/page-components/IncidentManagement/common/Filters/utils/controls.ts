@@ -1,3 +1,5 @@
+import styles from './styles.module.css';
+
 export const requestControls = (isSettlementExecutive = false) => {
 	let optionsVal = [{}];
 	if (isSettlementExecutive) {
@@ -22,6 +24,10 @@ export const requestControls = (isSettlementExecutive = false) => {
 			{
 				value : 'CONCOR_PDA_APPROVAL',
 				label : 'Concor PDA Approval',
+			},
+			{
+				value : 'SEZ_APPROVAL',
+				label : 'Sez Approval',
 			},
 		];
 	}
@@ -53,6 +59,7 @@ export const requestControls = (isSettlementExecutive = false) => {
 			isPreviousDaysAllowed : true,
 			caret                 : true,
 			isClearable           : true,
+			className             : styles.date,
 		},
 	];
 };
@@ -82,6 +89,10 @@ export const remainControls = (isSettlementExecutive = false) => {
 				value : 'CONCOR_PDA_APPROVAL',
 				label : 'Concor PDA Approval',
 			},
+			{
+				value : 'SEZ_APPROVAL',
+				label : 'Sez Approval',
+			},
 		];
 	}
 
@@ -101,6 +112,7 @@ export const remainControls = (isSettlementExecutive = false) => {
 			caret                 : true,
 			isPreviousDaysAllowed : true,
 			isClearable           : true,
+			className             : styles.date,
 		},
 	];
 };
