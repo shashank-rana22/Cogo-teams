@@ -13,7 +13,7 @@ const services = ['fcl_freight', 'lcl_freight', 'fcl_local'];
 
 function Ocean() {
 	const { buckets } = BUCKET_MAPPING;
-	const [filters, setFilters] = useState({});
+	const [filters, setFilters] = useState({ is_job_closed: 'no' });
 
 	const [activeTab, setActiveTab] = useState('export');
 
@@ -21,11 +21,11 @@ function Ocean() {
 
 	const [bucket, setBucket] = useState('eligible');
 
-	const { data, loading } = useListAuthorityDeskDocuments({ activeTab, service, bucket });
+	const stateProps = { bucket, setBucket, filters, setFilters };
+
+	const { data, loading } = useListAuthorityDeskDocuments({ activeTab, service, ...stateProps });
 
 	const { count_stats } = data;
-
-	const stateProps = { bucket, setBucket, filters, setFilters };
 
 	return (
 		<div className={styles.container}>

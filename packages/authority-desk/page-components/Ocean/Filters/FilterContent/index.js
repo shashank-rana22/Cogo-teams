@@ -1,6 +1,9 @@
 import { Button, Select } from '@cogoport/components';
+import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
+
+import FILTERS_CONTROLS from '../../../../config/OCEAN_FILTERS_CONTROLS.json';
 
 import styles from './styles.module.css';
 
@@ -19,11 +22,13 @@ function FilterContent({ stateProps, setShowPopover = () => {} }) {
 		.some((filterKey) => defaultFilters[filterKey] !== formValues[filterKey]);
 
 	const isFiltersApplied = Object.entries(defaultFilters)
-		.some(([key, val]) => !isEmpty(val) && !['shipment_type', 'page'].includes(key));
+		.some(([key, val]) => !isEmpty(val) && key !== 'page');
 
 	const applyPopoverFilters = () => {
 		setFilters({ ...filters, ...formValues, page: 1 });
+		setShowPopover(false);
 	};
+
 	const setValue = (key, value) => {
 		setFormValues({ ...formValues, [key]: value });
 	};
@@ -57,12 +62,47 @@ function FilterContent({ stateProps, setShowPopover = () => {} }) {
 				))}
 			</div>
 
+			<div>Trade Type</div>
 			<Select
 				size="sm"
-				onChange={(val) => setValue('shipment_type', val)}
-				value={formValues.shipment_type}
+				onChange={(val) => setValue('trade_type', val)}
+				options={FILTERS_CONTROLS.trade_type}
+				value={formValues.trade_type || undefined}
 			/>
 
+			<div>Shipper Name</div>
+			<AsyncSelect
+				asyncKey="organizations"
+				initialCall={false}
+				onChange={(val) => setValue('importer_exporter_id', val)}
+				value={formValues.importer_exporter_id || undefined}
+				placeholder="Select Shipper Name"
+				muiltiple
+				size="sm"
+				params={{
+					filters: {
+						account_type : 'importer_exporter',
+						status       : 'active',
+						kyc_status   : 'verified',
+					},
+				}}
+			/>
+
+			<div>State</div>
+			<Select
+				size="sm"
+				onChange={(val) => setValue('state', val)}
+				options={FILTERS_CONTROLS.state}
+				value={formValues.state || undefined}
+			/>
+
+			<div>Job Closed</div>
+			<Select
+				size="sm"
+				onChange={(val) => setValue('is_job_closed', val)}
+				options={FILTERS_CONTROLS.is_job_closed}
+				value={formValues.is_job_closed}
+			/>
 		</div>
 
 	);
