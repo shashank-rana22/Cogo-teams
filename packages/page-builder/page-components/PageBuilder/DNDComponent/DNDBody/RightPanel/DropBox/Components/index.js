@@ -34,7 +34,7 @@ function Components(props) {
 
 	const { id, component } = rowData || {};
 
-	const { type } = component || {};
+	const { type, isDraggingPreview } = component || {};
 
 	const { handleDelete, handleCopy, handleSelectRow, handleAddSlides } = useGetHelperFunctions({
 		setPageConfiguration,
@@ -141,6 +141,7 @@ function Components(props) {
 				elementId={id}
 				index={index}
 				type={type}
+				isDraggingPreview={isDraggingPreview}
 			/>
 
 			<div role="presentation" className={styles.change}>

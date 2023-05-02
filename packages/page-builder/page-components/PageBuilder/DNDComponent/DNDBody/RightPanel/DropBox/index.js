@@ -86,6 +86,7 @@ function DropBox({
 
 	useEffect(() => {
 		const stagedItems = (stageItems.layouts || []).filter(({ id }) => !!id);
+
 		if (isNewItemAdding) {
 			if (isOver && isNewItemAdding) {
 				const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
@@ -96,7 +97,8 @@ function DropBox({
 						...stagedItems.slice(0, startIndex),
 						{
 							component: {
-								type: draggingItemType,
+								type              : draggingItemType,
+								isDraggingPreview : true,
 							},
 						},
 						...stagedItems.slice(startIndex),
