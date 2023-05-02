@@ -6,6 +6,7 @@ import cogoAcademy from './config/cogo-academy';
 import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
+import costBookingDesk from './config/cost-booking-desk';
 import enrichment from './config/enrichment';
 import groundOps from './config/ground-ops';
 import inventory_management from './config/inventory_management';
@@ -39,6 +40,7 @@ const routeConfig = {
 	...performanceManagement,
 	...shipmentFclFreight,
 	...bookingDesk,
+	...costBookingDesk,
 	...welcome,
 	...athenaDashboard,
 };

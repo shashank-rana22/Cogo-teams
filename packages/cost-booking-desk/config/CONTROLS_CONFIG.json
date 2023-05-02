@@ -1,0 +1,6 @@
+{
+	"shipment_types": [
+		{ "label": "FCL", "value": "fcl_freight" },
+		{ "label": "LCL", "value": "lcl_freight" }
+	]
+}
