@@ -19,3 +19,7 @@
 	font-size: 16px;
 	color: var(--color-secondary-greyscale-4);
 }
+
+.image {
+	margin: 10px;
+}

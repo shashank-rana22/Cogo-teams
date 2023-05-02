@@ -34,7 +34,11 @@ function Form({
 							rules={field.rules}
 							size="sm"
 						/>
-						{errors[field.name] && <span>{errors[field.name].message}</span>}
+						{errors[field.name] && (
+							<span className={styles.errors}>
+								{errors[field.name].message}
+							</span>
+						)}
 					</div>
 				);
 			case 'input':
@@ -48,7 +52,11 @@ function Form({
 							placeholder={field.placeholder}
 							rules={field.rules}
 						/>
-						{errors[field.name] && <span>{errors[field.name].message}</span>}
+						{errors[field.name] && (
+							<span className={styles.errors}>
+								{errors[field.name].message}
+							</span>
+						)}
 					</div>
 				);
 			case 'select':
@@ -63,7 +71,11 @@ function Form({
 							placeholder={field.placeholder}
 							rules={field.rules}
 						/>
-						{errors[field.name] && <span>{errors[field.name].message}</span>}
+						{errors[field.name] && (
+							<span className={styles.errors}>
+								{errors[field.name].message}
+							</span>
+						)}
 					</div>
 				);
 			case 'file':
@@ -76,7 +88,11 @@ function Form({
 							size="sm"
 							rules={field.rules}
 						/>
-						{errors[field.name] && <span>{errors[field.name].message}</span>}
+						{errors[field.name] && (
+							<span className={styles.errors}>
+								{errors[field.name].message}
+							</span>
+						)}
 					</div>
 				);
 			default:

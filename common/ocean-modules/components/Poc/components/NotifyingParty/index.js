@@ -5,7 +5,11 @@ import Card from '../Card';
 import CreateNotifyingPary from './CreateNotifyingParty';
 import Detail from './Detail';
 
-function NotifyingParty({ tradePartnersData = {}, shipment_id = '', tradePartnerTrigger = () => {} }) {
+function NotifyingParty({
+	tradePartnersData = {}, shipment_id = '', tradePartnerTrigger = () => {},
+	rolesPermission = {},
+}) {
+	const editPermission = rolesPermission?.can_edit || [];
 	const { notify_parties_detail = [], list:tradePartnerList = [] } = tradePartnersData;
 
 	const showCondition = notify_parties_detail.length;
@@ -21,7 +25,11 @@ function NotifyingParty({ tradePartnersData = {}, shipment_id = '', tradePartner
 	};
 
 	return (
-		<Card title="Notifying Party" showEdit={showCondition} editAction={editAction}>
+		<Card
+			title="Notifying Party"
+			showEdit={showCondition && editPermission?.includes('notifying_party')}
+			editAction={editAction}
+		>
 			{show ? <Detail data={notify_parties_detail} />
 				: (
 					<CreateNotifyingPary
