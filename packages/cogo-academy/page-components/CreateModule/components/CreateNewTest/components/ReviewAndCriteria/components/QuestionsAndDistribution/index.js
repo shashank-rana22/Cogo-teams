@@ -9,19 +9,22 @@ function QuestionsAndDistribution(props) {
 	const { data, loading, errors, control, setValue, watch, setError } = props;
 
 	const columns = getColumns({ errors, control });
-
 	useEffect(() => {
 		data?.test_set_distribution_data?.forEach(({
 			question_type = '',
 			test_question_set_id = '',
 			distribution_count = 0,
 		}) => {
-			if (question_type === 'stand_alone') {
-				setValue(`${test_question_set_id}q`, (!(distribution_count || distribution_count === 0))
+			if (question_type === 'subjective') {
+				setValue(`${test_question_set_id}s`, (!(distribution_count || distribution_count === 0))
 					? ''
 					: distribution_count || '0');
-			} else {
+			} else if (question_type === 'case_study') {
 				setValue(`${test_question_set_id}c`, (!(distribution_count || distribution_count === 0))
+					? ''
+					: distribution_count || '0');
+			} else if (question_type === 'stand_alone') {
+				setValue(`${test_question_set_id}q`, (!(distribution_count || distribution_count === 0))
 					? ''
 					: distribution_count || '0');
 			}
@@ -34,6 +37,8 @@ function QuestionsAndDistribution(props) {
 
 	const caseStudyQuestions = watch((set_data || []).map(({ id }) => (`${id}c`)));
 
+	const subjectiveQuestions = watch((set_data || []).map(({ id }) => (`${id}s`)));
+
 	const questionsCount = (standAloneQuestions || []).reduce(
 		(total, currValue) => total + (Number(currValue) || 0),
 		0,
@@ -44,12 +49,18 @@ function QuestionsAndDistribution(props) {
 		0,
 	);
 
-	setError(questionsCount + casesCount === 0);
+	const subjectiveCount = (subjectiveQuestions || []).reduce(
+		(total, currValue) => total + (Number(currValue) || 0),
+		0,
+	);
+
+	setError(questionsCount + casesCount + subjectiveCount === 0);
 
 	let total = 0;
 
 	set_data.forEach((value) => {
-		total = total + value.case_study_question_count + value.non_case_study_question_count;
+		total = total + value.case_study_question_count
+			+ value.stand_alone_question_count + value.subjective_question_count;
 	});
 
 	return (
@@ -84,11 +95,18 @@ function QuestionsAndDistribution(props) {
 							{questionsCount}
 						</h4>
 
-						<h4 className={styles.total_heading_two}>
+						<h4 className={styles.total_heading}>
 							Total Cases:
 							{' '}
 							{casesCount}
 						</h4>
+
+						<h4 className={styles.total_heading}>
+							Total Subjective:
+							{' '}
+							{subjectiveCount}
+						</h4>
+
 					</div>
 				)}
 		</>

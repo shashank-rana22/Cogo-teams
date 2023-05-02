@@ -23,7 +23,7 @@ function MyResponsiveBar({ data }) {
 				data={data}
 				keys={['Approved', 'Rejected']}
 				indexBy="date"
-				margin={{ top: 100, right: 30, bottom: 80, left: 60 }}
+				margin={{ top: 50, right: 30, bottom: 80, left: 60 }}
 				padding={0.4}
 				enableGridY
 				valueScale={{ type: 'linear' }}
@@ -72,7 +72,7 @@ function MyResponsiveBar({ data }) {
 						direction     : 'row',
 						justify       : false,
 						translateX    : 20,
-						translateY    : -280,
+						translateY    : -300,
 						itemsSpacing  : 50,
 						itemWidth     : 100,
 						itemHeight    : 20,

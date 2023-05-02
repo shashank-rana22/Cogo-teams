@@ -15,6 +15,7 @@
 .table_container {
 	padding: unset !important;
 	margin-top: 16px;
+	overflow: auto;
 
 	:global {
 		.ui_table_head_row {
