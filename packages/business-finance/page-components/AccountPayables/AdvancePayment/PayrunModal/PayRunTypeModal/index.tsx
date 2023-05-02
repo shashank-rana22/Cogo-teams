@@ -99,7 +99,10 @@ function PayRunTypeModal({
 				<Modal.Footer>
 					<Button
 						disabled={loading || totalRecords < 1}
-						onClick={() => setExitPayRun(true)}
+						onClick={() => {
+							setExitPayRun(true);
+							setPayRunType(false);
+						}}
 						themeType="secondary"
 					>
 						Add Into Existing Pay Run
@@ -116,19 +119,19 @@ function PayRunTypeModal({
 					</div>
 				</Modal.Footer>
 			</Modal>
-			{exitPayRun && (
-				<ExitingPayRun
-					exitPayRun={exitPayRun}
-					setExitPayRun={setExitPayRun}
-					data={data}
-					loading={loading}
-					filters={filters}
-					setFilters={setFilters}
-					currency={currency}
-					activeEntity={activeEntity}
-					setShow={setShow}
-				/>
-			)}
+
+			<ExitingPayRun
+				exitPayRun={exitPayRun}
+				setExitPayRun={setExitPayRun}
+				data={data}
+				loading={loading}
+				filters={filters}
+				setFilters={setFilters}
+				currency={currency}
+				activeEntity={activeEntity}
+				setShow={setShow}
+			/>
+
 		</div>
 	);
 }

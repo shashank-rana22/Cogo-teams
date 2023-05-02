@@ -76,6 +76,7 @@ function PayRunModal({ show, setShow, activeEntity }:Props) {
 						<Button onClick={() => {
 							setPayRunType(true);
 							getAdvancedPayment();
+							setShow(false);
 						}}
 						>
 							Create
@@ -85,19 +86,18 @@ function PayRunModal({ show, setShow, activeEntity }:Props) {
 				</Modal.Footer>
 			</Modal>
 
-			{payRunType && (
-				<PayRunTypeModal
-					payRunType={payRunType}
-					setPayRunType={setPayRunType}
-					data={data}
-					loading={loading}
-					filters={filters}
-					setFilters={setFilters}
-					activeEntity={activeEntity}
-					currency={currency}
-					setShow={setShow}
-				/>
-			)}
+			<PayRunTypeModal
+				payRunType={payRunType}
+				setPayRunType={setPayRunType}
+				data={data}
+				loading={loading}
+				filters={filters}
+				setFilters={setFilters}
+				activeEntity={activeEntity}
+				currency={currency}
+				setShow={setShow}
+			/>
+
 		</div>
 	);
 }

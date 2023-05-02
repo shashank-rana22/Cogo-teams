@@ -57,7 +57,6 @@ function SelectFilters({ filters, setFilters, activeEntity, createButton }:Props
 					<div>
 						<Button
 							size="md"
-							themeType="secondary"
 							onClick={() => {
 								setshowPayRunModal(true);
 							}}
@@ -66,14 +65,12 @@ function SelectFilters({ filters, setFilters, activeEntity, createButton }:Props
 						</Button>
 					</div>
 				)}
-			</div>
-			{showPayRunModal && (
 				<PayRunModal
 					show={showPayRunModal}
 					setShow={setshowPayRunModal}
 					activeEntity={activeEntity}
 				/>
-			)}
+			</div>
 		</div>
 	);
 }
