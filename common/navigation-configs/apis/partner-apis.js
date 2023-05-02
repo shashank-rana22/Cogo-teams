@@ -11477,7 +11477,7 @@ const partner = {
 			service_name : 'tickets',
 		},
 		{
-			api          : 'post_tickets_actvity',
+			api          : 'post_tickets_activity',
 			access_type  : 'private',
 			service_name : 'tickets',
 		},

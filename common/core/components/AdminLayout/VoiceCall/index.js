@@ -150,6 +150,7 @@ function VoiceCall() {
 				<FeedbackModal
 					dispatch={dispatch}
 					profileData={profileData}
+					showFeedbackModal={showFeedbackModal}
 				/>
 			)}
 			{minimizeModal && (
