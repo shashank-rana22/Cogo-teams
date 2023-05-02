@@ -20,11 +20,7 @@ const useGetStep3Data = ({ servicesList = [], shipment_data, onCancel, task, tas
 
 	(servicesList || []).forEach((serviceObj) => {
 		if (serviceObj.service_type === 'fcl_freight_service'
-		) {
-			notMainService = true;
-			service_ids.push(serviceObj.id);
-		} else if (
-			serviceObj.service_type === `${shipment_data?.shipment_type}_service`
+			|| (serviceObj.service_type === 'fcl_freight_local_service' && serviceObj.trade_type === 'export')
 		) {
 			notMainService = true;
 			service_ids.push(serviceObj.id);
@@ -109,7 +105,7 @@ const useGetStep3Data = ({ servicesList = [], shipment_data, onCancel, task, tas
 				line_items: items.map((line_item) => ({
 					code     : line_item.code,
 					currency : line_item.currency,
-					name     : chargeCodes[line_item?.code],
+					name     : chargeCodes?.[line_item?.code] || '',
 					price    : Number(line_item.price),
 					quantity : Number(line_item.quantity),
 					unit     : line_item.unit,
@@ -127,7 +123,7 @@ const useGetStep3Data = ({ servicesList = [], shipment_data, onCancel, task, tas
 			try {
 				const res = await updateBuyQuotationTrigger({ quotations });
 
-				if (!res?.hasError) {
+				if (res?.status === 200) {
 					await updateTask({ id: task?.id });
 				}
 			} catch (err) {
