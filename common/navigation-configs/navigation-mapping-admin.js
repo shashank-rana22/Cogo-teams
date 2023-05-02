@@ -2192,7 +2192,7 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'ihls-lead_data_pipeline',
-				title         : 'Lead Dashboard',
+				title         : 'Lead Enrichment Dashboard',
 				href          : '/ihls/lead-data-pipeline',
 				as            : '/ihls/lead-data-pipeline',
 				type          : 'link',

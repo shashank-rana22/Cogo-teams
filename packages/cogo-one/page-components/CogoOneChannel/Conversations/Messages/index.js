@@ -25,6 +25,7 @@ function Messages({
 	userId = '',
 	isomniChannelAdmin = false,
 	setActiveMessage = () => {},
+	setRaiseTicketModal = () => {},
 }) {
 	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
@@ -150,6 +151,7 @@ function Messages({
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
+						formattedData={formattedData}
 						messagesData={messagesData}
 						uploading={uploading}
 						draftMessage={draftMessages?.[id]}
@@ -172,6 +174,7 @@ function Messages({
 						closeModal={closeModal}
 						messageLoading={messageLoading}
 						setActiveMessage={setActiveMessage}
+						setRaiseTicketModal={setRaiseTicketModal}
 					/>
 				</div>
 			</div>

@@ -229,22 +229,26 @@ importers:
       '@cogoport/components': ^1.0.395
       '@cogoport/context': workspace:^0.1.0
       '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/icons-react': ^1.0.65
       '@cogoport/maps': ^1.0.2
       '@cogoport/request': workspace:^0.1.0
       '@cogoport/store': workspace:^0.1.0
       '@cogoport/utils': ^1.2.7
+      date-fns: ^2.29.3
       file-saver: ^2.0.5
       react: 18.2.0
     dependencies:
       '@cogoport/components': 1.0.395_y3d6pejfqbkazdfzmaewia2nra
       '@cogoport/context': link:../context
       '@cogoport/forms': link:../forms
+      '@cogoport/globalization': link:../globalization
       '@cogoport/icons-react': 1.0.68_react@18.2.0
       '@cogoport/maps': 1.0.3_y3d6pejfqbkazdfzmaewia2nra
       '@cogoport/request': link:../request
       '@cogoport/store': link:../store
       '@cogoport/utils': 1.2.10
+      date-fns: 2.29.3
       file-saver: 2.0.5
       react: 18.2.0
 
@@ -581,7 +585,7 @@ importers:
       '@cogoport/constants': workspace:^0.1.0
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/globalization': workspace:^0.0.1
-      '@cogoport/icons-react': ^1.0.66
+      '@cogoport/icons-react': ^1.0.68
       '@cogoport/next': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
@@ -836,6 +840,7 @@ importers:
       '@cogoport/next': workspace:^0.1.0
       '@cogoport/ocean-modules': workspace:^0.1.0
       '@cogoport/request': workspace:^0.1.0
+      '@cogoport/scope-select': workspace:^0.1.0
       '@cogoport/shipment-chat': workspace:^0.1.0
       '@cogoport/shipment-mails': workspace:^0.1.0
       '@cogoport/store': workspace:^0.1.0
@@ -843,6 +848,7 @@ importers:
       file-saver: ^2.0.5
       prop-types: ^15.8.1
       react: 18.2.0
+      react-hook-form: ^7.43.3
     dependencies:
       '@cogoport/components': 1.0.395_y3d6pejfqbkazdfzmaewia2nra
       '@cogoport/constants': link:../../common/constants
@@ -855,6 +861,7 @@ importers:
       '@cogoport/next': link:../../common/next
       '@cogoport/ocean-modules': link:../../common/ocean-modules
       '@cogoport/request': link:../../common/request
+      '@cogoport/scope-select': link:../../common/scope-select
       '@cogoport/shipment-chat': link:../../common/shipment-chat
       '@cogoport/shipment-mails': link:../../common/shipment-mails
       '@cogoport/store': link:../../common/store
@@ -862,6 +869,7 @@ importers:
       file-saver: 2.0.5
       prop-types: 15.8.1
       react: 18.2.0
+      react-hook-form: 7.43.9_react@18.2.0
 
   packages/supply-dashboards:
     specifiers:

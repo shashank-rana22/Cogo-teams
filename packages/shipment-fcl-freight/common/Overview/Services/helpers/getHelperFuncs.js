@@ -27,17 +27,19 @@ const helperFuncs = (servicesList, possibleServices) => {
 		let isServiceAlreadyAdded = false;
 
 		(servicesList || []).forEach((service) => {
-			if (service?.service_type === serviceToIterate.service_type) {
+			if (service?.service_type === serviceToIterate.service_type
+				&& ((serviceToIterate.trade_type === service?.trade_type)
+				|| (service?.service_type === 'fcl_freight_service'))) {
 				isServiceAlreadyAdded = true;
+
 				if (service?.trade_type === 'export' && !serviceToIterate.is_main) {
 					const canPushService = 	checkIfServiceAlreadyPresent(serviceObj.originServices, service);
 
 					if (canPushService) {
 						if (Object.keys(serviceObj.originServices).includes(service?.service_type)) {
 							(serviceObj.originServices[service?.service_type]).push({
-								...(serviceObj.originServices[service?.service_type]),
-								display_label : serviceToIterate.display_label,
-								trade_type    : serviceToIterate.trade_type,
+								...service,
+								display_label: serviceToIterate.display_label,
 							});
 						} else {
 							(serviceObj.originServices)[service?.service_type] = [{
@@ -52,7 +54,7 @@ const helperFuncs = (servicesList, possibleServices) => {
 					if (canPushService) {
 						if (Object.keys(serviceObj.destinationServices).includes(service?.service_type)) {
 							(serviceObj.destinationServices[service?.service_type]).push({
-								...(serviceObj.destinationServices[service?.service_type]),
+								...service,
 								display_label: serviceToIterate.display_label,
 							});
 						} else {
@@ -101,13 +103,7 @@ const helperFuncs = (servicesList, possibleServices) => {
 	};
 
 	possibleServices.forEach((service) => {
-		if ('mainServices' in service) {
-			(service.mainServices).forEach((singleService) => {
-				classifyTradeTypeBasedService(singleService);
-			});
-		} else {
-			classifyTradeTypeBasedService(service);
-		}
+		classifyTradeTypeBasedService(service);
 	});
 
 	return {
