@@ -1,4 +1,5 @@
 import { IcCFfcl } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { format } from '@cogoport/utils';
 
 import CardHeader from '../../../common/Card/CardHeader';
@@ -10,11 +11,15 @@ import LineItems from './LineItems';
 import styles from './styles.module.css';
 
 function Card({ item = {}, couldBeCardsCritical = false, activeTab = '' }) {
+	const router = useRouter();
+	const clickCard = () => {
+		router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}`);
+	};
 	return (
 		<div
 			role="button"
 			tabIndex={0}
-			// onClick={clickCard}
+			onClick={clickCard}
 			// className={`${card} ${
 			// 	couldBeCardsCritical && isCardCritical({ item, activeTab }) ? critical_card : ''
 			// }`}
