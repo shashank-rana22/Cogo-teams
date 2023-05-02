@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 function Filters() {
 	const {
-		activeTab, filters = {}, setFilters,
+		activeTab, filters = {}, setFilters = () => {},
 		scopeFilters, handleVersionChange = () => {},
 	} = useContext(LastMileDeskContext);
 
@@ -22,7 +22,7 @@ function Filters() {
 
 	return (
 		<div className={styles.container}>
-			{Object.keys(CRITICAL_TABS).includes(activeTab) && (
+			{Object.keys(CRITICAL_TABS).includes(activeTab) ? (
 				<div className={styles.toggle_container}>
 					<Toggle
 						size="md"
@@ -31,7 +31,7 @@ function Filters() {
 						onChange={() => setFilters({ ...filters, criticalOn: !criticalOn, page: 1 })}
 					/>
 				</div>
-			)}
+			) : null}
 
 			<div className={styles.input_container}>
 				<Input
@@ -71,6 +71,7 @@ function Filters() {
 					</Button>
 				</Popover>
 			</div>
+
 			<div className={styles.version}>
 				<Toggle
 					size="md"
@@ -78,8 +79,8 @@ function Filters() {
 					offLabel="New"
 					onChange={handleVersionChange}
 				/>
-
 			</div>
+
 			<div>
 				<ScopeSelect size="md" defaultValues={scopeFilters} />
 			</div>

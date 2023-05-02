@@ -9,9 +9,10 @@ function PopoverContent({ list = [] }) {
 		<div className={styles.container}>
 			{list?.map((item) => {
 				const pills = getPillsFormat(item);
+
 				return (
 					<div className={styles.pills_container}>
-						{pills.map((pill) => <Pill>{pill}</Pill>)}
+						{pills?.map((pill) => <Pill>{pill || ''}</Pill>)}
 					</div>
 				);
 			})}

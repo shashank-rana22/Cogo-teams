@@ -8,19 +8,11 @@
 	margin-left: 6px;
 }
 
-.trade_type_container {
+.type_container {
 	display: flex;
 }
 
-.date_type_container {
-	display: flex;
-}
-
-.date_type_container > button {
-	margin-right: 6px;
-}
-
-.trade_type_container > button {
+.type_container > button {
 	margin-right: 6px;
 }
 

@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 const KEY_FROM_ITEM = ['inco_term', 'trade_type', 'free_days_detention_destination'];
 
-function CargoPills({ item }) {
+function CargoPills({ item = {} }) {
 	const { cargo_details = [] } = item || {};
 
 	const initialPills = cargo_details?.[0] || {};
@@ -18,7 +18,7 @@ function CargoPills({ item }) {
 
 	return (
 		<div className={styles.container}>
-			{getPillsFormat(initialPills).map((pill) => <Pill>{pill}</Pill>)}
+			{getPillsFormat(initialPills)?.map((pill) => <Pill>{pill}</Pill>)}
 
 			{cargo_details?.length > 1 ? (
 				<div className={styles.popover_container}>

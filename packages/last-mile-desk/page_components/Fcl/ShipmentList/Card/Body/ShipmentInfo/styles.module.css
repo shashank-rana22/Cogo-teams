@@ -1,14 +1,10 @@
-.serial_id {
-	font-weight: 600;
-}
-
 .service_provider {
 	margin-top: 4px;
 	font-size: var(--font-size-md);
 	font-weight: 600;
 }
 
-.line_heading {
+.font_wt_600 {
 	font-weight: 600;
 }
 

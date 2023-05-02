@@ -4,7 +4,7 @@ import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function PortDetails({ item }) {
+function PortDetails({ item = {} }) {
 	const { destination_port = {}, origin_port = {}, estimated_arrival = '', estimated_departure = '' } = item || {};
 
 	function Port({ est_key, port, est_label = '' }) {
@@ -36,7 +36,9 @@ function PortDetails({ item }) {
 				{Port({ est_key: estimated_departure, port: origin_port, est_label: 'ETD' })}
 			</div>
 
-			<div className={styles.port_icon}><IcMPortArrow height={20} width={20} /></div>
+			<div className={styles.port_icon}>
+				<IcMPortArrow height={20} width={20} />
+			</div>
 
 			<div className={styles.port_detail}>
 				{Port({ est_key: estimated_arrival, port: destination_port, est_label: 'ETA' })}

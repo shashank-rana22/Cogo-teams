@@ -8,16 +8,14 @@ import ShipmentList from './ShipmentList';
 import styles from './styles.module.css';
 
 function Fcl() {
-	const { data, loading } = useListLastMileDeskShipments();
+	const { data = {}, loading } = useListLastMileDeskShipments();
 
 	return (
 		<div>
 			<div className={styles.header}>
 				<h1>Last Mile Desk</h1>
 
-				<div>
-					<Filters />
-				</div>
+				<Filters />
 			</div>
 
 			<AppliedFilters />

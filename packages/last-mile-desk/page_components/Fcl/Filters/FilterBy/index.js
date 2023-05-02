@@ -14,7 +14,7 @@ function FilterBy({
 	setShowPopover = () => {},
 }) {
 	const { filters = {}, setFilters } = useContext(LastMileDeskContext);
-	const { date_type, dateRange = '', trade_type } = popoverFilter;
+	const { date_type, dateRange = '', trade_type } = popoverFilter || {};
 
 	const handleCustomDateChange = (val) => {
 		const { startDate, endDate } = val;
@@ -66,7 +66,7 @@ function FilterBy({
 			<div className={styles.filter_container}>
 				<div className={styles.filter_heading}>Trade Type</div>
 
-				<div className={styles.trade_type_container}>
+				<div className={styles.type_container}>
 					{TRADE_TYPE.map((trade) => (
 						<div className={cl`${trade_type === trade ? styles.active : styles.inactive}
 						 ${styles.filter_by_buttons}`}
@@ -82,7 +82,7 @@ function FilterBy({
 			<div className={styles.filter_container}>
 				<div className={styles.filter_heading}>Date Type</div>
 
-				<div className={styles.date_type_container}>
+				<div className={styles.type_container}>
 					{['eta', 'etd'].map((type) => (
 						<div className={cl`${date_type === type ? styles.active : styles.inactive} 
 							${styles.filter_by_buttons}`}
@@ -103,7 +103,7 @@ function FilterBy({
 				</div>
 			</div>
 
-			{date_type && (
+			{date_type ? (
 				<div className={styles.filter_container}>
 					<div className={styles.filter_heading}>{upperCase(date_type)}</div>
 
@@ -126,7 +126,7 @@ function FilterBy({
 						))}
 
 						<div className={cl`${dateRange === 'custom' ? styles.active : styles.inactive}
-						 ${styles.filter_by_buttons}`}
+							${styles.filter_by_buttons}`}
 						>
 							<Button
 								onClick={() => setPopoverFilter({
@@ -143,7 +143,7 @@ function FilterBy({
 						</div>
 					</div>
 
-					{dateRange === 'custom' && (
+					{dateRange === 'custom' ? (
 						<div className={styles.filter_container}>
 							<DateRangepicker
 								value={popoverFilter}
@@ -151,9 +151,9 @@ function FilterBy({
 								isPreviousDaysAllowed
 							/>
 						</div>
-					)}
+					) : null}
 				</div>
-			)}
+			) : null}
 
 		</div>
 	);
