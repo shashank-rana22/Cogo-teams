@@ -17,7 +17,7 @@ function SettingsItem(props) {
 					const Element = getFieldController(element.type);
 
 					return (
-						<div className={styles?.[inputStyle] || styles.input}>
+						<div key={element.name} className={styles?.[inputStyle] || styles.input}>
 							{index === 0 && (
 								<div className={styles.label}>
 									{element.label}
