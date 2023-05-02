@@ -297,6 +297,32 @@ function asyncFieldsTicketTypes() {
 	};
 }
 
+function asyncListHsCodes() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_hs_codes',
+		initialCall : false,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListCurrency() {
+	return {
+		labelKey    : 'iso_code',
+		valueKey    : 'iso_code',
+		endpoint    : 'list_exchange_rate_currencies',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -320,5 +346,7 @@ export {
 	asyncKamExpertiseGroupOptions,
 	listVendors,
 	asyncListCogoEntity,
+	asyncListHsCodes,
+	asyncListCurrency,
 	asyncFieldsTicketTypes,
 };
