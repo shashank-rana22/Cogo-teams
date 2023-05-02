@@ -1,0 +1,33 @@
+.customized_modal {
+	:global {
+		.ui_radiogroup_container {
+			flex-wrap: wrap;
+			justify-content: space-between;
+			padding: 0;
+		}
+
+		.ui_radio_container {
+			width: 48%;
+			padding: 10px 0 0;
+		}
+
+		.ui_input_container {
+			width: 48%;
+		}
+	}
+}
+
+.error_message {
+	font-size: var(--font-size-md);
+	color: var(--color-primary-error-red-2);
+}
+
+.label {
+	margin: 30px 0 10px;
+	font-weight: 600;
+}
+
+.no_reasons_found {
+	padding: 16px;
+	font-size: var(--font-size-xl);
+}

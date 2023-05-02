@@ -1,24 +1,17 @@
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
-import toastApiError from '../utils/toastApiError';
-
-const useGetBusiness = (props) => {
-	const {
-		setValue = () => {},
-		gstNumber = '',
-	} = props;
-
+const useGetBusiness = ({ gstNumber = '' }) => {
 	const [{ data }, trigger] = useRequest({
 		url    : '/get_business',
 		method : 'get',
 	});
 
-	useEffect(() => {
+	const getBusiness = useCallback(() => {
 		(async () => {
 			try {
-				const response = await trigger({
+				await trigger({
 					params: {
 						identity_number : gstNumber,
 						identity_type   : 'tax',
@@ -26,21 +19,15 @@ const useGetBusiness = (props) => {
 						provider_name   : 'cogoscore',
 					},
 				});
-
-				const {
-					addresses = [],
-					trade_name = '',
-					business_name = '',
-				} = response.data || {};
-
-				setValue('name', trade_name || business_name || '');
-				setValue('pincode', (!isEmpty(addresses) && (addresses[0] || {}).pincode) || '');
-				setValue('address', (!isEmpty(addresses) && (addresses[0] || {}).address) || '');
 			} catch (err) {
 				toastApiError(err);
 			}
 		})();
-	}, [trigger, gstNumber, setValue]);
+	}, [trigger, gstNumber]);
+
+	useEffect(() => {
+		getBusiness();
+	}, [getBusiness]);
 
 	return {
 		data,
