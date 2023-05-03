@@ -32,11 +32,14 @@ function FclFreight({
 						options={CONFIGS.shipment_types}
 					/>
 				</div>
+				<Filters
+					stateProps={stateProps}
+					dateFilters={dateFilters}
+					setDateFilters={setDateFilters}
+				/>
 			</div>
 
 			<Tabs tabs={tabs} stateProps={stateProps} />
-
-			<Filters stateProps={stateProps} dateFilters={dateFilters} setDateFilters={setDateFilters} />
 
 			<div
 				className={`${styles.list_container} ${loading ? styles.loading : ''}`}
@@ -51,8 +54,3 @@ function FclFreight({
 	);
 }
 export default FclFreight;
-
-// data={data}
-// stateProps={stateProps}
-// Card={Card}
-// couldBeCardsCritical={couldBeCardsCritical}

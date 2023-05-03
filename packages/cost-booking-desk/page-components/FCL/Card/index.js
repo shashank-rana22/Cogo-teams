@@ -5,6 +5,7 @@ import { format } from '@cogoport/utils';
 import CardHeader from '../../../common/Card/CardHeader';
 import PortDetails from '../../../common/Card/PortDetails/DualLocation';
 import ShipmentInfo from '../../../common/Card/ShipmentInfo';
+import getAnimatedCard from '../../../helpers/getAnimatedCard';
 
 import CargoDetails from './CargoDetails';
 import LineItems from './LineItems';
@@ -12,6 +13,7 @@ import styles from './styles.module.css';
 
 function Card({ item = {}, couldBeCardsCritical = false, activeTab = '' }) {
 	const router = useRouter();
+
 	const clickCard = () => {
 		router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}`);
 	};
@@ -20,9 +22,7 @@ function Card({ item = {}, couldBeCardsCritical = false, activeTab = '' }) {
 			role="button"
 			tabIndex={0}
 			onClick={clickCard}
-			// className={`${card} ${
-			// 	couldBeCardsCritical && isCardCritical({ item, activeTab }) ? critical_card : ''
-			// }`}
+			// className={`${styles.card} ${animateClass ? styles.animate_card : ''}`}
 			className={styles.card}
 		>
 			<CardHeader item={item} />

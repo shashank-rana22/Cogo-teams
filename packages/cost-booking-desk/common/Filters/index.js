@@ -15,14 +15,16 @@ export default function Filters({ stateProps = {}, dateFilters, setDateFilters }
 	return (
 		<div className={styles.container}>
 			<div className={styles.open_filters}>
-				{/* <Input
-					placeholder="Search SID"
-					type="search"
-					size="sm"
-					value={filters.q || ''}
-					onChange={(val) => setFilters({ ...filters, q: val, page: 1 })}
-					prefix={<IcMSearchlight />}
-				/> */}
+				<div className={styles.input_container}>
+					<Input
+						placeholder="Search SID"
+						type="search"
+						size="sm"
+						value={filters.q || ''}
+						onChange={(val) => setFilters({ ...filters, q: val, page: 1 })}
+						prefix={<IcMSearchlight />}
+					/>
+				</div>
 
 				<Popover
 					visible={showPopover}
