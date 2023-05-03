@@ -27,9 +27,9 @@ function ColumnComponents({
 
 	const { children, style } = component || {};
 
-	const { id: columnChildId } = selectedColumn || {};
+	// const { id: columnChildId } = selectedColumn || {};
 
-	const { id: selectedRowId } = selectedRow || {};
+	// const { id: selectedRowId } = selectedRow || {};
 
 	if (isEmpty(children)) {
 		return (
@@ -37,10 +37,12 @@ function ColumnComponents({
 				<img
 					alt=""
 					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/svgviewer-png-output%20(14).png"
-					width="96px"
-					height="96px"
+					width="78px"
+					height="78px"
 				/>
-				Drop here to add blocks
+				<div className={styles.block_text}>
+					Drop here to add blocks
+				</div>
 			</div>
 		);
 	}
@@ -74,7 +76,7 @@ function ColumnComponents({
 
 				const { onClick } = attributes || {};
 
-				const isChildSelected = columnChildId === id && componentId === selectedRowId;
+				// const isChildSelected = columnChildId === id && componentId === selectedRowId;
 				// const border = isChildSelected ? '1px solid green' : allStyles.border;
 
 				const { border } = allStyles;
