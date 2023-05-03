@@ -1,29 +1,37 @@
 import { useRequest } from '@cogoport/request';
-import { useCallback } from 'react';
+import { useSelector } from '@cogoport/store';
+import { useEffect } from 'react';
 
 const useListCogoEntities = () => {
-	const [{ data }, trigger] = useRequest(
-		{
-			url    : 'list_cogo_entities',
-			method : 'get',
-		},
-		{ manual: true },
-	);
+	const [{ data, loading }, trigger] = useRequest({
+		method : 'get',
+		url    : '/list_cogo_entities',
+	}, { manual: false });
+	const profile = useSelector((state) => state);
+	const { profile:{ partner } } = profile || {};
+	const { id, country } = partner || {};
+	const { country_code:countryCode } = country || {};
 
-	const api = useCallback(() => {
-		(async () => {
-			try {
-				await trigger();
-			} catch (err) {
-				console.log(err, 'error');
-			}
-		})();
-	}, [trigger]);
+	useEffect(() => {
+		try {
+			trigger({
+				params: {
+					filters: {
+						status : 'active',
+						id     : countryCode === 'IN' ? undefined : id,
+					},
+					page_limit : 100,
+					page       : 1,
+				},
+			});
+		} catch (e) {
+			console.log(e, 'e');
+		}
+	}, [trigger, id, countryCode]);
 
 	return {
-		entityList: data?.list,
-		data,
-		api,
+		loading,
+		entityData: data?.list || [],
 	};
 };
 

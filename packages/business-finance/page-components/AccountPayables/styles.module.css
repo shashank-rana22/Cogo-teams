@@ -17,3 +17,8 @@
 	display: flex;
 	justify-content: space-between;
 }
+
+.loader {
+	width: 200px;
+	height: 30px;
+}
