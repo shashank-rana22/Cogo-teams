@@ -1,3 +1,4 @@
+import airRepository from './config/air-repository';
 import allocations from './config/allocations';
 import athenaDashboard from './config/athena-dashboard';
 import bookingDesk from './config/booking-desk';
@@ -43,6 +44,7 @@ const routeConfig = {
 	...lastMileDesk,
 	...welcome,
 	...athenaDashboard,
+	...airRepository,
 };
 
 export default routeConfig;

@@ -2201,6 +2201,16 @@ const navigationMappingAdmin = {
 			},
 		],
 	},
+	air_repository: {
+		key           : 'air_repository',
+		title         : 'Air Repository',
+		icon          : IcMAir,
+		href          : '/v2/air-repository',
+		as            : '/v2/air-repository',
+		type          : 'link',
+		possible_apis : apis.air_repository,
+		module_type   : 'dashboards',
+	},
 };
 
 export default navigationMappingAdmin;

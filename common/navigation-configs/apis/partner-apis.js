@@ -11684,6 +11684,7 @@ const partner = {
 			service_name : 'tickets',
 		},
 	],
+	air_repository: [],
 };
 
 export default partner;
