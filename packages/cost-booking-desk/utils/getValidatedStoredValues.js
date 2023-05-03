@@ -1,5 +1,5 @@
 import CONTROLS_CONFIG from '../config/CONTROLS_CONFIG.json';
-import TABS_CONFIG from '../config/TABS_CONFIG.json';
+import TABS_CONFIG from '../config/TABS_CONFIG';
 
 export default function getValidatedStoredValues() {
 	const storedValues = JSON.parse(localStorage.getItem('cost_booking_desk_stored_values'));

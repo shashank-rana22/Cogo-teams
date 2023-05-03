@@ -1,35 +1,54 @@
-import { useGetScopeOptions } from '@cogoport/scope-select';
+import { dynamic } from '@cogoport/next';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 
-import getLocalStorageSetters from '../helpers/geLocalStorageSetters';
-import getValidatedStoredValues from '../utils/getValidatedStoredValues';
+import CostBookingDeskContext from '../context/CostBookingDeskContext';
+import getLocalStorageVal from '../helpers/getLocalStorageVal';
 
-import FclFreight from './FCL';
-import styles from './styles.module.css';
+const ResolveCostBookingDesk = {
+	fcl_freight: dynamic(() => import('./FCL'), { ssr: false }),
+};
 
 function CostBookingDesk() {
-	const [filters, setFilters] = useState({});
-	const [activeTab, setActiveTab] = useState('assigned');
-	const [scopeFilters, setScopeFilters] = useState(null);
+	const router = useRouter();
+	const defaultValues = getLocalStorageVal();
 
-	// const scopeData = useGetScopeOptions();
-	// const defaultValues = getLocalStorageSetters({ scopeData });
+	const [filters, setFilters] = useState(defaultValues?.filters);
+	const [activeTab, setActiveTab] = useState(defaultValues?.activeTab);
+	const [shipmentType, setShipmentType] = useState(defaultValues?.shipmentType);
+	const [stepperTab, setStepperTab] = useState(defaultValues?.stepperTab);
+	const [scopeFilters] = useState(defaultValues?.scopeFilters);
 
-	const stateProps = { activeTab, setActiveTab, filters, setFilters, scopeFilters };
+	const handleVersionChange = useCallback(() => {
+		const newPathname = `${router.asPath}`;
+		window.location.replace(newPathname);
+		localStorage.setItem('last_mile_desk_version', 'v1');
+	}, [router.asPath]);
 
-	// useEffect(() => {
-	// 	const defaultValues = getValidatedStoredValues();
+	if (defaultValues?.costBookingDeskVersion === 'v1') handleVersionChange();
 
-	// 	setFilters(defaultValues.filters);
-	// 	setActiveTab(defaultValues.activeTab);
-	// 	setScopeFilters(defaultValues.scopeFilters);
-	// }, []);
+	const contextValues = useMemo(() => ({
+		activeTab,
+		setActiveTab,
+		filters,
+		setFilters,
+		scopeFilters,
+		handleVersionChange,
+		setShipmentType,
+		setStepperTab,
+		stepperTab,
+		shipmentType,
+	}), [activeTab, setActiveTab, filters, setFilters, scopeFilters, handleVersionChange,
+		shipmentType, setShipmentType, stepperTab, setStepperTab]);
+
+	const RenderDesk = shipmentType in ResolveCostBookingDesk
+		? ResolveCostBookingDesk[shipmentType]
+		: null;
 
 	return (
-		<div>
-			<FclFreight stateProps={stateProps} />
-		</div>
+		<CostBookingDeskContext.Provider value={contextValues}>
+			{shipmentType in ResolveCostBookingDesk ?	<RenderDesk /> : null}
+		</CostBookingDeskContext.Provider>
 	);
 }
 export default CostBookingDesk;

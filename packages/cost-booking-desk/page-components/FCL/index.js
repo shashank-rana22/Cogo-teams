@@ -1,56 +1,40 @@
-import { useState } from 'react';
-
+import DeskTabs from '../../common/DeskTabs';
 import Filters from '../../common/Filters';
-import List from '../../common/List';
 import Loader from '../../common/Loader';
 import Stepper from '../../common/Stepper';
-import Tabs from '../../common/Tabs';
-import CONFIGS from '../../config/CONTROLS_CONFIG.json';
-import allTabs from '../../config/TABS_CONFIG.json';
+import StepperTabs from '../../common/StepperTabs';
 import useListCostBookingDeskShipments from '../../hooks/useListCostBookingDeskShipments';
 
+import ShipmentList from './ShipmentList';
 import styles from './styles.module.css';
 
-const { fcl_freight: tabs } = allTabs;
-
-function FclFreight({
-	stateProps,
-}) {
-	const { loading, data } = useListCostBookingDeskShipments({
-		prefix: 'fcl_freight',
-		stateProps,
-	});
-
-	const [dateFilters, setDateFilters] = useState(stateProps?.filters?.dateFilters);
-	const { activeTab = 'assigned', setActiveTab } = stateProps?.filters || {};
+function FclFreight() {
+	const { loading, data } = useListCostBookingDeskShipments();
 
 	return (
-		<>
+		<div>
 			<div className={styles.header}>
 				<div className={styles.stepper_container}>
-					<Stepper
-						options={CONFIGS.shipment_types}
-					/>
+					<Stepper />
 				</div>
-				<Filters
-					stateProps={stateProps}
-					dateFilters={dateFilters}
-					setDateFilters={setDateFilters}
-				/>
+
+				<Filters />
 			</div>
 
-			<Tabs tabs={tabs} stateProps={stateProps} />
+			<StepperTabs />
 
-			<div
-				className={`${styles.list_container} ${loading ? styles.loading : ''}`}
-			>
+			<DeskTabs />
+
+			<div>
 				{loading ? (
 					<Loader />
 				) : (
-					<List data={data} activeTab={activeTab} setActiveTab={setActiveTab} />
+					<ShipmentList
+						data={data}
+					/>
 				)}
 			</div>
-		</>
+		</div>
 	);
 }
 export default FclFreight;

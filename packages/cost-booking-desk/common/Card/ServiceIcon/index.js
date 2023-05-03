@@ -1,9 +1,9 @@
 import styles from './styles.module.css';
 
 const classNames = {
-	FCL: 'fcl',
-	// 'FCL Local' : 'fcl_local',
-	// LCL         : 'lcl',
+	FCL         : 'fcl',
+	'FCL Local' : 'fcl_local',
+	LCL         : 'lcl',
 };
 
 export default function ServiceIcon({ Icon, text }) {

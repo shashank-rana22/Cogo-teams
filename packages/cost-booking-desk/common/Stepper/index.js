@@ -1,11 +1,21 @@
+import { useContext } from 'react';
+
+import CONTROL_CONFIG from '../../config/CONTROLS_CONFIG.json';
+import CostBookingDeskContext from '../../context/CostBookingDeskContext';
+
 import Child from './Child';
 import styles from './styles.module.css';
 
-function Stepper({ options = [], value = '', onChange = () => {} }) {
+function Stepper() {
+	const { shipmentType } = useContext(CostBookingDeskContext);
+
+	const tabs = CONTROL_CONFIG.shipment_types;
+	const onChange = () => {};
+
 	return (
 		<div className={styles.container}>
-			{options?.map((item) => (
-				<Child item={item} value={value} onChange={onChange} />
+			{tabs?.map((tab) => (
+				<Child item={tab} value={shipmentType} onChange={onChange} />
 			))}
 		</div>
 	);

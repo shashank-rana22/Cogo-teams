@@ -1,62 +1,87 @@
-import { Button, Input, Popover } from '@cogoport/components';
+import { Toggle, Input, Popover, Button } from '@cogoport/components';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
-import ScopeSelect from '@cogoport/scope-select/components';
-import { useState } from 'react';
+import ScopeSelect from '@cogoport/scope-select';
+import { useState, useContext } from 'react';
 
-import PopoverContent from './PopoverContent';
+import CostBookingDeskContext from '../../context/CostBookingDeskContext';
+
+import FilterBy from './FilterBy';
 import styles from './styles.module.css';
 
-export default function Filters({ stateProps = {}, dateFilters, setDateFilters }) {
-	const [showPopover, setShowPopover] = useState(false);
-	const { filters, setFilters } = stateProps;
+function Filters() {
+	const {
+		activeTab, filters = {}, setFilters = () => {},
+		scopeFilters, handleVersionChange = () => {},
+	} = useContext(CostBookingDeskContext);
 
-	console.log('statePropssss', stateProps);
+	const { criticalOn, q = '' } = filters || {};
+
+	const [popoverFilter, setPopoverFilter] = useState({ ...(filters || {}) });
+	const [showPopover, setShowPopover] = useState(false);
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.open_filters}>
-				<div className={styles.input_container}>
-					<Input
-						placeholder="Search SID"
-						type="search"
-						size="sm"
-						value={filters.q || ''}
-						onChange={(val) => setFilters({ ...filters, q: val, page: 1 })}
-						prefix={<IcMSearchlight />}
+			{/* {Object.keys(CRITICAL_TABS).includes(activeTab) ? (
+				<div className={styles.toggle_container}>
+					<Toggle
+						size="md"
+						offLabel="Critical SIDs"
+						checked={criticalOn}
+						onChange={() => setFilters({ ...filters, criticalOn: !criticalOn, page: 1 })}
 					/>
 				</div>
+			) : null} */}
 
+			<div className={styles.input_container}>
+				<Input
+					placeholder="Search Shipments"
+					type="search"
+					size="sm"
+					suffix={<IcMSearchlight />}
+					value={q}
+					onChange={(val) => setFilters({ ...filters, q: val, page: 1 })}
+				/>
+			</div>
+
+			<div className={styles.popover_container}>
 				<Popover
-					visible={showPopover}
-					onClickOutside={() => setShowPopover(false)}
+					placement="bottom"
 					render={(
-						<PopoverContent
-							onClose={() => setShowPopover(false)}
-							stateProps={stateProps}
+						<FilterBy
+							popoverFilter={popoverFilter}
+							setPopoverFilter={setPopoverFilter}
 							setShowPopover={setShowPopover}
-							dateFilters={dateFilters}
-							setDateFilters={setDateFilters}
-							key={showPopover}
 						/>
 					)}
-					placement="bottom"
+					visible={showPopover}
+					onClickOutside={() => setShowPopover(false)}
 				>
 					<Button
 						themeType="secondary"
-						size="sm"
-						onClick={() => setShowPopover((p) => !p)}
-						className={styles.filter_text}
+						onClick={() => {
+							// setPopoverFilter(filters);
+							setShowPopover(!showPopover);
+						}}
 					>
-						<div className={styles.button_content}>
-							<IcMFilter />
-							Filters
+						<div className={styles.popover_button_text}>
+							<IcMFilter height={16} width={16} />
+							<span className={styles.button_text}> Filter By</span>
 						</div>
 					</Button>
 				</Popover>
-				<div className={styles.scope_container}>
-					<ScopeSelect defaultValues={stateProps.scopeFilters} size="md" />
-				</div>
 			</div>
+
+			<div className={styles.version}>
+				<Toggle
+					size="md"
+					onLabel="Old"
+					offLabel="New"
+					// onChange={handleVersionChange}
+				/>
+			</div>
+
+			<ScopeSelect size="md" defaultValues={scopeFilters} />
 		</div>
 	);
 }
+export default Filters;
