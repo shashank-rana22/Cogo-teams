@@ -135,6 +135,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 	useEffect(() => {
 		if (viewSelectedInvoice === false || viewSelectedInvoice === undefined) {
 			getAdvancedPayment();
+			setApiData({ list: [] });
 		}
 	}, [getAdvancedPayment, activeEntity, service, entity, query, sort, pageIndex, viewSelectedInvoice]);
 
