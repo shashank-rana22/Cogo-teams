@@ -1,13 +1,14 @@
 import { Badge, Button } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
-import React from 'react';
+import { IcMEdit, IcMDelete } from '@cogoport/icons-react';
+import { startCase, format } from '@cogoport/utils';
+import React, { useState } from 'react';
 
 import List from '../../commons/List';
 import { RepositoryFields } from '../../configurations/repository-fields';
 
 import styles from './styles.module.css';
 
-function Details({ data, loading }) {
+function Details({ data, loading, setShowModal, setItem, setEdit }) {
 	const { fields } = RepositoryFields;
 
 	const functions = {
@@ -31,6 +32,36 @@ function Details({ data, loading }) {
 			>
 				{singleItem?.platform_url}
 			</Button>
+		),
+		handleAction: (singleItem) => (
+			<div className={styles.action_buttons}>
+				<Button
+					size="md"
+					themeType="linkUi"
+					onClick={() => { setItem(singleItem); setShowModal(true); setEdit(true); }}
+					style={{ color: '#F68B21' }}
+				>
+					<IcMEdit height={16} width={16} />
+				</Button>
+				<Button
+					size="md"
+					themeType="linkUi"
+					onClick={() => window.open(singleItem?.platform_url, '_blank')}
+					style={{ color: '#F68B21' }}
+				>
+					<IcMDelete height={16} width={16} />
+				</Button>
+			</div>
+		),
+		handleEditDetail: (singleItem) => (
+			<div className={styles.edit_detail}>
+				Last Edited :
+				<span>
+					BY: Rakesh -
+					{' '}
+					{format(singleItem.updated_at, 'dd/MM/yy hh:mm', {}, false)}
+				</span>
+			</div>
 		),
 	};
 	return (

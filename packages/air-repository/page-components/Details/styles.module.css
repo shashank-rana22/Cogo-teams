@@ -18,3 +18,22 @@
         }
     }
 } */
+
+.action_buttons {
+    display: flex;
+    :global {
+        .ui_button_container {
+            padding: 2px;
+            min-width: 28px;
+        }
+    }
+}
+
+.edit_detail {
+    display: flex;
+    flex-direction: column;
+    span {
+        color:#ED8A1D;
+        font-size: 11px;
+    }
+}

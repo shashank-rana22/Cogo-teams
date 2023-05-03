@@ -11695,6 +11695,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
+		{
+			api          : 'update_service_ops_repository',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
 	],
 };
 

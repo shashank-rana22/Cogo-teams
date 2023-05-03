@@ -9,19 +9,19 @@ export const RepositoryFields = {
 		{
 			key       : 'mode',
 			label     : 'Mode',
-			span      : 0.5,
+			span      : 0.4,
 			className : 'right_border',
 			func      : 'handleMode',
 		},
 		{
 			key   : 'poc_name',
 			label : 'POC Name',
-			span  : 0.8,
+			span  : 0.5,
 		},
 		{
 			key   : 'email',
-			label : 'Email ( from airline)',
-			span  : 1,
+			label : 'Email (from airline)',
+			span  : 0.8,
 		},
 		{
 			key   : 'platform_url',
@@ -37,12 +37,19 @@ export const RepositoryFields = {
 		{
 			key   : 'password',
 			label : 'Password (Platform)',
-			span  : 0.5,
+			span  : 0.6,
 		},
 		{
 			key   : 'action',
 			label : 'Action',
-			span  : 0.5,
+			span  : 0.3,
+			func  : 'handleAction',
+		},
+		{
+			key   : 'edit_detail',
+			label : '',
+			span  : 0.8,
+			func  : 'handleEditDetail',
 		},
 	],
 };

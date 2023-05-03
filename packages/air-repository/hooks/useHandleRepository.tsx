@@ -1,29 +1,32 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-const useCreateRepository = () => {
+const useHandleRepository = (edit) => {
+	let api = 'create_service_ops_repository';
+	if (edit) {
+		api = 'update_service_ops_repository';
+	}
+
 	const [{ loading }, trigger] = useRequest({
-		url    : 'create_service_ops_repository',
+		url    : `${api}`,
 		method : 'POST',
 	});
 
-	const createRepository = async (payload, listRepository) => {
+	const handleRepository = async (payload, listRepository) => {
 		try {
 			await trigger({
 				data: payload,
 			});
 			listRepository();
-			Toast.success('Repository Created Successfully');
+			Toast.success(`Repository ${edit ? 'Updated' : 'Created'} Successfully`);
 		} catch (err) {
-			console.log('err', err);
-
 			Toast.error(err?.response?.data?.base || err?.message || 'Failed to Upload');
 		}
 	};
 
 	return {
-		createRepository,
+		handleRepository,
 		loading,
 	};
 };
-export default useCreateRepository;
+export default useHandleRepository;

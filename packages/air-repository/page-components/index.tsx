@@ -11,8 +11,9 @@ import styles from './styles.module.css';
 
 function AirRepository() {
 	const [showModal, setShowModal] = useState(false);
+	const [item, setItem] = useState(null);
+	const [edit, setEdit] = useState(false);
 	const { data, listRepository, loading } = useListRepository();
-	console.log('data', data);
 	return (
 		<div className={styles.container}>
 			<Header />
@@ -29,12 +30,15 @@ function AirRepository() {
 				/>
 				<Button size="md" themeType="accent" onClick={() => setShowModal(true)}>+ Create new Repository</Button>
 			</div>
-			<Details data={data} loading={loading} />
+			<Details data={data} loading={loading} setShowModal={setShowModal} setItem={setItem} setEdit={setEdit} />
 			{showModal && (
 				<RepositoryModal
 					showModal={showModal}
 					setShowModal={setShowModal}
 					listRepository={listRepository}
+					item={item}
+					edit={edit}
+					setEdit={setEdit}
 				/>
 			)}
 		</div>

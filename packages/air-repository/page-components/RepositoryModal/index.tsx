@@ -1,10 +1,10 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Layout from '../../commons/Layout';
 import repositoryControls from '../../configurations/repository-controls';
-import useCreateRepository from '../../hooks/useCreateRepository';
+import useHandleRepository from '../../hooks/useHandleRepository';
 
 import styles from './styles.module.css';
 
@@ -12,27 +12,47 @@ interface ModalProps {
 	showModal: boolean;
 	setShowModal: React.FC;
 	listRepository: React.FC;
+	item:any;
+	edit:boolean;
+	setEdit:React.FC;
 }
 
-function RepositoryModal({ showModal, setShowModal, listRepository }:ModalProps) {
-	const { createRepository, loading } = useCreateRepository();
+function RepositoryModal({ showModal, setShowModal, listRepository, item, edit, setEdit }:ModalProps) {
+	const { handleRepository, loading } = useHandleRepository(edit);
 
 	const { control, handleSubmit, reset, setValue, watch, formState:{ errors } } = useForm();
 	const fields = repositoryControls();
 	const mode = watch('mode');
 
 	const onSubmit = (values) => {
-		const payload = { ...values, performed_by_id: '' };
-		createRepository(payload, listRepository);
+		const payload = { ...values, id: item?.id, performed_by_id: '' };
+		handleRepository(payload, listRepository);
 	};
+
+	const finalFields = [
+		...fields.basic,
+		...fields.email,
+		...fields.platform,
+	];
+
+	useEffect(() => {
+		finalFields.forEach((c) => {
+			setValue(c.name, item[c.name]);
+		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<Modal
 			show={showModal}
-			onClose={() => setShowModal(false)}
+			onClose={() => { setShowModal(false); setEdit(false); }}
 			className={styles.modal_container}
 		>
-			<div className={styles.modal_header}>Create Repository</div>
+			<div className={styles.modal_header}>
+				{edit ? 'Edit' : 'Create'}
+				{' '}
+				Repository
+			</div>
 			<Layout fields={fields.basic} control={control} errors={errors} />
 			{['email', 'both'].includes(mode) && (
 				<>
@@ -52,7 +72,7 @@ function RepositoryModal({ showModal, setShowModal, listRepository }:ModalProps)
 					themeType="secondary"
 					disabled={loading}
 					style={{ marginRight: 12 }}
-					onClick={() => setShowModal(false)}
+					onClick={() => { setShowModal(false); setEdit(false); }}
 				>
 					Cancel
 				</Button>
