@@ -114,6 +114,7 @@ export default {
 		service_ops2_role_id      : [
 			'017856dc-b424-4145-9181-5680732cb33b',
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // LCL So2
+			'8b04b2b9-baa1-4913-bf4c-b11effecef0b', // SO2 Executive
 		],
 		lastmile_ops_id         : 'b808aabb-2245-4369-aaa7-6ebd2d5de20b',
 		lastmile_ops_manager_id : '3965f742-f4e5-420a-911c-f3657be05028',
@@ -174,6 +175,7 @@ export default {
 		prod_coe_finance_head : '7b1fc916-6984-4179-aee5-c23f9871085d',
 		finance_head_id       : 'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
 		so_1_manager          : '17885538-e746-4650-a5bc-7d4d81247c7d',
+		so_2_manager          : '1665784f-6e58-4299-8a33-4b7487f61188',
 	},
 	options: {
 		registration_types: [

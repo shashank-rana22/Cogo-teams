@@ -130,6 +130,7 @@ export default {
 		service_ops2_role_id: [
 			'017856dc-b424-4145-9181-5680732cb33b',
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // LCL So2
+			'8b04b2b9-baa1-4913-bf4c-b11effecef0b', // SO2 Executive
 		],
 		service_ops3_role_ids: [
 			'60869bd4-5f18-4400-a003-411eb49dcd4a', // Prod_COE_Finance_Executive
@@ -172,6 +173,7 @@ export default {
 		prod_coe_finance_head : '7b1fc916-6984-4179-aee5-c23f9871085d',
 		finance_head_id       : 'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
 		so_1_manager          : '17885538-e746-4650-a5bc-7d4d81247c7d',
+		so_2_manager          : '1665784f-6e58-4299-8a33-4b7487f61188',
 	},
 	options: {
 		registration_types: [
