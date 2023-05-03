@@ -38,6 +38,7 @@
 }
 
 .min_duration {
+	margin-bottom: 5px;
 	font-size: 10px;
 	font-weight: 500;
 	color: #393f70;
