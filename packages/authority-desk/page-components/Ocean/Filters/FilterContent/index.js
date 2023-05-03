@@ -7,14 +7,13 @@ import FILTERS_CONTROLS from '../../../../config/OCEAN_FILTERS_CONTROLS.json';
 
 import styles from './styles.module.css';
 
-function FilterContent({ stateProps, setShowPopover = () => {} }) {
-	const { filters, setFilters } = stateProps;
-	const { q, page, ...defaultFilters } = filters;
+function FilterContent({ allFilters = {}, setShowPopover = () => {}, setAllFilters = () => {} }) {
+	const { q, page, ...defaultFilters } = allFilters.filters;
 
 	const [formValues, setFormValues] = useState(defaultFilters);
 
 	const clearFilters = () => {
-		setFilters({ shipment_type: filters.shipment_type, page: 1 });
+		setAllFilters({ ...allFilters, filters: { page: 1, is_job_closed: 'no' } });
 		setShowPopover(false);
 	};
 
@@ -25,7 +24,15 @@ function FilterContent({ stateProps, setShowPopover = () => {} }) {
 		.some(([key, val]) => !isEmpty(val) && key !== 'page');
 
 	const applyPopoverFilters = () => {
-		setFilters({ ...filters, ...formValues, page: 1 });
+		setAllFilters({
+			...allFilters,
+			filters: {
+				...(allFilters.filters),
+				...formValues,
+				q    : '',
+				page : 1,
+			},
+		});
 		setShowPopover(false);
 	};
 
@@ -42,7 +49,7 @@ function FilterContent({ stateProps, setShowPopover = () => {} }) {
 		},
 		{
 			label     : 'Apply',
-			onClick   : () => applyPopoverFilters({ stateProps, formValues, setShowPopover }),
+			onClick   : () => applyPopoverFilters(),
 			disabled  : !isFiltersChanged,
 			themeType : 'primary',
 		},

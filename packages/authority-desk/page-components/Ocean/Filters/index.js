@@ -5,10 +5,8 @@ import React, { useState } from 'react';
 import FilterContent from './FilterContent';
 import styles from './styles.module.css';
 
-function Filters({ stateProps = {} }) {
+function Filters({ allFilters = {}, setAllFilters = () => {} }) {
 	const [showPopover, setShowPopover] = useState(false);
-
-	const { filters, setFilters } = stateProps;
 
 	return (
 		<div className={styles.container}>
@@ -18,15 +16,28 @@ function Filters({ stateProps = {} }) {
 					placeholder="Search Shipments"
 					type="search"
 					size="sm"
-					value={filters.q || ''}
-					onChange={(val) => setFilters({ ...filters, q: val, page: 1 })}
+					value={allFilters.filters.q || ''}
+					onChange={(val) => {
+						console.log(val, 'filtersss');
+
+						setAllFilters({
+							...allFilters,
+							filters: {
+								...(allFilters.filters || {}),
+								q    : val,
+								page : 1,
+							},
+						});
+						console.log({ allFilters });
+					}}
 				/>
 
 				<Popover
 					render={(
 						<FilterContent
-							stateProps={stateProps}
+							allFilters={allFilters}
 							setShowPopover={setShowPopover}
+							setAllFilters={setAllFilters}
 							key={showPopover}
 						/>
 					)}

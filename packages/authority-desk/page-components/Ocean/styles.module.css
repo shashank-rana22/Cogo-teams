@@ -65,4 +65,8 @@
 
 .active.count{
     background-color: #EE3425;
+} 
+
+.tab_panel {
+    margin-top: 12px;
 }

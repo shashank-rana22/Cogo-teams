@@ -5,8 +5,8 @@ import EmptyState from '../../../commons/EmptyState';
 import ListCard from './ListCard';
 import styles from './styles.module.css';
 
-export default function List({ data, stateProps }) {
-	const { filters, setFilters } = stateProps;
+export default function List({ data, allFilters = {}, setAllFilters = () => {} }) {
+	const { filters } = allFilters;
 	// const { list = [], total } = data;
 
 	const renderPagination = (
@@ -15,7 +15,13 @@ export default function List({ data, stateProps }) {
 			// totalItems={total}
 			pageSize={10}
 			currentPage={filters.page}
-			onPageChange={(val) => setFilters({ ...filters, page: val })}
+			onPageChange={(val) => setAllFilters({
+				...allFilters,
+				filters: {
+					...(allFilters.filters),
+					page: val,
+				},
+			})}
 		/>
 	);
 
@@ -28,7 +34,7 @@ export default function List({ data, stateProps }) {
 					<ListCard
 						key={item?.id}
 						item={item}
-						bucket={stateProps?.bucket}
+						bucket={allFilters?.bucket}
 					/>
 				))}
 

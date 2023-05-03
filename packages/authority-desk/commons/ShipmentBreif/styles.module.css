@@ -1,6 +1,18 @@
 .container{
-border-right: 1px solid #F2E3C3;  
-width: 18%;
+    width: 18%;
+    position: relative;
+
+    &::after {
+    content: '';
+    display: inline-block;
+    background-color: #F2E3C3;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 120%;
+    }
 } 
 
 

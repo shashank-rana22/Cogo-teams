@@ -1,4 +1,4 @@
-import { Tooltip, Button } from '@cogoport/components';
+import {  Button } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -24,22 +24,17 @@ function ListCard({ item }) {
 		free_days_detention_origin,
 	} = freight_service;
 
-	const documents = () => (
-		(item?.bill_of_ladings || []).map((doc) => (
-			<div>{doc?.bl_number}</div>
-		))
-	);
-
 	return (
 		<>
-
 			<div className={styles.container}>
 				<div className={styles.status}>
 					&nbsp;
 					Status :
 					&nbsp;
 					{startCase(freight_service?.state)}
-				</div>
+				</div> 
+
+				
 				<div className={styles.detail_container}>
 					<div className={styles.shipment_details}>
 						<ShipmentBreif item={item} />
@@ -55,11 +50,11 @@ function ListCard({ item }) {
 								&nbsp;
 								{ free_days_detention_origin}
 								&nbsp;
-								days ,
+								Detention days ,
 								&nbsp;
 								{free_days_demurrage_origin}
 								&nbsp;
-								days
+								Dumurrage Days
 							</span>
 							<br />
 							<span>
@@ -68,25 +63,17 @@ function ListCard({ item }) {
 								&nbsp;
 								{free_days_detention_destination}
 								&nbsp;
-								days,
+								Detention days,
 								&nbsp;
 								{free_days_demurrage_destination}
 								&nbsp;
-								days
+								Demurrage days
 								&nbsp;
 							</span>
 						</div>
 
 						<div className={styles.documents_and_invoices}>
-							<Tooltip
-								theme="light"
-								content={documents()}
-								placement="bottom"
-								animation="shift-away"
-								interactive
-							>
-								<div className={styles.documents}> View Documents</div>
-							</Tooltip>
+							
 							<div className={styles.validation}>
 								Sales Invoice Status:
 								{'  '}
@@ -102,7 +89,7 @@ function ListCard({ item }) {
 							<div>
 								BL Type :
 								&nbsp;
-								{item?.freight_service?.bl_category}
+								{startCase(item?.freight_service?.bl_category)}
 							</div>
 							<div>
 								Expected Release Date :

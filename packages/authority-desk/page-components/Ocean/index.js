@@ -13,17 +13,17 @@ const services = ['fcl_freight', 'lcl_freight', 'fcl_local'];
 
 function Ocean() {
 	const { buckets } = BUCKET_MAPPING;
-	const [filters, setFilters] = useState({ is_job_closed: 'no' });
 
-	const [activeTab, setActiveTab] = useState('export');
+	const [allFilters, setAllFilters] = useState({
+		activeTab : 'bl',
+		service   : 'fcl_freight',
+		bucket    : 'eligible',
+		filters   : { is_job_closed: 'no', page: 1 },
 
-	const [service, setService] = useState('fcl_freight');
+	});
+	console.log({allFilters},"out")
 
-	const [bucket, setBucket] = useState('eligible');
-
-	const stateProps = { bucket, setBucket, filters, setFilters };
-
-	const { data, loading } = useListAuthorityDeskDocuments({ activeTab, service, ...stateProps });
+	const { data, loading } = useListAuthorityDeskDocuments({ ...allFilters });
 
 	const { count_stats } = data;
 
@@ -32,19 +32,19 @@ function Ocean() {
 			<div className={styles.heading}> Authority Desk</div>
 
 			<Tabs
-				activeTab={activeTab}
-				themeType="secondary"
-				onChange={setActiveTab}
+				activeTab={allFilters.activeTab}
+				themeType="primary"
+				onChange={(val) => setAllFilters({ ...allFilters, activeTab: val })}
 				className={styles.tab_panel}
 				fullWidth
 			>
 				<TabPanel
-					name="export"
-					title="Bill of ladings"
+					name="bl"
+					title="Bill of Ladings"
 				/>
 
 				<TabPanel
-					name="import"
+					name="do"
 					title="Delivery Orders"
 				/>
 
@@ -55,8 +55,8 @@ function Ocean() {
 					<div
 						role="button"
 						tabIndex={0}
-						onClick={() => setService(item)}
-						className={cl`${service === item ? styles.active : ''} ${styles.service_tab} `}
+						onClick={() => setAllFilters({ ...allFilters, service: item })}
+						className={cl`${allFilters.service === item ? styles.active : ''} ${styles.service_tab} `}
 					>
 						{startCase(item)}
 					</div>
@@ -69,22 +69,22 @@ function Ocean() {
 						<div
 							role="button"
 							tabIndex={0}
-							className={cl`${bucket === item ? styles.active : ''} ${styles.bucket} `}
-							onClick={() => setBucket(item?.name)}
+							className={cl`${allFilters.bucket === item?.name ? styles.active : ''} ${styles.bucket} `}
+							onClick={() => setAllFilters({ ...allFilters, bucket: item?.name })}
 						>
 							{item.title}
 							{' '}
-							<span className={`cl${bucket === item ? styles.active : ''} ${styles.count}`}>
+							<span className={`cl${allFilters.bucket === item ? styles.active : ''} ${styles.count}`}>
 								{count_stats[item.count] || 0}
 							</span>
 						</div>
 					))}
 				</div>
 
-				<Filters stateProps={stateProps} />
+				<Filters allFilters={allFilters} setAllFilters={setAllFilters} />
 			</div>
 
-			<List data={data} loading={loading} stateProps={stateProps} />
+			<List data={data} loading={loading} allFilters={allFilters} setAllFilters={setAllFilters} />
 
 		</div>
 

@@ -1,4 +1,4 @@
-import { Toast } from '@cogoport/components';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useState, useCallback, useEffect } from 'react';
 
@@ -7,6 +7,7 @@ const emptyData = { list: [], total: 0, total_page: 0, count_stats: {} };
 const shipmentStates = ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress', 'completed'];
 
 function useListAuthorityDeskDocuments({ activeTab, service, bucket, filters }) {
+	console.log({filters})
 	const [data, setData] = useState(emptyData);
 
 	const [{ loading }, trigger] = useRequest({
@@ -16,7 +17,8 @@ function useListAuthorityDeskDocuments({ activeTab, service, bucket, filters }) 
 
 	const listShipments = useCallback(async () => {
 		try {
-			const { state, is_job_closed, ...restFilters } = filters;
+			const { state, is_job_closed, page, ...restFilters } = filters;
+
 			const res = await trigger({
 				params: {
 					filters: {
@@ -25,7 +27,7 @@ function useListAuthorityDeskDocuments({ activeTab, service, bucket, filters }) 
 						document_status : bucket,
 						...restFilters || {},
 					},
-					page               : 1,
+					page               : page || 1,
 					page_limit         : 10,
 					additional_methods : ['pagination', 'count_stats', 'invoice_status', 'ongoing_shipment_stats'],
 
@@ -44,13 +46,14 @@ function useListAuthorityDeskDocuments({ activeTab, service, bucket, filters }) 
 			// if (message !== 'canceled') { Toast.error(message); }
 			// setData(emptyData);
 		}
-	}, [trigger, bucket]);
+	}, [trigger, bucket,filters]);
 
 	console.log(data, 'data');
 
 	useEffect(() => {
+		console.log("odns")
 		listShipments();
-	}, [listShipments, bucket, filters]);
+	}, [listShipments]);
 
 	return {
 		data,

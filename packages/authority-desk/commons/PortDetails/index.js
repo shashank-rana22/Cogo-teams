@@ -1,5 +1,6 @@
-import { cl, Tooltip } from '@cogoport/components';
-import { IcMPortArrow, IcCFfcl } from '@cogoport/icons-react';
+import { cl, Tooltip } from '@cogoport/components';  
+import { IcMPortArrow } from '@cogoport/icons-react';
+import Icons from  './Icon'
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -11,7 +12,9 @@ function PortDetails({ primary_service = {} }) {
 		destination_main_port = {},
 		origin_port = {},
 		destination_port = {},
-	} = primary_service;
+	} = primary_service; 
+
+	console.log(primary_service, 'primary_servixe');
 
 	const handleLocationDetails = (location, icdPortInfo) => (
 		<>
@@ -63,8 +66,8 @@ function PortDetails({ primary_service = {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.icons_and_service}>
-				<IcCFfcl />
-				<span>FCL</span>
+				{/* <Icons service = {primary_service?.service_type}/> */}
+				{/* <span>FCL</span> */}
 			</div>
 			{renderLocation()}
 		</div>
