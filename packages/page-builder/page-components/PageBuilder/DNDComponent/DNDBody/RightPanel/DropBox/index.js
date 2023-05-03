@@ -74,6 +74,7 @@ function DropBox({
 		setNewAddingItemProps,
 		newAddingItemProps,
 		modeType,
+		handleUnselectItem,
 	});
 
 	const isActive = canDrop && isOver;

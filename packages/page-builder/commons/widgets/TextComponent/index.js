@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import useUpdateComponentsContent from '../../../helpers/useUpdateComponentsContent';
 
+import 'react-quill/dist/quill.bubble.css';
 import TextEditorModal from './TextEditorModal';
 
 function TextComponent(props) {
@@ -50,6 +51,7 @@ function TextComponent(props) {
 			<div
 				style={{ cursor: 'pointer' }}
 				role="presentation"
+				className="ql-editor"
 				onClick={() => {
 					if (modeType === 'edit') {
 						setEditorModal((prev) => ({
