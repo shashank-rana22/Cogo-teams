@@ -42,6 +42,14 @@ function DocumentForm({
 				actions           : ['create'],
 			};
 			break;
+		case 'lastmile_ops':
+			params = {
+				shipment_id       : shipment_data?.id,
+				organization_ids  : [uploaded_by_org_id],
+				org_account_types : ['service_provider'],
+				actions           : ['create'],
+			};
+			break;
 		default:
 			params = {};
 			break;

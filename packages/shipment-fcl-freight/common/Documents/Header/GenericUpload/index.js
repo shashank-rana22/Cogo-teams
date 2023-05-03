@@ -64,7 +64,7 @@ function GenericUpload({
 				<Modal.Header title="Upload Document" />
 
 				<Modal.Body style={{ minHeight: '200px' }}>
-					{['booking_desk', 'document_desk'].includes(activeStakeholder) ? (
+					{['booking_desk', 'document_desk', 'lastmile_ops'].includes(activeStakeholder) ? (
 						<Select
 							size="sm"
 							placeholder="Select Source"
@@ -75,7 +75,7 @@ function GenericUpload({
 							isClearable
 						/>
 					) : null }
-					{!['booking_desk', 'document_desk'].includes(activeStakeholder) || selectSource ? (
+					{!['booking_desk', 'document_desk', 'lastmile_ops'].includes(activeStakeholder) || selectSource ? (
 						<DocumentForm
 							shipment_data={shipment_data}
 							orgList={data}
