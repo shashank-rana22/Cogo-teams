@@ -7,7 +7,7 @@ import Carousel from 'react-slick';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import RenderComponent from '../../../page-components/PageBuilder/DNDComponent/DNDBody/RightPanel/DropBox/Components/RenderElement';
+import RenderElement from '../../../page-components/PageBuilder/DNDComponent/DNDBody/RightPanel/DropBox/Components/RenderElement';
 
 import styles from './styles.module.css';
 
@@ -143,7 +143,7 @@ function CarouselComponent({
 											style={{ ...childrenStyles, nestedBorder }}
 											onClick={(e) => handleNestedClick(e, childComponent, nestedChildComponent)}
 										>
-											<RenderComponent
+											<RenderElement
 												componentType={childrenType}
 												widget={nestedChildComponent}
 												pageConfiguration={pageConfiguration}
@@ -191,7 +191,7 @@ function CarouselComponent({
 										{icon}
 									</div>
 								) : (
-									<RenderComponent
+									<RenderElement
 										componentType={type}
 										widget={childComponent}
 										pageConfiguration={pageConfiguration}
@@ -212,6 +212,7 @@ function CarouselComponent({
 										selectedRow={selectedRow}
 										selectedColumn={selectedColumn}
 										selectedNestedColumn={selectedNestedColumn}
+										modeType={modeType}
 									/>
 								) }
 

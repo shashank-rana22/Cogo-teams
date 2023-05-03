@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 
 import useGetAddNewComponent from '../../../helpers/useGetAddNewComponent';
 import useGetRedoUndoState from '../../../helpers/useGetRedoUndoState';
+import useCheckMobileScreen from '../../../hooks/useCheckMobileScreen';
 
 import DNDBody from './DNDBody';
 import SelectComponentModal from './SelectComponentModal';
@@ -13,6 +14,10 @@ import styles from './styles.module.css';
 
 function DNDComponent({ initialPageData, metaData }) {
 	const [pageConfiguration, setPageConfiguration] = useState(metaData);
+
+	const { width: screenWidth } = useCheckMobileScreen();
+
+	const [previewMode, setPreviewMode] = useState('desktop');
 
 	const [showContentModal, setShowContentModal] = useState(false);
 
@@ -108,6 +113,8 @@ function DNDComponent({ initialPageData, metaData }) {
 				goBack={goBack}
 				goForward={goForward}
 				handleUnselectItem={handleUnselectItem}
+				previewMode={previewMode}
+				setPreviewMode={setPreviewMode}
 			/>
 
 			<SelectComponentModal

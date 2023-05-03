@@ -98,6 +98,7 @@ function NestedColumnComponent({
 							selectedRow={selectedRow}
 							selectedColumn={selectedColumn}
 							selectedNestedColumn={selectedNestedColumn}
+							modeType={modeType}
 						/>
 					</div>
 				);

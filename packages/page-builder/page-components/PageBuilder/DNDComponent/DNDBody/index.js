@@ -30,6 +30,9 @@ function DNDBody({
 	goBack,
 	goForward,
 	handleUnselectItem,
+	previewMode,
+	setPreviewMode,
+
 }) {
 	const [activeTab, setActiveTab] = useState('content');
 
@@ -51,7 +54,9 @@ function DNDBody({
 				selectedItem={selectedItem}
 				setSelectedItem={setSelectedItem}
 				selectedColumn={selectedColumn}
+				setSelectedColumn={setSelectedColumn}
 				selectedNestedColumn={selectedNestedColumn}
+				setSelectedNestedColumn={setSelectedNestedColumn}
 				modeType={modeType}
 			/>
 			<RightPanel
@@ -79,6 +84,8 @@ function DNDBody({
 				lastEventIndex={lastEventIndex}
 				setEveryEvents={setEveryEvents}
 				handleUnselectItem={handleUnselectItem}
+				previewMode={previewMode}
+				setPreviewMode={setPreviewMode}
 			/>
 		</section>
 	);

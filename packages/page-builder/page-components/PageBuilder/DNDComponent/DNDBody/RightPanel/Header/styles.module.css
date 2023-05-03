@@ -9,6 +9,9 @@
     display: flex;
 }
 
+.ui_buttonicon_container *{
+    fill: #FCDC00;
+}
 
 .button_wrapper {
     display: flex;

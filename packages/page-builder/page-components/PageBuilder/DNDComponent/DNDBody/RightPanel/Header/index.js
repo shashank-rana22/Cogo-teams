@@ -1,5 +1,5 @@
-import { Button } from '@cogoport/components';
-import { IcMRedo, IcMUndo } from '@cogoport/icons-react';
+import { Button, ButtonIcon } from '@cogoport/components';
+import { IcMDesktop, IcMMobile, IcMRedo, IcMUndo } from '@cogoport/icons-react';
 
 import useUpdateDynamicPage from '../../../../../../hooks/useUpdateDynamicPage';
 
@@ -15,6 +15,7 @@ function Header(props) {
 		lastEventIndex,
 		goBack,
 		goForward,
+		setPreviewMode,
 	} = props;
 
 	const { handleSave } = useUpdateDynamicPage();
@@ -59,6 +60,26 @@ function Header(props) {
 
 				</Button>
 			</div>
+
+			{modeType === 'preview' && (
+				<div>
+					<ButtonIcon
+						size="lg"
+						className={styles.ui_buttonicon_container}
+						icon={<IcMMobile />}
+						onClick={() => setPreviewMode('mobile')}
+						style={{ marginRight: '8px' }}
+						themeType="primary"
+					/>
+					<ButtonIcon
+						size="lg"
+						className={styles.ui_buttonicon_container}
+						onClick={() => setPreviewMode('desktop')}
+						icon={<IcMDesktop />}
+						themeType="primary"
+					/>
+				</div>
+			)}
 
 			<div className={styles.button_container}>
 				<Button

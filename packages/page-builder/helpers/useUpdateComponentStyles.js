@@ -7,6 +7,9 @@ const useUpdateComponentsStyles = ({
 	selectedRow,
 	selectedColumn,
 	setSelectedItem,
+	// setSelectedRow,
+	// setSelectedColumn,
+	// setSelectedNestedColumn,
 	selectedNestedColumn,
 	selectedItem,
 }) => {
@@ -21,6 +24,14 @@ const useUpdateComponentsStyles = ({
 	// 3.for form- when not added then selectedItem.
 	// 4. for form with data - outer div is selected Column
 	// 5. when inner are selected - selectedItem and selectedNestedItem
+
+	// console.log('elected item :::', selectedItem);
+
+	// console.log('elected row ::: ::: ', selectedRow);
+
+	// console.log('elected column :::', selectedColumn);
+
+	// console.log('elected nested column :::', selectedNestedColumn);
 
 	const handleUpdateStyles = (key, value, settingType = '') => {
 		const isRootComponent = isEmpty(selectedRow);
@@ -56,15 +67,40 @@ const useUpdateComponentsStyles = ({
 						[key]: value,
 					};
 
+					// setSelectedNestedColumn((prev) => ({
+					// 	...prev,
+					// 	component: {
+					// 		...prev.component,
+					// 		style: {
+					// 			...prev.component.style,
+					// 			[key]: value,
+					// 		},
+
+					// 	},
+					// }));
+
 					data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component.children[nestedSelectedChildrenId].component[styleKey] = modifiedStyle;
 				} else if (Object.keys(selectedColumn).length > 0 && Object.keys(selectedNestedColumn).length === 0) {
 					const selectedChildrenId = data.layouts[selectedComponentIndex].component.children.findIndex((item) => item.id === selectedChildId);
+
 					const prevStyle = data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component?.[styleKey];
 
 					const modifiedStyle = {
 						...prevStyle,
 						[key]: value,
 					};
+
+					// setSelectedColumn((prev) => ({
+					// 	...prev,
+					// 	component: {
+					// 		...prev.component,
+					// 		style: {
+					// 			...prev.component.style,
+					// 			[key]: value,
+					// 		},
+
+					// 	},
+					// }));
 
 					data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component[styleKey] = modifiedStyle;
 				} else if (Object.keys(selectedColumn).length === 0 && Object.keys(selectedNestedColumn).length === 0) {
@@ -75,6 +111,18 @@ const useUpdateComponentsStyles = ({
 					};
 
 					data.layouts[selectedComponentIndex].component[styleKey] = modifiedStyle;
+
+					// setSelectedRow((prev) => ({
+					// 	...prev,
+					// 	component: {
+					// 		...prev.component,
+					// 		style: {
+					// 			...prev.component.style,
+					// 			[key]: value,
+					// 		},
+
+					// 	},
+					// }));
 				}
 			}
 

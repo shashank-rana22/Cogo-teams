@@ -22,6 +22,9 @@ function LeftPanel(props) {
 		setPageConfiguration,
 		selectedColumn,
 		selectedNestedColumn,
+		setSelectedRow,
+		setSelectedColumn,
+		setSelectedNestedColumn,
 		modeType,
 	} = props;
 
@@ -77,6 +80,9 @@ function LeftPanel(props) {
 						setShowContentModal={setShowContentModal}
 						parentComponentId={parentComponentId}
 						setSelectedItem={setSelectedItem}
+						setSelectedRow={setSelectedRow}
+						setSelectedColumn={setSelectedColumn}
+						setSelectedNestedColumn={setSelectedNestedColumn}
 						setParentComponentId={setParentComponentId}
 						addNewItem={addNewItem}
 						onNewItemAdding={onNewItemAdding}
