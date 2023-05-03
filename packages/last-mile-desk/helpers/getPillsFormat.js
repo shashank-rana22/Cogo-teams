@@ -23,6 +23,7 @@ const getPillsFormat = (pillsObj = {}) => {
 		free_days_detention_destination : getFreeDaysDetentionDestination,
 		default                         : convertToStartCase,
 	};
+
 	return Object.keys(pillsObj).map((pillKey) => ((formatValue?.[pillKey] || formatValue.default)(pillsObj[pillKey])));
 };
 export default getPillsFormat;

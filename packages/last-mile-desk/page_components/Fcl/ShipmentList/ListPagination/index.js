@@ -3,14 +3,15 @@ import { useContext } from 'react';
 
 import LastMileDeskContext from '../../../../context/LastMileDeskContext';
 
-function ListPagination({ data }) {
+function ListPagination({ data = {} }) {
 	const { setFilters, filters = {} } = useContext(LastMileDeskContext);
 
 	const { page, total_count, page_limit } = data || {};
 
 	const onPageChange = (val) => {
-		setFilters({ ...filters, page: val });
+		setFilters({ ...(filters || {}), page: val });
 	};
+
 	return (
 		<div>
 			<Pagination

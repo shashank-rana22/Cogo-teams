@@ -4,7 +4,12 @@
         "can_view":["notifying_party","invoicing_party","service_provider","pocs","collection_party"],
         "can_edit":["notifying_party","collection_party"],
         "can_add_service_provider_poc":true
-        
+    },
+    "booking_desk_manager":{
+        "trade_parties":["collection_party"],
+        "can_view":["notifying_party","invoicing_party","service_provider","pocs","collection_party"],
+        "can_edit":["notifying_party","collection_party"],
+        "can_add_service_provider_poc":true
     },
     "superadmin":{
         "trade_parties":["self","shipper","consignee","collection_party","origin_transporter","destination_transporter","origin_cha","destination_cha"],

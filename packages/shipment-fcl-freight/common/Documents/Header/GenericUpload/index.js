@@ -7,6 +7,8 @@ import DocumentForm from '../DocumentForm';
 
 import getCreateDocumentParams from './getCreateDocumentParams';
 
+const SUPPLIER_STAKEHOLDERS = ['booking_desk', 'document_desk', 'booking_desk_manager', 'lastmile_ops'];
+
 function GenericUpload({
 	showModal,
 	setShowModal,
@@ -64,7 +66,7 @@ function GenericUpload({
 				<Modal.Header title="Upload Document" />
 
 				<Modal.Body style={{ minHeight: '200px' }}>
-					{['booking_desk', 'document_desk', 'lastmile_ops'].includes(activeStakeholder) ? (
+					{SUPPLIER_STAKEHOLDERS.includes(activeStakeholder) ? (
 						<Select
 							size="sm"
 							placeholder="Select Source"
@@ -75,7 +77,8 @@ function GenericUpload({
 							isClearable
 						/>
 					) : null }
-					{!['booking_desk', 'document_desk', 'lastmile_ops'].includes(activeStakeholder) || selectSource ? (
+
+					{!SUPPLIER_STAKEHOLDERS.includes(activeStakeholder) || selectSource ? (
 						<DocumentForm
 							shipment_data={shipment_data}
 							orgList={data}

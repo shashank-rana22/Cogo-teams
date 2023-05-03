@@ -7,7 +7,7 @@ function ShipmentInfo({ item = {} }) {
 
 	return (
 		<div>
-			<div className={styles.serial_id}>
+			<div className={styles.font_wt_600}>
 				Shipment ID #
 				{' '}
 				{serial_id || ''}
@@ -24,20 +24,18 @@ function ShipmentInfo({ item = {} }) {
 			<div className={styles.tooltip_container}>
 				<Tooltip content={shipping_line?.business_name} placement="bottom" interactive>
 					<div className={cl`${styles.shipping_line} ${styles.tooltip_text}`}>
-						<span className={styles.line_heading}>Line:</span>
+						<span className={styles.font_wt_600}>Line:</span>
 						{' '}
 						{shipping_line?.business_name}
 					</div>
 				</Tooltip>
 			</div>
 
-			{lastmile_ops?.name && (
+			{lastmile_ops?.name ? (
 				<div className={styles.last_mile}>
-					LASTMILE OPS :
-					{' '}
-					{lastmile_ops?.name}
+					{`LASTMILE OPS : ${lastmile_ops?.name}`}
 				</div>
-			)}
+			) : null}
 		</div>
 	);
 }

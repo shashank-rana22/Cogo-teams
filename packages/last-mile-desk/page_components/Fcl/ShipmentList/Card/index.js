@@ -31,6 +31,7 @@ function Card({ item = {} }) {
 			tabIndex={0}
 		>
 			<Header item={item} />
+
 			<Body item={item} />
 		</div>
 	);
