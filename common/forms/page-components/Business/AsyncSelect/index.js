@@ -22,6 +22,7 @@ import {
 	asyncListCogoEntity,
 	asyncListHsCodes,
 	asyncListCurrency,
+	asyncAccountEngagementScoringEvents,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -62,6 +63,7 @@ const keyAsyncFieldsParamsMapping = {
 	rule_options                  : asyncKamExpertiseRuleOptions,
 	list_hs_codes                 : asyncListHsCodes,
 	list_exchange_rate_currencies : asyncListCurrency,
+	engagement_scoring_events     : asyncAccountEngagementScoringEvents,
 };
 
 function AsyncSelect(props) {
