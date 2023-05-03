@@ -1799,6 +1799,13 @@ const navigationMappingAdmin = {
 				as            : '/v2/allocation/crm-feedback-dashboard',
 				possible_apis : apis.crm_feedback_dashboard,
 			},
+			{
+				key           : 'allocations-account_scoring',
+				title         : 'Account Scoring',
+				href          : '/v2/allocation/account-scoring',
+				as            : '/v2/allocation/account-scoring',
+				possible_apis : apis.account_scoring,
+			},
 		],
 	},
 	kam_monitoring: {
