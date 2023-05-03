@@ -7643,6 +7643,12 @@ const partner = {
 			feature     : 'Dashboard',
 		},
 		{
+			api         : 'put_sales_invoice_finance_reject_invoice',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
 			api         : 'post_sales_invoice_post_from_sage',
 			access_type : 'private',
 			module      : 'outstanding',
@@ -11478,6 +11484,21 @@ const partner = {
 		},
 		{
 			api          : 'post_tickets_actvity',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'post_tickets_ticket',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_stats',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_list',
 			access_type  : 'private',
 			service_name : 'tickets',
 		},

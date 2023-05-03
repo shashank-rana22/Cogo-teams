@@ -3,17 +3,13 @@ import { SelectController, useForm, useGetAsyncOptions, asyncFieldsPartnerUsers 
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import { STAKEHOLDER_CAN_BE_ADDED } from '../../../../../contants/STAKEHOLDER_MAPPING';
+import { SERVICE_LEVEL_STATKEHOLDERS, STAKEHOLDER_CAN_BE_ADDED } from '../../../../../contants/STAKEHOLDER_MAPPING';
 import useUpdateShipmentStakeholders from '../../../../../hooks/useUpdateShipmentStakeholders';
 import { convertObjectMappingToArray } from '../../../../../utils/convertObjectMappingToArray';
 
 import styles from './styles.module.css';
 
-const showServiceForStakeholder = (stakeholder_type) => !['booking_agent',
-	'sales_agent',
-	'entity_manager',
-	'portfolio_manager',
-	'lastmile_ops'].includes(stakeholder_type);
+const showServiceForStakeholder = (stakeholder_type) => SERVICE_LEVEL_STATKEHOLDERS.includes(stakeholder_type);
 
 function AddInternalPoc({
 	addPoc = {}, setAddPoc = () => {}, services = [], shipment_id,

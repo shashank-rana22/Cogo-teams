@@ -13,10 +13,6 @@ function CancelAdditionalService({
 }) {
 	const [remarkValues, setRemarkValues] = useState('');
 
-	const onOuterClick = () => {
-		setShowCancel(false);
-	};
-
 	const { cancelAdditionalService, loading } = useUpdateShipmentAdditionalService({ refetch });
 
 	const onSubmit = () => {
@@ -30,39 +26,36 @@ function CancelAdditionalService({
 
 	return showCancel ? (
 		<Modal
-			show={showCancel}
-			onClose={() => {
-				setShowCancel(false);
-			}}
-			closable={false}
-			onOuterClick={onOuterClick}
+			show
+			onClose={() => setShowCancel(false)}
+			showCloseIcon={!loading}
+			closeOnOuterClick={false}
+			className={styles.custom_modal}
 		>
 			<Modal.Header title="Cancel Service" />
+
 			<Modal.Body>
-				<div className={styles.container}>
-					<div style={{ height: '40vh' }}>
-						<Textarea
-							value={remarkValues}
-							onChange={(e) => setRemarkValues(e)}
-							placeholder="State reason for cancellation"
-						/>
-					</div>
-					<div className={styles.button_container}>
-						<Button
-							themeType="primary"
-							style={{ marginRight: '6px' }}
-							onClick={() => {
-								setShowCancel(false);
-							}}
-						>
-							Cancel
-						</Button>
-						<Button onClick={onSubmit} disabled={loading} themeType="primary">
-							Submit
-						</Button>
-					</div>
-				</div>
+				<Textarea
+					value={remarkValues}
+					onChange={(e) => setRemarkValues(e)}
+					placeholder="State reason for cancellation"
+				/>
+
 			</Modal.Body>
+
+			<Modal.Footer>
+				<Button
+					themeType="secondary"
+					onClick={() => setShowCancel(false)}
+					disabled={loading}
+				>
+					Cancel
+				</Button>
+
+				<Button onClick={onSubmit} disabled={loading} themeType="primary">
+					Submit
+				</Button>
+			</Modal.Footer>
 		</Modal>
 	) : null;
 }

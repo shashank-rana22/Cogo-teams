@@ -15,14 +15,14 @@ const customSerializer = (params) => {
 const ticketsRequest = Axios.create({ baseURL: process.env.NEXT_PUBLIC_TICKET_REST_BASE_API_URL });
 
 ticketsRequest.interceptors.request.use((oldConfig) => {
-	const { authKey = '', ...axiosConfig } = oldConfig;
+	const { authkey = '', ...axiosConfig } = oldConfig;
 
 	const auth = process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME;
 	if (process.env.NODE_ENV === 'production') {
 		axiosConfig.baseURL = `${process.env.NEXT_PUBLIC_REST_BASE_API_URL}/tickets`;
 	}
 	const token = getCookie(auth, oldConfig.ctx);
-	const authorizationparameters = getAuthorizationParams(store, authKey);
+	const authorizationparameters = getAuthorizationParams(store, authkey);
 
 	return {
 		...axiosConfig,
