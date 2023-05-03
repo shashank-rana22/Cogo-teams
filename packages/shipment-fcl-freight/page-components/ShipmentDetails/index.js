@@ -37,11 +37,11 @@ function ShipmentDetails() {
 
 		case 'booking_desk':
 			return <BookingDesk get={get} activeStakeholder="booking_desk" />;
-        case 'lastmile_ops':
-			return <LastMileDesk get={get} activeStakeholder='lastmile_ops' />;
+		// case 'lastmile_ops':
+		// 	return <LastMileDesk get={get} activeStakeholder="lastmile_ops" />;
 		case 'admin':
 		case 'superadmin':
-			return <Superadmin get={get} activeStakeholder="superadmin" />;
+			return <LastMileDesk get={get} activeStakeholder="lastmile_ops" />;
 		default:
 			return (
 				<h1 className={styles.not_allowed}>

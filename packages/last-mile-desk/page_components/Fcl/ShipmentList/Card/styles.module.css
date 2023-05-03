@@ -3,6 +3,7 @@
 	background-color: #fff;
 	border-radius: 4px;
 	box-shadow: 0 1px 6px rgb(169 188 218 / 65%);
+	cursor: pointer;
 }
 
 .animate_card {
