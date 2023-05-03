@@ -8,8 +8,10 @@ import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
 import enrichment from './config/enrichment';
 import groundOps from './config/ground-ops';
+import ingestion from './config/ingestion';
 import inventory_management from './config/inventory_management';
 import kamMonitoring from './config/kam-monitoring';
+import lastMileDesk from './config/last-mile-desk';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import performanceManagement from './config/performance-management';
@@ -40,9 +42,11 @@ const routeConfig = {
 	...performanceManagement,
 	...shipmentFclFreight,
 	...bookingDesk,
+	...lastMileDesk,
 	...welcome,
 	...referral,
 	...athenaDashboard,
+	...ingestion,
 };
 
 export default routeConfig;

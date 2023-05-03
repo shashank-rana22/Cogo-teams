@@ -10,6 +10,7 @@ const shipmentCancelStakeholders = [
 	'booking_agent',
 	'sales_agent',
 	'booking_desk',
+	'booking_desk_manager',
 ];
 
 export default function getCanCancelShipment({ shipment_data, user_data, activeStakeholder }) {
