@@ -1308,8 +1308,14 @@ const saas = {
 	],
 	app_saas_cogo_subscription: [
 		{
-			api         : 'capture_checkout_payment',
-			access_type : 'private',
+			api          : 'capture_checkout_payment',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'cancel_saas_subscription',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
 		},
 		{
 			api          : 'saas_get_user_active_plan',
@@ -1788,20 +1794,27 @@ const saas = {
 			feature     : 'dutiesTaxes',
 		},
 		{
-			api         : 'list_organization_billing_addresses',
-			access_type : 'private',
+			api          : 'list_organization_billing_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 		{
-			api         : 'list_organization_addresses',
-			access_type : 'private',
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+
 		},
 		{
-			api         : 'create_organization_address',
-			access_type : 'private',
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
+
 		},
 		{
-			api         : 'create_organization_billing_address',
-			access_type : 'private',
+			api          : 'create_organization_billing_address',
+			access_type  : 'private',
+			service_name : 'organization',
+
 		},
 		{
 			api         : 'get_sailing_schedules',
@@ -1970,20 +1983,28 @@ const saas = {
 			access_type : 'private',
 		},
 		{
-			api         : 'list_organization_billing_addresses',
-			access_type : 'private',
+			api          : 'list_organization_billing_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+
 		},
 		{
-			api         : 'list_organization_addresses',
-			access_type : 'private',
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+
 		},
 		{
-			api         : 'create_organization_address',
-			access_type : 'private',
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
+
 		},
 		{
-			api         : 'create_organization_billing_address',
-			access_type : 'private',
+			api          : 'create_organization_billing_address',
+			access_type  : 'private',
+			service_name : 'organization',
+
 		},
 		{
 			api         : 'get_saas_bill_status',
@@ -2049,8 +2070,10 @@ const saas = {
 	],
 	app_saas_import_export_doc: [
 		{
-			api         : 'list_organization_billing_addresses',
-			access_type : 'private',
+			api          : 'list_organization_billing_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+
 		},
 		{
 			api         : 'post_saas_payment_cancel_order',
@@ -2059,16 +2082,19 @@ const saas = {
 			feature     : 'import-export-documents',
 		},
 		{
-			api         : 'list_organization_addresses',
-			access_type : 'private',
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 		{
-			api         : 'create_organization_address',
-			access_type : 'private',
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 		{
-			api         : 'create_organization_billing_address',
-			access_type : 'private',
+			api          : 'create_organization_billing_address',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 		{
 			api         : 'capture_checkout_payment',
@@ -2181,10 +2207,6 @@ const saas = {
 			access_type : 'private',
 			module      : 'product-catalogue',
 			feature     : 'product-catalogue',
-		},
-		{
-			api         : 'capture_checkout_payment',
-			access_type : 'private',
 		},
 	],
 	app_saas_cogostore: [
