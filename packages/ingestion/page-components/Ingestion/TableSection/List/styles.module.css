@@ -1,0 +1,31 @@
+.table {
+	margin: 4px 0;
+	background-color: #fff;
+	box-shadow: 0 0 4px rgb(44 62 80 / 10%);
+
+	tr {
+		height: 52px;
+	}
+
+	:global(.ui_table_head_cell) {
+		font-size: 14px;
+	}
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}
+
+.empty {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 520px;
+}
+
+.table_container {
+	width: 100%;
+	overflow-x: scroll;
+}
