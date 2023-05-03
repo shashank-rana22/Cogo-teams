@@ -9,6 +9,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import RenderComponent from '../../../page-components/PageBuilder/DNDComponent/DNDBody/RightPanel/DropBox/Components/RenderElement';
 
+import CarouselPreview from './CarouselPreview';
 import styles from './styles.module.css';
 
 const CAROUSEL_SETTINGS = {
@@ -45,9 +46,7 @@ function CarouselComponent({
 }) {
 	const { component, id: componentId } = widget || {};
 
-	const { children } = component || {};
-
-	// const { id: selectedRowId } = rowData || {};
+	const { children, isDraggingPreview } = component || {};
 
 	const { id: columnChildId } = selectedColumn || {};
 
@@ -96,6 +95,12 @@ function CarouselComponent({
 			setSelectedItem({});
 		}
 	};
+
+	if (isDraggingPreview) {
+		return (
+			<CarouselPreview />
+		);
+	}
 
 	return (
 		<div className={styles.container}>
@@ -222,6 +227,7 @@ function CarouselComponent({
 												height="24px"
 												width="24px"
 												cursor="pointer"
+												fill="#ee3425"
 												onClick={(e) => handleRemovelides(e, idx, widget)}
 											/>
 										</Tooltip>

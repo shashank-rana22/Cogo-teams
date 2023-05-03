@@ -117,6 +117,27 @@ function RenderElement({
 			modeType,
 		},
 
+		carouselSample: {
+			widget,
+			pageConfiguration,
+			setPageConfiguration,
+			setSelectedItem,
+			childId,
+			setParentComponentId,
+			setShowContentModal,
+			rowData,
+			setSelectedRow,
+			setSelectedColumn,
+			columnData,
+			setSelectedNestedColumn,
+			nestedColumData,
+			selectedItem,
+			selectedRow,
+			selectedColumn,
+			selectedNestedColumn,
+			modeType,
+		},
+
 		divider: {
 			key: elementId,
 			widget,

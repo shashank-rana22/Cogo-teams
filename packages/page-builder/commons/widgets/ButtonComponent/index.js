@@ -1,3 +1,4 @@
+import ButtonPreview from './ButtonPreview';
 import styles from './styles.module.css';
 
 function ButtonComponent(props) {
@@ -6,9 +7,17 @@ function ButtonComponent(props) {
 		rowData,
 	} = props;
 
-	const { content = 'Click Here', type, attributes } = widget || {};
+	const { content = 'Click Here', type, attributes, component } = widget || {};
+
+	const { isDraggingPreview } = component;
 
 	const { onClick = () => {} } = attributes || {};
+
+	if (isDraggingPreview) {
+		return (
+			<ButtonPreview />
+		);
+	}
 
 	return (
 		<div className={styles.button_wrapper}>

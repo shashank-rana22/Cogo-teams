@@ -4,6 +4,7 @@ import useUpdateComponentsContent from '../../../helpers/useUpdateComponentsCont
 
 import 'react-quill/dist/quill.bubble.css';
 import TextEditorModal from './TextEditorModal';
+import TextPreview from './TextPreview';
 
 function TextComponent(props) {
 	const {
@@ -28,7 +29,7 @@ function TextComponent(props) {
 
 	const { component } = widget || {};
 
-	const { content } = component;
+	const { content, isDraggingPreview } = component;
 
 	const [editorValue, setEditorValue] = useState(content);
 
@@ -45,6 +46,12 @@ function TextComponent(props) {
 		type: 'text',
 		modeType,
 	});
+
+	if (isDraggingPreview) {
+		return (
+			<TextPreview />
+		);
+	}
 
 	return (
 		<>

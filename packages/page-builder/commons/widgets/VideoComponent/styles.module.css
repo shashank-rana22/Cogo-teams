@@ -3,3 +3,18 @@
      min-height: 400px;
   
 }
+
+.video_drop {
+     padding: 32px;
+     font-weight: 600;
+     color: #FCDC00;
+     background-color: #fffdee;
+     cursor: pointer;
+     border: none;
+     outline: #FCDC00 1px solid;
+     width: 100%;
+     &:hover{
+         background-color: #fffbe0;
+     }
+ }
+ 

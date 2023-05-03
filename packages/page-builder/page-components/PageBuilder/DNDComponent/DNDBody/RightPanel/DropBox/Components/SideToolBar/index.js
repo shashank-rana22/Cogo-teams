@@ -18,11 +18,13 @@ function SideToolBar({
 				height="24px"
 				width="24px"
 				cursor="pointer"
+				fill="#ee3425"
 				onClick={(e) => handleDelete(e, rowData, pageConfiguration)}
 			/>
 			<IcMDuplicate
 				height="24px"
 				width="24px"
+				fill="#ee3425"
 				cursor="pointer"
 				onClick={(e) => handleCopy(e, rowData, component, pageConfiguration)}
 			/>
@@ -33,6 +35,7 @@ function SideToolBar({
 						height="24px"
 						width="24px"
 						cursor="pointer"
+						fill="#ee3425"
 						onClick={(e) => handleAddSlides(e, rowData, pageConfiguration)}
 					/>
 				</Tooltip>

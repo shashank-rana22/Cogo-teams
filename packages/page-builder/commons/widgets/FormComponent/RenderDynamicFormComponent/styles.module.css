@@ -1,5 +1,9 @@
-.image_drop {
-    padding: 32px;
+.form_drop {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
     font-weight: 600;
     color: #FCDC00;
     background-color: #fffdee;

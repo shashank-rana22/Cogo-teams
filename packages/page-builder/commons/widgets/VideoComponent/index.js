@@ -1,5 +1,5 @@
+/* eslint-disable max-len */
 import { Modal } from '@cogoport/components';
-import { IcMVideoCall } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import useUpdateComponentsContent from '../../../helpers/useUpdateComponentsContent';
@@ -63,10 +63,15 @@ function VideoComponent(props) {
 					<div
 						onClick={() => setShowUploadModal(true)}
 						role="presentation"
-						style={{ cursor: 'pointer' }}
+						className={styles.video_drop}
 					>
-						<IcMVideoCall width={48} height={48} />
-						<div>Upload</div>
+						<img
+							alt=""
+							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/svgviewer-png-output%20(5).png"
+							width="48px"
+							height="48px"
+						/>
+						<div>Add your YouTube or video content</div>
 					</div>
 				</div>
 			) }

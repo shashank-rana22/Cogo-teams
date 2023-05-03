@@ -34,9 +34,13 @@ function ColumnComponents({
 	if (isEmpty(children)) {
 		return (
 			<div className={styles.block_wrapper}>
-				<div className={styles.loader_text}>
-					Drop here to add blocks
-				</div>
+				<img
+					alt=""
+					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/svgviewer-png-output%20(14).png"
+					width="96px"
+					height="96px"
+				/>
+				Drop here to add blocks
 			</div>
 		);
 	}

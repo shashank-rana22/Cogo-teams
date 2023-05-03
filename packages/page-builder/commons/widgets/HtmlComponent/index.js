@@ -1,9 +1,17 @@
 import React from 'react';
 
+import HtmlPreview from './HtmlPreview';
+
 function HtmlComponent({ widget }) {
 	const { component } = widget || {};
 
-	const { content } = component || {};
+	const { content, isDraggingPreview } = component || {};
+
+	if (isDraggingPreview) {
+		return (
+			<HtmlPreview />
+		);
+	}
 
 	return (
 		<div

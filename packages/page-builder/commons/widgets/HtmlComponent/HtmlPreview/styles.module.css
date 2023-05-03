@@ -1,5 +1,6 @@
-.image_drop {
-    padding: 32px;
+.html_drop {
+    align-items: center;
+    padding: 28px;
     font-weight: 600;
     color: #FCDC00;
     background-color: #fffdee;

@@ -1,7 +1,8 @@
-import { IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
 import DynamicFormComponent from '../DynamicFormComponent';
+
+import styles from './styles.module.css';
 
 function RenderDynamicFormComponent({
 	dynamicControls,
@@ -29,14 +30,16 @@ function RenderDynamicFormComponent({
 	}
 
 	return (
-		<div>
-			<IcMPlusInCircle
-				height="22px"
-				width="22px"
-				cursor="pointer"
-				onClick={() => { if (modeType === 'edit') { setShow(true); } }}
-			/>
-			<div>Click here to start Customizing your form</div>
+		<div className={styles.form_drop}>
+			<div role="presentation" onClick={() => { if (modeType === 'edit') { setShow(true); } }}>
+				<img
+					alt=""
+					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/svgviewer-png-output (10).png"
+					width="48px"
+					height="48px"
+				/>
+				<div>Click here to start Customizing your form</div>
+			</div>
 		</div>
 	);
 }
