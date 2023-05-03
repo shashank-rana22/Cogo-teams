@@ -1,5 +1,9 @@
 import { IcMFfcl, IcMFlocalCharges, IcMFcustoms } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useContext } from 'react';
+
+import DocumentDeskContext from '../../../../context/DocumentDeskContext';
+import getCriticalShipment from '../../../../helpers/getCriticalShipment';
 
 import CardFooter from './CardFooter';
 import CardHeader from './CardHeader';
@@ -17,6 +21,9 @@ const iconMapping = {
 
 export default function Card({ item = {} }) {
 	const router = useRouter();
+	const { activeTab } = useContext(DocumentDeskContext);
+
+	const isShipmentCritical = getCriticalShipment({ tab: activeTab, shipment: item });
 
 	const clickCard = () => {
 		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}`;
@@ -31,22 +38,29 @@ export default function Card({ item = {} }) {
 		<div
 			role="button"
 			tabIndex={0}
-			className={`${styles.card}`}
+			className={`${styles.card} ${isShipmentCritical ? styles.animate_card : ''}`}
 			onClick={clickCard}
 		>
 			<CardHeader item={item} />
 
 			<div className={styles.card_body}>
-				<ShipmentInfo item={item} />
+				<div className={styles.shipment_info}>
+					<ShipmentInfo item={item} />
+				</div>
 
 				<div className={styles.separator} />
 
-				{item?.shipment_type === 'fcl_freight' ? <DualLocation data={item} icon={iconProps} />
-					: <SingleLocation data={item} icon={iconProps} />}
+				<div className={styles.location_container}>
+					{item?.shipment_type === 'fcl_freight'
+						? <DualLocation data={item} icon={iconProps} />
+						: <SingleLocation data={item} icon={iconProps} />}
+				</div>
 
 				<div className={styles.separator} />
 
-				<CargoPills item={item} />
+				<div className={styles.cargo_pill}>
+					<CargoPills item={item} />
+				</div>
 			</div>
 
 			<CardFooter item={item} />

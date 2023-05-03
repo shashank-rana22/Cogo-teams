@@ -20,7 +20,7 @@
 	}
 }
 
-.card.animate_card {
+.animate_card {
 	background: linear-gradient(90deg, #fff, #ffb3b3, #fff);
 	background-size: 400% 400%;
 	animation: move-bg 5s ease-in-out infinite alternate;
@@ -39,12 +39,7 @@
 .card_body {
 	display: flex;
 	justify-content: space-between;
-
-	.separator {
-		align-self: stretch;
-		width: 1px;
-		background: var(--color-secondary-greyscale-5);
-	}
+	align-items: center;
 
 	:global {
 		.service-info-icon-container {
@@ -54,3 +49,23 @@
 		}
 	}
 }
+
+.shipment_info{
+	width: 22%;
+}
+
+.location_container{
+	width: 50%;
+}
+
+.cargo_pill{
+	width: 30%;
+}
+
+.separator {
+	align-self: stretch;
+	width: 1px;
+	background: var(--color-secondary-greyscale-5);
+	margin-right: 10px;
+}
+

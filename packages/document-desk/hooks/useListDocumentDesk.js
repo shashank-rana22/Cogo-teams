@@ -29,6 +29,10 @@ const useListDocumentDesk = () => {
 				...(selected_agent_id ? { stakeholder_id: selected_agent_id } : {}),
 			},
 			additional_methods,
+			page,
+			page_limit : 10,
+			sort_by    : 'serial_id',
+			sort_type  : 'desc',
 		},
 	}, { manual: true });
 

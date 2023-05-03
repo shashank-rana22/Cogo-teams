@@ -1,6 +1,7 @@
-import { startCase } from '@cogoport/utils';
+import { startCase, upperCase } from '@cogoport/utils';
 
 const convertToStartCase = (val) => startCase(val || '');
+const convertToUpperCase = (val) => upperCase(val || '');
 
 const getContainerSize = (container_size = '') => (
 	container_size?.includes('HC') ? container_size.replace('HC', 'ft HC') : `${container_size || '--'}ft`
@@ -21,6 +22,7 @@ const getPillsFormat = (pillsObj = {}) => {
 		containers_count                : getContainerCount,
 		container_size                  : getContainerSize,
 		free_days_detention_destination : getFreeDaysDetentionDestination,
+		bl_category                     : convertToUpperCase,
 		default                         : convertToStartCase,
 	};
 

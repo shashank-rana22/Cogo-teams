@@ -5,16 +5,25 @@ import getPillsFormat from '../../../../../helpers/getPillsFormat';
 import PopoverContent from './PopoverContent';
 import styles from './styles.module.css';
 
-const KEY_FROM_ITEM = ['inco_term', 'trade_type'];
+const KEY_FROM_ITEM = ['inco_term', 'trade_type', 'bl_category'];
+
+const LOCAL_CUSTOMS_ITEM = ['container_type', 'container_size', 'commodity',
+	'containers_count', 'commodity', 'trade_type'];
 
 function CargoPills({ item = {} }) {
-	const { cargo_details = [] } = item || {};
+	const { cargo_details = [], shipment_type = '' } = item || {};
 
 	const initialPills = cargo_details?.[0] || {};
 
-	KEY_FROM_ITEM.forEach((itemKey) => {
-		if (item?.[itemKey]) { initialPills[itemKey] = item?.[itemKey]; }
-	});
+	if (shipment_type === 'fcl_freight') {
+		KEY_FROM_ITEM.forEach((itemKey) => {
+			if (item?.[itemKey]) { initialPills[itemKey] = item?.[itemKey]; }
+		});
+	} else {
+		LOCAL_CUSTOMS_ITEM.forEach((itemKey) => {
+			if (item?.[itemKey]) { initialPills[itemKey] = item?.[itemKey]; }
+		});
+	}
 
 	return (
 		<div className={styles.container}>
