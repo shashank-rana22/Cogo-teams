@@ -9,7 +9,7 @@ const colorArray = ['hsla(232, 44%, 96%, 1)', 'hsla(234, 46%, 87%, 1)', 'hsla(23
 
 const getBarChartData = ({ chart_data = {}, toggleState }) => (Object.keys(chart_data).map((key, index) => ({
 	label      : toggleState ? startCase(key) : startCase(key.split('_')[0]),
-	percentile : Math.ceil(toFixed(chart_data[key], 2)),
+	percentage : Math.ceil(toFixed(chart_data[key], 2)),
 	color      : colorArray[index],
 })));
 

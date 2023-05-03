@@ -19,6 +19,9 @@ import {
 	asyncKamExpertiseRuleOptions,
 	listVendors,
 	asyncListCogoEntity,
+	asyncListHsCodes,
+	asyncListCurrency,
+	asyncAccountEngagementScoringEvents,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -41,21 +44,24 @@ import {
  */
 
 const keyAsyncFieldsParamsMapping = {
-	list_vendors            : listVendors,
-	organizations           : asyncFieldsOrganizations,
-	organization_users      : asyncFieldsOrganizationUser,
-	partners                : asyncFieldsPartner,
-	partner_users           : asyncFieldsPartnerUsers,
-	partner_roles           : asyncFieldsPartnerRoles,
-	segments                : asyncFieldsCampaignSegments,
-	list_locations          : asyncFieldsLocations,
-	list_operators          : asyncFieldsListOperators,
-	list_rate_charge_codes  : asyncFieldListRateChargeCodes,
-	allot_bank              : asyncAllotBanks,
-	list_cogo_entity        : asyncListCogoEntity,
-	expertise_configuration : asyncFieldsExpertiseConfigurations,
-	badge_name              : asyncFieldsExpertiseBadgeName,
-	rule_options            : asyncKamExpertiseRuleOptions,
+	list_vendors                  : listVendors,
+	organizations                 : asyncFieldsOrganizations,
+	organization_users            : asyncFieldsOrganizationUser,
+	partners                      : asyncFieldsPartner,
+	partner_users                 : asyncFieldsPartnerUsers,
+	partner_roles                 : asyncFieldsPartnerRoles,
+	segments                      : asyncFieldsCampaignSegments,
+	list_locations                : asyncFieldsLocations,
+	list_operators                : asyncFieldsListOperators,
+	list_rate_charge_codes        : asyncFieldListRateChargeCodes,
+	allot_bank                    : asyncAllotBanks,
+	list_cogo_entity              : asyncListCogoEntity,
+	expertise_configuration       : asyncFieldsExpertiseConfigurations,
+	badge_name                    : asyncFieldsExpertiseBadgeName,
+	rule_options                  : asyncKamExpertiseRuleOptions,
+	list_hs_codes                 : asyncListHsCodes,
+	list_exchange_rate_currencies : asyncListCurrency,
+	engagement_scoring_events     : asyncAccountEngagementScoringEvents,
 };
 
 function AsyncSelect(props) {

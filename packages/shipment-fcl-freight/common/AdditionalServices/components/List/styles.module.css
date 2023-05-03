@@ -1,5 +1,5 @@
 .container {
-	padding: 20px 14px;
+	padding: 10px 0;
 }
 
 .not_added {
@@ -24,6 +24,12 @@
 	flex-wrap: wrap;
 	align-items: center;
 	margin-top: 12px;
+
+	:global {
+		.ui_button_childeren {
+			white-space: nowrap;
+		}
+	}
 }
 
 .circle {

@@ -1366,9 +1366,9 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'coe-last_mile',
-				title         : 'Last Mile',
-				href          : '/last-mile',
-				as            : '/last-mile',
+				title         : 'Last Mile Desk',
+				href          : '/v2/last-mile',
+				as            : '/v2/last-mile',
 				type          : 'link',
 				main_apis     : ['list_lastmile_desk_shipments'],
 				possible_apis : [...apis.document_desk, ...apis.cogolens],
@@ -1799,6 +1799,13 @@ const navigationMappingAdmin = {
 				as            : '/v2/allocation/crm-feedback-dashboard',
 				possible_apis : apis.crm_feedback_dashboard,
 			},
+			{
+				key           : 'allocations-account_scoring',
+				title         : 'Account Scoring',
+				href          : '/v2/allocation/account-scoring',
+				as            : '/v2/allocation/account-scoring',
+				possible_apis : apis.account_scoring,
+			},
 		],
 	},
 	kam_monitoring: {
@@ -2192,7 +2199,7 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'ihls-lead_data_pipeline',
-				title         : 'Lead Dashboard',
+				title         : 'Lead Enrichment Dashboard',
 				href          : '/ihls/lead-data-pipeline',
 				as            : '/ihls/lead-data-pipeline',
 				type          : 'link',

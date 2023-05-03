@@ -167,28 +167,25 @@ export default {
 		],
 		prod_coe_finance_head : '7b1fc916-6984-4179-aee5-c23f9871085d',
 		finance_head_id       : 'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
+		so_1_manager          : '17885538-e746-4650-a5bc-7d4d81247c7d',
 	},
 	options: {
 		registration_types: [
 			{
-				label : 'Private Limited Company',
-				value : 'private_limited',
+				label : 'Limited Liability Company',
+				value : 'limited_liability_company',
 			},
 			{
-				label : 'Public Limited Company',
-				value : 'public_limited',
+				label : 'Joint Stock Company',
+				value : 'joint_stock_company',
 			},
 			{
-				label : 'Partnership',
-				value : 'partnership',
+				label : 'Representative Office',
+				value : 'representative_office',
 			},
 			{
-				label : 'Proprietorship',
-				value : 'proprietorship',
-			},
-			{
-				label : 'Limited Liability Partnership',
-				value : 'limited_liability_partnership',
+				label : 'Branch',
+				value : 'branch',
 			},
 		],
 		country_truck_type : 'Open_body_1_ton',

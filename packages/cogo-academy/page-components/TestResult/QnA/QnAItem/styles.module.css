@@ -3,11 +3,19 @@
 	align-items: center;
 	justify-content: space-between;
 	margin-top: 32px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .question_card {
 	width: 50%;
 	margin-right: 8%;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 }
 
 .explanation {
@@ -15,4 +23,8 @@
 	padding: 12px;
 	background: #fff;
 	border-radius: 6px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 }

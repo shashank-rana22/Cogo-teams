@@ -65,12 +65,14 @@ function EmailView({
 
 	return (
 		<div>
-			<Thread
-				content={content}
-				allAttachements={allAttachements}
-				emailData={emailData}
-				onAction={onAction}
-			/>
+			{emailData ? (
+				<Thread
+					content={content}
+					allAttachements={allAttachements}
+					emailData={emailData}
+					onAction={onAction}
+				/>
+			) : null}
 		</div>
 	);
 }

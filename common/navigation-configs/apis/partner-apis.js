@@ -7643,6 +7643,18 @@ const partner = {
 			feature     : 'Dashboard',
 		},
 		{
+			api         : 'put_sales_invoice_finance_reject_invoice',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'post_sales_invoice_post_from_sage',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
 			api         : 'get_sales_dashboard_outstanding_by_age',
 			access_type : 'private',
 			module      : 'Dashboard',
@@ -8064,6 +8076,22 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_payments_parent_jv_gl_code_master',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_parent_jv_acc_mode',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_parent_jv_jv_category',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_parent_jv_journal_code',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_organization_trade_parties',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -8154,6 +8182,18 @@ const partner = {
 			feature     : 'history',
 		},
 		{
+			api         : 'post_payments_settlement_settlement_matching',
+			access_type : 'private',
+			module      : 'history',
+			feature     : 'history',
+		},
+		{
+			api         : 'post_payments_settlement_matching_on_sage',
+			access_type : 'private',
+			module      : 'history',
+			feature     : 'history',
+		},
+		{
 			api         : 'delete_payments_settlement',
 			access_type : 'private',
 			module      : 'history',
@@ -8202,6 +8242,12 @@ const partner = {
 			feature     : 'onAccount',
 		},
 		{
+			api         : 'post_payments_accounts_post_from_sage',
+			access_type : 'private',
+			module      : 'onAccount',
+			feature     : 'onAccount',
+		},
+		{
 			api         : 'delete_sales_accounts',
 			access_type : 'private',
 			module      : 'onAccount',
@@ -8232,7 +8278,37 @@ const partner = {
 			feature     : 'onAccount',
 		},
 		{
-			api         : 'get_payments_journal_voucher_list',
+			api         : 'get_payments_parent_jv_list',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
+			api         : 'delete_payments_parent_jv',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
+			api         : 'post_payments_parent_jv_post_to_sage',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
+			api         : 'post_payments_parent_jv',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
+			api         : 'put_payments_parent_jv',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
+			api         : 'get_payments_journal_voucher_jv_line_items_list',
 			access_type : 'private',
 			module      : 'JournalVoucher',
 			feature     : 'JournalVoucher',
@@ -9147,7 +9223,7 @@ const partner = {
 			service_name : 'cogopoint',
 		},
 		{
-			api          : 'get_cogostore_brand_details',
+			api          : 'get_cogostore_product',
 			access_type  : 'private',
 			service_name : 'cogopoint',
 		},
@@ -9203,6 +9279,81 @@ const partner = {
 		},
 		{
 			api          : 'update_cogostore_brand_status',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogostore_products',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'create_cogostore_product_code',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'create_cogostore_product',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'create_cogostore_vendor',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'create_cogostore_brand',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'create_cogostore_banner',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'create_cogostore_product_category',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'update_cogostore_product_category',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'update_cogostore_product',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogostore_banners',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogostore_vendors',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'get_cogostore_product_stats',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogostore_brands',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogostore_product_categories',
+			access_type  : 'private',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_cogostore_product_codes',
 			access_type  : 'private',
 			service_name : 'cogopoint',
 		},
@@ -11333,6 +11484,31 @@ const partner = {
 			api          : 'request_assign_chat',
 			access_type  : 'private',
 			service_name : 'communication',
+		},
+		{
+			api          : 'get_tickets_default_types',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'post_tickets_actvity',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'post_tickets_ticket',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_stats',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_list',
+			access_type  : 'private',
+			service_name : 'tickets',
 		},
 	],
 	analytics_dashboard: [
