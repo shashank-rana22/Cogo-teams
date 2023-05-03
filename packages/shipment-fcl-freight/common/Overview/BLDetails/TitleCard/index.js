@@ -48,7 +48,7 @@ function TitleCard({
 						<div>
 							MBL Collection Mode:
 							&nbsp;
-							{item?.collection_mode?.replace(/_/g, ' ')}
+							{startCase(item?.collection_mode?.replace(/_/g, ' '))}
 						</div>
 					) : null}
 

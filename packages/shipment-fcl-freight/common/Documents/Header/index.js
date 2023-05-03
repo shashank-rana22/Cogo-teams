@@ -81,6 +81,17 @@ function Header({
 				) : null}
 			</div>
 
+			{showModal ? (
+				<GenericUpload
+					showModal={showModal}
+					setShowModal={setShowModal}
+					data={data}
+					shipment_data={shipment_data}
+					activeStakeholder={activeStakeholder}
+					refetch={refetch}
+				/>
+			) : null }
+
 			<div className={styles.sub_heading}>
 				<div
 					className={styles.generic_upload}
@@ -102,17 +113,6 @@ function Header({
 					onChange={() => setActiveToggle((p) => !p)}
 				/>
 			</div>
-
-			{showModal ? (
-				<GenericUpload
-					showModal={showModal}
-					setShowModal={setShowModal}
-					data={data}
-					shipment_data={shipment_data}
-					activeStakeholder={activeStakeholder}
-					refetch={refetch}
-				/>
-			) : null }
 
 		</div>
 	);

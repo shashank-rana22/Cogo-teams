@@ -87,6 +87,7 @@ function Child({
 									index={index}
 									control={control}
 									disabled={disabled || disable}
+									size="sm"
 								/>
 								<p style={{
 									fontStyle     : 'normal',
