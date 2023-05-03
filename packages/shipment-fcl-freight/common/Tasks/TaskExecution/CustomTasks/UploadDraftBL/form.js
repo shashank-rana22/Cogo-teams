@@ -11,6 +11,7 @@ function Form(props) {
 	const {
 		control,
 		formState: { errors },
+		handleSubmit,
 	} = useForm();
 
 	const controlTypeMapping = {
@@ -31,26 +32,6 @@ function Form(props) {
 			</div>
 		) : null;
 	}
-
-	// const { apiTrigger, docLoading } = useCreateShipmentDocument({});
-
-	// const onSubmit = async (values) => {
-	// 	const body = {
-	// 		shipment_id        : props?.data?.shipment_id,
-	// 		uploaded_by_org_id : props?.data?.organization_id,
-	// 		document_type      : 'draft_house_bill_of_lading',
-	// 		documents          : [{
-	// 			file_name    : values?.url?.name,
-	// 			document_url : values?.url?.url,
-	// 			data         : {
-	// 				description      : values?.description,
-	// 				document_number  : values?.document_number,
-	// 				containers_count : values?.containers_count,
-	// 			},
-	// 		}],
-	// 	};
-	// 	await apiTrigger(body);
-	// };
 
 	return (
 		<main className={styles.container}>

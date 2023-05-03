@@ -1,7 +1,9 @@
 import { Button, Modal } from '@cogoport/components';
+import { omit } from '@cogoport/utils';
 import { forwardRef, useRef, useState } from 'react';
 
 import styles from './styles.module.css';
+import TradeDocTemplate from './TradeDocTemplate';
 
 function HBLCreate({
 	onSave = () => {},
@@ -11,7 +13,7 @@ function HBLCreate({
 	primaryService = {},
 }) {
 	const [show, setShow] = useState(false);
-	// const [mode, setMode] = useState('write');
+	const [mode, setMode] = useState('write');
 	const ref = useRef();
 
 	const movement_details = primaryService?.movement_details
@@ -39,12 +41,38 @@ function HBLCreate({
 	};
 
 	const handleSave = () => {
-		ref?.current?.submit().then(onSave);
+		ref?.current?.submit((data) => {
+			const containerDetails = {
+				container_number    : data.container_number,
+				marks_and_number    : data.marks_and_number,
+				package_description : data.package_description,
+				gross_weight        : data.gross_weight,
+				measurement         : data.measurement,
+			};
+			data.containers.push(containerDetails);
+
+			const excludedKeys = ['container_number',
+				'marks_and_number', 'package_description', 'gross_weight', 'measurement'];
+			const finalData = omit(data, excludedKeys);
+
+			onSave(finalData);
+		})();
 		setShow(false);
 	};
+
+	const headerAction = () => (
+		<header className={styles.header_action}>
+			<p>Trade Document Template</p>
+			<div>
+				<Button onClick={handleSave} themeType="secondary">Save</Button>
+				<Button onClick={() => setShow(false)}>Close</Button>
+			</div>
+		</header>
+
+	);
 	return (
 		<div className={styles.container}>
-			{!completed ? (
+			{!completed ? ( // reverse the condition, it's for development only
 				<div className={styles.container_child}>
 					<div>
 						Click the following button to create a new draft HBL
@@ -52,7 +80,6 @@ function HBLCreate({
 					<Button
 						onClick={() => setShow(true)}
 						size="sm"
-						id="bm_pt_draf_hbl_create_btn"
 					>
 						{hblData ? 'Edit the draft HBL' : 'Create a new draft HBL'}
 					</Button>
@@ -67,7 +94,6 @@ function HBLCreate({
 							setShow(true);
 							// setMode('read');
 						}}
-						id="bm_pt_view_hbl_btn"
 						size="sm"
 					>
 						View HBL
@@ -75,22 +101,20 @@ function HBLCreate({
 				</div>
 			)}
 			<Modal
-				size="md"
+				size="fullscreen"
 				show={show}
 				onClose={() => setShow(false)}
+				className={styles.custom_modal}
+				showCloseIcon={false}
 			>
-				<Modal.Header title="Trade Document Template" />
+				<Modal.Header title={headerAction()} />
 				<Modal.Body>
-					{/* <TradeDocTemplate
-						ref={ref}
-						mode={mode}
+					<TradeDocTemplate
 						documentType="bluetide_hbl"
+						mode={mode}
 						initialValues={templateInitialValues}
-						summary={summary}
-						service={fcl_or_lcl_service}
-						watermark="draft"
-					/> */}
-					Trade Document Coming Soon....
+						ref={ref}
+					/>
 				</Modal.Body>
 			</Modal>
 		</div>

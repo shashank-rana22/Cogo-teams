@@ -1,0 +1,45 @@
+.container {
+    background-color: orchid;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    border: 1px solid black;
+    text-align: center;
+}
+.secondary_header {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+    padding: 4px;
+}
+
+.table_data {
+    font-size: 10px; 
+    font-weight: 400; 
+    text-align: center;
+}
+
+.close_icon {
+    position: absolute;
+    bottom: 0;
+    right: -30px;
+    width: 24px;
+    height: 24px;
+    border: 1px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+
+}
+
+.button_wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 4px;
+}

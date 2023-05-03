@@ -1,0 +1,34 @@
+.main {
+	width: 812px; 
+	background-color: #fff; 
+	padding: 50px; 
+	margin: auto;
+}
+
+.flex_box{
+    display: flex;   
+}
+
+.styled_div  {
+	border: 1px #333 solid;
+	padding: 4px;
+}
+
+.block { 
+	border: 1px #333 solid;
+	padding: 4px;
+}
+
+.styled_text {
+	font-family: monospace, monospace;
+	font-size: 10px;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	line-height: 1;
+}
+
+.button_wrapper{
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 8px;
+}

@@ -82,23 +82,18 @@ function UploadDraftBL({
 	};
 
 	const {
-		listDocsAPI,
-		shipmentListDocsAPI,
-		// createShipmentDocAPI,
-		// createHBL,
+		createHBL,
 		submitMBL,
 	} = useDraftBLHelper({
 		isHBL,
-		task,
+		pendingTask: task,
 		primaryService,
 		onCancel,
 		taskListRefetch,
 		shipmentData,
 	});
 
-	const shipmentDocsLength = shipmentListDocsAPI?.data?.list?.length;
-	const tradeDocsLength = tradeDocList?.list?.length;
-	const showUploadView = shipmentDocsLength > 0 && tradeDocsLength === 0;
+	const showUploadView = uploadedDocs?.list?.length > 0 && tradeDocList?.list?.length === 0;
 
 	const isNextDisabled = (isHBL && !isAllHBLUploaded) || ((!isHBL || isAllHBLUploaded));
 
@@ -110,25 +105,43 @@ function UploadDraftBL({
 		}
 	};
 
+	const handleSaveHBL = (index, values) => {
+		if (values) {
+			setHblData((old) => {
+				const newValues = [...old];
+				newValues[index] = values;
+				return newValues;
+			});
+		}
+	};
+
+	const saveAllBls = async () => {
+		await createHBL({
+			hblData,
+			shipmentData,
+		});
+		setcanUseSwitch(false);
+		setIsAllHblUploaded(tradeDocList?.list?.length >= blCount);
+	};
+
 	const handleClickSwitch = () => {
 		setShowSwitchGenerate(!showSwitchGenerate);
 	};
 
 	useEffect(() => {
-		// setShowSwitchGenerate(!showUploadView);
+		setShowSwitchGenerate(!showUploadView);
 	}, [showUploadView]);
 
 	return (
 		<TaskContainer
-			loading={listDocsAPI?.loading || loading}
+			loading={uploadedDocs?.list?.length?.loading || loading}
 			pendingTask={task}
 			actions={(
 				<>
 					{canUseSwitch && isHBL ? (
 						<Button
-							disabled={listDocsAPI?.loading}
+							disabled={uploadedDocs?.list?.length?.loading}
 							onClick={handleClickSwitch}
-							id="bm_pt_switch_bl_upload"
 							style={{ marginRight: '10px' }}
 						>
 							{showSwitchGenerate ? 'Switch to upload' : 'Switch to create'}
@@ -138,7 +151,6 @@ function UploadDraftBL({
 					<Button
 						disabled={isNextDisabled}
 						onClick={handleClickOnNext}
-						id="bm_pt_bl_upload_submit"
 					>
 						{step === 'hbl' && isHBL ? 'Next: MBL Details' : null}
 						{step === 'mbl' || !isHBL ? 'Submit' : null}
@@ -149,7 +161,7 @@ function UploadDraftBL({
 		>
 			{isHBL && step === 'hbl' ? (
 				<section>
-					{showSwitchGenerate ? (
+					{!showSwitchGenerate ? ( // reverse the condition, it's for development only
 						<>
 							{Array(blCount)
 								.fill(null)
@@ -161,9 +173,9 @@ function UploadDraftBL({
 											{i + 1}
 										</div>
 										<HBLCreate
-											completed={tradeDocList?.list?.[i]}
+											completed={tradeDocList?.list?.list?.[i]}
 											hblData={hblData[i] || tradeDocList?.list?.[i]?.data}
-												// onSave={(v) => handleSaveHBL(i, v)}
+											onSave={(v) => handleSaveHBL(i, v)}
 											shipmentData={shipmentData}
 											primaryService={fclOrLclService}
 										/>
@@ -173,7 +185,7 @@ function UploadDraftBL({
 								<div className={styles.flex_end}>
 									<Button
 										disabled={hblData?.length !== blCount}
-										// onClick={saveAllBls}
+										onClick={saveAllBls}
 									>
 										Save All HBLs
 									</Button>

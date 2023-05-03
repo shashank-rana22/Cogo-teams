@@ -34,7 +34,6 @@ function ExecuteTask({
 
 	const { servicesList, shipment_data, primary_service } = useContext(ShipmentDetailContext);
 
-	console.log('sererferf', servicesList, shipment_data, primary_service);
 	const {
 		steps = [],
 		currentStep = {},

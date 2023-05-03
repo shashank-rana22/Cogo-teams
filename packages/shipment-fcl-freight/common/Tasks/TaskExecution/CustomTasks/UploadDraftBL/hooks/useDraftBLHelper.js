@@ -22,8 +22,14 @@ const useDraftBLHelper = ({
 		method : 'POST',
 	}, { manual: true });
 
+	const [{ loading: createTradeDocLoading }, tradeDocTrigger] = useRequest({
+		method : 'POST',
+		url    : '/create_shipment_trade_document',
+	}, { manual: true });
+
 	const createHBL = async ({ setHblLoading, hblData }) => {
-		setHblLoading(true);
+		console.log('createHBL', hblData);
+		// setHblLoading(true);
 		const promises = hblData.reduce((acc, data) => {
 			if (data) {
 				const body = {
@@ -41,24 +47,28 @@ const useDraftBLHelper = ({
 					uploaded_by_org_id: pendingTask?.organization_id,
 				};
 
-				// eslint-disable-next-line react-hooks/rules-of-hooks
-				const promise = useRequest({
-					method : 'POST',
-					url    : '/create_shipment_trade_document',
-					data   : body,
-				});
+				console.log({ body });
 
-				acc.push(promise);
+				tradeDocTrigger({ data: body });
+
+				// eslint-disable-next-line react-hooks/rules-of-hooks
+				// const promise = useRequest({
+				// 	method : 'POST',
+				// 	url    : '/create_shipment_trade_document',
+				// 	data   : body,
+				// });
+
+				// acc.push(promise);
 			}
 			return acc;
 		}, []);
 
 		try {
 			await Promise.all(promises);
-			setHblLoading(false);
+			// setHblLoading(false);
 			refetch();
 		} catch {
-			setHblLoading(false);
+			// setHblLoading(false);
 		}
 	};
 
