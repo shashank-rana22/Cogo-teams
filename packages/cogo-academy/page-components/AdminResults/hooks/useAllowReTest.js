@@ -28,7 +28,6 @@ function useAllowReTest({ setShowRetestModal = () => {}, test_id, refetchTest = 
 						validity_end           : values?.test_validity?.endDate,
 						is_percentile_editable : values?.is_percentile_editable === 'true',
 						not_appeared_included  : values?.filtered_users.includes('not_appeared'),
-
 					},
 
 				});

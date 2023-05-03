@@ -15,11 +15,6 @@
 	margin-top: 24px;
 }
 
-.vertical_line {
-	height: 120px;
-	border: 1px solid #e0e0e0;
-}
-
 .text_top {
 	font-size: 14px;
 	font-weight: 400;
@@ -61,6 +56,10 @@
 	color: #221f20;
 }
 
+.questions_render {
+	margin-top: 56px;
+}
+
 .general_bottom {
 	display: flex;
 }
@@ -73,12 +72,19 @@
 	display: flex;
 	flex-wrap: wrap;
 	width: 30%;
+	padding-left: 24px;
+	padding-top: 30px;
 }
 
 .left_flex {
 	width: 50%;
+	background-color: #FAFAFA;
+	padding-left: 24px;
+	padding-top: 30px;
 }
 
 .middle_flex {
 	width: 20%;
+	background-color: #FAFAFA;
+	padding-top: 30px;
 }

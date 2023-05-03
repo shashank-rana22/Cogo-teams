@@ -1,6 +1,7 @@
 import { Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
+import useGetTest from '../../hooks/useGetTest';
 import useGetTestPerformace from '../Questions/hooks/useGetTestPerformance';
 
 import BasicDetails from './BasicDetails';
@@ -11,6 +12,8 @@ import styles from './styles.module.css';
 
 function TestResults({ test_id = '' }) {
 	const { loading, stats_data, basic_info_data, toggleState, header_data } = useGetTestPerformace({ test_id });
+
+	const { questions, retest } = useGetTest({ id: test_id });
 
 	if (loading) {
 		return (
@@ -35,11 +38,11 @@ function TestResults({ test_id = '' }) {
 			<Header header_data={header_data} loading={loading} />
 
 			<div className={styles.info_row}>
-				<BasicDetails basic_info_data={basic_info_data} />
+				<BasicDetails basic_info_data={basic_info_data} questions={questions} />
 
 				<PercentagePassed stats_data={stats_data} />
 
-				<DifficultyAndTopicDistribution data={stats_data} toggleState={toggleState} />
+				<DifficultyAndTopicDistribution data={stats_data} toggleState={toggleState} retest={retest} />
 			</div>
 		</div>
 	);

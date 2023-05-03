@@ -8,8 +8,8 @@ import Header from './Header';
 import styles from './styles.module.css';
 import ViewQuestionItem from './ViewQuestionItem';
 
-function ViewQuestions({ question_id = '', test_id = '' }) {
-	const { data = {}, loading } = useListTestCaseStudyQuestions({ test_id, question_id });
+function ViewQuestions({ question_id = '', test_id = '', activeAttempt }) {
+	const { data = {}, loading } = useListTestCaseStudyQuestions({ test_id, question_id, activeAttempt });
 
 	const { list = [] } = data;
 

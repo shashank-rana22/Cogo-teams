@@ -2,7 +2,7 @@ import { IcMTimer, IcMActivePlans } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function BasicDetails({ basic_info_data }) {
+function BasicDetails({ basic_info_data, questions }) {
 	const content_mapping_left = {
 		topics_covered: {
 			label : 'Topics Covered',
@@ -16,7 +16,7 @@ function BasicDetails({ basic_info_data }) {
 
 		},
 		duration: {
-			label : 'Duration',
+			label : 'Time taken',
 			icon  : <IcMTimer />,
 			renderData:
 	<div className={styles.text_bottom}>
@@ -26,6 +26,7 @@ function BasicDetails({ basic_info_data }) {
 
 		},
 	};
+
 	const content_mapping_right = {
 		students_appeared: {
 			label: 'Students Appeared',
@@ -82,14 +83,24 @@ function BasicDetails({ basic_info_data }) {
 			</div>
 			<div className={styles.middle_flex}>
 				<div className={styles.general}>
-					<div className={styles.text}>
-						<div className={styles.text_top}>
-							Required pass %
+					<div>
+						<div className={styles.text}>
+							<div className={styles.text_top}>
+								Required Pass %
+							</div>
+							<div className={styles.text_bottom}>
+								{basic_info_data.required_pass_percent || ' '}
+								{' '}
+								%
+							</div>
 						</div>
-						<div className={styles.text_bottom}>
-							{basic_info_data.required_pass_percent || ' '}
-							{' '}
-							%
+						<div className={styles.questions_render}>
+							<div className={styles.text_top}>
+								Questions
+							</div>
+							<div className={styles.text_bottom}>
+								{ questions || '-' }
+							</div>
 						</div>
 					</div>
 

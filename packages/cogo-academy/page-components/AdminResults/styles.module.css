@@ -21,8 +21,18 @@
 	cursor: pointer;
 }
 
+.tab{
+	margin-bottom: 20px;
+}
+
 .tabs_container {
 	width: 100%;
+	:global {
+		.ui_tabs_container .ui_tab_list_container.ui_ps_themeType_tertiary {
+			box-shadow: unset;
+			background-color: unset;
+		}
+	}
 }
 
 .go_back_text {

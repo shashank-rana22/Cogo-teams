@@ -31,19 +31,22 @@ function AdminResults() {
 
 	const [activeTab, setActiveTab] = useState('students');
 
+	const [activeAttempt, setActiveAttempt] = useState('attempt_1');
+
 	const { test_id = '' } = query || {};
 
 	const {
 		loading,
 		data,
 		getTest,
+		retest,
 	} = useGetTest({ id: test_id });
 
 	const { status, validity_end } = data || {};
 
 	const COMPONENT_PROPS_MAPPING = {
-		students  : { test_id, status },
-		questions : { test_id },
+		students  : { test_id, status, activeAttempt },
+		questions : { test_id, activeAttempt },
 	};
 
 	const handleGoBack = () => {
@@ -58,7 +61,7 @@ function AdminResults() {
 
 					<p className={styles.go_back_text}>Test Result</p>
 				</div>
-
+				{ }
 				{data?.status === 'publishing' && (
 					<Button themeType="accent" onClick={() => getTest({ test_id })} disabled={loading}>
 						Refresh
@@ -68,6 +71,19 @@ function AdminResults() {
 				)}
 			</div>
 
+			{retest ? (
+				<Tabs
+					themeType="primary"
+					className={styles.tab}
+					activeTab={activeAttempt}
+					onChange={setActiveAttempt}
+				>
+					<TabPanel name="attempt_1" title="Attempt 1" />
+
+					<TabPanel name="retest" title="Retest" />
+				</Tabs>
+			) : null}
+
 			{status === 'published' ? <TestResults test_id={test_id} /> : null}
 
 			<InfoBanner
@@ -76,6 +92,7 @@ function AdminResults() {
 				test_id={test_id}
 				validity_end={validity_end}
 				refetchTest={getTest}
+				retest={retest}
 			/>
 
 			<div className={styles.tabs_container}>

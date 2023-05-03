@@ -2,7 +2,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useListQuestions = ({ test_id }) => {
+const useListQuestions = ({ test_id, activeAttempt }) => {
 	const [activeTab, setActiveTab] = useState('stand_alone_questions');
 
 	const [params, setParams] = useState({});
@@ -14,21 +14,25 @@ const useListQuestions = ({ test_id }) => {
 	const QUESTIONS_MAPPING = {
 		stand_alone_questions: {
 			payload: {
-				filters: { q: query, question_type: ['single_correct', 'multi_correct'], test_id },
+				filters                   : { q: query, question_type: ['single_correct', 'multi_correct'], test_id },
+				active_questions_required : activeAttempt === 'attempt_1',
 				...params,
+
 			},
 			title: 'Stand Alone Questions',
 		},
 		case_study_based: {
 			payload: {
-				filters: { question_type: 'case_study', q: query, test_id },
+				filters                   : { question_type: 'case_study', q: query, test_id },
+				active_questions_required : activeAttempt === 'attempt_1',
 				...params,
 			},
 			title: 'Case Study Based',
 		},
 		subjective: {
 			payload: {
-				filters: { question_type: 'subjective', q: query, test_id },
+				filters                   : { question_type: 'subjective', q: query, test_id },
+				active_questions_required : activeAttempt === 'attempt_1',
 				...params,
 			},
 			title: 'Subjective',

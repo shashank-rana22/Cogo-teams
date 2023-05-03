@@ -9,7 +9,7 @@ import RenderContent from './RenderContent';
 import Search from './Search';
 import styles from './styles.module.css';
 
-function QuestionsComponent({ test_id }) {
+function QuestionsComponent({ test_id, activeAttempt }) {
 	const {
 		data = {},
 		loading,
@@ -22,7 +22,7 @@ function QuestionsComponent({ test_id }) {
 		params,
 		setParams,
 		QUESTIONS_MAPPING,
-	} = useListTestQuestions({ test_id });
+	} = useListTestQuestions({ test_id, activeAttempt });
 
 	const { page_limit = 0, total_count = 0, list: questionsList = [] } = data || {};
 
@@ -84,6 +84,7 @@ function QuestionsComponent({ test_id }) {
 						questionsList={questionsList}
 						test_id={test_id}
 						activeTab={activeTab}
+						activeAttempt={activeAttempt}
 					/>
 
 					{total_count > page_limit ? (

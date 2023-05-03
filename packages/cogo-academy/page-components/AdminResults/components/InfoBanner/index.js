@@ -9,7 +9,7 @@ import Retest from './Retest';
 import styles from './styles.module.css';
 import TEXT_MAPPING from './text-mapping';
 
-function InfoBanner({ test_status = '', test_id, validity_end, refetchTest = () => {}, loading }) {
+function InfoBanner({ test_status = '', test_id, validity_end, refetchTest = () => {}, loading, retest }) {
 	const [showRetestModal, setShowRetestModal] = useState(false);
 
 	const {
@@ -44,7 +44,7 @@ function InfoBanner({ test_status = '', test_id, validity_end, refetchTest = () 
 				<span>{subText}</span>
 			</div>
 
-			{test_status === 'published' ? (
+			{test_status === 'published' && retest === false ? (
 				<Button
 					type="button"
 					themeType="accent"

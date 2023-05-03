@@ -4,7 +4,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useStudentWiseTestResult = ({ test_id = '' }) => {
+const useStudentWiseTestResult = ({ test_id = '', activeAttempt = '' }) => {
 	const [{ loading: reAttemptLoading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_test_mapping_responses',
@@ -15,8 +15,11 @@ const useStudentWiseTestResult = ({ test_id = '' }) => {
 	const [activeTab, setActiveTab] = useState('appeared');
 
 	const [params, setParams] = useState({});
+
 	const [filter, setFilter] = useState('');
+
 	const [sortFilter, setSortFilter] = useState({});
+
 	const [searchValue, setSearchValue] = useState('');
 
 	const { debounceQuery, query } = useDebounceQuery();
@@ -28,7 +31,13 @@ const useStudentWiseTestResult = ({ test_id = '' }) => {
 			payload: {
 				sort_by   : sortBy,
 				sort_type : sortType,
-				filters   : { test_id, q: query, result_status: filter, is_appeared: true, status: 'active' },
+				filters   : {
+					test_id,
+					q             : query,
+					result_status : filter,
+					is_appeared   : true,
+					status        : activeAttempt === 'attempt_1' ? 'active' : 'retest',
+				},
 				...params,
 			},
 			title: 'Appeared',
@@ -37,14 +46,25 @@ const useStudentWiseTestResult = ({ test_id = '' }) => {
 			payload: {
 				sort_by   : sortBy,
 				sort_type : sortType,
-				filters   : { test_id, q: query, result_status: filter, state: 'ongoing' },
+				filters   : {
+					test_id,
+					q             : query,
+					result_status : filter,
+					state         : 'ongoing',
+					status        : activeAttempt === 'attempt_1' ? 'active' : 'retest',
+				},
 				...params,
 			},
 			title: 'Ongoing',
 		},
 		not_appeared: {
 			payload: {
-				filters: { test_id, q: query, is_appeared: false, status: 'active' },
+				filters: {
+					test_id,
+					q           : query,
+					is_appeared : false,
+					status      : activeAttempt === 'attempt_1' ? 'active' : 'retest',
+				},
 				...params,
 			},
 			title: 'Not Appeared',
