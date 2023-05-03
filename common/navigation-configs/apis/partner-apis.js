@@ -11502,6 +11502,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'tickets',
 		},
+		{
+			api          : 'check_sent_quotation_duplicacy',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
 	],
 	analytics_dashboard: [
 		{

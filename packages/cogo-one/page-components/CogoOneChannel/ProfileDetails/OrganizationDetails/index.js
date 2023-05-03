@@ -1,9 +1,10 @@
 import { Button, Pill, Placeholder, Loader } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, format } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 import { ACCOUNT_TYPE } from '../../../../constants';
+import useCheckQuotationSentDuplicacy from '../../../../hooks/useCheckQuotationSentDuplicacy';
 import useGetListPromotions from '../../../../hooks/useGetListPromocode';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
 import useGetOrganizationCogopoints from '../../../../hooks/useGetOrganizationCogopoints';
@@ -21,7 +22,7 @@ function OrganizationDetails({
 	hideCpButton = false,
 	getOrgDetails = () => {},
 }) {
-	const { organization_id:messageOrgId = '' } = formattedMessageData || {};
+	const { organization_id:messageOrgId = '', user_id:messageUserId = '' } = formattedMessageData || {};
 	const { organization_id:voiceOrgId = '' } = activeVoiceCard || {};
 
 	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
@@ -36,6 +37,10 @@ function OrganizationDetails({
 	} = useGetOrganizationCogopoints({ organizationId });
 
 	const { promoData = {}, promoLoading } = useGetListPromotions({ organizationId });
+	const { quotationSentData = {} } = useCheckQuotationSentDuplicacy({ userId: messageUserId });
+
+	const { quotation_email_sent_at, quotation_email_sent_by_name } = quotationSentData || {};
+	const quotation_date = quotation_email_sent_at && format(new Date(quotation_email_sent_at), 'dd MMM YYYY');
 	const { list = [] } = promoData || {};
 	const { agent = {}, account_type, kyc_status, serial_id, short_name, city, tags = [] } = organizationData || {};
 	const { display_name } = city || {};
@@ -199,6 +204,23 @@ function OrganizationDetails({
 				</div>
 			) : (
 				<ListPromos />
+			)}
+			{!isEmpty(quotation_email_sent_by_name) && (
+				<div className={styles.quotation_details}>
+					<div className={styles.agent_title}>
+						Quotation sent details
+					</div>
+					<div className={styles.quotation}>
+						<div>
+							Agent:
+							<span>{quotation_email_sent_by_name}</span>
+						</div>
+						<div>
+							Sent at:
+							<span>{quotation_date}</span>
+						</div>
+					</div>
+				</div>
 			)}
 		</div>
 	);
