@@ -38,8 +38,8 @@
 
 .card_body {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
 
 	:global {
 		.service-info-icon-container {
@@ -50,22 +50,21 @@
 	}
 }
 
-.shipment_info{
+.shipment_info {
 	width: 22%;
 }
 
-.location_container{
+.location_container {
 	width: 50%;
 }
 
-.cargo_pill{
+.cargo_pill {
 	width: 30%;
 }
 
 .separator {
 	align-self: stretch;
 	width: 1px;
-	background: var(--color-secondary-greyscale-5);
 	margin-right: 10px;
+	background: var(--color-secondary-greyscale-5);
 }
-

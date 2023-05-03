@@ -23,7 +23,7 @@
 		color: #333;
 	}
 
-	&.pointer{
+	&.pointer {
 		cursor: pointer;
 	}
 }
