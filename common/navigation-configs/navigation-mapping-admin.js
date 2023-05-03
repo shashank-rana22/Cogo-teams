@@ -54,6 +54,7 @@ import {
 	IcCCogoassured, IcMOverview,
 	IcMFaq,
 	IcMRolesIncluded,
+	IcMExportfile,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -1054,28 +1055,6 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		module_type   : 'dashboards',
 	},
-	data_pipeline: {
-		key           : 'data_pipeline',
-		title         : 'Export Import Data Pipeline',
-		href          : '/data-pipeline',
-		as            : '/data-pipeline',
-		type          : 'link',
-		main_apis     : [],
-		icon          : IcMDataPipeline,
-		possible_apis : [],
-		module_type   : 'crm',
-	},
-	lead_data_pipeline: {
-		key           : 'lead_data_pipeline',
-		title         : 'Lead Data Pipeline',
-		href          : '/lead-data-pipeline',
-		as            : '/lead-data-pipeline',
-		type          : 'link',
-		main_apis     : [],
-		possible_apis : [],
-		icon          : IcMDataPipeline,
-		module_type   : 'crm',
-	},
 	lens: {
 		key           : 'lens',
 		title         : 'Lens',
@@ -1585,6 +1564,16 @@ const navigationMappingAdmin = {
 
 				main_apis: [],
 			},
+			{
+				key           : 'cogo_assured-feedbacks',
+				title         : 'Feedbacks',
+				href          : '/cogo-assured/feedbacks',
+				as            : '/cogo-assured/feedbacks',
+				type          : 'link',
+				possible_apis : apis.cogo_assured,
+
+				main_apis: [],
+			},
 		],
 	},
 	tracking_job: {
@@ -1812,15 +1801,6 @@ const navigationMappingAdmin = {
 				possible_apis : apis.crm_feedback_dashboard,
 			},
 		],
-	},
-	athena_dashboard: {
-		key           : 'athena_dashboard',
-		title         : 'Athena Dashboard',
-		module_type   : 'dashboards',
-		icon          : IcMDashboard,
-		href          : '/v2/athena-dashboard',
-		as            : '/v2/athena-dashboard',
-		possible_apis : apis.athena,
 	},
 	kam_monitoring: {
 		key         : 'kam_monitoring',
@@ -2182,6 +2162,43 @@ const navigationMappingAdmin = {
 				href          : '/v2/performance-management/hr-dashboard',
 				as            : '/v2/performance-management/hr-dashboard',
 				possible_apis : apis.hr_dashboard,
+			},
+		],
+	},
+	ihls: {
+		key         : 'ihls',
+		title       : 'IHLS',
+		isSubNavs   : true,
+		module_type : 'dashboards',
+		icon        : IcMExportfile,
+		main_apis   : [],
+		options     : [
+			{
+				key           : 'ihls-athena_dashboard',
+				title         : 'Market Intelligence',
+				icon          : IcMDashboard,
+				href          : '/v2/ihls/athena-dashboard',
+				as            : '/v2/ihls/athena-dashboard',
+				type          : 'link',
+				possible_apis : apis.athena,
+			},
+			{
+				key           : 'ihls-data_pipeline',
+				title         : 'File Processing Dashboard',
+				href          : '/ihls/data-pipeline',
+				as            : '/ihls/data-pipeline',
+				type          : 'link',
+				icon          : IcMDataPipeline,
+				possible_apis : [],
+			},
+			{
+				key           : 'ihls-lead_data_pipeline',
+				title         : 'Lead Enrichment Dashboard',
+				href          : '/ihls/lead-data-pipeline',
+				as            : '/ihls/lead-data-pipeline',
+				type          : 'link',
+				possible_apis : [],
+				icon          : IcMDataPipeline,
 			},
 		],
 	},

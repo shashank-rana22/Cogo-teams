@@ -74,6 +74,22 @@
 	width: 50%;
 }
 
+.chart_item {
+	position: relative;
+	width: max-content;
+}
+
+.question_count {
+	position: absolute;
+	top: 104px;
+	left: 34px;
+	max-width: 80px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #828282;
+	text-align: center;
+}
+
 .bar_charts {
 	display: flex;
 	align-items: center;

@@ -14,6 +14,7 @@ import React, { useState } from 'react';
 // eslint-disable-next-line import/no-cycle
 import { DataInterface } from '..';
 import { RemarksValInterface } from '../../../../../commons/Interfaces/index';
+import isDisabled from '../../../../utils/isDisabled';
 
 import LineItemCard from './lineItemCard/index';
 import styles from './styles.module.css';
@@ -56,6 +57,7 @@ function ShipmentDetailsCard({
 		bankName = '',
 		accountNumber = '',
 		ifscCode = '',
+		beneficiaryName = '',
 	} = sellerBankDetail || {};
 
 	const {
@@ -433,7 +435,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
-																disabled={status !== 'LOCKED'}
+																disabled={!isDisabled(status)}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -443,7 +445,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
-																disabled={status !== 'LOCKED'}
+																disabled={!isDisabled(status)}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}
@@ -462,9 +464,15 @@ function ShipmentDetailsCard({
 
 										<div className={styles.billing_party_container}>
 											<div className={styles.margin_bottom}>
-												Name -
+												Collection Party Name -
 												{' '}
 												<span>{organizationName}</span>
+											</div>
+											<div className={styles.margin_bottom}>
+												{' '}
+												Beneficiary Name-
+												{' '}
+												<span>{beneficiaryName}</span>
 											</div>
 											<div className={styles.margin_bottom}>
 												{' '}
@@ -539,7 +547,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
-																disabled={status !== 'LOCKED'}
+																disabled={!isDisabled(status)}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -549,7 +557,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
-																disabled={status !== 'LOCKED'}
+																disabled={!isDisabled(status)}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}
@@ -637,7 +645,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
-																disabled={status !== 'LOCKED'}
+																disabled={!isDisabled(status)}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -647,7 +655,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
-																disabled={status !== 'LOCKED'}
+																disabled={!isDisabled(status)}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}

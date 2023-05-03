@@ -177,6 +177,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'list_organization_invoicing_parties',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
 		api         : 'get_purchase_bills_exchange_rate_deviation_by_id',
 		access_type : 'private',
 	},
@@ -274,6 +279,16 @@ const apis = [
 	},
 	{
 		api          : 'get_shipment_invoice_preference',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_service',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_buy_quotations',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},

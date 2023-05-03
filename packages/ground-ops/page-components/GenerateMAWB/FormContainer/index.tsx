@@ -164,7 +164,7 @@ function FormContainer({
 					Refer Shipping Instruction
 				</Button>
 			</div>
-			{value === 'upload' ? <UploadMAWB item={item} setGenerate={setGenerate} />
+			{value === 'upload' ? <UploadMAWB item={item} setGenerate={setGenerate} activeCategory={activeCategory} />
 				: (
 					<>
 						{activeKey === 'basic' && (

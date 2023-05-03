@@ -15,6 +15,12 @@ if (typeof window !== 'undefined') {
 	RichTextEditor = require('react-rte').default;
 }
 
+const NAME_ARRAY_MAPPING = {
+	stand_alone : 'question',
+	case_study  : 'case_questions',
+	subjective  : 'subjective',
+};
+
 function QuestionForm({
 	control,
 	register,
@@ -31,6 +37,10 @@ function QuestionForm({
 	listSetQuestions,
 	editorValue,
 	setEditorValue,
+	subjectiveEditorValue,
+	setSubjectiveEditorValue = () => {},
+	uploadable,
+	setUploadable,
 }) {
 	const NAME_CONTROL_MAPPING = useMemo(() => {
 		const hash = {};
@@ -102,7 +112,11 @@ function QuestionForm({
 							questionTypeWatch={questionTypeWatch}
 							editorValue={editorValue}
 							setEditorValue={setEditorValue}
-							name={questionTypeWatch === 'stand_alone' ? 'question' : 'case_questions'}
+							subjectiveEditorValue={subjectiveEditorValue}
+							setSubjectiveEditorValue={setSubjectiveEditorValue}
+							uploadable={uploadable}
+							setUploadable={setUploadable}
+							name={NAME_ARRAY_MAPPING[questionTypeWatch]}
 							errors={questionTypeWatch === 'stand_alone'
 								? errors.question?.[index] : errors?.case_questions?.[index]}
 						/>

@@ -4,11 +4,11 @@ import { IcCFtick, IcCCogoCoin, IcMEdit } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
 import useCreateRule from '../../../hooks/useCreateRule';
-import useGetRules from '../../../hooks/useGetRules';
 
+import Reward from './Reward';
 import styles from './styles.module.css';
 
-function KYCRule() {
+function KYCRule({ kycData, dataLoading }) {
 	const {
 		control,
 		formState: { errors },
@@ -17,23 +17,28 @@ function KYCRule() {
 	} = useForm();
 
 	const [apiState, setApiState] = useState('Created');
-	const { data, loading : getDataLoading, isEdit, setIsEdit } = useGetRules('kyc_verified');
+	const [isEdit, setIsEdit] = useState(false);
 	const { createRule, loading } = useCreateRule(apiState, setApiState, setIsEdit);
 
 	useEffect(() => {
-		const { referral_bonus } = data?.data || {};
+		const { referral_bonus, referee_reward } = kycData || {};
+		if (kycData !== null) setIsEdit(true);
 		if (referral_bonus?.total_cogopoints) {
 			setValue('total_cogopoints', referral_bonus?.total_cogopoints);
+			setValue('promotion_id', referee_reward?.promotion_id);
 			setApiState('Updated');
 		}
-	}, [data, setValue]);
+	}, [kycData, setValue]);
 
 	const handleSave = (values, e) => {
 		e.stopPropagation();
+		const { promotion_id } = values || {};
+		const referee_reward = promotion_id ? { promotion_id } : {};
 		createRule({
 			...values,
 			referral_bonus:
 			{ total_cogopoints: Number(values.total_cogopoints) },
+			referee_reward,
 			event: 'kyc_verified',
 		});
 	};
@@ -73,11 +78,20 @@ function KYCRule() {
 					<div className={styles.text}>
 						Cogopoints on registering for KYC.
 					</div>
+					<Reward
+						isEdit={isEdit}
+						control={control}
+						errors={errors}
+						data={kycData}
+						setValue={setValue}
+						apiState={apiState}
+						setApiState={setApiState}
+					/>
 				</div>
 				{isEdit
 					? (
 						<Button
-							disabled={loading || getDataLoading}
+							disabled={loading || dataLoading}
 							className={styles.submit_btn}
 							onClick={handleEdit}
 						>
@@ -87,7 +101,7 @@ function KYCRule() {
 					)
 					: (
 						<Button
-							disabled={loading || getDataLoading}
+							disabled={loading || dataLoading}
 							className={styles.submit_btn}
 							onClick={handleSubmit(handleSave)}
 						>

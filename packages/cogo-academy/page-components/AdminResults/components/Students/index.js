@@ -11,7 +11,7 @@ import useUpdateTestUserMapping from './hooks/useUpdateTestUserMapping';
 import styles from './styles.module.css';
 import getTableColumns from './TableColumns';
 
-function StudentsComponent({ test_id }) {
+function StudentsComponent({ test_id, status }) {
 	const router = useRouter();
 
 	const [showModal, setShowModal] = useState(false);
@@ -31,6 +31,10 @@ function StudentsComponent({ test_id }) {
 		setSearchValue,
 		params,
 		setParams,
+		reAttemptLoading,
+		handleReAttempt,
+		showReAttemptModal,
+		setShowReAttemptModal,
 		STUDENTS_MAPPING,
 	} = useStudentWiseTestResult({ test_id });
 
@@ -45,12 +49,14 @@ function StudentsComponent({ test_id }) {
 	const columns = getTableColumns({
 		sortFilter,
 		setSortFilter,
+		setShowReAttemptModal,
 		activeTab,
 		showModal,
 		setShowModal,
 		handleDelete,
 		setUserId,
 		router,
+		status,
 	});
 
 	useEffect(() => {
@@ -122,6 +128,44 @@ function StudentsComponent({ test_id }) {
 					</div>
 				</Modal.Body>
 			</Modal>
+
+			{showReAttemptModal ? (
+				<Modal
+					size="sm"
+					show={showReAttemptModal}
+					onClose={() => setShowReAttemptModal(false)}
+					placement="center"
+					showCloseIcon={false}
+				>
+					<Modal.Header title="Are you sure you want this user to re-attempt the test?" />
+
+					<Modal.Body>
+						<div className={styles.btn_container}>
+							<Button
+								type="button"
+								themeType="secondary"
+								loading={reAttemptLoading}
+								onClick={() => setShowReAttemptModal(false)}
+								className={styles.btn_container}
+							>
+								Cancel
+							</Button>
+
+							<Button
+								type="button"
+								style={{ marginLeft: '8px' }}
+								loading={reAttemptLoading}
+								onClick={() => {
+									handleReAttempt();
+									setShowReAttemptModal(false);
+								}}
+							>
+								Allow Re-Attempt
+							</Button>
+						</div>
+					</Modal.Body>
+				</Modal>
+			) : null}
 
 			{!loading && isEmpty(list)
 				? <EmptyState />
