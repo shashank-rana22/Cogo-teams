@@ -58,6 +58,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'saas',
 	},
+	{
+		api          : 'list_address_for_insurance',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
 ];
 
 export default apis;

@@ -128,7 +128,6 @@ const apis = {
 	login_apis,
 	enrichment,
 	...faq,
-	performance_management,
 	cargo_insurance,
 	...performance_management,
 	booking_desk,
