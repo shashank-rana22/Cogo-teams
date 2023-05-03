@@ -54,6 +54,7 @@ import {
 	IcCCogoassured, IcMOverview,
 	IcMFaq,
 	IcMRolesIncluded,
+	IcMActivePlans,
 	IcMExportfile,
 } from '@cogoport/icons-react';
 
@@ -1367,9 +1368,9 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'coe-last_mile',
-				title         : 'Last Mile',
-				href          : '/last-mile',
-				as            : '/last-mile',
+				title         : 'Last Mile Desk',
+				href          : '/v2/last-mile',
+				as            : '/v2/last-mile',
 				type          : 'link',
 				main_apis     : ['list_lastmile_desk_shipments'],
 				possible_apis : [...apis.document_desk, ...apis.cogolens],
@@ -1800,6 +1801,13 @@ const navigationMappingAdmin = {
 				as            : '/v2/allocation/crm-feedback-dashboard',
 				possible_apis : apis.crm_feedback_dashboard,
 			},
+			{
+				key           : 'allocations-account_scoring',
+				title         : 'Account Scoring',
+				href          : '/v2/allocation/account-scoring',
+				as            : '/v2/allocation/account-scoring',
+				possible_apis : apis.account_scoring,
+			},
 		],
 	},
 	kam_monitoring: {
@@ -2201,6 +2209,17 @@ const navigationMappingAdmin = {
 				icon          : IcMDataPipeline,
 			},
 		],
+	},
+	ingestion: {
+		key           : 'ingestion',
+		title         : 'Ingestion',
+		isSubNavs     : false,
+		module_type   : 'dashboards',
+		main_apis     : ['list_ingestion_requests'],
+		href          : '/v2/ingestion',
+		as            : '/v2/ingestion',
+		possible_apis : apis.ingestion,
+		icon          : IcMActivePlans,
 	},
 	referral: {
 		key         : 'referral',

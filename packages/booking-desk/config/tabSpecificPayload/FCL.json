@@ -104,9 +104,6 @@
                     "status": "pending"
                 }
             ]
-        },
-        "other":{
-            "booking_preference":true
         }
     },
     "completed": {
