@@ -1,4 +1,4 @@
-import DividerPreview from './DividerPreview';
+import DragPreview from '../../DragPreview';
 
 function DividerComponent(props) {
 	const { widget } = props;
@@ -8,7 +8,7 @@ function DividerComponent(props) {
 
 	if (isDraggingPreview) {
 		return (
-			<DividerPreview />
+			<DragPreview type="divider" />
 		);
 	}
 

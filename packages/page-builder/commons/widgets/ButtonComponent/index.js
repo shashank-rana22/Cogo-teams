@@ -1,4 +1,5 @@
-import ButtonPreview from './ButtonPreview';
+import DragPreview from '../../DragPreview';
+
 import styles from './styles.module.css';
 
 function ButtonComponent(props) {
@@ -15,7 +16,7 @@ function ButtonComponent(props) {
 
 	if (isDraggingPreview) {
 		return (
-			<ButtonPreview />
+			<DragPreview showBackDrop={false} type="button" />
 		);
 	}
 

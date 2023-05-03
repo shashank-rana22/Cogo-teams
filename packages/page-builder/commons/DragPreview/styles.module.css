@@ -27,3 +27,13 @@
     border-radius: 20%;
     margin-bottom: 4px;
 }
+
+.flex_drag {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.drop_text{
+    margin-top: 4px;
+}

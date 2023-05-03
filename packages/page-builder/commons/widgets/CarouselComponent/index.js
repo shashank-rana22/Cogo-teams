@@ -8,8 +8,8 @@ import Carousel from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import RenderComponent from '../../../page-components/PageBuilder/DNDComponent/DNDBody/RightPanel/DropBox/Components/RenderElement';
+import DragPreview from '../../DragPreview';
 
-import CarouselPreview from './CarouselPreview';
 import styles from './styles.module.css';
 
 const CAROUSEL_SETTINGS = {
@@ -98,7 +98,7 @@ function CarouselComponent({
 
 	if (isDraggingPreview) {
 		return (
-			<CarouselPreview />
+			<DragPreview type="carousel" />
 		);
 	}
 

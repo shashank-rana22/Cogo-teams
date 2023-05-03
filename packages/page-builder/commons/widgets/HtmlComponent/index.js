@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HtmlPreview from './HtmlPreview';
+import DragPreview from '../../DragPreview';
 
 function HtmlComponent({ widget }) {
 	const { component } = widget || {};
@@ -9,7 +9,7 @@ function HtmlComponent({ widget }) {
 
 	if (isDraggingPreview) {
 		return (
-			<HtmlPreview />
+			<DragPreview showBackDrop={false} type="html" />
 		);
 	}
 

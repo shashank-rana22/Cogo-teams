@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-import useUpdateComponentsContent from '../../../helpers/useUpdateComponentsContent';
-
 import 'react-quill/dist/quill.bubble.css';
+import useUpdateComponentsContent from '../../../helpers/useUpdateComponentsContent';
+import DragPreview from '../../DragPreview';
+
 import TextEditorModal from './TextEditorModal';
-import TextPreview from './TextPreview';
 
 function TextComponent(props) {
 	const {
@@ -49,7 +49,7 @@ function TextComponent(props) {
 
 	if (isDraggingPreview) {
 		return (
-			<TextPreview />
+			<DragPreview type="text" />
 		);
 	}
 
