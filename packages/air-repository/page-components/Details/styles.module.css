@@ -1,0 +1,20 @@
+.mode_badge {
+    font-weight: 500;
+
+}
+
+/* .mode_badge::after {
+    display: block;
+	width: 100px;
+	height: 4px;
+	content: "";
+	background: #ed3726;
+} */
+/* 
+.details_list {
+    :global {
+        .right_border {
+            border-right: 1px solid #F8F2E7;
+        }
+    }
+} */

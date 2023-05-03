@@ -1,0 +1,155 @@
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+	padding: 16px;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	min-height: 40px;
+	background-color: #fff;
+	border-bottom: 1px solid #F8F2E7;
+}
+
+@media screen and (max-width: 768px) {
+	.row.is_mobile {
+		flex-flow: row wrap;
+	}
+
+	.col.is_mobile {
+		flex: 0 0 50%;
+		flex-direction: column;
+	}
+}
+
+.clickable:hover {
+	cursor: pointer;
+	opacity: 0.8;
+}
+
+.col {
+	display: flex;
+	flex: var(--span);
+	padding: 4px;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.asc {
+	color: #f68b21;
+	cursor: pointer;
+}
+
+.desc {
+	color: #f68b21;
+	cursor: pointer;
+}
+
+.center {
+	align-items: center;
+	width: 0;
+	margin-left: 8px;
+}
+
+.tablelabel {
+	display: flex;
+	font-size: 12px;
+	font-weight: 600;
+	color: #303b67;
+}
+
+.flex {
+	display: flex;
+	width: var(--span) px;
+}
+
+.pagination_container {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	margin-top: 10px;
+}
+
+.accordian_style {
+	position: relative;
+	top: var(--length);
+	width: 60px;
+	height: 16px;
+	margin-right: auto;
+	margin-bottom: var(--length);
+	margin-left: auto;
+	text-align: center;
+	background: #fff;
+	border: 1px solid #eceff8;
+	border-top: none;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	box-shadow: 0 5px 10px rgb(0 0 0 / 5%);
+}
+
+.info_content {
+	display: flex;
+	justify-content: flex-end;
+	padding: 4px;
+	margin-right: 4%;
+	margin-left: 4%;
+}
+
+.density {
+	display: inline-flex;
+	height: fit-content;
+	padding: 2px 10px;
+	margin: 4px;
+	font-size: 10px;
+	font-weight: 500;
+	color: #4f4f4f;
+	text-transform: uppercase;
+	background-color: #cdf7d4;
+	border-radius: 10px;
+}
+
+.expiring_tag {
+	display: inline-flex;
+	height: fit-content;
+	padding: 2px 8px;
+	margin: 4px;
+	font-size: 10px;
+	font-weight: 500;
+	color: #ffa500;
+	border: 1px solid #ffa500;
+	border-radius: 10px;
+}
+
+.list_container {
+	display: flex;
+	flex-direction: column;
+	padding: 8px 20px;
+	word-wrap: wrap;
+	background: #fff;
+}
+
+.loading_style {
+	margin-top: 40px;
+	margin-bottom: 40px;
+	text-align: center;
+}
+
+.end_message {
+	margin-top: 20px;
+	font-size: 16px;
+	color: #4f4f4f;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.scroll {
+	max-height: 600px;
+	overflow: auto;
+}
+
+.loader {
+	width: 100%;
+	margin-top: 4%;
+	text-align: center;
+}
