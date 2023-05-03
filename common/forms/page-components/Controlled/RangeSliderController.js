@@ -4,7 +4,7 @@ import { Controller } from 'react-hook-form';
 
 function RangeSliderController(props) {
 	const {
-		name, control, value, rules, min, max, ...rest
+		name, control, value, rules, min, max, sliderWidth, ...rest
 	} = props;
 
 	return (
@@ -23,8 +23,8 @@ function RangeSliderController(props) {
 					onChange={onChange}
 					min={min || 0}
 					max={max || 100}
+					sliderWidth={sliderWidth || 200}
 				/>
-
 			)}
 		/>
 	);
