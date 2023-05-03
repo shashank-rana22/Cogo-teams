@@ -1,36 +1,39 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback } from 'react';
+// import { useSelector } from '@cogoport/store';
+import { useEffect, useCallback, useState, useMemo } from 'react';
 
-function useListCostBookingDeskShipments() {
-	const [{ loading, data }, trigger] = useRequest({
-		url    : 'fcl_freight/list_cost_booking_desk_shipments',
+import getPayload from '../helpers/getPayload';
+
+function useListCostBookingDeskShipments({ prefix, stateProps }) {
+	// const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
+	const [data, setData] = useState('');
+	const { activeTab, filters } = stateProps;
+
+	const payload = useMemo(() => getPayload({ filters, activeTab }), [filters, activeTab]);
+
+	const [{ loading }, trigger] = useRequest({
+		url    : `${prefix}/list_cost_booking_desk_shipments`,
 		method : 'GET',
-		params : {
-			filters: {
-				trade_type     : 'export',
-				is_job_closed  : 'false',
-				new_collection : 'true',
-			},
-			page      : 1,
-			sort_by   : 'created_at',
-			sort_type : 'desc',
-		},
+		params : payload,
 	}, { manual: true });
 
-	const listDocuments = useCallback(() => {
-		(async () => {
-			try {
-				await trigger();
-			} catch (err) {
-				Toast(err);
-			}
-		})();
+	const listDocuments = useCallback(async () => {
+		try {
+			const res = await trigger();
+			setData(res?.data);
+		} catch (err) {
+			Toast(err);
+		}
 	}, [trigger]);
 
 	useEffect(() => {
+		// const [, scope, view_type] = (authParams || '').split(':');
+		// if (!scope || !activeTab) return;
+		// const scopeFilters = { scope, view_type, selected_agent_id };
 		listDocuments();
-	}, [listDocuments]);
+		localStorage.setItem('cost_booking_desk_stored_values', JSON.stringify({ filters, activeTab }));
+	}, [listDocuments, activeTab, filters]);
 
 	return {
 		loading,

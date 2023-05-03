@@ -1,3 +1,6 @@
+import { useState } from 'react';
+
+import Filters from '../../common/Filters';
 import List from '../../common/List';
 import Loader from '../../common/Loader';
 import Stepper from '../../common/Stepper';
@@ -11,14 +14,16 @@ import styles from './styles.module.css';
 const { fcl_freight: tabs } = allTabs;
 
 function FclFreight({
-	activeTab,
-	setActiveTab,
+	stateProps,
 }) {
 	const { loading, data } = useListCostBookingDeskShipments({
 		prefix: 'fcl_freight',
+		stateProps,
 	});
 
-	console.log('data', data);
+	const [dateFilters, setDateFilters] = useState(stateProps?.filters?.dateFilters);
+	const { activeTab = 'assigned', setActiveTab } = stateProps?.filters || {};
+
 	return (
 		<>
 			<div className={styles.header}>
@@ -28,7 +33,10 @@ function FclFreight({
 					/>
 				</div>
 			</div>
-			<Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
+
+			<Tabs tabs={tabs} stateProps={stateProps} />
+
+			<Filters stateProps={stateProps} dateFilters={dateFilters} setDateFilters={setDateFilters} />
 
 			<div
 				className={`${styles.list_container} ${loading ? styles.loading : ''}`}
@@ -36,7 +44,7 @@ function FclFreight({
 				{loading ? (
 					<Loader />
 				) : (
-					<List data={data} activeTab={activeTab} />
+					<List data={data} activeTab={activeTab} setActiveTab={setActiveTab} />
 				)}
 			</div>
 		</>

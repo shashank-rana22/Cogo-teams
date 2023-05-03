@@ -1,11 +1,12 @@
 import { TabPanel, Tabs as TabContainer } from '@cogoport/components';
 
-function Tab({ tabs, activeTab, setActiveTab }) {
+function Tab({ tabs, stateProps = {} }) {
+	const { activeTab, setActiveTab } = stateProps;
 	const handleActiveTabChange = (val) => {
 		setActiveTab(val);
 	};
 
-	console.log('activeTab', activeTab);
+	console.log(activeTab, 'active');
 
 	return (
 		<TabContainer

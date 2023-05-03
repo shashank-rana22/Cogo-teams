@@ -1,5 +1,4 @@
 import CONTROLS_CONFIG from '../config/CONTROLS_CONFIG.json';
-// import FILTER_CONFIG from '../config/FILTER_CONFIG.json';
 import TABS_CONFIG from '../config/TABS_CONFIG.json';
 
 export default function getValidatedStoredValues() {
@@ -25,10 +24,9 @@ export default function getValidatedStoredValues() {
 
 	return {
 		filters: {
-			shipment_type,
 			...(trade_type && { trade_type }),
-			...(isCriticalVisible && { isCriticalOn: !!isCriticalOn }),
-			...(q && { q }),
+			// ...(isCriticalVisible && { isCriticalOn: !!isCriticalOn }),
+			// ...(q && { q }),
 			page,
 		},
 		activeTab,
