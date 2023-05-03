@@ -1,0 +1,84 @@
+{
+    "export":[
+        {
+            "label":"Confirm Additional Services",
+            "value":"awaiting_service_provider_confirmation"
+        },
+        {
+            "label":"Upload Documents",
+            "value":"confirmed_by_service_provider",
+            "isCriticalVisible": true
+
+        },
+        {
+            "label":"Gated In",
+            "value":"bl_approval_pending",
+            "isCriticalVisible": true
+        },
+        {
+            "label":"Completed",
+            "value":"completed"
+        },
+        {
+            "label":"Cancelled",
+            "value":"cancelled"
+        }
+    ],
+    "import":[
+        {
+            "label":"Confirm Additional Services",
+            "value":"awaiting_service_provider_confirmation"
+        },
+        {
+            "label":"Upload Documents",
+            "value":"confirmed_by_service_provider",
+            "isCriticalVisible": true
+        },
+        {
+            "label":"Gated In",
+            "value":"do_approval_pending",
+            "isCriticalVisible": true
+        },
+        {
+            "label":"Vessel Departed",
+            "value":"vessel_departed",
+            "isCriticalVisible": true
+        },
+        {
+            "label":"Completed",
+            "value":"completed"
+        },
+        {
+            "label":"Cancelled",
+            "value":"cancelled"
+        }
+    ],
+    "fcl_customs":[
+        {
+            "label":"In Progress",
+            "value":"in_progress"
+        },
+        {
+            "label":"Completed",
+            "value":"completed"
+        },
+        {
+            "label":"Cancelled",
+            "value":"cancelled"
+        }
+    ],
+    "fcl_local":[
+        {
+            "label":"In Progress",
+            "value":"in_progress"
+        },
+        {
+            "label":"Completed",
+            "value":"completed"
+        },
+        {
+            "label":"Cancelled",
+            "value":"cancelled"
+        }
+    ]
+}
