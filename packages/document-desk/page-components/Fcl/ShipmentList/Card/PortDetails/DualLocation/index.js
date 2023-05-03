@@ -27,7 +27,7 @@ const handleLocationDetails = (location) => (
 			interactive
 			content={location?.display_name}
 		>
-			<div className={`${styles.ellipsis_text} core_ui_loaction_name`}>{location?.name}</div>
+			<div className={`${styles.ellipsis_text} core_ui_location_name`}>{location?.name}</div>
 		</Tooltip>
 	</>
 );

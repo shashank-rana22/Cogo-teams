@@ -22,13 +22,13 @@ function ShipmentList({ loading, data = {} }) {
 			{!loading && isEmpty(list)
 				? <EmptyState />
 				: (
-					<div>
+					<>
 						<Pagination />
 
 						{(list || [])?.map((item) => <Card item={item} />)}
 
 						<Pagination />
-					</div>
+					</>
 				)}
 		</div>
 	);

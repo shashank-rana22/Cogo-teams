@@ -8,7 +8,6 @@
             "label":"Upload Documents",
             "value":"confirmed_by_service_provider",
             "isCriticalVisible": true
-
         },
         {
             "label":"Gated In",

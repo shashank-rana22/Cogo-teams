@@ -6,9 +6,6 @@ import { useState, useContext } from 'react';
 import tabsConfig from '../../../configs/TAB_CONFIG.json';
 import DocumentDeskContext from '../../../context/DocumentDeskContext';
 
-// import { CRITICAL_TABS } from '../../../configs/FCL_TABS';
-// import LastMileDeskContext from '../../../context/LastMileDeskContext';
-
 import FilterBy from './FilterBy';
 import styles from './styles.module.css';
 
