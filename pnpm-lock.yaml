@@ -166,7 +166,7 @@ importers:
       react: 18.2.0
     dependencies:
       '@cogoport/authentication': link:../../packages/authentication
-      '@cogoport/components': 1.0.385_aydyy3gkshtlrnyh7fafj36que
+      '@cogoport/components': 1.0.412_aydyy3gkshtlrnyh7fafj36que
       '@cogoport/forms': link:../forms
       '@cogoport/globalization': link:../globalization
       '@cogoport/icons-react': 1.0.60_react@18.2.0
@@ -184,7 +184,7 @@ importers:
 
   common/forms:
     specifiers:
-      '@cogoport/components': ^1.0.411
+      '@cogoport/components': ^1.0.412
       '@cogoport/constants': workspace:0.1.0
       '@cogoport/globalization': workspace:*
       '@cogoport/icons-react': ^1.0.58

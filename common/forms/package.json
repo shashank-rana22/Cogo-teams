@@ -6,7 +6,7 @@
     "main": "index.js",
     "module": "index.js",
     "dependencies": {
-        "@cogoport/components": "^1.0.411",
+        "@cogoport/components": "^1.0.412",
         "@cogoport/globalization": "workspace:*",
         "@cogoport/constants": "workspace:0.1.0",
         "@cogoport/icons-react": "^1.0.58",
