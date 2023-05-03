@@ -9,8 +9,8 @@ function HtmlPreview() {
 			<img
 				alt=""
 				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/svgviewer-png-output%20(9).png"
-				width="48px"
-				height="60px"
+				width="42px"
+				height="54px"
 			/>
 			<div>HTML</div>
 		</div>

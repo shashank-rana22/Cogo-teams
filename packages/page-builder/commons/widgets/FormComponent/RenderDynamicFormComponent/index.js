@@ -31,7 +31,11 @@ function RenderDynamicFormComponent({
 
 	return (
 		<div className={styles.form_drop}>
-			<div role="presentation" onClick={() => { if (modeType === 'edit') { setShow(true); } }}>
+			<div
+				className={styles.flex_form}
+				role="presentation"
+				onClick={() => { if (modeType === 'edit') { setShow(true); } }}
+			>
 				<img
 					alt=""
 					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/svgviewer-png-output (10).png"

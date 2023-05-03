@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 
 const CAROUSEL_SETTINGS = {
 	dots           : true,
-	infinite       : false,
+	infinite       : true,
 	speed          : 1000,
 	autoplaySpeed  : 3000,
 	slidesToShow   : 1,

@@ -46,22 +46,21 @@ function ImageComponent(props) {
 					<img width="100%" src={content} alt="upload-img" />
 				</div>
 			) : (
-				<div style={{ display: 'flex', justifyContent: 'center' }}>
-					<div
-						onClick={() => setShowUploadModal(true)}
-						role="presentation"
-						className={styles.image_drop}
-						style={{ cursor: 'pointer' }}
-					>
-						<img
-							alt=""
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/svgviewer-png-output%20(4).png"
-							width="48px"
-							height="48px"
-						/>
-						<div>Drop your image here or browse</div>
-					</div>
+
+				<div
+					onClick={() => setShowUploadModal(true)}
+					role="presentation"
+					className={styles.image_drop}
+				>
+					<img
+						alt=""
+						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/svgviewer-png-output%20(4).png"
+						width="48px"
+						height="48px"
+					/>
+					<div>Drop your image here or browse</div>
 				</div>
+
 			)}
 
 			{showUploadModal && (
