@@ -8,9 +8,7 @@ function Filters({ formProps }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.title}>
-				Filters
-			</div>
+			<div className={styles.title}>Filters</div>
 
 			<form className={styles.form}>
 				{controls.map((controlItem) => {
