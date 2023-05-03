@@ -61,7 +61,7 @@ function VideoComponent(props) {
 			) : (
 				<div style={{ display: 'flex', justifyContent: 'center' }}>
 					<div
-						onClick={() => setShowUploadModal(true)}
+						onClick={() => { if (modeType === 'edit') { setShowUploadModal(true); } }}
 						role="presentation"
 						className={styles.video_drop}
 					>

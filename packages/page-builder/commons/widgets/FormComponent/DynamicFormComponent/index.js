@@ -12,6 +12,7 @@ function DynamicFormComponent({
 	dynamicHandleSubmit,
 	onDynamicFormSubmit,
 	handleEditForm = () => {},
+	modeType,
 }) {
 	const { controls, buttonText } = formData || {};
 
@@ -28,14 +29,17 @@ function DynamicFormComponent({
 					{buttonText || 'Submit'}
 				</Button>
 			</div>
-			<div className={styles.show_wrapper}>
-				<IcMFacebook
-					height="24px"
-					width="24px"
-					cursor="pointer"
-					onClick={() => handleEditForm(formData)}
-				/>
-			</div>
+
+			{modeType === 'edit' && (
+				<div className={styles.show_wrapper}>
+					<IcMFacebook
+						height="24px"
+						width="24px"
+						cursor="pointer"
+						onClick={() => handleEditForm(formData)}
+					/>
+				</div>
+			)}
 		</div>
 	);
 }

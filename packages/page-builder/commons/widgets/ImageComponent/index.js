@@ -48,7 +48,7 @@ function ImageComponent(props) {
 			) : (
 
 				<div
-					onClick={() => setShowUploadModal(true)}
+					onClick={() => { if (modeType === 'edit') { setShowUploadModal(true); } }}
 					role="presentation"
 					className={styles.image_drop}
 				>
