@@ -26,6 +26,7 @@
     "@cogoport/performance-management": "workspace:1.0.0",
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/icons-react": "^1.0.58",
+    "@cogoport/ingestion": "workspace:0.1.0",
     "@cogoport/locations": "workspace:0.1.0",
     "@cogoport/my-incident": "workspace:0.1.0",
     "@cogoport/my-profile": "workspace:0.1.0",

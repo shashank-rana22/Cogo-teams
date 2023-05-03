@@ -9,6 +9,7 @@ import contracts from './config/contracts';
 import documentDesk from './config/document-desk';
 import enrichment from './config/enrichment';
 import groundOps from './config/ground-ops';
+import ingestion from './config/ingestion';
 import inventory_management from './config/inventory_management';
 import kamMonitoring from './config/kam-monitoring';
 import lastMileDesk from './config/last-mile-desk';
@@ -45,6 +46,7 @@ const routeConfig = {
 	...welcome,
 	...athenaDashboard,
 	...documentDesk,
+	...ingestion,
 };
 
 export default routeConfig;

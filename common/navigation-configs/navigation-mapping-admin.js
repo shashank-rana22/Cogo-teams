@@ -53,6 +53,7 @@ import {
 	IcMCreditRequest,
 	IcCCogoassured, IcMOverview,
 	IcMFaq,
+	IcMActivePlans,
 	IcMExportfile,
 } from '@cogoport/icons-react';
 
@@ -1799,6 +1800,13 @@ const navigationMappingAdmin = {
 				as            : '/v2/allocation/crm-feedback-dashboard',
 				possible_apis : apis.crm_feedback_dashboard,
 			},
+			{
+				key           : 'allocations-account_scoring',
+				title         : 'Account Scoring',
+				href          : '/v2/allocation/account-scoring',
+				as            : '/v2/allocation/account-scoring',
+				possible_apis : apis.account_scoring,
+			},
 		],
 	},
 	kam_monitoring: {
@@ -2200,6 +2208,17 @@ const navigationMappingAdmin = {
 				icon          : IcMDataPipeline,
 			},
 		],
+	},
+	ingestion: {
+		key           : 'ingestion',
+		title         : 'Ingestion',
+		isSubNavs     : false,
+		module_type   : 'dashboards',
+		main_apis     : ['list_ingestion_requests'],
+		href          : '/v2/ingestion',
+		as            : '/v2/ingestion',
+		possible_apis : apis.ingestion,
+		icon          : IcMActivePlans,
 	},
 };
 
