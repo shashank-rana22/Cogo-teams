@@ -17,6 +17,13 @@ justify-content: space-between;
 	color: #221f20;
 }
 
+.label {
+	height: 16px;
+	margin-bottom: 6px;
+	font-weight: 400;
+	font-size: 12px;
+}
+
 .item {
 	display: flex;
 	flex-direction: column;

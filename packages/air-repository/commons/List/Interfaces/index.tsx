@@ -19,7 +19,8 @@ export interface FieldType {
 }
 
 export interface ListDataType {
-	data?: NestedObj;
+	list?: NestedObj;
+	total_count?: number;
 }
 
 export interface DataType {

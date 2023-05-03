@@ -45,10 +45,8 @@ function Layout({
 									<div className={styles.heading}>
 										{heading}
 									</div>
-									<h4 style={{
-										height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
-									}}
-									>
+
+									<h4 className={styles.label}>
 										{label}
 									</h4>
 
@@ -62,16 +60,13 @@ function Layout({
 								</div>
 							);
 						}
-						return show
-							? (
-								<Item
-									control={control}
-									error={errors[fieldsItem.name]}
-									{...fieldsItem}
-								/>
-
-							)
-							: null;
+						return show ? (
+							<Item
+								control={control}
+								error={errors[fieldsItem.name]}
+								{...fieldsItem}
+							/>
+						) : null;
 					})}
 				</div>
 			))}

@@ -8,9 +8,7 @@ export interface Props {
 	fields: FieldType[];
 }
 
-function Header({
-	fields,
-}:Props) {
+function Header({ fields }:Props) {
 	return (
 		<header className={styles.header}>
 			<div className={styles.header_row}>

@@ -1,6 +1,5 @@
 import { Pagination } from '@cogoport/components';
-import { IcMArrowDown } from '@cogoport/icons-react';
-import React, { useState, ReactFragment } from 'react';
+import React from 'react';
 
 import EmptyState from './EmptyState';
 import { FunctionObjects, FieldType, ListDataType } from './Interfaces';
@@ -15,10 +14,6 @@ interface Props {
 	page?: number;
 	setPage?: Function;
 	functions?: FunctionObjects;
-	activeTab?: string;
-	Child?: ReactFragment;
-	setViewDoc?: Function;
-	setItem?: Function;
 }
 
 function List({
@@ -28,19 +23,8 @@ function List({
 	page,
 	setPage,
 	functions,
-	activeTab = '',
-	Child = () => {},
-	setViewDoc = () => {},
-	setItem = () => {},
 } :Props) {
-	const { list = {}, total_count } = listData;
-
-	const [isOpen, setIsOpen] = useState(null);
-
-	const handleProgramDetail = (itm) => {
-		setIsOpen(isOpen === null ? itm.id : null);
-		setIsOpen(itm.id);
-	};
+	const { list = {}, total_count:totalCount } = listData;
 
 	const render = () => {
 		type TypeObject = string | number | Date | null | React.FC ;
@@ -54,33 +38,7 @@ function List({
 						fields={fields}
 						functions={functions}
 						loading={loading}
-						isOpen={isOpen}
-						Child={Child}
-						setViewDoc={setViewDoc}
-						setItem={setItem}
 					/>
-					{singleitem.blCategory === 'hawb' && ['approval_pending', 'approved_awb'].includes(activeTab) && (
-						<div
-							style={{ '--length': isOpen ? 0 : '-16px' } as React.CSSProperties}
-							className={styles.accordian_style}
-						>
-							{isOpen === singleitem.id ? (
-								<IcMArrowDown
-									style={{ transform: 'rotate(180deg)', cursor: 'pointer', width: '100%' }}
-									onClick={() => {
-										setIsOpen(null);
-									}}
-								/>
-							) : (
-								<IcMArrowDown
-									style={{ cursor: 'pointer', width: '100%' }}
-									onClick={() => {
-										handleProgramDetail(singleitem);
-									}}
-								/>
-							)}
-						</div>
-					)}
 				</div>
 			));
 		}
@@ -92,11 +50,11 @@ function List({
 			<ListHeader fields={fields} />
 			<div className={styles.scroll}>
 				{render()}
-				{!loading && list.length > 0 ? (
+				{!loading && Number(list.length) > 0 ? (
 					<div className={styles.pagination}>
 						<Pagination
 							currentPage={page}
-							totalItems={Number(total_count)}
+							totalItems={Number(totalCount)}
 							pageSize={10}
 							type="table"
 							onPageChange={(val) => { setPage(val); }}

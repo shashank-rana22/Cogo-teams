@@ -13,20 +13,22 @@ function AirRepository() {
 	const [showModal, setShowModal] = useState(false);
 	const [item, setItem] = useState(null);
 	const [edit, setEdit] = useState(false);
-	const { data, listRepository, loading } = useListRepository();
+	const {
+		data, listRepository, loading,	searchValue, setSearchValue,
+	} = useListRepository();
 	return (
 		<div className={styles.container}>
 			<Header />
 			<div className={styles.middle_container}>
 				<Input
-					// value={searchValue}
+					value={searchValue}
 					suffix={<IcMSearchlight fill="#CACACA" className="search_icon" />}
 					className={styles.input_search}
 					placeholder="Search By Airline/POC "
 					type="text"
-					// onChange={(val) => {
-					// 	setSearchValue(val);
-					// }}
+					onChange={(val) => {
+						setSearchValue(val);
+					}}
 				/>
 				<Button size="md" themeType="accent" onClick={() => setShowModal(true)}>+ Create new Repository</Button>
 			</div>

@@ -1,5 +1,5 @@
 import { Placeholder } from '@cogoport/components';
-import React, { ReactNode, ReactFragment, useEffect, useCallback } from 'react';
+import React, { ReactNode } from 'react';
 
 import { FieldType, FunctionObjects, NestedObj } from '../Interfaces/index';
 import styles from '../styles.module.css';
@@ -12,10 +12,6 @@ export interface Props {
 	functions?: FunctionObjects;
 	loading?: boolean;
 	isMobile?: boolean;
-	isOpen?: string;
-	Child?: ReactFragment;
-	setViewDoc?: Function;
-	setItem?: Function;
 }
 
 function CardItem({
@@ -24,19 +20,10 @@ function CardItem({
 	functions = {},
 	loading = false,
 	isMobile = false,
-	isOpen = '',
-	Child = () => {},
-	setViewDoc = () => {},
-	setItem = () => {},
 }:Props) {
 	return (
 		<div>
-			<section
-				className={styles.list_container}
-				style={{
-					'--open-margin': isOpen ? 0 : '16px',
-				} as React.CSSProperties}
-			>
+			<section className={styles.list_container}>
 				<div
 					className={`${styles.row} ${
 						isMobile ? styles.is_mobile : ''
@@ -77,13 +64,6 @@ function CardItem({
 					})}
 				</div>
 			</section>
-			{isOpen === singleitem.id && (
-				<Child
-					data={singleitem}
-					setViewDoc={setViewDoc}
-					setItem={setItem}
-				/>
-			)}
 		</div>
 	);
 }

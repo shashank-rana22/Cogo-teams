@@ -32,35 +32,20 @@ function Item(props) {
 
 	return (
 		<div className={styles.element} style={{ width: `${flex}%` }}>
-			<div
-				className="heading"
-				style={{
-					height: '16px', marginBottom: '6px', fontWeight: '600', fontSize: '13px',
-				}}
-			>
+			<div className={styles.item_heading}>
 				{heading}
 			</div>
-			<h4
-				className={styles.item_label}
-			>
+			<h4 className={styles.item_label}>
 				{label}
 			</h4>
 			<Element
 				{...props}
 				control={control}
 			/>
-			<p style={{
-				fontStyle     : 'normal',
-				fontSize      : '12px',
-				lineHeight    : '16px',
-				letterSpacing : '0.02em',
-				paddingLeft   : '4px',
-				margin        : '0px',
-				color         : '#cb6464',
-			}}
+			<p
+				className={styles.error}
 			>
 				{errorOriginal}
-
 			</p>
 		</div>
 	);

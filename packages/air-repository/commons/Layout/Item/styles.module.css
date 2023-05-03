@@ -90,10 +90,26 @@
 	}
 }
 
+.item_heading {
+	height: 16px;
+	margin-bottom: 6px;
+	font-weight: 600;
+font-size: 13px;
+}
+
 .item_label {
 	height: 16px;
 	margin-bottom: 6px;
 	font-weight: 500;
 font-size: 12px;
 line-height: 150%;
+}
+
+.error{
+					font-size      : 12px;
+					line-height    : 16px;
+					letter-spacing : 0.02em;
+					padding-left   : 4px;
+					margin        : 0;
+					color         : #cb6464;
 }
