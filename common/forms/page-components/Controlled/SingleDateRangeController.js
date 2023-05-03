@@ -1,27 +1,29 @@
-import { DateRangepicker } from '@cogoport/components';
+import { SingleDateRange } from '@cogoport/components';
 import React from 'react';
 import { Controller } from 'react-hook-form';
 
-function DateRangePickerController(props) {
+function SingleDateRangeController(props) {
 	const {
-		name, control, rules, ...rest
+		name, control, rules, disabled, ...rest
 	} = props;
 
 	return (
 		<Controller
-			key={rest.id}
+			key={name}
 			control={control}
 			name={name}
 			rules={rules}
 			render={({ field: { onChange, value } }) => (
-				<DateRangepicker
+				<SingleDateRange
 					{...rest}
-					key={rest.id}
+					key={name}
+					id={name}
 					onChange={onChange}
 					value={value}
+					disable={disabled}
 				/>
 			)}
 		/>
 	);
 }
-export default DateRangePickerController;
+export default SingleDateRangeController;
