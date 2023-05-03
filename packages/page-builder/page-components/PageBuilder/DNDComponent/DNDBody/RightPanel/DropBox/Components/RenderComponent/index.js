@@ -1,5 +1,4 @@
 /* eslint-disable import/no-cycle */
-// import ComponentsDropPreview from '../../../../../../../../commons/ComponentsDropPreview';
 import ColumnComponents from '../ColumnComponents';
 import RenderElement from '../RenderElement';
 
@@ -20,13 +19,8 @@ function RenderComponent({
 	elementId,
 	index,
 	type,
-	// isDraggingPreview,
 	modeType,
 }) {
-	// if (isDraggingPreview) {
-	// 	return <ComponentsDropPreview type={type} />;
-	// }
-
 	return (
 		<div>
 			{['container', 'card', 'formSample'].includes(type)
