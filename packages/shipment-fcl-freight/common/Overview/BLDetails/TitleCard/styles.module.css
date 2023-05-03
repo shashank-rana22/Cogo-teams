@@ -2,7 +2,7 @@
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-	background: #f6f5fe;
+	background: #f3fafa;
 	border-radius: 4px;
 }
 
@@ -26,18 +26,14 @@
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 16px;
-	color: #cb6464;
+	color: #ee3425;
 }
 
 .bl_number {
 	font-size: 14px;
-	font-weight: 700;
+	font-weight: 400;
 	line-height: 16px;
 	color: #4f4f4f;
-
-	& > span {
-		color: var(--color-primary-error-red-2);
-	}
 }
 
 .title_container {
@@ -50,7 +46,7 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	padding: 20px 28px;
+	padding: 10px 25px;
 	border-radius: 4px 4px 0 0;
 }
 
