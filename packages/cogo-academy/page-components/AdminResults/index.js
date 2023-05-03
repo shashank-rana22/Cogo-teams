@@ -39,16 +39,16 @@ function AdminResults() {
 		getTest,
 	} = useGetTest({ id: test_id });
 
+	const { status, validity_end } = data || {};
+
 	const COMPONENT_PROPS_MAPPING = {
-		students  : { test_id },
+		students  : { test_id, status },
 		questions : { test_id },
 	};
 
 	const handleGoBack = () => {
 		push('/learning?activeTab=test_module', '/learning?activeTab=test_module');
 	};
-
-	const { status, validity_end } = data || {};
 
 	return (
 		<div className={styles.container}>
