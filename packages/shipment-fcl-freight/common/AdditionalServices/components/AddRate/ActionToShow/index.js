@@ -73,8 +73,8 @@ function ActionsToShow({
 		);
 	}
 
-	if (
-		status?.status === 'cancelled_by_supplier' && activeStakeholder === 'booking_desk'
+	if (status?.status === 'cancelled_by_supplier'
+		&& ['booking_desk_manager', 'booking_desk'].includes(activeStakeholder)
 	) {
 		return (
 			<div className={styles.button_container}>
