@@ -1367,9 +1367,9 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'coe-last_mile',
-				title         : 'Last Mile',
-				href          : '/last-mile',
-				as            : '/last-mile',
+				title         : 'Last Mile Desk',
+				href          : '/v2/last-mile',
+				as            : '/v2/last-mile',
 				type          : 'link',
 				main_apis     : ['list_lastmile_desk_shipments'],
 				possible_apis : [...apis.document_desk, ...apis.cogolens],
@@ -1559,6 +1559,16 @@ const navigationMappingAdmin = {
 				title         : 'Rate Sheets',
 				href          : '/cogo-assured/rate_sheets',
 				as            : '/cogo-assured/rate_sheets',
+				type          : 'link',
+				possible_apis : apis.cogo_assured,
+
+				main_apis: [],
+			},
+			{
+				key           : 'cogo_assured-feedbacks',
+				title         : 'Feedbacks',
+				href          : '/cogo-assured/feedbacks',
+				as            : '/cogo-assured/feedbacks',
 				type          : 'link',
 				possible_apis : apis.cogo_assured,
 
@@ -2183,7 +2193,7 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'ihls-lead_data_pipeline',
-				title         : 'Lead Dashboard',
+				title         : 'Lead Enrichment Dashboard',
 				href          : '/ihls/lead-data-pipeline',
 				as            : '/ihls/lead-data-pipeline',
 				type          : 'link',

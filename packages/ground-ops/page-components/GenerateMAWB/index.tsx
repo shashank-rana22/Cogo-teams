@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Modal, Loader } from '@cogoport/components';
+import { Loader } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
+import Modal from '../Air/commons/Modal';
 import useGetHawbList from '../Air/hooks/useGetHawbList';
 
 import FormContainer from './FormContainer';
@@ -112,13 +113,13 @@ function GenerateMAWB({
 	const { data:hawbDataList = {}, loading:hawbListLoading, getHawbList } = useGetHawbList(item.shipmentId);
 
 	useEffect(() => {
-		if (edit && activeCategory === 'hawb') {
+		if (activeCategory === 'hawb') {
 			getHawbList();
 		}
 	}, [activeCategory]);
 
 	useEffect(() => {
-		if (edit && activeCategory === 'hawb') {
+		if (activeCategory === 'hawb') {
 			const dataList = [];
 			(hawbDataList?.data?.shipmentPendingTasks || []).forEach((hawbItem) => {
 				const pushData = {
@@ -148,6 +149,7 @@ function GenerateMAWB({
 		}
 		if (hawbSuccess) {
 			setTaskItem({
+				...taskItem,
 				...hawbData.data,
 				...hawbData.data?.data,
 				originAirportId   : item.originAirportId,
@@ -166,9 +168,9 @@ function GenerateMAWB({
 		});
 		setValue('executedDate', taskItem.executedDate ? new Date(taskItem.executedDate) : new Date());
 		setValue('iataCode', iataCodeMapping[taskItem?.originAirportId] || '');
-		setValue('city', 'NEW DELHI');
-		setValue('place', 'NEW DELHI');
-		setValue('class', 'q');
+		setValue('city', taskItem?.city || 'NEW DELHI');
+		setValue('place', taskItem?.place || 'NEW DELHI');
+		setValue('class', taskItem?.class || 'q');
 		setValue('currency', 'INR');
 		setValue('commodity', taskItem.commodity
 			|| `${'SAID TO CONTAIN\n'}${taskItem.commodity || ''}`);
@@ -177,7 +179,7 @@ function GenerateMAWB({
 			? carrierOtherChargesCode
 			: taskItem.carrierOtherCharges || carrierOtherChargesCode);
 		setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
-		setValue('shipperSignature', taskItem.customer_name || taskItem.shipperSignature);
+		setValue('shipperSignature', taskItem?.shipperSignature || taskItem.customer_name);
 		setValue('amountOfInsurance', 'NIL');
 		setValue('accountingInformation', 'FREIGHT PREPAID');
 	}, [hawbSuccess, activeHawb, category, activeCategory]);
@@ -199,7 +201,7 @@ function GenerateMAWB({
 	}, [formValues.chargeableWeight, formValues.ratePerKg, formValues.class]);
 
 	useEffect(() => {
-		if (operatorList.length > 0) {
+		if (operatorList.length > 0 && !edit) {
 			setTaskItem((prev) => ({
 				...prev,
 				airline         : operatorList[0]?.business_name,
@@ -211,7 +213,7 @@ function GenerateMAWB({
 	}, [operatorList]);
 
 	useEffect(() => {
-		if (organizationList.length > 0) {
+		if (organizationList.length > 0 && !edit) {
 			setTaskItem((prev) => ({
 				...prev,
 				customer_name: organizationList[0]?.business_name,
@@ -222,7 +224,7 @@ function GenerateMAWB({
 	}, [organizationList]);
 
 	useEffect(() => {
-		if (airportList.length > 0) {
+		if (airportList.length > 0 && !edit) {
 			(airportList || []).forEach((airItem) => {
 				if (airItem.id === item.originAirportId) {
 					setTaskItem((prev) => ({
@@ -256,9 +258,9 @@ function GenerateMAWB({
 			packingList({ item });
 			setValue('executedDate', edit && taskItem.executedDate ? new Date(taskItem.executedDate) : new Date());
 			setValue('iataCode', edit ? taskItem.iataCode : iataCodeMapping[taskItem?.originAirportId] || '');
-			setValue('city', 'NEW DELHI');
-			setValue('place', 'NEW DELHI');
-			setValue('class', 'q');
+			setValue('city', taskItem?.city || 'NEW DELHI');
+			setValue('place', taskItem?.place || 'NEW DELHI');
+			setValue('class', taskItem?.class || 'q');
 			setValue('currency', 'INR');
 			setValue('commodity', edit ? `${taskItem.commodity || ''}`
 				: `${'SAID TO CONTAIN\n'}${taskItem.commodity || ''}`);
@@ -267,7 +269,7 @@ function GenerateMAWB({
 			setValue('carrierOtherCharges', edit ? taskItem.carrierOtherCharges
 				: carrierOtherChargesCode);
 			setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
-			setValue('shipperSignature', taskItem.customer_name);
+			setValue('shipperSignature', taskItem?.shipperSignature || taskItem.customer_name);
 			setValue('amountOfInsurance', 'NIL');
 			setValue('accountingInformation', 'FREIGHT PREPAID');
 		}
@@ -339,33 +341,28 @@ function GenerateMAWB({
 			<div className={styles.file_container}>
 				{(back || viewDoc) && (
 					<Modal
-						show={back || viewDoc}
 						onClose={() => { setBack(false); setViewDoc(false); }}
-						size="lg"
-						className={styles.modal_container}
 						style={{ width: '900px', height: '92vh' }}
 					>
-						<Modal.Body style={{ minHeight: '90vh' }}>
-							<GenerateMawbDoc
-								taskItem={taskItem}
-								formData={formData}
-								setBack={setBack}
-								back={back}
-								edit={edit}
-								setEdit={setEdit}
-								viewDoc={viewDoc}
-								chargeableWeight={chargeableWeight}
-								setGenerate={setGenerate}
-								activeCategory={activeCategory}
-								hawbDetails={hawbDetails}
-								setHawbDetails={setHawbDetails}
-								setActiveHawb={setActiveHawb}
-								setActiveKey={setActiveKey}
-								activeHawb={activeHawb}
-								pendingTaskId={pendingTaskId}
-							/>
-						</Modal.Body>
-
+						<GenerateMawbDoc
+							taskItem={taskItem}
+							formData={formData}
+							setBack={setBack}
+							back={back}
+							edit={edit}
+							setEdit={setEdit}
+							viewDoc={viewDoc}
+							chargeableWeight={chargeableWeight}
+							setGenerate={setGenerate}
+							activeCategory={activeCategory}
+							hawbDetails={hawbDetails}
+							setHawbDetails={setHawbDetails}
+							setActiveHawb={setActiveHawb}
+							setActiveKey={setActiveKey}
+							activeHawb={activeHawb}
+							pendingTaskId={pendingTaskId}
+							category={category}
+						/>
 					</Modal>
 				)}
 			</div>

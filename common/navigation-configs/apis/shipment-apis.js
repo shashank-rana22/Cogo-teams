@@ -1310,6 +1310,11 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
+		api          : 'get_buyers',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
 		api          : 'list_documents',
 		access_type  : 'private',
 		service_name : 'bookings',
@@ -1370,6 +1375,11 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
+		api          : 'get_possible_documents',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
 		api          : 'update_shipment_rail_domestic_freight_invoice_type',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -1415,6 +1425,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 		feature      : 'revenue_desk',
+	},
+	{
+		api          : 'list_organization_assets',
+		access_type  : 'private',
+		service_name : 'organization',
 	},
 ];
 
