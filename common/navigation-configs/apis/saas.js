@@ -1465,11 +1465,6 @@ const saas = {
 			service_name : 'exchange_rate',
 		},
 		{
-			api          : 'list_organization_billing_addresses',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
 			api         : 'get_saas_bill_status',
 			access_type : 'private',
 			module      : 'insurance',
@@ -1575,12 +1570,25 @@ const saas = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'list_organization_addresses',
-			access_type  : 'private',
-			service_name : 'organization',
+			api         : 'list_address_for_insurance',
+			access_type : 'private',
+			module      : 'insurance',
+			feature     : 'insurance',
 		},
 		{
 			api         : 'get_saas_faq',
+			access_type : 'private',
+			module      : 'insurance',
+			feature     : 'insurance',
+		},
+		{
+			api         : 'post_saas_insurance_claim',
+			access_type : 'private',
+			module      : 'insurance',
+			feature     : 'insurance',
+		},
+		{
+			api         : 'post_saas_insurance_cancel',
 			access_type : 'private',
 			module      : 'insurance',
 			feature     : 'insurance',
