@@ -9,9 +9,10 @@ function ColorInput(props) {
 		selectedItem,
 		isRootComponent,
 		handleChange,
+		settingType,
 	} = props;
 
-	const color = isRootComponent ? pageConfiguration.style?.[colorKey] : selectedItem.style?.[colorKey];
+	const color = isRootComponent ? pageConfiguration.style?.[colorKey] : selectedItem?.component?.style?.[colorKey];
 
 	return (
 		<div className={styles.color_input}>
@@ -21,7 +22,7 @@ function ColorInput(props) {
 					size="sm"
 					type="color"
 					value={color || '#ffffff'}
-					onChange={(value) => handleChange(colorKey, value)}
+					onChange={(value) => handleChange(colorKey, value, settingType)}
 				/>
 			</div>
 			<div>
@@ -31,7 +32,7 @@ function ColorInput(props) {
 					type="text"
 					value={color || '#ffffff'}
 					placeholder="Small"
-					onChange={(value) => handleChange(colorKey, value)}
+					onChange={(value) => handleChange(colorKey, value, settingType)}
 				/>
 			</div>
 		</div>

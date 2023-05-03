@@ -6,11 +6,13 @@
     "@cogoport/components": "^1.0.395",
     "@cogoport/context": "workspace:^0.1.0",
     "@cogoport/forms": "workspace:^0.1.0",
+    "@cogoport/globalization": "workspace:^0.0.1",
     "@cogoport/icons-react": "^1.0.65",
     "@cogoport/maps": "^1.0.2",
     "@cogoport/request": "workspace:^0.1.0",
     "@cogoport/store": "workspace:^0.1.0",
     "@cogoport/utils": "^1.2.7",
+    "date-fns": "^2.29.3",
     "file-saver": "^2.0.5",
     "react": "18.2.0"
   }

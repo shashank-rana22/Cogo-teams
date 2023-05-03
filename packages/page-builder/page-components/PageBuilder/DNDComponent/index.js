@@ -2,7 +2,7 @@
 import { Breadcrumb } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useGetAddNewComponent from '../../../helpers/useGetAddNewComponent';
 import useGetRedoUndoState from '../../../helpers/useGetRedoUndoState';
@@ -60,6 +60,10 @@ function DNDComponent({ initialPageData, metaData }) {
 		setParentComponentId,
 		setEveryEvents,
 	});
+
+	useEffect(() => {
+		setPageConfiguration(metaData);
+	}, [metaData]);
 
 	const router = useRouter();
 

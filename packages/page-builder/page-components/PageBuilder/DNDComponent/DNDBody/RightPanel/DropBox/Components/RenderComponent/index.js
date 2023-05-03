@@ -47,7 +47,7 @@ function RenderComponent({
 					<div
 						style={{
 							...(type === 'divider'
-								? {} : rowData.style),
+								? {} : rowData.component.style),
 						}}
 					>
 						<RenderElement

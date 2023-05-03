@@ -9,6 +9,7 @@ const useGetHelperFunctions = ({
 	setShowContentModal,
 	setSelectedColumn,
 	setSelectedNestedColumn,
+	handleUnselectItem,
 	modeType,
 }) => {
 	const handleDelete = (e, itemList, pageConfiguration) => {
@@ -21,8 +22,9 @@ const useGetHelperFunctions = ({
 
 		setPageConfiguration(() => ({ ...data }));
 
-		setSelectedRow({});
-		setSelectedItem({});
+		// setSelectedRow({});
+		// setSelectedItem({});
+		handleUnselectItem();
 	};
 
 	const handleSubmitClick = ({ childrenId, parentId }) => {

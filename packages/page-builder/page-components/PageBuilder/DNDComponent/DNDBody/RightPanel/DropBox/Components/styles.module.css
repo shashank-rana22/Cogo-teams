@@ -4,7 +4,6 @@
 }	
 
 .element_container {
-	padding: 16px;
 	&:hover {
 		.change {
 			display: flex;

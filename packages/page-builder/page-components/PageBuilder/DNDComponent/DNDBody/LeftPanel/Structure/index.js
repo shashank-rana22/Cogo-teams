@@ -60,7 +60,6 @@ function Structure(props) {
 					style      : {
 						width          : row,
 						border         : '1px dashed #9ab7fe',
-						margin         : '2px',
 						display        : 'flex',
 						justifyContent : 'center',
 						alignItems     : 'center',

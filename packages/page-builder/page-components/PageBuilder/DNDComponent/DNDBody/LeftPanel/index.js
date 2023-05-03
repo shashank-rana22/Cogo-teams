@@ -69,15 +69,17 @@ function LeftPanel(props) {
 					<Settings
 						selectedRow={selectedRow}
 						selectedItem={selectedItem}
+						selectedColumn={selectedColumn}
+						selectedNestedColumn={selectedNestedColumn}
 						pageConfiguration={pageConfiguration}
 						setPageConfiguration={setPageConfiguration}
 						showContentModal={showContentModal}
 						setShowContentModal={setShowContentModal}
 						parentComponentId={parentComponentId}
+						setSelectedItem={setSelectedItem}
 						setParentComponentId={setParentComponentId}
 						addNewItem={addNewItem}
 						onNewItemAdding={onNewItemAdding}
-						setSelectedItem={setSelectedItem}
 					/>
 				</TabPanel>
 			</Tabs>

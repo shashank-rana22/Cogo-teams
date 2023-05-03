@@ -69,12 +69,12 @@ const containerSettings = [
 		options : [
 			{
 				label : 'Color',
-				key   : 'border-color',
+				key   : 'borderColor',
 				type  : 'color',
 			},
 			{
 				label   : 'Style',
-				key     : 'border-style',
+				key     : 'borderStyle',
 				type    : 'select',
 				options : [
 					{ label: 'None', value: 'none' },
@@ -85,12 +85,12 @@ const containerSettings = [
 			},
 			{
 				label : 'Width',
-				key   : 'border-width',
+				key   : 'borderWidth',
 				type  : 'number',
 			},
 			{
 				label : 'Radius',
-				key   : 'border-radius',
+				key   : 'borderRadius',
 				type  : 'number',
 			},
 

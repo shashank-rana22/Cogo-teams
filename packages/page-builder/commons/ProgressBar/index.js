@@ -9,7 +9,7 @@ function ProgressBar(props) {
 		selectedItem,
 	} = props;
 
-	const width = isRootComponent ? pageConfiguration.style?.[imageKey] : selectedItem.style?.[imageKey];
+	const width = isRootComponent ? pageConfiguration.style?.[imageKey] : selectedItem.component.style?.[imageKey];
 
 	const handleInputChange = (e) => {
 		const newValue = e.target.value;

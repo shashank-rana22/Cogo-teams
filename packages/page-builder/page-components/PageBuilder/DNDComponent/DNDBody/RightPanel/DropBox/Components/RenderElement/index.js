@@ -58,6 +58,7 @@ function RenderElement({
 			widget,
 			pageConfiguration,
 			setPageConfiguration,
+			rowData,
 			modeType,
 		},
 
@@ -146,7 +147,7 @@ function RenderElement({
 
 	// const { id: nestedColumnId } = selectedNestedColumn || {};
 
-	const border = widget.id === selectedItem.id ? '5px solid blue' : '';
+	const border = widget.id === selectedItem.id ? '1px solid blue' : '';
 
 	return (
 		<div

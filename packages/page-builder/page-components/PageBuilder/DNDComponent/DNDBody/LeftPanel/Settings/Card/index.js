@@ -21,13 +21,11 @@ function extractUrlString(urlString = '') {
 function Card(props) {
 	const {
 		pageConfiguration,
-		// setPageConfiguration,
 		selectedItem,
 		handleChange,
 		setShowUploadModal,
 		setting,
 		isRootComponent,
-		setSelectedItem,
 	} = props;
 
 	const selectedComponent = isRootComponent ? pageConfiguration : selectedItem;
@@ -44,9 +42,12 @@ function Card(props) {
 		}
 	};
 
-	const modifiedImageUrl = extractUrlString(
-		selectedItem.style?.['background-image'],
-	);
+	const imgUrl = isRootComponent ? pageConfiguration.style?.['background-image']
+		: selectedItem?.component?.style?.['background-image'];
+
+	const modifiedImageUrl = extractUrlString(imgUrl);
+
+	const { type: settingType } = setting;
 
 	return (
 
@@ -58,8 +59,9 @@ function Card(props) {
 					select: (
 						<Select
 							size="sm"
-							value={selectedComponent.style[key]}
-							onChange={(value) => handleChange(key, value)}
+							value={isRootComponent ? pageConfiguration.style?.[key]
+								: selectedItem?.component?.style?.[key]}
+							onChange={(value) => handleChange(key, value, settingType)}
 							style={{ width: '140px' }}
 							options={options}
 							placeholder="Select"
@@ -72,8 +74,8 @@ function Card(props) {
 							pageConfiguration={pageConfiguration}
 							selectedItem={selectedItem}
 							isRootComponent={isRootComponent}
-							setSelectedItem={setSelectedItem}
 							handleChange={handleChange}
+							settingType={settingType}
 						/>
 					),
 					range: (
@@ -145,8 +147,8 @@ function Card(props) {
 							pageConfiguration={pageConfiguration}
 							selectedItem={selectedItem}
 							isRootComponent={isRootComponent}
-							setSelectedItem={setSelectedItem}
 							handleChange={handleChange}
+							settingType={settingType}
 						/>
 					),
 				};

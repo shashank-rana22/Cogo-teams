@@ -1,5 +1,9 @@
+import { Modal } from '@cogoport/components';
+import { IcMCloudUpload } from '@cogoport/icons-react';
+import { useState } from 'react';
+
 import useUpdateComponentsContent from '../../../helpers/useUpdateComponentsContent';
-import FileUploader from '../FileUploader';
+import UploadImageModal from '../../UploadImageModal';
 
 function ImageComponent(props) {
 	const {
@@ -17,7 +21,7 @@ function ImageComponent(props) {
 	} = props;
 
 	const { component } = widget || {};
-
+	const [showUploadModal, setShowUploadModal] = useState(false);
 	const { content } = component || {};
 
 	const { handleUpdateContent } = useUpdateComponentsContent({
@@ -40,14 +44,34 @@ function ImageComponent(props) {
 					<img width="100%" src={content} alt="upload-img" />
 				</div>
 			) : (
-				<FileUploader
-					value={content}
-					onChange={(val) => handleUpdateContent(val, rowData)}
-					accept="png"
-					uploadDesc="Upload"
-				/>
+				<div style={{ display: 'flex', justifyContent: 'center' }}>
+					<div
+						onClick={() => setShowUploadModal(true)}
+						role="presentation"
+						style={{ cursor: 'pointer' }}
+					>
+						<IcMCloudUpload width={48} height={48} />
+						<div>Upload</div>
+					</div>
+				</div>
+			)}
 
-			) }
+			{showUploadModal && (
+				<Modal
+					size="md"
+					placement="top"
+					show={showUploadModal}
+					onClose={() => setShowUploadModal(false)}
+				>
+					<UploadImageModal
+						setShowUploadModal={setShowUploadModal}
+						handleChange={handleUpdateContent}
+						rowData={rowData}
+						type="image"
+						accept=".png, .jpg, .webp, .webm, .jpeg, .svg, .gif"
+					/>
+				</Modal>
+			)}
 		</div>
 	);
 }
