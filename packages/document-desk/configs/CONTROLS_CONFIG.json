@@ -1,8 +1,8 @@
 {
     "stepper_tabs":[
         { "label": "Export", "value": "export" },
-		{ "label": "Import", "value": "import" },
-		{ "label": "Locals", "value": "fcl_local" },
+	{ "label": "Import", "value": "import" },
+	{ "label": "Locals", "value": "fcl_local" },
         { "label": "Customs", "value": "fcl_customs" }
     ]
 }
