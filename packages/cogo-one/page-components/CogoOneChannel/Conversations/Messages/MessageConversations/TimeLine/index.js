@@ -1,7 +1,7 @@
 import { format } from '@cogoport/utils';
 import React from 'react';
 
-import timeLineFunctions from '../../../../../../utils/timeLineFunctions';
+import getVoiceCallStatement from '../../../../../../utils/getVoiceCallStatement';
 
 import styles from './styles.module.css';
 
@@ -12,16 +12,19 @@ function TimeLine({ eachMessage = {}, key = '' }) {
 		performed_by_data = {},
 		created_at,
 		conversation_started_at,
+		user_data :{ name: voiceCallUserName = '' } = {},
+		status = '',
+		channel = '',
 	} = eachMessage;
 	const { name : presentAgent } = agent_data || {};
 	const { name : previousAgent } = performed_by_data || {};
-	const { renderStatement } = timeLineFunctions();
 
-	const timelineText = renderStatement({
-		type     : conversation_type,
-		present  : presentAgent,
-		previous : previousAgent,
-		startAt  : conversation_started_at,
+	const timelineText = getVoiceCallStatement({
+		type            : conversation_type,
+		present         : presentAgent,
+		previous        : channel === 'voice_call' ? voiceCallUserName : previousAgent,
+		startAt         : conversation_started_at,
+		voiceCallStatus : status,
 	});
 
 	return (

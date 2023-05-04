@@ -99,7 +99,7 @@ function VoiceCall() {
 
 	const durationTime = () => {
 		let time = '';
-		if (!callLoading) {
+		if (status) {
 			const secs = counter % 60;
 			const minute = Math.trunc(counter / 60) % 60;
 			const hour = Math.trunc(Math.trunc(counter / 60) / 60) % 60;
@@ -118,7 +118,7 @@ function VoiceCall() {
 	useEffect(() => {
 		let startcounter;
 		if (!callLoading) {
-			if (callId) {
+			if (status) {
 				startcounter = setInterval(() => {
 					setCounter((prevCounter) => prevCounter + 1);
 				}, 1000);
@@ -128,8 +128,7 @@ function VoiceCall() {
 			clearInterval(startcounter);
 			setCounter(0);
 		};
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [callId, callLoading]);
+	}, [callLoading, status]);
 
 	return (
 		<>
@@ -151,6 +150,7 @@ function VoiceCall() {
 				<FeedbackModal
 					dispatch={dispatch}
 					profileData={profileData}
+					showFeedbackModal={showFeedbackModal}
 				/>
 			)}
 			{minimizeModal && (

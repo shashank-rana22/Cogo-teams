@@ -498,5 +498,10 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'checkout',
 	},
+	{
+		api          : 'update_shipment_bl_details',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 export default apis;
