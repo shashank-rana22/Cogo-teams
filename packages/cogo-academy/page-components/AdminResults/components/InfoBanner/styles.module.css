@@ -23,3 +23,12 @@
 	height: 24px;
 	margin-right: 12px;
 }
+
+.button_container {
+	display: flex;
+}
+
+.cancel_button {
+	margin-right: 10px;
+}
+

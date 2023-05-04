@@ -84,7 +84,7 @@ function AdminResults() {
 				</Tabs>
 			) : null}
 
-			{status === 'published' ? <TestResults test_id={test_id} /> : null}
+			{status === 'published' || activeAttempt === 'attempt_1' ? <TestResults test_id={test_id} /> : null}
 
 			<InfoBanner
 				loading={loading}
@@ -93,6 +93,7 @@ function AdminResults() {
 				validity_end={validity_end}
 				refetchTest={getTest}
 				retest={retest}
+				activeAttempt={activeAttempt}
 			/>
 
 			<div className={styles.tabs_container}>

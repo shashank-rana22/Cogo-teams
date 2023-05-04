@@ -34,6 +34,7 @@ function Item(props) {
 		<div className={styles.element}>
 			<div className={styles.label}>
 				{label}
+				<sup className={styles.sup}>*</sup>
 			</div>
 			<div className={styles.filters_types}>
 				{Element && (

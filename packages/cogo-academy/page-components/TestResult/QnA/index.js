@@ -10,7 +10,7 @@ import StandAlone from './StandAlone';
 import styles from './styles.module.css';
 import Subjective from './Subjective';
 
-function QnA({ user_name = '', test_id, user_id, view, is_evaluated = false, status }) {
+function QnA({ user_name = '', test_id, user_id, view, is_evaluated = false, status, activeAttempt }) {
 	const ref = useRef();
 
 	const [animation, setAnimation] = useState(false);
@@ -26,7 +26,9 @@ function QnA({ user_name = '', test_id, user_id, view, is_evaluated = false, sta
 		method : 'GET',
 		url    : '/get_questions_analysis',
 		params : {
-			user_id, test_id,
+			user_id,
+			test_id,
+			active_questions_required: activeAttempt === 'attempt_1',
 		},
 	}, { manual: false });
 

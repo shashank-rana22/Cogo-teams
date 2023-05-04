@@ -36,7 +36,7 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router, setShowReAttemp
 		id       : 'passed_failed',
 		accessor : ({ result_status = '', is_evaluated = false }) => (
 			<section className={`${styles.section} ${styles[result_status]}`}>
-				{(!is_evaluated || status !== 'published')
+				{(!is_evaluated || !['published', 'retest'].includes(status))
 					? <IsEvaluated is_evaluated={is_evaluated} /> : (startCase(result_status) || '-')}
 			</section>
 		),
@@ -57,7 +57,8 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router, setShowReAttemp
 		id       : 'score_achieved',
 		accessor : ({ final_score = '', test = {}, is_evaluated = false }) => (
 			<section className={styles.section}>
-				{(!is_evaluated || status !== 'published') ? <IsEvaluated is_evaluated={is_evaluated} />
+				{(!is_evaluated || !['published', 'retest'].includes(status))
+					? <IsEvaluated is_evaluated={is_evaluated} />
 					: `${toFixed(final_score, 2)}/${toFixed(test.total_marks, 2)}`}
 			</section>
 		),
@@ -77,7 +78,7 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router, setShowReAttemp
 		id       : 'percentile',
 		accessor : ({ percentile = '', is_evaluated = false }) => (
 			<div className={styles.section}>
-				{(!is_evaluated || status !== 'published')
+				{(!is_evaluated || !['published', 'retest'].includes(status))
 					? <IsEvaluated is_evaluated={is_evaluated} /> : (toFixed(percentile || 0, 2) || '-')}
 			</div>
 		),

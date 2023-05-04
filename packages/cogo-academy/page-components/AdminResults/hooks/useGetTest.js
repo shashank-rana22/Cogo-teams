@@ -6,7 +6,7 @@ import { useEffect, useCallback } from 'react';
 function useGetTest({ id }) {
 	const [{ loading = false, data = {} }, trigger] = useRequest({
 		method : 'get',
-		url    : 'get_test',
+		url    : '/get_test',
 	}, { manual: false });
 
 	const {

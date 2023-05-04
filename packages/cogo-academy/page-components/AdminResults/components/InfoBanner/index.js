@@ -7,9 +7,18 @@ import PublishNow from '../PublishNow';
 
 import Retest from './Retest';
 import styles from './styles.module.css';
+import testStatus from './testStatus';
 import TEXT_MAPPING from './text-mapping';
 
-function InfoBanner({ test_status = '', test_id, validity_end, refetchTest = () => {}, loading, retest }) {
+function InfoBanner({
+	test_status = '',
+	test_id,
+	validity_end,
+	refetchTest = () => { },
+	loading,
+	retest,
+	activeAttempt,
+}) {
 	const [showRetestModal, setShowRetestModal] = useState(false);
 
 	const {
@@ -24,7 +33,9 @@ function InfoBanner({ test_status = '', test_id, validity_end, refetchTest = () 
 
 	const isUnderValidity = new Date() < new Date(validity_end);
 
-	const content = TEXT_MAPPING[test_status];
+	const status = testStatus(retest, activeAttempt, test_status);
+
+	const content = TEXT_MAPPING[status];
 
 	const { key, backgroundColor, text, subText, iconColor, Icon, borderColor } = content || {};
 
@@ -82,6 +93,7 @@ function InfoBanner({ test_status = '', test_id, validity_end, refetchTest = () 
 								<Button
 									themeType="secondary"
 									onClick={() => setShowRetestModal(false)}
+									className={styles.cancel_button}
 								>
 									Cancel
 								</Button>
@@ -91,7 +103,7 @@ function InfoBanner({ test_status = '', test_id, validity_end, refetchTest = () 
 									onClick={handleSubmit(onSubmit)}
 									disabled={loading}
 								>
-									Submit
+									Create Retest
 								</Button>
 							</div>
 						</Modal.Footer>
