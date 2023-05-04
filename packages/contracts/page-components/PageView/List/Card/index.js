@@ -108,7 +108,7 @@ function Card({ item, filters }) {
 					{is_bidding_contract && (
 						<Popover
 							content={(
-								<BiddingProof bidding_proof={bidding_proof} />
+								<BiddingProof bidding_proof={bidding_proof} handleDownload={handleDownload} />
 							)}
 							placement="bottom"
 						>
