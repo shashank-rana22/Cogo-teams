@@ -13,8 +13,8 @@ import RequestModal from './RequestModal';
 import ShipmentAudit from './ShipmentAudit';
 import styles from './styles.module.css';
 
-function ListCard({ item = {}, role = '', allFilters = {} }) {
-	const { bucket } = allFilters;
+function ListCard({ item = {}, role = '', tabsState = {} }) {
+	const { bucket } = tabsState;
 	const [showDetails, setShowDetails] = useState(false);
 
 	const [showModal, setShowModal] = useState(false);
@@ -238,7 +238,6 @@ function ListCard({ item = {}, role = '', allFilters = {} }) {
 				<RequestModal
 					closeModal={closeModal}
 					data={item}
-					allFilters={allFilters}
 				/>
 			) : null}
 		</>

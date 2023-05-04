@@ -5,39 +5,30 @@ import React, { useState } from 'react';
 import FilterContent from './FilterContent';
 import styles from './styles.module.css';
 
-function Filters({ allFilters = {}, setAllFilters = () => {} }) {
+function Filters({ filters = {}, setFilters = () => {} }) {
 	const [showPopover, setShowPopover] = useState(false);
 
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.open_filters}>
 				<Input
 					placeholder="Search Shipments"
 					type="search"
 					size="sm"
-					value={allFilters.filters.q || ''}
-					onChange={(val) => {
-						console.log(val, 'filtersss');
-
-						setAllFilters({
-							...allFilters,
-							filters: {
-								...(allFilters.filters || {}),
-								q    : val,
-								page : 1,
-							},
-						});
-						console.log({ allFilters });
-					}}
+					value={filters.q || ''}
+					onChange={(val) => setFilters({
+						...filters,
+						q    : val,
+						page : 1,
+					})}
 				/>
 
 				<Popover
 					render={(
 						<FilterContent
-							allFilters={allFilters}
+							filters={filters}
 							setShowPopover={setShowPopover}
-							setAllFilters={setAllFilters}
+							setFilters={setFilters}
 							key={showPopover}
 						/>
 					)}

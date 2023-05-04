@@ -7,8 +7,9 @@ import styles from "./styles.module.css";
 
 export default function List({
 	data = {},
-	allFilters = {},
-	setAllFilters = () => {},
+	filters = {},
+	setFilters = () => {},
+	tabsState,
 	role = "",
 	additionalTabs = [], 
 	loading = false,
@@ -24,15 +25,10 @@ export default function List({
 			// totalItems={total}
 			pageSize={10}
 			currentPage={filters.page}
-			onPageChange={(val) =>
-				setAllFilters({
-					...allFilters,
-					filters: {
-						...allFilters.filters,
-						page: val,
-					},
-				})
-			}
+			onPageChange={(val) => setFilters({
+				...filters,
+				page: val,
+			})}
 		/>
 	); 
 
@@ -77,7 +73,7 @@ export default function List({
 						key={item?.id}
 						item={item}
 						role={role}
-						allFilters={allFilters}
+						tabsState={tabsState}
 					/>
 				))}
 			</div>

@@ -5,6 +5,7 @@ import { useState, useCallback, useEffect } from 'react';
 const emptyData = { list: [], total: 0, total_page: 0, count_stats: {} };
 
 const shipmentStates = ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress', 'completed'];
+const additional_methods = ['pagination', 'count_stats', 'invoice_status', 'ongoing_shipment_stats'];
 
 function useListAuthorityDeskDocuments({ activeTab, service, bucket, filters }) {
 	const [data, setData] = useState(emptyData);
@@ -26,10 +27,9 @@ function useListAuthorityDeskDocuments({ activeTab, service, bucket, filters }) 
 						document_status : bucket,
 						...restFilters || {},
 					},
-					page               : page || 1,
-					page_limit         : 10,
-					additional_methods : ['pagination', 'count_stats', 'invoice_status', 'ongoing_shipment_stats'],
-
+					page       : page || 1,
+					page_limit : 10,
+					additional_methods,
 				},
 			});
 

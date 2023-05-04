@@ -7,13 +7,13 @@ import FILTERS_CONTROLS from '../../../../config/OCEAN_FILTERS_CONTROLS.json';
 
 import styles from './styles.module.css';
 
-function FilterContent({ allFilters = {}, setShowPopover = () => {}, setAllFilters = () => {} }) {
-	const { q, page, ...defaultFilters } = allFilters.filters;
+function FilterContent({ filters = {}, setShowPopover = () => {}, setFilters = () => {} }) {
+	const { q, page, ...defaultFilters } = filters;
 
 	const [formValues, setFormValues] = useState(defaultFilters);
 
 	const clearFilters = () => {
-		setAllFilters({ ...allFilters, filters: { page: 1, is_job_closed: 'no' } });
+		setFilters({ page: 1, is_job_closed: 'no' });
 		setShowPopover(false);
 	};
 
@@ -24,14 +24,10 @@ function FilterContent({ allFilters = {}, setShowPopover = () => {}, setAllFilte
 		.some(([key, val]) => !isEmpty(val) && key !== 'page');
 
 	const applyPopoverFilters = () => {
-		setAllFilters({
-			...allFilters,
-			filters: {
-				...(allFilters.filters),
-				...formValues,
-				q    : '',
-				page : 1,
-			},
+		setFilters({
+			...filters,
+			...formValues,
+			page: 1,
 		});
 		setShowPopover(false);
 	};
