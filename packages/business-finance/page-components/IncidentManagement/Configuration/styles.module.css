@@ -1,93 +1,96 @@
 .trade_party_name {
-  padding: 4px;
-  margin: 4px;
-  border: 1px solid black;
-  border-radius: 4px;
+	padding: 4px;
+	margin: 4px;
+	border: 1px solid black;
+	border-radius: 4px;
 }
 
 .wrapper {
-  width: 100px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  cursor: pointer;
+	width: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
 }
 
 .incident_id {
-  padding: 0 20px;
-  font-weight: 600;
-  color: #f68b21;
+	padding: 0 20px;
+	font-weight: 600;
+	color: #f68b21;
 }
 
 .flex {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .tooltip {
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
 }
 
 .remark {
-  width: 70px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  cursor: pointer;
+	width: 70px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
 }
 
 .flex_reverse {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .ribbon_red {
-  --f: 6px; /* control the folded part */
-  --r: 16px; /* control the ribbon shape */
-  --t: -7px; /* the top offset */
+	--f: 6px; /* control the folded part */
+	--r: 16px; /* control the ribbon shape */
+	--t: -7px; /* the top offset */
 
-  position: absolute;
-  top: 3px;
-  right: -30px;
-  padding: 0 10px var(--f) calc(10px + var(--r));
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% calc(100% - var(--f)),
-    calc(100% - var(--f)) 100%,
-    calc(100% - var(--f)) calc(100% - var(--f)),
-    0 calc(100% - var(--f)),
-    var(--r) calc(50% - var(--f) / 2)
-  );
-  font-size: 10px;
-  color: #fff;
-  background: #ed3726;
+	position: absolute;
+	top: 3px;
+	right: -30px;
+	padding: 0 10px var(--f) calc(10px + var(--r));
+	clip-path:
+		polygon(
+			0 0,
+			100% 0,
+			100% calc(100% - var(--f)),
+			calc(100% - var(--f)) 100%,
+			calc(100% - var(--f)) calc(100% - var(--f)),
+			0 calc(100% - var(--f)),
+			var(--r) calc(50% - var(--f) / 2)
+		);
+	font-size: 10px;
+	color: #fff;
+	background: #ed3726;
 }
 
 .ribbon_orange {
-  --f: 5px; /* control the folded part */
-  --r: 15px; /* control the ribbon shape */
-  --t: -7px; /* the top offset */
+	--f: 5px; /* control the folded part */
+	--r: 15px; /* control the ribbon shape */
+	--t: -7px; /* the top offset */
 
-  position: absolute;
-  top: 3px;
-  right: -30px;
-  padding: 0 16px var(--f) calc(10px + var(--r));
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% calc(100% - var(--f)),
-    calc(100% - var(--f)) 100%,
-    calc(100% - var(--f)) calc(100% - var(--f)),
-    0 calc(100% - var(--f)),
-    var(--r) calc(50% - var(--f) / 2)
-  );
-  font-size: 10px;
-  color: #fff;
-  background: #ffab58;
+	position: absolute;
+	top: 3px;
+	right: -30px;
+	padding: 0 16px var(--f) calc(10px + var(--r));
+	clip-path:
+		polygon(
+			0 0,
+			100% 0,
+			100% calc(100% - var(--f)),
+			calc(100% - var(--f)) 100%,
+			calc(100% - var(--f)) calc(100% - var(--f)),
+			0 calc(100% - var(--f)),
+			var(--r) calc(50% - var(--f) / 2)
+		);
+	font-size: 10px;
+	color: #fff;
+	background: #ffab58;
 }
+
 .credit {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
