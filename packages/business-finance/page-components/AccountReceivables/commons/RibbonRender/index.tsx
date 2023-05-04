@@ -13,7 +13,7 @@ interface Interface {
 function RibbonRender({ row }: Interface) {
 	const { daysLeftForAutoIrnGeneration = '' } = row || {};
 	let value;
-	if (daysLeftForAutoIrnGeneration as unknown as number >= 0) {
+	if ((daysLeftForAutoIrnGeneration as unknown as number) >= 0) {
 		value = `${daysLeftForAutoIrnGeneration || '--'} days left` || '0';
 	} else {
 		value = 'Expired';
@@ -24,7 +24,7 @@ function RibbonRender({ row }: Interface) {
 			<div
 				className={styles.ribbon}
 				style={{
-					background: daysLeftForAutoIrnGeneration as unknown as number >= 0
+					background: (daysLeftForAutoIrnGeneration as unknown as number) >= 0
 						? 'rgb(255, 213, 85)' : '#ff0000',
 				}}
 			>
