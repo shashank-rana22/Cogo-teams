@@ -13,11 +13,11 @@
 	padding-top: 14px;
 }
 
-.desk_tabs{
+.desk_tabs {
 	margin-top: 10px;
 }
 
-.search_and_tab{
+.search_and_tab {
 	display: flex;
 	justify-content: space-between;
 }

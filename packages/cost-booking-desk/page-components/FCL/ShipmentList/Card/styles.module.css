@@ -13,20 +13,20 @@
 	}
 }
 
-.shipment_info{
+.shipment_info {
 	width: 20%;
 }
 
-.line_item{
+.line_item {
 	width: 20%;
 	margin: auto 20px;
 }
 
-.port{
+.port {
 	width: 40%;
 }
 
-.cargo{
+.cargo {
 	width: 30%;
 }
 
@@ -41,7 +41,8 @@
 		background: var(--color-secondary-greyscale-5);
 	}
 }
-.footer{
+
+.footer {
 	right: 0;
 	bottom: 0;
 	display: flex;
@@ -50,7 +51,6 @@
 	font-size: var(--font-size-sm);
 	font-weight: 600;
 }
-
 
 .animate_card {
 	background: linear-gradient(90deg, #fff, #fae7e7, #fff);
@@ -68,8 +68,8 @@
 	}
 }
 
-.gate_in_cutoff{
-	text-align: right;
-	font-weight: 600;
+.gate_in_cutoff {
 	font-size: 10px;
+	font-weight: 600;
+	text-align: right;
 }

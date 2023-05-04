@@ -13,20 +13,20 @@
 	}
 }
 
-.shipment_info{
+.shipment_info {
 	width: 20%;
 }
 
-.line_item{
+.line_item {
 	width: 20%;
 	margin: auto 20px;
 }
 
-.port{
+.port {
 	width: 40%;
 }
 
-.cargo{
+.cargo {
 	width: 30%;
 }
 
@@ -52,7 +52,8 @@
 	margin-top: 12px;
 	border-top: 1px solid var(--color-secondary-greyscale-5);
 }
-.footer{
+
+.footer {
 	position: absolute;
 	right: 0;
 	display: flex;
