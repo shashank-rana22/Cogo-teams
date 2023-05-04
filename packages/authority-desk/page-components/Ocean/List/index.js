@@ -10,36 +10,39 @@ export default function List({
 	filters = {},
 	setFilters = () => {},
 	tabsState,
+	setTabsState = () => {},
 	role = "",
-	additionalTabs = [], 
+	additionalTabs = [],
 	loading = false,
 }) {
-	const { filters, bucket, subApprovedBucket } = allFilters;
-	// const { list = [], total } = data;
+	const { bucket, subApprovedBucket } = tabsState;
 
-	const { count_stats } = data;
+	const { count_stats, total_count } = data;
+	console.log({ data });
 
 	const renderPagination = (
 		<Pagination
 			type="table"
-			// totalItems={total}
+			totalItems={total_count}
 			pageSize={10}
 			currentPage={filters.page}
-			onPageChange={(val) => setFilters({
-				...filters,
-				page: val,
-			})}
+			onPageChange={(val) =>
+				setFilters({
+					...filters,
+					page: val,
+				})
+			}
 		/>
-	); 
-
+	);
 
 	if (loading) {
 		return <Loader themeType="primary" />;
 	}
 
-	return data?.list?.length === 0 ? <EmptyState /> : (
+	return data?.list?.length === 0 ? (
+		<EmptyState />
+	) : (
 		<>
-
 			<div className={styles.list_container}>
 				{bucket === "approved" ? (
 					<div>
@@ -47,8 +50,8 @@ export default function List({
 							activeTab={subApprovedBucket}
 							themeType="primary"
 							onChange={(val) => {
-								setAllFilters({
-									...allFilters,
+								setTabsState({
+									...tabsState,
 									subApprovedBucket: val,
 								});
 							}}
@@ -76,9 +79,8 @@ export default function List({
 						tabsState={tabsState}
 					/>
 				))}
+				{renderPagination}
 			</div>
-
-			{renderPagination}
 		</>
 	);
 }

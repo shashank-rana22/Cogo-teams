@@ -11,6 +11,7 @@ import useListAuthorityDeskDocuments from '../../hooks/useListAuthorityDeskDocum
 import Filters from './Filters';
 import List from './List';
 import styles from './styles.module.css';
+import { useStakeholderCheck } from '../../hooks/useStakeholderCheck';
 
 const services = ['fcl_freight', 'lcl_freight', 'fcl_local'];
 const roleName = {
@@ -21,22 +22,23 @@ const roleName = {
 
 function Ocean() {
 	const { role } = useStakeholderCheck();
-	const { buckets, additionalTabs } = BUCKET_MAPPING;
-
+	
 	const [tabsState, setTabsState] = useState({
 		activeTab : 'bl',
 		service   : 'fcl_freight',
 		bucket    : 'eligible',
 	});
-
+	
 	const [filters, setFilters] = useState({
 		is_job_closed : 'no',
 		page          : 1,
 	});
-
+	
 	const { data, loading } = useListAuthorityDeskDocuments({ ...tabsState, filters });
-
 	const { count_stats } = data;
+	
+	const { buckets, additionalTabs } = BucketsMapping({ role, count_stats });
+	
 
 	return (
 		<div className={styles.container}>
@@ -89,7 +91,7 @@ function Ocean() {
 							{item.title}
 							{' '}
 							<span className={`cl${tabsState.bucket === item ? styles.active : ''} ${styles.count}`}>
-								{count_stats[item.count] || 0}
+								{item.count || 0}
 							</span>
 						</div>
 					))}
@@ -104,6 +106,7 @@ function Ocean() {
 				filters={filters}
 				setFilters={setFilters}
 				tabsState={tabsState}
+				setTabsState={setTabsState}
 				additionalTabs={additionalTabs}
 				role={role}
 			/>
