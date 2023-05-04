@@ -135,7 +135,7 @@ function LastMileDesk({ get = {}, activeStakeholder = '' }) {
 						<TabPanel name="tracking" title="Tracking">
 							<Tracking shipmentData={shipment_data} />
 						</TabPanel>
-						
+
 					</Tabs>
 				</div>
 			</div>

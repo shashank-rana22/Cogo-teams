@@ -54,11 +54,9 @@ function TitleCard({
 
 				<div className={styles.bl_number}>
 					BL Number:&nbsp;
-					<span>
-						<b>
-							{item?.bl_number}
-						</b>
-					</span>
+					<b>
+						{item?.bl_number}
+					</b>
 				</div>
 			</div>
 
