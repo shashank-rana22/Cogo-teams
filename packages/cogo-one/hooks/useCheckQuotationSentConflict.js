@@ -5,7 +5,7 @@ const useCheckQuotationSentConflict = ({ orgId = '' }) => {
 	const [{ loading, data }, trigger] = useRequest(
 		{
 			method : 'get',
-			url    : '/check_sent_quotation_duplicacy',
+			url    : '/check_sent_quotation_conflict',
 		},
 		{ manual: true, autoCancel: false },
 	);
