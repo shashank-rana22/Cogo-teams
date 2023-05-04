@@ -58,3 +58,10 @@
 	margin-top: 16px;
 	margin-bottom: 0;
 }
+
+.error{
+	font-size: 10px;
+	color: red;
+	padding-left: 4px;
+	width:200px
+}

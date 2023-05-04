@@ -1,17 +1,21 @@
 import { Button } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import AccordianView from '../../common/Accordianview';
 import getFormattedAmount from '../../common/helpers/formatAmount';
 import ServiceTables from '../../common/ServiceTable';
 import ToolTipWrapper from '../../common/ToolTipWrapper';
+import UploadInvoiceModal from '../../common/UploadInvoiceModel';
 import InvoicesInProcess from '../InvoicesInProcess';
 import InvoicesUploaded from '../InvoicesUploaded';
 
 import styles from './styles.module.css';
 
 function CollectionPartyDetails({ collectionParty }) {
+	const [showUploadInvoice, setShowUploadInvoice] = useState(false);
+	const [uploadInvoiceUrl, setUploadInvoiceUrl] = useState('');
+
 	const services = (collectionParty?.services || []).map(
 		(service) => service?.service_type,
 	);
@@ -96,10 +100,24 @@ function CollectionPartyDetails({ collectionParty }) {
 				<InvoicesInProcess invoicesdata={collectionParty?.existing_collection_parties} />
 				<span className={styles.headings}>Live Invoice</span>
 				<div className={styles.buttoncontailner}>
-					<Button size="md" themeType="secondary" style={{ marginRight: '16px' }}>Upload Invoice</Button>
+					<Button
+						size="md"
+						themeType="secondary"
+						style={{ marginRight: '16px' }}
+						onClick={() => { setShowUploadInvoice(true); }}
+					>
+						Upload Invoice
+					</Button>
 					<Button size="md" themeType="secondary">Add Incidental Charges</Button>
 				</div>
 				<ServiceTables service_charges={collectionParty?.service_charges} />
+				<UploadInvoiceModal
+					open={showUploadInvoice}
+					setOpen={setShowUploadInvoice}
+					uploadInvoiceUrl={uploadInvoiceUrl}
+					setUploadInvoiceUrl={setUploadInvoiceUrl}
+					serviceProvider={collectionParty}
+				/>
 			</AccordianView>
 		</div>
 	);

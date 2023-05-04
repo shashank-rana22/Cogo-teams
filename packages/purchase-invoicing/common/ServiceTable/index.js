@@ -9,7 +9,16 @@ import CargoDetails from './CargoDetails';
 import SingleColumn from './SingleColumn';
 import styles from './styles.module.css';
 
-function ServiceTables({ service_charges }) {
+function ServiceTables({
+	service_charges,
+	config,
+	showTotal = true,
+	showCargo = true,
+	showservice,
+	ismappings,
+	renderCheck,
+	mappingtable,
+}) {
 	return (
 		<>
 			{(service_charges || []).map((singlecharge) => {
@@ -31,14 +40,23 @@ function ServiceTables({ service_charges }) {
 					: otherService;
 				const lineItems = singlecharge?.line_items || [];
 
+				const formatLineItems = lineItems.map((litem) => ({
+					...litem,
+					service_id   : singlecharge?.service_id,
+					service_type : singlecharge?.service_type,
+				}));
+
 				return (
 					<div className={styles.servicecontainer}>
-						<div style={{ marginLeft: '4px' }}>
-							<CargoDetails />
-						</div>
+						{showCargo && (
+							<div style={{ marginLeft: '4px' }}>
+								<CargoDetails />
+							</div>
+						)}
+						{showservice && <div className={styles.serviceheader}>{service}</div>}
 						<div className={styles.flextable}>
 							<div className={styles.tableheader}>
-								{(serviceConfig(service)).map((field) => (
+								{((config || serviceConfig(service))).map((field) => (
 									<div
 										style={{
 											flex  : (field.span || 1),
@@ -50,15 +68,23 @@ function ServiceTables({ service_charges }) {
 									</div>
 								))}
 							</div>
-							{lineItems.map((lineitem) => (
-								<SingleColumn lineitem={lineitem} fields={serviceConfig(service)} />
+							{formatLineItems.map((lineitem) => (
+								<SingleColumn
+									lineitem={lineitem}
+									fields={config || serviceConfig(service)}
+									ismappings={ismappings}
+									renderCheck={renderCheck}
+									mappingtable={mappingtable}
+								/>
 							))}
-							<div className={styles.totalamount}>
-								Total With TAX
-								<span className={styles.amount}>
-									{getFormattedAmount(singlecharge?.tax_total_price || 0, singlecharge?.currency)}
-								</span>
-							</div>
+							{showTotal && (
+								<div className={styles.totalamount}>
+									Total With TAX
+									<span className={styles.amount}>
+										{getFormattedAmount(singlecharge?.tax_total_price || 0, singlecharge?.currency)}
+									</span>
+								</div>
+							)}
 						</div>
 					</div>
 				);

@@ -1,0 +1,57 @@
+.formcontainer {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 16px 0;
+	margin-top: 16px;
+	border: 1px solid #797979;
+	border-radius: 4px;
+}
+
+.label {
+	margin: 4px 2px;
+}
+
+.selectcontainer {
+	:global {
+		.ui_select_input_placeholder,
+		::placeholder {
+			font-size: 12px;
+		}
+
+		.ui_select_display_container {
+			width: 360px;
+			max-height: 36px;
+		}
+	}
+}
+
+.flex {
+	display: flex;
+}
+
+.marginleft {
+	margin-left: 26px;
+}
+
+.address {
+	padding: 16px 4px;
+	margin-top: 16px;
+	border: 1px solid #d9d9d9;
+	border-radius: 4px;
+}
+
+.key {
+	padding-left: 16px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.value {
+	padding-left: 8px;
+}
+
+.errors{
+	font-size: 10px;
+	color: red;
+	padding-left: 4px;
+}

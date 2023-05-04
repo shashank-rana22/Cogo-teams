@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function Accordion({ title, children, open = false }) {
+function Accordion({ title, children, open = false, showerror }) {
 	const [active, setActive] = useState(open);
 
 	function toggleActive() {
@@ -18,6 +18,7 @@ function Accordion({ title, children, open = false }) {
 				onClick={toggleActive}
 			>
 				<h3 className={styles.accordion_title}>{title}</h3>
+				{showerror && <div className={styles.error}>Please Provide required fields</div>}
 				<div>
 					{active ? (
 						<IcMArrowRotateDown />

@@ -1,0 +1,29 @@
+.upload_invoice {
+	flex: 1;
+	height: calc(100vh - 178px);
+	overflow: scroll;
+	border: 1px solid black;
+	border-radius: 8px;
+}
+
+.flex {
+	display: flex;
+}
+
+.formlayout {
+	flex: 1.8;
+	height: calc(100vh - 180px);
+	padding: 4px 8px;
+	margin-left: 26px;
+	overflow: auto;
+}
+
+.errors{
+	font-size: 10px;
+	color: red;
+	padding-left: 4px;
+}
+
+.marginleft{
+	margin-left: 20px;
+}

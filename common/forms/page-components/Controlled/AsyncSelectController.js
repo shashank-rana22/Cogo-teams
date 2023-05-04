@@ -15,8 +15,13 @@ function AsyncSelectController(props) {
 			render={({ field: { onChange, value } }) => (
 				<AsyncSelect
 					{...rest}
-					onChange={onChange}
-					value={value}
+					onChange={(val, obj) => {
+						if (typeof rest?.onChange === 'function') {
+							rest?.onChange(val, obj);
+						}
+						onChange(val, obj);
+					}}
+					value={rest?.value || value}
 				/>
 			)}
 		/>

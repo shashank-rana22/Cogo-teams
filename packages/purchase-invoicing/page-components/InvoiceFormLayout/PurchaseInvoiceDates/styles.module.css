@@ -1,0 +1,76 @@
+.container {
+	background-color: #fff;
+}
+
+.formcontainer {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 16px 0;
+	margin-top: 16px;
+	border: 1px solid #797979;
+	border-radius: 4px;
+}
+
+.heading {
+	margin: 4px 16px;
+}
+
+.datecontainer {
+	width: 240px;
+	margin-left: 26px;
+}
+
+.label {
+	margin: 4px 2px;
+}
+
+.selectcontainer {
+	:global {
+		.ui_select_input_placeholder,
+		::placeholder {
+			font-size: 12px;
+		}
+
+		.ui_select_display_container {
+			width: 240px;
+			max-height: 36px;
+		}
+	}
+}
+
+.exchangeratecontainer {
+	margin-left: 26px;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+}
+
+.marginleft {
+	margin-left: 26px;
+}
+
+.inputcontainer {
+	:global {
+		.ui_input_container {
+			max-width: 240px;
+			max-height: 36px;
+		}
+	}
+}
+
+.delete {
+	margin-top: 26px;
+	margin-left: 16px;
+}
+
+.addbutton {
+	margin-top: 10px;
+}
+
+.errors{
+	font-size: 10px;
+	color: red;
+	padding-left: 4px;
+}

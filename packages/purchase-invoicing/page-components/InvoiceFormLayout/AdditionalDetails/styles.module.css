@@ -1,0 +1,52 @@
+.flex {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.label {
+	width: 210px;
+	padding-left: 16px;
+	margin-top: 10px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.inputcontainer {
+	display: flex;
+	margin: 10px 0;
+
+	:global {
+		.ui_select_input_placeholder,
+		::placeholder {
+			font-size: 12px;
+		}
+
+		.ui_input_container {
+			width: 180px;
+		}
+	}
+}
+
+.selectcontainer {
+	display: flex;
+	margin: 10px 0;
+
+	:global {
+		.ui_select_input_placeholder,
+		::placeholder {
+			font-size: 12px;
+		}
+
+		.ui_select_container {
+			width: 180px;
+		}
+	}
+}
+
+
+.errors{
+	font-size: 10px;
+	color: red;
+	padding-left: 4px;
+}

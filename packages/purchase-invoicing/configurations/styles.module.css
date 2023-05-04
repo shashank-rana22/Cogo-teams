@@ -31,3 +31,67 @@
 	text-decoration: underline;
 	cursor: pointer;
 }
+
+.selectcontainer {
+	:global {
+		.ui_select_input_placeholder,
+		::placeholder {
+			font-size: 12px;
+		}
+
+		.ui_select_input_control {
+			font-size: 12px !important;
+		}
+	}
+
+	:global(.ui_select_container) {
+		width: 100%;
+		max-height: 32px;
+	}
+
+	:global(.ui_select_display_container) {
+		width: 100%;
+		max-height: 32px;
+	}
+}
+
+.inputcontainer {
+	:global(.ui_input_container) {
+		width: 100%;
+		max-height: 32px;
+	}
+
+	:global {
+		.ui_input_control {
+			font-size: 12px !important;
+		}
+	}
+}
+
+.paddingleft {
+	padding-left: 12px;
+}
+
+.delete {
+	display: flex;
+	margin-top: 4px;
+	margin-left: 8px;
+}
+
+.head{
+	font-size: 10px;
+}
+
+.checkbox{
+	display: flex;
+}
+
+.text{
+	margin-top: 6px;
+}
+
+.errors{
+	font-size: 10px;
+	color: red;
+	padding-left: 4px;
+}

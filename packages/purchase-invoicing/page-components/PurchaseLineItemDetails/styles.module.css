@@ -1,0 +1,44 @@
+.heading{
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.margintop{
+    margin-top: 16px;
+}
+
+.label{
+    font-weight: 600;
+    font-size: 12px;
+
+}
+
+.value{
+    font-weight: 600;
+    font-size: 10px;
+}
+
+.margin{
+    margin-top: 6px;
+}
+
+.flex{
+    display: flex;
+}
+
+.marginright{
+    margin-right: 16px;
+}
+
+.marginbottom{
+    margin-bottom: 10px;
+}
+
+.borderbottom{
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+.wrap{
+    flex-wrap: wrap;
+}

@@ -9,7 +9,7 @@ const useGetTaggingBills = ({ shipmentId, serviceProviderId }) => {
 			method  : 'get',
 			authKey : 'get_purchase_bills_tagging_map',
 		},
-		{ manual: true, autoCancel: false },
+		{ manual: true },
 	);
 
 	const getMappings = async () => {

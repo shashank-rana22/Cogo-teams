@@ -1,10 +1,12 @@
 import React from 'react';
 
+import { renderMappingsFunction } from '../../configurations/mappingslineItems';
 import { renderFunction } from '../../configurations/serviceconfig';
 
 import styles from './styles.module.css';
 
-function SingleColumn({ lineitem, fields }) {
+function SingleColumn({ lineitem, fields, ismappings, renderCheck, mappingtable }) {
+	const renderMethod = ismappings ? renderMappingsFunction(renderCheck) : renderFunction;
 	return (
 		<div className={styles.tablecolumn}>
 			{fields.map((field) => (
@@ -13,9 +15,9 @@ function SingleColumn({ lineitem, fields }) {
 						flex  : (field.span || 1),
 						width : `${((field.span || 1) * (100 / 12))}px`,
 					}}
-					className={styles.value}
+					className={`${styles.value} ${!mappingtable ? styles.paddingtotal : ''}`}
 				>
-					{renderFunction[field?.key] ? renderFunction[field?.key](lineitem) : '-'}
+					{renderMethod[field?.key] ? renderMethod[field?.key](lineitem) : '-'}
 				</div>
 			))}
 		</div>

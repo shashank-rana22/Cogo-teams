@@ -50,3 +50,28 @@ export const purchaseTypeList = [
 		value : 'reimbursement',
 	},
 ];
+
+export const invoiceTypeOptions = [
+	{ label: 'Invoice', value: 'purchase_invoice' },
+	{ label: 'Credit Note', value: 'CREDIT_NOTE' },
+	{ label: 'Proforma', value: 'proforma_invoice' },
+];
+
+export const EMPTY_EXCHANGE_RATES = { from_currency: '', to_currency: '', rate: 1 };
+
+export const EMPTY_LINE_ITEMS = {
+	code: '', currency: '', rate: 1, unit: '', quantity: '', exchange_rate: '', tax_amt: '', cost: '',
+};
+
+export const UNIT_OPTIONS = [
+	{ label: 'Per container', value: 'per_container' },
+	{ label: 'Per bl', value: 'per_bl' },
+	{ label: 'Per shipment', value: 'per_shipment' },
+	{ label: 'Per Kg', value: 'per_kg' },
+	{ label: 'Per CBM', value: 'per_cbm' },
+	{ label: 'Per Truck', value: 'per_truck' },
+];
+
+export const PAYMENT_MODE_OPTIONS = [
+	{ label: 'Cash', value: 'cash' },
+];

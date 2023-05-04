@@ -1,0 +1,67 @@
+.modal_container {
+	@media (max-width: 768px) {
+		width: 300px !important;
+	}
+
+	:global {
+		.ui_modal_body_container {
+			max-height: 85%;
+		}
+
+		.ui_modal_footer_container {
+			height: 86px;
+			padding: 10px;
+		}
+	}
+}
+
+.body {
+	min-height: 170px;
+}
+
+.footerstyles {
+	display: flex;
+	align-items: center;
+}
+
+.back{
+	cursor: pointer;
+	padding-right: 16px;
+	padding-top: 4px;
+}
+
+.flex{
+	display: flex;
+}
+
+.align{
+	align-items: center;
+}
+
+.purchaselineitems{
+	flex: 1;
+	padding: 12px;
+	height: calc(100vh - 178px);
+	overflow: scroll;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+}
+
+.maplineitems{
+	flex: 1;
+	margin-left: 12px;
+	height: calc(100vh - 178px);
+	overflow: scroll;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+	padding: 12px;
+}
+
+.buttoncontainer{
+	display: flex;
+	justify-content: flex-end;
+}
+
+.button{
+	margin-left: 16px;
+}

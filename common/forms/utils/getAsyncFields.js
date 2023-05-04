@@ -250,6 +250,24 @@ function asyncKamExpertiseRuleOptions() {
 	};
 }
 
+function asyncOrganizationTradeParties() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : '/list_organization_trade_parties',
+		initialCall : true,
+	};
+}
+
+function asyncSearchProducts() {
+	return {
+		labelKey    : 'item_name',
+		valueKey    : 'code',
+		endpoint    : '/search_products_v2',
+		initialCall : true,
+	};
+}
+
 function asyncKamExpertiseGroupOptions() {
 	return {
 		labelKey     : 'name',
@@ -321,4 +339,6 @@ export {
 	listVendors,
 	asyncListCogoEntity,
 	asyncFieldsTicketTypes,
+	asyncOrganizationTradeParties,
+	asyncSearchProducts,
 };
