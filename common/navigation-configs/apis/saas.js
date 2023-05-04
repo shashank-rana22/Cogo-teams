@@ -1308,6 +1308,16 @@ const saas = {
 	],
 	app_saas_cogo_subscription: [
 		{
+			api          : 'capture_checkout_payment',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'cancel_saas_subscription',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
 			api          : 'saas_get_user_active_plan',
 			access_type  : 'public',
 			service_name : 'saas_subscriptions_v2',
@@ -1780,6 +1790,41 @@ const saas = {
 	],
 	app_saas_premium_services: [
 		{
+			api         : 'capture_checkout_payment',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+		{
+			api         : 'post_saas_payment_cancel_order',
+			access_type : 'private',
+			module      : 'dutiesTaxes',
+			feature     : 'dutiesTaxes',
+		},
+		{
+			api          : 'list_organization_billing_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+
+		},
+		{
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
+
+		},
+		{
+			api          : 'create_organization_billing_address',
+			access_type  : 'private',
+			service_name : 'organization',
+
+		},
+		{
 			api         : 'get_sailing_schedules',
 			access_type : 'private',
 			module      : 'dutiesTaxes',
@@ -1930,8 +1975,44 @@ const saas = {
 	],
 	app_saas_trader_eligibilty_check: [
 		{
+			api         : 'capture_checkout_payment',
+			access_type : 'private',
+			module      : 'trader-eligibility-check',
+			feature     : 'trader-eligibility-check',
+		},
+		{
+			api         : 'post_saas_payment_cancel_order',
+			access_type : 'private',
+			module      : 'trader-eligibility-check',
+			feature     : 'trader-eligibility-check',
+		},
+		{
 			api         : 'saas_get_user_quota_usage',
 			access_type : 'private',
+		},
+		{
+			api          : 'list_organization_billing_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+
+		},
+		{
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+
+		},
+		{
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
+
+		},
+		{
+			api          : 'create_organization_billing_address',
+			access_type  : 'private',
+			service_name : 'organization',
+
 		},
 		{
 			api         : 'get_saas_bill_status',
@@ -1996,6 +2077,39 @@ const saas = {
 		},
 	],
 	app_saas_import_export_doc: [
+		{
+			api          : 'list_organization_billing_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+
+		},
+		{
+			api         : 'post_saas_payment_cancel_order',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_billing_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api         : 'capture_checkout_payment',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
 		{
 			api          : 'saas_get_user_quota_usage',
 			access_type  : 'private',
