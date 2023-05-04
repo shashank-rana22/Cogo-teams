@@ -14,5 +14,28 @@
     { "name": "approved", "title": "Approved", "count": "approved" },
     { "name": "released", "title": "Released", "count": "released" },
     { "name": "hold", "title": "Hold", "count": "hold" }
+],
+
+"additionalTabs": [
+	{
+		"name": "approved",
+		"title": "Ready for Release"
+	},
+	{
+		"name": "release_pending",
+		"title": "Pending for Release"
+	},
+	{
+		"name": "surrender_pending",
+		"title": "Pending for Surrender"
+	},
+	{
+		"name": "surrendered",
+		"title": "Surrendered"
+	},
+	{
+		"name": "delivered",
+		"title": "Delivered"
+	}
 ]
 }

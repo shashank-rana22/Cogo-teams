@@ -1,45 +1,41 @@
 import React, { useState } from 'react';
-
+import { startCase } from '@cogoport/utils';
 import useListInvoiceWrapper from '../../../../../../hooks/useListInvoiceWrapper';
-
-import InvoiceInfo from './InvoiceInfo';
+import { format} from '@cogoport/components';
 import styles from './styles.module.css';
 
-function ShipmentInvoices() {
-	const { data, loading } = useListInvoiceWrapper({});
+function ShipmentInvoices({ item = {}}) { 
+
+	const { data, loading } = useListInvoiceWrapper({serial_id :  item?.serial_id}); 
 
 	return (
 		<div className={styles.container}>
+			<table>
+				<thead>
+					<tr className={styles.row}>
+					<th>Invoice Number</th>
+						<th>Type </th>
+						<th>Invoice Value</th>
+						<th> Balance Amount</th>
+						<th>Due Date</th>
+						<th>Payment Status </th>
+					</tr>
+				</thead>
+				<tbody>
 
-			<div className={styles.header}>
-				<div className={styles.invoice_number}>
-					<b>Invoice Number</b>
-				</div>
-				<div className={styles.invoice_type}><b>Type </b></div>
-				<div className={styles.invoice_value}>
-					{' '}
-					<b>Invoice Value </b>
-					{' '}
-				</div>
-				<div className={styles.balance_amount}>
-					{' '}
-					<b>  Balance Amount </b>
-					{' '}
-				</div>
-				<div className={styles.due_date}>
-					{' '}
-					<b>Due Date </b>
-					{' '}
-				</div>
-				<div className={styles.payment_status}>
-					{' '}
-					<b>Payment Status </b>
-					{' '}
-				</div>
-			</div>
+					{(data?.list || []).map((item)=> {
+						<tr className={styles.row}>
+							<td>{item?.invoiceNumber}</td>
+							<td>{item?.invoiceType} </td>
+							<td>{item?.invoiceValue}</td>
+							<td>{item?.balanceAmount}</td>
+							<td>{format(item?.dueDate, 'dd MM yyyy', null, true)}</td>
+							<td>{startCase(item?.paymentStatus)}</td> 
+						</tr>
+					})}
+				</tbody>
 
-			{(data?.list || []).map((item) => <InvoiceInfo item={item} />)}
-
+			</table>
 		</div>
 	);
 }

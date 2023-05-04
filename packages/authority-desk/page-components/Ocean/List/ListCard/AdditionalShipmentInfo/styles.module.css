@@ -1,19 +1,32 @@
 .container{
     border-top : 1px solid #F2E3C3;  
     padding: 24px;
+
+    :global{
+        .ui_toggle_container.ui_ps_size_md .ui_toggle_offlabel{
+            font-size: 14px;
+        }
+        .ui_toggle_container.ui_ps_size_md .ui_toggle_onlabel{
+            font-size: 14px;
+        }
+    }
 } 
 
 .header{
     background: #F3FAFA; 
     border: 1px solid #88CAD1; 
     padding: 16px 32px; 
-    display: flex;
+    display: flex; 
+    font-size: 12px; 
+
 justify-content: space-around; 
 } 
 
 .customer{
     color: #000000; 
-    font-size: 12px; 
     font-weight: 600; 
-    
+} 
+
+.toggle { 
+    place-content: end;
 }

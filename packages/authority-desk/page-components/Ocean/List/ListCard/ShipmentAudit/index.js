@@ -61,12 +61,13 @@ function ShipmentAudit({ item = {}, showAudit = true, setShowAudit = () => {}, b
 									{tabs[tab]}
 								</div>
 							))}
-						</div>
-
+						</div>  
+						
+						<div className={styles.more_info}> 
 						{additionalTab === 'invoices' ? <Invoices /> : null}
 						{additionalTab === 'payments' ? <Organizations /> : null}
 						{additionalTab === 'shipments' ? <OrgShipments /> : null}
-
+						</div>
 					</>
 				</Modal.Body>
 				<Modal.Footer>

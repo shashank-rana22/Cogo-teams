@@ -1,0 +1,22 @@
+
+.container{
+	display: flex;
+	margin: 8px;
+}
+
+.heading{
+	font-weight: 700;
+	font-size: 14px;
+	color: #393f70;
+	margin-bottom: 20px;
+}
+
+.button_container{
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 8px;
+} 
+
+.form{
+	
+}

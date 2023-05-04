@@ -32,7 +32,6 @@ function BlDetails({ item = {} }) {
 
 				</tbody>
 			</table>
-
 		</div>
 	);
 }

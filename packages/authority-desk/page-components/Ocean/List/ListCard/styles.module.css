@@ -49,8 +49,7 @@ border-right: 1px solid #F2E3C3;
 
 .documents_and_invoices{ 
 padding-left: 24px;  
-border-right: 1px solid #F2E3C3;  
-width: 40%; 
+width: 30%; 
 } 
 
 .documents {
@@ -70,12 +69,18 @@ padding-left: 4px;
 } 
 
 .bl_details{
-    font-size: 12px; 
-    padding-left: 24px;
+font-size: 12px; 
+padding-left: 24px; 
+border-left: 1px solid #F2E3C3;  
+display: flex; 
+align-items: center;  
+width: 45%;
+justify-content: space-around;
 } 
 
 .organization_details{
-display: flex; 
+display: flex;  
+align-items: center;
 justify-content: space-around; 
 font-size: 12px; 
 width: 90%;
@@ -113,5 +118,17 @@ width: 90%;
 
 .additional_text{
     border-bottom: 1px solid #000;
+} 
+
+.bl_remark_detail {
+    font-size: 10px; 
+
+   table{
+    border-spacing: 8px;
+   }
+} 
+
+.all_remarks{
+    max-width: none !important;
 }
 

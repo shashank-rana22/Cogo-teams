@@ -5,7 +5,7 @@ import EmptyState from '../../../commons/EmptyState';
 import ListCard from './ListCard';
 import styles from './styles.module.css';
 
-export default function List({ data, allFilters = {}, setAllFilters = () => {} }) {
+export default function List({ data, allFilters = {}, setAllFilters = () => {} , role = ''}) {
 	const { filters } = allFilters;
 	// const { list = [], total } = data;
 
@@ -34,7 +34,8 @@ export default function List({ data, allFilters = {}, setAllFilters = () => {} }
 					<ListCard
 						key={item?.id}
 						item={item}
-						bucket={allFilters?.bucket}
+						role = {role} 
+						allFilters = {allFilters}
 					/>
 				))}
 

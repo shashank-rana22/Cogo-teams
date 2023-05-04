@@ -1,4 +1,5 @@
-import { Toast } from '@cogoport/components';
+import { Toast } from '@cogoport/components'; 
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateShipmentBlDetails = ({
@@ -10,18 +11,18 @@ const useUpdateShipmentBlDetails = ({
 		method : 'POST',
 	});
 
-	const apiTrigger = async (val) => {
+	const onUpdate = async (val) => {
 		try {
 			await trigger({ data: val });
 			Toast.success(successMessage);
 			refetch();
 		} catch (err) {
-			// toastApiError(err);
+			 toastApiError(err);
 		}
 	};
 
 	return {
-		loading, apiTrigger,
+		loading, onUpdate,
 	};
 };
 

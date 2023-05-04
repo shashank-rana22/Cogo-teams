@@ -70,3 +70,9 @@
 .tab_panel {
     margin-top: 12px;
 }
+
+.second_stepper{
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+}

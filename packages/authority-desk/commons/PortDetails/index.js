@@ -1,5 +1,6 @@
 import { cl, Tooltip } from '@cogoport/components';  
-import { IcMPortArrow } from '@cogoport/icons-react';
+import { IcMPortArrow } from '@cogoport/icons-react'; 
+import { format } from '@cogoport/utils';
 import Icons from  './Icon'
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
@@ -11,7 +12,9 @@ function PortDetails({ primary_service = {} }) {
 		origin_main_port = {},
 		destination_main_port = {},
 		origin_port = {},
-		destination_port = {},
+		destination_port = {}, 
+		schedule_arrival = '', 
+		schedule_departure = '',
 	} = primary_service; 
 
 	console.log(primary_service, 'primary_servixe');
@@ -50,7 +53,10 @@ function PortDetails({ primary_service = {} }) {
 	const renderLocation = () => (
 		<>
 			<div className={styles.flex_row_origin}>
-				{handleLocationDetails(origin_port, origin_main_port)}
+				{handleLocationDetails(origin_port, origin_main_port)}  
+				{ schedule_departure ? <div className={styles.date}> 
+					{format(schedule_departure, 'dd MMM yyyy', null, true)}</div> : null}
+
 			</div>
 
 			<div className={styles.icon_wrapper}>
@@ -58,7 +64,9 @@ function PortDetails({ primary_service = {} }) {
 			</div>
 
 			<div className={styles.flex_row_destination}>
-				{handleLocationDetails(destination_port, destination_main_port)}
+				{handleLocationDetails(destination_port, destination_main_port)} 
+				{ schedule_arrival ? <div className={styles.date}> 
+					{format(schedule_arrival, 'dd MMM yyyy', null, true)} </div> : null}
 			</div>
 		</>
 	);
@@ -66,8 +74,7 @@ function PortDetails({ primary_service = {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.icons_and_service}>
-				{/* <Icons service = {primary_service?.service_type}/> */}
-				{/* <span>FCL</span> */}
+				<Icons service_type ={primary_service?.service_type}/>
 			</div>
 			{renderLocation()}
 		</div>

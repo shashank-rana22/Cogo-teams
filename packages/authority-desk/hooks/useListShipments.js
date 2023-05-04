@@ -3,7 +3,7 @@ import { useState, useCallback, useEffect } from 'react';
 
 const emptyData = { list: [], total: 0, total_page: 0, count_stats: {} };
 
-function useListShipments() {
+function useListShipments({ item}) {
 	const [data, setData] = useState(emptyData);
 
 	const [{ loading }, trigger] = useRequest({
@@ -18,7 +18,7 @@ function useListShipments() {
 					filters: {
 						state                : ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress'],
 						is_job_closed        : false,
-						importer_exporter_id : '1e4b9f43-4863-4e29-a944-8e9e8780e514',
+						importer_exporter_id : '1e4b9f43-4863-4e29-a944-8e9e8780e514' || item?.importer_exporter_id,
 					},
 					invoice_value_required: true,
 				},

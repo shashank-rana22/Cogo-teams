@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-const useListInvoiceWrapper = ({ registerationNumber = '' }) => {
+const useListInvoiceWrapper = ({serial_id = '', registerationNumber = '' }) => {
 	const [
 		{ data, loading },
 		trigger,
@@ -19,7 +19,7 @@ const useListInvoiceWrapper = ({ registerationNumber = '' }) => {
 			try {
 				await trigger({
 					params: {
-						// jobNumber               : '144294',
+						jobNumber               :  serial_id,
 						jobType                 : 'SHIPMENT',
 						jobSource               : 'LOGISTICS',
 						buyerRegistrationNumber : registerationNumber,
