@@ -10,6 +10,12 @@ import PortPair from './PortPair';
 import ServiceDetail from './ServiceDetail';
 import styles from './styles.module.css';
 
+const handleDownload = (val) => {
+	if (val) {
+		window.open(val, '_blank');
+	}
+};
+
 function Card({ item, filters }) {
 	const {
 		importer_exporter = {}, requested_by = '', requester_name = '',
@@ -32,12 +38,6 @@ function Card({ item, filters }) {
 	item.services.forEach((service) => {
 		services[`${service}_services`] = (item[`${service}_services`] || []).length;
 	});
-
-	const handleDownload = (val) => {
-		if (val) {
-			window.open(val, '_blank');
-		}
-	};
 
 	return (
 		<div className={styles.card}>
