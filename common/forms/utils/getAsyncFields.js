@@ -284,6 +284,18 @@ function asyncListCogoEntity() {
 		},
 	};
 }
+
+function asyncAccountEngagementScoringEvents() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'name',
+		endpoint     : '/engagement_scoring_event_names',
+		authkey      : 'get_allocation_engagement_scoring_event_names',
+		microService : 'allocation',
+		initialCall  : true,
+	};
+}
+
 function asyncFieldsTicketTypes() {
 	return {
 		labelKey     : 'TicketType',
@@ -348,5 +360,6 @@ export {
 	asyncListCogoEntity,
 	asyncListHsCodes,
 	asyncListCurrency,
+	asyncAccountEngagementScoringEvents,
 	asyncFieldsTicketTypes,
 };

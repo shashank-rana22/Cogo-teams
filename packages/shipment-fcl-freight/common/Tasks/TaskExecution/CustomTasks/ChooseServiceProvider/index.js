@@ -24,7 +24,7 @@ function ChooseServiceProvider({
 		return service_ids;
 	});
 
-	const { apiData, loading } = useListShipmentBookingConfirmationPreferences({
+	const { data, loading } = useListShipmentBookingConfirmationPreferences({
 		defaultFilters: {
 			service_id   : service_ids,
 			service_type : task.service_type,
@@ -97,7 +97,7 @@ function ChooseServiceProvider({
 
 	return (
 		<div>
-			{(apiData?.list || []).map((item) => (
+			{(data?.list || []).map((item) => (
 				<Card
 					item={item}
 					priority={item.priority}

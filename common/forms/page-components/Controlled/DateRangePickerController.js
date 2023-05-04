@@ -13,13 +13,12 @@ function DateRangePickerController(props) {
 			control={control}
 			name={name}
 			rules={rules}
-			render={({ field: { onChange, onBlur, value } }) => (
+			render={({ field: { onChange, value } }) => (
 				<DateRangepicker
 					{...rest}
 					key={rest.id}
 					onChange={onChange}
 					value={value}
-					onBlur={onBlur}
 				/>
 			)}
 		/>
