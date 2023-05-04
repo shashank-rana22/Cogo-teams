@@ -1,22 +1,36 @@
-
-.container{
-	display: flex;
-	margin: 8px;
+.no_data_warning {
+	font-weight: 500;
+	color: var(--color-primary-error-red-2);
 }
 
-.heading{
-	font-weight: 700;
-	font-size: 14px;
-	color: #393f70;
-	margin-bottom: 20px;
-}
-
-.button_container{
+.checkbox_controller {
 	display: flex;
-	justify-content: flex-end;
-	margin-top: 8px;
-} 
-
-.form{
+	flex-direction: column;
+	padding: 0;
 	
+	:global {
+		.ui_checkbox_container {
+			padding: 0 0 10px 0;
+		}
+	}
+}
+
+.checkbox_controller + .error_message {
+	margin-top: -10px;
+}
+
+.request_modal {
+	:global {
+		.ui_modal_footer_container .ui_button_container:not(:last-of-type) {
+			margin-right: 10px;
+		}
+	}
+}
+
+.error_message {
+	color: var(--color-primary-error-red-2);
+}
+
+.form_element {
+	margin-bottom: 10px;
 }

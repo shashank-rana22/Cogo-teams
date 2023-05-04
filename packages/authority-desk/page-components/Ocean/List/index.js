@@ -1,11 +1,11 @@
-import { Pagination } from '@cogoport/components';
+import { Loader, Pagination } from '@cogoport/components';
 
 import EmptyState from '../../../commons/EmptyState';
 
 import ListCard from './ListCard';
 import styles from './styles.module.css';
 
-export default function List({ data, allFilters = {}, setAllFilters = () => {} , role = ''}) {
+export default function List({ data, loading, allFilters = {}, setAllFilters = () => {}, role = '' }) {
 	const { filters } = allFilters;
 	// const { list = [], total } = data;
 
@@ -25,6 +25,10 @@ export default function List({ data, allFilters = {}, setAllFilters = () => {} ,
 		/>
 	);
 
+	if (loading) {
+		return <Loader themeType="primary" />;
+	}
+
 	return data?.list?.length === 0 ? <EmptyState /> : (
 		<>
 			{renderPagination}
@@ -34,8 +38,8 @@ export default function List({ data, allFilters = {}, setAllFilters = () => {} ,
 					<ListCard
 						key={item?.id}
 						item={item}
-						role = {role} 
-						allFilters = {allFilters}
+						role={role}
+						allFilters={allFilters}
 					/>
 				))}
 

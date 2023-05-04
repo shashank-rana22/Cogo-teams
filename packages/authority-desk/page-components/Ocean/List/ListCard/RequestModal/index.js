@@ -1,96 +1,83 @@
-import React from "react";
-import { CheckboxGroup, Modal , Textarea} from "@cogoport/components";
-import useUpdateShipmentBlDetails from "../../../../../hooks/useUpdateShipmentBlDetails";
-import RestrictRequest from "./RestrictRequest";
-import styles from "./styles.module.css";
+import { Button, Modal } from '@cogoport/components';
+import { CheckboxGroupController, TextAreaController, useForm } from '@cogoport/forms';
 
-function RequestModal({
-	requestModal,
-	setRequestModal = () => {},
-	data = {},
-	allFilters = {},
-	refetch = () => {},
-}) {
-	const { trade_type } = data || {};
+import useUpdateShipmentBlDoDetails from '../../../../../hooks/useUpdateShipmentBlDoDetails';
 
-	const documentOptions = data?.bill_of_ladings || data?.delivery_orders;
+import RestrictRequest from './RestrictRequest';
+import styles from './styles.module.css';
 
-	const blOptions = [];
-	const filteredBls = documentOptions?.filter(
-		(item) => !["surrender_pending", "surrendered"].includes(item?.status)
-	);
-	filteredBls?.map((item) =>
-		blOptions.push({
-			label: item?.bl_number || item?.do_number,
-			value: item?.id,
-		})
-	);
+function RequestModal({ closeModal = () => { }, data = {} }) {
+	const { trade_type, bill_of_ladings, delivery_orders, is_request_doc_allowed } = data || {};
 
-	// const controls = control(blOptions);
+	const documentOptions = bill_of_ladings || delivery_orders;
 
-	// const { handleSubmit, fields, error, onError, onUpdate } = useUpdateShipmentBlDetailss(
-	// 	{
-	// 		blOptions,
-	// 		setRequestModal,
-	// 		controls,
-	// 		refetch,
-	// 		trade_type,
-	// 	},
-	// ); 
+	const blOptions = (documentOptions || []).filter(
+		(item) => !['surrender_pending', 'surrendered'].includes(item?.status),
+	).map((item) => ({
+		label : item?.bl_number || item?.do_number,
+		value : item?.id,
+	}));
 
-	const setValue = (key, value) => {
-		setFormValues({ ...formValues, [key]: value });
+	const { formState: { errors }, control, handleSubmit } = useForm();
+
+	const { onUpdate, loading } = useUpdateShipmentBlDoDetails({ trade_type });
+
+	const onSubmit = (formData) => {
+		const payload = {
+			ids  : formData?.ids,
+			data : {
+				[trade_type === 'export' ? 'bl_remarks' : 'remarks']:
+					{ comment: formData?.remarks, status: 'requested' },
+				status: 'requested',
+			},
+		};
+		onUpdate(payload);
 	};
 
-	return (
-		<div className={styles.container}>
-			{data?.is_request_doc_allowed ? (
-				<Modal
-					show={requestModal}
-					onClose={() => setRequestModal(false)}
-				>
-					<div style={{ minHeight: "30vh" }}>
-						<div className={styles.heading}>
-							Request for Approval
+	return !is_request_doc_allowed ? (
+		<Modal show onClose={closeModal} showCloseIcon={!loading} className={styles.request_modal}>
+			<Modal.Header title="Request for Approval" />
+
+			<Modal.Body>
+				<div className={styles.form}>
+					{blOptions.length === 0 ? (
+						<div className={styles.no_data_warning}>
+							No document has been uploaded!
 						</div>
+					) : null}
 
-						{controls?.[0]?.options?.length === 0 ? (
-							<div style={{ fontWeight: "500", color: "red" }}>
-								No document has been uploaded!
-							</div>
-						) : null}
-					</div>
-
-					<div className={styles.form}>
-						{/* <CheckboxGroup
-							options={blOptions}
-							onChange={(val) => setValue('bl_doc', val)}
-							value={formValues.bl_doc || []}
-							style={{ marginLeft: "auto" }}
-							className={styles.options}
-						/> */}  
-
-							<Textarea
-							value={formValues.remarks}
-							onChange={(val) => setValue('remarks', val)}
+					<div className={styles.form_element}>
+						<CheckboxGroupController
+							name="ids"
+							control={control}
 							size="md"
-							placeholder="Enter Remarks..."
+							options={blOptions}
+							className={styles.checkbox_controller}
+							rules={{ required: 'This field is required' }}
 						/>
-						
+						{errors.ids ? <div className={styles.error_message}>{errors.ids.message}</div> : null}
 					</div>
 
-					<div className={styles.button_container}>
-						{/* <Button onClick={handleSubmit(onUpdate, onError)}>Request</Button> */}
+					<div className={styles.form_element}>
+						<TextAreaController
+							name="remarks"
+							control={control}
+							size="md"
+							rows={4}
+							placeholder="Enter Remarks Here..."
+							rules={{ required: 'This field is Required' }}
+						/>
+						{errors.remarks ? <div className={styles.error_message}>{errors.remarks.message}</div> : null}
 					</div>
-				</Modal>
-			) : (
-				<RestrictRequest
-					requestModal={requestModal}
-					setRequestModal={setRequestModal}
-				/>
-			)}
-		</div>
-	);
+				</div>
+			</Modal.Body>
+
+			<Modal.Footer>
+				<Button disabled={loading} themeType="secondary" onClick={closeModal}>Cancel</Button>
+				<Button disabled={loading} onClick={handleSubmit(onSubmit)}>Request</Button>
+			</Modal.Footer>
+		</Modal>
+	) : <RestrictRequest closeModal={closeModal} />;
 }
 
 export default RequestModal;

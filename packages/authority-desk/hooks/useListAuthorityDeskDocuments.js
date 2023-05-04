@@ -7,11 +7,10 @@ const emptyData = { list: [], total: 0, total_page: 0, count_stats: {} };
 const shipmentStates = ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress', 'completed'];
 
 function useListAuthorityDeskDocuments({ activeTab, service, bucket, filters }) {
-	console.log({filters})
 	const [data, setData] = useState(emptyData);
 
 	const [{ loading }, trigger] = useRequest({
-		url    : `${service}/list_authority_desk_${activeTab === 'import' ? 'do' : 'bl'}_shipments`,
+		url    : `${service}/list_authority_desk_${activeTab}_shipments`,
 		method : 'GET',
 	}, { manual: true });
 
@@ -35,23 +34,13 @@ function useListAuthorityDeskDocuments({ activeTab, service, bucket, filters }) 
 			});
 
 			setData(res.data || {});
-
-			// if (res.data?.list?.length === 0 && filters.page > 1) {
-			// 	setFilters({ ...filters, page: 1 });
-			// } else {
-			// 	setData(res.data || {});
-			// }
 		} catch (err) {
-			// const mešsage = err?.response?.data?.message || err?.message || 'Something went wrong !!';
-			// if (message !== 'canceled') { Toast.error(message); }
-			// setData(emptyData);
+			toastApiError(err);
+			setData(emptyData);
 		}
-	}, [trigger, bucket,filters]);
-
-	console.log(data, 'data');
+	}, [trigger, bucket, filters]);
 
 	useEffect(() => {
-		console.log("odns")
 		listShipments();
 	}, [listShipments]);
 

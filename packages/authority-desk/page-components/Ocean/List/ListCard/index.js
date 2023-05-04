@@ -1,22 +1,25 @@
-import { Button, Tooltip } from "@cogoport/components";
-import { format, startCase } from "@cogoport/utils";
-import React, { useState } from "react";
-import formatAmount from "@cogoport/globalization/utils/formatAmount";
-import { IcMLiveChat } from "@cogoport/icons-react";
-import CargoDetails from "../../../../commons/CargoDetails";
-import PortDetails from "../../../../commons/PortDetails";
-import ShipmentBreif from "../../../../commons/ShipmentBreif";
-import RequestModal from "./RequestModal";
-import AdditionalShipmentInfo from "./AdditionalShipmentInfo";
-import ShipmentAudit from "./ShipmentAudit";
-import styles from "./styles.module.css";
+import { Button, Tooltip } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { IcMLiveChat } from '@cogoport/icons-react';
+import { format, startCase } from '@cogoport/utils';
+import React, { useState } from 'react';
+
+import CargoDetails from '../../../../commons/CargoDetails';
+import PortDetails from '../../../../commons/PortDetails';
+import ShipmentBreif from '../../../../commons/ShipmentBreif';
+
+import AdditionalShipmentInfo from './AdditionalShipmentInfo';
+import RequestModal from './RequestModal';
+import ShipmentAudit from './ShipmentAudit';
+import styles from './styles.module.css';
 
 function ListCard({ item = {}, role = '', allFilters = {} }) {
+	const { bucket } = allFilters;
 	const [showDetails, setShowDetails] = useState(false);
 
-	const [showAudit, setShowAudit] = useState(false); 
+	const [showModal, setShowModal] = useState(false);
 
-	const [requestModal , setRequestModal] = useState(false);
+	const closeModal = () => setShowModal(false);
 
 	const { freight_service, bill_of_ladings } = item;
 
@@ -25,17 +28,16 @@ function ListCard({ item = {}, role = '', allFilters = {} }) {
 		free_days_demurrage_origin,
 		free_days_detention_destination,
 		free_days_detention_origin,
-	} = freight_service; 
-
+	} = freight_service;
 
 	const renderButtonCondition = () => {
 		if (
-			role === 'okam' &&
-			['ineligible', 'hold'].includes(tab) &&
-			data?.validation_status?.invoice_validation_status
+			role === 'kam'
+			&& ['ineligible', 'hold'].includes(bucket)
+			&& item?.validation_status?.invoice_validation_status
 		) {
 			return (
-				<Button onClick={() => setRequestModal(!requestModal)}>
+				<Button onClick={() => setShowModal('request_modal')}>
 					Request
 				</Button>
 			);
@@ -43,7 +45,7 @@ function ListCard({ item = {}, role = '', allFilters = {} }) {
 
 		if (role === 'credit_control') {
 			return (
-				<Button  onClick={() => setShowAudit(!showAudit)}>
+				<Button onClick={() => setShowModal('shipment_audit')}>
 					Audit
 				</Button>
 			);
@@ -64,26 +66,26 @@ function ListCard({ item = {}, role = '', allFilters = {} }) {
 					</tr>
 				</thead>
 				<tbody>
-					{(bill_of_ladings || []).map((bl) => {
-						return (bl?.bl_remarks || []).map((rm) => {
-							return rm?.comment !== "System Invalidated" ? (
-								<tr>
-									<td> {rm?.name}</td>
-									<td> {startCase(rm?.status)}</td>
-									<td>{rm?.comment}</td>
-									<td>
-										{format(
-											rm?.created_at,
-											"dd MMM yyyy - hh:mm a",
-											null,
-											true
-										)}
-									</td>
-									<td> {bl?.bl_number}</td>
-								</tr>
-							) : null;
-						});
-					})}
+					{(bill_of_ladings || []).map((bl) => (bl?.bl_remarks || []).map(
+						(rm) => (rm?.comment !== 'System Invalidated' ? (
+							<tr>
+								<td>
+									{' '}
+									{rm?.name}
+								</td>
+								<td>
+									{' '}
+									{startCase(rm?.status)}
+								</td>
+								<td>{rm?.comment}</td>
+								<td>{format(rm?.created_at, 'dd MMM yyyy - hh:mm a', null, true)}</td>
+								<td>
+									{' '}
+									{bl?.bl_number}
+								</td>
+							</tr>
+						) : null),
+					))}
 				</tbody>
 			</table>
 		</div>
@@ -125,11 +127,11 @@ function ListCard({ item = {}, role = '', allFilters = {} }) {
 						<div className={styles.documents_and_invoices}>
 							<div className={styles.validation}>
 								Sales Invoice Status:
-								{"  "}
+								{'  '}
 								<span className={styles.text}>
 									{item?.invoice_status
-										? "System Validated "
-										: "Validation Pending"}
+										? 'System Validated '
+										: 'Validation Pending'}
 									&nbsp;
 								</span>
 							</div>
@@ -140,7 +142,7 @@ function ListCard({ item = {}, role = '', allFilters = {} }) {
 								<div>
 									BL Type : &nbsp;
 									{startCase(
-										item?.freight_service?.bl_category
+										item?.freight_service?.bl_category,
 									)}
 								</div>
 								<div>
@@ -148,9 +150,9 @@ function ListCard({ item = {}, role = '', allFilters = {} }) {
 									{format(
 										item?.bill_of_ladings
 											?.expected_release_date,
-										"dd MMM yyyy",
+										'dd MMM yyyy',
 										null,
-										true
+										true,
 									)}
 								</div>
 							</div>
@@ -172,7 +174,8 @@ function ListCard({ item = {}, role = '', allFilters = {} }) {
 					<div className={styles.footer}>
 						<div className={styles.organization_details}>
 							<div className={styles.business_name}>
-								Customer Name -{" "}
+								Customer Name -
+								{' '}
 								{item?.importer_exporter?.business_name}
 								&nbsp;
 							</div>
@@ -181,30 +184,32 @@ function ListCard({ item = {}, role = '', allFilters = {} }) {
 								{formatAmount({
 									amount: item?.invoice_status
 										?.outstanding_amount,
-									currency: item?.currency,
-									options: {
-										style: "currency",
-										currencyDisplay: "code",
-										maximumFractionDigits: 2,
+									currency : item?.currency,
+									options  : {
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 2,
 									},
 								})}
 							</div>
 							<div>
-								On-going shipments : &nbsp; &nbsp;{" "}
+								On-going shipments : &nbsp; &nbsp;
+								{' '}
 								{item?.ongoing_shipments}
 							</div>
 						</div>
 
 						<div>
-						{renderButtonCondition()}
+							{renderButtonCondition()}
 						</div>
 					</div>
 				</div>
 
 				{showDetails ? (
 					<div className={styles.additional_audits}>
-						{" "}
-						<AdditionalShipmentInfo item={item} />{" "}
+						{' '}
+						<AdditionalShipmentInfo item={item} />
+						{' '}
 					</div>
 				) : null}
 
@@ -215,25 +220,24 @@ function ListCard({ item = {}, role = '', allFilters = {} }) {
 						onClick={() => setShowDetails(!showDetails)}
 					>
 						&nbsp;
-						{showDetails ? "View Less" : "View More"}
+						{showDetails ? 'View Less' : 'View More'}
 						&nbsp;
 					</span>
 				</div>
 			</div>
-			{showAudit ? (
+
+			{showModal === 'shipment_audit' ? (
 				<ShipmentAudit
-					showAudit={showAudit}
-					setShowAudit={setShowAudit}
+					closeModal={closeModal}
 					item={item}
 				/>
-			) : null} 
+			) : null}
 
-				{requestModal ? (
+			{showModal === 'request_modal' ? (
 				<RequestModal
-					requestModal={requestModal}
-					setRequestModal={setRequestModal}
-					data={item} 
-					allFilters = {allFilters}
+					closeModal={closeModal}
+					data={item}
+					allFilters={allFilters}
 				/>
 			) : null}
 		</>
