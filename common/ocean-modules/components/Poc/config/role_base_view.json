@@ -27,5 +27,12 @@
         "can_edit":["origin_cha","pocs","invoicing_party","service_provider"],
         "edit_internal_poc":[],
         "can_add_service_provider_poc":true
+    },
+    "lastmile_ops_manager":{
+        "trade_parties":["origin_cha","collection_party"],
+        "can_view":["origin_cha","pocs","invoicing_party","service_provider"],
+        "can_edit":["origin_cha","pocs","invoicing_party","service_provider"],
+        "edit_internal_poc":[],
+        "can_add_service_provider_poc":true
     }
 }

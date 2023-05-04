@@ -44,6 +44,7 @@ function DocumentForm({
 			};
 			break;
 		case 'lastmile_ops':
+		case 'lastmile_ops_manager':
 			params = {
 				shipment_id       : shipment_data?.id,
 				organization_ids  : [uploaded_by_org_id],
