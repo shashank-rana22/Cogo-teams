@@ -1,17 +1,25 @@
-.container {
-	min-height: 90vh;
-	background: var(--color-secondary-5);
-	border-radius: 4px;
-
-	:global {
-		.ui_pagination_table_container {
-			justify-content: flex-end;
-			padding: 10px 0 4px;
-			font-size: var(--font-size-md);
-		}
-	}
-}
-
 .list_container {
-	padding: 0 10px;
+padding: 18px 24px;  
+margin-top: 12px;
+background: #FFFFFF;
+border-radius: 12px; 
+
+
+:global {
+	.ui_pagination_table_container {
+		justify-content: flex-end;
+		padding: 10px 0 4px;
+		font-size: var(--font-size-md);
+	} 
+
+	.ui_tab_container.ui_ps_themeType_primary{
+		padding: 6px 10px; 
+		font-size: 12px;
+	} 
+
+	.ui_tabs_list_badge{
+		font-size: 10px;
+	}
+	
+}
 }

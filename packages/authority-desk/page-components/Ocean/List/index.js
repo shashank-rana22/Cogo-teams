@@ -1,13 +1,21 @@
-import { Pagination } from '@cogoport/components';
+import { Pagination } from "@cogoport/components";
+import { Tabs, TabPanel } from "@cogoport/components";
+import EmptyState from "../../../commons/EmptyState";
 
-import EmptyState from '../../../commons/EmptyState';
+import ListCard from "./ListCard";
+import styles from "./styles.module.css";
 
-import ListCard from './ListCard';
-import styles from './styles.module.css';
-
-export default function List({ data, allFilters = {}, setAllFilters = () => {} , role = ''}) {
-	const { filters } = allFilters;
+export default function List({
+	data = {},
+	allFilters = {},
+	setAllFilters = () => {},
+	role = "",
+	additionalTabs = [],
+}) {
+	const { filters, bucket, subApprovedBucket } = allFilters;
 	// const { list = [], total } = data;
+
+	const { count_stats } = data;
 
 	const renderPagination = (
 		<Pagination
@@ -15,30 +23,59 @@ export default function List({ data, allFilters = {}, setAllFilters = () => {} ,
 			// totalItems={total}
 			pageSize={10}
 			currentPage={filters.page}
-			onPageChange={(val) => setAllFilters({
-				...allFilters,
-				filters: {
-					...(allFilters.filters),
-					page: val,
-				},
-			})}
+			onPageChange={(val) =>
+				setAllFilters({
+					...allFilters,
+					filters: {
+						...allFilters.filters,
+						page: val,
+					},
+				})
+			}
 		/>
 	);
 
-	return data?.list?.length === 0 ? <EmptyState /> : (
+	return data?.list?.length === 0 ? (
+		<EmptyState />
+	) : (
 		<>
-			{renderPagination}
 
 			<div className={styles.list_container}>
+				{bucket === "approved" ? (
+					<div>
+						<Tabs
+							activeTab={subApprovedBucket}
+							themeType="primary"
+							onChange={(val) => {
+								setAllFilters({
+									...allFilters,
+									subApprovedBucket: val,
+								});
+							}}
+							className={styles.tab_panel}
+						>
+							{additionalTabs.map((tab) => {
+								const { name, title } = tab;
+								return (
+									<TabPanel
+										name={name}
+										title={title}
+										badge={count_stats[name] || 0}
+									/>
+								);
+							})}
+						</Tabs>
+					</div>
+				) : null}
+
 				{(data?.list || []).map((item) => (
 					<ListCard
 						key={item?.id}
 						item={item}
-						role = {role} 
-						allFilters = {allFilters}
+						role={role}
+						allFilters={allFilters}
 					/>
 				))}
-
 			</div>
 
 			{renderPagination}

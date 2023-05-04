@@ -26,7 +26,7 @@ function BlDetails({ item = {} }) {
 							<td>{startCase(val?.status)}</td>
 							<td>{startCase(val?.status)}</td>
 							<td>{item?.expected_release_date || '--'}</td>
-							<td>piuu</td>
+							<td>{startCase(val?.delivery_mode)}</td>
 						</tr>
 					))}
 

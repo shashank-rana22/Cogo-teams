@@ -1,0 +1,28 @@
+.container {  
+   
+    border-radius: 4px; 
+    font-size: 12px;  
+    padding: 36px;
+    margin: 24px 0;
+  
+    table {
+        width: 100%; 
+        background: #FDFBF6;
+        border: 1px solid #F2E3C3; 
+        border-collapse: collapse;
+
+    } 
+    tbody{
+    text-align: center;
+    }
+
+    tr{
+        border-bottom: 1px solid #F2E3C3;
+    } 
+} 
+
+.row{
+    border-bottom: 1px solid #F2E3C3; 
+}
+
+

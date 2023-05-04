@@ -1,12 +1,11 @@
 import { Modal, cl, Button } from '@cogoport/components';
 import React, { useState } from 'react';
-
+import { startCase } from '@cogoport/utils';
 import CargoDetails from '../../../../../commons/CargoDetails';
 import PortDetails from '../../../../../commons/PortDetails';
 import ShipmentBreif from '../../../../../commons/ShipmentBreif';
 import useUpdateShipmentBlDetails from '../../../../../hooks/useUpdateShipmentBlDetails';
-import OrgShipments from '../AdditionalShipmentInfo/OrgShipments';
-
+import CustodyShipments from './CustodyShipments';
 import BlDetails from './BlDetails';
 import Invoices from './Invoices';
 import Organizations from './Organizations';
@@ -34,7 +33,7 @@ function ShipmentAudit({ item = {}, showAudit = true, setShowAudit = () => {}, b
 				onClose={() => setShowAudit(false)}
 				className={styles.modal_container}
 			>
-				<Modal.Header title={`Go back to ${bucket}`} />
+				<Modal.Header title = {`Shipments > Audits > ${startCase(bucket)}`} />
 				<Modal.Body className={styles.modal_body_content}>
 					<>
 
@@ -51,7 +50,7 @@ function ShipmentAudit({ item = {}, showAudit = true, setShowAudit = () => {}, b
 						</div>
 
 						<div className={styles.tabs}>
-							{ Object.keys(tabs).map((tab) => (
+							{Object.keys(tabs).map((tab) => (
 								<div
 									className={cl`${styles.tab} ${tab === additionalTab ? styles.active : ''}`}
 									role="button"
@@ -66,7 +65,7 @@ function ShipmentAudit({ item = {}, showAudit = true, setShowAudit = () => {}, b
 						<div className={styles.more_info}> 
 						{additionalTab === 'invoices' ? <Invoices /> : null}
 						{additionalTab === 'payments' ? <Organizations /> : null}
-						{additionalTab === 'shipments' ? <OrgShipments /> : null}
+						{additionalTab === 'shipments' ? <CustodyShipments /> : null}
 						</div>
 					</>
 				</Modal.Body>

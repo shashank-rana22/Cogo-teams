@@ -49,7 +49,8 @@ border-right: 1px solid #F2E3C3;
 
 .documents_and_invoices{ 
 padding-left: 24px;  
-width: 30%; 
+width: 30%;  
+font-size: 12px;
 } 
 
 .documents {

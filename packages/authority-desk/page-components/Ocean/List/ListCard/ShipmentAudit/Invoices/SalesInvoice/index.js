@@ -24,8 +24,8 @@ function SalesInvoice() {
 					<td> Due Date</td>
 					<td>Payment Status</td>
 				</th>
-				{(data?.list || []).map((val) => (
-					<tr key={val.id}>
+				{(data?.list || []).map((val) => {
+					return <tr key={val.id}>
 						<td>{val?.invoiceNumber || val?.proformaNumber}</td>
 						<td>
 							{val?.invoiceType}
@@ -36,7 +36,7 @@ function SalesInvoice() {
 						<td>{val?.dueDate}</td>
 						<td>{val?.paymentStatus}</td>
 					</tr>
-				))}
+})}
 			</table>
 
 		</div>

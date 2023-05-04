@@ -1,13 +1,22 @@
-.container {
-    table {
-        width: 100%;
+.container { 
+    background: #FDFBF6;
+    border: 1px solid #F2E3C3;
+    border-radius: 4px; 
+    font-size: 12px;  
+    padding: 6px; 
+    margin: 20px 30px;
+    
+        table {
+            width: 100%;
+        }
+        th, tr{
+            display: flex;
+            text-align: center; 
+            border-bottom: 1px solid #F2E3C3; 
+            padding: 6px;
+        }
+    
+        td {
+            flex: 1;
+        } 
     }
-    th, tr{
-        display: flex;
-        text-align: center;
-    }
-
-    td {
-        flex: 1;
-    } 
-}

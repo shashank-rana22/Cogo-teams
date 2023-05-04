@@ -224,7 +224,8 @@ function ListCard({ item = {}, role = '', allFilters = {} }) {
 				<ShipmentAudit
 					showAudit={showAudit}
 					setShowAudit={setShowAudit}
-					item={item}
+					item={item} 
+					bucket = {allFilters.bucket}
 				/>
 			) : null} 
 
