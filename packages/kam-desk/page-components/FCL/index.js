@@ -1,5 +1,6 @@
 import DeskTabs from '../../common/DeskTabs';
 import HeaderFilters from '../../common/HeaderFilters';
+import Loader from '../../common/Loader';
 import ShipmentType from '../../common/ShipmentType';
 import StepperTabs from '../../common/StepperTabs';
 import useListKamDeskShipments from '../../hooks/useListKamDeskShipments';
@@ -8,7 +9,7 @@ import ShipmentList from './ShipmentList';
 import styles from './styles.module.css';
 
 function Fcl() {
-	const { data } = useListKamDeskShipments({});
+	const { data, loading } = useListKamDeskShipments({});
 
 	return (
 		<div>
@@ -28,7 +29,9 @@ function Fcl() {
 			</div>
 
 			<div>
-				<ShipmentList data={data} />
+				{loading
+					? <Loader />
+					: <ShipmentList data={data} loading={loading} />}
 			</div>
 		</div>
 	);

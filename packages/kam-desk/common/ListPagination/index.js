@@ -18,7 +18,6 @@ function ListPagination({ data = {} }) {
 				totalItems={total_count}
 				pageSize={page_limit}
 				onPageChange={onPageChange}
-
 			/>
 		</div>
 	);

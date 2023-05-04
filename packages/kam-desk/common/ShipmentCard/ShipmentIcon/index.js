@@ -25,6 +25,7 @@ function ShipmentIcon({ shipment_type = '', icon_text = '' }) {
 			<div className={cl`${styles.icon_container} customize_icon`}>
 				<Icon height={HEIGHT} width={WIDTH} fill={currentIcon?.fill || ''} />
 			</div>
+
 			<div className={cl` ${styles.icon_text} customize_icon_text`} style={{ color: currentIcon?.fill }}>
 				{icon_text || currentIcon.text || '' }
 			</div>
