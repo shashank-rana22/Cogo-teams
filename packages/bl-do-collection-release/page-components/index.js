@@ -1,17 +1,10 @@
-import { dynamic } from '@cogoport/next';
 import { Tabs, TabPanel } from '@cogoport/components';
 import FCL from './FCL';
 import LCL from './LCL';
 import FCLLocal from './FCL-Local';
-import TAB_CONFIG from '../configs/TAB_CONFIG.json'
 import { useState } from 'react';
 import styles from './styles.module.css';
 
-const CollectionDesk ={
-  fcl_freight: dynamic(()=> import('./FCL'), {ssr: false}),
-  lcl_freight: dynamic(()=> import('./LCL'), {ssr: false}),
-  fcl_local: dynamic(()=> import('./FCL-Local'), {ssr: false}),
-}
 export default function BLDoCollectionDesk() {
   const [stateProps, setStateProps] = useState({
     activeTab: 'bl_collection',
@@ -19,9 +12,36 @@ export default function BLDoCollectionDesk() {
     filters: {}
   });
 
-  const RenderTab = stateProps?.shipment_type in CollectionDesk 
-  ? CollectionDesk[stateProps.shipment_type] 
-  : null;
+  const renderInnerTabs = () => {
+    return(
+      <div className={styles.inner_tabs}>
+          <Tabs
+              activeTab={stateProps.shipment_type}
+              themeType="primary"
+              onChange={(val)=> setStateProps({...stateProps, shipment_type: val})}
+            >
+              <TabPanel
+              name="fcl_freight"
+              title="FCL"
+              >
+                <FCL stateProps={stateProps}/>
+              </TabPanel>
+                <TabPanel
+                name="lcl_freight"
+                title="LCL"
+              >
+                <LCL stateProps={stateProps}/>
+              </TabPanel>
+              <TabPanel
+                name="fcl_local"
+                title="FCL Local"
+              >
+                <FCLLocal stateProps={stateProps}/>
+              </TabPanel>
+            </Tabs>
+      </div>
+    )
+  }
 	return (
 		<div className={styles.container}>
       <div className={styles.header}>BL/DO Collection</div>
@@ -32,40 +52,26 @@ export default function BLDoCollectionDesk() {
         onChange={(val)=> setStateProps({...stateProps, activeTab: val})}
         fullWidth
         >
-          {
-            TAB_CONFIG.LEVEL_1.map((item)=>{
-              return(
-                <TabPanel
-                name={item.name}
-                title={item.title}
-                >
-                <div className={styles.inner_tabs}>
-                { item.name !=='stationary'?
-                  <Tabs
-                    activeTab={stateProps.shipment_type}
-                    themeType="primary"
-                    onChange={(val)=> setStateProps({...stateProps, shipment_type: val})}
-                  >
-                    {
-                      TAB_CONFIG.LEVEL_2.map((shipmentType)=>{
-                        return (
-                          <TabPanel
-                            name={shipmentType.name}
-                            title={shipmentType.title}
-                            >
-                              <RenderTab/>
-                            </TabPanel>
-                        )
-                      })
-                    }
-                  </Tabs>:
-                  <div>Stationary Tab Component</div>
-                  }
-                  </div>
-              </TabPanel>
-              )
-            })
-          }    
+          <TabPanel
+            name="bl_collection"
+            title="BL Colletion-Release"
+          >
+            {renderInnerTabs()}
+          </TabPanel>
+          <TabPanel
+            name="do_collection"
+            title="DO Release"
+          >
+            {renderInnerTabs()}
+          </TabPanel>
+
+          <TabPanel
+            name="stationary"
+            title="Stationary Management"
+          >
+            Stationary Managemnt
+          </TabPanel>
+        
         </Tabs>
     </div>
 	);
