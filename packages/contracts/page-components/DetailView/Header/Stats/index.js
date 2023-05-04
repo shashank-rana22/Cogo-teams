@@ -30,10 +30,17 @@ function Stats({
 							{startCase(data?.contract_name)}
 						</div>
 					</div>
-					<div className={styles.business_name}>
-						Business Name:
-						<div className={styles.org_name}>
-							{startCase(data?.importer_exporter?.business_name)}
+					<div className={styles.bidding_proof}>
+						{data?.is_bidding_contract &&	(
+							<div className={styles.bidding_contract}>
+								Bidding Contract
+							</div>
+						)}
+						<div className={styles.business_name}>
+							Business Name:
+							<div className={styles.org_name}>
+								{startCase(data?.importer_exporter?.business_name)}
+							</div>
 						</div>
 					</div>
 				</div>
