@@ -25,7 +25,6 @@ function InvoiceModal({
 			show={uploadInvoice}
 			onClose={() => setUploadInvoice(false)}
 			size="lg"
-			onOuterClick={() => setUploadInvoice(false)}
 		>
 			<Modal.Header
 				title="Upload E-invoice Document"
