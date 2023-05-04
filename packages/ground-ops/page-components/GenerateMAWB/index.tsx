@@ -20,8 +20,9 @@ import usePackingList from './Helpers/hooks/usePackingList';
 import styles from './styles.module.css';
 
 const agentOtherChargesCode = [{ code: 'AWB', price: '150' }, { code: 'PCA', price: '250' }];
-const carrierOtherChargesCode = [{ code: 'AMS', price: '' }, { code: 'AWC', price: '' },
-	{ code: 'XRAY', price: '' }, { code: 'CGC', price: '' }];
+const carrierOtherChargesCode = [{ code: 'FSC', chargeType: 'chargeable_wt', price: '' },
+	{ code: 'SSC', chargeType: 'chargeable_wt', price: '' }, { code: 'XRAY', chargeType: 'chargeable_wt', price: '' },
+	{ code: 'AWC', chargeType: 'chargeable_wt', price: '' }, { code: 'AMS', chargeType: 'chargeable_wt', price: '' }];
 const unsavedFields = ['consigneeAddress',
 	'shipperName',
 	'shipperAddress',
@@ -323,6 +324,7 @@ function GenerateMAWB({
 						fields={fields}
 						control={control}
 						errors={errors}
+						setValue={setValue}
 						item={item}
 						setGenerate={setGenerate}
 						handleSubmit={handleSubmit}
@@ -334,6 +336,7 @@ function GenerateMAWB({
 						activeKey={activeKey}
 						setActiveKey={setActiveKey}
 						taskItem={taskItem}
+						formValues={formValues}
 					/>
 				</>
 			)}
