@@ -1,4 +1,4 @@
-import { Pagination } from "@cogoport/components";
+import { Loader, Pagination } from "@cogoport/components";
 import { Tabs, TabPanel } from "@cogoport/components";
 import EmptyState from "../../../commons/EmptyState";
 
@@ -10,7 +10,8 @@ export default function List({
 	allFilters = {},
 	setAllFilters = () => {},
 	role = "",
-	additionalTabs = [],
+	additionalTabs = [], 
+	loading = false,
 }) {
 	const { filters, bucket, subApprovedBucket } = allFilters;
 	// const { list = [], total } = data;
@@ -33,11 +34,14 @@ export default function List({
 				})
 			}
 		/>
-	);
+	); 
 
-	return data?.list?.length === 0 ? (
-		<EmptyState />
-	) : (
+
+	if (loading) {
+		return <Loader themeType="primary" />;
+	}
+
+	return data?.list?.length === 0 ? <EmptyState /> : (
 		<>
 
 			<div className={styles.list_container}>

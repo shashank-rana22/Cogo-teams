@@ -1,21 +1,21 @@
-import React from 'react';
-import { IcCError } from '@cogoport/icons-react';
 import { Modal } from '@cogoport/components';
-import { Content } from './styles.module.css';
+import { IcCError } from '@cogoport/icons-react';
 
-const RestrictRequest = ({ requestModal, setRequestModal }) => {
+import styles from './styles.module.css';
+
+function RestrictRequest({ closeModal = () => {} }) {
 	return (
-		<Modal show={requestModal} onClose={() => setRequestModal(false)}>
+		<Modal show onClose={closeModal}>
 			<div style={{ textAlign: 'center' }}>
 				<IcCError width={28} height={28} />
 			</div>
 
-			<Content>
+			<div className={styles.content}>
 				Oops!!! You cannot request for document release as some of your
 				mandatory tasks are not completed yet.
-			</Content>
+			</div>
 		</Modal>
 	);
-};
+}
 
 export default RestrictRequest;

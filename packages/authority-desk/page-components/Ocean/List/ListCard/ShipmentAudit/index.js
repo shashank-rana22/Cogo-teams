@@ -4,14 +4,14 @@ import { startCase } from '@cogoport/utils';
 import CargoDetails from '../../../../../commons/CargoDetails';
 import PortDetails from '../../../../../commons/PortDetails';
 import ShipmentBreif from '../../../../../commons/ShipmentBreif';
-import useUpdateShipmentBlDetails from '../../../../../hooks/useUpdateShipmentBlDetails';
+import useUpdateShipmentBlDoDetails from '../../../../../hooks/useUpdateShipmentBlDoDetails';
 import CustodyShipments from './CustodyShipments';
 import BlDetails from './BlDetails';
 import Invoices from './Invoices';
 import Organizations from './Organizations';
 import styles from './styles.module.css';
 
-function ShipmentAudit({ item = {}, showAudit = true, setShowAudit = () => {}, bucket = 'eligible' }) {
+function ShipmentAudit({ item = {}, closeModal = () => {}, bucket = 'eligible' }) {
 	const { freight_service } = item;
 
 	const tabs = {
@@ -20,7 +20,7 @@ function ShipmentAudit({ item = {}, showAudit = true, setShowAudit = () => {}, b
 		shipments : 'Shipments In Custody',
 	};
 
-	const { loading, apiTrigger } = useUpdateShipmentBlDetails({});
+	const { loading, apiTrigger } = useUpdateShipmentBlDoDetails({});
 
 	const [additionalTab, setAdditionalTab] = useState('invoices');
 
@@ -29,8 +29,7 @@ function ShipmentAudit({ item = {}, showAudit = true, setShowAudit = () => {}, b
 			<Modal
 				size="fullscreen"
 				show
-				setShowAudit={setShowAudit}
-				onClose={() => setShowAudit(false)}
+				onClose={closeModal}
 				className={styles.modal_container}
 			>
 				<Modal.Header title = {`Shipments > Audits > ${startCase(bucket)}`} />
