@@ -61,8 +61,8 @@
 }
 
 .share_test {
-	cursor: pointer;
 	text-decoration-line: underline;
+	cursor: pointer;
 	background-color: inherit;
 }
 

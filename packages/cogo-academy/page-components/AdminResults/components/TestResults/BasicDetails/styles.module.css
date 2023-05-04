@@ -72,19 +72,19 @@
 	display: flex;
 	flex-wrap: wrap;
 	width: 30%;
-	padding-left: 24px;
 	padding-top: 30px;
+	padding-left: 24px;
 }
 
 .left_flex {
 	width: 50%;
-	background-color: #FAFAFA;
-	padding-left: 24px;
 	padding-top: 30px;
+	padding-left: 24px;
+	background-color: #fafafa;
 }
 
 .middle_flex {
 	width: 20%;
-	background-color: #FAFAFA;
 	padding-top: 30px;
+	background-color: #fafafa;
 }
