@@ -4,10 +4,15 @@
 	:global {
 		.ui_table_body_cell {
 			overflow: unset;
+			text-align: center;
 
 			&:last-child {
 				width: 350px !important;
 			}
+		}
+
+		.ui_table_head_cell {
+			text-align: center;
 		}
 	}
 }
@@ -15,9 +20,9 @@
 .title {
 	width: 100%;
 	margin: 10px 0 0;
+	margin-bottom: 8px;
 	font-size: 12px;
 	font-weight: 700;
-	margin-bottom: 8px;
 }
 
 .rate_container {
@@ -41,12 +46,4 @@
 	height: 100%;
 	background-color: #fff;
 	opacity: 0.7;
-}
-
-.styled_table {
-	:global{
-		.ui_table_head_cell, .ui_table_body_cell {
-			text-align: center;
-		}
-	}
 }
