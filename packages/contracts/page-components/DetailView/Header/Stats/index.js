@@ -39,7 +39,7 @@ function Stats({
 						<div className={styles.business_name}>
 							Business Name:
 							<div className={styles.org_name}>
-								{startCase(data?.importer_exporter?.business_name)}
+								{startCase(data?.importer_exporter?.business_name || '')}
 							</div>
 						</div>
 					</div>
