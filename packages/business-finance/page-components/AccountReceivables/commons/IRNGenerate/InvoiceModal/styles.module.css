@@ -13,6 +13,8 @@
 }
 
 .input_style {
+	width: 230px;
+
 	:global {
 		.ui_input_container {
 			height: 38px;
@@ -32,4 +34,27 @@
 .lable_style {
 	margin-bottom: 4px;
 	font-weight: 600;
+}
+
+.date_container {
+	display: flex;
+	justify-content: space-around;
+}
+
+.div_width {
+	width: 230px;
+}
+
+.upload_container {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 32px;
+}
+
+.upload_Width {
+	width: 360px;
+}
+
+.cancel_style {
+	margin-right: 10px;
 }

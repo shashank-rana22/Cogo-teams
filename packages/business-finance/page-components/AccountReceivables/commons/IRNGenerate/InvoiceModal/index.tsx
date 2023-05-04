@@ -40,8 +40,10 @@ function InvoiceModal({
 				<Modal.Body>
 					<div>
 
-						<div style={{ display: 'flex', justifyContent: 'space-around' }}>
-							<div style={{ width: '230px' }}>
+						<div className={styles.date_container}>
+							<div
+								className={styles.div_width}
+							>
 								<div className={styles.lable_style}>E Invoice Date</div>
 								<DatepickerController
 									control={control}
@@ -59,7 +61,7 @@ function InvoiceModal({
 								)}
 							</div>
 
-							<div style={{ width: '230px' }}>
+							<div className={styles.div_width}>
 
 								<div className={styles.lable_style}>E Invoice Due Date</div>
 								<DatepickerController
@@ -77,7 +79,7 @@ function InvoiceModal({
 									</span>
 								)}
 							</div>
-							<div className={styles.input_style} style={{ width: '230px' }}>
+							<div className={styles.input_style}>
 								<div className={styles.lable_style}>E-invoice Number</div>
 								<InputController
 									control={control}
@@ -94,9 +96,11 @@ function InvoiceModal({
 								)}
 							</div>
 						</div>
-						<div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '32px' }}>
+						<div
+							className={styles.upload_container}
+						>
 
-							<div style={{ width: '360px' }}>
+							<div className={styles.upload_Width}>
 								<div className={styles.lable_style}>E-invoice pdf file</div>
 								<UploadController
 									control={control}
@@ -112,7 +116,7 @@ function InvoiceModal({
 									</span>
 								)}
 							</div>
-							<div style={{ width: '360px' }}>
+							<div className={styles.upload_Width}>
 								<div className={styles.lable_style}>E-invoice xml file</div>
 								<UploadController
 									control={control}
@@ -133,7 +137,9 @@ function InvoiceModal({
 				</Modal.Body>
 				<Modal.Footer>
 					<div className={styles.button_div}>
-						<div style={{ marginRight: '10px' }}>
+						<div
+							className={styles.cancel_style}
+						>
 							<Button
 								className="secondary md"
 								onClick={() => setUploadInvoice(false)}
