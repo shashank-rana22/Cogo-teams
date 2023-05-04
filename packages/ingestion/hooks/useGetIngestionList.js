@@ -193,7 +193,7 @@ function useGetIngestionList() {
 			accessor : (item) => (
 				<div className={styles.re_upload}>
 
-					{item?.request_files?.errored_data_url ? (
+					{!(item?.request_files?.stage === 'completed') ? (
 						<Button onClick={() => { reUploadFiles(item); }} size="md" themeType="secondary">
 							Re-Upload
 						</Button>
