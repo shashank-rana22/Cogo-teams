@@ -50,6 +50,7 @@ function GenerateFreightCertificate({
 				data={containersData || []}
 				columns={tableColumn({ controls, control })}
 				loading={loading}
+				className={styles.styled_table}
 			/>
 
 			<div className={styles.rate_container}>

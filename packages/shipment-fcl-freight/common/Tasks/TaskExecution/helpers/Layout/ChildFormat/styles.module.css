@@ -10,6 +10,14 @@
 	align-items: center;
 	justify-content: space-between;
 	margin: 4px;
+	box-shadow: 2px 0px 8px 0px rgba(208,198,209,1);
+	padding: 12px;
+	border-radius: 4px;
+	margin-bottom: 24px;
+}
+
+.heading {
+	color: var(--color-accent-orange-1);
 }
 
 .child {
@@ -52,4 +60,27 @@
 			opacity: 0.3;
 		}
 	}
+}
+
+.delete_icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	position: relative;
+	height: 10px;
+
+	hr {
+		width: 97%;
+		border-top: 1px solid black;
+	}
+}
+
+.icon {
+	position: absolute;
+	top: -10.7px;
+	right: -3px;
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
 }
