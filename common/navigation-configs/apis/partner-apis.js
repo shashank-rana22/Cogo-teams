@@ -505,6 +505,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_organization_payment_modes',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'create_organization_billing_cycle',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -5557,6 +5562,11 @@ const partner = {
 			api          : 'get_air_freight_incoterms',
 			access_type  : 'private',
 			service_name : 'spot_search',
+		},
+		{
+			api          : 'get_organization_payment_modes',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 	],
 	bl_desk: [
@@ -11483,7 +11493,7 @@ const partner = {
 			service_name : 'tickets',
 		},
 		{
-			api          : 'post_tickets_actvity',
+			api          : 'post_tickets_activity',
 			access_type  : 'private',
 			service_name : 'tickets',
 		},
