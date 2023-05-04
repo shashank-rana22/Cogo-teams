@@ -49,7 +49,7 @@ function ProfileDetails({
 		type: 'count',
 	});
 
-	const { quotationSentData = {} } = useCheckQuotationSentDuplicacy({ userId: activeMessageCard.user_id });
+	const { quotationSentData = {} } = useCheckQuotationSentDuplicacy({ orgId: activeMessageCard.organization_id });
 	const quotationEmailSentAt = quotationSentData.quotation_email_sent_at;
 
 	useEffect(() => {

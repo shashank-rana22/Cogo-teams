@@ -22,7 +22,7 @@ function OrganizationDetails({
 	hideCpButton = false,
 	getOrgDetails = () => {},
 }) {
-	const { organization_id:messageOrgId = '', user_id:messageUserId = '' } = formattedMessageData || {};
+	const { organization_id:messageOrgId = '' } = formattedMessageData || {};
 	const { organization_id:voiceOrgId = '' } = activeVoiceCard || {};
 
 	const organizationId = activeTab === 'message' ? messageOrgId : voiceOrgId;
@@ -37,7 +37,7 @@ function OrganizationDetails({
 	} = useGetOrganizationCogopoints({ organizationId });
 
 	const { promoData = {}, promoLoading } = useGetListPromotions({ organizationId });
-	const { quotationSentData = {} } = useCheckQuotationSentDuplicacy({ userId: messageUserId });
+	const { quotationSentData = {} } = useCheckQuotationSentDuplicacy({ orgId: organizationId });
 
 	const { quotation_email_sent_at, quotation_email_sent_by_name } = quotationSentData || {};
 	const quotation_date = quotation_email_sent_at && format(new Date(quotation_email_sent_at), 'dd MMM YYYY');

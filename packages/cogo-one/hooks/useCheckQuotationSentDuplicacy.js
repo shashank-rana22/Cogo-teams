@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
-const useCheckQuotationSentDuplicacy = ({ userId = '' }) => {
+const useCheckQuotationSentDuplicacy = ({ orgId = '' }) => {
 	const { profile = {} } = useSelector((state) => state);
 	const { user = {} } = profile;
 	const { id: performedBy } = user;
@@ -19,20 +19,20 @@ const useCheckQuotationSentDuplicacy = ({ userId = '' }) => {
 		try {
 			await trigger({
 				params: {
-					user_id         : userId,
+					organization_id : orgId,
 					performed_by_id : performedBy,
 				},
 			});
 		} catch (err) {
 			// console.log(err);
 		}
-	}, [userId, performedBy, trigger]);
+	}, [orgId, performedBy, trigger]);
 
 	useEffect(() => {
-		if (userId) {
+		if (orgId) {
 			checkDuplicacy();
 		}
-	}, [checkDuplicacy, userId]);
+	}, [checkDuplicacy, orgId]);
 
 	return {
 		quotationSentData: data,
