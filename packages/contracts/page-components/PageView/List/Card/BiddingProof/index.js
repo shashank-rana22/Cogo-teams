@@ -9,6 +9,7 @@ function BiddingProof({ bidding_proof, handleDownload }) {
 			{(bidding_proof || []).map((val) => (
 				<Button
 					size="md"
+					key={val?.name}
 					themeType="linkUi"
 					interactive
 					onClick={() => handleDownload(val?.url)}
