@@ -106,7 +106,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 
 					</span>
 					<span>
-						{revoked && (
+						{typeof (revoked) === 'boolean' && (
 							<div>
 								{revoked
 									? <Pill size="md" color="#C4DC91">Fully</Pill>
