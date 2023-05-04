@@ -49,3 +49,13 @@
 	background: red;
 	border-radius: 50%;
 }
+
+.quotation {
+	position: absolute;
+	width: 12px;
+	height: 12px;
+	margin: -8px 0 0 14px;
+	/* background: #ECD7A9; */
+	background: #FDE74D;
+	border-radius: 50%;
+}

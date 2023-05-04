@@ -5,16 +5,19 @@ import { useEffect, useCallback } from 'react';
 const useCheckQuotationSentDuplicacy = ({ userId = '' }) => {
 	const { profile = {} } = useSelector((state) => state);
 	const { user = {} } = profile;
-	const { id:performedBy } = user;
+	const { id: performedBy } = user;
 
-	const [{ loading, data }, trigger] = useRequest({
-		method : 'get',
-		url    : '/check_sent_quotation_duplicacy',
-	}, { manual: true });
+	const [{ loading, data }, trigger] = useRequest(
+		{
+			method : 'get',
+			url    : '/check_sent_quotation_duplicacy',
+		},
+		{ manual: true, autoCancel: false },
+	);
 
-	const checkDuplicacy = useCallback(() => {
+	const checkDuplicacy = useCallback(async () => {
 		try {
-			trigger({
+			await trigger({
 				params: {
 					user_id         : userId,
 					performed_by_id : performedBy,
@@ -26,7 +29,9 @@ const useCheckQuotationSentDuplicacy = ({ userId = '' }) => {
 	}, [userId, performedBy, trigger]);
 
 	useEffect(() => {
-		if (userId) { checkDuplicacy(); }
+		if (userId) {
+			checkDuplicacy();
+		}
 	}, [checkDuplicacy, userId]);
 
 	return {

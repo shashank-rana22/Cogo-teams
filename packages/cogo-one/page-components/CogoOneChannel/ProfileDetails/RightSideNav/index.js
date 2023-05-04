@@ -18,6 +18,7 @@ function RightSideNav({
 	activeMessageCard,
 	activeVoiceCard,
 	activeTab,
+	quotationSentData,
 }) {
 	const dispatch = useDispatch();
 	const { profileData } = useSelector(({ profile }) => ({
@@ -63,6 +64,9 @@ function RightSideNav({
 				const { icon, name, content, hide = false } = item;
 				const showDocumentCount = activeSelect !== 'documents' && name === 'documents'
 				&& documents_count > 0 && !checkConditions;
+				const ShowquotationSentData = activeSelect !== 'organization'
+				&& name === 'organization' && !isEmpty(quotationSentData);
+
 				return (
 					!hide && (
 						<div
@@ -86,6 +90,9 @@ function RightSideNav({
 											documents_count
 										)}
 									</div>
+								)}
+								{ShowquotationSentData && (
+									<div className={styles.quotation} />
 								)}
 								<div>
 									{icon && icon}

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 import COMPONENT_MAPPING from '../../../constants/COMPONENT_MAPPING';
 import useCheckChannelPartner from '../../../hooks/useCheckChannelPartner';
+import useCheckQuotationSentDuplicacy from '../../../hooks/useCheckQuotationSentDuplicacy';
 import useListOmnichannelDocuments from '../../../hooks/useListOmnichannelDocuments';
 import getActiveCardDetails from '../../../utils/getActiveCardDetails';
 
@@ -48,6 +49,9 @@ function ProfileDetails({
 		type: 'count',
 	});
 
+	const { quotationSentData = {} } = useCheckQuotationSentDuplicacy({ userId: activeMessageCard.user_id });
+	const quotationEmailSentAt = quotationSentData.quotation_email_sent_at;
+
 	useEffect(() => {
 		setShowMore(false);
 	}, [activeSelect]);
@@ -80,6 +84,7 @@ function ProfileDetails({
 						setShowMore={setShowMore}
 						setRaiseTicketModal={setRaiseTicketModal}
 						zippedTicketsData={zippedTicketsData}
+						quotationSentData={quotationEmailSentAt}
 					/>
 				)}
 			</div>
@@ -94,6 +99,7 @@ function ProfileDetails({
 				activeMessageCard={activeMessageCard}
 				activeVoiceCard={activeVoiceCard}
 				activeTab={activeTab}
+				quotationSentData={quotationEmailSentAt}
 			/>
 		</div>
 	);
