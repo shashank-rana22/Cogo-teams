@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestAir } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const agentCondition = ['partner', 'micro_service'];
+const AGENT_CONDITION = ['partner', 'micro_service'];
 
 const useCreateManifest = () => {
 	const { user_data:userData } = useSelector(({ profile }:any) => ({
@@ -23,7 +23,7 @@ const useCreateManifest = () => {
 				data: {
 					...payload,
 					uploadedByUserId   : userData?.user?.id,
-					uploadedByUserType : agentCondition.includes(userData?.session_type) ? 'agent' : 'user',
+					uploadedByUserType : AGENT_CONDITION.includes(userData?.session_type) ? 'agent' : 'user',
 				},
 			});
 			setTriggerManifest(null);

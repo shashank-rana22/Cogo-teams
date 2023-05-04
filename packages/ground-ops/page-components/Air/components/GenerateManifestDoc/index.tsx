@@ -1,9 +1,8 @@
-import { Button, Loader, Toast } from '@cogoport/components';
-import { usePublicRequest } from '@cogoport/request';
-import { saveAs } from 'file-saver';
+import { Button, Loader } from '@cogoport/components';
 import { useEffect } from 'react';
 
 import useCreateManifest from '../../hooks/useCreateManifest';
+import useDownloadManifest from '../../hooks/useDownloadManifest';
 import useGetManifest from '../../hooks/useGetManifest';
 
 import styles from './styles.module.css';
@@ -12,8 +11,6 @@ import { stylesTHC } from './stylesTHC';
 interface NestedObj {
 	[key: string]: string;
 }
-
-const generateFromHtmlUrl = 'https://vmoiuzda31.execute-api.ap-south-1.amazonaws.com/production/generate_from_html';
 
 function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 	const { data, getManifest, loading:manifestLoading } = useGetManifest();
@@ -47,34 +44,7 @@ function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 		createManifest(payload, setTriggerManifest);
 	};
 
-	const [{ loading }, trigger] = usePublicRequest({
-		url    : generateFromHtmlUrl,
-		method : 'POST',
-	});
-
-	const handleView = async () => {
-		const html = `<html><head><style>${stylesTHC}</style></head><body>${
-			document.getElementById('manifest').innerHTML
-		}</body></html>`;
-		try {
-			await trigger({
-				data: {
-					html,
-					configs: {
-						landscape : false,
-						format    : 'A4',
-						scale     : 1,
-					},
-				},
-			}).then((res) => {
-				const url = res?.data?.pdf_url;
-				saveAs(url);
-				handleSave(url);
-			});
-		} catch (err) {
-			Toast.error(err?.message || 'Failed to Download');
-		}
-	};
+	const { handleView, loading } = useDownloadManifest(stylesTHC, handleSave);
 
 	useEffect(() => {
 		getManifest(shipmentId);
