@@ -42,7 +42,7 @@ function QuestionsComponent({ test_id, activeAttempt }) {
 			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTab}
-					themeType="tertiary"
+					themeType="secondary"
 					onChange={setActiveTab}
 				>
 					{Object.keys(QUESTIONS_MAPPING).map((item) => {
