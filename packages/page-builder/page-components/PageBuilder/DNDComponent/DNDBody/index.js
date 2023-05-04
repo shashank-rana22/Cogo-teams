@@ -79,6 +79,7 @@ function DNDBody({
 				lastEventIndex={lastEventIndex}
 				setEveryEvents={setEveryEvents}
 				handleUnselectItem={handleUnselectItem}
+
 			/>
 		</section>
 	);

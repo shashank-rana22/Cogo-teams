@@ -83,26 +83,28 @@ function Components(props) {
 				return;
 			}
 
-			if (!isNewItemAdding) {
-				onNewAddingItemProps({ hoveredIndex: hoverIndex });
-				moveItem(dragIndex, hoverIndex);
+			if (modeType === 'edit') {
+				if (!isNewItemAdding) {
+					onNewAddingItemProps({ hoveredIndex: hoverIndex });
+					moveItem(dragIndex, hoverIndex);
 
-				const data = item;
-				data.index = hoverIndex;
-			} else {
-				const belowThreshold = top + height / 2;
-				const newShould = y >= belowThreshold;
+					const data = item;
+					data.index = hoverIndex;
+				} else {
+					const belowThreshold = top + height / 2;
+					const newShould = y >= belowThreshold;
 
-				onNewAddingItemProps({
-					hoveredIndex   : hoverIndex,
-					shouldAddBelow : newShould,
-				});
+					onNewAddingItemProps({
+						hoveredIndex   : hoverIndex,
+						shouldAddBelow : newShould,
+					});
+				}
 			}
 		},
 	});
 
 	const [, drag] = useDrag({
-		type,
+		type    : type || 'text',
 		item    : { type, id, index },
 		collect : (monitor) => ({
 			isDragging: monitor.isDragging(),

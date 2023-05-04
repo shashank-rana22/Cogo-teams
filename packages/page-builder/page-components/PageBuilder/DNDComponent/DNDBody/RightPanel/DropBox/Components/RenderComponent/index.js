@@ -21,6 +21,10 @@ function RenderComponent({
 	type,
 	modeType,
 }) {
+	const { component } = rowData || {};
+
+	const { style } = component || {};
+
 	return (
 		<div>
 			{['container', 'card', 'formSample'].includes(type)
@@ -47,7 +51,7 @@ function RenderComponent({
 					<div
 						style={{
 							...(type === 'divider'
-								? {} : rowData.component.style),
+								? {} : style),
 						}}
 					>
 						<RenderElement
