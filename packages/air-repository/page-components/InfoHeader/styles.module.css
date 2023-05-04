@@ -1,0 +1,8 @@
+.info_container {
+    display: flex;
+    align-items: center;
+}
+
+.info_container::role{
+    background-color: red;
+}

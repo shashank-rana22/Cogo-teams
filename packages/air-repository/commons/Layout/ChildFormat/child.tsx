@@ -62,10 +62,7 @@ function Child({
 						if (!Element) return null;
 						return (
 							<div className={styles.element} style={{ width: `${flex}%` }}>
-								<h4 style={{
-									height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
-								}}
-								>
+								<h4 className={styles.child_label}>
 									{controlItem?.label}
 								</h4>
 								<Element
@@ -82,7 +79,6 @@ function Child({
 									className={styles.font_style}
 								>
 									{errorOriginal}
-
 								</p>
 							</div>
 						);
@@ -90,14 +86,10 @@ function Child({
 					<div style={{ width: '2em', marginTop: '24px' }}>
 						{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 							<IcMDelete
-								className={`form-fieldArray-${name}-remove`}
+								className={`form-fieldArray-${name}-remove ${styles.delete_icon}`}
 								onClick={() => remove(index, 1)}
-								style={{
-									width: '1.8em', height: '1.8em', marginTop: '8px', cursor: 'pointer',
-								}}
 							/>
 						) : null}
-
 					</div>
 				</div>
 			))}

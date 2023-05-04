@@ -9,27 +9,6 @@
 
 .element {
 	:global {
-		/* stylelint-disable-next-line selector-class-pattern */
-		.react-datepicker__input-container {
-			width: 100%;
-
-			:hover {
-				border: 1px solid var(--color-accent-orange-2);
-			}
-
-			input {
-				height: 42px;
-				border: 1px solid #ebebeb;
-				border-radius: 4px;
-			}
-
-			input::placeholder {
-				font-size: 14px;
-				font-weight: 400;
-				color: #bdbdbd;
-			}
-		}
-
 		.ui_input_container {
 			border: 1px solid #333333;
 			height: 32px;
@@ -69,23 +48,6 @@
 					}
 				}
 			}
-		}
-
-		/* stylelint-disable-next-line selector-id-pattern */
-		#booking_rate_procurement_proof {
-			height: unset;
-		}
-
-		.ui_upload_droparea_heading {
-			font-size: 14px;
-			font-weight: 400;
-			color: #bdbdbd;
-		}
-
-		.ui_upload_droparea_subheading {
-			font-size: 12px;
-			font-weight: 400;
-			color: #bdbdbd;
 		}
 	}
 }

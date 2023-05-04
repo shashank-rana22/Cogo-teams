@@ -20,13 +20,16 @@ interface ModalProps {
 function RepositoryModal({ showModal, setShowModal, listRepository, item, edit, setEdit }:ModalProps) {
 	const { handleRepository, loading } = useHandleRepository(edit);
 
-	const { control, handleSubmit, reset, setValue, watch, formState:{ errors } } = useForm();
+	const { control, handleSubmit, setValue, watch, formState:{ errors } } = useForm();
 	const fields = repositoryControls();
 	const mode = watch('mode');
 
 	const onSubmit = (values) => {
 		const payload = { ...values, id: item?.id, performed_by_id: '' };
 		handleRepository(payload, listRepository);
+		if (edit) {
+			setEdit(false);
+		}
 	};
 
 	const finalFields = [
@@ -36,9 +39,11 @@ function RepositoryModal({ showModal, setShowModal, listRepository, item, edit, 
 	];
 
 	useEffect(() => {
-		finalFields.forEach((c) => {
-			setValue(c.name, item[c.name]);
-		});
+		if (edit) {
+			finalFields.forEach((c) => {
+				setValue(c.name, item[c.name]);
+			});
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

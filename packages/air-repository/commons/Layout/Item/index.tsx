@@ -42,9 +42,7 @@ function Item(props) {
 				{...props}
 				control={control}
 			/>
-			<p
-				className={styles.error}
-			>
+			<p className={styles.error}>
 				{errorOriginal}
 			</p>
 		</div>

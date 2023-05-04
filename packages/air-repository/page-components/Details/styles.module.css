@@ -10,14 +10,19 @@
 	content: "";
 	background: #ed3726;
 } */
-/* 
+
 .details_list {
     :global {
-        .right_border {
-            border-right: 1px solid #F8F2E7;
+        .line_division {
+            display: block;
+            width: 1px;
+            height: 32px;
+            background: #F8F2E7;
+            position: relative;
+            right: 20px;
         }
     }
-} */
+}
 
 .action_buttons {
     display: flex;

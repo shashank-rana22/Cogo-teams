@@ -1,3 +1,5 @@
+import InfoHeader from '../page-components/InfoHeader';
+
 export const RepositoryFields = {
 	fields: [
 		{
@@ -7,16 +9,20 @@ export const RepositoryFields = {
 			func  : 'handleAirline',
 		},
 		{
-			key       : 'mode',
-			label     : 'Mode',
-			span      : 0.4,
-			className : 'right_border',
-			func      : 'handleMode',
+			key   : 'mode',
+			label : 'Mode',
+			span  : 0.4,
+			func  : 'handleMode',
 		},
 		{
 			key   : 'poc_name',
-			label : 'POC Name',
-			span  : 0.5,
+			label : (
+				<InfoHeader
+					heading="POC Name"
+					content="Point of contact person "
+				/>
+			),
+			span: 0.5,
 		},
 		{
 			key   : 'email',

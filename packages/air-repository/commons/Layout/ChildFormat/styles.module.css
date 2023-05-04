@@ -24,8 +24,6 @@
 
 .element {
 	padding: 4px;
-
-	/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 	:global {
 		.ui_select_input_placeholder {
 			font-size: 14px;
@@ -39,4 +37,17 @@
 			color: #bdbdbd;
 		}
 	}
+}
+
+.delete_icon {
+	width: 1.8em;
+	height: 1.8em;
+	margin-top: 8px;
+	cursor: pointer;
+}
+
+.child_label {
+	height: 16px;
+	margin-bottom: 6px;
+	font-size: 12px;
 }

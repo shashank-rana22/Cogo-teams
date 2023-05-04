@@ -44,6 +44,7 @@ function CardItem({
 								{isMobile && (
 									<div className={styles.tablelabel}>{field.label}</div>
 								)}
+								<div className="line_division" />
 
 								{loading ? <Placeholder />
 									: (
