@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
-const useCheckQuotationSentDuplicacy = ({ orgId = '' }) => {
+const useCheckQuotationSentConflict = ({ orgId = '' }) => {
 	const { profile = {} } = useSelector((state) => state);
 	const { user = {} } = profile;
 	const { id: performedBy } = user;
@@ -10,7 +10,7 @@ const useCheckQuotationSentDuplicacy = ({ orgId = '' }) => {
 	const [{ loading, data }, trigger] = useRequest(
 		{
 			method : 'get',
-			url    : '/check_sent_quotation_duplicacy',
+			url    : '/check_sent_quotation_conflict',
 		},
 		{ manual: true, autoCancel: false },
 	);
@@ -41,4 +41,4 @@ const useCheckQuotationSentDuplicacy = ({ orgId = '' }) => {
 	};
 };
 
-export default useCheckQuotationSentDuplicacy;
+export default useCheckQuotationSentConflict;
