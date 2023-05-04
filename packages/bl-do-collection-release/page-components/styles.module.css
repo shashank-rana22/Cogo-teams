@@ -1,0 +1,20 @@
+.container{
+  width: 100%;
+  .ui_tab_list_container{
+    margin: 16px;
+  }
+  .ui_ps_themeType_primary{
+    margin: 16px;
+  }
+}
+
+.header{
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.inner_tabs{
+  margin: 16px 0px;
+}

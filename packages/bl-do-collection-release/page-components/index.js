@@ -1,37 +1,72 @@
-import useListBLShipments from "../hooks/useListBLShipment";
-import useListDOShipments from "../hooks/useListDOShipments";
-import useListTasks from '../hooks/useListTasks';
-export default function BLDoCollectionDesk(){
+import { dynamic } from '@cogoport/next';
+import { Tabs, TabPanel } from '@cogoport/components';
+import FCL from './FCL';
+import LCL from './LCL';
+import FCLLocal from './FCL-Local';
+import TAB_CONFIG from '../configs/TAB_CONFIG.json'
+import { useState } from 'react';
+import styles from './styles.module.css';
 
-  const fcl_bl_data = useListBLShipments({prefix: 'fcl_freight'});
-  const lcl_bl_data = useListBLShipments({prefix: 'lcl_freight'});
-  const fcl_local_bl_data = useListBLShipments({prefix: 'fcl_freight_local'});
+const CollectionDesk ={
+  fcl_freight: dynamic(()=> import('./FCL'), {ssr: false}),
+  lcl_freight: dynamic(()=> import('./LCL'), {ssr: false}),
+  fcl_local: dynamic(()=> import('./FCL-Local'), {ssr: false}),
+}
+export default function BLDoCollectionDesk() {
+  const [stateProps, setStateProps] = useState({
+    activeTab: 'bl_collection',
+    shipment_type: 'fcl_freight',
+    filters: {}
+  });
 
-  console.log('fcl_bl_data', fcl_bl_data);
-  console.log('fcl_local_bl_data', fcl_local_bl_data);
-  console.log('lcl_bl_data', lcl_bl_data);
+  const RenderTab = stateProps?.shipment_type in CollectionDesk 
+  ? CollectionDesk[stateProps.shipment_type] 
+  : null;
+	return (
+		<div className={styles.container}>
+      <div className={styles.header}>BL/DO Collection</div>
 
-
-  const fcl_do_data = useListDOShipments({prefix: 'fcl_freight'});
-  const lcl_do_data = useListDOShipments({prefix: 'lcl_freight'});
-  const fcl_local_do_data = useListDOShipments({prefix: 'fcl_freight_local'});
-
-  console.log('fcl_do_data', fcl_do_data);
-  console.log('lcl_do_data', lcl_do_data);
-  console.log('fcl_local_do_data', fcl_local_do_data);
-
-  // const fcl_do_data = useListTasks({prefix: 'fcl_freight'});
-  // const lcl_do_data = useListTasks({prefix: 'lcl_freight'});
-  // const fcl_local_do_data = useListTasks({prefix: 'fcl_local_freight'});
-
-  // console.log('fcl_do_data', fcl_do_data);
-  // console.log('lcl_do_data', lcl_do_data);
-  // console.log('fcl_local_do_data', fcl_local_do_data);
-
-  
-
-
-  return(
-    <div>This is bl do collection desk</div>
-  )
+      <Tabs
+        activeTab={stateProps.activeTab}
+        themeType="primary"
+        onChange={(val)=> setStateProps({...stateProps, activeTab: val})}
+        fullWidth
+        >
+          {
+            TAB_CONFIG.LEVEL_1.map((item)=>{
+              return(
+                <TabPanel
+                name={item.name}
+                title={item.title}
+                >
+                <div className={styles.inner_tabs}>
+                { item.name !=='stationary'?
+                  <Tabs
+                    activeTab={stateProps.shipment_type}
+                    themeType="primary"
+                    onChange={(val)=> setStateProps({...stateProps, shipment_type: val})}
+                  >
+                    {
+                      TAB_CONFIG.LEVEL_2.map((shipmentType)=>{
+                        return (
+                          <TabPanel
+                            name={shipmentType.name}
+                            title={shipmentType.title}
+                            >
+                              <RenderTab/>
+                            </TabPanel>
+                        )
+                      })
+                    }
+                  </Tabs>:
+                  <div>Stationary Tab Component</div>
+                  }
+                  </div>
+              </TabPanel>
+              )
+            })
+          }    
+        </Tabs>
+    </div>
+	);
 }

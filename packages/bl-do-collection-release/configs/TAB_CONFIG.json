@@ -1,0 +1,12 @@
+{
+  "LEVEL_1": [
+      { "name": "bl_collection",  "title": "BL Colletion-Release" },
+      { "name": "do_collection",  "title": "DO Release" },
+      { "name": "stationary",  "title": "Stationary Management" }
+  ],
+  "LEVEL_2":[
+    { "name": "fcl_freight", "title": "FCL" },
+    { "name": "lcl_freight", "title": "LCL" },
+    { "name": "fcl_local", "title": "FCL Local" }
+  ]
+}
