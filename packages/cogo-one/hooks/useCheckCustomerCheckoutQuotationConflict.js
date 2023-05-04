@@ -1,11 +1,11 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useCheckQuotationSentConflict = ({ orgId = '' }) => {
+const useCheckCustomerQuotationConflict = ({ orgId = '' }) => {
 	const [{ loading, data }, trigger] = useRequest(
 		{
 			method : 'get',
-			url    : '/check_sent_quotation_conflict',
+			url    : '/check_customer_quotation_conflict',
 		},
 		{ manual: true, autoCancel: false },
 	);
@@ -35,4 +35,4 @@ const useCheckQuotationSentConflict = ({ orgId = '' }) => {
 	};
 };
 
-export default useCheckQuotationSentConflict;
+export default useCheckCustomerQuotationConflict;

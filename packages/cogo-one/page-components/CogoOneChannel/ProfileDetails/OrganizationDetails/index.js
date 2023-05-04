@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 import { ACCOUNT_TYPE } from '../../../../constants';
-import useCheckQuotationSentConflict from '../../../../hooks/useCheckQuotationSentConflict';
+import useCheckCustomerCheckoutQuotationConflict from '../../../../hooks/useCheckCustomerCheckoutQuotationConflict';
 import useGetListPromotions from '../../../../hooks/useGetListPromocode';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
 import useGetOrganizationCogopoints from '../../../../hooks/useGetOrganizationCogopoints';
@@ -37,7 +37,7 @@ function OrganizationDetails({
 	} = useGetOrganizationCogopoints({ organizationId });
 
 	const { promoData = {}, promoLoading } = useGetListPromotions({ organizationId });
-	const { quotationSentData = {} } = useCheckQuotationSentConflict({ orgId: organizationId });
+	const { quotationSentData = {} } = useCheckCustomerCheckoutQuotationConflict({ orgId: organizationId });
 
 	const { quotation_email_sent_at, quotation_email_sent_by_name } = quotationSentData || {};
 	const quotation_date = quotation_email_sent_at && format(new Date(quotation_email_sent_at), 'dd MMM YYYY');

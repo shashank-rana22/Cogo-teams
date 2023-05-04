@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import COMPONENT_MAPPING from '../../../constants/COMPONENT_MAPPING';
 import useCheckChannelPartner from '../../../hooks/useCheckChannelPartner';
-import useCheckQuotationSentConflict from '../../../hooks/useCheckQuotationSentConflict';
+import useCheckCustomerCheckoutQuotationConflict from '../../../hooks/useCheckCustomerCheckoutQuotationConflict';
 import useListOmnichannelDocuments from '../../../hooks/useListOmnichannelDocuments';
 import getActiveCardDetails from '../../../utils/getActiveCardDetails';
 
@@ -49,7 +49,9 @@ function ProfileDetails({
 		type: 'count',
 	});
 
-	const { quotationSentData = {} } = useCheckQuotationSentConflict({ orgId: activeMessageCard.organization_id });
+	const { quotationSentData = {} } = useCheckCustomerCheckoutQuotationConflict(
+		{ orgId: activeMessageCard.organization_id },
+	);
 	const quotationEmailSentAt = quotationSentData.quotation_email_sent_at;
 
 	useEffect(() => {
