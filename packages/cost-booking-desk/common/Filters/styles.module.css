@@ -20,14 +20,7 @@
 	}
 }
 
-.input_container {
-	:global {
-		.ui_input_container {
-			min-width: 250px;
-			padding-right: 6px;
-		}
-	}
-}
+
 
 .popover_container {
 	:global {

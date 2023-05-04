@@ -1,0 +1,63 @@
+.card {
+	cursor: pointer;
+	background: var(--color-secondary-5);
+	border-radius: 4px;
+	box-shadow: 0 0 6px 2px rgb(68 68 68 / 20%);
+
+	&:not(:last-of-type) {
+		margin-bottom: 14px;
+	}
+
+	&:hover {
+		box-shadow: 0 0 6px 2px rgb(133 110 249 / 20%);
+	}
+}
+
+.shipment_info{
+	width: 20%;
+}
+
+.line_item{
+	width: 20%;
+	margin: auto 20px;
+}
+
+.port{
+	width: 40%;
+}
+
+.cargo{
+	width: 30%;
+}
+
+.card_body {
+	display: flex;
+	align-items: center;
+	padding-bottom: 10px;
+
+	.separator {
+		align-self: stretch;
+		width: 1px;
+		background: var(--color-secondary-greyscale-5);
+	}
+}
+
+.card_footer {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: start;
+	width: 100%;
+	padding: 4px;
+	margin-top: 12px;
+	border-top: 1px solid var(--color-secondary-greyscale-5);
+}
+.footer{
+	position: absolute;
+	right: 0;
+	display: flex;
+	justify-content: flex-end;
+	padding: 4px;
+	font-size: var(--font-size-sm);
+	font-weight: 600;
+}

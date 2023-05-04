@@ -13,7 +13,7 @@ function FilterBy({
 	setShowPopover = () => {},
 }) {
 	const { filters = {}, setFilters = () => {} } = useContext(CostBookingDeskContext) || {};
-	const { date_type, dateRange = '', trade_type } = popoverFilter || {};
+	const { date_type, dateRange = '' } = popoverFilter || {};
 
 	const handleCustomDateChange = (val) => {
 		const { startDate, endDate } = val;
@@ -25,9 +25,8 @@ function FilterBy({
 
 		setFilters({
 			...filters,
-			trade_type : undefined,
-			date_type  : undefined,
-			dateRange  : 'today',
+			date_type : undefined,
+			dateRange : 'today',
 			startDate,
 			endDate,
 
@@ -35,13 +34,11 @@ function FilterBy({
 		setShowPopover(false);
 	};
 
-	const trade_date_cond = trade_type || date_type;
-
 	return (
 		<div>
 			<div className={styles.action_buttons}>
 				<Button
-					disabled={!trade_date_cond}
+					disabled={!date_type}
 					size="sm"
 					onClick={handleReset}
 					themeType="tertiary"
@@ -50,7 +47,7 @@ function FilterBy({
 				</Button>
 
 				<Button
-					disabled={!trade_date_cond
+					disabled={!date_type
 							|| (dateRange
 							&& 	(!popoverFilter?.startDate
 							|| !popoverFilter?.endDate))}

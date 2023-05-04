@@ -1,0 +1,22 @@
+{
+    "assigned":{
+        "new_collections": true,
+        "is_job_closed":false
+    },
+    "in_progress":{
+        "in_progress_collections": true,
+        "is_job_closed":false
+    },
+    "completed":{
+        "completed_collections": true,
+        "is_job_closed":false
+    },
+    "cancelled":{
+        "cancelled_collections": true,
+        "is_job_closed":false
+    },
+    "job_closed":{
+        "is_job_closed":true
+    }
+
+}

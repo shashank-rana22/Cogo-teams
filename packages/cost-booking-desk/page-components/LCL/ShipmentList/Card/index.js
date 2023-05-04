@@ -1,4 +1,4 @@
-import { IcCFfcl, IcMFcustoms, IcMFlocalCharges } from '@cogoport/icons-react';
+import { IcCFlclCustoms, IcMFlcl } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 
 import CardHeader from '../../../../common/Card/CardHeader';
@@ -10,17 +10,13 @@ import ShipmentInfo from '../../../../common/Card/ShipmentInfo';
 import styles from './styles.module.css';
 
 const SHIPMENT_ICON = {
-	fcl_customs: {
-		Icon : IcMFcustoms,
-		text : 'FCL Customs',
+	lcl_customs: {
+		Icon : IcCFlclCustoms,
+		text : 'LCL Customs',
 	},
-	fcl_freight_local: {
-		Icon : IcMFlocalCharges,
-		text : 'FCL Local',
-	},
-	fcl_freight: {
-		Icon : IcCFfcl,
-		text : 'FCL',
+	lcl_freight: {
+		Icon : IcMFlcl,
+		text : 'LCL',
 	},
 };
 
@@ -31,7 +27,7 @@ function Card({ item = {} }) {
 		router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}`);
 	};
 
-	const iconProps = SHIPMENT_ICON[item?.shipment_type] || SHIPMENT_ICON.fcl_freight;
+	const iconProps = SHIPMENT_ICON[item?.shipment_type] || SHIPMENT_ICON.lcl_freight;
 
 	return (
 		<div

@@ -10,7 +10,7 @@ import useListCostBookingDeskShipments from '../../hooks/useListCostBookingDeskS
 import ShipmentList from './ShipmentList';
 import styles from './styles.module.css';
 
-function FclFreight() {
+function LclFreight() {
 	const { loading, data } = useListCostBookingDeskShipments();
 
 	return (
@@ -40,11 +40,10 @@ function FclFreight() {
 				) : (
 					<ShipmentList
 						data={data}
-						loading={loading}
 					/>
 				)}
 			</div>
 		</div>
 	);
 }
-export default FclFreight;
+export default LclFreight;

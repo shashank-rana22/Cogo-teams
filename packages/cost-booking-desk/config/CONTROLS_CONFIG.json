@@ -4,14 +4,14 @@
 		{ "label": "LCL", "value": "lcl_freight" }
 	],
 	"fcl_freight": [
-        { "label": "Export", "value": "export" },
-        { "label": "Import", "value": "import" },
+        { "label": "Export", "value": "export", "isDateFilterVisible":true },
+        { "label": "Import", "value": "import", "isDateFilterVisible":true },
         { "label": "Customs", "value": "fcl_customs" },
         { "label": "Local", "value": "fcl_local" }
     ], 
     "lcl_freight": [
-        { "label": "Export", "value": "export" },
-        { "label": "Import", "value": "import" },
+        { "label": "Export", "value": "export", "isDateFilterVisible":true  },
+        { "label": "Import", "value": "import", "isDateFilterVisible":true },
         { "label": "Customs", "value": "lcl_customs" }
     ]
 }
