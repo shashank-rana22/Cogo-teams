@@ -1,4 +1,4 @@
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, Pill } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
 
 import BankDetails from '../Modals/BankDetails';
@@ -97,12 +97,25 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 		accessor : 'type',
 		id       : 'request_type',
 		Cell     : ({ row: { original } }) => {
-			const { type: requestType = '' } = original || {};
+			const { type: requestType = '', revoked } = original || {};
 			return (
-				<span>
-					{ requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? <span>ICJV Approval </span>
-						: toTitleCase(requestType.replace(/_/g, ' '))}
-				</span>
+				<div className={styles.credit}>
+					<span>
+						{ requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? <span>ICJV Approval </span>
+							: toTitleCase(requestType.replace(/_/g, ' ') || '-')}
+
+					</span>
+					<span>
+						{revoked && (
+							<div>
+								{revoked
+									? <Pill size="md" color="#C4DC91">Fully</Pill>
+									: <Pill size="md" color="#FEF199">Partial</Pill>}
+							</div>
+						)}
+					</span>
+				</div>
+
 			);
 		},
 	},
