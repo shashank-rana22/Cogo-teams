@@ -49,14 +49,10 @@ function Card({ item = {} }) {
 				</div>
 			</div>
 
-			<div className={styles.card_footer}>
-
-				<div className={styles.footer}>
-					GateIn Cutoff:
-					{' '}
-					{format(item.gate_in_cutoff, 'dd MMM yyyy, hh:mm aaa', null, true)}
-				</div>
-
+			<div className={styles.footer}>
+				GateIn Cutoff:
+				{' '}
+				{format(item.gate_in_cutoff, 'dd MMM yyyy, hh:mm aaa', null, true)}
 			</div>
 
 		</div>
