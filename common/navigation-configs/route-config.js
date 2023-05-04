@@ -1,5 +1,6 @@
 import allocations from './config/allocations';
 import athenaDashboard from './config/athena-dashboard';
+import blDoCollectionRelease from './config/bl-do-collection-release';
 import bookingDesk from './config/booking-desk';
 import businessFinance from './config/business-finance';
 import cogoAcademy from './config/cogo-academy';
@@ -43,6 +44,7 @@ const routeConfig = {
 	...lastMileDesk,
 	...welcome,
 	...athenaDashboard,
+	...blDoCollectionRelease,
 };
 
 export default routeConfig;
