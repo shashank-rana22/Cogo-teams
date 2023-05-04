@@ -131,7 +131,6 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 					)}
 					{openReject && (
 						<Modal
-							width={500}
 							show={openReject}
 							onClose={() => {
 								setOpenReject(false);
@@ -151,14 +150,16 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 							</Modal.Body>
 							<Modal.Footer>
 								<div className={styles.button_val}>
-									<Button
-										className="secondary sm"
-										onClick={() => {
-											setOpenReject(false);
-										}}
-									>
-										Cancel
-									</Button>
+									<div className={styles.style_cancel}>
+										<Button
+											className="secondary sm"
+											onClick={() => {
+												setOpenReject(false);
+											}}
+										>
+											Cancel
+										</Button>
+									</div>
 									<Button
 										className="primary sm"
 										disabled={!textValue || loadingReject}
@@ -193,7 +194,6 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	return (
 		<Popover
 			placement="left"
-			interactive
 			render={content()}
 		>
 
