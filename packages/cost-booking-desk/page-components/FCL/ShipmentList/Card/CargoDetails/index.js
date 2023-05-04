@@ -1,5 +1,4 @@
 import { Tooltip, Pill } from '@cogoport/components';
-import { format } from '@cogoport/utils';
 
 import { renderValue } from './renderCargoValue';
 import styles from './styles.module.css';
@@ -17,20 +16,12 @@ const renderCargoPills = (cargo_detail) => (
 		: null))
 );
 
-export default function CargoDetails({ cargo_details, item = {}, activeTab = '' }) {
+export default function CargoDetails({ cargo_details }) {
 	const [firstCargoDetails, ...restCargoDetails] = cargo_details || [];
-
-	function BnExpiry() {
-		return activeTab === 'container_pick_up' && item?.bn_expiry
-			? <Pill>{`BN Expiry : ${format(item.bn_expiry, 'dd MMM yyyy')}`}</Pill>
-			: null;
-	}
 
 	return (
 		<div className={styles.cargo_details_container}>
 			{firstCargoDetails ? renderCargoPills(firstCargoDetails) : null}
-
-			<BnExpiry />
 
 			{restCargoDetails.length > 0 ? (
 				<Tooltip

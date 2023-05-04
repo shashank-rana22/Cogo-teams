@@ -1,12 +1,17 @@
 import { IcCFfcl, IcMFcustoms, IcMFlocalCharges } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { format } from '@cogoport/utils';
+import { useContext } from 'react';
 
 import CardHeader from '../../../../common/Card/CardHeader';
-import CargoDetails from '../../../../common/Card/CargoDetails';
 import LineItems from '../../../../common/Card/LineItems';
-import PortDetails from '../../../../common/Card/PortDetails/DualLocation';
 import ShipmentInfo from '../../../../common/Card/ShipmentInfo';
+import CostBookingDeskContext from '../../../../context/CostBookingDeskContext';
+import getCriticalShipment from '../../../../helpers/getCriticalShipment';
 
+import CargoDetails from './CargoDetails';
+import DualPort from './PortDetails/DualLocation';
+import SinglePort from './PortDetails/SingleLocation';
 import styles from './styles.module.css';
 
 const SHIPMENT_ICON = {
@@ -25,6 +30,8 @@ const SHIPMENT_ICON = {
 };
 
 function Card({ item = {} }) {
+	const contextValues = useContext(CostBookingDeskContext);
+	const { activeTab } = contextValues || {};
 	const router = useRouter();
 
 	const clickCard = () => {
@@ -33,12 +40,18 @@ function Card({ item = {} }) {
 
 	const iconProps = SHIPMENT_ICON[item?.shipment_type] || SHIPMENT_ICON.fcl_freight;
 
+	const isSinglePort = ['fcl_freight_local', 'fcl_customs'].includes(item?.shipment_type);
+
+	const isShipmentCritical = getCriticalShipment({ contextValues, shipment: item });
+
+	const showGateInCutOff = ['assigned', 'in_progress'].includes(activeTab) && item?.gate_in_cutoff;
+
 	return (
 		<div
 			role="button"
 			tabIndex={0}
 			onClick={clickCard}
-			className={styles.card}
+			className={`${styles.card} ${isShipmentCritical ? styles.animate_card : ''}`}
 		>
 			<CardHeader item={item} />
 
@@ -50,7 +63,9 @@ function Card({ item = {} }) {
 				<div className={styles.separator} />
 
 				<div className={styles.port}>
-					<PortDetails data={item} icon={iconProps} />
+					{isSinglePort
+						? <SinglePort data={item} icon={iconProps} />
+						: <DualPort data={item} icon={iconProps} />}
 				</div>
 
 				<div className={styles.separator} />
@@ -65,6 +80,14 @@ function Card({ item = {} }) {
 					<CargoDetails cargo_details={item?.cargo_details || []} item={item} />
 				</div>
 			</div>
+
+			{showGateInCutOff ? (
+				<div className={styles.gate_in_cutoff}>
+					GateIn Cutoff:
+					{' '}
+					{format(item.gate_in_cutoff, 'dd MMM yyyy, hh:mm aaa', null, true)}
+				</div>
+			) : null}
 		</div>
 	);
 }

@@ -3,7 +3,7 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import React from 'react';
 
-import ServiceIcon from '../../ServiceIcon';
+import ServiceIcon from '../../../../../../common/Card/ServiceIcon';
 
 import styles from './styles.module.css';
 
@@ -27,7 +27,7 @@ const handleLocationDetails = (location) => (
 			interactive
 			content={location?.display_name}
 		>
-			<div className={`${styles.ellipsis_text} core_ui_loaction_name`}>{location?.name}</div>
+			<div className={`${styles.ellipsis_text} core_ui_location_name`}>{location?.name}</div>
 		</Tooltip>
 	</>
 );
@@ -35,7 +35,7 @@ const handleLocationDetails = (location) => (
 const getDisplayDate = (date, dateFormat = 'dd MMM yyyy') => (date ? format(date, dateFormat, null, true) : null);
 
 function PortDetails({ data = {}, icon }) {
-	const { origin, destination, schedule_arrival, schedule_departure } = data;
+	const { destination = {}, origin = {}, schedule_arrival = '', schedule_departure = '' } = data;
 
 	return (
 		<div className={`${styles.container} core_ui_port_conatiner`}>
@@ -58,6 +58,7 @@ function PortDetails({ data = {}, icon }) {
 
 			<div className={styles.port_detail}>
 				{handleLocationDetails(destination)}
+
 				{schedule_arrival ? (
 					<div className={styles.eta_etd}>
 						ETA:

@@ -1,3 +1,4 @@
+import CRITICAL_FILTER from '../config/CRITICAL_FILTER';
 import TABWISE_FILTERS from '../config/TABWISE_FILTERS.json';
 
 const keyMapping = {
@@ -6,10 +7,10 @@ const keyMapping = {
 };
 
 export default function getCostBookingFilters({ filters, costBookingContextValues }) {
-	const { activeTab, stepperTab } = costBookingContextValues || {};
+	const { activeTab, stepperTab, shipmentType } = costBookingContextValues || {};
 	const { criticalOn, endDate, startDate, dateRange, date_type, q, ...restFilters } = filters || {};
 
-	const finalFilters = { ...(TABWISE_FILTERS[activeTab] || {}), ...restFilters };
+	let finalFilters = { ...(TABWISE_FILTERS[activeTab] || {}), ...restFilters };
 
 	if (['import', 'export'].includes(stepperTab)) {
 		finalFilters.trade_type = stepperTab;
@@ -17,7 +18,9 @@ export default function getCostBookingFilters({ filters, costBookingContextValue
 
 	if (q) { finalFilters.q = q; }
 
-	// if (criticalOn) {}
+	if (criticalOn) {
+		finalFilters = { ...finalFilters, ...(CRITICAL_FILTER[shipmentType]?.[stepperTab]?.[activeTab] || {}) };
+	}
 
 	if (dateRange && startDate && date_type && endDate) {
 		const start = new Date(startDate);

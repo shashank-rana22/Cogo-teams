@@ -2,11 +2,12 @@ import { IcCFlclCustoms, IcMFlcl } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 
 import CardHeader from '../../../../common/Card/CardHeader';
-import CargoDetails from '../../../../common/Card/CargoDetails';
 import LineItems from '../../../../common/Card/LineItems';
-import PortDetails from '../../../../common/Card/PortDetails/DualLocation';
 import ShipmentInfo from '../../../../common/Card/ShipmentInfo';
 
+import CargoDetails from './CargoDetails';
+import DualPort from './PortDetails/DualLocation';
+import SinglePort from './PortDetails/SingleLocation';
 import styles from './styles.module.css';
 
 const SHIPMENT_ICON = {
@@ -29,6 +30,8 @@ function Card({ item = {} }) {
 
 	const iconProps = SHIPMENT_ICON[item?.shipment_type] || SHIPMENT_ICON.lcl_freight;
 
+	const isSingleLocation = item?.shipment_type === 'lcl_customs';
+
 	return (
 		<div
 			role="button"
@@ -46,7 +49,9 @@ function Card({ item = {} }) {
 				<div className={styles.separator} />
 
 				<div className={styles.port}>
-					<PortDetails data={item} icon={iconProps} />
+					{isSingleLocation
+						? <SinglePort data={item} icon={iconProps} />
+						: <DualPort data={item} icon={iconProps} />}
 				</div>
 
 				<div className={styles.separator} />
@@ -58,7 +63,7 @@ function Card({ item = {} }) {
 				<div className={styles.separator} />
 
 				<div className={styles.cargo}>
-					<CargoDetails cargo_details={item?.cargo_details || []} item={item} />
+					<CargoDetails item={item} />
 				</div>
 			</div>
 		</div>
