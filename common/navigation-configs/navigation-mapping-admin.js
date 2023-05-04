@@ -1359,8 +1359,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-document_desk',
 				title         : 'Document Desk',
-				href          : '/document-desk',
-				as            : '/document-desk',
+				href          : '/v2/document-desk',
+				as            : '/v2/document-desk',
 				type          : 'link',
 				main_apis     : ['list_document_desk_shipments'],
 				possible_apis : [...apis.document_desk, ...apis.cogolens],
