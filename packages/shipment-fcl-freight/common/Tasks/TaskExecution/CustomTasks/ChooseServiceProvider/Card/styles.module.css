@@ -16,12 +16,7 @@
 	font-size: 12px;
 	font-weight: 600;
 	line-height: 14px;
-	color: #5e3def;
-}
-
-.purple {
-	margin-left: 10px;
-	color: #393f70;
+	color: var(--color-accent-orange-1);
 }
 
 .heading {
