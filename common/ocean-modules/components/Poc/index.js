@@ -55,7 +55,6 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) 
 							tradePartnersData={data}
 							setAddCompany={setAddCompany}
 							serviceProviders={serviceProviders}
-							activeStakeholder={activeStakeholder}
 							rolesPermission={rolesPermission}
 						/>
 

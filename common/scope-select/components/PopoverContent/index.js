@@ -108,6 +108,7 @@ export default function PopoverContent({
 						size={size}
 						asyncKey="partner_users"
 						isClearable
+						valueKey="user_id"
 					/>
 				</>
 			) : null }
