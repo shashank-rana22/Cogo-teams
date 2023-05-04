@@ -18,6 +18,10 @@
 	padding-left: 24px;
 }
 
+.toggle_part {
+	z-index: 10;
+}
+
 .heading {
 	font-size: 18px;
 	font-weight: 600;

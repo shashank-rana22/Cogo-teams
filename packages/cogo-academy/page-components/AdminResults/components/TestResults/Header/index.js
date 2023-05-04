@@ -56,7 +56,7 @@ function Header({ header_data, loading = false }) {
 				</p>
 			</div>
 
-			<div style={{ zIndex: '10' }}>
+			<div className={styles.toggle_part}>
 				<Toggle
 					name="a4"
 					size="md"

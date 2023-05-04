@@ -103,15 +103,10 @@ function BasicDetails({ basic_info_data, questions }) {
 							</div>
 						</div>
 					</div>
-
 				</div>
-
 			</div>
 
-			<div className={styles.vertical_line} />
-
 			<div className={styles.right_flex}>
-
 				{
 					Object.keys(content_mapping_right).map((itemKey) => {
 						const { label, renderData } = content_mapping_right[itemKey] || {};
@@ -126,7 +121,6 @@ function BasicDetails({ basic_info_data, questions }) {
 										{renderData}
 									</div>
 								</div>
-
 							</div>
 						);
 					})
