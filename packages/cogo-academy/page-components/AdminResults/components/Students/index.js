@@ -68,7 +68,7 @@ function StudentsComponent({ test_id, status, activeAttempt }) {
 			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTab}
-					themeType="tertiary"
+					themeType="secondary"
 					onChange={setActiveTab}
 				>
 					{Object.keys(STUDENTS_MAPPING).map((item) => {
