@@ -53,6 +53,7 @@ import {
 	IcMCreditRequest,
 	IcCCogoassured, IcMOverview,
 	IcMFaq,
+	IcMActivePlans,
 	IcMExportfile,
 } from '@cogoport/icons-react';
 
@@ -1358,8 +1359,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-document_desk',
 				title         : 'Document Desk',
-				href          : '/document-desk',
-				as            : '/document-desk',
+				href          : '/v2/document-desk',
+				as            : '/v2/document-desk',
 				type          : 'link',
 				main_apis     : ['list_document_desk_shipments'],
 				possible_apis : [...apis.document_desk, ...apis.cogolens],
@@ -2207,6 +2208,17 @@ const navigationMappingAdmin = {
 				icon          : IcMDataPipeline,
 			},
 		],
+	},
+	ingestion: {
+		key           : 'ingestion',
+		title         : 'Ingestion',
+		isSubNavs     : false,
+		module_type   : 'dashboards',
+		main_apis     : ['list_ingestion_requests'],
+		href          : '/v2/ingestion',
+		as            : '/v2/ingestion',
+		possible_apis : apis.ingestion,
+		icon          : IcMActivePlans,
 	},
 };
 
