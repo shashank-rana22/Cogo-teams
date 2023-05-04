@@ -5,22 +5,22 @@ const useUploadeInvoice = ({ id, setUploadInvoice, partner }) => {
 	const [{ loading }, trigger] = useRequestBf(
 		{
 			url     : '/sales/invoice/einvoice',
-			method  : 'get',
+			method  : 'post',
 			authKey : 'post_sales_invoice_einvoice',
 		},
 		{ manual: true },
 	);
 
-	const uploadEInvoice = async (value = {}) => {
+	const uploadEInvoice = async (value) => {
 		try {
 			await trigger({
 				data: {
 					invoiceId           : id,
-					invoiceDate         : value?.eInvoiceDate,
-					invoiceDueDate      : value?.eInvoiceDueDate,
-					eInvoiceNumber      : value?.eInvoiceNumber,
-					eInvoicePdfUrl      : value?.uploadInvoiceFile?.url,
-					eInvoiceXmlUrl      : value?.uploadXmlFile?.url,
+					invoiceDate         : value?.E_invoice_date,
+					invoiceDueDate      : value?.E_invoice_due_date,
+					eInvoiceNumber      : value?.E_invoice_number,
+					eInvoicePdfUrl      : value?.E_invoice_pdf_file?.finalUrl,
+					eInvoiceXmlUrl      : value?.E_invoice_xml_file?.finalUrl,
 					updatedBy           : partner?.id,
 					performedByUserType : 'agent',
 				},
@@ -29,7 +29,7 @@ const useUploadeInvoice = ({ id, setUploadInvoice, partner }) => {
 			setUploadInvoice(false);
 		} catch (error) {
 			Toast.error(
-				error?.error?.message || 'There was an error Uploading E-invoice',
+				error?.response?.data?.message || 'There was an error Uploading E-invoice',
 			);
 		}
 	};

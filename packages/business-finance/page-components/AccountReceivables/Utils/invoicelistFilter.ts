@@ -1,52 +1,94 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 
-export const INVOICE_LIST_FILTERS = [
-	{
-		name        : 'migrated',
-		placeholder : 'Migration',
-		size        : 'sm',
-		type        : 'select',
-		caret       : true,
-		isClearable : true,
-		options     : [
-			{ value: 'true', label: 'True' },
-			{ value: 'false', label: 'False' },
-		],
-	},
-	{
-		name        : 'status',
-		placeholder : 'Payment',
-		size        : 'sm',
-		type        : 'select',
-		caret       : true,
-		isClearable : true,
-		options     : [
+export const invoiceListFilter = (country : string) => {
+	if (country === 'IN') {
+		return (
+			[
+				{
+					name        : 'migrated',
+					placeholder : 'Migration',
+					size        : 'sm',
+					type        : 'select',
+					caret       : true,
+					isClearable : true,
+					options     : [
+						{ value: 'true', label: 'True' },
+						{ value: 'false', label: 'False' },
+					],
+				},
+				{
+					name        : 'status',
+					placeholder : 'Payment',
+					size        : 'sm',
+					type        : 'select',
+					caret       : true,
+					isClearable : true,
+					options     : [
 
-			{ value: 'paid', label: 'Paid' },
-			{ value: 'unpaid', label: 'Unpaid' },
-			{ value: 'partiallyPaid', label: 'Partially paid' },
+						{ value: 'paid', label: 'Paid' },
+						{ value: 'unpaid', label: 'Unpaid' },
+						{ value: 'partiallyPaid', label: 'Partially paid' },
 
-		],
-	},
-	{
-		name        : 'invoiceStatus',
-		placeholder : 'Invoice',
-		size        : 'sm',
-		type        : 'select',
-		caret       : true,
-		isClearable : true,
-		options     : [
-			{ label: 'Draft', value: 'DRAFT' },
-			{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
-			{ label: 'Irn Generated', value: 'IRN_GENERATED' },
-			{ label: 'Irn Failed', value: 'IRN_FAILED' },
-			{ label: 'Irn Cancelled', value: 'IRN_CANCELLED' },
-			{ label: 'Posted to Sage', value: 'POSTED' },
-			{ label: 'Post to Sage Failed', value: 'FAILED' },
-			{ label: 'Requested', value: 'REQUESTED' },
-		],
-	},
-];
+					],
+				},
+				{
+					name        : 'invoiceStatus',
+					placeholder : 'Invoice',
+					size        : 'sm',
+					type        : 'select',
+					caret       : true,
+					isClearable : true,
+					options     : [
+						{ label: 'Draft', value: 'DRAFT' },
+						{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
+						{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
+						{ label: 'Irn Generated', value: 'IRN_GENERATED' },
+						{ label: 'Irn Failed', value: 'IRN_FAILED' },
+						{ label: 'Irn Cancelled', value: 'IRN_CANCELLED' },
+						{ label: 'Posted to Sage', value: 'POSTED' },
+						{ label: 'Post to Sage Failed', value: 'FAILED' },
+						{ label: 'Requested', value: 'REQUESTED' },
+					],
+				},
+			]);
+	}
+	if (country === 'VN') {
+		return (
+			[
+				{
+					name        : 'status',
+					placeholder : 'Payment',
+					size        : 'sm',
+					type        : 'select',
+					caret       : true,
+					isClearable : true,
+					options     : [
+
+						{ value: 'paid', label: 'Paid' },
+						{ value: 'unpaid', label: 'Unpaid' },
+						{ value: 'partiallyPaid', label: 'Partially paid' },
+
+					],
+				},
+				{
+					name        : 'invoiceStatus',
+					placeholder : 'Invoice',
+					size        : 'sm',
+					type        : 'select',
+					caret       : true,
+					isClearable : true,
+					options     : [
+						{ label: 'Draft', value: 'DRAFT' },
+						{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
+						{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
+						{ label: 'E-INVOICE Generated', value: 'IRN_GENERATED' },
+						{ label: 'Requested', value: 'REQUESTED' },
+					],
+				},
+			]);
+	}
+	return null;
+};
 
 export const INVOICE_MORE_FILTERS = [
 	{
@@ -79,6 +121,7 @@ export const INVOICE_MORE_FILTERS = [
 		placeholder           : 'Invoice Date',
 		isPreviousDaysAllowed : true,
 		span                  : 4.5,
+		style                 : { width: '200px' },
 	},
 	{
 
@@ -88,12 +131,14 @@ export const INVOICE_MORE_FILTERS = [
 		placeholder           : 'Due Date',
 		isPreviousDaysAllowed : true,
 		span                  : 6,
+		style                 : { width: '200px' },
 	},
 	{
 		label       : 'Currency',
 		name        : 'currency',
 		type        : 'select',
 		placeholder : 'Currency',
+		isClearable : true,
 		options     : [
 			GLOBAL_CONSTANTS.currency_code.USD,
 			GLOBAL_CONSTANTS.currency_code.INR,

@@ -5,14 +5,16 @@ import { format, getByKey, startCase } from '@cogoport/utils';
 import InvoiceDetails from '../commons/invoiceDetails';
 import Remarks from '../commons/Remarks';
 import RenderIRNGenerated from '../commons/RenderIRNGenerated';
+import RibbonRender from '../commons/RibbonRender';
 import { getDocumentNumber, getDocumentUrl } from '../Utils/getDocumentNumber';
 
+import SortHeaderInvoice from './SortHeaderInvoice';
 import styles from './styles.module.css';
 
 const status = {
-	UNPAID         : '#FEF1DF',
-	PARTIALLY_PAID : '#D9EAFD',
-	PAID           : '#CDF7D4',
+	UNPAID           : '#FEF1DF',
+	'PARTIALLY PAID' : '#D9EAFD',
+	PAID             : '#CDF7D4',
 };
 
 const invoiceType = {
@@ -33,7 +35,15 @@ const invoiceStatus = {
 	FINANCE_REJECTED : '#f9ac98',
 };
 
-const completedColumn = (refetch: Function, showName: boolean) => [
+const completedColumn = (
+	refetch: Function,
+	showName: boolean,
+	setSort: (p: object)=>void,
+	sortStyleAsc: string,
+	sortStyleDesc: string,
+	invoiceFilter: object,
+	setInvoiceFilter: (p:object) => void,
+) => [
 
 	{
 		Header   : showName && 'Name',
@@ -68,6 +78,7 @@ const completedColumn = (refetch: Function, showName: boolean) => [
 		accessor : (row) => (
 			(
 				<div className={styles.fieldPair}>
+
 					<div
 						className={styles.link}
 						onClick={() => window.open(getDocumentUrl({ itemData: row }) as string, '_blank')}
@@ -77,7 +88,7 @@ const completedColumn = (refetch: Function, showName: boolean) => [
 
 					</div>
 					<div>
-						<Pill size="md" color={invoiceType[(getByKey(row, 'invoiceType') as string)]}>
+						<Pill size="sm" color={invoiceType[(getByKey(row, 'invoiceType') as string)]}>
 							{startCase(getByKey(row, 'invoiceType') as string)}
 						</Pill>
 					</div>
@@ -91,13 +102,46 @@ const completedColumn = (refetch: Function, showName: boolean) => [
 		Header   : 'SID',
 		accessor : (row) => (
 			<div className={styles.field_pair}>
-				<div
-					className={styles.sid}
-				>
-					{getByKey(row, 'sidNo') as string}
 
-				</div>
-				<div>{startCase(getByKey(row, 'serviceType') as string)}</div>
+				{(getByKey(row, 'sidNo') as string).length > 10 ? (
+					<Tooltip
+						interactive
+						placement="top"
+						content={getByKey(row, 'sidNo') as string}
+					>
+						<text className={styles.sid}>
+							{`${(getByKey(row, 'sidNo') as string).substring(
+								0,
+								10,
+							)}...`}
+						</text>
+					</Tooltip>
+				)
+					: (
+						<div className={styles.sid}>
+							{getByKey(row, 'sidNo') as string}
+						</div>
+					)}
+
+				{startCase(getByKey(row, 'serviceType') as string).length > 10 ? (
+					<Tooltip
+						interactive
+						placement="top"
+						content={startCase(getByKey(row, 'serviceType') as string)}
+					>
+						<text className={styles.cursor}>
+							{`${startCase(getByKey(row, 'serviceType') as string).substring(
+								0,
+								10,
+							)}...`}
+						</text>
+					</Tooltip>
+				)
+					: (
+						<div className={styles.cursor}>
+							{startCase(getByKey(row, 'serviceType') as string)}
+						</div>
+					)}
 			</div>
 		),
 	},
@@ -110,8 +154,22 @@ const completedColumn = (refetch: Function, showName: boolean) => [
 		),
 	},
 	{
-		Header   : 'Invoice Amount',
-		accessor : (row) => (
+		Header: () => (
+			<div className={styles.flex}>
+				<div>
+					Invoice Amount
+				</div>
+				<SortHeaderInvoice
+					invoiceFilter={invoiceFilter}
+					setInvoiceFilter={setInvoiceFilter}
+					setOrderBy={setSort}
+					sortStyleDesc={sortStyleDesc}
+					sortStyleAsc={sortStyleAsc}
+					type="grandTotal"
+				/>
+			</div>
+		),
+		accessor: (row) => (
 
 			<div className={styles.fieldPair}>
 				<div>
@@ -124,12 +182,13 @@ const completedColumn = (refetch: Function, showName: boolean) => [
 					</div>
 				</div>
 				<div>
-					<Pill size="md" color={status[(getByKey(row, 'status') as string)]}>
+					<Pill size="sm" color={status[(getByKey(row, 'status') as string)]}>
 						{startCase(getByKey(row, 'status') as string)}
 					</Pill>
 				</div>
 			</div>
 		),
+		id: 'invoice_amount',
 	},
 	{
 		Header   : 'Ledger Amount',
@@ -160,20 +219,54 @@ const completedColumn = (refetch: Function, showName: boolean) => [
 		),
 	},
 	{
-		Header   : 'Invoice Date',
-		accessor : (row) => (
+		Header: () => (
+			<div className={styles.flex}>
+				<div>
+					Invoice Date
+				</div>
+				<SortHeaderInvoice
+					invoiceFilter={invoiceFilter}
+					setInvoiceFilter={setInvoiceFilter}
+					setOrderBy={setSort}
+					sortStyleDesc={sortStyleDesc}
+					sortStyleAsc={sortStyleAsc}
+					type="invoiceDate"
+				/>
+			</div>
+		),
+		accessor: (row) => (
 			<div>
 				<div>{format(getByKey(row, 'invoiceDate') as Date, 'dd MMM yy', {}, false)}</div>
+
 			</div>
 		),
+		id: 'invoice_date',
+
 	},
 	{
-		Header   : 'Due Date',
-		accessor : (row) => (
-			<div>
-				<div>{format(getByKey(row, 'dueDate') as Date, 'dd MMM yy', {}, false)}</div>
+		Header: () => (
+			<div className={styles.flex}>
+				<div>
+					Due Date
+				</div>
+				<SortHeaderInvoice
+					invoiceFilter={invoiceFilter}
+					setInvoiceFilter={setInvoiceFilter}
+					setOrderBy={setSort}
+					sortStyleDesc={sortStyleDesc}
+					sortStyleAsc={sortStyleAsc}
+					type="dueDate"
+				/>
 			</div>
 		),
+		accessor: (row) => (
+			<div>
+				<div>{format(getByKey(row, 'dueDate') as Date, 'dd MMM yy', {}, false)}</div>
+
+			</div>
+		),
+		id: 'due_date',
+
 	},
 
 	{
@@ -190,7 +283,7 @@ const completedColumn = (refetch: Function, showName: boolean) => [
 		accessor : (row) => (
 
 			<div>
-				<Pill size="md" color={invoiceStatus[(getByKey(row, 'invoiceStatus') as string)]}>
+				<Pill size="sm" color={invoiceStatus[(getByKey(row, 'invoiceStatus') as string)]}>
 					{startCase(getByKey(row, 'invoiceStatus') as string)}
 				</Pill>
 
@@ -211,6 +304,15 @@ const completedColumn = (refetch: Function, showName: boolean) => [
 					itemData={row}
 					refetch={refetch}
 				/>
+			</div>
+		),
+	},
+	{
+		Header   : '',
+		id       : 'ribbon',
+		accessor : (row) => (
+			<div>
+				<RibbonRender row={row} />
 			</div>
 		),
 	},

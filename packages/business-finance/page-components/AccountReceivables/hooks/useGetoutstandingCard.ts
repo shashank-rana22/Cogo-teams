@@ -44,6 +44,11 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 		orgId     : organizationId,
 	});
 
+	const [sort, setSort] = useState({
+		sortType : 'desc',
+		sortBy   : 'invoiceDate',
+	});
+
 	const { userData } = useSelector(({ profile }) => ({
 		userData: profile?.user || {},
 	}));
@@ -68,8 +73,6 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 		},
 		{ manual: true },
 	);
-
-	console.log('invoiceFilters', invoiceFilters);
 
 	const {
 		page, pageLimit, migrated, status, invoiceStatus,
@@ -105,15 +108,16 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 					invoiceDateEnd,
 					cogoEntity    : entityCode || undefined,
 					currency      : currency || undefined,
+					sortBy        : sort.sortBy || undefined,
+					sortType      : sort.sortType || undefined,
 				},
 			});
 		} catch (e) {
 			if (e?.error?.message) { Toast.error(e?.error?.message || 'Failed'); }
 		}
-	}, [listApi, page, pageLimit, migrated,
-		status, invoiceStatus,
-		services, query, userData.id, orgId, dueDateStart, dueDateEnd,
-		invoiceDateStart, invoiceDateEnd, entityCode, currency]);
+	}, [listApi, page, pageLimit, migrated, status, invoiceStatus, services,
+		query, userData.id, orgId, dueDateStart, dueDateEnd, invoiceDateStart,
+		invoiceDateEnd, entityCode, currency, sort.sortBy, sort.sortType]);
 
 	const sendReport = async () => {
 		try {
@@ -155,6 +159,7 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 			migrated      : undefined,
 			invoiceDate   : undefined,
 			dueDate       : undefined,
+			currency      : undefined,
 		}));
 	};
 
@@ -167,6 +172,8 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 		clearInvoiceFilters,
 		sendReport,
 		apiState,
+		sort,
+		setSort,
 	};
 };
 

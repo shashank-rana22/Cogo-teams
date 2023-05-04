@@ -13,7 +13,7 @@ const useFinanceReject = ({ id, textValue, refetch }) => {
 	] = useRequestBf(
 		{
 			url     : '/sales/invoice/finance-reject-invoice',
-			method  : 'post',
+			method  : 'put',
 			authKey : 'put_sales_invoice_finance_reject_invoice',
 		},
 		{ manual: true },

@@ -18,6 +18,7 @@
 
 .sid {
 	color: #f68b21;
+	cursor: pointer;
 }
 
 .center {
@@ -31,6 +32,7 @@
 
 .flex {
 	display: flex;
+	align-items: center;
 }
 
 .icon_div {

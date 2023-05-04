@@ -1,4 +1,5 @@
 import { Button, Popover } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -7,17 +8,23 @@ import usePostToSage from '../../hooks/usePostToSage';
 import CancellationModal from './CancellationModal';
 import styles from './styles.module.css';
 
+const { cogoport_entities: CogoportEntity } = GLOBAL_CONSTANTS || {};
+
 function IRNCancel({ itemData }) {
 	const [showCancellationModal, setShowCancellationModal] = useState(false);
 	const [show, setShow] = useState(false);
 
-	const { invoiceStatus, id } = itemData;
+	const { invoiceStatus, id, entityCode } = itemData;
 
 	const isAfterADay =		itemData?.irnGeneratedAt !== null
 		? itemData.irnGeneratedAt + 86400000 >= Date.now()
 		: false;
 
 	const { postToSage, loading } = usePostToSage(id);
+
+	const { labels } = CogoportEntity[entityCode] || {};
+
+	const { irn_label: IRNLabel } = labels || {};
 
 	const content = () => (
 		<div className={styles.container}>
@@ -30,7 +37,9 @@ function IRNCancel({ itemData }) {
 					}}
 					style={{ marginBottom: '8px' }}
 				>
-					Cancel IRN
+					Cancel
+					{' '}
+					{IRNLabel}
 				</Button>
 			)}
 			{(['IRN_GENERATED', 'FAILED'].includes(invoiceStatus)) && (

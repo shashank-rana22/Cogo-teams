@@ -47,3 +47,11 @@
 	display: flex;
 	margin-top: 12px;
 }
+
+.styled_button {
+	margin-right: 12px;
+}
+
+.styled_invoice {
+	text-decoration: underline;
+}

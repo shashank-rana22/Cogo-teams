@@ -1,6 +1,6 @@
 import { Modal, Button } from '@cogoport/components';
 import { DatepickerController, InputController, UploadController, useForm } from '@cogoport/forms';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import styles from './styles.module.css';
 
@@ -11,17 +11,13 @@ function InvoiceModal({
 	loading,
 }) {
 	const {
-		setValue,
-		watch,
 		handleSubmit,
 		control,
 		formState: { errors: errorVal },
 	} = useForm();
 
 	const onSubmit = (value) => {
-		console.log('value', value);
-
-		// uploadEInvoice(value);
+		uploadEInvoice(value);
 	};
 
 	return (
@@ -40,7 +36,7 @@ function InvoiceModal({
 
 						<div style={{ display: 'flex', justifyContent: 'space-around' }}>
 							<div style={{ width: '230px' }}>
-								<span>E Invoice Date</span>
+								<div className={styles.lable_style}>E Invoice Date</div>
 								<DatepickerController
 									control={control}
 									name="E_invoice_date"
@@ -59,7 +55,7 @@ function InvoiceModal({
 
 							<div style={{ width: '230px' }}>
 
-								<span>E Invoice Due Date</span>
+								<div className={styles.lable_style}>E Invoice Due Date</div>
 								<DatepickerController
 									control={control}
 									name="E_invoice_due_date"
@@ -75,8 +71,8 @@ function InvoiceModal({
 									</span>
 								)}
 							</div>
-							<div style={{ width: '230px' }}>
-								<span>E-invoice Number</span>
+							<div className={styles.input_style} style={{ width: '230px' }}>
+								<div className={styles.lable_style}>E-invoice Number</div>
 								<InputController
 									control={control}
 									name="E_invoice_number"
@@ -92,10 +88,10 @@ function InvoiceModal({
 								)}
 							</div>
 						</div>
-						<div style={{ display: 'flex', justifyContent: 'space-around' }}>
+						<div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '32px' }}>
 
 							<div style={{ width: '360px' }}>
-								<span>E-invoice pdf file</span>
+								<div className={styles.lable_style}>E-invoice pdf file</div>
 								<UploadController
 									control={control}
 									name="E_invoice_pdf_file"
@@ -111,7 +107,7 @@ function InvoiceModal({
 								)}
 							</div>
 							<div style={{ width: '360px' }}>
-								<span>E-invoice xml file</span>
+								<div className={styles.lable_style}>E-invoice xml file</div>
 								<UploadController
 									control={control}
 									name="E_invoice_xml_file"

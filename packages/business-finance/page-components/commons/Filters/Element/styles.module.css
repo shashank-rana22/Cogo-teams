@@ -41,6 +41,9 @@
 		}
 		.ui_select_container{
 			width: 100%;
+			.ui_select_input_control {
+				font-size: 14px;
+			}
 		}
 	}
 }

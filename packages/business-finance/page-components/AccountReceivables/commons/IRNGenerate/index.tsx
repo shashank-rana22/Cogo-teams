@@ -16,6 +16,7 @@ type Itemdata = {
 	id?: string
 	invoiceStatus?: string
 	entityCode?: number
+	daysLeftForAutoIrnGeneration?: string
 };
 interface IRNGeneration {
 	itemData?: Itemdata
@@ -25,12 +26,11 @@ interface IRNGeneration {
 const INVOICE_STATUS = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
 const financeRejectCheck = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
 
-const { cogoport_entities } = GLOBAL_CONSTANTS || {};
+const { cogoport_entities : CogoportEntity } = GLOBAL_CONSTANTS || {};
 
 function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	const [uploadInvoice, setUploadInvoice] = useState(false);
 	const [openReject, setOpenReject] = useState(false);
-	const [show, setShow] = useState(false);
 	const [textValue, setTextValue] = useState('');
 	const { profile = {} } = useSelector((state) => state);
 	const { invoiceStatus } = itemData || {};
@@ -62,16 +62,15 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	const { daysLeftForAutoIrnGeneration = '' } = itemData || {};
 
 	const financeRejected = () => {
-		setShow(false);
 		setOpenReject(!openReject);
 	};
 
 	const onChange = (e) => {
 		setTextValue(e);
 	};
-	const { labels } = cogoport_entities[itemData?.entityCode] || {};
+	const { labels } = CogoportEntity[itemData?.entityCode] || {};
 
-	const { irn_label } = labels || {};
+	const { irn_label: IrnLabel } = labels || {};
 
 	const content = () => (
 		<div>
@@ -100,12 +99,12 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 					{INVOICE_STATUS.includes(invoiceStatus) && (
 						<Button
 							className="secondary sm"
-							disabled={loading || daysLeftForAutoIrnGeneration <= 0}
+							disabled={loading || (daysLeftForAutoIrnGeneration as unknown as number) <= 0}
 							onClick={() => generateIrn()}
 						>
 							Generate
 							{' '}
-							{irn_label}
+							{IrnLabel}
 						</Button>
 					)}
 					{invoiceStatus === 'POSTED' && (
@@ -206,8 +205,6 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 
 		</Popover>
 	);
-
-	return null;
 }
 
 export default IRNGenerate;
