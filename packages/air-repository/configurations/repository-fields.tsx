@@ -13,7 +13,7 @@ export const RepositoryFields = {
 		{
 			key   : 'mode',
 			label : 'Mode',
-			span  : 0.4,
+			span  : 0.7,
 			func  : 'handleMode',
 		},
 		{
@@ -24,7 +24,7 @@ export const RepositoryFields = {
 					content="Point of contact person"
 				/>
 			),
-			span: 0.5,
+			span: 0.6,
 		},
 		{
 			key   : 'email',

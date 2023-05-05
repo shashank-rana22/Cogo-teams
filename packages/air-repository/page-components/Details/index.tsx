@@ -28,7 +28,7 @@ function Details({
 
 	const functions = {
 		handleAirline: (singleItem) => (
-			<div className={styles.airline}>{singleItem?.airline?.business_name}</div>
+			singleItem?.airline?.business_name
 		),
 		handleMode: (singleItem) => (
 			<Badge
@@ -45,8 +45,9 @@ function Details({
 					themeType="linkUi"
 					onClick={() => window.open(singleItem?.platform_url, '_blank')}
 					style={{ color: '#F68B21', padding: 0 }}
+					className={styles.url_button}
 				>
-					{singleItem?.platform_url}
+					<div className={styles.overflow_text}>{singleItem?.platform_url}</div>
 				</Button>
 			) : '-'),
 		handleAction: (singleItem) => (
@@ -92,7 +93,7 @@ function Details({
 						placement="top"
 						interactive
 					>
-						<div className={styles.tooltip_text}>{editDetail}</div>
+						<div className={styles.overflow_text}>{editDetail}</div>
 					</Tooltip>
 				</div>
 			);

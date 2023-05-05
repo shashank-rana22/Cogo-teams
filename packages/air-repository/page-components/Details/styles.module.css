@@ -38,12 +38,6 @@
 	}
 }
 
-.airline {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
 .tooltip_container {
 	:global {
 		.tippy-box {
@@ -55,7 +49,11 @@
 	}
 }
 
-.tooltip_text {
+.url_button {
+	width: 100%;
+}
+
+.overflow_text {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
