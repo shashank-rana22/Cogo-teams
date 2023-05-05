@@ -83,6 +83,7 @@ function QnA({ user_name = '', test_id, user_id, view, is_evaluated = false, sta
 							count_till_now={stand_alone_questions.length + case_study_questions.length}
 							view={view}
 							status={status}
+							activeAttempt={activeAttempt}
 						/>
 					</div>
 				) : null}

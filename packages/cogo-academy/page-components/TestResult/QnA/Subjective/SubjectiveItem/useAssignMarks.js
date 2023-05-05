@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 
 const regexPattern = /^[+-]?\d*\.?\d+$/;
 
-function useAssignMarks({ setError = () => {} }) {
+function useAssignMarks({ setError = () => {}, activeAttempt }) {
 	const [{ loading }, trigger] = useRequest({
 		method : 'POST',
 		url    : '/update_test_user_question_response',
@@ -28,8 +28,9 @@ function useAssignMarks({ setError = () => {} }) {
 					test_id,
 					user_id,
 					test_question_id,
-					marks         : parseFloat(marks),
-					question_type : 'subjective',
+					marks          : parseFloat(marks),
+					question_type  : 'subjective',
+					active_attempt : activeAttempt === 'attempt_1',
 				},
 			});
 
