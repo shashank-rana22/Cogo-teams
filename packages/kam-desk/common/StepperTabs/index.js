@@ -12,6 +12,7 @@ function StepperTabs() {
 		stepperTab, shipmentType, setStepperTab, filters, setFilters,
 		setActiveTab, activeTab,
 	} = useContext(KamDeskContext);
+
 	const stepperTabs = shipmentStepperTabs[shipmentType];
 
 	const shipmentConfig = shipmentTabMapping[shipmentType];
@@ -26,6 +27,7 @@ function StepperTabs() {
 		setStepperTab(val);
 		setActiveTab(tempActiveTab);
 	};
+
 	return (
 		<div>
 			<Tabs activeTab={stepperTab} themeType="primary" onChange={handleChange}>

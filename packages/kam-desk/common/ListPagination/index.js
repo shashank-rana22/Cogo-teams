@@ -10,6 +10,7 @@ function ListPagination({ data = {} }) {
 	const onPageChange = (val) => {
 		setFilters({ ...filters, page: val });
 	};
+
 	return (
 		<div>
 			<Pagination

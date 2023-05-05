@@ -7,6 +7,7 @@ import {
 	CargoPillsV2,
 	DualLocation,
 	Header,
+	SingleLocation,
 } from '../../../common/ShipmentCard';
 import KamDeskContext from '../../../context/KamDeskContext';
 
@@ -14,7 +15,9 @@ import styles from './styles.module.css';
 
 function Card({ data = {} }) {
 	const { shipmentType, stepperTab } = useContext(KamDeskContext);
-	const icon_type = ['fcl_local', 'fcl_customs'].includes(stepperTab) ? stepperTab : shipmentType;
+	const icon_type = ['fcl_local', 'fcl_customs'].includes(stepperTab)
+		? stepperTab
+		: shipmentType;
 
 	return (
 		<div className={styles.container}>
@@ -35,10 +38,12 @@ function Card({ data = {} }) {
 					<ShipmentIcon shipment_type={icon_type} />
 				</div>
 
-				<div className={styles.divider} />
-
 				<div className={styles.location_container}>
-					<DualLocation data={data} />
+					{['export', 'import'].includes(stepperTab) ? (
+						<DualLocation data={data} />
+					) : (
+						<SingleLocation data={data} />
+					)}
 				</div>
 
 				<div className={styles.divider} />

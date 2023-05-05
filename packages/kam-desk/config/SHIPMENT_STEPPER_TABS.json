@@ -1,13 +1,13 @@
 {
     "fcl_freight":[
         {
-            "value":"import",
-            "label":"Import"
-        },
-        {
             "value":"export",
             "label":"Export"
         },
+        {
+          "value":"import",
+          "label":"Import"
+      },
         {
             "value":"fcl_customs",
             "label":"Customs"
@@ -19,13 +19,13 @@
     ],
     "lcl_freight":[
         {
-            "value":"import",
-            "label":"Import"
-        },
-        {
             "value":"export",
             "label":"Export"
         },
+        {
+          "value":"import",
+          "label":"Import"
+      },
         {
             "value":"lcl_customs",
             "label":"Customs"
