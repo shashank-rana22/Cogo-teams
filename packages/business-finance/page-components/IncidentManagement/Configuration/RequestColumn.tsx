@@ -1,6 +1,8 @@
 import { Tooltip } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
 
+import AdvanceSecurityDeposit from '../Modals/AdvanceSecurityDeposit';
+import AdvanceSecurityDepositRefund from '../Modals/AdvanceSecurityDepositRefund';
 import BankDetails from '../Modals/BankDetails';
 import ConcorModal from '../Modals/ConcorModal';
 import ICJVModal from '../Modals/ICJV_Modal';
@@ -150,9 +152,12 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 				interCompanyJournalVoucherRequest,
 				concorPdaApprovalRequest,
 				sezRequest,
+				advanceSecurityDeposit,
+				advanceSecurityDepositRefund,
 			} = data || {};
 
 			const { type, id } = row || {};
+			console.log(data);
 
 			return (
 				<>
@@ -183,6 +188,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 					)}
 					{type === 'ISSUE_CREDIT_NOTE' && (
 						<RequestCN row={row} refetch={getIncidentData} id={id} />
+
 					)}
 
 					{type === 'CONSOLIDATED_CREDIT_NOTE' && (
@@ -228,6 +234,22 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 							/>
 						)
 					}
+					{type === 'ADVANCE_SECURITY_DEPOSIT' && (
+						<AdvanceSecurityDeposit
+							advanceSecurityDeposit={advanceSecurityDeposit}
+							id={id}
+							row={row}
+							refetch={getIncidentData}
+						/>
+					)}
+					{type === 'ADVANCE_SECURITY_DEPOSIT_REFUND' && (
+						<AdvanceSecurityDepositRefund
+							advanceSecurityDepositRefund={advanceSecurityDepositRefund}
+							id={id}
+							row={row}
+							refetch={getIncidentData}
+						/>
+					)}
 
 				</>
 			);

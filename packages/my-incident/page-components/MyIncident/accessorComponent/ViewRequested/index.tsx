@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import useRaisedAgain from '../../hooks/useRaisedAgain';
 import useSave from '../../hooks/useSave';
 
+import AdvanceSecurityDepositModal from './AdvanceSecurityDepositModal';
+import AdvanceSecurityDepositRefundModal from './AdvanceSecurityDepositRefundModal';
 import BankDatailsModal from './BankDetailsModal';
 import IcJvApproval from './IcJvApproval';
 import JournalVoucher from './JournalVoucher';
@@ -23,6 +25,7 @@ function ViewRequested({ itemData, name, refetch }) {
 		refetch,
 		setShowModal,
 	});
+	console.log(itemData, 'type', type);
 
 	switch (type) {
 		case 'BANK_DETAIL_APPROVAL':
@@ -108,6 +111,21 @@ function ViewRequested({ itemData, name, refetch }) {
 					loadingOnSave={loadingOnSave}
 				/>
 			);
+		case 'ADVANCE_SECURITY_DEPOSIT':
+			return (
+				<AdvanceSecurityDepositModal
+					itemData={itemData}
+					showModal={showModal}
+					setShowModal={setShowModal}
+				/>
+			);
+		case 'ADVANCE_SECURITY_DEPOSIT_REFUND': return (
+			<AdvanceSecurityDepositRefundModal
+				itemData={itemData}
+				showModal={showModal}
+				setShowModal={setShowModal}
+			/>
+		);
 		default:
 			return null;
 	}
