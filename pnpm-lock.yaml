@@ -72,6 +72,7 @@ importers:
       '@cogoport/ocean-modules': workspace:0.1.0
       '@cogoport/performance-management': workspace:1.0.0
       '@cogoport/request': workspace:0.1.0
+      '@cogoport/saas-tools': workspace:0.1.0
       '@cogoport/scope-select': workspace:0.1.0
       '@cogoport/shipment-chat': workspace:0.1.0
       '@cogoport/shipment-fcl-freight': workspace:0.1.0
@@ -120,6 +121,7 @@ importers:
       '@cogoport/ocean-modules': link:../common/ocean-modules
       '@cogoport/performance-management': link:../packages/performance-management
       '@cogoport/request': link:../common/request
+      '@cogoport/saas-tools': link:../packages/saas-tools
       '@cogoport/scope-select': link:../common/scope-select
       '@cogoport/shipment-chat': link:../common/shipment-chat
       '@cogoport/shipment-fcl-freight': link:../packages/shipment-fcl-freight
@@ -903,6 +905,24 @@ importers:
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.6
+      react: 18.2.0
+
+  packages/saas-tools:
+    specifiers:
+      '@cogoport/components': ^1.0.410
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/icons-react': ^1.0.68
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.10
+      react: 18.2.0
+    dependencies:
+      '@cogoport/components': 1.0.410_y3d6pejfqbkazdfzmaewia2nra
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/icons-react': 1.0.68_react@18.2.0
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
       react: 18.2.0
 
   packages/shipment-fcl-freight:
@@ -2871,6 +2891,10 @@ packages:
       stylelint-config-recess-order: 3.1.0_stylelint@14.16.1
       stylelint-config-standard: 28.0.0_stylelint@14.16.1
     dev: true
+
+  /@cogoport/utils/1.2.10:
+    resolution: {integrity: sha512-1mc6JkBtJRJ6YC7wpgabmlVP+1sfCZXKdpF5iRunGGR+fP9BMDvPjPvaaMgsONZhIatrpw07HDzG91HPw4V25A==}
+    dev: false
 
   /@cogoport/utils/1.2.6:
     resolution: {integrity: sha512-H5zCe0bdcKGYZKThZw2sYZwdcWeqgJmry82AKq4LVMllysKZxtCyJjIhrvofNqwu1cmZFPPMyNXjp4laqC6qCw==}
