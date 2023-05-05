@@ -1,5 +1,4 @@
 import { Pagination } from '@cogoport/components';
-import { useEffect } from 'react';
 
 import getFieldsByTab from '../../../constants/config';
 import useGetMilestones from '../hooks/useGetMilestones';
