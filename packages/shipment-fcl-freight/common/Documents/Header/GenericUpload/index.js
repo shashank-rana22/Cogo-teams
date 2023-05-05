@@ -7,7 +7,13 @@ import DocumentForm from '../DocumentForm';
 
 import getCreateDocumentParams from './getCreateDocumentParams';
 
-const SUPPLIER_STAKEHOLDERS = ['booking_desk', 'document_desk', 'booking_desk_manager'];
+const SUPPLIER_STAKEHOLDERS = [
+	'booking_desk',
+	'document_desk',
+	'booking_desk_manager',
+	'costbooking_ops',
+	'costbooking_ops_manager',
+];
 
 function GenericUpload({
 	showModal,

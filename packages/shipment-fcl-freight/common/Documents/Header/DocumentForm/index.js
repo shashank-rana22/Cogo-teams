@@ -43,6 +43,15 @@ function DocumentForm({
 				actions           : ['create'],
 			};
 			break;
+		case 'costbooking_ops':
+		case 'costbooking_ops_manager':
+			params = {
+				shipment_id       : shipment_data?.id,
+				organization_ids  : [uploaded_by_org_id],
+				org_account_types : ['service_provider'],
+				actions           : ['create'],
+			};
+			break;
 		default:
 			params = {};
 			break;
