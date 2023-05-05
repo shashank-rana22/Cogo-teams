@@ -344,6 +344,21 @@ function asyncListCurrency() {
 	};
 }
 
+function asyncListPromotions() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_promotions',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'published',
+			},
+			page_limit: 100,
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -368,6 +383,7 @@ export {
 	asyncKamExpertiseGroupOptions,
 	listVendors,
 	asyncListCogoEntity,
+	asyncListPromotions,
 	asyncListHsCodes,
 	asyncListCurrency,
 	asyncAccountEngagementScoringEvents,

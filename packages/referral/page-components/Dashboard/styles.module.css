@@ -1,0 +1,15 @@
+.heading_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.heading{
+    font-weight: 600;
+    font-size: 20px;
+    color: #221F20;
+}
+
+.flex{
+    display: flex;
+    align-items: center;
+}
