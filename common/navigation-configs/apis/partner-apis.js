@@ -9984,6 +9984,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'saas_traceability',
 		},
+		{
+			api          : 'list_shipping_line_events',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
 	],
 
 	ftl_freight: [
@@ -11154,6 +11159,14 @@ const partner = {
 		},
 		{
 			api         : 'get_air_coe_documents',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_documents_list_manifest',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_air_coe_documents_create_manifest',
 			access_type : 'private',
 		},
 		{
