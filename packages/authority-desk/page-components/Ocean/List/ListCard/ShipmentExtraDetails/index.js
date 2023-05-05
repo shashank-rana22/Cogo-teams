@@ -1,6 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 import { IcCRedCircle, IcCYelloCircle, IcMLiveChat } from '@cogoport/icons-react';
-import { startCase, format } from '@cogoport/utils';
+import { startCase, format, upperCase } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../../../commons/EmptyState';
@@ -102,7 +102,7 @@ function ShipmentExtraDetails({ item = {} }) {
 				<div>
 					<div>
 						BL Type : &nbsp;
-						{startCase(
+						{upperCase(
 							item?.freight_service?.bl_category,
 						)}
 					</div>
