@@ -114,9 +114,6 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 
 			});
 
-			console.log('currency', currency);
-			console.log('sort.sortBy', sort.sortBy);
-
 			if (sort.sortBy === 'grandTotal' && currency === undefined) {
 				Toast.warn('Please apply currency filter to sort invoice amount accurately');
 			}
