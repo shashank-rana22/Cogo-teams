@@ -26,3 +26,18 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
+.tooltip_container {
+	:global {
+		.tippy-box {
+			min-height: 30px;
+			padding: 4px 6px;
+			font-size: var(--font-size-md);
+			word-break: normal;
+		}
+
+		.tippy-content {
+			padding: 2px 0;
+		}
+	}
+}

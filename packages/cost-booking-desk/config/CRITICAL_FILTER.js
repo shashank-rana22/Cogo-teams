@@ -2,15 +2,18 @@ import { addDays } from '@cogoport/utils';
 
 const TODAY = new Date();
 
+const importCondition = { schedule_arrival_less_than: addDays(TODAY, 2) };
+const exportCondition = { gated_in_less_than: TODAY, pending_gate_in: true };
+
 const CRITICAL_FILTER = {
 	fcl_freight: {
 		import: {
-			assigned    : { schedule_arrival_less_than: addDays(TODAY, 2) },
-			in_progress : { schedule_arrival_less_than: addDays(TODAY, 2) },
+			assigned    : importCondition,
+			in_progress : importCondition,
 		},
 		export: {
-			assigned    : {	gated_in_less_than: TODAY },
-			in_progress : {	gated_in_less_than: TODAY },
+			assigned    : exportCondition,
+			in_progress : exportCondition,
 		},
 	},
 };

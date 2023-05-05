@@ -52,7 +52,7 @@ function Child({
 		}
 	}
 
-	const getNewControls = (item) => {
+	const getNewControls = (item = {}) => {
 		let newProps = { ...item };
 
 		const { type } = item;
@@ -124,7 +124,6 @@ function Child({
 									control={control}
 									size="sm"
 									disabled={disabled || disable}
-									size="sm"
 								/>
 								<p style={{
 									fontStyle     : 'normal',
