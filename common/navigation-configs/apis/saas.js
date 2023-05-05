@@ -1778,6 +1778,11 @@ const saas = {
 			feature     : 'dutiesTaxes',
 		},
 		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'get_exchange_rate',
 			access_type  : 'private',
 			module       : 'dutiesTaxes',
@@ -1926,6 +1931,11 @@ const saas = {
 			access_type : 'private',
 		},
 		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api         : 'get_saas_bill_status',
 			access_type : 'private',
 			module      : 'trader-eligibility-check',
@@ -1988,6 +1998,11 @@ const saas = {
 		},
 	],
 	app_saas_import_export_doc: [
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 		{
 			api          : 'saas_get_user_quota_usage',
 			access_type  : 'private',
