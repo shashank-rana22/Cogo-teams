@@ -98,7 +98,11 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 		accessor : 'type',
 		id       : 'request_type',
 		Cell     : ({ row: { original } }) => {
-			const { type: requestType = '', revoked } = original || {};
+			const { type: requestType = '', data } = original || {};
+
+			const { creditNoteRequest } = data || {};
+
+			const { revoked } = creditNoteRequest || {};
 			return (
 				<div className={styles.credit}>
 					<span>

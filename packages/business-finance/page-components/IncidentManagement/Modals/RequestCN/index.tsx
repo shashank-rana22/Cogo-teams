@@ -207,16 +207,15 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									</Button>
 								</Popover>
 							</div>
-							<span>
-								{typeof (revoked) === 'boolean' && (
-									<div>
-										{revoked
-											? <Pill size="md" color="#C4DC91">Fully</Pill>
-											: <Pill size="md" color="#FEF199">Partial</Pill>}
-									</div>
-								)}
 
-							</span>
+							{typeof (revoked) === 'boolean' && (
+								<div>
+									{revoked
+										? <Pill size="md" color="#C4DC91">Fully</Pill>
+										: <Pill size="md" color="#FEF199">Partial</Pill>}
+								</div>
+							)}
+
 						</div>
 
 						<div className={styles.flex}>
