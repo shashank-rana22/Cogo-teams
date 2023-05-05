@@ -115,7 +115,7 @@ function NominationTask({
 			</div>
 
 			<div className={styles.button_container}>
-				<Button themeType="secondary" onClick={onCancel}>
+				<Button themeType="secondary" onClick={onCancel} disabled={loading}>
 					Cancel
 				</Button>
 

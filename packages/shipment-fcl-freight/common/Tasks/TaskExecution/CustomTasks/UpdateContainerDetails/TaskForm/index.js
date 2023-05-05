@@ -17,7 +17,7 @@ function TaskForm({
 	const [details, setDetails] = useState('');
 	const [customDateFormat, setCustomDateFormat] = useState(false);
 
-	const { formProps, handleFillData, loading } =	useContainerDetails({
+	const { formProps, handleFillData = () => {}, loading } =	useContainerDetails({
 		apis_data,
 		onCancel,
 		pendingTask,
@@ -86,7 +86,7 @@ function TaskForm({
 			</div>
 
 			<div className={styles.button_wrap}>
-				<Button className="secondary md" onClick={() => onCancel()}>
+				<Button className="secondary md" onClick={() => onCancel()} disabled={loading}>
 					cancel
 				</Button>
 

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import PopoverContent from './PopoverContent';
 import styles from './styles.module.css';
 
-export default function Filters({ stateProps = {} }) {
+export default function Filters({ stateProps = {}, showPopoverFilters = true }) {
 	const [showPopover, setShowPopover] = useState(false);
 	const { filters, setFilters } = stateProps;
 
@@ -21,7 +21,7 @@ export default function Filters({ stateProps = {} }) {
 					prefix={<IcMSearchlight />}
 				/>
 
-				{filters?.shipment_type !== 'fcl_freight_local' ? (
+				{showPopoverFilters ? (
 					<Popover
 						render={(
 							<PopoverContent

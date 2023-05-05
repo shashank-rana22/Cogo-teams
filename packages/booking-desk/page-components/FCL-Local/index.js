@@ -52,7 +52,7 @@ export default function FCLLocalDesk({ stateProps = {} }) {
 				</div>
 
 				<div className={styles.top_header_container}>
-					<Filters stateProps={stateProps} />
+					<Filters stateProps={stateProps} showPopoverFilters={false} />
 
 					<div className={styles.version}>
 						<Toggle
@@ -68,7 +68,7 @@ export default function FCLLocalDesk({ stateProps = {} }) {
 			</div>
 
 			<div className={styles.render_filter_container}>
-				{RenderAppliedFilters({ appliedFilters, setFilters })}
+				<RenderAppliedFilters appliedFilters={appliedFilters} setFilters={setFilters} />
 			</div>
 
 			<Tabs tabs={tabs} stateProps={stateProps} />

@@ -1,6 +1,6 @@
 const getControls = ({
-	taskData,
-	task,
+	taskData = {},
+	task = {},
 	primaryService = {},
 	shipmentData = {},
 }) => {
@@ -8,8 +8,8 @@ const getControls = ({
 
 	(taskData?.apis_data?.list_organization_users || []).forEach((user) => {
 		options.push({
-			label : user.name,
-			value : user.user_id,
+			label : user?.name,
+			value : user?.user_id,
 		});
 	});
 
@@ -83,7 +83,7 @@ const getControls = ({
 			rules : { required: 'Commodity is required' },
 			label : 'Commodity',
 			span  : 4,
-			value : primaryService?.cargo_details[0]?.commodity_description || '',
+			value : primaryService?.cargo_details?.[0]?.commodity_description || '',
 			size  : 'sm',
 		},
 		{

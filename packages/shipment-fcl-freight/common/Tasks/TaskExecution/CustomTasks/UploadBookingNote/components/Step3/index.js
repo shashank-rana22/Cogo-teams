@@ -40,17 +40,16 @@ function Step3({ data, setStep }) {
 
 	return (
 		<div>
-			<div>
-				<Layout
-					control={control}
-					fields={finalControls}
-					errors={errors}
-					customValues={customValues}
-				/>
-			</div>
+			<Layout
+				control={control}
+				fields={finalControls}
+				errors={errors}
+				customValues={customValues}
+			/>
 
 			<div className={styles.button_container}>
 				<Button themeType="secondary" onClick={() => setStep(2)}>Back</Button>
+
 				<Button themeType="primary" onClick={handleSubmit(onSubmit)}>Submit</Button>
 			</div>
 		</div>

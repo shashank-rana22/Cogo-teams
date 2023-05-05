@@ -505,6 +505,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_organization_payment_modes',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'create_organization_billing_cycle',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -5558,6 +5563,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'spot_search',
 		},
+		{
+			api          : 'get_organization_payment_modes',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	bl_desk: [
 		{
@@ -7641,6 +7651,12 @@ const partner = {
 			access_type : 'private',
 			module      : 'Dashboard',
 			feature     : 'Dashboard',
+		},
+		{
+			api         : 'put_sales_invoice_finance_reject_invoice',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
 		},
 		{
 			api         : 'post_sales_invoice_post_from_sage',
@@ -9968,6 +9984,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'saas_traceability',
 		},
+		{
+			api          : 'list_shipping_line_events',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
 	],
 
 	ftl_freight: [
@@ -11477,7 +11498,7 @@ const partner = {
 			service_name : 'tickets',
 		},
 		{
-			api          : 'post_tickets_actvity',
+			api          : 'post_tickets_activity',
 			access_type  : 'private',
 			service_name : 'tickets',
 		},

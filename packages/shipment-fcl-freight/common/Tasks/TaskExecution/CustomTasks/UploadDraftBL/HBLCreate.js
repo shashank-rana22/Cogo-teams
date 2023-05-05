@@ -92,7 +92,6 @@ function HBLCreate({
 					<Button
 						onClick={() => {
 							setShow(true);
-							// setMode('read');
 						}}
 						size="sm"
 					>

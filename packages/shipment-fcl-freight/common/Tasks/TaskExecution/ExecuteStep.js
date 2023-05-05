@@ -15,7 +15,6 @@ function ExecuteStep({
 	getApisData = {},
 	selectedMail = [],
 	serviceIdMapping = [],
-	// uiConfig = {},
 }) {
 	const {
 		formProps,

@@ -68,7 +68,7 @@ export default function FCLDesk({ stateProps = {} }) {
 			</div>
 
 			<div className={styles.render_filter_container}>
-				{RenderAppliedFilters({ appliedFilters, setFilters })}
+				<RenderAppliedFilters appliedFilters={appliedFilters} setFilters={setFilters} />
 			</div>
 
 			<Tabs tabs={tabs} stateProps={stateProps} />

@@ -38,8 +38,9 @@ function FieldArray({
 					formValues={formValues}
 				/>
 			))}
-			<div className={styles.add_button_container}>
-				{showButtons && !disabled ? (
+
+			{showButtons && !disabled ? (
+				<div className={styles.add_button_container}>
 					<Button
 						size="sm"
 						themeType="tertiary"
@@ -50,8 +51,9 @@ function FieldArray({
 							{buttonText || 'Add'}
 						</div>
 					</Button>
-				) : null}
-			</div>
+
+				</div>
+			) : null}
 
 		</div>
 	);

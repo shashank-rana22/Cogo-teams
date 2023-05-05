@@ -127,14 +127,13 @@ function ExecuteTask({
 
 	if (task.task === 'choose_service_provider') {
 		return (
-			<div>
-				<ChooseServiceProvider
-					task={task}
-					onCancel={onCancel}
-					refetch={taskListRefetch}
-					services={servicesList}
-				/>
-			</div>
+			<ChooseServiceProvider
+				task={task}
+				onCancel={onCancel}
+				refetch={taskListRefetch}
+				services={servicesList}
+			/>
+
 		);
 	}
 

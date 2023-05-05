@@ -7,16 +7,19 @@ import styles from './styles.module.css';
 
 const LoadingState = () => [...Array(6)].map((v, idx) => (
 	<div className={styles.single_item}>
-		<VerticleLine zIndex={idx} isLast={idx === 5} />
+		<VerticleLine isLast={idx === 5} />
+
 		<div className={styles.main}>
 			<div className={styles.heading}>
-				<Placeholder width="1200px" height="40px" />
+				<Placeholder className={styles.loader} />
 			</div>
+
 			<div className={styles.gap}>
-				<Placeholder height="50px" />
+				<Placeholder className={styles.loader} />
 			</div>
 		</div>
-		<div style={{ marginTop: '20px', marginLeft: 'auto' }}>
+
+		<div className={styles.sub_container}>
 			<Placeholder />
 		</div>
 	</div>

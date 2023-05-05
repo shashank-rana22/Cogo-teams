@@ -21,7 +21,7 @@ export default function useGetScopeOptions({ defaultValues = {}, apisToConsider 
 		const viewTypes = {};
 		let defaultScope = null;
 		let defaultView = null;
-		const defaultAgentId = defaultValues.selected_agent_id;
+		const defaultAgentId = defaultValues?.selected_agent_id || '';
 
 		(main_apis || []).forEach((api) => {
 			(allNavApis[api] || []).forEach((scopeData) => {
@@ -34,8 +34,8 @@ export default function useGetScopeOptions({ defaultValues = {}, apisToConsider 
 					if ((!defaultScope && is_default) || defaultValues.scope === type) {
 						defaultScope = type;
 
-						defaultView = viewTypes[type].includes(defaultValues.view_type)
-							? defaultValues.view_type
+						defaultView = viewTypes[type]?.includes(defaultValues?.view_type)
+							? defaultValues?.view_type
 							: (through_criteria || [])[0];
 					}
 				}

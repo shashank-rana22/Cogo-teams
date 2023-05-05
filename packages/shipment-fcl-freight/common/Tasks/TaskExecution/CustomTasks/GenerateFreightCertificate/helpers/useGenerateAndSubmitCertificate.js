@@ -1,10 +1,10 @@
 import { startCase } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 const getFclFreightUpdateData = ({
-	values,
-	commodityValues,
-	containersData,
+	values = {},
+	commodityValues = {},
+	containersData = [],
 	id,
 }) => {
 	const rateData = values?.freight_declaration;
@@ -13,14 +13,12 @@ const getFclFreightUpdateData = ({
 	const nonHazQuotations = [];
 	const hazQuotations = [];
 
-	containersData.forEach((item) => {
+	containersData?.forEach((item) => {
 		const { container_number, container_size, container_type } = item || {};
 
 		const container_data = `${container_number}/${container_size}`;
-		if (
-			commodityValues[`is_hazardous-${item?.serial_no}`]
-			=== `hazardous-${container_size}-${container_type}`
-		) {
+
+		if (commodityValues[`is_hazardous-${item?.serial_no}`] === `hazardous-${container_size}-${container_type}`) {
 			hazardousContainers.push(container_data);
 		} else {
 			nonHazardousContainers.push(container_data);
@@ -28,7 +26,7 @@ const getFclFreightUpdateData = ({
 	});
 
 	rateData?.forEach((data) => {
-		const containerDetails = data?.item.split('-');
+		const containerDetails = data?.item?.split('-');
 
 		if (Number(data?.freight_price)) {
 			const quotation = {
@@ -39,6 +37,7 @@ const getFclFreightUpdateData = ({
 				container_size : containerDetails?.[1],
 				container_type : containerDetails?.[2],
 			};
+
 			if (containerDetails?.[0] === 'hazardous') {
 				hazQuotations.push(quotation);
 			} else {
@@ -59,18 +58,18 @@ const getFclFreightUpdateData = ({
 };
 
 const useGenerateAndSubmitCertificate = ({
-	task,
+	task = {},
 	containersData,
-	commodityValues,
-	shipmentData,
-	refetch,
-	onCancel,
-	setValue,
-	updateTask,
-	generateCertificate,
+	commodityValues = {},
+	shipmentData = {},
+	refetch = () => {},
+	onCancel = () => {},
+	setValue = () => {},
+	updateTask = () => {},
+	generateCertificate = () => {},
 
 }) => {
-	const commodityTypes = [...new Set(Object.values(commodityValues))];
+	const commodityTypes = useMemo(() => [...new Set(Object.values(commodityValues))], [commodityValues]);
 
 	useEffect(() => {
 		const freightDeclaration = [];
@@ -83,8 +82,7 @@ const useGenerateAndSubmitCertificate = ({
 		});
 
 		setValue('freight_declaration', freightDeclaration);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(commodityTypes)]);
+	}, [setValue, commodityTypes]);
 
 	const onSubmit = async (values) => {
 		let data = {};
@@ -96,17 +94,21 @@ const useGenerateAndSubmitCertificate = ({
 			id: shipmentData?.id,
 		});
 
-		await generateCertificate(data);
-		await updateTask({
-			id   : task?.id,
-			data : {
-				shipment: {
-					id: shipmentData.id,
+		const res = await generateCertificate(data);
+
+		if (res.status === 200) {
+			const resTask = await updateTask({
+				id   : task?.id,
+				data : {
+					shipment: { id: shipmentData.id },
 				},
-			},
-		});
-		onCancel();
-		refetch();
+			});
+
+			if (resTask.status === 200) {
+				onCancel();
+				refetch();
+			}
+		}
 	};
 
 	return {

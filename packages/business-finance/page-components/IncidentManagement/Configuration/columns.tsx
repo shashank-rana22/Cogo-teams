@@ -6,6 +6,7 @@ import ICJVModal from '../Modals/ICJV_Modal';
 import JvModal from '../Modals/JvModal';
 import RequestCN from '../Modals/RequestCN';
 import SettlementModal from '../Modals/SettlementModal';
+import SezApproval from '../Modals/SezApproval';
 import TDSModal from '../Modals/TDSModal';
 import { TooltipInterface } from '../utils/interface';
 import { toTitleCase } from '../utils/titleCase';
@@ -177,6 +178,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 				settlementRequest,
 				journalVoucherRequest,
 				interCompanyJournalVoucherRequest,
+				sezRequest,
 			} = row.data || {};
 
 			const { type: requestType, id, remark, status } = row || {};
@@ -250,6 +252,15 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 							id={id}
 							isEditable={false}
 							status={status}
+						/>
+					)}
+
+					{requestType === 'SEZ_APPROVAL' && (
+						<SezApproval
+							sezRequest={sezRequest}
+							organization={organization}
+							isEditable={false}
+							remark={remark}
 						/>
 					)}
 

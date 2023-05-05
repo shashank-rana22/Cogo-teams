@@ -17,6 +17,7 @@ function UploadHbl(props) {
 		docs?.forEach((item, i) => {
 			newUrls[i] = `${item?.document_url}`;
 		});
+
 		setUrls(newUrls);
 	}, [docs]);
 

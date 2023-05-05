@@ -40,3 +40,8 @@
 		margin-right: 4px;
 	}
 }
+
+.errors {
+	font-size: 12px;
+	color: red;
+}
