@@ -25,7 +25,10 @@ function Card({ item = {} }) {
 	const router = useRouter();
 
 	const clickCard = () => {
-		router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}`);
+		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}`;
+
+		window.sessionStorage.setItem('prev_nav', newUrl);
+		window.location.href = newUrl;
 	};
 
 	const iconProps = SHIPMENT_ICON[item?.shipment_type] || SHIPMENT_ICON.lcl_freight;

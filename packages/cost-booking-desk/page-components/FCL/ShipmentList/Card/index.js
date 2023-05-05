@@ -36,7 +36,14 @@ function Card({ item = {} }) {
 	const router = useRouter();
 
 	const clickCard = () => {
-		router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}`);
+		if (item?.shipment_type === 'fcl_freight') {
+			router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}`);
+		} else {
+			const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}`;
+
+			window.sessionStorage.setItem('prev_nav', newUrl);
+			window.location.href = newUrl;
+		}
 	};
 
 	const iconProps = SHIPMENT_ICON[item?.shipment_type] || SHIPMENT_ICON.fcl_freight;
