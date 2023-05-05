@@ -1,5 +1,7 @@
 import { Button, Pill, Placeholder, Loader } from '@cogoport/components';
-import { isEmpty, format } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
@@ -39,8 +41,12 @@ function OrganizationDetails({
 	const { promoData = {}, promoLoading } = useGetListPromotions({ organizationId });
 	const { quotationSentData = {} } = useCheckCustomerCheckoutQuotationConflict({ orgId: organizationId });
 
-	const { quotation_email_sent_at, quotation_email_sent_by_name } = quotationSentData || {};
-	const quotation_date = quotation_email_sent_at && format(new Date(quotation_email_sent_at), 'dd MMM YYYY');
+	const { quotation_email_sent_at = '', quotation_email_sent_by_name = '' } = quotationSentData || {};
+	const quotation_date = quotation_email_sent_at && formatDate({
+		date       : quotation_email_sent_at || new Date(),
+		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+		formatType : 'date',
+	});
 	const { list = [] } = promoData || {};
 	const { agent = {}, account_type, kyc_status, serial_id, short_name, city, tags = [] } = organizationData || {};
 	const { display_name } = city || {};
@@ -205,7 +211,7 @@ function OrganizationDetails({
 			) : (
 				<ListPromos />
 			)}
-			{!isEmpty(quotation_email_sent_by_name) && (
+			{quotation_email_sent_by_name && (
 				<div className={styles.quotation_details}>
 					<div className={styles.agent_title}>
 						Quotation sent details
