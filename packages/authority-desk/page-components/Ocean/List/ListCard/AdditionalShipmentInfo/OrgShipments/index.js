@@ -1,10 +1,10 @@
-import { startCase } from '@cogoport/utils';
-import React from 'react';
+import { startCase } from "@cogoport/utils";
+import React from "react";
+import { Loader } from "@cogoport/components";
+import EmptyState from "../../../../../../commons/EmptyState";
+import useListShipments from "../../../../../../hooks/useListShipments";
 
-import EmptyState from '../../../../../../commons/EmptyState';
-import useListShipments from '../../../../../../hooks/useListShipments';
-
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 function OrgShipments({ item = {} }) {
 	const { list, loading } = useListShipments({ item });
@@ -22,9 +22,14 @@ function OrgShipments({ item = {} }) {
 		);
 	}
 
+	const docStatusMapping = {
+		pending: "Final BL not uploaded",
+		uploaded: "Final BL collected",
+	};
+
 	const renderBLDetails = (blDetails) => (
 		<div>
-			{['uploaded', 'pending'].includes(blDetails.status)
+			{["uploaded", "pending"].includes(blDetails.status)
 				? docStatusMapping[blDetails.status]
 				: startCase(blDetails.status)}
 		</div>
@@ -55,19 +60,20 @@ function OrgShipments({ item = {} }) {
 				<tbody>
 					{(list || []).map((item) => (
 						<tr className={styles.row} key={item.serial_id}>
-							<td>{item.serial_id}</td>
-							<td>
-								{startCase(item.shipment_type)}
-								{' '}
-							</td>
-							<td>{item.trade_type}</td>
-							<td>{startCase(item.state)}</td>
+							<td>{item?.serial_id}</td>
+							<td>{startCase(item?.shipment_type)} </td>
+							<td>{startCase(item?.trade_type)}</td>
+							<td>{startCase(item?.state)}</td>
 							<td />
-							<td>{item.cargo_value || '--'}</td>
-							<td>{item.payment_term || '--'}</td>
-							<td>{item.bl_details.map(renderBLDetails)}</td>
-							<td>{item.do_details.map(renderDODetails)}</td>
-							<td>{item.booking_agent?.name || '--'}</td>
+							<td>{item?.cargo_value || "--"}</td>
+							<td>{startCase(item?.payment_term || "--")}</td>
+							<td>
+								{(item?.bl_details || []).map(renderBLDetails)}
+							</td>
+							<td>
+								{(item?.do_details || []).map(renderDODetails)}
+							</td>
+							<td>{item.booking_agent?.name || "--"}</td>
 						</tr>
 					))}
 				</tbody>

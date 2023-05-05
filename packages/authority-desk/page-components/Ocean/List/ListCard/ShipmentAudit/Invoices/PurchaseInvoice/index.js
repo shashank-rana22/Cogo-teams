@@ -4,10 +4,9 @@ import useGetBill from '../../../../../../../hooks/useGetBill';
 
 import styles from './styles.module.css';
 
-function PurchaseInvoice() {
-	const { loadingBills, data } = useGetBill();
+function PurchaseInvoice({ item}) {
+	const { loadingBills, data } = useGetBill({ serial_id : item?.serial_id });
 
-	console.log(data, 'data');
 
 	return (
 		<div className={styles.container}>

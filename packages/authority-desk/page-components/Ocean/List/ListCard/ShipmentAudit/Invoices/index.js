@@ -5,7 +5,7 @@ import PurchaseInvoice from './PurchaseInvoice';
 import SalesInvoice from './SalesInvoice';
 import styles from './styles.module.css';
 
-function Invoices() {
+function Invoices({ item }) {
 	const [invoiceTab, setInvoiceTab] = useState('sales_invoices');
 
 	return (

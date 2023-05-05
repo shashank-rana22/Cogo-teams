@@ -14,7 +14,6 @@
 	position: absolute;
 	right: 0;
 	width: fit-content;
-	width: fit-content;
 	padding: 2px 6px;
 	margin-left: auto;
 	font-size: 10px;
@@ -104,7 +103,6 @@
 	cursor: pointer;
 	background: #f8f2e7;
 	border-radius: 0 0 8px 8px;
-
 
 	&::after {
 		margin-left: 4px;

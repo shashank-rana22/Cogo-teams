@@ -1,37 +1,36 @@
-.container {
-	.business-checkbox-item {
-		margin: 12px;
-	}
-
-	.ui-text-area {
-		padding: 12px !important;
-	}
-
-	.form-layout-root-row {
-		width: 100%;
-	}
-
-	.business-checkbox-label {
-		width: 98%;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
+.no_data_warning {
+	font-weight: 500;
+	color: var(--color-primary-error-red-2);
 }
 
-.heading {
-	margin-bottom: 30px;
-	font-size: 18px;
-	font-weight: 600;
-	color: #393f70;
-}
-
-.button_wrapper {
+.checkbox_controller {
 	display: flex;
-	justify-content: flex-end;
-	margin: 16px;
+	flex-direction: column;
+	padding: 0;
 
-	.core-ui-button-root {
-		text-transform: capitalize;
-		letter-spacing: 0;
+	:global {
+		.ui_checkbox_container {
+			padding: 0 0 10px;
+		}
 	}
+}
+
+.checkbox_controller + .error_message {
+	margin-top: -10px;
+}
+
+.request_modal {
+	:global {
+		.ui_modal_footer_container .ui_button_container:not(:last-of-type) {
+			margin-right: 10px;
+		}
+	}
+}
+
+.error_message {
+	color: var(--color-primary-error-red-2);
+}
+
+.form_element {
+	margin-bottom: 10px;
 }

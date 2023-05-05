@@ -18,7 +18,7 @@ function useListShipments({ item }) {
 					filters: {
 						state                : ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress'],
 						is_job_closed        : false,
-						importer_exporter_id : '1e4b9f43-4863-4e29-a944-8e9e8780e514' || item?.importer_exporter_id,
+						importer_exporter_id :  item?.importer_exporter_id,
 					},
 					invoice_value_required: true,
 				},

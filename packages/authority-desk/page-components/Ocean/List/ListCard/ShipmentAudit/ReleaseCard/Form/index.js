@@ -1,27 +1,29 @@
-import { Button } from '@cogoport/components';
-import React from 'react';
+import { Button, Modal } from "@cogoport/components"; 
+import { CheckboxGroupController, TextAreaController, useForm } from '@cogoport/forms';
+import React from "react";
+import useUpdateShipmentBlDoDetails from "../../../../../../../hooks/useUpdateShipmentBlDoDetails";
 
-import useUpdateShipmentBlDoDetails from '../../../../../../../hooks/useUpdateShipmentBlDoDetails';
-
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 function Form({
-	setOpen = () => {},
+	handleClose = () => {},
 	blData = [],
-	tradeType,
 	hold = false,
 	surrender = false,
-	selectedTab,
+	bucket,
+	trade_type = "export",
 }) {
 	const docOptions = () => {
 		if (surrender) {
 			const docsToSurrender = blData.filter(
-				(item) => [
-					'draft_bill_of_lading',
-					'bill_of_lading',
-					'draft_house_bill_of_lading',
-					'house_bill_of_lading',
-				].includes(item?.document_type) && item?.status === 'approved',
+				(item) =>
+					[
+						"draft_bill_of_lading",
+						"bill_of_lading",
+						"draft_house_bill_of_lading",
+						"house_bill_of_lading",
+					].includes(item?.document_type) &&
+					item?.status === "approved"
 			);
 			return docsToSurrender;
 		}
@@ -29,49 +31,105 @@ function Form({
 		return blData;
 	};
 
-	const modifiedControls = controls(docOptions());
+	const {
+		formState: { errors },
+		control,
+		handleSubmit,
+	} = useForm();
 
-	// const { onUpdate, fields, error, onError, handleSubmit } = useUpdateBlDetails(
-	// 	{
-	// 		modifiedControls,
-	// 		setOpen,
-	// 		tradeType,
-	// 		hold,
-	// 		surrender,
-	// 		selectedTab,
-	// 	},
-	// );
+	const { onUpdate, loading } = useUpdateShipmentBlDoDetails({ trade_type });
 
-	let heading = 'Approve Document';
+	let heading = "Approve Document";
+	let status = "approved";
 	if (hold) {
-		heading = 'Hold Document';
+		heading = "Hold Document";
+		status = "hold";
 	} else if (surrender) {
-		heading = 'Approve for Surrender Document';
-	} else if (selectedTab === 'approved') {
-		heading = 'Approve for Release';
+		heading = "Approve for Surrender Document";
+		status = "surrender_pending";
+	} else if (bucket === "approved") {
+		heading = "Approve for Release";
+		status = "release_pending";
 	}
 
+	const onSubmit = (formData) => {
+		const payload = {
+			ids: formData?.ids,
+			data: {
+				[trade_type === "export" ? "bl_remarks" : "remarks"]: {
+					comment: formData?.remarks,
+					status: "requested",
+				},
+				status,
+			},
+		};
+		onUpdate(payload);
+	};
+
 	return (
-		<div className={styles.container}>
-			<div className={styles.heading}>{div}</div>
+		<Modal
+			show
+			onClose={handleClose}
+			showCloseIcon={!loading}
+			className={styles.request_modal}
+		>
+			<Modal.Header title={heading} />
 
-			{modifiedControls?.[0]?.options?.length === 0 ? (
-				<div style={{ fontWeight: '500', color: 'red', marginBottom: '16px' }}>
-					No Document has been uploaded!
+			<Modal.Body>
+				<div className={styles.form}>
+					{(docOptions()).length === 0 ? (
+						<div className={styles.no_data_warning}>
+							No document has been uploaded!
+						</div>
+					) : null}
+
+					<div className={styles.form_element}>
+						<CheckboxGroupController
+							name="ids"
+							control={control}
+							size="md"
+							options={docOptions()}
+							className={styles.checkbox_controller}
+							rules={{ required: "This field is required" }}
+						/>
+						{errors.ids ? (
+							<div className={styles.error_message}>
+								{errors.ids.message}
+							</div>
+						) : null}
+					</div>
+
+					<div className={styles.form_element}>
+						<TextAreaController
+							name="remarks"
+							control={control}
+							size="md"
+							rows={4}
+							placeholder="Enter Remarks Here..."
+							rules={{ required: "This field is Required" }}
+						/>
+						{errors.remarks ? (
+							<div className={styles.error_message}>
+								{errors.remarks.message}
+							</div>
+						) : null}
+					</div>
 				</div>
-			) : null}
+			</Modal.Body>
 
-			{/* <Layout
-				themeType="admin"
-				fields={fields}
-				controls={modifiedControls}
-				errors={error}
-			/> */}
-
-			<div className={styles.button_wrapper}>
-				<Button onClick={handleSubmit(onUpdate, onError)}>{heading}</Button>
-			</div>
-		</div>
+			<Modal.Footer>
+				<Button
+					disabled={loading}
+					themeType="secondary"
+					onClick={handleClose}
+				>
+					Cancel
+				</Button>
+				<Button disabled={loading} onClick={handleSubmit(onSubmit)}>
+					{heading}
+				</Button>
+			</Modal.Footer>
+		</Modal>
 	);
 }
 

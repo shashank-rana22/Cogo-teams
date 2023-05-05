@@ -1,7 +1,7 @@
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
-const useGetBill = () => {
+const useGetBill = ({ serial_id}) => {
 	const [
 		{ loading: billsApiLoading },
 		listExpenseInvoicesTrigger,
@@ -20,7 +20,7 @@ const useGetBill = () => {
 		try {
 			const res = await listExpenseInvoicesTrigger({
 				params: {
-					jobNumbers : '145063',
+					jobNumbers : serial_id,
 					jobSource  : 'LOGISTICS',
 					jobType    : 'SHIPMENT',
 				},
