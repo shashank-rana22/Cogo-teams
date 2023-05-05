@@ -1,5 +1,5 @@
 const authorityDesk = {
-	'/[partner_id]/authority-desk': {
+	'/[partner_id]/bl-do': {
 		navigation: 'coe-bl_do',
 	},
 };

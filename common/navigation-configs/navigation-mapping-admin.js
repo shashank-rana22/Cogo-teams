@@ -1271,10 +1271,10 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-bl_do',
 				title         : 'Authority Desk',
-				href          : '/authority-desk',
-				as            : '/authority-desk',
+				href          : '/bl-do',
+				as            : '/bl-do',
 				type          : 'link',
-				main_apis     : ['list_authority_desk_bl_documents', 'list_shipments'],
+				main_apis     : ['list_authority_desk_bl_documents','list_authority_desk_do_documents', 'list_shipments'],
 				module_type   : 'dashboards',
 				possible_apis : [...apis.bl_do, ...apis.sop, ...apis.poc],
 
