@@ -1,7 +1,9 @@
 import { Checkbox } from '@cogoport/components';
 import { IcMProfile } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 import { SERVICE_MAPPING } from '../../../../../../constants';
+import { getformattedDuration } from '../../../../../../utils/getFormattedDuration';
 
 import styles from './styles.module.css';
 
@@ -15,16 +17,30 @@ function Card({ item, checkedItems, handleCheck }) {
 				onChange={handleCheck}
 			/>
 			<div className={styles.basic_details}>
-				<div className={styles.org_name}>Zetwerk International Manufacturing Businesses Private Limited</div>
+				<div className={styles.org_name}>{item?.organization_business_name || '-'}</div>
 				<div className={styles.tags}>
-					<div className={styles.primary_tag}>10 Port Pairs : 4 Requested for Approval</div>
-					<div className={styles.primary_tag}>SME</div>
-					<div className={styles.primary_tag}>Last Shipment : 1 Month Ago</div>
+					<div className={styles.primary_tag}>
+						{item?.port_pairs_count}
+						{' '}
+						Port Pairs :
+						{' '}
+						{item?.pending_requests}
+						{' '}
+						Requested for Approval
+					</div>
+					{item?.sub_type && <div className={styles.primary_tag}>{startCase(item?.sub_type)}</div>}
+					<div className={styles.primary_tag}>
+						Last Shipment :
+						{' '}
+						{getformattedDuration(item?.last_shipment)}
+						{' '}
+						Ago
+					</div>
 				</div>
 				<div className={styles.rest_tags}>
 					<div className={styles.secondary_tag}>
 						<IcMProfile className={styles.avatar} />
-						Kam Name
+						{item?.kam_name}
 					</div>
 					<div className={styles.secondary_tag}>Requested on : 20 Mar 2023</div>
 					<div className={styles.secondary_tag}>RFQ ID : 1124</div>
