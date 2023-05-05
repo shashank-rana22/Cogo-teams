@@ -43,6 +43,7 @@ function CardItem({
 										'--span': (field.span || 1),
 										...itemStyle,
 									} as React.CSSProperties}
+									key={field.key}
 								>
 									{isMobile && (
 										<div className={styles.tablelabel}>{field.label}</div>

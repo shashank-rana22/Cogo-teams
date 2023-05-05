@@ -61,7 +61,7 @@ function Child({
 						const flex = ((controlItem?.span || 12) / 12) * 100 - 1;
 						if (!Element) return null;
 						return (
-							<div className={styles.element} style={{ width: `${flex}%` }}>
+							<div className={styles.element} style={{ width: `${flex}%` }} key={controlItem.name}>
 								<h4 className={styles.child_label}>
 									{controlItem?.label}
 								</h4>

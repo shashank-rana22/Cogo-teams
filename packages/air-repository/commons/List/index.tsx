@@ -33,15 +33,14 @@ function List({
 
 		if (loading || list.length) {
 			return (showlist).map((singleitem) => (
-				<div className="card-list-data">
-					<ListItem
-						singleitem={singleitem}
-						fields={fields}
-						functions={functions}
-						loading={loading}
-						isMobile={isMobile}
-					/>
-				</div>
+				<ListItem
+					key={singleitem.id}
+					singleitem={singleitem}
+					fields={fields}
+					functions={functions}
+					loading={loading}
+					isMobile={isMobile}
+				/>
 			));
 		}
 		return <EmptyState />;

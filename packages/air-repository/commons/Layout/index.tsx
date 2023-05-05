@@ -41,7 +41,7 @@ function Layout({
 						const show = (!(field.name in showElements) || showElements[fieldsItem.name]);
 						if (type === 'fieldArray' && show) {
 							return (
-								<div style={{ width: `${flex}%`, padding: '4px' }}>
+								<div style={{ width: `${flex}%`, padding: '4px' }} key={fieldsItem.name}>
 									<div className={styles.heading}>
 										{heading}
 									</div>
