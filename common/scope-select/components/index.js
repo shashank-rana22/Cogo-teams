@@ -12,7 +12,7 @@ export default function ScopeSelect({
 	size = 'sm',
 	themeType = 'secondary',
 	className = '',
-	defaultValues,
+	defaultValues = {},
 	showChooseAgent = true,
 	popoverSize = 'sm',
 	apisToConsider = [],
