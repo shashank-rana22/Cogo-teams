@@ -1,0 +1,9 @@
+.img_styles {
+	width: 15px;
+	margin-right: 6px;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+}
