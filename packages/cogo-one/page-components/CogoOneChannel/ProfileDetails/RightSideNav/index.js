@@ -18,7 +18,8 @@ function RightSideNav({
 	activeMessageCard,
 	activeVoiceCard,
 	activeTab,
-	quotationSentData,
+	quotationEmailSentAt = '',
+	orgId = '',
 }) {
 	const dispatch = useDispatch();
 	const { profileData } = useSelector(({ profile }) => ({
@@ -64,8 +65,8 @@ function RightSideNav({
 				const { icon, name, content, hide = false } = item;
 				const showDocumentCount = activeSelect !== 'documents' && name === 'documents'
 				&& documents_count > 0 && !checkConditions;
-				const ShowquotationSentData = activeSelect !== 'organization'
-				&& name === 'organization' && !isEmpty(quotationSentData);
+				const ShowquotationSentData = orgId && activeSelect !== 'organization'
+				&& name === 'organization' && !!quotationEmailSentAt;
 
 				return (
 					!hide && (

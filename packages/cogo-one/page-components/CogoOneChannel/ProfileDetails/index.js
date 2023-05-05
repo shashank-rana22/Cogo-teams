@@ -50,9 +50,9 @@ function ProfileDetails({
 	});
 
 	const { quotationSentData = {} } = useCheckCustomerCheckoutQuotationConflict(
-		{ orgId: activeMessageCard.organization_id },
+		{ orgId },
 	);
-	const quotationEmailSentAt = quotationSentData.quotation_email_sent_at;
+	const quotationEmailSentAt = quotationSentData?.quotation_email_sent_at;
 
 	useEffect(() => {
 		setShowMore(false);
@@ -101,7 +101,8 @@ function ProfileDetails({
 				activeMessageCard={activeMessageCard}
 				activeVoiceCard={activeVoiceCard}
 				activeTab={activeTab}
-				quotationSentData={quotationEmailSentAt}
+				quotationEmailSentAt={quotationEmailSentAt}
+				orgId={orgId}
 			/>
 		</div>
 	);

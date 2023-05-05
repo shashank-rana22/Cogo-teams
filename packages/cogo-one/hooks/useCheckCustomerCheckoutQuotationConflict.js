@@ -5,7 +5,7 @@ const useCheckCustomerQuotationConflict = ({ orgId = '' }) => {
 	const [{ loading, data }, trigger] = useRequest(
 		{
 			method : 'get',
-			url    : '/check_customer_quotation_conflict',
+			url    : '/check_customer_checkout_quotation_conflict',
 		},
 		{ manual: true, autoCancel: false },
 	);
