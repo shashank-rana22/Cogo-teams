@@ -1,6 +1,6 @@
 import { Modal, cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import CargoDetails from '../../../../../commons/CargoDetails';
@@ -29,7 +29,9 @@ function ShipmentAudit({
 }) {
 	const { bucket = 'eligible', service } = tabsState;
 
-	const { freight_service } = item;
+	const { freight_service = {}, local_service = {} } = item;
+
+	const primary_service = isEmpty(freight_service) ? local_service : freight_service;
 
 	const tabs = {
 		invoices : 'Invoices',
@@ -71,9 +73,9 @@ function ShipmentAudit({
 						<div className={styles.shipment_details}>
 							<ShipmentBreif item={item} service={service} redirectable />
 
-							<PortDetails primary_service={freight_service} />
+							<PortDetails primary_service={primary_service} trade_type={item?.trade_type} />
 
-							<CargoDetails primary_service={freight_service} />
+							<CargoDetails primary_service={primary_service} />
 						</div>
 
 						<div className={styles.bl_details}>

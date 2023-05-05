@@ -1,4 +1,4 @@
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import CargoDetails from '../../../../commons/CargoDetails';
@@ -13,7 +13,9 @@ import styles from './styles.module.css';
 function ListCard({ item = {}, role = '', tabsState = {} }) {
 	const [showDetails, setShowDetails] = useState(false);
 
-	const { freight_service = {} } = item;
+	const { freight_service = {}, local_service = {} } = item;
+
+	const primary_service = isEmpty(freight_service) ? local_service : freight_service;
 
 	return (
 		<div className={styles.container}>
@@ -25,8 +27,8 @@ function ListCard({ item = {}, role = '', tabsState = {} }) {
 			<div className={styles.detail_container}>
 				<div className={styles.shipment_details}>
 					<ShipmentBreif item={item} />
-					<PortDetails primary_service={freight_service} />
-					<CargoDetails primary_service={freight_service} />
+					<PortDetails primary_service={primary_service} trade_type={item?.trade_type} />
+					<CargoDetails primary_service={primary_service} />
 				</div>
 
 			</div>
