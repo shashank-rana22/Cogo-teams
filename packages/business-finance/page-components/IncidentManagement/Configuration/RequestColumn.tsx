@@ -7,6 +7,7 @@ import ICJVModal from '../Modals/ICJV_Modal';
 import JvModal from '../Modals/JvModal';
 import RequestCN from '../Modals/RequestCN';
 import SettlementModal from '../Modals/SettlementModal';
+import SezApproval from '../Modals/SezApproval';
 import TDSModal from '../Modals/TDSModal';
 import { TooltipInterface } from '../utils/interface';
 import { toTitleCase } from '../utils/titleCase';
@@ -148,6 +149,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 				journalVoucherRequest,
 				interCompanyJournalVoucherRequest,
 				concorPdaApprovalRequest,
+				sezRequest,
 			} = data || {};
 
 			const { type, id } = row || {};
@@ -211,6 +213,16 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 						type === 'CONCOR_PDA_APPROVAL' && (
 							<ConcorModal
 								concorData={concorPdaApprovalRequest}
+								id={id}
+								refetch={getIncidentData}
+							/>
+						)
+					}
+					{
+						type === 'SEZ_APPROVAL' && (
+							<SezApproval
+								sezRequest={sezRequest}
+								organization={organization}
 								id={id}
 								refetch={getIncidentData}
 							/>

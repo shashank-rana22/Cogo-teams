@@ -1,0 +1,58 @@
+.button {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.title {
+	min-width: 200px;
+	font-weight: 600;
+}
+
+.flex {
+	display: flex;
+	margin-bottom: 8px;
+}
+
+.name {
+	padding: 0 4px;
+}
+
+.remarks {
+	margin: 8px 0;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.divider {
+	margin-right: 16px;
+}
+
+.section {
+	display: flex;
+	margin-bottom: 8px;
+}
+
+.input_titles {
+	min-width: 200px;
+	font-weight: 600;
+}
+
+.text_area {
+	height: 100px;
+	padding: 4px;
+	margin-bottom: 12px;
+}
+
+.file_link {
+	color: #07b02c !important;
+	text-decoration: underline !important;
+}
+
+.doc {
+	display: flex;
+	align-items: center;
+}
+
+.eye {
+	margin: 4px 0 0 4px;
+}

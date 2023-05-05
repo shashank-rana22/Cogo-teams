@@ -117,3 +117,14 @@
 		color: #828282;
 	}
 }
+
+.calcuate_button {
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 20%;
+
+	:global(.ui_button_container) {
+		position: relative;
+		bottom: 42px;
+	}
+}
