@@ -1,33 +1,27 @@
 import { Tooltip } from '@cogoport/components';
 import { IcCRedCircle, IcCYelloCircle, IcMLiveChat } from '@cogoport/icons-react';
-import { startCase, format, upperCase } from '@cogoport/utils';
+import { startCase, format, upperCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../../../commons/EmptyState';
 
+import DetentionAndDemurrage from './DetentionAndDemurrage';
 import styles from './styles.module.css';
 
 function ShipmentExtraDetails({ item = {} }) {
-	const { freight_service = {}, bill_of_ladings = {}, delivery_orders = {} } = item;
+	const { bill_of_ladings = [], delivery_orders = [] } = item;
 
-	const {
-		free_days_demurrage_destination,
-		free_days_demurrage_origin,
-		free_days_detention_destination,
-		free_days_detention_origin,
-	} = freight_service;
-
-	const docsList = bill_of_ladings || delivery_orders || [];
+	const docsList = isEmpty(bill_of_ladings) ? delivery_orders : bill_of_ladings;
 
 	const IconMapping = {
 		red    : <IcCRedCircle height={12} width={12} />,
 		yellow : <IcCYelloCircle height={12} width={12} />,
 	};
 
-	const remarks = docsList.flatMap(
+	const remarks = (docsList || []).flatMap(
 		(doc) => (doc?.bl_remarks || doc?.remarks || []).flatMap(
 			(remark) => (remark?.comment !== 'System Invalidated'
-				? { ...remark, bl_number: doc.bl_number }
+				? { ...remark, bl_number: doc.bl_number || doc.do_number }
 				: []),
 		),
 	);
@@ -41,11 +35,11 @@ function ShipmentExtraDetails({ item = {} }) {
 						<th>Status</th>
 						<th>Comment</th>
 						<th>Date and time</th>
-						<th>Bl Number</th>
+						<th>Bl/DO Number</th>
 					</tr>
 				</thead>
 				<tbody>
-					{remarks.length ? (
+					{remarks.length === 0 ? (
 						<td colSpan={5}>
 							<EmptyState customClass={styles.customized_empty_state} />
 						</td>
@@ -65,23 +59,8 @@ function ShipmentExtraDetails({ item = {} }) {
 
 	return (
 		<div className={styles.shipment_extra_details}>
-			<div className={styles.detention_demurrage}>
-				<span>
-								&nbsp; Origin : &nbsp;
-					{free_days_detention_origin || 0}
-								&nbsp; Detention days , &nbsp;
-					{free_days_demurrage_origin || 0}
-								&nbsp; Dumurrage Days
-				</span>
-				<br />
-				<span>
-								&nbsp; Destination : &nbsp;
-					{free_days_detention_destination || 0}
-								&nbsp; Detention days, &nbsp;
-					{free_days_demurrage_destination || 0}
-								&nbsp; Demurrage days &nbsp;
-				</span>
-			</div>
+
+			<DetentionAndDemurrage item={item} />
 
 			<div className={styles.documents_and_invoices}>
 				<div className={styles.validation}>
@@ -103,7 +82,7 @@ function ShipmentExtraDetails({ item = {} }) {
 					<div>
 						BL Type : &nbsp;
 						{upperCase(
-							item?.freight_service?.bl_category,
+							item?.freight_service?.bl_category || item?.local_service?.bl_category,
 						)}
 					</div>
 					<div>

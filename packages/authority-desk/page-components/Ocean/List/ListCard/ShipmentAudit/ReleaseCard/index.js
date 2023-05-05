@@ -32,7 +32,7 @@ function ReleaseCard({ data = {}, bucket }) {
 	const [hold, setHold] = useState(false);
 	const [surrender, setSurrender] = useState(false);
 
-	const docDetails = data?.bill_of_ladings || data?.delivery_orders;
+	const docDetails = isEmpty(data?.bill_of_ladings) ? data?.delivery_orders : data?.bill_of_ladings;
 
 	const releasedBLData = [];
 	const blsAvailable = (docDetails || [])?.filter(

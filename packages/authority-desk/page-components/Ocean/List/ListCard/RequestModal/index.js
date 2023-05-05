@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { CheckboxGroupController, TextAreaController, useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 
 import useUpdateShipmentBlDoDetails from '../../../../../hooks/useUpdateShipmentBlDoDetails';
 
@@ -9,7 +10,7 @@ import styles from './styles.module.css';
 function RequestModal({ closeModal = () => { }, data = {} }) {
 	const { trade_type, bill_of_ladings, delivery_orders, is_request_doc_allowed } = data || {};
 
-	const documentOptions = bill_of_ladings || delivery_orders;
+	const documentOptions = isEmpty(bill_of_ladings) ? delivery_orders : bill_of_ladings;
 
 	const blOptions = (documentOptions || []).filter(
 		(item) => !['surrender_pending', 'surrendered'].includes(item?.status),
