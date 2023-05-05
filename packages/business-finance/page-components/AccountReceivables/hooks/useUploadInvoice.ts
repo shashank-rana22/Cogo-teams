@@ -21,15 +21,20 @@ const useUploadeInvoice = ({ id, setUploadInvoice, partner }: UploadInterface) =
 	);
 
 	const uploadEInvoice = async (value) => {
+		const {
+			E_invoice_date : E_INVOICE_DATE = '',
+			E_invoice_due_date : E_INVOICE_DUE_DATE = '', E_invoice_number : E_INVOICE_NUMBER = '',
+			E_invoice_pdf_file : E_INVOICE_PDF_FILE = '', E_invoice_xml_file : E_INVOICE_XML_FILE = '',
+		} = value || {};
 		try {
 			await trigger({
 				data: {
 					invoiceId           : id,
-					invoiceDate         : value?.E_invoice_date,
-					invoiceDueDate      : value?.E_invoice_due_date,
-					eInvoiceNumber      : value?.E_invoice_number,
-					eInvoicePdfUrl      : value?.E_invoice_pdf_file?.finalUrl,
-					eInvoiceXmlUrl      : value?.E_invoice_xml_file?.finalUrl,
+					invoiceDate         : E_INVOICE_DATE || undefined,
+					invoiceDueDate      : E_INVOICE_DUE_DATE || undefined,
+					eInvoiceNumber      : E_INVOICE_NUMBER || undefined,
+					eInvoicePdfUrl      : E_INVOICE_PDF_FILE?.finalUrl || undefined,
+					eInvoiceXmlUrl      : E_INVOICE_XML_FILE?.finalUrl || undefined,
 					updatedBy           : partner?.id,
 					performedByUserType : 'agent',
 				},

@@ -29,3 +29,8 @@
 	text-decoration: underline;
 	cursor: pointer;
 }
+
+.filter_div {
+	display: flex;
+	align-items: center;
+}

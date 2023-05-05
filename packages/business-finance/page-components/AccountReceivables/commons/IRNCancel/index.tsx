@@ -14,10 +14,12 @@ function IRNCancel({ itemData }) {
 	const [showCancellationModal, setShowCancellationModal] = useState(false);
 	const [show, setShow] = useState(false);
 
-	const { invoiceStatus, id, entityCode } = itemData;
+	const { invoiceStatus, id, entityCode, irnGeneratedAt = '' } = itemData || {};
 
-	const isAfterADay =		itemData?.irnGeneratedAt !== null
-		? itemData.irnGeneratedAt + 86400000 >= Date.now()
+	const TimeValue = 86400000;
+
+	const isAfterADay =	irnGeneratedAt !== null
+		? irnGeneratedAt + TimeValue >= Date.now()
 		: false;
 
 	const { postToSage, loading } = usePostToSage(id);

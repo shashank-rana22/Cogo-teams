@@ -8,7 +8,11 @@ interface IrnGenerationProps {
 }
 
 const useGetIrnGeneration = ({ id, refetch }: IrnGenerationProps) => {
-	const { profile } = useSelector((state) => state || {});
+	const { profile = {} } = useSelector((state) => state || {});
+
+	const { user = {} } = profile;
+
+	const { id: userId = '' } = user;
 
 	const [
 		{ data, loading },
@@ -53,7 +57,7 @@ const useGetIrnGeneration = ({ id, refetch }: IrnGenerationProps) => {
 			const resp = await finalPostTrigger({
 				data: {
 					invoiceIds  : [id],
-					performedBy : profile?.user?.id,
+					performedBy : userId,
 				},
 			});
 			refetch();

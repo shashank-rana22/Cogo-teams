@@ -29,32 +29,36 @@ const financeRejectCheck = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
 const { cogoport_entities : CogoportEntity } = GLOBAL_CONSTANTS || {};
 
 function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
+	const { profile = {} } = useSelector((state) => state);
 	const [uploadInvoice, setUploadInvoice] = useState(false);
 	const [openReject, setOpenReject] = useState(false);
 	const [textValue, setTextValue] = useState('');
-	const { profile = {} } = useSelector((state) => state);
-	const { invoiceStatus } = itemData || {};
+	const { invoiceStatus = '' } = itemData || {};
 
 	const { partner = {} } = profile;
 
+	const { id: partnerId = '' } = partner;
+
+	const { id = '' } = itemData;
+
 	const { financeReject, loading: loadingReject } = useFinanceReject({
-		id: itemData?.id,
+		id,
 		textValue,
 		refetch,
 	});
 
 	const { generateIrn, loading, finalPostFromSage, finalPostLoading } = useGetIrnGeneration({
-		id: itemData?.id,
+		id,
 		refetch,
 	});
 
 	const { refresh, loadingOnRefresh } = useGetRefresh({
-		id: itemData?.id,
+		id,
 		refetch,
 	});
 
 	const { uploadEInvoice, loading: invoiceLoading } = useUploadeInvoice({
-		id: itemData?.id,
+		id,
 		setUploadInvoice,
 		partner,
 	});
@@ -74,9 +78,9 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 
 	const content = () => (
 		<div>
-			{partner?.id === GLOBAL_CONSTANTS.country_entity_ids.VN ? (
+			{partnerId === GLOBAL_CONSTANTS.country_entity_ids.VN ? (
 				<div>
-					<div style={{ display: 'flex', flexDirection: 'column', margin: '8px', width: 'maxContent' }}>
+					<div className={styles.generate_container}>
 						<Button
 							size="sm"
 							disabled={loading}
@@ -95,7 +99,9 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 					) : null}
 				</div>
 			) : (
-				<div style={{ display: 'flex', flexDirection: 'column', margin: '8px', width: 'maxContent' }}>
+				<div
+					className={styles.generate_container}
+				>
 					{INVOICE_STATUS.includes(invoiceStatus) && (
 						<Button
 							size="sm"
@@ -118,7 +124,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 							</Button>
 						</div>
 					)}
-					{financeRejectCheck.includes(itemData?.invoiceStatus) && (
+					{financeRejectCheck.includes(invoiceStatus) && (
 						<div className={styles.button_container}>
 							<Button
 								size="sm"

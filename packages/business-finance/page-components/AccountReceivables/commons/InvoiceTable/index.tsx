@@ -44,17 +44,19 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 		(key) => GLOBAL_CONSTANTS.country_entity_ids[key] === countryId,
 	));
 
-	const sortStyleGrandTotalAsc = sort.sortType === 'asc' && sort.sortBy === 'grandTotal' ? '#F68B21' : '#BDBDBD';
+	const { sortType = '', sortBy = '' } = sort || {};
 
-	const sortStyleGrandTotalDesc = sort.sortType === 'desc' && sort.sortBy === 'grandTotal' ? '#F68B21' : '#BDBDBD';
+	const sortStyleGrandTotalAsc = sortType === 'asc' && sortBy === 'grandTotal' ? '#F68B21' : '#BDBDBD';
 
-	const sortStyleInvoiceDateAsc = sort.sortType === 'asc' && sort.sortBy === 'invoiceDate' ? '#F68B21' : '#BDBDBD';
+	const sortStyleGrandTotalDesc = sortType === 'desc' && sortBy === 'grandTotal' ? '#F68B21' : '#BDBDBD';
 
-	const sortStyleinvoiceDateDesc = sort.sortType === 'desc' && sort.sortBy === 'invoiceDate' ? '#F68B21' : '#BDBDBD';
+	const sortStyleInvoiceDateAsc = sortType === 'asc' && sortBy === 'invoiceDate' ? '#F68B21' : '#BDBDBD';
 
-	const sortStyleDueDateAsc = sort.sortType === 'asc' && sort.sortBy === 'dueDate' ? '#F68B21' : '#BDBDBD';
+	const sortStyleinvoiceDateDesc = sortType === 'desc' && sortBy === 'invoiceDate' ? '#F68B21' : '#BDBDBD';
 
-	const sortStyleDueDateDesc = sort.sortType === 'desc' && sort.sortBy === 'dueDate' ? '#F68B21' : '#BDBDBD';
+	const sortStyleDueDateAsc = sortType === 'asc' && sortBy === 'dueDate' ? '#F68B21' : '#BDBDBD';
+
+	const sortStyleDueDateDesc = sortType === 'desc' && sortBy === 'dueDate' ? '#F68B21' : '#BDBDBD';
 
 	const columns = completedColumn(
 		getOrganizationInvoices,
@@ -75,7 +77,9 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 			<div
 				className={styles.filter_container}
 			>
-				<div style={{ display: 'flex', alignItems: 'center' }}>
+				<div
+					className={styles.filter_div}
+				>
 
 					<Filters
 						filters={invoiceFilters}
@@ -89,7 +93,7 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 						clearFilter={clearInvoiceFilters}
 					/>
 				</div>
-				<div style={{ display: 'flex', alignItems: 'center' }}>
+				<div className={styles.filter_container}>
 
 					<div
 						className={styles.send_report}

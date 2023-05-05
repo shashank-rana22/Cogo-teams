@@ -27,6 +27,12 @@ function InvoiceModal({
 		uploadEInvoice(value);
 	};
 
+	const {
+		E_invoice_date : E_INVOICE_DATE = '', E_invoice_due_date : E_INVOICE_DUE_DATE = '',
+		E_invoice_number: E_INVOICE_NUMBER = '', E_invoice_pdf_file: E_INVOICE_PDF_FILE = '',
+		E_invoice_xml_file: E_INVOICE_XML_FILE = '',
+	} = errorVal;
+
 	return (
 		<Modal
 			show={uploadInvoice}
@@ -53,10 +59,10 @@ function InvoiceModal({
 									placeholder="E-invoice Date"
 									rules={{ required: 'E invoice Date is required.' }}
 								/>
-								{errorVal.E_invoice_date && (
+								{E_INVOICE_DATE && (
 									<span className={styles.errors}>
 										{' '}
-										{errorVal?.E_invoice_date?.message.toString()}
+										{E_INVOICE_DATE?.message.toString()}
 									</span>
 								)}
 							</div>
@@ -72,10 +78,10 @@ function InvoiceModal({
 									isPreviousDaysAllowed
 									rules={{ required: 'E invoice Due Date is required.' }}
 								/>
-								{errorVal.E_invoice_due_date && (
+								{E_INVOICE_DUE_DATE && (
 									<span className={styles.errors}>
 										{' '}
-										{errorVal?.E_invoice_due_date?.message.toString()}
+										{E_INVOICE_DUE_DATE?.message.toString()}
 									</span>
 								)}
 							</div>
@@ -88,10 +94,10 @@ function InvoiceModal({
 									type="number"
 									rules={{ required: 'E invoice Number is required.' }}
 								/>
-								{errorVal.E_invoice_number && (
+								{E_INVOICE_NUMBER && (
 									<span className={styles.errors}>
 										{' '}
-										{errorVal?.E_invoice_number?.message.toString()}
+										{E_INVOICE_NUMBER?.message.toString()}
 									</span>
 								)}
 							</div>
@@ -109,10 +115,10 @@ function InvoiceModal({
 										required: 'E-invoice pdf file is required',
 									}}
 								/>
-								{errorVal.E_invoice_pdf_file && (
+								{E_INVOICE_PDF_FILE && (
 									<span className={styles.errors}>
 										{' '}
-										{errorVal?.E_invoice_pdf_file?.message.toString()}
+										{E_INVOICE_PDF_FILE?.message.toString()}
 									</span>
 								)}
 							</div>
@@ -125,10 +131,10 @@ function InvoiceModal({
 										required: 'E-invoice xml file is required',
 									}}
 								/>
-								{errorVal.E_invoice_xml_file && (
+								{E_INVOICE_XML_FILE && (
 									<span className={styles.errors}>
 										{' '}
-										{errorVal?.E_invoice_xml_file?.message.toString()}
+										{E_INVOICE_XML_FILE?.message.toString()}
 									</span>
 								)}
 							</div>
