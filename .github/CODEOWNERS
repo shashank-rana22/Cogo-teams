@@ -25,6 +25,7 @@ packages/cogo-verse-analytics @Cogoport/platform-engineering @SDineshKumarCogopo
 packages/enrichment @Cogoport/platform-engineering @cogoparth @mohit-cogo @Harshitcogo
 packages/performance-management @Cogoport/platform-engineering @cogoparth @Harshitcogo @shridharDB @gurramgadda-sai-nithin
 packages/ground-ops @Cogoport/platform-engineering @vinodtalapa @ankitcogoport
+packages/air-repository @Cogoport/platform-engineering @vinodtalapa @ankitcogoport
 packages/cogo-academy @Cogoport/platform-engineering @shivanshi-cogoport
 packages/cogo-academy/page-components/ControlCenter @Cogoport/platform-engineering @shivam-cogo @prachidewangan26
 packages/cogo-academy/page-components/FAQs @Cogoport/platform-engineering @shivam-cogo @prachidewangan26
