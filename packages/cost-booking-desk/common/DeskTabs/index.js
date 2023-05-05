@@ -15,7 +15,7 @@ function DeskTabs() {
 
 	const handleTabChange = (val) => {
 		const isTabCritical = getIsTabCritical({ shipmentType, stepperTab, activeTab: val });
-
+		if (val === activeTab) return;
 		setFilters({ ...filters, criticalOn: filters.criticalOn && isTabCritical, page: 1 });
 		setActiveTab(val);
 	};

@@ -21,6 +21,7 @@ function StepperTabs() {
 
 		const isDateFilterVisible = getIsDateFilterVisible({ shipmentType, stepperTab: val });
 		const isCritical = getIsTabCritical({ shipmentType, stepperTab: val, activeTab: tempActiveTab });
+		if (val === stepperTab) return;
 
 		setFilters({
 			...(isDateFilterVisible ? filters : {}),
