@@ -12,13 +12,15 @@ export default function ShipmentInfo({ item = {} }) {
 				{serial_id}
 			</div>
 
-			<Tooltip
-				placement="bottom"
-				interactive
-				content={<div>{service_provider?.business_name}</div>}
-			>
-				<div className={styles.ellipsis_text}>{service_provider?.business_name}</div>
-			</Tooltip>
+			<div className={styles.tooltip_container}>
+				<Tooltip
+					placement="bottom"
+					interactive
+					content={service_provider?.business_name}
+				>
+					<div className={styles.ellipsis_text}>{service_provider?.business_name}</div>
+				</Tooltip>
+			</div>
 
 			{costbooking_ops?.name ? (
 				<div className={styles.so1_container}>

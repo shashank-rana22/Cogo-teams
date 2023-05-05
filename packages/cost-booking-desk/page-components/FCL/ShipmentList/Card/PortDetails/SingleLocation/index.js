@@ -31,14 +31,16 @@ function PortDetails({ data = {}, icon }) {
 					</div>
 				</div>
 
-				<Tooltip
-					placement="bottom"
-					theme="light"
-					interactive
-					content={port?.display_name}
-				>
-					<div className={`${styles.ellipsis_text} core_ui_loaction_name`}>{port?.name}</div>
-				</Tooltip>
+				<div className={styles.port_name_container}>
+					<Tooltip
+						placement="bottom"
+						theme="light"
+						interactive
+						content={port?.display_name}
+					>
+						<div className={`${styles.ellipsis_text} core_ui_loaction_name`}>{port?.name}</div>
+					</Tooltip>
+				</div>
 			</div>
 		</div>
 	);

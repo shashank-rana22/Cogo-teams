@@ -22,7 +22,10 @@ function useListCostBookingDeskShipments() {
 		url    : `${apiPrefix}/list_cost_booking_desk_shipments`,
 		method : 'GET',
 		params : {
-			filters            : getCostBookingFilters({ filters: restFilters, costBookingContextValues }),
+			filters: {
+				...getCostBookingFilters({ filters: restFilters, costBookingContextValues }),
+				...(selected_agent_id ? { costbooking_ops_id: selected_agent_id } : {}),
+			},
 			additional_methods : ['pagination'],
 			page,
 			page_limit         : 10,
