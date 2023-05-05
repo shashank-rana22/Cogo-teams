@@ -222,7 +222,7 @@ function CarouselComponent({
 
 								{modeType === 'edit' && (
 									<div role="presentation" className={styles.show_wrapper}>
-										<Tooltip content="Click here to remove current slides" placement="bottom">
+										<Tooltip content="Remove current slide" placement="top">
 											<IcMDelete
 												height="24px"
 												width="24px"

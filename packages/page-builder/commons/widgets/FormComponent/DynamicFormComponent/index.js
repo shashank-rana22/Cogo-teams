@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { IcMFacebook } from '@cogoport/icons-react';
+import { IcMEdit } from '@cogoport/icons-react';
 
 import FormLayout from '../../FormLayout';
 
@@ -32,9 +32,10 @@ function DynamicFormComponent({
 
 			{modeType === 'edit' && (
 				<div className={styles.show_wrapper}>
-					<IcMFacebook
-						height="24px"
-						width="24px"
+					<IcMEdit
+						height="15px"
+						width="15px"
+						fill="#ffffff"
 						cursor="pointer"
 						onClick={() => handleEditForm(formData)}
 					/>

@@ -58,8 +58,8 @@
 			flex-direction: column;
 			color: #222;
 			position: absolute;
-			right: 10px;
-			z-index: 4;	
+			right: 24px;
+			z-index: 2;	
 			top: 0;
 		}
 	 }
