@@ -11,7 +11,7 @@ import useUpdateTestUserMapping from './hooks/useUpdateTestUserMapping';
 import styles from './styles.module.css';
 import getTableColumns from './TableColumns';
 
-function StudentsComponent({ test_id, status, activeAttempt }) {
+function StudentsComponent({ test_id, status, activeAttempt, retest }) {
 	const router = useRouter();
 
 	const [showModal, setShowModal] = useState(false);
@@ -57,6 +57,8 @@ function StudentsComponent({ test_id, status, activeAttempt }) {
 		setUserId,
 		router,
 		status,
+		activeAttempt,
+		retest,
 	});
 
 	useEffect(() => {

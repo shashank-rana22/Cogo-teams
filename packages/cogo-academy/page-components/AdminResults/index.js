@@ -45,7 +45,7 @@ function AdminResults() {
 	const { status, validity_end } = data || {};
 
 	const COMPONENT_PROPS_MAPPING = {
-		students  : { test_id, status, activeAttempt },
+		students  : { test_id, status, activeAttempt, retest },
 		questions : { test_id, activeAttempt },
 	};
 
