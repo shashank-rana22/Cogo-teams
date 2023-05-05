@@ -24,7 +24,6 @@ function ApproveAndRejectHeader({ row }:any) {
 					At :
 					{format(updatedAt, 'dd MMM YYYY hh:mm a', {}, false)}
 					{' '}
-					{}
 				</div>
 			</div>
 			<div className={status === 'APPROVED' ? styles.hr : styles.rejected_hr} />

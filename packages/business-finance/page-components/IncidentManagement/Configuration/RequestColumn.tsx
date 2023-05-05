@@ -157,7 +157,6 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 			} = data || {};
 
 			const { type, id } = row || {};
-			console.log(data);
 
 			return (
 				<>
@@ -190,7 +189,6 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 						<RequestCN row={row} refetch={getIncidentData} id={id} />
 
 					)}
-
 					{type === 'CONSOLIDATED_CREDIT_NOTE' && (
 						<RequestCN row={row} refetch={getIncidentData} id={id} />
 					)}

@@ -29,14 +29,14 @@ function AdvanceSecurityDepositModal({ itemData, showModal, setShowModal }) {
 			title: 'Remark',
 			value:
 	<div>
-		{remark.length >= 30 ? (
+		{remark?.length >= 30 ? (
 			<Tooltip
 				placement="top"
 				content={<div className={styles.tooltip_text}>{remark}</div>}
 				interactive
 			>
 				<div>
-					{remark.substring(0, 30)}
+					{remark?.substring(0, 30)}
 					...
 				</div>
 			</Tooltip>
@@ -66,15 +66,15 @@ function AdvanceSecurityDepositModal({ itemData, showModal, setShowModal }) {
 					<Modal.Body>
 						<ApproveAndRejectHeader row={itemData} />
 						{securityDepositDetails?.map((itm) => (
-							<div key={itm.title} className={styles.flex}>
+							<div key={itm?.title} className={styles.flex}>
 								<div className={styles.title}>
-									{itm.title}
+									{itm?.title}
 								</div>
 								<div className={styles.divider}>
 									:
 								</div>
 								<div className={styles.name}>
-									<div>{itm.value}</div>
+									<div>{itm?.value}</div>
 								</div>
 							</div>
 						))	}

@@ -25,7 +25,6 @@ function ViewRequested({ itemData, name, refetch }) {
 		refetch,
 		setShowModal,
 	});
-	console.log(itemData, 'type', type);
 
 	switch (type) {
 		case 'BANK_DETAIL_APPROVAL':
