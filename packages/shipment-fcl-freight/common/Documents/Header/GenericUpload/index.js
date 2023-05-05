@@ -12,7 +12,7 @@ const SUPPLIER_STAKEHOLDERS = [
 	'document_desk',
 	'booking_desk_manager',
 	'costbooking_ops',
-	'costbooking_ops_manager',
+	'costbooking_manager',
 	'lastmile_ops',
 	'lastmile_ops_manager',
 ];

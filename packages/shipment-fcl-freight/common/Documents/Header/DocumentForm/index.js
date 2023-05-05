@@ -44,7 +44,7 @@ function DocumentForm({
 			};
 			break;
 		case 'costbooking_ops':
-		case 'costbooking_ops_manager':
+		case 'costbooking_manager':
 			params = {
 				shipment_id       : shipment_data?.id,
 				organization_ids  : [uploaded_by_org_id],
