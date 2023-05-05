@@ -1,27 +1,33 @@
+import { cl } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { format } from '@cogoport/utils';
-import { useRouter } from 'next/router';
 
 import ClickableDiv from '../ClickableDiv';
 
 import styles from './styles.module.css';
 
-function ShipmentBreif({ item }) {
+function ShipmentBreif({ item, service, redirectable = false }) {
 	const router = useRouter();
 
-	const handleV1Redirect = () => {
-		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}`;
+	const redirectToDetailPage = () => {
+		if (service === 'fcl_freight') {
+			router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}`);
+			document.querySelector('.authority_desk').style.cursor = 'progress';
+		} else {
+			const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}`;
 
-		window.sessionStorage.setItem('prev_nav', newUrl);
-		window.location.href = newUrl;
-	};
-
-	const handleV2Redirect = () => {
-		router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}`);
+			window.sessionStorage.setItem('prev_nav', newUrl);
+			window.location.href = newUrl;
+			document.querySelector('.authority_desk').style.cursor = 'progress';
+		}
 	};
 
 	return (
 		<div className={styles.container}>
-			<ClickableDiv>
+			<ClickableDiv
+				className={cl`${styles.serial_id} ${redirectable ? styles.clickable : ''}`}
+				onClick={redirectable ? redirectToDetailPage : null}
+			>
 				SID #
 				{' '}
 				{item?.serial_id}

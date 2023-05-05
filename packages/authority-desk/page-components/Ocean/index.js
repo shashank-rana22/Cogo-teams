@@ -3,8 +3,8 @@ import ScopeSelect from '@cogoport/scope-select';
 import { startCase } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import React, { useState, useCallback } from 'react';
-import ClickableDiv from '../../commons/ClickableDiv';
 
+import ClickableDiv from '../../commons/ClickableDiv';
 import { BucketsMapping } from '../../config/BucketMapping';
 import useListAuthorityDeskDocuments from '../../hooks/useListAuthorityDeskDocuments';
 import { useStakeholderCheck } from '../../hooks/useStakeholderCheck';

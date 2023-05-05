@@ -9,7 +9,6 @@ import PortDetails from '../../../../../commons/PortDetails';
 import ShipmentBreif from '../../../../../commons/ShipmentBreif';
 
 import BlDetails from './BlDetails';
-import CustodyShipments from './CustodyShipments';
 import Invoices from './Invoices';
 import Organizations from './Organizations';
 import ReleaseCard from './ReleaseCard';
@@ -18,15 +17,17 @@ import styles from './styles.module.css';
 const moreInfoComponentMapping = {
 	invoices  : <Invoices />,
 	payments  : <Organizations />,
-	shipments : <CustodyShipments />,
+	shipments : <ReleaseCard />,
 };
 
 function ShipmentAudit({
 	item = {},
 	closeModal = () => {},
-	bucket = 'eligible',
+	tabsState = {},
 	role = 'kam',
 }) {
+	const { bucket = 'eligible', service } = tabsState;
+
 	const { freight_service } = item;
 
 	const tabs = {
@@ -67,7 +68,7 @@ function ShipmentAudit({
 				<Modal.Body className={styles.modal_body_content}>
 					<div className={styles.shipment_content_container}>
 						<div className={styles.shipment_details}>
-							<ShipmentBreif item={item} />
+							<ShipmentBreif item={item} service={service} redirectable />
 
 							<PortDetails primary_service={freight_service} />
 

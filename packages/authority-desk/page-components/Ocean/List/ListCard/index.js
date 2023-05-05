@@ -11,7 +11,6 @@ import ShipmentExtraDetails from './ShipmentExtraDetails';
 import styles from './styles.module.css';
 
 function ListCard({ item = {}, role = '', tabsState = {} }) {
-	const { bucket } = tabsState;
 	const [showDetails, setShowDetails] = useState(false);
 
 	const { freight_service = {} } = item;
@@ -33,7 +32,7 @@ function ListCard({ item = {}, role = '', tabsState = {} }) {
 			</div>
 
 			<ShipmentExtraDetails item={item} />
-			<Footer item={item} role={role} bucket={bucket} />
+			<Footer item={item} role={role} tabsState={tabsState} />
 
 			{showDetails ? (
 				<div className={styles.additional_audits}>
