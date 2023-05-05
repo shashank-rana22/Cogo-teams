@@ -78,8 +78,8 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 	{
 		Header   : 'NO. OF SUBJECTIVE QUESTIONS',
 		id       : 'subjective_questions',
-		accessor : ({ subjective_question_count = 0 }) => (
-			<section>
+		accessor : ({ subjective_question_count = 0, id = '' }) => (
+			<section {...propsFunction({ router, id })}>
 				{subjective_question_count || 0}
 			</section>
 		),
