@@ -4,9 +4,8 @@ import useGetBill from '../../../../../../../hooks/useGetBill';
 
 import styles from './styles.module.css';
 
-function PurchaseInvoice({ item}) {
-	const { loadingBills, data } = useGetBill({ serial_id : item?.serial_id });
-
+function PurchaseInvoice({ item }) {
+	const { data } = useGetBill({ serial_id: item?.serial_id });
 
 	return (
 		<div className={styles.container}>
@@ -24,19 +23,21 @@ function PurchaseInvoice({ item}) {
 					<td> Due Date</td>
 					<td>Payment Status</td>
 				</th>
-				{(data?.list || []).map((val) => (
-					<tr key={val.id}>
-						<td>{val?.invoiceNumber || val?.proformaNumber}</td>
-						<td>
-							{val?.invoiceType}
-						</td>
-						<td>{val?.subTotals}</td>
-						<td>-</td>
-						<td>{val?.balanceAmount}</td>
-						<td>{val?.dueDate}</td>
-						<td>{val?.paymentStatus}</td>
-					</tr>
-				))}
+				<tbody>
+					{(data?.list || []).map((val) => (
+						<tr key={val.id}>
+							<td>{val?.invoiceNumber || val?.proformaNumber}</td>
+							<td>
+								{val?.invoiceType}
+							</td>
+							<td>{val?.subTotals}</td>
+							<td>-</td>
+							<td>{val?.balanceAmount}</td>
+							<td>{val?.dueDate}</td>
+							<td>{val?.paymentStatus}</td>
+						</tr>
+					))}
+				</tbody>
 			</table>
 
 		</div>

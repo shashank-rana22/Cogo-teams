@@ -1,4 +1,5 @@
-import { startCase } from '@cogoport/utils';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { startCase, format } from '@cogoport/utils';
 import React from 'react';
 
 import useListInvoiceWrapper from '../../../../../../../hooks/useListInvoiceWrapper';
@@ -6,7 +7,7 @@ import useListInvoiceWrapper from '../../../../../../../hooks/useListInvoiceWrap
 import styles from './styles.module.css';
 
 function SalesInvoice() {
-	const { data, loading } = useListInvoiceWrapper({});
+	const { data } = useListInvoiceWrapper({});
 
 	return (
 		<div className={styles.container}>
@@ -28,13 +29,25 @@ function SalesInvoice() {
 					<tr key={val.id}>
 						<td>{val?.invoiceNumber || val?.proformaNumber}</td>
 						<td>
-							{val?.invoiceType}
+							{startCase(val?.invoiceType)}
 						</td>
-						<td>{val?.subTotals}</td>
+						<td>
+							{
+							formatAmount({
+								amount   : val?.subTotals,
+								currency : val?.currency,
+								options  : {
+									style                 : 'currency',
+									currencyDisplay       : 'code',
+									maximumFractionDigits : 2,
+								},
+							})
+						}
+						</td>
 						<td>-</td>
 						<td>{val?.balanceAmount}</td>
-						<td>{val?.dueDate}</td>
-						<td>{val?.paymentStatus}</td>
+						<td>{format(val?.dueDate, 'dd MMM yyyy', null, true)}</td>
+						<td>{startCase(val?.paymentStatus)}</td>
 					</tr>
 				))}
 			</table>
