@@ -1,4 +1,5 @@
 import { Modal, cl } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -15,10 +16,10 @@ import ReleaseCard from './ReleaseCard';
 import styles from './styles.module.css';
 
 const moreInfoComponentMapping = {
-	invoices : <Invoices />,
-	payments : <Organizations />,
-	shipments : <ReleaseCard />,
-}
+	invoices  : <Invoices />,
+	payments  : <Organizations />,
+	shipments : <CustodyShipments />,
+};
 
 function ShipmentAudit({
 	item = {},
@@ -29,9 +30,17 @@ function ShipmentAudit({
 	const { freight_service } = item;
 
 	const tabs = {
-		invoices  : 'Invoices',
-		payments  : `Payments - Total Outstanding  ${item?.invoice_status?.outstanding_amount}`,
-		shipments : 'Shipments In Custody',
+		invoices : 'Invoices',
+		payments : `Payments - Total Outstanding ${formatAmount({
+			amount   : item?.invoice_status?.outstanding_amount,
+			currency : item?.invoice_status?.outstanding_currency,
+			options  : {
+				style                 : 'currency',
+				currencyDisplay       : 'code',
+				maximumFractionDigits : 2,
+			},
+		})}`,
+		shipments: 'Shipments In Custody',
 	};
 
 	const isApprovalAllowed = [
