@@ -31,14 +31,10 @@ export const pieBuckets = [
 export const selectOptions = [
 	{
 		label : 'By ETD',
-		value : 'etd',
+		value : 'true',
 	},
 	{
 		label : 'By Shipment Date',
-		value : 'shipment_created_at',
-	},
-	{
-		label : 'By Invoice Date',
-		value : 'invoice_or_bill_date',
+		value : 'false',
 	},
 ];

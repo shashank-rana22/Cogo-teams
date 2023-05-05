@@ -20,7 +20,7 @@ function VisualizationContainer({
 	setSelectedPieData,
 	setPage,
 	inViewport,
-	revenueFilter,
+	byEtd,
 	headerFilters,
 }) {
 	const {
@@ -33,7 +33,7 @@ function VisualizationContainer({
 		apiKey: buckets.heading,
 		isDataSelected,
 		inViewport,
-		revenueFilter,
+		byEtd,
 		headerFilters,
 	});
 
@@ -45,7 +45,7 @@ function VisualizationContainer({
 		apiKey: buckets.key,
 		isDataSelected,
 		selectedData,
-		revenueFilter,
+		byEtd,
 		headerFilters,
 	});
 

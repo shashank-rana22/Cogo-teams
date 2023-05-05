@@ -6,7 +6,7 @@ const INITIAL_ARRAY = [];
 
 const useGetOrganizationCohort = ({
 	isComponentInViewport,
-	revenueFilter,
+	byEtd,
 	headerFilters,
 }) => {
 	const [page, setPage] = useState(1);
@@ -27,14 +27,14 @@ const useGetOrganizationCohort = ({
 				params: {
 					page,
 					page_size    : 5,
-					visualize_by : revenueFilter,
+					by_etd : byEtd,
 					entity_code  : entity_code?.length > 0 ? entity_code : undefined,
 				},
 			});
 		} catch (err) {
 			console.log(err, 'err');
 		}
-	}, [page, revenueFilter, entity_code, trigger]);
+	}, [page, byEtd, entity_code, trigger]);
 
 	useEffect(() => {
 		if (isComponentInViewport) {

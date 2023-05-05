@@ -8,9 +8,9 @@ import useGetAccountWiseFunnel from '../../../hooks/useGetAccountWiseFunnel';
 import FunnelChart from './FunnelChart';
 import styles from './styles.module.css';
 
-function Funnel({ revenueFilter, headerFilters }) {
+function Funnel({ byEtd, headerFilters }) {
 	const [activeAccount, setActiveAccount] = useState('CP');
-	const { data, loading } = useGetAccountWiseFunnel(revenueFilter, headerFilters);
+	const { data, loading } = useGetAccountWiseFunnel(byEtd, headerFilters);
 
 	const { data: apiData = {}, accounts = [] } = data || {};
 

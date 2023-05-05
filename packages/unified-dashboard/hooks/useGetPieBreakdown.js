@@ -6,7 +6,7 @@ import { useEffect, useState, useCallback } from 'react';
 
 const INITIAL_ARRAY = [];
 
-const useGetPieBreakdown = ({ selectedPieData, revenueFilter, headerFilters }) => {
+const useGetPieBreakdown = ({ selectedPieData, byEtd, headerFilters }) => {
 	const { entity_code = INITIAL_ARRAY } = headerFilters;
 	const { apiKey } = selectedPieData || {};
 	const [page, setPage] = useState(1);
@@ -40,14 +40,14 @@ const useGetPieBreakdown = ({ selectedPieData, revenueFilter, headerFilters }) =
 					as_on_date   : formattedDate,
 					page,
 					page_size    : 10,
-					visualize_by : revenueFilter,
+					by_etd : byEtd,
 					entity_code  : entity_code?.length > 0 ? entity_code : undefined,
 				},
 			});
 		} catch (err) {
 			console.log(err, 'err');
 		}
-	}, [revenueFilter, entity_code, page, selectedPieData, trigger]);
+	}, [byEtd, entity_code, page, selectedPieData, trigger]);
 
 	useEffect(() => {
 		if (selectedPieData) getPieBreakdown();

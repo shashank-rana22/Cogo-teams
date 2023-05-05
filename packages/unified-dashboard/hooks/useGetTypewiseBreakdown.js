@@ -10,7 +10,7 @@ const useGetTypewiseBreakdown = ({
 	apiKey,
 	isDataSelected = false,
 	selectedData,
-	revenueFilter,
+	byEtd,
 	headerFilters,
 }) => {
 	const scope = useSelector(({ general }) => general.scope);
@@ -40,7 +40,7 @@ const useGetTypewiseBreakdown = ({
 						as_on_date   : formattedDate,
 						type,
 						sub_type     : type === 'cost' ? undefined : id,
-						visualize_by : revenueFilter,
+						by_etd : byEtd,
 						entity_code  : entity_code?.length > 0 ? entity_code : undefined,
 					},
 				});
@@ -48,7 +48,7 @@ const useGetTypewiseBreakdown = ({
 				console.log(err, 'err');
 			}
 		},
-		[revenueFilter, entity_code, selectedData, trigger],
+		[byEtd, entity_code, selectedData, trigger],
 	);
 
 	useEffect(() => {

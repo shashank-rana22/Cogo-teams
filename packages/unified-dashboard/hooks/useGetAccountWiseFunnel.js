@@ -4,7 +4,7 @@ import { useEffect, useCallback } from 'react';
 
 const INITIAL_ARRAY = [];
 
-const useGetAccountWiseFunnel = (revenueFilter, headerFilters) => {
+const useGetAccountWiseFunnel = (byEtd, headerFilters) => {
 	const scope = useSelector(({ general }) => general.scope);
 
 	const { entity_code = INITIAL_ARRAY } = headerFilters;
@@ -20,7 +20,7 @@ const useGetAccountWiseFunnel = (revenueFilter, headerFilters) => {
 			try {
 				await trigger({
 					params: {
-						visualize_by : revenueFilter,
+						by_etd : byEtd,
 						entity_code  : entity_code?.length > 0 ? entity_code : undefined,
 					},
 				});
@@ -28,7 +28,7 @@ const useGetAccountWiseFunnel = (revenueFilter, headerFilters) => {
 				console.log(err, 'error');
 			}
 		},
-		[entity_code, revenueFilter, trigger],
+		[entity_code, byEtd, trigger],
 	);
 
 	useEffect(() => {

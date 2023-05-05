@@ -18,7 +18,7 @@ import VisualizationContainer from './VisualizationContainer';
 function RevenueVisualization({ headerFilters }) {
 	const [selectedBarData, setSelectedBarData] = useState();
 	const [selectedPieData, setSelectedPieData] = useState();
-	const [revenueFilter, setRevenueFilter] = useState('shipment_created_at');
+	const [byEtd, setByEtd] = useState(false);
 	const [isComponentInViewport, setisComponentInViewport] = useState(false);
 	const ref = useRef(null);
 	const inViewportBarChart = useIntersection(ref, '-200px');
@@ -29,18 +29,18 @@ function RevenueVisualization({ headerFilters }) {
 		loading,
 		setPage,
 		error,
-	} = useGetPieBreakdown({ selectedPieData, revenueFilter, headerFilters });
+	} = useGetPieBreakdown({ selectedPieData, byEtd, headerFilters });
 
 	const isDataSelected = selectedBarData !== undefined;
 
 	const handleResetCharts = () => {
 		setSelectedBarData();
 		setSelectedPieData();
-		setRevenueFilter('shipment_created_at');
+		setByEtd(false);
 	};
 
 	const handleDateType = (e) => {
-		setRevenueFilter(e);
+		setByEtd(e);
 		setSelectedBarData();
 		setSelectedPieData();
 	};
@@ -48,14 +48,14 @@ function RevenueVisualization({ headerFilters }) {
 	useEffect(() => {
 		setSelectedBarData();
 		setSelectedPieData();
-		setRevenueFilter('shipment_created_at');
+		setByEtd(false);
 	}, [entity_code]);
 
 	useEffect(() => {
 		if (!isComponentInViewport) {
 			setisComponentInViewport(inViewportBarChart);
 		}
-	}, [inViewportBarChart, isComponentInViewport]);
+	}, [inViewportBarChart]);
 
 	return (
 		<div className={styles.container} ref={ref}>
@@ -66,7 +66,7 @@ function RevenueVisualization({ headerFilters }) {
 						className={styles.dropdown}
 						placeholder="By Shipment Date"
 						isDataSelected={isDataSelected}
-						value={revenueFilter}
+						value={byEtd}
 						onChange={(e) => handleDateType(e)}
 						options={selectOptions}
 					/>
@@ -88,7 +88,7 @@ function RevenueVisualization({ headerFilters }) {
 								setSelectedBarData={setSelectedBarData}
 								setSelectedPieData={setSelectedPieData}
 								inViewport={isComponentInViewport}
-								revenueFilter={revenueFilter}
+								byEtd={byEtd}
 								headerFilters={headerFilters}
 							/>
 						</div>
@@ -109,7 +109,7 @@ function RevenueVisualization({ headerFilters }) {
 								selectedData={selectedBarData}
 								setSelectedPieData={setSelectedPieData}
 								setPage={setPage}
-								revenueFilter={revenueFilter}
+								byEtd={byEtd}
 								headerFilters={headerFilters}
 							/>
 						</div>
@@ -135,13 +135,13 @@ function RevenueVisualization({ headerFilters }) {
 				<div className={styles.flex_col_1}>
 					<CohortTable
 						isComponentInViewport={isComponentInViewport}
-						revenueFilter={revenueFilter}
+						byEtd={byEtd}
 						headerFilters={headerFilters}
 					/>
 				</div>
 				<div className={styles.divider_line} />
 				<div className={styles.flex_col_2}>
-					<Funnel revenueFilter={revenueFilter} headerFilters={headerFilters} />
+					<Funnel byEtd={byEtd} headerFilters={headerFilters} />
 				</div>
 			</div>
 		</div>

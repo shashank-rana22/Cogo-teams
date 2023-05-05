@@ -8,12 +8,12 @@ import useGetOrganizationCohort from '../../../hooks/useGetOrganizationCohort';
 import ResultColumns from './resultColumns';
 import styles from './styles.module.css';
 
-function CohortTable({ isComponentInViewport, revenueFilter, headerFilters }) {
+function CohortTable({ isComponentInViewport, byEtd, headerFilters }) {
 	const {
 		data: apiData,
 		loading,
 		setPage,
-	} = useGetOrganizationCohort({ isComponentInViewport, revenueFilter, headerFilters });
+	} = useGetOrganizationCohort({ isComponentInViewport, byEtd, headerFilters });
 
 	const { data = [], page, page_size } = apiData || {};
 

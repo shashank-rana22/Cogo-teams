@@ -8,7 +8,7 @@ const useGetMonthlyRevenue = ({
 	apiKey,
 	isDataSelected,
 	inViewport,
-	revenueFilter,
+	byEtd,
 	headerFilters,
 }) => {
 	const [filters, setFilters] = useState({
@@ -34,7 +34,7 @@ const useGetMonthlyRevenue = ({
 				await trigger({
 					params: {
 						page         : page || filters.page,
-						visualize_by : revenueFilter,
+						by_etd : byEtd,
 						entity_code  : entity_code?.length > 0 ? entity_code : undefined,
 					},
 				});
@@ -42,7 +42,7 @@ const useGetMonthlyRevenue = ({
 		} catch (err) {
 			console.log(err, 'err');
 		}
-	}, [apiKey, revenueFilter, entity_code, filters.page, trigger]);
+	}, [apiKey, byEtd, entity_code, filters.page, trigger]);
 
 	useEffect(() => {
 		if (!isDataSelected && inViewport) getMonthlyRevenue();
