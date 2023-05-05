@@ -12,13 +12,13 @@ function TimeLine({ eachMessage = {}, key = '' }) {
 		performed_by_data = {},
 		created_at,
 		conversation_started_at,
-		user_data :{ name: voiceCallUserName = '' } = {},
+		user_data,
 		status = '',
 		channel = '',
 	} = eachMessage;
 	const { name : presentAgent } = agent_data || {};
 	const { name : previousAgent } = performed_by_data || {};
-
+	const { name: voiceCallUserName = '' } = user_data || {};
 	const timelineText = getVoiceCallStatement({
 		type            : conversation_type,
 		present         : presentAgent,
