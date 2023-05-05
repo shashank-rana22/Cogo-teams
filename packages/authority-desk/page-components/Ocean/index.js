@@ -1,7 +1,5 @@
 import { Tabs, TabPanel, cl } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import ScopeSelect from '@cogoport/scope-select';
-import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -26,7 +24,9 @@ function Ocean() {
 	const [tabsState, setTabsState] = useState({
 		activeTab : 'bl',
 		service   : 'fcl_freight',
-		bucket    : 'eligible',
+		bucket    : 'eligible',  
+		subApprovedBucket : ''
+
 	});
 	
 	const [filters, setFilters] = useState({
@@ -86,7 +86,10 @@ function Ocean() {
 							role="button"
 							tabIndex={0}
 							className={cl`${tabsState.bucket === item?.name ? styles.active : ''} ${styles.bucket} `}
-							onClick={() => setTabsState({ ...tabsState, bucket: item?.name })}
+							onClick={() => setTabsState({ ...tabsState,
+								 bucket: item?.name,
+								  subApprovedBucket : item?.name === 'approved' ? 'approved' : '',
+								})}
 						>
 							{item.title}
 							{' '}

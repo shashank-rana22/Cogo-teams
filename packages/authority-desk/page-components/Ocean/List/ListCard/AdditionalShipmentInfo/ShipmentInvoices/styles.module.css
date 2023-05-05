@@ -11,4 +11,16 @@
     th {
         font-weight: 700;
     } 
+} 
+
+.loader {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+.loader_icon {
+	width: 50px;
 }

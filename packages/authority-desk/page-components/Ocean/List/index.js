@@ -36,7 +36,10 @@ export default function List({
 	);
 
 	if (loading) {
-		return <Loader themeType="primary" />;
+		return 	<div className={styles.loader}>
+		Loading Documents Data....
+		<Loader themeType="primary" className={styles.loader_icon} />
+	</div>;
 	}
 
 	return data?.list?.length === 0 ? (

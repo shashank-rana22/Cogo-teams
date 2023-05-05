@@ -230,7 +230,8 @@ function ListCard({ item = {}, role = '', tabsState = {} }) {
 				<ShipmentAudit
 					closeModal={closeModal}
 					item={item} 
-					bucket={bucket}
+					bucket={bucket} 
+					role = {role}
 				/>
 			) : null}
 

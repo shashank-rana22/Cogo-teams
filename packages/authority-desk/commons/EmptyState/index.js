@@ -5,8 +5,8 @@ export default function EmptyState() {
 	return (
 		<div className={styles.container}>
 			<div>
-				<h1 className={styles.header}>No Shipments found !!</h1>
-				<h3>Looks like no results were found...</h3>
+				<h1 className={styles.header}>No data found !!</h1>
+				<h3>Looks like there are no results...</h3>
 			</div>
 
 			<img

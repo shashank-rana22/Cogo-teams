@@ -8,10 +8,22 @@
         width: 100%; 
        
     }
-    th {
-        font-weight: 700;
+    th, tr { 
+        text-align: center;
     } 
 
+} 
+
+.loader {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+.loader_icon {
+	width: 50px;
 }
 
 

@@ -5,7 +5,7 @@ import OrgShipments from './OrgShipments';
 import ShipmentInvoices from './ShipmentInvoices';
 import styles from './styles.module.css';
 
-function AdditionalShipmentInfo({ item = {}, activeTab = 'export' }) {
+function AdditionalShipmentInfo({ item = {} }) {
 	let orgDetails = item?.importer_exporter;
 
 	const [toggleVal, setToggleVal] = useState(false);

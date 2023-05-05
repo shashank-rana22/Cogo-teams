@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react'; 
 import { startCase } from '@cogoport/utils';
 import useListInvoiceWrapper from '../../../../../../hooks/useListInvoiceWrapper';
-import { format} from '@cogoport/components';
+import { format, Loader } from '@cogoport/components'; 
+import EmptyState from '../../../../../../commons/EmptyState';
 import styles from './styles.module.css';
 
 function ShipmentInvoices({ item = {}}) { 
 
-	const { data, loading } = useListInvoiceWrapper({serial_id :  item?.serial_id}); 
+	const { data, loading } = useListInvoiceWrapper({serial_id :  item?.serial_id});  
+
+	if(data?.list?.length === 0 && !loading) {
+		return <EmptyState/>;
+	} 
+
+	if (loading) {
+		return 	<div className={styles.loader}>
+		Loading Invoices Data....
+		<Loader themeType="primary" className={styles.loader_icon} />
+	</div>;
+	}
 
 	return (
 		<div className={styles.container}>

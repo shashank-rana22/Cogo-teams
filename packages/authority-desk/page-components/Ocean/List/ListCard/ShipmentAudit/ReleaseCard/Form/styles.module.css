@@ -1,0 +1,36 @@
+.container {
+	.business-checkbox-item {
+		margin: 12px;
+	}
+	.ui-text-area {
+		padding: 12px !important;
+	}
+
+	.form-layout-root-row {
+		width: 100%;
+	}
+
+	.business-checkbox-label {
+		width: 98%;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+}
+
+.heading {
+	font-weight: 600;
+	font-size: 18px;
+	color: #393f70;
+	margin-bottom: 30px;
+}
+
+.button_wrapper {
+	display: flex;
+	justify-content: flex-end;
+	margin: 16px;
+
+	.core-ui-button-root {
+		text-transform: capitalize;
+		letter-spacing: 0px;
+	}
+}

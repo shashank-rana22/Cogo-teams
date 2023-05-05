@@ -4,14 +4,13 @@ import { startCase } from '@cogoport/utils';
 import CargoDetails from '../../../../../commons/CargoDetails';
 import PortDetails from '../../../../../commons/PortDetails';
 import ShipmentBreif from '../../../../../commons/ShipmentBreif';
-import useUpdateShipmentBlDoDetails from '../../../../../hooks/useUpdateShipmentBlDoDetails';
 import CustodyShipments from './CustodyShipments';
 import BlDetails from './BlDetails';
-import Invoices from './Invoices';
+import Invoices from './Invoices'; 
 import Organizations from './Organizations';
 import styles from './styles.module.css';
 
-function ShipmentAudit({ item = {}, closeModal = () => {}, bucket = 'eligible' }) {
+function ShipmentAudit({ item = {}, closeModal = () => {}, bucket = 'eligible', role = 'kam' }) {
 	const { freight_service } = item;
 
 	const tabs = {
@@ -20,7 +19,14 @@ function ShipmentAudit({ item = {}, closeModal = () => {}, bucket = 'eligible' }
 		shipments : 'Shipments In Custody',
 	};
 
-	const { loading, apiTrigger } = useUpdateShipmentBlDoDetails({});
+
+	const isApprovalAllowed = [
+		'eligible',
+		'requested',
+		'hold',
+		'approved',
+		'released',
+	].includes(bucket);
 
 	const [additionalTab, setAdditionalTab] = useState('invoices');
 
@@ -69,12 +75,13 @@ function ShipmentAudit({ item = {}, closeModal = () => {}, bucket = 'eligible' }
 					</>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button themeType="secondary">
-						Hold
-					</Button>
-					<Button themeType="primary">
-						Approve
-					</Button>
+				{/* {role === 'credit_control' && isApprovalAllowed ? (
+				<ReleaseCard
+					blDetails={list}
+					shipmentState={shipmentState}
+					selectedTab={selectedTab}
+				/>
+			) : null} */}
 				</Modal.Footer>
 			</Modal>
 
