@@ -3,6 +3,7 @@ import ScopeSelect from '@cogoport/scope-select';
 import { startCase } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import React, { useState, useCallback } from 'react';
+import ClickableDiv from '../../commons/ClickableDiv';
 
 import { BucketsMapping } from '../../config/BucketMapping';
 import useListAuthorityDeskDocuments from '../../hooks/useListAuthorityDeskDocuments';
@@ -29,7 +30,6 @@ function Ocean() {
 		service           : 'fcl_freight',
 		bucket            : 'eligible',
 		subApprovedBucket : '',
-
 	});
 
 	const handleVersionChange = useCallback(() => {
@@ -72,14 +72,12 @@ function Ocean() {
 			<div className={styles.second_stepper}>
 				<div className={styles.service_tabs}>
 					{services.map((item) => (
-						<div
-							role="button"
-							tabIndex={0}
+						<ClickableDiv
 							onClick={() => setTabsState({ ...tabsState, service: item })}
 							className={cl`${tabsState.service === item ? styles.active : ''} ${styles.service_tab}`}
 						>
 							{startCase(item)}
-						</div>
+						</ClickableDiv>
 					))}
 				</div>
 
@@ -98,9 +96,7 @@ function Ocean() {
 			<div className={styles.list_filters}>
 				<div className={styles.buckets}>
 					{buckets.map((item) => (
-						<div
-							role="button"
-							tabIndex={0}
+						<ClickableDiv
 							className={cl`${tabsState.bucket === item?.name ? styles.active : ''} ${styles.bucket} `}
 							onClick={() => setTabsState({
 								...tabsState,
@@ -113,7 +109,7 @@ function Ocean() {
 							<span className={`cl${tabsState.bucket === item ? styles.active : ''} ${styles.count}`}>
 								{item.count || 0}
 							</span>
-						</div>
+						</ClickableDiv>
 					))}
 				</div>
 

@@ -16,8 +16,6 @@ function PortDetails({ primary_service = {} }) {
 		schedule_departure = '',
 	} = primary_service;
 
-	console.log(primary_service, 'primary_servixe');
-
 	const handleLocationDetails = (location, icdPortInfo) => (
 		<>
 			<div className={styles.port_code}>

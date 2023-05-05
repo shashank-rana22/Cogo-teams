@@ -7,8 +7,6 @@ import styles from './styles.module.css';
 function OrgDetails({ registerationNumber = '' }) {
 	const { data, loading } = useListInvoiceWrapper({ registerationNumber });
 
-	console.log(data, 'data');
-
 	return (
 		<div className={styles.container}>
 			<table>

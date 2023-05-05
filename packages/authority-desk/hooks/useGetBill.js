@@ -1,3 +1,4 @@
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
@@ -27,7 +28,7 @@ const useGetBill = ({ serial_id}) => {
 			});
 			setData(res.data);
 		} catch (err) {
-			console.log(err);
+			toastApiError(err);
 		}
 	}, [listExpenseInvoicesTrigger]);
 

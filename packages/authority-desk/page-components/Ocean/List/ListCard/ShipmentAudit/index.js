@@ -3,6 +3,7 @@ import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import CargoDetails from '../../../../../commons/CargoDetails';
+import ClickableDiv from '../../../../../commons/ClickableDiv';
 import PortDetails from '../../../../../commons/PortDetails';
 import ShipmentBreif from '../../../../../commons/ShipmentBreif';
 
@@ -12,6 +13,12 @@ import Invoices from './Invoices';
 import Organizations from './Organizations';
 import ReleaseCard from './ReleaseCard';
 import styles from './styles.module.css';
+
+const moreInfoComponentMapping = {
+	invoices : <Invoices />,
+	payments : <Organizations />,
+	shipments : <ReleaseCard />,
+}
 
 function ShipmentAudit({
 	item = {},
@@ -52,7 +59,9 @@ function ShipmentAudit({
 					<div className={styles.shipment_content_container}>
 						<div className={styles.shipment_details}>
 							<ShipmentBreif item={item} />
+
 							<PortDetails primary_service={freight_service} />
+
 							<CargoDetails primary_service={freight_service} />
 						</div>
 
@@ -63,25 +72,21 @@ function ShipmentAudit({
 
 					<div className={styles.tabs}>
 						{Object.keys(tabs).map((tab) => (
-							<div
+							<ClickableDiv
 								className={cl`${styles.tab} ${
 									tab === additionalTab
 										? styles.active
 										: ''
 								}`}
-								role="button"
-								tabIndex={0}
 								onClick={() => setAdditionalTab(tab)}
 							>
 								{tabs[tab]}
-							</div>
+							</ClickableDiv>
 						))}
 					</div>
 
 					<div className={styles.more_info}>
-						{additionalTab === 'invoices' ? <Invoices /> : null}
-						{additionalTab === 'payments' ? <Organizations /> : null}
-						{additionalTab === 'shipments' ? <CustodyShipments /> : null}
+						{moreInfoComponentMapping[additionalTab]}
 					</div>
 				</Modal.Body>
 
