@@ -1,4 +1,4 @@
-import { Pagination, Button } from '@cogoport/components';
+import { Pagination } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { useSelector } from '@cogoport/store';
 import React from 'react';
@@ -44,16 +44,28 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 		(key) => GLOBAL_CONSTANTS.country_entity_ids[key] === countryId,
 	));
 
-	const sortStyleAsc = sort.sortType === 'asc' ? '#303B67' : '#BDBDBD';
+	const sortStyleGrandTotalAsc = sort.sortType === 'asc' && sort.sortBy === 'grandTotal' ? '#F68B21' : '#BDBDBD';
 
-	const sortStyleDesc = sort.sortType === 'desc' ? '#303B67' : '#BDBDBD';
+	const sortStyleGrandTotalDesc = sort.sortType === 'desc' && sort.sortBy === 'grandTotal' ? '#F68B21' : '#BDBDBD';
+
+	const sortStyleInvoiceDateAsc = sort.sortType === 'asc' && sort.sortBy === 'invoiceDate' ? '#F68B21' : '#BDBDBD';
+
+	const sortStyleinvoiceDateDesc = sort.sortType === 'desc' && sort.sortBy === 'invoiceDate' ? '#F68B21' : '#BDBDBD';
+
+	const sortStyleDueDateAsc = sort.sortType === 'asc' && sort.sortBy === 'dueDate' ? '#F68B21' : '#BDBDBD';
+
+	const sortStyleDueDateDesc = sort.sortType === 'desc' && sort.sortBy === 'dueDate' ? '#F68B21' : '#BDBDBD';
 
 	const columns = completedColumn(
 		getOrganizationInvoices,
 		showName,
 		setSort,
-		sortStyleAsc,
-		sortStyleDesc,
+		sortStyleGrandTotalAsc,
+		sortStyleGrandTotalDesc,
+		sortStyleInvoiceDateAsc,
+		sortStyleinvoiceDateDesc,
+		sortStyleDueDateAsc,
+		sortStyleDueDateDesc,
 		invoiceFilters,
 		setinvoiceFilters,
 	);
@@ -78,17 +90,16 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 					/>
 				</div>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
-					<div style={{ display: 'flex', marginRight: '20px', alignItems: 'center' }}>
-						<Button
-							size="md"
-							style={{ marginRight: '8px' }}
-							onClick={() => { sendReport(); }}
-						>
-							send Report
 
-						</Button>
+					<div
+						className={styles.send_report}
+						onClick={() => { sendReport(); }}
+						role="presentation"
+					>
+						Send Report
 
 					</div>
+
 					<SearchInput
 						value={invoiceFilters.search || ''}
 						onChange={(value) => setinvoiceFilters({

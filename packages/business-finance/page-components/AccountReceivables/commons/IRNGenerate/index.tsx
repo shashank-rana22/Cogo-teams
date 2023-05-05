@@ -78,7 +78,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 				<div>
 					<div style={{ display: 'flex', flexDirection: 'column', margin: '8px', width: 'maxContent' }}>
 						<Button
-							className="secondary sm"
+							size="sm"
 							disabled={loading}
 							onClick={() => setUploadInvoice(true)}
 						>
@@ -98,7 +98,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 				<div style={{ display: 'flex', flexDirection: 'column', margin: '8px', width: 'maxContent' }}>
 					{INVOICE_STATUS.includes(invoiceStatus) && (
 						<Button
-							className="secondary sm"
+							size="sm"
 							disabled={loading || (daysLeftForAutoIrnGeneration as unknown as number) <= 0}
 							onClick={() => generateIrn()}
 						>
@@ -110,7 +110,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 					{invoiceStatus === 'POSTED' && (
 						<div className={styles.button_container}>
 							<Button
-								className="secondary sm"
+								size="sm"
 								disabled={finalPostLoading}
 								onClick={() => finalPostFromSage()}
 							>
@@ -121,7 +121,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 					{financeRejectCheck.includes(itemData?.invoiceStatus) && (
 						<div className={styles.button_container}>
 							<Button
-								className="secondary sm"
+								size="sm"
 								disabled={loading}
 								onClick={() => financeRejected()}
 							>
@@ -177,7 +177,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 					{invoiceStatus === 'IRN_FAILED' && (
 						<div className={styles.button_container}>
 							<Button
-								className="secondary sm"
+								size="sm"
 								disabled={loadingOnRefresh}
 								onClick={refresh}
 							>

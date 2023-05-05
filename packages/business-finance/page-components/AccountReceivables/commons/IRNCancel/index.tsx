@@ -30,7 +30,7 @@ function IRNCancel({ itemData }) {
 		<div className={styles.container}>
 			{ isAfterADay && (
 				<Button
-					className="secondary sm"
+					size="sm"
 					onClick={() => {
 						setShowCancellationModal(true);
 						setShow(false);
@@ -45,7 +45,7 @@ function IRNCancel({ itemData }) {
 			{(['IRN_GENERATED', 'FAILED'].includes(invoiceStatus)) && (
 				<Button
 					disabled={loading}
-					className="secondary sm"
+					size="sm"
 					onClick={postToSage}
 				>
 					Post to Sage

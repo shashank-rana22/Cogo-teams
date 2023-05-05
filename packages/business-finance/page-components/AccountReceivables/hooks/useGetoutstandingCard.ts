@@ -111,7 +111,15 @@ const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 					sortBy        : sort.sortBy || undefined,
 					sortType      : sort.sortType || undefined,
 				},
+
 			});
+
+			console.log('currency', currency);
+			console.log('sort.sortBy', sort.sortBy);
+
+			if (sort.sortBy === 'grandTotal' && currency === undefined) {
+				Toast.warn('Please apply currency filter to sort invoice amount accurately');
+			}
 		} catch (e) {
 			if (e?.error?.message) { Toast.error(e?.error?.message || 'Failed'); }
 		}

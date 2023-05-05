@@ -33,7 +33,6 @@
 
 .select_container {
 	width: var(--width);
-	padding-left: 5px;
 
 	:global {
 		.ui_multiselect_input_control {

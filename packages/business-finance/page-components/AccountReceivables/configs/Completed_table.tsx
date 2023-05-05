@@ -36,13 +36,17 @@ const invoiceStatus = {
 };
 
 const completedColumn = (
-	refetch: Function,
-	showName: boolean,
-	setSort: (p: object)=>void,
-	sortStyleAsc: string,
-	sortStyleDesc: string,
-	invoiceFilter: object,
-	setInvoiceFilter: (p:object) => void,
+	refetch?: Function,
+	showName?: boolean,
+	setSort?: (p: object)=>void,
+	sortStyleGrandTotalAsc?: string,
+	sortStyleGrandTotalDesc?: string,
+	sortStyleInvoiceDateAsc?: string,
+	sortStyleInvoiceDateDesc?: string,
+	sortStyleDueDateAsc?: string,
+	sortStyleDueDateDesc?: string,
+	invoiceFilter?: object,
+	setInvoiceFilter?: (p:object) => void,
 ) => [
 
 	{
@@ -163,8 +167,8 @@ const completedColumn = (
 					invoiceFilter={invoiceFilter}
 					setInvoiceFilter={setInvoiceFilter}
 					setOrderBy={setSort}
-					sortStyleDesc={sortStyleDesc}
-					sortStyleAsc={sortStyleAsc}
+					sortStyleDesc={sortStyleGrandTotalDesc}
+					sortStyleAsc={sortStyleGrandTotalAsc}
 					type="grandTotal"
 				/>
 			</div>
@@ -228,8 +232,8 @@ const completedColumn = (
 					invoiceFilter={invoiceFilter}
 					setInvoiceFilter={setInvoiceFilter}
 					setOrderBy={setSort}
-					sortStyleDesc={sortStyleDesc}
-					sortStyleAsc={sortStyleAsc}
+					sortStyleDesc={sortStyleInvoiceDateDesc}
+					sortStyleAsc={sortStyleInvoiceDateAsc}
 					type="invoiceDate"
 				/>
 			</div>
@@ -253,8 +257,8 @@ const completedColumn = (
 					invoiceFilter={invoiceFilter}
 					setInvoiceFilter={setInvoiceFilter}
 					setOrderBy={setSort}
-					sortStyleDesc={sortStyleDesc}
-					sortStyleAsc={sortStyleAsc}
+					sortStyleDesc={sortStyleDueDateDesc}
+					sortStyleAsc={sortStyleDueDateAsc}
 					type="dueDate"
 				/>
 			</div>
