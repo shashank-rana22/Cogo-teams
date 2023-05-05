@@ -5,7 +5,7 @@ import Form from '../form';
 
 import getControls from './controls';
 
-function MBLDetails({ primaryService = {}, ref = () => {}, selectedMail = {} }) {
+function MBLDetails({ primaryService = {}, selectedMail = {} },ref) {
 	let newSummary = primaryService;
 	if (selectedMail?.formatted?.length) {
 		newSummary = selectedMail?.formatted[0];
@@ -18,7 +18,6 @@ function MBLDetails({ primaryService = {}, ref = () => {}, selectedMail = {} }) 
 		bls_count = 1;
 	}
 
-	// eslint-disable-next-line no-use-before-define
 	useImperativeHandle(ref, () => ({ submit: handleSubmit }));
 
 	const handleSubmit = () => {

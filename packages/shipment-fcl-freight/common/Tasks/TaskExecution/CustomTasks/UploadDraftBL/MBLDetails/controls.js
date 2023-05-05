@@ -15,7 +15,7 @@ const controls = ({ data = {} }) => {
 			span        : 6,
 			size        : 'sm',
 			value       : data?.document_number,
-			validations : [{ type: 'required', message: 'BL Number is required' }],
+			rules   : { required: 'Currency is required' },
 		},
 		{
 			label       : 'Container Quantity',
@@ -26,7 +26,7 @@ const controls = ({ data = {} }) => {
 			min         : 1,
 			disabled    : true,
 			value       : containersCount,
-			validations : [
+			rules : [
 				{ type: 'required', message: 'Container Quantity is required' },
 				{
 					type    : 'min',
@@ -44,7 +44,7 @@ const controls = ({ data = {} }) => {
 			label  : 'Document URL',
 			accept : 'image/*,.pdf,.doc,.docx,application/msword,'
 			+ 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-			validations: [
+			rules: [
 				{
 					type    : 'required',
 					message : 'document is required',

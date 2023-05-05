@@ -1,9 +1,9 @@
 import { InputController, TextAreaController, UploadController, useForm } from '@cogoport/forms';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
 
 import styles from './styles.module.css';
 
-function Form(props) {
+function Form(props, ref) {
 	const {
 		id, bl_type = '', controls = [],
 	} = props || {};
@@ -11,7 +11,7 @@ function Form(props) {
 	const {
 		control,
 		formState: { errors },
-		handleSubmit,
+		getValues,
 	} = useForm();
 
 	const controlTypeMapping = {
@@ -32,6 +32,17 @@ function Form(props) {
 			</div>
 		) : null;
 	}
+
+	const submitForm = () => {
+		const formValues = getValues();
+		console.log({errors});
+		if (formValues) {
+			return formValues;
+		}
+		return null;
+	};
+
+	useImperativeHandle(ref, () => ({ submitForm }));
 
 	return (
 		<main className={styles.container}>

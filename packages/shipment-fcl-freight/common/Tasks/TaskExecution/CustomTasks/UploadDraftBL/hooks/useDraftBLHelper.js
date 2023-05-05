@@ -83,8 +83,8 @@ const useDraftBLHelper = ({
 				service_type       : pendingTask.service_type,
 				pending_task_id    : pendingTask?.id,
 				documents          : values.map((value) => ({
-					file_name    : value?.url?.name,
-					document_url : value?.url?.url,
+					file_name    : value?.url?.fileName,
+					document_url : value?.url?.finalUrl,
 					data         : {
 						description      : value?.description,
 						document_number  : value?.document_number,
@@ -95,14 +95,14 @@ const useDraftBLHelper = ({
 				})),
 			};
 
-			await trigger({ data: body });
 			// feedbacks to cogolens starts
 			try {
 				const rpaMappings = {
 					cogo_shipment_id        : pendingTask.shipment_id,
 					cogo_shipment_serial_no : shipment_data?.serial_id,
-					bill_of_lading          : values?.document_number,
+					bill_of_lading          : body.documents[0].data.document_number,
 				};
+
 				await submitShipmentMapping(rpaMappings);
 			} catch (err) {
 				console.log(err);

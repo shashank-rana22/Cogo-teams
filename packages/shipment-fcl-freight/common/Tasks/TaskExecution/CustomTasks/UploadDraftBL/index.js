@@ -42,7 +42,7 @@ function UploadDraftBL({
 
 	const {
 		list: uploadedDocs,
-		loading,
+		loading: listDocLoading,
 		refetch: refetchDocs,
 	} = useListDocuments({
 		defaultParams: {
@@ -84,6 +84,7 @@ function UploadDraftBL({
 	const {
 		createHBL,
 		submitMBL,
+		loading
 	} = useDraftBLHelper({
 		isHBL,
 		pendingTask: task,
@@ -95,8 +96,9 @@ function UploadDraftBL({
 
 	const showUploadView = uploadedDocs?.list?.length > 0 && tradeDocList?.list?.length === 0;
 
-	const isNextDisabled = (isHBL && !isAllHBLUploaded) || ((!isHBL || isAllHBLUploaded));
-
+	
+	const isNextDisabled = (isHBL && !isAllHBLUploaded) || ((!isHBL || isAllHBLUploaded)) && loading;
+	
 	const handleClickOnNext = async () => {
 		if (step === 'hbl') {
 			setStep('mbl');
@@ -134,7 +136,7 @@ function UploadDraftBL({
 
 	return (
 		<TaskContainer
-			loading={uploadedDocs?.list?.length?.loading || loading}
+			loading={uploadedDocs?.list?.length?.loading || listDocLoading}
 			pendingTask={task}
 			actions={(
 				<>
