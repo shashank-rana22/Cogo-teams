@@ -8,7 +8,7 @@
 
 	:global {
 		.ui_button_container {
-			padding: 8px;
+			padding: 8px !important;
 			margin: 8px;
 		}
 	}
