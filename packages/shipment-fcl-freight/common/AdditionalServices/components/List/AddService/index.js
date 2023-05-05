@@ -79,6 +79,7 @@ function AddService({
 							setShowChargeCodes={setShowChargeCodes}
 						/>
 					) : null}
+
 					{showAddRate ? (
 						<AddRate
 							isSeller={isSeller}
@@ -90,6 +91,7 @@ function AddService({
 							source="overview"
 						/>
 					) : null}
+
 					{!showAddRate && showPrice ? (
 						<ViewPrice
 							showPrice={showPrice}

@@ -6,6 +6,7 @@ import styles from './styles.module.css';
 
 function ShipmentList({ data = {} }) {
 	const { list = [] } = data || {};
+
 	function Pagination() {
 		return (
 			<div className={styles.pagination}>
@@ -14,15 +15,16 @@ function ShipmentList({ data = {} }) {
 		);
 	}
 
-	return list.length === 0 ? <EmptyState /> : (
-		<div>
-			<Pagination />
+	return list.length === 0
+		? <EmptyState /> : (
+			<div>
+				<Pagination />
 
-			{list?.map((item) => <Card item={item} />)}
+				{list?.map((item) => <Card item={item} />)}
 
-			<Pagination />
-		</div>
-	);
+				<Pagination />
+			</div>
+		);
 }
 
 export default ShipmentList;

@@ -27,6 +27,7 @@ function FclFreight() {
 
 			<div className={styles.search_and_tab}>
 				<StepperTabs />
+
 				<CriticalAndSearch />
 			</div>
 

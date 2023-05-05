@@ -3,7 +3,7 @@ import { Tooltip } from '@cogoport/components';
 import styles from './styles.module.css';
 
 export default function ShipmentInfo({ item = {} }) {
-	const { serial_id, service_provider, costbooking_ops } = item;
+	const { serial_id = '', service_provider, costbooking_ops } = item || {};
 
 	return (
 		<div className={styles.container}>

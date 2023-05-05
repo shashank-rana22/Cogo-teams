@@ -45,6 +45,7 @@ function PortDetails({ data = {}, icon }) {
 
 			<div className={styles.port_detail}>
 				{handleLocationDetails(origin)}
+
 				{schedule_departure ? (
 					<div className={styles.eta_etd}>
 						ETD:
@@ -60,6 +61,7 @@ function PortDetails({ data = {}, icon }) {
 
 			<div className={styles.port_detail}>
 				{handleLocationDetails(destination)}
+
 				{schedule_arrival ? (
 					<div className={styles.eta_etd}>
 						ETA:

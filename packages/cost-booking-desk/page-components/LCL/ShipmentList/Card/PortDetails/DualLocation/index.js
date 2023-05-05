@@ -37,7 +37,7 @@ const handleLocationDetails = (location) => (
 const getDisplayDate = (date, dateFormat = 'dd MMM yyyy') => (date ? format(date, dateFormat, null, true) : null);
 
 function PortDetails({ data = {}, icon }) {
-	const { destination = {}, origin = {}, schedule_arrival = '', schedule_departure = '' } = data;
+	const { destination = {}, origin = {}, schedule_arrival = '', schedule_departure = '' } = data || {};
 
 	return (
 		<div className={`${styles.container} core_ui_port_conatiner`}>

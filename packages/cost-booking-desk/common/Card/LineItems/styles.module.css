@@ -12,7 +12,7 @@
 .text {
 	width: 70%;
 	padding: 2px 6px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 500;
 	line-height: 12px;
 	white-space: nowrap;

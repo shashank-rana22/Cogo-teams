@@ -6,7 +6,7 @@ import ServiceIcon from '../../../../../../common/Card/ServiceIcon';
 import styles from './styles.module.css';
 
 function PortDetails({ data = {}, icon }) {
-	const { port, trade_type } = data;
+	const { port = {}, trade_type = '' } = data || {};
 
 	return (
 		<div className={`${styles.container} core_ui_port_conatiner`}>

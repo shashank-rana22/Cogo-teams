@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 const labels = ['commodity', 'volume', 'inco_term', 'weight'];
 
 const renderCargoPills = (cargo_detail) => (
-	labels.map((label) => (cargo_detail[label]
+	labels.map((label) => (cargo_detail?.[label]
 		? (
 			<Pill size="sm" key={label}>
 				{renderValue(label, cargo_detail[label])}

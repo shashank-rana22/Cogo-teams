@@ -5,7 +5,7 @@ import CostBookingDeskContext from '../../../../context/CostBookingDeskContext';
 
 function ShipmentPagination({ data = {} }) {
 	const { page, total_count, page_limit } = data || {};
-	const { setFilters, filters = {} } = useContext(CostBookingDeskContext);
+	const { setFilters = () => {}, filters = {} } = useContext(CostBookingDeskContext);
 
 	const onPageChange = (val) => {
 		setFilters({ ...(filters || {}), page: val });

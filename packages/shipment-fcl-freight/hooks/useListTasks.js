@@ -3,6 +3,11 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
+const STAKEHOLDER_MAPPINGS = {
+	booking_desk : 'service_ops',
+	lastmile_ops : 'lastmile_ops',
+};
+
 function useListTasks({
 	filters = {},
 	defaultFilters = {},
@@ -14,7 +19,7 @@ function useListTasks({
 
 	const user_id = profile?.user?.id;
 
-	const stakeholder = activeStakeholder === 'booking_desk' ? 'service_ops' : '';
+	const stakeholder = STAKEHOLDER_MAPPINGS[activeStakeholder] || '';
 
 	const showTaskFilters = stakeholder ? { [`${stakeholder}_id`]: user_id } : {};
 

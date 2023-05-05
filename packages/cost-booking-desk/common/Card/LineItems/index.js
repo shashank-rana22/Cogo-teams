@@ -2,22 +2,25 @@ import { Pill } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function LineItems({ item }) {
+function LineItems({ item = {} }) {
 	return (
 		<div className={styles.line_item_values}>
 			<div className={styles.value}>
 				<div className={styles.text}>Total Line-items: </div>
-				<Pill>{item.total_line_items}</Pill>
+
+				<Pill>{item?.total_line_items}</Pill>
 			</div>
 
 			<div className={styles.value}>
 				<div className={styles.text}>Line-items Locked: </div>
-				<Pill>{item.locked_line_items}</Pill>
+
+				<Pill>{item?.locked_line_items}</Pill>
 			</div>
 
 			<div className={styles.value}>
 				<div className={styles.text}>Invoices Uploaded: </div>
-				<Pill>{item.invoices_uploaded}</Pill>
+
+				<Pill>{item?.invoices_uploaded}</Pill>
 			</div>
 		</div>
 	);

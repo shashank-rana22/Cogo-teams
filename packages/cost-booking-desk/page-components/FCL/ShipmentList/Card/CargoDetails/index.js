@@ -3,8 +3,8 @@ import { Tooltip, Pill } from '@cogoport/components';
 import { renderValue } from './renderCargoValue';
 import styles from './styles.module.css';
 
-const labels = ['container_size', 'container_type', 'commodity',
-	'inco_term', 'containers_count', 'cargo_weight_per_container', 'destination_cargo_handling_type'];
+const labels = ['container_size', 'container_type', 'commodity', 'inco_term', 'containers_count',
+	'cargo_weight_per_container', 'destination_cargo_handling_type'];
 
 const renderCargoPills = (cargo_detail) => (
 	labels.map((label) => (cargo_detail[label]
@@ -16,7 +16,7 @@ const renderCargoPills = (cargo_detail) => (
 		: null))
 );
 
-export default function CargoDetails({ cargo_details }) {
+export default function CargoDetails({ cargo_details = [] }) {
 	const [firstCargoDetails, ...restCargoDetails] = cargo_details || [];
 
 	return (
