@@ -26,6 +26,7 @@ function LeftPanel(props) {
 		setSelectedColumn,
 		setSelectedNestedColumn,
 		modeType,
+		previewMode,
 	} = props;
 
 	if (modeType !== 'edit') {
@@ -58,13 +59,14 @@ function LeftPanel(props) {
 					/>
 				</TabPanel>
 
-				<TabPanel name="structure" title="Structure">
+				<TabPanel name="structure" title="Layouts">
 					<Structure
 						selectedRow={selectedRow}
 						setShowContentModal={setShowContentModal}
 						setParentComponentId={setParentComponentId}
 						addNewItem={addNewItem}
 						onNewItemAdding={onNewItemAdding}
+						previewMode={previewMode}
 					/>
 				</TabPanel>
 

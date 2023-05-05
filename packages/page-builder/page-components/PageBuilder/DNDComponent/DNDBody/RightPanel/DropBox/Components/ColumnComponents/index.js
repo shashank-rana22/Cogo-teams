@@ -22,14 +22,23 @@ function ColumnComponents({
 	selectedColumn,
 	selectedNestedColumn,
 	modeType,
+	previewMode,
+	isMobile,
 }) {
 	const { id: componentId, component } = widget || {};
 
 	const { children, style } = component || {};
 
-	const { id: columnChildId } = selectedColumn || {};
+	const modifiedParentStyle = {
+		...style,
+		...((isMobile || previewMode === 'mobile') && {
+			flexDirection: 'column',
+		}),
+	};
 
-	const { id: selectedRowId } = selectedRow || {};
+	// const { id: columnChildId } = selectedColumn || {};
+
+	// const { id: selectedRowId } = selectedRow || {};
 
 	if (isEmpty(children)) {
 		return (
@@ -52,7 +61,7 @@ function ColumnComponents({
 	};
 
 	return (
-		<div style={style}>
+		<div style={modifiedParentStyle}>
 
 			{ (children || []).map((childComponent, idx) => {
 				const {
@@ -70,10 +79,18 @@ function ColumnComponents({
 
 				const { onClick } = attributes || {};
 
-				const isChildSelected = columnChildId === id && componentId === selectedRowId;
+				const modifiedStyle = {
+					...allStyles,
+					...((isMobile || previewMode === 'mobile') && {
+						width: '100%',
+					}),
+				};
+
+				// const isChildSelected = columnChildId === id && componentId === selectedRowId;
+
 				// const border = isChildSelected ? '1px solid green' : allStyles.border;
 
-				const { border } = allStyles;
+				const { border } = modifiedStyle;
 
 				if (!isEmpty(childChildren) && ['container', 'card', 'formSample'].includes(type)) {
 					return (
@@ -97,6 +114,8 @@ function ColumnComponents({
 							handleClick={handleClick}
 							componentId={componentId}
 							id={id}
+							previewMode={previewMode}
+							isMobile={isMobile}
 							modeType={modeType}
 						/>
 					);
@@ -107,7 +126,7 @@ function ColumnComponents({
 					<div
 						role="presentation"
 						className={modeType === 'edit' && styles.content_container}
-						style={{ ...(type === 'divider' ? {} : allStyles), border }}
+						style={{ ...(type === 'divider' ? {} : modifiedStyle), border }}
 						onClick={(e) => handleClick(e, childComponent)}
 					>
 

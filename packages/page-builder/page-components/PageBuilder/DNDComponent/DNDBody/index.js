@@ -32,12 +32,14 @@ function DNDBody({
 	handleUnselectItem,
 	previewMode,
 	setPreviewMode,
+	isMobile,
 
 }) {
 	const [activeTab, setActiveTab] = useState('content');
 
 	return (
 		<section className={styles.body}>
+
 			<LeftPanel
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
@@ -58,7 +60,10 @@ function DNDBody({
 				selectedNestedColumn={selectedNestedColumn}
 				setSelectedNestedColumn={setSelectedNestedColumn}
 				modeType={modeType}
+				previewMode={previewMode}
+				isMobile={isMobile}
 			/>
+
 			<RightPanel
 				pageConfiguration={pageConfiguration}
 				setPageConfiguration={setPageConfiguration}
@@ -86,6 +91,7 @@ function DNDBody({
 				handleUnselectItem={handleUnselectItem}
 				previewMode={previewMode}
 				setPreviewMode={setPreviewMode}
+				isMobile={isMobile}
 			/>
 		</section>
 	);

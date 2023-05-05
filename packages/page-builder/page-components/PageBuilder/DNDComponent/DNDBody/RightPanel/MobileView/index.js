@@ -26,6 +26,7 @@ function MobileView(props) {
 		setSelectedNestedColumn,
 		modeType,
 		handleUnselectItem,
+		previewMode,
 	} = props;
 
 	return (
@@ -34,11 +35,13 @@ function MobileView(props) {
 			<div className={styles.mobile_view}>
 				<div className={styles.header}>
 
-					{formatDate({
-						date       : new Date(),
-						formatType : 'time',
-						timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
-					})}
+					<div className={styles.time}>
+						{formatDate({
+							date       : new Date(),
+							formatType : 'time',
+							timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+						})}
+					</div>
 
 					<div className={styles.center}>
 						<div className={styles.speaker} />
@@ -66,6 +69,7 @@ function MobileView(props) {
 							setSelectedNestedColumn={setSelectedNestedColumn}
 							handleUnselectItem={handleUnselectItem}
 							modeType={modeType}
+							previewMode={previewMode}
 						/>
 
 					</div>

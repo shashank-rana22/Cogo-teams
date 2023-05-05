@@ -15,7 +15,7 @@ import styles from './styles.module.css';
 function DNDComponent({ initialPageData, metaData }) {
 	const [pageConfiguration, setPageConfiguration] = useState(metaData);
 
-	const { width: screenWidth } = useCheckMobileScreen();
+	const { isMobile } = useCheckMobileScreen();
 
 	const [previewMode, setPreviewMode] = useState('desktop');
 
@@ -115,6 +115,7 @@ function DNDComponent({ initialPageData, metaData }) {
 				handleUnselectItem={handleUnselectItem}
 				previewMode={previewMode}
 				setPreviewMode={setPreviewMode}
+				isMobile={isMobile}
 			/>
 
 			<SelectComponentModal

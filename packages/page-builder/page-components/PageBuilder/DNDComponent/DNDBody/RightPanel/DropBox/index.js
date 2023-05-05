@@ -29,6 +29,8 @@ function DropBox({
 	setSelectedNestedColumn,
 	handleUnselectItem,
 	modeType,
+	previewMode,
+	isMobile,
 }) {
 	const [stageItems, setStageItems] = useState(pageConfiguration);
 
@@ -75,6 +77,8 @@ function DropBox({
 		newAddingItemProps,
 		modeType,
 		handleUnselectItem,
+		previewMode,
+		isMobile,
 	});
 
 	const isActive = canDrop && isOver;
@@ -119,10 +123,12 @@ function DropBox({
 		}
 	}, [isOver, draggingItemType, isNewItemAdding, shouldAddBelow, hoveredIndex]);
 
+	const className = previewMode === 'mobile' ? `${styles.mobile_container}` : `${styles.container}`;
+
 	return (
 		<div
 			ref={dropRef}
-			className={styles.container}
+			className={className}
 			role="presentation"
 			onClick={handleUnselectItem}
 			style={{

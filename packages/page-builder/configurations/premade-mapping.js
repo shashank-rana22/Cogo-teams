@@ -1,7 +1,5 @@
 /* eslint-disable max-len */
 
-import { IcMVideoCall } from '@cogoport/icons-react';
-
 const PremadeMappings = [
 	{
 		name : 'card',

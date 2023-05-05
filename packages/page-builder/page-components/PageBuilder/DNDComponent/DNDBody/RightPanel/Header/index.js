@@ -1,5 +1,5 @@
 import { Button, ButtonIcon } from '@cogoport/components';
-import { IcMDesktop, IcMMobile, IcMRedo, IcMUndo } from '@cogoport/icons-react';
+import { IcMArrowBack, IcMDesktop, IcMMobile, IcMRedo, IcMUndo } from '@cogoport/icons-react';
 
 import useUpdateDynamicPage from '../../../../../../hooks/useUpdateDynamicPage';
 
@@ -16,6 +16,7 @@ function Header(props) {
 		goBack,
 		goForward,
 		setPreviewMode,
+		isMobile,
 	} = props;
 
 	const { handleSave } = useUpdateDynamicPage();
@@ -51,35 +52,42 @@ function Header(props) {
 					onClick={() => {
 						setMode({ modeType: modeType === 'edit' ? 'preview' : 'edit' });
 						handleUnselectItem();
+						setPreviewMode('desktop');
 					}}
 					type="button"
 					size="md"
 					themeType="secondary"
 				>
-					{modeType === 'edit' ? 'Preview' : 'Back to editor'}
+					{modeType === 'edit' ? 'Preview' : <IcMArrowBack />}
 
 				</Button>
+
 			</div>
 
-			{modeType === 'preview' && (
-				<div>
-					<ButtonIcon
-						size="lg"
-						className={styles.ui_buttonicon_container}
-						icon={<IcMMobile />}
-						onClick={() => setPreviewMode('mobile')}
-						style={{ marginRight: '8px' }}
-						themeType="primary"
-					/>
-					<ButtonIcon
-						size="lg"
-						className={styles.ui_buttonicon_container}
-						onClick={() => setPreviewMode('desktop')}
-						icon={<IcMDesktop />}
-						themeType="primary"
-					/>
-				</div>
-			)}
+			<div className={styles.preview_icons}>
+				{modeType === 'preview' && !isMobile && (
+
+					<div>
+						<ButtonIcon
+							size="lg"
+							className={styles.ui_buttonicon_container}
+							icon={<IcMMobile />}
+							onClick={() => setPreviewMode('mobile')}
+							style={{ marginRight: '8px' }}
+							themeType="primary"
+						/>
+						<ButtonIcon
+							size="lg"
+							className={styles.ui_buttonicon_container}
+							onClick={() => setPreviewMode('desktop')}
+							icon={<IcMDesktop />}
+							themeType="primary"
+						/>
+					</div>
+
+				)}
+
+			</div>
 
 			<div className={styles.button_container}>
 				<Button

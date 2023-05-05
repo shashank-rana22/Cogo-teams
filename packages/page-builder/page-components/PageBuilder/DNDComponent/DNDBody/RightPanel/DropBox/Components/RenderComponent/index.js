@@ -21,7 +21,9 @@ function RenderComponent({
 	index,
 	type,
 	// isDraggingPreview,
+	previewMode,
 	modeType,
+	isMobile,
 }) {
 	// if (isDraggingPreview) {
 	// 	return <ComponentsDropPreview type={type} />;
@@ -47,6 +49,8 @@ function RenderComponent({
 						selectedNestedColumn={selectedNestedColumn}
 						setSelectedNestedColumn={setSelectedNestedColumn}
 						modeType={modeType}
+						previewMode={previewMode}
+						isMobile={isMobile}
 					/>
 				)
 				: (

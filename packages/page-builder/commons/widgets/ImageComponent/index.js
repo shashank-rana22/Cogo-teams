@@ -41,7 +41,7 @@ function ImageComponent(props) {
 		<div>
 			{content ? (
 				<div>
-					<img width="100%" src={content} alt="upload-img" />
+					<img width="100%" height="auto" src={content} alt="upload-img" />
 				</div>
 			) : (
 				<div style={{ display: 'flex', justifyContent: 'center' }}>

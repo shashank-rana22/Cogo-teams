@@ -25,6 +25,8 @@ const useGetMemoStagedItems = ({
 	newAddingItemProps,
 	handleUnselectItem,
 	modeType,
+	previewMode,
+	isMobile,
 }) => {
 	const { moveItem } = useGetShiftComponent({ stageItems, setStageItems });
 
@@ -64,6 +66,8 @@ const useGetMemoStagedItems = ({
 					setSelectedNestedColumn={setSelectedNestedColumn}
 					handleUnselectItem={handleUnselectItem}
 					modeType={modeType}
+					previewMode={previewMode}
+					isMobile={isMobile}
 				/>
 			</div>
 		);
@@ -75,6 +79,8 @@ const useGetMemoStagedItems = ({
 		selectedItem,
 		handleNewAddingItemPropsChange,
 		modeType,
+		isMobile,
+		previewMode,
 	]);
 
 	return { memoItems };

@@ -1,16 +1,24 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    padding: 12px; 
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 12px;
 }
 
   
 .button_container {
     display: flex;
+    justify-content: flex-end;
 }
 
 .ui_buttonicon_container *{
     fill: #FCDC00;
+}
+
+.preview_icons{
+   display: flex;
+   justify-content: center;
+   margin-left: 124px;
+  
 }
 
 .button_wrapper {

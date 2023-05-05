@@ -23,11 +23,20 @@ function NestedColumnComponent({
 	componentId,
 	id,
 	modeType,
+	previewMode,
+	isMobile,
 }) {
 	const {
 		children: childChildren,
 		style: allStyles,
 	} = childrenComponent || {};
+
+	const modifiedParentStyle = {
+		...allStyles,
+		...((isMobile || previewMode === 'mobile') && {
+			width: '100%',
+		}),
+	};
 
 	const { id: columnChildId } = selectedColumn || {};
 
@@ -50,7 +59,7 @@ function NestedColumnComponent({
 			role="presentation"
 			className={styles.content_container}
 			onClick={(e) => handleClick(e, childComponent)}
-			style={{ ...allStyles, display: 'block', border, padding: '16px' }}
+			style={{ ...modifiedParentStyle, display: 'block', border, padding: '16px' }}
 		>
 			{ (childChildren || []).map((nestedChildren, childrenIndex) => {
 				const {
@@ -63,18 +72,25 @@ function NestedColumnComponent({
 					type: childrenType,
 				} = nestedChildrenComponent || {};
 
+				const modifiedChildrenStyle = {
+					...childrenStyles,
+					...((isMobile || previewMode === 'mobile') && {
+						width: '100%',
+					}),
+				};
+
 				const isNestedChildSelected = columnChildId === id
                 && componentId === selectedRowId
                 && childrenId === nestedColumnId;
 
-				const nestedBorder = isNestedChildSelected ? '1px solid yellow' : allStyles.border;
+				const nestedBorder = isNestedChildSelected ? '1px solid yellow' : modifiedParentStyle.border;
 
 				return (
 
 					<div
 						role="presentation"
 						className={styles.content_container}
-						style={{ ...childrenStyles, border: nestedBorder }}
+						style={{ ...modifiedChildrenStyle, border: nestedBorder }}
 						onClick={(e) => handleNesteColumnClick(e, childComponent, nestedChildren)}
 					>
 						<RenderElement

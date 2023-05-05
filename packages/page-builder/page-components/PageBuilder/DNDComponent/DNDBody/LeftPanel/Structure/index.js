@@ -3,20 +3,10 @@ import { IcMPlusInCircle } from '@cogoport/icons-react';
 import React, { useMemo } from 'react';
 import { v1 as uuid } from 'uuid';
 
+import useGetStructureWidths from '../../../../../../helpers/useGetStructureWidths';
+
 import StructureItem from './StructureItem';
 import styles from './styles.module.css';
-
-const widths = [['100%'],
-	['50%', '50%'],
-	['33.33%', '33.33%', '33.33%'],
-	['25%', '25%', '25%', '25%'],
-	['40%', '60%'],
-	['60%', '40%'],
-	['25%', '75%'],
-	['75%', '25%'],
-	['25%', '25%', '50%'],
-	['50%', '25%', '25%'],
-];
 
 function Structure(props) {
 	const {
@@ -25,7 +15,10 @@ function Structure(props) {
 		onNewItemAdding,
 		addNewItem,
 		selectedRow,
+		previewMode,
 	} = props;
+
+	const structureWidths = useGetStructureWidths({ previewMode });
 
 	const handleSubmitClick = ({ id, parentId }) => {
 		setParentComponentId({ childId: id, parentId });
@@ -76,7 +69,7 @@ function Structure(props) {
 	};
 
 	const StructurePanelItems = useMemo(
-		() => (widths || []).map((row) => (
+		() => (structureWidths || []).map((row) => (
 			<StructureItem
 				row={row}
 				handleClick={() => addNewItem({

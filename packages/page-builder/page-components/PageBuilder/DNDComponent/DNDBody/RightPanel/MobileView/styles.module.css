@@ -1,6 +1,7 @@
 .container{
     display: flex;
     justify-content: center;
+    margin-top: 40px;
 }
 .mobile_view {
   display: flex;
@@ -10,36 +11,20 @@
   border: 14px solid #191919;
   height: 580px;
   width: 312px;
-  padding: 0px 16px 60px 16px;
+  padding: 0px 8px 40px 8px;
 }
 
 .header {
   display: flex;
   align-items: center;
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
-.right {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-}
-
-.text {
-  font-weight: 600;
-  font-size: 13px;
-  color: #333;
-  padding-left: 5px;
+.time{
+  padding-top: 2px;
+  padding-left: 4px;
   width: 22%;
-}
-
-.body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .center {
@@ -58,3 +43,22 @@
   width: 28%;
   border-radius: 8px;
 }
+
+
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: scroll;
+}
+

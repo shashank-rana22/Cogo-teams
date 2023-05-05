@@ -30,6 +30,7 @@ function RightPanel({
 	handleUnselectItem,
 	previewMode,
 	setPreviewMode,
+	isMobile,
 }) {
 	return (
 		<div className={styles.right_panel} style={{ width: modeType === 'edit' ? '70%' : '100%' }}>
@@ -44,6 +45,7 @@ function RightPanel({
 				goBack={goBack}
 				goForward={goForward}
 				setPreviewMode={setPreviewMode}
+				isMobile={isMobile}
 			/>
 
 			{previewMode === 'mobile' ? (
@@ -66,6 +68,7 @@ function RightPanel({
 					setSelectedNestedColumn={setSelectedNestedColumn}
 					handleUnselectItem={handleUnselectItem}
 					modeType={modeType}
+					previewMode={previewMode}
 				/>
 			) : (
 				<DropBox
@@ -87,6 +90,8 @@ function RightPanel({
 					setSelectedNestedColumn={setSelectedNestedColumn}
 					handleUnselectItem={handleUnselectItem}
 					modeType={modeType}
+					previewMode={previewMode}
+					isMobile={isMobile}
 				/>
 			)}
 

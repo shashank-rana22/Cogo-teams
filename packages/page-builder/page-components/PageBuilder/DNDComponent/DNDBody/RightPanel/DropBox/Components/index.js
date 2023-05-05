@@ -31,6 +31,8 @@ function Components(props) {
 		setSelectedNestedColumn,
 		handleUnselectItem,
 		modeType,
+		previewMode,
+		isMobile,
 	} = props;
 
 	const itemRef = useRef(null);
@@ -149,6 +151,8 @@ function Components(props) {
 				type={type}
 				isDraggingPreview={isDraggingPreview}
 				modeType={modeType}
+				previewMode={previewMode}
+				isMobile={isMobile}
 			/>
 
 			{modeType === 'edit' && (
