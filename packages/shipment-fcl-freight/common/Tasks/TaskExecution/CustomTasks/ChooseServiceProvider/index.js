@@ -97,8 +97,8 @@ function ChooseServiceProvider({
 	}
 
 	return (
-		data?.list?.length
-			? (data?.list || []).map((item) => (
+		data?.list?.length > 0
+			? data?.list.map((item) => (
 				<Card
 					item={item}
 					priority={item.priority}
