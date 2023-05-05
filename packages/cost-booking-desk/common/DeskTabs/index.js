@@ -7,8 +7,8 @@ import getIsTabCritical from '../../helpers/getIsTabCritical';
 
 function DeskTabs() {
 	const {
-		shipmentType, stepperTab, activeTab,
-		filters, setFilters, setActiveTab,
+		shipmentType = '', stepperTab = '', activeTab = '',
+		filters = {}, setFilters = () => {}, setActiveTab = () => {},
 	} = useContext(CostBookingDeskContext);
 
 	const stepperTabs = TABS?.[shipmentType]?.[stepperTab];

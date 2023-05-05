@@ -32,7 +32,9 @@ const SHIPMENT_ICON = {
 
 function Card({ item = {} }) {
 	const contextValues = useContext(CostBookingDeskContext);
+
 	const { activeTab } = contextValues || {};
+
 	const router = useRouter();
 
 	const clickCard = () => {
@@ -91,7 +93,7 @@ function Card({ item = {} }) {
 				<div className={styles.gate_in_cutoff}>
 					GateIn Cutoff:
 					{' '}
-					{format(item.gate_in_cutoff, 'dd MMM yyyy, hh:mm aaa', null, true)}
+					{format(item.gate_in_cutoff, 'dd MMM yyyy, hh:mm aaa')}
 				</div>
 			) : null}
 		</div>

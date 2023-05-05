@@ -51,6 +51,7 @@ const useListLastMileDeskShipments = () => {
 
 	useEffect(() => {
 		const [, scope, view_type] = (authParams || '').split(':');
+
 		if (!scope) { return; }
 
 		const newScopeFilters = { scope, view_type, selected_agent_id };

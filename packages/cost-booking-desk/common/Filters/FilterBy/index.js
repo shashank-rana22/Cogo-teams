@@ -93,8 +93,9 @@ function FilterBy({
 
 					<div className={styles.date_range_container}>
 						{Object.keys(DATE_RANGE_MAPPING).map((dateKey) => (
-							<div className={cl`${dateRange === dateKey ? styles.active : styles.inactive} 
-							${styles.filter_by_buttons}`}
+							<div className={cl`${dateRange === dateKey
+								? styles.active : styles.inactive}  
+								${styles.filter_by_buttons}`}
 							>
 								<Button
 									onClick={() => setPopoverFilter({
@@ -109,7 +110,8 @@ function FilterBy({
 							</div>
 						))}
 
-						<div className={cl`${dateRange === 'custom' ? styles.active : styles.inactive}
+						<div className={cl`${dateRange === 'custom'
+							? styles.active : styles.inactive}
 							${styles.filter_by_buttons}`}
 						>
 							<Button

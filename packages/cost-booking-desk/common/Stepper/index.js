@@ -10,8 +10,8 @@ import styles from './styles.module.css';
 
 function Stepper() {
 	const {
-		shipmentType, setShipmentType, setStepperTab,
-		filters, setFilters, setActiveTab,
+		shipmentType = '', setShipmentType = () => {}, setStepperTab = () => {},
+		filters = {}, setFilters = () => {}, setActiveTab = () => {},
 	} = useContext(CostBookingDeskContext);
 
 	const tabs = CONTROL_CONFIG.shipment_types;

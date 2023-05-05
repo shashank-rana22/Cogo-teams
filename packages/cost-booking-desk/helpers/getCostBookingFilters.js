@@ -6,8 +6,9 @@ const keyMapping = {
 	etd : 'schedule_departure',
 };
 
-export default function getCostBookingFilters({ filters, costBookingContextValues }) {
+export default function getCostBookingFilters({ filters = {}, costBookingContextValues = {} }) {
 	const { activeTab, stepperTab, shipmentType } = costBookingContextValues || {};
+
 	const { criticalOn, endDate, startDate, dateRange, date_type, q, ...restFilters } = filters || {};
 
 	let finalFilters = { ...(TABWISE_FILTERS[activeTab] || {}), ...restFilters };

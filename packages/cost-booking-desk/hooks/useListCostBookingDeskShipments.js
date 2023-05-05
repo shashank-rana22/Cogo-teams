@@ -8,12 +8,15 @@ import getCostBookingFilters from '../helpers/getCostBookingFilters';
 
 function useListCostBookingDeskShipments() {
 	const costBookingContextValues = useContext(CostBookingDeskContext);
+
 	const { filters, setFilters, shipmentType, stepperTab, activeTab } = costBookingContextValues || {};
+
 	const { page = 1, ...restFilters } = filters || {};
 
 	const debounceQuery = useRef({ q: filters.q });
 
 	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
+
 	const [apiData, setApiData] = useState('');
 
 	const apiPrefix = ['import', 'export'].includes(stepperTab) ? shipmentType : stepperTab;
@@ -47,6 +50,7 @@ function useListCostBookingDeskShipments() {
 
 	useEffect(() => {
 		const [, scope, view_type] = (authParams || '').split(':');
+
 		if (!scope) { return; }
 
 		const newScopeFilters = { scope, view_type, selected_agent_id };

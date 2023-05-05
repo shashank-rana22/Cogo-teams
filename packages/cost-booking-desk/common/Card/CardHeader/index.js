@@ -4,9 +4,11 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-export default function CardHeader({ item }) {
-	const { trade_type, source } = item;
+export default function CardHeader({ item = {} }) {
+	const { trade_type, source } = item || {};
+
 	const displaySource = source === 'direct' ? 'Sell Without Buy' : startCase(source);
+
 	const showChannelPartner = (item?.importer_exporter?.tags || []).includes('partner');
 
 	return (

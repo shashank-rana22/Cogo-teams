@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 function TitleCard({
 	item = {},
-	containerDetails = 0,
+	containerDetails = [],
 }) {
 	const { primary_service } = useContext(ShipmentDetailContext);
 	return (
