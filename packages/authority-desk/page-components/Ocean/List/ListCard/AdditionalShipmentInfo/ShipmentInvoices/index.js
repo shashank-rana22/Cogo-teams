@@ -1,7 +1,7 @@
 import { format, Loader } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils'; 
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
-
 import EmptyState from '../../../../../../commons/EmptyState';
 import useListInvoiceWrapper from '../../../../../../hooks/useListInvoiceWrapper';
 
@@ -45,7 +45,14 @@ function ShipmentInvoices({ item = {} }) {
 								{item?.invoiceType}
 								{' '}
 							</td>
-							<td>{item?.invoiceValue}</td>
+							<td>{formatAmount({amount : item?.invoiceValue,
+								 currency : item?.invoiceCurrency,
+								 options  : {
+									style                 : 'currency',
+									currencyDisplay       : 'code',
+									maximumFractionDigits : 2,
+								}
+								 })  }</td>
 							<td>{item?.balanceAmount}</td>
 							<td>{format(item?.dueDate, 'dd MM yyyy', null, true)}</td>
 							<td>{startCase(item?.paymentStatus)}</td>
