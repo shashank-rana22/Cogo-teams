@@ -14,14 +14,16 @@
 
 	:global {
 		.ui_input_control {
-		font-size: 12px !important;
+			font-size: 12px !important;
 		}
+
 		.ui_input_suffix {
 			width: 24px;
 			height: 80%;
-			svg{
-				width:16px;
-				height:16px;
+
+			svg {
+				width: 16px;
+				height: 16px;
 			}
 		}
 	}

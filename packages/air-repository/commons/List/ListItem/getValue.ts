@@ -34,7 +34,7 @@ const getValue = (
 			val = ACTIONS[itemField.func as keyof typeof ACTIONS](val as string);
 		}
 	}
-	return val === null || val === undefined ? null : val;
+	return val === null || val === undefined ? '-' : val;
 };
 
 export default getValue;

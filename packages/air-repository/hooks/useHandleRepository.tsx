@@ -2,9 +2,9 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const useHandleRepository = (edit) => {
-	let api = 'create_service_ops_repository';
+	let api = 'create_shipment_service_ops_repository';
 	if (edit) {
-		api = 'update_service_ops_repository';
+		api = 'update_shipment_service_ops_repository';
 	}
 
 	const [{ loading }, trigger] = useRequest({

@@ -24,6 +24,7 @@
 
 .element {
 	padding: 4px;
+
 	:global {
 		.ui_select_input_placeholder {
 			font-size: 14px;

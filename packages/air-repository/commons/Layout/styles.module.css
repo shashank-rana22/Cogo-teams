@@ -6,7 +6,7 @@
 .row {
 	display: flex;
 	flex-wrap: wrap;
-justify-content: space-between;
+	justify-content: space-between;
 }
 
 .heading {
@@ -20,8 +20,8 @@ justify-content: space-between;
 .label {
 	height: 16px;
 	margin-bottom: 6px;
-	font-weight: 400;
 	font-size: 12px;
+	font-weight: 400;
 }
 
 .item {

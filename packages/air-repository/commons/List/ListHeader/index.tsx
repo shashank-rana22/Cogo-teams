@@ -14,7 +14,7 @@ function Header({ fields }:Props) {
 			<div className={styles.header_row}>
 				{fields.map((field) => (
 					<div
-						className={`${styles.col} ${field.className || ''}`}
+						className={`${styles.col}`}
 						style={{ '--span': field.span || 1 } as React.CSSProperties}
 					>
 						{ field.label }

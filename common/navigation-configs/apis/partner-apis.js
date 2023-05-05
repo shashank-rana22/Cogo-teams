@@ -11686,17 +11686,17 @@ const partner = {
 	],
 	air_repository: [
 		{
-			api          : 'list_service_ops_repository',
+			api          : 'list_shipment_service_ops_repository',
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
 		{
-			api          : 'create_service_ops_repository',
+			api          : 'create_shipment_service_ops_repository',
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
 		{
-			api          : 'update_service_ops_repository',
+			api          : 'update_shipment_service_ops_repository',
 			access_type  : 'private',
 			service_name : 'shipment',
 		},

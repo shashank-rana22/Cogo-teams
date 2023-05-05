@@ -14,6 +14,8 @@ export interface Props {
 	isMobile?: boolean;
 }
 
+const INCLUDE_LINE_SEPARATION = ['mode', 'email', 'password'];
+
 function CardItem({
 	fields,
 	singleitem,
@@ -32,35 +34,38 @@ function CardItem({
 					{fields.map((field:FieldType) => {
 						const itemStyle = field.styles || {};
 						return (
-							<div
-								className={`${styles.col} ${field.className || ''} ${
-									isMobile ? styles.is_mobile : ''
-								}`}
-								style={{
-									'--span': (field.span || 1),
-									...itemStyle,
-								} as React.CSSProperties}
-							>
-								{isMobile && (
-									<div className={styles.tablelabel}>{field.label}</div>
-								)}
-								<div className="line_division" />
-
-								{loading ? <Placeholder />
-									: (
-										<div
-											className={styles.flex}
-										>
-											{field.render ? field.render(singleitem) : getValue(
-												singleitem,
-												field,
-												functions,
-												'-',
-											) as ReactNode }
-										</div>
+							<>
+								<div
+									className={`${styles.col} ${field.className || ''} ${
+										isMobile ? styles.is_mobile : ''
+									}`}
+									style={{
+										'--span': (field.span || 1),
+										...itemStyle,
+									} as React.CSSProperties}
+								>
+									{isMobile && (
+										<div className={styles.tablelabel}>{field.label}</div>
 									)}
 
-							</div>
+									{loading ? <Placeholder />
+										: (
+											<div
+												className={styles.flex}
+											>
+												{field.render ? field.render(singleitem) : getValue(
+													singleitem,
+													field,
+													functions,
+													'-',
+												) as ReactNode }
+											</div>
+										)}
+
+								</div>
+								{INCLUDE_LINE_SEPARATION.includes(field.key)
+								&& <div className="line_division" />}
+							</>
 						);
 					})}
 				</div>

@@ -7,27 +7,28 @@ const useListRepository = () => {
 	const [page, setPage] = useState(1);
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const [{ data = {}, loading }, trigger] = useRequest('/list_service_ops_repository', { manual: true });
+	const [{ data = {}, loading }, trigger] = useRequest('/list_shipment_service_ops_repository', { manual: true });
 
 	const listRepository = useCallback(() => {
 		(async () => {
 			try {
 				await trigger({
 					params: {
-						q: (query || '').trim() || undefined,
-
+						filters: {
+							q: (query || '').trim() || undefined,
+						},
+						page,
 					},
 				});
 			} catch (err) {
 				console.log(err);
 			}
 		})();
-	}, [query, trigger]);
+	}, [page, query, trigger]);
 
 	useEffect(() => {
 		debounceQuery(searchValue);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchValue]);
+	}, [debounceQuery, searchValue]);
 
 	useEffect(() => {
 		listRepository();
@@ -39,6 +40,8 @@ const useListRepository = () => {
 		loading,
 		searchValue,
 		setSearchValue,
+		page,
+		setPage,
 	};
 };
 

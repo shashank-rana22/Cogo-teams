@@ -1,23 +1,24 @@
 .header {
 	padding: 8px 20px;
-    background-color: #fff;
+	background-color: #fff;
 	border-radius: 8px 8px 0 0;
 }
 
 .header_row {
-    display: flex;
-    font-size: 12px;
+	display: flex;
+	align-items: center;
+	font-size: 12px;
 	font-weight: 500;
 	line-height: 150%;
-    color: #000;
-    align-items: center;
-    border-bottom:1px solid #F68B21;
+	color: #000;
+	border-bottom: 1px solid #f68b21;
 }
 
 .col {
 	display: flex;
 	flex: var(--span);
 	padding: 4px;
+	margin-left: 16px;
 	font-size: 12px;
 	font-weight: 500;
 }

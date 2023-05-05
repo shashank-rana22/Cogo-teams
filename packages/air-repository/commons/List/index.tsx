@@ -1,5 +1,5 @@
 import { Pagination } from '@cogoport/components';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import EmptyState from './EmptyState';
 import { FunctionObjects, FieldType, ListDataType } from './Interfaces';
@@ -24,6 +24,7 @@ function List({
 	setPage,
 	functions,
 } :Props) {
+	const [isMobile, setIsMobile] = useState(false);
 	const { list = {}, total_count:totalCount } = listData;
 
 	const render = () => {
@@ -38,6 +39,7 @@ function List({
 						fields={fields}
 						functions={functions}
 						loading={loading}
+						isMobile={isMobile}
 					/>
 				</div>
 			));
@@ -45,9 +47,26 @@ function List({
 		return <EmptyState />;
 	};
 
+	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth < 768) {
+				setIsMobile(true);
+			} else {
+				setIsMobile(false);
+			}
+		};
+
+		handleResize();
+		window.addEventListener('resize', handleResize);
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
+
 	return (
 		<section>
-			<ListHeader fields={fields} />
+			{!isMobile && <ListHeader fields={fields} />}
 			<div className={styles.scroll}>
 				{render()}
 				{!loading && Number(list.length) > 0 ? (

@@ -14,7 +14,7 @@ function AirRepository() {
 	const [item, setItem] = useState(null);
 	const [edit, setEdit] = useState(false);
 	const {
-		data, listRepository, loading,	searchValue, setSearchValue,
+		data, listRepository, loading,	searchValue, setSearchValue, page, setPage,
 	} = useListRepository();
 	return (
 		<div className={styles.container}>
@@ -32,7 +32,16 @@ function AirRepository() {
 				/>
 				<Button size="md" themeType="accent" onClick={() => setShowModal(true)}>+ Create new Repository</Button>
 			</div>
-			<Details data={data} loading={loading} setShowModal={setShowModal} setItem={setItem} setEdit={setEdit} />
+			<Details
+				data={data}
+				loading={loading}
+				setShowModal={setShowModal}
+				setItem={setItem}
+				setEdit={setEdit}
+				listRepository={listRepository}
+				page={page}
+				setPage={setPage}
+			/>
 			{showModal && (
 				<RepositoryModal
 					showModal={showModal}

@@ -1,44 +1,45 @@
 .mode_badge {
-    font-weight: 500;
-
+	font-weight: 500;
 }
 
-/* .mode_badge::after {
-    display: block;
-	width: 100px;
-	height: 4px;
-	content: "";
-	background: #ed3726;
-} */
-
 .details_list {
-    :global {
-        .line_division {
-            display: block;
-            width: 1px;
-            height: 32px;
-            background: #F8F2E7;
-            position: relative;
-            right: 20px;
-        }
-    }
+	:global {
+		.line_division {
+			position: relative;
+			display: block;
+			width: 1px;
+			height: 36px;
+			background: #f8f2e7;
+		}
+	}
 }
 
 .action_buttons {
-    display: flex;
-    :global {
-        .ui_button_container {
-            padding: 2px;
-            min-width: 28px;
-        }
-    }
+	display: flex;
+
+	:global {
+		.ui_button_container {
+			min-width: 28px;
+			padding: 2px;
+		}
+	}
 }
 
 .edit_detail {
-    display: flex;
-    flex-direction: column;
-    span {
-        color:#ED8A1D;
-        font-size: 11px;
-    }
+	display: flex;
+	flex-direction: column;
+
+	span {
+		overflow: hidden;
+		font-size: 11px;
+		color: #ed8a1d;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+}
+
+.airline {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }

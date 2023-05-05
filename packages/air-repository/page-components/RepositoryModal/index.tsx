@@ -8,11 +8,15 @@ import useHandleRepository from '../../hooks/useHandleRepository';
 
 import styles from './styles.module.css';
 
+interface NestedObj {
+	[key: string]: string;
+}
+
 interface ModalProps {
 	showModal: boolean;
 	setShowModal: React.FC;
 	listRepository: React.FC;
-	item:any;
+	item:NestedObj;
 	edit:boolean;
 	setEdit:React.FC;
 }
@@ -25,11 +29,13 @@ function RepositoryModal({ showModal, setShowModal, listRepository, item, edit, 
 	const mode = watch('mode');
 
 	const onSubmit = (values) => {
-		const payload = { ...values, id: item?.id, performed_by_id: '' };
-		handleRepository(payload, listRepository);
-		if (edit) {
-			setEdit(false);
-		}
+		const payload = { ...values, id: item?.id, action_name: edit ? 'update' : undefined };
+		handleRepository(payload, listRepository).then(() => {
+			if (edit) {
+				setEdit(false);
+			}
+			setShowModal(false);
+		});
 	};
 
 	const finalFields = [
