@@ -19,6 +19,10 @@
 	font-size: 12px;
 	font-weight: 600;
 	color: #f68b21;
+
+	&.clickable {
+		cursor: pointer;
+	}
 }
 
 .created_at {

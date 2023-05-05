@@ -7,7 +7,7 @@ import ShipmentAudit from '../ShipmentAudit';
 
 import styles from './styles.module.css';
 
-function Footer({ item = {}, role = '', bucket = '' }) {
+function Footer({ item = {}, role = '', tabsState = {} }) {
 	const [showModal, setShowModal] = useState(false);
 
 	const closeModal = () => setShowModal(false);
@@ -15,7 +15,7 @@ function Footer({ item = {}, role = '', bucket = '' }) {
 	const renderButtonCondition = () => {
 		if (
 			role === 'kam'
-			&& ['ineligible', 'hold'].includes(bucket)
+			&& ['ineligible', 'hold'].includes(tabsState.bucket)
 			&& item?.validation_status?.invoice_validation_status
 		) {
 			return (
@@ -74,7 +74,7 @@ function Footer({ item = {}, role = '', bucket = '' }) {
 				<ShipmentAudit
 					closeModal={closeModal}
 					item={item}
-					bucket={bucket}
+					tabsState={tabsState}
 					role={role}
 				/>
 			) : null}
