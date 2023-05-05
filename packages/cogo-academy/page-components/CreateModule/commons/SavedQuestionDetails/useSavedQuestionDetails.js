@@ -51,6 +51,7 @@ const useSavedQuestionDetails = ({
 			updateStandAloneTestQuestion({
 				testQuestionId : id,
 				action         : 'delete',
+				question_type,
 			});
 		} else {
 			updateCaseStudy({

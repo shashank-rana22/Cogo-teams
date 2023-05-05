@@ -38,6 +38,10 @@ function CreateQuestion({
 		editorValue,
 		setEditorValue,
 		updateStandAloneLoading,
+		subjectiveEditorValue,
+		setSubjectiveEditorValue = () => {},
+		uploadable,
+		setUploadable,
 	} = useCreateQuestion({
 		item,
 		setSavedQuestionDetails,
@@ -90,6 +94,10 @@ function CreateQuestion({
 						listSetQuestions={listSetQuestions}
 						editorValue={editorValue}
 						setEditorValue={setEditorValue}
+						subjectiveEditorValue={subjectiveEditorValue}
+						setSubjectiveEditorValue={setSubjectiveEditorValue}
+						uploadable={uploadable}
+						setUploadable={setUploadable}
 					/>
 				</div>
 

@@ -18,6 +18,7 @@ interface Props {
 	activeCategory?: String;
 	edit?: boolean | string;
 	viewDoc?: boolean;
+	activeHawb?: NestedObj;
 }
 
 function ChargeDetails({
@@ -29,6 +30,7 @@ function ChargeDetails({
 	activeCategory = '',
 	edit,
 	viewDoc = false,
+	activeHawb = {},
 }:Props) {
 	let tempColor = '#333';
 	if (whiteout) {
@@ -51,6 +53,8 @@ function ChargeDetails({
 					formData={formData}
 					whiteout={whiteout}
 					awbType={awbType}
+					activeHawb={activeHawb}
+					viewDoc={viewDoc}
 				/>
 			</div>
 

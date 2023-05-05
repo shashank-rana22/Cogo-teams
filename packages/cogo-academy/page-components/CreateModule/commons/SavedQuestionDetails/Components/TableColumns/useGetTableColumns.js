@@ -11,6 +11,13 @@ import SortComponent from '../SortComponent';
 
 import styles from './styles.module.css';
 
+const QUESTION_TYPE_MAPPING = {
+	single_correct : 'Stand Alone',
+	multi_correct  : 'Stand Alone',
+	case_study     : 'Case Study',
+	subjective     : 'Subjective',
+};
+
 const useGetTableColumns = ({
 	setAllKeysSaved,
 	getTestQuestionTest,
@@ -35,7 +42,7 @@ const useGetTableColumns = ({
 					role="presentation"
 					onClick={() => setQuestionToShow(id)}
 				>
-					{question_type === 'case_study' ? 'Case Study' : 'Stand Alone'}
+					{QUESTION_TYPE_MAPPING[question_type] || ''}
 				</section>
 			),
 		},
@@ -45,8 +52,9 @@ const useGetTableColumns = ({
 			accessor : (item) => (
 				<Tooltip
 					interactive
+					className={styles.tooltip}
 					content={item?.question_type !== 'case_study'
-						? item?.question_text
+						? <div className={styles.q_text}>{item?.question_text}</div>
 						: <CaseQuestion item={item} from="tooltip" caseToShow={caseToShow} />}
 				>
 					<div
@@ -77,14 +85,19 @@ const useGetTableColumns = ({
 			Header   : 'ANSWER TYPE',
 			id       : 'answer_type',
 			accessor : (item) => (
-				<section
+				<div
 					role="presentation"
 					onClick={() => setQuestionToShow(item?.id)}
 				>
-					{item?.question_type !== 'case_study'
-						? startCase(item?.question_type)
-						: <CaseAnswerType item={item} caseToShow={caseToShow} />}
-				</section>
+					{item?.question_type !== 'subjective' && (
+						<section>
+							{item?.question_type !== 'case_study'
+								? startCase(item?.question_type)
+								: <CaseAnswerType item={item} caseToShow={caseToShow} />}
+						</section>
+					)}
+				</div>
+
 			),
 		},
 		{

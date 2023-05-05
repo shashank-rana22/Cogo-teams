@@ -1,0 +1,50 @@
+.form_element {
+	.label {
+		margin-bottom: 10px;
+		font-weight: 600;
+	}
+
+	.error_msg {
+		position: relative;
+		top: -6px;
+		font-size: var(--font-size-md);
+		color: var(--color-primary-error-red-2);
+	}
+
+	:global {
+		.ui_radiogroup_container {
+			flex-wrap: wrap;
+			justify-content: space-between;
+			padding: 0;
+		}
+
+		.ui_radio_container {
+			width: 48%;
+			padding: 0 10px 10px 0;
+		}
+
+		.ui_chip_container {
+			max-width: none;
+		}
+
+		.ui_input_container {
+			width: 48%;
+		}
+	}
+
+	&:not(:first-of-type) {
+		margin-top: 26px;
+	}
+}
+
+.my_modal {
+	:global {
+		.ui_modal_body_container {
+			min-height: 40vh;
+		}
+
+		.ui_button_container:not(:first-of-type) {
+			margin-left: 10px;
+		}
+	}
+}

@@ -12,7 +12,7 @@ import Summary from './Summary';
 
 function TestResult() {
 	const {
-		query: { test_id, view, id, name: userName },
+		query: { test_id, view, id, name: userName, is_evaluated, status },
 		user: { id: user_id, name },
 	} = useSelector(({ general, profile }) => ({
 		query : general.query,
@@ -66,6 +66,9 @@ function TestResult() {
 				user_name={view === 'admin' ? userName : name}
 				test_id={test_id}
 				user_id={view === 'admin' ? id : user_id}
+				view={view}
+				is_evaluated={is_evaluated === 'true'}
+				status={status}
 			/>
 		</div>
 	);
