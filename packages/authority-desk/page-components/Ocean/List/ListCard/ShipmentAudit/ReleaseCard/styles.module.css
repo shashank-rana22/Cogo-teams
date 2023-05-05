@@ -1,11 +1,12 @@
 .container {
 	position: fixed;
 	bottom: 12px;
+	left: 50%;
+	transform: translateX(-50%);
 	display: flex;
 	justify-content: flex-end;
-	width: calc(100% - 144px);
+	width: calc(100% - 80px);
 	padding: 12px;
-	margin: 0 16px;
 	background: #fff;
 	border-radius: 8px;
 }
@@ -13,8 +14,10 @@
 .bttn_wrap {
 	display: flex;
 	justify-content: flex-end;
-}
 
-.first_button {
-	margin-right: 12px;
+	:global {
+		.ui_button_container:not(:last-of-type) {
+			margin-right: 12px;
+		}
+	}
 }

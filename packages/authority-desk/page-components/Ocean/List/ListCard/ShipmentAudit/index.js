@@ -85,7 +85,7 @@ function ShipmentAudit({
 					</div>
 				</Modal.Body>
 
-				<Modal.Footer>
+				<Modal.Footer className={styles.modal_footer_content}>
 					{role === 'credit_control' && isApprovalAllowed ? (
 						<ReleaseCard data={item} bucket={bucket} />
 					) : null}

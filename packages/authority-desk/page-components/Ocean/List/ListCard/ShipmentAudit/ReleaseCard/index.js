@@ -86,7 +86,7 @@ function ReleaseCard({ data = {}, bucket }) {
 				) : null}
 
 				{bucket !== "released" ? (
-					<Button onClick={() => setOpen(true)} className = {styles.first_button}>
+					<Button onClick={() => setOpen(true)}>
 						{bucket === "approved"
 							? "Approve for Release"
 							: "Approve"}

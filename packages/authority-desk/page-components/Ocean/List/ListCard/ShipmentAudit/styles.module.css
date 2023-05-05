@@ -49,6 +49,10 @@
 	max-height: none !important;
 }
 
+.modal_footer_content {
+	box-shadow: none !important;
+}
+
 .more_info {
 	margin-top: 20px;
 	background: #fff;
