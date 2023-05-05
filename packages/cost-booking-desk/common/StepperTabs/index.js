@@ -16,6 +16,8 @@ function StepperTabs() {
 	const stepperTabs = CONTROL_CONFIG[shipmentType];
 
 	const handleTabChange = (val) => {
+		if (val === stepperTab) return;
+
 		const stepperConfig = TABS[shipmentType]?.[val];
 		const tempActiveTab = stepperConfig?.[0]?.name;
 
