@@ -95,6 +95,8 @@ const useDraftBLHelper = ({
 				})),
 			};
 
+			await trigger({ data: body });
+			
 			// feedbacks to cogolens starts
 			try {
 				const rpaMappings = {
