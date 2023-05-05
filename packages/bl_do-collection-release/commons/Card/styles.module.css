@@ -1,0 +1,100 @@
+.main_container{
+	display: flex;
+	border-radius: 4px;
+	background: #fff;
+	padding: 10px 10px 44px 10px;
+	min-height: 170px;
+
+	&.no-accordion {
+		margin-bottom: 20px;
+		padding-bottom: 10px;
+		min-height: 130px;
+	}
+
+	&.card-critical {
+		background: linear-gradient(90deg, #ffffff, #fadede, #ffffff);
+		background-size: 400% 400%;
+		animation: moveBg 5s ease-in-out infinite alternate;
+	}
+
+	@keyframes moveBg {
+		from {
+			background-position: 100% 0;
+		}
+		to {
+			background-position: 0 0;
+		}
+	}
+};
+
+.container{
+	&.action {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		width: 22%;
+		margin-left: auto;
+		padding: 10px 26px 10px 10px;
+
+		.core-ui-button-root {
+			&.awaiting {
+				background: #fff1c9;
+				color: #bf9722;
+				text-transform: capitalize;
+				cursor: initial;
+				padding: 10px 12px;
+				border: none;
+			}
+			&.surrendered {
+				background: #d3f6d7;
+				color: #278934;
+				cursor: initial;
+				padding: 10px 12px;
+				border: none;
+			}
+		}
+	}
+
+	&.row {
+		display: flex;
+		justify-content: flex-end;
+		margin-top: 10px;
+
+		.core-ui-button-root {
+			margin-left: 16px;
+		}
+
+		.core-ui-date-time-picker-container {
+			max-width: 300px;
+		}
+	}
+};
+
+.text{
+	&.thin {
+		font-weight: 300;
+		margin-top: 2px;
+	}
+	&.bold {
+		font-weight: 500;
+	}
+	&.inline {
+		display: inline;
+	}
+	&.small {
+		font-size: 12px;
+	}
+};
+
+.label{
+	font-weight: 500;
+	font-size: 16px;
+	color: #393f70;
+};
+
+.styled_modal{
+	.ui-modal-dialog {
+		padding: 30px;
+	}
+};

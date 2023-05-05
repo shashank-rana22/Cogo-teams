@@ -1,0 +1,38 @@
+.main_container{
+	padding: 0 10px;
+	margin-bottom: -18px;
+	position: relative;
+	top: -30px;
+};
+
+.text{
+	&.invoice-sid {
+		color: #034afd;
+		font-weight: 500;
+	}
+	&.bold {
+		font-weight: 500;
+	}
+	&.bold-colored {
+		font-weight: 500;
+		color: #393f70;
+	}
+	&.invoice-faded {
+		opacity: 0.8;
+		display: inline;
+	}
+	&.invoice-hover {
+		display: inline;
+		border-bottom: 1px dashed #000;
+		color: #393f70;
+		font-weight: 500;
+		opacity: 1;
+		margin: 0 4px;
+	}
+	&.billed-by {
+		text-transform: capitalize;
+	}
+	&.margin-left {
+		margin-left: 10px;
+	}
+};

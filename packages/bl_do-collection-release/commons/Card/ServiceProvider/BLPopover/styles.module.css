@@ -1,0 +1,36 @@
+.container{
+	&.main {
+		overflow: auto;
+		margin: -5px -9px;
+		position: relative;
+		z-index: 2;
+		border-radius: 4px;
+	}
+
+	&.header {
+		display: flex;
+		justify-content: space-between;
+		background: #fef6df;
+		padding: 10px 16px;
+	}
+	&.card {
+		display: flex;
+		justify-content: space-between;
+		padding: 10px 16px;
+		border-bottom: 1px solid #e0e0e0;
+	}
+	&.card:last-of-type {
+		border-bottom: none;
+	}
+};
+
+.text{
+	&.bl_number {
+		color: #da9a3b;
+		font-weight: 500;
+	}
+
+	&.title {
+		margin-right: 12px;
+	}
+};

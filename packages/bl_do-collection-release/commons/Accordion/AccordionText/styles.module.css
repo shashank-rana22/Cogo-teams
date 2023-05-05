@@ -1,0 +1,29 @@
+.container{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	border: 1px solid #e0e7f1;
+	border-radius: 4px 4px 0 0;
+	background: #fefcf4;
+};
+
+.text{
+	font-weight: 500;
+	display: inline;
+	margin-left: 4px;
+};
+
+.text_container{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	font-size: 12px;
+};
+
+.action_container{
+	display: flex;
+	align-items: center;
+	color: #034afd;
+	cursor: pointer;
+};

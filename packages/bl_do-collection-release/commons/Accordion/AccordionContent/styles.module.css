@@ -1,0 +1,115 @@
+
+.container{
+	padding: 10px;
+	background-color: #fff;
+	border: 1px solid #e0e0e0;
+	border-top: none;
+
+	.core-ui-button-root {
+		margin-left: auto;
+	}
+	.ui-tabs-list {
+		width: 20%;
+		margin: 12px;
+		padding: 12px;
+		border-bottom: none;
+	}
+	.ui-tabs-list.horizontal {
+		border-bottom: none !important;
+	}
+};
+
+.form_container{
+	width: 72%;
+	padding-left: 30px;
+	border-left: 1px solid rgba(216, 218, 227, 0.5);
+	margin-bottom: 16px;
+
+	.core-ui-tag-root.custom-pills {
+		padding: 18px;
+		margin-right: 10px;
+		background: transparent;
+
+		.core-ui-tag-text {
+			font-weight: 500;
+			font-size: 12px;
+			text-transform: capitalize;
+			color: #8c8d96;
+		}
+	}
+
+	.custom-pills.active {
+		.core-ui-tag-root {
+			background: #eff1ff;
+			border-color: #8b92cc;
+		}
+		.core-ui-tag-text {
+			color: #393f70;
+		}
+	}
+	.flex-wrap {
+		flex-wrap: wrap;
+	}
+	.admin > div {
+		margin: 0 !important;
+	}
+};
+
+.accordian_container{
+	display: flex;
+	justify-content: space-between;
+};
+
+.link{
+	font-weight: 500;
+	color: #393f70;
+	display: inline-block;
+	max-width: 230px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin-right: 5px;
+};
+
+.bottom_container{
+	border-top: 1px solid #d1d5e433;
+	padding: 10px 0;
+};
+
+.form_div{
+	display: flex;
+	flex-direction: column;
+	padding-left: 12px;
+};
+
+.list_container{
+	padding: 10px;
+	background-color: #fff;
+	border-top: none;
+
+	.card-list-header-root {
+		background: #393f70;
+		padding: 0 20px;
+		border-bottom: none;
+
+		.card-list-header-root-row {
+			align-items: center !important;
+			padding: 8px 0 !important;
+		}
+
+		.card-list-header-title {
+			color: #fff;
+			font-weight: normal;
+			font-size: 12px;
+		}
+	}
+	.card-body-row {
+		margin: 0 !important;
+
+		cursor: initial !important;
+
+		.card-body-col {
+			font-size: 12px;
+		}
+	}
+};

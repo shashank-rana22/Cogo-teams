@@ -1,0 +1,44 @@
+.container{
+	.ui-tabs-list {
+		width: 20%;
+		margin: 12px;
+		padding: 12px;
+		border-bottom: none;
+	}
+	.ui-tabs-list.horizontal {
+		border-bottom: none !important;
+	}
+};
+
+.list_container{
+	padding: 20px;
+	background-color: #fff;
+	border: 1px solid #e0e0e0;
+	border-top: none;
+
+	.card-list-header-root {
+		background: #393f70;
+		padding: 0 20px;
+		border-bottom: none;
+
+		.card-list-header-root-row {
+			align-items: center !important;
+			padding: 8px 0 !important;
+		}
+
+		.card-list-header-title {
+			color: #fff;
+			font-weight: normal;
+			font-size: 12px;
+		}
+	}
+	.card-body-row {
+		margin: 0 !important;
+
+		cursor: initial !important;
+
+		.card-body-col {
+			font-size: 12px;
+		}
+	}
+};

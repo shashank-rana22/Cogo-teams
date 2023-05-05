@@ -1,10 +1,14 @@
 .container{
   width: 100%;
-  .ui_tab_list_container{
-    margin: 16px;
-  }
-  .ui_ps_themeType_primary{
-    margin: 16px;
+  :global{
+    .ui_tab_list_container{
+      border-radius: 4px;
+      margin: 16px 0px;
+      background: var(--color-secondary-5);
+    }
+    .ui_tabs_list_title{
+      padding: 12px;
+    }
   }
 }
 
@@ -17,4 +21,14 @@
 
 .inner_tabs{
   margin: 16px 0px;
+  :global{
+    .ui_tabs_list_title{
+      padding: 4px;
+    }
+    .ui_tab_active{
+      border-bottom: none !important;
+      background: var(--color-primary-error-red-4);
+      color: #EE3425;
+    }
+  }
 }
