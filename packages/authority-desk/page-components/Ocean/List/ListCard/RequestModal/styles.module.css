@@ -15,6 +15,10 @@
 	}
 }
 
+.error_message {
+	color: var(--color-primary-error-red-2);
+}
+
 .checkbox_controller + .error_message {
 	margin-top: -10px;
 }
@@ -25,10 +29,6 @@
 			margin-right: 10px;
 		}
 	}
-}
-
-.error_message {
-	color: var(--color-primary-error-red-2);
 }
 
 .form_element {

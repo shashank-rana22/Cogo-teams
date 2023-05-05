@@ -24,7 +24,6 @@
 	display: flex;
 	width: 100%;
 	padding: 12px 24px;
-	font-family: Poppins;
 	border-right: 1px solid #f68b21;
 
 	> div:first-of-type {
