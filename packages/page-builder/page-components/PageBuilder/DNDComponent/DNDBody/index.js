@@ -92,6 +92,7 @@ function DNDBody({
 				previewMode={previewMode}
 				setPreviewMode={setPreviewMode}
 				isMobile={isMobile}
+
 			/>
 		</section>
 	);

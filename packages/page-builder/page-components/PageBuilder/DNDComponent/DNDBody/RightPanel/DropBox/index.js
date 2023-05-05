@@ -7,6 +7,7 @@ import { useDrop } from 'react-dnd';
 
 import VALID_ITEM_TYPES from '../../../../../../configurations/accept-items';
 import useGetActiveBackgroundColor from '../../../../../../helpers/useGetActiveBackgroundColor';
+import useGetHandleStagedItems from '../../../../../../helpers/useGetHandleStagedItems';
 import useGetMemoStagedItems from '../../../../../../helpers/useGetMemoStageItems';
 
 import styles from './styles.module.css';
@@ -83,7 +84,18 @@ function DropBox({
 
 	const isActive = canDrop && isOver;
 
-	const backgroundColor = useGetActiveBackgroundColor({ pageConfiguration, isActive, canDrop });
+	const backgroundColor = useGetActiveBackgroundColor({ pageConfiguration, isActive, canDrop, modeType });
+
+	const { handleStagedItem } = useGetHandleStagedItems({
+		stageItems,
+		isNewItemAdding,
+		isOver,
+		shouldAddBelow,
+		hoveredIndex,
+		handleUnselectItem,
+		setStageItems,
+		draggingItemType,
+	});
 
 	useEffect(() => {
 		// if (!isEqual(stageItems, component)) {
@@ -92,36 +104,8 @@ function DropBox({
 	}, [pageConfiguration]);
 
 	useEffect(() => {
-		const stagedItems = (stageItems.layouts || []).filter(({ id }) => !!id);
-
-		if (isNewItemAdding) {
-			if (isOver && isNewItemAdding) {
-				const startIndex = shouldAddBelow ? hoveredIndex + 1 : hoveredIndex;
-
-				handleUnselectItem();
-
-				if (startIndex === hoveredIndex && hoveredIndex !== 0 && startIndex !== 0) {
-					return;
-				}
-
-				setStageItems((prev) => ({
-					...prev,
-					layouts: [
-						...stagedItems.slice(0, startIndex),
-						{
-							component: {
-								type              : draggingItemType,
-								isDraggingPreview : true,
-							},
-						},
-						...stagedItems.slice(startIndex),
-					],
-				}));
-			}
-		} else {
-			setStageItems((prev) => ({ ...prev, layouts: stagedItems }));
-		}
-	}, [isOver, draggingItemType, isNewItemAdding, shouldAddBelow, hoveredIndex]);
+		handleStagedItem();
+	}, [handleStagedItem]);
 
 	const className = previewMode === 'mobile' ? `${styles.mobile_container}` : `${styles.container}`;
 

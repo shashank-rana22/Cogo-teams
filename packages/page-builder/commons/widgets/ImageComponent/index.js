@@ -1,9 +1,11 @@
+/* eslint-disable max-len */
 import { Modal } from '@cogoport/components';
-import { IcMCloudUpload } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import useUpdateComponentsContent from '../../../helpers/useUpdateComponentsContent';
 import UploadImageModal from '../../UploadImageModal';
+
+import styles from './styles.module.css';
 
 function ImageComponent(props) {
 	const {
@@ -44,16 +46,21 @@ function ImageComponent(props) {
 					<img width="100%" height="auto" src={content} alt="upload-img" />
 				</div>
 			) : (
-				<div style={{ display: 'flex', justifyContent: 'center' }}>
-					<div
-						onClick={() => setShowUploadModal(true)}
-						role="presentation"
-						style={{ cursor: 'pointer' }}
-					>
-						<IcMCloudUpload width={48} height={48} />
-						<div>Upload</div>
-					</div>
+
+				<div
+					onClick={() => { if (modeType === 'edit') { setShowUploadModal(true); } }}
+					role="presentation"
+					className={styles.image_drop}
+				>
+					<img
+						alt=""
+						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/svgviewer-png-output%20(4).png"
+						width="48px"
+						height="48px"
+					/>
+					<div>Drop your image here or browse</div>
 				</div>
+
 			)}
 
 			{showUploadModal && (

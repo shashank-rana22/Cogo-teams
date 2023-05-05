@@ -8,12 +8,13 @@ import Carousel from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import RenderElement from '../../../page-components/PageBuilder/DNDComponent/DNDBody/RightPanel/DropBox/Components/RenderElement';
+import DragPreview from '../../DragPreview';
 
 import styles from './styles.module.css';
 
 const CAROUSEL_SETTINGS = {
 	dots           : true,
-	infinite       : false,
+	infinite       : true,
 	speed          : 1000,
 	autoplaySpeed  : 3000,
 	slidesToShow   : 1,
@@ -45,9 +46,7 @@ function CarouselComponent({
 }) {
 	const { component, id: componentId } = widget || {};
 
-	const { children } = component || {};
-
-	// const { id: selectedRowId } = rowData || {};
+	const { children, isDraggingPreview } = component || {};
 
 	const { id: columnChildId } = selectedColumn || {};
 
@@ -96,6 +95,12 @@ function CarouselComponent({
 			setSelectedItem({});
 		}
 	};
+
+	if (isDraggingPreview) {
+		return (
+			<DragPreview type="carousel" />
+		);
+	}
 
 	return (
 		<div className={styles.container}>
@@ -218,11 +223,12 @@ function CarouselComponent({
 
 								{modeType === 'edit' && (
 									<div role="presentation" className={styles.show_wrapper}>
-										<Tooltip content="Click here to remove current slides" placement="bottom">
+										<Tooltip content="Remove current slide" placement="top">
 											<IcMDelete
 												height="24px"
 												width="24px"
 												cursor="pointer"
+												fill="#ee3425"
 												onClick={(e) => handleRemovelides(e, idx, widget)}
 											/>
 										</Tooltip>

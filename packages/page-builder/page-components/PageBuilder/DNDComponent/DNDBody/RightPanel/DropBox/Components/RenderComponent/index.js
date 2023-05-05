@@ -1,5 +1,4 @@
 /* eslint-disable import/no-cycle */
-// import ComponentsDropPreview from '../../../../../../../../commons/ComponentsDropPreview';
 import ColumnComponents from '../ColumnComponents';
 import RenderElement from '../RenderElement';
 
@@ -25,9 +24,9 @@ function RenderComponent({
 	modeType,
 	isMobile,
 }) {
-	// if (isDraggingPreview) {
-	// 	return <ComponentsDropPreview type={type} />;
-	// }
+	const { component } = rowData || {};
+
+	const { style } = component || {};
 
 	return (
 		<div>
@@ -57,7 +56,7 @@ function RenderComponent({
 					<div
 						style={{
 							...(type === 'divider'
-								? {} : rowData.component.style),
+								? {} : style),
 						}}
 					>
 						<RenderElement
