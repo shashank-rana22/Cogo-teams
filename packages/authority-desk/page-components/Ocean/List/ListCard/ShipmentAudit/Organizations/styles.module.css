@@ -1,14 +1,19 @@
 .heading {
-	margin: 24px 0 12px;
+	padding: 8px;
+	margin: 12px 0;
 	font-size: 16px;
 	font-weight: 700;
 }
 
+.container {
+	padding: 12px;
+}
+
 .org_card {
 	align-items: center;
-	width: 100%;
+	width: 96%;
 	padding: 8px;
-	margin-bottom: 12px;
+	margin: 6px 12px 6px 20px;
 	background: #fff;
 	border-radius: 8px;
 	box-shadow: 0 0 10px rgb(0 0 0 / 15%);

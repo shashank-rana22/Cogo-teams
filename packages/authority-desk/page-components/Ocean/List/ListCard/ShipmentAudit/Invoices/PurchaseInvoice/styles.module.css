@@ -15,11 +15,11 @@
 		display: flex;
 		padding: 6px;
 		text-align: center;
-		border-bottom: 1px solid #f2e3c3; 
-	} 
+		border-bottom: 1px solid #f2e3c3;
+	}
 
 	tbody {
-		max-height: 50px; 
+		max-height: 50px;
 		overflow-y: auto;
 	}
 

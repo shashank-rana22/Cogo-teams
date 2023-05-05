@@ -6,8 +6,8 @@ import useListInvoiceWrapper from '../../../../../../../hooks/useListInvoiceWrap
 
 import styles from './styles.module.css';
 
-function SalesInvoice() {
-	const { data } = useListInvoiceWrapper({});
+function SalesInvoice({ item = {} }) {
+	const { data } = useListInvoiceWrapper({ serial_id: item?.serial_id });
 
 	return (
 		<div className={styles.container}>

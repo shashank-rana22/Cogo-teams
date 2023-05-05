@@ -7,7 +7,7 @@ import OrgDetails from './OrgDetails';
 import styles from './styles.module.css';
 
 function Organizations() {
-	const { data, loading } = useGetOrganizationOutstanding();
+	const { data } = useGetOrganizationOutstanding();
 
 	const [orgDetails, setOrgDetails] = useState({});
 

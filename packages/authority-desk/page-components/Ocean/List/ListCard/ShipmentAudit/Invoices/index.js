@@ -22,14 +22,14 @@ function Invoices({ item }) {
 						name="purchase_invoices"
 						title="Purchase Invoices"
 					>
-						<PurchaseInvoice />
+						<PurchaseInvoice item={item} />
 					</TabPanel>
 
 					<TabPanel
 						name="sales_invoices"
 						title="Sales Invoices"
 					>
-						<SalesInvoice />
+						<SalesInvoice item={item} />
 					</TabPanel>
 				</Tabs>
 
