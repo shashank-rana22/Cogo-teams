@@ -2209,6 +2209,22 @@ const navigationMappingAdmin = {
 			},
 		],
 	},
+	saas_tools: {
+		key       : 'saas_tools',
+		title     : 'Saas Tools',
+		icon      : IcMTechops,
+		isSubNavs : true,
+		main_apis : [],
+		options   : [
+			{
+				key           : 'saas_tools-standard_milestones',
+				title         : 'Standard Milestones',
+				href          : '/v2/saas-tools/standard-milestones',
+				as            : '/v2/saas-tools/standard-milestones',
+				possible_apis : apis.saas_tools_standard_milestones,
+			},
+		],
+	},
 	ingestion: {
 		key           : 'ingestion',
 		title         : 'Ingestion',
