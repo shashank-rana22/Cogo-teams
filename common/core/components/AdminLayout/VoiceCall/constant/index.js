@@ -20,3 +20,9 @@ export const DEFAULT_PILLS_ITEMS = [
 		value : 'payment_recovery',
 	},
 ];
+
+export const CALL_END_STATUS = {
+	not_connected : 'Call not Connected',
+	missed        : 'Customer missed the call',
+	answered      : 'Call completed',
+};
