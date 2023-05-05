@@ -79,6 +79,7 @@ function FeedbackModal({ dispatch, profileData, showFeedbackModal }) {
 								size="md"
 								placeholder="Enter Remark"
 								value={inputValue}
+								rows={5}
 								onChange={(val) => setInputValue(val)}
 							/>
 							{showError && inputValue.length === 0 && (
