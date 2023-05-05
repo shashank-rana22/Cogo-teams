@@ -31,25 +31,6 @@
 	border-bottom: 1px solid #f2e3c3;
 }
 
-.shipment_extra_details {
-	display: flex;
-	align-items: center;
-	padding: 8px 16px;
-	border-bottom: 1px solid #f2e3c3;
-}
-
-.detention_demurrage {
-	width: 30%;
-	font-size: 12px;
-	border-right: 1px solid #f2e3c3;
-}
-
-.documents_and_invoices {
-	width: 30%;
-	padding-left: 24px;
-	font-size: 12px;
-}
-
 .documents {
 	width: fit-content;
 	font-size: 12px;
@@ -63,7 +44,7 @@
 }
 
 .validation {
-	display: flex; 
+	display: flex;
 	align-items: center;
 }
 

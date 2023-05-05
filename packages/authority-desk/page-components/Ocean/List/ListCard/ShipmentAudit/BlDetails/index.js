@@ -3,7 +3,10 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function BlDetails({ item = {} }) {
+function BlDetails({ item = {} }) { 
+
+const docsList = item?.bill_of_ladings || item?.delivery_orders;
+
 	return (
 		<div className={styles.container}>
 			<table>
@@ -19,7 +22,7 @@ function BlDetails({ item = {} }) {
 				</thead>
 
 				<tbody>
-					{(item?.bill_of_ladings || []).map((val) => (
+					{(docsList || []).map((val) => (
 						<tr key={val.id}>
 							<td>{startCase(item?.freight_service?.bl_category)}</td>
 							<td>{val?.bl_number}</td>

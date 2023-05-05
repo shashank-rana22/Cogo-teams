@@ -18,7 +18,6 @@ export default function List({
 	const { bucket, subApprovedBucket } = tabsState;
 
 	const { count_stats, total_count } = data;
-	console.log({ data });
 
 	const renderPagination = (
 		<Pagination

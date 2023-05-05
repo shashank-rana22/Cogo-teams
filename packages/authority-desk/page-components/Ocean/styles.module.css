@@ -14,11 +14,14 @@
 
 .bucket {
 	padding: 6px 12px;
-	margin: 8px;
 	cursor: pointer;
 	background-color: #fff;
 	border-radius: 6px;
 	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+
+	&:not(:last-of-type) {
+		margin-right: 8px;
+	}
 }
 
 .active.bucket {
