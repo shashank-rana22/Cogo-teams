@@ -11,7 +11,7 @@ function StepperTabs() {
 	const {
 		shipmentType = '', stepperTab = '', setStepperTab = () => {}, setActiveTab = () => {},
 		filters = {}, setFilters = () => {},
-	} =	 useContext(CostBookingDeskContext);
+	} = useContext(CostBookingDeskContext);
 
 	const stepperTabs = CONTROL_CONFIG[shipmentType];
 
