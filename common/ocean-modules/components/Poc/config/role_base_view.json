@@ -31,7 +31,7 @@
     "costbooking_ops_manager":{
         "trade_parties":["collection_party"],
         "can_view":["pocs","invoicing_party","service_provider"],
-        "can_edit":["pocs","invoicing_party","service_provider"],
+        "can_edit":["pocs","invoicing_party","service_provider"]
     },
     "lastmile_ops":{
         "trade_parties":["origin_cha","collection_party"],
