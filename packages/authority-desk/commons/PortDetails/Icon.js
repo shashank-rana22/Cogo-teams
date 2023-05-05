@@ -1,32 +1,18 @@
 import { IcCFfcl, IcAOceanLcl, IcCFclLocals } from '@cogoport/icons-react';
 
-function Icons({ service_type = '' }) {
-	console.log({ service_type });
+const serviceIconMapping = {
+	fcl_freight_service       : { icon: <IcCFfcl />, text: 'FCL' },
+	lcl_freight_service       : { icon: <IcAOceanLcl />, text: 'LCL' },
+	fcl_freight_local_service : { icon: <IcCFclLocals />, text: 'FCL Locals' },
+};
 
-	switch (service_type) {
-		case 'fcl_freight_service':
-			return (
-				<>
-					<IcCFfcl />
-					<span>FCL</span>
-				</>
-			);
-		case 'lcl_freight_service':
-			return (
-				<>
-					<IcAOceanLcl />
-					<span>LCL</span>
-				</>
-			);
-		case 'fcl_freight_local_service':
-			return (
-				<>
-					<IcCFclLocals />
-					<span>FCL Locals</span>
-				</>
-			);
-		default: return null;
-	}
+function Icons({ service_type = '' }) {
+	return service_type in serviceIconMapping ? (
+		<>
+			{serviceIconMapping[service_type].icon}
+			<span>{serviceIconMapping[service_type].text}</span>
+		</>
+	) : null;
 }
 
 export default Icons;

@@ -1,15 +1,18 @@
 import { format } from '@cogoport/utils';
 import React from 'react';
+import ClickableDiv from '../ClickableDiv';
 
 import styles from './styles.module.css';
 
 function ShipmentBreif({ item }) {
 	return (
 		<div className={styles.container}>
-			<div className={styles.serial_id}>
+			<ClickableDiv>
 				SID #
 				{' '}
 				{item?.serial_id}
+			</ClickableDiv>
+			<div className={styles.serial_id}>
 			</div>
 			<div className={styles.created_at}>
 				Created On
