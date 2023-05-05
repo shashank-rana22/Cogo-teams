@@ -40,7 +40,7 @@ function Filters() {
 						<Button
 							themeType="secondary"
 							onClick={() => {
-								// setPopoverFilter(filters);
+								setPopoverFilter(filters);
 								setShowPopover(!showPopover);
 							}}
 						>

@@ -23,14 +23,16 @@ function FilterBy({
 	const handleReset = () => {
 		const { startDate, endDate } = DATE_RANGE_MAPPING.today;
 
-		setFilters({
-			...filters,
-			date_type : undefined,
-			dateRange : 'today',
-			startDate,
-			endDate,
+		if (filters.startDate !== startDate && filters.endDate !== endDate) {
+			setFilters({
+				...filters,
+				date_type : undefined,
+				dateRange : 'today',
+				startDate,
+				endDate,
 
-		});
+			});
+		}
 		setShowPopover(false);
 	};
 
