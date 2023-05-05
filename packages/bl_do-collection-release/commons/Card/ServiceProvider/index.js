@@ -51,12 +51,105 @@ export default function ServiceProvider({ item = {}, activeTab = '' }) {
 		: 'DO';
 
 	return (
+
 		<div className={cl`${styles.container} ${styles.service_provider}`}>
-			<div>
-				Service provider
+			<div className={cl`${styles.container} ${styles.col} ${styles.sp_customer_details}`}>
+				<div className={cl`${styles.container} ${styles.row}`}>
+					<div className={cl`${styles.container} ${styles.half_width}`}>
+						<div className={cl`${styles.text} ${styles.thin}`}>Service Provider</div>
+
+						{/* <ToolTip
+							animation="shift-away"
+							theme="light-border"
+							interactive
+							content={(
+								<div className={cl`{styles.text}`} className="bold service-provider">
+									{(item?.service_provider?.business_name || '').toLowerCase()}
+								</div>
+							)}
+						>
+							<div className={cl`{styles.text}`} className="bold service-provider ellipsis-text">
+								{(item?.service_provider?.business_name || '').toLowerCase()}
+							</div>
+						</ToolTip> */}
+					</div>
+
+					<div className={cl`${styles.container}  ${styles.half_width}`}>
+						<div className={cl`${styles.text}  ${styles.thin}`}>Customer</div>
+
+						{/* <ToolTip
+							animation="shift-away"
+							theme="light-border"
+							interactive
+							content={(
+								<div className={cl`${styles.text} ${styles.bold} ${styles.service_provider}`}>
+									{(item?.customer?.business_name || '').toLowerCase()}
+								</div>
+							)}
+						>
+							<div className={cl`${styles.text} ${styles.bold}
+              ${styles.service_provider} ${styles.ellipsis_text}`}
+							>
+								{(item?.customer?.business_name || '').toLowerCase()}
+							</div>
+						</ToolTip> */}
+					</div>
+				</div>
+
+				<div className={cl`${styles.container}`}>
+					<div className={cl`${styles.text}  ${styles.thin}`}>Service Provider Contact</div>
+					{/*
+					<Popover
+						theme="light-border"
+						animation="shift-away"
+						interactive
+						content={(
+							<SPPopver
+								spDetails={item?.organization_poc}
+								address={item?.organization_address}
+							/>
+						)}
+					>
+						<div className={cl`${styles.text} ${styles.bold} ${styles.link} ${styles.inline}`}>
+							Click here to view
+							<IcMUserAllocations style={styleIcon} />
+						</div>
+					</Popover> */}
+				</div>
 			</div>
-			<div>contac</div>
-			<div className={styles.border_right} />
+
+			<div className={cl`${styles.container} ${styles.col} ${styles.half_width}`}>
+				<div className={cl`${styles.container}`}>
+					<div className={cl`${styles.text} ${styles.thin}`}>
+						{docTitle}
+						{' '}
+						Details
+					</div>
+					{/* {docsLength > 0 ? (
+						<Popover
+							animation="shift-away"
+							theme="light-border"
+							content={<BLPopver bl_do={docTitle} blDetails={list_of_docs} />}
+						>
+							<div className={cl`${styles.container} ${styles.cursor} ${styles.inline}`}>
+								<div className={cl`${styles.text} ${styles.document}`}>{doc_number}</div>
+								{remainLength ? (
+									<div className={styles.more}>
+										+
+										{remainLength}
+										{' '}
+										MORE
+									</div>
+								) : null}
+							</div>
+						</Popover>
+					) : null} */}
+				</div>
+
+				<div className={cl`${styles.container} ${styles.row}`}>
+					<ExtraDetails activeTab={activeTab} item={item} />
+				</div>
+			</div>
 		</div>
 	);
 }

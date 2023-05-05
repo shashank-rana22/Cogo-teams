@@ -17,6 +17,7 @@ export default function List({ data = {}, stateProps, couldBeCardsCritical = fal
 						<Card
 							key={item?.id}
 							item={item}
+							stateProps={stateProps}
 							couldBeCardsCritical={couldBeCardsCritical}
 							activeTab={activeTab}
 						/>

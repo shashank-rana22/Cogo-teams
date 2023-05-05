@@ -15,9 +15,8 @@
 	}
 
 	&.shipment_details {
-		margin: auto;
 		display: flex;
-		width: 10%;
+		width: 15%;
 		justify-content: space-evenly;
 		* {
 			font-size: 12px;

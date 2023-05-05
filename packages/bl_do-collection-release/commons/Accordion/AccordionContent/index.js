@@ -1,4 +1,4 @@
-//import CardList from '@cogo/bookings/commons/CardList';
+// import CardList from '@cogo/bookings/commons/CardList';
 import { Button, Tabs, TabPanel } from '@cogoport/components';
 import { useState, useRef } from 'react';
 
@@ -103,20 +103,20 @@ export default function AccordionContent({
 							tasksLoading={false}
 						/>
 					) : ( */}
-						<div className={styles.accordian_container}>
-							<AccordianTimeline
-								stepCount={currentStep?.count}
-								stepsData={taskConfig?.steps}
+					<div className={styles.accordian_container}>
+						<AccordianTimeline
+							stepCount={currentStep?.count}
+							stepsData={taskConfig?.steps}
+						/>
+						<div className={styles.form_container}>
+							<CustomTasks
+								ref={formRef}
+								setMyForm={setMyForm}
+								controls={mutatedControls}
+								handleNextAction={handleNextAction}
 							/>
-							<div className={styles.form_container}>
-								<CustomTasks
-									ref={formRef}
-									setMyForm={setMyForm}
-									controls={mutatedControls}
-									handleNextAction={handleNextAction}
-								/>
-							</div>
 						</div>
+					</div>
 					{/* )} */}
 				</div>
 

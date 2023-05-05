@@ -7,6 +7,7 @@ import { isCardCritical } from '../../helpers/isCardCritical';
 // import usePendingTask from '../../../hooks/usePendingTask';
 // import Accordion from '../Accordion';
 
+import LocaionDetails from './LocationDetails';
 import ServiceProvider from './ServiceProvider';
 import ShipmentDetails from './ShipmentDetails';
 import styles from './styles.module.css';
@@ -21,6 +22,7 @@ const stakeholderMappings = {
 export default function Card({
 	activeTab = '',
 	item = {},
+	stateProps = {},
 	openItem = null,
 	setOpenItem = () => {},
 	refetchList = () => {},
@@ -104,9 +106,17 @@ export default function Card({
 	return (
 		<>
 			<div className={cl`${styles.main_container} ${styles[cardClassName]}`}>
-				<ShipmentDetails item={item} />
+				<ShipmentDetails item={item} stateProps={stateProps} />
 
-				<ServiceProvider item={item} activeTab={activeTab} />
+				<div className={styles.border_right} />
+
+				<LocaionDetails item={item} stateProps={stateProps} />
+
+				<div className={styles.border_right} />
+
+				<ServiceProvider item={item} stateProps={stateProps} />
+
+				<div className={styles.border_right} />
 
 				<div className={cl`${styles.container} ${styles.action}`}>
 					{actionButton?.show ? (
@@ -152,7 +162,7 @@ export default function Card({
 					show={confirmationModal?.show}
 					onClose={closeModal}
 					className="primary md"
-					afterOpen={getShipmentPendingTask}
+					// afterOpen={getShipmentPendingTask}
 				>
 					<Modal.Header>
 						<div className={styles.label}>{confirmationModal?.labelText}</div>
@@ -161,15 +171,15 @@ export default function Card({
 					<Modal.Footer>
 						<div className={cl`${styles.container} ${styles.row}`}>
 							<Button
-								disabled={loading}
+								// disabled={loading}
 								onClick={closeModal}
 								className="primary md"
 							>
 								CANCEL
 							</Button>
 							<Button
-								disabled={loading}
-								onClick={handleSubmit}
+								// disabled={loading}
+								// onClick={handleSubmit}
 								className="primary md"
 							>
 								CONFIRM

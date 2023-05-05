@@ -1,8 +1,11 @@
+
 .main_container{
 	display: flex;
 	border-radius: 4px;
 	background: #fff;
-	padding: 10px 10px 44px 10px;
+	margin: 24px;
+	padding: 12px;
+	border: 1px solid #88CAD1;
 	min-height: 170px;
 
 	&.no-accordion {
@@ -98,3 +101,10 @@
 		padding: 30px;
 	}
 };
+
+.border_right{
+	display: flex;
+	flex-direction: flex-end;
+	width: 2%;
+	border-right: 1px solid #88CAD1;
+}

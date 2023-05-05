@@ -28,7 +28,7 @@ function CustomTasks({ setMyForm = () => {}, controls }, ref) {
 	);
 
 	// return <Layout fields={fields} controls={controls} errors={errors} />;
-	return <div>AccordianTimeline</div>
+	return <div>AccordianTimeline</div>;
 }
 
 export default forwardRef(CustomTasks);
