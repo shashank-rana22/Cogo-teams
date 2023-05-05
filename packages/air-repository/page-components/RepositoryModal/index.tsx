@@ -65,13 +65,13 @@ function RepositoryModal({ showModal, setShowModal, listRepository, item, edit, 
 				Repository
 			</div>
 			<Layout fields={fields.basic} control={control} errors={errors} />
-			{['email', 'both'].includes(mode) && (
+			{['email', 'email_and_platform'].includes(mode) && (
 				<>
 					<div className={styles.modal_header} style={{ marginTop: 24 }}>E-mail Information</div>
 					<Layout fields={fields.email} control={control} errors={errors} />
 				</>
 			)}
-			{['platform', 'both'].includes(mode) && (
+			{['platform', 'email_and_platform'].includes(mode) && (
 				<>
 					<div className={styles.modal_header} style={{ marginTop: 24 }}>Platform Information</div>
 					<Layout fields={fields.platform} control={control} errors={errors} />

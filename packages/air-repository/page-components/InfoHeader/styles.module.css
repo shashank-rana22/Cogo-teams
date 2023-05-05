@@ -1,10 +1,17 @@
 .info_container {
 	display: flex;
 	align-items: center;
+	:global {
+		.tippy-box {
+			min-width: initial;
+			min-height: initial;
+			padding: 4px;
+		}
+	}
 }
 
 .info_content {
-	font-size: 14px;
+	font-size: 12px;
 
 	span {
 		margin: 4px;

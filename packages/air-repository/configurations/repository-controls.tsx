@@ -19,7 +19,7 @@ const repositoryControls = () => ({
 			options     : [
 				{ value: 'email', label: 'E-mail' },
 				{ value: 'platform', label: 'Platform' },
-				{ value: 'both', label: 'E-mail/Platform' },
+				{ value: 'email_and_platform', label: 'E-mail/Platform' },
 			],
 			span  : 6,
 			rules : {
