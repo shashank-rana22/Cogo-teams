@@ -58,3 +58,7 @@
 .cursor {
 	cursor: pointer;
 }
+
+.tool_tip {
+	font-size: 12px;
+}

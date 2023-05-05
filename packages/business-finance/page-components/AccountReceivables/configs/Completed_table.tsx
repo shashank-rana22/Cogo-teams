@@ -59,12 +59,12 @@ const completedColumn = (
 					<Tooltip
 						interactive
 						placement="top"
-						content={getByKey(row, 'organizationName') as string}
+						content={<div className={styles.tool_tip}>{getByKey(row, 'organizationName') as string}</div>}
 					>
 						<text className={styles.cursor}>
 							{`${(getByKey(row, 'organizationName') as string).substring(
 								0,
-								20,
+								10,
 							)}...`}
 						</text>
 					</Tooltip>
@@ -82,15 +82,37 @@ const completedColumn = (
 		accessor : (row) => (
 			(
 				<div className={styles.fieldPair}>
-
-					<div
-						className={styles.link}
-						onClick={() => window.open(getDocumentUrl({ itemData: row }) as string, '_blank')}
-						role="presentation"
-					>
-						{getDocumentNumber({ itemData: row })}
-
-					</div>
+					{(getDocumentNumber({ itemData: row }) as string).length > 10 ? (
+						<Tooltip
+							interactive
+							placement="top"
+							content={(
+								<div className={styles.tool_tip}>
+									{getDocumentNumber({ itemData: row }) as string}
+								</div>
+							)}
+						>
+							<text
+								className={styles.link}
+								onClick={() => window.open(getDocumentUrl({ itemData: row }) as string, '_blank')}
+								role="presentation"
+							>
+								{`${(getDocumentNumber({ itemData: row }) as string).substring(
+									0,
+									10,
+								)}...`}
+							</text>
+						</Tooltip>
+					)
+						: (
+							<div
+								className={styles.link}
+								onClick={() => window.open(getDocumentUrl({ itemData: row }) as string, '_blank')}
+								role="presentation"
+							>
+								{getDocumentNumber({ itemData: row }) as string}
+							</div>
+						)}
 					<div>
 						<Pill size="sm" color={invoiceType[(getByKey(row, 'invoiceType') as string)]}>
 							{startCase(getByKey(row, 'invoiceType') as string)}
@@ -99,7 +121,7 @@ const completedColumn = (
 				</div>
 			)
 		),
-		id: 'invice_number',
+		id: 'invoice_number',
 
 	},
 	{
@@ -111,7 +133,7 @@ const completedColumn = (
 					<Tooltip
 						interactive
 						placement="top"
-						content={getByKey(row, 'sidNo') as string}
+						content={<div className={styles.tool_tip}>{getByKey(row, 'sidNo') as string}</div>}
 					>
 						<text className={styles.sid}>
 							{`${(getByKey(row, 'sidNo') as string).substring(
@@ -131,7 +153,11 @@ const completedColumn = (
 					<Tooltip
 						interactive
 						placement="top"
-						content={startCase(getByKey(row, 'serviceType') as string)}
+						content={(
+							<div className={styles.tool_tip}>
+								{startCase(getByKey(row, 'serviceType') as string)}
+							</div>
+						)}
 					>
 						<text className={styles.cursor}>
 							{`${startCase(getByKey(row, 'serviceType') as string).substring(
@@ -150,9 +176,9 @@ const completedColumn = (
 		),
 	},
 	{
-		Header   : 'Entity Type',
+		Header   : 'Entity',
 		accessor : (row) => (
-			<div>
+			<div style={{ width: '30px' }}>
 				{getByKey(row, 'entityCode') as string}
 			</div>
 		),
@@ -187,7 +213,30 @@ const completedColumn = (
 				</div>
 				<div>
 					<Pill size="sm" color={status[(getByKey(row, 'status') as string)]}>
-						{startCase(getByKey(row, 'status') as string)}
+
+						{(startCase(getByKey(row, 'status') as string)).length > 10 ? (
+							<Tooltip
+								interactive
+								placement="top"
+								content={(
+									<div className={styles.tool_tip}>
+										{startCase(getByKey(row, 'status') as string)}
+									</div>
+								)}
+							>
+								<text>
+									{`${startCase(getByKey(row, 'status') as string).substring(
+										0,
+										10,
+									)}...`}
+								</text>
+							</Tooltip>
+						)
+							: (
+								<div>
+									{startCase(getByKey(row, 'status') as string)}
+								</div>
+							)}
 					</Pill>
 				</div>
 			</div>
@@ -288,7 +337,32 @@ const completedColumn = (
 
 			<div>
 				<Pill size="sm" color={invoiceStatus[(getByKey(row, 'invoiceStatus') as string)]}>
-					{startCase(getByKey(row, 'invoiceStatus') as string)}
+
+					{(startCase(getByKey(row, 'invoiceStatus') as string)).length > 10 ? (
+						<Tooltip
+							interactive
+							placement="top"
+							content={(
+								<div
+									className={styles.tool_tip}
+								>
+									{startCase(getByKey(row, 'invoiceStatus') as string)}
+								</div>
+							)}
+						>
+							<text>
+								{`${startCase(getByKey(row, 'invoiceStatus') as string).substring(
+									0,
+									10,
+								)}...`}
+							</text>
+						</Tooltip>
+					)
+						: (
+							<div>
+								{startCase(getByKey(row, 'invoiceStatus') as string)}
+							</div>
+						)}
 				</Pill>
 
 			</div>
