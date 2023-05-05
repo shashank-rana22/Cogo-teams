@@ -1,6 +1,7 @@
 import { Pill, Tooltip } from '@cogoport/components';
 import getPrice from '@cogoport/forms/utils/get-formatted-price';
 import { format, getByKey, startCase } from '@cogoport/utils';
+import { CSSProperties } from 'react';
 
 import InvoiceDetails from '../commons/invoiceDetails';
 import Remarks from '../commons/Remarks';
@@ -211,34 +212,39 @@ const completedColumn = (
 
 					</div>
 				</div>
-				<div>
-					<Pill size="sm" color={status[(getByKey(row, 'status') as string)]}>
 
-						{(startCase(getByKey(row, 'status') as string)).length > 10 ? (
-							<Tooltip
-								interactive
-								placement="top"
-								content={(
-									<div className={styles.tool_tip}>
-										{startCase(getByKey(row, 'status') as string)}
-									</div>
-								)}
-							>
-								<text>
-									{`${startCase(getByKey(row, 'status') as string).substring(
-										0,
-										10,
-									)}...`}
-								</text>
-							</Tooltip>
-						)
-							: (
-								<div>
+				<div
+					className={styles.styled_pills}
+					style={{
+						'--color': status[(getByKey(row, 'status') as string)],
+					} as CSSProperties}
+				>
+
+					{startCase(getByKey(row, 'status') as string).length > 10 ? (
+						<Tooltip
+							interactive
+							placement="top"
+							content={(
+								<div className={styles.tool_tip}>
 									{startCase(getByKey(row, 'status') as string)}
 								</div>
 							)}
-					</Pill>
+						>
+							<text className={styles.style_text}>
+								{`${startCase(getByKey(row, 'status') as string).substring(
+									0,
+									10,
+								)}...`}
+							</text>
+						</Tooltip>
+					)
+						: (
+							<div className={styles.style_text}>
+								{startCase(getByKey(row, 'status') as string)}
+							</div>
+						)}
 				</div>
+
 			</div>
 		),
 		id: 'invoice_amount',
@@ -335,37 +341,40 @@ const completedColumn = (
 		Header   : 'Proforma Status',
 		accessor : (row) => (
 
-			<div>
-				<Pill size="sm" color={invoiceStatus[(getByKey(row, 'invoiceStatus') as string)]}>
+			<div
+				className={styles.styled_pills}
+				style={{
+					'--color': invoiceStatus[(getByKey(row, 'invoiceStatus') as string)],
+				} as CSSProperties}
+			>
 
-					{(startCase(getByKey(row, 'invoiceStatus') as string)).length > 10 ? (
-						<Tooltip
-							interactive
-							placement="top"
-							content={(
-								<div
-									className={styles.tool_tip}
-								>
-									{startCase(getByKey(row, 'invoiceStatus') as string)}
-								</div>
-							)}
-						>
-							<text>
-								{`${startCase(getByKey(row, 'invoiceStatus') as string).substring(
-									0,
-									10,
-								)}...`}
-							</text>
-						</Tooltip>
-					)
-						: (
-							<div>
+				{(startCase(getByKey(row, 'invoiceStatus') as string)).length > 10 ? (
+					<Tooltip
+						interactive
+						placement="top"
+						content={(
+							<div
+								className={styles.tool_tip}
+							>
 								{startCase(getByKey(row, 'invoiceStatus') as string)}
 							</div>
 						)}
-				</Pill>
-
+					>
+						<text className={styles.style_text}>
+							{`${startCase(getByKey(row, 'invoiceStatus') as string).substring(
+								0,
+								10,
+							)}...`}
+						</text>
+					</Tooltip>
+				)
+					: (
+						<div className={styles.style_text}>
+							{startCase(getByKey(row, 'invoiceStatus') as string)}
+						</div>
+					)}
 			</div>
+
 		),
 	},
 
