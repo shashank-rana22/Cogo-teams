@@ -52,7 +52,7 @@ function Child({
 		}
 	}
 
-	const getNewControls = (item) => {
+	const getNewControls = (item = {} ) => {
 		let newProps = { ...item };
 
 		const { type } = item;
