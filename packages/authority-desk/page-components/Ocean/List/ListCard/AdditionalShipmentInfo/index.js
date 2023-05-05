@@ -21,7 +21,8 @@ function AdditionalShipmentInfo({ item = {} }) {
 				</div>
 
 				<div>
-					Total Customer Outstanding of shipment :
+					Total Customer Outstanding of shipment : &nbsp; &nbsp;
+
 					{formatAmount({
 						amount   : item?.invoice_status?.invoice_total?.[orgDetails?.id],
 						currency : item?.currency,

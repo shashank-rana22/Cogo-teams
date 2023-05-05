@@ -81,16 +81,20 @@ function Ocean() {
 					))}
 				</div>
 
-				<div className={styles.version}>
-					<Toggle
-						size="md"
-						onLabel="Old"
-						offLabel="New"
-						onChange={handleVersionChange}
-					/>
+				<div>
+
+					<div className={styles.version}>
+						<Toggle
+							size="md"
+							onLabel="Old"
+							offLabel="New"
+							onChange={handleVersionChange}
+						/>
+					</div>
+
+					{role === 'kam' ? <ScopeSelect size="md" /> : null}
 				</div>
 
-				{role === 'kam' ? <ScopeSelect size="md" /> : null}
 			</div>
 
 			<div className={styles.list_filters}>

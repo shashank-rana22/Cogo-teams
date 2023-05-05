@@ -1,35 +1,51 @@
-import { startCase } from '@cogoport/utils';
+import { format, startCase, upperCase } from '@cogoport/utils';
 import React from 'react';
+
+import ClickableDiv from '../../../../../../commons/ClickableDiv';
 
 import styles from './styles.module.css';
 
-function BlDetails({ item = {} }) { 
+function BlDetails({ item = {} }) {
+	const docsList = item?.bill_of_ladings || item?.delivery_orders;
 
-const docsList = item?.bill_of_ladings || item?.delivery_orders;
+	const docUrl = (val) => (
+		<ClickableDiv className={styles.url} onClick={() => window.open(val?.document_url, '_blank')}>
+			View
+		</ClickableDiv>
+	);
 
 	return (
 		<div className={styles.container}>
 			<table>
 				<thead>
 					<tr className={styles.row}>
-						<th>Category</th>
+						<th>
+							BL/DO
+							&nbsp;
+							(
+							{docsList?.length || ' '}
+							)
+							&nbsp;
+						</th>
 						<th> Document Number</th>
-						<th>Collection Status</th>
-						<th>Type</th>
+						<th>Status</th>
+						<th>BL Type</th>
 						<th>Release Date</th>
 						<th>Delivery Mode</th>
+						<th>Document Url</th>
 					</tr>
 				</thead>
 
 				<tbody>
 					{(docsList || []).map((val) => (
 						<tr key={val.id}>
-							<td>{startCase(item?.freight_service?.bl_category)}</td>
+							<td>{startCase(val?.bl_document_type || val?.do_document_type)}</td>
 							<td>{val?.bl_number}</td>
-							<td>{startCase(val?.status)}</td>
-							<td>{startCase(val?.status)}</td>
-							<td>{item?.expected_release_date || '--'}</td>
+							<td>{startCase(val?.status) || '--'}</td>
+							<td>{upperCase(item?.freight_service?.bl_type)}</td>
+							<td>{format(item?.expected_release_date, 'dd MMM yyyy', null, true)}</td>
 							<td>{startCase(val?.delivery_mode)}</td>
+							<td>{docUrl(val)}</td>
 						</tr>
 					))}
 

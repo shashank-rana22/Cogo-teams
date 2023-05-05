@@ -29,7 +29,7 @@ const useListInvoiceWrapper = ({ serial_id = '', registerationNumber = '' }) => 
 				Toast.error(err?.message);
 			}
 		})();
-	}, [trigger]);
+	}, [trigger, serial_id, registerationNumber]);
 
 	useEffect(() => {
 		getInvoicesList();

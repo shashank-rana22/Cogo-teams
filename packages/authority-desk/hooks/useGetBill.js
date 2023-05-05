@@ -1,8 +1,9 @@
-import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
-const useGetBill = ({ serial_id}) => {
+import toastApiError from '../utils/toastApiError';
+
+const useGetBill = ({ serial_id }) => {
 	const [
 		{ loading: billsApiLoading },
 		listExpenseInvoicesTrigger,
@@ -30,7 +31,7 @@ const useGetBill = ({ serial_id}) => {
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [listExpenseInvoicesTrigger]);
+	}, [listExpenseInvoicesTrigger, serial_id]);
 
 	useEffect(() => {
 		listApi();
