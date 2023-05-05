@@ -19,10 +19,10 @@ function RenderAddRateForm({
 		number : InputController,
 	};
 
-	function FormElement({ name, label, type, ...rest }) {
+	function FormElement({ name, label, type, show, ...rest }) {
 		const Element = controlTypeMapping[type];
 
-		return Element ? (
+		return Element && show ? (
 			<div>
 				<div className={styles.label}>{label}</div>
 				<Element name={name} type={type} {...rest} />

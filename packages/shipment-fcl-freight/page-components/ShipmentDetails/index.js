@@ -12,6 +12,7 @@ const Superadmin = dynamic(() => import('./StakeholdersView/Superadmin'), { ssr:
 const DKam = dynamic(() => import('./StakeholdersView/ConsigneeShipperBookingAgent'), { ssr: false });
 const Kam = dynamic(() => import('./StakeholdersView/BookingAgent'), { ssr: false });
 const BookingDesk = dynamic(() => import('./StakeholdersView/BookingDesk'), { ssr: false });
+const LastMileDesk = dynamic(() => import('./StakeholdersView/LastMileDesk'), { ssr: false });
 
 const shipment_additional_methods = ['main_service', 'documents'];
 
@@ -37,10 +38,12 @@ function ShipmentDetails() {
 		case 'booking_desk':
 		case 'booking_desk_manager':
 			return <BookingDesk get={get} activeStakeholder={activeStakeholder} />;
-
+		case 'lastmile_ops':
+		case 'lastmile_ops_manager':
+			return <LastMileDesk get={get} activeStakeholder={activeStakeholder} />;
 		case 'admin':
 		case 'superadmin':
-			return <Superadmin get={get} activeStakeholder="superadmin" />;
+			return <Superadmin get={get} activeStakeholder={activeStakeholder} />;
 		default:
 			return (
 				<h1 className={styles.not_allowed}>
