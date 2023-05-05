@@ -18,7 +18,7 @@ function List({ checkedItems, setCheckedItems, setSelectAll, data }) {
 
 	return (
 		<div className={styles.container}>
-			{data.map((item) => (
+			{(data || []).map((item) => (
 				<Card
 					item={item}
 					handleCheck={handleCheck}
