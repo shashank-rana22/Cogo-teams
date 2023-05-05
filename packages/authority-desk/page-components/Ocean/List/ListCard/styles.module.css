@@ -63,7 +63,8 @@
 }
 
 .validation {
-	display: flex;
+	display: flex; 
+	align-items: center;
 }
 
 .bl_details {

@@ -1,6 +1,6 @@
 import { Button, Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMLiveChat } from '@cogoport/icons-react';
+import { IcMLiveChat , IcCRedCircle, IcCYelloCircle } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -21,7 +21,13 @@ function ListCard({ item = {}, role = '', tabsState = {} }) {
 
 	const closeModal = () => setShowModal(false);
 
-	const { freight_service, bill_of_ladings } = item;
+	const { freight_service, bill_of_ladings } = item; 
+
+
+const IconMapping = {
+	red: <IcCRedCircle height={12} width={12} />,
+	yellow: <IcCYelloCircle height={12} width={12} />,
+};
 
 	const {
 		free_days_demurrage_destination,
@@ -125,11 +131,13 @@ function ListCard({ item = {}, role = '', tabsState = {} }) {
 						</div>
 
 						<div className={styles.documents_and_invoices}>
-							<div className={styles.validation}>
+							<div className={styles.validation}> 
+							{item?.invoice_status?.is_payment_validated
+						? IconMapping.yellow
+						: IconMapping.red}
 								Sales Invoice Status:
-								{'  '}
 								<span className={styles.text}>
-									{item?.invoice_status
+									{item?.invoice_status?.is_invoice_validated
 										? 'System Validated '
 										: 'Validation Pending'}
 									&nbsp;
