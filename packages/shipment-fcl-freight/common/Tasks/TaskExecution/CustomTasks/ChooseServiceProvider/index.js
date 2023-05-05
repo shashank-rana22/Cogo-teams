@@ -100,6 +100,7 @@ function ChooseServiceProvider({
 		data?.list?.length > 0
 			? data?.list.map((item) => (
 				<Card
+					key={item?.id}
 					item={item}
 					priority={item.priority}
 					handleUpdateTask={handleUpdateTask}
