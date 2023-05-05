@@ -1,4 +1,4 @@
-import { Badge, Button, Popover } from '@cogoport/components';
+import { Badge, Button, Popover, Tooltip } from '@cogoport/components';
 import { IcMEdit, IcMDelete } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 import React from 'react';
@@ -70,20 +70,33 @@ function Details({
 				</Popover>
 			</div>
 		),
-		handleEditDetail: (singleItem) => (
-			<div className={styles.edit_detail}>
-				Last Edited :
-				<span>
-					BY:
-					{' '}
-					{singleItem.last_edited_by}
-					{' '}
-					-
-					{' '}
-					{format(singleItem.updated_at, 'dd/MM/yy hh:mm', {}, false)}
-				</span>
-			</div>
-		),
+		handleEditDetail: (singleItem) => {
+			const editDetail = (
+				<div className={styles.edit_detail}>
+					Last Edited :
+					<span>
+						BY:
+						{' '}
+						{singleItem.last_edited_by}
+						{' '}
+						-
+						{' '}
+						{format(singleItem.updated_at, 'dd/MM/yy hh:mm', {}, false)}
+					</span>
+				</div>
+			);
+			return (
+				<div className={styles.tooltip_container}>
+					<Tooltip
+						content={editDetail}
+						placement="top"
+						interactive
+					>
+						<div className={styles.tooltip_text}>{editDetail}</div>
+					</Tooltip>
+				</div>
+			);
+		},
 	};
 	return (
 		<div className={styles.details_list}>

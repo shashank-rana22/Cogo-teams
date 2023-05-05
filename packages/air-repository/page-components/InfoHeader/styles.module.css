@@ -1,6 +1,7 @@
 .info_container {
 	display: flex;
 	align-items: center;
+
 	:global {
 		.tippy-box {
 			min-width: initial;

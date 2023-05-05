@@ -43,3 +43,20 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
+.tooltip_container {
+	:global {
+		.tippy-box {
+			min-width: initial;
+			min-height: initial;
+			padding: 4px;
+			font-size: 12px;
+		}
+	}
+}
+
+.tooltip_text {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

@@ -1,11 +1,11 @@
-import { Tooltip } from '@cogoport/components';
 import {
 	getByKey, isEmpty, startCase,
 } from '@cogoport/utils';
 import React, { ReactElement } from 'react';
 
 import { NestedObj, FunctionObjects, FieldType } from '../Interfaces/index';
-import styles from '../styles.module.css';
+
+import OverflowCheck from './OverflowCheck';
 
 const ACTIONS = {
 	startCase,
@@ -29,8 +29,6 @@ const getValue = (
 
 	let val:Value = getByKey(itemData, itemField.key || '');
 
-	const isTooltipRequired = (itemField.span * 10) * 2 < val?.length;
-
 	if (itemField.func) {
 		if (functions[itemField.func]) {
 			val = functions[itemField.func](itemData, itemField);
@@ -39,23 +37,7 @@ const getValue = (
 		}
 	}
 
-	const finalValue = () => {
-		if (isTooltipRequired) {
-			return (
-				<div className={styles.tooltip_container}>
-					<Tooltip
-						content={val}
-						placement="top"
-						interactive
-					>
-						<div className={styles.tooltip_text}>{val}</div>
-					</Tooltip>
-				</div>
-			);
-		}
-		return val;
-	};
-	return val === null || val === undefined ? '-' : finalValue();
+	return val === null || val === undefined ? '-' : OverflowCheck({ children: val });
 };
 
 export default getValue;
