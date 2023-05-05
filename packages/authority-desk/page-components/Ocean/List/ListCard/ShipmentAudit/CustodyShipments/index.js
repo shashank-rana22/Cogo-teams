@@ -31,8 +31,8 @@ function OrgShipments({ item = {} }) {
 	const renderBLDetails = (blDetails) => (
 		<div>
 			{['uploaded', 'pending'].includes(blDetails.status)
-      	? docStatusMapping[blDetails.status]
-      	: startCase(blDetails.status)}
+				? docStatusMapping[blDetails.status]
+				: startCase(blDetails.status)}
 		</div>
 	);
 
@@ -59,25 +59,25 @@ function OrgShipments({ item = {} }) {
 				</thead>
 
 				<tbody>
-					{(list || []).map((item) => (
-						<tr className={styles.row} key={item.serial_id}>
-							<td>{item?.serial_id}</td>
+					{(list || []).map((val) => (
+						<tr className={styles.row} key={val.serial_id}>
+							<td>{val?.serial_id}</td>
 							<td>
-								{startCase(item?.shipment_type)}
+								{startCase(val?.shipment_type)}
 								{' '}
 							</td>
-							<td>{startCase(item?.trade_type)}</td>
-							<td>{startCase(item?.state)}</td>
+							<td>{startCase(val?.trade_type)}</td>
+							<td>{startCase(val?.state)}</td>
 							<td />
-							<td>{item?.cargo_value || '--'}</td>
-							<td>{startCase(item?.payment_term || '--')}</td>
+							<td>{val?.cargo_value || '--'}</td>
+							<td>{startCase(val?.payment_term || '--')}</td>
 							<td>
-								{(item?.bl_details || []).map(renderBLDetails)}
+								{(val?.bl_details || []).map(renderBLDetails)}
 							</td>
 							<td>
-								{(item?.do_details || []).map(renderDODetails)}
+								{(val?.do_details || []).map(renderDODetails)}
 							</td>
-							<td>{item.booking_agent?.name || '--'}</td>
+							<td>{val.booking_agent?.name || '--'}</td>
 						</tr>
 					))}
 				</tbody>
