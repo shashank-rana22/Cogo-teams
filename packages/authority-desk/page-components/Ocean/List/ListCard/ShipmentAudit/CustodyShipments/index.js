@@ -1,8 +1,8 @@
-import { Loader } from '@cogoport/components';
+import { Pagination, Loader } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import EmptyState from '../../../../../../commons/EmptyState';
 import useListShipments from '../../../../../../hooks/useListShipments';
@@ -11,7 +11,12 @@ import styles from './styles.module.css';
 
 function CustodyShipments({ item = {} }) {
 	const geo = getGeoConstants();
-	const { list, loading } = useListShipments({ item });
+
+	const [filters, setFilters] = useState({ page: 1 });
+
+	const { data, loading } = useListShipments({ item, filters });
+
+	const { list = [], total_count } = data || {};
 
 	if (list?.length === 0 && !loading) {
 		return <EmptyState />;
@@ -25,6 +30,20 @@ function CustodyShipments({ item = {} }) {
 			</div>
 		);
 	}
+
+	const renderPagination = (
+		<Pagination
+			type="table"
+			totalItems={total_count}
+			pageSize={10}
+			currentPage={filters.page}
+			className={styles.pagination}
+			onPageChange={(val) => setFilters({
+				...filters,
+				page: val,
+			})}
+		/>
+	);
 
 	const docStatusMapping = {
 		pending  : 'Final BL not uploaded',
@@ -45,6 +64,8 @@ function CustodyShipments({ item = {} }) {
 
 	return (
 		<div className={styles.container}>
+			{renderPagination}
+
 			<table>
 				<thead>
 					<tr className={styles.row}>
@@ -108,6 +129,8 @@ function CustodyShipments({ item = {} }) {
 					))}
 				</tbody>
 			</table>
+
+			{renderPagination}
 		</div>
 	);
 }

@@ -5,7 +5,7 @@ import toastApiError from '../utils/toastApiError';
 
 const emptyData = { list: [], total: 0, total_page: 0, count_stats: {} };
 
-function useListShipments({ item }) {
+function useListShipments({ item, filters }) {
 	const [data, setData] = useState(emptyData);
 
 	const [{ loading }, trigger] = useRequest({
@@ -22,21 +22,22 @@ function useListShipments({ item }) {
 						is_job_closed        : false,
 						importer_exporter_id : item?.importer_exporter_id,
 					},
-					invoice_value_required: true,
+					invoice_value_required : true,
+					page                   : filters.page,
 				},
 			});
 			setData(res.data);
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [trigger, item?.importer_exporter_id]);
+	}, [trigger, item?.importer_exporter_id, filters]);
 
 	useEffect(() => {
 		listShipments();
 	}, [listShipments]);
 
 	return {
-		list: data?.list,
+		data,
 		loading,
 	};
 }

@@ -34,3 +34,11 @@
 .loader_icon {
 	width: 50px;
 }
+
+.pagination {
+	margin-left: auto;
+	
+	> div {
+		margin-left: auto;
+	}
+}
