@@ -92,7 +92,7 @@ function Ocean() {
 					/>
 				</div>
 
-				{ role === 'kam' ? <ScopeSelect size="md" /> : null}
+				{role === 'kam' ? <ScopeSelect size="md" /> : null}
 			</div>
 
 			<div className={styles.list_filters}>
@@ -104,8 +104,8 @@ function Ocean() {
 							className={cl`${tabsState.bucket === item?.name ? styles.active : ''} ${styles.bucket} `}
 							onClick={() => setTabsState({
 								...tabsState,
-								 bucket            : item?.name,
-								  subApprovedBucket : item?.name === 'approved' ? 'approved' : '',
+								bucket            : item?.name,
+								subApprovedBucket : item?.name === 'approved' ? 'approved' : '',
 							})}
 						>
 							{item.title}
