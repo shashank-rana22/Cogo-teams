@@ -3,18 +3,20 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import { format, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import { getOceanLocationInfo } from '../../helpers/getOceanLocaltionInfo';
+
 import Icons from './Icon';
 import styles from './styles.module.css';
 
-function PortDetails({ primary_service = {} }) {
+function PortDetails({ primary_service = {}, trade_type = '' }) {
 	const {
 		origin_main_port = {},
 		destination_main_port = {},
-		origin_port = {},
-		destination_port = {},
 		schedule_arrival = '',
 		schedule_departure = '',
 	} = primary_service;
+
+	const { origin_port, destination_port } = getOceanLocationInfo(primary_service, trade_type);
 
 	const handleLocationDetails = (location, icdPortInfo) => (
 		<>
@@ -48,6 +50,7 @@ function PortDetails({ primary_service = {} }) {
 	);
 
 	const renderLocation = () => (
+
 		<>
 			<div className={styles.flex_row_origin}>
 				{handleLocationDetails(origin_port, origin_main_port)}
@@ -59,18 +62,24 @@ function PortDetails({ primary_service = {} }) {
 
 			</div>
 
-			<div className={styles.icon_wrapper}>
-				<IcMPortArrow className="core_ui_icon" />
-			</div>
-
-			<div className={styles.flex_row_destination}>
-				{handleLocationDetails(destination_port, destination_main_port)}
-				{ schedule_arrival ? (
-					<div className={styles.date}>
-						{format(schedule_arrival, 'dd MMM yyyy', null, true)}
+			{ !isEmpty(destination_port) ? (
+				<>
+					<div className={styles.icon_wrapper}>
+						<IcMPortArrow className="core_ui_icon" />
 					</div>
-				) : null}
-			</div>
+
+					<div className={styles.flex_row_destination}>
+						{handleLocationDetails(destination_port, destination_main_port)}
+						{ schedule_arrival ? (
+							<div className={styles.date}>
+								{format(schedule_arrival, 'dd MMM yyyy', null, true)}
+							</div>
+						) : null}
+					</div>
+				</>
+			)
+				: null }
+
 		</>
 	);
 
