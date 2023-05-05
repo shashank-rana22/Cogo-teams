@@ -1,3 +1,4 @@
+import { Loader } from '@cogoport/components';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -7,9 +8,18 @@ import OrgDetails from './OrgDetails';
 import styles from './styles.module.css';
 
 function Organizations() {
-	const { data } = useGetOrganizationOutstanding();
+	const { data, loading } = useGetOrganizationOutstanding();
 
 	const [orgDetails, setOrgDetails] = useState({});
+
+	if (loading) {
+		return (
+			<div className={styles.loader}>
+				Loading Data....
+				<Loader themeType="primary" className={styles.loader_icon} />
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>
@@ -17,14 +27,11 @@ function Organizations() {
 			{
 				(data?.list || []).map((item) => (
 					<div className={styles.org_card}>
-
 						<div className={styles.main_details}>
-
 							<div className={styles.org_details}>
 								<div>
 									Name :
 									{' '}
-									{'  '}
 									{item?.businessName}
 								</div>
 								<div>

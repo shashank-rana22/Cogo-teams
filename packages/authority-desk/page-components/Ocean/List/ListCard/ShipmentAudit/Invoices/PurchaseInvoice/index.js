@@ -1,12 +1,26 @@
+import { Loader } from '@cogoport/components';
 import React from 'react';
 
+import EmptyState from '../../../../../../../commons/EmptyState';
 import useGetBill from '../../../../../../../hooks/useGetBill';
 
 import styles from './styles.module.css';
 
 function PurchaseInvoice({ item }) {
-	const { data } = useGetBill({ serial_id: item?.serial_id });
+	const { data, loadingBills } = useGetBill({ serial_id: item?.serial_id });
 
+	if (loadingBills) {
+		return (
+			<div className={styles.loader}>
+				Loading Invoice Data....
+				<Loader themeType="primary" className={styles.loader_icon} />
+			</div>
+		);
+	}
+
+	if (data?.list?.length === 0 && !loadingBills) {
+		return <EmptyState />;
+	}
 	return (
 		<div className={styles.container}>
 			<table>

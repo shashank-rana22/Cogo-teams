@@ -46,7 +46,7 @@
 }
 
 .modal_body_content {
-	max-height: none !important;
+	max-height: 80vh !important;
 }
 
 .modal_footer_content {
