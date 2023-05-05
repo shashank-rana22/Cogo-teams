@@ -68,17 +68,17 @@ function ShipmentExtraDetails({ item = {} }) {
 			<div className={styles.detention_demurrage}>
 				<span>
 								&nbsp; Origin : &nbsp;
-					{free_days_detention_origin}
+					{free_days_detention_origin || 0}
 								&nbsp; Detention days , &nbsp;
-					{free_days_demurrage_origin}
+					{free_days_demurrage_origin || 0}
 								&nbsp; Dumurrage Days
 				</span>
 				<br />
 				<span>
 								&nbsp; Destination : &nbsp;
-					{free_days_detention_destination}
+					{free_days_detention_destination || 0}
 								&nbsp; Detention days, &nbsp;
-					{free_days_demurrage_destination}
+					{free_days_demurrage_destination || 0}
 								&nbsp; Demurrage days &nbsp;
 				</span>
 			</div>

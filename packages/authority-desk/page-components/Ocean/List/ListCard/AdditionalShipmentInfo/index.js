@@ -6,7 +6,7 @@ import OrgShipments from './OrgShipments';
 import ShipmentInvoices from './ShipmentInvoices';
 import styles from './styles.module.css';
 
-function AdditionalShipmentInfo({ item = {} }) {
+function AdditionalShipmentInfo({ item = {}, filters = {}, setFilters = () => {} }) {
 	const orgDetails = item?.importer_exporter;
 
 	const [toggleVal, setToggleVal] = useState(false);
@@ -58,7 +58,14 @@ function AdditionalShipmentInfo({ item = {} }) {
 			/>
 
 			{
-                !toggleVal ? <ShipmentInvoices item={item} /> : <OrgShipments item={item} />
+                !toggleVal ? <ShipmentInvoices item={item} />
+                	: (
+	<OrgShipments
+		item={item}
+		filters={filters}
+		setFilters={setFilters}
+	/>
+                	)
             }
 
 		</div>

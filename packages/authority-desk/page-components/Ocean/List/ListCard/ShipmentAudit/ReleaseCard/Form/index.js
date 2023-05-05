@@ -1,9 +1,10 @@
-import { Button, Modal } from "@cogoport/components"; 
+import { Button, Modal } from '@cogoport/components';
 import { CheckboxGroupController, TextAreaController, useForm } from '@cogoport/forms';
-import React from "react";
-import useUpdateShipmentBlDoDetails from "../../../../../../../hooks/useUpdateShipmentBlDoDetails";
+import React from 'react';
 
-import styles from "./styles.module.css";
+import useUpdateShipmentBlDoDetails from '../../../../../../../hooks/useUpdateShipmentBlDoDetails';
+
+import styles from './styles.module.css';
 
 function Form({
 	handleClose = () => {},
@@ -11,19 +12,18 @@ function Form({
 	hold = false,
 	surrender = false,
 	bucket,
-	trade_type = "export",
+	trade_type = 'export',
 }) {
 	const docOptions = () => {
 		if (surrender) {
 			const docsToSurrender = blData.filter(
-				(item) =>
-					[
-						"draft_bill_of_lading",
-						"bill_of_lading",
-						"draft_house_bill_of_lading",
-						"house_bill_of_lading",
-					].includes(item?.document_type) &&
-					item?.status === "approved"
+				(item) => [
+					'draft_bill_of_lading',
+					'bill_of_lading',
+					'draft_house_bill_of_lading',
+					'house_bill_of_lading',
+				].includes(item?.document_type)
+					&& item?.status === 'approved',
 			);
 			return docsToSurrender;
 		}
@@ -37,28 +37,28 @@ function Form({
 		handleSubmit,
 	} = useForm();
 
-	const { onUpdate, loading } = useUpdateShipmentBlDoDetails({ trade_type });
+	const { onUpdate, loading } = useUpdateShipmentBlDoDetails({ trade_type, onClose: handleClose });
 
-	let heading = "Approve Document";
-	let status = "approved";
+	let heading = 'Approve Document';
+	let status = 'approved';
 	if (hold) {
-		heading = "Hold Document";
-		status = "hold";
+		heading = 'Hold Document';
+		status = 'hold';
 	} else if (surrender) {
-		heading = "Approve for Surrender Document";
-		status = "surrender_pending";
-	} else if (bucket === "approved") {
-		heading = "Approve for Release";
-		status = "release_pending";
+		heading = 'Approve for Surrender Document';
+		status = 'surrender_pending';
+	} else if (bucket === 'approved') {
+		heading = 'Approve for Release';
+		status = 'release_pending';
 	}
 
 	const onSubmit = (formData) => {
 		const payload = {
-			ids: formData?.ids,
-			data: {
-				[trade_type === "export" ? "bl_remarks" : "remarks"]: {
-					comment: formData?.remarks,
-					status: "requested",
+			ids  : formData?.ids,
+			data : {
+				[trade_type === 'export' ? 'bl_remarks' : 'remarks']: {
+					comment : formData?.remarks,
+					status  : 'requested',
 				},
 				status,
 			},
@@ -90,7 +90,7 @@ function Form({
 							size="md"
 							options={docOptions()}
 							className={styles.checkbox_controller}
-							rules={{ required: "This field is required" }}
+							rules={{ required: 'This field is required' }}
 						/>
 						{errors.ids ? (
 							<div className={styles.error_message}>
@@ -106,7 +106,7 @@ function Form({
 							size="md"
 							rows={4}
 							placeholder="Enter Remarks Here..."
-							rules={{ required: "This field is Required" }}
+							rules={{ required: 'This field is Required' }}
 						/>
 						{errors.remarks ? (
 							<div className={styles.error_message}>

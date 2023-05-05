@@ -20,7 +20,7 @@ function RequestModal({ closeModal = () => { }, data = {} }) {
 
 	const { formState: { errors }, control, handleSubmit } = useForm();
 
-	const { onUpdate, loading } = useUpdateShipmentBlDoDetails({ trade_type });
+	const { onUpdate, loading } = useUpdateShipmentBlDoDetails({ trade_type, onClose: closeModal });
 
 	const onSubmit = (formData) => {
 		const payload = {

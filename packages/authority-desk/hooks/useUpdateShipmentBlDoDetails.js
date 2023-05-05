@@ -11,9 +11,10 @@ const useUpdateShipmentBlDoDetails = ({
 	refetch = () => {},
 	successMessage = 'Updated Successfully!',
 	trade_type = 'export',
+	onClose = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : `fcl_freight/${updateApi[trade_type]}`,
+		url    : `${updateApi[trade_type]}`,
 		method : 'POST',
 	});
 
@@ -22,6 +23,7 @@ const useUpdateShipmentBlDoDetails = ({
 			await trigger({ data: val });
 			Toast.success(successMessage);
 			refetch();
+			onClose();
 		} catch (err) {
 			toastApiError(err);
 		}

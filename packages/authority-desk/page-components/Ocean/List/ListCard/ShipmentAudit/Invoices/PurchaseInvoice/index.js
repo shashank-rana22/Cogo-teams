@@ -1,4 +1,6 @@
 import { Loader } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { format } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../../../../../commons/EmptyState';
@@ -32,22 +34,60 @@ function PurchaseInvoice({ item }) {
 						Type
 					</td>
 					<td> Invoice Value</td>
-					<td> Paid Amount</td>
+					<td>Status</td>
 					<td> Balance Amount</td>
 					<td> Due Date</td>
+					<td>Payment Amount</td>
 					<td>Payment Status</td>
 				</th>
 				<tbody>
 					{(data?.list || []).map((val) => (
 						<tr key={val.id}>
-							<td>{val?.invoiceNumber || val?.proformaNumber}</td>
+							<td>{val?.status !== 'DRAFT' ? val?.billNumber : val?.proformaNumber}</td>
 							<td>
-								{val?.invoiceType}
+								{val?.billType}
 							</td>
-							<td>{val?.subTotals}</td>
-							<td>-</td>
-							<td>{val?.balanceAmount}</td>
-							<td>{val?.dueDate}</td>
+							<td>
+								{formatAmount({
+									amount   : val?.grandTotal,
+									currency : val?.billCurrency,
+									options  : {
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 2,
+									},
+								})}
+
+							</td>
+							<td>
+								{val?.status}
+							</td>
+							<td>
+								{formatAmount({
+									amount   : val.grandTotal - val.paidAmount - val.paidTds,
+									currency : val?.billCurrency,
+									options  : {
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 2,
+									},
+								})}
+
+							</td>
+
+							<td>
+								{formatAmount({
+									amount   : val?.paidAmount,
+									currency : val?.billCurrency,
+									options  : {
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 2,
+									},
+								})}
+
+							</td>
+							<td>{ format(val?.dueDate, 'dd MMM yyyy', null, true)}</td>
 							<td>{val?.paymentStatus}</td>
 						</tr>
 					))}

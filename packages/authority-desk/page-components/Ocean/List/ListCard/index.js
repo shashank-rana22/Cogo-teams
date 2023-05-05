@@ -10,7 +10,13 @@ import Footer from './Footer';
 import ShipmentExtraDetails from './ShipmentExtraDetails';
 import styles from './styles.module.css';
 
-function ListCard({ item = {}, role = '', tabsState = {} }) {
+function ListCard({
+	item = {},
+	role = '',
+	tabsState = {},
+	filters = {},
+	setFilters = () => {},
+}) {
 	const [showDetails, setShowDetails] = useState(false);
 
 	const { freight_service = {}, local_service = {} } = item;
@@ -38,7 +44,7 @@ function ListCard({ item = {}, role = '', tabsState = {} }) {
 
 			{showDetails ? (
 				<div className={styles.additional_audits}>
-					<AdditionalShipmentInfo item={item} />
+					<AdditionalShipmentInfo item={item} filters={filters} setFilters={setFilters} />
 				</div>
 			) : null}
 

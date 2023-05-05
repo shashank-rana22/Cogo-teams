@@ -78,6 +78,8 @@ export default function List({
 					item={item}
 					role={role}
 					tabsState={tabsState}
+					filters={filters}
+					setFilters={setFilters}
 				/>
 			))}
 			{renderPagination}
