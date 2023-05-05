@@ -1,3 +1,4 @@
+import { Loader } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -9,6 +10,15 @@ import styles from './styles.module.css';
 
 function OrgDetails({ registerationNumber = '' }) {
 	const { data, loading } = useListInvoiceWrapper({ registerationNumber });
+
+	if (loading) {
+		return (
+			<div className={styles.loader}>
+				Loading Invoice Data....
+				<Loader themeType="primary" className={styles.loader_icon} />
+			</div>
+		);
+	}
 
 	if (data?.list?.length === 0 && !loading) {
 		return <EmptyState />;

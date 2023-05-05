@@ -1,9 +1,11 @@
+import { cl } from '@cogoport/components';
+
 import styles from './styles.module.css';
 
-export default function EmptyState() {
+export default function EmptyState({ customClass }) {
 	const src = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man';
 	return (
-		<div className={styles.container}>
+		<div className={cl`${styles.container} ${customClass}`}>
 			<div>
 				<h1 className={styles.header}>No data found !!</h1>
 				<h3>Looks like there are no results...</h3>

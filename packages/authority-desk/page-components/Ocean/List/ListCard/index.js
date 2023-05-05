@@ -38,9 +38,7 @@ function ListCard({ item = {}, role = '', tabsState = {} }) {
 
 			{showDetails ? (
 				<div className={styles.additional_audits}>
-					{' '}
 					<AdditionalShipmentInfo item={item} />
-					{' '}
 				</div>
 			) : null}
 

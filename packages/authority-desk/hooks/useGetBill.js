@@ -40,7 +40,6 @@ const useGetBill = ({ serial_id }) => {
 	return {
 		loadingBills: billsApiLoading,
 		data,
-
 	};
 };
 

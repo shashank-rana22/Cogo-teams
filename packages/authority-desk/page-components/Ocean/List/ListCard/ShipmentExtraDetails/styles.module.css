@@ -20,6 +20,10 @@
 .bl_remark_detail {
 	font-size: 10px;
 
+	&:has(.customized_empty_state) {
+		width: 30vw;
+	}
+
 	table {
 		border-spacing: 8px;
 	}
@@ -54,4 +58,8 @@
 	padding-left: 24px;
 	font-size: 12px;
 	border-left: 1px solid #f2e3c3;
+}
+
+.customized_empty_state {
+	padding-top: 0;
 }
