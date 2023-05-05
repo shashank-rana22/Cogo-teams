@@ -17,56 +17,49 @@ function ShipmentExtraDetails({ item = {} }) {
 		free_days_detention_origin,
 	} = freight_service;
 
-	const docsList = bill_of_ladings || delivery_orders;
+	const docsList = bill_of_ladings || delivery_orders || [];
 
 	const IconMapping = {
 		red    : <IcCRedCircle height={12} width={12} />,
 		yellow : <IcCYelloCircle height={12} width={12} />,
 	};
 
-	const remarks = [];
-
-	(docsList?.bl_remarks || docsList?.remarks || []).forEach((remark) => (remark?.comment !== 'System Invalidated'
-		? remarks.push(remark) : null));
+	const remarks = docsList.flatMap(
+		(doc) => (doc?.bl_remarks || doc?.remarks || []).flatMap(
+			(remark) => (remark?.comment !== 'System Invalidated'
+				? { ...remark, bl_number: doc.bl_number }
+				: []),
+		),
+	);
 
 	const blContent = (
 		<div className={styles.bl_remark_detail}>
-			{ remarks?.length === 0 ? <EmptyState />
-				: (
-					<table>
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Status</th>
-								<th>Comment</th>
-								<th>Date and time</th>
-								<th>Bl Number</th>
-							</tr>
-						</thead>
-						<tbody>
-							{(docsList || []).map((bl) => (remarks || []).map(
-								(rm) => (rm?.comment !== 'System Invalidated' ? (
-									<tr>
-										<td>
-											{' '}
-											{rm?.name}
-										</td>
-										<td>
-											{' '}
-											{startCase(rm?.status)}
-										</td>
-										<td>{rm?.comment}</td>
-										<td>{format(rm?.created_at, 'dd MMM yyyy - hh:mm a', null, true)}</td>
-										<td>
-											{' '}
-											{bl?.bl_number}
-										</td>
-									</tr>
-								) : null),
-							))}
-						</tbody>
-					</table>
-				) }
+			<table>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Status</th>
+						<th>Comment</th>
+						<th>Date and time</th>
+						<th>Bl Number</th>
+					</tr>
+				</thead>
+				<tbody>
+					{remarks.length ? (
+						<td colSpan={5}>
+							<EmptyState customClass={styles.customized_empty_state} />
+						</td>
+					) : remarks.map((rm) => (
+						<tr>
+							<td>{rm?.name}</td>
+							<td>{startCase(rm?.status)}</td>
+							<td>{rm?.comment}</td>
+							<td>{format(rm?.created_at, 'dd MMM yyyy - hh:mm a', null, true)}</td>
+							<td>{rm?.bl_number}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
 		</div>
 	);
 

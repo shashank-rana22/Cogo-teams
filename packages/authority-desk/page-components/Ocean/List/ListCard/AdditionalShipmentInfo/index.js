@@ -15,16 +15,13 @@ function AdditionalShipmentInfo({ item = {} }) {
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.customer}>
-					{' '}
 					Customer :
 					{' '}
 					{orgDetails?.business_name}
-					{' '}
 				</div>
 
 				<div>
 					Total Customer Outstanding of shipment :
-
 					{formatAmount({
 						amount   : item?.invoice_status?.invoice_total?.[orgDetails?.id],
 						currency : item?.currency,
@@ -37,7 +34,6 @@ function AdditionalShipmentInfo({ item = {} }) {
 
 				</div>
 				<div>
-					{' '}
 					Total Outstanding of customer: &nbsp; &nbsp;
 					{formatAmount({
 						amount: item?.invoice_status
