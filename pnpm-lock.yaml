@@ -496,6 +496,7 @@ importers:
   packages/bl_do-collection-release:
     specifiers:
       '@cogoport/components': ^1.0.390
+      '@cogoport/forms': workspace:^0.1.0
       '@cogoport/icons-react': ^1.0.61
       '@cogoport/next': workspace:^0.1.0
       '@cogoport/ocean-modules': workspace:^0.1.0
@@ -506,6 +507,7 @@ importers:
       react: 18.2.0
     dependencies:
       '@cogoport/components': 1.0.399_y3d6pejfqbkazdfzmaewia2nra
+      '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.68_react@18.2.0
       '@cogoport/next': link:../../common/next
       '@cogoport/ocean-modules': link:../../common/ocean-modules
