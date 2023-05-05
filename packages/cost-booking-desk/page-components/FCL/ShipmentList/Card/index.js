@@ -10,6 +10,7 @@ import CostBookingDeskContext from '../../../../context/CostBookingDeskContext';
 import getCriticalShipment from '../../../../helpers/getCriticalShipment';
 
 import CargoDetails from './CargoDetails';
+import CargoDetailsLocal from './CargoDetails_v2';
 import DualPort from './PortDetails/DualLocation';
 import SinglePort from './PortDetails/SingleLocation';
 import styles from './styles.module.css';
@@ -77,7 +78,9 @@ function Card({ item = {} }) {
 				<div className={styles.separator} />
 
 				<div className={styles.cargo}>
-					<CargoDetails cargo_details={item?.cargo_details || []} item={item} />
+					{item?.shipment_type === 'fcl_freight_local'
+						? <CargoDetailsLocal item={item} />
+						: <CargoDetails cargo_details={item?.cargo_details || []} item={item} />}
 				</div>
 			</div>
 

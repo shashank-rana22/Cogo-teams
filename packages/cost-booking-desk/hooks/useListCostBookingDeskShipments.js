@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useCallback, useState, useContext } from 'react';
+import { useEffect, useCallback, useState, useContext, useRef } from 'react';
 
 import CostBookingDeskContext from '../context/CostBookingDeskContext';
 import getCostBookingFilters from '../helpers/getCostBookingFilters';
@@ -10,6 +10,8 @@ function useListCostBookingDeskShipments() {
 	const costBookingContextValues = useContext(CostBookingDeskContext);
 	const { filters, setFilters, shipmentType, stepperTab, activeTab } = costBookingContextValues || {};
 	const { page = 1, ...restFilters } = filters || {};
+
+	const debounceQuery = useRef({ q: filters.q });
 
 	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
 	const [apiData, setApiData] = useState('');
@@ -46,7 +48,14 @@ function useListCostBookingDeskShipments() {
 
 		const newScopeFilters = { scope, view_type, selected_agent_id };
 
-		apiTrigger();
+		if (debounceQuery.current.q !== filters.q) {
+			clearTimeout(debounceQuery.current.timerId);
+
+			debounceQuery.current.q = filters.q;
+			debounceQuery.current.timerId = setTimeout(apiTrigger, 600);
+		} else {
+			apiTrigger();
+		}
 
 		localStorage.setItem('cost_booking_desk_values', JSON.stringify({
 			filters,
