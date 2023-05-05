@@ -9,7 +9,7 @@ import useListShipments from '../../../../../../hooks/useListShipments';
 
 import styles from './styles.module.css';
 
-function OrgShipments({ item = {} }) {
+function CustodyShipments({ item = {} }) {
 	const geo = getGeoConstants();
 	const { list, loading } = useListShipments({ item });
 
@@ -112,4 +112,4 @@ function OrgShipments({ item = {} }) {
 	);
 }
 
-export default OrgShipments;
+export default CustodyShipments;

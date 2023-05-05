@@ -9,6 +9,7 @@ import PortDetails from '../../../../../commons/PortDetails';
 import ShipmentBreif from '../../../../../commons/ShipmentBreif';
 
 import BlDetails from './BlDetails';
+import CustodyShipments from './CustodyShipments';
 import Invoices from './Invoices';
 import Organizations from './Organizations';
 import ReleaseCard from './ReleaseCard';
@@ -17,7 +18,7 @@ import styles from './styles.module.css';
 const moreInfoComponentMapping = {
 	invoices  : <Invoices />,
 	payments  : <Organizations />,
-	shipments : <ReleaseCard />,
+	shipments : <CustodyShipments />,
 };
 
 function ShipmentAudit({
@@ -100,11 +101,11 @@ function ShipmentAudit({
 					</div>
 				</Modal.Body>
 
-				<Modal.Footer className={styles.modal_footer_content}>
-					{role === 'credit_control' && isApprovalAllowed ? (
+				{role === 'credit_control' && isApprovalAllowed ? (
+					<Modal.Footer className={styles.modal_footer_content}>
 						<ReleaseCard data={item} bucket={bucket} />
-					) : null}
-				</Modal.Footer>
+					</Modal.Footer>
+				) : null}
 			</Modal>
 
 			<div>Invoices</div>
