@@ -3,12 +3,8 @@
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: space-between;
-	width: 20%;
+	width: 100%;
 	padding: 0 10px;
-
-	> div {
-		max-width: 100%;
-	}
 }
 
 .serial_id {
@@ -23,12 +19,10 @@
 }
 
 .ellipsis_text {
-	width: fit-content;
-	max-width: 100%;
+	max-width: 220px;
 	overflow: hidden;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
-	color: #333;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }

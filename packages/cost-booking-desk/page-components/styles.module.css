@@ -1,5 +1,5 @@
 .component_enter_active {
-    animation: enter-active 300ms ease-in;
+	animation: enter-active 300ms ease-in;
 
 	@keyframes enter-active {
 		from {

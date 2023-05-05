@@ -18,7 +18,8 @@
 }
 
 .fcl,
-.fcl_local {
+.fcl_local,
+.fcl_customs {
 	svg path {
 		fill: var(--color-primary-error-red-2);
 	}
@@ -28,7 +29,8 @@
 	}
 }
 
-.lcl {
+.lcl,
+.lcl_customs {
 	svg path {
 		fill: var(--color-primary-error-red-3);
 	}
