@@ -3,12 +3,6 @@
 	background-color: #f9f5ec;
 }
 
-.container {
-	:global(.ui_modal_body_container) {
-		max-height: none;
-	}
-}
-
 .shipment_content_container {
 	font-size: 12px;
 	background: #fff;
@@ -42,6 +36,7 @@
 	background-color: #fff;
 	border-radius: 6px;
 	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+	cursor: pointer;
 }
 
 .tab.active {
@@ -51,12 +46,7 @@
 }
 
 .modal_body_content {
-	height: 100%;
-	max-height: none;
-
-	:global(.ui_modal_body_container) {
-		max-height: none;
-	}
+	max-height: none !important;
 }
 
 .more_info {
