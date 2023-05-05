@@ -214,11 +214,11 @@ function OrganizationDetails({
 			{quotation_email_sent_by_name && (
 				<div className={styles.quotation_details}>
 					<div className={styles.agent_title}>
-						Quotation sent details
+						Quotation details
 					</div>
 					<div className={styles.quotation}>
 						<div>
-							Agent:
+							Sent by:
 							<span>{quotation_email_sent_by_name}</span>
 						</div>
 						<div>
