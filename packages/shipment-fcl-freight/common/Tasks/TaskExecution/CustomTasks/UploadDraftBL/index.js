@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 import useListDocuments from '../../../../../hooks/useListDocuments';
 import useListTradeDocuments from '../../../../../hooks/useListTradeDocuments';
