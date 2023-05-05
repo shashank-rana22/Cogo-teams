@@ -27,7 +27,7 @@ const getValidDocuments = (trade_type) => {
 	];
 };
 
-function ReleaseCard({ data = {}, bucket }) {
+function ReleaseCard({ data = {}, bucket, refetch = () => {}, setShowModal = () => {} }) {
 	const [open, setOpen] = useState(false);
 	const [hold, setHold] = useState(false);
 	const [surrender, setSurrender] = useState(false);
@@ -108,6 +108,8 @@ function ReleaseCard({ data = {}, bucket }) {
 					surrender={surrender}
 					bucket={bucket}
 					tradeType={data?.trade_type}
+					refetch={refetch}
+					setShowModal={setShowModal}
 				/>
 			) : null}
 		</div>

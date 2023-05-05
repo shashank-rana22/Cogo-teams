@@ -16,6 +16,7 @@ function ListCard({
 	tabsState = {},
 	filters = {},
 	setFilters = () => {},
+	refetch = () => {},
 }) {
 	const [showDetails, setShowDetails] = useState(false);
 
@@ -40,7 +41,7 @@ function ListCard({
 			</div>
 
 			<ShipmentExtraDetails item={item} />
-			<Footer item={item} role={role} tabsState={tabsState} />
+			<Footer item={item} role={role} tabsState={tabsState} refetch={refetch} />
 
 			{showDetails ? (
 				<div className={styles.additional_audits}>

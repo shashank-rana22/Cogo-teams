@@ -11,8 +11,10 @@ function Form({
 	blData = [],
 	hold = false,
 	surrender = false,
-	bucket,
+	bucket = '',
 	trade_type = 'export',
+	setShowModal = () => {},
+	refetch = () => {},
 }) {
 	const docOptions = () => {
 		if (surrender) {
@@ -37,7 +39,12 @@ function Form({
 		handleSubmit,
 	} = useForm();
 
-	const { onUpdate, loading } = useUpdateShipmentBlDoDetails({ trade_type, onClose: handleClose });
+	const { onUpdate, loading } = useUpdateShipmentBlDoDetails({
+		trade_type,
+		onClose: handleClose,
+		refetch,
+		setShowModal,
+	});
 
 	let heading = 'Approve Document';
 	let status = 'approved';

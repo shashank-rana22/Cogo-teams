@@ -12,6 +12,7 @@ const useUpdateShipmentBlDoDetails = ({
 	successMessage = 'Updated Successfully!',
 	trade_type = 'export',
 	onClose = () => {},
+	setShowModal = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : `${updateApi[trade_type]}`,
@@ -22,8 +23,9 @@ const useUpdateShipmentBlDoDetails = ({
 		try {
 			await trigger({ data: val });
 			Toast.success(successMessage);
-			refetch();
 			onClose();
+			refetch();
+			setShowModal(false);
 		} catch (err) {
 			toastApiError(err);
 		}

@@ -20,6 +20,8 @@ function ShipmentAudit({
 	closeModal = () => {},
 	tabsState = {},
 	role = 'kam',
+	refetch = () => {},
+	setShowModal = () => {},
 }) {
 	const moreInfoComponentMapping = {
 		invoices  : <Invoices item={item} />,
@@ -57,6 +59,20 @@ function ShipmentAudit({
 
 	const [additionalTab, setAdditionalTab] = useState('invoices');
 
+	const headerTitle = () => (
+		<div className={styles.modal_title}>
+			<div className={styles.audits}>
+				Audits &nbsp;
+				{'>'}
+&nbsp;
+			</div>
+			<div className={styles.bucket_title}>
+				{startCase(bucket)}
+			</div>
+		</div>
+
+	);
+
 	return (
 		<div className={styles.container}>
 			<Modal
@@ -66,7 +82,7 @@ function ShipmentAudit({
 				className={styles.modal_container}
 			>
 				<Modal.Header
-					title={`Shipments > Audits > ${startCase(bucket)}`}
+					title={headerTitle()}
 				/>
 				<Modal.Body className={styles.modal_body_content}>
 					<div className={styles.shipment_content_container}>
@@ -105,7 +121,7 @@ function ShipmentAudit({
 
 				{role === 'credit_control' && isApprovalAllowed ? (
 					<Modal.Footer className={styles.modal_footer_content}>
-						<ReleaseCard data={item} bucket={bucket} />
+						<ReleaseCard data={item} bucket={bucket} refetch={refetch} setShowModal={setShowModal} />
 					</Modal.Footer>
 				) : null}
 			</Modal>

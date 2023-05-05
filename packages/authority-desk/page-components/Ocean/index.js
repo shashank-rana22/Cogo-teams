@@ -41,7 +41,7 @@ function Ocean() {
 		page          : 1,
 	});
 
-	const { data, loading } = useListAuthorityDeskDocuments({ ...tabsState, filters });
+	const { data, loading, refetch } = useListAuthorityDeskDocuments({ ...tabsState, filters });
 	const { count_stats } = data;
 
 	const { buckets, additionalTabs } = BucketsMapping({ role, count_stats });
@@ -141,6 +141,7 @@ function Ocean() {
 				setTabsState={setTabsState}
 				additionalTabs={additionalTabs}
 				role={role}
+				refetch={refetch}
 			/>
 
 		</div>

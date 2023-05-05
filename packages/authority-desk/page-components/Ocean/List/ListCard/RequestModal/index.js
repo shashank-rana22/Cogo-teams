@@ -7,7 +7,7 @@ import useUpdateShipmentBlDoDetails from '../../../../../hooks/useUpdateShipment
 import RestrictRequest from './RestrictRequest';
 import styles from './styles.module.css';
 
-function RequestModal({ closeModal = () => { }, data = {} }) {
+function RequestModal({ closeModal = () => { }, data = {}, refetch = () => {} }) {
 	const { trade_type, bill_of_ladings, delivery_orders, is_request_doc_allowed } = data || {};
 
 	const documentOptions = isEmpty(bill_of_ladings) ? delivery_orders : bill_of_ladings;
@@ -21,7 +21,7 @@ function RequestModal({ closeModal = () => { }, data = {} }) {
 
 	const { formState: { errors }, control, handleSubmit } = useForm();
 
-	const { onUpdate, loading } = useUpdateShipmentBlDoDetails({ trade_type, onClose: closeModal });
+	const { onUpdate, loading } = useUpdateShipmentBlDoDetails({ trade_type, onClose: closeModal, refetch });
 
 	const onSubmit = (formData) => {
 		const payload = {

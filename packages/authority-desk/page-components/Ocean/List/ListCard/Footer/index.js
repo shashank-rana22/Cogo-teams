@@ -7,7 +7,7 @@ import ShipmentAudit from '../ShipmentAudit';
 
 import styles from './styles.module.css';
 
-function Footer({ item = {}, role = '', tabsState = {} }) {
+function Footer({ item = {}, role = '', tabsState = {}, refetch = () => {} }) {
 	const [showModal, setShowModal] = useState(false);
 
 	const closeModal = () => setShowModal(false);
@@ -76,6 +76,9 @@ function Footer({ item = {}, role = '', tabsState = {} }) {
 					item={item}
 					tabsState={tabsState}
 					role={role}
+					refetch={refetch}
+					setShowModal={setShowModal}
+
 				/>
 			) : null}
 
@@ -83,6 +86,7 @@ function Footer({ item = {}, role = '', tabsState = {} }) {
 				<RequestModal
 					closeModal={closeModal}
 					data={item}
+					refetch={refetch}
 				/>
 			) : null}
 

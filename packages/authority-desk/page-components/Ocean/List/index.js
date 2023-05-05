@@ -14,6 +14,7 @@ export default function List({
 	role = '',
 	additionalTabs = [],
 	loading = false,
+	refetch = () => {},
 }) {
 	const { bucket, subApprovedBucket } = tabsState;
 
@@ -80,6 +81,7 @@ export default function List({
 					tabsState={tabsState}
 					filters={filters}
 					setFilters={setFilters}
+					refetch={refetch}
 				/>
 			))}
 			{renderPagination}

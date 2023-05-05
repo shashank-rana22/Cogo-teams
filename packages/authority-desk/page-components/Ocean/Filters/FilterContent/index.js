@@ -77,7 +77,7 @@ function FilterContent({ filters = {}, setShowPopover = () => {}, setFilters = (
 			<AsyncSelect
 				asyncKey="organizations"
 				initialCall={false}
-				onChange={(val) => setValue('importer_exporter_id', val)}
+				onChange={(val) => setValue('customer_id', val)}
 				value={formValues.importer_exporter_id || undefined}
 				placeholder="Select Shipper Name"
 				muiltiple

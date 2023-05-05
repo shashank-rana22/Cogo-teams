@@ -8,6 +8,8 @@ import styles from './styles.module.css';
 function BlDetails({ item = {} }) {
 	const docsList = isEmpty(item?.bill_of_ladings) ? item?.delivery_orders : item?.bill_of_ladings;
 
+	const blDoText = isEmpty(item?.bill_of_ladings) ? 'DO' : 'BL';
+
 	const docUrl = (val) => (
 		<ClickableDiv className={styles.url} onClick={() => window.open(val?.document_url, '_blank')}>
 			View
@@ -20,7 +22,7 @@ function BlDetails({ item = {} }) {
 				<thead>
 					<tr className={styles.row}>
 						<th>
-							BL/DO
+							{blDoText}
 							&nbsp;
 							(
 							{docsList?.length || ' '}
@@ -40,7 +42,7 @@ function BlDetails({ item = {} }) {
 					{(docsList || []).map((val) => (
 						<tr key={val.id}>
 							<td>{startCase(val?.bl_document_type || val?.do_document_type)}</td>
-							<td>{val?.bl_number}</td>
+							<td>{upperCase(val?.bl_number || val?.do_number)}</td>
 							<td>{startCase(val?.status) || '--'}</td>
 							<td>{upperCase(item?.freight_service?.bl_type || item?.local_service?.bl_type) }</td>
 							<td>{format(item?.expected_release_date, 'dd MMM yyyy', null, true)}</td>
