@@ -57,6 +57,7 @@ function PageView({
 					{getRender()}
 					{(data || []).map((item) => (
 						<List
+							key={item.shipping_line_id}
 							id="milestones_list_body"
 							loading={loading}
 							onClick={onClickCard}

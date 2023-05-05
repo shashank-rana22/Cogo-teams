@@ -15,7 +15,6 @@ const getValue = (
 			if (val) return format(val, itemField.formatType || 'dd MMM yy | hh:mm a');
 			return <div className="core-date-dash">-</div>;
 		}
-
 		default:
 			break;
 	}
