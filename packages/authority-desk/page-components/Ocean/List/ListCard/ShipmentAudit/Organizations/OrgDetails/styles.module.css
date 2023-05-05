@@ -1,15 +1,17 @@
-.container { 
-    border-top: 1px solid #F68B21;
+.container {
+	border-top: 1px solid #f68b21;
 
-    table {
-        width: 100%;
-    }
-    th, tr{
-        display: flex;
-        text-align: center;
-    }
+	table {
+		width: 100%;
+	}
 
-    td {
-        flex: 1;
-    } 
+	th,
+	tr {
+		display: flex;
+		text-align: center;
+	}
+
+	td {
+		flex: 1;
+	}
 }

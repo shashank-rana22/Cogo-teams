@@ -3,7 +3,7 @@ import { useState, useCallback, useEffect } from 'react';
 
 const emptyData = { list: [], total: 0, total_page: 0, count_stats: {} };
 
-function useListShipments({ item}) {
+function useListShipments({ item }) {
 	const [data, setData] = useState(emptyData);
 
 	const [{ loading }, trigger] = useRequest({

@@ -1,28 +1,25 @@
-.container {  
-   
-    border-radius: 4px; 
-    font-size: 12px;  
-    padding: 36px;
-    margin: 24px 0;
-  
-    table {
-        width: 100%; 
-        background: #FDFBF6;
-        border: 1px solid #F2E3C3; 
-        border-collapse: collapse;
+.container {
+	padding: 36px;
+	margin: 24px 0;
+	font-size: 12px;
+	border-radius: 4px;
 
-    } 
-    tbody{
-    text-align: center;
-    }
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		background: #fdfbf6;
+		border: 1px solid #f2e3c3;
+	}
 
-    tr{
-        border-bottom: 1px solid #F2E3C3;
-    } 
-} 
+	tbody {
+		text-align: center;
+	}
 
-.row{
-    border-bottom: 1px solid #F2E3C3; 
+	tr {
+		border-bottom: 1px solid #f2e3c3;
+	}
 }
 
-
+.row {
+	border-bottom: 1px solid #f2e3c3;
+}

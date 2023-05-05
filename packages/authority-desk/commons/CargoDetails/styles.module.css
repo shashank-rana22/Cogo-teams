@@ -1,7 +1,7 @@
 .container {
 	display: flex;
-	flex-wrap: wrap; 
-	width: 30%; 
+	flex-wrap: wrap;
+	width: 30%;
 	padding-left: 28px;
 }
 
@@ -25,7 +25,7 @@
 }
 
 .more_details_popover_text {
-	color: #f68b21;
-	cursor: pointer; 
 	font-size: 12px;
+	color: #f68b21;
+	cursor: pointer;
 }

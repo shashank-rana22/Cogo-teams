@@ -1,12 +1,14 @@
 import { Modal, cl, Button } from '@cogoport/components';
-import React, { useState } from 'react';
 import { startCase } from '@cogoport/utils';
+import React, { useState } from 'react';
+
 import CargoDetails from '../../../../../commons/CargoDetails';
 import PortDetails from '../../../../../commons/PortDetails';
 import ShipmentBreif from '../../../../../commons/ShipmentBreif';
-import CustodyShipments from './CustodyShipments';
+
 import BlDetails from './BlDetails';
-import Invoices from './Invoices'; 
+import CustodyShipments from './CustodyShipments';
+import Invoices from './Invoices';
 import Organizations from './Organizations';
 import styles from './styles.module.css';
 
@@ -18,7 +20,6 @@ function ShipmentAudit({ item = {}, closeModal = () => {}, bucket = 'eligible', 
 		payments  : `Payments - Total Outstanding  ${item?.invoice_status?.outstanding_amount}`,
 		shipments : 'Shipments In Custody',
 	};
-
 
 	const isApprovalAllowed = [
 		'eligible',
@@ -38,7 +39,7 @@ function ShipmentAudit({ item = {}, closeModal = () => {}, bucket = 'eligible', 
 				onClose={closeModal}
 				className={styles.modal_container}
 			>
-				<Modal.Header title = {`Shipments > Audits > ${startCase(bucket)}`} />
+				<Modal.Header title={`Shipments > Audits > ${startCase(bucket)}`} />
 				<Modal.Body className={styles.modal_body_content}>
 					<>
 
@@ -65,17 +66,17 @@ function ShipmentAudit({ item = {}, closeModal = () => {}, bucket = 'eligible', 
 									{tabs[tab]}
 								</div>
 							))}
-						</div>  
-						
-						<div className={styles.more_info}> 
-						{additionalTab === 'invoices' ? <Invoices /> : null}
-						{additionalTab === 'payments' ? <Organizations /> : null}
-						{additionalTab === 'shipments' ? <CustodyShipments /> : null}
+						</div>
+
+						<div className={styles.more_info}>
+							{additionalTab === 'invoices' ? <Invoices /> : null}
+							{additionalTab === 'payments' ? <Organizations /> : null}
+							{additionalTab === 'shipments' ? <CustodyShipments /> : null}
 						</div>
 					</>
 				</Modal.Body>
 				<Modal.Footer>
-				{/* {role === 'credit_control' && isApprovalAllowed ? (
+					{/* {role === 'credit_control' && isApprovalAllowed ? (
 				<ReleaseCard
 					blDetails={list}
 					shipmentState={shipmentState}

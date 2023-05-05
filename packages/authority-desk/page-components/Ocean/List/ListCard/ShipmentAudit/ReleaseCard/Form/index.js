@@ -1,6 +1,8 @@
-import React from 'react';
 import { Button } from '@cogoport/components';
+import React from 'react';
+
 import useUpdateShipmentBlDoDetails from '../../../../../../../hooks/useUpdateShipmentBlDoDetails';
+
 import styles from './styles.module.css';
 
 function Form({
@@ -14,13 +16,12 @@ function Form({
 	const docOptions = () => {
 		if (surrender) {
 			const docsToSurrender = blData.filter(
-				(item) =>
-					[
-						'draft_bill_of_lading',
-						'bill_of_lading',
-						'draft_house_bill_of_lading',
-						'house_bill_of_lading',
-					].includes(item?.document_type) && item?.status === 'approved',
+				(item) => [
+					'draft_bill_of_lading',
+					'bill_of_lading',
+					'draft_house_bill_of_lading',
+					'house_bill_of_lading',
+				].includes(item?.document_type) && item?.status === 'approved',
 			);
 			return docsToSurrender;
 		}

@@ -1,27 +1,26 @@
-.container{
-    width: 18%;
-    position: relative;
+.container {
+	position: relative;
+	width: 18%;
 
-    &::after {
-    content: '';
-    display: inline-block;
-    background-color: #F2E3C3;
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 1px;
-    height: 120%;
-    }
-} 
-
+	&::after {
+		position: absolute;
+		top: 50%;
+		right: 0;
+		display: inline-block;
+		width: 1px;
+		height: 120%;
+		content: "";
+		background-color: #f2e3c3;
+		transform: translateY(-50%);
+	}
+}
 
 .serial_id {
-    color: #F68B21; 
-    font-weight: 600; 
-    font-size: 12px;
-} 
+	font-size: 12px;
+	font-weight: 600;
+	color: #f68b21;
+}
 
-.created_at{
-font-size: 12px;
+.created_at {
+	font-size: 12px;
 }

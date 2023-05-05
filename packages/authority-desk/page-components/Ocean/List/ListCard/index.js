@@ -229,9 +229,9 @@ function ListCard({ item = {}, role = '', tabsState = {} }) {
 			{showModal === 'shipment_audit' ? (
 				<ShipmentAudit
 					closeModal={closeModal}
-					item={item} 
-					bucket={bucket} 
-					role = {role}
+					item={item}
+					bucket={bucket}
+					role={role}
 				/>
 			) : null}
 

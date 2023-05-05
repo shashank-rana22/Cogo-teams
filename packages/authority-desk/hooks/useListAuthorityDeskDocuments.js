@@ -7,7 +7,7 @@ const emptyData = { list: [], total: 0, total_page: 0, count_stats: {} };
 const shipmentStates = ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress', 'completed'];
 const additional_methods = ['pagination', 'count_stats', 'invoice_status', 'ongoing_shipment_stats'];
 
-function useListAuthorityDeskDocuments({ activeTab, service, bucket, filters, subApprovedBucket}) {
+function useListAuthorityDeskDocuments({ activeTab, service, bucket, filters, subApprovedBucket }) {
 	const [data, setData] = useState(emptyData);
 
 	const [{ loading }, trigger] = useRequest({
@@ -24,7 +24,7 @@ function useListAuthorityDeskDocuments({ activeTab, service, bucket, filters, su
 					filters: {
 						state           : state || shipmentStates,
 						is_job_closed   : is_job_closed === 'yes',
-						document_status :  subApprovedBucket || bucket,
+						document_status : subApprovedBucket || bucket,
 						...restFilters || {},
 					},
 					page       : page || 1,
@@ -46,7 +46,7 @@ function useListAuthorityDeskDocuments({ activeTab, service, bucket, filters, su
 
 	return {
 		data,
-		loading, 
+		loading,
 		refetch: listShipments,
 	};
 }

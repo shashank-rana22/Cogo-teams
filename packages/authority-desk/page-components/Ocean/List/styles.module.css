@@ -1,29 +1,26 @@
 .list_container {
-padding: 18px 24px;  
-margin-top: 12px;
-background: #FFFFFF;
-border-radius: 12px; 
+	padding: 18px 24px;
+	margin-top: 12px;
+	background: #fff;
+	border-radius: 12px;
 
+	:global {
+		.ui_pagination_table_container {
+			justify-content: flex-end;
+			padding: 10px 0 4px;
+			font-size: var(--font-size-md);
+		}
 
-:global {
-	.ui_pagination_table_container {
-		justify-content: flex-end;
-		padding: 10px 0 4px;
-		font-size: var(--font-size-md);
-	} 
+		.ui_tab_container.ui_ps_themeType_primary {
+			padding: 6px 10px;
+			font-size: 12px;
+		}
 
-	.ui_tab_container.ui_ps_themeType_primary{
-		padding: 6px 10px; 
-		font-size: 12px;
-	} 
-
-	.ui_tabs_list_badge{
-		font-size: 10px;
+		.ui_tabs_list_badge {
+			font-size: 10px;
+		}
 	}
-	
 }
-} 
-
 
 .loader {
 	display: flex;

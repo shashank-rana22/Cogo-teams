@@ -1,15 +1,16 @@
-import { Tabs, TabPanel, cl } from '@cogoport/components';
+import { Tabs, TabPanel, cl, Toggle } from '@cogoport/components';
 import ScopeSelect from '@cogoport/scope-select';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useState, useCallback } from 'react';
 
 import { BucketsMapping } from '../../config/BucketMapping';
 import useListAuthorityDeskDocuments from '../../hooks/useListAuthorityDeskDocuments';
+import { useStakeholderCheck } from '../../hooks/useStakeholderCheck';
 
 import Filters from './Filters';
 import List from './List';
 import styles from './styles.module.css';
-import { useStakeholderCheck } from '../../hooks/useStakeholderCheck';
 
 const services = ['fcl_freight', 'lcl_freight', 'fcl_local'];
 const roleName = {
@@ -20,25 +21,31 @@ const roleName = {
 
 function Ocean() {
 	const { role } = useStakeholderCheck();
-	
+
+	const router = useRouter();
+
 	const [tabsState, setTabsState] = useState({
-		activeTab : 'bl',
-		service   : 'fcl_freight',
-		bucket    : 'eligible',  
-		subApprovedBucket : ''
+		activeTab         : 'bl',
+		service           : 'fcl_freight',
+		bucket            : 'eligible',
+		subApprovedBucket : '',
 
 	});
-	
+
+	const handleVersionChange = useCallback(() => {
+		const newPathname = `${router.asPath}`;
+		window.location.replace(newPathname);
+	}, [router.asPath]);
+
 	const [filters, setFilters] = useState({
 		is_job_closed : 'no',
 		page          : 1,
 	});
-	
+
 	const { data, loading } = useListAuthorityDeskDocuments({ ...tabsState, filters });
 	const { count_stats } = data;
-	
+
 	const { buckets, additionalTabs } = BucketsMapping({ role, count_stats });
-	
 
 	return (
 		<div className={styles.container}>
@@ -76,6 +83,15 @@ function Ocean() {
 					))}
 				</div>
 
+				<div className={styles.version}>
+					<Toggle
+						size="md"
+						onLabel="Old"
+						offLabel="New"
+						onChange={handleVersionChange}
+					/>
+				</div>
+
 				{ role === 'kam' ? <ScopeSelect size="md" /> : null}
 			</div>
 
@@ -86,10 +102,11 @@ function Ocean() {
 							role="button"
 							tabIndex={0}
 							className={cl`${tabsState.bucket === item?.name ? styles.active : ''} ${styles.bucket} `}
-							onClick={() => setTabsState({ ...tabsState,
-								 bucket: item?.name,
+							onClick={() => setTabsState({
+								...tabsState,
+								 bucket            : item?.name,
 								  subApprovedBucket : item?.name === 'approved' ? 'approved' : '',
-								})}
+							})}
 						>
 							{item.title}
 							{' '}

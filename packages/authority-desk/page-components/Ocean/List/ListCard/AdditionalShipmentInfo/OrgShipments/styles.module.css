@@ -1,18 +1,19 @@
-.container {  
-    background: #FDFBF6;
-    border: 1px solid #F2E3C3;
-    border-radius: 4px; 
-    font-size: 12px; 
-    padding: 4px;
-    table {
-        width: 100%; 
-       
-    }
-    th, tr { 
-        text-align: center;
-    } 
+.container {
+	padding: 4px;
+	font-size: 12px;
+	background: #fdfbf6;
+	border: 1px solid #f2e3c3;
+	border-radius: 4px;
 
-} 
+	table {
+		width: 100%;
+	}
+
+	th,
+	tr {
+		text-align: center;
+	}
+}
 
 .loader {
 	display: flex;
@@ -25,5 +26,3 @@
 .loader_icon {
 	width: 50px;
 }
-
-

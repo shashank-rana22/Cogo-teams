@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
 import { Button, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import React, { useState } from 'react';
+
 import Form from './Form';
 import styles from './styles.module.css';
 
 const blLabelMapping = {
-	house_bill_of_lading: 'HBL',
-	bill_of_lading: 'MBL',
-	draft_house_bill_of_lading: 'HBL',
-	draft_bill_of_lading: 'BL',
-	delivery_order: 'DO',
-	do_noc_certificate: 'DO NOC',
+	house_bill_of_lading       : 'HBL',
+	bill_of_lading             : 'MBL',
+	draft_house_bill_of_lading : 'HBL',
+	draft_bill_of_lading       : 'BL',
+	delivery_order             : 'DO',
+	do_noc_certificate         : 'DO NOC',
 };
 
 const getValidDocuments = (trade_type) => {
@@ -35,15 +36,13 @@ function ReleaseCard({ blDetails = {}, shipmentState = {}, selectedTab }) {
 
 	const releasedBLData = [];
 	const blsAvailable = blDetails?.data?.filter(
-		(item) =>
-			!isEmpty(item?.bl_document_id || item?.do_document_id) &&
-			!['surrendered', 'surrender_pending'].includes(item?.status),
+		(item) => !isEmpty(item?.bl_document_id || item?.do_document_id)
+			&& !['surrendered', 'surrender_pending'].includes(item?.status),
 	);
 
-	const tradeType =
-		shipmentState?.data?.shipment_type === 'fcl_freight_local'
-			? primaryService?.trade_type
-			: incoTerms[primaryService?.inco_term];
+	const tradeType =		shipmentState?.data?.shipment_type === 'fcl_freight_local'
+		? primaryService?.trade_type
+		: incoTerms[primaryService?.inco_term];
 
 	const validDocuments = getValidDocuments(tradeType);
 
@@ -55,10 +54,10 @@ function ReleaseCard({ blDetails = {}, shipmentState = {}, selectedTab }) {
 				label: `${
 					blLabelMapping[item?.bl_document_type || item?.do_document_type]
 				}${item?.bl_number || item?.do_number}`,
-				value: item?.id,
-				document_type: item?.bl_document_type,
-				status: item?.status,
-				category: item?.category,
+				value         : item?.id,
+				document_type : item?.bl_document_type,
+				status        : item?.status,
+				category      : item?.category,
 			});
 		}
 	});

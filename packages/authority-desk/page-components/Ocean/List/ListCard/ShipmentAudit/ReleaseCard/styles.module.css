@@ -1,14 +1,13 @@
-
 .container {
 	position: fixed;
 	bottom: 12px;
 	display: flex;
 	justify-content: flex-end;
-	margin: 0 16px;
-	background: #ffffff;
-	padding: 12px;
-	border-radius: 8px;
 	width: calc(100% - 144px);
+	padding: 12px;
+	margin: 0 16px;
+	background: #fff;
+	border-radius: 8px;
 
 	.core-ui-button-root {
 		margin-left: 8px;

@@ -1,40 +1,39 @@
 .heading {
-    font-weight: 700; 
-    font-size: 16px;  
-    margin: 24px 0 12px;
-} 
+	margin: 24px 0 12px;
+	font-size: 16px;
+	font-weight: 700;
+}
 
-.org_card{
-background: #FFFFFF;
-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
-border-radius: 8px;
-margin-bottom: 12px; 
-padding: 8px; 
-width: 100%; 
-align-items: center;
+.org_card {
+	align-items: center;
+	width: 100%;
+	padding: 8px;
+	margin-bottom: 12px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
 
-    svg{ 
-        margin: 0 16px;
-        cursor: pointer;
-        align-self: center;
-    }
+	svg {
+		align-self: center;
+		margin: 0 16px;
+		cursor: pointer;
+	}
+}
 
-} 
+.org_details {
+	display: flex;
+	width: 100%;
+	padding: 12px 24px;
+	font-family: Poppins;
+	border-right: 1px solid #f68b21;
 
-.org_details{
-    padding: 12px 24px;
-    border-right: 1px solid #F68B21;
-    font-family: 'Poppins';
-    display: flex;
-    width: 100%;
+	> div:first-of-type {
+		flex: 0.6;
+	}
+}
 
-    > div:first-of-type { 
-        flex: 0.6;
-    } 
-} 
-
-.main_details { 
-    width: 100%; 
-    display: flex; 
-    padding-bottom: 6px;
+.main_details {
+	display: flex;
+	width: 100%;
+	padding-bottom: 6px;
 }

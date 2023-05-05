@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 function CargoDetails({ primary_service }) {
 	return (
-		<div className={cl`${styles.container} ${styles.shipment_cargo_details_root}`}> 
+		<div className={cl`${styles.container} ${styles.shipment_cargo_details_root}`}>
 			{primary_service?.cargo_details?.length > 1 ? (
 				<>
 					<RenderCargoPills detail={{ ...primary_service, ...primary_service?.cargo_details?.[0] } || {}} />
