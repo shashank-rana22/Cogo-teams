@@ -1,0 +1,32 @@
+.container {
+	table {
+		width: 100%;
+	}
+
+	th {
+		font-weight: 700;
+	}
+
+	tbody {
+		tr {
+			td {
+				padding: 4px;
+				text-align: center;
+			}
+		}
+	}
+}
+
+.row {
+	border-bottom: 1px solid black;
+}
+
+.url {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	padding: 2px 4px;
+	margin: auto;
+	border: 1px solid #000;
+	border-radius: 4px;
+}

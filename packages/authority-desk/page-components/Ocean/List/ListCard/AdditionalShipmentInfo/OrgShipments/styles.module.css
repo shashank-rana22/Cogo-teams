@@ -1,0 +1,32 @@
+.container {
+	padding: 4px;
+	font-size: 12px;
+	background: #fdfbf6;
+	border: 1px solid #f2e3c3;
+	border-radius: 4px;
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	th,
+	tr {
+		padding: 4px;
+		text-align: center;
+		border-bottom: 1px solid #f2e3c3;
+		border-radius: 2px;
+	}
+}
+
+.loader {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+	justify-content: center;
+	height: 30vh;
+}
+
+.loader_icon {
+	width: 50px;
+}
