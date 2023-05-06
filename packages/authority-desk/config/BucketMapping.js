@@ -13,10 +13,10 @@ export const BucketsMapping = ({ role = '', count_stats = {} }) => {
 	} = count_stats;
 
 	const postApproved =		+approved
-		+ +delivered
-		+ +surrendered
-		+ +surrender_pending
-		+ +release_pending;
+		+ delivered
+		+ surrendered
+		+ surrender_pending
+	+ release_pending;
 
 	const buckets =		role === 'kam'
 		? [
