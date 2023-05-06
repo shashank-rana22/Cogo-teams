@@ -57,20 +57,19 @@
 	margin-top: 20px;
 	background: #fff;
 	border-radius: 8px;
-} 
+}
 
 .modal_title {
-	display: flex; 
-	font-size: 16px; 
-	font-weight: 700; 
+	display: flex;
+	font-size: 16px;
+	font-weight: 700;
+}
 
-} 
-
-.bucket_title {  
-	color: #000; 
+.bucket_title {
+	color: #000;
 	text-decoration: underline;
 
-	&:hover{
-		color:#f68b21;
+	&:hover {
+		color: #f68b21;
 	}
 }
