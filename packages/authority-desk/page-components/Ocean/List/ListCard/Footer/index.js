@@ -16,7 +16,7 @@ function Footer({ item = {}, role = '', tabsState = {}, refetch = () => {} }) {
 		if (
 			role === 'kam'
 			&& ['ineligible', 'hold'].includes(tabsState.bucket)
-			&& item?.validation_status?.invoice_validation_status
+			&& item?.invoice_status?.is_invoice_validated
 		) {
 			return (
 				<Button onClick={() => setShowModal('request_modal')}>
