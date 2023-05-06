@@ -1,0 +1,35 @@
+.container {
+	padding: 6px;
+	margin: 20px 30px;
+	font-size: 12px;
+	background: #fdfbf6;
+	border: 1px solid #f2e3c3;
+	border-radius: 4px;
+
+	table {
+		width: 100%;
+	}
+
+	th,
+	tr {
+		display: flex;
+		padding: 6px;
+		text-align: center;
+		border-bottom: 1px solid #f2e3c3;
+	}
+
+	td {
+		flex: 1;
+	}
+}
+
+.loader {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+	justify-content: center;
+}
+
+.loader_icon {
+	width: 50px;
+}

@@ -1,0 +1,53 @@
+.collapse_inner_container {
+	padding: 18px;
+}
+
+.edit_container {
+	padding: 4px 16px;
+	border: 1px solid #f8f2e7;
+	border-radius: 6px;
+}
+
+.buttons_container {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 16px;
+}
+
+.table_headers {
+	display: flex;
+	flex-basis: 100%;
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 24px;
+	color: #4f4f4f;
+}
+
+.table_header_container {
+	display: flex;
+}
+
+.table_container {
+	tr {
+		height: 40px;
+	}
+
+	:global {
+		.ui_table_body_cell {
+			font-size: 14px;
+		}
+
+		.ui_table_head_cell {
+			font-size: 12px;
+		}
+	}
+}
+
+.table_lifecycle_item {
+	display: block;
+	max-width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-break: initial;
+	white-space: nowrap;
+}

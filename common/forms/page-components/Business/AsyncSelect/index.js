@@ -14,6 +14,7 @@ import {
 	asyncFieldsListOperators,
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
+	asyncShippingLines,
 	asyncFieldsExpertiseConfigurations,
 	asyncFieldsExpertiseBadgeName,
 	asyncKamExpertiseRuleOptions,
@@ -21,6 +22,9 @@ import {
 	asyncListCogoEntity,
 	asyncOrganizationTradeParties,
 	asyncSearchProducts,
+	asyncListHsCodes,
+	asyncListCurrency,
+	asyncAccountEngagementScoringEvents,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -60,6 +64,10 @@ const keyAsyncFieldsParamsMapping = {
 	rule_options                    : asyncKamExpertiseRuleOptions,
 	list_organization_trade_parties : asyncOrganizationTradeParties,
 	search_products_v2              : asyncSearchProducts,
+	shipping_lines                  : asyncShippingLines,
+	list_hs_codes                   : asyncListHsCodes,
+	list_exchange_rate_currencies   : asyncListCurrency,
+	engagement_scoring_events       : asyncAccountEngagementScoringEvents,
 };
 
 function AsyncSelect(props) {

@@ -20,7 +20,7 @@ function MyResponsivePie({ data }) {
 
 			<ResponsivePie
 				data={data}
-				margin={{ top: 40, right: 10, bottom: 80, left: 80 }}
+				margin={{ top: 40, right: 10, bottom: 80, left: 110 }}
 				startAngle={-180}
 				activeOuterRadiusOffset={8}
 				borderWidth={1}

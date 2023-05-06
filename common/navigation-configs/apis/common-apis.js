@@ -569,6 +569,36 @@ const common_apis = {
 			access_type  : 'private',
 			service_name : 'credit',
 		},
+		{
+			api          : 'list_export_factoring_buyers',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'send_ef_document_details_to_cogowallet',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'get_ef_invoices',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'get_ef_invoice_details',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'update_ef_shipment_request',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'get_ef_invoice_funding_summary',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
 	],
 };
 export default common_apis;
