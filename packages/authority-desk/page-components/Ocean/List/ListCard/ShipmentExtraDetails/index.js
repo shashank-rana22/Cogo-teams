@@ -71,7 +71,7 @@ function ShipmentExtraDetails({ item = {} }) {
 					Sales Invoice Status: &nbsp;
 					<span className={styles.text}>
 						{item?.invoice_status?.is_invoice_validated
-							? 'System Validated '
+							? 'System Validated'
 							: 'Validation Pending'}
 									&nbsp;
 					</span>
@@ -81,13 +81,13 @@ function ShipmentExtraDetails({ item = {} }) {
 			<div className={styles.bl_details}>
 				<div>
 					<div>
-						BL Type : &nbsp;
+						BL Type: &nbsp;
 						{upperCase(
 							item?.freight_service?.bl_category || item?.local_service?.bl_category,
 						)}
 					</div>
 					<div>
-						Expected Release Date : &nbsp;
+						Expected Release Date: &nbsp;
 						{format(
 							item?.bill_of_ladings
 								?.expected_release_date,

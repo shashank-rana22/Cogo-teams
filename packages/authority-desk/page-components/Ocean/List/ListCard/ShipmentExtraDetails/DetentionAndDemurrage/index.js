@@ -18,15 +18,15 @@ function DetentionAndDemurrage({ item = {} }) {
 	return (
 		<div className={styles.detention_demurrage}>
 			<span>
-								&nbsp; Origin : &nbsp;
+								&nbsp; Origin: &nbsp;
 				{free_days_detention_origin || 0}
 								&nbsp; Detention days , &nbsp;
 				{free_days_demurrage_origin || 0}
-								&nbsp; Dumurrage Days
+								&nbsp; Demurrage Days
 			</span>
 			<br />
 			<span>
-								&nbsp; Destination : &nbsp;
+								&nbsp; Destination: &nbsp;
 				{free_days_detention_destination || 0}
 								&nbsp; Detention days, &nbsp;
 				{free_days_demurrage_destination || 0}

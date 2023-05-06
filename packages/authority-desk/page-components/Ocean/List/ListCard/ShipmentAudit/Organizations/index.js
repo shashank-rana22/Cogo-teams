@@ -30,12 +30,12 @@ function Organizations() {
 						<div className={styles.main_details}>
 							<div className={styles.org_details}>
 								<div>
-									Name :
-									{' '}
+									Name:
+									&nbsp;
 									{item?.businessName}
 								</div>
 								<div>
-									Total Outstanding Amount -
+									Total Outstanding Amount: &nbsp;
 									{item?.totalOutstandingAmount}
 								</div>
 							</div>

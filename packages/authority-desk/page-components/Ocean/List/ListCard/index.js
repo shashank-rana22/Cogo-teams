@@ -26,7 +26,7 @@ function ListCard({
 	return (
 		<div className={styles.container}>
 			<div className={styles.status}>
-					&nbsp; Status : &nbsp;
+					&nbsp; Status: &nbsp;
 				{startCase(freight_service?.state)}
 			</div>
 

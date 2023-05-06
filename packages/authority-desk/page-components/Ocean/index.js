@@ -1,6 +1,5 @@
 import { Tabs, TabPanel, cl, Toggle, Placeholder } from '@cogoport/components';
 import ScopeSelect from '@cogoport/scope-select';
-import { startCase } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import React, { useState, useCallback } from 'react';
 
@@ -13,7 +12,7 @@ import Filters from './Filters';
 import List from './List';
 import styles from './styles.module.css';
 
-const services = ['fcl_freight', 'lcl_freight', 'fcl_local'];
+const services = { fcl_freight: 'FCL Freight', lcl_freight: 'LCL Freight', fcl_local: 'FCL Locals' };
 const roleName = {
 	kam            : 'KAM',
 	so2            : 'SO2',
@@ -71,12 +70,12 @@ function Ocean() {
 
 			<div className={styles.second_stepper}>
 				<div className={styles.service_tabs}>
-					{services.map((item) => (
+					{Object.keys(services).map((item) => (
 						<ClickableDiv
 							onClick={() => setTabsState({ ...tabsState, service: item })}
 							className={cl`${tabsState.service === item ? styles.active : ''} ${styles.service_tab}`}
 						>
-							{startCase(item)}
+							{services[item]}
 						</ClickableDiv>
 					))}
 				</div>
