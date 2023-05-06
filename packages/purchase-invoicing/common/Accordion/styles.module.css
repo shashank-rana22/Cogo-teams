@@ -59,9 +59,9 @@
 	margin-bottom: 0;
 }
 
-.error{
+.error {
+	width: 200px;
+	padding-left: 4px;
 	font-size: 10px;
 	color: red;
-	padding-left: 4px;
-	width:200px
 }

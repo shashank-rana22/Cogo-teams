@@ -13,17 +13,26 @@
 .formlayout {
 	flex: 1.8;
 	height: calc(100vh - 180px);
-	padding: 4px 8px;
-	margin-left: 26px;
+	padding: 4px 16px;
+	margin-left: 16px;
 	overflow: auto;
+	background-color: #fff;
 }
 
-.errors{
+.errors {
+	padding-left: 4px;
 	font-size: 10px;
 	color: red;
-	padding-left: 4px;
 }
 
-.marginleft{
+.marginleft {
 	margin-left: 20px;
+}
+
+.margintop {
+	margin-top: 12px;
+}
+
+.justifiy {
+	justify-content: space-between;
 }

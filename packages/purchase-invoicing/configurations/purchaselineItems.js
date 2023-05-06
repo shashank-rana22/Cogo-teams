@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 export const lineItemConfig = [
 	{
 		label : '',
-		span  : 0.2,
+		span  : 0.5,
 		key   : 'checkbox',
 	},
 	{
@@ -52,17 +52,17 @@ export const renderPurchaseFunction = {
 	checkbox      : () => (<div className={styles.checkbox}><Checkbox disabled checked /></div>),
 	service       : (item) => (<div className={styles.head}>{item?.code}</div>),
 	currency      : (item) => (<div className={styles.head}>{item?.currency}</div>),
-	rate          : (item) => (<div className={styles.head}>{item?.rate}</div>),
-	exchange_rate : (item) => (<div className={styles.head}>{item?.exchangerate}</div>),
+	rate          : (item) => (<div className={styles.head}>{item?.price}</div>),
+	exchange_rate : (item) => (<div className={styles.head}>{item?.exchange_rate}</div>),
 	quantity      : (item) => (<div className={styles.head}>{item?.quantity}</div>),
 	tax_amount    : (item) => (
 		<div className={styles.head}>
-			{getFormattedAmount(item?.tax_amt || 0, item?.currency)}
+			{getFormattedAmount(item?.tax_price || 0, item?.currency)}
 		</div>
 	),
 	cost: (item) => (
 		<div className={styles.head}>
-			{getFormattedAmount(item?.cost || 0, item?.currency)}
+			{getFormattedAmount(item?.tax_total_price || 0, item?.currency)}
 		</div>
 	),
 };

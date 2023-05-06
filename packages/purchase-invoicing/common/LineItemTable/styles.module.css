@@ -17,6 +17,7 @@
 
 .tableheader {
 	display: flex;
+	background-color: #e0e0e0;
 	border-bottom: 2px solid #e0e0e0;
 }
 

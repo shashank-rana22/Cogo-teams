@@ -78,20 +78,24 @@
 	margin-left: 8px;
 }
 
-.head{
+.head {
 	font-size: 10px;
 }
 
-.checkbox{
+.checkbox {
 	display: flex;
 }
 
-.text{
+.text {
 	margin-top: 6px;
 }
 
-.errors{
+.errors {
+	padding-left: 4px;
 	font-size: 10px;
 	color: red;
-	padding-left: 4px;
+}
+
+.pointer {
+	cursor: pointer;
 }

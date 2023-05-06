@@ -8,15 +8,22 @@ import invoiceconfiguration from '../../configurations/invoicetableconfig';
 
 import styles from './styles.module.css';
 
-function InvoicesUploaded({ invoicesdata, collectionParty }) {
+function InvoicesUploaded({ invoicesdata, collectionParty, setOpenComparision, setStep }) {
 	const titleCard = <div>Invoice List & Tagging</div>;
 	const [activeTab, setActiveTab] = useState('uploaded_invoices');
 
 	const viewDetails = {
 		Header   : '',
-		accessor : () => (
-			<div className={`${styles.value} ${styles.underline}`}>
-				View Details
+		accessor : (item) => (
+			<div
+				className={`${styles.value} ${styles.underline}`}
+				onClick={() => {
+					setStep(2);
+					setOpenComparision(item);
+				}}
+				role="presentation"
+			>
+				{item.status !== 'init' ? 'View Details' : 'Map Line-Items'}
 			</div>
 		),
 		id: 'view_details',

@@ -9,7 +9,7 @@ import mappingsFunc from './mappingsFunc';
 const useHandleFinalSave = ({
 	data = {},
 	purchaseInvoiceValues = {},
-	collectionPartyId = '',
+	billId = '',
 	onClose = () => { },
 	editData = {},
 	setGlobalSelected,
@@ -101,6 +101,7 @@ const useHandleFinalSave = ({
 			globalSelected,
 			purchaseInvoiceValues,
 		);
+
 		if (purchase_replica.length) {
 			finalMapping = finalMapping.map((mapping) => ({
 				...mapping,
@@ -111,18 +112,18 @@ const useHandleFinalSave = ({
 		const payload = values?.is_deviation_accepted
 			? {
 				mappings : finalMapping,
-				id       : editData.finance_job_number || collectionPartyId,
+				id       : editData.finance_job_number || billId,
 				status   : 'locked',
 				...(values || {}),
-				billType : purchaseInvoiceValues?.billType || values?.billType,
+				billType : values?.billType,
 			}
 			: {
 				mappings               : finalMapping,
-				id                     : editData.finance_job_number || collectionPartyId,
+				id                     : editData.finance_job_number || billId,
 				status                 : 'locked',
 				exchange_rate_document : values?.exchange_rate_document,
 				is_deviation_accepted  : values?.is_deviation_accepted,
-				billType               : purchaseInvoiceValues?.billType || values?.billType,
+				billType               : values?.billType,
 			};
 
 		await updateCp(payload);

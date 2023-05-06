@@ -6,9 +6,9 @@ import { PAYMENT_MODE_OPTIONS } from '../../../constants';
 
 import styles from './styles.module.css';
 
-function AdditionalDetails({ control, errors, errMszs }) {
+function AdditionalDetails({ control, errors, errMszs, open, purchaseInvoiceValues, shipment_data }) {
 	return (
-		<AccordianView title="Additional Details" fullwidth showerror={errMszs.line_items}>
+		<AccordianView title="Additional Details" fullwidth showerror={errMszs.line_items} open={open}>
 			<div className={styles.flex}>
 				<div className={styles.inputcontainer}>
 					<div className={styles.label}>Tax Invoice No :</div>
@@ -18,6 +18,7 @@ function AdditionalDetails({ control, errors, errMszs }) {
 							name="tax_invoice_no"
 							placeholder="Tax Invoice No"
 							rules={{ required: true }}
+							value={purchaseInvoiceValues?.tax_invoice_no}
 						/>
 						{errors?.tax_invoice_no && (
 							<div className={`${styles.errors}`}>
@@ -34,6 +35,7 @@ function AdditionalDetails({ control, errors, errMszs }) {
 							name="irn_number"
 							placeholder="IRN Number"
 							rules={{ required: true }}
+							value={purchaseInvoiceValues?.irn_number || purchaseInvoiceValues?.irn_no}
 						/>
 						{errors?.irn_number && (
 							<div className={`${styles.errors}`}>
@@ -50,6 +52,7 @@ function AdditionalDetails({ control, errors, errMszs }) {
 							name="place_of_supply"
 							placeholder="Place of Supply"
 							rules={{ required: true }}
+							value={purchaseInvoiceValues?.place_of_supply}
 						/>
 						{errors?.place_of_supply && (
 							<div className={`${styles.errors}`}>
@@ -66,6 +69,7 @@ function AdditionalDetails({ control, errors, errMszs }) {
 							name="pol"
 							placeholder="POL"
 							rules={{ required: true }}
+							value={purchaseInvoiceValues?.pol}
 						/>
 						{errors?.pol && (
 							<div className={`${styles.errors}`}>
@@ -82,6 +86,7 @@ function AdditionalDetails({ control, errors, errMszs }) {
 							name="pod"
 							placeholder="POD"
 							rules={{ required: true }}
+							value={purchaseInvoiceValues?.pod}
 						/>
 						{errors?.pod && (
 							<div className={`${styles.errors}`}>
@@ -99,6 +104,7 @@ function AdditionalDetails({ control, errors, errMszs }) {
 							placeholder="Mode of Payment"
 							options={PAYMENT_MODE_OPTIONS}
 							rules={{ required: true }}
+							value="cash"
 						/>
 						{errors?.payment_mode && (
 							<div className={`${styles.errors}`}>
@@ -107,6 +113,61 @@ function AdditionalDetails({ control, errors, errMszs }) {
 						)}
 					</div>
 				</div>
+				{shipment_data?.shipment_type === 'air_freight' ? (
+					<>
+						<div className={`${styles.inputcontainer}`}>
+							<div className={styles.label}>MAWB No :</div>
+							<div>
+								<InputController
+									control={control}
+									name="mawb_no"
+									placeholder="MAWB No"
+									rules={{ required: true }}
+									value={purchaseInvoiceValues?.mawb_no}
+								/>
+								{errors?.mawb_no && (
+									<div className={`${styles.errors}`}>
+										Mawb No is Required
+									</div>
+								)}
+							</div>
+						</div>
+						<div className={`${styles.inputcontainer}`}>
+							<div className={styles.label}>Package Count :</div>
+							<div>
+								<InputController
+									control={control}
+									name="package_count"
+									placeholder="Package Count"
+									rules={{ required: true }}
+									value={purchaseInvoiceValues?.package_count}
+								/>
+								{errors?.package_count && (
+									<div className={`${styles.errors}`}>
+										Package Count is Required
+									</div>
+								)}
+							</div>
+						</div>
+						<div className={`${styles.inputcontainer}`}>
+							<div className={styles.label}>Chargeable Weight :</div>
+							<div>
+								<InputController
+									control={control}
+									name="weight"
+									placeholder="Chargeable Weight"
+									rules={{ required: true }}
+									value={purchaseInvoiceValues?.weight}
+								/>
+								{errors?.weight && (
+									<div className={`${styles.errors}`}>
+										Weight is Required
+									</div>
+								)}
+							</div>
+						</div>
+					</>
+				) : null}
 			</div>
 		</AccordianView>
 	);

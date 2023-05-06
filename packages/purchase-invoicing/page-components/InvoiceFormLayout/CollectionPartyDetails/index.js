@@ -7,8 +7,17 @@ import AccordianView from '../../../common/Accordianview';
 import styles from './styles.module.css';
 
 function CollectionPartyDetails({
-	control, collectionParty = {},
-	setCollectionParty, setValue, watch, serviceProvider, collectionPartyAddresses, errors, errMszs,
+	control,
+	collectionParty = {},
+	setCollectionParty,
+	setValue,
+	watch,
+	serviceProvider,
+	collectionPartyAddresses,
+	errors,
+	errMszs,
+	purchaseInvoiceValues,
+	open,
 }) {
 	const organization_id = serviceProvider?.service_provider_id;
 
@@ -53,8 +62,35 @@ function CollectionPartyDetails({
 		(item) => item?.value === bankAccountNumber,
 	);
 
+	const handleOption = (option) => {
+		let newCollectionParty = null;
+		let collectionPartyAdd = null;
+		(option || []).forEach((cp) => {
+			const allAddresses = [
+				...(cp?.billing_addresses || []),
+				...(cp?.other_addresses || []),
+			];
+			(allAddresses || []).forEach((address) => {
+				if (
+					address?.address
+					=== purchaseInvoiceValues?.collection_party_address
+					|| address?.id === purchaseInvoiceValues?.collection_party_address
+				) {
+					newCollectionParty = cp;
+					collectionPartyAdd = address;
+				}
+			});
+		});
+
+		if (newCollectionParty) {
+			setValue('collection_party_address', collectionPartyAdd?.tax_number);
+			setValue('collection_party_bank_details', purchaseInvoiceValues?.collection_party_bank_details);
+			setCollectionParty({ ...newCollectionParty, collection_party_address: collectionPartyAdd?.tax_number });
+		}
+	};
+
 	return (
-		<AccordianView title="Collection Party Details" fullwidth showerror={errMszs.collectionPartyErr}>
+		<AccordianView title="Collection Party Details" fullwidth showerror={errMszs.collectionPartyErr} open={open}>
 			<div className={styles.flex}>
 				<div className={styles.selectcontainer}>
 					<div className={styles.label}>Collection Party/Bank Details</div>
@@ -67,7 +103,8 @@ function CollectionPartyDetails({
 							setCollectionParty(obj);
 							setValue('collection_party_address', '');
 						}}
-						value={collectionParty.id}
+						onValueChange={handleOption}
+						value={collectionParty.registration_number || purchaseInvoiceValues?.collection_party}
 						params={{
 							documents_data_required         : true,
 							other_addresses_data_required   : true,
@@ -123,7 +160,6 @@ function CollectionPartyDetails({
 					<div className={`${styles.flex} ${styles.margintop}`}>
 						<span className={styles.key}>Bank Details :</span>
 						<span className={styles.value}>
-							:
 							{' '}
 							{`${collectionPartyBank?.data?.bank_name || '-'}
 							/ ${collectionPartyBank?.data?.branch_name || '-'

@@ -35,6 +35,7 @@ function useGetCollectionParty({ shipment_id }) {
 		collectionPartyLoading,
 		refetchCollectionParties : listCollectionParties,
 		collectionPartyList      : data?.list || [],
+		refetch                  : listCollectionParties,
 	};
 }
 

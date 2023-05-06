@@ -1,5 +1,5 @@
 import { Toast } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
+import { useRequestBf, useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
@@ -14,10 +14,11 @@ const useCreateColletctionParty = ({
 	setCollectionPartyId = () => { },
 	serviceProviderId,
 }) => {
-	const { user_profile = {} } = useSelector(({ profile }) => ({
-		user_profile: profile,
+	const {
+		user_data,
+	} = useSelector(({ profile }) => ({
+		user_data: profile || {},
 	}));
-	// feedbacks to cogolens starts
 
 	const [{ data }] = useRequest({
 		url    : '/list_organization_invoicing_parties',
@@ -41,16 +42,19 @@ const useCreateColletctionParty = ({
 		country,
 	} = data?.list?.[0] || {};
 
-	// feedbacks to cogolens end
 	const [loading, setLoading] = useState(false);
 
-	const createBillsApi = useRequest('post', false, 'business_finance', {
-		authkey: 'post_purchase_bills',
-	})('/purchase/bills');
+	const [{ data:createBillData }, createBillsApi] = useRequestBf({
+		url     : '/purchase/bills',
+		method  : 'post',
+		authKey : 'post_purchase_bills',
+	}, { manual: true });
 
-	const updateBillsApi = useRequest('put', false, 'business_finance', {
-		authkey: 'put_purchase_bills',
-	})('/purchase/bills');
+	const [{ data: updateBillsData }, updateBillsApi] = useRequestBf({
+		url     : '/purchase/bills',
+		method  : 'put',
+		authKey : 'put_purchase_bills',
+	}, { manual: true });
 
 	const createCp = async (values, extraData) => {
 		const formatdata = formatCollectionPartyPayload(values, extraData);
@@ -58,12 +62,12 @@ const useCreateColletctionParty = ({
 		if (validateData(values, extraData)) {
 			try {
 				setLoading(true);
-				const res = await createBillsApi.trigger({
+				const res = await createBillsApi({
 					data: {
 						...formatdata,
-						createdBy: user_profile.id,
+						createdBy: user_data?.user?.id,
 						performedByUserType:
-                            user_profile.session_type === 'partner' ? 'AGENT' : 'USER',
+							user_data.session_type === 'partner' ? 'AGENT' : 'USER',
 					},
 				});
 
@@ -76,6 +80,7 @@ const useCreateColletctionParty = ({
 			} catch (err) {
 				toastApiError(err?.data);
 				setLoading(false);
+				onCreate();
 			}
 		}
 	};
@@ -86,12 +91,12 @@ const useCreateColletctionParty = ({
 		if (validateData(values, extraData)) {
 			try {
 				setLoading(true);
-				const res = await updateBillsApi.trigger({
+				const res = await updateBillsApi({
 					data: {
 						...formatdata,
-						updatedBy: user_profile.id,
+						updatedBy: user_data?.user?.id,
 						performedByUserType:
-                            user_profile.session_type === 'partner' ? 'AGENT' : 'USER',
+							user_data.session_type === 'partner' ? 'AGENT' : 'USER',
 					},
 				});
 
@@ -112,6 +117,8 @@ const useCreateColletctionParty = ({
 		createCp,
 		updateCp,
 		loading,
+		updateBillsData,
+		createBillData,
 		serviceProviderOrg: {
 			...(serviceProviderOrg || {}),
 			entity_code,

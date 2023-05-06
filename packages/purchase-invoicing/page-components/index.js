@@ -8,7 +8,10 @@ import CollectionPartyDetails from './CollectionPartyDetails';
 import Loader from './CollectionPartyDetails/Loader';
 
 function PurchaseInvoicing({ shipmentData }) {
-	const { collectionPartyList, collectionPartyLoading } = useGetCollectionParty({ shipment_id: shipmentData?.id });
+	const {
+		collectionPartyList, collectionPartyLoading,
+		refetch,
+	} = useGetCollectionParty({ shipment_id: shipmentData?.id });
 
 	const isEdit = false;
 	return (
@@ -22,6 +25,7 @@ function PurchaseInvoicing({ shipmentData }) {
 						<CollectionPartyDetails
 							shipmentData={shipmentData}
 							collectionParty={collectionParty}
+							refetch={refetch}
 						/>
 					))}
 				</>

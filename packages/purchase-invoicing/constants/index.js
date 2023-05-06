@@ -75,3 +75,15 @@ export const UNIT_OPTIONS = [
 export const PAYMENT_MODE_OPTIONS = [
 	{ label: 'Cash', value: 'cash' },
 ];
+
+export const BILL_MAPPINGS = {
+	purchase_invoice : 'BILL',
+	proforma_invoice : 'BILL',
+	credit_note      : 'CREDIT_NOTE',
+	reimbursement    : 'REIMBURSEMENT',
+};
+
+export const invoiceTypeOptionsCN = [
+	{ label: 'Invoice', value: 'purchase_invoice' },
+	{ label: 'Proforma', value: 'proforma_invoice' },
+];

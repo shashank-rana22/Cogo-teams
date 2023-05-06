@@ -1,0 +1,25 @@
+.container {
+	background-color: #fff;
+}
+
+.margin {
+	margin: 16px;
+}
+
+.padding {
+	padding: 4px 16px;
+}
+
+.heading {
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.buttoncontainer {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.button {
+	margin-left: 16px;
+}

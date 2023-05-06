@@ -28,7 +28,7 @@ const useUpdateColletctionParty = ({ onClose }) => {
 					performedByUserType:
                         user_profile.session_type === 'partner' ? 'AGENT' : 'USER',
 					serviceProviderType : 'freight_forwarder',
-					updatedBy           : user_profile.id,
+					updatedBy           : user_profile?.user?.id,
 					bill                : {
 						id         : values?.id,
 						billStatus : values?.status,

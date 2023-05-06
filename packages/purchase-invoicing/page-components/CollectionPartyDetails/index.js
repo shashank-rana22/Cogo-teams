@@ -1,20 +1,24 @@
-import { Button } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
+import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
+import { IcMUpload } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import AccordianView from '../../common/Accordianview';
+import ComparisionModal from '../../common/ComparisionModal';
 import getFormattedAmount from '../../common/helpers/formatAmount';
 import ServiceTables from '../../common/ServiceTable';
 import ToolTipWrapper from '../../common/ToolTipWrapper';
-import UploadInvoiceModal from '../../common/UploadInvoiceModel';
 import InvoicesInProcess from '../InvoicesInProcess';
 import InvoicesUploaded from '../InvoicesUploaded';
 
 import styles from './styles.module.css';
 
-function CollectionPartyDetails({ collectionParty }) {
-	const [showUploadInvoice, setShowUploadInvoice] = useState(false);
+function CollectionPartyDetails({ collectionParty, refetch }) {
 	const [uploadInvoiceUrl, setUploadInvoiceUrl] = useState('');
+	const [openComparision, setOpenComparision] = useState(false);
+	const [open, setOpen] = useState(false);
+	const [step, setStep] = useState(1);
 
 	const services = (collectionParty?.services || []).map(
 		(service) => service?.service_type,
@@ -31,6 +35,12 @@ function CollectionPartyDetails({ collectionParty }) {
 			))}
 		</>
 	);
+
+	const onClose = () => {
+		setUploadInvoiceUrl('');
+		setStep(1);
+		setOpenComparision(false);
+	};
 	const titleCard = (
 		<div className={styles.container_title}>
 			<div className={styles.customer}>
@@ -96,6 +106,8 @@ function CollectionPartyDetails({ collectionParty }) {
 				<InvoicesUploaded
 					invoicesdata={collectionParty?.existing_collection_parties}
 					collectionParty={collectionParty}
+					setOpenComparision={setOpenComparision}
+					setStep={setStep}
 				/>
 				<InvoicesInProcess invoicesdata={collectionParty?.existing_collection_parties} />
 				<span className={styles.headings}>Live Invoice</span>
@@ -104,20 +116,74 @@ function CollectionPartyDetails({ collectionParty }) {
 						size="md"
 						themeType="secondary"
 						style={{ marginRight: '16px' }}
-						onClick={() => { setShowUploadInvoice(true); }}
+						onClick={() => { setOpen(true); }}
 					>
 						Upload Invoice
 					</Button>
 					<Button size="md" themeType="secondary">Add Incidental Charges</Button>
 				</div>
 				<ServiceTables service_charges={collectionParty?.service_charges} />
-				<UploadInvoiceModal
-					open={showUploadInvoice}
-					setOpen={setShowUploadInvoice}
-					uploadInvoiceUrl={uploadInvoiceUrl}
-					setUploadInvoiceUrl={setUploadInvoiceUrl}
-					serviceProvider={collectionParty}
-				/>
+				{open && (
+					<Modal
+						show={open}
+						size="sm"
+						onClose={() => {
+							setOpen(false);
+						}}
+					>
+						<Modal.Header title="Upload Scan of Invoice" />
+						<Modal.Body>
+							<section>
+								<FileUploader
+									value={uploadInvoiceUrl}
+									onChange={setUploadInvoiceUrl}
+									showProgress
+									draggable
+									uploadIcon={<IcMUpload height={40} width={40} />}
+								/>
+							</section>
+						</Modal.Body>
+						<Modal.Footer>
+							<Button
+								size="md"
+								style={{ marginRight: 10 }}
+								themeType="secondary"
+								onClick={() => {
+									setOpen(false);
+									setUploadInvoiceUrl(null);
+								}}
+							>
+								Cancel
+							</Button>
+							<Button
+								size="md"
+								onClick={() => {
+									setOpenComparision(true);
+									setOpen(false);
+								}}
+							>
+								Confirm
+							</Button>
+						</Modal.Footer>
+					</Modal>
+				)}
+
+				{openComparision && (
+					<ComparisionModal
+						uploadInvoiceUrl={uploadInvoiceUrl}
+						setUploadInvoiceUrl={setUploadInvoiceUrl}
+						serviceProvider={collectionParty}
+						openComparision={openComparision}
+						setOpenComparision={setOpenComparision}
+						editData={openComparision}
+						step={step}
+						setStep={setStep}
+						onClose={() => {
+							onClose();
+							refetch();
+						}}
+					/>
+				)}
 			</AccordianView>
 		</div>
 	);

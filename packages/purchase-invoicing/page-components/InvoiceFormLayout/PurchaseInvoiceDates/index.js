@@ -9,7 +9,12 @@ import { EMPTY_EXCHANGE_RATES } from '../../../constants';
 
 import styles from './styles.module.css';
 
-function PurchaseInvoiceDates({ control, invoiceCurrency, errors }) {
+function PurchaseInvoiceDates({
+	control,
+	invoiceCurrency,
+	errors,
+	purchaseInvoiceValues,
+}) {
 	const geo = getGeoConstants();
 	const { fields, append, remove } = useFieldArray({
 		control,
@@ -27,6 +32,8 @@ function PurchaseInvoiceDates({ control, invoiceCurrency, errors }) {
 						name="invoice_date"
 						placeholder="Select Invoice Date"
 						rules={{ required: true }}
+						value={purchaseInvoiceValues?.invoice_date
+							? new Date(purchaseInvoiceValues?.invoice_date) : null}
 					/>
 					{errors?.invoice_date && (
 						<div className={`${styles.errors}`}>
@@ -41,6 +48,8 @@ function PurchaseInvoiceDates({ control, invoiceCurrency, errors }) {
 						name="due_date"
 						placeholder="Select Invoice Due Date"
 						rules={{ required: true }}
+						value={purchaseInvoiceValues?.invoice_due_date
+							? new Date(purchaseInvoiceValues?.invoice_due_date) : null}
 					/>
 					{errors?.due_date && (
 						<div className={`${styles.errors}`}>
@@ -56,6 +65,7 @@ function PurchaseInvoiceDates({ control, invoiceCurrency, errors }) {
 						placeholder={`Eg: ${geo.country.currency.code}`}
 						options={options}
 						rules={{ required: true }}
+						value={purchaseInvoiceValues?.invoice_currency}
 					/>
 					{errors?.invoice_currency && (
 						<div className={`${styles.errors}`}>
@@ -115,7 +125,12 @@ function PurchaseInvoiceDates({ control, invoiceCurrency, errors }) {
 								)}
 							</div>
 							<span className={styles.delete}>
-								<IcMDelete height={20} width={20} onClick={() => remove(index)} />
+								<IcMDelete
+									className={styles.pointer}
+									height={20}
+									width={20}
+									onClick={() => remove(index)}
+								/>
 							</span>
 						</div>
 					))}

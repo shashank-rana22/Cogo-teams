@@ -50,8 +50,8 @@
 	padding-left: 8px;
 }
 
-.errors{
+.errors {
+	padding-left: 4px;
 	font-size: 10px;
 	color: red;
-	padding-left: 4px;
 }

@@ -1,0 +1,14 @@
+.flex {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}
+
+.exchangeheading {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.button {
+	margin-left: 16px;
+}

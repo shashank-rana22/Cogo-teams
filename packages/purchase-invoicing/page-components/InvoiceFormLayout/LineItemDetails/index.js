@@ -10,10 +10,18 @@ import { EMPTY_LINE_ITEMS } from '../../../constants';
 import styles from './styles.module.css';
 
 function LineItemDetails({
-	control, watch, serviceProvider,
-	collectionParty, collectionPartyAddresses,
+	control,
+	watch,
+	serviceProvider,
+	collectionParty,
+	collectionPartyAddresses,
 	billingParty,
-	setCodes, calculatedValues, invoiceCurrency, errors, errMszs,
+	setCodes,
+	calculatedValues,
+	invoiceCurrency,
+	errors,
+	errMszs,
+	open,
 }) {
 	const { fields, append, remove } = useFieldArray({
 		control,
@@ -35,7 +43,7 @@ function LineItemDetails({
 	)?.id;
 
 	return (
-		<AccordianView title="Line Item Details" fullwidth showerror={errMszs.line_items}>
+		<AccordianView title="Line Item Details" fullwidth showerror={errMszs.line_items} open={open}>
 			<div className={styles.border}>
 				<div className={styles.tableheader}>
 					{(lineItemConfig).map((field) => (
@@ -60,6 +68,7 @@ function LineItemDetails({
 										width : `${((field.span || 1) * (100 / 12))}px`,
 									}}
 									className={styles.value}
+									key={field?.name}
 								>
 									{renderLineItemFunctions[field?.key]
 										? renderLineItemFunctions[field?.key]({

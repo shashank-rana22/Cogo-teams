@@ -65,8 +65,8 @@
 	margin-top: 6px;
 }
 
-.errors{
+.errors {
+	padding-left: 4px;
 	font-size: 10px;
 	color: red;
-	padding-left: 4px;
 }

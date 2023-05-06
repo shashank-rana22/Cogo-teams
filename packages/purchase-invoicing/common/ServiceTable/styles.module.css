@@ -17,6 +17,7 @@
 
 .tableheader {
 	display: flex;
+	background-color: #e0e0e0;
 	border-bottom: 2px solid #e0e0e0;
 }
 
@@ -53,12 +54,20 @@
 	padding-left: 16px;
 }
 
-.serviceheader{
+.serviceheader {
 	padding: 8px 34px;
+	background-color: #f9f9f9;
 	border-bottom: 1px solid #e0e0e0;
-	background-color: #F9F9F9;
 }
 
-.paddingtotal{
+.paddingtotal {
 	padding: 16px;
+}
+
+.serviceheadercolor {
+	padding: 12px 34px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #fff;
+	background-color: #88cad1;
 }

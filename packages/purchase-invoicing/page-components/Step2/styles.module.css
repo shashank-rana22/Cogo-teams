@@ -1,0 +1,47 @@
+.back {
+	padding-top: 4px;
+	padding-right: 16px;
+	cursor: pointer;
+}
+
+.flex {
+	display: flex;
+}
+
+.align {
+	align-items: center;
+}
+
+.purchaselineitems {
+	flex: 1;
+	height: calc(100vh - 178px);
+	padding: 12px;
+	overflow: scroll;
+	background-color: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+}
+
+.maplineitems {
+	flex: 1;
+	height: calc(100vh - 178px);
+	padding: 12px;
+	margin-left: 12px;
+	overflow: scroll;
+	background-color: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+}
+
+.buttoncontainer {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.button {
+	margin-left: 16px;
+}
+
+.marginleft {
+	margin-left: 16px;
+}

@@ -253,7 +253,7 @@ function asyncKamExpertiseRuleOptions() {
 function asyncOrganizationTradeParties() {
 	return {
 		labelKey    : 'display_name',
-		valueKey    : 'id',
+		valueKey    : 'registration_number',
 		endpoint    : '/list_organization_trade_parties',
 		initialCall : true,
 	};

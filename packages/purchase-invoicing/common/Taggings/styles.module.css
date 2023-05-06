@@ -15,10 +15,16 @@
 .proforma_tagcards_container {
 	display: flex;
 	align-items: center;
-	width: 260px;
+	width: 300px;
 	padding: 10px;
 	border: 1px solid #88cad1;
 	border-radius: 8px;
+
+	:global {
+		.ui_checkbox_container {
+			padding: 0 !important;
+		}
+	}
 }
 
 .merge {
@@ -150,6 +156,7 @@
 }
 
 .border {
+	height: 600px;
 	margin-top: 10px;
 	overflow-y: scroll;
 	border: 1px solid #88cad1;
@@ -158,4 +165,9 @@
 
 .padding {
 	padding-left: 4px;
+}
+
+.activetab {
+	padding-left: 4px;
+	text-transform: capitalize;
 }

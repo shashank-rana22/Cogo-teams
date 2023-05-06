@@ -1,55 +1,73 @@
-.flex{
-    display: flex;
-    width: 100%;
+.flex {
+	display: flex;
+	width: 100%;
 }
 
-.exchangeheading{
-    margin: 16px 4px ;
+.exchangeheading {
+	margin: 16px 4px;
 }
 
-.exchangevalue{
-    flex: 1;
-    margin-left: 4px;
+.exchangevalue {
+	flex: 1;
+	margin-left: 4px;
 }
 
-.bold{
-    font-weight: 600;
-    font-size: 14px;
-    color: rgb(0, 0, 0);
+.bold {
+	font-size: 14px;
+	font-weight: 600;
+	color: rgb(0 0 0);
 }
 
-.warning{
-    color: rgb(203, 100, 100);
+.warning {
+	color: rgb(203 100 100);
 }
 
-.uploaddiv{
-    margin-left: 4px;
-    margin-top: 10px;
-    font-weight: 600;
-    font-size: 14px;
+.uploaddiv {
+	margin-top: 10px;
+	margin-left: 4px;
+	font-size: 14px;
+	font-weight: 600;
 }
 
 .uploader {
-	padding: 12px 16px 0px 16px;
+	padding: 12px 16px 0;
 }
 
-.info{
-    padding: 4px 16px;
+.info {
+	padding: 4px 16px;
 }
 
-.information{
-    margin-right: 10px;
+.information {
+	margin-right: 10px;
 }
 
-.justifiy{
-    align-items: center;
+.justifiy {
+	align-items: center;
 }
 
-.buttoncontainer{
-    display: flex;
-    justify-content: flex-end;
+.buttoncontainer {
+	display: flex;
+	justify-content: flex-end;
 }
 
-.cancel{
-    margin-right: 16px;
+.cancel {
+	margin-right: 16px;
+}
+
+.loading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-bottom: 26px;
+	font-size: 18px;
+	font-weight: 800;
+}
+
+.span {
+	flex: 1.2;
+}
+
+.rate,
+.deviation {
+	margin-right: 12px;
 }

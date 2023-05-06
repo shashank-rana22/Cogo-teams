@@ -71,6 +71,7 @@ function AsyncSelect(props) {
 		getModifiedOptions,
 		getSelectedOption,
 		microService = '',
+		onValueChange,
 		...rest
 	} = props;
 
@@ -83,6 +84,7 @@ function AsyncSelect(props) {
 	const getAsyncOptionsProps = asyncOptionsHook({
 		...defaultParams,
 		initialCall,
+		onValueChange,
 		params       : params || defaultParams.params,
 		labelKey     : rest.labelKey || defaultParams.labelKey,
 		valueKey     : rest.valueKey || defaultParams.valueKey,

@@ -21,6 +21,7 @@ export function TagCard({
 		(data) => data.billId !== item?.billId,
 	);
 	const showCheckBox = activeTab === 'merge' ? isfirst : true;
+
 	const labelMap = {
 		merge : 'Merge',
 		split : 'Split',
@@ -70,6 +71,7 @@ export function TagCard({
 						selectedProforma={selectedProforma}
 						unCheckedData={unCheckedData}
 						isNormalTab={isNormalTab}
+						activeTab={activeTab}
 						isChecked={isChecked}
 					/>
 					{childBill && (

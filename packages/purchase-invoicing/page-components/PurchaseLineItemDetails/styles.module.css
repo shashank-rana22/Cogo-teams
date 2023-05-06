@@ -1,44 +1,43 @@
-.heading{
-    font-weight: 700;
-    font-size: 16px;
+.heading {
+	font-size: 16px;
+	font-weight: 700;
 }
 
-.margintop{
-    margin-top: 16px;
+.margintop {
+	margin-top: 16px;
 }
 
-.label{
-    font-weight: 600;
-    font-size: 12px;
-
+.label {
+	font-size: 12px;
+	font-weight: 600;
 }
 
-.value{
-    font-weight: 600;
-    font-size: 10px;
+.value {
+	font-size: 10px;
+	font-weight: 600;
 }
 
-.margin{
-    margin-top: 6px;
+.margin {
+	margin-top: 6px;
 }
 
-.flex{
-    display: flex;
+.flex {
+	display: flex;
 }
 
-.marginright{
-    margin-right: 16px;
+.marginright {
+	margin-right: 16px;
 }
 
-.marginbottom{
-    margin-bottom: 10px;
+.marginbottom {
+	margin-bottom: 10px;
 }
 
-.borderbottom{
-    border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 10px;
+.borderbottom {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #e0e0e0;
 }
 
-.wrap{
-    flex-wrap: wrap;
+.wrap {
+	flex-wrap: wrap;
 }

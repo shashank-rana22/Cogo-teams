@@ -188,7 +188,7 @@ function Form({
 								</span>
 							)}
 						</div>
-						<IcMDelete onClick={() => remove(index)} />
+						<IcMDelete className={styles.pointer} onClick={() => remove(index)} />
 					</div>
 
 				</div>

@@ -1,9 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { RadioGroupController } from '@cogoport/forms';
-import React, { useState, useEffect } from 'react';
+import { Button } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
+import { useForm, RadioGroupController } from '@cogoport/forms';
+import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
+import React, { useEffect, useContext, useImperativeHandle, forwardRef, useState } from 'react';
 
 import AccordianView from '../../common/Accordianview';
-import { invoiceTypeOptions } from '../../constants';
+import { EMPTY_LINE_ITEMS, invoiceTypeOptions, invoiceTypeOptionsCN } from '../../constants';
 import useCalculateTotalPrice from '../../helpers/useCalculateTotalPrice';
 import useResetErrors from '../../helpers/useResetErrors';
 
@@ -12,7 +16,9 @@ import BillingPartyDetails from './BillingPartyDetails';
 import CollectionPartyDetails from './CollectionPartyDetails';
 import LineItemDetails from './LineItemDetails';
 import PurchaseInvoiceDates from './PurchaseInvoiceDates';
+import Segmented from './Segmented';
 import styles from './styles.module.css';
+import Taggings from './Taggings';
 
 function InvoiceFormLayout({
 	uploadInvoiceUrl,
@@ -21,30 +27,66 @@ function InvoiceFormLayout({
 	setErrors,
 	setBillingParty,
 	billingParty,
-	errorVal,
-	setValue,
-	watch,
-	control,
-	formValues,
 	errMszs,
-}) {
-	const [collectionParty, setCollectionParty] = useState({});
-	const [codes, setCodes] = useState({});
-
+	collectionParty,
+	setCollectionParty,
+	purchaseInvoiceValues,
+	billId,
+}, ref) {
+	const [codes, setCodes] = useState(purchaseInvoiceValues?.codes || {});
+	const [showTaggings, setShowTaggings] = useState(false);
+	const [billCatogory, setBillCatogory] = useState('purchase');
+	const [selectedProforma, setSelectedProforma] = useState([]);
+	const { shipment_data } = useContext(ShipmentDetailContext);
 	const billingAddresses = collectionParty?.billing_addresses || [];
 	const otherAddresses = collectionParty?.other_addresses || [];
 	const allAddresses = [...billingAddresses, ...otherAddresses];
+	const isEdit = !isEmpty(billId);
 	const collectionPartyAddresses = (allAddresses || []).map((address) => ({
 		...address,
 		label : `${address?.address} / ${address?.tax_number}`,
 		value : address?.tax_number,
 	}));
 
+	const [{ data: listEntities }] = useRequest({
+		method : 'get',
+		url    : 'list_cogo_entities',
+	}, { manual: false });
+
+	const defaultLineItems = purchaseInvoiceValues?.line_items?.map((item) => ({
+		...item,
+		rate    : item?.price,
+		tax_amt : item?.tax_price || 0,
+		cost    : item?.tax_total_price,
+	}));
+
+	const { control, watch, setValue, handleSubmit, formState: { errors: errorVal } } = useForm({
+		defaultValues: {
+			exchange_rate: purchaseInvoiceValues.exchange_rates || [
+				{ from_currency: 'INR', to_currency: 'INR', rate: '1' },
+			],
+			line_items: isEmpty(defaultLineItems) ? [EMPTY_LINE_ITEMS] : defaultLineItems,
+		},
+	});
+
+	const formValues = watch();
+
 	const invoiceCurrency = formValues?.invoice_currency;
 
-	// useImperativeHandle(ref, () => ({
-	// 	handleSubmit,
-	// }));
+	const initialValueBP = listEntities?.list?.find(
+		(item) => item?.registration_number
+			=== (purchaseInvoiceValues.billing_party),
+	);
+
+	useEffect(() => {
+		if (initialValueBP && Object.keys(billingParty || {}).length === 0) {
+			setBillingParty({
+				...initialValueBP,
+				billing_party_address:
+					purchaseInvoiceValues.billing_party_address,
+			});
+		}
+	}, [listEntities?.list?.length]);
 
 	useEffect(() => {
 		if (formValues?.invoice_currency) {
@@ -85,6 +127,15 @@ function InvoiceFormLayout({
 
 	useResetErrors({ errors, setErrors, currentStateErrors: errorVal });
 
+	useImperativeHandle(ref, () => ({
+		handleSubmit,
+		formValues,
+		taggedProformas : selectedProforma,
+		codes,
+		shipment_data,
+		activeTab       : billCatogory,
+	}));
+
 	return (
 		<div className={styles.flex}>
 			<div className={styles.upload_invoice}>
@@ -97,20 +148,36 @@ function InvoiceFormLayout({
 				/>
 			</div>
 			<div className={styles.formlayout}>
-				<AccordianView title="Select Invoice Type" fullwidth>
-					<RadioGroupController
-						options={invoiceTypeOptions}
-						control={control}
-						name="invoice_type"
-						rules={{ required: true }}
-					/>
-					{errors?.invoice_type && (
-						<div className={`${styles.errors} ${styles.marginleft}`}>
-							Invoice type is Required
+				<AccordianView title="Select Invoice Type" fullwidth open={isEdit}>
+					<div className={`${styles.flex} ${styles.justifiy}`}>
+						<div className={`${styles.flex}`}>
+							<Segmented setBillCatogory={setBillCatogory} billCatogory={billCatogory} />
+							<RadioGroupController
+								options={billCatogory === 'pass_through' ? invoiceTypeOptionsCN : invoiceTypeOptions}
+								control={control}
+								name="invoice_type"
+								rules={{ required: true }}
+								value={purchaseInvoiceValues.invoice_type || 'purchase_invoice'}
+							/>
+							{errors?.invoice_type && (
+								<div className={`${styles.errors} ${styles.marginleft}`}>
+									Invoice type is Required
+								</div>
+							)}
 						</div>
-					)}
+						<Button className={styles.margintop} onClick={() => { setShowTaggings(true); }}>
+							{!isEmpty(selectedProforma)
+								? ' Edit & Tag ' : 'Tag'}
+						</Button>
+					</div>
 				</AccordianView>
-				<PurchaseInvoiceDates control={control} invoiceCurrency={invoiceCurrency} errors={errors} />
+				<PurchaseInvoiceDates
+					control={control}
+					invoiceCurrency={invoiceCurrency}
+					errors={errors}
+					purchaseInvoiceValues={purchaseInvoiceValues}
+					isEdit={isEdit}
+				/>
 				<BillingPartyDetails
 					control={control}
 					billingParty={billingParty}
@@ -119,6 +186,9 @@ function InvoiceFormLayout({
 					watch={watch}
 					errors={errors}
 					errMszs={errMszs}
+					purchaseInvoiceValues={purchaseInvoiceValues}
+					open={isEdit}
+					listEntities={listEntities}
 				/>
 				<CollectionPartyDetails
 					control={control}
@@ -130,6 +200,8 @@ function InvoiceFormLayout({
 					collectionPartyAddresses={collectionPartyAddresses}
 					errors={errors}
 					errMszs={errMszs}
+					purchaseInvoiceValues={purchaseInvoiceValues}
+					open={isEdit}
 				/>
 
 				<LineItemDetails
@@ -146,16 +218,28 @@ function InvoiceFormLayout({
 					invoiceCurrency={invoiceCurrency}
 					errors={errors}
 					errMszs={errMszs}
+					open={isEdit}
 				/>
 
 				<AdditionalDetails
 					control={control}
 					errors={errors}
 					errMszs={errMszs}
+					purchaseInvoiceValues={purchaseInvoiceValues}
+					shipment_data={shipment_data}
+					open={isEdit}
+				/>
+				<Taggings
+					showTagings={showTaggings}
+					setShowTaggings={setShowTaggings}
+					serviceProviderId={serviceProvider?.service_provider_id}
+					shipmentId={shipment_data?.id}
+					selectedProforma={selectedProforma}
+					setSelectedProforma={setSelectedProforma}
 				/>
 			</div>
 		</div>
 	);
 }
 
-export default InvoiceFormLayout;
+export default forwardRef(InvoiceFormLayout);

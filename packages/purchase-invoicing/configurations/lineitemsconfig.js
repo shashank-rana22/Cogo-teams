@@ -164,7 +164,7 @@ export const renderLineItemFunctions = {
 			/>
 			{errors?.line_items?.[index]?.exchange_rate && (
 				<div className={`${styles.errors}`}>
-					Exchange Rate is Required
+					* Required
 				</div>
 			)}
 		</div>
@@ -176,7 +176,14 @@ export const renderLineItemFunctions = {
 	),
 	delete: ({ index, remove, showDelete }) => (
 		<span className={styles.delete}>
-			{showDelete && <IcMDelete height={20} width={20} onClick={() => remove(index)} />}
+			{showDelete && (
+				<IcMDelete
+					className={styles.pointer}
+					height={20}
+					width={20}
+					onClick={() => remove(index)}
+				/>
+			)}
 		</span>
 	),
 };

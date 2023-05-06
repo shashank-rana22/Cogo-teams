@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
@@ -10,6 +11,7 @@ function useGetAsyncOptions({
 	valueKey = '',
 	labelKey = '',
 	params = {},
+	onValueChange,
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
 	const [storeoptions, setstoreoptions] = useState([]);
@@ -23,15 +25,22 @@ function useGetAsyncOptions({
 
 	const optionValues = options.map((item) => item[valueKey]);
 
-	const [{ loading: loadingSingle }, triggerSingle] = useRequest({
+	const [{ data:listData, loading: loadingSingle }, triggerSingle] = useRequest({
 		url    : endpoint,
 		method : 'GET',
 	}, { manual: true });
+
 	useEffect(() => {
 		storeoptions.push(...options);
 		setstoreoptions(storeoptions);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(optionValues)]);
+
+	useEffect(() => {
+		if (onValueChange) {
+			onValueChange(listData?.list || []);
+		}
+	}, [JSON.stringify(listData?.list || [])]);
 
 	const onSearch = (inputValue) => {
 		debounceQuery(inputValue);

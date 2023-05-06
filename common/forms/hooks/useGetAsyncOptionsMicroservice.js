@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useRequest, useRequestBf, useAllocationRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
@@ -17,6 +18,7 @@ function useGetAsyncOptionsMicroservice({
 	params = {},
 	authkey = '',
 	microService = '',
+	onValueChange,
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
 	const [storeoptions, setstoreoptions] = useState([]);
@@ -43,6 +45,12 @@ function useGetAsyncOptionsMicroservice({
 		setstoreoptions(storeoptions);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(optionValues)]);
+
+	useEffect(() => {
+		if (onValueChange) {
+			onValueChange(data?.list || []);
+		}
+	}, [JSON.stringify(data?.list || [])]);
 
 	const onSearch = (inputValue) => {
 		debounceQuery(inputValue);

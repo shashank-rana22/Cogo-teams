@@ -83,7 +83,7 @@ export const formatPurchaseLineItems = (line_items, codes) => {
 };
 
 const validatePincode = (pincode, context) => {
-	if (pincode.length > 10) {
+	if (pincode?.length > 10) {
 		Toast.error(`Pincode Is Invalid For ${context}`);
 		return false;
 	}
@@ -127,6 +127,7 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 		activeTab,
 		partyId,
 		serviceProviderOrg,
+		billId,
 	} = extraData;
 
 	const formatTaggedIds = [];
@@ -171,7 +172,7 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 	);
 
 	const bankDetails = (bank_details || []).find(
-		(item) => item?.data?.bank_account_number === collectionPartyObj?.selectedAccNo,
+		(item) => item?.data?.bank_account_number === formValues?.collection_party_bank_details,
 	);
 
 	const billingpartyAddress = (billingPartyObj.addresses || []).find(
@@ -194,8 +195,6 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 	const collectionPartyPOC = collectionPartyObj?.poc_data?.[0] || {};
 
 	const rootid = taggedProformas.length === 1 ? rooBill?.[0] : rootBillIds || undefined;
-
-	const billId = extraData?.finance_job_number || extraData?.collectionPartyId;
 
 	const finalData = {
 		jobSource           : 'LOGISTICS',

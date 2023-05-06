@@ -1,0 +1,12 @@
+.footerstyles {
+	display: flex;
+	align-items: center;
+}
+
+.flex {
+	display: flex;
+}
+
+.marginleft {
+	margin-left: 16px;
+}

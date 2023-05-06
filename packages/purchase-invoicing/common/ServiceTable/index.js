@@ -53,7 +53,7 @@ function ServiceTables({
 								<CargoDetails />
 							</div>
 						)}
-						{showservice && <div className={styles.serviceheader}>{service}</div>}
+						{showservice && <div className={styles.serviceheadercolor}>{service}</div>}
 						<div className={styles.flextable}>
 							<div className={styles.tableheader}>
 								{((config || serviceConfig(service))).map((field) => (
