@@ -216,6 +216,15 @@ function asyncAllotBanks() {
 		},
 	};
 }
+function asyncShippingLines() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : 'get_saas_container_shipping_lines',
+		initialCall  : false,
+		microService : 'saas_traceability',
+	};
+}
 
 function asyncFieldsExpertiseConfigurations() {
 	return {
@@ -367,6 +376,7 @@ export {
 	asyncFieldsListAgents,
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
+	asyncShippingLines,
 	asyncFieldsExpertiseConfigurations,
 	asyncFieldsExpertiseBadgeName,
 	asyncKamExpertiseRuleOptions,

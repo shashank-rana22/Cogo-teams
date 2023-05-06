@@ -505,6 +505,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_organization_payment_modes',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'create_organization_billing_cycle',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -949,6 +954,12 @@ const partner = {
 			api          : 'get_lead_organization_commodity_trade_port_pairs',
 			access_type  : 'private',
 			service_name : 'lead',
+		},
+		{
+			api          : 'organization_kam_allocation_migration',
+			access_type  : 'private',
+			service_name : 'organization',
+			feature      : 'demand_crm',
 		},
 		{
 			api         : 'list_lead_contacts',
@@ -5558,6 +5569,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'spot_search',
 		},
+		{
+			api          : 'get_organization_payment_modes',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	bl_desk: [
 		{
@@ -9974,6 +9990,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'saas_traceability',
 		},
+		{
+			api          : 'list_shipping_line_events',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
 	],
 
 	ftl_freight: [
@@ -11147,6 +11168,14 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_air_coe_documents_list_manifest',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_air_coe_documents_create_manifest',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_locations',
 			access_type  : 'private',
 			service_name : 'location',
@@ -11483,7 +11512,7 @@ const partner = {
 			service_name : 'tickets',
 		},
 		{
-			api          : 'post_tickets_actvity',
+			api          : 'post_tickets_activity',
 			access_type  : 'private',
 			service_name : 'tickets',
 		},

@@ -1,6 +1,7 @@
 import { Modal, cl } from '@cogoport/components';
 import { IcMProfile, IcMMinus } from '@cogoport/icons-react';
 import { setProfileState } from '@cogoport/store/reducers/profile';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import hideNumber from '../../../../helpers/hideNumber';
@@ -57,7 +58,7 @@ function CallModal({
 						{' '}
 						{hideNumber(mobile_number)}
 					</div>
-					<div className={styles.status_div}>{status || 'Connecting...'}</div>
+					<div className={styles.status_div}>{startCase(status) || 'Connecting...'}</div>
 					<div className={styles.timer}>{durationTime()}</div>
 					<div className={styles.hang_up}>
 						<img

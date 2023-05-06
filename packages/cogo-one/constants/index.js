@@ -281,3 +281,9 @@ export const PRIORITY_MAPPING = {
 	high   : '#EE3425',
 	low    : '#FCDC00',
 };
+
+export const ICON_MAPPING = {
+	incoming : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incoming-call-green.png',
+	outgoing : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoing-call-orange.png',
+	missed   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png',
+};
