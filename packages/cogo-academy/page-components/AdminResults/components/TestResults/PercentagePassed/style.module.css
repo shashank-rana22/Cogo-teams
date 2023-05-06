@@ -20,9 +20,9 @@
 }
 
 .label {
+	padding-top: 12px;
 	font-size: 14px;
 	color: #828282;
-	padding-top: 12px;
 }
 
 .value {
