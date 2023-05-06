@@ -48,8 +48,9 @@ function CostBookingDesk() {
 
 	return (
 		<CostBookingDeskContext.Provider value={contextValues}>
-			{shipmentType in ResolveCostBookingDesk ?	<RenderDesk /> : null}
+			{shipmentType in ResolveCostBookingDesk ? <RenderDesk /> : null}
 		</CostBookingDeskContext.Provider>
 	);
 }
+
 export default CostBookingDesk;
