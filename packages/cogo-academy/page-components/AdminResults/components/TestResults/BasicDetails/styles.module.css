@@ -71,20 +71,23 @@
 .right_flex {
 	display: flex;
 	flex-wrap: wrap;
+	align-items: center;
 	width: 30%;
-	padding-top: 30px;
+	padding-top: 40px;
 	padding-left: 24px;
 }
 
 .left_flex {
+	display: flex;
+	align-items: center;
 	width: 50%;
-	padding-top: 30px;
-	padding-left: 24px;
+	padding-left: 20px;
 	background-color: #fafafa;
 }
 
 .middle_flex {
+	display: flex;
+	align-items: center;
 	width: 20%;
-	padding-top: 30px;
 	background-color: #fafafa;
 }

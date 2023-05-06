@@ -3,7 +3,7 @@
 	flex-direction: column;
 	align-items: center;
 	width: 20%;
-	padding-top: 30px;
+	padding-top: 60px;
 }
 
 .circle {
@@ -22,6 +22,7 @@
 .label {
 	font-size: 14px;
 	color: #828282;
+	padding-top: 12px;
 }
 
 .value {

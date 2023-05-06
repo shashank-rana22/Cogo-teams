@@ -1,6 +1,23 @@
 .container {
 	display: flex;
+	flex-direction: column;
 	width: 20%;
 	padding: 24px;
 	margin-left: 24px;
+
+	:global {
+		.ui_toggle_container.ui_ps_size_md .ui_toggle_offlabel,
+		.ui_toggle_container.ui_ps_size_md .ui_toggle_onlabel {
+			font-size: 12px;
+		}
+	}
+}
+
+.toggle_part {
+	font-size: 12px;
+}
+
+.toggle {
+	padding: 4px;
+	text-align: center;
 }

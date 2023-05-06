@@ -1,13 +1,10 @@
-import { Toggle } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function Header({ header_data, loading = false }) {
-	const { setToggleState } = header_data || {};
-
+function Header({ header_data }) {
 	return (
 		<div className={styles.header_row}>
 			<div>
@@ -54,17 +51,6 @@ function Header({ header_data, loading = false }) {
 						</div>
 					</span>
 				</p>
-			</div>
-
-			<div className={styles.toggle_part}>
-				<Toggle
-					name="a4"
-					size="md"
-					disabled={loading}
-					offLabel="Level of Difficulty"
-					onLabel="Topic wise"
-					onChange={() => setToggleState((prev) => (!prev))}
-				/>
 			</div>
 		</div>
 	);

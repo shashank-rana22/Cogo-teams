@@ -42,7 +42,12 @@ function TestResults({ test_id = '' }) {
 
 				<PercentagePassed stats_data={stats_data} />
 
-				<DifficultyAndTopicDistribution data={stats_data} toggleState={toggleState} retest={retest} />
+				<DifficultyAndTopicDistribution
+					data={stats_data}
+					toggleState={toggleState}
+					header_data={header_data}
+					retest={retest}
+				/>
 			</div>
 		</div>
 	);
