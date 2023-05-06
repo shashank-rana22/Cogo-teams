@@ -1,3 +1,5 @@
+import { Button } from '@cogoport/components';
+
 import DragPreview from '../../DragPreview';
 
 import styles from './styles.module.css';
@@ -8,11 +10,18 @@ function ButtonComponent(props) {
 		rowData,
 	} = props;
 
-	const { content = 'Click Here', type, attributes, component } = widget || {};
+	const {
+		content = 'Click Here',
+		themeType = 'primary',
+		size = 'md',
+		type,
+		attributes,
+		component,
+	} = widget || {};
 
 	const { isDraggingPreview } = component;
 
-	const { onClick = () => {} } = attributes || {};
+	const { onClick = () => { } } = attributes || {};
 
 	if (isDraggingPreview) {
 		return (
@@ -21,8 +30,8 @@ function ButtonComponent(props) {
 	}
 
 	return (
-		<div className={styles.button_wrapper}>
-			{/* <Button
+		<div className={styles.button_wrapper} contentEditable>
+			<Button
 				style={rowData.component.buttonStyle}
 				type={type}
 				themeType={themeType}
@@ -31,17 +40,7 @@ function ButtonComponent(props) {
 				contentEditable
 			>
 				{content}
-			</Button> */}
-
-			<button
-				onClick={onClick}
-				type={type}
-				style={rowData.component?.buttonStyle}
-				contentEditable
-			>
-				<span>{content}</span>
-
-			</button>
+			</Button>
 
 		</div>
 	);

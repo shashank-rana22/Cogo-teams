@@ -23,7 +23,7 @@ const buttonSettings = [
 				type  : 'color',
 			},
 			{ label: 'Text Color', key: 'color', type: 'color' },
-			{ label: 'Padding', key: 'padding', type: 'padding' },
+			{ label: 'Padding', key: 'padding', type: 'number' },
 			{ label: 'Font Size', key: 'fontSize', type: 'number' },
 			{
 				label   : 'Font Weight',
