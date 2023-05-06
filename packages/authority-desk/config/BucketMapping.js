@@ -34,7 +34,7 @@ export const BucketsMapping = ({ role = '', count_stats = {} }) => {
 			{ name: 'approved', title: 'Approved', count: approved },
 			{ name: 'released', title: 'Released', count: released },
 			{ name: 'hold', title: 'Hold', count: hold },
-			  ]
+		]
 		: [
 			{ name: 'eligible', title: 'Eligible', count: eligible },
 			{
@@ -50,9 +50,9 @@ export const BucketsMapping = ({ role = '', count_stats = {} }) => {
 			{ name: 'approved', title: 'Approved', count: postApproved },
 			{ name: 'released', title: 'Released', count: released },
 			{ name: 'hold', title: 'Hold', count: hold },
-			  ];
+		];
 
-			  const additionalTabs = [
+	const additionalTabs = [
 		{
 			name  : 'approved',
 			title : 'Ready for Release',
