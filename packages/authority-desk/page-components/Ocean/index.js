@@ -5,7 +5,7 @@ import React, { useState, useCallback } from 'react';
 
 import ClickableDiv from '../../commons/ClickableDiv';
 import { BucketsMapping } from '../../config/BucketMapping';
-import useListAuthorityDeskDocuments from '../../hooks/useListAuthorityDeskDocuments';
+import useListAuthorityDeskShipments from '../../hooks/useListAuthorityDeskShipments';
 import { useStakeholderCheck } from '../../hooks/useStakeholderCheck';
 
 import Filters from './Filters';
@@ -41,7 +41,7 @@ function Ocean() {
 		page          : 1,
 	});
 
-	const { data, loading, refetch } = useListAuthorityDeskDocuments({ ...tabsState, filters });
+	const { data, loading, refetch } = useListAuthorityDeskShipments({ ...tabsState, filters });
 	const { count_stats } = data;
 
 	const { buckets, additionalTabs } = BucketsMapping({ role, count_stats });
