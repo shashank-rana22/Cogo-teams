@@ -75,17 +75,19 @@ function DNDComponent({ initialPageData, metaData }) {
 	return (
 		<div>
 
-			<section className={styles.heading_container}>
-				<Breadcrumb>
-					<Breadcrumb.Item
-						label="Page Builder"
-						onClick={() => router.push('/page-builder', '/page-builder')}
-						className={styles.breadcrumb_item}
-					/>
-					<Breadcrumb.Item label={startCase(initialPageData?.page_name) || '___'} />
-				</Breadcrumb>
+			{modeType === 'edit' && 	(
+				<section className={styles.heading_container}>
+					<Breadcrumb>
+						<Breadcrumb.Item
+							label="Page Builder"
+							onClick={() => router.push('/page-builder', '/page-builder')}
+							className={styles.breadcrumb_item}
+						/>
+						<Breadcrumb.Item label={startCase(initialPageData?.page_name) || '___'} />
+					</Breadcrumb>
 
-			</section>
+				</section>
+			)}
 
 			<DNDBody
 				pageConfiguration={pageConfiguration}

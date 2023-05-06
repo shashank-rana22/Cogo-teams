@@ -40,29 +40,31 @@ function DNDBody({
 	return (
 		<section className={styles.body}>
 
-			<LeftPanel
-				activeTab={activeTab}
-				setActiveTab={setActiveTab}
-				pageConfiguration={pageConfiguration}
-				setPageConfiguration={setPageConfiguration}
-				addNewItem={addNewItem}
-				onNewItemAdding={onNewItemAdding}
-				selectedRow={selectedRow}
-				setSelectedRow={setSelectedRow}
-				showContentModal={showContentModal}
-				setShowContentModal={setShowContentModal}
-				parentComponentId={parentComponentId}
-				setParentComponentId={setParentComponentId}
-				selectedItem={selectedItem}
-				setSelectedItem={setSelectedItem}
-				selectedColumn={selectedColumn}
-				setSelectedColumn={setSelectedColumn}
-				selectedNestedColumn={selectedNestedColumn}
-				setSelectedNestedColumn={setSelectedNestedColumn}
-				modeType={modeType}
-				previewMode={previewMode}
-				isMobile={isMobile}
-			/>
+			{!isMobile && (
+				<LeftPanel
+					activeTab={activeTab}
+					setActiveTab={setActiveTab}
+					pageConfiguration={pageConfiguration}
+					setPageConfiguration={setPageConfiguration}
+					addNewItem={addNewItem}
+					onNewItemAdding={onNewItemAdding}
+					selectedRow={selectedRow}
+					setSelectedRow={setSelectedRow}
+					showContentModal={showContentModal}
+					setShowContentModal={setShowContentModal}
+					parentComponentId={parentComponentId}
+					setParentComponentId={setParentComponentId}
+					selectedItem={selectedItem}
+					setSelectedItem={setSelectedItem}
+					selectedColumn={selectedColumn}
+					setSelectedColumn={setSelectedColumn}
+					selectedNestedColumn={selectedNestedColumn}
+					setSelectedNestedColumn={setSelectedNestedColumn}
+					modeType={modeType}
+					previewMode={previewMode}
+					isMobile={isMobile}
+				/>
+			)}
 
 			<RightPanel
 				pageConfiguration={pageConfiguration}

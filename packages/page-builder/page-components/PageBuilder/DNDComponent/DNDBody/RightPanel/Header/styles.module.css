@@ -1,39 +1,38 @@
 .header {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    padding: 12px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 8px;
+  position: sticky;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 8px;
+  top: 0;
+   z-index: 4; 
+  background-color: #ffffff ;
 }
 
-  
 .button_container {
-    display: flex;
-    justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.ui_buttonicon_container *{
-    fill: #FCDC00;
+.ui_buttonicon_container * {
+  fill: #fcdc00;
 }
 
-.preview_icons{
-   display: flex;
-   justify-content: center;
-   margin-left: 124px;
-  
+.preview_icons {
+  display: flex;
+  justify-content: center;
+  margin-left: 124px;
 }
 
 .button_wrapper {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
-
 
 .button_group {
-    cursor: pointer;
+  cursor: pointer;
 }
-
 
 .button_flex {
-    margin-right: 8px;
+  margin-right: 8px;
 }
-
-

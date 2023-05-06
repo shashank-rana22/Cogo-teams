@@ -1,8 +1,5 @@
 .container {
   background-color: #fff;
-  height: 100vh;
-  margin-top: 20px;
-  overflow: scroll;
 }
 
 .ui_accordion_content {
