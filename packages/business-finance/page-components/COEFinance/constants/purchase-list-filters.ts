@@ -17,7 +17,7 @@ function filtersData(statsData:StatsDataInterface) {
 			badge : ALL || '0',
 		},
 		{
-			label : 'LOCKED',
+			label : 'Locked',
 			value : 'LOCKED',
 			badge : LOCKED || '0',
 		},
