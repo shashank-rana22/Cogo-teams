@@ -124,7 +124,6 @@ function Child({
 									control={control}
 									size="sm"
 									disabled={disabled || disable}
-									size="sm"
 								/>
 								<p style={{
 									fontStyle     : 'normal',

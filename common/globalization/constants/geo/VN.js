@@ -117,10 +117,10 @@ export default {
 		],
 		lastmile_ops_id         : 'b808aabb-2245-4369-aaa7-6ebd2d5de20b',
 		lastmile_ops_manager_id : '3965f742-f4e5-420a-911c-f3657be05028',
-		prod_kam_cp           : 'e0e2f83b-9e5b-41a3-948e-ab1ec9b0f3ad',
-		prod_es_sales         : 'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
-		entity_manager_id     : '9d1d10dd-06c0-489d-92f8-272c6a40e9bb',
-		service_ops1_role_ids : [
+		prod_kam_cp				: 'e0e2f83b-9e5b-41a3-948e-ab1ec9b0f3ad',
+		prod_es_sales			: 'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
+		entity_manager_id		: '9d1d10dd-06c0-489d-92f8-272c6a40e9bb',
+		service_ops1_role_ids	: [
 			'348bc262-64c3-4667-a23c-908ceca80233', // SO1 + Revenue Desk
 			'5b5ee698-ec53-47fe-9584-737c9a174f8c', // Prod_SO1
 			'f0af57b0-34eb-46e8-86a6-38abafcfc072', // SO1
