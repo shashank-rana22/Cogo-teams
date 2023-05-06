@@ -17,7 +17,7 @@ const useGetDashboardData = () => {
 			try {
 				await trigger({});
 			} catch (err) {
-				Toast.error(err);
+				Toast.error(err?.response?.data?.message);
 			}
 		};
 		getData();

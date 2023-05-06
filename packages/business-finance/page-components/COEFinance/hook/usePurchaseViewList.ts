@@ -12,15 +12,16 @@ interface Props {
 	filters: GenericObject;
 	setFilters: (p: object) => void;
 	sort: NestedObj;
-	subActiveTab?:string
+	subActiveTabReject?:string
+	jobNumber?:string
 }
 
-const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTab }: Props) => {
+const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject, jobNumber }: Props) => {
 	const getStatus = () => {
-		if (subActiveTab === 'finance_rejected') {
+		if (subActiveTabReject === 'finance_rejected') {
 			return 'FINANCE_REJECTED';
 		}
-		if (subActiveTab === 'coe_rejected') {
+		if (subActiveTabReject === 'coe_rejected') {
 			return 'COE_REJECTED';
 		}
 		return 'ALL';
@@ -29,7 +30,7 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTab }: Pro
 	const [currentTab, setCurrentTab] = useState(getStatus());
 	const [tab, setTab] = useState('ALL');
 	const { debounceQuery, query } = useDebounceQuery();
-	const [searchValue, setSearchValue] = useState('');
+	const [searchValue, setSearchValue] = useState(jobNumber || '');
 
 	const showFilter = () => {
 		if (filters?.billType === 'PURCHASE') {
@@ -112,7 +113,6 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTab }: Pro
 				isUrgent : tab === 'Urgency_tag' ? true : undefined,
 				...sort,
 				pageSize : 10,
-				jobType  : 'SHIPMENT',
 			},
 			authKey: 'get_purchase_bills_list',
 		},

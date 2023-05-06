@@ -12,6 +12,7 @@
 
 .filter_container {
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .filter_container > button:last-child {

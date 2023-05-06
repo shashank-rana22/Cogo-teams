@@ -6,7 +6,7 @@
 	}
 
 	&.flex_border_solid {
-		border-bottom: 1px solid;
+		border-bottom: 1px solid var(--temp-color);
 	}
 
 	&.trapezium {
@@ -25,7 +25,7 @@
 		width: 100%;
 		height: 100%;
 		content: "";
-		border: 1px solid #333;
+		border: 1px solid var(--temp-color);
 		border-bottom: none;
 		transform: rotateX(160deg) rotateY(0deg);
 	}
@@ -39,7 +39,7 @@
 	}
 
 	&.flex_border_right {
-		border-right: 1px solid;
+		border-right: 1px solid var(--temp-color);
 	}
 
 	&.flex_in_flex {
@@ -102,7 +102,7 @@
 
 	&.insurance {
 		flex: 1.41;
-		border-right: 1px solid;
+		border-right: 1px solid var(--temp-color);
 	}
 
 	&.declared_carriage {
@@ -179,13 +179,12 @@
 
 .font_style {
 	margin-bottom: 0;
-	font-family: Arial, Helvetica, sans-serif;
-	font-weight: 900;
+	text-transform: uppercase;
 }
 
 .block {
 	display: flex;
-	border: 1px #8b8b8b solid;
+	border: 1px var(--temp-color) solid;
 
 	&.departure_airport {
 		flex: 1;
@@ -196,7 +195,7 @@
 
 .block_row {
 	display: flex;
-	border: 1px #8b8b8b solid;
+	border: 1px var(--temp-color) solid;
 
 	&.blockrow_left_padding {
 		padding-left: 5px;
@@ -222,7 +221,7 @@
 	}
 
 	&.to_by_first_carrier {
-		border-right: 1px solid;
+		border-right: 1px solid var(--temp-color);
 	}
 
 	&.to_by_to {
@@ -237,7 +236,7 @@
 .block_col {
 	display: flex;
 	flex-direction: column;
-	border: 1px #8b8b8b solid;
+	border: 1px var(--temp-color) solid;
 
 	&.routing_block {
 		border-top: none;
@@ -278,7 +277,7 @@
 	flex-direction: column;
 
 	&.flexcol_border_right {
-		border-right: 1px solid;
+		border-right: 1px solid var(--temp-color);
 	}
 
 	&.flexcol_in_flex {

@@ -71,6 +71,7 @@ function SupplierDetails({
 		getSupplierHistory();
 		setShowModal(!showModal);
 	};
+	const rest = { onClickOutside: () => { setShowModal(false); } };
 
 	const functions = {
 		DocumentTypeFunc: (item: any) => {
@@ -245,13 +246,14 @@ function SupplierDetails({
 						caret
 						visible={showModal}
 						render={getSupplierData()}
+						{...rest}
 					>
 						<div
-							className={styles.supplier_history}
 							onClick={() => {
 								handleChange();
 							}}
 							role="presentation"
+							className={styles.supplier_history}
 						>
 							Supplier History
 						</div>

@@ -17,6 +17,8 @@ const useShipmentDocument = (shipmentId) => {
 				filters                          : {
 					shipment_id: shipmentId,
 				},
+				page       : 1,
+				page_limit : 50,
 			},
 		});
 	}, [shipmentId, trigger]);

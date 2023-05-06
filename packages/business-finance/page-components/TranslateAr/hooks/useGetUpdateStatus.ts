@@ -3,7 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 interface Props {
-	finalUrl?: string;
+	uploadProof?: string;
 	setOpen?:(v:boolean)=>void;
 	itemData?: {
 		id?: string,
@@ -12,7 +12,7 @@ interface Props {
 	refetch: Function;
 }
 
-const useUpdateStatus = ({ finalUrl, setOpen, itemData = {}, refetch }: Props) => {
+const useUpdateStatus = ({ uploadProof, setOpen, itemData = {}, refetch }: Props) => {
 	const profile = useSelector((state) => state);
 	const { profile:{ user } } = profile || {};
 	const { id: partnerId } = user || {};
@@ -35,7 +35,7 @@ const useUpdateStatus = ({ finalUrl, setOpen, itemData = {}, refetch }: Props) =
 		try {
 			await trigger({
 				data: {
-					url       : finalUrl,
+					url       : uploadProof,
 					createdBy : partnerId,
 					invoiceId : id,
 				},

@@ -39,9 +39,9 @@ irisRequest.interceptors.request.use((oldConfig) => {
 		...newConfig,
 		paramsSerializer : { serialize: customSerializer },
 		headers          : {
-			authorizationscope : 'partner',
-			authorization      : `Bearer: ${token}`,
-			authorizationparameters,
+			AuthorizationScope      : 'partner',
+			Authorization           : `Bearer: ${token}`,
+			AuthorizationParameters : authorizationparameters,
 		},
 	};
 });

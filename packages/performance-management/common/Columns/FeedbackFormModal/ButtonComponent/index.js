@@ -1,32 +1,41 @@
 import { Button, Popover } from '@cogoport/components';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMEdit, IcMPlusInCircle } from '@cogoport/icons-react';
-import { addHours, addDays, getYear, getMonth, isEmpty } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+const formTypes = [
+	{ label: 'Employed', value: 'employed' },
+	{ label: 'New', value: 'new' },
+	{ label: 'Resigned', value: 'resigned' },
+];
+
 function ButtonComponent({
-	action = '', setShowModal = () => {}, showTypePopover = false,
+	item = {}, action = '', setShowModal = () => {}, showTypePopover = false,
 	setShowTypePopover = () => {}, feedback_id = '',
 }) {
-	const currentDate = new Date();
-	const month = getMonth(currentDate);
-	const year = getYear(currentDate);
-	const formStartingDate = addHours(new Date(year, month, 1), 10);
+	const currentDate = formatDate({
+		date       : new Date(),
+		formatType : 'dateTime',
+		dateFormat : 'dd MM yyyy',
+		timeFormat : 'HH:mm aaa',
+	});
 
-	const formEndingDate = addDays(formStartingDate, 5);
-
-	const formTypes = [
-		{ label: 'Employed', value: 'employed' },
-		{ label: 'New', value: 'new' },
-		{ label: 'Resigned', value: 'resigned' },
-	];
+	const formDeadline = 	formatDate({
+		date       : item.form_deadline,
+		formatType : 'dateTime',
+		dateFormat : 'dd MM yyyy',
+		timeFormat : 'HH:mm aaa',
+	});
 
 	if (action === 'show') {
 		return (
 			<Button
 				size="md"
-				themeType="link"
+				themeType="tertiary"
 				onClick={() => setShowModal(true)}
+				disabled={!feedback_id && !item.form_id}
 			>
 				View Form
 			</Button>
@@ -61,7 +70,7 @@ function ButtonComponent({
 				size="sm"
 				themeType="primary"
 				onClick={() => 	setShowTypePopover(!showTypePopover)}
-				disabled={!(currentDate <= formEndingDate && currentDate >= formStartingDate)}
+				disabled={formDeadline < currentDate}
 			>
 				{isEmpty(feedback_id) ? (
 					<>

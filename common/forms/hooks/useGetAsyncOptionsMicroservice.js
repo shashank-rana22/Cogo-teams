@@ -1,8 +1,13 @@
-import { useRequestBf } from '@cogoport/request';
+import { useRequest, useRequestBf, useAllocationRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import useDebounceQuery from './useDebounceQuery';
+
+const REQUEST_HOOK_MAPPING = {
+	business_finance : useRequestBf,
+	allocation       : useAllocationRequest,
+};
 
 function useGetAsyncOptionsMicroservice({
 	endpoint = '',
@@ -10,22 +15,28 @@ function useGetAsyncOptionsMicroservice({
 	valueKey = '',
 	labelKey = '',
 	params = {},
+	authkey = '',
+	microService = '',
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
 	const [storeoptions, setstoreoptions] = useState([]);
 
-	const [{ data, loading }] = useRequestBf({
+	const useRequestMicroservice = REQUEST_HOOK_MAPPING[microService] || useRequest;
+
+	const [{ data, loading }] = useRequestMicroservice({
 		url    : endpoint,
 		method : 'GET',
+		authkey,
 		params : merge(params, { filters: { q: query } }),
 	}, { manual: !(initialCall || query) });
-	const options = data?.list || [];
+	const options = data?.list || data || [];
 
 	const optionValues = options.map((item) => item[valueKey]);
 
-	const [{ loading: loadingSingle }, triggerSingle] = useRequestBf({
+	const [{ loading: loadingSingle }, triggerSingle] = useRequestMicroservice({
 		url    : endpoint,
 		method : 'GET',
+		authkey,
 	}, { manual: true });
 	useEffect(() => {
 		storeoptions.push(...options);
@@ -74,7 +85,7 @@ function useGetAsyncOptionsMicroservice({
 			const res = await triggerSingle({
 				params: merge(params, { filters: { [valueKey]: value } }),
 			});
-			return res?.data?.list?.[0] || null;
+			return res?.data?.list?.[0] || res?.data?.[0] || null;
 		} catch (err) {
 			// console.log(err);
 			return {};

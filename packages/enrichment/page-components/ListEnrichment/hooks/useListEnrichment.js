@@ -32,10 +32,10 @@ const useListEnrichment = () => {
 		sort_type  : 'desc',
 		page_limit : 10,
 		page       : 1,
-		partner_id,
-		user_id,
 		filters    : {
 			q: searchQuery || undefined,
+			partner_id,
+			user_id,
 		},
 	});
 
@@ -82,7 +82,7 @@ const useListEnrichment = () => {
 
 			filters: {
 				...prev.filters,
-				status: activeTab === 'requests_sent' ? 'responded' : 'requested',
+				status: activeTab === 'requests_sent' ? 'responded' : 'active',
 			},
 		}));
 	}, [activeTab]);
@@ -97,7 +97,19 @@ const useListEnrichment = () => {
 		{
 			id       : 'id',
 			Header   : 'SERIAL ID',
-			accessor : ({ serial_id = '' }) => (
+			accessor : ({ organization, lead_organization }) => (
+				<section>
+					<Pill>
+						#
+						{lead_organization?.serial_id || organization?.serial_id}
+					</Pill>
+				</section>
+			),
+		},
+		{
+			id       : 'file_id',
+			Header   : 'SERIAL ID',
+			accessor : ({ serial_id }) => (
 				<section>
 					<Pill>
 						#
@@ -109,9 +121,15 @@ const useListEnrichment = () => {
 		{
 			id       : 'business_name',
 			Header   : 'ORGANIZATION',
-			accessor : ({ organization = {} }) => (
+			accessor : ({ organization, lead_organization, lead_organization_id }) => (
 				<section>
-					{organization.business_name || '-'}
+					{
+						lead_organization_id ? (
+							(lead_organization || {}).business_name || '-'
+						) : (
+							(organization || {}).business_name || '-'
+						)
+					}
 				</section>
 			),
 		},
@@ -133,9 +151,15 @@ const useListEnrichment = () => {
 		{
 			id       : 'registration_number',
 			Header   : 'PAN',
-			accessor : ({ organization = {} }) => (
+			accessor : ({ organization, lead_organization, lead_organization_id }) => (
 				<section>
-					{organization.registration_number || '-'}
+					{
+						lead_organization_id ? (
+							(lead_organization || {}).registration_number || '-'
+						) : (
+							(organization || {}).registration_number || '-'
+						)
+					}
 				</section>
 			),
 		},

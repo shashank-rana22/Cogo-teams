@@ -1,0 +1,33 @@
+.validity_label {
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	color: #828282;
+}
+
+.validity {
+	margin-top: 4px;
+	font-size: 14px;
+	color: #221f20;
+}
+
+.header_row {
+	display: flex;
+	justify-content: space-between;
+}
+
+.heading {
+	font-size: 18px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.status_time {
+	display: flex;
+	align-items: center;
+	margin-left: 12px;
+}
+
+.middle_div {
+	margin: 4px 12px 0;
+}

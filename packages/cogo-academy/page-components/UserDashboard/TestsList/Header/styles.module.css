@@ -1,0 +1,45 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.header {
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.filters {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 12px;
+}
+
+.icon_container {
+	display: flex;
+	margin-right: 8px;
+}
+
+.select_container {
+	margin-left: 12px;
+
+	:global {
+		.ui_select_container {
+			width: 132px;
+		}
+	}
+}
+
+.label {
+	font-size: 10px;
+}
+
+.sub_heading {
+	margin: 8px 0 24px;
+	font-size: 12px;
+	color: #f68b21;
+}
+
+.input_container {
+	width: 100%;
+}

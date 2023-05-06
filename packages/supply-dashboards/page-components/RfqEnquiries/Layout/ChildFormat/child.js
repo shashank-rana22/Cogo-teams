@@ -14,8 +14,8 @@ function Child({
 	remove,
 	showDeleteButton = true,
 	noDeleteButtonTill = 0,
-	disabled = false,
 	field,
+	disabled,
 	error,
 }) {
 	let rowWiseFields = [];
@@ -57,6 +57,7 @@ function Child({
 						if (controlItem.customProps?.options) {
 							extraProps.options = controlItem.customProps.options[index];
 						}
+						const disable = index < noDeleteButtonTill && controlItem.name === 'code';
 						const flex = ((controlItem?.span || 12) / 12) * 100;
 						if (!Element) return null;
 						return (
@@ -75,6 +76,7 @@ function Child({
 									name={`${name}.${index}.${controlItem.name}`}
 									index={index}
 									control={control}
+									disabled={disabled || disable}
 
 								/>
 								<p style={{

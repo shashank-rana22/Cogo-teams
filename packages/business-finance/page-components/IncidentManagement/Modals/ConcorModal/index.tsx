@@ -143,7 +143,7 @@ function ConcorModal({ concorData, id, refetch }:Props) {
 									value={inputValues.bankname}
 									initialCall={false}
 									placeholder="Select Bank"
-									microService
+									microService="business_finance"
 									onChange={(value:string, obj:ObjectInterface) => setInputValues({
 										...inputValues,
 										bankAccountNo : obj?.bankAccountNo,
@@ -196,6 +196,7 @@ function ConcorModal({ concorData, id, refetch }:Props) {
 								size="md"
 								style={{ marginRight: '8px' }}
 								disabled={isDisabled}
+								loading={loading}
 								onClick={() => {
 									OnAction(inputValues);
 								}}

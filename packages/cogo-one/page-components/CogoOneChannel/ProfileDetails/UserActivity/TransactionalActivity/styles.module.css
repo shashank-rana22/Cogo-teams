@@ -27,35 +27,56 @@
 }
 
 .card {
-	padding: 8px;
-	margin: 5px 10px;
+	margin: 15px 10px;
 	background: #fff;
 	border-left: 2px solid #d6b300;
 	border-radius: 6px;
 	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
 }
 
-.booking_details {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin: 6px 0;
+.card_details {
+	max-height: 145px;
+	padding: 8px;
+	overflow: hidden;
+	transition: all 0.5s ease-in-out;
 }
 
-.title {
-	font-size: 14px;
-	font-weight: 500;
+.open_card_details {
+	height: auto;
+	padding: 8px;
+	overflow: hidden;
+	transition: all 0.5s ease-in-out;
+}
+
+.show_more {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 7px;
+	cursor: pointer;
+	background: #fdfbf6;
+}
+
+.arrow_down_icon {
+	transition: all 0.5s ease;
+	transform: rotate(0deg);
+}
+
+.arrow_up_icon {
+	transition: all 0.5s ease;
+	transform: rotate(180deg);
 }
 
 .booking_id {
-	font-size: 10px;
+	font-size: 14px;
+	font-weight: 500;
 	color: #4f4f4f;
 }
 
 .port_pair {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: space-evenly;
 	margin: 10px 0;
 }
 
@@ -74,7 +95,7 @@
 }
 
 .port_name {
-	max-width: 50px;
+	max-width: 70px;
 	overflow: hidden;
 	font-size: 11px;
 	font-weight: 500;
@@ -97,8 +118,31 @@
 	color: #828282;
 }
 
-/* .pagination {
-	position: absolute;
-	right: 0;
-	bottom: -8px;
-} */
+.milestone_name {
+	margin-left: 5px;
+	overflow: hidden;
+	font-size: 11px;
+	font-weight: 500;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.milestone_main_card {
+	padding: 8px;
+	margin: -5px 0 -5px 5px;
+	border-left: 1px solid #bdbdbd;
+}
+
+.milestone_name_container {
+	display: flex;
+	align-items: center;
+	margin: 8px 0;
+}
+
+.milestone_container {
+	margin-top: 20px;
+}
+
+.milestone_last_card {
+	border-left: none;
+}

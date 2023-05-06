@@ -101,6 +101,7 @@ function InstantReplies({
 								control={control}
 								{...content}
 								id="content"
+								rows={10}
 							/>
 							{errors?.content && <div className={styles.error_text}>This is Required</div>}
 						</div>

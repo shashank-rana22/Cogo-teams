@@ -8,13 +8,13 @@ import {
 	Checkbox,
 } from '@cogoport/components';
 import { IcCFtick, IcMCrossInCircle, IcMInfo } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import { format, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 // eslint-disable-next-line import/no-cycle
 import { DataInterface } from '..';
 import { RemarksValInterface } from '../../../../../commons/Interfaces/index';
+import isDisabled from '../../../../utils/isDisabled';
 
 import LineItemCard from './lineItemCard/index';
 import styles from './styles.module.css';
@@ -52,22 +52,22 @@ function ShipmentDetailsCard({
 		registrationNumber: registrationNumberBuyer = '',
 		taxNumber: taxNumberBuyer = '',
 	} = buyerDetail || {};
-	const { organizationName = '', taxNumber = '' } = sellerDetail || {};
+	const { organizationName = '', taxNumber = '', registrationNumber = '' } = sellerDetail || {};
 	const {
 		bankName = '',
 		accountNumber = '',
 		ifscCode = '',
+		beneficiaryName = '',
 	} = sellerBankDetail || {};
+
 	const {
 		billNumber = '',
 		billDate,
 		status = '',
 		placeOfSupply = '',
+		billType = '',
+		isProforma,
 	} = bill || {};
-
-	const { query } = useRouter();
-	const { billType, isProforma } = query;
-
 	const [DetailsCard, setDetailsCard] = useState([
 		{
 			id    : 1,
@@ -250,7 +250,7 @@ function ShipmentDetailsCard({
 														<div className={styles.margin_bottom}>
 															PAN Number -
 															{' '}
-															<span>{(taxNumber || '').slice(2, 12)}</span>
+															<span>{(registrationNumber || '')}</span>
 														</div>
 													</div>
 
@@ -435,7 +435,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={!isDisabled(status)}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -445,7 +445,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={!isDisabled(status)}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}
@@ -464,9 +464,15 @@ function ShipmentDetailsCard({
 
 										<div className={styles.billing_party_container}>
 											<div className={styles.margin_bottom}>
-												Name -
+												Collection Party Name -
 												{' '}
 												<span>{organizationName}</span>
+											</div>
+											<div className={styles.margin_bottom}>
+												{' '}
+												Beneficiary Name-
+												{' '}
+												<span>{beneficiaryName}</span>
 											</div>
 											<div className={styles.margin_bottom}>
 												{' '}
@@ -491,7 +497,7 @@ function ShipmentDetailsCard({
 											<div className={styles.margin_bottom}>
 												PAN Number -
 												{' '}
-												<span>{(taxNumber || '').slice(2, 12)}</span>
+												<span>{(registrationNumber || '')}</span>
 											</div>
 											<div className={styles.margin_bottom}>
 												GST Number -
@@ -541,7 +547,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={!isDisabled(status)}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -551,7 +557,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={!isDisabled(status)}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}
@@ -639,7 +645,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={!isDisabled(status)}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -649,7 +655,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
-																disabled={status !== 'INITIATED'}
+																disabled={!isDisabled(status)}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}

@@ -1,7 +1,6 @@
 import { Input } from '@cogoport/components';
 import { SelectController, useDebounceQuery, useForm } from '@cogoport/forms';
 import { IcMSearchlight } from '@cogoport/icons-react';
-import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
 import useGetColumns from '../../../../common/Columns';
@@ -13,8 +12,6 @@ import useListUserFeedbacks from '../../../../hooks/useListUserFeedbacks';
 import styles from './styles.module.css';
 
 function ListItem({ item }) {
-	const { profile:{ user:{ id: managerId = '' } } } = useSelector((state) => state);
-
 	const [searchValue, setSearchValue] = useState('');
 	const { query = '', debounceQuery } = useDebounceQuery();
 
@@ -27,7 +24,6 @@ function ListItem({ item }) {
 		month,
 		year,
 		searchValue     : query,
-		managerId,
 		rating_required : 'yes',
 	});
 
@@ -44,19 +40,17 @@ function ListItem({ item }) {
 	const designation = watch('designation');
 
 	useEffect(() => {
-		setParams({
-			...params,
+		setParams((pv) => ({
+			...pv,
 			Department  : department || undefined,
 			Designation : designation || undefined,
 			Page        : 1,
-		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [department, designation]);
+		}));
+	}, [department, designation, setParams]);
 
 	useEffect(() => {
 		debounceQuery(searchValue);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchValue]);
+	}, [debounceQuery, searchValue]);
 
 	return (
 		<div className={styles.overall_baselist}>

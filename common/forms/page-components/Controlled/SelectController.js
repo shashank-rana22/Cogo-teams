@@ -17,7 +17,7 @@ function SelectController(props) {
 			render={({ field: { onChange, onBlur, value : newValue } }) => (
 				<Select
 					{...rest}
-					key={name}
+					key={`${name}_${newValue}`}
 					id={name}
 					onChange={onChange}
 					value={newValue}

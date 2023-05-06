@@ -169,6 +169,282 @@ const allocation = {
 			service_name : 'allocation',
 		},
 	],
+	kam_expertise: [
+		{
+			api          : 'get_allocation_kam_expertise_rules',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_kam_expertise_badge_configuration',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_badge_configuration_list',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_kam_expertise_badge_configuration_detail_attributes',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_configuration',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_configuration_levels',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_kam_expertise_mastery_badge_configuration',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_kam_expertise_configuration_attributes',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_event_configuration',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_event_configuration_name',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_kam_expertise_configuration',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_event_configuration_attributes',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_kam_expertise_event_configuration',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_dashboard',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_kam_expertise_event_rule_mapping',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_stats_list',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_kam_expertise_event_scoring',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_kam_expertise_event_scoring_attribute',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_card_details',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_badge_name',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_kam_expertise_publishability',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_kam_expertise_version_configurations',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_level_overview',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_rule_options',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_kam_expertise_event_group_name',
+			access_type  : 'private',
+			feature      : 'kam_expertise',
+			service_name : 'allocation',
+		},
+	],
+	crm_feedback_dashboard: [
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_lead_organizations',
+			access_type  : 'private',
+			service_name : 'lead',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_partners',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'get_allocation_feedbacks',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_feedback_requests',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_feedback_stats',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_feedback_request_stats',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_feedback_responses',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_feedback_request_status',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_feedback_request_bulk_create',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+	],
+	account_scoring: [
+		{
+			api          : 'post_allocation_engagement_scoring_settings_attributes',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_engagement_scoring_settings',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_engagement_distribution_settings_attributes',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_engagement_scoring_leaderboard',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_engagement_scoring_account_distribution_graph',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_engagement_scoring_account_stats',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'list_segments',
+			access_type  : 'private',
+			service_name : 'segmentation',
+		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},		{
+			api          : 'get_allocation_engagement_scoring_event_configurations',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_engagement_scoring_event_configurations_attributes',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_engagement_scoring_event_names',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'post_allocation_remove_event_configuration',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
+
+	],
 };
 
 export default allocation;

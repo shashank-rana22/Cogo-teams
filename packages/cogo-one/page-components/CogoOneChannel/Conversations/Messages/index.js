@@ -7,10 +7,11 @@ import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPI
 import useAssignChat from '../../../../hooks/useAssignChat';
 import useGetMessages from '../../../../hooks/useGetMessages';
 import useListAssignedChatTags from '../../../../hooks/useListAssignedChatTags';
+import useRequestAssignChat from '../../../../hooks/useRequestAssignChat';
 import useSendChat from '../../../../hooks/useSendChat';
 import useSendCommunicationTemplate from '../../../../hooks/useSendCommunicationTemplate';
-import useSendMessage from '../../../../hooks/useSendMessage';
 import useUpdateAssignedChat from '../../../../hooks/useUpdateAssignedChat';
+import useUpdateUserRoom from '../../../../hooks/useUpdateUserRoom';
 import getActiveCardDetails from '../../../../utils/getActiveCardDetails';
 
 import Header from './Header';
@@ -23,32 +24,36 @@ function Messages({
 	suggestions = [],
 	userId = '',
 	isomniChannelAdmin = false,
-	showBotMessages = false,
+	setActiveMessage = () => {},
+	setRaiseTicketModal = () => {},
 }) {
 	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 	const [uploading, setUploading] = useState({});
+	const [disableButton, setDisableButton] = useState('');
 	const { tagOptions = [] } = useListAssignedChatTags();
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
-	const closeModal = () => setOpenModal({ type: null, data: {} });
+	const closeModal = () => {
+		setOpenModal({ type: null, data: {} });
+		setDisableButton('');
+	};
 	let activeChatCollection;
-
-	const [disableButton, setDisableButton] = useState('');
-
 	const {
 		id = '',
 		channel_type = '',
 		support_agent_id = '',
 		spectators_data = [],
-		sender = null,
+		session_type = '',
 	} = activeMessageCard || {};
 
 	const {
 		sendCommunicationTemplate,
 		loading: communicationLoading,
 	} = useSendCommunicationTemplate({ formattedData, callbackfunc: closeModal, isOtherChannels: false });
+
+	const showBotMessages = session_type === 'bot';
 
 	const hasPermissionToEdit = !showBotMessages && (userId === support_agent_id || isomniChannelAdmin);
 
@@ -60,11 +65,6 @@ function Messages({
 		(val) => val.agent_id === support_agent_id,
 	)?.agent_name;
 
-	const {
-		sendMessage,
-		loading:createCommunicationLoading,
-	} = useSendMessage({ channel_type, sender });
-
 	if (channel_type && id) {
 		activeChatCollection = collection(
 			firestore,
@@ -72,7 +72,7 @@ function Messages({
 		);
 	}
 
-	const { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions } = useSendChat({
+	const { sendChatMessage, messageFireBaseDoc, sentQuickSuggestions, messageLoading } = useSendChat({
 		firestore,
 		channel_type,
 		id,
@@ -81,8 +81,6 @@ function Messages({
 		activeChatCollection,
 		draftUploadedFiles,
 		setDraftUploadedFiles,
-		sendMessage,
-		createCommunicationLoading,
 		formattedData,
 	});
 
@@ -108,6 +106,14 @@ function Messages({
 		formattedData,
 	});
 
+	const {
+		updateRoomLoading,
+		updateUserRoom,
+	} = useUpdateUserRoom();
+	const {
+		requestForAssignChat,
+		requestAssignLoading,
+	} = useRequestAssignChat();
 	const {
 		comp: ActiveModalComp = null,
 		title: { img = null, name = null } = {},
@@ -138,9 +144,14 @@ function Messages({
 					isomniChannelAdmin={isomniChannelAdmin}
 					setDisableButton={setDisableButton}
 					disableButton={disableButton}
+					updateRoomLoading={updateRoomLoading}
+					updateUserRoom={updateUserRoom}
+					requestForAssignChat={requestForAssignChat}
+					requestAssignLoading={requestAssignLoading}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
+						formattedData={formattedData}
 						messagesData={messagesData}
 						uploading={uploading}
 						draftMessage={draftMessages?.[id]}
@@ -161,6 +172,9 @@ function Messages({
 						sendCommunicationTemplate={sendCommunicationTemplate}
 						communicationLoading={communicationLoading}
 						closeModal={closeModal}
+						messageLoading={messageLoading}
+						setActiveMessage={setActiveMessage}
+						setRaiseTicketModal={setRaiseTicketModal}
 					/>
 				</div>
 			</div>

@@ -1,0 +1,8 @@
+.answer {
+	max-width: fit-content;
+}
+
+.flex_column {
+	display: flex;
+	flex-direction: column;
+}

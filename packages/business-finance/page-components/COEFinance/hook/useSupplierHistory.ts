@@ -10,7 +10,7 @@ const useSupplierHistory = () => {
 		{
 			url     : '/purchase/bills/supplier-history',
 			method  : 'get',
-			authKey : 'get_purchase_supplier_history',
+			authKey : 'get_purchase_bills_supplier_history',
 		},
 		{ autoCancel: false },
 	);

@@ -1,14 +1,14 @@
-import { Button, Checkbox, cl } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
-import filterControls from '../../../../configurations/filter-controls';
+import useGetControls from '../../../../configurations/filter-controls';
 
 import Item from './Item';
 import styles from './styles.module.css';
 
-function getDefaultValues({ filters }) {
+function getDefaultValues({ filters, filterControls }) {
 	let defaultValues = {};
 
 	filterControls.forEach((item) => {
@@ -25,19 +25,27 @@ function FilterComponents({
 	setFilterVisible = () => {},
 	setAppliedFilters = () => {},
 	appliedFilters = {},
-	setActiveCardId = () => {},
 	setShowBotMessages = () => {},
+	isomniChannelAdmin = false,
+	tagOptions = [],
 	showBotMessages = false,
 }) {
-	const [botToggle, setBotToggle] = useState(false);
+	const filterControls = useGetControls({ isomniChannelAdmin, tagOptions, showBotMessages });
 
-	const defaultValues = getDefaultValues({ filters: appliedFilters });
+	const defaultValues = getDefaultValues({ filters: appliedFilters, filterControls });
 
 	const {
-		control, formState: { errors }, watch, setValue,
+		control, formState: { errors }, watch, setValue, handleSubmit,
 	} = useForm({ defaultValues });
 
 	const formValues = watch();
+
+	const { assigned_to = '', observer = '' } = formValues || {};
+
+	const showElements = {
+		assigned_agent : assigned_to === 'agent',
+		chat_tags      : observer === 'chat_tags' || isomniChannelAdmin,
+	};
 
 	let filterValues = {};
 
@@ -48,15 +56,10 @@ function FilterComponents({
 	};
 
 	useEffect(() => {
-		if (botToggle) {
-			resetForm();
+		if (assigned_to === 'me') {
+			setValue('assigned_agent', '');
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [botToggle]);
-
-	useEffect(() => {
-		setBotToggle(showBotMessages);
-	}, [showBotMessages]);
+	}, [assigned_to, setValue]);
 
 	Object.keys(formValues).forEach((item) => {
 		if (!isEmpty(formValues[item])) {
@@ -67,21 +70,33 @@ function FilterComponents({
 	const checkFiltersCount = Object.keys(filterValues).length;
 
 	const handleClick = () => {
-		setActiveCardId('');
 		setAppliedFilters(filterValues);
 		setFilterVisible(false);
-		setShowBotMessages(botToggle);
+		if (!isomniChannelAdmin) {
+			setShowBotMessages(filterValues?.observer === 'botSession');
+		}
 	};
-
+	const renderComp = (singleField) => {
+		const show = !(singleField?.name in showElements) || showElements[singleField?.name];
+		return (
+			show && (
+				<Item
+					{...singleField}
+					control={control}
+					value={formValues[singleField.name]}
+					setValue={setValue}
+					error={errors[singleField.name]}
+				/>
+			)
+		);
+	};
 	return (
-		<div className={styles.container}>
-			<div className={styles.header}>
+		<form className={styles.container} onSubmit={handleSubmit(handleClick)}>
+			<div className={cl`${styles.sticky_boxshadow_styles} ${styles.header}`}>
 				<div className={styles.title}>
 					Filters
 					{checkFiltersCount ? ` (${checkFiltersCount})` : ''}
-
 				</div>
-
 				<div className={styles.styled_icon}>
 					{checkFiltersCount
 						? (
@@ -95,37 +110,18 @@ function FilterComponents({
 						) : null}
 				</div>
 			</div>
-			<div className={styles.styled_flex}>
-				<Checkbox
-					name="closed"
-					size="sm"
-					onChange={() => setBotToggle((p) => !p)}
-					checked={botToggle}
-				/>
-				<div>
-					Closed
-				</div>
+			<div className={styles.filters_container}>
+				{filterControls.map((field) => (
+					<div className={styles.filter_container} key={field.name}>
+						{renderComp(field)}
+					</div>
+				))}
 			</div>
-
-			{filterControls.map((field) => (
-				<div className={cl`${styles.filter_container} ${botToggle ? styles.disabled : ''}`} key={field.name}>
-					<Item
-						{...field}
-						control={control}
-						value={formValues[field.name]}
-						setValue={setValue}
-						error={errors[field.name]}
-						botToggle={botToggle}
-
-					/>
-				</div>
-			))}
-
-			<div className={styles.actions}>
+			<div className={cl`${styles.sticky_boxshadow_styles} ${styles.footer}`}>
 				<Button size="md" themeType="tertiary" onClick={() => setFilterVisible(false)}>Cancel</Button>
-				<Button size="md" themeType="accent" onClick={() => handleClick()}>Apply</Button>
+				<Button size="md" themeType="accent" type="submit">Apply</Button>
 			</div>
-		</div>
+		</form>
 	);
 }
 

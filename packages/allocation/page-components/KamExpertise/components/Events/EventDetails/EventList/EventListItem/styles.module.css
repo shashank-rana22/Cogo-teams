@@ -1,0 +1,35 @@
+.container {
+	padding: 16px;
+	margin-bottom: 16px;
+	background-color: #fff;
+	border-radius: 8px;
+}
+
+.top_div {
+	display: flex;
+	justify-content: space-between;
+}
+
+.info_tag {
+	display: flex;
+}
+
+.rule_body {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	margin-top: 2px;
+}
+
+.rule_head {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.margin_left {
+	margin-left: 4px;
+}
+
+.margin_right {
+	margin-right: 4px;
+}

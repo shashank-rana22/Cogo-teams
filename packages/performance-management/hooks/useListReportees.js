@@ -2,20 +2,27 @@ import { Toast } from '@cogoport/components';
 import { useIrisRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
+import getDefaultFeedbackMonth from '../utils/getDefaultYearMonth';
+
 const useListReportees = ({
-	userId = '',
 	searchValue = '',
 }) => {
+	const { feedbackMonth, feedbackYear } = getDefaultFeedbackMonth();
 	const [params, setParams] = useState({
-		ManagerID : userId || undefined,
-		Page      : 1,
-		PageLimit : 20,
+		Page                 : 1,
+		PageLimit            : 20,
+		FeedbackDataRequired : true,
+		Year                 : feedbackYear,
+		Month                : feedbackMonth,
 	});
+
+	const validParams = {};
+	Object.keys(params).forEach((key) => { if (params[key]) { validParams[key] = params[key]; } });
 
 	const [{ data: feedbackData = {}, loading = false }, trigger] = useIrisRequest({
 		method : 'get',
 		url    : 'get_iris_list_reportees',
-		params,
+		params : { ...validParams },
 	}, { manual: false });
 
 	const fetchReportees = async () => {
@@ -28,12 +35,11 @@ const useListReportees = ({
 	const setPage = (p) => { setParams({ ...params, Page: p }); };
 
 	useEffect(() => {
-		setParams({
-			...params,
+		setParams((pv) => ({
+			...pv,
 			Q    : searchValue || undefined,
 			Page : 1,
-		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		}));
 	}, [searchValue]);
 
 	return {

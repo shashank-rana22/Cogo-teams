@@ -29,7 +29,7 @@ const chargeControls = ({ heading = '', charge_code_name }) => {
 		],
 		showButtons        : true,
 		buttonText         : 'Add Line Items',
-		noDeleteButtonTill : 1,
+		noDeleteButtonTill : 0,
 		controls           : [
 			{
 				name        : 'code',

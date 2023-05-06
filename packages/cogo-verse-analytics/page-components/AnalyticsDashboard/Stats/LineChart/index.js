@@ -1,4 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { format } from '@cogoport/utils';
 
@@ -7,30 +6,53 @@ import { imgURL } from '../../../../constants/image-urls';
 import styles from './styles.module.css';
 
 function Charts({ GraphData = [], hideChart = false }) {
-	const colors = ['#5B4A99', '#BDBDBD'];
+	const dates = GraphData.map((data) => data?.shipment_week_starting_from);
+	const cancelledShipments = GraphData.map((data) => data?.cogoverse_cancelled_shipments);
+	const activeShipments = GraphData.map((data) => data?.cogoverse_active_shipments);
+	const totalShipments = GraphData.map((data) => data?.total_shipments);
 
-	const formattedDate = (date) => format(date, 'dd MMM');
+	const colors = ['#bf291e', '#d6b300', '#6fa5ab'];
+	const cancelled_data = dates.map((date, index) => ({
+		x : format(date, 'dd MMM'),
+		y :	cancelledShipments[index],
+	}));
+	const active_data = dates.map((date, index) => ({
+		x : format(date, 'dd MMM'),
+		y :	activeShipments[index],
+	}));
+	const total_data = dates.map((date, index) => ({
+		x : format(date, 'dd MMM'),
+		y :	totalShipments[index],
+	}));
 
-	const formattedTime = (time) => {
-		if (time >= 60) {
-			return `${Number(time / 60).toFixed(1)} hrs`;
-		}
-		return `${time} min`;
-	};
+	const graphData = [
+		{
+			id   : 'cogoverse_cancelled_shipments',
+			data : cancelled_data,
+		},
+		{
+			id   : 'cogoverse_active_shipments',
+			data : active_data,
+		},
+		{
+			id   : 'cogoverse_total_shipments',
+			data : total_data,
+		},
+
+	];
 
 	return (
 		<div style={{ height: '100%' }}>
 			{!hideChart ? (
 				<ResponsiveLine
-					data={GraphData}
-					margin={{ top: 5, right: 35, bottom: 55, left: 75 }}
+					data={graphData}
+					margin={{ top: 15, right: 35, bottom: 75, left: 75 }}
 					xScale={{ type: 'point' }}
 					yScale={{
-            	type    : 'linear',
-            	min     : 'auto',
-            	max     : 'auto',
-            	stacked : true,
-            	reverse : false,
+						type    : 'linear',
+						min     : 0,
+						max     : 'auto',
+						reverse : false,
 					}}
 					yFormat=" >-.2f"
 					curve="natural"
@@ -38,42 +60,40 @@ function Charts({ GraphData = [], hideChart = false }) {
 					axisRight={null}
 					colors={colors}
 					axisBottom={{
-            	orient         : 'bottom',
-            	tickSize       : 0,
-            	tickPadding    : 25,
-            	tickValues     : 8,
-            	tickRotation   : 0,
-            	legend         : '',
-            	legendOffset   : 45,
-            	legendPosition : 'middle',
-            	format         : (v) => formattedDate(v),
+						orient         : 'bottom',
+						tickSize       : 0,
+						tickPadding    : 15,
+						tickValues     : 8,
+						tickRotation   : 0,
+						legend         : 'Date',
+						legendOffset   : 50,
+						legendPosition : 'middle',
 					}}
 					axisLeft={{
-            	orient         : 'left',
-            	tickSize       : 0,
-            	tickValues     : 5,
-            	tickPadding    : 15,
-            	tickRotation   : 0,
-            	legend         : '',
-            	legendOffset   : -40,
-            	legendPosition : 'middle',
-            	format         : (v) => formattedTime(v),
+						orient         : 'left',
+						tickSize       : 0,
+						tickValues     : 5,
+						tickPadding    : 12,
+						tickRotation   : 0,
+						legend         : 'Shipments',
+						legendOffset   : -50,
+						legendPosition : 'middle',
 					}}
 					tooltip={({ point = {} }) => {
-            	const { borderColor, data } = point;
+						const { borderColor, data } = point;
+						return (
+							<div className={styles.tool_tip}>
+								<span style={{ background: borderColor }} />
+								<strong>
+									{(data.x)}
 
-            	return (
-	<div className={styles.tool_tip}>
-		<span style={{ background: borderColor }} />
-		<strong>
-			{formattedDate(data.x)}
-			{' '}
-			:
-			{' '}
-			{formattedTime(data.y)}
-		</strong>
-	</div>
-            	);
+									{' '}
+									:
+									{' '}
+									{(data.y)}
+								</strong>
+							</div>
+						);
 					}}
 					enableGridX={false}
 					enablePoints={false}

@@ -1,0 +1,24 @@
+.sub_container {
+	display: flex;
+	max-width: 100%;
+	margin-top: 8px;
+
+	@media (max-width: 1158px) {
+		flex-direction: column;
+	}
+}
+
+.outstanding {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin-right: 16px;
+}
+
+.hr {
+	width: 100%;
+	height: 1px;
+	margin-top: 16px;
+	background: #f68b21;
+	border-radius: 10px;
+}

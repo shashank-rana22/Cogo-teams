@@ -1,32 +1,34 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 function useGetQuestions({ id }) {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_question',
 	}, { manual: true });
-
-	const fetchQuestions = async () => {
+	const fetchQuestions = useCallback(async () => {
 		try {
 			await trigger({
-				params: { id },
+				params: {
+					id,
+				},
 			});
 		} catch (error) {
-			console.log('error :: ', error);
+			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
 		}
-	};
+	}, [id, trigger]);
 
 	useEffect(() => {
-		fetchQuestions();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [id]);
-
+		if (id) {
+			fetchQuestions();
+		}
+	}, [fetchQuestions, id]);
 	return {
 		refetchQuestions: fetchQuestions,
 		data,
 		loading,
 	};
 }
-
 export default useGetQuestions;

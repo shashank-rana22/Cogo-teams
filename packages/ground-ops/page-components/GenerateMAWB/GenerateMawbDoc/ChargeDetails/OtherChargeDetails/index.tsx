@@ -26,24 +26,43 @@ interface NestedObj {
 interface Props {
 	taskItem?: NestedObj;
 	formData?: NestedObj;
+	whiteout?:boolean;
+	awbType?: String;
+	activeHawb?: NestedObj;
+	viewDoc?:boolean;
 }
 
 function OtherChargeDetails({
 	taskItem = {},
 	formData = {},
+	whiteout = false,
+	awbType = '',
+	activeHawb = {},
+	viewDoc = false,
 }:Props) {
 	const { agentOtherCharges = [], carrierOtherCharges = [] } = formData;
+	const { awbNumber = '', document_number:documentNo = '' } = taskItem;
+	const hawbNumber = activeHawb.isNew && !viewDoc ? '' : documentNo;
+
+	let tempColor = '#333';
+	if (whiteout) {
+		tempColor = 'transparent';
+	}
 
 	return (
-		<div className={cl`
+		<div
+			className={cl`
 				${styles.block_col} 
 				${styles.other_charge_container} 
 			`}
+			style={{ '--temp-color': tempColor } as React.CSSProperties}
 		>
-			<div className={cl`
+			<div
+				className={cl`
 				${styles.flex_col} 
 				${styles.other_container} 
 			`}
+				style={{ '--temp-color': tempColor } as React.CSSProperties}
 			>
 				<div className={cl`
 					${styles.flex} 
@@ -51,7 +70,7 @@ function OtherChargeDetails({
 				`}
 				>
 					<p style={{ fontSize: 9 }}>
-						Other Charges
+						<span style={{ color: tempColor }}>Other Charges</span>
 						<div className={cl`
 							${styles.flex} 
 							${styles.other_charge_text} 
@@ -59,27 +78,29 @@ function OtherChargeDetails({
 						>
 							<p style={{ fontSize: 13 }}>
 								<div style={{ height: '30%' }}>
-									{(agentOtherCharges || [{}]).map((item) => `${item.code.toUpperCase()}: ${item.price} `)}
+									{formData?.class === 'a' ? '' : (agentOtherCharges || [{}]).map((item) => `${item.code.toUpperCase()}: ${item.price} `)}
 								</div>
 								<br />
-								{carrierOtherCharges.map((item) => `${item.code.toUpperCase()}: ${item.price} `)}
+								{formData?.class === 'a' ? '' : carrierOtherCharges.map((item) => `${item.code.toUpperCase()}: ${item.price} `)}
 							</p>
 						</div>
 					</p>
 				</div>
 			</div>
 
-			<div className={cl`
+			<div
+				className={cl`
 				${styles.flex_col} 
 				${styles.hereby_container} 
 			`}
+				style={{ '--temp-color': tempColor } as React.CSSProperties}
 			>
 				<div className={cl`
 					${styles.flex} 
 					${styles.hereby_container_text} 
 				`}
 				>
-					<p style={{ fontSize: 10 }} className="text">
+					<p style={{ fontSize: 10, color: tempColor }} className="text">
 						I hereby certify that the particulars on the face hereof are
 						correct and that insofar as any part of the consignment contains
 						dangerous goods.
@@ -99,7 +120,7 @@ function OtherChargeDetails({
 				`}
 				>
 					<p style={{ fontSize: 14 }}>
-						{taskItem?.customer_name}
+						{formData?.shipperSignature}
 					</p>
 				</div>
 				<div className={cl`
@@ -107,18 +128,22 @@ function OtherChargeDetails({
 					${styles.signature_text} 
 				`}
 				>
-					<p style={{ fontSize: 9 }}>Signature of Shipper or his Agent</p>
+					<p style={{ fontSize: 9, color: tempColor }}>Signature of Shipper or his Agent</p>
 				</div>
 			</div>
-			<div className={cl`
+			<div
+				className={cl`
 				${styles.block_col} 
 				${styles.right_container} 
 			`}
+				style={{ '--temp-color': tempColor } as React.CSSProperties}
 			>
-				<div className={cl`
+				<div
+					className={cl`
 					${styles.flex_col} 
 					${styles.place_container} 
 				`}
+					style={{ '--temp-color': tempColor } as React.CSSProperties}
 				>
 					<div className={cl`
 						${styles.flex} 
@@ -135,8 +160,8 @@ function OtherChargeDetails({
 							${styles.place_container_text} 
 						`}
 						>
-							<p className={styles.font_style} style={{ fontSize: 14 }}>
-								{`${formatDate(new Date())}`}
+							<p style={{ fontSize: 14 }}>
+								{`${formatDate(formData.executedDate) || formatDate(new Date())}`}
 							</p>
 						</div>
 						<div
@@ -160,21 +185,21 @@ function OtherChargeDetails({
 							${styles.date_text} 
 						`}
 						>
-							<p style={{ fontSize: 8 }}>Executed on (date)</p>
+							<p style={{ fontSize: 8, color: tempColor }}>Executed on (date)</p>
 						</div>
 						<div className={cl`
 							${styles.flex} 
 							${styles.place_text} 
 						`}
 						>
-							<p style={{ fontSize: 8 }}>at (place)</p>
+							<p style={{ fontSize: 8, color: tempColor }}>at (place)</p>
 						</div>
 						<div className={cl`
 							${styles.flex} 
 							${styles.signature_value} 
 						`}
 						>
-							<p style={{ fontSize: 8 }}>Signature of Issuing Carrier or its Agent</p>
+							<p style={{ fontSize: 8, color: tempColor }}>Signature of Issuing Carrier or its Agent</p>
 						</div>
 					</div>
 				</div>
@@ -183,10 +208,12 @@ function OtherChargeDetails({
 						${styles.down_container} 
 					`}
 				>
-					<div className={cl`
+					<div
+						className={cl`
 							${styles.flex_col} 
 							${styles.down_container_block} 
 						`}
+						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
 						<div className={cl`
 							${styles.flex_row} 
@@ -198,13 +225,15 @@ function OtherChargeDetails({
 								${styles.collected_block} 
 							`}
 							/>
-							<div className={cl`
+							<div
+								className={cl`
 								${styles.flex} 
 								${styles.collecte_block_text} 
 								${styles.trapezium}
 							`}
+								style={{ '--temp-color': tempColor } as React.CSSProperties}
 							>
-								<p style={{ fontSize: 9 }}>Total Collected</p>
+								<p style={{ fontSize: 9, color: tempColor }}>Total Collected</p>
 							</div>
 							<div className={cl`
 								${styles.flex} 
@@ -223,8 +252,8 @@ function OtherChargeDetails({
 								${styles.end_final} 
 							`}
 					>
-						<p className={styles.font_style} style={{ fontSize: 18 }}>
-							{taskItem?.awbNumber}
+						<p style={{ fontSize: 18 }}>
+							{awbType === 'mawb' ? awbNumber : hawbNumber}
 						</p>
 					</div>
 				</div>

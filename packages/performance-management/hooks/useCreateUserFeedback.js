@@ -1,6 +1,5 @@
 import { Toast } from '@cogoport/components';
 import { useIrisRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 import monthOptions from '../constants/month-options';
@@ -16,7 +15,6 @@ const useCreateUserFeedback = ({
 	feedbackMonth,
 	feedbackYear,
 }) => {
-	const { profile:{ user:{ id: manager_id = '' } } } = useSelector((state) => state);
 	const url = isEmpty(feedback_id) ? 'post_iris_create_form_responses' : 'post_iris_update_form_responses';
 
 	const [{ data = {}, loading = false }, trigger] = useIrisRequest({
@@ -35,14 +33,12 @@ const useCreateUserFeedback = ({
 		try {
 			await trigger({
 				data: {
-					user_id           : userId,
-					form_id           : formId,
+					user_id        : userId,
+					form_id        : formId,
 					form_responses,
-					final_feedback    : comment,
-					performed_by_id   : manager_id,
-					performed_by_type : 'agent',
-					Year              : feedbackYear,
-					Month             : monthOptions[feedbackMonth].value,
+					final_feedback : comment,
+					Year           : feedbackYear,
+					Month          : monthOptions[feedbackMonth].value,
 				},
 			});
 

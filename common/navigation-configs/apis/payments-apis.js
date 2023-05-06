@@ -119,8 +119,16 @@ const payments = [
 		access_type  : 'private',
 		service_name : 'sage',
 	},
-	{ api: 'get_organization_credit_request', access_type: 'private' },
-	{ api: 'get_organization_credit_allocation', access_type: 'private' },
+	{
+		api          : 'get_organization_credit_request',
+		access_type  : 'private',
+		service_name : 'credit',
+	},
+	{
+		api          : 'get_organization_credit_allocation',
+		access_type  : 'private',
+		service_name : 'credit',
+	},
 	{
 		api          : 'list_sage_ar_outstandings',
 		access_type  : 'private',

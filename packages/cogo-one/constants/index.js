@@ -4,13 +4,14 @@ import {
 	IcCFcl,
 	IcCAir,
 	IcMFftl,
-	IcMFltl,
+	IcMFltl, IcCTelegram,
 } from '@cogoport/icons-react';
 
 export const SOURCE_ICON_MAPPING = {
 	whatsapp  : <IcCWhatsapp width={25} height={25} />,
 	facebook  : <IcCFacebook width={25} height={25} />,
 	instagram : <IcCInstagram width={25} height={25} />,
+	telegram  : <IcCTelegram width={25} height={25} />,
 	email     : <img
 		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/email.svg"
 		alt=""
@@ -51,6 +52,7 @@ export const USER_ACTIVITY_MAPPING = {
 	platform      : 'Platform Activity',
 	communication : 'Communication Activity',
 	transactional : 'Transactional Activity',
+	summary       : 'Summary',
 };
 
 export const emptyChat = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg';
@@ -109,6 +111,9 @@ export const PLATFORM_MAPPING = {
 // eslint-disable-next-line max-len
 export const URL_MATCH_REGEX = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
 
+export const ENDS_WITH_STAR_SPACE = /\* /;
+export const ENDS_WITH_STAR_CHAR = /\*[^0-9a-zA-Z]/;
+
 export const DEFAULT_PILLS_ITEMS = [
 	{
 		label : 'Introductory',
@@ -134,14 +139,14 @@ export const DEFAULT_PILLS_ITEMS = [
 export const statusMapping = {
 	approved : 'Approved',
 	rejected : 'Rejected',
-	null     : 'Pending',
+	pending  : 'Pending',
 
 };
 
 export const statusColorMapping = {
 	approved : 'green',
 	rejected : 'red',
-	null     : 'orange',
+	pending  : 'orange',
 
 };
 
@@ -200,4 +205,85 @@ export const TOOLBARCONFIG = {
 export const ACCOUNT_TYPE_MAPPING = {
 	importer_exporter : 'twin_importer_exporter_id',
 	service_provider  : 'twin_service_provider_id',
+};
+
+export const DOCUMENT_FILTERS_MAPPING = [
+	{
+		label : 'KYC Document',
+		value : 'kyc_document',
+	},
+	{
+		label : 'Shipment Document',
+		value : 'shipment_document',
+	},
+	{
+		label : 'Wrong Document',
+		value : 'wrong_document',
+	},
+	{
+		label : 'Document Uploaded',
+		value : 'document_uploaded',
+	},
+	{
+		label : 'Document Accepted',
+		value : 'document_accepted',
+	},
+	{
+		label : 'Document Rejected',
+		value : 'document_rejected',
+	},
+
+];
+
+export const ANDRIOD_APK = 'https://cogo-one-prod.s3.ap-south-1.amazonaws.com/cogoOne_prod.apk';
+
+export const MAIL_REPLY_TYPE = [
+	{
+		label : 'Reply',
+		value : 'reply',
+		icon  : <img
+			src="https://cdn-icons-png.flaticon.com/512/1933/1933011.png"
+			alt="reply icon"
+		/>,
+	},
+	{
+		label : 'Reply All',
+		value : 'reply_all',
+		icon  : <img
+			src="https://cdn-icons-png.flaticon.com/512/747/747334.png"
+			alt="reply all icon"
+		/>,
+	},
+	{
+		label : 'Forward',
+		value : 'forward',
+		icon  : <img
+			src="https://cdn-icons-png.flaticon.com/512/60/60546.png"
+			alt="forward icon"
+		/>,
+	},
+];
+export const PAGE_LIMIT = 50;
+export const INDIA_COUNTRY_ID = '541d1232-58ce-4d64-83d6-556a42209eb7';
+
+export const GENERAL_ICON = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/General.svg';
+
+export const ECLAMATION_SVG = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg';
+
+export const FILTER_KEYS_MAPPING = {
+	requested  : { Statuses: 'reject_requested,resolve_requested' },
+	unresolved : { Status: 'unresolved' },
+	closed     : { Status: 'closed' },
+};
+
+export const PRIORITY_MAPPING = {
+	medium : '#F68B21',
+	high   : '#EE3425',
+	low    : '#FCDC00',
+};
+
+export const ICON_MAPPING = {
+	incoming : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incoming-call-green.png',
+	outgoing : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoing-call-orange.png',
+	missed   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png',
 };

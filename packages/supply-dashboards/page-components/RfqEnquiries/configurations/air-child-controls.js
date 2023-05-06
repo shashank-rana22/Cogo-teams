@@ -25,7 +25,7 @@ const childControls = ({ heading = '', charge_code_name = '' }) => 	{
 			},
 		],
 		buttonText         : 'Add Line Items',
-		noDeleteButtonTill : 1,
+		noDeleteButtonTill : 0,
 		controls           : [
 			{
 				name        : 'code',

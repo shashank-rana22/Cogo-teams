@@ -1,7 +1,7 @@
 import { SingleDateRange, Button, Select } from '@cogoport/components';
 import React, { useState, useEffect } from 'react';
 
-import { REPORT_TYPE_OPTIONS, ACCOUNT_TYPE_OPTIONS } from './constants';
+import { REPORT_TYPE_OPTIONS, ACCOUNT_TYPE_OPTIONS, DATE_OPTIONAL_APIS } from './constants';
 import useSubmitReport from './hooks/useSubmitReport';
 import styles from './styles.module.css';
 
@@ -31,11 +31,15 @@ function Reports() {
 		}
 	}, [value.reportType]);
 
+	const isDateOptional = (DATE_OPTIONAL_APIS.includes(value.reportType));
+
 	const isSubmitDisabled = loading
 	|| !value.reportType
 	|| !value.dateRange?.startDate
 	|| !value.dateRange?.endDate
 	|| isDisabledForAccountType();
+
+	const disable = isDateOptional ? loading : isSubmitDisabled;
 
 	return (
 		<div>
@@ -65,23 +69,25 @@ function Reports() {
 						</div>
 					</div>
 				)}
-				<div>
-					<div className={styles.title}>Select Date Range*</div>
-					<div className={styles.date}>
-						<SingleDateRange
-							isPreviousDaysAllowed
-							placeholder="Enter Date Range"
-							dateFormat="yyyy-MM-dd"
-							name="date"
-							onChange={(e:any) => setValue((p) => ({ ...p, dateRange: e }))}
-							value={value.dateRange}
-						/>
+				{!(isDateOptional) && (
+					<div>
+						<div className={styles.title}>Select Date Range*</div>
+						<div className={styles.date}>
+							<SingleDateRange
+								placeholder="Enter Date Range"
+								dateFormat="yyyy-MM-dd"
+								name="date"
+								onChange={(e:any) => setValue((p) => ({ ...p, dateRange: e }))}
+								value={value.dateRange}
+								isPreviousDaysAllowed
+							/>
+						</div>
 					</div>
-				</div>
+				)}
 				<div className={styles.button}>
 					<Button
 						className={styles.button_class}
-						disabled={isSubmitDisabled}
+						disabled={disable}
 						onClick={() => api()}
 						size="md"
 					>

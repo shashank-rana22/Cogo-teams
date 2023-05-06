@@ -27,7 +27,7 @@ const apis = [
 	{
 		api          : 'get_shipment',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'bookings',
 	},
 	{
 		api          : 'get_shipment_timeline',
@@ -110,20 +110,23 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api         : 'create_chat_message',
-		access_type : 'private',
+		api          : 'create_chat_message',
+		access_type  : 'private',
+		service_name : 'chat',
 	},
 	{
-		api         : 'list_chat_channels',
-		access_type : 'private',
+		api          : 'list_chat_channels',
+		access_type  : 'private',
+		service_name : 'chat',
 	},
 	{
 		api         : 'delete_chat_message',
 		access_type : 'private',
 	},
 	{
-		api         : 'update_chat_message',
-		access_type : 'private',
+		api          : 'update_chat_message',
+		access_type  : 'private',
+		service_name : 'chat',
 	},
 	{
 		api         : 'get_chat_channel',
@@ -134,8 +137,10 @@ const apis = [
 		access_type : 'private',
 	},
 	{
-		api         : 'update_chat_channel_seen',
-		access_type : 'private',
+		api          : 'update_chat_channel_seen',
+		access_type  : 'private',
+		service_name : 'chat',
+
 	},
 	{
 		api          : 'list_shipment_credit_notes',
@@ -400,16 +405,19 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api         : 'list_shipment_operating_procedures',
-		access_type : 'private',
+		api          : 'list_shipment_operating_procedures',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 	{
-		api         : 'list_shipment_flash_booking_rates',
-		access_type : 'private',
+		api          : 'list_shipment_flash_booking_rates',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 	{
-		api         : 'get_shipment_elligible_booking_document',
-		access_type : 'private',
+		api          : 'get_shipment_elligible_booking_document',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 	{
 		api          : 'create_shipment_operating_procedure',
@@ -479,7 +487,7 @@ const apis = [
 	{
 		api          : 'create_spot_search',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'spot_search',
 	},
 	{
 		api          : 'get_all_exchange_rates',
@@ -620,6 +628,36 @@ const apis = [
 		api          : 'get_container_sea_route',
 		access_type  : 'public',
 		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'create_shipment_operating_instruction',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_operating_procedure',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_audits',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_operating_instruction',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_checkout_applicable_promocodes',
+		access_type  : 'private',
+		service_name : 'checkout',
+	},
+	{
+		api          : 'list_shipment_cancellation_reasons',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 
 ];
