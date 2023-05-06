@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, cl, Toggle } from '@cogoport/components';
+import { Tabs, TabPanel, cl, Toggle, Placeholder } from '@cogoport/components';
 import ScopeSelect from '@cogoport/scope-select';
 import { startCase } from '@cogoport/utils';
 import { useRouter } from 'next/router';
@@ -97,28 +97,41 @@ function Ocean() {
 
 			</div>
 
-			<div className={styles.list_filters}>
-				<div className={styles.buckets}>
-					{buckets.map((item) => (
-						<ClickableDiv
-							className={cl`${tabsState.bucket === item?.name ? styles.active : ''} ${styles.bucket} `}
-							onClick={() => setTabsState({
-								...tabsState,
-								bucket            : item?.name,
-								subApprovedBucket : item?.name === 'approved' ? 'approved' : '',
-							})}
-						>
-							{item.title}
-							{' '}
-							<span className={`cl${tabsState.bucket === item ? styles.active : ''} ${styles.count}`}>
-								{item.count || 0}
-							</span>
-						</ClickableDiv>
-					))}
-				</div>
+			{
+				loading ? (
+					<div className={styles.loading_buckets}>
+						{ buckets.map(() => <Placeholder className={styles.loader} />) }
+					</div>
+				)
+					: (
+						<div className={styles.list_filters}>
+							<div className={styles.buckets}>
+								{buckets.map((item) => (
 
-				<Filters filters={filters} setFilters={setFilters} />
-			</div>
+									<ClickableDiv
+										className={cl`${tabsState.bucket === item?.name ? styles.active : ''} 
+								${styles.bucket} `}
+										onClick={() => setTabsState({
+											...tabsState,
+											bucket            : item?.name,
+											subApprovedBucket : item?.name === 'approved' ? 'approved' : '',
+										})}
+									>
+										{item.title}
+										{' '}
+										<span className={`cl${tabsState.bucket === item ? styles.active : ''} 
+										${styles.count}`}
+										>
+											{item.count || 0}
+										</span>
+									</ClickableDiv>
+								))}
+							</div>
+
+							<Filters filters={filters} setFilters={setFilters} />
+						</div>
+					)
+			}
 
 			<List
 				data={data}

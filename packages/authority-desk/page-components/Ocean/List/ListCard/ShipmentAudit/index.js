@@ -15,18 +15,18 @@ import Organizations from './Organizations';
 import ReleaseCard from './ReleaseCard';
 import styles from './styles.module.css';
 
-const moreInfoComponentMapping = {
-	invoices  : <Invoices />,
-	payments  : <Organizations />,
-	shipments : <CustodyShipments />,
-};
-
 function ShipmentAudit({
 	item = {},
 	closeModal = () => {},
 	tabsState = {},
 	role = 'kam',
 }) {
+	const moreInfoComponentMapping = {
+		invoices  : <Invoices item={item} />,
+		payments  : <Organizations item={item} />,
+		shipments : <CustodyShipments item={item} />,
+	};
+
 	const { bucket = 'eligible', service } = tabsState;
 
 	const { freight_service = {}, local_service = {} } = item;

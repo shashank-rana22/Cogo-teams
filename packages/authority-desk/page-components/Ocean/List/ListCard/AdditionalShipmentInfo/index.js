@@ -58,14 +58,13 @@ function AdditionalShipmentInfo({ item = {}, filters = {}, setFilters = () => {}
 			/>
 
 			{
-                !toggleVal ? <ShipmentInvoices item={item} />
-                	: (
+                !toggleVal ? <ShipmentInvoices item={item} /> : (
 	<OrgShipments
 		item={item}
 		filters={filters}
 		setFilters={setFilters}
 	/>
-                	)
+                )
             }
 
 		</div>

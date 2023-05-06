@@ -74,7 +74,7 @@ function PurchaseInvoice({ item }) {
 								})}
 
 							</td>
-
+							<td>{ format(val?.dueDate, 'dd MMM yyyy', null, true)}</td>
 							<td>
 								{formatAmount({
 									amount   : val?.paidAmount,
@@ -87,7 +87,6 @@ function PurchaseInvoice({ item }) {
 								})}
 
 							</td>
-							<td>{ format(val?.dueDate, 'dd MMM yyyy', null, true)}</td>
 							<td>{val?.paymentStatus}</td>
 						</tr>
 					))}
