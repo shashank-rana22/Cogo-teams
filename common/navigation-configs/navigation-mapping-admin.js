@@ -2210,22 +2210,6 @@ const navigationMappingAdmin = {
 			},
 		],
 	},
-	saas_tools: {
-		key       : 'saas_tools',
-		title     : 'Saas Tools',
-		icon      : IcMTechops,
-		isSubNavs : true,
-		main_apis : [],
-		options   : [
-			{
-				key           : 'saas_tools-standard_milestones',
-				title         : 'Standard Milestones',
-				href          : '/v2/saas-tools/standard-milestones',
-				as            : '/v2/saas-tools/standard-milestones',
-				possible_apis : apis.saas_tools_standard_milestones,
-			},
-		],
-	},
 	referral: {
 		key         : 'referral',
 		title       : 'Referral',
@@ -2268,6 +2252,22 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : [],
+			},
+		],
+	},
+	saas_tools: {
+		key       : 'saas_tools',
+		title     : 'Saas Tools',
+		icon      : IcMTechops,
+		isSubNavs : true,
+		main_apis : [],
+		options   : [
+			{
+				key           : 'saas_tools-standard_milestones',
+				title         : 'Standard Milestones',
+				href          : '/v2/saas-tools/standard-milestones',
+				as            : '/v2/saas-tools/standard-milestones',
+				possible_apis : apis.saas_tools_standard_milestones,
 			},
 		],
 	},
