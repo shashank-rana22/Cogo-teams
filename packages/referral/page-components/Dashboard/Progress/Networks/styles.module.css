@@ -1,0 +1,11 @@
+.title {
+	font-weight: 600;
+	color: #828282;
+}
+
+.line_chart {
+	width: 450px;
+	height: 300px;
+
+	/* margin-top: 10px; */
+}

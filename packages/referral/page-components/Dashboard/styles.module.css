@@ -1,15 +1,30 @@
-.heading_container {
-    display: flex;
-    justify-content: space-between;
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
-.heading{
-    font-weight: 600;
-    font-size: 20px;
-    color: #221F20;
+.title {
+	font-size: 20px;
+	font-weight: 600;
+	color: #221f20;
 }
 
-.flex{
-    display: flex;
-    align-items: center;
+.main_filters {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_select_container {
+			width: 200px;
+		}
+
+		.react-datepicker__input-container {
+			width: 200px;
+		}
+	}
+}
+
+.select_field {
+	margin-right: 10px;
 }
