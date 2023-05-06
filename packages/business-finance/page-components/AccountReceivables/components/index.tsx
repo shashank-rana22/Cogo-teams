@@ -34,7 +34,7 @@ function AccountReceivables() {
 	};
 
 	const EntityOptions = EntityData.map((entityData) => ({
-		label : `${entityData.entity_code}-${upperCase(entityData.business_name)}`,
+		label : `${upperCase(entityData.business_name)} (${entityData.entity_code})`,
 		value : entityData.entity_code,
 	}));
 
@@ -55,7 +55,7 @@ function AccountReceivables() {
 							<Select
 								name="business_name"
 								onChange={(entityVal: string) => setEntityCode(entityVal)}
-								value={EntityOptions[2]?.value}
+								value={entityCode}
 								options={EntityOptions}
 								placeholder="Select Entity Code"
 								size="sm"

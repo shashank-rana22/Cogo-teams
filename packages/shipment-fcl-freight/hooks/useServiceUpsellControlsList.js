@@ -14,80 +14,79 @@ const useGetControls = ({ truckTypeToggle }) => {
 	const serviceWiseControls = {
 		fcl_customs: [
 			{
-				name      : 'cargo_handling_type',
-				label     : 'Select type of stuffing',
-				type      : 'select',
-				className : 'primary sm',
-				options   : [
+				name    : 'cargo_handling_type',
+				label   : 'Select type of stuffing',
+				type    : 'select',
+				options : [
 					{
 						label : 'Dock Stuffing',
 						value : 'stuffing_at_dock',
-						type  : 'origin',
+						type  : 'export',
 					},
 					{
 						label : 'Factory Stuffing',
 						value : 'stuffing_at_factory',
-						type  : 'origin',
+						type  : 'export',
 					},
 					{
 						label       : 'Direct Port Delivery',
 						value       : 'direct_port_delivery',
 						description : 'You are destuffing your cargo at factory',
-						type        : 'destination',
+						type        : 'import',
 					},
 					{
 						label       : 'Destuffing at Factory',
 						value       : 'delivery_from_dock',
 						description : 'You are destuffing your cargo at dock',
-						type        : 'destination',
+						type        : 'import',
 					},
 					{
 						label       : 'Destuffing at CFS',
 						value       : 'destuffing_at_dock',
 						description : 'You are destuffing your cargo at dock',
-						type        : 'destination',
+						type        : 'import',
 					},
 					{
 						label       : 'DPD Without CFS',
 						value       : 'dpd_without_cfs',
 						description : 'DPD Without CFS',
-						type        : 'destination',
+						type        : 'import',
 					},
 					{
 						label       : 'DPD CFS Dock Destuffing',
 						value       : 'dpd_cfs_dock_destuffing',
 						description : 'DPD CFS Dock Destuffing',
-						type        : 'destination',
+						type        : 'import',
 					},
 					{
 						label       : 'DPD CFS Factory Destuffing',
 						value       : 'dpd_cfs_factory_destuffing',
 						description : 'DPD CFS Factory Destuffing',
-						type        : 'destination',
+						type        : 'import',
 					},
 					{
 						label       : 'Enapanelled CFS Dock Destuffing',
 						value       : 'enpanelled_cfs_dock_destuffing',
 						description : 'Enapanelled CFS Dock Destuffing',
-						type        : 'destination',
+						type        : 'import',
 					},
 					{
 						label       : 'Enapanelled CFS Factory Destuffing',
 						value       : 'enpanelled_cfs_factory_destuffing',
 						description : 'Enapanelled CFS Factory Destuffing',
-						type        : 'destination',
+						type        : 'import',
 					},
 					{
 						label       : ' Non-Enapanelled CFS Factory Destuffing',
 						value       : 'non_enpanelled_cfs_factory_destuffing',
 						description : 'Non-Enapanelled CFS Factory Destuffing',
-						type        : 'destination',
+						type        : 'import',
 					},
 					{
 						label       : 'Non-Enapanelled CFS Dock Destuffing',
 						value       : 'non_enpanelled_cfs_dock_destuffing',
 						description : 'Non-Enapanelled CFS Dock Destuffing',
-						type        : 'destination',
+						type        : 'import',
 					},
 				],
 				xs    : 12,
@@ -96,6 +95,7 @@ const useGetControls = ({ truckTypeToggle }) => {
 				rules : { required: 'Type of stuffing at origin is required' },
 			},
 		],
+
 		trailer_freight: [
 			{
 				label       : 'Pickup/Drop Pincode',
@@ -121,7 +121,6 @@ const useGetControls = ({ truckTypeToggle }) => {
 				span        : 12,
 				rules       : { required: 'This is required' },
 				...locationAsyncOptions,
-
 			},
 			{
 				name     : 'truck_body_type',
@@ -148,8 +147,10 @@ const useGetControls = ({ truckTypeToggle }) => {
 				min       : 1,
 			},
 		],
-		haulage_freight : [],
-		fcl_cfs         : [
+
+		haulage_freight: [],
+
+		fcl_cfs: [
 			{
 				name      : 'cargo_handling_type',
 				label     : 'Select type of stuffing',
@@ -161,42 +162,42 @@ const useGetControls = ({ truckTypeToggle }) => {
 					{
 						label : 'Factory Stuffing',
 						value : 'stuffing_at_factory',
-						type  : 'origin',
+						type  : 'export',
 					},
 					{
 						label : 'DPD without cfs',
 						value : 'dpd_without_cfs',
-						type  : 'destination',
+						type  : 'import',
 					},
 					{
 						label : 'DPD cfs dock destuffing',
 						value : 'dpd_cfs_dock_destuffing',
-						type  : 'destination',
+						type  : 'import',
 					},
 					{
 						label : 'DPD cfs factory destuffing',
 						value : 'dpd_cfs_factory_destuffing',
-						type  : 'destination',
+						type  : 'import',
 					},
 					{
 						label : 'Enpanelled cfs dock destuffing',
 						value : 'enpanelled_cfs_dock_destuffing',
-						type  : 'destination',
+						type  : 'import',
 					},
 					{
 						label : 'Enpanelled cfs factory destuffing',
 						value : 'enpanelled_cfs_factory_destuffing',
-						type  : 'destination',
+						type  : 'import',
 					},
 					{
 						label : 'Non-enpanelled cfs dock destuffing',
 						value : 'non_enpanelled_cfs_dock_destuffing',
-						type  : 'destination',
+						type  : 'import',
 					},
 					{
 						label : 'Non-enpanelled cfs factory destuffing',
 						value : 'non_enpanelled_cfs_factory_destuffing',
-						type  : 'destination',
+						type  : 'import',
 					},
 				],
 				xs    : 12,

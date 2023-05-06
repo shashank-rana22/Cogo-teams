@@ -1,6 +1,6 @@
 import { Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
-import { IcMArrowNext, IcMShare } from '@cogoport/icons-react';
+import { IcMShare } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
 
@@ -9,6 +9,7 @@ import copyToClipboard from '../helpers/copyToClipboard';
 
 import { QuestionSetButtons, TestSetButtons } from './ButtonComponent';
 import styles from './styles.module.css';
+import ValidityDisplay from './ValidityDisplay';
 
 export const questionSetColumns = ({ loading, router, setShowModal, setQuestionSetId, sortFilter, setSortFilter }) => [
 	{
@@ -49,11 +50,11 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 		),
 	},
 	{
-		Header   : 'NO. OF QUESTIONS',
+		Header   : 'NO. OF STANDALONE QUESTIONS',
 		id       : 'questions',
-		accessor : ({ non_case_study_question_count = 0 }) => (
+		accessor : ({ stand_alone_question_count = 0 }) => (
 			<section>
-				{non_case_study_question_count || 0}
+				{stand_alone_question_count || 0}
 			</section>
 		),
 	},
@@ -63,6 +64,15 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 		accessor : ({ case_study_question_count = 0 }) => (
 			<section>
 				{case_study_question_count || 0}
+			</section>
+		),
+	},
+	{
+		Header   : 'NO. OF SUBJECTIVE QUESTIONS',
+		id       : 'subjective_questions',
+		accessor : ({ subjective_question_count = 0 }) => (
+			<section>
+				{subjective_question_count || 0}
 			</section>
 		),
 	},
@@ -113,8 +123,13 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 ];
 
 export const testSetColumns = ({
-	loading, router, setShowModal, setTestId, sortFilter,
+	loading,
+	router,
+	setShowModal,
+	setTestId,
+	sortFilter,
 	setSortFilter,
+	fetchList,
 }) => ([
 	{
 		Header   : 'NAME',
@@ -145,33 +160,69 @@ export const testSetColumns = ({
 		id       : 'topics',
 		accessor : ({ topics = [] }) => (
 			<section className={styles.topics}>
-				{topics.map((topic) => (
-					<Tooltip maxWidth={400} content={startCase(topic)} placement="top" key={topic}>
+
+				{topics.length > 0 ? (
+					<Tooltip maxWidth={400} content={startCase(topics[0])} placement="top" key={topics[0]}>
 						<Pill
 							className={styles.topic_pill}
 							size="lg"
 							color="#F3FAFA"
 						>
-							{startCase(topic)}
+							{startCase(topics[0])}
 						</Pill>
 					</Tooltip>
-				))}
-				{topics.length === 0 && '-'}
+				) : '-'}
+
+				{topics.length > 1 && (
+					<Tooltip
+						maxWidth={400}
+						content={(topics.map((topic, index) => ((index >= 1) ? (
+							<Pill
+								className={styles.topic_pill_sub}
+								size="lg"
+								color="#F3FAFA"
+							>
+								{startCase(topic)}
+							</Pill>
+						) : null)))}
+						placement="top"
+						interactive
+					>
+						<Pill
+							className={styles.topic_pill}
+							size="lg"
+							color="#F3FAFA"
+						>
+							+
+							{topics.length - 1}
+							{' '}
+							More
+						</Pill>
+					</Tooltip>
+				)}
 			</section>
 		),
 	},
 	{
-		Header   : 'TOTAL QUESTIONS/CASES',
+		Header   : 'TOTAL QUESTIONS',
 		id       : 'total_questions',
-		accessor : ({ case_study_questions = 0, stand_alone_questions = 0 }) => (
-			<section>
-				{stand_alone_questions || 0}
-				{' '}
-				Q +
-				{' '}
-				{case_study_questions || 0}
-				{' '}
-				Cases
+		accessor : ({ case_study_questions = 0, stand_alone_questions = 0, subjective_questions = 0 }) => (
+			<section className={styles.questions_count}>
+				<div>
+					{stand_alone_questions || 0}
+					{' '}
+					Standalone
+				</div>
+				<div>
+					{case_study_questions || 0}
+					{' '}
+					Cases
+				</div>
+				<div>
+					{subjective_questions || 0}
+					{' '}
+					Subjective
+				</div>
 			</section>
 		),
 	},
@@ -210,7 +261,7 @@ export const testSetColumns = ({
 						<section className={styles.status}>
 							<Pill
 								size="md"
-								color={current_status === 'upcoming' ? '#00c8ff' : '#C4DC91'}
+								color={current_status === 'upcoming' ? '#CFEAEC' : '#C4DC91'}
 								className={styles.status_pill}
 							>
 								{startCase(current_status)}
@@ -230,24 +281,12 @@ export const testSetColumns = ({
 							</div>
 						</section>
 
-						<div className={styles.status_time}>
-							<section className={styles.time}>
-								<div>{format(validity_start, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}</div>
-
-								<div>{format(validity_start, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}</div>
-							</section>
-
-							<div className={styles.middle_div}><IcMArrowNext height={16} width={16} /></div>
-
-							<section className={styles.time}>
-								<div>{format(validity_end, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}</div>
-
-								<div>{format(validity_end, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}</div>
-							</section>
-						</div>
+						<ValidityDisplay validity_end={validity_end} validity_start={validity_start} />
 					</section>
 				);
-			} if (current_status === 'published') {
+			}
+
+			if (current_status === 'published') {
 				return (
 					<section>
 						<Pill
@@ -260,6 +299,8 @@ export const testSetColumns = ({
 							{' '}
 							{startCase(current_status)}
 						</Pill>
+
+						<ValidityDisplay validity_end={validity_end} validity_start={validity_start} />
 					</section>
 				);
 			}
@@ -275,7 +316,10 @@ export const testSetColumns = ({
 						>
 							{startCase(current_status)}
 						</Pill>
+
+						<ValidityDisplay validity_end={validity_end} validity_start={validity_start} />
 					</section>
+
 				);
 			}
 
@@ -290,6 +334,7 @@ export const testSetColumns = ({
 						{startCase(current_status)}
 					</Pill>
 				</section>
+
 			);
 		},
 	},
@@ -343,6 +388,7 @@ export const testSetColumns = ({
 				setTestId={setTestId}
 				router={router}
 				validity_end={validity_end}
+				fetchList={fetchList}
 			/>
 		),
 	},

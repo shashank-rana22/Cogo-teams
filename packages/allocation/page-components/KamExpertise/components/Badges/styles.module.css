@@ -1,0 +1,45 @@
+.container {
+	display: flex;
+	flex-direction: column;
+
+	@media (max-width: 576px) {
+		padding-top: 25px;
+	}
+}
+
+.breadcrumb {
+	margin-bottom: 8px;
+}
+
+.main_container {
+	display: flex;
+	flex-direction: column;
+
+	@media (max-width: 576px) {
+		padding-top: 50px;
+	}
+}
+
+.back_container {
+	display: flex;
+	align-items: center;
+}
+
+.back_text {
+	margin: 4px 0;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.icon_container {
+	display: flex;
+	align-items: center;
+	margin-right: 8px;
+}
+
+.heading_container {
+	margin-bottom: 16px;
+	font-size: 28px;
+	font-weight: 600;
+	line-height: 42px;
+}

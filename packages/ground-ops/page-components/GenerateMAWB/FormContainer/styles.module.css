@@ -106,3 +106,25 @@
 	margin-right: 40px;
 	margin-left: auto;
 }
+
+.remark {
+	margin: 20px;
+
+	span {
+		margin-right: 20px;
+		font-size: 14px;
+		line-height: 150%;
+		color: #828282;
+	}
+}
+
+.calcuate_button {
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 20%;
+
+	:global(.ui_button_container) {
+		position: relative;
+		bottom: 42px;
+	}
+}

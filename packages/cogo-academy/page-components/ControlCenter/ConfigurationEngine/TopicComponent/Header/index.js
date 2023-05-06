@@ -25,47 +25,36 @@ function Header({
 	};
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.header_container}>
 
-			<div className={styles.topic}>Topics</div>
+			<div className={styles.flex_items}>
+				<div className={styles.tabs_container}>
+					<Tabs
+						activeTab={activeTopic}
+						themeType="tertiary"
+						onChange={setActiveTopic}
+					>
+						<TabPanel name="active" title="Active" />
 
-			<div className={styles.header_container}>
-
-				<div className={styles.flex_items}>
-					<div className={styles.tabs_container}>
-						<Tabs
-							activeTab={activeTopic}
-							themeType="tertiary"
-							onChange={setActiveTopic}
-						>
-							<TabPanel name="active" title="Active">
-								{/* <div>Active</div> */}
-							</TabPanel>
-
-							<TabPanel name="inactive" title="Inactive">
-								{/* <div>Inactive</div> */}
-							</TabPanel>
-
-						</Tabs>
-					</div>
-
-					<div className={styles.search}>
-						<SearchInput
-							value={searchTopicsInput}
-							onChange={setSearchTopicssInput}
-							size="md"
-							placeholder="Search a Topic"
-						/>
-					</div>
-
+						<TabPanel name="inactive" title="Inactive" />
+					</Tabs>
 				</div>
 
-				<div>
-					<Button onClick={onClickAddTopic}>Add New Topic</Button>
+				<div className={styles.search}>
+					<SearchInput
+						value={searchTopicsInput}
+						onChange={setSearchTopicssInput}
+						size="md"
+						placeholder="Search a Topic"
+					/>
 				</div>
+
 			</div>
 
+			<Button onClick={onClickAddTopic}>Add New Topic</Button>
+
 		</div>
+
 	);
 }
 

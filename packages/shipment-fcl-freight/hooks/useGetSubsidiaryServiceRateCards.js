@@ -1,11 +1,10 @@
-import { Toast } from '@cogoport/components';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback, useMemo } from 'react';
 
 import { formatPayloadForSubsidiaryServiceRateCards } from '../helpers/format-payload-service-rate-cards';
-import getApiErrorString from '../utils/getApiErrorString';
 
-const useGetSubsidiaryServiceRateCards = ({ item }) => {
+const useGetSubsidiaryServiceRateCards = ({ item = {} }) => {
 	const [apiData, setApiData] = useState({});
 
 	const { code, services, service_type } = item || {};
@@ -24,10 +23,12 @@ const useGetSubsidiaryServiceRateCards = ({ item }) => {
 	const getSubsidiaryServiceRateCards = useCallback(async () => {
 		try {
 			const res = await trigger();
+
 			setApiData(res.data || {});
 		} catch (err) {
 			setApiData({});
-			Toast.error(getApiErrorString(err));
+
+			toastApiError(err);
 		}
 	}, [trigger]);
 

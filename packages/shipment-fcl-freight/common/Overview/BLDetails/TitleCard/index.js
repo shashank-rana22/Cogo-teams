@@ -15,19 +15,26 @@ function TitleCard({
 							{item?.bl_document_type === 'draft_bill_of_lading' ? 'MBL' : 'HBL'}
 							&nbsp;
 							{startCase(item?.status)}
-							:
+							{ containerDetails?.length !== 0 ? ':' : null }
 						</div>
 
-						<div className={styles.ontrack}>
-							{`${startCase(containerDetails?.length || 0)} ${
-								containerDetails?.length === 1 ? 'Container' : 'Containers'
-							} on track`}
-						</div>
+						{containerDetails?.length !== 0
+							? (
+								<div className={styles.ontrack}>
+									{`${startCase(containerDetails?.length)} ${
+										containerDetails?.length === 1 ? 'container' : 'containers'
+									} on track`}
+								</div>
+							)
+
+							: null }
 
 						{item?.containers_rolled_over ? (
 							<div className={styles.roll_over}>
 								,
+								{' '}
 								{startCase(item?.containers_rolled_over)}
+								{' '}
 								rolled over
 							</div>
 						) : null}
@@ -36,7 +43,7 @@ function TitleCard({
 
 				<div className={styles.bl_number}>
 					BL Number:&nbsp;
-					{item?.bl_number}
+					<span>{item?.bl_number}</span>
 				</div>
 			</div>
 

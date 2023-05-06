@@ -87,8 +87,8 @@ function CardData({ tab }: CardDataProps) {
 										)}
 										>
 											<div className={styles.wrapper}>
-												{getFormat.substring(0, getFormat.length - 1)}
-												{getFormat.slice(-1) === 'T' ? 'K' : getFormat.slice(-1)}
+												{getFormat?.substring(0, getFormat.length - 1)}
+												{getFormat?.slice(-1) === 'T' ? 'K' : getFormat?.slice(-1)}
 											</div>
 
 										</Tooltip>

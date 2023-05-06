@@ -31,25 +31,21 @@ export const possibleServices = [
 		is_main       : false,
 	},
 	{
-		mainServices: [
-			{
-				service_type  : 'fcl_freight_local_service',
-				display_label : 'Origin FCL Locals',
-				trade_type    : 'export',
-				is_main       : true,
-			},
-			{
-				service_type  : 'fcl_freight_service',
-				display_label : 'FCL Freight',
-				is_main       : true,
-			},
-			{
-				service_type  : 'fcl_freight_local_service',
-				display_label : 'Destination FCL Local',
-				trade_type    : 'import',
-				is_main       : true,
-			},
-		],
+		service_type  : 'fcl_freight_local_service',
+		display_label : 'Origin FCL Locals',
+		trade_type    : 'export',
+		is_main       : true,
+	},
+	{
+		service_type  : 'fcl_freight_service',
+		display_label : 'FCL Freight',
+		is_main       : true,
+	},
+	{
+		service_type  : 'fcl_freight_local_service',
+		display_label : 'Destination FCL Local',
+		trade_type    : 'import',
+		is_main       : true,
 	},
 	{
 		service_type  : 'fcl_customs_service',

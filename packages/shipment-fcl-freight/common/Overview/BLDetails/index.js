@@ -1,10 +1,9 @@
-import { Button, Modal, Accordion } from '@cogoport/components';
+import { Button, Accordion } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { isEmpty } from '@cogoport/utils';
+import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import React, { useState, useContext } from 'react';
 
 import useListBillOfLadings from '../../../hooks/useListBillOfLadings';
-import EmptyState from '../../EmptyState';
 
 import BlContainersMapping from './BlContainersMapping';
 import ContainerDetails from './ContainerDetails';
@@ -15,8 +14,7 @@ import TitleCard from './TitleCard';
 function BLDetails() {
 	const [open, setOpen] = useState(false);
 	const [activeId, setActiveId] = useState('');
-	const [mappingModal, setMappingModal] = useState(false);
-	const [editContainerNum, setEditContainerNum] = useState(false);
+	const [showModal, setShowModal] = useState(false);
 
 	const { shipment_data, primary_service } = useContext(
 		ShipmentDetailContext,
@@ -36,7 +34,7 @@ function BLDetails() {
 			BL and Container Details
 			<div className="bl-count">
 				(
-				{list?.length || primary_service?.bls_count || 0}
+				{primary_service?.bls_count || 0}
 				&nbsp;BL & &nbsp;
 				{containerDetailsArray?.length || containersCount || 0}
 				&nbsp;
@@ -48,34 +46,22 @@ function BLDetails() {
 
 	const renderButtons = () => (
 		<div className={styles.button_container}>
-			{!isEmpty(list)
-				? (
-					<Button
-						onClick={(e) => {
-							setMappingModal(true);
-							e.stopPropagation();
-						}}
-						size="md"
-						style={{ marginLeft: '6px' }}
-					>
-						BL Container Mapping
-					</Button>
-				)
+			<Button
+				onClick={() => setShowModal('container_mapping')}
+				size="md"
+				style={{ marginLeft: '6px' }}
+				themeType="linkUi"
+			>
+				BL Container Mapping
+			</Button>
 
-				: null}
-
-			{!isEmpty(containerDetailsArray)
-				? (
-					<Button
-						onClick={(e) => {
-							setEditContainerNum(true);
-							e.stopPropagation();
-						}}
-						size="md"
-					>
-						Update Container Number
-					</Button>
-				) : null}
+			<Button
+				onClick={() => setShowModal('container_num_update')}
+				size="md"
+				themeType="linkUi"
+			>
+				Update Container Number
+			</Button>
 		</div>
 	);
 
@@ -86,7 +72,9 @@ function BLDetails() {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.button_div}>{renderButtons()}</div>
+
+			{containerDetailsArray?.[0]?.container_number
+				? <div className={styles.button_div}>{renderButtons()}</div> : null}
 
 			<Accordion title={renderBlCount} style={{ width: '100%' }}>
 				{!list?.length ? (
@@ -140,37 +128,22 @@ function BLDetails() {
 				)}
 			</Accordion>
 
-			{mappingModal ? (
-				<Modal
-					show={mappingModal}
-					onClose={() => {
-						setMappingModal(false);
-					}}
-				>
-					<Modal.Header title="BL Container Mapping" />
-					<BlContainersMapping
-						data={list}
-						setMappingModal={setMappingModal}
-						containerDetails={containerDetailsArray}
-						refetch={refetch}
-					/>
-				</Modal>
+			{showModal === 'container_mapping' ? (
+				<BlContainersMapping
+					data={list}
+					setMappingModal={setShowModal}
+					containerDetails={containerDetailsArray}
+					refetch={refetch}
+				/>
+
 			) : null}
 
-			{editContainerNum ? (
-				<Modal
-					show={editContainerNum}
-					onClose={() => {
-						setEditContainerNum(false);
-					}}
-				>
-					<Modal.Header title="Update Container Number" />
-					<ContainerNmUpdate
-						setEditContainerNum={setEditContainerNum}
-						containerDetails={containerDetailsArray}
-						refetch={refetch}
-					/>
-				</Modal>
+			{showModal === 'container_num_update' ? (
+				<ContainerNmUpdate
+					setEditContainerNum={setShowModal}
+					containerDetails={containerDetailsArray}
+					refetch={refetch}
+				/>
 			) : null}
 		</div>
 	);

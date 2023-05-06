@@ -9,14 +9,21 @@ import PopoverContent from './PopoverContent';
 import styles from './styles.module.css';
 
 export default function ScopeSelect({
-	size = 'sm', themeType = 'secondary', popoverSize = 'sm',
-	className = '', defaultValues, showChooseAgent = true,
+	size = 'sm',
+	themeType = 'secondary',
+	popoverSize = 'sm',
+	className = '',
+	defaultValues = {},
+	showChooseAgent = true,
+	apisToConsider = [],
 }) {
 	const [showPopover, setShowPopover] = useState(false);
 
 	const closePopover = () => setShowPopover(false);
 
-	const { handleApply, scopeData, scope, viewType, selectedAgentId } = useScope({ defaultValues, closePopover });
+	const {
+		handleApply, scopeData, scope, viewType, selectedAgentId,
+	} = useScope({ defaultValues, closePopover, apisToConsider });
 
 	return (
 		<Popover
@@ -43,6 +50,7 @@ export default function ScopeSelect({
 				themeType={themeType}
 			>
 				<div className={styles.ellipsis_text}>{startCase(scope) || 'My View'}</div>
+
 				{viewType ? (
 					<div className={styles.view_type}>
 						(

@@ -2,6 +2,7 @@ import allocation from './allocation-apis';
 import app_contract_management from './app-manage-contract-apis';
 import app_manage_rfq from './app-manage-rfq-apis';
 import app_settings from './app-settings';
+import athena_dashboard from './athena-apis';
 import bl_do from './bl-do-apis';
 import bl_do_collection_release from './bl-do-collection-release-apis';
 import bn_salvage from './bn-salvage-apis';
@@ -18,6 +19,7 @@ import enquiry_supply from './enquiry-supply-apis';
 import enrichment from './enrichment-apis';
 import faq from './faq-apis';
 import feedback from './feedback-apis';
+import ingestion from './ingestion-apis';
 import kam_desk from './kam-desk-apis';
 import kam_payments_dashboard from './kam-payments-dashboard-apis';
 import kyc from './kyc';
@@ -34,6 +36,7 @@ import rms from './rate-management-apis';
 import revenue_desk_apis from './revenue-desk-apis';
 import rfq from './rfq-apis';
 import saas from './saas';
+import saas_tools from './saas-tools';
 import search from './search-apis';
 import shipment from './shipment-apis';
 import shipment_cancellation_policies from './shipment-cancellation-poilicies';
@@ -126,9 +129,12 @@ const apis = {
 	login_apis,
 	enrichment,
 	...faq,
-	performance_management,
+	...saas_tools,
+	...performance_management,
+	ingestion,
 	booking_desk,
 	poc,
+	...athena_dashboard,
 };
 
 export default apis;

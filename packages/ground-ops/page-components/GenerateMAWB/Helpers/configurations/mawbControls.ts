@@ -21,7 +21,7 @@ const mawbControls = (disableClass) => ({
 			label       : "Shipper's Address",
 			type        : 'textarea',
 			span        : 7,
-			maxLength   : 150,
+			maxLength   : 200,
 			row         : 4,
 			placeholder : 'Enter Address',
 			rules       : {
@@ -47,7 +47,7 @@ const mawbControls = (disableClass) => ({
 			label       : "Consignee's Address",
 			type        : 'textarea',
 			span        : 7,
-			maxLength   : 150,
+			maxLength   : 200,
 			row         : 4,
 			placeholder : 'Enter Address',
 			rules       : {
@@ -61,9 +61,6 @@ const mawbControls = (disableClass) => ({
 			label       : 'Origin',
 			placeholder : 'Enter Origin Airport',
 			span        : 5,
-			rules       : {
-				required: 'Origin Airport is Required',
-			},
 		},
 		{
 			name        : 'destination',
@@ -72,9 +69,6 @@ const mawbControls = (disableClass) => ({
 			label       : 'Destination',
 			placeholder : 'Enter Destination Airport',
 			span        : 5,
-			rules       : {
-				required: 'Destination Airport is Required',
-			},
 		},
 		{
 			name        : 'originPortCode',
@@ -353,7 +347,7 @@ const mawbControls = (disableClass) => ({
 			label       : 'Remarks',
 			type        : 'textarea',
 			span        : 7,
-			maxLength   : 150,
+			maxLength   : 500,
 			placeholder : 'Remarks',
 			rows        : 3,
 		},
@@ -397,14 +391,16 @@ const mawbControls = (disableClass) => ({
 			name               : 'carrierOtherCharges',
 			label              : 'Due Carrier Charges',
 			className          : 'primary lg',
-			span               : 5,
+			span               : 7,
 			type               : 'fieldArray',
 			showButtons        : true,
 			noDeleteButtonTill : 1,
 			value              : [
 				{
-					code  : '',
-					price : '',
+					code       : '',
+					chargeType : '',
+					chargeUnit : '',
+					price      : '',
 				},
 			],
 			controls: [
@@ -412,17 +408,35 @@ const mawbControls = (disableClass) => ({
 					name        : 'code',
 					type        : 'text',
 					className   : 'primary lg',
-					span        : 5,
+					span        : 2,
 					placeholder : 'Enter Code',
 					rules       : {
 						required: 'Code is Required',
 					},
 				},
 				{
+					name        : 'chargeType',
+					type        : 'select',
+					className   : 'primary lg',
+					span        : 3,
+					placeholder : 'Enter Charge Type',
+					options     : [
+						{ value: 'chargeable_wt', label: 'Chargeable Weight' },
+						{ value: 'gross_wt', label: 'Gross Weight' },
+					],
+				},
+				{
+					name        : 'chargeUnit',
+					type        : 'text',
+					className   : 'primary lg',
+					span        : 2,
+					placeholder : 'Enter Charge Unit',
+				},
+				{
 					name        : 'price',
 					placeholder : 'Enter Price',
 					type        : 'text',
-					span        : 5,
+					span        : 2,
 					className   : 'primary lg',
 					rules       : {
 						required: 'Price is Required',

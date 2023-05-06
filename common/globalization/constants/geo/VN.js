@@ -32,8 +32,8 @@ export default {
 		TAX           : /^[0-3]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
 		MOBILE_NUMBER : /^[+][0-9]{1,3}[0-9]{10}$/,
 		EMAIL         : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
-		password_pattern:
-			/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
+		// password_pattern:
+		// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
 	},
 	uuid: {
 		tech_super_admin_id         : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
@@ -167,28 +167,25 @@ export default {
 		],
 		prod_coe_finance_head : '7b1fc916-6984-4179-aee5-c23f9871085d',
 		finance_head_id       : 'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
+		so_1_manager          : '17885538-e746-4650-a5bc-7d4d81247c7d',
 	},
 	options: {
 		registration_types: [
 			{
-				label : 'Private Limited Company',
-				value : 'private_limited',
+				label : 'Limited Liability Company',
+				value : 'limited_liability_company',
 			},
 			{
-				label : 'Public Limited Company',
-				value : 'public_limited',
+				label : 'Joint Stock Company',
+				value : 'joint_stock_company',
 			},
 			{
-				label : 'Partnership',
-				value : 'partnership',
+				label : 'Representative Office',
+				value : 'representative_office',
 			},
 			{
-				label : 'Proprietorship',
-				value : 'proprietorship',
-			},
-			{
-				label : 'Limited Liability Partnership',
-				value : 'limited_liability_partnership',
+				label : 'Branch',
+				value : 'branch',
 			},
 		],
 		country_truck_type : 'Open_body_1_ton',

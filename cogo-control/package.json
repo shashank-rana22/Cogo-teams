@@ -17,6 +17,7 @@
     "@cogoport/business-finance": "workspace:0.1.0",
     "@cogoport/ground-ops": "workspace:0.1.0",
     "@cogoport/cogo-academy": "workspace:0.1.0",
+    "@cogoport/athena-dashboard": "workspace:0.1.0",
     "@cogoport/cogo-one": "workspace:0.1.1",
     "@cogoport/cogo-verse-analytics": "workspace:0.1.0",
     "@cogoport/components": "^1.0.359",
@@ -25,6 +26,7 @@
     "@cogoport/performance-management": "workspace:1.0.0",
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/icons-react": "^1.0.58",
+    "@cogoport/ingestion": "workspace:0.1.0",
     "@cogoport/locations": "workspace:0.1.0",
     "@cogoport/my-incident": "workspace:0.1.0",
     "@cogoport/my-profile": "workspace:0.1.0",
@@ -37,10 +39,12 @@
     "@cogoport/vendor-rm": "workspace:0.1.0",
     "@cogoport/translate": "workspace:0.1.0",
     "@cogoport/shipment-fcl-freight": "workspace:0.1.0",
+    "@cogoport/document-desk" : "workspace:0.1.0",
     "@cogoport/ocean-modules": "workspace:0.1.0",
     "@cogoport/shipment-chat": "workspace:0.1.0",
     "@cogoport/shipment-mails": "workspace:0.1.0",
     "@cogoport/booking-desk" : "workspace:0.1.0",
+    "@cogoport/last-mile-desk" : "workspace:0.1.0",
     "@cogoport/scope-select" : "workspace:0.1.0",
     "@cogoport/utils": "^1.2.6",
     "@next/bundle-analyzer": "^13.2.3",
@@ -50,7 +54,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "@cogoport/saas-tools":"workspace:0.1.0"
   },
   "browserslist": [
     "defaults"

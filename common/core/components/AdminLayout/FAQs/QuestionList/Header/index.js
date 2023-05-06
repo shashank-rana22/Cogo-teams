@@ -1,12 +1,16 @@
-import { Toast, Input } from '@cogoport/components';
+import { Toast, Input, Button } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { IcMSearchlight, IcMCross, IcMArrowLeft } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import React from 'react';
 
 import styles from './styles.module.css';
 
 function Header({
+	activeTab = 'faq',
 	search = '',
 	setSearch = () => {},
+	announcementHeaderProps = {},
 	topic = '',
 	setTopic = () => {},
 	question,
@@ -16,12 +20,20 @@ function Header({
 	setShowNotificationContent = () => {},
 	showNotificationContent,
 	refetch,
+	from,
+	setInput,
+	input,
 }) {
-	const suffix = !search ? (
-		<IcMSearchlight />
+	const {
+		searchAnnouncement = '',
+		setSearchAnnouncement = () => {},
+	} = announcementHeaderProps;
+
+	const suffix = !search && !searchAnnouncement ? (
+		null
 	) : (
 		<IcMCross
-			onClick={() => { setSearch(''); setQuestion(null); }}
+			onClick={() => { setInput(''); setSearch(''); setQuestion(null); setSearchAnnouncement(''); }}
 			style={{ cursor: 'pointer', color: '#000000' }}
 		/>
 	);
@@ -37,7 +49,7 @@ function Header({
 					setShowNotificationContent(false);
 				}
 			} catch (e) {
-				Toast.error(e);
+				if (e.response?.data) Toast.error(getApiErrorString(e.response?.data));
 			}
 		} else {
 			setTopic(null);
@@ -49,32 +61,68 @@ function Header({
 
 	const showBackIcon = (!search && topic) || question || showHistory || showNotificationContent;
 
+	const TABS_CONTENT_MAPPING = {
+		faq: {
+			back_icon_visible : true,
+			placeholder       : 'Search for a question or a topic',
+			input_value       : search,
+			input_onchange    : setSearch,
+		},
+		announcements: {
+			back_icon_visible : false,
+			placeholder       : 'Search for an announcement',
+			input_value       : searchAnnouncement,
+			input_onchange    : setSearchAnnouncement,
+		},
+	};
+
 	return (
-		<div className={styles.container}>
+
+		<div className={`${styles.container} ${styles[from]}`}>
+
 			<div className={styles.wrapper}>
-				<div className={styles.heading_container}>
+				{from !== 'test_module' ? (
+					<div className={styles.heading_container}>
+						{showBackIcon && TABS_CONTENT_MAPPING[activeTab].back_icon_visible ? (
+							<div role="presentation" className={styles.arrow} onClick={onClickBackButton}>
+								<IcMArrowLeft style={{ height: '25px', width: '25px' }} />
+							</div>
+						) : (
+							<div className={styles.gap} />
+						)}
+						<div className={styles.title}>Cogo Assist</div>
+					</div>
+				) : null}
 
-					{showBackIcon ? (
-						<div role="presentation" className={styles.arrow} onClick={onClickBackButton}>
-							<IcMArrowLeft style={{ height: '25px', width: '25px' }} />
-						</div>
-					) : (
-						<div className={styles.gap} />
-					)}
-
-					<div className={styles.title}>Cogo Assist</div>
-				</div>
-
-				<div className={styles.input_container}>
+				<form
+					onSubmit={(e) => {
+						e.preventDefault();
+						const searchFn = TABS_CONTENT_MAPPING[activeTab].input_onchange;
+						searchFn(input);
+						setQuestion(null);
+					}}
+					className={`${styles.input_container} ${styles[from]}`}
+				>
 					<Input
 						className="primary lg"
-						placeholder="Search for a question or a topic"
-						value={search}
-						onChange={(e) => { setSearch(e); setQuestion(null); }}
+						placeholder={TABS_CONTENT_MAPPING[activeTab].placeholder}
+						value={input}
+						onChange={(e) => {
+							setInput(e);
+							if (!e) setSearch('');
+							setQuestion(null);
+						}}
 						suffix={suffix}
-						style={{ padding: '0 10px' }}
+						style={{ padding: '0 10px', marginRight: 8 }}
 					/>
-				</div>
+					<Button
+						type="submit"
+						size="lg"
+						themeType="primary"
+					>
+						<IcMSearchlight />
+					</Button>
+				</form>
 			</div>
 		</div>
 	);

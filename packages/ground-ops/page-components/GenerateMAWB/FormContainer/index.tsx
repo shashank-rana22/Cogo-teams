@@ -22,8 +22,8 @@ const options = [
 
 function FormContainer({
 	back, setBack, edit, setEdit, packingData, fields,
-	control, errors, item, setGenerate, handleSubmit, activeCategory, hawbDetails,
-	setHawbDetails, activeHawb, setActiveHawb, activeKey, setActiveKey, taskItem,
+	control, errors, setValue, item, setGenerate, handleSubmit, activeCategory, hawbDetails,
+	setHawbDetails, activeHawb, setActiveHawb, activeKey, setActiveKey, taskItem, formValues,
 }) {
 	const [value, onChange] = useState('manual');
 
@@ -79,6 +79,21 @@ function FormContainer({
 		);
 	}
 
+	const calculateCharges = () => {
+		const updatedCharges = (formValues.carrierOtherCharges || []).map((charge) => {
+			let price = 0;
+			if (charge.chargeType === 'chargeable_wt') {
+				price = formValues.chargeableWeight * charge.chargeUnit;
+			} else if (charge.chargeType === 'gross_wt') {
+				price = formValues.weight * charge.chargeUnit;
+			} else if (charge.chargeType === 'rate_per_kg') {
+				price = formValues.ratePerKg * charge.chargeUnit;
+			}
+			return { ...charge, price };
+		});
+		setValue('carrierOtherCharges', updatedCharges);
+	};
+
 	return (
 		<div className={styles.form_container}>
 			<div className={styles.header_flex}>
@@ -131,6 +146,12 @@ function FormContainer({
 						style={{ marginLeft: 'auto', height: '4%' }}
 					/>
 				)}
+				{edit && item?.remarks && (
+					<p className={styles.remark}>
+						<span>Remark for Amendment:</span>
+						{item?.remarks?.toString()}
+					</p>
+				)}
 			</div>
 			{value === 'manual' && activeCategory === 'hawb' && (
 				<Stepper
@@ -158,7 +179,7 @@ function FormContainer({
 					Refer Shipping Instruction
 				</Button>
 			</div>
-			{value === 'upload' ? <UploadMAWB item={item} setGenerate={setGenerate} />
+			{value === 'upload' ? <UploadMAWB item={item} setGenerate={setGenerate} activeCategory={activeCategory} />
 				: (
 					<>
 						{activeKey === 'basic' && (
@@ -195,6 +216,18 @@ function FormContainer({
 						{activeKey === 'package' && (
 							<>
 								<Layout fields={fields?.package} control={control} errors={errors} />
+								<div className={styles.calcuate_button}>
+									<Button
+										size="sm"
+										themeType="accent"
+										onClick={() => {
+											calculateCharges();
+										}}
+									>
+										Calculate
+
+									</Button>
+								</div>
 								<div className={styles.button_container}>
 									{activeCategory === 'hawb' && (
 										<RemoveHawb />

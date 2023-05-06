@@ -411,7 +411,7 @@ const apis = [
 	{
 		api          : 'list_organization_invoicing_parties',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'organization',
 	},
 	{
 		api          : 'list_organization_billing_addresses',
@@ -421,7 +421,7 @@ const apis = [
 	{
 		api          : 'list_organization_documents',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'organization',
 	},
 	{
 		api          : 'create_organization_document',
@@ -431,7 +431,7 @@ const apis = [
 	{
 		api          : 'list_organization_invoicing_parties',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'organization',
 	},
 	{
 		api          : 'list_organization_billing_addresses',
@@ -441,7 +441,7 @@ const apis = [
 	{
 		api          : 'list_organization_documents',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'organization',
 	},
 	{
 		api          : 'create_organization_document',
@@ -497,6 +497,11 @@ const apis = [
 		api          : 'list_checkout_applicable_promocodes',
 		access_type  : 'private',
 		service_name : 'checkout',
+	},
+	{
+		api          : 'update_shipment_bl_details',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 ];
 export default apis;

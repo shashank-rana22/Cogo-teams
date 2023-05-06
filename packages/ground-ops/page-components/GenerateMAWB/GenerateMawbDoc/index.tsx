@@ -1,15 +1,16 @@
-import { Button, Checkbox } from '@cogoport/components';
+import { Button, Checkbox, Popover } from '@cogoport/components';
 import * as htmlToImage from 'html-to-image';
 import html2canvas from 'html2canvas';
 import { jsPDF as JsPDF } from 'jspdf';
 import React, { createRef, useState, ReactFragment } from 'react';
 
-import { backPage, footerImages } from '../Helpers/configurations/12CopiesImages';
 import { footerValues } from '../Helpers/configurations/footerValues';
+import { backPage, footerImages } from '../Helpers/configurations/imageCopies';
 
 import ChargeDetails from './ChargeDetails';
 import ContainerDetails from './ContainerDetails';
 import getFileObject from './getFileObject';
+import SelectDocumentCopies from './SelectDocumentCopies';
 import ShipmentDetails from './ShipmentDetails';
 import ShipperConsigneeDetails from './ShipperConsigneeDetails';
 import styles from './styles.module.css';
@@ -38,6 +39,7 @@ interface Props {
 	setActiveHawb?: Function;
 	setActiveKey?: Function;
 	pendingTaskId?: string;
+	category?: string;
 }
 
 const downloadButton = {
@@ -45,6 +47,8 @@ const downloadButton = {
 	document_uploaded            : 'Download',
 	document_amendment_requested : 'Download',
 };
+
+const includeTnC = ['original_3', 'original_2', 'original_1'];
 
 function GenerateMawb({
 	taskItem = {},
@@ -56,13 +60,14 @@ function GenerateMawb({
 	viewDoc = false,
 	chargeableWeight,
 	setGenerate = () => {},
-	activeCategory = '',
+	activeCategory = 'mawb',
 	hawbDetails = [],
 	setHawbDetails = () => {},
 	activeHawb = {},
 	setActiveHawb,
 	setActiveKey,
 	pendingTaskId = '',
+	category = 'mawb',
 }:Props) {
 	const filteredData = { ...formData };
 
@@ -75,6 +80,8 @@ function GenerateMawb({
 	const [saveDocument, setSaveDocument] = useState(false);
 
 	const [whiteout, setWhiteout] = useState(false);
+
+	const [copiesValue, copiesOnChange] = useState<string[]>([]);
 
 	const handleClick = () => {
 		if (back) {
@@ -102,6 +109,10 @@ function GenerateMawb({
 
 	const downloadScreenshot = () => takeImageScreenShot(document.getElementById('mawb'));
 
+	const documentId = category === 'mawb' ? taskItem?.documentId : taskItem?.id;
+	const mawbPendingTaskId = edit === 'edit' ? undefined : pendingTaskId;
+	const hawbPendingTaskId = taskItem.state === 'document_amendment_requested' ? pendingTaskId : undefined;
+
 	const handleSave = async () => {
 		const newImage = await downloadScreenshot();
 		const { file } = getFileObject(newImage, 'mawb.pdf');
@@ -111,14 +122,15 @@ function GenerateMawb({
 			uploaded_by_org_id  : taskItem?.serviceProviderId,
 			performed_by_org_id : taskItem?.serviceProviderId,
 			document_type       : activeCategory === 'mawb' ? 'draft_airway_bill' : 'draft_house_airway_bill',
-			id                  : activeCategory === 'mawb' ? taskItem?.documentId : pendingTaskId,
+			id                  : documentId,
 			service_id          : taskItem?.serviceId,
 			service_type        : 'air_freight_service',
-			pending_task_id     : edit === 'edit' || activeHawb.isNew === false ? undefined : pendingTaskId,
-			data                : {
+			pending_task_id     : category === 'mawb' || activeCategory === 'mawb'
+				? mawbPendingTaskId : hawbPendingTaskId,
+			data: {
 				...filteredData,
 				status          : 'generated',
-				document_number : taskItem?.awbNumber,
+				document_number : activeCategory === 'hawb' ? activeHawb?.documentNo : taskItem?.awbNumber,
 				service_id      : taskItem?.serviceId,
 				service_type    : 'air_freight_service',
 			},
@@ -133,7 +145,7 @@ function GenerateMawb({
 						|| undefined,
 					document_url : res || undefined,
 					data         : {
-						document_number : taskItem?.awbNumber,
+						document_number : activeCategory === 'hawb' ? activeHawb?.documentNo : taskItem?.awbNumber,
 						service_id      : taskItem?.serviceId,
 						service_type    : 'air_freight_service',
 						...filteredData,
@@ -155,20 +167,21 @@ function GenerateMawb({
 				const pdf = new JsPDF();
 				const pdfWidth = pdf.internal.pageSize.getWidth();
 				const pdfHeight = pdf.internal.pageSize.getHeight();
-				footerImages.forEach((item, i) => {
+				(copiesValue || []).forEach((item, i) => {
 					pdf.addImage(imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
 					if (!whiteout) {
-						pdf.addImage(item, 'jpeg', 0, pdfHeight - 14, pdfWidth, 4.5);
+						pdf.addImage(footerImages[item], 'jpeg', 0, pdfHeight - 14, pdfWidth, 4.5);
 					}
+
 					if (download24) {
-						if (i < 3) {
+						if (includeTnC.includes(item)) {
 							pdf.addPage();
 							pdf.addImage(backPage, 'jpeg', 0, 0, pdfWidth, pdfHeight);
 						} else {
 							pdf.addPage();
 						}
 					}
-					if (i < 11) {
+					if (i < copiesValue.length - 1) {
 						pdf.addPage();
 					}
 				});
@@ -196,11 +209,11 @@ function GenerateMawb({
 		carrierCharge += Number(item.price);
 	});
 	const data = {
-		totalCharge: chargeableWeight * formData.ratePerKg,
+		totalCharge: Number(formData.amount),
 		agentCharge,
 		carrierCharge,
 		finalCharge:
-		chargeableWeight * formData.ratePerKg + agentCharge + carrierCharge,
+		Number(formData.amount) + agentCharge + carrierCharge,
 	};
 
 	return (
@@ -218,28 +231,64 @@ function GenerateMawb({
 									value={whiteout}
 									onChange={() => setWhiteout((p) => !p)}
 								/>
+								<Popover
+									placement="bottom"
+									trigger="click"
+									render={(
+										<SelectDocumentCopies
+											copiesValue={copiesValue}
+											copiesOnChange={copiesOnChange}
+											setSaveDocument={setSaveDocument}
+											handleView={handleView}
+											download24
+										/>
+									)}
+								>
+									<Button
+										className="primary md"
+										disabled={saveDocument || whiteout}
+									>
+										Download 12 Copies with T&C
+									</Button>
+								</Popover>
+							</div>
+						)}
+						{taskItem.documentState === 'document_accepted'
+							? (
+								<Popover
+									placement="bottom"
+									trigger="click"
+									render={(
+										<SelectDocumentCopies
+											copiesValue={copiesValue}
+											copiesOnChange={copiesOnChange}
+											setSaveDocument={setSaveDocument}
+											handleView={handleView}
+											download24={false}
+										/>
+									)}
+								>
+									<Button
+										className="primary md"
+										disabled={saveDocument}
+									>
+										Download 12 Copies
+									</Button>
+								</Popover>
+							)
+
+							: (
 								<Button
 									className="primary md"
 									onClick={() => {
 										setSaveDocument(true);
-										handleView(true);
+										handleView(false);
 									}}
-									disabled={saveDocument || whiteout}
+									disabled={saveDocument}
 								>
-									Download 12 Copies with T&C
+									{saveDocument ? 'Downloading...' : downloadButton[taskItem.documentState]}
 								</Button>
-							</div>
-						)}
-						<Button
-							className="primary md"
-							onClick={() => {
-								setSaveDocument(true);
-								handleView(false);
-							}}
-							disabled={saveDocument}
-						>
-							{saveDocument ? 'Downloading...' : downloadButton[taskItem.documentState]}
-						</Button>
+							)}
 					</div>
 				</div>
 			)}
@@ -266,11 +315,12 @@ function GenerateMawb({
 						activeCategory={activeCategory}
 						edit={edit}
 						viewDoc={viewDoc}
+						activeHawb={activeHawb}
 					/>
 					<ShipmentDetails
 						formData={filteredData}
 						whiteout={whiteout}
-						activeCategory={activeCategory}
+						taskItem={taskItem}
 					/>
 					<ContainerDetails
 						formData={filteredData}
@@ -286,6 +336,7 @@ function GenerateMawb({
 						activeCategory={activeCategory}
 						edit={edit}
 						viewDoc={viewDoc}
+						activeHawb={activeHawb}
 					/>
 				</div>
 			</div>

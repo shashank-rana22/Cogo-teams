@@ -14,7 +14,9 @@ function BankDatailsModal({
 	const { status, userIncidentStatus, userNotes } = itemData || {};
 	const { data } = itemData || {};
 	const { organization, bankRequest } = data || {};
-	const { bankHolderName, accountNumber, ifscCode, remark, bankName, branchName, documentUrls } = bankRequest || {};
+	const {
+		bankHolderName, accountNumber, ifscCode, swiftCode, remark, bankName, branchName, documentUrls,
+	} = bankRequest || {};
 	const { businessName, tradePartyType, category_types:categoryTypes } = organization || {};
 	return (
 		<div>
@@ -101,10 +103,10 @@ function BankDatailsModal({
 					<div className={styles.rate_conatiner}>
 						<div className={styles.bank_details}>
 							<div className={styles.value}>
-								IFSC Code
+								{ifscCode ? 'IFSC Code' : 'Swift Code'}
 							</div>
 							<div className={styles.label}>
-								{ifscCode}
+								{ifscCode ? ifscCode || '' : swiftCode || ''}
 							</div>
 						</div>
 

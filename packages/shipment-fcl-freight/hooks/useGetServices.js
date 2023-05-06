@@ -1,39 +1,57 @@
-import { Toast } from '@cogoport/components';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 
-import getApiErrorString from '../utils/getApiErrorString';
+const activeStakeholderMapping = {
+	consignee_shipper_booking_agent : 'consignee_shipper_id',
+	booking_agent                   : 'importer_exporter_id',
+};
 
-function useGetServices({ shipment_id, additional_methods = [] }) {
-	const [{ loading : servicesLoading, data }, trigger] = useRequest({
+function useGetServices({ shipment_data = {}, additional_methods = [], activeStakeholder = '' }) {
+	const [{ loading : servicesLoading }, trigger] = useRequest({
 		url    : 'fcl_freight/get_services',
 		method : 'GET',
 	}, { manual: true });
 
-	const listServices = useCallback(() => {
-		(async () => {
+	const [servicesData, setServicesData] = useState([]);
+
+	const { id = '' } = shipment_data;
+
+	const listServices = useCallback(
+		async () => {
 			try {
-				await trigger({
+				const res = await trigger({
 					params: {
-						shipment_id,
+						shipment_id: id,
 						additional_methods,
 					},
 				});
+
+				if (activeStakeholder in activeStakeholderMapping) {
+					const servicesToShow = (res?.data?.summary || [])
+						.filter((service) => service?.importer_exporter?.id
+							=== shipment_data?.[activeStakeholderMapping[activeStakeholder]]);
+
+					setServicesData(servicesToShow);
+				} else {
+					setServicesData(res?.data?.summary);
+				}
 			} catch (err) {
-				Toast.error(getApiErrorString(err));
+				toastApiError(err);
 			}
-		})();
-	}, [trigger, shipment_id, additional_methods]);
+		},
+		[trigger, id, additional_methods, activeStakeholder, shipment_data],
+	);
 
 	useEffect(() => {
-		if (shipment_id) listServices();
-	}, [listServices, shipment_id]);
+		if (id) listServices();
+	}, [listServices, id]);
 
 	return {
 		servicesGet: {
 			servicesLoading,
 			refetchServices : listServices,
-			servicesList    : data?.summary || [],
+			servicesList    : servicesData,
 		},
 
 	};

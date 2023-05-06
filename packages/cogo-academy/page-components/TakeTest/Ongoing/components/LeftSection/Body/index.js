@@ -1,5 +1,6 @@
 import CaseStudy from './CaseStudy';
 import SingleQuestion from './SingleQuestion';
+import Subjective from './Subjective';
 
 function Body({
 	data = {},
@@ -11,13 +12,17 @@ function Body({
 	loading,
 	subQuestion,
 	setSubQuestion,
+	setSubjectiveAnswer,
+	subjectiveAnswer,
+	uploadValue,
+	setUploadValue,
 }) {
 	const { question_type } = data || {};
 
 	return (
 		<div key={`${loading}_${subQuestion}`}>
-			{question_type !== 'case_study'
-				? (
+			{(['single_correct', 'multi_correct'].includes(question_type))
+				&& (
 					<SingleQuestion
 						question={data}
 						currentQuestion={currentQuestion}
@@ -27,20 +32,33 @@ function Body({
 						setAnswer={setAnswer}
 						loading={loading}
 					/>
-				)
-				: (
-					<CaseStudy
-						question={data}
-						currentQuestion={currentQuestion}
-						setCurrentQuestion={setCurrentQuestion}
-						total_question={total_question}
-						answer={answer}
-						setAnswer={setAnswer}
-						loading={loading}
-						subQuestion={subQuestion}
-						setSubQuestion={setSubQuestion}
-					/>
-				) }
+				)}
+
+			{question_type === 'case_study' && (
+				<CaseStudy
+					question={data}
+					currentQuestion={currentQuestion}
+					setCurrentQuestion={setCurrentQuestion}
+					total_question={total_question}
+					answer={answer}
+					setAnswer={setAnswer}
+					loading={loading}
+					subQuestion={subQuestion}
+					setSubQuestion={setSubQuestion}
+				/>
+			)}
+
+			{question_type === 'subjective' && (
+				<Subjective
+					currentQuestion={currentQuestion}
+					total_question={total_question}
+					question={data}
+					subjectiveAnswer={subjectiveAnswer}
+					setSubjectiveAnswer={setSubjectiveAnswer}
+					uploadValue={uploadValue}
+					setUploadValue={setUploadValue}
+				/>
+			)}
 		</div>
 	);
 }

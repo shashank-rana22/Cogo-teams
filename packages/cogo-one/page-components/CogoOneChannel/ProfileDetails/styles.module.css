@@ -5,13 +5,11 @@
 }
 
 .container {
-	display: flex;
-	flex-direction: column;
 	width: 92% !important;
 	min-width: 335px;
 	height: 100%;
 	padding: 12px;
-	overflow-y: scroll;
+	overflow-y: auto;
 	background: #f9f9f9;
 	filter: drop-shadow(0 0 16px rgb(98 127 172 / 20%));
 	border-radius: 8px 0 0 8px;

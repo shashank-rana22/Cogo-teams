@@ -1,31 +1,30 @@
 {
     "place_booking": {
-        "booking_preference": true,
-        "task_attributes": [
-            {
-                "task": [
-                    "confirm_booking",
-                    "mark_confirmed"
-                ],
-                "state": "shipment_received",
-                "status": "completed"
-            },
-            {
-                "task": [
-                    "mark_confirmed",
-                    "choose_service_provider",
-                    "update_nomination_details"
-                ],
-                "state": "awaiting_service_provider_confirmation",
-                "status": "pending",
-                "assigned_stakeholder": "service_ops1"
-            }
-        ]
+        "common":{
+            "task_attributes": [
+                {
+                    "task": "mark_confirmed",
+                    "state": "shipment_received",
+                    "status": "completed"
+                },
+                {
+                    "task": "mark_confirmed",
+                    "state": "awaiting_service_provider_confirmation",
+                    "status": "pending",
+                    "assigned_stakeholder": "service_ops1"
+                }
+            ]
+        }
     },
     "completed": {
-        "task_attributes": [
-            { "task": "update_container_details", "status" : "completed" }
-        ]
+        "common":{
+            "task_attributes": [
+                { 
+                    "task": "update_container_details",
+                    "status" : "completed" 
+                }
+            ]
+        }
     },
     "cancelled": {}
 }

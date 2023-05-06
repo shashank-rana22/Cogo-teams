@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 const useCreateShipmentTradePartner = ({
 	shipment_id = '',
@@ -15,13 +15,13 @@ const useCreateShipmentTradePartner = ({
 
 	const apiTrigger = async (val) => {
 		try {
-			const res = await trigger({ params: { ...val, shipment_id } });
+			const res = await trigger({ data: { ...val, shipment_id } });
 			if (!res.hasError) {
 				Toast.success(successMessage);
 				refetch();
 			}
 		} catch (err) {
-			Toast.error(getApiErrorString(err));
+			toastApiError(err);
 		}
 	};
 

@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
@@ -5,7 +6,7 @@ import { entityMappingData } from '../P&L/PLStatement/constant';
 
 interface FilterInterface {
 	filters?:{
-		month?:string
+		date?:string
 		category?:string
 		entity?:string
 	}
@@ -38,49 +39,65 @@ const useReport = ({
 		},
 		{ manual: true },
 	);
+	const { category = '', date:FilterDate = '', entity = '' } = filters || {};
+	const getLastMonthData = useCallback(() => {
+		if (category === 'lastMonth') {
+			const currentDate = new Date();
+			currentDate.setMonth(currentDate.getMonth() - 1);
+			const yearData = currentDate.getFullYear();
+			const month = currentDate.getMonth() + 1;
+			const monthValue = month.toString().padStart(2, '0');
+			const lastMonth = `${yearData}-${monthValue}-01`;
+			return [lastMonth];
+		}
+		if (category === 'lastQuarter') {
+			const now = new Date();
+			const prevQuarterLastMonth = new Date(now.getFullYear(), (now.getMonth() - ((now.getMonth() + 3) % 3)), 0);
+			const lastThreeMonths = Array.from({ length: 3 }, (_, i) => new Date(
+				prevQuarterLastMonth.getFullYear(),
+				prevQuarterLastMonth.getMonth() - i,
+				1,
+			));
+			const lastThreeMonthsFormatted = lastThreeMonths.map((date) => `${date.getFullYear()}
+			-0${date.getMonth() + 1}-01`);
+			return lastThreeMonthsFormatted;
+		}
+		return null;
+	}, [category]);
 
 	const fetchReportApi = useCallback(async (setShowReport) => {
-		const getLastMonthData = () => {
-			if (filters?.category === 'lastMonth ') {
-				const currentDate = new Date();
-				currentDate.setMonth(currentDate.getMonth() - 1);
-				const yearData = currentDate.getFullYear();
-				const month = currentDate.getMonth() + 1;
-				const monthValue = month.toString().padStart(2, '0');
-				const lastMonth = `${yearData}-${monthValue}-01`;
-				return lastMonth;
-			}
-			return null;
-		};
-
 		try {
 			await reportTrigger({
 				params: {
-					periods      : [filters?.month] || [getLastMonthData()] || undefined,
-					cogoEntityId : entityMappingData[filters?.entity] || undefined,
+					periods      : getLastMonthData() || [FilterDate] || undefined,
+					cogoEntityId : entityMappingData[entity] || undefined,
 				},
 			});
 
 			setShowReport(true);
-		} catch {
-			console.log('dfjnjn');
+		} catch (error) {
+			if (error?.response?.data?.message) {
+				Toast.error(error?.response?.data?.message);
+			}
 		}
-	}, [filters?.category, filters?.entity, filters?.month, reportTrigger]);
+	}, [getLastMonthData, reportTrigger, FilterDate, entity]);
 
 	const fetchRatioApi = useCallback(async (setShowReport?:any) => {
 		try {
 			await ratioTrigger({
 				params: {
-					periods      : monthPayload || filters?.month || undefined,
-					cogoEntityId : entityMappingData[filters?.entity] || undefined,
+					periods      : getLastMonthData() || monthPayload || FilterDate || undefined,
+					cogoEntityId : entityMappingData[entity] || undefined,
 				},
 			});
 
 			setShowReport(true);
-		} catch {
-			console.log('dfjn');
+		} catch (error) {
+			if (error?.response?.data?.message) {
+				Toast.error(error?.response?.data?.message);
+			}
 		}
-	}, [filters?.entity, filters?.month, monthPayload, ratioTrigger]);
+	}, [ratioTrigger, getLastMonthData, monthPayload, FilterDate, entity]);
 
 	return {
 		ratiosData,

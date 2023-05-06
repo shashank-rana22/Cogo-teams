@@ -21,20 +21,16 @@ function TagTable({
 	const { list:listTagsData = [], total_count } = data || {};
 	const router = useRouter();
 
-	if (tagsLoading) {
-		return <LoadingState />;
-	}
+	const onClick = () => {
+		router.push(
+			'/learning/faq/create/configuration?create=tag',
+			'/learning/faq/create/configuration?create=tag',
+		);
+		setConfigurationPage('tag');
+		reset();
+	};
 
 	const renderTable = () => {
-		const onClick = () => {
-			router.push(
-				'/learning/faq/create/configuration?create=tag',
-				'/learning/faq/create/configuration?create=tag',
-			);
-			setConfigurationPage('tag');
-			reset();
-		};
-
 		if (isEmpty(data?.list)) {
 			return (
 				activeTag === 'active'
@@ -52,18 +48,16 @@ function TagTable({
 
 		return (
 			<div>
-				<div>
-					<div className={styles.table}>
-						<StyledTable columns={columns} data={listTagsData} />
-					</div>
-
+				<div className={styles.table}>
+					<StyledTable columns={columns} data={listTagsData} />
 				</div>
+
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="table"
 						currentPage={tagCurrentPage}
 						totalItems={total_count}
-						pageSize={5}
+						pageSize={10}
 						onPageChange={setTagCurrentPage}
 					/>
 				</div>
@@ -71,11 +65,9 @@ function TagTable({
 		);
 	};
 
-	return (
-		<>
-			{renderTable()}
-		</>
-	);
+	if (tagsLoading) return <LoadingState />;
+
+	return renderTable();
 }
 
 export default TagTable;
