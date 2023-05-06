@@ -56,6 +56,7 @@ function PortDetails({ primary_service = {}, trade_type = '' }) {
 				{handleLocationDetails(origin_port, origin_main_port)}
 				{ schedule_departure ? (
 					<div className={styles.date}>
+						ETD : &nbsp;
 						{format(schedule_departure, 'dd MMM yyyy', null, true)}
 					</div>
 				) : null}
@@ -72,6 +73,7 @@ function PortDetails({ primary_service = {}, trade_type = '' }) {
 						{handleLocationDetails(destination_port, destination_main_port)}
 						{ schedule_arrival ? (
 							<div className={styles.date}>
+								ETA : &nbsp;
 								{format(schedule_arrival, 'dd MMM yyyy', null, true)}
 							</div>
 						) : null}

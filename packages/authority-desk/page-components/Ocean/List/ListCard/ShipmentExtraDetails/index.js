@@ -67,7 +67,8 @@ function ShipmentExtraDetails({ item = {} }) {
 					{item?.invoice_status?.is_payment_validated
 						? IconMapping.yellow
 						: IconMapping.red}
-					Sales Invoice Status:
+					&nbsp;
+					Sales Invoice Status: &nbsp;
 					<span className={styles.text}>
 						{item?.invoice_status?.is_invoice_validated
 							? 'System Validated '

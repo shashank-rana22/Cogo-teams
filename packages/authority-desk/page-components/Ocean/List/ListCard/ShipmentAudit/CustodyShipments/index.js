@@ -95,7 +95,7 @@ function CustodyShipments({ item = {} }) {
 							<td>
 								{' '}
 								{ formatAmount({
-									amount   : item?.inr_invoice_value,
+									amount   : val?.inr_invoice_value,
 									currency : geo.country.currency.code,
 									options  : {
 										style                 : 'currency',
@@ -108,8 +108,8 @@ function CustodyShipments({ item = {} }) {
 							</td>
 							<td>
 								{formatAmount({
-									amount   : item?.cargo_value,
-									currency : item?.cargo_currency,
+									amount   : val?.cargo_value,
+									currency : val?.cargo_currency,
 									options  : {
 										style                 : 'currency',
 										currencyDisplay       : 'code',
