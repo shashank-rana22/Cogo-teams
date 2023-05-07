@@ -50,7 +50,7 @@ function ServiceTables({
 					<div className={styles.servicecontainer}>
 						{showCargo && (
 							<div style={{ marginLeft: '4px' }}>
-								<CargoDetails />
+								<CargoDetails item={singlecharge} />
 							</div>
 						)}
 						{showservice && <div className={styles.serviceheadercolor}>{service}</div>}
