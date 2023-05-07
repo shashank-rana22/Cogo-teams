@@ -1,0 +1,113 @@
+.container {
+	color: #fff;
+}
+
+.issez {
+	display: flex;
+	margin-left: -16px;
+}
+
+.heading {
+	font-size: 26px;
+	font-weight: 600;
+}
+
+.layout {
+	padding-bottom: 16px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.selectcontainer {
+	margin-right: 16px;
+
+	:global {
+		.ui_select_input_placeholder,
+		::placeholder {
+			font-size: 12px;
+		}
+
+		.ui_select_container {
+			width: 180px;
+		}
+	}
+}
+
+.label {
+	margin: 6px 0;
+}
+
+.input_container {
+	display: flex;
+	flex-direction: column;
+	margin-right: 16px;
+
+	& > label {
+		margin-bottom: 4px;
+		font-weight: 900;
+	}
+
+	& > select,
+	input {
+		height: 38px;
+		font-size: 16px;
+	}
+
+	label :global {
+		.ui_upload_droparea_container {
+			min-height: fit-content !important;
+			padding: 0 !important;
+			margin-bottom: 0 !important;
+			border: 1px solid #dedede;
+		}
+	}
+}
+
+.errors {
+	padding-left: 4px;
+	font-size: 10px;
+	color: red;
+}
+
+.flexlayout {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.upload_container {
+	width: 48%;
+}
+
+.form_label {
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.width {
+	width: 46%;
+}
+
+.flex {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.tds_rate {
+	width: 45%;
+}
+
+.marginleft {
+	margin-left: 16px;
+}
+
+.marginleftchecque {
+	margin-left: 36px;
+}
+
+.buttoncontainer {
+	display: flex;
+}
+
+.button {
+	margin-left: 20px;
+}

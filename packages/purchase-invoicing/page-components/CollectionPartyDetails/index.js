@@ -9,7 +9,7 @@ import ComparisionModal from '../../common/ComparisionModal';
 import getFormattedAmount from '../../common/helpers/formatAmount';
 import ServiceTables from '../../common/ServiceTable';
 import ToolTipWrapper from '../../common/ToolTipWrapper';
-import InvoicesInProcess from '../InvoicesInProcess';
+// import InvoicesInProcess from '../InvoicesInProcess';
 import InvoicesUploaded from '../InvoicesUploaded';
 
 import styles from './styles.module.css';
@@ -109,7 +109,7 @@ function CollectionPartyDetails({ collectionParty, refetch }) {
 					setOpenComparision={setOpenComparision}
 					setStep={setStep}
 				/>
-				<InvoicesInProcess invoicesdata={collectionParty?.existing_collection_parties} />
+				{/* <InvoicesInProcess invoicesdata={collectionParty?.existing_collection_parties} /> */}
 				<span className={styles.headings}>Live Invoice</span>
 				<div className={styles.buttoncontailner}>
 					<Button

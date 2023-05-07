@@ -11,7 +11,7 @@ function useGetAsyncOptions({
 	valueKey = '',
 	labelKey = '',
 	params = {},
-	onValueChange,
+	onOptionsChange,
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
 	const [storeoptions, setstoreoptions] = useState([]);
@@ -37,8 +37,8 @@ function useGetAsyncOptions({
 	}, [JSON.stringify(optionValues)]);
 
 	useEffect(() => {
-		if (onValueChange) {
-			onValueChange(listData?.list || []);
+		if (onOptionsChange) {
+			onOptionsChange(listData?.list || []);
 		}
 	}, [JSON.stringify(listData?.list || [])]);
 

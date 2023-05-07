@@ -55,14 +55,42 @@ export const lineItemConfig = [
 	},
 ];
 
+const handleModifiedOptions = ({ options: newOptions }) => newOptions.map((option) => ({
+	...option,
+	item_name: (
+		<div className={styles.paddingname}>
+			<span className={styles.itemname}>
+				{option.item_name}
+				(
+				{option.code}
+				)-
+				{option.tax_percent}
+				%
+			</span>
+			<div>
+				<span className={styles.product}>
+					{option.product_code}
+					{' '}
+					-
+				</span>
+				<span className={styles.product}>
+					{option.sac_code}
+				</span>
+			</div>
+		</div>
+	),
+	code: option?.code,
+}));
+
 export const renderLineItemFunctions = {
 	code: ({ control, index, extradata, setCodes, errors }) => (
-		<div className={`${styles.selectcontainer} ${styles.paddingleft}`}>
+		<div className={`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}>
 			<AsyncSelectController
 				control={control}
 				name={`line_items.${index}.code`}
 				placeholder="Enter"
 				asyncKey="search_products_v2"
+				getModifiedOptions={handleModifiedOptions}
 				params={{
 					organization_id         : extradata?.organization_id,
 					organization_billing_id : extradata?.organization_billing_id,
@@ -118,7 +146,7 @@ export const renderLineItemFunctions = {
 		</div>
 	),
 	unit: ({ control, index, errors }) => (
-		<div className={`${styles.selectcontainer} ${styles.paddingleft}`}>
+		<div className={`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidthmd}`}>
 			<SelectController
 				name={`line_items.${index}.unit`}
 				control={control}

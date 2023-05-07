@@ -22,6 +22,10 @@
 			width: 242px;
 			max-height: 36px;
 		}
+
+		.ui_select_options_container {
+			min-width: 300px;
+		}
 	}
 }
 
@@ -34,6 +38,8 @@
 }
 
 .address {
+	display: flex;
+	flex-wrap: wrap;
 	padding: 16px 4px;
 	margin-top: 16px;
 	border: 1px solid #d9d9d9;
@@ -54,7 +60,9 @@
 .verification_status {
 	display: flex;
 	align-items: center;
-	padding: 4px 8px;
+	width: fit-content;
+	height: fit-content;
+	padding: 4px 12px;
 	font-size: 12px;
 	font-weight: 600;
 	background-color: #f3fafa;
@@ -69,4 +77,24 @@
 	padding-left: 4px;
 	font-size: 10px;
 	color: red;
+}
+
+.marginTop {
+	margin-top: 36px;
+	margin-left: 10px;
+}
+
+.circle {
+	cursor: pointer;
+}
+
+.link {
+	color: #f68b21;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.spacebetween {
+	display: flex;
+	justify-content: space-between;
 }

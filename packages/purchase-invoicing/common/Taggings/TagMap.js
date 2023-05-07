@@ -20,7 +20,8 @@ function TagMap({
 
 	const allTaggingMaps = ['merge', 'split'].includes(activeTab) ? [activeTab] : ['merge', 'split', 'notTaggedIds'];
 
-	if ((!isEmpty(activeTab) && isEmpty(mappingsData?.[activeTab])) && !loading) {
+	if ((!isEmpty(activeTab) && isEmpty(mappingsData?.[activeTab]))
+		|| (isEmpty(activeTab) && isEmpty(mappingsData) && !loading)) {
 		return (
 			<div className={styles.empty}>
 				No Invoices Found

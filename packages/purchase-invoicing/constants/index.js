@@ -87,3 +87,5 @@ export const invoiceTypeOptionsCN = [
 	{ label: 'Invoice', value: 'purchase_invoice' },
 	{ label: 'Proforma', value: 'proforma_invoice' },
 ];
+
+export const EMPTY_POC = [{ name: '', email: '', mobile_number: '', alternate_mobile_number: '' }];

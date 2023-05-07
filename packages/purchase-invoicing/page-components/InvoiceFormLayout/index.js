@@ -12,8 +12,10 @@ import useCalculateTotalPrice from '../../helpers/useCalculateTotalPrice';
 import useResetErrors from '../../helpers/useResetErrors';
 
 import AdditionalDetails from './AdditionalDetails';
+import BankForm from './BankForm';
 import BillingPartyDetails from './BillingPartyDetails';
 import CollectionPartyDetails from './CollectionPartyDetails';
+import CollectionPartyForm from './CollectionPartyForm';
 import LineItemDetails from './LineItemDetails';
 import PurchaseInvoiceDates from './PurchaseInvoiceDates';
 import Segmented from './Segmented';
@@ -37,6 +39,8 @@ function InvoiceFormLayout({
 	const [showTaggings, setShowTaggings] = useState(false);
 	const [billCatogory, setBillCatogory] = useState('purchase');
 	const [selectedProforma, setSelectedProforma] = useState([]);
+	const [showCollectionParty, setShowCollectionParty] = useState(false);
+	const [showBankform, setShowBankForm] = useState(false);
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const billingAddresses = collectionParty?.billing_addresses || [];
 	const otherAddresses = collectionParty?.other_addresses || [];
@@ -202,6 +206,8 @@ function InvoiceFormLayout({
 					errMszs={errMszs}
 					purchaseInvoiceValues={purchaseInvoiceValues}
 					open={isEdit}
+					setShowCollectionParty={setShowCollectionParty}
+					setShowBankForm={setShowBankForm}
 				/>
 
 				<LineItemDetails
@@ -237,6 +243,23 @@ function InvoiceFormLayout({
 					selectedProforma={selectedProforma}
 					setSelectedProforma={setSelectedProforma}
 				/>
+				{showCollectionParty && (
+					<CollectionPartyForm
+						showCollectionParty={showCollectionParty}
+						setShowCollectionParty={setShowCollectionParty}
+						serviceProvider={serviceProvider}
+					/>
+				)}
+				{showBankform && (
+					<BankForm
+						showBankform={showBankform}
+						setShowBankForm={setShowBankForm}
+						orgResponse={{
+							id: collectionParty.organization_id,
+						}}
+						tradePartyId={collectionParty.id}
+					/>
+				)}
 			</div>
 		</div>
 	);

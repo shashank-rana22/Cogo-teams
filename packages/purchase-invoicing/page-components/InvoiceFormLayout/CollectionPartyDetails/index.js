@@ -1,5 +1,7 @@
+import { Toast } from '@cogoport/components';
 import { AsyncSelectController, SelectController } from '@cogoport/forms';
-import { startCase } from '@cogoport/utils';
+import { IcMPlusInCircle } from '@cogoport/icons-react';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import AccordianView from '../../../common/Accordianview';
@@ -18,6 +20,8 @@ function CollectionPartyDetails({
 	errMszs,
 	purchaseInvoiceValues,
 	open,
+	setShowCollectionParty,
+	setShowBankForm,
 }) {
 	const organization_id = serviceProvider?.service_provider_id;
 
@@ -39,22 +43,21 @@ function CollectionPartyDetails({
 		) {
 			collectionPartyBankOptions.push({
 				...bank,
-				label: (
-					<div className={styles.flex}>
-						{bank?.data?.bank_name}
-						{' '}
-						/
-						{' '}
-						{bank?.data?.branch_name}
-						<div className={styles.verification_status}>
-							{startCase(bank.verification_status)}
-						</div>
-					</div>
-				),
-				value: bank?.data?.bank_account_number,
+				label : bank?.data?.bank_name,
+				value : bank?.data?.bank_account_number,
 			});
 		}
 	});
+
+	const handleModifiedOptions = ({ options }) => options.map((option) => ({
+		...option,
+		display_name:
+	<div className={styles.spacebetween}>
+		<div>{option?.display_name}</div>
+		<div className={styles.verification_status}>{startCase(option.verification_status)}</div>
+	</div>,
+		registration_number: option?.registration_number,
+	}));
 
 	const bankAccountNumber = watch('collection_party_bank_details');
 
@@ -99,11 +102,19 @@ function CollectionPartyDetails({
 						name="collection_party"
 						placeholder="Select Collection Party"
 						asyncKey="list_organization_trade_parties"
-						onChange={(_, obj) => {
-							setCollectionParty(obj);
-							setValue('collection_party_address', '');
+						getModifiedOptions={handleModifiedOptions}
+						onOptionsChange={handleOption}
+						handleChange={(v, obj) => {
+							if (obj?.verification_status === 'pending') {
+								setValue('collection_party', undefined);
+								setValue('collection_party_address', '');
+								setValue('collection_party_bank_details', '');
+								Toast.error('Cannot select KYC pending collection party!');
+							} else {
+								setCollectionParty(obj);
+								setValue('collection_party', v);
+							}
 						}}
-						onValueChange={handleOption}
 						value={collectionParty.registration_number || purchaseInvoiceValues?.collection_party}
 						params={{
 							documents_data_required         : true,
@@ -124,42 +135,71 @@ function CollectionPartyDetails({
 						</div>
 					)}
 				</div>
-				<div className={`${styles.selectcontainer} ${styles.marginleft}`}>
-					<div className={styles.label}>Select Collection Party Address</div>
-					<SelectController
-						control={control}
-						name="collection_party_address"
-						placeholder="Enter Collection Party Address"
-						options={collectionPartyAddresses}
-						rules={{ required: true }}
-					/>
-					{errors?.collection_party_address && (
-						<div className={`${styles.errors}`}>
-							Collection Party Address is Required
+				{!isEmpty(collectionPartyAddresses) && (
+					<div className={`${styles.selectcontainer} ${styles.marginleft}`}>
+						<div className={styles.label}>Select Collection Party Address</div>
+						<SelectController
+							control={control}
+							name="collection_party_address"
+							placeholder="Enter Collection Party Address"
+							options={collectionPartyAddresses}
+							rules={{ required: true }}
+						/>
+						{errors?.collection_party_address && (
+							<div className={`${styles.errors}`}>
+								Collection Party Address is Required
+							</div>
+						)}
+					</div>
+				)}
+				{!isEmpty(collectionParty) && (
+					<div className={`${styles.selectcontainer} ${styles.marginleft}`}>
+						<div className={styles.label}>Select Bank Details</div>
+						<SelectController
+							control={control}
+							name="collection_party_bank_details"
+							placeholder="Select Bank Details"
+							options={collectionPartyBankOptions}
+							renderLabel={(bank) => (
+								<div className={styles.flex}>
+									{bank?.data?.bank_name}
+									{' '}
+									/
+									{' '}
+									{bank?.data?.branch_name}
+									<div className={styles.verification_status}>
+										{startCase(bank.verification_status)}
+									</div>
+								</div>
+							)}
+							rules={{ required: true }}
+						/>
+						{errors?.collection_party_bank_details && (
+							<div className={`${styles.errors}`}>
+								Collection Party Bank Details is Required
+							</div>
+						)}
+						<div
+							className={styles.link}
+							role="presentation"
+							onClick={() => { setShowBankForm(true); }}
+						>
+							{' '}
+							+ Add Bank Details
+
 						</div>
-					)}
-				</div>
-				<div className={`${styles.selectcontainer} ${styles.marginleft}`}>
-					<div className={styles.label}>Select Bank Details</div>
-					<SelectController
-						control={control}
-						name="collection_party_bank_details"
-						placeholder="Select Bank Details"
-						options={collectionPartyBankOptions}
-						rules={{ required: true }}
-					/>
-					{errors?.collection_party_bank_details && (
-						<div className={`${styles.errors}`}>
-							Collection Party Bank Details is Required
-						</div>
-					)}
+					</div>
+				)}
+				<div className={`${styles.marginTop} ${styles.circle}`}>
+					<IcMPlusInCircle height={20} width={20} onClick={() => { setShowCollectionParty(true); }} />
 				</div>
 			</div>
 			{collectionPartyBank && (
 				<div className={styles.address}>
 					<div className={`${styles.flex} ${styles.margintop}`}>
-						<span className={styles.key}>Bank Details :</span>
+						<span className={styles.key}>BankDetails</span>
 						<span className={styles.value}>
+							:
 							{' '}
 							{`${collectionPartyBank?.data?.bank_name || '-'}
 							/ ${collectionPartyBank?.data?.branch_name || '-'
@@ -185,7 +225,6 @@ function CollectionPartyDetails({
 							<span className={styles.key}>PAN Number</span>
 							<span className={styles.value}>
 								:
-								{' '}
 								{collectionParty?.registration_number}
 							</span>
 						</div>

@@ -18,7 +18,7 @@ function useGetAsyncOptionsMicroservice({
 	params = {},
 	authkey = '',
 	microService = '',
-	onValueChange,
+	onOptionsChange,
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
 	const [storeoptions, setstoreoptions] = useState([]);
@@ -47,8 +47,8 @@ function useGetAsyncOptionsMicroservice({
 	}, [JSON.stringify(optionValues)]);
 
 	useEffect(() => {
-		if (onValueChange) {
-			onValueChange(data?.list || []);
+		if (onOptionsChange) {
+			onOptionsChange(data?.list || []);
 		}
 	}, [JSON.stringify(data?.list || [])]);
 
