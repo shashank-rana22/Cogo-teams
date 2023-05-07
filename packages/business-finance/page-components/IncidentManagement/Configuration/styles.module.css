@@ -89,3 +89,8 @@
 	color: #fff;
 	background: #ffab58;
 }
+
+.credit {
+	display: flex;
+	flex-direction: column;
+}
