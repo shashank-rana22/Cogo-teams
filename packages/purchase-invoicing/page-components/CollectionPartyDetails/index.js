@@ -123,6 +123,12 @@ function CollectionPartyDetails({ collectionParty, refetch }) {
 					<Button size="md" themeType="secondary">Add Incidental Charges</Button>
 				</div>
 				<ServiceTables service_charges={collectionParty?.service_charges} />
+				<div className={styles.totalamount}>
+					Total With TAX
+					<span className={styles.amount}>
+						{getFormattedAmount(collectionParty?.net_total || 0, collectionParty?.net_total_price_currency)}
+					</span>
+				</div>
 				{open && (
 					<Modal
 						show={open}

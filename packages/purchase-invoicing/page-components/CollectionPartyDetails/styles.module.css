@@ -71,3 +71,20 @@
 	padding-bottom: 14px;
 	margin: 14px 26px;
 }
+
+.totalamount {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 100%;
+	padding: 10px 30px 10px 0;
+	margin-right: 36px;
+	font-size: 16px;
+	font-weight: 800;
+	color: #4f4f4f;
+	border-radius: 0 0 4px 4px;
+}
+
+.amount {
+	padding-left: 16px;
+}
