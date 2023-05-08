@@ -4,8 +4,6 @@
 }
 
 .line_chart {
-	width: 450px;
-	height: 300px;
-
-	/* margin-top: 10px; */
+	height: 200px;
+	padding-top: 10px;
 }

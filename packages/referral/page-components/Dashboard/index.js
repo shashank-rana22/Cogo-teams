@@ -5,13 +5,15 @@ import { IcMCalendar } from '@cogoport/icons-react';
 import { merge } from '@cogoport/utils';
 import { useState } from 'react';
 
+import ListTables from './ListTables';
 import Progress from './Progress';
 import styles from './styles.module.css';
 
 function Dashboard() {
 	const [user, setUser] = useState('');
 	const [date, setDate] = useState(new Date());
-
+	const [searchValue, setSearchValue] = useState('');
+	const [activeTab, setActiveTab] = useState('invited');
 	const countryOptions = useGetAsyncOptions(merge(asyncFieldsOrganization()));
 
 	return (
@@ -31,7 +33,6 @@ function Dashboard() {
 						placeholder="From - To"
 						dateFormat="MM/dd/yyyy"
 						suffix={<IcMCalendar />}
-						// prefix={<IcMCalendar />}
 						name="date"
 						onChange={setDate}
 						value={date}
@@ -39,6 +40,14 @@ function Dashboard() {
 				</div>
 			</div>
 			<Progress />
+			<div className={styles.table_container}>
+				<ListTables
+					searchValue={searchValue}
+					setSearchValue={setSearchValue}
+					setActiveTab={setActiveTab}
+					activeTab={activeTab}
+				/>
+			</div>
 		</>
 	);
 }

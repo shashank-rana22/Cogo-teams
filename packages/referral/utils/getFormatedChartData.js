@@ -20,7 +20,7 @@ const getFormatedChartData = () => {
 	const estimatedData = [
 		{
 			id    : 'subscription',
-			value : 20 || 0,
+			value : 50 || 0,
 			color : '#FCDC00',
 		},
 		{
@@ -30,7 +30,7 @@ const getFormatedChartData = () => {
 		},
 		{
 			id    : 'shipment',
-			value : 40 || 0,
+			value : 20 || 0,
 			color : '#88CAD1',
 		},
 	];

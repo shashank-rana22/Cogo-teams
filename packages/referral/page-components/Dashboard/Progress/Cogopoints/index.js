@@ -5,6 +5,7 @@ import DetailsPieCharts from '../../../../common/DetailsPieCharts';
 import cogopointsMapping from '../../../../configurations/cogopoints-mapping';
 import pieChartMapping from '../../../../configurations/pie-chart-mapping';
 
+import ReferralPercentage from './ReferralPercentage';
 import ReferralTypes from './ReferralTypes';
 import styles from './styles.module.css';
 
@@ -25,6 +26,7 @@ function Cogopoints() {
 			<div className={styles.chart_container}>
 				{detailsPieChart.map(({ title, data, total_count }) => (
 					<div className={styles.charts}>
+						<ReferralPercentage data={data} />
 						<DetailsPieCharts
 							title={title}
 							data={data}

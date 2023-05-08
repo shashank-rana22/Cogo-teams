@@ -6,6 +6,7 @@
 
 .users {
 	width: 40%;
+	height: 200px;
 	padding: 8px 16px;
 	margin-right: 20px;
 	background: #fff;
@@ -14,6 +15,7 @@
 
 .cogopoints {
 	width: 40%;
+	height: 200px;
 	padding: 8px 13px;
 	margin-right: 20px;
 	background: #fff;
@@ -21,7 +23,8 @@
 }
 
 .networks {
-	width: 30%;
+	width: 28%;
+	height: 200px;
 	padding: 8px 13px;
 	background: #fff;
 	border-radius: 4px;

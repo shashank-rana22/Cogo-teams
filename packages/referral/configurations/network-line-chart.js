@@ -3,12 +3,11 @@ import { ResponsiveLine } from '@cogoport/charts/line';
 function NetworkLineChart() {
 	const data = [
 		{
-			id    : 'network',
-			color : '#F9AE64',
-			data  : [
+			id   : 'network',
+			data : [
 				{
 					x : 'L1',
-					y : 20,
+					y : 0,
 				},
 				{
 					x : 'L10',
@@ -28,50 +27,50 @@ function NetworkLineChart() {
 				},
 				{
 					x : 'L50',
-					y : 192,
+					y : '500',
 				},
 				{
 					x : 'L60',
-					y : 2000,
+					y : '3000',
 				},
-
 			],
 		},
 	];
 	return (
 		<ResponsiveLine
 			data={data}
-			margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+			width={320}
+			height={170}
+			colors={['#F9AE64']}
+			margin={{ top: 5, right: 10, bottom: 50, left: 50 }}
 			xScale={{ type: 'point' }}
 			yScale={{
 				type    : 'linear',
 				min     : 'auto',
 				max     : 'auto',
-				stacked : true,
+				stacked : false,
 				reverse : false,
 			}}
-			yFormat=" >-.2f"
 			curve="natural"
 			axisTop={null}
 			axisRight={null}
 			axisBottom={{
-				tickSize       : 5,
-				tickPadding    : 5,
+				tickSize       : 0,
+				tickPadding    : 10,
 				tickRotation   : 0,
-				legend         : 'transportation',
 				legendOffset   : 36,
 				legendPosition : 'middle',
 			}}
 			axisLeft={{
-				tickSize       : 5,
-				tickPadding    : 5,
+				tickSize       : 0,
+				tickPadding    : 10,
+				tickValues     : 5,
 				tickRotation   : 0,
-				legend         : 'count',
+				legend         : 'users  >',
 				legendOffset   : -40,
 				legendPosition : 'middle',
 			}}
 			enableGridX={false}
-			colors={{ scheme: 'nivo' }}
 			enablePoints={false}
 			pointSize={10}
 			pointColor={{ theme: 'background' }}
@@ -79,15 +78,7 @@ function NetworkLineChart() {
 			pointBorderColor={{ from: 'serieColor' }}
 			pointLabelYOffset={-12}
 			useMesh
-			legends={[]}
-			motionConfig={{
-				mass      : 1,
-				tension   : 170,
-				friction  : 26,
-				clamp     : false,
-				precision : 0.01,
-				velocity  : 0,
-			}}
+
 		/>
 	);
 }
