@@ -190,6 +190,26 @@ const controls = [
 				type  : 'text',
 				label : 'Enter Options Endpoint',
 				style : {
+					flexBasis: '50%',
+				},
+				rules: { required: true },
+			},
+			{
+				name        : 'label_key',
+				type        : 'text',
+				label       : 'Label key',
+				placeholder : 'Enter label key',
+				style       : {
+					flexBasis: '25%',
+				},
+				rules: { required: true },
+			},
+			{
+				name        : 'value_key',
+				type        : 'text',
+				label       : 'Value key',
+				placeholder : 'Enter value key',
+				style       : {
 					flexBasis: '25%',
 				},
 				rules: { required: true },
