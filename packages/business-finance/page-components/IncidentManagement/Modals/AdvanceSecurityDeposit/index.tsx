@@ -72,7 +72,7 @@ function AdvanceSecurityDeposit({ advanceSecurityDeposit, id, refetch, isEditabl
 					<Modal.Header title="Advance Container Security Deposit" />
 					<Modal.Body>
 						{!isEditable && <ApproveAndReject row={row} />}
-						{securityDepositDetails?.map((itm) => (
+						{securityDepositDetails.map((itm) => (
 							<div key={itm?.title} className={styles.flex}>
 								<div className={styles.title}>
 									{itm?.title}

@@ -55,7 +55,7 @@ function AdvanceSecurityDepositRefund({ advanceSecurityDepositRefund, id, refetc
 			value:
 	<div>
 
-		{(uploadProof || [])?.map((url:any) => (url !== '' ? (
+		{(uploadProof || []).map((url:any) => (url !== '' ? (
 			<a href={url} target="_blank" rel="noreferrer">
 				<div className={styles.view_flex}>
 					<div className={styles.view}>link</div>
@@ -84,7 +84,7 @@ function AdvanceSecurityDepositRefund({ advanceSecurityDepositRefund, id, refetc
 					<Modal.Header title="Advance Container Security Deposit Refund" />
 					<Modal.Body>
 						{!isEditable && <ApproveAndReject row={row} />}
-						{securityDepositDetails?.map((itm) => (
+						{securityDepositDetails.map((itm) => (
 							<div key={itm?.title} className={styles.flex}>
 								<div className={styles.title}>
 									{itm?.title}

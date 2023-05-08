@@ -51,7 +51,7 @@ function AdvanceSecurityDepositRefundModal({
 			value:
 	<div>
 
-		{(uploadProof || [])?.map((url:any) => (url !== '' ? (
+		{(uploadProof || []).map((url:any) => (url !== '' ? (
 			<a href={url} target="_blank" rel="noreferrer">
 				<div className={styles.view_flex}>
 					<div className={styles.view}>link</div>
@@ -82,7 +82,7 @@ function AdvanceSecurityDepositRefundModal({
 					<Modal.Header title="Advance Container Security Deposit Refund" />
 					<Modal.Body>
 						<ApproveAndRejectHeader row={itemData} />
-						{securityDepositDetails?.map((itm) => (
+						{securityDepositDetails.map((itm) => (
 							<div key={itm?.title} className={styles.flex}>
 								<div className={styles.title}>
 									{itm?.title}
