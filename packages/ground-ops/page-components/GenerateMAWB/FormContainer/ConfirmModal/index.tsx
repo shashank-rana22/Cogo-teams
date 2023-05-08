@@ -34,7 +34,7 @@ function ConfirmModal({ confirmDelete, setConfirmDelete, activeHawb, loading, de
 					size="md"
 					themeType="accent"
 					disabled={loading}
-					onClick={() => { deleteHAWB(); }}
+					onClick={deleteHAWB}
 				>
 					Confirm
 				</Button>
