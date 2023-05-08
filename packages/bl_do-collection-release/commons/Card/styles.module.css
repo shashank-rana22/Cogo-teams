@@ -1,22 +1,22 @@
-
-.main_container{
+.main_container {
 	display: flex;
-	border-radius: 4px;
-	background: #fff;
-	margin: 24px;
-	padding: 12px;
-	border: 1px solid #88CAD1;
+
 	/* min-height: 170px; */
 	max-height: 170px;
+	padding: 12px;
+	margin: 24px;
+	background: #fff;
+	border: 1px solid #88cad1;
+	border-radius: 4px;
 
 	&.no-accordion {
-		margin-bottom: 20px;
-		padding-bottom: 10px;
 		min-height: 130px;
+		padding-bottom: 10px;
+		margin-bottom: 20px;
 	}
 
 	&.card-critical {
-		background: linear-gradient(90deg, #ffffff, #fadede, #ffffff);
+		background: linear-gradient(90deg, #fff, #fadede, #fff);
 		background-size: 400% 400%;
 		animation: moveBg 5s ease-in-out infinite alternate;
 	}
@@ -25,36 +25,38 @@
 		from {
 			background-position: 100% 0;
 		}
+
 		to {
 			background-position: 0 0;
 		}
 	}
-};
+}
 
-.container{
+.container {
 	&.action {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 		width: 22%;
-		margin-left: auto;
 		padding: 10px 26px 10px 10px;
+		margin-left: auto;
 
 		.core-ui-button-root {
 			&.awaiting {
-				background: #fff1c9;
+				padding: 10px 12px;
 				color: #bf9722;
 				text-transform: capitalize;
 				cursor: initial;
-				padding: 10px 12px;
+				background: #fff1c9;
 				border: none;
 			}
+
 			&.surrendered {
-				background: #d3f6d7;
+				padding: 10px 12px;
 				color: #278934;
 				cursor: initial;
-				padding: 10px 12px;
+				background: #d3f6d7;
 				border: none;
 			}
 		}
@@ -73,43 +75,46 @@
 			max-width: 300px;
 		}
 	}
-};
+}
 
-.stakeholders{
+.stakeholders {
 	overflow: scroll;
 }
 
-.text{
+.text {
 	&.thin {
-		font-weight: 300;
 		margin-top: 2px;
+		font-weight: 300;
 	}
+
 	&.bold {
 		font-weight: 500;
 	}
+
 	&.inline {
 		display: inline;
 	}
+
 	&.small {
 		font-size: 12px;
 	}
-};
+}
 
-.label{
-	font-weight: 500;
+.label {
 	font-size: 16px;
+	font-weight: 500;
 	color: #393f70;
-};
+}
 
-.styled_modal{
+.styled_modal {
 	.ui-modal-dialog {
 		padding: 30px;
 	}
-};
+}
 
-.border_right{
+.border_right {
 	display: flex;
 	flex-direction: flex-end;
 	width: 2%;
-	border-right: 1px solid #88CAD1;
+	border-right: 1px solid #88cad1;
 }

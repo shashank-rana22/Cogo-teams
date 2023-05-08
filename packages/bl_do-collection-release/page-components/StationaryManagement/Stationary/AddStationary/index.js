@@ -4,29 +4,49 @@ import { useState } from 'react';
 
 import BL_OPTIONS from '../../../../configs/BL_CATEGORY.json';
 import HBL_SOURCE from '../../../../configs/HBL_SOURCE.json';
+import useCreateOrganizationDocumentInventory from '../../../../hooks/useCreateOrganizationDocumentInventory';
 
 import styles from './styles.module.css';
 
-function AddStationary() {
+function AddStationary({ listOrgDocTrigger = () => {} }) {
 	const [show, setShow] = useState(false);
 
-	const { control, reset, watch } = useForm({
+	const { control, reset, watch, handleSubmit } = useForm({
 		defaultValues: {
-			bl_category : 'house_bill_of_lading',
-			source      : 'bluetide',
+			document_type : 'house_bill_of_lading',
+			source        : 'bluetide',
 		},
 	});
 
-	const watchBlCategory = watch('bl_category');
+	const watchDocType = watch('document_type');
 
 	const onClose = () => {
 		setShow(false);
 		reset();
 	};
 
+	const createRefetch = () => {
+		listOrgDocTrigger();
+		onClose();
+	};
+
+	const { apiTrigger } = useCreateOrganizationDocumentInventory({ refetch: createRefetch });
+
 	const organizationParams = {
 		filters    : { status: 'active', account_type: 'service_provider' },
 		page_limit : 10,
+	};
+
+	const onSubmit = (val) => {
+		const payload = {
+			document_type   : val?.document_type,
+			bl_count        : val?.bl_count,
+			range           : [val?.serial_no_start, val?.serial_no_end],
+			organization_id : val?.document_type === 'bill_of_lading' ? val?.organization_id : undefined,
+			source          : val?.document_type === 'house_bill_of_lading' ? val?.source : undefined,
+		};
+
+		apiTrigger(payload);
 	};
 
 	return (
@@ -42,13 +62,13 @@ function AddStationary() {
 							<label>BL Category</label>
 							<SelectController
 								size="sm"
-								name="bl_category"
+								name="document_type"
 								control={control}
 								options={BL_OPTIONS.bl_category}
 							/>
 						</div>
 
-						{watchBlCategory === 'bill_of_lading' ? (
+						{watchDocType === 'bill_of_lading' ? (
 							<div className={styles.width_49}>
 								<label>Organization</label>
 								<AsyncSelectController
@@ -108,7 +128,7 @@ function AddStationary() {
 				<Modal.Footer>
 					<div className={styles.button_wrapper}>
 						<Button themeType="secondary" onClick={onClose}>Cancel</Button>
-						<Button>Confirm</Button>
+						<Button onClick={handleSubmit(onSubmit)}>Confirm</Button>
 					</div>
 				</Modal.Footer>
 			</Modal>

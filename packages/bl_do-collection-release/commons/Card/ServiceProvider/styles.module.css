@@ -1,43 +1,44 @@
-.container{
+.container {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
-	padding: 0 26px;
 	width: 50%;
+	padding: 0 26px;
+
 	* {
 		font-size: 12px;
 	}
 }
 
-.col{
+.col {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
 	width: 100%;
-	margin: 6px 0px;
+	margin: 6px 0;
 }
 
-.grey{
+.grey {
 	color: var(--color-secondary-greyscale-3);
 }
 
-.left{
+.left {
 	width: 50%;
 	padding: 8px 16px 8px 8px;
 }
 
-.right{
+.right {
 	width: 50%;
 	padding: 16px;
 }
 
-.details{
-	white-space: nowrap;
-  overflow: hidden;
+.details {
+	overflow: hidden;
 	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
-.tooltip_container{
-	text-decoration: underline;
+.tooltip_container {
 	color: var(--color-accent-orange-2);
+	text-decoration: underline;
 }

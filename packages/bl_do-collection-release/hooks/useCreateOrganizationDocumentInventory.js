@@ -8,7 +8,7 @@ const useCreateOrganizationDocumentInventory = ({
 	successMessage = 'Successfully Created',
 }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : 'list_organization_document_inventory',
+		url    : '/create_organization_document_inventory',
 		method : 'POST',
 	}, { manual: true });
 

@@ -1,4 +1,5 @@
 import { Input, TabPanel, Tabs } from '@cogoport/components';
+import { IcMSearchlight } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
@@ -18,7 +19,7 @@ function Filters({ filters = {}, setFilters = () => {} }) {
 		<div className={styles.container}>
 			<Tabs
 				themeType="primary"
-				onChange={(val) => setFilters({ ...filters, document_type: val })}
+				onChange={(val) => setFilters({ ...filters, document_attributes: [{ document_type: val }] })}
 				activeTab={filters.document_type}
 			>
 				{TABS.map((tab) => (
@@ -30,7 +31,12 @@ function Filters({ filters = {}, setFilters = () => {} }) {
 			</Tabs>
 
 			<div className={styles.input}>
-				<Input size="sm" value={filters.q || ''} onChange={(val) => setFilters({ ...filters, q: val })} />
+				<Input
+					size="sm"
+					value={filters.q || ''}
+					onChange={(val) => setFilters({ ...filters, q: val })}
+					prefix={<IcMSearchlight />}
+				/>
 			</div>
 		</div>
 	);
