@@ -17,40 +17,15 @@
 			}
 		}
 	}
-}
 
-.applied_filters {
-	display: flex;
-
-	.applied_filter {
-		padding: 4px 6px;
-		background-color: #f3fafa;
-		border-radius: 4px;
-
-		&.clearable {
-			border-radius: 4px 0 0 4px;
-		}
-
-		&:not(:first-of-type) {
-			margin-left: 10px;
-		}
-	}
-
-	.clear_filter_icon {
-		display: flex;
-		align-items: center;
-		padding: 0 6px;
-		cursor: pointer;
-		background-color: #cfeaed;
-		border: none;
-		border-radius: 0 4px 4px 0;
-
-		svg {
-			width: 16px;
-			height: 16px;
-			vertical-align: middle;
-			fill: #6fa5ab;
-		}
+	.icon_wrapper {
+		position: relative;
+		top: -8px;
+		display: inline-block;
+		width: 8px;
+		height: 8px;
+		content: "";
+		background-color: var(--color-primary-error-red-2);
 	}
 }
 
