@@ -1580,10 +1580,9 @@ const saas = {
 			service_name : 'organization',
 		},
 		{
-			api         : 'list_address_for_insurance',
-			access_type : 'private',
-			module      : 'insurance',
-			feature     : 'insurance',
+			api          : 'list_address_for_insurance',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 		{
 			api         : 'get_saas_faq',
