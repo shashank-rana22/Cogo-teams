@@ -12,7 +12,7 @@ export const BucketsMapping = ({ role = '', count_stats = {} }) => {
 		release_pending,
 	} = count_stats;
 
-	const postApproved = 		+(delivered || 0)
+	const postApproved = +(delivered || 0)
 		+ (approved || 0)
 		+ (surrendered || 0)
 		+ (surrender_pending || 0)
