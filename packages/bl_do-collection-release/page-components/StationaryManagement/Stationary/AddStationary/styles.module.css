@@ -1,24 +1,24 @@
-.container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 }
 
-.width_49{
-    width: 49%;
+.width_49 {
+	width: 49%;
 }
 
-.width_32{
-    width: 32%;
-    margin-top: 22px;
+.width_32 {
+	width: 32%;
+	margin-top: 22px;
 }
 
-.button_wrapper{
-    display: flex;
+.button_wrapper {
+	display: flex;
 
-    :global{
-        .ui_button_container:first-of-type{
-            margin-right: 6px;
-        }
-    }
+	:global {
+		.ui_button_container:first-of-type {
+			margin-right: 6px;
+		}
+	}
 }

@@ -1,10 +1,16 @@
-.container{
-    display: flex;
-    padding: 8px;
-    justify-content: space-between;
-    align-items: center;
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px;
+
+	:global {
+		.ui_tab_container {
+			padding: 0;
+		}
+	}
 }
 
-.input{
-    width: 40%;
+.input {
+	width: 40%;
 }

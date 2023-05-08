@@ -22,9 +22,11 @@ const useListOrganizationDocumentInventory = () => {
 		(async () => {
 			try {
 				const res = await trigger();
+
 				setApiData(res?.data || {});
 			} catch (err) {
 				setApiData({});
+
 				toastApiError(err);
 			}
 		})();

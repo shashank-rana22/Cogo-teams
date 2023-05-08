@@ -1,28 +1,28 @@
-
-
-.container{
+.container {
 	&.tab-container {
-		width: 400px;
-		max-height: 300px;
-		overflow: auto;
-		margin: -5px -9px;
 		position: relative;
 		z-index: 2;
+		width: 400px;
+		max-height: 300px;
+		margin: -5px -9px;
+		overflow: auto;
 		border-radius: 4px;
 
 		.ui-tabs-list {
 			display: flex;
 			margin-bottom: 10px;
 		}
+
 		.ui-tabs-list-container {
 			flex: 1;
 			justify-content: center;
-			border: solid #dbdeea !important;
-			border-width: 0 1px 1px 0 !important;
 			padding: 12px !important;
 			margin-right: 0 !important;
+			border: solid #dbdeea !important;
+			border-width: 0 1px 1px 0 !important;
 			border-radius: 0 !important;
 		}
+
 		.ui-tabs-list-container:last-of-type {
 			border-right: none !important;
 		}
@@ -31,22 +31,23 @@
 			padding-bottom: 10px !important;
 			border-bottom: 3px solid #303b67 !important;
 		}
+
 		.ui-tabs-list-container:has(+ .active) {
 			border-right: none !important;
 		}
 	}
 
 	&.popover {
-		display: flex;
-		padding: 10px 20px 10px 10px;
-		max-height: 300px;
 		position: relative;
+		display: flex;
+		max-height: 300px;
+		padding: 10px 20px 10px 10px;
 
 		.styleIcon {
-			width: 15px;
-			height: 15px;
 			position: absolute;
 			right: 6px;
+			width: 15px;
+			height: 15px;
 		}
 	}
 
@@ -54,14 +55,14 @@
 		padding: 10px;
 		font-size: 12px;
 	}
-};
+}
 
-.text{
+.text {
 	&.bold {
 		font-weight: 500;
 	}
-};
+}
 
-.link{
+.link {
 	color: #363e6e;
-};
+}

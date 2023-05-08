@@ -16,6 +16,8 @@ const useBlInventory = ({ defaultFilters = {}, defaultParams = {} }) => {
 			...defaultParams,
 			page,
 			page_limit : 10,
+			sort_by    : 'serial_id',
+			sort_type  : 'desc',
 		},
 	}, { manual: true });
 

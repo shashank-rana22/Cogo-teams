@@ -1,20 +1,20 @@
+.inner_tabs {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin: 16px 0;
 
-.inner_tabs{
-  margin: 16px 0px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  :global{
-    .ui_select_container{
-      width: 24%;
-    }
-  }
+	:global {
+		.ui_select_container {
+			width: 24%;
+		}
+	}
 }
 
 .service_tabs {
 	display: flex;
-  align-items: center;
+	align-items: center;
 	width: 40%;
 	margin-top: 12px;
 	font-size: 12px;

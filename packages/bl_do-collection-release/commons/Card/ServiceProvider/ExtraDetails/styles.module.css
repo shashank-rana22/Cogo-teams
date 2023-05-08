@@ -1,39 +1,42 @@
-.container{};
+.container{}
 
-.text{
+.text {
 	&.thin {
 		font-weight: 300;
 		opacity: 0.58;
 	}
+
 	&.bold {
 		font-weight: 500;
 	}
+
 	&.service-provider {
-		text-transform: capitalize;
+		max-width: 270px;
 		overflow: hidden;
 		text-overflow: ellipsis;
+		text-transform: capitalize;
 		white-space: nowrap;
-		max-width: 270px;
 	}
-};
+}
 
-.status{
+.status {
+	padding: 4px 6px;
 	font-weight: 500;
 	border-radius: 4px;
-	padding: 4px 6px;
 
 	&.released {
 		background: #dfe8ff;
 	}
+
 	&.delivered,
 	&.surrendered {
 		background: #d3f6d7;
 	}
-};
+}
 
-.link{
+.link {
 	display: flex;
 	align-items: center;
 	color: #393f70;
 	text-decoration: none;
-};
+}

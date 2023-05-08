@@ -1,8 +1,8 @@
-.container{
-    display: flex;
-    justify-content: space-between;
+.container {
+	display: flex;
+	justify-content: space-between;
 }
 
-.sub_container{
-    width: 48%;
+.sub_container {
+	width: 48%;
 }
