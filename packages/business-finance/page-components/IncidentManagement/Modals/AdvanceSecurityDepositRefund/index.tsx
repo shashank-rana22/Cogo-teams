@@ -1,9 +1,9 @@
-import { Modal, Button, Textarea, Tooltip } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import GetSecurityDepositRefundData from '../../apisModal/useGetSecurityDepositRefund';
-import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
+import SecurityDepositCommonModal from '../AdvanceSecurityDepositCommonModal';
 
 import styles from './styles.module.css';
 
@@ -26,10 +26,10 @@ function AdvanceSecurityDepositRefund({ advanceSecurityDepositRefund, id, refetc
 		remarkValue,
 	});
 	const securityDepositDetails = [
-		{ title: 'Supplier Name', value: <div>{supplierName || ''}</div> },
-		{ title: 'Shipment ID', value: <div>{sid || ''}</div> },
-		{ title: 'Total Amount', value: <div>{totalAmount || ''}</div> },
-		{ title: 'UTR Number', value: <div>{utrNumber || ''}</div> },
+		{ title: 'Supplier Name', value:	supplierName },
+		{ title: 'Shipment ID', value:	sid },
+		{ title: 'Total Amount', value:	totalAmount },
+		{ title: 'UTR Number', value:	utrNumber },
 		{
 			title: 'Remark',
 			value:
@@ -40,13 +40,13 @@ function AdvanceSecurityDepositRefund({ advanceSecurityDepositRefund, id, refetc
 				content={<div className={styles.tooltip_text}>{remark}</div>}
 				interactive
 			>
-				<div>
-					{remark?.substring(0, 30)}
+				<div className={styles.remark_overflow}>
+					{remark}
 					...
 				</div>
 			</Tooltip>
 		) : (
-			<div>{remark || ''}</div>
+			remark
 		)}
 	</div>,
 		},
@@ -74,72 +74,17 @@ function AdvanceSecurityDepositRefund({ advanceSecurityDepositRefund, id, refetc
 			</div>
 			{showDepositModal
 			&& (
-				<Modal
-					size="md"
-					show={showDepositModal}
-					onClose={() => {
-						setShowDepositModal(false);
-					}}
-				>
-					<Modal.Header title="Advance Container Security Deposit Refund" />
-					<Modal.Body>
-						{!isEditable && <ApproveAndReject row={row} />}
-						{securityDepositDetails.map((itm) => (
-							<div key={itm?.title} className={styles.flex}>
-								<div className={styles.title}>
-									{itm?.title}
-								</div>
-								<div className={styles.divider}>
-									:
-								</div>
-								<div className={styles.name}>
-									<div>{itm?.value}</div>
-								</div>
-							</div>
-						))	}
-
-						{isEditable && (
-							<>
-								<div className={styles.remarks}>Remarks*</div>
-								<Textarea
-									name="remark"
-									size="md"
-									placeholder="Enter Remark Here..."
-									onChange={(e: string) => setRemarkValue(e)}
-									style={{ width: '700', height: '100px', marginBottom: '12px' }}
-								/>
-							</>
-						)}
-					</Modal.Body>
-					{isEditable && (
-						<Modal.Footer>
-							<div className={styles.button}>
-								<Button
-									size="md"
-									themeType="secondary"
-									style={{ marginRight: '8px' }}
-									disabled={loading}
-									onClick={() => {
-										getData({ status: 'REJECTED' });
-									}}
-								>
-									Reject
-								</Button>
-
-								<Button
-									size="md"
-									style={{ marginRight: '8px' }}
-									disabled={loading}
-									onClick={() => {
-										getData({ status: 'APPROVED' });
-									}}
-								>
-									Approve
-								</Button>
-							</div>
-						</Modal.Footer>
-					)}
-				</Modal>
+				<SecurityDepositCommonModal
+					securityDepositDetails={securityDepositDetails}
+					showDepositModal={showDepositModal}
+					setShowDepositModal={setShowDepositModal}
+					isEditable={isEditable}
+					row={row}
+					getData={getData}
+					loading={loading}
+					setRemarkValue={setRemarkValue}
+					type="SecurityDepositRefund"
+				/>
 			)}
 		</div>
 	);

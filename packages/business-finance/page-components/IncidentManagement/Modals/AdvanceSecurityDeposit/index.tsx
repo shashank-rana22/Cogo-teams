@@ -1,9 +1,9 @@
-import { Modal, Button, Textarea, Tooltip } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import GetSecurityDepositData from '../../apisModal/useGetSecurityDeposit';
-import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
+import SecurityDepositCommonModal from '../AdvanceSecurityDepositCommonModal';
 
 import styles from './styles.module.css';
 
@@ -28,12 +28,12 @@ function AdvanceSecurityDeposit({ advanceSecurityDeposit, id, refetch, isEditabl
 	});
 
 	const securityDepositDetails = [
-		{ title: 'Supplier Name', value: <div>{supplierName || ''}</div> },
-		{ title: 'Shipment ID', value: <div>{advanceDocumentId || ''}</div> },
-		{ title: 'Amount Per container', value: <div>{amountPerContainer || ''}</div> },
-		{ title: 'Number of containers', value: <div>{numberOfContainers || ''}</div> },
-		{ title: 'Total Amount to be paid', value: <div>{totalAmountToBePaid || ''}</div> },
-		{ title: 'Payment Mode', value: <div>{paymentMode || ''}</div> },
+		{ title: 'Supplier Name', value: supplierName },
+		{ title: 'Shipment ID', value: advanceDocumentId },
+		{ title: 'Amount Per container', value: amountPerContainer },
+		{ title: 'Number of containers', value: numberOfContainers },
+		{ title: 'Total Amount to be paid', value: totalAmountToBePaid },
+		{ title: 'Payment Mode', value: paymentMode },
 		{
 			title: 'Remark',
 			value:
@@ -44,13 +44,13 @@ function AdvanceSecurityDeposit({ advanceSecurityDeposit, id, refetch, isEditabl
 				content={<div className={styles.tooltip_text}>{remark}</div>}
 				interactive
 			>
-				<div>
-					{remark?.substring(0, 30)}
+				<div className={styles.remark_overflow}>
+					{remark}
 					...
 				</div>
 			</Tooltip>
 		) : (
-			<div>{remark || ''}</div>
+			remark
 		)}
 	</div>,
 		},
@@ -62,72 +62,17 @@ function AdvanceSecurityDeposit({ advanceSecurityDeposit, id, refetch, isEditabl
 			</div>
 			{showDepositModal
 			&& (
-				<Modal
-					size="md"
-					show={showDepositModal}
-					onClose={() => {
-						setShowDepositModal(false);
-					}}
-				>
-					<Modal.Header title="Advance Container Security Deposit" />
-					<Modal.Body>
-						{!isEditable && <ApproveAndReject row={row} />}
-						{securityDepositDetails.map((itm) => (
-							<div key={itm?.title} className={styles.flex}>
-								<div className={styles.title}>
-									{itm?.title}
-								</div>
-								<div className={styles.divider}>
-									:
-								</div>
-								<div className={styles.name}>
-									<div>{itm?.value}</div>
-								</div>
-							</div>
-						))	}
-
-						{isEditable && (
-							<>
-								<div className={styles.remarks}>Remarks*</div>
-								<Textarea
-									name="remark"
-									size="md"
-									placeholder="Enter Remark Here..."
-									onChange={(e: string) => setRemarkValue(e)}
-									style={{ width: '700', height: '100px', marginBottom: '12px' }}
-								/>
-							</>
-						)}
-					</Modal.Body>
-					{isEditable && (
-						<Modal.Footer>
-							<div className={styles.button}>
-								<Button
-									size="md"
-									themeType="secondary"
-									style={{ marginRight: '8px' }}
-									disabled={loading}
-									onClick={() => {
-										getData({ status: 'REJECTED' });
-									}}
-								>
-									Reject
-								</Button>
-
-								<Button
-									size="md"
-									style={{ marginRight: '8px' }}
-									disabled={loading}
-									onClick={() => {
-										getData({ status: 'APPROVED' });
-									}}
-								>
-									Approve
-								</Button>
-							</div>
-						</Modal.Footer>
-					)}
-				</Modal>
+				<SecurityDepositCommonModal
+					securityDepositDetails={securityDepositDetails}
+					showDepositModal={showDepositModal}
+					setShowDepositModal={setShowDepositModal}
+					isEditable={isEditable}
+					row={row}
+					getData={getData}
+					loading={loading}
+					setRemarkValue={setRemarkValue}
+					type="SecurityDeposit"
+				/>
 			)}
 		</div>
 	);

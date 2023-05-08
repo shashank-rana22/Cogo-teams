@@ -1,7 +1,7 @@
-import { Modal, Button, Tooltip } from '@cogoport/components';
+import { Button, Tooltip } from '@cogoport/components';
 import React from 'react';
 
-import ApproveAndRejectHeader from '../../ApproveAndRejectHeader';
+import AdvanceDepositCommonModal from '../AdvanceDepositCommonModal';
 
 import styles from './styles.module.css';
 
@@ -19,12 +19,12 @@ function AdvanceSecurityDepositModal({ itemData, showModal, setShowModal }) {
 	} = advanceSecurityDeposit || {};
 
 	const securityDepositDetails = [
-		{ title: 'Supplier Name', value: <div>{supplierName || ''}</div> },
-		{ title: 'Shipment ID', value: <div>{advanceDocumentId || ''}</div> },
-		{ title: 'Amount Per container', value: <div>{amountPerContainer || ''}</div> },
-		{ title: 'Number of containers', value: <div>{numberOfContainers || ''}</div> },
-		{ title: 'Total Amount to be paid', value: <div>{totalAmountToBePaid || ''}</div> },
-		{ title: 'Payment Mode', value: <div>{paymentMode || ''}</div> },
+		{ title: 'Supplier Name', value: supplierName },
+		{ title: 'Shipment ID', value: advanceDocumentId },
+		{ title: 'Amount Per container', value: amountPerContainer },
+		{ title: 'Number of containers', value: numberOfContainers },
+		{ title: 'Total Amount to be paid', value: totalAmountToBePaid },
+		{ title: 'Payment Mode', value: paymentMode },
 		{
 			title: 'Remark',
 			value:
@@ -35,13 +35,13 @@ function AdvanceSecurityDepositModal({ itemData, showModal, setShowModal }) {
 				content={<div className={styles.tooltip_text}>{remark}</div>}
 				interactive
 			>
-				<div>
-					{remark?.substring(0, 30)}
+				<div className={styles.remark_overflow}>
+					{remark}
 					...
 				</div>
 			</Tooltip>
 		) : (
-			<div>{remark || ''}</div>
+			remark
 		)}
 	</div>,
 		},
@@ -55,32 +55,13 @@ function AdvanceSecurityDepositModal({ itemData, showModal, setShowModal }) {
 
 			{showModal
 			&& (
-				<Modal
-					size="md"
-					show={showModal}
-					onClose={() => {
-						setShowModal(false);
-					}}
-				>
-					<Modal.Header title="Advance Container Security Deposit" />
-					<Modal.Body>
-						<ApproveAndRejectHeader row={itemData} />
-						{securityDepositDetails?.map((itm) => (
-							<div key={itm?.title} className={styles.flex}>
-								<div className={styles.title}>
-									{itm?.title}
-								</div>
-								<div className={styles.divider}>
-									:
-								</div>
-								<div className={styles.name}>
-									<div>{itm?.value}</div>
-								</div>
-							</div>
-						))	}
-
-					</Modal.Body>
-				</Modal>
+				<AdvanceDepositCommonModal
+					securityDepositDetails={securityDepositDetails}
+					itemData={itemData}
+					showModal={showModal}
+					setShowModal={setShowModal}
+					type="SecurityDeposit"
+				/>
 			)}
 		</div>
 	);
