@@ -80,7 +80,6 @@ function ComparisionModal({
 					collectionParty={collectionParty}
 					setCollectionParty={setCollectionParty}
 					closeModal={closeModal}
-					editData={editData}
 				/>
 			)}
 

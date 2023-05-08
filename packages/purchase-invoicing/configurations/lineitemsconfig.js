@@ -57,7 +57,8 @@ export const lineItemConfig = [
 
 const handleModifiedOptions = ({ options: newOptions }) => newOptions.map((option) => ({
 	...option,
-	item_name: (
+	actualname : option?.item_name,
+	item_name  : (
 		<div className={styles.paddingname}>
 			<span className={styles.itemname}>
 				{option.item_name}

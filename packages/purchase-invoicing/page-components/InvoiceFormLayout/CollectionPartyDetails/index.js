@@ -144,6 +144,7 @@ function CollectionPartyDetails({
 							placeholder="Enter Collection Party Address"
 							options={collectionPartyAddresses}
 							rules={{ required: true }}
+							value={purchaseInvoiceValues?.collection_party_address}
 						/>
 						{errors?.collection_party_address && (
 							<div className={`${styles.errors}`}>
@@ -173,6 +174,7 @@ function CollectionPartyDetails({
 								</div>
 							)}
 							rules={{ required: true }}
+							value={purchaseInvoiceValues?.collection_party_bank_details}
 						/>
 						{errors?.collection_party_bank_details && (
 							<div className={`${styles.errors}`}>

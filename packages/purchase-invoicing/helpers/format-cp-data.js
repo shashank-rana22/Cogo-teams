@@ -9,7 +9,7 @@ export const formatLineItems = (line_items, codes) => {
 		const tax_total = (total * (codes[item?.code]?.tax_percent || 0)) / 100;
 		const cost = (total || 0) + (tax_total || 0);
 
-		const { tax_percent, service_name, trade_type, product_code, item_name } = codes[item?.code] || {};
+		const { tax_percent, service_name, trade_type, product_code, actualname } = codes[item?.code] || {};
 
 		return {
 			code                : item.code,
@@ -27,7 +27,7 @@ export const formatLineItems = (line_items, codes) => {
                     && trade_type === 'LOCAL' ? `${service_name}_local` : service_name,
 			productCode     : product_code,
 			taxTotalPrice   : Number(cost || 0),
-			name            : item_name || item?.name,
+			name            : actualname || item?.actualname,
 			unit            : item?.unit,
 			containerNumber : item?.container_number || '',
 		};

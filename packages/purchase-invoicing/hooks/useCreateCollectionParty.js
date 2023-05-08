@@ -73,14 +73,13 @@ const useCreateColletctionParty = ({
 
 				if (!res.hasError) {
 					Toast.success('Invoice Added!');
-					setCollectionPartyId(res?.data?.id);
+					setCollectionPartyId(res?.data);
 					setLoading(false);
 					onCreate();
 				}
 			} catch (err) {
 				toastApiError(err?.data);
 				setLoading(false);
-				onCreate();
 			}
 		}
 	};
@@ -103,7 +102,6 @@ const useCreateColletctionParty = ({
 				if (!res.hasError) {
 					Toast.success('Invoice Updated!');
 					setLoading(false);
-					setCollectionPartyId(res?.data?.id);
 					onCreate();
 				}
 			} catch (err) {
