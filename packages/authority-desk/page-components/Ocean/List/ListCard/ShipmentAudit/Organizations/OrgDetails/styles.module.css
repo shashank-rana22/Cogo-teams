@@ -1,0 +1,28 @@
+.container {
+	border-top: 1px solid #f68b21;
+
+	table {
+		width: 100%;
+	}
+
+	th,
+	tr {
+		display: flex;
+		text-align: center;
+	}
+
+	td {
+		flex: 1;
+	}
+}
+
+.loader {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+	justify-content: center;
+}
+
+.loader_icon {
+	width: 50px;
+}
