@@ -46,7 +46,7 @@
 
 .error {
 	margin: 0;
-	font-size: 120px;
+	font-size: 50px;
 	color: var(--color-accent-orange-2);
 	text-shadow:
 		1px 1px 1px #00593e,
@@ -57,7 +57,7 @@
 		6px 6px 1px #00593e,
 		7px 7px 1px #00593e,
 		8px 8px 1px #00593e,
-		25px 25px 8px rgb(0 0 0 / 20%);
+		10px 10px 8px rgb(0 0 0 / 20%);
 }
 
 .page {
