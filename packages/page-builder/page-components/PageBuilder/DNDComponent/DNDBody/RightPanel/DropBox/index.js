@@ -121,7 +121,7 @@ function DropBox({
 			}}
 		>
 			{modeType === 'edit' && (
-				<div>
+				<div style={{ margin: '12px 0' }}>
 					{isActive ? 'Release to drop' : 'Drag a box here'}
 				</div>
 			)}

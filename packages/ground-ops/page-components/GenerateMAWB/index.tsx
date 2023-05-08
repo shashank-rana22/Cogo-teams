@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Modal, Loader } from '@cogoport/components';
+import { Loader } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
+import Modal from '../Air/commons/Modal';
 import useGetHawbList from '../Air/hooks/useGetHawbList';
 
 import FormContainer from './FormContainer';
@@ -19,8 +20,9 @@ import usePackingList from './Helpers/hooks/usePackingList';
 import styles from './styles.module.css';
 
 const agentOtherChargesCode = [{ code: 'AWB', price: '150' }, { code: 'PCA', price: '250' }];
-const carrierOtherChargesCode = [{ code: 'AMS', price: '' }, { code: 'AWC', price: '' },
-	{ code: 'XRAY', price: '' }, { code: 'CGC', price: '' }];
+const carrierOtherChargesCode = [{ code: 'FSC', chargeType: 'chargeable_wt', price: '' },
+	{ code: 'SSC', chargeType: 'chargeable_wt', price: '' }, { code: 'XRAY', chargeType: 'chargeable_wt', price: '' },
+	{ code: 'AWC', chargeType: 'chargeable_wt', price: '' }, { code: 'AMS', chargeType: 'chargeable_wt', price: '' }];
 const unsavedFields = ['consigneeAddress',
 	'shipperName',
 	'shipperAddress',
@@ -322,6 +324,7 @@ function GenerateMAWB({
 						fields={fields}
 						control={control}
 						errors={errors}
+						setValue={setValue}
 						item={item}
 						setGenerate={setGenerate}
 						handleSubmit={handleSubmit}
@@ -333,6 +336,7 @@ function GenerateMAWB({
 						activeKey={activeKey}
 						setActiveKey={setActiveKey}
 						taskItem={taskItem}
+						formValues={formValues}
 					/>
 				</>
 			)}
@@ -340,34 +344,28 @@ function GenerateMAWB({
 			<div className={styles.file_container}>
 				{(back || viewDoc) && (
 					<Modal
-						show={back || viewDoc}
 						onClose={() => { setBack(false); setViewDoc(false); }}
-						size="lg"
-						className={styles.modal_container}
 						style={{ width: '900px', height: '92vh' }}
 					>
-						<Modal.Body style={{ minHeight: '90vh' }}>
-							<GenerateMawbDoc
-								taskItem={taskItem}
-								formData={formData}
-								setBack={setBack}
-								back={back}
-								edit={edit}
-								setEdit={setEdit}
-								viewDoc={viewDoc}
-								chargeableWeight={chargeableWeight}
-								setGenerate={setGenerate}
-								activeCategory={activeCategory}
-								hawbDetails={hawbDetails}
-								setHawbDetails={setHawbDetails}
-								setActiveHawb={setActiveHawb}
-								setActiveKey={setActiveKey}
-								activeHawb={activeHawb}
-								pendingTaskId={pendingTaskId}
-								category={category}
-							/>
-						</Modal.Body>
-
+						<GenerateMawbDoc
+							taskItem={taskItem}
+							formData={formData}
+							setBack={setBack}
+							back={back}
+							edit={edit}
+							setEdit={setEdit}
+							viewDoc={viewDoc}
+							chargeableWeight={chargeableWeight}
+							setGenerate={setGenerate}
+							activeCategory={activeCategory}
+							hawbDetails={hawbDetails}
+							setHawbDetails={setHawbDetails}
+							setActiveHawb={setActiveHawb}
+							setActiveKey={setActiveKey}
+							activeHawb={activeHawb}
+							pendingTaskId={pendingTaskId}
+							category={category}
+						/>
 					</Modal>
 				)}
 			</div>

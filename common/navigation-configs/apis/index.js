@@ -19,6 +19,7 @@ import enquiry_supply from './enquiry-supply-apis';
 import enrichment from './enrichment-apis';
 import faq from './faq-apis';
 import feedback from './feedback-apis';
+import ingestion from './ingestion-apis';
 import kam_desk from './kam-desk-apis';
 import kam_payments_dashboard from './kam-payments-dashboard-apis';
 import kyc from './kyc';
@@ -129,6 +130,7 @@ const apis = {
 	enrichment,
 	...faq,
 	...performance_management,
+	ingestion,
 	booking_desk,
 	poc,
 	...athena_dashboard,

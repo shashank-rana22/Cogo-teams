@@ -36,9 +36,9 @@ function ColumnComponents({
 		}),
 	};
 
-	// const { id: columnChildId } = selectedColumn || {};
+	const { id: columnChildId } = selectedColumn || {};
 
-	// const { id: selectedRowId } = selectedRow || {};
+	const { id: selectedRowId } = selectedRow || {};
 
 	if (isEmpty(children)) {
 		return (
@@ -90,13 +90,14 @@ function ColumnComponents({
 					...((isMobile || previewMode === 'mobile') && {
 						width: '100%',
 					}),
+					...(type && {
+						border: '1px solid transparent',
+					}),
 				};
 
-				// const isChildSelected = columnChildId === id && componentId === selectedRowId;
+				const isChildSelected = columnChildId === id && componentId === selectedRowId;
 
-				// const border = isChildSelected ? '1px solid green' : allStyles.border;
-
-				const { border } = modifiedStyle;
+				const border = isChildSelected ? '1px solid green' : modifiedStyle.border;
 
 				if (!isEmpty(childChildren) && ['container', 'card', 'formSample'].includes(type)) {
 					return (

@@ -82,7 +82,7 @@ function Settings(props) {
 				<Accordion
 					className={styles.ui_accordion_content}
 					type="text"
-					title="Margin & Padding"
+					title="Spacing"
 				>
 					<BoxModal
 						selectedItem={selectedItem}

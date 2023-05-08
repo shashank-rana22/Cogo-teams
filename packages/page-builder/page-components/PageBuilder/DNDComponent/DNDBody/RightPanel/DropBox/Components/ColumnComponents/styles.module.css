@@ -1,4 +1,5 @@
 .content_container {
+	border: 1px solid transparent;
 	&:hover {
 		border: 1px solid #88cad1;
 	}

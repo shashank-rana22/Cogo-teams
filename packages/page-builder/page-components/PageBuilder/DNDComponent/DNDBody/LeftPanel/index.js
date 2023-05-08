@@ -36,6 +36,7 @@ function LeftPanel(props) {
 	return (
 		<div className={styles.left_panel}>
 			<Tabs
+				className={styles.ui_tabs_container}
 				fullWidth
 				activeTab={activeTab}
 				themeType="primary"

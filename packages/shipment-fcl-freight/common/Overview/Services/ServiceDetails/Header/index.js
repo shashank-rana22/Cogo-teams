@@ -45,7 +45,7 @@ function Header({ serviceData = [] }) {
 							{ showDetails[serviceData?.[0]?.display_label] ? 'Hide Details' : 'View Details'}
 						</div>
 						<div className={styles.edit_cancel}>
-							<EditCancelService serviceData={serviceData} />
+							<EditCancelService serviceData={serviceData?.[0]} />
 						</div>
 					</div>
 				</div>

@@ -1,5 +1,6 @@
 .ui_input_container {
   border: none;
+  background-color: transparent;
 }
 
 .color_input {
