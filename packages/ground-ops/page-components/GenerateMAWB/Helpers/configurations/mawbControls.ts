@@ -1,6 +1,15 @@
 import currencies from '../currencies';
 
 const mawbControls = (disableClass) => ({
+	hawb_controls: [
+		{
+			name        : 'document_number',
+			label       : 'Document Number',
+			type        : 'text',
+			span        : 5,
+			placeholder : 'Document Number',
+		},
+	],
 	basic: [
 		{
 			name         : 'shipperName',

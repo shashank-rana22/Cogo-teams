@@ -23,7 +23,8 @@ const agentOtherChargesCode = [{ code: 'AWB', price: '150' }, { code: 'PCA', pri
 const carrierOtherChargesCode = [{ code: 'FSC', chargeType: 'chargeable_wt', price: '' },
 	{ code: 'SSC', chargeType: 'chargeable_wt', price: '' }, { code: 'XRAY', chargeType: 'chargeable_wt', price: '' },
 	{ code: 'AWC', chargeType: 'chargeable_wt', price: '' }, { code: 'AMS', chargeType: 'chargeable_wt', price: '' }];
-const unsavedFields = ['consigneeAddress',
+const unsavedFields = ['document_number',
+	'consigneeAddress',
 	'shipperName',
 	'shipperAddress',
 	'consigneeName',
@@ -101,6 +102,7 @@ function GenerateMAWB({
 	const [activeCategory, setActiveCategory] = useState(edit ? 'mawb' : taskItem.blCategory);
 
 	const finalFields = [
+		...fields.hawb_controls,
 		...fields.basic,
 		...fields.package,
 		...fields.handling,
@@ -304,7 +306,7 @@ function GenerateMAWB({
 
 	return (
 		<div className={styles.container}>
-			{loading && <Loader themeType="primary" className={styles.loader} />}
+			{(loading || hawbListLoading) && <Loader themeType="primary" className={styles.loader} />}
 			{!viewDoc && (
 				<>
 					<GenerateHeader

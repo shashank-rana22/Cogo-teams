@@ -210,6 +210,13 @@ function FormContainer({
 				<>
 					{activeKey === 'basic' && (
 						<>
+							{activeCategory === 'hawb' && (
+								<Layout
+									fields={fields?.hawb_controls}
+									errors={errors}
+									control={control}
+								/>
+							)}
 							<Layout fields={fields?.basic} control={control} errors={errors} />
 							<div className={styles.button_container}>
 								{activeCategory === 'hawb' && (

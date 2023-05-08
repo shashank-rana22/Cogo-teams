@@ -42,7 +42,7 @@ function OtherChargeDetails({
 }:Props) {
 	const { agentOtherCharges = [], carrierOtherCharges = [] } = formData;
 	const { awbNumber = '', document_number:documentNo = '' } = taskItem;
-	const hawbNumber = activeHawb.isNew && !viewDoc ? '' : documentNo;
+	const hawbNumber = activeHawb.isNew && !viewDoc ? formData?.document_number : documentNo;
 
 	let tempColor = '#333';
 	if (whiteout) {

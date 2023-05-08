@@ -5,7 +5,7 @@ const uploadControls = () => ({
 		{
 			name        : 'document_number',
 			label       : 'Document Number',
-			type        : 'number',
+			type        : 'text',
 			span        : 7,
 			placeholder : 'Document Number',
 			rules       : { required: true },

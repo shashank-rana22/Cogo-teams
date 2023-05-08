@@ -44,7 +44,7 @@ function GenerateManifestDoc({ setTriggerManifest, shipmentId }) {
 		createManifest(payload, setTriggerManifest);
 	};
 
-	const { handleView, loading } = useDownloadManifest(stylesTHC, handleSave);
+	const { handleView, loading } = useDownloadManifest(stylesTHC, handleSave, mawbData.document_number);
 
 	useEffect(() => {
 		getManifest(shipmentId);
