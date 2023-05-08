@@ -20,6 +20,7 @@ function Documents() {
 	const [activeToggle, setActiveToggle] = useState(false);
 	const [activeWallet, setActiveWallet] = useState('trade_documents');
 	const [addToWallet, setAddToWallet] = useState(true);
+	const [searchValue, setSearchValue] = useState('');
 
 	const { updateDocument } = useUpdateDocument({});
 	const { shipment_data, primary_service, activeStakeholder } = useContext(ShipmentDetailContext);
@@ -57,59 +58,71 @@ function Documents() {
 		}
 	};
 
-	return !loading
-		? (
-			<div className={styles.main_container}>
-				<HeaderComponent
-					activeToggle={activeToggle}
-					setActiveToggle={setActiveToggle}
-					shipment_data={shipment_data}
-					data={completedDocs?.organizations}
-					filters={filters}
-					setFilters={setFilters}
+	const filteredTaskList = taskList?.filter((item) => item?.label?.toLowerCase().includes(searchValue)
+	|| item?.document_type?.toLowerCase().includes(searchValue));
+
+	const renderContent = () => {
+		if (loading) {
+			return <LoadingState />;
+		} if (!activeToggle) {
+			return (
+				<CheckList
+					taskList={filteredTaskList}
+					emailDocs={emailList}
+					completedDocs={completedDocs?.list}
+					setShowDoc={setShowDoc}
+					setShowApproved={setShowApproved}
+				/>
+			);
+		}
+		return <Wallet activeWallet={activeWallet} />;
+	};
+
+	return (
+		<div className={styles.main_container}>
+			<HeaderComponent
+				activeToggle={activeToggle}
+				setActiveToggle={setActiveToggle}
+				shipment_data={shipment_data}
+				data={completedDocs?.organizations}
+				filters={filters}
+				setFilters={setFilters}
+				setSearchValue={setSearchValue}
+				searchValue={searchValue}
+				activeWallet={activeWallet}
+				setActiveWallet={setActiveWallet}
+				activeStakeholder={activeStakeholder}
+				refetch={refetch}
+			/>
+			<Modal
+				className={styles.modal_container}
+				show={showDoc}
+				size="lg"
+				onClose={() => setShowDoc(null)}
+				placement="top"
+				closeOnOuterClick={false}
+			>
+				<UploadForm
+					showDoc={showDoc}
+					setShowDoc={setShowDoc}
+					refetch={refetch}
 					activeWallet={activeWallet}
 					setActiveWallet={setActiveWallet}
-					activeStakeholder={activeStakeholder}
-					refetch={refetch}
 				/>
+			</Modal>
 
-				{!activeToggle ? (
-					<CheckList
-						taskList={taskList}
-						emailDocs={emailList}
-						completedDocs={completedDocs?.list}
-						setShowDoc={setShowDoc}
-						setShowApproved={setShowApproved}
-					/>
-				) : <Wallet activeWallet={activeWallet} />}
+			{renderContent()}
 
-				<Modal
-					className={styles.modal_container}
-					show={showDoc}
-					size="lg"
-					onClose={() => setShowDoc(null)}
-					placement="top"
-					closeOnOuterClick={false}
-				>
-					<UploadForm
-						showDoc={showDoc}
-						setShowDoc={setShowDoc}
-						refetch={refetch}
-						activeWallet={activeWallet}
-						setActiveWallet={setActiveWallet}
-					/>
-				</Modal>
-				<Approve
-					showApproved={showApproved}
-					setShowApproved={setShowApproved}
-					addToWallet={addToWallet}
-					setAddToWallet={setAddToWallet}
-					handleApprove={handleApprove}
-					setShowDoc={setShowDoc}
-				/>
-
-			</div>
-		) : <LoadingState />;
+			<Approve
+				showApproved={showApproved}
+				setShowApproved={setShowApproved}
+				addToWallet={addToWallet}
+				setAddToWallet={setAddToWallet}
+				handleApprove={handleApprove}
+				setShowDoc={setShowDoc}
+			/>
+		</div>
+	);
 }
 
 export default Documents;

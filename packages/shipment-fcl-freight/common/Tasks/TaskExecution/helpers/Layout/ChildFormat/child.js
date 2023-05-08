@@ -3,6 +3,7 @@ import React from 'react';
 
 import getElementController from '../getController';
 import getErrorMessage from '../getErrorMessage';
+import getAsyncFields from '../Item/getAsyncKeys';
 
 import styles from './styles.module.css';
 
@@ -51,12 +52,47 @@ function Child({
 		}
 	}
 
+	const getNewControls = (item = {}) => {
+		let newProps = { ...item };
+
+		const { type } = item;
+		const isAsyncSelect = ['select', 'creatable-select'].includes(type)
+		&& Object.keys(item).includes('optionsListKey');
+
+		if (isAsyncSelect) {
+			const asyncKey = item?.optionsListKey;
+
+			const asyncFields = getAsyncFields(asyncKey) || {};
+
+			const finalParams = item?.params || asyncFields?.defaultParams;
+
+			if (Object.keys(asyncFields)?.includes('defaultParams')) { delete asyncFields?.defaultParams; }
+
+			newProps = {
+				...newProps,
+				...asyncFields,
+				params : finalParams,
+				type   : 'async-select',
+			};
+			return newProps;
+		}
+
+		return newProps;
+	};
+
 	return (
 		<div className={styles.fieldarray} key={field.id}>
+			<h3 className={styles.heading}>
+				Document
+				&nbsp;
+				{index + 1}
+			</h3>
 			{totalFields.map((rowFields) => (
 				<div className={styles.row}>
 					{rowFields.map((controlItem) => {
-						const Element = getElementController(controlItem.type);
+						const newControl = getNewControls(controlItem);
+
+						const Element = getElementController(newControl.type);
 
 						const errorOriginal = getErrorMessage({
 							error : error?.[controlItem.name],
@@ -79,13 +115,14 @@ function Child({
 									{controlItem?.label}
 								</h4>
 								<Element
-									{...controlItem}
+									{...newControl}
 									{...extraProps}
 									style={{ minWidth: '0px' }}
 									key={`${name}.${index}.${controlItem.name}`}
 									name={`${name}.${index}.${controlItem.name}`}
 									index={index}
 									control={control}
+									size="sm"
 									disabled={disabled || disable}
 								/>
 								<p style={{
@@ -108,13 +145,11 @@ function Child({
 				</div>
 			))}
 			{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
-				<div>
+				<div className={styles.delete_icon}>
+					<hr />
 					<IcMDelete
-						className={`form-fieldArray-${name}-remove`}
+						className={styles.icon}
 						onClick={() => remove(index, 1)}
-						style={{
-							width: '2em', height: '2em', marginTop: '8px', cursor: 'pointer',
-						}}
 					/>
 				</div>
 			) : null}
