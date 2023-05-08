@@ -10,8 +10,14 @@ const findValueInArray = ({ value, arr = [] }) => !!arr?.some((i) => i?.value ==
 
 function ShipmentType() {
 	const {
-		shipmentType, setShipmentType, setStepperTab, setActiveTab,
-		filters, setFilters, stepperTab, activeTab,
+		shipmentType,
+		setShipmentType,
+		stepperTab,
+		setStepperTab,
+		activeTab,
+		setActiveTab,
+		filters,
+		setFilters,
 	} = useContext(KamDeskContext);
 
 	const handleChange = (val) => {
@@ -21,12 +27,14 @@ function ShipmentType() {
 
 		if (stepperTabs?.length) {
 			tempStepperTab = findValueInArray({ arr: stepperTabs, value: stepperTab })
-				? stepperTab : stepperTabs?.[0]?.value || '';
+				? stepperTab
+				: stepperTabs?.[0]?.value || '';
 
 			const tabs = shipmentTabMapping?.[val]?.[tempStepperTab]?.tabs;
 
 			tempActiveTab = findValueInArray({ arr: tabs, value: activeTab })
-				? activeTab : tabs?.[0]?.value || '';
+				? activeTab
+				: tabs?.[0]?.value || '';
 		}
 
 		setStepperTab(tempStepperTab);
@@ -34,6 +42,7 @@ function ShipmentType() {
 		setFilters({ ...filters, page: 1 });
 		setShipmentType(val);
 	};
+
 	return (
 		<Stepper
 			onChange={handleChange}

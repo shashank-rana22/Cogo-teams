@@ -14,32 +14,27 @@ import KamDeskContext from '../../../context/KamDeskContext';
 import styles from './styles.module.css';
 
 function Card({ data = {} }) {
-	const { shipmentType, stepperTab } = useContext(KamDeskContext);
-	const icon_type = ['lcl_customs'].includes(stepperTab) ? stepperTab : shipmentType;
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<Header data={data} />
 			</div>
+
 			<div className={styles.body_container}>
 				<div className={styles.details_container}>
 					<BasicDetails data={data} />
+
 					<AssignedStakeholder data={data} />
 				</div>
 
 				<div className={styles.divider} />
 
 				<div className={styles.icon_container}>
-					<ShipmentIcon shipment_type={icon_type} />
+					<ShipmentIcon shipment_type="air_freight" />
 				</div>
 
 				<div className={styles.location_container}>
-					{['export', 'import'].includes(stepperTab) ? (
-						<DualLocation data={data} />
-					) : (
-						<SingleLocation data={data} />
-					)}
+					<DualLocation data={data} />
 				</div>
 
 				<div className={styles.divider} />

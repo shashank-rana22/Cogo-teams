@@ -1,5 +1,6 @@
 import DeskTabs from '../../common/DeskTabs';
 import HeaderFilters from '../../common/HeaderFilters';
+import Loader from '../../common/Loader';
 import ShipmentType from '../../common/ShipmentType';
 import StepperTabs from '../../common/StepperTabs';
 import useListKamDeskShipments from '../../hooks/useListKamDeskShipments';
@@ -8,7 +9,7 @@ import ShipmentList from './ShipmentList';
 import styles from './styles.module.css';
 
 function Lcl() {
-	const { data } = useListKamDeskShipments({});
+	const { data, loading } = useListKamDeskShipments({});
 
 	return (
 		<div>
@@ -19,16 +20,18 @@ function Lcl() {
 				<HeaderFilters />
 			</div>
 
-			<div>
+			<div className={styles.stepper_container}>
 				<StepperTabs />
 			</div>
 
-			<div>
+			<div className={styles.tabs_container}>
 				<DeskTabs />
 			</div>
 
 			<div>
-				<ShipmentList data={data} />
+				{loading
+					? <Loader />
+					: <ShipmentList data={data} loading={loading} />}
 			</div>
 		</div>
 	);

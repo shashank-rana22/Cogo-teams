@@ -5,11 +5,12 @@ import shipmentTabMapping from '../../config/SHIPMENT_TAB_MAPPING';
 import KamDeskContext from '../../context/KamDeskContext';
 
 function DeskTabs() {
-	const { stepperTab, shipmentType, activeTab, setActiveTab } = useContext(KamDeskContext);
+	const { stepperTab, shipmentType, activeTab, setActiveTab, setFilters } = useContext(KamDeskContext);
 	const tabs = shipmentTabMapping[shipmentType]?.tabs || shipmentTabMapping[shipmentType]?.[stepperTab]?.tabs || [];
 
 	const handleChange = (val) => {
 		setActiveTab(val);
+		setFilters((prev) => ({ ...prev, page: 1 }));
 	};
 
 	return (

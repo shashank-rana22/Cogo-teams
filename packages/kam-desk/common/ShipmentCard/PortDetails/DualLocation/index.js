@@ -3,6 +3,8 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import React from 'react';
 
+import getLocation from '../../../../utils/getLocation';
+
 import styles from './styles.module.css';
 
 const handleLocationDetails = (location) => (
@@ -33,17 +35,17 @@ const handleLocationDetails = (location) => (
 const getDisplayDate = (date, dateFormat = 'dd MMM yyyy') => (date ? format(date, dateFormat, null, true) : null);
 
 function PortDetails({ data = {} }) {
-	const { origin_port, destination_port, schedule_arrival, schedule_departure } = data;
+	const { schedule_arrival, schedule_departure } = data;
+	const { origin, destination } = getLocation({ data });
 
 	return (
 		<div className={`${styles.container} core_ui_port_conatiner`}>
 			<div className={styles.port_detail}>
-				{handleLocationDetails(origin_port)}
+				{handleLocationDetails(origin)}
+
 				{schedule_departure ? (
 					<div className={styles.eta_etd}>
-						ETD:
-						{' '}
-						{getDisplayDate(schedule_departure)}
+						{`ETD ${getDisplayDate(schedule_departure)}`}
 					</div>
 				) : 'TBD'}
 			</div>
@@ -53,12 +55,10 @@ function PortDetails({ data = {} }) {
 			</div>
 
 			<div className={styles.port_detail}>
-				{handleLocationDetails(destination_port)}
+				{handleLocationDetails(destination)}
 				{schedule_arrival ? (
 					<div className={styles.eta_etd}>
-						ETA:
-						{' '}
-						{getDisplayDate(schedule_arrival)}
+						{`ETA ${getDisplayDate(schedule_arrival)}`}
 					</div>
 				) : 'TBD'}
 			</div>

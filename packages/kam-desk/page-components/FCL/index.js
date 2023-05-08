@@ -1,4 +1,5 @@
 import DeskTabs from '../../common/DeskTabs';
+import Filters from '../../common/Filters';
 import HeaderFilters from '../../common/HeaderFilters';
 import Loader from '../../common/Loader';
 import ShipmentType from '../../common/ShipmentType';
@@ -28,6 +29,7 @@ function Fcl() {
 				<DeskTabs />
 			</div>
 
+			<Filters />
 			<div>
 				{loading
 					? <Loader />

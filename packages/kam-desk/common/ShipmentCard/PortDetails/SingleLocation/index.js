@@ -4,7 +4,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function PortDetails({ data = {} }) {
-	const { port, trade_type } = data;
+	const { port, trade_type, location } = data;
 
 	return (
 		<div className={`${styles.container} core_ui_port_conatiner`}>
@@ -18,7 +18,7 @@ function PortDetails({ data = {} }) {
 				<div className={styles.port_code}>
 					<div className={`${styles.code} core_ui_port_code`}>
 						(
-						{port?.port_code || port?.postal_code}
+						{port?.port_code || port?.postal_code || location?.port_code}
 						)
 					</div>
 
@@ -31,9 +31,11 @@ function PortDetails({ data = {} }) {
 					placement="bottom"
 					theme="light"
 					interactive
-					content={port?.display_name}
+					content={port?.display_name || location?.display_name}
 				>
-					<div className={`${styles.ellipsis_text} core_ui_loaction_name`}>{port?.name}</div>
+					<div className={`${styles.ellipsis_text} core_ui_loaction_name`}>
+						{port?.name || location?.name}
+					</div>
 				</Tooltip>
 			</div>
 		</div>
