@@ -168,8 +168,9 @@ function CollectionPartyDetails({ collectionParty, refetch }) {
 									if (!isEmpty(uploadInvoiceUrl)) {
 										setOpenComparision(true);
 										setOpen(false);
+									} else {
+										toastApiError('Invoice is Required');
 									}
-									toastApiError('Invoice is Required');
 								}}
 							>
 								Confirm
