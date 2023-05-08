@@ -30,10 +30,10 @@ function PurchaseInvoice({ item }) {
 					<tr>
 						<td>Invoice Number</td>
 						<td>Type</td>
-						<td> Invoice Value</td>
+						<td>Invoice Value</td>
 						<td>Status</td>
-						<td> Balance Amount</td>
-						<td> Due Date</td>
+						<td>Balance Amount</td>
+						<td>Due Date</td>
 						<td>Paid Amount</td>
 						<td>Payment Status</td>
 					</tr>

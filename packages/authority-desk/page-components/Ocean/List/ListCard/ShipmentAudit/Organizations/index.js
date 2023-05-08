@@ -8,8 +8,8 @@ import DaysAmountBifercation from './DaysAmountBifercation';
 import OrgDetails from './OrgDetails';
 import styles from './styles.module.css';
 
-function Organizations() {
-	const { data, loading } = useGetOrganizationOutstanding();
+function Organizations({ item }) {
+	const { data, loading } = useGetOrganizationOutstanding({ item });
 
 	const [orgDetails, setOrgDetails] = useState({});
 
@@ -26,35 +26,35 @@ function Organizations() {
 		<div className={styles.container}>
 			<div className={styles.heading}>Invoicing Parties</div>
 			{
-				(data?.list || []).map((item) => (
+				(data?.list || []).map((val) => (
 					<div className={styles.org_card}>
 						<div className={styles.main_details}>
 							<div className={styles.org_details}>
 								<div>
 									Name:
 									&nbsp;
-									{item?.businessName}
+									{val?.businessName}
 								</div>
 								<div>
 									Total Outstanding Amount: &nbsp;
-									{item?.totalOutstandingAmount}
+									{val?.totalOutstandingAmount}
 								</div>
 							</div>
 
 							<IcMArrowRotateDown onClick={() => setOrgDetails(
 								{
 									...orgDetails,
-									[item?.registrationNumber]: !orgDetails[item?.registrationNumber],
+									[val?.registrationNumber]: !orgDetails[val?.registrationNumber],
 								},
 							)}
 							/>
 						</div>
 
-						{orgDetails[item?.registrationNumber]
+						{orgDetails[val?.registrationNumber]
 							? (
 								<>
-									<DaysAmountBifercation item={item} />
-									<OrgDetails registerationNumber={item?.registrationNumber} />
+									<DaysAmountBifercation item={val} />
+									<OrgDetails registerationNumber={val?.registrationNumber} />
 								</>
 							)
 							: null}

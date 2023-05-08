@@ -18,7 +18,7 @@ export const BucketsMapping = ({ role = '', count_stats = {} }) => {
 		+ (surrender_pending || 0)
 	+ (release_pending || 0);
 
-	const buckets =		role === 'kam'
+	const buckets =	role === 'kam'
 		? [
 			{
 				name  : 'ineligible',

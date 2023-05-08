@@ -48,11 +48,11 @@ function ShipmentInvoices({ item = {} }) {
 				<thead>
 					<tr className={styles.row}>
 						<th>Invoice Number</th>
-						<th>Type </th>
+						<th>Type</th>
 						<th>Invoice Value</th>
-						<th> Balance Amount</th>
+						<th>Balance Amount</th>
 						<th>Due Date</th>
-						<th>Payment Status </th>
+						<th>Payment Status</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -75,7 +75,6 @@ function ShipmentInvoices({ item = {} }) {
 							</td>
 							<td>
 								{startCase(val?.invoiceType)}
-								{' '}
 							</td>
 							<td>
 								{formatAmount({

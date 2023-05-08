@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-const useGetOrganizationOutstanding = () => {
+const useGetOrganizationOutstanding = ({ item }) => {
 	const [
 		{ data, loading },
 		trigger,
@@ -19,7 +19,7 @@ const useGetOrganizationOutstanding = () => {
 			try {
 				await trigger({
 					params: {
-						bookingPartyIds : ['02b01244-7a40-4186-a294-f5fa8ecdfbff'],
+						bookingPartyIds : [item?.importer_exporter_id],
 						page            : 1,
 						pageSize        : 10,
 					},
@@ -28,7 +28,7 @@ const useGetOrganizationOutstanding = () => {
 				Toast.error(err?.message);
 			}
 		})();
-	}, [trigger]);
+	}, [trigger, item?.importer_exporter_id]);
 
 	useEffect(() => {
 		getOrgList();

@@ -44,16 +44,12 @@ function OrgDetails({ registerationNumber = '' }) {
 			{ renderPagination}
 			<table>
 				<th>
-					<td>
-						Invoice Number
-					</td>
-					<td>
-						Type
-					</td>
-					<td> Invoice Value</td>
-					<td> Paid Amount</td>
-					<td> Balance Amount</td>
-					<td> Due Date</td>
+					<td>Invoice Number</td>
+					<td>Type</td>
+					<td>Invoice Value</td>
+					<td>Paid Amount</td>
+					<td>Balance Amount</td>
+					<td>Due Date</td>
 					<td>Payment Status</td>
 				</th>
 				{(data?.list || []).map((val) => (

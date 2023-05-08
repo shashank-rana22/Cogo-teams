@@ -25,7 +25,7 @@ const agingBuckets = [
 	},
 ];
 
-function DaysAmountBifercation({ item }) {
+function DaysAmountBifercation({ item = {} }) {
 	return (
 		<div className={styles.buckets_container}>
 			<b className={styles.overdue_label}>Overdue Invoices by due date</b>
