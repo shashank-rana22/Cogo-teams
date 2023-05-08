@@ -30,6 +30,7 @@ const useListTradeDocuments = ({ defaultFilters = {}, defaultParams = {} }) => {
 	return {
 		data,
 		loading,
+		refetch: getList,
 	};
 };
 

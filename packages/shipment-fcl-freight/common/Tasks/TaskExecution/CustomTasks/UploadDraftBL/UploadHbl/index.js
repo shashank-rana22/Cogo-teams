@@ -1,4 +1,4 @@
-import { Button, Toast } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useRef } from 'react';
 
@@ -66,14 +66,14 @@ function UploadHbl(props) {
 	};
 
 	useEffect(() => {
-		const newUrls = [...urls];
+		const newUrls = [];
 
 		docs?.forEach((item, i) => {
 			newUrls[i] = `${item?.document_url}`;
 		});
 
 		setUrls(newUrls);
-	}, [docs, urls]);
+	}, [docs]);
 
 	return (
 		<main>

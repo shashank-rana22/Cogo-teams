@@ -15,8 +15,6 @@ function UploadDraftBL({
 	task = {},
 	shipmentData = {},
 	primaryService = {},
-	onCancel = () => {},
-	taskListRefetch = () => {},
 }) {
 	const [hblData, setHblData] = useState([]);
 	const [isAllHBLUploaded, setIsAllHblUploaded] = useState(false);
@@ -47,7 +45,7 @@ function UploadDraftBL({
 		},
 	});
 
-	const { data: tradeDocList, loading: tradeDocLoading } = useListTradeDocuments({
+	const { data: tradeDocList, loading: tradeDocLoading, refetch: refetchTradeDoc } = useListTradeDocuments({
 		defaultParams: {
 			filters: {
 				shipment_id     : task?.shipment_id,
@@ -85,13 +83,9 @@ function UploadDraftBL({
 		createHBL,
 		submitMBL,
 		loading,
+		createTradeDocLoading,
 	} = useDraftBLHelper({
-		isHBL,
 		pendingTask: task,
-		primaryService,
-		onCancel,
-		taskListRefetch,
-		shipmentData,
 	});
 
 	const showUploadView = shipmentDocsLength > 0 && tradeDocsLength === 0;
@@ -121,6 +115,7 @@ function UploadDraftBL({
 			hblData,
 			shipmentData,
 		});
+		await refetchTradeDoc();
 		setcanUseSwitch(false);
 		setIsAllHblUploaded(tradeDocsLength >= blCount);
 	};
@@ -141,7 +136,7 @@ function UploadDraftBL({
 				<>
 					{canUseSwitch && isHBL ? (
 						<Button
-							disabled={uploadedDocs?.list?.length?.loading}
+							disabled={createTradeDocLoading || loading}
 							onClick={handleClickSwitch}
 							style={{ marginRight: '10px' }}
 						>
@@ -162,7 +157,7 @@ function UploadDraftBL({
 		>
 			{isHBL && step === 'hbl' ? (
 				<section>
-					{showSwitchGenerate ? ( // reverse the condition, it's for development only
+					{showSwitchGenerate ? (
 						<>
 							{Array(blCount)
 								.fill(null)
@@ -174,8 +169,8 @@ function UploadDraftBL({
 											{i + 1}
 										</div>
 										<HBLCreate
-											completed={tradeDocList?.list?.list?.[i]}
-											hblData={hblData[i] || tradeDocList?.list?.[i]?.data}
+											completed={tradeDocList?.list?.[i]}
+											hblData={hblData[i] || tradeDocList?.list?.[i]}
 											onSave={(v) => handleSaveHBL(i, v)}
 											shipmentData={shipmentData}
 											primaryService={primaryService}
@@ -185,7 +180,7 @@ function UploadDraftBL({
 							{!isAllHBLUploaded ? (
 								<div className={styles.flex_end}>
 									<Button
-										disabled={hblData?.length !== blCount}
+										disabled={hblData?.length !== blCount || createTradeDocLoading}
 										onClick={saveAllBls}
 									>
 										Save All HBLs

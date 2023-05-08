@@ -5,7 +5,7 @@ import Annexure from './Annexure';
 import Frontside from './Frontside';
 import styles from './styles.module.css';
 
-function BluetideHBL({ mode = 'read' }, ref) {
+function BluetideHBL({ mode = 'read', initialValues = {} }, ref) {
 	const [addAnnexure, setaddAnnexure] = useState(false); // for development
 
 	const { control, handleSubmit } = useForm({
@@ -20,8 +20,6 @@ function BluetideHBL({ mode = 'read' }, ref) {
 		},
 	});
 
-	// const onSubmit = (data) => console.log({ data });
-
 	useImperativeHandle(ref, () => ({ submit: handleSubmit }));
 
 	return (
@@ -31,6 +29,7 @@ function BluetideHBL({ mode = 'read' }, ref) {
 				addAnnexure={addAnnexure}
 				setaddAnnexure={setaddAnnexure}
 				control={control}
+				initialValues={initialValues}
 			/>
 
 			{addAnnexure && (

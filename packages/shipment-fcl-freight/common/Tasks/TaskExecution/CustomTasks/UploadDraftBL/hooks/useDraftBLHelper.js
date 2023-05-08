@@ -6,8 +6,6 @@ import useUpdateShipmentCogoid from '../../../../../../hooks/useUpdateShipmentCo
 
 const useDraftBLHelper = ({
 	pendingTask = {},
-	refetch = () => {},
-	closeTask = () => {},
 }) => {
 	const {
 		refetch: getShipmentRefetch,
@@ -27,9 +25,7 @@ const useDraftBLHelper = ({
 		url    : '/create_shipment_trade_document',
 	}, { manual: true });
 
-	const createHBL = async ({ setHblLoading, hblData }) => {
-		console.log('createHBL', hblData);
-		// setHblLoading(true);
+	const createHBL = async ({ hblData }) => {
 		const promises = hblData.reduce((acc, data) => {
 			if (data) {
 				const body = {
@@ -38,7 +34,7 @@ const useDraftBLHelper = ({
 					shipment_id     : pendingTask?.shipment_id,
 					service_id      : pendingTask?.service_id,
 					service_type    : pendingTask?.service_type,
-					organization_id : shipment_data?.importer_exporter_id,
+					organization_id : pendingTask?.organization_id,
 					data            : {
 						...data,
 						service_id   : pendingTask?.service_id,
@@ -47,28 +43,15 @@ const useDraftBLHelper = ({
 					uploaded_by_org_id: pendingTask?.organization_id,
 				};
 
-				console.log({ body });
-
-				tradeDocTrigger({ data: body });
-
-				// eslint-disable-next-line react-hooks/rules-of-hooks
-				// const promise = useRequest({
-				// 	method : 'POST',
-				// 	url    : '/create_shipment_trade_document',
-				// 	data   : body,
-				// });
-
-				// acc.push(promise);
+				acc.push(tradeDocTrigger({ data: body }));
 			}
 			return acc;
 		}, []);
 
 		try {
 			await Promise.all(promises);
-			// setHblLoading(false);
-			refetch();
-		} catch {
-			// setHblLoading(false);
+		} catch (err) {
+			console.log(err);
 		}
 	};
 
@@ -97,7 +80,6 @@ const useDraftBLHelper = ({
 
 			await trigger({ data: body });
 
-			// feedbacks to cogolens starts
 			try {
 				const rpaMappings = {
 					cogo_shipment_id        : pendingTask.shipment_id,
@@ -109,10 +91,7 @@ const useDraftBLHelper = ({
 			} catch (err) {
 				console.log(err);
 			}
-			// feedbacks to cogolens ends
-			refetch();
 			getShipmentRefetch();
-			closeTask();
 		}
 	};
 
@@ -120,6 +99,7 @@ const useDraftBLHelper = ({
 		createHBL,
 		submitMBL,
 		loading,
+		createTradeDocLoading,
 	};
 };
 

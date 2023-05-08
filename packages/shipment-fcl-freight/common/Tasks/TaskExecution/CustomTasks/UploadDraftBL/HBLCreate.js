@@ -70,21 +70,10 @@ function HBLCreate({
 		</header>
 
 	);
+
 	return (
 		<div className={styles.container}>
-			{!completed ? ( // reverse the condition, it's for development only
-				<div className={styles.container_child}>
-					<div>
-						Click the following button to create a new draft HBL
-					</div>
-					<Button
-						onClick={() => setShow(true)}
-						size="sm"
-					>
-						{hblData ? 'Edit the draft HBL' : 'Create a new draft HBL'}
-					</Button>
-				</div>
-			) : (
+			{completed ? (
 				<div className={styles.container_child}>
 					<div>
 						Draft HBL is already uploaded, you can preview it here
@@ -96,6 +85,19 @@ function HBLCreate({
 						size="sm"
 					>
 						View HBL
+					</Button>
+				</div>
+
+			) : (
+				<div className={styles.container_child}>
+					<div>
+						Click the following button to create a new draft HBL
+					</div>
+					<Button
+						onClick={() => setShow(true)}
+						size="sm"
+					>
+						{hblData ? 'Edit the draft HBL' : 'Create a new draft HBL'}
 					</Button>
 				</div>
 			)}

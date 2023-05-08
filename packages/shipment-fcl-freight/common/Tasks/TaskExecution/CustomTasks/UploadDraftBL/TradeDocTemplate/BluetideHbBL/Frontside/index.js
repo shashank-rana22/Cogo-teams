@@ -9,6 +9,7 @@ function Frontside({
 	setaddAnnexure = () => {},
 	addAnnexure = false,
 	control,
+	initialValues = {},
 }) {
 	const isReadonly = mode === 'read';
 	// const { control } = useForm();
@@ -33,6 +34,7 @@ function Frontside({
 			control={control}
 			setaddAnnexure={setaddAnnexure}
 			addAnnexure={addAnnexure}
+			initialValues={initialValues}
 		/>
 	);
 }
