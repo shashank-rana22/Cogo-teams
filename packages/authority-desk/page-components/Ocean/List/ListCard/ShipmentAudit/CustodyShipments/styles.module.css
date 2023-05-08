@@ -6,6 +6,7 @@
 
 	table {
 		width: 100%;
+		margin: 6px 0;
 		border-collapse: collapse;
 		background: #fdfbf6;
 		border: 1px solid #f2e3c3;
@@ -18,9 +19,9 @@
 	tr {
 		line-height: 24px;
 		border-bottom: 1px solid #f2e3c3;
-	} 
+	}
 
-	td{
+	td {
 		&:nth-child(1) {
 			text-decoration: underline;
 			cursor: pointer;

@@ -4,12 +4,12 @@
 }
 
 .shipment_content_container {
+	position: relative;
 	font-size: 12px;
 	background: #fff;
 	border-bottom: 1px solid transparent;
 	border-radius: 8px;
-	box-shadow: 0 0 4px rgb(0 0 0 / 25%); 
-	position: relative;
+	box-shadow: 0 0 4px rgb(0 0 0 / 25%);
 }
 
 .shipment_details {
@@ -74,28 +74,28 @@
 	&:hover {
 		color: #f68b21;
 	}
-} 
+}
 
 .top_bar {
-	display: flex; 
+	display: flex;
 	justify-content: space-between;
-} 
+}
 
-.export{
-	margin-right: auto; 
-    padding: 2px 6px;
-    font-size: 10px;
-    background-color: #fef199;
-    border-radius: 8px 0;
-}  
+.export {
+	padding: 2px 6px;
+	margin-right: auto;
+	font-size: 10px;
+	background-color: #fef199;
+	border-radius: 8px 0;
+}
 
-.import{
-	margin-right: auto; 
-    padding: 2px 6px;
-    font-size: 10px;
-    background-color: #cfeaed;
-    border-radius: 8px 0;
-} 
+.import {
+	padding: 2px 6px;
+	margin-right: auto;
+	font-size: 10px;
+	background-color: #cfeaed;
+	border-radius: 8px 0;
+}
 
 .status {
 	position: absolute;

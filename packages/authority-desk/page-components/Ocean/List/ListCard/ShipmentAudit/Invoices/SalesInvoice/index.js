@@ -45,55 +45,61 @@ function SalesInvoice({ item = {} }) {
 			{ renderPagination}
 
 			<table>
-				<th>
-					<td>Invoice Number</td>
-					<td>Type</td>
-					<td>Invoice Value</td>
-					<td>Balance Amount</td>
-					<td>Due Date</td>
-					<td>Payment Status</td>
-				</th>
-				{(data?.list || []).map((val) => (
-					<tr key={val.id}>
-						<td
-							role="presentation"
-							onClick={() => {
-								window.open(
-									val?.status !== 'DRAFT' ? val?.billPdfUrl : val?.proformaPdfUrl,
-									'_blank',
-								);
-							}}
-						>
-							{val?.status !== 'DRAFT' ? val?.billNumber : val?.proformaNumber}
-
-						</td>
-						<td>{startCase(val?.invoiceType)}</td>
-						<td>
-							{formatAmount({
-								amount   : val?.grandTotal,
-								currency : val?.billCurrency,
-								options  : {
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 2,
-								},
-							})}
-						</td>
-						<td>
-							{formatAmount({
-								amount   : val?.balanceAmount,
-								currency : val?.currency,
-								options  : {
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 2,
-								},
-							})}
-						</td>
-						<td>{format(val?.dueDate, 'dd MMM yyyy', null, true)}</td>
-						<td>{upperCase(val?.paymentStatus)}</td>
+				<thead>
+					<tr>
+						<td>Invoice Number</td>
+						<td>Type</td>
+						<td>Invoice Value</td>
+						<td>Balance Amount</td>
+						<td>Due Date</td>
+						<td>Payment Status</td>
 					</tr>
-				))}
+				</thead>
+
+				<tbody>
+					{(data?.list || []).map((val) => (
+						<tr key={val.id}>
+							<td
+								role="presentation"
+								onClick={() => {
+									window.open(
+										val?.status !== 'DRAFT' ? val?.billPdfUrl : val?.proformaPdfUrl,
+										'_blank',
+									);
+								}}
+							>
+								{val?.status !== 'DRAFT' ? val?.billNumber : val?.proformaNumber}
+
+							</td>
+							<td>{startCase(val?.invoiceType)}</td>
+							<td>
+								{formatAmount({
+									amount   : val?.grandTotal,
+									currency : val?.billCurrency,
+									options  : {
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 2,
+									},
+								})}
+							</td>
+							<td>
+								{formatAmount({
+									amount   : val?.balanceAmount,
+									currency : val?.currency,
+									options  : {
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 2,
+									},
+								})}
+							</td>
+							<td>{format(val?.dueDate, 'dd MMM yyyy', null, true)}</td>
+							<td>{upperCase(val?.paymentStatus)}</td>
+						</tr>
+					))}
+				</tbody>
+
 			</table>
 		</div>
 
