@@ -41,9 +41,7 @@ function OrgDetails({ registerationNumber = '' }) {
 
 	return (
 		<div className={styles.container}>
-
 			{ renderPagination}
-
 			<table>
 				<th>
 					<td>
