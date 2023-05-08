@@ -1,83 +1,82 @@
-.container{
-    background-color: #ffffff;
+.container {
+	background-color: #fff;
 }
 
-.listcontainer{
-    margin-bottom: 14%;
+.listcontainer {
+	margin-bottom: 14%;
 }
 
-.box{
-    background: #ffffff;
-	border-radius: 4px;
+.box {
 	padding: 8px 6px;
 	margin-bottom: 16px;
+	background: #fff;
+	border-radius: 4px;
 }
 
-.flexcontainer{
-    display: flex;
+.flexcontainer {
+	display: flex;
 	justify-content: space-between;
-	border-bottom: 1px solid #ded7fc;
 	width: 100%;
 	padding-bottom: 6px;
+	border-bottom: 1px solid #ded7fc;
 }
 
-.flexwrap{
-    display: flex;
+.flexwrap {
+	display: flex;
 	align-items: center;
 	width: 100%;
 }
 
-.flexdiv{
-    font-size: 14px;
-	font-weight: 500;
-	color: #333333;
+.flexdiv {
 	display: flex;
-	border-right: 1px solid #ded7fc;
 	width: 25%;
 	padding: 10px 18px 10px 16px;
 	margin-right: 30px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #333;
+	border-right: 1px solid #ded7fc;
 }
 
 .variance {
-		padding: 10px 0px 0px 16px;
-		border: none;
+	padding: 10px 0 0 16px;
+	border: none;
 }
 
-.label{
-    width: 140px;
+.label {
+	width: 140px;
 }
 
-.value{
-    color: #F68B21;
+.value {
+	color: #f68b21;
 }
 
-.lineitem{
-    font-size: 10px;
-	color: #333333;
+.lineitem {
 	display: flex;
-	margin-top: 2px;
-	white-space: nowrap;
 	flex-wrap: wrap;
+	margin-top: 2px;
+	font-size: 10px;
+	color: #333;
+	white-space: nowrap;
 }
 
 .padding {
-		padding: 10px 0px 0px 16px;
+	padding: 10px 0 0 16px;
 }
 
-.lineitemvalue{
-	margin: 0px 20px 0px 2px;
+.lineitemvalue {
+	margin: 0 20px 0 2px;
 	font-weight: 800;
 }
 
-.lineitemwrap{
-    white-space: nowrap;
+.lineitemwrap {
 	margin-right: 16px;
+	white-space: nowrap;
 }
 
-.invoiceswrap{
-    display: flex;
-	flex-direction: column;
+.invoiceswrap {
+	display: flex;
 	flex: 1;
+	flex-direction: column;
 	width: 100%;
 }
-
