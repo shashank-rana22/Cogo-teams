@@ -43,10 +43,8 @@ function FunnelChart({ data }) {
 			tooltip={({ part }) => (
 				<div className={styles.tool_tip_container}>
 					<strong>
-						{startCase(part.data.id)}
-						:
-						{Number(part.data.value).toFixed(2)}
-						%
+						{startCase(part.data?.id) ?? 'Unknown'}:
+						{(Number(part.data?.value) ?? 0).toFixed(2)}%
 					</strong>
 				</div>
 			)}

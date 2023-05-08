@@ -27,15 +27,13 @@ function CohortTable({ isComponentInViewport, byEtd, headerFilters }) {
 		<div className={styles.container_table}>
 			<div className={styles.heading}>Cohort</div>
 			<div className={styles.table}>
-				{!isEmpty(data) && (
+			{isEmpty(data) ? (
+				<EmptyState />
+				) : (
+				<>
 					<span className={styles.tag}>
 						<i>Transacting customers by months after signup</i>
 					</span>
-				)}
-
-				{isEmpty(data) ? (
-					<EmptyState />
-				) : (
 					<Table
 						className={styles.style_table}
 						columns={newColumns}
@@ -43,7 +41,9 @@ function CohortTable({ isComponentInViewport, byEtd, headerFilters }) {
 						loading={loading}
 						loadingRowsCount={5}
 					/>
-				)}
+				</>
+			)}
+
 
 			</div>
 

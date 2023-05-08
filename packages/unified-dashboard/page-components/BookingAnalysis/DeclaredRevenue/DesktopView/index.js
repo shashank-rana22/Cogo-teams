@@ -3,6 +3,7 @@ import React from 'react';
 
 import currencyCoversion from '../../../../utils/currencyCoversion';
 import getMonthYear from '../../../../utils/getMonthYear';
+import { v4 as uuidv4 } from 'uuid';
 import styles from '../styles.module.css';
 
 const DesktopView = ({ master, keys, selectedFilterTab, currency }) => {
@@ -18,7 +19,7 @@ const DesktopView = ({ master, keys, selectedFilterTab, currency }) => {
 	});
 
 	return declaredRevenueData.map((val) => (
-		<div className={backgroundColor(val) ? `${styles.revenue_col_color}` : `${styles.revenue_col}`}>
+		<div key={uuidv4()} className={backgroundColor(val) ? `${styles.revenue_col_color}` : `${styles.revenue_col}`}>
 			<div className={styles.text_currency}>
 				{formatAmount({
 					amount: currencyCoversion(

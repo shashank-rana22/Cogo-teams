@@ -7,7 +7,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const flagMapping = {
+const FLAG_MAPPING = {
 	101 : <IcCCountryIndia />,
 	201 : <IcCCountryNetherland />,
 	301 : <IcCCountryIndia />,
@@ -33,7 +33,7 @@ function Header({ headerFilters, setHeaderFilters }) {
 			<div>
 				{entity}
 				{' '}
-				{flagMapping[entity]}
+				{FLAG_MAPPING[entity]}
 				{' '}
 				{business_name}
 				{' '}

@@ -6,6 +6,7 @@ import Shipment from '../../../../../../common/SaleShipmentTable';
 import AfterHeader from '../../../../../../common/SaleShipmentTable/AfterHeader';
 import useListShipments from '../../../../../../hooks/useListShipments';
 import NoData from '../NoData';
+import { v4 as uuidv4 } from 'uuid';
 
 import styles from './styles.module.css';
 
@@ -160,6 +161,7 @@ function Employee({ val = {}, currency, filters, employeePad = 20 }) {
 					)}
 					{val?.employees?.map((employee) => (
 						<Employee
+							key={uuidv4()}
 							val={employee}
 							currency={currency}
 							filters={filters}

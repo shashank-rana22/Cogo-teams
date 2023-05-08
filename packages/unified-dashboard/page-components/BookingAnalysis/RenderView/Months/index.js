@@ -5,6 +5,7 @@ import getNextData from '../../../../utils/getNextData';
 import getPreviousData from '../../../../utils/getPreviousData';
 import isNextArrowAllowed from '../../../../utils/isNextArrowAllowed';
 import ShowMonths from '../../../../utils/showMonths';
+import { v4 as uuidv4 } from 'uuid';
 
 import styles from './styles.module.css';
 
@@ -41,7 +42,7 @@ function Months({
 
 			<div className={styles.flex_months}>
 				{(data || []).map((months) => (
-					<div className={styles.month_container}>
+					<div className={styles.month_container} key={uuidv4()}>
 						<ShowMonths selectedFilterTab={selectedFilterTab} value={months} />
 						<div className={styles.stepper_dots_top} />
 						{(selectedFilterTab === 'month'

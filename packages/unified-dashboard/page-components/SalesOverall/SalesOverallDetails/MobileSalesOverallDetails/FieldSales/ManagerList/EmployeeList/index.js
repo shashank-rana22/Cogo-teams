@@ -1,4 +1,5 @@
 import Employee from './Employee';
+import { v4 as uuidv4 } from 'uuid';
 
 function EmployeeList({ data = {}, currency, filters }) {
 	return (
@@ -15,7 +16,7 @@ function EmployeeList({ data = {}, currency, filters }) {
 				/>
 			)}
 			{data?.employees?.map((val) => (
-				<Employee val={val} currency={currency} filters={filters} />
+				<Employee key={uuidv4()} val={val} currency={currency} filters={filters} />
 			))}
 		</div>
 	);

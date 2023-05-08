@@ -6,6 +6,7 @@ import LoadingPage from '../../../common/LoadingPage';
 import MobileBookingAnalysis from './MobileBookingAnalytics';
 import Months from './Months';
 import RevenueSection from './RevenueSection';
+import { v4 as uuidv4 } from 'uuid';
 import styles from './styles.module.css';
 
 function RenderView({
@@ -55,7 +56,7 @@ function RenderView({
 				<div>
 					{loading ? (
 						[...Array(4)].map(() => (
-							<div className={styles.card_wrapper}>
+							<div key={uuidv4()} className={styles.card_wrapper}>
 								<Loader count={4} />
 							</div>
 						))

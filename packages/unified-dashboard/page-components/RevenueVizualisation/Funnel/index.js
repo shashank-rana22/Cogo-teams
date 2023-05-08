@@ -7,6 +7,8 @@ import useGetAccountWiseFunnel from '../../../hooks/useGetAccountWiseFunnel';
 
 import FunnelChart from './FunnelChart';
 import styles from './styles.module.css';
+import { v4 as uuidv4 } from 'uuid';
+
 
 function Funnel({ byEtd, headerFilters }) {
 	const [activeAccount, setActiveAccount] = useState('CP');
@@ -36,6 +38,7 @@ function Funnel({ byEtd, headerFilters }) {
 				<div className={styles.accounts_container}>
 					{accounts.map((val) => (
 						<div
+							key={uuidv4()}
 							className={styles.account_titlebox}
 							style={{
 								background : val === activeAccount ? '#FDE74D' : '#fff',

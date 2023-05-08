@@ -1,0 +1,33 @@
+.pagination_container {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+}
+
+.list_view {
+	margin-top: 20px;
+}
+
+.no_data {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 46px;
+	margin-top: 16px;
+	text-align: center;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+}
+
+.loading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100vw;
+	height: 100vh;
+
+	img {
+		width: 200px;
+		height: 200px;
+	}
+}

@@ -4,6 +4,7 @@ import React from 'react';
 import Card from '../../../../common/Card';
 import RevenueCardHeading from '../../../../common/RevenueCardHeading';
 import DeclaredRevenue from '../../DeclaredRevenue';
+import { v4 as uuidv4 } from 'uuid';
 
 import styles from './styles.module.css';
 
@@ -55,6 +56,7 @@ function RevenueSection({ data = {}, currency, selectedFilterTab, showRevenue, s
 					<div className={styles.card_container}>
 						{revenueData.map((val) => (
 							<Card
+								key={uuidv4()}
 								currency={currency}
 								title={val?.name}
 								data={val?.data}

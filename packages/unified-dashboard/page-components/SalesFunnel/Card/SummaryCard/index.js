@@ -76,16 +76,12 @@ function SummaryCard({
 													<span>
 														#CBM
 														{' '}
-														{(
-												CBM.toFixed(3)
-											)}
+														{(CBM ?? 0).toFixed(3)}
 													</span>
 													<span>
 														#KGs
 														{' '}
-														{(
-												KG.toFixed(3)
-											)}
+														{(KG ?? 0).toFixed(3)}
 													</span>
 												</div>
 											</div>
