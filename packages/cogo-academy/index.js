@@ -6,3 +6,4 @@ export { default as Question } from './page-components/ControlCenter/Question';
 export { default as AnswerPage } from './page-components/FAQs/page-components/AnswerPage';
 export { default as Announcements } from './page-components/Announcements';
 export { default as UserDashboard } from './page-components/UserDashboard';
+export { default as Course } from './page-components/Course';
