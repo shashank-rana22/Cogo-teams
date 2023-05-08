@@ -54,7 +54,7 @@ function Structure(props) {
 						width          : row,
 						border         : '1px dashed #9ab7fe',
 						display        : 'flex',
-						minHeight      : '120px',
+						minHeight      : '60px',
 						justifyContent : 'center',
 						alignItems     : 'center',
 					},
