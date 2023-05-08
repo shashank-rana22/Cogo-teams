@@ -107,4 +107,25 @@
 
 .all_remarks {
 	max-width: none !important;
+} 
+
+.export{
+	margin-right: auto; 
+    padding: 2px 6px;
+    font-size: 10px;
+    background-color: #fef199;
+    border-radius: 6px 0;
+}  
+
+.import{
+	margin-right: auto; 
+    padding: 2px 6px;
+    font-size: 10px;
+    background-color: #cfeaed;
+    border-radius: 6px 0;
+} 
+
+.top_bar {
+	display: flex; 
+	justify-content: space-between;
 }
