@@ -1,0 +1,20 @@
+.ind_container {
+	padding: 12px 24px;
+	cursor: pointer;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+}
+
+.item {
+	margin: 12px 0;
+}
+
+.child_container {
+	margin: 6px 0;
+	cursor: pointer;
+
+	&.active {
+		font-weight: 800;
+	}
+}
