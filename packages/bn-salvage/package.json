@@ -1,0 +1,12 @@
+{
+  "name": "@cogoport/bn-salvage",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Package for BN Salvage Desk",
+  "main": "index.js",
+  "dependencies": {
+    "@cogoport/components": "^1.0.413",
+    "@cogoport/request": "workspace:^0.1.0",
+    "@cogoport/utils": "^1.2.10"
+  }
+}
