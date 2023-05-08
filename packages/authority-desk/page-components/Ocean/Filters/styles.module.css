@@ -25,8 +25,8 @@
 		width: 8px;
 		height: 8px;
 		content: "";
-		border-radius: 50%;
 		background-color: var(--color-primary-error-red-2);
+		border-radius: 50%;
 	}
 }
 

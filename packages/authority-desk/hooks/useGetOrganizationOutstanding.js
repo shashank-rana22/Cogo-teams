@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-const useGetOrganizationOutstanding = ({ item }) => {
+const useGetOrganizationOutstanding = ({ item = {} }) => {
 	const [
 		{ data, loading },
 		trigger,

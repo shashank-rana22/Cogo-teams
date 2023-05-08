@@ -40,7 +40,7 @@ function RequestModal({ closeModal = () => {}, data = {}, refetch = () => {}, ta
 		onUpdate(payload);
 	};
 
-	return !can_request ? (
+	return can_request ? (
 		<Modal show onClose={closeModal} showCloseIcon={!loading} className={styles.request_modal}>
 			<Modal.Header title="Request for Approval" />
 

@@ -28,7 +28,7 @@ function useListAuthorityDeskShipments({ activeTab, service, bucket, filters, su
 						state           : state || shipmentStates,
 						is_job_closed   : is_job_closed === 'yes',
 						document_status : subApprovedBucket || bucket,
-						stakeholder_id  : selected_agent_id,
+						stakeholder_id  : selected_agent_id || undefined,
 						...restFilters || {},
 					},
 					page       : page || 1,
