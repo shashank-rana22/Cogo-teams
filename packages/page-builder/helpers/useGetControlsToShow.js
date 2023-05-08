@@ -19,27 +19,37 @@ const useGetControlsToShow = (controlItems, values) => {
 						showElements.controls[i].options = false;
 						if (item.options_type === 'dynamic_data') {
 							showElements.controls[i].dynamic_data_endpoint = true;
+							showElements.controls[i].label_key = true;
+							showElements.controls[i].value_key = true;
 							showElements.controls[i].manual_options = false;
 							showElements.controls[i].options = false;
 						} else if (item.options_type === 'manual_data') {
 							showElements.controls[i].manual_options = true;
 							showElements.controls[i].dynamic_data_endpoint = false;
 							showElements.controls[i].options = false;
+							showElements.controls[i].label_key = false;
+							showElements.controls[i].value_key = false;
 						} else {
 							showElements.controls[i].manual_options = false;
 							showElements.controls[i].dynamic_data_endpoint = false;
 							showElements.controls[i].options = false;
+							showElements.controls[i].label_key = false;
+							showElements.controls[i].value_key = false;
 						}
 					} else if (['radioGroup', 'chips'].includes(item.type)) {
 						showElements.controls[i].dynamic_data_endpoint = false;
 						showElements.controls[i].manual_options = false;
 						showElements.controls[i].options_type = false;
 						showElements.controls[i].options = true;
+						showElements.controls[i].label_key = false;
+						showElements.controls[i].value_key = false;
 					} else {
 						showElements.controls[i].dynamic_data_endpoint = false;
 						showElements.controls[i].manual_options = false;
 						showElements.controls[i].options_type = false;
 						showElements.controls[i].options = false;
+						showElements.controls[i].label_key = false;
+						showElements.controls[i].value_key = false;
 					}
 				});
 			}

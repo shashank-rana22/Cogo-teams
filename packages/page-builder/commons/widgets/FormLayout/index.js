@@ -1,16 +1,39 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+import { useGetAsyncOptions } from '@cogoport/forms';
+
 import FieldArray from './ChildFormat';
 import { getElementController } from './getElementController';
 import styles from './styles.module.css';
 
+const getOptionsProps = async (controlItem) => {
+	const { label_key: labelKey, value_key: valueKey, dynamic_data_endpoint: endPoint } = controlItem || {};
+
+	const optionsprops = await useGetAsyncOptions({
+		labelKey    : labelKey || '',
+		valueKey    : valueKey || '',
+		endpoint    : endPoint || '',
+		initialCall : true,
+		params      : {
+			page_limit: 100,
+		},
+	});
+
+	return optionsprops || {};
+};
+
 function FormLayout({ controls, control, errors, showElements = {} }) {
 	return (
 		<div className={styles.flex_container}>
-			{controls.map((controlItem) => {
+			{(controls || []).map((controlItem) => {
 				const { name, type, label } = controlItem;
 				const controlStyle = controlItem?.style;
 				const Element = getElementController(type);
 
 				const show = !(controlItem.name in showElements) || showElements[controlItem.name];
+
+				const { options_type } = controlItem || {};
+
+				const asyncOptionsProps = options_type === 'dynamic_data' ? getOptionsProps(controlItem) : {};
 
 				if (!show || !Element) {
 					return null;
@@ -57,6 +80,7 @@ function FormLayout({ controls, control, errors, showElements = {} }) {
 									itemKey={`${name}_${type}`}
 									control={control}
 									id={`${name}`}
+									{...asyncOptionsProps}
 								/>
 								{(errors?.[name]?.message || errors?.[name]?.type) && (
 									<div className={styles.error_message}>
