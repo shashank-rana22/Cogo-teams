@@ -22,11 +22,12 @@ const useListChats = ({
 	isomniChannelAdmin,
 	showBotMessages = false,
 	searchValue = '',
+	setShowFeedback = () => {},
 }) => {
 	const { query:searchQuery, debounceQuery } = useDebounceQuery();
 
 	const {
-		query: { assigned_chat = '', channel_type:queryChannelType = '' },
+		query: { assigned_chat = '', channel_type:queryChannelType = '', type = '' },
 	} = useRouter();
 
 	const snapshotListener = useRef(null);
@@ -93,6 +94,11 @@ const useListChats = ({
 		};
 	};
 
+	useEffect(() => {
+		if (type === 'openFeedbackModal') {
+			setShowFeedback(true);
+		}
+	}, [setShowFeedback, type]);
 	const omniChannelCollection = useMemo(
 		() => collectionGroup(firestore, 'rooms'),
 		[firestore],

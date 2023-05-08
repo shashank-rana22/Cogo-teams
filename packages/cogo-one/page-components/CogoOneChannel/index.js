@@ -119,6 +119,7 @@ function CogoOne() {
 		isomniChannelAdmin,
 		showBotMessages,
 		searchValue,
+		setShowFeedback,
 	});
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
