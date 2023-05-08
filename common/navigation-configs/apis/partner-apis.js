@@ -505,6 +505,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_organization_payment_modes',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'create_organization_billing_cycle',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -1034,6 +1039,12 @@ const partner = {
 			api          : 'get_lead_organization_commodity_trade_port_pairs',
 			access_type  : 'private',
 			service_name : 'lead',
+		},
+		{
+			api          : 'organization_kam_allocation_migration',
+			access_type  : 'private',
+			service_name : 'organization',
+			feature      : 'demand_crm',
 		},
 		{
 			api         : 'list_lead_contacts',
@@ -5834,6 +5845,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'campaign',
 		},
+		{
+			api          : 'get_organization_payment_modes',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	bl_desk: [
 		{
@@ -7929,6 +7945,18 @@ const partner = {
 			feature     : 'Dashboard',
 		},
 		{
+			api         : 'put_sales_invoice_finance_reject_invoice',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'post_sales_invoice_post_from_sage',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
 			api         : 'get_sales_dashboard_outstanding_by_age',
 			access_type : 'private',
 			module      : 'Dashboard',
@@ -8350,6 +8378,22 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_payments_parent_jv_gl_code_master',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_parent_jv_acc_mode',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_parent_jv_jv_category',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_parent_jv_journal_code',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_organization_trade_parties',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -8440,6 +8484,18 @@ const partner = {
 			feature     : 'history',
 		},
 		{
+			api         : 'post_payments_settlement_settlement_matching',
+			access_type : 'private',
+			module      : 'history',
+			feature     : 'history',
+		},
+		{
+			api         : 'post_payments_settlement_matching_on_sage',
+			access_type : 'private',
+			module      : 'history',
+			feature     : 'history',
+		},
+		{
 			api         : 'delete_payments_settlement',
 			access_type : 'private',
 			module      : 'history',
@@ -8488,6 +8544,12 @@ const partner = {
 			feature     : 'onAccount',
 		},
 		{
+			api         : 'post_payments_accounts_post_from_sage',
+			access_type : 'private',
+			module      : 'onAccount',
+			feature     : 'onAccount',
+		},
+		{
 			api         : 'delete_sales_accounts',
 			access_type : 'private',
 			module      : 'onAccount',
@@ -8518,7 +8580,37 @@ const partner = {
 			feature     : 'onAccount',
 		},
 		{
-			api         : 'get_payments_journal_voucher_list',
+			api         : 'get_payments_parent_jv_list',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
+			api         : 'delete_payments_parent_jv',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
+			api         : 'post_payments_parent_jv_post_to_sage',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
+			api         : 'post_payments_parent_jv',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
+			api         : 'put_payments_parent_jv',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
+		},
+		{
+			api         : 'get_payments_journal_voucher_jv_line_items_list',
 			access_type : 'private',
 			module      : 'JournalVoucher',
 			feature     : 'JournalVoucher',
@@ -10184,6 +10276,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'saas_traceability',
 		},
+		{
+			api          : 'list_shipping_line_events',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
 	],
 
 	ftl_freight: [
@@ -11357,6 +11454,14 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_air_coe_documents_list_manifest',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_air_coe_documents_create_manifest',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_locations',
 			access_type  : 'private',
 			service_name : 'location',
@@ -11686,6 +11791,31 @@ const partner = {
 			api          : 'request_assign_chat',
 			access_type  : 'private',
 			service_name : 'communication',
+		},
+		{
+			api          : 'get_tickets_default_types',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'post_tickets_activity',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'post_tickets_ticket',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_stats',
+			access_type  : 'private',
+			service_name : 'tickets',
+		},
+		{
+			api          : 'get_tickets_list',
+			access_type  : 'private',
+			service_name : 'tickets',
 		},
 	],
 	analytics_dashboard: [

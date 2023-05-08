@@ -1,12 +1,11 @@
-import { Modal } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 import React from 'react';
 
 import AddInvoicingParty from './AddInvoicingParty';
 import styles from './styles.module.css';
 
 function AddIp({
-	shipmentData,
-	showIp,
+	shipmentData = {},
 	setShowIp = () => {},
 	updateInvoicingParty = () => {},
 }) {
@@ -14,6 +13,7 @@ function AddIp({
 		id         : shipmentData?.importer_exporter?.id || undefined,
 		country_id : shipmentData?.importer_exporter?.country_id || undefined,
 	};
+
 	if (shipmentData?.importer_exporter?.is_tax_applicable === null) {
 		organizationDetails.is_tax_applicable = true;
 	} else {
@@ -23,20 +23,23 @@ function AddIp({
 	return (
 		<Modal
 			size="xl"
-			show={showIp}
+			show
 			className={styles.ip_modal_container}
-			onClose={() => setShowIp(null)}
-			closable={false}
-			placement="top"
-			onOuterClick={() => setShowIp(null)}
+			onClose={() => setShowIp(false)}
+			closeOnOuterClick={false}
 		>
 			<Modal.Header title="ADD INVOICING PARTY" />
+
 			<Modal.Body>
 				<AddInvoicingParty
 					organizationDetails={organizationDetails}
 					updateInvoicingParty={updateInvoicingParty}
 				/>
 			</Modal.Body>
+
+			<Modal.Footer>
+				<Button onClick={() => setShowIp(false)}>Close</Button>
+			</Modal.Footer>
 		</Modal>
 	);
 }

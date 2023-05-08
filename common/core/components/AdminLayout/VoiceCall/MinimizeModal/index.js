@@ -1,5 +1,6 @@
 import { IcMProfile } from '@cogoport/icons-react';
 import { setProfileState } from '@cogoport/store/reducers/profile';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -49,8 +50,7 @@ function MinimizeModal({
 			>
 				<div className={styles.min_number}>{name || `${mobile_country_code} ${mobile_number}`}</div>
 				<div className={styles.status_container}>
-					<div className={styles.min_duration}>{status || 'Connecting...'}</div>
-					{' '}
+					<div className={styles.min_duration}>{startCase(status) || 'Connecting...'}</div>
 					<div className={styles.min_duration}>
 						{durationTime()}
 					</div>

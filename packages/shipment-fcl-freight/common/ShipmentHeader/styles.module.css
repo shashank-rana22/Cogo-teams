@@ -55,12 +55,24 @@
 }
 
 .button {
-	font-size: 12px;
-	color: red;
+	font-size: var(--font-size-md);
+	color: var(--color-primary-error-red-2);
 	text-decoration: underline;
 	cursor: pointer;
 
 	:hover {
 		box-shadow: 0 0 8px rgb(0 0 0 / 20%);
 	}
+}
+
+.three_dot_icon {
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+	fill: var(--color-primary-error-red-2);
+}
+
+.cancel_button {
+	font-size: var(--font-size-md);
+	cursor: pointer;
 }
