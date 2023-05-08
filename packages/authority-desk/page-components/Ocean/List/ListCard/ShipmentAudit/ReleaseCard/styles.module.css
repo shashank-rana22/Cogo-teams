@@ -1,0 +1,23 @@
+.container {
+	position: fixed;
+	bottom: 12px;
+	left: 50%;
+	display: flex;
+	justify-content: flex-end;
+	width: calc(100% - 80px);
+	padding: 12px;
+	background: #fff;
+	border-radius: 8px;
+	transform: translateX(-50%);
+}
+
+.bttn_wrap {
+	display: flex;
+	justify-content: flex-end;
+
+	:global {
+		.ui_button_container:not(:last-of-type) {
+			margin-right: 12px;
+		}
+	}
+}

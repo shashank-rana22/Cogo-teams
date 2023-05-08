@@ -956,6 +956,12 @@ const partner = {
 			service_name : 'lead',
 		},
 		{
+			api          : 'organization_kam_allocation_migration',
+			access_type  : 'private',
+			service_name : 'organization',
+			feature      : 'demand_crm',
+		},
+		{
 			api         : 'list_lead_contacts',
 			access_type : 'private',
 		},
