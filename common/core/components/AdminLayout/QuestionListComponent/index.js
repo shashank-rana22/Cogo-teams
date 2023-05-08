@@ -23,6 +23,7 @@ function QuestionListComponent({
 	fetchFaqNotification,
 	showNotificationContent,
 	setShowNotificationContent,
+	setInput,
 }) {
 	if (search) {
 		return (
@@ -55,6 +56,7 @@ function QuestionListComponent({
 			fetchFaqNotification={fetchFaqNotification}
 			setShowNotificationContent={setShowNotificationContent}
 			showNotificationContent={showNotificationContent}
+			setInput={setInput}
 		/>
 	);
 }

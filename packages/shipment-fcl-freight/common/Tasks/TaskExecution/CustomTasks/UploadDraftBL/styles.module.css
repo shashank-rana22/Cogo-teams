@@ -1,0 +1,11 @@
+.flex_container {
+	display: block;
+	padding: 16;
+	margin-bottom: 8;
+	border: 1px solid #ededed;
+	border-radius: 8;
+}
+
+.flex_end {
+	justify-content: "flex-end";
+}

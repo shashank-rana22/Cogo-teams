@@ -23,8 +23,8 @@ const options = [
 
 function FormContainer({
 	back, setBack, edit, setEdit, packingData, fields,
-	control, errors, item, setGenerate, handleSubmit, category, activeCategory, hawbDetails,
-	setHawbDetails, activeHawb, setActiveHawb, activeKey, setActiveKey, taskItem,
+	control, errors, setValue, item, setGenerate, handleSubmit, category, activeCategory, hawbDetails,
+	setHawbDetails, activeHawb, setActiveHawb, activeKey, setActiveKey, taskItem, formValues,
 }) {
 	const [value, onChange] = useState('manual');
 	const [confirmDelete, setConfirmDelete] = useState(false);
@@ -91,6 +91,21 @@ function FormContainer({
 			</Button>
 		);
 	}
+
+	const calculateCharges = () => {
+		const updatedCharges = (formValues.carrierOtherCharges || []).map((charge) => {
+			let price = 0;
+			if (charge.chargeType === 'chargeable_wt') {
+				price = formValues.chargeableWeight * charge.chargeUnit;
+			} else if (charge.chargeType === 'gross_wt') {
+				price = formValues.weight * charge.chargeUnit;
+			} else if (charge.chargeType === 'rate_per_kg') {
+				price = formValues.ratePerKg * charge.chargeUnit;
+			}
+			return { ...charge, price };
+		});
+		setValue('carrierOtherCharges', updatedCharges);
+	};
 
 	return (
 		<div className={styles.form_container}>
@@ -223,10 +238,21 @@ function FormContainer({
 							</div>
 						</>
 					)}
-
 					{activeKey === 'package' && (
 						<>
 							<Layout fields={fields?.package} control={control} errors={errors} />
+							<div className={styles.calcuate_button}>
+								<Button
+									size="sm"
+									themeType="accent"
+									onClick={() => {
+										calculateCharges();
+									}}
+								>
+									Calculate
+
+								</Button>
+							</div>
 							<div className={styles.button_container}>
 								{activeCategory === 'hawb' && (
 									<RemoveHawb />
