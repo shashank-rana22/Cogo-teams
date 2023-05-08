@@ -43,6 +43,7 @@ function ShipmentDetails() {
 			return <LastMileDesk get={get} activeStakeholder={activeStakeholder} />;
 		case 'admin':
 		case 'superadmin':
+		case 'credit_control':
 			return <Superadmin get={get} activeStakeholder={activeStakeholder} />;
 		default:
 			return (

@@ -1,5 +1,6 @@
 import allocations from './config/allocations';
 import athenaDashboard from './config/athena-dashboard';
+import authorityDesk from './config/authority-desk';
 import bookingDesk from './config/booking-desk';
 import businessFinance from './config/business-finance';
 import cogoAcademy from './config/cogo-academy';
@@ -44,6 +45,7 @@ const routeConfig = {
 	...shipmentFclFreight,
 	...bookingDesk,
 	...costBookingDesk,
+	...authorityDesk,
 	...lastMileDesk,
 	...welcome,
 	...athenaDashboard,
