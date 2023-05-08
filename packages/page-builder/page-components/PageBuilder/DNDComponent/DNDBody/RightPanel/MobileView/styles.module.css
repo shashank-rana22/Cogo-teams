@@ -12,7 +12,8 @@
   border: 14px solid #191919;
   height: 580px;
   width: 312px;
-  padding: 0px 8px 40px 8px;
+  overflow: hidden;
+  padding-bottom: 40px;
 }
 
 .header {

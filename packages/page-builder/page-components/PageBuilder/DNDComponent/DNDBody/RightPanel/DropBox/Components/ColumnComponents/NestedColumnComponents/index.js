@@ -36,7 +36,6 @@ function NestedColumnComponent({
 		...((isMobile || previewMode === 'mobile') && {
 			width: '100%',
 		}),
-		backgroundColor: 'lavender',
 	};
 
 	// const { id: columnChildId } = selectedColumn || {};
