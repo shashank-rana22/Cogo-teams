@@ -34,20 +34,20 @@ function Details({
 			<Badge
 				size="md"
 				color="#CFEAED"
-				text={startCase(singleItem.mode)}
+				text={startCase(singleItem?.booking_mode)}
 				className={styles.mode_badge}
 			/>
 		),
 		handlePlatformURL: (singleItem) => (
-			singleItem?.platform_url ? (
+			singleItem?.lms_url ? (
 				<Button
 					size="md"
 					themeType="linkUi"
-					onClick={() => window.open(singleItem?.platform_url, '_blank')}
+					onClick={() => window.open(singleItem?.lms_url, '_blank')}
 					style={{ color: '#F68B21', padding: 0 }}
 					className={styles.url_button}
 				>
-					<div className={styles.overflow_text}>{singleItem?.platform_url}</div>
+					<div className={styles.overflow_text}>{singleItem?.lms_url}</div>
 				</Button>
 			) : '-'),
 		handleAction: (singleItem) => (

@@ -1,8 +1,8 @@
-const groundOps = {
+const airRepository = {
 	'/[partner_id]/air-repository': {
 		navigation : 'air_repository',
 		isMainNav  : true,
 	},
 };
 
-export default groundOps;
+export default airRepository;

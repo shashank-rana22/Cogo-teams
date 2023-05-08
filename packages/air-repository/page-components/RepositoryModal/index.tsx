@@ -26,7 +26,7 @@ function RepositoryModal({ showModal, setShowModal, listRepository, item, edit, 
 
 	const { control, handleSubmit, setValue, watch, formState:{ errors } } = useForm();
 	const fields = repositoryControls();
-	const mode = watch('mode');
+	const mode = watch('booking_mode');
 
 	const onSubmit = (values) => {
 		const payload = { ...values, id: item?.id, action_name: edit ? 'update' : undefined };

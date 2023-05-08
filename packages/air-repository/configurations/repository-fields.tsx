@@ -11,7 +11,7 @@ export const RepositoryFields = {
 			func  : 'handleAirline',
 		},
 		{
-			key   : 'mode',
+			key   : 'booking_mode',
 			label : 'Mode',
 			span  : 0.7,
 			func  : 'handleMode',
@@ -27,23 +27,23 @@ export const RepositoryFields = {
 			span: 0.6,
 		},
 		{
-			key   : 'email',
+			key   : 'poc_email',
 			label : 'Email (from airline)',
 			span  : 0.8,
 		},
 		{
-			key   : 'platform_url',
+			key   : 'lms_url',
 			label : 'Platform URL',
 			span  : 1,
 			func  : 'handlePlatformURL',
 		},
 		{
-			key   : 'user_id',
+			key   : 'lms_user_id',
 			label : 'User Id (Platform)',
 			span  : 0.8,
 		},
 		{
-			key   : 'password',
+			key   : 'lms_password',
 			label : 'Password (Platform)',
 			span  : 0.8,
 		},

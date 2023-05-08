@@ -438,9 +438,9 @@ importers:
       '@cogoport/utils': ^1.2.2
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.412_wplda5wko7cvixuybdk4vru4ti
+      '@cogoport/components': 1.0.410_y3d6pejfqbkazdfzmaewia2nra
       '@cogoport/forms': link:../../common/forms
-      '@cogoport/icons-react': 1.0.69_react@18.2.0
+      '@cogoport/icons-react': 1.0.68_react@18.2.0
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store

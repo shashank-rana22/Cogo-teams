@@ -12,7 +12,7 @@ const repositoryControls = () => ({
 			},
 		},
 		{
-			name        : 'mode',
+			name        : 'booking_mode',
 			type        : 'select',
 			label       : 'Select Mode',
 			placeholder : 'Choose Email/Platform',
@@ -39,7 +39,7 @@ const repositoryControls = () => ({
 			},
 		},
 		{
-			name        : 'email',
+			name        : 'poc_email',
 			type        : 'text',
 			label       : 'Airline E-mail ID',
 			placeholder : 'Enter email',
@@ -51,7 +51,7 @@ const repositoryControls = () => ({
 	],
 	platform: [
 		{
-			name        : 'platform_url',
+			name        : 'lms_url',
 			type        : 'text',
 			label       : 'Enter Platform URL',
 			placeholder : 'Enter URL',
@@ -61,7 +61,7 @@ const repositoryControls = () => ({
 			},
 		},
 		{
-			name        : 'user_id',
+			name        : 'lms_user_id',
 			type        : 'text',
 			label       : 'Enter Platform User Id',
 			placeholder : 'Enter used id',
@@ -71,7 +71,7 @@ const repositoryControls = () => ({
 			},
 		},
 		{
-			name        : 'password',
+			name        : 'lms_password',
 			type        : 'text',
 			label       : 'Enter Platform Password',
 			placeholder : 'Enter password',

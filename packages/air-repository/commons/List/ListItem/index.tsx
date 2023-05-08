@@ -14,7 +14,7 @@ export interface Props {
 	isMobile?: boolean;
 }
 
-const INCLUDE_LINE_SEPARATION = ['mode', 'email', 'password'];
+const INCLUDE_LINE_SEPARATION = ['booking_mode', 'poc_email', 'lms_password'];
 
 function CardItem({
 	fields,
