@@ -16,10 +16,11 @@ function SavePayRunModal({
 	setSavePayrunModal,
 	setViewSelectedInvoice,
 }:PropsType) {
+	const { push } = useRouter();
 	const handleCloseModal = () => {
 		setSavePayrunModal(false);
 	};
-	const { push } = useRouter();
+
 	const handleClick = () => {
 		setViewSelectedInvoice(false);
 		push(
@@ -35,7 +36,7 @@ function SavePayRunModal({
 			<Modal show={savePayrunModal} onClose={handleCloseModal} size="sm">
 				<div className={styles.container}>
 					<div className={styles.icon}>
-						<IcCError style={{ width: 28, height: 28 }} />
+						<IcCError width={28} height={28} />
 					</div>
 					<div className={styles.icon}>
 						Are you sure You want to Save this payrun
@@ -43,7 +44,7 @@ function SavePayRunModal({
 				</div>
 				<Modal.Footer>
 					<Button
-						style={{ marginRight: 10 }}
+						className={styles.button}
 						themeType="secondary"
 						onClick={() => setSavePayrunModal(false)}
 					>

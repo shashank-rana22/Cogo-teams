@@ -16,13 +16,16 @@ interface ItemProps {
 	itemData:PropsType,
 }
 
+const NAME_LENGTH = 20;
+
 function BankData({ itemData }:ItemProps) {
 	const { advanceDocumentSellerBankDetail } = itemData || {};
-	const { accountNumber, bankName, ifscCode } = advanceDocumentSellerBankDetail || {};
+	const { accountNumber = '', bankName = '', ifscCode = '' } = advanceDocumentSellerBankDetail || {};
+
 	return (
 		<div>
 			<div className={styles.text}>
-				{bankName?.length > 20
+				{bankName.length > NAME_LENGTH
 					? (
 						<Tooltip
 							interactive

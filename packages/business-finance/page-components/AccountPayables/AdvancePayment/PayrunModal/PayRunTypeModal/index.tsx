@@ -46,9 +46,11 @@ function PayRunTypeModal({
 	currency,
 	setShow,
 }:Props) {
-	const { totalRecords } = data || {};
 	const { push } = useRouter();
+	const { totalRecords } = data || {};
+	const [exitPayRun, setExitPayRun] = useState(false);
 	const { getCreateNewPayRun } = useGetCreateNewPayRun({ activeEntity, currency });
+	const buttonDisabled = loading || totalRecords < 1;
 	const handleClick = async () => {
 		const resp: CreateNewPayRunResponse = await getCreateNewPayRun();
 		push(`/business-finance/account-payables/advance-payment/create-new-payrun?payrun=${resp?.data?.id}
@@ -58,7 +60,7 @@ function PayRunTypeModal({
 		setShow(false);
 		Toast.success('PayRun Initialised, Please wait...');
 	};
-	const [exitPayRun, setExitPayRun] = useState(false);
+
 	return (
 		<div className={styles.container}>
 			<Modal size="md" show={payRunType} onClose={() => setPayRunType(false)} placement="top">
@@ -98,7 +100,7 @@ function PayRunTypeModal({
 
 				<Modal.Footer>
 					<Button
-						disabled={loading || totalRecords < 1}
+						disabled={buttonDisabled}
 						onClick={() => {
 							setExitPayRun(true);
 							setPayRunType(false);

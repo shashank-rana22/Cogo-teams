@@ -35,7 +35,7 @@ const CURRENCY_DATA_MAPPING = getContentMapping({
 	mapping : CURRENCY_ICON_MAPPING,
 });
 
-export const CURRENCY_DATA = Object.keys(CURRENCY_DATA_MAPPING).map(
+export const CURRENCY_DATA = Object.keys(CURRENCY_DATA_MAPPING || []).map(
 	(currency, index) => ({
 		id   : index,
 		icon : CURRENCY_DATA_MAPPING[currency],

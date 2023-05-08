@@ -8,3 +8,7 @@
 	display: flex;
 	gap: 12px;
 }
+
+.search_icon {
+	margin-right: 10px;
+}

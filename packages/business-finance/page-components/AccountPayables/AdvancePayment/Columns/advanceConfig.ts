@@ -17,13 +17,13 @@ export const ADVANCE_CONFIG = {
 		{
 			label : 'Adv. Doc. No.',
 			key   : 'advanceDocumentNo',
-			span  : 1.9,
+			span  : 1.8,
 		},
 		{
 			label : 'Incident Number',
 			key   : 'incidentRefNo',
 			func  : 'renderIncidentNumber',
-			span  : 1.5,
+			span  : 1.4,
 		},
 
 		{
@@ -39,13 +39,13 @@ export const ADVANCE_CONFIG = {
 				type : 'serviceType',
 			},
 			func : 'renderSIDnumber',
-			span : 1,
+			span : 1.2,
 		},
 		{
 			label : 'Entity',
 			key   : 'entityCode',
 			func  : 'renderEntityCode',
-			span  : 0.5,
+			span  : 0.4,
 
 		},
 		{
@@ -59,7 +59,7 @@ export const ADVANCE_CONFIG = {
 			key     : 'payableAmount',
 			func    : 'renderAmountWithCurrency',
 			sorting : { name: 'amountSortType' },
-			span    : 1.5,
+			span    : 1.4,
 		},
 		{
 			key     : 'requestedBy',

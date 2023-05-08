@@ -17,10 +17,11 @@ interface ItemPropsType {
 
 function OrganizationName({ itemData }:ItemPropsType) {
 	const { advanceDocumentSellerAddress } = itemData || {};
-	const { organizationName } = advanceDocumentSellerAddress || {};
+	const { organizationName = '' } = advanceDocumentSellerAddress || {};
+	const nameLength = organizationName.length > 20;
 	return (
 		<div className={styles.container}>
-			{organizationName?.length > 20
+			{nameLength
 				? (
 					<Tooltip
 						interactive

@@ -140,7 +140,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 	}, [getAdvancedPayment, activeEntity, service, entity, query, sort, pageIndex, viewSelectedInvoice]);
 
 	const submitSelectedInvoices = async () => {
-		const { list = [] } = apiData ?? {};
+		const { list = [] } = apiData || {};
 		const selectedInvoices = [];
 
 		for (let i = 0; i < list.length; i += 1) {
@@ -153,7 +153,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 				advanceDocumentSellerBankDetail = undefined,
 				invoiceNumber = ' ',
 				payableAmount,
-			} = addToSelectdata ?? {};
+			} = addToSelectdata || {};
 
 			if (checked) {
 				if (!advanceDocumentSellerBankDetail) {
@@ -231,12 +231,12 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 	}, [viewSelectedTrigger, pageIndex, payrun, selectedPayRunId, query, activeEntity, entity, service, sort]);
 
 	useEffect(() => {
-		if (viewSelectedInvoice === true) {
+		if (viewSelectedInvoice) {
 			getViewSelectedInvoices();
 		}
 	}, [getViewSelectedInvoices, service, query, sort, pageIndex, viewSelectedInvoice]);
 
-	const deleteInvoices = async (id) => {
+	const deleteInvoices = async (id:string) => {
 		try {
 			await deleteSelectedInvoiceTrigger({
 				data: {

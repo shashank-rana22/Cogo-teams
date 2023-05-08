@@ -51,8 +51,9 @@ function ExitingPayRun({
 	currency,
 	activeEntity,
 }:Props) {
-	const { pageIndex } = data || {};
 	const { push } = useRouter();
+	const { pageIndex, list = [] } = data || {};
+	const listLength = list.length;
 	const [value, setValue] = useState('');
 
 	const handleClick = () => {
@@ -102,7 +103,7 @@ function ExitingPayRun({
 			<Modal size="xl" show={exitPayRun} onClose={() => { setExitPayRun(false); }} placement="top">
 				<Modal.Header title="Payment Ready PayRuns" />
 				<Modal.Body>
-					{data?.list?.length > 0 ? (
+					{listLength > 0 ? (
 						<>
 							<div className={styles.header}>
 								Select a pay run you want to add to.

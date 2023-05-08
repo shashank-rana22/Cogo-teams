@@ -34,7 +34,7 @@ function AccountPayables() {
 
 	const [activeEntity, setActiveEntity] = useState(entity);
 
-	const EntityOptions = entityData?.map((item) => ({
+	const EntityOptions = (entityData || [])?.map((item) => ({
 		label : `${upperCase(item.business_name)} (${item?.entity_code})`,
 		value : item?.entity_code,
 	}));

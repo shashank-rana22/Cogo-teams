@@ -12,7 +12,7 @@ interface PropsType {
 
 function Entity({ itemData }:PropsType) {
 	const { advanceDocumentBuyerAddress } = itemData || {};
-	const { entityCode } = advanceDocumentBuyerAddress || {};
+	const { entityCode = '' } = advanceDocumentBuyerAddress || {};
 	return (
 		<div>
 			{entityCode}

@@ -21,7 +21,7 @@ interface Props {
 
 function SelectFilters({ filters, setFilters, activeEntity, createButton }:Props) {
 	const [showPayRunModal, setshowPayRunModal] = useState(false);
-	const { search } = filters || {};
+	const { search = '' } = filters || {};
 	return (
 		<div className={styles.container}>
 			<div>
@@ -35,7 +35,7 @@ function SelectFilters({ filters, setFilters, activeEntity, createButton }:Props
 				<div>
 					<Input
 						value={search || ''}
-						onChange={(value) => setFilters({
+						onChange={(value:string) => setFilters({
 							...filters,
 							search: value || undefined,
 						})}
@@ -47,7 +47,7 @@ function SelectFilters({ filters, setFilters, activeEntity, createButton }:Props
 								height={20}
 								width={20}
 								color="#CACACA"
-								style={{ marginRight: '10px' }}
+								className={styles.search_icon}
 							/>
 						)}
 					/>

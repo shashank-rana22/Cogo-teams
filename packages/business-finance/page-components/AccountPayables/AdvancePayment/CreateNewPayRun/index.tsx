@@ -88,10 +88,17 @@ function CreateNewPayRun() {
 			getAdvancedPayment();
 		}
 	}, [getAdvancedPayment, selectedPayRunId]);
-	const { list } = existpayRunData || {};
+	const { list = [] } = existpayRunData || {};
+	const { name = '', totalValue = '', currency = '', invoiceCount = '', createdAt = '' } = list[0] || {};
 	const { pageIndex } = data || {};
 
-	const listLength = viewSelectedInvoice ? viewSelectedData?.list?.length : data?.list?.length;
+	const { list:dataList = [] } = data || {};
+	const dataListLength = dataList.length;
+
+	const { list:selectedList = [] } = viewSelectedData || {};
+	const selectedListLength = selectedList.length;
+
+	const listLength = viewSelectedInvoice ? selectedListLength : dataListLength;
 	const functions = {
 		renderCheckbox    : (itemData:ItemProps) => getTableBodyCheckbox(itemData),
 		renderBankDetails : (itemData:ItemProps) => <BankDetails itemData={itemData} />,
@@ -163,7 +170,7 @@ function CreateNewPayRun() {
 							<div className={styles.text}>
 								<div>
 									{existingPayRunLoading ? <Placeholder className={styles.loader} />
-										: list?.[0]?.name}
+										: name}
 								</div>
 							</div>
 							<div className={styles.text}>
@@ -173,7 +180,7 @@ function CreateNewPayRun() {
 								<div>
 									{existingPayRunLoading
 										? <Placeholder className={styles.amount_loader} />
-										: getFormattedPrice(list?.[0]?.totalValue, list?.[0]?.currency)}
+										: getFormattedPrice(totalValue, currency)}
 								</div>
 							</div>
 							<div className={styles.text}>
@@ -184,14 +191,14 @@ function CreateNewPayRun() {
 								<div>
 									{existingPayRunLoading
 										? <Placeholder className={styles.amount_loader} />
-										: list?.[0]?.invoiceCount}
+										: invoiceCount}
 								</div>
 							</div>
 							<div className={styles.text}>
 								<div>
 									{existingPayRunLoading
 										? <Placeholder className={styles.loader} />
-										: list?.[0]?.createdAt}
+										: createdAt}
 								</div>
 							</div>
 							<div className={styles.ribbons}>

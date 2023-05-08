@@ -9,7 +9,7 @@ interface PropsType {
 	itemData:ItemProps,
 }
 function IncidentNumber({ itemData }:PropsType) {
-	const { incidentRefNo } = itemData || {};
+	const { incidentRefNo = '' } = itemData || {};
 	return (
 		<div className={styles.text}>
 			#

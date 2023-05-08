@@ -17,7 +17,7 @@ export const VIEW_SELECTED_CONFIG = {
 		{
 			label : 'Adv. Doc. No.',
 			key   : 'advanceDocumentNo',
-			span  : 1.3,
+			span  : 1.2,
 		},
 		{
 			label : 'Incident Number',
@@ -38,7 +38,7 @@ export const VIEW_SELECTED_CONFIG = {
 				type : 'serviceType',
 			},
 			func : 'renderSIDnumber',
-			span : 1.3,
+			span : 1,
 		},
 		{
 			key   : 'organizationName',
@@ -50,7 +50,7 @@ export const VIEW_SELECTED_CONFIG = {
 			label : 'Advance Amount',
 			key   : 'payableAmount',
 			func  : 'renderAmountWithCurrency',
-			span  : 1.4,
+			span  : 1.2,
 		},
 		{
 			key   : 'bankName',
@@ -62,18 +62,18 @@ export const VIEW_SELECTED_CONFIG = {
 		{
 			key   : 'requestedBy',
 			label : 'Requested by & on',
-			span  : 1.7,
+			span  : 1.8,
 			func  : 'renderRequestedBy',
 		},
 		{
 			label : 'Approved by & on',
 			key   : 'approvedBy',
-			span  : 1.7,
+			span  : 1.8,
 			func  : 'renderApprovedBy',
 		},
 		{
 			key  : 'delete',
-			span : 0.3,
+			span : 0.2,
 			func : 'renderIcDelete',
 		},
 

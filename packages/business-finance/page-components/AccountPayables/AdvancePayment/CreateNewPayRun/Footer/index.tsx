@@ -49,10 +49,19 @@ function Footer({
 
 	const [savePayrunModal, setSavePayrunModal] = useState(false);
 	const { totalValue, currency, invoiceCount } = viewSelectedData || {};
-
-	const isChecked = (list || [])?.filter((item) => item.checked);
-	const totalInvoiceAmount = isChecked?.reduce((acc, obj) => +acc + +obj.payableAmount, 0);
+	const { list:viewSelectedList = [] } = viewSelectedData || {};
+	const listLength = viewSelectedList.length;
+	const isChecked = (list || []).filter((item) => item.checked);
+	const totalInvoiceAmount = isChecked.reduce((acc, obj) => +acc + +obj.payableAmount, 0);
 	const showAddToSelected = isChecked?.length === 0;
+	const buttonDisabled = showAddToSelected || selectedDataLoading || loading;
+	const handleView = () => {
+		setViewSelectedInvoice(true);
+		getViewSelectedInvoices();
+		if (selectedPayRunId) {
+			getAdvancedPayment();
+		}
+	};
 	return (
 		<div>
 			<div className={styles.container}>
@@ -61,12 +70,9 @@ function Footer({
 						Total Advance Payments
 					</div>
 					<div className={styles.amount_container}>
-						<div className={styles.currency}>
-							INR
-						</div>
 						<div className={styles.amount}>
-							{viewSelectedInvoice === true ? getFormattedPrice(totalValue, currency || 'INR')
-								: getFormattedPrice(totalInvoiceAmount, 'INR')}
+							{viewSelectedInvoice ? getFormattedPrice(totalValue, currency)
+								: getFormattedPrice(totalInvoiceAmount, currency)}
 						</div>
 					</div>
 					<div className={styles.sid_count}>
@@ -74,7 +80,7 @@ function Footer({
 							SID :
 						</div>
 						<div>
-							{viewSelectedInvoice === true ? invoiceCount : isChecked.length}
+							{viewSelectedInvoice ? invoiceCount : isChecked.length}
 						</div>
 					</div>
 				</div>
@@ -83,7 +89,7 @@ function Footer({
 						? (
 							<div className={styles.view_button}>
 								<Button
-									disabled={viewSelectedData?.list?.length <= 0}
+									disabled={listLength <= 0}
 									onClick={() => { setSavePayrunModal(true); }}
 								>
 									Save PayRun
@@ -96,8 +102,8 @@ function Footer({
 								<div>
 									<Button
 										themeType="secondary"
-										onClick={submitSelectedInvoices}
-										disabled={showAddToSelected || selectedDataLoading || loading}
+										onClick={submitSelectedInvoices()}
+										disabled={buttonDisabled}
 									>
 										+ Add to selected
 									</Button>
@@ -106,13 +112,7 @@ function Footer({
 								<div className={styles.view_button}>
 									<Button
 										disabled={viewSelectedDataLoading}
-										onClick={() => {
-											setViewSelectedInvoice(true);
-											getViewSelectedInvoices();
-											if (selectedPayRunId) {
-												getAdvancedPayment();
-											}
-										}}
+										onClick={handleView}
 									>
 										View Selected SID
 

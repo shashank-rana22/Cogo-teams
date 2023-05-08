@@ -15,8 +15,10 @@ interface Props {
 
 function PayRunModal({ show, setShow, activeEntity }:Props) {
 	const [currencyValue, setCurrencyValue] = useState(CURRENCY_DATA[0]);
-	const currency = currencyValue?.text;
 	const [payRunType, setPayRunType] = useState(false);
+	const { text = '', id = '' } = currencyValue || {};
+	const currency = text;
+
 	const {
 		data, getAdvancedPayment,
 		loading,
@@ -33,41 +35,47 @@ function PayRunModal({ show, setShow, activeEntity }:Props) {
 						Currency
 					</div>
 					<div className={styles.currency}>
-						{CURRENCY_DATA.map((item) => (
-							<div
-								className={currencyValue.id === item.id ? styles.selected_currency_values
-									: styles.unselected_currency_values}
-								onClick={() => {
-									setCurrencyValue(item);
-								}}
-								role="presentation"
-							>
-								<div className={styles.icon_show}>{item.icon}</div>
-								<div className={styles.text_show}>{item.text}</div>
-							</div>
-						))}
+						{(CURRENCY_DATA || []).map((item) => {
+							const { id:itemId, icon:itemIcon, text:itemText } = item || {};
+							return (
+								<div
+									className={id === itemId ? styles.selected_currency_values
+										: styles.unselected_currency_values}
+									onClick={() => {
+										setCurrencyValue(item);
+									}}
+									role="presentation"
+								>
+									<div className={styles.icon_show}>{itemIcon}</div>
+									<div className={styles.text_show}>{itemText}</div>
+								</div>
+							);
+						})}
 					</div>
 					<div className={styles.entity}>
 						Entity
 					</div>
 					<div>
-						{ENTITY_MAPPING.map((item) => (
-							<div>
-								{item.entityCode === activeEntity
+						{(ENTITY_MAPPING || []).map((item) => {
+							const { label = '', entityCode = '', icon = '' } = item || {};
+							return (
+								<div>
+									{entityCode === activeEntity
                                 && (
 	<div className={styles.entity_container}>
 		<Radio name="selected" disabled={false} checked />
 		<div className={styles.text}>
-			{item.label}
+			{label}
 		</div>
 		<div className={styles.entity_icon}>
-			{item.icon}
+			{icon}
 		</div>
 
 	</div>
                                 )}
-							</div>
-						))}
+								</div>
+							);
+						})}
 					</div>
 				</Modal.Body>
 				<Modal.Footer>

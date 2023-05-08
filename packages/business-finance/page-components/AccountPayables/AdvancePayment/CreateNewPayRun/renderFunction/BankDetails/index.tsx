@@ -16,11 +16,16 @@ interface Props {
 }
 function BankDetails({ itemData }:Props) {
 	const { bankDetail } = itemData || {};
-	const { account_number:accountNo, beneficiary_name:beneficiaryName, ifsc_code:ifsc } = bankDetail[0];
+	const {
+		account_number:accountNo = '',
+		beneficiary_name:beneficiaryName = '',
+		ifsc_code:ifsc = '',
+	} = bankDetail[0] || {};
+	const nameLength = beneficiaryName.length > 20;
 	return (
 		<div>
 			<div className={styles.text}>
-				{beneficiaryName?.length > 20
+				{nameLength
 					? (
 						<Tooltip
 							interactive

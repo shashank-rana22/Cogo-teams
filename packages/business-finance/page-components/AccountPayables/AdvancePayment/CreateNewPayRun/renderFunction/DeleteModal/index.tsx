@@ -36,7 +36,7 @@ function DeleteModal({
 				<Modal show={openDeleteModal} onClose={handleCloseModal} size="sm">
 					<div className={styles.container}>
 						<div className={styles.icon}>
-							<IcCError style={{ width: 28, height: 28 }} />
+							<IcCError width={28} height={28} />
 						</div>
 						<div className={styles.icon}>
 							Are you sure You want to delete this PayRun Bill
@@ -44,7 +44,7 @@ function DeleteModal({
 					</div>
 					<Modal.Footer>
 						<Button
-							style={{ marginRight: 10 }}
+							className={styles.button}
 							themeType="secondary"
 							onClick={() => setopenDeleteModal(false)}
 						>

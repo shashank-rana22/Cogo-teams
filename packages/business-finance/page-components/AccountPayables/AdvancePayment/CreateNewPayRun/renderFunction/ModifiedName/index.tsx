@@ -12,10 +12,11 @@ interface PropsType {
 }
 
 function ModifiedName({ itemData }:PropsType) {
-	const { organizationName } = itemData || {};
+	const { organizationName = '' } = itemData || {};
+	const nameLength = organizationName.length > 20;
 	return (
 		<div className={styles.container}>
-			{ organizationName?.length > 20
+			{ nameLength
 				? (
 					<Tooltip
 						interactive
