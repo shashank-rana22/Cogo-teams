@@ -2331,6 +2331,13 @@ const saas = {
 			service_name : 'cogopoint',
 		},
 	],
+	app_saas_import_export_controls: [
+		{
+			api: 'saas_get_user_quota_usage',
+			access_type: 'private',
+			service_name: 'saas_subscriptions_v2',
+		},
+	],
 
 };
 export default saas;
