@@ -29,7 +29,7 @@ function ShipmentAudit({
 		shipments : <CustodyShipments item={item} />,
 	};
 
-	const { bucket = 'eligible', service } = tabsState;
+	const { bucket = 'eligible', service, activeTab = 'bl' } = tabsState;
 
 	const { freight_service = {}, local_service = {} } = item;
 
@@ -124,7 +124,13 @@ function ShipmentAudit({
 
 				{role === 'credit_control' && isApprovalAllowed ? (
 					<Modal.Footer className={styles.modal_footer_content}>
-						<ReleaseCard data={item} bucket={bucket} refetch={refetch} setShowModal={setShowModal} />
+						<ReleaseCard
+							data={item}
+							bucket={bucket}
+							refetch={refetch}
+							setShowModal={setShowModal}
+							activeTab={activeTab}
+						/>
 					</Modal.Footer>
 				) : null}
 			</Modal>

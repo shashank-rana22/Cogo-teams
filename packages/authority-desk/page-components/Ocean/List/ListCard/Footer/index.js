@@ -85,6 +85,7 @@ function Footer({ item = {}, role = '', tabsState = {}, refetch = () => {} }) {
 					closeModal={closeModal}
 					data={item}
 					refetch={refetch}
+					tabsState={tabsState}
 				/>
 			) : null}
 

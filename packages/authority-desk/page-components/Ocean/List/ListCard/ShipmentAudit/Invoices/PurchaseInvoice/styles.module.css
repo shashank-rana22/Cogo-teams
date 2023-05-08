@@ -10,7 +10,6 @@
 		width: 100%;
 	}
 
-	th,
 	tr {
 		display: flex;
 		padding: 6px;
@@ -26,6 +25,11 @@
 
 	td {
 		flex: 1;
+
+		&:nth-child(1) {
+			text-decoration: underline;
+			cursor: pointer;
+		}
 	}
 }
 

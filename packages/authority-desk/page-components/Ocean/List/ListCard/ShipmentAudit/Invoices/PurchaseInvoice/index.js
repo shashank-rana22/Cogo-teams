@@ -26,20 +26,20 @@ function PurchaseInvoice({ item }) {
 	return (
 		<div className={styles.container}>
 			<table>
-				<th>
-					<td>
+				<tr>
+					<th>
 						Invoice Number
-					</td>
-					<td>
+					</th>
+					<th>
 						Type
-					</td>
-					<td> Invoice Value</td>
-					<td>Status</td>
-					<td> Balance Amount</td>
-					<td> Due Date</td>
-					<td>Paid Amount</td>
-					<td>Payment Status</td>
-				</th>
+					</th>
+					<th> Invoice Value</th>
+					<th>Status</th>
+					<th> Balance Amount</th>
+					<th> Due Date</th>
+					<th>Paid Amount</th>
+					<th>Payment Status</th>
+				</tr>
 				<tbody>
 					{(data?.list || []).map((val) => (
 						<tr key={val.id}>
@@ -52,7 +52,7 @@ function PurchaseInvoice({ item }) {
 									);
 								}}
 							>
-								{val?.status !== 'DRAFT' ? val?.billNumber : val?.proformaNumber}
+								{val?.status !== 'DRAFT' ? val?.invoiceNumber : val?.proformaNumber}
 
 							</td>
 							<td>

@@ -55,7 +55,18 @@ function SalesInvoice({ item = {} }) {
 				</th>
 				{(data?.list || []).map((val) => (
 					<tr key={val.id}>
-						<td>{val?.invoiceNumber || val?.proformaNumber}</td>
+						<td
+							role="presentation"
+							onClick={() => {
+								window.open(
+									val?.status !== 'DRAFT' ? val?.billPdfUrl : val?.proformaPdfUrl,
+									'_blank',
+								);
+							}}
+						>
+							{val?.status !== 'DRAFT' ? val?.billNumber : val?.proformaNumber}
+
+						</td>
 						<td>{startCase(val?.invoiceType)}</td>
 						<td>
 							{formatAmount({

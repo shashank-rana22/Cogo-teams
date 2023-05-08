@@ -80,8 +80,7 @@ function Ocean() {
 					))}
 				</div>
 
-				<div>
-
+				<div className={styles.right_content}>
 					<div className={styles.version}>
 						<Toggle
 							size="md"

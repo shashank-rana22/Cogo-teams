@@ -7,8 +7,8 @@ import useUpdateShipmentBlDoDetails from '../../../../../hooks/useUpdateShipment
 import RestrictRequest from './RestrictRequest';
 import styles from './styles.module.css';
 
-function RequestModal({ closeModal = () => { }, data = {}, refetch = () => {} }) {
-	const { trade_type, bill_of_ladings, delivery_orders, is_request_doc_allowed } = data || {};
+function RequestModal({ closeModal = () => {}, data = {}, refetch = () => {}, tabsState = {} }) {
+	const { trade_type, bill_of_ladings, delivery_orders, can_request = false } = data || {};
 
 	const documentOptions = isEmpty(bill_of_ladings) ? delivery_orders : bill_of_ladings;
 
@@ -21,7 +21,12 @@ function RequestModal({ closeModal = () => { }, data = {}, refetch = () => {} })
 
 	const { formState: { errors }, control, handleSubmit } = useForm();
 
-	const { onUpdate, loading } = useUpdateShipmentBlDoDetails({ trade_type, onClose: closeModal, refetch });
+	const { onUpdate, loading } = useUpdateShipmentBlDoDetails({
+		trade_type,
+		onClose   : closeModal,
+		refetch,
+		activeTab : tabsState.activeTab,
+	});
 
 	const onSubmit = (formData) => {
 		const payload = {
@@ -35,7 +40,7 @@ function RequestModal({ closeModal = () => { }, data = {}, refetch = () => {} })
 		onUpdate(payload);
 	};
 
-	return !is_request_doc_allowed ? (
+	return !can_request ? (
 		<Modal show onClose={closeModal} showCloseIcon={!loading} className={styles.request_modal}>
 			<Modal.Header title="Request for Approval" />
 
