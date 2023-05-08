@@ -1,6 +1,13 @@
+import { Placeholder } from '@cogoport/components';
+
 import styles from './styles.module.css';
 
-function Mbl() {
+const WIDTH = '30px';
+const HEIGHT = '16px';
+
+function Mbl({ data = {}, loading }) {
+	const { stats:{ mbl_copies, total_organizations } = {} } = data || {};
+
 	return (
 		<div className={styles.container}>
 			<h3 className={styles.title}>MBL</h3>
@@ -9,12 +16,16 @@ function Mbl() {
 			<div className={styles.stats}>
 				<div className={styles.stats_sub_container}>
 					<div>Copies</div>
-					<div className={styles.value}>1</div>
+					{loading
+						? <Placeholder width={WIDTH} height={HEIGHT} />
+						: <div className={styles.value}>{mbl_copies || '-'}</div> }
 				</div>
 
 				<div className={styles.stats_sub_container}>
 					<div>Organizations</div>
-					<div className={styles.value}>1</div>
+					{loading
+						? <Placeholder width={WIDTH} height={HEIGHT} />
+						: <div className={styles.value}>{total_organizations || '-'}</div> }
 				</div>
 			</div>
 		</div>

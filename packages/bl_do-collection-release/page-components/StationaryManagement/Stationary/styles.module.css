@@ -14,3 +14,12 @@
 .body{
     padding: 8px;
 }
+
+.table_container{
+    padding: 8px;
+}
+
+.select_container{
+    width: 40%;
+    padding: 8px;
+}

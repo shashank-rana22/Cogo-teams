@@ -9,6 +9,7 @@ import TAB_CONFIG from '../configs/TAB_CONFIG.json';
 import FCL from './FCL';
 import FCLLocal from './FCL-Local';
 import LCL from './LCL';
+import StationaryManagement from './StationaryManagement';
 import styles from './styles.module.css';
 
 const trade_type_options = [
@@ -24,7 +25,7 @@ const deskMapping = {
 
 export default function BLDoCollectionDesk() {
 	const [stateProps, setStateProps] = useState({
-		activeTab     : 'bl',
+		activeTab     : 'stationary',
 		shipment_type : 'fcl_freight',
 		inner_tab     : 'knockoff_awaiting',
 		trade_type    : '',
@@ -120,7 +121,7 @@ export default function BLDoCollectionDesk() {
 					name="stationary"
 					title="Stationary Management"
 				>
-					Stationary Managemnt
+					<StationaryManagement />
 				</TabPanel>
 
 			</Tabs>

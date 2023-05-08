@@ -1,18 +1,19 @@
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
-const useListOrganizationDocumentInventory = () => {
+const useBlInventory = ({ defaultFilters = {}, defaultParams = {} }) => {
 	const [apiData, setApiData] = useState({});
-	const [filters, setFilters] = useState({});
+	const [filters, setFilters] = useState(defaultFilters);
 
 	const { page = 1, ...restFilters } = filters || {};
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/list_organization_document_inventory',
+		url    : 'fcl_freight/list_bl_inventory',
 		params : {
 			filters    : restFilters,
+			...defaultParams,
 			page,
 			page_limit : 10,
 		},
@@ -35,8 +36,8 @@ const useListOrganizationDocumentInventory = () => {
 	}, [apiTrigger, filters]);
 
 	return {
-		data: apiData, apiTrigger, loading, setFilters, filters,
+		data: apiData, apiTrigger, loading, filters, setFilters,
 	};
 };
 
-export default useListOrganizationDocumentInventory;
+export default useBlInventory;
