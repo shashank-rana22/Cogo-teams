@@ -149,5 +149,11 @@
 				"irn_label": "E-INVOICE"
 			}
 		}
+	},
+	"country_code": {
+		"IN": "IN",
+		"NL": "NL",
+		"SG": "SG",
+		"VN": "VN"
 	}
 }

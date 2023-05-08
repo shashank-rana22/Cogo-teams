@@ -19,6 +19,9 @@ interface Props {
 	showName?: boolean
 }
 
+const ORANGE = '#F68B21';
+const GREY = '#BDBDBD';
+
 function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 	const { profile = {} } = useSelector((store) => store);
 
@@ -46,17 +49,17 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 
 	const { sortType = '', sortBy = '' } = sort || {};
 
-	const sortStyleGrandTotalAsc = sortType === 'asc' && sortBy === 'grandTotal' ? '#F68B21' : '#BDBDBD';
+	const sortStyleGrandTotalAsc = sortType === 'asc' && sortBy === 'grandTotal' ? ORANGE : GREY;
 
-	const sortStyleGrandTotalDesc = sortType === 'desc' && sortBy === 'grandTotal' ? '#F68B21' : '#BDBDBD';
+	const sortStyleGrandTotalDesc = sortType === 'desc' && sortBy === 'grandTotal' ? ORANGE : GREY;
 
-	const sortStyleInvoiceDateAsc = sortType === 'asc' && sortBy === 'invoiceDate' ? '#F68B21' : '#BDBDBD';
+	const sortStyleInvoiceDateAsc = sortType === 'asc' && sortBy === 'invoiceDate' ? ORANGE : GREY;
 
-	const sortStyleInvoiceDateDesc = sortType === 'desc' && sortBy === 'invoiceDate' ? '#F68B21' : '#BDBDBD';
+	const sortStyleInvoiceDateDesc = sortType === 'desc' && sortBy === 'invoiceDate' ? ORANGE : GREY;
 
-	const sortStyleDueDateAsc = sortType === 'asc' && sortBy === 'dueDate' ? '#F68B21' : '#BDBDBD';
+	const sortStyleDueDateAsc = sortType === 'asc' && sortBy === 'dueDate' ? ORANGE : GREY;
 
-	const sortStyleDueDateDesc = sortType === 'desc' && sortBy === 'dueDate' ? '#F68B21' : '#BDBDBD';
+	const sortStyleDueDateDesc = sortType === 'desc' && sortBy === 'dueDate' ? ORANGE : GREY;
 
 	const columns = completedColumn({
 		refetch: getOrganizationInvoices,

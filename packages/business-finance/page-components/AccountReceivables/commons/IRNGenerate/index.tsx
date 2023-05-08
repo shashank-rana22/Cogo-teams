@@ -24,7 +24,10 @@ interface IRNGeneration {
 }
 
 const INVOICE_STATUS = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
-const financeRejectCheck = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
+
+const POSTED_STATUS = ['POSTED'];
+
+const IRN_FAILED_STATUS = ['IRN_FAILED'];
 
 const { cogoport_entities : CogoportEntity } = GLOBAL_CONSTANTS || {};
 
@@ -113,7 +116,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 							{IrnLabel}
 						</Button>
 					)}
-					{invoiceStatus === 'POSTED' && (
+					{POSTED_STATUS.includes(invoiceStatus) && (
 						<div className={styles.button_container}>
 							<Button
 								size="sm"
@@ -124,7 +127,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 							</Button>
 						</div>
 					)}
-					{financeRejectCheck.includes(invoiceStatus) && (
+					{INVOICE_STATUS.includes(invoiceStatus) && (
 						<div className={styles.button_container}>
 							<Button
 								size="sm"
@@ -180,7 +183,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 						</Modal>
 					)}
 
-					{invoiceStatus === 'IRN_FAILED' && (
+					{IRN_FAILED_STATUS.includes(invoiceStatus) && (
 						<div className={styles.button_container}>
 							<Button
 								size="sm"

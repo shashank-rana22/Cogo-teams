@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 
 export const invoiceListFilter = (country : string) => {
-	if (country === 'IN') {
+	if (country === GLOBAL_CONSTANTS.country_code.IN) {
 		return (
 			[
 				{
@@ -52,7 +52,7 @@ export const invoiceListFilter = (country : string) => {
 				},
 			]);
 	}
-	if (country === 'VN') {
+	if (country === GLOBAL_CONSTANTS.country_code.VN) {
 		return (
 			[
 				{

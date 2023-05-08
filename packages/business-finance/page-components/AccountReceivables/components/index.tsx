@@ -11,6 +11,8 @@ import Invoice from './Invoice';
 import Outstanding from './Outstanding';
 import styles from './styles.module.css';
 
+const REDIRECT_TABS = ['defaulters', 'manageBpr'];
+
 function AccountReceivables() {
 	const { push, query } = useRouter();
 	const [receivables, setReceivables] = useState<string>(query.active_tab || 'dashboard');
@@ -23,7 +25,7 @@ function AccountReceivables() {
 	const { id: partnerId } = partner || {};
 
 	const handleChange = (val:string) => {
-		if (['defaulters', 'manageBpr'].includes(val)) {
+		if (REDIRECT_TABS.includes(val)) {
 			window.location.href = `/${partnerId}/business-finance/account-receivables/${val}`;
 			return;
 		}
