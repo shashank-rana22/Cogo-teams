@@ -1,8 +1,9 @@
 // import CardList from '@cogo/bookings/commons/CardList';
 // import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { cl, ToolTip } from '@cogoport/components';
+import { cl, Tooltip } from '@cogoport/components';
 import { IcMArrowUp, IcMArrowDown, IcMDocument } from '@cogoport/icons-react';
 
+import ClickableDiv from '../../ClickableDiv';
 import PendingKnockOff from '../PendingKnockOff';
 
 import styles from './styles.module.css';
@@ -31,12 +32,12 @@ export default function Invoices({
 			<div className={cl`${styles.invoice_hover_container} ${styles.row}`}>
 				<div className={cl`${styles.text}`}>
 					<div className={cl`${styles.text}`}>UTR</div>
-					<div className={cl`${styles.text} ${styles.bold - colored}`}>{invoice?.utr_nos}</div>
+					<div className={cl`${styles.text} ${styles.bold_colored}`}>{invoice?.utr_nos}</div>
 				</div>
 
-				<div className={cl`${styles.text} ${styles.margin - left}`}>
+				<div className={cl`${styles.text} ${styles.margin_left}`}>
 					<div className={cl`${styles.text}`}>AMOUNT</div>
-					<div className={cl`${styles.text} ${styles.bold - colored}`}>
+					<div className={cl`${styles.text} ${styles.bold_colored}`}>
 						{/* {formatAmount({
 							amount   : invoice?.inr_invoice_total,
 							currency : invoice?.invoice_currency,
@@ -81,25 +82,24 @@ export default function Invoices({
 
 	return (
 		<>
-			<div className={styles.container} item={item}>
+			<div className={styles.container}>
 				{item?.trade_type === 'export' ? (
 					<div className={styles.invoice_container}>
 						<IcMDocument fill="#393f70" height={20} width={20} />
 
 						<div className={styles.invoice_container}>
-							<div className={cl`${styles.text} ${styles.invoice - faded}`}>INVOICE(S): </div>
+							<div className={cl`${styles.text} ${styles.invoice_faded}`}>INVOICE(S): </div>
 
 							{renderPart.map((invoice, i) => (
-								<ToolTip
+								<Tooltip
 									animation="shift-away"
-									theme="light-border"
 									content={invoiceHover(invoice)}
 								>
-									<div className={cl`${styles.text} ${styles.invoice - hover}`}>
+									<div className={cl`${styles.text} ${styles.invoice_hover}`}>
 										{invoice?.invoice_no}
-										{i < renderPart?.length - 1 ? ', ' : ' '}
+										{i < renderPart.length - 1 ? ', ' : ' '}
 									</div>
-								</ToolTip>
+								</Tooltip>
 							))}
 						</div>
 
@@ -114,15 +114,17 @@ export default function Invoices({
 					</div>
 				) : null}
 
-				<div className={styles.action_container} onClick={handleAccordionOpen}>
-					{accordionOpen ? 'Hide' : 'View'}
-					{' '}
-					Details
-					{accordionOpen ? (
-						<IcMArrowUp style={{ marginLeft: 4 }} />
-					) : (
-						<IcMArrowDown style={{ marginLeft: 4 }} />
-					)}
+				<div className={styles.action_container}>
+					<ClickableDiv onClick={handleAccordionOpen}>
+						{accordionOpen ? 'Hide' : 'View'}
+						{' '}
+						Details
+						{accordionOpen ? (
+							<IcMArrowUp style={{ marginLeft: 4 }} />
+						) : (
+							<IcMArrowDown style={{ marginLeft: 4 }} />
+						)}
+					</ClickableDiv>
 				</div>
 			</div>
 

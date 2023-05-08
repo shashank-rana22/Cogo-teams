@@ -72,17 +72,17 @@
 		font-weight: 500;
 	}
 
-	&.bold-colored {
+	&.bold_colored {
 		font-weight: 500;
 		color: #393f70;
 	}
 
-	&.invoice-faded {
+	&.invoice_faded {
 		display: inline;
 		opacity: 0.8;
 	}
 
-	&.invoice-hover {
+	&.invoice_hover {
 		display: inline;
 		margin: 0 4px;
 		font-weight: 500;

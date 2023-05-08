@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import { useState } from 'react';
 
 import Card from '../Card';
 import EmptyState from '../EmptyState';
@@ -6,6 +7,7 @@ import EmptyState from '../EmptyState';
 import styles from './styles.module.css';
 
 export default function List({ data = {}, stateProps, couldBeCardsCritical = false, setStateProps = () => {} }) {
+	const [openItem, setOpenItem] = useState(null);
 	const { activeTab } = stateProps;
 	const { list = [], total } = data;
 
@@ -19,7 +21,8 @@ export default function List({ data = {}, stateProps, couldBeCardsCritical = fal
 							item={item}
 							stateProps={stateProps}
 							couldBeCardsCritical={couldBeCardsCritical}
-							activeTab={activeTab}
+							openItem={openItem}
+							setOpenItem={setOpenItem}
 						/>
 					))}
 
