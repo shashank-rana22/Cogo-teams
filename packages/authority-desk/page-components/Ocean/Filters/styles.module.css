@@ -19,13 +19,13 @@
 	}
 
 	.icon_wrapper {
-		content: '';
+		position: relative;
+		top: -8px;
 		display: inline-block;
 		width: 8px;
 		height: 8px;
+		content: "";
 		background-color: var(--color-primary-error-red-2);
-		position: relative;
-		top: -8px;
 	}
 }
 
