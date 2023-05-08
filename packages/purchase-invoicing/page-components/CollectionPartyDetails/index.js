@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcMUpload } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import AccordianView from '../../common/Accordianview';
@@ -9,6 +9,7 @@ import ComparisionModal from '../../common/ComparisionModal';
 import getFormattedAmount from '../../common/helpers/formatAmount';
 import ServiceTables from '../../common/ServiceTable';
 import ToolTipWrapper from '../../common/ToolTipWrapper';
+import toastApiError from '../../utils/toastApiError';
 // import InvoicesInProcess from '../InvoicesInProcess';
 import InvoicesUploaded from '../InvoicesUploaded';
 
@@ -164,8 +165,11 @@ function CollectionPartyDetails({ collectionParty, refetch }) {
 							<Button
 								size="md"
 								onClick={() => {
-									setOpenComparision(true);
-									setOpen(false);
+									if (!isEmpty(uploadInvoiceUrl)) {
+										setOpenComparision(true);
+										setOpen(false);
+									}
+									toastApiError('Invoice is Required');
 								}}
 							>
 								Confirm
