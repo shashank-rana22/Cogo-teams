@@ -41,7 +41,7 @@ function InvoiceFormLayout({
 	const [selectedProforma, setSelectedProforma] = useState([]);
 	const [showCollectionParty, setShowCollectionParty] = useState(false);
 	const [showBankform, setShowBankForm] = useState(false);
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
 	const billingAddresses = collectionParty?.billing_addresses || [];
 	const otherAddresses = collectionParty?.other_addresses || [];
 	const allAddresses = [...billingAddresses, ...otherAddresses];
@@ -235,6 +235,7 @@ function InvoiceFormLayout({
 					purchaseInvoiceValues={purchaseInvoiceValues}
 					shipment_data={shipment_data}
 					open={isEdit}
+					primary_service={primary_service}
 				/>
 				<Taggings
 					showTagings={showTaggings}

@@ -1,0 +1,39 @@
+{
+	"name": "all_services",
+	"title": "Shipments",
+	"description": "Manage all your Shipments at a single place by viewing all your new bookings, completing pending tasks for each shipment, communicating with right stakeholders through comments and submitting invoices",
+	"filter_controls": [
+		{
+			"label": "Service Type",
+			"name": "service_type",
+			"type": "select-2",
+			"multiple": false,
+			"selectType": "pills",
+			"options": [
+				{ "label": "FCL Freight", "value": "fcl_freight" },
+				{ "label": "LCL Freight", "value": "lcl_freight" },
+				{ "label": "Air Freight", "value": "air_freight" },
+				{ "label": "LTL Freight", "value": "ltl_freight" },
+				{ "label": "FTL Freight", "value": "ftl_freight" },
+				{ "label": "Trailer Freight", "value": "trailer_freight" },
+				{ "label": "FCL Haulage", "value": "haulage_freight" },
+				{ "label": "FCL Customs", "value": "fcl_customs" },
+				{ "label": "LCL Customs", "value": "lcl_customs" },
+				{ "label": "Air Customs", "value": "air_customs" }
+			]
+		}
+	],
+	"list_states": {
+		"ongoing": ["shipment_received", "confirmed_by_importer_exporter", "in_progress"],
+		"past": ["completed", "cancelled", "aborted"]
+	},
+	"routeInfo": {
+		"origin_pickup": "origin_location",
+		"origin_port": "origin_port",
+		"origin_main_port": "origin_main_port",
+		"destination_main_port": "destination_main_port",
+		"destination_port": "destination_port",
+		"destination_drop": "destination_location"
+	},
+	"commnets": { "emptyContent": "" }
+}

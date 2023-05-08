@@ -3,10 +3,12 @@ import React from 'react';
 
 import AccordianView from '../../../common/Accordianview';
 import { PAYMENT_MODE_OPTIONS } from '../../../constants';
+import getLocationConfig from '../../../utils/getPortConfig';
 
 import styles from './styles.module.css';
 
-function AdditionalDetails({ control, errors, errMszs, open, purchaseInvoiceValues, shipment_data }) {
+function AdditionalDetails({ control, errors, errMszs, open, purchaseInvoiceValues, shipment_data, primary_service }) {
+	const { origin, destination } = getLocationConfig(primary_service);
 	return (
 		<AccordianView title="Additional Details" fullwidth showerror={errMszs.line_items} open={open}>
 			<div className={styles.flex}>
@@ -69,7 +71,7 @@ function AdditionalDetails({ control, errors, errMszs, open, purchaseInvoiceValu
 							name="pol"
 							placeholder="POL"
 							rules={{ required: true }}
-							value={purchaseInvoiceValues?.pol}
+							value={purchaseInvoiceValues?.pol || origin?.name}
 						/>
 						{errors?.pol && (
 							<div className={`${styles.errors}`}>
@@ -86,7 +88,7 @@ function AdditionalDetails({ control, errors, errMszs, open, purchaseInvoiceValu
 							name="pod"
 							placeholder="POD"
 							rules={{ required: true }}
-							value={purchaseInvoiceValues?.pod}
+							value={purchaseInvoiceValues?.pod || destination?.name}
 						/>
 						{errors?.pod && (
 							<div className={`${styles.errors}`}>

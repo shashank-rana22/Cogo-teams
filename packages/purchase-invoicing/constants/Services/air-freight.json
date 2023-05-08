@@ -1,0 +1,109 @@
+{
+	"name": "fcl_freight_service",
+	"title": "Shipments",
+	"description": "Manage all your Shipments at a single place by viewing all your new bookings, completing pending tasks for each shipment, communicating with right stakeholders through comments and submitting invoices",
+	"filter_controls": [
+		{
+			"label": "Airway bill no.",
+			"name": "airway_bill_number",
+			"type": "text"
+		},
+		{
+			"name": "origin_airport_id",
+			"label": "Origin Airport",
+			"multiple": false,
+			"type": "location-select",
+			"optionsListKey": "locations",
+			"params": {
+				"filters": {
+					"type": ["airport"]
+				}
+			}
+		},
+		{
+			"name": "origin_country_id",
+			"label": "Origin Country ",
+			"multiple": false,
+			"sort": true,
+			"type": "select-2",
+			"optionsListKey": "countries"
+		},
+		{
+			"name": "destination_airport_id",
+			"label": "Destination Airport",
+			"type": "location-select",
+			"optionsListKey": "locations",
+			"params": {
+				"filters": {
+					"type": ["airport"]
+				}
+			},
+			"multiple": false
+		},
+		{
+			"name": "destination_country_id",
+			"label": "Destination Country",
+			"sort": true,
+			"type": "select-2",
+			"optionsListKey": "countries",
+			"multiple": false
+		},
+		{
+			"name": "commodity",
+			"label": "Commodity",
+			"type": "select-2",
+			"commodityType": "air_freight"
+		},
+		{
+			"type": "select-2",
+			"optionsListKey": "air-lines",
+			"types": ["seller"],
+			"name": "airline_id",
+			"label": "Airline",
+			"multiple": false,
+			"defaultOptions": true
+		},
+		{
+			"name": "state",
+			"label": "State",
+			"type": "select-2",
+			"options": [
+				{ "label": "Cargo handed over at origin", "value": "cargo_handed_over_at_origin" },
+				{ "label": "Flight departed", "value": "flight_departed" },
+				{ "label": "Flight arrived", "value": "flight_arrived" },
+				{
+					"label": "Cargo handed over at destination",
+					"value": "cargo_handed_over_at_destination"
+				},
+				{ "label": "Confirmed by service provider", "value": "confirmed_by_service_provider" },
+				{
+					"label": "Awaiting service provider confirmation",
+					"value": "awaiting_service_provider_confirmation"
+				},
+				{ "label": "Completed", "value": "completed" },
+				{ "label": "Cancelled", "value": "cancelled" },
+				{ "label": "Aborted", "value": "aborted" }
+			]
+		}
+	],
+	"list_states": {
+		"ongoing": [
+			"cargo_handed_over_at_origin",
+			"flight_departed",
+			"flight_arrived",
+			"cargo_handed_over_at_destination",
+			"confirmed_by_service_provider",
+			"awaiting_service_provider_confirmation"
+		],
+		"past": ["completed", "cancelled", "aborted"]
+	},
+	"routeInfo": {
+		"origin_pickup": "origin_location",
+		"origin_port": "origin_airport",
+		"origin_main_port": "origin_main_port",
+		"destination_main_port": "destination_main_port",
+		"destination_port": "destination_airport",
+		"destination_drop": "destination_location"
+	},
+	"commnets": { "emptyContent": "" }
+}

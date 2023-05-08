@@ -1,0 +1,65 @@
+{
+	"name": "air_customs_service",
+	"title": "Shipments",
+	"filter_controls": [
+		{
+			"name": "airport_id",
+			"label": "Location",
+			"multiple": false,
+			"type": "location-select",
+			"optionsListKey": "locations",
+			"params": {
+				"filters": {
+					"type": ["airport"]
+				}
+			}
+		},
+		{
+			"name": "country_id",
+			"label": "Country",
+			"multiple": false,
+			"sort": true,
+			"type": "select-2",
+			"optionsListKey": "countries"
+		},
+		{
+			"name": "commodity",
+			"label": "Commodity",
+			"type": "select-2",
+			"commodityType": "air_customs"
+		},
+		{
+			"name": "state",
+			"label": "State",
+			"type": "select-2",
+			"options": [
+				{ "label": "Customs cleared", "value": "customs_cleared" },
+				{ "label": "Confirmed by service provider", "value": "confirmed_by_service_provider" },
+				{
+					"label": "Awaiting service provider confirmation",
+					"value": "awaiting_service_provider_confirmation"
+				},
+				{ "label": "Completed", "value": "completed" },
+				{ "label": "Cancelled", "value": "cancelled" },
+				{ "label": "Aborted", "value": "aborted" }
+			]
+		}
+	],
+	"list_states": {
+		"ongoing": [
+			"customs_cleared",
+			"confirmed_by_service_provider",
+			"awaiting_service_provider_confirmation"
+		],
+		"past": ["completed", "cancelled", "aborted"]
+	},
+	"routeInfo": {
+		"origin_pickup": "origin_location",
+		"origin_port": "airport",
+		"origin_main_port": "origin_main_port",
+		"destination_main_port": "destination_main_port",
+		"destination_port": "destination_port",
+		"destination_drop": "destination_location"
+	},
+	"commnets": { "emptyContent": "" }
+}

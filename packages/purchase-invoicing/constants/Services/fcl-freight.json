@@ -1,0 +1,117 @@
+{
+	"name": "fcl_freight_service",
+	"title": "Shipments",
+	"description": "Manage all your Shipments at a single place by viewing all your new bookings, completing pending tasks for each shipment, communicating with right stakeholders through comments and submitting invoices",
+	"filter_controls": [
+		{
+			"label": "BL Number",
+			"name": "bl_number",
+			"type": "text"
+		},
+		{
+			"name": "origin_port_id",
+			"label": "Origin Port",
+			"multiple": false,
+			"type": "location-select",
+			"optionsListKey": "locations",
+			"params": {
+				"filters": {
+					"type": ["seaport"]
+				}
+			}
+		},
+		{
+			"name": "origin_country_id",
+			"label": "Origin Country ",
+			"multiple": false,
+			"sort": true,
+			"type": "select-2",
+			"optionsListKey": "countries"
+		},
+		{
+			"name": "destination_port_id",
+			"label": "Destination Location",
+			"type": "location-select",
+			"optionsListKey": "locations",
+			"params": {
+				"filters": {
+					"type": ["seaport"]
+				}
+			}
+		},
+		{
+			"name": "destination_country_id",
+			"label": "Destination Country",
+			"type": "select-2",
+			"optionsListKey": "countries",
+			"sort": true,
+			"multiple": false
+		},
+		{
+			"name": "container_size",
+			"label": "Container Size",
+			"type": "select-2",
+			"optionsListKey": "container-sizes",
+			"selectType": "pills"
+		},
+		{
+			"name": "container_type",
+			"label": "Container Type",
+			"type": "select-2",
+			"optionsListKey": "container-types"
+		},
+		{
+			"name": "commodity",
+			"label": "Commodity",
+			"type": "select-2",
+			"commodityType": "freight"
+		},
+		{
+			"name": "shipping_line_id",
+			"label": "Shipping line",
+			"type": "select-2",
+			"optionsListKey": "shipping-lines",
+			"defaultOptions": true,
+			"multiple": false
+		},
+		{
+			"name": "state",
+			"label": "State",
+			"type": "select-2",
+			"options": [
+				{ "label": "Vessel arrived", "value": "vessel_arrived" },
+				{ "label": "Containers gated out", "value": "containers_gated_out" },
+				{ "label": "Vessel departed", "value": "vessel_departed" },
+				{ "label": "Containers gated in", "value": "containers_gated_in" },
+				{ "label": "Confirmed by service provider", "value": "confirmed_by_service_provider" },
+				{
+					"label": "Awaiting service provider confirmation",
+					"value": "awaiting_service_provider_confirmation"
+				},
+				{ "label": "Completed", "value": "completed" },
+				{ "label": "Cancelled", "value": "cancelled" },
+				{ "label": "Aborted", "value": "aborted" }
+			]
+		}
+	],
+	"list_states": {
+		"ongoing": [
+			"vessel_arrived",
+			"containers_gated_out",
+			"vessel_departed",
+			"containers_gated_in",
+			"confirmed_by_service_provider",
+			"awaiting_service_provider_confirmation"
+		],
+		"past": ["completed", "cancelled", "aborted"]
+	},
+	"routeInfo": {
+		"origin_pickup": "origin_location",
+		"origin_port": "origin_port",
+		"origin_main_port": "origin_main_port",
+		"destination_main_port": "destination_main_port",
+		"destination_port": "destination_port",
+		"destination_drop": "destination_location"
+	},
+	"commnets": { "emptyContent": "" }
+}

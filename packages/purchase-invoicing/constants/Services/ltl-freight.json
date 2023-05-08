@@ -1,0 +1,79 @@
+{
+	"name": "ltl_freight_service",
+	"title": "Shipments",
+	"filter_controls": [
+		{
+			"name": "origin_location_id",
+			"label": "Origin Location",
+			"multiple": false,
+			"type": "location-select",
+			"optionsListKey": "locations",
+			"params": {
+				"filters": {
+					"type": ["pincode", "seaport", "airport"]
+				}
+			}
+		},
+		{
+			"name": "destination_location_id",
+			"label": "Destination location",
+			"type": "location-select",
+			"optionsListKey": "locations",
+			"params": {
+				"filters": {
+					"type": ["pincode", "seaport", "airport"]
+				}
+			},
+			"multiple": false
+		},
+		{
+			"name": "commodity",
+			"label": "Commodity",
+			"type": "select-2",
+			"commodityType": "hazardous"
+		},
+		{
+			"name": "trade_type",
+			"label": "Trade type",
+			"type": "select-2",
+			"optionsListKey": "trade-types",
+			"selectType": "pills",
+			"multiple": false
+		},
+		{
+			"name": "state",
+			"label": "State",
+			"type": "select-2",
+			"options": [
+				{ "label": "Cargo dropped", "value": "cargo_dropped" },
+				{ "label": "Cargo picked up", "value": "cargo_picked_up" },
+				{ "label": "Confirmed by service provider", "value": "confirmed_by_service_provider" },
+				{
+					"label": "Awaiting service provider confirmation",
+					"value": "awaiting_service_provider_confirmation"
+				},
+				{ "label": "Completed", "value": "completed" },
+				{ "label": "Cancelled", "value": "cancelled" },
+				{ "label": "Aborted", "value": "aborted" }
+			]
+		}
+	],
+	"list_states": {
+		"ongoing": [
+			"cargo_dropped",
+			"cargo_picked_up",
+			"confirmed_by_service_provider",
+			"awaiting_service_provider_confirmation"
+		],
+		"past": ["completed", "cancelled", "aborted"]
+	},
+	"routeInfo": {
+		"origin_pickup": "origin_location",
+		"origin_port": "origin_port",
+		"origin_main_port": "origin_main_port",
+		"destination_main_port": "destination_main_port",
+		"destination_port": "destination_drop",
+		"destination_drop": "destination_location"
+	},
+	"commnets": { "emptyContent": "" }
+}
