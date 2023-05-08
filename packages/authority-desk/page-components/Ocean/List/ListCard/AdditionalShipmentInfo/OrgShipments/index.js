@@ -5,8 +5,8 @@ import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../../../../commons/EmptyState';
-import RedirectToShipmentDetailPage from '../../../../../../commons/RedirectToShipmentDetailPage';
 import useListShipments from '../../../../../../hooks/useListShipments';
+import useRedirectToShipmentDetailPage from '../../../../../../hooks/useRedirectToShipmentDetailPage';
 
 import styles from './styles.module.css';
 
@@ -17,7 +17,7 @@ function OrgShipments({ item = {}, filters = {}, setFilters = () => {} }) {
 
 	const { list, total_count } = data;
 
-	const { redirect } = RedirectToShipmentDetailPage();
+	const { redirect } = useRedirectToShipmentDetailPage();
 
 	if (list?.length === 0 && !loading) {
 		return <EmptyState />;

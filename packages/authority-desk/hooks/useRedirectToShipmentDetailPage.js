@@ -1,6 +1,6 @@
 import { useRouter } from '@cogoport/next';
 
-function RedirectToShipmentDetailPage() {
+export default function useRedirectToShipmentDetailPage() {
 	const router = useRouter();
 
 	const redirect = ({ service = '', shipment = {} }) => {
@@ -20,5 +20,3 @@ function RedirectToShipmentDetailPage() {
 		redirect,
 	};
 }
-
-export default RedirectToShipmentDetailPage;
