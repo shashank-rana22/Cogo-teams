@@ -89,6 +89,17 @@ function ShipmentAudit({
 				/>
 				<Modal.Body className={styles.modal_body_content}>
 					<div className={styles.shipment_content_container}>
+						<div className={styles.top_bar}>
+							<div className={styles[item?.trade_type]}>
+								{startCase(item?.trade_type)}
+							</div>
+
+							<div className={styles.status}>
+					&nbsp; Status: &nbsp;
+								{startCase(freight_service?.state)}
+							</div>
+
+						</div>
 						<div className={styles.shipment_details}>
 							<ShipmentBreif item={item} service={service} redirectable />
 

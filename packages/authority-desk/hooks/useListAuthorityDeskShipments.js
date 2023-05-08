@@ -1,4 +1,5 @@
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useState, useCallback, useEffect } from 'react';
 
 import toastApiError from '../utils/toastApiError';
@@ -9,6 +10,7 @@ const shipmentStates = ['shipment_received', 'confirmed_by_importer_exporter', '
 const additional_methods = ['pagination', 'count_stats', 'invoice_status', 'ongoing_shipment_stats'];
 
 function useListAuthorityDeskShipments({ activeTab, service, bucket, filters, subApprovedBucket }) {
+	const { selected_agent_id } = useSelector(({ profile }) => profile) || {};
 	const [data, setData] = useState(emptyData);
 
 	const [{ loading }, trigger] = useRequest({
@@ -26,6 +28,7 @@ function useListAuthorityDeskShipments({ activeTab, service, bucket, filters, su
 						state           : state || shipmentStates,
 						is_job_closed   : is_job_closed === 'yes',
 						document_status : subApprovedBucket || bucket,
+						stakeholder_id  : selected_agent_id,
 						...restFilters || {},
 					},
 					page       : page || 1,
@@ -39,7 +42,7 @@ function useListAuthorityDeskShipments({ activeTab, service, bucket, filters, su
 			toastApiError(err);
 			setData(emptyData);
 		}
-	}, [trigger, bucket, filters, subApprovedBucket]);
+	}, [trigger, bucket, filters, subApprovedBucket, selected_agent_id]);
 
 	useEffect(() => {
 		listShipments();
