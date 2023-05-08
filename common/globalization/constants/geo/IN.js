@@ -115,14 +115,16 @@ export default {
 			'017856dc-b424-4145-9181-5680732cb33b',
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // LCL So2
 		],
-		credit_controller_id   : 'b2af88f9-84e4-44fd-92f8-12f74c55e5ae',
-		vietnam_business_heads : [
-			'7f6f97fd-c17b-4760-a09f-d70b6ad963e8', // Rishi Agarwal
-		],
-		business_heads: [
+		lastmile_ops_id         : 'b808aabb-2245-4369-aaa7-6ebd2d5de20b',
+		lastmile_ops_manager_id : '3965f742-f4e5-420a-911c-f3657be05028',
+		credit_controller_id    : 'b2af88f9-84e4-44fd-92f8-12f74c55e5ae',
+		business_heads          : [
 			'7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44', // Hrishikesh Kulkarni
 			'95d62549-8ab6-4ee5-a655-9edd0ec46dac', // Purnendu Shekhar
 			'cd8dde11-678c-4467-85b2-2e2d6055bef4', // Amitabh Shankar
+		],
+		vietnam_business_heads: [
+			'7f6f97fd-c17b-4760-a09f-d70b6ad963e8', // Rishi Agarwal
 		],
 		prod_kam_cp           : 'e0e2f83b-9e5b-41a3-948e-ab1ec9b0f3ad',
 		prod_es_sales         : 'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
