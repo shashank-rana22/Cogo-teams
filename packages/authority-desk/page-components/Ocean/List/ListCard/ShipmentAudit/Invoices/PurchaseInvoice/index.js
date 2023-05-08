@@ -1,6 +1,6 @@
 import { Loader } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { format } from '@cogoport/utils';
+import { format, upperCase, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../../../../../commons/EmptyState';
@@ -37,15 +37,26 @@ function PurchaseInvoice({ item }) {
 					<td>Status</td>
 					<td> Balance Amount</td>
 					<td> Due Date</td>
-					<td>Payment Amount</td>
+					<td>Paid Amount</td>
 					<td>Payment Status</td>
 				</th>
 				<tbody>
 					{(data?.list || []).map((val) => (
 						<tr key={val.id}>
-							<td>{val?.status !== 'DRAFT' ? val?.billNumber : val?.proformaNumber}</td>
+							<td
+								role="presentation"
+								onClick={() => {
+									window.open(
+										val?.status !== 'DRAFT' ? val?.billPdfUrl : val?.proformaPdfUrl,
+										'_blank',
+									);
+								}}
+							>
+								{val?.status !== 'DRAFT' ? val?.billNumber : val?.proformaNumber}
+
+							</td>
 							<td>
-								{val?.billType}
+								{startCase(val?.billType)}
 							</td>
 							<td>
 								{formatAmount({
@@ -60,7 +71,7 @@ function PurchaseInvoice({ item }) {
 
 							</td>
 							<td>
-								{val?.status}
+								{startCase(val?.status)}
 							</td>
 							<td>
 								{formatAmount({
@@ -87,7 +98,7 @@ function PurchaseInvoice({ item }) {
 								})}
 
 							</td>
-							<td>{val?.paymentStatus}</td>
+							<td>{upperCase(val?.paymentStatus)}</td>
 						</tr>
 					))}
 				</tbody>

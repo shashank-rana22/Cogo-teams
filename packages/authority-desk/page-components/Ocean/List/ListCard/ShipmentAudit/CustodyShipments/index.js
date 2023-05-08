@@ -5,6 +5,7 @@ import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import EmptyState from '../../../../../../commons/EmptyState';
+import RedirectToShipmentDetailPage from '../../../../../../commons/RedirectToShipmentDetailPage';
 import useListShipments from '../../../../../../hooks/useListShipments';
 
 import styles from './styles.module.css';
@@ -30,6 +31,8 @@ function CustodyShipments({ item = {} }) {
 			</div>
 		);
 	}
+
+	const { redirect } = RedirectToShipmentDetailPage();
 
 	const renderPagination = (
 		<Pagination
@@ -85,7 +88,13 @@ function CustodyShipments({ item = {} }) {
 				<tbody>
 					{(list || []).map((val) => (
 						<tr className={styles.row} key={val.serial_id}>
-							<td>{val?.serial_id}</td>
+							<td
+								role="presentation"
+								onClick={() => redirect({ service: val?.shipment_type, shipment: val })}
+							>
+								{val?.serial_id}
+
+							</td>
 							<td>
 								{startCase(val?.shipment_type)}
 								{' '}
@@ -109,7 +118,7 @@ function CustodyShipments({ item = {} }) {
 							<td>
 								{formatAmount({
 									amount   : val?.cargo_value,
-									currency : val?.cargo_currency,
+									currency : val?.cargo_value_currency,
 									options  : {
 										style                 : 'currency',
 										currencyDisplay       : 'code',

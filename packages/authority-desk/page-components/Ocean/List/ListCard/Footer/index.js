@@ -40,13 +40,12 @@ function Footer({ item = {}, role = '', tabsState = {}, refetch = () => {} }) {
 			<div className={styles.footer}>
 				<div className={styles.organization_details}>
 					<div className={styles.business_name}>
-						Customer Name -
-						{' '}
+						Customer Name: &nbsp;
 						{item?.importer_exporter?.business_name}
 								&nbsp;
 					</div>
 					<div>
-						Outstanding : &nbsp;
+						Outstanding: &nbsp;
 						{formatAmount({
 							amount: item?.invoice_status
 								?.outstanding_amount,
@@ -59,8 +58,7 @@ function Footer({ item = {}, role = '', tabsState = {}, refetch = () => {} }) {
 						})}
 					</div>
 					<div>
-						On-going shipments : &nbsp; &nbsp;
-						{' '}
+						On-going shipments: &nbsp;
 						{item?.ongoing_shipments}
 					</div>
 				</div>
