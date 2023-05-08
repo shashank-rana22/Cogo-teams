@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
+
+import { formatDate } from '../utils/formatDate';
 
 export const formatLineItems = (line_items, codes) => {
 	const newLineItems = (line_items || []).map((item) => {
@@ -102,7 +102,7 @@ export const validateData = (data, extraData) => {
 	];
 
 	const collectionPartyBA = allBillingAddresses?.find(
-		(address) => address?.id === formValues?.collection_party_address,
+		(address) => address?.tax_number === formValues?.collection_party_address,
 	) || {};
 	if (!validatePincode(billingPartyAddress?.pin_code?.toString(), 'Buyer')) {
 		return false;
@@ -189,7 +189,7 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 
 	const isTagginsAllowed = billType === 'BILL';
 	const collectionPartyBA = allBillingAddresses?.find(
-		(address) => address.id === formValues?.collection_party_address,
+		(address) => address.tax_number === formValues?.collection_party_address,
 	) || {};
 
 	const collectionPartyPOC = collectionPartyObj?.poc_data?.[0] || {};
@@ -210,12 +210,12 @@ export const formatCollectionPartyPayload = (data, extraData) => {
                 extraData?.invoiceStatus === 'init' ? 'INITIATED' : extraData?.invoiceStatus?.toUpperCase(),
 			isProforma : formValues?.invoice_type === 'proforma_invoice',
 			isTaxable  : collectionPartyObj?.is_tax_applicable,
-			billDate:
-				formatDate({
-					date       : data.invoice_date || formValues?.invoice_date,
-					dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd hh:mm:ss'],
-					formatType : 'date',
-				}),
+			billDate   : formatDate(
+				data.invoice_date || formValues?.invoice_date,
+				'yyyy-MM-dd hh:mm:ss',
+				{},
+				true,
+			),
 			placeOfSupply : formValues?.place_of_supply,
 			billCurrency  : formValues?.invoice_currency || ocrData?.invoice_currency,
 			creditDays:

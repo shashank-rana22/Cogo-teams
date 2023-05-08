@@ -1,5 +1,7 @@
-import countries from './countries.json';
+/* eslint-disable import/no-unresolved */
 import sort from './sortTabel';
+
+import countries from '@/data-store/constants/countries.json';
 
 const previousCurriencies = [];
 const optionsAll = [];

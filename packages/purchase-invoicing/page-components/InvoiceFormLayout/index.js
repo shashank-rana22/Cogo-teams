@@ -208,6 +208,7 @@ function InvoiceFormLayout({
 					open={isEdit}
 					setShowCollectionParty={setShowCollectionParty}
 					setShowBankForm={setShowBankForm}
+					formValues={formValues}
 				/>
 
 				<LineItemDetails

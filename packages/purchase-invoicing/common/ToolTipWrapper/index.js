@@ -3,18 +3,18 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function ToolTipWrapper({ text = '', maxlength = 25, content, children }) {
+function ToolTipWrapper({ text = '', maxlength = 25, content, children, render }) {
 	const renderToolTip = text.length > maxlength;
 
 	return (
 		<div>
-			{renderToolTip ? (
+			{(render || renderToolTip) ? (
 				<Tooltip
 					placement="bottom"
 					content={content || <span className={styles.contenttext}>{text}</span>}
 					interactive={false}
 				>
-					<span>{`${text.slice(0, maxlength)}...`}</span>
+					<span>{render ? children : `${text.slice(0, maxlength)}...`}</span>
 				</Tooltip>
 			) : children || text}
 		</div>

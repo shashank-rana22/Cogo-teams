@@ -53,6 +53,7 @@ function CollectionPartyDetails({ collectionParty, refetch }) {
 					<ToolTipWrapper
 						text={services}
 						maxlength={2}
+						render
 						content={(
 							<>
 								{serviceswrapper(services)}

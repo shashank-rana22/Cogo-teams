@@ -1,7 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 
 import useDebounceQuery from './useDebounceQuery';
 
@@ -36,11 +35,11 @@ function useGetAsyncOptions({
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(optionValues)]);
 
-	useEffect(() => {
+	useCallback(() => {
 		if (onOptionsChange) {
 			onOptionsChange(listData?.list || []);
 		}
-	}, [JSON.stringify(listData?.list || [])]);
+	}, [listData?.list, onOptionsChange]);
 
 	const onSearch = (inputValue) => {
 		debounceQuery(inputValue);

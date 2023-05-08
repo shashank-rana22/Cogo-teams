@@ -22,6 +22,7 @@ function CollectionPartyDetails({
 	open,
 	setShowCollectionParty,
 	setShowBankForm,
+	formValues,
 }) {
 	const organization_id = serviceProvider?.service_provider_id;
 
@@ -77,7 +78,7 @@ function CollectionPartyDetails({
 				if (
 					address?.address
 					=== purchaseInvoiceValues?.collection_party_address
-					|| address?.id === purchaseInvoiceValues?.collection_party_address
+					|| address?.tax_number === purchaseInvoiceValues?.collection_party_address
 				) {
 					newCollectionParty = cp;
 					collectionPartyAdd = address;
@@ -135,7 +136,7 @@ function CollectionPartyDetails({
 						</div>
 					)}
 				</div>
-				{!isEmpty(collectionPartyAddresses) && (
+				{!isEmpty(formValues?.collection_party) && (
 					<div className={`${styles.selectcontainer} ${styles.marginleft}`}>
 						<div className={styles.label}>Select Collection Party Address</div>
 						<SelectController
@@ -153,7 +154,7 @@ function CollectionPartyDetails({
 						)}
 					</div>
 				)}
-				{!isEmpty(collectionParty) && (
+				{!isEmpty(formValues?.collection_party) && (
 					<div className={`${styles.selectcontainer} ${styles.marginleft}`}>
 						<div className={styles.label}>Select Bank Details</div>
 						<SelectController
