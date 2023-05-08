@@ -96,6 +96,12 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'bookings',
 	},
+	{
+		api          : 'list_bl_inventory',
+		access_type  : 'private',
+		service_name : 'bookings',
+		feature      : 'inventory_management',
+	},
 ];
 
 export default apis;
