@@ -1,4 +1,5 @@
 import { Loader } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -37,7 +38,16 @@ function Organizations({ item }) {
 								</div>
 								<div>
 									Total Outstanding Amount: &nbsp;
-									{val?.totalOutstandingAmount}
+
+									{formatAmount({
+										amount   : val?.totalOutstandingAmount,
+										currency : val?.currency,
+										options  : {
+											style                 : 'currency',
+											currencyDisplay       : 'code',
+											maximumFractionDigits : 2,
+										},
+									})}
 								</div>
 							</div>
 
