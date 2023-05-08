@@ -6,6 +6,7 @@ import Courses from './components/Courses';
 import SearchFilter from './components/SearchFilter';
 import Students from './components/Students';
 import Header from './Header';
+import styles from './styles.module.css';
 
 const TABS_MAPPING = {
 	courses: {
@@ -37,27 +38,29 @@ function Course() {
 	};
 
 	return (
-		<div>
+		<div className={styles.container}>
 			<Header />
+			<div className={styles.tabs_container}>
 
-			<Tabs
-				activeTab={activeTab}
-				themeType="primary"
-				onChange={handleChangeTab}
-				fullWidth
-			>
-				{Object.keys(TABS_MAPPING).map((item) => {
-					const activeComponentProps = tabPropsMapping[item];
-					const { title, component: ActiveComponent } = TABS_MAPPING[item];
+				<Tabs
+					activeTab={activeTab}
+					themeType="primary"
+					onChange={handleChangeTab}
+					fullWidth
+				>
+					{Object.keys(TABS_MAPPING).map((item) => {
+						const activeComponentProps = tabPropsMapping[item];
+						const { title, component: ActiveComponent } = TABS_MAPPING[item];
 
-					return (
-						<TabPanel key={item} name={item} title={title}>
-							<ActiveComponent {...activeComponentProps} />
-						</TabPanel>
-					);
-				})}
-			</Tabs>
-			<SearchFilter />
+						return (
+							<TabPanel key={item} name={item} title={title}>
+								<ActiveComponent {...activeComponentProps} />
+							</TabPanel>
+						);
+					})}
+				</Tabs>
+				<SearchFilter />
+			</div>
 		</div>
 	);
 }
