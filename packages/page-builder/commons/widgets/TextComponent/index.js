@@ -1,11 +1,9 @@
-import { IcMEdit } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import 'react-quill/dist/quill.bubble.css';
 import useUpdateComponentsContent from '../../../helpers/useUpdateComponentsContent';
 import DragPreview from '../../DragPreview';
 
-import styles from './styles.module.css';
 import TextEditorModal from './TextEditorModal';
 
 function TextComponent(props) {
@@ -56,31 +54,22 @@ function TextComponent(props) {
 	}
 
 	return (
-		<div className={styles.block_wrapper}>
+		<div>
 			<div
 				style={{ cursor: 'pointer' }}
 				className="ql-editor"
+				role="presentation"
+				cursor="pointer"
+				onClick={() => {
+					if (modeType === 'edit') {
+						setEditorModal((prev) => ({
+							...prev,
+							show: true,
+						}));
+					}
+				}}
 				dangerouslySetInnerHTML={{ __html: content }}
 			/>
-
-			{modeType === 'edit' && (
-				<div className={styles.show_wrapper}>
-					<IcMEdit
-						height="15px"
-						width="15px"
-						fill="#ffffff"
-						cursor="pointer"
-						onClick={() => {
-							if (modeType === 'edit') {
-								setEditorModal((prev) => ({
-									...prev,
-									show: true,
-								}));
-							}
-						}}
-					/>
-				</div>
-			)}
 
 			<TextEditorModal
 				handleUpdateContent={handleUpdateContent}
