@@ -77,7 +77,9 @@ function GenerateMAWB({
 	const [activeHawb, setActiveHawb] = useState(hawbDetails[0]);
 	const [activeKey, setActiveKey] = useState('basic');
 
-	const fields = mawbControls(disableClass);
+	const editHawbNumberCondition = !activeHawb.isNew;
+
+	const fields = mawbControls(disableClass, editHawbNumberCondition);
 
 	const { packingData, packingList } = usePackingList();
 

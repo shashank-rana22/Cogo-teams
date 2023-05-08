@@ -1,6 +1,6 @@
 import currencies from '../currencies';
 
-const mawbControls = (disableClass) => ({
+const mawbControls = (disableClass, editHawbNumberCondition) => ({
 	hawb_controls: [
 		{
 			name        : 'document_number',
@@ -8,6 +8,7 @@ const mawbControls = (disableClass) => ({
 			type        : 'text',
 			span        : 5,
 			placeholder : 'Document Number',
+			disabled    : editHawbNumberCondition,
 		},
 	],
 	basic: [
