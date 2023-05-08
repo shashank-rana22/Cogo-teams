@@ -30,7 +30,7 @@
 	& > select,
 	input {
 		height: 38px;
-		font-size: 16px;
+		font-size: var(--font-size-md);
 	}
 
 	:global {

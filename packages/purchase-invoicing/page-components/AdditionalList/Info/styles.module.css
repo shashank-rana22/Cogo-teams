@@ -7,7 +7,7 @@
 	align-items: center;
 	margin: 0;
 	margin-left: 18px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	font-weight: 400;
 	line-height: 12px;
 	color: #000;
@@ -18,7 +18,7 @@
 	display: flex;
 	align-items: center;
 	padding: 4px 10px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	line-height: 12px;
 	color: #393f70;
 	text-align: center;

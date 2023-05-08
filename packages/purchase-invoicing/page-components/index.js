@@ -19,7 +19,7 @@ function PurchaseInvoicing({ shipmentData }) {
 			<AccordianView title="Manage Services" open={isEdit} shipmentData={shipmentData}>
 				<AdditionalServiceList />
 			</AccordianView>
-			{!collectionPartyLoading ? (
+			{collectionPartyLoading ? <Loader /> : (
 				<>
 					{collectionPartyList.map((collectionParty) => (
 						<CollectionPartyDetails
@@ -29,7 +29,7 @@ function PurchaseInvoicing({ shipmentData }) {
 						/>
 					))}
 				</>
-			) : <Loader />}
+			)}
 		</div>
 	);
 }

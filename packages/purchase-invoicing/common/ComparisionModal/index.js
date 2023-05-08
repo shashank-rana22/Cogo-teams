@@ -31,11 +31,12 @@ function ComparisionModal({
 	const [collectionParty, setCollectionParty] = useState({});
 	const [errors, setErrors] = useState({});
 	const [errMszs, setErrMszs] = useState({});
-
-	let contentText = <span className={styles.headingmodal}>STEP 1 - Match Purchase Invoice With Cogo Invoice</span>;
-	if (step === 2) {
-		contentText = <span className={styles.headingmodal}>STEP 2a - Match and Lock Items with Live Invoice</span>;
-	}
+	const contentText = (
+		<span className={styles.headingmodal}>
+			{step === 2 ? 'STEP 2a - Match and Lock Items with Live Invoice'
+				: 'STEP 1 - Match Purchase Invoice With Cogo Invoice'}
+		</span>
+	);
 
 	const onError = (errordata) => {
 		setErrors(errordata);

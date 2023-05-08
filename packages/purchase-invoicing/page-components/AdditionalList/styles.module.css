@@ -15,7 +15,7 @@
 
 .add_icon {
 	margin-right: 6px;
-	font-size: 16px;
+	font-size: var(--font-size-md);
 	font-weight: 400;
 }
 
@@ -40,7 +40,7 @@
 
 .service_name {
 	margin-right: 40px;
-	font-size: 14px;
+	font-size: var(--font-size-md);
 	font-weight: 500;
 	line-height: 16px;
 	color: #333;
@@ -54,7 +54,7 @@
 
 .heading {
 	margin-bottom: 20px;
-	font-size: 14px;
+	font-size: var(--font-size-md);
 	font-weight: 500;
 	color: #363e6e;
 }

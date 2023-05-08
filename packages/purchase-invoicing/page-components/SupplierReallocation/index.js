@@ -102,7 +102,7 @@ function SupplierReallocation({
 			<Modal.Body>
 				<Modal.Header title={(
 					<div className={styles.header}>
-						{!isAdditional ? 'Edit Parameters' : 'Supplier Reallocation'}
+						{isAdditional ? 'Supplier Reallocation' : 'Edit Parameters' }
 					</div>
 				)}
 				/>

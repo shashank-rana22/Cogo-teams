@@ -17,9 +17,9 @@ const getPortConfigs = (data) => {
 		const { service_type } = data;
 		const { routeInfo } = getConfigs(data?.service_type) || {};
 
-		const isSingleShipmentLocation = (service_type || '').includes('customs')
-            || (service_type || '').includes('cfs')
-            || (service_type || '').includes('fcl_freight_local');
+		const singleservices = ['customs', 'cfs', 'fcl_freight_local'];
+
+		const isSingleShipmentLocation = singleservices.some((type) => (service_type || '').includes(type));
 
 		const origin = data[routeInfo.origin_pickup] || data[routeInfo.origin_port];
 		const destination = data[routeInfo.destination_drop] || data[routeInfo.destination_port];

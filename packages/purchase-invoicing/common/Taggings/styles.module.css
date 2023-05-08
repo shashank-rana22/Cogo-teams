@@ -48,13 +48,13 @@
 
 .proforma {
 	margin-right: 8px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 500;
 }
 
 .updated_at {
 	padding-top: 2px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	font-weight: 400;
 }
 

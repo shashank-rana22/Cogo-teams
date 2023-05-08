@@ -12,7 +12,7 @@ function MapLineItemDetails({
 	isLockedMode,
 	collectionPartyObj,
 }) {
-	let bankDetails = {};
+	let bankDetails = [];
 	if (!isEmpty(collectionPartyObj?.bank_details)) {
 		bankDetails = (collectionPartyObj?.bank_details || []).filter(
 			(item) => item?.bank_account_number === collectionPartyObj?.selectedAccNo,

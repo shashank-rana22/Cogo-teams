@@ -1,10 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Placeholder } from '@cogoport/components';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useRequest } from '@cogoport/request';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
+import getFormattedAmount from '../../../common/helpers/formatAmount';
 import getPurchaseReplica from '../../../helpers/get-purchase-replica';
 import mappingsFunc from '../../../helpers/getPurchaseLineItems';
 import toastApiError from '../../../utils/toastApiError';
@@ -21,8 +20,7 @@ function KnockOffMode({
 	const [{ data: varianceFullData }, trigger] = useRequest({
 		url    : '/get_collection_party_variance',
 		method : 'post',
-	}, { manual: false });
-
+	}, { manual: true });
 	const purchase_replica = getPurchaseReplica(
 		data,
 		globalSelected,
@@ -62,6 +60,7 @@ function KnockOffMode({
 
 	useEffect(() => {
 		getVaraince();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const { data: varianceData, currency } = varianceFullData || {};
@@ -69,9 +68,15 @@ function KnockOffMode({
 	if (loading) {
 		return (
 			<div>
-				<Placeholder />
-				<Placeholder />
-				<Placeholder />
+				<div className={styles.margintop}>
+					<Placeholder height="80px" />
+				</div>
+				<div className={styles.margintop}>
+					<Placeholder height="80px" />
+				</div>
+				<div className={styles.margintop}>
+					<Placeholder height="80px" />
+				</div>
 			</div>
 		);
 	}
@@ -85,15 +90,7 @@ function KnockOffMode({
 								<div className={styles.flexdiv}>
 									<div className={styles.label}>Purchase Invoice</div>
 									<div className={styles.value}>
-										{formatAmount({
-											amount  : item?.purchase_invoice,
-											currency,
-											options : {
-												style                 : 'currency',
-												currencyDisplay       : 'code',
-												maximumFractionDigits : 2,
-											},
-										})}
+										{getFormattedAmount(item?.purchase_invoice, currency)}
 									</div>
 								</div>
 
@@ -102,15 +99,7 @@ function KnockOffMode({
 										<div className={styles.lineitemwrap}>
 											{pi?.name}
 											<div className={styles.lineitemvalue}>
-												{formatAmount({
-													amount   : pi?.tax_total_price,
-													currency : pi?.currency,
-													options  : {
-														style                 : 'currency',
-														currencyDisplay       : 'code',
-														maximumFractionDigits : 2,
-													},
-												})}
+												{getFormattedAmount(pi?.tax_total_price, pi?.currency)}
 											</div>
 										</div>
 									))}
@@ -121,15 +110,7 @@ function KnockOffMode({
 								<div className={styles.flexdiv}>
 									<div className={styles.label}>Live Invoice</div>
 									<div className={styles.value}>
-										{formatAmount({
-											amount  : item?.live_invoice,
-											currency,
-											options : {
-												style                 : 'currency',
-												currencyDisplay       : 'code',
-												maximumFractionDigits : 2,
-											},
-										})}
+										{getFormattedAmount(item?.live_invoice, currency)}
 									</div>
 								</div>
 
@@ -141,15 +122,7 @@ function KnockOffMode({
 											-
 											{li?.code}
 											<div className={styles.lineitemvalue}>
-												{formatAmount({
-													amount   : li?.tax_total_price || 0,
-													currency : li?.currency,
-													options  : {
-														style                 : 'currency',
-														currencyDisplay       : 'code',
-														maximumFractionDigits : 2,
-													},
-												})}
+												{getFormattedAmount(li?.tax_total_price, li?.currency)}
 											</div>
 										</div>
 									))}
@@ -161,15 +134,7 @@ function KnockOffMode({
 					<div className={`${styles.variance} ${styles.flexdiv}`}>
 						<div className={styles.label}>Variance</div>
 						<div className={styles.value}>
-							{formatAmount({
-								amount  : item?.variance,
-								currency,
-								options : {
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 2,
-								},
-							})}
+							{getFormattedAmount(item?.variance, currency)}
 						</div>
 					</div>
 				</div>

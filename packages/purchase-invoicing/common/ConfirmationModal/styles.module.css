@@ -5,7 +5,7 @@
 }
 
 .exchangeheading {
-	font-size: 16px;
+	font-size: var(--font-size-lg);
 	font-weight: 600;
 }
 

@@ -32,7 +32,7 @@
 	width: 25%;
 	padding: 10px 18px 10px 16px;
 	margin-right: 30px;
-	font-size: 14px;
+	font-size: var(--font-size-md);
 	font-weight: 500;
 	color: #333;
 	border-right: 1px solid #ded7fc;
@@ -55,7 +55,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	margin-top: 2px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	color: #333;
 	white-space: nowrap;
 }
@@ -79,4 +79,8 @@
 	flex: 1;
 	flex-direction: column;
 	width: 100%;
+}
+
+.margintop{
+	margin-top: 16px;
 }

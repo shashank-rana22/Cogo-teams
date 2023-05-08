@@ -69,7 +69,7 @@
 }
 
 .headingmodal {
-	font-size: 18px;
+	font-size: var(--font-size-xxl);
 	font-weight: 600;
 	color: #ed3726;
 }

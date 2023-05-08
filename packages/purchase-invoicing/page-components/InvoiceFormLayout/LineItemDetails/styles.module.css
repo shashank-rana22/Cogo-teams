@@ -9,7 +9,7 @@
 
 .fieldstyle {
 	padding: 12px 16px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	font-weight: 800;
 }
 
@@ -43,7 +43,7 @@
 }
 
 .label {
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 }
 
 .amount {

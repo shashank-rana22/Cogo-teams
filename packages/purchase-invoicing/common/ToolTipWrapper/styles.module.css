@@ -1,4 +1,4 @@
 .contenttext {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 }

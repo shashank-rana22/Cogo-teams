@@ -8,7 +8,7 @@
 	width: 210px;
 	padding-left: 16px;
 	margin-top: 10px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 }
 
@@ -19,7 +19,7 @@
 	:global {
 		.ui_select_input_placeholder,
 		::placeholder {
-			font-size: 12px;
+			font-size: var(--font-size-md);
 		}
 
 		.ui_input_container {
@@ -35,7 +35,7 @@
 	:global {
 		.ui_select_input_placeholder,
 		::placeholder {
-			font-size: 12px;
+			font-size: var(--font-size-md);
 		}
 
 		.ui_select_container {
@@ -46,6 +46,6 @@
 
 .errors {
 	padding-left: 4px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	color: red;
 }

@@ -11,7 +11,7 @@
 
 .fieldstyle {
 	padding: 16px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 }
 
@@ -43,7 +43,7 @@
 	width: 100%;
 	padding: 10px 30px 10px 0;
 	margin-right: 36px;
-	font-size: 16px;
+	font-size: var(--font-size-lg);
 	font-weight: 800;
 	color: #4f4f4f;
 	background: #f9f9f9;

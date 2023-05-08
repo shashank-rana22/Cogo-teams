@@ -36,11 +36,11 @@
 	:global {
 		.ui_select_input_placeholder,
 		::placeholder {
-			font-size: 12px;
+			font-size: var(--font-size-md);
 		}
 
 		.ui_select_input_control {
-			font-size: 12px !important;
+			font-size: var(--font-size-md);
 		}
 	}
 
@@ -63,7 +63,7 @@
 
 	:global {
 		.ui_input_control {
-			font-size: 12px !important;
+			font-size: var(--font-size-md);
 		}
 	}
 }
@@ -79,7 +79,7 @@
 }
 
 .head {
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 }
 
 .checkbox {
@@ -92,7 +92,7 @@
 
 .errors {
 	padding-left: 4px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	color: red;
 }
 
@@ -101,7 +101,7 @@
 }
 
 .itemname {
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	font-weight: 600;
 }
 
@@ -110,7 +110,7 @@
 }
 
 .product {
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 }
 
 .menuwidth {

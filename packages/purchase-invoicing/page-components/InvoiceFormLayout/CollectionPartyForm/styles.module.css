@@ -24,7 +24,7 @@
 	:global {
 		.ui_select_input_placeholder,
 		::placeholder {
-			font-size: 12px;
+			font-size: var(--font-size-md);
 		}
 
 		.ui_select_container {
@@ -50,7 +50,7 @@
 	& > select,
 	input {
 		height: 38px;
-		font-size: 16px;
+		font-size: var(--font-size-md);
 	}
 
 	label :global {
@@ -65,7 +65,7 @@
 
 .errors {
 	padding-left: 4px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	color: red;
 }
 
@@ -79,7 +79,7 @@
 }
 
 .form_label {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 }
 

@@ -1,5 +1,5 @@
 .header {
-	font-size: 18px;
+	font-size: var(--font-size-lg);
 	font-weight: 600;
 }
 
@@ -10,7 +10,7 @@
 }
 
 .errors {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	color: var(--color-primary-error-red-1);
 }
 

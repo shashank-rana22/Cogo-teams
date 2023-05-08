@@ -28,7 +28,7 @@
 	:global {
 		.ui_select_input_placeholder,
 		::placeholder {
-			font-size: 12px;
+			font-size: var(--font-size-md);
 		}
 
 		.ui_select_display_container {
@@ -71,7 +71,7 @@
 
 .errors {
 	padding-left: 4px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	color: red;
 }
 

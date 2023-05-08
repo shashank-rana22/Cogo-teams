@@ -5,7 +5,7 @@
 .heading {
 	margin: 0;
 	margin-right: 12px;
-	font-size: 18px;
+	font-size: var(--font-size-lg);
 	font-weight: 500;
 	line-height: 15px;
 	color: #393f70;
