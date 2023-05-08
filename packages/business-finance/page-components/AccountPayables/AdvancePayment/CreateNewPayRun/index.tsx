@@ -223,7 +223,7 @@ function CreateNewPayRun() {
 					</div>
 				)}
 				<div className={styles.list_container}>
-					{(loading || viewSelectedDataLoading || listLength > 0) ? (
+					{listLength > 0 ? (
 						<List
 							itemData={viewSelectedInvoice ? viewSelectedData : data}
 							loading={viewSelectedInvoice ? viewSelectedDataLoading : loading}

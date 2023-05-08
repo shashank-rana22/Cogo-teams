@@ -102,7 +102,7 @@ function Footer({
 								<div>
 									<Button
 										themeType="secondary"
-										onClick={submitSelectedInvoices()}
+										onClick={submitSelectedInvoices}
 										disabled={buttonDisabled}
 									>
 										+ Add to selected
