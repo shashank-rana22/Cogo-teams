@@ -98,8 +98,6 @@ function UploadDraftBL({
 
 	const isNextDisabled = (isHBL && !isAllHBLUploaded) || ((!isHBL || isAllHBLUploaded) && loading);
 
-	console.log({ isAllHBLUploaded });
-
 	const handleClickOnNext = async () => {
 		if (step === 'hbl') {
 			setStep('mbl');

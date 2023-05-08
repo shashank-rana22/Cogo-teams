@@ -46,31 +46,22 @@ function UploadHbl(props) {
 			documents,
 		};
 
-		console.log('body', body);
-
 		await trigger({ data: body });
 
 		refetchDocs();
 	};
 
-	const handleSubmit = () => {
-		let isAllFormsValid = true;
-		const invoice_details = [];
+	const handleSubmit = async () => {
+		const payload = [];
+		const validationFlags = await Promise.all(formRefs.current.map(({ formTrigger }) => formTrigger()));
+		const isFormValid = validationFlags.every((valid) => valid);
 
-		(formRefs?.current || []).forEach((item) => {
-			if (!item?.submitForm()) {
-				isAllFormsValid = false;
-			} else if (item?.submitForm()?.e) {
-				Toast.error(item?.submitForm()?.e);
-			} else {
-				invoice_details.push(item?.submitForm());
-			}
-		});
-
-		if (isAllFormsValid) {
-			uploadBills(invoice_details);
-		} else {
-			Toast.error('Fill all forms');
+		if (isFormValid) {
+			formRefs.current.forEach(({ getFormValues }) => {
+				const val = getFormValues();
+				payload.push(val);
+			});
+			uploadBills(payload);
 		}
 	};
 
@@ -82,7 +73,7 @@ function UploadHbl(props) {
 		});
 
 		setUrls(newUrls);
-	}, [docs]);
+	}, [docs, urls]);
 
 	return (
 		<main>

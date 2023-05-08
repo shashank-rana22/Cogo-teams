@@ -3,6 +3,25 @@ import React, { forwardRef, useImperativeHandle } from 'react';
 
 import styles from './styles.module.css';
 
+const controlTypeMapping = {
+	file     : UploadController,
+	text     : InputController,
+	number   : InputController,
+	textarea : TextAreaController,
+};
+
+function FormElement({ name, label, errors, type, span, ...rest }) {
+	const Element = controlTypeMapping[type];
+	const widthVal = (span / 12) * 100;
+	return Element ? (
+		<div style={{ width: `${widthVal}%` }}>
+			<div className={styles.label}>{label}</div>
+			<Element name={name} type={type} {...rest} />
+			{errors[name] ? <div>{errors[name].message}</div> : null}
+		</div>
+	) : null;
+}
+
 function Form(props, ref) {
 	const {
 		id, bl_type = '', controls = [],
@@ -11,38 +30,11 @@ function Form(props, ref) {
 	const {
 		control,
 		formState: { errors },
+		trigger,
 		getValues,
 	} = useForm();
 
-	const controlTypeMapping = {
-		file     : UploadController,
-		text     : InputController,
-		number   : InputController,
-		textarea : TextAreaController,
-	};
-
-	function FormElement({ name, label, type, span, ...rest }) {
-		const Element = controlTypeMapping[type];
-		const widthVal = (span / 12) * 100;
-		return Element ? (
-			<div style={{ width: `${widthVal}%` }}>
-				<div className={styles.label}>{label}</div>
-				<Element name={name} type={type} {...rest} />
-				{errors[name] ? <div>{errors[name].message}</div> : null}
-			</div>
-		) : null;
-	}
-
-	const submitForm = () => {
-		const formValues = getValues();
-		console.log({errors});
-		if (formValues) {
-			return formValues;
-		}
-		return null;
-	};
-
-	useImperativeHandle(ref, () => ({ submitForm }));
+	useImperativeHandle(ref, () => ({ formTrigger: trigger, getFormValues: getValues }), [trigger, getValues]);
 
 	return (
 		<main className={styles.container}>

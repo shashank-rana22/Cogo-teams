@@ -1,11 +1,10 @@
-import Toast from '@cogoport/components';
 import { useRef, forwardRef, useImperativeHandle } from 'react';
 
 import Form from '../form';
 
 import getControls from './controls';
 
-function MBLDetails({ primaryService = {}, selectedMail = {} },ref) {
+function MBLDetails({ primaryService = {}, selectedMail = {} }, ref) {
 	let newSummary = primaryService;
 	if (selectedMail?.formatted?.length) {
 		newSummary = selectedMail?.formatted[0];
@@ -18,27 +17,22 @@ function MBLDetails({ primaryService = {}, selectedMail = {} },ref) {
 		bls_count = 1;
 	}
 
-	useImperativeHandle(ref, () => ({ submit: handleSubmit }));
+	const handleSubmit = async () => {
+		const payload = [];
+		const validationFlags = await Promise.all(formRefs.current.map(({ formTrigger }) => formTrigger()));
+		const isFormValid = validationFlags.every((valid) => valid);
 
-	const handleSubmit = () => {
-		let isAllFormsValid = true;
-		const invoice_details = [];
-
-		(formRefs?.current || []).forEach((item) => {
-			if (!item?.submitForm()) {
-				isAllFormsValid = false;
-			} else if (item?.submitForm()?.e) {
-				Toast.error(item?.submitForm()?.e);
-			} else {
-				invoice_details.push(item?.submitForm());
-			}
-		});
-		if (isAllFormsValid) {
-			return invoice_details;
+		if (isFormValid) {
+			formRefs.current.forEach(({ getFormValues }) => {
+				const val = getFormValues();
+				payload.push(val);
+			});
+			return payload;
 		}
-		Toast.error('Fill all forms');
 		return null;
 	};
+
+	useImperativeHandle(ref, () => ({ submit: handleSubmit }));
 
 	return (
 		<>

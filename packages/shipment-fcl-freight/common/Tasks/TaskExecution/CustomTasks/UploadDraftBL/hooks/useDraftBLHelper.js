@@ -73,7 +73,7 @@ const useDraftBLHelper = ({
 	};
 
 	const submitMBL = async ({ mblRef }) => {
-		const values = mblRef.current.submit();
+		const values = await mblRef.current.submit();
 		if (values?.length) {
 			const body = {
 				shipment_id        : pendingTask?.shipment_id,
@@ -96,7 +96,7 @@ const useDraftBLHelper = ({
 			};
 
 			await trigger({ data: body });
-			
+
 			// feedbacks to cogolens starts
 			try {
 				const rpaMappings = {

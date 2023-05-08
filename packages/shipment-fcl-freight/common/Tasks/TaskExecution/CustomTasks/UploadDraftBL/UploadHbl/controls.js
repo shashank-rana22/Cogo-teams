@@ -6,12 +6,7 @@ const controls = [
 		type  : 'text',
 		span  : 6,
 		size  : 'sm',
-		rules : [
-			{
-				type    : 'required',
-				message : 'BL Number is required',
-			},
-		],
+		rules : { required: 'BL Number is required' },
 	},
 	{
 		label : 'Container Quantity',
@@ -20,17 +15,7 @@ const controls = [
 		span  : 6,
 		size  : 'sm',
 		min   : 1,
-		rules : [
-			{
-				type    : 'required',
-				message : 'Container Quantity is required',
-			},
-			{
-				type    : 'min',
-				message : 'Container Quantity cannot be less than 1',
-				min     : 1,
-			},
-		],
+		rules : { required: 'Container Quantity is required' },
 	},
 	{
 		name : 'url',
@@ -40,12 +25,7 @@ const controls = [
 		accept:
 			'image/*,.pdf,.doc,.docx,.xlsx,application/msword,'
 			+ 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-		rules: [
-			{
-				type    : 'required',
-				message : 'document is required',
-			},
-		],
+		rules: { required: 'Document is required' },
 	},
 	{
 		label : 'Document Description (optional)',

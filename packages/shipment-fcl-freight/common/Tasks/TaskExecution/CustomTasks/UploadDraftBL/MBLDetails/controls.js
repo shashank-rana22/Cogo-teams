@@ -9,31 +9,24 @@ const controls = ({ data = {} }) => {
 
 	const form_controls = [
 		{
-			label       : 'Master Bill of lading Number',
-			name        : 'document_number',
-			type        : 'text',
-			span        : 6,
-			size        : 'sm',
-			value       : data?.document_number,
-			rules   : { required: 'Currency is required' },
+			label : 'Master Bill of lading Number',
+			name  : 'document_number',
+			type  : 'text',
+			span  : 6,
+			size  : 'sm',
+			value : data?.document_number,
+			rules : { required: 'BL Number is required' },
 		},
 		{
-			label       : 'Container Quantity',
-			name        : 'containers_count',
-			type        : 'number',
-			span        : 6,
-			size        : 'sm',
-			min         : 1,
-			disabled    : true,
-			value       : containersCount,
-			rules : [
-				{ type: 'required', message: 'Container Quantity is required' },
-				{
-					type    : 'min',
-					message : 'Container Quantity cannot be less than 1',
-					min     : 1,
-				},
-			],
+			label    : 'Container Quantity',
+			name     : 'containers_count',
+			type     : 'number',
+			span     : 6,
+			size     : 'sm',
+			min      : 1,
+			disabled : true,
+			value    : containersCount,
+			rules    : { required: 'Container Quantity is required' },
 		},
 		{
 			name   : 'url',
@@ -44,12 +37,7 @@ const controls = ({ data = {} }) => {
 			label  : 'Document URL',
 			accept : 'image/*,.pdf,.doc,.docx,application/msword,'
 			+ 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-			rules: [
-				{
-					type    : 'required',
-					message : 'document is required',
-				},
-			],
+			rules: { required: 'Document is required' },
 		},
 		{
 			label : 'Document Description (optional)',
