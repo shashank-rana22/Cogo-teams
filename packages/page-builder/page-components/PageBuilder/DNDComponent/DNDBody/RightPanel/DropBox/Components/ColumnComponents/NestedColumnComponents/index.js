@@ -20,8 +20,8 @@ function NestedColumnComponent({
 	setParentComponentId,
 	setShowContentModal,
 	handleClick,
-	componentId,
-	id,
+	// componentId,
+	// id,
 	modeType,
 	previewMode,
 	isMobile,
@@ -36,13 +36,14 @@ function NestedColumnComponent({
 		...((isMobile || previewMode === 'mobile') && {
 			width: '100%',
 		}),
+		backgroundColor: 'lavender',
 	};
 
-	const { id: columnChildId } = selectedColumn || {};
+	// const { id: columnChildId } = selectedColumn || {};
 
-	const { id: selectedRowId } = selectedRow || {};
+	// const { id: selectedRowId } = selectedRow || {};
 
-	const { id: nestedColumnId } = selectedNestedColumn || {};
+	// const { id: nestedColumnId } = selectedNestedColumn || {};
 
 	const handleNesteColumnClick = (e, columnData, nestedData) => {
 		if (modeType === 'edit') {
@@ -59,7 +60,7 @@ function NestedColumnComponent({
 			role="presentation"
 			className={styles.content_container}
 			onClick={(e) => handleClick(e, childComponent)}
-			style={{ ...modifiedParentStyle, display: 'block', border, padding: '16px' }}
+			style={{ ...modifiedParentStyle, display: 'block', border }}
 		>
 			{ (childChildren || []).map((nestedChildren, childrenIndex) => {
 				const {
@@ -77,20 +78,21 @@ function NestedColumnComponent({
 					...((isMobile || previewMode === 'mobile') && {
 						width: '100%',
 					}),
+					border: '1px solid transparent',
 				};
 
-				const isNestedChildSelected = columnChildId === id
-                && componentId === selectedRowId
-                && childrenId === nestedColumnId;
+				// const isNestedChildSelected = columnChildId === id
+				// && componentId === selectedRowId
+				// && childrenId === nestedColumnId;
 
-				const nestedBorder = isNestedChildSelected ? '1px solid yellow' : modifiedParentStyle.border;
+				// const nestedBorder = isNestedChildSelected ? '4px solid yellow' : modifiedParentStyle.border;
 
 				return (
 
 					<div
 						role="presentation"
 						className={styles.content_container}
-						style={{ ...modifiedChildrenStyle, border: nestedBorder }}
+						style={{ ...modifiedChildrenStyle }}
 						onClick={(e) => handleNesteColumnClick(e, childComponent, nestedChildren)}
 					>
 						<RenderElement

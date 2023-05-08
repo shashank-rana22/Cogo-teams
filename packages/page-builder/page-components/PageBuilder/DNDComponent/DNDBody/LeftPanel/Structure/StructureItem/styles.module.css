@@ -1,21 +1,21 @@
-
-  .grid_item {
-		margin: 12px;
-		display: flex;
-		border: 0.5px solid gray;
-		justify-content: center;
-	    border-radius: 4px;
-		&:hover {
-			border: 1px solid gray;
-		}
-		
+.grid_item {
+	margin: 12px;
+	display: flex;
+	border: 1px solid #ccc;
+	justify-content: center;
+	border-radius: 4px;
+	transition: border-color 0.2s ease-in-out;
+	
+	&:hover {
+	  border: 1px solid #666;
+	}
   }
   
   .item {
-	background-color: #fffce6;
+	background-color: #fdf5e6;
 	height: 60px;
 	margin: 4px;
-	border: 0.5px dotted gray;
+	border: 1px dashed #ccc;
 	border-radius: 4px;
   }
   

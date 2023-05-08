@@ -114,8 +114,15 @@ function CarouselComponent({
 
 					const { style, icon, type, children: childChildren } = childrenComponent || {};
 
+					const modifiedStyle = {
+						...style,
+						...(type && {
+							border: '1px solid transparent',
+						}),
+					};
+
 					const isChildSelected = columnChildId === id && componentId === selectedRowId;
-					const border = isChildSelected ? '5px solid pink' : style.border;
+					const border = isChildSelected ? '1px solid pink' : modifiedStyle.border;
 
 					if (!isEmpty(childChildren)) {
 						return 	(
