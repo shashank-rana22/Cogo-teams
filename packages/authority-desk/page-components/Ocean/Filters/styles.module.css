@@ -18,13 +18,14 @@
 		}
 	}
 
-	.icon_wrapper {
+	.icon_wrapper::before {
 		position: relative;
-		top: -8px;
+		top: -6px;
 		display: inline-block;
 		width: 8px;
 		height: 8px;
 		content: "";
+		border-radius: 50%;
 		background-color: var(--color-primary-error-red-2);
 	}
 }
