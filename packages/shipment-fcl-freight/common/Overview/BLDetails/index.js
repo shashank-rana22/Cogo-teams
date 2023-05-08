@@ -119,7 +119,7 @@ function BLDetails() {
 											setActiveId={setActiveId}
 											activeId={activeId}
 											shipmentData={shipment_data}
-											containerDetails={item?.containers}
+											containerDetails={containerDetailsArray}
 										/>
 									</div>
 								)

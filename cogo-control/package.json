@@ -44,6 +44,7 @@
     "@cogoport/shipment-chat": "workspace:0.1.0",
     "@cogoport/shipment-mails": "workspace:0.1.0",
     "@cogoport/booking-desk" : "workspace:0.1.0",
+    "@cogoport/cost-booking-desk" : "workspace:0.1.0",
     "@cogoport/authority-desk" : "workspace:0.1.0",
     "@cogoport/last-mile-desk" : "workspace:0.1.0",
     "@cogoport/scope-select" : "workspace:0.1.0",
