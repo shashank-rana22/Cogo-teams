@@ -1,4 +1,4 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, Toggle } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -7,6 +7,7 @@ import ExchangeRateModal from '../ExchangeRateModal';
 import MapLineItemDetails from '../MapLineItemDetails';
 import PurchaseLineItemDetails from '../PurchaseLineItemDetails';
 
+import KnockOffMode from './KnockOffMode';
 import styles from './styles.module.css';
 
 function Step2({
@@ -22,8 +23,10 @@ function Step2({
 	onClose,
 	billId,
 	closeModal,
+	partyId,
 }) {
 	const [globalSelected, setGlobalSelected] = useState({});
+	const [knockOffMode, setknockOffMode] = useState(false);
 
 	const {
 		handleFinalSubmit,
@@ -43,6 +46,9 @@ function Step2({
 
 	const iseditable = !['coe_approved', 'locked'].includes(editData?.status);
 
+	const context = knockOffMode ? <span className={styles.headingmodal}>STEP 2b - Locked Items / Services</span>
+		: contentText;
+
 	const goBack = (
 		<span className={styles.flex}>
 			<Button
@@ -56,36 +62,54 @@ function Step2({
 				Go Back
 
 			</Button>
-			<span className={styles.marginleft}>{contentText}</span>
+			<span className={styles.marginleft}>{context}</span>
 		</span>
 	);
 	return (
 		<div>
 			<Modal.Header title={goBack} />
 			<Modal.Body>
-				<div className={styles.flex}>
-					<div className={styles.purchaselineitems}>
-						<PurchaseLineItemDetails
-							billingPartyObj={billingPartyObj}
-							collectionPartyObj={collectionPartyObj}
-							editData={editData}
-							purchaseInvoiceValues={purchaseInvoiceValues}
-							isLockedMode={isLockedMode}
-						/>
+				{!knockOffMode ? (
+					<div className={styles.flex}>
+						<div className={styles.purchaselineitems}>
+							<PurchaseLineItemDetails
+								billingPartyObj={billingPartyObj}
+								collectionPartyObj={collectionPartyObj}
+								editData={editData}
+								purchaseInvoiceValues={purchaseInvoiceValues}
+								isLockedMode={isLockedMode}
+							/>
+						</div>
+						<div className={styles.maplineitems}>
+							<MapLineItemDetails
+								serviceProvider={serviceProvider}
+								handleChange={handleChange}
+								currentSelected={currentSelected}
+								isLockedMode={isLockedMode}
+								billingPartyObj={billingPartyObj}
+								collectionPartyObj={collectionPartyObj}
+							/>
+						</div>
 					</div>
-					<div className={styles.maplineitems}>
-						<MapLineItemDetails
-							serviceProvider={serviceProvider}
-							handleChange={handleChange}
-							currentSelected={currentSelected}
-							isLockedMode={isLockedMode}
-							billingPartyObj={billingPartyObj}
-							collectionPartyObj={collectionPartyObj}
-						/>
-					</div>
-				</div>
+				) : (
+					<KnockOffMode
+						purchaseInvoiceValues={purchaseInvoiceValues}
+						data={serviceProvider}
+						globalSelected={globalSelected}
+						collectionPartyId={partyId}
+					/>
+				)}
 			</Modal.Body>
 			<Modal.Footer>
+				<div className={styles.knockoff}>
+					<Toggle
+						name="mode"
+						size="sm"
+						onLabel="Knock Off Mode"
+						offLabel="Lock Mode"
+						onChange={(e) => setknockOffMode(e?.target?.checked)}
+					/>
+				</div>
 				<div className={styles.buttoncontainer}>
 					{isEmpty(editData) ? (
 						<Button

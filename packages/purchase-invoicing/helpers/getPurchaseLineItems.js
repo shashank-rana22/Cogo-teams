@@ -35,6 +35,7 @@ const mappingsFunc = (data = {}, mappings = {}, purchaseInvoiceValues = {}) => {
 			const founditem = allLineItems?.find(
 				(li) => li?.code === splititems[0] && li?.service_id === splititems[1],
 			);
+
 			if (founditem) {
 				buyLinesitems.push(founditem);
 			}

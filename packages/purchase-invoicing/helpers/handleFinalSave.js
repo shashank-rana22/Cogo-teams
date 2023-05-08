@@ -21,6 +21,7 @@ const useHandleFinalSave = ({
 
 	const charges = purchaseInvoiceValues?.line_items || [];
 	const allCodes = charges.map((charge) => charge?.code || charge?.name);
+
 	const buyCodes = [];
 	let existingMappings = [];
 	if (Object.keys(globalSelected).length && !isLockedMode) {

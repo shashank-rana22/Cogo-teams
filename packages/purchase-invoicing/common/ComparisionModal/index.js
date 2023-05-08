@@ -23,7 +23,7 @@ function ComparisionModal({
 
 	const [collectionPartyId, setCollectionPartyId] = useState({
 		billId  : editData?.finance_job_number,
-		partyId : editData?.collectionPartyId,
+		partyId : editData?.id,
 	});
 
 	const [exchangeRateModal, setExchangeRateModal] = useState(false);
@@ -35,8 +35,6 @@ function ComparisionModal({
 	let contentText = <span className={styles.headingmodal}>STEP 1 - Match Purchase Invoice With Cogo Invoice</span>;
 	if (step === 2) {
 		contentText = <span className={styles.headingmodal}>STEP 2a - Match and Lock Items with Live Invoice</span>;
-	} else if (step === 3) {
-		contentText = <span className={styles.headingmodal}>STEP 2b - Locked Items / Services</span>;
 	}
 
 	const onError = (errordata) => {
@@ -96,6 +94,7 @@ function ComparisionModal({
 					setStep={setStep}
 					exchangeRateModal={exchangeRateModal}
 					billId={collectionPartyId?.billId}
+					partyId={collectionPartyId?.partyId}
 					closeModal={closeModal}
 					onClose={onClose}
 				/>

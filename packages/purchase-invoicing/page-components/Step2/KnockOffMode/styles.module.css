@@ -1,0 +1,83 @@
+.container{
+    background-color: #ffffff;
+}
+
+.listcontainer{
+    margin-bottom: 14%;
+}
+
+.box{
+    background: #ffffff;
+	border-radius: 4px;
+	padding: 8px 6px;
+	margin-bottom: 16px;
+}
+
+.flexcontainer{
+    display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid #ded7fc;
+	width: 100%;
+	padding-bottom: 6px;
+}
+
+.flexwrap{
+    display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+.flexdiv{
+    font-size: 14px;
+	font-weight: 500;
+	color: #333333;
+	display: flex;
+	border-right: 1px solid #ded7fc;
+	width: 25%;
+	padding: 10px 18px 10px 16px;
+	margin-right: 30px;
+}
+
+.variance {
+		padding: 10px 0px 0px 16px;
+		border: none;
+}
+
+.label{
+    width: 140px;
+}
+
+.value{
+    color: #F68B21;
+}
+
+.lineitem{
+    font-size: 10px;
+	color: #333333;
+	display: flex;
+	margin-top: 2px;
+	white-space: nowrap;
+	flex-wrap: wrap;
+}
+
+.padding {
+		padding: 10px 0px 0px 16px;
+}
+
+.lineitemvalue{
+	margin: 0px 20px 0px 2px;
+	font-weight: 800;
+}
+
+.lineitemwrap{
+    white-space: nowrap;
+	margin-right: 16px;
+}
+
+.invoiceswrap{
+    display: flex;
+	flex-direction: column;
+	flex: 1;
+	width: 100%;
+}
+
