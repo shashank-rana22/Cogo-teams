@@ -1,11 +1,17 @@
 .sid{
-	color: #F68B21;
-	font-weight: 500;
+	display: flex;
+	justify-content: center;
+	font-weight: 400;
 	border-radius: 4px;
-	padding: 8px 4px;
-	text-decoration: underline;
+	text-align: center;
 	cursor: pointer;
+	&.id{
+		color: #F68B21;
+		text-decoration: underline;
+	}
+	
 };
+
 
 .container{
 	&.col {
@@ -17,7 +23,7 @@
 	&.shipment_details {
 		margin: auto;
 		display: flex;
-		width: 10%;
+		width: 12%;
 		justify-content: space-evenly;
 		* {
 			font-size: 12px;
@@ -50,7 +56,7 @@
 
 .tag_container{
 	display: flex;
-	margin: 4px;
+	/* margin: 4px; */
 }
 
 .border_right{

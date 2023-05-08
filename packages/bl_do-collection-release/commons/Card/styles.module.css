@@ -6,7 +6,8 @@
 	margin: 24px;
 	padding: 12px;
 	border: 1px solid #88CAD1;
-	min-height: 170px;
+	/* min-height: 170px; */
+	max-height: 170px;
 
 	&.no-accordion {
 		margin-bottom: 20px;
@@ -73,6 +74,10 @@
 		}
 	}
 };
+
+.stakeholders{
+	overflow: scroll;
+}
 
 .text{
 	&.thin {

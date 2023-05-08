@@ -5,7 +5,7 @@ import useListBlDOShipments from '../../hooks/useListBlDOShipment';
 
 import styles from './styles.module.css';
 
-function FCL({ stateProps = {} }) {
+function FCL({ stateProps = {}, setStateProps = () => {} }) {
 	const { data, loading } = useListBlDOShipments({ prefix: 'fcl_freight', stateProps });
 
 	if (loading) {
@@ -22,9 +22,8 @@ function FCL({ stateProps = {} }) {
 	}
 
 	return (
-		<div>
-
-			<List data={data} stateProps={stateProps} />
+		<div className={styles.list_container}>
+			<List data={data} stateProps={stateProps} setStateProps={setStateProps} />
 		</div>
 	);
 }

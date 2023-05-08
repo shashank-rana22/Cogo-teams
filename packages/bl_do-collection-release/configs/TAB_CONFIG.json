@@ -1,12 +1,17 @@
 {
-  "LEVEL_1": [
-      { "name": "bl_collection",  "title": "BL Colletion-Release" },
-      { "name": "do_collection",  "title": "DO Release" },
-      { "name": "stationary",  "title": "Stationary Management" }
+  "SHIPMENT_TYPES": [
+    { "label": "FCL", "value": "fcl_freight" },
+    { "label": "LCL", "value": "lcl_freight" },
+    { "label": "FCL Local", "value": "fcl_local" }
   ],
-  "LEVEL_2":[
-    { "name": "fcl_freight", "title": "FCL" },
-    { "name": "lcl_freight", "title": "LCL" },
-    { "name": "fcl_local", "title": "FCL Local" }
+  "TABS":[
+    { "label":"Knock Off Awaiting", "value": "knockoff_awaiting"},
+    { "label":"Knock Off Pending", "value": "knockoff_pending" },
+    { "label":"Pending Collection", "value": "collection_pending" },
+    { "label":"Under Collection", "value": "under_collection" },
+    { "label":"Collected", "value": "collected" },
+    { "label":"Released", "value": "released" },
+    { "label":"Surrender", "value": "surrendered" },
+    { "label":"On Hold", "value": "on_hold" }
   ]
 }

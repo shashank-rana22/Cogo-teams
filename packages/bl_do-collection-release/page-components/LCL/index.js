@@ -5,7 +5,7 @@ import useListBlDOShipments from '../../hooks/useListBlDOShipment';
 
 import styles from './styles.module.css';
 
-function LCL({ stateProps = {} }) {
+function LCL({ stateProps = {}, setStateProps = () => {} }) {
 	const { data, loading } = useListBlDOShipments({ prefix: 'lcl_freight', stateProps });
 
 	if (loading) {
@@ -21,8 +21,8 @@ function LCL({ stateProps = {} }) {
 		);
 	}
 	return (
-		<div>
-			<List data={data} stateProps={stateProps} />
+		<div className={styles.list_container}>
+			<List data={data} stateProps={stateProps} setStateProps={setStateProps} />
 		</div>
 	);
 }

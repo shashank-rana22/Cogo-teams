@@ -129,15 +129,17 @@ export default function Card({
 						</Button>
 					) : null}
 
-					{(item?.stakeholders || []).map((stakeholder) => (
-						<div className={cl`${styles.text} ${styles.thin} ${styles.small}`}>
-							{stakeholderMappings[stakeholder?.stakeholder_type]}
-							{' '}
-							<div className={cl`${styles.text} ${styles.bold} ${styles.inline}`}>
-								{stakeholder?.name}
+					<div className={styles.stakeholders}>
+						{(item?.stakeholders || []).map((stakeholder) => (
+							<div className={cl`${styles.text} ${styles.thin} ${styles.small}`}>
+								{stakeholderMappings[stakeholder?.stakeholder_type]}
+								{' '}
+								<div className={cl`${styles.text} ${styles.bold} ${styles.inline}`}>
+									{stakeholder?.name}
+								</div>
 							</div>
-						</div>
-					))}
+						))}
+					</div>
 				</div>
 			</div>
 

@@ -5,7 +5,7 @@ import EmptyState from '../EmptyState';
 
 import styles from './styles.module.css';
 
-export default function List({ data = {}, stateProps, couldBeCardsCritical = false }) {
+export default function List({ data = {}, stateProps, couldBeCardsCritical = false, setStateProps = () => {} }) {
 	const { activeTab } = stateProps;
 	const { list = [], total } = data;
 

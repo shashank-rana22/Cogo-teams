@@ -1,8 +1,8 @@
 import { cl, ToolTip } from '@cogoport/components';
-// import { format } from '@cogoport/utils';
 import { useRouter } from '@cogoport/next';
 
 import serviceNameMapping from '../../../configs/short-disply-names.json';
+import ClickableDiv from '../../ClickableDiv';
 
 import styles from './styles.module.css';
 
@@ -15,11 +15,12 @@ export default function ShipmentDetails({ item = {}, stateProps = {} }) {
 			<div className={cl`${styles.container} ${styles.col}`}>
 				<div
 					className={styles.sid}
-					onClick={() => router.push('/shipments/[id]', `/shipments/${item?.id}`)}
 				>
-					SID:
+					<div>SID:</div>
 					{' '}
-					{item?.serial_id}
+					<ClickableDiv onClick={() => router.push('/shipments/[id]', `/shipments/${item?.id}`)}>
+						<div className={styles.id}>{item?.serial_id}</div>
+					</ClickableDiv>
 				</div>
 
 				<div className={cl`${styles.tag_container} ${styles.col}`}>

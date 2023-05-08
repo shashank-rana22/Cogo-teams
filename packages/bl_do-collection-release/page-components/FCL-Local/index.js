@@ -5,7 +5,7 @@ import useListBlDOShipments from '../../hooks/useListBlDOShipment';
 
 import styles from './styles.module.css';
 
-function FCLLocal({ stateProps = {} }) {
+function FCLLocal({ stateProps = {}, setStateProps = () => {} }) {
 	const { data, loading } = useListBlDOShipments({ prefix: 'fcl_local', stateProps });
 	if (loading) {
 		return (
@@ -20,8 +20,8 @@ function FCLLocal({ stateProps = {} }) {
 		);
 	}
 	return (
-		<div>
-			<List data={data} stateProps={stateProps} />
+		<div className={styles.list_container}>
+			<List data={data} stateProps={stateProps} setStateProps={setStateProps} />
 		</div>
 	);
 }
