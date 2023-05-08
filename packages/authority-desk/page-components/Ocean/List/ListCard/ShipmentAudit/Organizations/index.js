@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 import useGetOrganizationOutstanding from '../../../../../../hooks/useGetOrganizationOutstanding';
 
+import DaysAmountBifercation from './DaysAmountBifercation';
 import OrgDetails from './OrgDetails';
 import styles from './styles.module.css';
 
@@ -50,7 +51,12 @@ function Organizations() {
 						</div>
 
 						{orgDetails[item?.registrationNumber]
-							? <OrgDetails registerationNumber={item?.registrationNumber} />
+							? (
+								<>
+									<DaysAmountBifercation item={item} />
+									<OrgDetails registerationNumber={item?.registrationNumber} />
+								</>
+							)
 							: null}
 
 					</div>

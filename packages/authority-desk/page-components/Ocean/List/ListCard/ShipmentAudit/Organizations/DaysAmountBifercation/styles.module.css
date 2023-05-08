@@ -1,0 +1,37 @@
+.buckets_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    border: 1px solid #88CAD1;
+    margin: 4px 12px 20px;
+    padding: 0 12px;
+}
+
+.divider {
+    background-color: #88CAD1;
+    align-self: stretch;
+    width: 2px;
+    margin: 10px 0;
+    margin-left: 0;
+}
+
+.buckets {
+    width: 80%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.overdue_label {
+    width: 20%;
+}
+
+.bucket {
+    padding: 12px;
+}
+
+.days_range {
+    font-size: var(--font-size-sm);
+    color: #676767;
+    font-weight: 600;
+}
