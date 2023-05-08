@@ -1,6 +1,12 @@
 .header {
 	display: flex;
 	align-items: center;
+	margin-top: 20px;
+}
+
+.top_container {
+	max-height: 20vh;
+	margin-bottom: 12px;
 }
 
 .title {
@@ -13,13 +19,27 @@
 	cursor: pointer;
 }
 
-.breadcrumb_item {
-	font-size: 16px;
-	font-weight: 600;
-	color: #6fa5ab;
+.container {
+	height: 84vh;
+	overflow: hidden;
+	background: #fff;
 }
 
-.breadcrumb_item_two {
-	font-weight: 700;
+.stepper_container {
+	padding: 12px;
+	background: #f9f9f9;
+
+	:global {
+		.ui_stepper_container {
+			margin: auto;
+			background: #f9f9f9;
+		}
+	}
 }
 
+.component_container {
+	position: relative;
+	display: flex;
+	align-items: center;
+	height: 76vh;
+}

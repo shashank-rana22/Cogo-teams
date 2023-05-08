@@ -1,0 +1,20 @@
+.container {
+	margin: auto;
+	text-align: center;
+}
+
+.title {
+	margin-bottom: 4px;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.input_container {
+	margin-top: 48px;
+}
+
+.footer {
+	position: absolute;
+	right: 24px;
+	bottom: 24px;
+}

@@ -1,4 +1,4 @@
-import { Stepper } from '@cogoport/components';
+import { Breadcrumb, Stepper } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
@@ -10,10 +10,9 @@ import CourseTopics from './CourseTopics';
 import styles from './styles.module.css';
 
 function CourseCreation() {
-	const [activeStepper, setActiveStepper] = useState('course_name');
 	const { push } = useRouter();
 
-	const items = TABS_MAPPING;
+	const [activeStepper, setActiveStepper] = useState('course_name');
 
 	const COMPONENT_MAPPING = {
 		course_name: {
@@ -40,27 +39,34 @@ function CourseCreation() {
 	};
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.back_div} role="presentation" onClick={onClickBackIcon}>
-				<IcMArrowBack width={20} height={20} />
+		<div>
+			<div className={styles.top_container}>
+				<Breadcrumb>
+					<Breadcrumb.Item label={<a href="page number">CogoAcademy</a>} />
+					<Breadcrumb.Item label="Course" />
+					<Breadcrumb.Item label="Course Creation" />
+				</Breadcrumb>
 
-				<div className={styles.back}>Create your Own Course</div>
-			</div>
-			<div className={styles.header}>
-				<IcMArrowBack
-					className={styles.back_icon}
-					width={20}
-					height={20}
-					onClick={onClickBackIcon}
-				/>
+				<div className={styles.header}>
+					<IcMArrowBack
+						className={styles.back_icon}
+						width={20}
+						height={20}
+						onClick={onClickBackIcon}
+					/>
 
-				<div role="presentation" className={styles.title}>Create your Own Course</div>
+					<div role="presentation" className={styles.title}>Create your Own Course</div>
+				</div>
 			</div>
-			<div>
-				<Stepper active={activeStepper} setActive={setActiveStepper} items={items} arrowed />
-			</div>
-			<div>
-				<ActiveComponent {...activeComponentProps} />
+
+			<div className={styles.container}>
+				<div className={styles.stepper_container}>
+					<Stepper active={activeStepper} setActive={setActiveStepper} items={TABS_MAPPING} arrowed />
+				</div>
+
+				<div className={styles.component_container}>
+					<ActiveComponent {...activeComponentProps} />
+				</div>
 			</div>
 		</div>
 	);

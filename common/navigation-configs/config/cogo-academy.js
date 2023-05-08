@@ -47,6 +47,9 @@ const cogoAcademy = {
 	'/[partner_id]/learning/tests/dashboard/admin/[test_id]': {
 		navigation: 'cogo_academy-create_faq',
 	},
+	'/[partner_id]/learning/course': {
+		navigation: 'cogo_academy-course',
+	},
 };
 
 module.exports = cogoAcademy;

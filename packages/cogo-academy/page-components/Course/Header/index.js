@@ -9,8 +9,8 @@ function Header() {
 
 	const onClickConfiguration = () => {
 		router.push(
-			'/learning/course/',
-			'/learning/course/',
+			'/learning/course/create',
+			'/learning/course/create',
 		);
 	};
 

@@ -428,6 +428,7 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 	],
+	courses: [],
 };
 
 export default faq;

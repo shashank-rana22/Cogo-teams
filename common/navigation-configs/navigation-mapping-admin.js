@@ -2088,7 +2088,7 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'cogo_academy-course',
-				title         : 'Course',
+				title         : 'Course Module',
 				href          : '/v2/learning/course',
 				as            : '/v2/learning/course',
 				type          : 'link',

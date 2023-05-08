@@ -1,19 +1,41 @@
-import { Input, Button } from '@cogoport/components';
+import { MultiSelect, Button } from '@cogoport/components';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
 
 function CourseTopics() {
+	const [value, onChange] = useState([]);
+	const options = [
+		{ label: 'Harper Lee', value: 'To Kill a Mockingbird' },
+		{ label: 'Lev Tolstoy', value: 'War and Peace' },
+	];
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.title}>Which topics of knowledge will you cover in the Course?</div>
+			<div className={styles.title}>Which Category does your Course belong to?</div>
+
 			<div className={styles.tag_line}>
-				Don’t worry, you can change that later. We just need a name for creation
+				This will help users find your course during Consumption
 			</div>
+
 			<div className={styles.input_container}>
-				<Input size="md" placeholder="Type name..." />
+				<MultiSelect
+					value={value}
+					onChange={onChange}
+					placeholder="Select topics"
+					options={options}
+					isClearable
+				/>
 			</div>
+
 			<div className={styles.footer}>
-				<Button size="md" themeType="accent">Continue</Button>
+				<div className={styles.prev_button}>
+					<Button size="md" themeType="secondary">Previous</Button>
+				</div>
+
+				<div className={styles.create_button}>
+					<Button size="md" themeType="primary">Create Course</Button>
+				</div>
 			</div>
 		</div>
 	);
