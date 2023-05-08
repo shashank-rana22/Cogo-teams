@@ -1,10 +1,10 @@
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import Card from '../../../../common/Card';
 import RevenueCardHeading from '../../../../common/RevenueCardHeading';
 import DeclaredRevenue from '../../DeclaredRevenue';
-import { v4 as uuidv4 } from 'uuid';
 
 import styles from './styles.module.css';
 

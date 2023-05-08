@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import Loader from '../../../common/Loader';
 import LoadingPage from '../../../common/LoadingPage';
@@ -6,7 +7,6 @@ import LoadingPage from '../../../common/LoadingPage';
 import MobileBookingAnalysis from './MobileBookingAnalytics';
 import Months from './Months';
 import RevenueSection from './RevenueSection';
-import { v4 as uuidv4 } from 'uuid';
 import styles from './styles.module.css';
 
 function RenderView({

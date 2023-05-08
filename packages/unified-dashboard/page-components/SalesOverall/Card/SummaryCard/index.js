@@ -81,7 +81,7 @@ function SummaryCard({
 													<span>
 														#KGs
 														{' '}
-														  {(KG ?? 0).toFixed(3)}
+														{(KG ?? 0).toFixed(3)}
 													</span>
 												</div>
 											</div>

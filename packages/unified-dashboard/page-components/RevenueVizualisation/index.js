@@ -55,7 +55,7 @@ function RevenueVisualization({ headerFilters }) {
 		if (!isComponentInViewport) {
 			setisComponentInViewport(inViewportBarChart);
 		}
-	}, [inViewportBarChart]);
+	}, [inViewportBarChart, isComponentInViewport]);
 
 	return (
 		<div className={styles.container} ref={ref}>

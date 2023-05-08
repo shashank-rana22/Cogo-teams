@@ -1,5 +1,6 @@
-import Zone from './Zone';
 import { v4 as uuidv4 } from 'uuid';
+
+import Zone from './Zone';
 
 function SalesZone({ data = [], currency, filters }) {
 	return (

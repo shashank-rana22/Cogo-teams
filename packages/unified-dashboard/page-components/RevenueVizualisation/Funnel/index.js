@@ -1,5 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import EmptyState from '../../../common/Empty';
 import Loader from '../../../common/PopoverLoader';
@@ -7,8 +8,6 @@ import useGetAccountWiseFunnel from '../../../hooks/useGetAccountWiseFunnel';
 
 import FunnelChart from './FunnelChart';
 import styles from './styles.module.css';
-import { v4 as uuidv4 } from 'uuid';
-
 
 function Funnel({ byEtd, headerFilters }) {
 	const [activeAccount, setActiveAccount] = useState('CP');

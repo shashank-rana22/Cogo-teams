@@ -1,11 +1,11 @@
 import { IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
+import { v4 as uuidv4 } from 'uuid';
 
 import getMonthYear from '../../../../utils/getMonthYear';
 import getNextData from '../../../../utils/getNextData';
 import getPreviousData from '../../../../utils/getPreviousData';
 import isNextArrowAllowed from '../../../../utils/isNextArrowAllowed';
 import ShowMonths from '../../../../utils/showMonths';
-import { v4 as uuidv4 } from 'uuid';
 
 import styles from './styles.module.css';
 

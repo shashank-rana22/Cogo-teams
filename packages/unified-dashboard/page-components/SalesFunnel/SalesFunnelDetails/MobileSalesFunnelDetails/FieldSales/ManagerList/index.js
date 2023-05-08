@@ -1,6 +1,6 @@
-import Manager from './Manager';
 import { v4 as uuidv4 } from 'uuid';
 
+import Manager from './Manager';
 
 function ManagerList({ data = [], currency, filters, managerPad = 10 }) {
 	return (

@@ -81,6 +81,7 @@ importers:
       '@cogoport/store': workspace:0.1.0
       '@cogoport/supply-dashboards': workspace:0.1.0
       '@cogoport/translate': workspace:0.1.0
+      '@cogoport/unified-dashboard': workspace:^0.1.0
       '@cogoport/utils': ^1.2.6
       '@cogoport/vendor-rm': workspace:0.1.0
       '@cogoport/welcome': workspace:0.1.0
@@ -131,6 +132,7 @@ importers:
       '@cogoport/store': link:../common/store
       '@cogoport/supply-dashboards': link:../packages/supply-dashboards
       '@cogoport/translate': link:../packages/Translation
+      '@cogoport/unified-dashboard': link:../packages/unified-dashboard
       '@cogoport/utils': 1.2.6
       '@cogoport/vendor-rm': link:../packages/vendor-rm
       '@cogoport/welcome': link:../packages/welcome
@@ -1028,6 +1030,32 @@ importers:
       '@cogoport/utils': 1.2.6
       react: 18.2.0
       react-hook-form: 7.43.7_react@18.2.0
+
+  packages/unified-dashboard:
+    specifiers:
+      '@cogoport/charts': ^1.0.1
+      '@cogoport/components': ^1.0.390
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/globalization': workspace:^0.0.1
+      '@cogoport/icons-react': ^1.0.57
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.4
+      react: 18.2.0
+      uuid: ^9.0.0
+    dependencies:
+      '@cogoport/charts': 1.0.2_react@18.2.0
+      '@cogoport/components': 1.0.410_y3d6pejfqbkazdfzmaewia2nra
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
+      '@cogoport/icons-react': 1.0.68_react@18.2.0
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
+      react: 18.2.0
+      uuid: 9.0.0
 
   packages/vendor-rm:
     specifiers:

@@ -1,9 +1,9 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import currencyCoversion from '../../../../utils/currencyCoversion';
 import getMonthYear from '../../../../utils/getMonthYear';
-import { v4 as uuidv4 } from 'uuid';
 import styles from '../styles.module.css';
 
 const DesktopView = ({ master, keys, selectedFilterTab, currency }) => {
