@@ -18,7 +18,9 @@
 	tr {
 		line-height: 24px;
 		border-bottom: 1px solid #f2e3c3;
+	} 
 
+	td{
 		&:nth-child(1) {
 			text-decoration: underline;
 			cursor: pointer;
