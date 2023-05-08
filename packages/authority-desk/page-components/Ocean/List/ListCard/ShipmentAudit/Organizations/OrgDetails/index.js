@@ -1,7 +1,7 @@
-import { Loader } from '@cogoport/components';
+import { Loader, Pagination } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { startCase } from '@cogoport/utils';
-import React from 'react';
+import { startCase, format, upperCase } from '@cogoport/utils';
+import React, { useState } from 'react';
 
 import EmptyState from '../../../../../../../commons/EmptyState';
 import useListInvoiceWrapper from '../../../../../../../hooks/useListInvoiceWrapper';
@@ -9,12 +9,14 @@ import useListInvoiceWrapper from '../../../../../../../hooks/useListInvoiceWrap
 import styles from './styles.module.css';
 
 function OrgDetails({ registerationNumber = '' }) {
-	const { data, loading } = useListInvoiceWrapper({ registerationNumber });
+	const [page, setPage] = useState(1);
+
+	const { data, loading } = useListInvoiceWrapper({ registerationNumber, page });
 
 	if (loading) {
 		return (
 			<div className={styles.loader}>
-				Loading Invoice Data....
+				Loading Invoices Data....
 				<Loader themeType="primary" className={styles.loader_icon} />
 			</div>
 		);
@@ -24,8 +26,24 @@ function OrgDetails({ registerationNumber = '' }) {
 		return <EmptyState />;
 	}
 
+	const renderPagination = (
+		data?.totalRecords < 10 && !loading ? (
+			<Pagination
+				type="table"
+				totalItems={data?.totalRecords}
+				pageSize={10}
+				currentPage={page}
+				className={styles.pagination}
+				onPageChange={(val) => setPage(val)}
+			/>
+		) : null
+	);
+
 	return (
 		<div className={styles.container}>
+
+			{ renderPagination}
+
 			<table>
 				<th>
 					<td>
@@ -74,8 +92,8 @@ function OrgDetails({ registerationNumber = '' }) {
 
 						<td>
 							{formatAmount({
-								amount   : val.grandTotal - val.paidAmount - val.paidTds,
-								currency : val?.billCurrency,
+								amount   : val?.balanceAmount,
+								currency : val?.currency,
 								options  : {
 									style                 : 'currency',
 									currencyDisplay       : 'code',
@@ -84,8 +102,8 @@ function OrgDetails({ registerationNumber = '' }) {
 							})}
 
 						</td>
-						<td>{val?.dueDate}</td>
-						<td>{val?.paymentStatus}</td>
+						<td>{format(val?.dueDate, 'dd MMM yyyy', null, true)}</td>
+						<td>{upperCase(val?.paymentStatus)}</td>
 					</tr>
 				))}
 			</table>

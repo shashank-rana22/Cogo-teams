@@ -66,9 +66,12 @@ function ShipmentAudit({
 				{'>'}
 &nbsp;
 			</div>
-			<div className={styles.bucket_title}>
+			<ClickableDiv
+				className={styles.bucket_title}
+				onClick={() => closeModal()}
+			>
 				{startCase(bucket)}
-			</div>
+			</ClickableDiv>
 		</div>
 
 	);

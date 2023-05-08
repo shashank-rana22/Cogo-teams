@@ -26,3 +26,8 @@
 .loader_icon {
 	width: 50px;
 }
+
+.pagination {
+	justify-content: flex-end;
+	margin-top: 6px;
+}
