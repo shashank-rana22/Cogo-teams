@@ -90,6 +90,9 @@
 }
 
 .link {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 12px;
 	color: #f68b21;
 	text-decoration: underline;
 	cursor: pointer;

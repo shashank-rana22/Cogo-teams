@@ -42,7 +42,7 @@ export const formatPurchaseLineItems = (line_items, codes) => {
 		const tax_total = (total * (codes[item?.code]?.tax_percent || 0)) / 100;
 		const cost = (total || 0) + (tax_total || 0);
 
-		const { tax_percent, service_name, trade_type, product_code, item_name } = codes[item?.code] || {};
+		const { tax_percent, service_name, trade_type, product_code, actualname } = codes[item?.code] || {};
 
 		const {
 			code,
@@ -51,7 +51,6 @@ export const formatPurchaseLineItems = (line_items, codes) => {
 			quantity,
 			exchange_rate,
 			service_name: serviceName,
-			name,
 			unit,
 			container_number,
 		} = item || {};
@@ -73,7 +72,7 @@ export const formatPurchaseLineItems = (line_items, codes) => {
 					? `${service_name || serviceName}_local` : service_name || serviceName,
 			product_code,
 			tax_total_price  : Number(cost || 0),
-			name             : item_name || name,
+			name             : actualname || item?.actualname,
 			unit,
 			container_number : container_number || '',
 		};

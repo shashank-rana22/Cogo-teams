@@ -23,8 +23,9 @@ function ComparisionModal({
 
 	const [collectionPartyId, setCollectionPartyId] = useState({
 		billId  : editData?.finance_job_number,
-		partyId : editData?.id,
+		partyId : editData?.collectionPartyId,
 	});
+
 	const [exchangeRateModal, setExchangeRateModal] = useState(false);
 	const [billingParty, setBillingParty] = useState({});
 	const [collectionParty, setCollectionParty] = useState({});

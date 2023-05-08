@@ -1,4 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
+import { IcMInformation } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -19,6 +20,9 @@ function ConfirmationModal({
 				className={styles.modal_container}
 			>
 				<Modal.Body>
+					<div className={styles.infoicon}>
+						<IcMInformation height={20} width={20} color="red" />
+					</div>
 					<div className={styles.exchangeheading}>
 						Please check all the details carefully and validate.
 					</div>

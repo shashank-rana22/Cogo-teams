@@ -26,7 +26,8 @@ function TagMap({
 			<div className={styles.empty}>
 				No Invoices Found
 				{' '}
-				{activeTab !== 'notTaggedIds' ? <span className={styles.activetab}>{activeTab}</span> : null}
+				{['merge', 'split'].includes(activeTab)
+					? <span className={styles.activetab}>{`In ${activeTab}`}</span> : null}
 			</div>
 		);
 	}
