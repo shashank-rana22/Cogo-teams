@@ -18,11 +18,15 @@ function Footer({ item = {}, role = '', tabsState = {}, refetch = () => {} }) {
 		yellow : <IcCYelloCircle height={12} width={12} />,
 	};
 
+	// To be Removed in future
+	let oldFlowForBlOrDo = item?.trade_type === 'export' && tabsState.activeTab === 'bl' ? true : null;
+	oldFlowForBlOrDo = item?.trade_type === 'import' && tabsState.activeTab === 'do' ? true : null;
+
 	const renderButtonCondition = () => {
 		if (
 			role === 'kam'
 			&& ['ineligible', 'hold'].includes(tabsState.bucket)
-			&& item?.invoice_status?.is_invoice_validated
+			&& item?.invoice_status?.is_invoice_validated && oldFlowForBlOrDo
 		) {
 			return (
 				<Button onClick={() => setShowModal('request_modal')}>
