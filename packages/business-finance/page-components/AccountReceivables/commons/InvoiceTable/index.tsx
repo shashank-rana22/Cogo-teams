@@ -6,11 +6,10 @@ import React from 'react';
 import Filters from '../../../commons/Filters';
 import completedColumn from '../../configs/Completed_table';
 import useGetOutstandingCard from '../../hooks/useGetoutstandingCard';
-import { invoiceListFilter } from '../../Utils/invoicelistFilter';
 import FilterModal from '../FilterModal';
 import SearchInput from '../searchInput';
 import StyledTable from '../styledTable';
-
+import invoiceListFilterMapping from '../../Utils/invoiceListFilterMapping.json'
 import styles from './styles.module.css';
 
 interface Props {
@@ -43,9 +42,11 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 
 	const { list : invoiceList = [], page: pageInvoiceList, totalRecords: recordInvoiceList } = listData || {};
 
-	const invoiceFilter = invoiceListFilter(Object.keys(GLOBAL_CONSTANTS.country_entity_ids).find(
+	const country_entity_ids = GLOBAL_CONSTANTS.country_entity_ids[Object.keys(GLOBAL_CONSTANTS.country_entity_ids).find(
 		(key) => GLOBAL_CONSTANTS.country_entity_ids[key] === countryId,
-	));
+	)];
+
+	const invoiceFilter = invoiceListFilterMapping[country_entity_ids];
 
 	const { sortType = '', sortBy = '' } = sort || {};
 
