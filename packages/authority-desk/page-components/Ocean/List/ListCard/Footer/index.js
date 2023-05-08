@@ -20,7 +20,7 @@ function Footer({ item = {}, role = '', tabsState = {}, refetch = () => {} }) {
 
 	// To be Removed in future
 	let oldFlowForBlOrDo = item?.trade_type === 'export' && tabsState.activeTab === 'bl' ? true : null;
-	oldFlowForBlOrDo = item?.trade_type === 'import' && tabsState.activeTab === 'do' ? true : null;
+	oldFlowForBlOrDo = item?.trade_type === 'import' && tabsState.activeTab === 'do' ? true : oldFlowForBlOrDo;
 
 	const renderButtonCondition = () => {
 		if (
