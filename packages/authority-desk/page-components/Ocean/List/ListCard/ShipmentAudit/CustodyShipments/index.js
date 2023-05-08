@@ -5,8 +5,8 @@ import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import EmptyState from '../../../../../../commons/EmptyState';
-import RedirectToShipmentDetailPage from '../../../../../../commons/RedirectToShipmentDetailPage';
 import useListShipments from '../../../../../../hooks/useListShipments';
+import useRedirectToShipmentDetailPage from '../../../../../../hooks/useRedirectToShipmentDetailPage';
 
 import styles from './styles.module.css';
 
@@ -16,6 +16,8 @@ function CustodyShipments({ item = {} }) {
 	const [filters, setFilters] = useState({ page: 1 });
 
 	const { data, loading } = useListShipments({ item, filters });
+
+	const { redirect } = useRedirectToShipmentDetailPage();
 
 	const { list = [], total_count } = data || {};
 
@@ -31,8 +33,6 @@ function CustodyShipments({ item = {} }) {
 			</div>
 		);
 	}
-
-	const { redirect } = RedirectToShipmentDetailPage();
 
 	const renderPagination = (
 		<Pagination
