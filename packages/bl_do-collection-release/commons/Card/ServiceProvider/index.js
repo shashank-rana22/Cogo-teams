@@ -1,4 +1,4 @@
-import { cl, Popover, ToolTip } from '@cogoport/components';
+import { cl, Popover, Tooltip } from '@cogoport/components';
 import { IcMUserAllocations } from '@cogoport/icons-react';
 
 import BLPopver from './BLPopover';
@@ -13,12 +13,13 @@ const styleIcon = {
 	verticalAlign : 'middle',
 };
 
-export default function ServiceProvider({ item = {}, activeTab = '' }) {
+export default function ServiceProvider({ item = {}, stateProps = {} }) {
+	console.log('itemn', item);
 	const getDocs = (ele) => {
 		let doc;
 		if (
 			['knockoff_pending', 'collection_pending', 'under_collection'].includes(
-				activeTab,
+				stateProps.inner_tab,
 			)
 			&& ele?.trade_type === 'import'
 		) {
@@ -35,7 +36,7 @@ export default function ServiceProvider({ item = {}, activeTab = '' }) {
 	const docsLength = list_of_docs?.length;
 	const remainLength = docsLength > 1 ? docsLength - 1 : 0;
 	const doc_number =		(['knockoff_pending', 'collection_pending', 'under_collection'].includes(
-		activeTab,
+		stateProps.inner_tab,
 	)
 			&& item?.trade_type === 'import')
 		|| item?.trade_type === 'export'
@@ -45,11 +46,62 @@ export default function ServiceProvider({ item = {}, activeTab = '' }) {
 	const docTitle =		item?.trade_type === 'export'
 		|| (item?.trade_type === 'import'
 			&& ['knockoff_pending', 'collection_pending', 'under_collection'].includes(
-				activeTab,
+				stateProps.inner_tab,
 			))
 		? 'BL'
 		: 'DO';
 
+	return (
+		<div className={styles.container}>
+			<div className={styles.col}>
+				<div className={cl`${styles.left}`}>
+					<div className={styles.grey}>
+						Service Provider
+					</div>
+					<div className={styles.details}>
+						{item?.freight_service?.service_provider?.business_name}
+					</div>
+				</div>
+				<div className={styles.right}>
+					<div className={styles.grey}>Service Provider Contact</div>
+					<div className={styles.details}>
+						<Tooltip
+							animation="shift-away"
+							interactive
+							content={(<div>service provider contacts</div>
+							)}
+						>
+							<div className={styles.tooltip_container}>Click Here To View</div>
+						</Tooltip>
+
+					</div>
+				</div>
+			</div>
+			<div className={styles.col}>
+				<div className={styles.left}>
+					<div className={styles.grey}>
+						Customer
+					</div>
+				</div>
+				<div className={styles.right}>
+					<div className={styles.grey}>
+						BL Details
+					</div>
+					<div className={styles.details}>
+						<Tooltip
+							animation="shift-away"
+							interactive
+							content={(<BLPopver blDetails={item?.bill_of_ladings} bl_do={stateProps.activeTab} />
+							)}
+						>
+							<div className={styles.tooltip_container}>Details</div>
+						</Tooltip>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 	return (
 
 		<div className={cl`${styles.container} ${styles.service_provider}`}>
@@ -58,7 +110,7 @@ export default function ServiceProvider({ item = {}, activeTab = '' }) {
 					<div className={cl`${styles.container} ${styles.half_width}`}>
 						<div className={cl`${styles.text} ${styles.thin}`}>Service Provider</div>
 
-						{/* <ToolTip
+						{/* <Tooltip
 							animation="shift-away"
 							theme="light-border"
 							interactive
@@ -71,15 +123,14 @@ export default function ServiceProvider({ item = {}, activeTab = '' }) {
 							<div className={cl`{styles.text}`} className="bold service-provider ellipsis-text">
 								{(item?.service_provider?.business_name || '').toLowerCase()}
 							</div>
-						</ToolTip> */}
+						</Tooltip> */}
 					</div>
 
 					<div className={cl`${styles.container}  ${styles.half_width}`}>
 						<div className={cl`${styles.text}  ${styles.thin}`}>Customer</div>
 
-						{/* <ToolTip
+						<Tooltip
 							animation="shift-away"
-							theme="light-border"
 							interactive
 							content={(
 								<div className={cl`${styles.text} ${styles.bold} ${styles.service_provider}`}>
@@ -92,15 +143,14 @@ export default function ServiceProvider({ item = {}, activeTab = '' }) {
 							>
 								{(item?.customer?.business_name || '').toLowerCase()}
 							</div>
-						</ToolTip> */}
+						</Tooltip>
 					</div>
 				</div>
 
 				<div className={cl`${styles.container}`}>
 					<div className={cl`${styles.text}  ${styles.thin}`}>Service Provider Contact</div>
-					{/*
+
 					<Popover
-						theme="light-border"
 						animation="shift-away"
 						interactive
 						content={(
@@ -114,7 +164,7 @@ export default function ServiceProvider({ item = {}, activeTab = '' }) {
 							Click here to view
 							<IcMUserAllocations style={styleIcon} />
 						</div>
-					</Popover> */}
+					</Popover>
 				</div>
 			</div>
 
@@ -125,10 +175,9 @@ export default function ServiceProvider({ item = {}, activeTab = '' }) {
 						{' '}
 						Details
 					</div>
-					{/* {docsLength > 0 ? (
+					{docsLength > 0 ? (
 						<Popover
 							animation="shift-away"
-							theme="light-border"
 							content={<BLPopver bl_do={docTitle} blDetails={list_of_docs} />}
 						>
 							<div className={cl`${styles.container} ${styles.cursor} ${styles.inline}`}>
@@ -143,7 +192,7 @@ export default function ServiceProvider({ item = {}, activeTab = '' }) {
 								) : null}
 							</div>
 						</Popover>
-					) : null} */}
+					) : null}
 				</div>
 
 				<div className={cl`${styles.container} ${styles.row}`}>

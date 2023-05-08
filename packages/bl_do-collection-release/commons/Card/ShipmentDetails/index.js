@@ -24,12 +24,12 @@ export default function ShipmentDetails({ item = {}, stateProps = {} }) {
 				</div>
 
 				<div className={cl`${styles.tag_container} ${styles.col}`}>
-					<div className={cl`${styles.block} ${styles.bold} ${styles.capitalize} ${styles.border}`}>
+					<div className={cl`${styles.block} ${styles.bold} ${styles.border}`}>
 						{serviceNameMapping[stateProps?.shipment_type]}
 					</div>
 
 					<div className={cl`${styles.block}  ${styles.border}
-					 ${styles.bold} ${styles.capitalize}`}
+					 ${styles.bold}`}
 					>
 						{item?.trade_type}
 					</div>

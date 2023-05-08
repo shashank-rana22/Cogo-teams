@@ -5,12 +5,12 @@
 	border-radius: 4px;
 	text-align: center;
 	cursor: pointer;
-	&.id{
-		color: #F68B21;
-		text-decoration: underline;
-	}
-	
 };
+
+.sid.id{
+	color: #F68B21;
+	text-decoration: underline;
+}
 
 
 .container{
@@ -70,10 +70,6 @@
 	font-weight: 600;
 	padding: 2px 8px;
 	overflow: hidden;
-
-	.capitalize {
-		text-transform: capitalize;
-	}
 
 	&.service {
 		background: #393f70cc;

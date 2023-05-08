@@ -17,7 +17,7 @@ export default function useListBlDOShipment({ prefix = '', stateProps = {} }) {
 			const finalFilters = {
 				[inner_tab] : true,
 				trade_type  : trade_type.length ? trade_type : undefined,
-				q,
+				q           : q.length ? q : undefined,
 			};
 			const res = await trigger({
 				params: {

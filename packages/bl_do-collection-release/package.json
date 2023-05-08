@@ -12,6 +12,7 @@
     "@cogoport/scope-select": "workspace:^0.1.0",
     "@cogoport/store": "workspace:^0.1.0",
     "@cogoport/ocean-modules": "workspace:^0.1.0",
+    "@cogoport/globalization": "workspace:^0.0.1",
     "@cogoport/utils": "^1.2.6",
     "@cogoport/forms": "workspace:^0.1.0",
     "react": "18.2.0"

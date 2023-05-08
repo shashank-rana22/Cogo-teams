@@ -8,7 +8,7 @@ export default function BLPopver({ bl_do = '', blDetails = [] }) {
 		<div className={cl`${styles.container} ${styles.main}`}>
 			<div className={cl`${styles.container} ${styles.header}`}>
 				<div className={cl`${styles.text} ${styles.title}`}>
-					{bl_do}
+					{bl_do.toUpperCase()}
 					{' '}
 					Number
 				</div>
