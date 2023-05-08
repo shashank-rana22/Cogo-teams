@@ -11,6 +11,7 @@ interface UploadInterface {
 }
 
 const useUploadeInvoice = ({ id, setUploadInvoice, partner }: UploadInterface) => {
+	const { id: partnerId = '' } = partner || {};
 	const [{ loading }, trigger] = useRequestBf(
 		{
 			url     : '/sales/invoice/einvoice',
@@ -26,6 +27,10 @@ const useUploadeInvoice = ({ id, setUploadInvoice, partner }: UploadInterface) =
 			E_invoice_due_date : E_INVOICE_DUE_DATE = '', E_invoice_number : E_INVOICE_NUMBER = '',
 			E_invoice_pdf_file : E_INVOICE_PDF_FILE = '', E_invoice_xml_file : E_INVOICE_XML_FILE = '',
 		} = value || {};
+
+		const { finalUrl : FINAL_URL_PDF = '' } = E_INVOICE_PDF_FILE;
+		const { finalUrl : FINAL_URL_XML = '' } = E_INVOICE_XML_FILE;
+
 		try {
 			await trigger({
 				data: {
@@ -33,9 +38,9 @@ const useUploadeInvoice = ({ id, setUploadInvoice, partner }: UploadInterface) =
 					invoiceDate         : E_INVOICE_DATE || undefined,
 					invoiceDueDate      : E_INVOICE_DUE_DATE || undefined,
 					eInvoiceNumber      : E_INVOICE_NUMBER || undefined,
-					eInvoicePdfUrl      : E_INVOICE_PDF_FILE?.finalUrl || undefined,
-					eInvoiceXmlUrl      : E_INVOICE_XML_FILE?.finalUrl || undefined,
-					updatedBy           : partner?.id,
+					eInvoicePdfUrl      : FINAL_URL_PDF || undefined,
+					eInvoiceXmlUrl      : FINAL_URL_XML || undefined,
+					updatedBy           : partnerId,
 					performedByUserType : 'agent',
 				},
 			});

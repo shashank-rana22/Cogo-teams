@@ -10,16 +10,16 @@ import styles from './styles.module.css';
 
 const { cogoport_entities: CogoportEntity } = GLOBAL_CONSTANTS || {};
 
+const TIME_VALUE = 86400000;
+
 function IRNCancel({ itemData }) {
 	const [showCancellationModal, setShowCancellationModal] = useState(false);
 	const [show, setShow] = useState(false);
 
 	const { invoiceStatus, id, entityCode, irnGeneratedAt = '' } = itemData || {};
 
-	const TimeValue = 86400000;
-
 	const isAfterADay =	irnGeneratedAt !== null
-		? irnGeneratedAt + TimeValue >= Date.now()
+		? irnGeneratedAt + TIME_VALUE >= Date.now()
 		: false;
 
 	const { postToSage, loading } = usePostToSage(id);

@@ -52,25 +52,25 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 
 	const sortStyleInvoiceDateAsc = sortType === 'asc' && sortBy === 'invoiceDate' ? '#F68B21' : '#BDBDBD';
 
-	const sortStyleinvoiceDateDesc = sortType === 'desc' && sortBy === 'invoiceDate' ? '#F68B21' : '#BDBDBD';
+	const sortStyleInvoiceDateDesc = sortType === 'desc' && sortBy === 'invoiceDate' ? '#F68B21' : '#BDBDBD';
 
 	const sortStyleDueDateAsc = sortType === 'asc' && sortBy === 'dueDate' ? '#F68B21' : '#BDBDBD';
 
 	const sortStyleDueDateDesc = sortType === 'desc' && sortBy === 'dueDate' ? '#F68B21' : '#BDBDBD';
 
-	const columns = completedColumn(
-		getOrganizationInvoices,
+	const columns = completedColumn({
+		refetch: getOrganizationInvoices,
 		showName,
 		setSort,
 		sortStyleGrandTotalAsc,
 		sortStyleGrandTotalDesc,
 		sortStyleInvoiceDateAsc,
-		sortStyleinvoiceDateDesc,
+		sortStyleInvoiceDateDesc,
 		sortStyleDueDateAsc,
 		sortStyleDueDateDesc,
 		invoiceFilters,
 		setinvoiceFilters,
-	);
+	});
 	return (
 		<div>
 			{' '}

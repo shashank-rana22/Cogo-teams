@@ -28,10 +28,16 @@ function InvoiceModal({
 	};
 
 	const {
-		E_invoice_date : E_INVOICE_DATE = '', E_invoice_due_date : E_INVOICE_DUE_DATE = '',
-		E_invoice_number: E_INVOICE_NUMBER = '', E_invoice_pdf_file: E_INVOICE_PDF_FILE = '',
-		E_invoice_xml_file: E_INVOICE_XML_FILE = '',
+		E_invoice_date : E_INVOICE_DATE = {}, E_invoice_due_date : E_INVOICE_DUE_DATE = {},
+		E_invoice_number: E_INVOICE_NUMBER = {}, E_invoice_pdf_file: E_INVOICE_PDF_FILE = {},
+		E_invoice_xml_file: E_INVOICE_XML_FILE = {},
 	} = errorVal;
+
+	const { message: E_INVOICE_DATE_MESSAGE = '' } = E_INVOICE_DATE;
+	const { message: E_INVOICE_DUE_DATE_MESSAGE = '' } = E_INVOICE_DUE_DATE;
+	const { message: E_INVOICE_NUMBER_MESSAGE = '' } = E_INVOICE_NUMBER;
+	const { message: E_INVOICE_PDF_FILE_MESSAGE = '' } = E_INVOICE_PDF_FILE;
+	const { message: E_INVOICE_XML_FILE_MESSAGE = '' } = E_INVOICE_XML_FILE;
 
 	return (
 		<Modal
@@ -62,7 +68,7 @@ function InvoiceModal({
 								{E_INVOICE_DATE && (
 									<span className={styles.errors}>
 										{' '}
-										{E_INVOICE_DATE?.message.toString()}
+										{E_INVOICE_DATE_MESSAGE.toString()}
 									</span>
 								)}
 							</div>
@@ -81,7 +87,7 @@ function InvoiceModal({
 								{E_INVOICE_DUE_DATE && (
 									<span className={styles.errors}>
 										{' '}
-										{E_INVOICE_DUE_DATE?.message.toString()}
+										{E_INVOICE_DUE_DATE_MESSAGE.toString()}
 									</span>
 								)}
 							</div>
@@ -97,7 +103,7 @@ function InvoiceModal({
 								{E_INVOICE_NUMBER && (
 									<span className={styles.errors}>
 										{' '}
-										{E_INVOICE_NUMBER?.message.toString()}
+										{E_INVOICE_NUMBER_MESSAGE.toString()}
 									</span>
 								)}
 							</div>
@@ -118,7 +124,7 @@ function InvoiceModal({
 								{E_INVOICE_PDF_FILE && (
 									<span className={styles.errors}>
 										{' '}
-										{E_INVOICE_PDF_FILE?.message.toString()}
+										{E_INVOICE_PDF_FILE_MESSAGE.toString()}
 									</span>
 								)}
 							</div>
@@ -134,7 +140,7 @@ function InvoiceModal({
 								{E_INVOICE_XML_FILE && (
 									<span className={styles.errors}>
 										{' '}
-										{E_INVOICE_XML_FILE?.message.toString()}
+										{E_INVOICE_XML_FILE_MESSAGE.toString()}
 									</span>
 								)}
 							</div>

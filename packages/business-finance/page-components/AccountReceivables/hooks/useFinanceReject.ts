@@ -9,9 +9,13 @@ interface FinanceInterface {
 }
 
 const useFinanceReject = ({ id, textValue, refetch }: FinanceInterface) => {
-	const { user_profile: UserProfile } = useSelector(({ profile }) => ({
+	const { user_profile: UserProfile = {} } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
+
+	const { user = {}, session_type: SessionType = '' } = UserProfile;
+
+	const { id: userId = '' } = user;
 
 	const [
 		{ data, loading },
@@ -31,9 +35,9 @@ const useFinanceReject = ({ id, textValue, refetch }: FinanceInterface) => {
 				data: {
 					invoiceId       : id,
 					rejectionReason : textValue,
-					updatedBy       : UserProfile?.user?.id,
+					updatedBy       : userId,
 					performedByUserType:
-                    UserProfile.session_type === 'partner' ? 'AGENT' : 'USER',
+					SessionType === 'partner' ? 'AGENT' : 'USER',
 				},
 			});
 			if (resp.status === 200) {

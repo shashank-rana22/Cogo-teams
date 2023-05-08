@@ -33,7 +33,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	const [uploadInvoice, setUploadInvoice] = useState(false);
 	const [openReject, setOpenReject] = useState(false);
 	const [textValue, setTextValue] = useState('');
-	const { invoiceStatus = '' } = itemData || {};
+	const { invoiceStatus = '', entityCode = '' } = itemData || {};
 
 	const { partner = {} } = profile;
 
@@ -72,7 +72,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	const onChange = (e) => {
 		setTextValue(e);
 	};
-	const { labels } = CogoportEntity[itemData?.entityCode] || {};
+	const { labels } = CogoportEntity[entityCode] || {};
 
 	const { irn_label: IrnLabel } = labels || {};
 

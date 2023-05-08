@@ -36,7 +36,7 @@ const invoiceStatus = {
 	FINANCE_REJECTED : '#f9ac98',
 };
 
-const completedColumn = (
+interface InvoiceTable {
 	refetch?: Function,
 	showName?: boolean,
 	setSort?: (p: object)=>void,
@@ -46,9 +46,23 @@ const completedColumn = (
 	sortStyleInvoiceDateDesc?: string,
 	sortStyleDueDateAsc?: string,
 	sortStyleDueDateDesc?: string,
-	invoiceFilter?: object,
-	setInvoiceFilter?: (p:object) => void,
-) => [
+	invoiceFilters?: object,
+	setinvoiceFilters?: (p:object) => void,
+}
+
+const completedColumn = ({
+	refetch,
+	showName,
+	setSort,
+	sortStyleGrandTotalAsc,
+	sortStyleGrandTotalDesc,
+	sortStyleInvoiceDateAsc,
+	sortStyleInvoiceDateDesc,
+	sortStyleDueDateAsc,
+	sortStyleDueDateDesc,
+	invoiceFilters,
+	setinvoiceFilters,
+}: InvoiceTable) => [
 
 	{
 		Header   : showName && 'Name',
@@ -191,8 +205,8 @@ const completedColumn = (
 					Invoice Amount
 				</div>
 				<SortHeaderInvoice
-					invoiceFilter={invoiceFilter}
-					setInvoiceFilter={setInvoiceFilter}
+					invoiceFilter={invoiceFilters}
+					setInvoiceFilter={setinvoiceFilters}
 					setOrderBy={setSort}
 					sortStyleDesc={sortStyleGrandTotalDesc}
 					sortStyleAsc={sortStyleGrandTotalAsc}
@@ -284,8 +298,8 @@ const completedColumn = (
 					Invoice Date
 				</div>
 				<SortHeaderInvoice
-					invoiceFilter={invoiceFilter}
-					setInvoiceFilter={setInvoiceFilter}
+					invoiceFilter={invoiceFilters}
+					setInvoiceFilter={setinvoiceFilters}
 					setOrderBy={setSort}
 					sortStyleDesc={sortStyleInvoiceDateDesc}
 					sortStyleAsc={sortStyleInvoiceDateAsc}
@@ -309,8 +323,8 @@ const completedColumn = (
 					Due Date
 				</div>
 				<SortHeaderInvoice
-					invoiceFilter={invoiceFilter}
-					setInvoiceFilter={setInvoiceFilter}
+					invoiceFilter={invoiceFilters}
+					setInvoiceFilter={setinvoiceFilters}
 					setOrderBy={setSort}
 					sortStyleDesc={sortStyleDueDateDesc}
 					sortStyleAsc={sortStyleDueDateAsc}
