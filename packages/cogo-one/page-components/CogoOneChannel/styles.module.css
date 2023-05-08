@@ -6,6 +6,14 @@
 	justify-content: flex-end;
 }
 
+.feedback {
+	position: absolute;
+	top: 4px;
+	right: 48px;
+	display: flex;
+	justify-content: flex-end;
+}
+
 .settings_icon {
 	width: 25px;
 	height: 25px;

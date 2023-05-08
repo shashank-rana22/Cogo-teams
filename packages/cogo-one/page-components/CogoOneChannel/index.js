@@ -1,4 +1,4 @@
-import { IcMDownload, IcMSettings } from '@cogoport/icons-react';
+import { IcMDownload, IcMSettings, IcMFeedback } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
@@ -22,6 +22,7 @@ import Conversations from './Conversations';
 import Customers from './Customers';
 import DialCallModal from './DialCallModal';
 import EmptyChatPage from './EmptyChatPage';
+import FeedbackModal from './FeedbackModal';
 import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
 
@@ -53,6 +54,7 @@ function CogoOne() {
 	});
 	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
 	const [agentDetails, setAgentDetails] = useState(false);
+	const [showFeedback, setShowFeedback] = useState(false);
 
 	const [modalType, setModalType] = useState({ type: null, data: {} });
 
@@ -193,6 +195,15 @@ function CogoOne() {
 					/>
 				</div>
 			)}
+
+			{isomniChannelAdmin && (
+				<div className={styles.feedback}>
+					<IcMFeedback
+						className={styles.settings_icon}
+						onClick={() => setShowFeedback(true)}
+					/>
+				</div>
+			)}
 			<div className={styles.layout_container}>
 				<Customers
 					isomniChannelAdmin={isomniChannelAdmin}
@@ -272,6 +283,14 @@ function CogoOne() {
 					setAgentDetails={setAgentDetails}
 				/>
 			)}
+			{
+				showFeedback && (
+					<FeedbackModal
+						showFeedback={showFeedback}
+						setShowFeedback={setShowFeedback}
+					/>
+				)
+			}
 			{raiseTicketModal?.state && (
 				<RaiseTicket
 					setRaiseTicketModal={setRaiseTicketModal}
