@@ -15,7 +15,7 @@ function KamExpertise() {
 	return (
 		<section className={styles.container} id="kam_expertise_container">
 			<section className={styles.heading_container}>
-				KAM Expertise
+				KAM Expertise Helllo
 			</section>
 
 			<Header />
