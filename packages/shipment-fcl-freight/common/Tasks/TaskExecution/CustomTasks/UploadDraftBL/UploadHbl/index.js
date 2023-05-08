@@ -1,4 +1,5 @@
-import { Button } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
+import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useRef } from 'react';
 
 import Form from '../form';
@@ -7,13 +8,75 @@ import controls from './controls';
 import styles from './styles.module.css';
 
 function UploadHbl(props) {
-	const { docs, bls_count, summary, data, refetchDocs } = props || {};
+	const { docs, bls_count, primaryService, task, refetchDocs } = props || {};
 
-	const formRefs = useRef();
+	const formRefs = useRef([]);
 	const [urls, setUrls] = useState([]);
 
+	const [{ loading }, trigger] = useRequest({
+		url    : '/create_shipment_document',
+		method : 'POST',
+	}, { manual: true });
+
+	const uploadBills = async (values) => {
+		const documents = [];
+
+		values?.forEach((item) => {
+			documents.push({
+				file_name    : item?.url?.fileName,
+				document_url : item?.url?.finalUrl,
+				data         : {
+					description      : item?.description,
+					document_number  : item?.document_number,
+					containers_count : item?.containers_count,
+					service_id       : primaryService?.id,
+					service_type     : primaryService?.service_type,
+				},
+			});
+		});
+
+		const body = {
+			shipment_id        : task?.shipment_id,
+			uploaded_by_org_id : task?.organization_id,
+			service_id         : task?.service_id,
+			service_type       : task.service_type,
+			pending_task_id:
+			task?.service_type === 'lcl_freight_service' ? task?.id : undefined,
+			document_type: 'draft_house_bill_of_lading',
+			documents,
+		};
+
+		console.log('body', body);
+
+		await trigger({ data: body });
+
+		refetchDocs();
+	};
+
+	const handleSubmit = () => {
+		let isAllFormsValid = true;
+		const invoice_details = [];
+
+		(formRefs?.current || []).forEach((item) => {
+			if (!item?.submitForm()) {
+				isAllFormsValid = false;
+			} else if (item?.submitForm()?.e) {
+				Toast.error(item?.submitForm()?.e);
+			} else {
+				invoice_details.push(item?.submitForm());
+			}
+		});
+
+		if (isAllFormsValid) {
+			uploadBills(invoice_details);
+		} else {
+			Toast.error('Fill all forms');
+		}
+	};
+
 	useEffect(() => {
-		const newUrls = [];
+		const newUrls = [...urls];
+
 		docs?.forEach((item, i) => {
 			newUrls[i] = `${item?.document_url}`;
 		});
@@ -57,9 +120,8 @@ function UploadHbl(props) {
 			<form className={styles.button_wrapper}>
 				{bls_count > urls?.length && (
 					<Button
-					// disabled={createShipmentDocAPI?.loading}
-					// onClick={handleSubmit}
-						id="bm_pt_bl_upload_hbl_submit"
+						disabled={loading}
+						onClick={handleSubmit}
 					>
 						Submitf
 					</Button>

@@ -78,7 +78,7 @@ function UploadListModal({ tableModal = '', setTableModal = () => {}, row = {} }
 
 				</Button>
 
-				{(request_files?.errored_data_url)
+				{(request_files?.stage !== 'completed')
 					? (
 						<Button
 							disabled={loading}
@@ -87,7 +87,7 @@ function UploadListModal({ tableModal = '', setTableModal = () => {}, row = {} }
 						>
 							Re-Upload
 						</Button>
-					) : ''}
+					) : null}
 
 			</Modal.Footer>
 		</Modal>
