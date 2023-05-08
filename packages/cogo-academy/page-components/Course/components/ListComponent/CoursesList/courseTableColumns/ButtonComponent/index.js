@@ -3,11 +3,11 @@ import { IcMEyeopen, IcMDelete, IcMOverflowDot, IcMEdit } from '@cogoport/icons-
 
 import styles from './styles.module.css';
 
-const handleEditCourse = ({ id, router }) => {
+const handleEditCourse = ({ router }) => {
 	router.push('/learning/course');
 };
 
-const handleViewCourse = ({ id, router }) => {
+const handleViewCourse = ({ router }) => {
 	router.push('/learning/course');
 };
 
