@@ -1,8 +1,8 @@
 // import CardList from '@cogo/bookings/commons/CardList';
-import { Tabs, TabPanel }from '@cogoport/components';
+import { Tabs, TabPanel } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
-import PendingTasks from '../../../PendingTasks/TaskList';
+// import PendingTasks from '../../../PendingTasks/TaskList';
 import tableColumn from '../Invoices/tableColumn';
 
 import styles from './styles.module.css';
@@ -44,13 +44,13 @@ const pendingKnockOff = ({
 				</TabPanel>
 
 				<TabPanel name="tasks" title="Tasks">
-					<PendingTasks
+					{/* <PendingTasks
 						taskList={tasks}
 						item={item}
 						handleAccordionOpen={handleAccordionOpen}
 						refetchForTask={refetchForTask}
 						tasksLoading={taskLoading}
-					/>
+					/> */}
 				</TabPanel>
 			</Tabs>
 		</div>

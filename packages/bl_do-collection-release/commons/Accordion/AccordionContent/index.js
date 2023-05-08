@@ -3,9 +3,9 @@ import { Button, Tabs, TabPanel } from '@cogoport/components';
 import { useState, useRef } from 'react';
 
 // import EmptyState from '../../../../../commons/EmptyState';
-import taskConfigs from '../../../../configs/taskConfig.json';
-import getMutatedControls from '../../../../helpers/get-mutated-controls';
-import PendingTasks from '../../../PendingTasks/TaskList';
+import taskConfigs from '../../../configs/taskConfigs.json';
+import getMutatedControls from '../../../helpers/getMutatedControls';
+// import PendingTasks from '../../../PendingTasks/TaskList';
 import Loader from '../../Loader';
 import tableColumn from '../Invoices/tableColumn';
 

@@ -24,7 +24,7 @@ export default function AccordionText({
 }) {
 	return (
 		<div className={styles.container}>
-			<div className={style.text_container}>
+			<div className={styles.text_container}>
 				{showInvoiceAndTask ? (
 					<>
 						<IcMFtaskCompleted

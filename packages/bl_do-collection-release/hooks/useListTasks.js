@@ -1,10 +1,24 @@
 import { useRequest } from '@cogoport/request';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 
-export default function useListTasks({ prefix = '' }) {
+export default function useListTasks({
+	prefix = '',
+	defaultFilters = {},
+	defaultParams = {},
+	params = {},
+	filters = {},
+}) {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : `${prefix}/list_tasks`,
 		method : 'GET',
+		params : {
+			...defaultParams,
+			...params,
+			filters: {
+				...filters,
+				...defaultFilters,
+			},
+		},
 	}, { manual: true });
 
 	const listTasks = useCallback(() => {
@@ -17,13 +31,10 @@ export default function useListTasks({ prefix = '' }) {
 		})();
 	}, [trigger]);
 
-	useEffect(() => {
-		listTasks();
-	}, [listTasks]);
-
 	console.log('tasks', data);
 	return {
-		data,
+		list: data?.list || [],
 		loading,
+		listTasks,
 	};
 }
