@@ -52,7 +52,8 @@ interface PropsType {
 function AdvancePayment({ activeEntity }:ItemProps) {
 	const [sort, setSort] = useState({});
 	const { filters, setFilters, data, loading } = useGetAdvancePaymentList({ activeEntity, sort });
-	const { pageIndex, list } = data || {};
+	const { pageIndex, list = [] } = data || {};
+	const listLength = list.length;
 	const functions = {
 		renderAmountWithCurrency: (itemData:PropsType) => (
 			<AmountWithCurrency itemData={itemData} />
@@ -88,7 +89,7 @@ function AdvancePayment({ activeEntity }:ItemProps) {
 				/>
 			</div>
 			<div className={styles.list}>
-				{loading || list?.length > 0
+				{listLength > 0
 					? (
 						<List
 							itemData={data}

@@ -10,6 +10,11 @@ import Dashboard from './Dashboard';
 import useListCogoEntities from './Dashboard/hooks/useListCogoEntities';
 import styles from './styles.module.css';
 
+interface ItemProps {
+	business_name:string,
+	entity_code:string,
+}
+
 function AccountPayables() {
 	const { query, push } = useRouter();
 	const [activePayables, setActivePayables] = useState<string>(query?.active_tab || 'dashboard');
@@ -34,10 +39,14 @@ function AccountPayables() {
 
 	const [activeEntity, setActiveEntity] = useState(entity);
 
-	const EntityOptions = (entityData || [])?.map((item) => ({
-		label : `${upperCase(item.business_name)} (${item?.entity_code})`,
-		value : item?.entity_code,
-	}));
+	const EntityOptions = (entityData || [])?.map((item:ItemProps) => {
+		const { business_name:companyName = '', entity_code:entityCode = '' } = item || {};
+
+		return {
+			label : `${upperCase(companyName)} (${entityCode})`,
+			value : entityCode,
+		};
+	});
 
 	return (
 		<div>
