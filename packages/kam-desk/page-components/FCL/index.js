@@ -10,7 +10,7 @@ import ShipmentList from './ShipmentList';
 import styles from './styles.module.css';
 
 function Fcl() {
-	const { data, loading } = useListKamDeskShipments({});
+	const { data, loading } = useListKamDeskShipments();
 
 	return (
 		<div>
@@ -29,7 +29,7 @@ function Fcl() {
 				<DeskTabs />
 			</div>
 
-			<Filters />
+			{/* <Filters /> */}
 			<div>
 				{loading
 					? <Loader />

@@ -6,7 +6,10 @@ import KamDeskContext from '../context/KamDeskContext';
 import getKamDeskFilters from '../helpers/getKamDeskFilters';
 
 const useListKamDeskShipments = () => {
-	const [apiData, setApiData] = useState({});
+	const [apiData, setApiData] = useState({
+		data  : {},
+		error : {},
+	});
 
 	const kamDeskContextValues = useContext(KamDeskContext);
 	const { activeTab, filters, setFilters, stepperTab, shipmentType } = kamDeskContextValues || {};
@@ -17,8 +20,7 @@ const useListKamDeskShipments = () => {
 	const apiPrefix = ['import', 'export'].includes(stepperTab) ? shipmentType : stepperTab;
 
 	const [{ loading }, trigger] = useRequest({
-		// url    : `${apiPrefix}/list_kam_desk_shipments`,
-		url    : 'fcl_freight/list_kam_desk_shipments',
+		url    : `${apiPrefix}/list_kam_desk_shipments`,
 		method : 'GET',
 		params : {
 			filters            : finalFilters,
@@ -37,8 +39,10 @@ const useListKamDeskShipments = () => {
 
 				if (res?.data?.list === 0 && page > 1) setFilters((prev) => ({ ...prev, page: 1 }));
 				setApiData(res?.data || {});
+				setApiData((prev) => ({ ...prev, data: res?.data || {}, error: {} }));
 			} catch (err) {
 				console.log({ err });
+				setApiData((prev) => ({ ...prev, data: {}, error: err }));
 				Toast.error(err?.response?.data?.message || err?.message || 'Something went wrong !!');
 			}
 		})();

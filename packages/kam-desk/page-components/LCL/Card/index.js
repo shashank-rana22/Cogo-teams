@@ -22,6 +22,7 @@ function Card({ data = {} }) {
 			<div className={styles.header}>
 				<Header data={data} />
 			</div>
+
 			<div className={styles.body_container}>
 				<div className={styles.details_container}>
 					<BasicDetails data={data} />

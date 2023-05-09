@@ -4,7 +4,9 @@ export default function getKamDeskFilters({ filters, kamDeskContextValues }) {
 	const { activeTab, shipmentType, stepperTab } = kamDeskContextValues || {};
 	const { page, date_type, dateRange, startDate, endDate, ...restFilters } = filters || {};
 
-	const payload = tabPayload?.[shipmentType]?.[stepperTab]?.[activeTab] || {};
+	const payload = tabPayload?.[shipmentType]?.[stepperTab]?.[activeTab]
+    || tabPayload?.[shipmentType]?.[activeTab]
+    || {};
 
 	let finalFilters = { ...payload, ...restFilters };
 	let additionalMethods = ['pagination'];

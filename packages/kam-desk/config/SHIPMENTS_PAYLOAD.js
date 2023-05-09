@@ -436,6 +436,13 @@ const tabPayload = {
 			cancelled        : { state: 'cancelled' },
 		},
 	},
+	all: {
+		ongoing: {
+			state: ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress'],
+		},
+		completed : { state: ['completed'] },
+		cancelled : { state: ['cancelled'] },
+	},
 };
 
 export default tabPayload;

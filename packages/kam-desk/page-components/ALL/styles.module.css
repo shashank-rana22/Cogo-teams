@@ -1,0 +1,13 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	margin-left: 16px;
+}
+
+.stepper_container {
+	margin-top: 16px;
+}
+
+.tabs_container {
+	margin-top: 16px;
+}

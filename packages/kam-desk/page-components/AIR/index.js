@@ -1,6 +1,4 @@
 import DeskTabs from '../../common/DeskTabs';
-import Filters from '../../common/Filters';
-import HeaderFilters from '../../common/HeaderFilters';
 import Loader from '../../common/Loader';
 import ShipmentType from '../../common/ShipmentType';
 import StepperTabs from '../../common/StepperTabs';
@@ -10,7 +8,7 @@ import ShipmentList from './ShipmentList';
 import styles from './styles.module.css';
 
 function Air() {
-	const { data, loading } = useListShipments({});
+	const { data, loading } = useListShipments();
 
 	return (
 		<div>

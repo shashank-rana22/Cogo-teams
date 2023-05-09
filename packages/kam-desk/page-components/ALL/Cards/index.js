@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import {
 	BasicDetails,
 	AssignedStakeholder,
@@ -17,18 +19,16 @@ function Card({ data = {} }) {
 			<div className={styles.header}>
 				<Header data={data} />
 			</div>
-
 			<div className={styles.body_container}>
 				<div className={styles.details_container}>
 					<BasicDetails data={data} />
-
 					<AssignedStakeholder data={data} />
 				</div>
 
 				<div className={styles.divider} />
 
 				<div className={styles.icon_container}>
-					<ShipmentIcon shipment_type="air_freight" />
+					<ShipmentIcon shipment_type={data?.shipment_type} />
 				</div>
 
 				<div className={styles.location_container}>

@@ -1,18 +1,17 @@
-.container{
-    display: flex;
-    justify-content: space-between;
-    
+.container {
+	display: flex;
+	justify-content: space-between;
 }
 
-.sub_container{
-    display: flex;
+.sub_container {
+	display: flex;
 }
 
-.channel_partner{
-    margin-left: 8px;
-    margin-top: 0;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+.channel_partner {
+	margin-top: 0;
+	margin-left: 8px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 }
 
 .export {

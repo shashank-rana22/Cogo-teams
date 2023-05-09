@@ -10,6 +10,7 @@ import {
 	SingleLocation,
 } from '../../../common/ShipmentCard';
 import KamDeskContext from '../../../context/KamDeskContext';
+import isSingleLocation from '../../../utils/checkSingleLocation';
 
 import styles from './styles.module.css';
 
@@ -35,7 +36,11 @@ function Card({ data = {} }) {
 				</div>
 
 				<div className={styles.location_container}>
-					<DualLocation data={data} />
+					{isSingleLocation(data?.shipment_type) ? (
+						<SingleLocation data={data} />
+					) : (
+						<DualLocation data={data} />
+					)}
 				</div>
 
 				<div className={styles.divider} />

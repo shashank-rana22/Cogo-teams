@@ -9,7 +9,7 @@ import ShipmentList from './ShipmentList';
 import styles from './styles.module.css';
 
 function Lcl() {
-	const { data, loading } = useListKamDeskShipments({});
+	const { data, loading } = useListKamDeskShipments();
 
 	return (
 		<div>
