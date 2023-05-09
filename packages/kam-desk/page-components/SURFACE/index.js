@@ -4,12 +4,13 @@ import HeaderFilters from '../../common/HeaderFilters';
 import Loader from '../../common/Loader';
 import ShipmentType from '../../common/ShipmentType';
 import StepperTabs from '../../common/StepperTabs';
-import useListKamDeskShipments from '../../hooks/useListKamDeskShipments';
+import useListKamDeskSurfaceShipments from '../../hooks/useListKamDeskSurfaceShipments';
 
+import ShipmentList from './ShipmentList';
 import styles from './styles.module.css';
 
 function Surface() {
-	const { data, loading } = useListKamDeskShipments({});
+	const { data, loading } = useListKamDeskSurfaceShipments();
 
 	return (
 		<div>
@@ -25,6 +26,12 @@ function Surface() {
 
 			<div className={styles.tabs_container}>
 				<DeskTabs />
+			</div>
+
+			<div>
+				{loading
+					? <Loader />
+					: <ShipmentList data={data} loading={loading} />}
 			</div>
 		</div>
 	);
