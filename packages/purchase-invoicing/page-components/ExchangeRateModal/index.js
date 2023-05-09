@@ -7,6 +7,7 @@ import { useRequestBf } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import { BILL_MAPPINGS } from '../../constants';
 import toastApiError from '../../utils/toastApiError';
 
 import styles from './styles.module.css';
@@ -38,7 +39,7 @@ function ExchangeRateModal({
 		const values = {
 			exchange_rate_document : exchangeProofUrl,
 			is_deviation_accepted  : checkedDeviation,
-			billType               : purchaseInvoiceValues?.billType,
+			billType               : BILL_MAPPINGS[purchaseInvoiceValues?.invoice_type],
 		};
 		if (isEmpty(exchangeProofUrl) && !checkedDeviation) {
 			toastApiError('Please Upload Exchange Rate Proof');
@@ -152,7 +153,15 @@ function ExchangeRateModal({
 						</Modal.Body>
 						<Modal.Footer>
 							<div className={styles.buttoncontainer}>
-								<Button className={`${styles.cancel}`} themeType="secondary">Cancel</Button>
+								<Button
+									className={`${styles.cancel}`}
+									onClick={() => {
+										setExchangeRateModal(false);
+									}}
+									themeType="secondary"
+								>
+									Cancel
+								</Button>
 								<Button
 									className={styles.button}
 									loading={loading}

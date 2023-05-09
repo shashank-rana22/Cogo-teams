@@ -138,6 +138,7 @@ function Step1({
 						themeType="secondary"
 						onClick={() => {
 							setUploadInvoiceUrl(null);
+							closeModal();
 						}}
 					>
 						Cancel

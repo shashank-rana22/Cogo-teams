@@ -53,7 +53,7 @@ export const purchaseTypeList = [
 
 export const invoiceTypeOptions = [
 	{ label: 'Invoice', value: 'purchase_invoice' },
-	{ label: 'Credit Note', value: 'CREDIT_NOTE' },
+	{ label: 'Credit Note', value: 'credit_note' },
 	{ label: 'Proforma', value: 'proforma_invoice' },
 ];
 
@@ -86,6 +86,10 @@ export const BILL_MAPPINGS = {
 export const invoiceTypeOptionsCN = [
 	{ label: 'Invoice', value: 'purchase_invoice' },
 	{ label: 'Proforma', value: 'proforma_invoice' },
+];
+
+export const optionsCN = [
+	{ label: 'Credit Note', value: 'credit_note' },
 ];
 
 export const EMPTY_POC = [{ name: '', email: '', mobile_number: '', alternate_mobile_number: '' }];

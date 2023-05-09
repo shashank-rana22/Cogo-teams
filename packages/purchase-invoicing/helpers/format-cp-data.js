@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
+import { BILL_MAPPINGS } from '../constants';
 import { formatDate } from '../utils/formatDate';
 
 export const formatLineItems = (line_items, codes) => {
@@ -183,8 +184,7 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 		...(collectionPartyObj?.other_addresses || []),
 	];
 
-	const type = formValues?.invoice_type === 'CREDIT_NOTE' ? 'CREDIT_NOTE' : 'BILL';
-	const billType = activeTab === 'pass_through' ? 'REIMBURSEMENT' : type;
+	const billType = BILL_MAPPINGS[formValues?.invoice_type];
 
 	const isTagginsAllowed = billType === 'BILL';
 	const collectionPartyBA = allBillingAddresses?.find(
@@ -225,7 +225,7 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 			billDocumentUrl : uploadProof,
 			billNumber      : data?.tax_invoice_no.trim(),
 			refBillId:
-                formValues.invoice_type === 'CREDIT_NOTE' ? formValues?.ref_invoice_no : undefined,
+				formValues.invoice_type === 'credit_note' ? formValues?.ref_invoice_no : undefined,
 		},
 		buyerDetails: {
 			entityCode              : billingPartyObj?.entity_code,
@@ -345,7 +345,7 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 			containersCount : shipment_data?.containers_count || undefined,
 			rootBillId      : isTagginsAllowed ? rootid : undefined,
 			refBillId:
-                formValues.invoice_type === 'CREDIT_NOTE' ? formValues?.ref_invoice_no : undefined,
+				formValues.invoice_type === 'credit_note' ? formValues?.ref_invoice_no : undefined,
 		},
 		paymentMode     : formValues?.payment_mode || 'cash',
 		invoiceCurrency : formValues?.invoice_currency || ocrData?.invoice_currency,

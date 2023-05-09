@@ -73,7 +73,10 @@ const useCreateColletctionParty = ({
 
 				if (!res.hasError) {
 					Toast.success('Invoice Added!');
-					setCollectionPartyId(res?.data);
+					setCollectionPartyId({
+						billId  : res?.data?.billId,
+						partyId : res?.data?.collectionPartyId,
+					});
 					setLoading(false);
 					onCreate();
 				}

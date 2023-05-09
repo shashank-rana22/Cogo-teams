@@ -80,6 +80,7 @@ function ComparisionModal({
 					collectionParty={collectionParty}
 					setCollectionParty={setCollectionParty}
 					closeModal={closeModal}
+					onClose={onClose}
 				/>
 			)}
 
@@ -96,7 +97,6 @@ function ComparisionModal({
 					exchangeRateModal={exchangeRateModal}
 					billId={collectionPartyId?.billId}
 					partyId={collectionPartyId?.partyId}
-					closeModal={closeModal}
 					onClose={onClose}
 				/>
 			)}

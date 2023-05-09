@@ -22,7 +22,6 @@ function Step2({
 	exchangeRateModal,
 	onClose,
 	billId,
-	closeModal,
 	partyId,
 }) {
 	const [globalSelected, setGlobalSelected] = useState({});
@@ -35,10 +34,10 @@ function Step2({
 		isLockedMode,
 		loading,
 	} = useHandleFinalSave({
-		data    : serviceProvider,
+		data: serviceProvider,
 		purchaseInvoiceValues,
 		billId,
-		onClose : closeModal,
+		onClose,
 		editData,
 		setGlobalSelected,
 		globalSelected,

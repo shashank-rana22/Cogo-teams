@@ -7,8 +7,28 @@ import getLocationConfig from '../../../utils/getPortConfig';
 
 import styles from './styles.module.css';
 
-function AdditionalDetails({ control, errors, errMszs, open, purchaseInvoiceValues, shipment_data, primary_service }) {
+function AdditionalDetails({
+	control,
+	errors,
+	errMszs,
+	open,
+	purchaseInvoiceValues,
+	shipment_data,
+	primary_service,
+	serviceProvider,
+}) {
 	const { origin, destination } = getLocationConfig(primary_service);
+
+	const uploadedInvoices = [];
+	(serviceProvider?.collection_parties || [])
+		.filter((party) => ['purchase_invoice'].includes(party.invoice_type))
+		.forEach((party) => {
+			uploadedInvoices.push({
+				label : party.invoice_no,
+				value : party?.finance_job_number,
+			});
+		});
+
 	return (
 		<AccordianView title="Additional Details" fullwidth showerror={errMszs.line_items} open={open}>
 			<div className={styles.flex}>
@@ -42,6 +62,24 @@ function AdditionalDetails({ control, errors, errMszs, open, purchaseInvoiceValu
 						{errors?.irn_number && (
 							<div className={`${styles.errors}`}>
 								Irn Number is Required
+							</div>
+						)}
+					</div>
+				</div>
+				<div className={`${styles.selectcontainer}`}>
+					<div className={styles.label}>Ref Invoice No :</div>
+					<div>
+						<SelectController
+							control={control}
+							name="ref_invoice_no"
+							placeholder="Ref Invoice Number"
+							options={uploadedInvoices}
+							rules={{ required: true }}
+							value={purchaseInvoiceValues?.ref_invoice_no}
+						/>
+						{errors?.ref_invoice_no && (
+							<div className={`${styles.errors}`}>
+								Payment Mode is Required
 							</div>
 						)}
 					</div>

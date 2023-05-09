@@ -7,7 +7,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useContext, useImperativeHandle, forwardRef, useState } from 'react';
 
 import AccordianView from '../../common/Accordianview';
-import { EMPTY_LINE_ITEMS, invoiceTypeOptions, invoiceTypeOptionsCN } from '../../constants';
+import { EMPTY_LINE_ITEMS, invoiceTypeOptions, invoiceTypeOptionsCN, optionsCN } from '../../constants';
 import useCalculateTotalPrice from '../../helpers/useCalculateTotalPrice';
 import useResetErrors from '../../helpers/useResetErrors';
 
@@ -42,6 +42,7 @@ function InvoiceFormLayout({
 	const [showCollectionParty, setShowCollectionParty] = useState(false);
 	const [showBankform, setShowBankForm] = useState(false);
 	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
+	const isJobClosed = shipment_data?.is_job_closed;
 	const billingAddresses = collectionParty?.billing_addresses || [];
 	const otherAddresses = collectionParty?.other_addresses || [];
 	const allAddresses = [...billingAddresses, ...otherAddresses];
@@ -66,7 +67,7 @@ function InvoiceFormLayout({
 
 	const { control, watch, setValue, handleSubmit, formState: { errors: errorVal } } = useForm({
 		defaultValues: {
-			exchange_rate: purchaseInvoiceValues.exchange_rates || [
+			exchange_rate: purchaseInvoiceValues.exchange_rate || [
 				{ from_currency: 'INR', to_currency: 'INR', rate: '1' },
 			],
 			line_items: isEmpty(defaultLineItems) ? [EMPTY_LINE_ITEMS] : defaultLineItems,
@@ -140,6 +141,41 @@ function InvoiceFormLayout({
 		activeTab       : billCatogory,
 	}));
 
+	const isTagDissable = () => {
+		if (
+			['coe_rejected', 'finance_rejected'].includes(
+				purchaseInvoiceValues?.status,
+			)
+		) {
+			return false;
+		}
+
+		if (formValues?.invoice_type === 'credit_note') {
+			return true;
+		}
+
+		if (isJobClosed) {
+			return true;
+		}
+
+		if (isEdit) {
+			return true;
+		}
+		return false;
+	};
+
+	const getOptions = () => {
+		if (isJobClosed) {
+			return optionsCN;
+		}
+		if (billCatogory === 'pass_through') {
+			return invoiceTypeOptionsCN;
+		}
+		return invoiceTypeOptions;
+	};
+
+	const isCreditNoteOnly = isJobClosed ? 'credit_note' : '';
+
 	return (
 		<div className={styles.flex}>
 			<div className={styles.upload_invoice}>
@@ -155,13 +191,18 @@ function InvoiceFormLayout({
 				<AccordianView title="Select Invoice Type" fullwidth open={isEdit}>
 					<div className={`${styles.flex} ${styles.justifiy}`}>
 						<div className={`${styles.flex}`}>
-							<Segmented setBillCatogory={setBillCatogory} billCatogory={billCatogory} />
+							{!isJobClosed && (
+								<Segmented
+									setBillCatogory={setBillCatogory}
+									billCatogory={billCatogory}
+								/>
+							)}
 							<RadioGroupController
-								options={billCatogory === 'pass_through' ? invoiceTypeOptionsCN : invoiceTypeOptions}
+								options={getOptions()}
 								control={control}
 								name="invoice_type"
 								rules={{ required: true }}
-								value={purchaseInvoiceValues.invoice_type || 'purchase_invoice'}
+								value={purchaseInvoiceValues.invoice_type || isCreditNoteOnly || 'purchase_invoice'}
 							/>
 							{errors?.invoice_type && (
 								<div className={`${styles.errors} ${styles.marginleft}`}>
@@ -169,7 +210,11 @@ function InvoiceFormLayout({
 								</div>
 							)}
 						</div>
-						<Button className={styles.margintop} onClick={() => { setShowTaggings(true); }}>
+						<Button
+							className={styles.margintop}
+							disabled={isTagDissable()}
+							onClick={() => { setShowTaggings(true); }}
+						>
 							{!isEmpty(selectedProforma)
 								? ' Edit & Tag ' : 'Tag'}
 						</Button>
@@ -236,6 +281,7 @@ function InvoiceFormLayout({
 					shipment_data={shipment_data}
 					open={isEdit}
 					primary_service={primary_service}
+					serviceProvider={serviceProvider}
 				/>
 				<Taggings
 					showTagings={showTaggings}
