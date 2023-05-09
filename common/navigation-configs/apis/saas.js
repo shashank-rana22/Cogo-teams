@@ -2175,6 +2175,12 @@ const saas = {
 			feature     : 'import-export-documents',
 		},
 		{
+			api         : 'get_saas_trade_engine_draft',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
 			api         : 'get_saas_product_category_list',
 			access_type : 'private',
 			module      : 'product-catalogue',
@@ -2216,6 +2222,7 @@ const saas = {
 			module      : 'product-catalogue',
 			feature     : 'product-catalogue',
 		},
+
 	],
 	app_saas_cogostore: [
 		{
