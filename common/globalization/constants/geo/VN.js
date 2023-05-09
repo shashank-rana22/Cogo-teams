@@ -112,6 +112,7 @@ export default {
 		credit_controller_id      : 'b2af88f9-84e4-44fd-92f8-12f74c55e5ae',
 		vietnam_business_heads    : [
 			'7f6f97fd-c17b-4760-a09f-d70b6ad963e8', // Rishi Agarwal
+			'065c7e26-69f7-4ceb-8f36-1e666b89de94', // Nam Bui
 		],
 		business_heads: [
 			'7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44', // Hrishikesh Kulkarni
