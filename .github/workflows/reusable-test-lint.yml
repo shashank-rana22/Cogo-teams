@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -50,12 +52,24 @@ jobs:
           touch .env
           echo NEXT_PUBLIC_REST_BASE_API_URL=${{ secrets.NEXT_PUBLIC_REST_BASE_API_URL }} >> .env
 
-      - name: Get modified files
-        run: echo "::set-output name=modified_files::$(git diff --name-only ${{ github.base_ref }} ${{ github.head_ref }})"
-      - name: Print file path
-        run: echo "The path of example.txt is ${{ github.workspace }}/example.txt"
-      - name: List files
-        run: ls -R ${{ github.workspace }}
+      - name: Get PR details
+        id: pr-details
+        uses: octokit/request-action@v2.x
+        with:
+          route: GET /repos/${{ github.repository }}/pulls/${{ github.event.number }}
+          headers: |
+            Authorization: ${{ secrets.GITHUB_TOKEN }}
+            Accept: application/vnd.github.v3+json
+
+      - name: Get changed files
+        run: |
+          for file in $(echo "${{ steps.pr-details.outputs.data }} | jq -r '.files[].filename'"); do
+            echo "Changed file: $file"
+          done
+        shell: bash
+        env:
+          DATA: ${{ steps.pr-details.outputs.data }}
+          
       - name: Test ESLint
         run: pnpm run eslint
 
