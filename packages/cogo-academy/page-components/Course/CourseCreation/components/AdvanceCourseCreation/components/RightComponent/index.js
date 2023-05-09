@@ -1,3 +1,4 @@
+import CourseCompletion from './components/CourseCompletion';
 import Curriculum from './components/Curriculum';
 import IntendedLearners from './components/IntendedLearners';
 import Specifications from './components/Specifications';
@@ -9,7 +10,7 @@ const COMPONENT_MAPPING = {
 	specifications    : Specifications,
 	intended_learners : IntendedLearners,
 	course_curriculum : Curriculum,
-	course_completion : Curriculum,
+	course_completion : CourseCompletion,
 	publish_course    : Curriculum,
 };
 
