@@ -1,10 +1,11 @@
 import { Tabs, TabPanel, Select, Input, cl } from '@cogoport/components';
+import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
 import ClickableDiv from '../commons/ClickableDiv';
+import STATIONARY_PERMISSIONS from '../configs/STATIONARY_PERMISSION.json';
 import TAB_CONFIG from '../configs/TAB_CONFIG.json';
 import getBlDoPayload from '../helpers/getBlDoPayload';
-
 // import ChildTabs from '../commons/ChildTabs';
 
 import FCL from './FCL';
@@ -37,6 +38,8 @@ export default function BLDoCollectionDesk() {
 	// useEffect(() => {
 	// 	getBlDoPayload({ stateProps, setFinalPaload });
 	// }, [stateProps]);
+
+	const profile = useSelector((state) => state.profile || {});
 
 	const Desk = deskMapping[stateProps.shipment_type];
 
@@ -121,12 +124,14 @@ export default function BLDoCollectionDesk() {
 					</div>
 				</TabPanel>
 
-				<TabPanel
-					name="stationary"
-					title="Stationary Management"
-				>
-					<StationaryManagement />
-				</TabPanel>
+				{STATIONARY_PERMISSIONS.email.includes(profile?.user?.email) ? (
+					<TabPanel
+						name="stationary"
+						title="Stationary Management"
+					>
+						<StationaryManagement />
+					</TabPanel>
+				) : null}
 
 			</Tabs>
 		</div>

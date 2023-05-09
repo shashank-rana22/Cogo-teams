@@ -96,7 +96,7 @@
 		background: #393f70;
 		border-bottom: none;
 
-		.ui_table_head_row{
+		.ui_table_head_row {
 			align-items: center !important;
 			padding: 8px 0 !important;
 		}
@@ -140,4 +140,3 @@
 	color: #ee3425;
 	background-color: #fdebe9;
 }
-

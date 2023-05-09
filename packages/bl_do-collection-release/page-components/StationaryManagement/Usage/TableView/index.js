@@ -1,14 +1,19 @@
 import { Table } from '@cogoport/components';
 import { format, upperCase } from '@cogoport/utils';
 
+import styles from './styles.module.css';
+
 function TableView({ data = {}, loading }) {
 	const { list = [] } = data || {};
 
 	const columns = [
-		{ Header: 'SID', accessor: 'serial_id' },
+		{
+			Header   : 'SID',
+			accessor : (row) => <span className={styles.serial_id}>{`#${row.serial_id}` }</span>,
+		},
 		{
 			Header   : 'Used On',
-			accessor : (row) => (row.bl_released_at ? format(row.bl_released_at, 'dd MMM yyyy') : '-'),
+			accessor : (row) => (row.used_at ? format(row.used_at, 'dd MMM yyyy') : '-'),
 		},
 		{ Header: 'BL Type', accessor: (row) => upperCase(row.bl_type || '-') },
 		{ Header: 'Copies', accessor: 'bls_count' },
