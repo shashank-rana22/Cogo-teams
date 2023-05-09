@@ -1,4 +1,4 @@
-import { IcMDownload, IcMSettings, IcMFeedback } from '@cogoport/icons-react';
+import { IcMDownload, IcMSettings } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
@@ -193,15 +193,6 @@ function CogoOne() {
 					<IcMSettings
 						className={styles.settings_icon}
 						onClick={() => setAgentDetails(true)}
-					/>
-				</div>
-			)}
-
-			{isomniChannelAdmin && (
-				<div className={styles.feedback}>
-					<IcMFeedback
-						className={styles.settings_icon}
-						onClick={() => setShowFeedback(true)}
 					/>
 				</div>
 			)}
