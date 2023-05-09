@@ -1,0 +1,23 @@
+.container {
+    margin: 32px 40px;
+
+    :global {
+        .ui_multiselect_container {
+            width: 50%;
+        }
+    }
+}
+
+.input_group {
+    margin-top: 8px;
+}
+
+.form_group {
+    margin-bottom: 32px;
+}
+
+.error_message {
+	font-size: 10px;
+	font-weight: 400;
+	color: #cb6464;
+}
