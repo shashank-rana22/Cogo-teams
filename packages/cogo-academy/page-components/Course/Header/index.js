@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 function Header() {
 	const router = useRouter();
 
-	const onClickConfiguration = () => {
+	const onClickCreate = () => {
 		router.push(
 			'/learning/course/create',
 			'/learning/course/create',
@@ -24,7 +24,7 @@ function Header() {
 					type="button"
 					style={{ marginLeft: 8 }}
 					themeType="primary"
-					onClick={onClickConfiguration}
+					onClick={onClickCreate}
 				>
 					Create New
 				</Button>
