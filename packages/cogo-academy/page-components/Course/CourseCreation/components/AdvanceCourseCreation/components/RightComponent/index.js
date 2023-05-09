@@ -1,3 +1,4 @@
+import CourseCompletion from './components/CourseCompletion';
 import CourseOverview from './components/CourseOverview';
 import Curriculum from './components/Curriculum';
 import IntendedLearners from './components/IntendedLearners';
@@ -11,8 +12,8 @@ const COMPONENT_MAPPING = {
 	specifications    : Specifications,
 	intended_learners : IntendedLearners,
 	course_curriculum : Curriculum,
-	course_completion : Curriculum,
-	publish_course    : PublishCourse,
+	course_completion : CourseCompletion,
+	publish_course    : Curriculum,
 };
 
 function RightComponent({ activeTab }) {
