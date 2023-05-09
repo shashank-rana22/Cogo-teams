@@ -7,6 +7,8 @@ import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect } from 'react';
 
+import CancelDetails from '../../../common/CancelDetails';
+import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
@@ -96,6 +98,10 @@ function LastMileDesk({ get = {}, activeStakeholder = '' }) {
 
 					<ShipmentChat />
 				</div>
+
+				{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
+
+				<DocumentHoldDetails />
 
 				<div className={styles.header}>
 					<ShipmentHeader />

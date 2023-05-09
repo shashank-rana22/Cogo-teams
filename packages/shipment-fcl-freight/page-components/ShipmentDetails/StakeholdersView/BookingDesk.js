@@ -98,7 +98,7 @@ function BookingDesk({ get = {}, activeStakeholder = '' }) {
 					<ShipmentChat />
 				</div>
 
-				<CancelDetails />
+				{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
 
 				<DocumentHoldDetails />
 
