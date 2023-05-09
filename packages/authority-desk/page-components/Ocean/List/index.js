@@ -72,19 +72,24 @@ export default function List({
 			) : null}
 
 			{data?.list?.length === 0
-				? <EmptyState /> : (data?.list || []).map((item) => (
-					<ListCard
-						key={item?.id}
-						item={item}
-						role={role}
-						tabsState={tabsState}
-						filters={filters}
-						setFilters={setFilters}
-						refetch={refetch}
-					/>
-				))}
+				? <EmptyState />
+				: (
+					<>
+						{	(data?.list || []).map((item) => (
+							<ListCard
+								key={item?.id}
+								item={item}
+								role={role}
+								tabsState={tabsState}
+								filters={filters}
+								setFilters={setFilters}
+								refetch={refetch}
+							/>
+						))}
 
-			{renderPagination}
+						{renderPagination}
+					</>
+				)}
 		</div>
 	);
 }
