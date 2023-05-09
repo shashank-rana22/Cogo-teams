@@ -6,7 +6,6 @@ import React from 'react';
 import Filters from '../../../commons/Filters';
 import completedColumn from '../../configs/Completed_table';
 import useGetOutstandingCard from '../../hooks/useGetoutstandingCard';
-import invoiceListFilterMapping from '../../Utils/invoiceListFilterMapping.json';
 import FilterModal from '../FilterModal';
 import SearchInput from '../searchInput';
 import StyledTable from '../styledTable';
@@ -43,12 +42,11 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 
 	const { list : invoiceList = [], page: pageInvoiceList, totalRecords: recordInvoiceList } = listData || {};
 
-	const COUNTRY_ENTITY_ID = 	GLOBAL_CONSTANTS.country_entity_ids[Object.keys(GLOBAL_CONSTANTS.country_entity_ids)
-		.find(
-			(key) => GLOBAL_CONSTANTS.country_entity_ids[key] === countryId,
-		)];
-
-	const invoiceFilter = invoiceListFilterMapping[COUNTRY_ENTITY_ID];
+	const COUNTRY_ENTITY_FILTER = 	GLOBAL_CONSTANTS
+		.business_finance_account_receivables_invoice_filters[Object.keys(GLOBAL_CONSTANTS.country_entity_ids)
+			.find(
+				(key) => GLOBAL_CONSTANTS.country_entity_ids[key] === countryId,
+			)];
 
 	const { sortType = '', sortBy = '' } = sort || {};
 
@@ -90,7 +88,7 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 					<Filters
 						filters={invoiceFilters}
 						setFilters={setinvoiceFilters}
-						controls={invoiceFilter}
+						controls={COUNTRY_ENTITY_FILTER}
 					/>
 
 					<FilterModal
