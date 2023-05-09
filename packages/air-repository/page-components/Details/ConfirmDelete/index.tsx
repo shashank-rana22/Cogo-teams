@@ -25,7 +25,7 @@ function ConfirmDelete({ item, listRepository }:Props) {
 		<div className={styles.confirm_delete_container}>
 			<div>Are you sure to delete this Repository?</div>
 			<div className={styles.confirm_delete_buttons}>
-				<Button size="sm" disabled={loading} onClick={() => handleDelete()}>
+				<Button size="sm" disabled={loading} onClick={handleDelete}>
 					Confirm
 				</Button>
 			</div>

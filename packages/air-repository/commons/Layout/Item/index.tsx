@@ -5,17 +5,16 @@ import getErrorMessage from '../getErrorMessage';
 
 import styles from './styles.module.css';
 
-function Item(props) {
-	const {
-		type,
-		control,
-		span,
-		label,
-		error,
-		heading,
-		rules,
-	} = props || {};
-
+function Item({
+	type,
+	control,
+	span,
+	label,
+	error,
+	heading,
+	rules,
+	...props
+}) {
 	const errorOriginal = getErrorMessage({
 		error,
 		rules,

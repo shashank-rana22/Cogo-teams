@@ -37,7 +37,7 @@ const getValue = (
 		}
 	}
 
-	return val === null || val === undefined ? '-' : OverflowCheck({ children: val });
+	return val ? OverflowCheck({ children: val }) : '-';
 };
 
 export default getValue;

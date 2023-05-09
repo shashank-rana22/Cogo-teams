@@ -16,6 +16,8 @@ interface Props {
 	functions?: FunctionObjects;
 }
 
+const PAGE_SIZE = 10;
+
 function List({
 	fields = [],
 	data:listData = {},
@@ -73,7 +75,7 @@ function List({
 						<Pagination
 							currentPage={page}
 							totalItems={Number(totalCount)}
-							pageSize={10}
+							pageSize={PAGE_SIZE}
 							type="table"
 							onPageChange={(val) => { setPage(val); }}
 						/>

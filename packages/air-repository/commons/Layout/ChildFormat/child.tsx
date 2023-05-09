@@ -23,13 +23,13 @@ function Child({
 	const totalFields = [];
 	let span = 0;
 	controls.forEach((fields) => {
-		span += fields.span || 11;
-		if (span === 11) {
+		span += fields.span || 12;
+		if (span === 12) {
 			rowWiseFields.push(fields);
 			totalFields.push(rowWiseFields);
 			rowWiseFields = [];
 			span = 0;
-		} else if (span < 11) {
+		} else if (span < 12) {
 			rowWiseFields.push(fields);
 		} else {
 			totalFields.push(rowWiseFields);

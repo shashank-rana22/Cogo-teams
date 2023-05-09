@@ -4,9 +4,9 @@ import styles from './styles.module.css';
 
 function Header() {
 	return (
-		<div>
+		<header>
 			<div className={styles.heading}>Air Repository</div>
-		</div>
+		</header>
 	);
 }
 
