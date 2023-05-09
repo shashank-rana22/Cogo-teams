@@ -184,7 +184,7 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 		...(collectionPartyObj?.other_addresses || []),
 	];
 
-	const billType = BILL_MAPPINGS[formValues?.invoice_type];
+	const billType = activeTab === 'pass_through' ? 'REIMBURSEMENT' : BILL_MAPPINGS[formValues?.invoice_type];
 
 	const isTagginsAllowed = billType === 'BILL';
 	const collectionPartyBA = allBillingAddresses?.find(
