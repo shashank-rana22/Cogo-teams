@@ -202,9 +202,7 @@ function OrganizationDetails({
 			) : (
 				<ListPromos />
 			)}
-			<div>
-				<QuotationDetails organizationId={organizationId} />
-			</div>
+			<QuotationDetails organizationId={organizationId} />
 		</div>
 	);
 }
