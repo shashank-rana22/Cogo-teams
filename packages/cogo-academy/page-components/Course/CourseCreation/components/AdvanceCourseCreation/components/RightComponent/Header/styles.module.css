@@ -1,0 +1,31 @@
+.top_container {
+    background: #F9F9F9;
+    border-radius: 6px 6px 0px 0px;
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.right_part {
+    display: flex;
+    align-items: center;
+}
+
+.button {
+    margin: 0px 8px;
+}
+
+.bottom_container {
+    margin: 24px 40px;
+}
+
+.text {
+    color: #4F4F4F;
+    margin-top: 6px;
+    max-width: 88%;
+}

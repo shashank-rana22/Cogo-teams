@@ -1,0 +1,56 @@
+.container {
+    margin: 12px 40px;
+}
+
+.node_container {
+    box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
+    border-radius: 4px;
+    border: 1px solid #E0E0E0;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+}
+
+.node {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.accordian_item {
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+}
+
+.left {
+    margin-left: 20px;
+}
+
+.flex {
+    display: flex;
+}
+
+.name {
+    margin-left: 4px;
+}
+
+.child_accordian {
+    margin-bottom: 12px;
+
+    :global {
+        .ui_accordion_header {
+            padding: unset;
+            padding-right: 24px;
+            background: #F9F9F9;
+        }
+    }
+}
+
+.button {
+    margin-top: 20px;
+}
+
+.icon {
+    cursor: pointer;
+}

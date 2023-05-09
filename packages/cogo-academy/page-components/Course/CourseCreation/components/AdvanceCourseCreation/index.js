@@ -1,10 +1,11 @@
 import { useState } from 'react';
 
 import LeftComponent from './components/LeftComponent';
+import RightComponent from './components/RightComponent';
 import styles from './styles.module.css';
 
 function AdvanceCourseCreation() {
-	const [activeTab, setActiveTab] = useState('');
+	const [activeTab, setActiveTab] = useState('overview');
 
 	return (
 		<div className={styles.container}>
@@ -13,7 +14,7 @@ function AdvanceCourseCreation() {
 			</div>
 
 			<div className={styles.right_section}>
-				{/* <LeftComponent /> */}
+				<RightComponent setActiveTab={setActiveTab} activeTab={activeTab} />
 			</div>
 		</div>
 	);
