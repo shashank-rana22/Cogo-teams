@@ -1,19 +1,19 @@
 .container {
-    margin: 32px 40px;
+	margin: 32px 40px;
 
-    :global {
-        .ui_multiselect_container {
-            width: 50%;
-        }
-    }
+	:global {
+		.ui_multiselect_container {
+			width: 50%;
+		}
+	}
 }
 
 .input_group {
-    margin-top: 6px;
+	margin-top: 6px;
 }
 
 .form_group {
-    margin-bottom: 32px;
+	margin-bottom: 32px;
 }
 
 .error_message {

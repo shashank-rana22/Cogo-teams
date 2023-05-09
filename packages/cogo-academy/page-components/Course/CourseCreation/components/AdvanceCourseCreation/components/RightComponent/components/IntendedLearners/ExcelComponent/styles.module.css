@@ -5,34 +5,34 @@
 }
 
 .excel_label_container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 12px;
 }
 
 .refresh_div {
-    background: #FFFFFF;
-    border-radius: 6px;
-    padding: 8px 12px;
-    font-size: 12px;
-    border: 1px solid #E0E0E0;
+	padding: 8px 12px;
+	font-size: 12px;
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
 }
 
 .excel_buttons_container {
-    display: flex;
-    justify-content: space-between;
-    margin: 12px 0px;
+	display: flex;
+	justify-content: space-between;
+	margin: 12px 0;
 }
 
 .right_section {
-    display: flex;
+	display: flex;
 }
 
 .excel_label {
-    max-width: 54%;
-    color: #828282;
-    font-size: 12px;
+	max-width: 54%;
+	font-size: 12px;
+	color: #828282;
 }
 
 .sample_div {
@@ -41,9 +41,9 @@
 	white-space: nowrap;
 	cursor: pointer;
 
-    &.right {
-        margin-left: 40px;
-    }
+	&.right {
+		margin-left: 40px;
+	}
 }
 
 .sample_text {

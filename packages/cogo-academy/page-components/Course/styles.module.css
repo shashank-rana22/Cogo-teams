@@ -1,6 +1,6 @@
 .tabs_container {
-    background: #FFFFFF;
-    box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
-    border-radius: 6px;
-    padding: 20px;
+	padding: 20px;
+	background: #fff;
+	border-radius: 6px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
 }

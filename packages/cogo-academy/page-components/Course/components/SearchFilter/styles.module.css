@@ -2,11 +2,11 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	width: 100%;
+	margin-top: 20px;
 	margin-bottom: 20px;
 	font-size: 20px;
 	font-weight: 500;
-	margin-top: 20px;
-	width: 100%;
 }
 
 .input {
@@ -14,8 +14,8 @@
 }
 
 .filter_btn {
-	font-size: 16px;
 	position: relative;
+	font-size: 16px;
 }
 
 .filter_dot {

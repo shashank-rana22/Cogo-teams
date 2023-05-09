@@ -1,13 +1,14 @@
 .ind_container {
+	display: flex;
+	align-items: center;
 	padding: 12px 24px;
 	cursor: pointer;
 	background: #fff;
 	border-radius: 4px;
-	display: flex;
-	box-shadow: 0 0 4px rgb(98 127 172 / 20%);align-items: center;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
 
 	&.active_tab {
-		background: #F7FAEF;
+		background: #f7faef;
 	}
 }
 
@@ -17,7 +18,7 @@
 	&.active_tab {
 		:global {
 			.ui_accordion_header {
-				background: #F7FAEF;
+				background: #f7faef;
 			}
 		}
 	}
@@ -33,14 +34,14 @@
 }
 
 .number {
-	border-radius: 50%;
 	width: 12px;
 	height: 12px;
-	border: 1px solid #221F20;
+	margin-right: 12px;
+	font-size: 10px;
 	color: #000;
 	text-align: center;
-	font-size: 10px;
-	margin-right: 12px;
+	border: 1px solid #221f20;
+	border-radius: 50%;
 }
 
 .index {

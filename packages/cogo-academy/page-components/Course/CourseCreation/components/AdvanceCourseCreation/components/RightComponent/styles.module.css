@@ -1,7 +1,7 @@
 .conatiner {
-    background: #FFFFFF;
-    box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
-    border-radius: 6px;
-    height: 84vh;
-    overflow: auto;
+	height: 84vh;
+	overflow: auto;
+	background: #fff;
+	border-radius: 6px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
 }
