@@ -87,12 +87,18 @@
 }
 
 .loader {
-	width: 6%;
+	width: 80px;
+	height: 30px;
 	margin-top: 12px;
-	margin-right: 6px;
+	margin-right: 8px;
 	border-radius: 4px;
 }
 
 .loading_buckets {
 	display: flex;
+}
+
+.right_content {
+	display: flex;
+	align-items: center;
 }

@@ -15,6 +15,7 @@ function Form({
 	trade_type = 'export',
 	setShowModal = () => {},
 	refetch = () => {},
+	activeTab = '',
 }) {
 	const docOptions = () => {
 		if (surrender) {
@@ -44,6 +45,7 @@ function Form({
 		onClose: handleClose,
 		refetch,
 		setShowModal,
+		activeTab,
 	});
 
 	let heading = 'Approve Document';
