@@ -1,0 +1,26 @@
+.Container{
+	display: flex;
+	flex-direction: column;
+
+	.card-list-root {
+		margin-left: 8px !important;
+	}
+
+	.core-ui-input-root {
+		margin-bottom: 6px !important;
+		margin-left: 4px !important;
+	}
+
+	.card-body-row {
+		margin: 0px;
+	}
+
+	.card-list-header-root {
+		padding: 6px;
+		background: #f9f9f9;
+	}
+
+	.card-body-row {
+		margin: 0px !important;
+	}
+}

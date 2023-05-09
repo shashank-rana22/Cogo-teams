@@ -1,0 +1,50 @@
+.Container{
+	padding: 0px 16px 20px 16px;
+	.business-checkbox-group-container {
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+	.business-checkbox-item {
+		flex-basis: 50%;
+	}
+}
+
+.ServiceName{
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 12px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	color: #393f70;
+	background: #ded7fc;
+	border-radius: 4px;
+	padding: 4px 6px;
+}
+
+.Row{
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	border-top: 1px solid #ded7fc;
+	padding-top: 18px;
+	margin-top: 10px;
+
+	.core-ui-button-root {
+		text-transform: capitalize;
+		width: 100px;
+	}
+}
+
+.Heading{
+	margin: 0;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 17px;
+	margin-bottom: 20px;
+	color: #2c3e50;
+}
+
+.ServiceDetails{
+	font-size: 10px;
+}

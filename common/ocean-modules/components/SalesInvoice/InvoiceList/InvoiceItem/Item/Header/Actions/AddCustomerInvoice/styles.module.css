@@ -1,0 +1,37 @@
+.Container{
+	.rc-upload {
+		.upload-area {
+			display: flex;
+			justify-content: center;
+		}
+	}
+}
+
+.Heading{
+	color: #333333;
+	font-weight: 500;
+	font-size: 18px;
+	margin: 6px 0px 16px;
+}
+
+.ButtonWrapper{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 30px 0px 5px;
+
+	.cancel {
+		margin-right: 10px;
+	}
+}
+
+.DownloadContainer{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.DownloadLink{
+	color: #5936f0;
+
+}

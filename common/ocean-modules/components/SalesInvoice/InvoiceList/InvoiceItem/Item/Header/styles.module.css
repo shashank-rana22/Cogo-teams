@@ -1,0 +1,249 @@
+.Container{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	width: 100%;
+}
+
+.InvoicePartyDetails{
+	border-right: 1px solid #F68B21;
+	width: 18%;
+	height: 100%;
+	padding-right: 10px;
+
+	@media (max-width: 768px) {
+		border-right: none;
+	}
+}
+
+.Gst{
+	display: flex;
+	align-items: center;
+}
+
+.GstNumber{
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 16px;
+	text-transform: capitalize;
+	color: #333333;
+	margin-left: 8px;
+	text-decoration: underline;
+	cursor: pointer;
+
+	@media (max-width: 768px) {
+		font-size: 12px;
+	}
+}
+
+.Label{
+	font-weight: 500;
+	font-size: 10px;
+	line-height: 16px;
+	text-transform: capitalize;
+	color: #333333;
+	white-space: nowrap;
+
+	@media (max-width: 768px) {
+		font-size: 12px;
+	}
+}
+
+.InvoicePartyName{
+	font-weight: 500;
+	font-size: 11px;
+	line-height: 12px;
+	color: #333333;
+
+	@media (max-width: 768px) {
+		width: max-content;
+		font-size: 12px;
+	}
+}
+
+.InvoiceValueContainer{
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	width: 46%;
+	font-weight: 500;
+	font-size: 14px;
+	text-transform: capitalize;
+}
+
+.InvoiceValueTitle{
+	color: #333333;
+
+	@media (max-width: 768px) {
+		width: 90px;
+		font-size: 12px;
+	}
+}
+
+.InvoiceValue{
+	color: #F68B21;
+	margin-left: 4px;
+
+	@media (max-width: 768px) {
+		font-size: 12px;
+	}
+}
+
+.InvoiceInfo{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 50%;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin: 0;
+	}
+	margin: 0 30px;
+}
+
+.SoNumber{
+	font-weight: 500;
+	font-size: 12px;
+	color: #000000;
+
+	&.active {
+		text-decoration: underline;
+		cursor: pointer;
+	}
+}
+
+.SoContainer{
+	width: 33%;
+
+	.core-ui-button-root {
+		background: none;
+		border: none;
+		text-transform: capitalize;
+		letter-spacing: 0px;
+		color: #333333;
+		margin-top: 4px;
+		padding: 0px;
+
+		&:hover {
+			box-shadow: none !important;
+			text-decoration: underline;
+		}
+	}
+
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
+
+.PaymentMethod{
+	font-size: 12px;
+	text-transform: capitalize;
+	color: #333333;
+	text-align: center;
+	border-radius: 4px;
+	padding: 4px 12px;
+	white-space: nowrap;
+	width: fit-content;
+	background: #DDEBC0;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
+
+.IconWrapper{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	padding: 10px 24px;
+	border-left: 1px solid #F68B21;
+	width: 7%;
+
+	@media (max-width: 768px) {
+		border-left: none;
+		justify-content: flex-end;
+		width: 100%;
+	}
+}
+
+.FlexRow{
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 0px 0px 12px 16px;
+
+	&.open {
+		border-bottom: 1px solid #F68B21;
+	}
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		align-items: flex-start;
+		margin-top: 10px;
+	}
+}
+
+.InfoContainer{
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 16px;
+	color: #333333;
+	background: #fbe6e6;
+	border-radius: 4px;
+	padding: 4px 7px;
+	margin-bottom: 6px;
+	white-space: nowrap;
+	width: fit-content;
+}
+
+.InvoiceContainer{
+	width: 26%;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
+
+.FlexContainer{
+	display: flex;
+	align-items: center;
+	width: 100%;
+	flex: 1;
+	justify-content: space-between;
+}
+
+.InvoiceSource{
+	background-color: #fef6df;
+	padding: 2px 16px;
+	width: fit-content;
+	color: #393f70;
+	font-size: 10px;
+	margin-right: 6px;
+}
+
+.PaymentModeStatus{
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	margin-right: 10px;
+	width: 35%;
+
+	.reviewed {
+		background: #e6fbe9;
+		color: #393f70;
+	}
+}
+
+.StatusStyle{
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.StatusContainer{
+	font-size: 10px;
+	color: #333333;
+	margin-top: 2px;
+}

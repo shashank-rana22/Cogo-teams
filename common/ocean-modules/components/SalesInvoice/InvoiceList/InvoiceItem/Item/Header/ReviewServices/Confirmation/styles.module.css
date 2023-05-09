@@ -1,0 +1,18 @@
+.Container{
+	margin-bottom: 24px;
+	display: flex;
+	align-items: flex-start;
+}
+
+.ConfirmLabel{
+	font-weight: 500;
+	font-size: 14px;
+	color: #393f70;
+	cursor: pointer;
+	width: 80%;
+}
+
+.CheckBoxWrapper{
+	width: 5%;
+	margin: 6px 20px 0 0;
+}
