@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Tags, Button } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 
 import MAPPING from './MAPPING';
@@ -12,6 +12,16 @@ function Header({ activeTab }) {
 			<div className={styles.top_container}>
 				<div className={styles.left_part}>
 					<div className={styles.title}>Course Trial ABC</div>
+
+					<Tags
+						size="md"
+						items={[{
+							disabled : false,
+							children : 'draft',
+							color    : '#FEF199',
+							tooltip  : false,
+						}]}
+					/>
 				</div>
 
 				<div className={styles.right_part}>

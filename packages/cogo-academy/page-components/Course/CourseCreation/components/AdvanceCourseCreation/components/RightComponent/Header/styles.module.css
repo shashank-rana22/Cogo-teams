@@ -9,6 +9,11 @@
 .title {
     font-weight: 700;
     font-size: 16px;
+    margin-right: 24px;
+}
+
+.left_part {
+    display: flex;
 }
 
 .right_part {

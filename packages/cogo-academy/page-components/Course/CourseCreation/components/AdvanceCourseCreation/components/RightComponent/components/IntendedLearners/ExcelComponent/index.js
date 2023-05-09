@@ -62,7 +62,11 @@ function ExcelComponent({ Element, name, label, controlItem, control, errors }) 
 				/>
 			</div>
 
-			<div className={styles.error_message}>{errors?.[name]?.message}</div>
+			{errors?.[name]?.message ? (
+				<div className={styles.error_message}>
+					{errors?.[name]?.message}
+				</div>
+			) : null}
 		</div>
 	);
 }

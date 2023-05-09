@@ -45,9 +45,11 @@ function Specifications() {
 							/>
 						</div>
 
-						<div className={styles.error_message}>
-							{errors?.[name]?.message}
-						</div>
+						{errors?.[name]?.message ? (
+							<div className={styles.error_message}>
+								{errors?.[name]?.message}
+							</div>
+						) : null}
 					</div>
 				);
 			})}

@@ -1,0 +1,40 @@
+.container {
+    margin: 32px 40px;
+}
+
+.input_group {
+    margin-top: 6px;
+}
+
+.form_group {
+    margin-bottom: 32px;
+
+    &.course_title {
+        width: 64%;
+    }
+
+    &.course_category {
+        width: 34%;
+    }
+}
+
+.error_message {
+	font-size: 10px;
+	font-weight: 400;
+	color: #cb6464;
+}
+
+.label {
+    font-weight: 400;
+    color: #4F4F4F;
+}
+
+.group_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sub_label {
+    color: #828282;
+    margin-top: 4px;
+}
