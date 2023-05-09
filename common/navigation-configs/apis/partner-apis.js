@@ -8532,7 +8532,7 @@ const partner = {
 			feature     : 'match',
 		},
 		{
-			api         : 'get_sales_accounts',
+			api         : 'get_payments_accounts',
 			access_type : 'private',
 			module      : 'onAccount',
 			feature     : 'onAccount',
