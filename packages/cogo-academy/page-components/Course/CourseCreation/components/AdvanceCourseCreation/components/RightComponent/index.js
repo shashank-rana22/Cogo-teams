@@ -13,7 +13,7 @@ const COMPONENT_MAPPING = {
 	intended_learners : IntendedLearners,
 	course_curriculum : Curriculum,
 	course_completion : CourseCompletion,
-	publish_course    : Curriculum,
+	publish_course    : PublishCourse,
 };
 
 function RightComponent({ activeTab }) {

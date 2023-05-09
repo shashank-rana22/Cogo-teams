@@ -84,7 +84,7 @@ export default function ModalContent({
 
 	return (
 		<div className={styles.modal_content}>
-			<Modal size="lg" show={show} onClose={onClose} placement="top-right">
+			<Modal size="lg" show={show} onClose={onClose} placement="center">
 				<Modal.Header title="Choose Certification Template" />
 				<Modal.Body>
 					<Select value={value} onChange={onChange} placeholder="Select" options={options} />
