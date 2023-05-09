@@ -1,10 +1,10 @@
 .heading {
+	position: relative;
+	display: flex;
 	width: fit-content;
+	margin-bottom: 12px;
 	font-size: 22px;
 	font-weight: 700;
-	position: relative;
-	display: flex; 
-	margin-bottom: 12px;
 
 	&::after {
 		position: absolute;
