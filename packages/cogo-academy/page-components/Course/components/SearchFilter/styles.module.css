@@ -5,20 +5,23 @@
 	margin-bottom: 20px;
 	font-size: 20px;
 	font-weight: 500;
+	margin-top: 20px;
+	width: 100%;
 }
 
 .input {
-	width: 60%;
+	width: 40%;
 }
 
-.filter_btn_container {
+.filter_btn {
+	font-size: 16px;
 	position: relative;
 }
 
 .filter_dot {
 	position: absolute;
 	top: 6px;
-	right: 12px;
+	right: 8px;
 	width: 6px;
 	height: 6px;
 	background-color: #ee3425;
