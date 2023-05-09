@@ -9,14 +9,14 @@ export default function List({
 	data = {},
 	filters = {},
 	setFilters = () => {},
-	tabsState,
+	tabsState = {},
 	setTabsState = () => {},
 	role = '',
 	additionalTabs = [],
 	loading = false,
 	refetch = () => {},
 }) {
-	const { bucket, subApprovedBucket } = tabsState;
+	const { bucket = '', subApprovedBucket = '' } = tabsState;
 
 	const { count_stats, total_count } = data;
 
