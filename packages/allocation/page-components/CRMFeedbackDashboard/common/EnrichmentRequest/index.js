@@ -3,7 +3,7 @@ import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import {
 	asyncFieldsPartnerUsers,
 } from '@cogoport/forms/utils/getAsyncFields';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import useCreateBulkEnrichment from '../../hooks/useCreateBulkEnrichment';

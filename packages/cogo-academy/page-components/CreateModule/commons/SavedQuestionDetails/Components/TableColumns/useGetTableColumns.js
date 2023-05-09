@@ -1,5 +1,5 @@
 import { Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { format, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 

@@ -1,6 +1,6 @@
 import IN from '../constants/geo/IN';
 import VN from '../constants/geo/VN';
-import GLOBAL_CONSTANTS from '../constants/globals.json';
+import GLOBAL_CONSTANTS from '../constants/globals';
 
 const { country_ids } = GLOBAL_CONSTANTS;
 

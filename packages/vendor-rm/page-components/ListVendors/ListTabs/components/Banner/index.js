@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCFtick, IcMCrossInCircle } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 import React from 'react';

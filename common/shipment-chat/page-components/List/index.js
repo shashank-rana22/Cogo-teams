@@ -1,6 +1,6 @@
 import { cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, useContext, useRef, useCallback } from 'react';

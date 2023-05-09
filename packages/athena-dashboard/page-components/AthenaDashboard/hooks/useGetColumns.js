@@ -1,6 +1,6 @@
 import { ResponsiveLine } from '@cogoport/charts/line/index';
 import { Tooltip } from '@cogoport/components';
-import globals from '@cogoport/globalization/constants/globals.json';
+import globals from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
 

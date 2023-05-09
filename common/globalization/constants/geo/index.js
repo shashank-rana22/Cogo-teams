@@ -1,6 +1,6 @@
 import { getCookie } from '@cogoport/utils';
 
-import GLOBAL_CONSTANTS from '../globals.json';
+import GLOBAL_CONSTANTS from '../globals';
 
 import IN from './IN';
 import VN from './VN';
