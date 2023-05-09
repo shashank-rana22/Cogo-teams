@@ -281,5 +281,12 @@ export default {
 				value : 'Close_body_18_ton',
 			},
 		],
+		invoice_status: [
+			{ label: 'Draft', value: 'DRAFT' },
+			{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
+			{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
+			{ label: 'E-INVOICE Generated', value: 'IRN_GENERATED' },
+			{ label: 'Requested', value: 'REQUESTED' },
+		],
 	},
 };

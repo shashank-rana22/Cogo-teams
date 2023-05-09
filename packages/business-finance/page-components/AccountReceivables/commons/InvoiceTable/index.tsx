@@ -1,11 +1,12 @@
 import { Pagination } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import { getConstantsByCountryCode } from '@cogoport/globalization/constants/geo';
 import { useSelector } from '@cogoport/store';
 import React from 'react';
 
 import Filters from '../../../commons/Filters';
 import completedColumn from '../../configs/Completed_table';
 import useGetOutstandingCard from '../../hooks/useGetoutstandingCard';
+import { INVOICE_FILTER } from '../../Utils/invoicelistFilter';
 import FilterModal from '../FilterModal';
 import SearchInput from '../searchInput';
 import StyledTable from '../styledTable';
@@ -23,10 +24,8 @@ const GREY = '#BDBDBD';
 
 function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 	const { profile = {} } = useSelector((store) => store);
-
 	const { partner = {} } = profile;
-
-	const { id:countryId = '' } = partner;
+	const { country_id : countryId = '' } = partner;
 
 	const {
 		listData,
@@ -40,13 +39,9 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 		setSort,
 	} = useGetOutstandingCard(organizationId, entityCode);
 
-	const { list : invoiceList = [], page: pageInvoiceList, totalRecords: recordInvoiceList } = listData || {};
+	const invoiceStatusFilter = getConstantsByCountryCode({ country_id: countryId });
 
-	const COUNTRY_ENTITY_FILTER = 	GLOBAL_CONSTANTS
-		.business_finance_account_receivables_invoice_filters[Object.keys(GLOBAL_CONSTANTS.country_entity_ids)
-			.find(
-				(key) => GLOBAL_CONSTANTS.country_entity_ids[key] === countryId,
-			)];
+	const { list : invoiceList = [], page: pageInvoiceList, totalRecords: recordInvoiceList } = listData || {};
 
 	const { sortType = '', sortBy = '' } = sort || {};
 
@@ -88,7 +83,7 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 					<Filters
 						filters={invoiceFilters}
 						setFilters={setinvoiceFilters}
-						controls={COUNTRY_ENTITY_FILTER}
+						controls={INVOICE_FILTER({ invoiceStatusFilter })}
 					/>
 
 					<FilterModal

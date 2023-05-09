@@ -1,6 +1,44 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 
-export const INVOICE_MORE_FILTERS = [
+export const INVOICE_FILTER = ({ invoiceStatusFilter }) => [
+	{
+		name        : 'migrated',
+		placeholder : 'Migration',
+		size        : 'sm',
+		type        : 'select',
+		caret       : true,
+		isClearable : true,
+		options     : [
+			{ value: 'true', label: 'True' },
+			{ value: 'false', label: 'False' },
+		],
+	},
+	{
+		name        : 'status',
+		placeholder : 'Payment',
+		size        : 'sm',
+		type        : 'select',
+		caret       : true,
+		isClearable : true,
+		options     : [
+			{ value: 'paid', label: 'Paid' },
+			{ value: 'unpaid', label: 'Unpaid' },
+			{ value: 'partial_paid', label: 'Partially paid' },
+
+		],
+	},
+	{
+		name        : 'invoiceStatus',
+		placeholder : 'Invoice',
+		size        : 'sm',
+		type        : 'select',
+		caret       : true,
+		isClearable : true,
+		options     : invoiceStatusFilter.options.invoice_status,
+	},
+];
+
+export const INVOICE_MORE_FILTERS = () => [
 	{
 		label       : 'Services',
 		name        : 'services',
