@@ -16,11 +16,6 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: My step
-        uses: my-action
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -57,23 +52,14 @@ jobs:
           touch .env
           echo NEXT_PUBLIC_REST_BASE_API_URL=${{ secrets.NEXT_PUBLIC_REST_BASE_API_URL }} >> .env
 
-      - name: Get PR details
-        id: pr-details
-        uses: octokit/request-action@v2.x
-        with:
-          route: GET /repos/${{ github.repository }}/pulls/${{ github.event.number }}
-          headers: |
-            Authorization: ${{ NPM_TOKEN }}
-            Accept: application/vnd.github.v3+json
-
-      - name: Get changed files
+      - name: Get modified files
         run: |
-          for file in $(echo "${{ steps.pr-details.outputs.data }} | jq -r '.files[].filename'"); do
-            echo "Changed file: $file"
+          git fetch origin pull/${{ github.event.pull_request.number }}/head
+          git diff --name-only --diff-filter=d ${{ github.event.pull_request.base.sha }}...FETCH_HEAD |
+          while read filename; do
+            echo "Modified file: $filename"
+            cat $filename
           done
-        shell: bash
-        env:
-          DATA: ${{ steps.pr-details.outputs.data }}
           
       - name: Test ESLint
         run: pnpm run eslint
