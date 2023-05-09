@@ -956,6 +956,12 @@ const partner = {
 			service_name : 'lead',
 		},
 		{
+			api          : 'organization_kam_allocation_migration',
+			access_type  : 'private',
+			service_name : 'organization',
+			feature      : 'demand_crm',
+		},
+		{
 			api         : 'list_lead_contacts',
 			access_type : 'private',
 		},
@@ -11159,6 +11165,14 @@ const partner = {
 		},
 		{
 			api         : 'get_air_coe_documents',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_air_coe_documents_list_manifest',
+			access_type : 'private',
+		},
+		{
+			api         : 'post_air_coe_documents_create_manifest',
 			access_type : 'private',
 		},
 		{
