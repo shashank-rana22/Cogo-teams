@@ -14,7 +14,6 @@ const styleIcon = {
 };
 
 export default function ServiceProvider({ item = {}, stateProps = {} }) {
-	console.log('itemn', item);
 	const getDocs = (ele) => {
 		let doc;
 		if (
@@ -58,8 +57,22 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 					<div className={styles.grey}>
 						Service Provider
 					</div>
-					<div className={styles.details}>
-						{item?.freight_service?.service_provider?.business_name}
+					<div>
+						<Tooltip
+							animation="shift-away"
+							interactive
+							content={(
+								<div>
+									{' '}
+									{item?.freight_service?.service_provider?.business_name}
+								</div>
+							)}
+						>
+							<div className={styles.details}>
+								{item?.freight_service?.service_provider?.business_name}
+							</div>
+						</Tooltip>
+
 					</div>
 				</div>
 				<div className={styles.right}>
@@ -82,6 +95,9 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 					<div className={styles.grey}>
 						Customer
 					</div>
+					<div className={styles.details}>
+						{item?.customer?.business_name}
+					</div>
 				</div>
 				<div className={styles.right}>
 					<div className={styles.grey}>
@@ -98,105 +114,6 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 						</Tooltip>
 
 					</div>
-				</div>
-			</div>
-		</div>
-	);
-	return (
-
-		<div className={cl`${styles.container} ${styles.service_provider}`}>
-			<div className={cl`${styles.container} ${styles.col} ${styles.sp_customer_details}`}>
-				<div className={cl`${styles.container} ${styles.row}`}>
-					<div className={cl`${styles.container} ${styles.half_width}`}>
-						<div className={cl`${styles.text} ${styles.thin}`}>Service Provider</div>
-
-						{/* <Tooltip
-							animation="shift-away"
-							theme="light-border"
-							interactive
-							content={(
-								<div className={cl`{styles.text}`} className="bold service-provider">
-									{(item?.service_provider?.business_name || '').toLowerCase()}
-								</div>
-							)}
-						>
-							<div className={cl`{styles.text}`} className="bold service-provider ellipsis-text">
-								{(item?.service_provider?.business_name || '').toLowerCase()}
-							</div>
-						</Tooltip> */}
-					</div>
-
-					<div className={cl`${styles.container}  ${styles.half_width}`}>
-						<div className={cl`${styles.text}  ${styles.thin}`}>Customer</div>
-
-						<Tooltip
-							animation="shift-away"
-							interactive
-							content={(
-								<div className={cl`${styles.text} ${styles.bold} ${styles.service_provider}`}>
-									{(item?.customer?.business_name || '').toLowerCase()}
-								</div>
-							)}
-						>
-							<div className={cl`${styles.text} ${styles.bold}
-              ${styles.service_provider} ${styles.ellipsis_text}`}
-							>
-								{(item?.customer?.business_name || '').toLowerCase()}
-							</div>
-						</Tooltip>
-					</div>
-				</div>
-
-				<div className={cl`${styles.container}`}>
-					<div className={cl`${styles.text}  ${styles.thin}`}>Service Provider Contact</div>
-
-					<Popover
-						animation="shift-away"
-						interactive
-						content={(
-							<SPPopver
-								spDetails={item?.organization_poc}
-								address={item?.organization_address}
-							/>
-						)}
-					>
-						<div className={cl`${styles.text} ${styles.bold} ${styles.link} ${styles.inline}`}>
-							Click here to view
-							<IcMUserAllocations style={styleIcon} />
-						</div>
-					</Popover>
-				</div>
-			</div>
-
-			<div className={cl`${styles.container} ${styles.col} ${styles.half_width}`}>
-				<div className={cl`${styles.container}`}>
-					<div className={cl`${styles.text} ${styles.thin}`}>
-						{docTitle}
-						{' '}
-						Details
-					</div>
-					{docsLength > 0 ? (
-						<Popover
-							animation="shift-away"
-							content={<BLPopver bl_do={docTitle} blDetails={list_of_docs} />}
-						>
-							<div className={cl`${styles.container} ${styles.cursor} ${styles.inline}`}>
-								<div className={cl`${styles.text} ${styles.document}`}>{doc_number}</div>
-								{remainLength ? (
-									<div className={styles.more}>
-										+
-										{remainLength}
-										{' '}
-										MORE
-									</div>
-								) : null}
-							</div>
-						</Popover>
-					) : null}
-				</div>
-
-				<div className={cl`${styles.container} ${styles.row}`}>
-					<ExtraDetails activeTab={activeTab} item={item} />
 				</div>
 			</div>
 		</div>

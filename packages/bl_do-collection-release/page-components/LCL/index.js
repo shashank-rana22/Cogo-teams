@@ -6,7 +6,7 @@ import useListBlDOShipments from '../../hooks/useListBlDOShipment';
 import styles from './styles.module.css';
 
 function LCL({ stateProps = {}, setStateProps = () => {} }) {
-	const { data, loading } = useListBlDOShipments({ prefix: 'lcl_freight', stateProps });
+	const { data, loading } = useListBlDOShipments({ prefix: 'lcl_freight', stateProps, setStateProps });
 
 	if (loading) {
 		return (
@@ -16,7 +16,7 @@ function LCL({ stateProps = {}, setStateProps = () => {} }) {
 				{' '}
 				{stateProps.activeTab}
 				{' '}
-				collection release data
+				Collection release data
 			</div>
 		);
 	}

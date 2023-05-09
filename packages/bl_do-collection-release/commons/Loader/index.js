@@ -4,17 +4,19 @@ import styles from './styles.module.css';
 
 export default function Loader() {
 	return (
-		<div className="main">
-			<div className="row">
-				<div className="details">
+		<div className={styles.container}>
+			<div className={styles.main}>
+				<div className={styles.row}>
+					<div className={styles.details}>
+						Loading
+					</div>
+					<div className={styles.details}>
+						Loading
+					</div>
+				</div>
+				<div className={styles.action}>
 					Loading
 				</div>
-				<div className="details">
-					Loading
-				</div>
-			</div>
-			<div className="action">
-				Loading
 			</div>
 		</div>
 	);

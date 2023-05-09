@@ -41,7 +41,7 @@ export default function ServcieProvider({ spDetails = [], address = [] }) {
 	) : (
 		(spDetails || []).map((item) => (
 			<div className={cl`${styles.container} ${styles.popover}`}>
-				<div className={cl`${styles.text} ${styles.bold}`} className="bold">{item?.name}</div>
+				<div className={cl`${styles.text} ${styles.bold}`}>{item?.name}</div>
 			</div>
 		))
 	);
@@ -50,7 +50,7 @@ export default function ServcieProvider({ spDetails = [], address = [] }) {
 		<EmptyState />
 	) : (
 		(spDetails || []).map((item) => (
-			<div className={cl`${container} ${popover}`}>
+			<div className={cl`${styles.container} ${styles.popover}`}>
 				<div className={cl`${styles.text} ${styles.bold}`}>
 					{`${item?.mobile_country_code} - ${item?.mobile_number}`}
 				</div>

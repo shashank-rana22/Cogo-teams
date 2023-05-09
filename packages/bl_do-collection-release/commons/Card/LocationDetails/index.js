@@ -6,7 +6,6 @@ import styles from './styles.module.css';
 
 export default function LocaionDetails({ item = {}, stateProps = {} }) {
 	const isFclLocal = stateProps?.shipment_type === 'fcl_freight_local';
-	console.log('item', item);
 
 	return (
 		<div className={styles.container}>
@@ -50,7 +49,7 @@ export default function LocaionDetails({ item = {}, stateProps = {} }) {
 
 				</div>
 				<div className={styles.right}>
-					<div className={styles.grey}>ET</div>
+					<div className={styles.grey}>ETA</div>
 					{formatDate({
 						date       : item?.freight_service?.schedule_arrival,
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],

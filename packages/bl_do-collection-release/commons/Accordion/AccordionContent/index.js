@@ -1,13 +1,11 @@
-// import CardList from '@cogo/bookings/commons/CardList';
-import { Button, Tabs, TabPanel } from '@cogoport/components';
+import { Button, Tabs, TabPanel, Table } from '@cogoport/components';
 import { useState, useRef } from 'react';
 
-// import EmptyState from '../../../../../commons/EmptyState';
 import taskConfigs from '../../../configs/taskConfigs.json';
 import getMutatedControls from '../../../helpers/getMutatedControls';
 // import PendingTasks from '../../../PendingTasks/TaskList';
 import Loader from '../../Loader';
-import tableColumn from '../Invoices/tableColumn';
+import { columns } from '../Invoices/tableColumn';
 
 import AccordianTimeline from './AccordianTimeline';
 import styles from './styles.module.css';
@@ -50,7 +48,9 @@ export default function AccordionContent({
 		manualFinal = true;
 	}
 
-	const list_of_invoices = item?.invoice_data;
+	const { mutatedControls } = getMutatedControls({ item, activeTab, controls });
+
+	const list_of_invoices = item?.invoice_data || [];
 
 	const handleNextAction = async () => {
 		const isFormValid = await formRef.current?.formTrigger();
@@ -67,6 +67,16 @@ export default function AccordionContent({
 			}
 		}
 	};
+	const refetchForTask = () => {
+		refetchList();
+		handleAccordionOpen();
+	};
+
+	const filteredTask = tasks.filter((e) => e.task === 'upload_delivery_order');
+
+	const taskToSend =		activeTab === 'collected' && item?.trade_type === 'import'
+		? filteredTask
+		: tasks;
 
 	const renderTask = () => {
 		if (taskLoading) {
@@ -131,25 +141,11 @@ export default function AccordionContent({
 		);
 	};
 
-	const refetchForTask = () => {
-		refetchList();
-		handleAccordionOpen();
-	};
-
-	const { mutatedControls } = getMutatedControls({ item, activeTab, controls });
-
-	const filteredTask = tasks.filter((e) => e.task === 'upload_delivery_order');
-
-	const taskToSend =		activeTab === 'collected' && item?.trade_type === 'import'
-		? filteredTask
-		: tasks;
-
 	return (
 		<div className={styles.container}>
 			{!showInvoiceAndTask ? (
 				<div className={styles.list_container}>
-					{/* <CardList fields={tableColumn()} data={list_of_invoices} /> */}
-					<div>Card list here</div>
+					<Table columns={columns} data={list_of_invoices} />
 				</div>
 			) : (
 				<Tabs
@@ -158,9 +154,8 @@ export default function AccordionContent({
 					onChange={setActiveAccordionTab}
 				>
 					<TabPanel name="invoice" title="Invoices">
-						<div className={styles.list_contaier}>
-							{/* <CardList fields={tableColumn()} data={list_of_invoices} /> */}
-							<div>Card list here</div>
+						<div className={styles.list_container}>
+							<Table columns={columns} data={list_of_invoices} />
 						</div>
 					</TabPanel>
 

@@ -17,7 +17,7 @@
 	&.card {
 		display: flex;
 		justify-content: space-between;
-		padding: 10px 16px;
+		padding: 10px 8px;
 		border-bottom: 1px solid #e0e0e0;
 	}
 
@@ -33,6 +33,6 @@
 	}
 
 	&.title {
-		margin-right: 12px;
+		margin-right: 8px;
 	}
 }

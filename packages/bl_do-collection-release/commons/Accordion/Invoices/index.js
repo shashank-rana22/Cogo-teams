@@ -1,13 +1,12 @@
-// import CardList from '@cogo/bookings/commons/CardList';
 // import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { cl, Tooltip } from '@cogoport/components';
+import { cl, Tooltip, Table } from '@cogoport/components';
 import { IcMArrowUp, IcMArrowDown, IcMDocument } from '@cogoport/icons-react';
 
 import ClickableDiv from '../../ClickableDiv';
 import PendingKnockOff from '../PendingKnockOff';
 
 import styles from './styles.module.css';
-import tableColumn from './tableColumn';
+import { columns } from './tableColumn';
 
 export default function Invoices({
 	item = {},
@@ -71,8 +70,7 @@ export default function Invoices({
 		if (item?.trade_type === 'export') {
 			return (
 				<div className={styles.list_container}>
-					{/* <CardList fields={tableColumn()} data={list_of_invoices} /> */}
-					<div>Card list here</div>
+					<Table columns={columns} data={list_of_invoices} />
 				</div>
 			);
 		}

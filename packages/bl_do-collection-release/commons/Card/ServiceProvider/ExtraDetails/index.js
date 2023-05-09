@@ -109,7 +109,9 @@ export default function ExtraDetails({ activeTab = '', item = {} }) {
 							<>
 								<div className={cl`${styles.text} ${styles.thin}`}>Mode of Delivery</div>
 
-								<div className={cl`${styles.text} ${styles.bold}`}>{startCase(item?.delivery_mode)}</div>
+								<div className={cl`${styles.text} ${styles.bold}`}>
+									{startCase(item?.delivery_mode)}
+								</div>
 							</>
 						) : (
 							<>

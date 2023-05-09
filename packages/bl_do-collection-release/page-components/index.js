@@ -1,8 +1,9 @@
 import { Tabs, TabPanel, Select, Input, cl } from '@cogoport/components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import ClickableDiv from '../commons/ClickableDiv';
 import TAB_CONFIG from '../configs/TAB_CONFIG.json';
+import getBlDoPayload from '../helpers/getBlDoPayload';
 
 // import ChildTabs from '../commons/ChildTabs';
 
@@ -25,13 +26,17 @@ const deskMapping = {
 
 export default function BLDoCollectionDesk() {
 	const [stateProps, setStateProps] = useState({
-		activeTab     : 'stationary',
+		activeTab     : 'bl',
 		shipment_type : 'fcl_freight',
 		inner_tab     : 'knockoff_awaiting',
-		trade_type    : '',
+		trade_type    : 'export',
 		q             : '',
 		page          : 1,
 	});
+	// const [payload, setFinalPaload] = useState({});
+	// useEffect(() => {
+	// 	getBlDoPayload({ stateProps, setFinalPaload });
+	// }, [stateProps]);
 
 	const Desk = deskMapping[stateProps.shipment_type];
 
@@ -44,7 +49,6 @@ export default function BLDoCollectionDesk() {
 				${styles.service_tab}`}
 					>
 						{item.label}
-
 					</div>
 				</ClickableDiv>
 			))

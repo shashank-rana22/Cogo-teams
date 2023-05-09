@@ -1,12 +1,9 @@
 .container {
 	display: flex;
-
-	/* justify-content: ${({ item }) =>
-		}${item?.trade_type === 'import' ? 'flex-end' : 'space-between'}}}; */
 	align-items: center;
 	padding: 10px;
 	background: #f4f8fe;
-	border: 1px solid #e0e7f1;
+	border: 1px solid #88CAD1;
 	border-radius: 4px 4px 0 0;
 
 	* {

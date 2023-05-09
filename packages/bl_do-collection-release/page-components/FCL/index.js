@@ -6,7 +6,7 @@ import useListBlDOShipments from '../../hooks/useListBlDOShipment';
 import styles from './styles.module.css';
 
 function FCL({ stateProps = {}, setStateProps = () => {} }) {
-	const { data, loading } = useListBlDOShipments({ prefix: 'fcl_freight', stateProps });
+	const { data, loading } = useListBlDOShipments({ prefix: 'fcl_freight', stateProps, setStateProps });
 
 	if (loading) {
 		return (
@@ -14,9 +14,9 @@ function FCL({ stateProps = {}, setStateProps = () => {} }) {
 				<Loader />
 				Loading
 				{' '}
-				{stateProps.activeTab}
+				{(stateProps.activeTab).toUpperCase()}
 				{' '}
-				collection release data
+				Collection Release data
 			</div>
 		);
 	}

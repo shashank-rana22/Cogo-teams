@@ -6,12 +6,16 @@
   ],
   "TABS":[
     { "label":"Knock Off Awaiting", "value": "knockoff_awaiting"},
-    { "label":"Knock Off Pending", "value": "knockoff_pending" },
+    { "label":"Pending Knock Off", "value": "knockoff_pending" },
     { "label":"Pending Collection", "value": "collection_pending" },
     { "label":"Under Collection", "value": "under_collection" },
     { "label":"Collected", "value": "collected" },
     { "label":"Released", "value": "released" },
     { "label":"Surrender", "value": "surrendered" },
     { "label":"On Hold", "value": "on_hold" }
+  ],
+  "ACCORDIAN_TABS": [
+    { "label": "Invoivces", "value": "invoices"},
+    { "label": "Tasks", "value": "tasks"}
   ]
 }

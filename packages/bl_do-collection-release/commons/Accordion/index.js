@@ -9,6 +9,8 @@ export default function Accordion({
 	accordionOpen = false,
 	tasks = [],
 	taskLoading = false,
+	setStateProps = {},
+	stateProps = () => {},
 	handleAccordionOpen = () => {},
 	handleSubmit = () => {},
 	refetchList = () => {},
@@ -43,6 +45,8 @@ export default function Accordion({
 					item={item}
 					tasks={tasks}
 					taskLoading={taskLoading}
+					stateProps={stateProps}
+					setStateProps={setStateProps}
 					handleSubmit={handleSubmit}
 					handleAccordionOpen={handleAccordionOpen}
 					refetchList={refetchList}

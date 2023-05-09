@@ -1,20 +1,20 @@
 // import CardList from '@cogo/bookings/commons/CardList';
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Tabs, TabPanel, Table } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
 // import PendingTasks from '../../../PendingTasks/TaskList';
-import tableColumn from '../Invoices/tableColumn';
+import { columns } from '../Invoices/tableColumn';
 
 import styles from './styles.module.css';
 
-const pendingKnockOff = ({
+function PendingKnockOff({
 	item = {},
 	tasks = [],
 	handleAccordionOpen = () => {},
 	refetchList = () => {},
 	getShipmentPendingTask = () => {},
 	taskLoading = false,
-}) => {
+}) {
 	const [activeTab, setActiveTab] = useState('invoice');
 	const list_of_invoices = item?.invoice_data;
 
@@ -27,23 +27,24 @@ const pendingKnockOff = ({
 		if (activeTab === 'tasks') {
 			getShipmentPendingTask();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab]);
 
 	return (
 		<div className={styles.container}>
 			<Tabs
-				className="horizontal two"
 				activeTab={activeTab}
-				onChange={setActiveTab}
+				onChange={(val) => setActiveTab(val)}
 			>
 				<TabPanel name="invoice" title="Invoices">
 					<div className={styles.list_container}>
-						{/* <CardList fields={tableColumn()} data={list_of_invoices} /> */}
-						<div>Card list goes here</div>
+						Invoices
+						{/* <Table fields={columns} data={list_of_invoices} /> */}
 					</div>
 				</TabPanel>
 
 				<TabPanel name="tasks" title="Tasks">
+					<div>Task</div>
 					{/* <PendingTasks
 						taskList={tasks}
 						item={item}
@@ -55,6 +56,6 @@ const pendingKnockOff = ({
 			</Tabs>
 		</div>
 	);
-};
+}
 
-export default pendingKnockOff;
+export default PendingKnockOff;

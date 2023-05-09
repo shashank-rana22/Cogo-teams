@@ -55,6 +55,7 @@ const stakeholderMappings = {
 export default function Card({
 	item = {},
 	stateProps = {},
+	setStateProps = () => {},
 	openItem = null,
 	setOpenItem = () => {},
 	refetchList = () => {},
@@ -66,14 +67,16 @@ export default function Card({
 	});
 
 	const restFilters = {
-		assigned_stakeholder : assigned_stakeholder_mapping[stateProps.activeTab],
-		task                 : taskFilter[stateProps.activeTab],
+		assigned_stakeholder : assigned_stakeholder_mapping[stateProps.inner_tab],
+		task                 : taskFilter[stateProps.inner_tab],
+		shipment_id          : item?.id,
+		status         					 : 'pending',
 	};
 
 	if (
-		['under_collection', 'collected', 'knockoff_pending'].includes(stateProps.activeTab)
+		['under_collection', 'collected', 'knockoff_pending'].includes(stateProps.inner_tab)
 	) {
-		restFilters.task = taskFilter[stateProps.activeTab][item?.trade_type];
+		restFilters.task = taskFilter[stateProps.inner_tab][item?.trade_type];
 	}
 
 	const {
@@ -82,7 +85,7 @@ export default function Card({
 		showDeliveryOrderTask,
 		showInvoiceAndTask,
 	} = getAccordionAndButton({
-		activeTab: stateProps.activeTab,
+		activeTab: stateProps.inner_tab,
 		item,
 	});
 
@@ -95,14 +98,11 @@ export default function Card({
 	const { list, loading, listTasks } = useListTasks({
 		prefix        : stateProps.shipment_type,
 		defaultParams : {
+			sort_by    : 'updated_at',
+			sort_type  : 'desc',
 			page_limit : 100,
-			sort_type  : 'asc',
 		},
-		defaultFilters: {
-			shipment_id : item?.id,
-			status      : 'pending',
-			...restFilters,
-		},
+		filters: restFilters,
 	});
 
 	const handleAccordionOpen = () => {
@@ -139,8 +139,6 @@ export default function Card({
 			handleAccordionOpen();
 		}
 	};
-
-	console.log('list ', list);
 
 	// const { loading, getShipmentPendingTask, pendingTasks, handleSubmit } =		usePendingTask({
 	// 	activeTab,
@@ -208,6 +206,8 @@ export default function Card({
 					accordionOpen={accordionOpen}
 					tasks={list || []}
 					taskLoading={loading}
+					setStateProps={setStateProps}
+					stateProps={stateProps}
 					handleAccordionOpen={handleAccordionOpen}
 					// handleSubmit={handleSubmit}
 					refetchList={refetchList}
@@ -231,14 +231,14 @@ export default function Card({
 					<Modal.Footer>
 						<div className={cl`${styles.container} ${styles.row}`}>
 							<Button
-								// disabled={loading}
+								disabled={loading}
 								onClick={closeModal}
 								className="primary md"
 							>
 								CANCEL
 							</Button>
 							<Button
-								// disabled={loading}
+								disabled={loading}
 								// onClick={handleSubmit}
 								className="primary md"
 							>

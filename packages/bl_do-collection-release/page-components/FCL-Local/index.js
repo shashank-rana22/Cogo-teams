@@ -6,7 +6,7 @@ import useListBlDOShipments from '../../hooks/useListBlDOShipment';
 import styles from './styles.module.css';
 
 function FCLLocal({ stateProps = {}, setStateProps = () => {} }) {
-	const { data, loading } = useListBlDOShipments({ prefix: 'fcl_local', stateProps });
+	const { data, loading } = useListBlDOShipments({ prefix: 'fcl_local', stateProps, setStateProps });
 	if (loading) {
 		return (
 			<div className={styles.loader}>
@@ -15,7 +15,7 @@ function FCLLocal({ stateProps = {}, setStateProps = () => {} }) {
 				{' '}
 				{stateProps.activeTab}
 				{' '}
-				collection release data
+				Collection release data
 			</div>
 		);
 	}

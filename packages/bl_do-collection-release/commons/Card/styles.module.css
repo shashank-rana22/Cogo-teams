@@ -39,7 +39,7 @@
 		align-items: center;
 		justify-content: center;
 		width: 22%;
-		padding: 10px 26px 10px 10px;
+		padding: 8px;
 		margin-left: auto;
 
 		.core-ui-button-root {
@@ -78,6 +78,7 @@
 }
 
 .stakeholders {
+	padding: 8px 12px;
 	overflow: scroll;
 }
 
@@ -85,10 +86,6 @@
 	&.thin {
 		margin-top: 2px;
 		font-weight: 300;
-	}
-
-	&.bold {
-		font-weight: 500;
 	}
 
 	&.inline {
@@ -99,6 +96,11 @@
 		font-size: 12px;
 	}
 }
+
+.bold {
+	font-weight: 600;
+}
+
 
 .label {
 	font-size: 16px;

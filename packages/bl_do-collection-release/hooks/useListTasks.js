@@ -3,33 +3,26 @@ import { useCallback } from 'react';
 
 export default function useListTasks({
 	prefix = '',
-	defaultFilters = {},
-	defaultParams = {},
-	params = {},
 	filters = {},
+	defaultParams = {},
 }) {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : `${prefix}/list_tasks`,
 		method : 'GET',
-		params : {
-			...defaultParams,
-			...params,
-			filters: {
-				...filters,
-				...defaultFilters,
-			},
-		},
 	}, { manual: true });
 
 	const listTasks = useCallback(() => {
 		(async () => {
 			trigger({
 				params: {
-					page_limit: 10,
+					...defaultParams,
+					filters: {
+						...filters,
+					},
 				},
 			});
 		})();
-	}, [trigger]);
+	}, [trigger, filters, defaultParams]);
 
 	console.log('tasks', data);
 	return {

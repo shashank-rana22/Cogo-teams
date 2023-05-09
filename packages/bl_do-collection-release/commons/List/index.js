@@ -8,7 +8,6 @@ import styles from './styles.module.css';
 
 export default function List({ data = {}, stateProps, couldBeCardsCritical = false, setStateProps = () => {} }) {
 	const [openItem, setOpenItem] = useState(null);
-	const { activeTab } = stateProps;
 	const { list = [], total } = data;
 
 	return (
@@ -20,6 +19,7 @@ export default function List({ data = {}, stateProps, couldBeCardsCritical = fal
 							key={item?.id}
 							item={item}
 							stateProps={stateProps}
+							setStateProps={setStateProps}
 							couldBeCardsCritical={couldBeCardsCritical}
 							openItem={openItem}
 							setOpenItem={setOpenItem}
@@ -29,6 +29,8 @@ export default function List({ data = {}, stateProps, couldBeCardsCritical = fal
 					<div className={styles.pagination_container}>
 						<Pagination
 							type="number"
+							currentPage={stateProps.page}
+							onPageChange={(val) => setStateProps({ ...stateProps, page: val })}
 							totalItems={total}
 							pageSize={10}
 						/>

@@ -5,6 +5,8 @@ import {
 	IcMDocument,
 } from '@cogoport/icons-react';
 
+import ClickableDiv from '../../ClickableDiv';
+
 import styles from './styles.module.css';
 
 const textMapping = {
@@ -34,11 +36,11 @@ export default function AccordionText({
 						/>
 						Next Task:
 						{' '}
-						<Text>
+						<div className={styles.text}>
 							{!showDeliveryOrderTask
 								? textMapping?.[activeTab]
 								: 'Upload Delivery Order'}
-						</Text>
+						</div>
 					</>
 				) : (
 					<>
@@ -53,16 +55,18 @@ export default function AccordionText({
 				)}
 			</div>
 
-			<div className={styles.action_container} onClick={handleAccordionOpen}>
-				{accordionOpen ? 'Hide' : 'View'}
-				{' '}
-				All
-				{accordionOpen ? (
-					<IcMArrowUp style={{ marginLeft: 4 }} />
-				) : (
-					<IcMArrowDown style={{ marginLeft: 4 }} />
-				)}
-			</div>
+			<ClickableDiv onClick={handleAccordionOpen}>
+				<div className={styles.action_container}>
+					{accordionOpen ? 'Hide' : 'View'}
+					{' '}
+					All
+					{accordionOpen ? (
+						<IcMArrowUp style={{ marginLeft: 4 }} />
+					) : (
+						<IcMArrowDown style={{ marginLeft: 4 }} />
+					)}
+				</div>
+			</ClickableDiv>
 		</div>
 	);
 }
