@@ -1,7 +1,7 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { format } from '@cogoport/utils';
 
-function LineGraph({ graphData }) {
+function TotalSearchesGraph({ graphData }) {
 	const theme = {
 		legends: {
 			text: {
@@ -11,6 +11,7 @@ function LineGraph({ graphData }) {
 	};
 	return (
 		<ResponsiveLine
+			style={{ height: '50px' }}
 			data={graphData}
 			theme={theme}
 			margin={{
@@ -89,4 +90,4 @@ function LineGraph({ graphData }) {
 	);
 }
 
-export default LineGraph;
+export default TotalSearchesGraph;

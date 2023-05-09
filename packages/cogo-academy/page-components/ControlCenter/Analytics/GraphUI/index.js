@@ -1,7 +1,8 @@
 import useGraphData from '../hooks/useGraphData';
 
 import Filters from './Filters';
-import LineGraph from './lineGraph';
+import LineGraph from './LineGraph';
+import useGetFaqTokenUtilizationStats from './LineGraph/getFaqTokenUtilizationStats';
 import PieChart from './PieChart';
 import styles from './styles.module.css';
 import useGetFormattedGraphData from './useGetFormattedGraphData';
@@ -15,9 +16,16 @@ function GraphUI() {
 		setDateRange,
 		view_count_data,
 		total_searches,
+		formatStartDate,
+		formatEndDate,
 	} = useGraphData();
 
 	const { graphData = [] } = useGetFormattedGraphData({ graph_data });
+
+	const { tokenData } = useGetFaqTokenUtilizationStats({
+		formatStartDate,
+		formatEndDate,
+	});
 
 	return (
 		<>
@@ -26,7 +34,7 @@ function GraphUI() {
 				className={styles.date}
 			>
 				<div className={styles.line_chart}>
-					<LineGraph graphData={graphData} />
+					<LineGraph graphData={graphData} tokenData={tokenData} />
 				</div>
 
 				<div className={styles.pie_container}>
