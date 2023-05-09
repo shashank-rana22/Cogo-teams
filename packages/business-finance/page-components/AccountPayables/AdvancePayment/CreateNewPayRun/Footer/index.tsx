@@ -29,6 +29,7 @@ interface PropsType {
 	selectedDataLoading:boolean,
 	loading:boolean,
 	viewSelectedDataLoading:boolean
+	selectedCurrency:string,
 }
 function Footer({
 	apiData,
@@ -42,13 +43,14 @@ function Footer({
 	selectedDataLoading,
 	loading,
 	viewSelectedDataLoading,
+	selectedCurrency,
 }:PropsType) {
 	const {
 		list = [],
 	} = apiData || {};
 
 	const [savePayrunModal, setSavePayrunModal] = useState(false);
-	const { totalValue, currency, invoiceCount } = viewSelectedData || {};
+	const { totalValue = '', invoiceCount = '' } = viewSelectedData || {};
 	const { list:viewSelectedList = [] } = viewSelectedData || {};
 	const listLength = viewSelectedList.length;
 	const isChecked = (list || []).filter((item) => item.checked);
@@ -71,8 +73,8 @@ function Footer({
 					</div>
 					<div className={styles.amount_container}>
 						<div className={styles.amount}>
-							{viewSelectedInvoice ? getFormattedPrice(totalValue, currency)
-								: getFormattedPrice(totalInvoiceAmount, currency)}
+							{viewSelectedInvoice ? getFormattedPrice(totalValue, selectedCurrency)
+								: getFormattedPrice(totalInvoiceAmount, selectedCurrency)}
 						</div>
 					</div>
 					<div className={styles.sid_count}>

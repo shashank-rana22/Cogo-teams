@@ -64,7 +64,7 @@ export const CREATE_NEW_PAYRUN_CONFIG = {
 			key   : 'bankName',
 			label : 'Bank Account Details',
 			func  : 'renderBankData',
-			span  : 1.4,
+			span  : 1.6,
 		},
 		{
 			key     : 'requestedBy',

@@ -9,6 +9,15 @@ import styles from './styles.module.css';
 interface ItemProps {
 	advanceDocumentId?:string,
 }
+interface EventDataType {
+	target: any;
+}
+
+interface NewDataListProps {
+	payableAmount:string,
+	tdsAmount:string,
+	invoiceAmount:string,
+}
 interface NestedObj {
 	[key: string]: string;
 }
@@ -100,14 +109,18 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 
 	useEffect(() => {
 		const newData = { ...data };
+		const { list = [] } = newData || {};
 		if (newData.list) {
-			newData.list = newData?.list?.map((item) => ({
-				...item,
-				payableValue       : item?.payableAmount,
-				tdsValue           : item?.tdsAmount,
-				inputAmount        : item?.payableAmount,
-				constPayableAmount : item?.invoiceAmount,
-			}));
+			newData.list = list.map((item:NewDataListProps) => {
+				const { payableAmount = '', tdsAmount = '', invoiceAmount = '' } = item || {};
+				return {
+					...item,
+					payableValue       : payableAmount,
+					tdsValue           : tdsAmount,
+					inputAmount        : payableAmount,
+					constPayableAmount : invoiceAmount,
+				};
+			});
 		}
 		setApiData(newData);
 	}, [data]);
@@ -123,6 +136,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 						q           : query !== '' ? query : undefined,
 						entityCode  : activeEntity || entity,
 						serviceType : service || undefined,
+						currency,
 						...sort,
 					},
 				});
@@ -130,7 +144,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 				console.log(err?.response?.data?.message);
 			}
 		})();
-	}, [query, trigger, activeEntity, service, pageIndex, sort, entity]);
+	}, [query, trigger, activeEntity, service, pageIndex, sort, entity, currency]);
 
 	useEffect(() => {
 		if (viewSelectedInvoice === false || viewSelectedInvoice === undefined) {
@@ -251,9 +265,10 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 		}
 	};
 
-	const onChangeTableHeaderCheckbox = (event) => {
+	const onChangeTableHeaderCheckbox = (event:EventDataType) => {
 		setApiData((prevData) => {
-			const newList = prevData?.list?.map((item) => ({
+			const { list = [] } = prevData || {};
+			const newList = list.map((item) => ({
 				...item,
 				checked: event.target.checked,
 			}));
@@ -262,10 +277,12 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 	};
 
 	const getTableHeaderCheckbox = () => {
-		const isCheckedLength = apiData?.list?.filter(
+		const { list = [] } = apiData || {};
+		const { list:dataList = [] } = data || {};
+		const isCheckedLength = list.filter(
 			(value) => value?.checked,
 		)?.length;
-		const isAllRowsChecked = isCheckedLength === data?.list?.length;
+		const isAllRowsChecked = isCheckedLength === dataList.length;
 		return (
 			<div className={styles.checkbox_style}>
 				<Checkbox
@@ -276,10 +293,11 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 		);
 	};
 
-	const onChangeTableBodyCheckbox = (itemData) => {
+	const onChangeTableBodyCheckbox = (itemData:ItemProps) => {
+		const { advanceDocumentId = '' } = itemData || {};
 		setApiData((prevData) => {
-			const index = prevData.list.findIndex(
-				(item) => item.advanceDocumentId === itemData.advanceDocumentId,
+			const index = (prevData.list || []).findIndex(
+				(item) => item.advanceDocumentId === advanceDocumentId,
 			);
 			if (index !== -1) {
 				const newList = [...prevData.list];
@@ -296,8 +314,10 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 		});
 	};
 	const getTableBodyCheckbox = (itemData:ItemProps) => {
-		const isChecked = apiData?.list?.find(
-			(item) => item?.advanceDocumentId === itemData?.advanceDocumentId,
+		const { advanceDocumentId = '' } = itemData || {};
+		const { list = [] } = apiData || {};
+		const isChecked = list.find(
+			(item) => item?.advanceDocumentId === advanceDocumentId,
 		)?.checked;
 
 		return (
@@ -327,6 +347,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 		deleteSelectedInvoice,
 		deleteSelecteInvoiceLoading,
 		deleteInvoices,
+		currency,
 	};
 };
 export default useGetAdvancePaymentList;
