@@ -1,12 +1,14 @@
 import CourseCompletion from './components/CourseCompletion';
+import CourseOverview from './components/CourseOverview';
 import Curriculum from './components/Curriculum';
 import IntendedLearners from './components/IntendedLearners';
+import PublishCourse from './components/PublishCourse';
 import Specifications from './components/Specifications';
 import Header from './Header';
 import styles from './styles.module.css';
 
 const COMPONENT_MAPPING = {
-	overview          : Curriculum,
+	overview          : CourseOverview,
 	specifications    : Specifications,
 	intended_learners : IntendedLearners,
 	course_curriculum : Curriculum,

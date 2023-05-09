@@ -3,11 +3,24 @@
 	cursor: pointer;
 	background: #fff;
 	border-radius: 4px;
-	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+	display: flex;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);align-items: center;
+
+	&.active_tab {
+		background: #F7FAEF;
+	}
 }
 
 .item {
 	margin: 12px 0;
+
+	&.active_tab {
+		:global {
+			.ui_accordion_header {
+				background: #F7FAEF;
+			}
+		}
+	}
 }
 
 .child_container {
@@ -17,4 +30,24 @@
 	&.active {
 		font-weight: 800;
 	}
+}
+
+.number {
+	border-radius: 50%;
+	width: 12px;
+	height: 12px;
+	border: 1px solid #221F20;
+	color: #000;
+	text-align: center;
+	font-size: 10px;
+	margin-right: 12px;
+}
+
+.index {
+	margin-top: -2px;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
 }
