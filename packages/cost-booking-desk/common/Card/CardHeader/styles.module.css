@@ -1,0 +1,32 @@
+.card_header {
+	display: flex;
+	margin-bottom: 4px;
+
+	:global {
+		.ui_pill_container {
+			padding: 2px 8px;
+			margin: 0;
+			font-size: var(--font-size-sm);
+			line-height: initial;
+		}
+	}
+
+	.header_pills:not(:last-of-type) {
+		margin-right: 10px;
+		border-radius: 0 0 4px 4px;
+	}
+
+	.header_pills:first-of-type {
+		border-radius: 4px 0;
+	}
+
+	.header_pills:last-of-type {
+		margin-left: auto;
+		border-radius: 0 4px;
+	}
+}
+
+svg.assured_icon {
+	width: 1.2em;
+	height: 1.2em;
+}
