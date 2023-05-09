@@ -1,0 +1,21 @@
+.error {
+	font-weight: 500;
+	color: #cb6464;
+}
+
+.form {
+	padding: 10px;
+	overflow: scroll;
+}
+
+.form::-webkit-scrollbar {
+	display: none;
+}
+
+.content {
+	margin-bottom: 10px;
+}
+
+.list {
+	margin: 10px 0;
+}

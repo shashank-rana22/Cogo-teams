@@ -1,15 +1,18 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-import useCreateFaqPayload from './useCreateFaqPayload';
+import getFaqPayload from './getFaqPayload';
 
 function useCreateFaqSet({
 	setQuestionPreview,
 	editorValue,
 	setEditorError,
 	RichTextEditor,
+	data: apiData,
+	showAlias,
 }) {
 	const router = useRouter();
 	const {
@@ -36,12 +39,20 @@ function useCreateFaqSet({
 			return;
 		}
 
-		// eslint-disable-next-line react-hooks/rules-of-hooks
-		const { payload } = useCreateFaqPayload({ values, editorValue, source: 'create' });
+		const emptyAlias = (showAlias || []).find((
+			alias,
+		) => alias?.status !== 'inactive' && (!(alias?.question_abstract || '').trim()));
+
+		if (emptyAlias) {
+			Toast.error('Alias can not be empty');
+			return;
+		}
+
+		const payload = getFaqPayload({ values, editorValue, source: 'create', data: apiData, showAlias });
 
 		try {
 			const res = await trigger({
-				data: payload,
+				data: { ...payload, id: questionId },
 			});
 
 			if (res?.data) {
@@ -55,11 +66,16 @@ function useCreateFaqSet({
 				setQuestionPreview('preview');
 			}
 		} catch (err) {
-			console.log('err', err);
+			Toast.error(getApiErrorString(err?.response?.data));
 		}
 	};
 
 	const onClickPublish = async ({ data }) => {
+		const { question_aliases = [], answers = {} } = data || {};
+		const { id :answerId } = answers?.[0] || {};
+
+		const updatedAlias = (question_aliases || []).map(({ id = '' }) => ({ id }));
+
 		const payload = {
 			id      : data?.id,
 			state   : 'published',
@@ -67,8 +83,9 @@ function useCreateFaqSet({
 			answers : [{
 				state  : 'published',
 				status : 'active',
-
+				id     : answerId,
 			}],
+			aliases: updatedAlias,
 		};
 
 		try {

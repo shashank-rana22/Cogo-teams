@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import COMPONENT_MAPPING from '../../../constants/COMPONENT_MAPPING';
 import useCheckChannelPartner from '../../../hooks/useCheckChannelPartner';
@@ -15,10 +15,15 @@ function ProfileDetails({
 	updateLeaduser,
 	activeCardId,
 	setModalType = () => {},
+	setActiveMessage = () => {},
+	activeRoomLoading,
+	setRaiseTicketModal = () => {},
+	zippedTicketsData = {},
 }) {
 	const customerId = activeTab === 'message' ? activeMessageCard?.id : activeVoiceCard?.id;
 
 	const [activeSelect, setActiveSelect] = useState('profile');
+	const [showMore, setShowMore] = useState(false);
 	const ActiveComp = COMPONENT_MAPPING[activeSelect] || null;
 	const formattedMessageData = getActiveCardDetails(activeMessageCard) || {};
 	const orgId = activeTab === 'message'
@@ -43,6 +48,10 @@ function ProfileDetails({
 		type: 'count',
 	});
 
+	useEffect(() => {
+		setShowMore(false);
+	}, [activeSelect]);
+
 	return (
 		<div className={styles.profile_div}>
 			<div className={styles.container}>
@@ -64,6 +73,13 @@ function ProfileDetails({
 						setModalType={setModalType}
 						hideCpButton={hideCpButton}
 						getOrgDetails={getOrgDetails}
+						setActiveMessage={setActiveMessage}
+						activeRoomLoading={activeRoomLoading}
+						setActiveSelect={setActiveSelect}
+						showMore={showMore}
+						setShowMore={setShowMore}
+						setRaiseTicketModal={setRaiseTicketModal}
+						zippedTicketsData={zippedTicketsData}
 					/>
 				)}
 			</div>

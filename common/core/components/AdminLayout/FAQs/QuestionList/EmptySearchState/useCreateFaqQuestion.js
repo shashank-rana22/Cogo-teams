@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const useCreateFaqQuestion = ({
@@ -30,8 +31,8 @@ const useCreateFaqQuestion = ({
 
 			setQuestionCreated(true);
 			setShow(false);
-		} catch (error) {
-			Toast.error(error?.message);
+		} catch (e) {
+			if (e.response?.data) { Toast.error(getApiErrorString(e.response?.data)); }
 		}
 	};
 

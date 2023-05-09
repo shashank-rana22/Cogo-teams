@@ -1,10 +1,17 @@
-import { Button } from '@cogoport/components';
-import { TextAreaController, SelectController, InputController, ChipsController } from '@cogoport/forms';
+import { Checkbox, Button } from '@cogoport/components';
+import { SelectController, InputController, ChipsController } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 
 import OptionsComponent from './OptionsComponent';
 import styles from './styles.module.css';
 import useHandleSingleQuestion from './useHandleSingleQuestion';
+
+let RichTextEditor;
+
+if (typeof window !== 'undefined') {
+	// eslint-disable-next-line global-require
+	RichTextEditor = require('react-rte').default;
+}
 
 function SingleQuestionComponent({
 	control,
@@ -17,6 +24,12 @@ function SingleQuestionComponent({
 	questionTypeWatch,
 	editDetails,
 	mode,
+	editorValue,
+	setEditorValue,
+	subjectiveEditorValue,
+	setUploadable = () => {},
+	uploadable,
+	setSubjectiveEditorValue = () => {},
 	...restProps
 }) {
 	const {
@@ -24,11 +37,15 @@ function SingleQuestionComponent({
 		handleDelete,
 		loading,
 		NAME_CONTROL_MAPPING,
+		handleChangeEditorValue,
 	} = useHandleSingleQuestion({
 		mode,
 		editDetails,
 		field,
 		index,
+		questionTypeWatch,
+		editorValue,
+		setEditorValue,
 		...restProps,
 	});
 
@@ -48,64 +65,132 @@ function SingleQuestionComponent({
 					name={`${name}.${index}.question_text`}
 				/>
 
-				<SelectController
-					className={`${styles.question_type} ${
-						errors?.question_type
-							? styles.question_type_err
-							: null
-					}`}
-					{...NAME_CONTROL_MAPPING.question_type}
-					control={control}
-					name={`${name}.${index}.question_type`}
-				/>
+				{questionTypeWatch !== 'subjective' && (
+					<SelectController
+						className={`${styles.question_type} ${
+							errors?.question_type
+								? styles.question_type_err
+								: null
+						}`}
+						{...NAME_CONTROL_MAPPING.question_type}
+						control={control}
+						name={`${name}.${index}.question_type`}
+					/>
+				)}
 			</div>
 
-			<OptionsComponent
-				control={control}
-				{...NAME_CONTROL_MAPPING.options}
-				register={register}
-				errors={errors?.options || {}}
-				name={`${name}.${index}.options`}
-				mode={mode}
-				isNewQuestion={questionTypeWatch === 'case_study' ? isNewQuestion : isEmpty(editDetails)}
-			/>
+			{questionTypeWatch !== 'subjective' ? (
+				<OptionsComponent
+					key={JSON.stringify(editorValue)}
+					control={control}
+					{...NAME_CONTROL_MAPPING.options}
+					register={register}
+					errors={errors?.options || {}}
+					name={`${name}.${index}.options`}
+					mode={mode}
+					isNewQuestion={questionTypeWatch === 'case_study' ? isNewQuestion : isEmpty(editDetails)}
+				/>
+			) : null}
 
-			{questionTypeWatch !== 'case_study' ? (
-				<div className={styles.difficulty_level}>
-					<div className={styles.label}>Set Difficulty level</div>
-
-					<div className={styles.control}>
-						<ChipsController
-							control={control}
-							{...NAME_CONTROL_MAPPING.difficulty_level}
-							name={`${name}.${index}.difficulty_level`}
-						/>
-						{errors?.difficulty_level && <div className={styles.error_msg}>This is required</div>}
-					</div>
+			{questionTypeWatch === 'subjective' ? (
+				<div className={styles.subjective_editor}>
+					<RichTextEditor
+						value={subjectiveEditorValue}
+						onChange={((val) => { setSubjectiveEditorValue(val); })}
+						required
+						id="body-text"
+						name="bodyText"
+						type="string"
+						multiline
+						variant="filled"
+						placeholder="Start Typing Here..."
+						rootStyle={{
+							zIndex    : 0,
+							position  : 'relative',
+							minHeight : '200px',
+						}}
+					/>
 				</div>
 			) : null}
 
-			<div className={styles.textarea_container}>
-				<TextAreaController
-					control={control}
-					{...NAME_CONTROL_MAPPING.explanation}
-					name={`${name}.${index}.explanation`}
-				/>
+			<div className={styles.difficulty_level}>
+				{questionTypeWatch !== 'case_study' ? (
+					<div className={styles.diff_level}>
+						<div className={styles.label}>Set Difficulty level</div>
+
+						<div className={styles.control}>
+							<ChipsController
+								control={control}
+								{...NAME_CONTROL_MAPPING.difficulty_level}
+								name={`${name}.${index}.difficulty_level`}
+							/>
+							{errors?.difficulty_level && <div className={styles.error_msg}>This is required</div>}
+						</div>
+					</div>
+				) : null}
+
 			</div>
 
-			{questionTypeWatch === 'case_study' && mode !== 'view' && !isEmpty(editDetails) ? (
-				<div className={styles.button_container}>
-					<Button
-						loading={loading}
-						onClick={() => handleDelete()}
-						themeType="accent"
-						size="sm"
-						type="button"
-					>
-						Delete
-					</Button>
+			{questionTypeWatch === 'subjective' && (
+				<div className={styles.uploadable}>
+					<div>
+						<Checkbox
+							name="upload"
+							label="Option of Upload Answer"
+							checked={uploadable}
+							onChange={() => { setUploadable(!uploadable); }}
+						/>
+					</div>
 
-					{isNewQuestion ? (
+					{/* <div className={styles.character_limit}>
+						<div className={styles.set_limit}>Set Character Limit</div>
+
+						<InputController
+							control={control}
+							name={`${name}.${index}.character_limit`}
+							placeholder="No Limit"
+							type="number"
+						/>
+					</div> */}
+				</div>
+			)}
+
+			{questionTypeWatch !== 'subjective' && (
+				<div className={styles.textarea_container}>
+					<RichTextEditor
+						value={questionTypeWatch === 'stand_alone'
+							? editorValue.question_0_explanation
+							: editorValue[`case_questions_${index}_explanation`]}
+						onChange={handleChangeEditorValue}
+						required
+						id="body-text"
+						name="bodyText"
+						type="string"
+						multiline
+						variant="filled"
+						placeholder="Start Typing Here..."
+						rootStyle={{
+							zIndex    : 0,
+							position  : 'relative',
+							minHeight : '200px',
+						}}
+					/>
+				</div>
+			)}
+
+			{questionTypeWatch === 'case_study' && mode !== 'view' && !isEmpty(editDetails)
+				? (
+					<div className={styles.button_container}>
+						<Button
+							loading={loading}
+							onClick={() => handleDelete()}
+							themeType="accent"
+							size="sm"
+							type="button"
+						>
+							Delete
+						</Button>
+
 						<Button
 							style={{ marginLeft: '12px' }}
 							loading={loading}
@@ -113,11 +198,10 @@ function SingleQuestionComponent({
 							size="sm"
 							type="button"
 						>
-							{field?.isNew ? 'Save' : 'Edit'}
+							{field?.isNew ? 'Save' : 'Update'}
 						</Button>
-					) : null}
-				</div>
-			) : null}
+					</div>
+				) : null}
 		</div>
 	);
 }

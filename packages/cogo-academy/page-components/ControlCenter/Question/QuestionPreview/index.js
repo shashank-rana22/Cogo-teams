@@ -1,10 +1,10 @@
-/* eslint-disable react/no-danger */
 import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
+import QuestionFeedBack from '../../../../commons/QuestionFeedBack';
 import Spinner from '../../../../commons/Spinner';
 import useGetQuestion from '../hooks/useGetQuestion';
 
@@ -22,10 +22,10 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 		answers = [],
 		faq_topics = [],
 		faq_tags = [],
-		faq_audiences = [],
 		id = '',
+		question_aliases = [],
 	} = data || {};
-
+	const { faq_audiences = [] } = answers?.[0] || [];
 	const tags = [];
 	const topics = [];
 	const audiences = [];
@@ -56,8 +56,10 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 		}
 	}, [fetchQuestion, query?.id]);
 
-	const onclickEdit = () => {
-		const href = `/learning/faq/create/question?mode=new&id=${id}`;
+	const onclickEdit = (feedbackId) => {
+		const showFeedbackId = feedbackId ? `&feedbackId=${feedbackId}` : '';
+
+		const href = `/learning/faq/create/question?mode=create&id=${id}${showFeedbackId}`;
 		router.push(href, href);
 		setQuestionPreview('create');
 	};
@@ -83,94 +85,149 @@ function PreviewQuestion({ setQuestionPreview, onClickPublish }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>
-				<IcMArrowBack
-					width={20}
-					height={20}
-					className={styles.back_icon}
-					onClick={onClickBackButton}
-				/>
-				<h1 className={styles.heading}>Preview Question</h1>
+			<div className={styles.question_container}>
+				<div className={styles.header}>
+					<IcMArrowBack
+						width={20}
+						height={20}
+						className={styles.back_icon}
+						onClick={onClickBackButton}
+					/>
+					<h1 className={styles.heading}>Preview Question</h1>
+				</div>
 
-			</div>
-			<div>
-				<h5 className={styles.question_title}>Question</h5>
-				<h1 className={styles.question}>
-					{question_abstract}
-				</h1>
-			</div>
-			<div>
-				<h5 className={styles.answer_title}>Answer</h5>
-				<p className={styles.answer_content}>
-					<div dangerouslySetInnerHTML={{ __html: answer }} />
-				</p>
-			</div>
-			<div>
-				{!isEmpty(tags)
+				<div>
+					<h5 className={styles.question_title}>Question</h5>
+					<h1 className={styles.question}>
+						{question_abstract}
+					</h1>
+				</div>
+
+				{
+					!isEmpty(question_aliases) && (
+						<div>
+							<h5 className={styles.answer_title}>
+								{(question_aliases || []).length > 1 ? 'Aliases' : 'Alias'}
+							</h5>
+
+							<p className={styles.answer_content}>
+								{(question_aliases || []).map((alias, index) => {
+									const { question_abstract: aliasQuestionAbstract = '', id: aliasId } = alias;
+									return (
+										<div className={styles.alias} key={aliasId}>
+											<span className={styles.span}>
+												{index + 1}
+												.
+											</span>
+											{' '}
+											{aliasQuestionAbstract}
+										</div>
+									);
+								})}
+							</p>
+						</div>
+					)
+				}
+
+				<div>
+					<h5 className={styles.answer_title}>Answer</h5>
+					<p className={styles.answer_content}>
+						<div dangerouslySetInnerHTML={{ __html: answer }} />
+					</p>
+				</div>
+
+				<div>
+					{!isEmpty(tags)
 					&& <h5 className={styles.tags_title}>Tags</h5>}
 
-				<div className={styles.tags_container}>
-					{tags.map((item) => (
-						<button type="button" className={styles.tags_button}>{item}</button>
-					))}
+					<div className={styles.tags_container}>
+						{tags.map((item, index) => (
+							<button
+								key={`${item}_${index + 1}`}
+								type="button"
+								className={styles.tags_button}
+							>
+								{item}
+							</button>
+						))}
+					</div>
+				</div>
+
+				<div>
+					{!isEmpty(topics)
+						? <h5 className={styles.tags_title}>Topics</h5> : null}
+
+					<div className={styles.tags_container}>
+						{topics.map((item, index) => (
+							<button
+								key={`${item}_${index + 1}`}
+								type="button"
+								className={styles.tags_button}
+							>
+								{item}
+							</button>
+						))}
+					</div>
+				</div>
+
+				<div>
+					{!isEmpty(audiences)
+						? <h5 className={styles.tags_title}>Audiences</h5> : null}
+
+					<div className={styles.tags_container}>
+						{(audiences || []).map((item, index) => (
+							<button
+								key={`${item}_${index + 1}`}
+								type="button"
+								className={styles.tags_button}
+							>
+								{item}
+							</button>
+						))}
+					</div>
+				</div>
+
+				<div className={styles.button_container}>
+					<Button
+						type="button"
+						themeType="secondary"
+						size="md"
+						className={styles.publish_button}
+						onClick={() => onClickBackButton(id)}
+					>
+						Back
+					</Button>
+
+					<Button
+						type="button"
+						themeType="primary"
+						size="md"
+						className={styles.publish_button}
+						onClick={() => onclickEdit()}
+					>
+						Edit
+					</Button>
+
+					{!(source === 'view')
+						? (
+							<Button
+								type="button"
+								themeType="primary"
+								size="md"
+								className={styles.publish_button}
+								onClick={() => onClickPublish({ data })}
+							>
+								Publish
+							</Button>
+						) : null}
 				</div>
 			</div>
 
-			<div>
-				{!isEmpty(topics)
-				&& <h5 className={styles.tags_title}>Topics</h5>}
+			<QuestionFeedBack
+				id={id}
+				onClickEdit={onclickEdit}
 
-				<div className={styles.tags_container}>
-					{topics.map((item) => (
-						<button type="button" className={styles.tags_button}>{item}</button>
-					))}
-				</div>
-			</div>
-
-			<div>
-				{!isEmpty(audiences)
-				&& <h5 className={styles.tags_title}>Audiences</h5>}
-
-				<div className={styles.tags_container}>
-					{audiences.map((item) => (
-						<button type="button" className={styles.tags_button}>{item}</button>
-					))}
-				</div>
-			</div>
-
-			<div className={styles.button_container}>
-
-				<Button
-					type="button"
-					themeType="secondary"
-					size="md"
-					className={styles.publish_button}
-					onClick={() => onClickBackButton(id)}
-				>
-					Back
-				</Button>
-				<Button
-					type="button"
-					themeType="primary"
-					size="md"
-					className={styles.publish_button}
-					onClick={() => onclickEdit(id)}
-				>
-					Edit
-				</Button>
-				{!(source === 'view')
-					&& (
-						<Button
-							type="button"
-							themeType="primary"
-							size="md"
-							className={styles.publish_button}
-							onClick={() => onClickPublish({ data })}
-						>
-							Publish
-						</Button>
-					)}
-			</div>
+			/>
 		</div>
 	);
 }

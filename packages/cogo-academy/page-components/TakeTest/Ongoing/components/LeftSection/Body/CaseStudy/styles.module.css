@@ -1,13 +1,17 @@
 .container {
 	display: flex;
+	height: 68vh;
+	overflow-y: scroll;
 }
 
 .pagination_container {
+	position: sticky;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding: 12px;
-	margin-bottom: 44px;
+	margin-top: 10px;
+	margin-bottom: 20px;
 	border: 1px solid #000;
 	border-radius: 6px;
 
@@ -16,8 +20,4 @@
 			margin-left: 12px;
 		}
 	}
-}
-
-.main_container {
-	margin-top: 72px;
 }

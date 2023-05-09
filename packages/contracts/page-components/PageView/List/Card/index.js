@@ -1,16 +1,26 @@
-import { Button } from '@cogoport/components';
+import { Button, Popover } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { format, startCase } from '@cogoport/utils';
 
 import Line from '../../../../common/Line';
 import formatPortPair from '../../../../utils/formatPortPair';
 
+import BiddingProof from './BiddingProof';
 import PortPair from './PortPair';
 import ServiceDetail from './ServiceDetail';
 import styles from './styles.module.css';
 
+const handleDownload = (val) => {
+	if (val) {
+		window.open(val, '_blank');
+	}
+};
+
 function Card({ item, filters }) {
-	const { importer_exporter = {}, requested_by = '', requester_name = '' } = item || {};
+	const {
+		importer_exporter = {}, requested_by = '', requester_name = '',
+		is_bidding_contract = false, contract_proof = '', bidding_proof = [],
+	} = item || {};
 	const { business_name = '' } = importer_exporter;
 
 	const router = useRouter();
@@ -47,6 +57,12 @@ function Card({ item, filters }) {
 				</div>
 
 				<div className={styles.details}>
+					{is_bidding_contract && (
+						<div className={styles.bidding_contract}>
+							Bidding Contract
+						</div>
+					)}
+
 					<div className={styles.requested_details}>
 						Requested By
 						{' '}
@@ -80,9 +96,28 @@ function Card({ item, filters }) {
 					) : null}
 				</div>
 			</div>
-			<div className={styles.business_name}>
-				Business Name:
-				<div className={styles.org_name}>{business_name ? startCase(business_name) : '-'}</div>
+			<div className={styles.proof_sheet}>
+				<div className={styles.business_name}>
+					Business Name:
+					<div className={styles.org_name}>{business_name ? startCase(business_name) : '-'}</div>
+				</div>
+				<div className={styles.proofs}>
+					<Button size="md" themeType="linkUi" onClick={() => handleDownload(contract_proof)}>
+						Contract Proof
+					</Button>
+					{is_bidding_contract && (
+						<Popover
+							content={(
+								<BiddingProof bidding_proof={bidding_proof} handleDownload={handleDownload} />
+							)}
+							placement="bottom"
+						>
+							<Button size="md" themeType="link">
+								Bidding Proof
+							</Button>
+						</Popover>
+					)}
+				</div>
 			</div>
 			<div className={styles.service_details}>
 				{item.services.map((service, index) => (

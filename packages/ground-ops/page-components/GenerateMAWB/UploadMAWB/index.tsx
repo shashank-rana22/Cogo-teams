@@ -8,16 +8,16 @@ import styles from '../styles.module.css';
 
 import { controls } from './controls';
 
-function UploadMAWB({ item, setGenerate }) {
+function UploadMAWB({ item, setGenerate, activeCategory }) {
 	const { control, handleSubmit, formState: { errors } } = useForm();
-	const { upload, loading } = useCreateShipmentDocument({ setGenerate });
+	const { upload, loading } = useCreateShipmentDocument({ setGenerate, activeCategory });
 	const onSubmit = (formValues) => {
 		const { fileName, finalUrl } = formValues?.document || {};
 		const payload = {
 			shipment_id         : item?.shipmentId,
 			uploaded_by_org_id  : item?.serviceProviderId,
 			performed_by_org_id : item?.serviceProviderId,
-			document_type       : 'draft_airway_bill',
+			document_type       : activeCategory === 'mawb' ? 'draft_airway_bill' : 'draft_house_airway_bill',
 			id                  : item?.documentId,
 			service_id          : item?.serviceId,
 			service_type        : 'air_freight_service',
@@ -42,7 +42,7 @@ function UploadMAWB({ item, setGenerate }) {
 						service_type    : 'air_freight_service',
 						document_url    : finalUrl,
 					},
-					document_type : 'draft_airway_bill',
+					document_type : activeCategory === 'mawb' ? 'draft_airway_bill' : 'draft_house_airway_bill',
 					document_url  : finalUrl,
 					file_name     : fileName,
 				},

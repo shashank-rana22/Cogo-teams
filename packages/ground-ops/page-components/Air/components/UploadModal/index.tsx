@@ -36,7 +36,7 @@ const controls = [
 		rules      : { required: true },
 	},
 ];
-function UploadModal({ showUpload, setShowUpload, listAPi, edit, setEdit }) {
+function UploadModal({ showUpload, setShowUpload, listAPI, edit, setEdit }) {
 	const { control, handleSubmit, formState: { errors } } = useForm();
 	const { loading, createDocument } = useCreateShipmentDocument();
 	const { loading:updateLoading, updateDocument } = useUpdateShipmentDocument();
@@ -50,7 +50,7 @@ function UploadModal({ showUpload, setShowUpload, listAPi, edit, setEdit }) {
 			id                  : showUpload?.documentId,
 			service_id          : showUpload?.serviceId,
 			service_type        : 'air_freight_service',
-			pending_task_id     : showUpload?.id,
+			pending_task_id     : edit === 'edit' ? undefined : showUpload?.id,
 			state               : showUpload?.type === 'FinalAwb' ? undefined : 'document_accepted',
 			document_url        : finalUrl,
 			data                : {
@@ -79,10 +79,10 @@ function UploadModal({ showUpload, setShowUpload, listAPi, edit, setEdit }) {
 			],
 		};
 		if (edit) {
-			updateDocument(payload, listAPi);
+			updateDocument(payload, listAPI);
 			setEdit(false);
 		} else {
-			createDocument(payload, listAPi);
+			createDocument(payload, listAPI);
 		}
 		setShowUpload(null);
 	};

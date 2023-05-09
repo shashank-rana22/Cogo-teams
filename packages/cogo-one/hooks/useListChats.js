@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import {
@@ -25,7 +26,7 @@ const useListChats = ({
 	const { query:searchQuery, debounceQuery } = useDebounceQuery();
 
 	const {
-		query: { assigned_chat = '' },
+		query: { assigned_chat = '', channel_type:queryChannelType = '' },
 	} = useRouter();
 
 	const snapshotListener = useRef(null);
@@ -33,7 +34,7 @@ const useListChats = ({
 	const unreadCountSnapshotListner = useRef(null);
 	const activeRoomSnapshotListner = useRef(null);
 
-	const [firstLoading, setFirstLoading] = useState(true);
+	const [firstMount, setFirstMount] = useState(false);
 
 	const [activeCard, setActiveCard] = useState({
 		activeCardId   : '',
@@ -41,6 +42,7 @@ const useListChats = ({
 	});
 
 	const [loading, setLoading] = useState(false);
+	const [activeRoomLoading, setActiveRoomLoading] = useState(false);
 	const [appliedFilters, setAppliedFilters] = useState({});
 
 	const [listData, setListData] = useState({
@@ -67,11 +69,10 @@ const useListChats = ({
 	}, [debounceQuery, searchValue]);
 
 	useEffect(() => {
-		if (assigned_chat) {
-			setActiveCard({ activeCardId: assigned_chat, activeCardData: {} });
+		if (assigned_chat && queryChannelType && firstMount) {
+			setActiveCard({ activeCardId: assigned_chat, activeCardData: { channel_type: queryChannelType } });
 		}
-		setFirstLoading(false);
-	}, [assigned_chat]);
+	}, [assigned_chat, firstMount, queryChannelType]);
 
 	const dataFormatter = (list) => {
 		let resultList = {};
@@ -142,7 +143,7 @@ const useListChats = ({
 
 	const mountUnreadCountSnapShot = useCallback(() => {
 		const queryForUnreadChats = status !== 'unread'
-			? [where('new_message_count', '>', 0), orderBy('new_message_count', 'desc')] : [];
+			? [where('has_admin_unread_messages', '==', true)] : [];
 
 		snapshotCleaner({ ref: unreadCountSnapshotListner });
 
@@ -233,6 +234,7 @@ const useListChats = ({
 	const { channel_type:activeChannelType = '' } = activeCardData || {};
 
 	const mountActiveRoomSnapShot = useCallback(() => {
+		setActiveRoomLoading(true);
 		snapshotCleaner({ ref: activeRoomSnapshotListner });
 		if (activeCardId) {
 			const activeMessageDoc = doc(
@@ -247,6 +249,7 @@ const useListChats = ({
 					{ id: activeMessageDoc?.id, ...(activeMessageData.data() || {}) },
 				}));
 			});
+			setActiveRoomLoading(false);
 		}
 	}, [firestore, activeCardId, activeChannelType]);
 
@@ -268,13 +271,17 @@ const useListChats = ({
 
 	const setActiveMessage = async (val) => {
 		const { channel_type, id } = val || {};
-		setActiveCard({ activeCardId: id, activeCardData: val });
 		if (channel_type && id) {
-			const messageDoc = doc(
-				firestore,
-				`${FIRESTORE_PATH[channel_type]}/${id}`,
-			);
-			await updateDoc(messageDoc, { new_message_count: 0 });
+			try {
+				const messageDoc = doc(
+					firestore,
+					`${FIRESTORE_PATH[channel_type]}/${id}`,
+				);
+				await updateDoc(messageDoc, { new_message_count: 0, has_admin_unread_messages: false });
+				setActiveCard({ activeCardId: id, activeCardData: val });
+			} catch (e) {
+				Toast.error('Chat Not Found');
+			}
 		}
 	};
 
@@ -318,8 +325,9 @@ const useListChats = ({
 		activeCardId,
 		setActiveCard,
 		updateLeaduser,
-		firstLoading,
+		setFirstMount,
 		handleScroll,
+		activeRoomLoading,
 	};
 };
 

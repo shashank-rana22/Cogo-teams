@@ -71,17 +71,17 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
+			api          : 'update_faq_keyword',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
 			api          : 'create_faq_audience',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
 		{
 			api          : 'list_faq_audiences',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
-		},
-		{
-			api          : 'get_faq_audience',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
@@ -100,6 +100,32 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
+			api          : 'create_faq_keyword',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'list_faq_feedbacks',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'list_faq_keywords',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_faq_feedback',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'create_faq_question_alias',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+
 	],
 	faq: [
 		{
@@ -148,11 +174,6 @@ const faq = {
 			api          : 'list_cogo_entities',
 			access_type  : 'private',
 			service_name : 'partner',
-		},
-		{
-			api          : 'get_faq_audience',
-			access_type  : 'private',
-			service_name : 'cogo_academy',
 		},
 		{
 			api          : 'create_faq_audience',
@@ -258,6 +279,11 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
+			api          : 'get_user_performance',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
 	],
 	create_test_set: [
 		{
@@ -266,12 +292,12 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
-			api          : 'create_stand_alone_test_question',
+			api          : 'create_case_study_test_question',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
 		{
-			api          : 'create_case_study_test_question',
+			api          : 'create_non_case_study_test_question',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
@@ -296,7 +322,7 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
-			api          : 'update_stand_alone_test_question',
+			api          : 'update_non_case_study_test_question',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
@@ -376,6 +402,11 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
+			api          : 'update_test_user_mapping',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
 			api          : 'list_test_questions',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
@@ -385,10 +416,14 @@ const faq = {
 			api          : 'list_test_case_study_questions',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
-
 		},
 		{
 			api        	 : 'get_test_result_question',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_test_mapping_responses',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},

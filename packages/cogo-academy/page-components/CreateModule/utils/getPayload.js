@@ -1,18 +1,36 @@
 import getCaseStudyPayload from './getCaseStudyPayload';
 import getStandAlonePayload from './getStandAlonePayload';
+import getSubjectivePayload from './getSubjectivePayload';
 
 const payloadMapping = {
 	stand_alone : getStandAlonePayload,
 	case_study  : getCaseStudyPayload,
+	subjective  : getSubjectivePayload,
 };
 
-function getPayload({ values, type, questionSetId, action, testQuestionId, editType, caseStudyQuestionId }) {
+function getPayload({
+	type,
+	editType,
+	caseStudyQuestionId,
+	index,
+	subjectiveEditorValue,
+	uploadable,
+	...commonProps
+}) {
 	const payloadPropsMapping = {
 		stand_alone: {
-			values, action, testQuestionId, questionSetId,
+			...commonProps,
 		},
 		case_study: {
-			editType, values, action, caseStudyQuestionId, testQuestionId, questionSetId,
+			editType,
+			caseStudyQuestionId,
+			index,
+			...commonProps,
+		},
+		subjective: {
+			subjectiveEditorValue,
+			uploadable,
+			...commonProps,
 		},
 	};
 

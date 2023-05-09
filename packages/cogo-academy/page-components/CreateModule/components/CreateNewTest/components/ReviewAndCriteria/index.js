@@ -1,6 +1,6 @@
-import { Pill, Button, Placeholder } from '@cogoport/components';
+import { Pill, Button, Placeholder, Tooltip } from '@cogoport/components';
 import { InputController } from '@cogoport/forms';
-import { IcMArrowBack, IcMDelete, IcMPlusInCircle } from '@cogoport/icons-react';
+import { IcMArrowBack, IcMDelete, IcMPlusInCircle, IcMDocument } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
 import DurationAndValidity from './components/DurationAndValidity';
@@ -12,7 +12,14 @@ import useHandleReviewAndCriteria from './useHandleReviewAndCriteria';
 function ReviewAndCriteria(props) {
 	const { loading, data, test_id } = props;
 
-	const { name = '', set_data = [], cogo_entity_object = {}, eligible_users = '', guidelines = [] } = data || {};
+	const {
+		name = '',
+		set_data = [],
+		cogo_entity_object = {},
+		eligible_users = '',
+		guidelines = [],
+		test_sheet = {},
+	} = data || {};
 
 	const {
 		checkError,
@@ -32,11 +39,17 @@ function ReviewAndCriteria(props) {
 		setValue,
 	} = useHandleReviewAndCriteria({ guidelines });
 
+	const openInNewTab = (url) => {
+		window.open(url, '_blank', 'noopener,noreferrer');
+	};
+
+	const file_name = test_sheet?.file_url?.split('/').pop();
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<IcMArrowBack className={styles.back_icon} width={20} height={20} onClick={onNavigate} />
-				<div className={styles.title}>New Test</div>
+				<div className={styles.title}>Review and Set Criteria</div>
 			</div>
 
 			{(loading || isEmpty(data)) ? (
@@ -53,7 +66,7 @@ function ReviewAndCriteria(props) {
 						<div className={styles.subtopic}>Topics </div>
 						<div className={styles.topic_pill_container}>
 							{set_data.map((question_set) => (
-								<Pill size="md" color="blue" className={styles.names}>
+								<Pill size="md" color="#F3FAFA" className={styles.names}>
 									<span className={styles.names}>{question_set?.topic}</span>
 								</Pill>
 							))}
@@ -68,9 +81,33 @@ function ReviewAndCriteria(props) {
 					<div className={styles.topic}>
 						<div className={styles.subtopic}> Users </div>
 						<div>
-							<Pill size="md" color="#FEF3E9" className={styles.names}>{ eligible_users || '-'}</Pill>
+							<Pill size="md" color="#FEF3E9" className={styles.names}>
+								<div className={styles.eligible}>
+									{eligible_users || '-'}
+								</div>
+							</Pill>
 						</div>
 					</div>
+
+					{test_sheet?.file_url && (
+						<div className={styles.list_user_tooltip}>
+							<Tooltip content={file_name} placement="top" maxWidth={300}>
+								<div className={styles.list_user_container}>
+									List Upload
+									<div className={styles.list_div}>
+										<IcMDocument />
+										<div
+											role="presentation"
+											className={styles.list_text}
+											onClick={() => openInNewTab(test_sheet?.file_url)}
+										>
+											{file_name}
+										</div>
+									</div>
+								</div>
+							</Tooltip>
+						</div>
+					)}
 				</div>
 			)}
 
@@ -98,6 +135,7 @@ function ReviewAndCriteria(props) {
 				{...props}
 				showModal={showModal}
 				setShowModal={setShowModal}
+				watch={watch}
 			/>
 
 			<div className={styles.instructions}>
@@ -153,7 +191,7 @@ function ReviewAndCriteria(props) {
 					size="md"
 					themeType="primary"
 					type="button"
-					onClick={() => handleSubmit(checkError)}
+					onClick={handleSubmit(checkError)}
 				>
 					Publish Test
 				</Button>

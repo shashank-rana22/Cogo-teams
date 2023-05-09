@@ -7,6 +7,11 @@ function Footer({
 	currentQuestion,
 	total_question,
 	fetchQuestions,
+	subjectiveAnswer,
+	setSubjectiveAnswer,
+	loading: getLoading,
+	uploadValue,
+	setUploadValue,
 	...restProps
 }) {
 	const {
@@ -17,6 +22,10 @@ function Footer({
 		currentQuestion,
 		total_question,
 		fetchQuestions,
+		subjectiveAnswer,
+		setSubjectiveAnswer,
+		uploadValue,
+		setUploadValue,
 		...restProps,
 	});
 
@@ -24,7 +33,7 @@ function Footer({
 		<div className={styles.container}>
 			<Button
 				type="button"
-				loading={loading}
+				loading={loading || getLoading}
 				themeType="secondary"
 				onClick={handleLeaveTest}
 			>
@@ -34,7 +43,7 @@ function Footer({
 			<div className={styles.right_button_container}>
 				<Button
 					themeType="secondary"
-					loading={loading}
+					loading={loading || getLoading}
 					style={{ marginRight: 12 }}
 					onClick={() => handleUpdate({ type: 'marked_for_review' })}
 				>
@@ -42,11 +51,10 @@ function Footer({
 				</Button>
 
 				<Button
-					loading={loading}
-					disabled={currentQuestion > total_question}
+					loading={loading || getLoading}
 					onClick={() => handleUpdate({ type: 'save_and_next' })}
 				>
-					{currentQuestion === total_question ? <>Save</> : <>Save & Next</>}
+					{Number(currentQuestion) === total_question ? <>Save</> : <>Save & Next</>}
 				</Button>
 			</div>
 		</div>

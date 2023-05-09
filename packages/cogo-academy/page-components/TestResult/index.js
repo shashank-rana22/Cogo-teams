@@ -12,28 +12,28 @@ import Summary from './Summary';
 
 function TestResult() {
 	const {
-		query: { test_id },
+		query: { test_id, view, id, name: userName, is_evaluated, status },
 		user: { id: user_id, name },
 	} = useSelector(({ general, profile }) => ({
 		query : general.query,
 		user  : profile.user,
 	}));
 
-	const { push } = useRouter();
+	const { back } = useRouter();
 
 	const [{ data, loading }] = useRequest({
 		method : 'GET',
 		url    : '/get_user_performance',
 		params : {
 			test_id,
-			user_id,
+			user_id: view === 'admin' ? id : user_id,
 		},
 	}, { manual: false });
 
-	const { data: summaryData } = data || {};
+	const { data: summaryData = {} } = data || {};
 
 	const handleGoBack = () => {
-		push('/learning/tests/dashboard');
+		back();
 	};
 
 	if (loading) {
@@ -45,14 +45,31 @@ function TestResult() {
 			<div role="presentation" onClick={handleGoBack} className={styles.go_back}>
 				<IcMArrowBack />
 
-				<p className={styles.go_back_text}>Dashboard</p>
+				<p className={styles.go_back_text}>{view === 'admin' ? 'Test Results' : 'Dashboard'}</p>
 			</div>
 
-			<TestResultMessage stats_data={summaryData} />
+			{view !== 'admin'
+				? <TestResultMessage stats_data={summaryData} />
+				: (
+					<div className={styles.test_user_name}>
+						{summaryData.test_name}
+						{' '}
+						:
+						{' '}
+						<span><b>{userName}</b></span>
+					</div>
+				)}
 
 			<Summary summaryData={summaryData} />
 
-			<QnA user_name={name} />
+			<QnA
+				user_name={view === 'admin' ? userName : name}
+				test_id={test_id}
+				user_id={view === 'admin' ? id : user_id}
+				view={view}
+				is_evaluated={is_evaluated === 'true'}
+				status={status}
+			/>
 		</div>
 	);
 }

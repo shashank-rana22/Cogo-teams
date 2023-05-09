@@ -1,8 +1,7 @@
 import { Toast } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 
 function useCreateAudience({
 	setConfigurationPage,
@@ -12,16 +11,8 @@ function useCreateAudience({
 }) {
 	const router = useRouter();
 
-	const { control, handleSubmit, formState: { errors }, setValue, reset, watch } = useForm();
-
-	const { general } = useSelector((state) => state);
-	const { id:audienceId } = general.query || {};
-
-	const apiName = audienceId ? '/update_faq_audience' : '/create_faq_audience';
-	const toastText = audienceId ? 'updated' : 'created';
-
 	const [{ loading }, trigger] = useRequest({
-		url    : apiName,
+		url    : '/create_faq_audience',
 		method : 'POST',
 	}, { manual: true });
 
@@ -46,7 +37,6 @@ function useCreateAudience({
 		} = values || {};
 
 		const payload = {
-			id                : audienceId || undefined,
 			platform,
 			...rest,
 			auth_function,
@@ -56,30 +46,21 @@ function useCreateAudience({
 		};
 
 		try {
-			const res = await trigger({
+			await trigger({
 				data: payload,
 			});
 
 			fetchAudiences();
 			setShowCreateAudienceModal(false);
-
-			if (res?.data) {
-				Toast.success(`Audience ${toastText} sucessfully`);
-				setConfigurationPage('dashboard');
-				if (source !== 'create') router.back();
-			}
+			Toast.success('Audience created sucessfully');
+			setConfigurationPage('dashboard');
+			if (source !== 'create') router.back();
 		} catch (err) {
-			Toast.error('Something went wrong');
+			if (err.response?.data) { Toast.error(getApiErrorString(err.response?.data)); }
 		}
 	};
 	return {
 		createAudience,
-		control,
-		handleSubmit,
-		errors,
-		setValue,
-		reset,
-		watch,
 		loading,
 
 	};

@@ -1,4 +1,3 @@
-/* eslint-disable valid-typeof */
 import { getCookie } from '@cogoport/utils';
 
 import GLOBAL_CONSTANTS from '../globals.json';
@@ -6,15 +5,23 @@ import GLOBAL_CONSTANTS from '../globals.json';
 import IN from './IN';
 import VN from './VN';
 
-const { country_entity_ids } = GLOBAL_CONSTANTS;
+const { country_entity_ids, country_ids } = GLOBAL_CONSTANTS;
 
 const MAPPING = {
 	[country_entity_ids.IN] : IN,
 	[country_entity_ids.VN] : VN,
 };
 
+const COUNTRY_ID_MAPPING = {
+	[country_ids.IN] : IN,
+	[country_ids.VN] : VN,
+};
+
+export const getConstantsByCountryCode = ({ country_id }) => COUNTRY_ID_MAPPING[country_id]
+|| COUNTRY_ID_MAPPING[country_ids.IN];
+
 const getGeoConstants = () => {
-	if (typeof window === undefined) {
+	if (typeof window === 'undefined') {
 		return null;
 	}
 

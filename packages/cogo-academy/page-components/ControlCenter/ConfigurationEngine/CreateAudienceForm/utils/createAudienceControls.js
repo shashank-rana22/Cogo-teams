@@ -1,4 +1,3 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 import SUB_FUNCTION_MAPPING from './subFunctionMappings';
 import WORK_SCOPES_OPTIONS from './workScopeMappings';
 
@@ -11,6 +10,8 @@ const AUTH_FUNCTION_OPTIONS = [{ label: 'Sales', value: 'sales' },
 	{ label: 'Supply', value: 'supply' },
 	{ label: 'Operations', value: 'operations' },
 	{ label: 'Finance', value: 'finance' },
+	{ label: 'Training', value: 'training' },
+	{ label: 'HR', value: 'hr' },
 	{ label: 'All', value: 'all' },
 ];
 

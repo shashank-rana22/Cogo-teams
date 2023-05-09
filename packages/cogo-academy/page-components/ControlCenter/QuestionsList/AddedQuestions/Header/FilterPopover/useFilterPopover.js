@@ -2,6 +2,14 @@ import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
+const COMMON_PARAMS = {
+	page_limit               : 100000,
+	pagination_data_required : false,
+	filters                  : {
+		status: 'active',
+	},
+};
+
 const useFilterPopover = ({ setFilters }) => {
 	const [showFilter, setShowFilter] = useState(false);
 
@@ -9,9 +17,8 @@ const useFilterPopover = ({ setFilters }) => {
 		method : 'get',
 		url    : '/list_faq_topics',
 		params : {
-			page_limit               : 100000,
-			pagination_data_required : false,
-			is_admin_view            : true,
+			is_admin_view: true,
+			...COMMON_PARAMS,
 		},
 	}, { manual: false });
 
@@ -19,8 +26,7 @@ const useFilterPopover = ({ setFilters }) => {
 		method : 'get',
 		url    : '/list_faq_tags',
 		params : {
-			page_limit               : 100000,
-			pagination_data_required : false,
+			...COMMON_PARAMS,
 		},
 	}, { manual: false });
 
@@ -28,8 +34,7 @@ const useFilterPopover = ({ setFilters }) => {
 		method : 'get',
 		url    : '/list_faq_audiences',
 		params : {
-			page_limit               : 100000,
-			pagination_data_required : false,
+			...COMMON_PARAMS,
 		},
 	}, { manual: false });
 
@@ -37,9 +42,9 @@ const useFilterPopover = ({ setFilters }) => {
 
 	const onSubmit = (values) => {
 		setFilters({
-			faq_tag_id      : values?.tag,
-			faq_topic_id    : values?.topic,
-			faq_audience_id : values?.audience,
+			faq_tag_id   : values?.tag,
+			faq_topic_id : values?.topic,
+			audience_id  : values?.audience,
 		});
 
 		setShowFilter(false);

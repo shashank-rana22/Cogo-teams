@@ -12,15 +12,18 @@ function useCreateTest({ setActiveStepper = '' }) {
 		method : 'POST',
 	}, { manual: true });
 
-	const createTest = async ({ idArray = [], next, uploadDocument = '' }) => {
+	const createTest = async ({ values = {}, idArray = [], next, uploadDocument = '' }) => {
 		try {
 			const res = await trigger({
 				data: {
 					id                    : test_id,
-					file_url              : uploadDocument,
+					name                  : values.name,
+					cogo_entity_id        : values.cogo_entity_id,
+					file_url              : uploadDocument.finalUrl,
 					set_wise_distribution : [
 						...idArray.map((id) => ({ test_question_set_id: id, question_type: 'case_study' })),
-						...idArray.map((id) => ({ test_question_set_id: id, question_type: 'stand_alone' }))],
+						...idArray.map((id) => ({ test_question_set_id: id, question_type: 'stand_alone' })),
+						...idArray.map((id) => ({ test_question_set_id: id, question_type: 'subjective' }))],
 				},
 			});
 

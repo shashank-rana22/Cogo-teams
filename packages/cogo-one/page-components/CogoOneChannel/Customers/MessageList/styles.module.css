@@ -77,9 +77,32 @@
 	color: #828282;
 }
 
+.auto_assign_button {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 12px;
+
+	svg {
+		width: 20px;
+		margin-right: 6px;
+	}
+
+	:global {
+		.ui_button_container {
+			width: 110px;
+		}
+	}
+}
+
 .list_container {
-	height: 80%;
+	height: calc(100% - 150px);
+	overflow-x: hidden;
 	overflow-y: auto;
+}
+
+.bot_list_container {
+	height: calc(100% - 200px);
 }
 
 .list_container::-webkit-scrollbar {
@@ -189,4 +212,20 @@
 	font-weight: 600;
 	color: #828282;
 	user-select: none;
+}
+
+.styled_popover {
+	padding: 0;
+
+	:global {
+		.tippy-content {
+			width: 260px;
+			height: 500px;
+			padding: 0;
+
+			>div {
+				height: 100%;
+			}
+		}
+	}
 }

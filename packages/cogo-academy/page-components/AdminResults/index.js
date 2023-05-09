@@ -39,8 +39,10 @@ function AdminResults() {
 		getTest,
 	} = useGetTest({ id: test_id });
 
+	const { status, validity_end } = data || {};
+
 	const COMPONENT_PROPS_MAPPING = {
-		students  : { test_id },
+		students  : { test_id, status },
 		questions : { test_id },
 	};
 
@@ -48,22 +50,22 @@ function AdminResults() {
 		push('/learning?activeTab=test_module', '/learning?activeTab=test_module');
 	};
 
-	const { status, validity_end } = data || {};
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div role="presentation" onClick={handleGoBack} className={styles.go_back}>
 					<IcMArrowBack />
 
-					<p className={styles.go_back_text}>Dashboard</p>
+					<p className={styles.go_back_text}>Test Result</p>
 				</div>
 
-				<Button themeType="accent" onClick={() => getTest({ test_id })} disabled={loading}>
-					Refresh
+				{data?.status !== 'published' && (
+					<Button themeType="accent" onClick={() => getTest({ test_id })} disabled={loading}>
+						Refresh
 
-					<IcMRefresh style={{ marginLeft: 6 }} />
-				</Button>
+						<IcMRefresh style={{ marginLeft: 6 }} />
+					</Button>
+				)}
 			</div>
 
 			{status === 'published' ? <TestResults test_id={test_id} /> : null}

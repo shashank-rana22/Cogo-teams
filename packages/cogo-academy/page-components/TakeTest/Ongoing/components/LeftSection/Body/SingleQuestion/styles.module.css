@@ -34,10 +34,11 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	padding-bottom: 36px;
+	padding-bottom: 10px;
 }
 
 .question_count {
+	position: sticky;
 	font-size: 12px;
 	font-weight: 600;
 	color: #4f4f4f;
@@ -49,7 +50,18 @@
 }
 
 .question {
+	padding: 10px 8px;
 	font-size: 14px;
 	font-weight: 600;
 	color: #221f20;
+	word-break: keep-all;
+	border-radius: 4px;
+}
+
+.question_content {
+	height: 73vh;
+}
+
+.options {
+	margin-left: auto;
 }

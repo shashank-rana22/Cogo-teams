@@ -49,3 +49,9 @@
 		}
 	}
 }
+
+.error_message {
+	margin-bottom: 6px;
+	font-size: 12px;
+	color: #cb6464;
+}

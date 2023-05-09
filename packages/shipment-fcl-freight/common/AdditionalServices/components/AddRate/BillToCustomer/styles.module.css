@@ -1,0 +1,18 @@
+.container {
+	margin-bottom: 24px;
+}
+
+.heading {
+	margin: 0;
+	margin-bottom: 16px;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 19px;
+	color: #393f70;
+}
+
+.button_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}

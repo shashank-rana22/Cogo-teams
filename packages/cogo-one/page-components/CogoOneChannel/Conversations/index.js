@@ -13,8 +13,9 @@ function Conversations({
 	suggestions = [],
 	userId,
 	isomniChannelAdmin = false,
-	showBotMessages = false,
 	mailProps,
+	setActiveMessage = () => {},
+	setRaiseTicketModal = () => {},
 }) {
 	return (
 		<div className={cl`${activeTab === 'mail' ? styles.mail_div : styles.container}`}>
@@ -25,7 +26,8 @@ function Conversations({
 					suggestions={suggestions}
 					userId={userId}
 					isomniChannelAdmin={isomniChannelAdmin}
-					showBotMessages={showBotMessages}
+					setActiveMessage={setActiveMessage}
+					setRaiseTicketModal={setRaiseTicketModal}
 				/>
 			)}
 			{activeTab === 'voice' && (<VoiceCall activeVoiceCard={activeVoiceCard} />)}

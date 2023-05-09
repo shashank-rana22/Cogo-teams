@@ -40,19 +40,17 @@ function ListItem({ item }) {
 	const designation = watch('designation');
 
 	useEffect(() => {
-		setParams({
-			...params,
+		setParams((pv) => ({
+			...pv,
 			Department  : department || undefined,
 			Designation : designation || undefined,
 			Page        : 1,
-		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [department, designation]);
+		}));
+	}, [department, designation, setParams]);
 
 	useEffect(() => {
 		debounceQuery(searchValue);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchValue]);
+	}, [debounceQuery, searchValue]);
 
 	return (
 		<div className={styles.overall_baselist}>

@@ -57,14 +57,11 @@ function Header({
 		setApprove(true);
 	};
 
-	const handleApproveAndReject = () => {
-		rejectApproveApi();
-	};
-
 	const isApproveDisabled = Object.keys(lineItemsRemarks)?.length > 0
     || remarksVal?.billingPartyRemark?.length > 0
     || remarksVal?.collectionPartyRemark?.length > 0
-    || remarksVal?.invoiceDetailsRemark?.length > 0;
+	|| remarksVal?.invoiceDetailsRemark?.length > 0
+	|| remarksVal?.taggingRemark?.length > 0;
 
 	const getRoute = () => {
 		if (isShipment) {
@@ -161,7 +158,7 @@ function Header({
 								size="md"
 								style={{ marginRight: '8px' }}
 								disabled={!(overAllRemark?.length > 0)}
-								onClick={() => handleApproveAndReject()}
+								onClick={() => rejectApproveApi(getRoute)}
 							>
 								Yes
 							</Button>

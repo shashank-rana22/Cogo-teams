@@ -53,7 +53,15 @@
 
 .difficulty_level {
 	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	margin-top: 32px;
+
+	:global {
+		.ui_chip_container {
+			height: 28px !important;
+		}
+	}
 
 	@media (max-width: 768px) {
 		flex-direction: column;
@@ -89,4 +97,40 @@
 .button_container {
 	display: flex;
 	float: right;
+}
+
+.editor {
+	margin-top: 12px;
+}
+
+.subjective_editor {
+	margin-top: 12px;
+}
+
+.diff_level {
+	display: flex;
+}
+
+.character_limit {
+	display: flex;
+	width: 40%;
+}
+
+.uploadable {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 24px;
+
+	:global {
+		.ui_checkbox_container {
+			padding: 0;
+		}
+	}
+}
+
+.set_limit {
+	display: flex;
+	align-items: center;
+	width: 100%;
 }

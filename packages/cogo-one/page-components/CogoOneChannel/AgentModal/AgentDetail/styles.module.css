@@ -1,0 +1,32 @@
+.agent_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 1px solid #dedede;
+}
+
+.inactive_agent_container {
+	color: #a1a1a1;
+}
+
+.toggle {
+	:global {
+		.ui_toggle_switch {
+			.ui_inner::after {
+				background-color: #d0d0d0;
+			}
+		}
+	}
+}
+
+.agent_ph {
+	width: 75%;
+	height: 30px;
+	margin: 10px 0 0;
+}
+
+.toggle_ph {
+	width: 10%;
+	height: 30px;
+	margin: 10px 0 0;
+}

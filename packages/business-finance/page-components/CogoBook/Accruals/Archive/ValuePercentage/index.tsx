@@ -4,6 +4,8 @@ import { getFormattedPrice } from '@cogoport/forms';
 import styles from './styles.module.css';
 
 function ValuePercentage({ data, keys, flag = false }) {
+	const { expenseCurrency } = data || {};
+
 	const percentage = `${keys}Percentage`;
 
 	const formatted = getFormattedPrice(
@@ -13,10 +15,8 @@ function ValuePercentage({ data, keys, flag = false }) {
 	);
 
 	const variance = data[keys] < 0 && data[keys];
-
-	const absVariance = variance
-		? Math.abs(variance).toString()
-		: data[keys].toString();
+	const absoluteValue = Math.abs(data[keys] || 0);
+	const absVariance = getFormattedPrice(absoluteValue, expenseCurrency);
 
 	const renderValue = (amt, n) => {
 		const check = keys === 'variance' ? variance : '';
@@ -70,7 +70,7 @@ function ValuePercentage({ data, keys, flag = false }) {
 	return (
 		<div>
 			{keys === 'variance'
-				? renderValue(absVariance, 5)
+				? renderValue(absVariance, 10)
 				: renderValue(formatted, 13)}
 		</div>
 	);

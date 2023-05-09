@@ -42,25 +42,6 @@ export const ApprovalPendingFields = {
 			),
 		},
 		{
-			key   : 'origin',
-			label : 'Origin',
-			span  : 2,
-			func  : 'startCase',
-
-		},
-		{
-			key   : 'destination',
-			label : 'Destination',
-			span  : 2,
-			func  : 'startCase',
-		},
-		{
-			key   : 'airline',
-			label : 'Carrier',
-			span  : 1.5,
-			func  : 'startCase',
-		},
-		{
 			key    : 'deadline',
 			label  : 'Due On',
 			span   : 1.5,
@@ -71,21 +52,37 @@ export const ApprovalPendingFields = {
 			),
 		},
 		{
+			key    : 'scheduleDeparture',
+			label  : 'Schedule Departure',
+			span   : 1.5,
+			render : (item) => (
+				<div style={{ textTransform: 'uppercase' }}>
+					{formatDate(item.scheduleDeparture)}
+				</div>
+			),
+		},
+		{
 			key   : 'status',
 			label : 'Status',
 			span  : 1,
 			func  : 'handleStatus',
 		},
 		{
+			key   : 'downloadManifest',
+			label : '',
+			span  : 0.6,
+			func  : 'handleDownloadManifest',
+		},
+		{
 			key   : 'download',
 			label : '',
-			span  : 0.5,
+			span  : 0.4,
 			func  : 'handleDownload',
 		},
 		{
 			key   : 'edit',
 			label : '',
-			span  : 0.5,
+			span  : 0.4,
 			func  : 'handleEdit',
 		},
 	],

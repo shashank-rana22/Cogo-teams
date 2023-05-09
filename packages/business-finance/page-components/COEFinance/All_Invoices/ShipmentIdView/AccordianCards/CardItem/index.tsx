@@ -15,6 +15,7 @@ import styles from './styles.module.css';
 
 interface ItemTypes {
 	jobNumber?: string;
+	jobType?:string;
 	discountAppliedKam?:number;
 	discountAppliedRevenueDesk?:number;
 	jobStatus?: string,
@@ -42,7 +43,7 @@ function CardItem({
 	setDataCard,
 	setAmountTab,
 }: PropsType) {
-	const { jobNumber } = cardData || {};
+	const { jobNumber, jobType } = cardData || {};
 	const {
 		loading,
 		list: { fullResponse },
@@ -51,6 +52,7 @@ function CardItem({
 		hookSetters,
 	} = useListBills({
 		jobNumber,
+		jobType,
 		amountTab,
 		currentOpenSID,
 		setDataCard,
@@ -76,7 +78,7 @@ function CardItem({
 			<AmountWithCurrency item={item} field={field} />
 		),
 		renderStatus   : (item: {}) => <Status item={item} />,
-		renderInvoices : (item: {}) => <ViewInvoice item={item} />,
+		renderInvoices : (item: {}, field: object) => <ViewInvoice item={item} field={field} />,
 		renderRemarks  : (item: {}) => <Remarks itemData={item} />,
 	};
 

@@ -42,6 +42,7 @@ function AddedQuestions(props) {
 		sortType,
 		setSortType,
 		requestedQuestionCount,
+		downvoteFeedbackCount,
 	} = props;
 
 	const router = useRouter();
@@ -74,6 +75,12 @@ function AddedQuestions(props) {
 						text="There are no inactive questions right now."
 					/>
 				);
+			} if (activeList === 'feedbacks') {
+				return (
+					<EmptyState
+						text="There are no feedbacks right now."
+					/>
+				);
 			}
 			return (
 				<EmptyState
@@ -84,9 +91,8 @@ function AddedQuestions(props) {
 
 		return (
 			<>
-				<div>
-					<StyledTable columns={columns} data={data} loading={questionListLoading} />
-				</div>
+
+				<StyledTable columns={columns} data={data} loading={questionListLoading} />
 
 				<div>
 					{paginationData?.total_count > 10
@@ -116,6 +122,7 @@ function AddedQuestions(props) {
 				sortType={sortType}
 				setSortType={setSortType}
 				requestedQuestionCount={requestedQuestionCount}
+				downvoteFeedbackCount={downvoteFeedbackCount}
 			/>
 
 			<div className={styles.button_container}>

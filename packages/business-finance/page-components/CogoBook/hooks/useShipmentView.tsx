@@ -2,9 +2,10 @@ import { Toast, Checkbox } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { format, isEmpty } from '@cogoport/utils';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { FilterInterface } from '../Accruals/interface';
+import { entityMappingData } from '../P&L/PLStatement/constant';
 
 import calculateAccrue from './calculateAccrue';
 
@@ -17,10 +18,12 @@ interface ShipmentInterface {
 }
 
 const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection, bulkAction }:ShipmentInterface) => {
+	const didMountRef = useRef(false);
 	const { user_id:userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
 	}));
 	const [checkedRowsSerialId, setCheckedRowsSerialId] = useState([]);
+	const [viewSelected, setViewSelected] = useState(true);
 	const [tempCheckedData, setTempCheckedData] = useState([]);
 	const [payload, setPayload] = useState([]);
 	const [profitValue, setProfitValue] = useState(0);
@@ -31,8 +34,11 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		year = '', month = '', shipmentType = '',
 		profitAmount = '', profitType = '', tradeType = '', service = '', range,
 		jobState = '', query = '', page, date, profitPercent = '', profitPercentUpper = '', profitAmountUpper = '',
-		sortType = '', sortBy = '',
+		sortType = '', sortBy = '', entity = '', milestone,
 	} = filters || {};
+
+	const { startDate, endDate } = date || {};
+
 	const { calAccruePurchase, calAccrueSale } = calculateAccrue();
 
 	const [
@@ -72,11 +78,14 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 			const resp = await shipmentTrigger({
 				params: {
 					query                : query || undefined,
+					shipmentMilestone    : milestone || undefined,
 					year                 : year || undefined,
 					month                : month || undefined,
 					serviceType          : service || undefined,
 					tradeType            : tradeType || undefined,
 					jobType              : shipmentType || undefined,
+					entityCode           : entity || undefined,
+					entityId             : entityMappingData[entity] || undefined,
 					profitComparisonType : rangeMapping[range] || undefined,
 					jobState             : jobState || undefined,
 					lowerProfitMargin    : profitAmount || profitPercent || undefined,
@@ -84,8 +93,8 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 					sortType             : sortType || undefined,
 					sortBy               : sortBy || undefined,
 					upperProfitMargin    : profitAmountUpper || profitPercentUpper || undefined,
-					startDate            : date ? format(date?.startDate, 'yyy-MM-dd') : undefined,
-					endDate              : date ? format(date?.endDate, 'yyy-MM-dd') : undefined,
+					startDate            : (startDate && endDate) ? format(startDate, 'yyy-MM-dd') : undefined,
+					endDate              : (startDate && endDate) ? format(endDate, 'yyy-MM-dd') : undefined,
 					page                 : page || undefined,
 					pageLimit            : 10,
 				},
@@ -101,11 +110,14 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 			});
 			setApiData(resp.data);
 		} catch (error) {
-			Toast.error(error?.response?.data?.message);
+			if (error?.response?.data?.message) {
+				Toast.error(error?.response?.data?.message);
+			}
 			setApiData({ pageNo: 0, totalPages: 0, total: 0, totalRecords: 0, list: [] });
 		}
 	}, [
-		date,
+		startDate,
+		endDate,
 		jobState,
 		month,
 		page,
@@ -123,13 +135,19 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		sortType,
 		tradeType,
 		year,
+		entity,
+		milestone,
 	]);
 
 	useEffect(() => {
-		if (!year && !month) {
+		if (didMountRef.current === false) {
+			didMountRef.current = true;
+			return;
+		}
+		if (year && month && viewSelected === false) {
 			refetch();
 		}
-	}, [refetch, query, year, month, page, sortType, sortBy]);
+	}, [refetch, query, page, sortType, sortBy, year, month, viewSelected]);
 
 	const {
 		pageNo: pageNos = 0,
@@ -258,7 +276,8 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 				data: {
 					shipmentList   : newPayload,
 					performedBy    : userId,
-					selectionMode  : bulkAction || 'SINGLE',
+					archivedStatus : bulkAction || 'BOOK',
+					selectionMode  : 'SINGLE',
 					jobListRequest : {
 						query                : query || undefined,
 						year                 : year || undefined,
@@ -271,8 +290,8 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 						lowerProfitMargin    : profitAmount || profitPercent || undefined,
 						upperProfitMargin    : profitAmountUpper || profitPercentUpper || undefined,
 						profitType           : profitType || undefined,
-						startDate            : date ? format(date?.startDate, 'yyy-MM-dd') : undefined,
-						endDate              : date ? format(date?.endDate, 'yyy-MM-dd') : undefined,
+						startDate            : startDate ? format(startDate, 'yyy-MM-dd') : undefined,
+						endDate              : endDate ? format(endDate, 'yyy-MM-dd') : undefined,
 						pageLimit            : apiData?.totalRecords,
 						page                 : 1,
 					},
@@ -285,7 +304,9 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 				setOpenModal(false);
 			}
 		} catch (error) {
-			Toast.error(error?.response?.data?.message);
+			if (error?.response?.data?.message) {
+				Toast.error(error?.response?.data?.message);
+			}
 		}
 	};
 
@@ -402,6 +423,8 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		selectedDataLoading,
 		getTableHeaderCheckbox,
 		checkedData,
+		viewSelected,
+		setViewSelected,
 	};
 };
 export default useShipmentView;

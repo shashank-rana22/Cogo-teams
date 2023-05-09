@@ -1,12 +1,25 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import { IcMDelete } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 
 import toFixed from '../../../../CreateModule/utils/toFixed';
 import SortComponent from '../../../commons/SortComponent';
 
+import IsEvaluated from './IsEvaluated';
 import styles from './styles.module.css';
 
-const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
+const handleRedirectToDashboard = ({ router, user, test_id, is_evaluated, status }) => {
+	const { id, name } = user || {};
+
+	router.push(
+		`/learning/tests/dashboard/[test_id]?view=admin&id=${id}&name=${name}
+		&is_evaluated=${is_evaluated}&status=${status}`,
+		`/learning/tests/dashboard/${test_id}?view=admin&id=${id}&name=${name}
+		&is_evaluated=${is_evaluated}&status=${status}`,
+	);
+};
+
+const getAppearedColumns = ({ sortFilter, setSortFilter, router, setShowReAttemptModal, status }) => [
 
 	{
 		Header: (
@@ -15,16 +28,20 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 			</div>
 		),
 		id       : 'user',
-		accessor : ({ user = {} }) => <section>{user.name}</section>,
+		accessor : ({ user = {} }) => <section className={styles.section}>{user?.name}</section>,
 	},
 
 	{
-		Header   : <div>PASSED/FAILED</div>,
+		Header   : <div className={styles.container}>PASSED/FAILED</div>,
 		id       : 'passed_failed',
-		accessor : ({ result_status = '' }) => (
-			<section>{startCase(result_status) || '-'}</section>
+		accessor : ({ result_status = '', is_evaluated = false }) => (
+			<section className={`${styles.section} ${styles[result_status]}`}>
+				{(!is_evaluated || status !== 'published')
+					? <IsEvaluated is_evaluated={is_evaluated} /> : (startCase(result_status) || '-')}
+			</section>
 		),
 	},
+
 	{
 		Header: (
 			<div className={styles.container}>
@@ -38,12 +55,10 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 			</div>
 		),
 		id       : 'score_achieved',
-		accessor : ({ final_score = '', test = {} }) => (
-			<section>
-				{toFixed(final_score, 2)}
-				/
-				{toFixed(test.total_marks, 2)}
-
+		accessor : ({ final_score = '', test = {}, is_evaluated = false }) => (
+			<section className={styles.section}>
+				{(!is_evaluated || status !== 'published') ? <IsEvaluated is_evaluated={is_evaluated} />
+					: `${toFixed(final_score, 2)}/${toFixed(test.total_marks, 2)}`}
 			</section>
 		),
 	},
@@ -60,8 +75,11 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 			</div>
 		),
 		id       : 'percentile',
-		accessor : ({ percentile = '' }) => (
-			<div>{percentile !== null ? toFixed(percentile, 2) : '-'}</div>
+		accessor : ({ percentile = '', is_evaluated = false }) => (
+			<div className={styles.section}>
+				{(!is_evaluated || status !== 'published')
+					? <IsEvaluated is_evaluated={is_evaluated} /> : (toFixed(percentile || 0, 2) || '-')}
+			</div>
 		),
 	},
 	{
@@ -81,16 +99,15 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 			const timeTaken = Math.ceil(time_taken);
 			return (
 				(time_taken > 0) ? (
-					<div>
+					<div className={styles.section}>
 						{timeTaken}
 						{' '}
 						{timeTaken > 1 ? 'mins' : 'min'}
 					</div>
-				) : ('-')
+				) : (<div className={styles.section}> - </div>)
 			);
 		},
 	},
-
 	{
 		Header: (
 			<div className={styles.container}>
@@ -104,18 +121,46 @@ const getAppearedColumns = ({ sortFilter, setSortFilter }) => [
 			</div>
 		),
 		id       : 'attempted_on',
-		accessor : ({ created_at = '' }) => (
-			<section>
+		accessor : ({ start_time = '' }) => (
+			<section className={styles.section}>
 				{format(
-					created_at,
+					start_time,
 					`${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']} ${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`,
 				)}
 			</section>
 		),
 	},
+	{
+		Header   : '',
+		id       : 'see_more',
+		accessor : ({ user = {}, test_id = '', is_evaluated = false }) => (
+			<div
+				role="presentation"
+				onClick={() => handleRedirectToDashboard({ router, user, test_id, is_evaluated, status })}
+				className={styles.see_more}
+			>
+				See More
+			</div>
+		),
+	},
+	{
+		Header   : '',
+		id       : 're-attempt',
+		accessor : ({ user = {} }) => (
+			(status !== 'published') && (
+				<div
+					role="presentation"
+					onClick={() => setShowReAttemptModal(user)}
+					className={styles.see_more}
+				>
+					Allow Re-Attempt
+				</div>
+			)
+		),
+	},
 ];
 
-const getNotAppeardColumns = () => [
+const getOngoingColumns = ({ setShowReAttemptModal }) => [
 	{
 		Header   : 'NAME',
 		id       : 'name',
@@ -130,14 +175,79 @@ const getNotAppeardColumns = () => [
 			<section>{user.email}</section>
 		),
 	},
+	{
+		Header   : '',
+		id       : 're-attempt',
+		accessor : ({ user = {} }) => (
+			<div
+				role="presentation"
+				onClick={() => setShowReAttemptModal(user)}
+				className={styles.see_more}
+			>
+				Allow Re-Attempt
+			</div>
+		),
+	},
 ];
 
-const getTableColumns = ({ sortFilter, setSortFilter, activeTab }) => {
-	if (activeTab === 'appeared') {
-		return getAppearedColumns({ sortFilter, setSortFilter });
-	}
+const getNotAppeardColumns = ({ setShowModal, setUserId }) => [
 
-	return getNotAppeardColumns();
+	{
+		Header   : 'NAME',
+		id       : 'name',
+		accessor : ({ user = {} }) => (
+			<section>{startCase(user.name)}</section>
+		),
+	},
+	{
+		Header   : 'EMAIL',
+		id       : 'email',
+		accessor : ({ user = {} }) => (
+			<section>{user.email}</section>
+		),
+	},
+	{
+		id       : 'delete',
+		accessor : ({ user_id = '' }) => (
+			<IcMDelete
+				className={styles.delete}
+				width={16}
+				height={16}
+				onClick={() => {
+					setUserId(user_id);
+					setShowModal(true);
+				}}
+			>
+				Delete
+			</IcMDelete>
+		),
+	},
+];
+
+const TABLE_MAPPING = {
+	appeared     : getAppearedColumns,
+	not_appeared : getNotAppeardColumns,
+	ongoing      : getOngoingColumns,
+};
+
+const getTableColumns = ({
+	sortFilter, setSortFilter,
+	activeTab,
+	setShowModal,
+	setShowReAttemptModal,
+	setUserId = () => {},
+	router,
+	status,
+}) => {
+	const getcolumnsFun = TABLE_MAPPING?.[activeTab] || getAppearedColumns;
+
+	const getcolumnsArg = {
+		appeared     : { sortFilter, setSortFilter, router, setShowReAttemptModal, status },
+		not_appeared : { setShowModal, setUserId },
+		ongoing      : { setShowReAttemptModal },
+	};
+
+	return getcolumnsFun(getcolumnsArg[activeTab] || {});
 };
 
 export default getTableColumns;

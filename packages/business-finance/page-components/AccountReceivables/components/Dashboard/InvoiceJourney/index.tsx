@@ -9,13 +9,14 @@ import styles from './styles.module.css';
 
 interface InvoiceJourneyProps {
 	filterValue?: object
+	entityCode?: string
 }
 
-function InvoiceJourney({ filterValue }: InvoiceJourneyProps) {
+function InvoiceJourney({ filterValue, entityCode }: InvoiceJourneyProps) {
 	const {
 		journeyData, journeyLoading, dateFilter,
 		setDateFilter, optionsVal,
-	} = useGetInvoiceJourney({ filterValue });
+	} = useGetInvoiceJourney({ filterValue, entityCode });
 
 	const {
 		draftInvoicesCount, financeAcceptedInvoiceCount,

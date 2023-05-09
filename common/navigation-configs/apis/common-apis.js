@@ -78,9 +78,9 @@ const common_apis = {
 			service_name : 'spot_search',
 		},
 		{
-			api          : 'update_organization_search_history',
+			api          : 'create_planet_search_history',
 			access_type  : 'private',
-			service_name : 'organization',
+			service_name : 'location',
 		},
 		{
 			api          : 'update_shipment_sell_quotations',
@@ -222,6 +222,11 @@ const common_apis = {
 			api          : 'create_rate_sheet',
 			access_type  : 'private',
 			service_name : 'rate_sheet',
+		},
+		{
+			api          : 'create_fcl_freight_rate_sheet',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
 		},
 		{
 			api          : 'update_organization',
@@ -556,6 +561,41 @@ const common_apis = {
 		},
 		{
 			api          : 'create_credit_comment',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'update_credit_status',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'list_export_factoring_buyers',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'send_ef_document_details_to_cogowallet',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'get_ef_invoices',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'get_ef_invoice_details',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'update_ef_shipment_request',
+			access_type  : 'private',
+			service_name : 'credit',
+		},
+		{
+			api          : 'get_ef_invoice_funding_summary',
 			access_type  : 'private',
 			service_name : 'credit',
 		},

@@ -32,8 +32,8 @@ export default {
 		TAX           : /^[0-3]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
 		MOBILE_NUMBER : /^[+][0-9]{1,3}[0-9]{10}$/,
 		EMAIL         : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
-		password_pattern:
-			/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
+		// password_pattern:
+		// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
 	},
 	uuid: {
 		tech_super_admin_id         : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
@@ -115,10 +115,12 @@ export default {
 			'95d62549-8ab6-4ee5-a655-9edd0ec46dac', // Purnendu Shekhar
 			'cd8dde11-678c-4467-85b2-2e2d6055bef4', // Amitabh Shankar
 		],
-		prod_kam_cp           : 'e0e2f83b-9e5b-41a3-948e-ab1ec9b0f3ad',
-		prod_es_sales         : 'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
-		entity_manager_id     : '9d1d10dd-06c0-489d-92f8-272c6a40e9bb',
-		service_ops1_role_ids : [
+		lastmile_ops_id         : 'b808aabb-2245-4369-aaa7-6ebd2d5de20b',
+		lastmile_ops_manager_id : '3965f742-f4e5-420a-911c-f3657be05028',
+		prod_kam_cp         				: 'e0e2f83b-9e5b-41a3-948e-ab1ec9b0f3ad',
+		prod_es_sales        			: 'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
+		entity_manager_id     		: '9d1d10dd-06c0-489d-92f8-272c6a40e9bb',
+		service_ops1_role_ids  	: [
 			'348bc262-64c3-4667-a23c-908ceca80233', // SO1 + Revenue Desk
 			'5b5ee698-ec53-47fe-9584-737c9a174f8c', // Prod_SO1
 			'f0af57b0-34eb-46e8-86a6-38abafcfc072', // SO1
@@ -167,28 +169,25 @@ export default {
 		],
 		prod_coe_finance_head : '7b1fc916-6984-4179-aee5-c23f9871085d',
 		finance_head_id       : 'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
+		so_1_manager          : '17885538-e746-4650-a5bc-7d4d81247c7d',
 	},
 	options: {
 		registration_types: [
 			{
-				label : 'Private Limited Company',
-				value : 'private_limited',
+				label : 'Limited Liability Company',
+				value : 'limited_liability_company',
 			},
 			{
-				label : 'Public Limited Company',
-				value : 'public_limited',
+				label : 'Joint Stock Company',
+				value : 'joint_stock_company',
 			},
 			{
-				label : 'Partnership',
-				value : 'partnership',
+				label : 'Representative Office',
+				value : 'representative_office',
 			},
 			{
-				label : 'Proprietorship',
-				value : 'proprietorship',
-			},
-			{
-				label : 'Limited Liability Partnership',
-				value : 'limited_liability_partnership',
+				label : 'Branch',
+				value : 'branch',
 			},
 		],
 		country_truck_type : 'Open_body_1_ton',

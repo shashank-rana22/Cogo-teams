@@ -48,8 +48,7 @@ const ApproveReject = ({
 		},
 		{ autoCancel: false },
 	);
-
-	const rejectApproveApi = async () => {
+	const rejectApproveApi = async (getRoute) => {
 		try {
 			await trigger({
 				data: {
@@ -64,7 +63,10 @@ const ApproveReject = ({
 			});
 			setApprove(false);
 			Toast.success(`${modalData}Successfully`);
-			router.push('/business-finance/coe-finance/all_invoices/purchase-view');
+			router.push(
+				getRoute()[0],
+				getRoute()[1],
+			);
 		} catch (error:any) {
 			Toast.error(error?.response?.data?.message || 'Something went wrong');
 		}

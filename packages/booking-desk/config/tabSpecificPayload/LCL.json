@@ -1,0 +1,30 @@
+{
+    "place_booking": {
+        "common":{
+            "task_attributes": [
+                {
+                    "task": "confirm_booking",
+                    "state": "shipment_received",
+                    "status": "completed"
+                },
+                {
+                    "task": "mark_confirmed",
+                    "state": "awaiting_service_provider_confirmation",
+                    "status": "pending",
+                    "assigned_stakeholder": "service_ops1"
+                }
+            ]
+        }
+    },
+    "completed": {
+        "common":{
+            "task_attributes": [
+                { 
+                    "task": "update_carrier_booking_reference_number",
+                    "status" : "completed" 
+                }
+            ]
+        }
+    },
+    "cancelled": {}
+}

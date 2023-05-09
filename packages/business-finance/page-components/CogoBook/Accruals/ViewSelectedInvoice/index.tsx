@@ -1,4 +1,5 @@
 import { Modal, Input, Tooltip, Button, Breadcrumb } from '@cogoport/components';
+import { getFormattedPrice } from '@cogoport/forms';
 import { IcMSearchlight, IcMArrowBack } from '@cogoport/icons-react';
 import { Link, useRouter } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
@@ -6,13 +7,14 @@ import { useState } from 'react';
 
 import StyledTable from '../../common/StyledTable';
 import useViewSelect from '../../hooks/useViewSelect';
-import { column, monthData } from '../constant';
+import { bookedColumn, column, monthData } from '../constant';
 import Footer from '../ShipmentView/Footer';
 
 import styles from './styles.module.css';
 
 function ViewSelectedInvoice() {
 	const { push, query } = useRouter();
+	const [showSub, setShowSub] = useState(false);
 	const [bulkSection, setBulkSection] = useState({ value: false, bulkAction: '' });
 	const [filters, setFilters] = useState({
 		search         : '',
@@ -50,9 +52,53 @@ function ViewSelectedInvoice() {
 	const { list = [], totalRecords = 0, pageSize = 10 } = viewSelectedSidData || {};
 
 	const { page } = filters || {};
-	const [openDeleteModal, setOpenDeleteModal] = useState(false);
+	const [openDeleteModal, setOpenDeleteModal] = useState({});
 
 	const { year = '', startDate, endDate, month = '', tradeType = '', service = '', shipmentType = '' } = query || {};
+
+	const subComponent = (itemData) => {
+		const {
+			sellQuotation = '', buyQuotation = '', quotationProfit = '',
+			quotationMargin = '', bookingType = '', buyQuotationCurrency = '',
+			sellQuotationCurrency = '', incomeCurrency = '',
+		} = itemData || {};
+
+		return (
+			<div className={styles.sub_comp}>
+				<div className={styles.quo}>
+					Quotation
+					<div className={styles.quo_border} />
+				</div>
+
+				<div>
+					Purchase :
+					{' '}
+					{getFormattedPrice(buyQuotation, buyQuotationCurrency) || '-'}
+				</div>
+				<div>
+					Sales :
+					{' '}
+					{getFormattedPrice(sellQuotation, sellQuotationCurrency) || '-' }
+				</div>
+				<div>
+					Margin :
+					{' '}
+					{getFormattedPrice(quotationProfit, incomeCurrency) || '-' }
+					{' '}
+					(
+					{Number(quotationMargin || 0.00)?.toFixed(2) || '0'}
+					%)
+				</div>
+				<div>
+					Shipment Type :
+					{' '}
+					{' '}
+					<span className={styles.span_val}>{bookingType || '-'}</span>
+				</div>
+			</div>
+		);
+	};
+
 	return (
 		<div>
 
@@ -65,8 +111,15 @@ function ViewSelectedInvoice() {
 							</Link>
 						)}
 					/>
-					<Breadcrumb.Item label="Selected Invoices" />
+					<Breadcrumb.Item label="Selected Shipments" />
+					<div>
+						<span className={styles.steps}>Step 2 -</span>
+
+						{' '}
+						<span className={styles.text_step}>Review The Selected Shipments And Accrue/Book Them</span>
+					</div>
 				</Breadcrumb>
+
 			</div>
 			<div className={styles.header_container}>
 				<div className={styles.div_left}>
@@ -124,11 +177,10 @@ function ViewSelectedInvoice() {
 						placeholder="Search by SID"
 						suffix={<IcMSearchlight height="20px" width="20px" style={{ marginRight: '8px' }} />}
 					/>
+					<div className={styles.booked_flex}>
+						<Button themeType="secondary" onClick={() => { setBulkModal(true); }}>Bulk Delete</Button>
+					</div>
 				</div>
-			</div>
-
-			<div className={styles.booked_flex}>
-				<Button themeType="secondary" onClick={() => { setBulkModal(true); }}>Bulk Delete</Button>
 			</div>
 
 			{bulkModal &&		(
@@ -151,7 +203,14 @@ function ViewSelectedInvoice() {
 								<Button
 									id="approve-modal-btn"
 									themeType="primary"
-									onClick={() => { deleteSelected({ bulkData: 'BULK', setBulkModal }); }}
+									onClick={() => {
+										const selectedIds = checkedData?.map((item) => item?.id);
+										deleteSelected({
+											selectedBulkData : selectedIds,
+											bulkData         : selectedIds?.length > 0 ? 'SINGLE' : 'BULK',
+											setBulkModal,
+										});
+									}}
 								>
 									Yes
 								</Button>
@@ -163,35 +222,51 @@ function ViewSelectedInvoice() {
 			)}
 
 			<div className={styles.button_container}>
-				<div
-					className={isBookedActive ? styles.selected : styles.button_tab}
-					onClick={() => {
-						setFilters((p) => ({
-							...p,
-							archivedStatus: 'BOOKED',
-						}));
-						viewSelected();
-						setIsBookActive(true);
-					}}
-					role="presentation"
-				>
-					Booked
-				</div>
+				<div className={styles.button_value}>
+					<div
+						className={isBookedActive ? styles.selected : styles.button_tab}
+						onClick={() => {
+							setFilters((p) => ({
+								...p,
+								archivedStatus : 'BOOKED',
+								page           : 1,
+							}));
+							viewSelected();
+							setIsBookActive(true);
+						}}
+						role="presentation"
+					>
+						Booked
+					</div>
 
-				<div
-					className={!isBookedActive ? styles.selected : styles.button_tab}
-					onClick={() => {
-						setFilters((p) => ({
-							...p,
-							archivedStatus: 'ACCRUED',
-						}));
-						viewSelected();
-						setIsBookActive(false);
-					}}
-					role="presentation"
-				>
-					Accrued
+					<div
+						className={!isBookedActive ? styles.selected : styles.button_tab}
+						onClick={() => {
+							setFilters((p) => ({
+								...p,
+								archivedStatus : 'ACCRUED',
+								page           : 1,
+							}));
+							viewSelected();
+							setIsBookActive(false);
+						}}
+						role="presentation"
+					>
+						Accrued
+
+					</div>
 				</div>
+				{!isBookedActive && (
+					<div
+						onClick={() => { setShowSub(!showSub); }}
+						className={styles.hide_data}
+						role="presentation"
+					>
+						{showSub ? 'Hide All Quotations' : 'View All Quotations'}
+
+					</div>
+				)}
+
 			</div>
 
 			<div className={styles.table_data}>
@@ -200,7 +275,21 @@ function ViewSelectedInvoice() {
 					total={totalRecords}
 					pageSize={pageSize}
 					data={list}
-					columns={column(
+					showEmptyState={isBookedActive ? 'BOOKED' : 'ACCRUED'}
+					renderRowSubComponent={!isBookedActive && subComponent}
+					selectType="multiple"
+					showAllNestedOptions={!isBookedActive && showSub}
+					columns={isBookedActive ? bookedColumn(
+						{
+							getTableBodyCheckbox,
+							getTableHeaderCheckbox,
+							deleteSelected,
+							openDeleteModal,
+							setOpenDeleteModal,
+							filters,
+							setFilters,
+						},
+					) : column(
 						{
 							getTableBodyCheckbox,
 							getTableHeaderCheckbox,

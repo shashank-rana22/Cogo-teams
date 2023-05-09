@@ -111,9 +111,9 @@ const apis = [
 		service_name : 'spot_search',
 	},
 	{
-		api          : 'update_organization_search_history',
+		api          : 'create_planet_search_history',
 		access_type  : 'private',
-		service_name : 'organization',
+		service_name : 'location',
 	},
 	{
 		api          : 'get_organization_search_history',
@@ -427,26 +427,14 @@ const apis = [
 		service_name : 'user',
 	},
 	{
-		api          : 'get_spot_search_cargo_insurance_rate',
+		api          : 'get_spot_search_indicative_prices',
 		access_type  : 'private',
 		service_name : 'spot_search',
 	},
 	{
-		api          : 'get_checkout_cargo_insurance_rate',
+		api          : 'get_spot_search_shipment_insights',
 		access_type  : 'private',
-		service_name : 'checkout',
-	},
-	{
-		api         : 'saas_insurance_list_commodities',
-		access_type : 'private',
-		model       : 'insurance',
-		feature     : 'insurance',
-	},
-	{
-		api         : 'saas_insurance_list_countries',
-		access_type : 'private',
-		model       : 'insurance',
-		feature     : 'insurance',
+		service_name : 'spot_search',
 	},
 ];
 export default apis;

@@ -5,6 +5,13 @@ import Footer from './Footer';
 import Header from './Header';
 import styles from './styles.module.css';
 
+let RichTextEditor;
+
+if (typeof window !== 'undefined') {
+	// eslint-disable-next-line global-require
+	RichTextEditor = require('react-rte').default;
+}
+
 function LeftSection({
 	data = {},
 	testData,
@@ -23,6 +30,8 @@ function LeftSection({
 	setSubQuestion,
 }) {
 	const [answer, setAnswer] = useState('');
+	const [subjectiveAnswer, setSubjectiveAnswer] = useState(RichTextEditor.createEmptyValue());
+	const [uploadValue, setUploadValue] = useState('');
 
 	return (
 		<div className={styles.container}>
@@ -33,6 +42,7 @@ function LeftSection({
 				setShowTimeOverModal={setShowTimeOverModal}
 				showTimeOverModal={showTimeOverModal}
 				start_time={start_time}
+				user_appearance={user_appearance}
 			/>
 
 			<Body
@@ -45,6 +55,10 @@ function LeftSection({
 				setAnswer={setAnswer}
 				subQuestion={subQuestion}
 				setSubQuestion={setSubQuestion}
+				subjectiveAnswer={subjectiveAnswer}
+				setSubjectiveAnswer={setSubjectiveAnswer}
+				uploadValue={uploadValue}
+				setUploadValue={setUploadValue}
 			/>
 
 			<Footer
@@ -59,6 +73,11 @@ function LeftSection({
 				subQuestion={subQuestion}
 				test_user_mapping_id={test_user_mapping_id}
 				user_appearance={user_appearance}
+				loading={loading}
+				subjectiveAnswer={subjectiveAnswer}
+				setSubjectiveAnswer={setSubjectiveAnswer}
+				uploadValue={uploadValue}
+				setUploadValue={setUploadValue}
 			/>
 		</div>
 	);
