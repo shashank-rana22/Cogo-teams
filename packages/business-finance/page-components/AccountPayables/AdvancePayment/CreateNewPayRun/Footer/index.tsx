@@ -21,7 +21,7 @@ interface PropsType {
 	apiData:ListType,
 	viewSelectedInvoice:boolean,
 	setViewSelectedInvoice:Function,
-	submitSelectedInvoices:Function,
+	submitSelectedInvoices: () => void,
 	getViewSelectedInvoices:Function,
 	getAdvancedPayment:Function,
 	viewSelectedData:SelectedDataType,
