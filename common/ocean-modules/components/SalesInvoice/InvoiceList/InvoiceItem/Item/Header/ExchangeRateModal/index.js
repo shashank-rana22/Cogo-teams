@@ -1,4 +1,4 @@
-// import CardList from '@cogo/bookings/commons/CardList';
+import CardList from '@cogoport/shipment-fcl-freight/common/CardList';
 // import useGetExchangeRate from '@cogo/bookings/Invoicing/hooks/useGetExchangeRate';
 import { Modal, Input } from '@cogoport/components';
 import React, { useState } from 'react';
@@ -42,7 +42,7 @@ function ExchangeRateModal({
 					style={{ width: '300px' }}
 					className="primary sm"
 				/>
-				{/* <CardList fields={fields} data={list} loading={loading} /> */}
+				<CardList fields={fields} data={list} loading={loading} />
 
 			</Modal.Body>
 		</Modal>

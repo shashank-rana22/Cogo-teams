@@ -8,7 +8,6 @@ import React from 'react';
 
 // import Info from './Info';
 import styles from './styles.module.css';
-
 const geo = getGeoConstants();
 
 function EditInvoice({
@@ -49,6 +48,7 @@ function EditInvoice({
 
 	return (
 		<Modal
+			size='lg'
 			onClose={onClose}
 			show={show}
 			className="primary xl"
