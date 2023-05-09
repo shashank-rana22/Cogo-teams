@@ -4,6 +4,9 @@
     padding: 16px 40px;
     display: flex;
     justify-content: space-between;
+    position: sticky;
+    top: 0;
+    align-items: center;
 }
 
 .title {
