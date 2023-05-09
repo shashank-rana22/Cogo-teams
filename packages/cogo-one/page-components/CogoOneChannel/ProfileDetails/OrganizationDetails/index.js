@@ -37,7 +37,6 @@ function OrganizationDetails({
 	} = useGetOrganizationCogopoints({ organizationId });
 
 	const { promoData = {}, promoLoading } = useGetListPromotions({ organizationId });
-
 	const { list = [] } = promoData || {};
 	const { agent = {}, account_type, kyc_status, serial_id, short_name, city, tags = [] } = organizationData || {};
 	const { display_name } = city || {};
