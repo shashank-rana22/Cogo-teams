@@ -1,0 +1,34 @@
+.Title{
+	font-size: 18px;
+	font-weight: 500;
+	color: #393f70;
+	margin: 10px 30px 20px 30px;
+	text-align: center;
+}
+
+.Container{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	.core-ui-input-root {
+		height: 48px;
+		font-size: 22px;
+		width: 70px;
+	}
+}
+
+.Actions{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 40px 0px 20px 0px;
+
+	.core-ui-button-root {
+		width: 20%;
+		text-transform: capitalize;
+
+		&:last-child {
+			margin-left: 16px;
+		}
+	}
+}

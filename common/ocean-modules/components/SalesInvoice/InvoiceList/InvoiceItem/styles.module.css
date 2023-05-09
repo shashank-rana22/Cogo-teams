@@ -1,0 +1,81 @@
+.container{
+	display: flex;
+	flex-direction: column;
+	padding: 36px 22px 10px 22px;
+	margin: 24px;
+	background: #F3FAFA;
+	border: 1px solid #88CAD1;
+	border-radius: 8px;
+}
+
+.header_container{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
+	margin-bottom: 20px;
+
+	@media (max-width: 768px) {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+.InvoicePartyDetails{
+	display: flex;
+	flex-direction: row;
+	margin-left: 8px;
+	color: #333333;
+	line-height: 20px;
+}
+
+.InvoicingPartyName{
+	font-weight: 500;
+	font-size: 18px;
+	margin-right: 10px;
+
+	@media (max-width: 768px) {
+		font-size: 16px;
+	}
+}
+
+.label{
+	font-weight: 400;
+	font-size: 14px;
+}
+
+.InvoiceValueContainer{
+	display: flex;
+	align-items: center;
+	margin-left: 2.5%;
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 16px;
+	white-space: nowrap;
+	/* margin-left: ${(props) => (!props.style ? '15.5%' : '2.5%')}; */
+
+	@media (max-width: 768px) {
+		font-size: 16px;
+		margin-left: 0px;
+	}
+}
+
+.InvoiceValueTitle{
+	color: #333333;
+	font-weight: 500;
+	font-size: 18px;
+
+	@media (max-width: 768px) {
+		font-size: 12px;
+	}
+}
+
+.InvoiceValue{
+	color: #F68B21;
+	margin-left: 4px;
+
+	@media (max-width: 768px) {
+		font-size: 12px;
+	}
+}

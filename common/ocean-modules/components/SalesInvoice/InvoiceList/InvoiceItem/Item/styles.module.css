@@ -1,0 +1,10 @@
+.container{
+	background: #ffffff;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+	border-radius: 4px;
+	margin-bottom: 16px;
+}
+
+.invoiceInfo{
+	padding: 30px 20px 20px 20px;
+}

@@ -1,0 +1,117 @@
+.container{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: 100%;
+	justify-content: space-between;
+	margin: 20px 0;
+	padding: 0 20px;
+
+	.core-ui-button-root {
+		text-transform: capitalize;
+	}
+	@media (max-width: 768px) {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
+
+.trigger_time{
+	margin: 0;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	text-align: center;
+	color: #cb6464;
+	margin-right: 16px;
+	white-space: nowrap;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
+
+.total_shipment_title{
+	margin: 0;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	text-transform: capitalize;
+	color: #333333;
+}
+
+.ShipmentValue{
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	text-transform: capitalize;
+	color: #F68B21;
+	margin-left: 4px;
+}
+
+.ReviwedStats{
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	color: #393f70;
+	margin: 0;
+	white-space: nowrap;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+}
+
+.IconWrapper{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 5px;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
+
+.EditInvoice{
+	display: flex;
+	align-items: center;
+	width: 25%;
+	justify-content: space-between;
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
+
+.FlexRow{
+	display: flex;
+	align-items: center;
+	width: 20%;
+
+	&.total {
+		flex: 1;
+		margin: 0px 12px;
+		@media (max-width: 768px) {
+			margin: 0;
+		}
+	}
+
+	&.triggered {
+		display: none;
+	}
+	@media (max-width: 1260px) {
+		width: 38%;
+	}
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+	&.inactive {
+		display: none;
+	}
+	&.active {
+		@media (max-width: 768px) {
+			align-items: flex-start;
+		}
+	}
+}

@@ -1,0 +1,15 @@
+.Container{
+	.upload-container {
+		margin-bottom: 12px;
+	}
+
+	.form-edit-line-items-root {
+		box-shadow: none;
+	}
+}
+
+.ButtonWrap{
+	display: flex;
+	justify-content: flex-end;
+	margin: 10px 0;
+}

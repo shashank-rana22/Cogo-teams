@@ -2,6 +2,7 @@ import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { Tracking } from '@cogoport/ocean-modules';
+import SalesInvoice from '@cogoport/ocean-modules/components/SalesInvoice';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
@@ -123,6 +124,10 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 
 						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
 							<Tasks />
+						</TabPanel>
+
+						<TabPanel name="invoice_and_quotation" title="Sales Invoice">
+							<SalesInvoice shipmentData={shipment_data} />
 						</TabPanel>
 
 						<TabPanel name="documents" title="Documents">

@@ -1,0 +1,38 @@
+.PopoverContainer{
+	background: #ffffff;
+	border-radius: 4px;
+	padding: 8px;
+	width: 100%;
+}
+
+.Title{
+	font-weight: 600;
+	font-size: 10px;
+	color: #333333;
+}
+
+.Value{
+	font-weight: 400;
+	font-size: 10px;
+	color: #828282;
+	margin: 0;
+}
+
+.Reasons{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin-top: 8px;
+}
+
+.FlexRow{
+	display: flex;
+	width: 100%;
+}
+
+.FlexCol{
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	margin-right: 16px;
+}
