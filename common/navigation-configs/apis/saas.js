@@ -2333,9 +2333,14 @@ const saas = {
 	],
 	app_saas_import_export_controls: [
 		{
-			api: 'saas_get_user_quota_usage',
-			access_type: 'private',
-			service_name: 'saas_subscriptions_v2',
+			api          : 'saas_get_user_quota_usage',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 	],
 
