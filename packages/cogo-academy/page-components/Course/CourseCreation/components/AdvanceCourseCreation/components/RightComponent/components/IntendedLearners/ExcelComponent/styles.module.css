@@ -1,0 +1,53 @@
+.error_message {
+	font-size: 10px;
+	font-weight: 400;
+	color: #cb6464;
+}
+
+.excel_label_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.refresh_div {
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 12px;
+    border: 1px solid #E0E0E0;
+}
+
+.excel_buttons_container {
+    display: flex;
+    justify-content: space-between;
+    margin: 12px 0px;
+}
+
+.right_section {
+    display: flex;
+}
+
+.excel_label {
+    max-width: 68%;
+    color: #828282;
+    font-size: 12px;
+}
+
+.sample_div {
+	display: flex;
+	align-items: center;
+	white-space: nowrap;
+	cursor: pointer;
+
+    &.right {
+        margin-left: 40px;
+    }
+}
+
+.sample_text {
+	margin-left: 4px;
+	font-size: 12px;
+	text-decoration: underline;
+}

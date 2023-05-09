@@ -1,18 +1,18 @@
 const controls = [
 	{
-		label   : 'What will the students learn from the course?*  ',
+		label   : 'What will the students learn from the course?*s',
 		name    : 'learning',
 		type    : 'multiSelect',
 		options : [],
 	},
 	{
-		label   : 'Which tags give a semblance of the Course content?*    ',
+		label   : 'Which tags give a semblance of the Course content?*',
 		name    : 'tags',
 		type    : 'multiSelect',
 		options : [],
 	},
 	{
-		label      : 'What will the students learn from the course?  ',
+		label      : 'What will the students learn from the course?',
 		name       : 'students_learn_field_array',
 		type       : 'fieldArray',
 		buttonText : 'Add More',
