@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { IcCRedCircle, IcCYelloCircle } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import RequestModal from '../RequestModal';
@@ -12,11 +13,20 @@ function Footer({ item = {}, role = '', tabsState = {}, refetch = () => {} }) {
 
 	const closeModal = () => setShowModal(false);
 
+	const IconMapping = {
+		red    : <IcCRedCircle height={12} width={12} />,
+		yellow : <IcCYelloCircle height={12} width={12} />,
+	};
+
+	// To be Removed in future
+	let oldFlowForBlOrDo = item?.trade_type === 'export' && tabsState.activeTab === 'bl' ? true : null;
+	oldFlowForBlOrDo = item?.trade_type === 'import' && tabsState.activeTab === 'do' ? true : oldFlowForBlOrDo;
+
 	const renderButtonCondition = () => {
 		if (
 			role === 'kam'
 			&& ['ineligible', 'hold'].includes(tabsState.bucket)
-			&& item?.invoice_status?.is_invoice_validated
+			&& item?.invoice_status?.is_invoice_validated && oldFlowForBlOrDo
 		) {
 			return (
 				<Button onClick={() => setShowModal('request_modal')}>
@@ -40,13 +50,16 @@ function Footer({ item = {}, role = '', tabsState = {}, refetch = () => {} }) {
 			<div className={styles.footer}>
 				<div className={styles.organization_details}>
 					<div className={styles.business_name}>
-						Customer Name -
-						{' '}
+						Customer Name: &nbsp;
 						{item?.importer_exporter?.business_name}
 								&nbsp;
 					</div>
-					<div>
-						Outstanding : &nbsp;
+					<div className={styles.is_outstanding}>
+						{item?.invoice_status?.is_outstanding_validated
+							? IconMapping.yellow
+							: IconMapping.red}
+					&nbsp;
+						Outstanding: &nbsp;
 						{formatAmount({
 							amount: item?.invoice_status
 								?.outstanding_amount,
@@ -59,8 +72,7 @@ function Footer({ item = {}, role = '', tabsState = {}, refetch = () => {} }) {
 						})}
 					</div>
 					<div>
-						On-going shipments : &nbsp; &nbsp;
-						{' '}
+						On-going shipments: &nbsp;
 						{item?.ongoing_shipments}
 					</div>
 				</div>
@@ -87,6 +99,7 @@ function Footer({ item = {}, role = '', tabsState = {}, refetch = () => {} }) {
 					closeModal={closeModal}
 					data={item}
 					refetch={refetch}
+					tabsState={tabsState}
 				/>
 			) : null}
 
