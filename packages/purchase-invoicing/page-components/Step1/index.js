@@ -31,6 +31,7 @@ function Step1({
 	collectionParty,
 	setCollectionParty,
 	closeModal,
+	editData,
 }) {
 	const [confirmation, setConfirmation] = useState(null);
 
@@ -127,6 +128,7 @@ function Step1({
 					collectionParty={collectionParty}
 					purchaseInvoiceValues={purchaseInvoiceValues}
 					billId={billId}
+					editData={editData}
 					ref={ref}
 				/>
 			</Modal.Body>

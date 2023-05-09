@@ -48,8 +48,9 @@ function PurchaseInvoiceDates({
 						name="due_date"
 						placeholder="Select Invoice Due Date"
 						rules={{ required: true }}
-						value={purchaseInvoiceValues?.due_date
-							? new Date(purchaseInvoiceValues?.due_date) : null}
+						value={(purchaseInvoiceValues?.due_date || purchaseInvoiceValues?.invoice_due_date)
+							? new Date(purchaseInvoiceValues?.due_date
+								|| purchaseInvoiceValues?.invoice_due_date) : null}
 					/>
 					{errors?.due_date && (
 						<div className={`${styles.errors}`}>

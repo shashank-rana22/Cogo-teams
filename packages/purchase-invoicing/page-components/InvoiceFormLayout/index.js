@@ -34,8 +34,10 @@ function InvoiceFormLayout({
 	setCollectionParty,
 	purchaseInvoiceValues,
 	billId,
+	editData,
 }, ref) {
 	const [codes, setCodes] = useState(purchaseInvoiceValues?.codes || {});
+
 	const [showTaggings, setShowTaggings] = useState(false);
 	const [billCatogory, setBillCatogory] = useState('purchase');
 	const [selectedProforma, setSelectedProforma] = useState([]);
@@ -47,6 +49,7 @@ function InvoiceFormLayout({
 	const otherAddresses = collectionParty?.other_addresses || [];
 	const allAddresses = [...billingAddresses, ...otherAddresses];
 	const isEdit = !isEmpty(billId);
+	const editable = !isEmpty(editData);
 	const collectionPartyAddresses = (allAddresses || []).map((address) => ({
 		...address,
 		label : `${address?.address} / ${address?.tax_number}`,
@@ -142,20 +145,16 @@ function InvoiceFormLayout({
 	}));
 
 	const isTagDissable = () => {
+		if (formValues?.invoice_type === 'credit_note') {
+			return true;
+		}
+
 		if (
 			['coe_rejected', 'finance_rejected'].includes(
 				purchaseInvoiceValues?.status,
 			)
 		) {
 			return false;
-		}
-
-		if (formValues?.invoice_type === 'credit_note') {
-			return true;
-		}
-
-		if (isJobClosed) {
-			return true;
 		}
 
 		if (isEdit) {
@@ -165,7 +164,7 @@ function InvoiceFormLayout({
 	};
 
 	const getOptions = () => {
-		if (isJobClosed) {
+		if (!editable && isJobClosed) {
 			return optionsCN;
 		}
 		if (billCatogory === 'pass_through') {
@@ -188,7 +187,7 @@ function InvoiceFormLayout({
 				/>
 			</div>
 			<div className={styles.formlayout}>
-				<AccordianView title="Select Invoice Type" fullwidth open={isEdit}>
+				<AccordianView title="Select Invoice Type" fullwidth open={isEdit || isJobClosed}>
 					<div className={`${styles.flex} ${styles.justifiy}`}>
 						<div className={`${styles.flex}`}>
 							{!isJobClosed && (
@@ -282,6 +281,7 @@ function InvoiceFormLayout({
 					open={isEdit}
 					primary_service={primary_service}
 					serviceProvider={serviceProvider}
+					formValues={formValues}
 				/>
 				<Taggings
 					showTagings={showTaggings}

@@ -81,7 +81,7 @@ const useCreateColletctionParty = ({
 					onCreate();
 				}
 			} catch (err) {
-				toastApiError(err?.data);
+				toastApiError(err);
 				setLoading(false);
 			}
 		}
@@ -108,7 +108,7 @@ const useCreateColletctionParty = ({
 					onCreate();
 				}
 			} catch (err) {
-				toastApiError(err?.data);
+				toastApiError(err);
 				setLoading(false);
 			}
 		}

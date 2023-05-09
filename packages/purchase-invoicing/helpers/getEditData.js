@@ -6,6 +6,7 @@ const getEditData = (editData) => {
 	(editData?.line_items || []).forEach((item) => {
 		codes[item.code] = {
 			...item,
+			actualname: item.name,
 		};
 	});
 
@@ -25,6 +26,7 @@ const getEditData = (editData) => {
 		codes,
 		id                       : editData?.finance_job_number,
 		billType                 : BILL_MAPPINGS[editData?.invoice_type],
+		irn_number               : editData?.irn_no,
 	};
 };
 

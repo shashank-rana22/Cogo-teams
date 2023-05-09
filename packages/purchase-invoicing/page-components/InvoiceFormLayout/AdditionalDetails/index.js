@@ -16,6 +16,7 @@ function AdditionalDetails({
 	shipment_data,
 	primary_service,
 	serviceProvider,
+	formValues,
 }) {
 	const { origin, destination } = getLocationConfig(primary_service);
 
@@ -57,7 +58,7 @@ function AdditionalDetails({
 							name="irn_number"
 							placeholder="IRN Number"
 							rules={{ required: true }}
-							value={purchaseInvoiceValues?.irn_number || purchaseInvoiceValues?.irn_no}
+							value={purchaseInvoiceValues?.irn_number}
 						/>
 						{errors?.irn_number && (
 							<div className={`${styles.errors}`}>
@@ -66,24 +67,26 @@ function AdditionalDetails({
 						)}
 					</div>
 				</div>
-				<div className={`${styles.selectcontainer}`}>
-					<div className={styles.label}>Ref Invoice No :</div>
-					<div>
-						<SelectController
-							control={control}
-							name="ref_invoice_no"
-							placeholder="Ref Invoice Number"
-							options={uploadedInvoices}
-							rules={{ required: true }}
-							value={purchaseInvoiceValues?.ref_invoice_no}
-						/>
-						{errors?.ref_invoice_no && (
-							<div className={`${styles.errors}`}>
-								Payment Mode is Required
-							</div>
-						)}
+				{formValues?.invoice_type === 'credit_note' && (
+					<div className={`${styles.selectcontainer}`}>
+						<div className={styles.label}>Ref Invoice No :</div>
+						<div>
+							<SelectController
+								control={control}
+								name="ref_invoice_no"
+								placeholder="Ref Invoice Number"
+								options={uploadedInvoices}
+								rules={{ required: true }}
+								value={purchaseInvoiceValues?.ref_invoice_no}
+							/>
+							{errors?.ref_invoice_no && (
+								<div className={`${styles.errors}`}>
+									Payment Mode is Required
+								</div>
+							)}
+						</div>
 					</div>
-				</div>
+				)}
 				<div className={`${styles.inputcontainer}`}>
 					<div className={styles.label}>Place of Supply :</div>
 					<div>

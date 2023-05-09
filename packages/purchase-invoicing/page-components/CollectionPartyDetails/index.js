@@ -256,7 +256,7 @@ function CollectionPartyDetails({ collectionParty, refetch, servicesData }) {
 								size="md"
 								onClick={() => {
 									if (!isEmpty(uploadInvoiceUrl)) {
-										setOpenComparision(true);
+										setOpenComparision({});
 										setOpen(false);
 									} else {
 										toastApiError('Invoice is Required');

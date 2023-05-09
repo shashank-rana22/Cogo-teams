@@ -89,7 +89,11 @@ function CollectionPartyDetails({
 		if (newCollectionParty) {
 			setValue('collection_party_address', collectionPartyAdd?.tax_number);
 			setValue('collection_party_bank_details', purchaseInvoiceValues?.collection_party_bank_details);
-			setCollectionParty({ ...newCollectionParty, collection_party_address: collectionPartyAdd?.tax_number });
+			setCollectionParty({
+				...newCollectionParty,
+				collection_party_address      : collectionPartyAdd?.tax_number,
+				collection_party_bank_details : purchaseInvoiceValues?.collection_party_bank_details,
+			});
 		}
 	};
 
@@ -154,91 +158,84 @@ function CollectionPartyDetails({
 						)}
 					</div>
 				)}
-				{!isEmpty(formValues?.collection_party) && (
-					<div className={`${styles.selectcontainer} ${styles.marginleft}`}>
-						<div className={styles.label}>Select Bank Details</div>
-						<SelectController
-							control={control}
-							name="collection_party_bank_details"
-							placeholder="Select Bank Details"
-							options={collectionPartyBankOptions}
-							renderLabel={(bank) => (
-								<div className={styles.flex}>
-									{bank?.data?.bank_name}
-									{' '}
-									/
-									{' '}
-									{bank?.data?.branch_name}
-									<div className={styles.verification_status}>
-										{startCase(bank.verification_status)}
+				<div className={`${styles.selectcontainer} ${styles.marginleft}`}>
+					{!isEmpty(collectionPartyBankOptions) && (
+						<div>
+							<div className={styles.label}>Select Bank Details</div>
+							<SelectController
+								control={control}
+								name="collection_party_bank_details"
+								placeholder="Select Bank Details"
+								options={collectionPartyBankOptions}
+								renderLabel={(bank) => (
+									<div className={styles.flex}>
+										{bank?.data?.bank_name}
+										{' '}
+										/
+										{' '}
+										{bank?.data?.branch_name}
+										<div className={styles.verification_status}>
+											{startCase(bank.verification_status)}
+										</div>
 									</div>
+								)}
+								rules={{ required: true }}
+								value={purchaseInvoiceValues?.collection_party_bank_details}
+							/>
+							{errors?.collection_party_bank_details && (
+								<div className={`${styles.errors}`}>
+									Collection Party Bank Details is Required
 								</div>
 							)}
-							rules={{ required: true }}
-							value={purchaseInvoiceValues?.collection_party_bank_details}
-						/>
-						{errors?.collection_party_bank_details && (
-							<div className={`${styles.errors}`}>
-								Collection Party Bank Details is Required
-							</div>
-						)}
+						</div>
+					)}
+					{!isEmpty(formValues?.collection_party) && (
 						<div
 							className={styles.link}
 							role="presentation"
 							onClick={() => { setShowBankForm(true); }}
 						>
-							{' '}
 							+ Add Bank Details
-
 						</div>
-					</div>
-				)}
+					)}
+				</div>
 				<div className={`${styles.marginTop} ${styles.circle}`}>
 					<IcMPlusInCircle height={20} width={20} onClick={() => { setShowCollectionParty(true); }} />
 				</div>
 			</div>
 			{collectionPartyBank && (
 				<div className={styles.address}>
-					<div className={`${styles.flex} ${styles.margintop}`}>
-						<span className={styles.key}>BankDetails</span>
+					<div className={styles.flex}>
+						<span className={styles.key}>BankDetails:</span>
 						<span className={styles.value}>
-							:
-							{' '}
 							{`${collectionPartyBank?.data?.bank_name || '-'}
 							/ ${collectionPartyBank?.data?.branch_name || '-'
 								}`}
 						</span>
-						<div className={styles.flex}>
-							<span className={styles.key}>AccountNumber</span>
-							<span className={styles.value}>
-								:
-								{collectionPartyBank?.data?.bank_account_number || '-'}
-							</span>
-						</div>
-						<div className={styles.flex}>
-							<span className={styles.key}>IFSC</span>
-							<span className={styles.value}>
-								:
-								{collectionPartyBank?.data?.ifsc_number || '-'}
-							</span>
-						</div>
 					</div>
-					<div className={`${styles.flex} ${styles.margintop}`}>
-						<div>
-							<span className={styles.key}>PAN Number</span>
-							<span className={styles.value}>
-								:
-								{collectionParty?.registration_number}
-							</span>
-						</div>
-						<div>
-							<span className={styles.key}>GST Number</span>
-							<span className={styles.value}>
-								:
-								{' '}
-								{collectionPartyAddress?.tax_number}
-							</span>
-						</div>
+					<div className={styles.flex}>
+						<span className={styles.key}>AccountNumber :</span>
+						<span className={styles.value}>
+							{collectionPartyBank?.data?.bank_account_number || '-'}
+						</span>
+					</div>
+					<div className={styles.flex}>
+						<span className={styles.key}>IFSC :</span>
+						<span className={styles.value}>
+							{collectionPartyBank?.data?.ifsc_number || '-'}
+						</span>
+					</div>
+					<div className={styles.flex}>
+						<span className={styles.key}>PAN Number :</span>
+						<span className={styles.value}>
+							{collectionParty?.registration_number}
+						</span>
+					</div>
+					<div className={styles.flex}>
+						<span className={styles.key}>GST Number :</span>
+						<span className={styles.value}>
+							{collectionPartyAddress?.tax_number}
+						</span>
 					</div>
 				</div>
 			)}
