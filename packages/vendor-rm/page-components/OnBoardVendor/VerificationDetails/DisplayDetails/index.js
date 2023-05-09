@@ -45,6 +45,10 @@ function DisplayDetails({
 
 	return (
 		<div className={styles.container}>
+			{Array(5).fill(1).map(() => (
+				<div>Hello</div>
+			))}
+
 			{Object.keys(component_mapping).map((title) => display({ title, body: vendorInformation[title] }))}
 		</div>
 	);

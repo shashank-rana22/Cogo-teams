@@ -2,6 +2,8 @@ module.exports = {
 	extends : ['@cogoport/eslint-config/next'],
 	rules   : {
 		'react/no-danger': 'off',
+		'react/jsx-key':'error'
+
 	},
 	ignorePatterns : ['cogo-control/dist/**/*', '!.stylelintrc.js'],
 	root           : true,

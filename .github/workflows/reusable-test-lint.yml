@@ -62,7 +62,7 @@ jobs:
       - name: Test ESLint
         env:
           file_name: ${{steps.modified-files.outputs.file_name}}
-        run: eslint $file_name
+        run: pnpm run eslint_file $file_name
 
       - name: Test Stylelint
         if: always()
