@@ -53,7 +53,7 @@ jobs:
       - name: Get modified files
         id: modified-files
         run: |
-          file_name=$(git diff origin/pre-release HEAD --name-only -- `find . -name '*.js'`| tr '\n' ' ')
+          file_name=$(git diff origin/pre-release HEAD --name-only| grep -E '\.js$' | tr '\n' ' ')
           echo "file_name=$file_name" >> "$GITHUB_OUTPUT"
           echo "$file_name"
           
