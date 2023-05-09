@@ -1,8 +1,8 @@
 import { Button, Modal } from '@cogoport/components';
-import ROLE_IDS from '@cogoport/constants/role_ids';
 import { SelectController } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsPartnerUsers } from '@cogoport/forms/utils/getAsyncFields';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { merge } from '@cogoport/utils';
 import React from 'react';
 
@@ -11,19 +11,20 @@ import useConvertAccountToCp from '../../../../../hooks/useConvertAccountToCp';
 
 import styles from './styles.module.css';
 
+const geo = getGeoConstants();
+
 function ConvertToCpModal({
 	showConvertModal,
 	setShowConvertModal,
 	organizationId,
 	refetchOrgDetails,
 }) {
-	const { COGOVERSE_KAM } = ROLE_IDS;
 	const listPartnerUsers = useGetAsyncOptions(
 		merge(asyncFieldsPartnerUsers(), {
 			params: {
 				filters: {
 					status               : 'active',
-					role_ids             : [COGOVERSE_KAM],
+					role_ids             : [geo.uuid.cogoverse_kam],
 					partner_entity_types : ['cogoport'],
 				},
 				rm_mappings_data_required : false,

@@ -1,4 +1,6 @@
-import PATTERNS from '@cogoport/constants/patterns';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+
+const geo = getGeoConstants();
 
 // eslint-disable-next-line
 import countries from '../../../.data-store/constants/countries.json';
@@ -42,7 +44,7 @@ const getControls = (fileType = '') => {
 			rules : {
 				required : `${fileType === 'pan' ? 'PAN' : 'GST'} Number is required`,
 				pattern  : {
-					value   : fileType === 'pan' ? PATTERNS.PAN_NUMBER : PATTERNS.GST_NUMBER,
+					value   : fileType === 'pan' ? geo.regex.PAN : geo.regex.GST,
 					message : `Enter a valid ${fileType === 'pan' ? 'PAN' : 'GST'} number`,
 				},
 			},

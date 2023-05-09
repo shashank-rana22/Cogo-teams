@@ -1,5 +1,7 @@
-import PATTERNS from '@cogoport/constants/patterns';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMCloudUpload } from '@cogoport/icons-react';
+
+const geo = getGeoConstants();
 
 const controls = [
 	{
@@ -100,7 +102,7 @@ const controls = [
 		placeholder : 'Enter GST',
 		rules       : {
 			pattern: {
-				value   : PATTERNS.GST_NUMBER,
+				value   : geo.regex.GST,
 				message : 'Enter a valid GST number',
 			},
 		},

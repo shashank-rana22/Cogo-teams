@@ -1,8 +1,10 @@
-import ROLE_IDS from '@cogoport/constants/role_ids';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 import useGetFiniteList from './useGetFiniteList';
+
+const geo = getGeoConstants();
 
 const useGetListRfqs = () => {
 	const { scope } = useSelector(({ general }) => ({ scope: general.scope }));
@@ -16,7 +18,9 @@ const useGetListRfqs = () => {
 	const { user_profile } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
-	const fullAccessIds = [ROLE_IDS.SUPERADMIN_ID, ROLE_IDS.ADMIN_ID];
+
+	const fullAccessIds = [geo.uuid.super_admin_id, geo.uuid.admin_id];
+
 	const isFullAccess = user_profile.partner.user_role_ids.filter((id) => fullAccessIds.includes(id)).length;
 
 	const listAPi = (restFilters, currentPage) => {
