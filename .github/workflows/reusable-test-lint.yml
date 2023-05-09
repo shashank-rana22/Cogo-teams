@@ -13,8 +13,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          ref: ${{ github.head_ref }}
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -54,12 +52,9 @@ jobs:
 
       - name: Get modified files
         run: |
-          git fetch origin pull/${{ github.event.pull_request.number }}/head
-          git diff --name-only --diff-filter=d ${{ github.event.pull_request.base.sha }}...FETCH_HEAD |
-          while read filename; do
-            echo "Modified file: $filename"
-            cat $filename
-          done
+          file_name=$(git diff origin/pre-release HEAD --name-only -- `find . -name '*.rb'`| tr '\n' ' ')
+          echo "file_name=$file_name" >> "$GITHUB_OUTPUT"
+          echo "$file_name"
           
       - name: Test ESLint
         run: pnpm run eslint
