@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-const useListInvoiceWrapper = ({ serial_id = '', registerationNumber = '' }) => {
+const useListInvoiceWrapper = ({ serial_id = '', registerationNumber = '', page = 1 }) => {
 	const [
 		{ data, loading },
 		trigger,
@@ -19,17 +19,19 @@ const useListInvoiceWrapper = ({ serial_id = '', registerationNumber = '' }) => 
 			try {
 				await trigger({
 					params: {
-						jobNumber               : serial_id,
+						jobNumber               : serial_id || undefined,
 						jobType                 : 'SHIPMENT',
 						jobSource               : 'LOGISTICS',
-						buyerRegistrationNumber : registerationNumber,
+						buyerRegistrationNumber : registerationNumber || undefined,
+						page,
+						pageLimit               : 10,
 					},
 				});
 			} catch (err) {
 				Toast.error(err?.message);
 			}
 		})();
-	}, [trigger, serial_id, registerationNumber]);
+	}, [trigger, serial_id, registerationNumber, page]);
 
 	useEffect(() => {
 		getInvoicesList();
