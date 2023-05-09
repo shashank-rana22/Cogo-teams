@@ -1,45 +1,90 @@
-.container {
-    background-color: orchid;
+.main {
+	position: relative;
+	width: 812px;
+	height: 1128px;
+	padding: 50px;
+	margin: auto;
+	background-color: #fff;
 }
 
-.flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.section {
+	position: relative;
+	width: 696px;
+	background-color: #fff;
+	page-break-after: auto;
+}
+
+.vessel_voyage {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	span {
+		margin-right: 4px;
+	}
 }
 
 .header {
-    border: 1px solid black;
-    text-align: center;
+	text-align: center;
+	border: 1px solid black;
 }
+
 .secondary_header {
-    display: flex;
-    justify-content: space-between;
-    border: 1px solid black;
-    padding: 4px;
+	display: flex;
+	justify-content: space-between;
+	padding: 4px;
+	border: 1px solid black;
 }
 
 .table_data {
-    font-size: 10px; 
-    font-weight: 400; 
-    text-align: center;
+	font-size: 10px;
+	font-weight: 400;
+	text-align: center;
+}
+
+.table_data_read {
+	height: 140px;
+	font-size: 10px;
+	font-weight: 400;
+	text-align: center;
+	border: 1px solid black;
 }
 
 .close_icon {
-    position: absolute;
-    bottom: 0;
-    right: -30px;
-    width: 24px;
-    height: 24px;
-    border: 1px solid black;
-    border-radius: 4px;
-    cursor: pointer;
-
+	position: absolute;
+	right: -30px;
+	bottom: 0;
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+	border: 1px solid black;
+	border-radius: 4px;
 }
 
 .button_wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    padding: 4px;
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	padding: 4px;
+}
+
+.table_wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border: 2px solid black;
+	border-top: none;
+
+	table {
+		width: 100%;
+		border-spacing: 0;
+		border-collapse: collapse;
+	}
+
+	th {
+		font-size: 10px;
+		font-weight: 700;
+		text-align: center;
+		border: 1px solid black;
+	}
 }

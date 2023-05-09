@@ -1,8 +1,7 @@
-import { useForm } from '@cogoport/forms';
 import React from 'react';
 
-import Read from './read';
-import Write from './write';
+import Read from './Read';
+import Write from './Write';
 
 function Frontside({
 	mode = 'read',
@@ -12,17 +11,16 @@ function Frontside({
 	initialValues = {},
 }) {
 	const isReadonly = mode === 'read';
-	// const { control } = useForm();
 
 	const osName = 'mac';
 	const getReadOnlyData = () => {
 		if (osName === 'windows') {
 			return (
-				<Read />
+				<Read defaultValues={initialValues} />
 			);
 		}
 		return (
-			<Read />
+			<Read defaultValues={initialValues} />
 		);
 	};
 

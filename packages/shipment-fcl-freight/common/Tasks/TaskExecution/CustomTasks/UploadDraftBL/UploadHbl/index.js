@@ -114,7 +114,7 @@ function UploadHbl(props) {
 						disabled={loading}
 						onClick={handleSubmit}
 					>
-						Submitf
+						Submit
 					</Button>
 				)}
 			</form>

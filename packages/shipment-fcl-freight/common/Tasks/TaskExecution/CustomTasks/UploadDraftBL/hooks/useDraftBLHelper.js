@@ -1,12 +1,14 @@
 import { ShipmentDetailContext } from '@cogoport/context';
-import { useRequest } from '@cogoport/request';
-import { useContext } from 'react';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
+import { useRequest, request } from '@cogoport/request';
+import { useContext, useState } from 'react';
 
 import useUpdateShipmentCogoid from '../../../../../../hooks/useUpdateShipmentCogoid';
 
 const useDraftBLHelper = ({
 	pendingTask = {},
 }) => {
+	const [createTradeDocLoading, setCreateTradeDocLoading] = useState();
 	const {
 		refetch: getShipmentRefetch,
 		shipment_data,
@@ -20,12 +22,8 @@ const useDraftBLHelper = ({
 		method : 'POST',
 	}, { manual: true });
 
-	const [{ loading: createTradeDocLoading }, tradeDocTrigger] = useRequest({
-		method : 'POST',
-		url    : '/create_shipment_trade_document',
-	}, { manual: true });
-
 	const createHBL = async ({ hblData }) => {
+		setCreateTradeDocLoading(true);
 		const promises = hblData.reduce((acc, data) => {
 			if (data) {
 				const body = {
@@ -43,15 +41,23 @@ const useDraftBLHelper = ({
 					uploaded_by_org_id: pendingTask?.organization_id,
 				};
 
-				acc.push(tradeDocTrigger({ data: body }));
+				const promise = request({
+					method : 'POST',
+					url    : '/create_shipment_trade_document',
+					data   : body,
+				});
+
+				acc.push(promise);
 			}
 			return acc;
 		}, []);
 
 		try {
 			await Promise.all(promises);
+			setCreateTradeDocLoading(false);
 		} catch (err) {
-			console.log(err);
+			toastApiError(err);
+			setCreateTradeDocLoading(false);
 		}
 	};
 
@@ -89,7 +95,7 @@ const useDraftBLHelper = ({
 
 				await submitShipmentMapping(rpaMappings);
 			} catch (err) {
-				console.log(err);
+				toastApiError(err);
 			}
 			getShipmentRefetch();
 		}

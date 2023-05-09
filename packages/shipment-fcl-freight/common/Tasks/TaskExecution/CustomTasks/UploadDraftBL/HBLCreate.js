@@ -16,10 +16,7 @@ function HBLCreate({
 	const [mode, setMode] = useState('write');
 	const ref = useRef();
 
-	const movement_details = primaryService?.movement_details
-		|| primaryService?.movement_detail
-		|| shipmentData?.movement_details
-		|| shipmentData?.movement_detail;
+	const movement_details = primaryService?.movement_details;
 
 	const templateInitialValues = {
 		port_of_loading   : primaryService?.origin_port?.display_name,
@@ -64,8 +61,8 @@ function HBLCreate({
 		<header className={styles.header_action}>
 			<p>Trade Document Template</p>
 			<div>
-				<Button onClick={handleSave} themeType="secondary">Save</Button>
-				<Button onClick={() => setShow(false)}>Close</Button>
+				<Button themeType="secondary" onClick={() => setShow(false)}>Close</Button>
+				{mode === 'write' && <Button onClick={handleSave}>Save</Button>}
 			</div>
 		</header>
 
@@ -81,6 +78,7 @@ function HBLCreate({
 					<Button
 						onClick={() => {
 							setShow(true);
+							setMode('read');
 						}}
 						size="sm"
 					>

@@ -1,34 +1,21 @@
-.main {
-	width: 812px; 
-	background-color: #fff; 
-	padding: 50px; 
-	margin: auto;
+.flex_box {
+	display: flex;
 }
 
-.flex_box{
-    display: flex;   
-}
-
-.styled_div  {
-	border: 1px #333 solid;
+.styled_div {
 	padding: 4px;
+	border: 1px #333 solid;
 }
 
-.block { 
-	border: 1px #333 solid;
+.block {
 	padding: 4px;
+	border: 1px #333 solid;
 }
 
 .styled_text {
-	font-family: monospace, monospace;
+	font-family: monospace;
 	font-size: 10px;
-	white-space: pre-wrap;
-	word-wrap: break-word;
 	line-height: 1;
-}
-
-.button_wrapper{
-	display: flex;
-	justify-content: flex-end;
-	margin-top: 8px;
+	word-wrap: break-word;
+	white-space: pre-wrap;
 }

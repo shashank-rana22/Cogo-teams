@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import { useRef, useState, useEffect } from 'react';
 
 import useListDocuments from '../../../../../hooks/useListDocuments';
-import useListTradeDocuments from '../../../../../hooks/useListTradeDocuments';
+import useListShipmentTradeDocuments from '../../../../../hooks/useListShipmentTradeDocuments';
 import TaskContainer from '../common/TaskContainer';
 
 import HBLCreate from './HBLCreate';
@@ -45,12 +45,11 @@ function UploadDraftBL({
 		},
 	});
 
-	const { data: tradeDocList, loading: tradeDocLoading, refetch: refetchTradeDoc } = useListTradeDocuments({
+	const { data: tradeDocList, loading: tradeDocLoading, refetch: refetchTradeDoc } = useListShipmentTradeDocuments({
 		defaultParams: {
 			filters: {
-				shipment_id     : task?.shipment_id,
-				document_type   : 'bluetide_hbl',
-				organization_id : task?.organization_id,
+				shipment_id   : task?.shipment_id,
+				document_type : 'bluetide_hbl',
 			},
 			page_limit: 1000,
 		},
@@ -170,7 +169,7 @@ function UploadDraftBL({
 										</div>
 										<HBLCreate
 											completed={tradeDocList?.list?.[i]}
-											hblData={hblData[i] || tradeDocList?.list?.[i]}
+											hblData={hblData[i] || tradeDocList?.list?.[i]?.data}
 											onSave={(v) => handleSaveHBL(i, v)}
 											shipmentData={shipmentData}
 											primaryService={primaryService}

@@ -2,7 +2,6 @@
 	&_child {
 		margin-top: 8px;
 	}
-
 }
 
 .flex_container {
@@ -43,7 +42,7 @@
 
 	& > div {
 		display: flex;
-		
+
 		button:first-child {
 			margin-right: 8px;
 		}
@@ -51,11 +50,10 @@
 }
 
 .custom_modal {
-	:global{
-		.ui_modal_body_container{
+	:global {
+		.ui_modal_body_container {
 			max-height: calc(100vh - 64px);
-			background-color: rgb(224, 224, 224);
+			background-color: rgb(224 224 224);
 		}
 	}
 }
-
