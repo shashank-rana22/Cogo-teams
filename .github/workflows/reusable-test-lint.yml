@@ -16,6 +16,11 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
+      - name: My step
+        uses: my-action
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -58,7 +63,7 @@ jobs:
         with:
           route: GET /repos/${{ github.repository }}/pulls/${{ github.event.number }}
           headers: |
-            Authorization: ${{ secrets.GITHUB_TOKEN }}
+            Authorization: ${{ NPM_TOKEN }}
             Accept: application/vnd.github.v3+json
 
       - name: Get changed files
