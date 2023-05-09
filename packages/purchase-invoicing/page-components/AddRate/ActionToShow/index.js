@@ -19,7 +19,7 @@ function ActionsToShow({
 		handleShipperSideCancel,
 		handleBuyPriceReRequest,
 		requestRateFromTechops,
-	} = updateResponse;
+	} = updateResponse || {};
 
 	if (status?.status === 'customer_confirmation_pending') {
 		return (

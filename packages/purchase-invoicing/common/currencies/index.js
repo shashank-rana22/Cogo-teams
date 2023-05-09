@@ -1,6 +1,8 @@
-/* eslint-disable import/no-unresolved */
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+
 import sort from './sortTabel';
 
+// eslint-disable-next-line import/no-unresolved
 import countries from '@/data-store/constants/countries.json';
 
 const previousCurriencies = [];
@@ -15,9 +17,17 @@ const optionsAll = [];
 		});
 	}
 });
-const prefferdCurrencies = ['INR', 'USD', 'GBP', 'EUR'];
+
+const prefferdCurrencies = [
+	GLOBAL_CONSTANTS.currency_code.INR,
+	GLOBAL_CONSTANTS.currency_code.USD,
+	GLOBAL_CONSTANTS.currency_code.EUR,
+	GLOBAL_CONSTANTS.currency_code.GBP,
+];
+
 const prefferedOptons = optionsAll.filter((option) => prefferdCurrencies.includes(option.key));
 const restOptionsList = optionsAll.filter((option) => !prefferdCurrencies.includes(option.key));
+
 const restOptions = sort(restOptionsList, { key: 'label' });
 const options = [...prefferedOptons, ...restOptions];
 export default options;

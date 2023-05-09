@@ -1,7 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useRequest, useRequestBf, useAllocationRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import useDebounceQuery from './useDebounceQuery';
 
@@ -35,7 +34,7 @@ function useGetAsyncOptionsMicroservice({
 
 	const optionValues = options.map((item) => item[valueKey]);
 
-	const [{ loading: loadingSingle }, triggerSingle] = useRequestMicroservice({
+	const [{ data: listData, loading: loadingSingle }, triggerSingle] = useRequestMicroservice({
 		url    : endpoint,
 		method : 'GET',
 		authkey,
@@ -46,11 +45,11 @@ function useGetAsyncOptionsMicroservice({
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(optionValues)]);
 
-	useEffect(() => {
+	useCallback(() => {
 		if (onOptionsChange) {
-			onOptionsChange(data?.list || []);
+			onOptionsChange(listData?.list || []);
 		}
-	}, [JSON.stringify(data?.list || [])]);
+	}, [listData?.list, onOptionsChange]);
 
 	const onSearch = (inputValue) => {
 		debounceQuery(inputValue);

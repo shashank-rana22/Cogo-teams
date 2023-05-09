@@ -1,29 +1,78 @@
 import { Button, Modal } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMUpload } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import AccordianView from '../../common/Accordianview';
 import ComparisionModal from '../../common/ComparisionModal';
 import getFormattedAmount from '../../common/helpers/formatAmount';
 import ServiceTables from '../../common/ServiceTable';
 import ToolTipWrapper from '../../common/ToolTipWrapper';
+import useGetTradeParty from '../../hooks/useGetTradeParty';
 import toastApiError from '../../utils/toastApiError';
 // import InvoicesInProcess from '../InvoicesInProcess';
 import InvoicesUploaded from '../InvoicesUploaded';
 
 import styles from './styles.module.css';
 
-function CollectionPartyDetails({ collectionParty, refetch }) {
+function CollectionPartyDetails({ collectionParty, refetch, servicesData }) {
 	const [uploadInvoiceUrl, setUploadInvoiceUrl] = useState('');
 	const [openComparision, setOpenComparision] = useState(false);
 	const [open, setOpen] = useState(false);
 	const [step, setStep] = useState(1);
 
+	const state = ['init', 'awaiting_service_provider_confirmation', 'completed'];
+
 	const services = (collectionParty?.services || []).map(
 		(service) => service?.service_type,
 	);
+	const {
+		user,
+	} = useSelector(({ profile }) => ({
+		user: profile,
+	}));
+
+	const geo = getGeoConstants();
+
+	const {
+		shipment_data,
+		// booking_note_details,
+	} = useContext(ShipmentDetailContext);
+
+	const serviceProviderConfirmation = (collectionParty.service_charges || []).find(
+		(item) => state.includes(item?.detail?.state),
+	);
+
+	const airServiceProviderConfirmation = shipment_data?.shipment_type === 'air_freight'
+		&& serviceProviderConfirmation;
+
+	// let isBookingNoteUploaded = true;
+	// if (shipment_data?.shipment_type === 'fcl_freight') {
+	// 	isBookingNoteUploaded = booking_note_details?.length;
+	// }
+
+	const AJEET_EMAIL_ID = 'ajeet@cogoport.com';
+
+	const uploadInvoiceAllowed = shipment_data?.stakeholder_types?.some((ele) => [
+		'superadmin',
+		'service_ops2',
+		'invoice executive',
+		'cost booking executive',
+		'costbooking_ops',
+		'cost booking manager',
+	].includes(ele))
+		|| [
+			geo.uuid.super_admin_id,
+			geo.uuid.admin_id,
+			geo.uuid.coe_finance_head,
+			geo.uuid.prod_process_owner,
+		].some((ele) => user?.partner.user_role_ids?.includes(ele));
+
+	const showUpload = uploadInvoiceAllowed || shipment_data?.source === 'spot_line_booking';
 
 	const serviceswrapper = (allservices) => (
 		<>
@@ -42,6 +91,41 @@ function CollectionPartyDetails({ collectionParty, refetch }) {
 		setStep(1);
 		setOpenComparision(false);
 	};
+
+	let disableInvoice = false;
+	let errorMsg = '';
+	const shipment_type = shipment_data?.shipment_type;
+
+	const { tdata } = useGetTradeParty({
+		shipment_id: shipment_data?.id || '',
+		shipment_data,
+	});
+
+	const servicesList = [];
+	(servicesData || []).forEach((element) => {
+		if (element?.is_active === true) {
+			servicesList.push(element);
+		}
+	});
+
+	if (shipment_type === 'ftl_freight') {
+		disableInvoice = !shipment_data?.all_services?.some(
+			(item) => item?.service_type === 'ftl_freight_service'
+				&& (item?.lr_numbers || []).length > 0,
+		);
+		errorMsg = 'LR task not completed';
+
+		if (
+			tdata?.list?.length === 0
+			&& geo.uuid.fortigo_network_ids.includes(shipment_data?.importer_exporter_id)
+		) {
+			disableInvoice = true;
+			errorMsg = 'Shipper not added';
+		}
+	}
+
+	const isJobClosed = shipment_data?.is_job_closed;
+
 	const titleCard = (
 		<div className={styles.container_title}>
 			<div className={styles.customer}>
@@ -114,14 +198,19 @@ function CollectionPartyDetails({ collectionParty, refetch }) {
 				{/* <InvoicesInProcess invoicesdata={collectionParty?.existing_collection_parties} /> */}
 				<span className={styles.headings}>Live Invoice</span>
 				<div className={styles.buttoncontailner}>
-					<Button
-						size="md"
-						themeType="secondary"
-						style={{ marginRight: '16px' }}
-						onClick={() => { setOpen(true); }}
-					>
-						Upload Invoice
-					</Button>
+					{(showUpload || user?.email === AJEET_EMAIL_ID) && !airServiceProviderConfirmation ? (
+						<Button
+							size="md"
+							themeType="secondary"
+							style={{ marginRight: '16px' }}
+							onClick={() => { setOpen(true); }}
+						>
+							{isJobClosed ? 'Upload Credit Note' : 'Upload Invoice'}
+						</Button>
+					) : null}
+					{disableInvoice ? (
+						<div className="upload-tooltip">{errorMsg}</div>
+					) : null}
 					<Button size="md" themeType="secondary">Add Incidental Charges</Button>
 				</div>
 				<ServiceTables service_charges={collectionParty?.service_charges} />

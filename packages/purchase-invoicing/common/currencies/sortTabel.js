@@ -10,7 +10,7 @@ const sortTable = (data, field) => {
 		return null;
 	};
 
-	if (data.length > 1) {
+	if (data?.length > 1) {
 		const sortedData = data.sort((a, b) => {
 			if (typeOfLabel(a) === 'string' && typeOfLabel(b) === 'string') {
 				return a[labelKey].localeCompare(b[labelKey]);

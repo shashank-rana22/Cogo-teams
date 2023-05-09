@@ -1,8 +1,8 @@
-import options from '@cogoport/constants/currencies';
 import { AsyncSelectController, InputController, SelectController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
+import options from '../common/currencies';
 import { UNIT_OPTIONS } from '../constants';
 
 import styles from './styles.module.css';

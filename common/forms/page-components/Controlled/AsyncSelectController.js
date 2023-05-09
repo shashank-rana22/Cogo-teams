@@ -26,7 +26,7 @@ function AsyncSelectController(props) {
 							onChange(val, obj);
 						}
 					}}
-					value={rest?.value || newValue}
+					value={newValue}
 				/>
 			)}
 		/>

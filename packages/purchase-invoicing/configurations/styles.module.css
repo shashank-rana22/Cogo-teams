@@ -10,7 +10,7 @@
 }
 
 .value {
-	font-size: 12;
+	font-size: var(--font-size-sm);
 	font-weight: 600;
 }
 

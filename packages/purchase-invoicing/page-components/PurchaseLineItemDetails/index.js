@@ -74,7 +74,7 @@ function PurchaseLineItemDetails({ billingPartyObj = {}, collectionPartyObj, edi
 							<span className={styles.value}>{collectionPartyDetails?.tax_number || '-'}</span>
 						</div>
 						{collectionPartyDetails?.bankStatus === 'pending' ? (
-							<div style={{ color: '#CB6464', fontWeight: 600 }}>
+							<div className={styles.pending}>
 								Bank Details verification approval pending
 							</div>
 						) : null}

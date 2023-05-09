@@ -120,7 +120,7 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 							<Tasks />
 						</TabPanel>
 						<TabPanel name="purchase_live_invoice" title="Purchase Live Invoice">
-							<PurchaseInvoicing shipmentData={shipment_data} />
+							<PurchaseInvoicing shipmentData={shipment_data} servicesData={servicesGet?.servicesList} />
 						</TabPanel>
 
 						<TabPanel name="documents" title="Documents">

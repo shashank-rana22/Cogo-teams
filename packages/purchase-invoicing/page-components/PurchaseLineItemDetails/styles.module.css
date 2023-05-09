@@ -41,3 +41,8 @@
 .wrap {
 	flex-wrap: wrap;
 }
+
+.pending {
+	font-weight: 600;
+	color: #cb6464;
+}

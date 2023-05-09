@@ -1,10 +1,10 @@
 import { Button } from '@cogoport/components';
-import options from '@cogoport/constants/currencies';
 import { DatepickerController, InputController, useFieldArray, SelectController } from '@cogoport/forms';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
 
+import options from '../../../common/currencies';
 import { EMPTY_EXCHANGE_RATES } from '../../../constants';
 
 import styles from './styles.module.css';

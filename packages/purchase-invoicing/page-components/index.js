@@ -7,7 +7,7 @@ import AdditionalServiceList from './AdditionalServiceList';
 import CollectionPartyDetails from './CollectionPartyDetails';
 import Loader from './CollectionPartyDetails/Loader';
 
-function PurchaseInvoicing({ shipmentData }) {
+function PurchaseInvoicing({ shipmentData, servicesData }) {
 	const {
 		collectionPartyList, collectionPartyLoading,
 		refetch,
@@ -26,6 +26,7 @@ function PurchaseInvoicing({ shipmentData }) {
 							shipmentData={shipmentData}
 							collectionParty={collectionParty}
 							refetch={refetch}
+							servicesData={servicesData}
 						/>
 					))}
 				</>
