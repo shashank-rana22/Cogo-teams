@@ -29,9 +29,8 @@ const useCheckCustomerQuotationConflict = ({ orgId = '' }) => {
 	}, [checkDuplicacy, orgId]);
 
 	return {
-		quotationSentData: data,
-		loading,
-		checkDuplicacy,
+		quotationSentData : data,
+		quotationLoading  : loading,
 	};
 };
 

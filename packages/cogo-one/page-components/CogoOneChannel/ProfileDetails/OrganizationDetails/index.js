@@ -1,12 +1,9 @@
 import { Button, Pill, Placeholder, Loader } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 import { ACCOUNT_TYPE } from '../../../../constants';
-import useCheckCustomerCheckoutQuotationConflict from '../../../../hooks/useCheckCustomerCheckoutQuotationConflict';
 import useGetListPromotions from '../../../../hooks/useGetListPromocode';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
 import useGetOrganizationCogopoints from '../../../../hooks/useGetOrganizationCogopoints';
@@ -14,6 +11,7 @@ import useGetOrganizationCogopoints from '../../../../hooks/useGetOrganizationCo
 import ConvertToCpModal from './ConvertToCpModal';
 import OrgAgentDetails from './OrgAgentDetails';
 import PromocodeThumbnail from './PromocodeThumbnail';
+import QuotationDetails from './QuotationDetails';
 import styles from './styles.module.css';
 
 function OrganizationDetails({
@@ -39,14 +37,7 @@ function OrganizationDetails({
 	} = useGetOrganizationCogopoints({ organizationId });
 
 	const { promoData = {}, promoLoading } = useGetListPromotions({ organizationId });
-	const { quotationSentData = {} } = useCheckCustomerCheckoutQuotationConflict({ orgId: organizationId });
 
-	const { quotation_email_sent_at = '', quotation_email_sent_by_name = '' } = quotationSentData || {};
-	const quotation_date = quotation_email_sent_at && formatDate({
-		date       : quotation_email_sent_at || new Date(),
-		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
-		formatType : 'date',
-	});
 	const { list = [] } = promoData || {};
 	const { agent = {}, account_type, kyc_status, serial_id, short_name, city, tags = [] } = organizationData || {};
 	const { display_name } = city || {};
@@ -211,23 +202,9 @@ function OrganizationDetails({
 			) : (
 				<ListPromos />
 			)}
-			{quotation_email_sent_by_name && (
-				<div className={styles.quotation_details}>
-					<div className={styles.agent_title}>
-						Quotation details
-					</div>
-					<div className={styles.quotation}>
-						<div>
-							Sent by:
-							<span>{quotation_email_sent_by_name}</span>
-						</div>
-						<div>
-							Sent at:
-							<span>{quotation_date}</span>
-						</div>
-					</div>
-				</div>
-			)}
+			<div>
+				<QuotationDetails organizationId={organizationId} />
+			</div>
 		</div>
 	);
 }

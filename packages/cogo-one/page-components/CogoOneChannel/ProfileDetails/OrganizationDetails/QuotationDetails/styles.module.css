@@ -1,0 +1,22 @@
+.quotation {
+	padding: 8px 30px 8px 30px;
+	margin-top: 12px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+	font-size: 12px;
+	width: 100%;
+	font-weight: 600;
+
+	span {
+		font-weight: normal;
+		margin-left: 8px;
+	}
+}
+
+.agent_title {
+	margin-top: 20px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #221f20;
+}
