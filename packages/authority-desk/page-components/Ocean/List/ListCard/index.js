@@ -26,9 +26,17 @@ function ListCard({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.status}>
+
+			<div className={styles.top_bar}>
+				<div className={styles[item?.trade_type]}>
+					{startCase(item?.trade_type)}
+				</div>
+
+				<div className={styles.status}>
 					&nbsp; Status: &nbsp;
-				{startCase(freight_service?.state)}
+					{startCase(freight_service?.state)}
+				</div>
+
 			</div>
 
 			<div className={styles.detail_container}>

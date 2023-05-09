@@ -158,6 +158,8 @@ export const renderValue = (label, detail) => {
 			return startCase(detail.destination_cargo_handling_type || '');
 		case 'origin_cargo_handling_type':
 			return startCase(detail.origin_cargo_handling_type || '');
+		case 'cargo_handling_type':
+			return startCase(detail.cargo_handling_type || '');
 		case 'container_status':
 			return startCase(detail.container_status || '');
 		case 'source':
