@@ -2,7 +2,7 @@ import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { Tracking } from '@cogoport/ocean-modules';
-import SalesInvoice from '../../SalesInvoice';
+import SalesInvoice from '../../../common/SalesInvoice';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';

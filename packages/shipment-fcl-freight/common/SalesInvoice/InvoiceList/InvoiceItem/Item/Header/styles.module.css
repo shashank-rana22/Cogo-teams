@@ -1,11 +1,11 @@
-.Container{
+.container{
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
 	width: 100%;
 }
 
-.InvoicePartyDetails{
+.invoice_party_details{
 	border-right: 1px solid #F68B21;
 	width: 18%;
 	height: 100%;
@@ -16,12 +16,12 @@
 	}
 }
 
-.Gst{
+.gst{
 	display: flex;
 	align-items: center;
 }
 
-.GstNumber{
+.gst_number{
 	font-weight: 400;
 	font-size: 10px;
 	line-height: 16px;
@@ -36,7 +36,7 @@
 	}
 }
 
-.Label{
+.label{
 	font-weight: 500;
 	font-size: 10px;
 	line-height: 16px;
@@ -49,7 +49,7 @@
 	}
 }
 
-.InvoicePartyName{
+.invoice_party_name{
 	font-weight: 500;
 	font-size: 11px;
 	line-height: 12px;
@@ -61,7 +61,7 @@
 	}
 }
 
-.InvoiceValueContainer{
+.invoice_value_container{
 	display: flex;
 	align-items: center;
 	font-size: 16px;
@@ -71,7 +71,7 @@
 	text-transform: capitalize;
 }
 
-.InvoiceValueTitle{
+.invoice_value_title{
 	color: #333333;
 
 	@media (max-width: 768px) {
@@ -80,7 +80,7 @@
 	}
 }
 
-.InvoiceValue{
+.invoice_value{
 	color: #F68B21;
 	margin-left: 4px;
 
@@ -89,7 +89,7 @@
 	}
 }
 
-.InvoiceInfo{
+.invoice_info{
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -102,7 +102,7 @@
 	margin: 0 30px;
 }
 
-.SoNumber{
+.so_number{
 	font-weight: 500;
 	font-size: 12px;
 	color: #000000;
@@ -113,7 +113,7 @@
 	}
 }
 
-.SoContainer{
+.so_container{
 	width: 33%;
 
 	.core-ui-button-root {
@@ -136,7 +136,7 @@
 	}
 }
 
-.PaymentMethod{
+.payment_method{
 	font-size: 12px;
 	text-transform: capitalize;
 	color: #333333;
@@ -152,7 +152,7 @@
 	}
 }
 
-.IconWrapper{
+.icon_wrapper{
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -168,7 +168,7 @@
 	}
 }
 
-.FlexRow{
+.flex_row{
 	display: flex;
 	align-items: center;
 	width: 100%;
@@ -185,7 +185,7 @@
 	}
 }
 
-.InfoContainer{
+.info_container{
 	font-weight: 400;
 	font-size: 10px;
 	line-height: 16px;
@@ -198,7 +198,7 @@
 	width: fit-content;
 }
 
-.InvoiceContainer{
+.invoice_container{
 	width: 26%;
 
 	@media (max-width: 768px) {
@@ -206,7 +206,7 @@
 	}
 }
 
-.FlexContainer{
+.flex_container{
 	display: flex;
 	align-items: center;
 	width: 100%;
@@ -214,7 +214,7 @@
 	justify-content: space-between;
 }
 
-.InvoiceSource{
+.invoice_source{
 	background-color: #fef6df;
 	padding: 2px 16px;
 	width: fit-content;
@@ -223,7 +223,7 @@
 	margin-right: 6px;
 }
 
-.PaymentModeStatus{
+.payment_mode_status{
 	display: flex;
 	align-items: center;
 	flex-direction: column;
@@ -237,12 +237,12 @@
 	}
 }
 
-.StatusStyle{
+.status_style{
 	cursor: pointer;
 	text-decoration: underline;
 }
 
-.StatusContainer{
+.status_container{
 	font-size: 10px;
 	color: #333333;
 	margin-top: 2px;

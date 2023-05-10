@@ -1,4 +1,4 @@
-.Container{
+.Ccntainer{
 	background: #fff;
 	margin-bottom: 22px;
 	padding-top: 20px;
@@ -36,7 +36,7 @@
 	}
 }
 
-.TotalContainer{
+.total_container{
 	font-weight: 600;
 	font-size: 14px;
 	line-height: 16px;
@@ -49,7 +49,7 @@
 	border-radius: 0 0 4px 4px;
 }
 
-.TotalAmount{
+.total_amount{
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 16px;
@@ -57,7 +57,7 @@
 	margin-left: 16px;
 }
 
-.Totals{
+.totals{
 	display: flex;
 	justify-content: flex-end;
 	color: #4f4f4f;
@@ -74,7 +74,7 @@
 	}
 }
 
-.TotalTax{
+.total_tax{
 	margin-left: 16px;
 	min-width: 12%;
 
@@ -83,7 +83,7 @@
 	}
 }
 
-.BilledText{
+.billed_text{
 	margin: 0;
 	padding-right: 24px;
 	font-weight: 400;

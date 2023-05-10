@@ -1,5 +1,5 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import CardList from '../../../../../../common/CardList';
+import CardList from '../../../../../CardList';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -29,7 +29,7 @@ function InvoiceServiceWise({ item = {}, loading = false }) {
 		: null;
 
 	return (
-		<div className={styles.Container}>
+		<div className={styles.container}>
 			<CardList
 				loading={loading}
 				fields={tableColumn(item)}
@@ -37,7 +37,7 @@ function InvoiceServiceWise({ item = {}, loading = false }) {
 				detail={detail}
 			/>
 
-			<div className={styles.Totals}>
+			<div className={styles.totals}>
 				<div style={{ minWidth: '12%' }}>
 					Total Tax:
 					{' '}
@@ -52,7 +52,7 @@ function InvoiceServiceWise({ item = {}, loading = false }) {
 					})}
 				</div>
 
-				<div className={styles.TotalTax}>
+				<div className={styles.total_tax}>
 					Total w/o Tax:
 					{' '}
 					{formatAmount({
@@ -67,10 +67,10 @@ function InvoiceServiceWise({ item = {}, loading = false }) {
 				</div>
 			</div>
 
-			<div className={styles.TotalContainer}>
-				<div className={styles.BilledText}>{renderBilledText}</div>
+			<div className={styles.total_container}>
+				<div className={styles.billed_text}>{renderBilledText}</div>
 				Total Amount After Tax :
-				<div className={styles.TotalAmount}>
+				<div className={styles.total_amount}>
 					{formatAmount({
 						amount   : service_total_discounted,
 						currency : service_total_currency,

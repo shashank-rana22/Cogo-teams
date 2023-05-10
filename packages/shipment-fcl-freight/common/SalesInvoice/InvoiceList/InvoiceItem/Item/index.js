@@ -27,7 +27,7 @@ function ItemHeader({
 				salesInvoicesRefetch={salesInvoicesRefetch}
 				refetchCN={refetchCN}
 			>
-				<div className={styles.invoiceInfo}>
+				<div className={styles.invoice_info}>
 					{/* {(invoice?.services || []).map((item) => ( */}
 					<InvoiceServiceWise
 						// item={item}
