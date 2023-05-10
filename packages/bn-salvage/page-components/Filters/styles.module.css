@@ -1,0 +1,18 @@
+.filters_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.primary_filters {
+    display: flex;
+
+    :global {
+        .ui_select_options_container {
+            z-index: 3;
+        }
+    }
+
+    > div {
+        margin-right: 10px;
+    }
+}

@@ -1,10 +1,16 @@
 [
     {
         "name": "active_booking_notes",
-        "title": "Active Booking Notes"
+        "title": "Active Booking Notes",
+        "filters": {
+            "status": "active"
+        }
     },
     {
         "name": "cancelled_booking_notes",
-        "title": "Expired Booking Notes"
+        "title": "Expired Booking Notes",
+        "filters": {
+            "status": "inactive"
+        }
     }
 ]

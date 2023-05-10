@@ -6,7 +6,10 @@
   "main": "index.js",
   "dependencies": {
     "@cogoport/components": "^1.0.413",
+    "@cogoport/forms": "workspace:^0.1.0",
+    "@cogoport/icons-react": "^1.0.70",
     "@cogoport/request": "workspace:^0.1.0",
-    "@cogoport/utils": "^1.2.10"
+    "@cogoport/utils": "^1.2.10",
+    "react": "18.2.0"
   }
 }

@@ -1,0 +1,46 @@
+[
+    {
+        "name": "origin_location",
+        "placeholder": "Origin Location",
+        "type": "async-select",
+        "size": "sm",
+        "asyncKey": "list_locations",
+        "params": {
+            "filters": {
+                "type": [
+                    "seaport",
+                    "country"
+                ]
+            }
+        }
+    },
+    {
+        "name": "desitination_location",
+        "placeholder": "Destination Location",
+        "type": "async-select",
+        "size": "sm",
+        "asyncKey": "list_locations",
+        "params": {
+            "filters": {
+                "type": [
+                    "seaport",
+                    "country"
+                ]
+            }
+        }
+    },
+    {
+        "name": "container_type",
+        "placeholder": "Container Type",
+        "type": "async-select",
+        "size": "sm",
+        "asyncKey": "container-types"
+    },
+    {
+        "name": "shipping_line",
+        "placeholder": "Shipping Line",
+        "type": "async-select",
+        "size": "sm",
+        "asyncKey": "shipping_lines"
+    }
+]

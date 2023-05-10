@@ -1131,7 +1131,7 @@ const navigationMappingAdmin = {
 				href          : '/bn-salvage',
 				as            : '/bn-salvage',
 				type          : 'link',
-				main_apis     : ['list_shipments'],
+				main_apis     : ['list_booking_documents'],
 				possible_apis : apis.bn_salvage,
 			},
 			{

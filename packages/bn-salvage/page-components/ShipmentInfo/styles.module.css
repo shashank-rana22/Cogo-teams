@@ -1,0 +1,10 @@
+.container {
+    padding: 20px;
+    display: flex;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+}
+
+.port_info {
+    width: 25%;
+}

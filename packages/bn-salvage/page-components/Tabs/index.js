@@ -1,11 +1,14 @@
 import { Tabs as TabContainer, TabPanel } from '@cogoport/components';
 
-import tabs from '../../config/tabs.json';
+import TABS from '../../config/tabs.json';
 
-export default function Tabs({ activeTab, setActiveTab }) {
+import styles from './style.module.css';
+
+export default function Tabs({ activeTab, setActiveTab, setFilters }) {
 	const onTabChange = (newTab) => {
 		if (newTab !== activeTab) {
 			setActiveTab(newTab);
+			setFilters((p) => ({ ...p, page: 1 }));
 		}
 	};
 
@@ -14,14 +17,15 @@ export default function Tabs({ activeTab, setActiveTab }) {
 			themeType="primary"
 			activeTab={activeTab}
 			onChange={onTabChange}
+			fullWidth
+			className={styles.customized_tabs}
 		>
-			{tabs.map((tab) => (
+			{TABS.map((tab) => (
 				<TabPanel
 					key={tab.name}
 					name={tab.name}
-				>
-					{tab.title}
-				</TabPanel>
+					title={tab.title}
+				/>
 			))}
 		</TabContainer>
 	);
