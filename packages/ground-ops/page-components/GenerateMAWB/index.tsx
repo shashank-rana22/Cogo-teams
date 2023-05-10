@@ -74,10 +74,14 @@ function GenerateMAWB({
 		{ id: uuid(), documentNo: null, isNew: true },
 	]);
 
+	console.log('hawbDetails', hawbDetails);
+
 	const [activeHawb, setActiveHawb] = useState(hawbDetails[0]);
 	const [activeKey, setActiveKey] = useState('basic');
 
-	const editHawbNumberCondition = !activeHawb.isNew;
+	const [customHawbNumber, setCustomHawbNumber] = useState(false);
+
+	const editHawbNumberCondition = !customHawbNumber;
 
 	const fields = mawbControls(disableClass, editHawbNumberCondition);
 
@@ -148,6 +152,16 @@ function GenerateMAWB({
 		}
 	}, [activeHawb, activeCategory]);
 
+	// useEffect(() => {
+	// 	if (!customHawbNumber && activeHawb.isNew && !activeHawb.documentNo) {
+	// 		setHawbDetails(
+	// 			hawbDetails.map((hawbItem) => (hawbItem.id === activeHawb.id
+	// 				? { ...hawbItem, documentNo: `COGO-${taskItem.serialId}${hawbDetails.length + 1}` }
+	// 				: hawbItem)),
+	// 		);
+	// 	}
+	// }, [activeHawb]);
+
 	useEffect(() => {
 		if (category === 'mawb') {
 			return;
@@ -171,6 +185,7 @@ function GenerateMAWB({
 				setValue(c.name, taskItem[c.name] || '');
 			}
 		});
+
 		setValue('executedDate', taskItem.executedDate ? new Date(taskItem.executedDate) : new Date());
 		setValue('iataCode', iataCodeMapping[taskItem?.originAirportId] || '');
 		setValue('city', taskItem?.city || 'NEW DELHI');
@@ -189,6 +204,28 @@ function GenerateMAWB({
 		setValue('amountOfInsurance', 'NIL');
 		setValue('accountingInformation', 'FREIGHT PREPAID');
 	}, [hawbSuccess, activeHawb, category, activeCategory]);
+
+	useEffect(() => {
+		if (!customHawbNumber && activeHawb.isNew) {
+			setValue('document_number', activeHawb.documentNo);
+			setHawbDetails(
+				hawbDetails.map((hawbItem) => (hawbItem.id === activeHawb.id
+					? {
+						...hawbItem,
+						documentNo: activeHawb.documentNo ? activeHawb.documentNo
+							: `COGO-${taskItem.serialId}${hawbDetails.length + 1}`,
+					}
+					: hawbItem)),
+			);
+		} else if (customHawbNumber && activeHawb.isNew) {
+			setValue('document_number', '');
+			setHawbDetails(
+				hawbDetails.map((hawbItem) => (hawbItem.id === activeHawb.id
+					? { ...hawbItem, documentNo: null }
+					: hawbItem)),
+			);
+		}
+	}, [activeHawb, customHawbNumber]);
 
 	useEffect(() => {
 		setChargeableWeight(formValues.chargeableWeight);
@@ -344,6 +381,8 @@ function GenerateMAWB({
 						setActiveKey={setActiveKey}
 						taskItem={taskItem}
 						formValues={formValues}
+						customHawbNumber={customHawbNumber}
+						setCustomHawbNumber={setCustomHawbNumber}
 					/>
 				</>
 			)}

@@ -1,4 +1,4 @@
-import { Button, Stepper, RadioGroup, Toast } from '@cogoport/components';
+import { Button, Stepper, RadioGroup, Toast, Toggle, Badge } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
@@ -8,6 +8,7 @@ import useCreateShipmentDocument from '../GenerateMawbDoc/useCreateShipmentDocum
 import UploadMAWB from '../UploadMAWB';
 
 import ConfirmModal from './ConfirmModal';
+import RadioToggle from './RadioToggle';
 import styles from './styles.module.css';
 
 const items = [
@@ -25,6 +26,7 @@ function FormContainer({
 	back, setBack, edit, setEdit, packingData, fields,
 	control, errors, setValue, item, setGenerate, handleSubmit, category, activeCategory, hawbDetails,
 	setHawbDetails, activeHawb, setActiveHawb, activeKey, setActiveKey, taskItem, formValues,
+	customHawbNumber, setCustomHawbNumber,
 }) {
 	const [value, onChange] = useState('manual');
 	const [confirmDelete, setConfirmDelete] = useState(false);
@@ -129,13 +131,19 @@ function FormContainer({
 									&& `HAWB - ${hawbItem.id}`}
 									{' '}
 									{hawbItem?.documentNo}
+									{' '}
+									{hawbItem.isNew && <Badge color="#ee3425" size="md" text="NOT SAVED" />}
 								</div>
 							</div>
 						))}
 
 						<Button
 							onClick={() => {
-								setHawbDetails((prev) => ([...prev, { id: uuid(), documentNo: null, isNew: true }]));
+								setHawbDetails((prev) => ([...prev, {
+									id         : uuid(),
+									documentNo : `COGO-${taskItem.serialId}${hawbDetails.length + 1}`,
+									isNew      : true,
+								}]));
 							}}
 							themeType="secondary"
 						>
@@ -211,11 +219,28 @@ function FormContainer({
 					{activeKey === 'basic' && (
 						<>
 							{activeCategory === 'hawb' && (
-								<Layout
-									fields={fields?.hawb_controls}
-									errors={errors}
-									control={control}
-								/>
+								<>
+									{/* <RadioToggle
+										onLabel="COGO Generated Series"
+										value1="cogo"
+										offLabel="Custom Generated Series"
+										value2="custom"
+										value="cogo"
+									/> */}
+									<Toggle
+										size="sm"
+										disabled={!activeHawb.isNew}
+										onLabel="Custom Series"
+										offLabel="COGO Series"
+										style={{ position: 'relative', left: '22%', top: '62px', width: 'fit-content' }}
+										onChange={() => setCustomHawbNumber((p) => !p)}
+									/>
+									<Layout
+										fields={fields?.hawb_controls}
+										errors={errors}
+										control={control}
+									/>
+								</>
 							)}
 							<Layout fields={fields?.basic} control={control} errors={errors} />
 							<div className={styles.button_container}>
