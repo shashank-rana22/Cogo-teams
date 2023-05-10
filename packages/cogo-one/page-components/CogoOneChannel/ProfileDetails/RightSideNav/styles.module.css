@@ -53,10 +53,10 @@
 
 .quotation {
 	position: absolute;
+	top: 1px;
+	right: 5px;
 	width: 12px;
 	height: 12px;
-	right: 5px;
-	top:1px;
-	background: #FDE74D;
+	background: #fde74d;
 	border-radius: 50%;
 }
