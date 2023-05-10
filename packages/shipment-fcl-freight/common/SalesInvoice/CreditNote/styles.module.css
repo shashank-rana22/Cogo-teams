@@ -1,0 +1,27 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	margin: 24px;
+	background: #F3FAFA;
+	border: 1px solid #88CAD1;
+	border-radius: 8px;
+}
+
+.invoice-party_details{
+	display: flex;
+	flex-direction: row;
+	margin-left: 8px;
+	color: #333333;
+	line-height: 20px;
+}
+
+.invoicing_party_name{
+	font-weight: 500;
+	font-size: 18px;
+	margin-right: 10px;
+
+	@media (max-width: 768px) {
+		font-size: 16px;
+	}
+}

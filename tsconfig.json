@@ -26,7 +26,7 @@
     "**/*.tsx",
     "**/*.js",
     ".eslintrc.js"
-, "packages/shipment-fcl-freight/common/SalesInvoice/InvoiceList/InvoiceItem/Item/Header/OTPVerificationModal/UserInfo/styles.module.csss", "packages/shipment-fcl-freight/common/SalesInvoice/InvoiceList/InvoiceItem/Item/Header/CNNullify/styles.modulecss"  ],
+, "packages/shipment-fcl-freight/common/SalesInvoice/Invoices/InvoiceItem/Item/Header/OTPVerificationModal/UserInfo/styles.module.csss", "packages/shipment-fcl-freight/common/SalesInvoice/Invoices/InvoiceItem/Item/Header/CNNullify/styles.modulecss"  ],
   "exclude": [
     "node_modules"
   ],

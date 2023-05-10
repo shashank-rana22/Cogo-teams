@@ -2,6 +2,8 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { isEmpty } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
+import CreditNote from '../CreditNote';
+
 import Header from './Header';
 import InvoiceItem from './InvoiceItem';
 import styles from './styles.module.css';
@@ -53,7 +55,7 @@ function Invoices({
 	// const { loadingCreditNotes, data, refetchCN } = useListCreditNotes(id);
 
 	return (
-		<div className={styles.container}>
+		<main className={styles.container}>
 			<Header
 				invoiceData={invoiceData}
 				isCustomer={isCustomer}
@@ -63,7 +65,7 @@ function Invoices({
 			/>
 			<div className={styles.line} />
 
-			<div>
+			<section>
 				{/* {Object.keys(groupedInvoices || {}).map((item) => ( */}
 				<InvoiceItem
 					// item={groupedInvoices[item]}
@@ -78,8 +80,10 @@ function Invoices({
 					salesInvoicesRefetch={salesInvoicesRefetch}
 				/>
 				{/* ))} */}
-			</div>
-		</div>
+			</section>
+
+			<CreditNote />
+		</main>
 	);
 }
 
