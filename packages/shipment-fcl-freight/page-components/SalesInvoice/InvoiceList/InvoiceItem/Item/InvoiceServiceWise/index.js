@@ -1,5 +1,5 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import CardList from '@cogoport/shipment-fcl-freight/common/CardList';
+import CardList from '../../../../../../common/CardList';
 import React from 'react';
 
 import styles from './styles.module.css';

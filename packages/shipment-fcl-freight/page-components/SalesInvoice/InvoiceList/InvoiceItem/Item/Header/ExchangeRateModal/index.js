@@ -1,4 +1,4 @@
-import CardList from '@cogoport/shipment-fcl-freight/common/CardList';
+import CardList from '../../../../../../../common/CardList';
 // import useGetExchangeRate from '@cogo/bookings/Invoicing/hooks/useGetExchangeRate';
 import { Modal, Input } from '@cogoport/components';
 import React, { useState } from 'react';
