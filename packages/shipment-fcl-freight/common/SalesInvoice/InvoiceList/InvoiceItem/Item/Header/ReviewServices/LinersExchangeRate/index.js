@@ -1,78 +1,68 @@
-import React from 'react';
-import { Button } from '@cogoport/front/components/admin';
-import { IcMError } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/front/utils';
-import {
-	StyledModal,
-	Form,
-	ConfirmLabel,
-	ButtonContainer,
-	Heading,
-	Flex,
-	Title,
-	Line,
-	Message,
-} from './styles';
+import React from "react";
+import { Button, Modal } from "@cogoport/components";
+import { IcMError } from "@cogoport/icons-react";
+import { isEmpty } from "@cogoport/utils";
+import styles from "./styles.module.css";
 
 function LinersExchangeRateConfirm({
-	invoice = {},
-	setShowExchangeRateConfirmation = () => {},
-	setShow = () => {},
-	showExchangeRateConfirmation = '',
+  invoice = {},
+  setShowExchangeRateConfirmation = () => {},
+  setShow = () => {},
+  showExchangeRateConfirmation = "",
 }) {
-	return (
-		<StyledModal
-			show={showExchangeRateConfirmation}
-			closable={false}
-			width={800}
-		>
-			<Heading>MARK AS REVIEWED - WARNING</Heading>
-			<Form>
-				<Message>
-					<IcMError width={30} height={30} fill="#ffe6a7" />
-					<ConfirmLabel>
-						Liners Exchange Rates are not available yet. Do you want to proceed
-						with system exchange rates?
-					</ConfirmLabel>
-				</Message>
+  return (
+    <Modal show={showExchangeRateConfirmation} closable={false} width={800}>
+      <Modal.Header title="MARK AS REVIEWED - WARNING" />
+      <Modal.Body>
+        <div className={styles.form}>
+          <div className={styles.message}>
+            <IcMError width={30} height={30} fill="#ffe6a7" />
+            <div className={styles.confirm_label}>
+              Liners Exchange Rates are not available yet. Do you want to
+              proceed with system exchange rates?
+            </div>
+          </div>
 
-				{!isEmpty(invoice?.exchange_rates) ? (
-					<Heading className="sub_heading">Declared Exchange Rates</Heading>
-				) : null}
+          {!isEmpty(invoice?.exchange_rates) ? (
+            <div className={cl`${styles.heading} ${styles.sub_heading}`}>
+              Declared Exchange Rates
+            </div>
+          ) : null}
 
-				{Object.keys(invoice?.exchange_rates)?.map((item) => {
-					return (
-						<Flex className="row">
-							<Title className="key">{item?.split('_')?.[0]}</Title>
-							<Line />
+          {Object.keys(invoice?.exchange_rates)?.map((item) => {
+            return (
+              <div className={cl`${styles.flex} ${styles.row}`}>
+                <div className={styles.title}>{item?.split("_")?.[0]}</div>
+                <Line />
 
-							<Title className="key">{item?.split('_')?.[1]}</Title>
-							<Line className="arrow" />
+                <div className={styles.title}>{item?.split("_")?.[1]}</div>
+                <Line className="arrow" />
 
-							<Title className="value">{invoice?.exchange_rates?.[item]}</Title>
-						</Flex>
-					);
-				})}
-			</Form>
-
-			<ButtonContainer>
-				<Button
-					className="secondary md"
-					style={{ marginRight: 12 }}
-					onClick={() => setShow(false)}
-				>
-					Close
-				</Button>
-
-				<Button
-					className="primary md reviewed"
-					onClick={() => setShowExchangeRateConfirmation(false)}
-				>
-					Proceed
-				</Button>
-			</ButtonContainer>
-		</StyledModal>
-	);
+                <div className={cl`${styles.title} ${styles.value}`}>
+                  {invoice?.exchange_rates?.[item]}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button
+          className="secondary md"
+          style={{ marginRight: 12 }}
+          onClick={() => setShow(false)}
+        >
+          Close
+        </Button>
+        <Button
+          className="primary md reviewed"
+          onClick={() => setShowExchangeRateConfirmation(false)}
+        >
+          Proceed
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
 }
 
 export default LinersExchangeRateConfirm;

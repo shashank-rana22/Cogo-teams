@@ -1,22 +1,22 @@
 import React from 'react';
 import ServiceItem from './ServiceItem';
-import { Container, Heading, ServiceContainer } from './styles';
+import styles from './styles.module.css';
 
 const AddRelevantServices = () => {
 	return (
-		<Container>
-			<Heading>
+		<div className={styles.container}>
+			<div className={styles.heading}>
 				Please add all relevant services sold to the customer, or confirm that
 				they don’t apply to this shipment.
-			</Heading>
+			</div>
 
-			<ServiceContainer>
+			<div className={styles.service_container}>
 				<ServiceItem />
 				<ServiceItem />
 				<ServiceItem />
 				<ServiceItem />
-			</ServiceContainer>
-		</Container>
+			</div>
+		</div>
 	);
 };
 

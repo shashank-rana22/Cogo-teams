@@ -1,10 +1,8 @@
-import styled from '@cogoport/front/styled';
-
-export const Container = styled.div`
+.container{
 	margin-bottom: 16px;
-`;
+}
 
-export const Heading = styled.p`
+.heading{
 	font-weight: 600;
 	font-size: 16px;
 	line-height: 19px;
@@ -12,11 +10,11 @@ export const Heading = styled.p`
 	margin: 0;
 	margin-bottom: 28px;
 	width: 85%;
-`;
+}
 
-export const ServiceContainer = styled.div`
+.service_container{
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
 	width: 100%;
-`;
+}
