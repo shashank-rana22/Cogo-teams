@@ -1,3 +1,4 @@
+import { Loader } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -25,7 +26,11 @@ function TaskContainer({
 				{loading ? null : <div className={styles.action_container}>{actions}</div>}
 			</div>
 
-			{loading ? <div className={styles.text}>Loading ...</div> : children}
+			{loading ? (
+				<div className={styles.loader}>
+					<Loader />
+				</div>
+			) : children}
 		</div>
 	);
 }

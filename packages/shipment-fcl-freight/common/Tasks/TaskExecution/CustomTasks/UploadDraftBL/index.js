@@ -15,6 +15,7 @@ function UploadDraftBL({
 	task = {},
 	shipmentData = {},
 	primaryService = {},
+	selectedMail = {},
 }) {
 	const [hblData, setHblData] = useState([]);
 	const [isAllHBLUploaded, setIsAllHblUploaded] = useState(false);
@@ -45,7 +46,7 @@ function UploadDraftBL({
 		},
 	});
 
-	const { data: tradeDocList, loading: tradeDocLoading, refetch: refetchTradeDoc } = useListShipmentTradeDocuments({
+	const { data: tradeDocList, refetch: refetchTradeDoc } = useListShipmentTradeDocuments({
 		defaultParams: {
 			filters: {
 				shipment_id   : task?.shipment_id,
@@ -202,9 +203,7 @@ function UploadDraftBL({
 			{(step === 'mbl' || !isHBL) && (
 				<MBLDetails
 					ref={mblRef}
-					task={task}
-					// selectedMail={selectedMail}
-					shipmentData={shipmentData}
+					selectedMail={selectedMail}
 					primaryService={primaryService}
 				/>
 			)}

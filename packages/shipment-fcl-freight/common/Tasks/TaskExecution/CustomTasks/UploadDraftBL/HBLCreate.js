@@ -1,9 +1,9 @@
 import { Button, Modal } from '@cogoport/components';
+import { TradeDocTemplate } from '@cogoport/ocean-modules';
 import { omit } from '@cogoport/utils';
 import { forwardRef, useRef, useState } from 'react';
 
 import styles from './styles.module.css';
-import TradeDocTemplate from './TradeDocTemplate';
 
 function HBLCreate({
 	onSave = () => {},
@@ -22,18 +22,13 @@ function HBLCreate({
 		port_of_loading   : primaryService?.origin_port?.display_name,
 		port_of_discharge : primaryService?.destination_port?.display_name,
 		consigner         : shipmentData?.importer_exporter?.business_name,
-		consignee:
-			shipmentData?.consignee_details?.company_name
-			|| shipmentData?.consignee_detail?.company_name,
-		vessel_number: (movement_details || [])
-			.map((movment) => `${movment?.vessel}, ${movment?.voyage}`)
-			.join(','),
+		consignee         : shipmentData?.consignee_shipper?.business_name,
+		vessel_number     : (movement_details || [])
+			.map((movment) => `${movment?.vessel}, ${movment?.voyage}`).join(','),
 		annexure_vessel_number: (movement_details || [])
-			.map((movment) => `${movment?.voyage}`)
-			.join(','),
+			.map((movment) => `${movment?.voyage}`).join(','),
 		annexure_vessel: (movement_details || [])
-			.map((movment) => `${movment?.vessel}`)
-			.join(','),
+			.map((movment) => `${movment?.vessel}`).join(','),
 		...hblData,
 	};
 

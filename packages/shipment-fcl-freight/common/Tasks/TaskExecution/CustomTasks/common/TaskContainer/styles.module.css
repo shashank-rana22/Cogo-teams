@@ -20,6 +20,11 @@
 	font-weight: 700;
 }
 
+.loader {
+	display: flex;
+	justify-content: center;
+}
+
 .action_container {
 	display: flex;
 }

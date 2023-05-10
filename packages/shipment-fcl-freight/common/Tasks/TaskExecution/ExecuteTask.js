@@ -74,9 +74,7 @@ function ExecuteTask({
 				task={task}
 				shipmentData={shipment_data}
 				primaryService={primary_service}
-				onCancel={onCancel}
-				taskListRefetch={taskListRefetch}
-				servicesList={servicesList}
+				selectedMail={selectedMail}
 			/>
 		);
 	}
