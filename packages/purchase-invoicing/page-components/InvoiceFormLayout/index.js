@@ -267,6 +267,7 @@ function InvoiceFormLayout({
 					setCodes={setCodes}
 					calculatedValues={calculatedValues}
 					invoiceCurrency={invoiceCurrency}
+					shipmentId={shipment_data?.id}
 					errors={errors}
 					errMszs={errMszs}
 					open={isEdit}

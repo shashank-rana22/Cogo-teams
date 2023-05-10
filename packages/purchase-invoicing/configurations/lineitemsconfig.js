@@ -84,6 +84,28 @@ const handleModifiedOptions = ({ options: newOptions }) => newOptions.map((optio
 }));
 
 export const renderLineItemFunctions = {
+	container_number: ({ control, index, setCodes, errors, shipmentId }) => (
+		<div className={`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}>
+			<AsyncSelectController
+				control={control}
+				name={`line_items.${index}.container_number`}
+				placeholder="Cont. Num"
+				asyncKey="shipment_container_details"
+				params={{
+					filters: {
+						shipment_id: shipmentId,
+					},
+				}}
+				onChange={(_, obj) => (setCodes((codes) => ({ ...codes, [obj.code]: obj })))}
+				rules={{ required: true }}
+			/>
+			{errors?.line_items?.[index]?.container_number && (
+				<div className={`${styles.errors}`}>
+					* Required
+				</div>
+			)}
+		</div>
+	),
 	code: ({ control, index, extradata, setCodes, errors }) => (
 		<div className={`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}>
 			<AsyncSelectController

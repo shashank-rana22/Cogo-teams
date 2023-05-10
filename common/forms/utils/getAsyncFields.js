@@ -323,6 +323,16 @@ function asyncAccountEngagementScoringEvents() {
 	};
 }
 
+function asyncShipmentContainerDetails() {
+	return {
+		valueKey      : 'container_number',
+		finalLabelKey : 'container_number',
+		endpoint      : 'list_shipment_container_details',
+		initialCall   : true,
+		defaultParams : {},
+	};
+}
+
 function asyncFieldsTicketTypes() {
 	return {
 		labelKey     : 'TicketType',
@@ -392,4 +402,5 @@ export {
 	asyncFieldsTicketTypes,
 	asyncOrganizationTradeParties,
 	asyncSearchProducts,
+	asyncShipmentContainerDetails,
 };

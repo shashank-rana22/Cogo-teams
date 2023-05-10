@@ -22,6 +22,7 @@ function LineItemDetails({
 	errors,
 	errMszs,
 	open,
+	shipmentId,
 }) {
 	const { fields, append, remove } = useFieldArray({
 		control,
@@ -42,11 +43,22 @@ function LineItemDetails({
 		(item) => item?.value === collectionPartyTaxNumber,
 	)?.id;
 
+	const railscontainers = [
+		{
+			label : 'Container Number',
+			span  : 3.6,
+			key   : 'container_number',
+		},
+	];
+
+	const finalLineItemConfig = serviceProvider?.shipment_type === 'rail_domestic_freight'
+		? [...lineItemConfig, ...railscontainers] : lineItemConfig;
+
 	return (
 		<AccordianView title="Line Item Details" fullwidth showerror={errMszs.line_items} open={open}>
 			<div className={styles.border}>
 				<div className={styles.tableheader}>
-					{(lineItemConfig).map((field) => (
+					{(finalLineItemConfig).map((field) => (
 						<div
 							style={{
 								flex  : (field.span || 1),
@@ -61,7 +73,7 @@ function LineItemDetails({
 				<div>
 					{fields.map((lineitem, index) => (
 						<div className={styles.tablecolumn} key={lineitem.id}>
-							{lineItemConfig.map((field) => (
+							{finalLineItemConfig.map((field) => (
 								<div
 									style={{
 										flex  : (field.span || 1),
@@ -88,6 +100,7 @@ function LineItemDetails({
 											},
 											errors,
 											setCodes,
+											shipmentId,
 										}) : '-'}
 								</div>
 							))}

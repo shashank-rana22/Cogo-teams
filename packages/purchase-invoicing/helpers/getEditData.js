@@ -26,7 +26,7 @@ const getEditData = (editData) => {
 		codes,
 		id                       : editData?.finance_job_number,
 		billType                 : BILL_MAPPINGS[editData?.invoice_type],
-		irn_number               : editData?.irn_no,
+		irn_number               : editData?.shipment_detail?.irn_number,
 	};
 };
 

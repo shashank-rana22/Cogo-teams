@@ -60,7 +60,15 @@ export const invoiceTypeOptions = [
 export const EMPTY_EXCHANGE_RATES = { from_currency: '', to_currency: '', rate: 1 };
 
 export const EMPTY_LINE_ITEMS = {
-	code: '', currency: '', rate: 1, unit: '', quantity: '', exchange_rate: '', tax_amt: '', cost: '',
+	container_number : '',
+	code             : '',
+	currency         : '',
+	rate             : 1,
+	unit             : '',
+	quantity         : '',
+	exchange_rate    : '',
+	tax_amt          : '',
+	cost             : '',
 };
 
 export const UNIT_OPTIONS = [

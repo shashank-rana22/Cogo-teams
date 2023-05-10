@@ -40,7 +40,12 @@
 		}
 
 		.ui_select_input_control {
-			font-size: var(--font-size-md);
+			font-size: var(--font-size-sm) !important;
+		}
+
+		.ui_select_input_placeholder {
+			font-size: var(--font-size-sm) !important;
+			opacity: 0.6;
 		}
 	}
 
@@ -63,7 +68,7 @@
 
 	:global {
 		.ui_input_control {
-			font-size: var(--font-size-md);
+			font-size: var(--font-size-sm) !important;
 		}
 	}
 }

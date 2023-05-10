@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { AsyncSelectController, SelectController } from '@cogoport/forms';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import AccordianView from '../../../common/Accordianview';
 
@@ -50,11 +50,22 @@ function CollectionPartyDetails({
 		}
 	});
 
+	useEffect(() => {
+		setValue('collection_party_bank_details', purchaseInvoiceValues?.collection_party_bank_details);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(collectionPartyBankOptions)]);
+
 	const handleModifiedOptions = ({ options }) => options.map((option) => ({
 		...option,
 		display_name:
 	<div className={styles.spacebetween}>
-		<div>{option?.display_name}</div>
+		<div>
+			{
+				option?.trade_party_type === 'self'
+					? option?.display_name
+					: `${option?.business_name} ${option?.display_name}`
+			}
+		</div>
 		<div className={styles.verification_status}>{startCase(option.verification_status)}</div>
 	</div>,
 		registration_number: option?.registration_number,
@@ -112,13 +123,13 @@ function CollectionPartyDetails({
 						handleChange={(v, obj) => {
 							if (obj?.verification_status === 'pending') {
 								setValue('collection_party', undefined);
-								setValue('collection_party_address', '');
-								setValue('collection_party_bank_details', '');
 								Toast.error('Cannot select KYC pending collection party!');
 							} else {
 								setCollectionParty(obj);
 								setValue('collection_party', v);
 							}
+							setValue('collection_party_address', '');
+							setValue('collection_party_bank_details', '');
 						}}
 						value={collectionParty.registration_number || purchaseInvoiceValues?.collection_party}
 						params={{
@@ -180,7 +191,6 @@ function CollectionPartyDetails({
 									</div>
 								)}
 								rules={{ required: true }}
-								value={purchaseInvoiceValues?.collection_party_bank_details}
 							/>
 							{errors?.collection_party_bank_details && (
 								<div className={`${styles.errors}`}>
