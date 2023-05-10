@@ -1,12 +1,14 @@
 import { useForm } from '@cogoport/forms';
+import getCountryOptions from '@cogoport/globalization/utils/getCountryOptions';
 import { useRouter } from '@cogoport/next';
 import { useEffect, useMemo } from 'react';
 
 import createAudienceControls from './utils/createAudienceControls';
 
+const countryOptions = getCountryOptions();
+
 const useGetAudienceOptions = ({
 	entity_data,
-	countries,
 	setConfigurationPage,
 	setShowCreateAudienceModal,
 	source,
@@ -22,21 +24,6 @@ const useGetAudienceOptions = ({
 
 	const watchFunctions = watch('auth_function');
 	const watchPlatform = watch('platform');
-
-	const indiaOption = countries.find((country) => country.country_code === 'IN');
-
-	const countryOptions = [{
-		label : indiaOption?.name,
-		value : indiaOption?.id,
-	}];
-
-	countries.filter((country) => country.country_code !== 'IN').map((country) => {
-		const option = { label: country.name, value: country.id };
-
-		countryOptions.push(option);
-
-		return countryOptions;
-	});
 
 	const { controls } = createAudienceControls({ entity_options, watchFunctions, countryOptions });
 

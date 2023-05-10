@@ -1,26 +1,11 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import getCountryOptions from '@cogoport/globalization/utils/getCountryOptions';
 
 const geo = getGeoConstants();
 
-// eslint-disable-next-line
-import countries from '../../../.data-store/constants/countries.json';
+const countryOptions = getCountryOptions();
 
 const getControls = (fileType = '') => {
-	const indiaOption = countries.find(
-		(country) => country.country_code === 'IN',
-	);
-
-	const countryOptions = [{
-		label : indiaOption?.name,
-		value : indiaOption?.id,
-	}];
-
-	countries.filter((country) => country.country_code !== 'IN').map((country) => {
-		const option = { label: country.name, value: country.id };
-		countryOptions.push(option);
-		return countryOptions;
-	});
-
 	const controls = {
 		utility_bill_document_url: {
 			name   : 'utility_bill_document_url',
