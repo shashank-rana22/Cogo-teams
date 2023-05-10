@@ -1,7 +1,8 @@
-import { Button, Accordion } from '@cogoport/components';
+import { Textarea, Input, Button } from '@cogoport/components';
 import { IcMDrag, IcMEdit, IcMDelete } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
+import SubModule from './SubModule';
 import useHandleCurriculum from './useHandleCurriculum';
 
 function Curriculum() {
@@ -11,70 +12,60 @@ function Curriculum() {
 		<div className={styles.container}>
 			{finalData.map((node, nodeIndex) => (
 				<div className={styles.node_container}>
-					<div
-						key={node.id}
-						draggable
-						onDragStart={(event) => handleDragStart(event, node, false)}
-						onDragOver={(event) => handleDragOver(event)}
-						onDrop={(event) => handleDrop(event, node, false)}
-						className={styles.node}
-					>
-						<IcMDrag className={styles.icon} />
-						<div className={`${styles.left} ${styles.flex}`}>
-							{`Module ${nodeIndex + 1}:`}
-							{' '}
-							<b className={styles.name}>{node.name}</b>
-						</div>
-
-						<IcMEdit className={`${styles.left} ${styles.icon}`} />
-						<IcMDelete
-							onClick={() => deleteModule({ id: node.id, isNew: node.isNew || false })}
-							className={`${styles.left} ${styles.icon}`}
-						/>
-					</div>
-
-					{node.children && (
-						<div>
-							{node.children.map((child) => (
-								<div className={styles.child_accordian}>
-									<Accordion
-										type="text"
-										title={(
-											<div
-												key={child.id}
-												draggable
-												onDragStart={(event) => handleDragStart(event, child, true)}
-												onDragOver={(event) => handleDragOver(event)}
-												onDrop={(event) => handleDrop(event, child, true)}
-												className={styles.accordian_item}
-											>
-												<IcMDrag className={styles.icon} />
-												<div className={`${styles.left} ${styles.flex}`}>
-													{`Sub-Module ${nodeIndex + 1}:`}
-													{' '}
-													<b className={styles.name}>{child.name}</b>
-												</div>
-
-												<IcMEdit className={`${styles.left} ${styles.icon}`} />
-												<IcMDelete className={`${styles.left} ${styles.icon}`} />
-											</div>
-										)}
-									>
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-										condimentum, nisl eget aliquam tincidunt, nunc nisl aliquam
-									</Accordion>
+					{node.isNew ? (
+						<div className={styles.node}>
+							<div className={styles.input_container}>
+								<div style={{ marginBottom: '20px' }} className={styles.select_container}>
+									<div className={styles.label}>Name</div>
+									<Input />
 								</div>
-							))}
 
-							<Button
-								type="button"
-								className={styles.button}
-								themeType="secondary"
-							>
-								+ Sub Module
+								<div className={styles.select_container}>
+									<div className={styles.label}>Description</div>
+									<Textarea rows={4} />
+								</div>
+							</div>
 
-							</Button>
+							<div className={styles.button_container}>
+								<Button size="sm">Save</Button>
+								<IcMDelete
+									onClick={() => deleteModule({ id: node.id, isNew: node.isNew || false })}
+									className={`${styles.left} ${styles.icon}`}
+								/>
+							</div>
 						</div>
+					) : (
+						<div
+							key={node.id}
+							draggable
+							onDragStart={(event) => handleDragStart(event, node, false)}
+							onDragOver={(event) => handleDragOver(event)}
+							onDrop={(event) => handleDrop(event, node, false)}
+							className={styles.node}
+						>
+							<IcMDrag className={styles.icon} />
+							<div className={`${styles.left} ${styles.flex}`}>
+								{`Module ${nodeIndex + 1}:`}
+								{' '}
+								<b className={styles.name}>{node.name}</b>
+							</div>
+
+							<IcMEdit className={`${styles.left} ${styles.icon}`} />
+							<IcMDelete
+								onClick={() => deleteModule({ id: node.id, isNew: node.isNew || false })}
+								className={`${styles.left} ${styles.icon}`}
+							/>
+						</div>
+					)}
+
+					{node.children && !node.isNew && (
+						<SubModule
+							node={node}
+							handleDragStart={handleDragStart}
+							handleDragOver={handleDragOver}
+							handleDrop={handleDrop}
+							deleteModule={deleteModule}
+						/>
 					)}
 				</div>
 			))}
@@ -86,7 +77,6 @@ function Curriculum() {
 				onClick={() => addModule()}
 			>
 				+ Module
-
 			</Button>
 		</div>
 	);

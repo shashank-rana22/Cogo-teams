@@ -1,66 +1,66 @@
 .conatiner {
-    padding: 0 40px 40px;
+	padding: 0 40px 40px;
 }
 
 .description_title {
-    margin-bottom: 12px;
+	margin-bottom: 12px;
 }
 
 .superscipt {
-    color: #EE3425;
+	color: #ee3425;
 }
 
 .textarea {
-    height: 70px;
+	height: 70px;
 }
 
 .form {
-    margin-top: 32px;
-    display: flex;
-    width: 100%;
+	display: flex;
+	width: 100%;
+	margin-top: 32px;
 }
 
 .form_left {
-    width: 100%;
-    padding-right: 24px;
+	width: 100%;
+	padding-right: 24px;
 }
 
 .form_right {
-    width: 100%;
+	width: 100%;
 }
 
 .select_row {
-    width: 100%;
-    margin-bottom: 24px;
+	width: 100%;
+	margin-bottom: 24px;
 }
 
 .multiple_select {
-    display: flex;
-    width: 50%;
+	display: flex;
+	width: 50%;
 }
 
 .modal_btn {
-    width: 100%;
+	width: 100%;
 }
 
 .form_two {
-    margin-top: 16px;
-    display: flex;
-    width: 100%;
+	display: flex;
+	width: 100%;
+	margin-top: 16px;
 }
 
 .select_row_two {
-    width: 100%;
-    margin-bottom: 24px;
+	width: 100%;
+	margin-bottom: 24px;
 }
 
 .form_container {
-    background: #F9F9F9;
-    border-radius: 6px;
-    padding: 32px;
-    margin-bottom: 32px;
+	padding: 32px;
+	margin-bottom: 32px;
+	background: #f9f9f9;
+	border-radius: 6px;
 }
 
 .button_container {
-    display: flex;
+	display: flex;
 }

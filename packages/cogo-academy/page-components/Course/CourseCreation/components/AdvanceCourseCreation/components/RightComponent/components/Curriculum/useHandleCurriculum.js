@@ -6,8 +6,18 @@ const data = [
 		name     : 'Node 1',
 		children : [
 			{
-				id   : 2,
-				name : 'Child 1 of Node 1',
+				id       : 2,
+				name     : 'Child 1 of Node 1',
+				children : [
+					{
+						id   : 10,
+						name : 'Child 1 of Node 1',
+					},
+					{
+						id   : 11,
+						name : 'Child 2 of Node 1',
+					},
+				],
 			},
 			{
 				id   : 3,

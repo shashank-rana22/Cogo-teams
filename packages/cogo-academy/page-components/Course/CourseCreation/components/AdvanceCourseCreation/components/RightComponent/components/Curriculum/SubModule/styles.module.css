@@ -12,7 +12,6 @@
 }
 
 .node {
-	position: relative;
 	display: flex;
 	align-items: center;
 	margin-bottom: 16px;
@@ -54,16 +53,4 @@
 
 .icon {
 	cursor: pointer;
-}
-
-.button_container {
-	position: absolute;
-	right: 20px;
-	bottom: 0;
-	display: flex;
-	align-items: center;
-}
-
-.input_container {
-	width: 80%;
 }
