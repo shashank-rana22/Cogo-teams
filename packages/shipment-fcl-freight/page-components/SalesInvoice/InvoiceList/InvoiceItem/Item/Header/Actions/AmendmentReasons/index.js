@@ -23,20 +23,20 @@ function AmendmentReasons({ invoice = {} }) {
 	];
 
 	return (
-		<div className={styles.PopoverContainer}>
-			<div className={styles.FlexRow}>
+		<div className={styles.popover_container}>
+			<div className={styles.flex_row}>
 				{details.map((item) => (
-					<div className={styles.FlexCol}>
-						<div className={styles.Title}>{item?.label}</div>
-						<div className={styles.Value}>{item?.value}</div>
+					<div>
+						<div className={styles.title}>{item?.label}</div>
+						<div className={styles.value}>{item?.value}</div>
 					</div>
 				))}
 			</div>
 
-			<div className={styles.Reasons}>
-				<div className={styles.Title}>Amendment Reason</div>
+			<div className={styles.reasons}>
+				<div className={styles.title}>Amendment Reason</div>
 
-				<div className={styles.Value}>
+				<div className={styles.value}>
 					{invoice?.amendment_detail?.amendment_reason}
 					{' - '}
 					{invoice?.amendment_detail?.amendment_subreason}

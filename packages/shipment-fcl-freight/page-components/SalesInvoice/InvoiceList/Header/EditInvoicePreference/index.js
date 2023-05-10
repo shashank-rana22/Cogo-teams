@@ -84,7 +84,7 @@ function EditInvoicePreference({
 				>
 					<Modal.Header title="EDIT INVOICING PREFERENCE" />
 					<Modal.Body className={isIE ? 'ie' : ''}>
-						<div className={styles.Form}>
+						<div className={styles.form}>
 
 							<Button
 								size="md"
@@ -112,7 +112,7 @@ function EditInvoicePreference({
 								>
 									<Modal.Header title="Add Invoicing Party" />
 									<Modal.Body className={isIE ? 'ie' : ''}>
-										<div className={styles.Form}>
+										<div className={styles.form}>
 											<AddInvoicingParty
 												shipmentData={shipment_data}
 												organizationDetails={organizationDetails}

@@ -40,7 +40,7 @@
 	color: #333333;
 }
 
-.ShipmentValue{
+.shipment_value{
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 16px;
@@ -49,7 +49,7 @@
 	margin-left: 4px;
 }
 
-.ReviwedStats{
+.reviwed_stats{
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 16px;
@@ -62,18 +62,7 @@
 	}
 }
 
-.IconWrapper{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-right: 5px;
-
-	@media (max-width: 768px) {
-		display: none;
-	}
-}
-
-.EditInvoice{
+.edit_invoice{
 	display: flex;
 	align-items: center;
 	width: 25%;
@@ -83,7 +72,7 @@
 	}
 }
 
-.FlexRow{
+.flex_row{
 	display: flex;
 	align-items: center;
 	width: 20%;

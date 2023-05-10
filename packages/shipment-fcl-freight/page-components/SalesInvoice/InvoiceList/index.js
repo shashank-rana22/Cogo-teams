@@ -63,7 +63,7 @@ function Invoices({
 			/>
 			<div className={styles.line} />
 
-			<div className={styles.sales_invoicing_parties}>
+			<div>
 				{/* {Object.keys(groupedInvoices || {}).map((item) => ( */}
 				<InvoiceItem
 					// item={groupedInvoices[item]}

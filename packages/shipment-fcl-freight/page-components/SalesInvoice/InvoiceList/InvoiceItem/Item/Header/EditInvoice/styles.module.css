@@ -1,15 +1,4 @@
-.Container{
-	margin: -16px;
-
-	.form-edit-line-items-root {
-		background: #ffffff;
-		border: 1px solid #e0e0e0;
-		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
-		border-radius: 4px;
-	}
-}
-
-.InvoiceValue{
+.invoice_value{
 	font-weight: 500;
 	font-size: 18px;
 	line-height: 16px;
@@ -21,7 +10,7 @@
 	}
 }
 
-.Forms{
+.forms{
 	padding: 30px 34px 0px 34px;
 	overflow: auto;
 	height: calc(100vh - 29vh);

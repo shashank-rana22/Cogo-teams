@@ -193,7 +193,7 @@ function Actions({
 
 			</div>
 
-			{invoice?.billing_address?.trade_party_type === 'self' ? (
+			{/* {invoice?.billing_address?.trade_party_type === 'self' ? ( */}
 				<div>
 					<div className={styles.Line} />
 
@@ -207,7 +207,7 @@ function Actions({
 
 					</div>
 				</div>
-			) : null}
+			{/* ) : null} */}
 			{/* ) : null} */}
 
 			{/* {(invoice.exchange_rate_document || []).map((url) => ( */}
@@ -222,25 +222,6 @@ function Actions({
 				>
 					Exchange Rate Document
 				</div>
-				<div
-					role="button"
-					tabIndex={0}
-					className={styles.Text}
-					onClick={handleExchangeRateModal}
-				>
-					Exchange Rate Sheet
-
-				</div>
-				{/* {shipment_data?.shipment_type === 'ftl_freight' ? ( */}
-				<div>
-					<div className={styles.Line} />
-					<div role="button" tabIndex={0} className={styles.Text} onClick={handleCustomerInvoice}>
-						{isEmpty(invoice?.customer_ftl_invoice) ? 'Add' : 'Download'}
-						{' '}
-						Customer Invoice
-					</div>
-				</div>
-				{/* ) : null} */}
 			</div>
 			{/* ))} */}
 		</div>

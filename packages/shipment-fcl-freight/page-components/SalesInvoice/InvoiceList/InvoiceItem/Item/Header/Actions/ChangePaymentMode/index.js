@@ -41,7 +41,6 @@ function ChangePaymentMode({
 		<Modal show={show} onClose={() => setShow(false)}>
 			<Modal.Header title="Change Payment Mode" />
 			<Modal.Body>
-				<div className={styles.Container}>
 					{invoice?.payment_mode ? (
 						<Radio
 							label={optionsToShow[invoice?.payment_mode]?.label}
@@ -55,9 +54,6 @@ function ChangePaymentMode({
 							onChange={(val) => setValue(val)}
 						/>
 					)}
-
-				</div>
-
 			</Modal.Body>
 			<Modal.Footer>
 				<Button>

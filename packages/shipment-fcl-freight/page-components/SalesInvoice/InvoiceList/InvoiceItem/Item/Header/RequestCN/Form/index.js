@@ -46,7 +46,7 @@ function Form({
 	};
 
 	return (
-		<div className={styles.Container}>
+		<div className={styles.container}>
 			{/* <Layout
 				controls={control}
 				fields={fields}
@@ -55,7 +55,7 @@ function Form({
 				themeType="custom"
 			/> */}
 
-			<div className={styles.ButtonWrap}>
+			<div className={styles.button_wrap}>
 				<Button
 					type="button"
 					// onClick={handleSubmit(onSubmit, onError)}

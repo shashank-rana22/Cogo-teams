@@ -1,14 +1,14 @@
-.BoldText{
+.bold_text{
 	font-weight: 500;
 	color: #393f70;
 }
 
-.Div{
+.div{
 	font-size: 12px;
 	color: #393f70;
 	margin: 5px 0;
 }
 
-.UnderLinedText{
+.underLined_text{
 	text-decoration: underline;
 }

@@ -1,27 +1,27 @@
 import React from 'react';
-import { ToolTip } from '@cogoport/front/components/admin';
+import { Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
-import { Container, InfoDiv, ContentDiv } from './styles';
+import styles from './styles.module.css';
 
 const Info = () => {
 	return (
-		<Container>
-			<ToolTip
+		<div className={styles.container}>
+			<Tooltip
 				theme="light"
 				content={
-					<ContentDiv>
+					<div className={styles.content_div}>
 						You can enter customized line item name/code according to
 						customer&apos;s need.{' '}
-					</ContentDiv>
+					</div>
 				}
 				animation="scale"
 				interactive
 			>
-				<InfoDiv>
+				<div className={styles.info_div}>
 					<IcMInfo fill="rgb(89, 54, 240)" />
-				</InfoDiv>
-			</ToolTip>
-		</Container>
+				</div>
+			</Tooltip>
+		</div>
 	);
 };
 

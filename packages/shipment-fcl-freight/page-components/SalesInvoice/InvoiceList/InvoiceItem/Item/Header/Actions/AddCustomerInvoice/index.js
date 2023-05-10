@@ -44,13 +44,13 @@ function AddCustomerInvoice({
 					Customer Invoice"
 			/>
 			<Modal.Body>
-				<div className={styles.Container}>
+				<div className={styles.container}>
 					{customerInvoicePresent ? (
-						<div className={styles.DownloadContainer}>
+						<div className={styles.download_container}>
 							<IcMDownload color="#5936f0" />
 						&nbsp;
 							<div
-								className={styles.DownloadLink}
+								className={styles.download_link}
 								href={invoice?.customer_ftl_invoice}
 								target="_blank"
 								rel="noreferrer"

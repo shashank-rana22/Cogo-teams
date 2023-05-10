@@ -21,8 +21,8 @@ function UserInfo({
 
 	const organizationOptions = list?.map((obj) => ({
 		label: (
-			<div className={styles.Container}>
-				<div className={styles.UserName}>{obj?.name}</div>
+			<div className={styles.container}>
+				<div className={styles.user_name}>{obj?.name}</div>
 				(
 				{obj?.mobile_country_code}
 				-
@@ -39,18 +39,18 @@ function UserInfo({
 	};
 
 	if (list?.length === 0) {
-		return <div className={styles.Nodata}>No verified user exists!</div>;
+		return <div className={styles.no_data}>No verified user exists!</div>;
 	}
 
 	return (
-		<div className={styles.UserInfoContainer}>
+		<div className={styles.user_info_container}>
 			<RadioGroup
 				options={organizationOptions}
 				value={selectedUser}
 				onChange={(item) => setSelectedUser(item)}
 			/>
 
-			<div className={styles.Actions}>
+			<div className={styles.actions}>
 				<Button
 					className="secondary md"
 					onClick={() => setOTPModal(false)}

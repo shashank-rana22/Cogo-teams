@@ -7,7 +7,7 @@ import useGetPermission from '@cogo/business-modules/hooks/useGetPermission';
 import { useSelector } from '@cogo/store';
 import { isEmpty } from '@cogoport/front/utils';
 import AddRate from '@cogo/bookings/AdditionalServices/components/AddRate';
-import { Container, AddedServices, RateContainer, Heading } from './styles';
+import styles from './styles.module.css';
 
 const AdditionalServices = ({ shipment_data }) => {
 	const { list: listAdded, refetch } = useAddedList({
@@ -22,13 +22,13 @@ const AdditionalServices = ({ shipment_data }) => {
 		};
 	});
 	return (
-		<Container>
-			<Heading>
+		<div>
+			<div className={styles.heading}>
 				You have not choosen any invoicing party for these services. You can add
 				these services in this invoice
-			</Heading>
+			</div>
 			{!isEmpty(listAdded) ? (
-				<AddedServices>
+				<div className={styles.added_services}>
 					{listAdded?.map((item) => {
 						const status = getStaus({ item });
 
@@ -48,11 +48,11 @@ const AdditionalServices = ({ shipment_data }) => {
 							/>
 						);
 					})}
-				</AddedServices>
+				</div>
 			) : null}
 
 			{addRate ? (
-				<RateContainer>
+				<div className={styles.rate_container}>
 					<AddRate
 						item={addRate?.item || addRate}
 						shipment_data={shipment_data}
@@ -60,9 +60,9 @@ const AdditionalServices = ({ shipment_data }) => {
 						setAddRate={setAddRate}
 						refetch={refetch}
 					/>
-				</RateContainer>
+				</div>
 			) : null}
-		</Container>
+		</div>
 	);
 };
 

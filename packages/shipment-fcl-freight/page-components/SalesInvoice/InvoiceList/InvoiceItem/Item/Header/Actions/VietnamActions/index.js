@@ -1,7 +1,7 @@
 import ChangeCurrency from '@cogo/bookings/commons/ChangeCurrency';
 import { useSelector } from '@cogo/store';
-import { Button, Popover, ToolTip } from '@cogoport/front/components/admin';
-import { isEmpty, startCase } from '@cogoport/front/utils';
+import { Button, Popover, Tooltip } from '@cogoport/components';
+import { isEmpty, startCase } from '@cogoport/utils';
 import {
 	IcMOverflowDot,
 	IcMInfo,
@@ -19,25 +19,7 @@ import AmendmentReasons from '../AmendmentReasons';
 // import SendInvoiceEmail from '../SendInvoiceEmail';
 import ChangePaymentMode from '../ChangePaymentMode';
 import RejectRequest from '../RejectRequest';
-import {
-	Container,
-	IconMoreWrapper,
-	InfoContainer,
-	IconInfoWrapper,
-	DialogBox,
-	Text,
-	Statuses,
-	Line,
-	RemarkContainer,
-	Title,
-	Value,
-	// EmailWrapper,
-	// FlexRow,
-	ActionsWrap,
-	MainContainer,
-	Pill,
-	ReviewInvoice,
-} from '../styles';
+import styles from '../styles.module.css';
 
 function Actions({
 	invoice = {},
@@ -201,10 +183,10 @@ function Actions({
 	);
 
 	return (
-		<Container>
-			<MainContainer>
-				<ActionsWrap>
-					<Statuses>
+		<div className={styles.container}>
+			<div className={styles.main_container}>
+				<div className={styles.actions_wrap}>
+					<div className={styles.statuses}>
 						{['pending', 'approved'].includes(invoice.status) ? (
 							<InfoContainer className={invoice.status || ''}>
 								{startCase(invoice.status)}
@@ -220,20 +202,20 @@ function Actions({
 								Mark as Reviewed
 							</Button>
 						) : null}
-					</Statuses>
+					</div>
 
 					{(invoice?.status === 'reviewed'
 						&& (!bfInvoice?.systemGeneratedProforma
 							|| !bfInvoice?.proformaPdfUrl))
 					|| (invoice?.status === 'approved'
 						&& !bfInvoice?.systemGeneratedInvoice) ? (
-							<Pill>Under Translation</Pill>
+							<div className={styles.pill}>Under Translation</div>
 						) : null}
 
 					{invoice?.status === 'reviewed'
 						&& bfInvoice?.systemGeneratedProforma
 						&& bfInvoice?.proformaPdfUrl && (
-							<ReviewInvoice>
+							<div className={styles.review_invoice}>
 								<Button
 									className="primary sm"
 									onClick={updateInvoiceStatus}
@@ -247,24 +229,24 @@ function Actions({
 								>
 									Reject
 								</Button>
-							</ReviewInvoice>
+							</div>
 					)}
 
 					{invoice?.status === 'amendment_requested' ? (
-						<ToolTip
+						<Tooltip
 							placement="bottom"
 							theme="light-border"
 							interactive
 							content={<AmendmentReasons invoice={invoice} />}
 						>
-							<IconInfoWrapper>
+							<div className={styles.icon_info_wrapper}>
 								<IcCError width={17} height={17} />
-							</IconInfoWrapper>
-						</ToolTip>
+							</div>
+						</Tooltip>
 					) : null}
-				</ActionsWrap>
+				</div>
 
-				<ActionsWrap className="icons">
+				<div className={styles.actions_wrap}>
 					{/* <EmailWrapper>
 						<IcMEmail
 							style={{ cursor: 'pointer' }}
@@ -312,16 +294,16 @@ function Actions({
 							theme="light"
 							onClickOutside={() => setShow(false)}
 						>
-							<IconMoreWrapper onClick={() => setShow(!show)}>
+							<div className={styles.icon_more_wrapper} onClick={() => setShow(!show)}>
 								<IcMOverflowDot />
-							</IconMoreWrapper>
+							</div>
 						</Popover>
 					) : (
 						<div style={{ width: '34px' }} />
 					)}
 
 					{!isEmpty(invoice.remarks) ? (
-						<ToolTip
+						<Tooltip
 							placement="bottom"
 							theme="light-border"
 							interactive
@@ -330,10 +312,10 @@ function Actions({
 							<IconMoreWrapper>
 								<IcMInfo fill="yellow" />
 							</IconMoreWrapper>
-						</ToolTip>
+						</Tooltip>
 					) : null}
-				</ActionsWrap>
-			</MainContainer>
+				</div>
+			</div>
 
 			{(invoice.services || []).length && isEditInvoice ? (
 				<EditInvoice
@@ -409,7 +391,7 @@ function Actions({
 					refetch={handleRefetch}
 				/>
 			) : null}
-		</Container>
+		</div>
 	);
 }
 

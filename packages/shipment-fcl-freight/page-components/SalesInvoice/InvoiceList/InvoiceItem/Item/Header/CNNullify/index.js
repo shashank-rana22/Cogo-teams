@@ -5,8 +5,6 @@ import React, { useState } from 'react';
 // import useCreditNoteNullify from '../../../../../../../hooks/useCreditNoteNullify';
 import RequestCN from '../RequestCN';
 
-import styles from './styles.module.css';
-
 function CNNullify({
 	askNullify,
 	setAskNullify = () => {},

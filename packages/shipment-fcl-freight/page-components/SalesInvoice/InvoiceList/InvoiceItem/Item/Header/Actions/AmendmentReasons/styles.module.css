@@ -1,31 +1,31 @@
-.PopoverContainer{
+.popover_container{
 	background: #ffffff;
 	border-radius: 4px;
 	padding: 8px;
 	width: 100%;
 }
 
-.Title{
+.title{
 	font-weight: 600;
 	font-size: 10px;
 	color: #333333;
 }
 
-.Value{
+.value{
 	font-weight: 400;
 	font-size: 10px;
 	color: #828282;
 	margin: 0;
 }
 
-.Reasons{
+.reasons{
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 	margin-top: 8px;
 }
 
-.FlexRow{
+.flex_row{
 	display: flex;
 	width: 100%;
 }

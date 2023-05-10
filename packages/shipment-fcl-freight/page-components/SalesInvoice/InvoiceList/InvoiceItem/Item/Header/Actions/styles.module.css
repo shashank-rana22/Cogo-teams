@@ -1,4 +1,4 @@
-.Container{
+.container{
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
@@ -14,7 +14,7 @@
 	}
 }
 
-.IconMoreWrapper{
+.icon_more_wrapper{
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -22,7 +22,7 @@
 	padding: 0px 10px;
 }
 
-.InfoContainer{
+.info_container{
 	font-weight: 400;
 	font-size: 10px;
 	line-height: 16px;
@@ -35,7 +35,7 @@
 	white-space: nowrap;
 }
 
-.IconInfoWrapper{
+.icon_info_wrapper{
 	display: flex;
 	justify-content: center;
 	padding-top: 4px;
@@ -43,7 +43,7 @@
 	cursor: pointer;
 }
 
-.DialogBox{
+.dialog_box{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -58,7 +58,7 @@
 	}
 }
 
-.Text{
+.text{
 	font-weight: 400;
 	font-size: 10px;
 	line-height: 16px;
@@ -72,7 +72,7 @@
 	}
 }
 
-.Statuses{
+.statuses{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -84,38 +84,38 @@
 	}
 }
 
-.Line{
+.line{
 	border-top: 1px solid #e0e0e0;
 	width: 100%;
 }
 
-.RemarkContainer{
+.remark_container{
 	background: #ffffff;
 	border-radius: 4px;
 	padding: 8px;
 	width: 100%;
 }
 
-.Title{
+.title{
 	margin: 0px;
 	font-weight: 600;
 	font-size: 10px;
 	color: #333333;
 }
 
-.Value{
+.value{
 	font-weight: 400;
 	font-size: 10px;
 	color: #828282;
 	margin: 0px;
 }
 
-.EmailWrapper{
+.email_wrapper{
 	display: flex;
 	align-items: center;
 }
 
-.FlexRow{
+.flex_row{
 	display: flex;
 
 	&.margin {
@@ -128,7 +128,7 @@
 	}
 }
 
-.ActionsWrap{
+.actions_wrap{
 	display: flex;
 	align-items: center;
 	/* margin: 30px 20px 0 0; */
@@ -139,14 +139,14 @@
 	}
 }
 
-.MainContainer{
+.main_container{
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
 }
 
-.Pill{
+.pill{
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -156,7 +156,7 @@
 	font-size: 10px;
 }
 
-.ReviewInvoice{
+.review_nvoice{
 	display: flex;
 	align-items: center;
 	gap: 10px;

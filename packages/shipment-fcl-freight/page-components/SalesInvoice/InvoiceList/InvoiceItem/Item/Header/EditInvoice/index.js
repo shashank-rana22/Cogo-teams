@@ -58,8 +58,8 @@ function EditInvoice({
 			// }}
 		>
 			<Modal.Body>
-				<div className={styles.Forms}>
-					<div className={styles.InvoiceValue}>
+				<div className={styles.forms}>
+					<div className={styles.invoice_value}>
 						Invoice Value -
 						{' '}
 						<span className="amount">

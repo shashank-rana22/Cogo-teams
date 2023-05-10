@@ -1,4 +1,4 @@
-.UserInfoContainer{
+.user_info_container{
 	width: 100%;
 	padding: 0 20px 20px 20px;
 
@@ -19,7 +19,7 @@
 	}
 }
 
-.Actions{
+.actions{
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -35,21 +35,21 @@
 	}
 }
 
-.Container{
+.container{
 	width: 400px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
 
-.UserName{
+.user_name{
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	width: 60%;
 }
 
-.Nodata{
+.no_data{
 	font-size: 16px;
 	font-weight: 500;
 }

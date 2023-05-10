@@ -1,19 +1,17 @@
-import styled from '@cogoport/front/styled';
-
-export const Container = styled.div`
+.container{
 	.tippy-box {
 		max-width: fit-content !important;
 	}
-`;
+}
 
-export const InfoDiv = styled.div`
+.info_div{
 	margin-left: 6px;
 	display: flex;
 	align-items: center;
-`;
+}
 
-export const ContentDiv = styled.div`
+.content_div{
 	width: 160px;
 	background: #fff;
 	font-size: 11px;
-`;
+}

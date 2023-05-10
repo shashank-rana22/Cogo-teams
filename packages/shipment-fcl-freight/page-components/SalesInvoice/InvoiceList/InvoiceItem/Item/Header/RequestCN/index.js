@@ -16,15 +16,15 @@ function RequestCN({
 		<Modal show={show} onClose={() => setShow(false)} className="primary xl">
 			<Modal.Header title="REQUEST CREDIT NOTE" />
 			<Modal.Body>
-				<div className={styles.Div} style={{ fontSize: 14 }}>
-					<div className={styles.BoldText}>
+				<div className={styles.div} style={{ fontSize: 14 }}>
+					<div className={styles.bold_text}>
 						SID
 						{' '}
 						{shipment_serial_id}
 						{' '}
 						- Invoice number -
 						{' '}
-						<div className={styles.UnderLinedText}>{invoice?.live_invoice_number}</div>
+						<div className={styles.underLined_text}>{invoice?.live_invoice_number}</div>
 					</div>
 				</div>
 

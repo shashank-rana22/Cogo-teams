@@ -1,5 +1,6 @@
 import { cl, Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { isEmpty } from '@cogoport/utils';
 // import { useSelector } from '@cogo/store';
 // import { Flex } from '@cogoport/front/components';
 import React, { useRef, useEffect } from 'react';
@@ -54,10 +55,10 @@ function Header({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.FlexRow}>
+			<div className={styles.flex_row}>
 				<div className={styles.total_shipment_title}>Total Shipment Value -</div>
 
-				<div className={styles.ShipmentValue}>
+				<div className={styles.shipment_value}>
 					{formatAmount({
 						amount   : net_total_price_discounted,
 						currency : net_total_price_currency,
@@ -70,9 +71,9 @@ function Header({
 				</div>
 			</div>
 
-			<div className={styles.EditInvoice}>
+			<div className={styles.edit_invoice}>
 				{!isCustomer ? (
-					<div className={styles.ReviwedStats}>
+					<div className={styles.reviwed_stats}>
 						{reviewed_invoices ?? 0}
 						{' '}
 						of

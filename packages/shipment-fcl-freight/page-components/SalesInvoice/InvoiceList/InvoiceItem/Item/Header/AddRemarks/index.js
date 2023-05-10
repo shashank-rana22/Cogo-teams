@@ -2,7 +2,6 @@ import { Button, Textarea, toast, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import styles from './styles.module.css';
 // import useInvoiceRemarks from '../../../../../../../hooks/useInvoiceRemarks';
 
 function AddRemarks({

@@ -29,7 +29,7 @@ function ChangeCurrency({
 		>
 			<Modal.Header title="CHANGE CURRENCY" />
 			<Modal.Body>
-				<div className={styles.Form}>
+				<div className={styles.form}>
 					{/* <Layout fields={fields} controls={controls} errors={errors} /> */}
 					<div>Select Currency</div>
 					<Select
