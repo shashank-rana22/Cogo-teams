@@ -228,12 +228,12 @@ function Actions({
 	);
 
 	return (
-		<div className={styles.Container}>
-			<div className={styles.MainContainer}>
-				<div className={styles.ActionsWrap}>
-					<div className={styles.Statuses}>
+		<div className={styles.container}>
+			<div className={styles.main_container}>
+				<div className={styles.actions_wrap}>
+					<div className={styles.statuses}>
 						{/* {invoice.status ? ( */}
-						<div className={styles.InfoContainer}>
+						<div className={styles.info_container}>
 							{startCase(invoice.status) || 'Pending'}
 						</div>
 						{/* ) : null} */}
@@ -263,15 +263,15 @@ function Actions({
 							interactive
 							content={<AmendmentReasons invoice={invoice} />}
 						>
-							<div className={styles.IconInfoWrapper}>
+							<div className={styles.icon_info_wrapper}>
 								<IcCError width={17} height={17} />
 							</div>
 						</Tooltip>
 					) : null}
 				</div>
 
-				<div className={styles.ActionsWrap}>
-					<div className={styles.EmailWrapper}>
+				<div className={styles.actions_wrap}>
+					<div className={styles.email_wrapper}>
 						<IcMEmail
 							style={{ cursor: 'pointer', color: '#F68B21' }}
 							onClick={() => setSendEmail(true)}
@@ -282,25 +282,25 @@ function Actions({
 							placement="bottom"
 							content={(
 								<div style={{ fontSize: '10px', color: '#333333' }}>
-									<div className={styles.FlexRow}>
+									<div className={styles.flex_row}>
 										Proforma email sent :
 										{' '}
 										{invoice.proforma_email_count || 0}
 									</div>
 
-									<div className={styles.FlexRow}>
+									<div className={styles.flex_row}>
 										Live email sent:
 										{' '}
 										{invoice.sales_email_count || 0}
 									</div>
 									{isLTLPrepaid && (
-										<div className={styles.FlexRow}>
-											<div className={styles.FlexRow}>
+										<div className={styles.flex_row}>
+											<div className={styles.flex_row}>
 												UTR Number:
 												{' '}
 												{invoice?.sales_utr?.utr_number || ''}
 											</div>
-											<div className={styles.FlexRow}>
+											<div className={styles.flex_row}>
 												Status:
 												{' '}
 												{invoice?.sales_utr?.status || ''}
@@ -330,7 +330,7 @@ function Actions({
 						<div
 							role="button"
 							tabIndex={0}
-							className={styles.IconMoreWrapper}
+							className={styles.icon_more_wrapper}
 							onClick={() => setShow(!show)}
 						>
 							<IcMOverflowDot />
@@ -347,7 +347,7 @@ function Actions({
 							interactive
 							content={remarkRender()}
 						>
-							<div className={styles.IconMoreWrapper}>
+							<div className={styles.icon_more_wrapper}>
 								<IcMInfo fill="yellow" />
 							</div>
 						</Tooltip>
