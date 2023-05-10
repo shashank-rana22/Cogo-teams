@@ -3,7 +3,6 @@
 
 	:global {
 		.ui_tab_list_container {
-			margin: 16px 0;
 			background: var(--color-secondary-5);
 			border-radius: 4px;
 		}
@@ -12,13 +11,6 @@
 			padding: 12px;
 		}
 	}
-}
-
-.header {
-	margin-bottom: 16px;
-	font-size: 20px;
-	font-weight: 600;
-	line-height: 30px;
 }
 
 .inner_tabs {

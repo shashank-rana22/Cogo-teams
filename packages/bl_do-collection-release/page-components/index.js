@@ -1,12 +1,10 @@
 import { Tabs, TabPanel, Select, Input, cl } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import ClickableDiv from '../commons/ClickableDiv';
 import STATIONARY_PERMISSIONS from '../configs/STATIONARY_PERMISSION.json';
 import TAB_CONFIG from '../configs/TAB_CONFIG.json';
-import getBlDoPayload from '../helpers/getBlDoPayload';
-// import ChildTabs from '../commons/ChildTabs';
 
 import FCL from './FCL';
 import FCLLocal from './FCL-Local';
@@ -34,16 +32,12 @@ export default function BLDoCollectionDesk() {
 		q             : '',
 		page          : 1,
 	});
-	// const [payload, setFinalPaload] = useState({});
-	// useEffect(() => {
-	// 	getBlDoPayload({ stateProps, setFinalPaload });
-	// }, [stateProps]);
 
 	const profile = useSelector((state) => state.profile || {});
 
 	const Desk = deskMapping[stateProps.shipment_type];
 
-	const renderFilters = () => (
+	const renderFilters =		(
 		<div className={styles.filters_tabs}>
 			{
 			TAB_CONFIG.TABS.map((item) => (
@@ -59,7 +53,7 @@ export default function BLDoCollectionDesk() {
 		</div>
 	);
 
-	const renderInnerTabs = () => (
+	const renderInnerTabs = (
 		<div className={styles.inner_tabs}>
 
 			<div className={styles.service_tabs}>
@@ -95,8 +89,6 @@ export default function BLDoCollectionDesk() {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>BL/DO Collection</div>
-
 			<Tabs
 				activeTab={stateProps.activeTab}
 				themeType="secondary"
@@ -108,8 +100,8 @@ export default function BLDoCollectionDesk() {
 					title="BL Colletion-Release"
 				>
 					<div className={styles.outer_tab}>
-						{renderInnerTabs()}
-						{renderFilters()}
+						{renderInnerTabs}
+						{renderFilters}
 						<Desk setStateProps={setStateProps} stateProps={stateProps} />
 					</div>
 				</TabPanel>
@@ -118,8 +110,8 @@ export default function BLDoCollectionDesk() {
 					title="DO Release"
 				>
 					<div className={styles.outer_tab}>
-						{renderInnerTabs()}
-						{renderFilters()}
+						{renderInnerTabs}
+						{renderFilters}
 						<Desk setStateProps={setStateProps} stateProps={stateProps} />
 					</div>
 				</TabPanel>

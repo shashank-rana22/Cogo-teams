@@ -1,4 +1,3 @@
-// import CardList from '@cogo/bookings/commons/CardList';
 import { Tabs, TabPanel, Table } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
@@ -38,13 +37,11 @@ function PendingKnockOff({
 			>
 				<TabPanel name="invoice" title="Invoices">
 					<div className={styles.list_container}>
-						Invoices
 						<Table fields={columns} data={list_of_invoices} />
 					</div>
 				</TabPanel>
 
 				<TabPanel name="tasks" title="Tasks">
-					<div>Task</div>
 					<PendingTasks
 						taskList={tasks}
 						item={item}

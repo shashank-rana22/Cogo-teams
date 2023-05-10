@@ -6,7 +6,7 @@ import useListBlDOShipments from '../../hooks/useListBlDOShipment';
 import styles from './styles.module.css';
 
 function FCLLocal({ stateProps = {}, setStateProps = () => {} }) {
-	const { data, loading } = useListBlDOShipments({ prefix: 'fcl_local', stateProps, setStateProps });
+	const { data, loading } = useListBlDOShipments({ prefix: 'fcl_local', stateProps });
 	if (loading) {
 		return (
 			<div className={styles.loader}>

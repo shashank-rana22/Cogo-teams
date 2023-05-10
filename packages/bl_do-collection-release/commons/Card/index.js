@@ -169,7 +169,7 @@ export default function Card({
 		});
 
 		if (payload) {
-			updateTask({ payload, refetch });
+			updateTask(payload);
 		}
 	};
 

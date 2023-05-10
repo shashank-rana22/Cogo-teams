@@ -5,9 +5,10 @@ import getBlDoPayload from '../helpers/getBlDoPayload';
 
 const emptyData = { list: [], total: 0, total_page: 0 };
 
-export default function useListBlDOShipment({ prefix = '', stateProps = {}, setStateProps = () => {} }) {
+export default function useListBlDOShipment({ prefix = '', stateProps = {} }) {
 	const [data, setData] = useState(emptyData);
 	const payload = useMemo(() => getBlDoPayload({ stateProps }), [stateProps]);
+
 	const { activeTab } = stateProps;
 
 	const [{ loading }, trigger] = useRequest({
@@ -20,19 +21,15 @@ export default function useListBlDOShipment({ prefix = '', stateProps = {}, setS
 			const res = await trigger({
 				params: payload,
 			});
-			if (res.data?.list?.length === 0) {
-				setStateProps((p) => ({ ...p, page: 1 }));
-			} else {
-				setData(res.data || {});
-			}
+			setData(res.data || {});
 		} catch (err) {
 			console.log(err);
 		}
-	}, [trigger, setStateProps, payload]);
+	}, [trigger, payload]);
 
 	useEffect(() => {
 		listBLs();
-	}, [listBLs, prefix]);
+	}, [listBLs]);
 
 	return {
 		data: {

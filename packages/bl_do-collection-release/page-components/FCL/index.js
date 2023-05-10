@@ -6,7 +6,7 @@ import useListBlDOShipments from '../../hooks/useListBlDOShipment';
 import styles from './styles.module.css';
 
 function FCL({ stateProps = {}, setStateProps = () => {} }) {
-	const { data, loading } = useListBlDOShipments({ prefix: 'fcl_freight', stateProps, setStateProps });
+	const { data, loading } = useListBlDOShipments({ prefix: 'fcl_freight', stateProps });
 
 	if (loading) {
 		return (
