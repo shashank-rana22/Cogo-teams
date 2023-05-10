@@ -74,8 +74,6 @@ function GenerateMAWB({
 		{ id: uuid(), documentNo: null, isNew: true },
 	]);
 
-	console.log('hawbDetails', hawbDetails);
-
 	const [activeHawb, setActiveHawb] = useState(hawbDetails[0]);
 	const [activeKey, setActiveKey] = useState('basic');
 
