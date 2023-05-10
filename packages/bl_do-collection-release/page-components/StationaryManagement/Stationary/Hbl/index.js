@@ -34,4 +34,3 @@ function Hbl({ data = {}, loading }) {
 }
 
 export default Hbl;
-
