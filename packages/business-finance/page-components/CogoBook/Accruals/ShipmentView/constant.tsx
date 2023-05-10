@@ -427,15 +427,17 @@ export const accrualColumn = (
 	{
 		Header   : '',
 		id       : 'ribbon',
-		accessor : (row) => (
-
-			<div>
-				<div className={styles.ribbon}>
-					{row?.shipmentType || '-'}
+		accessor : (row:{ shipmentType?:string }) => {
+			const { shipmentType } = row || {};
+			return (
+				<div>
+					{shipmentType && (
+						<div className={styles.ribbon}>
+							{shipmentType}
+						</div>
+					)}
 				</div>
-			</div>
-
-		),
+			);
+		},
 	},
-
 ];

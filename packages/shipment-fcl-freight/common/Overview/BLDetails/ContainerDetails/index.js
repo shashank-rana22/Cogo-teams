@@ -14,7 +14,7 @@ function ConatinerDetails({ containerDetails = [], cargoDetails = {} }) {
 						<div className={styles.container_description}>
 							<div className={styles.serial_number}>
 								{index + 1}
-								:
+								.
 							</div>
 							<div className={styles.container_number}>{item?.container_number}</div>
 							<div className={styles.tag_wrapper}>

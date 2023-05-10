@@ -1,60 +1,55 @@
 import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
-import { Documents, Tracking } from '@cogoport/ocean-modules';
-// import { ShipmentChat } from '@cogoport/shipment-chat';
+import { Tracking } from '@cogoport/ocean-modules';
+import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect } from 'react';
 
+import CancelDetails from '../../../common/CancelDetails';
+import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
+import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
+import Tasks from '../../../common/Tasks';
 import Timeline from '../../../common/TimeLine';
 import useGetServices from '../../../hooks/useGetServices';
-import useGetShipment from '../../../hooks/useGetShipment';
 import useGetTimeLine from '../../../hooks/useGetTimeline';
 
 import styles from './styles.module.css';
 
-const shipment_additional_methods = ['main_service',
-	'documents'];
+const services_additional_methods = ['stakeholder', 'service_objects', 'booking_requirement'];
 
-const services_additional_methods = [
-	'stakeholder',
-	'service_objects'];
-
-function Superadmin() {
+function Superadmin({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
-	const [activeTab, setActiveTab] = useState('overview');
 
-	const { get } = useGetShipment({ additional_methods: shipment_additional_methods });
-	const { shipment_data, isGettingShipment } = get;
+	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
 
-	const { servicesGet } = useGetServices({
-		shipment_id        : shipment_data?.id,
-		additional_methods : services_additional_methods,
+	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
+
+	const { servicesGet = {} } = useGetServices({
+		shipment_data,
+		additional_methods: services_additional_methods,
+		activeStakeholder,
 	});
 
-	const { getTimeline } = useGetTimeLine({ shipment_data });
+	const { getTimeline = {} } = useGetTimeLine({ shipment_data });
 
 	const contextValues = useMemo(() => ({
 		...get,
 		...servicesGet,
 		...getTimeline,
-		activeStakeholder: 'Superadmin',
-	}), [get, servicesGet, getTimeline]);
-
-	const handleClick = () => {
-		router.reload();
-	};
+		activeStakeholder,
+	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
 	useEffect(() => {
 		router.prefetch(router.asPath);
 	}, [router]);
 
-	if (isGettingShipment) {
+	if (isGettingShipment || getShipmentStatusCode === undefined) {
 		return (
 			<div className={styles.loader}>
 				Loading Shipment Data....
@@ -63,20 +58,32 @@ function Superadmin() {
 		);
 	}
 
-	if (!shipment_data) {
+	if (!shipment_data && ![403, undefined].includes(getShipmentStatusCode)) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.section}>
-					<h1 className={styles.error}>404</h1>
-					<div className={styles.page}>Ooops!!! The page you are looking for is not found</div>
+					<h2 className={styles.error}>Something Went Wrong!</h2>
+
+					<div className={styles.page}>We are looking into it.</div>
+
 					<Button
-						onClick={handleClick}
+						onClick={() => router.reload()}
 						className={styles.refresh}
 					>
 						<IcMRefresh />
-						&nbsp;
-						Refresh
+						&nbsp;Refresh
 					</Button>
+				</div>
+			</div>
+		);
+	}
+
+	if (getShipmentStatusCode === 403 && getShipmentStatusCode !== undefined) {
+		return (
+			<div className={styles.shipment_not_found}>
+				<div className={styles.page}>
+					You don&apos;t have permission to visit this page.
+					Please contact at +91 7208083747
 				</div>
 			</div>
 		);
@@ -87,15 +94,22 @@ function Superadmin() {
 			<div>
 				<div className={styles.top_header}>
 					<ShipmentInfo />
-					{/* <ShipmentChat /> */}
+
+					<ShipmentChat />
 				</div>
+
+				{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
+
+				<DocumentHoldDetails />
 
 				<div className={styles.header}>
 					<ShipmentHeader />
+
 					<PocSop />
 				</div>
 
 				<Timeline />
+
 				<div className={styles.container}>
 					<Tabs
 						activeTab={activeTab}
@@ -106,15 +120,15 @@ function Superadmin() {
 						<TabPanel name="overview" title="Overview">
 							<Overview shipmentData={shipment_data} />
 						</TabPanel>
+
 						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
-							{/* <TimelineAndTask /> */}
+							<Tasks />
 						</TabPanel>
-						<TabPanel name="sales_live_invoice" title="Sales Live Invoice">
-							{/* <SalesInvoice /> */}
-						</TabPanel>
+
 						<TabPanel name="documents" title="Documents">
 							<Documents />
 						</TabPanel>
+
 						<TabPanel name="emails" title="Emails">
 							<ShipmentMails
 								source="cogo_rpa"
@@ -122,6 +136,7 @@ function Superadmin() {
 								pre_subject_text={`${shipment_data?.serial_id}`}
 							/>
 						</TabPanel>
+
 						<TabPanel name="tracking" title="Tracking">
 							<Tracking shipmentData={shipment_data} />
 						</TabPanel>

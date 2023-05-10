@@ -9,8 +9,10 @@ import Card from '../../Card';
 import LabelValue from './LabelValue';
 import styles from './styles.module.css';
 
-function TradeParty({ data = {}, title = '', setAddCompany = () => {}, setAddPoc = () => {} }) {
+function TradeParty({ data = {}, title = '', setAddCompany = () => {}, setAddPoc = () => {}, rolesPermission = {} }) {
 	const [show, setShow] = useState({});
+
+	const editPermission = rolesPermission?.can_edit || [];
 
 	const {
 		trade_partner_details:{
@@ -36,7 +38,11 @@ function TradeParty({ data = {}, title = '', setAddCompany = () => {}, setAddPoc
 	};
 
 	return (
-		<Card title={title} showEdit editAction={editAction}>
+		<Card
+			title={title}
+			showEdit={editPermission?.includes(trade_party_type)}
+			editAction={editAction}
+		>
 			<div>
 				<div className={styles.header}>
 					<div className={styles.business_name}>{business_name}</div>
