@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
-const data = [
+const sampleData = [
 	{
 		id       : 1,
 		name     : 'Node 1',
@@ -54,6 +55,8 @@ const data = [
 		],
 	},
 ];
+
+const data = [];
 
 const useHandleCurriculum = () => {
 	const [finalData, setFinalData] = useState(data);
@@ -128,12 +131,30 @@ const useHandleCurriculum = () => {
 	};
 
 	const deleteModule = ({ id, isNew = false }) => {
-		console.log('isNew', isNew);
-
 		if (isNew) {
 			setFinalData((prev) => prev.filter((item) => item.id !== id));
 		}
 	};
+
+	const onSaveModule = ({ values, module, setShowModule }) => {
+		setFinalData((prev) => prev.map((item) => {
+			if (item.id === module.id) {
+				return {
+					...item, ...values, isNew: false, children: [],
+				};
+			}
+
+			return item;
+		}));
+
+		setShowModule((prev) => prev.filter((item) => item !== module.id));
+	};
+
+	useEffect(() => {
+		if (isEmpty(data)) {
+			setFinalData([{ id: new Date().getTime(), name: '', children: [], isNew: true }]);
+		}
+	}, []);
 
 	return {
 		handleDragStart,
@@ -142,6 +163,7 @@ const useHandleCurriculum = () => {
 		finalData,
 		addModule,
 		deleteModule,
+		onSaveModule,
 	};
 };
 

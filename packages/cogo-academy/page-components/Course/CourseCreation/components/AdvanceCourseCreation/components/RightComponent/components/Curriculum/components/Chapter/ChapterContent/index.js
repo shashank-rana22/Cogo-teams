@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
-import { getFieldController } from '../../../../../../../../../commons/getFieldController';
+import { getFieldController } from '../../../../../../../../../../commons/getFieldController';
 
 import controls from './controls';
 import styles from './styles.module.css';

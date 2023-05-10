@@ -1,0 +1,47 @@
+.module {
+	position: relative;
+	display: flex;
+	align-items: center;
+	margin-bottom: 16px;
+}
+
+.left {
+	margin-left: 20px;
+}
+
+.flex {
+	display: flex;
+}
+
+.name {
+	margin-left: 4px;
+}
+
+.icon {
+	cursor: pointer;
+}
+
+.select_container {
+    &.module_description {
+        margin-top: 16px;
+    }
+}
+
+.button_container {
+	position: absolute;
+	right: 20px;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+}
+
+.input_container {
+    margin-bottom: 44px;
+	width: 100%;
+}
+
+.error_message {
+	font-size: 12px;
+	font-weight: 400;
+	color: #cb6464;
+}
