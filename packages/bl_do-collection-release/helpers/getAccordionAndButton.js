@@ -10,14 +10,14 @@ const actionButtonMapping = {
 };
 
 const conditionMapping = {
-	fcl_freight_import       : ['fcl_freight_local'],
-	fcl_freight_export       : ['fcl_freight', 'fcl_freight_local'],
-	lcl_freight_import       : ['lcl_freight_local'],
-	lcl_freight_export       : ['lcl_freight', 'lcl_freight_local'],
-	fcl_freight_local_import : ['fcl_freight_local'],
+	fcl_freight_import : ['fcl_freight_local'],
+	fcl_freight_export : ['fcl_freight', 'fcl_freight_local'],
+	lcl_freight_import : ['lcl_freight_local'],
+	lcl_freight_export : ['lcl_freight', 'lcl_freight_local'],
+	fcl_local_import   : ['fcl_freight_local'],
 };
 
-const getAccordionAndButton = ({ activeTab = '', item = {} }) => {
+const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) => {
 	let showAccordion = true;
 	let showInvoiceAndTask = false;
 	let showDeliveryOrderTask = false;
@@ -38,7 +38,7 @@ const getAccordionAndButton = ({ activeTab = '', item = {} }) => {
 	if (!isOldCollectionParty) {
 		const filteredInvoiceData = invoice_data?.filter(
 			(inv) => inv?.service_name?.some((e) => conditionMapping[
-				`${item?.shipment_type}_${item?.trade_type}`
+				`${stateProps.shipment_type}_${item?.trade_type}`
 			]?.includes(e))
 				&& !['reimbursement', 'credit_note'].includes(inv?.invoice_type)
 				&& inv.status !== 'init',

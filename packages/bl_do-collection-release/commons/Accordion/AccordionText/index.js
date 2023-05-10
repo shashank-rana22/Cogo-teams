@@ -18,7 +18,7 @@ const textMapping = {
 };
 
 export default function AccordionText({
-	activeTab = '',
+	stateProps = {},
 	accordionOpen = false,
 	handleAccordionOpen = () => {},
 	showDeliveryOrderTask = false,
@@ -38,7 +38,7 @@ export default function AccordionText({
 						{' '}
 						<div className={styles.text}>
 							{!showDeliveryOrderTask
-								? textMapping?.[activeTab]
+								? textMapping?.[stateProps.inner_tab]
 								: 'Upload Delivery Order'}
 						</div>
 					</>

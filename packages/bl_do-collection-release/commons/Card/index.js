@@ -56,10 +56,10 @@ const assigned_stakeholder_mapping = {
 };
 
 const stakeholderMappings = {
-	service_ops2    : 'Document Desk Ops:',
+	service_ops2    : 'Document Desk:',
 	booking_agent   : 'KAM:',
-	release_desk    : 'Release Ops:',
-	collection_desk : 'Collection Ops:',
+	release_desk    : 'Release Desk:',
+	collection_desk : 'Collection Desk:',
 };
 
 export default function Card({
@@ -97,6 +97,7 @@ export default function Card({
 	} = getAccordionAndButton({
 		activeTab: stateProps.inner_tab,
 		item,
+		stateProps,
 	});
 
 	const accordionOpen = item?.id === openItem?.id;
@@ -130,6 +131,7 @@ export default function Card({
 				show      : true,
 				labelText : 'Do you want to Knock Off these invoices?',
 			});
+			listTasks();
 		} else if (
 			stateProps.inner_tab === 'collected'
 			&& item?.trade_type === 'import'
@@ -173,6 +175,10 @@ export default function Card({
 		}
 	};
 
+	const stakeholders =		(item?.stakeholders || [])
+		.filter((stakeholder) => (stakeholder.service_id === item?.freight_service?.id)
+		|| (stakeholder?.service_id === null));
+
 	let cardClassName = !showAccordion ? 'no-accordion' : '';
 	cardClassName
 		+= isCriticalVisible && isCardCritical({ item }) ? ' card-critical' : '';
@@ -208,7 +214,7 @@ export default function Card({
 					) : null}
 
 					<div className={styles.stakeholders}>
-						{(item?.stakeholders || []).map((stakeholder) => (
+						{(stakeholders || []).map((stakeholder) => (
 							<div className={cl`${styles.text} ${styles.thin} ${styles.small}`}>
 								{stakeholderMappings[stakeholder?.stakeholder_type]}
 								{' '}
@@ -223,7 +229,6 @@ export default function Card({
 
 			{showAccordion || showDeliveryOrderTask ? (
 				<Accordion
-					activeTab={stateProps.inner_tab}
 					item={item}
 					accordionOpen={accordionOpen}
 					tasks={list || []}
@@ -244,11 +249,13 @@ export default function Card({
 					show={confirmationModal?.show}
 					onClose={closeModal}
 					className="primary md"
-					// afterOpen={getShipmentPendingTask}
+					afterOpen={listTasks}
 				>
-					<Modal.Header>
+					<Modal.Header />
+
+					<Modal.Body>
 						<div className={styles.label}>{confirmationModal?.labelText}</div>
-					</Modal.Header>
+					</Modal.Body>
 
 					<Modal.Footer>
 						<div className={cl`${styles.container} ${styles.row}`}>

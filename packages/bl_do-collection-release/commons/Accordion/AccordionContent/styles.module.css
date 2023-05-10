@@ -140,3 +140,10 @@
 	color: #ee3425;
 	background-color: #fdebe9;
 }
+
+.button_container{
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	padding: 0px 32px 12px 0px;
+}

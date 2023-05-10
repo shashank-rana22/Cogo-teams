@@ -81,7 +81,11 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 						<Tooltip
 							animation="shift-away"
 							interactive
-							content={(<div>service provider contacts</div>
+							content={(
+								<SPPopver
+									spDetails={item?.organization_poc}
+									address={item?.organization_address}
+								/>
 							)}
 						>
 							<div className={styles.tooltip_container}>Click Here To View</div>
@@ -101,7 +105,9 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 				</div>
 				<div className={styles.right}>
 					<div className={styles.grey}>
-						BL Details
+						{stateProps.activeTab.toUpperCase()}
+						{' '}
+						Details
 					</div>
 					<div className={styles.details}>
 						<Tooltip
@@ -112,7 +118,6 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 						>
 							<div className={styles.tooltip_container}>Details</div>
 						</Tooltip>
-
 					</div>
 				</div>
 			</div>

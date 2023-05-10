@@ -3,38 +3,30 @@ const statusMapping = {
 	released    : 'released',
 	collected   : 'release_pending',
 };
-const getMutatedControls = ({ item, activeTab, controls = [] }) => {
-	const { export_bl_details, import_bl_details, do_details } = item || {};
+const getMutatedControls = ({ item, stateProps, controls = [] }) => {
+	const { bill_of_ladings, do_documents	} = item || {};
 	const blOptions = [];
 	const mutatedControls = [];
 
 	let docs;
 
-	if (
-		[
-			'knockoff_pending',
-			'collection_pending',
-			'under_collection',
-			'collected',
-		].includes(activeTab)
-		&& item?.trade_type === 'import'
-	) {
-		docs = import_bl_details;
+	if (stateProps.activeTab === 'do') {
+		docs = do_documents || [];
 	} else {
-		docs = item?.trade_type === 'export' ? export_bl_details : do_details;
+		docs = bill_of_ladings || [];
 	}
 
 	if (
 		['collection_pending', 'surrendered', 'released', 'collected'].includes(
-			activeTab,
+			stateProps.inner_tab,
 		)
 	) {
 		const availableDocs = (docs || []).filter((ele) => {
-			if (activeTab === 'collection_pending') {
+			if (stateProps.inner_tab === 'collection_pending') {
 				return ele.collection_mode === null;
 			}
 
-			return ele.status === statusMapping[activeTab];
+			return ele.status === statusMapping[stateProps.inner_tab];
 		});
 
 		availableDocs.forEach((doc) => {

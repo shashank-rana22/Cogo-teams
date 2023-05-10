@@ -3,6 +3,7 @@ import { useState, useRef } from 'react';
 
 import taskConfigs from '../../../configs/taskConfigs.json';
 import getMutatedControls from '../../../helpers/getMutatedControls';
+import getTableFormatedData from '../../../helpers/getTableFormatedData';
 import Loader from '../../Loader';
 import PendingTasks from '../../PendingTasks/TaskList';
 import { columns } from '../Invoices/tableColumn';
@@ -12,7 +13,7 @@ import styles from './styles.module.css';
 import CustomTasks from './Tasks';
 
 export default function AccordionContent({
-	activeTab = '',
+	stateProps = {},
 	item = {},
 	tasks = [],
 	taskLoading = false,
@@ -31,26 +32,27 @@ export default function AccordionContent({
 
 	const formRef = useRef(null);
 
-	const taskConfig = taskConfigs?.[activeTab];
+	const taskConfig = taskConfigs?.[stateProps.inner_tab];
 	const currentConfig = taskConfig?.[currentStep?.text];
 	const controls = currentConfig?.controls;
-	const usingDefaultPendingTasks =		activeTab === 'under_collection' || showDeliveryOrderTask;
+	const usingDefaultPendingTasks = stateProps.inner_tab === 'under_collection' || showDeliveryOrderTask;
 
 	let actionButton = currentConfig?.action_text;
 	let manualFinal = false;
 
 	if (
 		currentConfig?.conditional_final_step
-		&& activeTab === 'collected'
+		&& stateProps.inner_tab === 'collected'
 		&& myForm?.delivery_mode === 'telex'
 	) {
 		actionButton = 'FINISH';
 		manualFinal = true;
 	}
 
-	const { mutatedControls } = getMutatedControls({ item, activeTab, controls });
+	const { mutatedControls } = getMutatedControls({ item, stateProps, controls });
 
 	const list_of_invoices = item?.invoice_data || [];
+	const tableData = getTableFormatedData(list_of_invoices);
 
 	const handleNextAction = async () => {
 		const isFormValid = await formRef.current?.formTrigger();
@@ -74,7 +76,7 @@ export default function AccordionContent({
 
 	const filteredTask = tasks.filter((e) => e.task === 'upload_delivery_order');
 
-	const taskToSend =		activeTab === 'collected' && item?.trade_type === 'import'
+	const taskToSend = stateProps.inner_tab === 'collected' && item?.trade_type === 'import'
 		? filteredTask
 		: tasks;
 
@@ -145,7 +147,7 @@ export default function AccordionContent({
 		<div className={styles.container}>
 			{!showInvoiceAndTask ? (
 				<div className={styles.list_container}>
-					<Table columns={columns} data={list_of_invoices} />
+					<Table columns={columns} data={tableData} />
 				</div>
 			) : (
 				<Tabs
@@ -155,7 +157,7 @@ export default function AccordionContent({
 				>
 					<TabPanel name="invoice" title="Invoices">
 						<div className={styles.list_container}>
-							<Table columns={columns} data={list_of_invoices} />
+							<Table columns={columns} data={tableData} />
 						</div>
 					</TabPanel>
 

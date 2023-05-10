@@ -4,7 +4,6 @@ import Invoices from './Invoices';
 import styles from './styles.module.css';
 
 export default function Accordion({
-	activeTab = '',
 	item = {},
 	accordionOpen = false,
 	tasks = [],
@@ -20,7 +19,7 @@ export default function Accordion({
 }) {
 	return (
 		<div className={styles.main_container}>
-			{activeTab === 'knockoff_pending' ? (
+			{stateProps.inner_tab === 'knockoff_pending' ? (
 				<Invoices
 					item={item}
 					accordionOpen={accordionOpen}
@@ -32,16 +31,15 @@ export default function Accordion({
 				/>
 			) : (
 				<AccordionText
-					activeTab={activeTab}
+					stateProps={stateProps}
 					accordionOpen={accordionOpen}
 					handleAccordionOpen={handleAccordionOpen}
 					showDeliveryOrderTask={showDeliveryOrderTask}
 					showInvoiceAndTask={showInvoiceAndTask}
 				/>
 			)}
-			{accordionOpen && activeTab !== 'knockoff_pending' ? (
+			{accordionOpen && stateProps.inner_tab !== 'knockoff_pending' ? (
 				<AccordionContent
-					activeTab={activeTab}
 					item={item}
 					tasks={tasks}
 					taskLoading={taskLoading}

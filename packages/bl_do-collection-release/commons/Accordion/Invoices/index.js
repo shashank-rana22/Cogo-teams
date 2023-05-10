@@ -1,7 +1,8 @@
-// import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { cl, Tooltip, Table } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowUp, IcMArrowDown, IcMDocument } from '@cogoport/icons-react';
 
+import getTableFormatedData from '../../../helpers/getTableFormatedData';
 import ClickableDiv from '../../ClickableDiv';
 import PendingKnockOff from '../PendingKnockOff';
 
@@ -20,6 +21,8 @@ export default function Invoices({
 	const list_of_invoices = (item?.invoice_data || []).filter(
 		(inv) => inv.status !== 'init',
 	);
+	const tableData = getTableFormatedData(list_of_invoices);
+
 	const renderPart = (list_of_invoices || []).slice(0, 3);
 	const invoiceLength = list_of_invoices.length;
 	const remainLength = invoiceLength > 3 ? invoiceLength - 3 : 0;
@@ -37,16 +40,15 @@ export default function Invoices({
 				<div className={cl`${styles.text} ${styles.margin_left}`}>
 					<div className={cl`${styles.text}`}>AMOUNT</div>
 					<div className={cl`${styles.text} ${styles.bold_colored}`}>
-						{/* {formatAmount({
+						{formatAmount({
 							amount   : invoice?.inr_invoice_total,
-							currency : invoice?.invoice_currency,
+							currency : invoice?.invoice_currency || 'inr',
 							options  : {
 								style                 : 'currency',
 								currencyDisplay       : 'code',
 								maximumFractionDigits : 2,
 							},
-						})} */}
-						Ammount comes here
+						})}
 					</div>
 				</div>
 			</div>
@@ -70,7 +72,7 @@ export default function Invoices({
 		if (item?.trade_type === 'export') {
 			return (
 				<div className={styles.list_container}>
-					<Table columns={columns} data={list_of_invoices} />
+					<Table columns={columns} data={tableData} />
 				</div>
 			);
 		}

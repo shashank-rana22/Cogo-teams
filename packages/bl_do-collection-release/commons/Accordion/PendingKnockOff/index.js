@@ -41,15 +41,18 @@ function PendingKnockOff({
 					</div>
 				</TabPanel>
 
-				<TabPanel name="tasks" title="Tasks">
-					<PendingTasks
-						taskList={tasks}
-						item={item}
-						handleAccordionOpen={handleAccordionOpen}
-						refetchForTask={refetchForTask}
-						tasksLoading={taskLoading}
-					/>
-				</TabPanel>
+				{tasks.length ? (
+					<TabPanel name="tasks" title="Tasks">
+						<PendingTasks
+							taskList={tasks}
+							item={item}
+							handleAccordionOpen={handleAccordionOpen}
+							refetchForTask={refetchForTask}
+							tasksLoading={taskLoading}
+						/>
+					</TabPanel>
+				)
+					: null}
 			</Tabs>
 		</div>
 	);

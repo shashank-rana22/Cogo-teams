@@ -1,5 +1,6 @@
 {
   "fcl_freight": "FCL",
   "lcl_freight": "LCL",
-  "fcl_local": "FCL Local"
+  "fcl_local": "FCL Local",
+  "fcl_freight_local": "FCL Local"
 }
