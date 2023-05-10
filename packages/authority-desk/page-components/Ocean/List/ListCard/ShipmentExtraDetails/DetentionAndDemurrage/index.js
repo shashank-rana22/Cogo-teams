@@ -13,7 +13,7 @@ function DetentionAndDemurrage({ item = {} }) {
 		free_days_demurrage_origin,
 		free_days_detention_destination,
 		free_days_detention_origin,
-	} = primary_service;
+	} = primary_service || {};
 
 	return (
 		<div className={styles.detention_demurrage}>
