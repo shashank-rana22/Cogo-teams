@@ -37,11 +37,11 @@ const useGetPieBreakdown = ({ selectedPieData, byEtd, headerFilters }) => {
 				params: {
 					type,
 					sub_type,
-					as_on_date   : formattedDate,
+					as_on_date  : formattedDate,
 					page,
-					page_size    : 10,
-					by_etd : byEtd,
-					entity_code  : entity_code?.length > 0 ? entity_code : undefined,
+					page_size   : 10,
+					by_etd      : byEtd,
+					entity_code : entity_code?.length > 0 ? entity_code : undefined,
 				},
 			});
 		} catch (err) {

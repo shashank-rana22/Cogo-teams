@@ -26,9 +26,9 @@ const useGetOrganizationCohort = ({
 			await trigger({
 				params: {
 					page,
-					page_size    : 5,
-					by_etd : byEtd,
-					entity_code  : entity_code?.length > 0 ? entity_code : undefined,
+					page_size   : 5,
+					by_etd      : byEtd,
+					entity_code : entity_code?.length > 0 ? entity_code : undefined,
 				},
 			});
 		} catch (err) {

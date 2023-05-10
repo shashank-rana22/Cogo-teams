@@ -33,9 +33,9 @@ const useGetMonthlyRevenue = ({
 			if (apiKey) {
 				await trigger({
 					params: {
-						page         : page || filters.page,
-						by_etd : byEtd,
-						entity_code  : entity_code?.length > 0 ? entity_code : undefined,
+						page        : page || filters.page,
+						by_etd      : byEtd,
+						entity_code : entity_code?.length > 0 ? entity_code : undefined,
 					},
 				});
 			}

@@ -20,8 +20,8 @@ const useGetAccountWiseFunnel = (byEtd, headerFilters) => {
 			try {
 				await trigger({
 					params: {
-						by_etd : byEtd,
-						entity_code  : entity_code?.length > 0 ? entity_code : undefined,
+						by_etd      : byEtd,
+						entity_code : entity_code?.length > 0 ? entity_code : undefined,
 					},
 				});
 			} catch (err) {

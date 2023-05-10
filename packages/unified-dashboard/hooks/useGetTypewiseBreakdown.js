@@ -37,11 +37,11 @@ const useGetTypewiseBreakdown = ({
 			try {
 				await trigger({
 					params: {
-						as_on_date   : formattedDate,
+						as_on_date  : formattedDate,
 						type,
-						sub_type     : type === 'cost' ? undefined : id,
-						by_etd : byEtd,
-						entity_code  : entity_code?.length > 0 ? entity_code : undefined,
+						sub_type    : type === 'cost' ? undefined : id,
+						by_etd      : byEtd,
+						entity_code : entity_code?.length > 0 ? entity_code : undefined,
 					},
 				});
 			} catch (err) {
