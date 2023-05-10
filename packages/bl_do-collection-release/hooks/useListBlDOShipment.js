@@ -1,4 +1,5 @@
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState, useMemo } from 'react';
 
 import getBlDoPayload from '../helpers/getBlDoPayload';
@@ -7,6 +8,7 @@ const emptyData = { list: [], total: 0, total_page: 0 };
 
 export default function useListBlDOShipment({ prefix = '', stateProps = {} }) {
 	const [data, setData] = useState(emptyData);
+	const { authParams } = useSelector(({ profile }) => profile) || {};
 	const payload = useMemo(() => getBlDoPayload({ stateProps }), [stateProps]);
 
 	const { activeTab } = stateProps;
@@ -29,7 +31,7 @@ export default function useListBlDOShipment({ prefix = '', stateProps = {} }) {
 
 	useEffect(() => {
 		listBLs();
-	}, [listBLs]);
+	}, [listBLs, authParams]);
 
 	return {
 		data: {

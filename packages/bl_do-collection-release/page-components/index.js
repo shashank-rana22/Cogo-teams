@@ -1,4 +1,5 @@
 import { Tabs, TabPanel, Select, Input, cl, Toggle } from '@cogoport/components';
+import ScopeSelect from '@cogoport/scope-select';
 import { useSelector } from '@cogoport/store';
 import { useRouter } from 'next/router';
 import { useState, useCallback } from 'react';
@@ -97,6 +98,9 @@ export default function BLDoCollectionDesk() {
 					value={stateProps.q}
 					onChange={(val) => setStateProps({ ...stateProps, q: val })}
 				/>
+				<div className={styles.scope_container}>
+					<ScopeSelect size="md" showChooseAgent={false} />
+				</div>
 			</div>
 		</div>
 	);
