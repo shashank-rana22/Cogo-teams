@@ -94,13 +94,11 @@ function FormContainer({
 
 	const calculateCharges = () => {
 		const updatedCharges = (formValues.carrierOtherCharges || []).map((charge) => {
-			let price = 0;
+			let price:number = 0;
 			if (charge.chargeType === 'chargeable_wt') {
-				price = formValues.chargeableWeight * charge.chargeUnit;
+				price = Number((formValues.chargeableWeight * charge.chargeUnit).toFixed(2));
 			} else if (charge.chargeType === 'gross_wt') {
-				price = formValues.weight * charge.chargeUnit;
-			} else if (charge.chargeType === 'rate_per_kg') {
-				price = formValues.ratePerKg * charge.chargeUnit;
+				price = Number((formValues.weight * charge.chargeUnit).toFixed(2));
 			}
 			return { ...charge, price };
 		});

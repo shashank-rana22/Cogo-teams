@@ -150,15 +150,11 @@ function GenerateMAWB({
 		}
 	}, [activeHawb, activeCategory]);
 
-	// useEffect(() => {
-	// 	if (!customHawbNumber && activeHawb.isNew && !activeHawb.documentNo) {
-	// 		setHawbDetails(
-	// 			hawbDetails.map((hawbItem) => (hawbItem.id === activeHawb.id
-	// 				? { ...hawbItem, documentNo: `COGO-${taskItem.serialId}${hawbDetails.length + 1}` }
-	// 				: hawbItem)),
-	// 		);
-	// 	}
-	// }, [activeHawb]);
+	useEffect(() => {
+		if (activeHawb.isNew) {
+			setCustomHawbNumber(false);
+		}
+	}, [activeHawb]);
 
 	useEffect(() => {
 		if (category === 'mawb') {
@@ -200,7 +196,7 @@ function GenerateMAWB({
 		setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
 		setValue('shipperSignature', taskItem?.shipperSignature || taskItem.customer_name);
 		setValue('amountOfInsurance', 'NIL');
-		setValue('accountingInformation', 'FREIGHT PREPAID');
+		setValue('accountingInformation', taskItem?.accountingInformation || 'FREIGHT PREPAID');
 	}, [hawbSuccess, activeHawb, category, activeCategory]);
 
 	useEffect(() => {
@@ -313,7 +309,7 @@ function GenerateMAWB({
 			setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
 			setValue('shipperSignature', taskItem?.shipperSignature || taskItem.customer_name);
 			setValue('amountOfInsurance', 'NIL');
-			setValue('accountingInformation', 'FREIGHT PREPAID');
+			setValue('accountingInformation', taskItem?.accountingInformation || 'FREIGHT PREPAID');
 		}
 	}, []);
 

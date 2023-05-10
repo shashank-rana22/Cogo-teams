@@ -187,7 +187,7 @@ function GenerateMawb({
 						pdf.addPage();
 					}
 				});
-				pdf.save(taskItem.awbNumber);
+				pdf.save(activeCategory === 'hawb' ? taskItem?.document_number : taskItem.awbNumber);
 			});
 		} else {
 			html2canvas(document.getElementById('mawb')).then((canvas) => {
@@ -196,7 +196,7 @@ function GenerateMawb({
 				const pdfWidth = pdf.internal.pageSize.getWidth();
 				const pdfHeight = pdf.internal.pageSize.getHeight();
 				pdf.addImage(imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
-				pdf.save(taskItem.awbNumber);
+				pdf.save(activeCategory === 'hawb' ? taskItem?.document_number : taskItem.awbNumber);
 			});
 		}
 		setSaveDocument(false);
