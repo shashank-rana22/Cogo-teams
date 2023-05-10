@@ -29,7 +29,7 @@ interface ItemProps {
 	serialId?: string,
 	countryCode?: string,
 	organizationSerialId?: string,
-	updatedAt?: Date,
+	lastUpdatedAt?: Date,
 	selfOrganizationName?: string,
 	organizationId?: string,
 	selfOrganizationId?: string
@@ -64,7 +64,7 @@ function OutstandingList({ item, entityCode }: OutstandingListProps) {
 		serialId,
 		countryCode,
 		organizationSerialId,
-		updatedAt,
+		lastUpdatedAt,
 		selfOrganizationName,
 		organizationId = '',
 		selfOrganizationId = '',
@@ -139,7 +139,7 @@ function OutstandingList({ item, entityCode }: OutstandingListProps) {
 						<div className={styles.value}>
 							{' '}
 							{format(
-								updatedAt,
+								lastUpdatedAt,
 								'dd MMM yyyy hh:mm aaa',
 								{},
 								false,
