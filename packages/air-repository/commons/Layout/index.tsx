@@ -31,14 +31,18 @@ function Layout({
 	if (rowWiseFields.length) {
 		totalFields.push(rowWiseFields);
 	}
+
+	const totalFieldsObject = { ...totalFields };
+
 	return (
 		<div className={styles.layout}>
-			{totalFields.map((field) => (
-				<div className={styles.row}>
-					{field.map((fieldsItem) => {
+			{Object.keys(totalFieldsObject).map((field) => (
+				<div className={styles.row} key={field}>
+					{totalFieldsObject[field].map((fieldsItem) => {
 						const { type, heading = '', label = '', span:fieldArraySpan } = fieldsItem;
 						const flex = ((fieldArraySpan || 12) / 12) * 100 - 1;
-						const show = (!(field.name in showElements) || showElements[fieldsItem.name]);
+						const show = (!(totalFieldsObject[field].name in showElements)
+						|| showElements[fieldsItem.name]);
 						if (type === 'fieldArray' && show) {
 							return (
 								<div style={{ width: `${flex}%`, padding: '4px' }} key={fieldsItem.name}>

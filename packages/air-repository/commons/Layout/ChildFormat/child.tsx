@@ -42,11 +42,13 @@ function Child({
 		totalFields.push(rowWiseFields);
 	}
 
+	const totalFieldsObject = { ...totalFields };
+
 	return (
 		<div className={styles.fieldarray} key={field.id}>
-			{totalFields.map((fields) => (
-				<div className={styles.row}>
-					{fields.map((controlItem) => {
+			{Object.keys(totalFieldsObject).map((key) => (
+				<div className={styles.row} key={key}>
+					{totalFieldsObject[key].map((controlItem) => {
 						const Element = getElementController(controlItem.type);
 
 						const errorOriginal = getErrorMessage({
