@@ -50,11 +50,11 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 		),
 	},
 	{
-		Header   : 'NO. OF QUESTIONS',
+		Header   : 'NO. OF STANDALONE QUESTIONS',
 		id       : 'questions',
-		accessor : ({ non_case_study_question_count = 0 }) => (
+		accessor : ({ stand_alone_question_count = 0 }) => (
 			<section>
-				{non_case_study_question_count || 0}
+				{stand_alone_question_count || 0}
 			</section>
 		),
 	},
@@ -64,6 +64,15 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 		accessor : ({ case_study_question_count = 0 }) => (
 			<section>
 				{case_study_question_count || 0}
+			</section>
+		),
+	},
+	{
+		Header   : 'NO. OF SUBJECTIVE QUESTIONS',
+		id       : 'subjective_questions',
+		accessor : ({ subjective_question_count = 0 }) => (
+			<section>
+				{subjective_question_count || 0}
 			</section>
 		),
 	},
@@ -151,33 +160,69 @@ export const testSetColumns = ({
 		id       : 'topics',
 		accessor : ({ topics = [] }) => (
 			<section className={styles.topics}>
-				{topics.map((topic) => (
-					<Tooltip maxWidth={400} content={startCase(topic)} placement="top" key={topic}>
+
+				{topics.length > 0 ? (
+					<Tooltip maxWidth={400} content={startCase(topics[0])} placement="top" key={topics[0]}>
 						<Pill
 							className={styles.topic_pill}
 							size="lg"
 							color="#F3FAFA"
 						>
-							{startCase(topic)}
+							{startCase(topics[0])}
 						</Pill>
 					</Tooltip>
-				))}
-				{topics.length === 0 && '-'}
+				) : '-'}
+
+				{topics.length > 1 && (
+					<Tooltip
+						maxWidth={400}
+						content={(topics.map((topic, index) => ((index >= 1) ? (
+							<Pill
+								className={styles.topic_pill_sub}
+								size="lg"
+								color="#F3FAFA"
+							>
+								{startCase(topic)}
+							</Pill>
+						) : null)))}
+						placement="top"
+						interactive
+					>
+						<Pill
+							className={styles.topic_pill}
+							size="lg"
+							color="#F3FAFA"
+						>
+							+
+							{topics.length - 1}
+							{' '}
+							More
+						</Pill>
+					</Tooltip>
+				)}
 			</section>
 		),
 	},
 	{
-		Header   : 'TOTAL QUESTIONS/CASES',
+		Header   : 'TOTAL QUESTIONS',
 		id       : 'total_questions',
-		accessor : ({ case_study_questions = 0, stand_alone_questions = 0 }) => (
-			<section>
-				{stand_alone_questions || 0}
-				{' '}
-				Q +
-				{' '}
-				{case_study_questions || 0}
-				{' '}
-				Cases
+		accessor : ({ case_study_questions = 0, stand_alone_questions = 0, subjective_questions = 0 }) => (
+			<section className={styles.questions_count}>
+				<div>
+					{stand_alone_questions || 0}
+					{' '}
+					Standalone
+				</div>
+				<div>
+					{case_study_questions || 0}
+					{' '}
+					Cases
+				</div>
+				<div>
+					{subjective_questions || 0}
+					{' '}
+					Subjective
+				</div>
 			</section>
 		),
 	},
@@ -216,7 +261,7 @@ export const testSetColumns = ({
 						<section className={styles.status}>
 							<Pill
 								size="md"
-								color={current_status === 'upcoming' ? '#00c8ff' : '#C4DC91'}
+								color={current_status === 'upcoming' ? '#CFEAEC' : '#C4DC91'}
 								className={styles.status_pill}
 							>
 								{startCase(current_status)}

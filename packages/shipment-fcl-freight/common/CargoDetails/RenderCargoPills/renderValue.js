@@ -158,6 +158,8 @@ export const renderValue = (label, detail) => {
 			return startCase(detail.destination_cargo_handling_type || '');
 		case 'origin_cargo_handling_type':
 			return startCase(detail.origin_cargo_handling_type || '');
+		case 'cargo_handling_type':
+			return startCase(detail.cargo_handling_type || '');
 		case 'container_status':
 			return startCase(detail.container_status || '');
 		case 'source':
@@ -179,13 +181,13 @@ export const renderValue = (label, detail) => {
 		case 'destination_main_port.display_name':
 			return detail?.destination_main_port?.display_name || '';
 		case 'origin_location.display_name':
-			return detail.origin_location.display_name || '';
+			return detail.origin_location?.display_name || '';
 		case 'container_handover_location':
-			return detail.container_handover_location.display_name || '';
+			return detail.container_handover_location?.display_name || '';
 		case 'container_pickup_location':
-			return detail.container_pickup_location.display_name || '';
+			return detail.container_pickup_location?.display_name || '';
 		case 'destination_location.display_name':
-			return detail.destination_location.display_name || '';
+			return detail.destination_location?.display_name || '';
 		case 'schedule_departure':
 			return format(detail?.schedule_departure || detail?.selected_schedule_departure, 'dd MMM yyyy');
 		case 'schedule_arrival':

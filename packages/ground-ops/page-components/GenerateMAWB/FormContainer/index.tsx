@@ -1,12 +1,13 @@
 import { Button, Stepper, RadioGroup, Toast } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import Layout from '../../Air/commons/Layout';
 import useCreateShipmentDocument from '../GenerateMawbDoc/useCreateShipmentDocument';
 import UploadMAWB from '../UploadMAWB';
 
+import ConfirmModal from './ConfirmModal';
 import styles from './styles.module.css';
 
 const items = [
@@ -22,10 +23,11 @@ const options = [
 
 function FormContainer({
 	back, setBack, edit, setEdit, packingData, fields,
-	control, errors, item, setGenerate, handleSubmit, activeCategory, hawbDetails,
-	setHawbDetails, activeHawb, setActiveHawb, activeKey, setActiveKey, taskItem,
+	control, errors, setValue, item, setGenerate, handleSubmit, category, activeCategory, hawbDetails,
+	setHawbDetails, activeHawb, setActiveHawb, activeKey, setActiveKey, taskItem, formValues,
 }) {
 	const [value, onChange] = useState('manual');
+	const [confirmDelete, setConfirmDelete] = useState(false);
 
 	const handleDocumentList = (type) => {
 		(packingData?.list || []).forEach((itm) => {
@@ -35,7 +37,7 @@ function FormContainer({
 		});
 	};
 
-	const { upload } = useCreateShipmentDocument({
+	const { upload, loading } = useCreateShipmentDocument({
 		edit,
 		setGenerate,
 		setEdit,
@@ -51,25 +53,36 @@ function FormContainer({
 		setBack(true);
 	};
 
-	function RemoveHawb() {
+	const deleteHAWB = () => {
 		const payload = {
 			state               : 'document_rejected',
 			id                  : taskItem?.id,
 			performed_by_org_id : taskItem?.serviceProviderId,
 		};
+		if (edit) {
+			if (activeHawb.isNew === false) {
+				upload({ payload });
+			}
+			setHawbDetails((prev) => prev.filter((itm) => itm.id !== activeHawb.id));
+			setActiveHawb(hawbDetails.find((ele) => ele.id !== activeHawb.id));
+		} else {
+			Toast.error('Cannot be deleted in create mode');
+		}
+		setConfirmDelete(false);
+	};
+
+	useEffect(() => {
+		if (taskItem?.status === 'uploaded') {
+			onChange('upload');
+		} else {
+			onChange('manual');
+		}
+	}, [taskItem?.status]);
+
+	function RemoveHawb() {
 		return (
 			<Button
-				onClick={() => {
-					if (edit) {
-						if (activeHawb.isNew === false) {
-							upload({ payload });
-						}
-						setHawbDetails((prev) => prev.filter((itm) => itm.id !== activeHawb.id));
-						setActiveHawb(hawbDetails.find((ele) => ele.id !== activeHawb.id));
-					} else {
-						Toast.error('Cannot be deleted in create mode');
-					}
-				}}
+				onClick={() => { setConfirmDelete(true); }}
 				themeType="secondary"
 				style={{ border: '1px solid #333', marginLeft: '8%' }}
 				disabled={hawbDetails.length === 1}
@@ -78,6 +91,21 @@ function FormContainer({
 			</Button>
 		);
 	}
+
+	const calculateCharges = () => {
+		const updatedCharges = (formValues.carrierOtherCharges || []).map((charge) => {
+			let price = 0;
+			if (charge.chargeType === 'chargeable_wt') {
+				price = formValues.chargeableWeight * charge.chargeUnit;
+			} else if (charge.chargeType === 'gross_wt') {
+				price = formValues.weight * charge.chargeUnit;
+			} else if (charge.chargeType === 'rate_per_kg') {
+				price = formValues.ratePerKg * charge.chargeUnit;
+			}
+			return { ...charge, price };
+		});
+		setValue('carrierOtherCharges', updatedCharges);
+	};
 
 	return (
 		<div className={styles.form_container}>
@@ -164,97 +192,137 @@ function FormContainer({
 					Refer Shipping Instruction
 				</Button>
 			</div>
-			{value === 'upload' ? <UploadMAWB item={item} setGenerate={setGenerate} />
-				: (
-					<>
-						{activeKey === 'basic' && (
-							<>
-								<Layout fields={fields?.basic} control={control} errors={errors} />
-								<div className={styles.button_container}>
-									{activeCategory === 'hawb' && (
-										<RemoveHawb />
-									)}
-									{!back ? (
-										<div className={styles.button_div}>
-											<Button
-												onClick={() => {
-													setGenerate(false);
-													setEdit(false);
-												}}
-												themeType="secondary"
-												style={{ border: '1px solid #333' }}
-											>
-												CANCEL
-											</Button>
-											<Button
-												onClick={handleSubmit(() => setActiveKey('package'))}
-												themeType="accent"
-											>
-												NEXT
-											</Button>
-										</div>
-									) : null}
-								</div>
-							</>
-						)}
+			{value === 'upload' ? (
+				<UploadMAWB
+					item={item}
+					edit={edit}
+					taskItem={taskItem}
+					setEdit={setEdit}
+					setGenerate={setGenerate}
+					activeCategory={activeCategory}
+					activeHawb={activeHawb}
+					hawbDetails={hawbDetails}
+					setHawbDetails={setHawbDetails}
+					setActiveHawb={setActiveHawb}
+					category={category}
+				/>
+			) : (
+				<>
+					{activeKey === 'basic' && (
+						<>
+							{activeCategory === 'hawb' && (
+								<Layout
+									fields={fields?.hawb_controls}
+									errors={errors}
+									control={control}
+								/>
+							)}
+							<Layout fields={fields?.basic} control={control} errors={errors} />
+							<div className={styles.button_container}>
+								{activeCategory === 'hawb' && (
+									<RemoveHawb />
+								)}
+								{!back ? (
+									<div className={styles.button_div}>
+										<Button
+											onClick={() => {
+												setGenerate(false);
+												setEdit(false);
+											}}
+											themeType="secondary"
+											style={{ border: '1px solid #333' }}
+										>
+											CANCEL
+										</Button>
+										<Button
+											onClick={handleSubmit(() => setActiveKey('package'))}
+											themeType="accent"
+										>
+											NEXT
+										</Button>
+									</div>
+								) : null}
+							</div>
+						</>
+					)}
+					{activeKey === 'package' && (
+						<>
+							<Layout fields={fields?.package} control={control} errors={errors} />
+							<div className={styles.calcuate_button}>
+								<Button
+									size="sm"
+									themeType="accent"
+									onClick={() => {
+										calculateCharges();
+									}}
+								>
+									Calculate
 
-						{activeKey === 'package' && (
-							<>
-								<Layout fields={fields?.package} control={control} errors={errors} />
-								<div className={styles.button_container}>
-									{activeCategory === 'hawb' && (
-										<RemoveHawb />
-									)}
-									{!back ? (
-										<div className={styles.button_div}>
-											<Button
-												onClick={() => setActiveKey('basic')}
-												themeType="secondary"
-												style={{ border: '1px solid #333' }}
-											>
-												BACK
-											</Button>
-											<Button
-												onClick={handleSubmit(() => setActiveKey('handling'))}
-												themeType="accent"
-											>
-												Next
-											</Button>
-										</div>
-									) : null}
-								</div>
-							</>
-						)}
+								</Button>
+							</div>
+							<div className={styles.button_container}>
+								{activeCategory === 'hawb' && (
+									<RemoveHawb />
+								)}
+								{!back ? (
+									<div className={styles.button_div}>
+										<Button
+											onClick={() => setActiveKey('basic')}
+											themeType="secondary"
+											style={{ border: '1px solid #333' }}
+										>
+											BACK
+										</Button>
+										<Button
+											onClick={handleSubmit(() => setActiveKey('handling'))}
+											themeType="accent"
+										>
+											Next
+										</Button>
+									</div>
+								) : null}
+							</div>
+						</>
+					)}
 
-						{activeKey === 'handling' && (
-							<>
-								<Layout fields={fields?.handling} control={control} errors={errors} />
-								<div className={styles.button_container}>
-									{activeCategory === 'hawb' && (
-										<RemoveHawb />
-									)}
-									{!back ? (
-										<div className={styles.button_div}>
-											<Button
-												onClick={() => setActiveKey('package')}
-												themeType="secondary"
-												style={{ border: '1px solid #333' }}
-											>
-												BACK
-											</Button>
-											<Button
-												onClick={handleSubmit(onSubmit)}
-												themeType="accent"
-											>
-												Generate Master Airway Bill
-											</Button>
-										</div>
-									) : null}
-								</div>
-							</>
-						)}
-					</>
-				)}
+					{activeKey === 'handling' && (
+						<>
+							<Layout fields={fields?.handling} control={control} errors={errors} />
+							<div className={styles.button_container}>
+								{activeCategory === 'hawb' && (
+									<RemoveHawb />
+								)}
+								{!back ? (
+									<div className={styles.button_div}>
+										<Button
+											onClick={() => setActiveKey('package')}
+											themeType="secondary"
+											style={{ border: '1px solid #333' }}
+										>
+											BACK
+										</Button>
+										<Button
+											onClick={handleSubmit(onSubmit)}
+											themeType="accent"
+										>
+											Generate Master Airway Bill
+										</Button>
+									</div>
+								) : null}
+							</div>
+						</>
+					)}
+				</>
+			)}
+			{confirmDelete && (
+				<ConfirmModal
+					confirmDelete={confirmDelete}
+					setConfirmDelete={setConfirmDelete}
+					activeHawb={activeHawb}
+					loading={loading}
+					deleteHAWB={deleteHAWB}
+				/>
+			)}
 		</div>
 	);
 }

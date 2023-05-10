@@ -5,7 +5,7 @@ import { isEmpty, snakeCase } from '@cogoport/utils';
 
 import FormatData from '../../../../utils/formatData';
 
-import IconMapping from './IconMapping';
+import iconMapping from './iconMapping';
 import styles from './styles.module.css';
 
 function RightSideNav({
@@ -18,6 +18,8 @@ function RightSideNav({
 	activeMessageCard,
 	activeVoiceCard,
 	activeTab,
+	quotationEmailSentAt = '',
+	orgId = '',
 }) {
 	const dispatch = useDispatch();
 	const { profileData } = useSelector(({ profile }) => ({
@@ -59,39 +61,46 @@ function RightSideNav({
 
 	return (
 		<div className={styles.right_container}>
-			{IconMapping.map((item) => {
-				const { icon, name, content } = item;
-
+			{iconMapping.map((item) => {
+				const { icon, name, content, hide = false } = item;
 				const showDocumentCount = activeSelect !== 'documents' && name === 'documents'
 				&& documents_count > 0 && !checkConditions;
+				const showquotationSentData = orgId && activeSelect !== 'organization'
+				&& name === 'organization' && !!quotationEmailSentAt;
 
 				return (
-					<div
-						key={snakeCase(name)}
-						className={cl`${styles.icon_div} ${
-							activeSelect === name ? styles.active : ''
-						}
+					!hide && (
+						<div
+							key={snakeCase(name)}
+							className={cl`${styles.icon_div} ${
+								activeSelect === name ? styles.active : ''
+							}
 						 ${
 							disabledSpotSearch && item.name === 'spot_search'
 								? styles.icon_div_load
 								: ''
-						}`}
-						role="presentation"
-						onClick={() => handleClick(name)}
-					>
-						<Tooltip content={content} placement="left">
-							{showDocumentCount && (
-								<div className={styles.count}>
-									{documents_count > 100 ? '99+' : (
-										documents_count
-									)}
+							}`}
+							role="button"
+							tabIndex={0}
+							onClick={() => handleClick(name)}
+						>
+							<Tooltip content={content} placement="left">
+								{showDocumentCount && (
+									<div className={styles.count}>
+										{documents_count > 100 ? '99+' : (
+											documents_count
+										)}
+									</div>
+								)}
+								{showquotationSentData && (
+									<div className={styles.quotation} />
+								)}
+								<div>
+									{icon && icon}
 								</div>
-							)}
-							<div>
-								{icon}
-							</div>
-						</Tooltip>
-					</div>
+							</Tooltip>
+						</div>
+					)
 				);
 			})}
 		</div>

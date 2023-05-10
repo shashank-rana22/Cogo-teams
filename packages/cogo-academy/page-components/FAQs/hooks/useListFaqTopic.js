@@ -29,6 +29,7 @@ function useListFaqTopic() {
 				params: {
 					filters: {
 						status            : 'active',
+						state             : 'published',
 						auth_function     : scope === 'partner' ? roleFunction : undefined,
 						auth_sub_function : scope === 'partner' ? roleSubFunction : undefined,
 						country_id,

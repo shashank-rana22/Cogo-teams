@@ -36,7 +36,7 @@ const useCreateShipmentDocument = ({
 	activeHawb = {},
 }:Props) => {
 	let api = 'create_shipment_document';
-	if (edit && activeCategory === 'hawb') {
+	if (activeCategory === 'hawb') {
 		if (activeHawb.isNew === false) {
 			api = 'update_shipment_document';
 		} else {
@@ -96,7 +96,7 @@ const useCreateShipmentDocument = ({
 				setEdit(false);
 			} else {
 				if (!edit) { setHawbDetails([...hawbDetails, { id: uuid(), documentNo: null, isNew: true }]); }
-				getHawb(res?.data?.ids[0]);
+				getHawb(edit || !activeHawb.isNew ? res?.data?.id : res?.data?.ids[0]);
 			}
 		} catch (error) {
 			Toast.error(error?.response?.data?.message || error?.message || 'Failed to save Document');

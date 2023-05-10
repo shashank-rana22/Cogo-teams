@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
@@ -25,7 +26,7 @@ function useDeleteTag({ fetchFaqTag }) {
 				fetchFaqTag();
 			}
 		} catch (err) {
-			console.log('err', err);
+			Toast.error(getApiErrorString(err?.response?.data));
 		}
 	};
 

@@ -1,10 +1,11 @@
 import { Button, Modal, Tooltip } from '@cogoport/components';
-import { IcMEyeopen, IcMEdit } from '@cogoport/icons-react';
+import { IcMEyeopen, IcMEdit, IcMDownload } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import List from '../../commons/List';
 import { ApprovalPendingFields } from '../../configurations/approval_pending_fields';
 import useUpdateShipmentDocument from '../../hooks/useUpdateShipmentDocument';
+import GenerateManifestDoc from '../GenerateManifestDoc';
 import HAWBList from '../HawbList';
 import UploadModal from '../UploadModal';
 
@@ -18,6 +19,7 @@ function ApprovalPending({
 	const [showApprove, setShowApprove] = useState(null);
 	const [show, setShow] = useState(false);
 	const [showUpload, setShowUpload] = useState(null);
+	const [triggerManifest, setTriggerManifest] = useState(null);
 
 	const { loading:updateLoading, updateDocument } = useUpdateShipmentDocument();
 
@@ -40,7 +42,11 @@ function ApprovalPending({
 
 	const handleOnEdit = (singleItem) => {
 		if (singleItem?.documentState === 'document_amendment_requested') {
-			handleEditMAWB(singleItem, '');
+			if (singleItem?.documentData?.status === 'uploaded') {
+				setShowUpload(singleItem); setEdit(true);
+			} else if (singleItem?.documentData?.status === 'generated') {
+				handleEditMAWB(singleItem, '');
+			}
 		} else if (singleItem?.documentData?.status === 'uploaded') {
 			setShowUpload(singleItem); setEdit('edit');
 		} else if (singleItem?.documentData?.status === 'generated') {
@@ -81,6 +87,20 @@ function ApprovalPending({
 
 			</Button>
 		),
+		handleDownloadManifest: (singleItem) => (
+			singleItem.blCategory === 'hawb' && (
+				<Button
+					themeType="linkUi"
+					style={{ fontSize: 12 }}
+					onClick={() => { setTriggerManifest(singleItem.shipmentId); }}
+					className={styles.manifest_download_button}
+				>
+					<IcMDownload />
+					{' '}
+					Manifest
+				</Button>
+			)
+		),
 		handleEdit: (singleItem) => (
 			<Button
 				themeType="linkUi"
@@ -102,7 +122,13 @@ function ApprovalPending({
 								themeType="secondary"
 								style={{ border: '1px solid #ED3726', color: '#ED3726' }}
 								disabled={updateLoading}
-								onClick={() => { handleEditMAWB(singleItem, ''); }}
+								onClick={() => {
+									if (singleItem?.documentData?.status === 'uploaded') {
+										setShowUpload(singleItem); setEdit(true);
+									} else if (singleItem?.documentData?.status === 'generated') {
+										handleEditMAWB(singleItem, '');
+									}
+								}}
 							>
 								Amend
 							</Button>
@@ -168,6 +194,21 @@ function ApprovalPending({
 
 						</Button>
 					</Modal.Footer>
+				</Modal>
+			)}
+			{triggerManifest && (
+				<Modal
+					show={triggerManifest}
+					onClose={() => { setTriggerManifest(false); }}
+					size="lg"
+				>
+					<Modal.Body style={{ minHeight: '90vh' }}>
+						<GenerateManifestDoc
+							setTriggerManifest={setTriggerManifest}
+							shipmentId={triggerManifest}
+						/>
+					</Modal.Body>
+
 				</Modal>
 			)}
 			<UploadModal

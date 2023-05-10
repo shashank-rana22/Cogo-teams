@@ -26,12 +26,11 @@ function SideBarComponent({
 		}
 	};
 	return (
-		<div
-			className={styles.sidebar}
-			style={{ width: sideBar ? '420px' : '0', overflowY: sideBar ? '' : 'hidden' }}
-		>
+		<div className={styles.sidebar}>
 			<div className={styles.sidebar_body}>
-				<div role="presentation" className={styles.close} onClick={onClose}>&times;</div>
+				<div role="presentation" className={styles.close} onClick={onClose}>
+					&times;
+				</div>
 				<h2>{HEADER[sideBar]}</h2>
 				<div>{renderBody()}</div>
 			</div>

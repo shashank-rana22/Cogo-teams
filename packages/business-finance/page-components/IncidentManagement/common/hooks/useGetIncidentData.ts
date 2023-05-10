@@ -40,7 +40,7 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 			method  : 'get',
 			authKey : 'get_incident_management_incident_list',
 		},
-		{ manual: true },
+		{ manual: true, autoCancel: false },
 	);
 
 	const { query = '', debounceQuery } = useDebounceQuery();
@@ -96,7 +96,7 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 	useEffect(() => {
 		getIncidentData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(rest), category, date, query, page, urgency]);
+	}, [JSON.stringify(rest), category, date, query, page, urgency, activeTab]);
 
 	useEffect(() => {
 		setFilters((prev) => ({
