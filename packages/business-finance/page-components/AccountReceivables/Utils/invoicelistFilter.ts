@@ -1,6 +1,9 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 
-export const INVOICE_FILTER = ({ invoiceStatusFilter }) => [
+const geo = getGeoConstants();
+
+export const INVOICE_FILTER = () => [
 	{
 		name        : 'migrated',
 		placeholder : 'Migration',
@@ -34,7 +37,8 @@ export const INVOICE_FILTER = ({ invoiceStatusFilter }) => [
 		type        : 'select',
 		caret       : true,
 		isClearable : true,
-		options     : invoiceStatusFilter.options.invoice_status,
+		options     : geo.options.invoice_status,
+
 	},
 ];
 

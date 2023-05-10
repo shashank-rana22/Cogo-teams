@@ -1,6 +1,4 @@
 import { Pagination } from '@cogoport/components';
-import { getConstantsByCountryCode } from '@cogoport/globalization/constants/geo';
-import { useSelector } from '@cogoport/store';
 import React from 'react';
 
 import Filters from '../../../commons/Filters';
@@ -23,10 +21,6 @@ const ORANGE = '#F68B21';
 const GREY = '#BDBDBD';
 
 function InvoiceTable({ organizationId, entityCode, showName }: Props) {
-	const { profile = {} } = useSelector((store) => store);
-	const { partner = {} } = profile;
-	const { country_id : countryId = '' } = partner;
-
 	const {
 		listData,
 		clearInvoiceFilters,
@@ -38,8 +32,6 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 		sort,
 		setSort,
 	} = useGetOutstandingCard(organizationId, entityCode);
-
-	const invoiceStatusFilter = getConstantsByCountryCode({ country_id: countryId });
 
 	const { list : invoiceList = [], page: pageInvoiceList, totalRecords: recordInvoiceList } = listData || {};
 
@@ -83,7 +75,7 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 					<Filters
 						filters={invoiceFilters}
 						setFilters={setinvoiceFilters}
-						controls={INVOICE_FILTER({ invoiceStatusFilter })}
+						controls={INVOICE_FILTER()}
 					/>
 
 					<FilterModal
