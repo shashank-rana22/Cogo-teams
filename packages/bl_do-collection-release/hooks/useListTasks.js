@@ -24,7 +24,6 @@ export default function useListTasks({
 		})();
 	}, [trigger, filters, defaultParams]);
 
-	console.log('tasks', data);
 	return {
 		list: data?.list || [],
 		loading,

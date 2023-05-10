@@ -160,7 +160,6 @@ export default function Card({
 	const { updateTask } = useUpdateTask({ refetch });
 
 	const handleSubmit = ({ formValues = {}, taskConfig = {} }) => {
-		console.log('siubmit');
 		const payload = getFormattedPayload({
 			inner_tab    : stateProps.inner_tab,
 			item,
