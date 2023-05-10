@@ -1,14 +1,20 @@
 import { MultiSelect, Button } from '@cogoport/components';
-import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function CourseTopics() {
-	const [value, onChange] = useState([]);
-	const options = [
-		{ label: 'Harper Lee', value: 'To Kill a Mockingbird' },
-		{ label: 'Lev Tolstoy', value: 'War and Peace' },
-	];
+const options = [
+	{ label: 'Harper Lee', value: 'To Kill a Mockingbird' },
+	{ label: 'Lev Tolstoy', value: 'War and Peace' },
+];
+
+function CourseTopics({
+	setActiveStepper,
+	courseData,
+	setCourseData,
+}) {
+	const handlePreviousState = () => {
+		setActiveStepper('course_name');
+	};
 
 	return (
 		<div className={styles.container}>
@@ -20,21 +26,29 @@ function CourseTopics() {
 
 			<div className={styles.input_container}>
 				<MultiSelect
-					value={value}
-					onChange={onChange}
+					value={courseData.course_topics}
 					placeholder="Select topics"
 					options={options}
 					isClearable
+					onChange={(value) => setCourseData((prev) => ({ ...prev, course_topics: value }))}
 				/>
 			</div>
 
 			<div className={styles.footer}>
 				<div className={styles.prev_button}>
-					<Button size="md" themeType="secondary">Previous</Button>
+					<Button
+						type="button"
+						onClick={handlePreviousState}
+						size="md"
+						themeType="secondary"
+					>
+						Previous
+
+					</Button>
 				</div>
 
 				<div className={styles.create_button}>
-					<Button size="md" themeType="primary">Create Course</Button>
+					<Button type="button" size="md" themeType="primary">Create Course</Button>
 				</div>
 			</div>
 		</div>

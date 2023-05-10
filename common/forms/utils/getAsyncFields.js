@@ -335,6 +335,20 @@ function asyncListCurrency() {
 	};
 }
 
+function asyncListFAQTopics() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : 'list_faq_topics',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -362,4 +376,5 @@ export {
 	asyncListCurrency,
 	asyncAccountEngagementScoringEvents,
 	asyncFieldsTicketTypes,
+	asyncListFAQTopics,
 };

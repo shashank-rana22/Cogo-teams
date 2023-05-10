@@ -12,6 +12,7 @@ import {
 	UploadController,
 	TextAreaController,
 	CheckboxController,
+	ToggleController,
 } from '@cogoport/forms';
 
 const controlTypeControllerMapping = {
@@ -29,6 +30,7 @@ const controlTypeControllerMapping = {
 	creatableSelect    : CreatableSelectController,
 	textarea           : TextAreaController,
 	checkBox           : CheckboxController,
+	toggle             : ToggleController,
 };
 
 export const getFieldController = (type = 'text') => controlTypeControllerMapping[type] || null;

@@ -2,7 +2,7 @@
 	margin: 12px 40px;
 }
 
-.node_container {
+.module_container {
 	padding: 16px 20px;
 	padding-bottom: 8px;
 	margin-bottom: 12px;
@@ -11,46 +11,6 @@
 	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
 }
 
-.node {
-	display: flex;
-	align-items: center;
-	margin-bottom: 16px;
-}
-
-.accordian_item {
-	display: flex;
-	align-items: center;
-	padding: 12px 24px;
-}
-
-.left {
-	margin-left: 20px;
-}
-
-.flex {
-	display: flex;
-}
-
-.name {
-	margin-left: 4px;
-}
-
-.child_accordian {
-	margin-bottom: 12px;
-
-	:global {
-		.ui_accordion_header {
-			padding: unset;
-			padding-right: 24px;
-			background: #f9f9f9;
-		}
-	}
-}
-
 .button {
 	margin-top: 20px;
-}
-
-.icon {
-	cursor: pointer;
 }

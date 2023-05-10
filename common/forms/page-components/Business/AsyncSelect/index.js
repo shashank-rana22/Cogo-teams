@@ -22,6 +22,7 @@ import {
 	asyncListHsCodes,
 	asyncListCurrency,
 	asyncAccountEngagementScoringEvents,
+	asyncListFAQTopics,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -62,6 +63,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_hs_codes                 : asyncListHsCodes,
 	list_exchange_rate_currencies : asyncListCurrency,
 	engagement_scoring_events     : asyncAccountEngagementScoringEvents,
+	faq_topics                    : asyncListFAQTopics,
 };
 
 function AsyncSelect(props) {
