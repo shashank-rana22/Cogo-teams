@@ -81,6 +81,7 @@ function CourseCompletion() {
 								setMultiSelectedUser={setMultiSelectedUser}
 								setMultiSelectedEdit={setMultiSelectedEdit}
 								show={show}
+								setShow={setShow}
 								value={value}
 								onChange={onChange}
 								watch={watch}
