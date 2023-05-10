@@ -8,6 +8,7 @@ import {
 	CheckboxController,
 	CountrySelectController,
 	UploadController,
+	CheckboxGroupController,
 } from '@cogoport/forms';
 
 import DepartureDateSelectController from './DepartureDateSelect/index';
@@ -44,6 +45,9 @@ const getElementController = (type = 'text') => {
 
 		case 'checkbox':
 			return CheckboxController;
+
+		case 'checkbox_group':
+			return CheckboxGroupController;
 
 		case 'country_select':
 			return CountrySelectController;

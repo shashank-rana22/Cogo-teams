@@ -33,9 +33,11 @@ const getMutatedControls = ({ item, stateProps, controls = [] }) => {
 			blOptions.push({
 				label : doc?.bl_number,
 				value : doc?.id,
+				name  : doc?.bl_number,
 			});
 		});
 
+		console.log('log', blOptions, controls);
 		controls.forEach((ctrl) => {
 			const newObj = { ...ctrl };
 			if (ctrl.name === 'ids') {
@@ -46,6 +48,7 @@ const getMutatedControls = ({ item, stateProps, controls = [] }) => {
 	} else {
 		mutatedControls.push(...controls);
 	}
+	console.log('mutated controls', mutatedControls);
 	return {
 		mutatedControls,
 	};

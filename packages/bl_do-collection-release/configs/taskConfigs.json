@@ -11,7 +11,7 @@
 			"controls": [
 				{
 					"name": "ids",
-					"type": "checkbox",
+					"type": "checkbox_group",
 					"label": "Select BLs to collect",
 					"options": [],
 					"multiple": true
@@ -147,7 +147,7 @@
 			"controls": [
 				{
 					"name": "ids",
-					"type": "checkbox",
+					"type": "checkbox_group",
 					"label": "Select Documents to Release",
 					"options": [],
 					"multiple": true
@@ -246,7 +246,7 @@
 			"controls": [
 				{
 					"name": "ids",
-					"type": "checkbox",
+					"type": "checkbox_group",
 					"label": "Select Documents to Deliver",
 					"options": [],
 					"multiple": true
@@ -294,7 +294,7 @@
 				{
 				"name": "ids",
 				"label": "Select Documents to Surrender",
-				"type": "checkbox",
+				"type": "checkbox_group",
 				"options": [],
 				"multiple": true
 				},

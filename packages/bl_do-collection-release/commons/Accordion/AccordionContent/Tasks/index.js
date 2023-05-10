@@ -26,6 +26,7 @@ function CustomTasks({ setMyForm = () => {}, controls }, ref) {
 			...prev,
 			...formValues,
 		}));
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(formValues)]);
 
 	useImperativeHandle(
@@ -37,7 +38,6 @@ function CustomTasks({ setMyForm = () => {}, controls }, ref) {
 	);
 
 	return <Layout fields={controls} control={control} errors={errors} />;
-	// return <div>AccordianTimeline</div>;
 }
 
 export default forwardRef(CustomTasks);
