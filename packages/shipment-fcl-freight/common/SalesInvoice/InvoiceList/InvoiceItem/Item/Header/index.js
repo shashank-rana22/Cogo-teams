@@ -93,10 +93,10 @@ function Header({
 		&& (shipment_data?.serial_id > 120347 || isAuthorized);
 
 	return (
-		<div className={styles.Container}>
+		<div className={styles.container}>
 			<div>
 				{/* {invoice?.source === 'pass_through' ? ( */}
-				<div className={styles.InvoiceSource}>
+				<div className={styles.invoice_source}>
 					Source -
 					{' '}
 					{startCase(invoice?.source) || 'Source'}
@@ -104,7 +104,7 @@ function Header({
 				{/* ) : null} */}
 
 				{/* {invoice?.exchange_rate_state ? ( */}
-				<div className={styles.InvoiceSource}>
+				<div className={styles.invoice_source}>
 					Applicable State -
 					{' '}
 					{startCase(invoice?.exchange_rate_state) || 'Eta'}
@@ -112,16 +112,16 @@ function Header({
 				{/* ) : null} */}
 			</div>
 
-			<div className={cl`${styles.FlexRow} ${open ? styles.open : ''}`}>
+			<div className={cl`${styles.flex_row} ${open ? styles.open : ''}`}>
 				<div className={styles.InvoicePartyDetails}>
-					<div className={styles.InvoicePartyName}>
+					<div className={styles.invoice_party_name}>
 						{billing_address?.name || billing_address?.business_name || 'VOLTAS LIMITED'}
 					</div>
 
 					{shipment_data?.entity_id
 						!== GLOBAL_CONSTANTS.country_entity_ids.VN && (
-							<div className={styles.Gst}>
-								<div className={styles.Label}>GST Number :</div>
+							<div className={styles.gst}>
+								<div className={styles.label}>GST Number :</div>
 
 								<Tooltip
 									theme="light"
@@ -136,7 +136,7 @@ function Header({
 									)}
 								>
 									<div
-										className={styles.GstNumber}
+										className={styles.gst_number}
 									>
 										{billing_address?.tax_number || '05AAACV2809D1ZS'}
 									</div>
@@ -145,10 +145,10 @@ function Header({
 					)}
 				</div>
 
-				<div className={styles.InvoiceInfo}>
-					<div className={styles.SoContainer}>
+				<div className={styles.invoice_info}>
+					<div className={styles.so_container}>
 						<div
-							className={styles.SoNumber}
+							className={styles.so_number}
 							role="button"
 							tabIndex={0}
 							// className={!isEmpty(bfInvoice) ? 'active' : null}
@@ -163,7 +163,7 @@ function Header({
 								|| live_invoice_number || 'SO/2324/10110030'}
 						</div>
 
-						<div className={styles.StatusContainer}>
+						<div className={styles.status_container}>
 							{invoiceStatus === 'FINANCE_REJECTED' ? (
 								<Tooltip
 									theme="light"
@@ -173,7 +173,7 @@ function Header({
 										<div>{bfInvoice?.invoiceRejectionReason || '-'}</div>
 									}
 								>
-									<div className={styles.StatusStyle}>{startCase(invoiceStatus)}</div>
+									<div className={styles.status_style}>{startCase(invoiceStatus)}</div>
 								</Tooltip>
 							) : (
 								<div>{startCase(invoiceStatus)}</div>
@@ -188,10 +188,10 @@ function Header({
 							</Button>
 						) : null} */}
 					</div>
-					<div className={styles.InvoiceValueContainer}>
-						<div className={styles.InvoiceValueTitle}>Invoice Value -</div>
+					<div className={styles.invoice_value_container}>
+						<div className={styles.invoice_value_title}>Invoice Value -</div>
 
-						<div className={styles.InvoiceValue}>
+						<div className={styles.invoice_value}>
 							{formatAmount({
 								amount   : invoice_total_discounted,
 								currency : invoice_total_currency,
@@ -204,14 +204,14 @@ function Header({
 						</div>
 					</div>
 
-					<div className={styles.PaymentModeStatus}>
+					<div className={styles.payment_mode_status}>
 						{invoice?.payment_mode === 'credit' ? (
 							<div>
-								<div className={styles.InfoContainer}>
+								<div className={styles.info_container}>
 									{startCase(creditSource?.slice(0, -2) || '')}
 								</div>
 
-								<div className={styles.PaymentMethod}>
+								<div className={styles.payment_method}>
 									{startCase(
 										`${
 											creditSource?.[creditSource?.length ?? 0 - 2]
@@ -221,15 +221,15 @@ function Header({
 								</div>
 							</div>
 						) : (
-							<div className={styles.PaymentMethod}>{invoice?.payment_mode || 'Cash'}</div>
+							<div className={styles.payment_method}>{invoice?.payment_mode || 'Cash'}</div>
 						)}
 					</div>
 				</div>
 
-				<div className={styles.InvoiceContainer}>
+				<div className={styles.invoice_container}>
 					{invoice.status
 					&& RESTRICT_REVOKED_STATUS.includes(invoice.status) ? (
-						<div className={styles.InfoContainer}>
+						<div className={styles.invoice_container}>
 							{startCase(invoice.status)}
 						</div>
 						) : null}
@@ -277,11 +277,11 @@ function Header({
 					) : null}
 
 					{invoice?.is_revoked && invoice?.status !== 'revoked' ? (
-						<div className={styles.InfoContainer}>Requested for Revoke</div>
+						<div className={styles.info_container}>Requested for Revoke</div>
 					) : null}
 				</div>
 
-				<div className={styles.IconWrapper} role="button" tabIndex={0} onClick={() => setOpen(!open)}>
+				<div className={styles.icon_wrapper} role="button" tabIndex={0} onClick={() => setOpen(!open)}>
 					{open ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
 				</div>
 			</div>
