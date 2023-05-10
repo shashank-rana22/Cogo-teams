@@ -1,3 +1,4 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMDownload, IcMSettings } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -9,7 +10,6 @@ import React, { useState, useEffect } from 'react';
 import RaiseTicket from '../../common/RaiseTicket';
 import { firebaseConfig } from '../../configurations/firebase-config';
 import { ANDRIOD_APK } from '../../constants';
-import { hasPermission } from '../../constants/IDS_CONSTANTS';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus';
@@ -24,6 +24,14 @@ import DialCallModal from './DialCallModal';
 import EmptyChatPage from './EmptyChatPage';
 import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
+
+const geo = getGeoConstants();
+
+const omniChannelAdminIds = [
+	geo.uuid.super_admin_id,
+	geo.uuid.tech_super_admin_id,
+	geo.uuid.cogoverse_admin,
+];
 
 function CogoOne() {
 	const {
@@ -63,7 +71,7 @@ function CogoOne() {
 		emailAddress : profile?.user?.email,
 	}));
 
-	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
+	const isomniChannelAdmin = userRoleIds?.some((eachRole) => omniChannelAdminIds.includes(eachRole)) || false;
 
 	const {
 		loading:statusLoading,

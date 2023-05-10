@@ -1,7 +1,9 @@
 import { Input } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import SERVICABLE_COUNTRY_IDS from './config/servicableCountries';
 import SelectRegistrationType from './SelectRegistrationType';
+
+const SERVICABLE_COUNTRY_IDS = GLOBAL_CONSTANTS.servicable_country_ids;
 
 function CountrywiseTaxSelect({
 	value,

@@ -1,37 +1,21 @@
 import { Select } from '@cogoport/components';
-
-import SERVICABLE_COUNTRY_IDS from '../config/servicableCountries';
-
-const countrywiseOptions = {
-	[SERVICABLE_COUNTRY_IDS.IN]: [
-		{
-			label : 'PAN',
-			value : 'pan',
-		},
-		// {
-		// 	label : 'GST',
-		// 	value : 'gstin',
-		// },
-	],
-	[SERVICABLE_COUNTRY_IDS.VN]: [
-		{
-			label : 'ECN',
-			value : 'ecn',
-		},
-		{
-			label : 'Tax',
-			value : 'tax',
-		},
-	],
-};
+import { getConstantsByCountryCode } from '@cogoport/globalization/constants/geo';
 
 function SelectRegistrationType(props) {
 	const { value, countryId } = props;
 
+	const countryWiseData = getConstantsByCountryCode({ country_id: countryId });
+
+	const { options } = countryWiseData || {};
+
+	const { tax_types } = options;
+
+	const taxTypesOption = tax_types || [];
+
 	return (
 		<Select
 			{...props}
-			options={countrywiseOptions[countryId]}
+			options={taxTypesOption}
 			readOnly={false}
 			value={value}
 		/>

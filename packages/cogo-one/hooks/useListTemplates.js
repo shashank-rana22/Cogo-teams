@@ -1,9 +1,16 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState, useCallback } from 'react';
 
-import { hasPermission } from '../constants/IDS_CONSTANTS';
+const geo = getGeoConstants();
+
+const omniChannelAdminIds = [
+	geo.uuid.super_admin_id,
+	geo.uuid.tech_super_admin_id,
+	geo.uuid.cogoverse_admin,
+];
 
 function useListTemplate() {
 	const [{ loading }, trigger] = useRequest({
@@ -15,7 +22,7 @@ function useListTemplate() {
 		userRoleIds : profile.partner?.user_role_ids || [],
 		userId      : profile?.user?.id,
 	}));
-	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
+	const isomniChannelAdmin = userRoleIds?.some((eachRole) => omniChannelAdminIds.includes(eachRole)) || false;
 	const [qfilter, setQfilter] = useState('');
 	const [pagination, setPagination] = useState(1);
 	const [infiniteList, setInfiniteList] = useState({

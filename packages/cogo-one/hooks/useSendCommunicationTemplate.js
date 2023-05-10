@@ -1,9 +1,10 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-import { COGOVERSE_USER_ID } from '../constants/IDS_CONSTANTS';
+const geo = getGeoConstants();
 
 function useSendCommunicationTemplate({
 	formattedData = {},
@@ -37,7 +38,7 @@ function useSendCommunicationTemplate({
 		},
 	) => {
 		let service = 'user';
-		let service_id = COGOVERSE_USER_ID;
+		let service_id = geo.uuid.cogoverse_user_id;
 		if (user_id) {
 			service_id = user_id;
 		} else if (!user_id && lead_user_id) {

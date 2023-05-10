@@ -3,6 +3,10 @@ const GLOBAL_CONSTANTS = {
 		IN : '6fd98605-9d5d-479d-9fac-cf905d292b88',
 		VN : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
 	},
+	servicable_country_ids: {
+		IN : '541d1232-58ce-4d64-83d6-556a42209eb7',
+		VN : '177fcbad-8ef7-4324-871c-6c31745f4411',
+	},
 	country_ids: {
 		IN : '541d1232-58ce-4d64-83d6-556a42209eb7',
 		VN : '177fcbad-8ef7-4324-871c-6c31745f4411',
@@ -101,7 +105,8 @@ const GLOBAL_CONSTANTS = {
 			GB : '5eef8dfe-c485-414a-bbcb-82a8388539e3',
 			UK : '5eef8dfe-c485-414a-bbcb-82a8388539e3',
 		},
-		third_party_enrichment_agencies_role_ids: ['38d20d88-e987-4b65-a9ad-c41dd134845b'],
+		third_party_enrichment_agencies_role_ids : ['38d20d88-e987-4b65-a9ad-c41dd134845b'],
+		paramount_org_id                         : '1e4b9f43-4863-4e29-a944-8e9e8780e514',
 	},
 	view_key_mappings: {
 		sales_team_members_view          : 'sales_agent_id',

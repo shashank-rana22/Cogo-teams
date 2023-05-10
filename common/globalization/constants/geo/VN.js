@@ -173,6 +173,7 @@ export default {
 		so_1_manager          : '17885538-e746-4650-a5bc-7d4d81247c7d',
 		cogoverse_kam         : 'f041b303-3239-42c5-a386-03e787900bcd',
 		cogoverse_admin       : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
+		cogoverse_user_id     : 'a217c304-5296-4f1d-948c-814fa9ed9cdb',
 	},
 	options: {
 		registration_types: [
@@ -284,6 +285,16 @@ export default {
 			{
 				label : '18 Ton',
 				value : 'Close_body_18_ton',
+			},
+		],
+		tax_types: [
+			{
+				label : 'ECN',
+				value : 'ecn',
+			},
+			{
+				label : 'Tax',
+				value : 'tax',
 			},
 		],
 	},
