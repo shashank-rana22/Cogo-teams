@@ -1,4 +1,4 @@
-import OverviewManageServices from '../../common/Overview/OverviewManageServices';
+import OverviewManageServices from '../Overview/OverviewManageServices';
 import React from 'react';
 
 import Invoices from './InvoiceList';
