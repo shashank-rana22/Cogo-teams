@@ -11713,7 +11713,7 @@ const partner = {
 			service_name : 'tickets',
 		},
 	],
-	referral: [
+	referral_configuration: [
 		{
 			api          : 'list_promotions',
 			access_type  : 'private',
@@ -11729,6 +11729,10 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'referral',
 		},
+
+	],
+
+	referral_dashboard: [
 		{
 			api          : 'get_referrer_network_node',
 			access_type  : 'private',

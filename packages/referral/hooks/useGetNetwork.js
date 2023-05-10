@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 const useGetNetwork = ({ referrer_id }) => {
 	const [networkData, setNetworkData] = useState();
-
+	const [netWorkLoader, setNetWorkLoader] = useState(true);
 	const [{ loading }, trigger] = useRequest({
 		url    : '/get_referrer_network',
 		method : 'get',
@@ -44,8 +44,10 @@ const useGetNetwork = ({ referrer_id }) => {
 				const directChildData = addDirectChild(res?.data?.data);
 				setNetworkData(directChildData);
 			}
+			setNetWorkLoader(false);
 		} catch (error) {
 			console.log(error);
+			setNetWorkLoader(false);
 		}
 	};
 
@@ -60,6 +62,7 @@ const useGetNetwork = ({ referrer_id }) => {
 		data: networkData,
 		loading,
 		referrerNetwork,
+		netWorkLoader,
 	};
 };
 

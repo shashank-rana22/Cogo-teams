@@ -24,8 +24,13 @@ const ListButtons = ({
 					Show Network
 				</div>
 			),
-			onClick    : () => { router.push('/referral/[referrer_id]', `/referral/${referrer_id}`); },
-			conditions : ['affiliate', 'employees', 'users'],
+			onClick: () => {
+				router.push(
+					'/referral/dashboard/[referrer_id]',
+					`/referral/dashboard/${referrer_id}`,
+				);
+			},
+			conditions: ['affiliate', 'employees', 'users'],
 		},
 		{
 			children: (

@@ -48,6 +48,7 @@ function Dashboard() {
 					activeTab={activeTab}
 				/>
 			</div>
+
 		</>
 	);
 }

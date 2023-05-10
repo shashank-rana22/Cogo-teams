@@ -2224,7 +2224,7 @@ const navigationMappingAdmin = {
 				as            : '/referral/dashboard',
 				type          : 'link',
 				main_apis     : [],
-				possible_apis : apis.referral,
+				possible_apis : apis.referral_dashboard,
 			},
 			{
 				key           : 'referral-analytics',
@@ -2242,7 +2242,7 @@ const navigationMappingAdmin = {
 				as            : '/referral/configuration',
 				type          : 'link',
 				main_apis     : [],
-				possible_apis : apis.referral,
+				possible_apis : apis.referral_configuration,
 			},
 			{
 				key           : 'referral-affiliate_management',

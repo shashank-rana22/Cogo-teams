@@ -7,7 +7,6 @@ import styles from './styles.module.css';
 
 function NetworkChart({
 	data = {},
-	type = '',
 	setUserModal = () => {},
 	setNodeData = () => {},
 	nodeData = {},
@@ -103,11 +102,7 @@ function NetworkChart({
 	return (
 		<div
 			id="treeWrapper"
-			className={
-				type === 'mini_network'
-					? styles.mini_tree_wrapper
-					: styles.full_tree_wrapper
-			}
+			className={styles.full_tree_wrapper}
 			ref={containerRef}
 		>
 			<Tree
@@ -116,8 +111,8 @@ function NetworkChart({
 				pathFunc="step"
 				orientation="vertical"
 				nodeSize={nodeSize}
-				draggable={type === 'full_network'}
-				zoomable={type === 'full_network'}
+				draggable
+				zoomable
 				renderCustomNodeElement={(rd3tProps) => (
 					<RenderForeignObjectNode
 						nodeDatum={rd3tProps?.nodeDatum}
@@ -126,7 +121,6 @@ function NetworkChart({
 						nodeData={nodeData}
 						handleLinkClick={handleLinkClick}
 						handleConnections={handleConnections}
-						type={type}
 						topPerformerId={top_performer_id}
 					/>
 				)}
@@ -137,33 +131,33 @@ function NetworkChart({
 				shouldCollapseNeighborNodes
 				dimensions={dimensions}
 			/>
-			{type === 'full_network' && (
-				<div className={styles.button_container}>
-					<button
-						type="button"
-						className={styles.zoom_buttons}
-						onClick={() => handleZoom('in')}
-						disabled={zoom >= 1}
-					>
-						+
-					</button>
-					<button
-						type="button"
-						className={styles.zoom_buttons}
-						onClick={() => handleZoom('out')}
-						disabled={zoom <= 0.1}
-					>
-						-
-					</button>
-					<button
-						type="button"
-						className={styles.zoom_buttons}
-						onClick={handleRestore}
-					>
-						<IcMFitView className={styles.restore} />
-					</button>
-				</div>
-			)}
+
+			<div className={styles.button_container}>
+				<button
+					type="button"
+					className={styles.zoom_buttons}
+					onClick={() => handleZoom('in')}
+					disabled={zoom >= 1}
+				>
+					+
+				</button>
+				<button
+					type="button"
+					className={styles.zoom_buttons}
+					onClick={() => handleZoom('out')}
+					disabled={zoom <= 0.1}
+				>
+					-
+				</button>
+				<button
+					type="button"
+					className={styles.zoom_buttons}
+					onClick={handleRestore}
+				>
+					<IcMFitView className={styles.restore} />
+				</button>
+			</div>
+
 		</div>
 	);
 }

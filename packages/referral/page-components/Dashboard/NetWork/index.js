@@ -2,8 +2,8 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import NetworkChart from '../../common/NetworkChart';
-import useGetNetwork from '../../hooks/useGetNetwork';
+import NetworkChart from '../../../common/NetworkChart';
+import useGetNetwork from '../../../hooks/useGetNetwork';
 
 import styles from './styles.module.css';
 import UserNetworkModal from './UserNetworkModal';
@@ -15,7 +15,7 @@ function NetWork() {
 
 	const { query = {} } = useRouter();
 	const { referrer_id = '' } = query || {};
-	const { data = {}, referrerNetwork = () => {} } = useGetNetwork({ referrer_id });
+	const { data = {}, referrerNetwork = () => {}, netWorkLoader = false } = useGetNetwork({ referrer_id });
 
 	const router = useRouter();
 	return (
@@ -30,16 +30,26 @@ function NetWork() {
 				</div>
 			</div>
 
-			<div className={styles.tree_wrapper}>
-				<NetworkChart
-					data={data}
-					type="full_network"
-					setUserModal={setUserModal}
-					setNodeData={setNodeData}
-					nodeData={nodeData}
-					referrerNetwork={referrerNetwork}
-				/>
-			</div>
+			{netWorkLoader ? (
+				<div className={styles.loading_state}>
+					<img
+						alt="cogoport-loading"
+						src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-loading.gif"
+						width="120px"
+						height="120px"
+					/>
+				</div>
+			) : (
+				<div className={styles.tree_wrapper}>
+					<NetworkChart
+						data={data}
+						setUserModal={setUserModal}
+						setNodeData={setNodeData}
+						nodeData={nodeData}
+						referrerNetwork={referrerNetwork}
+					/>
+				</div>
+			)}
 
 			{userModal && (
 				<UserNetworkModal

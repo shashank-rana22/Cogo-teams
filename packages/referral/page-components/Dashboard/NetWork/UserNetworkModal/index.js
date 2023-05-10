@@ -3,11 +3,12 @@ import { IcMCall, IcMEmail, IcCCogoCoin } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 import React from 'react';
 
-import TooltipContent from '../../../common/TooltipContent';
-import { USER_STATUS_COLOUR, USER_STATUS_MAPPING } from '../../../constants';
-import useCreateCommunication from '../../../hooks/useCreateCommunication';
-import useGetReferrerNetworkNode from '../../../hooks/useGetReferrerNetworkNode';
+import TooltipContent from '../../../../common/TooltipContent';
+import { USER_STATUS_COLOUR, USER_STATUS_MAPPING } from '../../../../constants';
+import useCreateCommunication from '../../../../hooks/useCreateCommunication';
+import useGetReferrerNetworkNode from '../../../../hooks/useGetReferrerNetworkNode';
 
+import NetWorkCommission from './NetWorkCommission';
 import styles from './styles.module.css';
 
 function UserNetworkModal({
@@ -219,23 +220,7 @@ function UserNetworkModal({
 						</div>
 					)}
 
-					<div className={styles.commission}>Network Commission:</div>
-
-					{networkReferralData.map((item) => (
-						<div className={styles.user_profile}>
-							<IcCCogoCoin
-								width={20}
-								height={20}
-								className={styles.contact_icon}
-								fill="#BDBDBD"
-							/>
-							<div className={styles.earned_points}>{item.value}</div>
-							<div className={styles.flex_details}>
-								{' '}
-								{item.label}
-							</div>
-						</div>
-					))}
+					<NetWorkCommission networkReferralData={networkReferralData} />
 
 					{nodeData?.direct_child && (
 						<div>

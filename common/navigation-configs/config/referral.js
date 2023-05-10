@@ -4,6 +4,10 @@ const referral = {
 		navigation : 'referral-dashboard',
 		isMainNav  : true,
 	},
+	'[partner_id]/referral/dashboard/[referrer_id]': {
+		layoutType : 'no_header',
+		navigation : 'referral-dashboard',
+	},
 	'/[partner_id]/referral/analytics': {
 		layoutType : 'no_header',
 		navigation : 'referral-analytics',
@@ -19,6 +23,7 @@ const referral = {
 		navigation : 'referral-affiliate_management',
 		isMainNav  : true,
 	},
+
 };
 
 module.exports = referral;
