@@ -29,7 +29,7 @@ function BlDetails({ item = {} }) {
 							)
 							&nbsp;
 						</th>
-						<th> Document Number</th>
+						<th>Document Number</th>
 						<th>Status</th>
 						<th>BL Type</th>
 						<th>Release Date</th>
