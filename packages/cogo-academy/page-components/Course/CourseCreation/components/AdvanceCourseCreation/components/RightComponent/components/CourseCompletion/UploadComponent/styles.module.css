@@ -1,3 +1,9 @@
+.container {
+    padding: 20px;
+    background: #F9F9F9;
+    border-radius: 6px;
+}
+
 
 .description_title {
     margin-bottom: 12px;
@@ -30,14 +36,13 @@
     margin-bottom: 24px;
 }
 
-.row_label {
-    padding-bottom: 6px;
-    color: #4f4f4f;
-}
-
 .multiple_select {
     display: flex;
     width: 50%;
+}
+
+.modal_btn {
+    width: 100%;
 }
 
 .form_container {
@@ -51,11 +56,6 @@
     display: flex;
 }
 
-
-.container {
-	margin: 32px 40px;
-}
-
 .input_group {
 	margin-top: 6px;
 }
@@ -64,31 +64,21 @@
 	margin-bottom: 32px;
 
 	&.course_criteria {
-		width: 100%;
-        padding-right: 24px;
+		width: 50%;
+        margin-right: 24px;
 	}
 
 	&.course_reward {
-		width: 100%;
-        padding-right: 24px;
+		width: 50%;
 	}
 
     &.course_certificate_name {
         width: 50%;
-        padding-right: 24px;
+        margin-right: 24px;
     }
 
     &.course_signing_authority {
         width: 50%;
-    }
-
-    &.course_period {
-        width: 100%;
-        padding-right: 24px;
-    }
-
-    &.course_select {
-        width: 100%;
     }
 }
 
@@ -104,31 +94,20 @@
 }
 
 .group_container {
-    display: flex;
-    width: 100%;
-}
-
-.group_select_container {
 	display: flex;
 	justify-content: space-between;
-    width: 100%;
 }
 
-.group_select {
+.group_select_1 {
     display: flex;
 	flex-direction: column;
+}
+
+.group_select_2 {
+    width: 50%;
 }
 
 .sub_label {
 	margin-top: 4px;
 	color: #828282;
-}
-
-.select_group {
-    display: flex;
-    width: 44%;
-}
-
-.select_container {
-    margin-top: 20px;
 }
