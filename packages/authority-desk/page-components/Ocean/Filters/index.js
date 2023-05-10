@@ -38,12 +38,14 @@ function Filters({ filters = {}, setFilters = () => {} }) {
 				>
 					<Button
 						themeType="secondary"
-						size="sm"
+						size="md"
 						onClick={() => setShowPopover(!showPopover)}
 						className={styles.filter_text}
 					>
-						<IcMFilter />
-						{' '}
+						<div className={styles.icon_wrapper}>
+							<IcMFilter />
+							&nbsp;
+						</div>
 						Filters
 					</Button>
 				</Popover>
