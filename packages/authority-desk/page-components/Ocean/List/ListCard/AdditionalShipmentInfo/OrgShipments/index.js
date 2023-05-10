@@ -6,6 +6,7 @@ import React from 'react';
 
 import EmptyState from '../../../../../../commons/EmptyState';
 import useListShipments from '../../../../../../hooks/useListShipments';
+import useRedirectToShipmentDetailPage from '../../../../../../hooks/useRedirectToShipmentDetailPage';
 
 import styles from './styles.module.css';
 
@@ -15,6 +16,8 @@ function OrgShipments({ item = {}, filters = {}, setFilters = () => {} }) {
 	const { data, loading } = useListShipments({ item, filters });
 
 	const { list, total_count } = data;
+
+	const { redirect } = useRedirectToShipmentDetailPage();
 
 	if (list?.length === 0 && !loading) {
 		return <EmptyState />;
@@ -78,7 +81,13 @@ function OrgShipments({ item = {}, filters = {}, setFilters = () => {} }) {
 				<tbody>
 					{(list || []).map((val) => (
 						<tr className={styles.row} key={val.serial_id}>
-							<td>{val?.serial_id}</td>
+							<td
+								role="presentation"
+								onClick={() => redirect({ service: val?.shipment_type, shipment: val })}
+							>
+								{val?.serial_id}
+
+							</td>
 							<td>
 								{startCase(val?.shipment_type)}
 								{' '}

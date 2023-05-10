@@ -9,14 +9,14 @@ export default function List({
 	data = {},
 	filters = {},
 	setFilters = () => {},
-	tabsState,
+	tabsState = {},
 	setTabsState = () => {},
 	role = '',
 	additionalTabs = [],
 	loading = false,
 	refetch = () => {},
 }) {
-	const { bucket, subApprovedBucket } = tabsState;
+	const { bucket = '', subApprovedBucket = '' } = tabsState;
 
 	const { count_stats, total_count } = data;
 
@@ -42,9 +42,7 @@ export default function List({
 		);
 	}
 
-	return data?.list?.length === 0 ? (
-		<EmptyState />
-	) : (
+	return (
 		<div className={styles.list_container}>
 			{bucket === 'approved' ? (
 				<div>
@@ -73,18 +71,25 @@ export default function List({
 				</div>
 			) : null}
 
-			{(data?.list || []).map((item) => (
-				<ListCard
-					key={item?.id}
-					item={item}
-					role={role}
-					tabsState={tabsState}
-					filters={filters}
-					setFilters={setFilters}
-					refetch={refetch}
-				/>
-			))}
-			{renderPagination}
+			{data?.list?.length === 0
+				? <EmptyState />
+				: (
+					<>
+						{	(data?.list || []).map((item) => (
+							<ListCard
+								key={item?.id}
+								item={item}
+								role={role}
+								tabsState={tabsState}
+								filters={filters}
+								setFilters={setFilters}
+								refetch={refetch}
+							/>
+						))}
+
+						{renderPagination}
+					</>
+				)}
 		</div>
 	);
 }

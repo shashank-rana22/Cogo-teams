@@ -23,8 +23,8 @@ export const useStakeholderCheck = () => {
 	const matching_role_ids = role_ids_map
 		.filter(({ role_ids: ids }) => (role_ids || []).some((item) => ids.includes(item)));
 
-	const activeRole = matching_role_ids.length > 0
-		? matching_role_ids[0].role
+	const activeRole = matching_role_ids?.length > 0
+		? matching_role_ids?.[0].role
 		: 'kam';
 
 	return { role: activeRole };

@@ -34,7 +34,6 @@ function BookingRequirements({ showBookingReq = false, setShowBookingReq = () =>
 				show={showBookingReq}
 				onClose={() => setShowBookingReq(false)}
 				placement="top"
-				size="lg"
 				closeOnOuterClick={false}
 				className={styles.modal_content}
 			>
