@@ -48,7 +48,7 @@ importers:
       '@cogoport/athena-dashboard': workspace:0.1.0
       '@cogoport/authentication': workspace:0.1.0
       '@cogoport/authority-desk': workspace:0.1.0
-      '@cogoport/bl_do-collection-release-desk': workspace:0.1.0
+      '@cogoport/bl_do-collection-release': workspace:0.1.0
       '@cogoport/booking-desk': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
       '@cogoport/cogo-academy': workspace:0.1.0
@@ -99,7 +99,7 @@ importers:
       '@cogoport/athena-dashboard': link:../packages/athena-dashboard
       '@cogoport/authentication': link:../packages/authentication
       '@cogoport/authority-desk': link:../packages/authority-desk
-      '@cogoport/bl_do-collection-release-desk': link:../packages/bl_do-collection-release
+      '@cogoport/bl_do-collection-release': link:../packages/bl_do-collection-release
       '@cogoport/booking-desk': link:../packages/booking-desk
       '@cogoport/business-finance': link:../packages/business-finance
       '@cogoport/cogo-academy': link:../packages/cogo-academy
