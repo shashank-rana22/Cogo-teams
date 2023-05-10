@@ -11817,6 +11817,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'tickets',
 		},
+		{
+			api          : 'check_customer_checkout_quotation_conflict',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
 	],
 	analytics_dashboard: [
 		{
