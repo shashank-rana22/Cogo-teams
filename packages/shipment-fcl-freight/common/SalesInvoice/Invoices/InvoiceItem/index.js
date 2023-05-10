@@ -31,7 +31,7 @@ function InvoiceItem({
 	});
 
 	return (
-		<div className={styles.container}>
+		<main className={styles.container}>
 			<div className={styles.header_container}>
 				<div className={styles.InvoicePartyDetails}>
 					<div className={styles.InvoicingPartyName}>
@@ -82,7 +82,7 @@ function InvoiceItem({
 				refetchCN={refetchCN}
 			/>
 			{/* ))} */}
-		</div>
+		</main>
 	);
 }
 
