@@ -2,7 +2,7 @@
 import { Tabs, TabPanel, Table } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
-// import PendingTasks from '../../../PendingTasks/TaskList';
+import PendingTasks from '../../PendingTasks/TaskList';
 import { columns } from '../Invoices/tableColumn';
 
 import styles from './styles.module.css';
@@ -16,7 +16,7 @@ function PendingKnockOff({
 	taskLoading = false,
 }) {
 	const [activeTab, setActiveTab] = useState('invoice');
-	const list_of_invoices = item?.invoice_data;
+	const list_of_invoices = item?.invoice_data || [];
 
 	const refetchForTask = () => {
 		refetchList();
@@ -39,19 +39,19 @@ function PendingKnockOff({
 				<TabPanel name="invoice" title="Invoices">
 					<div className={styles.list_container}>
 						Invoices
-						{/* <Table fields={columns} data={list_of_invoices} /> */}
+						<Table fields={columns} data={list_of_invoices} />
 					</div>
 				</TabPanel>
 
 				<TabPanel name="tasks" title="Tasks">
 					<div>Task</div>
-					{/* <PendingTasks
+					<PendingTasks
 						taskList={tasks}
 						item={item}
 						handleAccordionOpen={handleAccordionOpen}
 						refetchForTask={refetchForTask}
 						tasksLoading={taskLoading}
-					/> */}
+					/>
 				</TabPanel>
 			</Tabs>
 		</div>

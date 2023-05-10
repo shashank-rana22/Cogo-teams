@@ -1,6 +1,7 @@
-// import Layout from '@cogo/bookings/commons/Layout';
 import { useForm } from '@cogoport/forms';
 import React, { useEffect, useImperativeHandle, forwardRef } from 'react';
+
+import Layout from '../../../Layout';
 
 const getDefaultValues = (controls) => {
 	const defaultVlaues = {};
@@ -11,9 +12,8 @@ const getDefaultValues = (controls) => {
 };
 
 function CustomTasks({ setMyForm = () => {}, controls }, ref) {
-	console.log('defaaaa', getDefaultValues(controls), controls);
 	const {
-		fields,
+		control,
 		trigger,
 		watch,
 		formState: { errors },
@@ -33,11 +33,11 @@ function CustomTasks({ setMyForm = () => {}, controls }, ref) {
 		() => ({
 			formTrigger: trigger,
 		}),
-		[],
+		[trigger],
 	);
 
-	// return <Layout fields={fields} controls={controls} errors={errors} />;
-	return <div>AccordianTimeline</div>;
+	return <Layout fields={controls} control={control} errors={errors} />;
+	// return <div>AccordianTimeline</div>;
 }
 
 export default forwardRef(CustomTasks);

@@ -3,8 +3,8 @@ import { useState, useRef } from 'react';
 
 import taskConfigs from '../../../configs/taskConfigs.json';
 import getMutatedControls from '../../../helpers/getMutatedControls';
-// import PendingTasks from '../../../PendingTasks/TaskList';
 import Loader from '../../Loader';
+import PendingTasks from '../../PendingTasks/TaskList';
 import { columns } from '../Invoices/tableColumn';
 
 import AccordianTimeline from './AccordianTimeline';
@@ -104,7 +104,7 @@ export default function AccordionContent({
 		return (
 			<>
 				<div className={styles.form_div}>
-					{/* {usingDefaultPendingTasks || showDeliveryOrderTask ? (
+					{usingDefaultPendingTasks || showDeliveryOrderTask ? (
 						<PendingTasks
 							taskList={taskToSend}
 							item={item}
@@ -112,22 +112,22 @@ export default function AccordionContent({
 							refetchForTask={refetchForTask}
 							tasksLoading={false}
 						/>
-					) : ( */}
-					<div className={styles.accordian_container}>
-						<AccordianTimeline
-							stepCount={currentStep?.count}
-							stepsData={taskConfig?.steps}
-						/>
-						<div className={styles.form_container}>
-							<CustomTasks
-								ref={formRef}
-								setMyForm={setMyForm}
-								controls={mutatedControls}
-								handleNextAction={handleNextAction}
+					) : (
+						<div className={styles.accordian_container}>
+							<AccordianTimeline
+								stepCount={currentStep?.count}
+								stepsData={taskConfig?.steps}
 							/>
+							<div className={styles.form_container}>
+								<CustomTasks
+									ref={formRef}
+									setMyForm={setMyForm}
+									controls={mutatedControls}
+									handleNextAction={handleNextAction}
+								/>
+							</div>
 						</div>
-					</div>
-					{/* )} */}
+					)}
 				</div>
 
 				{usingDefaultPendingTasks ? null : (
