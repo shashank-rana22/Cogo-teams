@@ -2,16 +2,26 @@ import { cl, Toast, Button, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import getFormattedPayload from '../../helpers/formatPayload';
 import getAccordionAndButton from '../../helpers/getAccordionAndButton';
 import { isCardCritical } from '../../helpers/isCardCritical';
 import useListTasks from '../../hooks/useListTasks';
-// import usePendingTask from '../../../hooks/usePendingTask';
+import useUpdateTask from '../../hooks/useUpdateTask';
 import Accordion from '../Accordion';
 
 import LocaionDetails from './LocationDetails';
 import ServiceProvider from './ServiceProvider';
 import ShipmentDetails from './ShipmentDetails';
 import styles from './styles.module.css';
+
+const successMsg = {
+	knockoff_pending   : 'Invoice Knocked Off successfully',
+	collection_pending : 'Details have been updated successfully',
+	under_collection   : 'Document Uploaded successfully',
+	collected          : 'Release Mode have been updated successfully',
+	released           : 'Details have been updated successfully',
+	surrendered        : 'BL has been surrendered successfully',
+};
 
 const taskFilter = {
 	knockoff_pending: {
@@ -140,16 +150,29 @@ export default function Card({
 		}
 	};
 
-	// const { loading, getShipmentPendingTask, pendingTasks, handleSubmit } =		usePendingTask({
-	// 	activeTab,
-	// 	item,
-	// 	closeModal,
-	// 	refetchList,
-	// 	handleAccordionOpen,
-	// 	showDeliveryOrderTask,
-	// });
+	const refetch = () => {
+		Toast.success(successMsg[stateProps.inner_tab]);
+		closeModal();
+		refetchList();
+		handleAccordionOpen();
+	};
 
-	// const tasks = pendingTasks || [];
+	const { updateTask } = useUpdateTask({ refetch });
+
+	const handleSubmit = ({ formValues = {}, taskConfig = {} }) => {
+		console.log('siubmit');
+		const payload = getFormattedPayload({
+			inner_tab    : stateProps.inner_tab,
+			item,
+			formValues,
+			taskConfig,
+			pendingTasks : list,
+		});
+
+		if (payload) {
+			updateTask({ payload, refetch });
+		}
+	};
 
 	let cardClassName = !showAccordion ? 'no-accordion' : '';
 	cardClassName
@@ -209,7 +232,7 @@ export default function Card({
 					setStateProps={setStateProps}
 					stateProps={stateProps}
 					handleAccordionOpen={handleAccordionOpen}
-					// handleSubmit={handleSubmit}
+					handleSubmit={handleSubmit}
 					refetchList={refetchList}
 					getShipmentPendingTask={listTasks}
 					showDeliveryOrderTask={showDeliveryOrderTask}
@@ -239,7 +262,7 @@ export default function Card({
 							</Button>
 							<Button
 								disabled={loading}
-								// onClick={handleSubmit}
+								onClick={handleSubmit}
 								className="primary md"
 							>
 								CONFIRM
