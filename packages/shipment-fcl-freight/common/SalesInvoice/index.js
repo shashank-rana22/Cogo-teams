@@ -1,4 +1,3 @@
-import OverviewManageServices from '../Overview/OverviewManageServices';
 import React from 'react';
 
 import OverviewManageServices from '../../common/Overview/OverviewManageServices';
