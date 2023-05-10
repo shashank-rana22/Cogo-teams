@@ -4,15 +4,17 @@ import { TextAreaController } from '@cogoport/forms';
 import Watermark from '../../../commons/Watermark';
 
 import styles from './styles.module.css';
+import { sectionThreeFields, containersDetails } from './templateConfig';
 
 function Write({
 	control,
 	setaddAnnexure = () => {},
 	addAnnexure = false,
 	isReadonly = false,
-	initialValues,
+	initialValues = {},
 }) {
 	const { port_of_loading, port_of_discharge, consigner } = initialValues;
+
 	return (
 		<main className={styles.main}>
 			<Watermark text="draft" />
@@ -179,42 +181,11 @@ function Write({
 						</thead>
 						<tbody>
 							<tr>
-								<td>
-									<TextAreaController
-										name="container_number"
-										control={control}
-										rows={10}
-									/>
-								</td>
-								<td>
-									<TextAreaController
-										name="marks_and_number"
-										control={control}
-										rows={10}
-									/>
-
-								</td>
-								<td>
-									<TextAreaController
-										name="package_description"
-										control={control}
-										rows={10}
-									/>
-								</td>
-								<td>
-									<TextAreaController
-										name="gross_weight"
-										control={control}
-										rows={10}
-									/>
-								</td>
-								<td>
-									<TextAreaController
-										name="measurement"
-										control={control}
-										rows={10}
-									/>
-								</td>
+								{containersDetails.map((name) => (
+									<td>
+										<TextAreaController name={name} control={control} rows={10} />
+									</td>
+								))}
 							</tr>
 						</tbody>
 					</table>
@@ -224,38 +195,12 @@ function Write({
 				</div>
 
 				<div className={styles.section_three}>
-					<div className={styles['section_three-element']}>
-						<span>Freight Terms</span>
-						<TextAreaController
-							name="freight_amount"
-							control={control}
-						/>
-					</div>
-					<div className={styles['section_three-element']}>
-						<span>Freight Payable At</span>
-						<TextAreaController
-							name="freight_payable_at"
-							control={control}
-						/>
-					</div>
-					<div className={styles['section_three-element']}>
-						<span>
-							Number of original MTD(s)
-						</span>
-						<TextAreaController
-							name="number_of_original_MTDs"
-							control={control}
-						/>
-					</div>
-					<div className={styles['section_three-element']}>
-						<span>
-							Place and date of issue
-						</span>
-						<TextAreaController
-							name="place_and_date_of_issue"
-							control={control}
-						/>
-					</div>
+					{sectionThreeFields.map(({ label, name }) => (
+						<div className={styles['section_three-element']}>
+							<span>{label}</span>
+							<TextAreaController name={name} control={control} />
+						</div>
+					))}
 				</div>
 
 				<div className={styles.section_four}>

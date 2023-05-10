@@ -1,56 +1,51 @@
 import Watermark from '../../../commons/Watermark';
 
 import styles from './styles.module.css';
+import { SECTION_THREE_MAPPINGSS, SECTION_ONE_CHILD_1_MAPPINGS } from './templateConfig';
 
 function Read({
 	defaultValues = {},
 }) {
+	function SectionOneChild1(values) {
+		return (
+			SECTION_ONE_CHILD_1_MAPPINGS.map(({ label, key, children }) => (children ? (
+				<div className={styles[`section_one_child_1-${key}`]}>
+					{children.map(({ childrenLabel, childrenKey, className }) => (
+						<div className={styles[className]}>
+							<p>{childrenLabel}</p>
+							<p>{values?.[childrenKey] || ''}</p>
+						</div>
+					))}
+				</div>
+			) : (
+				<div key={key} className={styles[`section_one_child_1-${key}`]}>
+					<p>{label}</p>
+					<p>{values?.[key] || ''}</p>
+				</div>
+			)))
+		);
+	}
+
+	function SectionThree(values) {
+		return (
+			<div className={styles.section_three}>
+				{SECTION_THREE_MAPPINGSS.map(({ label, key }) => (
+					<div className={styles['section_three-element']}>
+						<span>{label}</span>
+						<p>{values?.[key] || ''}</p>
+					</div>
+				))}
+			</div>
+		);
+	}
+
 	return (
 		<main className={styles.main}>
 			<Watermark text="draft" />
 			<section className={styles.section}>
 				<div className={styles.section_one}>
 					<div className={styles.section_one_child_1}>
-						<div className={styles['section_one_child_1-consigner']}>
-							<p>Consigner/Shipper</p>
-							<p>{defaultValues?.consigner || ''}</p>
-						</div>
-
-						<div className={styles['section_one_child_1-consignee']}>
-							<p>Consignee (or order)</p>
-							<p>{defaultValues?.consignee || ''}</p>
-						</div>
-						<div className={styles['section_one_child_1-notify_address']}>
-							<p>Notify Address</p>
-							<p>{defaultValues?.notify_address || ''}</p>
-						</div>
-						<div className={styles['section_one_child_1-location']}>
-							<div className={styles['section_one_child_1-location_element']}>
-								<p>Place of Acceptance</p>
-								<p>{defaultValues?.place_of_acceptance || ''}</p>
-							</div>
-							<div className={styles['section_one_child_1-location_element']}>
-								<p>Port of Loading</p>
-								<p>{defaultValues?.port_of_loading || ''}</p>
-							</div>
-						</div>
-						<div className={styles['section_one_child_1-location']}>
-							<div className={styles['section_one_child_1-location_element']}>
-								<p>Port of Discharge</p>
-								<p>{defaultValues?.port_of_discharge || ''}</p>
-							</div>
-							<div className={styles['section_one_child_1-location_element']}>
-								<p>Place of Delivery</p>
-								<p>{defaultValues?.place_of_delivery || ''}</p>
-							</div>
-						</div>
-						<div className={styles['section_one_child_1-location']}>
-							<div className={styles['section_one_child_1-location_element']}>
-								<p>Vessel &amp; Voyage No.</p>
-								<p>{defaultValues?.vessel_number || ''}</p>
-							</div>
-						</div>
-
+						{SectionOneChild1(defaultValues)}
 					</div>
 
 					<div className={styles.section_one_child_2}>
@@ -147,28 +142,7 @@ function Read({
 					</span>
 				</div>
 
-				<div className={styles.section_three}>
-					<div className={styles['section_three-element']}>
-						<span>Freight Terms</span>
-						<p>{defaultValues?.freight_amount || ''}</p>
-					</div>
-					<div className={styles['section_three-element']}>
-						<span>Freight Payable At</span>
-						<p>{defaultValues?.freight_payable_at || ''}</p>
-					</div>
-					<div className={styles['section_three-element']}>
-						<span>
-							Number of original MTD(s)
-						</span>
-						<p>{defaultValues?.number_of_original_MTDs || ''}</p>
-					</div>
-					<div className={styles['section_three-element']}>
-						<span>
-							Place and date of issue
-						</span>
-						<p>{defaultValues?.place_and_date_of_issue || ''}</p>
-					</div>
-				</div>
+				{SectionThree(defaultValues)}
 
 				<div className={styles.section_four}>
 					<div className={styles.section_four_child_1}>

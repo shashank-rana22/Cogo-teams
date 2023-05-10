@@ -108,16 +108,16 @@ function UploadHbl(props) {
 					</form>
 				))}
 
-			<form className={styles.button_wrapper}>
-				{bls_count > urls?.length && (
+			{bls_count > urls?.length && (
+				<form className={styles.button_wrapper}>
 					<Button
 						disabled={loading}
 						onClick={handleSubmit}
 					>
 						Submit
 					</Button>
-				)}
-			</form>
+				</form>
+			)}
 		</main>
 	);
 }

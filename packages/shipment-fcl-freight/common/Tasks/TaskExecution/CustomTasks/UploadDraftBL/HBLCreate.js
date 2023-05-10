@@ -5,6 +5,9 @@ import { forwardRef, useRef, useState } from 'react';
 
 import styles from './styles.module.css';
 
+const EXCLUDED_KEYS = ['container_number',
+	'marks_and_number', 'package_description', 'gross_weight', 'measurement'];
+
 function HBLCreate({
 	onSave = () => {},
 	hblData,
@@ -43,9 +46,7 @@ function HBLCreate({
 			};
 			data.containers.push(containerDetails);
 
-			const excludedKeys = ['container_number',
-				'marks_and_number', 'package_description', 'gross_weight', 'measurement'];
-			const finalData = omit(data, excludedKeys);
+			const finalData = omit(data, EXCLUDED_KEYS);
 
 			onSave(finalData);
 		})();

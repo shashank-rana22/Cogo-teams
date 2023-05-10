@@ -14,8 +14,7 @@ const controls = [
 		type  : 'number',
 		span  : 6,
 		size  : 'sm',
-		min   : 1,
-		rules : { required: 'Container Quantity is required' },
+		rules : { required: 'Container Quantity is required', min: 1 },
 	},
 	{
 		name : 'url',

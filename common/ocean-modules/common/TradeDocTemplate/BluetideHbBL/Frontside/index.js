@@ -12,20 +12,8 @@ function Frontside({
 }) {
 	const isReadonly = mode === 'read';
 
-	const osName = 'mac';
-	const getReadOnlyData = () => {
-		if (osName === 'windows') {
-			return (
-				<Read defaultValues={initialValues} />
-			);
-		}
-		return (
-			<Read defaultValues={initialValues} />
-		);
-	};
-
 	return isReadonly ? (
-		getReadOnlyData()
+		<Read defaultValues={initialValues} />
 	) : (
 		<Write
 			isReadonly={isReadonly}
