@@ -1,0 +1,18 @@
+.container{
+	.rc-upload {
+		.upload-area {
+			display: flex;
+			justify-content: center;
+		}
+	}
+}
+
+.download_container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.download_link{
+	color: #F68B21;
+}

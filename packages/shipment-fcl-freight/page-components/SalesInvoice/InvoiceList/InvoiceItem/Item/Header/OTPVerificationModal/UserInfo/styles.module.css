@@ -1,0 +1,55 @@
+.user_info_container{
+	width: 100%;
+	padding: 0 20px 20px 20px;
+
+	.core-ui-radio-radio-container {
+		&:hover {
+			border: 1px solid #393f70;
+		}
+
+		&.checked {
+			border: 1px solid #333333;
+		}
+	}
+	.core-ui-radio-root {
+		margin-bottom: 10px;
+	}
+	.core-ui-radio-label {
+		opacity: 1;
+	}
+}
+
+.actions{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 40px 0px 20px 0px;
+
+	.core-ui-button-root {
+		width: 20%;
+		text-transform: capitalize;
+
+		&:last-child {
+			margin-left: 16px;
+		}
+	}
+}
+
+.container{
+	width: 400px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.user_name{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 60%;
+}
+
+.no_data{
+	font-size: 16px;
+	font-weight: 500;
+}
