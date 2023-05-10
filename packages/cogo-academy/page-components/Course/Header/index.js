@@ -26,7 +26,7 @@ function Header() {
 					themeType="primary"
 					onClick={onClickCreate}
 				>
-					Create New
+					Create Course
 				</Button>
 			</div>
 

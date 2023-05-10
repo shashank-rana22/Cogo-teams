@@ -1,4 +1,4 @@
-import { TabPanel, Tabs } from '@cogoport/components';
+import { TabPanel, Tabs, Badge } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
@@ -53,7 +53,16 @@ function Course() {
 						const { title, component: ActiveComponent } = TABS_MAPPING[item];
 
 						return (
-							<TabPanel key={item} name={item} title={title}>
+							<TabPanel
+								key={item}
+								name={item}
+								title={(
+									<div className={styles.tab_title}>
+										{title}
+										<Badge color="red" size="md" text="100" style={{ marginLeft: '6px' }} />
+									</div>
+								)}
+							>
 								<ActiveComponent {...activeComponentProps} />
 							</TabPanel>
 						);

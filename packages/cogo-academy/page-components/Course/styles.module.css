@@ -4,3 +4,8 @@
 	border-radius: 6px;
 	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
 }
+
+.tab_title {
+	display: flex;
+	align-items: center;
+}
