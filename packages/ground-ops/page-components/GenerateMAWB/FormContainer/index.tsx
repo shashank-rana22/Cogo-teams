@@ -219,6 +219,7 @@ function FormContainer({
 							{activeCategory === 'hawb' && (
 								<>
 									<Toggle
+										name="document_number"
 										size="sm"
 										disabled={!activeHawb.isNew}
 										onLabel="Custom Series"
