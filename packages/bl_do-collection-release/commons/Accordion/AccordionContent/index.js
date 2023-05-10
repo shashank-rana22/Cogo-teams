@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import taskConfigs from '../../../configs/taskConfigs.json';
 import getMutatedControls from '../../../helpers/getMutatedControls';
 import getTableFormatedData from '../../../helpers/getTableFormatedData';
+import EmptyState from '../../EmptyState';
 import Loader from '../../Loader';
 import PendingTasks from '../../PendingTasks/TaskList';
 import { columns } from '../Invoices/tableColumn';
@@ -92,13 +93,13 @@ export default function AccordionContent({
 		if (tasks?.length === 0) {
 			return (
 				<div className={styles.container}>
-					{/* <EmptyState
+					<EmptyState
 						showContent={{
-							heading: 'No Results Found!',
-							description:
+							heading: 'No Task found !!',
+							subHeading:
 								'Looks like this task has not been created yet, please complete previous tasks first!!',
 						}}
-					/> */}
+					/>
 				</div>
 			);
 		}

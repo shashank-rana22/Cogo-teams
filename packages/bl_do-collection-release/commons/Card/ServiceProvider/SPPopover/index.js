@@ -54,7 +54,7 @@ export default function ServcieProvider({ spDetails = [], address = [] }) {
 				<div className={cl`${styles.text} ${styles.bold}`}>
 					{`${item?.mobile_country_code} - ${item?.mobile_number}`}
 				</div>
-				<div className={styles.link} href={`tel:${item?.mobile_country_code + item?.mobile_number}`}>
+				<div className={styles.link} href={`tel:${item?.mobile_country_code} ${item?.mobile_number}`}>
 					<IcMCall className="styleIcon" />
 				</div>
 			</div>

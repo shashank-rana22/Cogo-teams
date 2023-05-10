@@ -1,6 +1,7 @@
-// import EmptyState from '@cogo/bookings/commons/EmptyState';
 import { Loader } from '@cogoport/components';
 import { useState } from 'react';
+
+import EmptyState from '../EmptyState';
 
 import Card from './Card';
 import styles from './styles.module.css';
@@ -25,7 +26,17 @@ function PendingTasks({
 	}
 
 	if (taskList.length === 0) {
-		return <div>Empty State</div>;
+		return (
+			<div>
+				<EmptyState
+					showContent={{
+						heading: 'No Task found !!',
+						subHeading:
+				'Looks like this task has not been created yet, please complete previous tasks first!!',
+					}}
+				/>
+			</div>
+		);
 	}
 
 	return !selectedTask ? (
