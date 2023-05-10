@@ -36,6 +36,7 @@ function Filters({ filters = {}, setFilters = () => {} }) {
 					value={filters.q || ''}
 					onChange={(val) => setFilters({ ...filters, q: val })}
 					prefix={<IcMSearchlight />}
+					placeholder="Search by SID"
 				/>
 			</div>
 		</div>
