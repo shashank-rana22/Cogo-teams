@@ -5,7 +5,18 @@ import EmptyState from './EmptyState';
 import styles from './styles.module.css';
 
 function InvoicesTable({
-	id, className, columns, data, pageSize, page, total, setFilters, filters, loading, showPagination = true, ...rest
+	id,
+	className,
+	columns,
+	data,
+	pageSize,
+	page,
+	total,
+	setFilters,
+	filters,
+	loading,
+	showPagination = true,
+	...rest
 }) {
 	return (
 		<div className={styles.table}>

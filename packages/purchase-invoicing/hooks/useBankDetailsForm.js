@@ -1,6 +1,5 @@
 import { Placeholder } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { get } from '@cogoport/utils';
 
 import useGetBankDetails from './useGetBankDetails';
 import useSaveDocument from './useSaveDocument';
@@ -55,7 +54,7 @@ const useBankDetailsDocumentForm = (props) => {
 		const newValues = {
 			name          : 'BankDetails',
 			document_type : 'bank_account_details',
-			image_url     : get(image_url, 'url'),
+			image_url     : image_url?.finalUrl,
 			data          : restValues,
 			organization_trade_party_id,
 			source,

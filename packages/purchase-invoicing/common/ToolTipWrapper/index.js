@@ -3,7 +3,13 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function ToolTipWrapper({ text = '', maxlength = 25, content, children, render }) {
+function ToolTipWrapper({
+	text = '',
+	maxlength = 25,
+	content,
+	children,
+	render,
+}) {
 	const renderToolTip = text.length > maxlength;
 
 	return (

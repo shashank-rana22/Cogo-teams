@@ -47,7 +47,6 @@ import {
  */
 
 const keyAsyncFieldsParamsMapping = {
-	list_vendors                    : listVendors,
 	organizations                   : asyncFieldsOrganizations,
 	organization_users              : asyncFieldsOrganizationUser,
 	partners                        : asyncFieldsPartner,
@@ -65,6 +64,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_organization_trade_parties : asyncOrganizationTradeParties,
 	search_products_v2              : asyncSearchProducts,
 	shipping_lines                  : asyncShippingLines,
+	list_vendors                    : listVendors,
 	list_hs_codes                   : asyncListHsCodes,
 	list_exchange_rate_currencies   : asyncListCurrency,
 	engagement_scoring_events       : asyncAccountEngagementScoringEvents,
