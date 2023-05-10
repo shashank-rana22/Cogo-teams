@@ -1,4 +1,5 @@
 import { Placeholder, Button, Input, Select } from '@cogoport/components';
+import getEntityCode from '@cogoport/globalization/utils/getEntityCode';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty, format } from '@cogoport/utils';
@@ -7,7 +8,6 @@ import { useEffect, useState } from 'react';
 import { optionsEntity } from '../../Accruals/constant';
 import useList from '../../hooks/useList';
 import EmptyState from '../EmptyState';
-import { entityMapping } from '../PLStatement/constant';
 
 import styles from './styles.module.css';
 import UploadModal from './UploadModal';
@@ -30,7 +30,7 @@ function SourceFile() {
 			id       : `#Upload_${uploadNumber}` || '-',
 			month    : `Upload Month - ${formatMonth}` || '-',
 			name     : `Uploaded By - ${uploadedByName}` || '-',
-			entity   : entityMapping[cogoEntityId] || '-',
+			entity   : getEntityCode(cogoEntityId) || '-',
 			date     : formatDate || '-',
 			button   : 'View',
 			itemData : item,

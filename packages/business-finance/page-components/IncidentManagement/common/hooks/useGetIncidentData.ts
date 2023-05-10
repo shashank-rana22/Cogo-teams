@@ -1,10 +1,10 @@
 import { useDebounceQuery } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-import { global } from '../constants';
 import { FilterProps } from '../interface';
 
 interface Tab {
@@ -16,7 +16,7 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 	}));
 
 	const isSettlementExecutive = userProfile.partner.user_role_ids.includes(
-		global.PROD_SETTLEMENT_EXECUTIVE,
+		GLOBAL_CONSTANTS.country_entity_ids.IN,
 
 	);
 

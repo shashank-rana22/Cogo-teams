@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
@@ -20,7 +21,7 @@ const useListVendors = ({ filters, sort }) => {
 		try {
 			trigger({
 				params: {
-					entityCodeId               : '6fd98605-9d5d-479d-9fac-cf905d292b88',
+					entityCodeId               : GLOBAL_CONSTANTS.country_entity_ids.IN,
 					page_limit                 : pageLimit,
 					page,
 					verification_data_required : true,

@@ -1,9 +1,9 @@
+import getEntityCode from '@cogoport/globalization/utils/getEntityCode';
 import { useEffect, useState } from 'react';
 
 import useReport from '../../hooks/useReport';
 
 import Card from './Card';
-import { entityMapping } from './constant';
 import ListProfit from './ListProfit';
 import styles from './styles.module.css';
 
@@ -36,7 +36,7 @@ function PLStatement() {
 	useEffect(() => {
 		setFilters((prev) => ({
 			...prev,
-			entity   : `${entityMapping[filtersData?.cogoEntityId]}` || '',
+			entity   : getEntityCode(filtersData?.cogoEntityId) || '',
 			category : filtersData?.category || '',
 			date     : filtersData?.month || '',
 			rowCheck : filtersData?.rowCheck || '',

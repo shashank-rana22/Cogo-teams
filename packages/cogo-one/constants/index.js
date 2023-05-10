@@ -264,7 +264,6 @@ export const MAIL_REPLY_TYPE = [
 	},
 ];
 export const PAGE_LIMIT = 50;
-export const INDIA_COUNTRY_ID = '541d1232-58ce-4d64-83d6-556a42209eb7';
 
 export const GENERAL_ICON = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/General.svg';
 
