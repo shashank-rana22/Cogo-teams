@@ -1,6 +1,7 @@
-import { Tabs, TabPanel, Select, Input, cl } from '@cogoport/components';
+import { Tabs, TabPanel, Select, Input, cl, Toggle } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useState, useCallback } from 'react';
 
 import ClickableDiv from '../commons/ClickableDiv';
 import STATIONARY_PERMISSIONS from '../configs/STATIONARY_PERMISSION.json';
@@ -34,6 +35,13 @@ export default function BLDoCollectionDesk() {
 	});
 
 	const profile = useSelector((state) => state.profile || {});
+
+	const router = useRouter();
+
+	const handleVersionChange = useCallback(() => {
+		const newPathname = `${router.asPath}`;
+		window.location.replace(newPathname);
+	}, [router.asPath]);
 
 	const Desk = deskMapping[stateProps.shipment_type];
 
@@ -75,7 +83,13 @@ export default function BLDoCollectionDesk() {
 					placeholder="Trade Type"
 				/>
 			</div>
-			<div>
+			<div className={styles.right_filters}>
+				<Toggle
+					size="md"
+					onLabel="Old"
+					offLabel="New"
+					onChange={handleVersionChange}
+				/>
 				<Input
 					placeholder="Search SID"
 					type="search"
@@ -97,7 +111,7 @@ export default function BLDoCollectionDesk() {
 			>
 				<TabPanel
 					name="bl"
-					title="BL Colletion-Release"
+					title="Bill Of Ladings"
 				>
 					<div className={styles.outer_tab}>
 						{renderInnerTabs}
@@ -107,7 +121,7 @@ export default function BLDoCollectionDesk() {
 				</TabPanel>
 				<TabPanel
 					name="do"
-					title="DO Release"
+					title="Delivery Orders"
 				>
 					<div className={styles.outer_tab}>
 						{renderInnerTabs}

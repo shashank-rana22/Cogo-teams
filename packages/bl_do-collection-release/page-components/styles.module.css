@@ -27,6 +27,12 @@
 	}
 }
 
+.right_filters{
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
 .service_tabs {
 	display: flex;
 	align-items: center;
