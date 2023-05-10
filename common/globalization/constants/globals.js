@@ -22,6 +22,7 @@ const GLOBAL_CONSTANTS = {
 		HKD : 'HKD',
 		JPY : 'JPY',
 		SGD : 'SGD',
+		CAD : 'CAD',
 	},
 	currency_locale: {
 		INR : 'en-IN',
