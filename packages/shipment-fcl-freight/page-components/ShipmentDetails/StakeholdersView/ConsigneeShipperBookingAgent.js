@@ -97,7 +97,7 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 					<ShipmentChat />
 				</div>
 
-				<CancelDetails />
+				{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
 
 				<DocumentHoldDetails />
 
