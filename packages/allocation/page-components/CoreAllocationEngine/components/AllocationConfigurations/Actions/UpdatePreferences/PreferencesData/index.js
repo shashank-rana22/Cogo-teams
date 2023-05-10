@@ -38,9 +38,6 @@ function PreferencesData(props) {
 				<div className={styles.radio_label}>Select All : </div>
 				<RadioGroup options={CONFIGURATION_OPTIONS} value={radioValue} onChange={setRadioValue} />
 			</div>
-			{Array(5).fill(1).map(() => (
-				<div>Hello</div>
-			))}
 
 			{list.map((preference) => <PreferenceCard key={preference.id} preference={preference} />)}
 
