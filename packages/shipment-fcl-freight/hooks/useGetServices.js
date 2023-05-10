@@ -27,20 +27,12 @@ function useGetServices({ shipment_data = {}, additional_methods = [], activeSta
 					},
 				});
 
-				if (activeStakeholder in activeStakeholderMapping) {
-					const servicesToShow = (res?.data?.summary || [])
-						.filter((service) => service?.importer_exporter?.id
-							=== shipment_data?.[activeStakeholderMapping[activeStakeholder]]);
-
-					setServicesData(servicesToShow);
-				} else {
-					setServicesData(res?.data?.summary);
-				}
+				setServicesData(res?.data?.summary);
 			} catch (err) {
 				toastApiError(err);
 			}
 		},
-		[trigger, id, additional_methods, activeStakeholder, shipment_data],
+		[trigger, id, additional_methods],
 	);
 
 	useEffect(() => {

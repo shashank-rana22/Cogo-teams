@@ -1,5 +1,5 @@
 import { IcMPlus } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Form from './Form';
 import styles from './styles.module.css';
@@ -12,10 +12,15 @@ function AddNewService({
 	cancelUpsellOriginFor = '',
 	cancelUpsellDestinationFor = '',
 	activeStakeholder = '',
+	setShowTradeHeading = () => {},
+	showTradeHeading = {},
 }) {
-	const haveToUpsell = servicesList?.length === 0
-		&& upsellableService.service_type === 'fcl_freight_local_service'
-		&& primary_service?.bl_category === 'hbl';
+	// This Comment to be removed
+	// const haveToUpsell = servicesList?.length === 0
+	// 	&& upsellableService.service_type === 'fcl_freight_local_service'
+	// 	&& primary_service?.bl_category === 'hbl';
+
+	const haveToUpsell = false;
 
 	const [upsellModal, setUpsellModal] = useState(haveToUpsell);
 
@@ -46,6 +51,25 @@ function AddNewService({
 	const closeModal = () => {
 		setUpsellModal(!upsellModal);
 	};
+
+	useEffect(() => {
+		setShowTradeHeading({
+			origin: upsellableService.trade_type === 'export' && !cancelUpsell && isUpsellable && canUpsellForTradeType
+			&& !showTradeHeading.origin
+				? true : showTradeHeading.origin,
+			destination:
+			upsellableService.trade_type === 'import' && !cancelUpsell && isUpsellable && canUpsellForTradeType
+				&& !showTradeHeading.destination
+				? true : showTradeHeading.destination,
+
+			main: showTradeHeading.main,
+		});
+	}, [cancelUpsell, isUpsellable,
+		canUpsellForTradeType, setShowTradeHeading,
+		showTradeHeading.origin, showTradeHeading.destination,
+		upsellableService.trade_type,
+		showTradeHeading.main,
+	]);
 
 	return (
 		<>

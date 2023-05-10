@@ -14,7 +14,7 @@ const Kam = dynamic(() => import('./StakeholdersView/BookingAgent'), { ssr: fals
 const BookingDesk = dynamic(() => import('./StakeholdersView/BookingDesk'), { ssr: false });
 const LastMileDesk = dynamic(() => import('./StakeholdersView/LastMileDesk'), { ssr: false });
 
-const shipment_additional_methods = ['main_service', 'documents'];
+const shipment_additional_methods = ['main_service', 'documents', 'end_to_end_shipment'];
 
 function ShipmentDetails() {
 	const { get } = useGetShipment({ additional_methods: shipment_additional_methods });
