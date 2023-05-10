@@ -11,18 +11,23 @@ import styles from './styles.module.css';
 
 function CourseCreation() {
 	const [activeStepper, setActiveStepper] = useState('course_name');
+	const [courseData, setCourseData] = useState({ course_name: '', course_topics: [] });
 
 	const COMPONENT_MAPPING = {
 		course_name: {
 			component : CourseName,
 			props     : {
 				setActiveStepper,
+				setCourseData,
+				courseData,
 			},
 		},
 		course_topics: {
 			component : CourseTopics,
 			props     : {
 				setActiveStepper,
+				courseData,
+				setCourseData,
 			},
 		},
 	};
