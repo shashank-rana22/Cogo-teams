@@ -1,9 +1,11 @@
-import { Button, Input, ButtonIcon } from '@cogoport/components';
+import { Button, Input, ButtonIcon, Popover } from '@cogoport/components';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
 
 function SearchFilter() {
+	const [value, setValue] = useState('');
 	return (
 		<div className={styles.container}>
 			<Input
@@ -16,23 +18,29 @@ function SearchFilter() {
 						themeType="primary"
 					/>
 				)}
-				value=""
+				value={value}
 				placeholder="Search for Course Name"
-				onChange={() => {
-				}}
+				onChange={(e) => { setValue(e); }}
 				className={styles.input}
 			/>
-			<Button
-				type="button"
-				themeType="secondary"
-				size="md"
-				onClick={() => {}}
-				className={styles.filter_btn}
+			<Popover
+				placement="bottom"
+				render={() => (
+					<div />
+				)}
 			>
-				<IcMFilter style={{ marginRight: '2px' }} />
-				Filter
-				{true ? <div className={styles.filter_dot} /> : null}
-			</Button>
+				<Button
+					type="button"
+					themeType="secondary"
+					size="md"
+					onClick={() => {}}
+					className={styles.filter_btn}
+				>
+					<IcMFilter style={{ marginRight: '2px' }} />
+					Filter
+					{false ? <div className={styles.filter_dot} /> : null}
+				</Button>
+			</Popover>
 
 		</div>
 	);
