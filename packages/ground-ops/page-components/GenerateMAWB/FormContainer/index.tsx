@@ -8,7 +8,6 @@ import useCreateShipmentDocument from '../GenerateMawbDoc/useCreateShipmentDocum
 import UploadMAWB from '../UploadMAWB';
 
 import ConfirmModal from './ConfirmModal';
-import RadioToggle from './RadioToggle';
 import styles from './styles.module.css';
 
 const items = [
@@ -25,8 +24,7 @@ const options = [
 function FormContainer({
 	back, setBack, edit, setEdit, packingData, fields,
 	control, errors, setValue, item, setGenerate, handleSubmit, category, activeCategory, hawbDetails,
-	setHawbDetails, activeHawb, setActiveHawb, activeKey, setActiveKey, taskItem, formValues,
-	customHawbNumber, setCustomHawbNumber,
+	setHawbDetails, activeHawb, setActiveHawb, activeKey, setActiveKey, taskItem, formValues, setCustomHawbNumber,
 }) {
 	const [value, onChange] = useState('manual');
 	const [confirmDelete, setConfirmDelete] = useState(false);
@@ -220,13 +218,6 @@ function FormContainer({
 						<>
 							{activeCategory === 'hawb' && (
 								<>
-									{/* <RadioToggle
-										onLabel="COGO Generated Series"
-										value1="cogo"
-										offLabel="Custom Generated Series"
-										value2="custom"
-										value="cogo"
-									/> */}
 									<Toggle
 										size="sm"
 										disabled={!activeHawb.isNew}

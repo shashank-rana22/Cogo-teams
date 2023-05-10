@@ -381,7 +381,6 @@ function GenerateMAWB({
 						setActiveKey={setActiveKey}
 						taskItem={taskItem}
 						formValues={formValues}
-						customHawbNumber={customHawbNumber}
 						setCustomHawbNumber={setCustomHawbNumber}
 					/>
 				</>
