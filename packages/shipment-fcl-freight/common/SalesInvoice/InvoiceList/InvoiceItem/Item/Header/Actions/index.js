@@ -97,9 +97,9 @@ function Actions({
 	};
 
 	const remarkRender = () => (
-		<div className={styles.RemarkContainer}>
-			<div className={styles.Title}>Invoice Remarks</div>
-			<div className={styles.Value}>{invoice.remarks}</div>
+		<div className={styles.remarkcontainer}>
+			<div className={styles.title}>Invoice Remarks</div>
+			<div className={styles.value}>{invoice.remarks}</div>
 		</div>
 	);
 
@@ -153,20 +153,20 @@ function Actions({
 	const commonActions = invoice.status !== 'approved' && !isFtl && !disableAction;
 
 	const content = (
-		<div className={styles.DialogBox}>
+		<div className={styles.dialog_box}>
 			{/* {commonActions ? ( */}
 			{/* {editInvoicesVisiblity ? ( */}
 			<div style={{ width: '100%' }}>
 				<div
 					role="button"
 					tabIndex={0}
-					className={styles.Text}
+					className={styles.text}
 					onClick={handleClickInvoice}
 				>
 					Edit Invoices
 
 				</div>
-				<div className={styles.Line} />
+				<div className={styles.line} />
 			</div>
 			{/* ) : null} */}
 
@@ -174,19 +174,19 @@ function Actions({
 				<div
 					role="button"
 					tabIndex={0}
-					className={styles.Text}
+					className={styles.text}
 					onClick={handleClickCurrency}
 				>
 					Change Currency
 
 				</div>
-				<div className={styles.Line} />
+				<div className={styles.line} />
 			</div>
 
 			<div
 				role="button"
 				tabIndex={0}
-				className={styles.Text}
+				className={styles.text}
 				onClick={handleClickRemarks}
 			>
 				Add Remarks
@@ -195,12 +195,12 @@ function Actions({
 
 			{/* {invoice?.billing_address?.trade_party_type === 'self' ? ( */}
 				<div>
-					<div className={styles.Line} />
+					<div className={styles.line} />
 
 					<div
 						role="button"
 						tabIndex={0}
-						className={styles.Text}
+						className={styles.text}
 						onClick={handleChangePayment}
 					>
 						Change Payment Mode
@@ -212,12 +212,12 @@ function Actions({
 
 			{/* {(invoice.exchange_rate_document || []).map((url) => ( */}
 			<div>
-				{!commonActions ? <div className={styles.Line} /> : null}
+				{!commonActions ? <div className={styles.line} /> : null}
 
 				<div
 					role="button"
 					tabIndex={0}
-					className={styles.Text}
+					className={styles.text}
 				// onClick={() => window.open(url, '_blank')}
 				>
 					Exchange Rate Document
