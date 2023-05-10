@@ -157,9 +157,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 		const { list = [] } = apiData || {};
 		const selectedInvoices = [];
 
-		for (let i = 0; i < list.length; i += 1) {
-			const addToSelectdata = list?.[i];
-
+		list.forEach((addToSelectdata) => {
 			const {
 				checked = false,
 				advanceDocumentId = '',
@@ -171,7 +169,8 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 
 			if (checked) {
 				if (!advanceDocumentSellerBankDetail) {
-					return Toast.error(`Select Bank for Invoice Number ${invoiceNumber}`);
+					Toast.error(`Select Bank for Invoice Number ${invoiceNumber}`);
+					return;
 				}
 
 				const {
@@ -200,7 +199,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 					bankDetail : formattedBank,
 				});
 			}
-		}
+		});
 		try {
 			await addToSelectedTrigger({
 				data: {
