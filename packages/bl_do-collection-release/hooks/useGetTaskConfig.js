@@ -1,6 +1,6 @@
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 function useGetTaskConfig({ task = {} }) {
 	const [apiData, setApiData] = useState({});
@@ -24,13 +24,10 @@ function useGetTaskConfig({ task = {} }) {
 		})();
 	}, [trigger, task.id]);
 
-	useEffect(() => {
-		getTaskConfigTrigger();
-	}, [getTaskConfigTrigger]);
-
 	return {
 		loading,
 		taskConfigData: apiData,
+		getTaskConfigTrigger,
 	};
 }
 

@@ -72,8 +72,7 @@ const fillData = (value, item, formValues) => {
 };
 
 const getCurrentReleaseStatus = (item, inner_tab, formValues) => {
-	console.log('form valu', formValues);
-	const docs =		item?.trade_type === 'export'
+	const docs = item?.trade_type === 'export'
 		? item?.export_bl_details
 		: item?.import_bl_details;
 	const selectedDocsLength = formValues?.ids?.length;

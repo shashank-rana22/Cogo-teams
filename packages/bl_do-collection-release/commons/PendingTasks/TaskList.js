@@ -21,6 +21,7 @@ function PendingTasks({
 		return (
 			<div className={styles.loading_container}>
 				<Loader />
+				<div> Loading Task</div>
 			</div>
 		);
 	}
@@ -29,11 +30,9 @@ function PendingTasks({
 		return (
 			<div>
 				<EmptyState
-					showContent={{
-						heading: 'No Task found !!',
-						subHeading:
-				'Looks like this task has not been created yet, please complete previous tasks first!!',
-					}}
+					heading="No Task found !!"
+					subHeading="Looks like this task has not been created yet,
+					please complete previous tasks first!!"
 				/>
 			</div>
 		);
@@ -55,8 +54,6 @@ function PendingTasks({
 			task={selectedTask}
 			shipment_data={{ id: item?.id }}
 			shipment_type={shipment_type}
-			tasksLoading={false}
-			primary_service={item?.freight_service || {}}
 			onCancel={handleAccordionOpen}
 			refetch={refetchForTask}
 		/>

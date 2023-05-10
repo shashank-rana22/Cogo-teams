@@ -2,9 +2,8 @@
 	display: flex;
 
 	/* min-height: 170px; */
-	max-height: 170px;
 	padding: 12px;
-	margin: 24px;
+	margin: 8px 24px;
 	background: #fff;
 	border: 1px solid #88cad1;
 	border-radius: 4px;

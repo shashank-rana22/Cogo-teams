@@ -1,5 +1,5 @@
 import { cl, TabPanel, Tabs } from '@cogoport/components';
-import { IcMCall, IcMEmail, IcMLocation } from '@cogoport/icons-react';
+import { IcMCall, IcMEmail } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
@@ -9,7 +9,7 @@ function EmptyState() {
 	);
 }
 
-export default function ServcieProvider({ spDetails = [], address = [] }) {
+export default function ServcieProvider({ spDetails = [] }) {
 	const detailsArr = {
 		names  : [],
 		phones : [],
@@ -34,7 +34,6 @@ export default function ServcieProvider({ spDetails = [], address = [] }) {
 	const isNamesEmpty = detailsArr.names.length === 0;
 	const isPhonesEmpty = detailsArr.phones.length === 0;
 	const isEmailsEmpty = detailsArr.emails.length === 0;
-	const isAddressEmpty = address?.length === 0;
 
 	const names = isNamesEmpty ? (
 		<EmptyState />
@@ -74,17 +73,6 @@ export default function ServcieProvider({ spDetails = [], address = [] }) {
 		))
 	);
 
-	const addresses = isAddressEmpty ? (
-		<EmptyState />
-	) : (
-		(address || []).map((item) => (
-			<div className={cl`${styles.container} ${styles.popover}`}>
-				<div className={cl`${styles.text} ${styles.bold}`}>{item?.address}</div>
-				<IcMLocation className="styleIcon" />
-			</div>
-		))
-	);
-
 	return (
 		<div className={cl`${styles.container} ${styles.tab_container}`}>
 			<Tabs defaultActiveTab="name" className="horizontal three">
@@ -96,9 +84,6 @@ export default function ServcieProvider({ spDetails = [], address = [] }) {
 				</TabPanel>
 				<TabPanel name="email" title="Email ID" className="horizontal three">
 					{emails}
-				</TabPanel>
-				<TabPanel name="address" title="Address" className="horizontal three">
-					{addresses}
 				</TabPanel>
 			</Tabs>
 		</div>

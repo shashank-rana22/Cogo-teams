@@ -49,7 +49,7 @@ const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) =
 				&& ['FULL', 'OVERPAID'].includes(ele?.payment_status),
 		);
 
-		showKnockOff =			invoice_data && checkInvoices && !isEmpty(filteredInvoiceData);
+		showKnockOff = invoice_data && checkInvoices && !isEmpty(filteredInvoiceData);
 	}
 
 	switch (activeTab) {

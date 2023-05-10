@@ -5,7 +5,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import styles from './styles.module.css';
 
 export default function LocaionDetails({ item = {}, stateProps = {} }) {
-	const isFclLocal = stateProps?.shipment_type === 'fcl_freight_local';
+	const isFclLocal = stateProps.shipment_type === 'fcl_freight_local';
 
 	return (
 		<div className={styles.container}>

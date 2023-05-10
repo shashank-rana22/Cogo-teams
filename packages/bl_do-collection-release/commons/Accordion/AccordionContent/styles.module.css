@@ -1,7 +1,7 @@
 .container {
 	padding: 10px;
 	background-color: #fff;
-	border: 1px solid #e0e0e0;
+	border: 1px solid#88cad1;
 	border-top: none;
 
 	.core-ui-button-root {
@@ -146,4 +146,16 @@
 	display: flex;
 	justify-content: flex-end;
 	padding: 0px 32px 12px 0px;
+}
+
+.loading_container {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+	justify-content: center;
+	height: 24vh;
+}
+
+.loader_icon {
+	width: 50px;
 }

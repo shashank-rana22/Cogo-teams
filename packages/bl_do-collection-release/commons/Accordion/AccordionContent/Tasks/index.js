@@ -4,11 +4,11 @@ import React, { useEffect, useImperativeHandle, forwardRef } from 'react';
 import Layout from '../../../Layout';
 
 const getDefaultValues = (controls) => {
-	const defaultVlaues = {};
+	const defaultValues = {};
 	(controls || []).forEach((item) => {
-		defaultVlaues[item.name] = '';
+		defaultValues[item.name] = '';
 	});
-	return defaultVlaues;
+	return defaultValues;
 };
 
 function CustomTasks({ setMyForm = () => {}, controls }, ref) {

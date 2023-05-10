@@ -1,17 +1,27 @@
+import { Loader } from '@cogoport/components';
+import { useEffect } from 'react';
+
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
+import styles from './styles.module.css';
 
 function ExecuteTask({
 	task = {},
 	onCancel = () => {},
+	servicesLoading = false,
 	taskListRefetch = () => {},
 	primary_service = {},
 	servicesList = [],
 }) {
-	const { taskConfigData, loading } = useGetTaskConfig({ task });
+	const { taskConfigData, loading, getTaskConfigTrigger } = useGetTaskConfig({ task, servicesLoading });
 
+	useEffect(() => {
+		if (servicesList.length) {
+			getTaskConfigTrigger();
+		}
+	}, [servicesList, getTaskConfigTrigger]);
 	const {
 		steps,
 		currentStep,
@@ -23,6 +33,14 @@ function ExecuteTask({
 		? steps[currentStep] || steps[steps.length - 1]
 		: {};
 
+	if (loading || servicesLoading) {
+		return (
+			<div className={styles.loading_container}>
+				<div>Getting Tasks...</div>
+				<Loader themeType="primary" className={styles.loader_icon} />
+			</div>
+		);
+	}
 	return (
 		<ExecuteStep
 			task={task}

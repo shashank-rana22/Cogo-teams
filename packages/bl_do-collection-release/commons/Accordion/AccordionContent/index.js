@@ -1,11 +1,10 @@
-import { Button, Tabs, TabPanel, Table } from '@cogoport/components';
+import { Button, Tabs, TabPanel, Table, Loader } from '@cogoport/components';
 import { useState, useRef } from 'react';
 
 import taskConfigs from '../../../configs/taskConfigs.json';
 import getMutatedControls from '../../../helpers/getMutatedControls';
 import getTableFormatedData from '../../../helpers/getTableFormatedData';
 import EmptyState from '../../EmptyState';
-import Loader from '../../Loader';
 import PendingTasks from '../../PendingTasks/TaskList';
 import { columns } from '../Invoices/tableColumn';
 
@@ -84,21 +83,20 @@ export default function AccordionContent({
 	const renderTask = () => {
 		if (taskLoading) {
 			return (
-				<div className={styles.container}>
-					<Loader />
+				<div className={styles.loading_container}>
+					<div>Loading Tasks...</div>
+					<Loader className={styles.loader_icon} />
 				</div>
 			);
 		}
 
 		if (tasks?.length === 0) {
 			return (
-				<div className={styles.container}>
+				<div>
 					<EmptyState
-						showContent={{
-							heading: 'No Task found !!',
-							subHeading:
-								'Looks like this task has not been created yet, please complete previous tasks first!!',
-						}}
+						heading="No Task found !!"
+						subHeading="Looks like this task has not been created yet,
+						please complete previous tasks first!!"
 					/>
 				</div>
 			);
@@ -114,6 +112,7 @@ export default function AccordionContent({
 							handleAccordionOpen={handleAccordionOpen}
 							refetchForTask={refetchForTask}
 							tasksLoading={false}
+							shipment_type={stateProps.shipment_type}
 						/>
 					) : (
 						<div className={styles.accordian_container}>

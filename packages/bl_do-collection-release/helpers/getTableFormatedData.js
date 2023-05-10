@@ -10,13 +10,13 @@ export default function getTableFormatedData(list) {
 	(list || []).forEach((item) => {
 		const row = {
 			id         : item.id,
-			invoice_no : item.invoice_no || '',
+			invoice_no : item.invoice_no || item.invoice_number,
 			utr_nos    : (item.utr_nos || []).join(',') || '',
 			updated_at : formatDate({
 				date       : item.updated_at,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',
-			}).toString() || '',
+			}),
 			service_name      : (item.service_name || []).map((ele) => shotNames[ele]).join(', '),
 			inr_invoice_total : formatAmount({
 				amount   : item.inr_invoice_total || '',

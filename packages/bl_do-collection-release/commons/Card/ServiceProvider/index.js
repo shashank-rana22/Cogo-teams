@@ -34,7 +34,7 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 	const list_of_docs = getDocs(item);
 	const docsLength = list_of_docs?.length;
 	const remainLength = docsLength > 1 ? docsLength - 1 : 0;
-	const doc_number =		(['knockoff_pending', 'collection_pending', 'under_collection'].includes(
+	const doc_number = (['knockoff_pending', 'collection_pending', 'under_collection'].includes(
 		stateProps.inner_tab,
 	)
 			&& item?.trade_type === 'import')
@@ -83,8 +83,7 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 							interactive
 							content={(
 								<SPPopver
-									spDetails={item?.organization_poc}
-									address={item?.organization_address}
+									spDetails={item?.pocs}
 								/>
 							)}
 						>
@@ -109,10 +108,10 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 						{' '}
 						Details
 					</div>
-					<div className={styles.details}>
+					<div className={cl`${styles.details} ${styles.service_provider_details}`}>
 						<Tooltip
-							animation="shift-away"
-							interactive
+							placement="top"
+							caret={false}
 							content={(<BLPopver blDetails={item?.bill_of_ladings} bl_do={stateProps.activeTab} />
 							)}
 						>

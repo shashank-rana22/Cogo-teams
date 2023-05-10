@@ -10,7 +10,7 @@ import ClickableDiv from '../../ClickableDiv';
 import styles from './styles.module.css';
 
 const textMapping = {
-	collection_pending : 'Mark BL as \'Under Collection\'',
+	collection_pending : 'Mark BL as Under Collection',
 	under_collection   : 'Upload Scanned Copy of Document',
 	collected          : 'Select Release Mode',
 	released           : 'Mark BL as Delivered',

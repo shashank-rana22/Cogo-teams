@@ -97,6 +97,11 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
+		api          : 'get_services',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
 		api          : 'list_bl_inventory',
 		access_type  : 'private',
 		service_name : 'bookings',

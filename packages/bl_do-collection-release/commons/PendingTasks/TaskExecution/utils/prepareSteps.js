@@ -50,7 +50,7 @@ const evaluateVal = (value_to_insert, data) => {
 	if (Array.isArray(value_to_insert)) {
 		const new_value_to_insert = [];
 
-		(value_to_insert || [])?.forEach((valObj) => {
+		(value_to_insert || []).forEach((valObj) => {
 			const newObj = {};
 
 			Object.keys(valObj || {})?.forEach((key) => {

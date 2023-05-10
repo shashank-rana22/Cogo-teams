@@ -1,44 +1,6 @@
 .main_container {
 	position: relative;
 	top: -30px;
-	padding: 0 10px;
+	padding: 0 42px;
 	margin-bottom: -18px;
-}
-
-.text {
-	&.invoice-sid {
-		font-weight: 500;
-		color: #034afd;
-	}
-
-	&.bold {
-		font-weight: 500;
-	}
-
-	&.bold-colored {
-		font-weight: 500;
-		color: #393f70;
-	}
-
-	&.invoice-faded {
-		display: inline;
-		opacity: 0.8;
-	}
-
-	&.invoice-hover {
-		display: inline;
-		margin: 0 4px;
-		font-weight: 500;
-		color: #393f70;
-		border-bottom: 1px dashed #000;
-		opacity: 1;
-	}
-
-	&.billed-by {
-		text-transform: capitalize;
-	}
-
-	&.margin-left {
-		margin-left: 10px;
-	}
 }
