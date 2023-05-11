@@ -4,7 +4,7 @@ const statusMapping = {
 	collected   : 'release_pending',
 };
 const getMutatedControls = ({ item, stateProps, controls = [] }) => {
-	const { bill_of_ladings, delivery_orders	} = item || {};
+	const { bill_of_ladings, delivery_orders } = item || {};
 	const blOptions = [];
 	const mutatedControls = [];
 
