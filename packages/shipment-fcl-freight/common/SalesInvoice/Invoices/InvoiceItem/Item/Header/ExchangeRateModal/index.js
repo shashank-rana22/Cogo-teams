@@ -1,7 +1,7 @@
-import CardList from '../../../../../../CardList';
 // import useGetExchangeRate from '@cogo/bookings/Invoicing/hooks/useGetExchangeRate';
 import { Modal, Input } from '@cogoport/components';
 import React, { useState } from 'react';
+import CardList from '../../../../../commons/CardList'
 
 // import fields from './fields';
 

@@ -29,13 +29,14 @@ function InvoiceItem({
 			maximumFractionDigits : 2,
 		},
 	});
+	console.log(item, " :item");
 
 	return (
 		<main className={styles.container}>
 			<div className={styles.header_container}>
 				<div className={styles.InvoicePartyDetails}>
 					<div className={styles.InvoicingPartyName}>
-						{item?.name || item?.business_name || 'VOLTAS LIMITED'}
+						{item?.name || item?.business_name}
 					</div>
 					<div className={styles.label}>Invoicing Party</div>
 				</div>
@@ -69,9 +70,9 @@ function InvoiceItem({
 				) : null}
 			</div>
 
-			{/* {(item?.invoices || []).map((invoice) => ( */}
+			{(item?.invoices || []).map((invoice) => (
 			<Item
-				// invoice={invoice}
+				invoice={invoice}
 				refetch={refetch}
 				loading={loading}
 				shipment_data={shipment_data}
@@ -81,7 +82,7 @@ function InvoiceItem({
 				salesInvoicesRefetch={salesInvoicesRefetch}
 				refetchCN={refetchCN}
 			/>
-			{/* ))} */}
+			))}
 		</main>
 	);
 }

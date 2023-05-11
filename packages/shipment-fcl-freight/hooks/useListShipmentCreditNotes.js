@@ -2,10 +2,10 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
-const useListShipmentCreditNotes = ({ shipment_data = {} }) => {
+const useListShipmentCreditNotes = ({ shipmentData = {} }) => {
 	const [apiData, setApiData] = useState({});
 
-	const { id: shipment_id = '' } = shipment_data || {};
+	const { id: shipment_id = '' } = shipmentData || {};
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/list_shipment_credit_notes',

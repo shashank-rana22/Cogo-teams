@@ -1,8 +1,7 @@
-import { Button, Textarea, toast, Modal } from '@cogoport/components';
+import { Button, Textarea, Toast, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
-
-// import useInvoiceRemarks from '../../../../../../../hooks/useInvoiceRemarks';
+import useReviewInvoice from '../../../../../Hooks/useReviewInvoice';
 
 function AddRemarks({
 	showAddRemarks = false,
@@ -16,17 +15,19 @@ function AddRemarks({
 		setRemarkValue(invoice?.remarks);
 		setShowAddRemarks(false);
 	};
+const payload = {
+	id: invoice?.id,
+	remarks: [remarkValue],
+};
+	const { onSubmitRemarks, loading } = useReviewInvoice({
+		refetch,
+		onClose,
+		payload,
+	});
 
-	// const { onSubmitRemarks, loading } = useInvoiceRemarks(
-	// 	invoice,
-	// 	refetch,
-	// 	onClose,
-	// 	remarkValue,
-	// );
-
-	// const handleSubmit = () => (isEmpty(remarkValue)
-	// 	? toast.error('Please add remarks!')
-	// 	: onSubmitRemarks());
+	const handleSubmit = () => (isEmpty(remarkValue)
+		? Toast.error('Please add remarks!')
+		: onSubmitRemarks());
 
 	return (
 		<Modal onClose={onClose} show={showAddRemarks} width={600}>
@@ -37,7 +38,7 @@ function AddRemarks({
 					value={remarkValue}
 					size="md"
 					rows="6"
-					onChange={(e) => setRemarkValue(e?.target?.value)}
+					onChange={(e) => setRemarkValue(e)}
 					placeholder="Add remarks for your invoice..."
 				/>
 
@@ -54,6 +55,8 @@ function AddRemarks({
 
 				<Button
 					className="primary md"
+					onClick={handleSubmit}
+						disabled={loading}
 				>
 					Submit
 				</Button>

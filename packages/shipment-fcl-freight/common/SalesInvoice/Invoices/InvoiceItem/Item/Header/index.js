@@ -95,27 +95,27 @@ function Header({
 	return (
 		<div className={styles.container}>
 			<div>
-				{/* {invoice?.source === 'pass_through' ? ( */}
+				{invoice?.source === 'pass_through' ? (
 				<div className={styles.invoice_source}>
 					Source -
 					{' '}
-					{startCase(invoice?.source) || 'Source'}
+					{startCase(invoice?.source)}
 				</div>
-				{/* ) : null} */}
+				) : null}
 
-				{/* {invoice?.exchange_rate_state ? ( */}
+				{invoice?.exchange_rate_state ? (
 				<div className={styles.invoice_source}>
 					Applicable State -
 					{' '}
-					{startCase(invoice?.exchange_rate_state) || 'Eta'}
+					{startCase(invoice?.exchange_rate_state)}
 				</div>
-				{/* ) : null} */}
+				) : null}
 			</div>
 
 			<div className={cl`${styles.flex_row} ${open ? styles.open : ''}`}>
 				<div className={styles.InvoicePartyDetails}>
 					<div className={styles.invoice_party_name}>
-						{billing_address?.name || billing_address?.business_name || 'VOLTAS LIMITED'}
+						{billing_address?.name || billing_address?.business_name}
 					</div>
 
 					{shipment_data?.entity_id
@@ -130,15 +130,14 @@ function Header({
 										<div
 											style={{ fontSize: '10px', textTransform: 'capitalize' }}
 										>
-											{billing_address?.address
-									|| 'VOLTAS LIMITED UPBG UNIT 1, PLOT NO 2, SECTOR 8, II E PANT NAGAR, NAGAR'}
+											{billing_address?.address}
 										</div>
 									)}
 								>
 									<div
 										className={styles.gst_number}
 									>
-										{billing_address?.tax_number || '05AAACV2809D1ZS'}
+										{billing_address?.tax_number}
 									</div>
 								</Tooltip>
 							</div>
@@ -160,7 +159,7 @@ function Header({
 						>
 							{bfInvoice?.invoiceNumber
 								|| bfInvoice?.proformaNumber
-								|| live_invoice_number || 'SO/2324/10110030'}
+								|| live_invoice_number}
 						</div>
 
 						<div className={styles.status_container}>
@@ -221,7 +220,7 @@ function Header({
 								</div>
 							</div>
 						) : (
-							<div className={styles.payment_method}>{invoice?.payment_mode || 'Cash'}</div>
+							<div className={styles.payment_method}>{invoice?.payment_mode}</div>
 						)}
 					</div>
 				</div>

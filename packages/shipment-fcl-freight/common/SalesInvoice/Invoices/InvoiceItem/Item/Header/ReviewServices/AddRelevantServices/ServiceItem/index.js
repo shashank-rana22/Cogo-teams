@@ -2,14 +2,7 @@ import React from 'react';
 import getField from '@cogo/business-modules/form/components';
 import { useFormCogo } from '@cogoport/front/hooks';
 import { IcMPlus } from '@cogoport/icons-react';
-import {
-	Container,
-	ServiceName,
-	AvgMargin,
-	IconWrapper,
-	ServiceContainer,
-	FlexRow,
-} from './styles';
+import styles from './styles.module.css';
 
 const CheckBox = getField('checkbox');
 
@@ -26,22 +19,22 @@ const ServiceItem = () => {
 	const { fields } = useFormCogo(controls || []);
 
 	return (
-		<Container>
-			<ServiceContainer>
+		<div className={styles.container}>
+			<div className={styles.service_container}>
 				<div>
-					<ServiceName>Vessel Traffic Service</ServiceName>
-					<AvgMargin>Average Margin $20</AvgMargin>
+					<div className={styles.service_name}>Vessel Traffic Service</div>
+					<div className={styles.avg_margin}>Average Margin $20</div>
 				</div>
 
-				<IconWrapper>
+				<div className={styles.icon_wrapper}>
 					<IcMPlus />
-				</IconWrapper>
-			</ServiceContainer>
+				</div>
+			</div>
 
-			<FlexRow>
+			<div className={styles.flex_row}>
 				<CheckBox {...fields.isApplicable} />
-			</FlexRow>
-		</Container>
+			</div>
+		</div>
 	);
 };
 

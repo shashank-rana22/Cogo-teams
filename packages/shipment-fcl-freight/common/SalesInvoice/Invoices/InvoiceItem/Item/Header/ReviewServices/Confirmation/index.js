@@ -5,8 +5,8 @@ import styles from './styles.module.css';
 
 function Confirmation({ value = false, setValue = () => {} }) {
 	return (
-		<div className={styles.Container}>
-			<div className={styles.CheckBoxWrapper}>
+		<div className={styles.container}>
+			<div className={styles.check_box_wrapper}>
 				<Checkbox
 					value={value}
 					onChange={() => setValue(!value)}
@@ -16,7 +16,7 @@ function Confirmation({ value = false, setValue = () => {} }) {
 			<div
 				role="button"
 				tabIndex={0}
-				className={styles.ConfirmLabel}
+				className={styles.confirm_label}
 				onClick={() => setValue(!value)}
 			>
 				I have verified the invoice and ensured that all the services taken &

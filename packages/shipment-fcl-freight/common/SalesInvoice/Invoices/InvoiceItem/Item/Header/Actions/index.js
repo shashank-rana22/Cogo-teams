@@ -154,8 +154,8 @@ function Actions({
 
 	const content = (
 		<div className={styles.dialog_box}>
-			{/* {commonActions ? ( */}
-			{/* {editInvoicesVisiblity ? ( */}
+			{/* {/* {commonActions ? ( */}
+		{/* {editInvoicesVisiblity ? (  */}
 			<div style={{ width: '100%' }}>
 				<div
 					role="button"
@@ -193,7 +193,7 @@ function Actions({
 
 			</div>
 
-			{/* {invoice?.billing_address?.trade_party_type === 'self' ? ( */}
+			{invoice?.billing_address?.trade_party_type === 'self' ? (
 				<div>
 					<div className={styles.line} />
 
@@ -207,10 +207,10 @@ function Actions({
 
 					</div>
 				</div>
-			{/* ) : null} */}
+			) : null}
 			{/* ) : null} */}
 
-			{/* {(invoice.exchange_rate_document || []).map((url) => ( */}
+			{(invoice.exchange_rate_document || []).map((url) => (
 			<div>
 				{!commonActions ? <div className={styles.line} /> : null}
 
@@ -218,12 +218,12 @@ function Actions({
 					role="button"
 					tabIndex={0}
 					className={styles.text}
-				// onClick={() => window.open(url, '_blank')}
+				onClick={() => window.open(url, '_blank')}
 				>
 					Exchange Rate Document
 				</div>
 			</div>
-			{/* ))} */}
+			))}
 		</div>
 	);
 
@@ -232,18 +232,18 @@ function Actions({
 			<div className={styles.main_container}>
 				<div className={styles.actions_wrap}>
 					<div className={styles.statuses}>
-						{/* {invoice.status ? ( */}
+						{invoice.status ? (
 						<div className={styles.info_container}>
-							{startCase(invoice.status) || 'Pending'}
+							{startCase(invoice.status)}
 						</div>
-						{/* ) : null} */}
+						): null}
 
 						{!['reviewed', 'approved', 'revoked'].includes(invoice.status) ? (
 							<Button
 								className="primary sm"
 								onClick={() => setShowReview(true)}
 								themeType="accent"
-								// disabled={disableMarkAsReviewed || invoice?.is_eta_etd}
+								disabled={disableMarkAsReviewed || invoice?.is_eta_etd}
 							>
 								Mark as Reviewed
 							</Button>
@@ -317,8 +317,8 @@ function Actions({
 						</Tooltip>
 					</div>
 
-					{/* {(!disableAction || invoice.exchange_rate_document?.length > 0)
-					&& invoice.status !== 'revoked' ? ( */}
+					{(!disableAction || invoice.exchange_rate_document?.length > 0)
+					&& invoice.status !== 'revoked' ? (
 					<Popover
 						interactive
 						placement="left"
@@ -335,27 +335,25 @@ function Actions({
 						>
 							<IcMOverflowDot />
 						</div>
-					</Popover>
-					{/* ) : (
+					</Popover>) : (
 							<div style={{ width: '34px' }} />
-						)} */}
+						)}
 
 					{!isEmpty(invoice.remarks) ? (
 						<Tooltip
 							placement="bottom"
-							theme="light-border"
 							interactive
 							content={remarkRender()}
 						>
 							<div className={styles.icon_more_wrapper}>
-								<IcMInfo fill="yellow" />
+								<IcMInfo fill="#DDEBC0" />
 							</div>
 						</Tooltip>
 					) : null}
 				</div>
 			</div>
 
-			{/* {(invoice.services || []).length && isEditInvoice ? ( */}
+			{(invoice.services || []).length && isEditInvoice ? (
 			<EditInvoice
 				show={isEditInvoice}
 				onClose={() => setIsEditInvoice(false)}
@@ -363,7 +361,7 @@ function Actions({
 				refetch={handleRefetch}
 				shipment_data={shipment_data}
 			/>
-			{/* ) : null} */}
+			) : null}
 
 			{showReview ? (
 				<ReviewServices

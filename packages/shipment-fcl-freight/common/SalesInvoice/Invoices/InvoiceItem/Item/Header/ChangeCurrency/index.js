@@ -2,7 +2,7 @@ import { Button, Modal, Select } from '@cogoport/components';
 import React, { useState } from 'react';
 
 // import Layout from '../Layout';
-
+import useUpdateCurrency from '../../../../../Hooks/useUpdateCurrency';
 // import useUpdateCurrency from './hooks/useUpdateCurrency';
 import styles from './styles.module.css';
 
@@ -16,11 +16,17 @@ function ChangeCurrency({
 	const onClose = () => {
 		setIsChangeCurrency(false);
 	};
-
-	// const { fields, errors, controls, onError, onCreate, handleSubmit, loading } =
-	// useUpdateCurrency(invoice, onClose, refetch);
-
 	const [value, setValue] = useState('');
+
+	const payload = {
+		id: invoice?.id,
+		invoice_currency: value,
+		shipment_id: invoice.shipment_id,
+	};
+
+	const { onCreate, loading } =
+	useUpdateCurrency({payload, onClose, refetch,currency: invoice?.invoice_currency});
+
 	return (
 		<Modal
 			className="primary sm"
@@ -50,6 +56,7 @@ function ChangeCurrency({
 				<Button
 					className="secondary md"
 					onClick={() => setIsChangeCurrency(false)}
+							disabled={loading}
 				>
 					Cancel
 				</Button>
@@ -57,6 +64,8 @@ function ChangeCurrency({
 				<Button
 					className="primary md"
 					style={{ marginLeft: '16px' }}
+					onClick={onCreate}
+					disabled={loading}
 				>
 					Confirm
 				</Button>
