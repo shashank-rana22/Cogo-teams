@@ -11,11 +11,8 @@ import styles from './styles.module.css';
 function Filters() {
 	const { stepperTab, activeTab, filters = {}, setFilters = () => {}, shipmentType } = useContext(KamDeskContext);
 
-	const { q } = filters || {};
-
 	const [popoverFilter, setPopoverFilter] = useState({ ...(filters || {}) });
 	const [showPopover, setShowPopover] = useState(false);
-	const { q, criticalOn } = filters || {};
 
 	const isCriticalVisible = !!CRITICAL_TABS?.[shipmentType]?.[stepperTab]?.[activeTab];
 
@@ -27,7 +24,7 @@ function Filters() {
 					<Toggle
 						size="md"
 						offLabel="Critical SIDs"
-						checked={criticalOn}
+						checked={filters.criticalOn}
 						onChange={() => setFilters({ ...filters, criticalOn: !filters.criticalOn, page: 1 })}
 					/>
 				</div>
@@ -39,7 +36,7 @@ function Filters() {
 					type="search"
 					size="sm"
 					suffix={<IcMSearchlight />}
-					value={q}
+					value={filters.q}
 					onChange={(val) => setFilters({ ...filters, q: val, page: 1 })}
 				/>
 			</div>
