@@ -1,27 +1,23 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	padding: 16px;
 	margin: 24px;
-	background: #F3FAFA;
-	border: 1px solid #88CAD1;
+	background: #f3fafa;
+	border: 1px solid #88cad1;
 	border-radius: 8px;
 }
 
-.invoice-party_details{
-	display: flex;
-	flex-direction: row;
-	margin-left: 8px;
-	color: #333333;
-	line-height: 20px;
+.heading {
+	font-weight: 700;
+	font-size: 18px;
+	padding: 12px;
+	border-bottom: 1px solid #F68B21;
 }
 
-.invoicing_party_name{
-	font-weight: 500;
-	font-size: 18px;
-	margin-right: 10px;
-
-	@media (max-width: 768px) {
-		font-size: 16px;
-	}
+.loading_wrapper {
+	display: flex;
+	justify-content: center;
+	padding: 20px;
+	flex-direction: column;
+    align-items: center;
 }
