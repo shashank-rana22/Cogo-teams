@@ -25,3 +25,16 @@
 .superscipt {
 	color: #ee3425;
 }
+
+.label_container {
+	display: flex;
+	justify-content: end;
+	margin-bottom: 6px;
+}
+
+.create_tag_label {
+	margin-left: 8px;
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;
+}

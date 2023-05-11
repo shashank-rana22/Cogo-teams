@@ -23,6 +23,7 @@ import {
 	asyncListCurrency,
 	asyncAccountEngagementScoringEvents,
 	asyncListFAQTopics,
+	asyncListFAQTags,
 	asyncListCourseCategory,
 } from '../../../utils/getAsyncFields';
 
@@ -65,6 +66,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_exchange_rate_currencies : asyncListCurrency,
 	engagement_scoring_events     : asyncAccountEngagementScoringEvents,
 	faq_topics                    : asyncListFAQTopics,
+	faq_tags                      : asyncListFAQTags,
 	list_course_category          : asyncListCourseCategory,
 };
 

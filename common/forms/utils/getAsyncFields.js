@@ -349,6 +349,20 @@ function asyncListFAQTopics() {
 	};
 }
 
+function asyncListFAQTags() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : 'list_faq_tags',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
 function asyncListCourseCategory() {
 	return {
 		labelKey    : 'display_name',
@@ -391,5 +405,6 @@ export {
 	asyncAccountEngagementScoringEvents,
 	asyncFieldsTicketTypes,
 	asyncListFAQTopics,
+	asyncListFAQTags,
 	asyncListCourseCategory,
 };

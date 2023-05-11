@@ -1,0 +1,64 @@
+.container {
+	margin: auto;
+	text-align: center;
+}
+
+.title {
+	margin-bottom: 4px;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.tag_line {
+	color: #4f4f4f;
+}
+
+.input_container {
+	margin-top: 40px;
+}
+
+.prev_button {
+	position: absolute;
+	bottom: 24px;
+	left: 24px;
+}
+
+.create_button {
+	position: absolute;
+	right: 24px;
+	bottom: 24px;
+}
+
+.label_container {
+	display: flex;
+	justify-content: end;
+	margin-bottom: 6px;
+}
+
+.create_tag_label {
+	margin-left: 8px;
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.modal_container {
+	align-items: center;
+	width: 100%;
+}
+
+.input_group {
+	margin-top: 4px;
+}
+
+.form_group {
+	&.description {
+		margin-top: 32px;
+	}
+}
+
+.error_message {
+	font-size: 10px;
+	font-weight: 400;
+	color: #cb6464;
+}
