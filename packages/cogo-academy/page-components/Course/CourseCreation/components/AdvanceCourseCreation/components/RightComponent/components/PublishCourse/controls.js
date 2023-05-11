@@ -5,25 +5,28 @@ const controls = [
 		type        : 'groupSelect',
 		subControls : [
 			{
-				label   : 'Confirm Course Title*',
+				label   : 'Confirm Course Title',
 				name    : 'course_title',
 				type    : 'select',
 				options : [],
+				rules   : { required: { value: true, message: 'This is required' } },
 			},
 			{
-				label   : 'Confirm Course Category*',
+				label   : 'Confirm Course Category',
 				name    : 'course_category',
 				type    : 'select',
 				options : [],
+				rules   : { required: { value: true, message: 'This is required' } },
 			},
 		],
 	},
 	{
-		label       : 'Add Course Subtitle*',
+		label       : 'Add Course Subtitle',
 		subLabel    : 'This could be a brief description of the Course Title',
 		name        : 'course_subtitle',
 		placeholder : 'Type Subtitle',
 		type        : 'text',
+		rules       : { required: { value: true, message: 'This is required' } },
 	},
 	{
 		label       : 'Course Description Text',
@@ -33,12 +36,13 @@ const controls = [
 		placeholder : 'Type Description you want the user to see on before beginning the course',
 	},
 	{
-		label         : 'Upload Course Landing Image*',
+		label         : 'Upload Course Landing Image',
 		name          : 'upload_excel',
 		type          : 'fileUpload',
 		multiple      : false,
 		draggable     : true,
 		dropareaProps : { heading: 'Upload Image', subHeading: 'Only Jpeg, Jpg files (max lim?)' },
+		rules         : { required: { value: true, message: 'This is required' } },
 	},
 ];
 

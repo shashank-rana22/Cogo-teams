@@ -1,6 +1,6 @@
 const controls = [
 	{
-		label   : 'Select Main Content Type*',
+		label   : 'Select Main Content Type',
 		name    : 'content_type',
 		type    : 'radioGroup',
 		options : [
@@ -25,6 +25,7 @@ const controls = [
 				label : 'Jupyter Notebook',
 			},
 		],
+		rules: { required: { value: true, message: 'This is required' } },
 	},
 	{
 		name          : 'upload_presentation',

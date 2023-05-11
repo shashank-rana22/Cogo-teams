@@ -31,8 +31,8 @@
 
 .label_container {
 	display: flex;
-	margin-bottom: 6px;
 	justify-content: end;
+	margin-bottom: 6px;
 }
 
 .create_tag_label {

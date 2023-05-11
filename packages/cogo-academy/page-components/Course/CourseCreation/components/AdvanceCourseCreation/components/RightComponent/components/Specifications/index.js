@@ -12,12 +12,15 @@ function Specifications() {
 	return (
 		<div className={styles.container}>
 			{controls.map((controlItem) => {
-				const { type, label, name } = controlItem || {};
+				const { type, label, name, rules } = controlItem || {};
 
 				if (type === 'fieldArray') {
 					return (
 						<div key={name} className={styles.form_group}>
-							<div className={styles.label}>{label}</div>
+							<div className={styles.label}>
+								{label}
+								{rules ? <sup className={styles.superscipt}>*</sup> : null}
+							</div>
 
 							<FieldArray
 								{...controlItem}
@@ -34,7 +37,10 @@ function Specifications() {
 
 				return (
 					<div key={name} className={styles.form_group}>
-						<div className={styles.label}>{label}</div>
+						<div className={styles.label}>
+							{label}
+							{rules ? <sup className={styles.superscipt}>*</sup> : null}
+						</div>
 
 						<div className={styles.input_group}>
 							<Element

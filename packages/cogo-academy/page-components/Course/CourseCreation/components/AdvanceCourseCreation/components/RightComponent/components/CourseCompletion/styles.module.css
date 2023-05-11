@@ -11,8 +11,8 @@
 }
 
 .form {
-    display: flex;
-    width: 50%;
+	display: flex;
+	width: 50%;
 }
 
 .form_left {
@@ -30,8 +30,8 @@
 }
 
 .row_label {
-    padding-bottom: 6px;
-    color: #4f4f4f;
+	padding-bottom: 6px;
+	color: #4f4f4f;
 }
 
 .multiple_select {
@@ -47,9 +47,8 @@
 }
 
 .button_container {
-    display: flex;
+	display: flex;
 }
-
 
 .container {
 	margin: 32px 40px;
@@ -64,31 +63,31 @@
 
 	&.course_criteria {
 		width: 100%;
-        padding-right: 24px;
+		padding-right: 24px;
 	}
 
 	&.course_reward {
 		width: 100%;
-        padding-right: 24px;
+		padding-right: 24px;
 	}
 
-    &.course_certificate_name {
-        width: 50%;
-        padding-right: 24px;
-    }
+	&.course_certificate_name {
+		width: 50%;
+		padding-right: 24px;
+	}
 
-    &.course_signing_authority {
-        width: 50%;
-    }
+	&.course_signing_authority {
+		width: 50%;
+	}
 
-    &.course_period {
-        width: 100%;
-        padding-right: 24px;
-    }
+	&.course_period {
+		width: 100%;
+		padding-right: 24px;
+	}
 
-    &.course_select {
-        width: 100%;
-    }
+	&.course_select {
+		width: 100%;
+	}
 }
 
 .error_message {
@@ -103,18 +102,18 @@
 }
 
 .group_container {
-    display: flex;
-    width: 100%;
+	display: flex;
+	width: 100%;
 }
 
 .group_select_container {
 	display: flex;
 	justify-content: space-between;
-    width: 100%;
+	width: 100%;
 }
 
 .group_select {
-    display: flex;
+	display: flex;
 	flex-direction: column;
 }
 
@@ -124,10 +123,10 @@
 }
 
 .select_group {
-    display: flex;
-    width: 44%;
+	display: flex;
+	width: 44%;
 }
 
 .select_container {
-    margin-top: 20px;
+	margin-top: 20px;
 }

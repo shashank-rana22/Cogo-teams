@@ -1,15 +1,17 @@
 const controls = [
 	{
-		label   : 'What will the students learn from the course?*s',
+		label   : 'What will the students learn from the course?',
 		name    : 'learning',
 		type    : 'multiSelect',
 		options : [],
+		rules   : { required: { value: true, message: 'This is required' } },
 	},
 	{
-		label   : 'Which tags give a semblance of the Course content?*',
+		label   : 'Which tags give a semblance of the Course content?',
 		name    : 'tags',
 		type    : 'multiSelect',
 		options : [],
+		rules   : { required: { value: true, message: 'This is required' } },
 	},
 	{
 		label      : 'What will the students learn from the course?',

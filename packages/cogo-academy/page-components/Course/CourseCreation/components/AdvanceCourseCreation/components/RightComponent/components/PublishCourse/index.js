@@ -15,7 +15,7 @@ function PublishCourse() {
 	return (
 		<div className={styles.container}>
 			{controls.map((controlItem) => {
-				const { name, label, type, subControls = [], subLabel = '' } = controlItem || {};
+				const { name, label, type, subControls = [], subLabel = '', rules } = controlItem || {};
 
 				if (type === 'groupSelect') {
 					return (
@@ -25,6 +25,7 @@ function PublishCourse() {
 									name:subControlName,
 									label:subControlLabel,
 									type:subControlType,
+									rules:subControlRules,
 								} = subControlItem || {};
 
 								const SubControlElement = getFieldController(subControlType);
@@ -34,7 +35,10 @@ function PublishCourse() {
 										key={subControlName}
 										className={`${styles.form_group} ${styles[subControlName]}`}
 									>
-										<div className={styles.label}>{subControlLabel}</div>
+										<div className={styles.label}>
+											{subControlLabel}
+											{subControlRules ? <sup className={styles.superscipt}>*</sup> : null}
+										</div>
 
 										<div className={`${styles.input_group} ${styles[subControlName]}`}>
 											<SubControlElement
@@ -63,7 +67,10 @@ function PublishCourse() {
 
 				return (
 					<div key={name} className={`${styles.form_group} ${styles[name]}`}>
-						<div className={styles.label}>{label}</div>
+						<div className={styles.label}>
+							{label}
+							{rules ? <sup className={styles.superscipt}>*</sup> : null}
+						</div>
 
 						<div className={`${styles.input_group} ${styles[name]}`}>
 							<Element

@@ -12,7 +12,7 @@ function IntendedLearners() {
 	return (
 		<div className={styles.container}>
 			{controls.map((controlItem) => {
-				const { type, label, name } = controlItem || {};
+				const { type, label, name, rules } = controlItem || {};
 
 				const Element = getFieldController(type);
 
@@ -33,7 +33,10 @@ function IntendedLearners() {
 
 				return (
 					<div key={name} className={`${styles.form_group} ${styles[name]}`}>
-						<div className={styles.label}>{label}</div>
+						<div className={styles.label}>
+							{label}
+							{rules ? <sup className={styles.superscipt}>*</sup> : null}
+						</div>
 
 						<div className={`${styles.input_group} ${styles[name]}`}>
 							<Element

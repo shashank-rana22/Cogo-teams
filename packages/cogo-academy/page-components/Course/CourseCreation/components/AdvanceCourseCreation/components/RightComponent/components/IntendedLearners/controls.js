@@ -1,18 +1,20 @@
 const controls = [
 	{
-		label   : 'Select Audiences who can access this course*',
+		label   : 'Select Audiences who can access this course',
 		name    : 'audiences',
 		type    : 'multiSelect',
 		options : [],
+		rules   : { required: { value: true, message: 'This is required' } },
 	},
 	{
-		label   : 'Select Audiences for whom this course is mandatory*',
+		label   : 'Select Audiences for whom this course is mandatory',
 		name    : 'mandatory_audiences',
 		type    : 'multiSelect',
 		options : [],
+		rules   : { required: { value: true, message: 'This is required' } },
 	},
 	{
-		label   : 'Select Users within Mandatory Audience*',
+		label   : 'Select Users within Mandatory Audience',
 		name    : 'mandatory_audiences_user',
 		type    : 'radioGroup',
 		options : [
@@ -25,6 +27,7 @@ const controls = [
 				label : 'Custom Select Users',
 			},
 		],
+		rules: { required: { value: true, message: 'This is required' } },
 	},
 	{
 		label: `You may Upload you own Excel in required

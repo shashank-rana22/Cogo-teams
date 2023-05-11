@@ -37,7 +37,7 @@ function CourseCreation() {
 	return (
 		<div>
 			<Header />
-
+			{/*
 			<div className={styles.container}>
 				<div className={styles.stepper_container}>
 					<Stepper active={activeStepper} setActive={setActiveStepper} items={TABS_MAPPING} arrowed />
@@ -46,9 +46,9 @@ function CourseCreation() {
 				<div className={styles.component_container}>
 					<ActiveComponent {...activeComponentProps} />
 				</div>
-			</div>
+			</div> */}
 
-			{/* <AdvanceCourseCreation /> */}
+			<AdvanceCourseCreation />
 		</div>
 	);
 }

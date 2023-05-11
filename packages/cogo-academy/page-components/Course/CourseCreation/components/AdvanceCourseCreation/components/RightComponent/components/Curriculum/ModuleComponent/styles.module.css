@@ -22,9 +22,9 @@
 }
 
 .select_container {
-    &.module_description {
-        margin-top: 16px;
-    }
+	&.module_description {
+		margin-top: 16px;
+	}
 }
 
 .button_container {
@@ -36,8 +36,8 @@
 }
 
 .input_container {
-    margin-bottom: 44px;
 	width: 100%;
+	margin-bottom: 44px;
 }
 
 .error_message {

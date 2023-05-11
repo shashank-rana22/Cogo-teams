@@ -5,6 +5,7 @@ export const controls = [
 		type        : 'textarea',
 		rows        : 4,
 		placeholder : 'Type Description you want the user to see on before beginning the course',
+		rules       : { required: { value: true, message: 'This is required' } },
 	},
 	{
 		label       : '',
@@ -17,6 +18,7 @@ export const controls = [
 				type        : 'select',
 				placeholder : 'Select Criteria',
 				options     : [],
+				rules       : { required: { value: true, message: 'This is required' } },
 			},
 			{
 				label       : 'Reward on Course Completion',
@@ -24,6 +26,7 @@ export const controls = [
 				type        : 'select',
 				placeholder : 'Select Reward',
 				options     : [],
+				rules       : { required: { value: true, message: 'This is required' } },
 			},
 		],
 	},
@@ -41,6 +44,7 @@ export const certificateControls = [
 				type        : 'select',
 				placeholder : 'Type Certification Name',
 				options     : [],
+				rules       : { required: { value: true, message: 'This is required' } },
 			},
 			{
 				label       : 'Signing Authority',
@@ -48,6 +52,7 @@ export const certificateControls = [
 				type        : 'select',
 				placeholder : 'Select Authority from list',
 				options     : [],
+				rules       : { required: { value: true, message: 'This is required' } },
 			},
 		],
 	},
@@ -59,6 +64,7 @@ export const certificateControls = [
 		multiple      : false,
 		draggable     : true,
 		dropareaProps : { heading: 'Upload Authority Signature', subHeading: '11kb' },
+		rules         : { required: { value: true, message: 'This is required' } },
 	},
 ];
 
@@ -74,6 +80,7 @@ export const selectControls = [
 				type        : 'select',
 				placeholder : 'Select period of',
 				options     : [],
+				rules       : { required: { value: true, message: 'This is required' } },
 			},
 			{
 				label       : '',
@@ -81,6 +88,7 @@ export const selectControls = [
 				type        : 'select',
 				placeholder : 'Select',
 				options     : [],
+				rules       : { required: { value: true, message: 'This is required' } },
 			},
 		],
 	},
