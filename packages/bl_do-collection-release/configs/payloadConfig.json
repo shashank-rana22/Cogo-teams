@@ -67,18 +67,26 @@
     },
    "fcl_freight": {
       "export": {
-          "filters": {}
+          "filters": {
+            "task_attributes": [{"task": "knock_off_invoices", "status": "pending"}]
+          }
         },
         "import": {
-          "filters": {}
+          "filters": {
+            "task_attributes": [{"task": "knock_off_invoices", "status": "pending"}]
+          }
         }
     },
     "lcl_freight": {
       "export": {
-          "filters": {}
+          "filters": {
+            "task_attributes": [{"task": "knock_off_invoices", "status": "pending"}]
+          }
         },
         "import": {
-          "filters": {}
+          "filters": {
+            "task_attributes": [{"task": "knock_off_invoices", "status": "pending"}]
+          }
         }
     }, 
     "fcl_local": {
@@ -86,7 +94,8 @@
           "filters": {}
         },
         "import": {
-          "filters": {}
+          "filters": {
+          }
         }
     },
     "bl":{

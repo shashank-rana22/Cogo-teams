@@ -1,6 +1,7 @@
 import { cl, Tooltip, Table } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowUp, IcMArrowDown, IcMDocument } from '@cogoport/icons-react';
+import { useState } from 'react';
 
 import getTableFormatedData from '../../../helpers/getTableFormatedData';
 import ClickableDiv from '../../ClickableDiv';
@@ -18,6 +19,7 @@ export default function Invoices({
 	getShipmentPendingTask = () => {},
 	taskLoading = false,
 }) {
+	const [knockoffTabs, setKnockoffTabs] = useState('invoice');
 	const list_of_invoices = (item?.invoice_data || []).filter(
 		(inv) => inv.status !== 'init',
 	);
@@ -65,6 +67,8 @@ export default function Invoices({
 					refetch={refetch}
 					getShipmentPendingTask={getShipmentPendingTask}
 					taskLoading={taskLoading}
+					knockoffTabs={knockoffTabs}
+					setKnockoffTabs={setKnockoffTabs}
 				/>
 			);
 		}
@@ -83,39 +87,37 @@ export default function Invoices({
 	return (
 		<>
 			<div className={styles.container}>
-				{item?.trade_type === 'export' ? (
+				<div className={styles.invoice_container}>
+					<IcMDocument fill="#393f70" height={20} width={20} />
+
 					<div className={styles.invoice_container}>
-						<IcMDocument fill="#393f70" height={20} width={20} />
+						<div className={cl`${styles.text} ${styles.invoice_faded}`}>INVOICE(S): </div>
 
-						<div className={styles.invoice_container}>
-							<div className={cl`${styles.text} ${styles.invoice_faded}`}>INVOICE(S): </div>
-
-							{renderPart.map((invoice, i) => (
-								<Tooltip
-									interactive
-									content={invoiceHover(invoice)}
-									className={styles.tooltip}
-									caret={false}
-								>
-									<div className={cl`${styles.text} ${styles.invoice_hover}`}>
-										{invoice?.invoice_no}
-										{i < renderPart.length - 1 ? ', ' : ' '}
-									</div>
-								</Tooltip>
-							))}
-
-							{remainLength ? (
-								<div className={styles.more_invoices}>
-									+
-									{remainLength}
-									{' '}
-									MORE
+						{renderPart.map((invoice, i) => (
+							<Tooltip
+								interactive
+								content={invoiceHover(invoice)}
+								className={styles.tooltip}
+								caret={false}
+							>
+								<div className={cl`${styles.text} ${styles.invoice_hover}`}>
+									{invoice?.invoice_no}
+									{i < renderPart.length - 1 ? ', ' : ' '}
 								</div>
-							) : null}
-						</div>
+							</Tooltip>
+						))}
 
+						{remainLength ? (
+							<div className={styles.more_invoices}>
+								+
+								{remainLength}
+								{' '}
+								MORE
+							</div>
+						) : null}
 					</div>
-				) : null}
+
+				</div>
 
 				<div className={styles.action_container}>
 					<ClickableDiv onClick={handleAccordionOpen}>

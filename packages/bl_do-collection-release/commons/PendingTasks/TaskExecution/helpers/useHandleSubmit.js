@@ -101,8 +101,8 @@ function useHandleSubmit({
 						Toast.success('Task completed Successfully !');
 					}
 					onCancel();
+					refetch();
 				}
-				refetch();
 			} else {
 				Toast.error('Something went wrong');
 			}

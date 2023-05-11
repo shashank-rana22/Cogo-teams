@@ -11,7 +11,7 @@ const getDefaultValues = (controls) => {
 	return defaultValues;
 };
 
-function CustomTasks({ setMyForm = () => {}, controls }, ref) {
+function CustomTasks({ setMyForm = () => {}, controls = [] }, ref) {
 	const {
 		control,
 		trigger,

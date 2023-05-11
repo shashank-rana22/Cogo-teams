@@ -1,6 +1,6 @@
 .container {
 	min-height: 90vh;
-	padding: 16px 0;
+	padding: 8px 0px 16px 0px;
 	background: var(--color-secondary-5);
 	border-radius: 4px;
 

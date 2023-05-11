@@ -5,6 +5,15 @@ import useUpdateShipmentPendingTask from '../../../../../hooks/useUpdateShipment
 
 import styles from './styles.module.css';
 
+const options = [
+	{ label: 'KAM', value: 'booking_agent' },
+	{ label: 'Service Ops 1', value: 'service_ops1' },
+	{ label: 'Document Desk', value: 'service_ops2' },
+	{ label: 'Costbooking Desk', value: 'costbooking_ops' },
+	{ label: 'Collection Desk', value: 'collection_desk' },
+	{ label: 'Release Desk', value: 'release_desk' },
+	{ label: 'Lastmile Desk', value: 'lastmile_ops' },
+];
 function UpdateAssignedStakeholder({
 	setShowAdmin = () => {},
 	showAdmin = false,
@@ -39,15 +48,7 @@ function UpdateAssignedStakeholder({
 			<Modal.Body>
 				<div className={styles.container}>
 					<RadioGroupController
-						options={[
-							{ label: 'KAM', value: 'booking_agent' },
-							{ label: 'Service Ops 1', value: 'service_ops1' },
-							{ label: 'Document Desk', value: 'service_ops2' },
-							{ label: 'Costbooking Desk', value: 'costbooking_ops' },
-							{ label: 'Collection Desk', value: 'collection_desk' },
-							{ label: 'Release Desk', value: 'release_desk' },
-							{ label: 'Lastmile Desk', value: 'lastmile_ops' },
-						]}
+						options={options}
 						control={control}
 						name="assigned_stakeholder"
 						rules={{ required: { value: true, message: 'This is required' } }}

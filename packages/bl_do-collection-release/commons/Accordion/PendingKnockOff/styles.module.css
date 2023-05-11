@@ -1,4 +1,8 @@
 .container {
+	padding: 10px;
+	background-color: #fff;
+	border: 1px solid#88cad1;
+	border-top: none;
 	.ui-tabs-list {
 		width: 20%;
 		padding: 12px;

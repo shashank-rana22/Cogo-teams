@@ -15,6 +15,7 @@ const conditionMapping = {
 	lcl_freight_import : ['lcl_freight_local'],
 	lcl_freight_export : ['lcl_freight', 'lcl_freight_local'],
 	fcl_local_import   : ['fcl_freight_local'],
+	fcl_local_export   : ['fcl_freight_local'],
 };
 
 const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) => {
@@ -28,6 +29,12 @@ const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) =
 	};
 
 	const { invoice_data = [] } = item;
+	let bldoDoc = [];
+	if (stateProps.activeTab === 'bl') {
+		bldoDoc = item.bill_of_ladings || [];
+	} else {
+		bldoDoc = item.delivery_orders || [];
+	}
 
 	const isOldCollectionParty = (invoice_data || []).some(
 		(inv) => inv.created_at < '2023-02-27',
@@ -72,20 +79,20 @@ const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) =
 			break;
 		}
 		case 'collected': {
-			if (!(item?.status || []).includes('approved')) {
+			if (bldoDoc.some((doc) => doc.status !== 'approved')) {
 				showAccordion = false;
 				actionButton.disabled = true;
 				actionButton.text = 'Awaiting Approval';
 				actionButton.class = 'awaiting';
 			}
 
-			if ((item?.status || []).includes('approved')) {
+			if (bldoDoc.every((doc) => doc.status === 'approved')) {
 				showAccordion = false;
 				actionButton.disabled = true;
 				actionButton.text = 'Awaiting Approval for Release';
 				actionButton.class = 'awaiting';
 			}
-			if ((item?.status || []).includes('release_pending')) {
+			if (bldoDoc.some((doc) => doc.status === 'release_pending')) {
 				if (item?.trade_type !== 'import') {
 					showAccordion = true;
 				}
@@ -110,7 +117,7 @@ const getAccordionAndButton = ({ activeTab = '', item = {}, stateProps = {} }) =
 			break;
 		}
 		case 'surrendered': {
-			if ((item?.status || []).includes('surrendered')) {
+			if (bldoDoc.every((doc) => doc.status === 'surrendered')) {
 				showAccordion = false;
 				actionButton.disabled = true;
 				actionButton.text = 'BL SURRENDERED';
