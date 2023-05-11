@@ -74,11 +74,11 @@ function Header({
 			<div className={styles.edit_invoice}>
 				{!isCustomer ? (
 					<div className={styles.reviwed_stats}>
-						{reviewed_invoices ?? 0}
+						{reviewed_invoices}
 						{' '}
 						of
 						{' '}
-						{invoicing_parties?.length ?? 1}
+						{invoicing_parties?.length}
 						{' '}
 						reviewed
 					</div>

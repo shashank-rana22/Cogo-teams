@@ -2,10 +2,11 @@ import { Button, Modal } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
-
+import FormLayout from '../../../../../../../../../packages/shipment-fcl-freight/common/Tasks/TaskExecution/helpers/Layout'
 // import FormLayout from '../../../../../../../../commons/Layout';
 // import useEditLineItems from '../../../../../../../hooks/useEditLineItems';
-
+import controls from './controls';
+import { useForm } from '@cogoport/forms';
 // import Info from './Info';
 import styles from './styles.module.css';
 const geo = getGeoConstants();
@@ -46,6 +47,14 @@ function EditInvoice({
 	// 	&& !isFclFreight
 	// 	&& shipment_data?.serial_id > 130000;
 
+	const {control} = controls({shipment_data});
+	const { 
+		handleSubmit,
+		// control,
+		register,
+		setValue,
+		formState: { errors }, } = useForm(control);
+
 	return (
 		<Modal
 			size='lg'
@@ -75,13 +84,13 @@ function EditInvoice({
 						</span>
 					</div>
 
-					{/* <FormLayout
-						controls={controls}
-						fields={fields}
+					<FormLayout
+						controls={control}
+						// fields={fields}
 						errors={errors}
-						customValues={customValues}
-						disabledProps={disabledProps}
-					/> */}
+						// customValues={customValues}
+						// disabledProps={disabledProps}
+					/>
 				</div>
 
 			</Modal.Body>

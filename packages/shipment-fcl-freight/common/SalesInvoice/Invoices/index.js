@@ -20,11 +20,7 @@ function Invoices({
 	salesInvoicesRefetch = () => {},
 	shipmentData = {},
 }) {
-	const { shipment_data } = useContext(
-		ShipmentDetailContext,
-	);
-
-	const id = shipment_data?.id;
+	const id = shipmentData?.id;
 	const totals = invoiceData?.invoicing_party_wise_total;
 
 	const invoiceStatuses = invoiceData?.invoicing_parties?.map(
@@ -40,17 +36,16 @@ function Invoices({
 
 	let disableAction = isEmpty(invoiceData?.invoice_trigger_date);
 	if (
-		invoiceStatuses?.length === count
-		// || invoiceData?.invoice_tat_show !== true
+		invoiceStatuses?.length === count || invoiceData?.invoice_tat_show !== true
 	) {
 		disableAction = true;
 	}
 
-	// const showForOldShipments =		invoiceData?.invoice_trigger_date
-	// 	&& shipment_data?.serial_id <= 120347
-	// 	&& !invoiceStatuses?.some((ele) => ['reviewed', 'approved'].includes(ele));
+	const showForOldShipments =		invoiceData?.invoice_trigger_date
+		&& shipment_data?.serial_id <= 120347
+		&& !invoiceStatuses?.some((ele) => ['reviewed', 'approved'].includes(ele));
 
-	// disableAction = showForOldShipments ? false : disableAction;
+	disableAction = showForOldShipments ? false : disableAction;
 
 	// const { loadingCreditNotes, data, refetchCN } = useListCreditNotes(id);
 
@@ -66,10 +61,10 @@ function Invoices({
 			<div className={styles.line} />
 
 			<section>
-				{/* {Object.keys(groupedInvoices || {}).map((item) => ( */}
+				{Object.keys(groupedInvoices || {}).map((item) => (
 				<InvoiceItem
-					// item={groupedInvoices[item]}
-					// total={totals?.[item]}
+					item={groupedInvoices[item]}
+					total={totals?.[item]}
 					refetch={refetch}
 					loading={loading}
 					shipment_data={shipmentData}
@@ -79,7 +74,7 @@ function Invoices({
 					// org_outstanding={outstanding_by_reg_num[item]}
 					salesInvoicesRefetch={salesInvoicesRefetch}
 				/>
-				{/* ))} */}
+			 ))}
 			</section>
 
 			<CreditNote />

@@ -28,12 +28,12 @@ function ItemHeader({
 				refetchCN={refetchCN}
 			>
 				<div className={styles.invoice_info}>
-					{/* {(invoice?.services || []).map((item) => ( */}
+					{(invoice?.services || []).map((item) => (
 					<InvoiceServiceWise
-						// item={item}
+						item={item}
 						loading={loading}
 					/>
-					{/* ))} */}
+					))}
 				</div>
 			</Header>
 		</div>
