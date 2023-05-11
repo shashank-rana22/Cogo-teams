@@ -1,33 +1,43 @@
 [
     {
         "name": "origin_location",
-        "placeholder": "Origin Location",
-        "type": "async-select",
         "size": "sm",
+        "type": "async_select",
         "asyncKey": "list_locations",
-        "params": {
-            "filters": {
-                "type": [
-                    "seaport",
-                    "country"
-                ]
-            }
-        }
+        "placeholder": "Origin Location",
+		"params": {
+			"filters": {
+				"status": "active",
+				"type": ["seaport", "country", "trade"]
+			},
+			"includes": {
+				"country": true,
+				"default_params_required": true
+			},
+			"page_limit": 20,
+			"sort_by": "name",
+			"sort_type": "asc"
+		}
     },
     {
         "name": "desitination_location",
-        "placeholder": "Destination Location",
-        "type": "async-select",
         "size": "sm",
+        "type": "async_select",
         "asyncKey": "list_locations",
+        "placeholder": "Destination Location",
         "params": {
-            "filters": {
-                "type": [
-                    "seaport",
-                    "country"
-                ]
-            }
-        }
+			"filters": {
+				"status": "active",
+				"type": ["seaport", "country", "trade"]
+			},
+			"includes": {
+				"country": true,
+				"default_params_required": true
+			},
+			"page_limit": 20,
+			"sort_by": "name",
+			"sort_type": "asc"
+		}
     },
     {
         "name": "container_type",
@@ -37,10 +47,21 @@
         "asyncKey": "container-types"
     },
     {
-        "name": "shipping_line",
-        "placeholder": "Shipping Line",
-        "type": "async-select",
+        "name": "operator_id",
         "size": "sm",
-        "asyncKey": "shipping_lines"
+        "type": "async_select",
+        "asyncKey": "list_operators",
+		"labelKey": "business_name",
+		"valueKey": "id",
+        "placeholder": "Shipping Line",
+        "params": {
+			"filters": {
+				"operator_type": "shipping_line",
+				"status": "active"
+			},
+			"page_limit": 100,
+			"sort_by": "short_name",
+			"sort_type": "asc"
+		}
     }
 ]

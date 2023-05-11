@@ -10,10 +10,14 @@
 	}
 
 	&:not(:last-of-type) {
-		margin-bottom: 10px;
+		margin-bottom: 16px;
 	}
 }
 
 div.form_element.currency_input {
 	width: 30%;
+}
+
+div.form_element.upload_file {
+	width: 100%;
 }

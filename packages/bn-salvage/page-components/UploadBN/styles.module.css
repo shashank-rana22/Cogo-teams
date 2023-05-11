@@ -1,6 +1,9 @@
 .modal_container {
 	&:global {
-		&.ui_ps_size_xl {
+		&:has(.step1){
+			width: 60vw;
+		}
+		&:has(.step2){
 			width: 95vw;
 		}
 	}

@@ -1,22 +1,22 @@
 import { Modal } from '@cogoport/components';
-import { useState } from 'react';
 
 import RenderForm from '../../commons/RenderForm';
+import STEP1CONTROLS from '../../config/uploadBNStep1Controls.json';
+import STEP2CONTROLS from '../../config/uploadBNStep2Controls.json';
 import useCreateBookingNote from '../../hooks/useCreateBookingNote';
 
 import styles from './styles.module.css';
 
+const controlsMapping = {
+	step1 : STEP1CONTROLS,
+	step2 : STEP2CONTROLS,
+};
+
 export default function UploadBN({ setShow, refetchList }) {
-	const [currentStep, setCurrentStep] = useState('step1');
-
-	const [scheduleDeparture, setScheduleDeparture] = useState();
-
 	const closeModal = () => setShow(false);
 
-	const { controls, loading, createBookingNote } = useCreateBookingNote({
-		scheduleDeparture,
+	const { loading, createBookingNote } = useCreateBookingNote({
 		closeModal,
-		currentStep,
 		refetchList,
 	});
 
@@ -27,19 +27,15 @@ export default function UploadBN({ setShow, refetchList }) {
 			showCloseIcon={!loading}
 			closeOnOuterClick={false}
 			className={styles.modal_container}
-			size={currentStep === 'step2' ? 'xl' : 'lg'}
 		>
 			<Modal.Header title="Upload Booking Note" />
 
 			<RenderForm
 				closeModal={closeModal}
-				controls={controls}
 				onFormSubmit={createBookingNote}
+				controlsMapping={controlsMapping}
 				modalBodyClass={styles.modal_body_container}
 				modalFooterClass={styles.modal_footer}
-				setScheduleDeparture={setScheduleDeparture}
-				currentStep={currentStep}
-				setCurrentStep={setCurrentStep}
 			/>
 		</Modal>
 	);
