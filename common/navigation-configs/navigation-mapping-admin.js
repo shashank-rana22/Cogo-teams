@@ -1340,8 +1340,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-bl_do_collection_release',
 				title         : 'BL/DO Collection - Release',
-				href          : '/v2/bl_do-collection-release',
-				as            : '/v2/bl_do-collection-release',
+				href          : '/bl_do-collection-release',
+				as            : '/bl_do-collection-release',
 				type          : 'link',
 				main_apis     : ['list_shipment_document_collections'],
 				possible_apis : [...apis.bl_do_collection_release, ...apis.shipment],
