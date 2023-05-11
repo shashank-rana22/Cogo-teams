@@ -16,9 +16,22 @@ export default function List({
 	const [openItem, setOpenItem] = useState(null);
 	const { list = [], total } = data;
 
+	const renderPagination = (
+		<div className={styles.pagination_container}>
+			<Pagination
+				type="table"
+				currentPage={stateProps.page}
+				onPageChange={(val) => setStateProps({ ...stateProps, page: val })}
+				totalItems={total}
+				pageSize={10}
+			/>
+		</div>
+	);
+
 	return (
 		list.length === 0 ? <EmptyState /> : (
 			<div className={styles.container}>
+				{renderPagination}
 				<div className={styles.list_container}>
 					{list.map((item) => (
 						<Card
@@ -32,16 +45,7 @@ export default function List({
 							setOpenItem={setOpenItem}
 						/>
 					))}
-
-					<div className={styles.pagination_container}>
-						<Pagination
-							type="number"
-							currentPage={stateProps.page}
-							onPageChange={(val) => setStateProps({ ...stateProps, page: val })}
-							totalItems={total}
-							pageSize={10}
-						/>
-					</div>
+					{renderPagination}
 				</div>
 			</div>
 		)

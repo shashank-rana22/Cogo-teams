@@ -92,7 +92,7 @@ export default function Invoices({
 
 							{renderPart.map((invoice, i) => (
 								<Tooltip
-									animation="shift-away"
+									interactive
 									content={invoiceHover(invoice)}
 									className={styles.tooltip}
 									caret={false}

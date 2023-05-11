@@ -22,7 +22,6 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 					</div>
 					<div>
 						<Tooltip
-							animation="shift-away"
 							interactive
 							content={(
 								<div>
@@ -42,6 +41,7 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 					<div className={styles.grey}>Service Provider Contact</div>
 					<div className={styles.details}>
 						<Tooltip
+							interactive
 							className={styles.tooltip}
 							caret={false}
 							content={(
@@ -75,9 +75,14 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 						{docsLength > 0 ? (
 							<div className={cl`${styles.details} ${styles.service_provider_details}`}>
 								<Tooltip
+									interactive
 									placement="top"
 									caret={false}
-									content={(<BLPopver blDetails={item?.bill_of_ladings} bl_do={stateProps.activeTab} />
+									content={(
+										<BLPopver
+											blDetails={item?.bill_of_ladings}
+											bl_do={stateProps.activeTab}
+										/>
 									)}
 								>
 									<div className={styles.tooltip_container}>

@@ -1,6 +1,8 @@
+
 .main_container {
 	display: flex;
-	padding: 12px;
+	height: 90%;
+	padding-bottom: 12px;
 	margin: 8px 24px;
 	background: #fff;
 	border: 1px solid #88cad1;
@@ -28,6 +30,19 @@
 		}
 	}
 }
+
+.header{
+	background: var(--color-tertiary-blue-5);
+	height: fit-content;
+	width: fit-content;
+	padding: 4px;
+	font-size: 8px;
+	border-right: 1px solid #88cad1;
+	border-bottom: 1px solid #88cad1;
+	border-radius: 4px 0 4px 0;
+	text-transform: capitalize;
+}
+
 
 .container {
 	&.action {
@@ -112,6 +127,7 @@
 
 .border_right {
 	display: flex;
+	margin: 16px 0px 8px 0px; 
 	flex-direction: flex-end;
 	width: 2%;
 	border-right: 1px solid #88cad1;

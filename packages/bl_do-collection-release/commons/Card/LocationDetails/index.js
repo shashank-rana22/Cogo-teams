@@ -13,7 +13,7 @@ export default function LocaionDetails({ item = {}, stateProps = {} }) {
 				<div className={styles.left}>
 					<div className={styles.grey}>{isFclLocal && item?.trade_type === 'import' ? 'POD' : 'POL'}</div>
 					<Tooltip
-						animation="shift-away"
+						interactive
 						content={
 							isFclLocal ? item.port?.display_name : item.freight_service?.origin_port?.display_name
 						}
@@ -39,7 +39,7 @@ export default function LocaionDetails({ item = {}, stateProps = {} }) {
 						<div className={styles.left}>
 							<div className={styles.grey}>POD</div>
 							<Tooltip
-								animation="shift-away"
+								interactive
 								content={item.freight_service?.destination_port?.display_name}
 							>
 								<div className={cl`${styles.port_code} ${styles.primary} ${styles.sm}`}>

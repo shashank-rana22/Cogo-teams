@@ -70,7 +70,7 @@ export default function BLDoCollectionDesk() {
 				TAB_CONFIG.SHIPMENT_TYPES.map((item) => (
 					<ClickableDiv onClick={() => setStateProps({ ...stateProps, shipment_type: item.value })}>
 						<div className={cl`${stateProps.shipment_type === item.value ? styles.active : ''} 
-				${styles.service_tab}`}
+						 ${styles.service_tab}`}
 						>
 							{item.label}
 						</div>
