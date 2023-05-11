@@ -86,16 +86,6 @@ function Actions({
 		setShowChangePaymentMode(true);
 	};
 
-	const handleCustomerInvoice = () => {
-		setShow(false);
-		setAddCustomerInvoice(true);
-	};
-
-	const handleExchangeRateModal = () => {
-		setShow(false);
-		setExchangeRate(true);
-	};
-
 	const remarkRender = () => (
 		<div className={styles.remarkcontainer}>
 			<div className={styles.title}>Invoice Remarks</div>
@@ -423,15 +413,6 @@ function Actions({
 					setShow={setShowChangePaymentMode}
 					invoice={invoice}
 					refetch={refetch}
-				/>
-			) : null}
-			{addCustomerInvoice ? (
-				<AddCustomerInvoice
-					show={addCustomerInvoice}
-					closeModal={() => setAddCustomerInvoice(false)}
-					handleRefetch={handleRefetch}
-					invoice={invoice}
-					shipment_data={shipment_data}
 				/>
 			) : null}
 		</div>

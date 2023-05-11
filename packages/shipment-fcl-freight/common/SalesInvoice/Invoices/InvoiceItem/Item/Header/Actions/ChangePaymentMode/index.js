@@ -1,7 +1,6 @@
 import { RadioGroup, Modal, Radio, Button } from '@cogoport/components';
 import React, { useState } from 'react';
 import useUpdatePaymentMode from '../../../../../../Hooks/useUpdatePaymentMode';
-// import useUpdatePaymentMode from '../../../../../../../../hooks/useUpdatePaymentMode';
 import styles from './styles.module.css';
 
 function ChangePaymentMode({
