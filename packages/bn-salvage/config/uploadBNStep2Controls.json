@@ -7,7 +7,12 @@
 		"isPreviousDaysAllowed" : true,
 		"showTimeSelect" : true,
         "isClearable": false,
-        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa"
+        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa",
+        "rules": {
+            "required": {
+                "message": "Schedule departure is required"
+            }
+        }
     },
     {
         "label": "Schedule Arrival",
@@ -16,7 +21,12 @@
 		"placeholder" : "Select Date",
 		"isPreviousDaysAllowed" : true,
 		"showTimeSelect" : true,
-        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa"
+        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa",
+        "rules": {
+            "required": {
+                "message": "Schedule arrival is required"
+            }
+        }
     },
     {
         "label": "VGM Cut-off",
@@ -25,7 +35,12 @@
 		"placeholder" : "Select Date",
 		"isPreviousDaysAllowed" : true,
 		"showTimeSelect" : true,
-        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa"
+        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa",
+        "rules": {
+            "required": {
+                "message": "VGM Cut-off is required"
+            }
+        }
     },
     {
         "label": "S/I Cut-off",
@@ -34,7 +49,12 @@
 		"placeholder" : "Select Date",
 		"isPreviousDaysAllowed" : true,
 		"showTimeSelect" : true,
-        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa"
+        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa",
+        "rules": {
+            "required": {
+                "message": "S/I Cut-off is required"
+            }
+        }
     },
     {
         "label": "Document Cut-off",
@@ -43,7 +63,12 @@
 		"placeholder" : "Select Date",
 		"isPreviousDaysAllowed" : true,
 		"showTimeSelect" : true,
-        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa"
+        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa",
+        "rules": {
+            "required": {
+                "message": "Document Cut-off is required"
+            }
+        }
     },
     {
         "label": "Gate-in Cut-off",
@@ -52,7 +77,12 @@
 		"placeholder" : "Select Date",
 		"isPreviousDaysAllowed" : true,
 		"showTimeSelect" : true,
-        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa"
+        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa",
+        "rules": {
+            "required": {
+                "message": "Gate-in Cut-off is required"
+            }
+        }
     },
     {
         "label": "Booking Note Expiry",
@@ -61,7 +91,12 @@
 		"placeholder" : "Select Date",
 		"isPreviousDaysAllowed" : true,
 		"showTimeSelect" : true,
-        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa"
+        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa",
+        "rules": {
+            "required": {
+                "message": "Booking Note Expiry is required"
+            }
+        }
     },
     {
         "label": "Si filed at",
@@ -70,7 +105,12 @@
 		"placeholder" : "Select Date",
 		"isPreviousDaysAllowed" : true,
 		"showTimeSelect" : true,
-        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa"
+        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa",
+        "rules": {
+            "required": {
+                "message": "Si filed at is required"
+            }
+        }
     },
     {
         "label": "TR Cut-off",
@@ -79,7 +119,12 @@
 		"placeholder" : "Select Date",
 		"isPreviousDaysAllowed" : true,
 		"showTimeSelect" : true,
-        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa"
+        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa",
+        "rules": {
+            "required": {
+                "message": "TR Cut-off is required"
+            }
+        }
     },
     {
         "label": "Yard Details",
@@ -98,6 +143,11 @@
             },
             "page_limit": 20,
             "recommendations": true
+        },
+        "rules": {
+            "required": {
+                "message": "Yard details is required"
+            }
         }
     },
     {
@@ -105,14 +155,24 @@
         "name": "container_type",
         "type": "async_select",
         "optionsListKey": "container_types",
-        "placeholder": "Select Container Type"
+        "placeholder": "Select Container Type",
+        "rules": {
+            "required": {
+                "message": "Container Type is required"
+            }
+        }
     },
     {
         "label": "Commodity",
         "name": "commodity",
         "type": "async_select",
         "asyncKey": "commodities",
-        "value": "general"
+        "value": "general",
+        "rules": {
+            "required": {
+                "message": "Commodity is required"
+            }
+        }
     },
     {
         "name": "container_size",

@@ -4,7 +4,7 @@ import FILTERS from '../../config/filters.json';
 
 import styles from './styles.module.css';
 
-export default function Filters({ setFilters, children }) {
+export default function Filters({ filters, setFilters, children }) {
 	const handleFilterChange = (name, val) => {
 		setFilters((prev) => ({
 			...prev,
@@ -19,6 +19,7 @@ export default function Filters({ setFilters, children }) {
 				{FILTERS.map((filter) => (
 					<AsyncSelect
 						key={filter.name}
+						value={filters[filter.name]}
 						onChange={(val) => handleFilterChange(filter.name, val)}
 						{...filter}
 					/>

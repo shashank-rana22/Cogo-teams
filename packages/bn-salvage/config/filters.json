@@ -5,6 +5,7 @@
         "type": "async_select",
         "asyncKey": "list_locations",
         "placeholder": "Origin Location",
+		"isClearable": true,
 		"params": {
 			"filters": {
 				"status": "active",
@@ -25,6 +26,7 @@
         "type": "async_select",
         "asyncKey": "list_locations",
         "placeholder": "Destination Location",
+		"isClearable": true,
         "params": {
 			"filters": {
 				"status": "active",
@@ -44,6 +46,7 @@
         "placeholder": "Container Type",
         "type": "async-select",
         "size": "sm",
+		"isClearable": true,
         "asyncKey": "container-types"
     },
     {
@@ -54,6 +57,7 @@
 		"labelKey": "business_name",
 		"valueKey": "id",
         "placeholder": "Shipping Line",
+		"isClearable": true,
         "params": {
 			"filters": {
 				"operator_type": "shipping_line",

@@ -10,6 +10,9 @@
         .ui_select_options_container {
             z-index: 3;
         }
+        .ui_select_input_placeholder {
+            color: var(--color-secondary-greyscale-4);
+        }
     }
 
     > div {

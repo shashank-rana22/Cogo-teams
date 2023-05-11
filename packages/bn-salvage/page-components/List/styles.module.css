@@ -38,12 +38,9 @@
     width: 100%;
     font-size: var(--font-size-md);
     border-spacing: 0 10px;
+    text-align: left;
 
-    th {
-        white-space: nowrap;
-    }
-
-    th, td {
+    td {
         text-align: left;
         padding: 20px;
     }

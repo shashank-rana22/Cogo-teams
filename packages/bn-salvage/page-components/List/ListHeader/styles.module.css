@@ -16,7 +16,9 @@
         border-radius: 2px;
     }
 
-}
-thead.table_header > th {
-    padding: 10px;
+    th {
+        white-space: nowrap;
+        padding: 0 20px 20px;
+    }
+
 }

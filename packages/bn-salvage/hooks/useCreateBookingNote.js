@@ -22,7 +22,7 @@ export default function useCreateBookingNote({
 
 			refetchList();
 			closeModal();
-			Toast.succes('Booking Confirmation Document Created Successfully');
+			Toast.success('Booking Confirmation Document Created Successfully');
 		} catch (err) {
 			toastApiError(err);
 		}

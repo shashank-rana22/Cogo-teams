@@ -9,26 +9,42 @@ import styles from './styles.module.css';
 const dateFormatter = (date) => (new Date(date).toDateString()).split(' ');
 
 export default function Card({ item, openItem, setOpenItem, refetchList }) {
-	const [bn_expiry_day, ...bn_expiry_date] = dateFormatter(item?.expiry);
-	const [sailing_day, ...sailing_date] = dateFormatter(item?.schedule_departure);
+	const {
+		id,
+		origin_location,
+		destination_location,
+		expiry,
+		containers_count,
+		container_size,
+		container_type,
+		shipping_line,
+		service_provider,
+		schedule_departure,
+	} = item || {};
 
-	const isItemOpen = item && openItem?.id === item?.id;
+	const [bn_expiry_day, ...bn_expiry_date] = dateFormatter(expiry);
+	const [sailing_day, ...sailing_date] = dateFormatter(schedule_departure);
+
+	const isItemOpen = id && openItem?.id === id;
 
 	const handleOpenItemClick = () => {
 		setOpenItem(isItemOpen ? null : item);
 	};
 
+	let containerSize = container_size || '';
+	containerSize = containerSize.includes('HC') ? containerSize.replace('HC', 'ft HC') : `${containerSize}ft`;
+
 	return (
 		<>
 			<tr className={styles.card_container}>
 				<td>
-					<div>{item?.origin_location?.port_code}</div>
-					<b>{item?.origin_location?.name}</b>
+					<div>{origin_location?.port_code}</div>
+					<b>{origin_location?.name}</b>
 				</td>
 
 				<td>
-					<div>{item?.destination_location?.port_code}</div>
-					<b>{item?.destination_location?.name}</b>
+					<div>{destination_location?.port_code}</div>
+					<b>{destination_location?.name}</b>
 				</td>
 
 				<td className={styles.date_col}>
@@ -37,13 +53,13 @@ export default function Card({ item, openItem, setOpenItem, refetchList }) {
 				</td>
 
 				<td>
-					<p>{`${item?.containers_count || ''} x ${item?.container_size || ''}`}</p>
-					<p>{startCase(item?.container_type)}</p>
+					<p>{`${containers_count || ''} x ${containerSize}`}</p>
+					<p>{startCase(container_type)}</p>
 				</td>
 
-				<td>{item?.shipping_line?.business_name}</td>
+				<td>{shipping_line?.business_name}</td>
 
-				<td>{item?.service_provider?.business_name}</td>
+				<td>{service_provider?.business_name}</td>
 
 				<td className={styles.date_col}>
 					<b>{sailing_date.join(' ')}</b>

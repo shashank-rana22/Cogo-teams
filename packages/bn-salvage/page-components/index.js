@@ -32,7 +32,13 @@ export default function BNSalvage() {
 				</Button>
 			</Filters>
 
-			<List filters={filters} setFilters={setFilters} data={data} loading={loading} refetchList={refetchList} />
+			<List
+				filters={filters}
+				setFilters={setFilters}
+				data={data}
+				loading={loading}
+				refetchList={refetchList}
+			/>
 
 			{showModal ? <UploadBN setShow={setShowModal} refetchList={refetchList} /> : null}
 		</div>

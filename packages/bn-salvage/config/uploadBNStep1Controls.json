@@ -15,6 +15,9 @@
 			"page_limit": 100,
 			"sort_by": "short_name",
 			"sort_type": "asc"
+		},
+		"rules": {
+			"required": "Shipping line is required"
 		}
 	},
 	{
@@ -29,6 +32,9 @@
 				"status": "active",
 				"kyc_status": "verified"
 			}
+		},
+		"rules": {
+			"required": "Service Provider is required"
 		}
 	},
 	{
@@ -49,6 +55,9 @@
 			"page_limit": 20,
 			"sort_by": "name",
 			"sort_type": "asc"
+		},
+		"rules": {
+			"required": "Origin location is required"
 		}
 	},
 	{
@@ -69,6 +78,9 @@
 			"page_limit": 20,
 			"sort_by": "name",
 			"sort_type": "asc"
+		},
+		"rules": {
+			"required": "Destination location is required"
 		}
 	},
 	{
@@ -81,13 +93,23 @@
 			"filters": {
 				"status": "active"
 			}
+		},
+		"rules": {
+			"required": "Currency is required"
 		}
 	},
 	{
 		"name": "price",
 		"label": "Buy Price",
 		"type": "number",
-		"placeholder": "Enter Amount"
+		"placeholder": "Enter Amount",
+		"rules": {
+			"required": "Price is required",
+			"min": {
+				"value": 0.0001,
+				"message": "Price should be greater than 0"
+			}
+		}
 	},
 	{
 		"label": "Upload File",
