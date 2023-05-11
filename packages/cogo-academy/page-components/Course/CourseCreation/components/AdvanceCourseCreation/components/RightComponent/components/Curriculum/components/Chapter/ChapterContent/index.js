@@ -52,7 +52,7 @@ function ChapterContent() {
 								onLabel={onLabel}
 								rows={rows}
 								placeholder={placeholder}
-								{...(type === 'fileUpload' ? { dropareaProps, draggable: true } : null)}
+								{...(type === 'fileUpload' ? { dropareaProps, draggable: true } : {})}
 							/>
 						</div>
 

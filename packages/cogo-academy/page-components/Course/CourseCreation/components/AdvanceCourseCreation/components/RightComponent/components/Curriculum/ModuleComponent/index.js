@@ -27,8 +27,6 @@ function ModuleComponent({
 		onSaveModule({ values, module, isNew, setShowModule });
 	};
 
-	console.log('errors', showModule);
-
 	if (module.isNew || showModule.includes(module.id)) {
 		return (
 			<form onSubmit={handleSubmit(onSubmit)} className={styles.module}>

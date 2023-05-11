@@ -14,7 +14,9 @@ function UploadComponent() {
 	return (
 		<div className={styles.container}>
 			{(certificateControls || []).map((controlItem) => {
-				const { name, label, type, subControls = [], subLabel = '' } = controlItem || {};
+				const {
+					name, label, type, subControls = [], subLabel = '', dropareaProps, draggable, multiple, placeholder,
+				} = controlItem || {};
 				const Element = getFieldController(type);
 
 				if (type === 'groupSelect') {
@@ -69,8 +71,12 @@ function UploadComponent() {
 
 						<div className={`${styles.input_group} ${styles[name]}`}>
 							<Element
-								{...controlItem}
 								key={name}
+								name={name}
+								dropareaProps={dropareaProps}
+								draggable={draggable}
+								multiple={multiple}
+								placeholder={placeholder}
 								control={control}
 								id={`${name}_input`}
 							/>

@@ -13,6 +13,7 @@
 
 	&.mandatory_audiences_user {
 		margin-top: unset;
+		margin-left: 32px;
 	}
 }
 
@@ -22,8 +23,6 @@
 	&.mandatory_audiences_user {
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
-		width: 92%;
 	}
 }
 

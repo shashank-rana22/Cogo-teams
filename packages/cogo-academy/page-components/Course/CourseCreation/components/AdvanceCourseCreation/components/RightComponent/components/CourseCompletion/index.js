@@ -1,4 +1,3 @@
-import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -9,17 +8,17 @@ import { controls, selectControls } from './controls';
 import styles from './styles.module.css';
 import UploadComponent from './UploadComponent';
 
-function CourseCompletion() {
-	const {
-		control,
-		watch,
-		formState: { errors = {} },
-	} = useForm();
-
+function CourseCompletion({
+	control,
+	watch,
+	handleSubmit,
+	errors,
+}) {
 	const [value, onChange] = useState([]);
 	const [show, setShow] = useState(false);
 	const [multiSelectedUser, setMultiSelectedUser] = useState([]);
 	const [multiSelectedEdit, setMultiSelectedEdit] = useState([]);
+
 	const onClose = () => setShow(false);
 
 	const options = [];

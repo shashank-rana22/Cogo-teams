@@ -5,18 +5,9 @@ const MAPPING = [
 		children : [],
 	},
 	{
-		key      : 'plan_course',
-		title    : 'Plan Course',
-		children : [
-			{
-				key   : 'specifications',
-				title : 'Specifications',
-			},
-			{
-				key   : 'intended_learners',
-				title : 'Intended Learners',
-			},
-		],
+		key      : 'specifications',
+		title    : 'Specifications',
+		children : [],
 	},
 	{
 		key      : 'create_content',
@@ -35,6 +26,11 @@ const MAPPING = [
 	{
 		key      : 'publish_course',
 		title    : 'Publish Course',
+		children : [],
+	},
+	{
+		key      : 'intended_learners',
+		title    : 'Intended Learners',
 		children : [],
 	},
 ];

@@ -1,13 +1,16 @@
-import { useForm } from '@cogoport/forms';
-
 import { getFieldController } from '../../../../../../../commons/getFieldController';
 
 import controls from './controls';
 import ExcelComponent from './ExcelComponent';
 import styles from './styles.module.css';
 
-function IntendedLearners() {
-	const { control, formState:{ errors = {} } } = useForm();
+function IntendedLearners({
+	control,
+	watch,
+	handleSubmit,
+	errors,
+}) {
+	const mandatoryAudiencesUserWatch = watch('mandatory_audiences_user');
 
 	return (
 		<div className={styles.container}>
@@ -17,6 +20,10 @@ function IntendedLearners() {
 				const Element = getFieldController(type);
 
 				if (!Element) return null;
+
+				if (name === 'upload_excel' && mandatoryAudiencesUserWatch !== 'custom') {
+					return null;
+				}
 
 				if (name === 'upload_excel') {
 					return (

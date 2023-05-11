@@ -1,4 +1,3 @@
-import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 
 import { getFieldController } from '../../../../../../../commons/getFieldController';
@@ -6,12 +5,12 @@ import { getFieldController } from '../../../../../../../commons/getFieldControl
 import controls from './controls';
 import styles from './styles.module.css';
 
-function PublishCourse() {
-	const {
-		control,
-		formState: { errors = {} },
-	} = useForm();
-
+function PublishCourse({
+	control,
+	watch,
+	handleSubmit,
+	errors,
+}) {
 	return (
 		<div className={styles.container}>
 			{controls.map((controlItem) => {

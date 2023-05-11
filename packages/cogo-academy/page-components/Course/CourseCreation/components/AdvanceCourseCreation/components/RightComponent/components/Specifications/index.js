@@ -1,14 +1,15 @@
-import { useForm } from '@cogoport/forms';
-
 import FieldArray from '../../../../../../../commons/FieldArray';
 import { getFieldController } from '../../../../../../../commons/getFieldController';
 
 import controls from './controls';
 import styles from './styles.module.css';
 
-function Specifications() {
-	const { control, formState:{ errors = {} } } = useForm();
-
+function Specifications({
+	control,
+	watch,
+	handleSubmit,
+	errors,
+}) {
 	return (
 		<div className={styles.container}>
 			{controls.map((controlItem) => {

@@ -4,8 +4,23 @@ import { IcMArrowRight } from '@cogoport/icons-react';
 import MAPPING from './MAPPING';
 import styles from './styles.module.css';
 
-function Header({ activeTab }) {
+function Header({
+	activeTab,
+	handleSubmit,
+	reset,
+	setActiveTab,
+}) {
 	const { title, text } = MAPPING[activeTab];
+
+	const onSubmit = (values) => {
+		console.log('values', values);
+	};
+
+	const handleNextButton = () => {
+		console.log('hii');
+		handleSubmit(onSubmit)();
+		setActiveTab('specifications');
+	};
 
 	return (
 		<>
@@ -29,6 +44,7 @@ function Header({ activeTab }) {
 						type="button"
 						themeType="accent"
 						className={styles.button}
+						onClick={handleNextButton}
 					>
 						Next
 						{' '}

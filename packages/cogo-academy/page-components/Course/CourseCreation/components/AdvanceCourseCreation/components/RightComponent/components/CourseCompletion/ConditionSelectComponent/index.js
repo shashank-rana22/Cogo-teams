@@ -19,6 +19,7 @@ function ConditionSelectComponent({
 }) {
 	const courseCriteria = watch('course_criteria');
 	const courseReward = watch('course_reward');
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.display_container}>
