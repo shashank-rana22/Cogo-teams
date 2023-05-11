@@ -16,7 +16,7 @@ interface ItemProps {
 	itemData:PropsType,
 }
 
-const NAME_LENGTH = 20;
+const BANK_NAME_LENGTH = 20;
 
 function BankData({ itemData }:ItemProps) {
 	const { advanceDocumentSellerBankDetail } = itemData || {};
@@ -25,7 +25,7 @@ function BankData({ itemData }:ItemProps) {
 	return (
 		<div>
 			<div className={styles.text}>
-				{bankName.length > NAME_LENGTH
+				{bankName.length > BANK_NAME_LENGTH
 					? (
 						<Tooltip
 							interactive
@@ -36,7 +36,7 @@ function BankData({ itemData }:ItemProps) {
 
 								{`${(bankName).substring(
 									0,
-									20,
+									BANK_NAME_LENGTH,
 								)}...`}
 
 							</text>
