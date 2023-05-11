@@ -1,4 +1,5 @@
 import styles from './styles.module.css';
+import {CURRENCY_OPTIONS} from '../constants/CURRENCY_OPTIONS';
 
 interface FormDataInterface {
 	registrationNumber?: string,
@@ -133,11 +134,7 @@ export const recurringExpenseDetails = ({
 					span    : 2.2,
 					style   : { borderRadius: '4px', width: '164px' },
 					size    : 'md',
-					options : [
-						{ label: 'INR', value: 'INR' },
-						{ label: 'USD', value: 'USD' },
-						{ label: 'VND', value: 'VND' },
-						{ label: 'GBP', value: 'GBP' }],
+					options : CURRENCY_OPTIONS,
 				},
 				{
 					name           : 'repeatEvery',

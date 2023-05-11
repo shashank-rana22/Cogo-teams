@@ -23,7 +23,6 @@ const useListExpense = () => {
 			await trigger({
 				params: {
 					expenseType,
-					entityCodeId   : 'ee09645b-5f34-4d2e-8ec7-6ac83a7946e1',
 					pageSize,
 					pageIndex,
 					organizationId : vendorId,
