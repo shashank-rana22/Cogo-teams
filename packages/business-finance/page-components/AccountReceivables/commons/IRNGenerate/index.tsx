@@ -211,6 +211,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 						finalPostFromSage={finalPostFromSage}
 						sageInvoiceData={sageInvoiceData}
 						sageInvoiceLoading={sageInvoiceLoading}
+						finalPostLoading={finalPostLoading}
 					/>
 
 				</div>

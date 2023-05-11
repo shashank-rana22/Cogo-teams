@@ -5,13 +5,12 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function InvoiceDetailCard({ platformInvoiceInfo }) {
-	const platformInvoiceInfoObject = platformInvoiceInfo[0] || {};
-
 	const {
-		name = '', invoice_number : InvoiceNumber = '', status = '', bpr_number : BprNumber = '', entity = '',
+		name = '', invoice_number : InvoiceNumber = '', status = '', bpr_number : BprNumber = '',
+		job_number : JobNumber = '',
 		currency = '', exchange_rate : ExchangeRate = '',
 		tax_amount : TaxAmount = '', grand_total: GrandTotal = '', ledger_total: LedgerTotal = '',
-	} = platformInvoiceInfoObject;
+	} = platformInvoiceInfo;
 	return (
 		<div className={styles.div_flex}>
 			<div>
@@ -68,8 +67,8 @@ function InvoiceDetailCard({ platformInvoiceInfo }) {
 				<div className={styles.styled_lable_value}>{BprNumber || '-'}</div>
 			</div>
 			<div>
-				<div className={styles.lable}>Entity</div>
-				<div className={styles.styled_lable_value}>{entity || '-'}</div>
+				<div className={styles.lable}>Job Number</div>
+				<div className={styles.styled_lable_value}>{JobNumber || '-'}</div>
 			</div>
 			<div>
 				<div className={styles.lable}>Currency</div>

@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Placeholder } from '@cogoport/components';
 import React from 'react';
 
 import InvoiceDetailCard from './InvoiceDetailCard';
@@ -8,15 +8,9 @@ import styles from './styles.module.css';
 
 function FinalPostModal({
 	finalPostToSageModal, setFinalPostToSageModal, finalPostFromSage,
-	sageInvoiceData, sageInvoiceLoading,
+	sageInvoiceData, sageInvoiceLoading, finalPostLoading,
 }) {
-	const { platformInvoiceInfo = [], sageInvoiceInfo = [] } = sageInvoiceData || {};
-
-	const platformInvoiceInfoObject = platformInvoiceInfo[0] || {};
-
-	const {
-		job_number: JobNumber = '',
-	} = platformInvoiceInfoObject;
+	const { platformInvoiceInfo = {}, sageInvoiceInfo = {} } = sageInvoiceData || {};
 
 	return (
 		<Modal
@@ -29,8 +23,7 @@ function FinalPostModal({
 
 			<Modal.Header title={(
 				<div className={styles.styled_header}>
-					FINAL POST TO SAGE : #
-					<span className={styles.styled_job_number}>{JobNumber}</span>
+					FINAL POST TO SAGE
 				</div>
 			)}
 			/>
@@ -57,14 +50,20 @@ function FinalPostModal({
 			</Modal.Body>
 			<Modal.Footer>
 
-				<Button
-					disabled={false}
-					onClick={() => {
-						finalPostFromSage();
-					}}
-				>
-					FINAL POST
-				</Button>
+				{	sageInvoiceLoading
+
+					? <Placeholder width="100px" height="30px" />
+
+					:				(
+						<Button
+							disabled={finalPostLoading}
+							onClick={() => {
+								finalPostFromSage();
+							}}
+						>
+							FINAL POST
+						</Button>
+					)}
 
 			</Modal.Footer>
 		</Modal>
