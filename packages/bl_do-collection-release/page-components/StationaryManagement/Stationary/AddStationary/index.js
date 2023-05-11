@@ -8,6 +8,11 @@ import useCreateOrganizationDocumentInventory from '../../../../hooks/useCreateO
 
 import styles from './styles.module.css';
 
+const ORG_PARAMS = {
+	filters    : { status: 'active', account_type: 'service_provider' },
+	page_limit : 10,
+};
+
 function AddStationary({ listOrgDocTrigger = () => {} }) {
 	const [show, setShow] = useState(false);
 
@@ -31,11 +36,6 @@ function AddStationary({ listOrgDocTrigger = () => {} }) {
 	};
 
 	const { apiTrigger } = useCreateOrganizationDocumentInventory({ refetch: createRefetch });
-
-	const organizationParams = {
-		filters    : { status: 'active', account_type: 'service_provider' },
-		page_limit : 10,
-	};
 
 	const onSubmit = (val) => {
 		const payload = {
@@ -76,7 +76,7 @@ function AddStationary({ listOrgDocTrigger = () => {} }) {
 									name="organization_id"
 									control={control}
 									asyncKey="organizations"
-									params={organizationParams}
+									params={ORG_PARAMS}
 								/>
 							</div>
 						)
