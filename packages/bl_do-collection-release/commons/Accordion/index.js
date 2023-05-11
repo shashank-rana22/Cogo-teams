@@ -12,7 +12,7 @@ export default function Accordion({
 	stateProps = () => {},
 	handleAccordionOpen = () => {},
 	handleSubmit = () => {},
-	refetchList = () => {},
+	refetch = () => {},
 	getShipmentPendingTask = () => {},
 	showDeliveryOrderTask = false,
 	showInvoiceAndTask = false,
@@ -25,7 +25,7 @@ export default function Accordion({
 					accordionOpen={accordionOpen}
 					handleAccordionOpen={handleAccordionOpen}
 					tasks={tasks}
-					refetchList={refetchList}
+					refetch={refetch}
 					getShipmentPendingTask={getShipmentPendingTask}
 					taskLoading={taskLoading}
 				/>
@@ -47,7 +47,7 @@ export default function Accordion({
 					setStateProps={setStateProps}
 					handleSubmit={handleSubmit}
 					handleAccordionOpen={handleAccordionOpen}
-					refetchList={refetchList}
+					refetch={refetch}
 					showDeliveryOrderTask={showDeliveryOrderTask}
 					showInvoiceAndTask={showInvoiceAndTask}
 				/>

@@ -6,7 +6,13 @@ import EmptyState from '../EmptyState';
 
 import styles from './styles.module.css';
 
-export default function List({ data = {}, stateProps, couldBeCardsCritical = false, setStateProps = () => {} }) {
+export default function List({
+	data = {},
+	stateProps = {},
+	couldBeCardsCritical = false,
+	setStateProps = () => {},
+	refetch = () => {},
+}) {
 	const [openItem, setOpenItem] = useState(null);
 	const { list = [], total } = data;
 
@@ -22,6 +28,7 @@ export default function List({ data = {}, stateProps, couldBeCardsCritical = fal
 							setStateProps={setStateProps}
 							couldBeCardsCritical={couldBeCardsCritical}
 							openItem={openItem}
+							refetch={refetch}
 							setOpenItem={setOpenItem}
 						/>
 					))}

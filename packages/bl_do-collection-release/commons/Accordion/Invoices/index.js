@@ -14,7 +14,7 @@ export default function Invoices({
 	accordionOpen = false,
 	handleAccordionOpen = () => {},
 	tasks = [],
-	refetchList = () => {},
+	refetch = () => {},
 	getShipmentPendingTask = () => {},
 	taskLoading = false,
 }) {
@@ -62,7 +62,7 @@ export default function Invoices({
 					item={item}
 					tasks={tasks}
 					handleAccordionOpen={handleAccordionOpen}
-					refetchForTask={refetchList}
+					refetch={refetch}
 					getShipmentPendingTask={getShipmentPendingTask}
 					taskLoading={taskLoading}
 				/>

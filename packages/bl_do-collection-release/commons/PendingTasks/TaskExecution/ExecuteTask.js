@@ -9,9 +9,9 @@ import styles from './styles.module.css';
 
 function ExecuteTask({
 	task = {},
+	refetch = () => {},
 	onCancel = () => {},
 	servicesLoading = false,
-	taskListRefetch = () => {},
 	primary_service = {},
 	servicesList = [],
 }) {
@@ -46,7 +46,7 @@ function ExecuteTask({
 			task={task}
 			stepConfig={stepConfigValue}
 			onCancel={onCancel}
-			refetch={taskListRefetch}
+			refetch={refetch}
 			primary_service={primary_service}
 			isLastStep={currentStep === steps.length - 1}
 			currentStep={currentStep}

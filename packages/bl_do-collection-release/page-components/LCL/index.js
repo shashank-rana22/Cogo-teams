@@ -6,23 +6,19 @@ import useListBlDOShipments from '../../hooks/useListBlDOShipment';
 import styles from './styles.module.css';
 
 function LCL({ stateProps = {}, setStateProps = () => {} }) {
-	const { data, loading } = useListBlDOShipments({ prefix: 'lcl_freight', stateProps });
+	const { data, loading, refetch } = useListBlDOShipments({ prefix: 'lcl_freight', stateProps });
 
 	if (loading) {
 		return (
 			<div className={styles.loader}>
+				<div>Loading Shipments...</div>
 				<Loader />
-				Loading
-				{' '}
-				{stateProps.activeTab}
-				{' '}
-				Collection release data
 			</div>
 		);
 	}
 	return (
 		<div className={styles.list_container}>
-			<List data={data} stateProps={stateProps} setStateProps={setStateProps} />
+			<List data={data} stateProps={stateProps} setStateProps={setStateProps} refetch={refetch} />
 		</div>
 	);
 }

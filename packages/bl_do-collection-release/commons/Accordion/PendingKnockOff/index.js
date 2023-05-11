@@ -10,7 +10,7 @@ function PendingKnockOff({
 	item = {},
 	tasks = [],
 	handleAccordionOpen = () => {},
-	refetchList = () => {},
+	refetch = () => {},
 	getShipmentPendingTask = () => {},
 	taskLoading = false,
 }) {
@@ -18,7 +18,7 @@ function PendingKnockOff({
 	const list_of_invoices = item?.invoice_data || [];
 
 	const refetchForTask = () => {
-		refetchList();
+		refetch();
 		handleAccordionOpen();
 	};
 

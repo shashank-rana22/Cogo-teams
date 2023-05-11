@@ -18,7 +18,7 @@ export default function useListBlDOShipment({ prefix = '', stateProps = {} }) {
 		method : 'GET',
 	}, { manual: true });
 
-	const listBLs = useCallback(async () => {
+	const listBlDos = useCallback(async () => {
 		try {
 			const res = await trigger({
 				params: payload,
@@ -30,8 +30,8 @@ export default function useListBlDOShipment({ prefix = '', stateProps = {} }) {
 	}, [trigger, payload]);
 
 	useEffect(() => {
-		listBLs();
-	}, [listBLs, authParams]);
+		listBlDos();
+	}, [listBlDos, authParams]);
 
 	return {
 		data: {
@@ -39,6 +39,7 @@ export default function useListBlDOShipment({ prefix = '', stateProps = {} }) {
 			total      : data.total_count || 0,
 			total_page : data.total || 0,
 		},
+		refetch: listBlDos,
 		loading,
 	};
 }

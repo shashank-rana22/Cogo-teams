@@ -19,7 +19,7 @@ export default function AccordionContent({
 	taskLoading = false,
 	handleSubmit = () => {},
 	handleAccordionOpen = () => {},
-	refetchList = () => {},
+	refetch = () => {},
 	showDeliveryOrderTask = false,
 	showInvoiceAndTask,
 }) {
@@ -70,7 +70,7 @@ export default function AccordionContent({
 		}
 	};
 	const refetchForTask = () => {
-		refetchList();
+		refetch();
 		handleAccordionOpen();
 	};
 

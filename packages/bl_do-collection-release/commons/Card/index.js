@@ -68,7 +68,7 @@ export default function Card({
 	setStateProps = () => {},
 	openItem = null,
 	setOpenItem = () => {},
-	refetchList = () => {},
+	refetch = () => {},
 	isCriticalVisible = false,
 }) {
 	const [confirmationModal, setConfirmationModal] = useState({
@@ -152,14 +152,14 @@ export default function Card({
 		}
 	};
 
-	const refetch = () => {
+	const taskRefetch = () => {
 		Toast.success(successMsg[stateProps.inner_tab]);
 		closeModal();
-		refetchList();
+		refetch();
 		handleAccordionOpen();
 	};
 
-	const { updateTask } = useUpdateTask({ refetch });
+	const { updateTask } = useUpdateTask({ refetch: taskRefetch });
 
 	const handleSubmit = ({ formValues = {}, taskConfig = {} }) => {
 		const payload = getFormattedPayload({
@@ -237,7 +237,7 @@ export default function Card({
 					stateProps={stateProps}
 					handleAccordionOpen={handleAccordionOpen}
 					handleSubmit={handleSubmit}
-					refetchList={refetchList}
+					refetch={refetch}
 					getShipmentPendingTask={listTasks}
 					showDeliveryOrderTask={showDeliveryOrderTask}
 					showInvoiceAndTask={showInvoiceAndTask}
