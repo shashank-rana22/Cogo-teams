@@ -69,19 +69,23 @@ function InvoiceItem({
 				) : null}
 			</div>
 
-			{(item?.invoices || []).map((invoice) => (
-			<Item
-				invoice={invoice}
-				refetch={refetch}
-				loading={loading}
-				shipment_data={shipment_data}
-				invoiceData={invoiceData}
-				invoicesList={invoicesList}
-				isIRNGenerated={isIRNGenerated}
-				salesInvoicesRefetch={salesInvoicesRefetch}
-				refetchCN={refetchCN}
-			/>
-			))}
+			<div className={styles.invoice_list_wrapper}>
+
+				{(item?.invoices || []).map((invoice) => (
+					<Item
+						key={invoice?.id}
+						invoice={invoice}
+						refetch={refetch}
+						loading={loading}
+						shipment_data={shipment_data}
+						invoiceData={invoiceData}
+						invoicesList={invoicesList}
+						isIRNGenerated={isIRNGenerated}
+						salesInvoicesRefetch={salesInvoicesRefetch}
+						refetchCN={refetchCN}
+					/>
+				))}
+			</div>
 		</main>
 	);
 }

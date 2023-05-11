@@ -1,6 +1,4 @@
-import { ShipmentDetailContext } from '@cogoport/context';
 import { isEmpty } from '@cogoport/utils';
-import React, { useContext } from 'react';
 
 import useListShipmentCreditNotes from '../../../hooks/useListShipmentCreditNotes';
 import CreditNote from '../CreditNote';
@@ -51,6 +49,7 @@ function Invoices({
 	// const { loadingCreditNotes, data, refetchCN } = useListCreditNotes(id);
 	const { list, refetch: CNRefetch, loading: CNLoading } = useListShipmentCreditNotes({ shipmentData });
 
+	console.log(groupedInvoices);
 	return (
 		<main className={styles.container}>
 			<Header
@@ -64,19 +63,20 @@ function Invoices({
 
 			<section>
 				{Object.keys(groupedInvoices || {}).map((item) => (
-				<InvoiceItem
-					item={groupedInvoices[item]}
-					total={totals?.[item]}
-					refetch={refetch}
-					loading={loading}
-					shipment_data={shipmentData}
-					invoiceData={invoiceData}
-					invoicesList={invoicesList}
-					isIRNGenerated={isIRNGenerated}
+					<InvoiceItem
+						key={item}
+						item={groupedInvoices[item]}
+						total={totals?.[item]}
+						refetch={refetch}
+						loading={loading}
+						shipment_data={shipmentData}
+						invoiceData={invoiceData}
+						invoicesList={invoicesList}
+						isIRNGenerated={isIRNGenerated}
 					// org_outstanding={outstanding_by_reg_num[item]}
-					salesInvoicesRefetch={salesInvoicesRefetch}
-				/>
-			 ))}
+						salesInvoicesRefetch={salesInvoicesRefetch}
+					/>
+				))}
 			</section>
 
 			{list?.length

@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 function CardHeader({ fields = [], showCode = false, detail = {} }) {
 	return (
-		<main className={styles.main}>
+		<div className={styles.container}>
 			<div className={styles.cargo}>
 				<CargoDetails primary_service={detail || {}} />
 			</div>
@@ -21,7 +21,7 @@ function CardHeader({ fields = [], showCode = false, detail = {} }) {
 					return <Field field={field} showCode={showCode} />;
 				})}
 			</div>
-		</main>
+		</div>
 	);
 }
 
