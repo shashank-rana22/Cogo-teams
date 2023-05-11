@@ -1452,6 +1452,16 @@ const apis = [
 		service_name : 'bookings',
 		feature      : 'bl_do',
 	},
+	{
+		api          : 'list_fortigo_locations',
+		access_type  : 'private',
+		service_name : 'location',
+	},
+	{
+		api          : 'create_shipment_fortigo_trip_detail',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
