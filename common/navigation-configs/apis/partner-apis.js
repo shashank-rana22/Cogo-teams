@@ -8109,6 +8109,24 @@ const partner = {
 			feature     : 'invoices',
 		},
 		{
+			api         : 'put_sales_invoice_finance_reject_invoice',
+			access_type : 'private',
+			module      : 'invoices',
+			feature     : 'invoices',
+		},
+		{
+			api         : 'post_sales_invoice_post_from_sage',
+			access_type : 'private',
+			module      : 'invoices',
+			feature     : 'invoices',
+		},
+		{
+			api         : 'post_sales_invoice_update_org_detail_for_irn_failed',
+			access_type : 'private',
+			module      : 'invoices',
+			feature     : 'invoices',
+		},
+		{
 			api         : 'list_organization_trade_party_details',
 			access_type : 'private',
 			module      : 'Bpr',
@@ -8210,6 +8228,18 @@ const partner = {
 
 		{
 			api         : 'post_sales_invoice_post_to_sage',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'post_sales_invoice_update_org_detail_for_irn_failed',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'post_sales_invoice_einvoice',
 			access_type : 'private',
 			module      : 'outstanding',
 			feature     : 'outstanding',
@@ -8532,7 +8562,7 @@ const partner = {
 			feature     : 'match',
 		},
 		{
-			api         : 'get_sales_accounts',
+			api         : 'get_payments_accounts',
 			access_type : 'private',
 			module      : 'onAccount',
 			feature     : 'onAccount',
@@ -10277,6 +10307,16 @@ const partner = {
 			service_name : 'saas_traceability',
 		},
 		{
+			api          : 'get_saas_ftl_tracking_detail',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
+		{
+			api          : 'list_saas_surface_shipment_details',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
+		{
 			api          : 'list_shipping_line_events',
 			access_type  : 'private',
 			service_name : 'saas_traceability',
@@ -11816,6 +11856,11 @@ const partner = {
 			api          : 'get_tickets_list',
 			access_type  : 'private',
 			service_name : 'tickets',
+		},
+		{
+			api          : 'check_customer_checkout_quotation_conflict',
+			access_type  : 'private',
+			service_name : 'checkout',
 		},
 	],
 	analytics_dashboard: [

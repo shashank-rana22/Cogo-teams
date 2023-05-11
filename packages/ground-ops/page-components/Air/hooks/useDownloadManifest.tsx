@@ -4,7 +4,7 @@ import { saveAs } from 'file-saver';
 
 const GENERATE_FROM_HTML_URL = 'https://vmoiuzda31.execute-api.ap-south-1.amazonaws.com/production/generate_from_html';
 
-const useDownloadManifest = (stylesTHC, handleSave) => {
+const useDownloadManifest = (stylesTHC, handleSave, documentNumber) => {
 	const [{ loading }, trigger] = usePublicRequest({
 		url    : GENERATE_FROM_HTML_URL,
 		method : 'POST',
@@ -26,7 +26,7 @@ const useDownloadManifest = (stylesTHC, handleSave) => {
 				},
 			}).then((res) => {
 				const url = res?.data?.pdf_url;
-				saveAs(url);
+				saveAs(url, documentNumber);
 				handleSave(url);
 			});
 		} catch (err) {
