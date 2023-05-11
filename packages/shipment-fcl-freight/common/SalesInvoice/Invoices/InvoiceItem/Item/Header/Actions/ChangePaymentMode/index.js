@@ -1,7 +1,6 @@
 import { RadioGroup, Modal, Radio, Button } from '@cogoport/components';
 import React, { useState } from 'react';
 import useUpdatePaymentMode from '../../../../../../Hooks/useUpdatePaymentMode';
-import styles from './styles.module.css';
 
 function ChangePaymentMode({
 	show = false,
@@ -10,7 +9,6 @@ function ChangePaymentMode({
 	refetch = () => {},
 }) {
 	const [check, setCheck] = useState(!invoice?.paymentMode);
-
 	const [value, setValue] = useState('');
 
 	const optionsToShow = {
@@ -32,10 +30,14 @@ function ChangePaymentMode({
 
 	const payload = { id: invoice?.id, payment_mode: paymentMode };
 
+	const refetchAfterCall = () => {
+		setShow(false);
+		refetch();
+	}
+
 	const { changePaymentMode, loading } = useUpdatePaymentMode({
-		setShow,
 		payload,
-		refetch,
+		refetch: refetchAfterCall,
 	});
 	return (
 		<Modal show={show} onClose={() => setShow(false)}>
@@ -59,7 +61,6 @@ function ChangePaymentMode({
 			<Button onClick={changePaymentMode} disabled={loading || !check}>
 					Update
 				</Button>
-
 			</Modal.Footer>
 		</Modal>
 	);

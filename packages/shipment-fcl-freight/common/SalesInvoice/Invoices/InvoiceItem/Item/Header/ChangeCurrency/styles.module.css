@@ -1,5 +1,7 @@
 .form{
-	padding: 16px;
-	overflow: auto;
-	height: calc(100vh - 80vh);
+	:global{
+		.ui_modal_body_container {
+			height: 160px;
+		}
+	}
 }

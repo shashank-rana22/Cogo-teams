@@ -1,9 +1,10 @@
 import { useRequest } from '@cogoport/request';
 import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
+import { isEmpty } from '@cogoport/utils';
 
 
-const useUpdateCurrency = ({onClose, refetch, payload, currency}) => {
+const useUpdateCurrency = ({refetch, payload, currency}) => {
     const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_invoice_currency',
 		method : 'POST',
@@ -14,6 +15,10 @@ const useUpdateCurrency = ({onClose, refetch, payload, currency}) => {
 			Toast.error(`Currency is already in ${currency}`);
 			return;
 		}
+		if (isEmpty(payload.invoice_currency)) {
+			Toast.error("Currency is required");
+			return;
+		}
 		try {
 			const res = await trigger({
 				data: payload
@@ -21,9 +26,6 @@ const useUpdateCurrency = ({onClose, refetch, payload, currency}) => {
 			if (!res.hasError) {
 				Toast.success('Invoice Currency Updated');
 				refetch();
-				if (onClose) {
-					onClose();
-				}
 			}
 		} catch (err) {
 			toastApiError(err?.data);

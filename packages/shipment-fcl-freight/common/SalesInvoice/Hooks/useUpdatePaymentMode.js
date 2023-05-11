@@ -3,7 +3,6 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 
 const useUpdatePaymentMode = ({
-	setShow = () => {},
 	refetch = () => {},
 	payload = {},
 }) => {
@@ -20,7 +19,6 @@ const useUpdatePaymentMode = ({
 
 			if (!res?.hasError) {
 				Toast.success('Payment mode Updated');
-				setShow(false);
 				refetch();
 			} else {
 				toast.error(res?.err);

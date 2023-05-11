@@ -39,9 +39,7 @@ function Actions({
 	const [showChangePaymentMode, setShowChangePaymentMode] = useState(false);
 	const [sendEmail, setSendEmail] = useState(false);
 	const [showOtpModal, setOTPModal] = useState(false);
-	const [showExchangeRate, setExchangeRate] = useState(false);
-	const [addCustomerInvoice, setAddCustomerInvoice] = useState(false);
-	const showForOldShipments =		shipment_data.serial_id <= 120347 && invoice.status === 'pending';
+	const showForOldShipments = shipment_data.serial_id <= 120347 && invoice.status === 'pending';
 
 	// const user_data = useSelector(({ profile }) => profile || {});
 
@@ -378,14 +376,6 @@ function Actions({
 					invoice={invoice}
 					refetch={salesInvoicesRefetch}
 					shipment_data={shipment_data}
-				/>
-			) : null}
-
-			{showExchangeRate ? (
-				<ExchangeRateModal
-					showExchangeRate={showExchangeRate}
-					setExchangeRate={setExchangeRate}
-					invoice={invoice}
 				/>
 			) : null}
 
