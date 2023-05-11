@@ -19,6 +19,7 @@ import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import performanceManagement from './config/performance-management';
 import rolesAndPermissions from './config/roles-n-permission';
+import shipmentFclCfs from './config/shipment-fcl-cfs';
 import shipmentFclFreight from './config/shipment-fcl-freight';
 import supplyDashboard from './config/supply-dashboards';
 import vendorRM from './config/vendor-rm';
@@ -43,6 +44,7 @@ const routeConfig = {
 	...kamMonitoring,
 	...performanceManagement,
 	...shipmentFclFreight,
+	...shipmentFclCfs,
 	...bookingDesk,
 	...costBookingDesk,
 	...authorityDesk,

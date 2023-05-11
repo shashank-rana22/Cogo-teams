@@ -39,6 +39,7 @@
     "@cogoport/vendor-rm": "workspace:0.1.0",
     "@cogoport/translate": "workspace:0.1.0",
     "@cogoport/shipment-fcl-freight": "workspace:0.1.0",
+    "@cogoport/shipment-fcl-cfs": "workspace:0.1.0",
     "@cogoport/document-desk" : "workspace:0.1.0",
     "@cogoport/ocean-modules": "workspace:0.1.0",
     "@cogoport/shipment-chat": "workspace:0.1.0",

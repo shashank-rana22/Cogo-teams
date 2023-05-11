@@ -1,0 +1,22 @@
+.custom_modal {
+	:global {
+		.ui_modal_body_container {
+			min-height: 200px;
+		}
+	}
+}
+
+.header {
+	display: flex;
+	align-items: center;
+}
+
+.button {
+	display: flex;
+	margin-right: 8px;
+	cursor: pointer;
+
+	&:hover {
+		color: #ee3427;
+	}
+}
