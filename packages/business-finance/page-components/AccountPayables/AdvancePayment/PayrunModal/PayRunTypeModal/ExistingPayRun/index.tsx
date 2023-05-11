@@ -3,7 +3,7 @@ import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import List from '../../../../../commons/List';
-import EmptyState from '../../../common/EmptyState';
+import EmptyState from '../../../../../commons/StyledTable/EmptyState';
 
 import { PaymentReadyConfig } from './paymentReadyTable';
 import AmountWithCurrency from './renderFunction/AmountWithCurrency';
@@ -123,7 +123,7 @@ function ExitingPayRun({
 							/>
 						</>
 					)
-						:					<EmptyState />}
+						:					<EmptyState imageFind="NoInoiceFound" imgHeight="imageHeight" />}
 				</Modal.Body>
 				<Modal.Footer>
 					<Button
