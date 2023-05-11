@@ -1,4 +1,5 @@
 import { Tooltip, Pill } from '@cogoport/components';
+import { IcMInformation } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import getFormattedAmount from '../common/helpers/formatAmount';
@@ -137,7 +138,10 @@ export const invoiceconfig = [
 							interactive
 							content={<p>{(row.remarks || []).join(' , ')}</p>}
 						>
-							<Pill size="sm" color="#FEF1DF">{purchaseType(row)}</Pill>
+							<Pill size="sm" color="#FEF1DF">
+								{purchaseType(row)}
+								<IcMInformation color="red" className={styles.icon} height={10} width={10} />
+							</Pill>
 						</Tooltip>
 					) : (
 						<Pill size="sm" color="#FEF1DF">{purchaseType(row)}</Pill>

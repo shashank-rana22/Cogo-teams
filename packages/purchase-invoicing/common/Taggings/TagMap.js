@@ -55,7 +55,7 @@ function TagMap({
 										selectedProforma={selectedProforma}
 										isNormalTab={isNormalTab}
 										activeTab={activeTab}
-										key={item.billId}
+										key={item?.billId}
 										isfirst
 									/>
 								</div>

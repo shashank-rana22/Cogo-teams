@@ -116,7 +116,7 @@ function KnockOffMode({
 
 								<div className={`${styles.top} ${styles.lineitem}`}>
 									{(item?.buy_line_items || []).map((li) => (
-										<div className={styles.lineitemwrap}>
+										<div className={styles.lineitemwrap} key={li?.code}>
 											{startCase(li?.service_type)}
 											{' '}
 											-
