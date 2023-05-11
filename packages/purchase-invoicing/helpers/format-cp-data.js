@@ -4,6 +4,8 @@ import { isEmpty } from '@cogoport/utils';
 import { BILL_MAPPINGS } from '../constants';
 import { formatDate } from '../utils/formatDate';
 
+const VERIFICATION_STATUS = ['pending', 'verified'];
+
 export const formatLineItems = (line_items, codes) => {
 	const newLineItems = (line_items || []).map((item) => {
 		const total = Number(item?.rate) * Number(item?.quantity || 1);
@@ -83,8 +85,16 @@ export const formatPurchaseLineItems = (line_items, codes) => {
 };
 
 const validatePincode = (pincode, context) => {
-	if (pincode?.length > 10) {
+	if (pincode?.length > 30) {
 		Toast.error(`Pincode Is Invalid For ${context}`);
+		return false;
+	}
+	return true;
+};
+
+const validateIfsc = (ifsc, context) => {
+	if (ifsc?.length > 30) {
+		Toast.error(`Ifsc Is Invalid For ${context}`);
 		return false;
 	}
 	return true;
@@ -101,6 +111,16 @@ export const validateData = (data, extraData) => {
 		...(collectionPartyObj?.other_addresses || []),
 	];
 
+	const bank_details = (collectionPartyObj.documents || []).filter(
+		(item) => item.document_type === 'bank_account_details'
+			&& VERIFICATION_STATUS.includes(item.verification_status)
+			&& item.status === 'active',
+	);
+
+	const bankDetails = (bank_details || []).find(
+		(item) => item?.data?.bank_account_number === collectionPartyObj?.selectedAccNo,
+	);
+
 	const collectionPartyBA = allBillingAddresses?.find(
 		(address) => address?.tax_number === formValues?.collection_party_address,
 	) || {};
@@ -108,6 +128,9 @@ export const validateData = (data, extraData) => {
 		return false;
 	}
 	if (!validatePincode(collectionPartyBA?.pincode?.toString(), 'Seller')) {
+		return false;
+	}
+	if (!validateIfsc(bankDetails?.data?.ifsc_number?.toString(), 'Seller')) {
 		return false;
 	}
 	return true;
@@ -284,7 +307,7 @@ export const formatCollectionPartyPayload = (data, extraData) => {
                     bankDetails?.data?.account_holder_name || bankDetails?.data.bank_name,
 				ifscCode          : bankDetails?.data?.ifsc_number,
 				accountNumber     : bankDetails?.data?.bank_account_number,
-				swiftCode         : bankDetails?.data.swift_code,
+				swiftCode         : bankDetails?.data.swift_number,
 				collectionPartyId : bankDetails?.organization_trade_party_id,
 				imageUrl          : bankDetails?.image_url,
 			},

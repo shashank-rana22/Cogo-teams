@@ -83,7 +83,7 @@ function KnockOffMode({
 	return (
 		<div className={styles.listcontainer}>
 			{(varianceData || []).map((item) => (
-				<div className={styles.box}>
+				<div className={styles.box} key={item}>
 					<div className={styles.flexcontainer}>
 						<div className={styles.invoiceswrap}>
 							<div className={styles.flexwrap}>

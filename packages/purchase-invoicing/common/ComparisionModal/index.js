@@ -73,7 +73,11 @@ function ComparisionModal({
 					billId={collectionPartyId?.billId}
 					setErrMszs={setErrMszs}
 					purchaseInvoiceValues={purchaseInvoiceValues}
-					onSubmit={(values, codes) => setPurchaseInvoiceValues({ ...values, codes })}
+					onSubmit={(values, codes) => setPurchaseInvoiceValues({
+						...values,
+						codes,
+						status: editData?.status,
+					})}
 					shipment_data={shipment_data}
 					onError={onError}
 					partyId={collectionPartyId?.partyId}

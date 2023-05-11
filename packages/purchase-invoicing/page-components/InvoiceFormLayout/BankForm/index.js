@@ -38,7 +38,7 @@ function BankForm({
 			const payload = getPayload({ values });
 
 			await createTrigger({ data: payload });
-			Toast.sucess('Bank Added Successfully');
+			Toast.success('Bank Added Successfully');
 			setShowBankForm(false);
 		} catch (error) {
 			toastApiError(error);

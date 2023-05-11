@@ -65,6 +65,7 @@ function LineItemDetails({
 								width : `${((field.span || 1) * (100 / 12))}px`,
 							}}
 							className={styles.fieldstyle}
+							key={field.key || field.label}
 						>
 							{field.label}
 						</div>
@@ -80,7 +81,7 @@ function LineItemDetails({
 										width : `${((field.span || 1) * (100 / 12))}px`,
 									}}
 									className={styles.value}
-									key={field?.name}
+									key={field.key || field.label}
 								>
 									{renderLineItemFunctions[field?.key]
 										? renderLineItemFunctions[field?.key]({

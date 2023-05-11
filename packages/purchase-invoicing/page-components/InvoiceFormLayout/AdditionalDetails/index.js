@@ -31,7 +31,7 @@ function AdditionalDetails({
 		});
 
 	return (
-		<AccordianView title="Additional Details" fullwidth showerror={errMszs.line_items} open={open}>
+		<AccordianView title="Additional Details" fullwidth showerror={errMszs.additional} open={open}>
 			<div className={styles.flex}>
 				<div className={styles.inputcontainer}>
 					<div className={styles.label}>Tax Invoice No :</div>

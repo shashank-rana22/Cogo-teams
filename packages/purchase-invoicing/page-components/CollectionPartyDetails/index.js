@@ -77,7 +77,7 @@ function CollectionPartyDetails({ collectionParty, refetch, servicesData }) {
 	const serviceswrapper = (allservices) => (
 		<>
 			{(allservices || []).map((ser, i) => (
-				<span>
+				<span key={ser}>
 					{startCase(ser)}
 					{' '}
 					{(services).length - 1 === i ? '' : ', '}

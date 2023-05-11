@@ -21,6 +21,7 @@ function PurchaseInvoicing({ shipmentData = {}, servicesData = [] }) {
 							collectionParty={collectionParty}
 							refetch={refetch}
 							servicesData={servicesData}
+							key={collectionParty.id}
 						/>
 					))}
 				</>

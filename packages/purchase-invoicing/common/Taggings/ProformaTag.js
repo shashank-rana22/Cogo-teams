@@ -44,7 +44,7 @@ export function ProformaTagCards({
 						{' '}
 						-
 					</div>
-					<span style={{ color: '#5936f0', marginTop: '-2px' }}>
+					<span className={styles.billnum}>
 						{item?.billNumber}
 					</span>
 				</div>

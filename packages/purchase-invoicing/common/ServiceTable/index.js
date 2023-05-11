@@ -63,6 +63,7 @@ function ServiceTables({
 											width : `${((field.span || 1) * (100 / 12))}px`,
 										}}
 										className={styles.fieldstyle}
+										key={field.key || field.label}
 									>
 										{field.label}
 									</div>

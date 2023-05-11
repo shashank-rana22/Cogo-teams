@@ -44,7 +44,7 @@ const useUpdateColletctionParty = ({ onClose }) => {
 				},
 			});
 			if (!res.hasError) {
-				Toast.success('Bill Updated SucessFully');
+				Toast.success('Bill Updated SuccessFully');
 				setLoading(false);
 				onClose();
 			}
