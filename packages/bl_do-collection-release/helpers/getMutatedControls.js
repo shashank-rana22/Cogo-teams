@@ -4,14 +4,14 @@ const statusMapping = {
 	collected   : 'release_pending',
 };
 const getMutatedControls = ({ item, stateProps, controls = [] }) => {
-	const { bill_of_ladings, do_documents	} = item || {};
+	const { bill_of_ladings, delivery_orders	} = item || {};
 	const blOptions = [];
 	const mutatedControls = [];
 
 	let docs;
 
 	if (stateProps.activeTab === 'do') {
-		docs = do_documents || [];
+		docs = delivery_orders || [];
 	} else {
 		docs = bill_of_ladings || [];
 	}

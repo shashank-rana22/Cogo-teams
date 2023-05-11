@@ -1,7 +1,5 @@
 .main_container {
 	display: flex;
-
-	/* min-height: 170px; */
 	padding: 12px;
 	margin: 8px 24px;
 	background: #fff;

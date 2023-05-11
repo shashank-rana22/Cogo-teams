@@ -94,6 +94,8 @@ export default function Invoices({
 								<Tooltip
 									animation="shift-away"
 									content={invoiceHover(invoice)}
+									className={styles.tooltip}
+									caret={false}
 								>
 									<div className={cl`${styles.text} ${styles.invoice_hover}`}>
 										{invoice?.invoice_no}
@@ -101,16 +103,17 @@ export default function Invoices({
 									</div>
 								</Tooltip>
 							))}
+
+							{remainLength ? (
+								<div className={styles.more_invoices}>
+									+
+									{remainLength}
+									{' '}
+									MORE
+								</div>
+							) : null}
 						</div>
 
-						{remainLength ? (
-							<div className={styles.more_invoices}>
-								+
-								{remainLength}
-								{' '}
-								MORE
-							</div>
-						) : null}
 					</div>
 				) : null}
 

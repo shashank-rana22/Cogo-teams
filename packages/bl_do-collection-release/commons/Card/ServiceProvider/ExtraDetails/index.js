@@ -28,10 +28,10 @@ const handleCopy = async (val) => {
 		.then(Toast.info('Copied Successfully !!', { autoClose: 1000 }));
 };
 
-export default function ExtraDetails({ activeTab = '', item = {} }) {
+export default function ExtraDetails({ stateProps = {}, item = {} }) {
 	let renderElem = '';
 
-	switch (activeTab) {
+	switch (stateProps.inner_tab) {
 		case 'knockoff_pending':
 		case 'collection_pending': {
 			renderElem = item?.leo_copy ? (
@@ -39,7 +39,7 @@ export default function ExtraDetails({ activeTab = '', item = {} }) {
 					<div className={cl`${styles.text} ${styles.thin}`}>LEO Copy</div>
 
 					<div className={cl`${styles.text} ${styles.bold}`}>
-						<div className={styles.link} download href={item.leo_copy}>
+						<a className={styles.link} download href={item.leo_copy}>
 							Download
 							<IcMDownload
 								style={{
@@ -49,7 +49,7 @@ export default function ExtraDetails({ activeTab = '', item = {} }) {
 									borderRadius : '50%',
 								}}
 							/>
-						</div>
+						</a>
 					</div>
 				</div>
 			) : null;
@@ -139,7 +139,7 @@ export default function ExtraDetails({ activeTab = '', item = {} }) {
 			const isSurrendered = (item?.status || []).includes('surrendered');
 
 			renderElem = (
-				<>
+				<div>
 					{isSurrendered ? (
 						<div className={styles.container}>
 							<div className={cl`${styles.text} ${styles.thin}`}>Mode of Delivery</div>
@@ -165,7 +165,7 @@ export default function ExtraDetails({ activeTab = '', item = {} }) {
 							) : null}
 						</div>
 					)}
-				</>
+				</div>
 			);
 			break;
 		}

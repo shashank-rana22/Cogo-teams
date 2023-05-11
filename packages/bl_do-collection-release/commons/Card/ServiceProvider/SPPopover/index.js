@@ -1,5 +1,6 @@
 import { cl, TabPanel, Tabs } from '@cogoport/components';
 import { IcMCall, IcMEmail } from '@cogoport/icons-react';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -10,6 +11,7 @@ function EmptyState() {
 }
 
 export default function ServcieProvider({ spDetails = [] }) {
+	const [tab, setTab] = useState('name');
 	const detailsArr = {
 		names  : [],
 		phones : [],
@@ -73,19 +75,27 @@ export default function ServcieProvider({ spDetails = [] }) {
 		))
 	);
 
+	const renderData = () => {
+		if (tab === 'name') {
+			return <div>{names}</div>;
+		}
+		if (tab === 'email') {
+			return <div>{emails}</div>;
+		}
+
+		return <div>{phones}</div>;
+	};
+
 	return (
 		<div className={cl`${styles.container} ${styles.tab_container}`}>
-			<Tabs defaultActiveTab="name" className="horizontal three">
-				<TabPanel name="name" title="Name" className="horizontal three">
-					<div className={styles.container}>{names}</div>
-				</TabPanel>
-				<TabPanel name="phone" title="Phone" className="horizontal three">
-					{phones}
-				</TabPanel>
-				<TabPanel name="email" title="Email ID" className="horizontal three">
-					{emails}
-				</TabPanel>
+			<Tabs onChange={(val) => setTab(val)}>
+				<TabPanel name="name" title="Name" />
+				<TabPanel name="phone" title="Phone" />
+				<TabPanel name="email" title="Email ID" />
 			</Tabs>
+			<div>
+				{renderData()}
+			</div>
 		</div>
 	);
 }

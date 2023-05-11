@@ -11,22 +11,22 @@ export default function LocaionDetails({ item = {}, stateProps = {} }) {
 		<div className={styles.container}>
 			<div className={styles.col}>
 				<div className={styles.left}>
-					<div className={styles.grey}>POL</div>
+					<div className={styles.grey}>{isFclLocal && item?.trade_type === 'import' ? 'POD' : 'POL'}</div>
 					<Tooltip
 						animation="shift-away"
 						content={
-							isFclLocal ? 'adsad' : item?.freight_service?.origin_port?.display_name
+							isFclLocal ? item.port?.display_name : item.freight_service?.origin_port?.display_name
 						}
 					>
 						<div className={cl`${styles.port_code} ${styles.primary} ${styles.sm}`}>
-							{isFclLocal ? item?.port?.port_code : item?.freight_service?.origin_port?.port_code}
+							{isFclLocal ? item?.port?.port_code : item.freight_service?.origin_port?.port_code}
 						</div>
 					</Tooltip>
 				</div>
 				<div className={styles.right}>
 					<div className={styles.grey}>ETD</div>
 					{formatDate({
-						date       : item?.freight_service?.schedule_departure,
+						date       : item.freight_service?.schedule_departure,
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 						formatType : 'date',
 					})}
@@ -34,24 +34,25 @@ export default function LocaionDetails({ item = {}, stateProps = {} }) {
 				</div>
 			</div>
 			<div className={styles.col}>
-				<div className={styles.left}>
-					<div className={styles.grey}>POD</div>
-					<Tooltip
-						animation="shift-away"
-						content={
-							isFclLocal ? 'adsad' : item?.freight_service?.destination_port?.display_name
-						}
-					>
-						<div className={cl`${styles.port_code} ${styles.primary} ${styles.sm}`}>
-							{isFclLocal ? item?.port?.port_code : item?.freight_service?.destination_port?.port_code}
-						</div>
-					</Tooltip>
+				{!isFclLocal
+					? (
+						<div className={styles.left}>
+							<div className={styles.grey}>POD</div>
+							<Tooltip
+								animation="shift-away"
+								content={item.freight_service?.destination_port?.display_name}
+							>
+								<div className={cl`${styles.port_code} ${styles.primary} ${styles.sm}`}>
+									{item.freight_service?.destination_port?.port_code}
+								</div>
+							</Tooltip>
 
-				</div>
+						</div>
+					) : null}
 				<div className={styles.right}>
 					<div className={styles.grey}>ETA</div>
 					{formatDate({
-						date       : item?.freight_service?.schedule_arrival,
+						date       : item.freight_service?.schedule_arrival,
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 						formatType : 'date',
 					})}

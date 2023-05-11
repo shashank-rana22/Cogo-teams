@@ -32,6 +32,18 @@
 	padding: 16px;
 }
 
+.lower_left {
+	width: 40%;
+	padding: 8px 16px 8px 8px;
+}
+
+.lower_right {
+	width: 60%;
+	display: flex;
+	justify-content: space-around;
+	padding: 16px;
+}
+
 .details {
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -41,4 +53,8 @@
 .tooltip_container {
 	color: var(--color-accent-orange-2);
 	text-decoration: underline;
+}
+
+.tooltip{
+	max-width: none !important;
 }

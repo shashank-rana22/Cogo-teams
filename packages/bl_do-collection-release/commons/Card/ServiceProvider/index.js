@@ -1,54 +1,17 @@
-import { cl, Popover, Tooltip } from '@cogoport/components';
-import { IcMUserAllocations } from '@cogoport/icons-react';
+import { cl, Tooltip } from '@cogoport/components';
 
 import BLPopver from './BLPopover';
 import ExtraDetails from './ExtraDetails';
 import SPPopver from './SPPopover';
 import styles from './styles.module.css';
 
-const styleIcon = {
-	marginLeft    : 4,
-	height        : 20,
-	width         : 20,
-	verticalAlign : 'middle',
-};
-
 export default function ServiceProvider({ item = {}, stateProps = {} }) {
-	const getDocs = (ele) => {
-		let doc;
-		if (
-			['knockoff_pending', 'collection_pending', 'under_collection'].includes(
-				stateProps.inner_tab,
-			)
-			&& ele?.trade_type === 'import'
-		) {
-			doc = ele?.import_bl_details;
-		} else {
-			doc =				ele?.trade_type === 'export'
-				? ele?.export_bl_details
-				: ele?.do_documents;
-		}
-		return doc;
-	};
-
-	const list_of_docs = getDocs(item);
-	const docsLength = list_of_docs?.length;
+	const docs = stateProps.activeTab === 'bl' ? item.bill_of_ladings : item.delivery_orders;
+	const docsLength = docs?.length || 0;
 	const remainLength = docsLength > 1 ? docsLength - 1 : 0;
-	const doc_number = (['knockoff_pending', 'collection_pending', 'under_collection'].includes(
-		stateProps.inner_tab,
-	)
-			&& item?.trade_type === 'import')
-		|| item?.trade_type === 'export'
-		? list_of_docs?.[0]?.bl_number
-		: list_of_docs?.[0]?.do_number;
-
-	const docTitle =		item?.trade_type === 'export'
-		|| (item?.trade_type === 'import'
-			&& ['knockoff_pending', 'collection_pending', 'under_collection'].includes(
-				stateProps.inner_tab,
-			))
-		? 'BL'
-		: 'DO';
+	const doc_number = stateProps.activeTab === 'bl'
+		? docs?.[0]?.bl_number
+		: docs?.[0]?.do_number;
 
 	return (
 		<div className={styles.container}>
@@ -79,8 +42,8 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 					<div className={styles.grey}>Service Provider Contact</div>
 					<div className={styles.details}>
 						<Tooltip
-							animation="shift-away"
-							interactive
+							className={styles.tooltip}
+							caret={false}
 							content={(
 								<SPPopver
 									spDetails={item?.pocs}
@@ -94,7 +57,7 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 				</div>
 			</div>
 			<div className={styles.col}>
-				<div className={styles.left}>
+				<div className={styles.lower_left}>
 					<div className={styles.grey}>
 						Customer
 					</div>
@@ -102,21 +65,47 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 						{item?.customer?.business_name}
 					</div>
 				</div>
-				<div className={styles.right}>
-					<div className={styles.grey}>
-						{stateProps.activeTab.toUpperCase()}
-						{' '}
-						Details
+				<div className={styles.lower_right}>
+					<div>
+						<div className={styles.grey}>
+							{stateProps.activeTab.toUpperCase()}
+							{' '}
+							Details
+						</div>
+						{docsLength > 0 ? (
+							<div className={cl`${styles.details} ${styles.service_provider_details}`}>
+								<Tooltip
+									placement="top"
+									caret={false}
+									content={(<BLPopver blDetails={item?.bill_of_ladings} bl_do={stateProps.activeTab} />
+									)}
+								>
+									<div className={styles.tooltip_container}>
+										{doc_number}
+										{' '}
+										{remainLength ? (
+											<div>
+												{remainLength}
+												{' '}
+												+ More
+												{' '}
+											</div>
+										) : null}
+									</div>
+								</Tooltip>
+							</div>
+						) : (
+							<div>
+								No
+								{' '}
+								{stateProps.activeTab.toUpperCase()}
+								{' '}
+								documents found
+							</div>
+						)}
 					</div>
-					<div className={cl`${styles.details} ${styles.service_provider_details}`}>
-						<Tooltip
-							placement="top"
-							caret={false}
-							content={(<BLPopver blDetails={item?.bill_of_ladings} bl_do={stateProps.activeTab} />
-							)}
-						>
-							<div className={styles.tooltip_container}>Details</div>
-						</Tooltip>
+					<div>
+						<ExtraDetails stateProps={stateProps} item={item} />
 					</div>
 				</div>
 			</div>

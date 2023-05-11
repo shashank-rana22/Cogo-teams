@@ -61,7 +61,7 @@
 		text-transform: capitalize;
 	}
 
-	&.margin-left {
+	&.margin_left {
 		margin-left: 10px;
 	}
 
@@ -108,6 +108,7 @@
 
 .more_invoices {
 	padding: 4px;
+	width: 60px;
 	margin-left: 8px;
 	font-size: 12px;
 	font-weight: 500;
@@ -122,4 +123,8 @@
 	align-items: center;
 	color: #034afd;
 	cursor: pointer;
+}
+
+.tooltip{
+	max-width: none !important;
 }
