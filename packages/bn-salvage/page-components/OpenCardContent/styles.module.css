@@ -17,3 +17,13 @@
 .booking_no {
     color: #F68B21;
 }
+
+.btn_container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2em;
+
+    > button:not(:last-of-type) {
+        margin-right: 10px;
+    }
+}

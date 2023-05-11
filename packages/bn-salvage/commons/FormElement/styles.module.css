@@ -1,0 +1,19 @@
+.form_element {
+	.label {
+		margin-bottom: 10px;
+		font-weight: 600;
+	}
+
+	.error_msg {
+		font-size: var(--font-size-md);
+		color: var(--color-primary-error-red-2);
+	}
+
+	&:not(:last-of-type) {
+		margin-bottom: 10px;
+	}
+}
+
+div.form_element.currency_input {
+	width: 30%;
+}

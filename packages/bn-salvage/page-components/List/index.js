@@ -1,15 +1,13 @@
 import { Pagination, Loader } from '@cogoport/components';
 import { useState } from 'react';
 
-import useListBookingDocuments from '../../hooks/useListBookingDocuments';
+import EmptyState from '../../commons/EmptyState';
 import Card from '../Card';
-import EmptyState from '../EmptyState';
 
 import ListHeader from './ListHeader';
 import styles from './styles.module.css';
 
-export default function List({ filters, setFilters, activeTab }) {
-	const { data, loading } = useListBookingDocuments({ filters, activeTab });
+export default function List({ filters, setFilters, data, loading, refetchList }) {
 	const { list, total_count } = data || {};
 
 	const [openItem, setOpenItem] = useState(null);
@@ -47,6 +45,7 @@ export default function List({ filters, setFilters, activeTab }) {
 							item={item}
 							openItem={openItem}
 							setOpenItem={setOpenItem}
+							refetchList={refetchList}
 						/>
 					))}
 				</tbody>

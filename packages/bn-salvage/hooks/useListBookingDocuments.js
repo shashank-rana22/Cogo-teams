@@ -1,8 +1,8 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
 import getListBookingDeskShipmentsPayload from '../helpers/getListBookingDocumentsPayload';
+import toastApiError from '../utils/toastApiError';
 
 const emptyData = { list: [], total_count: 0, total_page: 0 };
 
@@ -22,11 +22,7 @@ export default function useListBookingDocuments({ filters, activeTab }) {
 
 			setData(res.data || {});
 		} catch (err) {
-			const message = err?.response?.data?.message
-				|| err?.message
-				|| 'Something went wrong !!';
-
-			if (message !== 'canceled') { Toast.error(message); }
+			toastApiError(err);
 			setData(emptyData);
 		}
 	}, [filters, activeTab, trigger]);
@@ -42,6 +38,6 @@ export default function useListBookingDocuments({ filters, activeTab }) {
 			total_page  : data.total || 0,
 		},
 		loading,
-		refetch: fetchList,
+		refetchList: fetchList,
 	};
 }

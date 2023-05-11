@@ -3,16 +3,18 @@ import { IcMUpload } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import tabs from '../config/tabs.json';
+import useListBookingDocuments from '../hooks/useListBookingDocuments';
 
 import Filters from './Filters';
 import List from './List';
-// import styles from './styles.module.css';
 import Tabs from './Tabs';
 import UploadBN from './UploadBN';
 
 export default function BNSalvage() {
 	const [activeTab, setActiveTab] = useState(tabs[0].name);
 	const [filters, setFilters] = useState({ page: 1 });
+
+	const { data, loading, refetchList } = useListBookingDocuments({ filters, activeTab });
 
 	const [showModal, setShowModal] = useState(false);
 
@@ -30,9 +32,9 @@ export default function BNSalvage() {
 				</Button>
 			</Filters>
 
-			<List filters={filters} setFilters={setFilters} activeTab={activeTab} />
+			<List filters={filters} setFilters={setFilters} data={data} loading={loading} refetchList={refetchList} />
 
-			{showModal ? <UploadBN setShow={setShowModal} /> : null}
+			{showModal ? <UploadBN setShow={setShowModal} refetchList={refetchList} /> : null}
 		</div>
 	);
 }
