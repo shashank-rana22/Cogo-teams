@@ -37,8 +37,10 @@ function TagMap({
 			{!loading ? (
 				<>
 					{(allTaggingMaps).map((type) => (
-						<div className={`${styles.flex} 
+						<div
+							className={`${styles.flex} 
 					${styles.column} ${type === 'merge' ? styles.merge : ''}`}
+							key={type}
 						>
 							{ (
 								mappingsData?.[type] || []
