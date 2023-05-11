@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 import List from '../../commons/List';
+import EmptyState from '../../commons/StyledTable/EmptyState';
 
 import { ADVANCE_CONFIG } from './Columns/advanceConfig';
-import EmptyState from './common/EmptyState';
 import useGetAdvancePaymentList from './hooks/useGetAdvancePaymentList';
 import AmountWithCurrency from './renderFunction/AmountWithCurrency';
 import ApprovedBy from './renderFunction/ApprovedBy';
@@ -107,7 +107,7 @@ function AdvancePayment({ activeEntity }:ItemProps) {
 							showPagination
 						/>
 					)
-					:				<EmptyState />}
+					:				<EmptyState imageFind="NoInoiceFound" imgHeight="imageHeight" />}
 			</div>
 		</div>
 	);

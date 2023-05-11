@@ -5,9 +5,9 @@ import { Link } from '@cogoport/next';
 import React, { useEffect, useState } from 'react';
 
 import List from '../../../commons/List';
+import EmptyState from '../../../commons/StyledTable/EmptyState';
 import { CREATE_NEW_PAYRUN_CONFIG } from '../Columns/createNewPayRunConfig';
 import { VIEW_SELECTED_CONFIG } from '../Columns/viewSelectedConfig';
-import EmptyState from '../common/EmptyState';
 import useGetAdvancePaymentList from '../hooks/useGetAdvancePaymentList';
 import useGetCreatePayRunType from '../hooks/useGetCreatePayRunType';
 import AmountWithCurrency from '../renderFunction/AmountWithCurrency';
@@ -243,7 +243,7 @@ function CreateNewPayRun() {
 						/>
 					)
 
-						:					<EmptyState />}
+						:					<EmptyState imageFind="NoInoiceFound" imgHeight="imageHeight" />}
 				</div>
 				<Footer
 					apiData={apiData}

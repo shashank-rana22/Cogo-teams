@@ -39,7 +39,7 @@ function AccountPayables() {
 
 	const [activeEntity, setActiveEntity] = useState(entity);
 
-	const EntityOptions = (entityData || [])?.map((item:ItemProps) => {
+	const EntityOptions = (entityData || []).map((item:ItemProps) => {
 		const { business_name:companyName = '', entity_code:entityCode = '' } = item || {};
 
 		return {

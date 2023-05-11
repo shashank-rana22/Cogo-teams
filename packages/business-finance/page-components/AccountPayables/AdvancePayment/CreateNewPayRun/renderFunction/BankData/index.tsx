@@ -17,7 +17,7 @@ interface ItemProps {
 }
 
 const BANK_NAME_LENGTH = 20;
-
+const BANK_NAME_ECLPSIS = 20;
 function BankData({ itemData }:ItemProps) {
 	const { advanceDocumentSellerBankDetail } = itemData || {};
 	const { accountNumber = '', bankName = '', ifscCode = '' } = advanceDocumentSellerBankDetail || {};
@@ -36,7 +36,7 @@ function BankData({ itemData }:ItemProps) {
 
 								{`${(bankName).substring(
 									0,
-									BANK_NAME_LENGTH,
+									BANK_NAME_ECLPSIS,
 								)}...`}
 
 							</text>

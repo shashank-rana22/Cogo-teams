@@ -11,6 +11,12 @@ type IconProps = {
 };
 
   type IconType = ComponentType<IconProps>;
+interface Mapping {
+	[key: string]: IconType | undefined;
+}
+
+  type ContentMapping = (args: { width: number;height: number;mapping: Mapping;
+  }) => Record<string, JSX.Element>;
 
 const CURRENCY_ICON_MAPPING = {
 	[GLOBAL_CONSTANTS.currency_code.INR] : IcMFrupee,
@@ -20,9 +26,9 @@ const CURRENCY_ICON_MAPPING = {
 	[GLOBAL_CONSTANTS.currency_code.EUR] : IcMFeuro,
 	[GLOBAL_CONSTANTS.currency_code.VND] : IcMFdong,
 };
-const getContentMapping = ({ width, height, mapping }:
-{ width: number; height: number;
-	mapping: Record<string, IconType | undefined> }) => Object.entries(mapping).reduce((pv, [key, Icon]) => ({
+
+const getContentMapping:
+ContentMapping = ({ width, height, mapping }) => Object.entries(mapping).reduce((pv, [key, Icon]) => ({
 	...pv,
 	...(Icon && {
 		[key]: <Icon width={width} height={height} />,

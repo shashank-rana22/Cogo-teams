@@ -23,7 +23,7 @@ function RequestedBy({ itemData }:PropsType) {
 			<div className={styles.date}>
 				On
 				{' '}
-				{format(requestedAt, 'hh:mm a, dd MMM yyyy')}
+				{format(requestedAt, 'hh:mm a, dd MMM yyyy', {}, false)}
 			</div>
 		</div>
 	);

@@ -23,7 +23,7 @@ function ApprovedBy({ itemData }:PropsType) {
 			<div className={styles.date}>
 				On
 				{' '}
-				{format(approvedAt, 'hh:mm a, dd MMM yyyy')}
+				{format(approvedAt, 'hh:mm a, dd MMM yyyy', {}, false)}
 			</div>
 		</div>
 	);

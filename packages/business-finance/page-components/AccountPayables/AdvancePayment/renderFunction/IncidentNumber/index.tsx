@@ -13,7 +13,7 @@ function IncidentNumber({ itemData }:PropsType) {
 	return (
 		<div className={styles.text}>
 			#
-			{incidentRefNo}
+			{incidentRefNo || '-'}
 		</div>
 	);
 }

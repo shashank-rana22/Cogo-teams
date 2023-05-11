@@ -280,7 +280,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 		const { list:dataList = [] } = data || {};
 		const isCheckedLength = list.filter(
 			(value) => value?.checked,
-		)?.length;
+		).length;
 		const isAllRowsChecked = isCheckedLength === dataList.length;
 		return (
 			<div className={styles.checkbox_style}>
