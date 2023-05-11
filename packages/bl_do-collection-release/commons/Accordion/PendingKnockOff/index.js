@@ -22,7 +22,6 @@ function PendingKnockOff({
 	taskLoading = false,
 }) {
 	const [tab, setTab] = useState('invoice');
-	console.log('tab', tab);
 	const list_of_invoices = item?.invoice_data || [];
 
 	const tableData = getTableFormatedData(list_of_invoices);
