@@ -51,7 +51,7 @@ function AmountWithCurrency({ item, field }: PropsType) {
 							{' '}
 							{showOverflowingNumber(formatAmount, 12)}
 						</div>
-						<Tooltip placement="top" content={content}>
+						<Tooltip placement="top" content={content} interactive>
 							<div className={styles.ic_min_icon}>
 								<IcMInfo width="16px" height="16px" />
 							</div>
