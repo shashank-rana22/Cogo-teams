@@ -53,6 +53,7 @@ import {
 	IcMCreditRequest,
 	IcCCogoassured, IcMOverview,
 	IcMFaq,
+	IcMActivePlans,
 	IcMExportfile,
 } from '@cogoport/icons-react';
 
@@ -1267,15 +1268,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
-				key           : 'coe-bl_do',
-				title         : 'Authority Desk',
-				href          : '/bl-do',
-				as            : '/bl-do',
-				type          : 'link',
-				main_apis     : ['list_shipments'],
+				key       : 'coe-bl_do',
+				title     : 'Authority Desk',
+				href      : '/bl-do',
+				as        : '/bl-do',
+				type      : 'link',
+				main_apis : ['list_authority_desk_bl_documents',
+					'list_authority_desk_do_documents', 'list_shipments'],
 				module_type   : 'dashboards',
 				possible_apis : [...apis.bl_do, ...apis.sop, ...apis.poc],
 
@@ -1358,8 +1359,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-document_desk',
 				title         : 'Document Desk',
-				href          : '/document-desk',
-				as            : '/document-desk',
+				href          : '/v2/document-desk',
+				as            : '/v2/document-desk',
 				type          : 'link',
 				main_apis     : ['list_document_desk_shipments'],
 				possible_apis : [...apis.document_desk, ...apis.cogolens],
@@ -1371,7 +1372,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/last-mile',
 				type          : 'link',
 				main_apis     : ['list_lastmile_desk_shipments'],
-				possible_apis : [...apis.document_desk, ...apis.cogolens],
+				possible_apis : [...apis.document_desk, ...apis.cogolens, ...apis.shipment],
 			},
 		],
 	},
@@ -1799,6 +1800,13 @@ const navigationMappingAdmin = {
 				as            : '/v2/allocation/crm-feedback-dashboard',
 				possible_apis : apis.crm_feedback_dashboard,
 			},
+			{
+				key           : 'allocations-account_scoring',
+				title         : 'Account Scoring',
+				href          : '/v2/allocation/account-scoring',
+				as            : '/v2/allocation/account-scoring',
+				possible_apis : apis.account_scoring,
+			},
 		],
 	},
 	kam_monitoring: {
@@ -2200,6 +2208,33 @@ const navigationMappingAdmin = {
 				icon          : IcMDataPipeline,
 			},
 		],
+	},
+	saas_tools: {
+		key       : 'saas_tools',
+		title     : 'Saas Tools',
+		icon      : IcMTechops,
+		isSubNavs : true,
+		main_apis : [],
+		options   : [
+			{
+				key           : 'saas_tools-standard_milestones',
+				title         : 'Standard Milestones',
+				href          : '/v2/saas-tools/standard-milestones',
+				as            : '/v2/saas-tools/standard-milestones',
+				possible_apis : apis.saas_tools_standard_milestones,
+			},
+		],
+	},
+	ingestion: {
+		key           : 'ingestion',
+		title         : 'Ingestion',
+		isSubNavs     : false,
+		module_type   : 'dashboards',
+		main_apis     : ['list_ingestion_requests'],
+		href          : '/v2/ingestion',
+		as            : '/v2/ingestion',
+		possible_apis : apis.ingestion,
+		icon          : IcMActivePlans,
 	},
 };
 

@@ -1,5 +1,5 @@
 import { startCase } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 const getFclFreightUpdateData = ({
 	values = {},
@@ -69,7 +69,7 @@ const useGenerateAndSubmitCertificate = ({
 	generateCertificate = () => {},
 
 }) => {
-	const commodityTypes = [...new Set(Object.values(commodityValues))];
+	const commodityTypes = useMemo(() => [...new Set(Object.values(commodityValues))], [commodityValues]);
 
 	useEffect(() => {
 		const freightDeclaration = [];
@@ -82,9 +82,7 @@ const useGenerateAndSubmitCertificate = ({
 		});
 
 		setValue('freight_declaration', freightDeclaration);
-
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(commodityTypes)]);
+	}, [setValue, commodityTypes]);
 
 	const onSubmit = async (values) => {
 		let data = {};
@@ -98,7 +96,7 @@ const useGenerateAndSubmitCertificate = ({
 
 		const res = await generateCertificate(data);
 
-		if (!res?.hasError) {
+		if (res.status === 200) {
 			const resTask = await updateTask({
 				id   : task?.id,
 				data : {
@@ -106,7 +104,7 @@ const useGenerateAndSubmitCertificate = ({
 				},
 			});
 
-			if (!resTask?.hasError) {
+			if (resTask.status === 200) {
 				onCancel();
 				refetch();
 			}
