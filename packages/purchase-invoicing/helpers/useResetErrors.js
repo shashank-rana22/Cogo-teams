@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 
 const useResetErrors = ({ errors, currentStateErrors, setErrors }) => {
@@ -10,6 +9,7 @@ const useResetErrors = ({ errors, currentStateErrors, setErrors }) => {
 			}
 		});
 		setErrors({ ...errors });
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(currentStateErrors)]);
 };
 

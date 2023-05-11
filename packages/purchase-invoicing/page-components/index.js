@@ -5,7 +5,7 @@ import useGetCollectionParty from '../hooks/useGetCollectionPartylist';
 import CollectionPartyDetails from './CollectionPartyDetails';
 import Loader from './CollectionPartyDetails/Loader';
 
-function PurchaseInvoicing({ shipmentData, servicesData }) {
+function PurchaseInvoicing({ shipmentData = {}, servicesData = [] }) {
 	const {
 		collectionPartyList, collectionPartyLoading,
 		refetch,

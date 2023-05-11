@@ -5,7 +5,13 @@ import { renderFunction } from '../../configurations/serviceconfig';
 
 import styles from './styles.module.css';
 
-function SingleColumn({ lineitem, fields, ismappings, renderCheck, mappingtable }) {
+function SingleColumn({
+	lineitem,
+	fields,
+	ismappings,
+	renderCheck,
+	mappingtable,
+}) {
 	const renderMethod = ismappings ? renderMappingsFunction(renderCheck) : renderFunction;
 	return (
 		<div className={styles.tablecolumn}>

@@ -4,7 +4,13 @@ import Accordion from '../Accordion';
 
 import styles from './styles.module.css';
 
-function AccordianView({ title, open, children, fullwidth, showerror }) {
+function AccordianView({
+	title,
+	open,
+	children,
+	fullwidth,
+	showerror,
+}) {
 	const getclass = fullwidth ? styles.fullwidth : styles.accordianContainer;
 	return (
 		<div className={`${getclass}`}>

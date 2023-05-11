@@ -8,7 +8,12 @@ import invoiceconfiguration from '../../configurations/invoicetableconfig';
 
 import styles from './styles.module.css';
 
-function InvoicesUploaded({ invoicesdata, collectionParty, setOpenComparision, setStep }) {
+function InvoicesUploaded({
+	invoicesdata = {},
+	collectionParty = {},
+	setOpenComparision = () => {},
+	setStep = () => {},
+}) {
 	const titleCard = <div>Invoice List & Tagging</div>;
 	const [activeTab, setActiveTab] = useState('uploaded_invoices');
 

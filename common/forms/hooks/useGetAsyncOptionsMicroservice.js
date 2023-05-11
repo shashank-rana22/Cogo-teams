@@ -17,7 +17,6 @@ function useGetAsyncOptionsMicroservice({
 	params = {},
 	authkey = '',
 	microService = '',
-	onOptionsChange,
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
 	const [storeoptions, setstoreoptions] = useState([]);
@@ -34,7 +33,7 @@ function useGetAsyncOptionsMicroservice({
 
 	const optionValues = options.map((item) => item[valueKey]);
 
-	const [{ data: listData, loading: loadingSingle }, triggerSingle] = useRequestMicroservice({
+	const [{ loading: loadingSingle }, triggerSingle] = useRequestMicroservice({
 		url    : endpoint,
 		method : 'GET',
 		authkey,
@@ -44,13 +43,6 @@ function useGetAsyncOptionsMicroservice({
 		setstoreoptions(storeoptions);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(optionValues)]);
-
-	useEffect(() => {
-		if (onOptionsChange) {
-			onOptionsChange(listData?.list || []);
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [listData?.list]);
 
 	const onSearch = (inputValue) => {
 		debounceQuery(inputValue);

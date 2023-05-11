@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Modal, Button } from '@cogoport/components';
 import React, { useState, useRef } from 'react';
 
@@ -13,11 +12,11 @@ import styles from './styles.module.css';
 function Step1({
 	contentText,
 	uploadInvoiceUrl,
-	serviceProvider,
+	serviceProvider = {},
 	errors,
 	setErrors,
 	setBillingParty,
-	billingParty,
+	billingParty = {},
 	errMszs,
 	setUploadInvoiceUrl,
 	setStep,
@@ -28,10 +27,10 @@ function Step1({
 	purchaseInvoiceValues,
 	onError,
 	partyId,
-	collectionParty,
+	collectionParty = {},
 	setCollectionParty,
 	closeModal,
-	editData,
+	editData = {},
 }) {
 	const [confirmation, setConfirmation] = useState(null);
 

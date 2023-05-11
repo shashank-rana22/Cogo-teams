@@ -13,8 +13,8 @@ import toastApiError from '../../utils/toastApiError';
 import styles from './styles.module.css';
 
 function ExchangeRateModal({
-	exchangeRateModal,
-	setExchangeRateModal,
+	exchangeRateModal = false,
+	setExchangeRateModal = () => {},
 	handleFinalSubmit,
 	billId,
 	loading,

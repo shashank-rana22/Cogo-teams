@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 
 import useUpdateColletctionParty from '../hooks/useUpdateCollectionParty';
@@ -12,8 +11,8 @@ const useHandleFinalSave = ({
 	billId = '',
 	onClose = () => { },
 	editData = {},
-	setGlobalSelected,
-	globalSelected,
+	setGlobalSelected = () => {},
+	globalSelected = {},
 }) => {
 	const isLockedMode = ['approval_pending', 'coe_approved'].includes(
 		editData.status,
@@ -88,6 +87,7 @@ const useHandleFinalSave = ({
 				},
 			});
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const handleFinalSubmit = async (values) => {

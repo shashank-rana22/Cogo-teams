@@ -1,7 +1,10 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import React from 'react';
 
-function Segmented({ setBillCatogory, billCatogory }) {
+function Segmented({
+	setBillCatogory,
+	billCatogory,
+}) {
 	return (
 		<div style={{ marginTop: 10 }}>
 			<Tabs

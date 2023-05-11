@@ -5,7 +5,10 @@ import { useEffect } from 'react';
 
 const geo = getGeoConstants();
 
-const useGetTradeParty = ({ shipment_id = '', shipment_data = {} }) => {
+const useGetTradeParty = ({
+	shipment_id = '',
+	shipment_data = {},
+}) => {
 	const { query } = useSelector(({ general }) => ({
 		query: general?.query,
 	}));

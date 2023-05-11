@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
@@ -50,6 +49,7 @@ const useCalculateTotalPrice = ({ baseCurrency, lineItems, chargeCodes }) => {
 		if (baseCurrency) {
 			getExchangeRates();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [baseCurrency]);
 
 	return calculatedValues;

@@ -7,7 +7,12 @@ import toastApiError from '../../../utils/toastApiError';
 
 import styles from './styles.module.css';
 
-function BankForm({ showBankform, setShowBankForm, orgResponse, tradePartyId }) {
+function BankForm({
+	showBankform = false,
+	setShowBankForm,
+	orgResponse,
+	tradePartyId,
+}) {
 	const { control, handleSubmit, formState: { errors }, watch, setValues } = useForm();
 
 	const [{ loading:createloading }, createTrigger] = useRequest({

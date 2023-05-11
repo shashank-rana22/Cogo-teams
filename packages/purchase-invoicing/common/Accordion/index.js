@@ -3,7 +3,12 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function Accordion({ title, children, open = false, showerror }) {
+function Accordion({
+	title,
+	children,
+	open = false,
+	showerror,
+}) {
 	const [active, setActive] = useState(open);
 
 	function toggleActive() {

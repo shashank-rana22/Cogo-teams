@@ -11,17 +11,17 @@ import styles from './styles.module.css';
 function CollectionPartyDetails({
 	control,
 	collectionParty = {},
-	setCollectionParty,
+	setCollectionParty = () => {},
 	setValue,
 	watch,
-	serviceProvider,
-	collectionPartyAddresses,
+	serviceProvider = {},
+	collectionPartyAddresses = [],
 	errors,
 	errMszs,
-	purchaseInvoiceValues,
+	purchaseInvoiceValues = {},
 	open,
-	setShowCollectionParty,
-	setShowBankForm,
+	setShowCollectionParty = () => {},
+	setShowBankForm = () => {},
 	formValues,
 }) {
 	const organization_id = serviceProvider?.service_provider_id;

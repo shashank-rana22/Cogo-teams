@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Placeholder } from '@cogoport/components';
 import { SelectController } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';

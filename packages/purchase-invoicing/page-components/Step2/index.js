@@ -12,10 +12,10 @@ import styles from './styles.module.css';
 
 function Step2({
 	contentText,
-	purchaseInvoiceValues,
-	serviceProvider,
+	purchaseInvoiceValues = {},
+	serviceProvider = {},
 	setExchangeRateModal,
-	billingPartyObj,
+	billingPartyObj = {},
 	collectionPartyObj,
 	editData = {},
 	setStep,

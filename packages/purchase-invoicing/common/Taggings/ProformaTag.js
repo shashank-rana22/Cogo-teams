@@ -7,10 +7,10 @@ import getFormattedAmount from '../helpers/formatAmount';
 import styles from './styles.module.css';
 
 export function ProformaTagCards({
-	item,
+	item = {},
 	classname,
-	showCheckBox,
-	isChecked,
+	showCheckBox = false,
+	isChecked = false,
 	activeTab,
 	setSelectedProforma,
 	selectedProforma,

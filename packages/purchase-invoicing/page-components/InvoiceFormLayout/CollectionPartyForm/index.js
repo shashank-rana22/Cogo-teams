@@ -10,7 +10,11 @@ import useAddCollectionParty from '../../../hooks/useAddCollectionParty';
 import PocForm from './PocForm';
 import styles from './styles.module.css';
 
-function CollectionPartyForm({ showCollectionParty = false, setShowCollectionParty, serviceProvider }) {
+function CollectionPartyForm({
+	showCollectionParty = false,
+	setShowCollectionParty,
+	serviceProvider,
+}) {
 	const {
 		handleSubmit,
 		onError,

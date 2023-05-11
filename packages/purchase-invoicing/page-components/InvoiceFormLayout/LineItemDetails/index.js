@@ -12,9 +12,9 @@ import styles from './styles.module.css';
 function LineItemDetails({
 	control,
 	watch,
-	serviceProvider,
-	collectionParty,
-	collectionPartyAddresses,
+	serviceProvider = {},
+	collectionParty = {},
+	collectionPartyAddresses = [],
 	billingParty,
 	setCodes,
 	calculatedValues,

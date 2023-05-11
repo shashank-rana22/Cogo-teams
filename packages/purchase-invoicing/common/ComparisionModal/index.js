@@ -9,15 +9,15 @@ import Step2 from '../../page-components/Step2';
 import styles from './styles.module.css';
 
 function ComparisionModal({
-	uploadInvoiceUrl,
-	setUploadInvoiceUrl,
-	serviceProvider,
+	uploadInvoiceUrl = '',
+	setUploadInvoiceUrl = () => {},
+	serviceProvider = {},
 	editData = {},
-	openComparision,
-	setOpenComparision,
-	step,
-	setStep,
-	onClose,
+	openComparision = false,
+	setOpenComparision = () => { },
+	step = 1,
+	setStep = () => { },
+	onClose = () => { },
 }) {
 	const [purchaseInvoiceValues, setPurchaseInvoiceValues] = useState(getEditData(editData));
 

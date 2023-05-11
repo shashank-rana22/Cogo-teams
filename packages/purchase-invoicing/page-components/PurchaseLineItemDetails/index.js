@@ -5,7 +5,12 @@ import handlePartyDetails from '../../helpers/handlePartyDetails';
 
 import styles from './styles.module.css';
 
-function PurchaseLineItemDetails({ billingPartyObj = {}, collectionPartyObj, editData, purchaseInvoiceValues }) {
+function PurchaseLineItemDetails({
+	billingPartyObj = {},
+	collectionPartyObj = {},
+	editData = {},
+	purchaseInvoiceValues = {},
+}) {
 	const { billingPartyDetails, collectionPartyDetails } = handlePartyDetails({
 		billingPartyObj,
 		collectionPartyObj,

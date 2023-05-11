@@ -4,7 +4,10 @@ import { renderPurchaseFunction } from '../../configurations/purchaselineItems';
 
 import styles from './styles.module.css';
 
-function SingleColumn({ lineitem, fields }) {
+function SingleColumn({
+	lineitem,
+	fields,
+}) {
 	return (
 		<div className={styles.tablecolumn}>
 			{fields.map((field) => (

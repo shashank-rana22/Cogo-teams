@@ -5,8 +5,8 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function ConfirmationModal({
-	setConfirmation,
-	handleFinalSubmit,
+	setConfirmation = () => {},
+	handleFinalSubmit = () => { },
 }) {
 	return (
 		<div>

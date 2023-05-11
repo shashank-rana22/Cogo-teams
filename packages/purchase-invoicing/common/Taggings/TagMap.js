@@ -7,8 +7,8 @@ import styles from './styles.module.css';
 import { TagCard } from './TagCard';
 
 function TagMap({
-	serviceProviderId,
-	shipmentId,
+	serviceProviderId = '',
+	shipmentId = '',
 	isNormalTab,
 	selectedProforma,
 	setSelectedProforma,
