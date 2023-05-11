@@ -1,4 +1,4 @@
-import { CURRENCY_OPTIONS } from '../constants/CURRENCY_OPTIONS';
+import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 
 import styles from './styles.module.css';
 
@@ -135,7 +135,7 @@ export const recurringExpenseDetails = ({
 					span    : 2.2,
 					style   : { borderRadius: '4px', width: '164px' },
 					size    : 'md',
-					options : CURRENCY_OPTIONS,
+					options : getCurrencyOptions(),
 				},
 				{
 					name           : 'repeatEvery',
