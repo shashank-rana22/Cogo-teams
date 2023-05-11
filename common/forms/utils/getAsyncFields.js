@@ -349,6 +349,20 @@ function asyncListFAQTopics() {
 	};
 }
 
+function asyncListCourseCategory() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : 'list_course_category',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -377,4 +391,5 @@ export {
 	asyncAccountEngagementScoringEvents,
 	asyncFieldsTicketTypes,
 	asyncListFAQTopics,
+	asyncListCourseCategory,
 };

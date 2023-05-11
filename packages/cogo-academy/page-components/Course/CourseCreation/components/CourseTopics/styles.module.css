@@ -14,7 +14,7 @@
 }
 
 .input_container {
-	margin-top: 48px;
+	margin-top: 40px;
 }
 
 .prev_button {
@@ -27,4 +27,38 @@
 	position: absolute;
 	right: 24px;
 	bottom: 24px;
+}
+
+.label_container {
+	display: flex;
+	margin-bottom: 6px;
+	justify-content: end;
+}
+
+.create_tag_label {
+	margin-left: 8px;
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.modal_container {
+	align-items: center;
+	width: 100%;
+}
+
+.input_group {
+	margin-top: 4px;
+}
+
+.form_group {
+	&.description {
+		margin-top: 32px;
+	}
+}
+
+.error_message {
+	font-size: 10px;
+	font-weight: 400;
+	color: #cb6464;
 }

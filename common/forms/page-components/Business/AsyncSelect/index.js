@@ -23,6 +23,7 @@ import {
 	asyncListCurrency,
 	asyncAccountEngagementScoringEvents,
 	asyncListFAQTopics,
+	asyncListCourseCategory,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -64,6 +65,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_exchange_rate_currencies : asyncListCurrency,
 	engagement_scoring_events     : asyncAccountEngagementScoringEvents,
 	faq_topics                    : asyncListFAQTopics,
+	list_course_category          : asyncListCourseCategory,
 };
 
 function AsyncSelect(props) {
