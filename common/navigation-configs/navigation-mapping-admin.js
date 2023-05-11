@@ -1157,8 +1157,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-booking_note_desk',
 				title         : 'Booking Desk',
-				href          : '/booking-desk',
-				as            : '/booking-desk',
+				href          : 'v2/booking-desk',
+				as            : 'v2/booking-desk',
 				type          : 'link',
 				main_apis     : ['list_booking_desk_shipments'],
 				possible_apis : [...apis.shipment, ...apis.booking_desk],
