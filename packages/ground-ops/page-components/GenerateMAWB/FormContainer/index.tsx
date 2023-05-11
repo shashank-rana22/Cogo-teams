@@ -136,9 +136,10 @@ function FormContainer({
 						<Button
 							onClick={() => {
 								setHawbDetails((prev) => ([...prev, {
-									id         : uuid(),
-									documentNo : `COGO-${taskItem.serialId}${hawbDetails.length + 1}`,
-									isNew      : true,
+									id: uuid(),
+									documentNo:
+									`COGO-${taskItem.serialId}${(hawbDetails.length + 1).toString().padStart(2, '0')}`,
+									isNew: true,
 								}]));
 							}}
 							themeType="secondary"

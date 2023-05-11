@@ -151,12 +151,6 @@ function GenerateMAWB({
 	}, [activeHawb, activeCategory]);
 
 	useEffect(() => {
-		if (activeHawb.isNew) {
-			setCustomHawbNumber(false);
-		}
-	}, [activeHawb]);
-
-	useEffect(() => {
 		if (category === 'mawb') {
 			return;
 		}
