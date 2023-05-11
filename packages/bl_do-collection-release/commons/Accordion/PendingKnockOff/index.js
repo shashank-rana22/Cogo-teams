@@ -1,5 +1,4 @@
 import { Tabs, TabPanel, Table } from '@cogoport/components';
-import { useState, useEffect } from 'react';
 
 import getTableFormatedData from '../../../helpers/getTableFormatedData';
 import PendingTasks from '../../PendingTasks/TaskList';
@@ -15,7 +14,6 @@ function PendingKnockOff({
 	getShipmentPendingTask = () => {},
 	taskLoading = false,
 }) {
-	// const [activeTab, setActiveTab] = useState('invoice');
 	const list_of_invoices = item?.invoice_data || [];
 
 	const tableData = getTableFormatedData(list_of_invoices);
