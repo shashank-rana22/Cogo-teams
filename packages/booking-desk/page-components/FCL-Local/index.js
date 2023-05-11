@@ -54,15 +54,6 @@ export default function FCLLocalDesk({ stateProps = {} }) {
 				<div className={styles.top_header_container}>
 					<Filters stateProps={stateProps} showPopoverFilters={false} />
 
-					<div className={styles.version}>
-						<Toggle
-							size="md"
-							onLabel="Old"
-							offLabel="New"
-							onChange={handleVersionChange}
-						/>
-					</div>
-
 					<ScopeSelect size="md" defaultValues={stateProps.scopeFilters} />
 				</div>
 			</div>

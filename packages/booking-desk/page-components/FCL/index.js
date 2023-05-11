@@ -1,4 +1,3 @@
-import { Toggle } from '@cogoport/components';
 import ScopeSelect from '@cogoport/scope-select';
 import { isEmpty } from '@cogoport/utils';
 
