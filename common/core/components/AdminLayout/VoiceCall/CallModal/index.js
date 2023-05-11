@@ -1,15 +1,13 @@
-import { Modal, cl, Button } from '@cogoport/components';
+import { Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { IcMProfile, IcMMinus } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { IcMMinus, IcMUserAllocations } from '@cogoport/icons-react';
 import React from 'react';
 
 import hideNumber from '../../../../helpers/hideNumber';
-import useGetControls from '../configurations/group-call-controls';
-import CustomCheckBoxGroupController from '../utils/CustomCheckBoxGroupController';
-import CustomSelectController from '../utils/CustomSelectController';
+import { useGetControls } from '../configurations/group-call-controls';
 import secsToDurationConverter from '../utils/secsToDurationConverter';
 
+import ConferenceForm from './ConferenceForm';
 import styles from './styles.module.css';
 
 function CallModal({
@@ -23,12 +21,12 @@ function CallModal({
 	hangUpCall,
 	hangUpLoading = false,
 }) {
-	const { handleSubmit, control, formState: { errors } } = useForm();
-	const { agent = {}, actionType = {} } = useGetControls({ localStateReducer });
-
+	const { handleSubmit, control, formState: { errors }, watch, reset } = useForm();
+	const controls = useGetControls({ localStateReducer });
+	const { live_call_action_type = '' } = watch();
 	const {
-		mobile_number = '',
-		mobile_country_code = '',
+		mobile_number = '7981304246',
+		mobile_country_code = '+91',
 		userName = '',
 	} = voice_call_recipient_data || {};
 
@@ -36,66 +34,66 @@ function CallModal({
 		<Modal
 			show
 			className={styles.modal_styles}
+			scroll={false}
+			closeOnOuterClick={false}
 		>
 			<Modal.Body>
-				<IcMMinus
-					width={25}
-					height={25}
-					cursor="pointer"
-					onClick={() => localStateReducer({ showCallModalType: 'minimizedModal' })}
-				/>
-				<div className={styles.outer_flex}>
-					<div className={styles.content}>
+				<div className={styles.minus_div}>
+					<IcMMinus
+						width={15}
+						height={15}
+						cursor="pointer"
+						fill="#4F4F4F"
+						onClick={() => localStateReducer({ showCallModalType: 'minimizedModal' })}
+					/>
+				</div>
+				<div className={styles.content}>
+					<div className={styles.header_flex}>
 						<div className={styles.avatar}>
-							<IcMProfile width={40} height={40} />
+							<IcMUserAllocations width={43} height={43} fill="#888FD1" />
 						</div>
-						<div className={styles.org_name}>
-							{userName || 'Unknown User'}
-						</div>
+						<div className={styles.user_name}>{userName || 'Unknown User'}</div>
 						<div className={styles.number}>
 							{mobile_country_code}
-							{' '}
-							{hideNumber(mobile_number)}
+							<span>{hideNumber(mobile_number)}</span>
 						</div>
-						<div className={styles.status_div}>{startCase(status) || 'Connecting...'}</div>
 						<div className={styles.timer}>{secsToDurationConverter(status, counter)}</div>
-						<div className={styles.hang_up}>
-							<img
-								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/hangUp.svg"
-								alt="hang-Up"
-								style={{ width: '50px', height: '50px' }}
-								role="presentation"
+					</div>
+					<div className={styles.footer} style={{ '--height': status ? '60%' : '30%' }}>
+						{status
+							? (
+								<ConferenceForm {...{
+									...(controls || {}),
+									control,
+									live_call_action_type,
+									reset,
+									updateLiveCallStatusLoading,
+									updateLiveCallStatus,
+									handleSubmit,
+									errors,
+								}}
+								/>
+							)
+							: <div className={styles.connecting}>Connecting...</div>}
+						{!live_call_action_type && (
+							<div
+								className={styles.end_call}
+								tabIndex={0}
+								role="button"
 								onClick={() => {
 									if (!hangUpLoading && !callLoading) {
 										hangUpCall();
 									}
 								}}
-								className={cl`${(callLoading || hangUpLoading) ? styles.disable : ''}`}
-							/>
-						</div>
-					</div>
-					<form
-						className={styles.conference_call_setting}
-						onSubmit={handleSubmit(updateLiveCallStatus)}
-					>
-						<div className={styles.agent_selecter}>
-							<div className={styles.label_text}>Select Agent</div>
-							<CustomSelectController control={control} {...agent} />
-							<div className={styles.error_text}>{errors?.agent_id && 'Required'}</div>
-						</div>
-						<CustomCheckBoxGroupController control={control} {...actionType} />
-						<div className={styles.button_div}>
-							<Button
-								type="submit"
-								size="md"
-								themeType="accent"
-								disabled={!status || callLoading || hangUpLoading}
-								loading={updateLiveCallStatusLoading}
 							>
-								submit
-							</Button>
-						</div>
-					</form>
+								<img
+									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/hangUp.svg"
+									alt="hang up"
+									height={40}
+								/>
+							</div>
+						)}
+					</div>
 				</div>
 			</Modal.Body>
 		</Modal>

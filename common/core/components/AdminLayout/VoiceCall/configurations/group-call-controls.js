@@ -1,7 +1,14 @@
 import { asyncFieldsPartnerUsers } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
+import { IcMAgentManagement } from '@cogoport/icons-react';
 
-const useGetControls = ({ localStateReducer }) => {
+export const iconMapping = {
+	monitor  : IcMAgentManagement,
+	whisper  : IcMAgentManagement,
+	barge    : IcMAgentManagement,
+	transfer : IcMAgentManagement,
+};
+export const useGetControls = ({ localStateReducer }) => {
 	const servetelAgentOptions = useGetAsyncOptions({
 		...asyncFieldsPartnerUsers(), valueKey: 'user_id',
 	});
@@ -21,14 +28,13 @@ const useGetControls = ({ localStateReducer }) => {
 			type    : 'checkbox',
 			label   : '',
 			options : [
-				{ label: 'monitor', value: 'monitor' },
-				{ label: 'whisper', value: 'whisper' },
-				{ label: 'barge', value: 'barge' },
-				{ label: 'transfer', value: 'transfer' },
+				{ label: 'monitor', value: 'monitor', icon: IcMAgentManagement },
+				{ label: 'whisper', value: 'whisper', icon: IcMAgentManagement },
+				{ label: 'barge', value: 'barge', icon: IcMAgentManagement },
+				{ label: 'transfer', value: 'transfer', icon: IcMAgentManagement },
 			],
 		},
 	};
 
 	return controls;
 };
-export default useGetControls;

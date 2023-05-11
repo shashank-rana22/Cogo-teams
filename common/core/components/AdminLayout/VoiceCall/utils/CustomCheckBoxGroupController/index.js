@@ -1,6 +1,6 @@
 import { Controller } from '@cogoport/forms';
 
-import CheckboxGroup from './CheckboxGroup';
+import ActionsType from './ActionsType';
 
 function CustomCheckBoxGroupController(props) {
 	const {
@@ -14,7 +14,7 @@ function CustomCheckBoxGroupController(props) {
 			name={name}
 			rules={rules}
 			render={({ field: { onChange, onBlur, value } }) => (
-				<CheckboxGroup
+				<ActionsType
 					{...rest}
 					key={name}
 					id={name}

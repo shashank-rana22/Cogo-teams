@@ -1,71 +1,103 @@
 .modal_styles {
+	width: 320px !important;
+	height: 500px !important;
+
 	:global {
 		.ui_modal_body_container {
-			position: relative;
-			min-width: 500px;
-			min-height: 400px;
-			border-top: none !important;
-			border-bottom: none !important;
+			height: 100%;
 		}
 	}
 }
 
 .content {
 	display: flex;
-	flex-basis: 65%;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
-	width: 100%;
-	height: fit-content;
+	justify-content: space-between;
+	height: 100%;
 	padding: 16px;
-	border-right: 1px solid;
 }
 
-.org_name {
+.minus_div {
 	display: flex;
+	align-items: center;
 	justify-content: center;
-	margin-top: 12px;
-	font-size: 16px;
-	font-weight: 600;
-	text-align: center;
-}
-
-.number {
-	display: flex;
-	justify-content: center;
-	margin-top: 12px;
-	font-size: 14px;
-	font-weight: 500;
-	text-align: center;
+	width: fit-content;
+	height: 15px;
+	background-color: #f2e3c3;
+	border-radius: 50%;
 }
 
 .avatar {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 60px;
-	height: 60px;
-	background: #fdebe9;
-	border-radius: 12px;
+	padding: 8px;
+	background: radial-gradient(43.3% 44.93% at 92.78% 92.42%, #f2f3fa 0%, #ced1ed 50.52%, #f2f3fa 100%);
+	border: 0.5px solid #abb0de;
+	border-radius: 10px;
 }
 
-.hang_up {
+.user_name {
+	margin-top: 8px;
+	font-size: 18px;
+	font-weight: 600;
+	color: #000;
+}
+
+.number {
+	margin-top: 4px;
+	font-size: 14px;
+
+	>span {
+		margin-left: 5px;
+	}
+}
+
+.timer {
+	margin-top: 8px;
+	color: #000;
+}
+
+.header_flex {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	margin-top: 52px;
+}
+
+.footer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	height: var(--height);
+	background: radial-gradient(50% 67.94% at 50% 50%, rgb(242 243 250 / 50%) 8.17%, rgb(206 209 237 / 50%) 100%);
+	border-radius: 10px;
+	transition: height 0.3s ease;
+}
+
+.end_call {
+	display: flex;
+	flex-basis: 10%;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 15px;
 	cursor: pointer;
 }
+
+.connecting {
+	padding: 32px 0 0;
+	font-size: 16px;
+	color: #000;
+}
+
+/* ss */
 
 .status_div {
 	display: flex;
 	align-items: center;
-	margin-top: 8px;
-	font-size: 14px;
-}
-
-.timer {
 	margin-top: 8px;
 	font-size: 14px;
 }
@@ -87,10 +119,6 @@
 	fill: #4f4f4f;
 }
 
-.outer_flex {
-	display: flex;
-}
-
 .error_text {
 	min-height: 17px;
 	font-size: 11px;
@@ -99,7 +127,6 @@
 }
 
 .conference_call_setting {
-	flex-basis: 50%;
 	padding: 0 20px;
 }
 

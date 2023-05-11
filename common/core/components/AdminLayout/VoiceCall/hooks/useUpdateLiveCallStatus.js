@@ -21,7 +21,7 @@ function useUpdateLiveCallStatus({
 		method : 'post',
 	}, { manual: true });
 
-	const updateLiveCallStatus = async (payload = {}) => {
+	const updateLiveCallStatus = async (payload = {}, callbackFunc = () => {}) => {
 		try {
 			const { live_call_action_type = [], agent_id = '' } = payload || {};
 			await trigger({
@@ -36,6 +36,7 @@ function useUpdateLiveCallStatus({
 				checkToOpenFeedBack({ hasAgentPickedCall: false });
 				return;
 			}
+			callbackFunc();
 			setLocalCallState((p) => updateLocalState(p, latestAddedAgentName, agent_id));
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.data));
