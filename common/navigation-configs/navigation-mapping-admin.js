@@ -1157,8 +1157,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-booking_note_desk',
 				title         : 'Booking Desk',
-				href          : '/booking-desk',
-				as            : '/booking-desk',
+				href          : '/v2/booking-desk',
+				as            : '/v2/booking-desk',
 				type          : 'link',
 				main_apis     : ['list_booking_desk_shipments'],
 				possible_apis : [...apis.shipment, ...apis.booking_desk],
@@ -1340,8 +1340,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-bl_do_collection_release',
 				title         : 'BL/DO Collection - Release',
-				href          : '/bl_do-collection-release',
-				as            : '/bl_do-collection-release',
+				href          : '/v2/bl_do-collection-release',
+				as            : '/v2/bl_do-collection-release',
 				type          : 'link',
 				main_apis     : ['list_shipment_document_collections'],
 				possible_apis : [...apis.bl_do_collection_release, ...apis.shipment],
