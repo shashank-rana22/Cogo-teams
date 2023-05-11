@@ -1,0 +1,16 @@
+{
+	"name": "@cogoport/saas-subscription",
+	"description": "Saas Subscription",
+	"version": "0.1.0",
+	"main": "index.js",
+	"sideEffects": false,
+	"dependencies": {
+		"@cogoport/components": "^1.0.410",
+		"@cogoport/forms": "workspace:^0.1.0",
+		"@cogoport/icons-react": "^1.0.68",
+		"@cogoport/request": "workspace:^0.1.0",
+		"@cogoport/store": "workspace:^0.1.0",
+		"@cogoport/utils": "^1.2.10",
+		"react": "18.2.0"
+	}
+}

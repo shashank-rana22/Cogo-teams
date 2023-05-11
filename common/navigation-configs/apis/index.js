@@ -36,6 +36,7 @@ import rms from './rate-management-apis';
 import revenue_desk_apis from './revenue-desk-apis';
 import rfq from './rfq-apis';
 import saas from './saas';
+import saas_subscription from './saas-subscription';
 import saas_tools from './saas-tools';
 import search from './search-apis';
 import shipment from './shipment-apis';
@@ -135,6 +136,7 @@ const apis = {
 	booking_desk,
 	poc,
 	...athena_dashboard,
+	...saas_subscription,
 };
 
 export default apis;

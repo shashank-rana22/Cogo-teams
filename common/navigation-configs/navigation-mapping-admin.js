@@ -2236,6 +2236,24 @@ const navigationMappingAdmin = {
 		possible_apis : apis.ingestion,
 		icon          : IcMActivePlans,
 	},
+	saas_subscription: {
+		key         : 'saas_subscription',
+		title       : 'Saas Subscription',
+		isSubNavs   : true,
+		icon        : IcMExportfile,
+		module_type : 'dashboards',
+		options     : [
+			{
+				key           : 'saas_subscription-customer',
+				title         : 'Customer',
+				href          : '/v2/saas-subscription/customer',
+				as            : '/v2/saas-subscription/customer',
+				type          : 'link',
+				icon          : IcMActivePlans,
+				possible_apis : apis.saas_tools_standard_milestones,
+			},
+		],
+	},
 };
 
 export default navigationMappingAdmin;
