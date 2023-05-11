@@ -43,13 +43,13 @@ function Invoices({
 	}
 
 	const showForOldShipments =		invoiceData?.invoice_trigger_date
-		&& shipment_data?.serial_id <= 120347
+		&& shipmentData?.serial_id <= 120347
 		&& !invoiceStatuses?.some((ele) => ['reviewed', 'approved'].includes(ele));
 
 	disableAction = showForOldShipments ? false : disableAction;
 
 	// const { loadingCreditNotes, data, refetchCN } = useListCreditNotes(id);
-	const { list, refetch: CNRefetch, loading: CNLoading } = useListShipmentCreditNotes({ shipment_data });
+	const { list, refetch: CNRefetch, loading: CNLoading } = useListShipmentCreditNotes({ shipmentData });
 
 	return (
 		<main className={styles.container}>
