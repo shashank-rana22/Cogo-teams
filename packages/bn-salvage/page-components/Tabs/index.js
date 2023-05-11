@@ -4,7 +4,7 @@ import TABS from '../../config/tabs.json';
 
 import styles from './style.module.css';
 
-export default function Tabs({ activeTab, setActiveTab, setFilters }) {
+export default function Tabs({ activeTab, setActiveTab, setFilters, stats }) {
 	const onTabChange = (newTab) => {
 		if (newTab !== activeTab) {
 			setActiveTab(newTab);
@@ -25,6 +25,7 @@ export default function Tabs({ activeTab, setActiveTab, setFilters }) {
 					key={tab.name}
 					name={tab.name}
 					title={tab.title}
+					badge={stats[tab.filters.status]}
 				/>
 			))}
 		</TabContainer>

@@ -1,43 +1,22 @@
-import { cl, Toast, Button, Modal } from '@cogoport/components';
+import { Toast, Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { addDays } from '@cogoport/utils';
 import { useState } from 'react';
 
+import getModifiedControls from '../../helpers/getModifiedControls';
 import FilePreview from '../FilePreview';
 import FormElement from '../FormElement';
 
 import styles from './styles.module.css';
 
-const cut_offs = [
-	'vgm_cutoff',
-	'si_cutoff',
-	'tr_cutoff',
-	'document_cutoff',
-	'gate_in_cutoff',
-	'si_filed_at',
-	'expiry',
-];
-const prefillDateValues = [
-	'schedule_departure',
-	'schedule_arrival',
-	'vgm_cutoff',
-	'si_cutoff',
-	'tr_cutoff',
-	'document_cutoff',
-	'gate_in_cutoff',
-	'si_filed_at',
-	'expiry',
-];
-
 const FormError = () => Toast.error('Some of the fields has error(s)');
 
-export default function RenderForm({
+export default function BookingNoteForm({
 	closeModal = () => {},
 	defaultValues = {},
 	controlsMapping = {},
 	onFormSubmit = () => {},
-	modalBodyClass,
-	modalFooterClass,
+	loading,
+	modalHeader = 'Upload Booking Note',
 }) {
 	const [currentStep, setCurrentStep] = useState('step1');
 
@@ -46,17 +25,7 @@ export default function RenderForm({
 	const { schedule_departure, url } = watch();
 
 	const currentControls = controlsMapping[currentStep];
-
-	currentControls.forEach((ctrl, index) => {
-		if (ctrl.name === 'schedule_arrival') {
-			currentControls[index].minDate = schedule_departure ? addDays(schedule_departure, 1) : undefined;
-			currentControls[index].disable = !schedule_departure;
-		}
-		if (cut_offs.includes(ctrl.name)) {
-			currentControls[index].maxDate = schedule_departure;
-			currentControls[index].disable = !schedule_departure;
-		}
-	});
+	const modifiedControls = getModifiedControls(currentControls, schedule_departure);
 
 	const currentUrl = typeof url === 'object' ? url?.finalUrl : url;
 
@@ -78,10 +47,18 @@ export default function RenderForm({
 	};
 
 	return (
-		<>
-			<Modal.Body className={cl`${modalBodyClass} ${currentStep}`}>
+		<Modal
+			show
+			onClose={closeModal}
+			showCloseIcon={!loading}
+			closeOnOuterClick={false}
+			className={styles[currentStep]}
+		>
+			<Modal.Header title={modalHeader} />
+
+			<Modal.Body className={styles.modal_body}>
 				<div className={styles.form_container}>
-					{currentControls.map((ctrl) => (
+					{modifiedControls.map((ctrl) => (
 						<FormElement
 							key={ctrl.name}
 							control={control}
@@ -96,13 +73,13 @@ export default function RenderForm({
 				) : null}
 			</Modal.Body>
 
-			<Modal.Footer className={modalFooterClass}>
+			<Modal.Footer className={styles.modal_footer}>
 				{stepWiseButtons[currentStep].map(({ label, ...rest }) => (
 					<Button key={label} {...rest}>
 						{label}
 					</Button>
 				))}
 			</Modal.Footer>
-		</>
+		</Modal>
 	);
 }

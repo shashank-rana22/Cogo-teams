@@ -36,6 +36,10 @@ export default function useListBookingDocuments({ filters, activeTab }) {
 			list        : data.list || [],
 			total_count : data.total_count || 0,
 			total_page  : data.total || 0,
+			stats       : {
+				active   : data.active,
+				inactive : data.inactive,
+			},
 		},
 		loading,
 		refetchList: fetchList,

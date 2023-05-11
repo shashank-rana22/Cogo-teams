@@ -1,0 +1,34 @@
+.step1 {
+    width: 60vw !important;
+}
+.step2 {
+    width: 95vw !important;
+}
+
+.form_container {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4%;
+    
+    > div {
+        width: 48%;
+    }
+}
+
+.modal_body {
+	display: flex;
+	gap: 4%;
+	max-height: 70vh !important;
+
+	> div:nth-of-type(2) {
+		flex: 1.5;
+	}
+}
+
+.modal_footer {
+	> button:not(:first-of-type) {
+		margin-left: 10px;
+	}
+}

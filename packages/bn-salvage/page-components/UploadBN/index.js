@@ -1,11 +1,7 @@
-import { Modal } from '@cogoport/components';
-
-import RenderForm from '../../commons/RenderForm';
+import BookingNoteForm from '../../commons/BookingNoteForm';
 import STEP1CONTROLS from '../../config/uploadBNStep1Controls.json';
 import STEP2CONTROLS from '../../config/uploadBNStep2Controls.json';
 import useCreateBookingNote from '../../hooks/useCreateBookingNote';
-
-import styles from './styles.module.css';
 
 const controlsMapping = {
 	step1 : STEP1CONTROLS,
@@ -21,22 +17,12 @@ export default function UploadBN({ setShow, refetchList }) {
 	});
 
 	return (
-		<Modal
-			show
-			onClose={closeModal}
-			showCloseIcon={!loading}
-			closeOnOuterClick={false}
-			className={styles.modal_container}
-		>
-			<Modal.Header title="Upload Booking Note" />
-
-			<RenderForm
-				closeModal={closeModal}
-				onFormSubmit={createBookingNote}
-				controlsMapping={controlsMapping}
-				modalBodyClass={styles.modal_body_container}
-				modalFooterClass={styles.modal_footer}
-			/>
-		</Modal>
+		<BookingNoteForm
+			closeModal={closeModal}
+			controlsMapping={controlsMapping}
+			onFormSubmit={createBookingNote}
+			loading={loading}
+			modalHeader="Upload Booking Note"
+		/>
 	);
 }

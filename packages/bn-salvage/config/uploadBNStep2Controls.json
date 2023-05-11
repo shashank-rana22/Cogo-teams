@@ -3,127 +3,72 @@
         "label": "Schedule Departure",
         "name": "schedule_departure",
         "type": "datepicker",
-		"placeholder" : "Select Date",
-		"isPreviousDaysAllowed" : true,
-		"showTimeSelect" : true,
-        "isClearable": false,
-        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa",
         "rules": {
-            "required": {
-                "message": "Schedule departure is required"
-            }
+            "required": "Schedule departure is required"
         }
     },
     {
         "label": "Schedule Arrival",
         "name": "schedule_arrival",
         "type": "datepicker",
-		"placeholder" : "Select Date",
-		"isPreviousDaysAllowed" : true,
-		"showTimeSelect" : true,
-        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa",
         "rules": {
-            "required": {
-                "message": "Schedule arrival is required"
-            }
+            "required": "Schedule arrival is required"
         }
     },
     {
         "label": "VGM Cut-off",
         "name": "vgm_cutoff",
         "type": "datepicker",
-		"placeholder" : "Select Date",
-		"isPreviousDaysAllowed" : true,
-		"showTimeSelect" : true,
-        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa",
         "rules": {
-            "required": {
-                "message": "VGM Cut-off is required"
-            }
+            "required": "VGM Cut-off is required"
         }
     },
     {
         "label": "S/I Cut-off",
         "name": "si_cutoff",
         "type": "datepicker",
-		"placeholder" : "Select Date",
-		"isPreviousDaysAllowed" : true,
-		"showTimeSelect" : true,
-        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa",
         "rules": {
-            "required": {
-                "message": "S/I Cut-off is required"
-            }
+            "required": "S/I Cut-off is required"
         }
     },
     {
         "label": "Document Cut-off",
         "name": "document_cutoff",
         "type": "datepicker",
-		"placeholder" : "Select Date",
-		"isPreviousDaysAllowed" : true,
-		"showTimeSelect" : true,
-        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa",
         "rules": {
-            "required": {
-                "message": "Document Cut-off is required"
-            }
+            "required": "Document Cut-off is required"
         }
     },
     {
         "label": "Gate-in Cut-off",
         "name": "gate_in_cutoff",
         "type": "datepicker",
-		"placeholder" : "Select Date",
-		"isPreviousDaysAllowed" : true,
-		"showTimeSelect" : true,
-        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa",
         "rules": {
-            "required": {
-                "message": "Gate-in Cut-off is required"
-            }
+            "required": "Gate-in Cut-off is required"
         }
     },
     {
         "label": "Booking Note Expiry",
         "name": "expiry",
         "type": "datepicker",
-		"placeholder" : "Select Date",
-		"isPreviousDaysAllowed" : true,
-		"showTimeSelect" : true,
-        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa",
         "rules": {
-            "required": {
-                "message": "Booking Note Expiry is required"
-            }
+            "required": "Booking Note Expiry is required"
         }
     },
     {
         "label": "Si filed at",
         "name": "si_filed_at",
         "type": "datepicker",
-		"placeholder" : "Select Date",
-		"isPreviousDaysAllowed" : true,
-		"showTimeSelect" : true,
-        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa",
         "rules": {
-            "required": {
-                "message": "Si filed at is required"
-            }
+            "required": "Si filed at is required"
         }
     },
     {
         "label": "TR Cut-off",
         "name": "tr_cutoff",
         "type": "datepicker",
-		"placeholder" : "Select Date",
-		"isPreviousDaysAllowed" : true,
-		"showTimeSelect" : true,
-        "dateFormat" : "MMM dd, yyyy, hh:mm:ss aaa",
         "rules": {
-            "required": {
-                "message": "TR Cut-off is required"
-            }
+            "required": "TR Cut-off is required"
         }
     },
     {
@@ -133,21 +78,21 @@
         "asyncKey": "list_locations",
         "params": {
             "filters": {
-                "type": ["yard"],
+                "type": [
+                    "yard"
+                ],
                 "status": "active"
             },
             "includes": {
-                "city" : true,
-                "country" : true,
-                "default_params_required" : true
+                "city": true,
+                "country": true,
+                "default_params_required": true
             },
             "page_limit": 20,
             "recommendations": true
         },
         "rules": {
-            "required": {
-                "message": "Yard details is required"
-            }
+            "required": "Yard details is required"
         }
     },
     {
@@ -157,9 +102,7 @@
         "optionsListKey": "container_types",
         "placeholder": "Select Container Type",
         "rules": {
-            "required": {
-                "message": "Container Type is required"
-            }
+            "required": "Container Type is required"
         }
     },
     {
@@ -169,9 +112,7 @@
         "asyncKey": "commodities",
         "value": "general",
         "rules": {
-            "required": {
-                "message": "Commodity is required"
-            }
+            "required": "Commodity is required"
         }
     },
     {
@@ -197,31 +138,23 @@
             }
         ],
         "rules": {
-            "required": {
-                "message": "Container size is required"
-            }
+            "required": "Container size is required"
         }
     },
     {
         "name": "containers_count",
         "label": "Containers Count",
-        "className": "primary md",
         "type": "number",
         "rules": {
-            "required": {
-                "message": "Container quantity is required"
-            }
+            "required": "Container quantity is required"
         }
     },
     {
         "name": "document_number",
         "label": "Document No.",
-        "className": "primary md",
         "type": "text",
         "rules": {
-            "required": {
-                "message": "Booking Note No. is required"
-            }
+            "required": "Booking Note No. is required"
         }
     }
 ]

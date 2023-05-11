@@ -14,7 +14,11 @@ export default function BNSalvage() {
 	const [activeTab, setActiveTab] = useState(tabs[0].name);
 	const [filters, setFilters] = useState({ page: 1 });
 
-	const { data, loading, refetchList } = useListBookingDocuments({ filters, activeTab });
+	const {
+		data,
+		loading,
+		refetchList,
+	} = useListBookingDocuments({ filters, activeTab });
 
 	const [showModal, setShowModal] = useState(false);
 
@@ -22,10 +26,19 @@ export default function BNSalvage() {
 		<div>
 			<h1>Booking Note Salvage</h1>
 
-			<Tabs activeTab={activeTab} setActiveTab={setActiveTab} setFilters={setFilters} />
+			<Tabs
+				activeTab={activeTab}
+				setActiveTab={setActiveTab}
+				setFilters={setFilters}
+				stats={data.stats}
+			/>
 
 			<Filters filters={filters} setFilters={setFilters}>
-				<Button key="upload_bn_btn" themeType="primary" onClick={() => setShowModal(true)}>
+				<Button
+					key="upload_bn_btn"
+					themeType="primary"
+					onClick={() => setShowModal(true)}
+				>
 					<IcMUpload />
 					&nbsp;
 					Upload Booking Note
