@@ -1,5 +1,6 @@
+import { CURRENCY_OPTIONS } from '../constants/CURRENCY_OPTIONS';
+
 import styles from './styles.module.css';
-import {CURRENCY_OPTIONS} from '../constants/CURRENCY_OPTIONS';
 
 interface FormDataInterface {
 	registrationNumber?: string,

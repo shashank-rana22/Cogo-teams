@@ -25,7 +25,7 @@ const useListExpense = () => {
 					expenseType,
 					pageSize,
 					pageIndex,
-					organizationId : vendorId,
+					organizationId: vendorId,
 				},
 			});
 		} catch (err) {

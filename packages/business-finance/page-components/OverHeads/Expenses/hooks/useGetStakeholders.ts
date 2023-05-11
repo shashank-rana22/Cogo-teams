@@ -16,8 +16,8 @@ const useGetStakeholders = (expenseCategory:string) => {
 			try {
 				await trigger({
 					params: {
-						category     : (expenseCategory || '').toUpperCase() || undefined,
-						level        : 1,
+						category : (expenseCategory || '').toUpperCase() || undefined,
+						level    : 1,
 					},
 				});
 			} catch (err) {
