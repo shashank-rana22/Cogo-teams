@@ -13,14 +13,18 @@ function CreditNote({
 				Credit Note
 			</header>
 
-			{(list || [])?.map((item) => (
-				<Item
-					item={item}
-					refetch={refetch}
-					invoicesList={invoicesList}
-					invoiceData={invoiceData}
-				/>
-			))}
+			<div className={styles.cn_list_container}>
+
+				{(list || [])?.map((item) => (
+					<Item
+						key={item?.id}
+						item={item}
+						refetch={refetch}
+						invoicesList={invoicesList}
+						invoiceData={invoiceData}
+					/>
+				))}
+			</div>
 		</section>
 	);
 }
