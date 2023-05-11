@@ -8,8 +8,10 @@
 	display: flex;
 	justify-content: space-between;
 	margin-top: 16px;
+	display: flex;
+	justify-content: space-between;
 }
 
 .tabs_container {
-	margin-top: 16px;
+	margin-top: 22px;
 }

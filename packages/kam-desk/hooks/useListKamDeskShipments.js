@@ -6,16 +6,11 @@ import KamDeskContext from '../context/KamDeskContext';
 import getKamDeskFilters from '../helpers/getKamDeskFilters';
 
 const useListKamDeskShipments = () => {
-	const [apiData, setApiData] = useState({
-		data  : {},
-		error : {},
-	});
+	const [apiData, setApiData] = useState({});
 
 	const kamDeskContextValues = useContext(KamDeskContext);
 	const { activeTab, filters, setFilters, stepperTab, shipmentType } = kamDeskContextValues || {};
-	const { page = 1 } = filters || {};
-
-	const { finalFilters, additionalMethods } = getKamDeskFilters({ filters, kamDeskContextValues });
+	const { page = 1, ...restFilters } = filters || {};
 
 	const apiPrefix = ['import', 'export'].includes(stepperTab) ? shipmentType : stepperTab;
 
@@ -23,12 +18,11 @@ const useListKamDeskShipments = () => {
 		url    : `${apiPrefix}/list_kam_desk_shipments`,
 		method : 'GET',
 		params : {
-			filters            : finalFilters,
-			additional_methods : additionalMethods,
+			...getKamDeskFilters({ filters: restFilters, kamDeskContextValues }),
 			page,
-			page_limit         : 10,
-			sort_by            : 'serial_id',
-			sort_type          : 'desc',
+			page_limit : 10,
+			sort_by    : 'serial_id',
+			sort_type  : 'desc',
 		},
 	}, { manual: true });
 
@@ -37,16 +31,14 @@ const useListKamDeskShipments = () => {
 			try {
 				const res = await trigger();
 
-				if (res?.data?.list === 0 && page > 1) setFilters((prev) => ({ ...prev, page: 1 }));
+				if (res?.data?.list === 0 && filters.page > 1) setFilters({ ...filters, page: 1 });
 				setApiData(res?.data || {});
-				setApiData((prev) => ({ ...prev, data: res?.data || {}, error: {} }));
 			} catch (err) {
-				console.log({ err });
-				setApiData((prev) => ({ ...prev, data: {}, error: err }));
+				setApiData({});
 				Toast.error(err?.response?.data?.message || err?.message || 'Something went wrong !!');
 			}
 		})();
-	}, [trigger, page, setFilters]);
+	}, [trigger, setFilters, filters]);
 
 	useEffect(() => {
 		apiTrigger();
@@ -54,8 +46,10 @@ const useListKamDeskShipments = () => {
 		localStorage.setItem('kam_desk_values', JSON.stringify({
 			filters,
 			activeTab,
+			shipmentType,
+			stepperTab,
 		}));
-	}, [apiTrigger, activeTab, filters]);
+	}, [apiTrigger, activeTab, filters, shipmentType, stepperTab]);
 
 	return {
 		loading,

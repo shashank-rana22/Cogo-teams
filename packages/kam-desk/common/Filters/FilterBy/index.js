@@ -7,11 +7,6 @@ import KamDeskContext from '../../../context/KamDeskContext';
 
 import styles from './styles.module.css';
 
-const mapping = {
-	eta : 'schedule_arrival',
-	etd : 'schedule_departure',
-};
-
 function FilterBy({
 	setPopoverFilter = () => {},
 	popoverFilter = {},
@@ -70,17 +65,22 @@ function FilterBy({
 			</div>
 
 			<div className={styles.filter_container}>
+				<div className={styles.filter_heading}>Customer/Channel Partner</div>
+				<div />
+			</div>
+
+			<div className={styles.filter_container}>
 				<div className={styles.filter_heading}>Date Type</div>
 
 				<div className={styles.type_container}>
 					{['eta', 'etd'].map((type) => (
-						<div className={cl`${date_type === mapping[type] ? styles.active : styles.inactive} 
+						<div className={cl`${date_type === type ? styles.active : styles.inactive} 
 							${styles.filter_by_buttons}`}
 						>
 							<Button
 								onClick={() => setPopoverFilter({
 									...popoverFilter,
-									date_type : mapping[type],
+									date_type : type,
 									dateRange : 'today',
 									...DATE_RANGE_MAPPING.today,
 								})}
@@ -114,7 +114,34 @@ function FilterBy({
 								</Button>
 							</div>
 						))}
+
+						<div className={cl`${dateRange === 'custom' ? styles.active : styles.inactive}
+							${styles.filter_by_buttons}`}
+						>
+							<Button
+								onClick={() => setPopoverFilter({
+									...popoverFilter,
+									dateRange : 'custom',
+									startDate : null,
+									endDate   : null,
+								})}
+								size="xs"
+								className={`${dateRange === 'custom' ? styles.active : styles.inactive}`}
+							>
+								Custom
+							</Button>
+						</div>
 					</div>
+
+					{dateRange === 'custom' ? (
+						<div className={styles.filter_container}>
+							<DateRangepicker
+								value={popoverFilter}
+								onChange={handleCustomDateChange}
+								isPreviousDaysAllowed
+							/>
+						</div>
+					) : null}
 				</div>
 			) : null}
 

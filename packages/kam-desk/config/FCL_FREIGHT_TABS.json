@@ -37,15 +37,6 @@
                 "value":"cancelled",
                 "label":"Cancelled"
             }
-        ],
-        "critical_visible":[
-            "mark_confirmed",
-            "upload_booking_note",
-            "update_container_details",
-            "list_task_pending",
-            "document_approval",
-            "vessel_departed",
-            "vessel_arrived"
         ]
     },
     "import":{
@@ -82,14 +73,6 @@
                 "label":"Cancelled",
                 "value":"cancelled"
             }
-        ],
-        "critical_visible":[
-            "mark_confirmed",
-            "upload_shipping_order",
-            "list_task_pending",
-            "document_approval",
-            "vessel_departed",
-            "vessel_arrived"
         ]
     },
     "fcl_customs":{

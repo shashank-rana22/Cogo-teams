@@ -33,14 +33,6 @@
           "value": "cancelled",
           "label": "Cancelled"
         }
-      ],
-      "critical_visible": [
-        "confirm_booking",
-        "list_task_pending",
-        "upload_carting_order",
-        "document_approval",
-        "vessel_departed",
-        "vessel_arrived"
       ]
     },
     "import": {
@@ -77,14 +69,6 @@
           "value": "cancelled",
           "label": "Cancelled"
         }
-      ],
-      "critical_visible": [
-        "confirm_booking",
-        "list_task_pending",
-        "upload_carting_order",
-        "document_approval",
-        "vessel_departed",
-        "vessel_arrived"
       ]
     },
     "lcl_customs": {

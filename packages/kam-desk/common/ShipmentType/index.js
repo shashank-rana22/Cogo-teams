@@ -16,7 +16,6 @@ function ShipmentType() {
 		setStepperTab,
 		activeTab,
 		setActiveTab,
-		filters,
 		setFilters,
 	} = useContext(KamDeskContext);
 
@@ -39,7 +38,7 @@ function ShipmentType() {
 
 		setStepperTab(tempStepperTab);
 		setActiveTab(tempActiveTab);
-		setFilters({ ...filters, page: 1 });
+		setFilters({ page: 1 });
 		setShipmentType(val);
 	};
 

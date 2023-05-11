@@ -1,46 +1,36 @@
-import tabPayload from '../config/SHIPMENTS_PAYLOAD';
+import tabPayload, { CRITICAL_TABS } from '../config/SHIPMENTS_PAYLOAD';
+
+import getAdditionalMethods from './getAdditionalMethods';
+
+const keyMapping = {
+	eta : 'schedule_arrival',
+	etd : 'schedule_departure',
+};
 
 export default function getKamDeskFilters({ filters, kamDeskContextValues }) {
 	const { activeTab, shipmentType, stepperTab } = kamDeskContextValues || {};
-	const { page, date_type, dateRange, startDate, endDate, ...restFilters } = filters || {};
+	const { criticalOn, date_type, dateRange, startDate, endDate, ...restFilters } = filters || {};
 
-	const payload = tabPayload?.[shipmentType]?.[stepperTab]?.[activeTab]
-    || tabPayload?.[shipmentType]?.[activeTab]
-    || {};
+	const tabwiseFilters = shipmentType === 'all' ? tabPayload.all?.[activeTab]
+		: tabPayload?.[shipmentType]?.[stepperTab]?.[activeTab];
 
-	let finalFilters = { ...payload, ...restFilters };
-	let additionalMethods = ['pagination'];
+	let finalFilters = { ...tabwiseFilters, ...restFilters };
 
-	if (shipmentType === 'fcl_freight') {
-		if (activeTab === 'list_task_pending') {
-			additionalMethods = [...additionalMethods, 'tasks'];
-		}
-
-		if (activeTab === 'upload_booking_note') {
-			additionalMethods = [...additionalMethods, 'booking_status'];
-		}
-
-		if (
-			[
-				'mark_confirmed',
-				'upload_booking_note',
-				'upload_shipping_order',
-			].includes(activeTab)
-		) {
-			additionalMethods = [...additionalMethods, 'booking_preference'];
-		}
+	if (criticalOn) {
+		finalFilters = { ...finalFilters, ...(CRITICAL_TABS?.[shipmentType]?.[stepperTab]?.[activeTab] || {}) };
 	}
 
-	if (date_type) {
-		finalFilters = {
-			...finalFilters,
-			[`${date_type}_greater_than`] : startDate,
-			[`${date_type}_less_than`]    : endDate,
-		};
+	if (dateRange && startDate && date_type && endDate) {
+		finalFilters[`${keyMapping[date_type]}_greater_than`] = startDate;
+		finalFilters[`${keyMapping[date_type]}_less_than`] = endDate;
+	}
+
+	if (['import', 'export'].includes(stepperTab)) {
+		finalFilters.trade_type = stepperTab;
 	}
 
 	return {
-		finalFilters,
-		additionalMethods,
+		filters            : finalFilters,
+		additional_methods : getAdditionalMethods({ shipmentType, stepperTab, activeTab }),
 	};
 }

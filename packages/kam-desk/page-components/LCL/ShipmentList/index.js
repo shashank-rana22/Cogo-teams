@@ -11,8 +11,7 @@ import styles from './styles.module.css';
 function ShipmentList({ data = {}, loading }) {
 	const { filters, setFilters } = useContext(KamDeskContext);
 
-	const { data: apiData, error } = data;
-	const { list = [], page, total_count, page_limit } = apiData;
+	const { list = [], page, total_count, page_limit } = data || {};
 
 	const renderPagination = (
 		<div className={styles.pagination_container}>
@@ -28,7 +27,7 @@ function ShipmentList({ data = {}, loading }) {
 
 	return (
 		<div>
-			{!loading && (isEmpty(list) || !isEmpty(error)) ? <EmptyState /> : (
+			{!loading && isEmpty(list) ? <EmptyState /> : (
 				<div>
 					{renderPagination}
 					{ list?.map((item) => <Card data={item} />)}
