@@ -1,3 +1,21 @@
+.loader_container {
+    background-color: var(--color-secondary-5);
+    margin-top: 2em;
+    border-radius: 4px;
+    padding: 10px 20px;
+    min-height: 70vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    :global(.ui_ps_themeType_primary){
+        width: 4em;
+        height: 4em;
+    }
+}
+
 .list_container {
     background-color: var(--color-secondary-5);
     margin-top: 2em;

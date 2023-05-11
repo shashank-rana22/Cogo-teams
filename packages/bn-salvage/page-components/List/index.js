@@ -24,7 +24,12 @@ export default function List({ filters, setFilters, data, loading, refetchList }
 	);
 
 	if (loading) {
-		return <Loader themeType="primary" />;
+		return (
+			<div className={styles.loader_container}>
+				<Loader />
+				<p>Loading Booking Documents...</p>
+			</div>
+		);
 	}
 
 	if (!loading && list.length === 0) {
