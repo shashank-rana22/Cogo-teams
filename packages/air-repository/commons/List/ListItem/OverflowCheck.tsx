@@ -1,7 +1,7 @@
 import { Tooltip } from '@cogoport/components';
 import React, { useRef, useEffect, useState } from 'react';
 
-import styles from '../styles.module.css';
+import styles from './styles.module.css';
 
 function OverflowCheck({ children }) {
 	const containerRef = useRef(null);

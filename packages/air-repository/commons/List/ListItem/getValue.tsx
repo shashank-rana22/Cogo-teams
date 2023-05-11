@@ -3,7 +3,7 @@ import {
 } from '@cogoport/utils';
 import React, { ReactElement } from 'react';
 
-import { NestedObj, FunctionObjects, FieldType } from '../Interfaces/index';
+import { NestedObj, FunctionObjects, FieldType } from '../Interfaces';
 
 import OverflowCheck from './OverflowCheck';
 
@@ -34,6 +34,8 @@ const getValue = (
 			val = functions[itemField.func](itemData, itemField);
 		} else if (ACTIONS[itemField.func as keyof typeof ACTIONS]) {
 			val = ACTIONS[itemField.func as keyof typeof ACTIONS](val as string);
+		} else {
+			val = '-';
 		}
 	}
 

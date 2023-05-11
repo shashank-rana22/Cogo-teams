@@ -17,9 +17,7 @@
 	padding-left: 4px;
 	margin: 0;
 	font-size: 12px;
-	line-height: 16px;
 	color: #cb6464;
-	letter-spacing: 0.02em;
 }
 
 .element {
@@ -39,14 +37,14 @@
 }
 
 .delete_icon {
-	width: 1.8em;
-	height: 1.8em;
+	width: 28px;
+	max-height: 28px;
 	margin-top: 8px;
 	cursor: pointer;
 }
 
 .child_label {
-	height: 16px;
+	max-height: 16px;
 	margin-bottom: 6px;
 	font-size: 12px;
 }

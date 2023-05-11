@@ -10,15 +10,14 @@
 }
 
 .heading {
-	height: 22px;
+	max-height: 22px;
 	font-size: 13px;
 	font-weight: 600;
-	line-height: 150%;
 	color: #221f20;
 }
 
 .label {
-	height: 16px;
+	max-height: 16px;
 	margin-bottom: 6px;
 	font-size: 12px;
 }

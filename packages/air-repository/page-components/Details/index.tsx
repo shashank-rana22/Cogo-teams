@@ -1,6 +1,8 @@
 import { Badge, Button, Popover, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMEdit, IcMDelete } from '@cogoport/icons-react';
-import { startCase, format } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import List from '../../commons/List';
@@ -82,7 +84,11 @@ function Details({
 						{' '}
 						-
 						{' '}
-						{format(singleItem.updated_at, 'dd/MM/yy hh:mm', {}, false)}
+						{formatDate({
+							date       : singleItem.updated_at,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yy hh:mm'],
+							formatType : 'date',
+						})}
 					</span>
 				</div>
 			);

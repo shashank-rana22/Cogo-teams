@@ -3,9 +3,7 @@
 }
 
 .modal_header {
-	font-size: 14px;
 	font-weight: 500;
-	line-height: 150%;
 }
 
 .modal_header::after {

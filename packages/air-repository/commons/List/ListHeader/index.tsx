@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FieldType } from '../Interfaces/index';
+import { FieldType } from '../Interfaces';
 
 import styles from './styles.module.css';
 

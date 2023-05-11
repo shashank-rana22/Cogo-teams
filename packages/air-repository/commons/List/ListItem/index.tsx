@@ -1,10 +1,10 @@
 import { Placeholder } from '@cogoport/components';
 import React, { ReactNode } from 'react';
 
-import { FieldType, FunctionObjects, NestedObj } from '../Interfaces/index';
-import styles from '../styles.module.css';
+import { FieldType, FunctionObjects, NestedObj } from '../Interfaces';
 
 import getValue from './getValue';
+import styles from './styles.module.css';
 
 export interface Props {
 	fields: FieldType[];

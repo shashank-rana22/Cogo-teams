@@ -1,6 +1,6 @@
 .date {
 	width: 100% !important;
-	height: 44px;
+	max-height: 44px;
 }
 
 .item {
@@ -10,7 +10,7 @@
 .element {
 	:global {
 		.ui_input_container {
-			height: 32px;
+			max-height: 32px;
 			border: 1px solid #333;
 
 			.ui_input_control {
@@ -33,14 +33,14 @@
 
 		.ui_upload_droparea_icon {
 			svg {
-				height: 22px;
+				max-height: 22px;
 				margin-top: 8px;
 			}
 		}
 
 		.ui_select_container {
 			.ui_select_display_container {
-				height: 32px;
+				max-height: 32px;
 				border: 1px solid #333;
 
 				.ui_select_input_control {
@@ -57,18 +57,17 @@
 }
 
 .item_heading {
-	height: 16px;
+	min-height: 16px;
 	margin-bottom: 6px;
 	font-size: 13px;
 	font-weight: 600;
 }
 
 .item_label {
-	height: 16px;
+	max-height: 16px;
 	margin-bottom: 6px;
 	font-size: 12px;
 	font-weight: 500;
-	line-height: 150%;
 }
 
 .error {
@@ -77,5 +76,4 @@
 	font-size: 12px;
 	line-height: 16px;
 	color: #cb6464;
-	letter-spacing: 0.02em;
 }
