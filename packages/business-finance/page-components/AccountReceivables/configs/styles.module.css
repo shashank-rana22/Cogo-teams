@@ -77,3 +77,11 @@
 .style_text {
 	font-size: 10px;
 }
+
+.modal_container {
+	:global {
+		.ui_modal_body_container {
+			max-height: 600px;
+		}
+	}
+}
