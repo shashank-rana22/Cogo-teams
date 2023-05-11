@@ -3,7 +3,16 @@ import { startCase, format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function ApproveAndRejectHeader({ row }:any) {
+interface RowInterface {
+	status?:string,
+	updatedBy?:{ name?:string },
+	remark?:string,
+	updatedAt?:Date
+}
+interface Props {
+	row?:RowInterface,
+}
+function ApproveAndRejectHeader({ row }:Props) {
 	const { status, updatedBy, updatedAt, remark } = row || {};
 
 	return (

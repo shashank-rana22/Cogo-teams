@@ -1,25 +1,31 @@
-import { Tooltip } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import GetSecurityDepositData from '../../apisModal/useGetSecurityDeposit';
 import ViewButton from '../../common/ViewButton';
 import SecurityDepositCommonModal from '../AdvanceSecurityDepositCommonModal';
 
-import styles from './styles.module.css';
+import SecurityDepositData from './securityDepositData';
 
-function AdvanceSecurityDeposit({ advanceSecurityDeposit, id, refetch, isEditable = true, row }) {
+interface DepositInterface {
+	advanceDocumentId?: string,
+	amountPerContainer?:number,
+	numberOfContainers?:number,
+	totalAmountToBePaid?:number,
+	paymentMode?: string,
+	remark?: string,
+	supplierName?: string,
+}
+interface Props {
+	advanceSecurityDeposit?: DepositInterface,
+	id?: string,
+	refetch?:()=>void,
+	isEditable?:boolean,
+	row?:object,
+}
+function AdvanceSecurityDeposit({ advanceSecurityDeposit, id, refetch, isEditable = true, row }:Props) {
 	const [showDepositModal, setShowDepositModal] = useState(false);
 	const [remarkValue, setRemarkValue] = useState('');
 
-	const {
-		advanceDocumentId = '',
-		amountPerContainer = 0,
-		numberOfContainers = 0,
-		paymentMode = '',
-		remark = '',
-		supplierName = '',
-		totalAmountToBePaid = 0,
-	} = advanceSecurityDeposit || {};
 	const { getData, loading } = GetSecurityDepositData({
 		refetch,
 		setShowDepositModal,
@@ -27,34 +33,6 @@ function AdvanceSecurityDeposit({ advanceSecurityDeposit, id, refetch, isEditabl
 		remarkValue,
 	});
 
-	const securityDepositDetails = [
-		{ title: 'Supplier Name', value: supplierName },
-		{ title: 'Shipment ID', value: advanceDocumentId },
-		{ title: 'Amount Per container', value: amountPerContainer },
-		{ title: 'Number of containers', value: numberOfContainers },
-		{ title: 'Total Amount to be paid', value: totalAmountToBePaid },
-		{ title: 'Payment Mode', value: paymentMode },
-		{
-			title: 'Remark',
-			value:
-	<div>
-		{remark?.length >= 30 ? (
-			<Tooltip
-				placement="top"
-				content={<div className={styles.tooltip_text}>{remark}</div>}
-				interactive
-			>
-				<div className={styles.remark_overflow}>
-					{remark}
-					...
-				</div>
-			</Tooltip>
-		) : (
-			remark
-		)}
-	</div>,
-		},
-	];
 	return (
 		<div>
 			<div>
@@ -63,7 +41,7 @@ function AdvanceSecurityDeposit({ advanceSecurityDeposit, id, refetch, isEditabl
 			{showDepositModal
 			&& (
 				<SecurityDepositCommonModal
-					securityDepositDetails={securityDepositDetails}
+					securityDepositDetails={SecurityDepositData({ advanceSecurityDeposit })}
 					showDepositModal={showDepositModal}
 					setShowDepositModal={setShowDepositModal}
 					isEditable={isEditable}

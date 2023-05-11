@@ -5,13 +5,25 @@ import ApproveAndRejectHeader from '../../ApproveAndRejectHeader';
 
 import styles from './styles.module.css';
 
+interface DetailsInterface {
+	title?:string,
+	value?:any,
+}
+interface Props {
+	itemData?: object,
+	showModal?: boolean,
+	setShowModal?:React.Dispatch<React.SetStateAction<boolean>>,
+	type?:string,
+	securityDepositDetails?: DetailsInterface[],
+}
+
 function AdvanceDepositCommonModal({
 	securityDepositDetails,
 	itemData,
 	showModal,
 	setShowModal,
 	type,
-}) {
+}:Props) {
 	return (
 		<Modal
 			size="md"
@@ -25,19 +37,22 @@ function AdvanceDepositCommonModal({
 			/>
 			<Modal.Body>
 				<ApproveAndRejectHeader row={itemData} />
-				{securityDepositDetails.map((itm) => (
-					<div key={itm?.title} className={styles.flex}>
-						<div className={styles.title}>
-							{itm.title}
+				{securityDepositDetails.map((itm) => {
+					const { title, value } = itm || {};
+					return (
+						<div key={title} className={styles.flex}>
+							<div className={styles.title}>
+								{title}
+							</div>
+							<div className={styles.divider}>
+								:
+							</div>
+							<div className={styles.name}>
+								<div>{value}</div>
+							</div>
 						</div>
-						<div className={styles.divider}>
-							:
-						</div>
-						<div className={styles.name}>
-							<div>{itm?.value}</div>
-						</div>
-					</div>
-				))	}
+					);
+				})	}
 
 			</Modal.Body>
 		</Modal>

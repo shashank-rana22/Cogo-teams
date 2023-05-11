@@ -5,6 +5,21 @@ import ApproveAndReject from '../../common/ApproveAndRejectData';
 
 import styles from './styles.module.css';
 
+interface DetailsInterface {
+	title?:string,
+	value?:any,
+}
+interface Props {
+	securityDepositDetails?:DetailsInterface[],
+	showDepositModal?: boolean,
+	setShowDepositModal?:React.Dispatch<React.SetStateAction<boolean>>,
+	isEditable?:boolean,
+	row?:object,
+	getData?:Function,
+	loading?:boolean,
+	setRemarkValue?:React.Dispatch<React.SetStateAction<string>>,
+	type?:string,
+}
 function SecurityDepositCommonModal({
 	securityDepositDetails,
 	showDepositModal,
@@ -15,7 +30,7 @@ function SecurityDepositCommonModal({
 	loading,
 	setRemarkValue,
 	type,
-}) {
+}:Props) {
 	return (
 		<Modal
 			size="md"
@@ -29,19 +44,22 @@ function SecurityDepositCommonModal({
 			/>
 			<Modal.Body>
 				{!isEditable && <ApproveAndReject row={row} />}
-				{securityDepositDetails.map((itm) => (
-					<div key={itm?.title} className={styles.flex}>
-						<div className={styles.title}>
-							{itm.title}
+				{securityDepositDetails.map((itm) => {
+					const { title, value } = itm || {};
+					return (
+						<div key={title} className={styles.flex}>
+							<div className={styles.title}>
+								{title}
+							</div>
+							<div className={styles.divider}>
+								:
+							</div>
+							<div className={styles.name}>
+								<div>{value || ''}</div>
+							</div>
 						</div>
-						<div className={styles.divider}>
-							:
-						</div>
-						<div className={styles.name}>
-							<div>{itm?.value || ''}</div>
-						</div>
-					</div>
-				))	}
+					);
+				})}
 
 				{isEditable && (
 					<>

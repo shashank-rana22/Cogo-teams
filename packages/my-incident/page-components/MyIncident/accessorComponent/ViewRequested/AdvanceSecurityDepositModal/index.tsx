@@ -1,51 +1,32 @@
-import { Button, Tooltip } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import React from 'react';
 
 import AdvanceDepositCommonModal from '../AdvanceDepositCommonModal';
 
-import styles from './styles.module.css';
+import SecurityDepositData from './securityDepositData';
 
-function AdvanceSecurityDepositModal({ itemData, showModal, setShowModal }) {
+interface DepositInterface {
+	advanceDocumentId?: string,
+	amountPerContainer?:number,
+	numberOfContainers?:number,
+	totalAmountToBePaid?:number,
+	paymentMode?: string,
+	remark?: string,
+	supplierName?: string,
+}
+interface ItemInterface {
+	status?:string,
+	data?:{ advanceSecurityDeposit?: DepositInterface },
+}
+interface Props {
+	itemData?:ItemInterface,
+	showModal?: boolean,
+	setShowModal?:React.Dispatch<React.SetStateAction<boolean>>,
+}
+function AdvanceSecurityDepositModal({ itemData, showModal, setShowModal }:Props) {
 	const { status, data } = itemData || {};
 	const { advanceSecurityDeposit } = data || {};
-	const {
-		advanceDocumentId = '',
-		amountPerContainer = 0,
-		numberOfContainers = 0,
-		paymentMode = '',
-		remark = '',
-		supplierName = '',
-		totalAmountToBePaid = 0,
-	} = advanceSecurityDeposit || {};
 
-	const securityDepositDetails = [
-		{ title: 'Supplier Name', value: supplierName },
-		{ title: 'Shipment ID', value: advanceDocumentId },
-		{ title: 'Amount Per container', value: amountPerContainer },
-		{ title: 'Number of containers', value: numberOfContainers },
-		{ title: 'Total Amount to be paid', value: totalAmountToBePaid },
-		{ title: 'Payment Mode', value: paymentMode },
-		{
-			title: 'Remark',
-			value:
-	<div>
-		{remark?.length >= 30 ? (
-			<Tooltip
-				placement="top"
-				content={<div className={styles.tooltip_text}>{remark}</div>}
-				interactive
-			>
-				<div className={styles.remark_overflow}>
-					{remark}
-					...
-				</div>
-			</Tooltip>
-		) : (
-			remark
-		)}
-	</div>,
-		},
-	];
 	return (
 		<div>
 			{status === 'REJECTED'
@@ -56,7 +37,7 @@ function AdvanceSecurityDepositModal({ itemData, showModal, setShowModal }) {
 			{showModal
 			&& (
 				<AdvanceDepositCommonModal
-					securityDepositDetails={securityDepositDetails}
+					securityDepositDetails={SecurityDepositData({ advanceSecurityDeposit })}
 					itemData={itemData}
 					showModal={showModal}
 					setShowModal={setShowModal}
