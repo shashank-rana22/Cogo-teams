@@ -1,0 +1,28 @@
+.container {
+    width: 100%;
+}
+
+.display_container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.select_row {
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+.row_label {
+    padding-bottom: 6px;
+    color: #4f4f4f;
+}
+
+.superscipt {
+    color: #EE3425;
+}
+
+.modal_btn {
+    width: 100%;
+    margin-top: 8px;
+}

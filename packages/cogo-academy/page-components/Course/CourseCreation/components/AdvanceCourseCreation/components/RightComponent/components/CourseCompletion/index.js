@@ -1,138 +1,173 @@
-import { Textarea, Select, Button, FileSelect } from '@cogoport/components';
-import { IcMUpload } from '@cogoport/icons-react';
+import { useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import ModalContent from './ModalContent';
+import { getFieldController } from '../../../../../../../commons/getFieldController';
+
+import ConditionSelectComponent from './ConditionSelectComponent';
+import { controls, selectControls } from './controls';
 import styles from './styles.module.css';
+import UploadComponent from './UploadComponent';
 
 function CourseCompletion() {
+	const {
+		control,
+		watch,
+		formState: { errors = {} },
+	} = useForm();
+
 	const [value, onChange] = useState([]);
 	const [show, setShow] = useState(false);
 	const [multiSelectedUser, setMultiSelectedUser] = useState([]);
 	const [multiSelectedEdit, setMultiSelectedEdit] = useState([]);
-	const [fileValue, setFileValue] = useState();
-	// const [loading, setLoading] = useState(false);
-
 	const onClose = () => setShow(false);
 
-	const options = [
-		{ label: 'Harper Lee', value: 'To Kill a Mockingbird' },
-		{ label: 'Lev Tolstoy', value: 'War and Peace' },
-		{ label: 'Fyodor Dostoyevsy', value: 'The Idiot' },
-	];
+	const options = [];
 
 	return (
-		<div className={styles.conatiner}>
-			<div className={styles.description_box}>
-				<div className={styles.description_title}>
-					Course Completion Description Text
-					<sup className={styles.superscipt}>*</sup>
-				</div>
-				<Textarea
-					name="textarea"
-					size="xs"
-					placeholder="Type Description you want the user to see on completion of the course"
-					className={styles.textarea}
-				/>
-			</div>
-			<div className={styles.form}>
-				<div className={styles.form_left}>
-					<div className={styles.select_row}>
-						Reward on Course Completion
-						<sup className={styles.superscipt}>*</sup>
-						<Select value={value} onChange={onChange} placeholder="Select Criteria" options={options} />
-					</div>
-					<div className={styles.select_row}>
-						Reward on Course Completion
-						<sup className={styles.superscipt}>*</sup>
-						<Select value={value} onChange={onChange} placeholder="Select Reward" options={options} />
-					</div>
-				</div>
-				<div className={styles.form_right}>
-					<div className={styles.select_row}>
-						Select test from Assessment Module
-						<sup className={styles.superscipt}>*</sup>
-						<Select value={value} onChange={onChange} placeholder="Select" options={options} />
-					</div>
-					<div className={styles.select_row}>
-						Select Reward Template
-						<sup className={styles.superscipt}>*</sup>
+		<div className={styles.container}>
 
-						<Button
-							onClick={() => setShow(true)}
-							style={{ background: '#FEF199', color: '#000000' }}
-							size="lg"
-							className={styles.modal_btn}
-						>
-							Select Certificate Template
-						</Button>
-						{show ? (
-							<ModalContent
+			{controls.map((controlItem) => {
+				const { name, label, type, subControls = [], subLabel = '' } = controlItem || {};
+
+				if (type === 'groupSelect') {
+					return (
+						<div className={styles.group_container}>
+							<div className={`${styles.group_select_container} ${styles[name]}`}>
+								{subControls.map((subControlItem) => {
+									const {
+										name:subControlName,
+										label:subControlLabel,
+										type:subControlType,
+									} = subControlItem || {};
+
+									const SubControlElement = getFieldController(subControlType);
+
+									return (
+										<div
+											key={subControlName}
+											className={`${styles.form_group} ${styles[subControlName]}`}
+										>
+											<div className={styles.label}>
+												{subControlLabel}
+												<sup className={styles.superscipt}>*</sup>
+											</div>
+
+											<div className={`${styles.input_group} ${styles[subControlName]}`}>
+												<SubControlElement
+													{...subControlItem}
+													key={subControlName}
+													control={control}
+													id={`${subControlName}_input`}
+												/>
+											</div>
+
+											{errors?.[subControlName]?.message ? (
+												<div className={styles.error_message}>
+													{errors?.[subControlName]?.message}
+												</div>
+											) : null}
+
+										</div>
+									);
+								})}
+							</div>
+
+							<ConditionSelectComponent
+								options={options}
 								onClose={onClose}
+								multiSelectedEdit={multiSelectedEdit}
+								multiSelectedUser={multiSelectedUser}
+								setMultiSelectedUser={setMultiSelectedUser}
+								setMultiSelectedEdit={setMultiSelectedEdit}
 								show={show}
 								setShow={setShow}
 								value={value}
-								options={options}
 								onChange={onChange}
-								multiSelectedUser={multiSelectedUser}
-								setMultiSelectedUser={setMultiSelectedUser}
-								multiSelectedEdit={multiSelectedEdit}
-								setMultiSelectedEdit={setMultiSelectedEdit}
+								watch={watch}
 							/>
+						</div>
+					);
+				}
+				const Element = getFieldController(type);
+
+				if (!Element) return null;
+				return (
+					<div key={name} className={`${styles.form_group} ${styles[name]}`}>
+						<div className={styles.label}>
+							{label}
+							<sup className={styles.superscipt}>*</sup>
+						</div>
+
+						<div className={`${styles.input_group} ${styles[name]}`}>
+							<Element
+								{...controlItem}
+								key={name}
+								control={control}
+								id={`${name}_input`}
+							/>
+						</div>
+
+						{!isEmpty(subLabel) ? <div className={styles.sub_label}>{subLabel}</div> : null}
+
+						{errors?.[name]?.message ? (
+							<div className={styles.error_message}>
+								{errors?.[name]?.message}
+							</div>
 						) : null}
 					</div>
-				</div>
-			</div>
-			<div className={styles.form_container}>
-				<div className={styles.form_two}>
-					<div className={styles.form_left}>
-						<div className={styles.select_row_two}>
-							Reward on Course Completion
-							<sup className={styles.superscipt}>*</sup>
-							<Select value={value} onChange={onChange} placeholder="Select Criteria" options={options} />
-						</div>
-					</div>
-					<div className={styles.form_right}>
-						<div className={styles.select_row_two}>
-							Select test from Assessment Module
-							<sup className={styles.superscipt}>*</sup>
-							<Select value={value} onChange={onChange} placeholder="Select" options={options} />
-						</div>
-					</div>
-				</div>
-				<div style={{ display: 'block', alignItems: 'center', marginBottom: '16px' }}>
-					<p>Upload Authority Signature</p>
-					<FileSelect value={fileValue} onChange={setFileValue} />
-					{/* <ProgressBar /> */}
-				</div>
-				<div className={styles.button_container}>
-					<Button size="md" themeType="secondary">
-						<IcMUpload color="#000000" style={{ marginRight: '4px' }} />
-						{' '}
-						Upload
-					</Button>
-					<Button size="md" themeType="tertiary">Cancel</Button>
-				</div>
-			</div>
-			<div className={styles.select_row}>
-				Time permitted to complete Course, in order to get Reward*
-				<sup className={styles.superscipt}>*</sup>
-				<div className={styles.multiple_select}>
-					<Select
-						value={value}
-						onChange={onChange}
-						placeholder="Select period of"
-						options={options}
-						style={{ width: '50%', marginRight: '24px' }}
-					/>
-					<Select
-						value={value}
-						onChange={onChange}
-						placeholder="Select"
-						options={options}
-						style={{ width: '50%' }}
-					/>
-				</div>
+				);
+			})}
+
+			<UploadComponent />
+			<div className={`${styles.select_container}`}>
+				{selectControls.map((controlItem) => {
+					const { name, label, subControls = [] } = controlItem || {};
+
+					return (
+						<>
+							<div className={styles.label}>
+								{label}
+								<sup className={styles.superscipt}>*</sup>
+							</div>
+							<div className={styles.select_group}>
+
+								{subControls.map((subControlItem) => {
+									const {
+										name:subControlName,
+										type:subControlType,
+									} = subControlItem || {};
+									const SubControlElement = getFieldController(subControlType);
+									console.log(subControlName, 'subControl');
+									return (
+										<div
+											key={name}
+											className={`${styles.form_group} ${styles[subControlName]}`}
+										>
+
+											<div className={`${styles.input_group} ${styles[subControlName]}`}>
+												<SubControlElement
+													{...controlItem}
+													key={subControlName}
+													control={control}
+													id={`${subControlName}_input`}
+												/>
+											</div>
+
+											{errors?.[subControlName]?.message ? (
+												<div className={styles.error_message}>
+													{errors?.[name]?.message}
+												</div>
+											) : null}
+
+										</div>
+									);
+								})}
+							</div>
+						</>
+					);
+				})}
+
 			</div>
 		</div>
 	);
