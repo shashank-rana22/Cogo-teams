@@ -4,13 +4,15 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function SageDetailsCard({ sageInvoiceInfo }) {
+function SageDetailsCard({ InvoiceInfo }) {
 	const {
 		name = '', invoice_number : InvoiceNumber = '',
 		sage_status : SageStatus = '', bpr_number : BprNumber = '', job_number: JobNumber = '',
 		currency = '', exchange_rate : ExchangeRate = '',
 		tax_amount : TaxAmount = '', grand_total: GrandTotal = '', ledger_total: LedgerTotal = '',
-	} = sageInvoiceInfo;
+		status = '',
+	} = InvoiceInfo;
+
 	return (
 		<div className={styles.div_flex}>
 			<div>
@@ -60,7 +62,7 @@ function SageDetailsCard({ sageInvoiceInfo }) {
 			</div>
 			<div>
 				<div className={styles.lable}>Status</div>
-				<div className={styles.styled_lable_value}>{SageStatus || '-'}</div>
+				<div className={styles.styled_lable_value}>{SageStatus || status || '-'}</div>
 			</div>
 			<div>
 				<div className={styles.lable}>BPR Number</div>

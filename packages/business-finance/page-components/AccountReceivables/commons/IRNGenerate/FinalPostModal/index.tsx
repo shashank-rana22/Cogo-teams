@@ -1,7 +1,6 @@
 import { Button, Modal, Placeholder } from '@cogoport/components';
 import React from 'react';
 
-import InvoiceDetailCard from './InvoiceDetailCard';
 import Loader from './Loader';
 import SageDetailsCard from './SageDetailsCard';
 import styles from './styles.module.css';
@@ -36,13 +35,13 @@ function FinalPostModal({
 
 							<div className={styles.styled_text}>Invoice Details</div>
 
-							<InvoiceDetailCard platformInvoiceInfo={platformInvoiceInfo} />
+							<SageDetailsCard InvoiceInfo={platformInvoiceInfo} />
 							<div className={styles.flex_style}>
 								<div className={styles.styled_text}>Invoice Details On</div>
 								<div className={styles.sage_style}> SAGE</div>
 							</div>
 
-							<SageDetailsCard sageInvoiceInfo={sageInvoiceInfo} />
+							<SageDetailsCard InvoiceInfo={sageInvoiceInfo} />
 
 						</div>
 					)}
