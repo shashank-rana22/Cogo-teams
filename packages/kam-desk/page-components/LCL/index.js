@@ -1,4 +1,5 @@
 import DeskTabs from '../../common/DeskTabs';
+import Filters from '../../common/Filters';
 import HeaderFilters from '../../common/HeaderFilters';
 import Loader from '../../common/Loader';
 import ShipmentType from '../../common/ShipmentType';
@@ -22,6 +23,7 @@ function Lcl() {
 
 			<div className={styles.stepper_container}>
 				<StepperTabs />
+				<Filters />
 			</div>
 
 			<div className={styles.tabs_container}>

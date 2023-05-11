@@ -1,6 +1,5 @@
 import { Toggle, Input, Popover, Button } from '@cogoport/components';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
-import ScopeSelect from '@cogoport/scope-select';
 import { useState, useContext } from 'react';
 
 import KamDeskContext from '../../context/KamDeskContext';
@@ -13,6 +12,8 @@ function Filters() {
 		stepperTab, activeTab, filters = {}, setFilters = () => {},
 		scopeFilters, handleVersionChange = () => {},
 	} = useContext(KamDeskContext);
+
+	const { q } = filters || {};
 
 	const [popoverFilter, setPopoverFilter] = useState({ ...(filters || {}) });
 	const [showPopover, setShowPopover] = useState(false);
@@ -31,7 +32,7 @@ function Filters() {
 				</div>
 			) : null} */}
 
-			{/* <div className={styles.input_container}>
+			<div className={styles.input_container}>
 				<Input
 					placeholder="Search Shipments"
 					type="search"
@@ -40,7 +41,7 @@ function Filters() {
 					value={q}
 					onChange={(val) => setFilters({ ...filters, q: val, page: 1 })}
 				/>
-			</div> */}
+			</div>
 
 			<div className={styles.popover_container}>
 				<Popover
@@ -69,8 +70,6 @@ function Filters() {
 					</Button>
 				</Popover>
 			</div>
-
-			{/* <ScopeSelect size="md" defaultValues={scopeFilters} /> */}
 		</div>
 	);
 }

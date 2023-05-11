@@ -1,4 +1,5 @@
 import DeskTabs from '../../common/DeskTabs';
+import Filters from '../../common/Filters';
 import HeaderFilters from '../../common/HeaderFilters';
 import Loader from '../../common/Loader';
 import ShipmentType from '../../common/ShipmentType';
@@ -17,6 +18,10 @@ function All() {
 					<ShipmentType />
 				</div>
 				<HeaderFilters />
+			</div>
+
+			<div className={styles.stepper_container}>
+				<Filters />
 			</div>
 
 			<div className={styles.tabs_container}>

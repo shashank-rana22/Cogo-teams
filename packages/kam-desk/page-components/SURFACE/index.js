@@ -22,6 +22,7 @@ function Surface() {
 
 			<div className={styles.stepper_container}>
 				<StepperTabs />
+				<Filters />
 			</div>
 
 			<div className={styles.tabs_container}>
