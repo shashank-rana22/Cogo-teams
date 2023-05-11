@@ -129,7 +129,7 @@ export default function Card({
 		}
 	};
 
-	const stakeholders =		(item?.stakeholders || [])
+	const stakeholders = (item?.stakeholders || [])
 		.filter((stakeholder) => (stakeholder.service_id === item?.freight_service?.id)
 		|| (stakeholder?.service_id === null));
 
