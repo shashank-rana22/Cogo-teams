@@ -86,6 +86,12 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 
 	const { irn_label: IrnLabel } = labels || {};
 
+	const handleFinalpost = () => {
+		setFinalPostToSageModal(true);
+		getSageInvoiceData();
+		setVisible(!visible);
+	};
+
 	const content = () => (
 		<div>
 			{partnerId === GLOBAL_CONSTANTS.country_entity_ids.VN ? (
@@ -128,10 +134,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 							<Button
 								size="sm"
 								disabled={finalPostLoading}
-								onClick={() => {
-									setFinalPostToSageModal(true); getSageInvoiceData();
-									setVisible(!visible);
-								}}
+								onClick={() => handleFinalpost()}
 							>
 								<div className={styles.button_style}>Final Post</div>
 							</Button>

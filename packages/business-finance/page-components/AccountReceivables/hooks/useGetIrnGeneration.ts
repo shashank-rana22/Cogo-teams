@@ -43,9 +43,9 @@ const useGetIrnGeneration = ({ id, refetch }: IrnGenerationProps) => {
 		sageDataTrigger,
 	] = useRequestBf(
 		{
-			url     : '/sales/invoice/final-post-sage-info',
+			url     : `/sales/invoice/${id}/final-post-sage-info`,
 			method  : 'get',
-			authKey : 'get_sales_invoice_final_post_sage_info',
+			authKey : 'get_sales_invoice_by_id_final_post_sage_info',
 		},
 		{ manual: true },
 	);
@@ -85,13 +85,11 @@ const useGetIrnGeneration = ({ id, refetch }: IrnGenerationProps) => {
 
 	const getSageInvoiceData = async () => {
 		try {
-			sageDataTrigger({
-				params: {
-					invoiceId: id,
-				},
-			});
+			sageDataTrigger();
 		} catch (e) {
-			Toast.error(e?.message);
+			console.log('e', e);
+
+			Toast.error(e?.response?.data?.message);
 		}
 	};
 

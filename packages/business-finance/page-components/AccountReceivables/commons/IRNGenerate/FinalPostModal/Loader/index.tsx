@@ -7,7 +7,7 @@ function Loader() {
 	return (
 		<>
 			{
-		[1, 2].map(() => (
+		Array.from({ length: 2 }).map(() => (
 
 			<div className={styles.style_placeholder}>
 				<Placeholder height="40px" />
