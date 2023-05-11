@@ -7,19 +7,7 @@
 		display: flex;
 		gap: 4%;
 		max-height: 70vh !important;
-	
-		.form_container {
-			flex: 1;
-			overflow: auto;
-			display: flex;
-			flex-wrap: wrap;
-			gap: 4%;
-			
-			> div {
-				width: 48%;
-			}
-		}
-	
+
 		> div:nth-of-type(2) {
 			flex: 1.5;
 		}

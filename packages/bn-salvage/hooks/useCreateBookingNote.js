@@ -27,7 +27,7 @@ export default function useCreateBookingNote({
 	closeModal,
 	currentStep,
 	refetchList,
-	schedule_departure,
+	scheduleDeparture,
 }) {
 	const controls = controlsMapping[currentStep];
 
@@ -53,15 +53,15 @@ export default function useCreateBookingNote({
 	useEffect(() => {
 		controls.forEach((ctrl, index) => {
 			if (ctrl.name === 'schedule_arrival') {
-				controls[index].minDate = schedule_departure ? addDays(schedule_departure, 1) : undefined;
-				controls[index].disable = !schedule_departure;
+				controls[index].minDate = scheduleDeparture ? addDays(scheduleDeparture, 1) : undefined;
+				controls[index].disable = !scheduleDeparture;
 			}
 			if (cut_offs.includes(ctrl.name)) {
-				controls[index].maxDate = schedule_departure;
-				controls[index].disable = !schedule_departure;
+				controls[index].maxDate = scheduleDeparture;
+				controls[index].disable = !scheduleDeparture;
 			}
 		});
-	}, [controls, schedule_departure]);
+	}, [controls, scheduleDeparture]);
 
 	return {
 		controls,
