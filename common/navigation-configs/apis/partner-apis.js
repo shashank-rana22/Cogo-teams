@@ -8127,6 +8127,12 @@ const partner = {
 			feature     : 'invoices',
 		},
 		{
+			api         : 'get_sales_invoice_final_post_sage_info',
+			access_type : 'private',
+			module      : 'invoices',
+			feature     : 'invoices',
+		},
+		{
 			api         : 'list_organization_trade_party_details',
 			access_type : 'private',
 			module      : 'Bpr',
@@ -8240,6 +8246,12 @@ const partner = {
 		},
 		{
 			api         : 'post_sales_invoice_einvoice',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'get_sales_invoice_final_post_sage_info',
 			access_type : 'private',
 			module      : 'outstanding',
 			feature     : 'outstanding',
