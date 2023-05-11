@@ -33,6 +33,7 @@ function LastMileDesk({ get = {}, activeStakeholder = '' }) {
 	const handleVersionChange = useCallback(() => {
 		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}`;
 		window.location.replace(newHref);
+		window.sessionStorage.setItem('prev_nav', newHref);
 	}, [router?.query?.partner_id, shipment_data?.id]);
 
 	const { servicesGet = {} } = useGetServices({
