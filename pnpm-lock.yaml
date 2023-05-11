@@ -188,7 +188,7 @@ importers:
   common/forms:
     specifiers:
       '@cogoport/components': ^1.0.395
-      '@cogoport/globalization': workspace:^0.0.1
+      '@cogoport/globalization': workspace:*
       '@cogoport/icons-react': ^1.0.58
       '@cogoport/request': workspace:0.1.0
       '@cogoport/utils': ^1.2.6
