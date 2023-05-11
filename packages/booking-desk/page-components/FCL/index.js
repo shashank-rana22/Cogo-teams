@@ -25,7 +25,6 @@ export default function FCLDesk({ stateProps = {} }) {
 	});
 
 	const {
-		handleVersionChange = () => {},
 		filters,
 		setFilters,
 	} = stateProps || {};
@@ -53,15 +52,6 @@ export default function FCLDesk({ stateProps = {} }) {
 
 				<div className={styles.top_header_container}>
 					<Filters stateProps={stateProps} />
-
-					<div className={styles.version}>
-						<Toggle
-							size="md"
-							onLabel="Old"
-							offLabel="New"
-							onChange={handleVersionChange}
-						/>
-					</div>
 
 					<ScopeSelect size="md" defaultValues={stateProps.scopeFilters} />
 				</div>
