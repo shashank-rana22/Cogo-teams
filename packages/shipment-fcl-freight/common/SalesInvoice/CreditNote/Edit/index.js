@@ -25,8 +25,6 @@ function Edit({
 		},
 	});
 
-	console.log({ data });
-
 	return (
 		<Modal
 			show

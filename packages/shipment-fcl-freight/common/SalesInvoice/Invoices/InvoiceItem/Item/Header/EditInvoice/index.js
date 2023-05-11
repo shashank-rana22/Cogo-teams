@@ -2,8 +2,6 @@ import { Button, Modal } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
-import FormLayout from '../../../../../../../../../packages/shipment-fcl-freight/common/Tasks/TaskExecution/helpers/Layout'
-// import FormLayout from '../../../../../../../../commons/Layout';
 // import useEditLineItems from '../../../../../../../hooks/useEditLineItems';
 import controls from './controls';
 import { useForm } from '@cogoport/forms';
@@ -84,13 +82,13 @@ function EditInvoice({
 						</span>
 					</div>
 
-					<FormLayout
+					{/* <FormLayout
 						controls={control}
 						// fields={fields}
 						errors={errors}
 						// customValues={customValues}
 						// disabledProps={disabledProps}
-					/>
+					/> */}
 				</div>
 
 			</Modal.Body>

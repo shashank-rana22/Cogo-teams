@@ -29,24 +29,23 @@ function InvoiceItem({
 			maximumFractionDigits : 2,
 		},
 	});
-	console.log(item, " :item");
 
 	return (
 		<main className={styles.container}>
 			<div className={styles.header_container}>
-				<div className={styles.InvoicePartyDetails}>
-					<div className={styles.InvoicingPartyName}>
+				<div className={styles.invoice_party_details}>
+					<div className={styles.invoice_party_name}>
 						{item?.name || item?.business_name}
 					</div>
 					<div className={styles.label}>Invoicing Party</div>
 				</div>
 
-				<div className={styles.InvoiceValueContainer} style={org_outstanding}>
-					<div className={styles.InvoiceValueTitle}>
+				<div className={styles.invoice_value_container} style={org_outstanding}>
+					<div className={styles.invoice_value_title}>
 						Invoice Value -
 					</div>
 
-					<div className={styles.InvoiceValue}>
+					<div className={styles.invoice_value}>
 						{formatAmount({
 							amount   : total_price_discounted,
 							currency : total_price_currency,
@@ -60,12 +59,12 @@ function InvoiceItem({
 				</div>
 
 				{org_outstanding ? (
-					<div className={styles.InvoiceValueContainer} style={{ marginLeft: '2.5%' }}>
-						<div className={styles.InvoiceValueTitle}>
+					<div className={styles.invoice_value_container} style={{ marginLeft: '2.5%' }}>
+						<div className={styles.invoice_value_title}>
 							Total Outstanding -
 						</div>
 
-						<div className={styles.InvoiceValue}>{outStanding}</div>
+						<div className={styles.invoice_value}>{outStanding}</div>
 					</div>
 				) : null}
 			</div>

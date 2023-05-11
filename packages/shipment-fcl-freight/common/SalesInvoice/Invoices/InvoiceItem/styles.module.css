@@ -22,7 +22,7 @@
 	}
 }
 
-.InvoicePartyDetails{
+.invoice_party_details{
 	display: flex;
 	flex-direction: row;
 	margin-left: 8px;
@@ -30,8 +30,8 @@
 	line-height: 20px;
 }
 
-.InvoicingPartyName{
-	font-weight: 500;
+.invoice_party_name{
+	font-weight: 600;
 	font-size: 18px;
 	margin-right: 10px;
 
@@ -45,7 +45,7 @@
 	font-size: 14px;
 }
 
-.InvoiceValueContainer{
+.invoice_value_container{
 	display: flex;
 	align-items: center;
 	margin-left: 2.5%;
@@ -61,7 +61,7 @@
 	}
 }
 
-.InvoiceValueTitle{
+.invoice_value_title{
 	color: #333333;
 	font-weight: 500;
 	font-size: 18px;
@@ -71,7 +71,7 @@
 	}
 }
 
-.InvoiceValue{
+.invoice_value{
 	color: #F68B21;
 	margin-left: 4px;
 

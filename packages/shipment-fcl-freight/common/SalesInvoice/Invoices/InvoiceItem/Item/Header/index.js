@@ -1,12 +1,11 @@
-import { Button, cl, Tooltip, isEmpty } from '@cogoport/components';
+import { Button, cl, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 // import { useSelector } from '@cogo/store';
 // import { Flex } from '@cogoport/front/components';
 // import { ToolTip, Button } from '@cogoport/front/components/admin';
-// import { startCase, isEmpty } from '@cogoport/front/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import Actions from './Actions';
@@ -113,7 +112,7 @@ function Header({
 			</div>
 
 			<div className={cl`${styles.flex_row} ${open ? styles.open : ''}`}>
-				<div className={styles.InvoicePartyDetails}>
+				<div className={styles.invoice_party_details}>
 					<div className={styles.invoice_party_name}>
 						{billing_address?.name || billing_address?.business_name}
 					</div>

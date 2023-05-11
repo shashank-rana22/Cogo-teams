@@ -2,7 +2,7 @@ import { Modal, Button } from '@cogoport/components';
 import React from 'react';
 
 import styles from './styles.module.css';
-// import useSendInvoiceEmail from '../../../../../../../../hooks/useSendInvoiceEmail';
+import useSendInvoiceEmail from '../../../../../../Hooks/useSendInvoiceEmail';
 
 function SendInvoiceEmail({
 	show = false,
@@ -10,11 +10,11 @@ function SendInvoiceEmail({
 	invoice = {},
 	refetch = () => {},
 }) {
-	// const { handleSend, loading } = useSendInvoiceEmail({
-	// 	setShow,
-	// 	invoice,
-	// 	refetch,
-	// });
+	const { handleSend, loading } = useSendInvoiceEmail({
+		setShow,
+		invoice,
+		refetch,
+	});
 
 	return (
 		<Modal show={show} onClose={() => setShow(false)}>
@@ -24,13 +24,13 @@ function SendInvoiceEmail({
 				<Button
 					className="secondary"
 					onClick={() => setShow(false)}
-						// disabled={loading}
+						disabled={loading}
 					style={{ marginRight: '20px' }}
 				>
 					Cancel
 				</Button>
 
-				<Button>
+				<Button onClick={handleSend} disabled={loading}>
 					Send Email
 				</Button>
 			</Modal.Footer>
