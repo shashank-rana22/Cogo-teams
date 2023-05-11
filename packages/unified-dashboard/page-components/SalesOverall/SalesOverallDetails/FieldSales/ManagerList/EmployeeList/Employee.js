@@ -1,6 +1,7 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import Shipment from '../../../../../../common/SaleShipmentTable';
 import AfterHeader from '../../../../../../common/SaleShipmentTable/AfterHeader';
@@ -161,6 +162,7 @@ function Employee({ val = {}, currency, filters, employeePad = 20 }) {
 					)}
 					{val?.employees?.map((employee) => (
 						<Employee
+							key={uuidv4()}
 							val={employee}
 							currency={currency}
 							filters={filters}
@@ -175,7 +177,7 @@ function Employee({ val = {}, currency, filters, employeePad = 20 }) {
 				<>
 					<AfterHeader showGrid={showShipments} />
 					{shipments?.list?.map((shipment) => (
-						<Shipment itemData={shipment} />
+						<Shipment key={uuidv4()} itemData={shipment} />
 					))}
 				</>
 			) : (

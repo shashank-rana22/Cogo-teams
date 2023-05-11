@@ -1,4 +1,5 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { v4 as uuidv4 } from 'uuid';
 
 import currencyCoversion from '../../../utils/currencyCoversion';
 import getMonthYear from '../../../utils/getMonthYear';
@@ -33,7 +34,7 @@ const DesktopCard = ({
 	});
 
 	return cardRevenueData.map((val) => (
-		<div className={styles.all_card}>
+		<div key={uuidv4()} className={styles.all_card}>
 			<div className={borderColor(val) ? `${styles.card_wrapper_border}` : `${styles.card_wrapper}`}>
 				<div className={styles.revenue_wrapper}>
 					<div className={styles.revenue_col}>

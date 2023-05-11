@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import { revenueFilters } from '../../constants/revenue-filters';
 
@@ -25,6 +26,7 @@ function FilterTabs({
 		<>
 			{revenueFilters.map((item) => (
 				<Button
+					key={uuidv4()}
 					disabled={loading}
 					className={item.value === selectedFilterTab
 						? `${styles.active} ${styles.revenue_filter_btn}` : `${styles.revenue_filter_btn}`}

@@ -1,6 +1,7 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import colors from '../../utils/colors';
 import currencyCoversion from '../../utils/currencyCoversion';
@@ -31,7 +32,7 @@ function RevenueData({ data = [], currency, heading = '' }) {
 				</div>
 			</div>
 			{data.map((val, index) => (
-				<div className={styles.revenue_row_data}>
+				<div key={uuidv4()} className={styles.revenue_row_data}>
 					<div className={styles.pie_data}>
 						<div className={styles.shipment_type_dot} style={{ background: colors[index] }} />
 						<div className={styles.shipment_text}>

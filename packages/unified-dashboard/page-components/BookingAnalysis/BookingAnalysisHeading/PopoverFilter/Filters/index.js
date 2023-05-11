@@ -1,5 +1,6 @@
 import { CheckboxGroup, Checkbox, Button } from '@cogoport/components';
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import { serviceTypeArr, tradeTypeArr } from '../../../../../constants/checkbox-data';
 import { trade, shipment } from '../../../../../constants/filter-data';
@@ -90,6 +91,7 @@ function Filters({
 					<div className={styles.check_trade}>
 						{trade.map((item) => (
 							<CheckboxGroup
+								key={uuidv4()}
 								className={styles.trade_checkbox}
 								options={item.options}
 								onChange={(e) => onChangeCheckbox(e, 'trade_type')}
@@ -105,6 +107,7 @@ function Filters({
 					<div className={styles.check_shipment}>
 						{shipment.map((item) => (
 							<CheckboxGroup
+								key={uuidv4()}
 								className={styles.shipment_checkbox}
 								options={item.options}
 								onChange={(e) => onChangeCheckbox(e, 'shipment_type')}

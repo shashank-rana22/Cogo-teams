@@ -2,6 +2,7 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import GetDashBoardTabs from '../hooks/getDashBoardTabs';
 
@@ -78,6 +79,7 @@ function UnifiedDashboard() {
 					if ((item.user_id || []).includes(profile.id)) {
 						return (
 							<TabPanel
+								key={uuidv4()}
 								name={item.urlKey}
 								title={item.title}
 							>
@@ -92,6 +94,7 @@ function UnifiedDashboard() {
 					) {
 						return (
 							<TabPanel
+								key={uuidv4()}
 								name={item.urlKey}
 								title={item.title}
 							>

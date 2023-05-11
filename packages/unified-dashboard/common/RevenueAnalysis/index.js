@@ -3,6 +3,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowLeft } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import currencyCoversion from '../../utils/currencyCoversion';
 import getMonthYear from '../../utils/getMonthYear';
@@ -103,6 +104,7 @@ function RevenueAnalysis({
 				{revenue_analysis?.length > 0
 					&& revenue_analysis?.map((data) => (
 						<div
+							key={uuidv4()}
 							className={styles.card_wrapper}
 							style={{
 								background: currentMonth === `${data?.month}${data?.year}` ? '#F9FEF9'

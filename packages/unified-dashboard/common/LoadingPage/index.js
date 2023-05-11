@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import Loader from '../Loader';
 
@@ -8,7 +9,7 @@ export function CardLoader() {
 	return (
 		<>
 			{[...Array(4)].map(() => (
-				<div>
+				<div key={uuidv4()}>
 					<div className={styles.card_wrapper}>
 						<Loader count={3} />
 					</div>

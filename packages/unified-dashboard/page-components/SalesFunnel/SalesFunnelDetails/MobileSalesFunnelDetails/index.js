@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import NoDataFound from '../../../../common/NoDataFound';
 
 import FieldSales from './FieldSales';
@@ -13,7 +15,7 @@ function MobileFunnelHeader({
 	return (
 		<div className={styles.card_wrapper}>
 			{distribution?.length > 0 ? (distribution.map((val) => (
-				<FieldSales val={val} currency={currency} filters={filters} />
+				<FieldSales key={uuidv4()} val={val} currency={currency} filters={filters} />
 			))) : (
 				<NoDataFound className={styles.nodata} />
 			)}
