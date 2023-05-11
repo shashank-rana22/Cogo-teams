@@ -9,13 +9,14 @@ function SingleColumn({ lineitem, fields, ismappings, renderCheck, mappingtable 
 	const renderMethod = ismappings ? renderMappingsFunction(renderCheck) : renderFunction;
 	return (
 		<div className={styles.tablecolumn}>
-			{fields.map((field) => (
+			{fields?.map((field) => (
 				<div
 					style={{
 						flex  : (field.span || 1),
 						width : `${((field.span || 1) * (100 / 12))}px`,
 					}}
 					className={`${styles.value} ${!mappingtable ? styles.paddingtotal : ''}`}
+					key={fields?.key || fields?.name}
 				>
 					{renderMethod[field?.key] ? renderMethod[field?.key](lineitem) : '-'}
 				</div>

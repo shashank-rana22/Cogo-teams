@@ -96,7 +96,7 @@ function KnockOffMode({
 
 								<div className={styles.lineitem}>
 									{(item?.purchase_line_items || []).map((pi) => (
-										<div className={styles.lineitemwrap}>
+										<div className={styles.lineitemwrap} key={pi.code}>
 											{pi?.name}
 											<div className={styles.lineitemvalue}>
 												{getFormattedAmount(pi?.tax_total_price, pi?.currency)}

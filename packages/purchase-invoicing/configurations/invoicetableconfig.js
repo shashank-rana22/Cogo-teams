@@ -37,7 +37,7 @@ export const invoiceconfig = [
 						theme="light"
 						interactive
 						content={(servicesKeys || []).map((item) => (
-							<div className={styles.servicetooltip}>
+							<div className={styles.servicetooltip} key={item}>
 								{startCase(item)}
 								{' '}
 								-
@@ -48,7 +48,7 @@ export const invoiceconfig = [
 						<div className={styles.flex}>
 							<span className={styles.servicemappings}>
 								{(servicesKeys || []).map((item) => (
-									<span style={{ marginRight: '10px' }}>
+									<span style={{ marginRight: '10px' }} key={item}>
 										{startCase(item)}
 										{' '}
 										-

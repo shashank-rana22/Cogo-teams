@@ -17,14 +17,14 @@ function LineItemTable({ lineItems }) {
 								width : `${((field.span || 1) * (100 / 12))}px`,
 							}}
 							className={styles.fieldstyle}
-							key={field.key}
+							key={field.key || field.name}
 						>
 							{field.label}
 						</div>
 					))}
 				</div>
 				{lineItems.map((lineitem) => (
-					<SingleColumn lineitem={lineitem} fields={lineItemConfig} />
+					<SingleColumn lineitem={lineitem} fields={lineItemConfig} key={lineitem.code} />
 				))}
 			</div>
 		</div>

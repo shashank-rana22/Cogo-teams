@@ -10,11 +10,17 @@ function Accordion({ title, children, open = false, showerror }) {
 		setActive(!active);
 	}
 
+	const classname = active ? `${styles.accordion_active}` : styles.accordion;
+
+	const activeclass = active ? styles.active : '';
+
+	const activeheader = active ? `${styles.accordion_header} ${active}` : styles.accordion_header;
+
 	return (
-		<div className={active ? `${styles.accordion_active}` : styles.accordion}>
+		<div className={classname}>
 			<button
 				type="button"
-				className={active ? `${styles.accordion_header} ${active}` : styles.accordion_header}
+				className={activeheader}
 				onClick={toggleActive}
 			>
 				<h3 className={styles.accordion_title}>{title}</h3>
@@ -29,7 +35,7 @@ function Accordion({ title, children, open = false, showerror }) {
 			</button>
 			<div className={active ? styles.accordion_line_active : styles.accordion_line} />
 			{active && (
-				<div className={`${styles.description} ${active ? styles.active : ''}`}>
+				<div className={`${styles.description} ${activeclass}`}>
 					<p className={styles.accordion_content}>
 						{children}
 					</p>

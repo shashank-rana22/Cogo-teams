@@ -47,7 +47,7 @@ function ServiceTables({
 				}));
 
 				return (
-					<div className={styles.servicecontainer}>
+					<div className={styles.servicecontainer} key={singlecharge?.id}>
 						{showCargo && (
 							<div style={{ marginLeft: '4px' }}>
 								<CargoDetails item={singlecharge} />
@@ -75,6 +75,7 @@ function ServiceTables({
 									ismappings={ismappings}
 									renderCheck={renderCheck}
 									mappingtable={mappingtable}
+									key={lineitem?.code}
 								/>
 							))}
 							{showTotal && (
