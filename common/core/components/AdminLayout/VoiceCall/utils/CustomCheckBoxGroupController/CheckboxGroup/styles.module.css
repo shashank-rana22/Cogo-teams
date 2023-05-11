@@ -1,0 +1,13 @@
+.radio_disabled {
+	cursor: not-allowed;
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 10px;
+}
+
+.checkbox_class {
+	flex-basis: 50%;
+}

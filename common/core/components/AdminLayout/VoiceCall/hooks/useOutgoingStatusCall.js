@@ -1,59 +1,62 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useDispatch, useSelector } from '@cogoport/store';
-import { setProfileState } from '@cogoport/store/reducers/profile';
-import { useState } from 'react';
+import { useCallback } from 'react';
 
 import { CALL_END_STATUS } from '../constant';
 
-function useOutgoingStatusCall({ callId }) {
-	const { call_record_id = '' } = callId || {};
+const updateLocalState = (p = {}, attendees = [], call_id = '', live_call_status = '') => {
+	const prevAttendes = p.attendees || [];
+	const lastAttendee = prevAttendes.pop() || {};
+	const updateLastAttendeee = attendees?.find(({ agent_id }) => agent_id === lastAttendee?.id);
+
+	if (updateLastAttendeee) {
+		prevAttendes.push({
+			...lastAttendee,
+			status: updateLastAttendeee?.call_status,
+		});
+	}
+
+	return {
+		...p,
+		attendees          : prevAttendes,
+		callId             : call_id,
+		status             : live_call_status,
+		hasAgentPickedCall : true,
+	};
+};
+
+function useOutgoingStatusCall({
+	setLocalCallState,
+	checkToOpenFeedBack,
+}) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/check_outgoing_call_status',
 		method : 'post',
 	}, { manual: true });
 
-	const dispatch = useDispatch();
-	const profileData = useSelector(({ profile }) => profile);
-	const [status, setStatus] = useState('');
-
-	const callStatusApi = async () => {
+	const fetchCallStatus = useCallback(async (callRecordId = '') => {
 		try {
 			const res = await trigger({
 				data: {
-					call_record_id,
+					call_record_id: callRecordId,
 				},
 			});
-			const { call_status = '', live_call_status = '' } = res.data || {};
-			setStatus(live_call_status);
-			if (live_call_status === 'completed') {
-				dispatch(
-					setProfileState({
-						...profileData,
-						voice_call: {
-							...profileData?.voice_call,
-							endCall           : true,
-							inCall            : false,
-							showCallModal     : false,
-							minimizeModal     : false,
-							showFeedbackModal : false,
-							endTime           : new Date(),
-						},
-					}),
-				);
-			}
+			const { call_status = '', live_call_status = '', call_id = '', attendees = [] } = res.data || {};
 			if (call_status) {
 				Toast.default(CALL_END_STATUS?.[call_status]);
 			}
+			if (live_call_status === 'in_progress') {
+				setLocalCallState((p) => updateLocalState(p, attendees, call_id, live_call_status));
+			}
+			if (live_call_status === 'completed') {
+				checkToOpenFeedBack({ hasAgentPickedCall: call_status !== 'not_connected' });
+			}
 		} catch (error) {
-			Toast.error(error);
+			// console.log("error:", error)
 		}
-	};
+	}, [checkToOpenFeedBack, setLocalCallState, trigger]);
 	return {
-		statusLoading: loading,
-		status,
-		callStatusApi,
-		setStatus,
+		fetchCallStatus, loading,
 	};
 }
 export default useOutgoingStatusCall;

@@ -1,174 +1,135 @@
-import { useDispatch, useSelector } from '@cogoport/store';
-import { setProfileState } from '@cogoport/store/reducers/profile';
-import { isEmpty } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import CallModal from './CallModal';
 import FeedbackModal from './FeedBackModal';
+import useCloseVoiceCall from './hooks/useCloseVoiceCall';
 import useHangUpCall from './hooks/useHangUpCall';
 import useOutgoingCall from './hooks/useOutgoingCall';
 import useOutgoingStatusCall from './hooks/useOutgoingStatusCall';
+import useUpdateLiveCallStatus from './hooks/useUpdateLiveCallStatus';
 import MinimizeCallModal from './MinimizeModal';
 
-function VoiceCall() {
-	const dispatch = useDispatch();
-	const [counter, setCounter] = useState(0);
-	const profileData = useSelector(({ profile }) => profile);
-	const voiceCall = profileData?.voice_call;
-	const {
-		inCall,
-		endCall,
-		showCallModal,
-		orgId,
-		userId,
-		name,
-		mobile_number,
-		mobile_country_code,
-		minimizeModal = false,
-		showFeedbackModal = false,
-	} = voiceCall || {};
-
-	const {
-		makeCallApi = () => {},
-		callLoading,
-		callId,
-		callStatus,
-		setCallId = () => {},
-	} = useOutgoingCall();
-
-	const {
-		callStatusApi = () => {},
-		status,
-		setStatus = () => {},
-	} = useOutgoingStatusCall({
-		callId,
+function VoiceCall({ voice_call_recipient_data = {}, inCall = false }) {
+	const [localCallState, setLocalCallState] = useState({
+		showCallModalType    : '',
+		status               : '',
+		attendees            : [],
+		callRecordId         : '',
+		callId               : '',
+		hasAgentPickedCall   : false,
+		latestAddedAgentName : '',
+		voiceCallEndAt       : null,
 	});
 
-	const { hangUpCall = () => {}, hangUpLoading } = useHangUpCall({
-		callId,
-		setCallId,
-		setStatus,
+	const localStateReducer = useCallback((val = {}) => {
+		setLocalCallState((p) => ({ ...p, ...val }));
+	}, []);
+
+	const {
+		showCallModalType = '',
+		status = '',
+		callId = '',
+		latestAddedAgentName = '',
+		callRecordId,
+		hasAgentPickedCall = false,
+	} = localCallState || {};
+
+	const {
+		unmountVoiceCall,
+		checkToOpenFeedBack,
+		clearApiInterval,
+		startApiCallInterval,
+		startSecsCounter,
+		stopSecsCounter,
+		counter,
+	} = useCloseVoiceCall({ localStateReducer, voice_call_recipient_data });
+
+	const { fetchCallStatus = () => {} } = useOutgoingStatusCall({
+		setLocalCallState,
+		checkToOpenFeedBack,
+		localStateReducer,
+		clearApiInterval,
 	});
 
-	const handleEnd = async () => {
-		if (!callLoading && inCall && !hangUpLoading) {
-			setStatus('hanging up');
-			dispatch(
-				setProfileState({
-					...profileData,
-					voice_call: {
-						...profileData?.voice_call,
-						endCall           : true,
-						showCallModal     : false,
-						minimizeModal     : false,
-						inCall            : false,
-						endTime           : new Date(),
-						showFeedbackModal : true,
-					},
-				}),
-			);
-		}
-	};
+	const { makeCallApi = () => {}, callLoading } = useOutgoingCall({
+		voice_call_recipient_data,
+		checkToOpenFeedBack,
+		localStateReducer,
+		startApiCallInterval,
+		fetchCallStatus,
+	});
+
+	const { updateLiveCallStatus, updateLiveCallStatusLoading } = useUpdateLiveCallStatus({
+		callId,
+		latestAddedAgentName,
+		setLocalCallState,
+		checkToOpenFeedBack,
+	});
+
+	const {
+		hangUpCall = () => {},
+		hangUpLoading,
+	} = useHangUpCall({
+		callRecordId,
+		hasAgentPickedCall,
+		checkToOpenFeedBack,
+	});
 
 	useEffect(() => {
 		if (inCall) {
+			localStateReducer({ showCallModalType: 'fullCallModal' });
 			makeCallApi();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [inCall]);
+
+		return clearApiInterval;
+	}, [
+		makeCallApi,
+		clearApiInterval,
+		inCall,
+		localStateReducer,
+	]);
 
 	useEffect(() => {
-		let interval = '';
-		if (callStatus === 200
-			&& !callLoading
-			&& callId !== '') {
-			interval = setInterval(() => {
-				callStatusApi();
-			}, 5000);
+		if (status === 'in_progress') {
+			startSecsCounter();
 		}
-		return () => clearInterval(interval);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [callStatus, callLoading, callId]);
-
-	useEffect(() => {
-		if (endCall) {
-			hangUpCall();
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [endCall]);
-
-	const durationTime = () => {
-		let time = '';
-		if (status) {
-			const secs = counter % 60;
-			const minute = Math.trunc(counter / 60) % 60;
-			const hour = Math.trunc(Math.trunc(counter / 60) / 60) % 60;
-
-			if (hour > 0) {
-				time = `${hour} hour ${minute} min ${secs} sec`;
-			} else if (minute > 0) {
-				time = `${minute} min ${secs} sec`;
-			} else if (secs > 0) {
-				time = `${secs} sec`;
-			}
-		}
-		return time;
-	};
-
-	useEffect(() => {
-		let startcounter;
-		if (!callLoading) {
-			if (status) {
-				startcounter = setInterval(() => {
-					setCounter((prevCounter) => prevCounter + 1);
-				}, 1000);
-			}
-		}
-		return () => {
-			clearInterval(startcounter);
-			setCounter(0);
-		};
-	}, [callLoading, status]);
+		return stopSecsCounter;
+	}, [status, startSecsCounter, stopSecsCounter]);
 
 	return (
 		<>
-			{showCallModal && (
+			{showCallModalType === 'fullCallModal' && (
 				<CallModal
-					dispatch={dispatch}
-					name={name}
-					mobile_number={mobile_number}
-					mobile_country_code={mobile_country_code}
-					profileData={profileData}
-					showCallModal={showCallModal}
+					voice_call_recipient_data={voice_call_recipient_data}
 					status={status}
-					handleEnd={handleEnd}
-					durationTime={durationTime}
 					callLoading={callLoading}
+					updateLiveCallStatusLoading={updateLiveCallStatusLoading}
+					updateLiveCallStatus={updateLiveCallStatus}
+					localStateReducer={localStateReducer}
+					counter={counter}
+					hangUpCall={hangUpCall}
+					hangUpLoading={hangUpLoading}
 				/>
 			)}
-			{!isEmpty(orgId) && !isEmpty(userId) && showFeedbackModal && (
+			{showCallModalType === 'feedbackModal' && (
 				<FeedbackModal
-					dispatch={dispatch}
-					profileData={profileData}
-					showFeedbackModal={showFeedbackModal}
+					voice_call_recipient_data={voice_call_recipient_data}
+					callEndAt={localCallState?.voiceCallEndAt}
+					unmountVoiceCall={unmountVoiceCall}
 				/>
 			)}
-			{minimizeModal && (
+			{showCallModalType === 'minimizedModal' && (
 				<MinimizeCallModal
-					dispatch={dispatch}
-					name={name}
-					mobile_number={mobile_number}
-					mobile_country_code={mobile_country_code}
-					profileData={profileData}
-					minimizeModal={minimizeModal}
+					voice_call_recipient_data={voice_call_recipient_data}
 					status={status}
-					handleEnd={handleEnd}
-					durationTime={durationTime}
 					callLoading={callLoading}
+					counter={counter}
+					hangUpCall={hangUpCall}
+					hangUpLoading={hangUpLoading}
+					localStateReducer={localStateReducer}
 				/>
 			)}
 		</>
-
 	);
 }
 export default VoiceCall;
