@@ -50,7 +50,8 @@
 			"EEE-dd": "EEE-dd",
 			"yyyy": "yyyy",
 			"dd/MMM/yyyy": "dd/MMM/yyyy",
-			"dd MMMM yyyy": "dd MMMM yyyy"
+			"dd MMMM yyyy": "dd MMMM yyyy",
+			"eee, dd MMM, yyyy": "eee, dd MMM, yyyy"
 		},
 		"time": {
 			"hh:mm aaa": "hh:mm aaa",

@@ -10307,6 +10307,16 @@ const partner = {
 			service_name : 'saas_traceability',
 		},
 		{
+			api          : 'get_saas_ftl_tracking_detail',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
+		{
+			api          : 'list_saas_surface_shipment_details',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
+		{
 			api          : 'list_shipping_line_events',
 			access_type  : 'private',
 			service_name : 'saas_traceability',
@@ -11846,6 +11856,11 @@ const partner = {
 			api          : 'get_tickets_list',
 			access_type  : 'private',
 			service_name : 'tickets',
+		},
+		{
+			api          : 'check_customer_checkout_quotation_conflict',
+			access_type  : 'private',
+			service_name : 'checkout',
 		},
 	],
 	analytics_dashboard: [
