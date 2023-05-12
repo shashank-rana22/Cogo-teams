@@ -1,4 +1,4 @@
-export default function FilePreview({ url = '' }) {
+export default function FilePreview({ url = '', containerClass = '' }) {
 	const decodedUrl = decodeURI(url);
 	const urlSplitByDot = decodedUrl?.split?.('.') || [];
 	const extension = urlSplitByDot?.[urlSplitByDot.length - 1];
@@ -10,7 +10,7 @@ export default function FilePreview({ url = '' }) {
 	const filename = urlSplitBySlash?.[urlSplitBySlash.length - 1];
 
 	return (
-		<div>
+		<div className={containerClass}>
 			<b>{filename}</b>
 
 			<object

@@ -1,3 +1,4 @@
+import { Select } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useContext } from 'react';
@@ -24,16 +25,26 @@ export default function Filters({ children }) {
 	return (
 		<div className={styles.filters_container}>
 			<div className={styles.primary_filters}>
-				{FILTERS.map((filter) => (
-					<AsyncSelect
-						key={filter.name}
-						value={filters[filter.name]}
-						onChange={(val) => handleFilterChange(filter.name, val)}
-						{...{
-							...filter,
-							...(filter.name === 'container_type' && { options: containerTypeOptions }),
-						}}
-					/>
+				{FILTERS.map((filter) => (filter.type === 'select'
+					? (
+						<Select
+							key={filter.name}
+							value={filters[filter.name]}
+							onChange={(val) => handleFilterChange(filter.name, val)}
+							{...{
+								...filter,
+								...(filter.name === 'container_type' && { options: containerTypeOptions }),
+							}}
+						/>
+					)
+					: (
+						<AsyncSelect
+							key={filter.name}
+							value={filters[filter.name]}
+							onChange={(val) => handleFilterChange(filter.name, val)}
+							{...filter}
+						/>
+					)
 				))}
 			</div>
 

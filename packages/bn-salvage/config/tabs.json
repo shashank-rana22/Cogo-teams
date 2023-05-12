@@ -7,7 +7,7 @@
         }
     },
     {
-        "name": "cancelled_booking_notes",
+        "name": "inactive_booking_notes",
         "title": "Expired Booking Notes",
         "filters": {
             "status": "inactive"

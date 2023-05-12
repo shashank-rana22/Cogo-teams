@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { cl, Button, Modal } from '@cogoport/components';
 import { useContext } from 'react';
 
 import FilePreview from '../../../commons/FilePreview';
@@ -26,7 +26,7 @@ export default function ActionModals({ modalKey, item }) {
 	});
 
 	const modalBodyContent = {
-		view_document   : <FilePreview url={item?.url} />,
+		view_document   : <FilePreview url={item?.url} containerClass={styles.file_preview} />,
 		move_to_expired : <h2>Are you sure, you want to move this to Expired ?</h2>,
 	};
 
@@ -56,7 +56,7 @@ export default function ActionModals({ modalKey, item }) {
 				onClose={closeModal}
 				closeOnOuterClick={false}
 				size="lg"
-				className={styles.customized_modal}
+				className={cl`${styles.customized_modal} ${styles[modalKey]}`}
 				showCloseIcon={!loading}
 			>
 				<Modal.Header title={modalHeader[modalKey]} />

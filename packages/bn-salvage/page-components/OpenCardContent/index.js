@@ -15,7 +15,9 @@ const actionButtons = [
 ];
 
 export default function OpenCardContent({ item }) {
-	const { showModal, setShowModal } = useContext(BNSalvageContext);
+	const { showModal, setShowModal, activeTab } = useContext(BNSalvageContext);
+
+	const showActionButtons = activeTab === 'inactive_booking_notes' ? actionButtons.slice(0, 1) : actionButtons;
 
 	return (
 		<div className={styles.open_card_container}>
@@ -28,7 +30,7 @@ export default function OpenCardContent({ item }) {
 			<Timeline item={item} />
 
 			<div className={styles.btn_container}>
-				{actionButtons.map((btn) => (
+				{showActionButtons.map((btn) => (
 					<Button
 						key={btn.modalKey}
 						themeType="secondary"
@@ -39,7 +41,7 @@ export default function OpenCardContent({ item }) {
 				))}
 			</div>
 
-			{showModal && actionButtons.some((btn) => btn.modalKey === showModal) ? (
+			{showModal && showActionButtons.some((btn) => btn.modalKey === showModal) ? (
 				<ActionModals modalKey={showModal} item={item} />
 			) : null}
 		</div>

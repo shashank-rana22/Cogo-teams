@@ -14,6 +14,8 @@ export default function Card({ item, openItem, setOpenItem }) {
 		origin_location,
 		destination_location,
 		expiry,
+		created_at,
+		updated_at,
 		containers_count,
 		container_size,
 		container_type,
@@ -36,7 +38,11 @@ export default function Card({ item, openItem, setOpenItem }) {
 
 	return (
 		<>
-			<tr className={styles.card_container}>
+			<tr className={cl`
+					${styles.card_container} 
+					${created_at !== updated_at ? styles.modified : ''}
+				`}
+			>
 				<td>
 					<div>{origin_location?.port_code}</div>
 					<b>{origin_location?.name}</b>

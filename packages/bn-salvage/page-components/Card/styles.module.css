@@ -11,6 +11,18 @@
 	}
 }
 
+.modified {
+	position: relative;
+}
+.modified::after {
+	content: 'Modified';
+	position: absolute;
+	right: 0;
+	background-color: #FEF199;
+	padding: 2px 8px;
+	border-radius: 0 4px;
+}
+
 .view_more_row {
 	position: relative;
 	top: -10px;
