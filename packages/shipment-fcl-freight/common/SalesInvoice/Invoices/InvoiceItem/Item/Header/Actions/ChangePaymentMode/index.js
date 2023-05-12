@@ -1,5 +1,6 @@
 import { RadioGroup, Modal, Radio, Button } from '@cogoport/components';
 import React, { useState } from 'react';
+
 import useUpdatePaymentMode from '../../../../../../Hooks/useUpdatePaymentMode';
 
 function ChangePaymentMode({
@@ -43,22 +44,22 @@ function ChangePaymentMode({
 		<Modal show={show} onClose={() => setShow(false)}>
 			<Modal.Header title="Change Payment Mode" />
 			<Modal.Body>
-					{invoice?.payment_mode ? (
-						<Radio
-							label={optionsToShow[invoice?.payment_mode]?.label}
-							checked={check}
-							onChange={handleChange}
-						/>
-					) : (
-						<RadioGroup
-							options={options}
-							value={value}
-							onChange={(val) => setValue(val)}
-						/>
-					)}
+				{invoice?.payment_mode ? (
+					<Radio
+						label={optionsToShow[invoice?.payment_mode]?.label}
+						checked={check}
+						onChange={handleChange}
+					/>
+				) : (
+					<RadioGroup
+						options={options}
+						value={value}
+						onChange={(val) => setValue(val)}
+					/>
+				)}
 			</Modal.Body>
 			<Modal.Footer>
-			<Button onClick={changePaymentMode} disabled={loading || !check}>
+				<Button onClick={changePaymentMode} disabled={loading || !check}>
 					Update
 				</Button>
 			</Modal.Footer>

@@ -17,7 +17,6 @@
 
 .billing_party {
 	flex: 0 0 22%;
-	height: 50px;
 	border-right: 1px solid #f68b21;
 
 	h3 {
@@ -26,10 +25,10 @@
 
 	& .gst_number{
 		font-size: 12px;
-		text-decoration: underline;
-
+		
 		span:first-child{
 			font-weight:700;
+			text-decoration: underline;
 		}
 	}
 }
@@ -38,7 +37,6 @@
 	display: flex;
 	flex: 1;
 	align-items: center;
-	height: 50px;
 	padding-left: 22px;
 }
 
@@ -46,7 +44,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 50px;
 	padding-left: 22px;
 	margin-left: 22px;
 	cursor: pointer;
@@ -59,8 +56,11 @@
 	flex-direction: column;
 	justify-content: center;
 
-	span {
+	.approved{
 		text-decoration: underline;
+	}
+
+	span {
 
 		&:first-child{
 			font-size: 14px;
@@ -91,23 +91,26 @@
 
 	& .status_text{
 		background-color: #fef1df;
-		width: 90px;
+		width: 110px;
 		font-size: 10px;
 		text-align: center;
 		border-radius: 4px;
 		padding: 2px;
 	}
 
-	&.approved {
+	& .approved {
 		background-color: #DDEBC0;
 	}
-	&.rejected {
+	& .rejected {
+		background-color: #F8AEA8;
+	}
+	& .draft {
+		background-color: #DDEBC0;
+	}
+	& .requested {
 		background-color: #FEF199;
 	}
-	&.draft {
-		background-color: #DDEBC0;
-	}
-	&.requested {
+	& .finance_rejected {
 		background-color: #FEF199;
 	}
 }

@@ -1,4 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
+import { TextAreaController, UploadController, useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
@@ -25,6 +26,8 @@ function Edit({
 		},
 	});
 
+	const { control } = useForm();
+
 	return (
 		<Modal
 			show
@@ -43,38 +46,46 @@ function Edit({
 			/>
 
 			<Modal.Body>
-				<div>
-					<div style={{ fontSize: 14 }}>
-						<b>
-							SID
-							{serial_id}
+				<div style={{ fontSize: 14 }}>
+					<b>
+						SID
+						{serial_id}
 						&nbsp;- Invoice number -
 						&nbsp;
-							<u>{live_invoice_number}</u>
-						</b>
-					</div>
-
-					<div>
-						<b>Requested By</b>
-						<span>
-							&nbsp;
-							-
-							{data?.requested_by?.name}
-						</span>
-					</div>
-					<div>
-						<b>Date</b>
-						<span>
-							&nbsp;
-							-
-							{formatDate({
-								date       : data?.created_at,
-								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-								formatType : 'date',
-							})}
-						</span>
-					</div>
+						<u>{live_invoice_number}</u>
+					</b>
 				</div>
+
+				<div>
+					<b>Requested By</b>
+					<span>
+						&nbsp;
+						-
+						{data?.requested_by?.name}
+					</span>
+				</div>
+				<div>
+					<b>Date</b>
+					<span>
+						&nbsp;
+						-
+						{formatDate({
+							date       : data?.created_at,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							formatType : 'date',
+						})}
+					</span>
+				</div>
+				<form>
+					<TextAreaController
+						name="details"
+						control={control}
+					/>
+					<UploadController
+						name="file"
+						control={control}
+					/>
+				</form>
 			</Modal.Body>
 
 			<Modal.Footer>

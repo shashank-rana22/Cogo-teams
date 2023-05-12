@@ -14,9 +14,9 @@
 	width: 100%;
 	align-items: center;
 	margin-bottom: 20px;
-	padding: 22px;
+	padding: 18px;
 	border-bottom: 1px solid #88CAD1;
-
+	
 	@media (max-width: 768px) {
 		display: flex;
 		flex-direction: column;
