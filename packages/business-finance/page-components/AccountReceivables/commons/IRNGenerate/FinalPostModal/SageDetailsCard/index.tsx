@@ -4,6 +4,9 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const CHECK_MAX_TOOL_TIP = 20;
+const CHECK_MIN_TOOL_TIP = 0;
+
 function SageDetailsCard({ InvoiceInfo }) {
 	const {
 		name = '', invoice_number : InvoiceNumber = '',
@@ -44,15 +47,15 @@ function SageDetailsCard({ InvoiceInfo }) {
 		},
 		{
 			key   : 'Tax Amount',
-			value : getFormattedPrice(TaxAmount || 0, currency || '') || '-',
+			value : getFormattedPrice(TaxAmount || CHECK_MIN_TOOL_TIP, currency || '') || '-',
 		},
 		{
 			key   : 'Total Amount',
-			value : getFormattedPrice(GrandTotal || 0, currency || '') || '-',
+			value : getFormattedPrice(GrandTotal || CHECK_MIN_TOOL_TIP, currency || '') || '-',
 		},
 		{
 			key   : 'Ledger Amount',
-			value : getFormattedPrice(LedgerTotal || 0, currency || '') || '-',
+			value : getFormattedPrice(LedgerTotal || CHECK_MIN_TOOL_TIP, currency || '') || '-',
 		},
 	];
 
@@ -61,7 +64,7 @@ function SageDetailsCard({ InvoiceInfo }) {
 			{getData.map((item) => (
 				<div key={item.key}>
 					<div className={styles.lable}>{item.key}</div>
-					{item.value.length > 20 ? (
+					{item.value.length > CHECK_MAX_TOOL_TIP ? (
 						<Tooltip
 							interactive
 							placement="top"
@@ -69,8 +72,8 @@ function SageDetailsCard({ InvoiceInfo }) {
 						>
 							<text className={styles.cursor}>
 								{`${item?.value?.substring(
-									0,
-									20,
+									CHECK_MIN_TOOL_TIP,
+									CHECK_MAX_TOOL_TIP,
 								)}...`}
 							</text>
 						</Tooltip>

@@ -6,12 +6,15 @@ import CostView from '../../commons/costView';
 
 import styles from './styles.module.css';
 
+const CHECK_MIN_VALUE = 0;
+const CHECK_MAX_VALUE = 10;
+
 function ShipmentView({ row }) {
 	const [show, setShow] = useState(false);
 	return (
 		<div className={styles.field_pair}>
 
-			{(getByKey(row, 'sidNo') as string).length > 10 ? (
+			{(getByKey(row, 'sidNo') as string).length > CHECK_MAX_VALUE ? (
 				<Tooltip
 					interactive
 					placement="top"
@@ -19,8 +22,8 @@ function ShipmentView({ row }) {
 				>
 					<text className={styles.sid}>
 						{`${(getByKey(row, 'sidNo') as string)?.substring(
-							0,
-							10,
+							CHECK_MIN_VALUE,
+							CHECK_MAX_VALUE,
 						)}...`}
 					</text>
 				</Tooltip>
@@ -46,7 +49,7 @@ function ShipmentView({ row }) {
 					</div>
 				)}
 
-			{startCase(getByKey(row, 'serviceType') as string).length > 10 ? (
+			{startCase(getByKey(row, 'serviceType') as string).length > CHECK_MAX_VALUE ? (
 				<Tooltip
 					interactive
 					placement="top"
@@ -58,8 +61,8 @@ function ShipmentView({ row }) {
 				>
 					<text className={styles.cursor}>
 						{`${startCase(getByKey(row, 'serviceType') as string)?.substring(
-							0,
-							10,
+							CHECK_MIN_VALUE,
+							CHECK_MAX_VALUE,
 						)}...`}
 					</text>
 				</Tooltip>
