@@ -81,6 +81,32 @@ const apis = [
 		service_name : 'organization',
 		feature      : 'inventory_management',
 	},
+	{
+		api          : 'list_tasks',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'list_collection_desk_do_shipments',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'list_collection_desk_bl_shipments',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'get_services',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'list_bl_inventory',
+		access_type  : 'private',
+		service_name : 'bookings',
+		feature      : 'inventory_management',
+	},
 ];
 
 export default apis;
