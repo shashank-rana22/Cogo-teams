@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useContext } from 'react';
 
 import {
@@ -16,14 +17,37 @@ import getCriticalShipment from '../../../helpers/getCriticalShipment';
 import styles from './styles.module.css';
 
 function Card({ data = {} }) {
+	const router = useRouter();
+
 	const { shipmentType, stepperTab, activeTab } = useContext(KamDeskContext);
 
-	const icon_type = ['lcl_customs'].includes(stepperTab) ? stepperTab : shipmentType;
+	const icon_type = ['lcl_customs'].includes(stepperTab)
+		? stepperTab
+		: shipmentType;
 
-	const isShipmentCritical = getCriticalShipment({ shipment: data, activeTab, stepperTab, shipmentType });
+	const isShipmentCritical = getCriticalShipment({
+		shipment: data,
+		activeTab,
+		stepperTab,
+		shipmentType,
+	});
+
+	const handleCardClick = () => {
+		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${data?.id}`;
+
+		window.sessionStorage.setItem('prev_nav', newUrl);
+		window.location.href = newUrl;
+	};
 
 	return (
-		<div className={cl`${styles.container} ${isShipmentCritical ? styles.animate_card : ''}`}>
+		<div
+			className={cl`${styles.container} ${
+				isShipmentCritical ? styles.animate_card : ''
+			}`}
+			onClick={handleCardClick}
+			role="button"
+			tabIndex={0}
+		>
 			<div className={styles.header}>
 				<Header data={data} />
 			</div>

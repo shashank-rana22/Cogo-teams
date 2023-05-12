@@ -1,3 +1,4 @@
+import { useRouter } from '@cogoport/next';
 import { useContext } from 'react';
 
 import {
@@ -15,10 +16,24 @@ import isSingleLocation from '../../../utils/checkSingleLocation';
 import styles from './styles.module.css';
 
 function Card({ data = {} }) {
+	const router = useRouter();
+
 	const { stepperTab } = useContext(KamDeskContext);
 
+	const handleCardClick = () => {
+		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${data?.id}`;
+
+		window.sessionStorage.setItem('prev_nav', newUrl);
+		window.location.href = newUrl;
+	};
+
 	return (
-		<div className={styles.container}>
+		<div
+			className={styles.container}
+			onClick={handleCardClick}
+			role="button"
+			tabIndex={0}
+		>
 			<div className={styles.header}>
 				<Header data={data} />
 			</div>
