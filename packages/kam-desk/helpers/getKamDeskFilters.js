@@ -1,3 +1,5 @@
+import { isEmpty } from '@cogoport/utils';
+
 import tabPayload, { CRITICAL_TABS } from '../config/SHIPMENTS_PAYLOAD';
 
 import getAdditionalMethods from './getAdditionalMethods';
@@ -9,12 +11,16 @@ const keyMapping = {
 
 export default function getKamDeskFilters({ filters, kamDeskContextValues }) {
 	const { activeTab, shipmentType, stepperTab } = kamDeskContextValues || {};
-	const { criticalOn, date_type, dateRange, startDate, endDate, ...restFilters } = filters || {};
+	const { criticalOn, date_type, dateRange, startDate, endDate, tags, ...restFilters } = filters || {};
 
 	const tabwiseFilters = shipmentType === 'all' ? tabPayload.all?.[activeTab]
 		: tabPayload?.[shipmentType]?.[stepperTab]?.[activeTab];
 
 	let finalFilters = { ...tabwiseFilters, ...restFilters };
+
+	if (!isEmpty(tags)) {
+		finalFilters = { ...finalFilters, tags: [tags] };
+	}
 
 	if (criticalOn) {
 		finalFilters = { ...finalFilters, ...(CRITICAL_TABS?.[shipmentType]?.[stepperTab]?.[activeTab] || {}) };
@@ -28,6 +34,7 @@ export default function getKamDeskFilters({ filters, kamDeskContextValues }) {
 	if (['import', 'export'].includes(stepperTab)) {
 		finalFilters.trade_type = stepperTab;
 	}
+	console.log(filters, 'filters');
 
 	return {
 		filters            : finalFilters,
