@@ -67,6 +67,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	});
 
 	const { daysLeftForAutoIrnGeneration = '' } = itemData || {};
+
 	const financeRejected = () => {
 		setOpenReject(!openReject);
 	};
@@ -107,7 +108,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 					{INVOICE_STATUS.includes(invoiceStatus) && (
 						<Button
 							size="sm"
-							{loading || (daysLeftForAutoIrnGeneration as unknown as number) <= 0}
+							disabled={loading || (daysLeftForAutoIrnGeneration as unknown as number) <= 0}
 							onClick={() => generateIrn()}
 						>
 							Generate
