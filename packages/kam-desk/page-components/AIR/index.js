@@ -1,5 +1,6 @@
 import DeskTabs from '../../common/DeskTabs';
 import Filters from '../../common/Filters';
+import HeaderFilters from '../../common/HeaderFilters';
 import Loader from '../../common/Loader';
 import ShipmentType from '../../common/ShipmentType';
 import StepperTabs from '../../common/StepperTabs';
@@ -14,13 +15,14 @@ function Air() {
 	return (
 		<div>
 			<div className={styles.header}>
-				<div>
-					<ShipmentType />
-				</div>
+				<ShipmentType />
+
+				<HeaderFilters />
 			</div>
 
 			<div className={styles.stepper_container}>
 				<StepperTabs />
+
 				<Filters />
 			</div>
 

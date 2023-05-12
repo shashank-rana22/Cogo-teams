@@ -15,13 +15,14 @@ function Surface() {
 	return (
 		<div>
 			<div className={styles.header}>
-				<div>
-					<ShipmentType />
-				</div>
+				<ShipmentType />
+
+				<HeaderFilters />
 			</div>
 
 			<div className={styles.stepper_container}>
 				<StepperTabs />
+
 				<Filters />
 			</div>
 

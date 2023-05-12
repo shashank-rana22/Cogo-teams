@@ -4,7 +4,7 @@ import {
 	BasicDetails,
 	AssignedStakeholder,
 	ShipmentIcon,
-	CargoPillsV2,
+	CargoPills,
 	DualLocation,
 	Header,
 	SingleLocation,
@@ -16,6 +16,7 @@ import styles from './styles.module.css';
 
 function Card({ data = {} }) {
 	const { stepperTab } = useContext(KamDeskContext);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -46,7 +47,7 @@ function Card({ data = {} }) {
 				<div className={styles.divider} />
 
 				<div className={styles.pill_container}>
-					<CargoPillsV2 data={data} />
+					<CargoPills data={data} />
 				</div>
 			</div>
 		</div>

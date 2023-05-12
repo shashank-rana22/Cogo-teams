@@ -12,13 +12,13 @@ function Filters() {
 	const { stepperTab, activeTab, filters = {}, setFilters = () => {}, shipmentType } = useContext(KamDeskContext);
 
 	const [popoverFilter, setPopoverFilter] = useState({ ...(filters || {}) });
+
 	const [showPopover, setShowPopover] = useState(false);
 
 	const isCriticalVisible = !!CRITICAL_TABS?.[shipmentType]?.[stepperTab]?.[activeTab];
 
 	return (
 		<div className={styles.container}>
-
 			{isCriticalVisible ? (
 				<div className={styles.toggle_container}>
 					<Toggle
@@ -63,6 +63,7 @@ function Filters() {
 					>
 						<div className={styles.popover_button_text}>
 							<IcMFilter height={16} width={16} />
+
 							<span className={styles.button_text}> Filter By</span>
 						</div>
 					</Button>

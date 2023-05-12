@@ -22,7 +22,7 @@ function CargoPills({ data = {} }) {
 	return (
 		<div className={styles.container}>
 			{getPillsFormat(initialPills).map((pill) => (
-				<Pill>{pill}</Pill>
+				<Pill key={pill}>{pill}</Pill>
 			))}
 
 			{cargo_details?.length > 1 ? (

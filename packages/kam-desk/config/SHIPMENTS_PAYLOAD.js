@@ -187,6 +187,7 @@ const tabPayload = {
 			cancelled : { state: 'cancelled' },
 		},
 	},
+
 	lcl_freight: {
 		export: {
 			confirm_booking: {
@@ -294,6 +295,7 @@ const tabPayload = {
 			completed : { state: 'completed' },
 		},
 	},
+
 	air_freight: {
 		air_freight: {
 			ongoing: {
@@ -302,10 +304,9 @@ const tabPayload = {
 					'confirmed_by_importer_exporter',
 					'in_progress',
 				],
-				shipment_type: 'air_freight',
 			},
-			completed : { state: 'completed', shipment_type: 'air_freight' },
-			cancelled : { state: 'cancelled', shipment_type: 'air_freight' },
+			completed : { state: 'completed' },
+			cancelled : { state: 'cancelled' },
 		},
 		domestic_air_freight: {
 			ongoing: {
@@ -314,10 +315,9 @@ const tabPayload = {
 					'confirmed_by_importer_exporter',
 					'in_progress',
 				],
-				shipment_type: 'domestic_air_freight',
 			},
-			completed : { state: 'completed', shipment_type: 'domestic_air_freight' },
-			cancelled : { state: 'cancelled', shipment_type: 'domestic_air_freight' },
+			completed : { state: 'completed' },
+			cancelled : { state: 'cancelled' },
 		},
 		air_customs: {
 			ongoing: {
@@ -326,10 +326,9 @@ const tabPayload = {
 					'confirmed_by_importer_exporter',
 					'in_progress',
 				],
-				shipment_type: 'air_customs',
 			},
-			completed : { state: 'completed', shipment_type: 'air_customs' },
-			cancelled : { state: 'cancelled', shipment_type: 'air_customs' },
+			completed : { state: 'completed' },
+			cancelled : { state: 'cancelled' },
 		},
 		air_freight_local: {
 			ongoing: {
@@ -338,12 +337,13 @@ const tabPayload = {
 					'confirmed_by_importer_exporter',
 					'in_progress',
 				],
-				shipment_type: 'air_freight_local',
+
 			},
-			completed : { state: 'completed', shipment_type: 'air_freight_local' },
-			cancelled : { state: 'cancelled', shipment_type: 'air_freight_local' },
+			completed : { state: 'completed' },
+			cancelled : { state: 'cancelled' },
 		},
 	},
+
 	surface: {
 		ftl_freight: {
 			confirm_booking: {
@@ -459,6 +459,7 @@ const tabPayload = {
 			cancelled        : { state: 'cancelled' },
 		},
 	},
+
 	all: {
 		ongoing: {
 			state: ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress'],

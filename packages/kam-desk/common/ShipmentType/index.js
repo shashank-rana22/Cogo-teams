@@ -20,34 +20,43 @@ function ShipmentType() {
 	} = useContext(KamDeskContext);
 
 	const handleChange = (val) => {
-		const stepperTabs = shipmentStepperTabs[val];
-		let tempActiveTab = 'ongoing';
-		let tempStepperTab = '';
+		if (val !== shipmentType) {
+			const stepperTabs = shipmentStepperTabs[val];
 
-		if (stepperTabs?.length) {
-			tempStepperTab = findValueInArray({ arr: stepperTabs, value: stepperTab })
-				? stepperTab
-				: stepperTabs?.[0]?.value || '';
+			let tempActiveTab = 'ongoing';
 
-			const tabs = shipmentTabMapping?.[val]?.[tempStepperTab]?.tabs;
+			let tempStepperTab = '';
 
-			tempActiveTab = findValueInArray({ arr: tabs, value: activeTab })
-				? activeTab
-				: tabs?.[0]?.value || '';
+			if (stepperTabs?.length) {
+				tempStepperTab = findValueInArray({ arr: stepperTabs, value: stepperTab })
+					? stepperTab
+					: stepperTabs?.[0]?.value || '';
+
+				const tabs = shipmentTabMapping?.[val]?.[tempStepperTab]?.tabs;
+
+				tempActiveTab = findValueInArray({ arr: tabs, value: activeTab })
+					? activeTab
+					: tabs?.[0]?.value || '';
+			}
+
+			setStepperTab(tempStepperTab);
+
+			setActiveTab(tempActiveTab);
+
+			setFilters({ page: 1 });
+
+			setShipmentType(val);
 		}
-
-		setStepperTab(tempStepperTab);
-		setActiveTab(tempActiveTab);
-		setFilters({ page: 1 });
-		setShipmentType(val);
 	};
 
 	return (
-		<Stepper
-			onChange={handleChange}
-			value={shipmentType}
-			options={shipmentControls.shipment_types}
-		/>
+		<div>
+			<Stepper
+				onChange={handleChange}
+				value={shipmentType}
+				options={shipmentControls.shipment_types}
+			/>
+		</div>
 	);
 }
 

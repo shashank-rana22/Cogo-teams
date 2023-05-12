@@ -9,7 +9,10 @@ const ShipmentTabMapping = {
 	lcl_freight : lclFreight,
 	air_freight : airFreight,
 	surface,
-	all         : { tabs: commonTabs },
+	all         : {
+		tabs             : commonTabs,
+		possible_filters : ['importer_exporter_id', 'pending_invoice', 'source', 'payment_term', 'tags'],
+	},
 };
 
 export default ShipmentTabMapping;

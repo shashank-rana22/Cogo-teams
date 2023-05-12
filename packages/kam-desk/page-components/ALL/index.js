@@ -14,13 +14,12 @@ function All() {
 	return (
 		<div>
 			<div className={styles.header}>
-				<div>
-					<ShipmentType />
-				</div>
+				<ShipmentType />
+
 				<HeaderFilters />
 			</div>
 
-			<div className={styles.stepper_container}>
+			<div className={styles.filter_container}>
 				<Filters />
 			</div>
 

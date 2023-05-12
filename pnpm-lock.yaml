@@ -841,6 +841,7 @@ importers:
   packages/kam-desk:
     specifiers:
       '@cogoport/components': ^1.0.390
+      '@cogoport/forms': workspace:^0.1.0
       '@cogoport/icons-react': ^1.0.61
       '@cogoport/next': workspace:^0.1.0
       '@cogoport/request': workspace:^0.1.0
@@ -850,6 +851,7 @@ importers:
       react: 18.2.0
     dependencies:
       '@cogoport/components': 1.0.399_n4iqapq6hltb5mr4rez3emws4q
+      '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.66_react@18.2.0
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request

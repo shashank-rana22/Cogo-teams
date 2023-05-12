@@ -11,7 +11,7 @@ function PopoverContent({ list = [] }) {
 				const pills = getPillsFormat(item);
 				return (
 					<div className={styles.pills_container}>
-						{pills.map((pill) => <Pill>{pill}</Pill>)}
+						{pills.map((pill) => <Pill key={pill}>{pill}</Pill>)}
 					</div>
 				);
 			})}

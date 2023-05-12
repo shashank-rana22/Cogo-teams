@@ -2,7 +2,7 @@ import {
 	BasicDetails,
 	AssignedStakeholder,
 	ShipmentIcon,
-	CargoPillsV2,
+	CargoPills,
 	DualLocation,
 	Header,
 	SingleLocation,
@@ -42,7 +42,7 @@ function Card({ data = {} }) {
 				<div className={styles.divider} />
 
 				<div className={styles.pill_container}>
-					<CargoPillsV2 data={data} />
+					<CargoPills data={data} />
 				</div>
 			</div>
 		</div>

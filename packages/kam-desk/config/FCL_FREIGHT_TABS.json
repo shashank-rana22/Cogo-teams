@@ -37,7 +37,8 @@
                 "value":"cancelled",
                 "label":"Cancelled"
             }
-        ]
+        ],
+        "possible_filters":["importer_exporter_id","pending_invoice","date_type","source","tags"]
     },
     "import":{
         "tabs":[
@@ -73,7 +74,8 @@
                 "label":"Cancelled",
                 "value":"cancelled"
             }
-        ]
+        ],
+        "possible_filters":["importer_exporter_id","pending_invoice","date_type","source","tags"]
     },
     "fcl_customs":{
         "tabs":[
@@ -93,7 +95,8 @@
                 "label":"Cancelled",
                 "value":"cancelled"
             }
-        ]
+        ],
+        "possible_filters":["importer_exporter_id","pending_invoice","source","tags"]
     },
     "fcl_local":{
         "tabs":[
@@ -113,7 +116,8 @@
                 "label":"Cancelled",
                 "value":"cancelled"
             }
-        ]
+        ],
+        "possible_filters":["importer_exporter_id","pending_invoice","source","tags"]
     }
     
 }

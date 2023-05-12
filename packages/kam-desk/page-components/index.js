@@ -14,12 +14,17 @@ const ResolveKamDesk = {
 
 function KamDesk() {
 	const router = useRouter();
+
 	const defaultValues = getLocalStorageVal();
 
 	const [filters, setFilters] = useState(defaultValues?.filters);
+
 	const [shipmentType, setShipmentType] = useState(defaultValues?.shipment_type);
+
 	const [scopeFilters] = useState(defaultValues?.scopeFilters);
+
 	const [activeTab, setActiveTab] = useState(defaultValues?.activeTab);
+
 	const [stepperTab, setStepperTab] = useState(defaultValues?.stepperTab);
 
 	const handleVersionChange = useCallback(() => {
@@ -47,7 +52,6 @@ function KamDesk() {
 	return (
 		<KamDeskContext.Provider value={contextValues}>
 			{shipmentType ? <RenderDesk /> : null}
-
 		</KamDeskContext.Provider>
 	);
 }

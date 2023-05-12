@@ -33,7 +33,8 @@
         "label": "Cancelled",
         "value": "cancelled"
       }
-    ]
+    ],
+    "possible_filters":["importer_exporter_id","pending_invoice","source","payment_term","tags"]
   },
   "ltl_freight": {
     "tabs": [
@@ -65,7 +66,8 @@
         "label": "Cancelled",
         "value": "cancelled"
       }
-    ]
+    ],
+    "possible_filters":["importer_exporter_id","pending_invoice","source","payment_term","tags"]
   },
   "rail_domestic_freight": {
     "tabs": [
@@ -97,6 +99,7 @@
         "label": "Cancelled",
         "value": "cancelled"
       }
-    ]
+    ],
+    "possible_filters":["importer_exporter_id","pending_invoice","source","payment_term","tags"]
   }
 }

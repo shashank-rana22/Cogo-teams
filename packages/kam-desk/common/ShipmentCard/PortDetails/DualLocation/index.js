@@ -32,7 +32,7 @@ const handleLocationDetails = (location) => (
 	</>
 );
 
-const getDisplayDate = (date, dateFormat = 'dd MMM yyyy') => (date ? format(date, dateFormat, null, true) : null);
+const getDisplayDate = (date, dateFormat = 'dd MMM yyyy') => (date ? format(date, dateFormat) : null);
 
 function PortDetails({ data = {} }) {
 	const { schedule_arrival, schedule_departure } = data;

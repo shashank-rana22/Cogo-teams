@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect, useCallback, useContext } from 'react';
+import { useSelector } from '@cogoport/store';
+import { useState, useEffect, useCallback, useContext, useRef } from 'react';
 
 import KamDeskContext from '../context/KamDeskContext';
 import getKamDeskFilters from '../helpers/getKamDeskFilters';
@@ -9,8 +10,14 @@ const useListKamDeskShipments = () => {
 	const [apiData, setApiData] = useState({});
 
 	const kamDeskContextValues = useContext(KamDeskContext);
+
 	const { activeTab, filters, setFilters, stepperTab, shipmentType } = kamDeskContextValues || {};
+
 	const { page = 1, ...restFilters } = filters || {};
+
+	const debounceQuery = useRef({ q: filters.q });
+
+	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
 
 	const apiPrefix = ['import', 'export'].includes(stepperTab) ? shipmentType : stepperTab;
 
@@ -41,15 +48,28 @@ const useListKamDeskShipments = () => {
 	}, [trigger, setFilters, filters]);
 
 	useEffect(() => {
-		apiTrigger();
+		const [, scope, view_type] = (authParams || '').split(':');
+
+		if (!scope) { return; }
+
+		const newScopeFilters = { scope, view_type, selected_agent_id };
+		if (debounceQuery.current.q !== filters.q) {
+			clearTimeout(debounceQuery.current.timerId);
+
+			debounceQuery.current.q = filters.q;
+			debounceQuery.current.timerId = setTimeout(apiTrigger, 600);
+		} else {
+			apiTrigger();
+		}
 
 		localStorage.setItem('kam_desk_values', JSON.stringify({
 			filters,
 			activeTab,
 			shipmentType,
 			stepperTab,
+			scopeFilters: newScopeFilters,
 		}));
-	}, [apiTrigger, activeTab, filters, shipmentType, stepperTab]);
+	}, [apiTrigger, activeTab, filters, shipmentType, stepperTab, authParams, selected_agent_id]);
 
 	return {
 		loading,

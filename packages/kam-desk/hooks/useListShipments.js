@@ -1,26 +1,27 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect, useCallback, useContext } from 'react';
+import { useSelector } from '@cogoport/store';
+import { useState, useEffect, useCallback, useContext, useRef } from 'react';
 
 import KamDeskContext from '../context/KamDeskContext';
-import getKamDeskFilters from '../helpers/getKamDeskFilters';
+import getShipmentFilters from '../helpers/getShipmentFilters';
 
 const useListShipments = () => {
-	const [apiData, setApiData] = useState({
-		data  : {},
-		error : {},
-	});
+	const [apiData, setApiData] = useState({});
 
 	const kamDeskContextValues = useContext(KamDeskContext);
-	const { activeTab, filters } = kamDeskContextValues || {};
-	const { page = 1 } = filters || {};
+	const { activeTab, filters, setFilters, stepperTab, shipmentType } = kamDeskContextValues || {};
+	const { page = 1, ...restFilters } = filters || {};
 
-	const { finalFilters } = getKamDeskFilters({ filters, kamDeskContextValues });
+	const debounceQuery = useRef({ q: filters.q });
+
+	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
+
 	const [{ loading }, trigger] = useRequest({
 		url    : 'list_shipments',
 		method : 'GET',
 		params : {
-			filters: finalFilters,
+			...getShipmentFilters({ filters: restFilters, kamDeskContextValues }),
 			page,
 		},
 	}, { manual: true });
@@ -30,26 +31,40 @@ const useListShipments = () => {
 			try {
 				const res = await trigger();
 
-				// if (res?.data?.list === 0 && page > 1) setFilters((prev) => ({ ...prev, page: 1 }));
+				if (res?.data?.list === 0 && filters.page > 1) setFilters({ ...filters, page: 1 });
 
 				setApiData(res?.data || {});
-				setApiData((prev) => ({ ...prev, data: res?.data || {}, error: {} }));
 			} catch (err) {
-				console.log({ err });
-				setApiData((prev) => ({ ...prev, data: {}, error: err }));
+				setApiData({});
 				Toast.error(err?.response?.data?.message || err?.message || 'Something went wrong !!');
 			}
 		})();
-	}, [trigger]);
+	}, [trigger, setFilters, filters]);
 
 	useEffect(() => {
-		apiTrigger();
+		const [, scope, view_type] = (authParams || '').split(':');
+
+		if (!scope) { return; }
+
+		const newScopeFilters = { scope, view_type, selected_agent_id };
+
+		if (debounceQuery.current.q !== filters.q) {
+			clearTimeout(debounceQuery.current.timerId);
+
+			debounceQuery.current.q = filters.q;
+			debounceQuery.current.timerId = setTimeout(apiTrigger, 600);
+		} else {
+			apiTrigger();
+		}
 
 		localStorage.setItem('kam_desk_values', JSON.stringify({
 			filters,
 			activeTab,
+			shipmentType,
+			stepperTab,
+			scopeFilters: newScopeFilters,
 		}));
-	}, [apiTrigger, activeTab, filters]);
+	}, [apiTrigger, activeTab, filters, shipmentType, stepperTab, authParams, selected_agent_id]);
 
 	return {
 		loading,

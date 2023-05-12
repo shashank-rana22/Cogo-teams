@@ -27,13 +27,17 @@ function ShipmentList({ data = {}, loading }) {
 
 	return (
 		<div>
-			{!loading && isEmpty(list) ? <EmptyState /> : (
-				<div>
-					{renderPagination}
-					{ list?.map((item) => <Card data={item} />)}
-					{renderPagination}
-				</div>
-			)}
+			{!loading && isEmpty(list)
+				? <EmptyState />
+				: (
+					<div>
+						{renderPagination}
+
+						{list?.map((item) => <Card data={item} key={item?.id} />)}
+
+						{renderPagination}
+					</div>
+				)}
 		</div>
 	);
 }

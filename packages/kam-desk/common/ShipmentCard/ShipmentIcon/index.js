@@ -41,6 +41,7 @@ const iconMapping = {
 
 function ShipmentIcon({ shipment_type = '', icon_text = '' }) {
 	const currentIcon = iconMapping[shipment_type];
+
 	const Icon = currentIcon?.icon;
 
 	if (isEmpty(currentIcon)) return null;

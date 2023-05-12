@@ -7,7 +7,8 @@ import KamDeskContext from '../../context/KamDeskContext';
 import styles from './styles.module.css';
 
 function HeaderFilters() {
-	const { scopeFilters, handleVersionChange } = useContext(KamDeskContext);
+	const { scopeFilters = {}, handleVersionChange = () => {} } = useContext(KamDeskContext);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.version}>
@@ -18,6 +19,7 @@ function HeaderFilters() {
 					onChange={handleVersionChange}
 				/>
 			</div>
+
 			<ScopeSelect size="md" defaultValues={scopeFilters} />
 		</div>
 

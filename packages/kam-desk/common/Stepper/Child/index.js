@@ -11,7 +11,9 @@ function Step({ item = {}, value = '', onChange = () => {} }) {
 			tabIndex={0}
 			onClick={() => onChange(item?.value)}
 		>
-			<div className={cl`${styles.text} ${isActive ? styles.active_text : ''}`}>{item?.label || ''}</div>
+			<div className={cl`${styles.text} ${isActive ? styles.active_text : ''}`}>
+				{item?.label || ''}
+			</div>
 		</div>
 	);
 }

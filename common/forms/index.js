@@ -26,6 +26,7 @@ export { default as CreatableMultiSelectController } from './page-components/Con
 export { default as CountrySelectController } from './page-components/Controlled/CountrySelectController';
 export { default as ToggleController } from './page-components/Controlled/ToggleController';
 export { default as SingleDateRangeController } from './page-components/Controlled/SingleDateRangeController';
+export { default as AsyncSelect } from './page-components/Business/AsyncSelect';
 
 export { default as useInterval } from './hooks/useInterval';
 export { default as useGetAsyncOptions } from './hooks/useGetAsyncOptions';
