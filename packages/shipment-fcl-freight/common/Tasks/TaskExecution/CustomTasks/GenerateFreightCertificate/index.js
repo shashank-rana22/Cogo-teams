@@ -1,7 +1,7 @@
 import { Loader, Table } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import useGenerateFreightCertificate from '../../../../../hooks/useGenerateFreightCertificate';
 import useListBillOfLadings from '../../../../../hooks/useListBillOfLadings';
@@ -25,7 +25,7 @@ function GenerateFreightCertificate({
 
 	const containersArray = containerDetails?.[shipment_data?.id];
 
-	const { watch, control, setValue } = useForm();
+	const { watch, control } = useForm();
 
 	const { containersData, controls } = formatDataForTable(services, containersArray);
 

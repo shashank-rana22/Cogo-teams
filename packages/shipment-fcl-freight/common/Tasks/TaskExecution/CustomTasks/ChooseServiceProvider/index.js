@@ -25,7 +25,7 @@ function ChooseServiceProvider({
 		return service_ids;
 	});
 
-	const { apiData = {}, loading = true } = useListShipmentBookingConfirmationPreferences({
+	const { data = {}, loading = true } = useListShipmentBookingConfirmationPreferences({
 		defaultFilters: {
 			service_id   : service_ids,
 			service_type : task.service_type,
