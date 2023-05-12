@@ -57,7 +57,7 @@ export default function useEditServiceSchedule({
 
 		const payloadForUpdateShipment = {
 			ids                 : mainServiceIds,
-			performed_by_org_id : primary_service?.service_provider_id,
+			performed_by_org_id : primary_service?.service_provider?.id,
 			data                : ['vessel_arrived'].includes(primary_service?.state)
 				? { schedule_arrival: timezonedValues?.schedule_arrival }
 				: { ...timezonedValues },
