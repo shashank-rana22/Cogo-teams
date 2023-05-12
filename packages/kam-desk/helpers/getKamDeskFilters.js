@@ -34,7 +34,6 @@ export default function getKamDeskFilters({ filters, kamDeskContextValues }) {
 	if (['import', 'export'].includes(stepperTab)) {
 		finalFilters.trade_type = stepperTab;
 	}
-	console.log(filters, 'filters');
 
 	return {
 		filters            : finalFilters,
