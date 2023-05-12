@@ -2,9 +2,10 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const updateLocalState = (p = {}, latestAddedAgentName = '', payload = {}) => ({
+const updateLocalState = ({ p = {}, latestAddedAgentName = '', payload = {}, attendeeId = '' }) => ({
 	...p,
 	attendees: [...(p.attendees || []), {
+		attendeeId,
 		agentName: latestAddedAgentName,
 		...payload,
 	}],
@@ -23,7 +24,7 @@ function useUpdateLiveCallStatus({
 
 	const updateLiveCallStatus = async (payload = {}, callbackFunc = () => {}) => {
 		try {
-			await trigger({
+			const res = await trigger({
 				data: {
 					call_id: callId,
 					...payload,
@@ -35,7 +36,14 @@ function useUpdateLiveCallStatus({
 				return;
 			}
 			callbackFunc();
-			setLocalCallState((p) => updateLocalState(p, latestAddedAgentName, payload));
+			setLocalCallState((p) => updateLocalState(
+				{
+					p,
+					latestAddedAgentName,
+					payload,
+					attendeeId: res?.data?.voice_call_attendee_id,
+				},
+			));
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.data));
 		}

@@ -1,6 +1,6 @@
 import { Modal, cl } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { IcMMinus, IcMUserAllocations } from '@cogoport/icons-react';
+import { IcMMinus, IcMUserAllocations, IcMCall } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
 import hideNumber from '../../../../helpers/hideNumber';
@@ -95,11 +95,7 @@ function CallModal({
 									}
 								}}
 							>
-								<img
-									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/hangUp.svg"
-									alt="hang up"
-									height={40}
-								/>
+								<IcMCall className={styles.end_call_icon} />
 							</div>
 						)}
 					</div>

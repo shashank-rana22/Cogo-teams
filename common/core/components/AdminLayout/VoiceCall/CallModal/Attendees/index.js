@@ -1,26 +1,30 @@
-import { IcMArrowDown } from '@cogoport/icons-react';
+import { IcMArrowDown, IcMCallnotconnected } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import { ICON_MAPPING, CALL_MAPPING } from '../../configurations/group-call-controls';
+import { ICON_MAPPING } from '../../configurations/group-call-controls';
 
 import styles from './styles.module.css';
 
+const callMapping = {
+	answered: <img
+		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/phone_in_talk.png"
+		alt="answered"
+		className={styles.icon_styles_attendee}
+	/>,
+	not_connected: <IcMCallnotconnected fill="#EE3425" className={styles.icon_styles_attendee} />,
+};
+
 function SingleAttendee({ eachAttendee }) {
-	const { agentName = '', status = '', live_call_action_type = '' } = eachAttendee || {};
+	const { agentName = '', status = '', live_call_action_type = '', id = '' } = eachAttendee || {};
 	const ActionIcon = ICON_MAPPING[live_call_action_type] || null;
-	const { icon:CallIcon, fill } = CALL_MAPPING[status] || {};
+	const callIcon = callMapping[status] || null;
 	return (
-		<div className={styles.attendee_flex}>
+		<div className={styles.attendee_flex} key={id}>
 			<div className={styles.common_flex}>
 				{ActionIcon && <ActionIcon className={styles.icon_styles_attendee} fill="#4f4f4f" />}
 				<div className={styles.name}>{agentName}</div>
 			</div>
-			{CallIcon ? (
-				<CallIcon
-					fill={fill}
-					className={styles.icon_styles_attendee}
-				/>
-			) : <div className={styles.connecting_text}>connecting...</div>}
+			{callIcon || <div className={styles.connecting_text}>connecting...</div>}
 		</div>
 	);
 }
@@ -55,7 +59,7 @@ function Attendees({ attendees = [] }) {
 				style={{ '--height': showAttendees ? '95%' : '0%' }}
 			>
 				{showAttendees && [...(attendees || [])].reverse().map((eachAttendee) => (
-					<SingleAttendee eachAttendee={eachAttendee} />
+					<SingleAttendee key={eachAttendee?.id} eachAttendee={eachAttendee} />
 				))}
 			</div>
 		</div>

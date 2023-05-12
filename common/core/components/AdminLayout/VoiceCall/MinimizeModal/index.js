@@ -1,5 +1,4 @@
-import { IcMProfile } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { IcMProfile, IcMCall } from '@cogoport/icons-react';
 import React from 'react';
 
 import secsToDurationConverter from '../utils/secsToDurationConverter';
@@ -42,7 +41,10 @@ function MinimizeModal({
 				className={styles.details}
 				role="presentation"
 			>
-				<div className={styles.min_number}>{userName || `${mobile_country_code} ${mobile_number}`}</div>
+				<div className={styles.min_number}>
+					{userName || `${mobile_country_code} ${mobile_number}`
+				|| 'Unkown User'}
+				</div>
 				<div className={styles.status_container}>
 					<div className={styles.min_duration}>
 						{status ? secsToDurationConverter(status, counter) : 'Connecting...'}
@@ -55,12 +57,11 @@ function MinimizeModal({
 					onClick={(e) => handleEndClick(e)}
 					role="button"
 					tabIndex={0}
+					className={styles.end_call}
 					style={{ cursor: (hangUpLoading || callLoading) ? 'not-allowed' : 'pointer' }}
 				>
-					<img
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/end-icon.svg"
-						alt="end-icon"
-						className={styles.end_icon}
+					<IcMCall
+						className={styles.end_call_icon}
 					/>
 				</div>
 			)}

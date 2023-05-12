@@ -94,8 +94,11 @@
 	flex-basis: 10%;
 	align-items: center;
 	justify-content: center;
+	padding: 10px;
 	margin-bottom: 15px;
 	cursor: pointer;
+	background-color: #bf291e;
+	border-radius: 10px;
 }
 
 .connecting {
@@ -118,4 +121,11 @@
 
 .disable {
 	cursor: not-allowed;
+}
+
+.end_call_icon {
+	width: 20px;
+	height: 20px;
+	fill: #fff;
+	transform: rotate(135deg);
 }

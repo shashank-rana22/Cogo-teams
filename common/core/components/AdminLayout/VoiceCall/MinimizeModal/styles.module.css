@@ -50,13 +50,23 @@
 	color: #393f70;
 }
 
-.end_icon {
-	width: 29px;
-	height: 29px;
-	margin-top: 5px;
-	cursor: pointer;
+.end_call_icon {
+	width: 15px;
+	height: 15px;
+	fill: #fff;
+	transform: rotate(135deg);
 }
 
 .disable {
 	cursor: not-allowed;
+}
+
+.end_call {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 8px;
+	cursor: pointer;
+	background-color: #bf291e;
+	border-radius: 10px;
 }

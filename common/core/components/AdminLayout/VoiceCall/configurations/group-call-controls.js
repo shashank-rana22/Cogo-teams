@@ -1,6 +1,6 @@
 import { asyncFieldsPartnerUsers } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-import { IcMAgentManagement, IcMCall, IcMCallnotconnected } from '@cogoport/icons-react';
+import { IcMAgentManagement } from '@cogoport/icons-react';
 
 export const ICON_MAPPING = {
 	monitor  : IcMAgentManagement,
@@ -9,10 +9,6 @@ export const ICON_MAPPING = {
 	transfer : IcMAgentManagement,
 };
 
-export const CALL_MAPPING = {
-	answered      : { icon: IcMCall, fill: '#ABCD62' },
-	not_connected : { icon: IcMCallnotconnected, fill: '#EE3425' },
-};
 export const useGetControls = ({ localStateReducer }) => {
 	const servetelAgentOptions = useGetAsyncOptions({
 		...asyncFieldsPartnerUsers(), valueKey: 'user_id',
