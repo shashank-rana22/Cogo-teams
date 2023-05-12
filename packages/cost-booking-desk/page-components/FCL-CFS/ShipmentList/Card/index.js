@@ -49,9 +49,9 @@ function Card({ item = {} }) {
 
 				{/* <div className={styles.line_item}>
 					<LineItems item={item} />
-				</div> */}
+				</div>
 
-				{/* <div className={styles.separator} /> */}
+				<div className={styles.separator} /> */}
 
 				<div className={styles.cargo}>
 					<CargoDetails cargo_details={item?.cargo_details || []} item={item} />
