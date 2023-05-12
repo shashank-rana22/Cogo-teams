@@ -50,7 +50,6 @@ function useListTasksHelper() {
 		count   : list?.list?.length,
 		tasksList,
 		completedTaskCount,
-		shipment_data,
 		hideCompletedTasks,
 		setHideCompletedTasks,
 		handleClick,

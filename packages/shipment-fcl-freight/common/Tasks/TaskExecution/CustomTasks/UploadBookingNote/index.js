@@ -11,7 +11,11 @@ import useGetStep1Data from './helpers/useGetStep1Data';
 import useGetStep2Data from './helpers/useGetStep2Data';
 import useGetStep3Data from './helpers/useGetStep3Data';
 
-function UploadBookingNote({ task, onCancel, taskListRefetch }) {
+function UploadBookingNote({
+	task = {},
+	onCancel = () => {},
+	taskListRefetch = () => {},
+}) {
 	const { primary_service, shipment_data, servicesList } = useContext(ShipmentDetailContext);
 
 	let initialStep = 0;
@@ -22,7 +26,7 @@ function UploadBookingNote({ task, onCancel, taskListRefetch }) {
 		skipStep0 = true;
 	}
 
-	if (task?.tags && task?.tags?.length) initialStep = Number(task.tags[0]) + 1;
+	if (task.tags && task.tags?.length) initialStep = Number(task.tags[0]) + 1;
 
 	const [step, setStep] = useState(initialStep);
 	const [fileUrl, setFileUrl] = useState();
@@ -31,7 +35,7 @@ function UploadBookingNote({ task, onCancel, taskListRefetch }) {
 
 	const selectedRate = step0_data.selectedServiceProvider || undefined;
 
-	const formattedRate = getFormattedRates({ primary_service, shipment_data, servicesList, selectedRate });
+	const formattedRate = getFormattedRates({ servicesList, selectedRate });
 
 	const step1_data = useGetStep1Data({ setFileUrl });
 
@@ -54,7 +58,7 @@ function UploadBookingNote({ task, onCancel, taskListRefetch }) {
 		task,
 		taskListRefetch,
 	});
-	const { serviceQuotationLoading } = step3_data || {};
+	const { serviceQuotationLoading = true } = step3_data || {};
 
 	return (
 

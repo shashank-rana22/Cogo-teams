@@ -1,6 +1,8 @@
+import airRepository from './config/air-repository';
 import allocations from './config/allocations';
 import athenaDashboard from './config/athena-dashboard';
 import authorityDesk from './config/authority-desk';
+import blDoCollectionRelease from './config/bl_do-collection-release';
 import bookingDesk from './config/booking-desk';
 import businessFinance from './config/business-finance';
 import cogoAcademy from './config/cogo-academy';
@@ -50,8 +52,10 @@ const routeConfig = {
 	...lastMileDesk,
 	...welcome,
 	...athenaDashboard,
+	...airRepository,
 	...documentDesk,
 	...ingestion,
+	...blDoCollectionRelease,
 	...saasTools,
 };
 
