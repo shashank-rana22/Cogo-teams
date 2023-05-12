@@ -548,6 +548,7 @@ importers:
       '@cogoport/store': workspace:^0.1.0
       '@cogoport/utils': ^1.2.6
       react: 18.2.0
+      react-hook-form: ^7.43.3
     dependencies:
       '@cogoport/components': 1.0.410_y3d6pejfqbkazdfzmaewia2nra
       '@cogoport/forms': link:../../common/forms
@@ -560,6 +561,7 @@ importers:
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.10
       react: 18.2.0
+      react-hook-form: 7.43.7_react@18.2.0
 
   packages/booking-desk:
     specifiers:

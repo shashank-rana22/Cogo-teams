@@ -3,6 +3,7 @@ import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState, useMemo } from 'react';
 
 import getBlDoPayload from '../helpers/getBlDoPayload';
+import toastApiError from '../utils/toastApiError';
 
 const emptyData = { list: [], total: 0, total_page: 0 };
 
@@ -25,7 +26,7 @@ export default function useListBlDOShipment({ prefix = '', stateProps = {} }) {
 			});
 			setData(res.data || {});
 		} catch (err) {
-			console.log(err);
+			toastApiError(err);
 		}
 	}, [trigger, payload]);
 
