@@ -12050,6 +12050,23 @@ const partner = {
 			service_name : 'tickets',
 		},
 	],
+	air_repository: [
+		{
+			api          : 'list_shipment_service_ops_repository',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_shipment_service_ops_repository',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_shipment_service_ops_repository',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+	],
 };
 
 export default partner;
