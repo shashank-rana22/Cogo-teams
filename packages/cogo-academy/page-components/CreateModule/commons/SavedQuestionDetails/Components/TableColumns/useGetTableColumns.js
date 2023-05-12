@@ -1,4 +1,3 @@
-import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { format, startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -50,35 +49,27 @@ const useGetTableColumns = ({
 			Header   : 'QUESTION/CASE',
 			id       : 'question_text',
 			accessor : (item) => (
-				<Tooltip
-					interactive
-					className={styles.tooltip}
-					content={item?.question_type !== 'case_study'
-						? <div className={styles.q_text}>{item?.question_text}</div>
-						: <CaseQuestion item={item} from="tooltip" caseToShow={caseToShow} />}
+				<div
+					role="presentation"
+					className={styles.question_div}
+					onClick={() => {
+						if (item?.question_type !== 'case_study') {
+							setQuestionToShow(item?.id);
+						}
+					}}
 				>
-					<div
-						role="presentation"
-						className={styles.question_div}
-						onClick={() => {
-							if (item?.question_type !== 'case_study') {
-								setQuestionToShow(item?.id);
-							}
-						}}
-					>
-						{item?.question_type !== 'case_study'
-							? item?.question_text
-							: (
-								<CaseQuestion
-									item={item}
-									from="normal"
-									caseToShow={caseToShow}
-									setQuestionToShow={setQuestionToShow}
-									setCaseToShow={setCaseToShow}
-								/>
-							)}
-					</div>
-				</Tooltip>
+					{item?.question_type !== 'case_study'
+						? item?.question_text
+						: (
+							<CaseQuestion
+								item={item}
+								from="normal"
+								caseToShow={caseToShow}
+								setQuestionToShow={setQuestionToShow}
+								setCaseToShow={setCaseToShow}
+							/>
+						)}
+				</div>
 			),
 		},
 		{

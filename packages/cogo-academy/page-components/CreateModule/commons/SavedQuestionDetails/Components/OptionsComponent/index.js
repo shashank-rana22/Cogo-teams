@@ -18,7 +18,7 @@ function OptionsComponent({
 	}, [item, questionToShow]);
 
 	return (
-		<div>
+		<>
 			<IcMEyeopen style={{ cursor: 'pointer' }} onClick={() => setQuestionDetails(item)} />
 
 			{!isEmpty(questionDetails) ? (
@@ -29,7 +29,7 @@ function OptionsComponent({
 					{...restProps}
 				/>
 			) : null}
-		</div>
+		</>
 	);
 }
 

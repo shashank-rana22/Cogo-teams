@@ -11,6 +11,7 @@ const useSavedQuestionDetails = ({
 	listSetQuestions,
 	editDetails,
 	setQuestionDetails,
+	setQuestionToShow,
 }) => {
 	const [questionToDelete, setQuestionToDelete] = useState({});
 
@@ -61,6 +62,11 @@ const useSavedQuestionDetails = ({
 		}
 	};
 
+	const onCloseModal = () => {
+		setQuestionDetails({});
+		setQuestionToShow('');
+	};
+
 	return {
 		handleEditQuestion,
 		handleDeleteQuestion,
@@ -68,6 +74,7 @@ const useSavedQuestionDetails = ({
 		questionToDelete,
 		setQuestionToDelete,
 		caseStudyLoading,
+		onCloseModal,
 	};
 };
 

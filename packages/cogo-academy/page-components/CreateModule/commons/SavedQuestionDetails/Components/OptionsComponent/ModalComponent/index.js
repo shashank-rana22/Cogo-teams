@@ -30,6 +30,7 @@ function ModalComponent({
 		questionToDelete,
 		setQuestionToDelete,
 		caseStudyLoading,
+		onCloseModal,
 	} = useSavedQuestionDetails({
 		setAllKeysSaved,
 		getTestQuestionTest,
@@ -38,6 +39,7 @@ function ModalComponent({
 		setEditDetails,
 		editDetails,
 		setQuestionDetails,
+		setQuestionToShow,
 	});
 
 	const { created_at, question_type = '', test_case_study_questions = [], question_text = '' } = item || {};
@@ -46,10 +48,7 @@ function ModalComponent({
 		<div>
 			<Modal
 				show={!isEmpty(questionDetails)}
-				onClose={() => {
-					setQuestionDetails({});
-					setQuestionToShow('');
-				}}
+				onClose={onCloseModal}
 				placement="center"
 				showCloseIcon={false}
 				className={styles.modal_container}
@@ -60,10 +59,7 @@ function ModalComponent({
 						<IcMCross
 							width={18}
 							height={18}
-							onClick={() => {
-								setQuestionDetails({});
-								setQuestionToShow('');
-							}}
+							onClick={onCloseModal}
 							className={styles.close_icon}
 						/>
 
@@ -76,6 +72,7 @@ function ModalComponent({
 						{question_type === 'case_study' ? (
 							test_case_study_questions.map((question, index) => (
 								<SingleQuestion
+									key={question?.id}
 									id={question?.id}
 									data={question}
 									primary_question_type={question_type}

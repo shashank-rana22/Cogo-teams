@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 const TYPE_MAPPING = {
 	single_correct : 'Single answer Choice',
 	multi_correct  : 'Multi answer Choice',
-	subjective     : 'subjective Question',
+	subjective     : 'Subjective Question',
 };
 
 const DIFFICULTY_MAPPING = {
