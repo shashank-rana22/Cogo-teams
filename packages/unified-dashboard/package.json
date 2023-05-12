@@ -3,16 +3,16 @@
 	"description": "Unified Dashboard",
 	"version": "0.1.0",
 	"dependencies": {
-		"@cogoport/components": "^1.0.390",
-		"@cogoport/charts": "^1.0.1",
-		"@cogoport/icons-react": "^1.0.57",
-		"@cogoport/request": "workspace:^0.1.0",
-		"@cogoport/globalization" : "workspace:^0.0.1",
-		"@cogoport/store": "workspace:^0.1.0",
+		"@cogoport/charts": "^1.0.3",
+		"@cogoport/components": "^1.0.416",
 		"@cogoport/forms": "workspace:^0.1.0",
+		"@cogoport/globalization": "workspace:^0.0.1",
+		"@cogoport/icons-react": "^1.0.72",
 		"@cogoport/next": "workspace:0.1.0",
-		"@cogoport/utils": "^1.2.4",
-		"uuid": "^9.0.0",
-		"react": "18.2.0"
+		"@cogoport/request": "workspace:^0.1.0",
+		"@cogoport/store": "workspace:^0.1.0",
+		"@cogoport/utils": "^1.2.10",
+		"react": "18.2.0",
+		"uuid": "^9.0.0"
 	}
 }

@@ -3,6 +3,7 @@ import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+import Loader from '../../../../../../common/Loader';
 import Shipment from '../../../../../../common/SaleShipmentTable';
 import AfterHeader from '../../../../../../common/SaleShipmentTable/AfterHeader';
 import useListShipments from '../../../../../../hooks/useListShipments';
@@ -20,10 +21,10 @@ function Employee({ val = {}, currency, filters, employeePad = 20 }) {
 			setFilters((prevFilters) => ({
 				...prevFilters,
 				...filters,
-				agent_id: val?.manager_id,
+				agent_id: val?.agent_id,
 			}));
 		}
-	}, [filters, showShipments, setFilters, val?.manager_id]);
+	}, [filters, showShipments, setFilters, val?.agent_id]);
 
 	return (
 		<>
@@ -145,6 +146,7 @@ function Employee({ val = {}, currency, filters, employeePad = 20 }) {
 
 				</div>
 			</div>
+
 			{showGrid && val?.employees?.length > 0 ? (
 				<>
 					{val?.user_name?.toLowerCase() !== 'others' && (
@@ -181,6 +183,7 @@ function Employee({ val = {}, currency, filters, employeePad = 20 }) {
 				</>
 			) : (
 				<div>
+					{loading && <Loader count={3} />}
 					{!loading && <NoData showGrid={showShipments} />}
 				</div>
 			)}

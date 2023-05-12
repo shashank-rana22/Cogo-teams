@@ -3,6 +3,7 @@ import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+import Loader from '../../../../../../../common/Loader';
 import Shipment from '../../../../../../../common/SaleShipmentTable';
 import AfterHeader from '../../../../../../../common/SaleShipmentTable/AfterHeader';
 import useListShipments from '../../../../../../../hooks/useListShipments';
@@ -208,6 +209,7 @@ function Employee({ val = {}, currency, filters, employeePad = 30 }) {
 				</div>
 			) : (
 				<div>
+					{loading && <Loader count={3} />}
 					{!loading && <NoData showGrid={showShipments} />}
 				</div>
 			)}
