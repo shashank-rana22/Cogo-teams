@@ -8127,7 +8127,7 @@ const partner = {
 			feature     : 'invoices',
 		},
 		{
-			api         : 'get_sales_invoice_final_post_sage_info',
+			api         : 'get_sales_invoice_by_id_final_post_sage_info',
 			access_type : 'private',
 			module      : 'invoices',
 			feature     : 'invoices',
@@ -8251,7 +8251,7 @@ const partner = {
 			feature     : 'outstanding',
 		},
 		{
-			api         : 'get_sales_invoice_final_post_sage_info',
+			api         : 'get_sales_invoice_by_id_final_post_sage_info',
 			access_type : 'private',
 			module      : 'outstanding',
 			feature     : 'outstanding',
