@@ -1,0 +1,18 @@
+.cargo_details_container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 0 10px;
+
+	:global {
+		.tippy-box.multiple-cargo {
+			max-width: initial !important;
+		}
+	}
+}
+
+.more_details {
+	font-size: var(--font-size-sm);
+	color: #f68b21;
+}
