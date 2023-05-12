@@ -87,8 +87,6 @@ const useGetIrnGeneration = ({ id, refetch }: IrnGenerationProps) => {
 		try {
 			sageDataTrigger();
 		} catch (e) {
-			console.log('e', e);
-
 			Toast.error(e?.response?.data?.message);
 		}
 	};
