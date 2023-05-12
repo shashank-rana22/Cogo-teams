@@ -95,7 +95,7 @@ function SupplierReallocation({
 				<div className={styles.form_wrapper}>
 					{controls.map((ctrl) => (
 						<FormElement
-							key={control?.name}
+							key={ctrl?.name}
 							{...ctrl}
 							control={control}
 							errors={errors}
