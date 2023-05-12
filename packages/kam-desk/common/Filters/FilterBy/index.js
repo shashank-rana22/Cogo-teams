@@ -224,7 +224,7 @@ function FilterBy({
 					<div className={styles.filter_heading}>Payment Type</div>
 					<Select
 						options={convertArrayToOptions(FILTER_OPTIONS.payment_term)}
-						value={popoverFilter?.payment_termp}
+						value={popoverFilter?.payment_term}
 						onChange={(val) => { setPopoverFilter({ ...popoverFilter, payment_term: val }); }}
 						size="sm"
 						isClearable
