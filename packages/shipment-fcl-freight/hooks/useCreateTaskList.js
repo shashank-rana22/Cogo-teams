@@ -8,7 +8,7 @@ import useGetListDocuments from './useListDocuments';
 const docTasks = ['upload_document', 'approve_document', 'amend_document'];
 
 const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
-	const [filters, setFilters] = useState({ q: '', uploaded_by_org_id: '', service_type: '' });
+	const [filters, setFilters] = useState({ uploaded_by_org_id: '', service_type: '' });
 	const [taskList, setTaskList] = useState([]);
 	const [docTypes, setDocTypes] = useState([]);
 
