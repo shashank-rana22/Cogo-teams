@@ -62,7 +62,7 @@ function Nodes({ type = '' }) {
 	return (
 		<>
 			{(mappingData || []).map((node) => (
-				<div className={styles.node}>
+				<div className={styles.node} key={node}>
 					<div className={styles.node_title}>
 						{node.title}
 					</div>

@@ -5,25 +5,26 @@ import filterOptopns from '../../../../configurations/filter-options';
 
 import styles from './styles.module.css';
 
+const func = () => {};
 function FiltersContent({
-	setFilterVisible = () => {},
+	setFilterVisible = func,
 	filter = '',
-	setFilter = () => {},
-	// listReferrals = () => {},
-	// setPagination = () => {},
+	setFilter = func,
+	getListReferrals = func,
+	setListPagination = func,
 }) {
 	const [tempStatus, setTempStatus] = useState(filter);
 
 	const handleReset = () => {
 		setFilter();
-		// setPagination(1);
+		setListPagination(1);
 		setFilterVisible(false);
-		// listReferrals();
+		getListReferrals();
 		setTempStatus(null);
 	};
 
 	const handleFilters = () => {
-		// setPagination(1);
+		setListPagination(1);
 		setFilter(tempStatus);
 		setFilterVisible(false);
 	};

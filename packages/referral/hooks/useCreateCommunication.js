@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -30,7 +31,7 @@ const useCreateCommunication = ({ referrerNetworkNode = () => {} }) => {
 			Toast.success('Email sent successfully!');
 			referrerNetworkNode();
 		} catch (error) {
-			Toast.error(error.data?.template);
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 

@@ -15,7 +15,10 @@ function NetWork() {
 
 	const { query = {} } = useRouter();
 	const { referrer_id = '' } = query || {};
-	const { data = {}, referrerNetwork = () => {}, netWorkLoader = false } = useGetNetwork({ referrer_id });
+	const {
+		data = {}, referrerNetwork = () => {},
+	 netWorkLoader,
+	 } = useGetNetwork({ referrer_id });
 
 	const router = useRouter();
 	return (

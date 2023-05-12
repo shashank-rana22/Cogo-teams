@@ -1,11 +1,11 @@
 import { Popover, ButtonGroup, Tooltip } from '@cogoport/components';
 import { IcMOverflowDot, IcMCall, IcMEmail } from '@cogoport/icons-react';
 import {
-	// format,
+	format,
 	startCase,
 } from '@cogoport/utils';
 
-import { TYPE } from '../../../../constants';
+import { TYPE, STATUS_MAPPING } from '../../../../constants';
 
 import ListButtons from './ListButtons';
 import Nodes from './Nodes';
@@ -41,18 +41,16 @@ function ShowButtons({
 	);
 }
 
-const email = 'hellcndjnnkkemmke';
-const whatsapp_number = '';
-const whatsapp_country_code = '+91';
-
 const TableColumns = ({ activeTab = '' }) => {
 	const columns = [
 		{
 			Header   : 'NAME',
-			accessor : ({ name = '' }) => (
-				<Tooltip content={startCase(name)} placement="bottom">
-					<div className={styles.user_name}>{startCase(name)}</div>
-				</Tooltip>
+			accessor : ({ item = {} }) => (
+				<div className={styles.tooltip_content}>
+					<Tooltip content={startCase(item?.name)} placement="bottom">
+						<div className={styles.user_name}>{startCase(item?.name)}</div>
+					</Tooltip>
+				</div>
 			),
 			conditions: ['invited', 'users', 'affiliate', 'employees'],
 		},
@@ -63,7 +61,7 @@ const TableColumns = ({ activeTab = '' }) => {
 					content={(
 						<div className={styles.organisation_list}>
 							{(organisation || []).map((org) => (
-								<div className={styles.single_org}>
+								<div className={styles.single_org} key={org}>
 									{startCase(org)}
 								</div>
 							))}
@@ -101,13 +99,16 @@ const TableColumns = ({ activeTab = '' }) => {
 		},
 		{
 			Header   : 'INVITED BY',
-			accessor : () => (
+			accessor : (item = {}) => (
 				<div className={styles.invented_by}>
 					<Tooltip content="Ashish- Cogoverse" placement="bottom">
 						<div className={styles.user_name}>Ashish- Cogoverse njenje je</div>
 					</Tooltip>
 					<div className={styles.invited_date}>
-						12/10/22
+						{format(
+							item?.created_at,
+							'dd/MM/yy',
+						)}
 					</div>
 				</div>
 			),
@@ -153,27 +154,27 @@ const TableColumns = ({ activeTab = '' }) => {
 
 		{
 			Header   : 'CONTACT',
-			accessor : () => (
+			accessor : (item = {}) => (
 				<div className={styles.each_item}>
-					{email && (
+					{item?.email && (
 						<div className={styles.contact_details}>
 							<IcMEmail
 								className={styles.contact_icon}
 								fill="#BDBDBD"
 							/>
 							<div className={styles.action_type}>
-								<TooltipContent content={email} type="" />
+								<TooltipContent content={item?.email} type="" />
 							</div>
 						</div>
 					)}
 
-					{whatsapp_number && (
+					{item?.whatsapp_number && (
 						<div className={styles.contact_details}>
 							<IcMCall className={styles.contact_icon} fill="#BDBDBD" />
 							<div className={styles.action_type}>
 								<TooltipContent
-									content={whatsapp_number}
-									countryCode={whatsapp_country_code}
+									content={item?.whatsapp_number}
+									countryCode={item?.whatsapp_country_code}
 									type="mobile"
 								/>
 							</div>
@@ -185,8 +186,10 @@ const TableColumns = ({ activeTab = '' }) => {
 		},
 		{
 			Header   : 'STATUS',
-			accessor : () => (
-				<div className={styles.user_name}>Sent</div>
+			accessor : (item = {}) => (
+				<div className={styles.user_name}>
+					{STATUS_MAPPING[item?.status]}
+				</div>
 			),
 			conditions: ['invited'],
 		},

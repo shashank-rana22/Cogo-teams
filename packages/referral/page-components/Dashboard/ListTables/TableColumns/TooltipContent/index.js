@@ -9,7 +9,7 @@ function TooltipContent({ content = '', countryCode = '', type = '' }) {
 			<div className={styles.user_data}>
 				{type === 'mobile' && countryCode}
 				{' '}
-				{content}
+				{ content}
 			</div>
 		</Tooltip>
 	);

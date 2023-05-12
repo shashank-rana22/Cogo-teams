@@ -1,5 +1,7 @@
 import React from 'react';
 
+import SemiPieChart from '../../../../common/SemiPieCharts';
+
 import StatusDetails from './StatusDetails';
 import styles from './styles.module.css';
 
@@ -9,7 +11,7 @@ function Users() {
 			<div className={styles.title}>USERS</div>
 			<div className={styles.chart_container}>
 				<div className={styles.chart}>
-					Chart will come here
+					<SemiPieChart />
 				</div>
 				<div className={styles.chart_status}>
 					<StatusDetails />

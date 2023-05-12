@@ -5,6 +5,8 @@ import { IcMCalendar } from '@cogoport/icons-react';
 import { merge } from '@cogoport/utils';
 import { useState } from 'react';
 
+import useGetListReferrals from '../../hooks/useGetListReferrals';
+
 import ListTables from './ListTables';
 import Progress from './Progress';
 import styles from './styles.module.css';
@@ -14,7 +16,15 @@ function Dashboard() {
 	const [date, setDate] = useState(new Date());
 	const [searchValue, setSearchValue] = useState('');
 	const [activeTab, setActiveTab] = useState('invited');
+	const [filter, setFilter] = useState('');
 	const countryOptions = useGetAsyncOptions(merge(asyncFieldsOrganization()));
+
+	const {
+		listReferals = {},
+		listLoading = false,
+		setListPagination = () => {},
+		getListReferrals = () => {},
+	} = useGetListReferrals({ filter, searchValue, activeTab, date });
 
 	return (
 		<>
@@ -46,6 +56,12 @@ function Dashboard() {
 					setSearchValue={setSearchValue}
 					setActiveTab={setActiveTab}
 					activeTab={activeTab}
+					setFilter={setFilter}
+					filter={filter}
+					listReferals={listReferals}
+					setListPagination={setListPagination}
+					listLoading={listLoading}
+					getListReferrals={getListReferrals}
 				/>
 			</div>
 

@@ -13,57 +13,25 @@ import FiltersContent from './FiltersContent';
 import styles from './styles.module.css';
 import TableColumns from './TableColumns';
 
+const func = () => {};
+
 function ListTables({
 	searchValue = '',
-	setSearchValue = () => {},
-	setActiveTab = () => {},
+	setSearchValue = func,
+	setActiveTab = func,
 	activeTab = '',
+	setFilter = func,
+	filter = '',
+	listReferals = {},
+	setListPagination = func,
+	listLoading = false,
+	getListReferrals = func,
 }) {
 	const [filterVisible, setFilterVisible] = useState(false);
-	const [filter, setFilter] = useState('');
 	const { tabs = [] } = tableTabs();
 
-	const listLoading = false;
-	const list = [
-		{
-			id           : 1,
-			name         : 'Rajesh Kumar',
-			organisation : ['HELLOncjnnkmmkem', 'JNKJ', 'BEJ'],
-			type         : 'importer_exporter',
-		},
-		{
-			id           : 2,
-			name         : 'Rajesh Kumar cowhan',
-			organisation : ['HELLO', 'JNKJ', 'BEJ', 'NXJKNKMMKWMW', 'NJKKNMKMKMDEDE'],
-			type         : 'channel_partner',
+	const { list = [], page, total_count, page_limit } = listReferals || {};
 
-		},
-		{
-			id           : 3,
-			name         : 'Rajesh Kumar',
-			organisation : ['HELLO', 'JNKJ', 'BEJ'],
-			type         : 'importer_exporter',
-		},
-		{
-			id           : 4,
-			name         : 'Rajesh Kumar',
-			organisation : ['HELLO'],
-			type         : 'channel_partner',
-		},
-		{
-			id           : 5,
-			name         : 'Rajesh Kumar cowhan naik jbj nj',
-			organisation : ['HELLO', 'JNKJ', 'BEJ'],
-			type         : 'importer_exporter',
-		},
-		{
-			id           : 6,
-			name         : 'Rajesh Kumar',
-			organisation : ['HELLOJBJNEKMK'],
-			type         : 'channel_partner',
-		},
-
-	];
 	return (
 		<div className={styles.container}>
 			<div className={styles.filter_container}>
@@ -83,8 +51,8 @@ function ListTables({
 							setFilterVisible={setFilterVisible}
 							filter={filter}
 							setFilter={setFilter}
-							// listReferrals={listReferrals}
-							// setPagination={setPagination}
+							getListReferrals={getListReferrals}
+							setListPagination={setListPagination}
 						/>
 					)}
 					visible={filterVisible}
@@ -120,7 +88,7 @@ function ListTables({
 									})}
 									data={list || []}
 									loading={listLoading}
-									// loadingRowsCount={10}
+									loadingRowsCount={10}
 								/>
 								{isEmpty(list) && !listLoading && (
 									<figure className={styles.empty_state}>
@@ -139,13 +107,10 @@ function ListTables({
 								<Pagination
 									type="table"
 									className={styles.pagination_container}
-									currentPage={0}
-									totalItems={10}
-									pageSize={10}
-									// currentPage={page || 0}
-									// totalItems={total_count || 0}
-									// pageSize={page_limit || 10}
-									// onPageChange={handleOnPageChange}
+									currentPage={page || 0}
+									totalItems={total_count || 0}
+									pageSize={page_limit || 10}
+									onPageChange={setListPagination}
 								/>
 							</TabPanel>
 						))}

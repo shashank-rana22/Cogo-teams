@@ -15,3 +15,9 @@ export const USER_STATUS_MAPPING = {
 	inactive  : 'In-Active',
 	Affiliate : 'affiliate',
 };
+
+export const STATUS_MAPPING = {
+	invalid  : 'Referral Invalid',
+	pending  : 'Verification Pending',
+	accepted : 'Invite Accepted',
+};

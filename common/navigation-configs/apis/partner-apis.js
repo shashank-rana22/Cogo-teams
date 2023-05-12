@@ -12079,6 +12079,12 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'referral',
 		},
+		{
+			api          : 'list_referral_invites',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+
 	],
 };
 
