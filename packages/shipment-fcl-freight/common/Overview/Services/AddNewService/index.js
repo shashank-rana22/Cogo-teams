@@ -50,12 +50,15 @@ function AddNewService({
 
 	const closeModal = () => {
 		setUpsellModal(!upsellModal);
-	};
+	}; 
+
+	console.log(!cancelUpsell, isUpsellable, canUpsellForTradeType, 'hdiuewhi');
 
 	const showAddServiceBox = !cancelUpsell && isUpsellable && canUpsellForTradeType;
 
 	useEffect(() => {
-		const { origin, destination, main } = showTradeHeadings;
+		const { origin, destination, main } = showTradeHeading;
+
 		if(showAddServiceBox){
 			setShowTradeHeading({
 				origin: origin || upsellableService.trade_type === 'export',
@@ -63,27 +66,7 @@ function AddNewService({
 				main: main,
 			})
 		}
-	}, [])
-
-	useEffect(() => {
-		const newValue = {
-			origin: upsellableService.trade_type === 'export' && !cancelUpsell && isUpsellable && canUpsellForTradeType
-			&& !showTradeHeading.origin || showTradeHeading.origin,
-			destination:
-			upsellableService.trade_type === 'import' && !cancelUpsell && isUpsellable && canUpsellForTradeType
-				&& !showTradeHeading.destination || showTradeHeading.destination,
-
-			main: showTradeHeading.main,
-		};
-		console.log({newValue})
-
-		setShowTradeHeading(newValue);
-	}, [cancelUpsell, isUpsellable,
-		canUpsellForTradeType, setShowTradeHeading,
-		showTradeHeading.origin, showTradeHeading.destination,
-		upsellableService.trade_type,
-		showTradeHeading.main,
-	]);
+	}, [showAddServiceBox, upsellableService.trade_type])
 
 	return (
 		<>
