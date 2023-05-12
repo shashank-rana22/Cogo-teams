@@ -1410,6 +1410,21 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'create_saas_surface_shipment_detail',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'get_saas_ftl_tracking_consent',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'get_saas_ftl_tracking_detail',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
 		api          : 'send_whatsapp_booking_note_delayed',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -1430,6 +1445,12 @@ const apis = [
 		api          : 'list_organization_assets',
 		access_type  : 'private',
 		service_name : 'organization',
+	},
+	{
+		api          : 'list_authority_desk_bl_documents',
+		access_type  : 'private',
+		service_name : 'bookings',
+		feature      : 'bl_do',
 	},
 ];
 

@@ -100,6 +100,7 @@ function FreightRate({
 							<InputController
 								name="freight_price"
 								control={control}
+								type="number"
 								size="sm"
 								{...register(`freight_declaration.${index}.freight_price`)}
 								rules={{ required: { value: true, message: 'Freight Price is required' } }}
@@ -118,6 +119,7 @@ function FreightRate({
 							<InputController
 								name="origin_price"
 								control={control}
+								type="number"
 								size="sm"
 								{...register(`freight_declaration.${index}.origin_price`)}
 								rules={{ required: { value: true, message: 'Origin Price is required' } }}
