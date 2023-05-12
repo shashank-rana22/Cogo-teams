@@ -223,8 +223,7 @@ function FormContainer({
 										disabled={!activeHawb.isNew}
 										onLabel="Custom Series"
 										offLabel="COGO Series"
-										style={{ position: 'relative', left: '22%', top: '62px', width: 'fit-content' }}
-										onChange={() => setCustomHawbNumber((p) => !p)}
+										onChange={() => setCustomHawbNumber((prev) => !prev)}
 									/>
 									<Layout
 										fields={fields?.hawb_controls}

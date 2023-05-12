@@ -173,7 +173,6 @@ function GenerateMAWB({
 				setValue(c.name, taskItem[c.name] || '');
 			}
 		});
-
 		setValue('executedDate', taskItem.executedDate ? new Date(taskItem.executedDate) : new Date());
 		setValue('iataCode', iataCodeMapping[taskItem?.originAirportId] || '');
 		setValue('city', taskItem?.city || 'NEW DELHI');
