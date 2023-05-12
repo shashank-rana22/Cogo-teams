@@ -118,6 +118,16 @@
 	}
 }
 
+.sure_approve {
+	font-size: 16px;
+	line-height: 24px;
+	text-align: center;
+
+	span {
+		font-weight: 600;
+	}
+}
+
 .calcuate_button {
 	display: flex;
 	justify-content: flex-end;
