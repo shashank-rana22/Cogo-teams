@@ -21,7 +21,6 @@ function Timeline() {
 		shipment_data, primary_service, timelineLoading : loading, isGettingShipment,
 		timelineData, getShipmentTimeline,
 	} = useContext(ShipmentDetailContext);
-	console.log('timelineData', timelineData);
 
 	useEffect(() => {
 		if (shipment_data?.id) {

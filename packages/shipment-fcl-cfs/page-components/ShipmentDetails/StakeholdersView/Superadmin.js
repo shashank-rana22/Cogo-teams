@@ -21,7 +21,7 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 
 import styles from './styles.module.css';
 
-const services_additional_methods = ['stakeholder', 'service_objects', 'booking_requirement'];
+const services_additional_methods = ['stakeholder', 'service_objects'];
 
 function Superadmin({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
@@ -31,60 +31,64 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
 
-	// const { servicesGet = {} } = useGetServices({
-	// 	shipment_data,
-	// 	additional_methods: services_additional_methods,
-	// 	activeStakeholder,
-	// });
+	const { getTimeline = {} } = useGetTimeLine({ shipment_data });
+
+	const { servicesGet = {} } = useGetServices({
+		shipment_data,
+		additional_methods: services_additional_methods,
+		activeStakeholder,
+	});
 
 	const contextValues = useMemo(() => ({
 		...get,
+		...servicesGet,
+		...getTimeline,
 		activeStakeholder,
-	}), [get, activeStakeholder]);
+	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
-	// useEffect(() => {
-	// 	router.prefetch(router.asPath);
-	// }, [router]);
+	useEffect(() => {
+		router.prefetch(router.asPath);
+	}, [router]);
 
-	// if (isGettingShipment || getShipmentStatusCode === undefined) {
-	// 	return (
-	// 		<div className={styles.loader}>
-	// 			Loading Shipment Data....
-	// 			<Loader themeType="primary" className={styles.loader_icon} />
-	// 		</div>
-	// 	);
-	// }
+	if (isGettingShipment || getShipmentStatusCode === undefined) {
+		return (
+			<div className={styles.loader}>
+				Loading Shipment Data....
+				<Loader themeType="primary" className={styles.loader_icon} />
+			</div>
+		);
+	}
 
-	// if (!shipment_data && ![403, undefined].includes(getShipmentStatusCode)) {
-	// 	return (
-	// 		<div className={styles.shipment_not_found}>
-	// 			<div className={styles.section}>
-	// 				<h2 className={styles.error}>Something Went Wrong!</h2>
+	if (!shipment_data && ![403, undefined].includes(getShipmentStatusCode)) {
+		return (
+			<div className={styles.shipment_not_found}>
+				<div className={styles.section}>
+					<h2 className={styles.error}>Something Went Wrong!</h2>
 
-	// 				<div className={styles.page}>We are looking into it.</div>
+					<div className={styles.page}>We are looking into it.</div>
 
-	// 				<Button
-	// 					onClick={() => router.reload()}
-	// 					className={styles.refresh}
-	// 				>
-	// 					<IcMRefresh />
-	// 					&nbsp;Refresh
-	// 				</Button>
-	// 			</div>
-	// 		</div>
-	// 	);
-	// }
+					<Button
+						onClick={() => router.reload()}
+						className={styles.refresh}
+					>
+						<IcMRefresh />
+						&nbsp;Refresh
+					</Button>
+				</div>
+			</div>
+		);
+	}
 
-	// if (getShipmentStatusCode === 403 && getShipmentStatusCode !== undefined) {
-	// 	return (
-	// 		<div className={styles.shipment_not_found}>
-	// 			<div className={styles.page}>
-	// 				You don&apos;t have permission to visit this page.
-	// 				Please contact at +91 7208083747
-	// 			</div>
-	// 		</div>
-	// 	);
-	// }
+	if (getShipmentStatusCode === 403 && getShipmentStatusCode !== undefined) {
+		return (
+			<div className={styles.shipment_not_found}>
+				<div className={styles.page}>
+					You don&apos;t have permission to visit this page.
+					Please contact at +91 7208083747
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<ShipmentDetailContext.Provider value={contextValues}>
@@ -105,7 +109,7 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 					{/* <PocSop /> */}
 				</div>
 
-				<Timeline get={get} />
+				<Timeline />
 
 				<div className={styles.container}>
 					<Tabs
@@ -115,7 +119,7 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 						onChange={setActiveTab}
 					>
 						<TabPanel name="overview" title="Overview">
-							<Overview get={get} activeStakeholder={activeStakeholder} />
+							<Overview shipmentData={shipment_data} />
 						</TabPanel>
 
 						{/* <TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
@@ -142,9 +146,6 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 			</div>
 		</ShipmentDetailContext.Provider>
 	);
-	// return (
-	// 	<div>SuperAdmin View...</div>
-	// );
 }
 
 export default Superadmin;

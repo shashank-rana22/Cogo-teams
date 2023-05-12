@@ -9,7 +9,7 @@ function useGetShipment({ additional_methods = [] }) {
 	const { shipment_id } = router.query;
 
 	const [{ loading : isGettingShipment, data }, trigger] = useRequest({
-		url    : 'fcl_freight/get_shipment',
+		url    : 'fcl_cfs/get_shipment',
 		method : 'GET',
 	}, { manual: true });
 

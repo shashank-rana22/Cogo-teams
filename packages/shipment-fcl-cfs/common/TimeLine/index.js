@@ -16,27 +16,17 @@ const editScheduleStates = [
 	'vessel_arrived',
 ];
 
-const timelineData = [
-	{ milestone: 'Cargo receipt', completed_on: '2023-03-28T09:52:37.559Z', is_sub: false },
-	{ milestone: 'Empty Container Pick-Up', completed_on: '2023-03-28T09:55:28.279Z', is_sub: true },
-	{ milestone: 'Stuffing of cargo', completed_on: '2023-03-29T04:51:51.124Z', is_sub: false },
-	{ milestone: 'Movement of Container', completed_on: null, is_sub: true },
-];
-
-function Timeline({ get }) {
+function Timeline() {
 	const {
-		timelineLoading : loading, isGettingShipment,
+		shipment_data, primary_service, timelineLoading : loading, isGettingShipment,
+		timelineData, getShipmentTimeline,
 	} = useContext(ShipmentDetailContext);
 
-	console.log('timelineData', timelineData);
-
-	const { shipment_data, primary_service } = get || {};
-
-	// useEffect(() => {
-	// 	if (shipment_data?.id) {
-	// 		getShipmentTimeline();
-	// 	}
-	// }, [getShipmentTimeline, shipment_data?.id]);
+	useEffect(() => {
+		if (shipment_data?.id) {
+			getShipmentTimeline();
+		}
+	}, [getShipmentTimeline, shipment_data?.id]);
 
 	const [showEditSchedule, setShowEditSchedule] = useState(false);
 
@@ -64,7 +54,6 @@ function Timeline({ get }) {
 			<div className={styles.list_container}>
 				{(filteredTimelineData || []).map((timelineItem, index) => {
 					consecutivelyCompleted = consecutivelyCompleted && timelineItem.completed_on;
-					console.log('consecutivelyCompleted', consecutivelyCompleted);
 					return (
 						<TimelineItem
 							item={timelineItem}

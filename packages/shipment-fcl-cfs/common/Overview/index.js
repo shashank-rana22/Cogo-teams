@@ -5,10 +5,10 @@ import BLDetails from './BLDetails';
 import OverviewManageServices from './OverviewManageServices';
 import styles from './styles.module.css';
 
-function Overview({ get = {}, activeStakeholder = '' }) {
+function Overview({ shipmentData = {} }) {
 	return (
 		<div className={styles.container}>
-			<OverviewManageServices get={get} activeStakeholder={activeStakeholder} />
+			<OverviewManageServices />
 			{/* <BLDetails />
 			<div className={styles.extra_details}>
 				{shipmentData?.is_cogo_assured ? (

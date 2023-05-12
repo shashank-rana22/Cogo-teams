@@ -2,7 +2,7 @@ import { dynamic } from '@cogoport/next';
 import React from 'react';
 
 import userLoggedIn from '../../helpers/booking-shipper-kam-user';
-import get from '../../helpers/shipment_data.json';
+// import get from '../../helpers/shipment_data.json';
 import useGetBuyers from '../../hooks/useGetBuyers';
 import useGetShipment from '../../hooks/useGetShipment';
 import { useStakeholderCheck } from '../../hooks/useStakeholderCheck';
@@ -15,15 +15,10 @@ const Superadmin = dynamic(() => import('./StakeholdersView/Superadmin'), { ssr:
 // const BookingDesk = dynamic(() => import('./StakeholdersView/BookingDesk'), { ssr: false });
 // const LastMileDesk = dynamic(() => import('./StakeholdersView/LastMileDesk'), { ssr: false });
 
-// const shipment_additional_methods = ['main_service', 'documents'];
+const shipment_additional_methods = ['main_service', 'conatiners'];
 
 function ShipmentDetails() {
-	// const { get } = useGetShipment({ additional_methods: shipment_additional_methods });
-
-	// const { shipment_data } = get;
-	// console.log('get', get);
-
-	// console.log('shipment_data', shipment_data);
+	const { get } = useGetShipment({ additional_methods: shipment_additional_methods });
 
 	// const { data } = useGetBuyers({ shipment_id: shipment_data?.id });
 
@@ -58,7 +53,6 @@ function ShipmentDetails() {
 	// }
 
 	return (
-	// <div> Welcome to the new service CFS...</div>
 		<Superadmin get={get} activeStakeholder={activeStakeholder} />
 	);
 }

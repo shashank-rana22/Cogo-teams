@@ -7,7 +7,7 @@ function useGetTimeLine({ shipment_data = {} }) {
 	const { id: shipment_id } = shipment_data || {};
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'fcl_freight/get_timeline',
+		url    : 'fcl_cfs/get_timeline',
 		method : 'GET',
 	}, { manual: true });
 

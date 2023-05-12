@@ -9,7 +9,7 @@ const activeStakeholderMapping = {
 
 function useGetServices({ shipment_data = {}, additional_methods = [], activeStakeholder = '' }) {
 	const [{ loading : servicesLoading }, trigger] = useRequest({
-		url    : 'fcl_freight/get_services',
+		url    : 'fcl_cfs/get_services',
 		method : 'GET',
 	}, { manual: true });
 
