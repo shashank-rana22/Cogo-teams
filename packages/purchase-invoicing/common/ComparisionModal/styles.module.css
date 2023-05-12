@@ -1,5 +1,5 @@
 .modal_container {
-	background-color: #f8f2e7;
+	background-color: var(--color-tertiary-beige-4);
 
 	@media (max-width: 768px) {
 		width: 300px !important;

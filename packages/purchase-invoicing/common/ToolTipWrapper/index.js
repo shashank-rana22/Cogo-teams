@@ -10,7 +10,7 @@ function ToolTipWrapper({
 	children,
 	render = false,
 }) {
-	const renderToolTip = text.length > maxlength;
+	const renderToolTip = text?.length > maxlength;
 
 	return (
 		<div>
@@ -20,7 +20,7 @@ function ToolTipWrapper({
 					content={content || <span className={styles.contenttext}>{text}</span>}
 					interactive={false}
 				>
-					<span>{render ? children : `${text.slice(0, maxlength)}...`}</span>
+					<span>{render ? children : `${text?.slice(0, maxlength)}...`}</span>
 				</Tooltip>
 			) : children || text}
 		</div>

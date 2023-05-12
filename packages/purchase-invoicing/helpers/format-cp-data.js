@@ -109,9 +109,9 @@ export const validateData = (data, extraData) => {
 	];
 
 	const bank_details = (collectionPartyObj?.documents || []).filter(
-		(item) => item.document_type === 'bank_account_details'
-			&& VERIFICATION_STATUS.includes(item.verification_status)
-			&& item.status === 'active',
+		(item) => item?.document_type === 'bank_account_details'
+			&& VERIFICATION_STATUS.includes(item?.verification_status)
+			&& item?.status === 'active',
 	);
 
 	const bankDetails = (bank_details || []).find(

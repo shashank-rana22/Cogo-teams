@@ -17,7 +17,7 @@ export function TagCard({
 	setSelectedProforma,
 	selectedProforma,
 	isNormalTab,
-	activeTab,
+	activeTab = null,
 }) {
 	const { childBill } = item || {};
 	const isChecked = selectedProforma?.some(
@@ -30,13 +30,7 @@ export function TagCard({
 
 	return (
 		<div className={styles.flexdiv}>
-			<div
-				style={{
-					borderRight : childBill?.length > 1 ? '1px solid var(--color-tertiary-blue-2)' : '',
-					marginTop   : '16px',
-					position    : 'relative',
-				}}
-			>
+			<div className={`${styles.tagging} ${childBill?.length > 1 ? styles.tagright : ''}`}>
 				<div className={styles.simpleflex}>
 					{childBill?.length > 1 ? (
 						<div className={`${classname === 'merge' ? styles.merge : ''} ${styles.tag}`}>
@@ -45,15 +39,11 @@ export function TagCard({
 					) : null}
 					<div className={styles.columnflex}>
 						{!isfirst ? (
-							<div
-								className={styles.line_block}
-							/>
+							<div className={styles.line_block} />
 						) : null}
-						{isLastChild && (
-							<div
-								className={styles.commonstyles}
-							/>
-						)}
+						{isLastChild ? (
+							<div className={styles.commonstyles} />
+						) : null}
 					</div>
 					<ProformaTagCards
 						showCheckBox={showCheckBox}

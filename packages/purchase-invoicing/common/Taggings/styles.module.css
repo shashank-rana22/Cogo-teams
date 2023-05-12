@@ -189,3 +189,12 @@
 .simpleflex {
 	display: flex;
 }
+
+.tagging{
+	margin-top   : 16px;
+	position    : relative;
+}
+
+.tagright{
+	border-right :  1px solid var(--color-tertiary-blue-2);
+}

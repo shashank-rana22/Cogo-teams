@@ -99,11 +99,11 @@ export const renderLineItemFunctions = {
 				onChange={(_, obj) => (setCodes((codes) => ({ ...codes, [obj?.code]: obj })))}
 				rules={{ required: true }}
 			/>
-			{errors?.line_items?.[index]?.container_number && (
+			{errors?.line_items?.[index]?.container_number ? (
 				<div className={styles.errors}>
 					* Required
 				</div>
-			)}
+			) : null}
 		</div>
 	),
 	code: ({ control, index, extradata, setCodes, errors }) => (
