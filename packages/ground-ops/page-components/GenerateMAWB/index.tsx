@@ -372,6 +372,7 @@ function GenerateMAWB({
 							activeHawb={activeHawb}
 							pendingTaskId={pendingTaskId}
 							category={category}
+							setViewDoc={setViewDoc}
 						/>
 					</Modal>
 				)}

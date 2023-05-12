@@ -40,6 +40,7 @@ interface Props {
 	setActiveKey?: Function;
 	pendingTaskId?: string;
 	category?: string;
+	setViewDoc?: Function;
 }
 
 const downloadButton = {
@@ -68,6 +69,7 @@ function GenerateMawb({
 	setActiveKey,
 	pendingTaskId = '',
 	category = 'mawb',
+	setViewDoc = () => {},
 }:Props) {
 	const filteredData = { ...formData };
 
@@ -266,6 +268,8 @@ function GenerateMawb({
 											copiesOnChange={copiesOnChange}
 											setSaveDocument={setSaveDocument}
 											handleView={handleView}
+											setGenerate={setGenerate}
+											setViewDoc={setViewDoc}
 											download24={false}
 										/>
 									)}

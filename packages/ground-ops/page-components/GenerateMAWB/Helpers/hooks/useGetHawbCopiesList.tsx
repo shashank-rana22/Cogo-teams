@@ -1,4 +1,5 @@
 import { useRequestAir } from '@cogoport/request';
+import { useEffect } from 'react';
 
 const useGetHawbCopiesList = () => {
 	const [{ data = {} }, trigger] = useRequestAir(
@@ -25,6 +26,10 @@ const useGetHawbCopiesList = () => {
 			console.log(err);
 		}
 	};
+
+	useEffect(() => {
+		hawbCopiesList();
+	}, []);
 
 	return {
 		data,
