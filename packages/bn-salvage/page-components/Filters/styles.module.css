@@ -1,21 +1,22 @@
 .filters_container {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .primary_filters {
-    display: flex;
+	display: flex;
 
-    :global {
-        .ui_select_options_container {
-            z-index: 3;
-        }
-        .ui_select_input_placeholder {
-            color: var(--color-secondary-greyscale-4);
-        }
-    }
+	:global {
+		.ui_select_options_container {
+			z-index: 3;
+		}
 
-    > div {
-        margin-right: 10px;
-    }
+		.ui_select_input_placeholder {
+			color: var(--color-secondary-greyscale-4);
+		}
+	}
+
+	> div {
+		margin-right: 10px;
+	}
 }

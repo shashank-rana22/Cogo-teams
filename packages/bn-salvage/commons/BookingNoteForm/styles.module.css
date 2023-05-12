@@ -1,20 +1,21 @@
 .step1 {
-    width: 60vw !important;
+	width: 60vw !important;
 }
+
 .step2 {
-    width: 95vw !important;
+	width: 95vw !important;
 }
 
 .form_container {
-    flex: 1;
-    overflow: auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4%;
-    
-    > div {
-        width: 48%;
-    }
+	display: flex;
+	flex: 1;
+	flex-wrap: wrap;
+	gap: 4%;
+	overflow: auto;
+
+	> div {
+		width: 48%;
+	}
 }
 
 .modal_body {
