@@ -27,8 +27,8 @@ function CallModal({
 	const controls = useGetControls({ localStateReducer });
 	const { live_call_action_type = '' } = watch();
 	const {
-		mobile_number = '7981304246',
-		mobile_country_code = '+91',
+		mobile_number = '',
+		mobile_country_code = '',
 		userName = '',
 	} = voice_call_recipient_data || {};
 

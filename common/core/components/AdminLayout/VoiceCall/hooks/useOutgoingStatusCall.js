@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
-import { CALL_END_STATUS } from '../constant';
+import { CALL_END_STATUS } from '../constants';
 
 const updateLocalState = (p = {}, attendees = [], call_id = '', live_call_status = '') => {
 	const prevAttendes = p.attendees || [];

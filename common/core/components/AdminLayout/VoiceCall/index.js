@@ -11,9 +11,20 @@ import MinimizeCallModal from './MinimizeModal';
 
 function VoiceCall({ voice_call_recipient_data = {}, inCall = false }) {
 	const [localCallState, setLocalCallState] = useState({
-		showCallModalType    : '',
-		status               : '',
-		attendees            : [],
+		showCallModalType : 'fullCallModal',
+		status            : 's',
+		attendees         : [{
+			id                    : 's',
+			agentName             : 'rahul',
+			live_call_action_type : 'whisper',
+			status                : 'answered',
+		}, {
+			id                    : 'ss',
+			agentName             : 'dinesh',
+			live_call_action_type : 'whisper',
+			status                : 'not_connected',
+		},
+		],
 		callRecordId         : '',
 		callId               : '',
 		hasAgentPickedCall   : false,

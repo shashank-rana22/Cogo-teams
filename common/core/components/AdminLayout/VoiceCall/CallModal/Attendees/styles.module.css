@@ -46,36 +46,3 @@
 .attendees_div::-webkit-scrollbar {
 	display: none;
 }
-
-.icon_styles_attendee {
-	width: 13px;
-	height: 13px;
-	margin-left: 10px;
-}
-
-.attendee_flex {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin-bottom: 5px;
-}
-
-.name {
-	margin-left: 5px;
-	font-size: 12px;
-	font-weight: 600;
-	color: #4f4f4f;
-	user-select: none;
-}
-
-.connecting_text {
-	margin-left: 10px;
-	font-size: 10px;
-	color: #f68b21;
-	user-select: none;
-}
-
-.common_flex {
-	display: flex;
-	align-items: center;
-}

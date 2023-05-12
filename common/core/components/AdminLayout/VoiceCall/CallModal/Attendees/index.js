@@ -1,33 +1,8 @@
-import { IcMArrowDown, IcMCallnotconnected } from '@cogoport/icons-react';
+import { IcMArrowDown } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import { ICON_MAPPING } from '../../configurations/group-call-controls';
-
+import SingleAttendee from './SingleAttendee';
 import styles from './styles.module.css';
-
-const callMapping = {
-	answered: <img
-		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/phone_in_talk.png"
-		alt="answered"
-		className={styles.icon_styles_attendee}
-	/>,
-	not_connected: <IcMCallnotconnected fill="#EE3425" className={styles.icon_styles_attendee} />,
-};
-
-function SingleAttendee({ eachAttendee }) {
-	const { agentName = '', status = '', live_call_action_type = '', id = '' } = eachAttendee || {};
-	const ActionIcon = ICON_MAPPING[live_call_action_type] || null;
-	const callIcon = callMapping[status] || null;
-	return (
-		<div className={styles.attendee_flex} key={id}>
-			<div className={styles.common_flex}>
-				{ActionIcon && <ActionIcon className={styles.icon_styles_attendee} fill="#4f4f4f" />}
-				<div className={styles.name}>{agentName}</div>
-			</div>
-			{callIcon || <div className={styles.connecting_text}>connecting...</div>}
-		</div>
-	);
-}
 
 function Attendees({ attendees = [] }) {
 	const [showAttendees, setShowAttendees] = useState(false);
