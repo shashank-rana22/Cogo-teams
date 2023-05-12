@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 
 import EmptyState from '../../../../../../commons/EmptyState';
 import useListShipments from '../../../../../../hooks/useListShipments';
+import useRedirectToShipmentDetailPage from '../../../../../../hooks/useRedirectToShipmentDetailPage';
 
 import styles from './styles.module.css';
 
@@ -15,6 +16,8 @@ function CustodyShipments({ item = {} }) {
 	const [filters, setFilters] = useState({ page: 1 });
 
 	const { data, loading } = useListShipments({ item, filters });
+
+	const { redirect } = useRedirectToShipmentDetailPage();
 
 	const { list = [], total_count } = data || {};
 
@@ -85,7 +88,13 @@ function CustodyShipments({ item = {} }) {
 				<tbody>
 					{(list || []).map((val) => (
 						<tr className={styles.row} key={val.serial_id}>
-							<td>{val?.serial_id}</td>
+							<td
+								role="presentation"
+								onClick={() => redirect({ service: val?.shipment_type, shipment: val })}
+							>
+								{val?.serial_id}
+
+							</td>
 							<td>
 								{startCase(val?.shipment_type)}
 								{' '}
@@ -109,7 +118,7 @@ function CustodyShipments({ item = {} }) {
 							<td>
 								{formatAmount({
 									amount   : val?.cargo_value,
-									currency : val?.cargo_currency,
+									currency : val?.cargo_value_currency,
 									options  : {
 										style                 : 'currency',
 										currencyDisplay       : 'code',

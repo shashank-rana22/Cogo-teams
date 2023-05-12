@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 function Filters() {
 	const {
 		activeTab, filters = {}, setFilters = () => {},
-		scopeFilters, handleVersionChange = () => {},
+		scopeFilters,
 	} = useContext(LastMileDeskContext);
 
 	const { criticalOn, q = '' } = filters || {};
@@ -70,15 +70,6 @@ function Filters() {
 						</div>
 					</Button>
 				</Popover>
-			</div>
-
-			<div className={styles.version}>
-				<Toggle
-					size="md"
-					onLabel="Old"
-					offLabel="New"
-					onChange={handleVersionChange}
-				/>
 			</div>
 
 			<ScopeSelect size="md" defaultValues={scopeFilters} />

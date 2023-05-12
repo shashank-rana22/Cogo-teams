@@ -69,3 +69,13 @@
 .refresh {
 	margin-top: 16px;
 }
+
+.toggle_chat {
+	display: flex;
+
+	:global {
+		.ui_toggle_container {
+			margin-right: 62px;
+		}
+	}
+}

@@ -8,7 +8,6 @@ import styles from './styles.module.css';
 function MultiServiceDetailsPopover({
 	children,
 	mainServices,
-
 }) {
 	if (mainServices?.length <= 1) {
 		return null;

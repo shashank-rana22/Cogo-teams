@@ -1,7 +1,7 @@
 {
   "name": "@cogoport/authority-desk",
   "version": "0.1.0",
-  "description": "",
+  "description": "Package for Document Control of every service",
   "main": "index.js",
   "dependencies": {
     "@cogoport/components": "^1.0.410",
