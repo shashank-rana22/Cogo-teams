@@ -1,9 +1,10 @@
 import { Input } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 
 import SelectRegistrationType from './SelectRegistrationType';
 
-const SERVICABLE_COUNTRY_IDS = GLOBAL_CONSTANTS.servicable_country_ids;
+const SERVICABLE_COUNTRY_CODES = GLOBAL_CONSTANTS.platform_supported_country_codes;
 
 function CountrywiseTaxSelect({
 	value,
@@ -30,11 +31,15 @@ function CountrywiseTaxSelect({
 		onChange({ ...(value || {}), [numberKey]: e });
 	};
 
+	const countryData = getCountryDetails({ country_id: countryId });
+
+	const { country_code: countryCode } = countryData || {};
+
 	const props = {};
 
 	return (
 		<div style={{ width: '100%', display: 'flex' }}>
-			{Object.values(SERVICABLE_COUNTRY_IDS).includes(countryId) && (
+			{SERVICABLE_COUNTRY_CODES.includes(countryCode) && (
 				<div style={{ paddingRight: 8, width: '33%' }}>
 					<SelectRegistrationType
 						{...rest}
@@ -51,7 +56,7 @@ function CountrywiseTaxSelect({
 				</div>
 			)}
 
-			<div style={{ width: Object.values(SERVICABLE_COUNTRY_IDS).includes(countryId) ? '67%' : '100%' }}>
+			<div style={{ width: SERVICABLE_COUNTRY_CODES.includes(countryCode) ? '67%' : '100%' }}>
 				<Input
 					{...rest}
 					width="100%"
@@ -62,7 +67,7 @@ function CountrywiseTaxSelect({
 					value={tax_number || (value || {})[numberKey] || ''}
 					onChange={handleNumberChange}
 					disabled={
-						Object.values(SERVICABLE_COUNTRY_IDS).includes(countryId)
+						SERVICABLE_COUNTRY_CODES.includes(countryCode)
 						&& !registration_type
 					}
 				/>

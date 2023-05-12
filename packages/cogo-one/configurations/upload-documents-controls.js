@@ -1,11 +1,11 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import getCountryOptions from '@cogoport/globalization/utils/getCountryOptions';
 
-const geo = getGeoConstants();
-
 const countryOptions = getCountryOptions();
 
 const getControls = (fileType = '') => {
+	const geo = getGeoConstants();
+
 	const controls = {
 		utility_bill_document_url: {
 			name   : 'utility_bill_document_url',

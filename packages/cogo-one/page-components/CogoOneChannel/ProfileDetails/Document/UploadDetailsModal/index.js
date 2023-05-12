@@ -1,6 +1,6 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { getCountryId } from '@cogoport/globalization/utils/getCountryDetails';
 import { useState } from 'react';
 
 import getControls from '../../../../../configurations/upload-documents-controls';
@@ -23,6 +23,8 @@ function UploadDetailsModal({
 }) {
 	const [selectedDocumentType, setSelectedDocumentType] = useState('');
 
+	const INDIA_COUNTRY_ID = getCountryId('IN');
+
 	const {
 		control,
 		handleSubmit,
@@ -31,7 +33,7 @@ function UploadDetailsModal({
 	} = useForm(
 		{
 			defaultValues: {
-				country_id          : singleItem?.country_id || GLOBAL_CONSTANTS.country_ids.IN,
+				country_id          : singleItem?.country_id || INDIA_COUNTRY_ID,
 				registration_number : singleItem?.registration_number || '',
 				preferred_languages : singleItem?.preferred_languages || ['english'],
 			},

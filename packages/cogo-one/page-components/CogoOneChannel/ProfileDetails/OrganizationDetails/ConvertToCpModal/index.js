@@ -11,14 +11,14 @@ import useConvertAccountToCp from '../../../../../hooks/useConvertAccountToCp';
 
 import styles from './styles.module.css';
 
-const geo = getGeoConstants();
-
 function ConvertToCpModal({
 	showConvertModal,
 	setShowConvertModal,
 	organizationId,
 	refetchOrgDetails,
 }) {
+	const geo = getGeoConstants();
+
 	const listPartnerUsers = useGetAsyncOptions(
 		merge(asyncFieldsPartnerUsers(), {
 			params: {

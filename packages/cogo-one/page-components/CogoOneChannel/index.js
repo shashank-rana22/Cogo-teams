@@ -25,19 +25,13 @@ import EmptyChatPage from './EmptyChatPage';
 import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
 
-const geo = getGeoConstants();
-
-const omniChannelAdminIds = [
-	geo.uuid.super_admin_id,
-	geo.uuid.tech_super_admin_id,
-	geo.uuid.cogoverse_admin,
-];
-
 function CogoOne() {
 	const {
 		agentStatus = {},
 		fetchworkPrefernce = () => {},
 	} = useAgentWorkPrefernce();
+
+	const geo = getGeoConstants();
 
 	const { status = '' } = agentStatus || {};
 
@@ -59,10 +53,17 @@ function CogoOne() {
 		subject : '',
 		body    : '',
 	});
+
 	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
 	const [agentDetails, setAgentDetails] = useState(false);
 
 	const [modalType, setModalType] = useState({ type: null, data: {} });
+
+	const omniChannelAdminIds = [
+		geo.uuid.super_admin_id,
+		geo.uuid.tech_super_admin_id,
+		geo.uuid.cogoverse_admin,
+	];
 
 	const { userRoleIds, userId, token, emailAddress } = useSelector(({ profile, general }) => ({
 		userRoleIds  : profile.partner?.user_role_ids || [],

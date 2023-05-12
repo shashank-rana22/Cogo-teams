@@ -4,13 +4,13 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const geo = getGeoConstants();
-
 function useSendCommunicationTemplate({
 	formattedData = {},
 	isOtherChannels = false,
 	callbackfunc = () => {},
 }) {
+	const geo = getGeoConstants();
+
 	const {
 		mobile_no = '',
 		user_name = 'user',

@@ -3,9 +3,9 @@ import getGeoConstants from '../constants/geo';
 // eslint-disable-next-line import/no-unresolved
 import countries from '@/data-store/constants/countries.json';
 
-const geo = getGeoConstants();
-
 const getCountryOptions = () => {
+	const geo = getGeoConstants();
+
 	const { country } = geo || {};
 
 	const { code } = country || {};

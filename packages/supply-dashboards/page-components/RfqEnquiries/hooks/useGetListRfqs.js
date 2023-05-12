@@ -4,9 +4,9 @@ import { useSelector } from '@cogoport/store';
 
 import useGetFiniteList from './useGetFiniteList';
 
-const geo = getGeoConstants();
-
 const useGetListRfqs = () => {
+	const geo = getGeoConstants();
+
 	const { scope } = useSelector(({ general }) => ({ scope: general.scope }));
 
 	const [{ loading: apiLoading }, trigger] = useRequest({
