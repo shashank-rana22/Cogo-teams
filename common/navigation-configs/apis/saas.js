@@ -2330,6 +2330,13 @@ const saas = {
 			feature      : 'cogo-store',
 			service_name : 'cogopoint',
 		},
+		{
+			api          : 'get_cogopoint_user_profile',
+			access_type  : 'private',
+			module       : 'cogo-store',
+			feature      : 'cogo-store',
+			service_name : 'cogopoint',
+		},
 	],
 
 };
