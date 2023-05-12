@@ -1,3 +1,4 @@
+import AppliedFilters from '../../common/AppliedFilters';
 import DeskTabs from '../../common/DeskTabs';
 import Filters from '../../common/Filters';
 import HeaderFilters from '../../common/HeaderFilters';
@@ -25,6 +26,8 @@ function Surface() {
 
 				<Filters />
 			</div>
+
+			<AppliedFilters />
 
 			<div className={styles.tabs_container}>
 				<DeskTabs />

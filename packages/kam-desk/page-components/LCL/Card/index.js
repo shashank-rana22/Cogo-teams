@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { useContext } from 'react';
 
 import {
@@ -10,16 +11,19 @@ import {
 	SingleLocation,
 } from '../../../common/ShipmentCard';
 import KamDeskContext from '../../../context/KamDeskContext';
+import getCriticalShipment from '../../../helpers/getCriticalShipment';
 
 import styles from './styles.module.css';
 
 function Card({ data = {} }) {
-	const { shipmentType, stepperTab } = useContext(KamDeskContext);
+	const { shipmentType, stepperTab, activeTab } = useContext(KamDeskContext);
 
 	const icon_type = ['lcl_customs'].includes(stepperTab) ? stepperTab : shipmentType;
 
+	const isShipmentCritical = getCriticalShipment({ shipment: data, activeTab, stepperTab, shipmentType });
+
 	return (
-		<div className={styles.container}>
+		<div className={cl`${styles.container} ${isShipmentCritical ? styles.animate_card : ''}`}>
 			<div className={styles.header}>
 				<Header data={data} />
 			</div>

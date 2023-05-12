@@ -1,3 +1,4 @@
+import AppliedFilters from '../../common/AppliedFilters';
 import DeskTabs from '../../common/DeskTabs';
 import Filters from '../../common/Filters';
 import HeaderFilters from '../../common/HeaderFilters';
@@ -20,6 +21,8 @@ function All() {
 			</div>
 
 			<div className={styles.filter_container}>
+				<AppliedFilters />
+
 				<Filters />
 			</div>
 

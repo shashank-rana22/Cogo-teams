@@ -43,17 +43,18 @@ function FilterBy({
 	const handleReset = () => {
 		const { startDate, endDate } = DATE_RANGE_MAPPING.today;
 
-		const { pending_invoice, importer_exporter_id, source, ...restFilters } = filters || {};
+		const { pending_invoice, importer_exporter_id, source, payment_term, tags, ...restFilters } = filters || {};
 
-		setFilters({
+		const finalFilters = {
 			...restFilters,
 			trade_type : undefined,
 			date_type  : undefined,
 			dateRange  : 'today',
 			startDate,
 			endDate,
+		};
 
-		});
+		setFilters(finalFilters);
 
 		setShowPopover(false);
 	};
@@ -71,6 +72,7 @@ function FilterBy({
 		};
 
 		setFilters(finalFilters);
+
 		setShowPopover(false);
 	};
 
@@ -111,7 +113,7 @@ function FilterBy({
 			{possibleFilters?.includes('pending_invoice') ? (
 				<div className={styles.pending_invoice}>
 					<Checkbox
-						checked={popoverFilter.invoice_pending}
+						checked={popoverFilter?.pending_invoice}
 						onChange={() => setPopoverFilter({
 							...popoverFilter,
 							pending_invoice: !popoverFilter.pending_invoice,

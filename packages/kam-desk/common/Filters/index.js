@@ -1,6 +1,6 @@
 import { Toggle, Input, Popover, Button } from '@cogoport/components';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 
 import { CRITICAL_TABS } from '../../config/SHIPMENTS_PAYLOAD';
 import KamDeskContext from '../../context/KamDeskContext';
@@ -16,6 +16,10 @@ function Filters() {
 	const [showPopover, setShowPopover] = useState(false);
 
 	const isCriticalVisible = !!CRITICAL_TABS?.[shipmentType]?.[stepperTab]?.[activeTab];
+
+	useEffect(() => {
+		setPopoverFilter({ ...(filters || {}) });
+	}, [filters]);
 
 	return (
 		<div className={styles.container}>
