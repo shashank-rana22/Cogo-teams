@@ -40,7 +40,7 @@ export default function List() {
 
 	return (
 		<div className={styles.list_container}>
-			{pagination}
+			{total_count > 10 ? pagination : null}
 
 			<table>
 				<ListHeader />

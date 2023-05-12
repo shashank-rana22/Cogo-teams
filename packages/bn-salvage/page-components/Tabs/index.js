@@ -6,8 +6,16 @@ import { BNSalvageContext } from '../../context/BNSalvageContext';
 
 import styles from './style.module.css';
 
+const statsLoader = (
+	<div className={styles.stats_loader}>
+		<div className={styles.loader_dot} />
+		<div className={styles.loader_dot} />
+		<div className={styles.loader_dot} />
+	</div>
+);
+
 export default function Tabs() {
-	const { activeTab, setActiveTab, setFilters, listData: { stats } } = useContext(BNSalvageContext);
+	const { activeTab, setActiveTab, setFilters, listData: { stats }, listLoading } = useContext(BNSalvageContext);
 
 	const onTabChange = (newTab) => {
 		if (newTab !== activeTab) {
@@ -29,7 +37,7 @@ export default function Tabs() {
 					key={tab.name}
 					name={tab.name}
 					title={tab.title}
-					badge={stats[tab.filters.status]}
+					badge={listLoading ? statsLoader : stats[tab.filters.status]}
 				/>
 			))}
 		</TabContainer>

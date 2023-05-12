@@ -1128,8 +1128,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-bn_salvage',
 				title         : 'BN Salvage',
-				href          : '/bn-salvage',
-				as            : '/bn-salvage',
+				href          : '/v2/bn-salvage',
+				as            : '/v2/bn-salvage',
 				type          : 'link',
 				main_apis     : ['list_booking_documents'],
 				possible_apis : apis.bn_salvage,

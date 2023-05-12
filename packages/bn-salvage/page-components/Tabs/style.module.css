@@ -1,3 +1,44 @@
 .customized_tabs {
 	margin-bottom: 2em;
 }
+
+.stats_loader {
+	.loader_dot {
+		display: inline-block;
+		width: 0.3em;
+		height: 0.3em;
+		background-color: currentColor;
+		border-radius: 50%;
+
+		animation: loading_dot 0.6s infinite alternate linear;
+
+		&:not(:last-of-type) {
+			margin-right: 0.3em;
+		}
+
+		@keyframes loading_dot {
+			0% {
+				opacity: 0;
+			}
+			20% {
+				opacity: 0.3;
+			}
+			40% {
+				opacity: 0.5;
+			}
+			60% {
+				opacity: 0.7;
+			}
+			80% {
+				opacity: 1;
+			}
+		}
+	}
+
+	.loader_dot:nth-of-type(2){
+		animation-delay: 0.2s;
+	}
+	.loader_dot:nth-of-type(3){
+		animation-delay: 0.3s;
+	}
+}

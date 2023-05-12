@@ -14,12 +14,17 @@ const containerTypeOptions = geo?.options?.freight_container_types || [];
 
 export default function Filters({ children }) {
 	const { filters, setFilters } = useContext(BNSalvageContext);
-	const handleFilterChange = (name, val) => {
-		setFilters((prev) => ({
-			...prev,
-			[name] : val,
-			page   : 1,
-		}));
+
+	const handleFilterChange = (name, newValue) => {
+		const { [name]: oldValue, ...restFilters } = filters || {};
+
+		if (oldValue || newValue) {
+			setFilters({
+				...restFilters,
+				...(newValue && { name: newValue }),
+				page: 1,
+			});
+		}
 	};
 
 	return (
