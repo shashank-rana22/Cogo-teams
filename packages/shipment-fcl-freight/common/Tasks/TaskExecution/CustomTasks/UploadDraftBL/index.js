@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useRef, useState, useEffect } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import useListDocuments from '../../../../../hooks/useListDocuments';
 import useListShipmentTradeDocuments from '../../../../../hooks/useListShipmentTradeDocuments';
@@ -162,7 +163,7 @@ function UploadDraftBL({
 							{Array(blCount)
 								.fill(null)
 								.map((n, i) => (
-									<div className={styles.flex_container}>
+									<div className={styles.flex_container} key={uuid()}>
 										<div className={styles.text}>
 											HBL
 											&nbsp;

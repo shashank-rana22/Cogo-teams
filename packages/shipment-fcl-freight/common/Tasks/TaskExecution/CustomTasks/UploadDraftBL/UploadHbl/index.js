@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useRef } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import Form from '../form';
 
@@ -80,7 +81,7 @@ function UploadHbl(props) {
 			{Array(bls_count)
 				.fill(null)
 				.map((n, i) => (
-					<form className={styles.view_and_form}>
+					<form className={styles.view_and_form} key={uuid()}>
 						{urls?.[i]?.length > 0 ? (
 							<Button
 								onClick={() => {
@@ -99,6 +100,7 @@ function UploadHbl(props) {
 									formRefs.current[i] = r;
 								}}
 								id={i}
+								key={uuid()}
 								url={urls[i]}
 								bl_type="HBL"
 								controls={controls}

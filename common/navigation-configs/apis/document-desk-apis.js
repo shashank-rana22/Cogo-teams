@@ -524,14 +524,14 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-        api          : 'list_shipment_booking_confirmation_preferences',
-        access_type  : 'private',
-        service_name : 'shipment',
-    },
-    {
-        api          : 'list_rate_charge_codes',
-        access_type  : 'private',
-        service_name : 'rate_sheet',
-    },
+		api          : 'list_shipment_booking_confirmation_preferences',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_rate_charge_codes',
+		access_type  : 'private',
+		service_name : 'rate_sheet',
+	},
 ];
 export default apis;

@@ -66,7 +66,7 @@ function Annexure({ control, mode = 'read', initialValues = {} }) {
 						<tbody>
 							{mode === 'read'
 								? (initialValues?.containers || []).slice(1).map((container) => (
-									<tr>
+									<tr key={container?.container_number}>
 										<td className={styles.table_data_read}>{container?.container_number}</td>
 										<td className={styles.table_data_read}>{container?.marks_and_number}</td>
 										<td className={styles.table_data_read}>{container?.package_description}</td>

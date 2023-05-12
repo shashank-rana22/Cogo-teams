@@ -9,9 +9,9 @@ function Read({
 	function SectionOneChild1(values) {
 		return (
 			SECTION_ONE_CHILD_1_MAPPINGS.map(({ label, key, children }) => (children ? (
-				<div className={styles[`section_one_child_1-${key}`]}>
+				<div className={styles[`section_one_child_1-${key}`]} key={key}>
 					{children.map(({ childrenLabel, childrenKey, className }) => (
-						<div className={styles[className]}>
+						<div className={styles[className]} key={childrenKey}>
 							<p>{childrenLabel}</p>
 							<p>{values?.[childrenKey] || ''}</p>
 						</div>
@@ -30,7 +30,7 @@ function Read({
 		return (
 			<div className={styles.section_three}>
 				{SECTION_THREE_MAPPINGSS.map(({ label, key }) => (
-					<div className={styles['section_three-element']}>
+					<div className={styles['section_three-element']} key={key}>
 						<span>{label}</span>
 						<p>{values?.[key] || ''}</p>
 					</div>

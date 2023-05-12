@@ -182,7 +182,7 @@ function Write({
 						<tbody>
 							<tr>
 								{containersDetails.map((name) => (
-									<td>
+									<td key={name}>
 										<TextAreaController name={name} control={control} rows={10} />
 									</td>
 								))}
@@ -196,7 +196,7 @@ function Write({
 
 				<div className={styles.section_three}>
 					{sectionThreeFields.map(({ label, name }) => (
-						<div className={styles['section_three-element']}>
+						<div className={styles['section_three-element']} key={name}>
 							<span>{label}</span>
 							<TextAreaController name={name} control={control} />
 						</div>

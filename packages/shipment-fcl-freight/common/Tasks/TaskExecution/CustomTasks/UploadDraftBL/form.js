@@ -44,7 +44,7 @@ function Form(props, ref) {
 				{id + 1}
 			</div>
 			<form className={styles.form_container}>
-				{controls.map((item) => <FormElement control={control} errors={errors} {...item} />)}
+				{controls.map((item) => <FormElement control={control} errors={errors} {...item} key={item?.name} />)}
 			</form>
 		</main>
 	);
