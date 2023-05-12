@@ -12,7 +12,7 @@ function PageView({
 	onClickCard = () => {},
 	sideBar,
 }) {
-	const { list, filters = {}, loading, hookSetters } = useGetMilestones({ sideBar });
+	const { list, filters = {}, loading = false, hookSetters } = useGetMilestones({ sideBar });
 
 	const { data = [], fullResponse } = list || {};
 	const { shipping_lines = {} } = fullResponse || {};
@@ -46,6 +46,7 @@ function PageView({
 		}
 		return null;
 	};
+	console.log(data, 'data');
 	return (
 		<div className={styles.container} id="milestones_main_container">
 			<Filter hookSetters={hookSetters} filters={filters} id="milestones_filters" />
@@ -57,7 +58,7 @@ function PageView({
 					{getRender()}
 					{(data || []).map((item) => (
 						<List
-							key={item.shipping_line_id}
+							key={item.id}
 							id="milestones_list_body"
 							loading={loading}
 							onClick={onClickCard}
