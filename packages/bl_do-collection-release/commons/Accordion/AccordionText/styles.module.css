@@ -3,9 +3,9 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 10px;
+	color: var(--color-primary-error-red-2);
 	background: #f4f8fe;
 	border: 1px solid #88cad1;
-	color: var(--color-primary-error-red-2);
 	border-radius: 4px 4px 0 0;
 }
 
@@ -25,6 +25,6 @@
 .action_container {
 	display: flex;
 	align-items: center;
-	color: #F68B21;
+	color: #f68b21;
 	cursor: pointer;
 }

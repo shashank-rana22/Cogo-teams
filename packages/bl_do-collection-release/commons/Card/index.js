@@ -1,7 +1,7 @@
 import { cl, Toast, Button, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
-import { u4 as uuid } from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 import getFormattedPayload from '../../helpers/formatPayload';
 import getAccordionAndButton from '../../helpers/getAccordionAndButton';

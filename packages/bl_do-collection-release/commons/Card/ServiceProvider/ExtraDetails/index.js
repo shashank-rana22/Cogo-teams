@@ -35,7 +35,7 @@ export default function ExtraDetails({ stateProps = {}, item = {} }) {
 		case 'knockoff_pending':
 		case 'collection_pending': {
 			renderElem = item?.leo_copy ? (
-				<div className={styles.container}>
+				<div>
 					<div className={cl`${styles.text} ${styles.thin}`}>LEO Copy</div>
 
 					<div className={cl`${styles.text} ${styles.bold}`}>
@@ -58,12 +58,12 @@ export default function ExtraDetails({ stateProps = {}, item = {} }) {
 		case 'under_collection': {
 			renderElem = (
 				<>
-					<div className={styles.container}>
+					<div>
 						<div className={cl`${styles.text} ${styles.thin}`}>Collected By</div>
 
 						<div className={cl`${styles.text} ${styles.bold}`}>{item?.collected_by}</div>
 					</div>
-					<div className={styles.container}>
+					<div>
 						<div className={cl`${styles.text} ${styles.thin}`}>Collection Mode</div>
 
 						<div className={cl`${styles.text} ${styles.bold}`}>
@@ -72,7 +72,7 @@ export default function ExtraDetails({ stateProps = {}, item = {} }) {
 					</div>
 
 					{item?.collection_mode === 'courier' ? (
-						<div className={styles.container}>
+						<div>
 							<div className={cl`${styles.text} ${styles.thin}`}>Tracking Id</div>
 							<div className={cl`${styles.text} ${styles.bold}`}>
 								{item?.collection_mode === 'courier' ? item?.tracking_id : null}
@@ -99,12 +99,12 @@ export default function ExtraDetails({ stateProps = {}, item = {} }) {
 
 			renderElem = (
 				<>
-					<div className={styles.container}>
+					<div>
 						<div className={cl`${styles.text} ${styles.thin}`}>Status</div>
 
 						<div className={cl`${styles.status} ${styles[status]}`}>{statusTextMapping[status]}</div>
 					</div>
-					<div className={styles.container}>
+					<div>
 						{showModeOfDelivery ? (
 							<>
 								<div className={cl`${styles.text} ${styles.thin}`}>Mode of Delivery</div>
@@ -141,7 +141,7 @@ export default function ExtraDetails({ stateProps = {}, item = {} }) {
 			renderElem = (
 				<div>
 					{isSurrendered ? (
-						<div className={styles.container}>
+						<div>
 							<div className={cl`${styles.text} ${styles.thin}`}>Mode of Delivery</div>
 
 							<div className={cl`${styles.text} ${styles.bold}`}>
@@ -149,7 +149,7 @@ export default function ExtraDetails({ stateProps = {}, item = {} }) {
 							</div>
 						</div>
 					) : (
-						<div className={styles.container}>
+						<div>
 							<div className={cl`${styles.text} ${styles.thin}`}>Tracking ID</div>
 
 							{item?.tracking_id ? (

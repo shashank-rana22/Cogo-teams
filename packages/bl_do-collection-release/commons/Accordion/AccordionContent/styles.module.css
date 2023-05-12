@@ -141,11 +141,11 @@
 	background-color: #fdebe9;
 }
 
-.button_container{
-	width: 100%;
+.button_container {
 	display: flex;
 	justify-content: flex-end;
-	padding: 0px 32px 12px 0px;
+	width: 100%;
+	padding: 0 32px 12px 0;
 }
 
 .loading_container {

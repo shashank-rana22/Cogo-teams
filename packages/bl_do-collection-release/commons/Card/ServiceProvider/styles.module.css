@@ -38,9 +38,9 @@
 }
 
 .lower_right {
-	width: 60%;
 	display: flex;
 	justify-content: space-around;
+	width: 60%;
 	padding: 16px;
 }
 
@@ -55,6 +55,6 @@
 	text-decoration: underline;
 }
 
-.tooltip{
+.tooltip {
 	max-width: none !important;
 }
