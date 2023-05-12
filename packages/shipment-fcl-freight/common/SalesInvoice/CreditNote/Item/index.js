@@ -62,7 +62,7 @@ function Item({
 	const title = (
 		<>
 			<section className={styles.billing_party}>
-				<h3>{item?.billing_address?.name}</h3>
+				<h4>{item?.billing_address?.name}</h4>
 				<Tooltip
 					theme="light"
 					interactive
@@ -73,14 +73,20 @@ function Item({
 					)}
 				>
 					<span className={styles.gst_number}>
-						<span>GST Number:&nbsp;</span>
+						GST Number:&nbsp;
 						<span>{item?.billing_address?.tax_number}</span>
 					</span>
 				</Tooltip>
 			</section>
 			<section className={styles.details}>
 				<div className={styles.number}>
-					<span onClick={!isEmpty(bfInvoice) ? handleDownload : null}>{item?.cn_number}</span>
+					<span
+						onClick={!isEmpty(bfInvoice) ? handleDownload : null}
+						className={item?.status === 'approved' ? styles.approved : undefined}
+					>
+						{item?.cn_number}
+
+					</span>
 					<span>{item?.live_invoice_number}</span>
 				</div>
 				<div className={styles.invoice_value}>
@@ -132,9 +138,13 @@ function Item({
 			</section>
 			<section
 				className={styles.rotate_icon}
-				onClick={() => setOpen(!open)}
+				onClick={() => setOpen(open !== 'line_items' ? 'line_items' : false)}
 				tabIndex={0}
 				role="button"
+				style={{
+					height:
+					`${document.querySelector('#__next main section.styles_billing_party__3Dosy')?.offsetHeight}px`,
+				}}
 			>
 				<IcMArrowRotateDown className={open ? styles.rotate : null} />
 			</section>
@@ -147,9 +157,10 @@ function Item({
 				<div className={styles.header}>
 					{title}
 				</div>
-				{open ? (
+				{open === 'line_items' ? (
 					(item?.services || []).map((_item) => (
 						<LineItems
+							key={_item?.service_id}
 							item={_item}
 							loading={loading}
 						/>
