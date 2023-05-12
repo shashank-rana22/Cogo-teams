@@ -3,17 +3,23 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const List = [
+	{ id: 1 },
+	{ id: 2 },
+];
+
 function Loader() {
 	return (
 		<>
 			{
-		Array.from({ length: 2 }).map(() => (
-
-			<div className={styles.style_placeholder}>
-				<Placeholder height="40px" />
-			</div>
-
-		))
+		List.map((item) => {
+			const { id } = item;
+			return (
+				<div className={styles.style_placeholder} key={id}>
+					<Placeholder height="40px" />
+				</div>
+			);
+		})
 	}
 		</>
 	);
