@@ -4,8 +4,8 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 // import { useSelector } from '@cogo/store';
 // import { Flex } from '@cogoport/front/components';
 // import { ToolTip, Button } from '@cogoport/front/components/admin';
-import { startCase, isEmpty } from '@cogoport/utils';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
+import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import Actions from './Actions';
@@ -95,19 +95,19 @@ function Header({
 		<div className={styles.container}>
 			<div>
 				{invoice?.source === 'pass_through' ? (
-				<div className={styles.invoice_source}>
-					Source -
-					{' '}
-					{startCase(invoice?.source)}
-				</div>
+					<div className={styles.invoice_source}>
+						Source -
+						{' '}
+						{startCase(invoice?.source)}
+					</div>
 				) : null}
 
 				{invoice?.exchange_rate_state ? (
-				<div className={styles.invoice_source}>
-					Applicable State -
-					{' '}
-					{startCase(invoice?.exchange_rate_state)}
-				</div>
+					<div className={styles.invoice_source}>
+						Applicable State -
+						{' '}
+						{startCase(invoice?.exchange_rate_state)}
+					</div>
 				) : null}
 			</div>
 
@@ -206,16 +206,15 @@ function Header({
 						{invoice?.payment_mode === 'credit' ? (
 							<div>
 								<div className={styles.info_container}>
-									{startCase(creditSource?.slice(0, -2) || '')}
+									{startCase(creditSource?.slice(0, -2))}
 								</div>
 
 								<div className={styles.payment_method}>
 									{startCase(
 										`${
-											creditSource?.[creditSource?.length ?? 0 - 2]
+											creditSource?.[(creditSource?.length ?? 0) - 2]
 										} deferred payment`,
 									)}
-									payment
 								</div>
 							</div>
 						) : (

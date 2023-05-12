@@ -1,7 +1,6 @@
 .container{
 	display: flex;
 	flex-direction: column;
-	/* padding: 36px 22px 10px 22px; */
 	margin: 24px;
 	background: #F3FAFA;
 	border: 1px solid #88CAD1;
@@ -16,7 +15,7 @@
 	align-items: center;
 	margin-bottom: 20px;
 	padding: 22px;
-	border-bottom: 1px solid;
+	border-bottom: 1px solid #88CAD1;
 
 	@media (max-width: 768px) {
 		display: flex;

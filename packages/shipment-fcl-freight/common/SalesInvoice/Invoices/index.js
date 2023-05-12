@@ -15,11 +15,10 @@ function Invoices({
 	loading = false,
 	invoicesList = [],
 	isIRNGenerated = false,
-	outstanding_by_reg_num,
+	outstanding_by_reg_num = {},
 	salesInvoicesRefetch = () => {},
 	shipmentData = {},
 }) {
-	const id = shipmentData?.id;
 	const totals = invoiceData?.invoicing_party_wise_total;
 
 	const invoiceStatuses = invoiceData?.invoicing_parties?.map(
@@ -46,10 +45,8 @@ function Invoices({
 
 	disableAction = showForOldShipments ? false : disableAction;
 
-	// const { loadingCreditNotes, data, refetchCN } = useListCreditNotes(id);
 	const { list, refetch: CNRefetch, loading: CNLoading } = useListShipmentCreditNotes({ shipmentData });
 
-	console.log(groupedInvoices);
 	return (
 		<main className={styles.container}>
 			<Header
@@ -73,7 +70,7 @@ function Invoices({
 						invoiceData={invoiceData}
 						invoicesList={invoicesList}
 						isIRNGenerated={isIRNGenerated}
-					// org_outstanding={outstanding_by_reg_num[item]}
+						org_outstanding={outstanding_by_reg_num[item]}
 						salesInvoicesRefetch={salesInvoicesRefetch}
 					/>
 				))}

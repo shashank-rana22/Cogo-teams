@@ -150,6 +150,7 @@ function Item({
 				{open ? (
 					(item?.services || []).map((_item) => (
 						<LineItems
+							key={_item}
 							item={_item}
 							loading={loading}
 						/>

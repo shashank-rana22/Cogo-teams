@@ -29,10 +29,11 @@ function ItemHeader({
 			>
 				<div className={styles.invoice_info}>
 					{(invoice?.services || []).map((item) => (
-					<InvoiceServiceWise
-						item={item}
-						loading={loading}
-					/>
+						<InvoiceServiceWise
+							item={item}
+							loading={loading}
+							key={item}
+						/>
 					))}
 				</div>
 			</Header>

@@ -2,6 +2,8 @@ import { Button, Modal } from '@cogoport/components';
 import React, { useState } from 'react';
 
 // import useUpdateInvoiceStatus from '../../../../../../../hooks/useUpdateInvoiceStatus';
+import useUpdateShipmentCreditNote from '../../../../../../../hooks/useUpdateShipmentCreditNote';
+
 import Confirmation from './Confirmation';
 import styles from './styles.module.css';
 // import LinersExchangeRateConfirm from './LinersExchangeRate';
@@ -12,20 +14,20 @@ function ReviewServices({
 	invoice = {},
 	refetch = () => {},
 }) {
-	const changeApplicableState =		invoice?.exchange_rate_state === 'liners_exchange_rate'
+	const changeApplicableState = invoice?.exchange_rate_state === 'liners_exchange_rate'
 		&& invoice?.is_liners_exchange_rate_state;
 
 	const [value, setValue] = useState(false);
-	const [showExchangeRateConfirmation, setShowExchangeRateConfirmation] =		useState(changeApplicableState);
+	const [showExchangeRateConfirmation, setShowExchangeRateConfirmation] = useState(changeApplicableState);
 
-	// const { updateInvoiceStatus, loading } = useUpdateInvoiceStatus({
-	// 	invoice,
-	// 	setShowReview,
-	// 	refetch,
-	// 	status: 'reviewed',
-	// 	changeApplicableState,
-	// });
+	const { loading, apiTrigger } = useUpdateShipmentCreditNote({ refetch });
 
+	const handleUpdate = () => {
+		apiTrigger({
+			id     : invoice?.id,
+			status : value ? 'reviewed' : undefined,
+		});
+	};
 	return (
 		<Modal show={showReview} closable={false}>
 			<Modal.Header title="MARK AS REVIEWED" />
@@ -45,7 +47,8 @@ function ReviewServices({
 				</Button>
 
 				<Button
-					className="primary md reviewed"
+					onClick={handleUpdate}
+					disabled={loading || !value}
 				>
 					Reviewed
 				</Button>

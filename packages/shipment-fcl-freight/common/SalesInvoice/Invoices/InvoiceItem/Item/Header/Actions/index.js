@@ -12,11 +12,9 @@ import React, { useState } from 'react';
 import AddRemarks from '../AddRemarks';
 import ChangeCurrency from '../ChangeCurrency';
 import EditInvoice from '../EditInvoice';
-import ExchangeRateModal from '../ExchangeRateModal';
 import OTPVerificationModal from '../OTPVerificationModal';
 import ReviewServices from '../ReviewServices';
 
-import AddCustomerInvoice from './AddCustomerInvoice';
 import AmendmentReasons from './AmendmentReasons';
 import ChangePaymentMode from './ChangePaymentMode';
 import SendInvoiceEmail from './SendInvoiceEmail';
@@ -143,7 +141,7 @@ function Actions({
 	const content = (
 		<div className={styles.dialog_box}>
 			{/* {/* {commonActions ? ( */}
-		{/* {editInvoicesVisiblity ? (  */}
+			{/* {editInvoicesVisiblity ? (  */}
 			<div style={{ width: '100%' }}>
 				<div
 					role="button"
@@ -199,18 +197,17 @@ function Actions({
 			{/* ) : null} */}
 
 			{(invoice.exchange_rate_document || []).map((url) => (
-			<div>
-				{!commonActions ? <div className={styles.line} /> : null}
-
-				<div
-					role="button"
-					tabIndex={0}
-					className={styles.text}
-				onClick={() => window.open(url, '_blank')}
-				>
-					Exchange Rate Document
+				<div key={url}>
+					{!commonActions ? <div className={styles.line} /> : null}
+					<div
+						role="button"
+						tabIndex={0}
+						className={styles.text}
+						onClick={() => window.open(url, '_blank')}
+					>
+						Exchange Rate Document
+					</div>
 				</div>
-			</div>
 			))}
 		</div>
 	);
@@ -221,10 +218,10 @@ function Actions({
 				<div className={styles.actions_wrap}>
 					<div className={styles.statuses}>
 						{invoice.status ? (
-						<div className={styles.info_container}>
-							{startCase(invoice.status)}
-						</div>
-						): null}
+							<div className={styles.info_container}>
+								{startCase(invoice.status)}
+							</div>
+						) : null}
 
 						{!['reviewed', 'approved', 'revoked'].includes(invoice.status) ? (
 							<Button
@@ -307,23 +304,24 @@ function Actions({
 
 					{(!disableAction || invoice.exchange_rate_document?.length > 0)
 					&& invoice.status !== 'revoked' ? (
-					<Popover
-						interactive
-						placement="left"
-						visible={show}
-						content={content}
-						theme="light"
-						onClickOutside={() => setShow(false)}
-					>
-						<div
-							role="button"
-							tabIndex={0}
-							className={styles.icon_more_wrapper}
-							onClick={() => setShow(!show)}
+						<Popover
+							interactive
+							placement="left"
+							visible={show}
+							content={content}
+							theme="light"
+							onClickOutside={() => setShow(false)}
 						>
-							<IcMOverflowDot />
-						</div>
-					</Popover>) : (
+							<div
+								role="button"
+								tabIndex={0}
+								className={styles.icon_more_wrapper}
+								onClick={() => setShow(!show)}
+							>
+								<IcMOverflowDot />
+							</div>
+						</Popover>
+						) : (
 							<div style={{ width: '34px' }} />
 						)}
 
@@ -342,13 +340,13 @@ function Actions({
 			</div>
 
 			{(invoice.services || []).length && isEditInvoice ? (
-			<EditInvoice
-				show={isEditInvoice}
-				onClose={() => setIsEditInvoice(false)}
-				invoice={invoice}
-				refetch={handleRefetch}
-				shipment_data={shipment_data}
-			/>
+				<EditInvoice
+					show={isEditInvoice}
+					onClose={() => setIsEditInvoice(false)}
+					invoice={invoice}
+					refetch={handleRefetch}
+					shipment_data={shipment_data}
+				/>
 			) : null}
 
 			{showReview ? (

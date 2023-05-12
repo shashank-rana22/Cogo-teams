@@ -7,7 +7,7 @@ import Invoices from './Invoices';
 import styles from './styles.module.css';
 
 function SalesInvoice({ shipmentData = {} }) {
-	const { loading, data: invoiceData, groupedInvoices } = useGetShipmentInvoice({
+	const { data: invoiceData, groupedInvoices, refetch } = useGetShipmentInvoice({
 		payload: {
 			shipment_id         : shipmentData?.id,
 			performed_by_org_id : '26f025cd-a0b7-4938-9588-dd83fabce66c',
@@ -16,7 +16,12 @@ function SalesInvoice({ shipmentData = {} }) {
 	return (
 		<main className={styles.container}>
 			<OverviewManageServices />
-			<Invoices shipmentData={shipmentData} invoiceData={invoiceData} groupedInvoices={groupedInvoices} />
+			<Invoices
+				shipmentData={shipmentData}
+				invoiceData={invoiceData}
+				groupedInvoices={groupedInvoices}
+				refetch={refetch}
+			/>
 		</main>
 	);
 }
