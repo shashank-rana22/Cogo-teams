@@ -1,4 +1,3 @@
-import { Toggle } from '@cogoport/components';
 import ScopeSelect from '@cogoport/scope-select';
 import { isEmpty } from '@cogoport/utils';
 
@@ -25,7 +24,6 @@ export default function FCLLocalDesk({ stateProps = {} }) {
 	});
 
 	const {
-		handleVersionChange = () => {},
 		filters,
 		setFilters,
 	} = stateProps || {};
@@ -53,15 +51,6 @@ export default function FCLLocalDesk({ stateProps = {} }) {
 
 				<div className={styles.top_header_container}>
 					<Filters stateProps={stateProps} showPopoverFilters={false} />
-
-					<div className={styles.version}>
-						<Toggle
-							size="md"
-							onLabel="Old"
-							offLabel="New"
-							onChange={handleVersionChange}
-						/>
-					</div>
 
 					<ScopeSelect size="md" defaultValues={stateProps.scopeFilters} />
 				</div>

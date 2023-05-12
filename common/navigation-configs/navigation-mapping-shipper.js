@@ -354,7 +354,7 @@ const navigationMappingShipper = {
 		icon      : 'nav-container-tracking',
 		type      : 'link',
 		isSubNavs : true,
-		showInNav : false,
+		showInNav : true,
 		options   : [
 			{
 				key           : 'saas_tracking-map_dashboard',
