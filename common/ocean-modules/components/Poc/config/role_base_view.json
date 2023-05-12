@@ -62,7 +62,6 @@
         "trade_parties":["collection_party"],
         "can_view":["notifying_party","pocs","invoicing_party","service_provider"],
         "can_edit":["notifying_party","pocs","invoicing_party","service_provider"],
-        "edit_internal_poc":[],
         "can_add_service_provider_poc":true
     },
     "lastmile_ops":{
