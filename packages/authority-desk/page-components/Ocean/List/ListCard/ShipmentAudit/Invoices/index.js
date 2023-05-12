@@ -11,7 +11,6 @@ function Invoices({ item }) {
 	return (
 		<div className={styles.container}>
 			<div>
-				{' '}
 				<Tabs
 					activeTab={invoiceTab}
 					themeType="secondary"

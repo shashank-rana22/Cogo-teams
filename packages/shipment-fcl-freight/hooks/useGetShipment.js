@@ -40,10 +40,11 @@ function useGetShipment({ additional_methods = [] }) {
 
 		get: {
 			isGettingShipment,
-			refetch         : getShipment,
-			documents       : data?.documents,
-			primary_service : data?.primary_service,
-			shipment_data   : data?.summary,
+			refetch               : getShipment,
+			documents             : data?.documents,
+			primary_service       : data?.primary_service,
+			shipment_data         : data?.summary,
+			document_delay_status : data?.document_delay_status,
 			getShipmentStatusCode,
 		},
 	};

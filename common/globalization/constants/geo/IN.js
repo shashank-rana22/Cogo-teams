@@ -328,5 +328,17 @@ export default {
 				value : 'closed_body_32ft_triple_axle_HQ_20_21_ton',
 			},
 		],
+
+		invoice_status: [
+			{ label: 'Draft', value: 'DRAFT' },
+			{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
+			{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
+			{ label: 'Irn Generated', value: 'IRN_GENERATED' },
+			{ label: 'Irn Failed', value: 'IRN_FAILED' },
+			{ label: 'Irn Cancelled', value: 'IRN_CANCELLED' },
+			{ label: 'Posted to Sage', value: 'POSTED' },
+			{ label: 'Post to Sage Failed', value: 'FAILED' },
+			{ label: 'Requested', value: 'REQUESTED' },
+		],
 	},
 };

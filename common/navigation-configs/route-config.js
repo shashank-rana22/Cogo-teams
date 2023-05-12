@@ -19,6 +19,7 @@ import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import performanceManagement from './config/performance-management';
 import rolesAndPermissions from './config/roles-n-permission';
+import saasTools from './config/saas-tools';
 import shipmentFclFreight from './config/shipment-fcl-freight';
 import supplyDashboard from './config/supply-dashboards';
 import unifiedDashboard from './config/unified-dashboard';
@@ -53,6 +54,7 @@ const routeConfig = {
 	...athenaDashboard,
 	...documentDesk,
 	...ingestion,
+	...saasTools,
 };
 
 export default routeConfig;
