@@ -14,12 +14,13 @@
 .modified {
 	position: relative;
 }
+
 .modified::after {
-	content: 'Modified';
 	position: absolute;
 	right: 0;
-	background-color: #FEF199;
 	padding: 2px 8px;
+	content: "Modified";
+	background-color: #fef199;
 	border-radius: 0 4px;
 }
 

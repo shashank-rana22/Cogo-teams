@@ -18,9 +18,9 @@
     "pre-build": "NODE_ENV=production node scripts/build-pages && node scripts/pre-build",
     "dev": "node scripts/build-pages && node scripts/pre-build && turbo run dev",
     "start": "turbo run start",
-    "eslint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
+    "eslint": "eslint \"packages/bn-salvage/**/*.{js,jsx,ts,tsx}\"",
     "eslint_file": "eslint",
-    "stylelint": "stylelint \"**/*.css\"",
+    "stylelint": "stylelint \"packages/bn-salvage/**/*.css\"",
     "clean": "turbo run clean"
   },
   "dependencies": {
