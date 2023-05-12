@@ -45,7 +45,7 @@ function ShipmentDetails() {
 		case 'superadmin':
 		case 'credit_control':
 		case 'prod_process_owner':
-			return <Superadmin get={get} activeStakeholder="superadmin"/>;
+			return <Superadmin get={get} activeStakeholder={activeStakeholder}/>;
 		default:
 			return (
 				<h1 className={styles.not_allowed}>
