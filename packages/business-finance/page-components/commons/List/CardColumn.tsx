@@ -46,6 +46,7 @@ function CardColumn({
 					const itemStyle = field.styles || {};
 					return (
 						<div
+							key={field.key}
 							className={`${styles.col} ${field.className || ''} ${
 								isMobile ? styles.is_mobile : ''
 							}`}

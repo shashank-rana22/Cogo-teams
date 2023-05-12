@@ -76,6 +76,7 @@ function List({
 			<div style={bodyStyles}>
 				{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
 					<CardColumn
+						key={singleitem.id}
 						fields={fields}
 						itemStyles={itemStyles}
 						singleitem={singleitem}
