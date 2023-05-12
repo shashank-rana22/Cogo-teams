@@ -52,18 +52,32 @@ function AddNewService({
 		setUpsellModal(!upsellModal);
 	};
 
+	const showAddServiceBox = !cancelUpsell && isUpsellable && canUpsellForTradeType;
+
 	useEffect(() => {
-		setShowTradeHeading({
+		const { origin, destination, main } = showTradeHeadings;
+		if(showAddServiceBox){
+			setShowTradeHeading({
+				origin: origin || upsellableService.trade_type === 'export',
+				destination: destination || upsellableService.trade_type === 'import',
+				main: main,
+			})
+		}
+	}, [])
+
+	useEffect(() => {
+		const newValue = {
 			origin: upsellableService.trade_type === 'export' && !cancelUpsell && isUpsellable && canUpsellForTradeType
-			&& !showTradeHeading.origin
-				? true : showTradeHeading.origin,
+			&& !showTradeHeading.origin || showTradeHeading.origin,
 			destination:
 			upsellableService.trade_type === 'import' && !cancelUpsell && isUpsellable && canUpsellForTradeType
-				&& !showTradeHeading.destination
-				? true : showTradeHeading.destination,
+				&& !showTradeHeading.destination || showTradeHeading.destination,
 
 			main: showTradeHeading.main,
-		});
+		};
+		console.log({newValue})
+
+		setShowTradeHeading(newValue);
 	}, [cancelUpsell, isUpsellable,
 		canUpsellForTradeType, setShowTradeHeading,
 		showTradeHeading.origin, showTradeHeading.destination,

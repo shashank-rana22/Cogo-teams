@@ -52,7 +52,7 @@ function Services() {
 								? <div className={styles.header}>{ startCase(serviceCategory)}</div> : null}
 
 							{ ['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder)
-							&& showTradeHeading[serviceCategory.split('Services')[0]]
+							&& showTradeHeading[`${serviceCategory.split('Services')[0]}`]
 								? <div className={styles.header}>{ startCase(serviceCategory)}</div> : null}
 
 							<div className={styles.trade_services}>
