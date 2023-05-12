@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useContext, useState, useEffect, useCallback } from 'react';
+import { useContext, useState, useEffect, useCallback, useRef } from 'react';
 
 import DocumentDeskContext from '../context/DocumentDeskContext';
 import getDocumentDeskAdditionalMethods from '../helpers/getDocumentDeskAdditionalMethods';
@@ -14,6 +14,8 @@ const useListDocumentDesk = () => {
 	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
 
 	const { page = 1, ...restFilters } = filters || {};
+
+	const debounceQuery = useRef({ q: filters.q });
 
 	const [apiData, setApiData] = useState({});
 
@@ -52,10 +54,19 @@ const useListDocumentDesk = () => {
 
 	useEffect(() => {
 		const [, scope, view_type] = (authParams || '').split(':');
+
 		if (!scope) { return; }
 
 		const newScopeFilters = { scope, view_type, selected_agent_id };
-		apiTrigger();
+
+		if (debounceQuery.current.q !== filters.q) {
+			clearTimeout(debounceQuery.current.timerId);
+
+			debounceQuery.current.q = filters.q;
+			debounceQuery.current.timerId = setTimeout(apiTrigger, 600);
+		} else {
+			apiTrigger();
+		}
 
 		localStorage.setItem('document_desk_values', JSON.stringify({
 			filters,
