@@ -1,4 +1,8 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 import { addDays } from '@cogoport/utils';
+
+const geo = getGeoConstants();
 
 const defaultDatePickerProperties = {
 	placeholder           : 'Select Date',
@@ -16,10 +20,22 @@ const cut_offs = [
 	'expiry',
 ];
 
-export default function getMutatedControls(currentControls, schedule_departure) {
+export default function getModifiedControls({
+	currentControls,
+	schedule_departure,
+	container_type,
+	commodity,
+	setValue,
+}) {
 	const mutatedControls = currentControls;
 
 	mutatedControls.forEach((ctrl, index) => {
+		if (ctrl.name === 'container_type') {
+			mutatedControls[index] = {
+				...ctrl,
+				options: geo?.options?.freight_container_types || [],
+			};
+		}
 		if (ctrl.type === 'datepicker') {
 			mutatedControls[index] = {
 				...ctrl,
@@ -33,6 +49,17 @@ export default function getMutatedControls(currentControls, schedule_departure) 
 		if (cut_offs.includes(ctrl.name)) {
 			mutatedControls[index].maxDate = schedule_departure;
 			mutatedControls[index].disable = !schedule_departure;
+		}
+		if (ctrl.name === 'commodity') {
+			const newOptions = getCommodityList('freight', container_type);
+			mutatedControls[index] = {
+				...ctrl,
+				disabled : !container_type,
+				options  : newOptions,
+			};
+			if (!newOptions.some((option) => option.value === commodity) && commodity) {
+				setValue('commodity', undefined);
+			}
 		}
 	});
 

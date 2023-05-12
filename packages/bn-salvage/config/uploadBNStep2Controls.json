@@ -98,8 +98,7 @@
     {
         "label": "Container Types",
         "name": "container_type",
-        "type": "async_select",
-        "optionsListKey": "container_types",
+        "type": "select",
         "placeholder": "Select Container Type",
         "rules": {
             "required": "Container Type is required"
@@ -108,9 +107,7 @@
     {
         "label": "Commodity",
         "name": "commodity",
-        "type": "async_select",
-        "asyncKey": "commodities",
-        "value": "general",
+        "type": "select",
         "rules": {
             "required": "Commodity is required"
         }

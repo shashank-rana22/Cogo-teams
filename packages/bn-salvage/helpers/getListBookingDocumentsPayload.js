@@ -10,7 +10,7 @@ export default function getListBookingDeskShipmentsPayload({ filters, activeTab 
 			...restFilters,
 		},
 		page,
-		additional_methods : ['pagination'],
+		additional_methods : ['pagination', 'stats'],
 		sort_by            : 'created_at',
 		sort_type          : 'desc',
 	};

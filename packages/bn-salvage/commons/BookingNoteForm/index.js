@@ -20,12 +20,24 @@ export default function BookingNoteForm({
 }) {
 	const [currentStep, setCurrentStep] = useState('step1');
 
-	const { control, watch, formState: { errors }, trigger, handleSubmit } = useForm({ defaultValues });
+	const {
+		control,
+		watch,
+		formState: { errors },
+		trigger,
+		setValue,
+		handleSubmit,
+	} = useForm({ defaultValues });
 
-	const { schedule_departure, url } = watch();
+	const { schedule_departure, container_type, commodity, url } = watch();
 
-	const currentControls = controlsMapping[currentStep];
-	const modifiedControls = getModifiedControls(currentControls, schedule_departure);
+	const modifiedControls = getModifiedControls({
+		currentControls: controlsMapping[currentStep],
+		schedule_departure,
+		container_type,
+		commodity,
+		setValue,
+	});
 
 	const currentUrl = typeof url === 'object' ? url?.finalUrl : url;
 

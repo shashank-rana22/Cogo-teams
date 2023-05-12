@@ -44,10 +44,9 @@
     {
         "name": "container_type",
         "placeholder": "Container Type",
-        "type": "async-select",
+        "type": "select",
         "size": "sm",
-		"isClearable": true,
-        "asyncKey": "container-types"
+		"isClearable": true
     },
     {
         "name": "operator_id",

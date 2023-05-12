@@ -1,10 +1,15 @@
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useContext } from 'react';
 
 import FILTERS from '../../config/filters.json';
 import { BNSalvageContext } from '../../context/BNSalvageContext';
 
 import styles from './styles.module.css';
+
+const geo = getGeoConstants();
+
+const containerTypeOptions = geo?.options?.freight_container_types || [];
 
 export default function Filters({ children }) {
 	const { filters, setFilters } = useContext(BNSalvageContext);
@@ -24,7 +29,10 @@ export default function Filters({ children }) {
 						key={filter.name}
 						value={filters[filter.name]}
 						onChange={(val) => handleFilterChange(filter.name, val)}
-						{...filter}
+						{...{
+							...filter,
+							...(filter.name === 'container_type' && { options: containerTypeOptions }),
+						}}
 					/>
 				))}
 			</div>

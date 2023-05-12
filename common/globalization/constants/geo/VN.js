@@ -283,5 +283,31 @@ export default {
 				value : 'Close_body_18_ton',
 			},
 		],
+		freight_container_types: [
+			{
+				label : 'Standard(Dry)',
+				value : 'standard',
+			},
+			{
+				label : 'Refrigerated (Reefer)',
+				value : 'refer',
+			},
+			{
+				label : 'Open Top',
+				value : 'open_top',
+			},
+			{
+				label : 'Flat Rack',
+				value : 'flat_rack',
+			},
+			{
+				label : 'ISO Tank',
+				value : 'iso_tank',
+			},
+			{
+				label : 'Open Side (One Door Open)',
+				value : 'open_side',
+			},
+		],
 	},
 };
