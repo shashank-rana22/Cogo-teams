@@ -19,7 +19,7 @@ function List({
 					<div
 						role="presentation"
 						className={styles.item}
-						key={key || label || item.id}
+						key={key || label || item?.id}
 						style={{ flex }}
 					>
 						{loading ? (
