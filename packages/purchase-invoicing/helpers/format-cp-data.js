@@ -1,8 +1,7 @@
 import { Toast } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, format } from '@cogoport/utils';
 
 import { BILL_MAPPINGS } from '../constants';
-import { formatDate } from '../utils/formatDate';
 
 const VERIFICATION_STATUS = ['pending', 'verified'];
 
@@ -232,7 +231,7 @@ export const formatCollectionPartyPayload = (data, extraData) => {
                 extraData?.invoiceStatus === 'init' ? 'INITIATED' : extraData?.invoiceStatus?.toUpperCase(),
 			isProforma : formValues?.invoice_type === 'proforma_invoice',
 			isTaxable  : collectionPartyObj?.is_tax_applicable,
-			billDate   : formatDate(
+			billDate   : format(
 				data.invoice_date || formValues?.invoice_date,
 				'yyyy-MM-dd hh:mm:ss',
 				{},
