@@ -1,6 +1,7 @@
 .container {
 	display: flex;
 	justify-content: flex-end;
+	margin-right: 10px;
 	margin-bottom: 6px;
 
 	* {
