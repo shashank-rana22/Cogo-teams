@@ -15,12 +15,9 @@ function AddNewService({
 	setShowTradeHeading = () => {},
 	showTradeHeading = {},
 }) {
-	// This Comment to be removed
-	// const haveToUpsell = servicesList?.length === 0
-	// 	&& upsellableService.service_type === 'fcl_freight_local_service'
-	// 	&& primary_service?.bl_category === 'hbl';
-
-	const haveToUpsell = false;
+	const haveToUpsell = servicesList?.length === 0
+		&& upsellableService.service_type === 'fcl_freight_local_service'
+		&& primary_service?.bl_category === 'hbl';
 
 	const [upsellModal, setUpsellModal] = useState(haveToUpsell);
 
@@ -50,7 +47,7 @@ function AddNewService({
 
 	const closeModal = () => {
 		setUpsellModal(!upsellModal);
-	}; 
+	};
 
 	console.log(!cancelUpsell, isUpsellable, canUpsellForTradeType, 'hdiuewhi');
 
@@ -59,14 +56,14 @@ function AddNewService({
 	useEffect(() => {
 		const { origin, destination, main } = showTradeHeading;
 
-		if(showAddServiceBox){
+		if (showAddServiceBox) {
 			setShowTradeHeading({
-				origin: origin || upsellableService.trade_type === 'export',
-				destination: destination || upsellableService.trade_type === 'import',
-				main: main,
-			})
+				origin      : origin || upsellableService.trade_type === 'export',
+				destination : destination || upsellableService.trade_type === 'import',
+				main,
+			});
 		}
-	}, [showAddServiceBox, upsellableService.trade_type])
+	}, [showAddServiceBox, upsellableService.trade_type]);
 
 	return (
 		<>
