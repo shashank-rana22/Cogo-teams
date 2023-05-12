@@ -6,9 +6,7 @@ function EmptyState({
 	height = 125,
 	width = 225,
 	emptyText = 'Data not found',
-	subEmptyText = '',
 	flexDirection = 'row',
-	textSize = '16px',
 }) {
 	return (
 		<div className={cl`${styles.container} ${styles[flexDirection]}`}>
@@ -21,8 +19,7 @@ function EmptyState({
 			/>
 
 			<div>
-				<div className={styles.text} style={{ fontSize: textSize }}>{emptyText}</div>
-				<p className={styles.text} style={{ fontSize: '16px' }}>{subEmptyText}</p>
+				<div className={styles.text}>{emptyText}</div>
 			</div>
 		</div>
 

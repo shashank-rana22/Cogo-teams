@@ -27,7 +27,7 @@
 }
 
 .underline {
-	color: #f68b21;
+	color: var(--color-accent-orange-2);
 	text-decoration: underline;
 	cursor: pointer;
 }
@@ -47,28 +47,28 @@
 			font-size: var(--font-size-sm) !important;
 			opacity: 0.6;
 		}
-	}
 
-	:global(.ui_select_container) {
-		width: 100%;
-		max-height: 32px;
-	}
+		.ui_select_container {
+			width: 100%;
+			max-height: 32px;
+		}
 
-	:global(.ui_select_display_container) {
-		width: 100%;
-		max-height: 32px;
+		.ui_select_display_container {
+			width: 100%;
+			max-height: 32px;
+		}
 	}
 }
 
 .inputcontainer {
-	:global(.ui_input_container) {
-		width: 100%;
-		max-height: 32px;
-	}
-
 	:global {
 		.ui_input_control {
 			font-size: var(--font-size-sm) !important;
+		}
+
+		.ui_input_container {
+			width: 100%;
+			max-height: 32px;
 		}
 	}
 }
@@ -132,4 +132,8 @@
 
 .icon {
 	margin-left: 8px;
+}
+
+.marginright {
+	margin-right: 10px;
 }

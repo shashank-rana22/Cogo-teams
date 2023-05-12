@@ -7,13 +7,12 @@ import styles from './styles.module.css';
 function AccordianView({
 	title,
 	open,
-	children,
+	children = null,
 	fullwidth,
 	showerror,
 }) {
-	const getclass = fullwidth ? styles.fullwidth : styles.accordianContainer;
 	return (
-		<div className={`${getclass}`}>
+		<div className={`${fullwidth ? styles.fullwidth : styles.accordianContainer}`}>
 			<Accordion title={title} open={open} showerror={showerror}>
 				{children}
 			</Accordion>

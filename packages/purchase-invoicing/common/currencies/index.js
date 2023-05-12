@@ -18,12 +18,7 @@ const optionsAll = [];
 	}
 });
 
-const prefferdCurrencies = [
-	GLOBAL_CONSTANTS.currency_code.INR,
-	GLOBAL_CONSTANTS.currency_code.USD,
-	GLOBAL_CONSTANTS.currency_code.EUR,
-	GLOBAL_CONSTANTS.currency_code.GBP,
-];
+const prefferdCurrencies = Object.keys(GLOBAL_CONSTANTS.currency_code || {});
 
 const prefferedOptons = optionsAll.filter((option) => prefferdCurrencies.includes(option.key));
 const restOptionsList = optionsAll.filter((option) => !prefferdCurrencies.includes(option.key));

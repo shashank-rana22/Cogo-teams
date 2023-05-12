@@ -2,7 +2,7 @@
 	:global {
 		padding: 24px 16px;
 		margin-bottom: 0 !important;
-		background-color: #ffff;
+		background-color: var(--color-secondary-5);
 
 		.ui_table_container {
 			border: none;
@@ -12,7 +12,7 @@
 			position: sticky;
 			top: 0;
 			z-index: 1;
-			background-color: #fff;
+			background-color: var(--color-secondary-5);
 		}
 
 		.ui_table_body_cell {
@@ -20,7 +20,7 @@
 		}
 
 		.ui_table_head_cell {
-			border-bottom: 1px solid #f68b21;
+			border-bottom: 1px solid var(--color-accent-orange-2);
 		}
 
 		.ui_table_body_row {
@@ -50,5 +50,5 @@
 	justify-content: center;
 	height: 250px;
 	text-align: center;
-	background-color: #fff;
+	background-color: var(--color-secondary-5);
 }

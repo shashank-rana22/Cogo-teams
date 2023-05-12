@@ -10,7 +10,7 @@ function SingleColumn({
 	fields,
 	ismappings,
 	renderCheck,
-	mappingtable,
+	mappingtable = false,
 }) {
 	const renderMethod = ismappings ? renderMappingsFunction(renderCheck) : renderFunction;
 	return (
@@ -22,7 +22,7 @@ function SingleColumn({
 						width : `${((field.span || 1) * (100 / 12))}px`,
 					}}
 					className={`${styles.value} ${!mappingtable ? styles.paddingtotal : ''}`}
-					key={fields?.key || fields?.name}
+					key={fields?.key || fields?.label}
 				>
 					{renderMethod[field?.key] ? renderMethod[field?.key](lineitem) : '-'}
 				</div>

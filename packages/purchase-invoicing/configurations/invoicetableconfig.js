@@ -4,7 +4,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 
 import getFormattedAmount from '../common/helpers/formatAmount';
 import RenderLink from '../common/RenderLink';
-import { purchaseTypeList } from '../constants';
+import { PURCHASE_TYPE_LIST } from '../constants';
 
 import styles from './styles.module.css';
 
@@ -21,7 +21,7 @@ export const invoiceconfig = [
 				const serviceLineitemMapping = {};
 				(services?.mappings || []).forEach((item) => {
 					(item?.buy_line_items || []).map((lineItem) => {
-						serviceLineitemMapping[lineItem.service_type] = !isEmpty(
+						serviceLineitemMapping[lineItem?.service_type] = !isEmpty(
 							serviceLineitemMapping[lineItem?.service_type],
 						)
 							? [...serviceLineitemMapping[lineItem?.service_type], lineItem?.code]
@@ -49,7 +49,7 @@ export const invoiceconfig = [
 						<div className={styles.flex}>
 							<span className={styles.servicemappings}>
 								{(servicesKeys || []).map((item) => (
-									<span style={{ marginRight: '10px' }} key={item}>
+									<span className={styles.marginright} key={item}>
 										{startCase(item)}
 										{' '}
 										-
@@ -69,8 +69,8 @@ export const invoiceconfig = [
 	{
 		Header   : 'Collection Party',
 		accessor : (row) => {
-			const bankName = row?.bank_details?.[0]?.bank_name;
-			const accountNumber = row?.bank_details?.[0]?.bank_account_number;
+			const bankName = row?.bank_details?.[0]?.bank_name || '';
+			const accountNumber = row?.bank_details?.[0]?.bank_account_number || '';
 			return (
 				<div className={styles.value}>
 					<Tooltip
@@ -115,7 +115,7 @@ export const invoiceconfig = [
 		accessor : (row) => {
 			const purchaseType = (item) => {
 				let displayType = 'Purchase';
-				purchaseTypeList.forEach((val) => {
+				PURCHASE_TYPE_LIST.forEach((val) => {
 					if (val?.value === item?.invoice_type) {
 						displayType = val?.label;
 					}
@@ -136,7 +136,7 @@ export const invoiceconfig = [
 						<Tooltip
 							theme="light"
 							interactive
-							content={<p>{(row.remarks || []).join(' , ')}</p>}
+							content={<p>{(row?.remarks || []).join(' , ')}</p>}
 						>
 							<Pill size="sm" color="#FEF1DF">
 								{purchaseType(row)}

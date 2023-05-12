@@ -7,7 +7,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useContext, useImperativeHandle, forwardRef, useState } from 'react';
 
 import AccordianView from '../../common/Accordianview';
-import { EMPTY_LINE_ITEMS, invoiceTypeOptions, invoiceTypeOptionsCN, optionsCN } from '../../constants';
+import { EMPTY_LINE_ITEMS, INVOICE_TYPE_OPTIONS, INVOICE_TYPE_OPTIONS_CN, OPTIONSCN } from '../../constants';
 import useCalculateTotalPrice from '../../helpers/useCalculateTotalPrice';
 import useResetErrors from '../../helpers/useResetErrors';
 
@@ -165,12 +165,12 @@ function InvoiceFormLayout({
 
 	const getOptions = () => {
 		if (!editable && isJobClosed) {
-			return optionsCN;
+			return OPTIONSCN;
 		}
 		if (billCatogory === 'pass_through') {
-			return invoiceTypeOptionsCN;
+			return INVOICE_TYPE_OPTIONS_CN;
 		}
-		return invoiceTypeOptions;
+		return INVOICE_TYPE_OPTIONS;
 	};
 
 	const isCreditNoteOnly = isJobClosed ? 'credit_note' : '';

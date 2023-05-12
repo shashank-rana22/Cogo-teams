@@ -1,23 +1,21 @@
 import { Toast } from '@cogoport/components';
 import { isEmpty, format } from '@cogoport/utils';
 
-import { BILL_MAPPINGS } from '../constants';
-
-const VERIFICATION_STATUS = ['pending', 'verified'];
+import { BILL_MAPPINGS, VERIFICATION_STATUS } from '../constants';
 
 export const formatLineItems = (line_items, codes) => {
 	const newLineItems = (line_items || []).map((item) => {
 		const total = Number(item?.rate) * Number(item?.quantity || 1);
-		const tax_total = (total * (codes[item?.code]?.tax_percent || 0)) / 100;
+		const tax_total = (total * (codes?.[item?.code]?.tax_percent || 0)) / 100;
 		const cost = (total || 0) + (tax_total || 0);
 
-		const { tax_percent, service_name, trade_type, product_code, actualname } = codes[item?.code] || {};
+		const { tax_percent, service_name, trade_type, product_code, actualname } = codes?.[item?.code] || {};
 
 		return {
-			code                : item.code,
-			currencyCode        : item.currency,
-			currency            : item.currency,
-			priceInBillCurrency : item.currency,
+			code                : item?.code,
+			currencyCode        : item?.currency,
+			currency            : item?.currency,
+			priceInBillCurrency : item?.currency,
 			price               : Number(item?.rate || 0),
 			quantity            : Number(item?.quantity || 1),
 			exchangeRate        : Number(item?.exchange_rate || 1),
@@ -40,11 +38,11 @@ export const formatLineItems = (line_items, codes) => {
 
 export const formatPurchaseLineItems = (line_items, codes) => {
 	const newLineItems = (line_items || []).map((item) => {
-		const total = Number(item?.rate) * Number(item?.quantity || 1);
-		const tax_total = (total * (codes[item?.code]?.tax_percent || 0)) / 100;
+		const total = Number(item?.rate || 0) * Number(item?.quantity || 1);
+		const tax_total = (total * (codes?.[item?.code]?.tax_percent || 0)) / 100;
 		const cost = (total || 0) + (tax_total || 0);
 
-		const { tax_percent, service_name, trade_type, product_code, actualname } = codes[item?.code] || {};
+		const { tax_percent, service_name, trade_type, product_code, actualname } = codes?.[item?.code] || {};
 
 		const {
 			code,
@@ -110,7 +108,7 @@ export const validateData = (data, extraData) => {
 		...(collectionPartyObj?.other_addresses || []),
 	];
 
-	const bank_details = (collectionPartyObj.documents || []).filter(
+	const bank_details = (collectionPartyObj?.documents || []).filter(
 		(item) => item.document_type === 'bank_account_details'
 			&& VERIFICATION_STATUS.includes(item.verification_status)
 			&& item.status === 'active',
@@ -137,38 +135,30 @@ export const validateData = (data, extraData) => {
 
 export const formatCollectionPartyPayload = (data, extraData) => {
 	const {
-		billingPartyObj,
-		collectionPartyObj,
-		shipment_data,
-		invoiceData,
-		uploadProof,
-		taggedProformas,
-		formValues,
-		ocrData,
+		billingPartyObj = {},
+		collectionPartyObj = {},
+		shipment_data = {},
+		invoiceData = {},
+		uploadProof = '',
+		taggedProformas = [],
+		formValues = {},
+		ocrData = {},
 		codes,
 		activeTab,
 		partyId,
-		serviceProviderOrg,
+		serviceProviderOrg = {},
 		billId,
-	} = extraData;
+	} = extraData || {};
 
 	const formatTaggedIds = [];
-	taggedProformas.forEach((item) => {
-		if (item.finance_job_number || item.billId) {
-			formatTaggedIds.push(item.finance_job_number || item.billId);
-		} else {
-			item.root?.split(',').forEach((id) => {
-				formatTaggedIds.push(id);
-			});
-		}
-	});
-
 	const formatRootIds = [];
-	taggedProformas.forEach((item) => {
-		if (item.finance_job_number) {
+	taggedProformas?.forEach((item) => {
+		if (item?.finance_job_number || item?.billId) {
+			formatTaggedIds.push(item?.finance_job_number || item?.billId);
 			formatRootIds.push(item.finance_job_number);
 		} else {
-			item.root?.split(',').forEach((id) => {
+			item?.root?.split(',')?.forEach((id) => {
+				formatTaggedIds.push(id);
 				formatRootIds.push(id);
 			});
 		}
@@ -183,14 +173,14 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 		rootBillIds += idbill;
 	});
 
-	const rooBill = taggedProformas.map(
-		(item) => item.finance_job_number || item.root,
+	const rooBill = taggedProformas?.map(
+		(item) => item?.finance_job_number || item.root,
 	);
 
-	const bank_details = (collectionPartyObj.documents || []).filter(
-		(item) => item.document_type === 'bank_account_details'
-            && ['pending', 'verified'].includes(item.verification_status)
-            && item.status === 'active',
+	const bank_details = (collectionPartyObj?.documents || []).filter(
+		(item) => item?.document_type === 'bank_account_details'
+            && ['pending', 'verified'].includes(item?.verification_status)
+            && item?.status === 'active',
 	);
 
 	const bankDetails = (bank_details || []).find(
@@ -198,7 +188,7 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 	);
 
 	const billingpartyAddress = (billingPartyObj.addresses || []).find(
-		(addr) => addr.gst_number === data.billing_party_address,
+		(addr) => addr?.gst_number === data?.billing_party_address,
 	);
 
 	const allBillingAddresses = [
@@ -210,12 +200,12 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 
 	const isTagginsAllowed = billType === 'BILL';
 	const collectionPartyBA = allBillingAddresses?.find(
-		(address) => address.tax_number === formValues?.collection_party_address,
+		(address) => address?.tax_number === formValues?.collection_party_address,
 	) || {};
 
 	const collectionPartyPOC = collectionPartyObj?.poc_data?.[0] || {};
 
-	const rootid = taggedProformas.length === 1 ? rooBill?.[0] : rootBillIds || undefined;
+	const rootid = taggedProformas?.length === 1 ? rooBill?.[0] : rootBillIds || undefined;
 
 	const finalData = {
 		jobSource           : 'LOGISTICS',
@@ -247,7 +237,7 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 			billDocumentUrl : uploadProof,
 			billNumber      : data?.tax_invoice_no.trim(),
 			refBillId:
-				formValues.invoice_type === 'credit_note' ? formValues?.ref_invoice_no : undefined,
+				formValues?.invoice_type === 'credit_note' ? formValues?.ref_invoice_no : undefined,
 		},
 		buyerDetails: {
 			entityCode              : billingPartyObj?.entity_code,
@@ -367,14 +357,14 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 			containersCount : shipment_data?.containers_count || undefined,
 			rootBillId      : isTagginsAllowed ? rootid : undefined,
 			refBillId:
-				formValues.invoice_type === 'credit_note' ? formValues?.ref_invoice_no : undefined,
+				formValues?.invoice_type === 'credit_note' ? formValues?.ref_invoice_no : undefined,
 		},
 		paymentMode     : formValues?.payment_mode || 'cash',
 		invoiceCurrency : formValues?.invoice_currency || ocrData?.invoice_currency,
 		invoiceUrl      : uploadProof,
 		lineItems       : formatLineItems(data.line_items || [], codes),
 		taggedBills:
-            taggedProformas.length > 0 && isTagginsAllowed ? formatTaggedIds : undefined,
+            taggedProformas?.length > 0 && isTagginsAllowed ? formatTaggedIds : undefined,
 	};
 
 	return finalData;

@@ -12,7 +12,7 @@ function InvoicesTable({
 	pageSize,
 	page,
 	total,
-	setFilters,
+	setFilters = () => {},
 	filters,
 	loading,
 	showPagination = true,
@@ -29,9 +29,9 @@ function InvoicesTable({
 				{...rest}
 			/>
 
-			{data?.length === 0 && <EmptyState text={rest?.emptytext} />}
+			{data?.length === 0 ? <EmptyState text={rest?.emptytext} /> : null}
 
-			{showPagination && (
+			{showPagination ? (
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="table"
@@ -41,7 +41,7 @@ function InvoicesTable({
 						onPageChange={(val) => setFilters({ ...filters, page: val })}
 					/>
 				</div>
-			)}
+			) : null}
 		</div>
 	);
 }

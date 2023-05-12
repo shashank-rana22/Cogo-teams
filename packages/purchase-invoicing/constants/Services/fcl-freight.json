@@ -113,5 +113,5 @@
 		"destination_port": "destination_port",
 		"destination_drop": "destination_location"
 	},
-	"commnets": { "emptyContent": "" }
+	"comments": { "emptyContent": "" }
 }

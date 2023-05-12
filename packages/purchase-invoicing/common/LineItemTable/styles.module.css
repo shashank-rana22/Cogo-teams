@@ -1,12 +1,9 @@
 .servicecontainer {
 	margin-bottom: 16px;
 	overflow-x: auto;
-	border: 1px solid #e0e0e0;
-	border-radius: 4px;
-}
-
-.flextable {
 	color: #000;
+	border: 1px solid var(--color-secondary-greyscale-5);
+	border-radius: 4px;
 }
 
 .fieldstyle {
@@ -17,11 +14,11 @@
 
 .tableheader {
 	display: flex;
-	background-color: #e0e0e0;
-	border-bottom: 2px solid #e0e0e0;
+	background-color: var(--color-secondary-greyscale-5);
+	border-bottom: 2px solid var(--color-secondary-greyscale-5);
 }
 
-.tablebody {
+.tablecolumn {
 	display: flex;
 }
 
@@ -30,10 +27,6 @@
 	align-items: center;
 	padding: 6px 16px;
 	margin-right: -8px;
-}
-
-.tablecolumn {
-	display: flex;
 }
 
 .totalamount {
@@ -45,7 +38,7 @@
 	margin-right: 36px;
 	font-size: var(--font-size-lg);
 	font-weight: 800;
-	color: #4f4f4f;
+	color: var(--color-secondary-greyscale-1);
 	background: #f9f9f9;
 	border-radius: 0 0 4px 4px;
 }

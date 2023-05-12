@@ -1,7 +1,13 @@
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import { ProformaTagCards } from './ProformaTag';
 import styles from './styles.module.css';
+
+const LABEL_MAP = {
+	merge : 'Merge',
+	split : 'Split',
+};
 
 export function TagCard({
 	item,
@@ -15,51 +21,37 @@ export function TagCard({
 }) {
 	const { childBill } = item || {};
 	const isChecked = selectedProforma?.some(
-		(data) => data.billId === item?.billId,
+		(data) => data?.billId === item?.billId,
 	);
 	const unCheckedData = selectedProforma?.filter(
-		(data) => data.billId !== item?.billId,
+		(data) => data?.billId !== item?.billId,
 	);
 	const showCheckBox = activeTab === 'merge' ? isfirst : true;
 
-	const labelMap = {
-		merge : 'Merge',
-		split : 'Split',
-	};
-	const commonStyles = {
-		width           : '40px',
-		backgroundColor : '#ffffff',
-		transform       : 'translateX(-2px)',
-	};
 	return (
 		<div className={styles.flexdiv}>
 			<div
 				style={{
-					borderRight : childBill?.length > 1 ? '1px solid #88cad1' : '',
+					borderRight : childBill?.length > 1 ? '1px solid var(--color-tertiary-blue-2)' : '',
 					marginTop   : '16px',
 					position    : 'relative',
 				}}
 			>
-				<div style={{ display: 'flex' }}>
-					{childBill?.length > 1 && (
+				<div className={styles.simpleflex}>
+					{childBill?.length > 1 ? (
 						<div className={`${classname === 'merge' ? styles.merge : ''} ${styles.tag}`}>
-							{labelMap[classname || 'split']}
+							{LABEL_MAP[classname || 'split']}
 						</div>
-					)}
-					<div style={{ display: 'flex', flexDirection: 'column' }}>
-						{!isfirst && (
+					) : null}
+					<div className={styles.columnflex}>
+						{!isfirst ? (
 							<div
 								className={styles.line_block}
 							/>
-						)}
+						) : null}
 						{isLastChild && (
 							<div
-								style={{
-									height   : 'calc(100% - 40px)',
-									top      : '38px',
-									...commonStyles,
-									position : 'absolute',
-								}}
+								className={styles.commonstyles}
 							/>
 						)}
 					</div>
@@ -74,16 +66,16 @@ export function TagCard({
 						activeTab={activeTab}
 						isChecked={isChecked}
 					/>
-					{childBill && (
+					{!isEmpty(childBill) ? (
 						<div
 							className={styles.child_block}
 						/>
-					)}
+					) : null}
 				</div>
 			</div>
-			{childBill && (
+			{!isEmpty(childBill) ? (
 				<div className={styles.childs}>
-					{childBill.map((child, index) => (
+					{childBill?.map((child, index) => (
 						<TagCard
 							item={child}
 							isfirst={false}
@@ -96,7 +88,7 @@ export function TagCard({
 						/>
 					))}
 				</div>
-			)}
+			) : null}
 		</div>
 	);
 }

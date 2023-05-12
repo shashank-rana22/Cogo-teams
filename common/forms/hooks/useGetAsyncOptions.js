@@ -10,7 +10,7 @@ function useGetAsyncOptions({
 	valueKey = '',
 	labelKey = '',
 	params = {},
-	onOptionsChange,
+	onOptionsChange = () => {},
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
 	const [storeoptions, setstoreoptions] = useState([]);
@@ -36,10 +36,8 @@ function useGetAsyncOptions({
 	}, [JSON.stringify(optionValues)]);
 
 	useEffect(() => {
-		if (typeof onOptionsChange === 'function') {
-			onOptionsChange(listData?.list || []);
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		onOptionsChange(listData?.list || []);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(listData?.list || [])]);
 
 	const onSearch = (inputValue) => {

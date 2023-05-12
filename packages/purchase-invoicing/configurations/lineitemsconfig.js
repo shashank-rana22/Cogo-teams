@@ -61,21 +61,21 @@ const handleModifiedOptions = ({ options: newOptions }) => newOptions.map((optio
 	item_name  : (
 		<div className={styles.paddingname}>
 			<span className={styles.itemname}>
-				{option.item_name}
+				{option?.item_name || ''}
 				(
-				{option.code}
+				{option?.code || ''}
 				)-
-				{option.tax_percent}
+				{option?.tax_percent || ''}
 				%
 			</span>
 			<div>
 				<span className={styles.product}>
-					{option.product_code}
+					{option?.product_code || ''}
 					{' '}
 					-
 				</span>
 				<span className={styles.product}>
-					{option.sac_code}
+					{option?.sac_code || ''}
 				</span>
 			</div>
 		</div>
@@ -96,11 +96,11 @@ export const renderLineItemFunctions = {
 						shipment_id: shipmentId,
 					},
 				}}
-				onChange={(_, obj) => (setCodes((codes) => ({ ...codes, [obj.code]: obj })))}
+				onChange={(_, obj) => (setCodes((codes) => ({ ...codes, [obj?.code]: obj })))}
 				rules={{ required: true }}
 			/>
 			{errors?.line_items?.[index]?.container_number && (
-				<div className={`${styles.errors}`}>
+				<div className={styles.errors}>
 					* Required
 				</div>
 			)}
@@ -121,20 +121,19 @@ export const renderLineItemFunctions = {
 					organization_trade_party_detail_id:
 						extradata?.organization_trade_party_detail_id,
 					filters: {
-						service_names: !isEmpty(extradata?.serviceNames)
-							? extradata?.serviceNames
-							: [extradata?.shipment_type],
+						service_names: isEmpty(extradata?.serviceNames)
+							? [extradata?.shipment_type] : extradata?.serviceNames,
 						invoicing_type: 'PURCHASE',
 					},
 				}}
-				onChange={(_, obj) => (setCodes((codes) => ({ ...codes, [obj.code]: obj })))}
+				onChange={(_, obj) => (setCodes((codes) => ({ ...codes, [obj?.code]: obj })))}
 				rules={{ required: true }}
 			/>
-			{errors?.line_items?.[index]?.code && (
-				<div className={`${styles.errors}`}>
+			{errors?.line_items?.[index]?.code ? (
+				<div className={styles.errors}>
 					Code is Required
 				</div>
-			)}
+			) : null}
 		</div>
 	),
 	currency: ({ control, index, errors }) => (
@@ -146,11 +145,11 @@ export const renderLineItemFunctions = {
 				options={options}
 				rules={{ required: true }}
 			/>
-			{errors?.line_items?.[index]?.currency && (
-				<div className={`${styles.errors}`}>
+			{errors?.line_items?.[index]?.currency ? (
+				<div className={styles.errors}>
 					* Required
 				</div>
-			)}
+			) : null}
 		</div>
 	),
 	rate: ({ control, index, errors }) => (
@@ -161,11 +160,11 @@ export const renderLineItemFunctions = {
 				placeholder="Rate"
 				rules={{ required: true }}
 			/>
-			{errors?.line_items?.[index]?.rate && (
-				<div className={`${styles.errors}`}>
+			{errors?.line_items?.[index]?.rate ? (
+				<div className={styles.errors}>
 					Rate is Required
 				</div>
-			)}
+			) : null}
 		</div>
 	),
 	unit: ({ control, index, errors }) => (
@@ -177,11 +176,11 @@ export const renderLineItemFunctions = {
 				options={UNIT_OPTIONS}
 				rules={{ required: true }}
 			/>
-			{errors?.line_items?.[index]?.unit && (
-				<div className={`${styles.errors}`}>
+			{errors?.line_items?.[index]?.unit ? (
+				<div className={styles.errors}>
 					Unit is Required
 				</div>
-			)}
+			) : null}
 		</div>
 	),
 	quantity: ({ control, index, errors }) => (
@@ -192,11 +191,11 @@ export const renderLineItemFunctions = {
 				placeholder="Quantity"
 				rules={{ required: true }}
 			/>
-			{errors?.line_items?.[index]?.quantity && (
-				<div className={`${styles.errors}`}>
+			{errors?.line_items?.[index]?.quantity ? (
+				<div className={styles.errors}>
 					* Required
 				</div>
-			)}
+			) : null}
 		</div>
 	),
 	tax_amount: ({ index, calculatedValues }) => (
@@ -213,11 +212,11 @@ export const renderLineItemFunctions = {
 				disabled
 				rules={{ required: true }}
 			/>
-			{errors?.line_items?.[index]?.exchange_rate && (
-				<div className={`${styles.errors}`}>
+			{errors?.line_items?.[index]?.exchange_rate ? (
+				<div className={styles.errors}>
 					* Required
 				</div>
-			)}
+			) : null}
 		</div>
 	),
 	cost: ({ index, calculatedValues }) => (
@@ -227,14 +226,14 @@ export const renderLineItemFunctions = {
 	),
 	delete: ({ index, remove, showDelete }) => (
 		<span className={styles.delete}>
-			{showDelete && (
+			{showDelete ? (
 				<IcMDelete
 					className={styles.pointer}
 					height={20}
 					width={20}
 					onClick={() => remove(index)}
 				/>
-			)}
+			) : null}
 		</span>
 	),
 };

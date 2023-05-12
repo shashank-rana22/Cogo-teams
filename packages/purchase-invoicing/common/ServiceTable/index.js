@@ -2,7 +2,7 @@ import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import { serviceConfig } from '../../configurations/serviceconfig';
-import { isMainService } from '../../constants';
+import { IS_MAIN_SERVICE } from '../../constants';
 import getFormattedAmount from '../helpers/formatAmount';
 
 import CargoDetails from './CargoDetails';
@@ -17,7 +17,7 @@ function ServiceTables({
 	showservice,
 	ismappings,
 	renderCheck,
-	mappingtable,
+	mappingtable = false,
 }) {
 	return (
 		<>
@@ -35,7 +35,7 @@ function ServiceTables({
 					? `Truck Number: ${startCase(singlecharge?.detail?.truck_number)}`
 					: `${trade_type} ${startCase(singlecharge?.service_type)}`;
 
-				const service = isMainService.includes(singlecharge?.service_type)
+				const service = IS_MAIN_SERVICE.includes(singlecharge?.service_type)
 					? startCase(singlecharge?.service_type)
 					: otherService;
 				const lineItems = singlecharge?.line_items || [];
@@ -49,7 +49,7 @@ function ServiceTables({
 				return (
 					<div className={styles.servicecontainer} key={singlecharge?.id}>
 						{showCargo && (
-							<div style={{ marginLeft: '4px' }}>
+							<div className={styles.marginleft}>
 								<CargoDetails item={singlecharge} />
 							</div>
 						)}
@@ -79,14 +79,14 @@ function ServiceTables({
 									key={lineitem?.code}
 								/>
 							))}
-							{showTotal && (
+							{showTotal ? (
 								<div className={styles.totalamount}>
 									Total With TAX
 									<span className={styles.amount}>
 										{getFormattedAmount(singlecharge?.tax_total_price || 0, singlecharge?.currency)}
 									</span>
 								</div>
-							)}
+							) : null}
 						</div>
 					</div>
 				);

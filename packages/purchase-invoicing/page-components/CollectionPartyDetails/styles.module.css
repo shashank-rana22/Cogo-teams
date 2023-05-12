@@ -1,5 +1,5 @@
 .container {
-	background-color: #fff;
+	background-color: var(--color-secondary-5);
 }
 
 .servicename {
@@ -20,7 +20,7 @@
 .customer {
 	flex: 2.5;
 	margin-right: 26px;
-	border-right: 2px solid #f68b21;
+	border-right: 2px solid var(--color-accent-orange-2);
 }
 
 .invoices {
@@ -36,7 +36,7 @@
 .value {
 	display: flex;
 	padding: 0 6px;
-	color: #f68b21;
+	color: var(--color-accent-orange-2);
 }
 
 .mode {
@@ -81,7 +81,7 @@
 	margin-right: 36px;
 	font-size: var(--font-size-xl);
 	font-weight: 800;
-	color: #4f4f4f;
+	color: var(--color-secondary-greyscale-1);
 	border-radius: 0 0 4px 4px;
 }
 

@@ -1,6 +1,5 @@
 import { Modal } from '@cogoport/components';
-import { ShipmentDetailContext } from '@cogoport/context';
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 
 import getEditData from '../../helpers/getEditData';
 import Step1 from '../../page-components/Step1';
@@ -14,10 +13,10 @@ function ComparisionModal({
 	serviceProvider = {},
 	editData = {},
 	openComparision = false,
-	setOpenComparision = () => { },
+	setOpenComparision = () => {},
 	step = 1,
-	setStep = () => { },
-	onClose = () => { },
+	setStep = () => {},
+	onClose = () => {},
 }) {
 	const [purchaseInvoiceValues, setPurchaseInvoiceValues] = useState(getEditData(editData));
 
@@ -38,16 +37,10 @@ function ComparisionModal({
 		</span>
 	);
 
-	const onError = (errordata) => {
-		setErrors(errordata);
-	};
-
 	const closeModal = () => {
 		setOpenComparision(false);
 		setErrMszs({});
 	};
-
-	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	return (
 		<Modal
@@ -57,7 +50,7 @@ function ComparisionModal({
 			placement="center"
 			className={styles.modal_container}
 		>
-			{step === 1 && (
+			{step === 1 ? (
 				<Step1
 					contentText={contentText}
 					uploadInvoiceUrl={openComparision?.invoice_url || uploadInvoiceUrl}
@@ -78,8 +71,9 @@ function ComparisionModal({
 						codes,
 						status: editData?.status,
 					})}
-					shipment_data={shipment_data}
-					onError={onError}
+					onError={(errordata) => {
+						setErrors(errordata);
+					}}
 					partyId={collectionPartyId?.partyId}
 					collectionParty={collectionParty}
 					setCollectionParty={setCollectionParty}
@@ -87,9 +81,9 @@ function ComparisionModal({
 					editData={editData}
 					onClose={onClose}
 				/>
-			)}
+			) : null}
 
-			{step === 2 && (
+			{step === 2 ? (
 				<Step2
 					contentText={contentText}
 					purchaseInvoiceValues={purchaseInvoiceValues}
@@ -104,7 +98,7 @@ function ComparisionModal({
 					partyId={collectionPartyId?.partyId}
 					onClose={onClose}
 				/>
-			)}
+			) : null}
 		</Modal>
 	);
 }

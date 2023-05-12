@@ -8,7 +8,7 @@ function ToolTipWrapper({
 	maxlength = 25,
 	content,
 	children,
-	render,
+	render = false,
 }) {
 	const renderToolTip = text.length > maxlength;
 

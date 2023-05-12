@@ -16,6 +16,7 @@ function ConfirmationModal({
 				onClose={() => {
 					setConfirmation(false);
 				}}
+				closeOnOuterClick={false}
 				placement="center"
 				className={styles.modal_container}
 			>

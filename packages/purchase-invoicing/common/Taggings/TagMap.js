@@ -34,7 +34,7 @@ function TagMap({
 
 	return (
 		<div className={styles.border}>
-			{!loading ? (
+			{loading ? <Placeholder width="100%" height="200px" /> : (
 				<>
 					{(allTaggingMaps).map((type) => (
 						<div
@@ -42,9 +42,7 @@ function TagMap({
 					${styles.column} ${type === 'merge' ? styles.merge : ''}`}
 							key={type}
 						>
-							{ (
-								mappingsData?.[type] || []
-							).map((item) => (
+							{(mappingsData?.[type] || []).map((item) => (
 								<div
 									className={`${styles.flex} ${styles.bordernone}
 									${styles.wrapper} ${type === 'merge' ? styles.flexend : styles.flexstart}`}
@@ -65,7 +63,7 @@ function TagMap({
 						</div>
 					))}
 				</>
-			) : <Placeholder width="100%" height="200px" />}
+			)}
 		</div>
 
 	);

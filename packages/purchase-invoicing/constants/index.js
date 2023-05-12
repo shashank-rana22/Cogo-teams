@@ -1,4 +1,4 @@
-export const cargolabels = [
+export const CARGO_LABELS = [
 	'airline',
 	'container_size',
 	'containers_count',
@@ -26,13 +26,13 @@ export const cargolabels = [
 	'truck_types',
 ];
 
-export const isMainService = [
+export const IS_MAIN_SERVICE = [
 	'fcl_freight_service',
 	'lcl_freight_service',
 	'air_freight_service',
 ];
 
-export const purchaseTypeList = [
+export const PURCHASE_TYPE_LIST = [
 	{
 		label : 'Purchase',
 		value : 'purchase_invoice',
@@ -51,7 +51,7 @@ export const purchaseTypeList = [
 	},
 ];
 
-export const invoiceTypeOptions = [
+export const INVOICE_TYPE_OPTIONS = [
 	{ label: 'Invoice', value: 'purchase_invoice' },
 	{ label: 'Credit Note', value: 'credit_note' },
 	{ label: 'Proforma', value: 'proforma_invoice' },
@@ -91,13 +91,15 @@ export const BILL_MAPPINGS = {
 	reimbursement    : 'REIMBURSEMENT',
 };
 
-export const invoiceTypeOptionsCN = [
+export const INVOICE_TYPE_OPTIONS_CN = [
 	{ label: 'Invoice', value: 'purchase_invoice' },
 	{ label: 'Proforma', value: 'proforma_invoice' },
 ];
 
-export const optionsCN = [
+export const OPTIONSCN = [
 	{ label: 'Credit Note', value: 'credit_note' },
 ];
+
+export const VERIFICATION_STATUS = ['pending', 'verified'];
 
 export const EMPTY_POC = [{ name: '', email: '', mobile_number: '', alternate_mobile_number: '' }];

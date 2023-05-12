@@ -3,7 +3,7 @@
 
 	:global {
 		.ui_accordion_content {
-			background-color: #fff;
+			background-color: var(--color-secondary-5);
 		}
 	}
 }
@@ -17,7 +17,7 @@
 	align-items: center;
 	width: 300px;
 	padding: 10px;
-	border: 1px solid #88cad1;
+	border: 1px solid var(--color-tertiary-blue-2);
 	border-radius: 8px;
 
 	:global {
@@ -34,8 +34,8 @@
 .line_block {
 	width: 40px;
 	height: 38px;
-	background-color: #fff;
-	border-bottom: 1px solid #88cad1;
+	background-color: var(--color-secondary-5);
+	border-bottom: 1px solid var(--color-tertiary-blue-2);
 }
 
 .details_wrapper {
@@ -104,8 +104,8 @@
 	justify-content: center;
 	min-height: 200px;
 	margin-top: 16px;
-	color: #88cad1;
-	border: 1px solid #88cad1;
+	color: var(--color-tertiary-blue-2);
+	border: 1px solid var(--color-tertiary-blue-2);
 }
 
 .tag {
@@ -114,9 +114,9 @@
 	right: -26px;
 	z-index: 1;
 	padding: 4px 6px;
-	color: #f68b21;
-	background-color: #fff;
-	border: 1px solid #88cad1;
+	color: var(--color-accent-orange-2);
+	background-color: var(--color-secondary-5);
+	border: 1px solid var(--color-tertiary-blue-2);
 	border-radius: 4px;
 }
 
@@ -124,8 +124,8 @@
 	width: 40px;
 	height: 38px;
 	margin-right: -2px;
-	background-color: #fff;
-	border-bottom: 1px solid #88cad1;
+	background-color: var(--color-secondary-5);
+	border-bottom: 1px solid var(--color-tertiary-blue-2);
 }
 
 .business_name {
@@ -159,7 +159,7 @@
 	max-height: 600px;
 	margin-top: 10px;
 	overflow-y: scroll;
-	border: 1px solid #88cad1;
+	border: 1px solid var(--color-tertiary-blue-2);
 	border-radius: 8px;
 }
 
@@ -170,4 +170,22 @@
 .activetab {
 	padding-left: 4px;
 	text-transform: capitalize;
+}
+
+.commonstyles {
+	position: absolute;
+	top: 38px;
+	width: 40px;
+	height: calc(100% - 40px);
+	background-color: #fff;
+	transform: translateX(-2px);
+}
+
+.columnflex {
+	display: flex;
+	flex-direction: column;
+}
+
+.simpleflex {
+	display: flex;
 }

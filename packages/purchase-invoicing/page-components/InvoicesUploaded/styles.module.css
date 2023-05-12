@@ -16,7 +16,7 @@
 }
 
 .underline {
-	color: #f68b21;
+	color: var(--color-accent-orange-2);
 	text-decoration: underline;
 	cursor: pointer;
 }

@@ -1,5 +1,6 @@
 import { Checkbox } from '@cogoport/components';
-import { format } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import React from 'react';
 
 import getFormattedAmount from '../helpers/formatAmount';
@@ -15,26 +16,29 @@ export function ProformaTagCards({
 	setSelectedProforma,
 	selectedProforma,
 	unCheckedData,
-	isNormalTab,
+	isNormalTab = false,
 }) {
+	const checkboxshow = showCheckBox && item?.isProforma && item?.billId;
+
+	const setProformas = () => {
+		if (!isChecked && activeTab === 'merge' && !isNormalTab) {
+			setSelectedProforma([...selectedProforma, item]);
+		} else if (!isChecked) {
+			setSelectedProforma([item]);
+		} else {
+			setSelectedProforma([...unCheckedData]);
+		}
+	};
 	return (
 		<div className={`
 		${styles.proforma_tagcards_container} ${classname === 'merge' ? styles.merge : ''}`}
 		>
-			{showCheckBox && item?.isProforma && item?.billId && (
+			{checkboxshow ? (
 				<Checkbox
 					checked={isChecked}
-					onChange={() => {
-						if (!isChecked && activeTab === 'merge' && !isNormalTab) {
-							setSelectedProforma([...selectedProforma, item]);
-						} else if (!isChecked) {
-							setSelectedProforma([item]);
-						} else {
-							setSelectedProforma([...unCheckedData]);
-						}
-					}}
+					onChange={setProformas}
 				/>
-			)}
+			) : null}
 			<div
 				className={`${styles.details_wrapper}`}
 			>
@@ -62,7 +66,11 @@ export function ProformaTagCards({
 				<div className={`${styles.updated_at}`}>
 					Uploaded At -
 					{' '}
-					{format(item?.createdAt, 'dd MMM yyyy', {}, true)}
+					{formatDate({
+						date       : item?.createdAt,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						formatType : 'date',
+					})}
 				</div>
 			</div>
 		</div>

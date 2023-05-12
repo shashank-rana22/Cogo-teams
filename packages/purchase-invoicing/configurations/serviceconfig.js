@@ -2,7 +2,7 @@ import getFormattedAmount from '../common/helpers/formatAmount';
 
 export const serviceConfig = (service) => [
 	{
-		label : service,
+		label : service || '',
 		span  : 4.5,
 		key   : 'service',
 	},

@@ -1,6 +1,6 @@
 import { cl } from '@cogoport/components';
 
-import { cargolabels } from '../../../../constants';
+import { CARGO_LABELS } from '../../../../constants';
 
 import { renderValue } from './renderValue';
 import styles from './styles.module.css';
@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 function RenderCargoPills({ detail = {} }) {
 	return (
 		<>
-			{cargolabels.map((label) => {
+			{CARGO_LABELS.map((label) => {
 				const value = renderValue(label, detail);
 				if (detail?.[label] && value) {
 					return (

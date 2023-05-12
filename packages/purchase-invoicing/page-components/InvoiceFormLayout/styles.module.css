@@ -16,7 +16,7 @@
 	padding: 4px 16px;
 	margin-left: 16px;
 	overflow: auto;
-	background-color: #fff;
+	background-color: var(--color-secondary-5);
 }
 
 .errors {
