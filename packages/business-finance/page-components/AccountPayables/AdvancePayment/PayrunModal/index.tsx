@@ -39,6 +39,7 @@ function PayRunModal({ show, setShow, activeEntity }:Props) {
 							const { id:itemId, icon:itemIcon, text:itemText } = item || {};
 							return (
 								<div
+									key={itemId}
 									className={id === itemId ? styles.selected_currency_values
 										: styles.unselected_currency_values}
 									onClick={() => {
@@ -59,7 +60,7 @@ function PayRunModal({ show, setShow, activeEntity }:Props) {
 						{(ENTITY_MAPPING || []).map((item) => {
 							const { label = '', entityCode = '', icon = '' } = item || {};
 							return (
-								<div>
+								<div key={entityCode}>
 									{entityCode === activeEntity
                                 && (
 	<div className={styles.entity_container}>
