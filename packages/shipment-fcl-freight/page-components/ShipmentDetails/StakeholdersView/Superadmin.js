@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
+import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { Tracking } from '@cogoport/ocean-modules';
@@ -6,7 +6,7 @@ import SalesInvoice from '../../../common/SalesInvoice';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
 import CancelDetails from '../../../common/CancelDetails';
 import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
@@ -30,6 +30,12 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
+
+	const handleVersionChange = useCallback(() => {
+		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}`;
+		window.location.replace(newHref);
+		window.sessionStorage.setItem('prev_nav', newHref);
+	}, [router?.query?.partner_id, shipment_data?.id]);
 
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
@@ -96,7 +102,15 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 				<div className={styles.top_header}>
 					<ShipmentInfo />
 
-					<ShipmentChat />
+					<div className={styles.toggle_chat}>
+						<Toggle
+							size="md"
+							onLabel="Old"
+							offLabel="New"
+							onChange={handleVersionChange}
+						/>
+						<ShipmentChat />
+					</div>
 				</div>
 
 				{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
