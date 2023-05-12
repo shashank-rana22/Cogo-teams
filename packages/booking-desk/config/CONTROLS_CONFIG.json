@@ -2,7 +2,8 @@
 	"shipment_types": [
 		{ "label": "FCL", "value": "fcl_freight" },
 		{ "label": "FCL Local", "value": "fcl_freight_local" },
-		{ "label": "LCL", "value": "lcl_freight" }
+		{ "label": "LCL", "value": "lcl_freight" },
+		{ "label": "FCL CFS", "value": "fcl_cfs" }
 	],
 	"trade_types": [
 		{ "label": "Export", "value": "export" },
