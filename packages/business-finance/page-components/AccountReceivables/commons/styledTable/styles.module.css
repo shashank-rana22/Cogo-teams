@@ -9,19 +9,17 @@
 		}
 
 		.ui_table_body_cell {
+			max-width: 50px !important;
 			padding: 21px 10px !important;
 		}
 
 		.ui_table_head_cell {
+			max-width: 50px !important;
 			border-bottom: 1px solid #f68b21;
 		}
 
 		.ui_table_body_row {
 			position: relative;
-		}
-
-		.ui_table_head_cell:first-child {
-			padding: 0 0 0 30px;
 		}
 	}
 }
