@@ -34,26 +34,26 @@
 	margin: 4px 0;
 }
 
-.channel_partner{
+.channel_partner {
 	margin: 4px 0 8px;
 }
 
-.pending_invoice{
+.pending_invoice {
 	display: flex;
 	align-items: center;
 	margin: 4px 0 8px;
-	
-	:global{
-		.ui_checkbox_container{
+
+	:global {
+		.ui_checkbox_container {
 			padding: 0;
 		}
 	}
 }
 
 .filter_heading {
+	margin-bottom: 4px;
 	font-size: var(--font-size-md);
 	font-weight: 600;
-	margin-bottom: 4px;
 }
 
 .inactive {

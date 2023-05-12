@@ -1,6 +1,6 @@
-.stakeholder{
-    margin-top: 2px;
-    font-size: var(--font-size-md);
-    font-weight: 600;
-    color: var(--color-secondary-greyscale-3);
+.stakeholder {
+	margin-top: 2px;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	color: var(--color-secondary-greyscale-3);
 }
