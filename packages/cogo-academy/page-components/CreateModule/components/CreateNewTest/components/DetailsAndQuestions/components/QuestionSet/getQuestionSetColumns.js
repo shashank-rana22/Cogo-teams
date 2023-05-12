@@ -2,7 +2,7 @@ import { Checkbox, Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { startCase, format } from '@cogoport/utils';
 
-import SortComponent from '../../../../../TestsList/components/SortComponent';
+import SortComponent from '../../../../../../commons/SortComponent';
 
 import styles from './styles.module.css';
 
