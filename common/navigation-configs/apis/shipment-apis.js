@@ -1410,6 +1410,21 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'create_saas_surface_shipment_detail',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'get_saas_ftl_tracking_consent',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'get_saas_ftl_tracking_detail',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
 		api          : 'send_whatsapp_booking_note_delayed',
 		access_type  : 'private',
 		service_name : 'shipment',

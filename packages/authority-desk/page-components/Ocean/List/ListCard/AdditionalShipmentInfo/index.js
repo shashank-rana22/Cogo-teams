@@ -15,13 +15,12 @@ function AdditionalShipmentInfo({ item = {}, filters = {}, setFilters = () => {}
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.customer}>
-					Customer :
-					{' '}
+					Customer:&nbsp;
 					{orgDetails?.business_name}
 				</div>
 
 				<div>
-					Total Customer Outstanding of shipment : &nbsp; &nbsp;
+					Total Customer Outstanding of shipment: &nbsp;
 
 					{formatAmount({
 						amount   : item?.invoice_status?.invoice_total?.[orgDetails?.id],
@@ -35,7 +34,7 @@ function AdditionalShipmentInfo({ item = {}, filters = {}, setFilters = () => {}
 
 				</div>
 				<div>
-					Total Outstanding of customer: &nbsp; &nbsp;
+					Total Outstanding of customer:&nbsp;
 					{formatAmount({
 						amount: item?.invoice_status
 							?.outstanding_amount,

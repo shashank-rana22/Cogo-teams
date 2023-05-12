@@ -9,8 +9,15 @@
 		width: 100%;
 	}
 
-	th {
-		font-weight: 700;
+	tr {
+		text-align: center;
+	}
+
+	td {
+		&:nth-child(1) {
+			text-decoration: underline;
+			cursor: pointer;
+		}
 	}
 }
 

@@ -1580,10 +1580,9 @@ const saas = {
 			service_name : 'organization',
 		},
 		{
-			api         : 'list_address_for_insurance',
-			access_type : 'private',
-			module      : 'insurance',
-			feature     : 'insurance',
+			api          : 'list_address_for_insurance',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 		{
 			api         : 'get_saas_faq',
@@ -1831,6 +1830,11 @@ const saas = {
 			feature     : 'dutiesTaxes',
 		},
 		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'get_exchange_rate',
 			access_type  : 'private',
 			module       : 'dutiesTaxes',
@@ -1991,13 +1995,7 @@ const saas = {
 			access_type : 'private',
 		},
 		{
-			api          : 'list_organization_billing_addresses',
-			access_type  : 'private',
-			service_name : 'organization',
-
-		},
-		{
-			api          : 'list_organization_addresses',
+			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
 
@@ -2078,7 +2076,7 @@ const saas = {
 	],
 	app_saas_import_export_doc: [
 		{
-			api          : 'list_organization_billing_addresses',
+			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
 
@@ -2088,11 +2086,6 @@ const saas = {
 			access_type : 'private',
 			module      : 'import-export-documents',
 			feature     : 'import-export-documents',
-		},
-		{
-			api          : 'list_organization_addresses',
-			access_type  : 'private',
-			service_name : 'organization',
 		},
 		{
 			api          : 'create_organization_address',
@@ -2175,6 +2168,12 @@ const saas = {
 			feature     : 'import-export-documents',
 		},
 		{
+			api         : 'get_saas_trade_engine_draft',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
 			api         : 'get_saas_product_category_list',
 			access_type : 'private',
 			module      : 'product-catalogue',
@@ -2216,6 +2215,7 @@ const saas = {
 			module      : 'product-catalogue',
 			feature     : 'product-catalogue',
 		},
+
 	],
 	app_saas_cogostore: [
 		{

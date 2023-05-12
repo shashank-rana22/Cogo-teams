@@ -56,7 +56,7 @@ const useCreateShipmentDocument = ({
 	const { hawbData, getHawb, hawbSuccess, setHawbSuccess } = useGetHawb();
 
 	useEffect(() => {
-		if (hawbSuccess && !edit) {
+		if (hawbSuccess) {
 			const updatedDetails = (hawbDetails || []).map((item:any) => {
 				if (item.id === activeHawb.id) {
 					return {
@@ -96,7 +96,7 @@ const useCreateShipmentDocument = ({
 				setEdit(false);
 			} else {
 				if (!edit) { setHawbDetails([...hawbDetails, { id: uuid(), documentNo: null, isNew: true }]); }
-				getHawb(edit ? res?.data?.id : res?.data?.ids[0]);
+				getHawb(edit || !activeHawb.isNew ? res?.data?.id : res?.data?.ids[0]);
 			}
 		} catch (error) {
 			Toast.error(error?.response?.data?.message || error?.message || 'Failed to save Document');
