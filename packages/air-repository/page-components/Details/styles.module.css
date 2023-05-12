@@ -1,0 +1,60 @@
+.mode_badge {
+	font-weight: 500;
+}
+
+.details_list {
+	:global {
+		.line_division {
+			position: relative;
+			display: block;
+			width: 1px;
+			height: 36px;
+			background: #f8f2e7;
+		}
+	}
+}
+
+.action_buttons {
+	display: flex;
+
+	:global {
+		.ui_button_container {
+			min-width: 28px;
+			padding: 2px;
+		}
+	}
+}
+
+.edit_detail {
+	display: flex;
+	flex-direction: column;
+
+	span {
+		overflow: hidden;
+		font-size: 11px;
+		color: #ed8a1d;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+}
+
+.tooltip_container {
+	:global {
+		.tippy-box {
+			min-width: initial;
+			min-height: initial;
+			padding: 4px;
+			font-size: 12px;
+		}
+	}
+}
+
+.url_button {
+	width: 100%;
+}
+
+.overflow_text {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
