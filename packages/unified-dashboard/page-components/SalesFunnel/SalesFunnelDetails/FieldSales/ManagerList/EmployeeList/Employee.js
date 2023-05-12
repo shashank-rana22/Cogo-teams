@@ -176,7 +176,7 @@ function Employee({ val = {}, currency, filters, employeePad = 20 }) {
 				<>
 					<AfterHeader showGrid={showShipments} />
 					{shipments?.list?.map((shipment) => (
-						<Shipment itemData={shipment} />
+						<Shipment key={uuidv4()} itemData={shipment} />
 					))}
 				</>
 			) : (
