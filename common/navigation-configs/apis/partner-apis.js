@@ -8568,6 +8568,12 @@ const partner = {
 			feature     : 'onAccount',
 		},
 		{
+			api         : 'post_payments_accounts_payment_final_post_sage_info',
+			access_type : 'private',
+			module      : 'onAccount',
+			feature     : 'onAccount',
+		},
+		{
 			api         : 'get_purchase_payable_bank_list',
 			access_type : 'private',
 			module      : 'onAccount',
