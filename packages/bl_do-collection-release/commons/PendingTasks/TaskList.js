@@ -1,5 +1,6 @@
 import { Loader } from '@cogoport/components';
 import { useState } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import EmptyState from '../EmptyState';
 
@@ -46,6 +47,7 @@ function PendingTasks({
 					index={index}
 					handleClick={setSelectedTask}
 					refetch={refetchForTask}
+					key={uuid()}
 				/>
 			))}
 		</div>

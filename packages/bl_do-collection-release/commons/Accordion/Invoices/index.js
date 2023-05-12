@@ -2,6 +2,7 @@ import { cl, Tooltip, Table } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowUp, IcMArrowDown, IcMDocument } from '@cogoport/icons-react';
 import { useState } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import getTableFormatedData from '../../../helpers/getTableFormatedData';
 import ClickableDiv from '../../ClickableDiv';
@@ -99,6 +100,7 @@ export default function Invoices({
 								content={invoiceHover(invoice)}
 								className={styles.tooltip}
 								caret={false}
+								key={uuid()}
 							>
 								<div className={cl`${styles.text} ${styles.invoice_hover}`}>
 									{invoice?.invoice_no}

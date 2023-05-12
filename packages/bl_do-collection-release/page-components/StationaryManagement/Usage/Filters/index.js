@@ -1,5 +1,6 @@
 import { Input, TabPanel, Tabs } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
+import { v4 as uuid } from 'uuid';
 
 import styles from './styles.module.css';
 
@@ -26,6 +27,7 @@ function Filters({ filters = {}, setFilters = () => {} }) {
 					<TabPanel
 						name={tab.name}
 						title={tab.title}
+						key={uuid()}
 					/>
 				))}
 			</Tabs>

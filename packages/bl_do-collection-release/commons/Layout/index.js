@@ -1,5 +1,6 @@
 import { cl } from '@cogoport/components';
 import React from 'react';
+import { v4 as uuid } from 'uuid';
 
 import FieldArray from './ChildFormat';
 import Item from './Item';
@@ -44,13 +45,13 @@ function Layout({
 	return (
 		<div className={styles.layout}>
 			{totalFields.map((rowFields) => (
-				<div className={cl`${styles.row} form_layout_row`}>
+				<div className={cl`${styles.row} form_layout_row`} key={uuid()}>
 					{rowFields.map((field) => {
 						const { type, heading = '' } = field || {};
 
 						if (type === 'fieldArray') {
 							return (
-								<div className={styles.width_100}>
+								<div className={styles.width_100} key={uuid()}>
 									{heading ? (
 										<div className={styles.heading}>
 											{heading}
@@ -74,6 +75,7 @@ function Layout({
 								error={errors?.[field?.name]}
 								formValues={formValues}
 								{...field}
+								key={uuid()}
 							/>
 						);
 					})}

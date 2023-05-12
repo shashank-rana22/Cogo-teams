@@ -1,5 +1,6 @@
 import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
+import { v4 as uuid } from 'uuid';
 
 import getElementController from '../getController';
 import getErrorMessage from '../getErrorMessage';
@@ -88,7 +89,7 @@ function Child({
 				{index + 1}
 			</h3>
 			{totalFields.map((rowFields) => (
-				<div className={styles.row}>
+				<div className={styles.row} key={uuid()}>
 					{rowFields.map((controlItem) => {
 						const newControl = getNewControls(controlItem);
 
@@ -110,7 +111,7 @@ function Child({
 						const flex = ((controlItem?.span || 12) / 12) * 100;
 						if (!Element || !show) return null;
 						return (
-							<div className={styles.element} style={{ width: `${flex}%` }}>
+							<div className={styles.element} style={{ width: `${flex}%` }} key={uuid()}>
 								<h4 className={styles.label}>
 									{controlItem?.label}
 								</h4>

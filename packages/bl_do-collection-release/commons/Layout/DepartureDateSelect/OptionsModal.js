@@ -1,6 +1,7 @@
 import { Modal, Button, Chips } from '@cogoport/components';
 import { isSameDay } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import createOptions from './createOptions';
 import styles from './styles.module.css';
@@ -40,6 +41,7 @@ function ModalContent({
 								role="presentation"
 								className={weekValues.length > 0 ? styles.item_active : styles.item_inactive}
 								onClick={() => setCurrentWeek(i)}
+								key={uuid()}
 							>
 								{`Week ${i + 1}`}
 								{(weekValues.length > 0 && <> &#10003;</>) || ''}

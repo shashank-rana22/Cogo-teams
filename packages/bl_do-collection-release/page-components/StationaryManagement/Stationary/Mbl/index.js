@@ -1,4 +1,5 @@
 import { Placeholder } from '@cogoport/components';
+import { v4 as uuid } from 'uuid';
 
 import styles from './styles.module.css';
 
@@ -18,7 +19,7 @@ function Mbl({ data = {}, loading }) {
 
 			<div className={styles.stats}>
 				{mappings.map((item) => (
-					<div className={styles.stats_sub_container}>
+					<div className={styles.stats_sub_container} key={uuid()}>
 						<div>{item.label}</div>
 						{loading
 							? <Placeholder width={WIDTH} height={HEIGHT} />

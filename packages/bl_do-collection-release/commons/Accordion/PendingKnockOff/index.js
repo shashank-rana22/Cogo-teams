@@ -1,5 +1,6 @@
 import { Table, cl } from '@cogoport/components';
 import { useState } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import getTableFormatedData from '../../../helpers/getTableFormatedData';
 import ClickableDiv from '../../ClickableDiv';
@@ -43,7 +44,7 @@ function PendingKnockOff({
 			<div className={styles.service_tabs}>
 				{
 				Tabs.map((currentTab) => (
-					<ClickableDiv onClick={() => onTabChange(currentTab)}>
+					<ClickableDiv onClick={() => onTabChange(currentTab)} key={uuid}>
 						<div className={cl`${tab === currentTab.value ? styles.active : ''} 
 				${styles.service_tab}`}
 						>

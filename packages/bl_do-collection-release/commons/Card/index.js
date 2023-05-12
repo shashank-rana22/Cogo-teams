@@ -1,6 +1,7 @@
 import { cl, Toast, Button, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
+import { u4 as uuid } from 'uuid';
 
 import getFormattedPayload from '../../helpers/formatPayload';
 import getAccordionAndButton from '../../helpers/getAccordionAndButton';
@@ -171,7 +172,7 @@ export default function Card({
 
 					<div className={styles.stakeholders}>
 						{(stakeholders || []).map((stakeholder) => (
-							<div className={cl`${styles.text} ${styles.thin} ${styles.small}`}>
+							<div className={cl`${styles.text} ${styles.thin} ${styles.small}`} key={uuid()}>
 								{stakeholderMappings[stakeholder?.stakeholder_type]}
 								{' '}
 								<div className={cl`${styles.text} ${styles.bold} ${styles.inline}`}>

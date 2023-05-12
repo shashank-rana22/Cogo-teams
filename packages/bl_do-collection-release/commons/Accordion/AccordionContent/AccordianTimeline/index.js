@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import { v4 as uuid } from 'uuid';
 
 import styles from './styles.module.css';
 
@@ -10,7 +11,7 @@ function AccordianTimeline({ stepCount = '', stepsData = [] }) {
 				step_class = stepCount === idx ? 'current' : step_class;
 
 				return (
-					<div className={styles.current_step}>
+					<div className={styles.current_step} key={uuid()}>
 						<div className={styles.path}>
 							<div className={cl`${styles.circle} ${styles[step_class]}`} />
 							{idx + 1 !== stepsData?.length ? (

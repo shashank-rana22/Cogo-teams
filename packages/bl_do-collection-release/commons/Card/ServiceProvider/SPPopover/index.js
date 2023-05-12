@@ -1,6 +1,7 @@
 import { cl, TabPanel, Tabs } from '@cogoport/components';
 import { IcMCall, IcMEmail } from '@cogoport/icons-react';
 import { useState } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import styles from './styles.module.css';
 
@@ -41,7 +42,7 @@ export default function ServcieProvider({ spDetails = [] }) {
 		<EmptyState />
 	) : (
 		(spDetails || []).map((item) => (
-			<div className={cl`${styles.container} ${styles.popover}`}>
+			<div className={cl`${styles.container} ${styles.popover}`} key={uuid()}>
 				<div className={cl`${styles.text} ${styles.bold}`}>{item?.name}</div>
 			</div>
 		))
@@ -51,7 +52,7 @@ export default function ServcieProvider({ spDetails = [] }) {
 		<EmptyState />
 	) : (
 		(spDetails || []).map((item) => (
-			<div className={cl`${styles.container} ${styles.popover}`}>
+			<div className={cl`${styles.container} ${styles.popover}`} key={uuid()}>
 				<div className={cl`${styles.text} ${styles.bold}`}>
 					{`${item?.mobile_country_code} - ${item?.mobile_number}`}
 				</div>
@@ -66,7 +67,7 @@ export default function ServcieProvider({ spDetails = [] }) {
 		<EmptyState />
 	) : (
 		(spDetails || []).map((item) => (
-			<div className={cl`${styles.container} ${styles.popover}`}>
+			<div className={cl`${styles.container} ${styles.popover}`} key={uuid()}>
 				<div className={cl`${styles.text} ${styles.bold}`}>{item?.email}</div>
 				<div className={styles.link} href={`mailto:${item?.email}`}>
 					<IcMEmail className="styleIcon" />
