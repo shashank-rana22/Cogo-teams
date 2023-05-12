@@ -21,7 +21,7 @@ function useHangUpCall({
 			});
 			checkToOpenFeedBack({ hasAgentPickedCall });
 		} catch (error) {
-			Toast.error(getApiErrorString(error.data || 'something went wrong'));
+			Toast.error(error?.response?.data?.message[0]);
 		}
 	};
 

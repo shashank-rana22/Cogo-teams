@@ -45,7 +45,7 @@ function useUpdateLiveCallStatus({
 				},
 			));
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.data));
+			Toast.error(error?.response?.data?.message[0]);
 		}
 	};
 
