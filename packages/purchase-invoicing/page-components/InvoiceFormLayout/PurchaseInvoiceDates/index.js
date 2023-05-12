@@ -118,6 +118,7 @@ function PurchaseInvoiceDates({
 									control={control}
 									placeholder="Rate"
 									rules={{ required: true }}
+									type="number"
 								/>
 								{errors?.exchange_rate?.[index]?.rate && (
 									<div className={`${styles.errors}`}>

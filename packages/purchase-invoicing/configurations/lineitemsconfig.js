@@ -159,6 +159,7 @@ export const renderLineItemFunctions = {
 				control={control}
 				placeholder="Rate"
 				rules={{ required: true }}
+				type="number"
 			/>
 			{errors?.line_items?.[index]?.rate ? (
 				<div className={styles.errors}>
@@ -190,6 +191,7 @@ export const renderLineItemFunctions = {
 				control={control}
 				placeholder="Quantity"
 				rules={{ required: true }}
+				type="number"
 			/>
 			{errors?.line_items?.[index]?.quantity ? (
 				<div className={styles.errors}>
@@ -211,6 +213,7 @@ export const renderLineItemFunctions = {
 				placeholder="Ex. Rate"
 				disabled
 				rules={{ required: true }}
+				type="number"
 			/>
 			{errors?.line_items?.[index]?.exchange_rate ? (
 				<div className={styles.errors}>

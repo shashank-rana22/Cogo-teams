@@ -184,6 +184,7 @@ function AdditionalDetails({
 									placeholder="Package Count"
 									rules={{ required: true }}
 									value={purchaseInvoiceValues?.package_count}
+									type="number"
 								/>
 								{errors?.package_count && (
 									<div className={`${styles.errors}`}>

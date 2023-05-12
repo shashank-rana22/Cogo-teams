@@ -234,7 +234,6 @@ function CollectionPartyDetails({ collectionParty, refetch, servicesData }) {
 								<FileUploader
 									value={uploadInvoiceUrl}
 									onChange={setUploadInvoiceUrl}
-									showProgress
 									draggable
 									uploadIcon={<IcMUpload height={40} width={40} />}
 								/>
