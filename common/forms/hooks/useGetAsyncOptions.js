@@ -36,7 +36,7 @@ function useGetAsyncOptions({
 	}, [JSON.stringify(optionValues)]);
 
 	useEffect(() => {
-		if (onOptionsChange) {
+		if (typeof onOptionsChange === 'function') {
 			onOptionsChange(listData?.list || []);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
