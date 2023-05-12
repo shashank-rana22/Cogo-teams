@@ -59,7 +59,7 @@ function SageDetailsCard({ InvoiceInfo }) {
 	return (
 		<div className={styles.div_flex}>
 			{getData.map((item) => (
-				<div key ={item.key}>
+				<div key={item.key}>
 					<div className={styles.lable}>{item.key}</div>
 					{item.value.length > 20 ? (
 						<Tooltip
