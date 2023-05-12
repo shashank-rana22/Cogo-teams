@@ -18,7 +18,7 @@ function ShipmentView({ row }) {
 					content={<div className={styles.tool_tip}>{getByKey(row, 'sidNo') as string}</div>}
 				>
 					<text className={styles.sid}>
-						{`${(getByKey(row, 'sidNo') as string).substring(
+						{`${(getByKey(row, 'sidNo') as string)?.substring(
 							0,
 							10,
 						)}...`}
@@ -57,7 +57,7 @@ function ShipmentView({ row }) {
 					)}
 				>
 					<text className={styles.cursor}>
-						{`${startCase(getByKey(row, 'serviceType') as string).substring(
+						{`${startCase(getByKey(row, 'serviceType') as string)?.substring(
 							0,
 							10,
 						)}...`}

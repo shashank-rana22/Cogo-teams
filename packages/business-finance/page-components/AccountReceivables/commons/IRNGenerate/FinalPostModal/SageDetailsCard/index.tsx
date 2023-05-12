@@ -68,7 +68,7 @@ function SageDetailsCard({ InvoiceInfo }) {
 							content={<div className={styles.tool_tip}>{item.value}</div>}
 						>
 							<text className={styles.cursor}>
-								{`${item.value.substring(
+								{`${item?.value?.substring(
 									0,
 									20,
 								)}...`}
