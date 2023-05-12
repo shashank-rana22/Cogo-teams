@@ -5,12 +5,11 @@ import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 import { useContext, useState } from 'react';
 
+import useUpdateShipmentCogoid from '../../../../hooks/useUpdateShipmentCogoid';
 import extraApiPayload from '../utils/extra-api-payload';
 import formatRawValues from '../utils/format-raw-payload';
 import formatForPayload from '../utils/fromat-payload';
 import getRpaMappings from '../utils/get-rpa-mappings';
-
-import useCreateShipmentMapping from './useCreateShipmentMapping';
 
 const shipmentRefetchTasks = [
 	'confirm_booking',
@@ -48,7 +47,7 @@ function useHandleSubmit({
 		method : 'POST',
 	}, { manual: true });
 
-	const { submitShipmentMapping } = useCreateShipmentMapping();
+	const { submitShipmentMapping } = useUpdateShipmentCogoid();
 
 	let dataFromApi = {};
 
