@@ -1,7 +1,8 @@
 {
 	"shipment_types": [
 		{ "label": "FCL", "value": "fcl_freight" },
-		{ "label": "LCL", "value": "lcl_freight" }
+		{ "label": "LCL", "value": "lcl_freight" },
+        { "label": "FCL CFS", "value": "fcl_cfs" }
 	],
 	"fcl_freight": [
         { "label": "Export", "value": "export", "isDateFilterVisible":true },
@@ -13,5 +14,9 @@
         { "label": "Export", "value": "export", "isDateFilterVisible":true  },
         { "label": "Import", "value": "import", "isDateFilterVisible":true },
         { "label": "Customs", "value": "lcl_customs" }
+    ],
+    "fcl_cfs": [
+        { "label": "Export", "value": "export", "isDateFilterVisible":true  },
+        { "label": "Import", "value": "import", "isDateFilterVisible":true }
     ]
 }
