@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import { IcMArrowLeft, IcMAgentManagement } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import { iconMapping } from '../../configurations/group-call-controls';
+import { ICON_MAPPING } from '../../configurations/group-call-controls';
 import CustomCheckBoxGroupController from '../../utils/CustomCheckBoxGroupController';
 import CustomSelectController from '../../utils/CustomSelectController';
 
@@ -19,7 +19,7 @@ function ConferenceForm({
 	handleSubmit,
 	errors = {},
 }) {
-	const ActiveTypeIcon = iconMapping[live_call_action_type] || null;
+	const ActiveTypeIcon = ICON_MAPPING[live_call_action_type] || null;
 	return (
 		!live_call_action_type ? (
 			<div className={styles.actions_div}>

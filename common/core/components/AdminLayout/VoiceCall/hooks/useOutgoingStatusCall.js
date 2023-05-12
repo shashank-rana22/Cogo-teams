@@ -7,7 +7,7 @@ import { CALL_END_STATUS } from '../constant';
 const updateLocalState = (p = {}, attendees = [], call_id = '', live_call_status = '') => {
 	const prevAttendes = p.attendees || [];
 	const lastAttendee = prevAttendes.pop() || {};
-	const updateLastAttendeee = attendees?.find(({ agent_id }) => agent_id === lastAttendee?.id);
+	const updateLastAttendeee = attendees?.find(({ agent_id }) => agent_id === lastAttendee?.agent_id);
 
 	if (updateLastAttendeee) {
 		prevAttendes.push({

@@ -1,6 +1,6 @@
 .actions_div {
 	width: 100%;
-	padding: 30px 0 0;
+	padding: 20px 0 0;
 }
 
 .agent_view {
@@ -20,7 +20,7 @@
 	:global {
 		.ui_select_display_container,
 		.ui_select_options_container {
-			max-width: 175px !important;
+			width: 200px !important;
 		}
 
 		.ui_select_options_container {

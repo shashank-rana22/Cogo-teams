@@ -31,6 +31,7 @@ function VoiceCall({ voice_call_recipient_data = {}, inCall = false }) {
 		callId = '',
 		latestAddedAgentName = '',
 		callRecordId,
+		attendees = [],
 		hasAgentPickedCall = false,
 	} = localCallState || {};
 
@@ -109,6 +110,7 @@ function VoiceCall({ voice_call_recipient_data = {}, inCall = false }) {
 					counter={counter}
 					hangUpCall={hangUpCall}
 					hangUpLoading={hangUpLoading}
+					attendees={attendees}
 				/>
 			)}
 			{showCallModalType === 'feedbackModal' && (

@@ -35,7 +35,6 @@ function ActionsType({
 					</div>
 				);
 			})}
-
 		</div>
 	);
 }

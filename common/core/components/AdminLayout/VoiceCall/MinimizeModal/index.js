@@ -23,7 +23,7 @@ function MinimizeModal({
 
 	const handleEndClick = (e) => {
 		e.stopPropagation();
-		if (!hangUpLoading) {
+		if (!hangUpLoading && !callLoading) {
 			hangUpCall();
 		}
 	};
@@ -44,9 +44,8 @@ function MinimizeModal({
 			>
 				<div className={styles.min_number}>{userName || `${mobile_country_code} ${mobile_number}`}</div>
 				<div className={styles.status_container}>
-					<div className={styles.min_duration}>{startCase(status) || 'Connecting...'}</div>
 					<div className={styles.min_duration}>
-						{secsToDurationConverter(status, counter)}
+						{status ? secsToDurationConverter(status, counter) : 'Connecting...'}
 					</div>
 				</div>
 			</div>
@@ -56,12 +55,12 @@ function MinimizeModal({
 					onClick={(e) => handleEndClick(e)}
 					role="button"
 					tabIndex={0}
+					style={{ cursor: (hangUpLoading || callLoading) ? 'not-allowed' : 'pointer' }}
 				>
 					<img
 						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/end-icon.svg"
 						alt="end-icon"
 						className={styles.end_icon}
-						style={{ cursor: hangUpLoading ? 'not-allowed' : 'pointer' }}
 					/>
 				</div>
 			)}

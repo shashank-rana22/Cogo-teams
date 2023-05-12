@@ -2,11 +2,11 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const updateLocalState = (p = {}, latestAddedAgentName = '', agent_id = '') => ({
+const updateLocalState = (p = {}, latestAddedAgentName = '', payload = {}) => ({
 	...p,
 	attendees: [...(p.attendees || []), {
-		agentName : latestAddedAgentName,
-		id        : agent_id,
+		agentName: latestAddedAgentName,
+		...payload,
 	}],
 });
 
@@ -23,21 +23,19 @@ function useUpdateLiveCallStatus({
 
 	const updateLiveCallStatus = async (payload = {}, callbackFunc = () => {}) => {
 		try {
-			const { live_call_action_type = [], agent_id = '' } = payload || {};
 			await trigger({
 				data: {
-					call_id               : callId,
-					agent_id,
-					live_call_action_type : live_call_action_type?.[0],
+					call_id: callId,
+					...payload,
 				},
 			});
-			if (live_call_action_type?.[0] === 'transfer') {
+			if (payload?.live_call_action_type === 'transfer') {
 				Toast.success('call transferred sucessfully');
 				checkToOpenFeedBack({ hasAgentPickedCall: false });
 				return;
 			}
 			callbackFunc();
-			setLocalCallState((p) => updateLocalState(p, latestAddedAgentName, agent_id));
+			setLocalCallState((p) => updateLocalState(p, latestAddedAgentName, payload));
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.data));
 		}

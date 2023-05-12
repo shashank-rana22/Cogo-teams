@@ -15,7 +15,7 @@
 	align-items: center;
 	justify-content: space-between;
 	height: 100%;
-	padding: 16px;
+	padding: 10px 16px;
 }
 
 .minus_div {
@@ -33,21 +33,21 @@
 	align-items: center;
 	justify-content: center;
 	padding: 8px;
+	margin-bottom: 3px;
 	background: radial-gradient(43.3% 44.93% at 92.78% 92.42%, #f2f3fa 0%, #ced1ed 50.52%, #f2f3fa 100%);
 	border: 0.5px solid #abb0de;
 	border-radius: 10px;
 }
 
 .user_name {
-	margin-top: 8px;
-	font-size: 18px;
+	font-size: 14px;
 	font-weight: 600;
 	color: #000;
 }
 
 .number {
-	margin-top: 4px;
-	font-size: 14px;
+	margin-top: 3px;
+	font-size: 12px;
 
 	>span {
 		margin-left: 5px;
@@ -55,7 +55,8 @@
 }
 
 .timer {
-	margin-top: 8px;
+	margin-top: 3px;
+	font-size: 12px;
 	color: #000;
 }
 
@@ -64,6 +65,15 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	width: 100%;
+	transition: width 0.3s ease;
+}
+
+.header_on_conference {
+	flex-direction: row;
+	justify-content: flex-start;
+	width: 90%;
+	height: 14%;
 }
 
 .footer {
@@ -73,9 +83,10 @@
 	justify-content: space-between;
 	width: 100%;
 	height: var(--height);
+	overflow: hidden;
 	background: radial-gradient(50% 67.94% at 50% 50%, rgb(242 243 250 / 50%) 8.17%, rgb(206 209 237 / 50%) 100%);
 	border-radius: 10px;
-	transition: height 0.3s ease;
+	transition: height 0.5s ease;
 }
 
 .end_call {
@@ -93,56 +104,18 @@
 	color: #000;
 }
 
-/* ss */
-
-.status_div {
+.user_details {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
-	margin-top: 8px;
-	font-size: 14px;
+	justify-content: center;
+}
+
+.user_details_on_conference {
+	align-items: flex-start;
+	margin-left: 10px;
 }
 
 .disable {
-	cursor: "not-allowed";
-}
-
-.conference_call {
-	position: absolute;
-	top: 40%;
-	right: 0;
-	width: 30px;
-	height: 30px;
-	padding: 5px;
-	cursor: pointer;
-	border: 1px solid #4f4f4f;
-	border-radius: 4px;
-	fill: #4f4f4f;
-}
-
-.error_text {
-	min-height: 17px;
-	font-size: 11px;
-	font-weight: 600;
-	color: #d22b2b;
-}
-
-.conference_call_setting {
-	padding: 0 20px;
-}
-
-.label_text {
-	padding-bottom: 5px;
-	font-size: 12px;
-	font-weight: 600px;
-	color: #333;
-}
-
-.agent_selecter {
-	padding-bottom: 10px;
-}
-
-.button_div {
-	display: flex;
-	justify-content: flex-end;
-	width: 100%;
+	cursor: not-allowed;
 }
