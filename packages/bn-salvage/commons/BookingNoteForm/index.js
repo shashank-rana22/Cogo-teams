@@ -16,7 +16,7 @@ export default function BookingNoteForm({
 	controlsMapping = {},
 	onFormSubmit = () => {},
 	loading,
-	modalHeader = 'Upload Booking Note',
+	modalHeader = 'Booking Note Form',
 }) {
 	const [currentStep, setCurrentStep] = useState('step1');
 

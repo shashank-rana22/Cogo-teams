@@ -21,7 +21,7 @@ export default function Filters({ children }) {
 		if (oldValue || newValue) {
 			setFilters({
 				...restFilters,
-				...(newValue && { name: newValue }),
+				...(newValue && { [name]: newValue }),
 				page: 1,
 			});
 		}
