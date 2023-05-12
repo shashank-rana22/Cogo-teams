@@ -9,8 +9,12 @@ import styles from './styles.module.css';
 interface ItemProps {
 	advanceDocumentId?:string,
 }
+
+interface Target {
+	checked: boolean;
+}
 interface EventDataType {
-	target: any;
+	target: Target;
 }
 
 interface NewDataListProps {
