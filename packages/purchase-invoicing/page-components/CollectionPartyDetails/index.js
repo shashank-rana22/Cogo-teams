@@ -211,7 +211,7 @@ function CollectionPartyDetails({ collectionParty, refetch, servicesData }) {
 					{disableInvoice ? (
 						<div className="upload-tooltip">{errorMsg}</div>
 					) : null}
-					<Button size="md" themeType="secondary">Add Incidental Charges</Button>
+					{/* <Button size="md" themeType="secondary">Add Incidental Charges</Button> */}
 				</div>
 				<ServiceTables service_charges={collectionParty?.service_charges} />
 				<div className={styles.totalamount}>

@@ -62,17 +62,17 @@ const useAddCollectionParty = ({
 						document_type : 'bank_account_details',
 						image_url     : data?.bank_details?.[0]?.cancelled_cheque?.finalUrl,
 						data          : {
-							bank_account_number : data?.bank_details?.bank_account_number,
-							bank_name           : data?.bank_details?.bank_name,
-							branch_name         : data?.bank_details?.branch_name,
-							ifsc_number         : data?.bank_details?.ifsc_number,
+							bank_account_number : data?.bank_account_number,
+							bank_name           : data?.bank_name,
+							branch_name         : data?.branch_name,
+							ifsc_number         : data?.ifsc_number,
 						},
 						source,
 					},
 					{
 						name          : 'Business Address Proof',
 						document_type : 'business_address_proof',
-						image_url     : data?.bank_details?.cancelled_cheque?.finalUrl,
+						image_url     : data?.cancelled_cheque?.finalUrl,
 						data          : {},
 					},
 					{
