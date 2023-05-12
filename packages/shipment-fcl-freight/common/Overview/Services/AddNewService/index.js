@@ -63,7 +63,7 @@ function AddNewService({
 				main,
 			});
 		}
-	}, [showAddServiceBox, upsellableService.trade_type]);
+	}, [showAddServiceBox, upsellableService.trade_type, showTradeHeading, setShowTradeHeading]);
 
 	return (
 		<>

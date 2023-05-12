@@ -25,24 +25,23 @@ function Services() {
 	const serviceCategories = Object.keys(serviceObj);
 	const { cancelUpsellDestinationFor, cancelUpsellOriginFor } = upsellTransportation(serviceObj);
 
-
 	const [showTradeHeading, setShowTradeHeading] = useState({
 		origin      : !isEmpty(serviceObj.originServices),
 		destination : !isEmpty(serviceObj.destinationServices),
 		main        : !isEmpty(serviceObj.mainServices),
-	}); 
+	});
 
-	const isKam = ['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder);  
-	
+	const isKam = ['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder);
+
 	const heading = (serviceCategory) => (
-<div className={styles.header}>{ startCase(serviceCategory)}</div>
-	)
+		<div className={styles.header}>{ startCase(serviceCategory)}</div>
+	);
 
 	return !servicesLoading && !isGettingShipment
 		? (
 			<div className={styles.container}>
 				<div className={styles.services_container}>
-					{serviceCategories.map((serviceCategory) => ( 
+					{serviceCategories.map((serviceCategory) => (
 						<>
 
 							{ !isKam
