@@ -1,0 +1,87 @@
+.modal_body {
+	display: flex;
+	justify-content: space-between;
+	height: 500px;
+	padding: 30px;
+}
+
+.reminder_stats {
+	height: 100%;
+}
+
+.reminder_heading {
+	margin-bottom: 20px;
+	font-size: 22px;
+	font-weight: 600;
+}
+
+.reminder_summary {
+	margin: 40px 0;
+}
+
+.summary_title {
+	font-size: 18px;
+	font-weight: 600;
+	text-align: center;
+}
+
+.summary_container {
+	display: flex;
+	margin: 10px 0;
+}
+
+.summary {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 60px;
+	height: 60px;
+	padding: 60px;
+	margin: 10px 0;
+	margin: 0 20px;
+	text-align: center;
+	border-radius: 50%;
+	box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
+}
+
+.reminder_tips {
+	margin-bottom: 20px;
+}
+
+.tips_heading {
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.reminder_ul {
+	padding: 0 20px;
+}
+
+.tip {
+	padding: 5px 0;
+}
+
+.reminder_target {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.reminder_circle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50px;
+	height: 50px;
+	padding: 70px;
+	margin: 40px;
+	font-size: 35px;
+	font-weight: 600;
+	color: #ee3424;
+	border-radius: 50%;
+	box-shadow: rgb(50 50 93 / 25%) 0 30px 60px -12px inset, rgb(0 0 0 / 30%) 0 18px 36px -18px inset;
+}
+
+.reminder_btn {
+	margin-top: 70px;
+}

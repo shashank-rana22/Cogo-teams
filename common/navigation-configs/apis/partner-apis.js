@@ -11282,6 +11282,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'list_checkouts',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
+		{
 			api          : 'get_user',
 			access_type  : 'private',
 			service_name : 'user',
