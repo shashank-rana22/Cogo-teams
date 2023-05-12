@@ -46,7 +46,6 @@ function PageView({
 		}
 		return null;
 	};
-	console.log(data, 'data');
 	return (
 		<div className={styles.container} id="milestones_main_container">
 			<Filter hookSetters={hookSetters} filters={filters} id="milestones_filters" />
