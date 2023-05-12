@@ -1,6 +1,7 @@
 import allocations from './config/allocations';
 import athenaDashboard from './config/athena-dashboard';
 import authorityDesk from './config/authority-desk';
+import blDoCollectionRelease from './config/bl_do-collection-release';
 import bookingDesk from './config/booking-desk';
 import businessFinance from './config/business-finance';
 import cogoAcademy from './config/cogo-academy';
@@ -19,6 +20,7 @@ import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import performanceManagement from './config/performance-management';
 import rolesAndPermissions from './config/roles-n-permission';
+import saasTools from './config/saas-tools';
 import shipmentFclFreight from './config/shipment-fcl-freight';
 import supplyDashboard from './config/supply-dashboards';
 import vendorRM from './config/vendor-rm';
@@ -51,6 +53,8 @@ const routeConfig = {
 	...athenaDashboard,
 	...documentDesk,
 	...ingestion,
+	...blDoCollectionRelease,
+	...saasTools,
 };
 
 export default routeConfig;
