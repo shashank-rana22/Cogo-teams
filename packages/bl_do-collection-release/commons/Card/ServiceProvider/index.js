@@ -6,6 +6,7 @@ import SPPopver from './SPPopover';
 import styles from './styles.module.css';
 
 export default function ServiceProvider({ item = {}, stateProps = {} }) {
+	const isFclLocal = stateProps.shipment_type === 'fcl_local';
 	const docs = stateProps.activeTab === 'bl' ? item.bill_of_ladings : item.delivery_orders;
 	const docsLength = docs?.length || 0;
 	const remainLength = docsLength > 1 ? docsLength - 1 : 0;
@@ -26,12 +27,14 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 							content={(
 								<div>
 									{' '}
-									{item?.freight_service?.service_provider?.business_name}
+									{isFclLocal ? item.local_service?.service_provider?.business_name
+										: item.freight_service?.service_provider?.business_name}
 								</div>
 							)}
 						>
 							<div className={styles.details}>
-								{item?.freight_service?.service_provider?.business_name}
+								{isFclLocal ? item.local_service?.service_provider?.business_name
+									: item.freight_service?.service_provider?.business_name}
 							</div>
 						</Tooltip>
 
@@ -62,7 +65,7 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 						Customer
 					</div>
 					<div className={styles.details}>
-						{item?.customer?.business_name}
+						{item.customer?.business_name}
 					</div>
 				</div>
 				<div className={styles.lower_right}>

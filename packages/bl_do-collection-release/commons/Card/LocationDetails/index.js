@@ -5,7 +5,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import styles from './styles.module.css';
 
 export default function LocaionDetails({ item = {}, stateProps = {} }) {
-	const isFclLocal = stateProps.shipment_type === 'fcl_freight_local';
+	const isFclLocal = stateProps.shipment_type === 'fcl_local';
 
 	return (
 		<div className={styles.container}>
@@ -15,11 +15,13 @@ export default function LocaionDetails({ item = {}, stateProps = {} }) {
 					<Tooltip
 						interactive
 						content={
-							isFclLocal ? item.port?.display_name : item.freight_service?.origin_port?.display_name
+							isFclLocal ? item.local_service?.port?.display_name
+								: item.freight_service?.origin_port?.display_name
 						}
 					>
 						<div className={cl`${styles.port_code} ${styles.primary} ${styles.sm}`}>
-							{isFclLocal ? item?.port?.port_code : item.freight_service?.origin_port?.port_code}
+							{isFclLocal ? item.local_service?.port?.port_code
+								: item.freight_service?.origin_port?.port_code}
 						</div>
 					</Tooltip>
 				</div>
