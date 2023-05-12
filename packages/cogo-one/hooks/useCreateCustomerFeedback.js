@@ -4,8 +4,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useCreateCustomerFeedback = ({ setShowFeedback = () => {} }) => {
-	const { profile, general } = useSelector((state) => state);
-	const { spot_search_ids } = general?.query || {};
+	const { profile } = useSelector((state) => state);
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_customer_feedback',
 		method : 'post',
@@ -18,8 +17,6 @@ const useCreateCustomerFeedback = ({ setShowFeedback = () => {} }) => {
 					agent_id         : profile?.user?.id,
 					rating           : starRating,
 					feedback_message : feedbackMessage,
-					spot_search_ids,
-
 				},
 			});
 			setShowFeedback(false);
