@@ -1,6 +1,9 @@
+import { useContext } from 'react';
+
 import BookingNoteForm from '../../commons/BookingNoteForm';
 import STEP1CONTROLS from '../../config/uploadBNStep1Controls.json';
 import STEP2CONTROLS from '../../config/uploadBNStep2Controls.json';
+import { BNSalvageContext } from '../../context/BNSalvageContext';
 import useCreateBookingNote from '../../hooks/useCreateBookingNote';
 
 const controlsMapping = {
@@ -8,8 +11,8 @@ const controlsMapping = {
 	step2 : STEP2CONTROLS,
 };
 
-export default function UploadBN({ setShow, refetchList }) {
-	const closeModal = () => setShow(false);
+export default function UploadBN() {
+	const { closeModal, refetchList } = useContext(BNSalvageContext);
 
 	const { loading, createBookingNote } = useCreateBookingNote({
 		closeModal,

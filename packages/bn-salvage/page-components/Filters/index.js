@@ -1,10 +1,13 @@
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
+import { useContext } from 'react';
 
 import FILTERS from '../../config/filters.json';
+import { BNSalvageContext } from '../../context/BNSalvageContext';
 
 import styles from './styles.module.css';
 
-export default function Filters({ filters, setFilters, children }) {
+export default function Filters({ children }) {
+	const { filters, setFilters } = useContext(BNSalvageContext);
 	const handleFilterChange = (name, val) => {
 		setFilters((prev) => ({
 			...prev,

@@ -1,6 +1,9 @@
+import { useContext } from 'react';
+
 import BookingNoteForm from '../../../../commons/BookingNoteForm';
 import EXTENDEXPIRYCONTROLS from '../../../../config/extendExpiryControls.json';
 import STEP2CONTROLS from '../../../../config/uploadBNStep2Controls.json';
+import { BNSalvageContext } from '../../../../context/BNSalvageContext';
 import getCreateBookingDocumentPayload from '../../../../helpers/getCreateBookingDocumentPayload';
 import getDefaultValues from '../../../../helpers/getDefaultValuesForExtendBN';
 import useUpdateBookingNote from '../../../../hooks/useUpdateBookingNote';
@@ -10,7 +13,8 @@ const controlsMapping = {
 	step2 : STEP2CONTROLS,
 };
 
-export default function ExtendExpiryModal({ closeModal, item, successRefetch }) {
+export default function ExtendExpiryModal({ item, successRefetch }) {
+	const { closeModal } = useContext(BNSalvageContext);
 	const defaultValues = getDefaultValues({ controlsMapping, item });
 
 	const { loading, updateBookingNote } = useUpdateBookingNote({ refetch: successRefetch });

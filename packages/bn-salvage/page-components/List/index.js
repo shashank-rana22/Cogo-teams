@@ -1,14 +1,16 @@
 import { Pagination, Loader } from '@cogoport/components';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import EmptyState from '../../commons/EmptyState';
+import { BNSalvageContext } from '../../context/BNSalvageContext';
 import Card from '../Card';
 
 import ListHeader from './ListHeader';
 import styles from './styles.module.css';
 
-export default function List({ filters, setFilters, data, loading, refetchList }) {
-	const { list, total_count } = data || {};
+export default function List() {
+	const { filters, setFilters, listData, listLoading } = useContext(BNSalvageContext);
+	const { list, total_count } = listData || {};
 
 	const [openItem, setOpenItem] = useState(null);
 
@@ -23,7 +25,7 @@ export default function List({ filters, setFilters, data, loading, refetchList }
 		/>
 	);
 
-	if (loading) {
+	if (listLoading) {
 		return (
 			<div className={styles.loader_container}>
 				<Loader />
@@ -32,7 +34,7 @@ export default function List({ filters, setFilters, data, loading, refetchList }
 		);
 	}
 
-	if (!loading && list.length === 0) {
+	if (!listLoading && list.length === 0) {
 		return <EmptyState />;
 	}
 
@@ -50,7 +52,6 @@ export default function List({ filters, setFilters, data, loading, refetchList }
 							item={item}
 							openItem={openItem}
 							setOpenItem={setOpenItem}
-							refetchList={refetchList}
 						/>
 					))}
 				</tbody>

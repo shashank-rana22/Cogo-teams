@@ -1,10 +1,14 @@
 import { Tabs as TabContainer, TabPanel } from '@cogoport/components';
+import { useContext } from 'react';
 
 import TABS from '../../config/tabs.json';
+import { BNSalvageContext } from '../../context/BNSalvageContext';
 
 import styles from './style.module.css';
 
-export default function Tabs({ activeTab, setActiveTab, setFilters, stats }) {
+export default function Tabs() {
+	const { activeTab, setActiveTab, setFilters, listData: { stats } } = useContext(BNSalvageContext);
+
 	const onTabChange = (newTab) => {
 		if (newTab !== activeTab) {
 			setActiveTab(newTab);

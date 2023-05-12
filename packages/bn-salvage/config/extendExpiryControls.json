@@ -4,6 +4,7 @@
 		"label": "Reason For Extending Expiry",
 		"type": "text",
 		"placeholder": "Put Reason Here",
+		"className": "remarks",
 		"rules": {
 			"required": "Reason is required"
 		}
@@ -14,6 +15,7 @@
 		"type": "file",
 		"draggable"     : true,
 		"loading"       : true,
+		"className": "upload_file",
 		"dropareaProps" : { 
 			"heading": "Upload your file here",
 			"subHeading": "supports - jpeg, jpg, svg, png, pdf, docx" 

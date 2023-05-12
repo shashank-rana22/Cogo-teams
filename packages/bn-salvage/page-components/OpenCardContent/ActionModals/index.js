@@ -1,6 +1,8 @@
 import { Button, Modal } from '@cogoport/components';
+import { useContext } from 'react';
 
 import FilePreview from '../../../commons/FilePreview';
+import { BNSalvageContext } from '../../../context/BNSalvageContext';
 import useUpdateBookingNote from '../../../hooks/useUpdateBookingNote';
 
 import ExtendExpiryModal from './ExtendExpiryModal';
@@ -11,8 +13,8 @@ const modalHeader = {
 	move_to_expired : 'Move To Expired',
 };
 
-export default function ActionModals({ modalKey, setShow, item, refetchList }) {
-	const closeModal = () => setShow(null);
+export default function ActionModals({ modalKey, item }) {
+	const { refetchList, closeModal } = useContext(BNSalvageContext);
 
 	const successRefetch = () => {
 		refetchList(); closeModal();
@@ -47,7 +49,7 @@ export default function ActionModals({ modalKey, setShow, item, refetchList }) {
 	};
 
 	return (modalKey === 'extend_expiry'
-		? <ExtendExpiryModal closeModal={closeModal} item={item} successRefetch={successRefetch} />
+		? <ExtendExpiryModal item={item} successRefetch={successRefetch} />
 		: (
 			<Modal
 				show

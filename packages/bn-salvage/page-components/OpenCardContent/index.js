@@ -1,5 +1,7 @@
 import { Button } from '@cogoport/components';
-import { useState } from 'react';
+import { useContext } from 'react';
+
+import { BNSalvageContext } from '../../context/BNSalvageContext';
 
 import ActionModals from './ActionModals';
 import ShipmentInfo from './ShipmentInfo';
@@ -12,8 +14,8 @@ const actionButtons = [
 	{ label: 'Move To Expired', modalKey: 'move_to_expired' },
 ];
 
-export default function OpenCardContent({ item, refetchList }) {
-	const [showModal, setShowModal] = useState();
+export default function OpenCardContent({ item }) {
+	const { showModal, setShowModal } = useContext(BNSalvageContext);
 
 	return (
 		<div className={styles.open_card_container}>
@@ -37,8 +39,8 @@ export default function OpenCardContent({ item, refetchList }) {
 				))}
 			</div>
 
-			{showModal ? (
-				<ActionModals modalKey={showModal} setShow={setShowModal} item={item} refetchList={refetchList} />
+			{showModal && actionButtons.some((btn) => btn.modalKey === showModal) ? (
+				<ActionModals modalKey={showModal} item={item} />
 			) : null}
 		</div>
 	);

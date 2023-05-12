@@ -1,8 +1,9 @@
 import { Button } from '@cogoport/components';
 import { IcMUpload } from '@cogoport/icons-react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 import tabs from '../config/tabs.json';
+import { BNSalvageContext } from '../context/BNSalvageContext';
 import useListBookingDocuments from '../hooks/useListBookingDocuments';
 
 import Filters from './Filters';
@@ -13,6 +14,9 @@ import UploadBN from './UploadBN';
 export default function BNSalvage() {
 	const [activeTab, setActiveTab] = useState(tabs[0].name);
 	const [filters, setFilters] = useState({ page: 1 });
+	const [showModal, setShowModal] = useState(false);
+
+	const closeModal = () => setShowModal(false);
 
 	const {
 		data,
@@ -20,24 +24,30 @@ export default function BNSalvage() {
 		refetchList,
 	} = useListBookingDocuments({ filters, activeTab });
 
-	const [showModal, setShowModal] = useState(false);
+	const contextValue = useMemo(() => ({
+		activeTab,
+		setActiveTab,
+		filters,
+		setFilters,
+		showModal,
+		setShowModal,
+		closeModal,
+		refetchList,
+		listLoading : loading,
+		listData    : data,
+	}), [activeTab, data, filters, loading, refetchList, showModal]);
 
 	return (
-		<div>
+		<BNSalvageContext.Provider value={contextValue}>
 			<h1>Booking Note Salvage</h1>
 
-			<Tabs
-				activeTab={activeTab}
-				setActiveTab={setActiveTab}
-				setFilters={setFilters}
-				stats={data.stats}
-			/>
+			<Tabs />
 
-			<Filters filters={filters} setFilters={setFilters}>
+			<Filters>
 				<Button
 					key="upload_bn_btn"
 					themeType="primary"
-					onClick={() => setShowModal(true)}
+					onClick={() => setShowModal('upload_bn')}
 				>
 					<IcMUpload />
 					&nbsp;
@@ -45,15 +55,9 @@ export default function BNSalvage() {
 				</Button>
 			</Filters>
 
-			<List
-				filters={filters}
-				setFilters={setFilters}
-				data={data}
-				loading={loading}
-				refetchList={refetchList}
-			/>
+			<List />
 
-			{showModal ? <UploadBN setShow={setShowModal} refetchList={refetchList} /> : null}
-		</div>
+			{showModal === 'upload_bn' ? <UploadBN /> : null}
+		</BNSalvageContext.Provider>
 	);
 }

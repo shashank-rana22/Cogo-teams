@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 const dateFormatter = (date) => (new Date(date).toDateString()).split(' ');
 
-export default function Card({ item, openItem, setOpenItem, refetchList }) {
+export default function Card({ item, openItem, setOpenItem }) {
 	const {
 		id,
 		origin_location,
@@ -70,7 +70,7 @@ export default function Card({ item, openItem, setOpenItem, refetchList }) {
 			<tr className={cl`${styles.view_more_row} ${isItemOpen ? styles.item_open : ''}`}>
 				<td colSpan={10}>
 					{isItemOpen ? (
-						<OpenCardContent item={item} refetchList={refetchList} />
+						<OpenCardContent item={item} />
 					) : null}
 
 					<div
