@@ -57,7 +57,7 @@ function PageView({
 					{getRender()}
 					{(data || []).map((item) => (
 						<List
-							key={item.id}
+							key={item?.id}
 							id="milestones_list_body"
 							loading={loading}
 							onClick={onClickCard}
