@@ -1,5 +1,6 @@
-import { useForm } from '@cogoport/forms';
+import { useRef, useEffect, useState } from 'react';
 
+import getProps from './COMPONENT_PROPS_MAPPING';
 import CourseCompletion from './components/CourseCompletion';
 import CourseOverview from './components/CourseOverview';
 import Curriculum from './components/Curriculum';
@@ -18,26 +19,35 @@ const COMPONENT_MAPPING = {
 	publish_course    : PublishCourse,
 };
 
-function RightComponent({ activeTab, setActiveTab }) {
-	const {
-		control,
-		watch,
-		formState: { errors = {} },
-		handleSubmit,
-		reset,
-	} = useForm();
-
+function RightComponent({ data = {}, activeTab, setActiveTab, id }) {
 	const ActiveComponent = COMPONENT_MAPPING[activeTab] || Curriculum;
+
+	const childRef = useRef({});
+
+	const [currRef, setCurrRef] = useState(childRef?.current[activeTab]);
+
+	// const obj = () => childRef?.current[activeTab]?.handleSubmit;
+
+	// console.log('obj', obj);
+
+	useEffect(() => {
+		setCurrRef(childRef?.current[activeTab]);
+	}, [activeTab, childRef]);
 
 	return (
 		<div className={styles.conatiner}>
-			<Header activeTab={activeTab} reset={reset} handleSubmit={handleSubmit} setActiveTab={setActiveTab} />
+			<Header
+				activeTab={activeTab}
+				handleSubmit={currRef?.handleSubmit}
+				setActiveTab={setActiveTab}
+				id={id}
+			/>
 
 			<ActiveComponent
-				errors={errors}
-				control={control}
-				handleSubmit={handleSubmit}
-				watch={watch}
+				data={getProps(data)[activeTab]}
+				ref={(r) => {
+					childRef.current[activeTab] = r;
+				}}
 			/>
 		</div>
 	);

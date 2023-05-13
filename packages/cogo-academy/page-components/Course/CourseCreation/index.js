@@ -5,8 +5,8 @@ import { useState } from 'react';
 import TABS_MAPPING from '../configs/TABS_MAPPING';
 
 import AdvanceCourseCreation from './components/AdvanceCourseCreation';
+import CourseCategories from './components/CourseCategories';
 import CourseName from './components/CourseName';
-import CourseTopics from './components/CourseTopics';
 import Header from './Header';
 import styles from './styles.module.css';
 
@@ -17,8 +17,8 @@ function CourseCreation() {
 
 	const [activeStepper, setActiveStepper] = useState('course_name');
 	const [courseData, setCourseData] = useState({
-		course_name   : '',
-		course_topics : [],
+		course_name       : '',
+		course_categories : [],
 	});
 
 	const COMPONENT_MAPPING = {
@@ -31,7 +31,7 @@ function CourseCreation() {
 			},
 		},
 		course_topics: {
-			component : CourseTopics,
+			component : CourseCategories,
 			props     : {
 				setActiveStepper,
 				courseData,
@@ -40,7 +40,7 @@ function CourseCreation() {
 		},
 	};
 
-	const { component: ActiveComponent, props: activeComponentProps } =		COMPONENT_MAPPING[activeStepper];
+	const { component: ActiveComponent, props: activeComponentProps } = COMPONENT_MAPPING[activeStepper];
 
 	return (
 		<div>

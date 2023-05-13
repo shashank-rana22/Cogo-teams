@@ -23,18 +23,20 @@ const controls = [
 	},
 	{
 		label      : 'What will the students learn from the course?',
-		name       : 'students_learn_field_array',
+		name       : 'course_objectives',
 		type       : 'fieldArray',
 		buttonText : 'Add More',
 		value      : {
-			students_learn: '',
+			objective: '',
 		},
-		controls: [
+		rules    : { required: { value: true, message: 'This is required' } },
+		controls : [
 			{
 				label       : '',
-				name        : 'students_learn',
+				name        : 'objective',
 				placeholder : 'Example: Will learn about the benefits of using xyz and how to apply it in xyz',
 				type        : 'text',
+				rules       : { required: { value: true, message: 'This is required' } },
 			},
 		],
 	},

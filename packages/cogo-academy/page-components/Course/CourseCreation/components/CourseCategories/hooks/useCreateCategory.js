@@ -2,10 +2,10 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const useCreateTopic = ({ setShow }) => {
+const useCreateCategory = ({ setShow }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_course_category',
-		method : 'POST',
+		method : 'post',
 	}, { manual: true });
 
 	const createCategory = async ({ values }) => {
@@ -24,4 +24,4 @@ const useCreateTopic = ({ setShow }) => {
 	};
 };
 
-export default useCreateTopic;
+export default useCreateCategory;

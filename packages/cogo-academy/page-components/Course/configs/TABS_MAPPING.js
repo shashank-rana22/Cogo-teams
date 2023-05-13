@@ -4,8 +4,8 @@ const TABS_MAPPING = [
 		key   : 'course_name',
 	},
 	{
-		title : 'Course Topics',
-		key   : 'course_topics',
+		title : 'Course Categories',
+		key   : 'course_categories',
 	},
 ];
 

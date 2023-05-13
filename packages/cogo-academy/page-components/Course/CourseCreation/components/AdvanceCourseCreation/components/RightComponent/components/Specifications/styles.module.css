@@ -3,13 +3,14 @@
 
 	:global {
 		.ui_multiselect_container {
-			width: 50%;
+			width: 60%;
 		}
 	}
 }
 
 .input_group {
 	margin-top: 6px;
+	width: 100%;
 }
 
 .form_group {
@@ -28,7 +29,9 @@
 
 .label_container {
 	display: flex;
-	justify-content: end;
+	justify-content: space-between;
+	width: 60%;
+	align-items: center;
 	margin-bottom: 6px;
 }
 

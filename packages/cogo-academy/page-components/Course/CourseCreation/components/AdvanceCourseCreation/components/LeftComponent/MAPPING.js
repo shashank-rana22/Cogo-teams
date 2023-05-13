@@ -24,13 +24,13 @@ const MAPPING = [
 		],
 	},
 	{
-		key      : 'publish_course',
-		title    : 'Publish Course',
+		key      : 'intended_learners',
+		title    : 'Intended Learners',
 		children : [],
 	},
 	{
-		key      : 'intended_learners',
-		title    : 'Intended Learners',
+		key      : 'publish_course',
+		title    : 'Publish Course',
 		children : [],
 	},
 ];

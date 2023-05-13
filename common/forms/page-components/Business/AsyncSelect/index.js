@@ -24,7 +24,7 @@ import {
 	asyncAccountEngagementScoringEvents,
 	asyncListFAQTopics,
 	asyncListFAQTags,
-	asyncListCourseCategory,
+	asyncListCourseCategories,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -67,7 +67,7 @@ const keyAsyncFieldsParamsMapping = {
 	engagement_scoring_events     : asyncAccountEngagementScoringEvents,
 	faq_topics                    : asyncListFAQTopics,
 	faq_tags                      : asyncListFAQTags,
-	list_course_category          : asyncListCourseCategory,
+	list_course_categories        : asyncListCourseCategories,
 };
 
 function AsyncSelect(props) {

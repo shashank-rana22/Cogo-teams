@@ -15,7 +15,7 @@ const useCreateTopicOrTag = ({ setShow, from = '' }) => {
 
 	const createTopicOrTag = async ({ values }) => {
 		try {
-			await trigger({ ...values, status: 'active', [KEY_MAPPING[from]]: 'course' });
+			await trigger({ data: { ...values, status: 'active', [KEY_MAPPING[from]]: 'cogo_academy_course' } });
 
 			setShow(false);
 		} catch (error) {

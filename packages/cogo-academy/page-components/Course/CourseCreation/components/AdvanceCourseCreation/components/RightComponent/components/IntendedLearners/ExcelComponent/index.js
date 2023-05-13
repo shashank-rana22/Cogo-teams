@@ -1,8 +1,16 @@
 import { IcMDownload, IcMRefresh } from '@cogoport/icons-react';
 
+import useGetUserList from '../useGetUserList';
+
 import styles from './styles.module.css';
 
 function ExcelComponent({ Element, name, label, controlItem, control, errors }) {
+	const {
+		dropareaProps, draggable, multiple, placeholder, rules, accept,
+	} = controlItem || {};
+
+	const { data: userList, getUserList } = useGetUserList();
+
 	return (
 		<div key={name} className={`${styles.excel_container} ${styles[name]}`}>
 			<div className={styles.excel_label_container}>
@@ -46,7 +54,11 @@ function ExcelComponent({ Element, name, label, controlItem, control, errors }) 
 						</div>
 					</div>
 
-					<div className={`${styles.sample_div} ${styles.right}`}>
+					<div
+						className={`${styles.sample_div} ${styles.right}`}
+						role="presentation"
+						onClick={() => { getUserList(); }}
+					>
 						<IcMRefresh />
 						<div className={styles.sample_text}>Refresh</div>
 					</div>
@@ -55,10 +67,16 @@ function ExcelComponent({ Element, name, label, controlItem, control, errors }) 
 
 			<div className={`${styles.input_group} ${styles[name]}`}>
 				<Element
-					{...controlItem}
 					key={name}
 					control={control}
 					id={`${name}_input`}
+					name={name}
+					dropareaProps={dropareaProps}
+					draggable={draggable}
+					multiple={multiple}
+					placeholder={placeholder}
+					accept={accept}
+					rules={rules}
 				/>
 			</div>
 

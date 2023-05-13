@@ -363,11 +363,11 @@ function asyncListFAQTags() {
 	};
 }
 
-function asyncListCourseCategory() {
+function asyncListCourseCategories() {
 	return {
 		labelKey    : 'display_name',
 		valueKey    : 'id',
-		endpoint    : 'list_course_category',
+		endpoint    : 'list_course_categories',
 		initialCall : true,
 		params      : {
 			filters: {
@@ -406,5 +406,5 @@ export {
 	asyncFieldsTicketTypes,
 	asyncListFAQTopics,
 	asyncListFAQTags,
-	asyncListCourseCategory,
+	asyncListCourseCategories,
 };

@@ -10,10 +10,8 @@ import styles from './styles.module.css';
 function ModalComponent({ show = false, setShow, from = '' }) {
 	const {
 		control,
-		watch,
 		formState: { errors = {} },
 		handleSubmit,
-		reset,
 	} = useForm();
 
 	const {

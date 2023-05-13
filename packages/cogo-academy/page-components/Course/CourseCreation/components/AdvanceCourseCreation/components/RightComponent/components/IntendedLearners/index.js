@@ -1,16 +1,37 @@
+import { useForm } from '@cogoport/forms';
+import { useEffect, forwardRef, useImperativeHandle } from 'react';
+
 import { getFieldController } from '../../../../../../../commons/getFieldController';
 
 import controls from './controls';
 import ExcelComponent from './ExcelComponent';
 import styles from './styles.module.css';
+import useGetAudiences from './useGetAudiences';
 
-function IntendedLearners({
-	control,
-	watch,
-	handleSubmit,
-	errors,
-}) {
+function IntendedLearners({ data = {} }, ref) {
+	const {
+		control,
+		formState: { errors = {} },
+		watch,
+		handleSubmit,
+		setValue,
+	} = useForm();
+
 	const mandatoryAudiencesUserWatch = watch('mandatory_audiences_user');
+
+	const { audiences = [] } = useGetAudiences();
+
+	const selectedAudiences = watch('audiences');
+
+	const mandatoryAudiencesOptions = audiences.filter((item) => (watch('audiences').includes(item.value)));
+
+	useEffect(() => {
+		setValue('mandatory_audiences', []);
+	}, [selectedAudiences, setValue]);
+
+	useImperativeHandle(ref, () => ({ handleSubmit }));
+
+	console.log(watch());
 
 	return (
 		<div className={styles.container}>
@@ -51,6 +72,8 @@ function IntendedLearners({
 								key={name}
 								control={control}
 								id={`${name}_input`}
+								{...(name === 'audiences' && { options: audiences })}
+								{...(name === 'mandatory_audiences' && { options: mandatoryAudiencesOptions })}
 							/>
 						</div>
 
@@ -66,4 +89,4 @@ function IntendedLearners({
 	);
 }
 
-export default IntendedLearners;
+export default forwardRef(IntendedLearners);

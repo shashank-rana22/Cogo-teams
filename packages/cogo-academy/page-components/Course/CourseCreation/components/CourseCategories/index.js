@@ -6,15 +6,11 @@ import { useState } from 'react';
 import { getFieldController } from '../../../commons/getFieldController';
 
 import controls from './controls';
+import useCreateCategory from './hooks/useCreateCategory';
+import useCreateCourse from './hooks/useCreateCourse';
 import styles from './styles.module.css';
-import useCreateTopic from './useCreateTopic';
 
-const options = [
-	{ label: 'Harper Lee', value: 'To Kill a Mockingbird' },
-	{ label: 'Lev Tolstoy', value: 'War and Peace' },
-];
-
-function CourseTopics({
+function CourseCategories({
 	setActiveStepper,
 	courseData,
 	setCourseData,
@@ -26,7 +22,12 @@ function CourseTopics({
 	const {
 		createCategory,
 		loading,
-	} = useCreateTopic({ setShow });
+	} = useCreateCategory({ setShow });
+
+	const {
+		createCourse,
+		loading: createCourseLoading,
+	} = useCreateCourse();
 
 	const handlePreviousState = () => {
 		setActiveStepper('course_name');
@@ -51,18 +52,18 @@ function CourseTopics({
 						className={styles.create_tag_label}
 						onClick={() => setShow(true)}
 					>
-						Create New Topic
+						Create New Category
 					</div>
 				</div>
 
 				<AsyncSelect
-					value={courseData.course_topics}
-					placeholder="Select topics"
-					options={options}
+					value={courseData.course_categories}
+					placeholder="Select category"
 					isClearable
-					onChange={(value) => setCourseData((prev) => ({ ...prev, course_topics: value }))}
+					onChange={(value) => setCourseData((prev) => ({ ...prev, course_categories: value }))}
 					multiple
-					asyncKey="list_course_category"
+					asyncKey="list_course_categories"
+					initialCall
 				/>
 			</div>
 
@@ -79,7 +80,16 @@ function CourseTopics({
 				</div>
 
 				<div className={styles.create_button}>
-					<Button type="button" size="md" themeType="primary">Create Course</Button>
+					<Button
+						type="button"
+						size="md"
+						themeType="primary"
+						onClick={() => createCourse({ courseData })}
+						loading={createCourseLoading}
+					>
+						Create Course
+
+					</Button>
 				</div>
 			</div>
 
@@ -149,4 +159,4 @@ function CourseTopics({
 	);
 }
 
-export default CourseTopics;
+export default CourseCategories;

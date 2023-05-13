@@ -37,6 +37,8 @@ const controls = [
 		multiple      : false,
 		draggable     : true,
 		dropareaProps : { heading: 'Upload excel', subHeading: '(only .xlsx or .csv formats)' },
+		rules         : { required: { value: true, message: 'This is required' } },
+		accept        : '.csv,.xlsx',
 	},
 	{
 		label       : 'How frequently do you want the users to take this course?',

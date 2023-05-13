@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useForm } from '@cogoport/forms';
+import { useState, forwardRef, useImperativeHandle } from 'react';
 
 import FieldArray from '../../../../../../../commons/FieldArray';
 import { getFieldController } from '../../../../../../../commons/getFieldController';
@@ -7,14 +8,23 @@ import ModalComponent from './components/ModalComponent';
 import controls from './controls';
 import styles from './styles.module.css';
 
-function Specifications({
-	control,
-	errors,
-}) {
+function Specifications({ data = {} }, ref) {
+	const {
+		control,
+		formState: { errors = {} },
+		handleSubmit,
+	} = useForm({
+		defaultValues: {
+			...data,
+		},
+	});
+
 	const [showModal, setShowModal] = useState({
 		topics : false,
 		tags   : false,
 	});
+
+	useImperativeHandle(ref, () => ({ handleSubmit }));
 
 	return (
 		<div className={styles.container}>
@@ -44,18 +54,20 @@ function Specifications({
 
 				return (
 					<div key={name} className={styles.form_group}>
-						<div className={styles.label}>
-							{label}
-							{rules ? <sup className={styles.superscipt}>*</sup> : null}
-						</div>
-
 						<div className={styles.label_container}>
+							<div className={styles.label}>
+								{label}
+								{rules ? <sup className={styles.superscipt}>*</sup> : null}
+							</div>
+
 							<div
 								role="presentation"
 								className={styles.create_tag_label}
 								onClick={() => setShowModal((prev) => ({ ...prev, [name]: true }))}
 							>
-								Create New Topic
+								Create New
+								{' '}
+								{(name === 'topics' ? 'Topic' : 'Tag')}
 							</div>
 						</div>
 
@@ -83,4 +95,4 @@ function Specifications({
 	);
 }
 
-export default Specifications;
+export default forwardRef(Specifications);

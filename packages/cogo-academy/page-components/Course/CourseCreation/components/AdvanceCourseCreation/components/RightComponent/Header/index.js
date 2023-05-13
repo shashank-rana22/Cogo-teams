@@ -1,25 +1,25 @@
 import { Tags, Button } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 
+import useUpdateCourse from '../useUpdateCourse';
+
+import CURRENT_TO_NEXT_MAPPING from './CURRENT_TO_NEXT_MAPPING';
 import MAPPING from './MAPPING';
 import styles from './styles.module.css';
 
 function Header({
 	activeTab,
-	handleSubmit,
-	reset,
+	handleSubmit = () => {},
 	setActiveTab,
+	id,
 }) {
 	const { title, text } = MAPPING[activeTab];
 
-	const onSubmit = (values) => {
-		console.log('values', values);
-	};
+	const { loading, updateCourse } = useUpdateCourse();
 
-	const handleNextButton = () => {
-		console.log('hii');
-		handleSubmit(onSubmit)();
-		setActiveTab('specifications');
+	const onSubmit = (values) => {
+		updateCourse({ activeTab, values, id });
+		setActiveTab(CURRENT_TO_NEXT_MAPPING[activeTab]);
 	};
 
 	return (
@@ -44,7 +44,9 @@ function Header({
 						type="button"
 						themeType="accent"
 						className={styles.button}
-						onClick={handleNextButton}
+						onClick={(activeTab === 'overview'
+							? () => { setActiveTab(CURRENT_TO_NEXT_MAPPING[activeTab]); } : handleSubmit(onSubmit))}
+						loading={loading}
 					>
 						Next
 						{' '}

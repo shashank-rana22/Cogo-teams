@@ -1,16 +1,30 @@
+import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
+import { forwardRef, useImperativeHandle } from 'react';
 
 import { getFieldController } from '../../../../../../../commons/getFieldController';
 
 import controls from './controls';
 import styles from './styles.module.css';
 
-function PublishCourse({
-	control,
-	watch,
-	handleSubmit,
-	errors,
-}) {
+function PublishCourse({ data = {} }, ref) {
+	const {
+		control,
+		formState: { errors = {} },
+		handleSubmit,
+	} = useForm({
+		defaultValues: {
+			...data,
+		},
+	});
+
+	useImperativeHandle(ref, () => ({ handleSubmit }));
+
+	const removeTypeField = (controlItem) => {
+		const { type, ...rest } = controlItem;
+		return rest;
+	};
+
 	return (
 		<div className={styles.container}>
 			{controls.map((controlItem) => {
@@ -72,8 +86,10 @@ function PublishCourse({
 						</div>
 
 						<div className={`${styles.input_group} ${styles[name]}`}>
+
 							<Element
-								{...controlItem}
+								{...(type === 'fileUpload'
+									? removeTypeField(controlItem) : { ...controlItem })}
 								key={name}
 								control={control}
 								id={`${name}_input`}
@@ -94,4 +110,4 @@ function PublishCourse({
 	);
 }
 
-export default PublishCourse;
+export default forwardRef(PublishCourse);
