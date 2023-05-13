@@ -1,0 +1,9 @@
+{
+  "fcl_freight": "FCL",
+  "fcl_freight_service": "FCL",
+  "lcl_freight": "LCL",
+  "lcl_freight_service": "LCL",
+  "fcl_local": "FCL Local",
+  "fcl_freight_local": "FCL Local",
+  "fcl_freight_local_service": "FCL Local"
+}
