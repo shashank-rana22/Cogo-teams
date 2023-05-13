@@ -10,8 +10,8 @@ import {
 import toastApiError from '../utils/toastApiError';
 
 const useCreateColletctionParty = ({
-	onCreate = () => { },
-	setCollectionPartyId = () => { },
+	onCreate = () => {},
+	setCollectionPartyId = () => {},
 	serviceProviderId,
 }) => {
 	const {
