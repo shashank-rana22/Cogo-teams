@@ -1,5 +1,6 @@
 import { useForm } from '@cogoport/forms';
-import { useState, forwardRef, useImperativeHandle } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
 
 import FieldArray from '../../../../../../../commons/FieldArray';
 import { getFieldController } from '../../../../../../../commons/getFieldController';
@@ -8,23 +9,52 @@ import ModalComponent from './components/ModalComponent';
 import controls from './controls';
 import styles from './styles.module.css';
 
-function Specifications({ data = {} }, ref) {
-	const {
-		control,
-		formState: { errors = {} },
-		handleSubmit,
-	} = useForm({
-		defaultValues: {
-			...data,
-		},
-	});
+const MAPPING = ['course_objectives', 'tags', 'topics'];
 
+function Specifications({ data = {}, id = '' }, ref) {
 	const [showModal, setShowModal] = useState({
 		topics : false,
 		tags   : false,
 	});
 
-	useImperativeHandle(ref, () => ({ handleSubmit }));
+	const {
+		control,
+		formState: { errors = {} },
+		handleSubmit,
+		setValue,
+	} = useForm();
+
+	useEffect(() => {
+		MAPPING.forEach((item) => {
+			if (!isEmpty(data[item])) {
+				setValue(item, data[item]);
+			}
+		});
+	}, [data, setValue]);
+
+	useImperativeHandle(ref, () => ({
+		handleSubmit: () => {
+			const onSubmit = (values) => ({
+				hasError : false,
+				values   : {
+					id,
+					topic_ids : values.topics,
+					tag_ids   : values.tags,
+					course_objectives:
+						(values.course_objectives || []).map((item) => item.objective),
+				},
+			});
+
+			const onError = (error) => ({ hasError: true, error });
+
+			return new Promise((resolve) => {
+				handleSubmit(
+					(values) => resolve(onSubmit(values)),
+					(error) => resolve(onError(error)),
+				)();
+			});
+		},
+	}));
 
 	return (
 		<div className={styles.container}>

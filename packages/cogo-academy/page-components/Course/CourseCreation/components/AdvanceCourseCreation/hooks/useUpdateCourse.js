@@ -2,17 +2,21 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-import getPayload from './Header/utils/getPayload';
+import CURRENT_TO_NEXT_MAPPING from '../components/RightComponent/Header/CURRENT_TO_NEXT_MAPPING';
 
-const useUpdateCourse = () => {
+const useUpdateCourse = ({ setActiveTab, activeTab, getCogoAcademyCourse }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_cogo_academy_course',
 		method : 'POST',
 	}, { manual: true });
 
-	const updateCourse = async ({ activeTab, values, id }) => {
+	const updateCourse = async ({ values }) => {
 		try {
-			await trigger({ data: getPayload({ activeTab, values, id }) });
+			await trigger({ data: values });
+
+			await getCogoAcademyCourse();
+
+			setActiveTab(CURRENT_TO_NEXT_MAPPING[activeTab]);
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

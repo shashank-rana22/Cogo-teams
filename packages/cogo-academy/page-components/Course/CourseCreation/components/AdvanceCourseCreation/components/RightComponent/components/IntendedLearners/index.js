@@ -8,7 +8,7 @@ import ExcelComponent from './ExcelComponent';
 import styles from './styles.module.css';
 import useGetAudiences from './useGetAudiences';
 
-function IntendedLearners({ data = {} }, ref) {
+function IntendedLearners({ id, data = {} }, ref) {
 	const {
 		control,
 		formState: { errors = {} },
@@ -29,9 +29,34 @@ function IntendedLearners({ data = {} }, ref) {
 		setValue('mandatory_audiences', []);
 	}, [selectedAudiences, setValue]);
 
-	useImperativeHandle(ref, () => ({ handleSubmit }));
+	useImperativeHandle(ref, () => ({
+		handleSubmit: () => {
+			const onSubmit = (values) => ({
+				hasError : false,
+				values   : {
+					id,
+					audiences:
+					(values.audiences || []).map((audience_id) => ({
+						id: audience_id,
+						is_mandatory:
+						(values.mandatory_audiences || []).includes(audience_id),
+					})),
+					tag_ids: values.tags,
+					course_objectives:
+					(values.course_objectives || []).map((item) => item.objective),
+				},
+			});
 
-	console.log(watch());
+			const onError = (error) => ({ hasError: true, error });
+
+			return new Promise((resolve) => {
+				handleSubmit(
+					(values) => resolve(onSubmit(values)),
+					(error) => resolve(onError(error)),
+				)();
+			});
+		},
+	}));
 
 	return (
 		<div className={styles.container}>

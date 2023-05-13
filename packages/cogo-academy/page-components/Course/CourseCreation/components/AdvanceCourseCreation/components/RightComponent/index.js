@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef } from 'react';
 
 import getProps from './COMPONENT_PROPS_MAPPING';
 import CourseCompletion from './components/CourseCompletion';
@@ -19,28 +19,19 @@ const COMPONENT_MAPPING = {
 	publish_course    : PublishCourse,
 };
 
-function RightComponent({ data = {}, activeTab, setActiveTab, id }) {
-	const ActiveComponent = COMPONENT_MAPPING[activeTab] || Curriculum;
-
+function RightComponent({ data = {}, activeTab, setActiveTab, id, getCogoAcademyCourse }) {
 	const childRef = useRef({});
 
-	const [currRef, setCurrRef] = useState(childRef?.current[activeTab]);
-
-	// const obj = () => childRef?.current[activeTab]?.handleSubmit;
-
-	// console.log('obj', obj);
-
-	useEffect(() => {
-		setCurrRef(childRef?.current[activeTab]);
-	}, [activeTab, childRef]);
+	const ActiveComponent = COMPONENT_MAPPING[activeTab] || Curriculum;
 
 	return (
 		<div className={styles.conatiner}>
 			<Header
 				activeTab={activeTab}
-				handleSubmit={currRef?.handleSubmit}
+				childRef={childRef}
 				setActiveTab={setActiveTab}
 				id={id}
+				getCogoAcademyCourse={getCogoAcademyCourse}
 			/>
 
 			<ActiveComponent
@@ -48,6 +39,7 @@ function RightComponent({ data = {}, activeTab, setActiveTab, id }) {
 				ref={(r) => {
 					childRef.current[activeTab] = r;
 				}}
+				id={id}
 			/>
 		</div>
 	);

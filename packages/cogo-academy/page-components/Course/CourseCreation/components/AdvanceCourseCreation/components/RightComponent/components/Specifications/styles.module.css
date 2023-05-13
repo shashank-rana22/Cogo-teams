@@ -9,8 +9,8 @@
 }
 
 .input_group {
-	margin-top: 6px;
 	width: 100%;
+	margin-top: 6px;
 }
 
 .form_group {
@@ -29,9 +29,9 @@
 
 .label_container {
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
 	width: 60%;
-	align-items: center;
 	margin-bottom: 6px;
 }
 

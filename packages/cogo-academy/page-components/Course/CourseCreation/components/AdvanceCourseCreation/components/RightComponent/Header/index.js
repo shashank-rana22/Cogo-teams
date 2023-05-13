@@ -1,7 +1,7 @@
 import { Tags, Button } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 
-import useUpdateCourse from '../useUpdateCourse';
+import useUpdateCourse from '../../../hooks/useUpdateCourse';
 
 import CURRENT_TO_NEXT_MAPPING from './CURRENT_TO_NEXT_MAPPING';
 import MAPPING from './MAPPING';
@@ -9,17 +9,26 @@ import styles from './styles.module.css';
 
 function Header({
 	activeTab,
-	handleSubmit = () => {},
 	setActiveTab,
 	id,
+	childRef,
+	getCogoAcademyCourse,
 }) {
 	const { title, text } = MAPPING[activeTab];
 
-	const { loading, updateCourse } = useUpdateCourse();
+	const { loading, updateCourse } = useUpdateCourse({ setActiveTab, activeTab, getCogoAcademyCourse });
 
-	const onSubmit = (values) => {
-		updateCourse({ activeTab, values, id });
-		setActiveTab(CURRENT_TO_NEXT_MAPPING[activeTab]);
+	const handleSubmitForm = () => {
+		if (activeTab === 'overview') {
+			setActiveTab(CURRENT_TO_NEXT_MAPPING[activeTab]);
+			return;
+		}
+
+		childRef.current[activeTab]?.handleSubmit().then((res) => {
+			if (!res.hasError) {
+				updateCourse({ activeTab, values: res.values, id });
+			}
+		});
 	};
 
 	return (
@@ -44,8 +53,7 @@ function Header({
 						type="button"
 						themeType="accent"
 						className={styles.button}
-						onClick={(activeTab === 'overview'
-							? () => { setActiveTab(CURRENT_TO_NEXT_MAPPING[activeTab]); } : handleSubmit(onSubmit))}
+						onClick={handleSubmitForm}
 						loading={loading}
 					>
 						Next

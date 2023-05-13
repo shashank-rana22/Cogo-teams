@@ -2,13 +2,13 @@ import { useState } from 'react';
 
 import LeftComponent from './components/LeftComponent';
 import RightComponent from './components/RightComponent';
+import useGetCogoAcademyCourse from './hooks/useGetCogoAcademyCourse';
 import styles from './styles.module.css';
-import useGetCogoAcademyCourse from './useGetCogoAcademyCourse';
 
 function AdvanceCourseCreation({ id }) {
 	const [activeTab, setActiveTab] = useState('overview');
 
-	const { data, loading } = useGetCogoAcademyCourse(id);
+	const { data, loading, getCogoAcademyCourse } = useGetCogoAcademyCourse(id);
 
 	return (
 		<div className={styles.container}>
@@ -17,7 +17,13 @@ function AdvanceCourseCreation({ id }) {
 			</div>
 
 			<div className={styles.right_section}>
-				<RightComponent data={data} setActiveTab={setActiveTab} activeTab={activeTab} id={id} />
+				<RightComponent
+					data={data}
+					setActiveTab={setActiveTab}
+					activeTab={activeTab}
+					id={id}
+					getCogoAcademyCourse={getCogoAcademyCourse}
+				/>
 			</div>
 		</div>
 	);
