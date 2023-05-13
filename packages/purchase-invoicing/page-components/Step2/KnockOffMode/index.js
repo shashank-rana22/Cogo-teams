@@ -73,8 +73,8 @@ function KnockOffMode({
 	if (loading) {
 		return (
 			<div>
-				{[1, 2, 3].map(() => (
-					<div className={styles.margintop}>
+				{[1, 2, 3].map((item) => (
+					<div className={styles.margintop} key={item}>
 						<Placeholder height="80px" />
 					</div>
 				))}

@@ -63,7 +63,7 @@ function PurchaseLineItemDetails({
 					</span>
 					<div className={`${styles.flex} ${styles.wrap}`}>
 						{DETAILS.map(({ label, key }) => (
-							<div className={`${styles.margin} ${styles.marginright}`}>
+							<div className={`${styles.margin} ${styles.marginright}`} key={key}>
 								<span className={styles.label}>
 									{label}
 								</span>
