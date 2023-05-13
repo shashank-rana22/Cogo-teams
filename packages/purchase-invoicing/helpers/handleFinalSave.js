@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 
 import useUpdateColletctionParty from '../hooks/useUpdateCollectionParty';
 
@@ -8,7 +8,7 @@ import mappingsFunc from './mappingsFunc';
 const useHandleFinalSave = ({
 	data = {},
 	purchaseInvoiceValues = {},
-	billId = '',
+	billId,
 	onClose = () => { },
 	editData = {},
 	setGlobalSelected = () => {},
@@ -18,10 +18,10 @@ const useHandleFinalSave = ({
 		editData.status,
 	);
 
-	const charges = purchaseInvoiceValues?.line_items || [];
-	const allCodes = charges.map((charge) => charge?.code || charge?.name);
+	const charges = useMemo(() => purchaseInvoiceValues?.line_items || [], [purchaseInvoiceValues]);
+	const allCodes = useMemo(() => charges.map((charge) => charge?.code || charge?.name), [charges]);
 
-	const buyCodes = [];
+	const buyCodes = useMemo(() => [], []);
 	let existingMappings = [];
 	if (Object.keys(globalSelected).length && !isLockedMode) {
 		existingMappings = mappingsFunc(
@@ -31,10 +31,10 @@ const useHandleFinalSave = ({
 		);
 	}
 
-	const mappingsToTake = isLockedMode ? editData.mappings : existingMappings;
+	const mappingsToTake = isLockedMode ? editData?.mappings : existingMappings;
 	mappingsToTake?.forEach((item) => {
-		const buyCodesTemp = (item.buy_line_items || []).map(
-			(itemMap) => `${itemMap.code}:${itemMap.service_id}`,
+		const buyCodesTemp = (item?.buy_line_items || []).map(
+			(itemMap) => `${itemMap?.code}:${itemMap?.service_id}`,
 		);
 		buyCodes.push(...buyCodesTemp);
 	});
@@ -78,17 +78,23 @@ const useHandleFinalSave = ({
 		}
 	};
 
+	const setGlobalSelectedRef = useRef(setGlobalSelected);
+
+	const handleGlobalSelected = useCallback(
+		(obj) => { setGlobalSelectedRef?.current(obj); },
+		[setGlobalSelectedRef],
+	);
+
 	useEffect(() => {
-		if (setGlobalSelected) {
-			setGlobalSelected({
+		if (handleGlobalSelected) {
+			handleGlobalSelected({
 				0: {
 					purchase_line_items : allCodes,
 					buy_line_items      : buyCodes,
 				},
 			});
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [handleGlobalSelected, allCodes, buyCodes]);
 
 	const handleFinalSubmit = async (values) => {
 		const purchase_replica = getPurchaseReplica(
@@ -103,8 +109,8 @@ const useHandleFinalSave = ({
 			purchaseInvoiceValues,
 		);
 
-		if (purchase_replica.length) {
-			finalMapping = finalMapping.map((mapping) => ({
+		if (purchase_replica?.length) {
+			finalMapping = finalMapping?.map((mapping) => ({
 				...mapping,
 				buy_line_items: purchase_replica,
 			}));

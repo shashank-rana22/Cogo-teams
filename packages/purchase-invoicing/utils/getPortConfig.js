@@ -21,8 +21,8 @@ const getPortConfigs = (data) => {
 
 		const isSingleShipmentLocation = singleservices.some((type) => (service_type || '').includes(type));
 
-		const origin = data[routeInfo.origin_pickup] || data[routeInfo.origin_port];
-		const destination = data[routeInfo.destination_drop] || data[routeInfo.destination_port];
+		const origin = data?.[routeInfo?.origin_pickup] || data?.[routeInfo?.origin_port];
+		const destination = data?.[routeInfo?.destination_drop] || data[routeInfo?.destination_port];
 
 		return { origin, destination, isSingleShipmentLocation };
 	}

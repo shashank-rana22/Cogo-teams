@@ -5,7 +5,7 @@ import { serviceConfig } from '../../configurations/serviceconfig';
 import { IS_MAIN_SERVICE } from '../../constants';
 import getFormattedAmount from '../helpers/formatAmount';
 
-import CargoDetails from './CargoDetails';
+import RenderCargoPills from './RenderCargoPills';
 import SingleColumn from './SingleColumn';
 import styles from './styles.module.css';
 
@@ -29,7 +29,7 @@ function ServiceTables({
 					trade_type = 'Destination';
 				}
 				const isFTL = singlecharge?.service_type === 'ftl_freight_service'
-                    && singlecharge?.detail?.truck_number;
+					&& singlecharge?.detail?.truck_number;
 
 				const otherService = isFTL
 					? `Truck Number: ${startCase(singlecharge?.detail?.truck_number)}`
@@ -48,12 +48,12 @@ function ServiceTables({
 
 				return (
 					<div className={styles.servicecontainer} key={singlecharge?.id}>
-						{showCargo && (
+						{showCargo ? (
 							<div className={styles.marginleft}>
-								<CargoDetails item={singlecharge} />
+								<RenderCargoPills item={singlecharge} />
 							</div>
-						)}
-						{showservice && <div className={styles.serviceheadercolor}>{service}</div>}
+						) : null}
+						{showservice ? <div className={styles.serviceheadercolor}>{service}</div> : null}
 						<div className={styles.flextable}>
 							<div className={styles.tableheader}>
 								{((config || serviceConfig(service))).map((field) => (

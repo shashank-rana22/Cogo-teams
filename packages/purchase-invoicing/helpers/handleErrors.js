@@ -4,7 +4,7 @@ const vietnamEntityId = GLOBAL_CONSTANTS.country_entity_ids.VN;
 
 const handleErrors = ({
 	errMszs = {},
-	setErrMszs = () => { },
+	setErrMszs = () => {},
 	formValues = {},
 	billingPartyObj = {},
 }) => {

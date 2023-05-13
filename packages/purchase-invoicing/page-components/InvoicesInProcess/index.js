@@ -26,8 +26,7 @@ function InvoicesInProcess({ invoicesdata }) {
 			<AccordianView title={titleCard} fullwidth>
 				<div className={styles.tablecontainer}>
 					<InvoicesTable
-						columns={[...invoiceconfiguration,
-							viewDetails]}
+						columns={[...invoiceconfiguration, viewDetails]}
 						data={editableData}
 						showPagination={false}
 					/>

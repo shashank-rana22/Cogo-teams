@@ -9,13 +9,13 @@ import styles from './styles.module.css';
 
 export function ProformaTagCards({
 	item = {},
-	classname,
+	classname = null,
 	showCheckBox = false,
 	isChecked = false,
-	activeTab,
-	setSelectedProforma,
-	selectedProforma,
-	unCheckedData,
+	activeTab = null,
+	setSelectedProforma = () => {},
+	selectedProforma = [],
+	unCheckedData = [],
 	isNormalTab = false,
 }) {
 	const checkboxshow = showCheckBox && item?.isProforma && item?.billId;
@@ -49,7 +49,7 @@ export function ProformaTagCards({
 						-
 					</div>
 					<span className={styles.billnum}>
-						{item?.billNumber}
+						{item?.billNumber || ''}
 					</span>
 				</div>
 				<div className={styles.flexdiv}>
@@ -59,7 +59,7 @@ export function ProformaTagCards({
 					)}
 					<span className={styles.padding}>
 						| Line Items (
-						{item?.lineItemCount}
+						{item?.lineItemCount || 0}
 						)
 					</span>
 				</div>

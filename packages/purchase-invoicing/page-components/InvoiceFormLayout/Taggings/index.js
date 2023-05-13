@@ -71,6 +71,7 @@ function Taggings({
 										selectedProforma={selectedProforma}
 										setSelectedProforma={setSelectedProforma}
 										activeTab={value}
+										showCheck
 										key={value}
 									/>
 								</TabPanel>

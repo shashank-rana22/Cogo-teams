@@ -4,7 +4,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
-const useUpdateColletctionParty = ({ onClose }) => {
+const useUpdateColletctionParty = ({ onClose = () => {} }) => {
 	const { user_profile = {} } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
@@ -26,7 +26,7 @@ const useUpdateColletctionParty = ({ onClose }) => {
 			const res = await trigger({
 				data: {
 					performedByUserType:
-                        user_profile.session_type === 'partner' ? 'AGENT' : 'USER',
+                        user_profile?.session_type === 'partner' ? 'AGENT' : 'USER',
 					serviceProviderType : 'freight_forwarder',
 					updatedBy           : user_profile?.user?.id,
 					bill                : {

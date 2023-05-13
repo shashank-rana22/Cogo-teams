@@ -27,7 +27,7 @@ const handlePartyDetails = ({
 	];
 
 	const collectionPartyBA = allBillingAddresses?.find(
-		(address) => address.tax_number === purchaseInvoiceValues?.collection_party_address,
+		(address) => address?.tax_number === purchaseInvoiceValues?.collection_party_address,
 	) || {};
 
 	const billingPartyDetails = {

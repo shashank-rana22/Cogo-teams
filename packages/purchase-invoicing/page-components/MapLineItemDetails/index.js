@@ -6,11 +6,11 @@ import ServiceTables from '../../common/ServiceTable';
 import { serviceMappingConfig } from '../../configurations/mappingslineItems';
 
 function MapLineItemDetails({
-	serviceProvider,
-	currentSelected,
-	handleChange,
-	isLockedMode,
-	collectionPartyObj,
+	serviceProvider = {},
+	currentSelected = {},
+	handleChange = () => {},
+	isLockedMode = false,
+	collectionPartyObj = {},
 }) {
 	let bankDetails = [];
 	if (!isEmpty(collectionPartyObj?.bank_details)) {

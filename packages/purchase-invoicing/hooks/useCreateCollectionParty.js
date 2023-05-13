@@ -67,7 +67,7 @@ const useCreateColletctionParty = ({
 						...formatdata,
 						createdBy: user_data?.user?.id,
 						performedByUserType:
-							user_data.session_type === 'partner' ? 'AGENT' : 'USER',
+							user_data?.session_type === 'partner' ? 'AGENT' : 'USER',
 					},
 				});
 
@@ -98,7 +98,7 @@ const useCreateColletctionParty = ({
 						...formatdata,
 						updatedBy: user_data?.user?.id,
 						performedByUserType:
-							user_data.session_type === 'partner' ? 'AGENT' : 'USER',
+							user_data?.session_type === 'partner' ? 'AGENT' : 'USER',
 					},
 				});
 

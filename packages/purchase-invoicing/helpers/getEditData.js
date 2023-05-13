@@ -4,9 +4,9 @@ const getEditData = (editData) => {
 	const codes = {};
 
 	(editData?.line_items || []).forEach((item) => {
-		codes[item.code] = {
+		codes[item?.code] = {
 			...item,
-			actualname: item.name,
+			actualname: item?.name,
 		};
 	});
 

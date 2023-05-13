@@ -15,12 +15,10 @@ function EmptyState({
 				width={width}
 				height={height}
 				alt="Empty-state"
-				style={{ margin: '10px' }}
+				className={styles.margintop}
 			/>
 
-			<div>
-				<div className={styles.text}>{emptyText}</div>
-			</div>
+			<div className={styles.text}>{emptyText}</div>
 		</div>
 
 	);

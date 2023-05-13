@@ -1,4 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
 import ConfirmationModal from '../../common/ConfirmationModal';
@@ -10,26 +11,26 @@ import InvoiceFormLayout from '../InvoiceFormLayout';
 import styles from './styles.module.css';
 
 function Step1({
-	contentText,
-	uploadInvoiceUrl,
+	contentText = '',
+	uploadInvoiceUrl = '',
 	serviceProvider = {},
-	errors,
-	setErrors,
-	setBillingParty,
+	errors = {},
+	setErrors = () => {},
+	setBillingParty = () => {},
 	billingParty = {},
-	errMszs,
-	setUploadInvoiceUrl,
-	setStep,
-	setCollectionPartyId,
+	errMszs = {},
+	setUploadInvoiceUrl = '',
+	setStep = () => {},
+	setCollectionPartyId = () => {},
 	billId,
-	onSubmit,
-	setErrMszs,
-	purchaseInvoiceValues,
-	onError,
+	onSubmit = () => {},
+	setErrMszs = () => {},
+	purchaseInvoiceValues = {},
+	onError = () => {},
 	partyId,
 	collectionParty = {},
-	setCollectionParty,
-	closeModal,
+	setCollectionParty = () => {},
+	closeModal = () => {},
 	editData = {},
 }) {
 	const [confirmation, setConfirmation] = useState(null);
@@ -58,10 +59,10 @@ function Step1({
 
 	const handleFinalSave = async () => {
 		setConfirmation(null);
-		if (billId) {
-			await updateCp(confirmation.formData, confirmation.extraData);
+		if (!isEmpty(billId)) {
+			await updateCp(confirmation?.formData, confirmation?.extraData);
 		} else {
-			await createCp(confirmation.formData, confirmation.extraData);
+			await createCp(confirmation?.formData, confirmation?.extraData);
 		}
 	};
 
@@ -73,7 +74,7 @@ function Step1({
 			codes,
 			taggedProformas,
 			activeTab,
-		} = ref.current;
+		} = ref.current || {};
 
 		handleErrors({
 			errMszs,
@@ -102,7 +103,7 @@ function Step1({
 		)();
 	};
 
-	const hasError = Object.keys(errMszs).filter((key) => errMszs[key] === true);
+	const hasError = Object.keys(errMszs).filter((key) => errMszs?.[key] === true);
 
 	const goBack = (
 		<span className={styles.flex}>
@@ -135,8 +136,8 @@ function Step1({
 				<div className={styles.footerstyles}>
 					<Button
 						size="md"
-						style={{ marginRight: 10 }}
 						themeType="secondary"
+						className={styles.marginright}
 						onClick={() => {
 							setUploadInvoiceUrl(null);
 							closeModal();
@@ -156,12 +157,12 @@ function Step1({
 				</div>
 			</Modal.Footer>
 
-			{confirmation && hasError?.length === 0 && (
+			{(confirmation && hasError?.length === 0) ? (
 				<ConfirmationModal
 					setConfirmation={setConfirmation}
 					handleFinalSubmit={handleFinalSave}
 				/>
-			)}
+			) : null}
 		</div>
 	);
 }

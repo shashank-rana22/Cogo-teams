@@ -18,3 +18,7 @@
 	font-size: var(--font-size-md);
 	color: var(--color-secondary-greyscale-4);
 }
+
+.margintop {
+	margin: 10px;
+}

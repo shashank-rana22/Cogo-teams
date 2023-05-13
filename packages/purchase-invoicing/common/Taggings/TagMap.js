@@ -13,6 +13,7 @@ function TagMap({
 	selectedProforma,
 	setSelectedProforma,
 	activeTab,
+	showCheck,
 }) {
 	const { mappingsData, loading } = useGetTaggingBills({
 		shipmentId, serviceProviderId,
@@ -56,6 +57,7 @@ function TagMap({
 										isNormalTab={isNormalTab}
 										activeTab={activeTab}
 										key={item?.billId}
+										showCheck={showCheck}
 										isfirst
 									/>
 								</div>

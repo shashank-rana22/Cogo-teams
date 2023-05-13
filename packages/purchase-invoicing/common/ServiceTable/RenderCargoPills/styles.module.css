@@ -30,3 +30,31 @@
 .font {
 	font-size: var(--font-size-sm);
 }
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.cargo_detail_pill {
+	height: fit-content;
+	font-weight: 500;
+	color: var(--color-secondary-greyscale-1);
+	text-transform: capitalize;
+}
+
+.shipment_cargo_details_root {
+	justify-content: start;
+}
+
+.multi_service {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	overflow-x: auto;
+	white-space: nowrap;
+}
+
+.more_details_popover_text {
+	color: var(--color-accent-orange-2);
+}

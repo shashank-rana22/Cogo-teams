@@ -15,7 +15,7 @@ function PurchaseInvoicing({ shipmentData = {}, servicesData = [] }) {
 		<div>
 			{collectionPartyLoading ? <Loader /> : (
 				<>
-					{collectionPartyList.map((collectionParty) => (
+					{(collectionPartyList || []).map((collectionParty) => (
 						<CollectionPartyDetails
 							shipmentData={shipmentData}
 							collectionParty={collectionParty}

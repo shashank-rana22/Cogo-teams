@@ -8,7 +8,7 @@ const useCreateOrganizationTradeParty = ({
 	refetch,
 }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : 'create_organization_trade_party',
+		url    : '/create_organization_trade_party',
 		method : 'POST',
 	}, { manual: true });
 

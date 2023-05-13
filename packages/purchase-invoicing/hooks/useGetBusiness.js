@@ -5,10 +5,7 @@ import { useEffect } from 'react';
 import toastApiError from '../utils/toastApiError';
 
 const useGetBusiness = (props) => {
-	const {
-		setValue = () => {},
-		gstNumber = '',
-	} = props;
+	const { setValue = () => {}, gstNumber = '' } = props;
 
 	const [{ data }, trigger] = useRequest({
 		url    : '/get_business',
@@ -31,7 +28,7 @@ const useGetBusiness = (props) => {
 					addresses = [],
 					trade_name = '',
 					business_name = '',
-				} = response.data || {};
+				} = response?.data || {};
 
 				setValue('name', trade_name || business_name || '');
 				setValue('pincode', (!isEmpty(addresses) && (addresses[0] || {}).pincode) || '');

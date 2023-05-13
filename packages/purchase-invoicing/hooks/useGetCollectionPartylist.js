@@ -33,9 +33,8 @@ function useGetCollectionParty({ shipment_id }) {
 
 	return {
 		collectionPartyLoading,
-		refetchCollectionParties : listCollectionParties,
-		collectionPartyList      : data?.list || [],
-		refetch                  : listCollectionParties,
+		collectionPartyList : data?.list || [],
+		refetch             : listCollectionParties,
 	};
 }
 

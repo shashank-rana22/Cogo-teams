@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { renderMappingsFunction } from '../../configurations/mappingslineItems';
-import { renderFunction } from '../../configurations/serviceconfig';
+import { renderFunction } from '../../page-components/RenderFunctions/renderServiceFunction';
+import { renderServiceMappings } from '../../page-components/RenderFunctions/renderServiceMappings';
 
 import styles from './styles.module.css';
 
@@ -12,7 +12,7 @@ function SingleColumn({
 	renderCheck,
 	mappingtable = false,
 }) {
-	const renderMethod = ismappings ? renderMappingsFunction(renderCheck) : renderFunction;
+	const renderMethod = ismappings ? renderServiceMappings(renderCheck) : renderFunction;
 	return (
 		<div className={styles.tablecolumn}>
 			{fields?.map((field) => (

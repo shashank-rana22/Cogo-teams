@@ -18,9 +18,9 @@ function Step2({
 	billingPartyObj = {},
 	collectionPartyObj,
 	editData = {},
-	setStep,
-	exchangeRateModal,
-	onClose,
+	setStep = () => {},
+	exchangeRateModal = false,
+	onClose = () => {},
 	billId,
 	partyId,
 }) {
@@ -68,7 +68,15 @@ function Step2({
 		<div>
 			<Modal.Header title={goBack} />
 			<Modal.Body>
-				{!knockOffMode ? (
+				{knockOffMode ? (
+					<KnockOffMode
+						purchaseInvoiceValues={purchaseInvoiceValues}
+						data={serviceProvider}
+						globalSelected={globalSelected}
+						collectionPartyId={partyId}
+					/>
+
+				) : (
 					<div className={styles.flex}>
 						<div className={styles.purchaselineitems}>
 							<PurchaseLineItemDetails
@@ -90,13 +98,6 @@ function Step2({
 							/>
 						</div>
 					</div>
-				) : (
-					<KnockOffMode
-						purchaseInvoiceValues={purchaseInvoiceValues}
-						data={serviceProvider}
-						globalSelected={globalSelected}
-						collectionPartyId={partyId}
-					/>
 				)}
 			</Modal.Body>
 			<Modal.Footer>
@@ -123,7 +124,7 @@ function Step2({
 							Close
 						</Button>
 					)}
-					{editData?.status !== 'coe_approved' && (
+					{editData?.status !== 'coe_approved' ? (
 						<Button
 							className={styles.button}
 							disabled={loading}
@@ -133,10 +134,10 @@ function Step2({
 						>
 							Save
 						</Button>
-					)}
+					) : null}
 				</div>
 			</Modal.Footer>
-			{exchangeRateModal && (
+			{exchangeRateModal ? (
 				<ExchangeRateModal
 					exchangeRateModal={exchangeRateModal}
 					setExchangeRateModal={setExchangeRateModal}
@@ -145,7 +146,7 @@ function Step2({
 					loading={loading}
 					purchaseInvoiceValues={purchaseInvoiceValues}
 				/>
-			)}
+			) : null}
 		</div>
 	);
 }

@@ -10,14 +10,15 @@ const LABEL_MAP = {
 };
 
 export function TagCard({
-	item,
+	item = {},
 	isfirst,
 	classname,
 	isLastChild,
-	setSelectedProforma,
-	selectedProforma,
+	setSelectedProforma = () => {},
+	selectedProforma = [],
 	isNormalTab,
 	activeTab = null,
+	showCheck = false,
 }) {
 	const { childBill } = item || {};
 	const isChecked = selectedProforma?.some(
@@ -26,7 +27,7 @@ export function TagCard({
 	const unCheckedData = selectedProforma?.filter(
 		(data) => data?.billId !== item?.billId,
 	);
-	const showCheckBox = activeTab === 'merge' ? isfirst : true;
+	const showCheckBox = activeTab === 'merge' ? isfirst : showCheck;
 
 	return (
 		<div className={styles.flexdiv}>

@@ -23,18 +23,18 @@ import styles from './styles.module.css';
 import Taggings from './Taggings';
 
 function InvoiceFormLayout({
-	uploadInvoiceUrl,
-	serviceProvider,
-	errors,
-	setErrors,
-	setBillingParty,
-	billingParty,
-	errMszs,
-	collectionParty,
-	setCollectionParty,
-	purchaseInvoiceValues,
+	uploadInvoiceUrl = '',
+	serviceProvider = {},
+	errors = {},
+	setErrors = () => {},
+	setBillingParty = () => {},
+	billingParty = {},
+	errMszs = {},
+	collectionParty = {},
+	setCollectionParty = () => {},
+	purchaseInvoiceValues = {},
 	billId,
-	editData,
+	editData = {},
 }, ref) {
 	const [codes, setCodes] = useState(purchaseInvoiceValues?.codes || {});
 
@@ -58,7 +58,7 @@ function InvoiceFormLayout({
 
 	const [{ data: listEntities }] = useRequest({
 		method : 'get',
-		url    : 'list_cogo_entities',
+		url    : '/list_cogo_entities',
 	}, { manual: false });
 
 	const defaultLineItems = purchaseInvoiceValues?.line_items?.map((item) => ({
@@ -70,7 +70,7 @@ function InvoiceFormLayout({
 
 	const { control, watch, setValue, handleSubmit, formState: { errors: errorVal } } = useForm({
 		defaultValues: {
-			exchange_rate: purchaseInvoiceValues.exchange_rate || [
+			exchange_rate: purchaseInvoiceValues?.exchange_rate || [
 				{ from_currency: 'INR', to_currency: 'INR', rate: '1' },
 			],
 			line_items: isEmpty(defaultLineItems) ? [EMPTY_LINE_ITEMS] : defaultLineItems,
@@ -83,7 +83,7 @@ function InvoiceFormLayout({
 
 	const initialValueBP = listEntities?.list?.find(
 		(item) => item?.registration_number
-			=== (purchaseInvoiceValues.billing_party),
+			=== (purchaseInvoiceValues?.billing_party),
 	);
 
 	useEffect(() => {
@@ -91,7 +91,7 @@ function InvoiceFormLayout({
 			setBillingParty({
 				...initialValueBP,
 				billing_party_address:
-					purchaseInvoiceValues.billing_party_address,
+					purchaseInvoiceValues?.billing_party_address,
 			});
 		}
 	}, [listEntities?.list?.length]);
@@ -99,7 +99,7 @@ function InvoiceFormLayout({
 	useEffect(() => {
 		if (formValues?.invoice_currency) {
 			const declaredExcRate = formValues?.exchange_rate?.map((item) => {
-				const isSame = item.from_currency === formValues?.invoice_currency;
+				const isSame = item?.from_currency === formValues?.invoice_currency;
 
 				return {
 					...item,
@@ -112,7 +112,7 @@ function InvoiceFormLayout({
 	}, [formValues?.invoice_currency, formValues?.exchange_rate?.length]);
 
 	useEffect(() => {
-		formValues?.line_items.forEach((item, index) => {
+		formValues?.line_items?.forEach((item, index) => {
 			const exchRate = formValues?.exchange_rate?.filter(
 				(ex) => ex?.from_currency === item?.currency,
 			)?.[0]?.rate;
@@ -129,7 +129,7 @@ function InvoiceFormLayout({
 
 	const calculatedValues = useCalculateTotalPrice({
 		baseCurrency : formValues?.invoice_currency,
-		lineItems    : formValues.line_items,
+		lineItems    : formValues?.line_items,
 		chargeCodes  : codes,
 	});
 
@@ -190,32 +190,32 @@ function InvoiceFormLayout({
 				<AccordianView title="Select Invoice Type" fullwidth open={isEdit || isJobClosed}>
 					<div className={`${styles.flex} ${styles.justifiy}`}>
 						<div className={`${styles.flex}`}>
-							{!isJobClosed && (
+							{!isJobClosed ? (
 								<Segmented
 									setBillCatogory={setBillCatogory}
 									billCatogory={billCatogory}
 								/>
-							)}
+							) : null}
 							<RadioGroupController
 								options={getOptions()}
 								control={control}
 								name="invoice_type"
 								rules={{ required: true }}
-								value={purchaseInvoiceValues.invoice_type || isCreditNoteOnly || 'purchase_invoice'}
+								value={purchaseInvoiceValues?.invoice_type || isCreditNoteOnly || 'purchase_invoice'}
 							/>
-							{errors?.invoice_type && (
+							{errors?.invoice_type ? (
 								<div className={`${styles.errors} ${styles.marginleft}`}>
 									Invoice type is Required
 								</div>
-							)}
+							) : null}
 						</div>
 						<Button
 							className={styles.margintop}
 							disabled={isTagDissable()}
 							onClick={() => { setShowTaggings(true); }}
 						>
-							{!isEmpty(selectedProforma)
-								? ' Edit & Tag ' : 'Tag'}
+							{isEmpty(selectedProforma)
+								? 'Tag' : ' Edit & Tag '}
 						</Button>
 					</div>
 				</AccordianView>
@@ -292,23 +292,23 @@ function InvoiceFormLayout({
 					selectedProforma={selectedProforma}
 					setSelectedProforma={setSelectedProforma}
 				/>
-				{showCollectionParty && (
+				{showCollectionParty ? (
 					<CollectionPartyForm
 						showCollectionParty={showCollectionParty}
 						setShowCollectionParty={setShowCollectionParty}
 						serviceProvider={serviceProvider}
 					/>
-				)}
-				{showBankform && (
+				) : null}
+				{showBankform ? (
 					<BankForm
 						showBankform={showBankform}
 						setShowBankForm={setShowBankForm}
 						orgResponse={{
 							id: collectionParty.organization_id,
 						}}
-						tradePartyId={collectionParty.id}
+						tradePartyId={collectionParty?.id}
 					/>
-				)}
+				) : null}
 			</div>
 		</div>
 	);

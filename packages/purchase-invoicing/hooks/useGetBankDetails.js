@@ -1,9 +1,11 @@
 import { useRequest } from '@cogoport/request';
 
+import toastApiError from '../utils/toastApiError';
+
 const useGetBankDetails = ({ setValues }) => {
 	const [{ loading }, trigger] = useRequest({
 		method : 'get',
-		url    : 'get_bank_details',
+		url    : '/get_bank_details',
 	}, { manual: false });
 
 	const getBankDetails = async ({ ifsc_code }) => {
@@ -20,7 +22,7 @@ const useGetBankDetails = ({ setValues }) => {
 				branch_name : bankData.branch || '',
 			});
 		} catch (error) {
-			console.log(error);
+			toastApiError(error);
 		}
 	};
 

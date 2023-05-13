@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 
 function Accordion({
 	title,
-	children,
+	children = null,
 	open = false,
 	showerror,
 }) {
@@ -31,13 +31,13 @@ function Accordion({
 				</div>
 			</button>
 			<div className={active ? styles.accordion_line_active : styles.accordion_line} />
-			{active && (
+			{active ? (
 				<div className={`${styles.description} ${active ? styles.active : ''}`}>
 					<p className={styles.accordion_content}>
 						{children}
 					</p>
 				</div>
-			)}
+			) : null}
 		</div>
 	);
 }

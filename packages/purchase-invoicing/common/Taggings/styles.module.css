@@ -190,11 +190,11 @@
 	display: flex;
 }
 
-.tagging{
-	margin-top   : 16px;
-	position    : relative;
+.tagging {
+	position: relative;
+	margin-top: 16px;
 }
 
-.tagright{
-	border-right :  1px solid var(--color-tertiary-blue-2);
+.tagright {
+	border-right: 1px solid var(--color-tertiary-blue-2);
 }

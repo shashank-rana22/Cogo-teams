@@ -11,21 +11,19 @@ import toastApiError from '../utils/toastApiError';
  * @property {Object} 	[data]
  * @property {function}	[onCloseModal]
  */
-const useSaveDocument = (props) => {
-	const {
-		orgResponse,
-		tradePartyId,
-		getOrganizationDocuments,
-		data,
-		onCloseModal,
-		getTradePartnerList,
-		source,
-	} = props;
-
+const useSaveDocument = ({
+	orgResponse,
+	tradePartyId,
+	getOrganizationDocuments,
+	data,
+	onCloseModal,
+	getTradePartnerList,
+	source,
+}) => {
 	const {
 		id: organizationId,
 		organization_trade_party_id: organizationTradePartyId,
-	} = orgResponse;
+	} = orgResponse || {};
 
 	const action = isEmpty(data) ? 'create' : 'edit';
 
@@ -47,25 +45,17 @@ const useSaveDocument = (props) => {
 		source,
 	});
 
-	const onSuccess = () => {
-		getOrganizationDocuments();
-		onCloseModal();
-	};
-
-	const onFailure = ({ error }) => {
-		toastApiError(error.data);
-	};
-
 	const saveDocument = async ({ values }) => {
 		try {
 			const payload = getPayload({ values });
 
 			await trigger({ data: payload });
 
-			onSuccess();
+			getOrganizationDocuments();
+			onCloseModal();
 			getTradePartnerList();
 		} catch (error) {
-			onFailure({ error });
+			toastApiError(error.data);
 		}
 	};
 

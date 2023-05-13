@@ -95,7 +95,7 @@ function ExchangeRateModal({
 							</div>
 							<div className={styles.flex}>
 								{data?.exchange_rates?.map((item) => (
-									<div className={styles.flex} key={item.id}>
+									<div className={styles.flex} key={item?.xe_rate}>
 										<div className={`${styles.exchangevalue} ${styles.span}`}>
 											{item?.from_currency}
 											{' '}

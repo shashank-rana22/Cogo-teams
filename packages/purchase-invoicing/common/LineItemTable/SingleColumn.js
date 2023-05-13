@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { renderPurchaseFunction } from '../../configurations/purchaselineItems';
+import { renderPurchaseFunction } from '../../page-components/RenderFunctions/renderPurchaseFunction';
 
 import styles from './styles.module.css';
 

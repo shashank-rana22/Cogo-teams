@@ -4,8 +4,9 @@ import React from 'react';
 
 import AccordianView from '../../../common/Accordianview';
 import getFormattedAmount from '../../../common/helpers/formatAmount';
-import { lineItemConfig, renderLineItemFunctions } from '../../../configurations/lineitemsconfig';
+import { lineItemConfig } from '../../../configurations/lineitemsconfig';
 import { EMPTY_LINE_ITEMS } from '../../../constants';
+import { renderLineItemFunctions } from '../../RenderFunctions/renderLineItemFunction';
 
 import styles from './styles.module.css';
 

@@ -334,7 +334,7 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 			shipperId            : invoiceData?.service_provider.id || undefined,
 			shipmentType         : shipment_data?.shipment_type || undefined,
 			noOfContainers       : shipment_data?.containers_count || undefined,
-			collectionPartyId    : partyId,
+			collectionPartyId    : partyId || undefined,
 			urgencyTag           : formValues?.urgency_tag || undefined,
 			exchangeRateDocument : uploadProof || undefined,
 			isDeviationAccepted  : data?.is_deviation_accepted || undefined,

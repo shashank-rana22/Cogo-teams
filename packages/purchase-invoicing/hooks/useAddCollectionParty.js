@@ -7,7 +7,7 @@ import { EMPTY_POC } from '../constants';
 
 const useAddCollectionParty = ({
 	organization_id = '',
-	setOpen = () => { },
+	setOpen = () => {},
 	source = 'shipment',
 }) => {
 	const { control, handleSubmit, formState:{ errors } } = useForm({

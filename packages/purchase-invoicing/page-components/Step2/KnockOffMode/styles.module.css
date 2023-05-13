@@ -15,6 +15,8 @@
 
 .flexcontainer {
 	display: flex;
+	flex: 1;
+	flex-direction: column;
 	justify-content: space-between;
 	width: 100%;
 	padding-bottom: 6px;
@@ -72,13 +74,6 @@
 .lineitemwrap {
 	margin-right: 16px;
 	white-space: nowrap;
-}
-
-.invoiceswrap {
-	display: flex;
-	flex: 1;
-	flex-direction: column;
-	width: 100%;
 }
 
 .margintop {

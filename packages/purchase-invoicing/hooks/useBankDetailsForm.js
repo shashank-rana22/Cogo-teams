@@ -18,7 +18,7 @@ const useBankDetailsDocumentForm = (props) => {
 
 	const formProps = useForm();
 
-	const { fields, watch, setValues } = formProps;
+	const { fields, watch, setValues } = formProps || {};
 
 	const { bankDetailsLoading, onBlurIfscControl } = useGetBankDetails({
 		setValues,
@@ -71,7 +71,7 @@ const useBankDetailsDocumentForm = (props) => {
 			...formProps,
 			fields: newFields,
 		},
-		errors: formProps.formState.errors,
+		errors: formProps?.formState?.errors,
 		onSubmit,
 	};
 };

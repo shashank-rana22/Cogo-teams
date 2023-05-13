@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
 
 const useResetErrors = ({ errors, currentStateErrors, setErrors }) => {
+	const newErrors = errors;
 	useEffect(() => {
-		Object.keys(errors).forEach((key) => {
+		Object.keys(newErrors).forEach((key) => {
 			if (!currentStateErrors[key]) {
-				// eslint-disable-next-line no-param-reassign
-				delete errors[key];
+				delete newErrors[key];
 			}
 		});
-		setErrors({ ...errors });
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		setErrors({ ...newErrors });
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(currentStateErrors)]);
 };
 

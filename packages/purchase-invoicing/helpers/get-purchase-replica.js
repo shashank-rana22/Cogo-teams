@@ -5,8 +5,8 @@ import { getPurchaseLineItems } from './getPurchaseLineItems';
 const getPurchaseReplica = (data, globalSelected, purchaseInvoiceValues) => {
 	let items = [];
 
-	if (isEmpty(globalSelected[0].buy_line_items)) {
-		const buy_line_items = globalSelected[0].purchase_line_items || [];
+	if (isEmpty(globalSelected?.[0]?.buy_line_items)) {
+		const buy_line_items = globalSelected?.[0]?.purchase_line_items || [];
 		const new_buy = getPurchaseLineItems(buy_line_items, purchaseInvoiceValues);
 		const service = data?.service_charges?.[0];
 
@@ -14,8 +14,8 @@ const getPurchaseReplica = (data, globalSelected, purchaseInvoiceValues) => {
 			items = new_buy.map((item) => ({
 				...item,
 				service_name     : undefined,
-				service_id       : service.service_id,
-				service_type     : service.service_type,
+				service_id       : service?.service_id,
+				service_type     : service?.service_type,
 				price            : 0,
 				exchange_rate    : 1,
 				tax_percent      : 0,

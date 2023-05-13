@@ -13,7 +13,7 @@ function InvoicesTable({
 	page,
 	total,
 	setFilters = () => {},
-	filters,
+	filters = {},
 	loading,
 	showPagination = true,
 	...rest
