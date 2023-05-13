@@ -45,8 +45,7 @@ function InvoiceFormLayout({
 	const [showBankform, setShowBankForm] = useState(false);
 	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
 	const isJobClosed = shipment_data?.is_job_closed;
-	const billingAddresses = collectionParty?.billing_addresses || [];
-	const otherAddresses = collectionParty?.other_addresses || [];
+	const { billing_addresses: billingAddresses = [], other_addresses: otherAddresses = [] } = collectionParty || {};
 	const allAddresses = [...billingAddresses, ...otherAddresses];
 	const isEdit = !isEmpty(billId);
 	const editable = !isEmpty(editData);

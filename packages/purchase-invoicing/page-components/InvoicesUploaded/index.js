@@ -21,7 +21,7 @@ function InvoicesUploaded({
 		Header   : '',
 		accessor : (item) => (
 			<div
-				className={`${styles.value} ${styles.underline}`}
+				className={styles.value}
 				onClick={() => {
 					setStep(2);
 					setOpenComparision(item);

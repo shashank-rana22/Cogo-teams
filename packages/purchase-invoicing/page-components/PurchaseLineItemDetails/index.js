@@ -18,6 +18,13 @@ function PurchaseLineItemDetails({
 		purchaseInvoiceValues,
 	});
 
+	const DETAILS = [
+		{ key: 'bank_name', label: 'Bank Details' },
+		{ key: 'bank_account_number', label: 'Account Number' },
+		{ key: 'ifsc_number', label: 'IFSC' },
+		{ key: 'registration_number', label: 'PAN Number' },
+	];
+
 	return (
 		<div>
 			<div className={styles.borderbottom}>
@@ -55,25 +62,18 @@ function PurchaseLineItemDetails({
 						{collectionPartyDetails?.company_name || '-'}
 					</span>
 					<div className={`${styles.flex} ${styles.wrap}`}>
-						<div className={`${styles.margin} ${styles.marginright}`}>
-							<span className={styles.label}>Bank Details : </span>
-							<span className={styles.value}>
-								{' '}
-								{collectionPartyDetails?.bank_name || '-'}
-							</span>
-						</div>
-						<div className={`${styles.margin} ${styles.marginright}`}>
-							<span className={styles.label}>Account Number : </span>
-							<span className={styles.value}>{collectionPartyDetails?.bank_account_number || '-'}</span>
-						</div>
-						<div className={`${styles.margin} ${styles.marginright}`}>
-							<span className={styles.label}>IFSC : </span>
-							<span className={styles.value}>{collectionPartyDetails?.ifsc_number || '-'}</span>
-						</div>
-						<div className={`${styles.margin} ${styles.marginright}`}>
-							<span className={styles.label}>PAN Number : </span>
-							<span className={styles.value}>{collectionPartyDetails?.registration_number || '-'}</span>
-						</div>
+						{DETAILS.map(({ label, key }) => (
+							<div className={`${styles.margin} ${styles.marginright}`}>
+								<span className={styles.label}>
+									{label}
+								</span>
+								<span className={styles.value}>
+									:
+									{' '}
+									{collectionPartyDetails?.[key] || '-'}
+								</span>
+							</div>
+						))}
 						<div className={styles.margin}>
 							<span className={styles.label}>GST Number : </span>
 							<span className={styles.value}>{collectionPartyDetails?.tax_number || '-'}</span>

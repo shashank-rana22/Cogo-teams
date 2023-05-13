@@ -36,35 +36,33 @@ function TagMap({
 	return (
 		<div className={styles.border}>
 			{loading ? <Placeholder width="100%" height="200px" /> : (
-				<>
-					{(allTaggingMaps).map((type) => (
-						<div
-							className={`${styles.flex} 
+				(allTaggingMaps).map((type) => (
+					<div
+						className={`${styles.flex} 
 					${styles.column} ${type === 'merge' ? styles.merge : ''}`}
-							key={type}
-						>
-							{(mappingsData?.[type] || []).map((item) => (
-								<div
-									className={`${styles.flex} ${styles.bordernone}
+						key={type}
+					>
+						{(mappingsData?.[type] || []).map((item) => (
+							<div
+								className={`${styles.flex} ${styles.bordernone}
 									${styles.wrapper} ${type === 'merge' ? styles.flexend : styles.flexstart}`}
+								key={item?.billId}
+							>
+								<TagCard
+									item={item}
+									classname={type}
+									setSelectedProforma={setSelectedProforma}
+									selectedProforma={selectedProforma}
+									isNormalTab={isNormalTab}
+									activeTab={activeTab}
 									key={item?.billId}
-								>
-									<TagCard
-										item={item}
-										classname={type}
-										setSelectedProforma={setSelectedProforma}
-										selectedProforma={selectedProforma}
-										isNormalTab={isNormalTab}
-										activeTab={activeTab}
-										key={item?.billId}
-										showCheck={showCheck}
-										isfirst
-									/>
-								</div>
-							))}
-						</div>
-					))}
-				</>
+									showCheck={showCheck}
+									isfirst
+								/>
+							</div>
+						))}
+					</div>
+				))
 			)}
 		</div>
 
