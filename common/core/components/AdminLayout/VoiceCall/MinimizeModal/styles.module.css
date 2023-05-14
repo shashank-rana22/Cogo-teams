@@ -57,10 +57,6 @@
 	transform: rotate(135deg);
 }
 
-.disable {
-	cursor: not-allowed;
-}
-
 .end_call {
 	display: flex;
 	align-items: center;

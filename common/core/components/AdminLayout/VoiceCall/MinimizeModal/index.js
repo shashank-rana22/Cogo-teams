@@ -39,7 +39,8 @@ function MinimizeModal({
 			</div>
 			<div
 				className={styles.details}
-				role="presentation"
+				role="button"
+				tabIndex={0}
 			>
 				<div className={styles.min_number}>
 					{userName || `${mobile_country_code} ${mobile_number}`

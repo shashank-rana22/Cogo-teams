@@ -1,9 +1,9 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-const updateLocalState = ({ p = {}, latestAddedAgentName = '', payload = {}, attendeeId = '' }) => ({
-	...p,
-	attendees: [...(p.attendees || []), {
+const updateLocalState = ({ prev = {}, latestAddedAgentName = '', payload = {}, attendeeId = '' }) => ({
+	...prev,
+	attendees: [...(prev.attendees || []), {
 		attendeeId,
 		agentName: latestAddedAgentName,
 		...payload,
@@ -35,9 +35,9 @@ function useUpdateLiveCallStatus({
 				return;
 			}
 			callbackFunc();
-			setLocalCallState((p) => updateLocalState(
+			setLocalCallState((prev) => updateLocalState(
 				{
-					p,
+					prev,
 					latestAddedAgentName,
 					payload,
 					attendeeId: res?.data?.voice_call_attendee_id,

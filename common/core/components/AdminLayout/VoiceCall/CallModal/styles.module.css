@@ -129,3 +129,10 @@
 	fill: #fff;
 	transform: rotate(135deg);
 }
+
+.minus_sign {
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
+	fill: #4f4f4f;
+}

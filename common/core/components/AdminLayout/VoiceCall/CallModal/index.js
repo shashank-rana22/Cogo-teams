@@ -33,6 +33,12 @@ function CallModal({
 	} = voice_call_recipient_data || {};
 
 	const isInConferenceCall = !isEmpty(attendees) || false;
+
+	const hangUpFunc = () => {
+		if (!hangUpLoading && !callLoading) {
+			hangUpCall();
+		}
+	};
 	return (
 		<Modal
 			show
@@ -43,10 +49,7 @@ function CallModal({
 			<Modal.Body>
 				<div className={styles.minus_div}>
 					<IcMMinus
-						width={15}
-						height={15}
-						cursor="pointer"
-						fill="#4F4F4F"
+						className={styles.minus_sign}
 						onClick={() => localStateReducer({ showCallModalType: 'minimizedModal' })}
 					/>
 				</div>
@@ -89,11 +92,7 @@ function CallModal({
 								${(hangUpLoading || callLoading) ? styles.disable : ''}`}
 								tabIndex={0}
 								role="button"
-								onClick={() => {
-									if (!hangUpLoading && !callLoading) {
-										hangUpCall();
-									}
-								}}
+								onClick={hangUpFunc}
 							>
 								<IcMCall className={styles.end_call_icon} />
 							</div>

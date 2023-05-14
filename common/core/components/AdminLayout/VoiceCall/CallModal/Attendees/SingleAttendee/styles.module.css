@@ -21,12 +21,10 @@
 	font-size: 12px;
 	font-weight: 600;
 	color: #4f4f4f;
-	user-select: none;
 }
 
 .connecting_text {
 	margin-left: 10px;
 	font-size: 10px;
 	color: #f68b21;
-	user-select: none;
 }
