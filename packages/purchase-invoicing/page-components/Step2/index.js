@@ -11,7 +11,7 @@ import KnockOffMode from './KnockOffMode';
 import styles from './styles.module.css';
 
 function Step2({
-	contentText,
+	contentText = '',
 	purchaseInvoiceValues = {},
 	serviceProvider = {},
 	setExchangeRateModal,
@@ -126,7 +126,7 @@ function Step2({
 					)}
 					{editData?.status !== 'coe_approved' ? (
 						<Button
-							className={styles.button}
+							className={styles.marginleft}
 							disabled={loading}
 							onClick={() => {
 								setExchangeRateModal(true);

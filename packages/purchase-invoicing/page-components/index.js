@@ -13,8 +13,8 @@ function PurchaseInvoicing({ shipmentData = {}, servicesData = [] }) {
 
 	return (
 		<div>
-			{!collectionPartyLoading ? (
-				(collectionPartyList || []).map((collectionParty) => (
+			{collectionPartyLoading ? (<Loader />)
+				: (collectionPartyList || []).map((collectionParty) => (
 					<CollectionPartyDetails
 						shipmentData={shipmentData}
 						collectionParty={collectionParty}
@@ -22,8 +22,7 @@ function PurchaseInvoicing({ shipmentData = {}, servicesData = [] }) {
 						servicesData={servicesData}
 						key={collectionParty.id}
 					/>
-				))
-			) : <Loader />}
+				))}
 		</div>
 	);
 }
