@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import styles from './styles.module.css';
 
 function Accordion({
-	title,
+	title = '',
 	children = null,
 	open = false,
-	showerror,
+	showerror = false,
 }) {
 	const [active, setActive] = useState(open);
 

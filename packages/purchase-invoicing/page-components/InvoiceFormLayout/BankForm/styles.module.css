@@ -65,7 +65,7 @@
 .errors {
 	padding-left: 4px;
 	font-size: var(--font-size-sm);
-	color: red;
+	color: var(--color-primary-error-red-2);
 }
 
 .loader {

@@ -5,7 +5,7 @@ import toastApiError from '../utils/toastApiError';
 
 const useCreateOrganizationTradeParty = ({
 	successMessage = 'Successfully Created',
-	refetch,
+	refetch = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_organization_trade_party',

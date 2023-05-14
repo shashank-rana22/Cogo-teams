@@ -55,7 +55,6 @@
 .updated_at {
 	padding-top: 2px;
 	font-size: var(--font-size-sm);
-	font-weight: 400;
 }
 
 .childs {
@@ -74,10 +73,6 @@
 	width: max-content;
 }
 
-.bordernone {
-	overflow-x: scroll;
-}
-
 .button_container {
 	display: flex;
 	gap: 16px;
@@ -88,6 +83,7 @@
 .wrapper {
 	width: 100%;
 	margin-top: 10px;
+	overflow-x: scroll;
 }
 
 .flexend {
@@ -136,7 +132,7 @@
 
 .color_reject {
 	padding-top: 6px;
-	color: red;
+	color: var(--color-primary-error-red-2);
 }
 
 .button {
@@ -186,15 +182,20 @@
 	flex-direction: column;
 }
 
-.simpleflex {
-	display: flex;
-}
-
 .tagging {
 	position: relative;
+	display: flex;
 	margin-top: 16px;
 }
 
 .tagright {
 	border-right: 1px solid var(--color-tertiary-blue-2);
+}
+
+.commontags {
+	display: flex;
+	width: 100%;
+	padding: 16px;
+	margin-top: 10px;
+	overflow-x: scroll;
 }

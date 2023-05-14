@@ -13,7 +13,7 @@ import useSaveDocument from './useSaveDocument';
  * @property {function}	[onCloseModal]
  */
 const useBankDetailsDocumentForm = (props) => {
-	const { source } = props;
+	const { source } = props || {};
 	const { loading, saveDocument } = useSaveDocument(props);
 
 	const formProps = useForm();

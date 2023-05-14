@@ -12,17 +12,17 @@ function CollectionPartyDetails({
 	control,
 	collectionParty = {},
 	setCollectionParty = () => {},
-	setValue,
-	watch,
+	setValue = () => {},
+	watch = () => {},
 	serviceProvider = {},
 	collectionPartyAddresses = [],
-	errors,
-	errMszs,
+	errors = {},
+	errMszs = {},
 	purchaseInvoiceValues = {},
 	open,
 	setShowCollectionParty = () => {},
 	setShowBankForm = () => {},
-	formValues,
+	formValues = {},
 }) {
 	const organization_id = serviceProvider?.service_provider_id;
 
@@ -145,13 +145,13 @@ function CollectionPartyDetails({
 						}}
 						rules={{ required: true }}
 					/>
-					{errors?.collection_party && (
-						<div className={`${styles.errors}`}>
+					{errors?.collection_party ? (
+						<div className={styles.errors}>
 							Collection Party is Required
 						</div>
-					)}
+					) : null}
 				</div>
-				{!isEmpty(formValues?.collection_party) && (
+				{!isEmpty(formValues?.collection_party) ? (
 					<div className={`${styles.selectcontainer} ${styles.marginleft}`}>
 						<div className={styles.label}>Select Collection Party Address</div>
 						<SelectController
@@ -162,15 +162,15 @@ function CollectionPartyDetails({
 							rules={{ required: true }}
 							value={purchaseInvoiceValues?.collection_party_address}
 						/>
-						{errors?.collection_party_address && (
-							<div className={`${styles.errors}`}>
+						{errors?.collection_party_address ? (
+							<div className={styles.errors}>
 								Collection Party Address is Required
 							</div>
-						)}
+						) : null}
 					</div>
-				)}
+				) : null}
 				<div className={`${styles.selectcontainer} ${styles.marginleft}`}>
-					{!isEmpty(collectionPartyBankOptions) && (
+					{!isEmpty(collectionPartyBankOptions) ? (
 						<div>
 							<div className={styles.label}>Select Bank Details</div>
 							<SelectController
@@ -192,14 +192,14 @@ function CollectionPartyDetails({
 								)}
 								rules={{ required: true }}
 							/>
-							{errors?.collection_party_bank_details && (
-								<div className={`${styles.errors}`}>
+							{errors?.collection_party_bank_details ? (
+								<div className={styles.errors}>
 									Collection Party Bank Details is Required
 								</div>
-							)}
+							) : null}
 						</div>
-					)}
-					{!isEmpty(formValues?.collection_party) && (
+					) : null}
+					{!isEmpty(formValues?.collection_party) ? (
 						<div
 							className={styles.link}
 							role="presentation"
@@ -207,13 +207,13 @@ function CollectionPartyDetails({
 						>
 							+ Add Bank Details
 						</div>
-					)}
+					) : null}
 				</div>
 				<div className={`${styles.marginTop} ${styles.circle}`}>
 					<IcMPlusInCircle height={20} width={20} onClick={() => { setShowCollectionParty(true); }} />
 				</div>
 			</div>
-			{collectionPartyBank && (
+			{collectionPartyBank ? (
 				<div className={styles.address}>
 					<div className={styles.flex}>
 						<span className={styles.key}>BankDetails:</span>
@@ -248,7 +248,7 @@ function CollectionPartyDetails({
 						</span>
 					</div>
 				</div>
-			)}
+			) : null}
 		</AccordianView>
 	);
 }

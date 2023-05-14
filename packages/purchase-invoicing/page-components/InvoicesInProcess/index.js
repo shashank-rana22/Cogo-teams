@@ -6,13 +6,13 @@ import invoiceconfiguration from '../../configurations/invoicetableconfig';
 
 import styles from './styles.module.css';
 
-function InvoicesInProcess({ invoicesdata }) {
+function InvoicesInProcess({ invoicesdata = {} }) {
 	const titleCard = <div>Invoice In Process</div>;
 
 	const viewDetails = {
 		Header   : '',
 		accessor : () => (
-			<div className={`${styles.value} ${styles.underline}`}>
+			<div className={styles.value}>
 				Map Line-Items
 			</div>
 		),

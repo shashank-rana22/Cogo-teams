@@ -44,5 +44,5 @@
 
 .pending {
 	font-weight: 600;
-	color: #cb6464;
+	color: var(--color-red);
 }

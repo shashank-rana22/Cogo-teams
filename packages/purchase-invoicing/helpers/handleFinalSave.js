@@ -9,7 +9,7 @@ const useHandleFinalSave = ({
 	data = {},
 	purchaseInvoiceValues = {},
 	billId,
-	onClose = () => { },
+	onClose = () => {},
 	editData = {},
 	setGlobalSelected = () => {},
 	globalSelected = {},

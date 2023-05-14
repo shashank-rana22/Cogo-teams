@@ -11,7 +11,6 @@ const useGetTaggingBills = ({ shipmentId, serviceProviderId }) => {
 				serviceProviderId,
 			},
 		},
-		{ manual: false },
 	);
 
 	return {

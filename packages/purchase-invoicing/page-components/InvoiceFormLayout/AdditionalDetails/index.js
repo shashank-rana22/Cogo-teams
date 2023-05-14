@@ -9,14 +9,14 @@ import styles from './styles.module.css';
 
 function AdditionalDetails({
 	control,
-	errors,
-	errMszs,
-	open,
-	purchaseInvoiceValues,
-	shipment_data,
+	errors = {},
+	errMszs = {},
+	open = false,
+	purchaseInvoiceValues = {},
+	shipment_data = {},
 	primary_service,
-	serviceProvider,
-	formValues,
+	serviceProvider = {},
+	formValues = {},
 }) {
 	const { origin, destination } = getLocationConfig(primary_service);
 
@@ -43,11 +43,11 @@ function AdditionalDetails({
 							rules={{ required: true }}
 							value={purchaseInvoiceValues?.tax_invoice_no}
 						/>
-						{errors?.tax_invoice_no && (
-							<div className={`${styles.errors}`}>
+						{errors?.tax_invoice_no ? (
+							<div className={styles.errors}>
 								Tax Invoice No is Required
 							</div>
-						)}
+						) : null}
 					</div>
 				</div>
 				<div className={`${styles.inputcontainer}`}>
@@ -60,14 +60,14 @@ function AdditionalDetails({
 							rules={{ required: true }}
 							value={purchaseInvoiceValues?.irn_number}
 						/>
-						{errors?.irn_number && (
-							<div className={`${styles.errors}`}>
+						{errors?.irn_number ? (
+							<div className={styles.errors}>
 								Irn Number is Required
 							</div>
-						)}
+						) : null}
 					</div>
 				</div>
-				{formValues?.invoice_type === 'credit_note' && (
+				{formValues?.invoice_type === 'credit_note' ? (
 					<div className={`${styles.selectcontainer}`}>
 						<div className={styles.label}>Ref Invoice No :</div>
 						<div>
@@ -79,14 +79,14 @@ function AdditionalDetails({
 								rules={{ required: true }}
 								value={purchaseInvoiceValues?.ref_invoice_no}
 							/>
-							{errors?.ref_invoice_no && (
-								<div className={`${styles.errors}`}>
+							{errors?.ref_invoice_no ? (
+								<div className={styles.errors}>
 									Payment Mode is Required
 								</div>
-							)}
+							) : null}
 						</div>
 					</div>
-				)}
+				) : null}
 				<div className={`${styles.inputcontainer}`}>
 					<div className={styles.label}>Place of Supply :</div>
 					<div>
@@ -97,11 +97,11 @@ function AdditionalDetails({
 							rules={{ required: true }}
 							value={purchaseInvoiceValues?.place_of_supply}
 						/>
-						{errors?.place_of_supply && (
-							<div className={`${styles.errors}`}>
+						{errors?.place_of_supply ? (
+							<div className={styles.errors}>
 								Place of Supply is Required
 							</div>
-						)}
+						) : null}
 					</div>
 				</div>
 				<div className={`${styles.inputcontainer}`}>
@@ -114,11 +114,11 @@ function AdditionalDetails({
 							rules={{ required: true }}
 							value={purchaseInvoiceValues?.pol || origin?.name}
 						/>
-						{errors?.pol && (
-							<div className={`${styles.errors}`}>
+						{errors?.pol ? (
+							<div className={styles.errors}>
 								Pol is Required
 							</div>
-						)}
+						) : null}
 					</div>
 				</div>
 				<div className={`${styles.inputcontainer}`}>
@@ -131,11 +131,11 @@ function AdditionalDetails({
 							rules={{ required: true }}
 							value={purchaseInvoiceValues?.pod || destination?.name}
 						/>
-						{errors?.pod && (
-							<div className={`${styles.errors}`}>
+						{errors?.pod ? (
+							<div className={styles.errors}>
 								Pod is Required
 							</div>
-						)}
+						) : null}
 					</div>
 				</div>
 				<div className={`${styles.selectcontainer}`}>
@@ -149,11 +149,11 @@ function AdditionalDetails({
 							rules={{ required: true }}
 							value="cash"
 						/>
-						{errors?.payment_mode && (
-							<div className={`${styles.errors}`}>
+						{errors?.payment_mode ? (
+							<div className={styles.errors}>
 								Payment Mode is Required
 							</div>
-						)}
+						) : null}
 					</div>
 				</div>
 				{shipment_data?.shipment_type === 'air_freight' ? (
@@ -168,11 +168,11 @@ function AdditionalDetails({
 									rules={{ required: true }}
 									value={purchaseInvoiceValues?.mawb_no}
 								/>
-								{errors?.mawb_no && (
-									<div className={`${styles.errors}`}>
+								{errors?.mawb_no ? (
+									<div className={styles.errors}>
 										Mawb No is Required
 									</div>
-								)}
+								) : null}
 							</div>
 						</div>
 						<div className={`${styles.inputcontainer}`}>
@@ -186,11 +186,11 @@ function AdditionalDetails({
 									value={purchaseInvoiceValues?.package_count}
 									type="number"
 								/>
-								{errors?.package_count && (
-									<div className={`${styles.errors}`}>
+								{errors?.package_count ? (
+									<div className={styles.errors}>
 										Package Count is Required
 									</div>
-								)}
+								) : null}
 							</div>
 						</div>
 						<div className={`${styles.inputcontainer}`}>
@@ -203,11 +203,11 @@ function AdditionalDetails({
 									rules={{ required: true }}
 									value={purchaseInvoiceValues?.weight}
 								/>
-								{errors?.weight && (
-									<div className={`${styles.errors}`}>
+								{errors?.weight ? (
+									<div className={styles.errors}>
 										Weight is Required
 									</div>
-								)}
+								) : null}
 							</div>
 						</div>
 					</>

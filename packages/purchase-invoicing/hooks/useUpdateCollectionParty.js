@@ -2,14 +2,11 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState } from 'react';
 
 const useUpdateColletctionParty = ({ onClose = () => {} }) => {
 	const { user_profile = {} } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
-
-	const [loading, setLoading] = useState(false);
 
 	const [{ loading: apiLoading }, trigger] = useRequestBf(
 		{
@@ -21,7 +18,6 @@ const useUpdateColletctionParty = ({ onClose = () => {} }) => {
 	);
 
 	const updateCp = async (values) => {
-		setLoading(true);
 		try {
 			const res = await trigger({
 				data: {
@@ -45,18 +41,16 @@ const useUpdateColletctionParty = ({ onClose = () => {} }) => {
 			});
 			if (!res.hasError) {
 				Toast.success('Bill Updated SuccessFully');
-				setLoading(false);
 				onClose();
 			}
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.data));
-			setLoading(false);
 		}
 	};
 
 	return {
 		updateCp,
-		loading: loading || apiLoading,
+		loading: apiLoading,
 	};
 };
 

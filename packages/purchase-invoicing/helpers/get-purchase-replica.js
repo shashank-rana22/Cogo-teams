@@ -1,6 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
-import { getPurchaseLineItems } from './getPurchaseLineItems';
+import { getPurchaseLineItems } from './mappingsFunc';
 
 const getPurchaseReplica = (data, globalSelected, purchaseInvoiceValues) => {
 	let items = [];

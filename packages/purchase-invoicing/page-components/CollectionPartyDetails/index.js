@@ -14,18 +14,17 @@ import ServiceTables from '../../common/ServiceTable';
 import ToolTipWrapper from '../../common/ToolTipWrapper';
 import useGetTradeParty from '../../hooks/useGetTradeParty';
 import toastApiError from '../../utils/toastApiError';
-// import InvoicesInProcess from '../InvoicesInProcess';
 import InvoicesUploaded from '../InvoicesUploaded';
 
 import styles from './styles.module.css';
 
-function CollectionPartyDetails({ collectionParty, refetch, servicesData }) {
+const STATE = ['init', 'awaiting_service_provider_confirmation', 'completed'];
+
+function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, servicesData = {} }) {
 	const [uploadInvoiceUrl, setUploadInvoiceUrl] = useState('');
 	const [openComparision, setOpenComparision] = useState(false);
 	const [open, setOpen] = useState(false);
 	const [step, setStep] = useState(1);
-
-	const state = ['init', 'awaiting_service_provider_confirmation', 'completed'];
 
 	const services = (collectionParty?.services || []).map(
 		(service) => service?.service_type,
@@ -40,20 +39,14 @@ function CollectionPartyDetails({ collectionParty, refetch, servicesData }) {
 
 	const {
 		shipment_data,
-		// booking_note_details,
 	} = useContext(ShipmentDetailContext);
 
 	const serviceProviderConfirmation = (collectionParty.service_charges || []).find(
-		(item) => state.includes(item?.detail?.state),
+		(item) => STATE.includes(item?.detail?.state),
 	);
 
 	const airServiceProviderConfirmation = shipment_data?.shipment_type === 'air_freight'
 		&& serviceProviderConfirmation;
-
-	// let isBookingNoteUploaded = true;
-	// if (shipment_data?.shipment_type === 'fcl_freight') {
-	// 	isBookingNoteUploaded = booking_note_details?.length;
-	// }
 
 	const AJEET_EMAIL_ID = 'ajeet@cogoport.com';
 

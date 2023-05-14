@@ -17,7 +17,7 @@ function SingleColumn({
 						width : `${((field.span || 1) * (100 / 12))}px`,
 					}}
 					className={styles.value}
-					key={field.name || field.key}
+					key={field.label || field.key}
 				>
 					{renderPurchaseFunction[field?.key] ? renderPurchaseFunction[field?.key](lineitem) : '-'}
 				</div>

@@ -11,13 +11,13 @@ function BillingPartyDetails({
 	control,
 	billingParty = {},
 	setBillingParty,
-	setValue,
+	setValue = () => {},
 	watch,
-	errors,
-	errMszs,
+	errors = {},
+	errMszs = {},
 	open,
-	purchaseInvoiceValues,
-	listEntities,
+	purchaseInvoiceValues = {},
+	listEntities = {},
 }) {
 	const billingPartyOpts = listEntities?.list?.map((item) => ({
 		...item,
@@ -59,13 +59,13 @@ function BillingPartyDetails({
 									rules={{ required: true }}
 									value={purchaseInvoiceValues?.billing_party}
 								/>
-								{errors?.billing_party && (
-									<div className={`${styles.errors}`}>
+								{errors?.billing_party ? (
+									<div className={styles.errors}>
 										Billing Party is Required
 									</div>
-								)}
+								) : null}
 							</div>
-							{billingParty?.addresses && (
+							{billingParty?.addresses ? (
 								<div className={`${styles.selectcontainer} ${styles.marginleft}`}>
 									<div className={styles.label}>Select Billing Address</div>
 									<SelectController
@@ -76,22 +76,22 @@ function BillingPartyDetails({
 										rules={{ required: true }}
 										value={purchaseInvoiceValues?.billing_party_address}
 									/>
-									{errors?.billing_party_address && (
-										<div className={`${styles.errors}`}>
+									{errors?.billing_party_address ? (
+										<div className={styles.errors}>
 											Billing Party Address is Required
 										</div>
-									)}
+									) : null}
 								</div>
-							)}
+							) : null}
 						</div>
-						{address && (
+						{address ? (
 							<div className={styles.address}>
 								<div>
 									<span className={styles.key}>Address</span>
 									<span className={styles.value}>
 										:
 										{' '}
-										{address?.address}
+										{address?.address || ''}
 									</span>
 								</div>
 								<div className={styles.flex}>
@@ -100,7 +100,7 @@ function BillingPartyDetails({
 										<span className={styles.value}>
 											:
 											{' '}
-											{billingParty?.registration_number}
+											{billingParty?.registration_number || ''}
 										</span>
 									</div>
 									<div>
@@ -108,12 +108,12 @@ function BillingPartyDetails({
 										<span className={styles.value}>
 											:
 											{' '}
-											{address?.gst_number}
+											{address?.gst_number || ''}
 										</span>
 									</div>
 								</div>
 							</div>
-						)}
+						) : null}
 					</>
 				) : <Placeholder width="100%" height="80px" />}
 		</AccordianView>

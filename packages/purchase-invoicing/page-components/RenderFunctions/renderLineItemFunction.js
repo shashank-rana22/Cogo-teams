@@ -7,7 +7,7 @@ import { UNIT_OPTIONS } from '../../constants';
 
 import styles from './styles.module.css';
 
-const handleModifiedOptions = ({ options: newOptions }) => newOptions.map((option) => ({
+const handleModifiedOptions = ({ options: newOptions = [] }) => newOptions?.map((option) => ({
 	...option,
 	actualname : option?.item_name,
 	item_name  : (

@@ -44,8 +44,8 @@ function TagMap({
 					>
 						{(mappingsData?.[type] || []).map((item) => (
 							<div
-								className={`${styles.flex} ${styles.bordernone}
-									${styles.wrapper} ${type === 'merge' ? styles.flexend : styles.flexstart}`}
+								className={`${styles.commontags}
+								${type === 'merge' ? styles.flexend : styles.flexstart}`}
 								key={item?.billId}
 							>
 								<TagCard

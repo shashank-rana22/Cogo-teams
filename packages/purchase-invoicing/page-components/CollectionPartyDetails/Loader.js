@@ -5,15 +5,11 @@ import styles from './styles.module.css';
 export default function Loader() {
 	return (
 		<>
-			<div className={styles.loadercontainer}>
-				<Placeholder height="64px" />
-			</div>
-			<div className={styles.loadercontainer}>
-				<Placeholder height="64px" />
-			</div>
-			<div className={styles.loadercontainer}>
-				<Placeholder height="64px" />
-			</div>
+			{[1, 2, 3].map((item) => (
+				<div className={styles.loadercontainer} key={item}>
+					<Placeholder height="64px" />
+				</div>
+			))}
 		</>
 
 	);

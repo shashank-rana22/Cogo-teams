@@ -28,7 +28,7 @@ const useCreateColletctionParty = ({
 				organization_id  : serviceProviderId,
 				trade_party_type : ['self', 'paying_party'],
 			},
-			page_limit                              : 10000,
+			page_limit                              : 10,
 			other_addresses_data_required           : true,
 			billing_addresses_data_required         : true,
 			organization_payment_mode_data_required : true,

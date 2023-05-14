@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 function ConfirmationModal({
 	setConfirmation = () => {},
-	handleFinalSubmit = () => { },
+	handleFinalSubmit = () => {},
 }) {
 	return (
 		<div>
@@ -35,9 +35,7 @@ function ConfirmationModal({
 						</Button>
 						<Button
 							className={styles.button}
-							onClick={() => {
-								handleFinalSubmit();
-							}}
+							onClick={handleFinalSubmit}
 						>
 							Proceed
 						</Button>

@@ -7,12 +7,12 @@ import TagMap from '../../../common/Taggings/TagMap';
 import styles from './styles.module.css';
 
 function Taggings({
-	showTagings,
-	serviceProviderId,
-	shipmentId,
-	selectedProforma,
-	setSelectedProforma,
-	setShowTaggings,
+	showTagings = false,
+	serviceProviderId = '',
+	shipmentId = '',
+	selectedProforma = [],
+	setSelectedProforma = () => {},
+	setShowTaggings = () => {},
 }) {
 	const TAGGING_TABS = [
 		{ label: 'split', value: 'split', heading: 'Select a proforma you want to split ' },
@@ -53,7 +53,7 @@ function Taggings({
 				)}
 				/>
 				<div className={styles.padding}>
-					{showTagings && (
+					{showTagings ? (
 						<Tabs
 							activeTab={activeTab}
 							themeType="tertiary"
@@ -77,7 +77,7 @@ function Taggings({
 								</TabPanel>
 							))}
 						</Tabs>
-					)}
+					) : null}
 				</div>
 				<Modal.Footer>
 					<div className={styles.buttoncontainer}>

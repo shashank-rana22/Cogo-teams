@@ -5,7 +5,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 import getFormattedAmount from '../../../common/helpers/formatAmount';
 import getPurchaseReplica from '../../../helpers/get-purchase-replica';
-import mappingsFunc from '../../../helpers/getPurchaseLineItems';
+import mappingsFunc from '../../../helpers/mappingsFunc';
 import toastApiError from '../../../utils/toastApiError';
 
 import styles from './styles.module.css';

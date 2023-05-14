@@ -20,42 +20,34 @@ const useGetTradeParty = ({
 		method : 'get',
 	}, { manual: true });
 
-	const getList = async () => {
-		try {
-			await trigger({
-				params: {
-					filters: {
-						shipment_id      : shipment_id || query?.id,
-						trade_party_type : 'shipper',
-					},
-					add_service_objects_required: true,
-				},
-			});
-		} catch (error) {
-			toastApiError(error);
-		}
-	};
-
-	const refetchList = () => {
-		if (
-			(shipment_id || query?.id)
-			&& geo.uuid.fortigo_network_ids.includes(shipment_data?.importer_exporter_id)
-			&& shipment_data?.shipment_type === 'ftl_freight'
-		) {
-			getList();
-		}
-	};
-
-	const refetchListRef = useRef(refetchList);
-
-	const handleRefetch = useCallback(
-		() => { refetchListRef?.current(); },
-		[refetchListRef],
-	);
+	const getList = useCallback(() => {
+		(async () => {
+			try {
+				if (
+					(shipment_id || query?.id)
+					&& geo.uuid.fortigo_network_ids.includes(shipment_data?.importer_exporter_id)
+					&& shipment_data?.shipment_type === 'ftl_freight'
+				) {
+					getList();
+					await trigger({
+						params: {
+							filters: {
+								shipment_id      : shipment_id || query?.id,
+								trade_party_type : 'shipper',
+							},
+							add_service_objects_required: true,
+						},
+					});
+				}
+			} catch (err) {
+				toastApiError(err);
+			}
+		})();
+	}, [trigger, query, shipment_id, shipment_data]);
 
 	useEffect(() => {
-		handleRefetch();
-	}, [handleRefetch]);
+		getList();
+	}, [getList]);
 
 	return {
 		tdata: data ?? [],

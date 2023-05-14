@@ -12,18 +12,18 @@ import styles from './styles.module.css';
 
 function LineItemDetails({
 	control,
-	watch,
+	watch = () => { },
 	serviceProvider = {},
 	collectionParty = {},
 	collectionPartyAddresses = [],
-	billingParty,
-	setCodes,
-	calculatedValues,
-	invoiceCurrency,
-	errors,
-	errMszs,
-	open,
-	shipmentId,
+	billingParty = {},
+	setCodes = () => {},
+	calculatedValues = {},
+	invoiceCurrency = '',
+	errors = {},
+	errMszs = {},
+	open = false,
+	shipmentId = '',
 }) {
 	const { fields, append, remove } = useFieldArray({
 		control,
@@ -116,7 +116,7 @@ function LineItemDetails({
 							+ Add
 						</Button>
 					</div>
-					<div className={`${styles.flex} ${styles.spacebetween} ${styles.label} ${styles.addborder}`}>
+					<div className={`${styles.flex} ${styles.spacebetween}`}>
 						<div className={`${styles.padding}`}>
 							<div>T: Taxable P: Pure Agent E: Exempted N: Nil Rated</div>
 							<div>NG: Non GST R: Reverse Charge</div>

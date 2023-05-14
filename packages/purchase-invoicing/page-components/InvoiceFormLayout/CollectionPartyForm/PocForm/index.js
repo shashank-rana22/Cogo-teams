@@ -7,7 +7,7 @@ import { EMPTY_POC } from '../../../../constants';
 
 import styles from './styles.module.css';
 
-function PocForm({ control, errors }) {
+function PocForm({ control, errors = {} }) {
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name: 'poc_details',
@@ -26,11 +26,11 @@ function PocForm({ control, errors }) {
 								size="sm"
 								rules={{ required: { value: true, message: 'POC Name is required' } }}
 							/>
-							{errors?.poc_details?.[index]?.name && (
-								<div className={`${styles.errors}`}>
+							{errors?.poc_details?.[index]?.name ? (
+								<div className={styles.errors}>
 									Poc Name is Required
 								</div>
-							)}
+							) : null}
 						</div>
 						<div className={`${styles.email} ${styles.marginleft}`}>
 							<label>Email Address</label>
@@ -40,11 +40,11 @@ function PocForm({ control, errors }) {
 								size="sm"
 								rules={{ required: { value: true, message: 'Email is required' } }}
 							/>
-							{errors?.poc_details?.[index]?.email && (
-								<div className={`${styles.errors}`}>
+							{errors?.poc_details?.[index]?.email ? (
+								<div className={styles.errors}>
 									Email Address is Required
 								</div>
-							)}
+							) : null}
 						</div>
 					</div>
 					<div className={styles.row}>
@@ -56,11 +56,11 @@ function PocForm({ control, errors }) {
 								size="sm"
 								rules={{ required: true }}
 							/>
-							{errors?.poc_details?.[index]?.mobile_number && (
-								<div className={`${styles.errors}`}>
+							{errors?.poc_details?.[index]?.mobile_number ? (
+								<div className={styles.errors}>
 									Mobile Number is Required
 								</div>
-							)}
+							) : null}
 						</div>
 
 						<div>
@@ -70,22 +70,22 @@ function PocForm({ control, errors }) {
 								name={`poc_details.${index}.alternate_mobile_number`}
 								size="sm"
 							/>
-							{errors?.poc_details?.[index]?.alternate_mobile_number && (
-								<div className={`${styles.errors}`}>
+							{errors?.poc_details?.[index]?.alternate_mobile_number ? (
+								<div className={styles.errors}>
 									Alternate Mobile Number is Required
 								</div>
-							)}
+							) : null}
 						</div>
 					</div>
 					<span className={styles.delete}>
-						{fields?.length > 1 && (
+						{fields?.length > 1 ? (
 							<IcMDelete
 								className={styles.pointer}
 								height={20}
 								width={20}
 								onClick={() => remove(index)}
 							/>
-						)}
+						) : null}
 					</span>
 				</div>
 			))}

@@ -67,7 +67,10 @@
 	flex: 1.2;
 }
 
-.rate,
-.deviation {
+.rate {
 	margin-right: 12px;
+}
+
+.paddi {
+	padding: 0 14px;
 }

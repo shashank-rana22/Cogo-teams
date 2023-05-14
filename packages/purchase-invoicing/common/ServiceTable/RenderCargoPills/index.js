@@ -7,12 +7,12 @@ import styles from './styles.module.css';
 
 function RenderCargoPills({ detail = {} }) {
 	return (
-		<div className={cl`${styles.container} ${styles.shipment_cargo_details_root}`}>
+		<div className={styles.container}>
 			{CARGO_LABELS.map((label) => {
 				const value = renderValue(label, detail);
 				if (detail?.[label] && value) {
 					return (
-						<div className={cl` ${styles.box} `} key={label}>
+						<div className={styles.box} key={label}>
 							{value}
 						</div>
 					);

@@ -11,8 +11,8 @@ import styles from './styles.module.css';
 
 function PurchaseInvoiceDates({
 	control,
-	invoiceCurrency,
-	errors,
+	invoiceCurrency = '',
+	errors = {},
 	purchaseInvoiceValues = {},
 }) {
 	const geo = getGeoConstants();
@@ -35,11 +35,11 @@ function PurchaseInvoiceDates({
 						value={purchaseInvoiceValues?.invoice_date
 							? new Date(purchaseInvoiceValues?.invoice_date) : null}
 					/>
-					{errors?.invoice_date && (
-						<div className={`${styles.errors}`}>
+					{errors?.invoice_date ? (
+						<div className={styles.errors}>
 							Invoice Date is Required
 						</div>
-					)}
+					) : null}
 				</div>
 				<div className={styles.datecontainer}>
 					<div className={styles.label}>Select Invoice Due Date </div>
@@ -52,11 +52,11 @@ function PurchaseInvoiceDates({
 							? new Date(purchaseInvoiceValues?.due_date
 								|| purchaseInvoiceValues?.invoice_due_date) : null}
 					/>
-					{errors?.due_date && (
-						<div className={`${styles.errors}`}>
+					{errors?.due_date ? (
+						<div className={styles.errors}>
 							Invoice Due Date is Required
 						</div>
-					)}
+					) : null}
 				</div>
 				<div className={`${styles.selectcontainer} ${styles.marginleft}`}>
 					<div className={styles.label}>Enter Invoice Currency</div>
@@ -68,11 +68,11 @@ function PurchaseInvoiceDates({
 						rules={{ required: true }}
 						value={purchaseInvoiceValues?.invoice_currency}
 					/>
-					{errors?.invoice_currency && (
-						<div className={`${styles.errors}`}>
+					{errors?.invoice_currency ? (
+						<div className={styles.errors}>
 							Invoice Currency is Required
 						</div>
-					)}
+					) : null}
 				</div>
 				<div className={styles.exchangeratecontainer}>
 					<div className={styles.label}>Declared Exchange Rates</div>
@@ -87,11 +87,11 @@ function PurchaseInvoiceDates({
 									options={options}
 									rules={{ required: true }}
 								/>
-								{errors?.exchange_rate?.[index]?.from_currency && (
-									<div className={`${styles.errors}`}>
+								{errors?.exchange_rate?.[index]?.from_currency ? (
+									<div className={styles.errors}>
 										From currency Required
 									</div>
-								)}
+								) : null}
 							</div>
 							<div className={`${styles.selectcontainer} ${styles.marginleft}`}>
 								<div className={styles.label}>To</div>
@@ -105,11 +105,11 @@ function PurchaseInvoiceDates({
 									disabled
 									rules={{ required: true }}
 								/>
-								{errors?.exchange_rate?.[index]?.to_currency && (
-									<div className={`${styles.errors}`}>
+								{errors?.exchange_rate?.[index]?.to_currency ? (
+									<div className={styles.errors}>
 										To currency Required
 									</div>
-								)}
+								) : null}
 							</div>
 							<div className={`${styles.inputcontainer} ${styles.marginleft}`}>
 								<div className={styles.label}>Rate</div>
@@ -120,11 +120,11 @@ function PurchaseInvoiceDates({
 									rules={{ required: true }}
 									type="number"
 								/>
-								{errors?.exchange_rate?.[index]?.rate && (
-									<div className={`${styles.errors}`}>
+								{errors?.exchange_rate?.[index]?.rate ? (
+									<div className={styles.errors}>
 										Rate Required
 									</div>
-								)}
+								) : null}
 							</div>
 							<span className={styles.delete}>
 								<IcMDelete

@@ -15,7 +15,7 @@ import styles from './styles.module.css';
 function ExchangeRateModal({
 	exchangeRateModal = false,
 	setExchangeRateModal = () => {},
-	handleFinalSubmit,
+	handleFinalSubmit = () => {},
 	billId,
 	loading,
 	purchaseInvoiceValues,
@@ -89,7 +89,7 @@ function ExchangeRateModal({
 								<div className={`${styles.exchangevalue} ${styles.span} ${styles.bold}`}>
 									XE Exchange Rate
 								</div>
-								<div className={`${styles.exchangevalue} ${styles.bold} ${styles.deviation}`}>
+								<div className={`${styles.exchangevalue} ${styles.bold} ${styles.rate}`}>
 									Exchange Deviation (%)
 								</div>
 							</div>
@@ -99,7 +99,7 @@ function ExchangeRateModal({
 										<div className={`${styles.exchangevalue} ${styles.span}`}>
 											{item?.from_currency}
 											{' '}
-											<span style={{ padding: '0px 14px' }}>
+											<span className={styles.paddi}>
 												-
 												{'>'}
 											</span>
