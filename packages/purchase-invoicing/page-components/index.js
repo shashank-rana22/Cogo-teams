@@ -13,19 +13,17 @@ function PurchaseInvoicing({ shipmentData = {}, servicesData = [] }) {
 
 	return (
 		<div>
-			{collectionPartyLoading ? <Loader /> : (
-				<>
-					{(collectionPartyList || []).map((collectionParty) => (
-						<CollectionPartyDetails
-							shipmentData={shipmentData}
-							collectionParty={collectionParty}
-							refetch={refetch}
-							servicesData={servicesData}
-							key={collectionParty.id}
-						/>
-					))}
-				</>
-			)}
+			{!collectionPartyLoading ? (
+				(collectionPartyList || []).map((collectionParty) => (
+					<CollectionPartyDetails
+						shipmentData={shipmentData}
+						collectionParty={collectionParty}
+						refetch={refetch}
+						servicesData={servicesData}
+						key={collectionParty.id}
+					/>
+				))
+			) : <Loader />}
 		</div>
 	);
 }
