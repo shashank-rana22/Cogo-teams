@@ -11935,11 +11935,6 @@ const partner = {
 			service_name : 'analytics_permissions',
 		},
 		{
-			api          : 'list_analytics_permission_user_roles',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
-		{
 			api          : 'list_analytics_dashboards',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
