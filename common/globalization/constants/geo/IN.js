@@ -115,8 +115,10 @@ export default {
 			'017856dc-b424-4145-9181-5680732cb33b',
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // LCL So2
 		],
-		credit_controller_id : 'b2af88f9-84e4-44fd-92f8-12f74c55e5ae',
-		business_heads       : [
+		lastmile_ops_id         : 'b808aabb-2245-4369-aaa7-6ebd2d5de20b',
+		lastmile_ops_manager_id : '3965f742-f4e5-420a-911c-f3657be05028',
+		credit_controller_id    : 'b2af88f9-84e4-44fd-92f8-12f74c55e5ae',
+		business_heads          : [
 			'7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44', // Hrishikesh Kulkarni
 			'95d62549-8ab6-4ee5-a655-9edd0ec46dac', // Purnendu Shekhar
 			'cd8dde11-678c-4467-85b2-2e2d6055bef4', // Amitabh Shankar
@@ -322,6 +324,18 @@ export default {
 				label : '32FT TRIPLE AXLE HQ 20 21 TON',
 				value : 'closed_body_32ft_triple_axle_HQ_20_21_ton',
 			},
+		],
+
+		invoice_status: [
+			{ label: 'Draft', value: 'DRAFT' },
+			{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
+			{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
+			{ label: 'Irn Generated', value: 'IRN_GENERATED' },
+			{ label: 'Irn Failed', value: 'IRN_FAILED' },
+			{ label: 'Irn Cancelled', value: 'IRN_CANCELLED' },
+			{ label: 'Posted to Sage', value: 'POSTED' },
+			{ label: 'Post to Sage Failed', value: 'FAILED' },
+			{ label: 'Requested', value: 'REQUESTED' },
 		],
 	},
 };

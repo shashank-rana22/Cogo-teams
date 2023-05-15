@@ -11,6 +11,7 @@ import useGetOrganizationCogopoints from '../../../../hooks/useGetOrganizationCo
 import ConvertToCpModal from './ConvertToCpModal';
 import OrgAgentDetails from './OrgAgentDetails';
 import PromocodeThumbnail from './PromocodeThumbnail';
+import QuotationDetails from './QuotationDetails';
 import styles from './styles.module.css';
 
 function OrganizationDetails({
@@ -200,6 +201,7 @@ function OrganizationDetails({
 			) : (
 				<ListPromos />
 			)}
+			<QuotationDetails organizationId={organizationId} />
 		</div>
 	);
 }

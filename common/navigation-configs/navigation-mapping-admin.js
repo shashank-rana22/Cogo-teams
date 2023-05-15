@@ -55,6 +55,7 @@ import {
 	IcMFaq,
 	IcMActivePlans,
 	IcMExportfile,
+	IcMAirSchedules,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -1157,8 +1158,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-booking_note_desk',
 				title         : 'Booking Desk',
-				href          : '/booking-desk',
-				as            : '/booking-desk',
+				href          : '/v2/booking-desk',
+				as            : '/v2/booking-desk',
 				type          : 'link',
 				main_apis     : ['list_booking_desk_shipments'],
 				possible_apis : [...apis.shipment, ...apis.booking_desk],
@@ -1268,15 +1269,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_shipments'],
 				possible_apis : apis.shipment,
-
 			},
 			{
-				key           : 'coe-bl_do',
-				title         : 'Authority Desk',
-				href          : '/bl-do',
-				as            : '/bl-do',
-				type          : 'link',
-				main_apis     : ['list_shipments'],
+				key       : 'coe-bl_do',
+				title     : 'Authority Desk',
+				href      : '/bl-do',
+				as        : '/bl-do',
+				type      : 'link',
+				main_apis : ['list_authority_desk_bl_documents',
+					'list_authority_desk_do_documents', 'list_shipments'],
 				module_type   : 'dashboards',
 				possible_apis : [...apis.bl_do, ...apis.sop, ...apis.poc],
 
@@ -1340,8 +1341,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-bl_do_collection_release',
 				title         : 'BL/DO Collection - Release',
-				href          : '/bl_do-collection-release',
-				as            : '/bl_do-collection-release',
+				href          : '/v2/bl_do-collection-release',
+				as            : '/v2/bl_do-collection-release',
 				type          : 'link',
 				main_apis     : ['list_shipment_document_collections'],
 				possible_apis : [...apis.bl_do_collection_release, ...apis.shipment],
@@ -1372,7 +1373,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/last-mile',
 				type          : 'link',
 				main_apis     : ['list_lastmile_desk_shipments'],
-				possible_apis : [...apis.document_desk, ...apis.cogolens],
+				possible_apis : [...apis.document_desk, ...apis.cogolens, ...apis.shipment],
 			},
 		],
 	},
@@ -2208,6 +2209,16 @@ const navigationMappingAdmin = {
 				icon          : IcMDataPipeline,
 			},
 		],
+	},
+	air_repository: {
+		key           : 'air_repository',
+		title         : 'Air Repository',
+		icon          : IcMAirSchedules,
+		href          : '/v2/air-repository',
+		as            : '/v2/air-repository',
+		type          : 'link',
+		possible_apis : apis.air_repository,
+		module_type   : 'dashboards',
 	},
 	saas_tools: {
 		key       : 'saas_tools',

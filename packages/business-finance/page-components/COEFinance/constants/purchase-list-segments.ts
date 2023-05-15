@@ -3,7 +3,7 @@ function filtersUrgentData(statsData) {
 	return [
 		{
 			label : 'All',
-			value : 'all',
+			value : 'ALL',
 		},
 		{
 			label : 'Urgent Invoices',
