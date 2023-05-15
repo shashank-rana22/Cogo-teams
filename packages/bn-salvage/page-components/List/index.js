@@ -34,7 +34,7 @@ export default function List() {
 		);
 	}
 
-	if (!listLoading && list.length === 0) {
+	if (!listLoading && list?.length === 0) {
 		return <EmptyState />;
 	}
 
@@ -46,7 +46,7 @@ export default function List() {
 				<ListHeader />
 
 				<tbody>
-					{list.map((item) => (
+					{(list || []).map((item) => (
 						<Card
 							key={item?.id}
 							item={item}

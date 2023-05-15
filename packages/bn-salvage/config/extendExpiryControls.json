@@ -3,7 +3,7 @@
 		"name": "remarks",
 		"label": "Reason For Extending Expiry",
 		"type": "text",
-		"placeholder": "Put Reason Here",
+		"placeholder": "Enter Reason",
 		"className": "remarks",
 		"rules": {
 			"required": "Reason is required"
@@ -13,14 +13,14 @@
 		"label": "Upload File",
 		"name": "url",
 		"type": "file",
-		"draggable"     : true,
-		"loading"       : true,
+		"draggable": true,
+		"loading": true,
 		"className": "upload_file",
-		"dropareaProps" : { 
+		"dropareaProps": {
 			"heading": "Upload your file here",
-			"subHeading": "supports - jpeg, jpg, svg, png, pdf, docx" 
+			"subHeading": "supports - jpeg, jpg, svg, png, pdf, docx"
 		},
-		"accept"        : ".jpeg, .xlsx, .jpg, .pdf, .png, .svg",
+		"accept": ".jpeg, .xlsx, .jpg, .pdf, .png, .svg",
 		"rules": {
 			"required": "Document is required"
 		}

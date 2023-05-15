@@ -56,11 +56,11 @@
         }
     },
     {
-        "label": "Si filed at",
+        "label": "SI filed at",
         "name": "si_filed_at",
         "type": "datepicker",
         "rules": {
-            "required": "Si filed at is required"
+            "required": "SI filed at is required"
         }
     },
     {

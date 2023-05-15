@@ -5,8 +5,8 @@ import {
 	FREIGHT_CONTAINER_COMMODITY_MAPPINGS,
 } from '../constants/commodities';
 
-const getCommoditiesDetails = (list, isNullValue = true) => {
-	const commodities = list.map((item) => {
+const getCommoditiesDetails = (list = [], isNullValue = true) => {
+	const commodities = (list || []).map((item) => {
 		const commodityMapping = COMMODITY_NAME_MAPPING[item] || {};
 
 		return {
