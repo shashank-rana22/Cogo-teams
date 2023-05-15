@@ -19,7 +19,7 @@ export default function ShipmentDetails({ item = {}, stateProps = {} }) {
 
 	const handleClick = useCallback(() => {
 		const path = router.asPath.split('/');
-		const newPathname = `${path[1]}/shipments/${item.id}`;
+		const newPathname = `/${path[1]}/shipments/${item.id}`;
 		window.location.replace(newPathname);
 	}, [router.asPath, item.id]);
 

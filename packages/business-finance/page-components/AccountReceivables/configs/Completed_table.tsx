@@ -131,7 +131,9 @@ const completedColumn = ({
 						)}
 					<div>
 						<Pill size="sm" color={invoiceType[(getByKey(row, 'invoiceType') as string)]}>
-							{startCase(getByKey(row, 'invoiceType') as string)}
+
+							{row?.eInvoicePdfUrl ? 'E INVOICE' : startCase(getByKey(row, 'invoiceType') as string)}
+
 						</Pill>
 					</div>
 				</div>
@@ -326,15 +328,24 @@ const completedColumn = ({
 							<div
 								className={styles.tool_tip}
 							>
-								{startCase(getByKey(row, 'invoiceStatus') as string)}
+								{row?.eInvoicePdfUrl
+									? 'E INVOICE GENERATED'
+									: startCase(getByKey(row, 'invoiceStatus') as string)}
+
 							</div>
 						)}
 					>
 						<text className={styles.style_text}>
-							{`${startCase(getByKey(row, 'invoiceStatus') as string).substring(
-								0,
-								10,
-							)}...`}
+							{row?.eInvoicePdfUrl
+								? `${'E INVOICE GENERATED'.substring(
+									0,
+									10,
+								)}...`
+								: `${startCase(getByKey(row, 'invoiceStatus') as string).substring(
+									0,
+									10,
+								)}...`}
+
 						</text>
 					</Tooltip>
 				)
