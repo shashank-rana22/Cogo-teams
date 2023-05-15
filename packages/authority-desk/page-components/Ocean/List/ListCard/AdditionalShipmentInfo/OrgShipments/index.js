@@ -2,7 +2,7 @@ import { Loader, Pagination } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import EmptyState from '../../../../../../commons/EmptyState';
 import useListShipments from '../../../../../../hooks/useListShipments';
@@ -10,8 +10,10 @@ import useRedirectToShipmentDetailPage from '../../../../../../hooks/useRedirect
 
 import styles from './styles.module.css';
 
-function OrgShipments({ item = {}, filters = {}, setFilters = () => {} }) {
+function OrgShipments({ item = {} }) {
 	const geo = getGeoConstants();
+
+	const [filters, setFilters] = useState({ page: 1 });
 
 	const { data, loading } = useListShipments({ item, filters });
 
