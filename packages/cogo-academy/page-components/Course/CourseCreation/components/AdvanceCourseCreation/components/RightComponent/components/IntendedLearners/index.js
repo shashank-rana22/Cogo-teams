@@ -19,15 +19,15 @@ function IntendedLearners({ id, data = {} }, ref) {
 
 	const mandatoryAudiencesUserWatch = watch('mandatory_audiences_user');
 
-	const { audiences = [] } = useGetAudiences();
+	console.log('data', data);
 
-	const selectedAudiences = watch('audiences');
+	const { audiences = [] } = useGetAudiences();
 
 	const mandatoryAudiencesOptions = audiences.filter((item) => (watch('audiences').includes(item.value)));
 
 	useEffect(() => {
 		setValue('mandatory_audiences', []);
-	}, [selectedAudiences, setValue]);
+	}, [setValue]);
 
 	useImperativeHandle(ref, () => ({
 		handleSubmit: () => {
@@ -41,9 +41,6 @@ function IntendedLearners({ id, data = {} }, ref) {
 						is_mandatory:
 						(values.mandatory_audiences || []).includes(audience_id),
 					})),
-					tag_ids: values.tags,
-					course_objectives:
-					(values.course_objectives || []).map((item) => item.objective),
 				},
 			});
 

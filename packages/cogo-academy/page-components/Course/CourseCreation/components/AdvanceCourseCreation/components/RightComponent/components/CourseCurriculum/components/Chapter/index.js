@@ -1,16 +1,27 @@
 import { Accordion, Button } from '@cogoport/components';
 import { IcMDelete, IcMDrag, IcMEdit } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import ChapterContent from './ChapterContent';
 import styles from './styles.module.css';
 
 function Chapter({ subModule, handleDragStart, handleDragOver, handleDrop }) {
+	const { course_sub_module_chapters } = subModule || {};
+
+	const [SubModuleChapters, setSubModuleChapters] = useState(course_sub_module_chapters);
+
+	if (isEmpty(SubModuleChapters)) {
+		setSubModuleChapters([{ id: new Date().getTime(), name: '', isNew: true }]);
+	}
+
 	return (
-		<div>
-			{subModule.children.map((child, index) => (
+		<>
+			{SubModuleChapters.map((child, index) => (
 				<div className={styles.child_accordian}>
 					<Accordion
 						type="text"
+						isOpen={child.isNew}
 						title={(
 							<div
 								key={child.id}
@@ -44,7 +55,7 @@ function Chapter({ subModule, handleDragStart, handleDragOver, handleDrop }) {
 			>
 				+ Chapter
 			</Button>
-		</div>
+		</>
 	);
 }
 

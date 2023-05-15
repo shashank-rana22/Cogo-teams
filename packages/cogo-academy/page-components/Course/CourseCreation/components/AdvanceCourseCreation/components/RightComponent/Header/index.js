@@ -13,7 +13,10 @@ function Header({
 	id,
 	childRef,
 	getCogoAcademyCourse,
+	data,
 }) {
+	const { name, state = 'draft' } = data || {};
+
 	const { title, text } = MAPPING[activeTab];
 
 	const { loading, updateCourse } = useUpdateCourse({ setActiveTab, activeTab, getCogoAcademyCourse });
@@ -35,13 +38,13 @@ function Header({
 		<>
 			<div className={styles.top_container}>
 				<div className={styles.left_part}>
-					<div className={styles.title}>Course Trial ABC</div>
+					<div className={styles.title}>{name}</div>
 
 					<Tags
 						size="md"
 						items={[{
 							disabled : false,
-							children : 'draft',
+							children : state,
 							color    : '#FEF199',
 							tooltip  : false,
 						}]}

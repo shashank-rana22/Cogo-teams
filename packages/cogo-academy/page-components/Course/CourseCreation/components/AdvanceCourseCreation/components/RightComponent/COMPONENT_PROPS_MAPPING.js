@@ -10,7 +10,9 @@ const getProps = (data = {}) => ({
 		course_title      : data.name,
 		course_categories : (data.course_categories || []).map((category) => category.id),
 	},
-
+	intended_learners: {
+		faq_audiences: data.faq_audiences,
+	},
 });
 
 export default getProps;

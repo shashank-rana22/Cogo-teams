@@ -3,9 +3,9 @@ import { Button } from '@cogoport/components';
 import SubModule from './components/SubModule';
 import ModuleComponent from './ModuleComponent';
 import styles from './styles.module.css';
-import useHandleCurriculum from './useHandleCurriculum';
+import useHandleCourseCurriculum from './useHandleCourseCurriculum';
 
-function Curriculum() {
+function CourseCurriculum({ id }) {
 	const {
 		handleDragStart,
 		handleDrop,
@@ -14,12 +14,15 @@ function Curriculum() {
 		addModule,
 		deleteModule,
 		onSaveModule,
-	} = useHandleCurriculum();
+		onSaveSubModule,
+	} = useHandleCourseCurriculum({ courseId: id });
+
+	console.log('finalData', finalData);
 
 	return (
 		<div className={styles.container}>
 			{finalData.map((module, nodeIndex) => (
-				<div className={styles.module_container}>
+				<div key={module.id} className={styles.module_container}>
 					<ModuleComponent
 						nodeIndex={nodeIndex}
 						module={module}
@@ -28,15 +31,19 @@ function Curriculum() {
 						handleDrop={handleDrop}
 						deleteModule={deleteModule}
 						onSaveModule={onSaveModule}
+						id={id}
 					/>
 
-					{module.children && !module.isNew && (
+					{module.course_sub_modules && !module.isNew && (
 						<SubModule
 							module={module}
 							handleDragStart={handleDragStart}
 							handleDragOver={handleDragOver}
 							handleDrop={handleDrop}
 							deleteModule={deleteModule}
+							id={id}
+							course_module_id={module.id}
+							onSaveSubModule={onSaveSubModule}
 						/>
 					)}
 				</div>
@@ -54,4 +61,4 @@ function Curriculum() {
 	);
 }
 
-export default Curriculum;
+export default CourseCurriculum;

@@ -1,67 +1,40 @@
-import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-const sampleData = [
-	{
-		id       : 1,
-		name     : 'Node 1',
-		children : [
-			{
-				id       : 2,
-				name     : 'Child 1 of Node 1',
-				children : [
-					{
-						id   : 10,
-						name : 'Child 1 of Node 1',
-					},
-					{
-						id   : 11,
-						name : 'Child 2 of Node 1',
-					},
-				],
-			},
-			{
-				id   : 3,
-				name : 'Child 2 of Node 1',
-			},
-		],
-	},
-	{
-		id       : 4,
-		name     : 'Node 2',
-		children : [
-			{
-				id   : 5,
-				name : 'Child of Node 2',
-			},
-		],
-	},
-	{
-		id       : 6,
-		name     : 'Node 3',
-		children : [
-			{
-				id   : 7,
-				name : 'Child 1 of Node 3',
-			},
-			{
-				id   : 8,
-				name : 'Child 2 of Node 3',
-			},
-			{
-				id   : 9,
-				name : 'Child 3 of Node 3',
-			},
-		],
-	},
-];
+import useCreateCourseModule from '../../../../hooks/useCreateCourseModule';
+import useCreateCourseSubModule from '../../../../hooks/useCreateCourseSubModule';
+import useGetCourseModuleDetails from '../../../../hooks/useGetCourseModuleDetails';
+import useUpdateCourseModule from '../../../../hooks/useUpdateCourseModule';
+import useUpdateCourseSubModule from '../../../../hooks/useUpdateCourseSubModule';
 
-const data = [];
-
-const useHandleCurriculum = () => {
-	const [finalData, setFinalData] = useState(data);
-
+const useHandleCourseCurriculum = ({ courseId }) => {
+	const [finalData, setFinalData] = useState([]);
 	const [draggedNode, setDraggedNode] = useState(null);
+
+	const {
+		getCourseModuleDetails,
+		loading,
+		moduleData,
+	} = useGetCourseModuleDetails({ id: courseId });
+
+	const {
+		createCourseModule,
+		loading: createLoading,
+	} = useCreateCourseModule({ getCourseModuleDetails });
+
+	const {
+		updateCourseModule,
+		loading:updateLoading,
+	} = useUpdateCourseModule({ getCourseModuleDetails });
+
+	const {
+		createCourseSubModule,
+		loading: createSubModuleLoading,
+	} = useCreateCourseSubModule({ getCourseModuleDetails });
+
+	const {
+		updateCourseSubModule,
+		loading: updateSubModuleLoading,
+	} = useUpdateCourseSubModule({ getCourseModuleDetails });
 
 	const handleDragStart = (event, node) => {
 		setDraggedNode(node);
@@ -137,24 +110,24 @@ const useHandleCurriculum = () => {
 	};
 
 	const onSaveModule = ({ values, module, setShowModule }) => {
-		setFinalData((prev) => prev.map((item) => {
-			if (item.id === module.id) {
-				return {
-					...item, ...values, isNew: false, children: [],
-				};
-			}
+		if (module.isNew) {
+			createCourseModule({ values });
+		} else {
+			updateCourseModule({ values });
+		}
+	};
 
-			return item;
-		}));
-
-		setShowModule((prev) => prev.filter((item) => item !== module.id));
+	const onSaveSubModule = ({ values, subModule }) => {
+		if (subModule.isNew) {
+			createCourseSubModule({ values });
+		} else {
+			updateCourseSubModule({ values });
+		}
 	};
 
 	useEffect(() => {
-		if (isEmpty(data)) {
-			setFinalData([{ id: new Date().getTime(), name: '', children: [], isNew: true }]);
-		}
-	}, []);
+		setFinalData(moduleData);
+	}, [moduleData]);
 
 	return {
 		handleDragStart,
@@ -164,7 +137,8 @@ const useHandleCurriculum = () => {
 		addModule,
 		deleteModule,
 		onSaveModule,
+		onSaveSubModule,
 	};
 };
 
-export default useHandleCurriculum;
+export default useHandleCourseCurriculum;

@@ -2,8 +2,8 @@ import { useRef } from 'react';
 
 import getProps from './COMPONENT_PROPS_MAPPING';
 import CourseCompletion from './components/CourseCompletion';
+import CourseCurriculum from './components/CourseCurriculum';
 import CourseOverview from './components/CourseOverview';
-import Curriculum from './components/Curriculum';
 import IntendedLearners from './components/IntendedLearners';
 import PublishCourse from './components/PublishCourse';
 import Specifications from './components/Specifications';
@@ -14,7 +14,7 @@ const COMPONENT_MAPPING = {
 	overview          : CourseOverview,
 	specifications    : Specifications,
 	intended_learners : IntendedLearners,
-	course_curriculum : Curriculum,
+	course_curriculum : CourseCurriculum,
 	course_completion : CourseCompletion,
 	publish_course    : PublishCourse,
 };
@@ -22,7 +22,7 @@ const COMPONENT_MAPPING = {
 function RightComponent({ data = {}, activeTab, setActiveTab, id, getCogoAcademyCourse }) {
 	const childRef = useRef({});
 
-	const ActiveComponent = COMPONENT_MAPPING[activeTab] || Curriculum;
+	const ActiveComponent = COMPONENT_MAPPING[activeTab] || CourseCurriculum;
 
 	return (
 		<div className={styles.conatiner}>
@@ -32,6 +32,7 @@ function RightComponent({ data = {}, activeTab, setActiveTab, id, getCogoAcademy
 				setActiveTab={setActiveTab}
 				id={id}
 				getCogoAcademyCourse={getCogoAcademyCourse}
+				data={data}
 			/>
 
 			<ActiveComponent

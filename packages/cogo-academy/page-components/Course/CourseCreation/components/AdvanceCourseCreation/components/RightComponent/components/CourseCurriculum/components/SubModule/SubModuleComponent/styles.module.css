@@ -1,0 +1,63 @@
+.module {
+	position: relative;
+	align-items: center;
+	margin-bottom: 16px;
+
+	&.flex {
+		display: flex;
+	}
+
+	&.edit {
+		padding: 20px;
+		background-color: #f9f5ec;
+		border-radius: 6px;
+	}
+
+	.cross_icon {
+		position: absolute;
+		top: 8px;
+		right: 8px;
+		cursor: pointer;
+	}
+}
+
+.left {
+	margin-left: 20px;
+}
+
+.flex {
+	display: flex;
+}
+
+.name {
+	margin-left: 4px;
+}
+
+.icon {
+	cursor: pointer;
+}
+
+.button_container {
+	position: absolute;
+	right: 20px;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	margin-bottom: 12px;
+}
+
+.edit_text {
+	margin-bottom: 20px;
+	margin-left: 6px;
+	font-weight: 600;
+}
+
+.input_container {
+	width: 80%;
+}
+
+.select_container {
+	&.description {
+		margin-top: 16px;
+	}
+}
