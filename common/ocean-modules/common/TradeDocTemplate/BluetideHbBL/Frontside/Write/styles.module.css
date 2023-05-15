@@ -1,0 +1,253 @@
+.main {
+	position: relative;
+	width: 812px;
+	padding: 50px;
+	margin: auto;
+	background-color: #fff;
+}
+
+.section {
+	position: relative;
+	width: 696px;
+	background-color: #fff;
+	page-break-after: auto;
+}
+
+.button_wrapper {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 8px;
+}
+
+.section_one {
+	display: flex;
+	border: 1px solid black;
+
+	&_child_1 {
+		width: 53%;
+		border: 1px solid black;
+
+		p {
+			margin: 0;
+			font-size: 10px;
+		}
+
+		&-consigner {
+			display: flex;
+			flex-direction: column;
+			height: 113px;
+			padding: 8px;
+			border-bottom: 1px solid black;
+		}
+
+		&-consignee {
+			display: flex;
+			flex-direction: column;
+			height: 140px;
+			padding: 8px;
+			border-top: 1px solid black;
+			border-bottom: 1px solid black;
+		}
+
+		&-notify_address {
+			display: flex;
+			flex-direction: column;
+			height: 157px;
+			padding: 8px;
+			border-top: 1px solid black;
+			border-bottom: 1px solid black;
+		}
+
+		&-location {
+			display: flex;
+			justify-content: space-between;
+			height: 70px;
+			padding: 8px;
+			border-top: 1px solid black;
+			border-bottom: 1px solid black;
+
+			&_element {
+				display: flex;
+				flex-direction: column;
+				width: 50%;
+
+				&:first-child {
+					margin-right: 4px;
+				}
+
+				&:nth-child(3) {
+					margin-right: 4px;
+				}
+			}
+		}
+	}
+
+	&_child_2 {
+		width: 48%;
+		border: 1px solid black;
+
+		&-header {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 50px;
+			padding: 8px;
+			border-bottom: 1px solid black;
+
+			& .header_text_md {
+				margin: 0;
+				font-weight: 700;
+			}
+
+			& .header_text_sm {
+				margin: 0;
+				font-size: 10px;
+				font-weight: 700;
+			}
+		}
+
+		&-bl_number {
+			display: flex;
+			justify-content: space-between;
+			height: 38px;
+			padding: 8px;
+			border-top: 1px solid black;
+			border-bottom: 1px solid black;
+
+			p {
+				margin: 0;
+				font-size: 16px;
+			}
+		}
+
+		&-details {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			height: 55%;
+			padding: 8px;
+			border-top: 1px solid black;
+			border-bottom: 1px solid black;
+
+			img {
+				height: 20px;
+			}
+
+			& .details_text_lg {
+				font-weight: 14px;
+				font-weight: 700;
+			}
+
+			& .details_text_sm {
+				font-size: 10px;
+			}
+
+			& .details_text_md {
+				font-weight: 700;
+			}
+
+			p {
+				font-size: 8px;
+			}
+		}
+
+		&-goods_delivery_contact {
+			height: 100%;
+			padding: 8px;
+			border-top: 1px solid black;
+
+			p {
+				margin: 0;
+				font-size: 10px;
+			}
+		}
+	}
+}
+
+.section_two {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border: 2px solid black;
+	border-top: none;
+
+	th {
+		font-size: 10px;
+		text-align: center;
+	}
+
+	td:first-child {
+		width: 25%;
+	}
+
+	td:nth-child(3) {
+		width: 40%;
+	}
+
+	span {
+		padding: 8px;
+		margin-top: 8px;
+		font-size: 10px;
+	}
+}
+
+.section_three {
+	display: flex;
+	height: 55px;
+	border: 1px solid black;
+
+	&-element {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		padding: 6px;
+		border: 1px solid black;
+		border-top: none;
+		border-bottom: none;
+
+		span {
+			font-size: 10px;
+		}
+	}
+}
+
+.section_four {
+	display: flex;
+	justify-content: space-between;
+	height: 70px;
+	padding: 4px;
+	border: 2px solid black;
+	border-top: 1px solid;
+
+	&_text {
+		font-size: 10px;
+		font-weight: 400;
+		line-height: 1.4;
+	}
+
+	&_child {
+		&_1 {
+			display: flex;
+			justify-content: space-between;
+
+			&-particular {
+				display: flex;
+				flex-direction: column;
+			}
+
+			&-weight_measurement {
+				display: flex;
+				flex-direction: column;
+				margin-left: 30px;
+			}
+		}
+
+		&_2 {
+			margin-right: 8px;
+			font-size: 10px;
+			font-weight: 400;
+			line-height: 1.4;
+		}
+	}
+}
