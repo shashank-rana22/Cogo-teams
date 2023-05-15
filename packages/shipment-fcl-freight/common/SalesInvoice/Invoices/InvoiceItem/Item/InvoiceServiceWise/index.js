@@ -1,6 +1,8 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
+
 import CardList from '../../../../commons/CardList';
+
 import styles from './styles.module.css';
 import { tableColumn } from './tableColumn';
 

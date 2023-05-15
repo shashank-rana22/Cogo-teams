@@ -17,6 +17,7 @@ function List({
 
 			{(data || []).map((item, i) => (
 				<CardItem
+					key={item}
 					item={item}
 					loading={loading}
 					fields={fields}
