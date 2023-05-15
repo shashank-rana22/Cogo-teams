@@ -16,15 +16,25 @@ const DIFFICULTY_MAPPING = {
 };
 
 function SingleQuestion({ data, primary_question_type, case_index, length }) {
-	const { test_question_answers = [], question_type, difficulty_level, question_text, explanation = [] } = data || {};
+	const {
+		test_question_answers = [],
+		question_type,
+		difficulty_level,
+		question_text,
+		explanation = [],
+	} = data || {};
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.question_text}>{`Q. ${question_text}`}</div>
 
 			<div className={styles.question_container}>
-				<div className={styles.question_type}>{TYPE_MAPPING[question_type]}</div>
-				<Pill size="md" color="#F3FAFA">{DIFFICULTY_MAPPING[difficulty_level]}</Pill>
+				<div className={styles.question_type}>
+					{TYPE_MAPPING[question_type]}
+				</div>
+				<Pill size="md" color="#F3FAFA">
+					{DIFFICULTY_MAPPING[difficulty_level]}
+				</Pill>
 			</div>
 
 			<OptionsComponent
@@ -40,10 +50,9 @@ function SingleQuestion({ data, primary_question_type, case_index, length }) {
 				</div>
 			) : null}
 
-			{primary_question_type === 'case_study'
-							&& case_index !== length - 1 ? (
-								<div className={styles.border} />
-				) : null}
+			{primary_question_type === 'case_study' && case_index !== length - 1 ? (
+				<div className={styles.border} />
+			) : null}
 		</div>
 	);
 }

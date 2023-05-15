@@ -42,7 +42,12 @@ function ModalComponent({
 		setQuestionToShow,
 	});
 
-	const { created_at, question_type = '', test_case_study_questions = [], question_text = '' } = item || {};
+	const {
+		created_at,
+		question_type = '',
+		test_case_study_questions = [],
+		question_text = '',
+	} = item || {};
 
 	return (
 		<div>
@@ -52,7 +57,9 @@ function ModalComponent({
 				placement="center"
 				showCloseIcon={false}
 				className={styles.modal_container}
-				size={['case_study', 'subjective'].includes(question_type) ? 'xl' : 'md'}
+				size={
+					['case_study', 'subjective'].includes(question_type) ? 'xl' : 'md'
+				}
 			>
 				<Modal.Body>
 					<div className={styles.container}>
@@ -64,22 +71,22 @@ function ModalComponent({
 						/>
 
 						{question_type === 'case_study' ? (
-							<div className={styles.case_study_question}>
-								{question_text}
-							</div>
-						) : null}
+							<>
+								<div className={styles.case_study_question}>
+									{question_text}
+								</div>
 
-						{question_type === 'case_study' ? (
-							test_case_study_questions.map((question, index) => (
-								<SingleQuestion
-									key={question?.id}
-									id={question?.id}
-									data={question}
-									primary_question_type={question_type}
-									case_index={index}
-									length={test_case_study_questions.length}
-								/>
-							))
+								{test_case_study_questions.map((question, index) => (
+									<SingleQuestion
+										key={question?.id}
+										id={question?.id}
+										data={question}
+										primary_question_type={question_type}
+										case_index={index}
+										length={test_case_study_questions.length}
+									/>
+								))}
+							</>
 						) : (
 							<SingleQuestion
 								data={item}
@@ -89,9 +96,19 @@ function ModalComponent({
 
 						<div className={styles.footer}>
 							<div className={styles.created_at}>
-								<span>{format(created_at, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}</span>
+								<span>
+									{format(
+										created_at,
+										GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+									)}
+								</span>
 								<span>{', '}</span>
-								<span>{format(created_at, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}</span>
+								<span>
+									{format(
+										created_at,
+										GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+									)}
+								</span>
 							</div>
 
 							{mode !== 'view' && allKeysSaved ? (
@@ -105,9 +122,7 @@ function ModalComponent({
 										}}
 									>
 										<IcMDelete />
-										<div style={{ marginLeft: '8px' }}>
-											Delete
-										</div>
+										<div style={{ marginLeft: '8px' }}>Delete</div>
 									</Button>
 
 									<Button
@@ -117,11 +132,7 @@ function ModalComponent({
 										style={{ marginLeft: '16px' }}
 									>
 										<IcMEdit />
-										<div
-											style={{ marginLeft: '8px' }}
-										>
-											Edit
-										</div>
+										<div style={{ marginLeft: '8px' }}>Edit</div>
 									</Button>
 								</div>
 							) : null}
