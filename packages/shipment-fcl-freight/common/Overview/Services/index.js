@@ -1,7 +1,6 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useContext, useState } from 'react';
-import { v4 as uuid } from 'uuid';
 
 import { possibleServices } from '../../../configurations/possible-full-route';
 
@@ -65,7 +64,7 @@ function Services() {
 								<div className={styles.upselling}>
 									{(upsellServices[serviceCategory]).map((service) => (
 										<AddNewService
-											key={uuid()}
+											key={`${service?.trade_type}_${service?.service_type}`}
 											upsellableService={service}
 											servicesList={servicesList}
 											shipmentData={shipment_data}

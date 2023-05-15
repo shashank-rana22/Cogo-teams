@@ -50,10 +50,9 @@ function AddNewService({
 	};
 
 	const showAddServiceBox = !cancelUpsell && isUpsellable && canUpsellForTradeType;
+	const { origin, destination, main } = showTradeHeading;
 
 	useEffect(() => {
-		const { origin, destination, main } = showTradeHeading;
-
 		if (showAddServiceBox) {
 			setShowTradeHeading({
 				origin      : origin || upsellableService.trade_type === 'export',
@@ -61,7 +60,7 @@ function AddNewService({
 				main,
 			});
 		}
-	}, [showAddServiceBox, upsellableService.trade_type, setShowTradeHeading]);
+	}, [showAddServiceBox, upsellableService.trade_type, setShowTradeHeading, origin, destination, main]);
 
 	return (
 		<>
