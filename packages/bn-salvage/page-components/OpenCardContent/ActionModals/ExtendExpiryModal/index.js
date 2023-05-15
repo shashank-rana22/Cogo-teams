@@ -21,7 +21,7 @@ export default function ExtendExpiryModal({ item, successRefetch }) {
 	const onFormSubmit = (formData) => {
 		const url = typeof formData?.url === 'object' ? formData.url.finalUrl : formData?.url;
 
-		updateBookingNote({ ...formData, url });
+		updateBookingNote({ ...formData, url, id: item?.id });
 	};
 
 	return (
