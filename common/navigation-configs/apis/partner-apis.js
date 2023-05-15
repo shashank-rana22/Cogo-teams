@@ -8598,7 +8598,7 @@ const partner = {
 			feature     : 'onAccount',
 		},
 		{
-			api         : 'delete_sales_accounts',
+			api         : 'delete_payments_accounts',
 			access_type : 'private',
 			module      : 'onAccount',
 			feature     : 'onAccount',
@@ -8610,13 +8610,13 @@ const partner = {
 			feature     : 'onAccount',
 		},
 		{
-			api         : 'put_sales_accounts',
+			api         : 'put_payments_accounts',
 			access_type : 'private',
 			module      : 'onAccount',
 			feature     : 'onAccount',
 		},
 		{
-			api         : 'post_sales_accounts',
+			api         : 'post_payments_accounts',
 			access_type : 'private',
 			module      : 'onAccount',
 			feature     : 'onAccount',
