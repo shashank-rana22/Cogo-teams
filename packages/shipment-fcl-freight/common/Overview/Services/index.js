@@ -1,7 +1,6 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { startCase } from '@cogoport/utils';
 import { useContext } from 'react';
-import { v4 as uuid } from 'uuid';
 
 import { possibleServices } from '../../../configurations/possible-full-route';
 
