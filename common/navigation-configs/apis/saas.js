@@ -518,6 +518,11 @@ const saas = {
 			access_type  : 'private',
 			service_name : 'sailing_schedule',
 		},
+		{
+			api          : 'get_sea_route',
+			access_type  : 'public',
+			service_name : 'location',
+		},
 	],
 	app_saas_air_schedules: [
 		{

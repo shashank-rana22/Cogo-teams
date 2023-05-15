@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 function TaskDetails({
 	task = {},
-	isTaskOpen,
+	isTaskOpen = false,
 }) {
 	const { servicesList } = useContext(ShipmentDetailContext);
 

@@ -8181,6 +8181,12 @@ const partner = {
 			feature     : 'invoices',
 		},
 		{
+			api         : 'get_sales_invoice_by_id_final_post_sage_info',
+			access_type : 'private',
+			module      : 'invoices',
+			feature     : 'invoices',
+		},
+		{
 			api         : 'list_organization_trade_party_details',
 			access_type : 'private',
 			module      : 'Bpr',
@@ -8294,6 +8300,12 @@ const partner = {
 		},
 		{
 			api         : 'post_sales_invoice_einvoice',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'get_sales_invoice_by_id_final_post_sage_info',
 			access_type : 'private',
 			module      : 'outstanding',
 			feature     : 'outstanding',
@@ -8617,6 +8629,12 @@ const partner = {
 		},
 		{
 			api         : 'get_payments_accounts',
+			access_type : 'private',
+			module      : 'onAccount',
+			feature     : 'onAccount',
+		},
+		{
+			api         : 'post_payments_accounts_payment_final_post_sage_info',
 			access_type : 'private',
 			module      : 'onAccount',
 			feature     : 'onAccount',
@@ -12096,6 +12114,23 @@ const partner = {
 			api          : 'delete_tickets_default_type',
 			access_type  : 'private',
 			service_name : 'tickets',
+		},
+	],
+	air_repository: [
+		{
+			api          : 'list_shipment_service_ops_repository',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_shipment_service_ops_repository',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_shipment_service_ops_repository',
+			access_type  : 'private',
+			service_name : 'shipment',
 		},
 	],
 };
