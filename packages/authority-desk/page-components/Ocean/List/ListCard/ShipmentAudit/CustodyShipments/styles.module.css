@@ -51,3 +51,14 @@
 		margin-left: auto;
 	}
 }
+
+.bl_do_details{
+	display: flex;
+} 
+
+.more_details { 
+	margin-left: 4px;
+	background-color: slategray; 
+	padding: 0 4px ; 
+	border-radius: 4px;
+}
