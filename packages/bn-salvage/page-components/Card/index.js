@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import { IcMArrowDown } from '@cogoport/icons-react';
+import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import OpenCardContent from '../OpenCardContent';
@@ -35,6 +35,8 @@ export default function Card({ item, openItem, setOpenItem }) {
 
 	let containerSize = container_size || '';
 	containerSize = containerSize.includes('HC') ? containerSize.replace('HC', 'ft HC') : `${containerSize}ft`;
+
+	const CaretIcon = isItemOpen ? IcMArrowUp : IcMArrowDown;
 
 	return (
 		<>
@@ -86,7 +88,7 @@ export default function Card({ item, openItem, setOpenItem }) {
 						className={styles.show_more_less}
 					>
 						{isItemOpen ? 'Show Less' : 'Show More'}
-						<IcMArrowDown className={styles.arrow_icon} />
+						<CaretIcon className={styles.arrow_icon} />
 					</div>
 				</td>
 			</tr>
