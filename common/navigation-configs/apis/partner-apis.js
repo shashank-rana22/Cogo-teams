@@ -7605,6 +7605,12 @@ const partner = {
 			feature     : 'payrun',
 		},
 		{
+			api         : 'get_purchase_payrun_bill_list_paid_advance_doc_by_id',
+			access_type : 'private',
+			module      : 'payrun',
+			feature     : 'payrun',
+		},
+		{
 			api         : 'get_purchase_payrun_advance_doc_list_view',
 			access_type : 'private',
 			module      : 'payrun',
