@@ -35,4 +35,5 @@ export { default as useDebounceQuery } from './hooks/useDebounceQuery';
 export { default as getApiError } from './utils/getApiError';
 export { default as handleError } from './utils/handleError';
 export { default as getFormattedPrice } from './utils/get-formatted-price';
+export { default as AsyncSelect } from './page-components/Business/AsyncSelect';
 export * from './utils/getAsyncFields';

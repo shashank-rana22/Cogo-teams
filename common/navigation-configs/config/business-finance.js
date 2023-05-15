@@ -45,6 +45,9 @@ const businessFinance = {
 	'/[partner_id]/business-finance/cogo-book/[active_tab]/[view]/view-data': {
 		navigation: 'business_finance-cogo_book',
 	},
+	'/[partner_id]/business-finance/cogo-book/selected_invoice': {
+		navigation: 'business_finance-cogo_book',
+	},
 	'/[partner_id]/business-finance/account-payables/[active_tab]': {
 		navigation : 'business_finance-account_payables',
 		isMainNav  : true,
