@@ -1,0 +1,38 @@
+.stepper_container {
+	display: flex;
+	width: 100%;
+}
+
+.container {
+	flex: 2;
+	margin-right: 20px;
+	clip-path: polygon(94% 0, 100% 50%, 94% 100%, 0 100%, 6% 50%, 0 0);
+	cursor: pointer;
+	background-color: #fbf9f3;
+}
+
+.stepper_arrow {
+	flex-grow: 1;
+	padding: 6px 12px;
+	clip-path: polygon(94% 0, 100% 50%, 94% 100%, 0 100%, 6% 50%, 0 0);
+}
+
+.content_container {
+	display: flex;
+	align-items: baseline;
+	padding: 6px;
+
+	.content {
+		margin: 0 6px;
+	}
+
+	.content_count {
+		margin-right: 3px;
+		margin-left: 15px;
+	}
+}
+
+.active {
+	color: #ee3425;
+	background-color: #fdebe9;
+}

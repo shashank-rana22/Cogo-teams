@@ -1,0 +1,23 @@
+.container {
+	margin: 25px 0;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 14px 16px;
+}
+
+.card_header {
+	font-weight: 600;
+	color: #f68b21;
+	background-color: #fffaee;
+	border: 1px solid #ffead4;
+	border-radius: 3px;
+}
+
+.col {
+	width: 80px;
+	padding: 0 8px;
+}

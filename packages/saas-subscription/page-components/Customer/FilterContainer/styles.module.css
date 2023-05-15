@@ -1,0 +1,10 @@
+.container {
+	display: flex;
+	justify-content: flex-end;
+	margin: 10px 0 25px;
+}
+
+.input_box {
+	width: 20%;
+	margin-right: 12px;
+}
