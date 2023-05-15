@@ -42,10 +42,7 @@ function Services() {
 
 							<div className={styles.trade_services}>
 								{(Object.keys(serviceObj[serviceCategory])).map((service) => (
-									<ServiceDetails
-										key={service}
-										servicesData={serviceObj[serviceCategory][service]}
-									/>
+									<ServiceDetails servicesData={serviceObj[serviceCategory][service]} />
 								))}
 							</div>
 
@@ -53,7 +50,6 @@ function Services() {
 								<div className={styles.upselling}>
 									{(upsellServices[serviceCategory]).map((service) => (
 										<AddNewService
-											key={uuid()}
 											upsellableService={service}
 											servicesList={servicesList}
 											shipmentData={shipment_data}

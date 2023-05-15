@@ -51,18 +51,3 @@
 		margin-left: auto;
 	}
 }
-
-.bl_do_details {
-	display: flex;
-}
-
-.more_details {
-	padding: 0 4px;
-	margin-left: 4px;
-	background-color: slategray;
-	border-radius: 4px;
-}
-
-.detail {
-	font-size: 10px;
-}
