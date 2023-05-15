@@ -44,7 +44,6 @@ function Services() {
 				<div className={styles.services_container}>
 					{serviceCategories.map((serviceCategory) => (
 						<>
-
 							{ !isKam
 						&& Object.keys(serviceObj[serviceCategory]).length
 								? heading(serviceCategory) : null}

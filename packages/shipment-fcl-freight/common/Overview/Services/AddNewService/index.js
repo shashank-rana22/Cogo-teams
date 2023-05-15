@@ -49,8 +49,6 @@ function AddNewService({
 		setUpsellModal(!upsellModal);
 	};
 
-	console.log(!cancelUpsell, isUpsellable, canUpsellForTradeType, 'hdiuewhi');
-
 	const showAddServiceBox = !cancelUpsell && isUpsellable && canUpsellForTradeType;
 
 	useEffect(() => {
@@ -63,11 +61,11 @@ function AddNewService({
 				main,
 			});
 		}
-	}, [showAddServiceBox, upsellableService.trade_type, showTradeHeading, setShowTradeHeading]);
+	}, [showAddServiceBox, upsellableService.trade_type, setShowTradeHeading]);
 
 	return (
 		<>
-			{ !cancelUpsell && isUpsellable && canUpsellForTradeType
+			{ showAddServiceBox
 				? (
 					<div
 						className={styles.container}
