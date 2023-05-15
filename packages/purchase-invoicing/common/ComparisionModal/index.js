@@ -97,6 +97,7 @@ function ComparisionModal({
 					billId={collectionPartyId?.billId}
 					partyId={collectionPartyId?.partyId}
 					onClose={onClose}
+					closeModal={closeModal}
 				/>
 			) : null}
 		</Modal>

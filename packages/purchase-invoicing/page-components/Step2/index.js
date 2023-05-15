@@ -23,6 +23,7 @@ function Step2({
 	onClose = () => {},
 	billId,
 	partyId,
+	closeModal = () => {},
 }) {
 	const [globalSelected, setGlobalSelected] = useState({});
 	const [knockOffMode, setknockOffMode] = useState(false);
@@ -55,7 +56,7 @@ function Step2({
 				onClick={
 					iseditable
 						? () => setStep(1)
-						: () => onClose()
+						: () => closeModal()
 				}
 			>
 				Go Back
@@ -120,7 +121,7 @@ function Step2({
 							Close / Knock-off later
 						</Button>
 					) : (
-						<Button onClick={onClose} disabled={loading}>
+						<Button onClick={iseditable ? onClose : closeModal} disabled={loading}>
 							Close
 						</Button>
 					)}
