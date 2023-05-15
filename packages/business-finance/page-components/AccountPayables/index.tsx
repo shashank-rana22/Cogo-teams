@@ -23,7 +23,7 @@ function AccountPayables() {
 	const { id: partnerId, business_name:businessName } = partner || {};
 	const { loading, entityData = [] } = useListCogoEntities();
 
-	const entity = ENTITY_MAP[businessName] || '301';
+	const entity = ENTITY_MAP[businessName];
 
 	const handleTabChange = (v:string) => {
 		if (['invoices', 'payruns', 'outstanding', 'treasury-chest'].includes(v)) {
