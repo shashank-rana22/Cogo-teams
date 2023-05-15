@@ -107,4 +107,10 @@
 	white-space: nowrap;
 	background: #fef199;
 	border-radius: 0 8px;
+} 
+
+.tabs_header {
+	display: flex; 
+	justify-content: space-between; 
+	align-items: center;
 }
