@@ -59,7 +59,7 @@ function Messages({
 	const canMessageOnBotSession = showBotMessages && ['shipment_view'].includes(viewType);
 
 	const hasPermissionToEdit = canMessageOnBotSession || (!showBotMessages && (userId === support_agent_id
-		|| ['agent_view', 'shipment_view'].includes(viewType)));
+		|| ['admin_view', 'shipment_view'].includes(viewType)));
 
 	const filteredSpectators = (spectators_data || []).filter(
 		({ agent_id: spectatorId }) => spectatorId !== support_agent_id,
