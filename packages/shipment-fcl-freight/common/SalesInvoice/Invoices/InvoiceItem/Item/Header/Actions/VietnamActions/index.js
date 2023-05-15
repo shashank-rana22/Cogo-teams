@@ -1,13 +1,13 @@
 import ChangeCurrency from '@cogo/bookings/commons/ChangeCurrency';
 import { useSelector } from '@cogo/store';
 import { Button, Popover, Tooltip } from '@cogoport/components';
-import { isEmpty, startCase } from '@cogoport/utils';
 import {
 	IcMOverflowDot,
 	IcMInfo,
 	IcCError,
 	// IcMEmail,
 } from '@cogoport/icons-react';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useUpdateInvoiceStatus from '../../../../../../../../hooks/useUpdateInvoiceStatus';

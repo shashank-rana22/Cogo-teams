@@ -41,3 +41,9 @@
 		margin: 6px;
 	}
 }
+
+.layout{
+	border: 1px solid #88CAD1;
+	border-radius: 4px;
+	padding: 15px;
+}

@@ -1,12 +1,12 @@
-import { useRequest } from '@cogoport/request';
 import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
+import { useRequest } from '@cogoport/request';
 
 const useUpdatePaymentMode = ({
 	refetch = () => {},
 	payload = {},
 }) => {
-    const [{ loading,data }, trigger] = useRequest({
+	const [{ loading, data }, trigger] = useRequest({
 		url    : '/update_shipment_invoice_payment_mode',
 		method : 'POST',
 	}, { manual: true });
@@ -21,7 +21,7 @@ const useUpdatePaymentMode = ({
 				Toast.success('Payment mode Updated');
 				refetch();
 			} else {
-				toast.error(res?.err);
+				Toast.error(res?.err);
 			}
 		} catch (err) {
 			toastApiError(err?.data);

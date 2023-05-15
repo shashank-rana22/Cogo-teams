@@ -1,13 +1,19 @@
 import { Button, Modal } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+// import { useForm } from '@cogoport/forms';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
+import Layout from '../../../../../../Tasks/TaskExecution/helpers/Layout';
+
+import Info from './Info';
+// import getDefaultValues from '../../../../../../Tasks/TaskExecution/utils/get-default-values';
+
+// import controls from './controls';
 // import useEditLineItems from '../../../../../../../hooks/useEditLineItems';
-import controls from './controls';
 // import Info from './Info';
 import styles from './styles.module.css';
+import useEditLineItems from './useEditLineItems';
 
 const geo = getGeoConstants();
 
@@ -47,21 +53,34 @@ function EditInvoice({
 	// 	&& !isFclFreight
 	// 	&& shipment_data?.serial_id > 130000;
 
-	const { control } = controls({ shipment_data });
-	const {
-		handleSubmit,
-		// control,
-		register,
-		setValue,
-		formState: { errors },
-	} = useForm(control);
+	// const defaultVal = getDefaultValues(controls);
+	// const {
+	// 	control,
+	// 	formState: { errors },
+	// } = useForm({ defaultVal });
 
+	const {
+		controls,
+		loading,
+		onCreate,
+		handleSubmit,
+		customValues,
+		fields,
+		onError,
+		errors,
+	} = useEditLineItems({
+		invoice,
+		onClose,
+		refetch,
+		isFclFreight : true,
+		shipment_data,
+		info         : <Info />,
+	});
 	return (
 		<Modal
-			size="lg"
+			size="xl"
 			onClose={onClose}
 			show={show}
-			className="primary xl"
 			closable={false}
 			// styles={{
 			// 	dialog: { width: isMobile ? 360 : 1030 },
@@ -85,13 +104,20 @@ function EditInvoice({
 						</span>
 					</div>
 
-					{/* <FormLayout
-						controls={control}
-						// fields={fields}
-						errors={errors}
-						// customValues={customValues}
-						// disabledProps={disabledProps}
-					/> */}
+					<div className={styles.layout}>
+						<Layout
+							control={controls}
+							fields={fields}
+							errors={errors}
+						/>
+						<Button
+							className="primary md"
+							style={{ marginLeft: '16px' }}
+						>
+							Add Line Item
+						</Button>
+
+					</div>
 				</div>
 
 			</Modal.Body>

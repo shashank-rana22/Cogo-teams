@@ -1,19 +1,21 @@
-import React from 'react';
 import { Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
+import React from 'react';
+
 import styles from './styles.module.css';
 
-const Info = () => {
+function Info() {
 	return (
 		<div className={styles.container}>
 			<Tooltip
 				theme="light"
-				content={
+				content={(
 					<div className={styles.content_div}>
 						You can enter customized line item name/code according to
-						customer&apos;s need.{' '}
+						customer&apos;s need.
+						{' '}
 					</div>
-				}
+				)}
 				animation="scale"
 				interactive
 			>
@@ -23,6 +25,6 @@ const Info = () => {
 			</Tooltip>
 		</div>
 	);
-};
+}
 
 export default Info;
