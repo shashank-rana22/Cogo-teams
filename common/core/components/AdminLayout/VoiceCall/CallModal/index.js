@@ -61,7 +61,10 @@ function CallModal({
 						<div className={cl`${styles.user_details} 
 						${isInConferenceCall ? styles.user_details_on_conference : ''}`}
 						>
-							<div className={styles.user_name}>{userName || 'Unknown User'}</div>
+							<div className={styles.user_name}>
+								{userName
+							|| `${mobile_country_code} ${mobile_number}` || 'Unknown User'}
+							</div>
 							<div className={styles.number}>
 								{mobile_country_code}
 								<span>{hideNumber(mobile_number)}</span>
