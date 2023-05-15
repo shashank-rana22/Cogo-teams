@@ -27,7 +27,7 @@ export function TagCard({
 	const unCheckedData = selectedProforma?.filter(
 		(data) => data?.billId !== item?.billId,
 	);
-	const showCheckBox = activeTab === 'merge' ? isfirst : showCheck;
+	const showCheckBox = activeTab === 'merge' ? (showCheck && isfirst) : showCheck;
 
 	return (
 		<div className={styles.flexdiv}>
@@ -73,6 +73,7 @@ export function TagCard({
 							activeTab={activeTab}
 							key={child.billId}
 							classname={classname}
+							showCheck={showCheck}
 							isLastChild={childBill.length - 1 === index}
 						/>
 					))}

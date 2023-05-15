@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 const TAGGING_TABS = [
 	{ label: 'split', value: 'split', heading: 'Select a proforma you want to split ' },
 	{ label: 'merge', value: 'merge', heading: 'Select More then one proforma you want to Merge' },
-	{ label: 'normal', value: 'notTaggedIds', heading: 'Select a proforma you want to Tag ' },
+	{ label: 'normal', value: 'normal', heading: 'Select a proforma you want to Tag ' },
 ];
 
 function Taggings({
@@ -72,7 +72,6 @@ function Taggings({
 									<TagMap
 										serviceProviderId={serviceProviderId}
 										shipmentId={shipmentId}
-										isNormalTab={value === 'notTaggedIds'}
 										selectedProforma={selectedProforma}
 										setSelectedProforma={setSelectedProforma}
 										activeTab={value}
