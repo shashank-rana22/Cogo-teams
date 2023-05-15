@@ -11954,11 +11954,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'auth',
 		},
-		{
-			api          : 'list_analytics_permission_entries',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
 	],
 	ticket_management: [
 		{
