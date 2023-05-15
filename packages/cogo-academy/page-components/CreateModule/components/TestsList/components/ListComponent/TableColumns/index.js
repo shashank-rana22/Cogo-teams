@@ -178,6 +178,7 @@ export const testSetColumns = ({
 						maxWidth={400}
 						content={(topics.map((topic, index) => ((index >= 1) ? (
 							<Pill
+								key={topic}
 								className={styles.topic_pill_sub}
 								size="lg"
 								color="#F3FAFA"
