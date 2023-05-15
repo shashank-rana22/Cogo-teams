@@ -22,6 +22,7 @@ const useListChats = ({
 	isomniChannelAdmin,
 	showBotMessages = false,
 	searchValue = '',
+	viewType = '',
 }) => {
 	const { query:searchQuery, debounceQuery } = useDebounceQuery();
 
@@ -104,8 +105,9 @@ const useListChats = ({
 			userId,
 			appliedFilters,
 			showBotMessages,
+			viewType,
 		}),
-		[appliedFilters, isomniChannelAdmin, showBotMessages, userId],
+		[appliedFilters, isomniChannelAdmin, showBotMessages, userId, viewType],
 	);
 
 	const queryForSearch = useMemo(() => (

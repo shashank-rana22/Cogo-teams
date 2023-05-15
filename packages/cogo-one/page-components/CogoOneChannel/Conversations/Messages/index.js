@@ -26,6 +26,7 @@ function Messages({
 	isomniChannelAdmin = false,
 	setActiveMessage = () => {},
 	setRaiseTicketModal = () => {},
+	viewType = '',
 }) {
 	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
@@ -55,7 +56,10 @@ function Messages({
 
 	const showBotMessages = session_type === 'bot';
 
-	const hasPermissionToEdit = !showBotMessages && (userId === support_agent_id || isomniChannelAdmin);
+	const canMessageOnBotSession = showBotMessages && ['shipment_view'].includes(viewType);
+
+	const hasPermissionToEdit = canMessageOnBotSession || (!showBotMessages && (userId === support_agent_id
+		|| ['agent_view', 'shipment_view'].includes(viewType)));
 
 	const filteredSpectators = (spectators_data || []).filter(
 		({ agent_id: spectatorId }) => spectatorId !== support_agent_id,
@@ -90,6 +94,7 @@ function Messages({
 		activeMessageCard,
 		formattedData,
 		setDisableButton,
+		canMessageOnBotSession,
 	});
 
 	const {
@@ -114,6 +119,18 @@ function Messages({
 		requestForAssignChat,
 		requestAssignLoading,
 	} = useRequestAssignChat();
+
+	const changeSessionAndMessage = (type = '') => {
+		const callbackFunc = type === 'quick_message' ? sentQuickSuggestions : sendChatMessage;
+		if (!canMessageOnBotSession) {
+			return callbackFunc;
+		}
+		return (scrollToBottom, val) => assignChat(
+			{ agent_id: userId, is_allowed_to_chat: true },
+			() => callbackFunc(scrollToBottom, val),
+		);
+	};
+
 	const {
 		comp: ActiveModalComp = null,
 		title: { img = null, name = null } = {},
@@ -148,6 +165,7 @@ function Messages({
 					updateUserRoom={updateUserRoom}
 					requestForAssignChat={requestForAssignChat}
 					requestAssignLoading={requestAssignLoading}
+					canMessageOnBotSession={canMessageOnBotSession}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
@@ -158,7 +176,7 @@ function Messages({
 						draftUploadedFile={draftUploadedFiles?.[id]}
 						setDraftMessages={setDraftMessages}
 						setDraftUploadedFiles={setDraftUploadedFiles}
-						sendChatMessage={sendChatMessage}
+						sendChatMessage={changeSessionAndMessage('chat_message')}
 						getNextData={getNextData}
 						firstLoadingMessages={firstLoadingMessages}
 						lastPage={lastPage}
@@ -166,15 +184,17 @@ function Messages({
 						activeMessageCard={activeMessageCard}
 						suggestions={suggestions}
 						setUploading={setUploading}
-						sentQuickSuggestions={sentQuickSuggestions}
+						sentQuickSuggestions={changeSessionAndMessage('quick_message')}
 						hasPermissionToEdit={hasPermissionToEdit}
 						loadingPrevMessages={loadingPrevMessages}
 						sendCommunicationTemplate={sendCommunicationTemplate}
 						communicationLoading={communicationLoading}
 						closeModal={closeModal}
-						messageLoading={messageLoading}
+						messageLoading={canMessageOnBotSession ? (messageLoading || assignLoading) : messageLoading}
 						setActiveMessage={setActiveMessage}
 						setRaiseTicketModal={setRaiseTicketModal}
+						canMessageOnBotSession={canMessageOnBotSession}
+						changeSessionAndMessage={changeSessionAndMessage}
 					/>
 				</div>
 			</div>

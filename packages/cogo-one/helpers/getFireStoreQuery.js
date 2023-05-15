@@ -1,23 +1,30 @@
 import { orderBy, where } from 'firebase/firestore';
 
+const getMainQuery = (userId, type, isObserver) => {
+	switch (type) {
+		case 'admin_view':
+			return [];
+		case 'shipment_view':
+			return [where('booking_agent_ids', 'array-contains', userId)];
+		default:
+			return [
+				!isObserver
+					? where('support_agent_id', '==', userId) : where('spectators_ids', 'array-contains', userId),
+			];
+	}
+};
 function getFireStoreQuery({
 	userId,
 	appliedFilters,
 	isomniChannelAdmin = false,
 	showBotMessages = false,
+	viewType,
 }) {
 	let queryFilters = [];
-	let mainQuery = [];
 
 	const isObserver = ['adminSession', 'botSession'].includes(appliedFilters?.observer) || false;
 
-	if (isomniChannelAdmin) {
-		mainQuery = [];
-	} else {
-		mainQuery = [
-			!isObserver ? where('support_agent_id', '==', userId) : where('spectators_ids', 'array-contains', userId),
-		];
-	}
+	const mainQuery = getMainQuery(userId, viewType, isObserver);
 
 	const sessionTypeQuery = showBotMessages
 		? where('session_type', '==', 'bot') : where('session_type', '==', 'admin');
