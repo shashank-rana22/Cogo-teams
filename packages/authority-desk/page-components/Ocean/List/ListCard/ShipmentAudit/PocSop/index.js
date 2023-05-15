@@ -35,7 +35,7 @@ function SopAndPoc({ shipment_data = {}, primary_service = {} }) {
 			</div>
 
 			{show
-				&& (
+				? (
 					<Modal
 						show
 						placement="top-right"
@@ -55,7 +55,7 @@ function SopAndPoc({ shipment_data = {}, primary_service = {} }) {
 										/>
 									</Button>
 								</div>
-								{activeTab === 'poc' && <div className={styles.close_border} />}
+								{activeTab === 'poc' ? <div className={styles.close_border} /> : null}
 							</div>
 							<Tabs
 								fullWidth
@@ -64,7 +64,7 @@ function SopAndPoc({ shipment_data = {}, primary_service = {} }) {
 								className={styles.custom_tabs}
 							>
 								<TabPanel name="poc" title="POC">
-									<div style={{ height: '80vh', overflow: 'scroll' }}>
+									<div className={styles.poc}>
 										<Poc
 											shipment_data={shipment_data}
 											servicesList={servicesList}
@@ -73,7 +73,7 @@ function SopAndPoc({ shipment_data = {}, primary_service = {} }) {
 									</div>
 								</TabPanel>
 								<TabPanel name="sop" title="SOP">
-									<div style={{ height: '80vh', overflow: 'scroll' }}>
+									<div className={styles.sop}>
 										<Sop shipment_data={shipment_data} primary_service={primary_service} />
 									</div>
 								</TabPanel>
@@ -81,7 +81,7 @@ function SopAndPoc({ shipment_data = {}, primary_service = {} }) {
 
 						</Modal.Body>
 					</Modal>
-				)}
+				) : null}
 		</div>
 	);
 }

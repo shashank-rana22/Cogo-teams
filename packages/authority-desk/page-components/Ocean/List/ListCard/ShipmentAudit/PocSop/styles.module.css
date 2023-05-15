@@ -76,3 +76,13 @@
 		}
 	}
 }
+
+.poc{
+	height: 80vh; 
+	overflow-y : auto;
+}
+
+.sop{
+	height: 80vh; 
+	overflow-y: auto;
+}
