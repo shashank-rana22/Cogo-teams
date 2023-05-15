@@ -82,6 +82,7 @@ function Invoices({
 						refetch={CNRefetch}
 						list={list}
 						loading={CNLoading}
+						invoiceData={invoiceData}
 					/>
 				) : null}
 		</main>

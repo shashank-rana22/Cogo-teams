@@ -1,5 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
-import { TextAreaController, UploadController, useForm } from '@cogoport/forms';
+import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
@@ -7,6 +7,7 @@ import React from 'react';
 
 import useGetShipmentCreditNote from '../../../../hooks/useGetShipmentCreditNote';
 
+import Form from './Form';
 import styles from './styles.module.css';
 
 function Edit({
@@ -77,14 +78,7 @@ function Edit({
 					</span>
 				</div>
 				<form>
-					<TextAreaController
-						name="details"
-						control={control}
-					/>
-					<UploadController
-						name="file"
-						control={control}
-					/>
+					<Form data={data} invoiceData={invoiceData} prevData={prevData} />
 				</form>
 			</Modal.Body>
 
