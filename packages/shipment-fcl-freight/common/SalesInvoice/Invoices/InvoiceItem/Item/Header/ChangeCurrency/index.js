@@ -1,6 +1,6 @@
 import { Button, Modal, Select } from '@cogoport/components';
 import React, { useState } from 'react';
-import useUpdateCurrency from '../../../../../Hooks/useUpdateCurrency';
+import useUpdateCurrency from '../../../../../../../hooks/useUpdateCurrency';
 import styles from './styles.module.css';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';

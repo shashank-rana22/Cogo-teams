@@ -1,6 +1,7 @@
+import { useRouter } from '@cogoport/next';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const groupByRegistrationNum = (invoices) => {
 	const groupByOrgInvoices = {};
@@ -15,19 +16,25 @@ const groupByRegistrationNum = (invoices) => {
 	return groupByOrgInvoices;
 };
 
-const useGetShipmentInvoice = ({ payload }) => {
+const useGetShipmentInvoice = () => {
+	const router = useRouter();
+	const { shipment_id } = router.query;
 	const [{ loading, data: invoiceData }, trigger] = useRequest({
-		url    : '/get_shipment_invoice_preference',
+		url    : 'fcl_freight/get_invoices',
 		method : 'GET',
 	}, { manual: true });
 
-	const getInvoiceInfo = async () => {
+	const getInvoiceInfo = useCallback(async () => {
 		try {
-			await trigger({ params: payload });
+			await trigger({
+				params: {
+					shipment_id,
+				},
+			});
 		} catch (error) {
 			toastApiError(error?.data);
 		}
-	};
+	}, [shipment_id, trigger]);
 
 	const groupedInvoices = groupByRegistrationNum(
 		invoiceData?.invoicing_parties || [],
@@ -35,7 +42,7 @@ const useGetShipmentInvoice = ({ payload }) => {
 
 	useEffect(() => {
 		getInvoiceInfo();
-	}, []);
+	}, [getInvoiceInfo]);
 
 	return { loading, data: invoiceData || {}, refetch: getInvoiceInfo, groupedInvoices };
 };

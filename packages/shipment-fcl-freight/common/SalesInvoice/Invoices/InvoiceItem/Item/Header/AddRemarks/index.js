@@ -1,7 +1,7 @@
 import { Button, Textarea, Toast, Modal } from "@cogoport/components";
 import { isEmpty } from "@cogoport/utils";
 import React, { useState } from "react";
-import useReviewInvoice from "../../../../../Hooks/useReviewInvoice";
+import useReviewInvoice from "../../../../../../../hooks/useReviewInvoice";
 
 function AddRemarks({
   showAddRemarks = false,

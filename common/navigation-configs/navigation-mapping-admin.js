@@ -1124,7 +1124,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				statsKey      : 'shipments',
 				main_apis     : ['list_shipments'],
-				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback],
+				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback, ...apis.sales_invoice],
 			},
 			{
 				key           : 'coe-bn_salvage',
@@ -1162,7 +1162,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/booking-desk',
 				type          : 'link',
 				main_apis     : ['list_booking_desk_shipments'],
-				possible_apis : [...apis.shipment, ...apis.booking_desk],
+				possible_apis : [...apis.shipment, ...apis.booking_desk, ...apis.sales_invoice],
 			},
 			{
 				key           : 'coe-fcl_revenue_desk',

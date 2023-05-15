@@ -1,18 +1,13 @@
 import React from 'react';
 
+import useGetShipmentInvoice from '../../hooks/useGetShipmentInvoice';
 import OverviewManageServices from '../Overview/OverviewManageServices';
 
-import useGetShipmentInvoice from './Hooks/useGetShipmentInvoice';
 import Invoices from './Invoices';
 import styles from './styles.module.css';
 
 function SalesInvoice({ shipmentData = {} }) {
-	const { data: invoiceData, groupedInvoices, refetch } = useGetShipmentInvoice({
-		payload: {
-			shipment_id         : shipmentData?.id,
-			performed_by_org_id : '26f025cd-a0b7-4938-9588-dd83fabce66c',
-		},
-	});
+	const { data: invoiceData, groupedInvoices, refetch } = useGetShipmentInvoice();
 	return (
 		<main className={styles.container}>
 			<OverviewManageServices />

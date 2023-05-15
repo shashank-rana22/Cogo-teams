@@ -2,7 +2,7 @@ import { Modal, Button } from '@cogoport/components';
 import React from 'react';
 
 import styles from './styles.module.css';
-import useSendInvoiceEmail from '../../../../../../Hooks/useSendInvoiceEmail';
+import useSendInvoiceEmail from '../../../../../../../../hooks/useSendInvoiceEmail';
 
 function SendInvoiceEmail({
 	show = false,
