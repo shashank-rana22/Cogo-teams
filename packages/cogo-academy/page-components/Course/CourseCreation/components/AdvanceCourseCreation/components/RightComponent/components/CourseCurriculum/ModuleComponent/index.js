@@ -25,7 +25,7 @@ function ModuleComponent({
 	const onSubmit = (values) => {
 		const { isNew = false } = module || {};
 
-		const payloadValues = { ...values, course_id: id, sequence_order: nodeIndex };
+		const payloadValues = { ...values, course_id: id, sequence_order: nodeIndex + 1 };
 
 		onSaveModule({ values: payloadValues, module, isNew, setShowModule });
 	};

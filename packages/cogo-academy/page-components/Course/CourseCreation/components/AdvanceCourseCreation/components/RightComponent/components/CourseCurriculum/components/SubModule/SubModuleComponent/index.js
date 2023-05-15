@@ -33,7 +33,7 @@ function SubModuleComponent({
 
 		const payloadValues = {
 			...values,
-			sequence_order: nodeIndex,
+			sequence_order: nodeIndex + 1,
 			...(isNew ? { course_module_id } : { id }),
 		};
 
