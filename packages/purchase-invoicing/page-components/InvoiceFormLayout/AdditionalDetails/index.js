@@ -50,7 +50,7 @@ function AdditionalDetails({
 						) : null}
 					</div>
 				</div>
-				<div className={`${styles.inputcontainer}`}>
+				<div className={styles.inputcontainer}>
 					<div className={styles.label}>IRN Number :</div>
 					<div>
 						<InputController
@@ -68,7 +68,7 @@ function AdditionalDetails({
 					</div>
 				</div>
 				{formValues?.invoice_type === 'credit_note' ? (
-					<div className={`${styles.selectcontainer}`}>
+					<div className={styles.selectcontainer}>
 						<div className={styles.label}>Ref Invoice No :</div>
 						<div>
 							<SelectController
