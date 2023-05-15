@@ -14,53 +14,36 @@ interface ItemProps {
 interface Props {
 	itemData:ItemProps,
 }
+const MAX_LENGTH = 16;
 function BankDetails({ itemData }:Props) {
 	const { bankDetail } = itemData || {};
+	const renderTooltip = (content: string, maxLength: number) => {
+		if (content.length > maxLength) {
+			return (
+				<Tooltip interactive placement="top" content={content}>
+					<div className={styles.value}>{`${content.substring(0, maxLength)}...`}</div>
+				</Tooltip>
+			);
+		}
+		return content;
+	};
 	const {
 		account_number:accountNo = '',
 		beneficiary_name:beneficiaryName = '',
 		ifsc_code:ifsc = '',
 	} = bankDetail[0] || {};
-	const nameLength = beneficiaryName.length > 20;
+
 	return (
 		<div>
-			<div className={styles.text}>
-				{nameLength
-					? (
-						<Tooltip
-							interactive
-							placement="top"
-							content={beneficiaryName}
-						>
-							<text>
-
-								{`${(beneficiaryName).substring(
-									0,
-									20,
-								)}...`}
-
-							</text>
-						</Tooltip>
-					) : beneficiaryName}
-				{}
-			</div>
-
+			<div className={styles.text}>{renderTooltip(beneficiaryName, MAX_LENGTH)}</div>
 			<div>
 				<div className={styles.sub_container}>
-					<div className={styles.label}>
-						A/C No:
-					</div>
-					<div className={styles.value}>
-						{ accountNo}
-					</div>
+					<div className={styles.label}>A/C No:</div>
+					{renderTooltip(accountNo, MAX_LENGTH)}
 				</div>
 				<div className={styles.sub_container}>
-					<div className={styles.label}>
-						IFSC:
-					</div>
-					<div className={styles.value}>
-						{ifsc}
-					</div>
+					<div className={styles.label}>IFSC:</div>
+					{renderTooltip(ifsc, MAX_LENGTH)}
 				</div>
 			</div>
 		</div>

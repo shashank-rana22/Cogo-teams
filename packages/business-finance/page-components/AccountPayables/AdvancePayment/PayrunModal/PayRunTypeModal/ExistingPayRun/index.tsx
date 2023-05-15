@@ -40,6 +40,9 @@ interface ItemProps {
 	invoiceCount:number;
 	createdAt:string,
 }
+interface ItemType {
+	id: string;
+}
 
 function ExitingPayRun({
 	exitPayRun,
@@ -65,7 +68,7 @@ function ExitingPayRun({
 	};
 
 	const functions = {
-		renderRadio: (itemData) => {
+		renderRadio: (itemData:ItemType) => {
 			const { id } = itemData || {};
 			const handleRadioChange = () => {
 				if (value) {

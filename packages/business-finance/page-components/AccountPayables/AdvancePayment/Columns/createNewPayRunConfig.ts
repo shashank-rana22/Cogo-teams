@@ -23,7 +23,8 @@ export const CREATE_NEW_PAYRUN_CONFIG = {
 		{
 			label  : 'Adv. Doc. No.',
 			key    : 'advanceDocumentNo',
-			span   : 1.4,
+			span   : 1.2,
+			func   : 'renderDocNumber',
 			styles : { marginLeft: '32px' },
 		},
 		{
@@ -64,7 +65,7 @@ export const CREATE_NEW_PAYRUN_CONFIG = {
 			key   : 'bankName',
 			label : 'Bank Account Details',
 			func  : 'renderBankData',
-			span  : 1.6,
+			span  : 2,
 		},
 		{
 			key     : 'requestedBy',

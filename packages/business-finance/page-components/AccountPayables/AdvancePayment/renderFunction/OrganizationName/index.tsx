@@ -14,11 +14,13 @@ interface PropsType {
 interface ItemPropsType {
 	itemData:PropsType
 }
+const ORGANIZATION_NAME_LENGTH = 16;
+const SUBSTRING_END_LENGNTH = 16;
 
 function OrganizationName({ itemData }:ItemPropsType) {
 	const { advanceDocumentSellerAddress } = itemData || {};
 	const { organizationName = '' } = advanceDocumentSellerAddress || {};
-	const nameLength = organizationName.length > 20;
+	const nameLength = organizationName.length > ORGANIZATION_NAME_LENGTH;
 	return (
 		<div className={styles.container}>
 			{nameLength
@@ -32,7 +34,7 @@ function OrganizationName({ itemData }:ItemPropsType) {
 
 							{`${organizationName.substring(
 								0,
-								20,
+								SUBSTRING_END_LENGNTH,
 							)}...`}
 
 						</text>

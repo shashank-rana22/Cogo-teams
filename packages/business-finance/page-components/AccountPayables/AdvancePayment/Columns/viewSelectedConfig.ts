@@ -17,6 +17,7 @@ export const VIEW_SELECTED_CONFIG = {
 		{
 			label : 'Adv. Doc. No.',
 			key   : 'advanceDocumentNo',
+			func  : 'renderDocNumber',
 			span  : 1.2,
 		},
 		{

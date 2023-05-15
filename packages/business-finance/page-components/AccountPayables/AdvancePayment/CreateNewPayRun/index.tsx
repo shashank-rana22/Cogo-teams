@@ -21,6 +21,7 @@ import Footer from './Footer';
 import BankData from './renderFunction/BankData';
 import BankDetails from './renderFunction/BankDetails';
 import DeleteModal from './renderFunction/DeleteModal/index';
+import DocumentNumber from './renderFunction/DocumentNumber';
 import ModifiedName from './renderFunction/ModifiedName';
 import SIDnumber from './renderFunction/SIDnumber';
 import styles from './styles.module.css';
@@ -42,6 +43,7 @@ interface BankType {
 interface ItemProps {
 	advanceDocumentSellerAddress:OrganizationTypes,
 	advanceDocumentId?:string,
+	advanceDocumentNo:string,
 	approvedAt:Date,
 	approvedBy:NameType,
 	organizationName:string,
@@ -84,22 +86,22 @@ function CreateNewPayRun() {
 		data:existpayRunData, loading:existingPayRunLoading,
 		getAdvancedPayment,
 	} = useGetCreatePayRunType({ selectedPayRunId });
+
+	const { list = [] } = existpayRunData || {};
+	const { name = '', totalValue = '', currency = '', invoiceCount = '', createdAt = '' } = list[0] || {};
+	const { pageIndex } = data || {};
+	const { list:dataList = [] } = data || {};
+	const dataListLength = dataList.length;
+	const { list:selectedList = [] } = viewSelectedData || {};
+	const selectedListLength = selectedList.length;
+	const listLength = viewSelectedInvoice ? selectedListLength : dataListLength;
+
 	useEffect(() => {
 		if (selectedPayRunId) {
 			getAdvancedPayment();
 		}
 	}, [getAdvancedPayment, selectedPayRunId]);
-	const { list = [] } = existpayRunData || {};
-	const { name = '', totalValue = '', currency = '', invoiceCount = '', createdAt = '' } = list[0] || {};
-	const { pageIndex } = data || {};
 
-	const { list:dataList = [] } = data || {};
-	const dataListLength = dataList.length;
-
-	const { list:selectedList = [] } = viewSelectedData || {};
-	const selectedListLength = selectedList.length;
-
-	const listLength = viewSelectedInvoice ? selectedListLength : dataListLength;
 	const functions = {
 		renderCheckbox    : (itemData:ItemProps) => getTableBodyCheckbox(itemData),
 		renderBankDetails : (itemData:ItemProps) => <BankDetails itemData={itemData} />,
@@ -134,10 +136,13 @@ function CreateNewPayRun() {
 		renderBankData: (itemData:ItemProps) => (
 			<BankData itemData={itemData} />
 		),
+		renderDocNumber: (itemData:ItemProps) => (
+			<DocumentNumber itemData={itemData} />
+		),
 	};
 	return (
 		<div>
-			<div className={styles.bread_crumb}>
+			<div>
 				<Breadcrumb>
 					<Breadcrumb.Item label={(
 						<Link href="/business-finance/account-payables/advance-payment">
