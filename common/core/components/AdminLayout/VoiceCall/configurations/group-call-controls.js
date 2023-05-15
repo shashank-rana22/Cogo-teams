@@ -1,12 +1,12 @@
 import { asyncFieldsPartnerUsers } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-import { IcMAgentManagement } from '@cogoport/icons-react';
+import { IcMCallbarge, IcMCallwhisper, IcMCallmonitor, IcMCalltransfer } from '@cogoport/icons-react';
 
 export const ICON_MAPPING = {
-	monitor  : IcMAgentManagement,
-	whisper  : IcMAgentManagement,
-	barge    : IcMAgentManagement,
-	transfer : IcMAgentManagement,
+	monitor  : IcMCallmonitor,
+	whisper  : IcMCallwhisper,
+	barge    : IcMCallbarge,
+	transfer : IcMCalltransfer,
 };
 
 export const useGetControls = ({ localStateReducer }) => {
@@ -29,10 +29,10 @@ export const useGetControls = ({ localStateReducer }) => {
 			type    : 'checkbox',
 			label   : '',
 			options : [
-				{ label: 'monitor', value: 'monitor', icon: IcMAgentManagement },
-				{ label: 'whisper', value: 'whisper', icon: IcMAgentManagement },
-				{ label: 'barge', value: 'barge', icon: IcMAgentManagement },
-				{ label: 'transfer', value: 'transfer', icon: IcMAgentManagement },
+				{ label: 'monitor', value: 'monitor', icon: IcMCallmonitor },
+				{ label: 'whisper', value: 'whisper', icon: IcMCallwhisper },
+				{ label: 'barge', value: 'barge', icon: IcMCallbarge },
+				{ label: 'transfer', value: 'transfer', icon: IcMCalltransfer },
 			],
 		},
 	};

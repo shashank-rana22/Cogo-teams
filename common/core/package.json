@@ -5,7 +5,7 @@
 	"dependencies": {
 		"@cogoport/authentication": "workspace:0.1.0",
 		"@cogoport/components": "^1.0.359",
-		"@cogoport/icons-react": "^1.0.72",
+		"@cogoport/icons-react": "^1.0.73",
 		"@cogoport/globalization": "workspace:*",
 		"@cogoport/navigation-configs": "workspace:0.1.0",
 		"@cogoport/forms": "workspace:^0.1.0",
