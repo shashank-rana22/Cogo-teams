@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 const getDate = (date) => format(
 	date,
-	'dd:mm:yyyy',
+	'dd/MM/yyyy',
 	{},
 	false,
 );

@@ -8,10 +8,10 @@ import TaskContainer from '../../common/TaskContainer';
 import styles from './styles.module.css';
 
 function TaskForm({
-	apis_data,
-	pendingTask,
+	apis_data = {},
+	pendingTask = {},
 	onCancel = () => {},
-	services,
+	services = [],
 	taskListRefetch = () => {},
 }) {
 	const [details, setDetails] = useState('');
