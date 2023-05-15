@@ -21,7 +21,7 @@ function ReviewDoc({
 		refetch();
 	};
 
-	const { list, loading } = useListDocuments({
+	const { list = {}, loading = true } = useListDocuments({
 		defaultFilters: {
 			shipment_id: task.shipment_id, id: task.task_field_id,
 		},
@@ -33,7 +33,7 @@ function ReviewDoc({
 	let docData = {};
 	let params = {};
 
-	if (!loading && list?.list?.length) {
+	if (!loading && list.list?.length) {
 		docData = list.list[0] || {};
 		params = {
 			id                  : docData.id,

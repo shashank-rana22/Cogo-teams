@@ -9,6 +9,7 @@ import useGetIrnGeneration from '../../hooks/useGetIrnGeneration';
 import useGetRefresh from '../../hooks/useGetRefresh';
 import useUploadeInvoice from '../../hooks/useUploadInvoice';
 
+import FinalPostModal from './FinalPostModal';
 import InvoiceModal from './InvoiceModal';
 import styles from './styles.module.css';
 
@@ -36,6 +37,11 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	const [uploadInvoice, setUploadInvoice] = useState(false);
 	const [openReject, setOpenReject] = useState(false);
 	const [textValue, setTextValue] = useState('');
+
+	const [finalPostToSageModal, setFinalPostToSageModal] = useState(false);
+
+	const [visible, setVisible] = useState(false);
+
 	const { invoiceStatus = '', entityCode = '' } = itemData || {};
 
 	const { partner = {} } = profile;
@@ -50,7 +56,10 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 		refetch,
 	});
 
-	const { generateIrn, loading, finalPostFromSage, finalPostLoading } = useGetIrnGeneration({
+	const {
+		generateIrn, loading, finalPostFromSage, finalPostLoading, getSageInvoiceData, sageInvoiceData,
+		sageInvoiceLoading,
+	} = useGetIrnGeneration({
 		id,
 		refetch,
 	});
@@ -66,8 +75,6 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 		partner,
 	});
 
-	const { daysLeftForAutoIrnGeneration = '' } = itemData || {};
-
 	const financeRejected = () => {
 		setOpenReject(!openReject);
 	};
@@ -78,6 +85,12 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	const { labels } = CogoportEntity[entityCode] || {};
 
 	const { irn_label: IrnLabel } = labels || {};
+
+	const handleFinalpost = () => {
+		setFinalPostToSageModal(true);
+		getSageInvoiceData();
+		setVisible(!visible);
+	};
 
 	const content = () => (
 		<div>
@@ -108,7 +121,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 					{INVOICE_STATUS.includes(invoiceStatus) && (
 						<Button
 							size="sm"
-							disabled={loading || (daysLeftForAutoIrnGeneration as unknown as number) <= 0}
+							disabled={loading}
 							onClick={() => generateIrn()}
 						>
 							Generate
@@ -121,7 +134,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 							<Button
 								size="sm"
 								disabled={finalPostLoading}
-								onClick={() => finalPostFromSage()}
+								onClick={() => handleFinalpost()}
 							>
 								<div className={styles.button_style}>Final Post</div>
 							</Button>
@@ -195,6 +208,15 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 						</div>
 					)}
 
+					<FinalPostModal
+						finalPostToSageModal={finalPostToSageModal}
+						setFinalPostToSageModal={setFinalPostToSageModal}
+						finalPostFromSage={finalPostFromSage}
+						sageInvoiceData={sageInvoiceData}
+						sageInvoiceLoading={sageInvoiceLoading}
+						finalPostLoading={finalPostLoading}
+					/>
+
 				</div>
 			)}
 		</div>
@@ -204,12 +226,14 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 		<Popover
 			placement="left"
 			render={content()}
+			visible={visible}
 		>
 
 			<IcMOverflowDot
 				style={{ cursor: 'pointer' }}
 				width="16px"
 				height="16px"
+				onClick={() => setVisible(!visible)}
 			/>
 
 		</Popover>

@@ -103,7 +103,7 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 		{
 			url     : 'pnl/accrual/archive-shipment/list',
 			method  : 'get',
-			authKey : 'get_pnl_accrual_archive-shipment_list',
+			authKey : 'get_pnl_accrual_archive_shipment_list',
 		},
 		{ manual: true },
 	);
@@ -112,7 +112,7 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 		try {
 			const res = await drillDownArchiveTrigger({
 				params: {
-					period         : month.period || undefined,
+					period         : format(month.period, 'yyyy-MM-dd') || undefined,
 					startDate      : date ? format(date?.startDate, 'yyyy-MM-dd') : undefined,
 					endDate        : date ? format(date?.endDate, 'yyyy-MM-dd') : undefined,
 					archivedStatus : archivedStatus || undefined,
