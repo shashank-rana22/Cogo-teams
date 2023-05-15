@@ -9,6 +9,7 @@ import RenderIRNGenerated from '../commons/RenderIRNGenerated';
 import RibbonRender from '../commons/RibbonRender';
 import { getDocumentNumber, getDocumentUrl } from '../Utils/getDocumentNumber';
 
+import ShipmentView from './ShipmentView';
 import SortHeaderInvoice from './SortHeaderInvoice';
 import styles from './styles.module.css';
 
@@ -142,52 +143,7 @@ const completedColumn = ({
 	{
 		Header   : 'SID',
 		accessor : (row) => (
-			<div className={styles.field_pair}>
-
-				{(getByKey(row, 'sidNo') as string).length > 10 ? (
-					<Tooltip
-						interactive
-						placement="top"
-						content={<div className={styles.tool_tip}>{getByKey(row, 'sidNo') as string}</div>}
-					>
-						<text className={styles.sid}>
-							{`${(getByKey(row, 'sidNo') as string).substring(
-								0,
-								10,
-							)}...`}
-						</text>
-					</Tooltip>
-				)
-					: (
-						<div className={styles.sid}>
-							{getByKey(row, 'sidNo') as string}
-						</div>
-					)}
-
-				{startCase(getByKey(row, 'serviceType') as string).length > 10 ? (
-					<Tooltip
-						interactive
-						placement="top"
-						content={(
-							<div className={styles.tool_tip}>
-								{startCase(getByKey(row, 'serviceType') as string)}
-							</div>
-						)}
-					>
-						<text className={styles.cursor}>
-							{`${startCase(getByKey(row, 'serviceType') as string).substring(
-								0,
-								10,
-							)}...`}
-						</text>
-					</Tooltip>
-				)
-					: (
-						<div className={styles.cursor}>
-							{startCase(getByKey(row, 'serviceType') as string)}
-						</div>
-					)}
-			</div>
+			<ShipmentView row={row} />
 		),
 	},
 	{
