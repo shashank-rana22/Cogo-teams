@@ -65,7 +65,7 @@ function CogoOne() {
 
 	const viewType = getViewType(userRoleIds);
 
-	const isomniChannelAdmin = viewType === 'agent_view';
+	const isomniChannelAdmin = viewType === 'admin_view';
 	const {
 		loading:statusLoading,
 		updateUserStatus = () => {},
