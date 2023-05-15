@@ -31,11 +31,13 @@ function SupplierReallocation({
 	setShow = () => {},
 	isAdditional = false,
 }) {
-	const { shipment_data, refetch, refetchServices } = useContext(ShipmentDetailContext);
+	const { shipment_data, refetch, refetchServices, primary_service = {} } = useContext(ShipmentDetailContext);
+
+	const { service_provider = {} } = primary_service;
 	const { documents, shipment_type, trade_type = '', payment_term = '' } = shipment_data || {};
 
 	const serviceObj = serviceData?.[0] || {};
-	const { service_type, importer_exporter } = serviceObj || {};
+	const { service_type } = serviceObj || {};
 
 	const { defaultValues, controls, showAllControls } = getControls({
 		serviceObj,
@@ -66,7 +68,7 @@ function SupplierReallocation({
 			ids                 : serviceData?.map((item) => item?.id),
 			data                : { ...values },
 			service_type,
-			performed_by_org_id : importer_exporter?.id,
+			performed_by_org_id : service_provider?.id,
 		};
 		apiTrigger(payload);
 	};
@@ -93,7 +95,7 @@ function SupplierReallocation({
 				<div className={styles.form_wrapper}>
 					{controls.map((ctrl) => (
 						<FormElement
-							key={ctrl.name}
+							key={ctrl?.name}
 							{...ctrl}
 							control={control}
 							errors={errors}

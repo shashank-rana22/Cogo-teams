@@ -1,97 +1,89 @@
-import { Toast, Button } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useScope } from '@cogoport/scope-select';
 import { useState, useEffect, useRef } from 'react';
+import { v4 as uuid } from 'uuid';
+
+import Form from '../form';
 
 import controls from './controls';
-import Form from './form';
 import styles from './styles.module.css';
 
 function UploadHbl(props) {
-	const { docs, bls_count, summary, data, refetchDocs } = props || {};
-	const [urls, setUrls] = useState([]);
+	const { docs, bls_count, primaryService, task, refetchDocs } = props || {};
 
 	const formRefs = useRef([]);
-	const { scope } = useScope();
+	const [urls, setUrls] = useState([]);
 
-	const createShipmentDocAPI = useRequest(
-		'post',
-		false,
-		scope,
-	)('/create_shipment_document');
+	const [{ loading }, trigger] = useRequest({
+		url    : '/create_shipment_document',
+		method : 'POST',
+	}, { manual: true });
 
 	const uploadBills = async (values) => {
 		const documents = [];
+
 		values?.forEach((item) => {
 			documents.push({
-				file_name    : item?.url?.name,
-				document_url : item?.url?.url,
+				file_name    : item?.url?.fileName,
+				document_url : item?.url?.finalUrl,
 				data         : {
 					description      : item?.description,
 					document_number  : item?.document_number,
 					containers_count : item?.containers_count,
-					service_id       : summary?.id,
-					service_type     : summary?.service_type,
+					service_id       : primaryService?.id,
+					service_type     : primaryService?.service_type,
 				},
 			});
 		});
 
 		const body = {
-			shipment_id        : data?.shipment_id,
-			uploaded_by_org_id : data?.organization_id,
-			service_id         : data?.service_id,
-			service_type       : data.service_type,
+			shipment_id        : task?.shipment_id,
+			uploaded_by_org_id : task?.organization_id,
+			service_id         : task?.service_id,
+			service_type       : task.service_type,
 			pending_task_id:
-				data?.service_type === 'lcl_freight_service' ? data?.id : undefined,
+			task?.service_type === 'lcl_freight_service' ? task?.id : undefined,
 			document_type: 'draft_house_bill_of_lading',
 			documents,
 		};
 
-		await createShipmentDocAPI.trigger({ data: body });
+		await trigger({ data: body });
 
 		refetchDocs();
 	};
 
-	const handleSubmit = () => {
-		let isAllFormsValid = true;
-		const invoice_details = [];
+	const handleSubmit = async () => {
+		const payload = [];
+		const validationFlags = await Promise.all(formRefs.current.map(({ formTrigger }) => formTrigger()));
+		const isFormValid = validationFlags.every((valid) => valid);
 
-		(formRefs?.current || []).forEach((item) => {
-			if (!item?.submitForm()) {
-				isAllFormsValid = false;
-			} else if (item?.submitForm()?.e) {
-				Toast.error(item?.submitForm()?.e);
-			} else {
-				invoice_details.push(item?.submitForm());
-			}
-		});
-
-		if (isAllFormsValid) {
-			uploadBills(invoice_details);
-		} else {
-			Toast.error('Fill all forms');
+		if (isFormValid) {
+			formRefs.current.forEach(({ getFormValues }) => {
+				const val = getFormValues();
+				payload.push(val);
+			});
+			uploadBills(payload);
 		}
 	};
 
 	useEffect(() => {
-		const newUrls = [...urls];
+		const newUrls = [];
 
 		docs?.forEach((item, i) => {
 			newUrls[i] = `${item?.document_url}`;
 		});
 
 		setUrls(newUrls);
-	}, [docs, urls]);
+	}, [docs]);
 
 	return (
-		<div>
+		<main>
 			{Array(bls_count)
 				.fill(null)
 				.map((n, i) => (
-					<div key={n} className={styles.flex_container}>
+					<form className={styles.view_and_form} key={uuid()}>
 						{urls?.[i]?.length > 0 ? (
 							<Button
-								ghost
 								onClick={() => {
 									window.open(urls[i], '_blank');
 								}}
@@ -99,7 +91,7 @@ function UploadHbl(props) {
 								id={`bm_pt_bl_upload_view_bl_${i + 1}`}
 							>
 								View HBL
-								{' '}
+								&nbsp;
 								{i + 1}
 							</Button>
 						) : (
@@ -108,25 +100,27 @@ function UploadHbl(props) {
 									formRefs.current[i] = r;
 								}}
 								id={i}
+								key={uuid()}
 								url={urls[i]}
 								bl_type="HBL"
 								controls={controls}
 								{...props}
 							/>
 						)}
-					</div>
+					</form>
 				))}
+
 			{bls_count > urls?.length && (
-				<Button
-					disabled={createShipmentDocAPI?.loading}
-					onClick={handleSubmit}
-					size="sm"
-					id="bm_pt_bl_upload_hbl_submit"
-				>
-					Submit
-				</Button>
+				<form className={styles.button_wrapper}>
+					<Button
+						disabled={loading}
+						onClick={handleSubmit}
+					>
+						Submit
+					</Button>
+				</form>
 			)}
-		</div>
+		</main>
 	);
 }
 export default UploadHbl;
