@@ -1,24 +1,18 @@
 import { Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import useGetTaggingBills from '../../hooks/useGetMappings';
-
 import styles from './styles.module.css';
 import { TagCard } from './TagCard';
 
 function TagMap({
-	serviceProviderId = '',
-	shipmentId = '',
 	isNormalTab,
 	selectedProforma,
 	setSelectedProforma,
 	activeTab,
 	showCheck,
+	mappingsData,
+	loading,
 }) {
-	const { mappingsData, loading } = useGetTaggingBills({
-		shipmentId, serviceProviderId,
-	});
-
 	const allTaggingMaps = ['merge', 'split'].includes(activeTab) ? [activeTab] : ['merge', 'split', 'notTaggedIds'];
 
 	if ((!isEmpty(activeTab) && isEmpty(mappingsData?.[activeTab]))

@@ -219,6 +219,7 @@ function CollectionPartyForm({
 						<div className={styles.label}>TDS Rate (%)</div>
 						<InputController
 							name="tds_rate"
+							type="number"
 							control={control}
 							size="sm"
 							placeholder="Add TDS Rate"
@@ -306,7 +307,7 @@ function CollectionPartyForm({
 			<Modal.Footer>
 				<div className={styles.buttoncontainer}>
 					<Button
-						className={`${styles.cancel}`}
+						className={styles.cancel}
 						themeType="secondary"
 						onClick={() => { setShowCollectionParty(false); }}
 					>

@@ -5,6 +5,7 @@ import AccordianView from '../../common/Accordianview';
 import InvoicesTable from '../../common/InvoicesTable';
 import TagMap from '../../common/Taggings/TagMap';
 import invoiceconfiguration from '../../configurations/invoicetableconfig';
+import useGetTaggingBills from '../../hooks/useGetMappings';
 
 import styles from './styles.module.css';
 
@@ -34,6 +35,10 @@ function InvoicesUploaded({
 		id: 'view_details',
 	};
 
+	const { mappingsData, loading } = useGetTaggingBills({
+		shipmentId: collectionParty?.shipment_id, serviceProviderId: collectionParty?.service_provider_id,
+	});
+
 	return (
 		<div className={styles.invoicescontainer}>
 			<span className={styles.headings}>Invoices Uploaded</span>
@@ -46,18 +51,14 @@ function InvoicesUploaded({
 					<TabPanel name="uploaded_invoices" title="Uploaded Invoices">
 						<div className={styles.tablecontainer}>
 							<InvoicesTable
-								columns={[...invoiceconfiguration,
-									viewDetails]}
+								columns={[...invoiceconfiguration, viewDetails]}
 								data={invoicesdata}
 								showPagination={false}
 							/>
 						</div>
 					</TabPanel>
 					<TabPanel name="tagging_map" title="Tagging Map">
-						<TagMap
-							serviceProviderId={collectionParty?.service_provider_id}
-							shipmentId={collectionParty?.shipment_id}
-						/>
+						<TagMap loading={loading} mappingsData={mappingsData} />
 					</TabPanel>
 				</Tabs>
 			</AccordianView>

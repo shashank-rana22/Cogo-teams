@@ -1,11 +1,11 @@
 import { Placeholder } from '@cogoport/components';
-import { useRequest } from '@cogoport/request';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 import getFormattedAmount from '../../../common/helpers/formatAmount';
 import getPurchaseReplica from '../../../helpers/get-purchase-replica';
 import mappingsFunc from '../../../helpers/mappingsFunc';
+import useGetVarience from '../../../hooks/useGetVarience';
 import toastApiError from '../../../utils/toastApiError';
 
 import styles from './styles.module.css';
@@ -17,10 +17,8 @@ function KnockOffMode({
 	collectionPartyId,
 }) {
 	const [loading, setLoading] = useState(false);
-	const [{ data: varianceFullData }, trigger] = useRequest({
-		url    : '/get_collection_party_variance',
-		method : 'post',
-	}, { manual: true });
+	const { varianceFullData, trigger } = useGetVarience();
+
 	const purchase_replica = getPurchaseReplica(
 		data,
 		globalSelected,

@@ -86,8 +86,8 @@ export const renderValue = (label, detail) => {
 
 	const formatShipperDetails = (shipperDetails) => (
 		<div>
-			<div>{shipperDetails?.name}</div>
-			<div>{shipperDetails?.address}</div>
+			<div>{shipperDetails?.name || ''}</div>
+			<div>{shipperDetails?.address || ''}</div>
 		</div>
 	);
 
@@ -164,7 +164,7 @@ export const renderValue = (label, detail) => {
 			return ` ${volume} ${detail?.service_type === 'ftl_freight_service'
 				|| detail?.service_type === 'haulage_freight_service'
 				? ''
-				: `, Chargeable Weight: ${chargableWeight.toFixed(2)} kg`
+				: `, Chargeable Weight: ${(chargableWeight || 0).toFixed(2)} kg`
 			}`;
 		case 'weight':
 			return ` ${detail?.weight} kgs`;
@@ -250,13 +250,13 @@ export const renderValue = (label, detail) => {
 		case 'shipper_details':
 			return formatShipperDetails(detail?.shipper_details || {});
 		case 'buy_quotation_agreed_rates':
-			return `${detail?.buy_quotation_agreed_rates.toFixed(2)} USD`;
+			return `${(detail?.buy_quotation_agreed_rates || 0).toFixed(2)} USD`;
 		case 'hs_code':
 			return `${detail?.hs_code?.hs_code} - ${detail?.hs_code?.name}`;
 		case 'delivery_date':
 			return getFormattedDate(detail?.delivery_date, 'date');
 
 		default:
-			return detail[label] || null;
+			return detail?.[label] || null;
 	}
 };

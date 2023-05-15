@@ -84,11 +84,9 @@ const useAddCollectionParty = ({
 				],
 			};
 
-			const res = await trigger({ data: newPayload });
-			if (!res.hasError) {
-				Toast.success('Collection party created successfully');
-				setOpen(false);
-			}
+			await trigger({ data: newPayload });
+			Toast.success('Collection party created successfully');
+			setOpen(false);
 		} catch (err) {
 			Toast.error(
 				'Unable to create Trade contact!!',

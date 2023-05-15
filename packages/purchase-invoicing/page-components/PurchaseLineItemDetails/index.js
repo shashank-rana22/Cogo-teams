@@ -5,6 +5,13 @@ import handlePartyDetails from '../../helpers/handlePartyDetails';
 
 import styles from './styles.module.css';
 
+const DETAILS = [
+	{ key: 'bank_name', label: 'Bank Details' },
+	{ key: 'bank_account_number', label: 'Account Number' },
+	{ key: 'ifsc_number', label: 'IFSC' },
+	{ key: 'registration_number', label: 'PAN Number' },
+];
+
 function PurchaseLineItemDetails({
 	billingPartyObj = {},
 	collectionPartyObj = {},
@@ -17,13 +24,6 @@ function PurchaseLineItemDetails({
 		editData,
 		purchaseInvoiceValues,
 	});
-
-	const DETAILS = [
-		{ key: 'bank_name', label: 'Bank Details' },
-		{ key: 'bank_account_number', label: 'Account Number' },
-		{ key: 'ifsc_number', label: 'IFSC' },
-		{ key: 'registration_number', label: 'PAN Number' },
-	];
 
 	return (
 		<div>

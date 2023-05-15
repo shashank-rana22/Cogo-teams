@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 
 function LineItemDetails({
 	control,
-	watch = () => { },
+	watch = () => {},
 	serviceProvider = {},
 	collectionParty = {},
 	collectionPartyAddresses = [],

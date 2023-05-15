@@ -41,8 +41,8 @@ function BillingPartyDetails({
 
 	return (
 		<AccordianView title="Billing Party Details" fullwidth showerror={errMszs?.billingPartyErr} open={open}>
-			{!isEmpty(billingPartiesExcept101)
-				? (
+			{isEmpty(billingPartiesExcept101)
+				? <Placeholder width="100%" height="80px" /> : (
 					<>
 						<div className={styles.flex}>
 							<div className={styles.selectcontainer}>
@@ -115,7 +115,7 @@ function BillingPartyDetails({
 							</div>
 						) : null}
 					</>
-				) : <Placeholder width="100%" height="80px" />}
+				)}
 		</AccordianView>
 	);
 }

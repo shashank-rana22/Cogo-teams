@@ -30,7 +30,7 @@ function MapLineItemDetails({
 
 	const disableEditing = isLockedMode || bankStatus === 'pending';
 	const renderCheck = (item) => {
-		const itemKey = `${item.code}:${item.service_id}`;
+		const itemKey = `${item?.code}:${item?.service_id}`;
 
 		const checkedCondition = currentSelected?.buy?.includes(itemKey);
 

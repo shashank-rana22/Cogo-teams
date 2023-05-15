@@ -3,8 +3,15 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import TagMap from '../../../common/Taggings/TagMap';
+import useGetTaggingBills from '../../../hooks/useGetMappings';
 
 import styles from './styles.module.css';
+
+const TAGGING_TABS = [
+	{ label: 'split', value: 'split', heading: 'Select a proforma you want to split ' },
+	{ label: 'merge', value: 'merge', heading: 'Select More then one proforma you want to Merge' },
+	{ label: 'normal', value: 'notTaggedIds', heading: 'Select a proforma you want to Tag ' },
+];
 
 function Taggings({
 	showTagings = false,
@@ -14,13 +21,11 @@ function Taggings({
 	setSelectedProforma = () => {},
 	setShowTaggings = () => {},
 }) {
-	const TAGGING_TABS = [
-		{ label: 'split', value: 'split', heading: 'Select a proforma you want to split ' },
-		{ label: 'merge', value: 'merge', heading: 'Select More then one proforma you want to Merge' },
-		{ label: 'normal', value: 'notTaggedIds', heading: 'Select a proforma you want to Tag ' },
-	];
-
 	const [activeTab, setActiveTab] = useState('split');
+
+	const { mappingsData, loading } = useGetTaggingBills({
+		shipmentId, serviceProviderId,
+	});
 
 	const handleSave = () => {
 		if (isEmpty(selectedProforma)) {
@@ -73,6 +78,8 @@ function Taggings({
 										activeTab={value}
 										showCheck
 										key={value}
+										mappingsData={mappingsData}
+										loading={loading}
 									/>
 								</TabPanel>
 							))}
@@ -82,7 +89,7 @@ function Taggings({
 				<Modal.Footer>
 					<div className={styles.buttoncontainer}>
 						<Button
-							className={`${styles.cancel}`}
+							className={styles.cancel}
 							onClick={() => {
 								setSelectedProforma([]);
 								setShowTaggings(false);

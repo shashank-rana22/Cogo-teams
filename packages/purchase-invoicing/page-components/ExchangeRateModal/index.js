@@ -1,13 +1,13 @@
-import { Button, Modal, Checkbox } from '@cogoport/components';
+import { Button, Modal, Checkbox, Placeholder } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMAttach, IcMInfo } from '@cogoport/icons-react';
-import { useRequestBf } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { BILL_MAPPINGS } from '../../constants';
+import useGetExchangeRate from '../../hooks/useGetExchangeRate';
 import toastApiError from '../../utils/toastApiError';
 
 import styles from './styles.module.css';
@@ -22,14 +22,8 @@ function ExchangeRateModal({
 }) {
 	const [exchangeProofUrl, setExchangeProofUrl] = useState('');
 	const [checkedDeviation, setCheckedDeviation] = useState(false);
-	const [{ data, loading: exchangeRateloading }] = useRequestBf(
-		{
-			url     : `/purchase/bills/exchange-rate-deviation/${billId}`,
-			method  : 'get',
-			authKey : 'get_purchase_bills_exchange_rate_deviation_by_id',
-		},
-		{ manual: false },
-	);
+
+	const { data, exchangeRateloading } = useGetExchangeRate({ billId });
 
 	const handleChange = (info) => {
 		setExchangeProofUrl(info);
@@ -65,7 +59,7 @@ function ExchangeRateModal({
 					</div>
 				)}
 				/>
-				{!exchangeRateloading ? (
+				{exchangeRateloading ? <Placeholder /> : (
 					<>
 						{' '}
 						<Modal.Body>
@@ -106,13 +100,10 @@ function ExchangeRateModal({
 											{' '}
 											{item?.to_currency}
 										</div>
-										<div />
 
 										<div className={`${styles.exchangevalue}`}>{item?.rate}</div>
-										<div />
 
 										<div className={`${styles.exchangevalue}`}>{item?.xe_rate?.toFixed(2)}</div>
-										<div />
 
 										<div className={`${styles.exchangevalue}
 										${styles.warning}`}
@@ -154,7 +145,7 @@ function ExchangeRateModal({
 						<Modal.Footer>
 							<div className={styles.buttoncontainer}>
 								<Button
-									className={`${styles.cancel}`}
+									className={styles.cancel}
 									onClick={() => {
 										setExchangeRateModal(false);
 									}}
@@ -174,7 +165,7 @@ function ExchangeRateModal({
 							</div>
 						</Modal.Footer>
 					</>
-				) : <div className={styles.loading}>Loading... Exchange Rate</div>}
+				)}
 			</Modal>
 		</div>
 	);

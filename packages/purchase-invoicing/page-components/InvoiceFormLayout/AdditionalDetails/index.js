@@ -22,10 +22,10 @@ function AdditionalDetails({
 
 	const uploadedInvoices = [];
 	(serviceProvider?.collection_parties || [])
-		.filter((party) => ['purchase_invoice'].includes(party.invoice_type))
+		.filter((party) => ['purchase_invoice'].includes(party?.invoice_type))
 		.forEach((party) => {
 			uploadedInvoices.push({
-				label : party.invoice_no,
+				label : party?.invoice_no,
 				value : party?.finance_job_number,
 			});
 		});
@@ -87,7 +87,7 @@ function AdditionalDetails({
 						</div>
 					</div>
 				) : null}
-				<div className={`${styles.inputcontainer}`}>
+				<div className={styles.inputcontainer}>
 					<div className={styles.label}>Place of Supply :</div>
 					<div>
 						<InputController
@@ -104,7 +104,7 @@ function AdditionalDetails({
 						) : null}
 					</div>
 				</div>
-				<div className={`${styles.inputcontainer}`}>
+				<div className={styles.inputcontainer}>
 					<div className={styles.label}>POL :</div>
 					<div>
 						<InputController
@@ -121,7 +121,7 @@ function AdditionalDetails({
 						) : null}
 					</div>
 				</div>
-				<div className={`${styles.inputcontainer}`}>
+				<div className={styles.inputcontainer}>
 					<div className={styles.label}>POD :</div>
 					<div>
 						<InputController
@@ -138,7 +138,7 @@ function AdditionalDetails({
 						) : null}
 					</div>
 				</div>
-				<div className={`${styles.selectcontainer}`}>
+				<div className={styles.selectcontainer}>
 					<div className={styles.label}>Mode of Payment :</div>
 					<div>
 						<SelectController
@@ -158,7 +158,7 @@ function AdditionalDetails({
 				</div>
 				{shipment_data?.shipment_type === 'air_freight' ? (
 					<>
-						<div className={`${styles.inputcontainer}`}>
+						<div className={styles.inputcontainer}>
 							<div className={styles.label}>MAWB No :</div>
 							<div>
 								<InputController
@@ -175,7 +175,7 @@ function AdditionalDetails({
 								) : null}
 							</div>
 						</div>
-						<div className={`${styles.inputcontainer}`}>
+						<div className={styles.inputcontainer}>
 							<div className={styles.label}>Package Count :</div>
 							<div>
 								<InputController
@@ -193,7 +193,7 @@ function AdditionalDetails({
 								) : null}
 							</div>
 						</div>
-						<div className={`${styles.inputcontainer}`}>
+						<div className={styles.inputcontainer}>
 							<div className={styles.label}>Chargeable Weight :</div>
 							<div>
 								<InputController

@@ -20,6 +20,17 @@ import styles from './styles.module.css';
 
 const STATE = ['init', 'awaiting_service_provider_confirmation', 'completed'];
 
+const AJEET_EMAIL_ID = 'ajeet@cogoport.com';
+
+const STAKE_HOLDER_TYPES = [
+	'superadmin',
+	'service_ops2',
+	'invoice executive',
+	'cost booking executive',
+	'costbooking_ops',
+	'cost booking manager',
+];
+
 function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, servicesData = {} }) {
 	const [uploadInvoiceUrl, setUploadInvoiceUrl] = useState('');
 	const [openComparision, setOpenComparision] = useState(false);
@@ -48,16 +59,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 	const airServiceProviderConfirmation = shipment_data?.shipment_type === 'air_freight'
 		&& serviceProviderConfirmation;
 
-	const AJEET_EMAIL_ID = 'ajeet@cogoport.com';
-
-	const uploadInvoiceAllowed = shipment_data?.stakeholder_types?.some((ele) => [
-		'superadmin',
-		'service_ops2',
-		'invoice executive',
-		'cost booking executive',
-		'costbooking_ops',
-		'cost booking manager',
-	].includes(ele))
+	const uploadInvoiceAllowed = shipment_data?.stakeholder_types?.some((ele) => STAKE_HOLDER_TYPES.includes(ele))
 		|| [
 			geo.uuid.super_admin_id,
 			geo.uuid.admin_id,
@@ -154,7 +156,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 						)}
 						maxlength={25}
 					/>
-					<span style={{ paddingLeft: '4px' }}>
+					<span className={styles.paddingleft}>
 						{' '}
 						- (
 						{collectionParty?.collection_parties?.length || 0}
@@ -174,10 +176,19 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 				</div>
 			</div>
 			<div className={styles.mode}>
-				<span className={styles.tag}>Cash</span>
+				Cash
 			</div>
 		</div>
 	);
+
+	const onConfirm = () => {
+		if (!isEmpty(uploadInvoiceUrl)) {
+			setOpenComparision({});
+			setOpen(false);
+		} else {
+			toastApiError('Invoice is Required');
+		}
+	};
 
 	return (
 		<div className={styles.container}>
@@ -188,14 +199,13 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 					setOpenComparision={setOpenComparision}
 					setStep={setStep}
 				/>
-				{/* <InvoicesInProcess invoicesdata={collectionParty?.existing_collection_parties} /> */}
 				<span className={styles.headings}>Live Invoice</span>
 				<div className={styles.buttoncontailner}>
 					{(showUpload || user?.email === AJEET_EMAIL_ID) && !airServiceProviderConfirmation ? (
 						<Button
 							size="md"
 							themeType="secondary"
-							style={{ marginRight: '16px' }}
+							className={styles.marginright}
 							onClick={() => { setOpen(true); }}
 						>
 							{isJobClosed ? 'Upload Credit Note' : 'Upload Invoice'}
@@ -204,7 +214,6 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 					{disableInvoice ? (
 						<div className="upload-tooltip">{errorMsg}</div>
 					) : null}
-					{/* <Button size="md" themeType="secondary">Add Incidental Charges</Button> */}
 				</div>
 				<ServiceTables service_charges={collectionParty?.service_charges} />
 				<div className={styles.totalamount}>
@@ -213,7 +222,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 						{getFormattedAmount(collectionParty?.net_total || 0, collectionParty?.net_total_price_currency)}
 					</span>
 				</div>
-				{open && (
+				{open ? (
 					<Modal
 						show={open}
 						size="sm"
@@ -235,7 +244,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 						<Modal.Footer>
 							<Button
 								size="md"
-								style={{ marginRight: 10 }}
+								className={styles.marginright}
 								themeType="secondary"
 								onClick={() => {
 									setOpen(false);
@@ -246,22 +255,15 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 							</Button>
 							<Button
 								size="md"
-								onClick={() => {
-									if (!isEmpty(uploadInvoiceUrl)) {
-										setOpenComparision({});
-										setOpen(false);
-									} else {
-										toastApiError('Invoice is Required');
-									}
-								}}
+								onClick={onConfirm}
 							>
 								Confirm
 							</Button>
 						</Modal.Footer>
 					</Modal>
-				)}
+				) : null}
 
-				{openComparision && (
+				{openComparision ? (
 					<ComparisionModal
 						uploadInvoiceUrl={uploadInvoiceUrl}
 						setUploadInvoiceUrl={setUploadInvoiceUrl}
@@ -276,7 +278,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 							refetch();
 						}}
 					/>
-				)}
+				) : null}
 			</AccordianView>
 		</div>
 	);

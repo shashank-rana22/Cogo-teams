@@ -26,6 +26,18 @@ function CollectionPartyDetails({
 }) {
 	const organization_id = serviceProvider?.service_provider_id;
 
+	const PARAMS = {
+		documents_data_required         : true,
+		other_addresses_data_required   : true,
+		poc_data_required               : true,
+		billing_addresses_data_required : true,
+		page_limit                      : 50,
+		filters                         : {
+			organization_id,
+			trade_party_type: ['collection_party', 'self'],
+		},
+	};
+
 	const bilingAddressGst = watch('collection_party_address');
 
 	const collectionPartyAddress = collectionPartyAddresses?.find(
@@ -35,12 +47,12 @@ function CollectionPartyDetails({
 	const collectionPartyBankOptions = [];
 
 	const bank_details = (collectionParty.documents || []).filter(
-		(item) => item.document_type === 'bank_account_details',
+		(item) => item?.document_type === 'bank_account_details',
 	);
 	(bank_details || []).forEach((bank) => {
 		if (
-			['pending', 'verified'].includes(bank.verification_status)
-			&& bank.status === 'active'
+			['pending', 'verified'].includes(bank?.verification_status)
+			&& bank?.status === 'active'
 		) {
 			collectionPartyBankOptions.push({
 				...bank,
@@ -50,10 +62,11 @@ function CollectionPartyDetails({
 		}
 	});
 
+	const bankOptions = JSON.stringify(collectionPartyBankOptions);
+
 	useEffect(() => {
 		setValue('collection_party_bank_details', purchaseInvoiceValues?.collection_party_bank_details);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(collectionPartyBankOptions)]);
+	}, [bankOptions, setValue, purchaseInvoiceValues]);
 
 	const handleModifiedOptions = ({ options }) => options.map((option) => ({
 		...option,
@@ -108,6 +121,54 @@ function CollectionPartyDetails({
 		}
 	};
 
+	const handleCollectionParty = (v, obj) => {
+		if (obj?.verification_status === 'pending') {
+			setValue('collection_party', undefined);
+			Toast.error('Cannot select KYC pending collection party!');
+		} else {
+			setCollectionParty(obj);
+			setValue('collection_party', v);
+		}
+		setValue('collection_party_address', '');
+		setValue('collection_party_bank_details', '');
+	};
+
+	const renderLabel = (bank) => (
+		<div className={styles.flex}>
+			{bank?.data?.bank_name}
+			{' '}
+			/
+			{' '}
+			{bank?.data?.branch_name}
+			<div className={styles.verification_status}>
+				{startCase(bank.verification_status)}
+			</div>
+		</div>
+	);
+
+	const collectionPartyBankDetails = [
+		{
+			label : 'BankDetails :',
+			value : `${collectionPartyBank?.data?.bank_name || '-'} / ${collectionPartyBank?.data?.branch_name || '-'}`,
+		},
+		{
+			label : 'AccountNumber :',
+			value : `${collectionPartyBank?.data?.bank_account_number || '-'}`,
+		},
+		{
+			label : 'IFSC :',
+			value : `${collectionPartyBank?.data?.ifsc_number || '-'}`,
+		},
+		{
+			label : 'PAN Number :',
+			value : `${collectionParty?.registration_number}`,
+		},
+		{
+			label : 'GST Number :',
+			value : `${collectionPartyAddress?.tax_number}`,
+		},
+	];
+
 	return (
 		<AccordianView title="Collection Party Details" fullwidth showerror={errMszs.collectionPartyErr} open={open}>
 			<div className={styles.flex}>
@@ -120,29 +181,9 @@ function CollectionPartyDetails({
 						asyncKey="list_organization_trade_parties"
 						getModifiedOptions={handleModifiedOptions}
 						onOptionsChange={handleOption}
-						handleChange={(v, obj) => {
-							if (obj?.verification_status === 'pending') {
-								setValue('collection_party', undefined);
-								Toast.error('Cannot select KYC pending collection party!');
-							} else {
-								setCollectionParty(obj);
-								setValue('collection_party', v);
-							}
-							setValue('collection_party_address', '');
-							setValue('collection_party_bank_details', '');
-						}}
+						handleChange={(v, obj) => { handleCollectionParty(v, obj); }}
 						value={collectionParty.registration_number || purchaseInvoiceValues?.collection_party}
-						params={{
-							documents_data_required         : true,
-							other_addresses_data_required   : true,
-							poc_data_required               : true,
-							billing_addresses_data_required : true,
-							page_limit                      : 50,
-							filters                         : {
-								organization_id,
-								trade_party_type: ['collection_party', 'self'],
-							},
-						}}
+						params={PARAMS}
 						rules={{ required: true }}
 					/>
 					{errors?.collection_party ? (
@@ -178,18 +219,7 @@ function CollectionPartyDetails({
 								name="collection_party_bank_details"
 								placeholder="Select Bank Details"
 								options={collectionPartyBankOptions}
-								renderLabel={(bank) => (
-									<div className={styles.flex}>
-										{bank?.data?.bank_name}
-										{' '}
-										/
-										{' '}
-										{bank?.data?.branch_name}
-										<div className={styles.verification_status}>
-											{startCase(bank.verification_status)}
-										</div>
-									</div>
-								)}
+								renderLabel={(bank) => { renderLabel(bank); }}
 								rules={{ required: true }}
 							/>
 							{errors?.collection_party_bank_details ? (
@@ -215,38 +245,14 @@ function CollectionPartyDetails({
 			</div>
 			{collectionPartyBank ? (
 				<div className={styles.address}>
-					<div className={styles.flex}>
-						<span className={styles.key}>BankDetails:</span>
-						<span className={styles.value}>
-							{`${collectionPartyBank?.data?.bank_name || '-'}
-							/ ${collectionPartyBank?.data?.branch_name || '-'
-								}`}
-						</span>
-					</div>
-					<div className={styles.flex}>
-						<span className={styles.key}>AccountNumber :</span>
-						<span className={styles.value}>
-							{collectionPartyBank?.data?.bank_account_number || '-'}
-						</span>
-					</div>
-					<div className={styles.flex}>
-						<span className={styles.key}>IFSC :</span>
-						<span className={styles.value}>
-							{collectionPartyBank?.data?.ifsc_number || '-'}
-						</span>
-					</div>
-					<div className={styles.flex}>
-						<span className={styles.key}>PAN Number :</span>
-						<span className={styles.value}>
-							{collectionParty?.registration_number}
-						</span>
-					</div>
-					<div className={styles.flex}>
-						<span className={styles.key}>GST Number :</span>
-						<span className={styles.value}>
-							{collectionPartyAddress?.tax_number}
-						</span>
-					</div>
+					{collectionPartyBankDetails.map(({ label = '', value = '' }) => (
+						<div className={styles.flex} key={label}>
+							<span className={styles.key}>{label}</span>
+							<span className={styles.value}>
+								{value}
+							</span>
+						</div>
+					))}
 				</div>
 			) : null}
 		</AccordianView>

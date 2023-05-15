@@ -1,8 +1,9 @@
 import { Modal, Button, Toast } from '@cogoport/components';
 import { AsyncSelectController, InputController, UploadController, useForm } from '@cogoport/forms';
-import { useRequest } from '@cogoport/request';
 import React from 'react';
 
+import useBankDetails from '../../../hooks/useBankDetails';
+import useCreateOrganizationDocument from '../../../hooks/useCreateOrganizationDocument';
 import toastApiError from '../../../utils/toastApiError';
 
 import styles from './styles.module.css';
@@ -15,15 +16,9 @@ function BankForm({
 }) {
 	const { control, handleSubmit, formState: { errors }, watch, setValues } = useForm();
 
-	const [{ loading:createloading }, createTrigger] = useRequest({
-		url    : '/create_organization_document',
-		method : 'post',
-	});
+	const { createloading, createTrigger } = useCreateOrganizationDocument();
 
-	const [{ loading }, trigger] = useRequest({
-		url    : '/get_bank_details',
-		method : 'get',
-	});
+	const { loading, trigger } = useBankDetails();
 
 	const getPayload = ({ values }) => ({
 		organization_id             : orgResponse?.id,
@@ -80,7 +75,7 @@ function BankForm({
 				branch_name : bankData.branch || '',
 			});
 		} catch (error) {
-			console.log(error);
+			toastApiError(error);
 		}
 	};
 
@@ -106,11 +101,11 @@ function BankForm({
 			<Modal.Body>
 				<div className={styles.layout}>
 					<div className={styles.inputcontainer}>
-						<div className={styles.label}>Ifsc Number :</div>
+						<div className={styles.label}>IFSC Number :</div>
 						<InputController
 							name="ifsc_number"
 							control={control}
-							placeholder="Ifsc Number"
+							placeholder="IFSC Number"
 							onBlur={() => {
 								onBlurIfscControl({ code: ifscCode });
 							}}
@@ -220,7 +215,7 @@ function BankForm({
 			<Modal.Footer>
 				<div className={styles.buttoncontainer}>
 					<Button
-						className={`${styles.cancel}`}
+						className={styles.cancel}
 						themeType="secondary"
 						onClick={() => { setShowBankForm(false); }}
 					>

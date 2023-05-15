@@ -1,5 +1,3 @@
-import { cl } from '@cogoport/components';
-
 import { CARGO_LABELS } from '../../../constants';
 
 import { renderValue } from './renderValue';

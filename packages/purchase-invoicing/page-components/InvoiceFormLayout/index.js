@@ -2,7 +2,6 @@
 import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm, RadioGroupController } from '@cogoport/forms';
-import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useContext, useImperativeHandle, forwardRef, useState } from 'react';
 
@@ -10,6 +9,7 @@ import AccordianView from '../../common/Accordianview';
 import { EMPTY_LINE_ITEMS, INVOICE_TYPE_OPTIONS, INVOICE_TYPE_OPTIONS_CN, OPTIONSCN } from '../../constants';
 import useCalculateTotalPrice from '../../helpers/useCalculateTotalPrice';
 import useResetErrors from '../../helpers/useResetErrors';
+import useGetEntities from '../../hooks/useGetEntities';
 
 import AdditionalDetails from './AdditionalDetails';
 import BankForm from './BankForm';
@@ -55,10 +55,7 @@ function InvoiceFormLayout({
 		value : address?.tax_number,
 	}));
 
-	const [{ data: listEntities }] = useRequest({
-		method : 'get',
-		url    : '/list_cogo_entities',
-	}, { manual: false });
+	const { listEntities } = useGetEntities();
 
 	const defaultLineItems = purchaseInvoiceValues?.line_items?.map((item) => ({
 		...item,
@@ -148,11 +145,7 @@ function InvoiceFormLayout({
 			return true;
 		}
 
-		if (
-			['coe_rejected', 'finance_rejected'].includes(
-				purchaseInvoiceValues?.status,
-			)
-		) {
+		if (['coe_rejected', 'finance_rejected'].includes(purchaseInvoiceValues?.status)) {
 			return false;
 		}
 
