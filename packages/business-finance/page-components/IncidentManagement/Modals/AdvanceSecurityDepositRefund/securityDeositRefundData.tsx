@@ -44,13 +44,13 @@ function SecurityDepositRefundData({ advanceSecurityDepositRefund }) {
 	<div>
 
 		{(uploadProof || []).map((url:any) => (url !== '' ? (
-			<a href={url} target="_blank" rel="noreferrer">
+			<a href={url} target="_blank" rel="noreferrer" key={url}>
 				<div className={styles.view_flex}>
 					<div className={styles.view}>link</div>
 				</div>
 			</a>
 		) : (
-			<div> No document available</div>
+			<div key={url}> No document available</div>
 		)))}
 	</div>,
 			},

@@ -45,7 +45,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 				<Tooltip
 					interactive
 					content={(list || [{}]).map((item:TooltipInterface) => (
-						<div className={styles.trade_party_name}>
+						<div className={styles.trade_party_name} key={item?.id}>
 							<div>{toTitleCase(item?.div || '-')}</div>
 						</div>
 					))}
