@@ -8,7 +8,7 @@ const useListShipmentCreditNotes = ({ shipmentData = {} }) => {
 	const { id: shipment_id = '' } = shipmentData || {};
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/list_shipment_credit_notes',
+		url    : 'fcl_freight/list_credit_notes',
 		params : {
 			filters: {
 				shipment_id,

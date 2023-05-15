@@ -91,9 +91,7 @@ const formatCreditNoteData = ({
 		remarks                : data?.remarks ? [data?.remarks] : undefined,
 		invoice_combination_id : invoice?.id,
 		shipment_id            : invoice?.shipment_id,
-		document_urls          : data?.uploadDocument
-			? data?.uploadDocument?.map((item) => item?.url)
-			: undefined,
+		document_urls          : [data?.uploadDocument.finalUrl],
 	};
 
 	return { submit_data, checkError };
