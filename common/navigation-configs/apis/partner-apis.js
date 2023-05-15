@@ -11582,6 +11582,11 @@ const partner = {
 			service_name : 'shipment',
 		},
 		{
+			api          : 'create_variance_report',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
 			api          : 'create_shipment_air_freight_consolidated_invoice',
 			access_type  : 'private',
 			service_name : 'shipment',
