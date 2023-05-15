@@ -3,6 +3,7 @@ import { IcMArrowDown } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import { useState } from 'react';
 
+import { cogopointImg } from '../../../constants';
 import styles from '../styles.module.css';
 
 import DirectNode from './DirectNode';
@@ -69,7 +70,7 @@ function RenderForeignObjectNode({
 					<div className={styles.root_user_text}>You</div>
 					<div className={styles.cogopoints}>
 						<img
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg"
+							src={cogopointImg}
 							alt="cogopoint"
 							className={styles.cogopoints_img}
 						/>
@@ -114,7 +115,7 @@ function RenderForeignObjectNode({
 							Total:
 						</div>
 						<img
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg"
+							src={cogopointImg}
 							alt="cogopoint"
 							className={styles.cogopoints_img}
 						/>
@@ -157,16 +158,16 @@ function RenderForeignObjectNode({
 			nodeDatum={nodeDatum}
 			topPerformer={topPerformer}
 			avatarContent={avatarContent}
-			referral_data={referral_data}
+			referralData={referral_data}
 			lastUserId={lastUserId}
-			user_data={user_data}
+			userData={user_data}
 			organization={organization}
 			orgCount={orgCount}
 			handleFunc={handleFunc}
 			total={total}
 			collapse={collapse}
 			collapseState={collapseState}
-			total_child_count={total_child_count}
+			totalChildCount={total_child_count}
 		/>
 	);
 }

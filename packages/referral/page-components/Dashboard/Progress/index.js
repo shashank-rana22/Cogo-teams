@@ -6,9 +6,10 @@ import Networks from './Networks';
 import styles from './styles.module.css';
 import Users from './Users';
 
-function Progress() {
-	const loading = false;
-	if (loading) {
+function Progress({ statsLoading, statsData = {} }) {
+	const { user_data = {}, network_data = {}, cogopoint_data = {} } = statsData.data;
+
+	if (statsLoading) {
 		return (
 			<LoadingState />
 		);
@@ -17,13 +18,13 @@ function Progress() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.users}>
-				<Users />
+				<Users userData={user_data} />
 			</div>
 			<div className={styles.cogopoints}>
-				<Cogopoints />
+				<Cogopoints cogopointData={cogopoint_data} />
 			</div>
 			<div className={styles.networks}>
-				<Networks />
+				<Networks networkData={network_data} />
 			</div>
 		</div>
 	);

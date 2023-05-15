@@ -9,7 +9,7 @@ function LoadingState() {
 	const pieChart = () => (
 		<div className={styles.pie_chart_container}>
 			<div className={styles.circle} />
-			<Placeholder type="circle" radius="130px" />
+			<Placeholder type="circle" radius="120px" />
 
 		</div>
 

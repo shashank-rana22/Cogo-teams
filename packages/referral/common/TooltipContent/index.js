@@ -6,7 +6,14 @@ import styles from './styles.module.css';
 function TooltipContent({ organization = [] }) {
 	return (
 		<div className={styles.container}>
-			{(organization || []).map((item) => <div className={styles.business_name}>{startCase(item)}</div>)}
+			{(organization || []).map((item) => (
+				<div
+					className={styles.business_name}
+					key={item}
+				>
+					{startCase(item)}
+				</div>
+			))}
 		</div>
 	);
 }

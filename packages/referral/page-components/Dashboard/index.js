@@ -1,10 +1,9 @@
 import { Select, SingleDateRange } from '@cogoport/components';
-import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
-import { asyncFieldsOrganization } from '@cogoport/forms/utils/getAsyncFields';
 import { IcMCalendar } from '@cogoport/icons-react';
-import { merge } from '@cogoport/utils';
 import { useState } from 'react';
 
+import { USER_TYPES } from '../../constants';
+import useGetAdminStats from '../../hooks/useGetAdminStats';
 import useGetListReferrals from '../../hooks/useGetListReferrals';
 
 import ListTables from './ListTables';
@@ -12,19 +11,23 @@ import Progress from './Progress';
 import styles from './styles.module.css';
 
 function Dashboard() {
-	const [user, setUser] = useState('');
+	const [userType, setUserType] = useState('');
 	const [date, setDate] = useState(new Date());
 	const [searchValue, setSearchValue] = useState('');
 	const [activeTab, setActiveTab] = useState('invited');
 	const [filter, setFilter] = useState('');
-	const countryOptions = useGetAsyncOptions(merge(asyncFieldsOrganization()));
+
+	const {
+		statsData = {},
+		statsLoading = false,
+	} = useGetAdminStats({ date, userType });
 
 	const {
 		listReferals = {},
 		listLoading = false,
 		setListPagination = () => {},
 		getListReferrals = () => {},
-	} = useGetListReferrals({ filter, searchValue, activeTab, date });
+	} = useGetListReferrals({ filter, searchValue, activeTab });
 
 	return (
 		<>
@@ -33,11 +36,12 @@ function Dashboard() {
 				<div className={styles.title}>Referral Dashboard</div>
 				<div className={styles.main_filters}>
 					<Select
-						value={user}
-						onChange={setUser}
+						value={userType}
+						onChange={setUserType}
 						placeholder="Select users here"
-						options={countryOptions}
+						options={USER_TYPES}
 						className={styles.select_field}
+						isClearable
 					/>
 					<SingleDateRange
 						placeholder="From - To"
@@ -49,7 +53,7 @@ function Dashboard() {
 					/>
 				</div>
 			</div>
-			<Progress />
+			<Progress statsData={statsData} statsLoading={statsLoading} />
 			<div className={styles.table_container}>
 				<ListTables
 					searchValue={searchValue}

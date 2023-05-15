@@ -30,7 +30,7 @@ function ListTables({
 	const [filterVisible, setFilterVisible] = useState(false);
 	const { tabs = [] } = tableTabs();
 
-	const { list = [], page, total_count, page_limit } = listReferals || {};
+	const { list = [], page, total_count, page_limit } = listReferals;
 
 	return (
 		<div className={styles.container}>

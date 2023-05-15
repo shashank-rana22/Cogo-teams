@@ -45,10 +45,13 @@ const TableColumns = ({ activeTab = '' }) => {
 	const columns = [
 		{
 			Header   : 'NAME',
-			accessor : ({ item = {} }) => (
+			accessor : (item = {}) => (
+
 				<div className={styles.tooltip_content}>
 					<Tooltip content={startCase(item?.name)} placement="bottom">
-						<div className={styles.user_name}>{startCase(item?.name)}</div>
+						<div className={styles.user_name}>
+							{startCase(item?.name)}
+						</div>
 					</Tooltip>
 				</div>
 			),

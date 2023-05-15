@@ -3,8 +3,6 @@ export const TYPE = {
 	channel_partner   : 'CP',
 };
 
-export const listEmptyState = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/list_emptystate.png';
-
 export const USER_STATUS_COLOUR = {
 	active   : '#4F4F4F',
 	inactive : '#828282',
@@ -21,3 +19,22 @@ export const STATUS_MAPPING = {
 	pending  : 'Verification Pending',
 	accepted : 'Invite Accepted',
 };
+
+export const USER_TYPES = [
+	{
+		label : 'Affiliate',
+		value : 'affiliate',
+	},
+	{
+		label : 'Importer Exporter',
+		value : 'importer_exporter',
+	},
+	{
+		label : 'Channel Partner',
+		value : 'channel_partner',
+	},
+
+];
+
+export const listEmptyState = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/list_emptystate.png';
+export const cogopointImg = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg';

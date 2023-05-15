@@ -3,7 +3,7 @@ import { IcMArrowDown } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import { USER_STATUS_MAPPING, USER_STATUS_COLOUR } from '../../../../constants';
+import { USER_STATUS_MAPPING, USER_STATUS_COLOUR, cogopointImg } from '../../../../constants';
 import TooltipContent from '../../../TooltipContent';
 import styles from '../../styles.module.css';
 
@@ -14,16 +14,16 @@ function DirectNode({
 	nodeDatum,
 	topPerformer,
 	avatarContent,
-	referral_data = {},
+	referralData = {},
 	lastUserId = '',
-	user_data = {},
+	userData = {},
 	organization,
 	orgCount,
 	handleFunc = () => {},
 	total,
 	collapse,
 	collapseState,
-	total_child_count,
+	totalChildCount,
 }) {
 	return (
 		<foreignObject
@@ -57,8 +57,8 @@ function DirectNode({
 							</div>
 						</div>
 						<div className={styles.user_status}>
-							<div className={styles.active} style={{ color: USER_STATUS_COLOUR[referral_data?.status] }}>
-								{USER_STATUS_MAPPING[referral_data?.status]}
+							<div className={styles.active} style={{ color: USER_STATUS_COLOUR[referralData?.status] }}>
+								{USER_STATUS_MAPPING[referralData?.status]}
 							</div>
 							<div className={styles.id}>{lastUserId}</div>
 						</div>
@@ -66,7 +66,7 @@ function DirectNode({
 				</div>
 				<div className={styles.user_data}>
 					<div className={styles.user_name}>
-						{startCase(user_data?.name) || '\u00A0'}
+						{startCase(userData?.name) || '\u00A0'}
 					</div>
 					<div className={styles.tooltip}>
 						<Tooltip
@@ -96,7 +96,7 @@ function DirectNode({
 						Total:
 					</div>
 					<img
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg"
+						src={cogopointImg}
 						alt="cogopoint"
 						className={styles.cogopoints_img}
 					/>
@@ -114,12 +114,12 @@ function DirectNode({
 			>
 				<div className={styles.child_network}>
 					<div className={styles.user_company_name}>
-						{total_child_count !== 0 && '+'}
-						{total_child_count}
+						{totalChildCount !== 0 && '+'}
+						{totalChildCount}
 						{' '}
 						connections
 					</div>
-					{total_child_count > 0
+					{totalChildCount > 0
 						? (
 							<IcMArrowDown
 								className={cl`

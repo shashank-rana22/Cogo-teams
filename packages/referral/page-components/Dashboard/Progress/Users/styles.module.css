@@ -1,4 +1,5 @@
 .title {
+	margin-left: 16px;
 	font-weight: 600;
 	color: #828282;
 }
@@ -11,6 +12,7 @@
 
 .chart {
 	width: 60%;
+	height: 120px;
 }
 
 .chart_status {

@@ -2,7 +2,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
-const useGetListReferrals = ({ filter = '', searchValue = '', activeTab = '', date }) => {
+const useGetListReferrals = ({ filter = '', searchValue = '', activeTab = '' }) => {
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const api = activeTab === 'invited' ? 'list_referral_invites' : 'list_referral_invites_testing';
@@ -22,14 +22,14 @@ const useGetListReferrals = ({ filter = '', searchValue = '', activeTab = '', da
 					filters : {
 						status : filter || undefined,
 						name   : query || undefined,
-						date,
+
 					},
 				},
 			});
 		} catch (error) {
 			console.log(error);
 		}
-	}, [trigger, listPagination, filter, query, date]);
+	}, [trigger, listPagination, filter, query]);
 
 	useEffect(() => {
 		getListReferrals();

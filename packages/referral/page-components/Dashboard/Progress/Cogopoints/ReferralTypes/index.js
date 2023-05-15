@@ -16,7 +16,6 @@ function ReferralTypes() {
 			color : '#FCDC00',
 			name  : 'Subscription',
 		},
-
 	];
 
 	return (
@@ -25,7 +24,7 @@ function ReferralTypes() {
 			{(referralTypes || []).map((type) => {
 				const { color = '', name = '' } = type || {};
 				return (
-					<div className={styles.pair}>
+					<div className={styles.pair} key={type}>
 						<div className={styles.circle} style={{ background: `${color}` }} />
 						<div className={styles.name}>
 							{name}

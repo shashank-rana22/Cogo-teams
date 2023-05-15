@@ -1,21 +1,36 @@
 import getFormatedChartData from '../utils/getFormatedChartData';
 
-const pieChartMapping = () => {
+const pieChartMapping = (
+	alloted = {},
+	estimated = {},
+) => {
+	const chartCount = ({ type = '' }) => {
+		const checkType = type === 'allotted' ? alloted : estimated;
+		let totalCount = 0;
+		Object.values(checkType).forEach((value) => {
+			totalCount += value;
+		});
+		return totalCount;
+	};
+
 	const {
 		allottedData = [],
 		estimatedData = [],
-	} = getFormatedChartData();
+	} = getFormatedChartData(
+		alloted,
+		estimated,
+	);
 
 	const detailsPieChart = [
 		{
 			title       : 'Allotted',
 			data        : allottedData,
-			total_count : 200 || 0,
+			total_count : chartCount({ type: 'allotted' }),
 		},
 		{
 			title       : 'Estimated',
 			data        : estimatedData,
-			total_count : 300 || 0,
+			total_count : chartCount({ type: 'estimated' }),
 		},
 
 	];

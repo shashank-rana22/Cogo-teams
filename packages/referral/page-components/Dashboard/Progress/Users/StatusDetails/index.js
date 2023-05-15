@@ -2,26 +2,27 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function StatusDetails() {
+function StatusDetails({ userData = {} }) {
+	const { affiliate = 0, invited = 0, kyc_verified = 0, signed_up = 0 } = userData;
 	const usersCount = [
 		{
 			label : 'Invited User',
-			value : 20 || 0,
+			value : invited,
 			color : '#7278AD',
 		},
 		{
 			label : 'Signed Up Users',
-			value : 30 || 0,
+			value : signed_up,
 			color : '#888FD1',
 		},
 		{
 			label : 'KYC Registered Users',
-			value : 40 || 0,
+			value : kyc_verified,
 			color : '#ABB0DE',
 		},
 		{
 			label : 'Affiliate Users',
-			value : 50 || 0,
+			value : affiliate,
 			color : '#CED1ED',
 		},
 		{
@@ -34,7 +35,7 @@ function StatusDetails() {
 	return (
 		<div className={styles.container}>
 			{(usersCount || []).map((item) => (
-				<div className={styles.stats}>
+				<div className={styles.stats} key={item}>
 					<div className={styles.circle} style={{ background: `${item?.color}` }} />
 					<div className={styles.count}>
 						{item.value}

@@ -1,44 +1,37 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 
-function NetworkLineChart() {
-	const data = [
+function NetworkLineChart({ networkData = {} }) {
+	const mapdata = (data) => {
+		const keys = Object.keys(data || {});
+		let details = [];
+		keys.forEach((key, index) => {
+			details = [
+				...details,
+				{
+					x : `L${index + 1}`,
+					y : data?.[key],
+				},
+			];
+		});
+		return details;
+	};
+
+	const network = mapdata(networkData);
+
+	const levelData = ['L1', 'L10', 'L20', 'L30', 'L40', 'L50', 'L60'];
+
+	const filteredNetwork = network.filter((item) => levelData.includes(item?.x));
+
+	const newData = [
 		{
 			id   : 'network',
-			data : [
-				{
-					x : 'L1',
-					y : 0,
-				},
-				{
-					x : 'L10',
-					y : 30,
-				},
-				{
-					x : 'L20',
-					y : 50,
-				},
-				{
-					x : 'L30',
-					y : 600,
-				},
-				{
-					x : 'L40',
-					y : 200,
-				},
-				{
-					x : 'L50',
-					y : '500',
-				},
-				{
-					x : 'L60',
-					y : '3000',
-				},
-			],
+			data : filteredNetwork,
 		},
 	];
+
 	return (
 		<ResponsiveLine
-			data={data}
+			data={newData}
 			width={320}
 			height={170}
 			colors={['#F9AE64']}
@@ -67,7 +60,7 @@ function NetworkLineChart() {
 				tickValues     : 5,
 				tickRotation   : 0,
 				legend         : 'users  >',
-				legendOffset   : -40,
+				legendOffset   : -45,
 				legendPosition : 'middle',
 			}}
 			enableGridX={false}

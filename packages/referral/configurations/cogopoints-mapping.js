@@ -1,12 +1,12 @@
-const cogopointsMapping = () => {
+const cogopointsMapping = (network_bonus, referral_bonus) => {
 	const bonusPoints = [
 		{
 			title  : 'Referral Bonus',
-			points : 2000,
+			points : referral_bonus,
 		},
 		{
 			title  : 'Network Bonus',
-			points : 3000,
+			points : network_bonus,
 		},
 
 	];

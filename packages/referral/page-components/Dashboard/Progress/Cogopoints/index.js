@@ -9,9 +9,16 @@ import ReferralPercentage from './ReferralPercentage';
 import ReferralTypes from './ReferralTypes';
 import styles from './styles.module.css';
 
-function Cogopoints() {
-	const { detailsPieChart } = pieChartMapping();
-	const { bonusPoints } = cogopointsMapping();
+function Cogopoints({ cogopointData = {} }) {
+	const {
+		network_bonus = 0,
+		referral_bonus = 0,
+		alloted = {},
+		esitimated: estimated = {},
+	} = cogopointData;
+
+	const { detailsPieChart } = pieChartMapping(alloted, estimated);
+	const { bonusPoints } = cogopointsMapping(network_bonus, referral_bonus);
 
 	return (
 		<>
@@ -25,7 +32,7 @@ function Cogopoints() {
 			</div>
 			<div className={styles.chart_container}>
 				{detailsPieChart.map(({ title, data, total_count }) => (
-					<div className={styles.charts}>
+					<div className={styles.charts} key={title}>
 						<ReferralPercentage data={data} />
 						<DetailsPieCharts
 							title={title}
@@ -37,7 +44,7 @@ function Cogopoints() {
 
 				<div className={styles.bonus_container}>
 					{bonusPoints.map(({ title, points }) => (
-						<div className={styles.view}>
+						<div className={styles.view} key={title}>
 							<div className={styles.count_container}>
 								<IcCCogoCoin className={styles.coin_icon} />
 								<div className={styles.number}>{ points}</div>
