@@ -1,0 +1,157 @@
+[
+    {
+        "label": "Schedule Departure",
+        "name": "schedule_departure",
+        "type": "datepicker",
+        "rules": {
+            "required": "Schedule departure is required"
+        }
+    },
+    {
+        "label": "Schedule Arrival",
+        "name": "schedule_arrival",
+        "type": "datepicker",
+        "rules": {
+            "required": "Schedule arrival is required"
+        }
+    },
+    {
+        "label": "VGM Cut-off",
+        "name": "vgm_cutoff",
+        "type": "datepicker",
+        "rules": {
+            "required": "VGM Cut-off is required"
+        }
+    },
+    {
+        "label": "S/I Cut-off",
+        "name": "si_cutoff",
+        "type": "datepicker",
+        "rules": {
+            "required": "S/I Cut-off is required"
+        }
+    },
+    {
+        "label": "Document Cut-off",
+        "name": "document_cutoff",
+        "type": "datepicker",
+        "rules": {
+            "required": "Document Cut-off is required"
+        }
+    },
+    {
+        "label": "Gate-in Cut-off",
+        "name": "gate_in_cutoff",
+        "type": "datepicker",
+        "rules": {
+            "required": "Gate-in Cut-off is required"
+        }
+    },
+    {
+        "label": "Booking Note Expiry",
+        "name": "expiry",
+        "type": "datepicker",
+        "rules": {
+            "required": "Booking Note Expiry is required"
+        }
+    },
+    {
+        "label": "Si filed at",
+        "name": "si_filed_at",
+        "type": "datepicker",
+        "rules": {
+            "required": "Si filed at is required"
+        }
+    },
+    {
+        "label": "TR Cut-off",
+        "name": "tr_cutoff",
+        "type": "datepicker",
+        "rules": {
+            "required": "TR Cut-off is required"
+        }
+    },
+    {
+        "label": "Yard Details",
+        "name": "yard_detail_id",
+        "type": "async_select",
+        "asyncKey": "list_locations",
+        "params": {
+            "filters": {
+                "type": [
+                    "yard"
+                ],
+                "status": "active"
+            },
+            "includes": {
+                "city": true,
+                "country": true,
+                "default_params_required": true
+            },
+            "page_limit": 20,
+            "recommendations": true
+        },
+        "rules": {
+            "required": "Yard details is required"
+        }
+    },
+    {
+        "label": "Container Types",
+        "name": "container_type",
+        "type": "select",
+        "placeholder": "Select Container Type",
+        "rules": {
+            "required": "Container Type is required"
+        }
+    },
+    {
+        "label": "Commodity",
+        "name": "commodity",
+        "type": "select",
+        "rules": {
+            "required": "Commodity is required"
+        }
+    },
+    {
+        "name": "container_size",
+        "label": "Container Size",
+        "type": "select",
+        "options": [
+            {
+                "label": "20ft",
+                "value": "20"
+            },
+            {
+                "label": "40ft",
+                "value": "40"
+            },
+            {
+                "label": "40HC",
+                "value": "40HC"
+            },
+            {
+                "label": "45HC",
+                "value": "45HC"
+            }
+        ],
+        "rules": {
+            "required": "Container size is required"
+        }
+    },
+    {
+        "name": "containers_count",
+        "label": "Containers Count",
+        "type": "number",
+        "rules": {
+            "required": "Container quantity is required"
+        }
+    },
+    {
+        "name": "document_number",
+        "label": "Document No.",
+        "type": "text",
+        "rules": {
+            "required": "Booking Note No. is required"
+        }
+    }
+]
