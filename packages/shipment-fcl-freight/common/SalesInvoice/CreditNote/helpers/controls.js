@@ -21,12 +21,12 @@ const handleServiceType = (charge) => {
 	return startCase(serviceType);
 };
 
-const commonControls = (handleChange, charge, isEdit) => [
+const commonControls = (handleChange, charge) => [
 	{
 		label    : handleServiceType(charge),
 		type     : 'select',
 		name     : 'code',
-		span     : isEdit ? 3 : 2,
+		span     : 3,
 		handleChange,
 		disabled : true,
 		rules    : { required: 'Required' },
@@ -75,56 +75,25 @@ const commonControls = (handleChange, charge, isEdit) => [
 ];
 
 const rawControls = (handleChange, charge, isEdit) => ({
-	type             : 'fieldArray',
+	type             : 'edit_service_charges',
 	name             : charge?.service_id,
-	subType          : 'edit_service',
 	service_name     : charge?.display_name || charge?.service_type,
 	showHeader       : true,
 	showButtons      : false,
 	showDeleteButton : false,
-	value            : !isEdit
-		? [
-			{
-				is_checked       : '',
-				code             : '',
-				sac_code         : '',
-				currency         : '',
-				price_discounted : '',
-				quantity         : '',
-				exchange_rate    : '',
-				tax              : '',
-				total            : '',
-			},
-		  ]
-		: [
-			{
-				code             : '',
-				sac_code         : '',
-				currency         : '',
-				price_discounted : '',
-				quantity         : '',
-				exchange_rate    : '',
-				tax              : '',
-				total            : '',
-			},
-		  ],
-	controls: !isEdit
-		? [
-			{
-				name    : 'is_checked',
-				type    : 'checkbox',
-				options : [
-					{
-						label : '',
-						value : 'true',
-					},
-				],
-				themeType : 'primary lg',
-				span      : 1,
-			},
-			...commonControls(handleChange, charge, isEdit),
-		  ]
-		: [...commonControls(handleChange, charge, isEdit)],
+	value            : [
+		{
+			code             : '',
+			sac_code         : '',
+			currency         : '',
+			price_discounted : '',
+			quantity         : '',
+			exchange_rate    : '',
+			tax              : '',
+			total            : '',
+		},
+	],
+	controls: [...commonControls(handleChange, charge, isEdit)],
 });
 
 const controls = [
@@ -137,19 +106,11 @@ const controls = [
 		rules       : { required: 'Remarks is required' },
 	},
 	{
-		label      : 'Upload File',
-		name       : 'uploadDocument',
-		span       : 12,
-		type       : 'file',
-		themeType  : 'secondary',
-		drag       : true,
-		uploadIcon : 'ic-upload',
-		height     : 80,
-		accept:
-			'image/*,.pdf,.doc,.docx,.xlsx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-		uploadType : 'aws',
-		multiple   : true,
-		rules      : { required: 'This field is required' },
+		label : 'Upload File',
+		name  : 'uploadDocument',
+		span  : 12,
+		type  : 'file',
+		rules : { required: 'This field is required' },
 	},
 ];
 

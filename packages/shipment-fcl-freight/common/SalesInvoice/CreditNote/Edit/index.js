@@ -3,9 +3,10 @@ import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import useGetShipmentCreditNote from '../../../../hooks/useGetShipmentCreditNote';
+import useEditCreditNoteHelper from '../helpers/useEditCreditNoteHelper';
 
 import Form from './Form';
 import styles from './styles.module.css';
@@ -27,13 +28,41 @@ function Edit({
 		},
 	});
 
-	const { control } = useForm();
+	const services = data?.services || [];
+
+	const servicesIDs = services?.map((_item) => _item?.service_id);
+
+	const {
+		controls,
+		defaultValues,
+		onCreate,
+	} = useEditCreditNoteHelper({
+		services,
+		invoice : data,
+		servicesIDs,
+		isEdit  : true,
+		invoiceData,
+	});
+
+	const { handleSubmit, control, setValue, watch, formState: { errors = {} } } = useForm();
+
+	const formValues = watch();
+
+	useEffect(() => {
+		if (defaultValues) {
+			Object.keys(defaultValues).forEach((fieldName) => {
+				if (!formValues[fieldName]) {
+					setValue(fieldName, defaultValues[fieldName]);
+				}
+			});
+		}
+	}, [defaultValues, watch, setValue, formValues]);
 
 	return (
 		<Modal
 			show
 			onClose={() => setOpen(false)}
-			size="lg"
+			size="xl"
 		>
 			<Modal.Header title={(
 				<header className={styles.heading}>
@@ -78,7 +107,16 @@ function Edit({
 					</span>
 				</div>
 				<form>
-					<Form data={data} invoiceData={invoiceData} prevData={prevData} />
+					<Form
+						data={data}
+						invoiceData={invoiceData}
+						prevData={prevData}
+						controls={controls}
+						defaultValues={defaultValues}
+						errors={errors}
+						control={control}
+						setValue={setValue}
+					/>
 				</form>
 			</Modal.Body>
 
@@ -88,7 +126,7 @@ function Edit({
 						Cancel
 					</Button>
 
-					<Button>
+					<Button onClick={handleSubmit(onCreate)}>
 						Re-Apply
 					</Button>
 				</div>
