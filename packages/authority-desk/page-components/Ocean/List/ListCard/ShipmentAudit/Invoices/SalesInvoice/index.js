@@ -63,12 +63,12 @@ function SalesInvoice({ item = {} }) {
 								role="presentation"
 								onClick={() => {
 									window.open(
-										val?.status !== 'DRAFT' ? val?.billPdfUrl : val?.proformaPdfUrl,
+										val?.status !== 'DRAFT' ? val?.invoicePdfUrl : val?.proformaPdfUrl,
 										'_blank',
 									);
 								}}
 							>
-								{val?.status !== 'DRAFT' ? val?.billNumber : val?.proformaNumber}
+								{val?.status !== 'DRAFT' ? val?.invoiceNumber : val?.proformaNumber}
 
 							</td>
 							<td>{startCase(val?.invoiceType)}</td>
