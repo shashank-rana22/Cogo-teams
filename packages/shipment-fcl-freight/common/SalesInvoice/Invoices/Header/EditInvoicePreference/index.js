@@ -1,6 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
-import AddInvoicingParty from '../../../../AdditionalServices/components/AddIp/AddInvoicingParty';
 import React, { useState } from 'react';
+
+import AddInvoicingParty from '../../../../AdditionalServices/components/AddIp/AddInvoicingParty';
 
 // import useEditInvoicePref from '../../../../../hooks/useEditInvoicePref';
 import ListInvoicePreferences from './ListInvoicePreferences';

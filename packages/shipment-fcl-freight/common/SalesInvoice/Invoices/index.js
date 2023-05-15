@@ -39,8 +39,7 @@ function Invoices({
 		disableAction = true;
 	}
 
-	const showForOldShipments =		invoiceData?.invoice_trigger_date
-		&& shipmentData?.serial_id <= 120347
+	const showForOldShipments = invoiceData?.invoice_trigger_date && shipmentData?.serial_id <= 120347
 		&& !invoiceStatuses?.some((ele) => ['reviewed', 'approved'].includes(ele));
 
 	disableAction = showForOldShipments ? false : disableAction;

@@ -6,19 +6,19 @@ import styles from './styles.module.css';
 
 function InvoiceItem({
 	item = {},
-	total,
+	total = {},
 	refetch = () => {},
 	loading = false,
 	shipment_data = {},
 	invoiceData = {},
 	invoicesList = [],
 	isIRNGenerated = false,
-	org_outstanding,
+	org_outstanding = {},
 	salesInvoicesRefetch = () => {},
 	refetchCN = () => {},
 }) {
-	const { total_price_discounted, total_price_currency } = total || {};
-	const { total_outstanding_amount, currency } = org_outstanding || {};
+	const { total_price_discounted, total_price_currency } = total;
+	const { total_outstanding_amount, currency } = org_outstanding;
 
 	const outStanding = formatAmount({
 		amount  : total_outstanding_amount || 0,
