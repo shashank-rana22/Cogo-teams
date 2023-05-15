@@ -44,7 +44,12 @@ function ConferenceForm({
 						themeType="accent"
 						className={styles.button_flex}
 						loading={updateLiveCallStatusLoading}
-						onClick={handleSubmit((val) => updateLiveCallStatus(val, reset))}
+						onClick={handleSubmit(
+							(val) => updateLiveCallStatus(val, () => reset({
+								agent_id              : '',
+								live_call_action_type : '',
+							}, { keepErrors: false })),
+						)}
 					>
 						{ActiveTypeIcon && <ActiveTypeIcon className={styles.type_icon} />}
 						{startCase(live_call_action_type)}
