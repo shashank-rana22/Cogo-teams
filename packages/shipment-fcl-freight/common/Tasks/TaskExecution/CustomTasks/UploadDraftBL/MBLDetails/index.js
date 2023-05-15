@@ -51,6 +51,7 @@ function MBLDetails({ primaryService = {}, ref = () => {}, selectedMail = {} }) 
 							formRefs.current[i] = r;
 						}}
 						id={i}
+						key={n}
 						bl_type="MBL"
 						controls={controls}
 					/>

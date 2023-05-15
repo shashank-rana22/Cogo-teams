@@ -65,6 +65,7 @@ function List() {
 
 						{!selectedTaskId ? (tasksList || []).map((task) => (
 							<Card
+								key={task?.id}
 								task={task}
 								handleClick={handleClick}
 								loading={loading}

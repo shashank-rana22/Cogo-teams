@@ -88,7 +88,7 @@ function UploadHbl(props) {
 			{Array(bls_count)
 				.fill(null)
 				.map((n, i) => (
-					<div className={styles.flex_container}>
+					<div key={n} className={styles.flex_container}>
 						{urls?.[i]?.length > 0 ? (
 							<Button
 								ghost
