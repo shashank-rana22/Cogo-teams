@@ -6,18 +6,13 @@ const tableTabs = () => {
 			badge : 20,
 		},
 		{
-			name  : 'users',
+			name  : 'user',
 			title : 'Users',
 			badge : 20,
 		},
 		{
 			name  : 'affiliate',
 			title : 'Affiliate',
-			badge : 20,
-		},
-		{
-			name  : 'employees',
-			title : 'Employees',
 			badge : 20,
 		},
 	];

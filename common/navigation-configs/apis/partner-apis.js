@@ -12089,6 +12089,12 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'referral',
 		},
+		{
+			api          : 'list_referral_mappings',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+
 	],
 };
 

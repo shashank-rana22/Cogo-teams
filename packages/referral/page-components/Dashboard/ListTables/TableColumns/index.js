@@ -12,19 +12,28 @@ import Nodes from './Nodes';
 import styles from './styles.module.css';
 import TooltipContent from './TooltipContent';
 
+const func = () => {};
+
 function ShowButtons({
 	item = {},
 	activeTab = '',
+	setActivityModal = func,
+	showPopover = {},
+	setShowPopover = func,
 }) {
 	const buttonOptions = ListButtons({
 		item,
 		activeTab,
+		setActivityModal,
+		setShowPopover,
 	});
 
 	return (
 		<div className={styles.popover_content} key={item?.id}>
 			<Popover
 				placement="left"
+				visible={showPopover?.id === item?.id}
+				onClickOutside={() => setShowPopover({})}
 				render={(
 					<ButtonGroup
 						size="sm"
@@ -34,125 +43,148 @@ function ShowButtons({
 				)}
 			>
 				<div>
-					<IcMOverflowDot className={styles.dots_icon} />
+					<IcMOverflowDot
+						onClick={() => setShowPopover(
+							(p) => (
+								p === item?.id ? {} : item),
+						)}
+						className={styles.dots_icon}
+					/>
 				</div>
 			</Popover>
 		</div>
 	);
 }
 
-const TableColumns = ({ activeTab = '' }) => {
+const TableColumns = ({
+	activeTab = '', showPopover = {},
+	setShowPopover = func,
+	setActivityModal = func,
+}) => {
 	const columns = [
 		{
 			Header   : 'NAME',
-			accessor : (item = {}) => (
+			accessor : (item = {}) => {
+				const { name = '', referee_data = {} } = item;
 
-				<div className={styles.tooltip_content}>
-					<Tooltip content={startCase(item?.name)} placement="bottom">
-						<div className={styles.user_name}>
-							{startCase(item?.name)}
-						</div>
-					</Tooltip>
-				</div>
-			),
-			conditions: ['invited', 'users', 'affiliate', 'employees'],
+				return (
+					<div className={styles.tooltip_content}>
+						<Tooltip content={startCase(name || referee_data?.name)} placement="bottom">
+							<div className={styles.user_name}>
+								{startCase(name || referee_data?.name)}
+							</div>
+						</Tooltip>
+					</div>
+				);
+			},
+			conditions: ['invited', 'user', 'affiliate'],
 		},
+
 		{
 			Header   : 'ORGANISATION',
-			accessor : ({ organisation = [] }) => (
-				<Tooltip
-					content={(
-						<div className={styles.organisation_list}>
-							{(organisation || []).map((org) => (
-								<div className={styles.single_org} key={org}>
-									{startCase(org)}
-								</div>
-							))}
-						</div>
-					)}
-					placement="bottom"
-				>
-					<div className={styles.organisation_div}>
-						<div className={styles.organisation_name}>
-							{startCase(organisation?.[0])}
-						</div>
-						{organisation?.length > 1 && (
-							<div className={styles.more_count}>
-								+
-								{organisation.length - 1}
-								{' '}
-								More
+			accessor : (item = {}) => {
+				const { organization_names = [] } = item;
+				return (
+					<Tooltip
+						content={(
+							<div className={styles.organisation_list}>
+								{(organization_names || []).map((org) => (
+									<div className={styles.single_org} key={org}>
+										{startCase(org)}
+									</div>
+								))}
 							</div>
 						)}
+						placement="bottom"
+					>
+						<div className={styles.organisation_div}>
+							<div className={styles.organisation_name}>
+								{startCase(organization_names?.[0])}
+							</div>
+							{organization_names?.length > 1 && (
+								<div className={styles.more_count}>
+									+
+									{organization_names.length - 1}
+									{' '}
+									More
+								</div>
+							)}
 
-					</div>
-				</Tooltip>
-			),
-			conditions: ['users', 'employees'],
+						</div>
+					</Tooltip>
+				);
+			},
+			conditions: ['user'],
 
 		},
 		{
 			Header   : 'TYPE',
-			accessor : ({ type = '' }) => (
+			accessor : (item = {}) => (
 				<div className={styles.more_count}>
-					{TYPE[type]}
+					{TYPE[item?.organization_type]}
 				</div>
 			),
-			conditions: ['users', 'employees'],
+			conditions: ['user'],
 		},
 		{
 			Header   : 'INVITED BY',
-			accessor : (item = {}) => (
-				<div className={styles.invented_by}>
-					<Tooltip content="Ashish- Cogoverse" placement="bottom">
-						<div className={styles.user_name}>Ashish- Cogoverse njenje je</div>
-					</Tooltip>
-					<div className={styles.invited_date}>
-						{format(
-							item?.created_at,
-							'dd/MM/yy',
-						)}
+			accessor : (item = {}) => {
+				const {
+					created_at = '',
+					referrer_data = {},
+				} = item;
+				return (
+					<div className={styles.invented_by}>
+						<Tooltip content="Ashish- Cogoverse" placement="bottom">
+							<div className={styles.user_name}>{startCase(referrer_data?.name)}</div>
+						</Tooltip>
+						<div className={styles.invited_date}>
+							{format(
+								created_at,
+								'dd/MM/yy',
+							)}
+						</div>
 					</div>
-				</div>
-			),
-			conditions: ['invited', 'users', 'affiliate', 'employees'],
+				);
+			},
+			conditions: ['invited', 'user', 'affiliate'],
 		},
 		{
 			Header   : 'DIRECT NODES',
-			accessor : () => (
+			accessor : (item = {}) => (
 				<div className={styles.node_container}>
-					{Nodes({ type: 'direct_node' })}
+					{Nodes({ item, type: 'direct_node' })}
 				</div>
 			),
-			conditions: ['users', 'affiliate', 'employees'],
+			conditions: ['user', 'affiliate'],
 		},
 		{
 			Header   : 'NETWORK',
-			accessor : () => (
+			accessor : (item = {}) => (
 				<div className={styles.node_container}>
-					{Nodes({ type: 'network_node' })}
+					{Nodes({ item, type: 'network_node' })}
 				</div>
 			),
-			conditions: ['users', 'affiliate', 'employees'],
+			conditions: ['user', 'affiliate'],
 		},
 		{
 			Header   : 'COGOPOINTS ALLOCATED',
-			accessor : () => (
+			accessor : (item = {}) => (
 				<div className={styles.node_container}>
-					{Nodes({ type: 'alloted_cogopoints' })}
+					{Nodes({ item, type: 'alloted_cogopoints' })}
 				</div>
 
 			),
-			conditions: ['users', 'affiliate', 'employees'],
+			conditions: ['user', 'affiliate'],
 		},
 		{
 			Header   : 'COGOPOINTS ON HOLD',
-			accessor : () => (
+			accessor : (item = {}) => (
 				<div className={styles.node_container}>
-					{Nodes({ type: 'holded_cogopoints' })}
+					{Nodes({ item, type: 'holded_cogopoints' })}
 				</div>
 			),
-			conditions: ['users', 'affiliate', 'employees'],
+			conditions: ['user', 'affiliate'],
 		},
 
 		{
@@ -203,10 +235,13 @@ const TableColumns = ({ activeTab = '' }) => {
 					<ShowButtons
 						item={item}
 						activeTab={activeTab}
+						showPopover={showPopover}
+						setShowPopover={setShowPopover}
+						setActivityModal={setActivityModal}
 					/>
 				</div>
 			),
-			conditions: ['invited', 'users', 'affiliate', 'employees'],
+			conditions: ['user', 'affiliate'],
 		},
 
 	];

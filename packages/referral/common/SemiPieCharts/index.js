@@ -3,11 +3,12 @@ import { ResponsivePie } from '@cogoport/charts/pie';
 import styles from './styles.module.css';
 
 function SemiPieChart({ usersData = [] }) {
+	const totalCount = usersData.reduce((total, item) => total + (item?.value || 0), 0);
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.view}>
 
-				<div className={styles.number}>4000</div>
+				<div className={styles.number}>{totalCount}</div>
 
 				<div className={styles.sub_text}>Total Users </div>
 

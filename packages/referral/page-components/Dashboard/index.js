@@ -6,6 +6,7 @@ import { USER_TYPES } from '../../constants';
 import useGetAdminStats from '../../hooks/useGetAdminStats';
 import useGetListReferrals from '../../hooks/useGetListReferrals';
 
+import ActivityModal from './ActivityModal';
 import ListTables from './ListTables';
 import Progress from './Progress';
 import styles from './styles.module.css';
@@ -16,6 +17,9 @@ function Dashboard() {
 	const [searchValue, setSearchValue] = useState('');
 	const [activeTab, setActiveTab] = useState('invited');
 	const [filter, setFilter] = useState('');
+	const [showPopover, setShowPopover] = useState({});
+	console.log('showPopover:', showPopover);
+	const [activityModal, setActivityModal] = useState(false);
 
 	const {
 		statsData = {},
@@ -66,8 +70,13 @@ function Dashboard() {
 					setListPagination={setListPagination}
 					listLoading={listLoading}
 					getListReferrals={getListReferrals}
+					showPopover={showPopover}
+					setShowPopover={setShowPopover}
+					setActivityModal={setActivityModal}
 				/>
 			</div>
+
+			<ActivityModal activityModal={activityModal} setActivityModal={setActivityModal} />
 
 		</>
 	);

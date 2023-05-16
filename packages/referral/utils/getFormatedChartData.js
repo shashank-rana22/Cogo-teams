@@ -73,12 +73,6 @@ const getFormatedChartData = (
 			value : affiliate,
 			color : '#CED1ED',
 		},
-		{
-			id    : 'employees',
-			label : 'Employees',
-			value : 10 || 0,
-			color : '#F2F3FA',
-		},
 
 	];
 

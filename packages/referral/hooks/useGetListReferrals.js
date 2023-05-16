@@ -5,7 +5,7 @@ import { useEffect, useState, useCallback } from 'react';
 const useGetListReferrals = ({ filter = '', searchValue = '', activeTab = '' }) => {
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const api = activeTab === 'invited' ? 'list_referral_invites' : 'list_referral_invites_testing';
+	const api = activeTab === 'invited' ? 'list_referral_invites' : 'list_referral_mappings';
 
 	const [{ data: listReferals, loading: listLoading }, trigger] = useRequest({
 		url    : `/${api}`,
@@ -20,8 +20,9 @@ const useGetListReferrals = ({ filter = '', searchValue = '', activeTab = '' }) 
 				params: {
 					page    : listPagination,
 					filters : {
-						status : filter || undefined,
-						name   : query || undefined,
+						referee_type : activeTab !== 'invited' ? activeTab : undefined,
+						status       : filter || undefined,
+						q            : query || undefined,
 
 					},
 				},
@@ -29,11 +30,11 @@ const useGetListReferrals = ({ filter = '', searchValue = '', activeTab = '' }) 
 		} catch (error) {
 			console.log(error);
 		}
-	}, [trigger, listPagination, filter, query]);
+	}, [trigger, listPagination, activeTab, filter, query]);
 
 	useEffect(() => {
 		getListReferrals();
-	}, [getListReferrals, activeTab]);
+	}, [getListReferrals]);
 
 	useEffect(() => {
 		debounceQuery(searchValue);

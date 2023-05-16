@@ -9,7 +9,7 @@ function NetWorkCommission({ networkReferralData = [] }) {
 			<div className={styles.commission}>Network Commission:</div>
 
 			{networkReferralData.map((item) => (
-				<div className={styles.user_profile}>
+				<div className={styles.user_profile} key={item}>
 					<IcCCogoCoin
 						width={20}
 						height={20}

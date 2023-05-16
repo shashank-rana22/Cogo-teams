@@ -6,8 +6,8 @@ import Networks from './Networks';
 import styles from './styles.module.css';
 import Users from './Users';
 
-function Progress({ statsLoading, statsData = {} }) {
-	const { user_data = {}, network_data = {}, cogopoint_data = {} } = statsData.data;
+function Progress({ statsLoading, statsData }) {
+	const { user_data = {}, network_data = {}, cogopoint_data = {} } = statsData?.data || {};
 
 	if (statsLoading) {
 		return (

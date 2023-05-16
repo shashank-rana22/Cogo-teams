@@ -7,24 +7,28 @@ import { USER_STATUS_MAPPING, USER_STATUS_COLOUR, cogopointImg } from '../../../
 import TooltipContent from '../../../TooltipContent';
 import styles from '../../styles.module.css';
 
-function DirectNode({
-	checkActiveNode,
-	status,
-	handleLinkClick = () => {},
-	nodeDatum,
-	topPerformer,
-	avatarContent,
-	referralData = {},
-	lastUserId = '',
-	userData = {},
-	organization,
-	orgCount,
-	handleFunc = () => {},
-	total,
-	collapse,
-	collapseState,
-	totalChildCount,
-}) {
+function DirectNode(
+	nodeProps = {},
+) {
+	const {
+		checkActiveNode,
+		status,
+		handleLinkClick = () => {},
+		nodeDatum,
+		topPerformer,
+		avatarContent,
+		referralData = {},
+		lastUserId = '',
+		userData = {},
+		organization,
+		orgCount,
+		handleFunc = () => {},
+		total,
+		collapse,
+		collapseState,
+		totalChildCount,
+	} = nodeProps;
+
 	return (
 		<foreignObject
 			className={cl`
@@ -80,7 +84,7 @@ function DirectNode({
 								>
 									{startCase(organization?.[0] || '\u00A0')}
 								</div>
-								{organization.length > 1 && (
+								{organization?.length > 1 && (
 									<div className={styles.more}>
 										+
 										{orgCount}

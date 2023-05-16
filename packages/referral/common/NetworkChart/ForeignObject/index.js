@@ -1,6 +1,3 @@
-import { cl } from '@cogoport/components';
-import { IcMArrowDown } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { cogopointImg } from '../../../constants';
@@ -18,8 +15,8 @@ function RenderForeignObjectNode({
 	topPerformerId = '',
 }) {
 	const {
-		user_data = null,
-		referral_data = {},
+		user_data: userData = null,
+		referral_data: referralData = {},
 		cogopoints = {},
 		organization = [],
 		referee_id: topuser = '',
@@ -38,12 +35,12 @@ function RenderForeignObjectNode({
 	const { total = 0 } = cogopoints || {};
 
 	const {
-		total_child_count = 0,
+		total_child_count: totalChildCount = 0,
 		referee_id = '',
 		status = '',
-	} = referral_data || {};
+	} = referralData || {};
 
-	const firstTwoLetters = user_data?.name.substring(0, 2);
+	const firstTwoLetters = userData?.name.substring(0, 2);
 
 	const avatarContent = firstTwoLetters?.toUpperCase();
 
@@ -54,6 +51,25 @@ function RenderForeignObjectNode({
 		if (collapseState) {
 			setCollapseState(false);
 		}
+	};
+
+	const nodeProps = {
+		checkActiveNode,
+		status,
+		handleLinkClick,
+		nodeDatum,
+		topPerformer,
+		avatarContent,
+		referralData,
+		lastUserId,
+		userData,
+		organization,
+		orgCount,
+		handleFunc,
+		total,
+		collapse,
+		collapseState,
+		totalChildCount,
 	};
 
 	if (nodeDatum.type === 'root') {
@@ -84,90 +100,14 @@ function RenderForeignObjectNode({
 
 	if (!nodeDatum.direct_child) {
 		return (
-			<foreignObject
-				className={cl`
-                    ${styles.direct_child_container}
-                    ${checkActiveNode && styles.active_container}
-                `}
-				x="-120"
-				y="-100"
-				width="250px"
-				height="155px"
-			>
+			<DirectNode {...nodeProps} />
 
-				<div
-					role="presentation"
-					className={styles.user_container_child}
-					onClick={() => handleLinkClick(nodeDatum)}
-				>
-					<div className={styles.card_id}>
-						ID:
-						{' '}
-						{lastUserId}
-					</div>
-					<div className={styles.total}>
-						Joining  Date:
-						{' '}
-						{format(referral_data?.created_at, 'dd LLL yyyy')}
-					</div>
-					<div className={styles.user_cogopoints}>
-						<div className={styles.total}>
-							Total:
-						</div>
-						<img
-							src={cogopointImg}
-							alt="cogopoint"
-							className={styles.cogopoints_img}
-						/>
-						<div className={styles.cogopoints_count}>
-							{total}
-						</div>
-					</div>
-				</div>
-				<div
-					className={styles.child_container}
-					role="presentation"
-					onClick={() => handleConnections(nodeDatum, toggleNode)}
-				>
-					<div className={styles.child_network}>
-						<div className={styles.user_company_name}>
-							{total_child_count !== 0 && '+'}
-							{total_child_count}
-							{' '}
-							connections
-						</div>
-						{total_child_count > 0
-							? (
-								<IcMArrowDown
-									className={cl`
-										${styles.down_icon} ${collapse ? styles.collapsed : styles.not_collapsed}`}
-								/>
-							) : ('')}
-					</div>
-				</div>
-
-			</foreignObject>
 		);
 	}
 
 	return (
 		<DirectNode
-			checkActiveNode={checkActiveNode}
-			status={status}
-			handleLinkClick={handleLinkClick}
-			nodeDatum={nodeDatum}
-			topPerformer={topPerformer}
-			avatarContent={avatarContent}
-			referralData={referral_data}
-			lastUserId={lastUserId}
-			userData={user_data}
-			organization={organization}
-			orgCount={orgCount}
-			handleFunc={handleFunc}
-			total={total}
-			collapse={collapse}
-			collapseState={collapseState}
-			totalChildCount={total_child_count}
+			{...nodeProps}
 		/>
 	);
 }

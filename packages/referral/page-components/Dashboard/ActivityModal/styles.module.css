@@ -1,0 +1,92 @@
+.modal_container {
+	:global {
+		.ui_modal_header_container {
+			padding: 5px 16px !important;
+		}
+
+		.ui_modal_body_container {
+			border-bottom: 0;
+		}
+
+		.ui_modal_footer_container {
+			padding: 8px;
+		}
+	}
+}
+
+.main_card {
+	padding: 8px;
+	margin: -5px 0 -5px 5px;
+	border-left: 1px solid #bdbdbd;
+}
+
+.main_card:last-child {
+	border-left: none;
+}
+
+.activity_date {
+	display: flex;
+	align-items: center;
+}
+
+.dot {
+	width: 10px;
+	height: 10px;
+	background: #bdbdbd;
+	border-radius: 50%;
+}
+
+.durations {
+	margin-left: 5px;
+	font-size: 10px;
+	color: #828282;
+}
+
+.card {
+	padding: 8px;
+	margin: 15px 10px;
+	background: #fff;
+	border-left: 2px solid #d6b300;
+	border-radius: 6px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+}
+
+.status_details {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.user_status {
+	font-size: 13px;
+	color: #828282;
+}
+
+.user_source {
+	font-size: 13px;
+	color: #828282;
+}
+
+.details {
+	margin-top: 10px;
+}
+
+.cogopoints_container {
+	display: flex;
+	align-items: center;
+	color: #828282;
+}
+
+.coin_icon {
+	margin: 0 5px 0 4px;
+}
+
+.number {
+	font-weight: 500;
+	color: #4f4f4f;
+}
+
+.name {
+	margin-top: 10px;
+	color: #828282;
+}

@@ -26,6 +26,9 @@ function ListTables({
 	setListPagination = func,
 	listLoading = false,
 	getListReferrals = func,
+	showPopover = {},
+	setShowPopover = func,
+	setActivityModal = func,
 }) {
 	const [filterVisible, setFilterVisible] = useState(false);
 	const { tabs = [] } = tableTabs();
@@ -85,6 +88,9 @@ function ListTables({
 									className={styles.table_container}
 									columns={TableColumns({
 										activeTab,
+										showPopover,
+										setShowPopover,
+										setActivityModal,
 									})}
 									data={list || []}
 									loading={listLoading}

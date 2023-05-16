@@ -25,11 +25,6 @@ function StatusDetails({ userData = {} }) {
 			value : affiliate,
 			color : '#CED1ED',
 		},
-		{
-			label : 'Employees',
-			value : 60 || 0,
-			color : '#F2F3FA',
-		},
 	];
 
 	return (

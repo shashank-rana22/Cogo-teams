@@ -1,6 +1,15 @@
 import styles from './styles.module.css';
 
-function Nodes({ type = '' }) {
+function Nodes({ item = {}, type = '' }) {
+	const { immediate_child_count = 0, total_child_count = 0, cogopoints = {}	} = item;
+
+	const {
+		network_cogopoint_earned = 0,
+		network_cogopoint_estimated = 0,
+		referral_cogopoint_earned = 0,
+		referral_cogopoint_estimated = 0,
+	} = cogopoints;
+
 	const directNode = [
 		{
 			title : 'Affiliate',
@@ -23,7 +32,7 @@ function Nodes({ type = '' }) {
 		},
 		{
 			title : 'Nodes',
-			count : 200,
+			count : total_child_count - immediate_child_count,
 		},
 
 	];
@@ -31,11 +40,11 @@ function Nodes({ type = '' }) {
 	const allotedCogopoints = [
 		{
 			title : 'Direct',
-			count : 20000,
+			count : referral_cogopoint_earned,
 		},
 		{
 			title : 'Indirect',
-			count : 600000,
+			count : network_cogopoint_earned,
 		},
 
 	];
@@ -43,11 +52,11 @@ function Nodes({ type = '' }) {
 	const holdedCogopoints = [
 		{
 			title : 'Direct',
-			count : 20000,
+			count : referral_cogopoint_estimated,
 		},
 		{
 			title : 'Indirect',
-			count : 200000,
+			count : network_cogopoint_estimated,
 		},
 
 	];
