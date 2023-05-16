@@ -1,18 +1,3 @@
-function formatDate(date) {
-	if (date) {
-		return new Date(date).toLocaleDateString('en-GB', {
-			day   : 'numeric',
-			month : 'short',
-			year  : 'numeric',
-		});
-	}
-	return new Date().toLocaleDateString('en-GB', {
-		day   : 'numeric',
-		month : 'short',
-		year  : 'numeric',
-	});
-}
-
 export const AmendmentFields = {
 	fields: [
 		{
@@ -43,12 +28,6 @@ export const AmendmentFields = {
 			label : 'Status',
 			span  : 1,
 			func  : 'handleStatus',
-		},
-		{
-			key   : 'downloadManifest',
-			label : '',
-			span  : 0.6,
-			func  : 'handleDownloadManifest',
 		},
 		{
 			key   : 'download',

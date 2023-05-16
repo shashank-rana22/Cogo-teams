@@ -1,12 +1,11 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMEyeopen, IcMEdit, IcMDownload } from '@cogoport/icons-react';
+import { IcMEyeopen, IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import List from '../../commons/List';
 import { AmendmentFields } from '../../configurations/amendment_fields';
-import GenerateManifestDoc from '../GenerateManifestDoc';
 import HAWBList from '../HawbList';
 import UploadModal from '../UploadModal';
 
@@ -16,7 +15,6 @@ function Amendment({
 	data, loading, page, setPage, setGenerate, setItem, setViewDoc, edit, setEdit, listAPI, activeTab,
 }) {
 	const [showUpload, setShowUpload] = useState(null);
-	const [triggerManifest, setTriggerManifest] = useState(null);
 	const { fields } = AmendmentFields;
 
 	const handleDownloadMAWB = (singleItem) => {
@@ -57,6 +55,17 @@ function Amendment({
 				})}
 			</div>
 		),
+		handleStatus: (singleItem) => (
+			<Tooltip
+				content={singleItem?.remarks?.toString()}
+				placement="top"
+			>
+				<div className={styles.status}>
+					Amend Requested
+				</div>
+			</Tooltip>
+
+		),
 		handleDownload: (singleItem) => (
 			<Button
 				themeType="linkUi"
@@ -69,21 +78,6 @@ function Amendment({
 
 			</Button>
 		),
-		handleDownloadManifest: (singleItem) => (
-			singleItem.blCategory === 'hawb' && (
-				<Button
-					themeType="linkUi"
-					style={{ fontSize: 12 }}
-					onClick={() => { setTriggerManifest(singleItem.shipmentId); }}
-					className={styles.manifest_download_button}
-				>
-					<IcMDownload />
-					{' '}
-					Manifest
-				</Button>
-			)
-		),
-
 		handleEdit: (singleItem) => (
 			<Button
 				themeType="linkUi"
@@ -95,7 +89,6 @@ function Amendment({
 				<IcMEdit fill="#8B8B8B" />
 			</Button>
 		),
-
 	};
 
 	return (
@@ -119,21 +112,6 @@ function Amendment({
 				edit={edit}
 				setEdit={setEdit}
 			/>
-			{triggerManifest && (
-				<Modal
-					show={triggerManifest}
-					onClose={() => { setTriggerManifest(false); }}
-					size="lg"
-				>
-					<Modal.Body style={{ minHeight: '90vh' }}>
-						<GenerateManifestDoc
-							setTriggerManifest={setTriggerManifest}
-							shipmentId={triggerManifest}
-						/>
-					</Modal.Body>
-
-				</Modal>
-			)}
 		</>
 	);
 }

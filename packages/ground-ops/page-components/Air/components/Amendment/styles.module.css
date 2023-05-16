@@ -1,8 +1,4 @@
-.manifest_download_button {
-	padding: 2px !important;
-	text-align: center;
-
-	svg {
-		margin-right: 8px;
-	}
+.status {
+	font-weight: 500;
+	color: #ed3726;
 }
