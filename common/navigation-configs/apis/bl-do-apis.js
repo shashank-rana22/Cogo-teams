@@ -246,6 +246,12 @@ const apis = [
 		service_name : 'bookings',
 		feature      : 'bl_do',
 	},
+	{
+		api          : 'get_servics',
+		access_type  : 'private',
+		service_name : 'bookings',
+		feature      : 'bl_do',
+	},
 ];
 
 export default apis;

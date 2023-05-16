@@ -55,6 +55,7 @@ import {
 	IcMFaq,
 	IcMActivePlans,
 	IcMExportfile,
+	IcMAirSchedules,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -1340,8 +1341,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-bl_do_collection_release',
 				title         : 'BL/DO Collection - Release',
-				href          : '/bl_do-collection-release',
-				as            : '/bl_do-collection-release',
+				href          : '/v2/bl_do-collection-release',
+				as            : '/v2/bl_do-collection-release',
 				type          : 'link',
 				main_apis     : ['list_shipment_document_collections'],
 				possible_apis : [...apis.bl_do_collection_release, ...apis.shipment],
@@ -2208,6 +2209,16 @@ const navigationMappingAdmin = {
 				icon          : IcMDataPipeline,
 			},
 		],
+	},
+	air_repository: {
+		key           : 'air_repository',
+		title         : 'Air Repository',
+		icon          : IcMAirSchedules,
+		href          : '/v2/air-repository',
+		as            : '/v2/air-repository',
+		type          : 'link',
+		possible_apis : apis.air_repository,
+		module_type   : 'dashboards',
 	},
 	saas_tools: {
 		key       : 'saas_tools',

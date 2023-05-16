@@ -1,178 +1,178 @@
 {
-    "booking_desk_details":[
-        {
-			"label": "POL (Port of Loading)", 
-			"key": "origin_port.display_name"
-		}, 
-		{
-			"label": "POD (Port of Discharge)", 
-			"key": "destination_port.display_name" 
-		}, 
-		{
-			"label": "POR (Place of Receipt)", 
-			"key": "origin_main_port.display_name"
-		},
-		{
-			"label": "FPOD (Final Place of Delivery)", 
-			"key": "destination_main_port.display_name"
-		},
-		{
-			"key": "container_handover_location", 
-			"label": "Preferred Handover Location"
-		},
-		{
-			"key": "container_pickup_location", 
-			"label": "Preferred Pickup Location"
-		},
-		{
-			"label": "Shipper Details", 
-			"key": "shipper_details"
-		},
-		{
-			"label": "Shipping line",
-			"key": "shipping_line.business_name"
-		}, 
-		{
-			"label": " Preferred Shipping line",
-			"key": "preferred_shipping_line.business_name"
-		},
-		{
-			"label": "Rate reference number",
-			"key": "rate_reference_number"
-		},
-		{
-			"label": "Container Pickup Date",
-			"key": "cargo_readiness_date"
-		},
-		{
-			"label": "Cargo Description",
-			"key": "commodity_description"
-		},
-		{
-			"label": "HS Code",
-			"key": "hs_code"
-		},
-		{
-			"label": "Number of Stop",
-			"key": "number_of_stops"
-		}, 
-		{
-			"label": "BL Category",
-			"key": "bl_category"
-		}, 
-		{
-			"label": "BL Count",
-			"key": "bls_count"
-		}, 
-		{
-			"label": "BL Type",
-			"key": "bl_type"
-		}, 
-		{
-			"label": "Destination Detention Free Days",
-			"key": "free_days_detention_destination"
-		},
-		{
-			"label": "Origin Detention Free Days",
-			"key": "free_days_detention_origin"
-		}, 
-		{
-			"label": "FPOD", 
-			"key": "destination_main_port.display_name"
-		},
-		{
-			"key": "cargo_weight_per_container",
-			"label": "Cargo Weight/Cont."
-		},
-		{
-			"key": "refer_humidity",
-			"label": "Reefer Humidity"
-		},
-		{
-			"key": "refer_temperature",
-			"label": "Reefer Temperature"
-		},
-		{
-			"key": "refer_vent_setting",
-			"label": "Reefer Ventilation Setting"
-		},
-		{
-			"key": "refer_ventilation",
-			"label": "Reefer Ventilation"
-		},
-		{
-			"key": "service_provider_reference_id",
-			"label": "Shipment Ref Id"
-		}, 
-		{
-			"key": "schedule_arrival",
-			"label": "ETA"
-		},
-		{
-			"key": "schedule_departure",
-			"label": "ETD"
-		}, 
-		{
-			"key": "msds_certificates", 
-			"label": "MSDS Certificates"
-		},
-		{
-			"key": "payment_term", 
-			"label": "Freight Type"
-		},
-		{
-			"key": "origin_cargo_handling_type", 
-			"label": "Origin Cargo Stuffing Type"
-		}, 
-		{
-			"key": "destination_cargo_handling_type",
-			"label": "Destination Cargo Stuffing Type"
-		}, 
-		{ 
-			"label": "Preferred Departure Date",  
-			"key": "preferred_departure_date"
-		},
-		{
-			"key": "iip_certificates", 
-			"label": "IIP Certificates"
-		}
+  "booking_desk_details":[
+    {
+      "label": "POL (Port of Loading)", 
+      "key": "origin_port.display_name"
+    }, 
+    {
+      "label": "POD (Port of Discharge)", 
+      "key": "destination_port.display_name" 
+    }, 
+    {
+      "label": "POR (Place of Receipt)", 
+      "key": "origin_main_port.display_name"
+    },
+    {
+      "label": "FPOD (Final Place of Delivery)", 
+      "key": "destination_main_port.display_name"
+    },
+    {
+      "key": "container_handover_location", 
+      "label": "Preferred Handover Location"
+    },
+    {
+      "key": "container_pickup_location", 
+      "label": "Preferred Pickup Location"
+    },
+    {
+      "label": "Shipper Details", 
+      "key": "shipper_details"
+    },
+    {
+      "label": "Shipping line",
+      "key": "shipping_line.business_name"
+    }, 
+    {
+      "label": " Preferred Shipping line",
+      "key": "preferred_shipping_line.business_name"
+    },
+    {
+      "label": "Rate reference number",
+      "key": "rate_reference_number"
+    },
+    {
+      "label": "Container Pickup Date",
+      "key": "cargo_readiness_date"
+    },
+    {
+      "label": "Cargo Description",
+      "key": "commodity_description"
+    },
+    {
+      "label": "HS Code",
+      "key": "hs_code"
+    },
+    {
+      "label": "Number of Stop",
+      "key": "number_of_stops"
+    }, 
+    {
+      "label": "BL Category",
+      "key": "bl_category"
+    }, 
+    {
+      "label": "BL Count",
+      "key": "bls_count"
+    }, 
+    {
+      "label": "BL Type",
+      "key": "bl_type"
+    }, 
+    {
+      "label": "Destination Detention Free Days",
+      "key": "free_days_detention_destination"
+    },
+    {
+      "label": "Origin Detention Free Days",
+      "key": "free_days_detention_origin"
+    }, 
+    {
+      "label": "FPOD", 
+      "key": "destination_main_port.display_name"
+    },
+    {
+      "key": "cargo_weight_per_container",
+      "label": "Cargo Weight/Cont."
+    },
+    {
+      "key": "refer_humidity",
+      "label": "Reefer Humidity"
+    },
+    {
+      "key": "refer_temperature",
+      "label": "Reefer Temperature"
+    },
+    {
+      "key": "refer_vent_setting",
+      "label": "Reefer Ventilation Setting"
+    },
+    {
+      "key": "refer_ventilation",
+      "label": "Reefer Ventilation"
+    },
+    {
+      "key": "service_provider_reference_id",
+      "label": "Shipment Ref Id"
+    }, 
+    {
+      "key": "schedule_arrival",
+      "label": "ETA"
+    },
+    {
+      "key": "schedule_departure",
+      "label": "ETD"
+    }, 
+    {
+      "key": "msds_certificates", 
+      "label": "MSDS Certificates"
+    },
+    {
+      "key": "payment_term", 
+      "label": "Freight Type"
+    },
+    {
+      "key": "origin_cargo_handling_type", 
+      "label": "Origin Cargo Stuffing Type"
+    }, 
+    {
+      "key": "destination_cargo_handling_type",
+      "label": "Destination Cargo Stuffing Type"
+    }, 
+    { 
+      "label": "Preferred Departure Date",  
+      "key": "preferred_departure_date"
+    },
+    {
+      "key": "iip_certificates", 
+      "label": "IIP Certificates"
+    }
     ],
 
-    "multi_service_details":[
-        {
-			"label": "Container Size",
-			"key": "container_size"
-		},
-		{
-			"label": "Containers Count",
-			"key": "containers_count"
-		},
-		{
-			"label": "Container Type",
-			"key": "container_type"
-		}, 
-		{
-			"label": "Commodity", 
-			"key": "commodity"
-		}
-    ],
-    
-    "supply_details": [
-		{
-			"key": "supplier_poc", 
-			"label": "Supplier Sales POC"
-		},
-		{
-			"key": "buy_quotation_agreed_rates", 
-			"label": "Agreed Buy Rates"
-		},  
-		{ 
-			"key": "origin_oversea_agent",
-			"label" : "Oversea Agent Details"
-		}, 
-		{
-			"label": "Destination Detention Free Days",
-			"key": "free_days_detention_destination"
-		}
-	]
+  "multi_service_details":[
+    {
+      "label": "Container Size",
+      "key": "container_size"
+    },
+    {
+      "label": "Containers Count",
+      "key": "containers_count"
+    },
+    {
+      "label": "Container Type",
+      "key": "container_type"
+    }, 
+    {
+      "label": "Commodity", 
+      "key": "commodity"
+    }
+  ],
+
+  "supply_details": [
+    {
+      "key": "supplier_poc", 
+      "label": "Supplier Sales POC"
+    },
+    {
+      "key": "buy_quotation_agreed_rates", 
+      "label": "Agreed Buy Rates"
+    },  
+    { 
+      "key": "origin_oversea_agent",
+      "label" : "Oversea Agent Details"
+    }, 
+    {
+      "label": "Destination Detention Free Days",
+      "key": "free_days_detention_destination"
+    }
+]
 }
