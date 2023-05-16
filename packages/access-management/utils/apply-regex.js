@@ -22,11 +22,11 @@ const applyRegEx = (searchString, list, key, aliases = []) => {
 			newItem = { ...item, options: newOptions };
 		}
 
-		const isPresentInAlias = aliases
+		const isAliasPresent = aliases
 			.some((alias) => newItem[alias] && newItem[alias].toLowerCase().includes(newSearchString));
 
 		if (!already_present
-			&& (isPresentInAlias || !isEmpty(newOptions) || newItem[key].toLowerCase().includes(newSearchString))) {
+			&& (isAliasPresent || !isEmpty(newOptions) || newItem[key].toLowerCase().includes(newSearchString))) {
 			newList.push(newItem);
 		}
 	});
