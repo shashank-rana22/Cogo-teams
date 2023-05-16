@@ -120,14 +120,13 @@ const formatPayload = ({
 	const newPayload = {
 		source_id: shipmentData?.id,
 		search_type,
-
 	};
 
 	newPayload[`${search_type}_services_attributes`] = formatDataForSingleService({
 		rawParams,
 	});
 
-	newPayload.buyers = {
+	newPayload.buyer = {
 		importer_exporter_id        : organization_id,
 		importer_exporter_branch_id : user?.branch_id,
 		user_id                     : user?.user_id,
