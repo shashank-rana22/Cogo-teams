@@ -219,7 +219,7 @@ function CollectionPartyDetails({
 								name="collection_party_bank_details"
 								placeholder="Select Bank Details"
 								options={collectionPartyBankOptions}
-								renderLabel={(bank) => { renderLabel(bank); }}
+								renderLabel={(bank) => renderLabel(bank)}
 								rules={{ required: true }}
 							/>
 							{errors?.collection_party_bank_details ? (
