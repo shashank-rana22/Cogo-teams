@@ -371,12 +371,10 @@ const completedColumn = ({
 				<InvoiceDetails
 					item={row}
 				/>
-				{!row?.isFinalPosted && (
-					<RenderIRNGenerated
-						itemData={row}
-						refetch={refetch}
-					/>
-				)}
+				<RenderIRNGenerated
+					itemData={row}
+					refetch={refetch}
+				/>
 			</div>
 		),
 	},
