@@ -1,4 +1,4 @@
-import { Placeholder, Tooltip } from '@cogoport/components';
+import { Placeholder } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import {
 	IcMArrowRotateLeft,
