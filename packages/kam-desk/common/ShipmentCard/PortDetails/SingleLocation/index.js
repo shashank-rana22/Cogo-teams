@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 function PortDetails({ data = {} }) {
 	const { trade_type, location } = data;
-	const { origin, destination } = getLocation({ data });
+	const { origin } = getLocation({ data });
 
 	return (
 		<div className={`${styles.container} core_ui_port_conatiner`}>

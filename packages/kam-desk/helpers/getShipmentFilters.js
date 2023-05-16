@@ -6,9 +6,10 @@ const getShipmentFilters = ({ filters = {}, kamDeskContextValues = {} }) => {
 	const { activeTab, stepperTab, shipmentType } = kamDeskContextValues || {};
 
 	const tab_payload = shipmentType === 'all'
-		? tabPayload.all?.[activeTab] : tabPayload?.[shipmentType]?.[stepperTab]?.[activeTab];
+		? tabPayload.all?.[activeTab]
+		: tabPayload?.[shipmentType]?.[stepperTab]?.[activeTab];
 
-	let finalFilters = { ...filters, ...tab_payload };
+	let finalFilters = { ...filters, ...(tab_payload || {}) };
 
 	if (!isEmpty(filters?.tags)) {
 		finalFilters = { ...finalFilters, tags: [filters?.tags] };

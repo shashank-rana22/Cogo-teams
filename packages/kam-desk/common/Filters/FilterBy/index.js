@@ -124,7 +124,6 @@ function FilterBy({
 			) : null}
 
 			{possibleFilters?.includes('date_type') ? (
-
 				<div className={styles.filter_container}>
 					<div className={styles.filter_heading}>Date Type</div>
 

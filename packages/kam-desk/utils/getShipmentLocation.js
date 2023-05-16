@@ -1,3 +1,5 @@
+import isSingleLocation from './checkSingleLocation';
+
 const SUFFIXCONFIG = {
 	fcl_freight             : 'port',
 	lcl_freight             : 'port',
@@ -19,39 +21,18 @@ const SUFFIXCONFIG = {
 	lcl_freight_local       : 'port',
 };
 
-const SINGLELOCATION = [
-	'fcl_customs',
-	'lcl_customs',
-	'air_customs',
-	'origin_fcl_customs',
-	'destination_fcl_customs',
-	'origin_lcl_customs',
-	'destination_lcl_customs',
-	'origin_air_customs',
-	'destination_air_customs',
-	'fcl_cfs',
-	'fcl_freight_local',
-	'air_freight_local',
-	'lcl_freight_local',
-];
-
-const isSingleLocation = (shipment) => SINGLELOCATION.includes(shipment);
-
-export default function getShipmentLocation({ data, type = 'origin' }) {
+export default function getShipmentLocation({ data = {}, type = 'origin' }) {
 	const { shipment_type } = data;
 
 	const suffix = SUFFIXCONFIG[`${type}_${shipment_type}`] || SUFFIXCONFIG[shipment_type];
 
-	const objName = !isSingleLocation(shipment_type)
-    && !['ftl_freight', 'ltl_freight'].includes(shipment_type)
+	const objName = !isSingleLocation(shipment_type) && !['ftl_freight', 'ltl_freight'].includes(shipment_type)
 		? `${type}_${suffix}`
 		: suffix;
 
 	const location = (data[objName] || {}).name || '';
 
-	const port_code = (data[objName] || {}).port_code
-    || (data[objName] || {}).postal_code
-    || null;
+	const port_code = (data[objName] || {}).port_code || (data[objName] || {}).postal_code || null;
 
 	const country = ((data[objName] || {}).country || {}).name || '';
 

@@ -4,7 +4,7 @@ const getCriticalShipment = ({ activeTab, stepperTab, shipmentType, shipment }) 
 	const {
 		schedule_departure, schedule_arrival,
 		free_days_detention_destination, free_days_destination_storage,
-	} = shipment;
+	} = shipment || {};
 
 	let freeDays = free_days_detention_destination || free_days_destination_storage || 0;
 	freeDays = freeDays > 2 ? freeDays - 2 : freeDays;

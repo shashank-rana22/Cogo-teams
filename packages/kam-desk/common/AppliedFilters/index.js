@@ -8,12 +8,12 @@ import KamDeskContext from '../../context/KamDeskContext';
 
 import styles from './styles.module.css';
 
-function AppliedFilters() {
-	const { setFilters, filters } = useContext(KamDeskContext);
+const FILTER_KEYS = ['source', 'payment_term', 'tags'];
 
-	const {
-		date_type, dateRange, startDate, endDate, pending_invoice,
-	} = filters || {};
+function AppliedFilters() {
+	const { setFilters = () => {}, filters = {} } = useContext(KamDeskContext);
+
+	const { date_type, dateRange, startDate, endDate, pending_invoice } = filters || {};
 
 	const onCancel = (resetKeys = {}) => {
 		setFilters({ ...filters, ...(resetKeys || {}) });
@@ -30,7 +30,7 @@ function AppliedFilters() {
 
 	const currentFilters = [];
 
-	['source', 'payment_term', 'tags'].forEach((key) => {
+	FILTER_KEYS.forEach((key) => {
 		if (!isEmpty(filters?.[key])) { currentFilters.push({ label: startCase(filters?.[key]), value: key }); }
 	});
 
@@ -71,16 +71,16 @@ function AppliedFilters() {
 			) : null}
 
 			{currentFilters?.map((item) => (
-				<Pill key={item.value}>
-					<div className={styles.pill_content} key={item.value}>
+				<Pill key={item?.value}>
+					<div className={styles.pill_content} key={item?.value}>
 						<div className={styles.pill_text}>
-							{item.label}
+							{item?.label}
 						</div>
 
 						<div className={styles.pill_cross}>
 							<Button
 								size="xs"
-								onClick={() => removeKeyFromFilter(item.value)}
+								onClick={() => removeKeyFromFilter(item?.value)}
 								themeType="tertiary"
 							>
 								<IcMCross fill="#6fa5ab" />

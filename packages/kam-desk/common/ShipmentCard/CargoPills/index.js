@@ -21,7 +21,7 @@ function CargoPills({ data = {} }) {
 
 	return (
 		<div className={styles.container}>
-			{getPillsFormat(initialPills).map((pill) => (
+			{getPillsFormat(initialPills)?.map((pill) => (
 				<Pill key={pill}>{pill}</Pill>
 			))}
 
@@ -33,8 +33,7 @@ function CargoPills({ data = {} }) {
 						trigger="mouseenter"
 					>
 						<div className={styles.popover_button_content}>
-							{`+${cargo_details.length - 1} 
-							Detail${cargo_details.length > 2 ? 's' : ''}`}
+							{`+${cargo_details.length - 1} Detail${cargo_details.length > 2 ? 's' : ''}`}
 						</div>
 					</Popover>
 				</div>

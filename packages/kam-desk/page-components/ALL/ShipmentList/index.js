@@ -25,19 +25,15 @@ export default function ShipmentList({ data = {}, loading = false }) {
 		</div>
 	);
 
-	return (
-		<div>
-			{!loading && isEmpty(list)
-				? <EmptyState />
-				: (
-					<div>
-						{renderPagination}
+	return !loading && isEmpty(list)
+		? <EmptyState />
+		: (
+			<>
+				{renderPagination}
 
-						{list?.map((item) => <Card data={item} key={item.id} />)}
+				{list?.map((item) => <Card data={item} key={item?.id} />)}
 
-						{renderPagination}
-					</div>
-				)}
-		</div>
-	);
+				{renderPagination}
+			</>
+		);
 }

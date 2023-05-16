@@ -9,7 +9,7 @@
 	height: 28px;
 
 	svg path {
-		fill: #ee3425;
+		fill: var(--color-primary-error-red-2);
 	}
 }
 

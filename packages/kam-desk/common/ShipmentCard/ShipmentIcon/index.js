@@ -56,7 +56,7 @@ function ShipmentIcon({ shipment_type = '', icon_text = '' }) {
 				className={cl` ${styles.icon_text} customize_icon_text`}
 				style={{ color: currentIcon?.fill }}
 			>
-				{icon_text || currentIcon.text || ''}
+				{icon_text || currentIcon?.text || ''}
 			</div>
 		</div>
 	);

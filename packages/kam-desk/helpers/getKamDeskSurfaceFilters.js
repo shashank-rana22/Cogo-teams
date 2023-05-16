@@ -6,7 +6,7 @@ const getKamDeskSurfaceFilters = ({ filters = {}, kamDeskContextValues = {} }) =
 	const { activeTab, stepperTab, shipmentType } = kamDeskContextValues || {};
 	const tab_payload = tabPayload?.[shipmentType]?.[stepperTab]?.[activeTab];
 
-	let finalFilters = { ...filters, ...tab_payload };
+	let finalFilters = { ...filters, ...(tab_payload || {}) };
 
 	if (!isEmpty(filters?.tags)) {
 		finalFilters = { ...finalFilters, tags: [filters?.tags] };

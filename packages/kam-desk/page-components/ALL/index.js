@@ -30,11 +30,14 @@ function All() {
 				<DeskTabs />
 			</div>
 
-			<div>
-				{loading
-					? <Loader />
-					: <ShipmentList data={data} loading={loading} />}
-			</div>
+			{loading
+				? <Loader />
+				: (
+					<ShipmentList
+						data={data}
+						loading={loading}
+					/>
+				)}
 		</div>
 	);
 }

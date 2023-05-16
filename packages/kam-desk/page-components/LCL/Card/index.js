@@ -41,9 +41,7 @@ function Card({ data = {} }) {
 
 	return (
 		<div
-			className={cl`${styles.container} ${
-				isShipmentCritical ? styles.animate_card : ''
-			}`}
+			className={cl`${styles.container} ${isShipmentCritical ? styles.animate_card : ''}`}
 			onClick={handleCardClick}
 			role="button"
 			tabIndex={0}

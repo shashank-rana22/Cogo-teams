@@ -18,15 +18,16 @@ function Header({ data = {} }) {
 				) : null}
 
 				{importer_exporter?.tags?.includes('partner')
-				&& <Pill className={styles.channel_partner} color="orange">Channel Partner</Pill>}
+					? <Pill className={styles.channel_partner} color="orange">Channel Partner</Pill>
+					: null}
 			</div>
 
 			<div>
-				{source && (
+				{source ? (
 					<Pill className={cl`${styles.source} customize_source`}>
 						{source === 'direct' ? 'Sell Without Buy' : startCase(source) }
 					</Pill>
-				)}
+				) : null}
 			</div>
 		</div>
 	);

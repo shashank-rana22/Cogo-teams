@@ -16,7 +16,7 @@ export default function getKamDeskFilters({ filters, kamDeskContextValues }) {
 	const tabwiseFilters = shipmentType === 'all' ? tabPayload.all?.[activeTab]
 		: tabPayload?.[shipmentType]?.[stepperTab]?.[activeTab];
 
-	let finalFilters = { ...tabwiseFilters, ...restFilters };
+	let finalFilters = { ...(tabwiseFilters || {}), ...restFilters };
 
 	if (!isEmpty(tags)) {
 		finalFilters = { ...finalFilters, tags: [tags] };

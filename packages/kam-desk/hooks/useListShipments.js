@@ -10,7 +10,7 @@ const useListShipments = () => {
 	const [apiData, setApiData] = useState({});
 
 	const kamDeskContextValues = useContext(KamDeskContext);
-	const { activeTab, filters, setFilters, stepperTab, shipmentType } = kamDeskContextValues || {};
+	const { activeTab, filters = {}, setFilters, stepperTab, shipmentType } = kamDeskContextValues || {};
 	const { page = 1, ...restFilters } = filters || {};
 
 	const debounceQuery = useRef({ q: filters.q });

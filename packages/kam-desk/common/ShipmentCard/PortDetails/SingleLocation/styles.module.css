@@ -41,7 +41,7 @@
 	}
 
 	.country {
-		color: #828282;
+		color: var(--color-secondary-greyscale-3);
 	}
 }
 
@@ -49,7 +49,7 @@
 	width: fit-content;
 	max-width: 100%;
 	overflow: hidden;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 	color: #333;
 	text-overflow: ellipsis;
@@ -58,6 +58,6 @@
 
 .icd {
 	margin: 4px 0;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	font-weight: 700;
 }

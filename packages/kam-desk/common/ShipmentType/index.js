@@ -11,12 +11,12 @@ const findValueInArray = ({ value, arr = [] }) => !!arr?.some((i) => i?.value ==
 function ShipmentType() {
 	const {
 		shipmentType,
-		setShipmentType,
+		setShipmentType = () => {},
 		stepperTab,
-		setStepperTab,
+		setStepperTab = () => {},
 		activeTab,
-		setActiveTab,
-		setFilters,
+		setActiveTab = () => {},
+		setFilters = () => {},
 	} = useContext(KamDeskContext);
 
 	const handleChange = (val) => {
