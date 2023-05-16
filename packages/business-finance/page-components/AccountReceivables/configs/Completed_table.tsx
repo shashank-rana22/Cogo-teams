@@ -319,7 +319,7 @@ const completedColumn = ({
 					'--color': invoiceStatus[(getByKey(row, 'invoiceStatus') as string)],
 				} as CSSProperties}
 			>
-				{row?.isFinalPosted ? <div>Final Posted</div> : (
+				{row?.isFinalPosted ? <text className={styles.style_text}>FINAL POSTED</text> : (
 					<div>
 						{(startCase(getByKey(row, 'invoiceStatus') as string)).length > 10 ? (
 							<Tooltip
