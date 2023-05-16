@@ -1,7 +1,7 @@
 import { Button, CheckboxGroup, Checkbox } from '@cogoport/components';
 import React, { useEffect } from 'react';
 
-import useGetHawbCopiesList from '../../Helpers/hooks/useGetHawbCopiesList';
+import useGetMultipleCopiesList from '../../Helpers/hooks/useGetMultipleCopiesList';
 
 import multipleCopies from './multipleCopies';
 import styles from './styles.module.css';
@@ -10,7 +10,7 @@ function SelectDocumentCopies({
 	copiesValue, copiesOnChange, setSaveDocument, handleView, setGenerate,
 	setViewDoc, download24, setEdit, setItem, setDocCopies, setEditCopies,
 }) {
-	const { data, hawbCopiesList } = useGetHawbCopiesList();
+	const { data } = useGetMultipleCopiesList();
 
 	const OPTIONS = multipleCopies({ data, setEditCopies, setGenerate, setViewDoc, setEdit, setItem });
 

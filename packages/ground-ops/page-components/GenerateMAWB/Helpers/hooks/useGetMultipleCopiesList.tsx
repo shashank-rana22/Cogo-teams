@@ -1,17 +1,17 @@
 import { useRequestAir } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetHawbCopiesList = () => {
+const useGetMultipleCopiesList = () => {
 	const [{ data = {} }, trigger] = useRequestAir(
 		{
-			url    : '/air-coe/document-copy/list',
-			method : 'get',
-			// authKey : 'get_air_coe_documents_list',
+			url     : '/air-coe/document-copy/list',
+			method  : 'get',
+			authKey : 'get_air_coe_document_copy_list',
 		},
 		{ manual: true },
 	);
 
-	const hawbCopiesList = async () => {
+	const multipleCopiesList = async () => {
 		try {
 			await trigger({
 				params: {
@@ -28,12 +28,13 @@ const useGetHawbCopiesList = () => {
 	};
 
 	useEffect(() => {
-		hawbCopiesList();
+		multipleCopiesList();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return {
 		data: data?.list,
-		hawbCopiesList,
+		multipleCopiesList,
 	};
 };
-export default useGetHawbCopiesList;
+export default useGetMultipleCopiesList;
