@@ -1,12 +1,22 @@
 import { Placeholder } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
+import { useRouter } from 'next/router';
 
 import styles from './styles.module.css';
 
 function Header({ loading }) {
+	const router = useRouter();
+	const { profile } = useSelector((state) => state);
+	const { partner } = profile;
+	const { id } = partner;
 	return (
 		<div className={styles.header_container}>
-			<div className={styles.back_path_section}>
+			<div
+				role="presentation"
+				onClick={() => router.push(`/${id}/rfq-dashboard`)}
+				className={styles.back_path_section}
+			>
 				<IcMArrowBack
 					className={styles.back_icon}
 					fill="#221F20"
