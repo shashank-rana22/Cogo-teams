@@ -17,7 +17,8 @@
 		"VND": "VND",
 		"HKD": "HKD",
 		"JPY": "JPY",
-		"SGD": "SGD"
+		"SGD": "SGD",
+		"CAD": "CAD"
 	},
 	"currency_locale": {
 		"INR": "en-IN",
@@ -49,7 +50,9 @@
 			"EEE-dd": "EEE-dd",
 			"yyyy": "yyyy",
 			"dd/MMM/yyyy": "dd/MMM/yyyy",
-			"dd MMMM yyyy": "dd MMMM yyyy"
+			"dd MMMM yyyy": "dd MMMM yyyy",
+			"eee, dd MMM, yyyy": "eee, dd MMM, yyyy",
+			"dd/MM/yy hh:mm":"dd/MM/yy hh:mm"
 		},
 		"time": {
 			"hh:mm aaa": "hh:mm aaa",
@@ -111,5 +114,42 @@
 		"default": "sales_agent_id",
 		"entity_manager_team_members_view": "entity_manager_id",
 		"reporting_manager_view": "reporting_manager_id"
+	},
+	"cogoport_entities": {
+		"101": {
+			"country_code": "IN",
+			"name": "COGO FREIGHT PVT LTD",
+			"labels": {
+				"irn_label": "IRN"
+			}
+		},
+		"201": {
+			"country_code": "NL",
+			"name": "Cogoport Netherlands",
+			"labels": {
+				"irn_label": "IRN"
+			}
+		},
+		"301": {
+			"country_code": "IN",
+			"name": "COGOPORT PRIVATE LIMITED",
+			"labels": {
+				"irn_label": "IRN"
+			}
+		},
+		"401": {
+			"country_code": "SG",
+			"name": "Cogo Universe Pte. Ltd",
+			"labels": {
+				"irn_label": "IRN"
+			}
+		},
+		"501": {
+			"country_code": "VN",
+			"name": "Cogoport Vietnam",
+			"labels": {
+				"irn_label": "E-INVOICE"
+			}
+		}
 	}
 }

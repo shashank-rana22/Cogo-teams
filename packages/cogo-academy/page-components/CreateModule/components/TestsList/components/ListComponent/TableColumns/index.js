@@ -4,7 +4,7 @@ import { IcMShare } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
 
-import SortComponent from '../../SortComponent';
+import SortComponent from '../../../../../commons/SortComponent';
 import copyToClipboard from '../helpers/copyToClipboard';
 
 import { QuestionSetButtons, TestSetButtons } from './ButtonComponent';
@@ -50,11 +50,11 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 		),
 	},
 	{
-		Header   : 'NO. OF QUESTIONS',
+		Header   : 'NO. OF STANDALONE QUESTIONS',
 		id       : 'questions',
-		accessor : ({ non_case_study_question_count = 0 }) => (
+		accessor : ({ stand_alone_question_count = 0 }) => (
 			<section>
-				{non_case_study_question_count || 0}
+				{stand_alone_question_count || 0}
 			</section>
 		),
 	},
@@ -64,6 +64,15 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 		accessor : ({ case_study_question_count = 0 }) => (
 			<section>
 				{case_study_question_count || 0}
+			</section>
+		),
+	},
+	{
+		Header   : 'NO. OF SUBJECTIVE QUESTIONS',
+		id       : 'subjective_questions',
+		accessor : ({ subjective_question_count = 0 }) => (
+			<section>
+				{subjective_question_count || 0}
 			</section>
 		),
 	},
@@ -169,6 +178,7 @@ export const testSetColumns = ({
 						maxWidth={400}
 						content={(topics.map((topic, index) => ((index >= 1) ? (
 							<Pill
+								key={topic}
 								className={styles.topic_pill_sub}
 								size="lg"
 								color="#F3FAFA"
@@ -195,17 +205,25 @@ export const testSetColumns = ({
 		),
 	},
 	{
-		Header   : 'TOTAL QUESTIONS/CASES',
+		Header   : 'TOTAL QUESTIONS',
 		id       : 'total_questions',
-		accessor : ({ case_study_questions = 0, stand_alone_questions = 0 }) => (
-			<section>
-				{stand_alone_questions || 0}
-				{' '}
-				Q +
-				{' '}
-				{case_study_questions || 0}
-				{' '}
-				Cases
+		accessor : ({ case_study_questions = 0, stand_alone_questions = 0, subjective_questions = 0 }) => (
+			<section className={styles.questions_count}>
+				<div>
+					{stand_alone_questions || 0}
+					{' '}
+					Standalone
+				</div>
+				<div>
+					{case_study_questions || 0}
+					{' '}
+					Cases
+				</div>
+				<div>
+					{subjective_questions || 0}
+					{' '}
+					Subjective
+				</div>
 			</section>
 		),
 	},

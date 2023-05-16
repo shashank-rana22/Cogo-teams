@@ -1310,6 +1310,11 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
+		api          : 'get_buyers',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
 		api          : 'list_documents',
 		access_type  : 'private',
 		service_name : 'bookings',
@@ -1370,6 +1375,11 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
+		api          : 'get_possible_documents',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
 		api          : 'update_shipment_rail_domestic_freight_invoice_type',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -1400,6 +1410,21 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'create_saas_surface_shipment_detail',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'get_saas_ftl_tracking_consent',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'get_saas_ftl_tracking_detail',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
 		api          : 'send_whatsapp_booking_note_delayed',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -1415,6 +1440,32 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 		feature      : 'revenue_desk',
+	},
+	{
+		api          : 'list_organization_assets',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_authority_desk_bl_documents',
+		access_type  : 'private',
+		service_name : 'bookings',
+		feature      : 'bl_do',
+	},
+	{
+		api          : 'list_organization_branches',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_organization_asset',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'update_organization_asset',
+		access_type  : 'private',
+		service_name : 'organization',
 	},
 ];
 

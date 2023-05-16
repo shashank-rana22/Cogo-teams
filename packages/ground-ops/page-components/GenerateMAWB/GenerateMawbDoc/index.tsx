@@ -60,7 +60,7 @@ function GenerateMawb({
 	viewDoc = false,
 	chargeableWeight,
 	setGenerate = () => {},
-	activeCategory = '',
+	activeCategory = 'mawb',
 	hawbDetails = [],
 	setHawbDetails = () => {},
 	activeHawb = {},
@@ -130,9 +130,10 @@ function GenerateMawb({
 			data: {
 				...filteredData,
 				status          : 'generated',
-				document_number : activeCategory === 'hawb' ? activeHawb?.documentNo : taskItem?.awbNumber,
-				service_id      : taskItem?.serviceId,
-				service_type    : 'air_freight_service',
+				document_number : activeCategory === 'hawb'
+					? formData?.document_number || activeHawb?.documentNo : taskItem?.awbNumber,
+				service_id   : taskItem?.serviceId,
+				service_type : 'air_freight_service',
 			},
 			document_url: res || undefined,
 			file_name:
@@ -145,12 +146,13 @@ function GenerateMawb({
 						|| undefined,
 					document_url : res || undefined,
 					data         : {
-						document_number : activeCategory === 'hawb' ? activeHawb?.documentNo : taskItem?.awbNumber,
-						service_id      : taskItem?.serviceId,
-						service_type    : 'air_freight_service',
+						document_number: activeCategory === 'hawb'
+							? formData?.document_number || activeHawb?.documentNo : taskItem?.awbNumber,
+						service_id   : taskItem?.serviceId,
+						service_type : 'air_freight_service',
 						...filteredData,
-						status          : 'generated',
-						bl_detail_id    : taskItem?.blDetailId,
+						status       : 'generated',
+						bl_detail_id : taskItem?.blDetailId,
 					},
 				},
 			],
@@ -320,7 +322,7 @@ function GenerateMawb({
 					<ShipmentDetails
 						formData={filteredData}
 						whiteout={whiteout}
-						activeCategory={activeCategory}
+						taskItem={taskItem}
 					/>
 					<ContainerDetails
 						formData={filteredData}

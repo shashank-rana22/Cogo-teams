@@ -15,9 +15,9 @@
 	display: flex;
 	align-items: center;
 	padding: 8px 0 4px;
-	background: #f8f2e7;
-	border-top: 1px solid #f2f2f2;
+	background: #fff;
 	border-radius: 4px;
+	box-shadow: 0 -1px 2px rgb(0 0 0 / 15%);
 }
 
 .icon_wrap {
@@ -25,6 +25,10 @@
 	align-items: center;
 	margin: 0 8px;
 	cursor: pointer;
+
+	svg {
+		fill: #f68b21;
+	}
 }
 
 .attached_doc {
@@ -50,7 +54,7 @@
 	cursor: pointer;
 
 	path {
-		fill: #000;
+		fill: #f68b21;
 	}
 
 	&.loading {
@@ -67,7 +71,7 @@
 		.ui_text_area_control {
 			align-items: center;
 			color: black;
-			background-color: #f8f2e7;
+			background-color: #fff;
 		}
 	}
 }

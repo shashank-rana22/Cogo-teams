@@ -1,0 +1,70 @@
+.action_buttons {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}
+
+.action_buttons > button {
+	margin-left: 6px;
+}
+
+.type_container {
+	display: flex;
+}
+
+.type_container > button {
+	margin-right: 6px;
+}
+
+.date_range_container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.date_range_container > button {
+	margin: 4px 4px 4px 0;
+}
+
+.action_text {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}
+
+.filter_container {
+	margin: 4px 0;
+}
+
+.filter_heading {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}
+
+.inactive {
+	:global {
+		.ui_button_container {
+			background-color: var(--color-tertiary-blue-5);
+		}
+	}
+}
+
+.active {
+	:global {
+		.ui_button_container {
+			background-color: var(--color-tertiary-blue-4);
+		}
+	}
+}
+
+.filter_by_buttons {
+	:global {
+		.ui_button_container {
+			margin: 4px;
+			margin-left: 0;
+			color: black;
+
+			&:hover {
+				background-color: var(--color-tertiary-blue-4);
+			}
+		}
+	}
+}
