@@ -18,7 +18,8 @@
 }
 
 .fcl,
-.fcl_local {
+.fcl_local,
+.fcl_cfs {
 	svg path {
 		fill: var(--color-primary-error-red-2);
 	}
@@ -35,14 +36,5 @@
 
 	.icon_text {
 		color: var(--color-primary-error-red-3);
-	}
-}
-.fcl_cfs {
-	svg path {
-		fill: var(--color-primary-error-red-2);
-	}
-
-	.icon_text {
-		color: var(--color-primary-error-red-2);
 	}
 }
