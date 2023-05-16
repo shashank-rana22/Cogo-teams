@@ -2,7 +2,6 @@ import { IcMCfs } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 
 import CardHeader from '../../../../common/Card/CardHeader';
-// import LineItems from '../../../../common/Card/LineItems';
 import ShipmentInfo from '../../../../common/Card/ShipmentInfo';
 
 import CargoDetails from './CargoDetails';
@@ -46,12 +45,6 @@ function Card({ item = {} }) {
 				</div>
 
 				<div className={styles.separator} />
-
-				{/* <div className={styles.line_item}>
-					<LineItems item={item} />
-				</div>
-
-				<div className={styles.separator} /> */}
 
 				<div className={styles.cargo}>
 					<CargoDetails cargo_details={item?.cargo_details || []} item={item} />
