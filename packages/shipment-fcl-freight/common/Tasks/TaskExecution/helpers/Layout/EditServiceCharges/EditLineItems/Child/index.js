@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { v4 as uuid } from 'uuid';
 
 import Item from '../../../Item';
 
@@ -23,7 +24,7 @@ function Child({
 
 					if (control_item?.type === 'static') {
 						return (
-							<div key={control_item} style={{ width: `${flex}%` }} className={styles.static_container}>
+							<div key={uuid()} style={{ width: `${flex}%` }} className={styles.static_container}>
 								{render ? render(customValues) : customValues?.[control_item?.name]}
 							</div>
 						);
