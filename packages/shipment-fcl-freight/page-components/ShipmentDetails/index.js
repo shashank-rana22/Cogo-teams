@@ -48,6 +48,7 @@ function ShipmentDetails() {
 		case 'lastmile_ops':
 		case 'lastmile_ops_manager':
 			return <LastMileDesk get={get} activeStakeholder={activeStakeholder} />;
+
 		case 'document_desk':
 		case 'document_desk_manager':
 			return <DocumentDesk get={get} activeStakeholder={activeStakeholder} />;

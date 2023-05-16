@@ -26,7 +26,7 @@ function External({ tradePartnersData = {}, setAddPoc = () => {}, rolesPermissio
 	};
 
 	return ['import', 'export'].map((trade) => (
-		<div>
+		<div key={trade}>
 			<div className={styles.header}>
 				<div className={styles.heading}>
 					External:&nbsp;
@@ -68,7 +68,7 @@ function External({ tradePartnersData = {}, setAddPoc = () => {}, rolesPermissio
 			{showDetail[trade]
 				? (
 					<div>
-						{(relativeData[trade] || []).map((item) => <Card data={item} />)}
+						{(relativeData[trade] || []).map((item) => <Card key={item?.id} data={item} />)}
 					</div>
 				)
 				: null}
