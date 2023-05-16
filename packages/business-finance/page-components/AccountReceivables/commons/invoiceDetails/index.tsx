@@ -52,11 +52,11 @@ function InvoiceDetails({ item }) {
 				onClick={handleShow}
 				role="presentation"
 			>
-				<Tooltip placement="top" content="Invoice Timeline">
-					<div>
-						<IcMOverview width={24} height={24} />
-					</div>
-				</Tooltip>
+
+				<div>
+					<IcMOverview width={24} height={24} />
+				</div>
+
 			</div>
 			{showDetailsCard && (
 				<>

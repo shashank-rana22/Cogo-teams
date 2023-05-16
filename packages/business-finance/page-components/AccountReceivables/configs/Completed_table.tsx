@@ -1,5 +1,6 @@
 import { Pill, Tooltip } from '@cogoport/components';
 import getPrice from '@cogoport/forms/utils/get-formatted-price';
+import { IcMInfo, IcMOverview, IcMProvision } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
 import { CSSProperties } from 'react';
 
@@ -71,7 +72,7 @@ const completedColumn = ({
 		accessor : (row) => (
 			showName
 			&& (
-				(getByKey(row, 'organizationName') as string).length > 10 ? (
+				(getByKey(row, 'organizationName') as string).length > 12 ? (
 					<Tooltip
 						interactive
 						placement="top"
@@ -80,7 +81,7 @@ const completedColumn = ({
 						<text className={styles.cursor}>
 							{`${(getByKey(row, 'organizationName') as string).substring(
 								0,
-								10,
+								12,
 							)}...`}
 						</text>
 					</Tooltip>
@@ -146,14 +147,6 @@ const completedColumn = ({
 		Header   : 'SID',
 		accessor : (row) => (
 			<ShipmentView row={row} />
-		),
-	},
-	{
-		Header   : 'Entity',
-		accessor : (row) => (
-			<div style={{ width: '30px' }}>
-				{getByKey(row, 'entityCode') as string}
-			</div>
 		),
 	},
 	{
@@ -301,7 +294,7 @@ const completedColumn = ({
 	},
 
 	{
-		Header   : 'OverDue Days',
+		Header   : 'Overdue',
 		accessor : (row) => (
 			<div>
 				{getByKey(row, 'overDueDays') as number}
@@ -360,7 +353,39 @@ const completedColumn = ({
 	},
 
 	{
-		Header   : <div>Actions</div>,
+		Header:
+	<div className={styles.action_div}>
+		<span>
+			Actions
+		</span>
+		{' '}
+		<Tooltip
+			placement="top"
+			content={(
+				<div>
+					<div className={styles.div_flex}>
+						<IcMProvision
+							height={24}
+							width={24}
+							color="#F68B21"
+						/>
+						<span className={styles.margin_span}>
+							Remarks
+						</span>
+					</div>
+					<div className={styles.div_flex}>
+						<IcMOverview width={24} height={24} color="#F68B21" />
+						<span className={styles.margin_span}>
+							Invoice TimeLine
+						</span>
+					</div>
+				</div>
+
+			)}
+		>
+			<IcMInfo className={styles.icon_style} />
+		</Tooltip>
+	</div>,
 		id       : 'remarks',
 		accessor : (row) => (
 			<div style={{ display: 'flex', alignItems: 'center' }}>
