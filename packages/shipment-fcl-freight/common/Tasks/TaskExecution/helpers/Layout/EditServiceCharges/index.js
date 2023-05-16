@@ -9,8 +9,7 @@ import styles from './styles.module.css';
 
 function EditServiceCharges(props) {
 	const { shipment_data = {}, primary_service = {} } = useContext(ShipmentDetailContext);
-
-	const { controls, service_name = '' } = props;
+	const { controls, service_name = '', customValues = {} } = props;
 
 	const [q, setQ] = useState('');
 
@@ -30,9 +29,9 @@ function EditServiceCharges(props) {
 				>
 					<div>
 						{item?.code}
-						{' '}
+						&nbsp;
 						-
-						{' '}
+						&nbsp;
 						{item?.name || ''}
 					</div>
 
@@ -63,6 +62,7 @@ function EditServiceCharges(props) {
 					{...props}
 					primary_service={primary_service}
 					controls={finalControls}
+					customValues={customValues}
 				/>
 			) : null}
 		</div>

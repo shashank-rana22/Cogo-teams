@@ -105,12 +105,12 @@ function Item({
 				</div>
 				<div className={styles.invoice_status_and_action}>
 					<div className={styles.status}>
-						{itemStatus === 'rejected' ? (
-							<IcCError width={16} height={16} />
-						) : null}
 						<div className={`${styles[CNstatusMapping[itemStatus]]} ${styles.status_text}`}>
 							{startCase(CNstatusMapping[itemStatus])}
 						</div>
+						{itemStatus === 'rejected' ? (
+							<IcCError width={16} height={16} />
+						) : null}
 					</div>
 					{itemStatus === 'pending' ? (
 						<div>

@@ -2,7 +2,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
-const useListShipmentCreditNotes = ({ shipmentData = {} }) => {
+const useListCreditNotes = ({ shipmentData = {} }) => {
 	const [apiData, setApiData] = useState({});
 
 	const { id: shipment_id = '' } = shipmentData || {};
@@ -12,9 +12,9 @@ const useListShipmentCreditNotes = ({ shipmentData = {} }) => {
 		params : {
 			filters: {
 				shipment_id,
-				is_active: true,
+				// is_active: true,
 			},
-			combination_data_required: true,
+			additional_methods: ['credit_note'],
 		},
 	}, { manual: true });
 
@@ -40,4 +40,4 @@ const useListShipmentCreditNotes = ({ shipmentData = {} }) => {
 		refetch : getCreditNoteList,
 	};
 };
-export default useListShipmentCreditNotes;
+export default useListCreditNotes;
