@@ -19,7 +19,7 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 
 import styles from './styles.module.css';
 
-const services_additional_methods = ['stakeholder', 'service_objects', 'booking_requirement'];
+const SERVICES_ADDITIONAL_MTDS = ['stakeholder', 'service_objects', 'booking_requirement'];
 
 function CostBookingDesk({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
@@ -30,7 +30,7 @@ function CostBookingDesk({ get = {}, activeStakeholder = '' }) {
 
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
-		additional_methods: services_additional_methods,
+		additional_methods: SERVICES_ADDITIONAL_MTDS,
 		activeStakeholder,
 	});
 
