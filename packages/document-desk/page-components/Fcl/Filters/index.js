@@ -48,33 +48,31 @@ function Filters() {
 			</div>
 
 			<div className={styles.popover_container}>
-				{!['fcl_cfs']?.includes(stepperTab) ? (
-					<Popover
-						placement="bottom"
-						render={(
-							<FilterBy
-								popoverFilter={popoverFilter}
-								setPopoverFilter={setPopoverFilter}
-								setShowPopover={setShowPopover}
-							/>
-						)}
-						visible={showPopover}
-						onClickOutside={() => setShowPopover(false)}
+				<Popover
+					placement="bottom"
+					render={(
+						<FilterBy
+							popoverFilter={popoverFilter}
+							setPopoverFilter={setPopoverFilter}
+							setShowPopover={setShowPopover}
+						/>
+					)}
+					visible={showPopover}
+					onClickOutside={() => setShowPopover(false)}
+				>
+					<Button
+						themeType="secondary"
+						onClick={() => {
+							setPopoverFilter(filters);
+							setShowPopover(!showPopover);
+						}}
 					>
-						<Button
-							themeType="secondary"
-							onClick={() => {
-								setPopoverFilter(filters);
-								setShowPopover(!showPopover);
-							}}
-						>
-							<div className={styles.popover_button_text}>
-								<IcMFilter height={16} width={16} />
-								<span className={styles.button_text}> Filter By</span>
-							</div>
-						</Button>
-					</Popover>
-				) : null}
+						<div className={styles.popover_button_text}>
+							<IcMFilter height={16} width={16} />
+							<span className={styles.button_text}> Filter By</span>
+						</div>
+					</Button>
+				</Popover>
 			</div>
 
 			<div className={styles.version}>
