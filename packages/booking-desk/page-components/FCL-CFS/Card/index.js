@@ -7,7 +7,7 @@ import ShipmentInfo from '../../../commons/Card/ShipmentInfo';
 import isCardCritical from '../../../helpers/isCardCritical';
 
 import CargoDetails from './CargoDetails';
-import { card, card_body, separator, critical_card } from './styles.module.css';
+import styles from './styles.module.css';
 
 export default function Card({ item = {}, couldBeCardsCritical = false }) {
 	const router = useRouter();
@@ -23,18 +23,18 @@ export default function Card({ item = {}, couldBeCardsCritical = false }) {
 			role="button"
 			tabIndex={0}
 			onClick={handleCardClick}
-			className={`${card} ${couldBeCardsCritical && isCardCritical({ item }) ? critical_card : ''}`}
+			className={`${styles.card} ${couldBeCardsCritical && isCardCritical({ item }) ? styles.critical_card : ''}`}
 		>
 			<CardHeader item={item} />
 
-			<div className={card_body}>
+			<div className={styles.card_body}>
 				<ShipmentInfo item={item} />
 
-				<div className={separator} />
+				<div className={styles.separator} />
 
 				<PortDetails data={item} icon={{ Icon: IcMFcfs, text: 'FCL CFS' }} />
 
-				<div className={separator} />
+				<div className={styles.separator} />
 
 				<CargoDetails cargo_details={item?.cargo_details || []} />
 			</div>
