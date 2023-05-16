@@ -10,17 +10,12 @@ const applyRegEx = (searchString, list, key, aliases = []) => {
 
 		const { options = [] } = newItem;
 
-		const filteredItem = newList.find((listItem) => item.key === listItem.key);
+		const already_present = newList.some((listItem) => item.key === listItem.key);
 
-		let already_present = false;
-		if (!isEmpty(filteredItem)) already_present = true;
-
-		let isSubNavPresent = false;
 		const newOptions = [];
 		if (!isEmpty(options)) {
 			(options || []).forEach((optionItem) => {
 				if (optionItem.title.toLowerCase().includes(newSearchString)) {
-					isSubNavPresent = true;
 					newOptions.push(optionItem);
 				}
 			});
@@ -30,16 +25,11 @@ const applyRegEx = (searchString, list, key, aliases = []) => {
 			newItem = { ...item, options: newOptions };
 		}
 
-		let isPresentInAlias = false;
-
-		aliases.forEach((alias) => {
-			if (newItem[alias] && newItem[alias].toLowerCase().includes(newSearchString)) {
-				isPresentInAlias = true;
-			}
-		});
+		const isPresentInAlias = (aliases || [])
+			.some((alias) => newItem[alias] && newItem[alias].toLowerCase().includes(newSearchString));
 
 		if (!already_present
-			&& (!!isPresentInAlias || isSubNavPresent || newItem[key].toLowerCase().includes(newSearchString))) {
+			&& (isPresentInAlias || !isEmpty(newOptions) || newItem[key].toLowerCase().includes(newSearchString))) {
 			newList.push(newItem);
 		}
 	});
