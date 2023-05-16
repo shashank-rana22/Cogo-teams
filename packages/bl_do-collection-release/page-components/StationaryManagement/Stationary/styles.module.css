@@ -1,0 +1,35 @@
+.container {
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 8px rgb(51 51 51 / 20%);
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	padding: 8px;
+	border-bottom: 1px solid #d9d9d9;
+}
+
+.body {
+	padding: 8px;
+}
+
+.table_container {
+	padding: 8px;
+}
+
+.select_container {
+	width: 40%;
+	padding: 8px;
+}
+
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.loading {
+	display: flex;
+	justify-content: center;
+}
