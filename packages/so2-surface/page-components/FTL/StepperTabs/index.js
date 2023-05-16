@@ -13,8 +13,6 @@ function StepperTabs() {
 
 		const tempFilters = filters;
 		tempFilters.page = 1;
-		tempFilters.isCriticalOn = firstTab?.isCriticalVisible && filters?.isCriticalOn;
-
 		setActiveTab(firstTab.value);
 		setFilters(tempFilters);
 		setStepperTab(val);

@@ -9,7 +9,7 @@ const useBulkUpdateSO2 = () => {
 		method : 'POST',
 	}, { manual: true });
 
-	const apiTrigger = async ({ checkedRows = [], allocatedSo2 = '' }) => {
+	const apiTrigger = async ({ checkedRows = [], allocatedSo2 = '', setCheckedRows = () => {} }) => {
 		try {
 			await trigger(
 				{
@@ -25,7 +25,7 @@ const useBulkUpdateSO2 = () => {
 				},
 			);
 			Toast.success('SO2 Updated Successfully');
-			// refetch();
+			setCheckedRows(new Set());
 		} catch (err) {
 			Toast.error('Something Went Wrong');
 		}

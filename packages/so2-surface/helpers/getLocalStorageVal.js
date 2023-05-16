@@ -21,7 +21,6 @@ const getLocalStorageVal = () => {
 	if (!stepperConfig.some((tab) => tab.value === activeTab)) {
 		const tabConfig = stepperConfig?.[0];
 		activeTab = tabConfig?.value || '';
-		filters.isCriticalOn = tabConfig?.isCriticalVisible && filters?.isCritical;
 	}
 
 	return { filters, activeTab, scopeFilters, documentDeskVersion, stepperTab };

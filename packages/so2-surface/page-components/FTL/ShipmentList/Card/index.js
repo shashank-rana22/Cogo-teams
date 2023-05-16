@@ -12,7 +12,6 @@ import ShipmentInfo from './ShipmentInfo';
 import styles from './styles.module.css';
 
 const iconMapping = {
-	// ftl_freight       : { Icon: IcMFftl, text: 'FTL' },
 	ftl_freight: { Icon: IcMFftl, text: 'FTL' },
 };
 

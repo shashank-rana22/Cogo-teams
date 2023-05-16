@@ -12,11 +12,8 @@ function DeskTabs({ tabData = {} }) {
 	const tabs = tabsConfig[stepperTab] || [];
 
 	const onChangeTab = (val) => {
-		const tabConfig = tabsConfig[stepperTab]?.find((i) => i.value === val);
-
 		const tempFilters = filters;
 		tempFilters.page = 1;
-		tempFilters.isCriticalOn = tabConfig?.isCriticalVisible && filters.isCriticalOn;
 		setFilters(tempFilters);
 		setActiveTab(val);
 	};

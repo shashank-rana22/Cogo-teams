@@ -12,7 +12,7 @@ import ListPagination from './ListPagination';
 import styles from './styles.module.css';
 
 function ShipmentList({ loading, data = {} }) {
-	const { activeTab } = useContext(DashboardContext);
+	const { activeTab, setFilters, filters } = useContext(DashboardContext);
 	const { apiTrigger } = useBulkUpdateSO2();
 
 	const { list = [] } = data || {};
@@ -21,7 +21,8 @@ function ShipmentList({ loading, data = {} }) {
 	const [show, setShow] = useState(false);
 
 	const handAllocate = () => {
-		apiTrigger({ checkedRows, allocatedSo2 });
+		apiTrigger({ checkedRows, allocatedSo2, setCheckedRows });
+		setFilters({ ...filters });
 		setShow(false);
 	};
 	function Pagination() {
