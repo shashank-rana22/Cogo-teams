@@ -1375,6 +1375,18 @@ const navigationMappingAdmin = {
 				main_apis     : ['list_lastmile_desk_shipments'],
 				possible_apis : [...apis.document_desk, ...apis.cogolens, ...apis.shipment],
 			},
+			{
+				key           : 'coe-so2_surface',
+				title         : 'SO2 Dashboard',
+				href          : '/v2/so2-surface',
+				as            : '/v2/so2-surface',
+				type          : 'link',
+				// main_apis     : [],
+				// possible_apis : apis.so2_surface,
+				main_apis     : ['list_lastmile_desk_shipments'],
+				possible_apis : [...apis.document_desk, ...apis.cogolens, ...apis.shipment],
+
+			},
 		],
 	},
 	terms_and_conditions: {
