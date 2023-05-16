@@ -12,6 +12,10 @@ function Footer({
 	shipmentData = {},
 	formProps = {},
 	haveToUpsell = false,
+	step = 1,
+	setStep = () => {},
+	organization_id = '',
+	user = {},
 
 }) {
 	const { watch } = formProps;
@@ -22,6 +26,8 @@ function Footer({
 		primary_service,
 		service,
 		shipmentData,
+		organization_id,
+		user,
 	});
 
 	return (
@@ -35,15 +41,23 @@ function Footer({
 				Cancel
 			</Button>
 
-			<Button
-				type="submit"
-				disabled={loading}
-				onClick={() => (onAddService(formValues))}
-				style={{ marginLeft: 12 }}
-				id="shipment_form_header_submit"
-			>
-				{loading ? 'Adding Service...' : 'Submit'}
-			</Button>
+			{step === 1
+				? (
+					<Button onClick={() => setStep(2)} style={{ marginLeft: 12 }}>
+						Next
+					</Button>
+				) : (
+					<Button
+						type="submit"
+						disabled={loading}
+						onClick={() => (onAddService(formValues))}
+						style={{ marginLeft: 12 }}
+						id="shipment_form_header_submit"
+					>
+						{loading ? 'Adding Service...' : 'Submit'}
+					</Button>
+				)}
+
 		</div>
 	);
 }

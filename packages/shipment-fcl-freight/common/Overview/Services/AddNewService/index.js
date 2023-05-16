@@ -85,6 +85,7 @@ function AddNewService({
 					upsellableService={upsellableService}
 					primary_service={primary_service}
 					haveToUpsell={haveToUpsell}
+					activeStakeholder={activeStakeholder}
 				/>
 			) : null}
 

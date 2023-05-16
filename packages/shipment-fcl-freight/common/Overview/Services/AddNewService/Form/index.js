@@ -1,4 +1,5 @@
-import { Modal } from '@cogoport/components';
+import { Modal, RadioGroup } from '@cogoport/components';
+import { AsyncSelect } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -17,12 +18,19 @@ function Form({
 	primary_service,
 	closeModal,
 	haveToUpsell,
+	activeStakeholder = '',
 }) {
 	const [truckTypeToggle, setTruckTypeToggle] = useState(false);
 
 	const service = upsellableService.service_type.replace('_service', '');
 
+	const [org, setOrg] = useState('');
+
 	const { handleShipmentsClick } = useShipmentBack();
+
+	const [step, setStep] = useState(1);
+
+	const [user, setUser] = useState(null);
 
 	const { controls, formProps } = useServiceUpsellControls({
 		service,
@@ -31,6 +39,23 @@ function Form({
 		setTruckTypeToggle,
 		upsellableService,
 	});
+
+	const { consignee_shipper, importer_exporter, importer_exporter_id, consignee_shipper_id } = shipmentData;
+
+	const haveToAskOrgDetails = !['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder);
+
+	const organization_id = activeStakeholder === 'booking_agent' ? importer_exporter_id : consignee_shipper_id;
+
+	const ORG_OPTIONS = [
+		{
+			label : consignee_shipper?.business_name,
+			value : consignee_shipper_id,
+		},
+		{
+			label : importer_exporter?.business_name,
+			value : importer_exporter_id,
+		},
+	];
 
 	return (
 		<Modal
@@ -60,9 +85,49 @@ function Form({
 			)}
 			/>
 			<Modal.Body>
-				{ controls?.length === 0
-					? <div> Are you sure you want to upsell this service?</div>
-					: <Layout controls={controls} formProps={formProps} />}
+				{ controls?.length === 0 && step === 1
+					? <div> Are you sure you want to upsell this service?</div> : null }
+				{ controls?.length !== 0 && step === 1 ? <Layout controls={controls} formProps={formProps} /> : null}
+
+				{ step === 2 && haveToAskOrgDetails
+					? (
+						<>
+							<div> Choose The organisation for which you want to upsell- </div>
+							<RadioGroup
+								options={ORG_OPTIONS}
+								value={org}
+								onChange={(role) => setOrg(role)}
+								className={styles.group_radio}
+							/>
+						</>
+					) : null}
+
+				{
+					step === 2 ? (
+						<AsyncSelect
+							className={styles.select}
+							asyncKey="organization_users"
+							isClearable
+							valueKey="custom_key"
+							initialCall={false}
+							placeholder="Select Organization User"
+							value={user}
+							params={{
+								filters:
+								{
+									organization_id,
+									status: 'active',
+								},
+								page_limit: 30,
+							}}
+							getModifiedOptions={(option) => option?.options?.map(
+								(op) => ({ ...op, custom_key: { user_id: op.user_id, branch_id: op.branch.id } }),
+							)}
+							onChange={setUser}
+						/>
+					) : null
+}
+
 			</Modal.Body>
 			<Modal.Footer>
 				<Footer
@@ -72,6 +137,10 @@ function Form({
 					shipmentData={shipmentData}
 					primary_service={primary_service}
 					haveToUpsell={haveToUpsell}
+					step={step}
+					setStep={setStep}
+					organization_id={organization_id}
+					user={user}
 				/>
 			</Modal.Footer>
 		</Modal>
