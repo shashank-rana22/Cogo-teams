@@ -23,7 +23,7 @@ function Child({
 
 					if (control_item?.type === 'static') {
 						return (
-							<div style={{ width: `${flex}%` }} className={styles.static_container}>
+							<div key={control_item} style={{ width: `${flex}%` }} className={styles.static_container}>
 								{render ? render(customValues) : customValues?.[control_item?.name]}
 							</div>
 						);

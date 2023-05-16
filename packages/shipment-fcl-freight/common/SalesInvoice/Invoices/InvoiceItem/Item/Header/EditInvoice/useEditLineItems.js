@@ -7,141 +7,9 @@ import { startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
+import rawControls from './rawControls';
+
 const admin_email_ids = ['vinod.talapa@cogoport.com'];
-
-const handleDisableCond = (charge, isFclFreight, shipment_data) => {
-	const disable =		charge?.service_type === 'fcl_freight_service'
-		&& !isFclFreight
-		&& shipment_data?.serial_id > 130000;
-
-	return disable;
-};
-
-const rawControls = (
-	handleChange,
-	charge,
-	info,
-	isFclFreight,
-	shipment_data,
-	index,
-	isAuthorised,
-	isAirFreight,
-	trade_mapping = {},
-) => ({
-	type         : 'fieldArray',
-	name         : `${charge?.service_id}:${index}`,
-	subType      : 'edit_service',
-	service_name : charge?.service_type,
-	showHeader   : true,
-	showButtons  : !isAirFreight || isAuthorised,
-	noDeleteButtonTill:
-		isAirFreight && !isAuthorised ? charge?.line_items?.length : 0,
-	buttonText : 'Add Line Item',
-	value      : [
-		{
-			code             : '',
-			alias            : '',
-			sac_code         : '',
-			currency         : '',
-			price_discounted : '',
-			quantity         : '',
-			exchange_rate    : '',
-			tax              : '',
-			total            : '',
-		},
-	],
-	controls: [
-		{
-			label: startCase(
-				`${
-					(`${shipment_data?.shipment_type}_service` !== charge?.service_type
-						&& trade_mapping[charge?.trade_type])
-					|| ''
-				} - ${charge?.service_type}`,
-			),
-			type        : 'select',
-			name        : 'code',
-			span        : 2,
-			handleChange,
-			placeholder : 'select line item',
-			disabled:
-				handleDisableCond(charge, isFclFreight, shipment_data)
-				|| (isAirFreight && !isAuthorised),
-			rules: { required: 'Required' },
-		},
-		{
-			label: (
-				<>
-					<div>Alias Name</div>
-					{info}
-				</>
-			),
-			type        : 'text',
-			name        : 'alias',
-			placeholder : 'Enter alias name/code',
-			rules       : {
-				validate: (v) => v?.length >= 3 || isEmpty(v) || 'Characters should be >= 3',
-			},
-			disabled : handleDisableCond(charge, isFclFreight, shipment_data),
-			span     : 2,
-		},
-		{
-			label       : 'Unit',
-			type        : 'select',
-			name        : 'unit',
-			placeholder : 'select...',
-			options     : [],
-			disabled:
-				handleDisableCond(charge, isFclFreight, shipment_data)
-				|| (isAirFreight && !isAuthorised),
-			span: 1.5,
-		},
-		{
-			name           : 'currency',
-			label          : 'Currency',
-			type           : 'select',
-			showOptional   : false,
-			className      : 'size-sm',
-			optionsListKey : 'currencies',
-			placeholder    : 'Select Currency',
-			rules          : { required: 'currency is required' },
-			span           : 1.5,
-			disabled:
-				handleDisableCond(charge, isFclFreight, shipment_data)
-				|| (isAirFreight && !isAuthorised),
-		},
-		{
-			label       : 'Price',
-			name        : 'price_discounted',
-			type        : 'number',
-			placeholder : 'enter price',
-			span        : 1.5,
-			rules       : {
-				required : 'Required',
-				validate : (v) => v > 0 || 'Price must be greater than 0',
-			},
-			disabled: handleDisableCond(charge, isFclFreight, shipment_data),
-		},
-		{
-			label       : 'Quantity',
-			name        : 'quantity',
-			type        : 'number',
-			placeholder : 'enter quantity',
-			rules       : { required: 'Required', min: 1 },
-			span        : 1,
-			disabled:
-				handleDisableCond(charge, isFclFreight, shipment_data)
-				|| (isAirFreight && !isAuthorised),
-		},
-		{
-			label  : 'Amount (Tax Excl.)',
-			type   : 'static',
-			name   : 'total',
-			span   : 1.5,
-			render : (item) => <p className="amount-excl">{item?.total}</p>,
-		},
-	],
-});
 
 const useEditLineItems = ({
 	invoice,
@@ -163,7 +31,7 @@ const useEditLineItems = ({
 
 	const [selectedCodes, setSelectedCodes] = useState({});
 	const [allChargeCodes, setAllChargeCodes] = useState({});
-	const [errors, setErrors] = useState({});
+	// const [errors, setErrors] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_sell_quotations',
@@ -179,6 +47,25 @@ const useEditLineItems = ({
 	const trade_mapping = {
 		import : 'Destination',
 		export : 'Origin',
+	};
+	const generateDefaultValues = ({ values }) => {
+		const defaultValues = {};
+
+		values.forEach((control) => {
+			if (control.type === 'edit_service_charges') {
+				defaultValues[control.name] = control.value.map((value) => {
+					const fieldValue = {};
+
+					control.controls.forEach((subControl) => {
+						fieldValue[subControl.name] = value[subControl.name] || '';
+					});
+
+					return fieldValue;
+				});
+			}
+		});
+
+		return defaultValues;
 	};
 
 	const controls = services.map((service, index) => ({
@@ -210,7 +97,8 @@ const useEditLineItems = ({
 		})),
 	}));
 
-	const { control, watch, handleSubmit } = useForm(controls);
+	const { handleSubmit, control, setValue, watch, formState: { errors = {} } } = useForm(controls);
+	const defaultValues = generateDefaultValues({ values: controls });
 
 	const formValues = watch();
 
@@ -233,13 +121,13 @@ const useEditLineItems = ({
 	};
 
 	const newFormValues = prepareFormValues(selectedCodes, formValues);
-	Object.keys(fields).forEach((key) => {
-		customValues[key] = {
-			formValues : newFormValues[key],
-			label      : labels[key],
-			id         : key,
-		};
-	});
+	// Object.keys(fields).forEach((key) => {
+	// 	customValues[key] = {
+	// 		formValues : newFormValues[key],
+	// 		label      : labels[key],
+	// 		id         : key,
+	// 	};
+	// });
 
 	controls.forEach((ctrl) => {
 		if (ctrl?.controls) {
@@ -313,7 +201,7 @@ const useEditLineItems = ({
 				}
 			});
 
-			setErrors({ ...newErrors });
+			// setErrors({ ...newErrors });
 			return !(Object.keys(newErrors).length > 0);
 		}
 		return true;
@@ -376,9 +264,9 @@ const useEditLineItems = ({
 		}
 	};
 
-	const onError = (err) => {
-		setErrors({ ...err });
-	};
+	// const onError = (err) => {
+	// 	setErrors({ ...err });
+	// };
 
 	return {
 		onCreate,
@@ -386,9 +274,13 @@ const useEditLineItems = ({
 		controls,
 		loading,
 		customValues,
-		fields,
-		onError,
+		// fields,
+		// onError,
 		errors,
+		control,
+		setValue,
+		watch,
+		defaultValues,
 	};
 };
 

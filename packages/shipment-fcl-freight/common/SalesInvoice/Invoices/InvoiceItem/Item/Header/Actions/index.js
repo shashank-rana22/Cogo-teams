@@ -225,7 +225,7 @@ function Actions({
 
 						{!['reviewed', 'approved', 'revoked'].includes(invoice.status) ? (
 							<Button
-								className="primary sm"
+								size="sm"
 								onClick={() => setShowReview(true)}
 								themeType="accent"
 								disabled={disableMarkAsReviewed || invoice?.is_eta_etd}
@@ -235,7 +235,7 @@ function Actions({
 						) : null}
 
 						{invoice?.status === 'reviewed' ? (
-							<Button className="primary sm" onClick={() => setOTPModal(true)}>
+							<Button size="sm" onClick={() => setOTPModal(true)}>
 								Send OTP for Approval
 							</Button>
 						) : null}
@@ -321,7 +321,8 @@ function Actions({
 								<IcMOverflowDot />
 							</div>
 						</Popover>
-						) : (
+						)
+						: (
 							<div style={{ width: '34px' }} />
 						)}
 

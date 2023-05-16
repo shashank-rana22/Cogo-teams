@@ -1,12 +1,11 @@
 import { Button, Modal } from '@cogoport/components';
 import React, { useState } from 'react';
 
-// import useUpdateInvoiceStatus from '../../../../../../../hooks/useUpdateInvoiceStatus';
-import useUpdateShipmentCreditNote from '../../../../../../../hooks/useUpdateShipmentCreditNote';
+import useUpdateInvoiceStatus from '../../../../../../../hooks/useUpdateInvoiceStatus';
 
 import Confirmation from './Confirmation';
+import LinersExchangeRateConfirm from './LinersExchangeRate';
 import styles from './styles.module.css';
-// import LinersExchangeRateConfirm from './LinersExchangeRate';
 
 function ReviewServices({
 	showReview = false,
@@ -20,7 +19,12 @@ function ReviewServices({
 	const [value, setValue] = useState(false);
 	const [showExchangeRateConfirmation, setShowExchangeRateConfirmation] = useState(changeApplicableState);
 
-	const { loading, apiTrigger } = useUpdateShipmentCreditNote({ refetch });
+	const refetchAfterCall = () => {
+		setShowReview(false);
+		refetch();
+	};
+
+	const { loading, apiTrigger } = useUpdateInvoiceStatus({ refetch: refetchAfterCall });
 
 	const handleUpdate = () => {
 		apiTrigger({
@@ -28,14 +32,21 @@ function ReviewServices({
 			status : value ? 'reviewed' : undefined,
 		});
 	};
-	return (
+
+	return showExchangeRateConfirmation ? (
+		<LinersExchangeRateConfirm
+			invoice={invoice}
+			setShowExchangeRateConfirmation={setShowExchangeRateConfirmation}
+			showExchangeRateConfirmation={showExchangeRateConfirmation}
+			setShow={setShowReview}
+		/>
+	) : (
 		<Modal show={showReview} closable={false}>
 			<Modal.Header title="MARK AS REVIEWED" />
 			<Modal.Body>
 				<div className={styles.Form}>
 					<Confirmation value={value} setValue={setValue} />
 				</div>
-
 			</Modal.Body>
 			<Modal.Footer>
 				<Button
@@ -45,27 +56,15 @@ function ReviewServices({
 				>
 					Close
 				</Button>
-
 				<Button
 					onClick={handleUpdate}
 					disabled={loading || !value}
 				>
 					Reviewed
 				</Button>
-
 			</Modal.Footer>
 		</Modal>
 	);
-	// showExchangeRateConfirmation ? (
-	// <LinersExchangeRateConfirm
-	// 	invoice={invoice}
-	// 	setShowExchangeRateConfirmation={setShowExchangeRateConfirmation}
-	// 	showExchangeRateConfirmation={showExchangeRateConfirmation}
-	// 	setShow={setShowReview}
-	// />
-	// ) : (
-
-	// );
 }
 
 export default ReviewServices;

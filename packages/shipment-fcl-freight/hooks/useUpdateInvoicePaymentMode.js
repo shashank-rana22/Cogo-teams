@@ -2,12 +2,12 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-const useUpdatePaymentMode = ({
+const useUpdateInvoicePaymentMode = ({
 	refetch = () => {},
 	payload = {},
 }) => {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : '/update_shipment_invoice_payment_mode',
+		url    : 'fcl_freight/update_invoice_payment_mode',
 		method : 'POST',
 	}, { manual: true });
 
@@ -31,4 +31,4 @@ const useUpdatePaymentMode = ({
 	return { changePaymentMode, loading, data };
 };
 
-export default useUpdatePaymentMode;
+export default useUpdateInvoicePaymentMode;

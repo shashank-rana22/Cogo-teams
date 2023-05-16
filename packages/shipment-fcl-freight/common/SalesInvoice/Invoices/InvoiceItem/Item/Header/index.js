@@ -80,16 +80,15 @@ function Header({
 	};
 
 	const creditSource = invoice?.credit_option?.credit_source?.split('_');
+	console.log(creditSource, " :creditSource : ",invoice);
 
 	// const restrictCN =
 	// 	['fcl_freight', 'lcl_freight', 'rail_domestic_freight'].includes(
 	// 		shipment_data?.shipment_type,
 	// 	) && shipment_data?.state === 'cancelled';
 
-	const showRequestCN =		showCN
-		&& !invoice.is_revoked
-		&& !RESTRICT_REVOKED_STATUS.includes(invoice.status)
-		&& (shipment_data?.serial_id > 120347 || isAuthorized);
+	const showRequestCN = showCN && !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
+	&& (shipment_data?.serial_id > 120347 || isAuthorized);
 
 	return (
 		<div className={styles.container}>
@@ -146,10 +145,9 @@ function Header({
 				<div className={styles.invoice_info}>
 					<div className={styles.so_container}>
 						<div
-							className={styles.so_number}
+							className={cl`${styles.so_number} ${!isEmpty(bfInvoice) ? styles.active : ''}`}
 							role="button"
 							tabIndex={0}
-							// className={!isEmpty(bfInvoice) ? 'active' : null}
 							onClick={() => (!isEmpty(bfInvoice)
 								? handleDownload(
 									bfInvoice?.invoicePdfUrl || bfInvoice?.proformaPdfUrl,
@@ -252,7 +250,7 @@ function Header({
 								textTransform : 'capitalize',
 								letterSpacing : '0px',
 							}}
-							className="primary sm"
+							size="sm"
 							onClick={() => handleClick('amendment_requested')}
 						>
 							Request Amendment
@@ -266,7 +264,7 @@ function Header({
 								textTransform : 'capitalize',
 								letterSpacing : '0px',
 							}}
-							className="primary sm"
+							size="sm"
 							onClick={() => setAskNullify(true)}
 						>
 							Request CN

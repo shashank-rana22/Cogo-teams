@@ -45,24 +45,11 @@ function UserInfo({
 	return (
 		<div className={styles.user_info_container}>
 			<RadioGroup
+				className={styles.radio_group}
 				options={organizationOptions}
 				value={selectedUser}
 				onChange={(item) => setSelectedUser(item)}
 			/>
-
-			<div className={styles.actions}>
-				<Button
-					className="secondary md"
-					onClick={() => setOTPModal(false)}
-					style={{ border: 'none' }}
-				>
-					Cancel
-				</Button>
-
-				<Button className="primary md" onClick={() => handleClick()}>
-					Send
-				</Button>
-			</div>
 		</div>
 	);
 }

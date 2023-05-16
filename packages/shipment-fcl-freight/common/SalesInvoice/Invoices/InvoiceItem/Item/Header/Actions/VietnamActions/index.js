@@ -195,7 +195,7 @@ function Actions({
 
 						{!['reviewed', 'approved', 'revoked'].includes(invoice.status) ? (
 							<Button
-								className="primary sm"
+								size="sm"
 								onClick={() => setShowReview(true)}
 								disabled={disableMarkAsReviewed}
 							>
@@ -217,7 +217,7 @@ function Actions({
 						&& bfInvoice?.proformaPdfUrl && (
 							<div className={styles.review_invoice}>
 								<Button
-									className="primary sm"
+									size="sm"
 									onClick={updateInvoiceStatus}
 									disabled={loading}
 								>

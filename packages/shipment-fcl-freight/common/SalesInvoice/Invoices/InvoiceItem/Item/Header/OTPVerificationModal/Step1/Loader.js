@@ -1,7 +1,7 @@
+import { Skeleton } from '@cogoport/components';
 import React from 'react';
-import { Skeleton } from '@cogoport/front/components/admin';
 
-const Loader = () => {
+function Loader() {
 	return (
 		<div>
 			<div style={{ margin: '16px' }}>
@@ -20,6 +20,6 @@ const Loader = () => {
 			</div>
 		</div>
 	);
-};
+}
 
 export default Loader;

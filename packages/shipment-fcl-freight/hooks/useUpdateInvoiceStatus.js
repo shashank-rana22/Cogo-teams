@@ -2,12 +2,12 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-const useUpdateShipmentCreditNote = ({
+const useUpdateInvoiceStatus = ({
 	refetch = () => {},
 	successMessage = 'Updated Successfully!',
 }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_shipment_credit_note',
+		url    : 'fcl_freight/update_invoice_status',
 		method : 'POST',
 	});
 
@@ -27,4 +27,4 @@ const useUpdateShipmentCreditNote = ({
 	};
 };
 
-export default useUpdateShipmentCreditNote;
+export default useUpdateInvoiceStatus;

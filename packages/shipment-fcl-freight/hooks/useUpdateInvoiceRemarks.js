@@ -1,13 +1,13 @@
-import { useRequest } from '@cogoport/request';
 import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
+import { useRequest } from '@cogoport/request';
 
-const useReviewInvoice = ({ 
+const useUpdateInvoiceRemarks = ({
 	refetch = () => {},
 	payload = {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/add_shipment_invoice_combination_remarks',
+		url    : 'fcl_freight/update_invoice_remarks',
 		method : 'POST',
 	}, { manual: true });
 
@@ -24,7 +24,7 @@ const useReviewInvoice = ({
 			toastApiError(error?.data);
 		}
 	};
-	return { onSubmitRemarks,loading, };
+	return { onSubmitRemarks, loading };
 };
 
-export default useReviewInvoice;
+export default useUpdateInvoiceRemarks;

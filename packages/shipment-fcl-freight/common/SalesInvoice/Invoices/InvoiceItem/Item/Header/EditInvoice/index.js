@@ -1,17 +1,13 @@
 import { Button, Modal } from '@cogoport/components';
-// import { useForm } from '@cogoport/forms';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import Layout from '../../../../../../Tasks/TaskExecution/helpers/Layout';
-
-import Info from './Info';
 // import getDefaultValues from '../../../../../../Tasks/TaskExecution/utils/get-default-values';
-
 // import controls from './controls';
-// import useEditLineItems from '../../../../../../../hooks/useEditLineItems';
 // import Info from './Info';
+import Form from './Form';
+import Info from './Info';
 import styles from './styles.module.css';
 import useEditLineItems from './useEditLineItems';
 
@@ -65,9 +61,11 @@ function EditInvoice({
 		onCreate,
 		handleSubmit,
 		customValues,
-		fields,
-		onError,
 		errors,
+		control,
+		setValue,
+		watch,
+		defaultValues,
 	} = useEditLineItems({
 		invoice,
 		onClose,
@@ -76,6 +74,19 @@ function EditInvoice({
 		shipment_data,
 		info         : <Info />,
 	});
+
+	const formValues = watch();
+
+	useEffect(() => {
+		if (defaultValues) {
+			Object.keys(defaultValues).forEach((fieldName) => {
+				if (!formValues[fieldName]) {
+					setValue(fieldName, defaultValues[fieldName]);
+				}
+			});
+		}
+	}, [defaultValues, watch, setValue, formValues]);
+
 	return (
 		<Modal
 			size="xl"
@@ -104,20 +115,16 @@ function EditInvoice({
 						</span>
 					</div>
 
-					<div className={styles.layout}>
-						<Layout
-							control={controls}
-							fields={fields}
-							errors={errors}
-						/>
-						<Button
-							className="primary md"
-							style={{ marginLeft: '16px' }}
-						>
-							Add Line Item
-						</Button>
-
-					</div>
+					<Form
+							// data={data}
+						invoiceData={invoice}
+							// prevData={prevData}
+						controls={controls}
+						defaultValues={defaultValues}
+						errors={errors}
+						control={control}
+						setValue={setValue}
+					/>
 				</div>
 
 			</Modal.Body>
@@ -132,7 +139,7 @@ function EditInvoice({
 
 				<Button
 					className="primary md"
-						// onClick={handleSubmit(onCreate, onError)}
+					onClick={handleSubmit(onCreate)}
 					style={{ marginLeft: '16px' }}
 				>
 					Save
