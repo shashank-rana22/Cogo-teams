@@ -119,6 +119,16 @@ function GenerateMAWB({
 
 	const { data:hawbDataList = {}, loading:hawbListLoading, getHawbList } = useGetHawbList(item.shipmentId);
 
+	let cogoSeriesNumber:Array<number> = [];
+
+	hawbDetails?.forEach((itm) => {
+		if (String(itm?.documentNo)?.includes('COGO')) {
+			cogoSeriesNumber.push(Number((itm?.documentNo || '').slice(5)));
+		}
+	});
+
+	cogoSeriesNumber = cogoSeriesNumber.sort();
+
 	useEffect(() => {
 		if (activeCategory === 'hawb') {
 			getHawbList();
@@ -200,7 +210,7 @@ function GenerateMAWB({
 					? {
 						...hawbItem,
 						documentNo: activeHawb.documentNo ? activeHawb.documentNo
-							: `COGO-${taskItem.serialId}${hawbDetails.length + 1}`,
+							: `COGO-${cogoSeriesNumber[cogoSeriesNumber.length - 1] + 1}`,
 					}
 					: hawbItem)),
 			);
@@ -369,6 +379,7 @@ function GenerateMAWB({
 						taskItem={taskItem}
 						formValues={formValues}
 						setCustomHawbNumber={setCustomHawbNumber}
+						cogoSeriesNumber={cogoSeriesNumber}
 					/>
 				</>
 			)}

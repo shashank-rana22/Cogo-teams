@@ -22,9 +22,9 @@ const options = [
 ];
 
 function FormContainer({
-	back, setBack, edit, setEdit, packingData, fields,
-	control, errors, setValue, item, setGenerate, handleSubmit, category, activeCategory, hawbDetails,
-	setHawbDetails, activeHawb, setActiveHawb, activeKey, setActiveKey, taskItem, formValues, setCustomHawbNumber,
+	back, setBack, edit, setEdit, packingData, fields, control, errors, setValue, item,
+	setGenerate, handleSubmit, category, activeCategory, hawbDetails, setHawbDetails, activeHawb,
+	setActiveHawb, activeKey, setActiveKey, taskItem, formValues, setCustomHawbNumber, cogoSeriesNumber,
 }) {
 	const [value, onChange] = useState('manual');
 	const [confirmDelete, setConfirmDelete] = useState(false);
@@ -138,7 +138,10 @@ function FormContainer({
 								setHawbDetails((prev) => ([...prev, {
 									id: uuid(),
 									documentNo:
-									`COGO-${taskItem.serialId}${(hawbDetails.length + 1).toString().padStart(2, '0')}`,
+									cogoSeriesNumber.length >= 1
+										? `COGO-${cogoSeriesNumber[cogoSeriesNumber.length - 1] + 1}`
+										: `COGO-${taskItem.serialId}${
+											(hawbDetails.length + 1).toString().padStart(2, '0')}`,
 									isNew: true,
 								}]));
 							}}
