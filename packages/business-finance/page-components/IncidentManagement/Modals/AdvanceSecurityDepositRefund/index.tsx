@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import GetSecurityDepositRefundData from '../../apisModal/useGetSecurityDepositRefund';
+import GetSecurityDepositData from '../../apisModal/useGetSecurityDeposit';
 import ViewButton from '../../common/ViewButton';
 import SecurityDepositCommonModal from '../AdvanceSecurityDepositCommonModal';
 
@@ -26,7 +26,7 @@ function AdvanceSecurityDepositRefund({ advanceSecurityDepositRefund, id, refetc
 	const [showDepositModal, setShowDepositModal] = useState(false);
 	const [remarkValue, setRemarkValue] = useState('');
 
-	const { getData, loading } = GetSecurityDepositRefundData({
+	const { getData, loading } = GetSecurityDepositData({
 		refetch,
 		setShowDepositModal,
 		id,

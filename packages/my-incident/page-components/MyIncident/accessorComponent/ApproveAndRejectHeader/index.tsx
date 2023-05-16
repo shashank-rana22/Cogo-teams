@@ -1,5 +1,7 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCFcrossInCircle, IcCFtick } from '@cogoport/icons-react';
-import { startCase, format } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -31,7 +33,11 @@ function ApproveAndRejectHeader({ row }:Props) {
 					{startCase(updatedBy?.name || '-')}
 					{' '}
 					At :
-					{format(updatedAt, 'dd MMM YYYY hh:mm a', {}, false)}
+					{	formatDate({
+						date       : updatedAt,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM YYYY hh:mm a'],
+						formatType : 'date',
+					})}
 					{' '}
 				</div>
 			</div>
