@@ -1,23 +1,34 @@
-import { Accordion, Button } from '@cogoport/components';
-import { IcMDelete, IcMDrag, IcMEdit } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { Pill, Accordion, Button } from '@cogoport/components';
+import { IcMDelete, IcMDrag } from '@cogoport/icons-react';
 
 import ChapterContent from './ChapterContent';
 import styles from './styles.module.css';
+import useHandleChapter from './useHandleChapter';
 
-function Chapter({ subModule, handleDragStart, handleDragOver, handleDrop }) {
-	const { course_sub_module_chapters } = subModule || {};
-
-	const [SubModuleChapters, setSubModuleChapters] = useState(course_sub_module_chapters);
-
-	if (isEmpty(SubModuleChapters)) {
-		setSubModuleChapters([{ id: new Date().getTime(), name: '', isNew: true }]);
-	}
+function Chapter({
+	subModule,
+	handleDragStart,
+	handleDragOver,
+	handleDrop,
+	getLoading,
+	getCourseModuleDetails,
+}) {
+	const {
+		chapterLoading,
+		deleteChapter,
+		addNewChapter,
+		onSaveChapter,
+		subModuleChapters,
+		subModuleId,
+	} = useHandleChapter({
+		subModule,
+		getLoading,
+		getCourseModuleDetails,
+	});
 
 	return (
 		<>
-			{SubModuleChapters.map((child, index) => (
+			{subModuleChapters.map((child, index) => (
 				<div className={styles.child_accordian}>
 					<Accordion
 						type="text"
@@ -38,12 +49,28 @@ function Chapter({ subModule, handleDragStart, handleDragOver, handleDrop }) {
 									<b className={styles.name}>{child.name}</b>
 								</div>
 
-								<IcMEdit className={`${styles.left} ${styles.icon}`} />
-								<IcMDelete className={`${styles.left} ${styles.icon}`} />
+								<IcMDelete
+									onClick={(e) => deleteChapter({ e, child, length: subModuleChapters.length })}
+									className={`${styles.left} ${styles.icon}`}
+								/>
+
+								<Pill
+									style={{ marginLeft: '16px' }}
+									size="sm"
+									color={child.isNew ? '#df8b00' : '#45f829'}
+								>
+									{child.isNew ? 'unsaved' : 'saved'}
+								</Pill>
 							</div>
 						)}
 					>
-						<ChapterContent />
+						<ChapterContent
+							chapterContent={child}
+							onSaveChapter={onSaveChapter}
+							subModuleId={subModuleId}
+							index={index}
+							chapterLoading={chapterLoading}
+						/>
 					</Accordion>
 				</div>
 			))}
@@ -52,6 +79,7 @@ function Chapter({ subModule, handleDragStart, handleDragOver, handleDrop }) {
 				type="button"
 				className={styles.button}
 				themeType="secondary"
+				onClick={addNewChapter}
 			>
 				+ Chapter
 			</Button>

@@ -40,10 +40,15 @@
 .button_container {
 	position: absolute;
 	right: 20px;
-	bottom: 0;
+	bottom: 8px;
 	display: flex;
 	align-items: center;
 	margin-bottom: 12px;
+
+	&.new {
+		margin-bottom: 0px;
+		bottom: 0;
+	}
 }
 
 .edit_text {

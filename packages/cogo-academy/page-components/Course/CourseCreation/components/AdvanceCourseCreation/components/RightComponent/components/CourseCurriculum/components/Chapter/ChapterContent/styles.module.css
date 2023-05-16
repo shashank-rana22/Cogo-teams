@@ -7,6 +7,10 @@
 			padding: unset;
 			font-size: 12px;
 		}
+
+		.ui_radiogroup_container {
+			padding: unset;
+		}
 	}
 }
 

@@ -1,51 +1,49 @@
-import { Button } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+import { Pill, Button } from '@cogoport/components';
 import { IcMCrossInCircle, IcMDelete, IcMDrag, IcMEdit } from '@cogoport/icons-react';
-import { useState, useEffect } from 'react';
 
 import { getFieldController } from '../../../../../../../../commons/getFieldController';
 
 import controls from './controls';
 import styles from './styles.module.css';
+import useHandleModule from './useHandleModule';
 
 function ModuleComponent({
 	module,
-	deleteModule,
 	handleDragStart,
 	handleDragOver,
 	handleDrop,
 	nodeIndex,
-	onSaveModule = () => {},
 	id,
+	getLoading,
+	setFinalData,
+	getCourseModuleDetails,
 }) {
-	const [showModule, setShowModule] = useState([]);
-
-	const { control, formState:{ errors = {} }, handleSubmit, setValue } = useForm();
-
-	const onSubmit = (values) => {
-		const { isNew = false } = module || {};
-
-		const payloadValues = { ...values, course_id: id, sequence_order: nodeIndex + 1 };
-
-		onSaveModule({ values: payloadValues, module, isNew, setShowModule });
-	};
-
-	const hideEditComponent = () => {
-		setShowModule((prev) => prev.filter((item) => item !== module.id));
-	};
-
-	useEffect(() => {
-		if (!module.isNew) {
-			setValue('name', module.name);
-			setValue('description', module.description);
-		}
-	}, [module, setValue]);
+	const {
+		deleteModule,
+		moduleLoading,
+		handleSubmit,
+		control,
+		errors,
+		onSubmit,
+		hideEditComponent,
+		showModule,
+		setShowModule,
+	} = useHandleModule({
+		getLoading,
+		setFinalData,
+		getCourseModuleDetails,
+		module,
+		nodeIndex,
+		id,
+	});
 
 	if (module.isNew || showModule.includes(module.id)) {
 		return (
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className={`${styles.module} ${showModule.includes(module.id) && styles.edit}`}
+				className={`${styles.module} ${
+					showModule.includes(module.id) && styles.edit
+				} ${module.isNew && styles.new}`}
 			>
 				{showModule.includes(module.id) ? (
 					<div className={styles.edit_text}>
@@ -96,8 +94,9 @@ function ModuleComponent({
 					/>
 				) : null}
 
-				<div className={styles.button_container}>
-					<Button type="submit" size="sm">Save</Button>
+				<div className={`${styles.button_container} ${module.isNew && styles.new}`}>
+					<Button loading={moduleLoading} type="submit" size="sm">Save</Button>
+
 					<IcMDelete
 						onClick={() => deleteModule({ id: module.id, isNew: module.isNew || false })}
 						className={`${styles.left} ${styles.icon}`}
@@ -127,10 +126,14 @@ function ModuleComponent({
 				onClick={() => setShowModule((prev) => ([...prev, module.id]))}
 				className={`${styles.left} ${styles.icon}`}
 			/>
-			<IcMDelete
-				onClick={() => deleteModule({ id: module.id, isNew: module.isNew || false })}
-				className={`${styles.left} ${styles.icon}`}
-			/>
+
+			<Pill
+				style={{ marginLeft: '16px' }}
+				size="sm"
+				color={module.isNew ? '#df8b00' : '#45f829'}
+			>
+				{module.isNew ? 'unsaved' : 'saved'}
+			</Pill>
 		</div>
 	);
 }

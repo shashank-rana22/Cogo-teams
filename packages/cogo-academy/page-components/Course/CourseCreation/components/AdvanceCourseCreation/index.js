@@ -10,6 +10,10 @@ function AdvanceCourseCreation({ id }) {
 
 	const { data, loading, getCogoAcademyCourse } = useGetCogoAcademyCourse(id);
 
+	if (loading) {
+		return null;
+	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.left_section}>

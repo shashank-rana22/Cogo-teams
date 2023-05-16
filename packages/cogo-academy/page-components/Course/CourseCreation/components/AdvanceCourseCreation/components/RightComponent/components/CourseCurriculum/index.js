@@ -12,12 +12,10 @@ function CourseCurriculum({ id }) {
 		handleDragOver,
 		finalData,
 		addModule,
-		deleteModule,
-		onSaveModule,
-		onSaveSubModule,
+		getLoading,
+		setFinalData,
+		getCourseModuleDetails,
 	} = useHandleCourseCurriculum({ courseId: id });
-
-	console.log('finalData', finalData);
 
 	return (
 		<div className={styles.container}>
@@ -29,9 +27,10 @@ function CourseCurriculum({ id }) {
 						handleDragStart={handleDragStart}
 						handleDragOver={handleDragOver}
 						handleDrop={handleDrop}
-						deleteModule={deleteModule}
-						onSaveModule={onSaveModule}
 						id={id}
+						getLoading={getLoading}
+						setFinalData={setFinalData}
+						getCourseModuleDetails={getCourseModuleDetails}
 					/>
 
 					{module.course_sub_modules && !module.isNew && (
@@ -40,10 +39,10 @@ function CourseCurriculum({ id }) {
 							handleDragStart={handleDragStart}
 							handleDragOver={handleDragOver}
 							handleDrop={handleDrop}
-							deleteModule={deleteModule}
 							id={id}
 							course_module_id={module.id}
-							onSaveSubModule={onSaveSubModule}
+							getLoading={getLoading}
+							getCourseModuleDetails={getCourseModuleDetails}
 						/>
 					)}
 				</div>

@@ -1,5 +1,19 @@
 const controls = [
 	{
+		label       : 'Chapter Name',
+		name        : 'name',
+		type        : 'text',
+		placeholder : 'Type name...',
+		rules       : { required: { value: true, message: 'This is required' } },
+	},
+	{
+		label       : 'Chapter Description',
+		name        : 'description',
+		type        : 'textarea',
+		placeholder : 'Add a description. Include what a student may be able to do after completing the sub module',
+		rows        : 4,
+	},
+	{
 		label   : 'Select Main Content Type',
 		name    : 'content_type',
 		type    : 'radioGroup',
@@ -33,13 +47,6 @@ const controls = [
 		multiple      : true,
 		draggable     : true,
 		dropareaProps : { heading: 'Upload Presentation', subHeading: '(only .pptx or .pdf formats)' },
-	},
-	{
-		label       : 'Chapter Description',
-		name        : 'chapter_description',
-		type        : 'textarea',
-		placeholder : 'Add a description. Include what a student may be able to do after completing the sub module',
-		rows        : 4,
 	},
 	{
 		label    : 'Additional Resources',

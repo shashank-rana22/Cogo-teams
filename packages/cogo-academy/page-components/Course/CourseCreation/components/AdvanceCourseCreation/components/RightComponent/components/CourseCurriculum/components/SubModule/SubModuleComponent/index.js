@@ -1,55 +1,41 @@
-import { Button } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+import { Pill, Button } from '@cogoport/components';
 import { IcMCrossInCircle, IcMDelete, IcMDrag, IcMEdit } from '@cogoport/icons-react';
-import { useState, useEffect } from 'react';
 
 import { getFieldController } from '../../../../../../../../../../commons/getFieldController';
 
 import controls from './controls';
 import styles from './styles.module.css';
+import useHandleSubModuleComponent from './useHandleSubModuleComponent';
 
 function SubModuleComponent({
 	subModule,
-	deleteModule,
 	handleDragStart,
 	handleDragOver,
 	handleDrop,
 	nodeIndex,
 	onSaveSubModule,
 	course_module_id,
-	deleteSubModule,
+	setCourseSubModule,
+	id: course_id,
+	subModuleLoading,
 }) {
-	const [showSubModule, setShowSubModule] = useState([]);
-
 	const {
-		control,
-		formState: { errors = {} },
 		handleSubmit,
-		setValue,
-	} = useForm();
-
-	const onSubmit = (values) => {
-		const { isNew = false, id = '' } = subModule || {};
-
-		const payloadValues = {
-			...values,
-			sequence_order: nodeIndex + 1,
-			...(isNew ? { course_module_id } : { id }),
-		};
-
-		onSaveSubModule({ values: payloadValues, subModule });
-	};
-
-	const hideEditComponent = () => {
-		setShowSubModule((prev) => prev.filter((item) => item !== subModule.id));
-	};
-
-	useEffect(() => {
-		if (!subModule.isNew) {
-			setValue('name', subModule.name);
-			setValue('description', subModule.description);
-		}
-	}, [subModule, setValue]);
+		control,
+		errors,
+		onSubmit,
+		showSubModule,
+		deleteSubModule,
+		hideEditComponent,
+		setShowSubModule,
+	} = useHandleSubModuleComponent({
+		onSaveSubModule,
+		subModule,
+		course_id,
+		nodeIndex,
+		course_module_id,
+		setCourseSubModule,
+	});
 
 	if (subModule.isNew || showSubModule.includes(subModule.id)) {
 		return (
@@ -106,10 +92,11 @@ function SubModuleComponent({
 					/>
 				) : null}
 
-				<div className={styles.button_container}>
-					<Button type="submit" size="sm">
+				<div className={`${styles.button_container} ${subModule.isNew && styles.new}`}>
+					<Button loading={subModuleLoading} type="submit" size="sm">
 						Save
 					</Button>
+
 					<IcMDelete
 						onClick={() => deleteSubModule({ subModule })}
 						className={`${styles.left} ${styles.icon}`}
@@ -139,10 +126,18 @@ function SubModuleComponent({
 				onClick={() => setShowSubModule((prev) => ([...prev, subModule.id]))}
 				className={`${styles.left} ${styles.icon}`}
 			/>
-			<IcMDelete
+			{/* <IcMDelete
 				onClick={() => deleteModule({ id: subModule.id, isNew: subModule.isNew || false })}
 				className={`${styles.left} ${styles.icon}`}
-			/>
+			/> */}
+
+			<Pill
+				style={{ marginLeft: '16px' }}
+				size="sm"
+				color={subModule.isNew ? '#df8b00' : '#45f829'}
+			>
+				{subModule.isNew ? 'unsaved' : 'saved'}
+			</Pill>
 		</div>
 	);
 }
