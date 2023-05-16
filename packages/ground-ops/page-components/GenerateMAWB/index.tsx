@@ -40,6 +40,7 @@ interface Props {
 	item?: NestedObj;
 	edit?: boolean;
 	setEdit?: Function;
+	setItem?: Function;
 	setGenerate?:Function;
 }
 
@@ -49,9 +50,11 @@ function GenerateMAWB({
 	item = {},
 	edit,
 	setEdit = () => {},
+	setItem = () => {},
 	setGenerate = () => {},
 }:Props) {
 	const [back, setBack] = useState(false);
+	const [editCopies, setEditCopies] = useState(null);
 	const { control, watch, setValue, handleSubmit, formState: { errors } } = useForm();
 
 	const {
@@ -149,9 +152,10 @@ function GenerateMAWB({
 	}, [activeHawb, activeCategory]);
 
 	useEffect(() => {
-		if (category === 'mawb') {
+		if (category === 'mawb' || category === undefined) {
 			return;
 		}
+
 		if (hawbSuccess) {
 			setTaskItem({
 				...taskItem,
@@ -257,6 +261,7 @@ function GenerateMAWB({
 		finalFields.forEach((c) => {
 			setValue(c.name, taskItem[c.name]);
 		});
+
 		if (!viewDoc) {
 			listAirport();
 			listOperator();
@@ -281,6 +286,20 @@ function GenerateMAWB({
 			setValue('accountingInformation', 'FREIGHT PREPAID');
 		}
 	}, []);
+
+	useEffect(() => {
+		if (!viewDoc) {
+			setTaskItem({
+				...item,
+				...item.documentData,
+			});
+			finalFields.forEach((c) => {
+				setValue(c.name, item?.documentData?.[c.name]);
+			});
+			setValue('executedDate', edit && item?.documentData?.executedDate
+				? new Date(item?.documentData?.executedDate) : new Date());
+		}
+	}, [editCopies]);
 
 	useEffect(() => {
 		let totalVolume:number = 0;
@@ -373,6 +392,9 @@ function GenerateMAWB({
 							pendingTaskId={pendingTaskId}
 							category={category}
 							setViewDoc={setViewDoc}
+							setItem={setItem}
+							editCopies={editCopies}
+							setEditCopies={setEditCopies}
 						/>
 					</Modal>
 				)}

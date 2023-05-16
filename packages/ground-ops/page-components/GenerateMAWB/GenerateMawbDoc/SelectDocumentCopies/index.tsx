@@ -1,5 +1,5 @@
 import { Button, CheckboxGroup, Checkbox } from '@cogoport/components';
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 
 import useGetHawbCopiesList from '../../Helpers/hooks/useGetHawbCopiesList';
 
@@ -7,12 +7,12 @@ import multipleCopies from './multipleCopies';
 import styles from './styles.module.css';
 
 function SelectDocumentCopies({
-	copiesValue,
-	copiesOnChange, setSaveDocument, handleView, setGenerate, setViewDoc, download24,
+	copiesValue, copiesOnChange, setSaveDocument, handleView, setGenerate,
+	setViewDoc, download24, setEdit, setItem, setDocCopies, setEditCopies,
 }) {
 	const { data, hawbCopiesList } = useGetHawbCopiesList();
-	const [editCopies, setEditCopies] = useState(null);
-	const OPTIONS = multipleCopies({ setEditCopies, setGenerate, setViewDoc });
+
+	const OPTIONS = multipleCopies({ data, setEditCopies, setGenerate, setViewDoc, setEdit, setItem });
 
 	const onChangeTableHeaderCheckbox = (event) => {
 		copiesOnChange(event.currentTarget.checked ? [
@@ -30,6 +30,20 @@ function SelectDocumentCopies({
 			'copy_12'] : []);
 	};
 
+	useEffect(() => {
+		setDocCopies(null);
+		(copiesValue || []).forEach((copy) => {
+			(data || []).forEach((item) => {
+				if (copy === item?.copyType) {
+					setDocCopies((prev) => (
+						prev ? [...prev, { [copy]: item?.documentUrl }] : [{ [copy]: item?.documentUrl }]
+					));
+				}
+			});
+		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [copiesValue]);
+
 	const getSelectAllCheckbox = () => {
 		const isAllRowsChecked = (copiesValue || []).length === 12;
 
@@ -43,8 +57,6 @@ function SelectDocumentCopies({
 			/>
 		);
 	};
-
-	// console.log('data', options);
 
 	return (
 		<div className={styles.select_copies_container}>

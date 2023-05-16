@@ -15,7 +15,7 @@ const useGetHawbCopiesList = () => {
 		try {
 			await trigger({
 				params: {
-					documentId   : '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+					documentId   : '35cd7dcb-5ddb-4382-807f-c312aec6909c',
 					documentType : 'draft_airway_bill',
 					status       : 'active',
 					pageIndex    : 0,
@@ -32,7 +32,7 @@ const useGetHawbCopiesList = () => {
 	}, []);
 
 	return {
-		data,
+		data: data?.list,
 		hawbCopiesList,
 	};
 };

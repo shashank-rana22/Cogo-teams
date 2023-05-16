@@ -3,13 +3,24 @@ import { IcMEdit } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-const multipleCopies = ({ setEditCopies, setGenerate, setViewDoc }) => {
+const multipleCopies = ({ data, setEditCopies, setGenerate, setViewDoc, setEdit, setItem }) => {
+	const handleClick = (key) => {
+		(data || []).forEach((item) => {
+			if (item?.copyType === key) {
+				setItem(item);
+				setEdit(true);
+				setEditCopies(key);
+				setGenerate(true);
+				setViewDoc(false);
+			}
+		});
+	};
 	const checkboxLabel = (label, key) => (
 		<div className={styles.label}>
 			{label}
 			<Button
 				themeType="linkUi"
-				onClick={() => { setEditCopies(key); setGenerate(true); setViewDoc(false); }}
+				onClick={() => handleClick(key)}
 			>
 				<IcMEdit fill="#8B8B8B" />
 			</Button>

@@ -6,6 +6,7 @@ import React, { createRef, useState, ReactFragment } from 'react';
 
 import { footerValues } from '../Helpers/configurations/footerValues';
 import { backPage, footerImages } from '../Helpers/configurations/imageCopies';
+import useUpdateIndividualEditing from '../Helpers/hooks/useUpdateIndividualEditing';
 
 import ChargeDetails from './ChargeDetails';
 import ContainerDetails from './ContainerDetails';
@@ -41,6 +42,9 @@ interface Props {
 	pendingTaskId?: string;
 	category?: string;
 	setViewDoc?: Function;
+	setItem?: Function;
+	editCopies?: string;
+	setEditCopies?: Function;
 }
 
 const downloadButton = {
@@ -70,6 +74,9 @@ function GenerateMawb({
 	pendingTaskId = '',
 	category = 'mawb',
 	setViewDoc = () => {},
+	setItem = () => {},
+	editCopies = '',
+	setEditCopies = () => {},
 }:Props) {
 	const filteredData = { ...formData };
 
@@ -84,6 +91,9 @@ function GenerateMawb({
 	const [whiteout, setWhiteout] = useState(false);
 
 	const [copiesValue, copiesOnChange] = useState<string[]>([]);
+	const [docCopies, setDocCopies] = useState(null);
+
+	console.log('taskItem', editCopies);
 
 	const handleClick = () => {
 		if (back) {
@@ -103,6 +113,8 @@ function GenerateMawb({
 		handleClick,
 		activeHawb,
 	});
+
+	const { updateIndividualEditing } = useUpdateIndividualEditing();
 
 	const takeImageScreenShot = async (node) => {
 		const dataURI = await htmlToImage.toJpeg(node);
@@ -160,7 +172,25 @@ function GenerateMawb({
 			],
 		};
 
-		upload({ payload });
+		const individualCopyPayload = {
+			id   : taskItem?.id,
+			data : {
+				...filteredData,
+				status          : 'generated',
+				document_number : activeCategory === 'hawb'
+					? formData?.document_number || activeHawb?.documentNo : taskItem?.awbNumber,
+				service_id   : taskItem?.serviceId,
+				service_type : 'air_freight_service',
+			},
+			document_url: res || undefined,
+		};
+
+		if (editCopies) {
+			updateIndividualEditing(individualCopyPayload);
+		} else {
+			upload({ payload });
+		}
+
 		setSaveDocument(false);
 	};
 
@@ -171,14 +201,15 @@ function GenerateMawb({
 				const pdf = new JsPDF();
 				const pdfWidth = pdf.internal.pageSize.getWidth();
 				const pdfHeight = pdf.internal.pageSize.getHeight();
-				(copiesValue || []).forEach((item, i) => {
-					pdf.addImage(imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
+
+				(docCopies || []).forEach((item, i) => {
+					pdf.addImage(`${Object.values(item)[0]}`, 'jpeg', 0, 0, pdfWidth, pdfHeight);
 					if (!whiteout) {
-						pdf.addImage(footerImages[item], 'jpeg', 0, pdfHeight - 14, pdfWidth, 4.5);
+						pdf.addImage(footerImages[Object.keys(item)[0]], 'jpeg', 0, pdfHeight - 13, pdfWidth, 4.5);
 					}
 
 					if (download24) {
-						if (includeTnC.includes(item)) {
+						if (includeTnC.includes(Object.keys(item)[0])) {
 							pdf.addPage();
 							pdf.addImage(backPage, 'jpeg', 0, 0, pdfWidth, pdfHeight);
 						} else {
@@ -244,6 +275,12 @@ function GenerateMawb({
 											copiesOnChange={copiesOnChange}
 											setSaveDocument={setSaveDocument}
 											handleView={handleView}
+											setGenerate={setGenerate}
+											setViewDoc={setViewDoc}
+											setEdit={setEdit}
+											setItem={setItem}
+											setDocCopies={setDocCopies}
+											setEditCopies={setEditCopies}
 											download24
 										/>
 									)}
@@ -270,7 +307,11 @@ function GenerateMawb({
 											handleView={handleView}
 											setGenerate={setGenerate}
 											setViewDoc={setViewDoc}
+											setEdit={setEdit}
 											download24={false}
+											setItem={setItem}
+											setDocCopies={setDocCopies}
+											setEditCopies={setEditCopies}
 										/>
 									)}
 								>
@@ -312,7 +353,8 @@ function GenerateMawb({
 					background : '#fff',
 				}}
 			>
-				{taskItem?.documentState !== 'document_accepted' && <Watermark text="draft" rotateAngle="315deg" />}
+				{(taskItem?.documentState !== 'document_accepted' || editCopies === null)
+				&& <Watermark text="draft" rotateAngle="315deg" />}
 				<div style={{ position: 'relative' }}>
 					<ShipperConsigneeDetails
 						formData={filteredData}
