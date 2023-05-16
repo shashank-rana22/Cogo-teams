@@ -205,22 +205,22 @@ function GenerateMAWB({
 	useEffect(() => {
 		if (!customHawbNumber && activeHawb.isNew) {
 			setValue('document_number', activeHawb.documentNo);
-			setHawbDetails(
-				hawbDetails.map((hawbItem) => (hawbItem.id === activeHawb.id
+			setHawbDetails((prev) => (
+				prev.map((hawbItem) => (hawbItem.id === activeHawb.id
 					? {
 						...hawbItem,
 						documentNo: activeHawb.documentNo ? activeHawb.documentNo
 							: `COGO-${cogoSeriesNumber[cogoSeriesNumber.length - 1] + 1}`,
 					}
-					: hawbItem)),
-			);
+					: hawbItem))
+			));
 		} else if (customHawbNumber && activeHawb.isNew) {
 			setValue('document_number', '');
-			setHawbDetails(
-				hawbDetails.map((hawbItem) => (hawbItem.id === activeHawb.id
+			setHawbDetails((prev) => (
+				prev.map((hawbItem) => (hawbItem.id === activeHawb.id
 					? { ...hawbItem, documentNo: null }
-					: hawbItem)),
-			);
+					: hawbItem))
+			));
 		}
 	}, [activeHawb, customHawbNumber]);
 
