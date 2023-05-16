@@ -8622,7 +8622,7 @@ const partner = {
 			feature     : 'onAccount',
 		},
 		{
-			api         : 'post_payments_accounts_download_sample',
+			api         : 'post_sales_accounts_download_sample',
 			access_type : 'private',
 			module      : 'onAccount',
 			feature     : 'onAccount',
