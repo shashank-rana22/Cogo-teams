@@ -143,7 +143,7 @@ export function CardBody({ charge, type }: Props) {
 						style={{ '--span': 1 } as React.CSSProperties}
 					>
 						{charge?.serviceTotalQuotational
-							? getFormattedPrice(charge?.serviceTotalQuotational, 'INR')
+							? getFormattedPrice(charge?.serviceTotalQuotational, charge?.serviceCurrencyQuotational)
 							: '-'}
 					</div>
 					<div
