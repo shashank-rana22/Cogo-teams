@@ -12,20 +12,17 @@ const applyRegEx = (searchString, list, key, aliases = []) => {
 
 		const already_present = newList.some((listItem) => item.key === listItem.key);
 
-		const newOptions = [];
+		let newOptions = [];
 		if (!isEmpty(options)) {
-			(options || []).forEach((optionItem) => {
-				if (optionItem.title.toLowerCase().includes(newSearchString)) {
-					newOptions.push(optionItem);
-				}
-			});
+			newOptions = (options || []).filter((optionItem) => optionItem.title.toLowerCase()
+				.includes(newSearchString));
 		}
 
 		if (!isEmpty(newOptions)) {
 			newItem = { ...item, options: newOptions };
 		}
 
-		const isPresentInAlias = (aliases || [])
+		const isPresentInAlias = aliases
 			.some((alias) => newItem[alias] && newItem[alias].toLowerCase().includes(newSearchString));
 
 		if (!already_present
