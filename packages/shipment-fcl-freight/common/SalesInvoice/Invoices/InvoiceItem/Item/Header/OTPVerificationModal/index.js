@@ -7,6 +7,7 @@ import useSendInvoiceOtp from '../../../../../../../hooks/useSendInvoiceOtp';
 import useVerifyInvoiceOtp from '../../../../../../../hooks/useVerifyInvoiceOtp';
 
 import Loader from './Loader';
+import OtpInput from './OtpInput';
 import styles from './styles.module.css';
 
 const OTP_LENGTH = 4;
@@ -69,8 +70,8 @@ function OTPVerificationModal({
 	const handleClick = async () => {
 		if (isEmpty(selectedUser)) Toast.error('Please select any user');
 		else {
-			await sendOtpForInvoiceApproval();
-			// setModalIsOpen(true);
+			// await sendOtpForInvoiceApproval();
+			setModalIsOpen(true);
 		}
 	};
 	const title = `Enter OTP sent to ${selectedUser?.split('_')?.[1]} registered mobile number`;
@@ -126,7 +127,14 @@ function OTPVerificationModal({
 					<Modal.Header title={title} />
 					<Modal.Body>
 						<div className={styles.Container}>
-							OTP Input
+							<OtpInput
+								otpLength={OTP_LENGTH}
+								inputSize="lg"
+								value={otpValue}
+								onChange={(value) => {
+									setOTPValue(value?.length === OTP_LENGTH ? `${value}` : '');
+								}}
+							/>
 						</div>
 					</Modal.Body>
 					<Modal.Footer>
