@@ -6,7 +6,7 @@ const useGetShipmentCreditNote = ({ defaultParams = {} }) => {
 	const [apiData, setApiData] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/get_shipment_credit_note',
+		url    : 'fcl_freight/get_credit_note',
 		method : 'GET',
 		params : defaultParams,
 	});

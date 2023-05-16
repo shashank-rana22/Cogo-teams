@@ -35,7 +35,7 @@ function Item({
 	const itemStatus = item?.status;
 
 	const prevData = {
-		remarks       : item?.remarks[0] || '',
+		remarks       : item?.remarks?.[0] || '',
 		document_urls : item?.document_urls || [],
 	};
 
