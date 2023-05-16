@@ -135,7 +135,7 @@ function ModuleComponent({
 						<Pill
 							style={{ marginLeft: '16px' }}
 							size="sm"
-							color={module.isNew ? '#df8b00' : '#45f829'}
+							color={module.isNew ? '#df8b00' : '#98FB98'}
 						>
 							{module.isNew ? 'unsaved' : 'saved'}
 						</Pill>

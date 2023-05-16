@@ -1,4 +1,7 @@
 import { Button } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
+
+import LoadingState from '../../../../commons/LoadingState';
 
 import ModuleComponent from './ModuleComponent';
 import styles from './styles.module.css';
@@ -15,6 +18,10 @@ function CourseCurriculum({ id }) {
 		setFinalData,
 		getCourseModuleDetails,
 	} = useHandleCourseCurriculum({ courseId: id });
+
+	if (getLoading && isEmpty(finalData)) {
+		return <LoadingState />;
+	}
 
 	return (
 		<div className={styles.container}>

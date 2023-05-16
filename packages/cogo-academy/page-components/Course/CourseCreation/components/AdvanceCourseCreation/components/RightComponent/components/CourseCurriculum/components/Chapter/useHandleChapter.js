@@ -3,6 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useCreateCourseSubModuleChapter from '../../../../../../hooks/useCreateCourseSubModuleChapter';
+import useGetCourseSubModule from '../../../../../../hooks/useGetCourseSubModule';
 import useUpdateCourseSubModuleChapter from '../../../../../../hooks/useUpdateCourseSubModuleChapter';
 
 const useHandleChapter = ({
@@ -10,9 +11,15 @@ const useHandleChapter = ({
 	getLoading,
 	getCourseModuleDetails,
 }) => {
-	const { course_sub_module_chapters, id } = subModule || {};
+	const { id } = subModule || {};
 
-	const [subModuleChapters, setSubModuleChapters] = useState(course_sub_module_chapters);
+	const [subModuleChapters, setSubModuleChapters] = useState([]);
+
+	const {
+		finalData,
+		loading: getCourseSubModuleLoading,
+		getCourseSubModule,
+	} = useGetCourseSubModule({ id });
 
 	const {
 		createCourseSubModuleChapter,
@@ -22,10 +29,10 @@ const useHandleChapter = ({
 	const {
 		updateCourseSubModuleChapter,
 		loading: updateChapterLoading,
-	} = useUpdateCourseSubModuleChapter({ getCourseModuleDetails });
+	} = useUpdateCourseSubModuleChapter({ getCourseSubModule });
 
 	if (isEmpty(subModuleChapters)) {
-		setSubModuleChapters([{ id: new Date().getTime(), name: '', isNew: true }]);
+		setSubModuleChapters([{ id: new Date().getTime(), name: '', isNew: true, course_sub_module_id: id }]);
 	}
 
 	const onSaveChapter = ({ values, chapter }) => {
@@ -64,8 +71,10 @@ const useHandleChapter = ({
 	const chapterLoading = createChapterLoading || updateChapterLoading || getLoading;
 
 	useEffect(() => {
-		setSubModuleChapters(course_sub_module_chapters);
-	}, [course_sub_module_chapters]);
+		if (!isEmpty(finalData) && !getCourseSubModuleLoading) {
+			setSubModuleChapters(finalData);
+		}
+	}, [finalData, getCourseSubModuleLoading]);
 
 	return {
 		chapterLoading,
@@ -74,6 +83,7 @@ const useHandleChapter = ({
 		onSaveChapter,
 		subModuleChapters,
 		subModuleId: id,
+		getCourseSubModuleLoading,
 	};
 };
 

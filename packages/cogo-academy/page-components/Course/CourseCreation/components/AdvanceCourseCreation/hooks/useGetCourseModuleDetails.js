@@ -5,7 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 
 const GetCourseModuleDetails = ({ id }) => {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : '/get_course_module_details',
+		url    : '/get_course_details',
 		method : 'get',
 		params : { id },
 	}, { manual: false });

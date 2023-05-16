@@ -18,15 +18,15 @@ const useGetCourseSubModule = ({ id }) => {
 		}
 	};
 
-	let finalData = data;
+	let finalData = data?.course_sub_module_chapters || [];
 
 	if (isEmpty(data)) {
-		finalData = [{ id: new Date().getTime(), name: '', children: [], isNew: true }];
+		finalData = [{ id: new Date().getTime(), name: '', isNew: true, course_sub_module_id: id }];
 	}
 
 	return {
 		getCourseSubModule,
-		moduleData: finalData,
+		finalData,
 		loading,
 	};
 };

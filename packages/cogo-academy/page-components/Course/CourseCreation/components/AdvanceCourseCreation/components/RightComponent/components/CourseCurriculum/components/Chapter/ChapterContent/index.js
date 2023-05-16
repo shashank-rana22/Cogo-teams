@@ -1,70 +1,34 @@
 import { Button } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
-import { useState, useEffect } from 'react';
+import { isEmpty } from '@cogoport/utils';
 
 import { getFieldController } from '../../../../../../../../../../commons/getFieldController';
-import getPayload from '../../../../../../../utils/getPayload';
 
 import controls from './controls';
 import styles from './styles.module.css';
-
-let RichTextEditor;
-
-if (typeof window !== 'undefined') {
-	// eslint-disable-next-line global-require, import/no-unresolved
-	RichTextEditor = require('react-rte').default;
-}
+import useHandleChapterContent from './useHandleChapterContent';
 
 function ChapterContent({ chapterContent, onSaveChapter, subModuleId, index, chapterLoading }) {
-	const [editorValue, setEditorValue] = useState(RichTextEditor.createEmptyValue());
-
-	const { control, formState:{ errors = {} }, watch, handleSubmit, setValue } = useForm();
-
-	const additionalResourcesWatch = watch('additional_resources');
-
-	const onSubmit = (values) => {
-		const { isNew = false } = chapterContent || {};
-
-		const payloadValues = getPayload({
-			values,
-			course_sub_module_id : subModuleId,
-			index,
-			editorValue,
-			chapterId            : chapterContent.id,
-			payloadType          : 'chapter',
-			isNew,
-			additionalResourcesWatch,
-		});
-
-		onSaveChapter({
-			values  : payloadValues,
-			chapter : chapterContent,
-		});
-	};
-
-	useEffect(() => {
-		const { name, description, content_type, chapter_content } = chapterContent || {};
-
-		setValue('name', name);
-		setValue('description', description);
-		setValue('content_type', content_type);
-		setEditorValue(RichTextEditor?.createValueFromString((chapter_content || ''), 'html'));
-	}, [chapterContent, setValue]);
+	const {
+		RichTextEditor,
+		onSubmit,
+		control,
+		errors,
+		handleSubmit,
+		contentTypeWatch,
+		additionalResourcesWatch,
+		editorValue,
+		setEditorValue,
+		uploadVideoWatch,
+		uploadDocumentWatch,
+	} = useHandleChapterContent({ chapterContent, onSaveChapter, subModuleId, index });
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.container}>
 			{controls.map((controlItem) => {
 				const {
-					type,
+					elementType,
 					label,
 					name,
-					dropareaProps,
-					options,
-					offLabel,
-					onLabel,
-					rows,
-					placeholder,
-					rules,
 				} = controlItem || {};
 
 				if (['additional_resources_title', 'additional_resources_link']
@@ -76,11 +40,25 @@ function ChapterContent({ chapterContent, onSaveChapter, subModuleId, index, cha
 					return null;
 				}
 
-				const Element = getFieldController(type);
+				if (!['presentation', 'text'].includes(contentTypeWatch) && name === 'upload_presentation') {
+					return null;
+				}
+
+				if (contentTypeWatch !== 'document' && name === 'upload_document') {
+					return null;
+				}
+
+				if (contentTypeWatch !== 'video' && name === 'upload_video') {
+					return null;
+				}
+
+				const docToUse = name === 'upload_video' ? uploadVideoWatch : uploadDocumentWatch;
+
+				const Element = getFieldController(elementType);
 
 				if (!Element) return null;
 
-				if (name === 'upload_presentation') {
+				if (contentTypeWatch === 'text' && name === 'upload_presentation') {
 					return (
 						<div style={{ marginTop: '24px' }}>
 							<RichTextEditor
@@ -109,15 +87,9 @@ function ChapterContent({ chapterContent, onSaveChapter, subModuleId, index, cha
 
 						<div className={`${styles.input_group} ${styles[name]}`}>
 							<Element
-								name={name}
 								control={control}
-								options={options}
-								offLabel={offLabel}
-								onLabel={onLabel}
-								rows={rows}
-								placeholder={placeholder}
-								rules={rules}
-								{...(type === 'fileUpload' ? { dropareaProps, draggable: true } : {})}
+								checked={additionalResourcesWatch}
+								{...controlItem}
 							/>
 						</div>
 
@@ -126,6 +98,22 @@ function ChapterContent({ chapterContent, onSaveChapter, subModuleId, index, cha
 								{errors?.[name]?.message}
 							</div>
 						) : null}
+
+						{['upload_video', 'upload_document']
+							.includes(name) && !isEmpty(docToUse) ? (
+								<iframe
+									style={{ width: '100%', marginTop: '20px' }}
+									height="400"
+									src={name === 'upload_video'
+										? uploadVideoWatch.replace('/watch?v=', '/embed/')
+										: uploadDocumentWatch?.finalUrl}
+									title="YouTube video player"
+									frameBorder="0"
+									allow="accelerometer; clipboard-write;
+										encrypted-media; gyroscope; picture-in-picture; web-share"
+									allowfullscreen="true"
+								/>
+							) : null}
 					</div>
 				);
 			})}

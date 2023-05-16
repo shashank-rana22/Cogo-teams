@@ -1,6 +1,8 @@
 import { Pill, Accordion, Button } from '@cogoport/components';
 import { IcMDelete, IcMDrag } from '@cogoport/icons-react';
 
+import LoadingState from '../../../../../../commons/LoadingState';
+
 import ChapterContent from './ChapterContent';
 import styles from './styles.module.css';
 import useHandleChapter from './useHandleChapter';
@@ -20,11 +22,16 @@ function Chapter({
 		onSaveChapter,
 		subModuleChapters,
 		subModuleId,
+		getCourseSubModuleLoading,
 	} = useHandleChapter({
 		subModule,
 		getLoading,
 		getCourseModuleDetails,
 	});
+
+	if (getCourseSubModuleLoading) {
+		return <LoadingState rowsCount={2} />;
+	}
 
 	return (
 		<div style={{ padding: '16px 20px' }}>
@@ -56,7 +63,7 @@ function Chapter({
 								<Pill
 									style={{ marginLeft: '16px' }}
 									size="sm"
-									color={child.isNew ? '#df8b00' : '#45f829'}
+									color={child.isNew ? '#df8b00' : '#98FB98'}
 								>
 									{child.isNew ? 'unsaved' : 'saved'}
 								</Pill>
@@ -69,6 +76,7 @@ function Chapter({
 							subModuleId={subModuleId}
 							index={index}
 							chapterLoading={chapterLoading}
+							getCourseSubModuleLoading={getCourseSubModuleLoading}
 						/>
 					</Accordion>
 				</div>

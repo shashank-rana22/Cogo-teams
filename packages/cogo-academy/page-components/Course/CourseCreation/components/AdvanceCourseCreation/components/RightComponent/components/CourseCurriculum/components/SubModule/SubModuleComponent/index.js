@@ -137,14 +137,14 @@ function SubModuleComponent({
 						<Pill
 							style={{ marginLeft: '16px' }}
 							size="sm"
-							color={subModule.isNew ? '#df8b00' : '#45f829'}
+							color={subModule.isNew ? '#df8b00' : '#98FB98'}
 						>
 							{subModule.isNew ? 'unsaved' : 'saved'}
 						</Pill>
 					</div>
 				)}
 			>
-				{subModule.course_sub_module_chapters && !subModule.isNew && (
+				{!subModule.isNew && (
 					<Chapter
 						subModule={subModule}
 						handleDragStart={handleDragStart}
