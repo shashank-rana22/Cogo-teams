@@ -21,5 +21,21 @@
 		.ui_radio_container{
 			width: 100%;
 		}
+		
+
+		.ui_modal_body_container{
+			height: 300px;
+		}
+	}
+}
+
+.otp_modal{
+	:global{
+		.ui_modal_body_container{
+			height: 140px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
 	}
 }

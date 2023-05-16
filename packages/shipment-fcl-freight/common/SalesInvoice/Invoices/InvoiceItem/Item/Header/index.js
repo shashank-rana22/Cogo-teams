@@ -8,6 +8,8 @@ import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import useUpdateShipmentInvoiceStatus from '../../../../../../hooks/useUpdateShipmentInvoiceStatus';
+
 import Actions from './Actions';
 import CNNullify from './CNNullify';
 import styles from './styles.module.css';
@@ -55,11 +57,11 @@ function Header({
 		window.open(invoiceLink);
 	};
 
-	// const { updateInvoiceStatus, loading } = useUpdateInvoiceStatus({
-	// 	invoice,
-	// 	refetch,
-	// 	status,
-	// });
+	const { updateInvoiceStatus, loading } = useUpdateShipmentInvoiceStatus({
+		invoice,
+		refetch,
+		status,
+	});
 
 	// const showIrnTriggerForOldShipments =		shipment_data?.serial_id <= 120347
 	// 	&& invoice?.status === 'reviewed'
@@ -76,11 +78,11 @@ function Header({
 
 	const handleClick = (type) => {
 		setStatus(type);
-		// updateInvoiceStatus();
+		updateInvoiceStatus();
 	};
 
 	const creditSource = invoice?.credit_option?.credit_source?.split('_');
-	console.log(creditSource, " :creditSource : ",invoice);
+	// console.log(creditSource, ' :creditSource : ', invoice?.credit_option);
 
 	// const restrictCN =
 	// 	['fcl_freight', 'lcl_freight', 'rail_domestic_freight'].includes(
@@ -257,19 +259,19 @@ function Header({
 						</Button>
 						) : null}
 
-					{showRequestCN ? (
-						<Button
-							style={{
-								marginTop     : '4px',
-								textTransform : 'capitalize',
-								letterSpacing : '0px',
-							}}
-							size="sm"
-							onClick={() => setAskNullify(true)}
-						>
-							Request CN
-						</Button>
-					) : null}
+					{/* {showRequestCN ? ( */}
+					<Button
+						style={{
+							marginTop     : '4px',
+							textTransform : 'capitalize',
+							letterSpacing : '0px',
+						}}
+						size="sm"
+						onClick={() => setAskNullify(true)}
+					>
+						Request CN
+					</Button>
+					{/* ) : null} */}
 
 					{invoice?.is_revoked && invoice?.status !== 'revoked' ? (
 						<div className={styles.info_container}>Requested for Revoke</div>

@@ -25,24 +25,25 @@ function OTPVerificationModal({
 
 	const { loading, orgData } = useGetOrgUsersData({ invoice });
 
-	const handleOTPChange = (newOTP) => {
-		setOTPValue(newOTP?.length === OTP_LENGTH ? `${newOTP}` : '');
-	};
-
-	const refetchAfterApiCall = () => {
+	const refetchAfterSendOtpApiCall = () => {
 		setModalIsOpen(true);
 	};
 
-	const { onClickSubmitOtp, verifyInvoiceLoader } = useVerifyInvoiceOtp(
+	const refetchAfterVerifydOtpApiCall = () => {
+		setModalIsOpen(false);
+		setShowOTPModal(false);
+		refetch();
+	};
+
+	const { onClickSubmitOtp, verifyInvoiceLoader } = useVerifyInvoiceOtp({
 		otpValue,
-		setShowOTPModal,
 		invoice,
-		refetch,
-	);
+		refetch: refetchAfterVerifydOtpApiCall,
+	});
 	const { sendOtpForInvoiceApproval } = useSendInvoiceOtp({
 		invoice_id : invoice?.id,
 		user_id    : selectedUser?.split('_')?.[0],
-		refetch    : refetchAfterApiCall,
+		refetch    : refetchAfterSendOtpApiCall,
 	});
 
 	const userLists = orgData?.list?.filter((obj) => obj?.mobile_verified);
@@ -123,6 +124,7 @@ function OTPVerificationModal({
 				<Modal
 					show={showOtpModal}
 					onClose={() => setModalIsOpen(false)}
+					className={styles.otp_modal}
 				>
 					<Modal.Header title={title} />
 					<Modal.Body>

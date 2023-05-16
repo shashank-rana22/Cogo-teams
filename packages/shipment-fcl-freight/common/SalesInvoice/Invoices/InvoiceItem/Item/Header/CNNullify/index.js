@@ -1,8 +1,8 @@
-// import Layout from '@cogo/bookings/commons/Layout';
 import { Button, Modal } from '@cogoport/components';
+import { TextAreaController, UploadController, useForm } from '@cogoport/forms';
 import React, { useState } from 'react';
 
-// import useCreditNoteNullify from '../../../../../../../hooks/useCreditNoteNullify';
+import useCreditNoteNullify from '../../../../../../../hooks/useCreditNoteNullify';
 import RequestCN from '../RequestCN';
 
 function CNNullify({
@@ -15,21 +15,21 @@ function CNNullify({
 	refetch = () => {},
 }) {
 	const [isRequestCN, setIsRequestCN] = useState(false);
-	// const {
-	// 	controls,
-	// 	fields,
-	// 	errors,
-	// 	onError,
-	// 	handleSubmit,
-	// 	onCreate,
-	// 	loading,
-	// 	reset,
-	// } = useCreditNoteNullify({
-	// 	invoice,
-	// 	setAskNullify,
-	// 	refetchCN,
-	// 	refetch,
-	// });
+
+	const refetchAfterApiCall = () => {
+		setAskNullify(false);
+		refetch();
+		refetchCN();
+	};
+	const {
+		onCreate,
+		loading,
+	} = useCreditNoteNullify({
+		invoiceId : invoice?.id,
+		refetch   : refetchAfterApiCall,
+	});
+
+	const { handleSubmit, control, reset } = useForm();
 
 	const handleNo = () => {
 		setIsRequestCN(true);
@@ -37,7 +37,7 @@ function CNNullify({
 	};
 
 	const handleOnClose = () => {
-		// reset();
+		reset();
 		setAskNullify(false);
 	};
 
@@ -49,21 +49,34 @@ function CNNullify({
 				onClose={handleOnClose}
 			>
 				<Modal.Header title="Do you want to revoke this invoice ?" />
-				{/* <Layout
-					controls={controls}
-					fields={fields}
-					errors={errors}
-					themeType="custom-layout"
-				/> */}
-
+				<Modal.Body>
+					<label>Details (Mandatory)</label>
+					<TextAreaController
+						id="remarks"
+						name="remarks"
+						control={control}
+						placeholder="Enter Details Here"
+					/>
+					<label>Upload File</label>
+					<UploadController
+						name="file"
+						control={control}
+					/>
+				</Modal.Body>
 				<Modal.Footer>
-					<Button className="secondary md" onClick={handleNo}>
+					<Button
+						size="md"
+						onClick={handleNo}
+						style={{
+							marginRight: '10px',
+						}}
+					>
 						Create Partial CN
 					</Button>
 					<Button
-						// onClick={handleSubmit(onCreate, onError)}
-						// disabled={loading}
-						className="primary md"
+						onClick={handleSubmit(onCreate)}
+						disabled={loading}
+						size="md"
 					>
 						Revoke Invoice
 					</Button>

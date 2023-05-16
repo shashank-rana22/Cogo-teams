@@ -2,12 +2,11 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-const useVerifyInvoiceOtp = (
-	otpValue,
-	setOTPModal = () => {},
+const useVerifyInvoiceOtp = ({
+	otpValue = '',
 	invoice = {},
 	refetch = () => {},
-) => {
+}) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/verify_invoice_approval_otp',
 		method : 'POST',
@@ -25,7 +24,6 @@ const useVerifyInvoiceOtp = (
 			});
 			if (!res?.hasError) {
 				Toast.success('OTP verified successfully!');
-				setOTPModal(false);
 				refetch();
 			}
 		} catch (err) {
