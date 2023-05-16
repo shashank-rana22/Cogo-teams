@@ -23,6 +23,11 @@ import {
 	asyncListHsCodes,
 	asyncListCurrency,
 	asyncAccountEngagementScoringEvents,
+	asyncJvList,
+	asyncJournalCode,
+	asyncAccMode,
+	asyncCodeMaster,
+	asyncListOrgTradeParties,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -64,6 +69,11 @@ const keyAsyncFieldsParamsMapping = {
 	list_hs_codes                 : asyncListHsCodes,
 	list_exchange_rate_currencies : asyncListCurrency,
 	engagement_scoring_events     : asyncAccountEngagementScoringEvents,
+	journal_category              : asyncJvList,
+	journal_code                  : asyncJournalCode,
+	jv_account_mode               : asyncAccMode,
+	jv_code_master                : asyncCodeMaster,
+	list_trade_parties            : asyncListOrgTradeParties,
 };
 
 function AsyncSelect(props) {

@@ -8456,6 +8456,10 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api         : 'list_cogo_entities',
+			access_type : 'private',
+		},
+		{
 			api         : 'post_payments_journal_voucher_post_to_sage',
 			access_type : 'private',
 			module      : 'settlement',

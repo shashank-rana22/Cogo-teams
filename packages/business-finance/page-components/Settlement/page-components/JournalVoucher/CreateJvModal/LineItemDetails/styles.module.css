@@ -1,0 +1,74 @@
+.flex {
+	display: flex;
+}
+
+.tableheader {
+	display: flex;
+	border-bottom: 1px solid var(--color-accent-orange-2);
+}
+
+.fieldstyle {
+	padding: 12px 16px;
+	font-size: var(--font-size-sm);
+	font-weight: 800;
+}
+
+.tablecolumn {
+	display: flex;
+	align-items: center;
+	margin-top: 12px;
+}
+
+.addbutton {
+	margin-top: 10px;
+}
+
+.border {
+	margin-top: 10px;
+	border: 1px solid var(--color-secondary-greyscale-5);
+	border-radius: 4px;
+}
+
+.addbuttonborder {
+	padding: 0 12px 10px;
+	margin-top: 12px;
+	border-top: 1px solid var(--color-secondary-greyscale-5);
+	border-bottom: 1px solid var(--color-secondary-greyscale-5);
+}
+
+.spacebetween {
+	justify-content: space-between;
+	font-size: var(--font-size-sm);
+	border-bottom: 1px solid var(--color-secondary-greyscale-5);
+}
+
+.padding {
+	padding: 10px;
+}
+
+.label {
+	font-size: var(--font-size-sm);
+}
+
+.amount {
+	padding: 10px;
+	border-left: 1px solid var(--color-secondary-greyscale-5);
+}
+
+.addborder {
+	border-bottom: 1px solid var(--color-secondary-greyscale-5);
+}
+
+.total {
+	display: flex;
+	justify-content: flex-end;
+	padding: 10px;
+}
+
+.tax {
+	font-weight: 600;
+}
+
+.keyvalue {
+	margin-left: 12px;
+}

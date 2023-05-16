@@ -1,0 +1,49 @@
+.column {
+	padding: 16px;
+	margin: 12px 4px;
+	box-shadow: 0 0 4px rgb(44 62 80 / 20%);
+}
+
+.flex {
+	display: flex;
+}
+
+.jvnumb {
+	flex: 1.6;
+}
+
+.jvtype {
+	flex: 1;
+}
+
+.accdate {
+	flex: 1;
+}
+
+.entity {
+	flex: 1;
+}
+
+.journal {
+	flex: 1;
+}
+
+.exrate {
+	flex: 1;
+}
+
+.legcurr {
+	flex: 0.9;
+}
+
+.accord {
+	flex: 0.2;
+}
+
+.curr {
+	flex: 1;
+}
+
+.icon {
+	cursor: pointer;
+}

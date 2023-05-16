@@ -344,6 +344,64 @@ function asyncListCurrency() {
 	};
 }
 
+function asyncJvList() {
+	return {
+		labelKey     : 'category',
+		valueKey     : 'id',
+		endpoint     : 'payments/parent-jv/jv-category',
+		initialCall  : true,
+		authkey      : 'get_payments_parent_jv_jv_category',
+		microService : 'business_finance',
+		params       : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncJournalCode() {
+	return {
+		labelKey     : 'description',
+		valueKey     : 'id',
+		endpoint     : 'payments/parent-jv/journal-code',
+		initialCall  : true,
+		authkey      : 'get_payments_parent_jv_journal_code',
+		microService : 'business_finance',
+	};
+}
+
+function asyncAccMode() {
+	return {
+		labelKey     : 'label',
+		valueKey     : 'label',
+		endpoint     : 'payments/parent-jv/acc-mode',
+		initialCall  : true,
+		authkey      : 'get_payments_parent_jv_acc_mode',
+		microService : 'business_finance',
+	};
+}
+
+function asyncCodeMaster() {
+	return {
+		labelKey     : 'description',
+		valueKey     : 'accountCode',
+		endpoint     : 'payments/parent-jv/gl-code-master',
+		initialCall  : true,
+		authkey      : 'get_payments_parent_jv_gl_code_master',
+		microService : 'business_finance',
+	};
+}
+
+function asyncListOrgTradeParties() {
+	return {
+		labelKey    : 'legal_business_name',
+		valueKey    : 'id',
+		endpoint    : 'list_organization_trade_party_details',
+		initialCall : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -370,6 +428,11 @@ export {
 	asyncListCogoEntity,
 	asyncListHsCodes,
 	asyncListCurrency,
+	asyncJvList,
 	asyncAccountEngagementScoringEvents,
 	asyncFieldsTicketTypes,
+	asyncJournalCode,
+	asyncAccMode,
+	asyncCodeMaster,
+	asyncListOrgTradeParties,
 };

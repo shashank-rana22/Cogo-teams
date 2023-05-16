@@ -1,0 +1,42 @@
+.header {
+	display: flex;
+	padding: 16px 4px;
+	font-weight: 600;
+	border-bottom: 2px solid var(--color-accent-orange-2);
+}
+
+.jvnumb {
+	flex: 1.6;
+}
+
+.jvtype {
+	flex: 1;
+}
+
+.accdate {
+	flex: 1;
+}
+
+.entity {
+	flex: 1;
+}
+
+.journal {
+	flex: 1;
+}
+
+.exrate {
+	flex: 1;
+}
+
+.legcurr {
+	flex: 1;
+}
+
+.accord {
+	flex: 0.2;
+}
+
+.curr {
+	flex: 1;
+}

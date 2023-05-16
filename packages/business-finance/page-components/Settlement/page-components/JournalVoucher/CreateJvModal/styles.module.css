@@ -1,0 +1,100 @@
+.flex {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.selectcontainer {
+	:global {
+		.ui_select_input_placeholder,
+		::placeholder {
+			font-size: var(--font-size-md);
+		}
+
+		.ui_select_input_control {
+			font-size: var(--font-size-sm) !important;
+		}
+
+		.ui_select_input_placeholder {
+			font-size: var(--font-size-md) !important;
+			opacity: 0.6;
+		}
+
+		.ui_select_container {
+			width: 200px;
+			max-height: 36px;
+		}
+
+		.ui_select_display_container {
+			width: 200px;
+			max-height: 36px;
+		}
+
+		.ui_select_options_container {
+			width: 240px;
+		}
+	}
+}
+
+.datecontainer {
+	width: 200px;
+}
+
+.textareacontroller {
+	height: 60px;
+
+	:global {
+		.ui_text_area_container {
+			height: 60px;
+		}
+	}
+}
+
+.inputcontainer {
+	:global {
+		.ui_input_control {
+			font-size: var(--font-size-md) !important;
+		}
+
+		.ui_input_container {
+			width: 200px;
+			max-height: 36px;
+		}
+	}
+}
+
+.marginright {
+	margin-top: 12px;
+	margin-right: 16px;
+}
+
+.modal_data {
+	height: 500px;
+	max-height: 500px !important;
+}
+
+.stat {
+	display: flex;
+	flex-direction: column;
+	min-width: 160px;
+	padding: 10px 16px;
+	margin-right: 16px;
+	border: 1px solid #e0e0e0;
+	border-radius: 4px;
+}
+
+.statlabel {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	color: var(--color-secondary-greyscale-3);
+}
+
+.value {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	color: var(--color-accent-orange-2);
+}
+
+.statflex {
+	display: flex;
+	margin-top: 26px;
+}

@@ -74,7 +74,12 @@ function Element({
 				return (
 					<div className={styles.flex} style={style as CSSProperties}>
 						{rest?.options?.map((val) => (
-							<div role="presentation" style={{ margin: '5px' }} onClick={() => tagClick(val)}>
+							<div
+								role="presentation"
+								key={val.value}
+								style={{ margin: '5px' }}
+								onClick={() => tagClick(val)}
+							>
 								<div
 									className={val.value === filters[name as keyof typeof filters]
 										? styles.active
@@ -136,8 +141,9 @@ function Element({
 								color="yellow"
 								className={className}
 								style={style as CSSProperties}
+								key={val?.label}
 							>
-								{val.label}
+								{val?.label || ''}
 							</Pill>
 						))}
 						;

@@ -1,0 +1,41 @@
+.container {
+	background-color: var(--color-gray-5);
+}
+
+.filtercontainer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 16px;
+
+	:global {
+		.ui_select_display_container {
+			width: 180px;
+		}
+
+		.ui_select_options_container {
+			width: 240px;
+		}
+
+		.ui_select_input_placeholder {
+			opacity: 0.6;
+		}
+
+		.ui_input_container {
+			width: 400px;
+		}
+	}
+}
+
+.search {
+	margin-right: 8px;
+}
+
+.createjv {
+	display: flex;
+	align-items: center;
+}
+
+.jvbutton {
+	margin-left: 16px;
+}
