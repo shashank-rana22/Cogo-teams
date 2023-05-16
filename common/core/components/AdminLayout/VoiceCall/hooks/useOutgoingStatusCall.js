@@ -52,7 +52,7 @@ function useOutgoingStatusCall({
 				checkToOpenFeedBack({ hasAgentPickedCall: call_status !== 'not_connected' });
 			}
 		} catch (error) {
-			// console.log("error:", error)
+			console.log('error:', error);
 		}
 	}, [checkToOpenFeedBack, setLocalCallState, trigger]);
 	return {
