@@ -1382,10 +1382,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/so2-surface',
 				type          : 'link',
 				main_apis     : [],
-				// main_apis     : ['list_lastmile_desk_shipments'],
 				possible_apis : apis.so2_surface,
-				// possible_apis : [...apis.document_desk, ...apis.cogolens, ...apis.shipment],
-
 			},
 		],
 	},

@@ -1,7 +1,9 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
 const useBulkUpdateSO2 = () => {
+	const { profile = {} } = useSelector((state) => state);
 	const [{ loading }, trigger] = useRequest({
 		url    : '/bulk_update_shipment_stakeholders',
 		method : 'POST',
@@ -12,11 +14,13 @@ const useBulkUpdateSO2 = () => {
 			await trigger(
 				{
 					data: {
-						ids              : [...checkedRows],
-						stakeholder_id   : allocatedSo2,
-						stakeholder_type : 'service_ops2',
-						service_id       : null,
-						service_type     : null,
+						performed_by_user_id   : profile?.session_type,
+						performed_by_user_type : profile?.user?.id,
+						ids                    : [...checkedRows],
+						stakeholder_id         : allocatedSo2,
+						stakeholder_type       : 'service_ops2',
+						service_id             : null,
+						service_type           : null,
 					},
 				},
 			);

@@ -31,7 +31,7 @@ function DeskTabs({ tabData = {} }) {
 					<TabPanel
 						title={tab.label}
 						name={tab.value}
-						badge={tabData[tab.stat] || 0}
+						badge={tabData[tab.stats] || 0}
 					/>
 				))}
 			</Tabs>
