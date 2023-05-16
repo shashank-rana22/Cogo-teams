@@ -23,12 +23,21 @@ function CancellationModal({
 	return (
 		<Modal show={showCancellationModal} onClose={() => setShowCancellationModal(false)} size="md">
 			<div className={styles.cancel_modal}>
-				<div className={styles.sub_cancel_modal}>
-					<div className={styles.cancel_invoice}>
-						Cancel IRN Of Invoice Number
-						{' '}
-						{itemData?.invoiceNumber}
-					</div>
+
+				<Modal.Header
+					title={(
+						<div className={styles.cancel_invoice}>
+							Cancel IRN Of Invoice Number
+							{' '}
+							<span className={styles.styled_invoice}>
+								{itemData?.invoiceNumber}
+							</span>
+						</div>
+					)}
+				/>
+
+				<Modal.Body>
+
 					<div className={styles.Radiodiv}>
 						<div className={styles.styled_reason}>
 							Reason
@@ -54,19 +63,31 @@ function CancellationModal({
 							placeholder="Not more than 100 characters"
 						/>
 					</div>
-				</div>
-				<div className={styles.confirm_button}>
-					<Button
-						onClick={() => {
-							cancelIrn(response);
-						}}
-						disabled={
+				</Modal.Body>
+
+				<Modal.Footer>
+					<div className={styles.confirm_button}>
+						<div className={styles.styled_button}>
+							<Button
+								onClick={() => {
+									cancelIrn(response);
+								}}
+								disabled={
 							response.value === '' || response.remarks === '' || loading
 						}
-					>
-						Confirm
-					</Button>
-				</div>
+							>
+								Confirm
+							</Button>
+						</div>
+						<Button
+							onClick={() => {
+								setShowCancellationModal(false);
+							}}
+						>
+							Cancel
+						</Button>
+					</div>
+				</Modal.Footer>
 			</div>
 		</Modal>
 	);

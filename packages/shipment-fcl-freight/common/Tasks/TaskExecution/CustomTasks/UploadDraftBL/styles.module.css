@@ -1,11 +1,59 @@
+.container {
+	&_child {
+		margin-top: 8px;
+	}
+}
+
 .flex_container {
 	display: block;
-	padding: 16;
-	margin-bottom: 8;
+	padding: 16px;
+	margin-bottom: 8px;
 	border: 1px solid #ededed;
-	border-radius: 8;
+	border-radius: 8px;
 }
 
 .flex_end {
 	justify-content: "flex-end";
+}
+
+.form_container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 8px;
+
+	& > div {
+		padding: 4px;
+	}
+}
+
+.text {
+	font-weight: 700;
+}
+
+.header_action {
+	display: flex;
+	justify-content: space-between;
+
+	p {
+		font-weight: 700;
+	}
+
+	& > div {
+		display: flex;
+
+		button:first-child {
+			margin-right: 8px;
+		}
+	}
+}
+
+.custom_modal {
+	:global {
+		.ui_modal_body_container {
+			max-height: calc(100vh - 64px);
+			background-color: rgb(224 224 224);
+		}
+	}
 }
