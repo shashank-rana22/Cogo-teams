@@ -1,119 +1,155 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, Toast, RadioGroup } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
-// import useGetOrgUsersData from '../../../../../../../hooks/useGetOrgUsersData';
-// import useSendInvoiceOtp from '../../../../../../../hooks/useSendInvoiceOtp';
-// import useVerifyInvoiceOtp from '../../../../../../../hooks/useVerifyInvoiceOtp';
-// import Step1 from './Step1';
-// import Step2 from './Step2';
 import useGetOrgUsersData from '../../../../../../../hooks/useGetOrgUsersData';
+import useSendInvoiceOtp from '../../../../../../../hooks/useSendInvoiceOtp';
+import useVerifyInvoiceOtp from '../../../../../../../hooks/useVerifyInvoiceOtp';
 
+import Loader from './Loader';
 import styles from './styles.module.css';
-import UserInfo from './UserInfo';
 
 const OTP_LENGTH = 4;
 
 function OTPVerificationModal({
 	showOtpModal = false,
-	setOTPModal = () => {},
+	setShowOTPModal = () => {},
 	invoice = {},
 	refetch = () => {},
 }) {
 	const [userList, setUserList] = useState([]);
 	const [otpValue, setOTPValue] = useState('');
 	const [modalIsOpen, setModalIsOpen] = useState(false);
-	const [selectedUser, setSelectedUser] = useState({});
+	const [selectedUser, setSelectedUser] = useState('');
 
 	const { loading, orgData } = useGetOrgUsersData({ invoice });
 
-	// const { onClickSubmitOtp, verifyInvoiceLoader } = useVerifyInvoiceOtp(
-	// 	otpValue,
-	// 	setOTPModal,
-	// 	invoice,
-	// 	refetch,
-	// );
+	const handleOTPChange = (newOTP) => {
+		setOTPValue(newOTP?.length === OTP_LENGTH ? `${newOTP}` : '');
+	};
 
-	// const { sendOtpForInvoiceApproval } = useSendInvoiceOtp({
-	// 	invoice,
-	// 	selectedUser,
-	// 	setModalIsOpen,
-	// });
+	const refetchAfterApiCall = () => {
+		setModalIsOpen(true);
+	};
+
+	const { onClickSubmitOtp, verifyInvoiceLoader } = useVerifyInvoiceOtp(
+		otpValue,
+		setShowOTPModal,
+		invoice,
+		refetch,
+	);
+	const { sendOtpForInvoiceApproval } = useSendInvoiceOtp({
+		invoice_id : invoice?.id,
+		user_id    : selectedUser?.split('_')?.[0],
+		refetch    : refetchAfterApiCall,
+	});
 
 	const userLists = orgData?.list?.filter((obj) => obj?.mobile_verified);
+
+	const organizationOptions = userList?.map((obj) => ({
+		label: (
+			<div className={styles.container}>
+				<div className={styles.user_name}>{obj?.name}</div>
+				<span>
+					(
+					{obj?.mobile_country_code}
+					-
+					{obj?.mobile_number}
+					)
+				</span>
+			</div>
+		),
+		value: `${obj.user_id}_${obj.name}`,
+	}));
 
 	useEffect(() => {
 		setUserList(userLists);
 	}, [userLists]);
 
-	// ${selectedUser?.split('_')?.[1]}
-	return !showOtpModal ? (
-		<Modal
-			show={showOtpModal}
-			onClose={() => setOTPModal(false)}
-		>
-			<Modal.Header title="Enter OTP sent to  registered mobile number" />
-			<Modal.Body>
-				<div className={styles.Container}>
-					{/* <OtpInput
-							otpLength={OTP_LENGTH}
-							value={otpValue}
-							onChange={(value) => {
-								setOTPValue(value?.length === OTP_LENGTH ? `${value}` : '');
-							}}
-						/> */}
-					OTP Input
-				</div>
-			</Modal.Body>
-			<Modal.Footer>
-				<Button
-					size="md"
-				>
-					SUBMIT
-				</Button>
+	const handleClick = async () => {
+		if (isEmpty(selectedUser)) Toast.error('Please select any user');
+		else {
+			await sendOtpForInvoiceApproval();
+			// setModalIsOpen(true);
+		}
+	};
+	const title = `Enter OTP sent to ${selectedUser?.split('_')?.[1]} registered mobile number`;
 
-				<Button
-					size="md"
-					style={{ marginLeft: '16px' }}
-				>
-					Resend OTP
-				</Button>
+	if (userList?.length === 0) {
+		return <div className={styles.no_data}>No verified user exists!</div>;
+	}
 
-			</Modal.Footer>
-		</Modal>
-	) : (
-		<Modal
-			show={showOtpModal}
-			onClose={() => setOTPModal(false)}
-		>
-			<Modal.Header title="Enter OTP sent to  registered mobile number" />
-			<Modal.Body>
-				<UserInfo
-					list={userList}
-					setModalIsOpen={setModalIsOpen}
-					setOTPModal={setOTPModal}
-					invoice={invoice}
-					setSelectedUser={setSelectedUser}
-					selectedUser={selectedUser}
-				/>
-			</Modal.Body>
-			<Modal.Footer>
-				<Button
-					className="secondary md"
-					onClick={() => setOTPModal(false)}
-					style={{ border: 'none' }}
+	return (
+		<div>
+			{showOtpModal ? (
+				<Modal
+					show={showOtpModal}
+					onClose={() => setShowOTPModal(false)}
 				>
-					Cancel
-				</Button>
+					<Modal.Header title="Select user to send OTP" />
+					<Modal.Body className={styles.body}>
+						{loading ? (
+							<Loader />
+						) : (
+							<RadioGroup
+								options={organizationOptions}
+								value={selectedUser}
+								onChange={(item) => setSelectedUser(item)}
+							/>
+						)}
 
-				<Button
-					className="primary md"
-					style={{ marginLeft: '16px' }}
-					onClick={() => setOTPModal(!showOtpModal)}
+					</Modal.Body>
+					<Modal.Footer>
+						<Button
+							size="md"
+							onClick={() => setShowOTPModal(false)}
+						>
+							Cancel
+						</Button>
+
+						<Button
+							size="md"
+							style={{ marginLeft: '16px' }}
+							onClick={handleClick}
+						>
+							Send
+						</Button>
+					</Modal.Footer>
+				</Modal>
+			) : null}
+
+			{modalIsOpen ? (
+				<Modal
+					show={showOtpModal}
+					onClose={() => setModalIsOpen(false)}
 				>
-					Send
-				</Button>
-			</Modal.Footer>
-		</Modal>
+					<Modal.Header title={title} />
+					<Modal.Body>
+						<div className={styles.Container}>
+							OTP Input
+						</div>
+					</Modal.Body>
+					<Modal.Footer>
+						<Button
+							size="md"
+							disabled={verifyInvoiceLoader}
+							onClick={() => onClickSubmitOtp()}
+						>
+							SUBMIT
+						</Button>
+
+						<Button
+							size="md"
+							style={{ marginLeft: '16px' }}
+							onClick={() => sendOtpForInvoiceApproval()}
+						>
+							Resend OTP
+						</Button>
+
+					</Modal.Footer>
+				</Modal>
+			) : null}
+		</div>
 	);
 }
 

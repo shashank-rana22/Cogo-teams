@@ -2,34 +2,38 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-const useSendInvoiceEmail = ({
-	setShow = () => {},
-	invoice = {},
+const useSendInvoiceOtp = ({
+	invoice_id = '',
+	user_id = '',
 	refetch = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/send_invoice_email',
+		url    : '/send_invoice_approval_otp',
 		method : 'POST',
 	}, { manual: true });
 
-	const handleSend = async () => {
+	const sendOtpForInvoiceApproval = async () => {
 		try {
-			const payload = { id: invoice?.id };
-
+			const payload = {
+				invoice_id,
+				user_id,
+			};
 			const res = await trigger({
 				data: payload,
 			});
 			if (!res?.hasError) {
-				Toast.success('Email Send successfully');
-				setShow(false);
 				refetch();
+				Toast.success('OTP sent successfully!');
 			}
-		} catch (err) {
-			toastApiError(err?.data?.invoice);
+		} catch (error) {
+			toastApiError(error?.data);
 		}
 	};
 
-	return { handleSend, loading };
+	return {
+		loading,
+		sendOtpForInvoiceApproval,
+	};
 };
 
-export default useSendInvoiceEmail;
+export default useSendInvoiceOtp;

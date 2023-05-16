@@ -1,34 +1,25 @@
-.title{
-	font-size: 18px;
-	font-weight: 500;
-	color: #393f70;
-	margin: 10px 30px 20px 30px;
-	text-align: center;
-}
-
 .container{
 	display: flex;
-	flex-direction: column;
 	align-items: center;
-	.core-ui-input-root {
-		height: 48px;
-		font-size: 22px;
-		width: 70px;
-	}
+	width: 100%;
 }
 
-.actions{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin: 40px 0px 20px 0px;
+.user_name{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 60%;
+}
 
-	.core-ui-button-root {
-		width: 20%;
-		text-transform: capitalize;
+.no_data{
+	font-size: 16px;
+	font-weight: 500;
+}
 
-		&:last-child {
-			margin-left: 16px;
+.body{
+	:global{
+		.ui_radio_container{
+			width: 100%;
 		}
 	}
 }

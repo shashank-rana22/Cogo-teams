@@ -36,7 +36,7 @@ function Actions({
 	const [showAddRemarks, setShowAddRemarks] = useState(false);
 	const [showChangePaymentMode, setShowChangePaymentMode] = useState(false);
 	const [sendEmail, setSendEmail] = useState(false);
-	const [showOtpModal, setOTPModal] = useState(false);
+	const [showOtpModal, setShowOTPModal] = useState(false);
 	const showForOldShipments = shipment_data.serial_id <= 120347 && invoice.status === 'pending';
 
 	// const user_data = useSelector(({ profile }) => profile || {});
@@ -235,7 +235,7 @@ function Actions({
 						) : null}
 
 						{invoice?.status === 'reviewed' ? (
-							<Button size="sm" onClick={() => setOTPModal(true)}>
+							<Button size="sm" onClick={() => setShowOTPModal(true)}>
 								Send OTP for Approval
 							</Button>
 						) : null}
@@ -371,7 +371,7 @@ function Actions({
 			{showOtpModal ? (
 				<OTPVerificationModal
 					showOtpModal={showOtpModal}
-					setOTPModal={setOTPModal}
+					setShowOTPModal={setShowOTPModal}
 					invoice={invoice}
 					refetch={salesInvoicesRefetch}
 					shipment_data={shipment_data}
