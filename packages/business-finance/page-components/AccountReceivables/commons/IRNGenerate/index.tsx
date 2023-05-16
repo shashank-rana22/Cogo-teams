@@ -226,12 +226,16 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 		</div>
 	);
 
+	const rest = {
+		onClickOutside: () => setVisible(false),
+	};
+
 	return (
 		<Popover
 			placement="left"
 			render={content()}
 			visible={visible}
-			onClickOutside={() => setVisible(false)}
+			{...rest}
 		>
 
 			<IcMOverflowDot
