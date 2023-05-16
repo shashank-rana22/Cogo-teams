@@ -23,20 +23,22 @@ const excludeServices = [
 ];
 
 function ExecuteTask({
-	task = {}, onCancel = () => {}, taskListRefetch = () => {},
+	task = {},
+	onCancel = () => {},
+	taskListRefetch = () => {},
 	selectedMail = [],
 	setSelectedMail = () => {},
 }) {
-	const { taskConfigData, loading } = useGetTaskConfig({ task });
-	const { mailLoading } = useTaskRpa({ setSelectedMail, task });
+	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
+	const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
 
 	const { servicesList, shipment_data, primary_service } = useContext(ShipmentDetailContext);
 
 	const {
-		steps,
-		currentStep,
-		setCurrentStep,
-		serviceIdMapping,
+		steps = [],
+		currentStep = {},
+		setCurrentStep = () => {},
+		serviceIdMapping = [],
 	} = useTaskExecution({ task, taskConfigData });
 
 	const stepConfigValue = steps.length
@@ -48,9 +50,9 @@ function ExecuteTask({
 	}
 
 	if (
-		task?.service_type
-		&& task?.task === 'mark_confirmed'
-		&& (!excludeServices.includes(task?.service_type))
+		task.service_type
+		&& task.task === 'mark_confirmed'
+		&& (!excludeServices.includes(task.service_type))
 	) {
 		return (
 			<MarkConfirmServices
@@ -72,8 +74,7 @@ function ExecuteTask({
 				task={task}
 				shipmentData={shipment_data}
 				primaryService={primary_service}
-				onCancel={onCancel}
-				taskListRefetch={taskListRefetch}
+				selectedMail={selectedMail}
 			/>
 		);
 	}
@@ -88,7 +89,6 @@ function ExecuteTask({
 				task={task}
 				onCancel={onCancel}
 				taskListRefetch={taskListRefetch}
-				taskConfigData={taskConfigData}
 			/>
 		);
 	}
