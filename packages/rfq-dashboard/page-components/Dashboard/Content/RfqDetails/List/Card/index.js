@@ -1,15 +1,23 @@
 import { Checkbox } from '@cogoport/components';
 import { IcMProfile } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useRouter } from 'next/router';
 
 import { SERVICE_MAPPING } from '../../../../../../constants';
 import { getformattedDuration } from '../../../../../../utils/getFormattedDuration';
 
 import styles from './styles.module.css';
 
-function Card({ item, checkedItems, handleCheck }) {
+function Card({ item, handleCheck, checkedItems, partner_id }) {
+	const router = useRouter();
+
 	return (
-		<div className={styles.container} key={item.id}>
+		<div
+			role="presentation"
+			onClick={() => router.push(`/${partner_id}/rfq-dashboard/${item.id}`)}
+			className={styles.container}
+			key={item.id}
+		>
 			<Checkbox
 				className={styles.checkbox}
 				value={item.id}
