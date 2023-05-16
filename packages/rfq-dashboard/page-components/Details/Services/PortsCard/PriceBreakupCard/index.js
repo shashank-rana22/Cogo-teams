@@ -125,7 +125,7 @@ function PriceBreakupCard({ prefilledValues = [{}], priceBreakupChildData = [], 
 		});
 		return newArr;
 	});
-	console.log('emptyValues', emptyValues);
+
 	const totalLength = priceBreakupChildData.reduce((total, val) => total + val.data.length, 0);
 	const watchFields = Array(totalLength).fill(0).map((item, index) => watch(`services.${index}.margin_value`));
 

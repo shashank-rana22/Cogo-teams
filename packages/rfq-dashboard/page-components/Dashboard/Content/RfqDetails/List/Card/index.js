@@ -18,12 +18,17 @@ function Card({ item, handleCheck, checkedItems, partner_id }) {
 			className={styles.container}
 			key={item.id}
 		>
-			<Checkbox
-				className={styles.checkbox}
-				value={item.id}
-				checked={checkedItems.some((checkedItem) => checkedItem.id === item.id)}
-				onChange={handleCheck}
-			/>
+			<div
+				role="presentation"
+				onClick={(e) => e.stopPropagation()}
+			>
+				<Checkbox
+					className={styles.checkbox}
+					value={item.id}
+					checked={checkedItems.some((checkedItem) => checkedItem.id === item.id)}
+					onChange={handleCheck}
+				/>
+			</div>
 			<div className={styles.basic_details}>
 				<div className={styles.org_name}>{item?.organization_business_name || '-'}</div>
 				<div className={styles.tags}>
