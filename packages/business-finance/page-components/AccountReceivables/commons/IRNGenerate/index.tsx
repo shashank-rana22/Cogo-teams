@@ -227,6 +227,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 			placement="left"
 			render={content()}
 			visible={visible}
+			onClickOutside={() => setVisible(false)}
 		>
 
 			<IcMOverflowDot
