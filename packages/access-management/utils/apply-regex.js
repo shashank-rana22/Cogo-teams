@@ -6,27 +6,26 @@ const applyRegEx = (searchString, list, key, aliases = []) => {
 	const newList = [];
 
 	(list || []).forEach((item) => {
-		let newItem = { ...item };
-
-		const { options = [] } = newItem;
-
 		const already_present = newList.some((listItem) => item.key === listItem.key);
 
-		let newOptions = [];
-		if (!isEmpty(options)) {
-			newOptions = (options || []).filter((optionItem) => optionItem.title.toLowerCase()
-				.includes(newSearchString));
+		if (already_present) {
+			return;
 		}
 
-		if (!isEmpty(newOptions)) {
-			newItem = { ...item, options: newOptions };
-		}
+		const { options = [] } = item;
+
+		const newItem = {
+			...item,
+			options: isEmpty(options)
+				? []
+				: options.filter((optionItem) => optionItem.title.toLowerCase()
+					.includes(newSearchString)),
+		};
 
 		const isAliasPresent = aliases
-			.some((alias) => newItem[alias] && newItem[alias].toLowerCase().includes(newSearchString));
+			.some((alias) => newItem[alias]?.toLowerCase().includes(newSearchString));
 
-		if (!already_present
-			&& (isAliasPresent || !isEmpty(newOptions) || newItem[key].toLowerCase().includes(newSearchString))) {
+		if ((isAliasPresent || !isEmpty(newItem.options) || newItem[key]?.toLowerCase().includes(newSearchString))) {
 			newList.push(newItem);
 		}
 	});
