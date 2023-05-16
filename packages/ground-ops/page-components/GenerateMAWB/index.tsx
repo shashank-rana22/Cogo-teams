@@ -127,7 +127,7 @@ function GenerateMAWB({
 		}
 	});
 
-	cogoSeriesNumber = cogoSeriesNumber.sort();
+	cogoSeriesNumber = cogoSeriesNumber.sort((a, b) => a - b);
 
 	useEffect(() => {
 		if (activeCategory === 'hawb') {
