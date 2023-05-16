@@ -4,13 +4,20 @@ const chapter_content = ({ values, editorValue }) => {
 	const {
 		content_type = '',
 		upload_video = '',
-		upload_presentation = '',
+		upload_presentation = {},
+		upload_document = {},
 	} = values || {};
 
 	if (content_type === 'text') {
 		return editorValue.toString('html');
-	} if (content_type === 'video') {
+	}
+
+	if (content_type === 'video') {
 		return upload_video;
+	}
+
+	if (content_type === 'document') {
+		return upload_document.finalUrl;
 	}
 
 	return upload_presentation.finalUrl;
@@ -75,6 +82,7 @@ const getChapterPayload = ({
 		additional_resources_title : undefined,
 		upload_video               : undefined,
 		upload_presentation        : undefined,
+		upload_document            : undefined,
 		...(!isNew ? { id: chapterId } : {}),
 		...(!isEmpty(chapter_attachments) ? { chapter_attachments } : {}),
 	};

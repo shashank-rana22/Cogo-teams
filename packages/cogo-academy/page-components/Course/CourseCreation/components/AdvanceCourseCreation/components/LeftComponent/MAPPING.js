@@ -5,7 +5,7 @@ const MAPPING = [
 		children : [],
 	},
 	{
-		key      : 'specifications',
+		key      : 'specification',
 		title    : 'Specifications',
 		children : [],
 	},
@@ -14,22 +14,22 @@ const MAPPING = [
 		title    : 'Create Content',
 		children : [
 			{
-				key   : 'course_curriculum',
+				key   : 'curriculum',
 				title : 'Course Curriculum',
 			},
 			{
-				key   : 'course_completion',
+				key   : 'completion',
 				title : 'Course Completion',
 			},
 		],
 	},
 	{
-		key      : 'intended_learners',
+		key      : 'audience',
 		title    : 'Intended Learners',
 		children : [],
 	},
 	{
-		key      : 'publish_course',
+		key      : 'publish',
 		title    : 'Publish Course',
 		children : [],
 	},

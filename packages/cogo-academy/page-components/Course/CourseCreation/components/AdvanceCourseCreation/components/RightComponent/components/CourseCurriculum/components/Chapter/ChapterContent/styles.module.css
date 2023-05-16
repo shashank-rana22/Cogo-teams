@@ -25,6 +25,10 @@
 		margin-top: 0;
 	}
 
+	&.upload_document {
+		margin-top: 0;
+	}
+
 	&.upload_file {
 		margin-top: 0;
 	}

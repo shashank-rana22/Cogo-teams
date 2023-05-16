@@ -11,12 +11,12 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 const COMPONENT_MAPPING = {
-	overview          : CourseOverview,
-	specifications    : Specifications,
-	intended_learners : IntendedLearners,
-	course_curriculum : CourseCurriculum,
-	course_completion : CourseCompletion,
-	publish_course    : PublishCourse,
+	overview      : CourseOverview,
+	specification : Specifications,
+	audience      : IntendedLearners,
+	curriculum    : CourseCurriculum,
+	completion    : CourseCompletion,
+	publish       : PublishCourse,
 };
 
 function RightComponent({ data = {}, activeTab, setActiveTab, id, getCogoAcademyCourse }) {

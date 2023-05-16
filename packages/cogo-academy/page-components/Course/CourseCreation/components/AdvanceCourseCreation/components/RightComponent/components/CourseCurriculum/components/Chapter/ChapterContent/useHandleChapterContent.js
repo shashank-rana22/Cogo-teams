@@ -110,6 +110,12 @@ const useHandleChapterContent = ({ chapterContent, onSaveChapter, subModuleId, i
 		}
 	}, [additionalResourcesWatch, chapterContent, setValue]);
 
+	useEffect(() => {
+		if (chapterContent.isNew) {
+			setValue('content_type', 'document');
+		}
+	}, [chapterContent.isNew, setValue]);
+
 	return {
 		RichTextEditor,
 		onSubmit,

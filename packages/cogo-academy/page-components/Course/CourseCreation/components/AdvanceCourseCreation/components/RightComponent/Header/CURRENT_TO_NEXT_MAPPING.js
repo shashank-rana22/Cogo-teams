@@ -1,9 +1,9 @@
 const CURRENT_TO_NEXT_MAPPING = {
-	overview          : 'specifications',
-	specifications    : 'course_curriculum',
-	course_curriculum : 'course_completion',
-	course_completion : 'intended_learners',
-	intended_learners : 'publish_course',
+	overview      : 'specification',
+	specification : 'curriculum',
+	curriculum    : 'completion',
+	completion    : 'audience',
+	audience      : 'publish',
 };
 
 export default CURRENT_TO_NEXT_MAPPING;

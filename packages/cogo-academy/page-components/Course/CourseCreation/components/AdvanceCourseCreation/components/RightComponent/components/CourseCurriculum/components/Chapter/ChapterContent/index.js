@@ -52,6 +52,10 @@ function ChapterContent({ chapterContent, onSaveChapter, subModuleId, index, cha
 					return null;
 				}
 
+				if (!['presentation', 'text'].includes(contentTypeWatch) && name === 'upload_presentation') {
+					return null;
+				}
+
 				const docToUse = name === 'upload_video' ? uploadVideoWatch : uploadDocumentWatch;
 
 				const Element = getFieldController(elementType);

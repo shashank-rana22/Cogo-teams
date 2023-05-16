@@ -17,6 +17,7 @@ const controls = [
 		label       : 'Select Main Content Type',
 		name        : 'content_type',
 		elementType : 'radioGroup',
+		value       : 'document',
 		options     : [
 			{
 				value : 'document',
@@ -46,13 +47,15 @@ const controls = [
 		elementType   : 'fileUpload',
 		draggable     : true,
 		dropareaProps : { heading: 'Upload Presentation', subHeading: '(only .pptx or .pdf formats)' },
+		accept        : '.pptx',
 		rules         : { required: { value: true, message: 'This is required' } },
 	},
 	{
 		name          : 'upload_document',
 		elementType   : 'fileUpload',
 		draggable     : true,
-		dropareaProps : { heading: 'Upload Presentation', subHeading: '(only .pptx or .pdf formats)' },
+		dropareaProps : { heading: 'Upload Document', subHeading: '(only .pptx or .pdf formats)' },
+		accept        : '.pdf,.doc,.docx',
 		rules         : { required: { value: true, message: 'This is required' } },
 	},
 	{
