@@ -1,6 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
-import useListShipmentCreditNotes from '../../../hooks/useListShipmentCreditNotes';
+import useListCreditNotes from '../../../hooks/useListCreditNotes';
 import CreditNote from '../CreditNote';
 
 import Header from './Header';
@@ -44,7 +44,7 @@ function Invoices({
 
 	disableAction = showForOldShipments ? false : disableAction;
 
-	const { list, refetch: CNRefetch, loading: CNLoading } = useListShipmentCreditNotes({ shipmentData });
+	const { list, refetch: CNRefetch, loading: CNLoading } = useListCreditNotes({ shipmentData });
 
 	return (
 		<main className={styles.container}>
