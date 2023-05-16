@@ -2,7 +2,7 @@ import { Button, DateRangepicker } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { useContext, useState } from 'react';
 
-import DocumentDeskContext from '../../../../context/DocumentDeskContext';
+import DashboardContext from '../../../../context/DashboardContext';
 
 import styles from './styles.module.css';
 
@@ -11,7 +11,7 @@ function FilterBy({
 	popoverFilter = {},
 	setShowPopover = () => {},
 }) {
-	const { filters = {}, setFilters } = useContext(DocumentDeskContext);
+	const { filters = {}, setFilters } = useContext(DashboardContext);
 
 	const [formValue, setFormValue] = useState({});
 

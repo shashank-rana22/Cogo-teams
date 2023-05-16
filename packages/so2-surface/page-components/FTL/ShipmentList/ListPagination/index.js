@@ -1,10 +1,10 @@
 import { Pagination } from '@cogoport/components';
 import { useContext } from 'react';
 
-import DocumentDeskContext from '../../../../context/DocumentDeskContext';
+import DashboardContext from '../../../../context/DashboardContext';
 
 function ListPagination({ data = {} }) {
-	const { setFilters, filters = {} } = useContext(DocumentDeskContext);
+	const { setFilters, filters = {} } = useContext(DashboardContext);
 
 	const { page, total_count, page_limit } = data || {};
 

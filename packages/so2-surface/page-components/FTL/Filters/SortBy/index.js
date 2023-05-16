@@ -1,7 +1,7 @@
 import { Button, Select, Chips } from '@cogoport/components';
 import { useContext, useState } from 'react';
 
-import DocumentDeskContext from '../../../../context/DocumentDeskContext';
+import DashboardContext from '../../../../context/DashboardContext';
 
 import styles from './styles.module.css';
 
@@ -16,7 +16,7 @@ function SortBy({
 	const SORTING_ORDER = [{ key: 'asc', children: 'Ascending' }, { key: 'desc', children: 'Descending' }];
 
 	const [order, setOrder] = useState('asc');
-	const { filters = {}, setFilters } = useContext(DocumentDeskContext);
+	const { filters = {}, setFilters } = useContext(DashboardContext);
 
 	const [sortValue, setSortValue] = useState('created_at');
 	const handleReset = () => {

@@ -3,10 +3,10 @@ import { useContext } from 'react';
 
 import controlConfig from '../../../configs/CONTROLS_CONFIG.json';
 import TabContainer from '../../../configs/TAB_CONFIG';
-import DocumentDeskContext from '../../../context/DocumentDeskContext';
+import DashboardContext from '../../../context/DashboardContext';
 
 function StepperTabs() {
-	const { stepperTab, filters, setFilters, setActiveTab, setStepperTab } = useContext(DocumentDeskContext);
+	const { stepperTab, filters, setFilters, setActiveTab, setStepperTab } = useContext(DashboardContext);
 	const tabsConfig = TabContainer();
 	const onStepperTabChange = (val) => {
 		const firstTab = tabsConfig[val]?.[0];

@@ -1,13 +1,13 @@
 import { Tooltip, cl, Button } from '@cogoport/components';
 import { useContext } from 'react';
 
-import DocumentDeskContext from '../../../../../context/DocumentDeskContext';
+import DashboardContext from '../../../../../context/DashboardContext';
 
 import styles from './styles.module.css';
 
 export default function ShipmentInfo({ item = {}, clickCard = () => {} }) {
 	const { serial_id, booking_party_details, kam_detail } = item;
-	const { activeTab } = useContext(DocumentDeskContext);
+	const { activeTab } = useContext(DashboardContext);
 
 	return (
 		<div className={styles.container}>

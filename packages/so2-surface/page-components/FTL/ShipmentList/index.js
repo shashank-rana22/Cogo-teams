@@ -4,7 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState, useContext, useEffect } from 'react';
 
 import EmptyState from '../../../common/EmptyState';
-import DocumentDeskContext from '../../../context/DocumentDeskContext';
+import DashboardContext from '../../../context/DashboardContext';
 import useBulkUpdateSO2 from '../../../hooks/useBulkUpdateSO2';
 
 import Card from './Card';
@@ -12,7 +12,7 @@ import ListPagination from './ListPagination';
 import styles from './styles.module.css';
 
 function ShipmentList({ loading, data = {} }) {
-	const { activeTab, filters, setFilters } = useContext(DocumentDeskContext);
+	const { activeTab } = useContext(DashboardContext);
 	const { apiTrigger } = useBulkUpdateSO2();
 
 	const { list = [] } = data || {};

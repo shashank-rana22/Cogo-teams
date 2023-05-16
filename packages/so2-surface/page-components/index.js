@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router';
 import { useState, useCallback, useMemo } from 'react';
 
-import DocumentDeskContext from '../context/DocumentDeskContext';
+import DashboardContext from '../context/DashboardContext';
 import getLocalStorageVal from '../helpers/getLocalStorageVal';
 
 import FTL from './FTL';
 
-export default function DocumentDesk() {
+export default function SO2Surface() {
 	const defaultValues = getLocalStorageVal();
 	const router = useRouter();
 
@@ -33,8 +33,8 @@ export default function DocumentDesk() {
 	}), [activeTab, setActiveTab, filters, setFilters, scopeFilters, handleVersionChange, stepperTab, setStepperTab]);
 
 	return (
-		<DocumentDeskContext.Provider value={contextValues}>
+		<DashboardContext.Provider value={contextValues}>
 			{activeTab ? <FTL /> : null}
-		</DocumentDeskContext.Provider>
+		</DashboardContext.Provider>
 	);
 }

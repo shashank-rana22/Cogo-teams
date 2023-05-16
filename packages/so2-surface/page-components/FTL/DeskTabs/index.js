@@ -2,13 +2,13 @@ import { TabPanel, Tabs } from '@cogoport/components';
 import { useContext } from 'react';
 
 import TabContainer from '../../../configs/TAB_CONFIG';
-import DocumentDeskContext from '../../../context/DocumentDeskContext';
+import DashboardContext from '../../../context/DashboardContext';
 
 import styles from './styles.module.css';
 
 function DeskTabs({ tabData = {} }) {
 	const tabsConfig = TabContainer();
-	const { stepperTab, filters, setFilters, activeTab, setActiveTab } = useContext(DocumentDeskContext);
+	const { stepperTab, filters, setFilters, activeTab, setActiveTab } = useContext(DashboardContext);
 	const tabs = tabsConfig[stepperTab] || [];
 
 	const onChangeTab = (val) => {
@@ -31,7 +31,7 @@ function DeskTabs({ tabData = {} }) {
 					<TabPanel
 						title={tab.label}
 						name={tab.value}
-						badge={tabData[tab.stats] || 0}
+						badge={tabData[tab.stat] || 0}
 					/>
 				))}
 			</Tabs>

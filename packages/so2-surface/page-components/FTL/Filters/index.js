@@ -2,14 +2,14 @@ import { Input, Popover, Button } from '@cogoport/components';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { useState, useContext } from 'react';
 
-import DocumentDeskContext from '../../../context/DocumentDeskContext';
+import DashboardContext from '../../../context/DashboardContext';
 
 import FilterBy from './FilterBy';
 import SortBy from './SortBy';
 import styles from './styles.module.css';
 
 function Filters() {
-	const { filters = {}, setFilters = () => {} } = useContext(DocumentDeskContext);
+	const { filters = {}, setFilters = () => {} } = useContext(DashboardContext);
 
 	const { q = '' } = filters || {};
 

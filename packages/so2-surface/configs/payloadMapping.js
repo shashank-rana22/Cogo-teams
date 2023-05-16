@@ -21,7 +21,6 @@ const payloadMapping = {
 		e_pod: {
 			shipment_type : 'ftl_freight',
 			pending_tasks : {
-				// task_type : 'upload_document',
 				task: 'upload_proof_of_delivery',
 			},
 
@@ -29,7 +28,6 @@ const payloadMapping = {
 		physical_pod_service_provider: {
 			shipment_type : 'ftl_freight',
 			pending_tasks : {
-				// task_type : 'upload_document',
 				task: 'upload_service_provider_proof_of_delivery',
 			},
 
@@ -37,7 +35,6 @@ const payloadMapping = {
 		physical_pod_customer: {
 			shipment_type : 'ftl_freight',
 			pending_tasks : {
-				// task_type : 'upload_document',
 				task: 'pod_sent_to_shipper',
 
 			},

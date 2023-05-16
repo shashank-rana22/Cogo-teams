@@ -4,11 +4,11 @@ import { useSelector } from '@cogoport/store';
 import { useContext, useState, useEffect, useCallback } from 'react';
 
 import payloadMapping from '../configs/payloadMapping';
-import DocumentDeskContext from '../context/DocumentDeskContext';
+import DashboardContext from '../context/DashboardContext';
 
 const useListDocumentDesk = () => {
-	const documentDeskContextValues = useContext(DocumentDeskContext);
-	const { filters, setFilters, activeTab, stepperTab } = documentDeskContextValues || {};
+	const dashboardContextValues = useContext(DashboardContext);
+	const { filters, setFilters, activeTab, stepperTab } = dashboardContextValues || {};
 
 	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
 	const { page = 1, ...restFilters } = filters || {};
