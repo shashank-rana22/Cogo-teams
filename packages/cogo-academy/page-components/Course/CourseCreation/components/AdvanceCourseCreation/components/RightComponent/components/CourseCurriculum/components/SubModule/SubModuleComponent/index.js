@@ -1,7 +1,8 @@
-import { Pill, Button } from '@cogoport/components';
+import { Accordion, Pill, Button } from '@cogoport/components';
 import { IcMCrossInCircle, IcMDelete, IcMDrag, IcMEdit } from '@cogoport/icons-react';
 
 import { getFieldController } from '../../../../../../../../../../commons/getFieldController';
+import Chapter from '../../Chapter';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -18,6 +19,8 @@ function SubModuleComponent({
 	setCourseSubModule,
 	id: course_id,
 	subModuleLoading,
+	getLoading,
+	getCourseModuleDetails,
 }) {
 	const {
 		handleSubmit,
@@ -107,38 +110,53 @@ function SubModuleComponent({
 	}
 
 	return (
-		<div
-			key={subModule.id}
-			draggable
-			onDragStart={(event) => handleDragStart(event, subModule, false)}
-			onDragOver={(event) => handleDragOver(event)}
-			onDrop={(event) => handleDrop(event, subModule, false)}
-			className={`${styles.module} ${styles.flex}`}
-		>
-			<IcMDrag className={styles.icon} />
-			<div className={`${styles.left} ${styles.flex}`}>
-				{`Sub Module ${nodeIndex + 1}:`}
-				{' '}
-				<b className={styles.name}>{subModule.name}</b>
-			</div>
+		<div className={styles.child_accordian}>
+			<Accordion
+				type="text"
+				title={(
+					<div
+						key={subModule.id}
+						draggable
+						onDragStart={(event) => handleDragStart(event, subModule, false)}
+						onDragOver={(event) => handleDragOver(event)}
+						onDrop={(event) => handleDrop(event, subModule, false)}
+						className={`${styles.module} ${styles.flex}`}
+					>
+						<IcMDrag className={styles.icon} />
+						<div className={`${styles.left} ${styles.flex}`}>
+							{`Sub Module ${nodeIndex + 1}:`}
+							{' '}
+							<b className={styles.name}>{subModule.name}</b>
+						</div>
 
-			<IcMEdit
-				onClick={() => setShowSubModule((prev) => ([...prev, subModule.id]))}
-				className={`${styles.left} ${styles.icon}`}
-			/>
-			{/* <IcMDelete
-				onClick={() => deleteModule({ id: subModule.id, isNew: subModule.isNew || false })}
-				className={`${styles.left} ${styles.icon}`}
-			/> */}
+						<IcMEdit
+							onClick={() => setShowSubModule((prev) => ([...prev, subModule.id]))}
+							className={`${styles.left} ${styles.icon}`}
+						/>
 
-			<Pill
-				style={{ marginLeft: '16px' }}
-				size="sm"
-				color={subModule.isNew ? '#df8b00' : '#45f829'}
+						<Pill
+							style={{ marginLeft: '16px' }}
+							size="sm"
+							color={subModule.isNew ? '#df8b00' : '#45f829'}
+						>
+							{subModule.isNew ? 'unsaved' : 'saved'}
+						</Pill>
+					</div>
+				)}
 			>
-				{subModule.isNew ? 'unsaved' : 'saved'}
-			</Pill>
+				{subModule.course_sub_module_chapters && !subModule.isNew && (
+					<Chapter
+						subModule={subModule}
+						handleDragStart={handleDragStart}
+						handleDragOver={handleDragOver}
+						handleDrop={handleDrop}
+						getLoading={getLoading}
+						getCourseModuleDetails={getCourseModuleDetails}
+					/>
+				)}
+			</Accordion>
 		</div>
+
 	);
 }
 

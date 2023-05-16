@@ -27,12 +27,11 @@ function Chapter({
 	});
 
 	return (
-		<>
+		<div style={{ padding: '16px 20px' }}>
 			{subModuleChapters.map((child, index) => (
 				<div className={styles.child_accordian}>
 					<Accordion
 						type="text"
-						isOpen={child.isNew}
 						title={(
 							<div
 								key={child.id}
@@ -83,7 +82,7 @@ function Chapter({
 			>
 				+ Chapter
 			</Button>
-		</>
+		</div>
 	);
 }
 

@@ -1,7 +1,7 @@
 .module {
 	position: relative;
 	align-items: center;
-	
+
 	&.new {
 		padding-bottom: 8px;
 	}
@@ -74,4 +74,14 @@
 	font-size: 12px;
 	font-weight: 400;
 	color: #cb6464;
+}
+
+.child_accordian {
+	:global {
+		.ui_accordion_content {
+			padding: unset;
+			margin: unset;
+			background-color: #fff;
+		}
+	}
 }

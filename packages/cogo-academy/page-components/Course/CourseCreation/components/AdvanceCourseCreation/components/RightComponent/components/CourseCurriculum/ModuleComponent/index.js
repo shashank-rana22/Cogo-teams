@@ -1,7 +1,8 @@
-import { Pill, Button } from '@cogoport/components';
+import { Accordion, Pill, Button } from '@cogoport/components';
 import { IcMCrossInCircle, IcMDelete, IcMDrag, IcMEdit } from '@cogoport/icons-react';
 
 import { getFieldController } from '../../../../../../../../commons/getFieldController';
+import SubModule from '../components/SubModule';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -107,33 +108,53 @@ function ModuleComponent({
 	}
 
 	return (
-		<div
-			key={module.id}
-			draggable
-			onDragStart={(event) => handleDragStart(event, module, false)}
-			onDragOver={(event) => handleDragOver(event)}
-			onDrop={(event) => handleDrop(event, module, false)}
-			className={`${styles.module} ${styles.flex}`}
-		>
-			<IcMDrag className={styles.icon} />
-			<div className={`${styles.left} ${styles.flex}`}>
-				{`Module ${nodeIndex + 1}:`}
-				{' '}
-				<b className={styles.name}>{module.name}</b>
-			</div>
+		<div className={styles.child_accordian}>
+			<Accordion
+				type="text"
+				title={(
+					<div
+						key={module.id}
+						draggable
+						onDragStart={(event) => handleDragStart(event, module, false)}
+						onDragOver={(event) => handleDragOver(event)}
+						onDrop={(event) => handleDrop(event, module, false)}
+						className={`${styles.module} ${styles.flex}`}
+					>
+						<IcMDrag className={styles.icon} />
+						<div className={`${styles.left} ${styles.flex}`}>
+							{`Module ${nodeIndex + 1}:`}
+							{' '}
+							<b className={styles.name}>{module.name}</b>
+						</div>
 
-			<IcMEdit
-				onClick={() => setShowModule((prev) => ([...prev, module.id]))}
-				className={`${styles.left} ${styles.icon}`}
-			/>
+						<IcMEdit
+							onClick={() => setShowModule((prev) => ([...prev, module.id]))}
+							className={`${styles.left} ${styles.icon}`}
+						/>
 
-			<Pill
-				style={{ marginLeft: '16px' }}
-				size="sm"
-				color={module.isNew ? '#df8b00' : '#45f829'}
+						<Pill
+							style={{ marginLeft: '16px' }}
+							size="sm"
+							color={module.isNew ? '#df8b00' : '#45f829'}
+						>
+							{module.isNew ? 'unsaved' : 'saved'}
+						</Pill>
+					</div>
+				)}
 			>
-				{module.isNew ? 'unsaved' : 'saved'}
-			</Pill>
+				{module.course_sub_modules && !module.isNew && (
+					<SubModule
+						module={module}
+						handleDragStart={handleDragStart}
+						handleDragOver={handleDragOver}
+						handleDrop={handleDrop}
+						id={id}
+						course_module_id={module.id}
+						getLoading={getLoading}
+						getCourseModuleDetails={getCourseModuleDetails}
+					/>
+				)}
+			</Accordion>
 		</div>
 	);
 }

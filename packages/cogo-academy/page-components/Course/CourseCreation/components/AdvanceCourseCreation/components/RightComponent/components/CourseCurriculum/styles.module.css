@@ -3,11 +3,14 @@
 }
 
 .module_container {
-	padding: 16px 20px;
-	margin-bottom: 12px;
-	border: 1px solid #e0e0e0;
+	margin-bottom: 20px;
 	border-radius: 4px;
-	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+
+	&.new {
+		padding: 16px 20px;
+		border: 1px solid #e0e0e0;
+		box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+	}
 }
 
 .button {

@@ -1,7 +1,5 @@
 import { Button } from '@cogoport/components';
 
-import Chapter from '../Chapter';
-
 import styles from './styles.module.css';
 import SubModuleComponent from './SubModuleComponent';
 import useHandleSubModule from './useHandleSubModule';
@@ -31,9 +29,9 @@ function SubModule({
 	});
 
 	return (
-		<div style={{ marginTop: '16px' }}>
+		<div style={{ padding: '16px' }}>
 			{courseSubModule.map((subModule, nodeIndex) => (
-				<div className={styles.node_container}>
+				<div className={`${styles.node_container} ${subModule.isNew && styles.new}`}>
 					<SubModuleComponent
 						nodeIndex={nodeIndex}
 						subModule={subModule}
@@ -45,18 +43,9 @@ function SubModule({
 						course_module_id={course_module_id}
 						setCourseSubModule={setCourseSubModule}
 						subModuleLoading={subModuleLoading}
+						getLoading={getLoading}
+						getCourseModuleDetails={getCourseModuleDetails}
 					/>
-
-					{subModule.course_sub_module_chapters && !subModule.isNew && (
-						<Chapter
-							subModule={subModule}
-							handleDragStart={handleDragStart}
-							handleDragOver={handleDragOver}
-							handleDrop={handleDrop}
-							getLoading={getLoading}
-							getCourseModuleDetails={getCourseModuleDetails}
-						/>
-					)}
 				</div>
 			))}
 

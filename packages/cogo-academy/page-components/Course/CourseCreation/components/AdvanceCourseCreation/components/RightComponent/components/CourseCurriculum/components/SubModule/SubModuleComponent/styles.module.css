@@ -1,7 +1,6 @@
 .module {
 	position: relative;
 	align-items: center;
-	margin-bottom: 16px;
 
 	&.flex {
 		display: flex;
@@ -46,8 +45,8 @@
 	margin-bottom: 12px;
 
 	&.new {
-		margin-bottom: 0px;
 		bottom: 0;
+		margin-bottom: 0;
 	}
 }
 
@@ -64,5 +63,15 @@
 .select_container {
 	&.description {
 		margin-top: 16px;
+	}
+}
+
+.child_accordian {
+	:global {
+		.ui_accordion_content {
+			padding: unset;
+			margin: unset;
+			background-color: #fff;
+		}
 	}
 }
