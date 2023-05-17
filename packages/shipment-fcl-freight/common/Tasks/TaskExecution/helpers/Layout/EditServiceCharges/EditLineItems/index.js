@@ -29,7 +29,7 @@ function EditLineItems({
 						field={field}
 						append={append}
 						remove={remove}
-						customValues={customValues?.formValues?.[index]}
+						customValues={customValues?.formValues?.[index] || customValues?.[index]}
 					/>
 				))}
 			</div>

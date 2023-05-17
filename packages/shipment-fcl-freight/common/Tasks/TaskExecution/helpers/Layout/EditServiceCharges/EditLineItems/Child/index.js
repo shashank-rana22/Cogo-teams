@@ -43,7 +43,7 @@ function Child({
 				})}
 
 				<div className={styles.delete_button_container}>
-					<Button onClick={() => remove(index, 1)}>Delete</Button>
+					<Button size="sm" onClick={() => remove(index, 1)}>Delete</Button>
 				</div>
 			</div>
 		</div>

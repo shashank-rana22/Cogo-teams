@@ -1,4 +1,4 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, Loader } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
@@ -36,12 +36,15 @@ function Edit({
 		controls,
 		defaultValues,
 		onCreate,
+		loading: updateLoading,
 	} = useEditCreditNoteHelper({
 		services,
 		invoice : data,
 		servicesIDs,
 		isEdit  : true,
 		invoiceData,
+		setOpen,
+		refetch,
 	});
 
 	const { handleSubmit, control, setValue, watch, formState: { errors = {} } } = useForm();
@@ -76,57 +79,63 @@ function Edit({
 			/>
 
 			<Modal.Body>
-				<div style={{ fontSize: 14 }}>
-					<b>
-						SID
-						{serial_id}
+				{loading ? (
+					<div className={styles.loader_wrapper}>
+						<Loader />
+					</div>
+				) : (
+					<>
+						<div style={{ fontSize: 14 }}>
+							<b>
+								SID
+								{serial_id}
 						&nbsp;- Invoice number -
 						&nbsp;
-						<u>{live_invoice_number}</u>
-					</b>
-				</div>
+								<u>{live_invoice_number}</u>
+							</b>
+						</div>
 
-				<div>
-					<b>Requested By</b>
-					<span>
-						&nbsp;
-						-
-						{data?.requested_by?.name}
-					</span>
-				</div>
-				<div>
-					<b>Date</b>
-					<span>
-						&nbsp;
-						-
-						{formatDate({
-							date       : data?.created_at,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-							formatType : 'date',
-						})}
-					</span>
-				</div>
-				<form>
-					<Form
-						data={data}
-						invoiceData={invoiceData}
-						prevData={prevData}
-						controls={controls}
-						defaultValues={defaultValues}
-						errors={errors}
-						control={control}
-						setValue={setValue}
-					/>
-				</form>
+						<div>
+							<b>Requested By</b>
+							<span>
+								&nbsp;
+								-
+								{data?.requested_by?.name}
+							</span>
+						</div>
+						<div>
+							<b>Date</b>
+							<span>
+								&nbsp;
+								-
+								{formatDate({
+									date       : data?.created_at,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+									formatType : 'date',
+								})}
+							</span>
+						</div>
+						<Form
+							data={data}
+							invoiceData={invoiceData}
+							prevData={prevData}
+							controls={controls}
+							defaultValues={defaultValues}
+							errors={errors}
+							control={control}
+							setValue={setValue}
+						/>
+					</>
+				)}
 			</Modal.Body>
 
 			<Modal.Footer>
 				<div className={styles.button_wrapper}>
-					<Button themeType="secondary" onClick={() => setOpen(false)}>
+					<Button themeType="secondary" onClick={() => setOpen(false)} disabled={updateLoading}>
 						Cancel
 					</Button>
 
-					<Button onClick={handleSubmit(onCreate)}>
+					<Button onClick={handleSubmit(onCreate)} disabled={updateLoading}>
 						Re-Apply
 					</Button>
 				</div>
