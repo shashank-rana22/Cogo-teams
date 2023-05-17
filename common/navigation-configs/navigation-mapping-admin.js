@@ -2246,6 +2246,17 @@ const navigationMappingAdmin = {
 			},
 		],
 	},
+	new_employee_dashboard: {
+		key           : 'new_employee_dashboard',
+		title         : 'New Employee Dashboard',
+		isSubNavs     : false,
+		module_type   : 'dashboards',
+		main_apis     : [],
+		href          : '/v2/new-employee-dashboard',
+		as            : '/v2/new-employee-dashboard',
+		possible_apis : [],
+		icon          : IcMDashboard,
+	},
 	ingestion: {
 		key           : 'ingestion',
 		title         : 'Ingestion',
