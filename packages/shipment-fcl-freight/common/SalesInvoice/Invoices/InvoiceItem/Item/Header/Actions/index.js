@@ -50,7 +50,7 @@ function Actions({
 	}
 
 	// HARD CODING STARTS
-	const invoice_serial_id = invoice?.serial_id.toString() || '';
+	const invoice_serial_id = invoice?.serial_id?.toString() || '';
 	const firstChar = invoice_serial_id[0];
 
 	const isInvoiceBefore20Aug2022 =		firstChar !== '1' || invoice_serial_id.length < 8;

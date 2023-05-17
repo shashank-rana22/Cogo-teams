@@ -13,6 +13,8 @@ const useCreateCreditNote = ({
 	servicesIDs = [],
 	isEdit = false,
 	invoiceData = {},
+	setOpen = () => {},
+	refetch,
 }) => {
 	const [selectedCodes, setSelectedCodes] = useState({});
 	const [allChargeCodes, setAllChargeCodes] = useState({});
@@ -79,7 +81,9 @@ const useCreateCreditNote = ({
 		});
 
 		if (isError === false) {
-			apiTrigger(submit_data);
+			await apiTrigger(submit_data);
+			setOpen(false);
+			refetch();
 		}
 	};
 
