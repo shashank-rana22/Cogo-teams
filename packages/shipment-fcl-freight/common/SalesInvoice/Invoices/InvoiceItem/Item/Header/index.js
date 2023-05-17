@@ -218,7 +218,7 @@ function Header({
 				<div className={styles.invoice_container}>
 					{invoice.status
 					&& RESTRICT_REVOKED_STATUS.includes(invoice.status) ? (
-						<div className={styles.invoice_container}>
+						<div className={styles.invoice_status}>
 							{startCase(invoice.status)}
 						</div>
 						) : null}

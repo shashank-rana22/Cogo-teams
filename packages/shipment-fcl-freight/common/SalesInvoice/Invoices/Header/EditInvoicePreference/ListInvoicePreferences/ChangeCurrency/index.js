@@ -1,4 +1,4 @@
-import { Flex, Pills } from '@cogoport/components';
+import { Pill } from '@cogoport/components';
 import React from 'react';
 
 import getCurrencyOptions from './helpers/getCurrencyOptions';
@@ -12,13 +12,13 @@ function ChangeCurrency({
 
 	return (
 		<div>
-			<Flex marginBottom="12px" className="change-currency-pills">
-				<Pills
+			<div style={{ marginBottom: '12px' }} className="change-currency-pills">
+				<Pill
 					options={currencyOptions}
 					onChange={(val) => setInvoiceCurreny(val)}
 					value={invoiceCurrency}
 				/>
-			</Flex>
+			</div>
 		</div>
 	);
 }

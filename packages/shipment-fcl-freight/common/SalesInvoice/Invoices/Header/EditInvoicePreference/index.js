@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import AddInvoicingParty from '../../../../AdditionalServices/components/AddIp/AddInvoicingParty';
 import getModifiedInvoicingParties from '../../../helper/getModifiedInvoicingParties';
 
-// import useEditInvoicePref from '../../../../../hooks/useEditInvoicePref';
 import ListInvoicePreferences from './ListInvoicePreferences';
 import styles from './styles.module.css';
+import useEditInvoicePref from './useEditInvoicePref';
 
 function EditInvoicePreference({
 	shipment_data = {},
@@ -19,18 +19,18 @@ function EditInvoicePreference({
 
 	const invoicingParties = getModifiedInvoicingParties({ invoicing_parties });
 
-	// const {
-	// 	selectedParties,
-	// 	setSelectedParties,
-	// 	handleInvoicingPartyAdd,
-	// 	handleEditPreferences,
-	// 	...rest
-	// } = useEditInvoicePref({
-	// 	invoicing_parties: invoiceParties,
-	// 	shipment_data,
-	// 	setShow,
-	// 	refetch,
-	// });
+	const {
+		selectedParties,
+		setSelectedParties,
+		handleInvoicingPartyAdd,
+		handleEditPreferences,
+		...rest
+	} = useEditInvoicePref({
+		invoicing_parties: invoicingParties,
+		shipment_data,
+		setShow,
+		refetch,
+	});
 	const organizationDetails = {
 		id         : shipment_data?.importer_exporter?.id || undefined,
 		country_id : shipment_data?.importer_exporter?.country_id || undefined,
@@ -42,7 +42,7 @@ function EditInvoicePreference({
 	}
 
 	const handleClose = () => {
-		// setSelectedParties(rest?.formattedIps);
+		setSelectedParties(rest?.formattedIps);
 		setShow(false);
 		setAddInvoicingParty(false);
 	};
@@ -79,8 +79,9 @@ function EditInvoicePreference({
 
 							<ListInvoicePreferences
 								shipmentData={shipment_data}
-							// invoicingParties={selectedParties}
+								// invoicingParties={selectedParties}
 								raw_invoicing_parties={invoicingParties}
+								// {...rest}
 							/>
 						</div>
 					</Modal.Body>

@@ -156,14 +156,14 @@ function SelectService({
 			<div className={styles.Row}>
 				<Button
 					style={{ marginRight: 16 }}
-					className="secondary sm"
+					size="sm"
 					onClick={onClose}
 				>
 					Cancel
 				</Button>
 
 				<Button
-					className="primary sm ie_add_services"
+					size="sm"
 					onClick={() => handleServiceChange(invoice, {
 						service_ids      : value,
 						invoice_currency : invoiceCurrency,
