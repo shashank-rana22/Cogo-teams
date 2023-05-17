@@ -11,11 +11,17 @@ const data = [{ title: 'PERSONAL INFORMATION', content: 'Personal Information' }
 	{ title: 'RESUME', content: 'Personal Information' },
 	{ title: 'BANK DETAILS', content: 'Personal Information' }];
 
-function NewHireInformation() {
+function NewHireInformation({ setInformationPage }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<IcMArrowBack className={styles.back_icon} width={20} height={20} />
+				<IcMArrowBack
+					role="presentation"
+					className={styles.back_icon}
+					width={20}
+					height={20}
+					onClick={() => setInformationPage('')}
+				/>
 				<div className={styles.title}>NEW HIRE INFORMATION</div>
 			</div>
 			<div className={styles.subcontainer}>
