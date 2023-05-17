@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Toast } from '@cogoport/components';
 import {
 	AsyncSelectController,
 	DatepickerController,
@@ -74,11 +74,6 @@ function CreateJvModal({ show, onClose = () => {}, setShow, refetch }:Props) {
 
 	const { create, loading } = useCreateJv({ setShow, refetch });
 
-	const onSubmit = (formdata) => {
-		const formattedData = formatCreateJvPayload(formdata);
-		create(formattedData);
-	};
-
 	const debitAmount = formValues?.line_items
 		?.filter((lineItem) => lineItem?.type === 'DEBIT')
 		?.reduce((sum, num) => Number(sum || 0) + Number(num?.amount || 0), 0);
@@ -88,6 +83,15 @@ function CreateJvModal({ show, onClose = () => {}, setShow, refetch }:Props) {
 		?.reduce((sum, num) => Number(sum || 0) + Number(num?.amount || 0), 0);
 
 	const balanceAmount = Number(debitAmount || 0) - Number(creditAmount || 0);
+
+	const onSubmit = (formdata) => {
+		if (balanceAmount === 0) {
+			const formattedData = formatCreateJvPayload(formdata);
+			create(formattedData);
+		} else {
+			Toast.error('Balance Amount Must Be Zero');
+		}
+	};
 
 	const handleEntityChange = (val, obj) => {
 		setValue('ledCurrency', obj?.ledger_currency);

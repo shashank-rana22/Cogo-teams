@@ -10,14 +10,14 @@ const formatCreateJvPayload = (data) => ({
 		separator  : ' ',
 	}),
 	jvLineItems  : data?.line_items?.map((lineitem) => ({ ...lineitem, entityCode: data?.entityCode })),
-	ledCurrency  : data?.ledCurrency,
-	jvCodeNum    : data?.journal,
-	jvCategory   : data?.category,
-	exchangeRate : data?.exchangeRate,
-	entityId     : data?.entityId,
-	entityCode   : data?.entityCode,
-	description  : data?.description,
-	currency     : data?.currency,
+	ledCurrency  : data?.ledCurrency || undefined,
+	jvCodeNum    : data?.journal || undefined,
+	jvCategory   : data?.category || undefined,
+	exchangeRate : data?.exchangeRate || undefined,
+	entityId     : data?.entityId || undefined,
+	entityCode   : data?.entityCode || undefined,
+	description  : data?.description || undefined,
+	currency     : data?.currency || undefined,
 });
 
 export default formatCreateJvPayload;

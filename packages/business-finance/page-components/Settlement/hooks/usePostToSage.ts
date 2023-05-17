@@ -40,7 +40,6 @@ const usePostToSage = ({ setShowConfirm, refetch }: Props) => {
 			} else {
 				Toast.error('Post to sage Failed');
 			}
-			refetch();
 		} catch (err) {
 			Toast.error(err?.response?.data?.message || 'Something went wrong');
 		}

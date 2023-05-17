@@ -1,6 +1,7 @@
 import { Popover } from '@cogoport/components';
 import { AsyncSelectController, InputController } from '@cogoport/forms';
 import { IcMDelete, IcMOverflowDot } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
 import { EMPTY_LINE_ITEMS } from '../../../../../Constants';
 import TabController from '../ControlledTab';
@@ -84,13 +85,14 @@ export const renderLineItemFunctions = {
 			) : null}
 		</div>
 	),
-	controller: ({ control, index, setValue, entity, getGlCode }) => (
+	controller: ({ control, index, setValue, entity, getGlCode, watch, errors }) => (
 		<div className={`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}>
 			<AsyncSelectController
 				control={control}
 				name={`line_items.${index}.accMode`}
 				placeholder="Select Mode"
 				asyncKey="jv_account_mode"
+				rules={{ required: !isEmpty(watch(`line_items.${index}.tradePartyId`)) }}
 				onChange={(val) => {
 					handleModeChange({
 						index,
@@ -101,6 +103,11 @@ export const renderLineItemFunctions = {
 					});
 				}}
 			/>
+			{errors?.line_items?.[index]?.accMode ? (
+				<div className={styles.errors}>
+					* Required
+				</div>
+			) : null}
 		</div>
 	),
 	gl_code: ({ control, index, errors, watch, entity }) => {
@@ -134,7 +141,6 @@ export const renderLineItemFunctions = {
 				name={`line_items.${index}.tradePartyId`}
 				placeholder="Select Partner"
 				asyncKey="list_trade_parties"
-				rules={{ required: true }}
 				renderLabel={(option) => renderTradeParty(option)}
 				params={{
 					sage_organization_id_required : true,
@@ -146,6 +152,7 @@ export const renderLineItemFunctions = {
 				onChange={(val, obj) => {
 					setValue(`line_items.${index}.sageOrgId`, obj?.sage_organization_id);
 				}}
+				rules={{ required: !isEmpty(watch(`line_items.${index}.accMode`)) }}
 			/>
 			<div className={styles.sageid}>
 				{watch(`line_items.${index}.sageOrgId`) || ''}
