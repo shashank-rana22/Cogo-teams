@@ -71,12 +71,12 @@
 		padding-right: 24px;
 	}
 
-	&.course_certificate_name {
+	&.certificate_name {
 		width: 50%;
 		padding-right: 24px;
 	}
 
-	&.course_signing_authority {
+	&.signing_authority_user_id {
 		width: 50%;
 	}
 
@@ -90,8 +90,8 @@
 	}
 
 	&.course_completion_value {
-		margin-left: 20px;
 		width: 200px;
+		margin-left: 20px;
 	}
 
 	&.course_completion_unit {

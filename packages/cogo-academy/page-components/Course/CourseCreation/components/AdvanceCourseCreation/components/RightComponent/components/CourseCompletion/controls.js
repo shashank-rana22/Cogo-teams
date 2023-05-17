@@ -1,7 +1,7 @@
 export const controls = [
 	{
-		label       : 'Course Description Text',
-		name        : 'course_description',
+		label       : 'Course Completion Message',
+		name        : 'completion_message',
 		type        : 'textarea',
 		rows        : 4,
 		placeholder : 'Type Description you want the user to see on before beginning the course',
@@ -14,8 +14,8 @@ export const controls = [
 		subControls : [
 			{
 				label       : 'Course Completion Criteria',
-				name        : 'course_criteria',
-				type        : 'select',
+				name        : 'completion_criteria',
+				type        : 'multiSelect',
 				placeholder : 'Select Criteria',
 				options     : [
 					{
@@ -47,8 +47,8 @@ export const controls = [
 			},
 			{
 				label       : 'Reward on Course Completion',
-				name        : 'course_reward',
-				type        : 'select',
+				name        : 'course_completion_rewards_details',
+				type        : 'multiSelect',
 				placeholder : 'Select Reward',
 				options     : [
 					{
@@ -82,7 +82,7 @@ export const certificateControls = [
 		subControls : [
 			{
 				label       : 'Certification Name',
-				name        : 'course_certificate_name',
+				name        : 'certificate_name',
 				type        : 'text',
 				placeholder : 'Type Certification Name',
 				options     : [],
@@ -90,17 +90,27 @@ export const certificateControls = [
 			},
 			{
 				label       : 'Signing Authority',
-				name        : 'course_signing_authority',
-				type        : 'select',
+				name        : 'signing_authority_user_id',
+				type        : 'asyncSelect',
 				placeholder : 'Select Authority from list',
-				options     : [],
-				rules       : { required: { value: true, message: 'This is required' } },
+				asyncKey    : 'partner_users',
+				params      : {
+					filters: {
+						partner_entity_types : ['cogoport'],
+						status               : 'active',
+					},
+					rm_mappings_data_required    : false,
+					pagination_data_required     : false,
+					partner_data_required        : false,
+					add_service_objects_required : true,
+				},
+				rules: { required: { value: true, message: 'This is required' } },
 			},
 		],
 	},
 	{
 		label         : 'Upload Authority Signature',
-		name          : 'upload_signature',
+		name          : 'signing_authority_sign_url',
 		type          : 'fileUpload',
 		placeholder   : 'Select Category',
 		multiple      : false,

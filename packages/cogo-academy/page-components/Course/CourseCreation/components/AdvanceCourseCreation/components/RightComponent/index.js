@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 
-import getProps from './COMPONENT_PROPS_MAPPING';
+import getProps from '../../utils/getProps';
+
 import CourseCompletion from './components/CourseCompletion';
 import CourseCurriculum from './components/CourseCurriculum';
 import CourseOverview from './components/CourseOverview';

@@ -494,6 +494,11 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 	],
 };
 

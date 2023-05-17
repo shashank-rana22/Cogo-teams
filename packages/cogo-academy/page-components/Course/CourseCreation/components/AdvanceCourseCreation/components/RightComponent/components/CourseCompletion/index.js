@@ -1,6 +1,6 @@
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useImperativeHandle, forwardRef } from 'react';
+import { useState, useImperativeHandle, forwardRef, useEffect } from 'react';
 
 import { getFieldController } from '../../../../../../../commons/getFieldController';
 
@@ -9,17 +9,14 @@ import { controls, selectControls } from './controls';
 import styles from './styles.module.css';
 import UploadComponent from './UploadComponent';
 
-function CourseCompletion({ data = {} }, ref) {
+function CourseCompletion({ data = {}, id = '' }, ref) {
 	const {
 		control,
 		formState: { errors = {} },
 		watch,
 		handleSubmit,
-	} = useForm({
-		defaultValues: {
-			...data,
-		},
-	});
+		setValue,
+	} = useForm();
 
 	const [value, onChange] = useState([]);
 	const [show, setShow] = useState(false);
@@ -32,10 +29,37 @@ function CourseCompletion({ data = {} }, ref) {
 
 	useImperativeHandle(ref, () => ({
 		handleSubmit: () => {
-			const onSubmit = (values) => ({
-				hasError : false,
-				values   : {},
-			});
+			const onSubmit = (values) => {
+				const {
+					completion_message,
+					completion_criteria,
+					certificate_name,
+					signing_authority_user_id,
+					signing_authority_sign_url,
+					course_completion_value,
+					course_completion_unit,
+					course_completion_rewards_details = [],
+				} = values || {};
+
+				return {
+					hasError : false,
+					values   : {
+						id,
+						completion_message,
+						course_completion_rewards_details,
+						course_completion_duration: {
+							course_completion_value,
+							course_completion_unit,
+						},
+						certificate_params: {
+							signing_authority_user_id,
+							signing_authority_sign_url: signing_authority_sign_url.finalUrl,
+							certificate_name,
+						},
+						completion_criteria,
+					},
+				};
+			};
 
 			const onError = (error) => ({ hasError: true, error });
 
@@ -47,6 +71,20 @@ function CourseCompletion({ data = {} }, ref) {
 			});
 		},
 	}));
+
+	useEffect(() => {
+		if (!isEmpty(data)) {
+			const { course_completion_duration = {} } = data || {};
+
+			const { course_completion_unit, course_completion_value } = course_completion_duration;
+
+			setValue('completion_criteria', data.completion_criteria);
+			setValue('completion_message', data.completion_message);
+			setValue('course_completion_rewards_details', data.course_completion_rewards_details);
+			setValue('course_completion_unit', course_completion_unit);
+			setValue('course_completion_value', course_completion_value);
+		}
+	}, [data, setValue]);
 
 	return (
 		<div className={styles.container}>

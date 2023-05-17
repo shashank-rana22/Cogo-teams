@@ -13,6 +13,12 @@ const getProps = (data = {}) => ({
 	audience: {
 		course_audience_mappings: data.course_audience_mappings,
 	},
+	completion: {
+		completion_criteria               : data.completion_criteria,
+		completion_message                : data.completion_message,
+		course_completion_duration        : data.course_completion_duration,
+		course_completion_rewards_details : data.course_completion_rewards_details,
+	},
 });
 
 export default getProps;

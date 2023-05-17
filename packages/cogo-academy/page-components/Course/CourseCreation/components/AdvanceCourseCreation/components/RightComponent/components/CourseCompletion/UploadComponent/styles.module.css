@@ -71,12 +71,12 @@
 		width: 50%;
 	}
 
-	&.course_certificate_name {
+	&.certificate_name {
 		width: 50%;
 		margin-right: 24px;
 	}
 
-	&.course_signing_authority {
+	&.signing_authority_user_id {
 		width: 50%;
 	}
 }

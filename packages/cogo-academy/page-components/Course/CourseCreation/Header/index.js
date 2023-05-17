@@ -11,14 +11,41 @@ const onClickBackIcon = (push) => {
 	);
 };
 
+const onClickCogoAcademy = (push) => {
+	push(
+		'/learning',
+		'/learning',
+	);
+};
+
 function Header() {
 	const { push } = useRouter();
 
 	return (
 		<div className={styles.top_container}>
 			<Breadcrumb>
-				<Breadcrumb.Item label={<a href="page number">CogoAcademy</a>} />
-				<Breadcrumb.Item label="Course" />
+				<Breadcrumb.Item label={(
+					<div
+						className={styles.link}
+						role="presentation"
+						onClick={() => onClickCogoAcademy(push)}
+					>
+						CogoAcademy
+					</div>
+				)}
+				/>
+
+				<Breadcrumb.Item label={(
+					<div
+						className={styles.link}
+						role="presentation"
+						onClick={() => onClickBackIcon(push)}
+					>
+						Course
+					</div>
+				)}
+				/>
+
 				<Breadcrumb.Item label="Course Creation" />
 			</Breadcrumb>
 

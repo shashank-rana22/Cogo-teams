@@ -18,3 +18,8 @@
 	max-height: 20vh;
 	margin-bottom: 12px;
 }
+
+.link {
+	text-decoration: underline;
+	cursor: pointer;
+}
