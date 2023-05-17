@@ -12,6 +12,7 @@ scripts/ @Cogoport/platform-engineering @prashantp01
 packages/ @Cogoport/platform-engineering @prashantp01
 packages/shipment-fcl-freight @Cogoport/platform-engineering @ajeets585
 packages/booking-desk @Cogoport/platform-engineering @ajeets585
+packages/bn-salvage @Cogoport/platform-engineering @ajeets585
 packages/access-management @Cogoport/platform-engineering @prashantp01
 packages/authentication @Cogoport/platform-engineering @prashantp01
 packages/locations @Cogoport/platform-engineering @prashantp01

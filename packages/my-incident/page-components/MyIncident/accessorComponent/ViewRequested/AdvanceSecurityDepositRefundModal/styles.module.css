@@ -1,0 +1,23 @@
+.remark_overflow {
+	text-overflow: ellipsis;
+}
+
+.view {
+	color: #6cc077;
+	text-decoration: underline;
+	background-color: transparent;
+}
+
+.view_flex {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+}
+
+.tooltip_text {
+	font-size: 12px;
+	font-weight: 600;
+	word-break: break-word;
+	word-wrap: break-word;
+	white-space: pre-wrap;
+}
