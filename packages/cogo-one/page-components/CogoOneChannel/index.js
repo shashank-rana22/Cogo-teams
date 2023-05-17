@@ -112,6 +112,7 @@ function CogoOne() {
 		updateLeaduser,
 		handleScroll,
 		activeRoomLoading,
+		getAssignedChats,
 	} = useListChats({
 		firestore,
 		userId,
@@ -280,7 +281,7 @@ function CogoOne() {
 					refetchTickets={refetchTickets}
 				/>
 			)}
-			<ReminderModal firestore={firestore} agentId={userId} />
+			<ReminderModal firestore={firestore} agentId={userId} getAssignedChats={getAssignedChats} />
 		</>
 	);
 }

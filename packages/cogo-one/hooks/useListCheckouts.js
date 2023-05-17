@@ -3,7 +3,7 @@ import { startOfDay, startOfMonth, startOfWeek } from '@cogoport/utils';
 import { updateDoc } from 'firebase/firestore';
 import { useCallback, useState } from 'react';
 
-function useGetShipmentNumber({ setReminderModal, agentId }) {
+function useListCheckouts({ setReminderModal, agentId, getAssignedChats }) {
 	const [shipmentData, setShipmentData] = useState({});
 
 	const [{ loading }, trigger] = useRequest(
@@ -14,7 +14,7 @@ function useGetShipmentNumber({ setReminderModal, agentId }) {
 		{ manual: true, autoCancel: false },
 	);
 
-	const getAgentShipmentNumber = useCallback(async ({ roomDoc = {}, type = '' }) => {
+	const getAgentShipmentsCount = useCallback(async ({ roomDoc = {}, type = '' }) => {
 		const currentTimeStamp = new Date();
 		const commonFilters = {
 			is_converted_to_booking : true,
@@ -45,10 +45,12 @@ function useGetShipmentNumber({ setReminderModal, agentId }) {
 					},
 				},
 			});
+			const assignedChatsCount = await getAssignedChats();
 			setShipmentData({
-				dayCount   : currentDayData?.data?.total_count,
-				weekCount  : currentWeekData?.data?.total_count,
-				monthCount : currentMonthData?.data?.total_count,
+				dayCount           : currentDayData?.data?.total_count,
+				weekCount          : currentWeekData?.data?.total_count,
+				monthCount         : currentMonthData?.data?.total_count,
+				assignedChatsCount : assignedChatsCount || 0,
 			});
 			setReminderModal(true);
 		} catch (error) {
@@ -61,12 +63,12 @@ function useGetShipmentNumber({ setReminderModal, agentId }) {
 				});
 			}
 		}
-	}, [agentId, setReminderModal, trigger]);
+	}, [agentId, getAssignedChats, setReminderModal, trigger]);
 
 	return {
 		loading,
 		shipmentData,
-		getAgentShipmentNumber,
+		getAgentShipmentsCount,
 	};
 }
-export default useGetShipmentNumber;
+export default useListCheckouts;

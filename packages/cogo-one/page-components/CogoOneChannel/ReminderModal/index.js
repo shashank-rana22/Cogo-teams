@@ -8,11 +8,11 @@ import getShipmentReminderStats from '../../../utils/getShipmentReminderStats';
 import PercentageDiv from './PercentageDiv';
 import styles from './styles.module.css';
 
-function ReminderModal({ firestore, agentId }) {
+function ReminderModal({ firestore, agentId, getAssignedChats }) {
 	const [reminderModal, setReminderModal] = useState(false);
 
 	const { mountReminderSnapShot, cleanUpTimeout, shipmentData } = useShipmentReminder(
-		{ setReminderModal, firestore, agentId },
+		{ setReminderModal, firestore, agentId, getAssignedChats },
 	);
 
 	useEffect(() => {
@@ -44,7 +44,7 @@ function ReminderModal({ firestore, agentId }) {
 
 				<div className={styles.agent_chats}>
 					No. of Chats Assigned :
-					<span>50</span>
+					<span>{shipmentData?.assignedChatsCount}</span>
 				</div>
 				<div className={styles.stats_row}>
 					{statsMapping.map((eachStat) => <PercentageDiv key={eachStat?.key} eachStat={eachStat} />)}
