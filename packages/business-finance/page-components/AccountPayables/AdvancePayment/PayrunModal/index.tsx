@@ -66,6 +66,10 @@ function PayRunModal({ show, setShow, activeEntity }:Props) {
 										<div className={styles.entity_container}>
 											<Radio name="selected" disabled={false} checked />
 											<div className={styles.text}>
+												{key}
+												{' '}
+												-
+												{' '}
 												{name}
 											</div>
 											<div className={styles.entity_icon}>
