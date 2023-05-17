@@ -319,41 +319,44 @@ const completedColumn = ({
 					'--color': invoiceStatus[(getByKey(row, 'invoiceStatus') as string)],
 				} as CSSProperties}
 			>
+				{row?.isFinalPosted ? <text className={styles.style_text}>FINAL POSTED</text> : (
+					<div>
+						{(startCase(getByKey(row, 'invoiceStatus') as string)).length > 10 ? (
+							<Tooltip
+								interactive
+								placement="top"
+								content={(
+									<div
+										className={styles.tool_tip}
+									>
+										{row?.eInvoicePdfUrl
+											? 'E INVOICE GENERATED'
+											: startCase(getByKey(row, 'invoiceStatus') as string)}
 
-				{(startCase(getByKey(row, 'invoiceStatus') as string)).length > 10 ? (
-					<Tooltip
-						interactive
-						placement="top"
-						content={(
-							<div
-								className={styles.tool_tip}
+									</div>
+								)}
 							>
-								{row?.eInvoicePdfUrl
-									? 'E INVOICE GENERATED'
-									: startCase(getByKey(row, 'invoiceStatus') as string)}
+								<text className={styles.style_text}>
+									{row?.eInvoicePdfUrl
+										? `${'E INVOICE GENERATED'.substring(
+											0,
+											10,
+										)}...`
+										: `${startCase(getByKey(row, 'invoiceStatus') as string).substring(
+											0,
+											10,
+										)}...`}
 
-							</div>
-						)}
-					>
-						<text className={styles.style_text}>
-							{row?.eInvoicePdfUrl
-								? `${'E INVOICE GENERATED'.substring(
-									0,
-									10,
-								)}...`
-								: `${startCase(getByKey(row, 'invoiceStatus') as string).substring(
-									0,
-									10,
-								)}...`}
-
-						</text>
-					</Tooltip>
-				)
-					: (
-						<div className={styles.style_text}>
-							{startCase(getByKey(row, 'invoiceStatus') as string)}
-						</div>
-					)}
+								</text>
+							</Tooltip>
+						)
+							: (
+								<div className={styles.style_text}>
+									{startCase(getByKey(row, 'invoiceStatus') as string)}
+								</div>
+							)}
+					</div>
+				)}
 			</div>
 
 		),
