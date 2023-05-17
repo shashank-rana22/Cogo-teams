@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+import LoadingState from '../../../commons/LoadingState';
+
 import LeftComponent from './components/LeftComponent';
 import RightComponent from './components/RightComponent';
 import useGetCogoAcademyCourse from './hooks/useGetCogoAcademyCourse';
@@ -17,7 +19,17 @@ function AdvanceCourseCreation({ id }) {
 	}, [state]);
 
 	if (loading) {
-		return null;
+		return (
+			<div className={styles.container}>
+				<div className={styles.left_section}>
+					<LoadingState rowsCount={5} small />
+				</div>
+
+				<div className={styles.right_section}>
+					<LoadingState rowsCount={6} />
+				</div>
+			</div>
+		);
 	}
 
 	return (

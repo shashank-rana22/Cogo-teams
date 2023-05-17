@@ -1,4 +1,5 @@
 import { Select, Button } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import ModalContent from '../ModalContent';
 
@@ -23,12 +24,11 @@ function ConditionSelectComponent({
 	return (
 		<div className={styles.container}>
 			<div className={styles.display_container}>
-				{courseCriteria !== '' 	? (
+				{!isEmpty(courseCriteria) 	? (
 					<div className={styles.select_row}>
 						<div className={styles.row_label}>
 							Select test from Assessment Module
 							<sup className={styles.superscipt}>*</sup>
-
 						</div>
 
 						<Select
@@ -39,12 +39,14 @@ function ConditionSelectComponent({
 						/>
 					</div>
 				) : null}
-				{courseReward !== '' ? (
+
+				{!isEmpty(courseReward) ? (
 					<div className={styles.select_row}>
 						<div className={styles.row_label}>
 							Select Reward Template
 							<sup className={styles.superscipt}>*</sup>
 						</div>
+
 						<Button
 							onClick={() => setShow(true)}
 							style={{ background: '#FEF199', color: '#000000' }}
@@ -53,6 +55,7 @@ function ConditionSelectComponent({
 						>
 							Select Certificate Template
 						</Button>
+
 						{show ? (
 							<ModalContent
 								onClose={onClose}

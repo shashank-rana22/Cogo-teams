@@ -29,9 +29,10 @@ function LeftComponent({ activeTab, setActiveTab }) {
 				const isActiveTab = children.map((childItem) => childItem.key).includes(activeTab);
 
 				return (
-					<div className={`${styles.item} ${isActiveTab && styles.active_tab}`}>
+					<div key={isActiveTab} className={`${styles.item} ${isActiveTab && styles.active_tab}`}>
 						<Accordion
 							type="text"
+							isOpen={isActiveTab}
 							title={(
 								<div className={styles.flex}>
 									<div className={styles.number}>

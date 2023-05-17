@@ -98,6 +98,7 @@ function CourseCompletion({ data = {} }) {
 				const Element = getFieldController(type);
 
 				if (!Element) return null;
+
 				return (
 					<div key={name} className={`${styles.form_group} ${styles[name]}`}>
 						<div className={styles.label}>

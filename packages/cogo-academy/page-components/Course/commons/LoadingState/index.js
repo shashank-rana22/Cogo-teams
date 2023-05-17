@@ -2,11 +2,25 @@ import { Placeholder } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function LoadingState({ rowsCount = 5 }) {
+function LoadingState({ rowsCount = 5, small = false }) {
+	if (small) {
+		return (
+			<>
+				{[...Array(rowsCount).keys()].map((key) => (
+					<div key={key} className={styles.card_container}>
+						<div className={styles.card}>
+							<Placeholder height="16px" width="100%" />
+						</div>
+					</div>
+				))}
+			</>
+		);
+	}
+
 	return (
 		<div className={styles.list_container}>
-			{[...Array(rowsCount)].map(() => (
-				<div className={styles.card_container}>
+			{[...Array(rowsCount).keys()].map((key) => (
+				<div key={key} className={styles.card_container}>
 					<div className={styles.card}>
 
 						<div className={styles.user_information}>
@@ -29,7 +43,6 @@ function LoadingState({ rowsCount = 5 }) {
 				</div>
 			))}
 		</div>
-
 	);
 }
 
