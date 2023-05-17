@@ -16,7 +16,8 @@ module.exports = {
 			files   : ['**/*.{ts,tsx}'],
 			extends : ['@cogoport/eslint-config/react-typescript'],
 			rules   : {
-				'react/no-danger': 'off',
+				'react/no-danger' : 'off',
+				'react/jsx-key'   : 'error',
 			},
 			env: {
 				browser : true,

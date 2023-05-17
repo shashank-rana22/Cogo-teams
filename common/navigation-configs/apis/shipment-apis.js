@@ -1452,6 +1452,37 @@ const apis = [
 		service_name : 'bookings',
 		feature      : 'bl_do',
 	},
+	{
+		api          : 'list_organization_branches',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_organization_asset',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'update_organization_asset',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_partner_addresses',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'generate_bluetide_hbl',
+		access_type  : 'private',
+		service_name : 'shipment',
+
+	},
+	{
+		api          : 'get_pending_task_authorization',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;

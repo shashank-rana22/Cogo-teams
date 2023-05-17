@@ -11,8 +11,12 @@ import styles from './styles.module.css';
 
 function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: getTestLoading }) {
 	const [showQuestionSet, setShowQuestionSet] = useState(false);
+
 	const [idArray, setIdArray] = useState([]);
+
 	const [uploadDocument, setUploadDocument] = useState('');
+
+	const [sortFilter, setSortFilter] = useState({});
 
 	const { control, formState:{ errors }, handleSubmit, setValue, watch } = useForm();
 
@@ -78,6 +82,8 @@ function DetailsAndQuestions({ setTestId, setActiveStepper, data = {}, loading: 
 					set_data={data?.set_data}
 					idArray={idArray}
 					watch={watch}
+					sortFilter={sortFilter}
+					setSortFilter={setSortFilter}
 				/>
 			) : null}
 

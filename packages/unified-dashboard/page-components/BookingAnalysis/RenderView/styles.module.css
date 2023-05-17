@@ -1,0 +1,26 @@
+.card_wrapper {
+	max-width: 100%;
+	padding: 14px;
+	margin: 10px 0;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
+}
+
+.desktop {
+	display: block;
+}
+
+.mobile {
+	display: none;
+}
+
+@media (max-width: 967px) {
+	.desktop {
+		display: none;
+	}
+
+	.mobile {
+		display: block;
+	}
+}

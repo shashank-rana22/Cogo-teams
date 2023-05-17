@@ -1,0 +1,90 @@
+.card_wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	max-width: 100%;
+	padding: 10px 0 0;
+	padding: 14px;
+	margin-top: 20px;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
+}
+
+.horizontal_bar_graph {
+	width: 355px;
+	height: 200px;
+	overflow-y: hidden;
+}
+
+@media (max-width: 768px) {
+	.horizontal_bar_graph {
+		width: 260px;
+	}
+}
+
+.summary_card {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	overflow: hidden;
+	border: 1px solid #e0e0e0;
+	box-shadow: none;
+}
+
+.summary_p {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 0 25px 0 30px;
+}
+
+.via_enquiry {
+	background: #f7f7f7;
+}
+
+.amount {
+	padding: 16px 0;
+}
+
+.amount_data {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.count_data {
+	width: 45%;
+	padding-left: 10px;
+}
+
+.quotation_count {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.vertical_col {
+	display: flex;
+	align-items: center;
+	padding-left: 0;
+	background: #e0e0e0;
+}
+
+.vertical_text {
+	padding-top: 0;
+	writing-mode: vertical-rl;
+	transform: rotate(180deg);
+}
+
+.text_tag {
+	width: 100%;
+	font-weight: 500;
+}
+
+.stat {
+	width: 100%;
+	padding: 8px;
+	color: #828282;
+}
