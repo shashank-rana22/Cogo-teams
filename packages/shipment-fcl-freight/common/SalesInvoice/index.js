@@ -1,5 +1,5 @@
-import { Loader } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import { isEmpty } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
 import useGetShipmentInvoice from '../../hooks/useGetShipmentInvoice';
@@ -8,6 +8,7 @@ import useListSageSalesInvoices from '../../hooks/useListSageSalesInvoices';
 import useOrgOutStanding from '../../hooks/useOrgOutStanding';
 import OverviewManageServices from '../Overview/OverviewManageServices';
 
+import Loader from './commons/Loader';
 import Invoices from './Invoices';
 import styles from './styles.module.css';
 
@@ -24,10 +25,20 @@ function SalesInvoice() {
 
 	const isIRNGenerated = !!list.find((item) => !!item.irn_number);
 
-	return (
-		<main className={styles.container}>
-			<OverviewManageServices />
-			{loading ? <Loader themeType="primary" /> : (
+	let salesInvoices = null;
+	if (loading) {
+		salesInvoices = (
+			<div>
+				<Loader />
+				<Loader />
+				<Loader />
+			</div>
+		);
+	} else if (isEmpty(invoiceData) && !loading) {
+		salesInvoices = null;
+	} else {
+		(
+			salesInvoices =	(
 				<Invoices
 					shipmentData={shipment_data}
 					invoiceData={invoiceData}
@@ -39,7 +50,14 @@ function SalesInvoice() {
 					isIRNGenerated={isIRNGenerated}
 					outstanding_by_reg_num={outstanding_by_reg_num}
 				/>
-			)}
+			)
+		);
+	}
+
+	return (
+		<main className={styles.container}>
+			<OverviewManageServices />
+			{salesInvoices}
 		</main>
 	);
 }

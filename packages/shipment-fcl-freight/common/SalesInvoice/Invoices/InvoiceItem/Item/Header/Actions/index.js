@@ -50,7 +50,7 @@ function Actions({
 	}
 
 	// HARD CODING STARTS
-	const invoice_serial_id = invoice?.serial_id.toString() || '';
+	const invoice_serial_id = invoice?.serial_id?.toString() || '';
 	const firstChar = invoice_serial_id[0];
 
 	const isInvoiceBefore20Aug2022 =		firstChar !== '1' || invoice_serial_id.length < 8;
@@ -112,7 +112,6 @@ function Actions({
 								onClick={handleClickInvoice}
 							>
 								Edit Invoices
-
 							</div>
 							<div className={styles.line} />
 						</div>
@@ -126,7 +125,6 @@ function Actions({
 							onClick={handleClickCurrency}
 						>
 							Change Currency
-
 						</div>
 						<div className={styles.line} />
 					</div>
@@ -138,13 +136,11 @@ function Actions({
 						onClick={handleClickRemarks}
 					>
 						Add Remarks
-
 					</div>
 
 					{invoice?.billing_address?.trade_party_type === 'self' ? (
 						<div>
 							<div className={styles.line} />
-
 							<div
 								role="button"
 								tabIndex={0}
@@ -152,7 +148,6 @@ function Actions({
 								onClick={handleChangePayment}
 							>
 								Change Payment Mode
-
 							</div>
 						</div>
 					) : null}
@@ -161,7 +156,7 @@ function Actions({
 
 			{(invoice.exchange_rate_document || []).map((url) => (
 				<div key={url}>
-					{!commonActions ? <div className={styles.line} /> : null}
+					{commonActions ? <div className={styles.line} /> : null}
 					<div
 						role="button"
 						tabIndex={0}
