@@ -1,6 +1,7 @@
+import { ShipmentDetailContext } from '@cogoport/context';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useSelector } from '@cogoport/store';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useContext } from 'react';
 
 import ExchangeRate from '../../ExchangeRate';
 
@@ -14,9 +15,10 @@ function Header({
 	isCustomer = false,
 	refetch = () => {},
 	disableAction = false,
-	shipment_data = {},
 }) {
 	const user_data = useSelector(({ profile }) => profile || {});
+
+	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const {
 		net_total_price_discounted,

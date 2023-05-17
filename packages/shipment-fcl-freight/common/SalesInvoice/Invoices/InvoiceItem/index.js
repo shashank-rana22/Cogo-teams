@@ -1,5 +1,4 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import React from 'react';
 
 import Item from './Item';
 import styles from './styles.module.css';
@@ -9,7 +8,6 @@ function InvoiceItem({
 	total = {},
 	refetch = () => {},
 	loading = false,
-	shipment_data = {},
 	invoiceData = {},
 	invoicesList = [],
 	isIRNGenerated = false,
@@ -77,7 +75,6 @@ function InvoiceItem({
 						invoice={invoice}
 						refetch={refetch}
 						loading={loading}
-						shipment_data={shipment_data}
 						invoiceData={invoiceData}
 						invoicesList={invoicesList}
 						isIRNGenerated={isIRNGenerated}

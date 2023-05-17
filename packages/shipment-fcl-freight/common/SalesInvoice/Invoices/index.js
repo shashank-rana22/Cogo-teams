@@ -1,4 +1,6 @@
+import { ShipmentDetailContext } from '@cogoport/context';
 import { isEmpty } from '@cogoport/utils';
+import { useContext } from 'react';
 
 import useListCreditNotes from '../../../hooks/useListCreditNotes';
 import CreditNote from '../CreditNote';
@@ -17,8 +19,8 @@ function Invoices({
 	isIRNGenerated = false,
 	outstanding_by_reg_num = {},
 	salesInvoicesRefetch = () => {},
-	shipmentData = {},
 }) {
+	const { shipment_data } = useContext(ShipmentDetailContext);
 	const totals = invoiceData?.invoicing_party_wise_total;
 
 	const invoiceStatuses = invoiceData?.invoicing_parties?.map(
@@ -37,12 +39,12 @@ function Invoices({
 		disableAction = true;
 	}
 
-	const showForOldShipments = invoiceData?.invoice_trigger_date && shipmentData?.serial_id <= 120347
+	const showForOldShipments = invoiceData?.invoice_trigger_date && shipment_data?.serial_id <= 120347
 		&& !invoiceStatuses?.some((ele) => ['reviewed', 'approved'].includes(ele));
 
 	disableAction = showForOldShipments ? false : disableAction;
 
-	const { list, refetch: CNRefetch, loading: CNLoading } = useListCreditNotes({ shipmentData });
+	const { list, refetch: CNRefetch, loading: CNLoading } = useListCreditNotes({ shipment_data });
 
 	return (
 		<main className={styles.container}>
@@ -50,7 +52,6 @@ function Invoices({
 				invoiceData={invoiceData}
 				isCustomer={isCustomer}
 				refetch={refetch}
-				shipment_data={shipmentData}
 				disableAction={disableAction}
 			/>
 			<div className={styles.line} />
@@ -62,7 +63,6 @@ function Invoices({
 						total={totals?.[item]}
 						refetch={refetch}
 						loading={loading}
-						shipment_data={shipmentData}
 						invoiceData={invoiceData}
 						invoicesList={invoicesList}
 						isIRNGenerated={isIRNGenerated}

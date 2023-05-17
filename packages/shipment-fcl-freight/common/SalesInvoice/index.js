@@ -1,6 +1,4 @@
-import { ShipmentDetailContext } from '@cogoport/context';
 import { isEmpty } from '@cogoport/utils';
-import React, { useContext } from 'react';
 
 import useGetShipmentInvoice from '../../hooks/useGetShipmentInvoice';
 import useListBfSalesInvoices from '../../hooks/useListBfSalesInvoices';
@@ -13,7 +11,6 @@ import Invoices from './Invoices';
 import styles from './styles.module.css';
 
 function SalesInvoice() {
-	const { shipment_data } = useContext(ShipmentDetailContext);
 	const { list } = useListSageSalesInvoices();
 	const { salesList, refetch:salesInvoicesRefetch } = useListBfSalesInvoices();
 
@@ -40,7 +37,6 @@ function SalesInvoice() {
 		(
 			salesInvoices =	(
 				<Invoices
-					shipmentData={shipment_data}
 					invoiceData={invoiceData}
 					groupedInvoices={groupedInvoices}
 					refetch={refetch}

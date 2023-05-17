@@ -8,7 +8,6 @@ function ItemHeader({
 	invoice = {},
 	refetch = () => {},
 	loading = false,
-	shipment_data = {},
 	invoiceData = {},
 	invoicesList = [],
 	isIRNGenerated = false,
@@ -20,7 +19,6 @@ function ItemHeader({
 			<Header
 				invoice={invoice}
 				refetch={refetch}
-				shipment_data={shipment_data}
 				invoiceData={invoiceData}
 				invoicesList={invoicesList}
 				isIRNGenerated={isIRNGenerated}
