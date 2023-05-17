@@ -8,21 +8,17 @@
 
 .heading {
 	font-weight: 600;
-		/* color: #333; */
 }
-
 
 .date_detail {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
 	width: 40%;
-.eta_etd {
+	.eta_etd {
 		color: #828282;
 	} 
-	
 }
-
 
 .icon_wrapper {
 	display: flex;
