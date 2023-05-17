@@ -20,6 +20,7 @@ import kamMonitoring from './config/kam-monitoring';
 import lastMileDesk from './config/last-mile-desk';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
+import newEmployeeDashboard from './config/new-employee-dashboard';
 import performanceManagement from './config/performance-management';
 import rolesAndPermissions from './config/roles-n-permission';
 import saasTools from './config/saas-tools';
@@ -57,6 +58,7 @@ const routeConfig = {
 	...airRepository,
 	...documentDesk,
 	...ingestion,
+	...newEmployeeDashboard,
 	...blDoCollectionRelease,
 	...saasTools,
 };
