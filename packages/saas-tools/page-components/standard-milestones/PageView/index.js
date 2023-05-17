@@ -12,7 +12,7 @@ function PageView({
 	onClickCard = () => {},
 	sideBar,
 }) {
-	const { list, filters = {}, loading, hookSetters } = useGetMilestones({ sideBar });
+	const { list, filters = {}, loading = false, hookSetters } = useGetMilestones({ sideBar });
 
 	const { data = [], fullResponse } = list || {};
 	const { shipping_lines = {} } = fullResponse || {};
@@ -57,7 +57,7 @@ function PageView({
 					{getRender()}
 					{(data || []).map((item) => (
 						<List
-							key={item.shipping_line_id}
+							key={item?.id}
 							id="milestones_list_body"
 							loading={loading}
 							onClick={onClickCard}

@@ -1,5 +1,5 @@
 export interface Object {
-	itemData: object;
+	itemData: any
 }
 
 export interface TableProps {

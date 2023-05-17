@@ -20,6 +20,7 @@ import enrichment from './enrichment-apis';
 import faq from './faq-apis';
 import feedback from './feedback-apis';
 import ingestion from './ingestion-apis';
+import cargo_insurance from './insurance-apis';
 import kam_desk from './kam-desk-apis';
 import kam_payments_dashboard from './kam-payments-dashboard-apis';
 import kyc from './kyc';
@@ -130,6 +131,7 @@ const apis = {
 	login_apis,
 	enrichment,
 	...faq,
+	cargo_insurance,
 	...saas_tools,
 	...performance_management,
 	ingestion,
