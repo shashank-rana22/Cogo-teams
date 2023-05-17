@@ -69,7 +69,7 @@ function Employee({ val = {}, currency, filters, employeePad = 20 }) {
 									{val.role_name?.length && (
 										<>
 										&nbsp;
-											<span className="role-name">
+											<span className={styles.role_name}>
 												(
 												{val.role_name}
 												)
