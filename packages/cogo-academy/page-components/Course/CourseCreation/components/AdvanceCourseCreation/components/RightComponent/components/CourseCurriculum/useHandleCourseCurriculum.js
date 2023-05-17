@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 
 import useGetCourseModuleDetails from '../../../../hooks/useGetCourseModuleDetails';
 import useUpdateSequenceOrder from '../../../../hooks/useUpdateSequenceOrder';
+import getSequenceOrderPayload from '../../../../utils/getSequenceOrderPayload';
 
 const useHandleCourseCurriculum = ({ courseId, activeTab }) => {
 	const [finalData, setFinalData] = useState([]);
@@ -58,18 +59,7 @@ const useHandleCourseCurriculum = ({ courseId, activeTab }) => {
 		}
 
 		if (draggedNode.from === 'module') {
-			const fromIndex = draggedNode.sequence_order - 1;
-			const toIndex = parentNode.sequence_order - 1;
-			const moduleIDs = finalData.map((item) => item.id);
-
-			const element = moduleIDs.splice(fromIndex, 1)[0];
-
-			moduleIDs.splice(toIndex, 0, element);
-
-			const finalPayload = moduleIDs.map((item, index) => ({
-				id                 : item,
-				new_sequence_order : index + 1,
-			}));
+			const finalPayload = getSequenceOrderPayload({ data: finalData, draggedNode, parentNode });
 
 			updateSequenceOrder({ values: { course_modules: finalPayload }, type: draggedNode.from });
 		}
@@ -79,19 +69,7 @@ const useHandleCourseCurriculum = ({ courseId, activeTab }) => {
 
 			const { course_sub_modules = [] } = courseModuleObject || {};
 
-			const fromIndex = draggedNode.sequence_order - 1;
-			const toIndex = parentNode.sequence_order - 1;
-
-			const subModuleIDs = course_sub_modules.map((item) => item.id);
-
-			const element = subModuleIDs.splice(fromIndex, 1)[0];
-
-			subModuleIDs.splice(toIndex, 0, element);
-
-			const finalPayload = subModuleIDs.map((item, index) => ({
-				id                 : item,
-				new_sequence_order : index + 1,
-			}));
+			const finalPayload = getSequenceOrderPayload({ data: course_sub_modules, draggedNode, parentNode });
 
 			updateSequenceOrder({ values: { course_sub_modules: finalPayload }, type: draggedNode.from });
 		}
@@ -99,19 +77,7 @@ const useHandleCourseCurriculum = ({ courseId, activeTab }) => {
 		if (draggedNode.from === 'chapter') {
 			const { start_point_details:{ start_chapters } } = draggedNode || {};
 
-			const fromIndex = draggedNode.sequence_order - 1;
-			const toIndex = parentNode.sequence_order - 1;
-
-			const chaptersIDs = start_chapters.filter((item) => !item.isNew).map((item) => item.id);
-
-			const element = chaptersIDs.splice(fromIndex, 1)[0];
-
-			chaptersIDs.splice(toIndex, 0, element);
-
-			const finalPayload = chaptersIDs.map((item, index) => ({
-				id                 : item,
-				new_sequence_order : index + 1,
-			}));
+			const finalPayload = getSequenceOrderPayload({ data: start_chapters, draggedNode, parentNode });
 
 			updateSequenceOrder({ values: { chapters: finalPayload }, type: draggedNode.from });
 		}
