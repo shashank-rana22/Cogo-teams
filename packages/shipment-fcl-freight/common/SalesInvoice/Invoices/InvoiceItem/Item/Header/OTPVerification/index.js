@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 
 const OTP_LENGTH = 4;
 
-function OTPVerificationModal({
+function OTPVerification({
 	showOtpModal = false,
 	setShowOTPModal = () => {},
 	invoice = {},
@@ -98,7 +98,6 @@ function OTPVerificationModal({
 								onChange={(item) => setSelectedUser(item)}
 							/>
 						)}
-
 					</Modal.Body>
 					<Modal.Footer>
 						<Button
@@ -107,7 +106,6 @@ function OTPVerificationModal({
 						>
 							Cancel
 						</Button>
-
 						<Button
 							size="md"
 							style={{ marginLeft: '16px' }}
@@ -146,7 +144,6 @@ function OTPVerificationModal({
 						>
 							SUBMIT
 						</Button>
-
 						<Button
 							size="md"
 							style={{ marginLeft: '16px' }}
@@ -154,7 +151,6 @@ function OTPVerificationModal({
 						>
 							Resend OTP
 						</Button>
-
 					</Modal.Footer>
 				</Modal>
 			) : null}
@@ -162,4 +158,4 @@ function OTPVerificationModal({
 	);
 }
 
-export default OTPVerificationModal;
+export default OTPVerification;

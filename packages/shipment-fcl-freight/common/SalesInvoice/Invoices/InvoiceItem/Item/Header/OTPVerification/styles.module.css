@@ -21,10 +21,11 @@
 		.ui_radio_container{
 			width: 100%;
 		}
-		
-
 		.ui_modal_body_container{
 			height: 300px;
+		}
+		.ui_radio_label{
+			width: 100%;
 		}
 	}
 }

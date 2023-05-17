@@ -12,7 +12,7 @@ import React, { useState } from 'react';
 import AddRemarks from '../AddRemarks';
 import ChangeCurrency from '../ChangeCurrency';
 import EditInvoice from '../EditInvoice';
-import OTPVerificationModal from '../OTPVerificationModal';
+import OTPVerification from '../OTPVerification';
 import ReviewServices from '../ReviewServices';
 
 import AmendmentReasons from './AmendmentReasons';
@@ -325,7 +325,7 @@ function Actions({
 			) : null}
 
 			{showOtpModal ? (
-				<OTPVerificationModal
+				<OTPVerification
 					showOtpModal={showOtpModal}
 					setShowOTPModal={setShowOTPModal}
 					invoice={invoice}

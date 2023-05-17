@@ -13,7 +13,7 @@ import useUpdateInvoiceStatus from '../../../../../../../../hooks/useUpdateInvoi
 import AddRemarks from '../../AddRemarks';
 import ChangeCurrency from '../../ChangeCurrency';
 import EditInvoice from '../../EditInvoice';
-import OTPVerificationModal from '../../OTPVerificationModal';
+import OTPVerification from '../../OTPVerification';
 import ReviewServices from '../../ReviewServices';
 import AmendmentReasons from '../AmendmentReasons';
 import ChangePaymentMode from '../ChangePaymentMode';
@@ -345,7 +345,7 @@ function Actions({
 			) : null}
 
 			{showOtpModal ? (
-				<OTPVerificationModal
+				<OTPVerification
 					showOtpModal={showOtpModal}
 					setOTPModal={setOTPModal}
 					invoice={invoice}

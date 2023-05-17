@@ -18,22 +18,20 @@ const useListBfSalesInvoices = () => {
 		{ autoCancel: false },
 	);
 
-	const listApi = useCallback(() => {
-		(async () => {
-			try {
-				await trigger({
-					params: {
-						jobNumber : shipment_data?.serial_id || undefined,
-						jobSource : 'LOGISTICS',
-						jobType   : 'SHIPMENT',
-						pageSize  : 50,
-						page      : 1,
-					},
-				});
-			} catch (err) {
-				toastApiError(err);
-			}
-		})();
+	const listApi = useCallback(async () => {
+		try {
+			await trigger({
+				params: {
+					jobNumber : shipment_data?.serial_id || undefined,
+					jobSource : 'LOGISTICS',
+					jobType   : 'SHIPMENT',
+					pageSize  : 50,
+					page      : 1,
+				},
+			});
+		} catch (err) {
+			toastApiError(err);
+		}
 	}, [shipment_data?.serial_id, trigger]);
 
 	useEffect(() => {
