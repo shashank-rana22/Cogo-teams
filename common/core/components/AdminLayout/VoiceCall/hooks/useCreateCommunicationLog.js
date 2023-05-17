@@ -1,57 +1,47 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-function useCreateCommunicationLog({
-	callTitle,
-	setInputValue = () => {},
-	setCallTitle = () => {},
-	inputValue,
-}) {
-	const profileData = useSelector(({ profile }) => profile);
-	const voiceCall = profileData?.voice_call;
+function useCreateCommunicationLog({ callEndAt = '', voice_call_recipient_data, unmountVoiceCall }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_organization_communication_log',
 		method : 'post',
 	}, { manual: true });
 
-	const voiceCallData = profileData?.voice_call;
-	const { startTime, endTime } = voiceCallData || {};
+	const partnerId = useSelector((s) => s?.profile?.partner?.id);
+	const {
+		orgId = '',
+		userId = '',
+		loggedInAgentId = '',
+		startTime = '',
+	} = voice_call_recipient_data || {};
 
-	const communicationLogApi = async () => {
-		const {
-			orgId,
-			userId,
-			agentId,
-		} = voiceCall || {};
-
+	const createCommunicationLog = async (extraPayload = {}) => {
 		const payload = {
 			communication_type       : 'call',
 			is_reminder              : 'true',
-			agent_id                 : agentId,
+			agent_id                 : loggedInAgentId,
 			user_id                  : userId,
-			title                    : callTitle,
-			communication_summary    : inputValue,
 			organization_id          : orgId,
-			partner_id               : profileData?.partner?.id,
+			partner_id               : partnerId,
 			communication_start_time : startTime,
-			communication_end_time   : endTime,
+			communication_end_time   : callEndAt,
+			...extraPayload,
 		};
-
 		try {
 			await trigger({
 				data: payload,
 			});
 			Toast.success('Saved Successfully');
-			setInputValue('');
-			setCallTitle('');
+			unmountVoiceCall();
 		} catch (error) {
-			Toast.error(error);
+			Toast.error(getApiErrorString(error.data || 'something went wrong'));
 		}
 	};
 
 	return {
-		communicationLogApi,
+		createCommunicationLog,
 		loading,
 	};
 }
