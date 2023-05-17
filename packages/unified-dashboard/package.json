@@ -1,0 +1,18 @@
+{
+	"name": "@cogoport/unified-dashboard",
+	"description": "Unified Dashboard",
+	"version": "0.1.0",
+	"dependencies": {
+		"@cogoport/charts": "^1.0.3",
+		"@cogoport/components": "^1.0.418",
+		"@cogoport/forms": "workspace:^0.1.0",
+		"@cogoport/globalization": "workspace:^0.0.1",
+		"@cogoport/icons-react": "^1.0.73",
+		"@cogoport/next": "workspace:0.1.0",
+		"@cogoport/request": "workspace:^0.1.0",
+		"@cogoport/store": "workspace:^0.1.0",
+		"@cogoport/utils": "^1.2.10",
+		"react": "18.2.0",
+		"uuid": "^9.0.0"
+	}
+}

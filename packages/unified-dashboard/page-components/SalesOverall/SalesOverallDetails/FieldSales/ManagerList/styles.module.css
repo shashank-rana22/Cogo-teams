@@ -1,0 +1,106 @@
+.card_wrapper {
+	padding: 0;
+	background: #fff;
+	border: 1px solid #efefef;
+	box-shadow: none;
+}
+
+.colllapse_icon_active {
+	width: 20px;
+	min-width: 20px;
+	height: 14px;
+	margin-left: 30px;
+	transition: transform 400ms;
+	transform: rotate(360deg);
+}
+
+.colllapse_icon_inactive {
+	width: 20px;
+	min-width: 20px;
+	height: 14px;
+	margin-left: 30px;
+	transition: transform 400ms;
+	transform: rotate(270deg);
+}
+
+.colllapse_icon path {
+	fill: #e7e7e7;
+}
+
+.text_tag {
+	padding-left: 10px;
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.revenue_col {
+	position: relative;
+	display: flex;
+	flex: 33%;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 4px 0;
+	text-align: center;
+	border-right: none;
+}
+
+.revenue_gap {
+	display: flex;
+	flex: 25%;
+}
+
+.role_name {
+	align-self: center;
+	margin-left: 6px;
+	font-size: 12px;
+}
+
+.view_button {
+	font-size: 10px;
+	color: #407fc3;
+	cursor: pointer;
+}
+
+.row {
+	position: relative;
+	display: flex;
+	padding: 8px 0 2px;
+	margin-bottom: 0;
+	font-size: 12px;
+}
+
+.row_border {
+	align-items: center;
+	padding-bottom: 0;
+	margin-bottom: 10px;
+	cursor: pointer;
+	border-right: none;
+}
+
+.no_border {
+	border-right: none;
+}
+
+.revenue_arrow {
+	position: relative;
+	display: flex;
+	flex: 25%;
+	align-items: center;
+	padding-bottom: 0;
+	padding-left: 10px;
+	margin-bottom: 10px;
+	cursor: pointer;
+	border-right: none;
+}
+
+@media (max-width: 768px) {
+	.card_wrapper {
+		width: max-content;
+		padding: 0;
+		overflow: auto;
+		background: #fff;
+		border: 1px solid #efefef;
+		box-shadow: none;
+	}
+}
