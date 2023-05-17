@@ -135,7 +135,7 @@
 
 .link {
 	padding: 8px;
-	color: var(--color-secondary-greyscale-2);
+	color: var(--color-accent-orange-2);
 	text-decoration: underline;
 }
 
@@ -156,7 +156,7 @@
 .credit {
 	:global {
 		.ui_input_container {
-			border: 1px solid var(--color-tertiary-success-green-2);
+			border: 1px solid var(--color-tertiary-success-green-1);
 		}
 	}
 }

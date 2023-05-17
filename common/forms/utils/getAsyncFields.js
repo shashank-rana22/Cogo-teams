@@ -365,6 +365,7 @@ function asyncJvList() {
 		initialCall  : true,
 		authkey      : 'get_payments_parent_jv_jv_category',
 		microService : 'business_finance',
+		searchByq    : true,
 	};
 }
 
@@ -376,6 +377,7 @@ function asyncJournalCode() {
 		initialCall  : true,
 		authkey      : 'get_payments_parent_jv_journal_code',
 		microService : 'business_finance',
+		searchByq    : true,
 	};
 }
 
@@ -387,6 +389,7 @@ function asyncAccMode() {
 		initialCall  : true,
 		authkey      : 'get_payments_parent_jv_acc_mode',
 		microService : 'business_finance',
+		searchByq    : true,
 	};
 }
 
@@ -398,6 +401,7 @@ function asyncCodeMaster() {
 		initialCall  : true,
 		authkey      : 'get_payments_parent_jv_gl_code_master',
 		microService : 'business_finance',
+		searchByq    : true,
 	};
 }
 

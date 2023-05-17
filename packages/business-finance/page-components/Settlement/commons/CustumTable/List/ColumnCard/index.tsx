@@ -1,6 +1,6 @@
 import { Popover } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp, IcMOverflowDot } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useGetDeleteJv from '../../../../hooks/useGetDeleteJv';
@@ -30,12 +30,12 @@ interface Props {
 	refetch: () => void;
 }
 
+const STATUS = ['APPROVED', 'POSTING_FAILED'];
+
 function ColumnCard({ item, refetch }: Props) {
 	const [showDetails, setShowDetails] = useState(false);
 
 	const [showConfirm, setShowConfirm] = useState<boolean | string>(false);
-
-	const [showPopover, setShowPopover] = useState(false);
 
 	const { post, loading: postloading } = usePostToSage({ setShowConfirm, refetch });
 
@@ -45,7 +45,7 @@ function ColumnCard({ item, refetch }: Props) {
 
 	const deletePostRender = (
 		<div className={styles.flexend}>
-			{item?.status === 'APPROVED' ? (
+			{STATUS?.includes(item?.status) ? (
 				<div
 					className={styles.posttosage}
 					onClick={() => {
@@ -84,8 +84,8 @@ function ColumnCard({ item, refetch }: Props) {
 				<div className={styles.exrate}>{item?.exchangeRate || ''}</div>
 				<div className={styles.legcurr}>{item?.ledCurrency || ''}</div>
 				<div className={styles.status}>{startCase(item?.status) || ''}</div>
-				<div className={styles.dots} onClick={() => { setShowPopover(!showPopover); }} role="presentation">
-					<Popover placement="left" render={deletePostRender} visible={showPopover}>
+				<div className={styles.dots}>
+					<Popover placement="left" render={deletePostRender}>
 						<IcMOverflowDot className={styles.icon} height={20} width={20} />
 					</Popover>
 				</div>
