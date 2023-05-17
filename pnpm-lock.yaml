@@ -44,11 +44,13 @@ importers:
   cogo-control:
     specifiers:
       '@cogoport/access-management': workspace:0.1.0
+      '@cogoport/air-repository': workspace:0.1.0
       '@cogoport/allocation': workspace:0.1.0
       '@cogoport/athena-dashboard': workspace:0.1.0
       '@cogoport/authentication': workspace:0.1.0
       '@cogoport/authority-desk': workspace:0.1.0
       '@cogoport/bl_do-collection-release': workspace:0.1.0
+      '@cogoport/bn-salvage': workspace:0.1.0
       '@cogoport/booking-desk': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
       '@cogoport/cogo-academy': workspace:0.1.0
@@ -96,11 +98,13 @@ importers:
       typescript: ^4.9.5
     dependencies:
       '@cogoport/access-management': link:../packages/access-management
+      '@cogoport/air-repository': link:../packages/air-repository
       '@cogoport/allocation': link:../packages/allocation
       '@cogoport/athena-dashboard': link:../packages/athena-dashboard
       '@cogoport/authentication': link:../packages/authentication
       '@cogoport/authority-desk': link:../packages/authority-desk
       '@cogoport/bl_do-collection-release': link:../packages/bl_do-collection-release
+      '@cogoport/bn-salvage': link:../packages/bn-salvage
       '@cogoport/booking-desk': link:../packages/booking-desk
       '@cogoport/business-finance': link:../packages/business-finance
       '@cogoport/cogo-academy': link:../packages/cogo-academy
@@ -429,6 +433,28 @@ importers:
       '@cogoport/utils': 1.2.6
       react: 18.2.0
 
+  packages/air-repository:
+    specifiers:
+      '@cogoport/components': ^1.0.322
+      '@cogoport/forms': workspace:0.1.0
+      '@cogoport/globalization': ^0.0.1
+      '@cogoport/icons-react': ^1.0.51
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:0.1.0
+      '@cogoport/store': workspace:0.1.0
+      '@cogoport/utils': ^1.2.2
+      react: 18.2.0
+    dependencies:
+      '@cogoport/components': 1.0.410_y3d6pejfqbkazdfzmaewia2nra
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
+      '@cogoport/icons-react': 1.0.68_react@18.2.0
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
+      react: 18.2.0
+
   packages/allocation:
     specifiers:
       '@cogoport/charts': ^1.0.1
@@ -517,9 +543,6 @@ importers:
       '@cogoport/scope-select': workspace:^0.1.0
       '@cogoport/store': workspace:^0.1.0
       '@cogoport/utils': ^1.2.10
-      formatAmount: link:@cogoport/globalization/utils/formatAmount
-      geo: link:@cogo/globalization/constants/geo
-      globals.json: link:@cogoport/globalization/constants/globals.json
       react: 18.2.0
     dependencies:
       '@cogoport/components': 1.0.410_y3d6pejfqbkazdfzmaewia2nra
@@ -532,9 +555,6 @@ importers:
       '@cogoport/scope-select': link:../../common/scope-select
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.10
-      formatAmount: link:@cogoport/globalization/utils/formatAmount
-      geo: link:@cogo/globalization/constants/geo
-      globals.json: link:@cogoport/globalization/constants/globals.json
       react: 18.2.0
 
   packages/bl_do-collection-release:
@@ -566,6 +586,24 @@ importers:
       react: 18.2.0
       react-hook-form: 7.43.7_react@18.2.0
       uuid: 9.0.0
+
+  packages/bn-salvage:
+    specifiers:
+      '@cogoport/components': ^1.0.413
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/globalization': workspace:^0.0.1
+      '@cogoport/icons-react': ^1.0.70
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.10
+      react: 18.2.0
+    dependencies:
+      '@cogoport/components': 1.0.417_curf2me2yhaaxyvkypamvvhkai
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
+      '@cogoport/icons-react': 1.0.72_react@18.2.0
+      '@cogoport/request': link:../../common/request
+      '@cogoport/utils': 1.2.10
+      react: 18.2.0
 
   packages/booking-desk:
     specifiers:
@@ -912,6 +950,7 @@ importers:
     specifiers:
       '@cogoport/components': ^1.0.359
       '@cogoport/forms': workspace:0.1.0
+      '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/icons-react': ^1.0.58
       '@cogoport/next': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
@@ -922,6 +961,7 @@ importers:
     dependencies:
       '@cogoport/components': 1.0.385_aydyy3gkshtlrnyh7fafj36que
       '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
       '@cogoport/icons-react': 1.0.60_react@18.2.0
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request

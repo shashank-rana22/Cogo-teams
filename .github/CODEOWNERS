@@ -1,5 +1,5 @@
 # Catchall
-* @Cogoport/platform-engineering @prashantp01 @brayn003
+* @Cogoport/platform-engineering @prashantp01
 
 # Github Actions
 .github/ @Cogoport/platform-engineering @prashantp01
@@ -11,6 +11,7 @@ scripts/ @Cogoport/platform-engineering @prashantp01
 packages/ @Cogoport/platform-engineering @prashantp01
 packages/shipment-fcl-freight @Cogoport/platform-engineering @ajeets585
 packages/booking-desk @Cogoport/platform-engineering @ajeets585
+packages/bn-salvage @Cogoport/platform-engineering @ajeets585
 packages/access-management @Cogoport/platform-engineering @prashantp01
 packages/authentication @Cogoport/platform-engineering @prashantp01
 packages/locations @Cogoport/platform-engineering @prashantp01
@@ -24,7 +25,8 @@ packages/cogo-one @Cogoport/platform-engineering @danampallyrahul-cogo @sandeepn
 packages/cogo-verse-analytics @Cogoport/platform-engineering @SDineshKumarCogoport
 packages/enrichment @Cogoport/platform-engineering @cogoparth @mohit-cogo @Harshitcogo
 packages/performance-management @Cogoport/platform-engineering @cogoparth @Harshitcogo @shridharDB @gurramgadda-sai-nithin
-packages/ground-ops @Cogoport/platform-engineering @vinodtalapa @ankitcogoport
+packages/ground-ops @Cogoport/platform-engineering @ankitcogoport @Arpit-Cogoport
+packages/air-repository @Cogoport/platform-engineering @ankitcogoport @Arpit-Cogoport
 packages/cogo-academy @Cogoport/platform-engineering @shivanshi-cogoport
 packages/cogo-academy/page-components/ControlCenter @Cogoport/platform-engineering @shivam-cogo @prachidewangan26
 packages/cogo-academy/page-components/FAQs @Cogoport/platform-engineering @shivam-cogo @prachidewangan26

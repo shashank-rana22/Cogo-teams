@@ -4,7 +4,7 @@ import { IcMShare } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
 
-import SortComponent from '../../SortComponent';
+import SortComponent from '../../../../../commons/SortComponent';
 import copyToClipboard from '../helpers/copyToClipboard';
 
 import { QuestionSetButtons, TestSetButtons } from './ButtonComponent';
@@ -178,6 +178,7 @@ export const testSetColumns = ({
 						maxWidth={400}
 						content={(topics.map((topic, index) => ((index >= 1) ? (
 							<Pill
+								key={topic}
 								className={styles.topic_pill_sub}
 								size="lg"
 								color="#F3FAFA"

@@ -7569,6 +7569,66 @@ const partner = {
 			feature     : 'invoices',
 		},
 		{
+			api         : 'get_purchase_payrun',
+			access_type : 'private',
+			module      : 'advance-payment',
+			feature     : 'advance-payment',
+		},
+		{
+			api         : 'post_purchase_payrun_advance_payment',
+			access_type : 'private',
+			module      : 'advance-payment',
+			feature     : 'advance-payment',
+		},
+		{
+			api         : 'get_purchase_advance_document_list',
+			access_type : 'private',
+			module      : 'advance-payment',
+			feature     : 'advance-payment',
+		},
+		{
+			api         : 'get_purchase_payrun_bill_advance_payment',
+			access_type : 'private',
+			module      : 'advance-payment',
+			feature     : 'advance-payment',
+		},
+		{
+			api         : 'delete_purchase_payrun_bill',
+			access_type : 'private',
+			module      : 'advance-payment',
+			feature     : 'advance-payment',
+		},
+		{
+			api         : 'get_purchase_payrun_advance_doc_list_view_download',
+			access_type : 'private',
+			module      : 'payrun',
+			feature     : 'payrun',
+		},
+		{
+			api         : 'get_purchase_payrun_bill_list_paid_advance_doc_by_id',
+			access_type : 'private',
+			module      : 'payrun',
+			feature     : 'payrun',
+		},
+		{
+			api         : 'get_purchase_payrun_advance_doc_list_view',
+			access_type : 'private',
+			module      : 'payrun',
+			feature     : 'payrun',
+		},
+		{
+			api         : 'get_purchase_payrun_bill_advance_payment',
+			access_type : 'private',
+			module      : 'payrun',
+			feature     : 'payrun',
+		},
+		{
+			api         : 'get_purchase_payrun_bill_list_paid_advance_doc',
+			access_type : 'private',
+			module      : 'payrun',
+			feature     : 'payrun',
+		},
+		{
 			api         : 'put_purchase_payrun_bill',
 			access_type : 'private',
 			module      : 'payrun',
@@ -8127,6 +8187,12 @@ const partner = {
 			feature     : 'invoices',
 		},
 		{
+			api         : 'get_sales_invoice_by_id_final_post_sage_info',
+			access_type : 'private',
+			module      : 'invoices',
+			feature     : 'invoices',
+		},
+		{
 			api         : 'list_organization_trade_party_details',
 			access_type : 'private',
 			module      : 'Bpr',
@@ -8240,6 +8306,12 @@ const partner = {
 		},
 		{
 			api         : 'post_sales_invoice_einvoice',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'get_sales_invoice_by_id_final_post_sage_info',
 			access_type : 'private',
 			module      : 'outstanding',
 			feature     : 'outstanding',
@@ -8586,7 +8658,7 @@ const partner = {
 			feature     : 'onAccount',
 		},
 		{
-			api         : 'delete_sales_accounts',
+			api         : 'delete_payments_accounts',
 			access_type : 'private',
 			module      : 'onAccount',
 			feature     : 'onAccount',
@@ -8598,13 +8670,13 @@ const partner = {
 			feature     : 'onAccount',
 		},
 		{
-			api         : 'put_sales_accounts',
+			api         : 'put_payments_accounts',
 			access_type : 'private',
 			module      : 'onAccount',
 			feature     : 'onAccount',
 		},
 		{
-			api         : 'post_sales_accounts',
+			api         : 'post_payments_accounts',
 			access_type : 'private',
 			module      : 'onAccount',
 			feature     : 'onAccount',
@@ -12048,6 +12120,23 @@ const partner = {
 			api          : 'delete_tickets_default_type',
 			access_type  : 'private',
 			service_name : 'tickets',
+		},
+	],
+	air_repository: [
+		{
+			api          : 'list_shipment_service_ops_repository',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'create_shipment_service_ops_repository',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
+			api          : 'update_shipment_service_ops_repository',
+			access_type  : 'private',
+			service_name : 'shipment',
 		},
 	],
 };
