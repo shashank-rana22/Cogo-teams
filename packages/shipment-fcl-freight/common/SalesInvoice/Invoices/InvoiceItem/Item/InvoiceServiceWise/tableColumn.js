@@ -1,41 +1,17 @@
+import { ShipmentDetailContext } from '@cogoport/context';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import { useContext } from 'react';
 
-// import { ShipmentDetailContext } from '../../../../../../../commons/Context';
+export const TableColumn = (serviceItem = {}) => {
+	const { shipment_data } = useContext(ShipmentDetailContext);
+	const mainService = `${shipment_data?.shipment_type}_service`;
 
-export const tableColumn = (serviceItem = {}) => {
-	// const [contextValues] = useContext(ShipmentDetailContext);
-	// const { shipment_data } = contextValues;
-
-	// const mainService = `${shipment_data?.shipment_type}_service`;
-
-	let ServiceName;
-
-	// if (serviceItem?.service_type === 'ftl_freight_service') {
-	// 	ServiceName = isEmpty(serviceItem?.truck_number)
-	// 		? 'Truck Number'
-	// 		: `Truck Number: ${serviceItem?.truck_number || ''}`;
-	// } else if (serviceItem?.service_type === 'ltl_freight_service') {
-	// 	ServiceName = isEmpty(serviceItem?.lr_number)
-	// 		? 'LR Number'
-	// 		: `LR Number: ${serviceItem?.lr_number || ''}`;
-	// } else if (
-	// 	serviceItem?.service_type === 'haulage_freight_service'
-	// 	&& serviceItem?.display_name === 'trailer_freight_service'
-	// ) {
-	// 	ServiceName =			serviceItem?.trailer_number === null
-	// 		? 'Trailer Number'
-	// 		: `Trailer Number: ${serviceItem?.trailer_number}`;
-	// } else {
-	// 	ServiceName =			serviceItem?.service_type === mainService
-	// 		? startCase(serviceItem?.display_name)
-	// 		: (serviceItem?.trade_type === 'import'
-	// 					&& `Destination ${startCase(serviceItem?.display_name)}`)
-	// 			  || (serviceItem?.trade_type === 'export'
-	// 					&& `Origin ${startCase(serviceItem?.display_name)}`)
-	// 			  || startCase(serviceItem?.display_name);
-	// }
+	const ServiceName = serviceItem?.service_type === mainService
+		? startCase(serviceItem?.display_name)
+		: (serviceItem?.trade_type === 'import' && `Destination ${startCase(serviceItem?.display_name)}`)
+				|| (serviceItem?.trade_type === 'export' && `Origin ${startCase(serviceItem?.display_name)}`)
+				|| startCase(serviceItem?.display_name);
 
 	return [
 		{

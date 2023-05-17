@@ -1,10 +1,10 @@
-import { Button, Tooltip, CheckboxGroup } from '@cogoport/components';
+import { Button, Tooltip, CheckboxGroup, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
-// import ChangeCurrency from '../../ChangeCurrency';
+import ChangeCurrency from '../../ChangeCurrency';
 
 import styles from './styles.module.css';
 
@@ -123,7 +123,7 @@ function SelectService({
 			addedValueObj?.service_source === 'pass_through'
 			&& addedValueObj?.service_source !== invoice_source
 		) {
-			// toast.error("Service from different sources can't be merged!");
+			Toast.error("Service from different sources can't be merged!");
 		} else {
 			onChange(newValue);
 		}
@@ -138,11 +138,11 @@ function SelectService({
 	return (
 		<div className={styles.Container}>
 			<div className={styles.Heading}>Select service and invoice currency</div>
-			{/* <ChangeCurrency
+			<ChangeCurrency
 				invoice={invoice}
 				invoiceCurrency={invoiceCurrency}
 				setInvoiceCurreny={setInvoiceCurreny}
-			/> */}
+			/>
 
 			<CheckboxGroup
 				options={options}

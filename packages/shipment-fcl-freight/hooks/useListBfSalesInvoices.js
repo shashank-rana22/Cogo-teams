@@ -1,8 +1,11 @@
+import { ShipmentDetailContext } from '@cogoport/context';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useContext } from 'react';
 
-const useListBfSalesInvoices = (shipment_data) => {
+const useListBfSalesInvoices = () => {
+	const { shipment_data } = useContext(ShipmentDetailContext);
+
 	const [
 		{ loading: apiLoading, data },
 		trigger,

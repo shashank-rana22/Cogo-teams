@@ -4,7 +4,7 @@ import React from 'react';
 import CardList from '../../../../commons/CardList';
 
 import styles from './styles.module.css';
-import { tableColumn } from './tableColumn';
+import { tableColumn } from './TableColumn';
 
 function InvoiceServiceWise({ item = {}, loading = false }) {
 	const {

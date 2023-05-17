@@ -33,9 +33,7 @@ function Invoices({
 	});
 
 	let disableAction = isEmpty(invoiceData?.invoice_trigger_date);
-	if (
-		invoiceStatuses?.length === count || invoiceData?.invoice_tat_show !== true
-	) {
+	if (invoiceStatuses?.length === count || invoiceData?.invoice_tat_show !== true) {
 		disableAction = true;
 	}
 
@@ -56,7 +54,6 @@ function Invoices({
 				disableAction={disableAction}
 			/>
 			<div className={styles.line} />
-
 			<section>
 				{Object.keys(groupedInvoices || {}).map((item) => (
 					<InvoiceItem
@@ -74,7 +71,6 @@ function Invoices({
 					/>
 				))}
 			</section>
-
 			{list?.length
 				? (
 					<CreditNote

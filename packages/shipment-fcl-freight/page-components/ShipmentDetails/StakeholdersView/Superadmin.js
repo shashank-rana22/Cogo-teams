@@ -2,7 +2,6 @@ import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { Tracking } from '@cogoport/ocean-modules';
-import SalesInvoice from '../../../common/SalesInvoice';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
@@ -13,6 +12,7 @@ import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
+import SalesInvoice from '../../../common/SalesInvoice';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Tasks from '../../../common/Tasks';
@@ -141,7 +141,7 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 						</TabPanel>
 
 						<TabPanel name="invoice_and_quotation" title="Sales Invoice">
-							<SalesInvoice shipmentData={shipment_data} />
+							<SalesInvoice />
 						</TabPanel>
 
 						<TabPanel name="documents" title="Documents">
