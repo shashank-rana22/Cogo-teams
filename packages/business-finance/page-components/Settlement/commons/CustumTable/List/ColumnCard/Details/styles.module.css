@@ -1,20 +1,10 @@
 .details {
 	margin-top: 16px;
-	border-top: 2px solid var(--color-tertiary-beige-2);
 }
 
 .flex {
 	display: flex;
 	justify-content: flex-end;
-}
-
-.posttosage {
-	display: flex;
-	justify-content: flex-end;
-	padding: 8px 12px;
-	color: var(--color-accent-orange-2);
-	text-decoration: underline;
-	cursor: pointer;
 }
 
 .table {
@@ -75,4 +65,9 @@
 
 .debit {
 	color: var(--color-primary-error-red-2);
+}
+
+.line {
+	margin-bottom: 16px;
+	border-top: 2px solid var(--color-tertiary-beige-2);
 }

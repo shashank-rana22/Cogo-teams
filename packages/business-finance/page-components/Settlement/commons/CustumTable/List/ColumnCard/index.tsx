@@ -1,6 +1,11 @@
-import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
+import { Popover } from '@cogoport/components';
+import { IcMArrowRotateDown, IcMArrowRotateUp, IcMOverflowDot } from '@cogoport/icons-react';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import useGetDeleteJv from '../../../../hooks/useGetDeleteJv';
+import usePostToSage from '../../../../hooks/usePostToSage';
+import ConfirmationModal from '../../../../page-components/ConfirmationModal';
 import getFormattedDate from '../../../Utils/getFormattedDate';
 
 import Details from './Details';
@@ -28,12 +33,45 @@ interface Props {
 function ColumnCard({ item, refetch }: Props) {
 	const [showDetails, setShowDetails] = useState(false);
 
+	const [showConfirm, setShowConfirm] = useState<boolean | string>(false);
+
+	const [showPopover, setShowPopover] = useState(false);
+
+	const { post, loading: postloading } = usePostToSage({ setShowConfirm, refetch });
+
+	const { deleteJv, loading: deleteloading } = useGetDeleteJv({ setShowConfirm, refetch });
+
 	const Icon = showDetails ? IcMArrowRotateUp : IcMArrowRotateDown;
+
+	const deletePostRender = (
+		<div className={styles.flexend}>
+			{item?.status === 'APPROVED' ? (
+				<div
+					className={styles.posttosage}
+					onClick={() => {
+						setShowConfirm('post');
+					}}
+					role="presentation"
+				>
+					Post To Sage
+				</div>
+			) : null}
+			<div
+				className={styles.posttosage}
+				onClick={() => {
+					setShowConfirm('delete');
+				}}
+				role="presentation"
+			>
+				Delete
+			</div>
+		</div>
+	);
 
 	return (
 		<div className={styles.column}>
 			<div className={styles.flex}>
-				<div className={styles.jvnumb}><ToolTipWrapper text={item?.jvNum} maxlength={14} /></div>
+				<div className={styles.jvnumb}><ToolTipWrapper text={item?.jvNum} maxlength={16} /></div>
 				<div className={styles.jvtype}>{item?.category || ''}</div>
 				<div className={styles.accdate}>
 					{item?.transactionDate
@@ -45,6 +83,12 @@ function ColumnCard({ item, refetch }: Props) {
 				<div className={styles.journal}>{item?.jvCodeNum || ''}</div>
 				<div className={styles.exrate}>{item?.exchangeRate || ''}</div>
 				<div className={styles.legcurr}>{item?.ledCurrency || ''}</div>
+				<div className={styles.status}>{startCase(item?.status) || ''}</div>
+				<div className={styles.dots} onClick={() => { setShowPopover(!showPopover); }} role="presentation">
+					<Popover placement="left" render={deletePostRender} visible={showPopover}>
+						<IcMOverflowDot className={styles.icon} height={20} width={20} />
+					</Popover>
+				</div>
 				<div className={styles.accord}>
 					<Icon
 						className={styles.icon}
@@ -52,7 +96,17 @@ function ColumnCard({ item, refetch }: Props) {
 					/>
 				</div>
 			</div>
-			{showDetails ? <Details item={item} refetch={refetch} /> : null}
+			{showDetails ? <Details item={item} /> : null}
+			{showConfirm ? (
+				<ConfirmationModal
+					showConfirm={showConfirm}
+					setShowConfirm={setShowConfirm}
+					post={post}
+					item={item}
+					deleteJv={deleteJv}
+					loading={postloading || deleteloading}
+				/>
+			) : null}
 		</div>
 	);
 }

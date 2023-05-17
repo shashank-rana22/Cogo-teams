@@ -1,9 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import useGetDeleteJv from '../../../../../hooks/useGetDeleteJv';
 import useGetJvLineItems from '../../../../../hooks/useGetJvLineItems';
-import usePostToSage from '../../../../../hooks/usePostToSage';
-import ConfirmationModal from '../../../../../page-components/ConfirmationModal';
 import Loader from '../../../../../page-components/Loader';
 import getFormattedAmount from '../../../../Utils/getFormattedAmount';
 import ToolTipWrapper from '../ToolTipWrapper';
@@ -26,7 +23,6 @@ interface ListItem {
 
 interface Props {
 	item: ListItem;
-	refetch: () => void;
 }
 
 const deafultVal = {
@@ -42,15 +38,8 @@ const deafultVal = {
 	ledCurrency     : '',
 };
 
-function Details({ item = deafultVal, refetch }: Props) {
+function Details({ item = deafultVal }: Props) {
 	const { data: list = [], loading } = useGetJvLineItems({ parentJVId: item?.id });
-
-	const [showConfirm, setShowConfirm] = useState<boolean | string>(false);
-
-	const { post, loading:postloading } = usePostToSage({ setShowConfirm, refetch });
-
-	const { deleteJv, loading:deleteloading } = useGetDeleteJv({ setShowConfirm, refetch });
-
 	const listTotal = list?.length;
 
 	if (loading) {
@@ -59,24 +48,7 @@ function Details({ item = deafultVal, refetch }: Props) {
 
 	return (
 		<div className={styles.details}>
-			<div className={styles.flex}>
-				{item?.status === 'APPROVED' ? (
-					<div
-						className={styles.posttosage}
-						onClick={() => { setShowConfirm('post'); }}
-						role="presentation"
-					>
-						Post To Sage
-					</div>
-				) : null}
-				<div
-					className={styles.posttosage}
-					onClick={() => { setShowConfirm('delete'); }}
-					role="presentation"
-				>
-					Delete
-				</div>
-			</div>
+			<div className={styles.line} />
 			<div className={styles.table}>
 				<LineItemsHeader />
 				{list.map((singleitem, index) => (
@@ -110,16 +82,6 @@ function Details({ item = deafultVal, refetch }: Props) {
 					</div>
 				))}
 			</div>
-			{showConfirm ? (
-				<ConfirmationModal
-					showConfirm={showConfirm}
-					setShowConfirm={setShowConfirm}
-					post={post}
-					item={item}
-					deleteJv={deleteJv}
-					loading={postloading || deleteloading}
-				/>
-			) : null}
 		</div>
 	);
 }

@@ -19,6 +19,7 @@ function Header({ setFilters, filters }:Props) {
 					<IcMArrowRotateUp
 						height={10}
 						width={10}
+						style={{ cursor: 'pointer' }}
 						color={filters?.sortType === 'Asc' ? '#F68B21' : '#B9B9B9'}
 						onClick={() => {
 							setFilters((prev) => ({
@@ -33,6 +34,7 @@ function Header({ setFilters, filters }:Props) {
 						height={10}
 						width={10}
 						color={filters?.sortType === 'Desc' ? '#F68B21' : '#B9B9B9'}
+						style={{ cursor: 'pointer' }}
 						onClick={() => {
 							setFilters((prev) => ({
 								...prev,
@@ -49,6 +51,8 @@ function Header({ setFilters, filters }:Props) {
 			<div className={styles.journal}>Journal</div>
 			<div className={styles.exrate}>Exc. Rate</div>
 			<div className={styles.legcurr}>Ledger Currency</div>
+			<div className={styles.status}>Status</div>
+			<div className={styles.dots} />
 			<div className={styles.accord} />
 		</div>
 	);

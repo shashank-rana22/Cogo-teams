@@ -32,8 +32,19 @@ const renderButtons = ({ lineitemvalue, insert, index }) => (
 
 const ACCOUNT_TYPE_MAPPINGS = { AP: 'service_provider', AR: 'importer_exporter' };
 
-const renderTradeParty = (option) => `${option?.legal_business_name || ''} 
-- ${option?.registration_number || ''} - ${option?.sage_organization_id || ''}`;
+const renderTradeParty = (option) => (
+	<div className={styles.tradeparty}>
+		<div>{option?.legal_business_name || ''}</div>
+		<div>
+			<span className={styles.label}>Reg.Number :</span>
+			{option?.registration_number || ''}
+		</div>
+		<div>
+			<span className={styles.label}>Sage Id :</span>
+			{option?.sage_organization_id || ''}
+		</div>
+	</div>
+);
 
 const handleModeChange = ({ index, entityCode, accMode, setValue, getGlCode }) => {
 	getGlCode({ index, entityCode, accMode, setValue });
