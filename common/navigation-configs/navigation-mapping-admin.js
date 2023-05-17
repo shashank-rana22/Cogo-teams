@@ -84,6 +84,16 @@ const navigationMappingAdmin = {
 		possible_apis : [],
 		module_type   : 'dashboards',
 	},
+	profile: {
+		key         : 'profile',
+		title       : 'Profile Details',
+		href        : '/profile',
+		as          : '/profile',
+		type        : 'link',
+		icon        : IcMProfile,
+		main_apis   : [],
+		module_type : 'dashboards',
+	},
 	channel_partner_dashboard: {
 		key           : 'channel_partner_dashboard',
 		title         : 'Dashboard',
