@@ -11,7 +11,7 @@ function SelectDocumentCopies({
 	copiesValue, copiesOnChange, setSaveDocument, handleView, setGenerate,
 	setViewDoc, download24, setEdit, setItem, setDocCopies, setEditCopies, taskItem,
 }) {
-	const { data } = useGetMultipleCopiesList(taskItem?.documentId);
+	const { data } = useGetMultipleCopiesList(taskItem);
 
 	const OPTIONS = multipleCopies({ data, setEditCopies, setGenerate, setViewDoc, setEdit, setItem });
 
@@ -37,7 +37,8 @@ function SelectDocumentCopies({
 			(data || []).forEach((item) => {
 				if (copy === item?.copyType) {
 					setDocCopies((prev) => (
-						prev ? [...prev, { [copy]: item?.documentUrl }] : [{ [copy]: item?.documentUrl }]
+						prev ? [...prev, { [copy]: item?.documentUrl, copyStatus: item?.copyStatus }]
+							: [{ [copy]: item?.documentUrl, copyStatus: item?.copyStatus }]
 					));
 				}
 			});

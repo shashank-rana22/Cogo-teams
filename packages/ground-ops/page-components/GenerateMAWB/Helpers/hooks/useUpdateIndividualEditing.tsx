@@ -1,7 +1,15 @@
 import { Toast } from '@cogoport/components';
 import { useRequestAir } from '@cogoport/request';
 
-const useUpdateIndividualEditing = () => {
+interface Props {
+	setGenerate?:Function;
+	setEdit?:Function;
+}
+
+const useUpdateIndividualEditing = ({
+	setGenerate = () => {},
+	setEdit = () => {},
+}:Props) => {
 	const [{ loading }, trigger] = useRequestAir(
 		{
 			url    : '/air-coe/document-copy/update',
@@ -15,6 +23,8 @@ const useUpdateIndividualEditing = () => {
 			await trigger({
 				data: payload,
 			});
+			setGenerate(false);
+			setEdit(false);
 		} catch (err) {
 			Toast.error(err?.message || 'Failed to Create');
 		}

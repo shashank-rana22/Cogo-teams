@@ -93,8 +93,6 @@ function GenerateMawb({
 	const [copiesValue, copiesOnChange] = useState<string[]>([]);
 	const [docCopies, setDocCopies] = useState(null);
 
-	console.log('taskItem', editCopies);
-
 	const handleClick = () => {
 		if (back) {
 			setBack(!back);
@@ -114,7 +112,10 @@ function GenerateMawb({
 		activeHawb,
 	});
 
-	const { updateIndividualEditing } = useUpdateIndividualEditing();
+	const { updateIndividualEditing } = useUpdateIndividualEditing({
+		setGenerate,
+		setEdit,
+	});
 
 	const takeImageScreenShot = async (node) => {
 		const dataURI = await htmlToImage.toJpeg(node);
@@ -173,16 +174,19 @@ function GenerateMawb({
 		};
 
 		const individualCopyPayload = {
-			id   : taskItem?.id,
-			data : {
+			id           : taskItem?.id,
+			documentId   : taskItem?.documentId,
+			documentType : taskItem?.documentType === 'draft_airway_bill'
+				? 'draft_airway_bill' : 'draft_house_airway_bill',
+			documentNumber : taskItem.document_number,
+			data           : {
 				...filteredData,
 				status          : 'generated',
-				document_number : activeCategory === 'hawb'
-					? formData?.document_number || activeHawb?.documentNo : taskItem?.awbNumber,
-				service_id   : taskItem?.serviceId,
-				service_type : 'air_freight_service',
+				document_number : taskItem.document_number,
+				service_id      : taskItem?.serviceId,
+				service_type    : 'air_freight_service',
 			},
-			document_url: res || undefined,
+			documentUrl: res || undefined,
 		};
 
 		if (editCopies) {
@@ -203,7 +207,8 @@ function GenerateMawb({
 				const pdfHeight = pdf.internal.pageSize.getHeight();
 
 				(docCopies || []).forEach((item, i) => {
-					pdf.addImage(`${Object.values(item)[0]}`, 'jpeg', 0, 0, pdfWidth, pdfHeight);
+					pdf.addImage(Object.values(item)[1] === 'updated' ? `${Object.values(item)[0]}`
+						: imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
 					if (!whiteout) {
 						pdf.addImage(footerImages[Object.keys(item)[0]], 'jpeg', 0, pdfHeight - 13, pdfWidth, 4.5);
 					}
@@ -355,8 +360,11 @@ function GenerateMawb({
 					background : '#fff',
 				}}
 			>
-				{(taskItem?.documentState !== 'document_accepted' || editCopies === null)
+				{(viewDoc && taskItem?.documentState !== 'document_accepted')
 				&& <Watermark text="draft" rotateAngle="315deg" />}
+				{(!viewDoc && editCopies === null)
+				&& <Watermark text="draft" rotateAngle="315deg" />}
+
 				<div style={{ position: 'relative' }}>
 					<ShipperConsigneeDetails
 						formData={filteredData}
