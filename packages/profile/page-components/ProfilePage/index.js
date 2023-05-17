@@ -1,7 +1,9 @@
+import NewHireInformation from '../NewHireInformation';
+
 function ProfilePage() {
 	return (
 		<div>
-			Hello, Welcome to Cogoport!
+			<NewHireInformation />
 		</div>
 	);
 }
