@@ -37,7 +37,7 @@ const useGetDeleteJv = ({ setShowConfirm, refetch }: Props) => {
 			Toast.success('Deleted Successfully');
 			setShowConfirm(false);
 		} catch (err) {
-			Toast.error(err?.error?.message || 'Something went wrong');
+			Toast.error(err?.response?.data?.message || 'Something went wrong');
 		}
 	};
 
