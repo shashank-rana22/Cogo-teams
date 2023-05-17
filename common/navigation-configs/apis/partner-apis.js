@@ -11582,7 +11582,7 @@ const partner = {
 			service_name : 'shipment',
 		},
 		{
-			api          : 'create_variance_report',
+			api          : 'generate_variance_report',
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
