@@ -4,12 +4,14 @@ import styles from './styles.module.css';
 import TokenAnalysisGraph from './TokenAnalysisGraph';
 import TotalSearchesGraph from './TotalSearchesGraph';
 
-function LineGraph({ graphData, tokenData }) {
+function LineGraph({ graphData, tokenData, setShowTotalCost }) {
 	const CarouselData = [{
 		key    : 'total_searches_graph',
 		render : () => (
 			<TotalSearchesGraph
 				graphData={graphData}
+				setShowTotalCost={setShowTotalCost}
+
 			/>
 		),
 	},
@@ -18,6 +20,7 @@ function LineGraph({ graphData, tokenData }) {
 		render : () => (
 			<TokenAnalysisGraph
 				graphData={tokenData}
+				setShowTotalCost={setShowTotalCost}
 			/>
 		),
 	},

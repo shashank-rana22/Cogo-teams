@@ -1,7 +1,12 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { format } from '@cogoport/utils';
+import { useEffect } from 'react';
 
-function TokenAnalysisGraph({ graphData }) {
+function TokenAnalysisGraph({ graphData, setShowTotalCost }) {
+	useEffect(() => {
+		setShowTotalCost(true);
+	}, [setShowTotalCost]);
+
 	const theme = {
 		legends: {
 			text: {

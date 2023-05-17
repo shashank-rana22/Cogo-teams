@@ -2,6 +2,7 @@
 	z-index: 1000000;
 	display: flex;
 	width: fit-content;
+	padding-right: 38.6%;
 
 	input {
 		z-index: 1000000;
@@ -24,8 +25,10 @@
 
 .top_content {
 	display: flex;
-	justify-content: center;
+	align-items: center;
+	justify-content: space-between;
 	padding-top: 12px;
+	padding-left: 20px;
 	margin-top: 16px;
 	background: #fff;
 	border-radius: 10px;
@@ -54,4 +57,9 @@
 	z-index: 1000000;
 	display: flex;
 	align-items: center;
+}
+
+.total {
+	font-weight: 600;
+	color: #ed3829;
 }

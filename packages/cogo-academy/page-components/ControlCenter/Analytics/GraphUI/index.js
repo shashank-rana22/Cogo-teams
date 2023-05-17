@@ -22,19 +22,35 @@ function GraphUI() {
 
 	const { graphData = [] } = useGetFormattedGraphData({ graph_data });
 
-	const { tokenData } = useGetFaqTokenUtilizationStats({
+	const {
+		tokenData,
+		cost_details,
+		showTotalCost,
+		setShowTotalCost,
+	} = useGetFaqTokenUtilizationStats({
 		formatStartDate,
 		formatEndDate,
 	});
 
 	return (
 		<>
-			<Filters dateRange={dateRange} setDateRange={setDateRange} />
+			<Filters
+				dateRange={dateRange}
+				setDateRange={setDateRange}
+				cost_details={cost_details}
+				showTotalCost={showTotalCost}
+			/>
+
 			<div
 				className={styles.date}
 			>
 				<div className={styles.line_chart}>
-					<LineGraph graphData={graphData} tokenData={tokenData} />
+					<LineGraph
+						graphData={graphData}
+						tokenData={tokenData}
+						showTotalCost={showTotalCost}
+						setShowTotalCost={setShowTotalCost}
+					/>
 				</div>
 
 				<div className={styles.pie_container}>

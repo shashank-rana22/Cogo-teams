@@ -1,7 +1,12 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { format } from '@cogoport/utils';
+import { useEffect } from 'react';
 
-function TotalSearchesGraph({ graphData }) {
+function TotalSearchesGraph({ graphData, setShowTotalCost }) {
+	useEffect(() => {
+		setShowTotalCost(false);
+	}, [setShowTotalCost]);
+
 	const theme = {
 		legends: {
 			text: {

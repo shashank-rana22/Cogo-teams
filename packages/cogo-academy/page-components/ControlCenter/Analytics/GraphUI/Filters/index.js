@@ -2,9 +2,23 @@ import { DateRangepicker } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function Filters({ setDateRange, dateRange }) {
+function Filters({ setDateRange, dateRange, cost_details, showTotalCost }) {
+	const { total_cost_amount, total_cost_currency } = cost_details || {};
 	return (
 		<div className={styles.top_content}>
+			<div className={styles.total}>
+				{showTotalCost ? (
+					<div className={styles.total_cost}>
+						Total -
+						{' '}
+						<span style={{ paddingRight: '4px' }}>
+							{total_cost_amount}
+						</span>
+						{total_cost_currency}
+					</div>
+				) : null}
+			</div>
+
 			<div className={styles.date_range_container}>
 				<div style={{
 					margin      : '0.3rem',

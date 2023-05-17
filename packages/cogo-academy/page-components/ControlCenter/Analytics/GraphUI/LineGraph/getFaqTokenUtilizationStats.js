@@ -1,8 +1,11 @@
 import { useRequest } from '@cogoport/request';
+import { useState } from 'react';
 
 import useGetFormattedGraphData from '../useGetFormattedGraphData';
 
 function useGetFaqTokenUtilizationStats({ formatStartDate, formatEndDate }) {
+	const [showTotalCost, setShowTotalCost] = useState(false);
+
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_faq_token_utilization_stats',
@@ -15,14 +18,17 @@ function useGetFaqTokenUtilizationStats({ formatStartDate, formatEndDate }) {
 		},
 	}, { manual: false });
 
-	const { graph_data = {} } = data || {};
+	const { cost_details, ...rest } = data?.graph_data || {};
 
-	const { graphData } = useGetFormattedGraphData({ graph_data, source: 'token_utilization' });
+	const { graphData } = useGetFormattedGraphData({ graph_data: rest, source: 'token_utilization' });
 
 	return {
 		tokenData: graphData,
 		loading,
 		trigger,
+		cost_details,
+		showTotalCost,
+		setShowTotalCost,
 	};
 }
 
