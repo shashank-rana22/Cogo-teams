@@ -65,8 +65,7 @@ const useCreateExpenseConfig = ({ mailData, setShowModal, getRecurringList }) =>
 					createdBy            : profile?.user?.id,
 					updatedBy            : profile?.user?.id,
 					agreementNumber,
-					// eslint-disable-next-line max-len
-					tradePartyDetailId   : tradePartyDetailId || '0005bfb6-06d4-4974-9989-773b441c9f44', // need to come from trade party only
+					tradePartyDetailId,
 				},
 			});
 		} catch (err) {

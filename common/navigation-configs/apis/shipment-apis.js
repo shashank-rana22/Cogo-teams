@@ -1453,6 +1453,21 @@ const apis = [
 		feature      : 'bl_do',
 	},
 	{
+		api          : 'list_organization_branches',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_organization_asset',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'update_organization_asset',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
 		api          : 'list_fortigo_locations',
 		access_type  : 'private',
 		service_name : 'location',
