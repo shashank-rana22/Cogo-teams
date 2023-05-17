@@ -1,0 +1,28 @@
+
+.title_black{
+	font-weight: normal;
+	font-size: 12px;
+	line-height: 20px;
+	text-align: center;
+	display: inline-block;
+	max-width: 100%;
+	color: #000000;
+	word-break: break-word;
+	word-wrap: break-word;
+	text-align: left;
+	background-color: red;
+}
+
+.row {
+	display: flex !important;
+	justify-content: space-between !important;
+    padding: 12px 20px;
+
+	&:hover {
+		background-color: #f9f9f9;
+	}
+}
+
+.column {
+    max-width: 16.6667%;
+}

@@ -1,0 +1,13 @@
+.container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.input_item{
+	margin-left: 16px;
+	width: 60px;
+	& input {
+		text-align: center;
+	}
+}

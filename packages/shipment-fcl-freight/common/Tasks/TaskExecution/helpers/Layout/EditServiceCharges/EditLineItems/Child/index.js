@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { v4 as uuid } from 'uuid';
 
 import Item from '../../../Item';
 
@@ -23,7 +24,7 @@ function Child({
 
 					if (control_item?.type === 'static') {
 						return (
-							<div style={{ width: `${flex}%` }} className={styles.static_container}>
+							<div key={uuid()} style={{ width: `${flex}%` }} className={styles.static_container}>
 								{render ? render(customValues) : customValues?.[control_item?.name]}
 							</div>
 						);
@@ -42,7 +43,7 @@ function Child({
 				})}
 
 				<div className={styles.delete_button_container}>
-					<Button onClick={() => remove(index, 1)}>Delete</Button>
+					<Button size="sm" onClick={() => remove(index, 1)}>Delete</Button>
 				</div>
 			</div>
 		</div>

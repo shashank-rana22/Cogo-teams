@@ -1,0 +1,93 @@
+.Ccntainer{
+	background: #fff;
+	margin-bottom: 22px;
+	padding-top: 20px;
+
+	.card-body-row {
+		margin-left: 0px !important;
+		margin-right: 0px !important;
+		padding: 12px 20px;
+		cursor: default !important;
+
+		:hover {
+			background: none;
+		}
+	}
+
+	.card-list-root {
+		border: none;
+	}
+
+	.card-list-header-root {
+		background: #ffffff;
+		border-radius: 4px 4px 0 0;
+		border-bottom: 2px solid #e0e0e0;
+	}
+
+	.card-list-header-title {
+		color: #333333;
+		font-size: 14px;
+		font-weight: 500;
+	}
+
+	.card-body-col {
+		font-size: 12px;
+		font-weight: 400;
+	}
+}
+
+.total_container{
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 16px;
+	color: #4f4f4f;
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	background: #f9f9f9;
+	padding: 12px 28px;
+	border-radius: 0 0 4px 4px;
+}
+
+.total_amount{
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	color: #4f4f4f;
+	margin-left: 16px;
+}
+
+.totals{
+	display: flex;
+	justify-content: flex-end;
+	color: #4f4f4f;
+	font-size: 12px;
+	font-weight: 500;
+	padding: 4px 30px;
+	white-space: nowrap;
+	border-top: 1px solid #e0e0e0;
+	align-items: center;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
+
+.total_tax{
+	margin-left: 16px;
+	min-width: 12%;
+
+	@media (max-width: 768px) {
+		margin-left: 0px;
+	}
+}
+
+.billed_text{
+	margin: 0;
+	padding-right: 24px;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16px;
+	color: #cb6464;
+}

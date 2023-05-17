@@ -1,0 +1,37 @@
+.exchange_rate_type{
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 20px;
+	margin-left: 12px;
+	margin-top: 18px;
+	margin-bottom: 18px;
+	height: 10px;
+}
+
+.exchange_rate_form{
+	width: 340px;
+	border-radius: 10px;
+}
+
+.date_heading{
+	height: 16px;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 16px;
+	color: #4f4f4f;
+	margin-bottom: 18px;
+}
+
+.heading{
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 16px;
+	color: #4f4f4f;
+	margin-bottom: 18px;
+}
+
+.buttons{
+	width: 350px;
+	background: #ffffff;
+	border-radius: 0px 0px 10px 10px;
+}

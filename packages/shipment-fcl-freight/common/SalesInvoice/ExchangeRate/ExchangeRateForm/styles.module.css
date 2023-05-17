@@ -1,0 +1,47 @@
+.exchange_rate_type{
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 20px;
+	margin-left: 5px;
+	margin-top: 6px;
+	margin-bottom: 40px;
+	color: #393f70;
+}
+
+.exchange_rate_form{
+	border-radius: 10px;
+}
+
+.heading{
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 16px;
+	color: #4f4f4f;
+	margin-bottom: 18px;
+}
+
+.buttons{
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 30px;
+
+	.core-ui-button-root {
+		text-transform: capitalize;
+		width: 100px;
+	}
+}
+
+.link_to_rate{
+	display: flex;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 16px;
+	color: #4f4f4f;
+	margin-bottom: 15px;
+}
+
+.form{
+	overflow: auto;
+	height: 67.5vh;
+}

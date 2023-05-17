@@ -1,0 +1,18 @@
+.container{
+	margin-bottom: 24px;
+	display: flex;
+	align-items: flex-start;
+}
+
+.confirm_label{
+	font-weight: 500;
+	font-size: 14px;
+	color: #393f70;
+	cursor: pointer;
+	width: 80%;
+}
+
+.check_box_wrapper{
+	width: 5%;
+	margin: 6px 20px 0 0;
+}

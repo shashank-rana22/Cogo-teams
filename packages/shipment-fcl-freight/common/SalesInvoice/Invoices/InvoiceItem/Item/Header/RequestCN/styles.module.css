@@ -1,0 +1,14 @@
+.bold_text{
+	font-weight: 500;
+	color: #393f70;
+}
+
+.div{
+	font-size: 12px;
+	color: #393f70;
+	margin: 5px 0;
+}
+
+.underLined_text{
+	text-decoration: underline;
+}

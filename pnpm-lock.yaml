@@ -254,6 +254,7 @@ importers:
       date-fns: ^2.29.3
       file-saver: ^2.0.5
       react: 18.2.0
+      uuid: ^9.0.0
     dependencies:
       '@cogoport/components': 1.0.395_uffp5ldixb4cfaot3z7zbxlpbm
       '@cogoport/context': link:../context
@@ -267,6 +268,7 @@ importers:
       date-fns: 2.29.3
       file-saver: 2.0.5
       react: 18.2.0
+      uuid: 9.0.0
 
   common/request:
     specifiers:

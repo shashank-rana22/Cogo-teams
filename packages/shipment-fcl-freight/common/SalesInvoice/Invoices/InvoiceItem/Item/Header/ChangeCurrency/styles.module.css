@@ -1,0 +1,7 @@
+.form{
+	:global{
+		.ui_modal_body_container {
+			height: 160px;
+		}
+	}
+}

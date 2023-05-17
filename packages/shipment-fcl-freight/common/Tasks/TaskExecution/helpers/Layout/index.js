@@ -45,13 +45,13 @@ function Layout({
 	return (
 		<div className={styles.layout}>
 			{totalFields.map((rowFields) => (
-				<div className={cl`${styles.row} form_layout_row`}>
+				<div className={cl`${styles.row} form_layout_row`} key={rowFields}>
 					{rowFields.map((field) => {
 						const { type, heading = '' } = field || {};
 
 						if (type === 'fieldArray') {
 							return (
-								<div className={styles.width_100}>
+								<div className={styles.width_100} key={field.name}>
 									{heading ? (
 										<div className={styles.heading}>
 											{heading}
@@ -71,7 +71,7 @@ function Layout({
 
 						if (type === 'edit_service_charges') {
 							return (
-								<div className={styles.width_100}>
+								<div className={styles.width_100} key={field.name}>
 									<EditServiceCharges
 										control={control}
 										customValues={customValues?.[field?.name]}
@@ -83,6 +83,7 @@ function Layout({
 
 						return (
 							<Item
+								key={field.name}
 								control={control}
 								error={errors?.[field?.name]}
 								formValues={formValues}

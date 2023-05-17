@@ -1,0 +1,18 @@
+.container {
+	padding: 16px 12px 14px;
+
+	:global {
+		.ui_accordion_content {
+			background-color: #fff !important;
+			border-top: 1px solid #e0e0e0 !important;
+			border-radius: initial;
+		}
+	} 
+}
+
+.loader{
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+	border-radius: 4px;
+	margin: 20px 0;
+	padding-bottom: 4px;
+}

@@ -1,9 +1,9 @@
 .card_title {
 	display: flex;
 	align-items: center;
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: 600;
-	line-height: 16px;
+	line-height: 30px;
 	color: #000;
 
 	&.icon {
