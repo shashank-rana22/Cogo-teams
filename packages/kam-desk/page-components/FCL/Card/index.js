@@ -32,6 +32,8 @@ function Card({ data = {} }) {
 
 		window.sessionStorage.setItem('prev_nav', newUrl);
 		window.location.href = newUrl;
+
+		// router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${data.id}`);
 	};
 
 	return (
