@@ -25,6 +25,7 @@ function Chapter({
 		subModuleChapters,
 		subModuleId,
 		getCourseSubModuleLoading,
+		deleteLoading,
 	} = useHandleChapter({
 		subModule,
 		getLoading,
@@ -33,7 +34,7 @@ function Chapter({
 		setGetSubModuleRefetch,
 	});
 
-	if (getCourseSubModuleLoading) {
+	if (getCourseSubModuleLoading || deleteLoading) {
 		return <LoadingState rowsCount={2} />;
 	}
 
@@ -109,6 +110,7 @@ function Chapter({
 				className={styles.button}
 				themeType="secondary"
 				onClick={addNewChapter}
+				disabled={subModuleChapters[subModuleChapters.length - 1].isNew}
 			>
 				+ Chapter
 			</Button>

@@ -1,6 +1,8 @@
+import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useState, useEffect } from 'react';
 
+import useCommonDeleteApi from '../../../../../../../hooks/useCommonDeleteApi';
 import getPayload from '../../../../../../../utils/getPayload';
 
 const useHandleSubModuleComponent = ({
@@ -10,6 +12,8 @@ const useHandleSubModuleComponent = ({
 	nodeIndex,
 	course_module_id,
 	setCourseSubModule,
+	getCourseModuleDetails,
+	courseSubModule,
 }) => {
 	const [showSubModule, setShowSubModule] = useState([]);
 
@@ -19,6 +23,12 @@ const useHandleSubModuleComponent = ({
 		handleSubmit,
 		setValue,
 	} = useForm();
+
+	const { loading: deleteLoading, commonDeleteApi } = useCommonDeleteApi({
+		finalData : courseSubModule,
+		getCourseModuleDetails,
+		type      : 'sub_module',
+	});
 
 	const onSubmit = (values) => {
 		const { isNew = false, id = '' } = subModule || {};
@@ -40,10 +50,25 @@ const useHandleSubModuleComponent = ({
 		setShowSubModule((prev) => prev.filter((item) => item !== subModule.id));
 	};
 
-	const deleteSubModule = () => {
+	const deleteSubModule = ({ length }) => {
+		if (length === 1) {
+			Toast.error('cannot delete as there should be atleast one sub-module');
+			return;
+		}
+
 		if (subModule.isNew) {
 			setCourseSubModule((prev) => prev.filter((item) => item.id !== subModule.id));
+			return;
 		}
+
+		const deletePayloadValues = getPayload({
+			course_id,
+			subModuleId : subModule.id,
+			payloadType : 'sub_module',
+			action_type : 'delete',
+		});
+
+		commonDeleteApi({ idToDelete: subModule.id, deletePayloadValues });
 	};
 
 	useEffect(() => {
@@ -62,6 +87,7 @@ const useHandleSubModuleComponent = ({
 		deleteSubModule,
 		hideEditComponent,
 		setShowSubModule,
+		deleteLoading,
 	};
 };
 

@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 import SubModuleComponent from './SubModuleComponent';
@@ -33,7 +34,7 @@ function SubModule({
 	return (
 		<div style={{ padding: '16px' }}>
 			{courseSubModule.map((subModule, nodeIndex) => (
-				<div className={`${styles.node_container} ${subModule.isNew && styles.new}`}>
+				<div key={subModule.id} className={`${styles.node_container} ${subModule.isNew && styles.new}`}>
 					<SubModuleComponent
 						nodeIndex={nodeIndex}
 						subModule={subModule}
@@ -49,6 +50,7 @@ function SubModule({
 						getCourseModuleDetails={getCourseModuleDetails}
 						getSubModuleRefetch={getSubModuleRefetch}
 						setGetSubModuleRefetch={setGetSubModuleRefetch}
+						courseSubModule={courseSubModule}
 					/>
 				</div>
 			))}
@@ -58,6 +60,7 @@ function SubModule({
 				className={styles.button}
 				themeType="secondary"
 				onClick={addNewCourseSubModule}
+				disabled={isEmpty(courseSubModule) || courseSubModule[courseSubModule.length - 1].isNew}
 			>
 				+ Sub Module
 			</Button>

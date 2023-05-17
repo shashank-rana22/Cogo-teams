@@ -37,7 +37,7 @@ function CourseCurriculum({ id, activeTab }, ref) {
 		},
 	}));
 
-	if (getLoading && isEmpty(finalData)) {
+	if (getLoading || isEmpty(finalData)) {
 		return <LoadingState />;
 	}
 
@@ -56,6 +56,7 @@ function CourseCurriculum({ id, activeTab }, ref) {
 						setFinalData={setFinalData}
 						getCourseModuleDetails={getCourseModuleDetails}
 						getSubModuleRefetch={getSubModuleRefetch}
+						finalData={finalData}
 						setGetSubModuleRefetch={setGetSubModuleRefetch}
 					/>
 				</div>
@@ -66,6 +67,7 @@ function CourseCurriculum({ id, activeTab }, ref) {
 				className={styles.button}
 				themeType="secondary"
 				onClick={() => addModule()}
+				disabled={finalData[finalData.length - 1].isNew}
 			>
 				+ Module
 			</Button>

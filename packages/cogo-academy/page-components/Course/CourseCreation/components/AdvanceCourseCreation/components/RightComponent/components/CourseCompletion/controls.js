@@ -17,16 +17,58 @@ export const controls = [
 				name        : 'course_criteria',
 				type        : 'select',
 				placeholder : 'Select Criteria',
-				options     : [],
-				rules       : { required: { value: true, message: 'This is required' } },
+				options     : [
+					{
+						value : 'test',
+						label : 'Test',
+					},
+					{
+						value : 'timed_test',
+						label : 'Timed test',
+					},
+					{
+						value : 'code_something',
+						label : 'code something',
+					},
+					{
+						value : 'scenario_based_things',
+						label : 'scenario based things',
+					},
+					{
+						value : 'assignment_upload',
+						label : 'Assignment upload',
+					},
+					{
+						value : 'only_course_content',
+						label : 'only course content (pdf, doc, test within modules)',
+					},
+				],
+				rules: { required: { value: true, message: 'This is required' } },
 			},
 			{
 				label       : 'Reward on Course Completion',
 				name        : 'course_reward',
 				type        : 'select',
 				placeholder : 'Select Reward',
-				options     : [],
-				rules       : { required: { value: true, message: 'This is required' } },
+				options     : [
+					{
+						value : 'certification',
+						label : 'Certification',
+					},
+					{
+						value : 'specialisation',
+						label : 'Specialisation',
+					},
+					{
+						value : 'nothing',
+						label : 'Nothing',
+					},
+					{
+						value : 'badge',
+						label : 'Badge',
+					},
+				],
+				rules: { required: { value: true, message: 'This is required' } },
 			},
 		],
 	},
@@ -41,7 +83,7 @@ export const certificateControls = [
 			{
 				label       : 'Certification Name',
 				name        : 'course_certificate_name',
-				type        : 'select',
+				type        : 'text',
 				placeholder : 'Type Certification Name',
 				options     : [],
 				rules       : { required: { value: true, message: 'This is required' } },
@@ -76,18 +118,24 @@ export const selectControls = [
 		subControls : [
 			{
 				label       : '',
-				name        : 'course_period',
+				name        : 'course_completion_unit',
 				type        : 'select',
 				placeholder : 'Select period of',
-				options     : [],
-				rules       : { required: { value: true, message: 'This is required' } },
+				options     : [{
+					value : 'week',
+					label : 'Week',
+				}, {
+					value : 'month',
+					label : 'Month',
+				}],
+				rules: { required: { value: true, message: 'This is required' } },
 			},
 			{
 				label       : '',
-				name        : 'course_select',
+				name        : 'course_completion_value',
 				type        : 'select',
 				placeholder : 'Select',
-				options     : [],
+				options     : [...Array(12).keys()].map((value) => ({ label: value + 1, value: value + 1 })),
 				rules       : { required: { value: true, message: 'This is required' } },
 			},
 		],

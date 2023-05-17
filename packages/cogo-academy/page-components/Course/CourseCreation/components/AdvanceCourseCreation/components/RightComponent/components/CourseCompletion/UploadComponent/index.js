@@ -1,4 +1,3 @@
-import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 
 import { getFieldController } from '../../../../../../../../commons/getFieldController';
@@ -6,17 +5,24 @@ import { certificateControls } from '../controls';
 
 import styles from './styles.module.css';
 
-function UploadComponent() {
-	const {
-		control,
-		formState: { errors = {} },
-	} = useForm();
+function UploadComponent({ errors, control }) {
+	console.log('errors', errors);
 	return (
 		<div className={styles.container}>
 			{(certificateControls || []).map((controlItem) => {
 				const {
-					name, label, type, subControls = [], subLabel = '', dropareaProps, draggable, multiple, placeholder,
+					name,
+					label,
+					type,
+					subControls = [],
+					subLabel = '',
+					dropareaProps,
+					draggable,
+					multiple,
+					placeholder,
+					rules = {},
 				} = controlItem || {};
+
 				const Element = getFieldController(type);
 
 				if (type === 'groupSelect') {
@@ -62,6 +68,7 @@ function UploadComponent() {
 						</div>
 					);
 				}
+
 				return (
 					<div key={name} className={`${styles.form_group} ${styles[name]}`}>
 						<div className={styles.label}>
@@ -78,6 +85,7 @@ function UploadComponent() {
 								multiple={multiple}
 								placeholder={placeholder}
 								control={control}
+								rules={rules}
 								id={`${name}_input`}
 							/>
 						</div>

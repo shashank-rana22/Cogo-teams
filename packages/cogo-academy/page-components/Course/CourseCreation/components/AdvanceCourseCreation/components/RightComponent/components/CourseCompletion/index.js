@@ -1,6 +1,6 @@
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useImperativeHandle, forwardRef } from 'react';
 
 import { getFieldController } from '../../../../../../../commons/getFieldController';
 
@@ -9,7 +9,7 @@ import { controls, selectControls } from './controls';
 import styles from './styles.module.css';
 import UploadComponent from './UploadComponent';
 
-function CourseCompletion({ data = {} }) {
+function CourseCompletion({ data = {} }, ref) {
 	const {
 		control,
 		formState: { errors = {} },
@@ -30,9 +30,26 @@ function CourseCompletion({ data = {} }) {
 
 	const options = [];
 
+	useImperativeHandle(ref, () => ({
+		handleSubmit: () => {
+			const onSubmit = (values) => ({
+				hasError : false,
+				values   : {},
+			});
+
+			const onError = (error) => ({ hasError: true, error });
+
+			return new Promise((resolve) => {
+				handleSubmit(
+					(values) => resolve(onSubmit(values)),
+					(error) => resolve(onError(error)),
+				)();
+			});
+		},
+	}));
+
 	return (
 		<div className={styles.container}>
-
 			{controls.map((controlItem) => {
 				const { name, label, type, subControls = [], subLabel = '' } = controlItem || {};
 
@@ -126,7 +143,8 @@ function CourseCompletion({ data = {} }) {
 				);
 			})}
 
-			<UploadComponent />
+			<UploadComponent control={control} errors={errors} />
+
 			<div className={`${styles.select_container}`}>
 				{selectControls.map((controlItem) => {
 					const { name, label, subControls = [] } = controlItem || {};
@@ -145,16 +163,15 @@ function CourseCompletion({ data = {} }) {
 										type:subControlType,
 									} = subControlItem || {};
 									const SubControlElement = getFieldController(subControlType);
-									console.log(subControlName, 'subControl');
+
 									return (
 										<div
 											key={name}
 											className={`${styles.form_group} ${styles[subControlName]}`}
 										>
-
 											<div className={`${styles.input_group} ${styles[subControlName]}`}>
 												<SubControlElement
-													{...controlItem}
+													{...subControlItem}
 													key={subControlName}
 													control={control}
 													id={`${subControlName}_input`}
@@ -163,10 +180,9 @@ function CourseCompletion({ data = {} }) {
 
 											{errors?.[subControlName]?.message ? (
 												<div className={styles.error_message}>
-													{errors?.[name]?.message}
+													{errors?.[subControlName]?.message}
 												</div>
 											) : null}
-
 										</div>
 									);
 								})}
@@ -180,4 +196,4 @@ function CourseCompletion({ data = {} }) {
 	);
 }
 
-export default CourseCompletion;
+export default forwardRef(CourseCompletion);

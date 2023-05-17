@@ -2,33 +2,43 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
+import { useEffect, useCallback } from 'react';
 
-const GetCourseModuleDetails = ({ id, activeTab }) => {
-	const [{ loading, data }, trigger] = useRequest({
+const useGetCourseModuleDetails = ({ id, setFinalData, activeTab }) => {
+	const [{ loading }, trigger] = useRequest({
 		url    : '/get_course_details',
 		method : 'get',
 		params : { id },
-	}, { manual: activeTab !== 'curriculum' });
+	}, { manual: true });
 
-	const getCourseModuleDetails = async () => {
+	const getCourseModuleDetails = useCallback(async () => {
 		try {
-			await trigger({ params: { id } });
+			const res = await trigger({ params: { id } });
+
+			const { data } = res || {};
+
+			if (isEmpty(data)) {
+				setFinalData([{ id: new Date().getTime(), name: '', children: [], isNew: true }]);
+			} else {
+				setFinalData(data);
+			}
 		} catch (error) {
-			Toast.error(getApiErrorString(error.response?.data));
+			if (error.response?.data) {
+				Toast.error(getApiErrorString(error.response?.data));
+			}
 		}
-	};
+	}, [id, setFinalData, trigger]);
 
-	let finalData = data;
-
-	if (isEmpty(data)) {
-		finalData = [{ id: new Date().getTime(), name: '', children: [], isNew: true }];
-	}
+	useEffect(() => {
+		if (activeTab === 'curriculum') {
+			getCourseModuleDetails();
+		}
+	}, [activeTab, getCourseModuleDetails]);
 
 	return {
 		getCourseModuleDetails,
-		moduleData: finalData,
 		loading,
 	};
 };
 
-export default GetCourseModuleDetails;
+export default useGetCourseModuleDetails;

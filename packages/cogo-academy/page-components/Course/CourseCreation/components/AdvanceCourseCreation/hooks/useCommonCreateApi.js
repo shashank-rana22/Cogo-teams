@@ -38,7 +38,7 @@ const useCommonCreateApi = ({ getCourseModuleDetails }) => {
 
 	return {
 		commonCreateApi,
-		loaing: loadingChapter || loadingSubModule || loadingModule,
+		loading: loadingChapter || loadingSubModule || loadingModule,
 	};
 };
 

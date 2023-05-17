@@ -1,6 +1,5 @@
 import { Toast } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import useGetCourseModuleDetails from '../../../../hooks/useGetCourseModuleDetails';
 import useUpdateSequenceOrder from '../../../../hooks/useUpdateSequenceOrder';
@@ -14,8 +13,7 @@ const useHandleCourseCurriculum = ({ courseId, activeTab }) => {
 	const {
 		getCourseModuleDetails,
 		loading: getLoading,
-		moduleData,
-	} = useGetCourseModuleDetails({ id: courseId, activeTab });
+	} = useGetCourseModuleDetails({ id: courseId, setFinalData, activeTab });
 
 	const { updateSequenceOrder } = useUpdateSequenceOrder({ getCourseModuleDetails, setGetSubModuleRefetch });
 
@@ -86,12 +84,6 @@ const useHandleCourseCurriculum = ({ courseId, activeTab }) => {
 	const addModule = () => {
 		setFinalData((prev) => [...prev, { id: new Date().getTime(), name: '', children: [], isNew: true }]);
 	};
-
-	useEffect(() => {
-		if (!getLoading && !isEmpty(moduleData)) {
-			setFinalData(moduleData);
-		}
-	}, [getLoading, moduleData]);
 
 	return {
 		handleDragStart,

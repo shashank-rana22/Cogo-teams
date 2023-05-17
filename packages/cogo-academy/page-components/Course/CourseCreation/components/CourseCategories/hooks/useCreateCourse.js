@@ -17,6 +17,7 @@ const useCreateCourse = () => {
 				data: {
 					name         : courseData.course_name,
 					category_ids : courseData.course_categories,
+					state        : 'overview',
 				},
 			});
 

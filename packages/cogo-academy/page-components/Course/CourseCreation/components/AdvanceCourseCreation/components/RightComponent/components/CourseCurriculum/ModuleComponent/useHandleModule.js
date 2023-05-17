@@ -1,7 +1,9 @@
+import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useState, useEffect } from 'react';
 
 import useCommonCreateApi from '../../../../../hooks/useCommonCreateApi';
+import useCommonDeleteApi from '../../../../../hooks/useCommonDeleteApi';
 import useCommonUpdateApi from '../../../../../hooks/useCommonUpdateApi';
 import getPayload from '../../../../../utils/getPayload';
 
@@ -12,6 +14,7 @@ const useHandleModule = ({
 	module,
 	nodeIndex,
 	id,
+	finalData,
 }) => {
 	const [showModule, setShowModule] = useState([]);
 
@@ -26,6 +29,12 @@ const useHandleModule = ({
 		commonUpdateApi,
 		loading:updateModuleLoading,
 	} = useCommonUpdateApi({ getCourseModuleDetails });
+
+	const { loading: deleteLoading, commonDeleteApi } = useCommonDeleteApi({
+		finalData,
+		getCourseModuleDetails,
+		type: 'module',
+	});
 
 	const onSaveModule = ({ values }) => {
 		if (module.isNew) {
@@ -47,10 +56,25 @@ const useHandleModule = ({
 		setShowModule((prev) => prev.filter((item) => item !== module.id));
 	};
 
-	const deleteModule = ({ id:deleteId, isNew = false }) => {
+	const deleteModule = ({ id: deleteId, isNew = false, length }) => {
+		if (length === 1) {
+			Toast.error('cannot delete as there should be atleast one module');
+			return;
+		}
+
 		if (isNew) {
 			setFinalData((prev) => prev.filter((item) => item.id !== deleteId));
+			return;
 		}
+
+		const deletePayloadValues = getPayload({
+			course_id   : id,
+			moduleId    : deleteId,
+			payloadType : 'module',
+			action_type : 'delete',
+		});
+
+		commonDeleteApi({ idToDelete: deleteId, deletePayloadValues });
 	};
 
 	useEffect(() => {
@@ -72,6 +96,7 @@ const useHandleModule = ({
 		hideEditComponent,
 		showModule,
 		setShowModule,
+		deleteLoading,
 	};
 };
 

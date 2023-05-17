@@ -1,6 +1,7 @@
 import { Accordion, Pill, Button } from '@cogoport/components';
 import { IcMCrossInCircle, IcMDelete, IcMDrag, IcMEdit } from '@cogoport/icons-react';
 
+import LoadingState from '../../../../../../../../../../commons/LoadingState';
 import { getFieldController } from '../../../../../../../../commons/getFieldController';
 import SubModule from '../components/SubModule';
 
@@ -20,6 +21,7 @@ function ModuleComponent({
 	getCourseModuleDetails,
 	getSubModuleRefetch,
 	setGetSubModuleRefetch,
+	finalData,
 }) {
 	const {
 		deleteModule,
@@ -31,6 +33,7 @@ function ModuleComponent({
 		hideEditComponent,
 		showModule,
 		setShowModule,
+		deleteLoading,
 	} = useHandleModule({
 		getLoading,
 		setFinalData,
@@ -38,7 +41,12 @@ function ModuleComponent({
 		module,
 		nodeIndex,
 		id,
+		finalData,
 	});
+
+	if (deleteLoading) {
+		return <LoadingState />;
+	}
 
 	if (module.isNew || showModule.includes(module.id)) {
 		return (
@@ -101,7 +109,11 @@ function ModuleComponent({
 					<Button loading={moduleLoading} type="submit" size="sm">Save</Button>
 
 					<IcMDelete
-						onClick={() => deleteModule({ id: module.id, isNew: module.isNew || false })}
+						onClick={() => deleteModule({
+							id     : module.id,
+							isNew  : module.isNew || false,
+							length : finalData.length,
+						})}
 						className={`${styles.left} ${styles.icon}`}
 					/>
 				</div>

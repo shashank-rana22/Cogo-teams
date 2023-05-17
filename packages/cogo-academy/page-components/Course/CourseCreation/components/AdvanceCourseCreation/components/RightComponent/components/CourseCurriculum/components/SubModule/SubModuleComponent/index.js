@@ -2,6 +2,7 @@ import { Accordion, Pill, Button } from '@cogoport/components';
 import { IcMCrossInCircle, IcMDelete, IcMDrag, IcMEdit } from '@cogoport/icons-react';
 
 import { getFieldController } from '../../../../../../../../../../commons/getFieldController';
+import LoadingState from '../../../../../../../../../../commons/LoadingState';
 import Chapter from '../../Chapter';
 
 import controls from './controls';
@@ -23,6 +24,7 @@ function SubModuleComponent({
 	getCourseModuleDetails,
 	getSubModuleRefetch,
 	setGetSubModuleRefetch,
+	courseSubModule,
 }) {
 	const {
 		handleSubmit,
@@ -33,6 +35,7 @@ function SubModuleComponent({
 		deleteSubModule,
 		hideEditComponent,
 		setShowSubModule,
+		deleteLoading,
 	} = useHandleSubModuleComponent({
 		onSaveSubModule,
 		subModule,
@@ -40,7 +43,13 @@ function SubModuleComponent({
 		nodeIndex,
 		course_module_id,
 		setCourseSubModule,
+		getCourseModuleDetails,
+		courseSubModule,
 	});
+
+	if (deleteLoading) {
+		return <LoadingState rowsCount={2} />;
+	}
 
 	if (subModule.isNew || showSubModule.includes(subModule.id)) {
 		return (
@@ -103,7 +112,7 @@ function SubModuleComponent({
 					</Button>
 
 					<IcMDelete
-						onClick={() => deleteSubModule({ subModule })}
+						onClick={() => deleteSubModule({ length: courseSubModule.length })}
 						className={`${styles.left} ${styles.icon}`}
 					/>
 				</div>

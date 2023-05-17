@@ -23,17 +23,37 @@ const chapter_content = ({ values, editorValue }) => {
 	return upload_presentation.finalUrl;
 };
 
-const getModulePayload = ({ values, course_id, isNew, nodeIndex, moduleId }) => ({
-	...values,
-	...(isNew ? { course_id } : { cogo_academy_course_id: course_id, id: moduleId }),
-	sequence_order: nodeIndex + 1,
-});
+const getModulePayload = ({ values, course_id, isNew, nodeIndex, moduleId, action_type }) => {
+	if (action_type === 'delete') {
+		return {
+			cogo_academy_course_id : course_id,
+			id                     : moduleId,
+			status                 : 'inactive',
+		};
+	}
 
-const getSubModulePayload = ({ values, course_id, isNew, nodeIndex, subModuleId, course_module_id }) => ({
-	...values,
-	...(isNew ? { course_module_id } : { cogo_academy_course_id: course_id, id: subModuleId }),
-	sequence_order: nodeIndex + 1,
-});
+	return {
+		...values,
+		...(isNew ? { course_id } : { cogo_academy_course_id: course_id, id: moduleId }),
+		sequence_order: nodeIndex + 1,
+	};
+};
+
+const getSubModulePayload = ({ values, course_id, isNew, nodeIndex, subModuleId, course_module_id, action_type }) => {
+	if (action_type === 'delete') {
+		return {
+			cogo_academy_course_id : course_id,
+			id                     : subModuleId,
+			status                 : 'inactive',
+		};
+	}
+
+	return {
+		...values,
+		...(isNew ? { course_module_id } : { cogo_academy_course_id: course_id, id: subModuleId }),
+		sequence_order: nodeIndex + 1,
+	};
+};
 
 const getChapterPayload = ({
 	values,
@@ -43,7 +63,16 @@ const getChapterPayload = ({
 	editorValue,
 	chapterId,
 	additionalResourcesWatch,
+	action_type,
 }) => {
+	if (action_type === 'delete') {
+		return {
+			course_sub_module_id,
+			id     : chapterId,
+			status : 'inactive',
+		};
+	}
+
 	const {
 		upload_file,
 		additional_resources_title,

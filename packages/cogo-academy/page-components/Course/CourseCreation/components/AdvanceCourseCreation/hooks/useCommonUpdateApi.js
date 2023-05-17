@@ -38,7 +38,7 @@ const useCommonUpdateApi = ({ getCourseModuleDetails, getCourseSubModule }) => {
 
 	return {
 		commonUpdateApi,
-		loaing: loadingChapter || loadingSubModule || loadingModule,
+		loading: loadingChapter || loadingSubModule || loadingModule,
 	};
 };
 

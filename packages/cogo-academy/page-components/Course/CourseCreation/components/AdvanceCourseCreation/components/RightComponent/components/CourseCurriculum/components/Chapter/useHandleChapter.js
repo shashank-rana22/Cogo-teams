@@ -3,8 +3,10 @@ import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useCommonCreateApi from '../../../../../../hooks/useCommonCreateApi';
+import useCommonDeleteApi from '../../../../../../hooks/useCommonDeleteApi';
 import useCommonUpdateApi from '../../../../../../hooks/useCommonUpdateApi';
 import useGetCourseSubModule from '../../../../../../hooks/useGetCourseSubModule';
+import getPayload from '../../../../../../utils/getPayload';
 
 const useHandleChapter = ({
 	subModule,
@@ -36,6 +38,12 @@ const useHandleChapter = ({
 		commonUpdateApi,
 		loading: updateChapterLoading,
 	} = useCommonUpdateApi({ getCourseSubModule });
+
+	const { loading: deleteLoading, commonDeleteApi } = useCommonDeleteApi({
+		finalData : subModuleChapters,
+		getCourseSubModule,
+		type      : 'chapter',
+	});
 
 	if (isEmpty(subModuleChapters)) {
 		setSubModuleChapters([{ id: new Date().getTime(), name: '', isNew: true, course_sub_module_id: id }]);
@@ -71,7 +79,17 @@ const useHandleChapter = ({
 
 		if (child.isNew) {
 			setSubModuleChapters((prev) => prev.filter((item) => item.id !== child.id));
+			return;
 		}
+
+		const deletePayloadValues = getPayload({
+			course_sub_module_id : id,
+			chapterId            : child.id,
+			payloadType          : 'chapter',
+			action_type          : 'delete',
+		});
+
+		commonDeleteApi({ idToDelete: child.id, deletePayloadValues });
 	};
 
 	const chapterLoading = createChapterLoading || updateChapterLoading || getLoading;
@@ -90,6 +108,7 @@ const useHandleChapter = ({
 		subModuleChapters,
 		subModuleId: id,
 		getCourseSubModuleLoading,
+		deleteLoading,
 	};
 };
 

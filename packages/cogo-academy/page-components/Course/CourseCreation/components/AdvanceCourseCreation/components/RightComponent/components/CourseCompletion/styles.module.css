@@ -88,6 +88,15 @@
 	&.course_select {
 		width: 100%;
 	}
+
+	&.course_completion_value {
+		margin-left: 20px;
+		width: 200px;
+	}
+
+	&.course_completion_unit {
+		width: 200px;
+	}
 }
 
 .error_message {
