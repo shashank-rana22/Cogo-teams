@@ -1832,6 +1832,12 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
+		{
+			api          : 'update_controlled_checkout_service',
+			access_type  : 'private',
+			service_name : 'checkout',
+
+		}
 	],
 	supply_crm: [
 		{
@@ -12138,6 +12144,19 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
+	],
+	controlled_booking: [
+		{
+			api          : 'list_checkouts',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
+		{
+			api:"update_controlled_checkout_state",
+	      	access_type  : 'private',
+			service_name : 'checkout',
+	},
+
 	],
 };
 

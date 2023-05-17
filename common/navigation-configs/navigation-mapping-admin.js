@@ -56,6 +56,7 @@ import {
 	IcMActivePlans,
 	IcMExportfile,
 	IcMAirSchedules,
+	IcMBookingDesk,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -2246,6 +2247,16 @@ const navigationMappingAdmin = {
 		as            : '/v2/ingestion',
 		possible_apis : apis.ingestion,
 		icon          : IcMActivePlans,
+	},
+	controlled_booking: {
+		key           : 'controlled_booking',
+		title         : 'Controlled Booking Desk',
+		icon          : IcMBookingDesk,
+		href          : '/v2/controlled-booking',
+		as            : '/v2/controlled-booking',
+		possible_apis : apis.controlled_booking,
+		module_type   : 'dashboards',
+		isSubNavs     : false,
 	},
 };
 

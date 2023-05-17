@@ -1,0 +1,17 @@
+{
+	"name": "@cogoport/controlled-booking",
+	"description": "Controlled Booking Desk",
+	"version": "0.1.0",
+	"main": "index.js",
+	"sideEffects": false,
+	"dependencies": {
+		"@cogoport/components": "^1.0.362",
+		"@cogoport/forms": "workspace:^0.1.0",
+		"@cogoport/icons-react": "^1.0.65",
+		"@cogoport/next": "workspace:0.1.0",
+		"@cogoport/request": "workspace:^0.1.0",
+		"@cogoport/store": "workspace:^0.1.0",
+		"@cogoport/utils": "^1.2.6",
+		"react": "18.2.0"
+	}
+}

@@ -1,0 +1,19 @@
+.container{
+     display: flex;
+     justify-content: flex-end;
+     align-items: center;
+}
+.button{
+     margin-right: 8px;
+}
+
+.rejection{
+     font-size:16;
+     margin-bottom:8px;
+}
+
+.buttonWrapper{
+
+     display: flex;
+     justify-content: flex-end;
+}

@@ -1,0 +1,12 @@
+.heading {
+	margin: 16px ;
+	font-size: 24px;
+	font-weight: 600;
+	line-height: 36px;
+	color: #221f20;
+}
+
+.container {
+	width: 100%;
+	background: #f9f5ec;
+}

@@ -58,6 +58,7 @@ importers:
       '@cogoport/cogo-verse-analytics': workspace:0.1.0
       '@cogoport/components': ^1.0.359
       '@cogoport/contracts': workspace:0.1.0
+      '@cogoport/controlled-booking': workspace:0.1.0
       '@cogoport/core': workspace:0.1.0
       '@cogoport/cost-booking-desk': workspace:0.1.0
       '@cogoport/document-desk': workspace:0.1.0
@@ -111,6 +112,7 @@ importers:
       '@cogoport/cogo-verse-analytics': link:../packages/cogo-verse-analytics
       '@cogoport/components': 1.0.385_zfibtjfawzd4ng63kcngfwss7u
       '@cogoport/contracts': link:../packages/contracts
+      '@cogoport/controlled-booking': link:../packages/controlled-booking
       '@cogoport/core': link:../common/core
       '@cogoport/cost-booking-desk': link:../packages/cost-booking-desk
       '@cogoport/document-desk': link:../packages/document-desk
@@ -780,6 +782,26 @@ importers:
       '@cogoport/utils': 1.2.6
       axios: 1.3.4
       axios-hooks: 4.0.0_axios@1.3.4+react@18.2.0
+      react: 18.2.0
+
+  packages/controlled-booking:
+    specifiers:
+      '@cogoport/components': ^1.0.362
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/icons-react': ^1.0.65
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.6
+      react: 18.2.0
+    dependencies:
+      '@cogoport/components': 1.0.417_curf2me2yhaaxyvkypamvvhkai
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/icons-react': 1.0.72_react@18.2.0
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
       react: 18.2.0
 
   packages/cost-booking-desk:
