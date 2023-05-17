@@ -1,12 +1,11 @@
-import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { format, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import AnswerKey from '../AnswerKey';
-import ButtonsComponent from '../ButtonsComponent';
 import CaseAnswerType from '../CaseAnswerType';
 import CaseQuestion from '../CaseQuestion';
+import OptionsComponent from '../OptionsComponent';
 import SortComponent from '../SortComponent';
 
 import styles from './styles.module.css';
@@ -31,13 +30,17 @@ const useGetTableColumns = ({
 	editDetails,
 }) => {
 	const [caseToShow, setCaseToShow] = useState('');
+	const [questionToShow, setQuestionToShow] = useState('');
 
 	return [
 		{
 			Header   : 'QUESTION TYPE',
 			id       : 'question_type',
-			accessor : ({ question_type = '' }) => (
-				<section>
+			accessor : ({ question_type, id = '' }) => (
+				<section
+					role="presentation"
+					onClick={() => setQuestionToShow(id)}
+				>
 					{QUESTION_TYPE_MAPPING[question_type] || ''}
 				</section>
 			),
@@ -46,30 +49,37 @@ const useGetTableColumns = ({
 			Header   : 'QUESTION/CASE',
 			id       : 'question_text',
 			accessor : (item) => (
-				<Tooltip
-					interactive
-					className={styles.tooltip}
-					content={item?.question_type !== 'case_study'
-						? <div className={styles.q_text}>{item?.question_text}</div>
-						: <CaseQuestion item={item} from="tooltip" caseToShow={caseToShow} />}
+				<div
+					role="presentation"
+					className={styles.question_div}
+					onClick={() => {
+						if (item?.question_type !== 'case_study') {
+							setQuestionToShow(item?.id);
+						}
+					}}
 				>
-					<div
-						role="presentation"
-						className={styles.question_div}
-						onClick={() => setCaseToShow(item.id === caseToShow ? '' : item.id)}
-					>
-						{item?.question_type !== 'case_study'
-							? item?.question_text
-							: <CaseQuestion item={item} from="normal" caseToShow={caseToShow} />}
-					</div>
-				</Tooltip>
+					{item?.question_type !== 'case_study'
+						? item?.question_text
+						: (
+							<CaseQuestion
+								item={item}
+								from="normal"
+								caseToShow={caseToShow}
+								setQuestionToShow={setQuestionToShow}
+								setCaseToShow={setCaseToShow}
+							/>
+						)}
+				</div>
 			),
 		},
 		{
 			Header   : 'ANSWER TYPE',
 			id       : 'answer_type',
 			accessor : (item) => (
-				<div>
+				<div
+					role="presentation"
+					onClick={() => setQuestionToShow(item?.id)}
+				>
 					{item?.question_type !== 'subjective' && (
 						<section>
 							{item?.question_type !== 'case_study'
@@ -85,14 +95,21 @@ const useGetTableColumns = ({
 			Header   : 'ANSWER KEY',
 			id       : 'answer_key',
 			accessor : (item) => (
-				<AnswerKey item={item} caseToShow={caseToShow} />
+				<AnswerKey
+					item={item}
+					caseToShow={caseToShow}
+					setQuestionToShow={setQuestionToShow}
+				/>
 			),
 		},
 		{
 			Header   : 'DIFFICULTY LEVEL',
 			id       : 'difficulty_level',
-			accessor : ({ difficulty_level }) => (
-				<section>
+			accessor : ({ difficulty_level, id = '' }) => (
+				<section
+					role="presentation"
+					onClick={() => setQuestionToShow(id)}
+				>
 					{startCase(difficulty_level)}
 				</section>
 			),
@@ -110,8 +127,11 @@ const useGetTableColumns = ({
 				</div>
 			),
 			id       : 'updated_at',
-			accessor : ({ updated_at }) => (
-				<div>
+			accessor : ({ updated_at, id = '' }) => (
+				<div
+					role="presentation"
+					onClick={() => setQuestionToShow(id)}
+				>
 					{format(updated_at, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}
 				</div>
 			),
@@ -120,7 +140,7 @@ const useGetTableColumns = ({
 			Header   : '',
 			id       : 'options',
 			accessor : (item) => (
-				<ButtonsComponent
+				<OptionsComponent
 					item={item}
 					setAllKeysSaved={setAllKeysSaved}
 					getTestQuestionTest={getTestQuestionTest}
@@ -130,6 +150,8 @@ const useGetTableColumns = ({
 					allKeysSaved={allKeysSaved}
 					mode={mode}
 					editDetails={editDetails}
+					questionToShow={questionToShow}
+					setQuestionToShow={setQuestionToShow}
 				/>
 			),
 		},
