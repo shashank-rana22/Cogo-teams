@@ -61,6 +61,7 @@ importers:
       '@cogoport/core': workspace:0.1.0
       '@cogoport/cost-booking-desk': workspace:0.1.0
       '@cogoport/document-desk': workspace:0.1.0
+      '@cogoport/employee-portal': workspace:0.1.0
       '@cogoport/enrichment': workspace:0.1.0
       '@cogoport/forms': workspace:0.1.0
       '@cogoport/globalization': workspace:^0.0.1
@@ -76,7 +77,6 @@ importers:
       '@cogoport/next': workspace:0.1.0
       '@cogoport/ocean-modules': workspace:0.1.0
       '@cogoport/performance-management': workspace:1.0.0
-      '@cogoport/profile': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
       '@cogoport/saas-tools': workspace:0.1.0
       '@cogoport/scope-select': workspace:0.1.0
@@ -116,6 +116,7 @@ importers:
       '@cogoport/core': link:../common/core
       '@cogoport/cost-booking-desk': link:../packages/cost-booking-desk
       '@cogoport/document-desk': link:../packages/document-desk
+      '@cogoport/employee-portal': link:../packages/employee-portal
       '@cogoport/enrichment': link:../packages/enrichment
       '@cogoport/forms': link:../common/forms
       '@cogoport/globalization': link:../common/globalization
@@ -131,7 +132,6 @@ importers:
       '@cogoport/next': link:../common/next
       '@cogoport/ocean-modules': link:../common/ocean-modules
       '@cogoport/performance-management': link:../packages/performance-management
-      '@cogoport/profile': link:../packages/profile
       '@cogoport/request': link:../common/request
       '@cogoport/saas-tools': link:../packages/saas-tools
       '@cogoport/scope-select': link:../common/scope-select
@@ -830,6 +830,28 @@ importers:
       '@cogoport/utils': 1.2.7
       react: 18.2.0
 
+  packages/employee-portal:
+    specifiers:
+      '@cogoport/components': ^1.0.345
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/globalization': workspace:^0.0.1
+      '@cogoport/icons-react': ^1.0.52
+      '@cogoport/next': workspace:^0.1.0
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.2
+      react: 18.2.0
+    dependencies:
+      '@cogoport/components': 1.0.417_curf2me2yhaaxyvkypamvvhkai
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
+      '@cogoport/icons-react': 1.0.72_react@18.2.0
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
+      react: 18.2.0
+
   packages/enrichment:
     specifiers:
       '@cogoport/charts': ^1.0.1
@@ -1047,30 +1069,6 @@ importers:
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.6
-      react: 18.2.0
-
-  packages/profile:
-    specifiers:
-      '@cogoport/charts': ^1.0.1
-      '@cogoport/components': ^1.0.345
-      '@cogoport/forms': workspace:^0.1.0
-      '@cogoport/globalization': workspace:^0.0.1
-      '@cogoport/icons-react': ^1.0.52
-      '@cogoport/next': workspace:^0.1.0
-      '@cogoport/request': workspace:^0.1.0
-      '@cogoport/store': workspace:^0.1.0
-      '@cogoport/utils': ^1.2.2
-      react: 18.2.0
-    dependencies:
-      '@cogoport/charts': 1.0.2_react@18.2.0
-      '@cogoport/components': 1.0.417_curf2me2yhaaxyvkypamvvhkai
-      '@cogoport/forms': link:../../common/forms
-      '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.72_react@18.2.0
-      '@cogoport/next': link:../../common/next
-      '@cogoport/request': link:../../common/request
-      '@cogoport/store': link:../../common/store
-      '@cogoport/utils': 1.2.10
       react: 18.2.0
 
   packages/saas-tools:
