@@ -1478,6 +1478,11 @@ const apis = [
 		service_name : 'shipment',
 
 	},
+	{
+		api          : 'get_pending_task_authorization',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
