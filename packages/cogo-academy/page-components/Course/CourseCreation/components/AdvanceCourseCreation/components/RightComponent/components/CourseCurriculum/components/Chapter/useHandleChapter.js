@@ -2,9 +2,9 @@ import { Toast } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import useCreateCourseSubModuleChapter from '../../../../../../hooks/useCreateCourseSubModuleChapter';
+import useCommonCreateApi from '../../../../../../hooks/useCommonCreateApi';
+import useCommonUpdateApi from '../../../../../../hooks/useCommonUpdateApi';
 import useGetCourseSubModule from '../../../../../../hooks/useGetCourseSubModule';
-import useUpdateCourseSubModuleChapter from '../../../../../../hooks/useUpdateCourseSubModuleChapter';
 
 const useHandleChapter = ({
 	subModule,
@@ -28,14 +28,14 @@ const useHandleChapter = ({
 	});
 
 	const {
-		createCourseSubModuleChapter,
+		commonCreateApi,
 		loading: createChapterLoading,
-	} = useCreateCourseSubModuleChapter({ getCourseModuleDetails });
+	} = useCommonCreateApi({ getCourseModuleDetails });
 
 	const {
-		updateCourseSubModuleChapter,
+		commonUpdateApi,
 		loading: updateChapterLoading,
-	} = useUpdateCourseSubModuleChapter({ getCourseSubModule });
+	} = useCommonUpdateApi({ getCourseSubModule });
 
 	if (isEmpty(subModuleChapters)) {
 		setSubModuleChapters([{ id: new Date().getTime(), name: '', isNew: true, course_sub_module_id: id }]);
@@ -43,9 +43,9 @@ const useHandleChapter = ({
 
 	const onSaveChapter = ({ values, chapter }) => {
 		if (chapter.isNew) {
-			createCourseSubModuleChapter({ values });
+			commonCreateApi({ values, type: 'chapter' });
 		} else {
-			updateCourseSubModuleChapter({ values });
+			commonUpdateApi({ values, type: 'chapter' });
 		}
 	};
 

@@ -1,8 +1,8 @@
 import { useForm } from '@cogoport/forms';
 import { useState, useEffect } from 'react';
 
-import useCreateCourseModule from '../../../../../hooks/useCreateCourseModule';
-import useUpdateCourseModule from '../../../../../hooks/useUpdateCourseModule';
+import useCommonCreateApi from '../../../../../hooks/useCommonCreateApi';
+import useCommonUpdateApi from '../../../../../hooks/useCommonUpdateApi';
 import getPayload from '../../../../../utils/getPayload';
 
 const useHandleModule = ({
@@ -18,20 +18,20 @@ const useHandleModule = ({
 	const { control, formState:{ errors = {} }, handleSubmit, setValue } = useForm();
 
 	const {
-		createCourseModule,
+		commonCreateApi,
 		loading: createModuleLoading,
-	} = useCreateCourseModule({ getCourseModuleDetails });
+	} = useCommonCreateApi({ getCourseModuleDetails });
 
 	const {
-		updateCourseModule,
+		commonUpdateApi,
 		loading:updateModuleLoading,
-	} = useUpdateCourseModule({ getCourseModuleDetails });
+	} = useCommonUpdateApi({ getCourseModuleDetails });
 
 	const onSaveModule = ({ values }) => {
 		if (module.isNew) {
-			createCourseModule({ values });
+			commonCreateApi({ values, type: 'module' });
 		} else {
-			updateCourseModule({ values });
+			commonUpdateApi({ values, type: 'module' });
 		}
 	};
 

@@ -3,9 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useGetCourseModuleDetails from '../../../../hooks/useGetCourseModuleDetails';
-import useUpdateChapterSequenceOrder from '../../../../hooks/useUpdateChapterSequenceOrder';
-import useUpdateCourseModuleSequenceOrder from '../../../../hooks/useUpdateCourseModuleSequenceOrder';
-import useUpdateCourseSubModuleSequenceOrder from '../../../../hooks/useUpdateCourseSubModuleSequenceOrder';
+import useUpdateSequenceOrder from '../../../../hooks/useUpdateSequenceOrder';
 
 const useHandleCourseCurriculum = ({ courseId, activeTab }) => {
 	const [finalData, setFinalData] = useState([]);
@@ -18,17 +16,7 @@ const useHandleCourseCurriculum = ({ courseId, activeTab }) => {
 		moduleData,
 	} = useGetCourseModuleDetails({ id: courseId, activeTab });
 
-	const {
-		updateCourseModuleSequenceOrder,
-	} = useUpdateCourseModuleSequenceOrder({ getCourseModuleDetails });
-
-	const {
-		updateCourseSubModuleSequenceOrder,
-	} = useUpdateCourseSubModuleSequenceOrder({ getCourseModuleDetails });
-
-	const {
-		updateChapterSequenceOrder,
-	} = useUpdateChapterSequenceOrder({ setGetSubModuleRefetch });
+	const { updateSequenceOrder } = useUpdateSequenceOrder({ getCourseModuleDetails, setGetSubModuleRefetch });
 
 	const handleDragStart = (event, node, from) => {
 		setDraggedNode({ ...node, from });
@@ -83,7 +71,7 @@ const useHandleCourseCurriculum = ({ courseId, activeTab }) => {
 				new_sequence_order : index + 1,
 			}));
 
-			updateCourseModuleSequenceOrder({ values: { course_modules: finalPayload } });
+			updateSequenceOrder({ values: { course_modules: finalPayload }, type: draggedNode.from });
 		}
 
 		if (draggedNode.from === 'sub_module') {
@@ -105,7 +93,7 @@ const useHandleCourseCurriculum = ({ courseId, activeTab }) => {
 				new_sequence_order : index + 1,
 			}));
 
-			updateCourseSubModuleSequenceOrder({ values: { course_sub_modules: finalPayload } });
+			updateSequenceOrder({ values: { course_sub_modules: finalPayload }, type: draggedNode.from });
 		}
 
 		if (draggedNode.from === 'chapter') {
@@ -125,7 +113,7 @@ const useHandleCourseCurriculum = ({ courseId, activeTab }) => {
 				new_sequence_order : index + 1,
 			}));
 
-			updateChapterSequenceOrder({ values: { chapters: finalPayload } });
+			updateSequenceOrder({ values: { chapters: finalPayload }, type: draggedNode.from });
 		}
 	};
 

@@ -1,8 +1,8 @@
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import useCreateCourseSubModule from '../../../../../../hooks/useCreateCourseSubModule';
-import useUpdateCourseSubModule from '../../../../../../hooks/useUpdateCourseSubModule';
+import useCommonCreateApi from '../../../../../../hooks/useCommonCreateApi';
+import useCommonUpdateApi from '../../../../../../hooks/useCommonUpdateApi';
 
 const useHandleSubModule = ({
 	getLoading,
@@ -16,20 +16,20 @@ const useHandleSubModule = ({
 	const [courseSubModule, setCourseSubModule] = useState(course_sub_modules);
 
 	const {
-		createCourseSubModule,
+		commonCreateApi,
 		loading: createSubModuleLoading,
-	} = useCreateCourseSubModule({ getCourseModuleDetails });
+	} = useCommonCreateApi({ getCourseModuleDetails });
 
 	const {
-		updateCourseSubModule,
+		commonUpdateApi,
 		loading: updateSubModuleLoading,
-	} = useUpdateCourseSubModule({ getCourseModuleDetails });
+	} = useCommonUpdateApi({ getCourseModuleDetails });
 
 	const onSaveSubModule = ({ values, subModule }) => {
 		if (subModule.isNew) {
-			createCourseSubModule({ values });
+			commonCreateApi({ values, type: 'sub_module' });
 		} else {
-			updateCourseSubModule({ values });
+			commonUpdateApi({ values, type: 'sub_module' });
 		}
 	};
 
