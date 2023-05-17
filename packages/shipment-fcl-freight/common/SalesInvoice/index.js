@@ -28,7 +28,7 @@ function SalesInvoice() {
 	let salesInvoices = null;
 	if (loading) {
 		salesInvoices = (
-			<div>
+			<div className={styles.loader}>
 				<Loader />
 				<Loader />
 				<Loader />
