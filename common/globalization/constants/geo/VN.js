@@ -333,4 +333,11 @@ export default {
 			},
 		],
 	},
+	entity_specific_data: {
+		feature_supported: {
+			supply_dashboard: {
+				tabs_not_supported: ['rate_density'],
+			},
+		},
+	},
 };
