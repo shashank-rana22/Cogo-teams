@@ -76,8 +76,21 @@ function OTPVerification({
 	};
 	const title = `Enter OTP sent to ${selectedUser?.split('_')?.[1]} registered mobile number`;
 
-	if (userList?.length === 0) {
-		return <div className={styles.no_data}>No verified user exists!</div>;
+	let userListInfo = null;
+	if (loading) {
+		userListInfo = <Loader />;
+	} else if (userList?.length === 0 && !loading) {
+		userListInfo = <div className={styles.no_data}>No verified user exists!</div>;
+	} else {
+		(
+			userListInfo =	(
+				<RadioGroup
+					options={organizationOptions}
+					value={selectedUser}
+					onChange={(item) => setSelectedUser(item)}
+				/>
+			)
+		);
 	}
 
 	return (
@@ -89,15 +102,7 @@ function OTPVerification({
 				>
 					<Modal.Header title="Select user to send OTP" />
 					<Modal.Body className={styles.body}>
-						{loading ? (
-							<Loader />
-						) : (
-							<RadioGroup
-								options={organizationOptions}
-								value={selectedUser}
-								onChange={(item) => setSelectedUser(item)}
-							/>
-						)}
+						{userListInfo}
 					</Modal.Body>
 					<Modal.Footer>
 						<Button
@@ -110,6 +115,7 @@ function OTPVerification({
 							size="md"
 							style={{ marginLeft: '16px' }}
 							onClick={handleClick}
+							disabled={userList?.length === 0}
 						>
 							Send
 						</Button>
