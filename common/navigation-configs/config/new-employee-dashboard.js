@@ -3,6 +3,9 @@ const newEmployeeDashboard = {
 		navigation : 'new_employee_dashboard',
 		isMainNav  : true,
 	},
+	'/[partner_id]/new-employee-dashboard/add': {
+		navigation: 'new_employee_dashboard',
+	},
 };
 
 module.exports = newEmployeeDashboard;
