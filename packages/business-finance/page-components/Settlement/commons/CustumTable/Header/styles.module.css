@@ -16,6 +16,7 @@
 }
 
 .accdate {
+	display: flex;
 	flex: 1;
 	width: calc(1*(100 / 12));
 }
@@ -48,4 +49,10 @@
 .curr {
 	flex: 1;
 	width: calc(1*(100 / 12));
+}
+
+.sorticons {
+	display: flex;
+	flex-direction: column;
+	margin-left: 4px;
 }

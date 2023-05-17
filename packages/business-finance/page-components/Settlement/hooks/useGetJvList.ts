@@ -12,7 +12,7 @@ const useGetJvList = ({ filters }) => {
 		{ manual: true },
 	);
 
-	const { category, status, query: search, page = 1 } = filters || {};
+	const { category, status, query: search, page = 1, sortType, sortBy } = filters || {};
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
@@ -28,6 +28,8 @@ const useGetJvList = ({ filters }) => {
 				category  : category || undefined,
 				status    : status || undefined,
 				query     : query || undefined,
+				sortBy    : sortBy || undefined,
+				sortType  : sortType || undefined,
 			},
 		});
 	};
@@ -40,9 +42,11 @@ const useGetJvList = ({ filters }) => {
 				category  : category || undefined,
 				status    : status || undefined,
 				query     : query || undefined,
+				sortBy    : sortBy || undefined,
+				sortType  : sortType || undefined,
 			},
 		});
-	}, [trigger, status, category, query, page]);
+	}, [trigger, status, category, query, page, sortType, sortBy]);
 
 	return {
 		data,

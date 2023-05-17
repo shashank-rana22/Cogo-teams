@@ -47,7 +47,14 @@ function JournalVoucher() {
 					</Button>
 				</div>
 			</div>
-			<CustumTable data={data} onPageChange={onPageChange} loading={loading} refetch={refetch} />
+			<CustumTable
+				data={data}
+				onPageChange={onPageChange}
+				loading={loading}
+				refetch={refetch}
+				setFilters={setFilters}
+				filters={filters}
+			/>
 			{show ? <CreateJvModal show={show} setShow={setShow} onClose={onClose} refetch={refetch} /> : null}
 		</div>
 	);
