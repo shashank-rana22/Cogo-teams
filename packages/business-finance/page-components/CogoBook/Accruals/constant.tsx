@@ -3,6 +3,7 @@ import { getFormattedPrice } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
+import React from 'react';
 
 import SortIcon from '../common/SortIcon';
 
@@ -28,7 +29,7 @@ export const monthData = {
 export const getEntityOptions = () => {
 	const ENTITY_OPTIONS = [];
 
-	Object.entries(GLOBAL_CONSTANTS.cogoport_entities).map(([key, value]) => (
+	Object.entries(GLOBAL_CONSTANTS.cogoport_entities).map(([key, value]: any) => (
 		value.feature_supported.includes('cogo_books')
 			&& ENTITY_OPTIONS.push({
 				label : Number(key),

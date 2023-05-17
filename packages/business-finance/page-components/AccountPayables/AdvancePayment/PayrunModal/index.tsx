@@ -59,7 +59,7 @@ function PayRunModal({ show, setShow, activeEntity }:Props) {
 					</div>
 					<div>
 						{Object.entries(GLOBAL_CONSTANTS.cogoport_entities).map(([key, value]) => {
-							const { name, icon: Icon } = value || {};
+							const { name, icon: Icon } = value as { name: string; icon: React.ElementType } || {};
 							return (
 								<div key={key}>
 									{key === activeEntity && (
