@@ -376,9 +376,7 @@ export default {
 	},
 	navigations: {
 		supply_dashboard: {
-			main          : {},
-			live_bookings : {},
-			rfq_enquiries : {
+			rfq_enquiries: {
 				tabs: [
 					'live_bookings',
 					'trade_enquiry',
