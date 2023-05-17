@@ -1,12 +1,8 @@
-.container {
-	margin: 25px 0;
-}
-
-.row {
+.flex_box {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	padding: 16px;
+	padding: 14px 16px;
 
 	&.item_row {
 		border-bottom: 1px solid #fbd1a6;
@@ -24,17 +20,4 @@
 .col {
 	width: 80px;
 	padding: 0 8px;
-
-	:global {
-		.ui_legend_container,
-		.ui_legend_item {
-			margin: 0;
-		}
-	}
-}
-
-.pagination_container {
-	display: flex;
-	justify-content: center;
-	margin: 20px 0;
 }

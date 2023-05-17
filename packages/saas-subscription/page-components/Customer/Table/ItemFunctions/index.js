@@ -1,5 +1,11 @@
+import { Legend } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
+import { format, startCase } from '@cogoport/utils';
+
+const statusColor = {
+	active: '#ABCD62',
+
+};
 
 const itemFunction = ({ setEditModal }) => ({
 	renderId: (item) => (
@@ -13,12 +19,22 @@ const itemFunction = ({ setEditModal }) => ({
 	renderPlan: (item) => (
 		<span>{item?.active_subscription?.plan?.display_name}</span>
 	),
-	renderEndDate: (item) => (
-		<span>{format(item?.active_subscription?.end_date, 'dd-MM-yyyy')}</span>
-	),
-	renderStatus: (item) => (
-		<span>{item?.active_subscription?.status}</span>
-	),
+	renderEndDate: (item) => {
+		const data = item?.active_subscription?.end_date;
+		return (
+			<span>
+				{data ? format(data, 'dd-MM-yyy') : '--' }
+			</span>
+		);
+	},
+	renderStatus: (item) => {
+		const status = item?.active_subscription?.status;
+		const modifiedStatus = startCase(status);
+		const itm = [{ label: modifiedStatus, color: statusColor?.[status], key: modifiedStatus }];
+		return (
+			<Legend hasBackground={false} direction="horizontal" items={itm} size="md" />
+		);
+	},
 	renderEdit: (item) => (
 		<span>
 			<IcMEdit

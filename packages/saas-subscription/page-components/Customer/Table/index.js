@@ -1,37 +1,29 @@
-import { cl } from '@cogoport/components';
-import { IcMEdit } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
+import { Pagination, Placeholder, cl } from '@cogoport/components';
+import { useState } from 'react';
 
 import listConfig from '../../../configuration/listConfig';
+import getValues from '../../../utils/getValues';
 
+import EditAddonModal from './EditAddonQuota';
+import EditModal from './EditModal';
 import itemFunction from './ItemFunctions';
 import styles from './styles.module.css';
 
-const list = [
-	{
-		id              : '1',
-		organization_id : '7746391b-09f1-449d-a389-8108d73269d4',
-		organization    : {
-			serial_id     : '26645',
-			business_name : 'MANAN  MOTA',
+function Table({ userList = {}, loading = false, setGlobalFilters }) {
+	const { list, page, page_limit, total_count } = userList || {};
+	const [editModal, setEditModal] = useState({
+		openEditModal       : false,
+		openEditAddonModal  : false,
+		openChangePlanModal : false,
+	});
+	const [editAddonModal, setEditAddonModal] = useState({});
+	const functions = itemFunction({ setEditModal });
 
-		},
-		active_subscription: {
-			start_date : '2022-12-28T08:43:44.000Z',
-			end_date   : '2023-01-28T08:43:44.000Z',
-			status     : 'active',
-			plan       : {
-				id           : '901f2d64-ca58-457b-a3c6-d772d6c08ac5',
-				plan_name    : 'starter-pack',
-				display_name : 'Starter Pack',
-				is_free_plan : true,
-			},
-		},
-	},
-];
+	const newList = loading ? [1, 2, 3, 4, 5] : list;
 
-function Table() {
-	const functions = itemFunction({});
+	const pageChangeHandler = (v) => {
+		setGlobalFilters((prev) => ({ ...prev, page: v }));
+	};
 
 	return (
 		<div className={styles.container}>
@@ -42,20 +34,35 @@ function Table() {
 					</div>
 				))}
 			</div>
-			{(list || []).map((item) => (
+			{(newList || []).map((item) => (
 				<div className={cl`${styles.row} ${styles.item_row}`}>
 					{listConfig.map((config) => (
 						<div
 							className={styles.col}
 							style={{ width: config?.width }}
 						>
-							{functions?.[config?.renderFunc](item)}
+							{loading ? <Placeholder height="30px" />
+								: getValues({ itemData: item, config, itemFunction: functions })}
 
 						</div>
 					))}
 				</div>
 			))}
 
+			{!loading && (
+				<div className={styles.pagination_container}>
+					<Pagination
+						type="number"
+						currentPage={page}
+						totalItems={total_count}
+						pageSize={page_limit}
+						onPageChange={pageChangeHandler}
+					/>
+				</div>
+			)}
+
+			<EditModal editModal={editModal} setEditModal={setEditModal} setEditAddonModal={setEditAddonModal} />
+			<EditAddonModal editAddonModal={editAddonModal} setEditAddonModal={setEditAddonModal} />
 		</div>
 	);
 }

@@ -1,0 +1,51 @@
+.container {
+	border: 1px solid #f8f2e7;
+	border-radius: 9px;
+}
+
+.flex_box {
+	display: flex;
+	justify-content: space-between;
+	padding: 12px 16px;
+	border-bottom: 1px solid #f8f2e7;
+
+	.no_border {
+		border: none;
+	}
+}
+
+.card_header {
+	div {
+		font-weight: 600;
+	}
+}
+
+.quota_row {
+	font-size: 12px;
+}
+
+.edit_icon {
+	width: 12px;
+	margin-left: 4px;
+	cursor: pointer;
+}
+
+.input_col {
+	display: flex;
+	align-items: center;
+
+	.cta_icon {
+		cursor: pointer;
+	}
+
+	:global {
+		.ui_ps_size_sm {
+			height: 25px;
+			min-height: 25px;
+		}
+
+		.ui_ps_size_sm .ui_input_number_control {
+			font-size: 12px;
+		}
+	}
+}
