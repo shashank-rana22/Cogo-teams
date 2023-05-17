@@ -9,7 +9,7 @@ function Filters({ setDateRange, dateRange, cost_details, showTotalCost }) {
 			<div className={styles.total}>
 				{showTotalCost ? (
 					<div className={styles.total_cost}>
-						Total -
+						Total Cost -
 						{' '}
 						<span style={{ paddingRight: '4px' }}>
 							{total_cost_amount}
