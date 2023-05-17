@@ -140,7 +140,9 @@ export default {
 			'2644ceb0-ebd4-4c51-af71-45067f27d78b', // Finance Controller Head
 			'ede05be5-8e8b-4f5a-8954-ae1b53c3cdc3', // Account Receivable Executive
 		],
-		sales_role: [
+		costbooking_ops_role_ids         : '281d52f4-096f-4c92-a629-57719c716ac6',
+		costbooking_ops_manager_role_ids : '219e184e-b080-4c83-837d-eb4b26a42e45',
+		sales_role                       : [
 			'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
 			'0bc8c199-09ed-4a85-b3a3-a855f05a2716',
 			'e0e2f83b-9e5b-41a3-948e-ab1ec9b0f3ad',
@@ -292,6 +294,32 @@ export default {
 			{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
 			{ label: 'E-INVOICE Generated', value: 'IRN_GENERATED' },
 			{ label: 'Requested', value: 'REQUESTED' },
+		],
+		freight_container_types: [
+			{
+				label : 'Standard(Dry)',
+				value : 'standard',
+			},
+			{
+				label : 'Refrigerated (Reefer)',
+				value : 'refer',
+			},
+			{
+				label : 'Open Top',
+				value : 'open_top',
+			},
+			{
+				label : 'Flat Rack',
+				value : 'flat_rack',
+			},
+			{
+				label : 'ISO Tank',
+				value : 'iso_tank',
+			},
+			{
+				label : 'Open Side (One Door Open)',
+				value : 'open_side',
+			},
 		],
 	},
 };
