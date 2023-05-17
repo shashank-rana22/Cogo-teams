@@ -37,7 +37,6 @@ function AddRemarks({
 	return (
 		<Modal onClose={onClose} show={showAddRemarks} width={600}>
 			<Modal.Header title="Invoice Remarks" />
-
 			<Modal.Body>
 				<Textarea
 					value={remarkValue}
@@ -47,7 +46,6 @@ function AddRemarks({
 					placeholder="Add remarks for your invoice..."
 				/>
 			</Modal.Body>
-
 			<Modal.Footer>
 				<Button
 					className="secondary md"
@@ -56,7 +54,6 @@ function AddRemarks({
 				>
 					Cancel
 				</Button>
-
 				<Button
 					className="primary md"
 					onClick={handleSubmit}

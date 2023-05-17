@@ -1,10 +1,8 @@
 import { Button, cl, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-// import { useSelector } from '@cogo/store';
-// import { Flex } from '@cogoport/front/components';
-// import { ToolTip, Button } from '@cogoport/front/components/admin';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -13,7 +11,6 @@ import useUpdateShipmentInvoiceStatus from '../../../../../../hooks/useUpdateShi
 import Actions from './Actions';
 import CNNullify from './CNNullify';
 import styles from './styles.module.css';
-// import useUpdateInvoiceStatus from '../../../../../../hooks/useUpdateInvoiceStatus';
 
 const RESTRICT_REVOKED_STATUS = ['revoked', 'finance_rejected'];
 
@@ -32,10 +29,9 @@ function Header({
 	const [askNullify, setAskNullify] = useState(false);
 	const [status, setStatus] = useState('');
 
-	// const { user_data } = useSelector(({ profile }) => ({
-	// 	user_data: profile || {},
-	// }));
-	const user_data = { email: 'ajeet@cogoport.com' };
+	const { user_data } = useSelector(({ profile }) => ({
+		user_data: profile || {},
+	}));
 	const isAuthorized = user_data.email === 'ajeet@cogoport.com';
 
 	const {
@@ -57,15 +53,14 @@ function Header({
 		window.open(invoiceLink);
 	};
 
-	const { updateInvoiceStatus, loading } = useUpdateShipmentInvoiceStatus({
+	const { updateInvoiceStatus } = useUpdateShipmentInvoiceStatus({
 		invoice,
 		refetch,
 		status,
 	});
 
-	// const showIrnTriggerForOldShipments =		shipment_data?.serial_id <= 120347
-	// 	&& invoice?.status === 'reviewed'
-	// 	&& !isEmpty(invoice?.data);
+	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= 120347 && invoice?.status === 'reviewed'
+		&& !isEmpty(invoice?.data);
 
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === live_invoice_number
@@ -83,11 +78,6 @@ function Header({
 
 	const creditSource = invoice?.credit_option?.credit_source?.split('_');
 	// console.log(creditSource, ' :creditSource : ', invoice?.credit_option);
-
-	// const restrictCN =
-	// 	['fcl_freight', 'lcl_freight', 'rail_domestic_freight'].includes(
-	// 		shipment_data?.shipment_type,
-	// 	) && shipment_data?.state === 'cancelled';
 
 	const showRequestCN = showCN && !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
 	&& (shipment_data?.serial_id > 120347 || isAuthorized);
@@ -178,13 +168,13 @@ function Header({
 							)}
 						</div>
 
-						{/* {showIrnTriggerForOldShipments ? (
+						{showIrnTriggerForOldShipments ? (
 							<Button
 								onClick={() => handleClick('approved')}
 							>
 								Generate IRN Invoice
 							</Button>
-						) : null} */}
+						) : null}
 					</div>
 					<div className={styles.invoice_value_container}>
 						<div className={styles.invoice_value_title}>Invoice Value -</div>
@@ -239,7 +229,6 @@ function Header({
 							invoiceData={invoiceData}
 							isIRNGenerated={isIRNGenerated}
 							salesInvoicesRefetch={salesInvoicesRefetch}
-							invoicesList={invoicesList}
 							bfInvoice={bfInvoice}
 						/>
 					) : null}
@@ -259,19 +248,19 @@ function Header({
 						</Button>
 						) : null}
 
-					{/* {showRequestCN ? ( */}
-					<Button
-						style={{
-							marginTop     : '4px',
-							textTransform : 'capitalize',
-							letterSpacing : '0px',
-						}}
-						size="sm"
-						onClick={() => setAskNullify(true)}
-					>
-						Request CN
-					</Button>
-					{/* ) : null} */}
+					{showRequestCN ? (
+						<Button
+							style={{
+								marginTop     : '4px',
+								textTransform : 'capitalize',
+								letterSpacing : '0px',
+							}}
+							size="sm"
+							onClick={() => setAskNullify(true)}
+						>
+							Request CN
+						</Button>
+					) : null}
 
 					{invoice?.is_revoked && invoice?.status !== 'revoked' ? (
 						<div className={styles.info_container}>Requested for Revoke</div>

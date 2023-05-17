@@ -27,7 +27,6 @@ const useEditLineItems = ({
 	}));
 
 	const isAuthorised = admin_email_ids.includes(user_data?.email);
-	const isAirFreight = shipment_data?.shipment_type === 'air_freight';
 
 	const [selectedCodes, setSelectedCodes] = useState({});
 	const [allChargeCodes, setAllChargeCodes] = useState({});
@@ -78,7 +77,6 @@ const useEditLineItems = ({
 			index,
 			trade_mapping,
 			isAuthorised,
-			isAirFreight,
 		),
 		onOptionsChange : (vals) => setAllChargeCodes({ ...allChargeCodes, ...vals }),
 		value           : (service?.line_items || []).map((item) => ({
@@ -102,7 +100,6 @@ const useEditLineItems = ({
 
 	const formValues = watch();
 
-	const labels = {};
 	const customValues = {};
 	const prepareFormValues = () => {
 		const allFormValues = { ...formValues };
@@ -153,7 +150,7 @@ const useEditLineItems = ({
 	});
 
 	const validateForPriceChanges = (values) => {
-		if (isAirFreight && !isAuthorised) {
+		if (isAuthorised) {
 			const newErrors = {};
 			Object.keys(values).forEach((key) => {
 				const customErrors = {};

@@ -131,7 +131,6 @@
 .actions_wrap{
 	display: flex;
 	align-items: center;
-	/* margin: 30px 20px 0 0; */
 
 	&.icons {
 		margin-right: 16px;
@@ -154,10 +153,4 @@
 	border-radius: 4px;
 	padding: 2px 10px;
 	font-size: 10px;
-}
-
-.review_nvoice{
-	display: flex;
-	align-items: center;
-	gap: 10px;
 }

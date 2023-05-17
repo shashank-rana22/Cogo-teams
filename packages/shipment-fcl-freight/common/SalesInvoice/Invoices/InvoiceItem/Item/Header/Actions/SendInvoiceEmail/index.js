@@ -1,8 +1,9 @@
 import { Modal, Button } from '@cogoport/components';
 import React from 'react';
 
-import styles from './styles.module.css';
 import useSendInvoiceEmail from '../../../../../../../../hooks/useSendInvoiceEmail';
+
+import styles from './styles.module.css';
 
 function SendInvoiceEmail({
 	show = false,
@@ -24,7 +25,7 @@ function SendInvoiceEmail({
 				<Button
 					className="secondary"
 					onClick={() => setShow(false)}
-						disabled={loading}
+					disabled={loading}
 					style={{ marginRight: '20px' }}
 				>
 					Cancel

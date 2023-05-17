@@ -49,15 +49,6 @@ function EditInvoicePreference({
 		organizationDetails.is_tax_applicable =			shipment_data?.importer_exporter?.is_tax_applicable;
 	}
 
-	let disableActionCondition = disableAction;
-	if (
-		(shipment_data?.source === 'contract'
-			&& shipment_data?.shipment_type === 'ftl_freight')
-		|| (shipment_data?.shipment_type === 'ltl_freight'
-			&& shipment_data?.all_services?.[0]?.payment_term === 'prepaid')
-	) {
-		disableActionCondition = true;
-	}
 	const handleClose = () => {
 		// setSelectedParties(rest?.formattedIps);
 		setShow(false);
@@ -69,7 +60,7 @@ function EditInvoicePreference({
 			<Button
 				className="secondary sm"
 				onClick={() => setShow(true)}
-				// disabled={disableActionCondition}
+				disabled={disableAction}
 			>
 				Edit Invoice Preference
 			</Button>

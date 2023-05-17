@@ -71,8 +71,7 @@ function OTPVerificationModal({
 	const handleClick = async () => {
 		if (isEmpty(selectedUser)) Toast.error('Please select any user');
 		else {
-			// await sendOtpForInvoiceApproval();
-			setModalIsOpen(true);
+			await sendOtpForInvoiceApproval();
 		}
 	};
 	const title = `Enter OTP sent to ${selectedUser?.split('_')?.[1]} registered mobile number`;

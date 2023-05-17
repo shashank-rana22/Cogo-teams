@@ -1,21 +1,22 @@
-import { Flex } from '@cogoport/front/components';
-import React from 'react';
+import { Flex } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
-import { ServiceName, AvgMargin, IconWrapper, Container } from './styles';
+import React from 'react';
 
-const SuggestedServices = () => {
+import styles from './styles.module.css';
+
+function SuggestedServices() {
 	return (
-		<Container>
+		<div className={styles.container}>
 			<Flex direction="column" justifyContent="center">
-				<ServiceName>Vessel Traffic Service</ServiceName>
-				<AvgMargin>Average Margin $20</AvgMargin>
+				<div className={styles.service_name}>Vessel Traffic Service</div>
+				<div className={styles.avg_margin}>Average Margin $20</div>
 			</Flex>
 
-			<IconWrapper>
+			<div className={styles.icon_wrapper}>
 				<IcMPlus />
-			</IconWrapper>
-		</Container>
+			</div>
+		</div>
 	);
-};
+}
 
 export default SuggestedServices;

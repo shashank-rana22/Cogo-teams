@@ -1,22 +1,25 @@
 import React from 'react';
+
 import ServiceItem from './ServiceItem';
-import { Container, Heading, ServiceContainer } from './styles';
+import styles from './styles.module.css';
 
-const SuggestedServices = () => {
+function SuggestedServices() {
 	return (
-		<Container>
-			<Heading>
-				Recommended Services <span style={{ fontWeight: 400 }}>(optional)</span>
-			</Heading>
+		<div className={styles.container}>
+			<div className={styles.heading}>
+				Recommended Services
+				{' '}
+				<span style={{ fontWeight: 400 }}>(optional)</span>
+			</div>
 
-			<ServiceContainer>
+			<div className={styles.service_container}>
 				<ServiceItem />
 				<ServiceItem />
 				<ServiceItem />
 				<ServiceItem />
-			</ServiceContainer>
-		</Container>
+			</div>
+		</div>
 	);
-};
+}
 
 export default SuggestedServices;

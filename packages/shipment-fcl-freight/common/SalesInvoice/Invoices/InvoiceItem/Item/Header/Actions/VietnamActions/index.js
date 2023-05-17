@@ -1,24 +1,24 @@
-import ChangeCurrency from '@cogo/bookings/commons/ChangeCurrency';
-import { useSelector } from '@cogo/store';
-import { Button, Popover, Tooltip } from '@cogoport/components';
+import { Button, Popover, Tooltip, cl } from '@cogoport/components';
 import {
 	IcMOverflowDot,
 	IcMInfo,
 	IcCError,
-	// IcMEmail,
+	IcMEmail,
 } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useUpdateInvoiceStatus from '../../../../../../../../hooks/useUpdateInvoiceStatus';
 import AddRemarks from '../../AddRemarks';
+import ChangeCurrency from '../../ChangeCurrency';
 import EditInvoice from '../../EditInvoice';
 import OTPVerificationModal from '../../OTPVerificationModal';
 import ReviewServices from '../../ReviewServices';
 import AmendmentReasons from '../AmendmentReasons';
-// import SendInvoiceEmail from '../SendInvoiceEmail';
 import ChangePaymentMode from '../ChangePaymentMode';
 import RejectRequest from '../RejectRequest';
+import SendInvoiceEmail from '../SendInvoiceEmail';
 import styles from '../styles.module.css';
 
 function Actions({
@@ -28,7 +28,6 @@ function Actions({
 	invoiceData = {},
 	isIRNGenerated = false,
 	salesInvoicesRefetch = () => {},
-	invoicesList = [],
 	bfInvoice = {},
 }) {
 	const [show, setShow] = useState(false);
@@ -37,7 +36,7 @@ function Actions({
 	const [showReview, setShowReview] = useState(false);
 	const [showAddRemarks, setShowAddRemarks] = useState(false);
 	const [showChangePaymentMode, setShowChangePaymentMode] = useState(false);
-	// const [sendEmail, setSendEmail] = useState(false);
+	const [sendEmail, setSendEmail] = useState(false);
 	const [showOtpModal, setOTPModal] = useState(false);
 	const [rejectInvoice, setRejectInvoice] = useState(false);
 	const showForOldShipments =		shipment_data.serial_id <= 120347 && invoice.status === 'pending';
@@ -49,7 +48,7 @@ function Actions({
 	let disableAction = showForOldShipments
 		? isIRNGenerated
 		: ['reviewed', 'approved'].includes(invoice.status)
-		  || isEmpty(invoiceData.invoice_trigger_date);
+		|| isEmpty(invoiceData.invoice_trigger_date);
 
 	if (invoice.status === 'amendment_requested') {
 		disableAction = false;
@@ -94,10 +93,10 @@ function Actions({
 	};
 
 	const remarkRender = () => (
-		<RemarkContainer>
-			<Title>Invoice Remarks</Title>
-			<Value>{invoice.remarks}</Value>
-		</RemarkContainer>
+		<div className={styles.remark_container}>
+			<div className={styles.title}>Invoice Remarks</div>
+			<div className={styles.value}>{invoice.remarks}</div>
+		</div>
 	);
 
 	const handleRefetch = () => {
@@ -106,80 +105,74 @@ function Actions({
 	};
 
 	// goods_transport_agency
-	// const isLTLPrepaid = false;
-	const isFtl =		shipment_data.shipment_type === 'ftl_freight'
-		&& shipment_data.source === 'contract';
-
-	if (
-		['ftl_freight', 'ltl_freight', 'haulage_freight'].includes(
-			shipment_data.shipment_type,
-		)
-	) {
-		if (invoicesList.length === 0) {
-			disableMarkAsReviewed = true;
-		}
-		if (shipment_data.shipment_type === 'ftl_freight') {
-			disableMarkAsReviewed = shipment_data.state !== 'completed';
-
-			const deliveryDatePresent =				shipment_data.all_services?.[0]?.delivery_date;
-
-			if (
-				deliveryDatePresent
-				|| invoiceData.invoicing_parties?.[0]?.billing_address?.tax_mechanism
-					=== 'goods_transport_agency'
-			) {
-				disableMarkAsReviewed = false;
-			}
-		}
-		// if (shipment_data?.payment_term && invoice?.sales_utr) {
-		// 	isLTLPrepaid = true;
-		// }
-	}
-
-	let editInvoicesVisiblity =		(shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
+	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
 		|| user_data.email === 'ajeet@cogoport.com';
 
-	if (shipment_data?.shipment_type === 'ltl_freight') {
-		editInvoicesVisiblity =			editInvoicesVisiblity && invoice?.sales_utr?.status !== 'approved';
-	}
-
-	const commonActions =		invoice.status !== 'approved' && !isFtl && !disableAction;
+	const commonActions = invoice.status !== 'approved' && !disableAction;
 
 	const content = (
-		<DialogBox>
+		<div className={styles.dialog_box}>
 			{commonActions ? (
 				<>
 					{editInvoicesVisiblity ? (
 						<div style={{ width: '100%' }}>
-							<Text onClick={handleClickInvoice}>Edit Invoices</Text>
-							<Line />
+							<div
+								role="button"
+								tabIndex={0}
+								className={styles.text}
+								onClick={handleClickInvoice}
+							>
+								Edit Invoices
+							</div>
+							<div className={styles.line} />
 						</div>
 					) : null}
-
 					<div>
-						<Text onClick={handleClickCurrency}>Change Currency</Text>
-						<Line />
+						<div
+							role="button"
+							tabIndex={0}
+							className={styles.text}
+							onClick={handleClickCurrency}
+						>
+							Change Currency
+						</div>
+						<div className={styles.line} />
 					</div>
-
-					<Text onClick={handleClickRemarks}>Add Remarks</Text>
-
+					<div
+						role="button"
+						tabIndex={0}
+						className={styles.text}
+						onClick={handleClickRemarks}
+					>
+						Add Remarks
+					</div>
 					<div>
-						<Line />
-						<Text onClick={handleChangePayment}>Change Payment Mode</Text>
+						<div className={styles.line} />
+						<div
+							role="button"
+							tabIndex={0}
+							className={styles.text}
+							onClick={handleChangePayment}
+						>
+							Change Payment Mode
+						</div>
 					</div>
 				</>
 			) : null}
-
 			{(invoice.exchange_rate_document || []).map((url) => (
-				<div>
-					{commonActions ? <Line /> : null}
-
-					<Text onClick={() => window.open(url, '_blank')}>
+				<div key={url}>
+					{commonActions ? <div className={styles.line} /> : null}
+					<div
+						role="button"
+						tabIndex={0}
+						className={styles.text}
+						onClick={() => window.open(url, '_blank')}
+					>
 						Exchange Rate Document
-					</Text>
+					</div>
 				</div>
 			))}
-		</DialogBox>
+		</div>
 	);
 
 	return (
@@ -188,11 +181,10 @@ function Actions({
 				<div className={styles.actions_wrap}>
 					<div className={styles.statuses}>
 						{['pending', 'approved'].includes(invoice.status) ? (
-							<InfoContainer className={invoice.status || ''}>
+							<div className={styles.info_container}>
 								{startCase(invoice.status)}
-							</InfoContainer>
+							</div>
 						) : null}
-
 						{!['reviewed', 'approved', 'revoked'].includes(invoice.status) ? (
 							<Button
 								size="sm"
@@ -203,7 +195,6 @@ function Actions({
 							</Button>
 						) : null}
 					</div>
-
 					{(invoice?.status === 'reviewed'
 						&& (!bfInvoice?.systemGeneratedProforma
 							|| !bfInvoice?.proformaPdfUrl))
@@ -211,7 +202,6 @@ function Actions({
 						&& !bfInvoice?.systemGeneratedInvoice) ? (
 							<div className={styles.pill}>Under Translation</div>
 						) : null}
-
 					{invoice?.status === 'reviewed'
 						&& bfInvoice?.systemGeneratedProforma
 						&& bfInvoice?.proformaPdfUrl && (
@@ -231,7 +221,6 @@ function Actions({
 								</Button>
 							</div>
 					)}
-
 					{invoice?.status === 'amendment_requested' ? (
 						<Tooltip
 							placement="bottom"
@@ -245,45 +234,50 @@ function Actions({
 						</Tooltip>
 					) : null}
 				</div>
-
 				<div className={styles.actions_wrap}>
-					{/* <EmailWrapper>
+					<div className={styles.email_wrapper}>
 						<IcMEmail
 							style={{ cursor: 'pointer' }}
 							onClick={() => setSendEmail(true)}
 						/>
 
-						<ToolTip
+						<Tooltip
 							interactive
 							placement="bottom"
-							content={
+							content={(
 								<div style={{ fontSize: '10px', color: '#333333' }}>
-									<FlexRow>
-										Proforma email sent : {invoice.proforma_email_count || 0}
-									</FlexRow>
+									<div className={styles.flex_row}>
+										Proforma email sent :
+										{' '}
+										{invoice.proforma_email_count || 0}
+									</div>
 
-									<FlexRow className="margin">
-										Live email sent: {invoice.sales_email_count || 0}
-									</FlexRow>
-									{isLTLPrepaid && (
-										<FlexRow className="utr_details">
-											<FlexRow className="margin">
-												UTR Number: {invoice?.sales_utr?.utr_number || ''}
-											</FlexRow>
-											<FlexRow className="margin">
-												Status: {invoice?.sales_utr?.status || ''}
-											</FlexRow>
-										</FlexRow>
-									)}
+									<div className={cl`${styles.flex_row} ${styles.margin}`}>
+										Live email sent:
+										{' '}
+										{invoice.sales_email_count || 0}
+									</div>
+									<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
+										<div className={cl`${styles.flex_row} ${styles.margin}`}>
+											UTR Number:
+											{' '}
+											{invoice?.sales_utr?.utr_number || ''}
+										</div>
+										<div className={cl`${styles.flex_row} ${styles.margin}`}>
+											Status:
+											{' '}
+											{invoice?.sales_utr?.status || ''}
+										</div>
+									</div>
 								</div>
-							}
+							)}
 							theme="light"
 						>
 							<div style={{ margin: '4px 0 0 10px', cursor: 'pointer' }}>
 								<IcMInfo />
 							</div>
-						</ToolTip>
-					</EmailWrapper> */}
+						</Tooltip>
+					</div>
 
 					{!disableAction || invoice.exchange_rate_document?.length > 0 ? (
 						<Popover
@@ -294,7 +288,12 @@ function Actions({
 							theme="light"
 							onClickOutside={() => setShow(false)}
 						>
-							<div className={styles.icon_more_wrapper} onClick={() => setShow(!show)}>
+							<div
+								role="button"
+								tabIndex={0}
+								className={styles.icon_more_wrapper}
+								onClick={() => setShow(!show)}
+							>
 								<IcMOverflowDot />
 							</div>
 						</Popover>
@@ -309,9 +308,9 @@ function Actions({
 							interactive
 							content={remarkRender()}
 						>
-							<IconMoreWrapper>
+							<div className={styles.icon_more_wrapper}>
 								<IcMInfo fill="yellow" />
-							</IconMoreWrapper>
+							</div>
 						</Tooltip>
 					) : null}
 				</div>
@@ -364,14 +363,14 @@ function Actions({
 				/>
 			) : null}
 
-			{/* {sendEmail ? (
+			{sendEmail ? (
 				<SendInvoiceEmail
 					show={sendEmail}
 					setShow={setSendEmail}
 					invoice={invoice}
 					refetch={refetch}
 				/>
-			) : null} */}
+			) : null}
 
 			{showChangePaymentMode ? (
 				<ChangePaymentMode

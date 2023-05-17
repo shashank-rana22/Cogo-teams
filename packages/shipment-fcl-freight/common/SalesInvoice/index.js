@@ -3,16 +3,22 @@ import React from 'react';
 import useGetShipmentInvoice from '../../hooks/useGetShipmentInvoice';
 import useListBfSalesInvoices from '../../hooks/useListBfSalesInvoices';
 import useListSageSalesInvoices from '../../hooks/useListSageSalesInvoices';
+import useOrgOutStanding from '../../hooks/useOrgOutStanding';
 import OverviewManageServices from '../Overview/OverviewManageServices';
 
 import Invoices from './Invoices';
 import styles from './styles.module.css';
 
 function SalesInvoice({ shipmentData = {} }) {
-	const { loading: loadingSageSalesInvoices, list } = useListSageSalesInvoices();
+	const { list } = useListSageSalesInvoices();
 	const { salesList, refetch:salesInvoicesRefetch } = useListBfSalesInvoices(shipmentData);
 
 	const { data: invoiceData, groupedInvoices, refetch, loading } = useGetShipmentInvoice();
+
+	const { outstanding_by_reg_num } = useOrgOutStanding({
+		org_reg_nums: Object.keys(groupedInvoices || {}),
+	});
+
 	const isIRNGenerated = !!list.find((item) => !!item.irn_number);
 
 	return (
@@ -27,6 +33,7 @@ function SalesInvoice({ shipmentData = {} }) {
 				loading={loading}
 				salesInvoicesRefetch={salesInvoicesRefetch}
 				isIRNGenerated={isIRNGenerated}
+				outstanding_by_reg_num={outstanding_by_reg_num}
 			/>
 		</main>
 	);

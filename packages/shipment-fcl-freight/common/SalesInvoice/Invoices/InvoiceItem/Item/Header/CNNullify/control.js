@@ -17,7 +17,8 @@ const control = [
 		uploadIcon : 'ic-upload',
 		height     : 80,
 		accept:
-			'image/*,.pdf,.doc,.docx,.xlsx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+			'image/*,.pdf,.doc,.docx,.xlsx,application/msword,application/vnd.openxmlformats-officedocument.'
+			+ 'wordprocessingml.document',
 		uploadType : 'aws',
 		multiple   : true,
 		rules      : { required: 'This field is required' },

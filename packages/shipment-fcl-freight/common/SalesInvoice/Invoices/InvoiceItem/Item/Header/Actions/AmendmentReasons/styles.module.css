@@ -29,10 +29,3 @@
 	display: flex;
 	width: 100%;
 }
-
-.FlexCol{
-	display: flex;
-	flex-direction: column;
-	flex: 1;
-	margin-right: 16px;
-}

@@ -1,26 +1,25 @@
-import React, { useState } from 'react';
-import useAddedList from '@cogo/bookings/AdditionalServices/components/List/useAddedList';
+import AddRate from '@cogo/bookings/AdditionalServices/components/AddRate';
 import ItemAdded from '@cogo/bookings/AdditionalServices/components/List/ItemAdded';
-import getStaus from '@cogo/bookings/AdditionalServices/components/List/ItemAdded/get_status';
 import actions from '@cogo/bookings/AdditionalServices/components/List/ItemAdded/actions';
+import getStaus from '@cogo/bookings/AdditionalServices/components/List/ItemAdded/get_status';
+import useAddedList from '@cogo/bookings/AdditionalServices/components/List/useAddedList';
 import useGetPermission from '@cogo/business-modules/hooks/useGetPermission';
 import { useSelector } from '@cogo/store';
 import { isEmpty } from '@cogoport/front/utils';
-import AddRate from '@cogo/bookings/AdditionalServices/components/AddRate';
+import React, { useState } from 'react';
+
 import styles from './styles.module.css';
 
-const AdditionalServices = ({ shipment_data }) => {
+function AdditionalServices({ shipment_data }) {
 	const { list: listAdded, refetch } = useAddedList({
 		shipment_id: shipment_data?.id,
 		shipment_data,
 	});
 	const { isConditionMatches } = useGetPermission();
 	const [addRate, setAddRate] = useState(null);
-	const { scope } = useSelector(({ general }) => {
-		return {
-			scope: general.scope,
-		};
-	});
+	const { scope } = useSelector(({ general }) => ({
+		scope: general.scope,
+	}));
 	return (
 		<div>
 			<div className={styles.heading}>
@@ -64,6 +63,6 @@ const AdditionalServices = ({ shipment_data }) => {
 			) : null}
 		</div>
 	);
-};
+}
 
 export default AdditionalServices;

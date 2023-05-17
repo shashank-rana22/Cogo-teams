@@ -1,4 +1,3 @@
-// import { useSelector } from '@cogo/store';
 import { Button, Popover, Tooltip } from '@cogoport/components';
 import {
 	IcMOverflowDot,
@@ -6,6 +5,7 @@ import {
 	IcCError,
 	IcMEmail,
 } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -27,7 +27,6 @@ function Actions({
 	invoiceData = {},
 	isIRNGenerated = false,
 	salesInvoicesRefetch = () => {},
-	invoicesList = [],
 }) {
 	const [show, setShow] = useState(false);
 	const [isEditInvoice, setIsEditInvoice] = useState(false);
@@ -39,7 +38,7 @@ function Actions({
 	const [showOtpModal, setShowOTPModal] = useState(false);
 	const showForOldShipments = shipment_data.serial_id <= 120347 && invoice.status === 'pending';
 
-	// const user_data = useSelector(({ profile }) => profile || {});
+	const user_data = useSelector(({ profile }) => profile || {});
 
 	let disableAction = showForOldShipments
 		? isIRNGenerated
@@ -51,15 +50,15 @@ function Actions({
 	}
 
 	// HARD CODING STARTS
-	// const invoice_serial_id = invoice?.serial_id.toString() || '';
-	// const firstChar = invoice_serial_id[0];
+	const invoice_serial_id = invoice?.serial_id.toString() || '';
+	const firstChar = invoice_serial_id[0];
 
-	// const isInvoiceBefore20Aug2022 =		firstChar !== '1' || invoice_serial_id.length < 8;
+	const isInvoiceBefore20Aug2022 =		firstChar !== '1' || invoice_serial_id.length < 8;
 
 	let disableMarkAsReviewed = disableAction;
-	// if (showForOldShipments) {
-	// 	disableMarkAsReviewed = isIRNGenerated && isInvoiceBefore20Aug2022;
-	// }
+	if (showForOldShipments) {
+		disableMarkAsReviewed = isIRNGenerated && isInvoiceBefore20Aug2022;
+	}
 	// HARD CODING ENDS
 
 	const handleClickInvoice = () => {
@@ -95,106 +94,70 @@ function Actions({
 	};
 
 	// goods_transport_agency
-	let isLTLPrepaid = false;
-	const isFtl =		shipment_data.shipment_type === 'ftl_freight'
-		&& shipment_data.source === 'contract';
+	const editInvoicesVisiblity =	(shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
+		|| user_data.email === 'ajeet@cogoport.com';
 
-	if (
-		['ftl_freight', 'ltl_freight', 'haulage_freight'].includes(
-			shipment_data.shipment_type,
-		)
-	) {
-		if (invoicesList.length === 0) {
-			disableMarkAsReviewed = true;
-		}
-		if (shipment_data.shipment_type === 'ftl_freight') {
-			disableMarkAsReviewed = shipment_data.state !== 'completed';
-
-			const deliveryDatePresent =				shipment_data.all_services?.[0]?.delivery_date;
-
-			if (
-				deliveryDatePresent
-				|| invoiceData.invoicing_parties?.[0]?.billing_address?.tax_mechanism
-					=== 'goods_transport_agency'
-			) {
-				disableMarkAsReviewed = false;
-			}
-		}
-		if (shipment_data?.payment_term && invoice?.sales_utr) {
-			isLTLPrepaid = true;
-		}
-	}
-
-	// let editInvoicesVisiblity =		(shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
-	// 	|| user_data.email === 'ajeet@cogoport.com';
-
-	// if (shipment_data?.shipment_type === 'ltl_freight') {
-	// 	editInvoicesVisiblity =			editInvoicesVisiblity && invoice?.sales_utr?.status !== 'approved';
-	// }
-
-	// if (shipment_data?.shipment_type === 'air_freight') {
-	// 	editInvoicesVisiblity =			shipment_data?.is_cogo_assured !== true && !invoice?.is_igst;
-	// }
-
-	const commonActions = invoice.status !== 'approved' && !isFtl && !disableAction;
+	const commonActions = invoice.status !== 'approved' && !disableAction;
 
 	const content = (
 		<div className={styles.dialog_box}>
-			{/* {/* {commonActions ? ( */}
-			{/* {editInvoicesVisiblity ? (  */}
-			<div style={{ width: '100%' }}>
-				<div
-					role="button"
-					tabIndex={0}
-					className={styles.text}
-					onClick={handleClickInvoice}
-				>
-					Edit Invoices
+			{commonActions ? (
+				<>
+					{editInvoicesVisiblity ? (
+						<div style={{ width: '100%' }}>
+							<div
+								role="button"
+								tabIndex={0}
+								className={styles.text}
+								onClick={handleClickInvoice}
+							>
+								Edit Invoices
 
-				</div>
-				<div className={styles.line} />
-			</div>
-			{/* ) : null} */}
+							</div>
+							<div className={styles.line} />
+						</div>
+					) : null}
 
-			<div>
-				<div
-					role="button"
-					tabIndex={0}
-					className={styles.text}
-					onClick={handleClickCurrency}
-				>
-					Change Currency
+					<div>
+						<div
+							role="button"
+							tabIndex={0}
+							className={styles.text}
+							onClick={handleClickCurrency}
+						>
+							Change Currency
 
-				</div>
-				<div className={styles.line} />
-			</div>
-
-			<div
-				role="button"
-				tabIndex={0}
-				className={styles.text}
-				onClick={handleClickRemarks}
-			>
-				Add Remarks
-
-			</div>
-
-			{invoice?.billing_address?.trade_party_type === 'self' ? (
-				<div>
-					<div className={styles.line} />
+						</div>
+						<div className={styles.line} />
+					</div>
 
 					<div
 						role="button"
 						tabIndex={0}
 						className={styles.text}
-						onClick={handleChangePayment}
+						onClick={handleClickRemarks}
 					>
-						Change Payment Mode
+						Add Remarks
 
 					</div>
-				</div>
+
+					{invoice?.billing_address?.trade_party_type === 'self' ? (
+						<div>
+							<div className={styles.line} />
+
+							<div
+								role="button"
+								tabIndex={0}
+								className={styles.text}
+								onClick={handleChangePayment}
+							>
+								Change Payment Mode
+
+							</div>
+						</div>
+					) : null}
+				</>
 			) : null}
-			{/* ) : null} */}
 
 			{(invoice.exchange_rate_document || []).map((url) => (
 				<div key={url}>
@@ -278,20 +241,18 @@ function Actions({
 										{' '}
 										{invoice.sales_email_count || 0}
 									</div>
-									{isLTLPrepaid && (
+									<div className={styles.flex_row}>
 										<div className={styles.flex_row}>
-											<div className={styles.flex_row}>
-												UTR Number:
-												{' '}
-												{invoice?.sales_utr?.utr_number || ''}
-											</div>
-											<div className={styles.flex_row}>
-												Status:
-												{' '}
-												{invoice?.sales_utr?.status || ''}
-											</div>
+											UTR Number:
+											{' '}
+											{invoice?.sales_utr?.utr_number || ''}
 										</div>
-									)}
+										<div className={styles.flex_row}>
+											Status:
+											{' '}
+											{invoice?.sales_utr?.status || ''}
+										</div>
+									</div>
 								</div>
 							)}
 							theme="light"
