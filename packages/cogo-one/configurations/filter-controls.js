@@ -6,35 +6,15 @@ const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMe
 		asyncFieldsListAgents(),
 	);
 	const HIDE_CONTROLS_MAPPING = {
-		admin_view    : ['observer'],
-		kam           : ['assigned_to', 'assigned_agent'],
-		shipment_view : ['assigned_to', 'assigned_agent'],
+		admin_view    : ['observer', 'shipment_view_bot_session'],
+		kam           : ['assigned_to', 'assigned_agent', 'shipment_view_bot_session'],
+		shipment_view : ['assigned_to', 'assigned_agent', 'observer'],
 	};
 	const extraStatusOptions = (showBotMessages && isomniChannelAdmin) ? 	[{
 		label : 'Seen By User',
 		value : 'seen_by_user',
 	}] : [];
 
-	const observerOptions = viewType === 'shipment_view' ? [
-		{
-			label : 'Closed',
-			value : 'botSession',
-		},
-	]
-		: [
-			{
-				label : 'Observer',
-				value : 'adminSession',
-			},
-			{
-				label : 'Closed',
-				value : 'botSession',
-			},
-			{
-				label : 'Chat Tags',
-				value : 'chat_tags',
-			},
-		];
 	const controls = [
 		{
 			label          : '',
@@ -52,6 +32,15 @@ const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMe
 					value : 'all',
 				},
 				...extraStatusOptions,
+			],
+		},
+		{
+			label          : '',
+			name           : 'shipment_view_bot_session',
+			controllerType : 'checkboxgroup',
+			className      : 'channels_field_controller',
+			options        : [
+				{ label: 'Bot Session', value: 'bot_session' },
 			],
 		},
 		{
@@ -122,7 +111,20 @@ const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMe
 			value          : '',
 			multiple       : false,
 			className      : 'escalation_field_controller',
-			options        : observerOptions,
+			options        : [
+				{
+					label : 'Observer',
+					value : 'adminSession',
+				},
+				{
+					label : 'Closed',
+					value : 'botSession',
+				},
+				{
+					label : 'Chat Tags',
+					value : 'chat_tags',
+				},
+			],
 		},
 		{
 			label          : isomniChannelAdmin ? 'Tags' : '',
