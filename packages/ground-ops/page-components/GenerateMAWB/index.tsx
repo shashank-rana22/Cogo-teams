@@ -336,7 +336,7 @@ function GenerateMAWB({
 						category={category}
 						activeCategory={activeCategory}
 						setActiveCategory={setActiveCategory}
-						awbNumber={item.awbNumber}
+						awbNumber={item.awbNumber || item.document_number}
 						serialId={item.serialId}
 					/>
 

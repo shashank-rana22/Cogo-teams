@@ -17,7 +17,7 @@ const useGetMultipleCopiesList = (id) => {
 				params: {
 					documentId   : id,
 					documentType : 'draft_airway_bill',
-					status       : 'active',
+					status       : ['created', 'updated'],
 					pageIndex    : 0,
 					pageSize     : 0,
 				},

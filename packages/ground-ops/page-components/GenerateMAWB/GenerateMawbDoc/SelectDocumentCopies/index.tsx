@@ -11,7 +11,7 @@ function SelectDocumentCopies({
 	copiesValue, copiesOnChange, setSaveDocument, handleView, setGenerate,
 	setViewDoc, download24, setEdit, setItem, setDocCopies, setEditCopies, taskItem,
 }) {
-	const { data } = useGetMultipleCopiesList(taskItem?.id);
+	const { data } = useGetMultipleCopiesList(taskItem?.documentId);
 
 	const OPTIONS = multipleCopies({ data, setEditCopies, setGenerate, setViewDoc, setEdit, setItem });
 
