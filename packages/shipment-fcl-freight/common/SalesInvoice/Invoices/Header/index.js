@@ -33,7 +33,7 @@ function Header({
 		const interval = setInterval(() => {
 			time = handleTimer(invoice_trigger_date);
 			if (time) {
-				timerRef.current.innerText = time;
+				// timerRef.current.innerText = time;
 			}
 		}, 1000);
 

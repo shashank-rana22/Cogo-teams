@@ -14,7 +14,6 @@ function CreditNote({
 			</header>
 
 			<div className={styles.cn_list_container}>
-
 				{(list || [])?.map((item) => (
 					<Item
 						key={item?.id}

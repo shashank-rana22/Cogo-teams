@@ -1,3 +1,4 @@
+import { Loader } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import React, { useContext } from 'react';
 
@@ -26,17 +27,19 @@ function SalesInvoice() {
 	return (
 		<main className={styles.container}>
 			<OverviewManageServices />
-			<Invoices
-				shipmentData={shipment_data}
-				invoiceData={invoiceData}
-				groupedInvoices={groupedInvoices}
-				refetch={refetch}
-				invoicesList={salesList}
-				loading={loading}
-				salesInvoicesRefetch={salesInvoicesRefetch}
-				isIRNGenerated={isIRNGenerated}
-				outstanding_by_reg_num={outstanding_by_reg_num}
-			/>
+			{loading ? <Loader themeType="primary" /> : (
+				<Invoices
+					shipmentData={shipment_data}
+					invoiceData={invoiceData}
+					groupedInvoices={groupedInvoices}
+					refetch={refetch}
+					invoicesList={salesList}
+					loading={loading}
+					salesInvoicesRefetch={salesInvoicesRefetch}
+					isIRNGenerated={isIRNGenerated}
+					outstanding_by_reg_num={outstanding_by_reg_num}
+				/>
+			)}
 		</main>
 	);
 }

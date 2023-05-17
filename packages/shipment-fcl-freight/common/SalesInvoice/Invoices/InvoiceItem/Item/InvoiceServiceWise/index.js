@@ -4,7 +4,7 @@ import React from 'react';
 import CardList from '../../../../commons/CardList';
 
 import styles from './styles.module.css';
-import { tableColumn } from './TableColumn';
+import { TableColumn } from './TableColumn';
 
 function InvoiceServiceWise({ item = {}, loading = false }) {
 	const {
@@ -25,15 +25,14 @@ function InvoiceServiceWise({ item = {}, loading = false }) {
 		}
 	});
 
-	const renderBilledText =		showBilledText && quotation_source === 'billed_at_actuals'
-		? '*will be billed at actuals'
+	const renderBilledText = showBilledText && quotation_source === 'billed_at_actuals' ? '*will be billed at actuals'
 		: null;
 
 	return (
 		<div className={styles.container}>
 			<CardList
 				loading={loading}
-				fields={tableColumn(item)}
+				fields={TableColumn(item)}
 				data={line_items || [{}]}
 				detail={detail}
 			/>

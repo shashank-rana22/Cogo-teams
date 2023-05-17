@@ -32,7 +32,7 @@ const useOrgOutStanding = ({ org_reg_nums }) => {
 		if (org_reg_nums.length) {
 			handleOutstandings();
 		}
-	}, [org_reg_nums.length, authorizationparameters]);
+	}, [handleOutstandings, org_reg_nums.length]);
 
 	return {
 		handleOutstandings,
