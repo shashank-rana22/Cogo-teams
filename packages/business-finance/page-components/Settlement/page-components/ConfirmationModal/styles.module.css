@@ -1,0 +1,17 @@
+.buttons {
+	display: flex;
+	justify-content: center;
+	padding-bottom: 40px;
+}
+
+.heading {
+	display: flex;
+	justify-content: center;
+	padding: 26px;
+	font-size: var(--font-size-xl);
+	font-weight: 600;
+}
+
+.post {
+	margin-left: 16px;
+}

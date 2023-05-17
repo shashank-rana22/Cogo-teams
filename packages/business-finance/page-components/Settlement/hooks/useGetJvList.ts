@@ -12,7 +12,7 @@ const useGetJvList = ({ filters }) => {
 		{ manual: true },
 	);
 
-	const { category, status, query:search } = filters || {};
+	const { category, status, query: search, page = 1 } = filters || {};
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
@@ -20,21 +20,34 @@ const useGetJvList = ({ filters }) => {
 		debounceQuery(search);
 	}, [search, debounceQuery]);
 
-	useEffect(() => {
+	const refetch = () => {
 		trigger({
 			params: {
-				page      : 1,
+				page,
 				pageLimit : 10,
 				category  : category || undefined,
 				status    : status || undefined,
 				query     : query || undefined,
 			},
 		});
-	}, [trigger, status, category, query]);
+	};
+
+	useEffect(() => {
+		trigger({
+			params: {
+				page,
+				pageLimit : 10,
+				category  : category || undefined,
+				status    : status || undefined,
+				query     : query || undefined,
+			},
+		});
+	}, [trigger, status, category, query, page]);
 
 	return {
 		data,
 		loading,
+		refetch,
 	};
 };
 

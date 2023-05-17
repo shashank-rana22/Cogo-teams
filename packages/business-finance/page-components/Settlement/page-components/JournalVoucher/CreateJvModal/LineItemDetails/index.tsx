@@ -10,9 +10,13 @@ import styles from './styles.module.css';
 
 function LineItemDetails({
 	control,
-	// watch = () => { },
+	watch = () => { },
+	entity,
+	errors,
+	getGlCode,
+	setValue,
 }) {
-	const { fields, append, remove } = useFieldArray({
+	const { fields, append, remove, insert } = useFieldArray({
 		control,
 		name: 'line_items',
 	});
@@ -48,9 +52,15 @@ function LineItemDetails({
 								{renderLineItemFunctions[field?.key]
 									? renderLineItemFunctions[field?.key]({
 										control,
+										getGlCode,
 										index,
 										remove,
+										insert,
 										showDelete: fields?.length > 1,
+										setValue,
+										entity,
+										watch,
+										errors,
 									}) : '-'}
 							</div>
 						))}

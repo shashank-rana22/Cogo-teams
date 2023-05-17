@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function Settlement() {
 	const { query } = useRouter();
 
-	const [activeTab, setActiveTab] = useState(query?.active_tab || 'vendors');
+	const [activeTab, setActiveTab] = useState(query?.active_tab);
 	const { push } = useRouter();
 
 	const handleChange = (tab: any) => {

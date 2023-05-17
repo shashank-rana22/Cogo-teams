@@ -10,38 +10,47 @@
 
 .jvnumb {
 	flex: 1.6;
+	width: calc(1.6*(100 / 12));
 }
 
 .jvtype {
 	flex: 1;
+	width: calc(1*(100 / 12));
 }
 
 .accdate {
 	flex: 1;
+	width: calc(1*(100 / 12));
 }
 
 .entity {
 	flex: 1;
+	width: calc(1*(100 / 12));
 }
 
 .journal {
 	flex: 1;
+	width: calc(1*(100 / 12));
 }
 
 .exrate {
 	flex: 1;
+	width: calc(1*(100 / 12));
 }
 
 .legcurr {
 	flex: 0.9;
+	width: calc(0.9*(100 / 12));
 }
 
 .accord {
 	flex: 0.2;
+	width: calc(0.2*(100 / 12));
 }
 
 .curr {
 	flex: 1;
+	width: calc(1*(100 / 12));
 }
 
 .icon {

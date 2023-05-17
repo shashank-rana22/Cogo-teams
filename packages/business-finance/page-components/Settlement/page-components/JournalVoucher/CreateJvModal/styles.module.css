@@ -11,7 +11,8 @@
 		}
 
 		.ui_select_input_control {
-			font-size: var(--font-size-sm) !important;
+			font-size: var(--font-size-md) !important;
+			font-weight: 600;
 		}
 
 		.ui_select_input_placeholder {
@@ -96,5 +97,15 @@
 
 .statflex {
 	display: flex;
-	margin-top: 26px;
+	margin-top: 40px;
+}
+
+.createjv {
+	margin-left: 16px;
+}
+
+.errors {
+	padding-left: 4px;
+	font-size: var(--font-size-sm);
+	color: var(--color-primary-error-red-2);
 }

@@ -1,4 +1,4 @@
-import { IcMArrowRotateDown } from '@cogoport/icons-react';
+import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import getFormattedDate from '../../../Utils/getFormattedDate';
@@ -7,8 +7,29 @@ import Details from './Details';
 import styles from './styles.module.css';
 import ToolTipWrapper from './ToolTipWrapper';
 
-function ColumnCard({ item }) {
+interface ListItem {
+	id: string;
+	jvNum: string;
+	category: string;
+	transactionDate: string;
+	currency: string;
+	entityCode: string;
+	jvCodeNum: string;
+	exchangeRate: string;
+	ledCurrency: string;
+	status: string;
+}
+
+interface Props {
+	item: ListItem;
+	refetch: () => void;
+}
+
+function ColumnCard({ item, refetch }: Props) {
 	const [showDetails, setShowDetails] = useState(false);
+
+	const Icon = showDetails ? IcMArrowRotateUp : IcMArrowRotateDown;
+
 	return (
 		<div className={styles.column}>
 			<div className={styles.flex}>
@@ -25,13 +46,13 @@ function ColumnCard({ item }) {
 				<div className={styles.exrate}>{item?.exchangeRate || ''}</div>
 				<div className={styles.legcurr}>{item?.ledCurrency || ''}</div>
 				<div className={styles.accord}>
-					<IcMArrowRotateDown
+					<Icon
 						className={styles.icon}
 						onClick={() => { setShowDetails(!showDetails); }}
 					/>
 				</div>
 			</div>
-			{showDetails ? <Details item={item} /> : null}
+			{showDetails ? <Details item={item} refetch={refetch} /> : null}
 		</div>
 	);
 }

@@ -347,23 +347,18 @@ function asyncListCurrency() {
 function asyncJvList() {
 	return {
 		labelKey     : 'category',
-		valueKey     : 'id',
+		valueKey     : 'category',
 		endpoint     : 'payments/parent-jv/jv-category',
 		initialCall  : true,
 		authkey      : 'get_payments_parent_jv_jv_category',
 		microService : 'business_finance',
-		params       : {
-			filters: {
-				status: 'active',
-			},
-		},
 	};
 }
 
 function asyncJournalCode() {
 	return {
 		labelKey     : 'description',
-		valueKey     : 'id',
+		valueKey     : 'number',
 		endpoint     : 'payments/parent-jv/journal-code',
 		initialCall  : true,
 		authkey      : 'get_payments_parent_jv_journal_code',
@@ -374,7 +369,7 @@ function asyncJournalCode() {
 function asyncAccMode() {
 	return {
 		labelKey     : 'label',
-		valueKey     : 'label',
+		valueKey     : 'value',
 		endpoint     : 'payments/parent-jv/acc-mode',
 		initialCall  : true,
 		authkey      : 'get_payments_parent_jv_acc_mode',
@@ -384,7 +379,7 @@ function asyncAccMode() {
 
 function asyncCodeMaster() {
 	return {
-		labelKey     : 'description',
+		labelKey     : 'accountCode',
 		valueKey     : 'accountCode',
 		endpoint     : 'payments/parent-jv/gl-code-master',
 		initialCall  : true,
@@ -399,6 +394,12 @@ function asyncListOrgTradeParties() {
 		valueKey    : 'id',
 		endpoint    : 'list_organization_trade_party_details',
 		initialCall : true,
+		params      : {
+			sage_organization_id_required : true,
+			filters                       : {
+				status: 'active',
+			},
+		},
 	};
 }
 

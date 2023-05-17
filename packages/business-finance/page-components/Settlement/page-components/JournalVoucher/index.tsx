@@ -14,9 +14,9 @@ function JournalVoucher() {
 	const [filters, setFilters] = useState({});
 	const [show, setShow] = useState(false);
 
-	const { data } = useGetJvList({ filters });
+	const { data, loading, refetch } = useGetJvList({ filters });
 
-	const onPageChange = (val) => {
+	const onPageChange = (val:number) => {
 		setFilters({ ...filters, page: val });
 	};
 
@@ -47,8 +47,8 @@ function JournalVoucher() {
 					</Button>
 				</div>
 			</div>
-			<CustumTable data={data} onPageChange={onPageChange} />
-			{show ? <CreateJvModal show={show} onClose={onClose} /> : null}
+			<CustumTable data={data} onPageChange={onPageChange} loading={loading} refetch={refetch} />
+			{show ? <CreateJvModal show={show} setShow={setShow} onClose={onClose} refetch={refetch} /> : null}
 		</div>
 	);
 }
