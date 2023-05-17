@@ -374,10 +374,20 @@ export default {
 			},
 		],
 	},
-	entity_specific_data: {
-		feature_supported: {
-			supply_dashboard: {
-				tabs_not_supported: [],
+	navigations: {
+		supply_dashboard: {
+			main          : {},
+			live_bookings : {},
+			rfq_enquiries : {
+				tabs: [
+					'live_bookings',
+					'trade_enquiry',
+					'disliked_rates',
+					'rate_density',
+					'manage_forecast',
+					'rfq_enquiries',
+					'rates_sheets',
+				],
 			},
 		},
 	},

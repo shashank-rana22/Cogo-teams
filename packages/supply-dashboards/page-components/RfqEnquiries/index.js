@@ -10,11 +10,11 @@ function RfqEnquiriesView() {
 
 	const geo = getGeoConstants();
 
-	const { entity_specific_data } = geo || {};
+	const { navigations } = geo || {};
 
-	const { feature_supported } = entity_specific_data || {};
+	const { supply_dashboard } = navigations || {};
 
-	const { tabs_not_supported = []	} = feature_supported.supply_dashboard || {};
+	const { tabs = [] } = supply_dashboard.rfq_enquiries || {};
 
 	const handleTabChange = (tab) => {
 		if (tab !== 'rfq_enquiries') {
@@ -30,7 +30,7 @@ function RfqEnquiriesView() {
 				{(TabPanelMapping || []).map(({
 					name, title,
 					component,
-				}) => !tabs_not_supported.includes(name)
+				}) => tabs.includes(name)
 							&& <TabPanel key={title} name={name} title={title}>{component}</TabPanel>)}
 			</Tabs>
 		</div>
