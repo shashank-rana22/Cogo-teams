@@ -6001,6 +6001,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'contract',
 		},
+		{
+			api          : 'get_exchange_rate',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
 	],
 	incentives: [
 		{
@@ -7567,6 +7572,66 @@ const partner = {
 			access_type : 'private',
 			module      : 'invoices',
 			feature     : 'invoices',
+		},
+		{
+			api         : 'get_purchase_payrun',
+			access_type : 'private',
+			module      : 'advance-payment',
+			feature     : 'advance-payment',
+		},
+		{
+			api         : 'post_purchase_payrun_advance_payment',
+			access_type : 'private',
+			module      : 'advance-payment',
+			feature     : 'advance-payment',
+		},
+		{
+			api         : 'get_purchase_advance_document_list',
+			access_type : 'private',
+			module      : 'advance-payment',
+			feature     : 'advance-payment',
+		},
+		{
+			api         : 'get_purchase_payrun_bill_advance_payment',
+			access_type : 'private',
+			module      : 'advance-payment',
+			feature     : 'advance-payment',
+		},
+		{
+			api         : 'delete_purchase_payrun_bill',
+			access_type : 'private',
+			module      : 'advance-payment',
+			feature     : 'advance-payment',
+		},
+		{
+			api         : 'get_purchase_payrun_advance_doc_list_view_download',
+			access_type : 'private',
+			module      : 'payrun',
+			feature     : 'payrun',
+		},
+		{
+			api         : 'get_purchase_payrun_bill_list_paid_advance_doc_by_id',
+			access_type : 'private',
+			module      : 'payrun',
+			feature     : 'payrun',
+		},
+		{
+			api         : 'get_purchase_payrun_advance_doc_list_view',
+			access_type : 'private',
+			module      : 'payrun',
+			feature     : 'payrun',
+		},
+		{
+			api         : 'get_purchase_payrun_bill_advance_payment',
+			access_type : 'private',
+			module      : 'payrun',
+			feature     : 'payrun',
+		},
+		{
+			api         : 'get_purchase_payrun_bill_list_paid_advance_doc',
+			access_type : 'private',
+			module      : 'payrun',
+			feature     : 'payrun',
 		},
 		{
 			api         : 'put_purchase_payrun_bill',
@@ -11883,6 +11948,16 @@ const partner = {
 			api          : 'check_customer_checkout_quotation_conflict',
 			access_type  : 'private',
 			service_name : 'checkout',
+		},
+		{
+			api          : 'list_servetel_agents',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
+			api          : 'update_live_call',
+			access_type  : 'private',
+			service_name : 'voice_call',
 		},
 	],
 	analytics_dashboard: [

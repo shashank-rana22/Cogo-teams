@@ -343,6 +343,19 @@ function asyncListCurrency() {
 		},
 	};
 }
+function asyncListServetelAgents() {
+	return {
+		labelKey    : 'mobile_number',
+		valueKey    : 'id',
+		endpoint    : 'list_servetel_agents',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
 
 function asyncJvList() {
 	return {
@@ -436,4 +449,5 @@ export {
 	asyncAccMode,
 	asyncCodeMaster,
 	asyncListOrgTradeParties,
+	asyncListServetelAgents,
 };
