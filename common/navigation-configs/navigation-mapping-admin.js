@@ -84,11 +84,11 @@ const navigationMappingAdmin = {
 		possible_apis : [],
 		module_type   : 'dashboards',
 	},
-	profile: {
-		key         : 'profile',
+	employee_portal: {
+		key         : 'employee_portal',
 		title       : 'Profile Details',
-		href        : '/profile',
-		as          : '/profile',
+		href        : '/employee-portal',
+		as          : '/employee-portal',
 		type        : 'link',
 		icon        : IcMProfile,
 		main_apis   : [],
