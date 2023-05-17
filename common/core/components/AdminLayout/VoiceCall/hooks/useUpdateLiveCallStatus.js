@@ -4,8 +4,8 @@ import { useRequest } from '@cogoport/request';
 const updateLocalState = ({
 	prev = {},
 	latestAddedAgentName = '',
-	live_call_action_type,
-	agent_id,
+	live_call_action_type = '',
+	agent_id = '',
 	attendeeId = '',
 }) => ({
 	...prev,
@@ -29,8 +29,8 @@ function useUpdateLiveCallStatus({
 	}, { manual: true });
 
 	const updateLiveCallStatus = async (payload = {}, callbackFunc = () => {}) => {
-		const { live_call_action_type = '', agent_id = '' } = payload || {};
 		try {
+			const { live_call_action_type = '', agent_id = '' } = payload || {};
 			const res = await trigger({
 				data: {
 					call_id: callId,
