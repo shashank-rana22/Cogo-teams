@@ -22,16 +22,16 @@ function Shipment({ itemData = {} }) {
 						date       : itemData.created_at,
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 						formatType : 'date',
-					})}
+					}) || '-'}
 				</div>
 
 				<div className={styles.revenue_col}>
 					{itemData.shipping_line
 						? itemData.shipping_line?.business_name
-						: itemData.airline?.business_name}
+						: itemData.airline?.business_name || '-'}
 				</div>
 				<div className={styles.revenue_col}>
-					{startCase(itemData.shipment_type)}
+					{startCase(itemData.shipment_type) || '-'}
 				</div>
 				<div className={styles.revenue_col}>
 					<PortPair
@@ -45,7 +45,7 @@ function Shipment({ itemData = {} }) {
 					/>
 				</div>
 				<div className={styles.revenue_col}>
-					{itemData?.importer_exporter?.business_name}
+					{itemData?.importer_exporter?.business_name || '-'}
 				</div>
 				<div className={styles.revenue_col}>
 					{itemData?.booking_reference_number || '-'}
@@ -56,14 +56,14 @@ function Shipment({ itemData = {} }) {
 							date       : itemData.schedule_arrival,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 							formatType : 'date',
-						})}
+						}) || '-'}
 					</div>
 
 					{formatDate({
 						date       : itemData.schedule_arrival,
 						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 						formatType : 'time',
-					})}
+					}) || '-'}
 				</div>
 				<div className={styles.revenue_col}>
 					<div>
@@ -71,14 +71,14 @@ function Shipment({ itemData = {} }) {
 							date       : itemData.schedule_departure,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 							formatType : 'date',
-						})}
+						}) || '-'}
 					</div>
 					<div>
 						{formatDate({
 							date       : itemData.schedule_departure,
 							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 							formatType : 'time',
-						})}
+						}) || '-'}
 					</div>
 
 				</div>
