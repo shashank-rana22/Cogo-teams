@@ -21,6 +21,8 @@ function SubModuleComponent({
 	subModuleLoading,
 	getLoading,
 	getCourseModuleDetails,
+	getSubModuleRefetch,
+	setGetSubModuleRefetch,
 }) {
 	const {
 		handleSubmit,
@@ -117,9 +119,17 @@ function SubModuleComponent({
 					<div
 						key={subModule.id}
 						draggable
-						onDragStart={(event) => handleDragStart(event, subModule, false)}
+						onDragStart={(event) => handleDragStart(
+							event,
+							{ ...subModule, type: 'sub_module', start_course_module_id: course_module_id },
+							'sub_module',
+						)}
 						onDragOver={(event) => handleDragOver(event)}
-						onDrop={(event) => handleDrop(event, subModule, false)}
+						onDrop={(event) => handleDrop(
+							event,
+							{ ...subModule, type: 'sub_module', drop_course_module_id: course_module_id },
+							'sub_module',
+						)}
 						className={`${styles.module} ${styles.flex}`}
 					>
 						<IcMDrag className={styles.icon} />
@@ -152,6 +162,8 @@ function SubModuleComponent({
 						handleDrop={handleDrop}
 						getLoading={getLoading}
 						getCourseModuleDetails={getCourseModuleDetails}
+						getSubModuleRefetch={getSubModuleRefetch}
+						setGetSubModuleRefetch={setGetSubModuleRefetch}
 					/>
 				)}
 			</Accordion>

@@ -1,7 +1,7 @@
 import { Pill, Accordion, Button } from '@cogoport/components';
 import { IcMDelete, IcMDrag } from '@cogoport/icons-react';
 
-import LoadingState from '../../../../../../commons/LoadingState';
+import LoadingState from '../../../../../../../../../commons/LoadingState';
 
 import ChapterContent from './ChapterContent';
 import styles from './styles.module.css';
@@ -14,6 +14,8 @@ function Chapter({
 	handleDrop,
 	getLoading,
 	getCourseModuleDetails,
+	getSubModuleRefetch,
+	setGetSubModuleRefetch,
 }) {
 	const {
 		chapterLoading,
@@ -27,6 +29,8 @@ function Chapter({
 		subModule,
 		getLoading,
 		getCourseModuleDetails,
+		getSubModuleRefetch,
+		setGetSubModuleRefetch,
 	});
 
 	if (getCourseSubModuleLoading) {
@@ -43,9 +47,27 @@ function Chapter({
 							<div
 								key={child.id}
 								draggable
-								onDragStart={(event) => handleDragStart(event, child, true)}
+								onDragStart={(event) => handleDragStart(
+									event,
+									{
+										...child,
+										type                : 'chapter',
+										start_point_details : {
+											start_chapters      : subModuleChapters,
+											start_sub_module_id : subModule.id,
+										},
+									},
+									'chapter',
+								)}
 								onDragOver={(event) => handleDragOver(event)}
-								onDrop={(event) => handleDrop(event, child, true)}
+								onDrop={(event) => handleDrop(event, {
+									...child,
+									type              : 'chapter',
+									end_point_details : {
+										end_chapters      : subModuleChapters,
+										end_sub_module_id : subModule.id,
+									},
+								}, 'chapter')}
 								className={styles.accordian_item}
 							>
 								<IcMDrag className={styles.icon} />

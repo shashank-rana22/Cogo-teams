@@ -27,9 +27,9 @@
 }
 
 .list_container {
-	overflow-y: auto;
 	padding: 20px;
 	padding-top: unset;
+	overflow-y: auto;
 }
 
 .user_activity {

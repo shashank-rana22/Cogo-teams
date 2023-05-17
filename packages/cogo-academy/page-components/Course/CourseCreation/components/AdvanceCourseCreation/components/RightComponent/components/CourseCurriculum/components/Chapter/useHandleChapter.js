@@ -10,6 +10,8 @@ const useHandleChapter = ({
 	subModule,
 	getLoading,
 	getCourseModuleDetails,
+	getSubModuleRefetch,
+	setGetSubModuleRefetch,
 }) => {
 	const { id } = subModule || {};
 
@@ -19,7 +21,11 @@ const useHandleChapter = ({
 		finalData,
 		loading: getCourseSubModuleLoading,
 		getCourseSubModule,
-	} = useGetCourseSubModule({ id });
+	} = useGetCourseSubModule({
+		id,
+		getSubModuleRefetch,
+		setGetSubModuleRefetch,
+	});
 
 	const {
 		createCourseSubModuleChapter,

@@ -1,4 +1,5 @@
 import { useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, forwardRef, useImperativeHandle } from 'react';
 
 import { getFieldController } from '../../../../../../../commons/getFieldController';
@@ -19,15 +20,24 @@ function IntendedLearners({ id, data = {} }, ref) {
 
 	const mandatoryAudiencesUserWatch = watch('mandatory_audiences_user');
 
-	console.log('data', data);
-
-	const { audiences = [] } = useGetAudiences();
+	const { audiences = [], listAudienceLoading } = useGetAudiences();
 
 	const mandatoryAudiencesOptions = audiences.filter((item) => (watch('audiences').includes(item.value)));
 
 	useEffect(() => {
-		setValue('mandatory_audiences', []);
-	}, [setValue]);
+		if (!isEmpty(data) && !listAudienceLoading) {
+			const { course_audience_mappings = [] } = data || {};
+
+			const allAudienceIds = course_audience_mappings.map((item) => item.faq_audience_id);
+
+			const mandatoryAudienceIds = course_audience_mappings
+				.filter((item) => item.is_mandatory)
+				.map((item) => item.faq_audience_id);
+
+			setValue('audiences', allAudienceIds);
+			setValue('mandatory_audiences', mandatoryAudienceIds);
+		}
+	}, [data, setValue, listAudienceLoading]);
 
 	useImperativeHandle(ref, () => ({
 		handleSubmit: () => {

@@ -1,13 +1,15 @@
 import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { forwardRef, useImperativeHandle } from 'react';
 
-import LoadingState from '../../../../commons/LoadingState';
+import LoadingState from '../../../../../../../commons/LoadingState';
+import CURRENT_TO_NEXT_MAPPING from '../../Header/CURRENT_TO_NEXT_MAPPING';
 
 import ModuleComponent from './ModuleComponent';
 import styles from './styles.module.css';
 import useHandleCourseCurriculum from './useHandleCourseCurriculum';
 
-function CourseCurriculum({ id }) {
+function CourseCurriculum({ id, activeTab }, ref) {
 	const {
 		handleDragStart,
 		handleDrop,
@@ -17,7 +19,23 @@ function CourseCurriculum({ id }) {
 		getLoading,
 		setFinalData,
 		getCourseModuleDetails,
-	} = useHandleCourseCurriculum({ courseId: id });
+		getSubModuleRefetch,
+		setGetSubModuleRefetch,
+	} = useHandleCourseCurriculum({ courseId: id, activeTab });
+
+	useImperativeHandle(ref, () => ({
+		handleSubmit: () => {
+			const onSubmit = () => ({
+				hasError : false,
+				values   : {
+					id,
+					state: CURRENT_TO_NEXT_MAPPING[activeTab],
+				},
+			});
+
+			return new Promise((resolve) => { resolve(onSubmit()); });
+		},
+	}));
 
 	if (getLoading && isEmpty(finalData)) {
 		return <LoadingState />;
@@ -37,6 +55,8 @@ function CourseCurriculum({ id }) {
 						getLoading={getLoading}
 						setFinalData={setFinalData}
 						getCourseModuleDetails={getCourseModuleDetails}
+						getSubModuleRefetch={getSubModuleRefetch}
+						setGetSubModuleRefetch={setGetSubModuleRefetch}
 					/>
 				</div>
 			))}
@@ -53,4 +73,4 @@ function CourseCurriculum({ id }) {
 	);
 }
 
-export default CourseCurriculum;
+export default forwardRef(CourseCurriculum);

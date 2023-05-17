@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import LeftComponent from './components/LeftComponent';
 import RightComponent from './components/RightComponent';
@@ -9,6 +9,12 @@ function AdvanceCourseCreation({ id }) {
 	const [activeTab, setActiveTab] = useState('overview');
 
 	const { data, loading, getCogoAcademyCourse } = useGetCogoAcademyCourse(id);
+
+	const { state } = data || {};
+
+	useEffect(() => {
+		setActiveTab(state);
+	}, [state]);
 
 	if (loading) {
 		return null;
@@ -23,10 +29,10 @@ function AdvanceCourseCreation({ id }) {
 			<div className={styles.right_section}>
 				<RightComponent
 					data={data}
-					setActiveTab={setActiveTab}
 					activeTab={activeTab}
 					id={id}
 					getCogoAcademyCourse={getCogoAcademyCourse}
+					setActiveTab={setActiveTab}
 				/>
 			</div>
 		</div>

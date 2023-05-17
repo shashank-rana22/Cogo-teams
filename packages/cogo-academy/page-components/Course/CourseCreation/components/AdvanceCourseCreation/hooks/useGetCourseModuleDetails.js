@@ -3,12 +3,12 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 
-const GetCourseModuleDetails = ({ id }) => {
+const GetCourseModuleDetails = ({ id, activeTab }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_course_details',
 		method : 'get',
 		params : { id },
-	}, { manual: false });
+	}, { manual: activeTab !== 'curriculum' });
 
 	const getCourseModuleDetails = async () => {
 		try {

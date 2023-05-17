@@ -1,29 +1,33 @@
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import { forwardRef, useImperativeHandle } from 'react';
+import { forwardRef, useImperativeHandle, useEffect } from 'react';
 
 import { getFieldController } from '../../../../../../../commons/getFieldController';
 
 import controls from './controls';
 import styles from './styles.module.css';
 
+const removeTypeField = (controlItem) => {
+	const { type, ...rest } = controlItem;
+	return rest;
+};
+
 function PublishCourse({ data = {} }, ref) {
 	const {
 		control,
 		formState: { errors = {} },
 		handleSubmit,
-	} = useForm({
-		defaultValues: {
-			...data,
-		},
-	});
+		setValue,
+	} = useForm();
+
+	useEffect(() => {
+		if (!isEmpty(data)) {
+			setValue('course_categories', data.course_categories);
+			setValue('course_title', data.course_title);
+		}
+	}, [data, setValue]);
 
 	useImperativeHandle(ref, () => ({ handleSubmit }));
-
-	const removeTypeField = (controlItem) => {
-		const { type, ...rest } = controlItem;
-		return rest;
-	};
 
 	return (
 		<div className={styles.container}>

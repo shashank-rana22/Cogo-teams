@@ -18,6 +18,8 @@ function ModuleComponent({
 	getLoading,
 	setFinalData,
 	getCourseModuleDetails,
+	getSubModuleRefetch,
+	setGetSubModuleRefetch,
 }) {
 	const {
 		deleteModule,
@@ -115,9 +117,9 @@ function ModuleComponent({
 					<div
 						key={module.id}
 						draggable
-						onDragStart={(event) => handleDragStart(event, module, false)}
+						onDragStart={(event) => handleDragStart(event, { ...module, type: 'module' }, 'module')}
 						onDragOver={(event) => handleDragOver(event)}
-						onDrop={(event) => handleDrop(event, module, false)}
+						onDrop={(event) => handleDrop(event, { ...module, type: 'module' }, 'module')}
 						className={`${styles.module} ${styles.flex}`}
 					>
 						<IcMDrag className={styles.icon} />
@@ -152,6 +154,8 @@ function ModuleComponent({
 						course_module_id={module.id}
 						getLoading={getLoading}
 						getCourseModuleDetails={getCourseModuleDetails}
+						getSubModuleRefetch={getSubModuleRefetch}
+						setGetSubModuleRefetch={setGetSubModuleRefetch}
 					/>
 				)}
 			</Accordion>

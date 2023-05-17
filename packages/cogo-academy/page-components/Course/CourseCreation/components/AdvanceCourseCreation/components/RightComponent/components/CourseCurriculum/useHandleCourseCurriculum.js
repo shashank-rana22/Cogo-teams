@@ -1,20 +1,37 @@
+import { Toast } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useGetCourseModuleDetails from '../../../../hooks/useGetCourseModuleDetails';
+import useUpdateChapterSequenceOrder from '../../../../hooks/useUpdateChapterSequenceOrder';
+import useUpdateCourseModuleSequenceOrder from '../../../../hooks/useUpdateCourseModuleSequenceOrder';
+import useUpdateCourseSubModuleSequenceOrder from '../../../../hooks/useUpdateCourseSubModuleSequenceOrder';
 
-const useHandleCourseCurriculum = ({ courseId }) => {
+const useHandleCourseCurriculum = ({ courseId, activeTab }) => {
 	const [finalData, setFinalData] = useState([]);
 	const [draggedNode, setDraggedNode] = useState(null);
+	const [getSubModuleRefetch, setGetSubModuleRefetch] = useState(false);
 
 	const {
 		getCourseModuleDetails,
 		loading: getLoading,
 		moduleData,
-	} = useGetCourseModuleDetails({ id: courseId });
+	} = useGetCourseModuleDetails({ id: courseId, activeTab });
 
-	const handleDragStart = (event, node) => {
-		setDraggedNode(node);
+	const {
+		updateCourseModuleSequenceOrder,
+	} = useUpdateCourseModuleSequenceOrder({ getCourseModuleDetails });
+
+	const {
+		updateCourseSubModuleSequenceOrder,
+	} = useUpdateCourseSubModuleSequenceOrder({ getCourseModuleDetails });
+
+	const {
+		updateChapterSequenceOrder,
+	} = useUpdateChapterSequenceOrder({ setGetSubModuleRefetch });
+
+	const handleDragStart = (event, node, from) => {
+		setDraggedNode({ ...node, from });
 		event.dataTransfer.setData('text', JSON.stringify(node));
 	};
 
@@ -22,57 +39,93 @@ const useHandleCourseCurriculum = ({ courseId }) => {
 		event.preventDefault();
 	};
 
-	const handleDrop = (event, parentNode, isChild) => {
+	const handleDrop = (event, parentNode) => {
 		event.preventDefault();
 
-		if (!isChild) {
-			const newItems = finalData.filter((i) => i.id !== draggedNode.id);
-			const newIndex = finalData.findIndex((i) => i.id === parentNode.id);
-			newItems.splice(newIndex, 0, draggedNode);
-			setFinalData(newItems);
-			setDraggedNode(null);
-		} else {
-			let newData = [];
+		if (parentNode.type !== draggedNode.from) {
+			Toast.error('cannot swap two different types');
+			return;
+		}
 
-			if (parentNode.id === draggedNode.id) {
-				newData = finalData;
-			} else {
-				newData = finalData.map((item) => {
-					if (
-						item.children
-							.map((childItem) => childItem.id)
-							.includes(draggedNode.id)
-						|| item.children
-							.map((childItem) => childItem.id)
-							.includes(parentNode.id)
-					) {
-						const itemIndex = item.children.findIndex(
-							(i) => i.id === draggedNode.id,
-						);
+		if (
+			draggedNode.from === 'sub_module'
+			&& parentNode.drop_course_module_id !== draggedNode.start_course_module_id
+		) {
+			Toast.error('cannot swap two sub modules from two different modules');
+			return;
+		}
 
-						const filteredChildren = item.children;
+		if (
+			draggedNode.from === 'chapter'
+			&& draggedNode.start_point_details.start_sub_module_id
+				!== parentNode.end_point_details.end_sub_module_id
+		) {
+			Toast.error('cannot swap two chapters from two different sub modules');
+			return;
+		}
 
-						if (itemIndex !== -1) {
-							filteredChildren.splice(itemIndex, 1);
-						}
+		if (draggedNode.from === 'chapter' && (draggedNode.isNew || parentNode.isNew)) {
+			Toast.error('cannot swap new chapter');
+			return;
+		}
 
-						const addIndex = filteredChildren.findIndex(
-							(i) => i.id === parentNode.id,
-						);
+		if (draggedNode.from === 'module') {
+			const fromIndex = draggedNode.sequence_order - 1;
+			const toIndex = parentNode.sequence_order - 1;
+			const moduleIDs = finalData.map((item) => item.id);
 
-						if (addIndex !== -1) {
-							filteredChildren.splice(addIndex, 0, draggedNode);
-						}
+			const element = moduleIDs.splice(fromIndex, 1)[0];
 
-						return { ...item, children: filteredChildren };
-					}
+			moduleIDs.splice(toIndex, 0, element);
 
-					return item;
-				});
-			}
+			const finalPayload = moduleIDs.map((item, index) => ({
+				id                 : item,
+				new_sequence_order : index + 1,
+			}));
 
-			setFinalData(newData);
-			setDraggedNode(null);
+			updateCourseModuleSequenceOrder({ values: { course_modules: finalPayload } });
+		}
+
+		if (draggedNode.from === 'sub_module') {
+			const courseModuleObject = finalData.find((item) => item.id === parentNode.drop_course_module_id);
+
+			const { course_sub_modules = [] } = courseModuleObject || {};
+
+			const fromIndex = draggedNode.sequence_order - 1;
+			const toIndex = parentNode.sequence_order - 1;
+
+			const subModuleIDs = course_sub_modules.map((item) => item.id);
+
+			const element = subModuleIDs.splice(fromIndex, 1)[0];
+
+			subModuleIDs.splice(toIndex, 0, element);
+
+			const finalPayload = subModuleIDs.map((item, index) => ({
+				id                 : item,
+				new_sequence_order : index + 1,
+			}));
+
+			updateCourseSubModuleSequenceOrder({ values: { course_sub_modules: finalPayload } });
+		}
+
+		if (draggedNode.from === 'chapter') {
+			const { start_point_details:{ start_chapters } } = draggedNode || {};
+
+			const fromIndex = draggedNode.sequence_order - 1;
+			const toIndex = parentNode.sequence_order - 1;
+
+			const chaptersIDs = start_chapters.filter((item) => !item.isNew).map((item) => item.id);
+
+			const element = chaptersIDs.splice(fromIndex, 1)[0];
+
+			chaptersIDs.splice(toIndex, 0, element);
+
+			const finalPayload = chaptersIDs.map((item, index) => ({
+				id                 : item,
+				new_sequence_order : index + 1,
+			}));
+
+			updateChapterSequenceOrder({ values: { chapters: finalPayload } });
 		}
 	};
 
@@ -95,6 +148,8 @@ const useHandleCourseCurriculum = ({ courseId }) => {
 		getLoading,
 		setFinalData,
 		getCourseModuleDetails,
+		getSubModuleRefetch,
+		setGetSubModuleRefetch,
 	};
 };
 

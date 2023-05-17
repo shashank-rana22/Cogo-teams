@@ -13,6 +13,8 @@ function SubModule({
 	course_module_id,
 	getLoading,
 	getCourseModuleDetails,
+	getSubModuleRefetch,
+	setGetSubModuleRefetch,
 }) {
 	const {
 		onSaveSubModule,
@@ -45,6 +47,8 @@ function SubModule({
 						subModuleLoading={subModuleLoading}
 						getLoading={getLoading}
 						getCourseModuleDetails={getCourseModuleDetails}
+						getSubModuleRefetch={getSubModuleRefetch}
+						setGetSubModuleRefetch={setGetSubModuleRefetch}
 					/>
 				</div>
 			))}

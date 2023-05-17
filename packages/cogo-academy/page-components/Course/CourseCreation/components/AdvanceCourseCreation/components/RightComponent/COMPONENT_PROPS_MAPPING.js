@@ -11,7 +11,7 @@ const getProps = (data = {}) => ({
 		course_categories : (data.course_categories || []).map((category) => category.id),
 	},
 	audience: {
-		faq_audiences: data.faq_audiences,
+		course_audience_mappings: data.course_audience_mappings,
 	},
 });
 

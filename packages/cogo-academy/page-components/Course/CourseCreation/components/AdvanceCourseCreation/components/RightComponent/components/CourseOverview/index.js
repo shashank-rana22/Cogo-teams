@@ -1,6 +1,24 @@
+import { forwardRef, useImperativeHandle } from 'react';
+
+import CURRENT_TO_NEXT_MAPPING from '../../Header/CURRENT_TO_NEXT_MAPPING';
+
 import styles from './styles.module.css';
 
-function CourseOverview() {
+function CourseOverview({ id, activeTab }, ref) {
+	useImperativeHandle(ref, () => ({
+		handleSubmit: () => {
+			const onSubmit = () => ({
+				hasError : false,
+				values   : {
+					id,
+					state: CURRENT_TO_NEXT_MAPPING[activeTab],
+				},
+			});
+
+			return new Promise((resolve) => { resolve(onSubmit()); });
+		},
+	}));
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.main_content}>
@@ -68,4 +86,4 @@ function CourseOverview() {
 	);
 }
 
-export default CourseOverview;
+export default forwardRef(CourseOverview);
