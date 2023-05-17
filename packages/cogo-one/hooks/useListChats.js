@@ -256,8 +256,10 @@ const useListChats = ({
 	}, [firestore, activeCardId, activeChannelType]);
 
 	useEffect(() => {
-		mountPinnedSnapShot();
-	}, [mountPinnedSnapShot]);
+		if (viewType !== 'shipment_view') {
+			mountPinnedSnapShot();
+		}
+	}, [mountPinnedSnapShot, viewType]);
 
 	useEffect(() => {
 		mountSnapShot();

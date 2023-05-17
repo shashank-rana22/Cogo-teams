@@ -36,7 +36,7 @@ const getPlaceHolder = (hasPermissionToEdit, canMessageOnBotSession) => {
 	if (hasPermissionToEdit) {
 		return 'Type your message...';
 	}
-	return 'You do not have typing controls as you are observing this chat';
+	return 'You do not have permission to chat';
 };
 
 function MessageConversations({

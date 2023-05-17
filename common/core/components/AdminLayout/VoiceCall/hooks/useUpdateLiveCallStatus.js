@@ -1,12 +1,19 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-const updateLocalState = ({ prev = {}, latestAddedAgentName = '', payload = {}, attendeeId = '' }) => ({
+const updateLocalState = ({
+	prev = {},
+	latestAddedAgentName = '',
+	live_call_action_type,
+	agent_id,
+	attendeeId = '',
+}) => ({
 	...prev,
 	attendees: [...(prev.attendees || []), {
 		attendeeId,
 		agentName: latestAddedAgentName,
-		...payload,
+		live_call_action_type,
+		agent_id,
 	}],
 });
 
@@ -22,14 +29,16 @@ function useUpdateLiveCallStatus({
 	}, { manual: true });
 
 	const updateLiveCallStatus = async (payload = {}, callbackFunc = () => {}) => {
+		const { live_call_action_type = '', agent_id = '' } = payload || {};
 		try {
 			const res = await trigger({
 				data: {
 					call_id: callId,
-					...payload,
+					live_call_action_type,
+					agent_id,
 				},
 			});
-			if (payload?.live_call_action_type === 'transfer') {
+			if (live_call_action_type === 'transfer') {
 				Toast.success('call transferred sucessfully');
 				checkToOpenFeedBack({ hasAgentPickedCall: false });
 				return;
@@ -39,7 +48,8 @@ function useUpdateLiveCallStatus({
 				{
 					prev,
 					latestAddedAgentName,
-					payload,
+					live_call_action_type,
+					agent_id,
 					attendeeId: res?.data?.voice_call_attendee_id,
 				},
 			));
