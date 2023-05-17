@@ -106,6 +106,7 @@
 	display: flex;
 	align-items: center;
 }
+
 .bold_data {
-    font-weight: 600;
+	font-weight: 600;
 }
