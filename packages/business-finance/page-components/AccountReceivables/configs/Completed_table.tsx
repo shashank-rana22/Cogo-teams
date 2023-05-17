@@ -51,6 +51,8 @@ interface InvoiceTable {
 	invoiceFilters?: object,
 	setinvoiceFilters?: (p:object) => void,
 }
+const MIN_NAME_STRING = 0;
+const MAX_NAME_STRING = 12;
 
 const completedColumn = ({
 	refetch,
@@ -72,7 +74,7 @@ const completedColumn = ({
 		accessor : (row) => (
 			showName
 			&& (
-				(getByKey(row, 'organizationName') as string).length > 12 ? (
+				(getByKey(row, 'organizationName') as string).length > MAX_NAME_STRING ? (
 					<Tooltip
 						interactive
 						placement="top"
@@ -80,8 +82,8 @@ const completedColumn = ({
 					>
 						<text className={styles.cursor}>
 							{`${(getByKey(row, 'organizationName') as string).substring(
-								0,
-								12,
+								MIN_NAME_STRING,
+								MAX_NAME_STRING,
 							)}...`}
 						</text>
 					</Tooltip>
