@@ -20,10 +20,27 @@ import useGetGlCode from '../../../hooks/useGetGlcode';
 import LineItemDetails from './LineItemDetails';
 import styles from './styles.module.css';
 
-function CreateJvModal({ show, onClose = () => { }, setShow, refetch }) {
+interface Props {
+	show: boolean;
+	onClose: () => void;
+	setShow: React.Dispatch<React.SetStateAction<boolean>>;
+	refetch: () => void;
+}
+
+function CreateJvModal({ show, onClose = () => {}, setShow, refetch }:Props) {
 	const { control, watch, handleSubmit, setValue, formState: { errors = {} } } = useForm({
 		defaultValues:
-			{ line_items: [EMPTY_LINE_ITEMS] },
+		{
+			entityCode     : '',
+			ledCurrency    : '',
+			category       : '',
+			currency       : '',
+			accountingDate : new Date(),
+			journal        : '',
+			exchangeRate   : '',
+			description    : '',
+			line_items     : [EMPTY_LINE_ITEMS],
+		},
 	});
 
 	const formValues = watch();
@@ -239,7 +256,6 @@ function CreateJvModal({ show, onClose = () => { }, setShow, refetch }) {
 					onClick={handleSubmit(onSubmit)}
 				>
 					Create Jv
-
 				</Button>
 			</Modal.Footer>
 		</Modal>
