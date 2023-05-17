@@ -1,6 +1,7 @@
-import { Button, CheckboxGroup, Checkbox } from '@cogoport/components';
+import { Button, Checkbox } from '@cogoport/components';
 import React, { useEffect } from 'react';
 
+import CheckboxGroup from '../../../Air/commons/CheckboxGroup';
 import useGetMultipleCopiesList from '../../Helpers/hooks/useGetMultipleCopiesList';
 
 import multipleCopies from './multipleCopies';
