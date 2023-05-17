@@ -16,7 +16,7 @@ import isRegistrationNumberValid from '../utils/isRegistrationNumberValid';
 
 import useOnBlurTaxPanGstinControl from './useOnBlurTaxPanGstinControl';
 
-const SupportedCountryCodes = GLOBAL_CONSTANTS.platform_supported_country_codes;
+const SUPPORTED_COUNTRY_CODES = GLOBAL_CONSTANTS.platform_supported_country_codes;
 
 function useOnBoardVendor({
 	setActiveStepper = () => {},
@@ -119,7 +119,7 @@ function useOnBoardVendor({
 							return 'Registration Number is required';
 						}
 
-						if (SupportedCountryCodes.includes(countryCode)) {
+						if (SUPPORTED_COUNTRY_CODES.includes(countryCode)) {
 							if (!registrationType) {
 								return 'Registration Type is required';
 							}
