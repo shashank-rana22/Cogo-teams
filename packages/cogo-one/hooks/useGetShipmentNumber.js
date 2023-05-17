@@ -1,56 +1,71 @@
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
-import { getApp, getApps, initializeApp } from 'firebase/app';
-import { doc, getFirestore, updateDoc } from 'firebase/firestore';
-import { useCallback } from 'react';
+import { startOfDay, startOfMonth, startOfWeek } from '@cogoport/utils';
+import { updateDoc } from 'firebase/firestore';
+import { useCallback, useState } from 'react';
 
-import { FIRESTORE_PATH, firebaseConfig } from '../configurations/firebase-config';
+function useGetShipmentNumber({ setReminderModal, agentId }) {
+	const [shipmentData, setShipmentData] = useState({});
 
-function useGetShipmentNumber() {
-	const [{ loading, data }, trigger] = useRequest(
+	const [{ loading }, trigger] = useRequest(
 		{
 			url    : '/list_checkouts',
 			method : 'get',
 		},
-		{ manual: true },
+		{ manual: true, autoCancel: false },
 	);
 
-	const { user:{ id } } = useSelector(({ profile }) => profile);
-	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
-	const firestore = getFirestore(app);
-
-	const getAgentShipmentNumber = useCallback(async (roomId, setReminderModal = () => {}) => {
-		const currentDate = new Date().toISOString().slice(0, 10);
+	const getAgentShipmentNumber = useCallback(async ({ roomDoc = {}, type = '' }) => {
+		const currentTimeStamp = new Date();
+		const commonFilters = {
+			is_converted_to_booking : true,
+			data_required           : false,
+		};
 		try {
-			await trigger({
+			const currentDayData = await trigger({
 				params: {
 					filters: {
-						is_converted_to_booking : true,
-						created_at_greater_than : currentDate,
+						...commonFilters,
+						created_at_greater_than: startOfDay(currentTimeStamp),
 					},
 				},
 			});
+			const currentWeekData = await trigger({
+				params: {
+					filters: {
+						...commonFilters,
+						created_at_greater_than: startOfWeek(currentTimeStamp),
+					},
+				},
+			});
+			const currentMonthData = await trigger({
+				params: {
+					filters: {
+						...commonFilters,
+						created_at_greater_than: startOfMonth(currentTimeStamp),
+					},
+				},
+			});
+			setShipmentData({
+				dayCount   : currentDayData?.data?.total_count,
+				weekCount  : currentWeekData?.data?.total_count,
+				monthCount : currentMonthData?.data?.total_count,
+			});
+			setReminderModal(true);
 		} catch (error) {
 			console.log(error);
 		} finally {
-			setReminderModal(true);
-
-			const updateLoginTimeRef = doc(
-				firestore,
-				`${FIRESTORE_PATH.shipment_reminder}/${roomId}`,
-			);
-
-			await updateDoc(updateLoginTimeRef, {
-				agent_id   : id,
-				last_login : Date.now(),
-			});
+			if (type === 'update') {
+				await updateDoc(roomDoc, {
+					agent_id      : agentId,
+					last_reminder : Date.now(),
+				});
+			}
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [trigger]);
+	}, [agentId, setReminderModal, trigger]);
 
 	return {
 		loading,
-		data,
+		shipmentData,
 		getAgentShipmentNumber,
 	};
 }

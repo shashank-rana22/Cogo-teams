@@ -1,4 +1,3 @@
-import { useSelector } from '@cogoport/store';
 import {
 	collection,
 	addDoc,
@@ -9,77 +8,81 @@ import {
 	doc,
 	onSnapshot,
 } from 'firebase/firestore';
-import { useEffect } from 'react';
+import { useRef, useCallback } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
 import useGetShipmentNumber from './useGetShipmentNumber';
 
-const hours = 10800000;
-const useShipmentReminder = ({ firestore, setReminderModal = () => {} }) => {
-	const { user:{ id } } = useSelector(({ profile }) => profile);
+const THREE_HOURS_IN_MILLISECONDS = 3 * 60 * 60 * 1000;
 
-	const {
-		// data,
-		getAgentShipmentNumber = () => {},
-	} = useGetShipmentNumber({});
-
-	// const { total_count: target } = data || {};
-
+const createOrGetRoom = async (agentId, firestore, getAgentShipmentNumber) => {
+	let roomId = '';
 	const shipmentReminderRoom = collection(firestore, FIRESTORE_PATH.shipment_reminder);
 
 	const roomsQuery = query(
 		shipmentReminderRoom,
-		where('agent_id', '==', id),
+		where('agent_id', '==', agentId),
 		limit(1),
 	);
-
-	const createRoom = async () => {
+	const docs = await getDocs(roomsQuery);
+	if (!docs.size) {
 		const newRoom = {
-			agent_id   : id,
-			last_login : Date.now(),
+			agent_id      : agentId,
+			last_reminder : Date.now(),
 		};
-
+		await getAgentShipmentNumber({ type: 'create' });
 		const roomid = await addDoc(shipmentReminderRoom, newRoom);
-		return { roomId: roomid?.id };
-	};
+		roomId = roomid?.id;
+	} else {
+		roomId = docs?.docs?.[0]?.id;
+	}
+	return doc(
+		firestore,
+		`${FIRESTORE_PATH.shipment_reminder}/${roomId}`,
+	);
+};
 
-	const createRoomIfNotExists = async () => {
-		const docs = await getDocs(roomsQuery);
-		if (!docs.size) {
-			const roomId = createRoom();
-			return { roomId };
+function useShipmentReminder({
+	firestore,
+	setReminderModal = () => {},
+	agentId = '',
+}) {
+	const shipmentReminderSnapShotRef = useRef(null);
+	const remindertimeoutRef = useRef(null);
+	const {
+		shipmentData,
+		getAgentShipmentNumber = () => {},
+	} = useGetShipmentNumber({ setReminderModal, agentId });
+
+	const mountReminderSnapShot = useCallback(async () => {
+		shipmentReminderSnapShotRef?.current?.();
+		try {
+			const roomDoc = await createOrGetRoom(agentId, firestore, getAgentShipmentNumber);
+			shipmentReminderSnapShotRef.current = onSnapshot(roomDoc, (roomDocData) => {
+				const { last_reminder = 0 } = roomDocData.data() || {};
+
+				const differenceFromLastReminder = Date.now() - last_reminder;
+				const timer = differenceFromLastReminder > THREE_HOURS_IN_MILLISECONDS
+					? 0 : THREE_HOURS_IN_MILLISECONDS - differenceFromLastReminder;
+
+				clearTimeout(remindertimeoutRef?.current);
+
+				remindertimeoutRef.current = setTimeout(() => {
+					getAgentShipmentNumber({ roomDoc, type: 'update' });
+				}, timer);
+			});
+		} catch (e) {
+			console.log('e:', e);
 		}
-		return { roomId: docs?.docs?.[0]?.id };
-	};
+	}, [agentId, firestore, getAgentShipmentNumber]);
 
-	const func = async () => {
-		const { roomId } = await createRoomIfNotExists();
-
-		const agent = doc(
-			firestore,
-			`${FIRESTORE_PATH.shipment_reminder}/${roomId}`,
-		);
-
-		onSnapshot(agent, (querySnapshot) => {
-			const { last_login = '' } = querySnapshot.data() || {};
-
-			const time_stamp = Date.now() - last_login;
-			const time_interval = time_stamp >= hours ? 0 : hours - time_stamp;
-
-			setTimeout(() => {
-				getAgentShipmentNumber(roomId, setReminderModal);
-			}, time_interval);
-		});
-	};
-
-	useEffect(() => {
-		func();
-		return () => clearTimeout();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+	const cleanUpTimeout = useCallback(() => {
+		shipmentReminderSnapShotRef?.current?.();
+		clearTimeout(remindertimeoutRef?.current);
 	}, []);
 
-	return [];
-};
+	return { mountReminderSnapShot, cleanUpTimeout, shipmentData };
+}
 
 export default useShipmentReminder;

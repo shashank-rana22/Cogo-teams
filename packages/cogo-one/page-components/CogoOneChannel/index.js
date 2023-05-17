@@ -16,7 +16,6 @@ import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus
 import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChats from '../../hooks/useListChats';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
-import useShipmentReminder from '../../hooks/useShipmentReminder';
 
 import AgentModal from './AgentModal';
 import Conversations from './Conversations';
@@ -34,8 +33,6 @@ function CogoOne() {
 	} = useAgentWorkPrefernce();
 
 	const { status = '' } = agentStatus || {};
-
-	const [reminderModal, setReminderModal] = useState(true);
 
 	const [activeTab, setActiveTab] = useState('message');
 	const [toggleStatus, setToggleStatus] = useState(false);
@@ -86,7 +83,6 @@ function CogoOne() {
 	}, [token]);
 
 	const firestore = getFirestore(app);
-	const { newRoom = '' } = useShipmentReminder({ firestore, setReminderModal });
 
 	const { tagOptions = [] } = useListAssignedChatTags();
 	const mailProps = {
@@ -284,7 +280,7 @@ function CogoOne() {
 					refetchTickets={refetchTickets}
 				/>
 			)}
-			{reminderModal && <ReminderModal setReminderModal={setReminderModal} />}
+			<ReminderModal firestore={firestore} agentId={userId} />
 		</>
 	);
 }

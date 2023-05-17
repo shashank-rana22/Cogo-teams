@@ -1,48 +1,68 @@
 import { Button, Modal } from '@cogoport/components';
+import React, { useState, useEffect } from 'react';
 
-import { TIPS } from '../../../configurations/shipment-reminder';
+import REMINDER_TIPS from '../../../constants/REMINDER_TIPS';
+import useShipmentReminder from '../../../hooks/useShipmentReminder';
+import getShipmentReminderStats from '../../../utils/getShipmentReminderStats';
 
+import PercentageDiv from './PercentageDiv';
 import styles from './styles.module.css';
 
-function ReminderModal({ setReminderModal = () => {} }) {
+function ReminderModal({ firestore, agentId }) {
+	const [reminderModal, setReminderModal] = useState(false);
+
+	const { mountReminderSnapShot, cleanUpTimeout, shipmentData } = useShipmentReminder(
+		{ setReminderModal, firestore, agentId },
+	);
+
+	useEffect(() => {
+		let addSnapShotAfterfewSeconds = '';
+		clearTimeout(addSnapShotAfterfewSeconds);
+		addSnapShotAfterfewSeconds = setTimeout(
+			mountReminderSnapShot,
+			100,
+		);
+		return () => {
+			cleanUpTimeout();
+			clearTimeout(addSnapShotAfterfewSeconds);
+		};
+	}, [cleanUpTimeout, mountReminderSnapShot]);
+
+	const statsMapping = getShipmentReminderStats(shipmentData);
+
 	return (
 		<Modal
-			className={styles.modal_body}
-			size="lg"
-			show
+			size="md"
+			show={reminderModal}
+			className={styles.modal_styled}
 			onClickOutside={() => setReminderModal(false)}
 			placement="center"
+			showCloseIcon={false}
 		>
-			<div className={styles.reminder_stats}>
-				<div className={styles.reminder_heading}>
-					No of Chats Assigned to You:
-				</div>
-				<div className={styles.reminder_summary}>
-					<div className={styles.summary_title}>Summary</div>
-					<div className={styles.summary_container}>
-						<div className={styles.summary}>Today&apos;s Count</div>
-						<div className={styles.summary}>This Week</div>
-						<div className={styles.summary}>This Month</div>
-					</div>
-				</div>
-				<div className={styles.reminder_tips}>
-					<div className={styles.tips_heading}>Tips</div>
-					<ul className={styles.reminder_ul}>
-						{TIPS.map((item) => <li><div className={styles.tip}>{item?.label}</div></li>)}
-					</ul>
-				</div>
-			</div>
-			<div className={styles.reminder_target}>
-				<div className={styles.reminder_circle}>3/25</div>
-				<Button
-					className={styles.reminder_btn}
-					onClick={() => setReminderModal(false)}
-				>
-					I Understand
+			<Modal.Header title="Your Summary" />
+			<Modal.Body>
 
-				</Button>
-			</div>
-
+				<div className={styles.agent_chats}>
+					No. of Chats Assigned :
+					<span>50</span>
+				</div>
+				<div className={styles.stats_row}>
+					{statsMapping.map((eachStat) => <PercentageDiv key={eachStat?.key} eachStat={eachStat} />)}
+				</div>
+				<div className={styles.tips_header}>
+					Tips
+				</div>
+				<ol>
+					{REMINDER_TIPS.map((tip) => <li key={tip} className={styles.li_styled}>{tip}</li>)}
+				</ol>
+			</Modal.Body>
+			<Modal.Footer>
+				<div className={styles.button_styles}>
+					<Button size="sm" themeType="primary" onClick={() => setReminderModal(false)}>
+						OK
+					</Button>
+				</div>
+			</Modal.Footer>
 		</Modal>
 	);
 }
